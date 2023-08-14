@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7DABC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 17:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B064EB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 17:40:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3994B8697B;
-	Mon, 14 Aug 2023 19:18:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D9EE38696D;
+	Mon, 14 Aug 2023 19:40:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TZ9OK9zP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VOrGagRk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E5CC8696D; Mon, 14 Aug 2023 19:18:07 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 48D1686963; Mon, 14 Aug 2023 19:40:01 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96B378696C
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 19:18:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D564D86927
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 19:39:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-58c4e337357so6133217b3.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 10:18:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3196fdb3238so1657092f8f.2
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 10:39:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692033483; x=1692638283;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DjmY/jqTxtlxSAV/W5GQhhpu5Pfvz9MaO0Awkv3y9kg=;
- b=TZ9OK9zPOyzpJ+wlA4HU7UmVmO1Strozps9nVATetM1/9s50Upd6WnDXpXlUVRj9OP
- w8IasxVtpDXxx0xrr03P6jN2pO5oVqTRtc5+dsI595WmFbzlAy0W3QziUbMPTyXfXTOQ
- 7jDfwwuPIaIWCcu5fJZtJ6Jyn2zg4RChtwy68=
+ d=gmail.com; s=20221208; t=1692034796; x=1692639596;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9FtD53zng8SfU5eoPF99d6/vH+fB+tbapgo7o7i8lM8=;
+ b=VOrGagRkL1cuxB3bd+LdYjfXqK3YmJjUTAqknnDvR5yl0mU/nw/EyqfHq6KjiHhOvB
+ F6LMbU62JuEgXx+qlUqz/Yxpv0cCv+w1dlBaHI3vnaPJr3z4L9vkyW+mkgHMLENZQxSg
+ Sfxyjr7ArQ2nUqRym9jC99tS5gu910cQs9CIqlnccf0jvzFi/JgGH6GkBL2X8Jh68ojH
+ yGbu/YAMow4qmZGq7US2VAP87q3cshmJ+4lJTLEqeYhHhsn25fGItb7Rqw0wKnT9Nwsl
+ fIZeMfdVoUV/HUAG+VnqE4R/i2PNvr1iY9xGTWAsONneV4LWexqnYLdSx9oVRUrhM41G
+ iYPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692033483; x=1692638283;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DjmY/jqTxtlxSAV/W5GQhhpu5Pfvz9MaO0Awkv3y9kg=;
- b=Vw9TJr7mw1TZKrfpSdQDnLFJ0ZwY5Jlj4pC/YJEhx2GC7ty9dHzNs9iNuAVu0/Xvcz
- XD7T1x08OxcCeqSE+u31UKOwiYcBhdGvoHNSxX9qJUtHPsMQu3kWDKoupiFBKGxv62Hv
- /IYertGVNJlgqrdoBmU68Wt7ReD4RYJY7w6MwVjHyp18C5bl3PqS1qwI52KxdM0vN0X5
- 49hXdmKD/63sKF+sGnayg/6qy6u+lcrCSVhskHS2KeOim0HFLu0cKHimZEmX79TMAXld
- wDeEeusA/x4VbPp+5kyVkKwwTAZJZQwo4Kneb9tw8Aq7A/9RCXaoL2VbIPhL2KKDfF88
- qzJA==
-X-Gm-Message-State: AOJu0Yxtbe/zsr3/FSsMQygNzs2LVxHBXgYy3+jjYUOrUWAHGwxG4pAm
- xANY5rcmBt2hchG0WkGgCuluBfATH6wtqGOAe7ndSw==
-X-Google-Smtp-Source: AGHT+IHDGqc5Gz94/Ztc+SnsBHONoHHEAenHVpqeVtAwTIGzn76oS2JMf4C00Ujk+lcTtLKck05ZkQ==
-X-Received: by 2002:a81:7b05:0:b0:586:9f6c:41a0 with SMTP id
- w5-20020a817b05000000b005869f6c41a0mr11263287ywc.14.1692033483309; 
- Mon, 14 Aug 2023 10:18:03 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-1d1b-2873-dbaa-7ea0.res6.spectrum.com.
- [2603:6081:7b00:6400:1d1b:2873:dbaa:7ea0])
- by smtp.gmail.com with ESMTPSA id
- w187-20020a8162c4000000b0057a918d6644sm2886934ywb.128.2023.08.14.10.18.02
+ d=1e100.net; s=20221208; t=1692034796; x=1692639596;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9FtD53zng8SfU5eoPF99d6/vH+fB+tbapgo7o7i8lM8=;
+ b=eQ3hGsa5RY6AOppfoRG+5RugKDb+gTueH8igkY+zpJvp2YuPI+L+QBFCgjaeDZmtfD
+ i/4LInsSBVqiE4/5DKUkdl34Ol86S5XFkEK4gWC9boV5mwPgbdMZfkmtMwRLWI4je2S4
+ Mr6pEHb3H2eDq4czimMq2nms0g41BdvfOlJ0LJMpdKpg1g/pZ8U4EgJpdxZFUqd3nCFw
+ gI9gAbKWCjOcaXIN2iOXS4opv/RV+bvZ/oB3j+5rvxwbVBTO/pC1tlETjP9l2FDOo912
+ 8/ljZxxLBXqqeEYQpvlqiiZy3KMKfQVnTXk3/EXnr+iIrhb4Gv1Niq7TvcsJNmYpmvio
+ yEbA==
+X-Gm-Message-State: AOJu0YzCROaXWELf/qPV4Ujpi4gFl4qoyZFDlhRl+IXlEcQEu80oqhtw
+ nMf9+TjawxqTap1ljvApaDpH6Nj8zIA=
+X-Google-Smtp-Source: AGHT+IHfTeIZ77j88I6Bx7GDqvvhVcsjBtruvD+W6FGq7kgnnZpgCVO05mN11uoXy8yvK6HFl2FiMw==
+X-Received: by 2002:adf:ef02:0:b0:317:5b76:826 with SMTP id
+ e2-20020adfef02000000b003175b760826mr6359699wro.0.1692034796003; 
+ Mon, 14 Aug 2023 10:39:56 -0700 (PDT)
+Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
+ n24-20020a7bcbd8000000b003fbb0c01d4bsm15002406wmi.16.2023.08.14.10.39.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 10:18:02 -0700 (PDT)
-Date: Mon, 14 Aug 2023 13:18:01 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Julien Panis <jpanis@baylibre.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, tony@atomide.com,
- rogerq@kernel.org, vigneshr@ti.com, nm@ti.com
-Subject: Re: [PATCH v4 1/2] musb-new: ti-musb: Handle usb dual-role feature
- as peripheral
-Message-ID: <20230814171801.GC3630934@bill-the-cat>
-References: <20230621-fix_usb_ether_init-v4-0-5f4977bb7678@baylibre.com>
- <20230621-fix_usb_ether_init-v4-1-5f4977bb7678@baylibre.com>
+ Mon, 14 Aug 2023 10:39:55 -0700 (PDT)
+From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng@tinylab.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Bharat Gooty <bharat.gooty@broadcom.com>, Stefan Roese <sr@denx.de>,
+ Qu Wenruo <wqu@suse.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Subject: [PATCH v2 0/4] arm: qemu: Enable Bochs, console buffering,
+ USB keyboard
+Date: Mon, 14 Aug 2023 20:39:40 +0300
+Message-Id: <20230814173944.288356-1-alpernebiyasak@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8R/mcT614Qsdntpi"
-Content-Disposition: inline
-In-Reply-To: <20230621-fix_usb_ether_init-v4-1-5f4977bb7678@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,60 +97,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Now that the driver for the Bochs VGA card emulated by QEMU is no longer
+limited to x86 architectures [1], this series enables it on arm and
+arm64 virtual machines to provide a graphical interface. In line with
+that series this also enables console buffering and USB keyboard.
 
---8R/mcT614Qsdntpi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Tested with the Debian 12 installer using GRUB EFI:
 
-On Thu, Jul 06, 2023 at 12:40:22PM +0200, Julien Panis wrote:
+  $ tools/buildman/buildman -o build/qemu_arm64 --boards=qemu_arm64 -w
+  $ cd build/qemu_arm64
+  $ curl -L -o debian.img \
+      https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/debian-12.0.0-arm64-netinst.iso
+  $ qemu-system-aarch64 \
+      -machine virt -cpu cortex-a53 -m 4G -smp 4 \
+      -bios u-boot.bin \
+      -serial stdio -device VGA \
+      -nic user,model=virtio-net-pci \
+      -device virtio-rng-pci \
+      -device qemu-xhci,id=xhci -device usb-kbd -device usb-tablet \
+      -drive if=virtio,file=debian.img,format=raw,readonly=on,media=cdrom
 
-> This prevents from getting some 'No USB device found' error,
-> in usb_ether_init() function for instance.
->=20
-> Signed-off-by: Julien Panis <jpanis@baylibre.com>
-> Reviewed-by: Tony Lindgren <tony@atomide.com>
-> Reviewed-by: Nishanth Menon <nm@ti.com>
-> ---
->  drivers/usb/musb-new/ti-musb.c | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-mus=
-b.c
-> index 3be3f93dd85d..44697dc31387 100644
-> --- a/drivers/usb/musb-new/ti-musb.c
-> +++ b/drivers/usb/musb-new/ti-musb.c
-> @@ -302,6 +302,7 @@ static int ti_musb_wrapper_bind(struct udevice *paren=
-t)
->  		dr_mode =3D usb_get_dr_mode(node);
->  		switch (dr_mode) {
->  		case USB_DR_MODE_PERIPHERAL:
-> +		case USB_DR_MODE_OTG:
->  			/* Bind MUSB device */
->  			ret =3D device_bind_driver_to_node(parent,
->  							 "ti-musb-peripheral",
+And with one using extlinux.conf:
 
-Julien, why don't we support OTG mode here instead?
+    $ [...]
+    $ curl -L -o head.img.gz \
+        https://deb.debian.org/debian/dists/bookworm/main/installer-arm64/current/images/netboot/SD-card-images/gtk/firmware.none.img.gz
+    $ curl -L -o partition.img.gz \
+        https://deb.debian.org/debian/dists/bookworm/main/installer-arm64/current/images/netboot/SD-card-images/gtk/partition.img.gz
+    $ zcat head.img.gz partition.img.gz >debian.img
+    $ [...]
 
---=20
-Tom
+Both can get to a graphical installer just fine, in addition to U-Boot
+video console showing up in a GTK window.
 
---8R/mcT614Qsdntpi
-Content-Type: application/pgp-signature; name="signature.asc"
+[1] video: bochs: Remove the x86 limitation
+https://lore.kernel.org/u-boot/20230723044041.1089804-1-bmeng@tinylab.org/
 
------BEGIN PGP SIGNATURE-----
+Changes in v2:
+- Add new patch for doc section on booting Linux distros
+- Improve and simplify the qemu command line used for testing
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTaYckACgkQFHw5/5Y0
-tyw+Zgv/ffO7ttTY1TXn2gnRdnyhwtZXRkDLeqir9Ka1+I4Q9g/cEDqo1mi98PGC
-Ktivk0Se7XxzTpLm8Dz62l6qcuRWJT+muLui3WoD30uTn+0BfTLRVFRgPVPiEdvU
-XvqgUH31BLdP69k3NQ3zdmFCI/1Q+nGQaAUTENKVwVJuOgWVlqai/dSmkKoP1gtG
-ltXSFr6zy75t2uDA8WNecsitEQFWCB2zi6dMRf3TjITjgZ8i5irWc7Te3PqOq7B1
-EC+yik51xolBsrZR/dcCdTwGJLWycdPLaQEAxsz2pH28LPJfa7plwZN0lGFx+STQ
-qn5FJ7RaLZNlWRncp26r1vFXjO+BqyRspsfEywR2871nY+Cn3UitPkpfgQmTgzsg
-jqVUeTgB4gaGfgA93s22XXKZBN6N6FbOqpW5gyf+afmtpLrR2w5h+gn1MNZkXRn/
-Q/FnxjxEEwLz1Dv+xJz/S8a3/YHqCb2eKms/ZMTEtyJR6ZW4wKWBtO1kbmByEYU9
-voZmDOie
-=jn2q
------END PGP SIGNATURE-----
+v1: https://lore.kernel.org/u-boot/20230808191901.1268429-1-alpernebiyasak@gmail.com/
 
---8R/mcT614Qsdntpi--
+Alper Nebi Yasak (4):
+  arm: qemu: Enable Bochs video support
+  arm: qemu: Enable PRE_CONSOLE_BUFFER
+  arm: qemu: Enable usb keyboard as an input device
+  doc: qemu: arm: Add a section on booting Linux distros
+
+ arch/arm/Kconfig                      | 10 ++++
+ board/emulation/qemu-arm/Kconfig      |  4 ++
+ board/emulation/qemu-arm/qemu-arm.c   |  5 ++
+ board/emulation/qemu-arm/qemu-arm.env |  3 ++
+ configs/qemu_arm64_defconfig          |  2 -
+ configs/qemu_arm_defconfig            |  2 -
+ doc/board/emulation/qemu-arm.rst      | 76 +++++++++++++++++++++++++++
+ 7 files changed, 98 insertions(+), 4 deletions(-)
+
+
+base-commit: 832148f675e427060be074c276956962fa9b5cb6
+-- 
+2.40.1
+
