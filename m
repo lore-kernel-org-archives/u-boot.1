@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CABBC04A6A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BB87C001DB
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:41:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76EF9869BC;
+	by phobos.denx.de (Postfix) with ESMTP id C2B99869C9;
 	Tue, 15 Aug 2023 00:41:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GsrPPMHL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OBFlcpEj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9682E869B5; Tue, 15 Aug 2023 00:41:22 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id 869CA869B5; Tue, 15 Aug 2023 00:41:23 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DB2E869A0
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72AC3869A2
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-3490cce32c4so23761915ab.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:20 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-791071b9a5eso170994539f.3
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692052879; x=1692657679;
+ d=chromium.org; s=google; t=1692052880; x=1692657680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AmU31G9cNhnJjdgNocL/C0Pa6BrlxrfQoQ6K+gfT3gA=;
- b=GsrPPMHLDjOnUagvY16dN2MnDySkbgat/nXZ2ZtL+uCi6zPG9oKEzY3BiDIHNgALvi
- OtPUkwKmO3qG8UY+nPQ9x/LtAJLtnVZ+WiP2/FtYvH2Q/Mha4uZ4gvfyG3fZjJXN2IpH
- 0BYR9N4SXCBGXcxWCK1/Il7FHMQDNKQtgDzSM=
+ bh=SKUH/a3daQsjrMHvTQr7rtWpKHXuRKpksdijDTCa30Q=;
+ b=OBFlcpEjAgZo+MzHQG3xiAXWZGtEhIUwb8o0iCCX5yKNljxdInxtZriX0UyKhh9zc0
+ QEPPl190HRCx66GE87dPk9rgHVvcRxR8BBScydwY+mYTEKlHaBD08sG3sS7sAbX1Ws+h
+ zxSXDEx/5hCAmK73k4dCNWtPpVyCH1yh+jbG8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692052879; x=1692657679;
+ d=1e100.net; s=20221208; t=1692052880; x=1692657680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AmU31G9cNhnJjdgNocL/C0Pa6BrlxrfQoQ6K+gfT3gA=;
- b=Ol74YRlGTCMvnBJYV1jj7QsmRX1BGp9jwzMlvIKdS8cvrHvwPv/BfUuNny+84oTTBX
- rf5+5+c4p/I0Dq2IgFSDt5EmOVhbjfcQmk9FnmhJfZkk8wecjHqCx3o9hegriVgHfLCk
- JJRP94iME3oZOhjrwcoDTtY3xfbCTVq6miXszs4S5dfsvCzqIIWvtW5K/BFzCxx4xTCn
- vbOr0cxUuz8vWIHk4vh86l99qRDZfeQIG3E2mMKIUk9VVySLhi04KNgYFqAYqhys2pyb
- ycbonoyI3bAIaSlXkvMERgr2/jXOYICrHCfQBxiKp8DnDhCuIrWjuuynacElDgXaJ73R
- 3wWA==
-X-Gm-Message-State: AOJu0Yw8XIUZPRY5Q0746tzo6q0e+j2HRwZ8UooBK9l2Y3JB+pGicbKG
- oS0LH3TSVvMevGftbLJm7oj9c6RYR5vCg907lQM=
-X-Google-Smtp-Source: AGHT+IHYF4vCmYP7ugTzttGbWShJL2w/KNBUy9YYsNzgKMWRaoyLphGOQ8nkg6VLsJ3Zt1Or2nQPpA==
-X-Received: by 2002:a05:6e02:1d16:b0:348:f0a2:84e9 with SMTP id
- i22-20020a056e021d1600b00348f0a284e9mr17973820ila.15.1692052879138; 
+ bh=SKUH/a3daQsjrMHvTQr7rtWpKHXuRKpksdijDTCa30Q=;
+ b=RG4qFJwoKrrtrvvz3rcA4eJ/XkfRE3zkJIe+o3zcipbX6MCo2otnRTRcDSWbDcIe0c
+ Vg8Vs5Jc8LnVh7VatIHq1hQGVZFXjDelNMdlVRXbOy444CjE7zBNNyK1WHIJG+gFxleI
+ k2LzOqltknn6SFUQrcYDLP0BS5rWPOIABrpJFqTGkKKn/Pd3C10dge2/MGt09Xb7u6RP
+ k+slvFKDlHFXTCkpftYib7JIZmNa/IiXIbsaPHWqC/8WfKbsWD4IrOL1kiO31jBri0+l
+ Z7S7mltaoNss/uLfR0NfvFGm2aKl061RGBGulOWMJu/oVlbNOH4wkZffNxFlml8UvHvy
+ ak5w==
+X-Gm-Message-State: AOJu0Ywe1Hm3cUj0e3tRBy85VFOG/Fr2MGYZ4Gl/TItoLLqxAe4EyMpV
+ nKmFkIYLIGSEDBQWVJnl/9EmJd6YIEpGveJGIx0=
+X-Google-Smtp-Source: AGHT+IGhsipAiu8WHKGc//QkrqCVEgWUR0OFlbAZuOoDkPmyCWMN+wzEauHjrH5kFhzMyncAZkz2Vw==
+X-Received: by 2002:a05:6e02:1d02:b0:349:4598:b99a with SMTP id
+ i2-20020a056e021d0200b003494598b99amr16978261ila.13.1692052879936; 
  Mon, 14 Aug 2023 15:41:19 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.18
+ u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 15:41:18 -0700 (PDT)
+ Mon, 14 Aug 2023 15:41:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 04/19] expo: Refactor menu_build() to return the object created
-Date: Mon, 14 Aug 2023 16:40:24 -0600
-Message-ID: <20230814224047.535491-5-sjg@chromium.org>
+Subject: [PATCH 05/19] expo: Split out cedit into its own header
+Date: Mon, 14 Aug 2023 16:40:25 -0600
+Message-ID: <20230814224047.535491-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
 In-Reply-To: <20230814224047.535491-1-sjg@chromium.org>
 References: <20230814224047.535491-1-sjg@chromium.org>
@@ -88,79 +88,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The caller reads the ID but menu_build() does this again. Add the ID as
-a parameter to avoid this. Return the object created so that the caller
-can adjust it.
+Before adding more functions to this interface, create a new header for
+the configuration editor.
+
+Fix up the expo header guard while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/expo_build.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+ boot/cedit.c    |  1 +
+ cmd/cedit.c     |  1 +
+ include/cedit.h | 33 +++++++++++++++++++++++++++++++++
+ include/expo.h  | 27 +++------------------------
+ 4 files changed, 38 insertions(+), 24 deletions(-)
+ create mode 100644 include/cedit.h
 
-diff --git a/boot/expo_build.c b/boot/expo_build.c
-index 22f62eb54bc5..e8c4a40d3f09 100644
---- a/boot/expo_build.c
-+++ b/boot/expo_build.c
-@@ -214,22 +214,21 @@ static void list_strings(struct build_info *info)
-  * @info: Build information
-  * @node: Node containing the menu description
-  * @scn: Scene to add the menu to
-+ * @id: ID for the menu
-+ * @objp: Returns the object pointer
-  * Returns: 0 if OK, -ENOMEM if out of memory, -EINVAL if there is a format
-  * error, -ENOENT if there is a references to a non-existent string
+diff --git a/boot/cedit.c b/boot/cedit.c
+index ee24658917bc..2d16086bad63 100644
+--- a/boot/cedit.c
++++ b/boot/cedit.c
+@@ -7,6 +7,7 @@
   */
--static int menu_build(struct build_info *info, ofnode node, struct scene *scn)
-+static int menu_build(struct build_info *info, ofnode node, struct scene *scn,
-+		      uint id, struct scene_obj **objp)
- {
- 	struct scene_obj_menu *menu;
- 	uint title_id, menu_id;
- 	const u32 *item_ids;
- 	int ret, size, i;
- 	const char *name;
--	u32 id;
  
- 	name = ofnode_get_name(node);
--	ret = ofnode_read_u32(node, "id", &id);
--	if (ret)
--		return log_msg_ret("id", -EINVAL);
+ #include <common.h>
++#include <cedit.h>
+ #include <cli.h>
+ #include <dm.h>
+ #include <expo.h>
+diff --git a/cmd/cedit.c b/cmd/cedit.c
+index 0cae304c4adc..5f0e84403f5b 100644
+--- a/cmd/cedit.c
++++ b/cmd/cedit.c
+@@ -7,6 +7,7 @@
+  */
  
- 	ret = scene_menu(scn, name, id, &menu);
- 	if (ret < 0)
-@@ -275,12 +274,13 @@ static int menu_build(struct build_info *info, ofnode node, struct scene *scn)
- 		if (ret < 0)
- 			return log_msg_ret("mi", ret);
- 	}
-+	*objp = &menu->obj;
+ #include <common.h>
++#include <cedit.h>
+ #include <command.h>
+ #include <expo.h>
+ #include <fs.h>
+diff --git a/include/cedit.h b/include/cedit.h
+new file mode 100644
+index 000000000000..21de12dfe7a9
+--- /dev/null
++++ b/include/cedit.h
+@@ -0,0 +1,33 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#ifndef __CEDIT_H
++#define __CEDIT_H
++
++struct expo;
++struct video_priv;
++
++/**
++ * cedit_arange() - Arrange objects in a configuration-editor scene
++ *
++ * @exp: Expo to update
++ * @vid_priv: Private info of the video device
++ * @scene_id: scene ID to arrange
++ * Returns: 0 if OK, -ve on error
++ */
++int cedit_arange(struct expo *exp, struct video_priv *vid_priv, uint scene_id);
++
++/**
++ * cedit_run() - Run a configuration editor
++ *
++ * This accepts input until the user quits with Escape
++ *
++ * @exp: Expo to use
++ * Returns: 0 if OK, -ve on error
++ */
++int cedit_run(struct expo *exp);
++
++#endif /* __CEDIT_H */
+diff --git a/include/expo.h b/include/expo.h
+index 0b1d944a169f..da151074d207 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -4,14 +4,13 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
  
- 	return 0;
- }
+-#ifndef __SCENE_H
+-#define __SCENE_H
++#ifndef __EXPO_H
++#define __EXPO_H
+ 
+ #include <dm/ofnode_decl.h>
+ #include <linux/list.h>
+ 
+ struct udevice;
+-struct video_priv;
  
  /**
-- * menu_build() - Build an expo object and add it to a scene
-+ * obj_build() - Build an expo object and add it to a scene
-  *
-  * See doc/developer/expo.rst for a description of the format
-  *
-@@ -292,6 +292,7 @@ static int menu_build(struct build_info *info, ofnode node, struct scene *scn)
+  * enum expoact_type - types of actions reported by the expo
+@@ -676,24 +675,4 @@ int expo_apply_theme(struct expo *exp, ofnode node);
   */
- static int obj_build(struct build_info *info, ofnode node, struct scene *scn)
- {
-+	struct scene_obj *obj;
- 	const char *type;
- 	u32 id;
- 	int ret;
-@@ -306,7 +307,7 @@ static int obj_build(struct build_info *info, ofnode node, struct scene *scn)
- 		return log_msg_ret("typ", -EINVAL);
+ int expo_build(ofnode root, struct expo **expp);
  
- 	if (!strcmp("menu", type))
--		ret = menu_build(info, node, scn);
-+		ret = menu_build(info, node, scn, id, &obj);
- 	 else
- 		ret = -EINVAL;
- 	if (ret)
+-/**
+- * cedit_arange() - Arrange objects in a configuration-editor scene
+- *
+- * @exp: Expo to update
+- * @vid_priv: Private info of the video device
+- * @scene_id: scene ID to arrange
+- * Returns: 0 if OK, -ve on error
+- */
+-int cedit_arange(struct expo *exp, struct video_priv *vid_priv, uint scene_id);
+-
+-/**
+- * cedit_run() - Run a configuration editor
+- *
+- * This accepts input until the user quits with Escape
+- *
+- * @exp: Expo to use
+- * Returns: 0 if OK, -ve on error
+- */
+-int cedit_run(struct expo *exp);
+-
+-#endif /*__SCENE_H */
++#endif /*__EXPO_H */
 -- 
 2.41.0.694.ge786442a9b-goog
 
