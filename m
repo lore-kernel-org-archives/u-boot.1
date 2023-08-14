@@ -4,84 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A93A0EB64DD
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 19:18:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11B37EB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 20:40:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 103C486828;
-	Mon, 14 Aug 2023 21:18:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 041C68692C;
+	Mon, 14 Aug 2023 22:40:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o99iRIMG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C79968696B; Mon, 14 Aug 2023 21:18:53 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5F14807F9
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 21:18:51 +0200 (CEST)
+ id 19DE286967; Mon, 14 Aug 2023 22:40:16 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id C03E68675B
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 22:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-586df08bba0so52068817b3.3
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 12:18:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692040730; x=1692645530;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pqhYOspZFrBaY7kdRwG83uP1Tuv8LXP+Dy+OmsVeBZ0=;
- b=o99iRIMG6K8FMKYrPGj+IBvgBXmiPOpuRQC2ttyTb8EI6ctreuRDGTPNC1vgy41+3A
- mq+he6My3dcl98wvzI5a1hU1nltD31raSt78MesKB0FNtalynPNhx5iZ1dqwIZnJwZ97
- XVO3oYvySuXkTmKunZ+az/XBQc0N1rJVechxM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692040730; x=1692645530;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pqhYOspZFrBaY7kdRwG83uP1Tuv8LXP+Dy+OmsVeBZ0=;
- b=LzZeZVbGjQLuOQg41yUgxjVu1WLctP63QmkD86I3UkwmsPQ9mJhObR81zU0wNdKcCc
- GgAXqOW+nFtuDIu0uIAZ07MCSS2VXEPseiCJbQmu834t39bP0NsmO3QQ5n7ALx3+o8TJ
- dxRce02us03BrtcezOgZE0gkvkVir1n3b/3BDZoZR21X4DcVbkzPt5wtGCGprE77OF9v
- kB+qYYSI2QOgmGgo8enjKs/6Eb2rsX7jm2jqUyM/UCWYKzPUr/CYinoTAw9wlF4vfES5
- jH1jkF4ULWZ9QyeGNs7et/KwKF9d051+wb6PNsExwc/iQEpFIy7RkUV33xzxWhq9zaJH
- DE6A==
-X-Gm-Message-State: AOJu0YyUSFXXwJ27j6K4LoUNnwtiNLueWllFexUB5syYAZjzw/BhYKhB
- b2qGntB+gZWNrw53jHNWG0T7JA==
-X-Google-Smtp-Source: AGHT+IE8bw2uyGZg5RWeoVogHYe24fIGSSyLUaGx41gaR/Vkr3EDYflIponXiOYxJnOYUw9s8ZVVrA==
-X-Received: by 2002:a0d:d544:0:b0:589:f4ec:4d51 with SMTP id
- x65-20020a0dd544000000b00589f4ec4d51mr4428395ywd.3.1692040730290; 
- Mon, 14 Aug 2023 12:18:50 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-1d1b-2873-dbaa-7ea0.res6.spectrum.com.
- [2603:6081:7b00:6400:1d1b:2873:dbaa:7ea0])
- by smtp.gmail.com with ESMTPSA id
- db4-20020a05690c0dc400b005844ae2bfa3sm2945246ywb.95.2023.08.14.12.18.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 12:18:49 -0700 (PDT)
-Date: Mon, 14 Aug 2023 15:18:47 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>
-Subject: Re: [RFC PATCH 2/4] scripts/Makefile.lib: Embed capsule public key
- in platform's dtb
-Message-ID: <20230814191847.GG3630934@bill-the-cat>
-References: <20230814090309.1548310-1-sughosh.ganu@linaro.org>
- <20230814090309.1548310-3-sughosh.ganu@linaro.org>
- <20230814150430.GX3630934@bill-the-cat>
- <CADg8p96MtFiWf=u2j6b9+ZxfGSyAZ=T11CDd6pFifLz_Bh4qwQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B9F71063;
+ Mon, 14 Aug 2023 13:40:55 -0700 (PDT)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 580EE3F64C;
+ Mon, 14 Aug 2023 13:40:12 -0700 (PDT)
+Date: Mon, 14 Aug 2023 21:39:10 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Marc
+ Zyngier <maz@kernel.org>, Chen-Yu Tsai <wens@csie.org>
+Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
+ psci_arch_init
+Message-ID: <20230814213854.408962d5@slackpad.lan>
+In-Reply-To: <20230531201520.15479-1-CFSworks@gmail.com>
+References: <20230531201520.15479-1-CFSworks@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IhCYCBbEoiLLuarZ"
-Content-Disposition: inline
-In-Reply-To: <CADg8p96MtFiWf=u2j6b9+ZxfGSyAZ=T11CDd6pFifLz_Bh4qwQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,132 +57,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 31 May 2023 14:15:20 -0600
+Sam Edwards <cfsworks@gmail.com> wrote:
 
---IhCYCBbEoiLLuarZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Tue, Aug 15, 2023 at 12:19:36AM +0530, Sughosh Ganu wrote:
-> hi Tom,
->=20
-> On Mon, 14 Aug 2023 at 20:34, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Aug 14, 2023 at 02:33:07PM +0530, Sughosh Ganu wrote:
-> > > The EFI capsule authentication logic in u-boot expects the public key
-> > > in the form of an EFI Signature List(ESL) to be provided as part of
-> > > the platform's dtb. Currently, the embedding of the ESL file into the
-> > > dtb needs to be done manually.
-> > >
-> > > Add a target for generating a dtsi file which contains the signature
-> > > node with the ESL file included as a property under the signature
-> > > node. Include the dtsi file in the dtb. This brings the embedding of
-> > > the ESL in the dtb into the U-Boot build flow.
-> > >
-> > > The path to the ESL file is specified through the
-> > > CONFIG_EFI_CAPSULE_ESL_FILE symbol.
-> > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > >  lib/efi_loader/Kconfig             |  9 +++++++++
-> > >  lib/efi_loader/capsule_esl.dtsi.in | 11 +++++++++++
-> > >  scripts/Makefile.lib               | 17 +++++++++++++++++
-> > >  3 files changed, 37 insertions(+)
-> > >  create mode 100644 lib/efi_loader/capsule_esl.dtsi.in
-> > >
-> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > index 9989e3f384..f40a62a0ba 100644
-> > > --- a/lib/efi_loader/Kconfig
-> > > +++ b/lib/efi_loader/Kconfig
-> > > @@ -272,6 +272,15 @@ config EFI_CAPSULE_MAX
-> > >         Select the max capsule index value used for capsule report
-> > >         variables. This value is used to create CapsuleMax variable.
-> > >
-> > > +config EFI_CAPSULE_ESL_FILE
-> > > +     string "Path to the EFI Signature List File"
-> > > +     default ""
-> >
-> > No default.
->=20
-> I think Simon wanted to keep this so that it would not break the build
-> if no option was provided.
+(CC:ing Marc and Chen-Yu as the original authors)
 
-No, that means that there's a missing dependency.  Blank defaults are
-almost never right.  And "so that we don't break configs" means that
-something else is wrong, generally a missing dependency.  And maybe I
-cut out too much context here as yes, this option needs to depend on
-some part of the capsule framework.
+sorry for the delay, found that mouldering in my Drafts folder.
 
-> > [snip]
-> > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > > index f41b16781d..cf4eef0b05 100644
-> > > --- a/scripts/Makefile.lib
-> > > +++ b/scripts/Makefile.lib
-> > > @@ -334,8 +334,25 @@ cmd_dtc =3D mkdir -p $(dir ${dtc-tmp}) ; \
-> > >               ; \
-> > >       sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp =
-> $(depfile)
-> > >
-> > > +ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
-> > > +quiet_cmd_capsule_esl_gen =3D CAPSULE_ESL_GEN $@
-> > > +cmd_capsule_esl_gen =3D \
-> > > +     $(shell sed "s:ESL_BIN_FILE:$(capsule_esl_path):" $(capsule_esl=
-_input_file) > $@)
-> > > +
-> > > +$(obj)/.capsule_esl.dtsi:
-> > > +     $(call cmd_capsule_esl_gen)
-> > > +
-> > > +capsule_esl_input_file=3D$(srctree)/lib/efi_loader/capsule_esl.dtsi.=
-in
-> > > +capsule_esl_dtsi =3D .capsule_esl.dtsi
-> > > +capsule_esl_path=3D$(abspath $(srctree)/$(subst $(quote),,$(CONFIG_E=
-FI_CAPSULE_ESL_FILE)))
-> >
-> > This seems right.
-> >
-> > > +include_files +=3D $(capsule_esl_dtsi)
-> > > +
-> > > +$(obj)/%.dtb: $(src)/%.dts $(DTC) $(obj)/.capsule_esl.dtsi FORCE
-> > > +     $(call if_changed_dep,dtc)
-> > > +else
-> > >  $(obj)/%.dtb: $(src)/%.dts $(DTC) FORCE
-> > >       $(call if_changed_dep,dtc)
-> > > +endif
-> >
-> > I think this implies to me that we should have been depending on
-> > $(include_files) (once renamed to be less vague) here already ?
->=20
-> Okay. That can be done. I had kept the .capsule_esl.dtsi as a
-> dependency primarily because that file needs to be generated before it
-> can be included. I suppose the same can apply to some other dtsi as
-> well.
+> The nonsec code overrides/handles these:
+> - Setting PMR to 0xFF happens earlier, in _nonsec_init, so this is
+>   redundant.
+> - The NS bit is not yet set: it gets set later in _secure_monitor.
+>   Trying to clear it here is pointless and misleading.
 
-You shouldn't need to have it be explicit, if it's in dtsi_include_list
-as there's a rule so make can resolve how to satisfy the dependency.
-But since we dynamically #include the other files, I don't know that
-they will be caught with the normal dependency logic.  But, it will
-still be cleaner to have the dtb rules depend on the automagic #include
-files too, rather than special casing the rule here I believe.
+So superficially this looks alright, but I am still somewhat reluctant
+to apply this, see below ...
 
---=20
-Tom
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> ---
+>  arch/arm/cpu/armv7/sunxi/psci.c | 4 ----
+>  1 file changed, 4 deletions(-)
+> 
+> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
+> index e1d3638b5c..f866025c37 100644
+> --- a/arch/arm/cpu/armv7/sunxi/psci.c
+> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
+> @@ -300,14 +300,10 @@ void __secure psci_arch_init(void)
+>  	/* Set SGI15 priority to 0 */
+>  	writeb(0, GICD_BASE + GICD_IPRIORITYRn + 15);
+>  
+> -	/* Be cool with non-secure */
+> -	writel(0xff, GICC_BASE + GICC_PMR);
+> -
+>  	/* Switch FIQEn on */
+>  	setbits_le32(GICC_BASE + GICC_CTLR, BIT(3));
+>  
+>  	reg = cp15_read_scr();
+>  	reg |= BIT(2);  /* Enable FIQ in monitor mode */
+> -	reg &= ~BIT(0); /* Secure mode */
 
---IhCYCBbEoiLLuarZ
-Content-Type: application/pgp-signature; name="signature.asc"
+I am scratching my head on this one: I see it deliberately being done in
+the original patch by Marc[1], and wonder why. If I read the code and
+the architecture correctly, this routine is called only(?) from the SMC
+handler, which means we are in monitor mode, that only exists in secure
+state. So the NS bit is irrelevant until we switch to another mode. And
+we indeed set the bit later, before dropping back to non-secure. So I
+agree that clearing the bit is pointless. Was it put in to be more
+robust, for other potential callers of this function, for instance in
+the boot path?
 
------BEGIN PGP SIGNATURE-----
+Does anyone remember?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTafhcACgkQFHw5/5Y0
-tyzT5Av8CRkrBO9gz/em9yxSR4YPrBy0Oij0USiQ1kNA452nNrwPlfUCQ/gCl5Fd
-emFrCRy7/HTw4TlwVpIhbtwyLyyArWAzeq4tVAj4J/M2ZOERKpxxNMnnW3SpEkuV
-ZxfS/en7CKV1EmhSoWG108HeiTDW6+72iQ894xW+17eVmV3Sp/pX4rfuZAQvyz6k
-ktsc4pw00sK0PQhF2Hfn5GyxoiwfCq+pmjMz5NLOFdNrP6/eIpSyxMInqyOunNJO
-TjaZLd+nFw5yoE/qxzCLbxuex7CwCQy2xHQGjxwmVGzjzg4bJFvKgS4mRFNcyltr
-k0qSmctEdhaTkwbtvGxgpbDMsYR892d1ESUo/lpvnYOYVPjRdWEsFkmi2alRryHd
-qYNkS1e1xndRGQSrp0ZnFpE1YJzq9Zi+tNIE7ASB/wojxqe/bz4LB+NQiklZZ6z5
-P3b91BH7SPMXlu2RC1/K8IuoJNBvL3OWEZ55zvMspmLFhWG12S8WsaBpyaFr6EXQ
-yA60JTOA
-=CJIC
------END PGP SIGNATURE-----
+Cheers,
+Andre
 
---IhCYCBbEoiLLuarZ--
+[1]
+https://source.denx.de/u-boot/u-boot/-/commit/d5db7024aafc5ea603f3a34f83bb29a1eaa3cbe7#f377950449a5dba076796d9e48fbd21f5d6ac545_0_65
+
+>  	cp15_write_scr(reg);
+>  }
+
