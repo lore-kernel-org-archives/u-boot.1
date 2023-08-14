@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCCC3C001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 305D8C001DB
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:45:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EBD686A31;
+	by phobos.denx.de (Postfix) with ESMTP id 834CC86A3C;
 	Tue, 15 Aug 2023 00:43:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SBsmNAXV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HcajIwGE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7DB086A1D; Tue, 15 Aug 2023 00:43:51 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id CCCE786A20; Tue, 15 Aug 2023 00:43:51 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E1AE869ED
+ by phobos.denx.de (Postfix) with ESMTPS id 0CDA3869E3
  for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-c5ffb6cda23so4962951276.0
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-cfcebc33d04so4718032276.2
  for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:43:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692053027; x=1692657827;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2dB8EVKZpQ9Y1o+H0xqLO9BAInC3qAakCNukbmUTCPU=;
- b=SBsmNAXVrOntCh+hjEW4rc+YogDlFM1/1HURw99yors81m3yN0qZ0om3oZRBj7PXH7
- VetY1Str8p3V26eQFgBFI60KgZ5EXStyc1rPbPAcxmha+8tZ+2ecrzMmhG8YSqW/5Okt
- cei7UeDPkQmDom2RgrhzW8IXMMWY4SJmvQkaI=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=prHUWXjS1xmOyXdfOn5kI6fbfxhC7Ea3MHVSU6xBEOs=;
+ b=HcajIwGEG+a9inwpBKRkahwpZc/xtEBCmJP1rdsKqis+brdIZqD+bPm3Zq3y+nWGj3
+ YgAi1CaU2spHc4Nio/pzsjpH1zowPmmneOJk3FtNh7oTV7qTkCXhsKS1SFpytlv9qGbG
+ Cxg+pVc3/IRyjY1f9fg7l6nfRjjs3dOEZOUO4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692053027; x=1692657827;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2dB8EVKZpQ9Y1o+H0xqLO9BAInC3qAakCNukbmUTCPU=;
- b=DWYZQb3aSB/UABvSae93hPSTVDlvp3B6v6Wtg+7u00mjm8wBQY7dsql9WzRWVQAGX3
- Gix0gT+35S8NN1KBDK70gA7bSp48XmA6DJpEFxAb9b0G65zbArjuqHmQy6qBajGZzaxx
- XO4cDHggVCBkA3iXBIr99BLsXWRWOnlmuR/xgmqdOD01Oaj1ogvH5yVGlGO31ILKTHX6
- ZhFIix0Pti/bUkc82UMxj5Xr3MXW2uDbrDim35cqk1XkGYDXOkNulmxIqq76lpZVDB3v
- 5WUR6wdoTQddIKillN5vIIsBqucVm8yPcynFzHMI3e26f9HKR95xr7UmEK0XxMe3vhcl
- M/7g==
-X-Gm-Message-State: AOJu0YydahCJQvbRIjru4TQpwdblKhqe0ciaFgf/FgyqQSDbXEC88DV8
- /5E06azcCHXB/ephw1VMLIEbhcIVJDPBk635jHVBUw==
-X-Google-Smtp-Source: AGHT+IGY23bVUXtsY+cnSdmWTllN9KS6KPkaVCt3uLTx5UYeYl3vywGpNSKd7eiUhkmUhBSbjxZsZOLdD/G2VCkWbHU=
-X-Received: by 2002:a25:83c4:0:b0:c86:a5b6:cdff with SMTP id
- v4-20020a2583c4000000b00c86a5b6cdffmr11442870ybm.19.1692053026611; Mon, 14
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=prHUWXjS1xmOyXdfOn5kI6fbfxhC7Ea3MHVSU6xBEOs=;
+ b=QzFU9UFep/ESGBvF4XmW1hAAfhU566ieuvdDucHTULbRwUpjZjYpCgcsesT+jaD/yi
+ wtlKF2HtyX3vbQbLqEnAEI/x0/TR5418notYZZyXKNsvq/zRFlgvbh6DJCHcyEO5Jya1
+ QCYZkgonw6QZCjmFQqb2x4N0WSDfxVHmS9LU2At5L0eXkyZQiI+ZmQ3hK6WeYHNVO9nS
+ onrrCDMHh0iThO8rPZxp7sUpqdeOakXTNdyJ/q+9zyRW+IGgPfGs6M6JDGphLDyUgcma
+ QG2gkxc+QXoZX6GgyS/Jn4LMGYbQmyuQNnt/4/6Ci0CxsIRN5/n9sXENdd46gTzn6dly
+ hKsw==
+X-Gm-Message-State: AOJu0YxHlRK5vHAezUd11s632ROp63k6wLKQV7IYYjLFegN41VMi38lL
+ 5SbGPrsqPKCLuG9/LSXDcKcNt6o08EDX3IdZducG6iGx+qQioyabDs0=
+X-Google-Smtp-Source: AGHT+IHZoD/D/cqbjX7HkxJYvkSe6pIWl9GMd1mFILq7O1mU2knVi3/lnKr2fr9Ptvnk6GFd5jNchRGklK6ajUtn4TU=
+X-Received: by 2002:a25:4112:0:b0:d0a:127e:7478 with SMTP id
+ o18-20020a254112000000b00d0a127e7478mr12277309yba.44.1692053026603; Mon, 14
  Aug 2023 15:43:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230813214659.441964-1-marek.vasut+renesas@mailbox.org>
- <20230813214659.441964-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230813214659.441964-2-marek.vasut+renesas@mailbox.org>
+References: <20230731160008.82342-5-sjg@chromium.org>
+ <CAEUhbmXn0VQ6B8Qfs+XWEBuPKQ0mtVbzNeH7ZmT+V1Yh1r5qWw@mail.gmail.com>
+ <CAEUhbmU14kY-DpNEZyXJEWX4vbqFY-ANgEZZskqY_gxVv4rD5Q@mail.gmail.com>
+ <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
+In-Reply-To: <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Aug 2023 16:42:58 -0600
-Message-ID: <CAPnjgZ0rCX+hUn2rtH-gpVB9X+Rfv-FTGoxGsB8tKa0e_QEBGA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] configs: sandbox: test: dm: blk: Enable NVMXIP QSPI
- and update test
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Date: Mon, 14 Aug 2023 16:43:02 -0600
+Message-ID: <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
+Subject: Re: [PATCH v3 5/9] board_f: Fix corruption of relocaddr
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Anatolij Gustschin <agust@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
+ Michal Suchanek <msuchanek@suse.de>, Ovidiu Panait <ovpanait@gmail.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,20 +89,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 13 Aug 2023 at 15:47, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
->
-> Enable NVMXIP QSPI driver on sandbox, since it is already enabled
-> on sandbox64. Update blk tests to match.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  configs/sandbox_defconfig |  1 +
->  test/dm/blk.c             | 63 +++++++++++++++++++++++++++++++--------
->  2 files changed, 52 insertions(+), 12 deletions(-)
->
+Hi Devarsh, Nikhil, Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, 9 Aug 2023 at 09:29, Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Thu, Aug 3, 2023 at 7:03=E2=80=AFPM Bin Meng <bmeng.cn@gmail.com> wrot=
+e:
+> >
+> > On Thu, Aug 3, 2023 at 6:37=E2=80=AFPM Bin Meng <bmeng.cn@gmail.com> wr=
+ote:
+> > >
+> > > On Tue, Aug 1, 2023 at 12:00=E2=80=AFAM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > When the video framebuffer comes from the bloblist, we should not c=
+hange
+> > > > relocaddr to this address, since it interfers with the normal memor=
+y
+> > >
+> > > typo: interferes
+> > >
+> > > > allocation.
+> > > >
+> > > > This fixes a boot loop in qemu-x86_64
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Fixes: 5bc610a7d9d ("common: board_f: Pass frame buffer info from S=
+PL to u-boot")
+> > > > Suggested-by: Nikhil M Jain <n-jain1@ti.com>
+> > > > ---
+> > > >
+> > > > Changes in v3:
+> > > > - Reword the Kconfig help as suggested
+> > > >
+> > > > Changes in v2:
+> > > > - Add a Kconfig as the suggested conditional did not work
+> > > >
+> > > >  common/board_f.c      | 3 ++-
+> > > >  drivers/video/Kconfig | 9 +++++++++
+> > > >  2 files changed, 11 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/common/board_f.c b/common/board_f.c
+> > > > index 7d2c380e91e..5173d0a0c2d 100644
+> > > > --- a/common/board_f.c
+> > > > +++ b/common/board_f.c
+> > > > @@ -419,7 +419,8 @@ static int reserve_video(void)
+> > > >                 if (!ho)
+> > > >                         return log_msg_ret("blf", -ENOENT);
+> > > >                 video_reserve_from_bloblist(ho);
+> > > > -               gd->relocaddr =3D ho->fb;
+> > > > +               if (IS_ENABLED(CONFIG_VIDEO_RESERVE_SPL))
+> > > > +                       gd->relocaddr =3D ho->fb;
+> > > >         } else if (CONFIG_IS_ENABLED(VIDEO)) {
+> > > >                 ulong addr;
+> > > >                 int ret;
+> > > > diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> > > > index b41dc60cec5..f2e56204d52 100644
+> > > > --- a/drivers/video/Kconfig
+> > > > +++ b/drivers/video/Kconfig
+> > > > @@ -1106,6 +1106,15 @@ config SPL_VIDEO_REMOVE
+> > > >           if this  option is enabled video driver will be removed a=
+t the end of
+> > > >           SPL stage, beforeloading the next stage.
+> > > >
+> > > > +config VIDEO_RESERVE_SPL
+> > > > +       bool
+> > > > +       help
+> > > > +         This adjusts reserve_video() to redirect memory reservati=
+on when it
+> > > > +         sees a video handoff blob (BLOBLISTT_U_BOOT_VIDEO). This =
+avoids the
+> > > > +         memory used for framebuffer from being allocated by U-Boo=
+t proper,
+> > > > +         thus preventing any further memory reservations done by U=
+-Boot proper
+> > > > +         from overwriting the framebuffer.
+> > > > +
+> > > >  if SPL_SPLASH_SCREEN
+> > > >
+> > > >  config SPL_SPLASH_SCREEN_ALIGN
+> > >
+> > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> >
+> > applied to u-boot-x86, thanks!
+>
+> Dropped this one from the x86 queue per the discussion.
+
+I just wanted to come back to this discussion.
+
+Do we have an agreed way forward? Who is waiting for who?
+
+Regards,
+Simon
