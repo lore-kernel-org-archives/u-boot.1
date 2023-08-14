@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53103EB64DD
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 17:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6DCEB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 18:10:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 065128697E;
-	Mon, 14 Aug 2023 19:40:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AC88865ED;
+	Mon, 14 Aug 2023 20:10:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QsofhgJ0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K310soqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C44A98697E; Mon, 14 Aug 2023 19:40:08 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id E500186828; Mon, 14 Aug 2023 20:10:35 +0200 (CEST)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE5098694B
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 19:40:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C0F580770
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 20:10:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-3fe4b45a336so41430535e9.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 10:40:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-1bc8045e09dso28447635ad.0
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 11:10:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692034806; x=1692639606;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/8g0G95uplBTC5nG01BrLZ6HAKrRlSJw9w9pGTjBnzc=;
- b=QsofhgJ0+Q97nizvrIk2W92glUJk2Wq2+tMEEVWV4MflaQIoJ4WAXPHvmecqXzX1eg
- WFrei4s2HzkevmXK531O3VvRfeCpKEh0tV1g5yL4lbKOFba327ieQfHNy+j+hHWdNWMO
- TXllq/FVg6vM/6prtDRucG2CWJ6YTyOxZeLiDdI0I1Nb67/N8WW+sByb9L4DSuSuMmlw
- Nw5Xc7mVOya99kFv0Er5NGe/cPzBtHNpzgV+LnIFmTFduxCkFbzM4yHo/a/x229UMs6L
- PmZz3b8ZfnPdy5V54Yp4zZVVSGP7oy6XIvnhS2BLwoCSl0NQ+qO5PFsyEtuXNJbjEgAZ
- gl+A==
+ d=gmail.com; s=20221208; t=1692036628; x=1692641428;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=HppQPKsjhF4XXnx5hKhlq+ZZMP2j4f/edK+RHkvgZXA=;
+ b=K310soqxNCMdjJYgYacc5HjXAmTUgUNzTZdWWk3CysxJpySTFv7UmZnPJ0G2zf1/ix
+ lwzvCOjN4Ec9UUjjMgYqbotgRbz1S9EpjssikotUCrCu+GO69sFJzTAnxUSkWnRVzESv
+ pgO/MRJ5qJyce8LBzPY+cBZzdFK7V6nhz4qLipPf0NZuuNwGsCl8mmFIauddhik7d2Ve
+ 5HebGRagTKXVF1Xl5eDoy1dT9B9FtzFZrlV1s82MLX+Rqn37LasBa9kqpSTaB2wmiTvl
+ AQX51j9rJiLacBNtVgztcC0le48UIH71aqi11wvPsczjavCF4GEnmmfJG2phjF2vbWtO
+ ww+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692034806; x=1692639606;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/8g0G95uplBTC5nG01BrLZ6HAKrRlSJw9w9pGTjBnzc=;
- b=QdM4fhuCyevthtEAsSF7alL8SCDpsM6FznZTETdRyi6Pxh55YD2ij8EG7wPXW//qip
- ImeomtKHEngs/UGkaYRxHiYM2bO5APU9Y3yodNCLswNbdamra91RWNcW+amnSR75kQPF
- CyIplPUNtkK6VkYO1ewn9vxEGHi6YIrThf6xHYOPmdPKhP3SsONUcq55jinwWbw9VL1H
- ccNM+0dXyF6C8+Lx4jCVzB/HUpmAQREqP15OG4kcbl1hdhsw1THwPujaKnAEFelZojM4
- Dk5uTlFhT+ImfcSmAFfq7KzVrTnudzElhKactd2/igcrOnsirKsC+FcovQ1NILaGBq5A
- tHjA==
-X-Gm-Message-State: AOJu0YxENE0ggW95uBEBGD+O+QIUaFIzASYm07TVCtTLUa8JkWGSQnPd
- Zbq5nGzrJ3W5BFsnQ+SUftnaa8i9pA8=
-X-Google-Smtp-Source: AGHT+IHKWjepfp7dCgJ+gs1oh+iO3I0j/8hy05eqyElUx1r4MUlx/hzTr6bB2C47NJUeQBcUDHVJIw==
-X-Received: by 2002:a1c:6a14:0:b0:3fd:2f8e:2c69 with SMTP id
- f20-20020a1c6a14000000b003fd2f8e2c69mr8055775wmc.32.1692034806229; 
- Mon, 14 Aug 2023 10:40:06 -0700 (PDT)
-Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- n24-20020a7bcbd8000000b003fbb0c01d4bsm15002406wmi.16.2023.08.14.10.40.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 10:40:05 -0700 (PDT)
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng@tinylab.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Bharat Gooty <bharat.gooty@broadcom.com>, Stefan Roese <sr@denx.de>,
- Qu Wenruo <wqu@suse.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux distros
-Date: Mon, 14 Aug 2023 20:39:44 +0300
-Message-Id: <20230814173944.288356-5-alpernebiyasak@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230814173944.288356-1-alpernebiyasak@gmail.com>
-References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
+ d=1e100.net; s=20221208; t=1692036628; x=1692641428;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HppQPKsjhF4XXnx5hKhlq+ZZMP2j4f/edK+RHkvgZXA=;
+ b=KocAucOJjQERKRQMe2T4mQSO2WBiWRgsvp3mkQrW9O9Zbi64U+d1aWXOAY15o/lo3P
+ LbOx/WchSqANbv6MZWbKDcGkD5sYgBQkWkunD0nZlPec4x3330Myyqo2MUuhL6kLgF1z
+ kSeeclV2A/zYcZNjwVuNRKKr9WScoIbKU5Tsl+hgj6bDSm/VWpAsMbAdeWmgwPzgc7f2
+ iB/RHKwKlLF6ypqopTjrFPc7U512+q2XNb9tEm/MuS9Gz+61hwIAB3ywUG76GeNz1YpW
+ 0mEY0BO4QC9qPvA54LvA3g0K8XyWFV6nP/MQwZYGzJOJ7DYkVZ9Xvc9snZASgVHONSV5
+ 2Bxg==
+X-Gm-Message-State: AOJu0YwJGRVh7bMfBti9NfSgAp/Cyb3W9YVsGDbf04tgmfpxr4Oshuui
+ NNz1GrIzVQG8BflRntmpX90=
+X-Google-Smtp-Source: AGHT+IFpqsHpaTWuXzHgKDf+mirYSyXnAHTlz1O/HlFMPD1VFLYx0PEnTuHXm49q3kCS11+qNFZvpQ==
+X-Received: by 2002:a17:90a:17ce:b0:262:f798:b60d with SMTP id
+ q72-20020a17090a17ce00b00262f798b60dmr6160485pja.6.1692036628258; 
+ Mon, 14 Aug 2023 11:10:28 -0700 (PDT)
+Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
+ [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
+ 9-20020a17090a190900b00268032f6a64sm10962163pjg.25.2023.08.14.11.10.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Aug 2023 11:10:27 -0700 (PDT)
+Message-ID: <1af2d8fe-0516-e67d-15b8-71248ac80fa3@gmail.com>
+Date: Mon, 14 Aug 2023 12:10:25 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH 1/3] sunxi: psci: clean away preprocessor macros
+Content-Language: en-US
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
+ Maksim Kiselev <bigunclemax@gmail.com>
+References: <20230812003055.74527-1-CFSworks@gmail.com>
+ <20230812003055.74527-2-CFSworks@gmail.com>
+ <20230814173714.61bd09a2@donnerap.manchester.arm.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <20230814173714.61bd09a2@donnerap.manchester.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,104 +99,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an example qemu-system-aarch64 command that can make U-Boot on QEMU
-boot into the Debian Installer, along with resulting console messages
-from U-Boot, based on the existing documentation section for the x86
-version.
+Hi Andre,
 
-Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
----
-I actually want to put the root.img device first so that the VM can boot
-into the installed system when it reboots, but U-Boot can't find the
-bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
-scan -lab`, but it seems to only ever search the first virtio-blk.
-However, `eficonfig; bootefi bootmgr` makes it boot somehow.
+On 8/14/23 10:37, Andre Przywara wrote:
+> So I think we can get rid of this:
+> - GEN_H6 never compiles this code here, as both H6 and H616 are arm64.
 
-Changes in v2:
-- Add new patch for doc section on booting Linux distros
+Easy!
 
- doc/board/emulation/qemu-arm.rst | 68 ++++++++++++++++++++++++++++++++
- 1 file changed, 68 insertions(+)
+> - We can define SUNXI_PRCM_BASE for NCAT2, I believe Samuel once
+> mentioned that the D1/T113 does have such a block, actually.
 
-diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
-index 8ec5349fc9ea..78bcc3ee44c0 100644
---- a/doc/board/emulation/qemu-arm.rst
-+++ b/doc/board/emulation/qemu-arm.rst
-@@ -98,6 +98,74 @@ can be enabled with the following command line parameters:
- 
- These have been tested in QEMU 2.9.0 but should work in at least 2.5.0 as well.
- 
-+Booting distros
-+---------------
-+
-+It is possible to install and boot a standard Linux distribution using
-+qemu_arm64 by setting up a root disk::
-+
-+    qemu-img create root.img 20G
-+
-+then using the installer to install. For example, with Debian 12::
-+
-+    qemu-system-aarch64 \
-+      -machine virt -cpu cortex-a53 -m 4G -smp 4 \
-+      -bios u-boot.bin \
-+      -serial stdio -device VGA \
-+      -nic user,model=virtio-net-pci \
-+      -device virtio-rng-pci \
-+      -device qemu-xhci,id=xhci \
-+      -device usb-kbd -device usb-tablet \
-+      -drive if=virtio,file=debian-12.0.0-arm64-netinst.iso,format=raw,readonly=on,media=cdrom \
-+      -drive if=virtio,file=root.img,format=raw,media=disk
-+
-+The output will be something like this::
-+
-+    U-Boot 2023.10-rc2-00075-gbe8fbe718e35 (Aug 11 2023 - 08:38:49 +0000)
-+
-+    DRAM:  4 GiB
-+    Core:  51 devices, 14 uclasses, devicetree: board
-+    Flash: 64 MiB
-+    Loading Environment from Flash... *** Warning - bad CRC, using default environment
-+
-+    In:    serial,usbkbd
-+    Out:   serial,vidconsole
-+    Err:   serial,vidconsole
-+    Bus xhci_pci: Register 8001040 NbrPorts 8
-+    Starting the controller
-+    USB XHCI 1.00
-+    scanning bus xhci_pci for devices... 3 USB Device(s) found
-+    Net:   eth0: virtio-net#32
-+    Hit any key to stop autoboot:  0
-+    Scanning for bootflows in all bootdevs
-+    Seq  Method       State   Uclass    Part  Name                      Filename
-+    ---  -----------  ------  --------  ----  ------------------------  ----------------
-+    Scanning global bootmeth 'efi_mgr':
-+    Scanning bootdev 'fw-cfg@9020000.bootdev':
-+    fatal: no kernel available
-+    scanning bus for devices...
-+    Scanning bootdev 'virtio-blk#34.bootdev':
-+      0  efi          ready   virtio       2  virtio-blk#34.bootdev.par efi/boot/bootaa64.efi
-+    ** Booting bootflow 'virtio-blk#34.bootdev.part_2' with efi
-+    Using prior-stage device tree
-+    Failed to load EFI variables
-+    Error: writing contents
-+    ** Unable to write file ubootefi.var **
-+    Failed to persist EFI variables
-+    Missing TPMv2 device for EFI_TCG_PROTOCOL
-+    Booting /efi\boot\bootaa64.efi
-+    Error: writing contents
-+    ** Unable to write file ubootefi.var **
-+    Failed to persist EFI variables
-+    Welcome to GRUB!
-+
-+Standard boot looks through various available devices and finds the virtio
-+disks, then boots from the first one. After a second or so the grub menu appears
-+and you can work through the installer flow normally.
-+
-+After the installation, you can boot into the installed system by running QEMU
-+again without the drive argument corresponding to the installer CD image.
-+
- Enabling TPMv2 support
- ----------------------
- 
--- 
-2.40.1
+Will you be taking care of this in v2 of your T113s series, or should I 
+be adding it (in which case I'll need to know the location of the block)?
 
+> - The non-existing cpu_pwr_clamp member should go away when you switch to
+> a BASE_ADDR + REG_OFFSET approach, I think.
+
+Less easy, but still can do.
+
+> Shouldn't that be the opposite? In the existing code, sun6i and H3 DO
+> program the clamp (see the "-" section above).
+
+And sun7i and R40, as well. It appears I simply read the #if 
+defined(...) mess backwards. I'll fix that for v2. As a bonus, this 
+lends itself to a rather nice refactoring of sunxi_cpu_set_power() where 
+I can have the if block only determine the pwroff/clamp addresses, and 
+have a single tail-call to sunxi_power_switch() at the bottom. Since the 
+latter function is so simple, I may as well just inline it into 
+sunxi_cpu_set_power() (which I suspect might be more readable).
+
+> Cheers,
+> Andre
+
+Likewise,
+Sam
