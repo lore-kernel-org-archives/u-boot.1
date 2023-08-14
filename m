@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F32C04A6A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:42:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B7DC04A6A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13582869AB;
+	by phobos.denx.de (Postfix) with ESMTP id 583F5869D6;
 	Tue, 15 Aug 2023 00:41:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BEJj+a7P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iLU3/mEQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B9DF869AE; Tue, 15 Aug 2023 00:41:24 +0200 (CEST)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id B8A68869C6; Tue, 15 Aug 2023 00:41:24 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F9F0869A6
+ by phobos.denx.de (Postfix) with ESMTPS id ABAE6869A0
  for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-79095499a16so181231039f.2
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-34978cc9e53so18852475ab.2
  for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692052880; x=1692657680;
+ d=chromium.org; s=google; t=1692052881; x=1692657681;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RpWYNKpcbxUDlE6vwbuowlMpWfjHE81Ana1RDmEw8TI=;
- b=BEJj+a7PMmfaH9XTvYsrS2iu2GpTdjaLs2wLwUSRCjHK/RFKnQVjVlTHEam8Gsq8RW
- 9y+ayYdpDCLEgZc7LuDI+6Kd08pVcCB7VfmljJ6tx7o5Y1C5y03HSHR4Ssgiq99O3h2V
- u5stt4xJ7hBoYxBvYW5yRUC4Fku421cOroUrc=
+ bh=feogD3tuT56eRGeYdhjMi3/TfBGWJSofulZpgKs1MJQ=;
+ b=iLU3/mEQWf07aeyu8d2JxDqwq5fUzrcGFV2evThFMZJN/7v8r4pih1cY5hq2RZkLRn
+ uOrIlXT9BoG1WvtABi6csTxNOWYZz138l8JnlijpGIZP6LXYMkjaWa08fob/PAqSM2pS
+ NVdFcaEPSYB4dKCPKFSrHvCHhQFTgJkl6TZwQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692052880; x=1692657680;
+ d=1e100.net; s=20221208; t=1692052881; x=1692657681;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RpWYNKpcbxUDlE6vwbuowlMpWfjHE81Ana1RDmEw8TI=;
- b=TcrQbL05CMKKMMfLQ9CuXEpohf5uqjTfnCIYuenef3A+rITyJG42lt8qfkDiwrg/KJ
- wWCuK1xGnMqvLtAdw59QgZpQPMrfgB1xeTfoV4Xfz+UUFmafnwyEqWrBlB8iSM6jArju
- ESnIsyo9QZnZOaynbx7KS7kxJBNsEsfO/nuVVhbmTuEiHcfzxrlSEfmGgmwxdRTyJYzU
- PBN9G46RL56ewR2nLF4brHxWqh6c3vysdb7HY69YhE2uH43dFa72U8h3Edo00EWsboCS
- oWl7TrviQA0rELgmsrB4itYZM0i2iDH0t+aMrgLhaNTwbS9HOlcd0r8Vpfgvaku0QKU7
- SmAw==
-X-Gm-Message-State: AOJu0YzfcSCgjVs6NuoQ9IHz5QWVshXi5XYEftcPQgvcDtxn/onzZE++
- GQYvJDZnXuSMIm6WUcun0EQxtTkHh2Uj7QRPB3E=
-X-Google-Smtp-Source: AGHT+IFjD+vk5kvf5CaOcmsrvKCY8pHQ0UWKhC+Y4J9wI8tVw5sP+EH+PvX/7tAWkn0mbmvzs8UtsQ==
-X-Received: by 2002:a92:c249:0:b0:347:7399:e9c1 with SMTP id
- k9-20020a92c249000000b003477399e9c1mr16883256ilo.14.1692052880647; 
- Mon, 14 Aug 2023 15:41:20 -0700 (PDT)
+ bh=feogD3tuT56eRGeYdhjMi3/TfBGWJSofulZpgKs1MJQ=;
+ b=caX6R/9Lz3JZR6j2e9GUo1FexN6xlk88m9eid8Yq8m21THkQ3WlPMN6qfHom967LxH
+ ti6de2X4NcONn5Zf61hUhvq0GZS5hkAwTLS1AC4se47i01LtJENL4+LYmZ8ce7iNw6La
+ ydfpr/36HABxdGZp1pYfo+7Q68V7AKWWn+blkbvDC29wFw5QY3ZbekohDVxh65F8Nx2e
+ WL1LgfB5mytOhl7Uhzso/sbE6YVT9P2yR+OdKuIuE2PrVJlv1bkQ0TkcmjkAxZIFiGQw
+ JAdaTmMowP2GeJDjkJMugryPc//ouFp4RAeSd/YNgcMtibIk2Za0Ghn7WrMomG2jfuy7
+ Gj+w==
+X-Gm-Message-State: AOJu0Yz4x1kDLf0754HoxmuDX7AxH0R+pci8c+8GyPticv4Mdh9CePoT
+ 38LSJAA7q956ER+CEWsk2cnhLQFIHjTYBIM5/v0=
+X-Google-Smtp-Source: AGHT+IGaXWHONdUsek8p3uII9fCZobGG1wCdnvzA90EAyenxLKBhX8kPCVOTRdEyqPqgLZLm4NvJvQ==
+X-Received: by 2002:a05:6e02:170a:b0:348:c293:9d9f with SMTP id
+ u10-20020a056e02170a00b00348c2939d9fmr17334264ill.27.1692052881376; 
+ Mon, 14 Aug 2023 15:41:21 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 15:41:20 -0700 (PDT)
+ Mon, 14 Aug 2023 15:41:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 06/19] expo: Move cedit test into its own file and tidy
-Date: Mon, 14 Aug 2023 16:40:26 -0600
-Message-ID: <20230814224047.535491-7-sjg@chromium.org>
+Subject: [PATCH 07/19] expo: Add a function to prepare a cedit
+Date: Mon, 14 Aug 2023 16:40:27 -0600
+Message-ID: <20230814224047.535491-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
 In-Reply-To: <20230814224047.535491-1-sjg@chromium.org>
 References: <20230814224047.535491-1-sjg@chromium.org>
@@ -88,144 +88,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this test out so it can have its own file. Rename the test to use
-a cedit_ prefix.
+Split out the code which prepares the cedit for use, so we can call it
+from a test.
 
-This allows us to drop the check for CONFIG_CMD_CEDIT in the test.
-
-Also we don't need driver model objects for this test, so drop them.
+Add a log category while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/boot/Makefile |  1 +
- test/boot/cedit.c  | 53 ++++++++++++++++++++++++++++++++++++++++++++++
- test/boot/expo.c   | 43 -------------------------------------
- 3 files changed, 54 insertions(+), 43 deletions(-)
- create mode 100644 test/boot/cedit.c
+ boot/cedit.c    | 32 ++++++++++++++++++++++++++------
+ include/cedit.h | 15 +++++++++++++++
+ 2 files changed, 41 insertions(+), 6 deletions(-)
 
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 22ed61c8fa02..52947580ae60 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -6,6 +6,7 @@ obj-$(CONFIG_BOOTSTD) += bootdev.o bootstd_common.o bootflow.o bootmeth.o
- obj-$(CONFIG_FIT) += image.o
+diff --git a/boot/cedit.c b/boot/cedit.c
+index 2d16086bad63..6c10b2114541 100644
+--- a/boot/cedit.c
++++ b/boot/cedit.c
+@@ -6,6 +6,8 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
  
- obj-$(CONFIG_EXPO) += expo.o
-+obj-$(CONFIG_CEDIT) += cedit.o
- 
- ifdef CONFIG_OF_LIVE
- obj-$(CONFIG_BOOTMETH_VBE_SIMPLE) += vbe_simple.o
-diff --git a/test/boot/cedit.c b/test/boot/cedit.c
-new file mode 100644
-index 000000000000..f3411f734fa2
---- /dev/null
-+++ b/test/boot/cedit.c
-@@ -0,0 +1,53 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2023 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
++#define LOG_CATEGORY LOGC_EXPO
 +
-+#include <common.h>
-+#include <cedit.h>
-+#include <expo.h>
-+#include <test/ut.h>
-+#include "bootstd_common.h"
-+#include <test/cedit-test.h>
-+#include "../../boot/scene_internal.h"
-+
-+/* Check the cedit command */
-+static int cedit_base(struct unit_test_state *uts)
-+{
-+	extern struct expo *cur_exp;
-+	struct scene_obj_menu *menu;
-+	struct scene_obj_txt *txt;
-+	struct expo *exp;
-+	struct scene *scn;
-+
-+	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
-+
-+	console_record_reset_enable();
-+
-+	/*
-+	 * ^N  Move down to second menu
-+	 * ^M  Open menu
-+	 * ^N  Move down to second item
-+	 * ^M  Select item
-+	 * \e  Quit
-+	 */
-+	console_in_puts("\x0e\x0d\x0e\x0d\e");
-+	ut_assertok(run_command("cedit run", 0));
-+
-+	exp = cur_exp;
-+	scn = expo_lookup_scene_id(exp, exp->scene_id);
-+	ut_assertnonnull(scn);
-+
-+	menu = scene_obj_find(scn, scn->highlight_id, SCENEOBJT_NONE);
-+	ut_assertnonnull(menu);
-+
-+	txt = scene_obj_find(scn, menu->title_id, SCENEOBJT_NONE);
-+	ut_assertnonnull(txt);
-+	ut_asserteq_str("AC Power", expo_get_str(exp, txt->str_id));
-+
-+	ut_asserteq(ID_AC_ON, menu->cur_item_id);
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(cedit_base, 0);
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 458e332440c3..90027409c817 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -714,46 +714,3 @@ static int expo_test_build(struct unit_test_state *uts)
+ #include <common.h>
+ #include <cedit.h>
+ #include <cli.h>
+@@ -47,18 +49,15 @@ int cedit_arange(struct expo *exp, struct video_priv *vpriv, uint scene_id)
  	return 0;
  }
- BOOTSTD_TEST(expo_test_build, UT_TESTF_DM);
+ 
+-int cedit_run(struct expo *exp)
++int cedit_prepare(struct expo *exp, struct video_priv **vid_privp,
++		  struct scene **scnp)
+ {
+-	struct cli_ch_state s_cch, *cch = &s_cch;
+ 	struct video_priv *vid_priv;
+-	uint scene_id;
+ 	struct udevice *dev;
+ 	struct scene *scn;
+-	bool done;
++	uint scene_id;
+ 	int ret;
+ 
+-	cli_ch_init(cch);
 -
--/* Check the cedit command */
--static int expo_cedit(struct unit_test_state *uts)
--{
--	extern struct expo *cur_exp;
--	struct scene_obj_menu *menu;
--	struct scene_obj_txt *txt;
--	struct expo *exp;
--	struct scene *scn;
--
--	if (!IS_ENABLED(CONFIG_CMD_CEDIT))
--		return -EAGAIN;
--
--	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
--
--	console_record_reset_enable();
--
--	/*
--	 * ^N  Move down to second menu
--	 * ^M  Open menu
--	 * ^N  Move down to second item
--	 * ^M  Select item
--	 * \e  Quit
--	 */
--	console_in_puts("\x0e\x0d\x0e\x0d\e");
--	ut_assertok(run_command("cedit run", 0));
--
--	exp = cur_exp;
--	scn = expo_lookup_scene_id(exp, exp->scene_id);
--	ut_assertnonnull(scn);
--
--	menu = scene_obj_find(scn, scn->highlight_id, SCENEOBJT_NONE);
--	ut_assertnonnull(menu);
--
--	txt = scene_obj_find(scn, menu->title_id, SCENEOBJT_NONE);
--	ut_assertnonnull(txt);
--	ut_asserteq_str("AC Power", expo_get_str(exp, txt->str_id));
--
--	ut_asserteq(ID_AC_ON, menu->cur_item_id);
--
--	return 0;
--}
--BOOTSTD_TEST(expo_cedit, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
+ 	/* For now we only support a video console */
+ 	ret = uclass_first_device_err(UCLASS_VIDEO, &dev);
+ 	if (ret)
+@@ -93,6 +92,27 @@ int cedit_run(struct expo *exp)
+ 	if (ret)
+ 		return log_msg_ret("dim", ret);
+ 
++	*vid_privp = vid_priv;
++	*scnp = scn;
++
++	return scene_id;
++}
++
++int cedit_run(struct expo *exp)
++{
++	struct cli_ch_state s_cch, *cch = &s_cch;
++	struct video_priv *vid_priv;
++	uint scene_id;
++	struct scene *scn;
++	bool done;
++	int ret;
++
++	cli_ch_init(cch);
++	ret = cedit_prepare(exp, &vid_priv, &scn);
++	if (ret < 0)
++		return log_msg_ret("prep", ret);
++	scene_id = ret;
++
+ 	done = false;
+ 	do {
+ 		struct expo_action act;
+diff --git a/include/cedit.h b/include/cedit.h
+index 21de12dfe7a9..851d8e83564a 100644
+--- a/include/cedit.h
++++ b/include/cedit.h
+@@ -8,6 +8,7 @@
+ #define __CEDIT_H
+ 
+ struct expo;
++struct scene;
+ struct video_priv;
+ 
+ /**
+@@ -30,4 +31,18 @@ int cedit_arange(struct expo *exp, struct video_priv *vid_priv, uint scene_id);
+  */
+ int cedit_run(struct expo *exp);
+ 
++/**
++ * cedit_prepare() - Prepare to run a cedit
++ *
++ * Set up the video device, select the first scene and highlight the first item.
++ * This ensures that all menus have a selected item.
++ *
++ * @exp: Expo to use
++ * @vid_privp: Set to private data for the video device
++ * @scnp: Set to the first scene
++ * Return: scene ID of first scene if OK, -ve on error
++ */
++int cedit_prepare(struct expo *exp, struct video_priv **vid_privp,
++		  struct scene **scnp);
++
+ #endif /* __CEDIT_H */
 -- 
 2.41.0.694.ge786442a9b-goog
 
