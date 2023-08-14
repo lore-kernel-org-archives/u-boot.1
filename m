@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EEDDC001B0
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 15:15:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 726B4C001B0
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 15:18:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DE6A8696C;
-	Mon, 14 Aug 2023 17:15:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CAAF986722;
+	Mon, 14 Aug 2023 17:18:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TDwausuO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CcLloqbi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9FA986966; Mon, 14 Aug 2023 17:15:32 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 9C8D1867B4; Mon, 14 Aug 2023 17:18:34 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC89F8692C
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 17:15:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D54E86679
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 17:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-991c786369cso598282666b.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 08:15:30 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-99c3d3c3db9so596944166b.3
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 08:18:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692026130; x=1692630930;
+ d=linaro.org; s=google; t=1692026312; x=1692631112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=f84jrRIA6ushXxBZEQcoPwZGH1mPNWsO2GMnylr12qE=;
- b=TDwausuOawwxQkKNaOPIEq2EsQSJpls8bKWmBjXVmlODR4rD6AMrhpjSnIvRkUE90D
- 0/5E0oO53HhNs0uPpulwB4F2ZwCP/FgWBOnv0uHxT4gxOqY1SWSeYNFvGeBciXmEOev7
- B0Ks+hmkOL3b0vUI5H81SK/7vYMCnMgqmGYXuuGKPIPLvNY4+6SV5ecOkalPxWGwJ+0r
- UcNgQaEzG01rN5nI7VvlCmQ/hXR4D7syirtoCS1ofEKpt4glTClSoMV0xNisYw2miMN5
- WCkjgXKRQ0456RBTFZiVcKHaUGjcgFlc5kwk0kzYmzN7q+jr+rxcDKZPjxKurKyC5R0v
- uQkg==
+ bh=kUTq3fbxIVVgAcclry5dCElJdOhlNBHpw72pV1hEJgs=;
+ b=CcLloqbioatbA1fr2MdYQe4/q6MQf8AdZ3jFXAUmQCGMDoAXFZs2R/bphZQSMs/QvU
+ mqDEFzs0b8OCi4dCSqoHPwqNssIxQVg6wZAYuy1RhHiyg8PlxcHMeAUd6NV2wgy3rBBi
+ wXMDWQ+p1fNDufE+vDUM2Z2dtZAJ5299R3YdZkum817Ot9og4Z30FjOTWTyeqMqtFsX4
+ HdqnIWQxDzmDiMcbNJbMQnqbQG3th4CfkILzOZIiAiF20UMwMi8F1mOQQLKwYJR+wEu4
+ 2bSuPI/0hJcu3J22Hbz9R6242L4pWCt32EbIpI0F8OFWCRVkRAuJPTQeToE5AmUaV0vi
+ Jaiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692026130; x=1692630930;
+ d=1e100.net; s=20221208; t=1692026312; x=1692631112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=f84jrRIA6ushXxBZEQcoPwZGH1mPNWsO2GMnylr12qE=;
- b=eu2pHqgr4H7sSu0Aebj19Vov3RXBAQTKq6LA7oGgTBPaCOaGXnwwjayUPQllKSLuB4
- AJ2ZAG+JQ9u99BEVkypx6FakmcuMXA68nRtKNFpeqfFyDzMZmAfexBBfyVrps85uGZfY
- VSNExgIfaL1BpE03kDnh8MDDfek3e1rQ+XWqAY0cnM3KbvdJ/CbOYqgfbZuap1NVnVMs
- sZ15adGKCgAOVsfMy00jXltWSqS3PWK0z3o04Kh8qGMM36KlkHMPWH0PtHrwDxdBXbTE
- XaeunIYHqCCtWezagn6FSwuhrF/vI2OQ9Kep7SdsB/coW7adO6VleUz1t7wSuHDVDalC
- qiaw==
-X-Gm-Message-State: AOJu0Yy088Cctv7BtmpdZEJk/KfRkyfCvqmhJLAfa9pD7VC9AKdJLn4v
- +uGxvpzbaJfJLGDzFqbRtOKwzqVNOcsveCjMOQJbQg==
-X-Google-Smtp-Source: AGHT+IHWewjS6a4dsmv4YyvzD8avLNKJ4J8KLsOMVMIHKU4zUJc+SNTyaEdcs+CZSZbzj23pf/fN/lcMm7rJtCek2F4=
-X-Received: by 2002:a17:906:3cb2:b0:98e:2b01:ab97 with SMTP id
- b18-20020a1709063cb200b0098e2b01ab97mr6826988ejh.68.1692026130217; Mon, 14
- Aug 2023 08:15:30 -0700 (PDT)
+ bh=kUTq3fbxIVVgAcclry5dCElJdOhlNBHpw72pV1hEJgs=;
+ b=KC6xUWlsCKZEDOibjbd0LTp1jdsivzO7RZ6agOUywxzPNCWFN81ggC2zBUiz2mPyOk
+ se+dcd0/UaDxxECUvVoxpWh89lXTuRsHU+U00pbXpfrWUB4hklCaWKQtGTCqJ9jX2FaD
+ CkCPiXfsKyNd7IDsePR2MB5R5nGzQOsSUU5bV4gJMAQPACXVlZLBTwqyDOsUk2lK3M2m
+ msReoQWuQk6pJctkRmuPxTfo8sfHxER0m3BMOT+LDNc0dsqSfdgR2l+RSz+iR1SpOjXj
+ 4d6mxwdfNr5BUJpVJZFs6cH+xkIw/yxL19FOafkU0P2CGAeFCvFbnnX9/TdZO+JcahTh
+ YwGw==
+X-Gm-Message-State: AOJu0YxEDePz3ewwuo8nEPA2mFJWGsd8C0ELv4o7IpYSe/f1H/d4T18O
+ OpvhgKOEd9H6Zt0figLkYsbjrRL+5zsNN1WeBESWdA==
+X-Google-Smtp-Source: AGHT+IEYYZ9Q+kM1rWDCy/cjaucbeaK5eNUoPwBu3kQW+uZ3smEZ4bhnjgX0a8/2nCsvvVs3eJ1byeq1rKHH7fejJc8=
+X-Received: by 2002:a17:906:3d21:b0:99b:c952:309a with SMTP id
+ l1-20020a1709063d2100b0099bc952309amr7462863ejf.39.1692026312035; Mon, 14 Aug
+ 2023 08:18:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
- <20230814133253.4150-4-maxim.uvarov@linaro.org> <ZNo3+qhKIEqmdMTh@hades>
-In-Reply-To: <ZNo3+qhKIEqmdMTh@hades>
+ <20230814133253.4150-5-maxim.uvarov@linaro.org> <ZNo4cZtrSXa1dKXd@hades>
+In-Reply-To: <ZNo4cZtrSXa1dKXd@hades>
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Mon, 14 Aug 2023 21:15:18 +0600
-Message-ID: <CAD8XO3ZK2GwOxc=wodp7M+9Qgh_Ugd7nNNTi58OXqq9X3SAa7g@mail.gmail.com>
-Subject: Re: [PATCHv6 03/14] net/lwip: implement dns cmd
+Date: Mon, 14 Aug 2023 21:18:19 +0600
+Message-ID: <CAD8XO3a3N1j2G_Fjiws1S7praCDtLup=nrv4po--x6JmKKCfjQ@mail.gmail.com>
+Subject: Re: [PATCHv6 04/14] net/lwip: implement dhcp cmd
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com, 
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de, 
@@ -88,120 +88,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Aug 2023 at 20:19, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Mon, 14 Aug 2023 at 20:21, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 wrote:
 
-> On Mon, Aug 14, 2023 at 07:32:42PM +0600, Maxim Uvarov wrote:
-> > Implement function for dns command with lwIP variant. Usage and output is
+> On Mon, Aug 14, 2023 at 07:32:43PM +0600, Maxim Uvarov wrote:
+> > Implement function for dhcp command with lwIP variant. Usage and output
+> is
 > > the same as the original command. This code called by compatibility code
 > > between U-Boot and lwIP.
 >
-> What's compatibility code?
-> I think something along the lines of
+> Same as the dns command
 >
-> 'U-Boot recently got support for an alternative network stack using LWIP.
-> Replace XXXX command with the LWIP variant while keeping the output and
-> error messages identical"
->
-
-ok, that message is a good one. By 'compatibility code' I meant code to
-merge lwip applications and other U-Boot code.
-
-So in general all net/lwip/apps/{dns,ping,wget} and etc. These applications
-do not have U-Boot headers and can be compiled with
-any other lwIP port. I.e. for example, you can take the linux userland port
-with a tap device and directly compile these apps, run and debug.
-This might be named lwIP apps code.
-
-And code which does lwIP init, calls application initialization, then goes
-to net polling loop - I named here 'a compatibility code'. Might be not the
-base naming, but that was an idea.
-
-
-
->
-> > +
-> > +int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +             char *const argv[]);
+> >
+> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > ---
+> >  include/net/lwip.h             | 10 +++++++
+> >  net/lwip/Makefile              |  1 +
+> >  net/lwip/apps/dhcp/lwip-dhcp.c | 51 ++++++++++++++++++++++++++++++++++
+> >  3 files changed, 62 insertions(+)
+> >  create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
+> >
+> > diff --git a/include/net/lwip.h b/include/net/lwip.h
+> > index c83b5c8231..2f035280eb 100644
+> > --- a/include/net/lwip.h
+> > +++ b/include/net/lwip.h
+> > @@ -15,3 +15,13 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int
+> argc,
+> >  *         Other value < 0, if error
+> >  */
+> >  int ulwip_dns(char *name, char *varname);
 > > +
 > > +/*
-> > +* This function creates the DNS request to resolve a domain host name.
-> Function
+> > +* This function creates the DHCP request to obtain IP address. If DHCP
+> server
 >
-> You need the name of the function as well.  Please have a look at how the
-> rest of the code is documented.
+> Sphinx needs something more, please check the existing functions
 >
-> > +* can return immediately if previous request was cached or it might
-> require
-> > +* entering the polling loop for a request to a remote server.
+> > +* returns file name, this file will be downloaded with tftp.  After this
+> > +* function you need to invoke the polling loop to process network
+> communication.
 > > +*
-> > +* @name  dns name to resolve
->
-> @name: etc
->
-> > +* @varname (optional) U-Boot variable name to store the result
-> > +* Return: ERR_OK(0) for fetching entry from the cache
-> > +*         ERR_INPROGRESS(-5) success, can go to the polling loop
+> > +* Return: 0 if success
 > > +*         Other value < 0, if error
 > > +*/
-> > +int ulwip_dns(char *name, char *varname);
+> > +int ulwip_dhcp(void);
 > > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> > index d1161bea78..6d2c00605b 100644
+> > index 6d2c00605b..59323fb325 100644
 > > --- a/net/lwip/Makefile
-> > + */
 > > +
-> > +#include <common.h>
-> > +#include <command.h>
-> > +#include <console.h>
+> > +static struct dhcp dhcp;
 > > +
-> > +#include <lwip/dns.h>
-> > +#include <lwip/ip_addr.h>
-> > +
-> > +#include <net/ulwip.h>
-> > +
-> > +static void dns_found_cb(const char *name, const ip_addr_t *ipaddr,
-> void *callback_arg)
+> > +static int ulwip_dhcp_tmo(void)
 > > +{
-> > +     char *varname = (char *)callback_arg;
+> > +     switch (dhcp.state) {
+> > +     case DHCP_STATE_BOUND:
+> > +             env_set("bootfile", dhcp.boot_file_name);
+> > +             env_set("ipaddr", ip4addr_ntoa(&dhcp.offered_ip_addr));
+> > +             env_set("netmask", ip4addr_ntoa(&dhcp.offered_sn_mask));
+> > +             env_set("serverip", ip4addr_ntoa(&dhcp.server_ip_addr));
+> > +             printf("DHCP client bound to address %s\n",
+> ip4addr_ntoa(&dhcp.offered_ip_addr));
+> > +             break;
+> > +     default:
+> > +             return -1;
+> > +     }
 > > +
-> > +     if (varname)
-> > +             env_set(varname, ip4addr_ntoa(ipaddr));
->
-> Why do we have to set the varname to the resolved address?  Is this
-> something the dns command already does?
->
-> Exactly, original  command is:
-
-U_BOOT_CMD(
-dns, 3, 1, do_dns,
-"lookup the IP of a hostname",
-"hostname [envvar]"
-);
-
-
-
-> > +
-> > +     log_info("resolved %s to %s\n",  name, ip4addr_ntoa(ipaddr));
-> > +     ulwip_exit(0);
+> > +     return 0;
 > > +}
 > > +
-> > +int ulwip_dns(char *name, char *varname)
+> > +int ulwip_dhcp(void)
 > > +{
 > > +     int err;
-> > +     ip_addr_t ipaddr; /* not used */
-> > +     ip_addr_t dns1;
-> > +     ip_addr_t dns2;
+> > +     struct netif *netif;
 > > +
-> > +     ipaddr_aton(env_get("dnsip"), &dns1);
-> > +     ipaddr_aton(env_get("dnsip2"), &dns2);
+> > +     ulwip_set_tmo(ulwip_dhcp_tmo);
+> > +     netif = netif_get_by_index(1);
+>
+> What's (1)?
+>
+>
+Only one lwip netif is registered. 1 - here is the index of netif. I don't
+think that there is any definition for that...
+
+
+
 > > +
-> > +     dns_init();
-> > +     dns_setserver(0, &dns1);
-> > +     dns_setserver(1, &dns2);
+> > +     if (!netif_get_client_data(netif,
+> LWIP_NETIF_CLIENT_DATA_INDEX_DHCP))
+> > +             dhcp_set_struct(netif, &dhcp);
 > > +
-> > +     err = dns_gethostbyname(name, &ipaddr, dns_found_cb, varname);
-> > +     if (err == ERR_OK)
-> > +             dns_found_cb(name, &ipaddr, varname);
+> > +     err = dhcp_start(netif);
+> > +     if (err)
+> > +             printf("dhcp_start error %d\n", err);
 > > +
 > > +     return err;
 > > +}
