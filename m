@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40161C001B0
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:58:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422EDC001DB
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:32:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9F71869C5;
-	Mon, 14 Aug 2023 23:56:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 48C4086977;
+	Tue, 15 Aug 2023 00:32:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CPPnzKUS";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dWvwo7u6";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SCPjD1KH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2438B869E2; Mon, 14 Aug 2023 23:56:31 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1653C86986; Tue, 15 Aug 2023 00:31:59 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AF1A869D5
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:56:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4268686958
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1bdf7086ae5so2635335ad.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:56:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692050180; x=1692654980;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m0gfmQRkqQENplE5JW0mNeBMe4WYfz66h5n3v37UEyk=;
- b=CPPnzKUSp/4Y1pFkiQ1ZAraSAFXXtJzQroPmOSNTPcuDhNbZ+qiN7DnlQ6yUN5Hv/0
- jBX7LUG8oeRNIV+lpGA4IxxcMKDyyAApwDYq2GBk178AgbfvnCgDoXA1WM+aneZQwtB/
- 43If1II+xs3Q65h8zW33liWqAatj7el8H88lbNv9odC9TFLnJhzNL6+RcZzr8QPKlLsh
- 7j39nzyH6mYKbe+L7ncIyUSPZiHIt3I2bh5wQBNZovmenLynCjSFUZhXqMmIitB10ryI
- 9zovMOqF37q5jCBh65351MO/CBln/CPHMZ/ymRJOncPK98zacrCktJGiFfFdQ/TzTPUU
- MqfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692050180; x=1692654980;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m0gfmQRkqQENplE5JW0mNeBMe4WYfz66h5n3v37UEyk=;
- b=ehCsW1WBcvGbek8eY9YWcX62PKA230K+N41njtYAsZALEZd5iJnsMwnhY8Ab+6j0JD
- D53HWmDLX3DfVg5eDAX/9QnogFJtg0/SfJgW3ZNVyBxORzr6Kjt+whnj938iBCKu5j5m
- xOtLLwg2P5nl9SdF/JWwbKvjeIOg5Il/V3aVx7uMcw55uMRQSLk52EwWLtez+yPVjbPe
- Q2b2pnMbeBSncAZ5MM+Nb8OvzlK2nZ1DK8QJFK/9r0+4HKQXqXERCgig97FsxaC3xtxP
- VmbeAj87WbFdDgRZQHsyadmyKYz8G/y5rpBHrUQSM3LGYo1NOkoKYhB1MpTLwJBBdxNZ
- 2bgg==
-X-Gm-Message-State: AOJu0Yz8w42kFrAPSQc6H+X0L0Qf/JOettRdm8VcMhlER+yjc0TXT7IA
- PZe8vLknfUDwaXI8wIhUVoTcg0h4gU/uvhr3ItY=
-X-Google-Smtp-Source: AGHT+IFXIQt3E6ihmiKlDt79tUImQ6/Z/zS73fOHQVIfPfDjpOZz788DGKxD7yUZQ43GajhVroeIVw==
-X-Received: by 2002:a17:902:d2d0:b0:1b8:83a3:7db6 with SMTP id
- n16-20020a170902d2d000b001b883a37db6mr14080432plc.44.1692050180151; 
- Mon, 14 Aug 2023 14:56:20 -0700 (PDT)
-Received: from localhost.localdomain
- ([2401:4900:1f3b:3924:6581:8508:2ecb:b5dd])
- by smtp.gmail.com with ESMTPSA id
- n4-20020a170903110400b001bba373919bsm9872075plh.261.2023.08.14.14.56.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 14:56:19 -0700 (PDT)
-From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.sharma@linaro.org,
- bhupesh.linux@gmail.com, marek.vasut+renesas@mailbox.org,
- sumit.garg@linaro.org, rfried.dev@gmail.com, patrice.chotard@foss.st.com,
- jbx6244@gmail.com, kever.yang@rock-chips.com, eugen.hristev@collabora.com
-Subject: [PATCH 16/17] configs/dragonboard845c_defconfig: Enable UFS + SCSI
- related configs
-Date: Tue, 15 Aug 2023 03:24:56 +0530
-Message-Id: <20230814215457.4075025-17-bhupesh.sharma@linaro.org>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
-References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RPpzd0yjdz9sRl;
+ Tue, 15 Aug 2023 00:31:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692052317;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/EENBVWR/zGNU0on0IiPCGS0mk6fDP679oyJKJVDjHA=;
+ b=dWvwo7u61VQfvdvqThRvEK232vCuS3UneJhU71SEWIwo06cemN6oOZAzXvEB1j+qNzWBlU
+ 4Y2K8nSgkhOTzkuKq/xpeaMjvYnXf67LRDWbfJxyn/5GAiqJSNbHLygfzJo/E5enVxd8NG
+ W4L+UIYlVawpLso2B3jnDCqK1gw+gwC+/+DCpSFHZ0TZ54Da+tdhLC1YMS+lAZNaZObSaI
+ qYrPZ7m75I3Br1z24LtcB2VFFjb6pWYaf5hDzYbhMBcl603UMxnMRgPrEZStpY1Xozzkfs
+ CK2pvnSPqucbfZymAcqWyUMVrpfaMSfoc+DgxsBlU2gvK518CO1BVvfSilAs3A==
+Message-ID: <d4b2b0f9-6231-6087-a06f-df7f059a80e5@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692052315;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/EENBVWR/zGNU0on0IiPCGS0mk6fDP679oyJKJVDjHA=;
+ b=SCPjD1KHhvYMe4mAKJYTKU3HI5svWfJwulSVgQMnO8Q1P5cWZo6UZoZEMrWjzQK/IQ4OTT
+ v+oaXHH1BGBFqHf6Bek15p6ilJ0CMdIpCYtcUm6ThFyy0N5hP+1ACh424aQZyMxSQ8xvf8
+ CZufz3CyAdgnotOPEuDUScHS7SWb6+BPcWrMkPUuF55mhRSU9yRkh6iS2O9HgpvFL24f7u
+ i0+JhtTcgES4UPfp5u4m0SQnkGHN4oiBLrIKDuaO8Ul8wqDIJMBbBlT9CJM1Vo78DljSnP
+ TIDyDCSfqlfPsKVr+mQwD/fDqxENlNInOta+O3LYJKIM3SaDmcccoYPtbU2rvg==
+Date: Tue, 15 Aug 2023 00:31:52 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH 17/17] MAINTAINERS: Update UFS maintainer
+Content-Language: en-US
+To: Bhupesh Sharma <bhupesh.sharma@linaro.org>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.linux@gmail.com,
+ marek.vasut+renesas@mailbox.org, sumit.garg@linaro.org,
+ rfried.dev@gmail.com, patrice.chotard@foss.st.com, jbx6244@gmail.com,
+ kever.yang@rock-chips.com, eugen.hristev@collabora.com,
+ "vigneshr@ti.com" <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
+References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
+ <20230814215457.4075025-18-bhupesh.sharma@linaro.org>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20230814215457.4075025-18-bhupesh.sharma@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 18cb825dda4333974df
+X-MBO-RS-META: 4q7snwyftg5brnqepsorpfpfep191x4f
+X-Rspamd-Queue-Id: 4RPpzd0yjdz9sRl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,39 +94,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
----
- configs/dragonboard845c_defconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+On 8/14/23 23:54, Bhupesh Sharma wrote:
+> Since Faiz Abbas's email ID is no longer valid,
+> drop him from UFS Maintainer list.
+> 
+> Since I am using the UFS framework now extensively
+> on Qualcomm Snapdragon SoCs, so proposing myself as
+> the new UFS maintainer.
+> 
+> I have also been sending out u-boot UFS fixes in the
+> recent past.
+> 
+> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 
-diff --git a/configs/dragonboard845c_defconfig b/configs/dragonboard845c_defconfig
-index e2676a37b5..0dd5ce6159 100644
---- a/configs/dragonboard845c_defconfig
-+++ b/configs/dragonboard845c_defconfig
-@@ -18,13 +18,23 @@ CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=64
- CONFIG_SYS_CBSIZE=512
- CONFIG_CMD_GPIO=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_UFS=y
-+CONFIG_DOS_PARTITION=y
-+CONFIG_EFI_PARTITION=y
- # CONFIG_NET is not set
- CONFIG_CLK=y
- CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
- CONFIG_PINCTRL=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
-+CONFIG_SCSI=y
-+CONFIG_DM_SCSI=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SPMI_MSM=y
-+CONFIG_UFS=y
-+CONFIG_QCOM_UFS=y
- CONFIG_LMB_MAX_REGIONS=64
--- 
-2.38.1
-
+I believe TI is working on something here, so please coordinate with them.
