@@ -4,38 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11B37EB64DD
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 20:40:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE17BEB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 041C68692C;
-	Mon, 14 Aug 2023 22:40:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA49C8675B;
+	Mon, 14 Aug 2023 23:06:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19DE286967; Mon, 14 Aug 2023 22:40:16 +0200 (CEST)
+ id 613ED8696D; Mon, 14 Aug 2023 23:06:24 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C03E68675B
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 22:40:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 70A3B80750
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:06:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B9F71063;
- Mon, 14 Aug 2023 13:40:55 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C784F1FB;
+ Mon, 14 Aug 2023 14:07:03 -0700 (PDT)
 Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 580EE3F64C;
- Mon, 14 Aug 2023 13:40:12 -0700 (PDT)
-Date: Mon, 14 Aug 2023 21:39:10 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6E58D3F64C;
+ Mon, 14 Aug 2023 14:06:20 -0700 (PDT)
+Date: Mon, 14 Aug 2023 22:05:21 +0100
 From: Andre Przywara <andre.przywara@arm.com>
 To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Marc
- Zyngier <maz@kernel.org>, Chen-Yu Tsai <wens@csie.org>
-Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
- psci_arch_init
-Message-ID: <20230814213854.408962d5@slackpad.lan>
-In-Reply-To: <20230531201520.15479-1-CFSworks@gmail.com>
-References: <20230531201520.15479-1-CFSworks@gmail.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
+ Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
+Subject: Re: [PATCH 1/3] sunxi: psci: clean away preprocessor macros
+Message-ID: <20230814220521.364addff@slackpad.lan>
+In-Reply-To: <1af2d8fe-0516-e67d-15b8-71248ac80fa3@gmail.com>
+References: <20230812003055.74527-1-CFSworks@gmail.com>
+ <20230812003055.74527-2-CFSworks@gmail.com>
+ <20230814173714.61bd09a2@donnerap.manchester.arm.com>
+ <1af2d8fe-0516-e67d-15b8-71248ac80fa3@gmail.com>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -57,65 +60,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 May 2023 14:15:20 -0600
+On Mon, 14 Aug 2023 12:10:25 -0600
 Sam Edwards <cfsworks@gmail.com> wrote:
 
-Hi,
-
-(CC:ing Marc and Chen-Yu as the original authors)
-
-sorry for the delay, found that mouldering in my Drafts folder.
-
-> The nonsec code overrides/handles these:
-> - Setting PMR to 0xFF happens earlier, in _nonsec_init, so this is
->   redundant.
-> - The NS bit is not yet set: it gets set later in _secure_monitor.
->   Trying to clear it here is pointless and misleading.
-
-So superficially this looks alright, but I am still somewhat reluctant
-to apply this, see below ...
-
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> ---
->  arch/arm/cpu/armv7/sunxi/psci.c | 4 ----
->  1 file changed, 4 deletions(-)
+> Hi Andre,
 > 
-> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
-> index e1d3638b5c..f866025c37 100644
-> --- a/arch/arm/cpu/armv7/sunxi/psci.c
-> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> @@ -300,14 +300,10 @@ void __secure psci_arch_init(void)
->  	/* Set SGI15 priority to 0 */
->  	writeb(0, GICD_BASE + GICD_IPRIORITYRn + 15);
->  
-> -	/* Be cool with non-secure */
-> -	writel(0xff, GICC_BASE + GICC_PMR);
-> -
->  	/* Switch FIQEn on */
->  	setbits_le32(GICC_BASE + GICC_CTLR, BIT(3));
->  
->  	reg = cp15_read_scr();
->  	reg |= BIT(2);  /* Enable FIQ in monitor mode */
-> -	reg &= ~BIT(0); /* Secure mode */
+> On 8/14/23 10:37, Andre Przywara wrote:
+> > So I think we can get rid of this:
+> > - GEN_H6 never compiles this code here, as both H6 and H616 are arm64.  
+> 
+> Easy!
+> 
+> > - We can define SUNXI_PRCM_BASE for NCAT2, I believe Samuel once
+> > mentioned that the D1/T113 does have such a block, actually.  
+> 
+> Will you be taking care of this in v2 of your T113s series, or should I 
+> be adding it (in which case I'll need to know the location of the block)?
 
-I am scratching my head on this one: I see it deliberately being done in
-the original patch by Marc[1], and wonder why. If I read the code and
-the architecture correctly, this routine is called only(?) from the SMC
-handler, which means we are in monitor mode, that only exists in secure
-state. So the NS bit is irrelevant until we switch to another mode. And
-we indeed set the bit later, before dropping back to non-secure. So I
-agree that clearing the bit is pointless. Was it put in to be more
-robust, for other potential callers of this function, for instance in
-the boot path?
+Yes, I will add this to the header file, either defined as 0, or to its
+actual address.
+ 
+> > - The non-existing cpu_pwr_clamp member should go away when you switch to
+> > a BASE_ADDR + REG_OFFSET approach, I think.  
+> 
+> Less easy, but still can do.
+> 
+> > Shouldn't that be the opposite? In the existing code, sun6i and H3 DO
+> > program the clamp (see the "-" section above).  
+> 
+> And sun7i and R40, as well.
 
-Does anyone remember?
+Yes, but you handle both above explicitly.
+
+> It appears I simply read the #if 
+> defined(...) mess backwards. I'll fix that for v2. As a bonus, this 
+> lends itself to a rather nice refactoring of sunxi_cpu_set_power() where 
+> I can have the if block only determine the pwroff/clamp addresses, and 
+> have a single tail-call to sunxi_power_switch() at the bottom. Since the 
+> latter function is so simple, I may as well just inline it into 
+> sunxi_cpu_set_power() (which I suspect might be more readable).
+
+Yes, any further simplification is welcome, and probably somewhat
+rewarding in this case ;-)
 
 Cheers,
 Andre
-
-[1]
-https://source.denx.de/u-boot/u-boot/-/commit/d5db7024aafc5ea603f3a34f83bb29a1eaa3cbe7#f377950449a5dba076796d9e48fbd21f5d6ac545_0_65
-
->  	cp15_write_scr(reg);
->  }
-
