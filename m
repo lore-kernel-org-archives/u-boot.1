@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A873C001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A078C04A6A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:42:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BB07869CA;
-	Tue, 15 Aug 2023 00:41:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2EA2869C5;
+	Tue, 15 Aug 2023 00:41:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bf5HVtVu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mXnbsmmn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE06D869D1; Tue, 15 Aug 2023 00:41:25 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id AF6CC869B9; Tue, 15 Aug 2023 00:41:26 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B5ED869A2
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78684869C0
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34992058e95so21251755ab.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:23 -0700 (PDT)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-79095499a16so181232439f.2
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692052882; x=1692657682;
+ d=chromium.org; s=google; t=1692052883; x=1692657683;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d/x5wim2pCzHntdfUS2V+OTXuukxwhrG4wEA2msqwQA=;
- b=bf5HVtVu4XL+m7YYhtw5XWPAavJiYHbuw6y+AtuG3BIA3D3iu819IoMdKbpnhUvP3w
- xBiL0vEgEfL1Gg6mAOGTLkTwXf9CVEHpj4wO2BrYHVN3c4bNK/M4qY60VwTk8BkvkxDp
- 8rqFTNvkBcf7jvt4xwIa7fsG002ijBG0dNPlI=
+ bh=RwMGfVc9oMBs5QsOYS/j2gLnKxxnU2ImfKV6Ln9bD5o=;
+ b=mXnbsmmnl6PJJjseiOzAvibOxH1WrKfHJkYMrvLozdZldRHjTxnUN60GjLFBEDPuMd
+ BYzGsMafpL0PcvGMWhQ77905chHImU0iK3BEHI14cF/zijBa2hsVWQ+zNK7Bdc3u8Uh+
+ 47r0IqkXn3ojTapjp6AfRQZAedCvUMUzcEj6U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692052882; x=1692657682;
+ d=1e100.net; s=20221208; t=1692052883; x=1692657683;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d/x5wim2pCzHntdfUS2V+OTXuukxwhrG4wEA2msqwQA=;
- b=BgokjM7HU+5BMAoXrZWFvBqzsBVsbQBR8LvGoBVIcPE6ZkwVZj+kge/OeM4Sb4nkAR
- EZx8nMTfwlvoHA5BBRc1FmTfjRPb+1Ugw6+SVpTNguxDTHbA/pImHBtOeB02vNRElSe5
- DmwbjU/jfktAXukRTI3iHBgQeY3LeXT7NZ4ddp0ZugA/5sCEvH0YrjQPoNW3fZ6ujXs7
- /Tbb8zwN4X/Gy40Ms6oWSwhpSwiBeIYRL8zNNFv+c3amVAeKQaV3aLgmt4Se/+hMGvv1
- EJXnXf/RgdtpjaCZh8wzoZCU+77v3ri1Khx1/dHKEJ4+/hAy8w3W0KY8t39Xt7xl3RtZ
- FkrA==
-X-Gm-Message-State: AOJu0YywhBtAL5AJgX/9Vt4YDJi6fOywA3ng96E5CqBU/SYLJ95/gm/Q
- ElPisLYA16xERr/zoSIQCa/ZW62GYnuV73/9QqA=
-X-Google-Smtp-Source: AGHT+IG2A02AuGqYEsnERcXKV8FLqv0VzDCCMwi7hYUnQBoGkC0d2yLz3PgOdLmvwkuElBq0OHXITQ==
-X-Received: by 2002:a05:6e02:1c0f:b0:349:501:12bd with SMTP id
- l15-20020a056e021c0f00b00349050112bdmr17571744ilh.20.1692052882230; 
- Mon, 14 Aug 2023 15:41:22 -0700 (PDT)
+ bh=RwMGfVc9oMBs5QsOYS/j2gLnKxxnU2ImfKV6Ln9bD5o=;
+ b=Os3Z0rrY6BzSQUmYZahge3QJfqdH/qkBZBEqfLOotcd2Bq0rlhj2aUuavTrgq92KNt
+ LuOaQmPd1NZAv/2qD7J4pQ9QKrarS8BOJiscdQArl+1UonfFndanGJfyJ4vML5xng3xy
+ ukj6cOZtnFkmD6b1rOc+VlwqzjOt/8YYmq7li+1U+gt7DibCaojrGBjX2UqOmgJ0/akO
+ 3lmkV2yVYzThvBbs4c/McFtzxTWtokOfToaQh/tIpyba4N75Q+z91gl5SH29pZXWNrp9
+ DzwabrY2WWa2Hl5Lq6cRuvA7uLBKFoOYHbhFLLnaEwBjJW76lU0ouoKSzbt33eho1zQ0
+ MaBQ==
+X-Gm-Message-State: AOJu0YwHuc3X/TtQ9Gvbs3WFhAsR1RUQrCVueuStki2mQRWaYZC1SYh8
+ 26Bv+WxRbrtqQQkdMBwmcOf8ZrrkjPRVlKCvPuE=
+X-Google-Smtp-Source: AGHT+IHAYNMY8dk8V0hQ4Zt7WEQU/S6iEEnXRIpSIfodUSKjJCA7RB9ZcvOWW0XxyHG4XGztxv+SOQ==
+X-Received: by 2002:a92:c249:0:b0:347:7399:e9c1 with SMTP id
+ k9-20020a92c249000000b003477399e9c1mr16883374ilo.14.1692052883001; 
+ Mon, 14 Aug 2023 15:41:23 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.21
+ u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 15:41:21 -0700 (PDT)
+ Mon, 14 Aug 2023 15:41:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 08/19] expo: Tidy up the expo.py tool and usage
-Date: Mon, 14 Aug 2023 16:40:28 -0600
-Message-ID: <20230814224047.535491-9-sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>
+Subject: [PATCH 09/19] expo: Add documentation for the configuration editor
+Date: Mon, 14 Aug 2023 16:40:29 -0600
+Message-ID: <20230814224047.535491-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
 In-Reply-To: <20230814224047.535491-1-sjg@chromium.org>
 References: <20230814224047.535491-1-sjg@chromium.org>
@@ -88,212 +88,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tidy up this tool a little:
+This is mentioned in passing in the 'cedit' command. Its file format is
+described under `expo`. But it would be better if it had its own entry
+in the documentation.
 
-- define which arguments are needed
-- split the enum values out into a header file
-- warn if no enum values are found
-- display the dtc error if something goes wrong
-- avoid a Python traceback on error
+Add a new 'cedit' entry with a few details about this feature.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- doc/develop/expo.rst            | 37 +++++++++++++++++++--------------
- test/boot/files/expo_ids.h      | 25 ++++++++++++++++++++++
- test/boot/files/expo_layout.dts | 23 +-------------------
- test/py/tests/test_ut.py        |  4 +++-
- tools/expo.py                   | 22 +++++++++++++-------
- 5 files changed, 65 insertions(+), 46 deletions(-)
- create mode 100644 test/boot/files/expo_ids.h
+ doc/develop/cedit.rst   | 147 ++++++++++++++++++++++++++++++++++++++++
+ doc/develop/expo.rst    |   3 +
+ doc/develop/index.rst   |   1 +
+ doc/usage/cmd/cedit.rst |   2 +
+ 4 files changed, 153 insertions(+)
+ create mode 100644 doc/develop/cedit.rst
 
-diff --git a/doc/develop/expo.rst b/doc/develop/expo.rst
-index 2ac4af232da4..0643283ae481 100644
---- a/doc/develop/expo.rst
-+++ b/doc/develop/expo.rst
-@@ -367,22 +367,27 @@ strings are provided inline in the nodes where they are used.
- 
- ::
- 
--    #define ID_PROMPT           1
--    #define ID_SCENE1           2
--    #define ID_SCENE1_TITLE     3
--
--    #define ID_CPU_SPEED        4
--    #define ID_CPU_SPEED_TITLE  5
--    #define ID_CPU_SPEED_1      6
--    #define ID_CPU_SPEED_2      7
--    #define ID_CPU_SPEED_3      8
--
--    #define ID_POWER_LOSS       9
--    #define ID_AC_OFF           10
--    #define ID_AC_ON            11
--    #define ID_AC_MEMORY        12
--
--    #define ID_DYNAMIC_START    13
-+    /* this comment is parsed by the expo.py tool to insert the values below
+diff --git a/doc/develop/cedit.rst b/doc/develop/cedit.rst
+new file mode 100644
+index 000000000000..48262ee535e9
+--- /dev/null
++++ b/doc/develop/cedit.rst
+@@ -0,0 +1,147 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Configuration Editor
++====================
++
++Introduction
++------------
++
++U-Boot provides a configuration editor which allows settings to be changed in
++a GUI or text environment.
++
++
++This feature is still in development and has a number of limitations. For
++example, cedit only supports menu items (there is no numeric or text entry),
++provides no support for colour text and does not support scrolling. Still it is
++possible to use it for simple applications.
++
++
++Overview
++--------
++
++The configuration editor makes use of :doc:`expo` to build a description of the
++configuration screens and allow user to interact with it.
++
++To create a single-scene cedit for your application:
++
++#. Design the scene, i.e. the objects that need to be present and what their
++   possible values are
++
++#. Enter this in .dts format
++
++#. Create a header file containing the IDs
++
++#. Run the 'expo.py' tool to generate a .dtb file containing the layout, which
++   can be used by U-Boot
++
++#. Use the :doc:`../usage/cmd/cedit` to create the cedit, read the settings,
++   present the cedit to the user and save the settings afterwards.
++
++Each of these is described in a separate section. See :ref:`expo_example` for
++an example file.
++
++
++Design a scene
++--------------
++
++Using a piece of paper or a drawing tool, lay out the objects you want in your
++scene. Typically you will use the default layout engine, which simply puts items
++one after the other from top to bottom. So use a single column and show the
++prompt and value for each object.
++
++For menu items, show one of the values, but keep in mind what else you need.
++
++
++Create an expo-format file
++--------------------------
++
++The description is in the form of a devicetree file, as documented at
++:ref:`expo_format`. Since everything in an expo has an ID number (an integer
++greater than 1) the description is written terms of these IDs. They each have
++an enum value. which is typically taken care of by the `expo.py` tool.
++
++The expo should have a `scenes` node with a named scene as a subnode. Within the
++scene, add properties for the scene, then a subnode for each object in the
++scene.
++
++All object nodes require an `id` value and a `type` property. Other properties
++depend on the type. For example, a menu has a `title` and an `item-label` list
++proving the text for the menu items, as well as an `item-id` list providing the
++ID of each menu item, so it can be selected.
++
++Text properties may have two variants. For example `title` specifies the title
++of a menu, but you can instead use `title-id` to specify the string ID to use as
++the title. String are defined in a separate area, common to the whole expo,
++which contains a subnode for each string. Within that subnode are the ID and the
++`value` (i.e. the text). For now only English is supported, but in future it may
++be possible to append a language identifier to provide other values (e.g.
++'value-es' for Spanish).
++
++
++Create an ID header-file
++------------------------
++
++Expo needs to know the integer value to use for every ID referenced in your
++expo-format file. For example, if you have defined a `cpu-speed` node with an
++id of `ID_CPU_SPEED`, then Expo needs to know the value of `ID_CPU_SPEED`.
++
++When you write C code to use the expo, you may need to know the IDs. For
++example, to find which value the user selected in `cpu-speed` menu, you must
++use the `ID_CPU_SPEED` ID. The ID is the only way to refer to anything in Expo.
++
++Since we need a shared set of IDs, it is best to have a header file containing
++them. Expo supports doing this with an enum, where every ID is listed in the
++enum::
 +
 +    enum {
 +        ZERO,
++
 +        ID_PROMPT,
++
 +        ID_SCENE1,
 +        ID_SCENE1_TITLE,
++        ...
++    };
 +
-+        ID_CPU_SPEED,
-+        ID_CPU_SPEED_TITLE,
-+        ID_CPU_SPEED_1,
-+        ID_CPU_SPEED_2,
-+        ID_CPU_SPEED_3,
++The C compiler can parse this directly. The `expo.py` tool parses it for expo.
 +
-+        ID_POWER_LOSS,
-+        ID_AC_OFF,
-+        ID_AC_ON,
-+        ID_AC_MEMORY,
++Create a header file containing every ID mentioned in your expo. Try to group
++related things together.
 +
-+        ID_DYNAMIC_START,
-+    */
- 
-     &cedit {
-         dynamic-start = <ID_DYNAMIC_START>;
-diff --git a/test/boot/files/expo_ids.h b/test/boot/files/expo_ids.h
-new file mode 100644
-index 000000000000..027d44bf38c5
---- /dev/null
-+++ b/test/boot/files/expo_ids.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Sample expo screen layout (ID numbers)
-+ */
 +
-+enum {
-+	ZERO,
-+	ID_PROMPT,
++Build the expo layout
++---------------------
 +
-+	ID_SCENE1,
-+	ID_SCENE1_TITLE,
++Use the `expo.py` tool to build a .dtb for your expo::
 +
-+	ID_CPU_SPEED,
-+	ID_CPU_SPEED_TITLE,
-+	ID_CPU_SPEED_1,
-+	ID_CPU_SPEED_2,
-+	ID_CPU_SPEED_3,
++    ./tools/expo.py -e expo_ids.h -l expo_layout.dts -o expo.dtb
 +
-+	ID_POWER_LOSS,
-+	ID_AC_OFF,
-+	ID_AC_ON,
-+	ID_AC_MEMORY,
++This uses the enum in the provided header file to get the ID numbers, grabs
++the `.dts` file, inserts the ID numbers and then uses the devicetree compiler to
++build a `.dtb` file.
 +
-+	ID_DYNAMIC_START,
-+};
-diff --git a/test/boot/files/expo_layout.dts b/test/boot/files/expo_layout.dts
-index 55d5c910dd5e..913140bace98 100644
---- a/test/boot/files/expo_layout.dts
-+++ b/test/boot/files/expo_layout.dts
-@@ -5,28 +5,7 @@
- 
- /dts-v1/;
- 
--/*
--enum {
--	ZERO,
--	ID_PROMPT,
--
--	ID_SCENE1,
--	ID_SCENE1_TITLE,
--
--	ID_CPU_SPEED,
--	ID_CPU_SPEED_TITLE,
--	ID_CPU_SPEED_1,
--	ID_CPU_SPEED_2,
--	ID_CPU_SPEED_3,
--
--	ID_POWER_LOSS,
--	ID_AC_OFF,
--	ID_AC_ON,
--	ID_AC_MEMORY,
--
--	ID_DYNAMIC_START,
--};
--*/
-+/* see expo_ids.h for the IDs */
- 
- / {
- 	dynamic-start = <ID_DYNAMIC_START>;
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index aa1d477cd565..6a59c306322f 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -285,10 +285,12 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
- def setup_cedit_file(cons):
-     infname = os.path.join(cons.config.source_dir,
-                            'test/boot/files/expo_layout.dts')
-+    inhname = os.path.join(cons.config.source_dir,
-+                           'test/boot/files/expo_ids.h')
-     expo_tool = os.path.join(cons.config.source_dir, 'tools/expo.py')
-     outfname = 'cedit.dtb'
-     u_boot_utils.run_and_log(
--        cons, f'{expo_tool} -e {infname} -l {infname} -o {outfname}')
-+        cons, f'{expo_tool} -e {inhname} -l {infname} -o {outfname}')
- 
- 
- @pytest.mark.buildconfigspec('ut_dm')
-diff --git a/tools/expo.py b/tools/expo.py
-index c6eb87aec739..ea80c70f04e3 100755
---- a/tools/expo.py
-+++ b/tools/expo.py
-@@ -69,7 +69,10 @@ def calc_ids(fname):
- 
- def run_expo(args):
-     """Run the expo program"""
--    ids = calc_ids(args.enum_fname)
-+    fname = args.enum_fname or args.layout
-+    ids = calc_ids(fname)
-+    if not ids:
-+        print(f"Warning: No enum ID values found in file '{fname}'")
- 
-     indata = tools.read_file(args.layout)
- 
-@@ -88,10 +91,10 @@ def run_expo(args):
- 
-     with open('/tmp/asc', 'wb') as outf:
-         outf.write(data)
--    proc = subprocess.run('dtc', input=data, capture_output=True, check=True)
-+    proc = subprocess.run('dtc', input=data, capture_output=True)
-     edtb = proc.stdout
-     if proc.stderr:
--        print(proc.stderr)
-+        print(f"Devicetree compiler error:\n{proc.stderr.decode('utf-8')}")
-         return 1
-     tools.write_file(args.outfile, edtb)
-     return 0
-@@ -109,11 +112,13 @@ def parse_args(argv):
-             args is a list of string arguments
-     """
-     parser = argparse.ArgumentParser()
-+    parser.add_argument('-D', '--debug', action='store_true',
-+        help='Enable full debug traceback')
-     parser.add_argument('-e', '--enum-fname', type=str,
--        help='C file containing enum declaration for expo items')
--    parser.add_argument('-l', '--layout', type=str,
--        help='Devicetree file source .dts for expo layout')
--    parser.add_argument('-o', '--outfile', type=str,
-+        help='.dts or C file containing enum declaration for expo items')
-+    parser.add_argument('-l', '--layout', type=str, required=True,
-+        help='Devicetree file source .dts for expo layout (and perhaps enums)')
-+    parser.add_argument('-o', '--outfile', type=str, required=True,
-         help='Filename to write expo layout dtb')
- 
-     return parser.parse_args(argv)
-@@ -122,6 +127,9 @@ def start_expo():
-     """Start the expo program"""
-     args = parse_args(sys.argv[1:])
- 
-+    if not args.debug:
-+        sys.tracebacklimit = 0
++If you get an error::
 +
-     ret_code = run_expo(args)
-     sys.exit(ret_code)
++    Devicetree compiler error:
++    Error: <stdin>:9.19-20 syntax error
++    FATAL ERROR: Unable to parse input tree
++
++that means that something is wrong with your syntax, or perhaps you have an ID
++in the `.dts` file that is not mentioned in your enum. Check both files and try
++again.
++
++
++Use the command interface
++-------------------------
++
++See the :doc:`../usage/cmd/cedit` command for information on available commands.
++Typically you will use `cedit load` to load the `.dtb` file and `cedit run` to
++let the user interact with it.
++
++
++Multiple scenes
++---------------
++
++Expo supports multiple scenes but has no pre-determined way of moving between
++them. You could use selection of a menu item as a signal to change the scene,
++but this is not currently implemented in the cedit code (see `cedit_run()`).
+diff --git a/doc/develop/expo.rst b/doc/develop/expo.rst
+index 0643283ae481..fde91494799e 100644
+--- a/doc/develop/expo.rst
++++ b/doc/develop/expo.rst
+@@ -358,6 +358,9 @@ The `expo_arrange()` function can be called to arrange the expo objects in a
+ suitable manner. For each scene it puts the title at the top, the prompt at the
+ bottom and the objects in order from top to bottom.
+ 
++
++.. _expo_example:
++
+ Expo format example
+ ~~~~~~~~~~~~~~~~~~~
+ 
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 263d404b4ca8..730055e273e5 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -37,6 +37,7 @@ Implementation
+    driver-model/index
+    environment
+    expo
++   cedit
+    event
+    global_data
+    logging
+diff --git a/doc/usage/cmd/cedit.rst b/doc/usage/cmd/cedit.rst
+index 8e1110c7c77e..3d815bd27af2 100644
+--- a/doc/usage/cmd/cedit.rst
++++ b/doc/usage/cmd/cedit.rst
+@@ -22,6 +22,8 @@ It makes use of the expo subsystem.
+ The description is in the form of a devicetree file, as documented at
+ :ref:`expo_format`.
+ 
++See :doc:`../../develop/cedit` for information about the configuration editor.
++
+ Example
+ -------
  
 -- 
 2.41.0.694.ge786442a9b-goog
