@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0911BC001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 17:40:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53103EB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 17:40:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B58BB86963;
-	Mon, 14 Aug 2023 19:40:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 065128697E;
+	Mon, 14 Aug 2023 19:40:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dMWd10vR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QsofhgJ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAA878698E; Mon, 14 Aug 2023 19:40:06 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id C44A98697E; Mon, 14 Aug 2023 19:40:08 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B2BA86927
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 19:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE5098694B
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 19:40:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-3fe45481edfso46535135e9.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 10:40:04 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-3fe4b45a336so41430535e9.1
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 10:40:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692034803; x=1692639603;
+ d=gmail.com; s=20221208; t=1692034806; x=1692639606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hd5BbdxJ+USR/I8hSid3mMIsXmqnl3rHSywPMUabapE=;
- b=dMWd10vREXBwm1nqrHtEja1bvPylcGqjFY5bLgEpoS3mQcXpgATRZFT624ribKShhr
- 5J9kvFu4dA41yEu5bUjCSWC+0ml49JyhZWoBYW+s/PVd2P1rRuTcNEgxwuH9qUUX8vro
- EEXgO+2bu2q/PMKYjhecKa5ak+3iJNv+fvimFzIMRPdEvwiCfIrsu5dYXBmxgAMUg4WL
- rDxRIB8CzjnS31RYwTO+sd/0nPVIjLDC4x2H0rllzi3Njd/9cBDSVml6cZVLiPHINLwR
- y1IIV2kFCg/KC9JAUmpmlXs7b1yg5lzPoyP/wOKZ1H2aMzXTOcC3vhfOg/2eZOAh64c8
- HNuw==
+ bh=/8g0G95uplBTC5nG01BrLZ6HAKrRlSJw9w9pGTjBnzc=;
+ b=QsofhgJ0+Q97nizvrIk2W92glUJk2Wq2+tMEEVWV4MflaQIoJ4WAXPHvmecqXzX1eg
+ WFrei4s2HzkevmXK531O3VvRfeCpKEh0tV1g5yL4lbKOFba327ieQfHNy+j+hHWdNWMO
+ TXllq/FVg6vM/6prtDRucG2CWJ6YTyOxZeLiDdI0I1Nb67/N8WW+sByb9L4DSuSuMmlw
+ Nw5Xc7mVOya99kFv0Er5NGe/cPzBtHNpzgV+LnIFmTFduxCkFbzM4yHo/a/x229UMs6L
+ PmZz3b8ZfnPdy5V54Yp4zZVVSGP7oy6XIvnhS2BLwoCSl0NQ+qO5PFsyEtuXNJbjEgAZ
+ gl+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692034803; x=1692639603;
+ d=1e100.net; s=20221208; t=1692034806; x=1692639606;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Hd5BbdxJ+USR/I8hSid3mMIsXmqnl3rHSywPMUabapE=;
- b=AkYewWDNDapWTC7Gmgf5ZjQk23G8DJduBZ2njoHzSecNxbgUu9x8hy4KlSup7iCtUP
- xL4+B5aS/jI3nBesjHfP2PEMD6yLMWtIbOM/jWUBaQH6SsY5ehKkP8Bnf9nQtQBy+fR1
- X00w5ZMsu4e9azMKsTZEHRnK9ettuhppUvU/AjuQvnn8g8thF9184abqJHmlAPgioLEG
- zSKPZCuyWaxrqzBO7lHmOLpuF6qvTURnPpmvZEB+xA6XWNFi56TAZEXT3KTpSGq1K4h6
- JZfzaJ4CKBs7+/e8EhvgVFR7OPfOvGJXmFgo/JwPX0sGJwsA1Rl9c3blTRkxi/dv8xls
- oQ6w==
-X-Gm-Message-State: AOJu0YzgQVrEa7O5Ouk2/TCczMWyoYCyHH/wT3VjWLSMYJyN1uT8byrC
- ZnVdqOo58C8ZgnTHP1jWcIKGY3PBu/E=
-X-Google-Smtp-Source: AGHT+IHPIXpzChZJIhmOfe+0g2Jjf6DZZseolBgOj+68iewrGJUdXyoHQ4gOdmBsqa+pb0MI5LbAbA==
-X-Received: by 2002:a7b:c8d2:0:b0:3fe:ad4:27b4 with SMTP id
- f18-20020a7bc8d2000000b003fe0ad427b4mr8898020wml.27.1692034803622; 
- Mon, 14 Aug 2023 10:40:03 -0700 (PDT)
+ bh=/8g0G95uplBTC5nG01BrLZ6HAKrRlSJw9w9pGTjBnzc=;
+ b=QdM4fhuCyevthtEAsSF7alL8SCDpsM6FznZTETdRyi6Pxh55YD2ij8EG7wPXW//qip
+ ImeomtKHEngs/UGkaYRxHiYM2bO5APU9Y3yodNCLswNbdamra91RWNcW+amnSR75kQPF
+ CyIplPUNtkK6VkYO1ewn9vxEGHi6YIrThf6xHYOPmdPKhP3SsONUcq55jinwWbw9VL1H
+ ccNM+0dXyF6C8+Lx4jCVzB/HUpmAQREqP15OG4kcbl1hdhsw1THwPujaKnAEFelZojM4
+ Dk5uTlFhT+ImfcSmAFfq7KzVrTnudzElhKactd2/igcrOnsirKsC+FcovQ1NILaGBq5A
+ tHjA==
+X-Gm-Message-State: AOJu0YxENE0ggW95uBEBGD+O+QIUaFIzASYm07TVCtTLUa8JkWGSQnPd
+ Zbq5nGzrJ3W5BFsnQ+SUftnaa8i9pA8=
+X-Google-Smtp-Source: AGHT+IHKWjepfp7dCgJ+gs1oh+iO3I0j/8hy05eqyElUx1r4MUlx/hzTr6bB2C47NJUeQBcUDHVJIw==
+X-Received: by 2002:a1c:6a14:0:b0:3fd:2f8e:2c69 with SMTP id
+ f20-20020a1c6a14000000b003fd2f8e2c69mr8055775wmc.32.1692034806229; 
+ Mon, 14 Aug 2023 10:40:06 -0700 (PDT)
 Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- n24-20020a7bcbd8000000b003fbb0c01d4bsm15002406wmi.16.2023.08.14.10.40.01
+ n24-20020a7bcbd8000000b003fbb0c01d4bsm15002406wmi.16.2023.08.14.10.40.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 10:40:03 -0700 (PDT)
+ Mon, 14 Aug 2023 10:40:05 -0700 (PDT)
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
@@ -75,9 +75,9 @@ Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH v2 3/4] arm: qemu: Enable usb keyboard as an input device
-Date: Mon, 14 Aug 2023 20:39:43 +0300
-Message-Id: <20230814173944.288356-4-alpernebiyasak@gmail.com>
+Subject: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux distros
+Date: Mon, 14 Aug 2023 20:39:44 +0300
+Message-Id: <20230814173944.288356-5-alpernebiyasak@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230814173944.288356-1-alpernebiyasak@gmail.com>
 References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
@@ -99,135 +99,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 02be57caf730 ("riscv: qemu: Enable usb keyboard as an input
-device") adds PCI xHCI support to QEMU RISC-V virtual machines and
-enables using a USB keyboard as one of the input devices. Similarly,
-enable those for ARM virtual machines as well.
+Add an example qemu-system-aarch64 command that can make U-Boot on QEMU
+boot into the Debian Installer, along with resulting console messages
+from U-Boot, based on the existing documentation section for the x86
+version.
 
 Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
 ---
+I actually want to put the root.img device first so that the VM can boot
+into the installed system when it reboots, but U-Boot can't find the
+bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
+scan -lab`, but it seems to only ever search the first virtio-blk.
+However, `eficonfig; bootefi bootmgr` makes it boot somehow.
 
 Changes in v2:
-- Add tag: "Reviewed-by: Simon Glass <sjg@chromium.org>"
-- Add tag: "Reviewed-by: Bin Meng <bmeng@tinylab.org>"
+- Add new patch for doc section on booting Linux distros
 
- arch/arm/Kconfig                      | 5 +++++
- board/emulation/qemu-arm/qemu-arm.c   | 5 +++++
- board/emulation/qemu-arm/qemu-arm.env | 2 +-
- configs/qemu_arm64_defconfig          | 2 --
- configs/qemu_arm_defconfig            | 2 --
- doc/board/emulation/qemu-arm.rst      | 4 ++++
- 6 files changed, 15 insertions(+), 5 deletions(-)
+ doc/board/emulation/qemu-arm.rst | 68 ++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 89b978797720..1fd3ccd1607f 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1041,6 +1041,11 @@ config ARCH_QEMU
- 	imply SYS_WHITE_ON_BLACK
- 	imply SYS_CONSOLE_IS_IN_ENV
- 	imply PRE_CONSOLE_BUFFER
-+	imply USB
-+	imply USB_XHCI_HCD
-+	imply USB_XHCI_PCI
-+	imply USB_KEYBOARD
-+	imply CMD_USB
- 
- config ARCH_RMOBILE
- 	bool "Renesas ARM SoCs"
-diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-index dfea0d92a3c8..942f1fff5717 100644
---- a/board/emulation/qemu-arm/qemu-arm.c
-+++ b/board/emulation/qemu-arm/qemu-arm.c
-@@ -11,6 +11,7 @@
- #include <fdtdec.h>
- #include <init.h>
- #include <log.h>
-+#include <usb.h>
- #include <virtio_types.h>
- #include <virtio.h>
- 
-@@ -114,6 +115,10 @@ int board_late_init(void)
- 	 */
- 	virtio_init();
- 
-+	/* start usb so that usb keyboard can be used as input device */
-+	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
-+		usb_init();
-+
- 	return 0;
- }
- 
-diff --git a/board/emulation/qemu-arm/qemu-arm.env b/board/emulation/qemu-arm/qemu-arm.env
-index 86a99a2e8713..fb4adef281ed 100644
---- a/board/emulation/qemu-arm/qemu-arm.env
-+++ b/board/emulation/qemu-arm/qemu-arm.env
-@@ -2,7 +2,7 @@
- 
- /* environment for qemu-arm and qemu-arm64 */
- 
--stdin=serial
-+stdin=serial,usbkbd
- stdout=serial,vidconsole
- stderr=serial,vidconsole
- fdt_high=0xffffffff
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 94bd96678443..f6b8ae530a4a 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -35,7 +35,6 @@ CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_ENV_IS_IN_FLASH=y
-@@ -68,7 +67,6 @@ CONFIG_SYSRESET=y
- CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_TPM2_MMIO=y
--CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_TPM=y
-diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-index 7cb1e9f037ff..1347b86f34b1 100644
---- a/configs/qemu_arm_defconfig
-+++ b/configs/qemu_arm_defconfig
-@@ -36,7 +36,6 @@ CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_ENV_IS_IN_FLASH=y
-@@ -69,7 +68,6 @@ CONFIG_SYSRESET=y
- CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_TPM2_MMIO=y
--CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_TPM=y
 diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
-index 1108fe5f8184..8ec5349fc9ea 100644
+index 8ec5349fc9ea..78bcc3ee44c0 100644
 --- a/doc/board/emulation/qemu-arm.rst
 +++ b/doc/board/emulation/qemu-arm.rst
-@@ -84,6 +84,10 @@ can be enabled with the following command line parameters:
+@@ -98,6 +98,74 @@ can be enabled with the following command line parameters:
  
-     -device usb-ehci,id=ehci
+ These have been tested in QEMU 2.9.0 but should work in at least 2.5.0 as well.
  
-+- To add a USB keyboard attached to an emulated xHCI controller, pass e.g.::
++Booting distros
++---------------
 +
-+    -device qemu-xhci,id=xhci -device usb-kbd,bus=xhci.0
++It is possible to install and boot a standard Linux distribution using
++qemu_arm64 by setting up a root disk::
 +
- - To add an NVMe disk, pass e.g.::
++    qemu-img create root.img 20G
++
++then using the installer to install. For example, with Debian 12::
++
++    qemu-system-aarch64 \
++      -machine virt -cpu cortex-a53 -m 4G -smp 4 \
++      -bios u-boot.bin \
++      -serial stdio -device VGA \
++      -nic user,model=virtio-net-pci \
++      -device virtio-rng-pci \
++      -device qemu-xhci,id=xhci \
++      -device usb-kbd -device usb-tablet \
++      -drive if=virtio,file=debian-12.0.0-arm64-netinst.iso,format=raw,readonly=on,media=cdrom \
++      -drive if=virtio,file=root.img,format=raw,media=disk
++
++The output will be something like this::
++
++    U-Boot 2023.10-rc2-00075-gbe8fbe718e35 (Aug 11 2023 - 08:38:49 +0000)
++
++    DRAM:  4 GiB
++    Core:  51 devices, 14 uclasses, devicetree: board
++    Flash: 64 MiB
++    Loading Environment from Flash... *** Warning - bad CRC, using default environment
++
++    In:    serial,usbkbd
++    Out:   serial,vidconsole
++    Err:   serial,vidconsole
++    Bus xhci_pci: Register 8001040 NbrPorts 8
++    Starting the controller
++    USB XHCI 1.00
++    scanning bus xhci_pci for devices... 3 USB Device(s) found
++    Net:   eth0: virtio-net#32
++    Hit any key to stop autoboot:  0
++    Scanning for bootflows in all bootdevs
++    Seq  Method       State   Uclass    Part  Name                      Filename
++    ---  -----------  ------  --------  ----  ------------------------  ----------------
++    Scanning global bootmeth 'efi_mgr':
++    Scanning bootdev 'fw-cfg@9020000.bootdev':
++    fatal: no kernel available
++    scanning bus for devices...
++    Scanning bootdev 'virtio-blk#34.bootdev':
++      0  efi          ready   virtio       2  virtio-blk#34.bootdev.par efi/boot/bootaa64.efi
++    ** Booting bootflow 'virtio-blk#34.bootdev.part_2' with efi
++    Using prior-stage device tree
++    Failed to load EFI variables
++    Error: writing contents
++    ** Unable to write file ubootefi.var **
++    Failed to persist EFI variables
++    Missing TPMv2 device for EFI_TCG_PROTOCOL
++    Booting /efi\boot\bootaa64.efi
++    Error: writing contents
++    ** Unable to write file ubootefi.var **
++    Failed to persist EFI variables
++    Welcome to GRUB!
++
++Standard boot looks through various available devices and finds the virtio
++disks, then boots from the first one. After a second or so the grub menu appears
++and you can work through the installer flow normally.
++
++After the installation, you can boot into the installed system by running QEMU
++again without the drive argument corresponding to the installer CD image.
++
+ Enabling TPMv2 support
+ ----------------------
  
-     -drive if=none,file=disk.img,id=mydisk -device nvme,drive=mydisk,serial=foo
 -- 
 2.40.1
 
