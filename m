@@ -4,110 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0995C04A94
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 15:05:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F97C001B0
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 15:15:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2BA286992;
-	Mon, 14 Aug 2023 17:04:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03C3A86722;
+	Mon, 14 Aug 2023 17:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CBFbumL7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ku6PrK3o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1A6886970; Mon, 14 Aug 2023 17:04:21 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id E54FC867B4; Mon, 14 Aug 2023 17:15:26 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7402865B6
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 17:04:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFC8A86679
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 17:15:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d659ad4af70so3810445276.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 08:04:19 -0700 (PDT)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-589f784a972so8454767b3.0
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 08:15:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692025458; x=1692630258;
+ d=konsulko.com; s=google; t=1692026123; x=1692630923;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ct0jvH+8Gvxg1sA+/OlRKEc4mpLILIDjPe/r9iV9isg=;
- b=CBFbumL7zQUk9UxvqE9LBe0XseupyQUUzKZdbPb2fraxAwnfeIyDOkAp93ZlgZnHwo
- d3OP4w6xmbFqxwg+DFbV8g+OStPEu5Ui9TgqERL+G4W1bW+pWGuztsi5wdnBjqwcB2bd
- +OJ2ADubS/NBLC/EPPrPzOekNQW2d7YcTs3Cw=
+ bh=HG8a1m1EFiJeIn71OzryUJ1/qSid2/qnbuOWZKnw6QU=;
+ b=Ku6PrK3oVnv5mqxxIXDVvOSXlMq06AspAekzN/84nTnEUODA8rCJ95PIE4fdbqnPT3
+ kBJ/YSOs7eBTO/1Ufdb/RFiJfMkfmLsnOJjdGNhEKcFxhb4Hu8hIXEl3HiNNSjUszIlg
+ rILxX4sufcFd8IQXcB4V/rSIGymquDBOAGGfU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692025458; x=1692630258;
+ d=1e100.net; s=20221208; t=1692026123; x=1692630923;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ct0jvH+8Gvxg1sA+/OlRKEc4mpLILIDjPe/r9iV9isg=;
- b=Pl0AuAv85vpLhDNZir9c0r5GPCXO7OEGdHJ1dcyWPagg4JechFp2sNCu7mQjnpG5Kp
- 1XeVNbpevhUsK4JKSf3H7c7cD3Kw7m9ghz05yRscaSOjxebR5pydykCWfOK3bdmgaPCa
- U8dstwHAJiECvEpQ3VCq4UMbWzU8X8tUjr/zqrgU5e4Bp/rJz2X8OAWC4MITq+ehS22U
- /92rV+gGhR7GrQiN9IxdTgeaqYi7PjoNbQfcqOb/PWDJOwtRJ8LEvV9GLEzI/bAhBo0l
- BaYu1/2KRRCa1f/YqDD2GjqCxiGt7yOilBxJqoCCEtq/8+jzLh/7x+4V66bX42tcbPYl
- Y6lw==
-X-Gm-Message-State: AOJu0YyPza3hYfkoFOPWbr7sl9U/n8MbCsJGHqnOEbv49JKDgipE7Gt3
- Q21pYiCuhrdeltoXoqxHOGnuDQ==
-X-Google-Smtp-Source: AGHT+IE1nHRfhbsl57DqQH74Xg3Km1xau8Oe+nKjIPOHyP9n5vEAJ3vyNX7KFmS4L9VtqtinJhPzhw==
-X-Received: by 2002:a25:c014:0:b0:c76:173c:6718 with SMTP id
- c20-20020a25c014000000b00c76173c6718mr11864079ybf.1.1692025458251; 
- Mon, 14 Aug 2023 08:04:18 -0700 (PDT)
+ bh=HG8a1m1EFiJeIn71OzryUJ1/qSid2/qnbuOWZKnw6QU=;
+ b=ck5bynOWI5O/Yq2hdjJ8vXt18+hYNWiuOCk8frOmUQ5LWTklrK96UEZ3v+5rJx8foW
+ p7HfDBlUeZX3DvYpBO+5aCtmW9r5r6UGxbcxr8cwEnJasXagQTA3nkG+QlrtBVOtqMez
+ T9QWKL14AFpeF/bjfdVGqR8UEUKDPH9iBS52IiGAeV5Vra9kV/dtBMxojleEr8DwPIZ9
+ Rpe0Xb0CXfsN4nrvkTrh1gwhZWIvk2tbB8W9kqdPJN3XSib55Tz7ErGa9rvBYza3SUUz
+ iFzv+JPGLvwoJIUXk1nHqJBYdj8w2RedCVWGgur6gps6L88mnuvnXKQenlKoXxiR1yhD
+ asmQ==
+X-Gm-Message-State: AOJu0YyoKMiLxFwnf6egZ2/hi08g7I8EYvYAtXUM0rTGVcPb5RDu8drb
+ rkCdRM7XqrfVjaALFX6F2baW8bEOqw0CwlpWGmgFYQ==
+X-Google-Smtp-Source: AGHT+IHXHqObJ91p0q3e3JBqvQ4gl4WW7EKkJjweU4pujbN1601dJw1JbZFzXTUCOfDXYfs6sH/xsA==
+X-Received: by 2002:a81:8882:0:b0:585:f4e0:6532 with SMTP id
+ y124-20020a818882000000b00585f4e06532mr7343309ywf.30.1692026123559; 
+ Mon, 14 Aug 2023 08:15:23 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-1d1b-2873-dbaa-7ea0.res6.spectrum.com.
  [2603:6081:7b00:6400:1d1b:2873:dbaa:7ea0])
  by smtp.gmail.com with ESMTPSA id
- c201-20020a25c0d2000000b00d679ae188a6sm1676891ybf.37.2023.08.14.08.04.15
+ w190-20020a0dd4c7000000b00583d67839fasm2815832ywd.121.2023.08.14.08.15.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 08:04:16 -0700 (PDT)
-Date: Mon, 14 Aug 2023 11:04:13 -0400
+ Mon, 14 Aug 2023 08:15:23 -0700 (PDT)
+Date: Mon, 14 Aug 2023 11:15:21 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Stefan Roese <sr@denx.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Tom Warren <twarren@nvidia.com>,
- Ezequiel Garcia <ezequiel@collabora.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Aaron Williams <awilliams@marvell.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Bin Meng <bmeng.cn@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Paul Burton <paul.burton@mips.com>, Marek Vasut <marex@denx.de>,
- Olaf Mandel <o.mandel@menlosystems.com>,
- Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Aswath Govindraju <a-govindraju@ti.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Michal Simek <michal.simek@amd.com>, Peng Fan <peng.fan@nxp.com>,
- Fedor Ross <fedor.ross@ifm.com>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Ovidiu Panait <ovpanait@gmail.com>,
- Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jason Liu <jason.hui.liu@nxp.com>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] common: return type board_get_usable_ram_top
-Message-ID: <20230814150413.GU3630934@bill-the-cat>
-References: <20230813050011.9345-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ1fxfxUT2g8wfi9YoJt4K2EDgCzy10Tv_D5p3T2yB-dVg@mail.gmail.com>
- <ff12490d-3ef8-dc66-2716-4b85ad5dbfea@canonical.com>
+To: Ben Wolsieffer <benwolsieffer@gmail.com>
+Cc: u-boot@lists.denx.de, Gabriel Hojda <ghojda@yo2urs.ro>
+Subject: Re: [PATCH] odroid_xu3: Fix board environment variable
+Message-ID: <20230814151521.GY3630934@bill-the-cat>
+References: <20220608183014.1417881-1-trini@konsulko.com>
+ <ZNGl-cmCNGhegE7T@Dell-Inspiron-15>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Axb0kZV6kblCVZ8F"
+ protocol="application/pgp-signature"; boundary="LAI5027tWY9o2yjt"
 Content-Disposition: inline
-In-Reply-To: <ff12490d-3ef8-dc66-2716-4b85ad5dbfea@canonical.com>
+In-Reply-To: <ZNGl-cmCNGhegE7T@Dell-Inspiron-15>
 X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Mon, 14 Aug 2023 17:04:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,116 +93,88 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Axb0kZV6kblCVZ8F
+--LAI5027tWY9o2yjt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 14, 2023 at 08:31:31AM +0200, Heinrich Schuchardt wrote:
->=20
->=20
-> On 8/13/23 15:36, Simon Glass wrote:
-> > Hi Heinrich,
+On Mon, Aug 07, 2023 at 10:18:33PM -0400, Ben Wolsieffer wrote:
+> On Wed, Jun 08, 2022 at 02:30:14PM -0400, Tom Rini wrote:
+> > When migrating CONFIG_CONS_INDEX to Kconfig, on this platform we changed
+> > what "board" evaluated to in the environment.  This in turn meant that
+> > we would no longer try and find the correct fdtfile via the normal
+> > distro boot logic.  Fix this by overriding board in the default
+> > environment, as done on other platforms where CONFIG_SYS_BOARD is not
+> > what we want to be in the board environment variable.
 > >=20
-> > On Sat, 12 Aug 2023 at 23:01, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> > >=20
-> > > board_get_usable_ram_top() returns a physical address that is stored =
-in
-> > > gd->ram_top. The return type of the function should be phys_addr_t li=
-ke the
-> > > current type of gd->ram_top.
-> > >=20
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >   arch/arm/mach-imx/imx8m/soc.c           | 2 +-
-> > >   arch/arm/mach-mvebu/arm64-common.c      | 2 +-
-> > >   arch/arm/mach-rockchip/sdram.c          | 2 +-
-> > >   arch/arm/mach-stm32mp/dram_init.c       | 2 +-
-> > >   arch/arm/mach-sunxi/board.c             | 2 +-
-> > >   arch/arm/mach-tegra/board2.c            | 2 +-
-> > >   arch/mips/mach-jz47xx/jz4780/jz4780.c   | 2 +-
-> > >   arch/mips/mach-octeon/dram.c            | 2 +-
-> > >   arch/riscv/cpu/fu540/dram.c             | 2 +-
-> > >   arch/riscv/cpu/fu740/dram.c             | 2 +-
-> > >   arch/riscv/cpu/generic/dram.c           | 2 +-
-> > >   arch/riscv/cpu/jh7110/dram.c            | 2 +-
-> > >   arch/x86/cpu/broadwell/sdram.c          | 2 +-
-> > >   arch/x86/cpu/coreboot/sdram.c           | 2 +-
-> > >   arch/x86/cpu/efi/payload.c              | 2 +-
-> > >   arch/x86/cpu/efi/sdram.c                | 2 +-
-> > >   arch/x86/cpu/ivybridge/sdram.c          | 2 +-
-> > >   arch/x86/cpu/qemu/dram.c                | 2 +-
-> > >   arch/x86/cpu/quark/dram.c               | 2 +-
-> > >   arch/x86/cpu/slimbootloader/sdram.c     | 2 +-
-> > >   arch/x86/cpu/tangier/sdram.c            | 2 +-
-> > >   arch/x86/include/asm/u-boot-x86.h       | 2 +-
-> > >   arch/x86/lib/fsp1/fsp_dram.c            | 2 +-
-> > >   arch/x86/lib/fsp2/fsp_dram.c            | 2 +-
-> > >   board/broadcom/bcmns3/ns3.c             | 2 +-
-> > >   board/imgtec/boston/ddr.c               | 2 +-
-> > >   board/menlo/m53menlo/m53menlo.c         | 2 +-
-> > >   board/raspberrypi/rpi/rpi.c             | 2 +-
-> > >   board/ti/am65x/evm.c                    | 2 +-
-> > >   board/ti/j721e/evm.c                    | 2 +-
-> > >   board/ti/j721s2/evm.c                   | 2 +-
-> > >   board/toradex/verdin-am62/verdin-am62.c | 2 +-
-> > >   board/xilinx/common/board.c             | 2 +-
-> > >   common/board_f.c                        | 2 +-
-> > >   include/init.h                          | 2 +-
-> > >   35 files changed, 35 insertions(+), 35 deletions(-)
+> > Fixes: f76750d11133 ("Convert CONFIG_CONS_INDEX et al to Kconfig")
+> > Reported-by: Gabriel Hojda <ghojda@yo2urs.ro>
+> > Tested-by: Gabriel Hojda <ghojda@yo2urs.ro>
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >  include/configs/odroid_xu3.h | 1 +
+> >  1 file changed, 1 insertion(+)
 > >=20
-> > While you are here, could you please fix the function comment?
+> > diff --git a/include/configs/odroid_xu3.h b/include/configs/odroid_xu3.h
+> > index eb35d7b4ae2d..360815bc03ee 100644
+> > --- a/include/configs/odroid_xu3.h
+> > +++ b/include/configs/odroid_xu3.h
+> > @@ -86,6 +86,7 @@
+> >  	"rootfstype=3Dext4\0" \
+> >  	"console=3Dconsole=3DttySAC2,115200n8\0" \
+> >  	"fdtfile=3Dexynos5422-odroidxu3.dtb\0" \
+> > +	"board=3Dodroid\0" \
+> >  	"board_name=3Dodroidxu3\0" \
+> >  	"mmcbootdev=3D0\0" \
+> >  	"mmcrootdev=3D0\0" \
+> > --=20
+> > 2.25.1
 > >=20
-> > [..]
-> >=20
-> > > diff --git a/include/init.h b/include/init.h
-> > > index 8873081685..b1e1451166 100644
-> > > --- a/include/init.h
-> > > +++ b/include/init.h
-> > > @@ -304,7 +304,7 @@ int show_board_info(void);
-> > >    *
-> > >    * @param total_size   Size of U-Boot (unused?)
-> >=20
-> > It seems confused about the param, and we should have a return value.
 >=20
-> The parameter with the monitor length (size of U-Boot code) is not used
-> anywhere (though it is passed on to functions like
-> mrc_common_board_get_usable_ram_top() where it isn't used either).
+> Hi Tom,
 >=20
-> We should try to eliminate the parameter in further patches.
+> This patch doesn't appear to have fixed the issue. There is a report
+> from Debian of it occuring even after this patch was applied [1], and I
+> ran into it today as well with 2023.07.02.
 >=20
-> >=20
-> > Also should explain what this function is used for.
+> I looked into it a bit, and the problem seems to be that
+> set_board_info() constructs the fdtfile variable using CONFIG_SYS_BOARD,
+> so setting the correct value of the board variable has no effect. I
+> think either set_board_info() needs to construct fdtfile differently, or
+> things need to be restructured to allow CONFIG_SYS_BOARD to be set as
+> "odroid".
 >=20
-> That explanation exists.
->=20
-> I will put the documentation fix into a separate patch so we can apply it=
- to
-> 2023.10. I don't know if Tom wants to apply this patch to next or to
-> 2023.10.
+> I would submit a patch, but I'm not sure of the right approach to take,
+> and I would appreciate your help.
 
-I'm thinking we should take this for v2023.10.
+Thanks for the detailed report. I believe the problem is that
+board/samsung/common/misc.c::set_board_info() should be doing a lot more
+checks for if the environment variable is already set, before
+over-riding them.  This is typically done around ethaddr (so there's a
+number of examples to look at) and in this case I think everything other
+than soc_rev / soc_id should have a check before blindly overwriting.
+However, just checking for board_name / fdtfile already being set
+before setting them is enough to fix this problem I think.
 
 --=20
 Tom
 
---Axb0kZV6kblCVZ8F
+--LAI5027tWY9o2yjt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTaQm0ACgkQFHw5/5Y0
-tyxp1Av+IdIhoW4Gywx2lQF/fQlXcQV4jXdC6wSU4v/NtsXT7FOPZ6jhdnFB/ugz
-nXus7fUZGQMX+IsM79O0PFhbJGx5+QD/cE01Rgip/pEi+cQTz7aIGWRc50FsTh6X
-t7vDTpsGPSkcAeV+YqXE67K6nqFlUPwrJ4Rj1NLaB76FQx9kMmEeWbA2C1UUVCPG
-MH3siCB4FDUdMcSdi4VWmkLAY62rjfVTuEYQBJQdtvFrJ66deV4VRoPGiVRwLdJ5
-SJyo3dSgzcy5JlHT0wVSecIVjK7hqlGIqX3xlV7dxT6eRg9Rwc/BIQHox49BlFIE
-IhnDu7ltuPNmoh5dhDOtoYwAOyo7EAAFul3Flhpq2YgUDv9aYc8DoHEimL4VanMS
-nNNmh4YtzxSts7ZFHeKI8JdVRLBVi5eB/NwfKPAYsF/96Fk0zKiuEaAETPVvzJBv
-GPn53a+kM++Huz19PHDgFEM/BgMsCgOYkojMawvk5hovBFhvMCXpUyT4M9g5Vw9N
-boOK9FB+
-=q5bH
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTaRP8ACgkQFHw5/5Y0
+tyx8Vgv/QGHoJQuvmyOBUPDsGFMWemiGi88NL1D149r5b2yqsuJUaS3OUmlofNIa
+yJZF3wodZUwr1qHLsITcabjR4S5slDrv9HiJnsedkOWAAd9hlD5rmteLwaa5rpDv
+QnpJXJFqdPw4E70OOErIrbwsBcivWylLjiKBunW5++7JARNhSf2f2oV2RQA849zJ
+E1aZlwm7RYFnfEGiPdPiLY5c/q6vozRI6QjZM9GWnRPCZm+NYeTKzUE35QRz7481
+byG22kHlX0DSeiOEEXeK27LFUjqg8gjSE0BniODG+bVuCJP+c3IrqlaUQ3A0b6uj
+JW8DMQExy371ske/eCSHjhSsdRhtFbYtcqcPOjj3GNQvBWjtIIyeT7XumXdOL+2L
+7isvSW1RSw+yr7G6KfwJQvkVpR9amtBoAG39CUvjzadABYA+UwXaVc7WG9wMdJrk
+4oRmgtRF3o6abKUDYO274shQSYVgdkGh2CODcDS8WPmZM4hQEyXIXGvDMqAXEzBi
+5XtfkRe0
+=68eq
 -----END PGP SIGNATURE-----
 
---Axb0kZV6kblCVZ8F--
+--LAI5027tWY9o2yjt--
