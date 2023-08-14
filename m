@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76EB7EB64DD
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 18:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FDAEB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 18:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C07B86844;
-	Mon, 14 Aug 2023 20:31:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 92DAD8692C;
+	Mon, 14 Aug 2023 20:43:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oMNmwTsT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hxww6/Of";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58BBC868D0; Mon, 14 Aug 2023 20:31:15 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 41FD886958; Mon, 14 Aug 2023 20:43:11 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4514B86828
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 20:31:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 505FD868D0
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 20:43:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-563e21a6011so3472424a12.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 11:31:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-4fe28f92d8eso7308559e87.1
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 11:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692037871; x=1692642671;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MPhNB+LyjZYopE6SUXheOjjx/BXuwmgjtJ+x8BGb9pg=;
- b=oMNmwTsTCPN2cUe7lPCvKXoSM0h2i21eChLNCg0z1He/+861CSAGC89M3h5seaNFzC
- eMdlyCjgdHiG9WdvNx1K5D2p8NFZWeqdf5h1xdAl07h8ySyIoVfM8GD3+LU53s0G0PFy
- XrN0F51+umxQgSeNc7iza+KaVnQgFiK46HPumoTPg4TKlr1RriB+ANh/qMR1uwaQ8B8f
- K1/NscMW/EajnBrq+3xLcYWc6ODBcetpNi4/9QqOmnomzQKkN98ZbszmO6ExvKzsx/qk
- Y9exp/bqVlyb05oxq00jvwqvlEdbh34N6Je+cji7HWJOHJGu89vaC80CWFWVu/MOI01H
- yr5A==
+ d=linaro.org; s=google; t=1692038588; x=1692643388;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6SKURnMRu4q1NY5VP52ThfPW8GMQry2g+G5eGwgdj4o=;
+ b=hxww6/Of/9ZZ6x7stvC8vrbzl6CqAa6u8ej25R+ptETP5uO8YrICyelGBIuXFg8cda
+ jN4CH6yH9v/LlZkeKlRCW7SeAXlzZlO7wBA5kFohCyzxe47O6ZGGC5kRYM2DYuXOE5V8
+ qFWHYYcziXb1hoqSziybNFBmhqyR5I4UU0bM/0x2kqF9+v5DctCDOLRYse1eTisIJZMv
+ oP8o5LDiopn6TvFtYs5hcGgo12ecPRzaRcZsTs9BaQrUiPAKtMh1Vl2N1EvMNWsvee7H
+ ye1UYhkT6vLU9xL6ul6Fpoh2DnrD+CRHSwg3oXbyvICgEFuLDSZAnGfXVvl5k0+K4+Yt
+ SM9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692037871; x=1692642671;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MPhNB+LyjZYopE6SUXheOjjx/BXuwmgjtJ+x8BGb9pg=;
- b=edGMeMJzfcWBMsZ9wEpjaRteuxhENOIlIyxFIMUk4uyV/eeKYWbGAAyhdgJde4g7NG
- shixE69oF0LUR6rBeFu6GRE2P8z+1jnrxc7PzMxsHOYYIZfSD1y1dwzBcbe72KHwxkxM
- q67Jzb57pPRFLePGnke/6kSnhWYDN+Z7R7/Xl64NuVJQDrcTE7fl1vRzN/bBmJ+9Kmta
- oqxicaZmdob6GoYr0SUIkm85qq1HP/d02n0DGKgdIrSNRSx2eP0HkxUS4TdIhqPSxs/y
- 27YZ9ZxL55MDsJ+7JVR46We03hbvPRG4DfGf80y6+q+fSEXNuh7UGjI3h2O++w+R9JPe
- UHBA==
-X-Gm-Message-State: AOJu0Yx2eEMFhUxqF+LG5Qs2Vf+DR/Ol04fogq7wvxcCa0cZZOuD5Mfu
- XvaewNfPqQI2SJFy5ottmAc=
-X-Google-Smtp-Source: AGHT+IFDEFdThfYRu3nkePiQ7uCRjdmYy7zbmjhuG0/XZwLrDk+wZUWHZw1kPZEqRMAyITBw42Fqig==
-X-Received: by 2002:a17:90a:a883:b0:267:fb26:32bd with SMTP id
- h3-20020a17090aa88300b00267fb2632bdmr8635378pjq.7.1692037871520; 
- Mon, 14 Aug 2023 11:31:11 -0700 (PDT)
-Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
- [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
- s88-20020a17090a69e100b00265c742a262sm8972803pjj.4.2023.08.14.11.31.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Aug 2023 11:31:10 -0700 (PDT)
-Message-ID: <95603ff4-9cf2-c20d-3c17-84135bb931a2@gmail.com>
-Date: Mon, 14 Aug 2023 12:31:08 -0600
+ d=1e100.net; s=20221208; t=1692038588; x=1692643388;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6SKURnMRu4q1NY5VP52ThfPW8GMQry2g+G5eGwgdj4o=;
+ b=Mw2PRWPo7LgktV84YyJQ3KSxX/9blzF0QvAwPLLtWq2xIPoyl/O5CP1+UVkWPks8YT
+ A7kD6QpC+OyFzNctOW00+QJTVu2jXgR67t4cr85g259tcSbMMfkj9dvvBQB7IqA3aAU3
+ MNhAieDKV28CxYWBAJ5zsJqqXPapWDyzCgsuV4iSQcLeuZqEqrChp3eJx9uzg6GU1Xxv
+ 3FQpBNKIQC7fltrBd04SNkM1JK9kMTH8XDVuFHDylp/FjHAjCLCL2+2hZyVTtAo6yz3+
+ +8gdqa2w2EuTf/heYHncrcXd83R4nbu9+YZQZEDDTaxjFYAwa8d44BGc7pwZ35hKKayV
+ gBAQ==
+X-Gm-Message-State: AOJu0YxaHXlmtwKu3lMn060O2kYhcoXJlYWx+rFUl8i/q8Nb6fELbO5o
+ aQaPfAb+0QPyfbdz8HRNIvSm9awSMzUPZHI8ckS14Q==
+X-Google-Smtp-Source: AGHT+IErC+A9ofKhHu83XpjKdb1yv5WThmxdKpEFJHtARh4l/UAySaHAX7ItQhSl/aEwidhPPkxkaAqmtvqVfOgSbrg=
+X-Received: by 2002:a05:6512:2117:b0:4f8:76ba:ad3c with SMTP id
+ q23-20020a056512211700b004f876baad3cmr6357166lfr.55.1692038588536; Mon, 14
+ Aug 2023 11:43:08 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH 0/3] Allwinner R528/T113s PSCI
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
- Maksim Kiselev <bigunclemax@gmail.com>
-References: <20230812003055.74527-1-CFSworks@gmail.com>
- <20230814150648.1dddd00d@donnerap.manchester.arm.com>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <20230814150648.1dddd00d@donnerap.manchester.arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230814090309.1548310-1-sughosh.ganu@linaro.org>
+ <20230814090309.1548310-2-sughosh.ganu@linaro.org>
+ <20230814150425.GW3630934@bill-the-cat>
+In-Reply-To: <20230814150425.GW3630934@bill-the-cat>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 15 Aug 2023 00:12:57 +0530
+Message-ID: <CADg8p95CFpBK+5C6th6D0w4guTsjdR1bGavGEb61kVsqyxyQSw@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/4] scripts/Makefile.lib: Collate all dtsi files for
+ inclusion
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,25 +89,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/14/23 08:06, Andre Przywara wrote:
-> Hi Sam,
-> 
-> many many thanks for sending this, I especially like your clean up around
-> the #ifdef's!
-> 
-> The patches looks good on the first glance (apart from some regression in
-> patch 3/3), but I will reply to them individually.
-> 
-> Cheers,
-> Andre
+hi Tom,
 
-Thanks for your attention to these! While you're in a PSCI headspace, 
-could you also look at my patch titled:
-sunxi: psci: remove redundant initialization from psci_arch_init
+On Mon, 14 Aug 2023 at 20:34, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Aug 14, 2023 at 02:33:06PM +0530, Sughosh Ganu wrote:
+>
+> > At the time of building a device-tree file, all the *u-boot.dtsi files
+> > are looked for, in a particular order, and the first file found is
+> > included. Then, the list of files specified in the
+> > CONFIG_DEVICE_TREE_INCLUDES symbol are included.
+> >
+> > Combine these files that are to be included into a variable, and then
+> > include all these files in one go.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >  scripts/Makefile.lib | 11 +++++++----
+> >  1 file changed, 7 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> > index f5ab7af0f4..f41b16781d 100644
+> > --- a/scripts/Makefile.lib
+> > +++ b/scripts/Makefile.lib
+> > @@ -179,10 +179,13 @@ ifdef DEVICE_TREE_DEBUG
+> >  u_boot_dtsi_options_debug = $(warning $(u_boot_dtsi_options_raw))
+> >  endif
+> >
+> > -# We use the first match
+> > -u_boot_dtsi = $(strip $(u_boot_dtsi_options_debug) \
+> > +# We use the first match to be included
+> > +include_files = $(strip $(u_boot_dtsi_options_debug) \
+> >       $(notdir $(firstword $(u_boot_dtsi_options))))
+> >
+> > +# The CONFIG_DEVICE_TREE_INCLUDES also need to be included
+> > +include_files += $(CONFIG_DEVICE_TREE_INCLUDES)
+>
+> This is what I wanted, logic-wise, but I think include_files is too
+> vague.
 
-...dated May 31?
+Okay. How about dtsi_include_list, or dtsi_list? If not, can you
+suggest a name which you think would be apt. Thanks.
 
-This one should be pretty uncontroversial and straightforward to review. :)
-
-Many thanks,
-Sam
+-sughosh
