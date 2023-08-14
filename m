@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB42EC001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:42:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F527C04A6A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:42:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 339DF869D0;
+	by phobos.denx.de (Postfix) with ESMTP id 7B479869E2;
 	Tue, 15 Aug 2023 00:41:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dUHJnX7V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S/hOlrcF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2369869A2; Tue, 15 Aug 2023 00:41:27 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id 62719869A2; Tue, 15 Aug 2023 00:41:28 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64DD48662F
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42F31869D2
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:41:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-34992fd567bso9843905ab.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:25 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-7910620f45dso188472139f.1
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:41:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692052884; x=1692657684;
+ d=chromium.org; s=google; t=1692052885; x=1692657685;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1nPC7MGRSkmOVzRh2gVawNvjMC0yQxP/asyV6TlAk4g=;
- b=dUHJnX7V6ob1Jwqcysh5as8Xq2/VmSp2jAGOtpzYjZZP0oqEsC1hVpitrJqKK++cSu
- MN/aukBh9U2WVCJVhcnI5QyZ+aNYb4a9/A+xgCAkPhfDp3HNrlljX6xoivXDmqicnOe3
- sDzzF2Ss7Ngi1auOE6fv6tWSFvXOqD6VT5XrM=
+ bh=o79s+jVKTG6sXZeyeeFwmxvZhMLmWqP1ok+MUE8Rf9o=;
+ b=S/hOlrcFGbBPugmTrtv+HNF1nDO1f1JP7F3fsnIcaH2nWxcJQDFnVFbUPfxQvbNcwA
+ EbpV6cF7IzYS1kqKxfotlE+Kx1H8EMGZX3R2hKEALc7K6M0JPzY6w2qBPmqyvpmhZs7I
+ UUpLHuWIrEC325yuyKgRjuUBvn42k9hGCyrl8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692052884; x=1692657684;
+ d=1e100.net; s=20221208; t=1692052885; x=1692657685;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1nPC7MGRSkmOVzRh2gVawNvjMC0yQxP/asyV6TlAk4g=;
- b=GrD+/Td2ZWBYbTuIsaYf3QgywAxTADj9SFidxtrszmWRO+Q2s8ycwBk8NLerj59Zw3
- T64Y880t8ap9Xha7jvijMSIi3HxrRb6a6LSlDMR/AhXy23UuZfPVnlpqYxRB/JHwCIZU
- KhHeyPHpRqjVwCu1/YbrUJE+LIsotQKK1PE+DySWuhB2BbOVZw1ck7Ij1BRMn5rzJ9zH
- UC9C6UgZlBwJh8EXsCSUhdrMZRyD9t1fVxg14nTIRMr5kb+rmwKacajv79nHYbYvh1A9
- ofmFqrb3g3UXUVbJI2ggGKKp+p6Lcy/H1RDOt0h2qmksAZ+l+6kqttS37gNafoRvHMC7
- 1JtQ==
-X-Gm-Message-State: AOJu0Yw/gHdeqn7t4XqfVBCBjISFV66DEoxN7ZfiTjJlOhflz6vswnP+
- ukWTpS8+5p3SGS8Tk6FVGq6Jog6wzsRdTP4Ko1c=
-X-Google-Smtp-Source: AGHT+IEJHnnPvEoGZJbonpfx4q57uHOGzbSUdiz4/45ttnDc00Jkz0MaV+TP9fcV5HdSmm28oYjw9g==
-X-Received: by 2002:a05:6e02:1567:b0:34a:8bb5:8736 with SMTP id
- k7-20020a056e02156700b0034a8bb58736mr368395ilu.12.1692052883979; 
- Mon, 14 Aug 2023 15:41:23 -0700 (PDT)
+ bh=o79s+jVKTG6sXZeyeeFwmxvZhMLmWqP1ok+MUE8Rf9o=;
+ b=iwtp0HsTqHqx/rrydwGBtwNrSAF438zhHuWRA1VceatzQnkyteP7nrOGFW0ltx4CuY
+ mVZvjRvi+rqzjz3XRVoCXoye6pZyxrUreBR7G4rW99nPxEq1LnAlLWjcBotvEsx0pEhr
+ iToFYpJYX719wI5FULHaXyhAGmEzbl/A8e3qwku9phNmO4ZmZquVlPKlvuPraiLNu3E4
+ pTM7xSvokQmVVeN0bunk8Odu0IywMrzJF0Z5GXWwugjzMpVTjo9YidWkeChdhy+QSj16
+ 1h+6twZ6eNaJFAuqMAWXnTg6RuGV4UdC3ogju7Bwgo0MQ7EFTWgZtwA+XoIFFTk8jThQ
+ Q2cA==
+X-Gm-Message-State: AOJu0YzpJNNafwf1vb0AU07AKZbmkrjRr5d082H/QlSXQFd5rnm6+oI2
+ bf9rSXRizbRUQwm4oJh09JH4W3F0mb9jDUDOmJc=
+X-Google-Smtp-Source: AGHT+IFyQi61s/UjpI/u4R+/r52NotwmBS0geJbyZF8H0eeGlejXsp2cTA8fyiz/6BNpDKhxJF9cAw==
+X-Received: by 2002:a05:6e02:13c1:b0:349:983c:4939 with SMTP id
+ v1-20020a056e0213c100b00349983c4939mr13368457ilj.16.1692052884876; 
+ Mon, 14 Aug 2023 15:41:24 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.23
+ u3-20020a056e02080300b0034886587bdcsm3485091ilm.18.2023.08.14.15.41.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 15:41:23 -0700 (PDT)
+ Mon, 14 Aug 2023 15:41:24 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Robert Marko <robimarko@gmail.com>
-Subject: [PATCH 10/19] expo: Move cedit theme under bootstd
-Date: Mon, 14 Aug 2023 16:40:30 -0600
-Message-ID: <20230814224047.535491-11-sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 11/19] doc: Expand documentation for the cedit command
+Date: Mon, 14 Aug 2023 16:40:31 -0600
+Message-ID: <20230814224047.535491-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
 In-Reply-To: <20230814224047.535491-1-sjg@chromium.org>
 References: <20230814224047.535491-1-sjg@chromium.org>
@@ -93,108 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is related to standard boot, so put it under the same node. This may
-simplify schema upstreaming later.
-
-Mention themes in the documentation while we are here.
+Add a little information about each subcommand.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/sandbox/dts/sandbox.dtsi | 12 ++++++------
- arch/sandbox/dts/test.dts     | 12 ++++++------
- cmd/cedit.c                   |  2 +-
- doc/develop/cedit.rst         |  7 +++++++
- 4 files changed, 20 insertions(+), 13 deletions(-)
+ doc/usage/cmd/cedit.rst | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
-index f0ee0b3481ac..4a0a5e847bef 100644
---- a/arch/sandbox/dts/sandbox.dtsi
-+++ b/arch/sandbox/dts/sandbox.dtsi
-@@ -16,12 +16,6 @@
- 		stdout-path = "/serial";
- 	};
+diff --git a/doc/usage/cmd/cedit.rst b/doc/usage/cmd/cedit.rst
+index 3d815bd27af2..d34a220797ee 100644
+--- a/doc/usage/cmd/cedit.rst
++++ b/doc/usage/cmd/cedit.rst
+@@ -24,6 +24,21 @@ The description is in the form of a devicetree file, as documented at
  
--	cedit-theme {
--		font-size = <30>;
--		menu-inset = <3>;
--		menuitem-gap-y = <1>;
--	};
--
- 	alarm_wdt: alarm-wdt {
- 		compatible = "sandbox,alarm-wdt";
- 		timeout-sec = <5>;
-@@ -36,6 +30,12 @@
- 	bootstd {
- 		compatible = "u-boot,boot-std";
- 		filename-prefixes = "./";
+ See :doc:`../../develop/cedit` for information about the configuration editor.
+ 
++cedit load
++~~~~~~~~~~
 +
-+		cedit-theme {
-+			font-size = <30>;
-+			menu-inset = <3>;
-+			menuitem-gap-y = <1>;
-+		};
- 	};
- 
- 	buttons {
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index b5509eee8cfe..9641776c8ba8 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -100,6 +100,12 @@
- 			menuitem-gap-y = <1>;
- 		};
- 
-+		cedit-theme {
-+			font-size = <30>;
-+			menu-inset = <3>;
-+			menuitem-gap-y = <1>;
-+		};
++Loads a configuration-editor description from a file. It creates a new cedit
++structure ready for use. Initially no settings are read, so default values are
++used for each object.
 +
- 		/*
- 		 * This is used for the VBE OS-request tests. A FAT filesystem
- 		 * created in a partition with the VBE information appearing
-@@ -144,12 +150,6 @@
- 	cedit: cedit {
- 	};
- 
--	cedit-theme {
--		font-size = <30>;
--		menu-inset = <3>;
--		menuitem-gap-y = <1>;
--	};
--
- 	fuzzing-engine {
- 		compatible = "sandbox,fuzzing-engine";
- 	};
-diff --git a/cmd/cedit.c b/cmd/cedit.c
-index 5f0e84403f5b..e98121b067b2 100644
---- a/cmd/cedit.c
-+++ b/cmd/cedit.c
-@@ -65,7 +65,7 @@ static int do_cedit_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_FAILURE;
- 	}
- 
--	node = ofnode_path("/cedit-theme");
-+	node = ofnode_path("/bootstd/cedit-theme");
- 	if (ofnode_valid(node)) {
- 		ret = expo_apply_theme(cur_exp, node);
- 		if (ret)
-diff --git a/doc/develop/cedit.rst b/doc/develop/cedit.rst
-index 48262ee535e9..8f0a554ae918 100644
---- a/doc/develop/cedit.rst
-+++ b/doc/develop/cedit.rst
-@@ -145,3 +145,10 @@ Multiple scenes
- Expo supports multiple scenes but has no pre-determined way of moving between
- them. You could use selection of a menu item as a signal to change the scene,
- but this is not currently implemented in the cedit code (see `cedit_run()`).
++cedit run
++~~~~~~~~~
++
++Runs the default configuration-editor event loop. This is very simple, just
++accepting character input and moving through the objects under user control.
++The implementation is at `cedit_run()`.
 +
 +
-+Themes
-+------
-+
-+The configuration editor uses simple expo themes. The theme is read from
-+`/bootstd/cedit-theme` in the devicetree.
+ Example
+ -------
+ 
 -- 
 2.41.0.694.ge786442a9b-goog
 
