@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FBD1C001B0
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:56:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1A30C001B0
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E479B869B6;
-	Mon, 14 Aug 2023 23:55:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33764869C0;
+	Mon, 14 Aug 2023 23:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CkPKQiQ8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n2Qvonmi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8060B86993; Mon, 14 Aug 2023 23:55:58 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id 2EED68698D; Mon, 14 Aug 2023 23:56:01 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 072F086989
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:55:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20B1486989
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:55:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-5657add1073so2122494a12.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:55:54 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1bc0d39b52cso29440115ad.2
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:55:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692050153; x=1692654953;
+ d=linaro.org; s=google; t=1692050157; x=1692654957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I2cNB02Pa6jyuBJ45ecjofX2UZ2ZIVJf6N1cut4RTFA=;
- b=CkPKQiQ8k3y4aVhSTHMRhwA1gDomPkLUKzN8P3Ua76w97yS5rSH9Whe1VpJArW1Kaz
- qX4i02x7R48wF4kq7pGQA79A1df5RO1JBgwpDDeVCkSbBlEgGvbsGJQmLA+RPWTJcjP4
- uRm9aKPVfYIEMn0iSlh1EqiqTkpPaFoBz/GzCR9h9NZnpi+rZJtxAflhq65lrRaI4Ssn
- EVo2Cp/DQauDUOEzt/MV9KXZM7G+gW90FiYH49fF1v3XDku+ZA2tD0O9gfdNAY6JcpoZ
- /lvt4JbBp2ZCDtRqvY9S74haCPXcNJBuABLxbORM2vzxXPmbWsv6FA1+KJdmESVZpDHG
- joZg==
+ bh=3Zil+xbKaA3+/E6r1SpmN8Ezd/5bANdyX0ywHxSKlao=;
+ b=n2QvonmircxlG/616rAIFomHcTW6geP+YsUK2VUZc0Z9RImgqhdnirUixkNsZtvhy/
+ BaN4cIGD4szacTEIAGQzwTjTbfJ/z0Bavu0gJWR8kA2Cm/FO9ziBVrOdPu+RxqjiFg9h
+ 72B7p9YDS1Ki7zebBsWJBxkzqHHIo0B8oxVYiWxFMq/EKl/GiLyDmkML3mbVZGozIxjE
+ iZ04SDKXENohE4Ee5ILjxDuCUEqUlAq0/zVK5cGHX2RIKvPBLatNiI71D8tG1/Dz/uQb
+ GFKi2wV2Dwbzux9siH8z0Uk2EhJm40U6BuKc8MFejfKtJxzg3w6PyJVuKcxo4GSoo2I3
+ ydkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692050153; x=1692654953;
+ d=1e100.net; s=20221208; t=1692050157; x=1692654957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I2cNB02Pa6jyuBJ45ecjofX2UZ2ZIVJf6N1cut4RTFA=;
- b=mGwZ/ia3CFzBTCaFEEY5WE5QsNhbObvzMe7qOkhbQEoyFv64f3mwR1wzgC0RvxCYjY
- XiNtlCwoE9QOfC1L8o76j/JsM+IQQHNRw0O0ZRTMg2f0uV3Yz640sFCmeYlkHj+VFRSe
- jId7bAz2nmOWiRSn79/uWdv6D2ZhpJr7fcPg7IApoericYu+n4wCh3SiM6WOVXY/dU8l
- FJNRX2as0dirnIatC6Jt6vIsFuZ1hvk8+Xf2Nxi0UgWJmO4EXVQXDdR8XokuI+IxyGfg
- aMaDXPPeINNMaZS/jOERd6GYvfq2+sBdHerQIUzpRDEk/E1By3hvMWV3SAMgyo2WgJAj
- fLqg==
-X-Gm-Message-State: AOJu0YwRJ5Imr8ItCMoU/esApl9KrWF0c1eKGFFdALMOr00ypRNie4Ol
- 5ETKqrJ40vmT5O/6LymDrQCZkCDc1H/vO8Yd/WI=
-X-Google-Smtp-Source: AGHT+IGu3d3WBZu6JzegtwO2yUkn4wY6i/1z3C/YAKXDOkkAYncD4fKYlNep7oGhM2dZJ4FRYM3wmw==
-X-Received: by 2002:a17:90a:644f:b0:268:220a:7080 with SMTP id
- y15-20020a17090a644f00b00268220a7080mr261768pjm.2.1692050152868; 
- Mon, 14 Aug 2023 14:55:52 -0700 (PDT)
+ bh=3Zil+xbKaA3+/E6r1SpmN8Ezd/5bANdyX0ywHxSKlao=;
+ b=Iq5LU7EVFDyWzSHef6IxnFB5840w7MDaWIH+h4WJJS6s6JYESC4cU4rFBW+Fm8G2a0
+ 1UP/YXL/bP2OYVxn1fWbMSkeq/t98Yb561yPHO2zHlG24rrFDAmOsUIr9wQf0wXMc+iI
+ 1/X0h+ZSYCMleRqREsmPn+LzLiP5MFUxnmprG4/b9z+E9UbiZ3uxDG635Yx8qotAuAYx
+ zEbox1MYe43r4aeagH90rDQ5AHKlK8jXm684sXRewURNX/DhJPD4yy4P+AcID7HTRC9K
+ 05VjjXG76FIRwWZ6nexI/u378Ynmw7vUnuKVKbFlHDZ8kUZ43S5XXeU5vH52peCNaea+
+ NdhA==
+X-Gm-Message-State: AOJu0YysFMCTI6ZN+8w0aU8ipBa3+LCT1uyA8UaZZKEdpSFPTFDp1okg
+ DtyL+o0pKen5lcY4EQDPHNkdPVeMWgAgbZMnQlo=
+X-Google-Smtp-Source: AGHT+IGM6KzYUQgs/bZXz09/dHMFH77PVvMBcLpB4lV0wsReRwzHKxiWGkMo5F2mEuSzcjh5xTTkpg==
+X-Received: by 2002:a17:902:740c:b0:1bd:cd6e:dc7 with SMTP id
+ g12-20020a170902740c00b001bdcd6e0dc7mr6450473pll.43.1692050157279; 
+ Mon, 14 Aug 2023 14:55:57 -0700 (PDT)
 Received: from localhost.localdomain
  ([2401:4900:1f3b:3924:6581:8508:2ecb:b5dd])
  by smtp.gmail.com with ESMTPSA id
- n4-20020a170903110400b001bba373919bsm9872075plh.261.2023.08.14.14.55.48
+ n4-20020a170903110400b001bba373919bsm9872075plh.261.2023.08.14.14.55.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 14:55:52 -0700 (PDT)
+ Mon, 14 Aug 2023 14:55:56 -0700 (PDT)
 From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.sharma@linaro.org,
  bhupesh.linux@gmail.com, marek.vasut+renesas@mailbox.org,
  sumit.garg@linaro.org, rfried.dev@gmail.com, patrice.chotard@foss.st.com,
  jbx6244@gmail.com, kever.yang@rock-chips.com, eugen.hristev@collabora.com
-Subject: [PATCH 10/17] ufs: Add missing memory barriers
-Date: Tue, 15 Aug 2023 03:24:50 +0530
-Message-Id: <20230814215457.4075025-11-bhupesh.sharma@linaro.org>
+Subject: [PATCH 11/17] ufs: Fix debug message in 'ufs_start'
+Date: Tue, 15 Aug 2023 03:24:51 +0530
+Message-Id: <20230814215457.4075025-12-bhupesh.sharma@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
 References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
@@ -95,53 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing wmb() and mb() barriers in the u-boot UFS core
-framework driver to allow registers updates to happen before
-follow-up read operations.
-
-This makes the barrier placement similar to the Linux UFS driver.
+Minor typo fix and rewording of printf message
+inside 'ufs_start' which announces the availability
+of the UFS device.
 
 Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 ---
- drivers/ufs/ufs.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/ufs/ufs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index 15fa3832b9..a97c45a530 100644
+index a97c45a530..8e507e8378 100644
 --- a/drivers/ufs/ufs.c
 +++ b/drivers/ufs/ufs.c
-@@ -503,6 +503,12 @@ static int ufshcd_make_hba_operational(struct ufs_hba *hba)
- 	ufshcd_writel(hba, upper_32_bits((dma_addr_t)hba->utmrdl),
- 		      REG_UTP_TASK_REQ_LIST_BASE_H);
+@@ -1937,7 +1937,7 @@ int ufs_start(struct ufs_hba *hba)
+ 			return ret;
+ 		}
  
-+	/*
-+	 * Make sure base address and interrupt setup are updated before
-+	 * enabling the run/stop registers below.
-+	 */
-+	wmb();
-+
- 	/*
- 	 * UCRDY, UTMRLDY and UTRLRDY bits must be 1
- 	 */
-@@ -892,6 +898,9 @@ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
+-		printf("Device at %s up at:", hba->dev->name);
++		printf("UFS Device %s is up!\n", hba->dev->name);
+ 		ufshcd_print_pwr_info(hba);
+ 	}
  
- 	ufshcd_writel(hba, 1 << task_tag, REG_UTP_TRANSFER_REQ_DOOR_BELL);
- 
-+	/* Make sure doorbell reg is updated before reading interrupt status */
-+	wmb();
-+
- 	start = get_timer(0);
- 	do {
- 		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
-@@ -1989,6 +1998,8 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
- 		      REG_INTERRUPT_STATUS);
- 	ufshcd_writel(hba, 0, REG_INTERRUPT_ENABLE);
- 
-+	mb();
-+
- 	err = ufshcd_hba_enable(hba);
- 	if (err) {
- 		dev_err(hba->dev, "Host controller enable failed\n");
 -- 
 2.38.1
 
