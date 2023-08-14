@@ -4,45 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36015C001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 16:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A85DBC001B0
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 17:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47BB186679;
-	Mon, 14 Aug 2023 18:37:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F9A086918;
+	Mon, 14 Aug 2023 19:17:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qTiBM9g8";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A49F866DC; Mon, 14 Aug 2023 18:37:21 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 399D686637
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 18:37:19 +0200 (CEST)
+ id 22ECC868D0; Mon, 14 Aug 2023 19:17:51 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 22D5D86918
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 19:17:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8CA2A1063;
- Mon, 14 Aug 2023 09:38:00 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 40F4E3F762;
- Mon, 14 Aug 2023 09:37:17 -0700 (PDT)
-Date: Mon, 14 Aug 2023 17:37:14 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
- Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH 1/3] sunxi: psci: clean away preprocessor macros
-Message-ID: <20230814173714.61bd09a2@donnerap.manchester.arm.com>
-In-Reply-To: <20230812003055.74527-2-CFSworks@gmail.com>
-References: <20230812003055.74527-1-CFSworks@gmail.com>
- <20230812003055.74527-2-CFSworks@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-584034c706dso50924137b3.1
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 10:17:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692033468; x=1692638268;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=K4KPaU9pXfKePozQJA0YqrGDA50/SS/cDjULCOTmB78=;
+ b=qTiBM9g8P77vLTPqTWjQLq/AXZPJhD9rASl/KEMWClzkJHcfDkJibGInmmvp0jZud6
+ jNOLCfNGlpbjDz7rBUm8oAU5uuDtBhSYW9l7PyBC+mbXIIZdj33DcphJJCNQiSfvzQiM
+ broKDQK4nGSheXS+RoOqO5jwCWvM/ODsBiNaY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692033468; x=1692638268;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K4KPaU9pXfKePozQJA0YqrGDA50/SS/cDjULCOTmB78=;
+ b=KStB/6hgts/blhEI9hFAV68HcVFXjRHcW409v2NTMXMt6X0GD7tMzlOQMKJYw0iA1z
+ 0OhAk6uzns7mg8oqmC+N2I0DG0b9KRyyNbBuldhrNNNi1C047UMIKx8RSGQOib998sM1
+ 2brmWk+H9yDFy/gs5WKxpIPkVRIDO81UxHg33hAkmEkwv8DMdAfHEW6tEf9IL9+XImqw
+ YccrlgDQykM6GZLBCDPVaRKDi8t4C0gazXGehugOOig40QEa2UDn5cF7fzrGi6ouQmUY
+ 7Ns3noqjkquOR8Y6w90EcJlIZe7/fM24ER/MZpZwvuS5l72Miqf2nvUK1b0XQS6hZYoW
+ V/Xw==
+X-Gm-Message-State: AOJu0YySp4brTO3+e8AXl+JspEs2x5G7EMk6sHsL4LcW9L8EQ21jz6p8
+ 8brB8quPmc0PWSGkDeVOJfK06w==
+X-Google-Smtp-Source: AGHT+IFX+qkyFeQtQhCGlJpn52W3Mv459segvazAcay6HMTt+zbrS2kvIVt/e+LBEKL5TWbncbn7sA==
+X-Received: by 2002:a0d:ca55:0:b0:589:a4c6:a4ed with SMTP id
+ m82-20020a0dca55000000b00589a4c6a4edmr10626643ywd.3.1692033467672; 
+ Mon, 14 Aug 2023 10:17:47 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-1d1b-2873-dbaa-7ea0.res6.spectrum.com.
+ [2603:6081:7b00:6400:1d1b:2873:dbaa:7ea0])
+ by smtp.gmail.com with ESMTPSA id
+ dy17-20020a05690c271100b0057a05834754sm2849307ywb.75.2023.08.14.10.17.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Aug 2023 10:17:47 -0700 (PDT)
+Date: Mon, 14 Aug 2023 13:17:44 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Julien Panis <jpanis@baylibre.com>
+Cc: u-boot@lists.denx.de, marex@denx.de, tony@atomide.com,
+ rogerq@kernel.org, r-gunasekaran@ti.com, vigneshr@ti.com, nm@ti.com
+Subject: Re: [PATCH v3 01/12] usb: dwc3: Handle unknown mode as otg
+Message-ID: <20230814171744.GA3630934@bill-the-cat>
+References: <20230706-handle-otg-as-periph-v3-0-27e24fa17345@baylibre.com>
+ <20230706-handle-otg-as-periph-v3-1-27e24fa17345@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9wU0fo2A2iy172rA"
+Content-Disposition: inline
+In-Reply-To: <20230706-handle-otg-as-periph-v3-1-27e24fa17345@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,169 +93,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 11 Aug 2023 18:30:53 -0600
-Sam Edwards <cfsworks@gmail.com> wrote:
 
-Hi Sam,
+--9wU0fo2A2iy172rA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-many thanks for that cleanup, that's very much welcome!
+On Thu, Jul 13, 2023 at 03:45:34PM +0200, Julien Panis wrote:
 
-I am still comparing the outcome for the different SoC families, and
-testing this on the boards I have, but two things I stumbled upon already:
-
-> This patch restructures psci.c to get away from the "many different
-> function definitions switched by #ifdef" paradigm to the preferred style
-> of having a single function definition with `if (IS_ENABLED(...))` to
-> make the optimizer include only the appropriate function bodies instead.
-> 
-> There are no functional changes here.
-> 
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> In case dr_mode attribute is not passed via DT,
+> USB DRD controllers should default to OTG.
+>=20
+> Signed-off-by: Julien Panis <jpanis@baylibre.com>
+> Acked-by: Roger Quadros <rogerq@kernel.org>
 > ---
->  arch/arm/cpu/armv7/sunxi/psci.c | 94 ++++++++++++++-------------------
->  1 file changed, 41 insertions(+), 53 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
-> index e1d3638b5c..7809b074f8 100644
-> --- a/arch/arm/cpu/armv7/sunxi/psci.c
-> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> @@ -76,28 +76,24 @@ static void __secure __mdelay(u32 ms)
->  	isb();
->  }
->  
-> -static void __secure clamp_release(u32 __maybe_unused *clamp)
-> +static void __secure clamp_release(u32 *clamp)
->  {
-> -#if defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN7I) || \
-> -	defined(CONFIG_MACH_SUN8I_H3) || \
-> -	defined(CONFIG_MACH_SUN8I_R40)
-> -	u32 tmp = 0x1ff;
-> -	do {
-> -		tmp >>= 1;
-> -		writel(tmp, clamp);
-> -	} while (tmp);
-> -
-> -	__mdelay(10);
-> -#endif
-> +	if (clamp) {
-> +		u32 tmp = 0x1ff;
-> +		do {
-> +			tmp >>= 1;
-> +			writel(tmp, clamp);
-> +		} while (tmp);
-> +
-> +		__mdelay(10);
-> +	}
->  }
->  
-> -static void __secure clamp_set(u32 __maybe_unused *clamp)
-> +static void __secure clamp_set(u32 *clamp)
->  {
-> -#if defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN7I) || \
-> -	defined(CONFIG_MACH_SUN8I_H3) || \
-> -	defined(CONFIG_MACH_SUN8I_R40)
-> -	writel(0xff, clamp);
-> -#endif
-> +	if (clamp) {
-> +		writel(0xff, clamp);
-> +	}
->  }
->  
->  static void __secure sunxi_power_switch(u32 *clamp, u32 *pwroff, bool on,
-> @@ -118,53 +114,45 @@ static void __secure sunxi_power_switch(u32 *clamp, u32 *pwroff, bool on,
+>  drivers/usb/dwc3/dwc3-generic.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-gene=
+ric.c
+> index 66da5a8d6f8c..857ae806e11d 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -182,8 +182,8 @@ static int dwc3_generic_of_to_plat(struct udevice *de=
+v)
+>  		node =3D dev_ofnode(dev->parent);
+>  		plat->dr_mode =3D usb_get_dr_mode(node);
+>  		if (plat->dr_mode =3D=3D USB_DR_MODE_UNKNOWN) {
+> -			pr_err("Invalid usb mode setup\n");
+> -			return -ENODEV;
+> +			pr_info("No USB mode specified. Using OTG.\n");
+> +			plat->dr_mode =3D USB_DR_MODE_OTG;
+>  		}
 >  	}
->  }
->  
-> -#ifdef CONFIG_MACH_SUN8I_R40
-> -/* secondary core entry address is programmed differently on R40 */
->  static void __secure sunxi_set_entry_address(void *entry)
->  {
-> -	writel((u32)entry,
-> -	       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
-> -}
-> -#else
-> -static void __secure sunxi_set_entry_address(void *entry)
-> -{
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +	/* secondary core entry address is programmed differently on R40 */
-> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
-> +		writel((u32)entry,
-> +		       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
-> +	} else {
-> +		struct sunxi_cpucfg_reg *cpucfg =
-> +			(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
->  
-> -	writel((u32)entry, &cpucfg->priv0);
-> +		writel((u32)entry, &cpucfg->priv0);
-> +	}
->  }
-> -#endif
->  
-> -#ifdef CONFIG_MACH_SUN7I
-> -/* sun7i (A20) is different from other single cluster SoCs */
-> -static void __secure sunxi_cpu_set_power(int __always_unused cpu, bool on)
-> -{
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> -
-> -	sunxi_power_switch(&cpucfg->cpu1_pwr_clamp, &cpucfg->cpu1_pwroff,
-> -			   on, 0);
-> -}
-> -#elif defined CONFIG_MACH_SUN8I_R40
->  static void __secure sunxi_cpu_set_power(int cpu, bool on)
->  {
->  	struct sunxi_cpucfg_reg *cpucfg =
->  		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
->  
-> -	sunxi_power_switch((void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu),
-> -			   (void *)cpucfg + SUN8I_R40_PWROFF,
-> -			   on, cpu);
-> -}
-> -#else /* ! CONFIG_MACH_SUN7I && ! CONFIG_MACH_SUN8I_R40 */
-> -static void __secure sunxi_cpu_set_power(int cpu, bool on)
-> -{
-> -	struct sunxi_prcm_reg *prcm =
-> -		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
-> +	/* sun7i (A20) is different from other single cluster SoCs */
-> +	if (IS_ENABLED(CONFIG_MACH_SUN7I)) {
-> +		sunxi_power_switch(NULL, &cpucfg->cpu1_pwroff, on, 0);
-> +	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
-> +		sunxi_power_switch(NULL, (void *)cpucfg + SUN8I_R40_PWROFF,
-> +				   on, cpu);
-> +	} else {
-> +#if !defined(CONFIG_SUN50I_GEN_H6) && !defined(CONFIG_SUNXI_GEN_NCAT2)
 
-So I think we can get rid of this:
-- GEN_H6 never compiles this code here, as both H6 and H616 are arm64.
-- We can define SUNXI_PRCM_BASE for NCAT2, I believe Samuel once
-mentioned that the D1/T113 does have such a block, actually.
-- The non-existing cpu_pwr_clamp member should go away when you switch to
-a BASE_ADDR + REG_OFFSET approach, I think.
+Is this part OK with you Marek?
 
-> +		struct sunxi_prcm_reg *prcm =
-> +			(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
->  
-> -	sunxi_power_switch(&prcm->cpu_pwr_clamp[cpu], &prcm->cpu_pwroff,
-> -			   on, cpu);
-> +		u32 *clamp = &prcm->cpu_pwr_clamp[cpu];
-> +		if (IS_ENABLED(CONFIG_MACH_SUN6I) ||
-> +		    IS_ENABLED(CONFIG_MACH_SUN8I_H3))
+--=20
+Tom
 
-Shouldn't that be the opposite? In the existing code, sun6i and H3 DO
-program the clamp (see the "-" section above).
+--9wU0fo2A2iy172rA
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Cheers,
-Andre
+-----BEGIN PGP SIGNATURE-----
 
-> +			clamp = NULL;
-> +
-> +		sunxi_power_switch(clamp, &prcm->cpu_pwroff, on, cpu);
-> +#endif
-> +	}
->  }
-> -#endif /* CONFIG_MACH_SUN7I */
->  
->  void __secure sunxi_cpu_power_off(u32 cpuid)
->  {
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTaYbUACgkQFHw5/5Y0
+tywKmgv/dc16euMIcHXSeHueSWD3yODEd70ws1SL6AKdAkObGkYvsXNlioNCyqKO
+Q5esqU5FzIdm42IZQXMWd+HBL/YdZgSLfS4Rgc6PseSaNwlq8SwQjmzGCpjlf2UL
+63r4Mx7GadnaOAnzSZj55pCbVvepqufru9fsASHR0PaGrz7ER+ZUJOakwaXQ1idt
+pldcdXnyyupOp01soG3tVMA7/yJpX05ztEqc5hyEg754fZROxbbYhejNNFKQqhjl
+PB7sfsmfoHNspGaAAeMf9ZsaeNTQsJbjbOYahesj7CvE0Vg+G0PI5ekFAx5RAZ68
+diDZuP08hSl143YKNx2lDfRmwlvZ7WiK+SOqjtxIbjtUp872WzIzzFDAA/h2ahgq
+PSwqqazJfzbzNVJU3d5f5vQ/h7COcEWhYN/Th+Z0ThWO6aLiPJaOmH3tZD7EXTYF
+7w7L65gpjuHXjtAfN5tya9zJ8Uom7ndp37k3sDwEjq//b0LMSo3eET5rlWnzQb7w
+c5XM6Bnd
+=pOSu
+-----END PGP SIGNATURE-----
 
+--9wU0fo2A2iy172rA--
