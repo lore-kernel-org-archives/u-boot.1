@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422EDC001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D24C04E69
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48C4086977;
-	Tue, 15 Aug 2023 00:32:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A354486977;
+	Tue, 15 Aug 2023 00:33:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dWvwo7u6";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SCPjD1KH";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ty0a8qpe";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="REI5r4yl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1653C86986; Tue, 15 Aug 2023 00:31:59 +0200 (CEST)
+ id 64AD286986; Tue, 15 Aug 2023 00:33:12 +0200 (CEST)
 Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
  [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4268686958
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:31:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A281686958
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:33:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RPpzd0yjdz9sRl;
- Tue, 15 Aug 2023 00:31:57 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RPq124786z9sm6;
+ Tue, 15 Aug 2023 00:33:10 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692052317;
+ s=mail20150812; t=1692052390;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/EENBVWR/zGNU0on0IiPCGS0mk6fDP679oyJKJVDjHA=;
- b=dWvwo7u61VQfvdvqThRvEK232vCuS3UneJhU71SEWIwo06cemN6oOZAzXvEB1j+qNzWBlU
- 4Y2K8nSgkhOTzkuKq/xpeaMjvYnXf67LRDWbfJxyn/5GAiqJSNbHLygfzJo/E5enVxd8NG
- W4L+UIYlVawpLso2B3jnDCqK1gw+gwC+/+DCpSFHZ0TZ54Da+tdhLC1YMS+lAZNaZObSaI
- qYrPZ7m75I3Br1z24LtcB2VFFjb6pWYaf5hDzYbhMBcl603UMxnMRgPrEZStpY1Xozzkfs
- CK2pvnSPqucbfZymAcqWyUMVrpfaMSfoc+DgxsBlU2gvK518CO1BVvfSilAs3A==
-Message-ID: <d4b2b0f9-6231-6087-a06f-df7f059a80e5@mailbox.org>
+ bh=phZNEzVDGvtG6C1NtaCWtQFzviiYyBXQHRRqouawc6s=;
+ b=Ty0a8qpe41SLe51MS8BO3uamdY+5HwqD4fuHTuEIXyvJOBrlWr9shyCDXEKxhtJ1HL+Rgm
+ j9PYgcZRCdD8elF/AH9XU947KXVAfo7Bc//wIHa4P0kXbE0W/C4WrkmaO8qTQWqR5Ae/do
+ f82c9yVehmPufWvuc3rU1n073dUsq4QgeOjkVRsSVuETl84W1ETD/PILmXQ7/8jn+nONFW
+ Boq9hOgZigtHbqLVaBcOmHxCR6/DL15VanuAMoE0frjxkH60Oit1rLLpEOHqOp+JON/K8n
+ T6L5RClq6NHFx0Qb6NN//1O2JrirmtqY86A/HnkRkldg3PsZmLL1WWXJU8YwIg==
+Message-ID: <39a84296-93a8-92db-1c1e-964ed45f634a@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692052315;
+ s=mail20150812; t=1692052388;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/EENBVWR/zGNU0on0IiPCGS0mk6fDP679oyJKJVDjHA=;
- b=SCPjD1KHhvYMe4mAKJYTKU3HI5svWfJwulSVgQMnO8Q1P5cWZo6UZoZEMrWjzQK/IQ4OTT
- v+oaXHH1BGBFqHf6Bek15p6ilJ0CMdIpCYtcUm6ThFyy0N5hP+1ACh424aQZyMxSQ8xvf8
- CZufz3CyAdgnotOPEuDUScHS7SWb6+BPcWrMkPUuF55mhRSU9yRkh6iS2O9HgpvFL24f7u
- i0+JhtTcgES4UPfp5u4m0SQnkGHN4oiBLrIKDuaO8Ul8wqDIJMBbBlT9CJM1Vo78DljSnP
- TIDyDCSfqlfPsKVr+mQwD/fDqxENlNInOta+O3LYJKIM3SaDmcccoYPtbU2rvg==
-Date: Tue, 15 Aug 2023 00:31:52 +0200
+ bh=phZNEzVDGvtG6C1NtaCWtQFzviiYyBXQHRRqouawc6s=;
+ b=REI5r4ylER1H6YxyhLfxvMnt+v//HqdleBITM8yshPE/5hhOBfrk8OB5gwcFsIW/tJQzkw
+ XDi4XkOw0AFYtBrR0b826OtygpMTP9whRlhWN4H22hk1CVBoPgGF1tuWc5g6EYDInu3Y5H
+ mmnbq5xY4WsFgvtkHTtiVgtsGASyF8YdyPjs7APdW/Wxzb9DlQGIWGNUe0k3L5K9xm/hOO
+ LZYV8qEF/+pZoevYBrVwCqkalJZ+mxfJRDSvdcE/R2Q8iE32dP5TsWHRSxPpc1VOWuz9ka
+ NawsEZKWKl0JjA59WEGlecj/i0/OQO23/BziZbQoovQYAD/AvEa271i9v/z6+w==
+Date: Tue, 15 Aug 2023 00:33:07 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 17/17] MAINTAINERS: Update UFS maintainer
-Content-Language: en-US
+Subject: Re: [PATCH 00/17] Enable UFS on DragonBoard845c
 To: Bhupesh Sharma <bhupesh.sharma@linaro.org>, u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.linux@gmail.com,
  marek.vasut+renesas@mailbox.org, sumit.garg@linaro.org,
  rfried.dev@gmail.com, patrice.chotard@foss.st.com, jbx6244@gmail.com,
- kever.yang@rock-chips.com, eugen.hristev@collabora.com,
- "vigneshr@ti.com" <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
+ kever.yang@rock-chips.com, eugen.hristev@collabora.com
 References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
- <20230814215457.4075025-18-bhupesh.sharma@linaro.org>
+Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230814215457.4075025-18-bhupesh.sharma@linaro.org>
+In-Reply-To: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 18cb825dda4333974df
-X-MBO-RS-META: 4q7snwyftg5brnqepsorpfpfep191x4f
-X-Rspamd-Queue-Id: 4RPpzd0yjdz9sRl
+X-MBO-RS-ID: ee2d46dde73071af73e
+X-MBO-RS-META: ja3gaxpa7yromuak66r96trb3gm6prrp
+X-Rspamd-Queue-Id: 4RPq124786z9sm6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,16 +93,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 8/14/23 23:54, Bhupesh Sharma wrote:
-> Since Faiz Abbas's email ID is no longer valid,
-> drop him from UFS Maintainer list.
+> This patchset enables the UFS controller on DragonBoard845c
+> board which houses Qualcomm SDM845 Snapdragon SoC.
 > 
-> Since I am using the UFS framework now extensively
-> on Qualcomm Snapdragon SoCs, so proposing myself as
-> the new UFS maintainer.
-> 
-> I have also been sending out u-boot UFS fixes in the
-> recent past.
-> 
-> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> In addition to enabling the UFS HC and UFS QMP PHY found
+> on this SoC this patchset also contains:
+>   * Patches to add 'reset' controller support for SDM845 SoC.
+>   * Minor UFS core framework fixes.
+>   * Patches to sync u-boot UFS driver flow with Linux UFS driver.
+>   * Patches which enable RESET, UFS and SCSI config options for
+>     DragonBoard845c.
 
-I believe TI is working on something here, so please coordinate with them.
+I submitted a couple of UFS related patches yesterday, they add handling 
+for controllers which cannot handle 64bit memory and add support for 
+cache management. Please rebase on top of those, otherwise there will be 
+hard to resolve conflicts.
+
+[PATCH 1/6] ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
+[PATCH 1/2] blk: Add bounce buffer support to read/write operations
