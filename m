@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA42C04A6A
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:45:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCCC3C001DB
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF5E686A20;
-	Tue, 15 Aug 2023 00:43:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3EBD686A31;
+	Tue, 15 Aug 2023 00:43:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JJx5j/ue";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SBsmNAXV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD47A86A2D; Tue, 15 Aug 2023 00:43:51 +0200 (CEST)
+ id C7DB086A1D; Tue, 15 Aug 2023 00:43:51 +0200 (CEST)
 Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
  [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07D95869E2
+ by phobos.denx.de (Postfix) with ESMTPS id 0E1AE869ED
  for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d3d729a08e4so4753765276.3
+ 3f1490d57ef6-c5ffb6cda23so4962951276.0
  for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 15:43:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692053027; x=1692657827;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LdgOR0wwpvFf+wPWIOTSDzhoE5jQ8TpOhFL5cY2k5PM=;
- b=JJx5j/ue0znxzdic57qIyLeuDJnhiNCMexTh1UilQUSMqS/MWWjOzunOodHWKQZLK5
- 0IghRzKvmVGOm9zU64VcrmZQSVifm2DNfU7aZm4iVcTNkO0AuwQ+L4q2kOtqH2l9a7Yj
- qFM0/T745nSkWQjDOsogrfNQyrxhYdaPqt1b4=
+ bh=2dB8EVKZpQ9Y1o+H0xqLO9BAInC3qAakCNukbmUTCPU=;
+ b=SBsmNAXVrOntCh+hjEW4rc+YogDlFM1/1HURw99yors81m3yN0qZ0om3oZRBj7PXH7
+ VetY1Str8p3V26eQFgBFI60KgZ5EXStyc1rPbPAcxmha+8tZ+2ecrzMmhG8YSqW/5Okt
+ cei7UeDPkQmDom2RgrhzW8IXMMWY4SJmvQkaI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692053027; x=1692657827;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LdgOR0wwpvFf+wPWIOTSDzhoE5jQ8TpOhFL5cY2k5PM=;
- b=ifunLi1xovuHMKAOMN5yiohsjoiE7uP0m3cugzxy8j4XUdrAUDEij2P1UU6A0Sdfji
- +yI83tmEY0mN5CJG2Qcvm2TswQYnV+5wCdA2FuLbfmwLie9w16uqMm/U32Ak53hTWZsf
- lfj7EfAa5yF0UTX4OmZwjG1sf8BmxaFE3Ea2fNQb+O6yZ0Wv5toPIv+PB+pAuBnBBFQ4
- eOpNaXUp+ZWVfRPXFvG/vDUxosSzsOi2IV81di6Xh9ZXxGAuB3RdXfuTPdvShTveVveZ
- /fxazjXnZOxLd5JZjBBfiMxG6jkBn2NxBOiD0ibtgP0b5YbvKlEBRiwgf6yLU5Q2Q3I3
- Pf1w==
-X-Gm-Message-State: AOJu0Yyd4Re6eZlad3Wy8hcAQeQJt1tdXJ96GNcjhrDPqXSUW+st2nOq
- ZpuJTvKtTT/Yg9RQIfcorJBZ1ZHsyC3mdL6+W47ol5BAD4YEKDihVNQ=
-X-Google-Smtp-Source: AGHT+IGzNCQ2sSdm6328XMEff4OnV7b8JTCvCHpiAO1Yni+UqNhd7nHAN5I/bPGY+pAUm+NWBiCaFKYddJq3PTicqmM=
-X-Received: by 2002:a25:428b:0:b0:d36:99eb:fc01 with SMTP id
- p133-20020a25428b000000b00d3699ebfc01mr10923615yba.15.1692053026606; Mon, 14
+ bh=2dB8EVKZpQ9Y1o+H0xqLO9BAInC3qAakCNukbmUTCPU=;
+ b=DWYZQb3aSB/UABvSae93hPSTVDlvp3B6v6Wtg+7u00mjm8wBQY7dsql9WzRWVQAGX3
+ Gix0gT+35S8NN1KBDK70gA7bSp48XmA6DJpEFxAb9b0G65zbArjuqHmQy6qBajGZzaxx
+ XO4cDHggVCBkA3iXBIr99BLsXWRWOnlmuR/xgmqdOD01Oaj1ogvH5yVGlGO31ILKTHX6
+ ZhFIix0Pti/bUkc82UMxj5Xr3MXW2uDbrDim35cqk1XkGYDXOkNulmxIqq76lpZVDB3v
+ 5WUR6wdoTQddIKillN5vIIsBqucVm8yPcynFzHMI3e26f9HKR95xr7UmEK0XxMe3vhcl
+ M/7g==
+X-Gm-Message-State: AOJu0YydahCJQvbRIjru4TQpwdblKhqe0ciaFgf/FgyqQSDbXEC88DV8
+ /5E06azcCHXB/ephw1VMLIEbhcIVJDPBk635jHVBUw==
+X-Google-Smtp-Source: AGHT+IGY23bVUXtsY+cnSdmWTllN9KS6KPkaVCt3uLTx5UYeYl3vywGpNSKd7eiUhkmUhBSbjxZsZOLdD/G2VCkWbHU=
+X-Received: by 2002:a25:83c4:0:b0:c86:a5b6:cdff with SMTP id
+ v4-20020a2583c4000000b00c86a5b6cdffmr11442870ybm.19.1692053026611; Mon, 14
  Aug 2023 15:43:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230813195219.159629-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230813195219.159629-1-marek.vasut+renesas@mailbox.org>
+References: <20230813214659.441964-1-marek.vasut+renesas@mailbox.org>
+ <20230813214659.441964-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230813214659.441964-2-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 14 Aug 2023 16:42:54 -0600
-Message-ID: <CAPnjgZ3ahTmHPwa8bESuiZbjapA05m_+My3QXv4yWP-KhM7G4Q@mail.gmail.com>
-Subject: Re: [PATCH] test: cpu: Handle both 32bit and 64bit CPUs
+Date: Mon, 14 Aug 2023 16:42:58 -0600
+Message-ID: <CAPnjgZ0rCX+hUn2rtH-gpVB9X+Rfv-FTGoxGsB8tKa0e_QEBGA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] configs: sandbox: test: dm: blk: Enable NVMXIP QSPI
+ and update test
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,20 +82,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 13 Aug 2023 at 13:52, Marek Vasut
+On Sun, 13 Aug 2023 at 15:47, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
-> Handle both 32bit and 64bit systems, i.e. sandbox and sandbox64
-> the same way drivers/cpu/cpu_sandbox.c does, that is in case
-> CONFIG_PHYS_64BIT is enabled, assume 64bit address width, else
-> assume 32bit address width. This fixes ut_dm_dm_test_cpu test
-> failure on sandbox64.
+> Enable NVMXIP QSPI driver on sandbox, since it is already enabled
+> on sandbox64. Update blk tests to match.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
+> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  test/dm/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  configs/sandbox_defconfig |  1 +
+>  test/dm/blk.c             | 63 +++++++++++++++++++++++++++++++--------
+>  2 files changed, 52 insertions(+), 12 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
