@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13E07C001DB
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4144C001DB
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:55:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB1FB86987;
-	Mon, 14 Aug 2023 23:55:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F136586986;
+	Mon, 14 Aug 2023 23:55:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ULrGIrV9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wcK+Duw+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CE608698F; Mon, 14 Aug 2023 23:55:23 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 421C186998; Mon, 14 Aug 2023 23:55:26 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5F586997
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:55:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A95EC86986
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:55:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1bc7e65ea44so32482665ad.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:55:19 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1bdc243d62bso18060935ad.3
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:55:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692050118; x=1692654918;
+ d=linaro.org; s=google; t=1692050122; x=1692654922;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6rEJouKzJ4Upcmj+q12wws0gfYHMmmxFowD9xe1Q0Tw=;
- b=ULrGIrV92tqetQxsYaTrmi2yFwcHdZbvbTxV8u3tFiyw4cDSsSHTC3gu9WMQYWCQFL
- C2jPd7oqAqJql8wVs0YC3l4AyM9NNrFVhDOK4bGqrLfERYuaJ/RSDvUEQLuW/RASc4w2
- XXJa0R2HQwwTD5PPqMGmCmescbQTgq1Pww1Ex/eAzvAwVL4qCNIMVXHpNLECWVvrgLBX
- G0MKSkz2VX9kqmHTpVo3Ev8aMXxFKGAC+E3j/ZQh38nOwpVfTD/XxqafQrmxkMAcrWsg
- lw86FLVNbOSQvFa8ka7pLWcwh4V2EigOMxOtMrtaRSbuFwe/k7EUip/tSF8zvoEGYrp4
- iFNA==
+ bh=x0pl/pbEd2rv4f/papl0YRDCAzd6eO00Sl9gHl3jPco=;
+ b=wcK+Duw+LtdBKeDjUjwAhI/h8Q3xn8pRymAZc2eq0muVdMV9K7tZPiwiQNHKf6EqVJ
+ zPrunETnX9rhLWaRY29OpK5r6C5QnZAz3NDNGxB/wUgjAU7mOqnbwDq//p0ruJbfB6Ey
+ nTYJX/H7HTCZ0jWagcZrNS9NoR7SYOnKfsLQbD1b8M6cQp+vzgP8C1miWNPygvvevvVG
+ 8JtnUAWCTtlj+CyesrrZELSi5bqtPoV9ka2gLEDD99UmHOGlmUX/gvcqPkhmtKNJ7H61
+ gGpm4KK2smkD1niIxXOF42dx8u2LTLhsx3qa7vElGMGiH4U+0tHgw9AXWdmj6klgC2L8
+ WI7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692050118; x=1692654918;
+ d=1e100.net; s=20221208; t=1692050122; x=1692654922;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6rEJouKzJ4Upcmj+q12wws0gfYHMmmxFowD9xe1Q0Tw=;
- b=jZfFZBZbyUrF1LlB7WPW3/S8cpK2KjbCtqGI0hPGpcIEmls86F97J1Du2RUtWNHh6g
- WXZKCyq4AlO++YqDMoqutuUthPfS1Oce/eCJ7LdorPlsFU+jJfr1reIAjH908Q6Tgsgm
- xJSD6c85FjGkWXJn9N9MUBoIJ8+A/6IMUgHf+8wJMzB1fwJuEQrp/JLqmjZkGT3INSZQ
- H/f7KNn6RqwdpDazgpxa/Rl3mnlP8EB/beV3Lxca+uXKDtor7kJqzE0ufKLLedrYogd0
- HeSvdfx5FK4pPzAITSiehfJs0TDu3TbrORSQu14EXwLKMN9A40ZmZb1x9HsVHpDzSCqO
- QVZg==
-X-Gm-Message-State: AOJu0YzN2wBmvet17gUgJqlS1Zp6/yHBFKB3LNFpnJpqj0elQvajX9Km
- qdHcyH6UTHyr6/eahjU5w5EjESuF/l9dO19bwdE=
-X-Google-Smtp-Source: AGHT+IH0PX4s6eBqsDjeSFDx0w+ntwMert64p3ht+X0X9rz/3+kAlglTEx+OWNFrW8rNYmj/Fk0UIw==
-X-Received: by 2002:a17:903:2585:b0:1bb:b2f7:e075 with SMTP id
- jb5-20020a170903258500b001bbb2f7e075mr243278plb.7.1692050117290; 
- Mon, 14 Aug 2023 14:55:17 -0700 (PDT)
+ bh=x0pl/pbEd2rv4f/papl0YRDCAzd6eO00Sl9gHl3jPco=;
+ b=arynmveWRvL0Gl1I7npxSO4awy2xPOEaZGSQN9SJprS5V5hlRY3tkPv5S7YNU6tN8B
+ u1HWt4T6CDmIP2KT3jWSjyLB4aiyqxQSIqkAuWgfzCljXEssj1/LP2SMr4B+2wHTq5V/
+ J/+WR6zZmHCPI7AtN2bveClhXwzSgJU/H6Rc68jwPt2Qy5WOfJCctQdCk4nfmRQuc4J5
+ 4RTs9hKOnvPA3oZWW1jjrYC1GkkiwfOeXC9Tv7VR5YQRLr40bbhGsRiZgL+frhITiwUm
+ OQ+pFiK+kd1ltmcECvuRdTHyj8SgXAX+dDfY8ZeNLPy5eFLzWy/aPbmSNa8Xt9WgbdAH
+ oV0w==
+X-Gm-Message-State: AOJu0YzvBefjcXUfSbQCgO/8WG6oKQKr6L5jVhhHq72bJAqp/gqVHTEO
+ caDtig0La5wYvjfhyRxwKnlqxVX7rgAS2/4VbBw=
+X-Google-Smtp-Source: AGHT+IFj/Gbw/cx3fMXCVNLGgZQwqIyM/9cifho9Zeyl8yyp5SCbAkET99MpjefwESle0lvg6ieBbw==
+X-Received: by 2002:a17:902:8697:b0:1bb:8931:ee94 with SMTP id
+ g23-20020a170902869700b001bb8931ee94mr7626638plo.67.1692050121589; 
+ Mon, 14 Aug 2023 14:55:21 -0700 (PDT)
 Received: from localhost.localdomain
  ([2401:4900:1f3b:3924:6581:8508:2ecb:b5dd])
  by smtp.gmail.com with ESMTPSA id
- n4-20020a170903110400b001bba373919bsm9872075plh.261.2023.08.14.14.55.12
+ n4-20020a170903110400b001bba373919bsm9872075plh.261.2023.08.14.14.55.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 14:55:16 -0700 (PDT)
+ Mon, 14 Aug 2023 14:55:21 -0700 (PDT)
 From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.sharma@linaro.org,
  bhupesh.linux@gmail.com, marek.vasut+renesas@mailbox.org,
  sumit.garg@linaro.org, rfried.dev@gmail.com, patrice.chotard@foss.st.com,
  jbx6244@gmail.com, kever.yang@rock-chips.com, eugen.hristev@collabora.com
-Subject: [PATCH 02/17] phy: qcom: Import QMP phy related header files from
- Linux
-Date: Tue, 15 Aug 2023 03:24:42 +0530
-Message-Id: <20230814215457.4075025-3-bhupesh.sharma@linaro.org>
+Subject: [PATCH 03/17] dt-bindings: clock: Import SM6115 and SM8250 related
+ clock header files from Linux
+Date: Tue, 15 Aug 2023 03:24:43 +0530
+Message-Id: <20230814215457.4075025-4-bhupesh.sharma@linaro.org>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
 References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
@@ -96,1577 +96,499 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Import Qualcomm QMP phy related header files from Linux.
+Import SM6115 and SM8250 related clock header files from Linux,
+which would be included in the Qualcomm QMP PHY driver.
 
 Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 ---
- drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h    |  25 ++
- drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h    |  21 ++
- drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h    |  31 +++
- drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h    |  32 +++
- drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h    |  31 +++
- drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h        |  43 ++++
- drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h        | 145 +++++++++++
- drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h        | 135 ++++++++++
- .../phy/qcom/phy-qcom-qmp-qserdes-com-v3.h    | 111 +++++++++
- .../phy/qcom/phy-qcom-qmp-qserdes-com-v4.h    | 123 +++++++++
- drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h   | 140 +++++++++++
- drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h   |  66 +++++
- .../qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h   |  30 +++
- .../phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h   |  68 +++++
- .../phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h   | 233 ++++++++++++++++++
- drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h  | 205 +++++++++++++++
- 16 files changed, 1439 insertions(+)
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v3.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v4.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h
+ include/dt-bindings/clock/qcom,gcc-sm6115.h | 201 +++++++++++++++
+ include/dt-bindings/clock/qcom,gcc-sm8250.h | 271 ++++++++++++++++++++
+ 2 files changed, 472 insertions(+)
+ create mode 100644 include/dt-bindings/clock/qcom,gcc-sm6115.h
+ create mode 100644 include/dt-bindings/clock/qcom,gcc-sm8250.h
 
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h
+diff --git a/include/dt-bindings/clock/qcom,gcc-sm6115.h b/include/dt-bindings/clock/qcom,gcc-sm6115.h
 new file mode 100644
-index 0000000000..a0803a8783
+index 0000000000..b91a7b4604
 --- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/include/dt-bindings/clock/qcom,gcc-sm6115.h
+@@ -0,0 +1,201 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 +/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
++ * Copyright (c) 2019-2021, The Linux Foundation. All rights reserved.
 + */
 +
-+#ifndef QCOM_PHY_QMP_PCS_UFS_V2_H_
-+#define QCOM_PHY_QMP_PCS_UFS_V2_H_
++#ifndef _DT_BINDINGS_CLK_QCOM_GCC_SM6115_H
++#define _DT_BINDINGS_CLK_QCOM_GCC_SM6115_H
 +
-+#define QPHY_V2_PCS_UFS_PHY_START			0x000
-+#define QPHY_V2_PCS_UFS_POWER_DOWN_CONTROL		0x004
++/* GCC clocks */
++#define GPLL0							0
++#define GPLL0_OUT_AUX2						1
++#define GPLL0_OUT_MAIN						2
++#define GPLL10							3
++#define GPLL10_OUT_MAIN						4
++#define GPLL11							5
++#define GPLL11_OUT_MAIN						6
++#define GPLL3							7
++#define GPLL4							8
++#define GPLL4_OUT_MAIN						9
++#define GPLL6							10
++#define GPLL6_OUT_MAIN						11
++#define GPLL7							12
++#define GPLL7_OUT_MAIN						13
++#define GPLL8							14
++#define GPLL8_OUT_MAIN						15
++#define GPLL9							16
++#define GPLL9_OUT_MAIN						17
++#define GCC_CAMSS_CSI0PHYTIMER_CLK				18
++#define GCC_CAMSS_CSI0PHYTIMER_CLK_SRC				19
++#define GCC_CAMSS_CSI1PHYTIMER_CLK				20
++#define GCC_CAMSS_CSI1PHYTIMER_CLK_SRC				21
++#define GCC_CAMSS_CSI2PHYTIMER_CLK				22
++#define GCC_CAMSS_CSI2PHYTIMER_CLK_SRC				23
++#define GCC_CAMSS_MCLK0_CLK					24
++#define GCC_CAMSS_MCLK0_CLK_SRC					25
++#define GCC_CAMSS_MCLK1_CLK					26
++#define GCC_CAMSS_MCLK1_CLK_SRC					27
++#define GCC_CAMSS_MCLK2_CLK					28
++#define GCC_CAMSS_MCLK2_CLK_SRC					29
++#define GCC_CAMSS_MCLK3_CLK					30
++#define GCC_CAMSS_MCLK3_CLK_SRC					31
++#define GCC_CAMSS_NRT_AXI_CLK					32
++#define GCC_CAMSS_OPE_AHB_CLK					33
++#define GCC_CAMSS_OPE_AHB_CLK_SRC				34
++#define GCC_CAMSS_OPE_CLK					35
++#define GCC_CAMSS_OPE_CLK_SRC					36
++#define GCC_CAMSS_RT_AXI_CLK					37
++#define GCC_CAMSS_TFE_0_CLK					38
++#define GCC_CAMSS_TFE_0_CLK_SRC					39
++#define GCC_CAMSS_TFE_0_CPHY_RX_CLK				40
++#define GCC_CAMSS_TFE_0_CSID_CLK				41
++#define GCC_CAMSS_TFE_0_CSID_CLK_SRC				42
++#define GCC_CAMSS_TFE_1_CLK					43
++#define GCC_CAMSS_TFE_1_CLK_SRC					44
++#define GCC_CAMSS_TFE_1_CPHY_RX_CLK				45
++#define GCC_CAMSS_TFE_1_CSID_CLK				46
++#define GCC_CAMSS_TFE_1_CSID_CLK_SRC				47
++#define GCC_CAMSS_TFE_2_CLK					48
++#define GCC_CAMSS_TFE_2_CLK_SRC					49
++#define GCC_CAMSS_TFE_2_CPHY_RX_CLK				50
++#define GCC_CAMSS_TFE_2_CSID_CLK				51
++#define GCC_CAMSS_TFE_2_CSID_CLK_SRC				52
++#define GCC_CAMSS_TFE_CPHY_RX_CLK_SRC				53
++#define GCC_CAMSS_TOP_AHB_CLK					54
++#define GCC_CAMSS_TOP_AHB_CLK_SRC				55
++#define GCC_CFG_NOC_USB3_PRIM_AXI_CLK				56
++#define GCC_CPUSS_AHB_CLK					57
++#define GCC_CPUSS_GNOC_CLK					60
++#define GCC_DISP_AHB_CLK					61
++#define GCC_DISP_GPLL0_DIV_CLK_SRC				62
++#define GCC_DISP_HF_AXI_CLK					63
++#define GCC_DISP_THROTTLE_CORE_CLK				64
++#define GCC_DISP_XO_CLK						65
++#define GCC_GP1_CLK						66
++#define GCC_GP1_CLK_SRC						67
++#define GCC_GP2_CLK						68
++#define GCC_GP2_CLK_SRC						69
++#define GCC_GP3_CLK						70
++#define GCC_GP3_CLK_SRC						71
++#define GCC_GPU_CFG_AHB_CLK					72
++#define GCC_GPU_GPLL0_CLK_SRC					73
++#define GCC_GPU_GPLL0_DIV_CLK_SRC				74
++#define GCC_GPU_IREF_CLK					75
++#define GCC_GPU_MEMNOC_GFX_CLK					76
++#define GCC_GPU_SNOC_DVM_GFX_CLK				77
++#define GCC_GPU_THROTTLE_CORE_CLK				78
++#define GCC_GPU_THROTTLE_XO_CLK					79
++#define GCC_PDM2_CLK						80
++#define GCC_PDM2_CLK_SRC					81
++#define GCC_PDM_AHB_CLK						82
++#define GCC_PDM_XO4_CLK						83
++#define GCC_PRNG_AHB_CLK					84
++#define GCC_QMIP_CAMERA_NRT_AHB_CLK				85
++#define GCC_QMIP_CAMERA_RT_AHB_CLK				86
++#define GCC_QMIP_DISP_AHB_CLK					87
++#define GCC_QMIP_GPU_CFG_AHB_CLK				88
++#define GCC_QMIP_VIDEO_VCODEC_AHB_CLK				89
++#define GCC_QUPV3_WRAP0_CORE_2X_CLK				90
++#define GCC_QUPV3_WRAP0_CORE_CLK				91
++#define GCC_QUPV3_WRAP0_S0_CLK					92
++#define GCC_QUPV3_WRAP0_S0_CLK_SRC				93
++#define GCC_QUPV3_WRAP0_S1_CLK					94
++#define GCC_QUPV3_WRAP0_S1_CLK_SRC				95
++#define GCC_QUPV3_WRAP0_S2_CLK					96
++#define GCC_QUPV3_WRAP0_S2_CLK_SRC				97
++#define GCC_QUPV3_WRAP0_S3_CLK					98
++#define GCC_QUPV3_WRAP0_S3_CLK_SRC				99
++#define GCC_QUPV3_WRAP0_S4_CLK					100
++#define GCC_QUPV3_WRAP0_S4_CLK_SRC				101
++#define GCC_QUPV3_WRAP0_S5_CLK					102
++#define GCC_QUPV3_WRAP0_S5_CLK_SRC				103
++#define GCC_QUPV3_WRAP_0_M_AHB_CLK				104
++#define GCC_QUPV3_WRAP_0_S_AHB_CLK				105
++#define GCC_SDCC1_AHB_CLK					106
++#define GCC_SDCC1_APPS_CLK					107
++#define GCC_SDCC1_APPS_CLK_SRC					108
++#define GCC_SDCC1_ICE_CORE_CLK					109
++#define GCC_SDCC1_ICE_CORE_CLK_SRC				110
++#define GCC_SDCC2_AHB_CLK					111
++#define GCC_SDCC2_APPS_CLK					112
++#define GCC_SDCC2_APPS_CLK_SRC					113
++#define GCC_SYS_NOC_CPUSS_AHB_CLK				114
++#define GCC_SYS_NOC_UFS_PHY_AXI_CLK				115
++#define GCC_SYS_NOC_USB3_PRIM_AXI_CLK				116
++#define GCC_UFS_PHY_AHB_CLK					117
++#define GCC_UFS_PHY_AXI_CLK					118
++#define GCC_UFS_PHY_AXI_CLK_SRC					119
++#define GCC_UFS_PHY_ICE_CORE_CLK				120
++#define GCC_UFS_PHY_ICE_CORE_CLK_SRC				121
++#define GCC_UFS_PHY_PHY_AUX_CLK					122
++#define GCC_UFS_PHY_PHY_AUX_CLK_SRC				123
++#define GCC_UFS_PHY_RX_SYMBOL_0_CLK				124
++#define GCC_UFS_PHY_TX_SYMBOL_0_CLK				125
++#define GCC_UFS_PHY_UNIPRO_CORE_CLK				126
++#define GCC_UFS_PHY_UNIPRO_CORE_CLK_SRC				127
++#define GCC_USB30_PRIM_MASTER_CLK				128
++#define GCC_USB30_PRIM_MASTER_CLK_SRC				129
++#define GCC_USB30_PRIM_MOCK_UTMI_CLK				130
++#define GCC_USB30_PRIM_MOCK_UTMI_CLK_SRC			131
++#define GCC_USB30_PRIM_MOCK_UTMI_POSTDIV_CLK_SRC		132
++#define GCC_USB30_PRIM_SLEEP_CLK				133
++#define GCC_USB3_PRIM_CLKREF_CLK				134
++#define GCC_USB3_PRIM_PHY_AUX_CLK_SRC				135
++#define GCC_USB3_PRIM_PHY_COM_AUX_CLK				136
++#define GCC_USB3_PRIM_PHY_PIPE_CLK				137
++#define GCC_VCODEC0_AXI_CLK					138
++#define GCC_VENUS_AHB_CLK					139
++#define GCC_VENUS_CTL_AXI_CLK					140
++#define GCC_VIDEO_AHB_CLK					141
++#define GCC_VIDEO_AXI0_CLK					142
++#define GCC_VIDEO_THROTTLE_CORE_CLK				143
++#define GCC_VIDEO_VCODEC0_SYS_CLK				144
++#define GCC_VIDEO_VENUS_CLK_SRC					145
++#define GCC_VIDEO_VENUS_CTL_CLK					146
++#define GCC_VIDEO_XO_CLK					147
++#define GCC_AHB2PHY_CSI_CLK					148
++#define GCC_AHB2PHY_USB_CLK					149
++#define GCC_BIMC_GPU_AXI_CLK					150
++#define GCC_BOOT_ROM_AHB_CLK					151
++#define GCC_CAM_THROTTLE_NRT_CLK				152
++#define GCC_CAM_THROTTLE_RT_CLK					153
++#define GCC_CAMERA_AHB_CLK					154
++#define GCC_CAMERA_XO_CLK					155
++#define GCC_CAMSS_AXI_CLK					156
++#define GCC_CAMSS_AXI_CLK_SRC					157
++#define GCC_CAMSS_CAMNOC_ATB_CLK				158
++#define GCC_CAMSS_CAMNOC_NTS_XO_CLK				159
++#define GCC_CAMSS_CCI_0_CLK					160
++#define GCC_CAMSS_CCI_CLK_SRC					161
++#define GCC_CAMSS_CPHY_0_CLK					162
++#define GCC_CAMSS_CPHY_1_CLK					163
++#define GCC_CAMSS_CPHY_2_CLK					164
++#define GCC_UFS_CLKREF_CLK					165
++#define GCC_DISP_GPLL0_CLK_SRC					166
 +
-+#define QPHY_V2_PCS_UFS_TX_LARGE_AMP_DRV_LVL		0x034
-+#define QPHY_V2_PCS_UFS_TX_LARGE_AMP_POST_EMP_LVL	0x038
-+#define QPHY_V2_PCS_UFS_TX_SMALL_AMP_DRV_LVL		0x03c
-+#define QPHY_V2_PCS_UFS_TX_SMALL_AMP_POST_EMP_LVL	0x040
++/* GCC resets */
++#define GCC_QUSB2PHY_PRIM_BCR					0
++#define GCC_QUSB2PHY_SEC_BCR					1
++#define GCC_SDCC1_BCR						2
++#define GCC_UFS_PHY_BCR						3
++#define GCC_USB30_PRIM_BCR					4
++#define GCC_USB_PHY_CFG_AHB2PHY_BCR				5
++#define GCC_VCODEC0_BCR						6
++#define GCC_VENUS_BCR						7
++#define GCC_VIDEO_INTERFACE_BCR					8
++#define GCC_USB3PHY_PHY_PRIM_SP0_BCR				9
++#define GCC_USB3_PHY_PRIM_SP0_BCR				10
++#define GCC_SDCC2_BCR						11
 +
-+#define QPHY_V2_PCS_UFS_RX_MIN_STALL_NOCONFIG_TIME_CAP	0x0cc
-+#define QPHY_V2_PCS_UFS_RX_SYM_RESYNC_CTRL			0x13c
-+#define QPHY_V2_PCS_UFS_RX_MIN_HIBERN8_TIME			0x140
-+#define QPHY_V2_PCS_UFS_RX_SIGDET_CTRL2			0x148
-+#define QPHY_V2_PCS_UFS_RX_PWM_GEAR_BAND			0x154
-+
-+#define QPHY_V2_PCS_UFS_READY_STATUS			0x168
++/* Indexes for GDSCs */
++#define GCC_CAMSS_TOP_GDSC			0
++#define GCC_UFS_PHY_GDSC			1
++#define GCC_USB30_PRIM_GDSC			2
++#define GCC_VCODEC0_GDSC			3
++#define GCC_VENUS_GDSC				4
++#define HLOS1_VOTE_TURING_MMU_TBU1_GDSC		5
++#define HLOS1_VOTE_TURING_MMU_TBU0_GDSC		6
++#define HLOS1_VOTE_MM_SNOC_MMU_TBU_RT_GDSC	7
++#define HLOS1_VOTE_MM_SNOC_MMU_TBU_NRT_GDSC	8
 +
 +#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h
+diff --git a/include/dt-bindings/clock/qcom,gcc-sm8250.h b/include/dt-bindings/clock/qcom,gcc-sm8250.h
 new file mode 100644
-index 0000000000..adea13c3a9
+index 0000000000..7b7abe327e
 --- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/include/dt-bindings/clock/qcom,gcc-sm8250.h
+@@ -0,0 +1,271 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
++ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
 + */
 +
-+#ifndef QCOM_PHY_QMP_PCS_UFS_V3_H_
-+#define QCOM_PHY_QMP_PCS_UFS_V3_H_
++#ifndef _DT_BINDINGS_CLK_QCOM_GCC_SM8250_H
++#define _DT_BINDINGS_CLK_QCOM_GCC_SM8250_H
 +
-+#define QPHY_V3_PCS_UFS_PHY_START			0x000
-+#define QPHY_V3_PCS_UFS_POWER_DOWN_CONTROL		0x004
-+#define QPHY_V3_PCS_UFS_TX_LARGE_AMP_DRV_LVL		0x02c
-+#define QPHY_V3_PCS_UFS_TX_SMALL_AMP_DRV_LVL		0x034
-+#define QPHY_V3_PCS_UFS_RX_SYM_RESYNC_CTRL		0x134
-+#define QPHY_V3_PCS_UFS_RX_MIN_HIBERN8_TIME		0x138
-+#define QPHY_V3_PCS_UFS_RX_SIGDET_CTRL1			0x13c
-+#define QPHY_V3_PCS_UFS_RX_SIGDET_CTRL2			0x140
-+#define QPHY_V3_PCS_UFS_READY_STATUS			0x160
-+#define QPHY_V3_PCS_UFS_TX_MID_TERM_CTRL1		0x1bc
-+#define QPHY_V3_PCS_UFS_MULTI_LANE_CTRL1		0x1c4
++/* GCC clocks */
++#define GPLL0							0
++#define GPLL0_OUT_EVEN						1
++#define GPLL4							2
++#define GPLL9							3
++#define GCC_AGGRE_NOC_PCIE_TBU_CLK				4
++#define GCC_AGGRE_UFS_CARD_AXI_CLK				5
++#define GCC_AGGRE_UFS_PHY_AXI_CLK				6
++#define GCC_AGGRE_USB3_PRIM_AXI_CLK				7
++#define GCC_AGGRE_USB3_SEC_AXI_CLK				8
++#define GCC_BOOT_ROM_AHB_CLK					9
++#define GCC_CAMERA_AHB_CLK					10
++#define GCC_CAMERA_HF_AXI_CLK					11
++#define GCC_CAMERA_SF_AXI_CLK					12
++#define GCC_CAMERA_XO_CLK					13
++#define GCC_CFG_NOC_USB3_PRIM_AXI_CLK				14
++#define GCC_CFG_NOC_USB3_SEC_AXI_CLK				15
++#define GCC_CPUSS_AHB_CLK					16
++#define GCC_CPUSS_AHB_CLK_SRC					17
++#define GCC_CPUSS_AHB_POSTDIV_CLK_SRC				18
++#define GCC_CPUSS_DVM_BUS_CLK					19
++#define GCC_CPUSS_RBCPR_CLK					20
++#define GCC_DDRSS_GPU_AXI_CLK					21
++#define GCC_DDRSS_PCIE_SF_TBU_CLK				22
++#define GCC_DISP_AHB_CLK					23
++#define GCC_DISP_HF_AXI_CLK					24
++#define GCC_DISP_SF_AXI_CLK					25
++#define GCC_DISP_XO_CLK						26
++#define GCC_GP1_CLK						27
++#define GCC_GP1_CLK_SRC						28
++#define GCC_GP2_CLK						29
++#define GCC_GP2_CLK_SRC						30
++#define GCC_GP3_CLK						31
++#define GCC_GP3_CLK_SRC						32
++#define GCC_GPU_CFG_AHB_CLK					33
++#define GCC_GPU_GPLL0_CLK_SRC					34
++#define GCC_GPU_GPLL0_DIV_CLK_SRC				35
++#define GCC_GPU_IREF_EN						36
++#define GCC_GPU_MEMNOC_GFX_CLK					37
++#define GCC_GPU_SNOC_DVM_GFX_CLK				38
++#define GCC_NPU_AXI_CLK						39
++#define GCC_NPU_BWMON_AXI_CLK					40
++#define GCC_NPU_BWMON_CFG_AHB_CLK				41
++#define GCC_NPU_CFG_AHB_CLK					42
++#define GCC_NPU_DMA_CLK						43
++#define GCC_NPU_GPLL0_CLK_SRC					44
++#define GCC_NPU_GPLL0_DIV_CLK_SRC				45
++#define GCC_PCIE0_PHY_REFGEN_CLK				46
++#define GCC_PCIE1_PHY_REFGEN_CLK				47
++#define GCC_PCIE2_PHY_REFGEN_CLK				48
++#define GCC_PCIE_0_AUX_CLK					49
++#define GCC_PCIE_0_AUX_CLK_SRC					50
++#define GCC_PCIE_0_CFG_AHB_CLK					51
++#define GCC_PCIE_0_MSTR_AXI_CLK					52
++#define GCC_PCIE_0_PIPE_CLK					53
++#define GCC_PCIE_0_SLV_AXI_CLK					54
++#define GCC_PCIE_0_SLV_Q2A_AXI_CLK				55
++#define GCC_PCIE_1_AUX_CLK					56
++#define GCC_PCIE_1_AUX_CLK_SRC					57
++#define GCC_PCIE_1_CFG_AHB_CLK					58
++#define GCC_PCIE_1_MSTR_AXI_CLK					59
++#define GCC_PCIE_1_PIPE_CLK					60
++#define GCC_PCIE_1_SLV_AXI_CLK					61
++#define GCC_PCIE_1_SLV_Q2A_AXI_CLK				62
++#define GCC_PCIE_2_AUX_CLK					63
++#define GCC_PCIE_2_AUX_CLK_SRC					64
++#define GCC_PCIE_2_CFG_AHB_CLK					65
++#define GCC_PCIE_2_MSTR_AXI_CLK					66
++#define GCC_PCIE_2_PIPE_CLK					67
++#define GCC_PCIE_2_SLV_AXI_CLK					68
++#define GCC_PCIE_2_SLV_Q2A_AXI_CLK				69
++#define GCC_PCIE_MDM_CLKREF_EN					70
++#define GCC_PCIE_PHY_AUX_CLK					71
++#define GCC_PCIE_PHY_REFGEN_CLK_SRC				72
++#define GCC_PCIE_WIFI_CLKREF_EN					73
++#define GCC_PCIE_WIGIG_CLKREF_EN				74
++#define GCC_PDM2_CLK						75
++#define GCC_PDM2_CLK_SRC					76
++#define GCC_PDM_AHB_CLK						77
++#define GCC_PDM_XO4_CLK						78
++#define GCC_PRNG_AHB_CLK					79
++#define GCC_QMIP_CAMERA_NRT_AHB_CLK				80
++#define GCC_QMIP_CAMERA_RT_AHB_CLK				81
++#define GCC_QMIP_DISP_AHB_CLK					82
++#define GCC_QMIP_VIDEO_CVP_AHB_CLK				83
++#define GCC_QMIP_VIDEO_VCODEC_AHB_CLK				84
++#define GCC_QUPV3_WRAP0_CORE_2X_CLK				85
++#define GCC_QUPV3_WRAP0_CORE_CLK				86
++#define GCC_QUPV3_WRAP0_S0_CLK					87
++#define GCC_QUPV3_WRAP0_S0_CLK_SRC				88
++#define GCC_QUPV3_WRAP0_S1_CLK					89
++#define GCC_QUPV3_WRAP0_S1_CLK_SRC				90
++#define GCC_QUPV3_WRAP0_S2_CLK					91
++#define GCC_QUPV3_WRAP0_S2_CLK_SRC				92
++#define GCC_QUPV3_WRAP0_S3_CLK					93
++#define GCC_QUPV3_WRAP0_S3_CLK_SRC				94
++#define GCC_QUPV3_WRAP0_S4_CLK					95
++#define GCC_QUPV3_WRAP0_S4_CLK_SRC				96
++#define GCC_QUPV3_WRAP0_S5_CLK					97
++#define GCC_QUPV3_WRAP0_S5_CLK_SRC				98
++#define GCC_QUPV3_WRAP0_S6_CLK					99
++#define GCC_QUPV3_WRAP0_S6_CLK_SRC				100
++#define GCC_QUPV3_WRAP0_S7_CLK					101
++#define GCC_QUPV3_WRAP0_S7_CLK_SRC				102
++#define GCC_QUPV3_WRAP1_CORE_2X_CLK				103
++#define GCC_QUPV3_WRAP1_CORE_CLK				104
++#define GCC_QUPV3_WRAP1_S0_CLK					105
++#define GCC_QUPV3_WRAP1_S0_CLK_SRC				106
++#define GCC_QUPV3_WRAP1_S1_CLK					107
++#define GCC_QUPV3_WRAP1_S1_CLK_SRC				108
++#define GCC_QUPV3_WRAP1_S2_CLK					109
++#define GCC_QUPV3_WRAP1_S2_CLK_SRC				110
++#define GCC_QUPV3_WRAP1_S3_CLK					111
++#define GCC_QUPV3_WRAP1_S3_CLK_SRC				112
++#define GCC_QUPV3_WRAP1_S4_CLK					113
++#define GCC_QUPV3_WRAP1_S4_CLK_SRC				114
++#define GCC_QUPV3_WRAP1_S5_CLK					115
++#define GCC_QUPV3_WRAP1_S5_CLK_SRC				116
++#define GCC_QUPV3_WRAP2_CORE_2X_CLK				117
++#define GCC_QUPV3_WRAP2_CORE_CLK				118
++#define GCC_QUPV3_WRAP2_S0_CLK					119
++#define GCC_QUPV3_WRAP2_S0_CLK_SRC				120
++#define GCC_QUPV3_WRAP2_S1_CLK					121
++#define GCC_QUPV3_WRAP2_S1_CLK_SRC				122
++#define GCC_QUPV3_WRAP2_S2_CLK					123
++#define GCC_QUPV3_WRAP2_S2_CLK_SRC				124
++#define GCC_QUPV3_WRAP2_S3_CLK					125
++#define GCC_QUPV3_WRAP2_S3_CLK_SRC				126
++#define GCC_QUPV3_WRAP2_S4_CLK					127
++#define GCC_QUPV3_WRAP2_S4_CLK_SRC				128
++#define GCC_QUPV3_WRAP2_S5_CLK					129
++#define GCC_QUPV3_WRAP2_S5_CLK_SRC				130
++#define GCC_QUPV3_WRAP_0_M_AHB_CLK				131
++#define GCC_QUPV3_WRAP_0_S_AHB_CLK				132
++#define GCC_QUPV3_WRAP_1_M_AHB_CLK				133
++#define GCC_QUPV3_WRAP_1_S_AHB_CLK				134
++#define GCC_QUPV3_WRAP_2_M_AHB_CLK				135
++#define GCC_QUPV3_WRAP_2_S_AHB_CLK				136
++#define GCC_SDCC2_AHB_CLK					137
++#define GCC_SDCC2_APPS_CLK					138
++#define GCC_SDCC2_APPS_CLK_SRC					139
++#define GCC_SDCC4_AHB_CLK					140
++#define GCC_SDCC4_APPS_CLK					141
++#define GCC_SDCC4_APPS_CLK_SRC					142
++#define GCC_SYS_NOC_CPUSS_AHB_CLK				143
++#define GCC_TSIF_AHB_CLK					144
++#define GCC_TSIF_INACTIVITY_TIMERS_CLK				145
++#define GCC_TSIF_REF_CLK					146
++#define GCC_TSIF_REF_CLK_SRC					147
++#define GCC_UFS_1X_CLKREF_EN					148
++#define GCC_UFS_CARD_AHB_CLK					149
++#define GCC_UFS_CARD_AXI_CLK					150
++#define GCC_UFS_CARD_AXI_CLK_SRC				151
++#define GCC_UFS_CARD_ICE_CORE_CLK				152
++#define GCC_UFS_CARD_ICE_CORE_CLK_SRC				153
++#define GCC_UFS_CARD_PHY_AUX_CLK				154
++#define GCC_UFS_CARD_PHY_AUX_CLK_SRC				155
++#define GCC_UFS_CARD_RX_SYMBOL_0_CLK				156
++#define GCC_UFS_CARD_RX_SYMBOL_1_CLK				157
++#define GCC_UFS_CARD_TX_SYMBOL_0_CLK				158
++#define GCC_UFS_CARD_UNIPRO_CORE_CLK				159
++#define GCC_UFS_CARD_UNIPRO_CORE_CLK_SRC			160
++#define GCC_UFS_PHY_AHB_CLK					161
++#define GCC_UFS_PHY_AXI_CLK					162
++#define GCC_UFS_PHY_AXI_CLK_SRC					163
++#define GCC_UFS_PHY_ICE_CORE_CLK				164
++#define GCC_UFS_PHY_ICE_CORE_CLK_SRC				165
++#define GCC_UFS_PHY_PHY_AUX_CLK					166
++#define GCC_UFS_PHY_PHY_AUX_CLK_SRC				167
++#define GCC_UFS_PHY_RX_SYMBOL_0_CLK				168
++#define GCC_UFS_PHY_RX_SYMBOL_1_CLK				169
++#define GCC_UFS_PHY_TX_SYMBOL_0_CLK				170
++#define GCC_UFS_PHY_UNIPRO_CORE_CLK				171
++#define GCC_UFS_PHY_UNIPRO_CORE_CLK_SRC				172
++#define GCC_USB30_PRIM_MASTER_CLK				173
++#define GCC_USB30_PRIM_MASTER_CLK_SRC				174
++#define GCC_USB30_PRIM_MOCK_UTMI_CLK				175
++#define GCC_USB30_PRIM_MOCK_UTMI_CLK_SRC			176
++#define GCC_USB30_PRIM_MOCK_UTMI_POSTDIV_CLK_SRC		177
++#define GCC_USB30_PRIM_SLEEP_CLK				178
++#define GCC_USB30_SEC_MASTER_CLK				179
++#define GCC_USB30_SEC_MASTER_CLK_SRC				180
++#define GCC_USB30_SEC_MOCK_UTMI_CLK				181
++#define GCC_USB30_SEC_MOCK_UTMI_CLK_SRC				182
++#define GCC_USB30_SEC_MOCK_UTMI_POSTDIV_CLK_SRC			183
++#define GCC_USB30_SEC_SLEEP_CLK					184
++#define GCC_USB3_PRIM_PHY_AUX_CLK				185
++#define GCC_USB3_PRIM_PHY_AUX_CLK_SRC				186
++#define GCC_USB3_PRIM_PHY_COM_AUX_CLK				187
++#define GCC_USB3_PRIM_PHY_PIPE_CLK				188
++#define GCC_USB3_PRIM_PHY_PIPE_CLK_SRC				189
++#define GCC_USB3_SEC_CLKREF_EN					190
++#define GCC_USB3_SEC_PHY_AUX_CLK				191
++#define GCC_USB3_SEC_PHY_AUX_CLK_SRC				192
++#define GCC_USB3_SEC_PHY_COM_AUX_CLK				193
++#define GCC_USB3_SEC_PHY_PIPE_CLK				194
++#define GCC_USB3_SEC_PHY_PIPE_CLK_SRC				195
++#define GCC_VIDEO_AHB_CLK					196
++#define GCC_VIDEO_AXI0_CLK					197
++#define GCC_VIDEO_AXI1_CLK					198
++#define GCC_VIDEO_XO_CLK					199
 +
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h
-new file mode 100644
-index 0000000000..a1c7d3d171
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h
-@@ -0,0 +1,31 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
++/* GCC resets */
++#define GCC_GPU_BCR						0
++#define GCC_MMSS_BCR						1
++#define GCC_NPU_BWMON_BCR					2
++#define GCC_NPU_BCR						3
++#define GCC_PCIE_0_BCR						4
++#define GCC_PCIE_0_LINK_DOWN_BCR				5
++#define GCC_PCIE_0_NOCSR_COM_PHY_BCR				6
++#define GCC_PCIE_0_PHY_BCR					7
++#define GCC_PCIE_0_PHY_NOCSR_COM_PHY_BCR			8
++#define GCC_PCIE_1_BCR						9
++#define GCC_PCIE_1_LINK_DOWN_BCR				10
++#define GCC_PCIE_1_NOCSR_COM_PHY_BCR				11
++#define GCC_PCIE_1_PHY_BCR					12
++#define GCC_PCIE_1_PHY_NOCSR_COM_PHY_BCR			13
++#define GCC_PCIE_2_BCR						14
++#define GCC_PCIE_2_LINK_DOWN_BCR				15
++#define GCC_PCIE_2_NOCSR_COM_PHY_BCR				16
++#define GCC_PCIE_2_PHY_BCR					17
++#define GCC_PCIE_2_PHY_NOCSR_COM_PHY_BCR			18
++#define GCC_PCIE_PHY_BCR					19
++#define GCC_PCIE_PHY_CFG_AHB_BCR				20
++#define GCC_PCIE_PHY_COM_BCR					21
++#define GCC_PDM_BCR						22
++#define GCC_PRNG_BCR						23
++#define GCC_QUPV3_WRAPPER_0_BCR					24
++#define GCC_QUPV3_WRAPPER_1_BCR					25
++#define GCC_QUPV3_WRAPPER_2_BCR					26
++#define GCC_QUSB2PHY_PRIM_BCR					27
++#define GCC_QUSB2PHY_SEC_BCR					28
++#define GCC_SDCC2_BCR						29
++#define GCC_SDCC4_BCR						30
++#define GCC_TSIF_BCR						31
++#define GCC_UFS_CARD_BCR					32
++#define GCC_UFS_PHY_BCR						33
++#define GCC_USB30_PRIM_BCR					34
++#define GCC_USB30_SEC_BCR					35
++#define GCC_USB3_DP_PHY_PRIM_BCR				36
++#define GCC_USB3_DP_PHY_SEC_BCR					37
++#define GCC_USB3_PHY_PRIM_BCR					38
++#define GCC_USB3_PHY_SEC_BCR					39
++#define GCC_USB3PHY_PHY_PRIM_BCR				40
++#define GCC_USB3PHY_PHY_SEC_BCR					41
++#define GCC_USB_PHY_CFG_AHB2PHY_BCR				42
++#define GCC_VIDEO_AXI0_CLK_ARES					43
++#define GCC_VIDEO_AXI1_CLK_ARES					44
 +
-+#ifndef QCOM_PHY_QMP_PCS_UFS_V4_H_
-+#define QCOM_PHY_QMP_PCS_UFS_V4_H_
-+
-+/* Only for QMP V4 PHY - UFS PCS registers */
-+#define QPHY_V4_PCS_UFS_PHY_START			0x000
-+#define QPHY_V4_PCS_UFS_POWER_DOWN_CONTROL		0x004
-+#define QPHY_V4_PCS_UFS_SW_RESET			0x008
-+#define QPHY_V4_PCS_UFS_TIMER_20US_CORECLK_STEPS_MSB	0x00c
-+#define QPHY_V4_PCS_UFS_TIMER_20US_CORECLK_STEPS_LSB	0x010
-+#define QPHY_V4_PCS_UFS_PLL_CNTL			0x02c
-+#define QPHY_V4_PCS_UFS_TX_LARGE_AMP_DRV_LVL		0x030
-+#define QPHY_V4_PCS_UFS_TX_SMALL_AMP_DRV_LVL		0x038
-+#define QPHY_V4_PCS_UFS_BIST_FIXED_PAT_CTRL		0x060
-+#define QPHY_V4_PCS_UFS_TX_HSGEAR_CAPABILITY		0x074
-+#define QPHY_V4_PCS_UFS_RX_HSGEAR_CAPABILITY		0x0b4
-+#define QPHY_V4_PCS_UFS_DEBUG_BUS_CLKSEL		0x124
-+#define QPHY_V4_PCS_UFS_LINECFG_DISABLE			0x148
-+#define QPHY_V4_PCS_UFS_RX_MIN_HIBERN8_TIME		0x150
-+#define QPHY_V4_PCS_UFS_RX_SIGDET_CTRL2			0x158
-+#define QPHY_V4_PCS_UFS_TX_PWM_GEAR_BAND		0x160
-+#define QPHY_V4_PCS_UFS_TX_HS_GEAR_BAND			0x168
-+#define QPHY_V4_PCS_UFS_READY_STATUS			0x180
-+#define QPHY_V4_PCS_UFS_TX_MID_TERM_CTRL1		0x1d8
-+#define QPHY_V4_PCS_UFS_MULTI_LANE_CTRL1		0x1e0
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h
-new file mode 100644
-index 0000000000..07959964fc
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h
-@@ -0,0 +1,32 @@
-+/* Only for QMP V5 PHY - UFS PCS registers */
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_PCS_UFS_V5_H_
-+#define QCOM_PHY_QMP_PCS_UFS_V5_H_
-+
-+/* Only for QMP V5 PHY - UFS PCS registers */
-+#define QPHY_V5_PCS_UFS_PHY_START			0x000
-+#define QPHY_V5_PCS_UFS_POWER_DOWN_CONTROL		0x004
-+#define QPHY_V5_PCS_UFS_SW_RESET			0x008
-+#define QPHY_V5_PCS_UFS_TIMER_20US_CORECLK_STEPS_MSB	0x00c
-+#define QPHY_V5_PCS_UFS_TIMER_20US_CORECLK_STEPS_LSB	0x010
-+#define QPHY_V5_PCS_UFS_PLL_CNTL			0x02c
-+#define QPHY_V5_PCS_UFS_TX_LARGE_AMP_DRV_LVL		0x030
-+#define QPHY_V5_PCS_UFS_TX_SMALL_AMP_DRV_LVL		0x038
-+#define QPHY_V5_PCS_UFS_BIST_FIXED_PAT_CTRL		0x060
-+#define QPHY_V5_PCS_UFS_TX_HSGEAR_CAPABILITY		0x074
-+#define QPHY_V5_PCS_UFS_RX_HSGEAR_CAPABILITY		0x0b4
-+#define QPHY_V5_PCS_UFS_DEBUG_BUS_CLKSEL		0x124
-+#define QPHY_V5_PCS_UFS_RX_MIN_HIBERN8_TIME		0x150
-+#define QPHY_V5_PCS_UFS_RX_SIGDET_CTRL1			0x154
-+#define QPHY_V5_PCS_UFS_RX_SIGDET_CTRL2			0x158
-+#define QPHY_V5_PCS_UFS_TX_PWM_GEAR_BAND		0x160
-+#define QPHY_V5_PCS_UFS_TX_HS_GEAR_BAND			0x168
-+#define QPHY_V5_PCS_UFS_READY_STATUS			0x180
-+#define QPHY_V5_PCS_UFS_TX_MID_TERM_CTRL1		0x1d8
-+#define QPHY_V5_PCS_UFS_MULTI_LANE_CTRL1		0x1e0
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h
-new file mode 100644
-index 0000000000..c23d5e41e2
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h
-@@ -0,0 +1,31 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2023, Linaro Limited
-+ */
-+
-+#ifndef QCOM_PHY_QMP_PCS_UFS_V6_H_
-+#define QCOM_PHY_QMP_PCS_UFS_V6_H_
-+
-+/* Only for QMP V6 PHY - UFS PCS registers */
-+#define QPHY_V6_PCS_UFS_PHY_START			0x000
-+#define QPHY_V6_PCS_UFS_POWER_DOWN_CONTROL		0x004
-+#define QPHY_V6_PCS_UFS_SW_RESET			0x008
-+#define QPHY_V6_PCS_UFS_TIMER_20US_CORECLK_STEPS_MSB	0x00c
-+#define QPHY_V6_PCS_UFS_TIMER_20US_CORECLK_STEPS_LSB	0x010
-+#define QPHY_V6_PCS_UFS_PLL_CNTL			0x02c
-+#define QPHY_V6_PCS_UFS_TX_LARGE_AMP_DRV_LVL		0x030
-+#define QPHY_V6_PCS_UFS_TX_SMALL_AMP_DRV_LVL		0x038
-+#define QPHY_V6_PCS_UFS_BIST_FIXED_PAT_CTRL		0x060
-+#define QPHY_V6_PCS_UFS_TX_HSGEAR_CAPABILITY		0x074
-+#define QPHY_V6_PCS_UFS_RX_HSGEAR_CAPABILITY		0x0bc
-+#define QPHY_V6_PCS_UFS_DEBUG_BUS_CLKSEL		0x158
-+#define QPHY_V6_PCS_UFS_LINECFG_DISABLE			0x17c
-+#define QPHY_V6_PCS_UFS_RX_MIN_HIBERN8_TIME		0x184
-+#define QPHY_V6_PCS_UFS_RX_SIGDET_CTRL2			0x18c
-+#define QPHY_V6_PCS_UFS_TX_PWM_GEAR_BAND		0x178
-+#define QPHY_V6_PCS_UFS_TX_HS_GEAR_BAND			0x174
-+#define QPHY_V6_PCS_UFS_READY_STATUS			0x1a8
-+#define QPHY_V6_PCS_UFS_TX_MID_TERM_CTRL1		0x1f4
-+#define QPHY_V6_PCS_UFS_MULTI_LANE_CTRL1		0x1fc
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h
-new file mode 100644
-index 0000000000..bf36399d00
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h
-@@ -0,0 +1,43 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_PCS_V2_H_
-+#define QCOM_PHY_QMP_PCS_V2_H_
-+
-+/* Only for QMP V2 PHY - PCS registers */
-+#define QPHY_V2_PCS_SW_RESET				0x000
-+#define QPHY_V2_PCS_POWER_DOWN_CONTROL			0x004
-+#define QPHY_V2_PCS_START_CONTROL			0x008
-+#define QPHY_V2_PCS_TXDEEMPH_M6DB_V0			0x024
-+#define QPHY_V2_PCS_TXDEEMPH_M3P5DB_V0			0x028
-+#define QPHY_V2_PCS_ENDPOINT_REFCLK_DRIVE		0x054
-+#define QPHY_V2_PCS_RX_IDLE_DTCT_CNTRL			0x058
-+#define QPHY_V2_PCS_POWER_STATE_CONFIG1			0x060
-+#define QPHY_V2_PCS_POWER_STATE_CONFIG2			0x064
-+#define QPHY_V2_PCS_POWER_STATE_CONFIG4			0x06c
-+#define QPHY_V2_PCS_LOCK_DETECT_CONFIG1			0x080
-+#define QPHY_V2_PCS_LOCK_DETECT_CONFIG2			0x084
-+#define QPHY_V2_PCS_LOCK_DETECT_CONFIG3			0x088
-+#define QPHY_V2_PCS_PWRUP_RESET_DLY_TIME_AUXCLK		0x0a0
-+#define QPHY_V2_PCS_LP_WAKEUP_DLY_TIME_AUXCLK		0x0a4
-+#define QPHY_V2_PCS_PLL_LOCK_CHK_DLY_TIME		0x0a8
-+#define QPHY_V2_PCS_FLL_CNTRL1				0x0c0
-+#define QPHY_V2_PCS_FLL_CNTRL2				0x0c4
-+#define QPHY_V2_PCS_FLL_CNT_VAL_L			0x0c8
-+#define QPHY_V2_PCS_FLL_CNT_VAL_H_TOL			0x0cc
-+#define QPHY_V2_PCS_FLL_MAN_CODE			0x0d0
-+#define QPHY_V2_PCS_AUTONOMOUS_MODE_CTRL		0x0d4
-+#define QPHY_V2_PCS_LFPS_RXTERM_IRQ_CLEAR		0x0d8
-+#define QPHY_V2_PCS_LFPS_RXTERM_IRQ_STATUS		0x178
-+#define QPHY_V2_PCS_USB_PCS_STATUS			0x17c /* USB */
-+#define QPHY_V2_PCS_PLL_LOCK_CHK_DLY_TIME_AUXCLK_LSB	0x1a8
-+#define QPHY_V2_PCS_OSC_DTCT_ACTIONS			0x1ac
-+#define QPHY_V2_PCS_RX_SIGDET_LVL			0x1d8
-+#define QPHY_V2_PCS_L1SS_WAKEUP_DLY_TIME_AUXCLK_LSB	0x1dc
-+#define QPHY_V2_PCS_L1SS_WAKEUP_DLY_TIME_AUXCLK_MSB	0x1e0
-+
-+#define QPHY_V2_PCS_PCI_PCS_STATUS			0x174 /* PCI */
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h
-new file mode 100644
-index 0000000000..10dbbb0062
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h
-@@ -0,0 +1,145 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_PCS_V3_H_
-+#define QCOM_PHY_QMP_PCS_V3_H_
-+
-+/* Only for QMP V3 PHY - PCS registers */
-+#define QPHY_V3_PCS_SW_RESET				0x000
-+#define QPHY_V3_PCS_POWER_DOWN_CONTROL			0x004
-+#define QPHY_V3_PCS_START_CONTROL			0x008
-+#define QPHY_V3_PCS_TXMGN_V0				0x00c
-+#define QPHY_V3_PCS_TXMGN_V1				0x010
-+#define QPHY_V3_PCS_TXMGN_V2				0x014
-+#define QPHY_V3_PCS_TXMGN_V3				0x018
-+#define QPHY_V3_PCS_TXMGN_V4				0x01c
-+#define QPHY_V3_PCS_TXMGN_LS				0x020
-+#define QPHY_V3_PCS_TXDEEMPH_M6DB_V0			0x024
-+#define QPHY_V3_PCS_TXDEEMPH_M3P5DB_V0			0x028
-+#define QPHY_V3_PCS_TXDEEMPH_M6DB_V1			0x02c
-+#define QPHY_V3_PCS_TXDEEMPH_M3P5DB_V1			0x030
-+#define QPHY_V3_PCS_TXDEEMPH_M6DB_V2			0x034
-+#define QPHY_V3_PCS_TXDEEMPH_M3P5DB_V2			0x038
-+#define QPHY_V3_PCS_TXDEEMPH_M6DB_V3			0x03c
-+#define QPHY_V3_PCS_TXDEEMPH_M3P5DB_V3			0x040
-+#define QPHY_V3_PCS_TXDEEMPH_M6DB_V4			0x044
-+#define QPHY_V3_PCS_TXDEEMPH_M3P5DB_V4			0x048
-+#define QPHY_V3_PCS_TXDEEMPH_M6DB_LS			0x04c
-+#define QPHY_V3_PCS_TXDEEMPH_M3P5DB_LS			0x050
-+#define QPHY_V3_PCS_ENDPOINT_REFCLK_DRIVE		0x054
-+#define QPHY_V3_PCS_RX_IDLE_DTCT_CNTRL			0x058
-+#define QPHY_V3_PCS_RATE_SLEW_CNTRL			0x05c
-+#define QPHY_V3_PCS_POWER_STATE_CONFIG1			0x060
-+#define QPHY_V3_PCS_POWER_STATE_CONFIG2			0x064
-+#define QPHY_V3_PCS_POWER_STATE_CONFIG3			0x068
-+#define QPHY_V3_PCS_POWER_STATE_CONFIG4			0x06c
-+#define QPHY_V3_PCS_RCVR_DTCT_DLY_P1U2_L		0x070
-+#define QPHY_V3_PCS_RCVR_DTCT_DLY_P1U2_H		0x074
-+#define QPHY_V3_PCS_RCVR_DTCT_DLY_U3_L			0x078
-+#define QPHY_V3_PCS_RCVR_DTCT_DLY_U3_H			0x07c
-+#define QPHY_V3_PCS_LOCK_DETECT_CONFIG1			0x080
-+#define QPHY_V3_PCS_LOCK_DETECT_CONFIG2			0x084
-+#define QPHY_V3_PCS_LOCK_DETECT_CONFIG3			0x088
-+#define QPHY_V3_PCS_TSYNC_RSYNC_TIME			0x08c
-+#define QPHY_V3_PCS_SIGDET_LOW_2_IDLE_TIME		0x090
-+#define QPHY_V3_PCS_BEACON_2_IDLE_TIME_L		0x094
-+#define QPHY_V3_PCS_BEACON_2_IDLE_TIME_H		0x098
-+#define QPHY_V3_PCS_PWRUP_RESET_DLY_TIME_SYSCLK		0x09c
-+#define QPHY_V3_PCS_PWRUP_RESET_DLY_TIME_AUXCLK		0x0a0
-+#define QPHY_V3_PCS_LP_WAKEUP_DLY_TIME_AUXCLK		0x0a4
-+#define QPHY_V3_PCS_PLL_LOCK_CHK_DLY_TIME		0x0a8
-+#define QPHY_V3_PCS_LFPS_DET_HIGH_COUNT_VAL		0x0ac
-+#define QPHY_V3_PCS_LFPS_TX_ECSTART_EQTLOCK		0x0b0
-+#define QPHY_V3_PCS_LFPS_TX_END_CNT_P2U3_START		0x0b4
-+#define QPHY_V3_PCS_RXEQTRAINING_WAIT_TIME		0x0b8
-+#define QPHY_V3_PCS_RXEQTRAINING_RUN_TIME		0x0bc
-+#define QPHY_V3_PCS_TXONESZEROS_RUN_LENGTH		0x0c0
-+#define QPHY_V3_PCS_FLL_CNTRL1				0x0c4
-+#define QPHY_V3_PCS_FLL_CNTRL2				0x0c8
-+#define QPHY_V3_PCS_FLL_CNT_VAL_L			0x0cc
-+#define QPHY_V3_PCS_FLL_CNT_VAL_H_TOL			0x0d0
-+#define QPHY_V3_PCS_FLL_MAN_CODE			0x0d4
-+#define QPHY_V3_PCS_AUTONOMOUS_MODE_CTRL		0x0d8
-+#define QPHY_V3_PCS_LFPS_RXTERM_IRQ_CLEAR		0x0dc
-+#define QPHY_V3_PCS_ARCVR_DTCT_EN_PERIOD		0x0e0
-+#define QPHY_V3_PCS_ARCVR_DTCT_CM_DLY			0x0e4
-+#define QPHY_V3_PCS_ALFPS_DEGLITCH_VAL			0x0e8
-+#define QPHY_V3_PCS_INSIG_SW_CTRL1			0x0ec
-+#define QPHY_V3_PCS_INSIG_SW_CTRL2			0x0f0
-+#define QPHY_V3_PCS_INSIG_SW_CTRL3			0x0f4
-+#define QPHY_V3_PCS_INSIG_MX_CTRL1			0x0f8
-+#define QPHY_V3_PCS_INSIG_MX_CTRL2			0x0fc
-+#define QPHY_V3_PCS_INSIG_MX_CTRL3			0x100
-+#define QPHY_V3_PCS_OUTSIG_SW_CTRL1			0x104
-+#define QPHY_V3_PCS_OUTSIG_MX_CTRL1			0x108
-+#define QPHY_V3_PCS_CLK_DEBUG_BYPASS_CTRL		0x10c
-+#define QPHY_V3_PCS_TEST_CONTROL			0x110
-+#define QPHY_V3_PCS_TEST_CONTROL2			0x114
-+#define QPHY_V3_PCS_TEST_CONTROL3			0x118
-+#define QPHY_V3_PCS_TEST_CONTROL4			0x11c
-+#define QPHY_V3_PCS_TEST_CONTROL5			0x120
-+#define QPHY_V3_PCS_TEST_CONTROL6			0x124
-+#define QPHY_V3_PCS_TEST_CONTROL7			0x128
-+#define QPHY_V3_PCS_COM_RESET_CONTROL			0x12c
-+#define QPHY_V3_PCS_BIST_CTRL				0x130
-+#define QPHY_V3_PCS_PRBS_POLY0				0x134
-+#define QPHY_V3_PCS_PRBS_POLY1				0x138
-+#define QPHY_V3_PCS_PRBS_SEED0				0x13c
-+#define QPHY_V3_PCS_PRBS_SEED1				0x140
-+#define QPHY_V3_PCS_FIXED_PAT_CTRL			0x144
-+#define QPHY_V3_PCS_FIXED_PAT0				0x148
-+#define QPHY_V3_PCS_FIXED_PAT1				0x14c
-+#define QPHY_V3_PCS_FIXED_PAT2				0x150
-+#define QPHY_V3_PCS_FIXED_PAT3				0x154
-+#define QPHY_V3_PCS_COM_CLK_SWITCH_CTRL			0x158
-+#define QPHY_V3_PCS_ELECIDLE_DLY_SEL			0x15c
-+#define QPHY_V3_PCS_SPARE1				0x160
-+#define QPHY_V3_PCS_BIST_CHK_ERR_CNT_L_STATUS		0x164
-+#define QPHY_V3_PCS_BIST_CHK_ERR_CNT_H_STATUS		0x168
-+#define QPHY_V3_PCS_BIST_CHK_STATUS			0x16c
-+#define QPHY_V3_PCS_LFPS_RXTERM_IRQ_SOURCE_STATUS	0x170
-+#define QPHY_V3_PCS_PCS_STATUS				0x174
-+#define QPHY_V3_PCS_PCS_STATUS2				0x178
-+#define QPHY_V3_PCS_PCS_STATUS3				0x17c
-+#define QPHY_V3_PCS_COM_RESET_STATUS			0x180
-+#define QPHY_V3_PCS_OSC_DTCT_STATUS			0x184
-+#define QPHY_V3_PCS_REVISION_ID0			0x188
-+#define QPHY_V3_PCS_REVISION_ID1			0x18c
-+#define QPHY_V3_PCS_REVISION_ID2			0x190
-+#define QPHY_V3_PCS_REVISION_ID3			0x194
-+#define QPHY_V3_PCS_DEBUG_BUS_0_STATUS			0x198
-+#define QPHY_V3_PCS_DEBUG_BUS_1_STATUS			0x19c
-+#define QPHY_V3_PCS_DEBUG_BUS_2_STATUS			0x1a0
-+#define QPHY_V3_PCS_DEBUG_BUS_3_STATUS			0x1a4
-+#define QPHY_V3_PCS_LP_WAKEUP_DLY_TIME_AUXCLK_MSB	0x1a8
-+#define QPHY_V3_PCS_OSC_DTCT_ACTIONS			0x1ac
-+#define QPHY_V3_PCS_SIGDET_CNTRL			0x1b0
-+#define QPHY_V3_PCS_IDAC_CAL_CNTRL			0x1b4
-+#define QPHY_V3_PCS_CMN_ACK_OUT_SEL			0x1b8
-+#define QPHY_V3_PCS_PLL_LOCK_CHK_DLY_TIME_SYSCLK	0x1bc
-+#define QPHY_V3_PCS_AUTONOMOUS_MODE_STATUS		0x1c0
-+#define QPHY_V3_PCS_ENDPOINT_REFCLK_CNTRL		0x1c4
-+#define QPHY_V3_PCS_EPCLK_PRE_PLL_LOCK_DLY_SYSCLK	0x1c8
-+#define QPHY_V3_PCS_EPCLK_PRE_PLL_LOCK_DLY_AUXCLK	0x1cc
-+#define QPHY_V3_PCS_EPCLK_DLY_COUNT_VAL_L		0x1d0
-+#define QPHY_V3_PCS_EPCLK_DLY_COUNT_VAL_H		0x1d4
-+#define QPHY_V3_PCS_RX_SIGDET_LVL			0x1d8
-+#define QPHY_V3_PCS_L1SS_WAKEUP_DLY_TIME_AUXCLK_LSB	0x1dc
-+#define QPHY_V3_PCS_L1SS_WAKEUP_DLY_TIME_AUXCLK_MSB	0x1e0
-+#define QPHY_V3_PCS_AUTONOMOUS_MODE_CTRL2		0x1e4
-+#define QPHY_V3_PCS_RXTERMINATION_DLY_SEL		0x1e8
-+#define QPHY_V3_PCS_LFPS_PER_TIMER_VAL			0x1ec
-+#define QPHY_V3_PCS_SIGDET_STARTUP_TIMER_VAL		0x1f0
-+#define QPHY_V3_PCS_LOCK_DETECT_CONFIG4			0x1f4
-+#define QPHY_V3_PCS_RX_SIGDET_DTCT_CNTRL		0x1f8
-+#define QPHY_V3_PCS_PCS_STATUS4				0x1fc
-+#define QPHY_V3_PCS_PCS_STATUS4_CLEAR			0x200
-+#define QPHY_V3_PCS_DEC_ERROR_COUNT_STATUS		0x204
-+#define QPHY_V3_PCS_COMMA_POS_STATUS			0x208
-+#define QPHY_V3_PCS_REFGEN_REQ_CONFIG1			0x20c
-+#define QPHY_V3_PCS_REFGEN_REQ_CONFIG2			0x210
-+#define QPHY_V3_PCS_REFGEN_REQ_CONFIG3			0x214
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h b/drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h
-new file mode 100644
-index 0000000000..a2c1eba2b6
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h
-@@ -0,0 +1,135 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_PCS_V4_H_
-+#define QCOM_PHY_QMP_PCS_V4_H_
-+
-+/* Only for QMP V4 PHY - USB/PCIe PCS registers */
-+#define QPHY_V4_PCS_SW_RESET				0x000
-+#define QPHY_V4_PCS_REVISION_ID0			0x004
-+#define QPHY_V4_PCS_REVISION_ID1			0x008
-+#define QPHY_V4_PCS_REVISION_ID2			0x00c
-+#define QPHY_V4_PCS_REVISION_ID3			0x010
-+#define QPHY_V4_PCS_PCS_STATUS1				0x014
-+#define QPHY_V4_PCS_PCS_STATUS2				0x018
-+#define QPHY_V4_PCS_PCS_STATUS3				0x01c
-+#define QPHY_V4_PCS_PCS_STATUS4				0x020
-+#define QPHY_V4_PCS_PCS_STATUS5				0x024
-+#define QPHY_V4_PCS_PCS_STATUS6				0x028
-+#define QPHY_V4_PCS_PCS_STATUS7				0x02c
-+#define QPHY_V4_PCS_DEBUG_BUS_0_STATUS			0x030
-+#define QPHY_V4_PCS_DEBUG_BUS_1_STATUS			0x034
-+#define QPHY_V4_PCS_DEBUG_BUS_2_STATUS			0x038
-+#define QPHY_V4_PCS_DEBUG_BUS_3_STATUS			0x03c
-+#define QPHY_V4_PCS_POWER_DOWN_CONTROL			0x040
-+#define QPHY_V4_PCS_START_CONTROL			0x044
-+#define QPHY_V4_PCS_INSIG_SW_CTRL1			0x048
-+#define QPHY_V4_PCS_INSIG_SW_CTRL2			0x04c
-+#define QPHY_V4_PCS_INSIG_SW_CTRL3			0x050
-+#define QPHY_V4_PCS_INSIG_SW_CTRL4			0x054
-+#define QPHY_V4_PCS_INSIG_SW_CTRL5			0x058
-+#define QPHY_V4_PCS_INSIG_SW_CTRL6			0x05c
-+#define QPHY_V4_PCS_INSIG_SW_CTRL7			0x060
-+#define QPHY_V4_PCS_INSIG_SW_CTRL8			0x064
-+#define QPHY_V4_PCS_INSIG_MX_CTRL1			0x068
-+#define QPHY_V4_PCS_INSIG_MX_CTRL2			0x06c
-+#define QPHY_V4_PCS_INSIG_MX_CTRL3			0x070
-+#define QPHY_V4_PCS_INSIG_MX_CTRL4			0x074
-+#define QPHY_V4_PCS_INSIG_MX_CTRL5			0x078
-+#define QPHY_V4_PCS_INSIG_MX_CTRL7			0x07c
-+#define QPHY_V4_PCS_INSIG_MX_CTRL8			0x080
-+#define QPHY_V4_PCS_OUTSIG_SW_CTRL1			0x084
-+#define QPHY_V4_PCS_OUTSIG_MX_CTRL1			0x088
-+#define QPHY_V4_PCS_CLAMP_ENABLE			0x08c
-+#define QPHY_V4_PCS_POWER_STATE_CONFIG1			0x090
-+#define QPHY_V4_PCS_POWER_STATE_CONFIG2			0x094
-+#define QPHY_V4_PCS_FLL_CNTRL1				0x098
-+#define QPHY_V4_PCS_FLL_CNTRL2				0x09c
-+#define QPHY_V4_PCS_FLL_CNT_VAL_L			0x0a0
-+#define QPHY_V4_PCS_FLL_CNT_VAL_H_TOL			0x0a4
-+#define QPHY_V4_PCS_FLL_MAN_CODE			0x0a8
-+#define QPHY_V4_PCS_TEST_CONTROL1			0x0ac
-+#define QPHY_V4_PCS_TEST_CONTROL2			0x0b0
-+#define QPHY_V4_PCS_TEST_CONTROL3			0x0b4
-+#define QPHY_V4_PCS_TEST_CONTROL4			0x0b8
-+#define QPHY_V4_PCS_TEST_CONTROL5			0x0bc
-+#define QPHY_V4_PCS_TEST_CONTROL6			0x0c0
-+#define QPHY_V4_PCS_LOCK_DETECT_CONFIG1			0x0c4
-+#define QPHY_V4_PCS_LOCK_DETECT_CONFIG2			0x0c8
-+#define QPHY_V4_PCS_LOCK_DETECT_CONFIG3			0x0cc
-+#define QPHY_V4_PCS_LOCK_DETECT_CONFIG4			0x0d0
-+#define QPHY_V4_PCS_LOCK_DETECT_CONFIG5			0x0d4
-+#define QPHY_V4_PCS_LOCK_DETECT_CONFIG6			0x0d8
-+#define QPHY_V4_PCS_REFGEN_REQ_CONFIG1			0x0dc
-+#define QPHY_V4_PCS_REFGEN_REQ_CONFIG2			0x0e0
-+#define QPHY_V4_PCS_REFGEN_REQ_CONFIG3			0x0e4
-+#define QPHY_V4_PCS_BIST_CTRL				0x0e8
-+#define QPHY_V4_PCS_PRBS_POLY0				0x0ec
-+#define QPHY_V4_PCS_PRBS_POLY1				0x0f0
-+#define QPHY_V4_PCS_FIXED_PAT0				0x0f4
-+#define QPHY_V4_PCS_FIXED_PAT1				0x0f8
-+#define QPHY_V4_PCS_FIXED_PAT2				0x0fc
-+#define QPHY_V4_PCS_FIXED_PAT3				0x100
-+#define QPHY_V4_PCS_FIXED_PAT4				0x104
-+#define QPHY_V4_PCS_FIXED_PAT5				0x108
-+#define QPHY_V4_PCS_FIXED_PAT6				0x10c
-+#define QPHY_V4_PCS_FIXED_PAT7				0x110
-+#define QPHY_V4_PCS_FIXED_PAT8				0x114
-+#define QPHY_V4_PCS_FIXED_PAT9				0x118
-+#define QPHY_V4_PCS_FIXED_PAT10				0x11c
-+#define QPHY_V4_PCS_FIXED_PAT11				0x120
-+#define QPHY_V4_PCS_FIXED_PAT12				0x124
-+#define QPHY_V4_PCS_FIXED_PAT13				0x128
-+#define QPHY_V4_PCS_FIXED_PAT14				0x12c
-+#define QPHY_V4_PCS_FIXED_PAT15				0x130
-+#define QPHY_V4_PCS_TXMGN_CONFIG			0x134
-+#define QPHY_V4_PCS_G12S1_TXMGN_V0			0x138
-+#define QPHY_V4_PCS_G12S1_TXMGN_V1			0x13c
-+#define QPHY_V4_PCS_G12S1_TXMGN_V2			0x140
-+#define QPHY_V4_PCS_G12S1_TXMGN_V3			0x144
-+#define QPHY_V4_PCS_G12S1_TXMGN_V4			0x148
-+#define QPHY_V4_PCS_G12S1_TXMGN_V0_RS			0x14c
-+#define QPHY_V4_PCS_G12S1_TXMGN_V1_RS			0x150
-+#define QPHY_V4_PCS_G12S1_TXMGN_V2_RS			0x154
-+#define QPHY_V4_PCS_G12S1_TXMGN_V3_RS			0x158
-+#define QPHY_V4_PCS_G12S1_TXMGN_V4_RS			0x15c
-+#define QPHY_V4_PCS_G3S2_TXMGN_MAIN			0x160
-+#define QPHY_V4_PCS_G3S2_TXMGN_MAIN_RS			0x164
-+#define QPHY_V4_PCS_G12S1_TXDEEMPH_M6DB			0x168
-+#define QPHY_V4_PCS_G12S1_TXDEEMPH_M3P5DB		0x16c
-+#define QPHY_V4_PCS_G3S2_PRE_GAIN			0x170
-+#define QPHY_V4_PCS_G3S2_POST_GAIN			0x174
-+#define QPHY_V4_PCS_G3S2_PRE_POST_OFFSET		0x178
-+#define QPHY_V4_PCS_G3S2_PRE_GAIN_RS			0x17c
-+#define QPHY_V4_PCS_G3S2_POST_GAIN_RS			0x180
-+#define QPHY_V4_PCS_G3S2_PRE_POST_OFFSET_RS		0x184
-+#define QPHY_V4_PCS_RX_SIGDET_LVL			0x188
-+#define QPHY_V4_PCS_RX_SIGDET_DTCT_CNTRL		0x18c
-+#define QPHY_V4_PCS_RCVR_DTCT_DLY_P1U2_L		0x190
-+#define QPHY_V4_PCS_RCVR_DTCT_DLY_P1U2_H		0x194
-+#define QPHY_V4_PCS_RATE_SLEW_CNTRL1			0x198
-+#define QPHY_V4_PCS_RATE_SLEW_CNTRL2			0x19c
-+#define QPHY_V4_PCS_PWRUP_RESET_DLY_TIME_AUXCLK		0x1a0
-+#define QPHY_V4_PCS_P2U3_WAKEUP_DLY_TIME_AUXCLK_L	0x1a4
-+#define QPHY_V4_PCS_P2U3_WAKEUP_DLY_TIME_AUXCLK_H	0x1a8
-+#define QPHY_V4_PCS_TSYNC_RSYNC_TIME			0x1ac
-+#define QPHY_V4_PCS_CDR_RESET_TIME			0x1b0
-+#define QPHY_V4_PCS_TSYNC_DLY_TIME			0x1b4
-+#define QPHY_V4_PCS_ELECIDLE_DLY_SEL			0x1b8
-+#define QPHY_V4_PCS_CMN_ACK_OUT_SEL			0x1bc
-+#define QPHY_V4_PCS_ALIGN_DETECT_CONFIG1		0x1c0
-+#define QPHY_V4_PCS_ALIGN_DETECT_CONFIG2		0x1c4
-+#define QPHY_V4_PCS_ALIGN_DETECT_CONFIG3		0x1c8
-+#define QPHY_V4_PCS_ALIGN_DETECT_CONFIG4		0x1cc
-+#define QPHY_V4_PCS_PCS_TX_RX_CONFIG			0x1d0
-+#define QPHY_V4_PCS_RX_IDLE_DTCT_CNTRL			0x1d4
-+#define QPHY_V4_PCS_RX_DCC_CAL_CONFIG			0x1d8
-+#define QPHY_V4_PCS_EQ_CONFIG1				0x1dc
-+#define QPHY_V4_PCS_EQ_CONFIG2				0x1e0
-+#define QPHY_V4_PCS_EQ_CONFIG3				0x1e4
-+#define QPHY_V4_PCS_EQ_CONFIG4				0x1e8
-+#define QPHY_V4_PCS_EQ_CONFIG5				0x1ec
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v3.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v3.h
-new file mode 100644
-index 0000000000..c0bd54e0e7
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v3.h
-@@ -0,0 +1,111 @@
-+
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_COM_V3_H_
-+#define QCOM_PHY_QMP_QSERDES_COM_V3_H_
-+
-+/* Only for QMP V3 PHY - QSERDES COM registers */
-+#define QSERDES_V3_COM_ATB_SEL1				0x000
-+#define QSERDES_V3_COM_ATB_SEL2				0x004
-+#define QSERDES_V3_COM_FREQ_UPDATE			0x008
-+#define QSERDES_V3_COM_BG_TIMER				0x00c
-+#define QSERDES_V3_COM_SSC_EN_CENTER			0x010
-+#define QSERDES_V3_COM_SSC_ADJ_PER1			0x014
-+#define QSERDES_V3_COM_SSC_ADJ_PER2			0x018
-+#define QSERDES_V3_COM_SSC_PER1				0x01c
-+#define QSERDES_V3_COM_SSC_PER2				0x020
-+#define QSERDES_V3_COM_SSC_STEP_SIZE1			0x024
-+#define QSERDES_V3_COM_SSC_STEP_SIZE2			0x028
-+#define QSERDES_V3_COM_POST_DIV				0x02c
-+#define QSERDES_V3_COM_POST_DIV_MUX			0x030
-+#define QSERDES_V3_COM_BIAS_EN_CLKBUFLR_EN		0x034
-+#define QSERDES_V3_COM_CLK_ENABLE1			0x038
-+#define QSERDES_V3_COM_SYS_CLK_CTRL			0x03c
-+#define QSERDES_V3_COM_SYSCLK_BUF_ENABLE		0x040
-+#define QSERDES_V3_COM_PLL_EN				0x044
-+#define QSERDES_V3_COM_PLL_IVCO				0x048
-+#define QSERDES_V3_COM_CMN_IETRIM			0x04c
-+#define QSERDES_V3_COM_CMN_IPTRIM			0x050
-+#define QSERDES_V3_COM_EP_CLOCK_DETECT_CTR		0x054
-+#define QSERDES_V3_COM_SYSCLK_DET_COMP_STATUS		0x058
-+#define QSERDES_V3_COM_CLK_EP_DIV			0x05c
-+#define QSERDES_V3_COM_CP_CTRL_MODE0			0x060
-+#define QSERDES_V3_COM_CP_CTRL_MODE1			0x064
-+#define QSERDES_V3_COM_PLL_RCTRL_MODE0			0x068
-+#define QSERDES_V3_COM_PLL_RCTRL_MODE1			0x06c
-+#define QSERDES_V3_COM_PLL_CCTRL_MODE0			0x070
-+#define QSERDES_V3_COM_PLL_CCTRL_MODE1			0x074
-+#define QSERDES_V3_COM_PLL_CNTRL			0x078
-+#define QSERDES_V3_COM_BIAS_EN_CTRL_BY_PSM		0x07c
-+#define QSERDES_V3_COM_SYSCLK_EN_SEL			0x080
-+#define QSERDES_V3_COM_CML_SYSCLK_SEL			0x084
-+#define QSERDES_V3_COM_RESETSM_CNTRL			0x088
-+#define QSERDES_V3_COM_RESETSM_CNTRL2			0x08c
-+#define QSERDES_V3_COM_LOCK_CMP_EN			0x090
-+#define QSERDES_V3_COM_LOCK_CMP_CFG			0x094
-+#define QSERDES_V3_COM_LOCK_CMP1_MODE0			0x098
-+#define QSERDES_V3_COM_LOCK_CMP2_MODE0			0x09c
-+#define QSERDES_V3_COM_LOCK_CMP3_MODE0			0x0a0
-+#define QSERDES_V3_COM_LOCK_CMP1_MODE1			0x0a4
-+#define QSERDES_V3_COM_LOCK_CMP2_MODE1			0x0a8
-+#define QSERDES_V3_COM_LOCK_CMP3_MODE1			0x0ac
-+#define QSERDES_V3_COM_DEC_START_MODE0			0x0b0
-+#define QSERDES_V3_COM_DEC_START_MODE1			0x0b4
-+#define QSERDES_V3_COM_DIV_FRAC_START1_MODE0		0x0b8
-+#define QSERDES_V3_COM_DIV_FRAC_START2_MODE0		0x0bc
-+#define QSERDES_V3_COM_DIV_FRAC_START3_MODE0		0x0c0
-+#define QSERDES_V3_COM_DIV_FRAC_START1_MODE1		0x0c4
-+#define QSERDES_V3_COM_DIV_FRAC_START2_MODE1		0x0c8
-+#define QSERDES_V3_COM_DIV_FRAC_START3_MODE1		0x0cc
-+#define QSERDES_V3_COM_INTEGLOOP_INITVAL		0x0d0
-+#define QSERDES_V3_COM_INTEGLOOP_EN			0x0d4
-+#define QSERDES_V3_COM_INTEGLOOP_GAIN0_MODE0		0x0d8
-+#define QSERDES_V3_COM_INTEGLOOP_GAIN1_MODE0		0x0dc
-+#define QSERDES_V3_COM_INTEGLOOP_GAIN0_MODE1		0x0e0
-+#define QSERDES_V3_COM_INTEGLOOP_GAIN1_MODE1		0x0e4
-+#define QSERDES_V3_COM_VCOCAL_DEADMAN_CTRL		0x0e8
-+#define QSERDES_V3_COM_VCO_TUNE_CTRL			0x0ec
-+#define QSERDES_V3_COM_VCO_TUNE_MAP			0x0f0
-+#define QSERDES_V3_COM_VCO_TUNE1_MODE0			0x0f4
-+#define QSERDES_V3_COM_VCO_TUNE2_MODE0			0x0f8
-+#define QSERDES_V3_COM_VCO_TUNE1_MODE1			0x0fc
-+#define QSERDES_V3_COM_VCO_TUNE2_MODE1			0x100
-+#define QSERDES_V3_COM_VCO_TUNE_INITVAL1		0x104
-+#define QSERDES_V3_COM_VCO_TUNE_INITVAL2		0x108
-+#define QSERDES_V3_COM_VCO_TUNE_MINVAL1			0x10c
-+#define QSERDES_V3_COM_VCO_TUNE_MINVAL2			0x110
-+#define QSERDES_V3_COM_VCO_TUNE_MAXVAL1			0x114
-+#define QSERDES_V3_COM_VCO_TUNE_MAXVAL2			0x118
-+#define QSERDES_V3_COM_VCO_TUNE_TIMER1			0x11c
-+#define QSERDES_V3_COM_VCO_TUNE_TIMER2			0x120
-+#define QSERDES_V3_COM_CMN_STATUS			0x124
-+#define QSERDES_V3_COM_RESET_SM_STATUS			0x128
-+#define QSERDES_V3_COM_RESTRIM_CODE_STATUS		0x12c
-+#define QSERDES_V3_COM_PLLCAL_CODE1_STATUS		0x130
-+#define QSERDES_V3_COM_PLLCAL_CODE2_STATUS		0x134
-+#define QSERDES_V3_COM_CLK_SELECT			0x138
-+#define QSERDES_V3_COM_HSCLK_SEL			0x13c
-+#define QSERDES_V3_COM_INTEGLOOP_BINCODE_STATUS		0x140
-+#define QSERDES_V3_COM_PLL_ANALOG			0x144
-+#define QSERDES_V3_COM_CORECLK_DIV_MODE0		0x148
-+#define QSERDES_V3_COM_CORECLK_DIV_MODE1		0x14c
-+#define QSERDES_V3_COM_SW_RESET				0x150
-+#define QSERDES_V3_COM_CORE_CLK_EN			0x154
-+#define QSERDES_V3_COM_C_READY_STATUS			0x158
-+#define QSERDES_V3_COM_CMN_CONFIG			0x15c
-+#define QSERDES_V3_COM_CMN_RATE_OVERRIDE		0x160
-+#define QSERDES_V3_COM_SVS_MODE_CLK_SEL			0x164
-+#define QSERDES_V3_COM_DEBUG_BUS0			0x168
-+#define QSERDES_V3_COM_DEBUG_BUS1			0x16c
-+#define QSERDES_V3_COM_DEBUG_BUS2			0x170
-+#define QSERDES_V3_COM_DEBUG_BUS3			0x174
-+#define QSERDES_V3_COM_DEBUG_BUS_SEL			0x178
-+#define QSERDES_V3_COM_CMN_MISC1			0x17c
-+#define QSERDES_V3_COM_CMN_MISC2			0x180
-+#define QSERDES_V3_COM_CMN_MODE				0x184
-+#define QSERDES_V3_COM_CMN_VREG_SEL			0x188
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v4.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v4.h
-new file mode 100644
-index 0000000000..b0e3298d99
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v4.h
-@@ -0,0 +1,123 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_COM_V4_H_
-+#define QCOM_PHY_QMP_QSERDES_COM_V4_H_
-+
-+/* Only for QMP V4 PHY - QSERDES COM registers */
-+#define QSERDES_V4_COM_ATB_SEL1				0x000
-+#define QSERDES_V4_COM_ATB_SEL2				0x004
-+#define QSERDES_V4_COM_FREQ_UPDATE			0x008
-+#define QSERDES_V4_COM_BG_TIMER				0x00c
-+#define QSERDES_V4_COM_SSC_EN_CENTER			0x010
-+#define QSERDES_V4_COM_SSC_ADJ_PER1			0x014
-+#define QSERDES_V4_COM_SSC_ADJ_PER2			0x018
-+#define QSERDES_V4_COM_SSC_PER1				0x01c
-+#define QSERDES_V4_COM_SSC_PER2				0x020
-+#define QSERDES_V4_COM_SSC_STEP_SIZE1_MODE0		0x024
-+#define QSERDES_V4_COM_SSC_STEP_SIZE2_MODE0		0x028
-+#define QSERDES_V4_COM_SSC_STEP_SIZE3_MODE0		0x02c
-+#define QSERDES_V4_COM_SSC_STEP_SIZE1_MODE1		0x030
-+#define QSERDES_V4_COM_SSC_STEP_SIZE2_MODE1		0x034
-+#define QSERDES_V4_COM_SSC_STEP_SIZE3_MODE1		0x038
-+#define QSERDES_V4_COM_POST_DIV				0x03c
-+#define QSERDES_V4_COM_POST_DIV_MUX			0x040
-+#define QSERDES_V4_COM_BIAS_EN_CLKBUFLR_EN		0x044
-+#define QSERDES_V4_COM_CLK_ENABLE1			0x048
-+#define QSERDES_V4_COM_SYS_CLK_CTRL			0x04c
-+#define QSERDES_V4_COM_SYSCLK_BUF_ENABLE		0x050
-+#define QSERDES_V4_COM_PLL_EN				0x054
-+#define QSERDES_V4_COM_PLL_IVCO				0x058
-+#define QSERDES_V4_COM_CMN_IETRIM			0x05c
-+#define QSERDES_V4_COM_CMN_IPTRIM			0x060
-+#define QSERDES_V4_COM_EP_CLOCK_DETECT_CTRL		0x064
-+#define QSERDES_V4_COM_SYSCLK_DET_COMP_STATUS		0x068
-+#define QSERDES_V4_COM_CLK_EP_DIV_MODE0			0x06c
-+#define QSERDES_V4_COM_CLK_EP_DIV_MODE1			0x070
-+#define QSERDES_V4_COM_CP_CTRL_MODE0			0x074
-+#define QSERDES_V4_COM_CP_CTRL_MODE1			0x078
-+#define QSERDES_V4_COM_PLL_RCTRL_MODE0			0x07c
-+#define QSERDES_V4_COM_PLL_RCTRL_MODE1			0x080
-+#define QSERDES_V4_COM_PLL_CCTRL_MODE0			0x084
-+#define QSERDES_V4_COM_PLL_CCTRL_MODE1			0x088
-+#define QSERDES_V4_COM_PLL_CNTRL			0x08c
-+#define QSERDES_V4_COM_BIAS_EN_CTRL_BY_PSM		0x090
-+#define QSERDES_V4_COM_SYSCLK_EN_SEL			0x094
-+#define QSERDES_V4_COM_CML_SYSCLK_SEL			0x098
-+#define QSERDES_V4_COM_RESETSM_CNTRL			0x09c
-+#define QSERDES_V4_COM_RESETSM_CNTRL2			0x0a0
-+#define QSERDES_V4_COM_LOCK_CMP_EN			0x0a4
-+#define QSERDES_V4_COM_LOCK_CMP_CFG			0x0a8
-+#define QSERDES_V4_COM_LOCK_CMP1_MODE0			0x0ac
-+#define QSERDES_V4_COM_LOCK_CMP2_MODE0			0x0b0
-+#define QSERDES_V4_COM_LOCK_CMP1_MODE1			0x0b4
-+#define QSERDES_V4_COM_LOCK_CMP2_MODE1			0x0b8
-+#define QSERDES_V4_COM_DEC_START_MODE0			0x0bc
-+#define QSERDES_V4_COM_DEC_START_MSB_MODE0		0x0c0
-+#define QSERDES_V4_COM_DEC_START_MODE1			0x0c4
-+#define QSERDES_V4_COM_DEC_START_MSB_MODE1		0x0c8
-+#define QSERDES_V4_COM_DIV_FRAC_START1_MODE0		0x0cc
-+#define QSERDES_V4_COM_DIV_FRAC_START2_MODE0		0x0d0
-+#define QSERDES_V4_COM_DIV_FRAC_START3_MODE0		0x0d4
-+#define QSERDES_V4_COM_DIV_FRAC_START1_MODE1		0x0d8
-+#define QSERDES_V4_COM_DIV_FRAC_START2_MODE1		0x0dc
-+#define QSERDES_V4_COM_DIV_FRAC_START3_MODE1		0x0e0
-+#define QSERDES_V4_COM_INTEGLOOP_INITVAL		0x0e4
-+#define QSERDES_V4_COM_INTEGLOOP_EN			0x0e8
-+#define QSERDES_V4_COM_INTEGLOOP_GAIN0_MODE0		0x0ec
-+#define QSERDES_V4_COM_INTEGLOOP_GAIN1_MODE0		0x0f0
-+#define QSERDES_V4_COM_INTEGLOOP_GAIN0_MODE1		0x0f4
-+#define QSERDES_V4_COM_INTEGLOOP_GAIN1_MODE1		0x0f8
-+#define QSERDES_V4_COM_INTEGLOOP_P_PATH_GAIN0		0x0fc
-+#define QSERDES_V4_COM_INTEGLOOP_P_PATH_GAIN1		0x100
-+#define QSERDES_V4_COM_VCOCAL_DEADMAN_CTRL		0x104
-+#define QSERDES_V4_COM_VCO_TUNE_CTRL			0x108
-+#define QSERDES_V4_COM_VCO_TUNE_MAP			0x10c
-+#define QSERDES_V4_COM_VCO_TUNE1_MODE0			0x110
-+#define QSERDES_V4_COM_VCO_TUNE2_MODE0			0x114
-+#define QSERDES_V4_COM_VCO_TUNE1_MODE1			0x118
-+#define QSERDES_V4_COM_VCO_TUNE2_MODE1			0x11c
-+#define QSERDES_V4_COM_VCO_TUNE_INITVAL1		0x120
-+#define QSERDES_V4_COM_VCO_TUNE_INITVAL2		0x124
-+#define QSERDES_V4_COM_VCO_TUNE_MINVAL1			0x128
-+#define QSERDES_V4_COM_VCO_TUNE_MINVAL2			0x12c
-+#define QSERDES_V4_COM_VCO_TUNE_MAXVAL1			0x130
-+#define QSERDES_V4_COM_VCO_TUNE_MAXVAL2			0x134
-+#define QSERDES_V4_COM_VCO_TUNE_TIMER1			0x138
-+#define QSERDES_V4_COM_VCO_TUNE_TIMER2			0x13c
-+#define QSERDES_V4_COM_CMN_STATUS			0x140
-+#define QSERDES_V4_COM_RESET_SM_STATUS			0x144
-+#define QSERDES_V4_COM_RESTRIM_CODE_STATUS		0x148
-+#define QSERDES_V4_COM_PLLCAL_CODE1_STATUS		0x14c
-+#define QSERDES_V4_COM_PLLCAL_CODE2_STATUS		0x150
-+#define QSERDES_V4_COM_CLK_SELECT			0x154
-+#define QSERDES_V4_COM_HSCLK_SEL			0x158
-+#define QSERDES_V4_COM_HSCLK_HS_SWITCH_SEL		0x15c
-+#define QSERDES_V4_COM_INTEGLOOP_BINCODE_STATUS		0x160
-+#define QSERDES_V4_COM_PLL_ANALOG			0x164
-+#define QSERDES_V4_COM_CORECLK_DIV_MODE0		0x168
-+#define QSERDES_V4_COM_CORECLK_DIV_MODE1		0x16c
-+#define QSERDES_V4_COM_SW_RESET				0x170
-+#define QSERDES_V4_COM_CORE_CLK_EN			0x174
-+#define QSERDES_V4_COM_C_READY_STATUS			0x178
-+#define QSERDES_V4_COM_CMN_CONFIG			0x17c
-+#define QSERDES_V4_COM_CMN_RATE_OVERRIDE		0x180
-+#define QSERDES_V4_COM_SVS_MODE_CLK_SEL			0x184
-+#define QSERDES_V4_COM_DEBUG_BUS0			0x188
-+#define QSERDES_V4_COM_DEBUG_BUS1			0x18c
-+#define QSERDES_V4_COM_DEBUG_BUS2			0x190
-+#define QSERDES_V4_COM_DEBUG_BUS3			0x194
-+#define QSERDES_V4_COM_DEBUG_BUS_SEL			0x198
-+#define QSERDES_V4_COM_CMN_MISC1			0x19c
-+#define QSERDES_V4_COM_CMN_MISC2			0x1a0
-+#define QSERDES_V4_COM_CMN_MODE				0x1a4
-+#define QSERDES_V4_COM_VCO_DC_LEVEL_CTRL		0x1a8
-+#define QSERDES_V4_COM_BIN_VCOCAL_CMP_CODE1_MODE0	0x1ac
-+#define QSERDES_V4_COM_BIN_VCOCAL_CMP_CODE2_MODE0	0x1b0
-+#define QSERDES_V4_COM_BIN_VCOCAL_CMP_CODE1_MODE1	0x1b4
-+#define QSERDES_V4_COM_BIN_VCOCAL_CMP_CODE2_MODE1	0x1b8
-+#define QSERDES_V4_COM_BIN_VCOCAL_HSCLK_SEL		0x1bc
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h
-new file mode 100644
-index 0000000000..7fa5363fee
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h
-@@ -0,0 +1,140 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_COM_H_
-+#define QCOM_PHY_QMP_QSERDES_COM_H_
-+
-+/* Only for QMP V2 PHY - QSERDES COM registers */
-+#define QSERDES_COM_ATB_SEL1				0x000
-+#define QSERDES_COM_ATB_SEL2				0x004
-+#define QSERDES_COM_FREQ_UPDATE				0x008
-+#define QSERDES_COM_BG_TIMER				0x00c
-+#define QSERDES_COM_SSC_EN_CENTER			0x010
-+#define QSERDES_COM_SSC_ADJ_PER1			0x014
-+#define QSERDES_COM_SSC_ADJ_PER2			0x018
-+#define QSERDES_COM_SSC_PER1				0x01c
-+#define QSERDES_COM_SSC_PER2				0x020
-+#define QSERDES_COM_SSC_STEP_SIZE1			0x024
-+#define QSERDES_COM_SSC_STEP_SIZE2			0x028
-+#define QSERDES_COM_POST_DIV				0x02c
-+#define QSERDES_COM_POST_DIV_MUX			0x030
-+#define QSERDES_COM_BIAS_EN_CLKBUFLR_EN			0x034
-+#define QSERDES_COM_CLK_ENABLE1				0x038
-+#define QSERDES_COM_SYS_CLK_CTRL			0x03c
-+#define QSERDES_COM_SYSCLK_BUF_ENABLE			0x040
-+#define QSERDES_COM_PLL_EN				0x044
-+#define QSERDES_COM_PLL_IVCO				0x048
-+#define QSERDES_COM_LOCK_CMP1_MODE0			0x04c
-+#define QSERDES_COM_LOCK_CMP2_MODE0			0x050
-+#define QSERDES_COM_LOCK_CMP3_MODE0			0x054
-+#define QSERDES_COM_LOCK_CMP1_MODE1			0x058
-+#define QSERDES_COM_LOCK_CMP2_MODE1			0x05c
-+#define QSERDES_COM_LOCK_CMP3_MODE1			0x060
-+#define QSERDES_COM_LOCK_CMP1_MODE2			0x064
-+#define QSERDES_COM_CMN_RSVD0				0x064
-+#define QSERDES_COM_LOCK_CMP2_MODE2			0x068
-+#define QSERDES_COM_EP_CLOCK_DETECT_CTRL		0x068
-+#define QSERDES_COM_LOCK_CMP3_MODE2			0x06c
-+#define QSERDES_COM_SYSCLK_DET_COMP_STATUS		0x06c
-+#define QSERDES_COM_BG_TRIM				0x070
-+#define QSERDES_COM_CLK_EP_DIV				0x074
-+#define QSERDES_COM_CP_CTRL_MODE0			0x078
-+#define QSERDES_COM_CP_CTRL_MODE1			0x07c
-+#define QSERDES_COM_CP_CTRL_MODE2			0x080
-+#define QSERDES_COM_CMN_RSVD1				0x080
-+#define QSERDES_COM_PLL_RCTRL_MODE0			0x084
-+#define QSERDES_COM_PLL_RCTRL_MODE1			0x088
-+#define QSERDES_COM_PLL_RCTRL_MODE2			0x08c
-+#define QSERDES_COM_CMN_RSVD2				0x08c
-+#define QSERDES_COM_PLL_CCTRL_MODE0			0x090
-+#define QSERDES_COM_PLL_CCTRL_MODE1			0x094
-+#define QSERDES_COM_PLL_CCTRL_MODE2			0x098
-+#define QSERDES_COM_CMN_RSVD3				0x098
-+#define QSERDES_COM_PLL_CNTRL				0x09c
-+#define QSERDES_COM_PHASE_SEL_CTRL			0x0a0
-+#define QSERDES_COM_PHASE_SEL_DC			0x0a4
-+#define QSERDES_COM_CORE_CLK_IN_SYNC_SEL		0x0a8
-+#define QSERDES_COM_BIAS_EN_CTRL_BY_PSM			0x0a8
-+#define QSERDES_COM_SYSCLK_EN_SEL			0x0ac
-+#define QSERDES_COM_CML_SYSCLK_SEL			0x0b0
-+#define QSERDES_COM_RESETSM_CNTRL			0x0b4
-+#define QSERDES_COM_RESETSM_CNTRL2			0x0b8
-+#define QSERDES_COM_RESTRIM_CTRL			0x0bc
-+#define QSERDES_COM_RESTRIM_CTRL2			0x0c0
-+#define QSERDES_COM_RESCODE_DIV_NUM			0x0c4
-+#define QSERDES_COM_LOCK_CMP_EN				0x0c8
-+#define QSERDES_COM_LOCK_CMP_CFG			0x0cc
-+#define QSERDES_COM_DEC_START_MODE0			0x0d0
-+#define QSERDES_COM_DEC_START_MODE1			0x0d4
-+#define QSERDES_COM_DEC_START_MODE2			0x0d8
-+#define QSERDES_COM_VCOCAL_DEADMAN_CTRL			0x0d8
-+#define QSERDES_COM_DIV_FRAC_START1_MODE0		0x0dc
-+#define QSERDES_COM_DIV_FRAC_START2_MODE0		0x0e0
-+#define QSERDES_COM_DIV_FRAC_START3_MODE0		0x0e4
-+#define QSERDES_COM_DIV_FRAC_START1_MODE1		0x0e8
-+#define QSERDES_COM_DIV_FRAC_START2_MODE1		0x0ec
-+#define QSERDES_COM_DIV_FRAC_START3_MODE1		0x0f0
-+#define QSERDES_COM_DIV_FRAC_START1_MODE2		0x0f4
-+#define QSERDES_COM_VCO_TUNE_MINVAL1			0x0f4
-+#define QSERDES_COM_DIV_FRAC_START2_MODE2		0x0f8
-+#define QSERDES_COM_VCO_TUNE_MINVAL2			0x0f8
-+#define QSERDES_COM_DIV_FRAC_START3_MODE2		0x0fc
-+#define QSERDES_COM_CMN_RSVD4				0x0fc
-+#define QSERDES_COM_INTEGLOOP_INITVAL			0x100
-+#define QSERDES_COM_INTEGLOOP_EN			0x104
-+#define QSERDES_COM_INTEGLOOP_GAIN0_MODE0		0x108
-+#define QSERDES_COM_INTEGLOOP_GAIN1_MODE0		0x10c
-+#define QSERDES_COM_INTEGLOOP_GAIN0_MODE1		0x110
-+#define QSERDES_COM_INTEGLOOP_GAIN1_MODE1		0x114
-+#define QSERDES_COM_INTEGLOOP_GAIN0_MODE2		0x118
-+#define QSERDES_COM_VCO_TUNE_MAXVAL1			0x118
-+#define QSERDES_COM_INTEGLOOP_GAIN1_MODE2		0x11c
-+#define QSERDES_COM_VCO_TUNE_MAXVAL2			0x11c
-+#define QSERDES_COM_RES_TRIM_CONTROL2			0x120
-+#define QSERDES_COM_VCO_TUNE_CTRL			0x124
-+#define QSERDES_COM_VCO_TUNE_MAP			0x128
-+#define QSERDES_COM_VCO_TUNE1_MODE0			0x12c
-+#define QSERDES_COM_VCO_TUNE2_MODE0			0x130
-+#define QSERDES_COM_VCO_TUNE1_MODE1			0x134
-+#define QSERDES_COM_VCO_TUNE2_MODE1			0x138
-+#define QSERDES_COM_VCO_TUNE1_MODE2			0x13c
-+#define QSERDES_COM_VCO_TUNE_INITVAL1			0x13c
-+#define QSERDES_COM_VCO_TUNE2_MODE2			0x140
-+#define QSERDES_COM_VCO_TUNE_INITVAL2			0x140
-+#define QSERDES_COM_VCO_TUNE_TIMER1			0x144
-+#define QSERDES_COM_VCO_TUNE_TIMER2			0x148
-+#define QSERDES_COM_SAR					0x14c
-+#define QSERDES_COM_SAR_CLK				0x150
-+#define QSERDES_COM_SAR_CODE_OUT_STATUS			0x154
-+#define QSERDES_COM_SAR_CODE_READY_STATUS		0x158
-+#define QSERDES_COM_CMN_STATUS				0x15c
-+#define QSERDES_COM_RESET_SM_STATUS			0x160
-+#define QSERDES_COM_RESTRIM_CODE_STATUS			0x164
-+#define QSERDES_COM_PLLCAL_CODE1_STATUS			0x168
-+#define QSERDES_COM_PLLCAL_CODE2_STATUS			0x16c
-+#define QSERDES_COM_BG_CTRL				0x170
-+#define QSERDES_COM_CLK_SELECT				0x174
-+#define QSERDES_COM_HSCLK_SEL				0x178
-+#define QSERDES_COM_INTEGLOOP_BINCODE_STATUS		0x17c
-+#define QSERDES_COM_PLL_ANALOG				0x180
-+#define QSERDES_COM_CORECLK_DIV				0x184
-+#define QSERDES_COM_SW_RESET				0x188
-+#define QSERDES_COM_CORE_CLK_EN				0x18c
-+#define QSERDES_COM_C_READY_STATUS			0x190
-+#define QSERDES_COM_CMN_CONFIG				0x194
-+#define QSERDES_COM_CMN_RATE_OVERRIDE			0x198
-+#define QSERDES_COM_SVS_MODE_CLK_SEL			0x19c
-+#define QSERDES_COM_DEBUG_BUS0				0x1a0
-+#define QSERDES_COM_DEBUG_BUS1				0x1a4
-+#define QSERDES_COM_DEBUG_BUS2				0x1a8
-+#define QSERDES_COM_DEBUG_BUS3				0x1ac
-+#define QSERDES_COM_DEBUG_BUS_SEL			0x1b0
-+#define QSERDES_COM_CMN_MISC1				0x1b4
-+#define QSERDES_COM_CMN_MISC2				0x1b8
-+#define QSERDES_COM_CORECLK_DIV_MODE1			0x1bc
-+#define QSERDES_COM_CORECLK_DIV_MODE2			0x1c0
-+#define QSERDES_COM_CMN_RSVD5				0x1c4
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h
-new file mode 100644
-index 0000000000..ad326e301a
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h
-@@ -0,0 +1,66 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_PLL_H_
-+#define QCOM_PHY_QMP_QSERDES_PLL_H_
-+
-+/* QMP V2 PHY for PCIE gen3 ports - QSERDES PLL registers */
-+#define QSERDES_PLL_BG_TIMER				0x00c
-+#define QSERDES_PLL_SSC_PER1				0x01c
-+#define QSERDES_PLL_SSC_PER2				0x020
-+#define QSERDES_PLL_SSC_STEP_SIZE1_MODE0		0x024
-+#define QSERDES_PLL_SSC_STEP_SIZE2_MODE0		0x028
-+#define QSERDES_PLL_SSC_STEP_SIZE1_MODE1		0x02c
-+#define QSERDES_PLL_SSC_STEP_SIZE2_MODE1		0x030
-+#define QSERDES_PLL_BIAS_EN_CLKBUFLR_EN			0x03c
-+#define QSERDES_PLL_CLK_ENABLE1				0x040
-+#define QSERDES_PLL_SYS_CLK_CTRL			0x044
-+#define QSERDES_PLL_SYSCLK_BUF_ENABLE			0x048
-+#define QSERDES_PLL_PLL_IVCO				0x050
-+#define QSERDES_PLL_LOCK_CMP1_MODE0			0x054
-+#define QSERDES_PLL_LOCK_CMP2_MODE0			0x058
-+#define QSERDES_PLL_LOCK_CMP1_MODE1			0x060
-+#define QSERDES_PLL_LOCK_CMP2_MODE1			0x064
-+#define QSERDES_PLL_BG_TRIM				0x074
-+#define QSERDES_PLL_CLK_EP_DIV_MODE0			0x078
-+#define QSERDES_PLL_CLK_EP_DIV_MODE1			0x07c
-+#define QSERDES_PLL_CP_CTRL_MODE0			0x080
-+#define QSERDES_PLL_CP_CTRL_MODE1			0x084
-+#define QSERDES_PLL_PLL_RCTRL_MODE0			0x088
-+#define QSERDES_PLL_PLL_RCTRL_MODE1			0x08c
-+#define QSERDES_PLL_PLL_CCTRL_MODE0			0x090
-+#define QSERDES_PLL_PLL_CCTRL_MODE1			0x094
-+#define QSERDES_PLL_BIAS_EN_CTRL_BY_PSM			0x0a4
-+#define QSERDES_PLL_SYSCLK_EN_SEL			0x0a8
-+#define QSERDES_PLL_RESETSM_CNTRL			0x0b0
-+#define QSERDES_PLL_LOCK_CMP_EN				0x0c4
-+#define QSERDES_PLL_DEC_START_MODE0			0x0cc
-+#define QSERDES_PLL_DEC_START_MODE1			0x0d0
-+#define QSERDES_PLL_DIV_FRAC_START1_MODE0		0x0d8
-+#define QSERDES_PLL_DIV_FRAC_START2_MODE0		0x0dc
-+#define QSERDES_PLL_DIV_FRAC_START3_MODE0		0x0e0
-+#define QSERDES_PLL_DIV_FRAC_START1_MODE1		0x0e4
-+#define QSERDES_PLL_DIV_FRAC_START2_MODE1		0x0e8
-+#define QSERDES_PLL_DIV_FRAC_START3_MODE1		0x0ec
-+#define QSERDES_PLL_INTEGLOOP_GAIN0_MODE0		0x100
-+#define QSERDES_PLL_INTEGLOOP_GAIN1_MODE0		0x104
-+#define QSERDES_PLL_INTEGLOOP_GAIN0_MODE1		0x108
-+#define QSERDES_PLL_INTEGLOOP_GAIN1_MODE1		0x10c
-+#define QSERDES_PLL_VCO_TUNE_MAP			0x120
-+#define QSERDES_PLL_VCO_TUNE1_MODE0			0x124
-+#define QSERDES_PLL_VCO_TUNE2_MODE0			0x128
-+#define QSERDES_PLL_VCO_TUNE1_MODE1			0x12c
-+#define QSERDES_PLL_VCO_TUNE2_MODE1			0x130
-+#define QSERDES_PLL_VCO_TUNE_TIMER1			0x13c
-+#define QSERDES_PLL_VCO_TUNE_TIMER2			0x140
-+#define QSERDES_PLL_CLK_SELECT				0x16c
-+#define QSERDES_PLL_HSCLK_SEL				0x170
-+#define QSERDES_PLL_CORECLK_DIV				0x17c
-+#define QSERDES_PLL_CORE_CLK_EN				0x184
-+#define QSERDES_PLL_CMN_CONFIG				0x18c
-+#define QSERDES_PLL_SVS_MODE_CLK_SEL			0x194
-+#define QSERDES_PLL_CORECLK_DIV_MODE1			0x1b4
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h
-new file mode 100644
-index 0000000000..15bcb4ba91
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h
-@@ -0,0 +1,30 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2023, Linaro Limited
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_TXRX_UFS_V6_H_
-+#define QCOM_PHY_QMP_QSERDES_TXRX_UFS_V6_H_
-+
-+#define QSERDES_UFS_V6_TX_RES_CODE_LANE_TX			0x28
-+#define QSERDES_UFS_V6_TX_RES_CODE_LANE_RX			0x2c
-+#define QSERDES_UFS_V6_TX_RES_CODE_LANE_OFFSET_TX		0x30
-+#define QSERDES_UFS_V6_TX_RES_CODE_LANE_OFFSET_RX		0x34
-+
-+#define QSERDES_UFS_V6_RX_UCDR_FASTLOCK_FO_GAIN_RATE2		0x08
-+#define QSERDES_UFS_V6_RX_UCDR_FASTLOCK_FO_GAIN_RATE4		0x10
-+#define QSERDES_UFS_V6_RX_VGA_CAL_MAN_VAL			0x178
-+#define QSERDES_UFS_V6_RX_MODE_RATE_0_1_B0			0x208
-+#define QSERDES_UFS_V6_RX_MODE_RATE_0_1_B1			0x20c
-+#define QSERDES_UFS_V6_RX_MODE_RATE_0_1_B3			0x214
-+#define QSERDES_UFS_V6_RX_MODE_RATE_0_1_B6			0x220
-+#define QSERDES_UFS_V6_RX_MODE_RATE2_B3				0x238
-+#define QSERDES_UFS_V6_RX_MODE_RATE2_B6				0x244
-+#define QSERDES_UFS_V6_RX_MODE_RATE3_B3				0x25c
-+#define QSERDES_UFS_V6_RX_MODE_RATE3_B4				0x260
-+#define QSERDES_UFS_V6_RX_MODE_RATE3_B5				0x264
-+#define QSERDES_UFS_V6_RX_MODE_RATE3_B8				0x270
-+#define QSERDES_UFS_V6_RX_MODE_RATE4_B3				0x280
-+#define QSERDES_UFS_V6_RX_MODE_RATE4_B6				0x28c
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h
-new file mode 100644
-index 0000000000..161e6df30e
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h
-@@ -0,0 +1,68 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_TXRX_V3_H_
-+#define QCOM_PHY_QMP_QSERDES_TXRX_V3_H_
-+
-+/* Only for QMP V3 PHY - TX registers */
-+#define QSERDES_V3_TX_BIST_MODE_LANENO			0x000
-+#define QSERDES_V3_TX_CLKBUF_ENABLE			0x008
-+#define QSERDES_V3_TX_TX_EMP_POST1_LVL			0x00c
-+#define QSERDES_V3_TX_TX_DRV_LVL			0x01c
-+#define QSERDES_V3_TX_RESET_TSYNC_EN			0x024
-+#define QSERDES_V3_TX_PRE_STALL_LDO_BOOST_EN		0x028
-+#define QSERDES_V3_TX_TX_BAND				0x02c
-+#define QSERDES_V3_TX_SLEW_CNTL				0x030
-+#define QSERDES_V3_TX_INTERFACE_SELECT			0x034
-+#define QSERDES_V3_TX_RES_CODE_LANE_TX			0x03c
-+#define QSERDES_V3_TX_RES_CODE_LANE_RX			0x040
-+#define QSERDES_V3_TX_RES_CODE_LANE_OFFSET_TX		0x044
-+#define QSERDES_V3_TX_RES_CODE_LANE_OFFSET_RX		0x048
-+#define QSERDES_V3_TX_DEBUG_BUS_SEL			0x058
-+#define QSERDES_V3_TX_TRANSCEIVER_BIAS_EN		0x05c
-+#define QSERDES_V3_TX_HIGHZ_DRVR_EN			0x060
-+#define QSERDES_V3_TX_TX_POL_INV			0x064
-+#define QSERDES_V3_TX_PARRATE_REC_DETECT_IDLE_EN	0x068
-+#define QSERDES_V3_TX_LANE_MODE_1			0x08c
-+#define QSERDES_V3_TX_LANE_MODE_2			0x090
-+#define QSERDES_V3_TX_LANE_MODE_3			0x094
-+#define QSERDES_V3_TX_RCV_DETECT_LVL_2			0x0a4
-+#define QSERDES_V3_TX_TRAN_DRVR_EMP_EN			0x0c0
-+#define QSERDES_V3_TX_TX_INTERFACE_MODE			0x0c4
-+#define QSERDES_V3_TX_VMODE_CTRL1			0x0f0
-+
-+/* Only for QMP V3 PHY - RX registers */
-+#define QSERDES_V3_RX_UCDR_FO_GAIN			0x008
-+#define QSERDES_V3_RX_UCDR_SO_GAIN_HALF			0x00c
-+#define QSERDES_V3_RX_UCDR_SO_GAIN			0x014
-+#define QSERDES_V3_RX_UCDR_SVS_SO_GAIN_HALF		0x024
-+#define QSERDES_V3_RX_UCDR_SVS_SO_GAIN_QUARTER		0x028
-+#define QSERDES_V3_RX_UCDR_SVS_SO_GAIN			0x02c
-+#define QSERDES_V3_RX_UCDR_FASTLOCK_FO_GAIN		0x030
-+#define QSERDES_V3_RX_UCDR_SO_SATURATION_AND_ENABLE	0x034
-+#define QSERDES_V3_RX_UCDR_FASTLOCK_COUNT_LOW		0x03c
-+#define QSERDES_V3_RX_UCDR_FASTLOCK_COUNT_HIGH		0x040
-+#define QSERDES_V3_RX_UCDR_PI_CONTROLS			0x044
-+#define QSERDES_V3_RX_RX_TERM_BW			0x07c
-+#define QSERDES_V3_RX_VGA_CAL_CNTRL1			0x0bc
-+#define QSERDES_V3_RX_VGA_CAL_CNTRL2			0x0c0
-+#define QSERDES_V3_RX_RX_EQ_GAIN2_LSB			0x0c8
-+#define QSERDES_V3_RX_RX_EQ_GAIN2_MSB			0x0cc
-+#define QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL1		0x0d0
-+#define QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL2		0x0d4
-+#define QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL3		0x0d8
-+#define QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL4		0x0dc
-+#define QSERDES_V3_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1	0x0f8
-+#define QSERDES_V3_RX_RX_OFFSET_ADAPTOR_CNTRL2		0x0fc
-+#define QSERDES_V3_RX_SIGDET_ENABLES			0x100
-+#define QSERDES_V3_RX_SIGDET_CNTRL			0x104
-+#define QSERDES_V3_RX_SIGDET_LVL			0x108
-+#define QSERDES_V3_RX_SIGDET_DEGLITCH_CNTRL		0x10c
-+#define QSERDES_V3_RX_RX_BAND				0x110
-+#define QSERDES_V3_RX_RX_INTERFACE_MODE			0x11c
-+#define QSERDES_V3_RX_RX_MODE_00			0x164
-+#define QSERDES_V3_RX_RX_MODE_01			0x168
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h
-new file mode 100644
-index 0000000000..6ee3bec9ac
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h
-@@ -0,0 +1,233 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_TXRX_V4_H_
-+#define QCOM_PHY_QMP_QSERDES_TXRX_V4_H_
-+
-+/* Only for QMP V4 PHY - TX registers */
-+#define QSERDES_V4_TX_BIST_MODE_LANENO			0x000
-+#define QSERDES_V4_TX_BIST_INVERT			0x004
-+#define QSERDES_V4_TX_CLKBUF_ENABLE			0x008
-+#define QSERDES_V4_TX_TX_EMP_POST1_LVL			0x00c
-+#define QSERDES_V4_TX_TX_IDLE_LVL_LARGE_AMP		0x010
-+#define QSERDES_V4_TX_TX_DRV_LVL			0x014
-+#define QSERDES_V4_TX_TX_DRV_LVL_OFFSET			0x018
-+#define QSERDES_V4_TX_RESET_TSYNC_EN			0x01c
-+#define QSERDES_V4_TX_PRE_STALL_LDO_BOOST_EN		0x020
-+#define QSERDES_V4_TX_TX_BAND				0x024
-+#define QSERDES_V4_TX_SLEW_CNTL				0x028
-+#define QSERDES_V4_TX_INTERFACE_SELECT			0x02c
-+#define QSERDES_V4_TX_LPB_EN				0x030
-+#define QSERDES_V4_TX_RES_CODE_LANE_TX			0x034
-+#define QSERDES_V4_TX_RES_CODE_LANE_RX			0x038
-+#define QSERDES_V4_TX_RES_CODE_LANE_OFFSET_TX		0x03c
-+#define QSERDES_V4_TX_RES_CODE_LANE_OFFSET_RX		0x040
-+#define QSERDES_V4_TX_PERL_LENGTH1			0x044
-+#define QSERDES_V4_TX_PERL_LENGTH2			0x048
-+#define QSERDES_V4_TX_SERDES_BYP_EN_OUT			0x04c
-+#define QSERDES_V4_TX_DEBUG_BUS_SEL			0x050
-+#define QSERDES_V4_TX_TRANSCEIVER_BIAS_EN		0x054
-+#define QSERDES_V4_TX_HIGHZ_DRVR_EN			0x058
-+#define QSERDES_V4_TX_TX_POL_INV			0x05c
-+#define QSERDES_V4_TX_PARRATE_REC_DETECT_IDLE_EN	0x060
-+#define QSERDES_V4_TX_BIST_PATTERN1			0x064
-+#define QSERDES_V4_TX_BIST_PATTERN2			0x068
-+#define QSERDES_V4_TX_BIST_PATTERN3			0x06c
-+#define QSERDES_V4_TX_BIST_PATTERN4			0x070
-+#define QSERDES_V4_TX_BIST_PATTERN5			0x074
-+#define QSERDES_V4_TX_BIST_PATTERN6			0x078
-+#define QSERDES_V4_TX_BIST_PATTERN7			0x07c
-+#define QSERDES_V4_TX_BIST_PATTERN8			0x080
-+#define QSERDES_V4_TX_LANE_MODE_1			0x084
-+#define QSERDES_V4_TX_LANE_MODE_2			0x088
-+#define QSERDES_V4_TX_LANE_MODE_3			0x08c
-+#define QSERDES_V4_TX_ATB_SEL1				0x090
-+#define QSERDES_V4_TX_ATB_SEL2				0x094
-+#define QSERDES_V4_TX_RCV_DETECT_LVL			0x098
-+#define QSERDES_V4_TX_RCV_DETECT_LVL_2			0x09c
-+#define QSERDES_V4_TX_PRBS_SEED1			0x0a0
-+#define QSERDES_V4_TX_PRBS_SEED2			0x0a4
-+#define QSERDES_V4_TX_PRBS_SEED3			0x0a8
-+#define QSERDES_V4_TX_PRBS_SEED4			0x0ac
-+#define QSERDES_V4_TX_RESET_GEN				0x0b0
-+#define QSERDES_V4_TX_RESET_GEN_MUXES			0x0b4
-+#define QSERDES_V4_TX_TRAN_DRVR_EMP_EN			0x0b8
-+#define QSERDES_V4_TX_TX_INTERFACE_MODE			0x0bc
-+#define QSERDES_V4_TX_PWM_CTRL				0x0c0
-+#define QSERDES_V4_TX_PWM_ENCODED_OR_DATA		0x0c4
-+#define QSERDES_V4_TX_PWM_GEAR_1_DIVIDER_BAND2		0x0c8
-+#define QSERDES_V4_TX_PWM_GEAR_2_DIVIDER_BAND2		0x0cc
-+#define QSERDES_V4_TX_PWM_GEAR_3_DIVIDER_BAND2		0x0d0
-+#define QSERDES_V4_TX_PWM_GEAR_4_DIVIDER_BAND2		0x0d4
-+#define QSERDES_V4_TX_PWM_GEAR_1_DIVIDER_BAND0_1	0x0d8
-+#define QSERDES_V4_TX_PWM_GEAR_2_DIVIDER_BAND0_1	0x0dc
-+#define QSERDES_V4_TX_PWM_GEAR_3_DIVIDER_BAND0_1	0x0e0
-+#define QSERDES_V4_TX_PWM_GEAR_4_DIVIDER_BAND0_1	0x0e4
-+#define QSERDES_V4_TX_VMODE_CTRL1			0x0e8
-+#define QSERDES_V4_TX_ALOG_OBSV_BUS_CTRL_1		0x0ec
-+#define QSERDES_V4_TX_BIST_STATUS			0x0f0
-+#define QSERDES_V4_TX_BIST_ERROR_COUNT1			0x0f4
-+#define QSERDES_V4_TX_BIST_ERROR_COUNT2			0x0f8
-+#define QSERDES_V4_TX_ALOG_OBSV_BUS_STATUS_1		0x0fc
-+#define QSERDES_V4_TX_LANE_DIG_CONFIG			0x100
-+#define QSERDES_V4_TX_PI_QEC_CTRL			0x104
-+#define QSERDES_V4_TX_PRE_EMPH				0x108
-+#define QSERDES_V4_TX_SW_RESET				0x10c
-+#define QSERDES_V4_TX_DCC_OFFSET			0x110
-+#define QSERDES_V4_TX_DIG_BKUP_CTRL			0x114
-+#define QSERDES_V4_TX_DEBUG_BUS0			0x118
-+#define QSERDES_V4_TX_DEBUG_BUS1			0x11c
-+#define QSERDES_V4_TX_DEBUG_BUS2			0x120
-+#define QSERDES_V4_TX_DEBUG_BUS3			0x124
-+#define QSERDES_V4_TX_READ_EQCODE			0x128
-+#define QSERDES_V4_TX_READ_OFFSETCODE			0x12c
-+#define QSERDES_V4_TX_IA_ERROR_COUNTER_LOW		0x130
-+#define QSERDES_V4_TX_IA_ERROR_COUNTER_HIGH		0x134
-+#define QSERDES_V4_TX_VGA_READ_CODE			0x138
-+#define QSERDES_V4_TX_VTH_READ_CODE			0x13c
-+#define QSERDES_V4_TX_DFE_TAP1_READ_CODE		0x140
-+#define QSERDES_V4_TX_DFE_TAP2_READ_CODE		0x144
-+#define QSERDES_V4_TX_IDAC_STATUS_I			0x148
-+#define QSERDES_V4_TX_IDAC_STATUS_IBAR			0x14c
-+#define QSERDES_V4_TX_IDAC_STATUS_Q			0x150
-+#define QSERDES_V4_TX_IDAC_STATUS_QBAR			0x154
-+#define QSERDES_V4_TX_IDAC_STATUS_A			0x158
-+#define QSERDES_V4_TX_IDAC_STATUS_ABAR			0x15c
-+#define QSERDES_V4_TX_IDAC_STATUS_SM_ON			0x160
-+#define QSERDES_V4_TX_IDAC_STATUS_CAL_DONE		0x164
-+#define QSERDES_V4_TX_IDAC_STATUS_SIGNERROR		0x168
-+#define QSERDES_V4_TX_DCC_CAL_STATUS			0x16c
-+
-+/* Only for QMP V4 PHY - RX registers */
-+#define QSERDES_V4_RX_UCDR_FO_GAIN_HALF			0x000
-+#define QSERDES_V4_RX_UCDR_FO_GAIN_QUARTER		0x004
-+#define QSERDES_V4_RX_UCDR_FO_GAIN			0x008
-+#define QSERDES_V4_RX_UCDR_SO_GAIN_HALF			0x00c
-+#define QSERDES_V4_RX_UCDR_SO_GAIN_QUARTER		0x010
-+#define QSERDES_V4_RX_UCDR_SO_GAIN			0x014
-+#define QSERDES_V4_RX_UCDR_SVS_FO_GAIN_HALF		0x018
-+#define QSERDES_V4_RX_UCDR_SVS_FO_GAIN_QUARTER		0x01c
-+#define QSERDES_V4_RX_UCDR_SVS_FO_GAIN			0x020
-+#define QSERDES_V4_RX_UCDR_SVS_SO_GAIN_HALF		0x024
-+#define QSERDES_V4_RX_UCDR_SVS_SO_GAIN_QUARTER		0x028
-+#define QSERDES_V4_RX_UCDR_SVS_SO_GAIN			0x02c
-+#define QSERDES_V4_RX_UCDR_FASTLOCK_FO_GAIN		0x030
-+#define QSERDES_V4_RX_UCDR_SO_SATURATION_AND_ENABLE	0x034
-+#define QSERDES_V4_RX_UCDR_FO_TO_SO_DELAY		0x038
-+#define QSERDES_V4_RX_UCDR_FASTLOCK_COUNT_LOW		0x03c
-+#define QSERDES_V4_RX_UCDR_FASTLOCK_COUNT_HIGH		0x040
-+#define QSERDES_V4_RX_UCDR_PI_CONTROLS			0x044
-+#define QSERDES_V4_RX_UCDR_PI_CTRL2			0x048
-+#define QSERDES_V4_RX_UCDR_SB2_THRESH1			0x04c
-+#define QSERDES_V4_RX_UCDR_SB2_THRESH2			0x050
-+#define QSERDES_V4_RX_UCDR_SB2_GAIN1			0x054
-+#define QSERDES_V4_RX_UCDR_SB2_GAIN2			0x058
-+#define QSERDES_V4_RX_AUX_CONTROL			0x05c
-+#define QSERDES_V4_RX_AUX_DATA_TCOARSE_TFINE		0x060
-+#define QSERDES_V4_RX_RCLK_AUXDATA_SEL			0x064
-+#define QSERDES_V4_RX_AC_JTAG_ENABLE			0x068
-+#define QSERDES_V4_RX_AC_JTAG_INITP			0x06c
-+#define QSERDES_V4_RX_AC_JTAG_INITN			0x070
-+#define QSERDES_V4_RX_AC_JTAG_LVL			0x074
-+#define QSERDES_V4_RX_AC_JTAG_MODE			0x078
-+#define QSERDES_V4_RX_AC_JTAG_RESET			0x07c
-+#define QSERDES_V4_RX_RX_TERM_BW			0x080
-+#define QSERDES_V4_RX_RX_RCVR_IQ_EN			0x084
-+#define QSERDES_V4_RX_RX_IDAC_I_DC_OFFSETS		0x088
-+#define QSERDES_V4_RX_RX_IDAC_IBAR_DC_OFFSETS		0x08c
-+#define QSERDES_V4_RX_RX_IDAC_Q_DC_OFFSETS		0x090
-+#define QSERDES_V4_RX_RX_IDAC_QBAR_DC_OFFSETS		0x094
-+#define QSERDES_V4_RX_RX_IDAC_A_DC_OFFSETS		0x098
-+#define QSERDES_V4_RX_RX_IDAC_ABAR_DC_OFFSETS		0x09c
-+#define QSERDES_V4_RX_RX_IDAC_EN			0x0a0
-+#define QSERDES_V4_RX_RX_IDAC_ENABLES			0x0a4
-+#define QSERDES_V4_RX_RX_IDAC_SIGN			0x0a8
-+#define QSERDES_V4_RX_RX_HIGHZ_HIGHRATE			0x0ac
-+#define QSERDES_V4_RX_RX_TERM_AC_BYPASS_DC_COUPLE_OFFSET 0x0b0
-+#define QSERDES_V4_RX_DFE_1				0x0b4
-+#define QSERDES_V4_RX_DFE_2				0x0b8
-+#define QSERDES_V4_RX_DFE_3				0x0bc
-+#define QSERDES_V4_RX_DFE_4				0x0c0
-+#define QSERDES_V4_RX_TX_ADAPT_PRE_THRESH1		0x0c4
-+#define QSERDES_V4_RX_TX_ADAPT_PRE_THRESH2		0x0c8
-+#define QSERDES_V4_RX_TX_ADAPT_POST_THRESH		0x0cc
-+#define QSERDES_V4_RX_TX_ADAPT_MAIN_THRESH		0x0d0
-+#define QSERDES_V4_RX_VGA_CAL_CNTRL1			0x0d4
-+#define QSERDES_V4_RX_VGA_CAL_CNTRL2			0x0d8
-+#define QSERDES_V4_RX_GM_CAL				0x0dc
-+#define QSERDES_V4_RX_RX_VGA_GAIN2_LSB			0x0e0
-+#define QSERDES_V4_RX_RX_VGA_GAIN2_MSB			0x0e4
-+#define QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL1		0x0e8
-+#define QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL2		0x0ec
-+#define QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL3		0x0f0
-+#define QSERDES_V4_RX_RX_EQU_ADAPTOR_CNTRL4		0x0f4
-+#define QSERDES_V4_RX_RX_IDAC_TSETTLE_LOW		0x0f8
-+#define QSERDES_V4_RX_RX_IDAC_TSETTLE_HIGH		0x0fc
-+#define QSERDES_V4_RX_RX_IDAC_MEASURE_TIME		0x100
-+#define QSERDES_V4_RX_RX_IDAC_ACCUMULATOR		0x104
-+#define QSERDES_V4_RX_RX_EQ_OFFSET_LSB			0x108
-+#define QSERDES_V4_RX_RX_EQ_OFFSET_MSB			0x10c
-+#define QSERDES_V4_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1	0x110
-+#define QSERDES_V4_RX_RX_OFFSET_ADAPTOR_CNTRL2		0x114
-+#define QSERDES_V4_RX_SIGDET_ENABLES			0x118
-+#define QSERDES_V4_RX_SIGDET_CNTRL			0x11c
-+#define QSERDES_V4_RX_SIGDET_LVL			0x120
-+#define QSERDES_V4_RX_SIGDET_DEGLITCH_CNTRL		0x124
-+#define QSERDES_V4_RX_RX_BAND				0x128
-+#define QSERDES_V4_RX_CDR_FREEZE_UP_DN			0x12c
-+#define QSERDES_V4_RX_CDR_RESET_OVERRIDE		0x130
-+#define QSERDES_V4_RX_RX_INTERFACE_MODE			0x134
-+#define QSERDES_V4_RX_JITTER_GEN_MODE			0x138
-+#define QSERDES_V4_RX_SJ_AMP1				0x13c
-+#define QSERDES_V4_RX_SJ_AMP2				0x140
-+#define QSERDES_V4_RX_SJ_PER1				0x144
-+#define QSERDES_V4_RX_SJ_PER2				0x148
-+#define QSERDES_V4_RX_PPM_OFFSET1			0x14c
-+#define QSERDES_V4_RX_PPM_OFFSET2			0x150
-+#define QSERDES_V4_RX_SIGN_PPM_PERIOD1			0x154
-+#define QSERDES_V4_RX_SIGN_PPM_PERIOD2			0x158
-+#define QSERDES_V4_RX_RX_PWM_ENABLE_AND_DATA		0x15c
-+#define QSERDES_V4_RX_RX_PWM_GEAR1_TIMEOUT_COUNT	0x160
-+#define QSERDES_V4_RX_RX_PWM_GEAR2_TIMEOUT_COUNT	0x164
-+#define QSERDES_V4_RX_RX_PWM_GEAR3_TIMEOUT_COUNT	0x168
-+#define QSERDES_V4_RX_RX_PWM_GEAR4_TIMEOUT_COUNT	0x16c
-+#define QSERDES_V4_RX_RX_MODE_00_LOW			0x170
-+#define QSERDES_V4_RX_RX_MODE_00_HIGH			0x174
-+#define QSERDES_V4_RX_RX_MODE_00_HIGH2			0x178
-+#define QSERDES_V4_RX_RX_MODE_00_HIGH3			0x17c
-+#define QSERDES_V4_RX_RX_MODE_00_HIGH4			0x180
-+#define QSERDES_V4_RX_RX_MODE_01_LOW			0x184
-+#define QSERDES_V4_RX_RX_MODE_01_HIGH			0x188
-+#define QSERDES_V4_RX_RX_MODE_01_HIGH2			0x18c
-+#define QSERDES_V4_RX_RX_MODE_01_HIGH3			0x190
-+#define QSERDES_V4_RX_RX_MODE_01_HIGH4			0x194
-+#define QSERDES_V4_RX_RX_MODE_10_LOW			0x198
-+#define QSERDES_V4_RX_RX_MODE_10_HIGH			0x19c
-+#define QSERDES_V4_RX_RX_MODE_10_HIGH2			0x1a0
-+#define QSERDES_V4_RX_RX_MODE_10_HIGH3			0x1a4
-+#define QSERDES_V4_RX_RX_MODE_10_HIGH4			0x1a8
-+#define QSERDES_V4_RX_PHPRE_CTRL			0x1ac
-+#define QSERDES_V4_RX_PHPRE_INITVAL			0x1b0
-+#define QSERDES_V4_RX_DFE_EN_TIMER			0x1b4
-+#define QSERDES_V4_RX_DFE_CTLE_POST_CAL_OFFSET		0x1b8
-+#define QSERDES_V4_RX_DCC_CTRL1				0x1bc
-+#define QSERDES_V4_RX_DCC_CTRL2				0x1c0
-+#define QSERDES_V4_RX_VTH_CODE				0x1c4
-+#define QSERDES_V4_RX_VTH_MIN_THRESH			0x1c8
-+#define QSERDES_V4_RX_VTH_MAX_THRESH			0x1cc
-+#define QSERDES_V4_RX_ALOG_OBSV_BUS_CTRL_1		0x1d0
-+#define QSERDES_V4_RX_PI_CTRL1				0x1d4
-+#define QSERDES_V4_RX_PI_CTRL2				0x1d8
-+#define QSERDES_V4_RX_PI_QUAD				0x1dc
-+#define QSERDES_V4_RX_IDATA1				0x1e0
-+#define QSERDES_V4_RX_IDATA2				0x1e4
-+#define QSERDES_V4_RX_AUX_DATA1				0x1e8
-+#define QSERDES_V4_RX_AUX_DATA2				0x1ec
-+#define QSERDES_V4_RX_AC_JTAG_OUTP			0x1f0
-+#define QSERDES_V4_RX_AC_JTAG_OUTN			0x1f4
-+#define QSERDES_V4_RX_RX_SIGDET				0x1f8
-+#define QSERDES_V4_RX_ALOG_OBSV_BUS_STATUS_1		0x1fc
-+
-+#endif
-diff --git a/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h
-new file mode 100644
-index 0000000000..d20694513e
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h
-@@ -0,0 +1,205 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (c) 2017, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef QCOM_PHY_QMP_QSERDES_TXRX_H_
-+#define QCOM_PHY_QMP_QSERDES_TXRX_H_
-+
-+/* Only for QMP V2 PHY - TX registers */
-+#define QSERDES_TX_BIST_MODE_LANENO			0x000
-+#define QSERDES_TX_BIST_INVERT				0x004
-+#define QSERDES_TX_CLKBUF_ENABLE			0x008
-+#define QSERDES_TX_CMN_CONTROL_ONE			0x00c
-+#define QSERDES_TX_CMN_CONTROL_TWO			0x010
-+#define QSERDES_TX_CMN_CONTROL_THREE			0x014
-+#define QSERDES_TX_TX_EMP_POST1_LVL			0x018
-+#define QSERDES_TX_TX_POST2_EMPH			0x01c
-+#define QSERDES_TX_TX_BOOST_LVL_UP_DN			0x020
-+#define QSERDES_TX_HP_PD_ENABLES			0x024
-+#define QSERDES_TX_TX_IDLE_LVL_LARGE_AMP		0x028
-+#define QSERDES_TX_TX_DRV_LVL				0x02c
-+#define QSERDES_TX_TX_DRV_LVL_OFFSET			0x030
-+#define QSERDES_TX_RESET_TSYNC_EN			0x034
-+#define QSERDES_TX_PRE_STALL_LDO_BOOST_EN		0x038
-+#define QSERDES_TX_TX_BAND				0x03c
-+#define QSERDES_TX_SLEW_CNTL				0x040
-+#define QSERDES_TX_INTERFACE_SELECT			0x044
-+#define QSERDES_TX_LPB_EN				0x048
-+#define QSERDES_TX_RES_CODE_LANE_TX			0x04c
-+#define QSERDES_TX_RES_CODE_LANE_RX			0x050
-+#define QSERDES_TX_RES_CODE_LANE_OFFSET			0x054
-+#define QSERDES_TX_PERL_LENGTH1				0x058
-+#define QSERDES_TX_PERL_LENGTH2				0x05c
-+#define QSERDES_TX_SERDES_BYP_EN_OUT			0x060
-+#define QSERDES_TX_DEBUG_BUS_SEL			0x064
-+#define QSERDES_TX_HIGHZ_TRANSCEIVEREN_BIAS_DRVR_EN	0x068
-+#define QSERDES_TX_TX_POL_INV				0x06c
-+#define QSERDES_TX_PARRATE_REC_DETECT_IDLE_EN		0x070
-+#define QSERDES_TX_BIST_PATTERN1			0x074
-+#define QSERDES_TX_BIST_PATTERN2			0x078
-+#define QSERDES_TX_BIST_PATTERN3			0x07c
-+#define QSERDES_TX_BIST_PATTERN4			0x080
-+#define QSERDES_TX_BIST_PATTERN5			0x084
-+#define QSERDES_TX_BIST_PATTERN6			0x088
-+#define QSERDES_TX_BIST_PATTERN7			0x08c
-+#define QSERDES_TX_BIST_PATTERN8			0x090
-+#define QSERDES_TX_LANE_MODE				0x094
-+#define QSERDES_TX_IDAC_CAL_LANE_MODE			0x098
-+#define QSERDES_TX_IDAC_CAL_LANE_MODE_CONFIGURATION	0x09c
-+#define QSERDES_TX_ATB_SEL1				0x0a0
-+#define QSERDES_TX_ATB_SEL2				0x0a4
-+#define QSERDES_TX_RCV_DETECT_LVL			0x0a8
-+#define QSERDES_TX_RCV_DETECT_LVL_2			0x0ac
-+#define QSERDES_TX_PRBS_SEED1				0x0b0
-+#define QSERDES_TX_PRBS_SEED2				0x0b4
-+#define QSERDES_TX_PRBS_SEED3				0x0b8
-+#define QSERDES_TX_PRBS_SEED4				0x0bc
-+#define QSERDES_TX_RESET_GEN				0x0c0
-+#define QSERDES_TX_RESET_GEN_MUXES			0x0c4
-+#define QSERDES_TX_TRAN_DRVR_EMP_EN			0x0c8
-+#define QSERDES_TX_TX_INTERFACE_MODE			0x0cc
-+#define QSERDES_TX_PWM_CTRL				0x0d0
-+#define QSERDES_TX_PWM_ENCODED_OR_DATA			0x0d4
-+#define QSERDES_TX_PWM_GEAR_1_DIVIDER_BAND2		0x0d8
-+#define QSERDES_TX_PWM_GEAR_2_DIVIDER_BAND2		0x0dc
-+#define QSERDES_TX_PWM_GEAR_3_DIVIDER_BAND2		0x0e0
-+#define QSERDES_TX_PWM_GEAR_4_DIVIDER_BAND2		0x0e4
-+#define QSERDES_TX_PWM_GEAR_1_DIVIDER_BAND0_1		0x0e8
-+#define QSERDES_TX_PWM_GEAR_2_DIVIDER_BAND0_1		0x0ec
-+#define QSERDES_TX_PWM_GEAR_3_DIVIDER_BAND0_1		0x0f0
-+#define QSERDES_TX_PWM_GEAR_4_DIVIDER_BAND0_1		0x0f4
-+#define QSERDES_TX_VMODE_CTRL1				0x0f8
-+#define QSERDES_TX_VMODE_CTRL2				0x0fc
-+#define QSERDES_TX_TX_ALOG_INTF_OBSV_CNTL		0x100
-+#define QSERDES_TX_BIST_STATUS				0x104
-+#define QSERDES_TX_BIST_ERROR_COUNT1			0x108
-+#define QSERDES_TX_BIST_ERROR_COUNT2			0x10c
-+#define QSERDES_TX_TX_ALOG_INTF_OBSV			0x110
-+
-+/* Only for QMP V2 PHY - RX registers */
-+#define QSERDES_RX_UCDR_FO_GAIN_HALF			0x000
-+#define QSERDES_RX_UCDR_FO_GAIN_QUARTER			0x004
-+#define QSERDES_RX_UCDR_FO_GAIN_EIGHTH			0x008
-+#define QSERDES_RX_UCDR_FO_GAIN				0x00c
-+#define QSERDES_RX_UCDR_SO_GAIN_HALF			0x010
-+#define QSERDES_RX_UCDR_SO_GAIN_QUARTER			0x014
-+#define QSERDES_RX_UCDR_SO_GAIN_EIGHTH			0x018
-+#define QSERDES_RX_UCDR_SO_GAIN				0x01c
-+#define QSERDES_RX_UCDR_SVS_FO_GAIN_HALF		0x020
-+#define QSERDES_RX_UCDR_SVS_FO_GAIN_QUARTER		0x024
-+#define QSERDES_RX_UCDR_SVS_FO_GAIN_EIGHTH		0x028
-+#define QSERDES_RX_UCDR_SVS_FO_GAIN			0x02c
-+#define QSERDES_RX_UCDR_SVS_SO_GAIN_HALF		0x030
-+#define QSERDES_RX_UCDR_SVS_SO_GAIN_QUARTER		0x034
-+#define QSERDES_RX_UCDR_SVS_SO_GAIN_EIGHTH		0x038
-+#define QSERDES_RX_UCDR_SVS_SO_GAIN			0x03c
-+#define QSERDES_RX_UCDR_FASTLOCK_FO_GAIN		0x040
-+#define QSERDES_RX_UCDR_FD_GAIN				0x044
-+#define QSERDES_RX_UCDR_SO_SATURATION_AND_ENABLE	0x048
-+#define QSERDES_RX_UCDR_FO_TO_SO_DELAY			0x04c
-+#define QSERDES_RX_UCDR_FASTLOCK_COUNT_LOW		0x050
-+#define QSERDES_RX_UCDR_FASTLOCK_COUNT_HIGH		0x054
-+#define QSERDES_RX_UCDR_MODULATE			0x058
-+#define QSERDES_RX_UCDR_PI_CONTROLS			0x05c
-+#define QSERDES_RX_RBIST_CONTROL			0x060
-+#define QSERDES_RX_AUX_CONTROL				0x064
-+#define QSERDES_RX_AUX_DATA_TCOARSE			0x068
-+#define QSERDES_RX_AUX_DATA_TFINE_LSB			0x06c
-+#define QSERDES_RX_AUX_DATA_TFINE_MSB			0x070
-+#define QSERDES_RX_RCLK_AUXDATA_SEL			0x074
-+#define QSERDES_RX_AC_JTAG_ENABLE			0x078
-+#define QSERDES_RX_AC_JTAG_INITP			0x07c
-+#define QSERDES_RX_AC_JTAG_INITN			0x080
-+#define QSERDES_RX_AC_JTAG_LVL				0x084
-+#define QSERDES_RX_AC_JTAG_MODE				0x088
-+#define QSERDES_RX_AC_JTAG_RESET			0x08c
-+#define QSERDES_RX_RX_TERM_BW				0x090
-+#define QSERDES_RX_RX_RCVR_IQ_EN			0x094
-+#define QSERDES_RX_RX_IDAC_I_DC_OFFSETS			0x098
-+#define QSERDES_RX_RX_IDAC_IBAR_DC_OFFSETS		0x09c
-+#define QSERDES_RX_RX_IDAC_Q_DC_OFFSETS			0x0a0
-+#define QSERDES_RX_RX_IDAC_QBAR_DC_OFFSETS		0x0a4
-+#define QSERDES_RX_RX_IDAC_A_DC_OFFSETS			0x0a8
-+#define QSERDES_RX_RX_IDAC_ABAR_DC_OFFSETS		0x0ac
-+#define QSERDES_RX_RX_IDAC_EN				0x0b0
-+#define QSERDES_RX_RX_IDAC_ENABLES			0x0b4
-+#define QSERDES_RX_RX_IDAC_SIGN				0x0b8
-+#define QSERDES_RX_RX_HIGHZ_HIGHRATE			0x0bc
-+#define QSERDES_RX_RX_TERM_AC_BYPASS_DC_COUPLE_OFFSET	0x0c0
-+#define QSERDES_RX_RX_EQ_GAIN1_LSB			0x0c4
-+#define QSERDES_RX_RX_EQ_GAIN1_MSB			0x0c8
-+#define QSERDES_RX_RX_EQ_GAIN2_LSB			0x0cc
-+#define QSERDES_RX_RX_EQ_GAIN2_MSB			0x0d0
-+#define QSERDES_RX_RX_EQU_ADAPTOR_CNTRL1		0x0d4
-+#define QSERDES_RX_RX_EQU_ADAPTOR_CNTRL2		0x0d8
-+#define QSERDES_RX_RX_EQU_ADAPTOR_CNTRL3		0x0dc
-+#define QSERDES_RX_RX_EQU_ADAPTOR_CNTRL4		0x0e0
-+#define QSERDES_RX_RX_IDAC_CAL_CONFIGURATION		0x0e4
-+#define QSERDES_RX_RX_IDAC_TSETTLE_LOW			0x0e8
-+#define QSERDES_RX_RX_IDAC_TSETTLE_HIGH			0x0ec
-+#define QSERDES_RX_RX_IDAC_ENDSAMP_LOW			0x0f0
-+#define QSERDES_RX_RX_IDAC_ENDSAMP_HIGH			0x0f4
-+#define QSERDES_RX_RX_IDAC_MIDPOINT_LOW			0x0f8
-+#define QSERDES_RX_RX_IDAC_MIDPOINT_HIGH		0x0fc
-+#define QSERDES_RX_RX_EQ_OFFSET_LSB			0x100
-+#define QSERDES_RX_RX_EQ_OFFSET_MSB			0x104
-+#define QSERDES_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1		0x108
-+#define QSERDES_RX_RX_OFFSET_ADAPTOR_CNTRL2		0x10c
-+#define QSERDES_RX_SIGDET_ENABLES			0x110
-+#define QSERDES_RX_SIGDET_CNTRL				0x114
-+#define QSERDES_RX_SIGDET_LVL				0x118
-+#define QSERDES_RX_SIGDET_DEGLITCH_CNTRL		0x11c
-+#define QSERDES_RX_RX_BAND				0x120
-+#define QSERDES_RX_CDR_FREEZE_UP_DN			0x124
-+#define QSERDES_RX_CDR_RESET_OVERRIDE			0x128
-+#define QSERDES_RX_RX_INTERFACE_MODE			0x12c
-+#define QSERDES_RX_JITTER_GEN_MODE			0x130
-+#define QSERDES_RX_BUJ_AMP				0x134
-+#define QSERDES_RX_SJ_AMP1				0x138
-+#define QSERDES_RX_SJ_AMP2				0x13c
-+#define QSERDES_RX_SJ_PER1				0x140
-+#define QSERDES_RX_SJ_PER2				0x144
-+#define QSERDES_RX_BUJ_STEP_FREQ1			0x148
-+#define QSERDES_RX_BUJ_STEP_FREQ2			0x14c
-+#define QSERDES_RX_PPM_OFFSET1				0x150
-+#define QSERDES_RX_PPM_OFFSET2				0x154
-+#define QSERDES_RX_SIGN_PPM_PERIOD1			0x158
-+#define QSERDES_RX_SIGN_PPM_PERIOD2			0x15c
-+#define QSERDES_RX_SSC_CTRL				0x160
-+#define QSERDES_RX_SSC_COUNT1				0x164
-+#define QSERDES_RX_SSC_COUNT2				0x168
-+#define QSERDES_RX_RX_ALOG_INTF_OBSV_CNTL		0x16c
-+#define QSERDES_RX_RX_PWM_ENABLE_AND_DATA		0x170
-+#define QSERDES_RX_RX_PWM_GEAR1_TIMEOUT_COUNT		0x174
-+#define QSERDES_RX_RX_PWM_GEAR2_TIMEOUT_COUNT		0x178
-+#define QSERDES_RX_RX_PWM_GEAR3_TIMEOUT_COUNT		0x17c
-+#define QSERDES_RX_RX_PWM_GEAR4_TIMEOUT_COUNT		0x180
-+#define QSERDES_RX_PI_CTRL1				0x184
-+#define QSERDES_RX_PI_CTRL2				0x188
-+#define QSERDES_RX_PI_QUAD				0x18c
-+#define QSERDES_RX_IDATA1				0x190
-+#define QSERDES_RX_IDATA2				0x194
-+#define QSERDES_RX_AUX_DATA1				0x198
-+#define QSERDES_RX_AUX_DATA2				0x19c
-+#define QSERDES_RX_AC_JTAG_OUTP				0x1a0
-+#define QSERDES_RX_AC_JTAG_OUTN				0x1a4
-+#define QSERDES_RX_RX_SIGDET				0x1a8
-+#define QSERDES_RX_RX_VDCOFF				0x1ac
-+#define QSERDES_RX_IDAC_CAL_ON				0x1b0
-+#define QSERDES_RX_IDAC_STATUS_I			0x1b4
-+#define QSERDES_RX_IDAC_STATUS_IBAR			0x1b8
-+#define QSERDES_RX_IDAC_STATUS_Q			0x1bc
-+#define QSERDES_RX_IDAC_STATUS_QBAR			0x1c0
-+#define QSERDES_RX_IDAC_STATUS_A			0x1c4
-+#define QSERDES_RX_IDAC_STATUS_ABAR			0x1c8
-+#define QSERDES_RX_CALST_STATUS_I			0x1cc
-+#define QSERDES_RX_CALST_STATUS_Q			0x1d0
-+#define QSERDES_RX_CALST_STATUS_A			0x1d4
-+#define QSERDES_RX_RX_ALOG_INTF_OBSV			0x1d8
-+#define QSERDES_RX_READ_EQCODE				0x1dc
-+#define QSERDES_RX_READ_OFFSETCODE			0x1e0
-+#define QSERDES_RX_IA_ERROR_COUNTER_LOW			0x1e4
-+#define QSERDES_RX_IA_ERROR_COUNTER_HIGH		0x1e8
++/* GCC power domains */
++#define PCIE_0_GDSC						0
++#define PCIE_1_GDSC						1
++#define PCIE_2_GDSC						2
++#define UFS_CARD_GDSC						3
++#define UFS_PHY_GDSC						4
++#define USB30_PRIM_GDSC						5
++#define USB30_SEC_GDSC						6
++#define HLOS1_VOTE_MMNOC_MMU_TBU_HF0_GDSC			7
++#define HLOS1_VOTE_MMNOC_MMU_TBU_HF1_GDSC			8
++#define HLOS1_VOTE_MMNOC_MMU_TBU_SF0_GDSC			9
++#define HLOS1_VOTE_MMNOC_MMU_TBU_SF1_GDSC			10
 +
 +#endif
 -- 
