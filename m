@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FDAEB64DD
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 18:43:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7887EB64DD
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 18:49:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92DAD8692C;
-	Mon, 14 Aug 2023 20:43:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 414E5866DA;
+	Mon, 14 Aug 2023 20:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hxww6/Of";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pVqqufap";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41FD886958; Mon, 14 Aug 2023 20:43:11 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 4CB5086828; Mon, 14 Aug 2023 20:49:50 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 505FD868D0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 20:43:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4474B80842
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 20:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-4fe28f92d8eso7308559e87.1
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 11:43:09 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-4fe48d0ab0fso7182897e87.1
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 11:49:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692038588; x=1692643388;
+ d=linaro.org; s=google; t=1692038987; x=1692643787;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6SKURnMRu4q1NY5VP52ThfPW8GMQry2g+G5eGwgdj4o=;
- b=hxww6/Of/9ZZ6x7stvC8vrbzl6CqAa6u8ej25R+ptETP5uO8YrICyelGBIuXFg8cda
- jN4CH6yH9v/LlZkeKlRCW7SeAXlzZlO7wBA5kFohCyzxe47O6ZGGC5kRYM2DYuXOE5V8
- qFWHYYcziXb1hoqSziybNFBmhqyR5I4UU0bM/0x2kqF9+v5DctCDOLRYse1eTisIJZMv
- oP8o5LDiopn6TvFtYs5hcGgo12ecPRzaRcZsTs9BaQrUiPAKtMh1Vl2N1EvMNWsvee7H
- ye1UYhkT6vLU9xL6ul6Fpoh2DnrD+CRHSwg3oXbyvICgEFuLDSZAnGfXVvl5k0+K4+Yt
- SM9Q==
+ bh=N1kmtkVeaxseAYOymz14EDvPi5gS0m+eKXZgXaOJYzA=;
+ b=pVqqufapkglNLKxRw/qmOFADZc8pEYL+TT2+z3PMcM8VB1cyzBErsMyKikPVrHE/yQ
+ BdlYmRb/eA44vzXp8cDVRkA5Ho4vVyvX24YSyw+O3Ju6OUB6M6RaoxNI8COM1nxXDBcm
+ LyAfIdeAmMGO5r/eqhpH3zArUgnR8kvJHhpm9WBf6Li2o3Yl4PqNo3JdKm7APvH9NxL5
+ bvCcY/L1akdKXqpsQTQtFZC63lWLqWchCxPHcDzyWZ8JfMRG+KyN2PCMh8ndtM8OTxV9
+ BmYRJif2tWPNUc5QYhcNbjoWBTHUfllJ0ceYnKAlqIGAsQy4fumIgiYqxHo1B5m7jc9Z
+ 25hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692038588; x=1692643388;
+ d=1e100.net; s=20221208; t=1692038987; x=1692643787;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6SKURnMRu4q1NY5VP52ThfPW8GMQry2g+G5eGwgdj4o=;
- b=Mw2PRWPo7LgktV84YyJQ3KSxX/9blzF0QvAwPLLtWq2xIPoyl/O5CP1+UVkWPks8YT
- A7kD6QpC+OyFzNctOW00+QJTVu2jXgR67t4cr85g259tcSbMMfkj9dvvBQB7IqA3aAU3
- MNhAieDKV28CxYWBAJ5zsJqqXPapWDyzCgsuV4iSQcLeuZqEqrChp3eJx9uzg6GU1Xxv
- 3FQpBNKIQC7fltrBd04SNkM1JK9kMTH8XDVuFHDylp/FjHAjCLCL2+2hZyVTtAo6yz3+
- +8gdqa2w2EuTf/heYHncrcXd83R4nbu9+YZQZEDDTaxjFYAwa8d44BGc7pwZ35hKKayV
- gBAQ==
-X-Gm-Message-State: AOJu0YxaHXlmtwKu3lMn060O2kYhcoXJlYWx+rFUl8i/q8Nb6fELbO5o
- aQaPfAb+0QPyfbdz8HRNIvSm9awSMzUPZHI8ckS14Q==
-X-Google-Smtp-Source: AGHT+IErC+A9ofKhHu83XpjKdb1yv5WThmxdKpEFJHtARh4l/UAySaHAX7ItQhSl/aEwidhPPkxkaAqmtvqVfOgSbrg=
-X-Received: by 2002:a05:6512:2117:b0:4f8:76ba:ad3c with SMTP id
- q23-20020a056512211700b004f876baad3cmr6357166lfr.55.1692038588536; Mon, 14
- Aug 2023 11:43:08 -0700 (PDT)
+ bh=N1kmtkVeaxseAYOymz14EDvPi5gS0m+eKXZgXaOJYzA=;
+ b=LKorMA3s1YloYP2xt0zrQoSsjDkebVBoYysh3+NIiDKKqAsjjU5PhX2gDXIV5Pf/Zb
+ PacAl5wfo2xdjrB3gu3Q+t/uzduAeGyD2oJ54G7/+pIruTge63cJDbtUznP64tpiuMH3
+ mLMCWy9YJIuWp/EmhC9ocVoscwINu9KP8G+bcZ8VLM3ReRuPHbhTgCHHe9+avlpZgIVu
+ 5Nh8KDowm3Y+poVMPnuOMSmJHCQAJ7FIh67pP8FLFAG6gCUaiiiKRjaTtkY14jdn9KPd
+ +RQg2YuEF5+lXHteXkUS8XZHuT12LIT39ZFC6fVb4hOCU+41iuHJpBzEu1XcxKI6pR/5
+ hUMg==
+X-Gm-Message-State: AOJu0YwPpRvKRU5KV5VYILa3nOuvktEILZCuoA/vTe9jz1O/0nsq+/fG
+ qCBHZMCSlQYP13I4MVJcmcBEoaitPNits9nNJAhzxg==
+X-Google-Smtp-Source: AGHT+IH5FjhUiI961Mo/ujk5A9QY2oHQpaZQ4NcSR7LrrL4fNeLdb/hQ7zTYEysqmFwh9UELXU86yCxAZDVmADe6Yzg=
+X-Received: by 2002:a05:6512:3d0b:b0:4fd:faa5:64ed with SMTP id
+ d11-20020a0565123d0b00b004fdfaa564edmr9109105lfv.11.1692038987325; Mon, 14
+ Aug 2023 11:49:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230814090309.1548310-1-sughosh.ganu@linaro.org>
- <20230814090309.1548310-2-sughosh.ganu@linaro.org>
- <20230814150425.GW3630934@bill-the-cat>
-In-Reply-To: <20230814150425.GW3630934@bill-the-cat>
+ <20230814090309.1548310-3-sughosh.ganu@linaro.org>
+ <20230814150430.GX3630934@bill-the-cat>
+In-Reply-To: <20230814150430.GX3630934@bill-the-cat>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 15 Aug 2023 00:12:57 +0530
-Message-ID: <CADg8p95CFpBK+5C6th6D0w4guTsjdR1bGavGEb61kVsqyxyQSw@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/4] scripts/Makefile.lib: Collate all dtsi files for
- inclusion
+Date: Tue, 15 Aug 2023 00:19:36 +0530
+Message-ID: <CADg8p96MtFiWf=u2j6b9+ZxfGSyAZ=T11CDd6pFifLz_Bh4qwQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/4] scripts/Makefile.lib: Embed capsule public key in
+ platform's dtb
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
@@ -93,42 +93,84 @@ hi Tom,
 
 On Mon, 14 Aug 2023 at 20:34, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Aug 14, 2023 at 02:33:06PM +0530, Sughosh Ganu wrote:
->
-> > At the time of building a device-tree file, all the *u-boot.dtsi files
-> > are looked for, in a particular order, and the first file found is
-> > included. Then, the list of files specified in the
-> > CONFIG_DEVICE_TREE_INCLUDES symbol are included.
+> On Mon, Aug 14, 2023 at 02:33:07PM +0530, Sughosh Ganu wrote:
+> > The EFI capsule authentication logic in u-boot expects the public key
+> > in the form of an EFI Signature List(ESL) to be provided as part of
+> > the platform's dtb. Currently, the embedding of the ESL file into the
+> > dtb needs to be done manually.
 > >
-> > Combine these files that are to be included into a variable, and then
-> > include all these files in one go.
+> > Add a target for generating a dtsi file which contains the signature
+> > node with the ESL file included as a property under the signature
+> > node. Include the dtsi file in the dtb. This brings the embedding of
+> > the ESL in the dtb into the U-Boot build flow.
+> >
+> > The path to the ESL file is specified through the
+> > CONFIG_EFI_CAPSULE_ESL_FILE symbol.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> >  scripts/Makefile.lib | 11 +++++++----
-> >  1 file changed, 7 insertions(+), 4 deletions(-)
+> >  lib/efi_loader/Kconfig             |  9 +++++++++
+> >  lib/efi_loader/capsule_esl.dtsi.in | 11 +++++++++++
+> >  scripts/Makefile.lib               | 17 +++++++++++++++++
+> >  3 files changed, 37 insertions(+)
+> >  create mode 100644 lib/efi_loader/capsule_esl.dtsi.in
 > >
+> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > index 9989e3f384..f40a62a0ba 100644
+> > --- a/lib/efi_loader/Kconfig
+> > +++ b/lib/efi_loader/Kconfig
+> > @@ -272,6 +272,15 @@ config EFI_CAPSULE_MAX
+> >         Select the max capsule index value used for capsule report
+> >         variables. This value is used to create CapsuleMax variable.
+> >
+> > +config EFI_CAPSULE_ESL_FILE
+> > +     string "Path to the EFI Signature List File"
+> > +     default ""
+>
+> No default.
+
+I think Simon wanted to keep this so that it would not break the build
+if no option was provided.
+
+>
+> [snip]
 > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > index f5ab7af0f4..f41b16781d 100644
+> > index f41b16781d..cf4eef0b05 100644
 > > --- a/scripts/Makefile.lib
 > > +++ b/scripts/Makefile.lib
-> > @@ -179,10 +179,13 @@ ifdef DEVICE_TREE_DEBUG
-> >  u_boot_dtsi_options_debug = $(warning $(u_boot_dtsi_options_raw))
-> >  endif
+> > @@ -334,8 +334,25 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+> >               ; \
+> >       sed "s:$(pre-tmp):$(<):" $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
 > >
-> > -# We use the first match
-> > -u_boot_dtsi = $(strip $(u_boot_dtsi_options_debug) \
-> > +# We use the first match to be included
-> > +include_files = $(strip $(u_boot_dtsi_options_debug) \
-> >       $(notdir $(firstword $(u_boot_dtsi_options))))
-> >
-> > +# The CONFIG_DEVICE_TREE_INCLUDES also need to be included
-> > +include_files += $(CONFIG_DEVICE_TREE_INCLUDES)
+> > +ifdef CONFIG_EFI_CAPSULE_AUTHENTICATE
+> > +quiet_cmd_capsule_esl_gen = CAPSULE_ESL_GEN $@
+> > +cmd_capsule_esl_gen = \
+> > +     $(shell sed "s:ESL_BIN_FILE:$(capsule_esl_path):" $(capsule_esl_input_file) > $@)
+> > +
+> > +$(obj)/.capsule_esl.dtsi:
+> > +     $(call cmd_capsule_esl_gen)
+> > +
+> > +capsule_esl_input_file=$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
+> > +capsule_esl_dtsi = .capsule_esl.dtsi
+> > +capsule_esl_path=$(abspath $(srctree)/$(subst $(quote),,$(CONFIG_EFI_CAPSULE_ESL_FILE)))
 >
-> This is what I wanted, logic-wise, but I think include_files is too
-> vague.
+> This seems right.
+>
+> > +include_files += $(capsule_esl_dtsi)
+> > +
+> > +$(obj)/%.dtb: $(src)/%.dts $(DTC) $(obj)/.capsule_esl.dtsi FORCE
+> > +     $(call if_changed_dep,dtc)
+> > +else
+> >  $(obj)/%.dtb: $(src)/%.dts $(DTC) FORCE
+> >       $(call if_changed_dep,dtc)
+> > +endif
+>
+> I think this implies to me that we should have been depending on
+> $(include_files) (once renamed to be less vague) here already ?
 
-Okay. How about dtsi_include_list, or dtsi_list? If not, can you
-suggest a name which you think would be apt. Thanks.
+Okay. That can be done. I had kept the .capsule_esl.dtsi as a
+dependency primarily because that file needs to be generated before it
+can be included. I suppose the same can apply to some other dtsi as
+well.
 
 -sughosh
