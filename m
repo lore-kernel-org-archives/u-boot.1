@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F97C001B0
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 15:15:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EEDDC001B0
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 15:15:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03C3A86722;
-	Mon, 14 Aug 2023 17:15:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DE6A8696C;
+	Mon, 14 Aug 2023 17:15:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ku6PrK3o";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TDwausuO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E54FC867B4; Mon, 14 Aug 2023 17:15:26 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id B9FA986966; Mon, 14 Aug 2023 17:15:32 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFC8A86679
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 17:15:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC89F8692C
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 17:15:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-589f784a972so8454767b3.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 08:15:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-991c786369cso598282666b.1
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 08:15:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692026123; x=1692630923;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HG8a1m1EFiJeIn71OzryUJ1/qSid2/qnbuOWZKnw6QU=;
- b=Ku6PrK3oVnv5mqxxIXDVvOSXlMq06AspAekzN/84nTnEUODA8rCJ95PIE4fdbqnPT3
- kBJ/YSOs7eBTO/1Ufdb/RFiJfMkfmLsnOJjdGNhEKcFxhb4Hu8hIXEl3HiNNSjUszIlg
- rILxX4sufcFd8IQXcB4V/rSIGymquDBOAGGfU=
+ d=linaro.org; s=google; t=1692026130; x=1692630930;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=f84jrRIA6ushXxBZEQcoPwZGH1mPNWsO2GMnylr12qE=;
+ b=TDwausuOawwxQkKNaOPIEq2EsQSJpls8bKWmBjXVmlODR4rD6AMrhpjSnIvRkUE90D
+ 0/5E0oO53HhNs0uPpulwB4F2ZwCP/FgWBOnv0uHxT4gxOqY1SWSeYNFvGeBciXmEOev7
+ B0Ks+hmkOL3b0vUI5H81SK/7vYMCnMgqmGYXuuGKPIPLvNY4+6SV5ecOkalPxWGwJ+0r
+ UcNgQaEzG01rN5nI7VvlCmQ/hXR4D7syirtoCS1ofEKpt4glTClSoMV0xNisYw2miMN5
+ WCkjgXKRQ0456RBTFZiVcKHaUGjcgFlc5kwk0kzYmzN7q+jr+rxcDKZPjxKurKyC5R0v
+ uQkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692026123; x=1692630923;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HG8a1m1EFiJeIn71OzryUJ1/qSid2/qnbuOWZKnw6QU=;
- b=ck5bynOWI5O/Yq2hdjJ8vXt18+hYNWiuOCk8frOmUQ5LWTklrK96UEZ3v+5rJx8foW
- p7HfDBlUeZX3DvYpBO+5aCtmW9r5r6UGxbcxr8cwEnJasXagQTA3nkG+QlrtBVOtqMez
- T9QWKL14AFpeF/bjfdVGqR8UEUKDPH9iBS52IiGAeV5Vra9kV/dtBMxojleEr8DwPIZ9
- Rpe0Xb0CXfsN4nrvkTrh1gwhZWIvk2tbB8W9kqdPJN3XSib55Tz7ErGa9rvBYza3SUUz
- iFzv+JPGLvwoJIUXk1nHqJBYdj8w2RedCVWGgur6gps6L88mnuvnXKQenlKoXxiR1yhD
- asmQ==
-X-Gm-Message-State: AOJu0YyoKMiLxFwnf6egZ2/hi08g7I8EYvYAtXUM0rTGVcPb5RDu8drb
- rkCdRM7XqrfVjaALFX6F2baW8bEOqw0CwlpWGmgFYQ==
-X-Google-Smtp-Source: AGHT+IHXHqObJ91p0q3e3JBqvQ4gl4WW7EKkJjweU4pujbN1601dJw1JbZFzXTUCOfDXYfs6sH/xsA==
-X-Received: by 2002:a81:8882:0:b0:585:f4e0:6532 with SMTP id
- y124-20020a818882000000b00585f4e06532mr7343309ywf.30.1692026123559; 
- Mon, 14 Aug 2023 08:15:23 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-1d1b-2873-dbaa-7ea0.res6.spectrum.com.
- [2603:6081:7b00:6400:1d1b:2873:dbaa:7ea0])
- by smtp.gmail.com with ESMTPSA id
- w190-20020a0dd4c7000000b00583d67839fasm2815832ywd.121.2023.08.14.08.15.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Aug 2023 08:15:23 -0700 (PDT)
-Date: Mon, 14 Aug 2023 11:15:21 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Ben Wolsieffer <benwolsieffer@gmail.com>
-Cc: u-boot@lists.denx.de, Gabriel Hojda <ghojda@yo2urs.ro>
-Subject: Re: [PATCH] odroid_xu3: Fix board environment variable
-Message-ID: <20230814151521.GY3630934@bill-the-cat>
-References: <20220608183014.1417881-1-trini@konsulko.com>
- <ZNGl-cmCNGhegE7T@Dell-Inspiron-15>
+ d=1e100.net; s=20221208; t=1692026130; x=1692630930;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=f84jrRIA6ushXxBZEQcoPwZGH1mPNWsO2GMnylr12qE=;
+ b=eu2pHqgr4H7sSu0Aebj19Vov3RXBAQTKq6LA7oGgTBPaCOaGXnwwjayUPQllKSLuB4
+ AJ2ZAG+JQ9u99BEVkypx6FakmcuMXA68nRtKNFpeqfFyDzMZmAfexBBfyVrps85uGZfY
+ VSNExgIfaL1BpE03kDnh8MDDfek3e1rQ+XWqAY0cnM3KbvdJ/CbOYqgfbZuap1NVnVMs
+ sZ15adGKCgAOVsfMy00jXltWSqS3PWK0z3o04Kh8qGMM36KlkHMPWH0PtHrwDxdBXbTE
+ XaeunIYHqCCtWezagn6FSwuhrF/vI2OQ9Kep7SdsB/coW7adO6VleUz1t7wSuHDVDalC
+ qiaw==
+X-Gm-Message-State: AOJu0Yy088Cctv7BtmpdZEJk/KfRkyfCvqmhJLAfa9pD7VC9AKdJLn4v
+ +uGxvpzbaJfJLGDzFqbRtOKwzqVNOcsveCjMOQJbQg==
+X-Google-Smtp-Source: AGHT+IHWewjS6a4dsmv4YyvzD8avLNKJ4J8KLsOMVMIHKU4zUJc+SNTyaEdcs+CZSZbzj23pf/fN/lcMm7rJtCek2F4=
+X-Received: by 2002:a17:906:3cb2:b0:98e:2b01:ab97 with SMTP id
+ b18-20020a1709063cb200b0098e2b01ab97mr6826988ejh.68.1692026130217; Mon, 14
+ Aug 2023 08:15:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LAI5027tWY9o2yjt"
-Content-Disposition: inline
-In-Reply-To: <ZNGl-cmCNGhegE7T@Dell-Inspiron-15>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
+ <20230814133253.4150-4-maxim.uvarov@linaro.org> <ZNo3+qhKIEqmdMTh@hades>
+In-Reply-To: <ZNo3+qhKIEqmdMTh@hades>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Mon, 14 Aug 2023 21:15:18 +0600
+Message-ID: <CAD8XO3ZK2GwOxc=wodp7M+9Qgh_Ugd7nNNTi58OXqq9X3SAa7g@mail.gmail.com>
+Subject: Re: [PATCHv6 03/14] net/lwip: implement dns cmd
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de, 
+ lwip-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,89 +88,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 14 Aug 2023 at 20:19, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
---LAI5027tWY9o2yjt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> On Mon, Aug 14, 2023 at 07:32:42PM +0600, Maxim Uvarov wrote:
+> > Implement function for dns command with lwIP variant. Usage and output is
+> > the same as the original command. This code called by compatibility code
+> > between U-Boot and lwIP.
+>
+> What's compatibility code?
+> I think something along the lines of
+>
+> 'U-Boot recently got support for an alternative network stack using LWIP.
+> Replace XXXX command with the LWIP variant while keeping the output and
+> error messages identical"
+>
 
-On Mon, Aug 07, 2023 at 10:18:33PM -0400, Ben Wolsieffer wrote:
-> On Wed, Jun 08, 2022 at 02:30:14PM -0400, Tom Rini wrote:
-> > When migrating CONFIG_CONS_INDEX to Kconfig, on this platform we changed
-> > what "board" evaluated to in the environment.  This in turn meant that
-> > we would no longer try and find the correct fdtfile via the normal
-> > distro boot logic.  Fix this by overriding board in the default
-> > environment, as done on other platforms where CONFIG_SYS_BOARD is not
-> > what we want to be in the board environment variable.
-> >=20
-> > Fixes: f76750d11133 ("Convert CONFIG_CONS_INDEX et al to Kconfig")
-> > Reported-by: Gabriel Hojda <ghojda@yo2urs.ro>
-> > Tested-by: Gabriel Hojda <ghojda@yo2urs.ro>
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  include/configs/odroid_xu3.h | 1 +
-> >  1 file changed, 1 insertion(+)
-> >=20
-> > diff --git a/include/configs/odroid_xu3.h b/include/configs/odroid_xu3.h
-> > index eb35d7b4ae2d..360815bc03ee 100644
-> > --- a/include/configs/odroid_xu3.h
-> > +++ b/include/configs/odroid_xu3.h
-> > @@ -86,6 +86,7 @@
-> >  	"rootfstype=3Dext4\0" \
-> >  	"console=3Dconsole=3DttySAC2,115200n8\0" \
-> >  	"fdtfile=3Dexynos5422-odroidxu3.dtb\0" \
-> > +	"board=3Dodroid\0" \
-> >  	"board_name=3Dodroidxu3\0" \
-> >  	"mmcbootdev=3D0\0" \
-> >  	"mmcrootdev=3D0\0" \
-> > --=20
-> > 2.25.1
-> >=20
->=20
-> Hi Tom,
->=20
-> This patch doesn't appear to have fixed the issue. There is a report
-> from Debian of it occuring even after this patch was applied [1], and I
-> ran into it today as well with 2023.07.02.
->=20
-> I looked into it a bit, and the problem seems to be that
-> set_board_info() constructs the fdtfile variable using CONFIG_SYS_BOARD,
-> so setting the correct value of the board variable has no effect. I
-> think either set_board_info() needs to construct fdtfile differently, or
-> things need to be restructured to allow CONFIG_SYS_BOARD to be set as
-> "odroid".
->=20
-> I would submit a patch, but I'm not sure of the right approach to take,
-> and I would appreciate your help.
+ok, that message is a good one. By 'compatibility code' I meant code to
+merge lwip applications and other U-Boot code.
 
-Thanks for the detailed report. I believe the problem is that
-board/samsung/common/misc.c::set_board_info() should be doing a lot more
-checks for if the environment variable is already set, before
-over-riding them.  This is typically done around ethaddr (so there's a
-number of examples to look at) and in this case I think everything other
-than soc_rev / soc_id should have a check before blindly overwriting.
-However, just checking for board_name / fdtfile already being set
-before setting them is enough to fix this problem I think.
+So in general all net/lwip/apps/{dns,ping,wget} and etc. These applications
+do not have U-Boot headers and can be compiled with
+any other lwIP port. I.e. for example, you can take the linux userland port
+with a tap device and directly compile these apps, run and debug.
+This might be named lwIP apps code.
 
---=20
-Tom
+And code which does lwIP init, calls application initialization, then goes
+to net polling loop - I named here 'a compatibility code'. Might be not the
+base naming, but that was an idea.
 
---LAI5027tWY9o2yjt
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTaRP8ACgkQFHw5/5Y0
-tyx8Vgv/QGHoJQuvmyOBUPDsGFMWemiGi88NL1D149r5b2yqsuJUaS3OUmlofNIa
-yJZF3wodZUwr1qHLsITcabjR4S5slDrv9HiJnsedkOWAAd9hlD5rmteLwaa5rpDv
-QnpJXJFqdPw4E70OOErIrbwsBcivWylLjiKBunW5++7JARNhSf2f2oV2RQA849zJ
-E1aZlwm7RYFnfEGiPdPiLY5c/q6vozRI6QjZM9GWnRPCZm+NYeTKzUE35QRz7481
-byG22kHlX0DSeiOEEXeK27LFUjqg8gjSE0BniODG+bVuCJP+c3IrqlaUQ3A0b6uj
-JW8DMQExy371ske/eCSHjhSsdRhtFbYtcqcPOjj3GNQvBWjtIIyeT7XumXdOL+2L
-7isvSW1RSw+yr7G6KfwJQvkVpR9amtBoAG39CUvjzadABYA+UwXaVc7WG9wMdJrk
-4oRmgtRF3o6abKUDYO274shQSYVgdkGh2CODcDS8WPmZM4hQEyXIXGvDMqAXEzBi
-5XtfkRe0
-=68eq
------END PGP SIGNATURE-----
+>
+> > +
+> > +int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +             char *const argv[]);
+> > +
+> > +/*
+> > +* This function creates the DNS request to resolve a domain host name.
+> Function
+>
+> You need the name of the function as well.  Please have a look at how the
+> rest of the code is documented.
+>
+> > +* can return immediately if previous request was cached or it might
+> require
+> > +* entering the polling loop for a request to a remote server.
+> > +*
+> > +* @name  dns name to resolve
+>
+> @name: etc
+>
+> > +* @varname (optional) U-Boot variable name to store the result
+> > +* Return: ERR_OK(0) for fetching entry from the cache
+> > +*         ERR_INPROGRESS(-5) success, can go to the polling loop
+> > +*         Other value < 0, if error
+> > +*/
+> > +int ulwip_dns(char *name, char *varname);
+> > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+> > index d1161bea78..6d2c00605b 100644
+> > --- a/net/lwip/Makefile
+> > + */
+> > +
+> > +#include <common.h>
+> > +#include <command.h>
+> > +#include <console.h>
+> > +
+> > +#include <lwip/dns.h>
+> > +#include <lwip/ip_addr.h>
+> > +
+> > +#include <net/ulwip.h>
+> > +
+> > +static void dns_found_cb(const char *name, const ip_addr_t *ipaddr,
+> void *callback_arg)
+> > +{
+> > +     char *varname = (char *)callback_arg;
+> > +
+> > +     if (varname)
+> > +             env_set(varname, ip4addr_ntoa(ipaddr));
+>
+> Why do we have to set the varname to the resolved address?  Is this
+> something the dns command already does?
+>
+> Exactly, original  command is:
 
---LAI5027tWY9o2yjt--
+U_BOOT_CMD(
+dns, 3, 1, do_dns,
+"lookup the IP of a hostname",
+"hostname [envvar]"
+);
+
+
+
+> > +
+> > +     log_info("resolved %s to %s\n",  name, ip4addr_ntoa(ipaddr));
+> > +     ulwip_exit(0);
+> > +}
+> > +
+> > +int ulwip_dns(char *name, char *varname)
+> > +{
+> > +     int err;
+> > +     ip_addr_t ipaddr; /* not used */
+> > +     ip_addr_t dns1;
+> > +     ip_addr_t dns2;
+> > +
+> > +     ipaddr_aton(env_get("dnsip"), &dns1);
+> > +     ipaddr_aton(env_get("dnsip2"), &dns2);
+> > +
+> > +     dns_init();
+> > +     dns_setserver(0, &dns1);
+> > +     dns_setserver(1, &dns2);
+> > +
+> > +     err = dns_gethostbyname(name, &ipaddr, dns_found_cb, varname);
+> > +     if (err == ERR_OK)
+> > +             dns_found_cb(name, &ipaddr, varname);
+> > +
+> > +     return err;
+> > +}
+> > --
+> > 2.30.2
+> >
+>
+> Thanks
+> /Ilias
+>
