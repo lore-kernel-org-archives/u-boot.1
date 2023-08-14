@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D24C04E69
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA9AC001DB
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 22:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A354486977;
-	Tue, 15 Aug 2023 00:33:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B5E386977;
+	Tue, 15 Aug 2023 00:34:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ty0a8qpe";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="REI5r4yl";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NAa2O1h8";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vfOA/RFc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64AD286986; Tue, 15 Aug 2023 00:33:12 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 9FEF58666B; Tue, 15 Aug 2023 00:34:20 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A281686958
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:33:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D148F855CE
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 00:34:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RPq124786z9sm6;
- Tue, 15 Aug 2023 00:33:10 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RPq2L44Bjz9smc;
+ Tue, 15 Aug 2023 00:34:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692052390;
+ s=mail20150812; t=1692052458;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=phZNEzVDGvtG6C1NtaCWtQFzviiYyBXQHRRqouawc6s=;
- b=Ty0a8qpe41SLe51MS8BO3uamdY+5HwqD4fuHTuEIXyvJOBrlWr9shyCDXEKxhtJ1HL+Rgm
- j9PYgcZRCdD8elF/AH9XU947KXVAfo7Bc//wIHa4P0kXbE0W/C4WrkmaO8qTQWqR5Ae/do
- f82c9yVehmPufWvuc3rU1n073dUsq4QgeOjkVRsSVuETl84W1ETD/PILmXQ7/8jn+nONFW
- Boq9hOgZigtHbqLVaBcOmHxCR6/DL15VanuAMoE0frjxkH60Oit1rLLpEOHqOp+JON/K8n
- T6L5RClq6NHFx0Qb6NN//1O2JrirmtqY86A/HnkRkldg3PsZmLL1WWXJU8YwIg==
-Message-ID: <39a84296-93a8-92db-1c1e-964ed45f634a@mailbox.org>
+ bh=yOU2EAu2gTHR3jUR4Tho0P0+VdH+xgc12yrngMBcRPY=;
+ b=NAa2O1h8K0j7lFZfR/YYu8DI1MLO4hrFfNxxVJ8+jAxpN8z51250whzIy3ezd1zOw6tw+N
+ nmsiZCJb4W/ginFBxPfsf3AX7EcNLexoMLP3wfmvnXJoorBCjBIezMSCJa8rTYti9wtVf3
+ F1FTqR3OT5sDjyIfmG0Ryk26SDBMCoTYypa9CRdRS4s+p5vB1MJO2udfK7L49rOlAy9Rx3
+ e5iQ+9S/D8I4gcvbwXSqDYjWC41DTGFmikSE44dUvrAZqv9BcR/zcMyQAf3p4lDbQTcQ6X
+ RBuNcjPlosoFjO0TMqcQPafjCC46xbl1mnQ9JbwB7u9mQKPCZnkMjBG3WCbedQ==
+Message-ID: <c96bfb16-83bf-7e49-73b9-f3734cca008c@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692052388;
+ s=mail20150812; t=1692052456;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=phZNEzVDGvtG6C1NtaCWtQFzviiYyBXQHRRqouawc6s=;
- b=REI5r4ylER1H6YxyhLfxvMnt+v//HqdleBITM8yshPE/5hhOBfrk8OB5gwcFsIW/tJQzkw
- XDi4XkOw0AFYtBrR0b826OtygpMTP9whRlhWN4H22hk1CVBoPgGF1tuWc5g6EYDInu3Y5H
- mmnbq5xY4WsFgvtkHTtiVgtsGASyF8YdyPjs7APdW/Wxzb9DlQGIWGNUe0k3L5K9xm/hOO
- LZYV8qEF/+pZoevYBrVwCqkalJZ+mxfJRDSvdcE/R2Q8iE32dP5TsWHRSxPpc1VOWuz9ka
- NawsEZKWKl0JjA59WEGlecj/i0/OQO23/BziZbQoovQYAD/AvEa271i9v/z6+w==
-Date: Tue, 15 Aug 2023 00:33:07 +0200
+ bh=yOU2EAu2gTHR3jUR4Tho0P0+VdH+xgc12yrngMBcRPY=;
+ b=vfOA/RFcrIpY2J9hmmBWXNF3v1oRCH2gMV1wObV67tWmRrVqsrRsi2ndGe56Kvw9W8S2iI
+ KS0JTPIPq9XvfgK8pXCDEHnYxM/kTjBh9YQs3aSy2TZhUgY1FK0TcldaCn9rzNz0xS4MPu
+ uqFh+pEvKAUWal3pp0zT2qPguOK3F2dk8GWB/Je8APAKrbXMDOCib0cggRv4slamlhULEK
+ Vd0apl8a+OjlLJegc0jefxAqXECojwv5SDkgud9iyUx45pQBi12qhTr+sUzZMegTsyQyjF
+ h3m5bAw0Vd26kgu5EvUc1LgGOIwUc4pEslrRQT5DOcVgUQ/R3X3T6ijmETBZnw==
+Date: Tue, 15 Aug 2023 00:34:14 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 00/17] Enable UFS on DragonBoard845c
+Subject: Re: [PATCH 08/17] ufs: Expose 'ufshcd_ops_dbg_register_dump' vops to
+ allow dumping debug registers
+Content-Language: en-US
 To: Bhupesh Sharma <bhupesh.sharma@linaro.org>, u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.linux@gmail.com,
  marek.vasut+renesas@mailbox.org, sumit.garg@linaro.org,
  rfried.dev@gmail.com, patrice.chotard@foss.st.com, jbx6244@gmail.com,
  kever.yang@rock-chips.com, eugen.hristev@collabora.com
 References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
-Content-Language: en-US
+ <20230814215457.4075025-9-bhupesh.sharma@linaro.org>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
+In-Reply-To: <20230814215457.4075025-9-bhupesh.sharma@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: ee2d46dde73071af73e
-X-MBO-RS-META: ja3gaxpa7yromuak66r96trb3gm6prrp
-X-Rspamd-Queue-Id: 4RPq124786z9sm6
+X-MBO-RS-META: c18e96x8ff7jip9zwd93y4znxdb35skf
+X-MBO-RS-ID: c818fa2e8d433e938c6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,21 +92,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 8/14/23 23:54, Bhupesh Sharma wrote:
-> This patchset enables the UFS controller on DragonBoard845c
-> board which houses Qualcomm SDM845 Snapdragon SoC.
+> Add more verbose debug capabilities and vops to allow dumping
+> UFS debug registers / regions, similar to how the UFS Linux driver
+> does it.
 > 
-> In addition to enabling the UFS HC and UFS QMP PHY found
-> on this SoC this patchset also contains:
->   * Patches to add 'reset' controller support for SDM845 SoC.
->   * Minor UFS core framework fixes.
->   * Patches to sync u-boot UFS driver flow with Linux UFS driver.
->   * Patches which enable RESET, UFS and SCSI config options for
->     DragonBoard845c.
+> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> ---
+>   drivers/ufs/ufs.c | 71 +++++++++++++++++++++++++++++++++++++++++++++++
+>   drivers/ufs/ufs.h |  9 ++++++
+>   2 files changed, 80 insertions(+)
+> 
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index b2c3af429e..15fa3832b9 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -59,10 +59,81 @@
+>   /* maximum bytes per request */
+>   #define UFS_MAX_BYTES	(128 * 256 * 1024)
+>   
+> +#define ufshcd_hex_dump(prefix_str, buf, len) do {                      \
+> +	size_t __len = (len);                                           \
+> +	print_hex_dump(prefix_str,                             		\
+> +		       DUMP_PREFIX_OFFSET,				\
+> +		       16, 4, buf, __len, false);                       \
+> +} while (0)
+> +
+>   static inline bool ufshcd_is_hba_active(struct ufs_hba *hba);
+>   static inline void ufshcd_hba_stop(struct ufs_hba *hba);
+>   static int ufshcd_hba_enable(struct ufs_hba *hba);
+>   
+> +int ufshcd_dump_regs(struct ufs_hba *hba, size_t offset, size_t len,
+> +		     const char *prefix)
+> +{
+> +	u32 *regs;
+> +	size_t pos;
+> +
+> +	if (offset % 4 != 0 || len % 4 != 0) /* keep readl happy */
+> +		return -EINVAL;
+> +
+> +	regs = kzalloc(len, GFP_KERNEL);
+> +	if (!regs)
+> +		return -ENOMEM;
+> +
+> +	for (pos = 0; pos < len; pos += 4) {
+> +		if (offset == 0 &&
+> +		    pos >= REG_UIC_ERROR_CODE_PHY_ADAPTER_LAYER &&
+> +		    pos <= REG_UIC_ERROR_CODE_DME)
+> +			continue;
+> +		regs[pos / 4] = ufshcd_readl(hba, offset + pos);
+> +	}
+> +
+> +	ufshcd_hex_dump(prefix, regs, len);
+> +	kfree(regs);
 
-I submitted a couple of UFS related patches yesterday, they add handling 
-for controllers which cannot handle 64bit memory and add support for 
-cache management. Please rebase on top of those, otherwise there will be 
-hard to resolve conflicts.
-
-[PATCH 1/6] ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
-[PATCH 1/2] blk: Add bounce buffer support to read/write operations
+Why not use variable on stack instead of this malloc-free cycle ?
