@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE25EB64DD
-	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E67A9C04A6A
+	for <u-boot@archiver.kernel.org>; Mon, 14 Aug 2023 21:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A56A8697E;
-	Mon, 14 Aug 2023 23:23:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E1BE86970;
+	Mon, 14 Aug 2023 23:55:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T94Z7+rV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cq9llbvX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C820B86983; Mon, 14 Aug 2023 23:23:55 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id C2C9A8697B; Mon, 14 Aug 2023 23:55:12 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B33EE833BF
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:23:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76EB984788
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 23:55:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1bc8045e09dso29808285ad.0
- for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:23:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1bc6535027aso41255105ad.2
+ for <u-boot@lists.denx.de>; Mon, 14 Aug 2023 14:55:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692048232; x=1692653032;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JRskrxUmBbnaOTBcVZaQR40kDPdpcl0NiZXQRm8wK48=;
- b=T94Z7+rVUJZkLHn7G6M/piK7GefqLFwV2qF0aIFbuczRNabGkVcfPJ8SfCLG7E7UmQ
- ROcYNhUzgwy4CbgXxNSvTE985X20Tnw508ERSlggNCXSlGwkqobOgSXumY4CbOBl8+HA
- 3rC5Win7mepGp9qo5eM4MukDhd9WwOGQ1g1pzAJCLSWlANfKsQ0nrzZuNqu2DyPPf0XH
- jJPbFvM6WpCL4YaeSAFm78BEbPO6ArfcSAAc/S63Iw2KZpkNm9ygyheXbyWe+ZsHzm8/
- R8jv/PW6wkTIOTt8TfdNLFZ3/rHzzCSDeMaSI4zxao4zCFDqEIRPP4bo/lPdIuI8g4SS
- QePg==
+ d=linaro.org; s=google; t=1692050108; x=1692654908;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EAg/jcZBofpli5PaQmLkP2VLLTeUAljDlpFayjcDMNY=;
+ b=Cq9llbvX/spLP+omlmtL36cOVFYfzsR1xaUWGVVk+ft/gH6rBQd6IZzRDdJKzoQLSG
+ XGdutLvzvRvvBvV+Vn889r3KDZJjhmlRllQ13AD1r3myfp7MbXmrvsCMlO2FBcRIVBnM
+ i4veWmlOvX9Z7yubzAgbWcwaorcIN2FdiqmXVfg3QR/GXLp5uJv49ax2UtHO1MD1DgYI
+ gdk+jRiuO/o9TeRPRMtj0ylU4FT1XKZaqPwCGL9e99hFQRuyBaPdydfCdJUgTanCktg4
+ mXSP1eBsDFAp00w3mJ4Bj36dpetfNJgShBVhGjtWmXkpBDi1ZEPU6omz+RXNx2EJRt2h
+ GKWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692048232; x=1692653032;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JRskrxUmBbnaOTBcVZaQR40kDPdpcl0NiZXQRm8wK48=;
- b=k8Jut/6DFmt5rIU2n9ONWtwVW7ltBFu5TqAdDU9BfTMG5DQGwZGE9L6wVRI+TE3tNi
- 8jjapdN9JFX7cWiyh8VCxgTbwi5WNjTrAVq9heVM0v/9QID3YyHJgUbSee+ZHX8Q614Y
- Ko6M8iHrLDv7f7dPojPCF5cgU5QwakLbuhSggoCDmHJ6e4dS0lPZnv3YIMPUUjeWzoUG
- 49S3zMXXHXfrRn1FIovl9yOnFbP5b1JnYNRqi4JVt2yw9fUbZ5Wwlqa/YC04C6U3dCFa
- VGHjjChbkwT7Tu/dFfYCZk8bXFRGxQEAKqq8uBHCC9B7dD78/DKSm8RRWGO2Nup6+MYN
- +V/A==
-X-Gm-Message-State: AOJu0YxUU7WsmFZ8H6D7G/szu/8TCYnV9zdPDItmEC1FfVkuSMXssxBH
- I2silICk7yiZmxgua6esamE=
-X-Google-Smtp-Source: AGHT+IH11Odh/W3eaE9S1EFkhQG3SPxbM9dNytIpo65uBcrRxAozkDzrB0hobhUoqLe3D+6QzDTQGQ==
-X-Received: by 2002:a17:903:191:b0:1bd:b8c0:b58f with SMTP id
- z17-20020a170903019100b001bdb8c0b58fmr9218847plg.50.1692048231862; 
- Mon, 14 Aug 2023 14:23:51 -0700 (PDT)
-Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
- [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
- u18-20020a170903125200b001b53953f306sm9919002plh.178.2023.08.14.14.23.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Aug 2023 14:23:51 -0700 (PDT)
-Message-ID: <154df0c5-73fe-7a59-41fd-6bbb53ebd471@gmail.com>
-Date: Mon, 14 Aug 2023 15:23:49 -0600
+ d=1e100.net; s=20221208; t=1692050108; x=1692654908;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EAg/jcZBofpli5PaQmLkP2VLLTeUAljDlpFayjcDMNY=;
+ b=lPBOblhUCnkLpIdahn5M0ugve8mpvcIlZxzjnLe4JYeOnkwq6+4NJDRecVuAJtW8fz
+ C7h8XWoJwrAom3eFA5mcfP3WzNxhjesLc5iGz2RVlID1QMfieMVDg34JlRzG0WVlxyDt
+ DPwCvSb7b9+V0bkB6UCW/B4OzcWe+hSZ7jh0OKDorH9/hFPSSN5E//gZiaWK3wxTb40l
+ ZnJAc/RwuKqsqyZALoVhSDYB4v8GdSp/WdjQtJ4LE4qzPYTHn0QuEii5MyPtojpqwA1O
+ I3qwdEM8aHBUpWvY2TquhuC8NJIbFhVfXPdP8c0a3ad/SourvGdm28tKFpgiA/Khk4/A
+ wNQA==
+X-Gm-Message-State: AOJu0Yy8oFtM4gKbHSDsSso69vFNvl07WBY29j0qLcbRU5oJCCtEfpED
+ EvmCmpYQHTG+s1SC3HDkIq+wAyJZU37DI9z8r3o=
+X-Google-Smtp-Source: AGHT+IFaoGDPiV+2CTsRdQj+IdQTgDmTjRKpQOMlfCzNSfjNXH6m1V5+eH12uHUj17jHucjeMBwF9A==
+X-Received: by 2002:a17:902:7795:b0:1bb:cf58:531d with SMTP id
+ o21-20020a170902779500b001bbcf58531dmr11422813pll.10.1692050108318; 
+ Mon, 14 Aug 2023 14:55:08 -0700 (PDT)
+Received: from localhost.localdomain
+ ([2401:4900:1f3b:3924:6581:8508:2ecb:b5dd])
+ by smtp.gmail.com with ESMTPSA id
+ n4-20020a170903110400b001bba373919bsm9872075plh.261.2023.08.14.14.55.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 14 Aug 2023 14:55:07 -0700 (PDT)
+From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.sharma@linaro.org,
+ bhupesh.linux@gmail.com, marek.vasut+renesas@mailbox.org,
+ sumit.garg@linaro.org, rfried.dev@gmail.com, patrice.chotard@foss.st.com,
+ jbx6244@gmail.com, kever.yang@rock-chips.com, eugen.hristev@collabora.com
+Subject: [PATCH 00/17] Enable UFS on DragonBoard845c
+Date: Tue, 15 Aug 2023 03:24:40 +0530
+Message-Id: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
+X-Mailer: git-send-email 2.38.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH 1/3] sunxi: psci: clean away preprocessor macros
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
- Maksim Kiselev <bigunclemax@gmail.com>
-References: <20230812003055.74527-1-CFSworks@gmail.com>
- <20230812003055.74527-2-CFSworks@gmail.com>
- <20230814173714.61bd09a2@donnerap.manchester.arm.com>
- <1af2d8fe-0516-e67d-15b8-71248ac80fa3@gmail.com>
- <20230814220521.364addff@slackpad.lan>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <20230814220521.364addff@slackpad.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,22 +92,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/14/23 15:05, Andre Przywara wrote:
-> Yes, I will add this to the header file, either defined as 0, or to its
-> actual address.
+This patchset enables the UFS controller on DragonBoard845c
+board which houses Qualcomm SDM845 Snapdragon SoC.
 
-Gotcha; my v2 will also assume you've taken care of merging these guys:
-+#define SUNXI_CPUX_BASE			0x09010000
-+#define SUNXI_CPUCFG_BASE		0
+In addition to enabling the UFS HC and UFS QMP PHY found
+on this SoC this patchset also contains:
+ * Patches to add 'reset' controller support for SDM845 SoC.
+ * Minor UFS core framework fixes.
+ * Patches to sync u-boot UFS driver flow with Linux UFS driver.
+ * Patches which enable RESET, UFS and SCSI config options for
+   DragonBoard845c.
 
-(As I presume from your comments on 3/3 that it's better to consider 
-"CPUX" simply an updated CPUCFG than to distinguish between them as 
-fundamentally different concepts.)
+Also since the current UFS maintainer's email bounces, promote
+myself as the new UFS maintainer to help address this work-area ->
+review, test and fix UFS issues in u-boot framework. 
 
-> Yes, but you handle both above explicitly.
+Bhupesh Sharma (17):
+  reset: qcom: Add support for SDM845 SoC reset table
+  phy: qcom: Import QMP phy related header files from Linux
+  dt-bindings: clock: Import SM6115 and SM8250 related clock header
+    files from Linux
+  phy: qcom: Add QMP UFS PHY driver
+  ufs/ufs.h: Add definition of 'ufshcd_rmwl()'
+  ufs: Clear UECPA once due to LINERESET has happened during
+    LINK_STARTUP
+  ufs: Add support for probing UFS controllers newer than
+    UFSHCI_VERSION_21
+  ufs: Expose 'ufshcd_ops_dbg_register_dump' vops to allow dumping debug
+    registers
+  ufs: Sync possible UFS Quirks with Linux UFS driver
+  ufs: Add missing memory barriers
+  ufs: Fix debug message in 'ufs_start'
+  ufs: Add Support for Qualcomm UFS HC driver
+  arm: dts: qcom: sdm845: Add 'reset' node
+  arm: dts: qcom: sdm845: Add UFS HC and PHY nodes
+  configs/dragonboard845c_defconfig: Enable DM_RESET by default
+  configs/dragonboard845c_defconfig: Enable UFS + SCSI related configs
+  MAINTAINERS: Update UFS maintainer
 
-No, I was passing a NULL clamp address in those cases too. So I'm noting 
-that this must also be fixed in v2.
+ MAINTAINERS                                   |   2 +-
+ arch/arm/dts/sdm845.dtsi                      |  68 ++
+ configs/dragonboard845c_defconfig             |  11 +
+ drivers/phy/qcom/Kconfig                      |   6 +
+ drivers/phy/qcom/Makefile                     |   1 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h    |  25 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h    |  21 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h    |  31 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h    |  32 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h    |  31 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h        |  43 +
+ drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h        | 145 +++
+ drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h        | 135 +++
+ .../phy/qcom/phy-qcom-qmp-qserdes-com-v3.h    | 111 ++
+ .../phy/qcom/phy-qcom-qmp-qserdes-com-v4.h    | 123 +++
+ drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h   | 140 +++
+ drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h   |  66 ++
+ .../qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h   |  30 +
+ .../phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h   |  68 ++
+ .../phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h   | 233 ++++
+ drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h  | 205 ++++
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c           | 996 ++++++++++++++++++
+ drivers/phy/qcom/phy-qcom-qmp.h               | 115 ++
+ drivers/reset/reset-qcom.c                    |  33 +
+ drivers/ufs/Kconfig                           |   7 +
+ drivers/ufs/Makefile                          |   1 +
+ drivers/ufs/qcom-ufshcd.c                     | 880 ++++++++++++++++
+ drivers/ufs/ufs-qcom.h                        | 275 +++++
+ drivers/ufs/ufs.c                             |  93 +-
+ drivers/ufs/ufs.h                             | 156 ++-
+ include/dt-bindings/clock/qcom,gcc-sm6115.h   | 201 ++++
+ include/dt-bindings/clock/qcom,gcc-sm8250.h   | 271 +++++
+ 32 files changed, 4539 insertions(+), 16 deletions(-)
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v2.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v3.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v4.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v5.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-ufs-v6.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-v2.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-v3.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-pcs-v4.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v3.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com-v4.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-com.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-pll.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-ufs-v6.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v3.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx-v4.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-qserdes-txrx.h
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-ufs.c
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp.h
+ create mode 100644 drivers/ufs/qcom-ufshcd.c
+ create mode 100644 drivers/ufs/ufs-qcom.h
+ create mode 100644 include/dt-bindings/clock/qcom,gcc-sm6115.h
+ create mode 100644 include/dt-bindings/clock/qcom,gcc-sm8250.h
 
-Thanks,
-Sam
+-- 
+2.38.1
+
