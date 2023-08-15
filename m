@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58EC9C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:28:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 669DDC001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00E60869E0;
-	Tue, 15 Aug 2023 18:27:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40E72869D8;
+	Tue, 15 Aug 2023 18:27:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rGDmaWDJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UaxDu/aF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7665E8671F; Tue, 15 Aug 2023 18:27:52 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id BAECA869D8; Tue, 15 Aug 2023 18:27:55 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6ED67869D6
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD22869E6
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:27:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jpewhacker@gmail.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-1c5046642b4so1385290fac.1
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 09:27:50 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6bcaa6d5e2cso4829889a34.3
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 09:27:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692116868; x=1692721668;
+ d=gmail.com; s=20221208; t=1692116872; x=1692721672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BMo2EMs3c+Pz7rioGFr1PCou8iiqIrmb+EhLCpbRpPI=;
- b=rGDmaWDJTlsPrQzj4kmtG9k2Uhhj5PngCg8kAbIfn4jOBf6/up2y+KS7PRR+xsAj6t
- UDoqdGUaNxWwv3tGfVbT+fsLfEL3j+aGLWmDtuuDQbsWhbYOLeEoHEWUFq4NiSF9v4WU
- FThoRkdPRORPr4na8dzVOq4eiMWXU0VTOiQeC4D9DKGYDp5fI33tAMLD7sGAjgmlNpwb
- j4lQTuy+5UFrk5vOifCYq4t2V1rMngaHMzGczPsWXpB7gaSr9ic3m7vE5705zyVjU58p
- dFrP8//r+246nwjfKV4fF48a+CofmnRopxBS8dzfw+LQJ9lykshZwlsQCroo1EyT6m9i
- JJ1g==
+ bh=rkgHqqSIVH6gh14H9vyjVYckcAz2btzhjjMLbFEWnx4=;
+ b=UaxDu/aFO+ZuoKF6s22VrP4RdcOhWw1udcbfoNcAtosrQE52qEVruHCzW3vltqMFFf
+ 9UVdD7zHh84gVTUbWoBD56GY0NmeXRBibpl+sC6/ySbDCIDy8UVamfaam0A8IwpXGl+6
+ O2mR0Z71hJz9SfKFo3k/H/fhWEicXz+B3+LFLZ12qe8lmk0xcjlE02KXfm+uaO8153fp
+ bQmC3Ncb+b7XFoZL8vvYjZMooSPg9yviJ3QBkUfyWg1MFLN2rr949ImUqG6GYWYVRHYH
+ 3YsAXmUfrc8PvL+K1VteQRBzxLH1i+tMidM0GCIWQ3ekY2b3QkINVY2UAphvZ8vxS1Kf
+ 4tbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692116868; x=1692721668;
+ d=1e100.net; s=20221208; t=1692116872; x=1692721672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BMo2EMs3c+Pz7rioGFr1PCou8iiqIrmb+EhLCpbRpPI=;
- b=C5mtRzAaNn3jXd8gKvyCukosjGsOP2T8eYTJZX0S3QqHBWs+JJMvqLaD1OGDUdgYFX
- gn+Utldh2grElk0jXu3u9E3Eifc7ThBGT6Tp9RbndTKF1RmNTiXxlKjzEbQaJXOvWOnn
- L/La6pXUHkirCDu05JxTQARssVukkWqonNPerbw+42MrdCZcFXjtOQZi3XT2OME98G/j
- e+V+KVGtGaPnvnbWUb5vWMK8qgizu0f2YO2Y7Ds/QnfvFlBZ5cTU78A2kYTjxj7JCkuT
- 637Eh+Qw1k07j9su5nVmZZiOpug9RfVSVBH1lB2CRAwPCVXYgyQo224/3kHzaV6izAzT
- bkeQ==
-X-Gm-Message-State: AOJu0YymZ3njFzh2IitdLuJtXNy/k/FDiLaQ6hyB1L2lCrkWy5wRph+O
- c4Hc8MRw/4o9SPYXYLQU9PJm919rIIQ=
-X-Google-Smtp-Source: AGHT+IGEAaHaJkHn4P3e2zzi3+z+LCbM7d1PUA+zV3qTGvbNpfBsJLlAlDVhE/v0MHLy4OCb6B/ydQ==
-X-Received: by 2002:a05:6870:80d3:b0:1b4:6d3b:3e15 with SMTP id
- r19-20020a05687080d300b001b46d3b3e15mr14503426oab.3.1692116868498; 
- Tue, 15 Aug 2023 09:27:48 -0700 (PDT)
+ bh=rkgHqqSIVH6gh14H9vyjVYckcAz2btzhjjMLbFEWnx4=;
+ b=geDUQttvCFfFzvAv0cFyOthXE+e/HM0AGtoEhKCFABOJ8LLJus0EZlu/BY+UPu+LdH
+ flNw/RLRUDlpDTlPUVvgg7q5aGIi9lMMlOxW3sn+Wf9zQRjQFBLO4h762A5B2kliIiSA
+ wD446g60xxhL2ra2HLDPVFI+2hog2kgq7BShXQ87NAsBw9B1uU3EhkoN6HAoPsmyrz2e
+ IGzeYWM7JnWjfxiU0mKfCoq5A5WL0QzYiD7uneBACKscalJMiVAA9v0+oU6dJO/grbr1
+ xrs0+TJDg1oCBvVHj47mIWoFb+ueZCnq+HbJSAf9YyfhCKuVU3aeRFnVkObNAReoN5Dg
+ M5YA==
+X-Gm-Message-State: AOJu0YyTyIoJGpWeq267AHB2r5eunfLpzWADljoOsTFy6FXrNZYt6n1x
+ wDXl3O75R1XJwXfzzi4vdkjy1zC0xfE=
+X-Google-Smtp-Source: AGHT+IENZ9346puQOwr0lK/QPyWMg6OmzIwvKvMNqRXpOTV/IH+Z+Xhzp2bGeS2zQ7U7HeUFdV3YQA==
+X-Received: by 2002:a05:6870:5588:b0:1bb:4bb3:ecee with SMTP id
+ n8-20020a056870558800b001bb4bb3eceemr13798373oao.31.1692116871745; 
+ Tue, 15 Aug 2023 09:27:51 -0700 (PDT)
 Received: from localhost.localdomain ([2601:282:4300:19e0::6897])
  by smtp.gmail.com with ESMTPSA id
- zf26-20020a0568716a9a00b001c4f840e7bbsm2474441oab.47.2023.08.15.09.27.47
+ zf26-20020a0568716a9a00b001c4f840e7bbsm2474441oab.47.2023.08.15.09.27.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 09:27:47 -0700 (PDT)
+ Tue, 15 Aug 2023 09:27:51 -0700 (PDT)
 From: Joshua Watt <jpewhacker@gmail.com>
 X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Joshua Watt <JPEWhacker@gmail.com>
-Subject: [PATCH 3/6] cmd: gpt: Add gpt_partition_bootable variable
-Date: Tue, 15 Aug 2023 10:26:57 -0600
-Message-Id: <20230815162726.1524958-4-JPEWhacker@gmail.com>
+Subject: [PATCH 4/6] cmd: gpt: Preserve type GUID if enabled
+Date: Tue, 15 Aug 2023 10:26:58 -0600
+Message-Id: <20230815162726.1524958-5-JPEWhacker@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20230815162726.1524958-1-JPEWhacker@gmail.com>
 References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
@@ -92,48 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds an additional variable called gpt_partition_bootable that indicates
-if the given partition is bootable or not.
+If CONFIG_PARTITION_TYPE_GUID is enabled, the type GUID will be
+preserved when writing out the partition string. It was already
+respected when writing out partitions; this ensures that if you capture
+the current partition layout and write it back (such as when renaming),
+the type GUIDs are preserved.
 
 Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- cmd/gpt.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ cmd/gpt.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
 diff --git a/cmd/gpt.c b/cmd/gpt.c
-index a4b8b2b286..bc08799512 100644
+index bc08799512..c6fbd94ba2 100644
 --- a/cmd/gpt.c
 +++ b/cmd/gpt.c
-@@ -723,7 +723,7 @@ static int gpt_enumerate(struct blk_desc *desc)
-  * gpt_setenv_part_variables() - setup partition environmental variables
-  *
-  * Setup the gpt_partition_name, gpt_partition_entry, gpt_partition_addr
-- * and gpt_partition_size environment variables.
-+ * and gpt_partition_size, gpt_partition_bootable environment variables.
-  *
-  * @pinfo: pointer to disk partition
-  * @i: partition entry
-@@ -750,6 +750,10 @@ static int gpt_setenv_part_variables(struct disk_partition *pinfo, int i)
- 	if (ret)
- 		goto fail;
+@@ -173,6 +173,9 @@ static int calc_parts_list_len(int numparts)
+ 	/* see part.h for definition of struct disk_partition */
+ 	partlistlen += numparts * (strlen("start=MiB,") + sizeof(lbaint_t) + 1);
+ 	partlistlen += numparts * (strlen("size=MiB,") + sizeof(lbaint_t) + 1);
++#ifdef CONFIG_PARTITION_TYPE_GUID
++	partlistlen += numparts * (strlen("type=,") + UUID_STR_LEN + 1);
++#endif
+ 	partlistlen += numparts * (strlen("uuid=;") + UUID_STR_LEN + 1);
+ 	/* for the terminating null */
+ 	partlistlen++;
+@@ -211,6 +214,11 @@ static struct disk_part *allocate_disk_part(struct disk_partition *info,
+ 		PART_TYPE_LEN);
+ 	newpart->gpt_part_info.type[PART_TYPE_LEN - 1] = '\0';
+ 	newpart->gpt_part_info.bootable = info->bootable;
++#ifdef CONFIG_PARTITION_TYPE_GUID
++	strncpy(newpart->gpt_part_info.type_guid, (const char *)info->type_guid,
++		UUID_STR_LEN);
++	newpart->gpt_part_info.type_guid[UUID_STR_LEN] = '\0';
++#endif
+ #ifdef CONFIG_PARTITION_UUIDS
+ 	strncpy(newpart->gpt_part_info.uuid, (const char *)info->uuid,
+ 		UUID_STR_LEN);
+@@ -252,6 +260,9 @@ static void print_gpt_info(void)
+ 		       curr->gpt_part_info.name);
+ 		printf("Type %s, bootable %d\n", curr->gpt_part_info.type,
+ 		       curr->gpt_part_info.bootable & PART_BOOTABLE);
++#ifdef CONFIG_PARTITION_TYPE_GUID
++		printf("Type GUID %s\n", curr->gpt_part_info.type_guid);
++#endif
+ #ifdef CONFIG_PARTITION_UUIDS
+ 		printf("UUID %s\n", curr->gpt_part_info.uuid);
+ #endif
+@@ -299,6 +310,11 @@ static int create_gpt_partitions_list(int numparts, const char *guid,
+ 					    curr->gpt_part_info.blksz);
+ 		strncat(partitions_list, partstr, PART_NAME_LEN + 1);
  
-+	ret = env_set_ulong("gpt_partition_bootable", !!(pinfo->bootable & PART_BOOTABLE));
-+	if (ret)
-+		goto fail;
-+
- 	return 0;
- 
- fail:
-@@ -1133,7 +1137,8 @@ U_BOOT_CMD(gpt, CONFIG_SYS_MAXARGS, 1, do_gpt,
- 	" gpt setenv mmc 0 $name\n"
- 	"    - setup environment variables for partition $name:\n"
- 	"      gpt_partition_addr, gpt_partition_size,\n"
--	"      gpt_partition_name, gpt_partition_entry\n"
-+	"      gpt_partition_name, gpt_partition_entry,\n"
-+	"      gpt_partition_bootable\n"
- 	" gpt enumerate mmc 0\n"
- 	"    - store list of partitions to gpt_partition_list environment variable\n"
- 	" gpt guid <interface> <dev>\n"
++#ifdef CONFIG_PARTITION_TYPE_GUID
++		strcat(partitions_list, ",type=");
++		strncat(partitions_list, curr->gpt_part_info.type_guid,
++			UUID_STR_LEN + 1);
++#endif
+ 		strcat(partitions_list, ",uuid=");
+ 		strncat(partitions_list, curr->gpt_part_info.uuid,
+ 			UUID_STR_LEN + 1);
 -- 
 2.33.0
 
