@@ -4,75 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF15C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 17:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E921C001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 18:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AF7086384;
-	Tue, 15 Aug 2023 19:48:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 87CC38699C;
+	Tue, 15 Aug 2023 20:39:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mvMqF27L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cmbdp/A8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38EDD86776; Tue, 15 Aug 2023 19:48:28 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 17161869AD; Tue, 15 Aug 2023 20:39:52 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BCF7833BF
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 19:48:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75F7986995
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 20:39:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-31965c94001so3217073f8f.3
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 10:48:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5255ce77d70so3670861a12.0
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 11:39:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692121705; x=1692726505;
+ d=chromium.org; s=google; t=1692124789; x=1692729589;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FhlR6LJIF9ptnLozq1J4CDYLMUP0xHlpuVBDMAkj46E=;
- b=mvMqF27LpumFdnDpXL+mjv0mMQ7VN1QI/l4dWjneZ5djelJVEGOjQxEeQWWw7Vs5Ht
- ng4ajIQdP/2LP85fzj9qzfuOzg0PMa2hUYlPiul6cuakLzEBK01n3hGh/e6CBy5ssfXX
- FMg6Fdcs9nFAbTzjJhZFs3kD8daEY7PYG3BcoJfRxK0fUmSzLtqvkzyCRycDFrC86b4g
- u6JHgATHANtWftGQb9gRS3H4Z6YM8UpPbjhsdTi6NtWexFe8KessXXri/NCYxdNANX8m
- MNUksaN1NurSPnfKOsIa2jhjvIBSlZcBkZ+cMcTeVDK4enjoVfdcJDlrTR8+y5gx7aOy
- 3hRw==
+ bh=9p1nsXJfUKPPaJcU+CDBB3SPkYAt0SpZfmCeoRcZcYc=;
+ b=Cmbdp/A8g/9joQ0tqXEnZm7HaViDkh2mSVn1b30AGR37IFGC+940MGCyCInNa1ytz9
+ kT/kIm7amS0dvjCiYSoGobYgnISB8fO5ApzazfbhBhBlcx2gVT21mpaFt29ZNPHmHyIJ
+ lgpkRVT19F/UPSh2YiSFxD+AiXtboctEnumvI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692121705; x=1692726505;
+ d=1e100.net; s=20221208; t=1692124789; x=1692729589;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FhlR6LJIF9ptnLozq1J4CDYLMUP0xHlpuVBDMAkj46E=;
- b=QBOJJ6NQUmwtK1d3IuHLXi7/jSmeXwH6pzLOmiGjySKoMeTFvhFlgUEq2yEocbvmSp
- pRwnNzx5A10x7lwRO8SfhZAZIpzilR1vV9q4QRnWC4YtBDMmehdDOZjTmajif0UWvbF4
- RzYXIBaBj1vUYWCGQhbqI2T8YFCZ17L5epxwA1j2XRbCRV7kQm9ORDLYjmETtIxWXCO4
- Z9r4WuNZTaefT5xZ8q4cJtLlvGUY9tCn5Hy3ZPbyiT+NO33fDdblZDwUN5sMoADtw15Q
- OSCOpgXR01txEg/xi9+mQR/djUzgatWPZr7Hk97ifHUw086gde1FPtSbySjXQNZXW5tv
- W/vA==
-X-Gm-Message-State: AOJu0YwVpEmsA7ycYB7Nret1TwRK5skUwV8w77L11QD08SZjRfWzFyx1
- fitI6KccoeXrII4jDOJW6z7kaeKn2OzOxOG8G/pgKQ==
-X-Google-Smtp-Source: AGHT+IEU1KtGEzaAwIgBU6AC0F0MgC8LnItkzvbleIy+VdqG5zIeN4VAHrRxlZSsrq6+/IhGF7p4E8LEurt+RvLj2KQ=
-X-Received: by 2002:a5d:49cf:0:b0:317:5b1b:1a40 with SMTP id
- t15-20020a5d49cf000000b003175b1b1a40mr9975645wrs.49.1692121704968; Tue, 15
- Aug 2023 10:48:24 -0700 (PDT)
+ bh=9p1nsXJfUKPPaJcU+CDBB3SPkYAt0SpZfmCeoRcZcYc=;
+ b=O+FcRUGtcXR2Yw0bKJ9e8p0HFC9jkv13anQ3XZg+VwD9PaSwyBgrxV41KUrHPragbk
+ KDdGyivOIsFjg0UIQcCNNyB9zfEF+QbuxkHFrT81UKkWTm0w+TSL7OnRa8MhkilIce86
+ qixY4P5Anp54I92+rGvPOcT2UlS9YsM7zoZ5wcK9tcOmZ8DgEz7u80X7LApTgJZaaCme
+ zOZ5IfI33eqmE56Bs8ki/iueh9hfaRSsAmXUldNh9T99zmCcECwV1YlrhfRFgLs1tZzV
+ zh4hd/YkJn3ZvPW0QCTOGG09lLlz5RnL2k9fVTqgBb8Ysxrf3rJFk68aZv2RA51RP0QS
+ RAYw==
+X-Gm-Message-State: AOJu0YwyNmCu/9vxth70Wb95c8X+XnRt3wZ1Oq48uT+Lqow5zUb4Nmev
+ aD4zwFrHUKtmuQqGVJ8Skmfy1DFFTgfN7tcOznf6W5QHcssLPJn9Nro=
+X-Google-Smtp-Source: AGHT+IGK/7zg4tHAWpfNqrgvBkqeznlrcLVG5aygr/NUWfmaC3dpz3DAD91w7c6iavfuUYhnCuv4FC8/SAZfqS1jmz0=
+X-Received: by 2002:a17:907:7883:b0:99b:e464:bf49 with SMTP id
+ ku3-20020a170907788300b0099be464bf49mr10737574ejc.51.1692124788829; Tue, 15
+ Aug 2023 11:39:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230814215457.4075025-1-bhupesh.sharma@linaro.org>
- <20230814215457.4075025-18-bhupesh.sharma@linaro.org>
- <d4b2b0f9-6231-6087-a06f-df7f059a80e5@mailbox.org>
-In-Reply-To: <d4b2b0f9-6231-6087-a06f-df7f059a80e5@mailbox.org>
-From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Date: Tue, 15 Aug 2023 23:18:13 +0530
-Message-ID: <CAH=2Ntw_4sJYy_ehbQ2ZL6GMd6bbFcAO9pJBWRrmqMjKNehSwg@mail.gmail.com>
-Subject: Re: [PATCH 17/17] MAINTAINERS: Update UFS maintainer
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com, 
- bhupesh.linux@gmail.com, marek.vasut+renesas@mailbox.org, 
- sumit.garg@linaro.org, rfried.dev@gmail.com, patrice.chotard@foss.st.com, 
- jbx6244@gmail.com, kever.yang@rock-chips.com, eugen.hristev@collabora.com, 
- "vigneshr@ti.com" <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
+References: <20230803185957.1769543-1-sjg@chromium.org>
+ <20230815144234.GJ3630934@bill-the-cat>
+In-Reply-To: <20230815144234.GJ3630934@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 15 Aug 2023 12:39:37 -0600
+Message-ID: <CAPnjgZ0C3Qpauto980cmPZoBkem_OVUOzusxRfRgDkJQeVOgJA@mail.gmail.com>
+Subject: Re: [PATCH] buildman: Allow more results while building
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,30 +81,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Aug 2023 at 04:01, Marek Vasut <marek.vasut@mailbox.org> wrote:
+Hi Tom,
+
+On Tue, 15 Aug 2023 at 08:42, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 8/14/23 23:54, Bhupesh Sharma wrote:
-> > Since Faiz Abbas's email ID is no longer valid,
-> > drop him from UFS Maintainer list.
-> >
-> > Since I am using the UFS framework now extensively
-> > on Qualcomm Snapdragon SoCs, so proposing myself as
-> > the new UFS maintainer.
-> >
-> > I have also been sending out u-boot UFS fixes in the
-> > recent past.
-> >
-> > Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> On Thu, Aug 03, 2023 at 12:59:55PM -0600, Simon Glass wrote:
 >
-> I believe TI is working on something here, so please coordinate with them.
+> > The -v option enables display of build results while building, instead of
+> > needing to do a separate summary step later (or in another terminal). But
+> > this resets the build results after each commit, so that all errors are
+> > reported fresh, without trying to diff them against previous errors
+> > already shown.
+> >
+> > Drop this reset, as an experiment, so see if this is useful.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  tools/buildman/builder.py | 1 -
+> >  1 file changed, 1 deletion(-)
+> >
+> > diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+> > index ecbd368c47a..5ee2b5959b2 100644
+> > --- a/tools/buildman/builder.py
+> > +++ b/tools/buildman/builder.py
+> > @@ -536,7 +536,6 @@ class Builder:
+> >              if self._verbose:
+> >                  terminal.print_clear()
+> >                  boards_selected = {target : result.brd}
+> > -                self.reset_result_summary(boards_selected)
+> >                  self.produce_result_summary(result.commit_upto, self.commits,
+> >                                            boards_selected)
+> >          else:
+>
+> Nope, this doesn't change any of the output I see in how I usually do my
+> world builds.
 
-Ok, well I haven't seen any reply to my earlier UFS fix related emails
-from TI, so I thought maybe no one is actively looking into this area.
-But I would love to hear from TI on the same..
+For me it allows using -S and -B during the build phase, and seeing some output.
 
-Anyways since I will be working on the Qualcomm UFS glue layer going
-forward, I can propose to either be a UFS maintainer or a reviewer for
-now to make sure that the subsystem patches are reviewed and tested .
+However, the patch is not correct...it is just a concept. I should
+have marked it as RFC.
 
-Thanks,
-Bhupesh
+Regards,
+Simon
