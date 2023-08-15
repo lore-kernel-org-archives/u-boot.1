@@ -4,83 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915B7C0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 08:24:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A945C0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 09:23:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9394A86725;
-	Tue, 15 Aug 2023 10:24:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C60A8685D;
+	Tue, 15 Aug 2023 11:23:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B9190sne";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mVe8l7sf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nzt/jnCA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08A248675B; Tue, 15 Aug 2023 10:24:29 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D26B686970; Tue, 15 Aug 2023 11:23:50 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F10786604
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 10:24:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3A4B86384
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 11:23:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RQ47G0c58z9skl;
- Tue, 15 Aug 2023 10:24:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692087866;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eh9WSqn6cC+SL8X8SqgW+f+ct+enqovFk9iDFicaQGI=;
- b=B9190snebRmrvAb7ZY/gbG3cofQbXlGCcODuL4nzB28IMaAG4LWUHqgNeQw4UkZNPW5Qp6
- x6dPQ/A7Bs0Kl6tNPN4quyw5rLcG9wwMpuXuDY4D1x8Usm/VD4PGJfX6Fe5l0II21CDsV0
- kv8JLxLBtpQQeGNlbFh13LUEkQKoinaTxPDkxT4HNTlMqsplIMSj0knBvWCEajDbk5e9UU
- bHhlyWAmMztqwQc0lWJDN7oNPeDMwoVBeTaWKL5NYFe+o9MKhpNHaDex2M7hN7Kq6n+5sH
- kPIE7mSZ6ml+a2BtOjgwKTuYOwIKEq2Cy4XAe0hJ+jPsQXX98zskflrRWBYdew==
-Message-ID: <507f1311-132d-57f1-ed0b-dd3aa3d7695f@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692087863;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=eh9WSqn6cC+SL8X8SqgW+f+ct+enqovFk9iDFicaQGI=;
- b=mVe8l7sfGWRWrua3YX/J5EM46HrW9HjvSd+FXgJ2elp/62B4a1TqwBleB8QclaWkDz34sh
- TAPG3wMvJ9cJG8K9liH1x6LgjX/TUdwTCnVqqcvd6V4lWPT1geeb+XDHCkVe9zNxb6eIjb
- b+ArPhxJJadK6XGfmwPigexnYfb0J+HYWzwXMkf9u2dvKKFcadT7+snR+v+7I6/vQyEBzu
- Zm9kB0mYM7697dv4fHeXF0T+iYohdyIe+kwVA1RS0AsEbE0toyKz6z7dCgorY9Crrzi7Ad
- JCGDHrlSHDhnFHETscTBC9vRAVdCdG9F7pxdbCeaT3OCfWbo/hYNJvEigzWrig==
-Date: Tue, 15 Aug 2023 10:24:21 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37F9NcpC076742;
+ Tue, 15 Aug 2023 04:23:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692091418;
+ bh=w2JOluwxgtgZrnSQt+IWmNn7hi0bS/DamDDgA4KZOpI=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=nzt/jnCAlgy+ncUs7t6eVqnVatwAg/0hGxRITV2Pw9XVoB1Qy+kaYXWv1oQG3XyQ0
+ jvGoe48YM3sGbDPQRw9dvY0VdOxXzxTy4aWyoNIF9RRVFg/OTXMeilr1uKKzVTJZ1A
+ mrBNgW5OIPTHayfGJH+yY3eNM12ZQAtGuYGq4fTM=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37F9NcG7016907
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 15 Aug 2023 04:23:38 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
+ Aug 2023 04:23:38 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 15 Aug 2023 04:23:37 -0500
+Received: from [10.0.2.15] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37F9NUh1004937;
+ Tue, 15 Aug 2023 04:23:32 -0500
+Message-ID: <99f81e66-9295-8e4c-1693-86e3d81a302c@ti.com>
+Date: Tue, 15 Aug 2023 14:53:29 +0530
 MIME-Version: 1.0
-Subject: Re: [PATCH 8/8] disk: Make blk_get_ops() internal to blk uclass
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v3 5/9] board_f: Fix corruption of relocaddr
 Content-Language: en-US
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glplk@gmx.de>,
- Joshua Watt <jpewhacker@gmail.com>, Michal Suchanek <msuchanek@suse.de>,
- Tobias Waldekranz <tobias@waldekranz.com>
-References: <20230813234648.591083-1-marek.vasut+renesas@mailbox.org>
- <20230813234648.591083-8-marek.vasut+renesas@mailbox.org>
- <CAPnjgZ2GHvNE0q1-r8VqRJhAPy-EuOsMqkmDq9NPPiDfMBz6wQ@mail.gmail.com>
- <ZNrHSX5atPqd4x/2@octopus>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <ZNrHSX5atPqd4x/2@octopus>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 6c599dfab4fe0cb08e3
-X-MBO-RS-META: j95b3r4zmodcbxnzqf1oeqr8fm5zutsq
-X-Rspamd-Queue-Id: 4RQ47G0c58z9skl
+To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ <trini@konsulko.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Nikhil M Jain
+ <n-jain1@ti.com>, Anatolij Gustschin <agust@denx.de>, Michal Suchanek
+ <msuchanek@suse.de>, Ovidiu Panait <ovpanait@gmail.com>,
+ =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
+References: <20230731160008.82342-5-sjg@chromium.org>
+ <CAEUhbmXn0VQ6B8Qfs+XWEBuPKQ0mtVbzNeH7ZmT+V1Yh1r5qWw@mail.gmail.com>
+ <CAEUhbmU14kY-DpNEZyXJEWX4vbqFY-ANgEZZskqY_gxVv4rD5Q@mail.gmail.com>
+ <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
+ <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,56 +89,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/15/23 02:31, AKASHI Takahiro wrote:
-> On Mon, Aug 14, 2023 at 04:42:57PM -0600, Simon Glass wrote:
->> On Sun, 13 Aug 2023 at 17:47, Marek Vasut
->> <marek.vasut+renesas@mailbox.org> wrote:
+Hi Simon, Tom,
+
+On 15/08/23 04:13, Simon Glass wrote:
+> Hi Devarsh, Nikhil, Tom,
+> 
+> On Wed, 9 Aug 2023 at 09:29, Bin Meng <bmeng.cn@gmail.com> wrote:
+>>
+>> On Thu, Aug 3, 2023 at 7:03 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >>>
->>> Move the macro into blk-uclass.c , since it is only used there.
+>>> On Thu, Aug 3, 2023 at 6:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>>>
+>>>> On Tue, Aug 1, 2023 at 12:00 AM Simon Glass <sjg@chromium.org> wrote:
+>>>>>
+>>>>> When the video framebuffer comes from the bloblist, we should not change
+>>>>> relocaddr to this address, since it interfers with the normal memory
+>>>>
+>>>> typo: interferes
+>>>>
+>>>>> allocation.
+>>>>>
+>>>>> This fixes a boot loop in qemu-x86_64
+>>>>>
+>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>> Fixes: 5bc610a7d9d ("common: board_f: Pass frame buffer info from SPL to u-boot")
+>>>>> Suggested-by: Nikhil M Jain <n-jain1@ti.com>
+>>>>> ---
+>>>>>
+>>>>> Changes in v3:
+>>>>> - Reword the Kconfig help as suggested
+>>>>>
+>>>>> Changes in v2:
+>>>>> - Add a Kconfig as the suggested conditional did not work
+>>>>>
+>>>>>   common/board_f.c      | 3 ++-
+>>>>>   drivers/video/Kconfig | 9 +++++++++
+>>>>>   2 files changed, 11 insertions(+), 1 deletion(-)
+>>>>>
+>>>>> diff --git a/common/board_f.c b/common/board_f.c
+>>>>> index 7d2c380e91e..5173d0a0c2d 100644
+>>>>> --- a/common/board_f.c
+>>>>> +++ b/common/board_f.c
+>>>>> @@ -419,7 +419,8 @@ static int reserve_video(void)
+>>>>>                  if (!ho)
+>>>>>                          return log_msg_ret("blf", -ENOENT);
+>>>>>                  video_reserve_from_bloblist(ho);
+>>>>> -               gd->relocaddr = ho->fb;
+>>>>> +               if (IS_ENABLED(CONFIG_VIDEO_RESERVE_SPL))
+>>>>> +                       gd->relocaddr = ho->fb;
+>>>>>          } else if (CONFIG_IS_ENABLED(VIDEO)) {
+>>>>>                  ulong addr;
+>>>>>                  int ret;
+>>>>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+>>>>> index b41dc60cec5..f2e56204d52 100644
+>>>>> --- a/drivers/video/Kconfig
+>>>>> +++ b/drivers/video/Kconfig
+>>>>> @@ -1106,6 +1106,15 @@ config SPL_VIDEO_REMOVE
+>>>>>            if this  option is enabled video driver will be removed at the end of
+>>>>>            SPL stage, beforeloading the next stage.
+>>>>>
+>>>>> +config VIDEO_RESERVE_SPL
+>>>>> +       bool
+>>>>> +       help
+>>>>> +         This adjusts reserve_video() to redirect memory reservation when it
+>>>>> +         sees a video handoff blob (BLOBLISTT_U_BOOT_VIDEO). This avoids the
+>>>>> +         memory used for framebuffer from being allocated by U-Boot proper,
+>>>>> +         thus preventing any further memory reservations done by U-Boot proper
+>>>>> +         from overwriting the framebuffer.
+>>>>> +
+>>>>>   if SPL_SPLASH_SCREEN
+>>>>>
+>>>>>   config SPL_SPLASH_SCREEN_ALIGN
+>>>>
+>>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 >>>
->>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>> ---
->>> Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>
->>> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
->>> Cc: Bin Meng <bmeng.cn@gmail.com>
->>> Cc: Heinrich Schuchardt <xypron.glplk@gmx.de>
->>> Cc: Joshua Watt <jpewhacker@gmail.com>
->>> Cc: Michal Suchanek <msuchanek@suse.de>
->>> Cc: Simon Glass <sjg@chromium.org>
->>> Cc: Tobias Waldekranz <tobias@waldekranz.com>
->>> ---
->>>   drivers/block/blk-uclass.c | 2 ++
->>>   include/blk.h              | 2 --
->>>   2 files changed, 2 insertions(+), 2 deletions(-)
+>>> applied to u-boot-x86, thanks!
 >>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->> Unfortunately this does not stop people using the ops member directly.
->>
->> For this series, I tried a patch myself [1] but I think I stuffed it
->> up. So I will let Takahiro-San figure it out. I would very much like
->> to see this clean-up go in.
+>> Dropped this one from the x86 queue per the discussion.
 > 
-> At that time I thought that the necessary change was small and trivial:)
+> I just wanted to come back to this discussion.
 > 
-> As for Marek's patch, let me first explain why I implement that way,
-> i.e. separating disk_blk_*() from part_disk_*():
-> - Initially I tried to implement disk_blk_*() work for both UCLASS_BLOCK
->    and UCLASS_PARTITION, while this idea was rejected by Simon.
-> - Then, I implemented part_disk_*() with direct access to the devices,
->    and part_disk_*(), as helper functions, with block caching.
-
-I think the later should not be part_disk_*(), but rather disk_blk_*() ?
-
->    I thought that this approach was aligned with the implementation of
->    block devices (blk_[read|wirte]).
+> Do we have an agreed way forward? Who is waiting for who?
 > 
-> If you don't think the second point makes sense, I can agree to Marek's
-> approach.
 
-Does it even make sense to have accessors which bypass the block cache ?
+I was waiting on feedback on 
+https://lore.kernel.org/all/3b1e8005-f161-8058-13e7-3de2316aac34@ti.com/ 
+but per my opinion, I would prefer to go with "Approach 2" with a 
+Kconfig as it looks simpler to me. It would look something like below :
 
--- 
-Best regards,
-Marek Vasut
+if (gd->relocaddr > (unsigned long)ho->fb) {
+      ulong fb_reloc_gap = gd->relocaddr - gd->ho->fb;
 
+      /* Relocate after framebuffer area if nearing too close to it */
+      if (fb_reloc_gap < CONFIG_BLOBLIST_FB_RELOC_MIN_GAP)
+             gd->relocaddr = ho->fb;
+}
+
+Regarding CONFIG_BLOBLIST_FB_RELOC_MIN_GAP
+-> This describes minimum gap to keep between framebuffer address and 
+relocation address to avoid overlap when framebuffer address used by 
+blob is below the current relocation address
+
+-> It would be selected as default when CONFIG_BLOBLIST is selected with 
+  default value set to 100Mb
+
+-> SoC specific Vendors can override this in their defconfigs to a 
+custom value if they feel 100Mb is not enough
+
+Also probably we can have some debug/error prints in the code to show 
+overlap happened (or is going happen) so that users can fine tune this 
+Kconfig if they got it wrong at first place.
+
+I can re-spin updated patch if we are aligned on this,
+Kindly let me know your opinion.
+
+Regards
+Devarsh
+
+> Regards,
+> Simon
