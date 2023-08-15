@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0494BC0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0780BC001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB2CF86852;
-	Tue, 15 Aug 2023 21:17:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 309C8867E2;
+	Tue, 15 Aug 2023 21:55:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JOc/eCQR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YDZQPfUW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40B6E86863; Tue, 15 Aug 2023 21:17:40 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 1E79486940; Tue, 15 Aug 2023 21:55:49 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71EAE86801
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:17:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A7F786785
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:55:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5654051b27fso4393160a12.0
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:17:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1bd9b4f8e0eso34864385ad.1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692127055; x=1692731855;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aV66Y01J54tsHnj0agaUT+Yje/h5VS4iHHLC9UV8fsE=;
- b=JOc/eCQRgPOn03rwvJo/q4GBWdpFKdyNAP1iMoWvg0l3ArvDxn8Lf4/dUODsohjS+M
- 9/qTCn0yHc97Oym3VayOlnchvt0DI5fI9wPA8fIBQ0YTBtqgsTUXsZsN1Mm4dHUn1T8Z
- pyaZLJhaS1bvL0/zODyNStftRAIrkmkLcBqp11BqNcntjiyPK/UKGX/cv6vYwGO1xaCi
- //lAlxqGNetiaoYqkXlgmSqjwlPWg52CN6o38u1mcF+s4bDC2UCy1fmStIfVSXQSTHVR
- sViiE+r5JpNr70MZD0M+FyCdcjVCeYtEEAgofh/MDj71Bdd7TMdH1w1OlGx4QNDUByKl
- NdWg==
+ d=linaro.org; s=google; t=1692129344; x=1692734144;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=x6IbbAAWCqGP0nSCS5hSkmgptzVfRQI1JzIEU5FW2lc=;
+ b=YDZQPfUWWjnhocQ6YNY5y7vbprDAsOppfi4ZzeqSXlu9MvrMq79bSdU1rW9AO682BW
+ NHjCGMdV+IP7GULzEWI05Hn2MG8C78TTHx6Z1ntN0W1iofUHcwqgABF2OXAPkeFtUECo
+ lhQmdmou5cMr7LpVO4+sjhi4/uo6VLJxjyiMGGAPXNe+0g1QUZM50GLy487JqX/7gkQ6
+ joqAQ9uqWRNFi0GxnId9QOQDwZQmeV6HRlFbpvsMmA3GinvxJOXm6AYgWTdFG92XVEXf
+ XXS+cB/oPJp6JH27csKnQ6r1vC/a5eVzRYBePnSTVG6Z3oG3kmcOYCxmFAvWcvvps+Ng
+ K+mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692127055; x=1692731855;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20221208; t=1692129344; x=1692734144;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aV66Y01J54tsHnj0agaUT+Yje/h5VS4iHHLC9UV8fsE=;
- b=JT0fBblbLIn0/fn8drg9X4LKZ8C1e/Hi88CsW/+EeCyUQNrVASBvkSqODwhVYovtZ7
- 4EpOcllIA7Lkq03YVAO2ttMP41n128T4ItH214rcHfTbukvkxZaUGDGW+z6ZQ00iNp8S
- qRTClj3D0J+1I6+Wrk/wDk6Ce6UNP0aTwR6W99mQQq1cOYxCJ3kgp3lCnZ3j/BcEhUhq
- 1pIqdLtc+qUWbK3tTRFIj307rdDtxp1edMaQNQGl78AVgZjTraPSHCClRm4o91HJIk9O
- zVgxo5dkekfvLY/TIAjuOuKfW32HBPbBGp492+AF6P/Bbpmho5Lwjvofums3aa4YnMTR
- jQeQ==
-X-Gm-Message-State: AOJu0YzO6ewSFn4/8Pgl+a7uI6dyy1eW0x4x29lTufDAkzd2T6jTkK++
- KXLwg7W1NxjQX8f5Jxy0QfY=
-X-Google-Smtp-Source: AGHT+IE8oF90rFn4jejhc4yh90yAO9VKAuxuhZOlsfhqBCLZNabR8rtsXziqFiSwcFdsMVtYt0e4dA==
-X-Received: by 2002:a05:6a20:7485:b0:143:4382:f836 with SMTP id
- p5-20020a056a20748500b001434382f836mr17731065pzd.14.1692127055425; 
- Tue, 15 Aug 2023 12:17:35 -0700 (PDT)
-Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
- [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
- z20-20020a63ac54000000b0054fd46531a1sm10604600pgn.5.2023.08.15.12.17.34
+ bh=x6IbbAAWCqGP0nSCS5hSkmgptzVfRQI1JzIEU5FW2lc=;
+ b=Ay8tpVYuEO4JeN83Dx9sR5cY+iXfuUiPXCy8kEZNNTpRXUtALpgTU1TVcviDrjgUjV
+ CJVSbTfF70ce4BSkRkYrPkCEQ9PrbeUgZZsev8sfZcNOxFAir8uABXpFU+5D2rHU45I2
+ xgK9qRdHwSCnkVLYOM7d2OYPYCG6h15yTWQ0hZA1N1xZ3Ca0tt3EcRcdta82uOA0UV9D
+ QgMgdUCE8W5HSwgLQ2JWGOiv07yKcpLybZU5M5DkImN8WtSQ5jBp5c6IOs2hmYSy2Gja
+ /FCE9tDqf8kFNkjZAT1oBhoPJyQjjc2SXbivqbNVAiCihH/CvwWiZleMnP3Z4nXWh+Kq
+ yOUg==
+X-Gm-Message-State: AOJu0YwVuoNFAx/Qvkk9HhufdxzZsLeexTHaReiwsW/GCqgqFV3m5T+Q
+ NA8oErubXrtgTaz+sySEwhURcw==
+X-Google-Smtp-Source: AGHT+IHv2WgFKpy6HF8WCFX5O5DWWpa26AnX9xUdAnKIRbhc5wgNCdO9QD67jyTJiNAZBuks1BWfqw==
+X-Received: by 2002:a17:902:b718:b0:1bc:6a89:86ba with SMTP id
+ d24-20020a170902b71800b001bc6a8986bamr9016767pls.16.1692129344136; 
+ Tue, 15 Aug 2023 12:55:44 -0700 (PDT)
+Received: from ?IPV6:2401:4900:1f3b:3924:6581:8508:2ecb:b5dd?
+ ([2401:4900:1f3b:3924:6581:8508:2ecb:b5dd])
+ by smtp.gmail.com with ESMTPSA id
+ p5-20020a170902e74500b001b9de2b905asm11416440plf.231.2023.08.15.12.55.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Aug 2023 12:17:34 -0700 (PDT)
-Message-ID: <225be7f9-558e-4695-0b38-b30b0229cdcd@gmail.com>
-Date: Tue, 15 Aug 2023 13:17:33 -0600
+ Tue, 15 Aug 2023 12:55:43 -0700 (PDT)
+Message-ID: <fd482da0-438f-c4b1-99c1-7b6d631e888e@linaro.org>
+Date: Wed, 16 Aug 2023 01:25:39 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH 3/3] sunxi: psci: implement PSCI on R528
+ Thunderbird/102.3.1
+Subject: Re: [PATCH 6/6] ufs: Implement cache management
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+References: <20230813235231.591454-1-marek.vasut+renesas@mailbox.org>
+ <20230813235231.591454-6-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
- Maksim Kiselev <bigunclemax@gmail.com>
-References: <20230812003055.74527-1-CFSworks@gmail.com>
- <20230812003055.74527-4-CFSworks@gmail.com>
- <20230814151642.6f47f6b5@donnerap.manchester.arm.com>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <20230814151642.6f47f6b5@donnerap.manchester.arm.com>
+From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+In-Reply-To: <20230813235231.591454-6-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,26 +95,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/14/23 08:16, Andre Przywara wrote:
-> Hi Sam,
+On 8/14/23 5:22 AM, Marek Vasut wrote:
+> Add function to flush and invalidate cache over request and response
+> queue entries, and perform flush and optional invalidate over block
+> layer data that are passed into the UFS layer. This makes it possible
+> to use UFS with caches enabled.
 > 
->> This patch adds the necessary code to make nonsec booting and PSCI
->> secondary core management functional on the R528/T113.
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Faiz Abbas <faiz_abbas@ti.com>
+> ---
+>   drivers/ufs/ufs.c | 42 +++++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 41 insertions(+), 1 deletion(-)
 > 
-> Unfortunately this patch breaks the build on older 32-bit SoCs, as
-> SUNXI_CPUX_BASE is not defined there. That's a typical problem of the
-> "C-if" approach, but typically there is a clean, albeit not trivial,
-> solution:
-> 
-> It seems like SUNXI_CPUX_BASE and SUNXI_CPUCFG_BASE are mutually
-> exclusive, and I actually carry a "#define SUNXI_CPUCFG_BASE 0" hack in my
-> patches already.
-> So I wonder if we should unify those two into SUNXI_CPUCFG_BASE, with the
-> following rework:
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index 041caee714f..7c48d57f99d 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -692,6 +692,21 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+>   	return (ufshcd_readl(hba, REG_CONTROLLER_STATUS) >> 8) & 0x7;
+>   }
+>   
+> +/**
+> + * ufshcd_cache_flush_and_invalidate - Flush and invalidate cache
+> + *
+> + * Flush and invalidate cache in aligned address..address+size range.
+> + * The invalidation is in place to avoid stale data in cache.
+> + */
+> +static void ufshcd_cache_flush_and_invalidate(void *addr, unsigned long size)
+> +{
+> +	uintptr_t aaddr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+> +	unsigned long asize = ALIGN(size, ARCH_DMA_MINALIGN);
+> +
+> +	flush_dcache_range(aaddr, aaddr + asize);
+> +	invalidate_dcache_range(aaddr, aaddr + asize);
+> +}
+> +
+>   /**
+>    * ufshcd_prepare_req_desc_hdr() - Fills the requests header
+>    * descriptor according to request
+> @@ -735,6 +750,8 @@ static void ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba,
+>   	req_desc->header.dword_3 = 0;
+>   
+>   	req_desc->prd_table_length = 0;
+> +
+> +	ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
+>   }
+>   
+>   static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
+> @@ -763,10 +780,15 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
+>   	memcpy(&ucd_req_ptr->qr, &query->request.upiu_req, QUERY_OSF_SIZE);
+>   
+>   	/* Copy the Descriptor */
+> -	if (query->request.upiu_req.opcode == UPIU_QUERY_OPCODE_WRITE_DESC)
+> +	if (query->request.upiu_req.opcode == UPIU_QUERY_OPCODE_WRITE_DESC) {
+>   		memcpy(ucd_req_ptr + 1, query->descriptor, len);
+> +		ufshcd_cache_flush_and_invalidate(ucd_req_ptr, 2 * sizeof(*ucd_req_ptr));
+> +	} else {
+> +		ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
+> +	}
+>   
+>   	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
+> +	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
+>   }
+>   
+>   static inline void ufshcd_prepare_utp_nop_upiu(struct ufs_hba *hba)
+> @@ -783,6 +805,9 @@ static inline void ufshcd_prepare_utp_nop_upiu(struct ufs_hba *hba)
+>   	ucd_req_ptr->header.dword_2 = 0;
+>   
+>   	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
+> +
+> +	ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
+> +	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
+>   }
+>   
+>   /**
+> @@ -1409,6 +1434,8 @@ void ufshcd_prepare_utp_scsi_cmd_upiu(struct ufs_hba *hba,
+>   	memcpy(ucd_req_ptr->sc.cdb, pccb->cmd, cdb_len);
+>   
+>   	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
+> +	ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
+> +	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
+>   }
+>   
+>   static inline void prepare_prdt_desc(struct ufshcd_sg_entry *entry,
+> @@ -1423,6 +1450,7 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   {
+>   	struct utp_transfer_req_desc *req_desc = hba->utrdl;
+>   	struct ufshcd_sg_entry *prd_table = hba->ucd_prdt_ptr;
+> +	uintptr_t aaddr = (uintptr_t)(pccb->pdata) & ~(ARCH_DMA_MINALIGN - 1);
+>   	ulong datalen = pccb->datalen;
+>   	int table_length;
+>   	u8 *buf;
+> @@ -1430,9 +1458,19 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   
+>   	if (!datalen) {
+>   		req_desc->prd_table_length = 0;
+> +		ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
+>   		return;
+>   	}
+>   
+> +	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
+> +		flush_dcache_range(aaddr, aaddr +
+> +				   ALIGN(datalen, ARCH_DMA_MINALIGN));
+> +	}
+> +
+> +	/* In any case, invalidate cache to avoid stale data in it. */
+> +	invalidate_dcache_range(aaddr, aaddr +
+> +				ALIGN(datalen, ARCH_DMA_MINALIGN));
+> +
+>   	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
+>   	buf = pccb->pdata;
+>   	i = table_length;
+> @@ -1446,6 +1484,8 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   	prepare_prdt_desc(&prd_table[table_length - i - 1], buf, datalen - 1);
+>   
+>   	req_desc->prd_table_length = table_length;
+> +	ufshcd_cache_flush_and_invalidate(prd_table, sizeof(*prd_table) * table_length);
+> +	ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
+>   }
+>   
+>   static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
 
-The SUNXI_CPUX_BASE -> SUNXI_CPUCFG_BASE rename worked excellently. 
-We're having the same problem with SUNXI_R_CPUCFG_BASE as well, though. 
-How do you want to handle that?
+LGTM, so:
+Reviewed-and-Tested-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 
-Thanks,
-Sam
+Thanks.
