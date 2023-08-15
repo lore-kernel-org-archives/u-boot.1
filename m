@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6693C04A94
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 21:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6879C0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 21:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCAA6869A0;
-	Tue, 15 Aug 2023 23:01:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 46669867E2;
+	Tue, 15 Aug 2023 23:05:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PXTUMI8X";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="T6knZ9I2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vLj00gHE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C330869A4; Tue, 15 Aug 2023 23:01:57 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BD147867E2; Tue, 15 Aug 2023 23:05:36 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 620A386852
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 23:01:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A235586852
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 23:05:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RQNx62Tctz9sWv;
- Tue, 15 Aug 2023 23:01:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692133306;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=chafz/xxVamTINAZWqRtnLuL/iXkF+N6g0Xq95Dvmhg=;
- b=PXTUMI8XYYKFRferS55YES+JW+78zdkh2ZoqC/R8X2kmvekQMWaEBmgvUdADSb1VNSMiw1
- ebMIkw2/jtPNWkyHZ5rVe5L4TuWshUaF9nlJ6ZeCb4mMr9FZIiK9cICrcalM7gdemsVJL3
- 7Aoz1H25zxeo3rxrv+BsnPnGu8cWHcBsLe46n+i3i9TpvhNQmUOc2pMuv+MXK57e/sqIZ8
- 4vUJJupGDTg6aafJMZalMY82mksREyQAXPist1CIJE4s/6wsb7JKzaEb2HcFVTjuHAiFoB
- PJzNWbEAzCe7cO7j3yxDmd4Ibe4hqjr0pMqarPS9gCch61Jp3SNgaV2tBCFlug==
-Message-ID: <4ca740dc-de83-0f5e-f9c4-ad2cac6be3dd@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692133303;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=chafz/xxVamTINAZWqRtnLuL/iXkF+N6g0Xq95Dvmhg=;
- b=T6knZ9I2ihUov28EGa+NDFFSaq7axRDuUel6Mml8mF25HjdArWGELen6eOIdXV27lBFxck
- YYD8jwd4iR54GSW66rx797W+9I79MEPLxmur+G1jmGIseU4PZOClADP5Q4HXuEZ5tsDB5W
- +WlTJwrO9Vu0pq/K0RVbwpWlk05dN6LVIne+ALWCFZRMM4me5vOkCyTsfheeI6oUPbyXpY
- 4rKeku4rMdKqZnuU35PppwQt+oCGsIfxQ2AVV3eQ1fgt+zxlA1bi+MLQ5afqRNaQNf13Wq
- vGwfrX8FvFIgtT90sZdUlhje3kiEDLz/8VzqTTTvlqJo6YKr46avnQ5QnOVOlg==
-Date: Tue, 15 Aug 2023 22:56:10 +0200
+ spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-3fe5c0e5747so34872195e9.0
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 14:05:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692133532; x=1692738332;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ktzTSbDpIzNoYWgyiGJTxE3eT4ODZ4r7QcReNJM/+8k=;
+ b=vLj00gHEp3V9h1FSLLI1lPjsM0bVn8n3VVsKqIGRQLpsV/UbfeUyoJByixJmiwy7lR
+ QFK/E3c/sZzxLuEgY+dm+Ohtw11Q0EvccruMPMkLemOoyc7qC2Wh8nn/XvM0zBb+iNMU
+ L7KdhAigJzN9i3cjvkz9ALBZLzVZFAY6QhLSnkQTjVsijo9ucW9R3S6IaBzwTBwIx4u/
+ j0KNXVQCc90uOwXYfcLZA/2dcdS49bQXJZq506uN6PehepjmXpfBCGHc7vZIr70V/JUz
+ np9/EO/uziG+4x7hvywqGZBrNH6tBPum4aDT1TCz772FmU7J58Ss2FpQPYyh9N+YC4QX
+ /UcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692133532; x=1692738332;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ktzTSbDpIzNoYWgyiGJTxE3eT4ODZ4r7QcReNJM/+8k=;
+ b=QPA6OAftjiJ+BqCBPywb7RZeuxzv9r+zIBB12sXl/cCTVfy9zZrow6wAKN28b/MISn
+ icTvIynefet4XR7Qyw9WiTIyASsLZZogyE9gB841DJ749EnNLQe7iZSY5Ldfzzh5S2oi
+ SXrTt6bA45/EXIJJJALIWutvNblqqWZbNYdo5nko/6gaoBNyyQvDpbgDxFRATYsjwGw7
+ 2HF3PWj0yvIq6cPQ8hIXnKEFyIyYvXkqrvpTAJhWFWmvlCnFb/05zTBGF4J/3DgtNaca
+ G+b3/NjlzdOq+vw9uc8Xfhv6Kh0m2NQiBBfnnm/CEO9fz8BlGbuVmEzbZ02kqn1TAegF
+ apsA==
+X-Gm-Message-State: AOJu0YxsV0o7O9a7OV4m6HPP2CFaXXP33dyZTmNiDXbVXdplZLEWnCow
+ nVzNsyfAef13rtsb66Lziq92efMFjhOS3B/oZ8Qefg==
+X-Google-Smtp-Source: AGHT+IEHiadg7YY4wIBHxFvaIzTy+F/lvT9z2QSgj+ez/s5WkywjtiqQHaQ94UiDLjzJFmwGfgXklWqvMgUMKeRmwpA=
+X-Received: by 2002:a05:600c:2d93:b0:3fe:20f1:fb2 with SMTP id
+ i19-20020a05600c2d9300b003fe20f10fb2mr2521897wmg.6.1692133532080; Tue, 15 Aug
+ 2023 14:05:32 -0700 (PDT)
 MIME-Version: 1.0
-From: Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH 4/6] ufs: Pass hba pointer to ufshcd_prepare_req_desc_hdr()
-To: Bhupesh Sharma <bhupesh.sharma@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 References: <20230813235231.591454-1-marek.vasut+renesas@mailbox.org>
- <20230813235231.591454-4-marek.vasut+renesas@mailbox.org>
- <d2e3f423-0110-6980-baa9-d3a4ea1391af@linaro.org>
-Content-Language: en-US
-In-Reply-To: <d2e3f423-0110-6980-baa9-d3a4ea1391af@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 0d58c08d7c5ab9ea372
-X-MBO-RS-META: uowp7swjykfpi6quo4f8ybiem9yecsdf
-X-Rspamd-Queue-Id: 4RQNx62Tctz9sWv
+ <20230813235231.591454-3-marek.vasut+renesas@mailbox.org>
+ <CAH=2NtyeiRyN1pwJ8ukXXbMiD6Yv2bUgYdoVkd4D4mM2f3Dw_g@mail.gmail.com>
+ <2f97ee68-65e4-fcf2-773e-411936c8227d@mailbox.org>
+In-Reply-To: <2f97ee68-65e4-fcf2-773e-411936c8227d@mailbox.org>
+From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+Date: Wed, 16 Aug 2023 02:35:20 +0530
+Message-ID: <CAH=2NtwTWud_8iNoMgWmOPYVoHTXEZAgcsr4Gmv9fq0SO2tfYg@mail.gmail.com>
+Subject: Re: [PATCH 3/6] ufs: Handle UFS 3.0 controllers
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
+ Faiz Abbas <faiz_abbas@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,65 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/15/23 21:57, Bhupesh Sharma wrote:
-> On 8/14/23 5:22 AM, Marek Vasut wrote:
->> Pass the hba pointer itself to ufshcd_prepare_req_desc_hdr()
->> instead of duplicating utp_transfer_req_desc access at each
->> call site. No functional change.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Faiz Abbas <faiz_abbas@ti.com>
->> ---
->>   drivers/ufs/ufs.c | 9 ++++-----
->>   1 file changed, 4 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
->> index 58830c8ddca..da1009e2c14 100644
->> --- a/drivers/ufs/ufs.c
->> +++ b/drivers/ufs/ufs.c
->> @@ -696,10 +696,11 @@ static inline u8 ufshcd_get_upmcrs(struct 
->> ufs_hba *hba)
->>    * ufshcd_prepare_req_desc_hdr() - Fills the requests header
->>    * descriptor according to request
->>    */
->> -static void ufshcd_prepare_req_desc_hdr(struct utp_transfer_req_desc 
->> *req_desc,
->> +static void ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba,
->>                       u32 *upiu_flags,
->>                       enum dma_data_direction cmd_dir)
->>   {
->> +    struct utp_transfer_req_desc *req_desc = hba->utrdl;
->>       u32 data_direction;
->>       u32 dword_0;
->> @@ -793,11 +794,10 @@ static int ufshcd_comp_devman_upiu(struct 
->> ufs_hba *hba,
->>   {
->>       u32 upiu_flags;
->>       int ret = 0;
->> -    struct utp_transfer_req_desc *req_desc = hba->utrdl;
->>       hba->dev_cmd.type = cmd_type;
->> -    ufshcd_prepare_req_desc_hdr(req_desc, &upiu_flags, DMA_NONE);
->> +    ufshcd_prepare_req_desc_hdr(hba, &upiu_flags, DMA_NONE);
->>       switch (cmd_type) {
->>       case DEV_CMD_TYPE_QUERY:
->>           ufshcd_prepare_utp_query_req_upiu(hba, upiu_flags);
->> @@ -1449,12 +1449,11 @@ static void prepare_prdt_table(struct ufs_hba 
->> *hba, struct scsi_cmd *pccb)
->>   static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd 
->> *pccb)
->>   {
->>       struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
->> -    struct utp_transfer_req_desc *req_desc = hba->utrdl;
->>       u32 upiu_flags;
->>       int ocs, result = 0;
->>       u8 scsi_status;
->> -    ufshcd_prepare_req_desc_hdr(req_desc, &upiu_flags, pccb->dma_dir);
->> +    ufshcd_prepare_req_desc_hdr(hba, &upiu_flags, pccb->dma_dir);
->>       ufshcd_prepare_utp_scsi_cmd_upiu(hba, pccb, upiu_flags);
->>       prepare_prdt_table(hba, pccb);
-> 
-> Reviewed-and-Tested-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+On Wed, 16 Aug 2023 at 02:31, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 8/15/23 19:14, Bhupesh Sharma wrote:
+> > On Mon, 14 Aug 2023 at 05:23, Marek Vasut
+> > <marek.vasut+renesas@mailbox.org> wrote:
+> >>
+> >> Extend the version check to handle UFS 3.0 controllers as well.
+> >> Tested on R-Car S4 UFS 3.0 controller.
+> >>
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> ---
+> >> Cc: Faiz Abbas <faiz_abbas@ti.com>
+> >> ---
+> >>   drivers/ufs/ufs.c | 3 ++-
+> >>   drivers/ufs/ufs.h | 1 +
+> >>   2 files changed, 3 insertions(+), 1 deletion(-)
+> >>
+> >> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> >> index 261ae2843c2..58830c8ddca 100644
+> >> --- a/drivers/ufs/ufs.c
+> >> +++ b/drivers/ufs/ufs.c
+> >> @@ -1903,7 +1903,8 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
+> >>          if (hba->version != UFSHCI_VERSION_10 &&
+> >>              hba->version != UFSHCI_VERSION_11 &&
+> >>              hba->version != UFSHCI_VERSION_20 &&
+> >> -           hba->version != UFSHCI_VERSION_21)
+> >> +           hba->version != UFSHCI_VERSION_21 &&
+> >> +           hba->version != UFSHCI_VERSION_30)
+> >>                  dev_err(hba->dev, "invalid UFS version 0x%x\n",
+> >>                          hba->version);
+> >>
+> >> diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+> >> index 33ca5f29812..ef7728fc39e 100644
+> >> --- a/drivers/ufs/ufs.h
+> >> +++ b/drivers/ufs/ufs.h
+> >> @@ -781,6 +781,7 @@ enum {
+> >>          UFSHCI_VERSION_11 = 0x00010100, /* 1.1 */
+> >>          UFSHCI_VERSION_20 = 0x00000200, /* 2.0 */
+> >>          UFSHCI_VERSION_21 = 0x00000210, /* 2.1 */
+> >> +       UFSHCI_VERSION_30 = 0x00000300, /* 3.0 */
+> >>   };
+> >>
+> >>   /* Interrupt disable masks */
+> >> --
+> >> 2.40.1
+> >
+> > SInce the Qualcomm UFS HC controllers are even newer / greater version
+> > values, we can drop this patch in favour of my UFS patch here:
+> > https://lists.denx.de/pipermail/u-boot/2023-August/527215.html
+>
+> Why not keep validating the version ?
 
-Please use Reviewed-by: and Tested-by: tags separately, else patchwork 
-won't pick those tags up.
+How many versions would one want to validate when the newer versions
+are 4.1 or greater?
