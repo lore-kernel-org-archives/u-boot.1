@@ -4,82 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F18A5C04A6A
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:45:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22911C001DB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66958869AB;
-	Tue, 15 Aug 2023 16:44:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A9E08869CD;
+	Tue, 15 Aug 2023 16:44:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FMisEmhS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K4OlORvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5090869D2; Tue, 15 Aug 2023 16:44:34 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 37E23869D9; Tue, 15 Aug 2023 16:44:36 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1C8286995
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:44:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DA97869C9
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:44:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-99bcfe28909so708395466b.3
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:44:31 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-99cdb0fd093so748109166b.1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:44:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692110671; x=1692715471;
+ d=chromium.org; s=google; t=1692110673; x=1692715473;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g38pcbFBy3BzBP/NIDdsqQ3ZYJZ/2R3j1z9bmObcZR4=;
- b=FMisEmhS33z0EDOCyky3r37h+IwMPHewqXOeDmqUD14p+QhFKtXu7S2YJWDSYG83oB
- tU6zdQZGyrLEwL7i52g0szeodCFmhMV5PkiHj1DiPqR4F07gc3ZgLTA9YCqwcB3D6vAY
- MsgpotI045MYP7gGxe8v3A5J2S3vD7T6JKPtU=
+ bh=wBbjRzYBH4tZwuCH1qU2BliS6hDFHNu5WWakz1AVZao=;
+ b=K4OlORvf94DjHOKXDfYITEwkTO4j/8gt3RIKWSEt+f03FDF5gSQSaVpQdsNVWOikXA
+ 2IsxgzY+bMhL58+nFS96HARjjercy9x9rI2IpmSkd3LgNY/CQFqY4LXZRQxFfmwif85E
+ oNk8esZiZRKr/JnlnIf8Fe2nwzz3Y+KPVNgRw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692110671; x=1692715471;
+ d=1e100.net; s=20221208; t=1692110673; x=1692715473;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g38pcbFBy3BzBP/NIDdsqQ3ZYJZ/2R3j1z9bmObcZR4=;
- b=GR7hSVQN9hlXIw/dEsNNW+i7WTcHTL97mBP/hbrK0986zcGL0gZ0egWPxC7kIwLWro
- ZvHX0+v10QNN1ZfXnNUmNeM39CbAAJMTfkKcmKdVKeN4b/A7m1ajjxcyHYyHN3+AHW6X
- PWuM9VZszpCX+SHnI4ujVmNcSHWo1pI4y9wiGRuHUfeWVYzc6e2VzwWNjlTH1GHUdxtJ
- mtmDmrNmDePadh/S2sEHUltu9SV3qvEuwcLxmxndN2tEe8zQr0eruEdT10N3I8tyxEk/
- UZmFLzk05dmJa4G0N/eZbc6w/Tj56FpHnsIc2tVneS0MR5yftaQJ5iu9mtf0xAbTeNQI
- f9dQ==
-X-Gm-Message-State: AOJu0YxTumlZJ/UETMC4xWXzf2HH1hA3TGBq7T17dQFJYbepS7U1xCS8
- ebZY2jJK9wuwj3AcQPbc4QY+OdajAAU8p1e3Nd2hqg==
-X-Google-Smtp-Source: AGHT+IH1/AWJcYzfK1UANKfVmBbYsLocXmzwd17+4cUj1Nb6uhvjPZaQQKpBlCx6vQyV4p4MtCRWXNAKPJlpZ9Bb7U8=
-X-Received: by 2002:a17:906:53cd:b0:982:b224:2a5d with SMTP id
- p13-20020a17090653cd00b00982b2242a5dmr9981929ejo.37.1692110670975; Tue, 15
- Aug 2023 07:44:30 -0700 (PDT)
+ bh=wBbjRzYBH4tZwuCH1qU2BliS6hDFHNu5WWakz1AVZao=;
+ b=PK1uISVeeRWQqq8hXP2OPu3Vc/pe2K1HYcRRhbQm5B3JzIPXuyjcfyN/Kbgg3Ykytm
+ H5rOiKWj3Vt32EAaK/AQVB1OzhepI7TQyqM3zoyHLnCLJ+ubt2MPTEPUwPrqysRniQ6w
+ CwZFqJEXRD80vVAYYwjpoW2zu16FRLNrZQRMfBo0PTjN47Ljm1GrO+gj8H1UyCR5HeCO
+ IWxszWqHBG2U1BiGNgKAPQCtIyUGkPz5R/rBZPVeIw3iSbL+7zxmVmSb9C4Q9O1iXRQw
+ 6Akm+gFpW3JoN/c8OQsSwaQoh7wXFjwWU0XqEVbs1lmKjCKxDGgvMHRDDz+S5uHf/6Vw
+ 8tFA==
+X-Gm-Message-State: AOJu0YzwXq7nwOLEv10dvt2u7pn8zzYI3iFnDHgvotvhXeLqz33G4sRt
+ mnfJnyf04efkXSOtf0CjQ0LE9gRAD78jzdAeVMv8dQ==
+X-Google-Smtp-Source: AGHT+IHhaB8U4/BhMslJGTuqcJ/iusfTQS+q1KCntUg/tTFj3VrnOAo0RRmw/Ud5Xojwq9nbjBTdOQApH1JN0Q7BLH0=
+X-Received: by 2002:a17:907:7853:b0:99d:bcc8:6830 with SMTP id
+ lb19-20020a170907785300b0099dbcc86830mr3340409ejc.29.1692110672730; Tue, 15
+ Aug 2023 07:44:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230811155613.GE3630934@bill-the-cat>
- <CAPnjgZ3cL9v5VgQyqHhAr+Do2f8MOy2RYT3jNq7y6m_9i8aeJA@mail.gmail.com>
- <20230812142223.GI3630934@bill-the-cat>
- <CAPnjgZ380FF64cHtBjMTztJpj1bqF3-u2Vpt0YdRo7EzqSiVcw@mail.gmail.com>
- <20230812142824.GJ3630934@bill-the-cat>
- <CAPnjgZ3zC_F4OvuUqfU1=V_aAp74kyNNcEqgNky2VhyWhcpFOA@mail.gmail.com>
- <20230812223758.GK3630934@bill-the-cat>
- <CAPnjgZ0sfYRBGxB=_5Loi-9K=RgfSqLHA2FLafYgBs9vQaC59Q@mail.gmail.com>
- <20230813124045.GL3630934@bill-the-cat>
- <CAPnjgZ2moLG0HKVyQ5nZk91080dpNbC9EYD+u1H1Dw6sYkJ9sg@mail.gmail.com>
- <20230813144352.GM3630934@bill-the-cat>
-In-Reply-To: <20230813144352.GM3630934@bill-the-cat>
+References: <CAPnjgZ0Gj==Q-YOU+EoD=s3h25Waw5EYa0DEOD_comoAy_bRMw@mail.gmail.com>
+ <20230813155208.GN3630934@bill-the-cat>
+In-Reply-To: <20230813155208.GN3630934@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Aug 2023 08:44:18 -0600
-Message-ID: <CAPnjgZ0DpYY3X9w66N6G0tgAwoN_3-SToTT+2yMmk0Gibse8fg@mail.gmail.com>
-Subject: Re: [PATCH v8 4/9] sandbox: Build the mkeficapsule tool for the
- sandbox variants
+Date: Tue, 15 Aug 2023 08:44:20 -0600
+Message-ID: <CAPnjgZ2_y3coEzTh=3Y=-w=B+qFAmxM5CbCYsKDWvCNaeO_-Kg@mail.gmail.com>
+Subject: Re: Strange gitlab idea
 To: Tom Rini <trini@konsulko.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Malte Schmidt <malte.schmidt-oss@weidmueller.com>,
- Michal Simek <michal.simek@amd.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,206 +83,52 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sun, 13 Aug 2023 at 08:43, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 13 Aug 2023 at 09:52, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Aug 13, 2023 at 07:36:45AM -0600, Simon Glass wrote:
+> On Sat, Aug 12, 2023 at 09:14:45PM -0600, Simon Glass wrote:
+>
 > > Hi Tom,
 > >
-> > On Sun, 13 Aug 2023 at 06:40, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Aug 12, 2023 at 06:14:45PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sat, 12 Aug 2023 at 16:38, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sat, Aug 12, 2023 at 11:03:36AM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Sat, 12 Aug 2023 at 08:28, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sat, Aug 12, 2023 at 08:24:59AM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Sat, 12 Aug 2023 at 08:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sat, Aug 12, 2023 at 07:08:44AM -0600, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 11 Aug 2023 at 09:56, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, Aug 11, 2023 at 08:26:36AM -0600, Simon Glass wrote:
-> > > > > > > > > > > > Hi Sughosh,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Fri, 11 Aug 2023 at 08:23, Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > > > > > wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Fri, 11 Aug 2023 at 19:28, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Fri, Aug 11, 2023 at 04:29:37PM +0530, Sughosh Ganu wrote:
-> > > > > > > > > > > > > > > On Thu, 10 Aug 2023 at 22:47, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Thu, Aug 10, 2023 at 10:39:06PM +0530, Sughosh Ganu wrote:
-> > > > > > > > > > > > > > > > > On Thu, 10 Aug 2023 at 21:22, Tom Rini <trini@konsulko.com>
-> > > > > > > > > > wrote:
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > On Thu, Aug 10, 2023 at 07:53:33PM +0530, Sughosh Ganu
-> > > > > > > > > > wrote:
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > Build the mkeficapsule tool for all the sandbox variants.
-> > > > > > > > > > This tool
-> > > > > > > > > > > > > > > > > > > will be used subsequently for testing capsule generation
-> > > > > > > > > > in binman.
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > > > > > > > > > > > > > > ---
-> > > > > > > > > > > > > > > > > > > Changes since V7: None
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > >  tools/Kconfig | 6 +++---
-> > > > > > > > > > > > > > > > > > >  1 file changed, 3 insertions(+), 3 deletions(-)
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > diff --git a/tools/Kconfig b/tools/Kconfig
-> > > > > > > > > > > > > > > > > > > index 6e23f44d55..353a855243 100644
-> > > > > > > > > > > > > > > > > > > --- a/tools/Kconfig
-> > > > > > > > > > > > > > > > > > > +++ b/tools/Kconfig
-> > > > > > > > > > > > > > > > > > > @@ -91,10 +91,10 @@ config TOOLS_SHA512
-> > > > > > > > > > > > > > > > > > >         Enable SHA512 support in the tools builds
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > >  config TOOLS_MKEFICAPSULE
-> > > > > > > > > > > > > > > > > > > -     bool "Build efimkcapsule command"
-> > > > > > > > > > > > > > > > > > > -     default y if EFI_CAPSULE_ON_DISK
-> > > > > > > > > > > > > > > > > > > +     bool "Build mkeficapsule tool"
-> > > > > > > > > > > > > > > > > > > +     default y if EFI_CAPSULE_ON_DISK || SANDBOX
-> > > > > > > > > > > > > > > > > > >       help
-> > > > > > > > > > > > > > > > > > > -       This command allows users to create a UEFI
-> > > > > > > > > > capsule file and,
-> > > > > > > > > > > > > > > > > > > +       This tool allows users to create a UEFI capsule
-> > > > > > > > > > file and,
-> > > > > > > > > > > > > > > > > > >         optionally sign that file. If you want to enable
-> > > > > > > > > > UEFI capsule
-> > > > > > > > > > > > > > > > > > >         update feature on your target, you certainly need
-> > > > > > > > > > this.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Sorry, what is this fixing exactly?
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > The tool is required to be supported on the sandbox_spl
-> > > > > > > > > > variant, since
-> > > > > > > > > > > > > > > > > that is used for the binman tests in CI. Simon had then asked
-> > > > > > > > > > me to
-> > > > > > > > > > > > > > > > > add support for the tool on all sandbox variants. I missed
-> > > > > > > > > > putting his
-> > > > > > > > > > > > > > > > > R-b on this patch.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > OK, moving forward just depend on:
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20230810165224.514772-1-trini@konsulko.com/
-> > > > > > > > > > > > > > > > instead please, thanks.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > I will base my changes on top of your patch. However, we would
-> > > > > > > > > > still
-> > > > > > > > > > > > > > > need this patch as part of the series, since Simon wants the
-> > > > > > > > > > capsules
-> > > > > > > > > > > > > > > to be generated for all the sandbox variants. Thanks.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > No, this isn't needed.  Any sandbox variant that needs capsules has
-> > > > > > > > > > > > > > EFI_CAPSULE_ON_DISK enabled.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Simon wants the capsules to be generated on all sandbox variants,
-> > > > > > > > > > > > > including those that do not have the EFI_CAPSULE_ON_DISK enabled.
-> > > > > > > > > > > > > Which is why we need to have the tool enabled for all sandbox
-> > > > > > > > > > > > > variants.
-> > > > > > > > > > > >
-> > > > > > > > > > > > I want to avoid #ifdefs in the sandbox .dts so far as possible.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Tom, I'll let you make the final decision.
-> > > > > > > > > > > >
-> > > > > > > > > > > > In any case, the multiple-images thing needs to be fixed.
-> > > > > > > > > > >
-> > > > > > > > > > > Sughosh, please update the other sandbox defconfigs to just enable
-> > > > > > > > > > > EFI_CAPSULE_ON_DISK.
-> > > > > > > > > > >
-> > > > > > > > > > > Simon, this I think is an example of where re-working
-> > > > > > > > > > > configs/sandbox64_defconfig
-> > > > > > > > > > > configs/sandbox_defconfig
-> > > > > > > > > > > configs/sandbox_flattree_defconfig
-> > > > > > > > > > > configs/sandbox_noinst_defconfig
-> > > > > > > > > > > configs/sandbox_spl_defconfig
-> > > > > > > > > > > configs/sandbox_vpl_defconfig
-> > > > > > > > > > >
-> > > > > > > > > > > To be configs/sandbox_defconfig + boards/sandbox/flattree.config,
-> > > > > > > > > > > noinst.config, spl.config, vpl.config would be helpful.  There's the
-> > > > > > > > > > > sandbox config itself where EFI_CAPSULE_ON_DISK=y and then every other
-> > > > > > > > > > > variant just gets that, and we don't have to tweak N configs.
-> > > > > > > > > >
-> > > > > > > > > > You mean split configs? So far I am unable to build those...
-> > > > > > > > >
-> > > > > > > > > I don't know what you mean by split configs.  I mean that I think the
-> > > > > > > > > only intentional difference between configs/sandbox_defconfig and
-> > > > > > > > > configs/sandbox64_defconfig is:
-> > > > > > > > > CONFIG_SANDBOX64=y
-> > > > > > > > > CONFIG_DEFAULT_DEVICE_TREE="sandbox64"
-> > > > > > > > >
-> > > > > > > > > And everything else is unintentional.  And there's lots of other deltas
-> > > > > > > > > like that between each of the other variants, and sandbox.  And that
-> > > > > > > > > this isn't the first, nor likely the last, time where we need to enable
-> > > > > > > > > some option on other sandbox config files too, so that CI passes.  This
-> > > > > > > > > would all be avoided by using the config fragments mechanism so that
-> > > > > > > > > we captured only the intentional delta of a fragment rather than
-> > > > > > > > > maintaining N nearly identical, but not quite, files.
-> > > > > > > >
-> > > > > > > > Well we do have other intentional differences, e.g. OF_LIVE. But OK if
-> > > > > > > > we can find a way to make fragments work with buildman (amd qconfig),
-> > > > > > > > then we could do this.
-> > > > > > >
-> > > > > > > Yes, I was noting this in hopes of sparking your interest in figuring
-> > > > > > > out how to handle fragments with buildman.  It's similar to how we have
-> > > > > > > the override option today.
-> > > > > >
-> > > > > > We need a list of fragments somewhere, so that it is possible to
-> > > > > > enumerate the different board combinations. Does the main defconfig
-> > > > > > have a way to specify this, or could we add it?
-> > > > >
-> > > > > No, I don't think that's the right way to go.  I was thinking of
-> > > > > something along the lines of how --adjust-cfg works, but instead it's a
-> > > > > csv of additional targets to pass along with the defconfig name when
-> > > > > invoking make.
-> > > >
-> > > > So we would do them one at a time, with the 'name' of the board being
-> > > > some portion of the filename of the config-fragment file?
-> > > >
-> > > > BTW CSV is not great for humans...perhaps a text file with columns
-> > > > like boards.cfg ?
-> > >
-> > > I think you're still missing what I'm saying.  There should not be a
-> > > file that lists fragments.  Outside of documentation, at least.  I was
-> > > saying csv above because it would make sense to do something like:
-> > > ./tools/buildman/buildman --add-fragments=64bit,vpl sandbox
-> > > And that would eventually do:
-> > > make sandbox_config 64bit.config vpl.config
-> > > Which has the standard Kconfig merging of configs/sandbox_defconfig
-> > > boards/sandbox/64bit.config (replaces sandbox64_defconfig) and
-> > > boards/sandbox/vpl.config
-> > > And passing multiple files with a comma seems easiest.
+> > I notice that the runners are not utilised much by the QEMU jobs,
+> > since we only run one at a time.
 > >
-> > So is it only possible to add one fragment file to a build?
+> > I wonder if we could improve this, perhaps by using a different tag
+> > for the QEMU ones and then having a machine that only runs those (and
+> > runs 40 in parallel)?
+> >
+> > In general our use of the runners seems a bit primitive, since the
+> > main use of parallelism is in the world builds.
 >
-> The example above is two, and yes, N config fragments works (they are
-> merged in listed order).
+> I'm honestly not sure. I think there's a few tweaks that we should do,
+> like putting the opensbi and coreboot files in to the Dockerfile logic
+> instead.  And maybe seeing if just like we can have a docker registry
+> cache, if we can setup local pypi cache too?  I'm not otherwise sure
+> what's taking 23 seconds or so of
+> https://source.denx.de/u-boot/u-boot/-/jobs/673565#L34 since the build
+> and run parts aren't much.
+>
+> My first big worry about running 2 or 3 qemu jobs at the same time on a
+> host is that any wins get from a shorter queue will be lost to buildman
+> doing "make -j$(nproc)" 2 or 3 times at once and so we build slower.
 
-OK
+Yes, perhaps.
 
 >
-> > I see what you are saying, but from my side I am trying to enumerate
-> > the boards, since generally I (like) build things without explicitly
-> > specifying each board defconfig.
->
-> Yes, but that's not possible in this case I think.  And I'm really just
-> trying to figure out how we can make CI a little easier.  But maybe we
-> can't / don't bother in this case and keep fixing up the sandbox
-> defconfig files as needed.
+> My second big worry is that getting the right tags on runners will be a
+> little tricky.
 
-Maybe...it sounds like you are really just wanting a way for buildman
-to manually build a single board with some config added, rather than
-having it detect and build everything that is in-tree?
+Yes, and error-prone. Also it makes it harder to deal with broken machines.
+
+>
+> My third big worry (but this is something you can test easy enough at
+> least) is that running the big sandbox tests, 2 or 3 times at once on
+> the same host will get much slower. I think, but profiling would be
+> helpful, that those get slow due to I/O and not CPU.
+
+I suspect it would be fast enough.
+
+But actually the other problem is that I am not sure whether the jobs
+would have their own filesystem?
 
 Regards,
 Simon
