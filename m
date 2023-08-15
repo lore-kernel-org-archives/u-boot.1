@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 333E8C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15EEEC001DE
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EC74869AD;
-	Tue, 15 Aug 2023 18:26:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 86F6E869AB;
+	Tue, 15 Aug 2023 18:27:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA6386940; Tue, 15 Aug 2023 18:26:57 +0200 (CEST)
+ id 1FBAB8671F; Tue, 15 Aug 2023 18:27:00 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 490B48671F
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:26:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 356C586940
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:26:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 226D91063;
- Tue, 15 Aug 2023 09:27:37 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CB8371063;
+ Tue, 15 Aug 2023 09:27:39 -0700 (PDT)
 Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 951113F6C4;
- Tue, 15 Aug 2023 09:26:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4B66D3F6C4;
+ Tue, 15 Aug 2023 09:26:55 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -33,9 +33,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 3/5] sandbox: capsule: Add path to the public key ESL file
-Date: Tue, 15 Aug 2023 21:56:21 +0530
-Message-Id: <20230815162623.1824357-4-sughosh.ganu@linaro.org>
+Subject: [PATCH 4/5] doc: capsule: Document the new mechanism to embed ESL
+ file into dtb
+Date: Tue, 15 Aug 2023 21:56:22 +0530
+Message-Id: <20230815162623.1824357-5-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230815162623.1824357-1-sughosh.ganu@linaro.org>
 References: <20230815162623.1824357-1-sughosh.ganu@linaro.org>
@@ -57,42 +58,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the path to the public key EFI Signature List(ESL) file for the
-sandbox variants which enable capsule authentication. This ESL file
-gets embedded into the platform's device-tree as part of the build.
+Update the document to specify how the EFI Signature List(ESL) file
+can be embedded into the platform's dtb as part of the U-Boot build.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since RFC series: None
+Changes since RFC series:
+* s/u-boot/U-Boot in the commit message.
 
- configs/sandbox_defconfig          | 1 +
- configs/sandbox_flattree_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+ doc/develop/uefi/uefi.rst | 19 +++++--------------
+ 1 file changed, 5 insertions(+), 14 deletions(-)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 1cd1c2ed7c..9f349d482b 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -340,6 +340,7 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
-+CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_TEST_FDTDEC=y
- CONFIG_UNIT_TEST=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 8aa295686d..2a24b38cfb 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -227,6 +227,7 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
- CONFIG_EFI_CAPSULE_AUTHENTICATE=y
-+CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
- CONFIG_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index 3ce579d46e..950f4d1a5a 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -539,20 +539,11 @@ and used by the steps highlighted below.
+             ...
+     }
+ 
+-You can do step-4 manually with
+-
+-.. code-block:: console
+-
+-    $ dtc -@ -I dts -O dtb -o signature.dtbo signature.dts
+-    $ fdtoverlay -i orig.dtb -o new.dtb -v signature.dtbo
+-
+-where signature.dts looks like::
+-
+-    &{/} {
+-            signature {
+-                    capsule-key = /incbin/("CRT.esl");
+-            };
+-    };
++You can perform step-4 by defining the Kconfig symbol
++CONFIG_EFI_CAPSULE_ESL_FILE. This symbol defines the path to the esl
++file generated in step-2. Once the symbol has been populated with the
++path to the esl file, the esl file will automatically get embedded
++into the platform's dtb as part of U-Boot build.
+ 
+ Anti-rollback Protection
+ ************************
 -- 
 2.34.1
 
