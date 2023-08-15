@@ -4,60 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A879BC001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D0DC001DE
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:45:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0569A869AE;
+	by phobos.denx.de (Postfix) with ESMTP id 43765869BD;
 	Tue, 15 Aug 2023 18:44:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZcSBRPU0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Z/yY8REl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFFF5869B4; Tue, 15 Aug 2023 18:44:49 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 9F5DF869B8; Tue, 15 Aug 2023 18:44:50 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C50B786940
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:44:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F989869B1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37FGihUW049232;
- Tue, 15 Aug 2023 11:44:43 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37FGigWm039514;
+ Tue, 15 Aug 2023 11:44:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692117883;
- bh=pxCbL15lUWSkElXWvh6lwXTrqJqUlbiNOd6f0tMHeKs=;
- h=From:To:CC:Subject:Date;
- b=ZcSBRPU0fupAM2nhktFj9uKjIA0eOrtxtZx8JzFxLAG5MlgKmhM7zy9NmrQLdW8y5
- szlBZ0CkIw/bTqG4VL7FqpIelX/bSZsF4cbliS6rc/rKpS9dglosuFVP8pYRPlAWvj
- ABZI0mvrqgLgP5xDlVSzwKKcj5csQvCzyfRSYKUc=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37FGihgh113812
+ s=ti-com-17Q1; t=1692117882;
+ bh=GiAPzwSPkg2WHLv/lnRweK0AUxw9TzHL/GMYQYf8C6I=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=Z/yY8RElgAp73uycis7wRfcoH7elL8taqWkjkAQI7FK5WeSOmhfY6OmtUfTPZEwem
+ Y0NLR7TybazqkQLZGwApJ8Y0fLfSA2V6jytzRIf2kwNJqcJ6VpntAgXz8S0+k7ar2a
+ XDTZkW6yaPBZSSs06302NV0kfhFRhkZBG40Kr/Sg=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37FGiguO059029
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 15 Aug 2023 11:44:43 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 15 Aug 2023 11:44:42 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
  Aug 2023 11:44:42 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 15 Aug 2023 11:44:42 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37FGigqH100646;
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37FGigS3012879;
  Tue, 15 Aug 2023 11:44:42 -0500
 From: Nishanth Menon <nm@ti.com>
 To: <n-francis@ti.com>, <trini@konsulko.com>
 CC: <bb@ti.com>, <praneeth@ti.com>, <afd@ti.com>, Robert Nelson
  <robertcnelson@gmail.com>, <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V3 0/4] board: ti: Add support for BeaglePlay
-Date: Tue, 15 Aug 2023 11:44:36 -0500
-Message-ID: <20230815164440.2713726-1-nm@ti.com>
+ <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH V3 1/4] arm: dts: k3-am625-sk-binman: Add labels for unsigned
+ binary
+Date: Tue, 15 Aug 2023 11:44:37 -0500
+Message-ID: <20230815164440.2713726-2-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20230815164440.2713726-1-nm@ti.com>
+References: <20230815164440.2713726-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -78,57 +82,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add labels for unsigned binary to permit over-ride.
 
-Add support for BeaglePlay - rev 3
+Cc: Simon Glass <sjg@chromium.org>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+NOTE: We can refactor this once the template solution comes online later on
 
-Boot log: https://gist.github.com/nmenon/3e99b44380873263e39ba4d84788db89
+Changes since V2: None
+V2: https://lore.kernel.org/u-boot/20230727234446.3651836-2-nm@ti.com/
+V1: https://lore.kernel.org/all/20230725185253.2123433-3-nm@ti.com/
 
-Full series(including dependencies) can be found at:
-https://github.com/nmenon/fix-k3-dt-u-boot/commits/beagleplay-v3
+ arch/arm/dts/k3-am625-sk-binman.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Caveats:
-* I have kept networking out of picture for now as it is still in debug
- (See
-  https://github.com/nmenon/fix-k3-dt-u-boot/commits/beagleplay-v3-enet-debug
-  if anyone is interested)
-
-Changes since V2:
-* I have rebased to latest next branch
-  bdc682437a67 (origin/next) Merge branch '2023-08-14-assorted-general-updates' into next
-* Uses config fragments by default.
-* Updated MAINTAINER file as well
-
-V2: https://lore.kernel.org/u-boot/20230727234446.3651836-1-nm@ti.com/
-V1: https://lore.kernel.org/all/20230725185253.2123433-1-nm@ti.com/
-
-Nishanth Menon (3):
-  arm: dts: k3-am625-sk-binman: Add labels for unsigned binary
-  board: ti: am62x: Add am62x_beagleplay_* defconfigs
-  doc: board: ti: Add BeaglePlay documentation
-
-Robert Nelson (1):
-  arm: dts: Add k3-am625-beagleplay
-
- arch/arm/dts/Makefile                         |    2 +
- .../dts/k3-am625-beagleplay-ddr4-1600MTs.dtsi | 2195 +++++++++++++++++
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  172 ++
- arch/arm/dts/k3-am625-beagleplay.dts          |  758 ++++++
- arch/arm/dts/k3-am625-r5-beagleplay.dts       |   87 +
- arch/arm/dts/k3-am625-sk-binman.dtsi          |    4 +-
- board/ti/am62x/MAINTAINERS                    |    7 +
- board/ti/am62x/beagleplay_a53.config          |   20 +
- board/ti/am62x/beagleplay_r5.config           |   11 +
- doc/board/ti/am62x_beagleplay.rst             |  121 +
- doc/board/ti/k3.rst                           |    1 +
- 11 files changed, 3376 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm/dts/k3-am625-beagleplay-ddr4-1600MTs.dtsi
- create mode 100644 arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
- create mode 100644 arch/arm/dts/k3-am625-beagleplay.dts
- create mode 100644 arch/arm/dts/k3-am625-r5-beagleplay.dts
- create mode 100644 board/ti/am62x/beagleplay_a53.config
- create mode 100644 board/ti/am62x/beagleplay_r5.config
- create mode 100644 doc/board/ti/am62x_beagleplay.rst
-
+diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+index a35d6418c25f..41277bf4bfdb 100644
+--- a/arch/arm/dts/k3-am625-sk-binman.dtsi
++++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
+@@ -389,7 +389,7 @@
+ 					type = "flat_dt";
+ 					arch = "arm";
+ 					compression = "none";
+-					blob {
++					spl_am625_sk_dtb_unsigned: blob {
+ 						filename = SPL_AM625_SK_DTB;
+ 					};
+ 				};
+@@ -438,7 +438,7 @@
+ 					type = "flat_dt";
+ 					arch = "arm";
+ 					compression = "none";
+-					blob {
++					am625_sk_dtb_unsigned: blob {
+ 						filename = AM625_SK_DTB;
+ 					};
+ 					hash {
 -- 
 2.40.0
 
