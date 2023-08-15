@@ -4,67 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF132C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:45:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8957EC001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:45:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4440A869D9;
+	by phobos.denx.de (Postfix) with ESMTP id 8A73E869E2;
 	Tue, 15 Aug 2023 16:44:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ctbeX+96";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RCmsxY4E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D8B5869AD; Tue, 15 Aug 2023 16:44:40 +0200 (CEST)
+ id 6873C869AD; Tue, 15 Aug 2023 16:44:40 +0200 (CEST)
 Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
  [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 483E4869E0
+ by phobos.denx.de (Postfix) with ESMTPS id 36687869C9
  for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:44:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-99bccc9ec02so773350066b.2
+ a640c23a62f3a-99d937b83efso386464966b.3
  for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:44:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692110677; x=1692715477;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hCDANBJc99vvymBCSQABpWJgXGo3JnJkoHcz41IutIw=;
- b=ctbeX+96jHF/yWy4JedWHmsrxLvzqmIRaV/7780nUAiH5pLulS6E9J+J4ZLR1bPicM
- ECo8abSeGySlx+S+HcjsFU+XIUAy+ZMQUVLaScySXMytKuh3pqC9r51flef2M3j0f+ob
- 5qzCuFK2GqldNwvT2Q+ZHiS255qKyRr5ISqAw=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RYGAjiX2PyP9CzLGrFBMqjqIEqGZKwwiCYGiTIB8QhA=;
+ b=RCmsxY4EMWpKeWhQnkdU3s8/7/CIIi8s5cZ57VIgdPI5k9Zq209Cttb7G7mBVvjFXz
+ 3ekh9Wr0jGZuKf54SiKhP359zu3cXogh7TLQZnvY0PEiFWnlBtB2LvBj575/6eLpzSoo
+ MWfjdNSCb+lkRMJGxb8Bo6WfYE7oB/+QOJsdE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692110677; x=1692715477;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hCDANBJc99vvymBCSQABpWJgXGo3JnJkoHcz41IutIw=;
- b=e6hn7J5qEWAnZOQJpXr2oW26EzxHbAfOWWqkCy0t/7TDUfGneBl8nX4w59ts/XsGHb
- 0uj4KxD4El9uA291A0yxoQOfwDgYZpyxr7QYNuAYkYcR5U4Lt9S9EJv5DIQ+FEo3/OH9
- 2IHOymh/8lL3ZwOunZ4dLSTh4kD7FUEpQnhWezcKTb0xBoeB3iOBfF+dL0PYW8w9nYVU
- MVdGSNm5gSdkgLIYC7f4Waq1Wxkdgqp+q3Dk2f1diorURMuQxemDES1aRQHHG6nLPNw9
- s0iPLjeIKQ7b4MeMxYp1H5oharsHr/goLlhYLRWQTN5VEL/Sy+xbTtIzRnlmuIG2R1//
- 3p5g==
-X-Gm-Message-State: AOJu0YwchP6uIyGsHRKWYuRT2bh7GJKDOpPiFDB2fqduXGO3kG8QO8mB
- XGioG4yDiWONcAZgVjz04+T4sKsxNoFbOUI8hlAcwQ==
-X-Google-Smtp-Source: AGHT+IHKmgYU+6UKcjSHP0xcZraiRKvSKxj5ild4D6K3Li1IqGX5xvrNyD8588XsO5GnrZefSBY+x1t6udCcGNmjEqI=
-X-Received: by 2002:a17:906:3ca9:b0:99c:6312:73ca with SMTP id
- b9-20020a1709063ca900b0099c631273camr9710354ejh.71.1692110676716; Tue, 15 Aug
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RYGAjiX2PyP9CzLGrFBMqjqIEqGZKwwiCYGiTIB8QhA=;
+ b=ekt3EkYPyINAzYTe2e+c9KHfj4XCRtWwGzHHZRKpXgVjeJ0C/ifMOG5J1PVcxSoUPu
+ IfXNyGtd13F/IBen2pLJPlDlZbO8oR7SZlkWFh0WAgzmpECSHFh9YTEzeeNjb7bhBkTB
+ B+0UqfNzMnkCjqieqTiEK+YqtRU2KJEOvs6Lnnu3NjDhlQPRBNi+eFWIhpeIvaGHjRW2
+ cCh64YvEzaSi5llKfV5EgUTR5rK1wjc70Y54gT8FwQ2OeLAcjB5uvcFKnNXlu+qdEJqA
+ UnZgJ4QGcBW12QCkCLM71O2dPn4uhP90XkshGwLiFSrdkUVWpzZ8ENMhwabvKKvGFREL
+ RTlg==
+X-Gm-Message-State: AOJu0YxnLvroUEkiF0jONIyWc0jDbVz4XApyKhfTExFahYJSrjJL9cNv
+ 6Udl/n+wAwa45vGXg2JwY5aFQeWLLZA95vL43p/ebQ==
+X-Google-Smtp-Source: AGHT+IGOPTxy1LwYWNDwRr1+4NKLdhmnYQe3qsyCTBXeJAF2r3Yo3AkEg/wrxfIBNMdRR3HKVgD+qYyTCgOkuUx+lH0=
+X-Received: by 2002:a17:906:1db:b0:99c:7eaa:28ec with SMTP id
+ 27-20020a17090601db00b0099c7eaa28ecmr9959063ejj.12.1692110676609; Tue, 15 Aug
  2023 07:44:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230815103259.17476-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20230815103259.17476-1-heinrich.schuchardt@canonical.com>
+References: <20230731160008.82342-5-sjg@chromium.org>
+ <CAEUhbmXn0VQ6B8Qfs+XWEBuPKQ0mtVbzNeH7ZmT+V1Yh1r5qWw@mail.gmail.com>
+ <CAEUhbmU14kY-DpNEZyXJEWX4vbqFY-ANgEZZskqY_gxVv4rD5Q@mail.gmail.com>
+ <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
+ <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
+ <99f81e66-9295-8e4c-1693-86e3d81a302c@ti.com>
+In-Reply-To: <99f81e66-9295-8e4c-1693-86e3d81a302c@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Aug 2023 08:44:25 -0600
-Message-ID: <CAPnjgZ0BB90F4Zpq6AtyTPuME3XiJJYmYUOBhFCG9FujOq4wHw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] doc: add partition API to HTML documentation
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Joshua Watt <jpewhacker@gmail.com>, u-boot@lists.denx.de
+Date: Tue, 15 Aug 2023 08:44:23 -0600
+Message-ID: <CAPnjgZ2EjOn86eQ-BdGH5F67Op3bSwG0BZb-LAbPOw955Srg0g@mail.gmail.com>
+Subject: Re: [PATCH v3 5/9] board_f: Fix corruption of relocaddr
+To: Devarsh Thakkar <devarsht@ti.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, trini@konsulko.com, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Nikhil M Jain <n-jain1@ti.com>, 
+ Anatolij Gustschin <agust@denx.de>, Michal Suchanek <msuchanek@suse.de>,
+ Ovidiu Panait <ovpanait@gmail.com>, 
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,82 +92,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Devarsh,
 
-On Tue, 15 Aug 2023 at 04:32, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 15 Aug 2023 at 03:23, Devarsh Thakkar <devarsht@ti.com> wrote:
 >
-> * Convert comments in part.h to Sphinx style.
-> * Create documentation page for the partition API.
-> * Add the partition API page to the API index page.
+> Hi Simon, Tom,
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  doc/api/index.rst |   1 +
->  doc/api/part.rst  |   6 ++
->  include/part.h    | 210 ++++++++++++++++++++++++----------------------
->  3 files changed, 119 insertions(+), 98 deletions(-)
->  create mode 100644 doc/api/part.rst
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Q below
-
+> On 15/08/23 04:13, Simon Glass wrote:
+> > Hi Devarsh, Nikhil, Tom,
+> >
+> > On Wed, 9 Aug 2023 at 09:29, Bin Meng <bmeng.cn@gmail.com> wrote:
+> >>
+> >> On Thu, Aug 3, 2023 at 7:03=E2=80=AFPM Bin Meng <bmeng.cn@gmail.com> w=
+rote:
+> >>>
+> >>> On Thu, Aug 3, 2023 at 6:37=E2=80=AFPM Bin Meng <bmeng.cn@gmail.com> =
+wrote:
+> >>>>
+> >>>> On Tue, Aug 1, 2023 at 12:00=E2=80=AFAM Simon Glass <sjg@chromium.or=
+g> wrote:
+> >>>>>
+> >>>>> When the video framebuffer comes from the bloblist, we should not c=
+hange
+> >>>>> relocaddr to this address, since it interfers with the normal memor=
+y
+> >>>>
+> >>>> typo: interferes
+> >>>>
+> >>>>> allocation.
+> >>>>>
+> >>>>> This fixes a boot loop in qemu-x86_64
+> >>>>>
+> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>>>> Fixes: 5bc610a7d9d ("common: board_f: Pass frame buffer info from S=
+PL to u-boot")
+> >>>>> Suggested-by: Nikhil M Jain <n-jain1@ti.com>
+> >>>>> ---
+> >>>>>
+> >>>>> Changes in v3:
+> >>>>> - Reword the Kconfig help as suggested
+> >>>>>
+> >>>>> Changes in v2:
+> >>>>> - Add a Kconfig as the suggested conditional did not work
+> >>>>>
+> >>>>>   common/board_f.c      | 3 ++-
+> >>>>>   drivers/video/Kconfig | 9 +++++++++
+> >>>>>   2 files changed, 11 insertions(+), 1 deletion(-)
+> >>>>>
+> >>>>> diff --git a/common/board_f.c b/common/board_f.c
+> >>>>> index 7d2c380e91e..5173d0a0c2d 100644
+> >>>>> --- a/common/board_f.c
+> >>>>> +++ b/common/board_f.c
+> >>>>> @@ -419,7 +419,8 @@ static int reserve_video(void)
+> >>>>>                  if (!ho)
+> >>>>>                          return log_msg_ret("blf", -ENOENT);
+> >>>>>                  video_reserve_from_bloblist(ho);
+> >>>>> -               gd->relocaddr =3D ho->fb;
+> >>>>> +               if (IS_ENABLED(CONFIG_VIDEO_RESERVE_SPL))
+> >>>>> +                       gd->relocaddr =3D ho->fb;
+> >>>>>          } else if (CONFIG_IS_ENABLED(VIDEO)) {
+> >>>>>                  ulong addr;
+> >>>>>                  int ret;
+> >>>>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> >>>>> index b41dc60cec5..f2e56204d52 100644
+> >>>>> --- a/drivers/video/Kconfig
+> >>>>> +++ b/drivers/video/Kconfig
+> >>>>> @@ -1106,6 +1106,15 @@ config SPL_VIDEO_REMOVE
+> >>>>>            if this  option is enabled video driver will be removed =
+at the end of
+> >>>>>            SPL stage, beforeloading the next stage.
+> >>>>>
+> >>>>> +config VIDEO_RESERVE_SPL
+> >>>>> +       bool
+> >>>>> +       help
+> >>>>> +         This adjusts reserve_video() to redirect memory reservati=
+on when it
+> >>>>> +         sees a video handoff blob (BLOBLISTT_U_BOOT_VIDEO). This =
+avoids the
+> >>>>> +         memory used for framebuffer from being allocated by U-Boo=
+t proper,
+> >>>>> +         thus preventing any further memory reservations done by U=
+-Boot proper
+> >>>>> +         from overwriting the framebuffer.
+> >>>>> +
+> >>>>>   if SPL_SPLASH_SCREEN
+> >>>>>
+> >>>>>   config SPL_SPLASH_SCREEN_ALIGN
+> >>>>
+> >>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> >>>
+> >>> applied to u-boot-x86, thanks!
+> >>
+> >> Dropped this one from the x86 queue per the discussion.
+> >
+> > I just wanted to come back to this discussion.
+> >
+> > Do we have an agreed way forward? Who is waiting for who?
+> >
 >
-> diff --git a/doc/api/index.rst b/doc/api/index.rst
-> index a9338cfef9..3a80ae0635 100644
-> --- a/doc/api/index.rst
-> +++ b/doc/api/index.rst
-> @@ -15,6 +15,7 @@ U-Boot API documentation
->     lmb
->     logging
->     nvmem
-> +   part
->     pinctrl
->     rng
->     sandbox
-> diff --git a/doc/api/part.rst b/doc/api/part.rst
-> new file mode 100644
-> index 0000000000..d1df1d8494
-> --- /dev/null
-> +++ b/doc/api/part.rst
-> @@ -0,0 +1,6 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Partition API
-> +=============
-> +[..]
+> I was waiting on feedback on
+> https://lore.kernel.org/all/3b1e8005-f161-8058-13e7-3de2316aac34@ti.com/
+> but per my opinion, I would prefer to go with "Approach 2" with a
+> Kconfig as it looks simpler to me. It would look something like below :
+>
+> if (gd->relocaddr > (unsigned long)ho->fb) {
+>       ulong fb_reloc_gap =3D gd->relocaddr - gd->ho->fb;
+>
+>       /* Relocate after framebuffer area if nearing too close to it */
+>       if (fb_reloc_gap < CONFIG_BLOBLIST_FB_RELOC_MIN_GAP)
+>              gd->relocaddr =3D ho->fb;
+> }
+>
+> Regarding CONFIG_BLOBLIST_FB_RELOC_MIN_GAP
+> -> This describes minimum gap to keep between framebuffer address and
+> relocation address to avoid overlap when framebuffer address used by
+> blob is below the current relocation address
+>
+> -> It would be selected as default when CONFIG_BLOBLIST is selected with
+>   default value set to 100Mb
+>
+> -> SoC specific Vendors can override this in their defconfigs to a
+> custom value if they feel 100Mb is not enough
+>
+> Also probably we can have some debug/error prints in the code to show
+> overlap happened (or is going happen) so that users can fine tune this
+> Kconfig if they got it wrong at first place.
+>
+> I can re-spin updated patch if we are aligned on this,
+> Kindly let me know your opinion.
 
-> +/**
-> + * struct part_driver - partition driver
-> + */
->  struct part_driver {
-> +       /** @name:      partition name */
->         const char *name;
-> +       /** @part_type: (MBR) partition type */
->         int part_type;
-> -       const int max_entries;  /* maximum number of entries to search */
-> -
-> +       /** @max_entries:       maximum number of partition table entries */
-> +       const int max_entries;
->         /**
-> -        * get_info() - Get information about a partition
-> +        * @get_info:           Get information about a partition
+I'm just nervous about the whole idea, TBH. Perhaps I am missing some
+documentation on how people are supposed to lay out memory in SPL and
+U-Boot properr, but I'm not really aware of any guidance we give.
 
-Are we not allowed the () at end? I much prefer brackets as they show
-it is a function.
-
->          *
-> -        * @dev_desc:   Block device descriptor
-> -        * @part:       Partition number (1 = first)
-> -        * @info:       Returns partition information
-> +        * @get_info.dev_desc:  Block device descriptor
-> +        * @get_info.part:      Partition number (1 = first)
-> +        * @get_info.info:      Returns partition information
->          */
->         int (*get_info)(struct blk_desc *dev_desc, int part,
->                         struct disk_partition *info);
-[..]
+Perhaps we should say that the SPL frame buffer should be at the top
+of memory, and U-Boot's reserve area should start below that?
 
 Regards,
 Simon
