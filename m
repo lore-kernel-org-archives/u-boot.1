@@ -4,72 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3D0C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6515DC001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:43:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D4198697B;
-	Tue, 15 Aug 2023 18:31:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5285E8697B;
+	Tue, 15 Aug 2023 18:43:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VP+3XDCa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3F8C8698D; Tue, 15 Aug 2023 18:31:01 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F24B86940
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:30:59 +0200 (CEST)
+ id 8E26C8697B; Tue, 15 Aug 2023 18:43:15 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 481ED8699C
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1692117057; x=1692721857; i=xypron.glpk@gmx.de;
- bh=yUXxqdIh1Z7jssG8s+M00/rsImCFvEce2L4GDeLZojk=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=VP+3XDCag4hDWFd3iB415f3+Ud3U2xX/vkR4qu+LO0o24MqgmSZcrdcIcfUxy87Gbp3QtUa
- POy1iGwubmNGlRYGeYaEy0zpZeC7c0d4DYDNf8INSyPL9Vtk2Rhl3eOiFzdqXJuHupPsGwSJN
- x8GihZbscp7F9Dgwo9oB2UpIeh2qpWU/pfqXMXAMrdWXmOPlM3VWML7s9YgLg05dzlV2COylc
- UgGDZ/Jo+rXs/aHoYJakZyZP5unqU+E23E9ETq9VNupRLr8OCPXSJip3Y81dBCIrdF6MIeNV5
- 4/A2bIWiR1QeF6vTksluZ+l6OXneRHkyNbifUnaOxCIOoQVvc0/w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MSKu0-1qKya109Lk-00Sj8b; Tue, 15
- Aug 2023 18:30:57 +0200
-Message-ID: <5e7a5766-0afd-0051-af97-d3bedf4712d2@gmx.de>
-Date: Tue, 15 Aug 2023 18:31:39 +0200
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9D2031063;
+ Tue, 15 Aug 2023 09:43:54 -0700 (PDT)
+Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.35.50])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BF45D3F6C4;
+ Tue, 15 Aug 2023 09:43:10 -0700 (PDT)
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+To: marek.vasut@mailbox.org
+Cc: abdellatif.elkhlifi@arm.com, marek.vasut+renesas@mailbox.org,
+ sjg@chromium.org, u-boot@lists.denx.de, nd@arm.com,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] nvmxip: add sandbox support
+Date: Tue, 15 Aug 2023 17:43:00 +0100
+Message-Id: <20230815164300.444701-1-abdellatif.elkhlifi@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <85390ee0-acf3-8e39-1074-250e07bf5e5f@mailbox.org>
+References: <85390ee0-acf3-8e39-1074-250e07bf5e5f@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng.cn@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request for efi-2023-10-rc3
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:UOb6fmERK4YB1hU3oRYq4qXDsZ5fnG2GK8YPDmQYl159w95U780
- anZkVcpejYvlY9OA+1Wh+7QeeYGbrdRpuYlvacp9m21VDmQ9Z37ZYPD+JnkXDt3Bshugt90
- I9Zf+Ho1SA9q0DE2xGr+6On6S2kXshVwcrh6TM3DpJle6bioPCW/4B9XosfQp8AhgtfDLtL
- srUPW5ekhl7dgOv+vsT0A==
-UI-OutboundReport: notjunk:1;M01:P0:5zRJPIT/eJw=;kqir6axu+Cb4bYRId90cVYXnu9L
- 01hneqcuKJIZCpHfyl8vAd8ByMAjJFRfoqOZtC3ychfyLZBveNrVqn+gBkLfk4/1jIVyR9xcW
- 1ZSiDe8mevdhPJ1H+JWxwycOejk1WatGPXGKl1o2DHhJXYsa1vtoBaMuZPcuD64Hp8EYj/mc6
- Svcwc/xAaXR15g7F07LjApt9yUOl6zP3on09gisUJxfN07ewYLv5myxq4apIBFItGh4vJ9ZMd
- uCVxiAyudp6OZwRzBkTNNSFkOLIdj3cVTVMkqsdSkSzHe6/0PraKHg021OnzRoUFuyPdbrIjX
- 9/X8/T0THCguhpkuZAY0EZ7GKyISELHkO9qeMJGusiUp4VAqSC87CBQhnhat8ZJXjMQU/s9eG
- hXOOXlrkOgNl20StIxkKuJCtcjquGFHmWsKfisnYcOe5M2JYLhyPv9QXpeIPq1hnD3IxFstb/
- g5z5HkZC75n41txaeoLb2ME/s4ftkcVoa5gY1wdswrPNyH+2pw+0mZyPCQzj8WbG/97oSaz2d
- 8YfoPRkZwofg6GeXb3w72Jm5akErKB06NXivL03gIK/VmEDONJDA0TkY0qx6YSP3Y2ZmzIL2g
- Wpqc+SYV4zqYnhgWpitRHpZF+6nFxaW+jSqofo2/2ZN44O0codtlSgy+RgIIa+jY4KL18PeFx
- w5B3Mjk/MQCdvDV1cFAmrQ1a7BHA9Fv+y+62QXtIO/xSrqcHTX5Z9bm1DIHRRf4KaS3OfUpKN
- TOYMol6BTrQ9NL3lbYb/xvb1J4n6P/QmTKPSomZCfjzJRXFWLbSaPDUaN+27otv+BnFV4oTra
- ELLXV91HZHPlQsJSKnmjDTU/M/8V4fgnpH6VBiP5HMn+/KTjYZLhlaGNLs6iI33RvZo93rxgn
- YRkCWIOix3j+iQSJ6R8lNbDzd8KGITLMVV2MrFVA7PWI0D+B4a/oIW8DHgou3p5ulDfS61DSq
- HQ8nBX0NxHR/0H2P3hc26XTVG0Y=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,100 +55,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+enable the 32-bit version of sandbox
 
-The following changes since commit 832148f675e427060be074c276956962fa9b5cb=
-6:
+Initially NVMXIP came with sandbox64 support.
+Let's enable sandbox support as well.
 
-   Merge tag 'u-boot-rockchip-20230814' of
-https://source.denx.de/u-boot/custodians/u-boot-rockchip (2023-08-14
-09:11:09 -0400)
+Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+---
+ arch/sandbox/dts/sandbox.dts       | 14 ++++++++++++++
+ configs/sandbox_defconfig          |  4 ++--
+ drivers/mtd/nvmxip/nvmxip-uclass.c |  6 +++---
+ drivers/mtd/nvmxip/nvmxip.c        | 13 +++++++++++--
+ drivers/mtd/nvmxip/nvmxip_qspi.c   | 10 +++++++++-
+ test/dm/Makefile                   |  2 +-
+ 6 files changed, 40 insertions(+), 9 deletions(-)
 
-are available in the Git repository at:
+diff --git a/arch/sandbox/dts/sandbox.dts b/arch/sandbox/dts/sandbox.dts
+index 12d3eff5fa..1d38a939c4 100644
+--- a/arch/sandbox/dts/sandbox.dts
++++ b/arch/sandbox/dts/sandbox.dts
+@@ -97,6 +97,20 @@
+ 		compatible = "sandbox,spi";
+ 		cs-gpios = <0>, <&gpio_a 0>;
+ 	};
++
++	nvmxip-qspi1@08000000 {
++		compatible = "nvmxip,qspi";
++		reg = <0x08000000 0x00200000>;
++		lba_shift = <9>;
++		lba = <4096>;
++	};
++
++	nvmxip-qspi2@08200000 {
++		compatible = "nvmxip,qspi";
++		reg = <0x08200000 0x00100000>;
++		lba_shift = <9>;
++		lba = <2048>;
++	};
+ };
+ 
+ #include "sandbox.dtsi"
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 1cd1c2ed7c..296f9d7326 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -145,7 +145,6 @@ CONFIG_IP_DEFRAG=y
+ CONFIG_BOOTP_SERVERIP=y
+ CONFIG_IPV6=y
+ CONFIG_DM_DMA=y
+-CONFIG_DEVRES=y
+ CONFIG_DEBUG_DEVRES=y
+ CONFIG_SIMPLE_PM_BUS=y
+ CONFIG_ADC=y
+@@ -184,6 +183,7 @@ CONFIG_DMA_CHANNELS=y
+ CONFIG_SANDBOX_DMA=y
+ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_ARM_FFA_TRANSPORT=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_GPIO_LOOKUP_LABEL=y
+ CONFIG_QCOM_PMIC_GPIO=y
+@@ -227,6 +227,7 @@ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_SPI_FLASH_SST=y
+ CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_NVMXIP_QSPI=y
+ CONFIG_MULTIPLEXER=y
+ CONFIG_MUX_MMIO=y
+ CONFIG_NVME_PCI=y
+@@ -345,4 +346,3 @@ CONFIG_TEST_FDTDEC=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
+-CONFIG_ARM_FFA_TRANSPORT=y
+diff --git a/drivers/mtd/nvmxip/nvmxip-uclass.c b/drivers/mtd/nvmxip/nvmxip-uclass.c
+index 6d8eb177b5..7177f8f314 100644
+--- a/drivers/mtd/nvmxip/nvmxip-uclass.c
++++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
+@@ -9,7 +9,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <log.h>
+-#if CONFIG_IS_ENABLED(SANDBOX64)
++#if CONFIG_IS_ENABLED(SANDBOX)
+ #include <asm/test.h>
+ #endif
+ #include <linux/bitops.h>
+@@ -39,7 +39,7 @@ static int nvmxip_post_bind(struct udevice *udev)
+ 	char bdev_name[NVMXIP_BLKDEV_NAME_SZ + 1];
+ 	int devnum;
+ 
+-#if CONFIG_IS_ENABLED(SANDBOX64)
++#if CONFIG_IS_ENABLED(SANDBOX)
+ 	sandbox_set_enable_memio(true);
+ #endif
+ 
+@@ -62,7 +62,7 @@ static int nvmxip_post_bind(struct udevice *udev)
+ 		return ret;
+ 	}
+ 
+-	log_info("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
++	log_debug("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
+ 
+ 	return 0;
+ }
+diff --git a/drivers/mtd/nvmxip/nvmxip.c b/drivers/mtd/nvmxip/nvmxip.c
+index a359e3b482..9191e69a40 100644
+--- a/drivers/mtd/nvmxip/nvmxip.c
++++ b/drivers/mtd/nvmxip/nvmxip.c
+@@ -11,6 +11,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
++#include <linux/bitfield.h>
+ #include <linux/bitops.h>
+ #include <linux/errno.h>
+ #include "nvmxip.h"
+@@ -26,9 +27,17 @@
+  *
+  * Always return 0.
+  */
+-static int nvmxip_mmio_rawread(const phys_addr_t address, u64 *value)
++static int nvmxip_mmio_rawread(const u64 *address, u64 *value)
+ {
++#if CONFIG_IS_ENABLED(PHYS_64BIT)
+ 	*value = readq(address);
++#else
++	u32 h_word, l_word;
++
++	l_word = readl(address);
++	h_word = readl((u8 *)address + sizeof(u32));
++	*value = FIELD_PREP(GENMASK_ULL(63, 32), h_word) | l_word;
++#endif
+ 	return 0;
+ }
+ 
+@@ -67,7 +76,7 @@ static ulong nvmxip_blk_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcn
+ 	/* assumption: the data is virtually contiguous */
+ 
+ 	for (qdata_idx = 0 ; qdata_idx < qwords ; qdata_idx++)
+-		nvmxip_mmio_rawread((phys_addr_t)(virt_blkaddr + qdata_idx), pdst++);
++		nvmxip_mmio_rawread(virt_blkaddr + qdata_idx, pdst++);
+ 
+ 	log_debug("[%s]:     src[0]: 0x%llx , dst[0]: 0x%llx , src[-1]: 0x%llx , dst[-1]: 0x%llx\n",
+ 		  dev->name,
+diff --git a/drivers/mtd/nvmxip/nvmxip_qspi.c b/drivers/mtd/nvmxip/nvmxip_qspi.c
+index 7221fd1cb4..b6b94ca57f 100644
+--- a/drivers/mtd/nvmxip/nvmxip_qspi.c
++++ b/drivers/mtd/nvmxip/nvmxip_qspi.c
+@@ -17,6 +17,14 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ #define NVMXIP_QSPI_DRV_NAME "nvmxip_qspi"
+ 
++/* Select the right physical address formatting according to the platform */
++#ifdef CONFIG_PHYS_64BIT
++#define PhysAddrLength "ll"
++#else
++#define PhysAddrLength ""
++#endif
++#define PHYS_ADDR_LN "%" PhysAddrLength "x"
++
+ /**
+  * nvmxip_qspi_of_to_plat() -read from DT
+  * @dev:	the NVMXIP device
+@@ -50,7 +58,7 @@ static int nvmxip_qspi_of_to_plat(struct udevice *dev)
+ 		return -EINVAL;
+ 	}
+ 
+-	log_debug("[%s]: XIP device base addr: 0x%llx , lba_shift: %d , lbas: %lu\n",
++	log_debug("[%s]: XIP device base addr: " PHYS_ADDR_LN " , lba_shift: %d , lbas: %lu\n",
+ 		  dev->name, plat->phys_base, plat->lba_shift, plat->lba);
+ 
+ 	return 0;
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 7ed00733c1..77172d9012 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -18,7 +18,7 @@ obj-$(CONFIG_UT_DM) += test-uclass.o
+ obj-$(CONFIG_UT_DM) += core.o
+ obj-$(CONFIG_UT_DM) += read.o
+ obj-$(CONFIG_UT_DM) += phys2bus.o
+-ifeq ($(CONFIG_NVMXIP_QSPI)$(CONFIG_SANDBOX64),yy)
++ifeq ($(CONFIG_NVMXIP_QSPI),y)
+ obj-y += nvmxip.o
+ endif
+ 
+-- 
+2.25.1
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2023-10-rc3
-
-for you to fetch changes up to d768dd88552df18d4a0527cf3d6ddd05dc072f02:
-
-   common: return type board_get_usable_ram_top (2023-08-15 18:21:17 +0200=
-)
-
-=2D---------------------------------------------------------------
-Pull request for efi-2023-10-rc3
-
-Documentation:
-
-* Correct description of board_get_usable_ram_top
-* Add partition API to HTML documentation
-* Describe  lmb_is_reserved
-* doc/sphinx/requirements.txt: Bump certifi up
-
-UEFI:
-
-* Fix  efi_add_known_memory
-* Make distro_efi_boot() static
-
-Other:
-
-* Correct return type board_get_usable_ram_top
-
-=2D---------------------------------------------------------------
-Bin Meng (1):
-       bootmeth: efi: Make distro_efi_boot() static
-
-Heinrich Schuchardt (5):
-       lmb: description lmb_is_reserved, lmb_is_reserved_flags
-       doc: description of board_get_usable_ram_top()
-       doc: add partition API to HTML documentation
-       efi_loader: fix efi_add_known_memory()
-       common: return type board_get_usable_ram_top
-
-Tom Rini (1):
-       doc/sphinx/requirements.txt: Bump certifi up
-
-  arch/arm/mach-imx/imx8m/soc.c           |   2 +-
-  arch/arm/mach-mvebu/arm64-common.c      |   2 +-
-  arch/arm/mach-rockchip/sdram.c          |   2 +-
-  arch/arm/mach-stm32mp/dram_init.c       |   2 +-
-  arch/arm/mach-sunxi/board.c             |   2 +-
-  arch/arm/mach-tegra/board2.c            |   2 +-
-  arch/mips/mach-jz47xx/jz4780/jz4780.c   |   2 +-
-  arch/mips/mach-octeon/dram.c            |   2 +-
-  arch/riscv/cpu/fu540/dram.c             |   2 +-
-  arch/riscv/cpu/fu740/dram.c             |   2 +-
-  arch/riscv/cpu/generic/dram.c           |   2 +-
-  arch/riscv/cpu/jh7110/dram.c            |   2 +-
-  arch/x86/cpu/broadwell/sdram.c          |   2 +-
-  arch/x86/cpu/coreboot/sdram.c           |   2 +-
-  arch/x86/cpu/efi/payload.c              |   2 +-
-  arch/x86/cpu/efi/sdram.c                |   2 +-
-  arch/x86/cpu/ivybridge/sdram.c          |   2 +-
-  arch/x86/cpu/qemu/dram.c                |   2 +-
-  arch/x86/cpu/quark/dram.c               |   2 +-
-  arch/x86/cpu/slimbootloader/sdram.c     |   2 +-
-  arch/x86/cpu/tangier/sdram.c            |   2 +-
-  arch/x86/include/asm/u-boot-x86.h       |   2 +-
-  arch/x86/lib/fsp1/fsp_dram.c            |   2 +-
-  arch/x86/lib/fsp2/fsp_dram.c            |   2 +-
-  board/broadcom/bcmns3/ns3.c             |   2 +-
-  board/imgtec/boston/ddr.c               |   2 +-
-  board/menlo/m53menlo/m53menlo.c         |   2 +-
-  board/raspberrypi/rpi/rpi.c             |   2 +-
-  board/ti/am65x/evm.c                    |   2 +-
-  board/ti/j721e/evm.c                    |   2 +-
-  board/ti/j721s2/evm.c                   |   2 +-
-  board/toradex/verdin-am62/verdin-am62.c |   2 +-
-  board/xilinx/common/board.c             |   2 +-
-  boot/bootmeth_efi.c                     |   2 +-
-  common/board_f.c                        |   2 +-
-  doc/api/index.rst                       |   1 +
-  doc/api/part.rst                        |   6 +
-  doc/sphinx/requirements.txt             |   2 +-
-  include/init.h                          |  17 ++-
-  include/lmb.h                           |  21 +++-
-  include/part.h                          | 210
-+++++++++++++++++---------------
-  lib/efi_loader/efi_memory.c             |   2 +-
-  42 files changed, 185 insertions(+), 144 deletions(-)
-  create mode 100644 doc/api/part.rst
