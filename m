@@ -4,73 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 298C9C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 15:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC6DC0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D00E8679B;
-	Tue, 15 Aug 2023 17:34:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C61A38699A;
+	Tue, 15 Aug 2023 18:07:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nYsUiIMK";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="En1ua11K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B64A2867F0; Tue, 15 Aug 2023 17:34:03 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5249D867CF; Tue, 15 Aug 2023 18:07:02 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E384586785
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 17:33:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56736867CF
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.liu@linaro.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-686be3cbea0so4394847b3a.0
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 08:33:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692113634; x=1692718434;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dmqSsucRvztnOnQRvI/YTtAxBTSLn4MG8aNiveTdIe4=;
- b=nYsUiIMK4imTZuFgYnEU2GiESFPgE4xoXELZt3Yz4GuIF3+y0Gq5mZwdMe0LBsxPOb
- UmKmnhZ6dtsLQHO5MimvZGFBMGVExWMNsSXpZhLFoYgtUdoXqTgyUvWs4aPEGztkRzen
- HxVEIkBODX6SoW3+WEPzuMmAhsZEYpvMMYtiz0x2G6eOXilHc1McpHoz8IMBLEGzwcPh
- E7KSmdbCIzUvTheZZBrzM/YT7TUgyLwGgMDSc+VQnvRxIrAkHuaXuLLkxMeZ58S8UDea
- dS1Jxej4GOE/TNfADftDlWlHU2aP08lMIkxasbm3tTdRRr5odbsRt8Ap1cjTZTbJMwaM
- vy4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692113634; x=1692718434;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dmqSsucRvztnOnQRvI/YTtAxBTSLn4MG8aNiveTdIe4=;
- b=fshNoYMAxqncVbMX4SXWrFm5sKSnMClc1CdlQb00rmqTFgBBTjS2dDEpLnudsmzPah
- YqQjZriJUsdW3re5HSnDWDmDvetnj07t/6mXmlPATlufwwvFGEqofFZc1XGL/tJ/Clhc
- tT+1KKFxPWALPy5PZwIsyLwf+I9bsKXwg+6KrEHq8IVyblzNk4IiKi/tJLbRtzuDutNA
- LF+e6d1GtUuJNdUzUNNk+WzkUDc1lHwnamDzozs+fbfYhNXAzqXZcYq3Vbj7ybuw44i4
- ctBvDVIwtPh7umGrZS4pjCHUOXuLMvknz/eirUWvaLb+YBUPaCecjZPYSg6zLxNxB+bJ
- RsTg==
-X-Gm-Message-State: AOJu0Ywnb/2rojuVAN4vxzzYmt6BF2zGc88STAHrmHK4LZbwxDGW8REr
- 3KXDKMS7H45OX0HBYJnbtoNzW9tdIeRJY3c+QpajYwjVliOa4919
-X-Google-Smtp-Source: AGHT+IFWQ+Cv0mOdhsEzEWK5xFRRrEvzznzAZFS99gVs7jHZasRpa+0NQUfuluxVCQu/8eCE7xwJvZw5htoOrL2InaI=
-X-Received: by 2002:a17:90a:c68c:b0:26b:db8:2973 with SMTP id
- n12-20020a17090ac68c00b0026b0db82973mr3012725pjt.5.1692113634210; Tue, 15 Aug
- 2023 08:33:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230309021221.306044-1-paul.liu@linaro.org>
- <20230309021221.306044-2-paul.liu@linaro.org>
- <20230815144227.GI3630934@bill-the-cat>
-In-Reply-To: <20230815144227.GI3630934@bill-the-cat>
-From: Paul Liu <paul.liu@linaro.org>
-Date: Tue, 15 Aug 2023 23:33:43 +0800
-Message-ID: <CALG-KHwSCD=R-AFUHBCc4AxVEgyM37k8TH5aYSx9XSMnXcNXgQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] lib/vsprintf.c: fix integer overflow in vsprintf
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
+ [62.143.244.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9B5283FE9E; 
+ Tue, 15 Aug 2023 16:06:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1692115619;
+ bh=qJF8ok9FGojqIEMHruvsmOJ24kVzsdVXrB6RpptPfSY=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=En1ua11KfiBojJ6trXLKz2adVhxLtGsU5MIvWGIC07QqwBQPlV2tw1LH8+2pHhTGq
+ qU49owAXlFtmNHp2y5LU61bmqG7JkMSioyJxBQ5H0/kI09bam6fYXxV+jEt7hIsb2W
+ 9k9w/+A3ekzvUaADoseYopJgjLplE5XLMaaj1Mf0nE2d1TIyxkDPcx87t/GVcyw/Cz
+ HAAj7VGWkaDHbTN9xMSSZuz0aPFY4dwNKzhfuu4BVlJvKKZJ+9seqHsqIeIqbtGqWD
+ ztTd9p18dgkl14wXKoiDxf+mh7JU5/FA4KByZw92cUFsIfz1+gZ8Bmlmz4/JcvEL89
+ nSKj4+H188H/A==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Tom Cherry <tomcherry@google.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Simon Glass <sjg@chromium.org>, Sean Anderson <sean.anderson@seco.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] spl: don't assume NVMe partition 1 exists
+Date: Tue, 15 Aug 2023 18:07:36 +0200
+Message-Id: <20230815160736.39330-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,46 +71,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+There is no requirement that a partition 1 exists in a partition table.
+We should not try to retrieve information about it.
 
-Yes, I think Rasmus is correct. I didn't have any real cases that can
-trigger the bug.
-So let's don't include this patch. I'll see if I can revert this in
-AOSP's branch.
+We should not even try reading with partition number
+CONFIG_SYS_NVME_BOOT_PARTITION here as this is done in the fs_set_blk_dev()
+call anyway.
 
-Yours,
-Paul
+Fixes: 8ce6a2e17577 ("spl: blk: Support loading images from fs")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ common/spl/spl_blk_fs.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
+diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
+index 16ecece702..eb6f526689 100644
+--- a/common/spl/spl_blk_fs.c
++++ b/common/spl/spl_blk_fs.c
+@@ -44,7 +44,6 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
+ 		       enum uclass_id uclass_id, int devnum, int partnum)
+ {
+ 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+-	struct disk_partition part_info = {};
+ 	struct legacy_img_hdr *header;
+ 	struct blk_desc *blk_desc;
+ 	loff_t actlen, filesize;
+@@ -59,11 +58,6 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
+ 
+ 	blk_show_device(uclass_id, devnum);
+ 	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+-	ret = part_get_info(blk_desc, 1, &part_info);
+-	if (ret) {
+-		printf("spl: no partition table found. Err - %d\n", ret);
+-		goto out;
+-	}
+ 
+ 	dev.ifname = blk_get_uclass_name(uclass_id);
+ 	snprintf(dev.dev_part_str, sizeof(dev.dev_part_str) - 1, "%x:%x",
+-- 
+2.40.1
 
-
-Y
-
-On Tue, 15 Aug 2023 at 22:42, Tom Rini <trini@konsulko.com> wrote:
-
-> On Thu, Mar 09, 2023 at 10:12:21AM +0800, Ying-Chun Liu (PaulLiu) wrote:
->
-> > From: Tom Cherry <tomcherry@google.com>
-> >
-> > vsnprintf_internal() adds 'size' to 'buf' and vsprintf() sets 'size'
-> > to 'INT_MAX' which can overflow.  This causes sprintf() to fail when
-> > initializing the environment on 8GB.
-> >
-> > Instead of using 'INT_MAX', we use SIZE_MAX - buf, which is the
-> > largest possible string that could fit without overflowing 'size'.
-> >
-> > Signed-off-by: Tom Cherry <tomcherry@google.com>
-> > [ Paul: pick from the Android tree. Rebase to the upstream ]
-> > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > Link:
-> https://android.googlesource.com/platform/external/u-boot/+/43aae5d4415e0f9d744fb798acd52429d09957ce
->
-> So, this link here leads back to
-> https://issuetracker.google.com/issues/200479053 which isn't public.
->
-> Rasmus followed up and asked pointed questions, that weren't followed up
-> on.
->
-> --
-> Tom
->
