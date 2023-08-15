@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16918C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03FEAC001DB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:45:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C40D0869C5;
-	Tue, 15 Aug 2023 16:43:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1671C86874;
+	Tue, 15 Aug 2023 16:43:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oSfcxaCi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hTTQm5gy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4489C867F0; Tue, 15 Aug 2023 16:43:44 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id F118B8682B; Tue, 15 Aug 2023 16:43:50 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 604A086993
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:43:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03263869B8
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:43:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-589addee1c1so48801037b3.3
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:43:41 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-58439daf39fso57966857b3.1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:43:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692110620; x=1692715420;
+ d=konsulko.com; s=google; t=1692110626; x=1692715426;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NNIcxf7AKGZ1dahxpmskbfKaSX6xJ7ls/qefhO+OFtg=;
- b=oSfcxaCimkbhJWF/bT4kWI9eQN2BkB2Vi10Hdr1LulFHkhCmI2jSk29w4l+XnLQdbd
- lZB6qnDJpTJO8Jj8A9vdxXhGDpGWj75W6ijpYGzvbKvzjvoBtQ8jd8Q7woGElRoQtKkx
- LJ8Y8aE5+hAtyxCkQeBr8MGmgLUtx9UT2IKck=
+ bh=cEKV1PvfjwULo/p8SFNut+msq9SUtIS6K5WRP+xTVjo=;
+ b=hTTQm5gyuJtYxlzLZmN/hBMbUXRLHTK0yfIladLuZ9IcQZulmeYuBn7sNMBneZXFi9
+ TeARxdKvmiuJl/JMs2iw7/RCv1GUiummLNbq4GzMbAN5Ne/MFD3Cs5nOD4lcpUg4Im02
+ LpK5XqyXEQ7BYQlSLT09OEmVMrzUXbPOUxTb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692110620; x=1692715420;
+ d=1e100.net; s=20221208; t=1692110626; x=1692715426;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NNIcxf7AKGZ1dahxpmskbfKaSX6xJ7ls/qefhO+OFtg=;
- b=hEBNl0qpJI1WXhsbvkm0/WOjAhgrrXjLYn7vDA5sTSrciS0McM+hXNqKCYLvedRXz+
- vc8Z47Zn/if2lC73jQQmKyOd0OEDcD4+bPpruBi5RP3xrbkMydIHS3OlpFx0beVP6bYS
- iRN7xrXCMu0V80HkluU6tDASSe0YrDY6Y9P8VVeCg2qD/xH/huGPwLRCoEVH48ni4Mha
- 5UWRAlOWmUcoO4opfm/T1WbsB5L0yU+ea5ORJvmBSNOgZKqqRpPghQR2RnS/Q6bNi7Oa
- GVqz/BfgDrlBAG4FwFBIkhwjUWmWENVjPuPJiB2DLkj161+6DLnynjBkn/Dv7obL2JFo
- 90zw==
-X-Gm-Message-State: AOJu0YwcL/N+ua437s6HYyLCRh4Tg993d7zSAKfh60oa7V/IjxQkIPcF
- 1xJBQnYJ65NKddsR2En1EVS2etruxgaTmqp7gLhJrw==
-X-Google-Smtp-Source: AGHT+IG3ieWgzgrnMVsSRnBii3DUaslLDNpgg7QKYTJhsCBJDHZVoMZYervtMnvXLg6LotNo1GzNTA==
-X-Received: by 2002:a0d:da86:0:b0:584:61df:45e8 with SMTP id
- c128-20020a0dda86000000b0058461df45e8mr10682309ywe.13.1692110620187; 
- Tue, 15 Aug 2023 07:43:40 -0700 (PDT)
+ bh=cEKV1PvfjwULo/p8SFNut+msq9SUtIS6K5WRP+xTVjo=;
+ b=P5/1jOmW36fq4YYueHCC9Yhq+VdVbx8L7AihcHH1MHdhQlAHgZcqpM2AbhJi2ACFtr
+ TuKD586rU4/jHjm6ITO2cru4Op2zG1lJReg0Dx1iDbaPtb014nuCIjmfeIdu40GZGAUM
+ lgB69fuNGQdtZM4GEDPKoMfAVwP2vg/+z45mgZYLi05qFimTzWLUh+YG3Y75MIbTqEpW
+ fUbY3SMqHTP/qqo85pCbCp5sc4rjgKFeFJP/SY68CzRkPfIijhWLz1xPB0eoYzRizMlV
+ bC10XvAbKuH1O017fVwq+bYYai+Kqr+7lk8kuCxFhIT4sSkrc00V+wQMtyEMI+X4/XLT
+ agkA==
+X-Gm-Message-State: AOJu0Yxfki+s4WC/SozwRYjDZOMH7fQRorDTA9T1FQEjIWEUWUYSgQ5g
+ yecKXBtK5AoAyxug7NcAKlHhPw==
+X-Google-Smtp-Source: AGHT+IHT41EjraCv4UaxQHgSnm9euMKeHQzZHjHHacA0fSt4zNwIS5IU/n8PB+/p0zMK9StwxY/pzg==
+X-Received: by 2002:a81:6d49:0:b0:579:efbb:cbe3 with SMTP id
+ i70-20020a816d49000000b00579efbbcbe3mr14260642ywc.43.1692110625806; 
+ Tue, 15 Aug 2023 07:43:45 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-14d5-2a24-c47a-465f.res6.spectrum.com.
  [2603:6081:7b00:6400:14d5:2a24:c47a:465f])
  by smtp.gmail.com with ESMTPSA id
- n186-20020a8172c3000000b0058605521e6esm3440191ywc.125.2023.08.15.07.43.39
+ w187-20020a8162c4000000b0057a918d6644sm3435759ywb.128.2023.08.15.07.43.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 07:43:39 -0700 (PDT)
-Date: Tue, 15 Aug 2023 10:43:37 -0400
+ Tue, 15 Aug 2023 07:43:45 -0700 (PDT)
+Date: Tue, 15 Aug 2023 10:43:43 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng@tinylab.org>
-Cc: Simon Glass <sjg@chromium.org>, Ramon Fried <rfried.dev@gmail.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: pxe: Update the command help
-Message-ID: <20230815144337.GV3630934@bill-the-cat>
-References: <20230731083323.622744-1-bmeng@tinylab.org>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Michal Suchanek <msuchanek@suse.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Samuel Holland <samuel@sholland.org>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v3] gpio: Use separate bitfield array to indicate GPIO is
+ claimed
+Message-ID: <20230815144343.GW3630934@bill-the-cat>
+References: <20230801232602.86719-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="59KVOUxdHEg0lRAF"
+ protocol="application/pgp-signature"; boundary="mtCMggOydFsOg159"
 Content-Disposition: inline
-In-Reply-To: <20230731083323.622744-1-bmeng@tinylab.org>
+In-Reply-To: <20230801232602.86719-1-marex@denx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,27 +97,28 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---59KVOUxdHEg0lRAF
+--mtCMggOydFsOg159
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 31, 2023 at 04:33:23PM +0800, Bin Meng wrote:
+On Wed, Aug 02, 2023 at 01:26:02AM +0200, Marek Vasut wrote:
 
-> Currently the "help" displays pxe command help text like this:
+> The current gpio-uclass design uses name field in struct gpio_dev_priv as
+> an indicator that GPIO is claimed by consumer. This overloads the function
+> of name field and does not work well for named pins not configured as GPIO
+> pins.
 >=20
->   =3D> help
->   ...
->   printenv  - print environment variables
->   pxe       - commands to get and boot from pxe files
->   To use IPv6 add -ipv6 parameter
->   qfw       - QEMU firmware interface
->   ...
+> Introduce separate bitfield array as the claim indicator.
 >=20
-> This does not read clearly. Remove the IPv6 stuff as it is in
-> the detailed help text so that it fits just a single line.
+> This unbreaks dual-purpose AF and GPIO operation on STM32MP since commit
+> 2c38f7c31806 ("pinctrl: pinctrl_stm32: Populate uc_priv->name[] with pinm=
+ux node's name")
+> where any pin which has already been configured as AF could no longer be
+> claimed as dual-purpose GPIO. This is important for pins like STM32 MMCI
+> st,cmd-gpios .
 >=20
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/next, thanks!
@@ -121,22 +126,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---59KVOUxdHEg0lRAF
+--mtCMggOydFsOg159
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTbjxkACgkQFHw5/5Y0
-tyy/+gv/UVW47kXpPsnWdOe2y0vTwOxla8GvqU2M2yvT2No4tl/6B2DrCmlXEvFp
-XJk6KWOCEpef/N5V49rBzYwkraJECOOmr3deq5SOEkXUlUWemEJyHYKdky9cF08l
-vVEIhiS/BGodK2/SEcQzL2Fgbo0cMyyxM1Jmk3431p09kUTe1GP8e8pwpiiDd79w
-YLdA8+Vb5/y7GEoTJbKrPA64C599QY1Ef7BNFgmL/oRDdN2hcLVwh7xBRZJyl5yw
-QR37tIOEEKad09E5EUgqo5bPt7lEtq/YWCkT+yOqMaA4bxe22tzzU4kENOUkKkmU
-OIMMZOIIolQl3mmnlsosxOzNAj4a+3/UHOLyNSGXs1wBSe45wsD24d4tcHpKzOWj
-7OwdtislfM0j54NQNImsEkWbMf7O5bMJJgchmuFcuoLZkywoRtkLeqodT1SexTLx
-mrbpBYBjIiop6efZmV2cH6dOVVEFGQ5QTfJ41QvK4XU03I+oPOwZqM5m380E+lml
-mdn5/wiY
-=PYOL
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTbjx8ACgkQFHw5/5Y0
+tywe2gv+KzD6i91xvPuJvlAK/E/c4Z7gCT6kG143w+YSUQs4m+5n2A9Ow99rd21e
+f/pTxSn4Gu72/P7IZfdUYh+no5D3SUBKRq+BfVescbIGPnhs5X+haIkJS+f5jpdj
+Bx7cZGC07EvsT/m5aGxJgHb2hwTi13nUVCGSCHHZ/HsQFCTCgjWy+q0Vku70GwwE
+P4Z0O0Zj7jCqNGecqoblPjrobDwb0zE1kdeatNnyc3Vm1yJRTo/IYBriYD2HBT5P
+lUEjrmx5NWm7lkHA6el9ix4OCnXb+9X6o1ahlFhnePapzHde+Q6SVubWR0+9Y8zQ
+L6/Zg//nDzznOFSbe6qJwkFUV5hMD6A6d4G59SbUK2BolKmFv0suuusvuUwcgLxW
+u8IEpc9K84imA3DPpkZvFbuRa6FcaFgezirmMneOmfDwe8NVDIHBmgfLmuis3CQ0
+2CjSPU5g68LVnIi3cY4yecVUOK7cdsNo/hqO1ETcGzCOntLLbqZN8SBbwgIBL1Dl
+BuIelNJL
+=KBvC
 -----END PGP SIGNATURE-----
 
---59KVOUxdHEg0lRAF--
+--mtCMggOydFsOg159--
