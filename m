@@ -4,52 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18B82C0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 12:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 673E0C001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 12:26:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FB708675B;
-	Tue, 15 Aug 2023 14:24:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 968D98676C;
+	Tue, 15 Aug 2023 14:26:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692102242;
-	bh=N9SKH6kLHb5trHCAIENZUT44dXFVrlQ3wnBt+jUsEAY=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=hVTAm2FqtPiFM79XieycBQDGU9IO0RF/lZKrWBeLEfQOKdYHIJ++Gr8LgvXwZST4S
-	 L9VfmQHSJ8kXba2QDcKf4s5gH3fcfl88oeTY2mvJiM3kWZCwb3AxMiWsGVt2WMafOU
-	 ea0TTMmBpEdnObPjnNHwiuSmT9GnrEfgupWVdWEubJUobOCqNAq+U2laCC7MPOPQOj
-	 zwEWfjoRN9lIyy+bOurzFhmgUQtQas/A/2qlUNaa9ghUQl/84BRm7yKGIqsOrfyT2L
-	 6Nr3f3JIKa5FPRpu5U954qs/ofam5p1yrIm61Himcd7JKyKiSDWUQxd7iuE8Z6494+
-	 qJGWXE5MJvCgA==
+	s=phobos-20191101; t=1692102372;
+	bh=T0KCecgTcMjAkR+VouEUq/vIUW9zzYufGgVl/mSGBck=;
+	h=To:Cc:From:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=orhZOGPq+XEcTWojg/IlCgCiEt8nMAUhBsJ7kq65YGfqZZstWlkD4yWjWZbhQMxZR
+	 heUSb04fV/7AA7OCg+u/abuYZ2XzLI5oygahoRuMs1aKvjLSeWgodjgb+Pyav96kkl
+	 gJeypuK0Yni3kACWGNFw8kxrdWwmYwFfVtu14/HZAwtbcU3pqUVQhsL1vFdaKUHduT
+	 6Zp0Z01lYJYwn7aJPYCIs8+nVPzXsHpoNc5FR3EfbX80VaFBwqs1MSQSGq0nqQ9CWP
+	 aOtgbqsepsSUcI8l8ruuTm6bIfmkIZGFzUqmJfCR5+gA1nM9lZt6q3C0k6Ax22j/DV
+	 dibNU2Of00D0Q==
 Received: from [192.168.1.107] (89-186-114-123.pool.digikabel.hu
  [89.186.114.123])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 40B8D86264;
- Tue, 15 Aug 2023 14:24:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id C7F1286264;
+ Tue, 15 Aug 2023 14:26:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692102240;
- bh=N9SKH6kLHb5trHCAIENZUT44dXFVrlQ3wnBt+jUsEAY=;
- h=Subject:To:Cc:References:Reply-To:From:Date:In-Reply-To:From;
- b=NUZn4vJpMqTFy+cnko+dR5zpp2Ei5zR/JFZMVY4u53OvTnqZBCAttND9o69ZRusu1
- ILxUzW4TaTR0LUPiC8GANdDJty4GRkyGu29RBt+W1XOjcVFBYtHPKfrO4CBxtH51Mz
- +aBgoLv7doSn/a4KugRxVXzhlifXHfvJJRarT+nFW2ptItr1JeYnx8lJJ2Rj2YyGs/
- kI7PbzT4k4LvyUlBTnl0SAl5yTM4vGpNPvKCcNSMGzNaWFSWlqNvtPuL70bOmInXC1
- 73vixACHoUkRIXGbA0UMk6xrYpPJwpFj0eUjdr8JeVsMwcfQUwl+n8IJ7LGBCj1gSR
- ROMQYyzXDYe5Q==
-Subject: Re: [PATCH] cmd: ubi: Fix 'ubi list' command arguments parsing
-To: Dmitry Dunaev <dunaev@tecon.ru>
-Cc: =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>, u-boot@lists.denx.de
-References: <20230712125821.41233-1-dunaev@tecon.ru>
+ s=phobos-20191101; t=1692102371;
+ bh=T0KCecgTcMjAkR+VouEUq/vIUW9zzYufGgVl/mSGBck=;
+ h=To:Cc:Reply-To:From:Subject:Date:From;
+ b=NhHIq+8rhPqRG9EM1RYskIK84yYg60aIP67prbd2xz2tnacTwiHJBzG8u92LXV1XW
+ kx/BfZudrPMq1GQIFxfXoXrMbNjKt6r1+GVMfLNsu+vQCk7hh3XpK0A3xUnu3d5eTD
+ sxP5txTVNtDYdGJkZjcfqJhCDava3D92rx8Hw1YaxmpotE+7qmqA3EIZKb8XkLxL/J
+ gezGj2D12Q5FCx85Wie7dF/lKbpPEi5AoOoOkeozUBjtfQUDfch56lpYCvn/Gn4vcc
+ SoA5Q9JBcBsIHFTe3ehXqMnf1irq/6YqnRA+VJ8/ODpWDv+6HLw76cH0eMwwSxxI+q
+ 6fu8bRQqK2v3Q==
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Dmitry Dunaev <dunaev@tecon.ru>
 From: Heiko Schocher <hs@denx.de>
-Message-ID: <b4e2c8f9-5b72-373e-0130-b3d8e2dafb70@denx.de>
-Date: Tue, 15 Aug 2023 14:23:56 +0200
+Subject: Please pull u-boot-ubi
+Message-ID: <f8f83f82-4515-c237-8748-c89fae24a60c@denx.de>
+Date: Tue, 15 Aug 2023 14:26:06 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20230712125821.41233-1-dunaev@tecon.ru>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -70,20 +68,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Dmitry,
+Hello Tom,
 
-On 12.07.23 14:58, Dmitry Dunaev wrote:
-> This fixes allowed argc variable value for arguments parsing
-> 
-> Fixes: 6de1daf64b1 ("cmd: ubi: Add 'ubi list' command")
-> Signed-off-by: Dmitry Dunaev <dunaev@tecon.ru>
-> ---
->  cmd/ubi.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+please pull from u-boot-ubi.git master
 
-Applied to u-boot-ubi master
+The following changes since commit 832148f675e427060be074c276956962fa9b5cb6:
 
-thanks!
+  Merge tag 'u-boot-rockchip-20230814' of https://source.denx.de/u-boot/custodians/u-boot-rockchip
+(2023-08-14 09:11:09 -0400)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-ubi.git tags/ubi-updates-for-v2023.10-rc3
+
+for you to fetch changes up to 34031e9cce91de323ed711d7e8614c0d12fada1c:
+
+  cmd: ubi: Fix 'ubi list' command arguments parsing (2023-08-15 07:32:13 +0200)
+
+----------------------------------------------------------------
+ubi changes for v2023.10-rc3
+
+Fix:
+- Fix 'ubi list' command arguments parsing
+  from Dmitry
+
+----------------------------------------------------------------
+Dmitry Dunaev (1):
+      cmd: ubi: Fix 'ubi list' command arguments parsing
+
+ cmd/ubi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Azure build is fine:
+
+https://dev.azure.com/hs0298/hs/_build/results?buildId=108&view=results
+
+Thanks!
 
 bye,
 Heiko
