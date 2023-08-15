@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31FDEC001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:44:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A879BC001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:44:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9E1E8698D;
-	Tue, 15 Aug 2023 18:44:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0569A869AE;
+	Tue, 15 Aug 2023 18:44:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vWPl/cJW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZcSBRPU0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FC2F869B4; Tue, 15 Aug 2023 18:44:48 +0200 (CEST)
+ id AFFF5869B4; Tue, 15 Aug 2023 18:44:49 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 168F38697B
+ by phobos.denx.de (Postfix) with ESMTPS id C50B786940
  for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:44:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37FGihlc049228;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37FGihUW049232;
  Tue, 15 Aug 2023 11:44:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692117883;
- bh=cti9+mw8FVl1xw2gSuE4H+YhSIU64Jm5qwr5y50n++M=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=vWPl/cJWoKbW1wjHFNcuOYox0eP480Z3BksUaRDIZDE+IxpbLVT11Ynvx7GNy61uB
- J1+xfEnH50KdHEgLHfY5hntD8tFvNUZeArGXsINtKHWaWGx+p2U3RAzI4Iedkw2l+b
- 0QLE7R0JWMMtvSw4fS+oMutkmaofPkCK0+IDa5iQ=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37FGihgc093252
+ bh=pxCbL15lUWSkElXWvh6lwXTrqJqUlbiNOd6f0tMHeKs=;
+ h=From:To:CC:Subject:Date;
+ b=ZcSBRPU0fupAM2nhktFj9uKjIA0eOrtxtZx8JzFxLAG5MlgKmhM7zy9NmrQLdW8y5
+ szlBZ0CkIw/bTqG4VL7FqpIelX/bSZsF4cbliS6rc/rKpS9dglosuFVP8pYRPlAWvj
+ ABZI0mvrqgLgP5xDlVSzwKKcj5csQvCzyfRSYKUc=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37FGihgh113812
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Tue, 15 Aug 2023 11:44:43 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 15
  Aug 2023 11:44:42 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Tue, 15 Aug 2023 11:44:42 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37FGigvV103636;
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37FGigqH100646;
  Tue, 15 Aug 2023 11:44:42 -0500
 From: Nishanth Menon <nm@ti.com>
 To: <n-francis@ti.com>, <trini@konsulko.com>
 CC: <bb@ti.com>, <praneeth@ti.com>, <afd@ti.com>, Robert Nelson
  <robertcnelson@gmail.com>, <vigneshr@ti.com>,
  <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V3 3/4] board: ti: am62x: Add am62x_beagleplay_* defconfigs
-Date: Tue, 15 Aug 2023 11:44:39 -0500
-Message-ID: <20230815164440.2713726-4-nm@ti.com>
+Subject: [PATCH V3 0/4] board: ti: Add support for BeaglePlay
+Date: Tue, 15 Aug 2023 11:44:36 -0500
+Message-ID: <20230815164440.2713726-1-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230815164440.2713726-1-nm@ti.com>
-References: <20230815164440.2713726-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,64 +78,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add defconfig fragments for am625 based beagleplay
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
+Add support for BeaglePlay - rev 3
+
+Boot log: https://gist.github.com/nmenon/3e99b44380873263e39ba4d84788db89
+
+Full series(including dependencies) can be found at:
+https://github.com/nmenon/fix-k3-dt-u-boot/commits/beagleplay-v3
+
+Caveats:
+* I have kept networking out of picture for now as it is still in debug
+ (See
+  https://github.com/nmenon/fix-k3-dt-u-boot/commits/beagleplay-v3-enet-debug
+  if anyone is interested)
+
 Changes since V2:
-* Switch entirely to config fragments.
+* I have rebased to latest next branch
+  bdc682437a67 (origin/next) Merge branch '2023-08-14-assorted-general-updates' into next
+* Uses config fragments by default.
+* Updated MAINTAINER file as well
 
-V2: https://lore.kernel.org/u-boot/20230727234446.3651836-4-nm@ti.com/
-V1: https://lore.kernel.org/all/20230725185253.2123433-6-nm@ti.com/
- board/ti/am62x/beagleplay_a53.config | 20 ++++++++++++++++++++
- board/ti/am62x/beagleplay_r5.config  | 11 +++++++++++
- 2 files changed, 31 insertions(+)
+V2: https://lore.kernel.org/u-boot/20230727234446.3651836-1-nm@ti.com/
+V1: https://lore.kernel.org/all/20230725185253.2123433-1-nm@ti.com/
+
+Nishanth Menon (3):
+  arm: dts: k3-am625-sk-binman: Add labels for unsigned binary
+  board: ti: am62x: Add am62x_beagleplay_* defconfigs
+  doc: board: ti: Add BeaglePlay documentation
+
+Robert Nelson (1):
+  arm: dts: Add k3-am625-beagleplay
+
+ arch/arm/dts/Makefile                         |    2 +
+ .../dts/k3-am625-beagleplay-ddr4-1600MTs.dtsi | 2195 +++++++++++++++++
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  172 ++
+ arch/arm/dts/k3-am625-beagleplay.dts          |  758 ++++++
+ arch/arm/dts/k3-am625-r5-beagleplay.dts       |   87 +
+ arch/arm/dts/k3-am625-sk-binman.dtsi          |    4 +-
+ board/ti/am62x/MAINTAINERS                    |    7 +
+ board/ti/am62x/beagleplay_a53.config          |   20 +
+ board/ti/am62x/beagleplay_r5.config           |   11 +
+ doc/board/ti/am62x_beagleplay.rst             |  121 +
+ doc/board/ti/k3.rst                           |    1 +
+ 11 files changed, 3376 insertions(+), 2 deletions(-)
+ create mode 100644 arch/arm/dts/k3-am625-beagleplay-ddr4-1600MTs.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-beagleplay.dts
+ create mode 100644 arch/arm/dts/k3-am625-r5-beagleplay.dts
  create mode 100644 board/ti/am62x/beagleplay_a53.config
  create mode 100644 board/ti/am62x/beagleplay_r5.config
+ create mode 100644 doc/board/ti/am62x_beagleplay.rst
 
-diff --git a/board/ti/am62x/beagleplay_a53.config b/board/ti/am62x/beagleplay_a53.config
-new file mode 100644
-index 000000000000..4889e1bc6f2b
---- /dev/null
-+++ b/board/ti/am62x/beagleplay_a53.config
-@@ -0,0 +1,20 @@
-+# Defconfig fragment to apply on top of am62x_evm_a53_defconfig
-+
-+CONFIG_DEFAULT_DEVICE_TREE="k3-am625-beagleplay"
-+CONFIG_OF_LIST="k3-am625-beagleplay"
-+CONFIG_SPL_OF_LIST="k3-am625-beagleplay"
-+CONFIG_BOOTCOMMAND="run findfdt; run envboot; run distro_bootcmd"
-+CONFIG_EXT4_WRITE=y
-+CONFIG_LZO=y
-+CONFIG_AUTOBOOT_KEYED=y
-+CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
-+CONFIG_AUTOBOOT_DELAY_STR="d"
-+CONFIG_AUTOBOOT_STOP_STR=" "
-+# Uses Realtek phy rather than TI phy
-+CONFIG_PHY_TI_DP83867=n
-+CONFIG_PHY_REALTEK=y
-+# No SPI flash on Beagleplay
-+CONFIG_SPI=n
-+CONFIG_SPI_FLASH=n
-+CONFIG_SPL_DM_SPI_FLASH=n
-+CONFIG_SPL_SPI_FLASH_SUPPORT=n
-diff --git a/board/ti/am62x/beagleplay_r5.config b/board/ti/am62x/beagleplay_r5.config
-new file mode 100644
-index 000000000000..ce64561bee92
---- /dev/null
-+++ b/board/ti/am62x/beagleplay_r5.config
-@@ -0,0 +1,11 @@
-+# Defconfig fragment to apply on top of:
-+# am62x_evm_r5_defconfig
-+#
-+CONFIG_DEFAULT_DEVICE_TREE="k3-am625-r5-beagleplay"
-+CONFIG_OF_LIST="k3-am625-r5-beagleplay"
-+CONFIG_SPL_OF_LIST="k3-am625-r5-beagleplay"
-+# No SPI flash on Beagleplay
-+CONFIG_SPI=n
-+CONFIG_SPI_FLASH=n
-+CONFIG_SPL_DM_SPI_FLASH=n
-+CONFIG_SPL_SPI_FLASH_SUPPORT=n
 -- 
 2.40.0
 
