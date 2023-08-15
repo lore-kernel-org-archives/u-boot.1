@@ -4,77 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 828F1C001DB
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:46:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32488C001DB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E678867CF;
-	Tue, 15 Aug 2023 16:46:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A67286874;
+	Tue, 15 Aug 2023 16:51:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I5Q2TlaG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RSZAYCZ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86E36867E2; Tue, 15 Aug 2023 16:46:51 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id A9B9B8685D; Tue, 15 Aug 2023 16:51:05 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C53F2863E9
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:46:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D518686995
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-589e590af61so35354657b3.0
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:46:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-d45caf42d73so5518589276.2
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:51:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692110807; x=1692715607;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KXgmEbzaDWAxbAjbxl4G4gwX4D/dz/iGnvR9l4SnDjk=;
- b=I5Q2TlaG6z6uhmy+Jjeh0UTigA9L0JT33FMnr9xIN7kilLtxPY6KkKkiRN8ayyyoim
- p3NJ3cvwEnJhGaoY2/8An+EOzQ3WnCTi5NqQn4qhse+oUs/rSFG7kaF3UhiADmJqkiW+
- +BSAQsbJFUC/K6qrfX2HqGJl+TXrtzJd9sPWg=
+ d=chromium.org; s=google; t=1692111061; x=1692715861;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+HSGfIx5X5G5UUtgCuX3p6mjyZX4Fjul/gqUD26Knhg=;
+ b=RSZAYCZ/C0R8IvV7qCs1hAc5mSu/0hSLxYLudn/QQcgcDqkfsh57omWVk9CjN/DWa6
+ L5Oy+llUNejuAILd6x6EsjvLJYoVDqxs+y66eLyeMZpH+iRyahqJLSCzxwz+zJ7GaT27
+ Jy26ndy8xwH8pxKiLCLuYUg529Kp/HEkWPpYM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692110807; x=1692715607;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KXgmEbzaDWAxbAjbxl4G4gwX4D/dz/iGnvR9l4SnDjk=;
- b=ho4m8sZHaVxWodPG+/2FAfNEKVwtuzb6t56rrq86fApYCHbAXVsJrR4jBWBTLRdSf+
- B9bEESdev1WdaGPEdNbnP+l+MeoZL2CxQFU94Z3CSI8uT6p3bHgsbkglbc3WYawgY4xH
- eyiGcLp4Vs9Q+LSm+GIbezZVt5Jjw4XmD1iKgANHhdlWyPRmXH7Xxf5jGVX27t+UgYgJ
- 85xw0eyKr4ky9Jya6UO2hr/H12ni58RguvYWXdRf7slUy2FmI4cRXIgH6d+8ZMl3Hm/m
- LxtJXZpUNp9Gxi69Cn4VQxRtu4bIlxSXk++OymhzSEoWGuqI9hOxgTK4T8L1KHcao7a7
- gU4w==
-X-Gm-Message-State: AOJu0Ywc9IYwlcpCIgpOQcInNH+LY/eE+tktYYsPXH452Tq9unyqTAYV
- eyQR2vZ7CN9WElY7WII1vwWJjQ==
-X-Google-Smtp-Source: AGHT+IGpyknHhN5uGbWXYRunFRUtFjUbNIXbzVar0KV1bgmTj/HZKWOEQyzvDn+5nMdkHK9hqdNzDQ==
-X-Received: by 2002:a81:4914:0:b0:586:b847:5ef0 with SMTP id
- w20-20020a814914000000b00586b8475ef0mr2315590ywa.4.1692110807574; 
- Tue, 15 Aug 2023 07:46:47 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-14d5-2a24-c47a-465f.res6.spectrum.com.
- [2603:6081:7b00:6400:14d5:2a24:c47a:465f])
- by smtp.gmail.com with ESMTPSA id
- f184-20020a0ddcc1000000b0057a44e20fb8sm3444447ywe.73.2023.08.15.07.46.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 07:46:47 -0700 (PDT)
-Date: Tue, 15 Aug 2023 10:46:45 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Malte Schmidt <malte.schmidt-oss@weidmueller.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v8 4/9] sandbox: Build the mkeficapsule tool for the
- sandbox variants
-Message-ID: <20230815144645.GX3630934@bill-the-cat>
+ d=1e100.net; s=20221208; t=1692111061; x=1692715861;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+HSGfIx5X5G5UUtgCuX3p6mjyZX4Fjul/gqUD26Knhg=;
+ b=DjPH92jWneluWhZqzqRCVDhUv/zM44iPIA4YLqDK1YzQcrpIWUxTeN1Ajx88R7IPDM
+ nNO88yqaFBF4cEK4eXTiIVJkwgWeBUMIV3piVq8a/mJOIsSjb+XjLYHbfxaiU7I2cawl
+ 5OYE18EPmB7hNiAizjunDD1TvT4YdqUFWLLPNjKRvGhak6HjC1+OuRacqo0wgtxellCO
+ cYr+AM8Nx1iAN9GSPT6kFwr++iNlJfFsfdDBhltZzGRPC57zegGqrSNa8SF90cVp52La
+ s8HRFOnIUXUS85GJiKPsQ4OTFARdmk2tM/uLDxnSKQOtteT89x5fTGPgYFmJpqxnhaAf
+ WWzg==
+X-Gm-Message-State: AOJu0YzRspOR2jWFlNuuOM1eq2nIPxf7HM+0k8Owrlt1xqNQ9ujLGAvd
+ geGp4Y1NoifyRD7BkMaz0F6v362oED6WZ6PM42UdIA==
+X-Google-Smtp-Source: AGHT+IHEq5h+FzS9J2EUPBoeDQlKNY110m57bmPMYkB6ZMdP2KIrBxdeT15E4hqWf0z4Fl8EMu9ZlmFMdCTD25oEMxo=
+X-Received: by 2002:a25:c017:0:b0:d08:82a2:6a4f with SMTP id
+ c23-20020a25c017000000b00d0882a26a4fmr13268043ybf.42.1692111061380; Tue, 15
+ Aug 2023 07:51:01 -0700 (PDT)
+MIME-Version: 1.0
 References: <20230812142223.GI3630934@bill-the-cat>
  <CAPnjgZ380FF64cHtBjMTztJpj1bqF3-u2Vpt0YdRo7EzqSiVcw@mail.gmail.com>
  <20230812142824.GJ3630934@bill-the-cat>
@@ -85,12 +65,22 @@ References: <20230812142223.GI3630934@bill-the-cat>
  <CAPnjgZ2moLG0HKVyQ5nZk91080dpNbC9EYD+u1H1Dw6sYkJ9sg@mail.gmail.com>
  <20230813144352.GM3630934@bill-the-cat>
  <CAPnjgZ0DpYY3X9w66N6G0tgAwoN_3-SToTT+2yMmk0Gibse8fg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="n/BIpPtqPmlzWdSG"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0DpYY3X9w66N6G0tgAwoN_3-SToTT+2yMmk0Gibse8fg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20230815144645.GX3630934@bill-the-cat>
+In-Reply-To: <20230815144645.GX3630934@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 15 Aug 2023 08:50:41 -0600
+Message-ID: <CAPnjgZ0Ej6afQLTQ3i1TT1nSjjWZTteBqu_eH12AqFBDOT1UGw@mail.gmail.com>
+Subject: Re: [PATCH v8 4/9] sandbox: Build the mkeficapsule tool for the
+ sandbox variants
+To: Tom Rini <trini@konsulko.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Malte Schmidt <malte.schmidt-oss@weidmueller.com>,
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,55 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---n/BIpPtqPmlzWdSG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Aug 15, 2023 at 08:44:18AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sun, 13 Aug 2023 at 08:43, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 15 Aug 2023 at 08:46, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Aug 15, 2023 at 08:44:18AM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Sun, Aug 13, 2023 at 07:36:45AM -0600, Simon Glass wrote:
-[snip]
-> > > I see what you are saying, but from my side I am trying to enumerate
-> > > the boards, since generally I (like) build things without explicitly
-> > > specifying each board defconfig.
+> > On Sun, 13 Aug 2023 at 08:43, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sun, Aug 13, 2023 at 07:36:45AM -0600, Simon Glass wrote:
+> [snip]
+> > > > I see what you are saying, but from my side I am trying to enumerate
+> > > > the boards, since generally I (like) build things without explicitly
+> > > > specifying each board defconfig.
+> > >
+> > > Yes, but that's not possible in this case I think.  And I'm really just
+> > > trying to figure out how we can make CI a little easier.  But maybe we
+> > > can't / don't bother in this case and keep fixing up the sandbox
+> > > defconfig files as needed.
 > >
-> > Yes, but that's not possible in this case I think.  And I'm really just
-> > trying to figure out how we can make CI a little easier.  But maybe we
-> > can't / don't bother in this case and keep fixing up the sandbox
-> > defconfig files as needed.
->=20
-> Maybe...it sounds like you are really just wanting a way for buildman
-> to manually build a single board with some config added, rather than
-> having it detect and build everything that is in-tree?
+> > Maybe...it sounds like you are really just wanting a way for buildman
+> > to manually build a single board with some config added, rather than
+> > having it detect and build everything that is in-tree?
+>
+> What I'm trying to do really, is since you didn't seem to see the value
+> in config fragments before, showcase how it would be beneficial to
+> sandbox (and CI) if we used them there.
 
-What I'm trying to do really, is since you didn't seem to see the value
-in config fragments before, showcase how it would be beneficial to
-sandbox (and CI) if we used them there.
+Yes, don't worry, I am past that stage and I see their value.
 
---=20
-Tom
+But I think for this to be more broadly useful we need a way to
+enumerate the combinations permissible for a board and give them
+names. Things like qconfig and buildman need to know what is going on
+and cannot infer it from the filesystem...?
 
---n/BIpPtqPmlzWdSG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTbj9UACgkQFHw5/5Y0
-tyyVrAv/Wn32z2FDt3CI6+WsAGLoje4h8VQRiwM1/608nqb7H/kWWz5bD7PDesg5
-HrgNtJpItaVCUYJhgQ4rgsMbVmG0ANRwYbewtwhp2h8EjP1arwR5fr516fmkRBGY
-0Th712vIaTrP2rFknAaRnM5SJBYXHtkvmI2bl5klfD9dwvUvusM2K0yCkhc3nhdr
-G+jok97zg1QpkyNU/Jh+9JRbGC1B32wa0A+zBQaqEXjT2qX6auEYmnEr6/42bgGh
-Ew1HvmbghVe6VKJRvKPOjZQictMqYlils1xgKrogohHmXtppVS0nSn7DFqxJfMTN
-55UiIF2QDGx0GQISeXMECYSpmU+wfkfrDFrH0zPDICBPc+gFAgSBR77+vqsWrbz/
-vSONNnMzGDPqd+k8nSFcJnVoifZH96eWhLKRMpxIzP88AdVjblWhu1SFKmSisfWd
-kPInd9wcui1EdIcW/MCsI8AyuMfPugO8+9k17D/q6/bsDqysFyZm+91a2HNAb/wj
-sumyBqf2
-=nOYV
------END PGP SIGNATURE-----
-
---n/BIpPtqPmlzWdSG--
+Regards,
+Simon
