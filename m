@@ -4,53 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC19CC0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 07:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915B7C0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 08:24:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FA5886987;
-	Tue, 15 Aug 2023 09:54:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9394A86725;
+	Tue, 15 Aug 2023 10:24:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692086046;
-	bh=D/SsCD82LLNJFMagM7wQGeI1fj0vyKnikOQzMguwgA0=;
-	h=To:Cc:From:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=Ba4GauSaFgJd80xjFMwcdh40HFVGlHQ0zUPorZKRAlZ3u9904Hx5RjpwwIFWrTvYY
-	 LyTelDOSPKEI6CJEImfRrZtKuVkMG5M/dkrtgs1W5IYgC5vwhaZ83rwrvBMiKDETk8
-	 Zys8T2Q1MU7hyFbvr+qcrowM9ZNBr20ss8BHYw6L+RQQ/Z+SXuSKW1/kVhwtk84B8M
-	 una+vgMT8FqtAyYj9AX3wxq9YZIOb+cTryd6uE48VrtbbppbNQdwmlmhrcKj7FIYte
-	 RLdzgNaPN7gcnd3kPzFnBBcKfj0KOddYQSo0ZJqH696Fekt36gA7My//7seRSQ2sMO
-	 9D1IgwMY4rg1g==
-Received: from [192.168.1.107] (89-186-114-123.pool.digikabel.hu
- [89.186.114.123])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3701C86986;
- Tue, 15 Aug 2023 09:54:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692086045;
- bh=D/SsCD82LLNJFMagM7wQGeI1fj0vyKnikOQzMguwgA0=;
- h=To:Cc:Reply-To:From:Subject:Date:From;
- b=gyioCNzRRMtMyaP+PKSKKbN4AI48RwOjIb6cLeVijjsYimODmFvPc9c32VXq4B1yT
- nDb8sax5xbUHikCcUoFdjneQi8R7pwdnh+HrQ5sMqwsftfXJGQvKMNrh7QheqjboH3
- O7QqFUyEa1DWhts1LQZ8HoagkYPBcXl+xeNK/N2rVmLlOXEUbcrmV83PJqjvH/CTK2
- rJ9voVL/KQ0Cm2C6Xhk8+w8C1qC5LeZgmtcUoageuB7v1j8EZxb2OWt/l232bkRNCT
- P/uxDdkv+Sq5l0n101H5/xBFn1Z3AtrNu1jYFw6USNz0w8Gg2BnYi2p2fcPndK6iKE
- wfUevU9ZNHDlw==
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Sam Edwards <cfsworks@gmail.com>
-From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-i2c
-Message-ID: <e99b4be6-ceca-8275-5826-3fb27630f030@denx.de>
-Date: Tue, 15 Aug 2023 09:53:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B9190sne";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mVe8l7sf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 08A248675B; Tue, 15 Aug 2023 10:24:29 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F10786604
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 10:24:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RQ47G0c58z9skl;
+ Tue, 15 Aug 2023 10:24:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692087866;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eh9WSqn6cC+SL8X8SqgW+f+ct+enqovFk9iDFicaQGI=;
+ b=B9190snebRmrvAb7ZY/gbG3cofQbXlGCcODuL4nzB28IMaAG4LWUHqgNeQw4UkZNPW5Qp6
+ x6dPQ/A7Bs0Kl6tNPN4quyw5rLcG9wwMpuXuDY4D1x8Usm/VD4PGJfX6Fe5l0II21CDsV0
+ kv8JLxLBtpQQeGNlbFh13LUEkQKoinaTxPDkxT4HNTlMqsplIMSj0knBvWCEajDbk5e9UU
+ bHhlyWAmMztqwQc0lWJDN7oNPeDMwoVBeTaWKL5NYFe+o9MKhpNHaDex2M7hN7Kq6n+5sH
+ kPIE7mSZ6ml+a2BtOjgwKTuYOwIKEq2Cy4XAe0hJ+jPsQXX98zskflrRWBYdew==
+Message-ID: <507f1311-132d-57f1-ed0b-dd3aa3d7695f@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692087863;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eh9WSqn6cC+SL8X8SqgW+f+ct+enqovFk9iDFicaQGI=;
+ b=mVe8l7sfGWRWrua3YX/J5EM46HrW9HjvSd+FXgJ2elp/62B4a1TqwBleB8QclaWkDz34sh
+ TAPG3wMvJ9cJG8K9liH1x6LgjX/TUdwTCnVqqcvd6V4lWPT1geeb+XDHCkVe9zNxb6eIjb
+ b+ArPhxJJadK6XGfmwPigexnYfb0J+HYWzwXMkf9u2dvKKFcadT7+snR+v+7I6/vQyEBzu
+ Zm9kB0mYM7697dv4fHeXF0T+iYohdyIe+kwVA1RS0AsEbE0toyKz6z7dCgorY9Crrzi7Ad
+ JCGDHrlSHDhnFHETscTBC9vRAVdCdG9F7pxdbCeaT3OCfWbo/hYNJvEigzWrig==
+Date: Tue, 15 Aug 2023 10:24:21 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Subject: Re: [PATCH 8/8] disk: Make blk_get_ops() internal to blk uclass
 Content-Language: en-US
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glplk@gmx.de>,
+ Joshua Watt <jpewhacker@gmail.com>, Michal Suchanek <msuchanek@suse.de>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+References: <20230813234648.591083-1-marek.vasut+renesas@mailbox.org>
+ <20230813234648.591083-8-marek.vasut+renesas@mailbox.org>
+ <CAPnjgZ2GHvNE0q1-r8VqRJhAPy-EuOsMqkmDq9NPPiDfMBz6wQ@mail.gmail.com>
+ <ZNrHSX5atPqd4x/2@octopus>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <ZNrHSX5atPqd4x/2@octopus>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 6c599dfab4fe0cb08e3
+X-MBO-RS-META: j95b3r4zmodcbxnzqf1oeqr8fm5zutsq
+X-Rspamd-Queue-Id: 4RQ47G0c58z9skl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,53 +92,61 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+On 8/15/23 02:31, AKASHI Takahiro wrote:
+> On Mon, Aug 14, 2023 at 04:42:57PM -0600, Simon Glass wrote:
+>> On Sun, 13 Aug 2023 at 17:47, Marek Vasut
+>> <marek.vasut+renesas@mailbox.org> wrote:
+>>>
+>>> Move the macro into blk-uclass.c , since it is only used there.
+>>>
+>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>> ---
+>>> Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>
+>>> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>>> Cc: Bin Meng <bmeng.cn@gmail.com>
+>>> Cc: Heinrich Schuchardt <xypron.glplk@gmx.de>
+>>> Cc: Joshua Watt <jpewhacker@gmail.com>
+>>> Cc: Michal Suchanek <msuchanek@suse.de>
+>>> Cc: Simon Glass <sjg@chromium.org>
+>>> Cc: Tobias Waldekranz <tobias@waldekranz.com>
+>>> ---
+>>>   drivers/block/blk-uclass.c | 2 ++
+>>>   include/blk.h              | 2 --
+>>>   2 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>
+>> Unfortunately this does not stop people using the ops member directly.
+>>
+>> For this series, I tried a patch myself [1] but I think I stuffed it
+>> up. So I will let Takahiro-San figure it out. I would very much like
+>> to see this clean-up go in.
+> 
+> At that time I thought that the necessary change was small and trivial:)
+> 
+> As for Marek's patch, let me first explain why I implement that way,
+> i.e. separating disk_blk_*() from part_disk_*():
+> - Initially I tried to implement disk_blk_*() work for both UCLASS_BLOCK
+>    and UCLASS_PARTITION, while this idea was rejected by Simon.
+> - Then, I implemented part_disk_*() with direct access to the devices,
+>    and part_disk_*(), as helper functions, with block caching.
 
-please pull from u-boot-i2c:
+I think the later should not be part_disk_*(), but rather disk_blk_*() ?
 
-The following changes since commit 832148f675e427060be074c276956962fa9b5cb6:
+>    I thought that this approach was aligned with the implementation of
+>    block devices (blk_[read|wirte]).
+> 
+> If you don't think the second point makes sense, I can agree to Marek's
+> approach.
 
-  Merge tag 'u-boot-rockchip-20230814' of https://source.denx.de/u-boot/custodians/u-boot-rockchip
-(2023-08-14 09:11:09 -0400)
+Does it even make sense to have accessors which bypass the block cache ?
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2c-updates-for-v2023.10-rc3
-
-for you to fetch changes up to 250454c59b1b056d47cbb0c6d8d09a68416c9776:
-
-  i2c: mvtwsi: reset controller if stuck in "bus error" state (2023-08-15 06:52:04 +0200)
-
-----------------------------------------------------------------
-i2c updates for v2023.10-rc3
-
-Bugfixes:
-- mvtwsi driver fix stuck "bus error" state
-  from Sam
-
-----------------------------------------------------------------
-Sam Edwards (1):
-      i2c: mvtwsi: reset controller if stuck in "bus error" state
-
- drivers/i2c/mvtwsi.c | 42 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
-
-
-azure build is fine:
-
-https://source.denx.de/u-boot/custodians/u-boot-i2c.git
-
-Thanks!
-
-bye,
-Heiko
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Best regards,
+Marek Vasut
+
