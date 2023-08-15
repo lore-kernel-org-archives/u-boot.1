@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD656C001DF
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 22:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCDC6C001DF
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 22:02:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A63BA86901;
+	by phobos.denx.de (Postfix) with ESMTP id F00BE869B9;
 	Wed, 16 Aug 2023 00:01:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05DD0869AB; Wed, 16 Aug 2023 00:01:28 +0200 (CEST)
+ id 40145869AB; Wed, 16 Aug 2023 00:01:28 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1529869A9
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 00:01:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81FF4869AE
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 00:01:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
@@ -26,15 +26,16 @@ Received: from 068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.93)
  (envelope-from <tharvey@gateworks.com>)
- id 1qW26J-0085bD-0x; Tue, 15 Aug 2023 22:01:19 +0000
+ id 1qW26J-0085bD-Gm; Tue, 15 Aug 2023 22:01:19 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
  Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 5/6] board: gateworks: venice: add imx8mm-gw7905-0x support
-Date: Tue, 15 Aug 2023 15:01:14 -0700
-Message-Id: <20230815220115.2000851-5-tharvey@gateworks.com>
+Subject: [PATCH 6/6] board: gateworks: venice: updates for
+ imx8mp-venice-gw74xx revB PCB
+Date: Tue, 15 Aug 2023 15:01:15 -0700
+Message-Id: <20230815220115.2000851-6-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230815220115.2000851-1-tharvey@gateworks.com>
 References: <20230815220115.2000851-1-tharvey@gateworks.com>
@@ -56,293 +57,587 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Gateworks imx8mm-venice-gw7905-0x consists of a SOM + baseboard.
-
-The GW700x SOM contains the following:
- - i.MX8M Mini SoC
- - LPDDR4 memory
- - eMMC Boot device
- - Gateworks System Controller (GSC) with integrated EEPROM, button
-   controller, and ADC's
- - RGMII PHY
- - PMIC
- - SOM connector providing:
-  - FEC GbE MII
-  - 1x SPI
-  - 2x I2C
-  - 4x UART
-  - 2x USB 2.0
-  - 1x PCI
-  - 1x SDIO (4-bit 3.3V)
-  - 1x SDIO (4-bit 3.3V/1.8V)
-  - GPIO
-
-The GW7905 Baseboard contains the following:
- - GPS
- - microSD
- - off-board I/O connector with I2C, SPI, GPIO
- - EERPOM
- - PCIe clock generator
- - 1x full-length miniPCIe socket with PCI/USB3 (via mux) and USB2.0
- - 1x half-length miniPCIe socket with USB2.0 and USB3.0
- - USB 3.0 HUB
- - USB Type-C with USB PD Sink capability and peripheral support
- - USB Type-C with USB 3.0 host support
+Update the imx8mp-venice-gw74xx for revB:
+ - add CAN1
+ - add TIS-TPM on SPI2
+ - add FAN controller
+ - fix PMIC I2C bus (revA PMIC I2C was non-functional so no need for
+   backward compatible option)
+ - M2 socket GPIO's moved
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
- arch/arm/dts/Makefile                         |   1 +
- .../dts/imx8mm-venice-gw7905-0x-u-boot.dtsi   |  58 ++++
- arch/arm/dts/imx8mm-venice-gw7905-0x.dts      |  28 ++
- arch/arm/dts/imx8mm-venice-gw7905.dtsi        | 303 ++++++++++++++++++
- configs/imx8mm_venice_defconfig               |   2 +-
- 5 files changed, 391 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/imx8mm-venice-gw7905-0x-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx8mm-venice-gw7905-0x.dts
- create mode 100644 arch/arm/dts/imx8mm-venice-gw7905.dtsi
+ arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi |  70 +++--
+ arch/arm/dts/imx8mp-venice-gw74xx.dts         | 263 +++++++++++-------
+ arch/arm/dts/imx8mp-venice-u-boot.dtsi        |   8 +
+ arch/arm/dts/imx8mp-venice.dts                |  14 +
+ board/gateworks/venice/spl.c                  |   4 +-
+ 5 files changed, 227 insertions(+), 132 deletions(-)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 9b29c809dfd7..7d5f3efa04cc 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1011,6 +1011,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
- 	imx8mm-venice-gw7902.dtb \
- 	imx8mm-venice-gw7903.dtb \
- 	imx8mm-venice-gw7904.dtb \
-+	imx8mm-venice-gw7905-0x.dtb \
- 	imx8mm-verdin-wifi-dev.dtb \
- 	phycore-imx8mm.dtb \
- 	imx8mn-bsh-smm-s2.dtb \
-diff --git a/arch/arm/dts/imx8mm-venice-gw7905-0x-u-boot.dtsi b/arch/arm/dts/imx8mm-venice-gw7905-0x-u-boot.dtsi
-new file mode 100644
-index 000000000000..c259026d1a8f
---- /dev/null
-+++ b/arch/arm/dts/imx8mm-venice-gw7905-0x-u-boot.dtsi
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2023 Gateworks Corporation
-+ */
-+#include "imx8mm-venice-gw700x-u-boot.dtsi"
-+
-+&gpio1 {
-+	app_gpioa {
+diff --git a/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi
+index c3fb040080b6..501bc0ce200e 100644
+--- a/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-venice-gw74xx-u-boot.dtsi
+@@ -53,67 +53,81 @@
+ &gpio2 {
+ 	bootph-pre-ram;
+ 
+-	pcie1_wdis_hog {
++	m2_pin20 {
 +		gpio-hog;
 +		input;
++		gpios = <6 GPIO_ACTIVE_HIGH>;
++		line-name = "m2_pin20";
++	};
++
++	m2_pin22 {
++		gpio-hog;
++		input;
++		gpios = <11 GPIO_ACTIVE_HIGH>;
++		line-name = "m2_pin22";
++	};
++
++	tpm_rst_hog {
+ 		gpio-hog;
+-		gpios = <17 GPIO_ACTIVE_HIGH>;
+ 		output-high;
+-		line-name = "pcie1_wdis#";
++		gpios = <12 GPIO_ACTIVE_HIGH>;
++		line-name = "tpm_rst#";
+ 	};
+ 
+-	pcie2_wdis_hog {
++	pcie1_wdis_hog {
+ 		gpio-hog;
+-		gpios = <18 GPIO_ACTIVE_HIGH>;
+ 		output-high;
+-		line-name = "pcie2_wdis#";
 +		gpios = <13 GPIO_ACTIVE_HIGH>;
-+		line-name = "gpioa";
-+	};
-+
-+	app_gpiob {
-+		gpio-hog;
-+		input;
++		line-name = "pcie1_wdis#";
+ 	};
+ 
+ 	pcie3_wdis_hog {
+ 		gpio-hog;
+-		gpios = <14 GPIO_ACTIVE_HIGH>;
+ 		output-high;
 +		gpios = <14 GPIO_ACTIVE_HIGH>;
-+		line-name = "gpiob";
-+	};
+ 		line-name = "pcie3_wdis#";
+ 	};
+-};
+ 
+-&gpio3 {
+-	bootph-pre-ram;
+-
+-	m2_dis2_hog {
++	pcie2_wdis_hog {
+ 		gpio-hog;
+-		gpios = <0 GPIO_ACTIVE_HIGH>;
+ 		output-high;
+-		line-name = "m2_gdis#";
++		gpios = <18 GPIO_ACTIVE_HIGH>;
++		line-name = "pcie2_wdis#";
+ 	};
++};
++
++&gpio3 {
++	bootph-pre-ram;
+ 
+-	m2rst_hog {
++	m2_rst {
+ 		gpio-hog;
++		output-low;
+ 		gpios = <6 GPIO_ACTIVE_HIGH>;
+-		output-high;
+-		line-name = "m2_rst#";
++		line-name = "m2_rst";
+ 	};
 +};
 +
 +&gpio4 {
-+	pci_usb_sel {
-+		gpio-hog;
-+		output-low;
-+		gpios = <3 GPIO_ACTIVE_HIGH>;
-+		line-name = "pci_usb_sel";
-+	};
-+
-+	pci_wdis {
-+		gpio-hog;
-+		output-high;
-+		gpios = <7 GPIO_ACTIVE_HIGH>;
-+		line-name = "pci_wdis#";
-+	};
-+};
-+
-+&gpio5 {
-+	app_gpioc {
-+		gpio-hog;
-+		input;
-+		gpios = <4 GPIO_ACTIVE_HIGH>;
-+		line-name = "gpioc";
-+	};
-+
-+	app_gpiod {
-+		gpio-hog;
-+		input;
-+		gpios = <5 GPIO_ACTIVE_HIGH>;
-+		line-name = "gpiod";
-+	};
-+};
-+
-+/* Disable SOM interfaces not used on baseboard */
-+&fec1 {
-+	status = "disabled";
-+};
-diff --git a/arch/arm/dts/imx8mm-venice-gw7905-0x.dts b/arch/arm/dts/imx8mm-venice-gw7905-0x.dts
-new file mode 100644
-index 000000000000..914753f062cd
---- /dev/null
-+++ b/arch/arm/dts/imx8mm-venice-gw7905-0x.dts
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright 2023 Gateworks Corporation
-+ */
-+
-+/dts-v1/;
-+
-+#include "imx8mm.dtsi"
-+#include "imx8mm-venice-gw700x.dtsi"
-+#include "imx8mm-venice-gw7905.dtsi"
-+
-+/ {
-+	model = "Gateworks Venice GW7905-0x i.MX8MM Development Kit";
-+	compatible = "gateworks,imx8mm-gw7905-0x", "fsl,imx8mm";
-+
-+	chosen {
-+		stdout-path = &uart2;
-+	};
-+};
-+
-+/* Disable SOM interfaces not used on baseboard */
-+&fec1 {
-+	status = "disabled";
-+};
-+
-+&usdhc1 {
-+	status = "disabled";
-+};
-diff --git a/arch/arm/dts/imx8mm-venice-gw7905.dtsi b/arch/arm/dts/imx8mm-venice-gw7905.dtsi
-new file mode 100644
-index 000000000000..9646eb9e4928
---- /dev/null
-+++ b/arch/arm/dts/imx8mm-venice-gw7905.dtsi
-@@ -0,0 +1,303 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright 2023 Gateworks Corporation
-+ */
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/phy/phy-imx8-pcie.h>
-+
-+/ {
-+	led-controller {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_gpio_leds>;
-+
-+		led-0 {
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_GREEN>;
-+			gpios = <&gpio4 0 GPIO_ACTIVE_HIGH>;
-+			default-state = "on";
-+			linux,default-trigger = "heartbeat";
-+		};
-+
-+		led-1 {
-+			function = LED_FUNCTION_STATUS;
-+			color = <LED_COLOR_ID_RED>;
-+			gpios = <&gpio4 2 GPIO_ACTIVE_HIGH>;
-+			default-state = "off";
-+		};
-+	};
-+
-+	pcie0_refclk: pcie0-refclk {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <100000000>;
-+	};
-+
-+	pps {
-+		compatible = "pps-gpio";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_pps>;
-+		gpios = <&gpio4 5 GPIO_ACTIVE_HIGH>;
-+		status = "okay";
-+	};
-+
-+	reg_usb2_vbus: regulator-usb2-vbus {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_reg_usb2_en>;
++	bootph-pre-ram;
+ 
+-	m2_off_hog {
++	m2_off {
+ 		gpio-hog;
+-		gpios = <14 GPIO_ACTIVE_HIGH>;
+ 		output-high;
++		gpios = <2 GPIO_ACTIVE_HIGH>;
+ 		line-name = "m2_off#";
+ 	};
+-};
+-
+-&gpio4 {
+-	bootph-pre-ram;
+ 
+-	m2_dis1_hog {
++	m2_wdis {
+ 		gpio-hog;
+-		gpios = <18 GPIO_ACTIVE_HIGH>;
+ 		output-high;
++		gpios = <18 GPIO_ACTIVE_HIGH>;
+ 		line-name = "m2_wdis#";
+ 	};
+ 
+ 	rs485_en {
+ 		gpio-hog;
+-		gpios = <31 GPIO_ACTIVE_HIGH>;
+ 		output-low;
++		gpios = <31 GPIO_ACTIVE_HIGH>;
+ 		line-name = "rs485_en";
+ 	};
+ };
+@@ -123,15 +137,15 @@
+ 
+ 	rs485_half {
+ 		gpio-hog;
+-		gpios = <0 GPIO_ACTIVE_HIGH>;
+ 		output-low;
++		gpios = <0 GPIO_ACTIVE_HIGH>;
+ 		line-name = "rs485_hd";
+ 	};
+ 
+ 	rs485_term {
+ 		gpio-hog;
+-		gpios = <1 GPIO_ACTIVE_HIGH>;
+ 		output-low;
++		gpios = <1 GPIO_ACTIVE_HIGH>;
+ 		line-name = "rs485_term";
+ 	};
+ };
+diff --git a/arch/arm/dts/imx8mp-venice-gw74xx.dts b/arch/arm/dts/imx8mp-venice-gw74xx.dts
+index ceeca4966fc5..7eb285315739 100644
+--- a/arch/arm/dts/imx8mp-venice-gw74xx.dts
++++ b/arch/arm/dts/imx8mp-venice-gw74xx.dts
+@@ -125,12 +125,22 @@
+ 		regulator-max-microvolt = <5000000>;
+ 	};
+ 
++	reg_can1_stby: regulator-can1-stby {
 +		compatible = "regulator-fixed";
-+		regulator-name = "usb2_vbus";
-+		gpio = <&gpio1 8 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	reg_usdhc2_vmmc: regulator-usdhc2 {
 +		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
-+		compatible = "regulator-fixed";
-+		regulator-name = "SD2_3P3V";
++		pinctrl-0 = <&pinctrl_reg_can1>;
++		regulator-name = "can1_stby";
++		gpio = <&gpio3 19 GPIO_ACTIVE_LOW>;
 +		regulator-min-microvolt = <3300000>;
 +		regulator-max-microvolt = <3300000>;
-+		gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
++	};
++
+ 	reg_can2_stby: regulator-can2-stby {
+ 		compatible = "regulator-fixed";
+ 		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_reg_can>;
++		pinctrl-0 = <&pinctrl_reg_can2>;
+ 		regulator-name = "can2_stby";
+-		gpio = <&gpio3 19 GPIO_ACTIVE_LOW>;
++		gpio = <&gpio5 5 GPIO_ACTIVE_LOW>;
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
+ 	};
+@@ -164,6 +174,21 @@
+ 	cpu-supply = <&reg_arm>;
+ };
+ 
++&ecspi1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_spi1>;
++	cs-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;
++	status = "okay";
++
++	tpm@0 {
++		compatible = "tcg,tpm_tis-spi";
++		#address-cells = <0x1>;
++		#size-cells = <0x1>;
++		reg = <0x0>;
++		spi-max-frequency = <36000000>;
 +	};
 +};
 +
-+/* off-board header */
-+&ecspi2 {
+ /* off-board header */
+ &ecspi2 {
+ 	pinctrl-names = "default";
+@@ -204,6 +229,13 @@
+ 	};
+ };
+ 
++&flexcan1 {
 +	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_spi2>;
-+	cs-gpios = <&gpio5 13 GPIO_ACTIVE_LOW>;
++	pinctrl-0 = <&pinctrl_flexcan1>;
++	xceiver-supply = <&reg_can1_stby>;
 +	status = "okay";
 +};
 +
-+&gpio1 {
-+	gpio-line-names =
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "gpioa", "gpiob", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "";
-+};
+ &flexcan2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_flexcan2>;
+@@ -214,38 +246,38 @@
+ &gpio1 {
+ 	gpio-line-names =
+ 		"", "", "", "", "", "", "", "",
+-		"", "", "dio0", "", "dio1", "", "", "",
++		"", "dio0", "", "dio1", "", "", "", "",
+ 		"", "", "", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "";
+ };
+ 
+ &gpio2 {
+ 	gpio-line-names =
+-		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "", "", "pcie3_wdis#", "",
++		"", "", "", "", "", "", "m2_pin20", "",
++		"", "", "", "", "", "pcie1_wdis#", "pcie3_wdis#", "",
+ 		"", "", "pcie2_wdis#", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "";
+ };
+ 
+ &gpio3 {
+ 	gpio-line-names =
+-		"m2_gdis#", "", "", "", "", "", "", "m2_rst#",
++		"", "", "", "", "", "", "m2_rst", "",
++		"", "", "", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "",
+-		"m2_off#", "", "", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "";
+ };
+ 
+ &gpio4 {
+ 	gpio-line-names =
++		"", "", "m2_off#", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "", "", "", "",
+-		"", "", "", "", "m2_wdis#", "", "", "",
+-		"", "", "", "", "", "", "", "uart_rs485";
++		"", "", "m2_wdis#", "", "", "", "", "",
++		"", "", "", "", "", "", "", "rs485_en";
+ };
+ 
+ &gpio5 {
+ 	gpio-line-names =
+-		"uart_half", "uart_term", "", "", "", "", "", "",
++		"rs485_hd", "rs485_term", "", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "",
+ 		"", "", "", "", "", "", "", "";
+@@ -268,6 +300,8 @@
+ 		interrupts = <20 IRQ_TYPE_EDGE_FALLING>;
+ 		interrupt-controller;
+ 		#interrupt-cells = <1>;
++		#address-cells = <1>;
++		#size-cells = <0>;
+ 
+ 		adc {
+ 			compatible = "gw,gsc-adc";
+@@ -286,6 +320,12 @@
+ 				label = "vdd_bat";
+ 			};
+ 
++			channel@16 {
++				gw,mode = <4>;
++				reg = <0x16>;
++				label = "fan_tach";
++			};
 +
-+&gpio4 {
-+	gpio-line-names =
-+		"", "", "", "pci_usb_sel",
-+		"", "", "", "pci_wdis#",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "";
-+};
+ 			channel@82 {
+ 				gw,mode = <2>;
+ 				reg = <0x82>;
+@@ -358,6 +398,11 @@
+ 				gw,voltage-divider-ohms = <10000 10000>;
+ 			};
+ 		};
 +
-+&gpio5 {
-+	gpio-line-names =
-+		"", "", "", "",
-+		"gpioc", "gpiod", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "",
-+		"", "", "", "";
-+};
++		fan-controller@a {
++			compatible = "gw,gsc-fan";
++			reg = <0x0a>;
++		};
+ 	};
+ 
+ 	gpio: gpio@23 {
+@@ -369,85 +414,6 @@
+ 		interrupts = <4>;
+ 	};
+ 
+-	pmic@25 {
+-		compatible = "nxp,pca9450c";
+-		reg = <0x25>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pinctrl_pmic>;
+-		interrupt-parent = <&gpio3>;
+-		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
+-
+-		regulators {
+-			BUCK1 {
+-				regulator-name = "BUCK1";
+-				regulator-min-microvolt = <720000>;
+-				regulator-max-microvolt = <1000000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-				regulator-ramp-delay = <3125>;
+-			};
+-
+-			reg_arm: BUCK2 {
+-				regulator-name = "BUCK2";
+-				regulator-min-microvolt = <720000>;
+-				regulator-max-microvolt = <1025000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-				regulator-ramp-delay = <3125>;
+-				nxp,dvs-run-voltage = <950000>;
+-				nxp,dvs-standby-voltage = <850000>;
+-			};
+-
+-			BUCK4 {
+-				regulator-name = "BUCK4";
+-				regulator-min-microvolt = <3000000>;
+-				regulator-max-microvolt = <3600000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			BUCK5 {
+-				regulator-name = "BUCK5";
+-				regulator-min-microvolt = <1650000>;
+-				regulator-max-microvolt = <1950000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			BUCK6 {
+-				regulator-name = "BUCK6";
+-				regulator-min-microvolt = <1045000>;
+-				regulator-max-microvolt = <1155000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			LDO1 {
+-				regulator-name = "LDO1";
+-				regulator-min-microvolt = <1650000>;
+-				regulator-max-microvolt = <1950000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			LDO3 {
+-				regulator-name = "LDO3";
+-				regulator-min-microvolt = <1710000>;
+-				regulator-max-microvolt = <1890000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			LDO5 {
+-				regulator-name = "LDO5";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3300000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-		};
+-	};
+-
+ 	eeprom@50 {
+ 		compatible = "atmel,24c02";
+ 		reg = <0x50>;
+@@ -559,7 +525,6 @@
+ 	};
+ };
+ 
+-/* off-board header */
+ &i2c3 {
+ 	clock-frequency = <400000>;
+ 	pinctrl-names = "default", "gpio";
+@@ -568,6 +533,85 @@
+ 	scl-gpios = <&gpio5 18 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
+ 	sda-gpios = <&gpio5 19 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
+ 	status = "okay";
 +
-+&i2c2 {
-+	clock-frequency = <400000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_i2c2>;
-+	status = "okay";
++	pmic@25 {
++		compatible = "nxp,pca9450c";
++		reg = <0x25>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pmic>;
++		interrupt-parent = <&gpio3>;
++		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
 +
-+	eeprom@52 {
-+		compatible = "atmel,24c32";
-+		reg = <0x52>;
-+		pagesize = <32>;
++		regulators {
++			BUCK1 {
++				regulator-name = "BUCK1";
++				regulator-min-microvolt = <720000>;
++				regulator-max-microvolt = <1000000>;
++				regulator-boot-on;
++				regulator-always-on;
++				regulator-ramp-delay = <3125>;
++			};
++
++			reg_arm: BUCK2 {
++				regulator-name = "BUCK2";
++				regulator-min-microvolt = <720000>;
++				regulator-max-microvolt = <1025000>;
++				regulator-boot-on;
++				regulator-always-on;
++				regulator-ramp-delay = <3125>;
++				nxp,dvs-run-voltage = <950000>;
++				nxp,dvs-standby-voltage = <850000>;
++			};
++
++			BUCK4 {
++				regulator-name = "BUCK4";
++				regulator-min-microvolt = <3000000>;
++				regulator-max-microvolt = <3600000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			BUCK5 {
++				regulator-name = "BUCK5";
++				regulator-min-microvolt = <1650000>;
++				regulator-max-microvolt = <1950000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			BUCK6 {
++				regulator-name = "BUCK6";
++				regulator-min-microvolt = <1045000>;
++				regulator-max-microvolt = <1155000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			LDO1 {
++				regulator-name = "LDO1";
++				regulator-min-microvolt = <1650000>;
++				regulator-max-microvolt = <1950000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			LDO3 {
++				regulator-name = "LDO3";
++				regulator-min-microvolt = <1710000>;
++				regulator-max-microvolt = <1890000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++
++			LDO5 {
++				regulator-name = "LDO5";
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-boot-on;
++				regulator-always-on;
++			};
++		};
 +	};
+ };
+ 
+ /* off-board header */
+@@ -734,12 +778,14 @@
+ 		fsl,pins = <
+ 			MX8MP_IOMUXC_GPIO1_IO09__GPIO1_IO09	0x40000040 /* DIO0 */
+ 			MX8MP_IOMUXC_GPIO1_IO11__GPIO1_IO11	0x40000040 /* DIO1 */
+-			MX8MP_IOMUXC_NAND_DQS__GPIO3_IO14	0x40000040 /* M2SKT_OFF# */
+-			MX8MP_IOMUXC_SD2_DATA3__GPIO2_IO18	0x40000150 /* PCIE2_WDIS# */
++			MX8MP_IOMUXC_SAI1_RXD0__GPIO4_IO02	0x40000040 /* M2SKT_OFF# */
++			MX8MP_IOMUXC_SAI1_TXD6__GPIO4_IO18	0x40000150 /* M2SKT_WDIS# */
++			MX8MP_IOMUXC_SD1_DATA4__GPIO2_IO06	0x40000040 /* M2SKT_PIN20 */
++			MX8MP_IOMUXC_SD1_STROBE__GPIO2_IO11	0x40000040 /* M2SKT_PIN22 */
++			MX8MP_IOMUXC_SD2_CLK__GPIO2_IO13	0x40000150 /* PCIE1_WDIS# */
+ 			MX8MP_IOMUXC_SD2_CMD__GPIO2_IO14	0x40000150 /* PCIE3_WDIS# */
++			MX8MP_IOMUXC_SD2_DATA3__GPIO2_IO18	0x40000150 /* PCIE2_WDIS# */
+ 			MX8MP_IOMUXC_NAND_DATA00__GPIO3_IO06	0x40000040 /* M2SKT_RST# */
+-			MX8MP_IOMUXC_SAI1_TXD6__GPIO4_IO18	0x40000150 /* M2SKT_WDIS# */
+-			MX8MP_IOMUXC_NAND_ALE__GPIO3_IO00	0x40000150 /* M2SKT_GDIS# */
+ 			MX8MP_IOMUXC_SAI3_TXD__GPIO5_IO01	0x40000104 /* UART_TERM */
+ 			MX8MP_IOMUXC_SAI3_TXFS__GPIO4_IO31	0x40000104 /* UART_RS485 */
+ 			MX8MP_IOMUXC_SAI3_TXC__GPIO5_IO00	0x40000104 /* UART_HALF */
+@@ -792,6 +838,13 @@
+ 		>;
+ 	};
+ 
++	pinctrl_flexcan1: flexcan1grp {
++		fsl,pins = <
++			MX8MP_IOMUXC_SPDIF_RX__CAN1_RX		0x154
++			MX8MP_IOMUXC_SPDIF_TX__CAN1_TX		0x154
++		>;
++	};
++
+ 	pinctrl_flexcan2: flexcan2grp {
+ 		fsl,pins = <
+ 			MX8MP_IOMUXC_SAI5_RXD3__CAN2_TX		0x154
+@@ -877,7 +930,7 @@
+ 
+ 	pinctrl_pcie0: pciegrp {
+ 		fsl,pins = <
+-			MX8MP_IOMUXC_SD2_DATA2__GPIO2_IO17	0x110
++			MX8MP_IOMUXC_SD2_DATA2__GPIO2_IO17	0x106
+ 		>;
+ 	};
+ 
+@@ -893,12 +946,18 @@
+ 		>;
+ 	};
+ 
+-	pinctrl_reg_can: regcangrp {
++	pinctrl_reg_can1: regcan1grp {
+ 		fsl,pins = <
+ 			MX8MP_IOMUXC_SAI5_RXFS__GPIO3_IO19	0x154
+ 		>;
+ 	};
+ 
++	pinctrl_reg_can2: regcan2grp {
++		fsl,pins = <
++			MX8MP_IOMUXC_SPDIF_EXT_CLK__GPIO5_IO05	0x154
++		>;
++	};
++
+ 	pinctrl_reg_usb2: regusb2grp {
+ 		fsl,pins = <
+ 			MX8MP_IOMUXC_GPIO1_IO06__GPIO1_IO06	0x140
+@@ -911,12 +970,12 @@
+ 		>;
+ 	};
+ 
+-	pinctrl_sai2: sai2grp {
++	pinctrl_spi1: spi1grp {
+ 		fsl,pins = <
+-			MX8MP_IOMUXC_SAI2_TXFS__AUDIOMIX_SAI2_TX_SYNC	0xd6
+-			MX8MP_IOMUXC_SAI2_TXD0__AUDIOMIX_SAI2_TX_DATA00	0xd6
+-			MX8MP_IOMUXC_SAI2_TXC__AUDIOMIX_SAI2_TX_BCLK	0xd6
+-			MX8MP_IOMUXC_SAI2_MCLK__AUDIOMIX_SAI2_MCLK	0xd6
++			MX8MP_IOMUXC_ECSPI1_SCLK__ECSPI1_SCLK	0x82
++			MX8MP_IOMUXC_ECSPI1_MOSI__ECSPI1_MOSI	0x82
++			MX8MP_IOMUXC_ECSPI1_MISO__ECSPI1_MISO	0x82
++			MX8MP_IOMUXC_ECSPI1_SS0__GPIO5_IO09	0x140
+ 		>;
+ 	};
+ 
+diff --git a/arch/arm/dts/imx8mp-venice-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-u-boot.dtsi
+index 99d76393d336..07813d03065a 100644
+--- a/arch/arm/dts/imx8mp-venice-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-venice-u-boot.dtsi
+@@ -73,6 +73,14 @@
+ 	bootph-pre-ram;
+ };
+ 
++&i2c3 {
++	bootph-pre-ram;
 +};
 +
-+/* off-board header */
++&pinctrl_i2c3 {
++	bootph-pre-ram;
++};
++
+ &wdog1 {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/imx8mp-venice.dts b/arch/arm/dts/imx8mp-venice.dts
+index 77e5ac423db3..372db26cc09c 100644
+--- a/arch/arm/dts/imx8mp-venice.dts
++++ b/arch/arm/dts/imx8mp-venice.dts
+@@ -57,6 +57,13 @@
+ 	};
+ };
+ 
 +&i2c3 {
 +	clock-frequency = <400000>;
 +	pinctrl-names = "default";
@@ -350,189 +645,39 @@ index 000000000000..9646eb9e4928
 +	status = "okay";
 +};
 +
-+&pcie_phy {
-+	fsl,refclk-pad-mode = <IMX8_PCIE_REFCLK_PAD_INPUT>;
-+	fsl,clkreq-unsupported;
-+	clocks = <&pcie0_refclk>;
-+	clock-names = "ref";
-+	status = "okay";
-+};
-+
-+&pcie0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_pcie0>;
-+	reset-gpio = <&gpio4 6 GPIO_ACTIVE_LOW>;
-+	status = "okay";
-+};
-+
-+/* GPS */
-+&uart1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_uart1>;
-+	status = "okay";
-+};
-+
-+/* USB1 - Type C front panel SINK port J14 */
-+&usbotg1 {
-+	dr_mode = "peripheral";
-+	status = "okay";
-+};
-+
-+/* USB2 4-port USB3.0 HUB:
-+ *  P1 - USBC connector (host only)
-+ *  P2 - USB2 test connector
-+ *  P3 - miniPCIe full card
-+ *  P4 - miniPCIe half card
-+ */
-+&usbotg2 {
-+	dr_mode = "host";
-+	vbus-supply = <&reg_usb2_vbus>;
-+	status = "okay";
-+};
-+
-+/* microSD */
-+&usdhc2 {
-+	pinctrl-names = "default", "state_100mhz", "state_200mhz";
-+	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
-+	cd-gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
-+	vmmc-supply = <&reg_usdhc2_vmmc>;
-+	bus-width = <4>;
-+	status = "okay";
-+};
-+
-+&iomuxc {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_hog>;
-+
-+	pinctrl_hog: hoggrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_GPIO1_IO13_GPIO1_IO13	0x40000040 /* GPIOA */
-+			MX8MM_IOMUXC_GPIO1_IO14_GPIO1_IO14	0x40000040 /* GPIOB */
-+			MX8MM_IOMUXC_SAI1_RXD1_GPIO4_IO3	0x40000106 /* PCI_USBSEL */
-+			MX8MM_IOMUXC_SAI1_RXD5_GPIO4_IO7	0x40000106 /* PCIE_WDIS# */
-+			MX8MM_IOMUXC_SPDIF_EXT_CLK_GPIO5_IO5	0x40000040 /* GPIOD */
-+			MX8MM_IOMUXC_SPDIF_RX_GPIO5_IO4		0x40000040 /* GPIOC */
-+		>;
-+	};
-+
-+	pinctrl_gpio_leds: gpioledgrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SAI1_RXFS_GPIO4_IO0	0x6	/* LEDG */
-+			MX8MM_IOMUXC_SAI1_RXD0_GPIO4_IO2	0x6	/* LEDR */
-+		>;
-+	};
-+
-+	pinctrl_i2c2: i2c2grp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_I2C2_SCL_I2C2_SCL		0x400001c2
-+			MX8MM_IOMUXC_I2C2_SDA_I2C2_SDA		0x400001c2
-+		>;
-+	};
-+
+ /* console */
+ &uart2 {
+ 	pinctrl-names = "default";
+@@ -106,6 +113,13 @@
+ 		>;
+ 	};
+ 
 +	pinctrl_i2c3: i2c3grp {
 +		fsl,pins = <
-+			MX8MM_IOMUXC_I2C3_SCL_I2C3_SCL		0x400001c2
-+			MX8MM_IOMUXC_I2C3_SDA_I2C3_SDA		0x400001c2
++			MX8MP_IOMUXC_I2C3_SCL__I2C3_SCL		0x400001c3
++			MX8MP_IOMUXC_I2C3_SDA__I2C3_SDA		0x400001c3
 +		>;
 +	};
 +
-+	pinctrl_pcie0: pciegrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SAI1_RXD4_GPIO4_IO6	0x106
-+		>;
-+	};
-+
-+	pinctrl_pps: ppsgrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SAI1_RXD3_GPIO4_IO5	0x106
-+		>;
-+	};
-+
-+	pinctrl_reg_usb2_en: regusb2grp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_GPIO1_IO08_GPIO1_IO8	0x6	/* USBHUB_RST# (ext p/u) */
-+		>;
-+	};
-+
-+	pinctrl_reg_usdhc2_vmmc: regusdhc2vmmcgrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SD2_RESET_B_GPIO2_IO19	0x40
-+		>;
-+	};
-+
-+	pinctrl_spi2: spi2grp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_ECSPI2_SCLK_ECSPI2_SCLK	0x140
-+			MX8MM_IOMUXC_ECSPI2_MOSI_ECSPI2_MOSI	0x140
-+			MX8MM_IOMUXC_ECSPI2_MISO_ECSPI2_MISO	0x140
-+			MX8MM_IOMUXC_ECSPI2_SS0_GPIO5_IO13	0x140
-+		>;
-+	};
-+
-+	pinctrl_uart1: uart1grp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_UART1_RXD_UART1_DCE_RX	0x140
-+			MX8MM_IOMUXC_UART1_TXD_UART1_DCE_TX	0x140
-+		>;
-+	};
-+
-+	pinctrl_usdhc2: usdhc2grp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SD2_CLK_USDHC2_CLK		0x190
-+			MX8MM_IOMUXC_SD2_CMD_USDHC2_CMD		0x1d0
-+			MX8MM_IOMUXC_SD2_DATA0_USDHC2_DATA0	0x1d0
-+			MX8MM_IOMUXC_SD2_DATA1_USDHC2_DATA1	0x1d0
-+			MX8MM_IOMUXC_SD2_DATA2_USDHC2_DATA2	0x1d0
-+			MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3	0x1d0
-+			MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT	0xc0
-+		>;
-+	};
-+
-+	pinctrl_usdhc2_100mhz: usdhc2-100mhzgrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SD2_CLK_USDHC2_CLK		0x194
-+			MX8MM_IOMUXC_SD2_CMD_USDHC2_CMD		0x1d4
-+			MX8MM_IOMUXC_SD2_DATA0_USDHC2_DATA0	0x1d4
-+			MX8MM_IOMUXC_SD2_DATA1_USDHC2_DATA1	0x1d4
-+			MX8MM_IOMUXC_SD2_DATA2_USDHC2_DATA2	0x1d4
-+			MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3	0x1d4
-+			MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT	0xc0
-+		>;
-+	};
-+
-+	pinctrl_usdhc2_200mhz: usdhc2-200mhzgrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SD2_CLK_USDHC2_CLK		0x196
-+			MX8MM_IOMUXC_SD2_CMD_USDHC2_CMD		0x1d6
-+			MX8MM_IOMUXC_SD2_DATA0_USDHC2_DATA0	0x1d6
-+			MX8MM_IOMUXC_SD2_DATA1_USDHC2_DATA1	0x1d6
-+			MX8MM_IOMUXC_SD2_DATA2_USDHC2_DATA2	0x1d6
-+			MX8MM_IOMUXC_SD2_DATA3_USDHC2_DATA3	0x1d6
-+			MX8MM_IOMUXC_GPIO1_IO04_USDHC2_VSELECT	0xc0
-+		>;
-+	};
-+
-+	pinctrl_usdhc2_gpio: usdhc2gpiogrp {
-+		fsl,pins = <
-+			MX8MM_IOMUXC_SD2_CD_B_GPIO2_IO12	0x1c4
-+		>;
-+	};
-+};
-diff --git a/configs/imx8mm_venice_defconfig b/configs/imx8mm_venice_defconfig
-index 4fba8eb2438b..a702f58c88c0 100644
---- a/configs/imx8mm_venice_defconfig
-+++ b/configs/imx8mm_venice_defconfig
-@@ -75,7 +75,7 @@ CONFIG_CMD_EXT4_WRITE=y
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_LIST="imx8mm-venice imx8mm-venice-gw71xx-0x imx8mm-venice-gw72xx-0x imx8mm-venice-gw73xx-0x imx8mm-venice-gw7901 imx8mm-venice-gw7902 imx8mm-venice-gw7903 imx8mm-venice-gw7904"
-+CONFIG_OF_LIST="imx8mm-venice imx8mm-venice-gw71xx-0x imx8mm-venice-gw72xx-0x imx8mm-venice-gw73xx-0x imx8mm-venice-gw7901 imx8mm-venice-gw7902 imx8mm-venice-gw7903 imx8mm-venice-gw7904 imx8mm-venice-gw7905-0x"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
- CONFIG_SYS_MMC_ENV_DEV=2
+ 	pinctrl_uart2: uart2grp {
+ 		fsl,pins = <
+ 			MX8MP_IOMUXC_UART2_RXD__UART2_DCE_RX	0x49
+diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
+index 5aa209578b21..41de2af861e2 100644
+--- a/board/gateworks/venice/spl.c
++++ b/board/gateworks/venice/spl.c
+@@ -158,9 +158,9 @@ static int power_init_board(void)
+ 	}
+ 
+ 	else if (!strncmp(model, "GW74", 4)) {
+-		ret = uclass_get_device_by_seq(UCLASS_I2C, 0, &bus);
++		ret = uclass_get_device_by_seq(UCLASS_I2C, 2, &bus);
+ 		if (ret) {
+-			printf("PMIC    : failed I2C1 probe: %d\n", ret);
++			printf("PMIC    : failed I2C3 probe: %d\n", ret);
+ 			return ret;
+ 		}
+ 		ret = dm_i2c_probe(bus, 0x25, 0, &dev);
 -- 
 2.25.1
 
