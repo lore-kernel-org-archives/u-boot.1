@@ -4,69 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA0FC0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:03:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0494BC0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:17:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD80A8671F;
-	Tue, 15 Aug 2023 21:03:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BB2CF86852;
+	Tue, 15 Aug 2023 21:17:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YL2Ho28H";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JOc/eCQR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA91086384; Tue, 15 Aug 2023 21:03:44 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 40B6E86863; Tue, 15 Aug 2023 21:17:40 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFB9686994
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:03:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71EAE86801
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2b9d3dacb33so89517661fa.1
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:03:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-5654051b27fso4393160a12.0
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:17:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692126221; x=1692731021;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xNf/vg0VHgK6MAJZ+4f3hn/wGev5cCXSUtoD0fHhHKg=;
- b=YL2Ho28HTU0VMkKopaQe1YQVne2FuShMJ8d5drwy4TFR6mBfyzM4mYE75iyS9rxjv7
- CNFEdvJgN4d+yvE81r8lclwQVlpdipcrNfqrsV/MXw8MukNknV1/yOtEyW3tyytkCoaf
- 7/wBox5i/p2Y6EMm+YJfJUaiL2YnQsECfWRVc=
+ d=gmail.com; s=20221208; t=1692127055; x=1692731855;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aV66Y01J54tsHnj0agaUT+Yje/h5VS4iHHLC9UV8fsE=;
+ b=JOc/eCQRgPOn03rwvJo/q4GBWdpFKdyNAP1iMoWvg0l3ArvDxn8Lf4/dUODsohjS+M
+ 9/qTCn0yHc97Oym3VayOlnchvt0DI5fI9wPA8fIBQ0YTBtqgsTUXsZsN1Mm4dHUn1T8Z
+ pyaZLJhaS1bvL0/zODyNStftRAIrkmkLcBqp11BqNcntjiyPK/UKGX/cv6vYwGO1xaCi
+ //lAlxqGNetiaoYqkXlgmSqjwlPWg52CN6o38u1mcF+s4bDC2UCy1fmStIfVSXQSTHVR
+ sViiE+r5JpNr70MZD0M+FyCdcjVCeYtEEAgofh/MDj71Bdd7TMdH1w1OlGx4QNDUByKl
+ NdWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692126221; x=1692731021;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xNf/vg0VHgK6MAJZ+4f3hn/wGev5cCXSUtoD0fHhHKg=;
- b=GwBfJ9XDxBotgHCAFH062uUIYqidJuvvf8JzYS/8ukT8RJOOsNF9HcATk/3/TrfvnX
- GfuGGnVjjMnMHOykg6ugS/w9KjPp6zNv1nHvMiNomw5UhLj9wt5j9Aor4v5kIJn6Qqy1
- 5zLN1pr8XXvae/z65r2zghuxh4yYcAiFDUmJHamgFAOn57CcPBGjoDFeZJ91xA141jNn
- atP/hlBAkoa63yg0wEfqTg/wCA9MZVEsV4XQucB9JVg66ykcbXVDYSl+xHJuq/6KfbJF
- fpCgnwK/GA7JRm0z7FEPsxurly+08xMci+dGsg1ZAaDI125szii7oqI/jI5edzyneP5M
- 0cRA==
-X-Gm-Message-State: AOJu0Yxm/ZlcESfYgsaqBuD9jVEOxd2KE0gTaEGO8uRZUifgZMftrRKA
- mTdbsvv5VyzL/d6W8ZClrD+t6dCh0og3PYSA3Hu9dg==
-X-Google-Smtp-Source: AGHT+IF+MSgmvtFzLKRmsmGwyzCr/GNhleam5Atw6PVSg5ipNeWXL2evwmeogJ/jFjhP/wgge5H4A/7rmcPuA0UVwDs=
-X-Received: by 2002:a2e:8950:0:b0:2bb:8d96:6041 with SMTP id
- b16-20020a2e8950000000b002bb8d966041mr1825415ljk.45.1692126220858; Tue, 15
- Aug 2023 12:03:40 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692127055; x=1692731855;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aV66Y01J54tsHnj0agaUT+Yje/h5VS4iHHLC9UV8fsE=;
+ b=JT0fBblbLIn0/fn8drg9X4LKZ8C1e/Hi88CsW/+EeCyUQNrVASBvkSqODwhVYovtZ7
+ 4EpOcllIA7Lkq03YVAO2ttMP41n128T4ItH214rcHfTbukvkxZaUGDGW+z6ZQ00iNp8S
+ qRTClj3D0J+1I6+Wrk/wDk6Ce6UNP0aTwR6W99mQQq1cOYxCJ3kgp3lCnZ3j/BcEhUhq
+ 1pIqdLtc+qUWbK3tTRFIj307rdDtxp1edMaQNQGl78AVgZjTraPSHCClRm4o91HJIk9O
+ zVgxo5dkekfvLY/TIAjuOuKfW32HBPbBGp492+AF6P/Bbpmho5Lwjvofums3aa4YnMTR
+ jQeQ==
+X-Gm-Message-State: AOJu0YzO6ewSFn4/8Pgl+a7uI6dyy1eW0x4x29lTufDAkzd2T6jTkK++
+ KXLwg7W1NxjQX8f5Jxy0QfY=
+X-Google-Smtp-Source: AGHT+IE8oF90rFn4jejhc4yh90yAO9VKAuxuhZOlsfhqBCLZNabR8rtsXziqFiSwcFdsMVtYt0e4dA==
+X-Received: by 2002:a05:6a20:7485:b0:143:4382:f836 with SMTP id
+ p5-20020a056a20748500b001434382f836mr17731065pzd.14.1692127055425; 
+ Tue, 15 Aug 2023 12:17:35 -0700 (PDT)
+Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
+ [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
+ z20-20020a63ac54000000b0054fd46531a1sm10604600pgn.5.2023.08.15.12.17.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 15 Aug 2023 12:17:34 -0700 (PDT)
+Message-ID: <225be7f9-558e-4695-0b38-b30b0229cdcd@gmail.com>
+Date: Tue, 15 Aug 2023 13:17:33 -0600
 MIME-Version: 1.0
-References: <20230811215743.3111594-1-sjg@chromium.org>
-In-Reply-To: <20230811215743.3111594-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 15 Aug 2023 13:03:29 -0600
-Message-ID: <CAPnjgZ3O=iYnU1ghMNXxQOtnMR+DTs6jwaHN+KrYzjy_Z-mG0Q@mail.gmail.com>
-Subject: Re: [PATCH] schemas: Add a schema for memory map
-To: Devicetree Discuss <devicetree@vger.kernel.org>
-Cc: Rob Herring <robh@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Gua Guo <gua.guo@intel.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>, 
- Chiu Chasel <chasel.chiu@intel.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Subject: Re: [PATCH 3/3] sunxi: psci: implement PSCI on R528
+Content-Language: en-US
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
+ Maksim Kiselev <bigunclemax@gmail.com>
+References: <20230812003055.74527-1-CFSworks@gmail.com>
+ <20230812003055.74527-4-CFSworks@gmail.com>
+ <20230814151642.6f47f6b5@donnerap.manchester.arm.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <20230814151642.6f47f6b5@donnerap.manchester.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,99 +99,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+linux-acpi@vger.kernel.org
-+lk
+On 8/14/23 08:16, Andre Przywara wrote:
+> Hi Sam,
+> 
+>> This patch adds the necessary code to make nonsec booting and PSCI
+>> secondary core management functional on the R528/T113.
+> 
+> Unfortunately this patch breaks the build on older 32-bit SoCs, as
+> SUNXI_CPUX_BASE is not defined there. That's a typical problem of the
+> "C-if" approach, but typically there is a clean, albeit not trivial,
+> solution:
+> 
+> It seems like SUNXI_CPUX_BASE and SUNXI_CPUCFG_BASE are mutually
+> exclusive, and I actually carry a "#define SUNXI_CPUCFG_BASE 0" hack in my
+> patches already.
+> So I wonder if we should unify those two into SUNXI_CPUCFG_BASE, with the
+> following rework:
 
-Since there was a related discussion here:
-https://patches.linaro.org/project/linux-acpi/patch/20230426034001.16-1-cuiyunhui@bytedance.com/
+The SUNXI_CPUX_BASE -> SUNXI_CPUCFG_BASE rename worked excellently. 
+We're having the same problem with SUNXI_R_CPUCFG_BASE as well, though. 
+How do you want to handle that?
 
-On Fri, 11 Aug 2023 at 15:57, Simon Glass <sjg@chromium.org> wrote:
->
-> The Devicespec specification skips over handling of a logical view of
-> the memory map, pointing users to the UEFI specification.
->
-> It is common to split firmware into 'Platform Init', which does the
-> initial hardware setup and a "Payload" which selects the OS to be booted.
-> Thus an handover interface is required between these two pieces.
->
-> Where UEFI boot-time services are not available, but UEFI firmware is
-> present on either side of this interface, information about memory usage
-> and attributes must be presented to the "Payload" in some form.
->
-> This aims to provide an initial schema for this mapping.
->
-> Note that this is separate from the existing /memory and /reserved-memory
-> nodes, since it is mostly concerned with what the memory is used for. It
-> may cover only a small fraction of available memory, although it could be
-> used to signal which area of memory has ECC.
->
-> For now, no attempt is made to create an exhaustive binding, but this can
-> be completed once this has passed initial review.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->  dtschema/schemas/memory-map.yaml | 51 ++++++++++++++++++++++++++++++++
->  1 file changed, 51 insertions(+)
->  create mode 100644 dtschema/schemas/memory-map.yaml
->
-> diff --git a/dtschema/schemas/memory-map.yaml b/dtschema/schemas/memory-map.yaml
-> new file mode 100644
-> index 0000000..97e531e
-> --- /dev/null
-> +++ b/dtschema/schemas/memory-map.yaml
-> @@ -0,0 +1,51 @@
-> +# SPDX-License-Identifier: BSD-2-Clause
-> +# Copyright 2023 Google LLC
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/memory-map.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: /memory-map nodes
-> +description: |
-> +  Common properties always required in /memory-map nodes. These nodes are
-> +  intended to resolve the nonchalant clause 3.4.1 ("/memory node and UEFI")
-> +  in the Devicetree Specification.
-> +
-> +maintainers:
-> +  - Simon Glass <sjg@chromium.org>
-> +
-> +properties:
-> +  $nodename:
-> +    const: '/'
-> +  usage:
-> +    $ref: /schemas/types.yaml#/definitions/string
-> +    description: |
-> +      Describes the usage of the memory region, e.g.:
-> +
-> +        "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
-> +        "runtime-code", "runtime-data"
-> +  attr:
-> +    $ref: /schemas/types.yaml#/definitions/string-array
-> +    description: |
-> +      Attributes possessed by this memory region:
-> +
-> +        "single-bit-ecc" - supports single-bit ECC
-> +        "multi-bit-ecc" - supports multiple-bit ECC
-> +        "no-ecc" - non-ECC memory
-> +
-> +patternProperties:
-> +  "^([a-z][a-z0-9\\-]+@[0-9a-f]+)?$":
-> +    type: object
-> +    additionalProperties: false
-> +
-> +    properties:
-> +      reg:
-> +        minItems: 1
-> +        maxItems: 1024
-> +
-> +    required:
-> +      - reg
-> +
-> +additionalProperties: true
-> +
-> +...
-> --
-> 2.41.0.694.ge786442a9b-goog
->
+Thanks,
+Sam
