@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FDB8C0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50502C0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 20:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE2C3867E2;
-	Tue, 15 Aug 2023 21:58:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B57AF8692F;
+	Tue, 15 Aug 2023 22:04:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mRALY8yr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PeBwoXqn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0F8A8692F; Tue, 15 Aug 2023 21:58:00 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 0B96D8697B; Tue, 15 Aug 2023 22:04:37 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1330486785
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:57:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA96F867E2
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 22:04:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6874d1c8610so3850520b3a.0
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:57:58 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-686bc261111so4027614b3a.3
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 13:04:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692129476; x=1692734276;
+ d=linaro.org; s=google; t=1692129872; x=1692734672;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=xMtplFwz8fglQt+ZAxNrx7Y2jVU4SaFtYsZineT5UeI=;
- b=mRALY8yryYY/snB6nSqghdXE2EhXLywxFCMY7ase9z/g79fIvlF5z45WXXAO5WoH/H
- A8bwdxwLmRNkgginLY7VAyqIgrYjYnv3OEJhIB3rfa5uYaFrnsYptUCP1bV5Pcy1Sk1s
- RTPmoZiHBHXnXvms+Nxff9bhtaskLUEJ5r/6bp8BCaMEA/eOiJ8spEmDGoLAN0OPGiTa
- L/R0Kxf1sh0VOxEdZG7UHOGHBd8FoP2xTfL0fTODu/CqvZPpBCM+ia6VWwivuARhlvFS
- Z7J8atBQsp45NRBnPFLw3j3jdbEAjHgjbK1hk2s2qankDipYz9v9ElEwvcodLIOuH1i7
- um4w==
+ bh=/y/vhsQiN5KOEpgmGXnp63tBJTDTzLr++AXmPVTW0Cw=;
+ b=PeBwoXqnhJr7fsXVy+VXq4nukUKPaPErVsVM+I9e/93eoBw2r3Y+i34flW4IxpGmj1
+ 5kffauvgdTMO86Rte0whOlxl/H67RhLrgrEK4x9MmQ9q6j4q46BLG+QsW+cdc8WcZ5Pc
+ T5d7qmExhGkvOZmhRNUbfMTuYtE1IGCTwcOq/in+0AsP6AhMskVqzVCotx8r7zGhgjuq
+ L+8SQg7KvobY1cWoDCn3LHRF53J0wCr1R2TeupYuy940mOZ2zC0p/ezSpcOVbSX55Oot
+ WqTVemFLE2KNuo7ouyty3hodawOEhttdeRqGB71MYSVUk1ic+gPH5f2sWHikQT8NTSb2
+ +zzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692129476; x=1692734276;
+ d=1e100.net; s=20221208; t=1692129872; x=1692734672;
  h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xMtplFwz8fglQt+ZAxNrx7Y2jVU4SaFtYsZineT5UeI=;
- b=WzDj5kA1D/qmpWeySyEwBXuLpc5nEFLO/508jjykPu2PGdHx9h1kkPuo1g7R1CEPaO
- qffdNJGc1Jjz6RfKgqvpuzccpJscyR+D/upIXdeD4aQeU9LtaSqOFK6PLTokr1pEwCgf
- RkXsoByFa6kQO3sztDpVOsla6y0ovpNU1Gji8dWfirBTfd3SguWfbZWy+aOsln5ZLgP5
- s2SJ9hH/X/uMkqvVdmRcPSP9qSNsyep5L6TTwQ8gRRk1aNz/W1sweAu7lsKv4y9pE+9l
- 1kg9hOKuLobxLCxfG7HNpNqN5jGkP9TOpVqNtPPlVNOzKcYn3xC0teduY5+I6rDBEpgM
- GVoA==
-X-Gm-Message-State: AOJu0YzvSa9XpqcTBKT7K4Q0civKEPWF80UGVBgFDPFNfdxTm0NexiLb
- GzeZML0tbXm+YRlzxlLgprkXP4oYcBFlraPaYx8=
-X-Google-Smtp-Source: AGHT+IHocH0thFubzAWgeSX2kSIgW4eeWG2IlCh25JVCjkJ1NlZe4FUfpTkWFQnD782q1L6UXgWEUg==
-X-Received: by 2002:a05:6a21:3e0b:b0:137:3eba:b7fb with SMTP id
- bk11-20020a056a213e0b00b001373ebab7fbmr10839839pzc.2.1692129476454; 
- Tue, 15 Aug 2023 12:57:56 -0700 (PDT)
+ bh=/y/vhsQiN5KOEpgmGXnp63tBJTDTzLr++AXmPVTW0Cw=;
+ b=doIEIzqyzE/txwN5WGEGtvgkplrkXmRoD/Zir0nRVjZT9IYxLKPW9tXjG5E0uRpEzf
+ F5NYXckAuP4M/1KVtdz4a9mGj2CauOE1cVVv4sbq8nYCMo5EKyqp9vJUp0xLQuQ1+c9a
+ fgIIjodOH4BxgsFF5Hm2cBtnqPktxFCRojL1W8TFzBMPfJYHzdG0XTXZ7OF7rc1cs27j
+ VvZynF37kKSl2D738Jh5ZlSnvSgM7QuZxVMWWUTXiBHiL0aNLHkPMs0VmQvN0USpngK8
+ XfX7glwYSARo6XPW0MToMYo6HwH+o/uQyZREBR4PQgqjZXr7fIAkJjhPEp43/90AYimO
+ CrYQ==
+X-Gm-Message-State: AOJu0Yyohgl7e8dCcVfM4l5XCcgZw6oNTHe1OSO383m0YiV+NbAd/xTq
+ FxwUSLpr6s35Y3GHEF2lC3KMyYattfwmo5IgDT4=
+X-Google-Smtp-Source: AGHT+IF23QGEMZxwy+rG1Rfs0Rs35M9g6hSBoRtoa8UQ0ScxO2YUWddpZzY1AvIou+m1RvngvXl7EA==
+X-Received: by 2002:a17:90b:1117:b0:268:ee6:6bdf with SMTP id
+ gi23-20020a17090b111700b002680ee66bdfmr10333801pjb.47.1692129871930; 
+ Tue, 15 Aug 2023 13:04:31 -0700 (PDT)
 Received: from ?IPV6:2401:4900:1f3b:3924:6581:8508:2ecb:b5dd?
  ([2401:4900:1f3b:3924:6581:8508:2ecb:b5dd])
  by smtp.gmail.com with ESMTPSA id
- x42-20020a056a000bea00b00684b64da08bsm9716017pfu.132.2023.08.15.12.57.54
+ t14-20020a17090a950e00b0026b4d215627sm4643424pjo.21.2023.08.15.13.04.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Aug 2023 12:57:56 -0700 (PDT)
-Message-ID: <d2e3f423-0110-6980-baa9-d3a4ea1391af@linaro.org>
-Date: Wed, 16 Aug 2023 01:27:52 +0530
+ Tue, 15 Aug 2023 13:04:31 -0700 (PDT)
+Message-ID: <0dc7875e-ecdb-27e3-4234-1e09a9e27a20@linaro.org>
+Date: Wed, 16 Aug 2023 01:34:28 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
-Subject: Re: [PATCH 4/6] ufs: Pass hba pointer to ufshcd_prepare_req_desc_hdr()
+Subject: Re: [PATCH 1/6] ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
 Content-Language: en-US
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 References: <20230813235231.591454-1-marek.vasut+renesas@mailbox.org>
- <20230813235231.591454-4-marek.vasut+renesas@mailbox.org>
 From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-In-Reply-To: <20230813235231.591454-4-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230813235231.591454-1-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,63 +94,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
+
 On 8/14/23 5:22 AM, Marek Vasut wrote:
-> Pass the hba pointer itself to ufshcd_prepare_req_desc_hdr()
-> instead of duplicating utp_transfer_req_desc access at each
-> call site. No functional change.
+> Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS for host controllers which do not
+> support 64-bit addressing.
+> 
+> Ported from Linux kernel commit
+> 6554400d6f66 ("scsi: ufs: core: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS")
+> with ufs_scsi_buffer_aligned() based on U-Boot generic bounce buffer.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
 > Cc: Faiz Abbas <faiz_abbas@ti.com>
 > ---
->   drivers/ufs/ufs.c | 9 ++++-----
->   1 file changed, 4 insertions(+), 5 deletions(-)
+>   drivers/ufs/ufs.c | 26 ++++++++++++++++++++++++++
+>   drivers/ufs/ufs.h |  6 ++++++
+>   2 files changed, 32 insertions(+)
 > 
 > diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-> index 58830c8ddca..da1009e2c14 100644
+> index 3bf1a95e7f2..da0550d98c6 100644
 > --- a/drivers/ufs/ufs.c
 > +++ b/drivers/ufs/ufs.c
-> @@ -696,10 +696,11 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
->    * ufshcd_prepare_req_desc_hdr() - Fills the requests header
->    * descriptor according to request
+> @@ -8,6 +8,7 @@
+>    * Copyright (C) 2019 Texas Instruments Incorporated - http://www.ti.com
 >    */
-> -static void ufshcd_prepare_req_desc_hdr(struct utp_transfer_req_desc *req_desc,
-> +static void ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba,
->   					u32 *upiu_flags,
->   					enum dma_data_direction cmd_dir)
->   {
-> +	struct utp_transfer_req_desc *req_desc = hba->utrdl;
->   	u32 data_direction;
->   	u32 dword_0;
 >   
-> @@ -793,11 +794,10 @@ static int ufshcd_comp_devman_upiu(struct ufs_hba *hba,
->   {
->   	u32 upiu_flags;
->   	int ret = 0;
-> -	struct utp_transfer_req_desc *req_desc = hba->utrdl;
+> +#include <bouncebuf.h>
+>   #include <charset.h>
+>   #include <common.h>
+>   #include <dm.h>
+> @@ -1889,6 +1890,8 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
 >   
->   	hba->dev_cmd.type = cmd_type;
+>   	/* Read capabilties registers */
+>   	hba->capabilities = ufshcd_readl(hba, REG_CONTROLLER_CAPABILITIES);
+> +	if (hba->quirks & UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS)
+> +		hba->capabilities &= ~MASK_64_ADDRESSING_SUPPORT;
 >   
-> -	ufshcd_prepare_req_desc_hdr(req_desc, &upiu_flags, DMA_NONE);
-> +	ufshcd_prepare_req_desc_hdr(hba, &upiu_flags, DMA_NONE);
->   	switch (cmd_type) {
->   	case DEV_CMD_TYPE_QUERY:
->   		ufshcd_prepare_utp_query_req_upiu(hba, upiu_flags);
-> @@ -1449,12 +1449,11 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
->   static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
->   {
->   	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
-> -	struct utp_transfer_req_desc *req_desc = hba->utrdl;
->   	u32 upiu_flags;
->   	int ocs, result = 0;
->   	u8 scsi_status;
+>   	/* Get UFS version supported by the controller */
+>   	hba->version = ufshcd_get_ufs_version(hba);
+> @@ -1942,8 +1945,31 @@ int ufs_scsi_bind(struct udevice *ufs_dev, struct udevice **scsi_devp)
+>   	return ret;
+>   }
 >   
-> -	ufshcd_prepare_req_desc_hdr(req_desc, &upiu_flags, pccb->dma_dir);
-> +	ufshcd_prepare_req_desc_hdr(hba, &upiu_flags, pccb->dma_dir);
->   	ufshcd_prepare_utp_scsi_cmd_upiu(hba, pccb, upiu_flags);
->   	prepare_prdt_table(hba, pccb);
+> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
+> +static int ufs_scsi_buffer_aligned(struct udevice *scsi_dev, struct bounce_buffer *state)
+> +{
+> +#ifdef CONFIG_PHYS_64BIT
+> +	struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
+> +	uintptr_t ubuf = (uintptr_t)state->user_buffer;
+> +	size_t len = state->len_aligned;
+> +
+> +	/* Check if below 32bit boundary */
+> +	if ((hba->quirks & UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS) &&
+> +	    ((ubuf >> 32) || (ubuf + len) >> 32)) {
+> +		dev_dbg(scsi_dev, "Buffer above 32bit boundary %lx-%lx\n",
+> +			ubuf, ubuf + len);
+> +		return 0;
+> +	}
+> +#endif
+> +	return 1;
+> +}
+> +#endif	/* CONFIG_BOUNCE_BUFFER */
+> +
+>   static struct scsi_ops ufs_ops = {
+>   	.exec		= ufs_scsi_exec,
+> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
+> +	.buffer_aligned	= ufs_scsi_buffer_aligned,
+> +#endif	/* CONFIG_BOUNCE_BUFFER */
+>   };
 >   
+>   int ufs_probe_dev(int index)
+> diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+> index 8a38832b05f..070db0dce68 100644
+> --- a/drivers/ufs/ufs.h
+> +++ b/drivers/ufs/ufs.h
+> @@ -719,6 +719,12 @@ struct ufs_hba {
+>    */
+>   #define UFSHCD_QUIRK_BROKEN_LCC				0x1
+>   
+> +/*
+> + * This quirk needs to be enabled if the host controller has
+> + * 64-bit addressing supported capability but it doesn't work.
+> + */
+> +#define UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS		0x2
+> +
+>   	/* Virtual memory reference */
+>   	struct utp_transfer_cmd_desc *ucdl;
+>   	struct utp_transfer_req_desc *utrdl;
 
-Reviewed-and-Tested-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+For this and the follow-up patch, I think implementing or at least 
+supporting all the quirks currently supported by the Linux UFS driver 
+makes sense as newer controllers do support these quirks.
 
-Thanks.
+Accordingly I had sent: 
+https://lists.denx.de/pipermail/u-boot/2023-August/527217.html
+
+So, I would suggest that we pick these two patches and then I can send 
+my patches rebased on the same, but change the .h to support all the
+possible UFS quirks currently supported in Linux so that subsequent 
+patches can utilize them in u-boot - which I plan to post next.
+
+Thanks,
+Bhupesh
