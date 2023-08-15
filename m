@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3643C001DE
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5765C001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AE87869F0;
-	Tue, 15 Aug 2023 18:28:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D23CC869AD;
+	Tue, 15 Aug 2023 18:28:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XCPAByLQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YXv8BA8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D490869D6; Tue, 15 Aug 2023 18:28:02 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id E40D5869F4; Tue, 15 Aug 2023 18:28:03 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42C348671F
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:28:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2B98869AB
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jpewhacker@gmail.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-56c96982829so4207229eaf.0
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 09:28:00 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-1c4af84667bso2826059fac.1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 09:28:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692116878; x=1692721678;
+ d=gmail.com; s=20221208; t=1692116875; x=1692721675;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aZZk4XUIpHgcE/+sd2ZqBwmQcYIJHk3Aqz2T3RYr6AQ=;
- b=XCPAByLQU9CbhGElBJD7XzMAkCuT3NxTOuiQu4///FjbiIYf8ZdRFb25HEhcoHsp+c
- UUW5oRNKWHKj8cJ9EFVq4EARh19B1glSZ5uvFGIcGFAEvHhVIVMM9a/CVrrsuCvIb3hE
- CXouPZCrvYS3kP06BBOKfYEvZ+LMxHLetNJrPpxIutP4rsOA/UaxWurfnxw7XvsCL0kY
- 9u26ryXBhyhr1SovGEiB2UeQv1j5W8u4HBaP8WWeByYLmmKFigRhAWhaQuPRGqL1auM5
- q+EfMfP4t+T9dnJTlxX5ts7fQW/gsHZ+nqxgD+qo5kxm1j74WePT56w5he/6jriEP4KF
- lHuQ==
+ bh=N3x87ISuThCwxAXeGOpgTSzjHcDwylELLiW5fTw25xE=;
+ b=YXv8BA8z6DzT0Yx0vlqJ9GB6oK9/qRMpYDZD9FZ699VHuLDE6TJSEXja8DBVTL/0vK
+ Q1m4UWeAgtM/un59OjJhnxP+7gF1bwIqt2OTbJh03evA7C/6bdCO1tCtqIzNEPDgI2FE
+ UDOjwQAM4XtHvY11+04MpWxzYwv9/ICJhBA6cEkGQ7rulj1BabNI9GwBuCqbHmVffiN5
+ m4l4oUK7j7t15dwZ3RDxQVAXzixm1DP+ztmgepcloeEnmNrurwF8cpKsEQ3TmGYhTvlT
+ U7vmShkKzM4QWsBROnt9fV4XXLNAGzIkrgr7GXp6uCGhNgBz4QYf6PRyL8ig9jlWE9+M
+ g+tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692116878; x=1692721678;
+ d=1e100.net; s=20221208; t=1692116875; x=1692721675;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aZZk4XUIpHgcE/+sd2ZqBwmQcYIJHk3Aqz2T3RYr6AQ=;
- b=RcZdlQkIQ2pAU1/ukDZNAqA8IO9H6TMhxIT9LaC5HJL1M+GhLkdldGVFmQo9j4kHXS
- IWBE+M+9/+QcdYS89uctWPv+3Cn0lG9V4z6KB2ulDpXu6jPVrOZkdsGw4CxhfQ4pp5OW
- cBByLE3EleJji7cOzBu36bPK6CpDoBhcoqJyvpl3KTmpcUCV5AB7FI7Om0JuEMS83tBy
- kP/JcQlCnwHvn91te02NcqqCQikIUCtfN2uJ5Hh3Tyhr5UZMUpqUG+ZKZpzftHTE41Bd
- b5wl3yxUbuQVsUeW0vAdoGqRz363teKtHMKQNSlRurOOYhbIF77k2WMCIA5RQv1oVvnG
- 4vdg==
-X-Gm-Message-State: AOJu0YyTunD0BEpUyeycAWahNdwE5DMg/tcVpYtCq3TW1i92kxsUdxMM
- 7d/9fAavfgzfVSbj6U65+835IX7tCtQ=
-X-Google-Smtp-Source: AGHT+IHl3VKWmvBDI36uBKIQfSBvMy3feZSP/alUupzPSnZgTlQjk0nFFb9OplY9KBwl5UVxlitwpQ==
-X-Received: by 2002:a05:6870:179f:b0:1b0:5141:4c6e with SMTP id
- r31-20020a056870179f00b001b051414c6emr13062622oae.26.1692116878239; 
- Tue, 15 Aug 2023 09:27:58 -0700 (PDT)
+ bh=N3x87ISuThCwxAXeGOpgTSzjHcDwylELLiW5fTw25xE=;
+ b=O+Z+mzWzEArPM7Sjh+P7qjJM5Oc8SDyeqdDT0KgVihEdhf+N7Di1jVynaKpwWqOzka
+ 0z2QZ3tioUjTpSYCmz4Cqu3rxP24w4c9lAJ6F9HiwxBTTAKmJLeNqNg+mTChkvvqgkHE
+ UFNMKIkIn3+s8DS/aIKxxkAZQPK+VKORul0O5U5EnN0o80J56U43nsN/KWLuq5Y4FBdc
+ E+6Zsx/N9Z47Zm2KQ1qMnFpxEqZHVqbSleCje3h0R+FT/wfE4my5uk+GKqJGEOJMDj44
+ YjOO3Ik5lChmnUgjVjmT9PlR1a1gNJQrUKmVnANTTGCqeu9sXWNpiHOpeEJswQZ2q0I0
+ ipUw==
+X-Gm-Message-State: AOJu0Yw8KZckD2nBJFlE9PrvE6zyI1wfL4/j+pkyKL7t45IRRledcXlg
+ Am5GvNYF3Jrfn/W8At/tYRPEET8sPcs=
+X-Google-Smtp-Source: AGHT+IGwzEwZ322CVMp85b6daDSOISQPH36poOogmacg75RnuMCPzjb7EIp7jYvIiuRPEsLVJvZBtg==
+X-Received: by 2002:a05:6871:554:b0:1be:c87d:c670 with SMTP id
+ t20-20020a056871055400b001bec87dc670mr13317156oal.47.1692116874933; 
+ Tue, 15 Aug 2023 09:27:54 -0700 (PDT)
 Received: from localhost.localdomain ([2601:282:4300:19e0::6897])
  by smtp.gmail.com with ESMTPSA id
- zf26-20020a0568716a9a00b001c4f840e7bbsm2474441oab.47.2023.08.15.09.27.57
+ zf26-20020a0568716a9a00b001c4f840e7bbsm2474441oab.47.2023.08.15.09.27.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 09:27:57 -0700 (PDT)
+ Tue, 15 Aug 2023 09:27:54 -0700 (PDT)
 From: Joshua Watt <jpewhacker@gmail.com>
 X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Joshua Watt <JPEWhacker@gmail.com>
-Subject: [PATCH 6/6] cmd: gpt: Add command to swap partition order
-Date: Tue, 15 Aug 2023 10:27:00 -0600
-Message-Id: <20230815162726.1524958-7-JPEWhacker@gmail.com>
+Subject: [PATCH 5/6] cmd: gpt: Preserve bootable flag
+Date: Tue, 15 Aug 2023 10:26:59 -0600
+Message-Id: <20230815162726.1524958-6-JPEWhacker@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20230815162726.1524958-1-JPEWhacker@gmail.com>
 References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
@@ -92,102 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds a command called "gpt swap-postition" which will swap the order two
-partitions are listed in the GPT partition table (but leaves them
-pointing to the same locations on disk).
+Sets the bootable flag when constructing the partition string from the
+current partition configuration. This ensures that when the partitions
+are written back (for example, when renaming a partition), the flag is
+preserved.
 
 Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- cmd/gpt.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 48 insertions(+), 2 deletions(-)
+ cmd/gpt.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/cmd/gpt.c b/cmd/gpt.c
-index 58564436d3..c8a2b5ae7b 100644
+index c6fbd94ba2..58564436d3 100644
 --- a/cmd/gpt.c
 +++ b/cmd/gpt.c
-@@ -859,7 +859,7 @@ static int do_rename_gpt_parts(struct blk_desc *dev_desc, char *subcomm,
- 	int partlistlen, ret, numparts = 0, partnum, i = 1, ctr1 = 0, ctr2 = 0;
- 
- 	if ((subcomm == NULL) || (name1 == NULL) || (name2 == NULL) ||
--	    (strcmp(subcomm, "swap") && (strcmp(subcomm, "rename"))))
-+	    (strcmp(subcomm, "swap") && strcmp(subcomm, "rename") && strcmp(subcomm, "swap-position")))
- 		return -EINVAL;
- 
- 	ret = get_disk_guid(dev_desc, disk_guid);
-@@ -920,6 +920,48 @@ static int do_rename_gpt_parts(struct blk_desc *dev_desc, char *subcomm,
- 			ret = -EINVAL;
- 			goto out;
- 		}
-+	} else if(!strcmp(subcomm, "swap-position")) {
-+		int idx1, idx2;
-+		struct disk_partition first, second;
-+		idx1 = simple_strtoul(name1, NULL, 10);
-+		if (idx1 <= 0 || idx1 > numparts) {
-+			printf("Illegal partition number %s\n", name1);
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+		idx2 = simple_strtoul(name2, NULL, 10);
-+		if (idx2 <= 0 || idx2 > numparts) {
-+			printf("Illegal partition number %s\n", name2);
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+		if (idx1 == idx2) {
-+			printf("Cannot swap partition with itself\n");
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+
-+		i = 1;
-+		list_for_each(pos, &disk_partitions) {
-+			curr = list_entry(pos, struct disk_part, list);
-+			if (i == idx1) {
-+				first = curr->gpt_part_info;
-+			} else if (i == idx2) {
-+				second = curr->gpt_part_info;
-+			}
-+			i++;
-+		}
-+
-+		i = 1;
-+		list_for_each(pos, &disk_partitions) {
-+			curr = list_entry(pos, struct disk_part, list);
-+			if (i == idx1) {
-+				curr->gpt_part_info = second;
-+			} else if (i == idx2) {
-+				curr->gpt_part_info = first;
-+			}
-+			i++;
-+		}
- 	} else { /* rename */
- 		if (strlen(name2) > PART_NAME_LEN) {
- 			printf("Names longer than %d characters are truncated.\n", PART_NAME_LEN);
-@@ -1122,7 +1164,8 @@ static int do_gpt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	} else if (strcmp(argv[1], "read") == 0) {
- 		ret = do_get_gpt_info(blk_dev_desc, (argc == 5) ? argv[4] : NULL);
- 	} else if ((strcmp(argv[1], "swap") == 0) ||
--		   (strcmp(argv[1], "rename") == 0)) {
-+		   (strcmp(argv[1], "rename") == 0) ||
-+		   (strcmp(argv[1], "swap-position") == 0)) {
- 		ret = do_rename_gpt_parts(blk_dev_desc, argv[1], argv[4], argv[5]);
+@@ -176,6 +176,7 @@ static int calc_parts_list_len(int numparts)
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 	partlistlen += numparts * (strlen("type=,") + UUID_STR_LEN + 1);
  #endif
- 	} else if ((strcmp(argv[1], "set-bootable") == 0)) {
-@@ -1175,11 +1218,14 @@ U_BOOT_CMD(gpt, CONFIG_SYS_MAXARGS, 1, do_gpt,
- 	" gpt swap <interface> <dev> <name1> <name2>\n"
- 	"    - change all partitions named name1 to name2\n"
- 	"      and vice-versa\n"
-+	" gpt swap-position <interface> <dev> <part1> <part2>\n"
-+	"    - Swap the order of name1 with name2 in the partition table\n"
- 	" gpt rename <interface> <dev> <part> <name>\n"
- 	"    - rename the specified partition\n"
- 	" Example usage:\n"
- 	" gpt swap mmc 0 foo bar\n"
- 	" gpt rename mmc 0 3 foo\n"
-+	" gpt swap-partitions mmc 0 1 2\n"
- #endif
- 	" gpt set-bootable <interface> <dev> <list>\n"
- 	"    - make partition names in list bootable\n"
++	partlistlen += numparts * strlen("bootable,");
+ 	partlistlen += numparts * (strlen("uuid=;") + UUID_STR_LEN + 1);
+ 	/* for the terminating null */
+ 	partlistlen++;
+@@ -318,6 +319,8 @@ static int create_gpt_partitions_list(int numparts, const char *guid,
+ 		strcat(partitions_list, ",uuid=");
+ 		strncat(partitions_list, curr->gpt_part_info.uuid,
+ 			UUID_STR_LEN + 1);
++		if (curr->gpt_part_info.bootable & PART_BOOTABLE)
++			strcat(partitions_list, ",bootable");
+ 		strcat(partitions_list, ";");
+ 	}
+ 	return 0;
 -- 
 2.33.0
 
