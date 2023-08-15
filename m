@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88B71C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B430C001DB
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 14:43:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FB4B86977;
-	Tue, 15 Aug 2023 16:42:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A63F68699C;
+	Tue, 15 Aug 2023 16:42:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fl9knR5H";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TFY+HYuI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF59286863; Tue, 15 Aug 2023 16:42:42 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id C059E86986; Tue, 15 Aug 2023 16:42:47 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1946B8685D
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:42:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1462186993
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 16:42:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-589f2fb1a88so23669297b3.2
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:42:40 -0700 (PDT)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-579de633419so51092327b3.3
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 07:42:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692110559; x=1692715359;
+ d=konsulko.com; s=google; t=1692110564; x=1692715364;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ObVXj+pTb56rqmVBkHWoOnn1o/Y8waCKscImOJ7BP/8=;
- b=fl9knR5HU0gYfY2abeEb7K26E9LWvszj75FeYs+9k7dq7P5dm5G57zdKOxke3Fq+oE
- PTRMiFeeplYYNKJ0a/Yyy4nlNLiQ8MtgY2RwuWYoz5fluPVjWZ+U7qrbRUNCVJXQ4lxv
- /mnbEAn5vyLgg3E9yjY3Y5nrMSdpf+3rVk7cY=
+ bh=RQVk2TImKDbzQquvjWlxvQRbImbasZq6thn2fbpnQnc=;
+ b=TFY+HYuIU6ibvEBWKefgRIjxciX7ZnAXaOKGSujmNQJQ2djsOPouRTyYZ22R7hFTzP
+ 4gYIpiYSmOpKDRrWBW3SOl7OgA3k+DxyqF0QCtmKYrCrFDTwp+isHGHvCiHck/XMjZAS
+ P4lxItHmBmOIsGfn0OmjvS+BpSYUB1mIJPulc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692110559; x=1692715359;
+ d=1e100.net; s=20221208; t=1692110564; x=1692715364;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ObVXj+pTb56rqmVBkHWoOnn1o/Y8waCKscImOJ7BP/8=;
- b=lygYu7VNkdAssOBB1i00thBfvoyaF2aHQaZgF5Bl9wjTZTsVMaYBveRBPJ2G0Qi56w
- +MCrgzcglpfc/P+RHDTwFsesqVKK0jwI6JX5tW7CqqUPWcFA56PPPYdEkjzau25w9VnB
- hCd9yOxor9R7gNk2sebF0Yrp0f8wJcq7cSq3B14L9sn6B7BzayPNjZ86NKIDjr+p5FO7
- 9guvAed8/k2fFB3CZyg6KqkKef+2wlxb0mDPO5NGphHNCFR/PNKa3F+H6DoXuZGDBDzo
- MPf7pBFGyq3BNEHQ+4azB1a53No4MaRUSsWfxMUqx0fQI19WLU899jUSThcUXe0UEh47
- obAQ==
-X-Gm-Message-State: AOJu0YwrTlTP6YYc1OSVjqUAfoS+HzFMbpGz+canXNoP1onm/gMI6ds+
- e63ucImZPwlhFtuk31X7cs05cG9sPGYk13Z0i+8PXw==
-X-Google-Smtp-Source: AGHT+IGTzlsxHT/QQ4H6TsmMxRwaF+BCoZnUU9oAGz7ADT+wNJzq43CUU1FE5ari130aeuoK+k2sNw==
-X-Received: by 2002:a0d:ca4d:0:b0:589:f8c7:244 with SMTP id
- m74-20020a0dca4d000000b00589f8c70244mr5997959ywd.33.1692110558856; 
- Tue, 15 Aug 2023 07:42:38 -0700 (PDT)
+ bh=RQVk2TImKDbzQquvjWlxvQRbImbasZq6thn2fbpnQnc=;
+ b=ApZWsbYuWRtBKwxIwp76r8Pbn/3QdyM5ASoCS3fTsfC/yhTIae1ys8Tevw1dkFClhn
+ 9P7MqeHxjInqxXDmcmSan6u8gQ3Q23m75v96skig0NyeWWdKe+kvYRG+e411R+u5e+rA
+ Mt1OufevAMwNP5W4lXsPahWt9WH2oG8eHD2omybhY+oAlMDd1jYNm6SHkA6Vy88Y8cbC
+ JG/4ogGzPFqWkwAaC/aDqGU8HXmU8VAlSDSwYLGo3emHIAFWIbCPHTN+Yo8HYi5LiKR8
+ CCP0ro9umI1GyN13YFMtKGgH5UZKS4sQy2gWZGMKahONJeum89tiMw06LE1/isWJ8/P2
+ YRbQ==
+X-Gm-Message-State: AOJu0Yx1JchQav7jJL3phzMv895ywPl4Bf3YXoxxW+twAgMRkiMgywae
+ IEoThseWPXmM4oDqicokUCIjQw==
+X-Google-Smtp-Source: AGHT+IH0USywztXB1qvJ9o5OYC1t6VwWGtdg7uaaYP1xQsGx4giEkdnFWyAWSyCF3Qv3OwEeYYtZow==
+X-Received: by 2002:a81:d54d:0:b0:576:ffe3:b95 with SMTP id
+ l13-20020a81d54d000000b00576ffe30b95mr10782918ywj.40.1692110563736; 
+ Tue, 15 Aug 2023 07:42:43 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-14d5-2a24-c47a-465f.res6.spectrum.com.
  [2603:6081:7b00:6400:14d5:2a24:c47a:465f])
  by smtp.gmail.com with ESMTPSA id
- k6-20020a0dfa06000000b005731dbd4928sm3398902ywf.69.2023.08.15.07.42.36
+ h201-20020a816cd2000000b005707f542f62sm3418709ywc.25.2023.08.15.07.42.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Aug 2023 07:42:36 -0700 (PDT)
-Date: Tue, 15 Aug 2023 10:42:34 -0400
+ Tue, 15 Aug 2023 07:42:43 -0700 (PDT)
+Date: Tue, 15 Aug 2023 10:42:41 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH] buildman: Allow more results while building
-Message-ID: <20230815144234.GJ3630934@bill-the-cat>
-References: <20230803185957.1769543-1-sjg@chromium.org>
+Subject: Re: Please pull u-boot-dm/next
+Message-ID: <20230815144241.GK3630934@bill-the-cat>
+References: <CAPnjgZ0F3-9T5pTjSakw26XXeaquhBkZRqeSifjFfcsM51HVUA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Kf5OWecCEnlZINXK"
+ protocol="application/pgp-signature"; boundary="ILerFYQU8cBgKpYp"
 Content-Disposition: inline
-In-Reply-To: <20230803185957.1769543-1-sjg@chromium.org>
+In-Reply-To: <CAPnjgZ0F3-9T5pTjSakw26XXeaquhBkZRqeSifjFfcsM51HVUA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,63 +92,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Kf5OWecCEnlZINXK
+--ILerFYQU8cBgKpYp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 03, 2023 at 12:59:55PM -0600, Simon Glass wrote:
+On Mon, Aug 14, 2023 at 04:48:28PM -0600, Simon Glass wrote:
 
-> The -v option enables display of build results while building, instead of
-> needing to do a separate summary step later (or in another terminal). But
-> this resets the build results after each commit, so that all errors are
-> reported fresh, without trying to diff them against previous errors
-> already shown.
+> Hi Tom,
 >=20
-> Drop this reset, as an experiment, so see if this is useful.
+> This is for the -next branch
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
 >=20
->  tools/buildman/builder.py | 1 -
->  1 file changed, 1 deletion(-)
+> The following changes since commit 321d7b4d875a77552a969dd6ea5bbed2644fcb=
+0c:
 >=20
-> diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
-> index ecbd368c47a..5ee2b5959b2 100644
-> --- a/tools/buildman/builder.py
-> +++ b/tools/buildman/builder.py
-> @@ -536,7 +536,6 @@ class Builder:
->              if self._verbose:
->                  terminal.print_clear()
->                  boards_selected =3D {target : result.brd}
-> -                self.reset_result_summary(boards_selected)
->                  self.produce_result_summary(result.commit_upto, self.com=
-mits,
->                                            boards_selected)
->          else:
+>   Merge branch '2023-08-09-misc-cleanups' into next (2023-08-09 13:15:51 =
+-0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-next-14aug23
+>=20
+> for you to fetch changes up to daffb0be2c839f3abe431cd68c772fae0e7e49ca:
+>=20
+>   bootstd: cros: Add ARM support (2023-08-11 07:33:40 -0600)
+>=20
 
-Nope, this doesn't change any of the output I see in how I usually do my
-world builds.
+Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---Kf5OWecCEnlZINXK
+--ILerFYQU8cBgKpYp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTbjtoACgkQFHw5/5Y0
-tywcyAv+MwQn3WHK3oXjGqUuIhhbgLwUJTWVM0iqNRGj49dr/6QXzCccabvUSWJT
-luODXlgzTvSFycqV9OnTsLfqX2Mnmxmuz+t9FfxevW6xX68aeqksgzDfQj79Nmsc
-k8xrsHwMv8yY0WcpG81mc96K8ZGoFSYhvSg55ra7A71EmchhIL8BgwvA16MfZmQO
-HF/M8p8hp23OdiCo408isLmrMd1bZ5HLcRrcag9N9k0y3BbjddeogkLvS7QGoS7v
-VrUPxReBD0ozY0c2lpa6HJ9RB//48CFoE4IM+lncu3hBe+hjIcDnZzOiVnl9nFBi
-f+cDDkmmlYeYZDMNXwRNWIilSumur/jC/D+nghEvPSZW7fxzDib4GuvkdHFAUemn
-bsSSZUtgZQ6iBx558vUhEVxyRv69cCi7Hhm/G4lfvJGB+1ZxQGD+Ox8Ol7M7qsuo
-+tzY9O/CJX8Vt6DppA5UY6JlVGnAqtfZLOCQYFeqPU4YnRBRbYochECHi/PAF7xS
-LxBbQtMu
-=d5iP
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTbjuEACgkQFHw5/5Y0
+tyxEXQwAn2vcR+IguA0jdQoavk7MMKiTTZEf+UQkpLLO+/xXPIy1/lN/HVy3Va9t
+rz95q/tN7AlR19UeRkui5VhGTjGqSiMxnAnxyYAnmCG29FUtZ+UVrnxDt9K9j9sj
+TFO79mebsjIf58eHJfMkmAbHo42tPJ9EDJTRINfe6upd8CeFxVJLr+UJqwa8UQdq
+IFT6SPtW8gkR+XbxSZ6z/g0CQNyABubkw2yWwMvWmRAG3LSfOz4SUJuKUbo21fSQ
+/QKhvTo+6RmMVtuAMi4XtKrpX0ibXV9Pl8ZImnZOCq2Opd+W9J+yrm8ZmHTUdTdS
+S1Gl5OFrm9M6/pf8JV2nS9jeOKVq/XSPCYpzM4k7/eMYlO5wSDI6fW1pkujWYksP
+YlLU/fWofcMhT17k+2WORs99p+n75JoABPbtB+0VsxOtZ0h7aZxjd8tiTHs+iYZn
+wgL/wPqTdQZD4bVOZe2KrIMjSqitwIetLbtmlT6ECUIn6VwZAWGZ06qHw1oBVvjH
+VSAwk+Ok
+=VXl/
 -----END PGP SIGNATURE-----
 
---Kf5OWecCEnlZINXK--
+--ILerFYQU8cBgKpYp--
