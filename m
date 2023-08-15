@@ -4,55 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC6DC0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE78C001DE
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 16:26:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C61A38699A;
-	Tue, 15 Aug 2023 18:07:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D32786995;
+	Tue, 15 Aug 2023 18:26:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="En1ua11K";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5249D867CF; Tue, 15 Aug 2023 18:07:02 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56736867CF
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:07:00 +0200 (CEST)
+ id 9FC768698D; Tue, 15 Aug 2023 18:26:49 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 63EDF8671F
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:26:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
- [62.143.244.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9B5283FE9E; 
- Tue, 15 Aug 2023 16:06:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1692115619;
- bh=qJF8ok9FGojqIEMHruvsmOJ24kVzsdVXrB6RpptPfSY=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=En1ua11KfiBojJ6trXLKz2adVhxLtGsU5MIvWGIC07QqwBQPlV2tw1LH8+2pHhTGq
- qU49owAXlFtmNHp2y5LU61bmqG7JkMSioyJxBQ5H0/kI09bam6fYXxV+jEt7hIsb2W
- 9k9w/+A3ekzvUaADoseYopJgjLplE5XLMaaj1Mf0nE2d1TIyxkDPcx87t/GVcyw/Cz
- HAAj7VGWkaDHbTN9xMSSZuz0aPFY4dwNKzhfuu4BVlJvKKZJ+9seqHsqIeIqbtGqWD
- ztTd9p18dgkl14wXKoiDxf+mh7JU5/FA4KByZw92cUFsIfz1+gZ8Bmlmz4/JcvEL89
- nSKj4+H188H/A==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <sean.anderson@seco.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] spl: don't assume NVMe partition 1 exists
-Date: Tue, 15 Aug 2023 18:07:36 +0200
-Message-Id: <20230815160736.39330-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B20F1063;
+ Tue, 15 Aug 2023 09:27:29 -0700 (PDT)
+Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B98CD3F6C4;
+ Tue, 15 Aug 2023 09:26:44 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/5] capsule: Embed the public key ESL as part of build
+Date: Tue, 15 Aug 2023 21:56:18 +0530
+Message-Id: <20230815162623.1824357-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,43 +54,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no requirement that a partition 1 exists in a partition table.
-We should not try to retrieve information about it.
 
-We should not even try reading with partition number
-CONFIG_SYS_NVME_BOOT_PARTITION here as this is done in the fs_set_blk_dev()
-call anyway.
+This series takes a different approach to embedding the public key EFI
+Signature List(ESL) needed for capsule authentication into the
+platform's DTB.
 
-Fixes: 8ce6a2e17577 ("spl: blk: Support loading images from fs")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- common/spl/spl_blk_fs.c | 6 ------
- 1 file changed, 6 deletions(-)
+The earlier approach [1] was using a u-boot.dtsi file to embed the
+key. But this approach has a few issues. 1) The path of the incbin file
+is not relative to $(srctree), but relative to the directory of the
+dts file which is including the dtsi -- this causes problems when the
+dts file are located in different directories. 2) The u-boot.dtsi file
+only gets included in the DTB if there are no other *u-boot.dtsi files
+being included. 3) A separate u-boot.dtsi is needed per arch.
 
-diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
-index 16ecece702..eb6f526689 100644
---- a/common/spl/spl_blk_fs.c
-+++ b/common/spl/spl_blk_fs.c
-@@ -44,7 +44,6 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
- 		       enum uclass_id uclass_id, int devnum, int partnum)
- {
- 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
--	struct disk_partition part_info = {};
- 	struct legacy_img_hdr *header;
- 	struct blk_desc *blk_desc;
- 	loff_t actlen, filesize;
-@@ -59,11 +58,6 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
- 
- 	blk_show_device(uclass_id, devnum);
- 	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
--	ret = part_get_info(blk_desc, 1, &part_info);
--	if (ret) {
--		printf("spl: no partition table found. Err - %d\n", ret);
--		goto out;
--	}
- 
- 	dev.ifname = blk_get_uclass_name(uclass_id);
- 	snprintf(dev.dev_part_str, sizeof(dev.dev_part_str) - 1, "%x:%x",
+To get around these issues, this approach generates a dtsi
+file(.capsule_esl.dtsi) with the public key node during build. This
+generated dtsi file contains the resolved path to the ESL and is then
+included for the DTB generation.
+
+The first patch of the series also cleans up the logic to include the
+dtsi files, by collating all the dtsi files to be included into a
+single variable.
+
+These patches need to be applied on top of the series for generating
+the capsules as part of the build [2].
+
+[1] - https://lists.denx.de/pipermail/u-boot/2023-August/526323.html
+[2] - https://lore.kernel.org/u-boot/20230812153024.334563-1-sughosh.ganu@linaro.org/T/#m85a50079007acf8943cfe8efcc7d78d23a40db7c
+
+Changes since RFC series:
+
+* s/include_files/dtsi_include_list
+* Remove the default value of the config symbol.
+* s/include_files/dtsi_include_list
+* Add all the dtsi files being included as dependency for the dtb
+  target.
+* s/u-boot/U-Boot in the commit message.
+* New patch for removing superfluous logic from efi capsule update
+  test setup.
+
+Sughosh Ganu (5):
+  scripts/Makefile.lib: Collate all dtsi files for inclusion
+  scripts/Makefile.lib: Embed capsule public key in platform's dtb
+  sandbox: capsule: Add path to the public key ESL file
+  doc: capsule: Document the new mechanism to embed ESL file into dtb
+  test: capsule: Remove logic to add public key ESL
+
+ configs/sandbox_defconfig                    |  1 +
+ configs/sandbox_flattree_defconfig           |  1 +
+ doc/develop/uefi/uefi.rst                    | 19 ++++---------
+ lib/efi_loader/Kconfig                       |  8 ++++++
+ lib/efi_loader/capsule_esl.dtsi.in           | 11 ++++++++
+ scripts/Makefile.lib                         | 29 ++++++++++++++++----
+ test/py/tests/test_efi_capsule/conftest.py   | 28 +++++--------------
+ test/py/tests/test_efi_capsule/signature.dts | 10 -------
+ 8 files changed, 57 insertions(+), 50 deletions(-)
+ create mode 100644 lib/efi_loader/capsule_esl.dtsi.in
+ delete mode 100644 test/py/tests/test_efi_capsule/signature.dts
+
 -- 
-2.40.1
+2.34.1
+
 
