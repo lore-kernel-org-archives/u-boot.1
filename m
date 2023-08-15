@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04405C001E0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA0FC0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 19:03:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 400368671F;
-	Tue, 15 Aug 2023 21:01:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AD80A8671F;
+	Tue, 15 Aug 2023 21:03:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HmO4P0i3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YL2Ho28H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF80386940; Tue, 15 Aug 2023 21:01:04 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id DA91086384; Tue, 15 Aug 2023 21:03:44 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2751E86384
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:01:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFB9686994
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 21:03:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3a7d4030621so3013171b6e.3
- for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:01:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2b9d3dacb33so89517661fa.1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 12:03:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692126060; x=1692730860;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=3YYQyu3GSuQKyn7BugXEt03xmnN4HV8Is7xdhb6hBg8=;
- b=HmO4P0i3+1cDrvKMOE//SEND9bBAeTJBpH4hw5sN1B5ZPiHoi3KLAMquD6nM6e2vge
- hMb+F8/gCATOYyXM5J94t82+/QtU0/tY4QTlWm1FjlAE3mLTPS+bbyQrjZF+70zmDYj5
- N418v+7nNkkuiM+rlzUujtiJWBXFxwdbcs8MF0omwjYtOmnHJNcq1bitkKZe+YJplVYz
- suxgLYoxDdPlMiNjIm8i8e8+nUUUM4F7tlSg8DWaAasL2XovVYjtEVKn8qzqLz5B8s6P
- MDWDYaWttXJ9MRCKvYm5ncNqDwteA/Jk4ymI3Qrv+DMB3tTO6k21gA+nFkZlr3RNi6+n
- FzxA==
+ d=chromium.org; s=google; t=1692126221; x=1692731021;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xNf/vg0VHgK6MAJZ+4f3hn/wGev5cCXSUtoD0fHhHKg=;
+ b=YL2Ho28HTU0VMkKopaQe1YQVne2FuShMJ8d5drwy4TFR6mBfyzM4mYE75iyS9rxjv7
+ CNFEdvJgN4d+yvE81r8lclwQVlpdipcrNfqrsV/MXw8MukNknV1/yOtEyW3tyytkCoaf
+ 7/wBox5i/p2Y6EMm+YJfJUaiL2YnQsECfWRVc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692126060; x=1692730860;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3YYQyu3GSuQKyn7BugXEt03xmnN4HV8Is7xdhb6hBg8=;
- b=THytHhqcOxckYB0n6l5477RvBMFUryYebGQWFaq2ZR44x4qZhX7bg/3VBTzXkywG8M
- 3InxNQgD0WP7tS161t5NWL6rGHmXa3y474MuV7uIrrvCwASj6Gsy+vIknci7neLaHKHm
- CbTWhyne9Y8+4hAY/jVvGObQkXYRFci547PUUBo9uUjdGIWOWWDjdlX92CN7ZNXihXpc
- dHF/VK8L4CDImiUnHMHMZs+EM3l6wefynoE21Dih9HftQPcc+wANB1apQb6xW9MVJHf4
- oTZsrsZUpcpB33Px8qFVxaN9OHxhc0qTELJn4o1h1C2UNdaSXWEzfxAGW9Xte8oBMXBc
- xjTQ==
-X-Gm-Message-State: AOJu0Yz63H+P8fP/qmBxq5AdR0dlx8q0uDxUzhFbgBR7/81dYMc3JdEU
- P8Gfy3ink8RpM9LkALVlTnRGS6ofp62Pe+VvX6w=
-X-Google-Smtp-Source: AGHT+IEwKubEKBV4QgP10na4JQBvCv8ALdUQsP7UzvTgdS90U5wzRDQEVQ3XzpBCp6tOAfNnBgUapcvLLZQgLFXmv/Q=
-X-Received: by 2002:a05:6358:7253:b0:134:d030:e5da with SMTP id
- i19-20020a056358725300b00134d030e5damr4830852rwa.21.1692126060530; Tue, 15
- Aug 2023 12:01:00 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692126221; x=1692731021;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xNf/vg0VHgK6MAJZ+4f3hn/wGev5cCXSUtoD0fHhHKg=;
+ b=GwBfJ9XDxBotgHCAFH062uUIYqidJuvvf8JzYS/8ukT8RJOOsNF9HcATk/3/TrfvnX
+ GfuGGnVjjMnMHOykg6ugS/w9KjPp6zNv1nHvMiNomw5UhLj9wt5j9Aor4v5kIJn6Qqy1
+ 5zLN1pr8XXvae/z65r2zghuxh4yYcAiFDUmJHamgFAOn57CcPBGjoDFeZJ91xA141jNn
+ atP/hlBAkoa63yg0wEfqTg/wCA9MZVEsV4XQucB9JVg66ykcbXVDYSl+xHJuq/6KfbJF
+ fpCgnwK/GA7JRm0z7FEPsxurly+08xMci+dGsg1ZAaDI125szii7oqI/jI5edzyneP5M
+ 0cRA==
+X-Gm-Message-State: AOJu0Yxm/ZlcESfYgsaqBuD9jVEOxd2KE0gTaEGO8uRZUifgZMftrRKA
+ mTdbsvv5VyzL/d6W8ZClrD+t6dCh0og3PYSA3Hu9dg==
+X-Google-Smtp-Source: AGHT+IF+MSgmvtFzLKRmsmGwyzCr/GNhleam5Atw6PVSg5ipNeWXL2evwmeogJ/jFjhP/wgge5H4A/7rmcPuA0UVwDs=
+X-Received: by 2002:a2e:8950:0:b0:2bb:8d96:6041 with SMTP id
+ b16-20020a2e8950000000b002bb8d966041mr1825415ljk.45.1692126220858; Tue, 15
+ Aug 2023 12:03:40 -0700 (PDT)
 MIME-Version: 1.0
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Tue, 15 Aug 2023 21:00:49 +0200
-Message-ID: <CAC928HaEQhH2q57T36XtoetfLVSC84-DMBv2msu2PdbkazUBOQ@mail.gmail.com>
-Subject: U-Boot logging
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, u-boot@lists.denx.de
+References: <20230811215743.3111594-1-sjg@chromium.org>
+In-Reply-To: <20230811215743.3111594-1-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 15 Aug 2023 13:03:29 -0600
+Message-ID: <CAPnjgZ3O=iYnU1ghMNXxQOtnMR+DTs6jwaHN+KrYzjy_Z-mG0Q@mail.gmail.com>
+Subject: Re: [PATCH] schemas: Add a schema for memory map
+To: Devicetree Discuss <devicetree@vger.kernel.org>
+Cc: Rob Herring <robh@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Gua Guo <gua.guo@intel.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>, 
+ Chiu Chasel <chasel.chiu@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,38 +83,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
++linux-acpi@vger.kernel.org
++lk
 
-I had a trip into U-Boot logging and I am quite confused. I read the
-documentation at doc/develop/logging.rst and had a look at source code
-in log.h log.c printk.h Kconfig and other files, but the picture is
-still quite foggy and, let's say, 'complicated'.
+Since there was a related discussion here:
+https://patches.linaro.org/project/linux-acpi/patch/20230426034001.16-1-cuiyunhui@bytedance.com/
 
-The documentation does not mention at all CONFIG_LOGLEVEL, but pr_xxx
-macros rely on its value (and then on log_xxx macros). While log_xxx
-definitions, instead, depends on CONFIG_LOG and other CONFIG_LOG_XXX
-values.
-
-It is not clear when/if pr_xxx and/or log/log_xxx should be used. Is
-any preferred and why? Is there a specific reason to keep both?
-
-Neither the constrains and relations between Kconfig variables are
-clear. CONFIG_LOGLEVEL and CONFIG_LOG are in different section
-of menuconfig: Console and Logging. The semantic is also a little
-bit different: for LOGLEVEL, values smaller than the console loglevel
-will be compiled in; for LOG_MAX_LEVEL, instead, any value higher
-than this will be ignored.
-
-The doc states that 'If CONFIG_LOG is not set, then no logging will
-be available'. But a few lines below 'If logging is disabled, the
-default behaviour is to output any message at level LOGL_INFO and
-below'. This sounds inconsistent to me.
-
-I see a lot of To Do tasks listed in logging.rst, like converting
-some other logging statements like debug() and error(). I wonder if
-something can be improved, and in case how: I could commit some of
-my spare time.
-
-Thanks. Regards.
-
-Massimo
+On Fri, 11 Aug 2023 at 15:57, Simon Glass <sjg@chromium.org> wrote:
+>
+> The Devicespec specification skips over handling of a logical view of
+> the memory map, pointing users to the UEFI specification.
+>
+> It is common to split firmware into 'Platform Init', which does the
+> initial hardware setup and a "Payload" which selects the OS to be booted.
+> Thus an handover interface is required between these two pieces.
+>
+> Where UEFI boot-time services are not available, but UEFI firmware is
+> present on either side of this interface, information about memory usage
+> and attributes must be presented to the "Payload" in some form.
+>
+> This aims to provide an initial schema for this mapping.
+>
+> Note that this is separate from the existing /memory and /reserved-memory
+> nodes, since it is mostly concerned with what the memory is used for. It
+> may cover only a small fraction of available memory, although it could be
+> used to signal which area of memory has ECC.
+>
+> For now, no attempt is made to create an exhaustive binding, but this can
+> be completed once this has passed initial review.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  dtschema/schemas/memory-map.yaml | 51 ++++++++++++++++++++++++++++++++
+>  1 file changed, 51 insertions(+)
+>  create mode 100644 dtschema/schemas/memory-map.yaml
+>
+> diff --git a/dtschema/schemas/memory-map.yaml b/dtschema/schemas/memory-map.yaml
+> new file mode 100644
+> index 0000000..97e531e
+> --- /dev/null
+> +++ b/dtschema/schemas/memory-map.yaml
+> @@ -0,0 +1,51 @@
+> +# SPDX-License-Identifier: BSD-2-Clause
+> +# Copyright 2023 Google LLC
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/memory-map.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: /memory-map nodes
+> +description: |
+> +  Common properties always required in /memory-map nodes. These nodes are
+> +  intended to resolve the nonchalant clause 3.4.1 ("/memory node and UEFI")
+> +  in the Devicetree Specification.
+> +
+> +maintainers:
+> +  - Simon Glass <sjg@chromium.org>
+> +
+> +properties:
+> +  $nodename:
+> +    const: '/'
+> +  usage:
+> +    $ref: /schemas/types.yaml#/definitions/string
+> +    description: |
+> +      Describes the usage of the memory region, e.g.:
+> +
+> +        "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
+> +        "runtime-code", "runtime-data"
+> +  attr:
+> +    $ref: /schemas/types.yaml#/definitions/string-array
+> +    description: |
+> +      Attributes possessed by this memory region:
+> +
+> +        "single-bit-ecc" - supports single-bit ECC
+> +        "multi-bit-ecc" - supports multiple-bit ECC
+> +        "no-ecc" - non-ECC memory
+> +
+> +patternProperties:
+> +  "^([a-z][a-z0-9\\-]+@[0-9a-f]+)?$":
+> +    type: object
+> +    additionalProperties: false
+> +
+> +    properties:
+> +      reg:
+> +        minItems: 1
+> +        maxItems: 1024
+> +
+> +    required:
+> +      - reg
+> +
+> +additionalProperties: true
+> +
+> +...
+> --
+> 2.41.0.694.ge786442a9b-goog
+>
