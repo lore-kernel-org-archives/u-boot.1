@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E26C0015E
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 22:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C956C0015E
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 22:01:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FEF686940;
-	Wed, 16 Aug 2023 00:01:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6305F869A4;
+	Wed, 16 Aug 2023 00:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7758986940; Wed, 16 Aug 2023 00:01:25 +0200 (CEST)
+ id 583898697B; Wed, 16 Aug 2023 00:01:26 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C274869A1
+ by phobos.denx.de (Postfix) with ESMTPS id 2D30A8699C
  for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 00:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=gateworks.com
@@ -26,15 +26,15 @@ Received: from 068-189-091-139.biz.spectrum.com ([68.189.91.139]
  helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.93)
  (envelope-from <tharvey@gateworks.com>)
- id 1qW26I-0085bD-Hg; Tue, 15 Aug 2023 22:01:18 +0000
+ id 1qW26I-0085bD-1X; Tue, 15 Aug 2023 22:01:18 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
  Fabio Estevam <festevam@gmail.com>,
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 4/6] board: gateworks: venice: add imx8mp-gw73xx-2x support
-Date: Tue, 15 Aug 2023 15:01:13 -0700
-Message-Id: <20230815220115.2000851-4-tharvey@gateworks.com>
+Subject: [PATCH 3/6] board: gateworks: venice: add imx8mp-gw72xx-2x support
+Date: Tue, 15 Aug 2023 15:01:12 -0700
+Message-Id: <20230815220115.2000851-3-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230815220115.2000851-1-tharvey@gateworks.com>
 References: <20230815220115.2000851-1-tharvey@gateworks.com>
@@ -56,7 +56,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Gateworks imx8mp-venice-gw73xx-2x consists of a SOM + baseboard.
+The Gateworks imx8mp-venice-gw72xx-2x consists of a SOM + baseboard.
 
 The GW702x SOM contains the following:
  - i.MX8M Plus SoC
@@ -76,7 +76,7 @@ The GW702x SOM contains the following:
   - 1x SDIO (4-bit 3.3V/1.8V)
   - GPIO
 
-The GW73xx Baseboard contains the following:
+The GW72xx Baseboard contains the following:
  - 1x RJ45 GbE (eQoS from SOM)
  - 1x RJ45 GbE (PCI)
  - off-board I/O connector with MIPI-CSI (3-lane), MIPI-DSI (4-lane),
@@ -93,54 +93,47 @@ The GW73xx Baseboard contains the following:
  - re-chargeable battery (for RTC)
  - PCIe clock generator
  - PCIe switch
- - on-board 802.11abgnac 1x1 WiFi and Bluetooth 5.2
  - 1x USB Type-A host socket with USB 3.0 support
  - 1x USB OTG with USB 2.0 support
- - 2x MiniPCIe socket with PCI and USB 2.0
+ - 1x MiniPCIe socket with PCI and USB 2.0
  - 1x MiniPCIe socket with SIM, PCI/USB 3.0 (mux), and USB 2.0
  - Wide range DC input supply
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
  arch/arm/dts/Makefile                         |   1 +
- .../dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi   |  95 ++++
- arch/arm/dts/imx8mp-venice-gw73xx-2x.dts      |  19 +
- arch/arm/dts/imx8mp-venice-gw73xx.dtsi        | 414 ++++++++++++++++++
+ .../dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi   |  89 +++++
+ arch/arm/dts/imx8mp-venice-gw72xx-2x.dts      |  19 +
+ arch/arm/dts/imx8mp-venice-gw72xx.dtsi        | 371 ++++++++++++++++++
  configs/imx8mp_venice_defconfig               |   2 +-
- 5 files changed, 530 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx8mp-venice-gw73xx-2x.dts
- create mode 100644 arch/arm/dts/imx8mp-venice-gw73xx.dtsi
+ 5 files changed, 481 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-venice-gw72xx-2x.dts
+ create mode 100644 arch/arm/dts/imx8mp-venice-gw72xx.dtsi
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 6e8ed1255580..9b29c809dfd7 100644
+index 6a2ec7c88b88..6e8ed1255580 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -1037,6 +1037,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+@@ -1036,6 +1036,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	imx8mp-phyboard-pollux-rdk.dtb \
  	imx8mp-venice.dtb \
  	imx8mp-venice-gw71xx-2x.dtb \
- 	imx8mp-venice-gw72xx-2x.dtb \
-+	imx8mp-venice-gw73xx-2x.dtb \
++	imx8mp-venice-gw72xx-2x.dtb \
  	imx8mp-venice-gw74xx.dtb \
  	imx8mp-venice-gw7905-2x.dtb \
  	imx8mp-verdin-wifi-dev.dtb \
-diff --git a/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi
+diff --git a/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
 new file mode 100644
-index 000000000000..70433c073293
+index 000000000000..7f2609ab5469
 --- /dev/null
-+++ b/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi
-@@ -0,0 +1,95 @@
++++ b/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
+@@ -0,0 +1,89 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2023 Gateworks Corporation
 + */
 +#include "imx8mp-venice-gw702x-u-boot.dtsi"
-+
-+&ethphy0 {
-+	reset-gpios = <&gpio3 14 GPIO_ACTIVE_LOW>;
-+	reset-delay-us = <1000>;
-+	reset-post-delay-us = <300000>;
-+};
 +
 +&gpio4 {
 +	dio_1 {
@@ -225,11 +218,11 @@ index 000000000000..70433c073293
 +&usb_dwc3_0 {
 +	dr_mode = "host";
 +};
-diff --git a/arch/arm/dts/imx8mp-venice-gw73xx-2x.dts b/arch/arm/dts/imx8mp-venice-gw73xx-2x.dts
+diff --git a/arch/arm/dts/imx8mp-venice-gw72xx-2x.dts b/arch/arm/dts/imx8mp-venice-gw72xx-2x.dts
 new file mode 100644
-index 000000000000..000fd15e0c07
+index 000000000000..255e36f66b00
 --- /dev/null
-+++ b/arch/arm/dts/imx8mp-venice-gw73xx-2x.dts
++++ b/arch/arm/dts/imx8mp-venice-gw72xx-2x.dts
 @@ -0,0 +1,19 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
@@ -240,22 +233,22 @@ index 000000000000..000fd15e0c07
 +
 +#include "imx8mp.dtsi"
 +#include "imx8mp-venice-gw702x.dtsi"
-+#include "imx8mp-venice-gw73xx.dtsi"
++#include "imx8mp-venice-gw72xx.dtsi"
 +
 +/ {
-+	model = "Gateworks Venice GW73xx-2x i.MX8MP Development Kit";
-+	compatible = "gateworks,imx8mp-gw73xx-2x", "fsl,imx8mp";
++	model = "Gateworks Venice GW72xx-2x i.MX8MP Development Kit";
++	compatible = "gateworks,imx8mp-gw72xx-2x", "fsl,imx8mp";
 +
 +	chosen {
 +		stdout-path = &uart2;
 +	};
 +};
-diff --git a/arch/arm/dts/imx8mp-venice-gw73xx.dtsi b/arch/arm/dts/imx8mp-venice-gw73xx.dtsi
+diff --git a/arch/arm/dts/imx8mp-venice-gw72xx.dtsi b/arch/arm/dts/imx8mp-venice-gw72xx.dtsi
 new file mode 100644
-index 000000000000..1c05398c862c
+index 000000000000..e05fdecdaf4f
 --- /dev/null
-+++ b/arch/arm/dts/imx8mp-venice-gw73xx.dtsi
-@@ -0,0 +1,414 @@
++++ b/arch/arm/dts/imx8mp-venice-gw72xx.dtsi
+@@ -0,0 +1,371 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright 2023 Gateworks Corporation
@@ -321,18 +314,6 @@ index 000000000000..1c05398c862c
 +		enable-active-high;
 +		regulator-min-microvolt = <5000000>;
 +		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	reg_wifi_en: regulator-wifi-en {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_reg_wl>;
-+		compatible = "regulator-fixed";
-+		regulator-name = "wl";
-+		gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
-+		startup-delay-us = <100>;
-+		enable-active-high;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
 +	};
 +
 +	reg_usdhc2_vmmc: regulator-usdhc2-vmmc {
@@ -409,18 +390,11 @@ index 000000000000..1c05398c862c
 +	status = "okay";
 +};
 +
-+/* bluetooth HCI */
++/* off-board header */
 +&uart3 {
 +	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_uart3>, <&pinctrl_bten>;
-+	cts-gpios = <&gpio5 8 GPIO_ACTIVE_LOW>;
-+	rts-gpios = <&gpio5 9 GPIO_ACTIVE_LOW>;
++	pinctrl-0 = <&pinctrl_uart3>;
 +	status = "okay";
-+
-+	bluetooth {
-+		compatible = "brcm,bcm4330-bt";
-+		shutdown-gpios = <&gpio4 16 GPIO_ACTIVE_HIGH>;
-+	};
 +};
 +
 +/* RS232 */
@@ -480,16 +454,6 @@ index 000000000000..1c05398c862c
 +	status = "okay";
 +};
 +
-+/* SDIO WiFi */
-+&usdhc1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_usdhc1>;
-+	bus-width = <4>;
-+	non-removable;
-+	vmmc-supply = <&reg_wifi_en>;
-+	status = "okay";
-+};
-+
 +/* microSD */
 +&usdhc2 {
 +	pinctrl-names = "default", "state_100mhz", "state_200mhz";
@@ -524,12 +488,6 @@ index 000000000000..1c05398c862c
 +		>;
 +	};
 +
-+	pinctrl_bten: btengrp {
-+		fsl,pins = <
-+			MX8MP_IOMUXC_SAI1_TXD4__GPIO4_IO16	0x146
-+		>;
-+	};
-+
 +	pinctrl_gpio_leds: gpioledgrp {
 +		fsl,pins = <
 +			MX8MP_IOMUXC_SAI1_RXC__GPIO4_IO01	0x6	/* LEDG */
@@ -546,12 +504,6 @@ index 000000000000..1c05398c862c
 +	pinctrl_pps: ppsgrp {
 +		fsl,pins = <
 +			MX8MP_IOMUXC_SAI1_RXD1__GPIO4_IO03	0x146
-+		>;
-+	};
-+
-+	pinctrl_reg_wl: regwlgrp {
-+		fsl,pins = <
-+			MX8MP_IOMUXC_SAI1_TXD7__GPIO4_IO19	0x146
 +		>;
 +	};
 +
@@ -599,8 +551,6 @@ index 000000000000..1c05398c862c
 +		fsl,pins = <
 +			MX8MP_IOMUXC_UART3_RXD__UART3_DCE_RX	0x140
 +			MX8MP_IOMUXC_UART3_TXD__UART3_DCE_TX	0x140
-+			MX8MP_IOMUXC_ECSPI1_MISO__GPIO5_IO08	0x140
-+			MX8MP_IOMUXC_ECSPI1_SS0__GPIO5_IO09	0x140
 +		>;
 +	};
 +
@@ -671,15 +621,15 @@ index 000000000000..1c05398c862c
 +	};
 +};
 diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_defconfig
-index 151de3140421..0969451d9ae2 100644
+index e981bb844e10..151de3140421 100644
 --- a/configs/imx8mp_venice_defconfig
 +++ b/configs/imx8mp_venice_defconfig
 @@ -77,7 +77,7 @@ CONFIG_CMD_EXT4_WRITE=y
  # CONFIG_SPL_EFI_PARTITION is not set
  CONFIG_OF_CONTROL=y
  CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_LIST="imx8mp-venice imx8mp-venice-gw71xx-2x imx8mp-venice-gw72xx-2x imx8mp-venice-gw74xx imx8mp-venice-gw7905-2x"
-+CONFIG_OF_LIST="imx8mp-venice imx8mp-venice-gw71xx-2x imx8mp-venice-gw72xx-2x imx8mp-venice-gw73xx-2x imx8mp-venice-gw74xx imx8mp-venice-gw7905-2x"
+-CONFIG_OF_LIST="imx8mp-venice imx8mp-venice-gw71xx-2x imx8mp-venice-gw74xx imx8mp-venice-gw7905-2x"
++CONFIG_OF_LIST="imx8mp-venice imx8mp-venice-gw71xx-2x imx8mp-venice-gw72xx-2x imx8mp-venice-gw74xx imx8mp-venice-gw7905-2x"
  CONFIG_ENV_IS_IN_MMC=y
  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
  CONFIG_SYS_MMC_ENV_DEV=2
