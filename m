@@ -4,53 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 673E0C001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 12:26:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D05FDC001B0
+	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 12:42:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 968D98676C;
-	Tue, 15 Aug 2023 14:26:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D634586785;
+	Tue, 15 Aug 2023 14:42:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692102372;
-	bh=T0KCecgTcMjAkR+VouEUq/vIUW9zzYufGgVl/mSGBck=;
-	h=To:Cc:From:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=orhZOGPq+XEcTWojg/IlCgCiEt8nMAUhBsJ7kq65YGfqZZstWlkD4yWjWZbhQMxZR
-	 heUSb04fV/7AA7OCg+u/abuYZ2XzLI5oygahoRuMs1aKvjLSeWgodjgb+Pyav96kkl
-	 gJeypuK0Yni3kACWGNFw8kxrdWwmYwFfVtu14/HZAwtbcU3pqUVQhsL1vFdaKUHduT
-	 6Zp0Z01lYJYwn7aJPYCIs8+nVPzXsHpoNc5FR3EfbX80VaFBwqs1MSQSGq0nqQ9CWP
-	 aOtgbqsepsSUcI8l8ruuTm6bIfmkIZGFzUqmJfCR5+gA1nM9lZt6q3C0k6Ax22j/DV
-	 dibNU2Of00D0Q==
-Received: from [192.168.1.107] (89-186-114-123.pool.digikabel.hu
- [89.186.114.123])
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pnJgfdC3";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A590B8678A; Tue, 15 Aug 2023 14:42:28 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C7F1286264;
- Tue, 15 Aug 2023 14:26:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692102371;
- bh=T0KCecgTcMjAkR+VouEUq/vIUW9zzYufGgVl/mSGBck=;
- h=To:Cc:Reply-To:From:Subject:Date:From;
- b=NhHIq+8rhPqRG9EM1RYskIK84yYg60aIP67prbd2xz2tnacTwiHJBzG8u92LXV1XW
- kx/BfZudrPMq1GQIFxfXoXrMbNjKt6r1+GVMfLNsu+vQCk7hh3XpK0A3xUnu3d5eTD
- sxP5txTVNtDYdGJkZjcfqJhCDava3D92rx8Hw1YaxmpotE+7qmqA3EIZKb8XkLxL/J
- gezGj2D12Q5FCx85Wie7dF/lKbpPEi5AoOoOkeozUBjtfQUDfch56lpYCvn/Gn4vcc
- SoA5Q9JBcBsIHFTe3ehXqMnf1irq/6YqnRA+VJ8/ODpWDv+6HLw76cH0eMwwSxxI+q
- 6fu8bRQqK2v3Q==
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Dmitry Dunaev <dunaev@tecon.ru>
-From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-ubi
-Message-ID: <f8f83f82-4515-c237-8748-c89fae24a60c@denx.de>
-Date: Tue, 15 Aug 2023 14:26:06 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 14EEA8676C
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 14:42:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-99c353a395cso722474066b.2
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 05:42:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692103345; x=1692708145;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=OKULS+jGMth1WCVpwn5jn1aAW4X79nezJ3/dbHsWEhk=;
+ b=pnJgfdC3Y/a9/oEqo0kQYs8WGsYVfXO6REw+Z+Qj+tn0D45C5ol9FGJndeaTL9Db6U
+ mXN27aU8MCpzoxEHpuksN/jzpq1vD8xNOUykvJ4fpKz7kiN+XqATjYBG4RUlMw9OYEAM
+ FiP1iLjMXIC55gfEsnNQ1oZJZI7hiD+KtO8VFsiC9zNCd7cXI+mmB/hStxgiMUuoieJ9
+ +zbjnaek905+DXyqgnD18RscI0yVvSMHNO3QvMhIwOaPfFZO3C+sB/Vg2j0b6wGszcPb
+ z2SgUl6mwdszZhDjgOW3u9wx46EUdrny3bfnTX+w7VOpIQJIJ7slKI1AT9bD5nYjLBgx
+ 1Bjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692103345; x=1692708145;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OKULS+jGMth1WCVpwn5jn1aAW4X79nezJ3/dbHsWEhk=;
+ b=gXsTKrAM29gaoK8vEhVSvn1VcevrhTAeoao5rMha/ZmObqq7VXFokbrI07Yr64ShP1
+ 63BtklCuf9Jg4qcpB4CSlFrX6j0fuvOwIAmrXpYD7pkI9OnoITcnqL218WVloY6CWkl0
+ kWseS9oOIo6KteQitpUPyOu4lN+VjRpxSie+DwmLLMYVTXZN7YpSNylPpXCcYihO/2dU
+ skYlim1i9UDq24okA+x9Jxs4D1F2FJkqsPpx+RkgnQ3llzRbtBnLIbP3wRCNAq5Btrc7
+ E5cPRM3rIYkVTeGNH+HvJaGoSo0Rex8McGqJVRFR1s7uCLk3HUlbAN92q2EdMd6UGS2C
+ 53mw==
+X-Gm-Message-State: AOJu0Yzcr20DrQeF6RfrnPKjvEzfMnKqC8IKLW2whQ0iMkvvnR/yUTuZ
+ ipAyhmBb6fnhaB+/9Zx0S44nsbr2OBTIlZvvRS+rxw==
+X-Google-Smtp-Source: AGHT+IFzPLz8nmkSn4ecfadsyXVTG01NL3FMy7mV6JypGrI00FX8oXu7IpU7qDSfDArhbTa9SBQmYrQr/EohBlkMb60=
+X-Received: by 2002:a17:907:2cd5:b0:99c:b0c9:4ec7 with SMTP id
+ hg21-20020a1709072cd500b0099cb0c94ec7mr9824388ejc.26.1692103345542; Tue, 15
+ Aug 2023 05:42:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
+ <20230814133253.4150-4-maxim.uvarov@linaro.org> <ZNo3+qhKIEqmdMTh@hades>
+In-Reply-To: <ZNo3+qhKIEqmdMTh@hades>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Tue, 15 Aug 2023 18:42:14 +0600
+Message-ID: <CAD8XO3a-C1oiZdcy_sk0DOzKwPEq7pBW6CsDeSHM-bmLE=RXHA@mail.gmail.com>
+Subject: Re: [PATCHv6 03/14] net/lwip: implement dns cmd
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de, 
+ lwip-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,52 +83,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+On Mon, 14 Aug 2023 at 20:19, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-please pull from u-boot-ubi.git master
+[...]
 
-The following changes since commit 832148f675e427060be074c276956962fa9b5cb6:
 
-  Merge tag 'u-boot-rockchip-20230814' of https://source.denx.de/u-boot/custodians/u-boot-rockchip
-(2023-08-14 09:11:09 -0400)
+> > +/*
+> > +* This function creates the DNS request to resolve a domain host name.
+> Function
+>
+> You need the name of the function as well.  Please have a look at how the
+> rest of the code is documented.
+>
+> > +* can return immediately if previous request was cached or it might
+> require
+> > +* entering the polling loop for a request to a remote server.
+> > +*
+> > +* @name  dns name to resolve
+>
+> @name: etc
+>
+> > +* @varname (optional) U-Boot variable name to store the result
+> > +* Return: ERR_OK(0) for fetching entry from the cache
+> > +*         ERR_INPROGRESS(-5) success, can go to the polling loop
+> > +*         Other value < 0, if error
+> > +*/
+> >
+>
 
-are available in the Git repository at:
+Is there any command to check all the files for the comments style?
 
-  https://source.denx.de/u-boot/custodians/u-boot-ubi.git tags/ubi-updates-for-v2023.10-rc3
-
-for you to fetch changes up to 34031e9cce91de323ed711d7e8614c0d12fada1c:
-
-  cmd: ubi: Fix 'ubi list' command arguments parsing (2023-08-15 07:32:13 +0200)
-
-----------------------------------------------------------------
-ubi changes for v2023.10-rc3
-
-Fix:
-- Fix 'ubi list' command arguments parsing
-  from Dmitry
-
-----------------------------------------------------------------
-Dmitry Dunaev (1):
-      cmd: ubi: Fix 'ubi list' command arguments parsing
-
- cmd/ubi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-Azure build is fine:
-
-https://dev.azure.com/hs0298/hs/_build/results?buildId=108&view=results
-
-Thanks!
-
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+[...]
