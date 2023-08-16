@@ -4,80 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2741DC001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E7D0C04E69
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:28:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84AD38690B;
-	Wed, 16 Aug 2023 15:26:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id DE35A86680;
+	Wed, 16 Aug 2023 15:28:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="aSBIjmtI";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CE0DE80740; Wed, 16 Aug 2023 15:26:41 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692192486;
+	bh=iQNXWnjnNjxsM7qrXx78M/cR39jkYt4MdG05ioQEopU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=NF8QjS0W2m+WFh131LgEO3qwiguOGJxzK4rbRJq16BrjY58EJKBKPppo/CLk0Idik
+	 HyfvP2NDfpXEjHsXHnCoWsjNAVj6ryxRfkIs/VmqDJjA2BSP6oeQAzGggxzhDwY62X
+	 zD2dnSnij993Z8DaHF5RRHi9h4aXgY2I4QhD5TcI/C5ndt/0w6PGAb5HvJk6uv+YyL
+	 /bVLvABAp/7zPTF0yu4x9pn0DAFpURtuaZUCrvlynd2bAT3De8ai1qG6BU7j9B9mo4
+	 +pitVtex1bqwQgLYBCOjH3W5zIjvTUpVebErhq3wJlOrwyAjW4epcZ9cNjmIJteS6d
+	 5sd5hN+sFyS3A==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5049780740
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:26:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6592a39e51=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37G9C2TH021258; Wed, 16 Aug 2023 15:26:36 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=vo98uFdUZMsn+SuArl+X5bC4WxfY+WE2ekNNlx1s8qs=; b=aS
- BIjmtIHRaUkAoW9lsyjAdsx8PdQlhWAX8EREAzNQcLgjJi55o0+NsphQ5EyYVb4D
- k42N1FezF2Lp4uGOA6aHrB7mhhGGjpSpCeu7swjp/vA99UQeJBGMdckAJJmZx45W
- cxhm9KMA0cAMqz5tT1mpMVh/f6tRw7suGQv9CSXrbOPqw4+d3jIHEsE760eNZMu+
- BgNJSwCkUcYSnQZgPVLkFgqyL6/yHqpmEiooQIEOo5CkLwPV8Mz7nONDTKMs+Dgb
- Nq2c0FAhv6S2x21974XSaF1NaFpzC3Q2ao5PgaKmjno8gsPGiUTIkrbC12Na6zh5
- Hyy7MNtxweFNgk9ZlMrg==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sgum7hecq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Aug 2023 15:26:34 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9BDC410005D;
- Wed, 16 Aug 2023 15:26:32 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 91F6C242AAF;
- Wed, 16 Aug 2023 15:26:32 +0200 (CEST)
-Received: from [10.201.20.38] (10.201.20.38) by EQNDAG1NODE4.st.com
- (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 16 Aug
- 2023 15:26:31 +0200
-Message-ID: <a7c0ae7e-e431-8aee-18bc-4e455897771e@foss.st.com>
-Date: Wed, 16 Aug 2023 15:26:31 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7FC0E80740;
+ Wed, 16 Aug 2023 15:28:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1692192485;
+ bh=iQNXWnjnNjxsM7qrXx78M/cR39jkYt4MdG05ioQEopU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=wEZLe8HtPeXcTQ56mCSVeXwAVNBcLq4fXi0+FX+KgRq2PE2aYc3hy8fYHknxnp/ek
+ zY4nAooF14DWwMY/oGm76Xp6nYR4GiXfLT9EA/Yw7ykgmEnkQN/llqlW9BYqP6ec1L
+ XTR+1EEBtvjwpoCeepB9u7C9dEhUUqPqadx9Uxv3SYOLP1+vBEmLwAgrlL8tE7LVdl
+ 57uBANZO7OuS6j6uy99dVa6WHMbLvTHiI9g6lJH3sRd814srnWDThTbWqlSLKQix5i
+ lkysLk9PAjtYPeeeSSHabEkKDMm8M7iTOLpzgCb/wHaoZk02iRBN2BSpyFGIa7zDKf
+ OUbuaNhciTsSg==
+Message-ID: <532a3a0c-389f-6945-9a20-0a523caebeae@denx.de>
+Date: Wed, 16 Aug 2023 15:28:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [RESEND PATCH] ARM: dts: stm32: fix display pinmux for
- stm32f746-disco
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] ARM: stm32: Power cycle Buck3 in reset on DHSOM
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com,
+ christophe.priouzeau@foss.st.com
+References: <20230517220239.329807-1-marex@denx.de>
+ <e171b09d-0e7d-1815-6133-0946212a08d9@foss.st.com>
+ <607a112c-4320-5a5f-b988-98e5ea8e3267@denx.de>
+ <cb59086b-3212-3b46-990f-c8223a6122a4@denx.de>
+ <f418e766-9063-496d-dd5c-05758cbabd38@foss.st.com>
+ <bba7dcb0-285a-f3ed-1dcb-d631466c1ee2@denx.de>
+ <40efc460-899d-f4d6-e79f-5c0e635f4387@denx.de>
+ <fe65f376-a188-3f72-b6f8-58bd2a65542c@foss.st.com>
 Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: Amarula patchwork <linux-amarula@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <michael@amarulasolutions.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20230703160233.2303076-1-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230703160233.2303076-1-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To EQNDAG1NODE4.st.com
- (10.75.129.133)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-16_12,2023-08-15_02,2023-05-22_02
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <fe65f376-a188-3f72-b6f8-58bd2a65542c@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,39 +78,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 7/3/23 18:02, Dario Binacchi wrote:
-> As reported by the datasheet (DocID027590 Rev 4) for PG12:
-> - AF9  -> LCD_B4
-> - AF14 -> LCD_B1
+On 8/16/23 15:22, Patrice CHOTARD wrote:
 > 
-> So replace AF14 with AF9 for PG12 in the dts.
 > 
-> Fixes: fe63d3cfb77ef ("ARM: dts: stm32: Sync DT with v4.20 kernel for stm32f7")
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> On 7/10/23 23:43, Marek Vasut wrote:
+>> On 6/17/23 02:36, Marek Vasut wrote:
+>>> On 6/16/23 15:04, Patrick DELAUNAY wrote:
+>>>> Hi,
+>>>
+>>> Hi,
+>>>
+>>>>> [   39.426015] Disabling non-boot CPUs ...
+>>>>> [   39.448635] Retrying again to check for CPU kill
+>>>>> [   39.451909] CPU1 killed.
+>>>>> U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
+>>>>> RAM: DDR3-DDR3L 32bits 533000kHz
+>>>>> DDR invalid size : 0x4, expected 0x40000000
+>>>>> DRAM init failed: -22
+>>>>> ### ERROR ### Please RESET the board ###
+>>>>>
+>>>>> Press RESET button
+>>>>>
+>>>>> U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
+>>>>> RAM: DDR3-DDR3L 32bits 533000kHz
+>>>>> DDR invalid size : 0x4, expected 0x40000000
+>>>>> DRAM init failed: -22
+>>>>> ### ERROR ### Please RESET the board ###
+>>>>>
+>>>>>
+>>>> I try it with the latest STMicroelectronics OSS image.
+>>>>
+>>>> I just change in U-Boot config to be aligned the expected SD-Card partionning
+>>>>
+>>>> configs/stm32mp15_basic_defconfig:
+>>>>
+>>>> -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3
+>>>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=5
+>>>>
+>>>> But low power is not supported in this downstream config :-<
+>>>
+>>> Use multi_v7_defconfig or some such ?
+>>>
+>>>> I got the error:
+>>>>
+>>>>
+>>>> .......
+>>>> U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3ed-dirty (Jun 16 2023 - 11:37:52 +0200)
+>>>> RAM: DDR3-DDR3L 32bits 533000kHz
+>>>> WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s timeout)
+>>>> image entry point: 0xc0100000
+>>>>
+>>>>
+>>>> U-Boot 2023.07-rc4-00008-g2f4664f5c3ed-dirty (Jun 16 2023 - 11:37:52 +0200)
+>>>>
+>>>> CPU: STM32MP157FAA Rev.Z
+>>>> Model: STMicroelectronics STM32MP157C eval daughter on eval mother
+>>>> Board: stm32mp1 in basic mode (st,stm32mp157c-ev1)
+>>>> Board: MB1263 Var4.0 Rev.C-03
+>>>> DRAM:  1 GiB
+>>>> Clocks:
+>>>> - MPU : 800 MHz
+>>>> - MCU : 208.878 MHz
+>>>> - AXI : 266.500 MHz
+>>>> - PER : 24 MHz
+>>>> - DDR : 533 MHz
+>>>> Core:  288 devices, 42 uclasses, devicetree: separate
+>>>> WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s timeout)
+>>>> NAND:  1024 MiB
+>>>> MMC:   STM32 SD/MMC: 0, STM32 SD/MMC: 1
+>>>> Loading Environment from MMC... Invalid ENV offset in MMC, copy=0
+>>>> In:    serial
+>>>> Out:   serial
+>>>> Err:   serial
+>>>> Net:   eth0: ethernet@5800a000
+>>>> Hit any key to stop autoboot:  0
+>>>>
+>>>> ....
+>>>> [    0.000000] Booting Linux on physical CPU 0x0
+>>>> [    0.000000] Linux version 6.4.0-rc6 (oe-user@oe-host) (arm-ostl-linux-gnueabi-gcc (GCC) 12.2.0, GNU ld (GNU Binutils) 2.40.20230119) #1 SMP PREEMPT Sun Jun 11 21:35:30 UTC 2023
+>>>> ....
+>>>> root@stm32mp1-disco-oss:~# while true ; do rtcwake -s 100 -m mem ; done
+>>>> rtcwake: unrecognized suspend state 'mem'
+>>>
+>>> Please fix your kernel config and enable suspend to mem, I am sure that is not difficult.
+>>>
+>>>> I check also with downstream (OpenSTLinux V4.0),
+>>>
+>>> This is not relevant to this discussion.
+>>>
+>>>> and I can't reproduced the issue but we are using TF-A  / OP-TEE / SCMI to support all the low power modes.
+>>>>
+>>>>
+>>>> And this low power support (in TF-A/ OP-TEE / Linux with SCMI) is not yet up streamed.
+>>>>
+>>>>
+>>>> PS: if you are not able to restart even after a RESET,
+>>>>         I assume something is wrong in the PMIC configuration
+>>>>
+>>>>         (for example in NVM or in initial regulator configuration)
+>>>>
+>>>>         so you have no power cycle on DDR during reset...
+>>>>
+>>>>          => something is wrong in PMIC configuration in linux ?
+>>>
+>>> Possibly, but then it is also something wrong on STM32MP157C EV1, because I can reproduce the failure on EV1 too. I specifically did check this on the EV1. Please fix your kernel config and try again, then you should be able to see it yourself.
+>>
+>> Has there been any news on this defect of EV1 or has this been ignored by ST ?
 > 
-> ---
-> 
->  arch/arm/dts/stm32f746-disco-u-boot.dtsi | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> index 19b5451db441..522cffb1ac9f 100644
-> --- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> @@ -169,7 +169,7 @@
->  	ltdc_pins: ltdc@0 {
->  		pins {
->  			pinmux = <STM32_PINMUX('E', 4, AF14)>, /* B0 */
-> -				 <STM32_PINMUX('G',12, AF14)>, /* B4 */
-> +				 <STM32_PINMUX('G',12, AF9)>,  /* B4 */
->  				 <STM32_PINMUX('I', 9, AF14)>, /* VSYNC */
->  				 <STM32_PINMUX('I',10, AF14)>, /* HSYNC */
->  				 <STM32_PINMUX('I',14, AF14)>, /* CLK */
+> Hi Marek
 
+Hi,
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Sorry for the delay,
 
-Thanks
-Patrice
+No worries.
+
+What I am more concerned about is -- why is this problem present on EV1 
+too and how to solve it there ? (and no, "add more unnecessary software 
+to the stack to cover this up" is not the answer)
+
+> Patch applied on stm32-master
+
+Thank you
