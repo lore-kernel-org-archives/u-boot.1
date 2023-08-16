@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F251DC001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86526C001B0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:34:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70EB380DF7;
-	Wed, 16 Aug 2023 15:34:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF534869EA;
+	Wed, 16 Aug 2023 15:34:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="cjZouSVs";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="YDZFuFBX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17BA8679B; Wed, 16 Aug 2023 15:33:59 +0200 (CEST)
+ id 24606869D8; Wed, 16 Aug 2023 15:34:08 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5943580842
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:33:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C0D0869ED
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:34:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=6592a39e51=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37G9C2UQ021258; Wed, 16 Aug 2023 15:33:56 +0200
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37G9HYUh006614; Wed, 16 Aug 2023 15:34:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=Q7QjqoUCKaYO4yiSJTgGY1yE1LlGDG6jyrYynjJuh0w=; b=cj
- ZouSVsPzszOxpUm7uY7PJmoSU8LUSqIHL5F8s4IpRYVskxdDizqiYyxBoTg1DVsI
- 3AKwWjS1yivmyLJWALqIFP+0hSEnLu/37sk28uGOporC7PcsrlnG1Jzdrixh+IjH
- 1Ss6Q0EJagst5o1dM108On+AwIudapVKfb8A3JP0xKyiyZDfWGZy5aGBnIcGYWQk
- 56KzuzFr531yCdY/E0YHvuNVkLJj506WR4ZTz7Rb2K5ZfcGkehR6s3xhbJReyK5C
- Nt4j+HhO60zFAwD2+ehJTDfs6AhqsAQil4OmE85VkGLpo0JjjuFfXf4/LRmZYkXk
- 34/rj6NK1C2IxW9x5DlA==
+ selector1; bh=NLzTrEc2ZN8XRcNeG5kf8kNloXL+UZcs88SzEF5Vdpk=; b=YD
+ ZFuFBXUK0w2rT6kYToJ0YQXMuj9LKVx/zQ1JrJt+WCgJDkJNiLacdbhQVdwE40Mf
+ 8VdU16l56Ph6YmXq6FO1G675ElmE/1Va+1q2EpJD8MuAb00rPNe3V6P2yl6KAVOh
+ 68CC8m3by+FfaUtDtlT3ypHb0IDOte0q0PeO/772PXAXsODtJXEEt9NjQtqZok7p
+ LDLZTSoUe0MVBO0lHZ1oXwGkSfngPe8uOH+u7saDSPuTzy+6s43recReXzEvZKQk
+ ygvFOBsA5OD5jbC9OPjPKHcoNZcBpv/6FqwSrpJi7kG2YemHtb7lz3sq1Um2XxwQ
+ 2avt35fs3pEbMdtyQltQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sgum7hfj6-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sguptseu0-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Aug 2023 15:33:56 +0200 (MEST)
+ Wed, 16 Aug 2023 15:34:02 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E379E10005D;
- Wed, 16 Aug 2023 15:33:55 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3A7F010005D;
+ Wed, 16 Aug 2023 15:34:02 +0200 (CEST)
 Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB115242ADE;
- Wed, 16 Aug 2023 15:33:55 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 321B2242ADE;
+ Wed, 16 Aug 2023 15:34:02 +0200 (CEST)
 Received: from [10.201.20.38] (10.201.20.38) by EQNDAG1NODE4.st.com
  (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 16 Aug
- 2023 15:33:55 +0200
-Message-ID: <c4f32038-0291-9006-a63f-a95ffbcfc294@foss.st.com>
-Date: Wed, 16 Aug 2023 15:33:54 +0200
+ 2023 15:34:01 +0200
+Message-ID: <f6e407f3-0e6a-464d-38cb-3d2e2c5f39b0@foss.st.com>
+Date: Wed, 16 Aug 2023 15:34:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH 1/2] ARM: dts: sm32mp15: remove shmem for scmi-optee
+Subject: Re: [PATCH 2/2] ARM: dts: sm32mp13: remove shmem for scmi-optee
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: Etienne CARRIERE <etienne.carriere@foss.st.com>, Tom Rini
  <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20230710104406.1.Icd397b21b510ba9fc2de7cd4b69835afb131dda7@changeid>
+ <20230710104406.2.Ia58005c96c892d76d149dbad1aa51eb06f60f673@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230710104406.1.Icd397b21b510ba9fc2de7cd4b69835afb131dda7@changeid>
+In-Reply-To: <20230710104406.2.Ia58005c96c892d76d149dbad1aa51eb06f60f673@changeid>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.201.20.38]
@@ -93,28 +94,45 @@ X-Virus-Status: Clean
 
 
 On 7/10/23 10:44, Patrick Delaunay wrote:
-> Since OP-TEE commit 89ba3422ee80 ("plat-stm32mp1: scmi_server: default
-> use OP-TEE shared memory"), integrated in OP-TEE 3.22.0-rc1
-> the default configuration for STM32MP15x SoCs changes,
-> CFG_STM32MP1_SCMI_SHM_SYSRAM is disabled by default and the OP-TEE SMCI
-> server uses ithe OP-TEE native shared memory registered by clients.
+> CFG_STM32MP1_SCMI_SHM_SYSRAM will be disabled by default for STM32MP13x
+> SoCs in next OP-TEE version and the OP-TEE SMCI server uses the OP-TEE
+> native shared memory registered by clients.
 > 
-> To be compatible by default with this configuration and the next OP-TEE
-> version, this patch removes the SHMEM in the SCMI configuration and the
-> associated reserved memory in the last 4KByte page of SRAM,
-> in the STM32MP15 device tree.
+> To be compatible by default with this configuration this patch removes
+> the shared memory in the SCMI configuration and the associated reserved
+> memory in SRAM.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  arch/arm/dts/stm32mp15-scmi.dtsi | 16 ----------------
->  1 file changed, 16 deletions(-)
+>  arch/arm/dts/stm32mp13-u-boot.dtsi |  8 --------
+>  arch/arm/dts/stm32mp131.dtsi       | 14 --------------
+>  2 files changed, 22 deletions(-)
 > 
-> diff --git a/arch/arm/dts/stm32mp15-scmi.dtsi b/arch/arm/dts/stm32mp15-scmi.dtsi
-> index 543f24c2f4f6..ad2584213d99 100644
-> --- a/arch/arm/dts/stm32mp15-scmi.dtsi
-> +++ b/arch/arm/dts/stm32mp15-scmi.dtsi
-> @@ -16,7 +16,6 @@
+> diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> index 726cd1a7e479..aa5cfc6e41d5 100644
+> --- a/arch/arm/dts/stm32mp13-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> @@ -108,14 +108,6 @@
+>  	bootph-all;
+>  };
+>  
+> -&scmi_shm {
+> -	bootph-all;
+> -};
+> -
+> -&scmi_sram {
+> -	bootph-all;
+> -};
+> -
+>  &syscfg {
+>  	bootph-all;
+>  };
+> diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
+> index d94ba2547267..f1810c9eb704 100644
+> --- a/arch/arm/dts/stm32mp131.dtsi
+> +++ b/arch/arm/dts/stm32mp131.dtsi
+> @@ -40,7 +40,6 @@
 >  			#address-cells = <1>;
 >  			#size-cells = <0>;
 >  			linaro,optee-channel-id = <0>;
@@ -122,12 +140,10 @@ On 7/10/23 10:44, Patrick Delaunay wrote:
 >  
 >  			scmi_clk: protocol@14 {
 >  				reg = <0x14>;
-> @@ -60,21 +59,6 @@
->  			};
->  		};
->  	};
-> -
-> -	soc {
+> @@ -106,19 +105,6 @@
+>  		interrupt-parent = <&intc>;
+>  		ranges;
+>  
 > -		scmi_sram: sram@2ffff000 {
 > -			compatible = "mmio-sram";
 > -			reg = <0x2ffff000 0x1000>;
@@ -140,10 +156,10 @@ On 7/10/23 10:44, Patrick Delaunay wrote:
 > -				reg = <0 0x80>;
 > -			};
 > -		};
-> -	};
->  };
->  
->  &reg11 {
+> -
+>  		timers2: timer@40000000 {
+>  			#address-cells = <1>;
+>  			#size-cells = <0>;
 
 Applied on stm32-master
 
