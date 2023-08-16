@@ -4,68 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4C3C001DF
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 17:05:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3967CC001DF
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 17:05:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15B5F869BF;
-	Wed, 16 Aug 2023 19:05:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 59FBE869F1;
+	Wed, 16 Aug 2023 19:05:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KWgeUWye";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lZJVwXuQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D680846EE; Wed, 16 Aug 2023 19:05:28 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 7D55386A00; Wed, 16 Aug 2023 19:05:44 +0200 (CEST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECCA7869F6
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 19:05:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9582846EE
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 19:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-977e0fbd742so878563766b.2
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 10:05:24 -0700 (PDT)
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2b95d5ee18dso102509451fa.1
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 10:05:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692205524; x=1692810324;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/35XfXtoOACbtbRjvl/k/BAns0ZXzSCLyISfBDob2HE=;
- b=KWgeUWye1Pb2bGWkyDWJRoffpiv551sIgan/323YRZBKVTlGDedyvFvMO8olBgYxq1
- y0zvqk8K4pqI7veLxoPouhm9NzK62hLgozjQcItR7+Z4vhchFaAARYY1xk29MptCdVUr
- YdqgPuPaK88QyOo+xaHmfBP6iYSEg2jmgfXJc=
+ d=chromium.org; s=google; t=1692205540; x=1692810340;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=WbmfiOFhYKK3BqdD3JEj4MvCO3avQe9yztWlbH9waKU=;
+ b=lZJVwXuQ3w0qu6q1VJbdMoYkpsl8TuAN7XcLBN85Lrgdz2Kjksm/ouYRj2XejCZc14
+ OOHyDennFdECC5Hr6AQd+sSv/QjpXBg9Nt+PfKt/9goKgSgYn8uAF8Sem05+fHXesHeL
+ AMPCcFrGY1HohzNK7xOFY99mXH3pB/e9dZ8Bk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692205524; x=1692810324;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/35XfXtoOACbtbRjvl/k/BAns0ZXzSCLyISfBDob2HE=;
- b=B0inn7P9X5+TxsQsH6D5o53UL5Wf9SfHKQ43QqE4SaEadiCzLQxXScDKkjg8S0aqF0
- 9lpBDYPHlV8K+sFTBwRra7MVnpJTO3dFWZSO3sDrCCh9frJW+Nzc39bD1qna7OSpHQPJ
- pg6xr+k9oLSQJrtjb+2p4DjPceEGZYvIKmk0u75+tXg5TqdFpLfejHXfX7+B34Uvm91W
- woCxQU0Vyf8O9IbpaLLOyRY3VpLj3hwiyrlviKrudqRiQJq0D6VHT6vQVZmP9rvVx7OP
- 3SB5UDHylgQ7N/FgwjY/fUWFhLOTnLhY7gV9PuUxPmIX+uFwlmruNygAtwtVdRFDBWEG
- LC2w==
-X-Gm-Message-State: AOJu0Yzn7x/WL2M2mTkvorCLDnLJIopZE3OMS4BZcMnftjKuF23ZLjrk
- GswcB3xIHJkl9pct00QPYaKovUiNbth9l9qvIaHzfQ==
-X-Google-Smtp-Source: AGHT+IHlqQqLPYVy9lmMAngX414ZOfi3ryDPFb88Zt4O81cPXTFg6SKBdsylVLrQ3MsmSraF/3KecEx/vqv6bMC0l8w=
-X-Received: by 2002:a17:906:1444:b0:969:7739:2eb7 with SMTP id
- q4-20020a170906144400b0096977392eb7mr1694197ejc.4.1692205524266; Wed, 16 Aug
- 2023 10:05:24 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692205540; x=1692810340;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WbmfiOFhYKK3BqdD3JEj4MvCO3avQe9yztWlbH9waKU=;
+ b=jBbf8MBLsI+YdZAgt6+3f3RXyO83s1zrQBo1s11ootIsYNJ8wq+JGP7W46yxPLEdNF
+ N4u3YvB9PdRR2tUUa9pwUHhWekOPMLCo+l0nAAHRnhjMuKCDJ6unncQxP1UgZ2JjjDGe
+ k/o3GEXg9BCFIvSNv0VyiN8Cg/BC9uoMXypOF/WGq3THbTy7k8BCwaIzsss4m55uXb2i
+ +2sO3vCjp2VJ0dKwDv2fsqgkbS+l73BnNbmQ23NF72GIM1vRe1t/Q5/qCxPxa74t3HH8
+ gLEEksbYfgOb9fZm1kDdBQClttqJ9/jdniJThyhzOxHkBgW6nuK0mV1s2WR9UIEDV+8d
+ EzZQ==
+X-Gm-Message-State: AOJu0YxzXzmBg4A3/1Rshw/Wkq8yQY4llO3kPhs/LArkkKnbtijj7cNe
+ 8t6QVhWIq6gCbWMN2MgYkZ5X+2Jwpdolr4oAn3cv5w==
+X-Google-Smtp-Source: AGHT+IG2ahssO7RBaPtmsOlM7s1lEgbmW78mZxiSZRm6diQtrYydF4W++n84eRj95mqP2vmNrD096oU0wul5P68uz9A=
+X-Received: by 2002:a2e:9f57:0:b0:2b6:b6c4:6e79 with SMTP id
+ v23-20020a2e9f57000000b002b6b6c46e79mr2138320ljk.1.1692205539879; Wed, 16 Aug
+ 2023 10:05:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230815103259.17476-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ0BB90F4Zpq6AtyTPuME3XiJJYmYUOBhFCG9FujOq4wHw@mail.gmail.com>
- <d359a225-fbda-3bfd-ee5a-6cab8e011568@canonical.com>
-In-Reply-To: <d359a225-fbda-3bfd-ee5a-6cab8e011568@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 16 Aug 2023 11:05:12 -0600
-Message-ID: <CAPnjgZ3Ssh8=fvdRa+KM5h5BS9LQs1bTjdku=JqtqRA4rqLDFQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] doc: add partition API to HTML documentation
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Joshua Watt <jpewhacker@gmail.com>, u-boot@lists.denx.de
+Date: Wed, 16 Aug 2023 11:05:27 -0600
+Message-ID: <CAPnjgZ0vPwd9v+V8Pg5Bo87OELD-vokB7ZrvU3Bv5dQ_O9z6Sg@mail.gmail.com>
+Subject: Doc style for method functions
+To: linux-doc@vger.kernel.org
+Cc: Jonathan Corbet <corbet@lwn.net>, Mark Rutland <mark.rutland@arm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,100 +79,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Jonathan,
 
-On Tue, 15 Aug 2023 at 09:18, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
->
->
-> On 8/15/23 16:44, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Tue, 15 Aug 2023 at 04:32, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> * Convert comments in part.h to Sphinx style.
-> >> * Create documentation page for the partition API.
-> >> * Add the partition API page to the API index page.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   doc/api/index.rst |   1 +
-> >>   doc/api/part.rst  |   6 ++
-> >>   include/part.h    | 210 ++++++++++++++++++++++++----------------------
-> >>   3 files changed, 119 insertions(+), 98 deletions(-)
-> >>   create mode 100644 doc/api/part.rst
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > Q below
-> >
-> >>
-> >> diff --git a/doc/api/index.rst b/doc/api/index.rst
-> >> index a9338cfef9..3a80ae0635 100644
-> >> --- a/doc/api/index.rst
-> >> +++ b/doc/api/index.rst
-> >> @@ -15,6 +15,7 @@ U-Boot API documentation
-> >>      lmb
-> >>      logging
-> >>      nvmem
-> >> +   part
-> >>      pinctrl
-> >>      rng
-> >>      sandbox
-> >> diff --git a/doc/api/part.rst b/doc/api/part.rst
-> >> new file mode 100644
-> >> index 0000000000..d1df1d8494
-> >> --- /dev/null
-> >> +++ b/doc/api/part.rst
-> >> @@ -0,0 +1,6 @@
-> >> +.. SPDX-License-Identifier: GPL-2.0+
-> >> +
-> >> +Partition API
-> >> +=============
-> >> +[..]
-> >
-> >> +/**
-> >> + * struct part_driver - partition driver
-> >> + */
-> >>   struct part_driver {
-> >> +       /** @name:      partition name */
-> >>          const char *name;
-> >> +       /** @part_type: (MBR) partition type */
-> >>          int part_type;
-> >> -       const int max_entries;  /* maximum number of entries to search */
-> >> -
-> >> +       /** @max_entries:       maximum number of partition table entries */
-> >> +       const int max_entries;
-> >>          /**
-> >> -        * get_info() - Get information about a partition
-> >> +        * @get_info:           Get information about a partition
-> >
-> > Are we not allowed the () at end? I much prefer brackets as they show
-> > it is a function.
->
-> Thanks for reviewing.
->
-> 'make htmldocs' does not like parentheses here:
->
-> Incorrect use of kernel-doc format:
-> * @get_info(): Get ...
-> Incorrect use of kernel-doc format:
-> * @get_info() - Get ...
->
-> We are using code from the kernel.org. We would have to change that
-> upstream first:
->
-> scripts/kernel-doc:2325:
-> print STDERR "Incorrect use of kernel-doc format: $_";
+I would like to do something like this:
 
-OK thank you, I will send an mail about it.
+struct part_driver {
+   /**
+    * get_info() - Get information about a partition
 
-Do you think you could base your part on [1], since I changed the same
-file? It is available at u-boot-dm/methb-working
+              ^ causes error
+
+    *
+    * @desc: Block device descriptor
+    * @part: Partition number (1 = first)
+    * @info: Returns partition information
+    */
+   int (*get_info)(struct blk_desc *desc, int part, struct
+disk_partition *info);
+...
+};
+
+But this gives:
+
+scripts/kernel-doc:292:
+   print STDERR "Incorrect use of kernel-doc format: $_";
+
+Without the brackets on get_info() it works OK. What is the purpose of
+that check, please?
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=368613
