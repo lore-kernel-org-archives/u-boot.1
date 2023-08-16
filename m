@@ -4,83 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BACC001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:56:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0032C001E0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 14:16:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B19C86386;
-	Wed, 16 Aug 2023 15:56:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F3361847D3;
+	Wed, 16 Aug 2023 16:16:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ReH26xdj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hqCF/rVc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3626869DA; Wed, 16 Aug 2023 15:56:02 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 59989857BF; Wed, 16 Aug 2023 16:16:01 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB91A847D3
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:55:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85E33847C3
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 16:15:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-3fe8242fc4dso56941175e9.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 06:55:59 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5254f9eda36so5260643a12.1
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 07:15:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692194159; x=1692798959;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Kq0M2d8QB7t5JpQWKOTHH3v3ZZwIL1tDxklUVgqTgH4=;
- b=ReH26xdjmwvhTcIWudGeVBIQbHX5CO3I12BMYYcchl1ghHIOdXz0I2DO3takpIe81D
- yWe0ogvS3ASJyYUjFeTVUSsCAu8DYAKr4I4Jy57qHsNeVkYbLCpXShJl5PAb0cikZeAl
- 0bk7JDdOMQLv91eCzedTx9Odu2fO4b3IVZkkNILhdxoC7PESgyGmEn5ae0nH0CJvlqLz
- WMwFOZRCeD1FxVAu8pZROcgciez3HK3RcQY1DE0EJoEDTYdZJ6U5Q0WkbhqGxzKFCINh
- O7iOM2BHYyRNiYSMhTuRQmAdhsr2VBZM4mokkkoDzm60VGsjWxjvRlB99qYOIYuJb+sa
- vKMw==
+ d=chromium.org; s=google; t=1692195354; x=1692800154;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ou7ABXuvG4MX865LM7Jz+5s/N5SQ6rUMMWKJsD6s0ik=;
+ b=hqCF/rVcEXJju8AvxXgnjlJC4FMbXxelm3th16c+5gxzS5Wfe62hf3chppKhC9NqPx
+ qRUPTEWWr13fUp+YejlQms20gDtZiA3fDKK/npZ+Z+9fBkYcqhI3h/OyprEM/GONVMa1
+ 5d7uYhrFunYlYMSoJd0FHA5yNdrL5HgfuOe1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692194159; x=1692798959;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Kq0M2d8QB7t5JpQWKOTHH3v3ZZwIL1tDxklUVgqTgH4=;
- b=G5Yi9bAGzLUU1caHy5dJrD9fKQSS2PqazD/TteyLX0PhM+TXN5+i0RPFv1PqsCruCn
- UWBbETrwNuTbiakykKMFTiPiy4S02eEL65mAe+UBUElSstSgHegK1vXKrq4ug3BAhnfT
- Kf6lejb/L5UpTljGmfp81LROR7USXp5Ml+act6OTsFQc+NPSsbi6rHxJJ+yUrabxB7IQ
- d6IvRumZt3pvQD5hwW6grk8SF81ZYMnpHBceXUvywQsHZAdL1gg6Tn/GEWmlhe/TqK5W
- dR1Dag4+ccUaZWFmwZ1ZDOfPXzcgVNJymd6Hih83YasK1B6iwQOAGBlZckgK3G6Mwzqw
- eESg==
-X-Gm-Message-State: AOJu0YzXSEFoxAkE4JaAIdV1Vmi44jV2wrMsYlE1MGTYioTmuuNFn6SE
- FQHJawUDEbYyWo4KExdZnJu59yK0QXkEX45D6FU=
-X-Google-Smtp-Source: AGHT+IHggRmjM2IiMfDPjgSI8PVTEWt7IpPMgU9CRvjnikjV/fHs0zv4UoXpqfXp5SC1wpCZZc1qnA==
-X-Received: by 2002:a7b:c445:0:b0:3fb:b56b:470f with SMTP id
- l5-20020a7bc445000000b003fbb56b470fmr1553206wmi.14.1692194159226; 
- Wed, 16 Aug 2023 06:55:59 -0700 (PDT)
-Received: from hades (ppp089210246083.access.hol.gr. [89.210.246.83])
- by smtp.gmail.com with ESMTPSA id
- 22-20020a05600c231600b003fc015ae1e1sm21655966wmo.3.2023.08.16.06.55.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 06:55:58 -0700 (PDT)
-Date: Wed, 16 Aug 2023 16:55:56 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Sean Edmond <seanedmond@linux.microsoft.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, stcarlso@linux.microsoft.com,
- abdellatif.elkhlifi@arm.com
-Subject: Re: [PATCH 2/5] drivers: security: Add TPM2 implementation of
- security devices
-Message-ID: <ZNzVbGEloIVE6WCP@hades>
-References: <20230812002823.82576-1-seanedmond@linux.microsoft.com>
- <20230812002823.82576-3-seanedmond@linux.microsoft.com>
- <CAC_iWjL7sx6F4d2VtvjksJ04z00bxjGGoefCdAUU+_0t598h8g@mail.gmail.com>
- <af88b677-77ff-0245-a76a-901b9d9ac998@linux.microsoft.com>
+ d=1e100.net; s=20221208; t=1692195354; x=1692800154;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ou7ABXuvG4MX865LM7Jz+5s/N5SQ6rUMMWKJsD6s0ik=;
+ b=SUJUnKOW5/3dYFI6RrM6ZZW64OWlRRBp5g3F8sppOBzOqTzaKtjFlahq6vmwDuXEba
+ luwHOs84gtC9csdU2VMpbnS6952NuD2irCrAotn69PpzveVs0t90cqP2F89z7VV231MD
+ eqgO2SaXyILt/sZkLNO5bO0/E/SMv4dl5AvdhPmkT4hzpNHSDvUZ0OwCx3IEyjnBbq9X
+ 4CTTXmHkcYkUinTNgcFDn4wa002/VfKyH8JbWky3gCrdqodgOYOxvDXLbwiGMhpc90U8
+ s/S+qUYbdvI4YK6ngL0mOiT2uw3RA3oaltvraDaKm+wzBQFU9GCxKRoMc0xR0rhtd6Xf
+ PPnw==
+X-Gm-Message-State: AOJu0Yz8LQFW1X+k9fHUz3AfokRta79bLzZrZbhLEEGNKZtY2qwz9vO+
+ trnMtklrGP0La1smgnvBtuWOjfSdlmbJOljYspGM5w==
+X-Google-Smtp-Source: AGHT+IEd5BtfuXlRTo+4v5qk+X3oTdFFyT3VFaAxEGG+r7gmnOTcPn6VTYlqnZ4jP7UDjnFyZsHq/VTmwAaJCg9pXjY=
+X-Received: by 2002:a17:907:a071:b0:99b:c0a0:8e17 with SMTP id
+ ia17-20020a170907a07100b0099bc0a08e17mr1609730ejc.52.1692195353714; Wed, 16
+ Aug 2023 07:15:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <af88b677-77ff-0245-a76a-901b9d9ac998@linux.microsoft.com>
+References: <CAPnjgZ2a6S_Hh_=Gb=_Cz2zr9DG7TPEJxJD9z_PU9E6LiiMPHg@mail.gmail.com>
+ <de4b9edb-1d17-9ca8-1871-e25b280733e3@gmx.de>
+ <8c605f6f-ad36-27da-83ac-54932e6b1226@gmx.de>
+In-Reply-To: <8c605f6f-ad36-27da-83ac-54932e6b1226@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 16 Aug 2023 08:15:42 -0600
+Message-ID: <CAPnjgZ1CVSFptm7h6_sYD0Rk7xXyYz6LJOVs5DyJDcyzxtTjYg@mail.gmail.com>
+Subject: Re: Booting Windows 11
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,269 +83,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 14, 2023 at 02:23:22PM -0700, Sean Edmond wrote:
-> 
-> On 2023-08-14 1:39 a.m., Ilias Apalodimas wrote:
-> > Hi Sean
-> > 
-> > On Sat, 12 Aug 2023 at 03:28, <seanedmond@linux.microsoft.com> wrote:
-> > > From: Stephen Carlson <stcarlso@linux.microsoft.com>
-> > > 
-> > > This implementation of the security uclass driver allows existing TPM2
-> > > devices declared in the device tree to be referenced for storing the OS
-> > > anti-rollback counter, using the TPM2 non-volatile storage API.
-> > > 
-> > > Signed-off-by: Stephen Carlson <stcarlso@linux.microsoft.com>
-> > > ---
-> > >   MAINTAINERS                     |   1 +
-> > >   drivers/security/Makefile       |   1 +
-> > >   drivers/security/security-tpm.c | 173 ++++++++++++++++++++++++++++++++
-> > >   include/tpm-v2.h                |   1 +
-> > >   4 files changed, 176 insertions(+)
-> > >   create mode 100644 drivers/security/security-tpm.c
-> > > 
-> > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > [...]
-> > 
-> > > +
-> > > +struct security_state {
-> > > +       u32 index_arbvn;
-> > > +       struct udevice *tpm_dev;
-> > > +};
-> > > +
-> > > +static int tpm_security_init(struct udevice *tpm_dev)
-> > > +{
-> > > +       int res;
-> > > +
-> > > +       /* Initialize TPM but allow reuse of existing session */
-> > > +       res = tpm_open(tpm_dev);
-> > > +       if (res == -EBUSY) {
-> > > +               log(UCLASS_SECURITY, LOGL_DEBUG,
-> > > +                   "Existing TPM session found, reusing\n");
-> > > +       } else {
-> > > +               if (res) {
-> > > +                       log(UCLASS_SECURITY, LOGL_ERR,
-> > > +                           "TPM initialization failed (ret=%d)\n", res);
-> > > +                       return res;
-> > > +               }
-> > > +
-> > > +               res = tpm2_startup(tpm_dev, TPM2_SU_CLEAR);
-> > > +               if (res) {
-> > > +                       log(UCLASS_SECURITY, LOGL_ERR,
-> > > +                           "TPM startup failed (ret=%d)\n", res);
-> > > +                       return res;
-> > > +               }
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > There's nothing security related in that wrapper.  It looks like a
-> > typical tpm startup sequence.  Any reason you can't use
-> > tpm_auto_start()?
-> 
-> Good suggestion, I'll make this change.
-> 
-> > 
-> > > +
-> > > +static int tpm_security_arbvn_get(struct udevice *dev, u64 *arbvn)
-> > > +{
-> > > +       struct security_state *priv = dev_get_priv(dev);
-> > > +       int ret;
-> > > +
-> > > +       if (!arbvn)
-> > > +               return -EINVAL;
-> > > +
-> > > +       ret = tpm2_nv_read_value(priv->tpm_dev, priv->index_arbvn, arbvn,
-> > > +                                sizeof(u64));
-> > > +       if (ret == TPM2_RC_NV_UNINITIALIZED) {
-> > > +               /* Expected if no OS image has been loaded before */
-> > > +               log(UCLASS_SECURITY, LOGL_INFO,
-> > > +                   "No previous OS image, defaulting ARBVN to 0\n");
-> > > +               *arbvn = 0ULL;
-> > Why aren't we returning an error here?  Looks like the code following
-> > this is trying to reason with the validity of arbnv
-> On the first boot (before ARBVN has been set in NV memory), it's expected
-> that the NV index hasn't been initialized/written yet.  In this case,
-> TPM2_RC_NV_UNINITIALIZED is expected.  A value of 0 is returned to ensure
-> that the anti-rollback check always passes (which it should since there's
-> nothing to check on the first boot).
+Hi Heinrich,
 
-Ok then I think it's better to add an 'init' function which will talk to
-the TPM and try to read the value.  If you get an error or
-TPM2_RC_NV_UNINITIALIZED(), we can then create the NV storage and
-initialize it.  Note here that blindly returning 0 isn't correct either.  
-When you define a TPM NV counter index it will hold any stored value (and
-reuse it) even if you delete it and re-add it. 
-I think doing it like this will make _get() a bit simpler, since you just
-have to talk to the TPM and return whatever you read. 
+On Wed, 16 Aug 2023 at 04:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 8/16/23 09:41, Heinrich Schuchardt wrote:
+> > On 8/16/23 03:22, Simon Glass wrote:
+> >> Hi Heinrich,
+> >>
+> >> I thought I would try booting Windows on U-Boot but it does not get
+> >> very far. Have you tried that? I note a ew odd things below. Is there
+> >> a validation suite for it?
+> >>
+> >> https://github.com/sjg20/u-boot/tree/efi2
 
-> > 
-> > > +       } else if (ret) {
-> > > +               log(UCLASS_SECURITY, LOGL_ERR,
-> > > +                   "Unable to read ARBVN from TPM (ret=%d)\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static int tpm_security_arbvn_set(struct udevice *dev, u64 arbvn)
-> > > +{
-> > > +       struct security_state *priv = dev_get_priv(dev);
-> > > +       struct udevice *tpm_dev = priv->tpm_dev;
-> > > +       u64 old_arbvn;
-> > > +       int ret;
-> > > +
-> > > +       ret = tpm_security_arbvn_get(dev, &old_arbvn);
-> > > +       if (ret)
-> > > +               return ret;
-> > > +
-> > > +       if (arbvn < old_arbvn)
-> > > +               return -EPERM;
-> > > +
-> > What happens if they are equal ?
-> > 
-> If they are equal, then we are booting the same OS that was previously
-> booted (we are not moving the OS version forward or back).
-> 
-> Note the actual "anti-rollback" check is in fit_image_verify_arbvn().  If it
-> make things more clear, we could remove the value checks here completely and
-> just write the value.
-> 
+Thanks for all the helpful info. I know very little about this so am
+happy that you do!
 
-Ok, I think adding another statment would be a bit easier to read then.
-Right after reading the stored TPM value, just return 0 if arbvn == old_arbvn
+> >
+> > qemu-x86_64_defconfig does not build with your tree (commit
+> > d4caae6bce9082d0a770047e8f3d3a68b7084740, sjg/efi2):
+> >
+> >    BINMAN  .binman_stamp
+> > Wrote map file './rom.map' to show errors
+> > binman: Node '/binman/rom/u-boot-spl-with-ucode-ptr': Offset 0xfffd8000
+> > (4294803456) overlaps with previous entry '/binman/rom/u-boot' ending at
+> > 0xfffd84e8 (4294804712)
+> > make: *** [Makefile:1115: .binman_stamp] Error 1
+> >
+> > ImagePos    Offset      Size  Name
+> > <none>    00000000  00100000  rom
+> > <none>     fff00000  000d84e8  u-boot
+> > <none>      00000000  000d79a0  u-boot-nodtb
+> > <none>      000d79a0  00000b48  u-boot-dtb
+> > <none>     fffd8000  00015f60  u-boot-spl-with-ucode-ptr
+> > <none>     fffd84e8  00000b48  u-boot-dtb
+> > <none>     fffd9030  000004c6  fdtmap
+> > <none>     fffd94f6  00000000  private-files
+> > <none>     fffedf60  00000b48  u-boot-dtb-with-ucode2
+> > <none>     fffff800  00000070  x86-start16-spl
+> > <none>     fffffff0  00000005  x86-reset16-spl
+> > <none>     fffffff8  00000008  image-header
 
-> > > +       if (arbvn > old_arbvn) {
-> > You just check for this and exited
-> > 
-> > > +               ret = tpm2_nv_write_value(tpm_dev, priv->index_arbvn, &arbvn,
-> > > +                                         sizeof(u64));
-> > > +               if (ret) {
-> > > +                       log(UCLASS_SECURITY, LOGL_ERR,
-> > > +                           "Unable to write ARBVN to TPM (ret=%d)\n", ret);
-> > > +                       return ret;
-> > > +               }
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static const struct dm_security_ops tpm_security_ops = {
-> > > +       .arbvn_get              = tpm_security_arbvn_get,
-> > > +       .arbvn_set              = tpm_security_arbvn_set,
-> > > +};
-> > > +
-> > > +static int tpm_security_probe(struct udevice *dev)
-> > > +{
-> > > +       struct security_state *priv = dev_get_priv(dev);
-> > > +       struct udevice *tpm_dev = priv->tpm_dev;
-> > > +       u32 index = priv->index_arbvn;
-> > > +       int ret;
-> > > +
-> > > +       if (!tpm_dev) {
-> > > +               log(UCLASS_SECURITY, LOGL_ERR,
-> > > +                   "TPM device not defined in DTS\n");
-> > > +               return -EINVAL;
-> > > +       }
-> > > +
-> > > +       ret = tpm_security_init(tpm_dev);
-> > > +       if (ret)
-> > > +               return ret;
-> > > +
-> > > +       ret = tpm2_nv_define_space(tpm_dev, index, sizeof(u64), TPMA_NV_PPREAD |
-> > > +                                  TPMA_NV_PPWRITE | TPMA_NV_PLATFORMCREATE,
-> > > +                                  NULL, 0);
-> > How secure is that ? Is it protected by a locality? We dont seem to be
-> > using an auth value when creating the index
-> On our platform, we're using a different security device driver to provide
-> our secure storage (we aren't using this TPM backed driver).  I'm not an
-> expert on authorization for NV indexes, but I'd welcome feedback on how we
-> could make this driver more secure (and publicly available) for others.
+I am building with
 
-IIRC we can use a 'NV Counter Index' for the counter.  That's only allowed
-to increment and even if you delete it and reinitialize it, it will retain
-it's (lost) value)
+> >
+> >>
+> >> qemu-system-x86_64  -smp 4 -m 8G -serial mon:stdio -bios
+> >> /tmp/b/qemu-x86_64/u-boot.rom -drive
+> >> id=fisk,file=root.img,if=virtio,driver=raw -drive
+> >> id=disk,if=virtio,file=/vid/software/win/Win11_22H2_English_x64v2.iso
+> >
+> > This does not work with EDK II either.
+> >
 
-> > 
-> > > +       /* NV_DEFINED is an expected error if ARBVN already initialized */
-> > > +       if (ret == TPM2_RC_NV_DEFINED)
-> > > +               log(UCLASS_SECURITY, LOGL_DEBUG,
-> > > +                   "ARBVN index %u already defined\n", index);
-> > I'd prefer returning 0 here. The rewrite the code below as
-> >   if (ret)
-> >     log().....
-> > 
-> > return ret;
-> > 
-> > > +       else if (ret) {
-> > > +               log(UCLASS_SECURITY, LOGL_ERR,
-> > > +                   "Unable to create ARBVN NV index (ret=%d)\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static int tpm_security_remove(struct udevice *dev)
-> > > +{
-> > > +       struct security_state *priv = dev_get_priv(dev);
-> > > +
-> > > +       return tpm_close(priv->tpm_dev);
-> > > +}
-> > > +
-> > > +static int tpm_security_ofdata_to_platdata(struct udevice *dev)
-> > > +{
-> > > +       const u32 phandle = (u32)dev_read_u32_default(dev, "tpm", 0);
-> > > +       struct security_state *priv = dev_get_priv(dev);
-> > > +       struct udevice *tpm_dev;
-> > > +       int ret;
-> > > +
-> > > +       ret = uclass_get_device_by_phandle_id(UCLASS_TPM, phandle, &tpm_dev);
-> > > +       if (ret) {
-> > > +               log(UCLASS_SECURITY, LOGL_ERR, "TPM node in DTS is invalid\n");
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       priv->index_arbvn = (u32)dev_read_u32_default(dev, "arbvn-nv-index", 0);
-> > > +       priv->tpm_dev = tpm_dev;
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static const struct udevice_id tpm_security_ids[] = {
-> > > +       { .compatible = "tpm,security" },
-> > > +       { }
-> > > +};
-> > > +
-> > > +U_BOOT_DRIVER(security_tpm) = {
-> > > +       .name   = "security_tpm",
-> > > +       .id     = UCLASS_SECURITY,
-> > > +       .priv_auto = sizeof(struct security_state),
-> > > +       .of_match = tpm_security_ids,
-> > > +       .of_to_plat = tpm_security_ofdata_to_platdata,
-> > > +       .probe  = tpm_security_probe,
-> > > +       .remove = tpm_security_remove,
-> > > +       .ops    = &tpm_security_ops,
-> > > +};
-> > > diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-> > > index 2b6980e441..49bf0f0ba4 100644
-> > > --- a/include/tpm-v2.h
-> > > +++ b/include/tpm-v2.h
-> > > @@ -321,6 +321,7 @@ enum tpm2_return_codes {
-> > >          TPM2_RC_COMMAND_CODE    = TPM2_RC_VER1 + 0x0043,
-> > >          TPM2_RC_AUTHSIZE        = TPM2_RC_VER1 + 0x0044,
-> > >          TPM2_RC_AUTH_CONTEXT    = TPM2_RC_VER1 + 0x0045,
-> > > +       TPM2_RC_NV_UNINITIALIZED        = TPM2_RC_VER1 + 0x04a,
-> > >          TPM2_RC_NV_DEFINED      = TPM2_RC_VER1 + 0x004c,
-> > >          TPM2_RC_NEEDS_TEST      = TPM2_RC_VER1 + 0x0053,
-> > >          TPM2_RC_WARN            = 0x0900,
-> > > --
-> > > 2.40.0
-> > > 
-> > Thanks
-> > /Ilias
-> > 
-> > 
+OK
 
-Thanks
-/Ilias
+> > I was able to start the installer with:
+> >
+> > qemu-system-x86_64 \
+> > -M q35,smm=on,accel=kvm -smp 8 -m 4G -gdb tcp::1234 \
+> > -serial mon:stdio \
+> > -vga std \
+> > -device qemu-xhci \
+> > -device usb-kbd \
+> > -device usb-mouse \
+> > -global driver=cfi.pflash01,property=secure,value=on \
+> > -drive
+> > if=pflash,format=raw,unit=0,file=OVMF_CODE_4M.secboot.fd,readonly=on \
+> > -drive if=pflash,format=raw,unit=1,file=OVMF_VARS.ms.fd \
+> > -drive file=root.img,if=virtio,format=raw \
+> > -drive file=Win11_22H2_EnglishInternational_x64v2.iso,media=cdrom
+> >
+
+For me I get an error:
+
+$ dpkg -l ovmf
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name           Version                  Architecture Description
++++-==============-========================-============-=============================================
+ii  ovmf           2022.02-3ubuntu0.22.04.1 all          UEFI firmware
+for 64-bit x86 virtual machines
+
+$ qemu-system-x86_64 -M q35,smm=on,accel=kvm -smp 8 -m 4G -gdb
+tcp::1234 -serial mon:stdio -vga std -device qemu-xhci -device usb-kbd
+-device usb-mouse -global driver=cfi.pflash01,property=secure,value=on
+-drive if=pflash,format=raw,unit=0,file=/usr/share/OVMF/OVMF_CODE_4M.secboot.fd,readonly=on
+-drive if=pflash,format=raw,unit=1,file=//vid/software/devel/u-boot/efi/OVMF_VARS.ms.fd
+-drive file=root.img,if=virtio,format=raw -drive
+file=/vid/software/win/Win11_22H2_English_x64v2.iso,media=cdrom
+qemu-system-x86_64: Gdk:
+gdk_wayland_window_set_dbus_properties_libgtk_only: assertion
+'GDK_IS_WAYLAND_WINDOW (window)' failed
+!!!! X64 Exception Type - 06(#UD - Invalid Opcode)  CPU Apic ID - 00000000 !!!!
+RIP  - 0000000000030000, CS  - 0000000000000038, RFLAGS - 0000000000010246
+RAX  - 0000000000000000, RCX - 0000000000000000, RDX - 0000000000000000
+RBX  - FFFFFFFFFFFFFFFF, RSP - 000000007EEC1E18, RBP - 0000000000000001
+RSI  - 000000007E8EC818, RDI - 000000007EED9830
+R8   - 0000000000000000, R9  - 0000000003041001, R10 - 000000000000003A
+R11  - 000000007E8E9680, R12 - 000000007E8E9018, R13 - 000000007EEC1EA0
+R14  - 000000007EED72F0, R15 - 0000000000000000
+DS   - 0000000000000030, ES  - 0000000000000030, FS  - 0000000000000030
+GS   - 0000000000000030, SS  - 0000000000000030
+CR0  - 0000000080010033, CR2 - 0000000000000000, CR3 - 000000007EC01000
+CR4  - 0000000000000668, CR8 - 0000000000000000
+DR0  - 0000000000000000, DR1 - 0000000000000000, DR2 - 0000000000000000
+DR3  - 0000000000000000, DR6 - 00000000FFFF0FF0, DR7 - 0000000000000400
+GDTR - 000000007E9E2000 0000000000000047, LDTR - 0000000000000000
+IDTR - 000000007E4E6018 0000000000000FFF,   TR - 0000000000000000
+FXSAVE_STATE - 000000007EEC1A70
+!!!! Can't find image information. !!!!
+
+
+> > The Windows installer does not work without SMM but returns to the EFI
+> > shell. This might be what you have seen.
+
+OK.
+
+> >
+> > U-Boot's qemu-x86_64_defconfig does not start with
+> > -M q35,smm=on,accel=kvm
+> >
+> > Instead of using KVM you could specify -cpu Skylake-Client-v4 which is
+> > supported by the Windows 11. But of course this is very slow.
+> >
+> > Please, retry with:
+> > qemu-system-x86_64 \
+> > -machine pc-i440fx-2.5,smm=on -cpu Skylake-Client-v4 \
+> > -vga std \
+
+That does the same thing for me with qemu-x86_64 (eventually reboots).
+I tried using Q35 too:
+
+qemu-system-x86_64 -M smm=on  -cpu Skylake-Client-v4 -vga std  -m 4G
+-serial mon:stdio -bios /tmp/b/qemu-x86_64/u-boot.rom -drive
+id=fisk,file=root.img,if=virtio,driver=raw  -drive
+id=disk,file=/vid/software/win/Win11_22H2_English_x64v2.iso,if=none
+   -device ich9-ahci,id=ahci       -device
+ide-hd,drive=disk,bus=ahci.0
+
+Trying the same idea with the OVMF stuff hangs with nothing on the display:
+
+qemu-system-x86_64 -M pc-i440fx-2.5,smm=on -cpu Skylake-Client-v4 -vga
+std  -m 4G -gdb tcp::1234 -serial mon:stdio -vga std -device qemu-xhci
+-device usb-kbd -device usb-mouse -global
+driver=cfi.pflash01,property=secure,value=on -drive
+if=pflash,format=raw,unit=0,file=/usr/share/OVMF/OVMF_CODE_4M.secboot.fd,readonly=on
+-drive if=pflash,format=raw,unit=1,file=//vid/software/devel/u-boot/efi/OVMF_VARS.ms.fd
+-drive file=root.img,if=virtio,format=raw -drive
+file=/vid/software/win/Win11_22H2_English_x64v2.iso,media=cdrom
+
+> >
+> > Can we get support for -M q35 into U-Boot? Cf.
+> > https://wiki.qemu.org/Features/Q35. This would allow us to actually
+> > compare EDK II and U-Boot when running with the same settings.
+
+Yes but you need to change CONFIG_DEVICE_TREE to "qemu-x86_q35"
+
+> >
+> > Why wouldn't U-Boot support kvm on an AMD Ryzen 5 2500U?
+>
+> With KVM I either get:
+> "int_exception_handler() Exception 13 while executing option rom"
+> or the code hangs in cpu_call64.
+
+Yes, that is a bug I mentioned to Bin as well. It happens when jumping
+into 64-bit mode. However, it works fine with booting from coreboot,
+so it is probably something missing in the CPU init. I have not dug
+into that yet.
+
+I pushed a new tree to my github/efi2 with the Q35 changes so that you
+can try that.
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >>
+> >> Scanning bootdev 'virtio-blk#0.bootdev':
+> >> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> >> efi_locate_device_path(protocol, &dp, &old_handle)
+> >> efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+> >> Path, 00000000becf6848, 00000000becf6840)
+> >> efi_locate_device_path()     EFI: Call:
+> >> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> >> &handles)
+> >> efi_locate_handle_buffer()       EFI: Entry
+> >> efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+> >> 00000000becf67b8, 00000000becf67b0)
+> >> efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+> >> efi_locate_device_path()     EFI: 0 returned by
+> >> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> >> &handles)
+> >> efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
+> >> efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
+> >>
+> >>
+> >> ^ This seems unhappy because it is a virtio device?
+> >
+> > Before a device path protocol is installed we check that the same device
+> > path has not been installed before (lib/efi_loader/efi_boottime.c:2685).
+> >
+> > EFI_NOT_FOUND signals that we are good to continue.
+
+OK, thanks.
+
+Regards,
+Simon
