@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E69C001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B81C001B0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:38:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4561980DF7;
-	Wed, 16 Aug 2023 15:36:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A84AC869F3;
+	Wed, 16 Aug 2023 15:38:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DrhGHcIJ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZuckxXRF";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7A61m4bH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3CEB869D8; Wed, 16 Aug 2023 15:36:23 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 51AD4869F3; Wed, 16 Aug 2023 15:38:10 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96BD080842
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:36:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B65C880842
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RQq0h2TWHz9sSZ;
- Wed, 16 Aug 2023 15:36:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692192980;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QnkXk0YqpNldok9WLZq3ZjJVV0vPDSrneV80B5SQTQk=;
- b=DrhGHcIJt4et3qxn1K0A8RefRC9PjkcH2S5DUL02cFdAh2BN8N0P2AwqQlsO3m6myhfoo0
- TDWaj2yJNFKN732Tc8uQEOq6KEeYRaC9kf7BtGbfpsbgvuEX1LlNe8jRJJzncU0TKXywUq
- 92nw3qdYytA5ljkRvkcVQR9yhMeoXxc+PAyqOxLqzC8f4oiZrlV0FguwX218gVGxE9iRPo
- KYLfnHO/2kmIe1p74MY+VO9cynnorUncq3PAdlU7Np4OZ88/ToJeO3iFnXP9u71DBxqHb3
- +ijSwFiyQG2lTO+oI7qKgaZb0L3GFouhLG1m+tYXBEHi+7Sa2Ca7ucRk0NHHBQ==
-Message-ID: <c73ca9bd-26ec-0cbb-064e-f8a91c6b43ec@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692192977;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QnkXk0YqpNldok9WLZq3ZjJVV0vPDSrneV80B5SQTQk=;
- b=ZuckxXRFtRKhiKOsF64IKW2HmtisYje98hvV7SfJkzQ9HZaGR8DgLYdJqMJsQApo1/5xUe
- 1YfIMk6A4gkaI6SD7uv9BCgvzvFCvyWZnL36UwhPXH3Xkw3UnxvpROGmT6ztkQdJUhF9wI
- 3OJh+05kXwtk0qqPwVl7nwCn7id5vzyjpIjoXBfwsHU85AVHzQrDLBMzRo9ayC6br/aTJx
- 3pSa/cRUT+7Bssbj7zijUOYpFLAn664qBHTJrrc/HEFgI5NDtbFPfGfo1DFInhabPGhFiC
- sZouUQT36y93dJkjvHr/MhktZP0PRtt7PkB2Oa+rLktjiV0O93bxudPAyIOfEA==
-Date: Wed, 16 Aug 2023 15:36:16 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6592a39e51=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 37G9C27w021251; Wed, 16 Aug 2023 15:37:58 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=TlApiDzJSO96D9EpWK+isRs2Rkp9YvvLB7X45nv0AUo=; b=7A
+ 61m4bHWj5+i6KKLvJZ53t2Jh2z04gVhu1L7a4YFk7+S50Zu9nxUqSsYtD4dr2iZH
+ yVDpQB8Pc5ijm4KTP+lci0XOosIx91be6X6EzVyyWA7a+iOQCLIDDuOWPhi1TdTN
+ MBVqW6GjUsHhgyhWLZRKJVTeV7d1JwmQQVJqqMQELP0+o0a9PsHpA2Uy7Szcu9np
+ nDVZPQEXkzP3yVB5w31VFFJIgX2K8Wuht1dwLtCwyGRFCFIme+jkQUpui5Zn9HdI
+ j5oTMOb9GqMKsgaXreVOfY6otmxJRdeHABKZEqnDO54euDpsGObeNRHdYBo/POQq
+ umpD23MC2f5IT5TbOpJQ==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sgum7hgcx-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 16 Aug 2023 15:37:58 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 123A310005D;
+ Wed, 16 Aug 2023 15:37:57 +0200 (CEST)
+Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0AC58245510;
+ Wed, 16 Aug 2023 15:37:57 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by EQNDAG1NODE4.st.com
+ (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 16 Aug
+ 2023 15:37:56 +0200
+Message-ID: <f0381a66-43a3-6656-c6a5-37101438c0ab@foss.st.com>
+Date: Wed, 16 Aug 2023 15:37:55 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/6] ufs: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v2] ARM: dts: stm32: Switch DWMAC RMII clock to MCO2 on
+ DHCOM
 Content-Language: en-US
-To: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-References: <20230813235231.591454-1-marek.vasut+renesas@mailbox.org>
- <0dc7875e-ecdb-27e3-4234-1e09a9e27a20@linaro.org>
- <460cb258-12fc-380e-1b14-65f41763764d@mailbox.org>
- <CAH=2NtxvFMPtyTQtguJwSok9--Ta+CbGQ0aHctxX_+u7JWHcNA@mail.gmail.com>
- <5b6fbc58-0d0a-becf-f713-4424efd4a1a0@mailbox.org>
- <CAH=2NtwE6zdqjrOHmPFiY6760_hhsFgLsvRfSoO-41V2tAE9mA@mail.gmail.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAH=2NtwE6zdqjrOHmPFiY6760_hhsFgLsvRfSoO-41V2tAE9mA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230726235807.497657-1-marex@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230726235807.497657-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 7775890c4152fef2720
-X-MBO-RS-META: njiysd4cmx7qsbenhk87omuwwwk68mco
-X-Rspamd-Queue-Id: 4RQq0h2TWHz9sSZ
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To EQNDAG1NODE4.st.com
+ (10.75.129.133)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-16_13,2023-08-15_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,124 +91,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/16/23 00:05, Bhupesh Sharma wrote:
-> On Wed, 16 Aug 2023 at 03:10, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 8/15/23 23:08, Bhupesh Sharma wrote:
->>> On Wed, 16 Aug 2023 at 02:31, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>>>
->>>> On 8/15/23 22:04, Bhupesh Sharma wrote:
->>>>> Hi Marek,
->>>>>
->>>>> On 8/14/23 5:22 AM, Marek Vasut wrote:
->>>>>> Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS for host controllers which do not
->>>>>> support 64-bit addressing.
->>>>>>
->>>>>> Ported from Linux kernel commit
->>>>>> 6554400d6f66 ("scsi: ufs: core: Add UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS")
->>>>>> with ufs_scsi_buffer_aligned() based on U-Boot generic bounce buffer.
->>>>>>
->>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>>> ---
->>>>>> Cc: Faiz Abbas <faiz_abbas@ti.com>
->>>>>> ---
->>>>>>     drivers/ufs/ufs.c | 26 ++++++++++++++++++++++++++
->>>>>>     drivers/ufs/ufs.h |  6 ++++++
->>>>>>     2 files changed, 32 insertions(+)
->>>>>>
->>>>>> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
->>>>>> index 3bf1a95e7f2..da0550d98c6 100644
->>>>>> --- a/drivers/ufs/ufs.c
->>>>>> +++ b/drivers/ufs/ufs.c
->>>>>> @@ -8,6 +8,7 @@
->>>>>>      * Copyright (C) 2019 Texas Instruments Incorporated -
->>>>>> http://www.ti.com
->>>>>>      */
->>>>>> +#include <bouncebuf.h>
->>>>>>     #include <charset.h>
->>>>>>     #include <common.h>
->>>>>>     #include <dm.h>
->>>>>> @@ -1889,6 +1890,8 @@ int ufshcd_probe(struct udevice *ufs_dev, struct
->>>>>> ufs_hba_ops *hba_ops)
->>>>>>         /* Read capabilties registers */
->>>>>>         hba->capabilities = ufshcd_readl(hba, REG_CONTROLLER_CAPABILITIES);
->>>>>> +    if (hba->quirks & UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS)
->>>>>> +        hba->capabilities &= ~MASK_64_ADDRESSING_SUPPORT;
->>>>>>         /* Get UFS version supported by the controller */
->>>>>>         hba->version = ufshcd_get_ufs_version(hba);
->>>>>> @@ -1942,8 +1945,31 @@ int ufs_scsi_bind(struct udevice *ufs_dev,
->>>>>> struct udevice **scsi_devp)
->>>>>>         return ret;
->>>>>>     }
->>>>>> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
->>>>>> +static int ufs_scsi_buffer_aligned(struct udevice *scsi_dev, struct
->>>>>> bounce_buffer *state)
->>>>>> +{
->>>>>> +#ifdef CONFIG_PHYS_64BIT
->>>>>> +    struct ufs_hba *hba = dev_get_uclass_priv(scsi_dev->parent);
->>>>>> +    uintptr_t ubuf = (uintptr_t)state->user_buffer;
->>>>>> +    size_t len = state->len_aligned;
->>>>>> +
->>>>>> +    /* Check if below 32bit boundary */
->>>>>> +    if ((hba->quirks & UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS) &&
->>>>>> +        ((ubuf >> 32) || (ubuf + len) >> 32)) {
->>>>>> +        dev_dbg(scsi_dev, "Buffer above 32bit boundary %lx-%lx\n",
->>>>>> +            ubuf, ubuf + len);
->>>>>> +        return 0;
->>>>>> +    }
->>>>>> +#endif
->>>>>> +    return 1;
->>>>>> +}
->>>>>> +#endif    /* CONFIG_BOUNCE_BUFFER */
->>>>>> +
->>>>>>     static struct scsi_ops ufs_ops = {
->>>>>>         .exec        = ufs_scsi_exec,
->>>>>> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
->>>>>> +    .buffer_aligned    = ufs_scsi_buffer_aligned,
->>>>>> +#endif    /* CONFIG_BOUNCE_BUFFER */
->>>>>>     };
->>>>>>     int ufs_probe_dev(int index)
->>>>>> diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
->>>>>> index 8a38832b05f..070db0dce68 100644
->>>>>> --- a/drivers/ufs/ufs.h
->>>>>> +++ b/drivers/ufs/ufs.h
->>>>>> @@ -719,6 +719,12 @@ struct ufs_hba {
->>>>>>      */
->>>>>>     #define UFSHCD_QUIRK_BROKEN_LCC                0x1
->>>>>> +/*
->>>>>> + * This quirk needs to be enabled if the host controller has
->>>>>> + * 64-bit addressing supported capability but it doesn't work.
->>>>>> + */
->>>>>> +#define UFSHCD_QUIRK_BROKEN_64BIT_ADDRESS        0x2
->>>>>> +
->>>>>>         /* Virtual memory reference */
->>>>>>         struct utp_transfer_cmd_desc *ucdl;
->>>>>>         struct utp_transfer_req_desc *utrdl;
->>>>>
->>>>> For this and the follow-up patch, I think implementing or at least
->>>>> supporting all the quirks currently supported by the Linux UFS driver
->>>>> makes sense as newer controllers do support these quirks.
->>>>
->>>> I disagree. There is no point in implementing quirks which cannot be
->>>> tested or may not even be relevant to U-Boot. Quirks which are needed
->>>> should be added one by one.
->>
->> I assume you agree we should not add all quirks at once ?
->>
->>> But the format you use for adding new quiks in u-boot is still in sync
->>> with Linux version 3.10. Can we atleast use the newer ( 1<< 7) kind of
->>> format for consistency.
->>
->> Feel free to update quirks to BIT() macro.
->>
->> We should enumerate the quirks in order instead of starting with BIT(7)
->> however.
-> 
-> Qualcomm UFS controllers support a few quirks from the list so the
-> numbering can be taken care of in my patch.
-> 
-> But since 'include/ufs/ufs_quirks.h' in Linux already uses the (1 <<7)
-> kind of format we can use the same as it would make future backporting
-> from Linux easier.
 
-Better use BIT() macro , can you fix that in Linux ? I'll fix it in V2 here.
+
+On 7/27/23 01:58, Marek Vasut wrote:
+> The DHCOM SoM has two options for supplying ETHRX clock to the DWMAC
+> block and PHY. Either (1) ETHCK_K generates 50 MHz clock on ETH_CLK
+> pad for the PHY and the same 50 MHz clock are fed back to ETHRX via
+> internal eth_clk_fb clock connection OR (2) ETH_CLK is not used at
+> all, MCO2 generates 50 MHz clock on MCO2 output pad for the PHY and
+> the same MCO2 clock are fed back into ETHRX via ETH_RX_CLK input pad
+> using external pad-to-pad connection.
+> 
+> Option (1) has two downsides. ETHCK_K is supplied directly from either
+> PLL3_Q or PLL4_P, hence the PLL output is limited to exactly 50 MHz and
+> since the same PLL output is also used to supply SDMMC blocks, the
+> performance of SD and eMMC access is affected. The second downside is
+> that using this option, the EMI of the SoM is higher.
+> 
+> Option (2) solves both of those problems, so implement it here. In this
+> case, the PLL4_P is no longer limited and can be operated faster, at
+> 100 MHz, which improves SDMMC performance (read performance is improved
+> from ~41 MiB/s to ~57 MiB/s with dd if=/dev/mmcblk1 of=/dev/null bs=64M
+> count=1). The EMI interference also decreases.
+> 
+> Ported from Linux kernel commit
+> 73ab99aad50cd ("ARM: dts: stm32: Switch DWMAC RMII clock to MCO2 on DHCOM")
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: Add U-Boot specifics to cater also for clock and clock-names in stm32mp151.dtsi
+> ---
+>  arch/arm/dts/stm32mp15xx-dhcom-som.dtsi    | 22 ++++++++++++++++++----
+>  arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi | 14 ++++++++++++++
+>  2 files changed, 32 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-som.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-som.dtsi
+> index 83e2c87713f..238a611192e 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-som.dtsi
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-som.dtsi
+> @@ -118,13 +118,12 @@
+>  
+>  &ethernet0 {
+>  	status = "okay";
+> -	pinctrl-0 = <&ethernet0_rmii_pins_a>;
+> -	pinctrl-1 = <&ethernet0_rmii_sleep_pins_a>;
+> +	pinctrl-0 = <&ethernet0_rmii_pins_c &mco2_pins_a>;
+> +	pinctrl-1 = <&ethernet0_rmii_sleep_pins_c &mco2_sleep_pins_a>;
+>  	pinctrl-names = "default", "sleep";
+>  	phy-mode = "rmii";
+>  	max-speed = <100>;
+>  	phy-handle = <&phy0>;
+> -	st,eth-ref-clk-sel;
+>  
+>  	mdio0 {
+>  		#address-cells = <1>;
+> @@ -136,7 +135,7 @@
+>  			/* LAN8710Ai */
+>  			compatible = "ethernet-phy-id0007.c0f0",
+>  				     "ethernet-phy-ieee802.3-c22";
+> -			clocks = <&rcc ETHCK_K>;
+> +			clocks = <&rcc CK_MCO2>;
+>  			reset-gpios = <&gpioh 3 GPIO_ACTIVE_LOW>;
+>  			reset-assert-us = <500>;
+>  			reset-deassert-us = <500>;
+> @@ -446,6 +445,21 @@
+>  	};
+>  };
+>  
+> +&rcc {
+> +	/* Connect MCO2 output to ETH_RX_CLK input via pad-pad connection */
+> +	clocks = <&rcc CK_MCO2>;
+> +	clock-names = "ETH_RX_CLK/ETH_REF_CLK";
+> +
+> +	/*
+> +	 * Set PLL4P output to 100 MHz to supply SDMMC with faster clock,
+> +	 * set MCO2 output to 50 MHz to supply ETHRX clock with PLL4P/2,
+> +	 * so that MCO2 behaves as a divider for the ETHRX clock here.
+> +	 */
+> +	assigned-clocks = <&rcc CK_MCO2>, <&rcc PLL4_P>;
+> +	assigned-clock-parents = <&rcc PLL4_P>;
+> +	assigned-clock-rates = <50000000>, <100000000>;
+> +};
+> +
+>  &rng1 {
+>  	status = "okay";
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> index bc0730cf2bd..ff5e9034951 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> @@ -126,6 +126,20 @@
+>  };
+>  
+>  &rcc {
+> +	/*
+> +	 * Reinstate clock names from stm32mp151.dtsi, the MCO2 trick
+> +	 * used in stm32mp15xx-dhcom-som.dtsi is not supported by the
+> +	 * U-Boot clock framework.
+> +	 */
+> +	clock-names = "hse", "hsi", "csi", "lse", "lsi";
+> +	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>,
+> +		 <&clk_lse>, <&clk_lsi>;
+> +
+> +	/* The MCO2 is already configured correctly, remove those. */
+> +	/delete-property/ assigned-clocks;
+> +	/delete-property/ assigned-clock-parents;
+> +	/delete-property/ assigned-clock-rates;
+> +
+>  	st,clksrc = <
+>  		CLK_MPU_PLL1P
+>  		CLK_AXI_PLL2P
+
+Applied on stm32-master
+
+Thanks
+Patrice
