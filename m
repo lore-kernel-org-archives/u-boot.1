@@ -4,78 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ECC4C001E0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 11:19:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886C9C04E69
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 11:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 014488679B;
-	Wed, 16 Aug 2023 13:19:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C7BA68585E;
+	Wed, 16 Aug 2023 13:44:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ge7l+uZq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Y6V+AM9K";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rT7b1sST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4A4D869B8; Wed, 16 Aug 2023 13:19:01 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BC901862B6; Wed, 16 Aug 2023 13:44:51 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5759807C9
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 13:18:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D533857BF
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 13:44:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RQlyB3xSKz9sjc;
- Wed, 16 Aug 2023 13:18:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692184738;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8gJWdKwsRV1n37hw9en0qb+6le4pAnzWBeq1TdmPo/8=;
- b=Ge7l+uZq6m/7uxzbYtuNDDaqC8QIgwiHbjicLQ23gWILZ80VXLohCmJTab/oW3C7Er4JUh
- icAQrL3/gMsu6cLJKnHTRKWaos/H4k+wwxaJ8t1gVWRp5Gb8wu+P3IOhxxhYZzUXLJVWZH
- VrDyoWp37CPAIgh1tIFV0H2dgv1ZWVsm0ZXyu7oYam0YSUiaXZpQuB/xxysZtS7fil/SE8
- AgKHgi8L17WdqsmIQ/JkqZuoHCTjY38uywaMjqbN8pbMqzrDz16MvGDcS2cgvq4mUMleA5
- cQXoG8/5sUg6k7vgRqEiELqy5QujBtw9K68yVCh4Sk18KrKQr3APJ4F+k9ixVg==
-Message-ID: <2a74558f-1cf5-2333-a585-8871ea163e68@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692184735;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8gJWdKwsRV1n37hw9en0qb+6le4pAnzWBeq1TdmPo/8=;
- b=Y6V+AM9KvQCPMXWg6GPiSgHxdmQwkJYAkXvD3v+CB7U7B4WrdNV4bqUQs8+j10hgiiyWU5
- 8FQITw0j/XrmRycK4JTBvG+QXMsN80ofG3Ez3UFzve2AfeyrTLj1Osddg8aMUVW4jpYAHm
- iuXz6/M/zybD0b6vUIHi1J3PzivoAOUZ4Q5C4UsG4iAxiktMZKVeiGt1f9dFhpRJ6k4Zcn
- FHxUBlbngdNh4j69Uex08YflAYirYbB/QA+vVezdafYzD1g4kHl9svbA2F2UQmvrWQHmDO
- 1zQ3mCZzwDhJR7XL2vgc2SvvsWNfW6QbF7+NuyWwzdCBToGek7WKSZHynfMd9A==
-Date: Wed, 16 Aug 2023 13:18:54 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37GBijrF083610;
+ Wed, 16 Aug 2023 06:44:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692186285;
+ bh=4lRtzUUrw2SpPmVBMJIcSslpYkNmjaa6RwWOp9Gq4fg=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=rT7b1sSTf9UhJgDkrRa1o3ntNdsXm8ECVO/JNn+H1y6WQssiSNx2dZ/0cgBIdCszF
+ dMFH1dwscVJ42Bta0Ej1pZRqEQcoOBnf1wIwQ5A2X4JNqma5usayD7U0KmXWyp+5Zg
+ 7AYZLX18SVGdTHq1p7zVsFj98X7FN9wOy+ZATbNU=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37GBijmq012347
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Aug 2023 06:44:45 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Aug 2023 06:44:45 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Aug 2023 06:44:45 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37GBij6Z114985;
+ Wed, 16 Aug 2023 06:44:45 -0500
+Date: Wed, 16 Aug 2023 06:44:45 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
+ <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+Subject: Re: [PATCH 1/3] k3-j721s2: Sync from linux-next tag next-20230815
+Message-ID: <20230816114445.c4c7rgdp5arhmiaq@polyester>
+References: <20230816-b4-upstream-j721s2-r5-pinmux-v1-0-f4548452760a@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v1-1-f4548452760a@ti.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] nvmxip: add sandbox support
-Content-Language: en-US
-To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, sjg@chromium.org
-Cc: marek.vasut+renesas@mailbox.org, nd@arm.com, trini@konsulko.com,
- u-boot@lists.denx.de
-References: <CAPnjgZ34z865voaKeShSJpdvWcFLbN0OEWBnus4qt0W_1P4jBw@mail.gmail.com>
- <20230816110551.86930-1-abdellatif.elkhlifi@arm.com>
- <20230816110551.86930-2-abdellatif.elkhlifi@arm.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230816110551.86930-2-abdellatif.elkhlifi@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 2fcf87a07575e369ce4
-X-MBO-RS-META: w84n1ft46d66kdue8wesnsb4xmuc4rx1
-X-Rspamd-Queue-Id: 4RQlyB3xSKz9sjc
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v1-1-f4548452760a@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,153 +80,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/16/23 13:05, Abdellatif El Khlifi wrote:
-> enable the 32-bit version of sandbox
+On 14:53-20230816, Manorit Chawdhry wrote:
+> The following commit syncs the device tree from Linux tag
+> next-20230815 to U-boot and fixes the following to be compatible with
+> the future syncs -
+
+NAK - please use 6.5-rc1 as baseline to integrate. we can use v6.6-rc1
+once that occurs to clean up further.
+
+[..]
+Nice first attempt, but there is more to do: - Same comments apply for
+am68, so please take it there as well.
+
 > 
-> Initially NVMXIP came with sandbox64 support.
-> Let's enable sandbox support as well.
+> All these have been put in a single commit to not break the
+> bisectability.
 > 
-> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> 
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
-> 
-> Changelog:
-> ===============
-> 
-> v2:
-> 
-> * split into 2 commits: one for sandbox 32-bit support,
->     and one for moving PHYS_ADDR_LN* to log.h
-> 
-> v1: introduce the sandbox 32-bit support
-> 
-> arch/sandbox/dts/sandbox.dts       | 14 ++++++++++++++
+[..]
 
-Please separate DT change
+>  &wkup_i2c0 {
+>  	bootph-pre-ram;
+>  };
+> @@ -35,16 +17,17 @@
+>  	bootph-pre-ram;
+>  };
+>  
+> -&cbass_mcu_wakeup {
+> -	bootph-pre-ram;
+> -
+> -	timer1: timer@40400000 {
+> -		compatible = "ti,omap5430-timer";
+> -		reg = <0x0 0x40400000 0x0 0x80>;
+> +&mcu_timer0 {
+> +		/delete-property/ power-domains;
+> +		/delete-property/ assigned-clocks;
+> +		/delete-property/ assigned-clock-parents;
 
->   configs/sandbox_defconfig          |  4 ++--
+NAK - this should come in from R5 data.
+>  		ti,timer-alwon;
+NAK.
+>  		clock-frequency = <250000000>;
+>  		bootph-pre-ram;
+> -	};
 
-Config change too, separate patch that goes last.
+you should just have:
+&mcu_timer0 {
+	clock-frequency = <250000000>;
+	bootph-pre-ram;
+};
 
->   drivers/mtd/nvmxip/nvmxip-uclass.c |  6 +++---
->   drivers/mtd/nvmxip/nvmxip.c        | 13 +++++++++++--
->   drivers/mtd/nvmxip/nvmxip_qspi.c   |  2 +-
->   test/dm/Makefile                   |  2 +-
->   6 files changed, 32 insertions(+), 9 deletions(-)
+Introduce the required data into the power / clock data for R5.
+A72 side should just work fine with this since DM should be up and
+running by this time.
+
+> +};
+> +
+> +&cbass_mcu_wakeup {
+> +	bootph-pre-ram;
+>  
+>  	chipid@43000014 {
+>  		bootph-pre-ram;
+> @@ -56,12 +39,6 @@
+>  };
+>  
+>  &mcu_ringacc {
+> -	reg =   <0x0 0x2b800000 0x0 0x400000>,
+> -		<0x0 0x2b000000 0x0 0x400000>,
+> -		<0x0 0x28590000 0x0 0x100>,
+> -		<0x0 0x2a500000 0x0 0x40000>,
+> -		<0x0 0x28440000 0x0 0x40000>;
+> -	reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
+
+You need to retain this for v6.5-rc1 in 6.6-rc1 sync we will do this change.
+
+>  	bootph-pre-ram;
+>  };
+>  
+> @@ -129,19 +106,6 @@
+>  	bootph-pre-ram;
+>  };
+>  
+> -&mcu_cpsw {
+> -	reg = <0x0 0x46000000 0x0 0x200000>,
+> -	      <0x0 0x40f00200 0x0 0x8>;
+> -	reg-names = "cpsw_nuss", "mac_efuse";
+> -	/delete-property/ ranges;
+> -
+> -	cpsw-phy-sel@40f04040 {
+> -		compatible = "ti,am654-cpsw-phy-sel";
+> -		reg= <0x0 0x40f04040 0x0 0x4>;
+> -		reg-names = "gmii-sel";
+> -	};
+> -};
+> -
+>  &main_sdhci0 {
+>  	bootph-pre-ram;
+>  };
 
 [...]
 
-> --- a/drivers/mtd/nvmxip/nvmxip-uclass.c
-> +++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
-> @@ -9,7 +9,7 @@
->   #include <common.h>
->   #include <dm.h>
->   #include <log.h>
-> -#if CONFIG_IS_ENABLED(SANDBOX64)
-> +#if CONFIG_IS_ENABLED(SANDBOX)
->   #include <asm/test.h>
->   #endif
->   #include <linux/bitops.h>
-> @@ -39,7 +39,7 @@ static int nvmxip_post_bind(struct udevice *udev)
->   	char bdev_name[NVMXIP_BLKDEV_NAME_SZ + 1];
->   	int devnum;
->   
-> -#if CONFIG_IS_ENABLED(SANDBOX64)
-> +#if CONFIG_IS_ENABLED(SANDBOX)
->   	sandbox_set_enable_memio(true);
+> diff --git a/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts b/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
+> index c74e8e58ae81..dd1c371ba6b5 100644
+> --- a/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
+> +++ b/arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
+> @@ -5,7 +5,7 @@
+>  
+>  /dts-v1/;
+>  
+> -#include "k3-j721s2-som-p0.dtsi"
+> +#include <k3-j721s2-common-proc-board.dts>
 
-This should not be in drivers at all, this should be in tests/ , see
+Why <> instead of ""?
 
-https://source.denx.de/u-boot/custodians/u-boot-sh/-/commit/b07772226b405d6212d4faa9329d64a09708b188
+Is there a reason to go with proc-board instead of som-p0?
 
->   #endif
->   
-> @@ -62,7 +62,7 @@ static int nvmxip_post_bind(struct udevice *udev)
->   		return ret;
->   	}
->   
-> -	log_info("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
-> +	log_debug("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
+>  #include "k3-j721s2-ddr-evm-lp4-4266.dtsi"
+>  #include "k3-j721s2-ddr.dtsi"
+>  #include "k3-j721s2-binman.dtsi"
+> @@ -14,7 +14,7 @@
+>  	chosen {
+>  		firmware-loader = &fs_loader0;
+>  		stdout-path = &main_uart8;
+> -		tick-timer = &timer1;
+> +		tick-timer = &mcu_timer0;
+>  	};
+>  
+>  	aliases {
+> @@ -51,38 +51,22 @@
+>  		bootph-pre-ram;
+>  	};
+>  
+> -	clk_19_2mhz: dummy_clock_19_2mhz {
+> -		compatible = "fixed-clock";
+> -		#clock-cells = <0>;
+> -		clock-frequency = <19200000>;
+> -		bootph-pre-ram;
+> -	};
+>  };
 
-Unrelated change -> separate patch please.
+Why do you need the clk_200mhz ? we have a clock and dm functionality.
 
->   	return 0;
->   }
-> diff --git a/drivers/mtd/nvmxip/nvmxip.c b/drivers/mtd/nvmxip/nvmxip.c
-> index a359e3b482..9191e69a40 100644
-> --- a/drivers/mtd/nvmxip/nvmxip.c
-> +++ b/drivers/mtd/nvmxip/nvmxip.c
-> @@ -11,6 +11,7 @@
->   #include <log.h>
->   #include <mapmem.h>
->   #include <asm/io.h>
-> +#include <linux/bitfield.h>
->   #include <linux/bitops.h>
->   #include <linux/errno.h>
->   #include "nvmxip.h"
-> @@ -26,9 +27,17 @@
->    *
->    * Always return 0.
->    */
-> -static int nvmxip_mmio_rawread(const phys_addr_t address, u64 *value)
-> +static int nvmxip_mmio_rawread(const u64 *address, u64 *value)
->   {
-> +#if CONFIG_IS_ENABLED(PHYS_64BIT)
->   	*value = readq(address);
-> +#else
-> +	u32 h_word, l_word;
-> +
-> +	l_word = readl(address);
-> +	h_word = readl((u8 *)address + sizeof(u32));
-> +	*value = FIELD_PREP(GENMASK_ULL(63, 32), h_word) | l_word;
-> +#endif
->   	return 0;
->   }
->   
-> @@ -67,7 +76,7 @@ static ulong nvmxip_blk_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcn
->   	/* assumption: the data is virtually contiguous */
->   
->   	for (qdata_idx = 0 ; qdata_idx < qwords ; qdata_idx++)
-> -		nvmxip_mmio_rawread((phys_addr_t)(virt_blkaddr + qdata_idx), pdst++);
-> +		nvmxip_mmio_rawread(virt_blkaddr + qdata_idx, pdst++);
+Why do you need fs_loader0 anymore? there is no phandlepart property.
 
-Separate patch please, or just use this commit as part of this series:
+[...]
 
-https://source.denx.de/u-boot/custodians/u-boot-sh/-/commit/85a662e98c44921a0f5652fa4b170625424ef9a9
+did you check for overlaps between u-boot.dtsi and r5.dts?
+&sms for example has duplicate bootph-pre-ram property.
 
->   	log_debug("[%s]:     src[0]: 0x%llx , dst[0]: 0x%llx , src[-1]: 0x%llx , dst[-1]: 0x%llx\n",
->   		  dev->name,
-> diff --git a/drivers/mtd/nvmxip/nvmxip_qspi.c b/drivers/mtd/nvmxip/nvmxip_qspi.c
-> index 7221fd1cb4..faeb99b4ad 100644
-> --- a/drivers/mtd/nvmxip/nvmxip_qspi.c
-> +++ b/drivers/mtd/nvmxip/nvmxip_qspi.c
-> @@ -50,7 +50,7 @@ static int nvmxip_qspi_of_to_plat(struct udevice *dev)
->   		return -EINVAL;
->   	}
->   
-> -	log_debug("[%s]: XIP device base addr: 0x%llx , lba_shift: %d , lbas: %lu\n",
-> +	log_debug("[%s]: XIP device base addr: " PHYS_ADDR_LN " , lba_shift: %d , lbas: %lu\n",
->   		  dev->name, plat->phys_base, plat->lba_shift, plat->lba);
+>  
+>  &main_sdhci0 {
+>  	/delete-property/ power-domains;
+>  	/delete-property/ assigned-clocks;
+> @@ -182,11 +105,8 @@
+>  	/delete-property/ power-domains;
+>  	/delete-property/ assigned-clocks;
+>  	/delete-property/ assigned-clock-parents;
 
-Another separate patch.
+Why do you need to delete-property of power-domains, assigned-clocks
+etc? you should be able to rely on clock and power domain data in R5
+SPL.
 
->   	return 0;
-> diff --git a/test/dm/Makefile b/test/dm/Makefile
-> index 7ed00733c1..77172d9012 100644
-> --- a/test/dm/Makefile
-> +++ b/test/dm/Makefile
-> @@ -18,7 +18,7 @@ obj-$(CONFIG_UT_DM) += test-uclass.o
->   obj-$(CONFIG_UT_DM) += core.o
->   obj-$(CONFIG_UT_DM) += read.o
->   obj-$(CONFIG_UT_DM) += phys2bus.o
-> -ifeq ($(CONFIG_NVMXIP_QSPI)$(CONFIG_SANDBOX64),yy)
-> +ifeq ($(CONFIG_NVMXIP_QSPI),y)
+> -	pinctrl-0 = <&main_mmc1_pins_default>;
+> -	pinctrl-names = "default";
+>  	clock-names = "clk_xin";
+>  	clocks = <&clk_200mhz>;
+> -	ti,driver-strength-ohm = <50>;
 
-Separate patch.
+Is this even correct?
+>  };
+>  
+>  &mcu_ringacc {
 
-Look here for some ideas:
+I see that you are overriding &mcu_udmap -> But I have not seen kernel
+patches to clean that up to introduce reg-names "rchan" "tchan" and "rflow".
 
-https://source.denx.de/u-boot/custodians/u-boot-sh/-/commits/ci%2Ftest-sandbox64?ref_type=heads
+Why not? looks like 6.6-rc1 wont have things cleaned up either.
+
+
+[...]
+
+Move the #include "k3-j721s2-common-proc-board-u-boot.dtsi" 
+to the top.
+
+The order should be:
+
+#include "board.dts"
+#include "ddr-timing.dtsi"
+#include "ddr.dtsi"
+#include "board-uboot.dtsi"
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
