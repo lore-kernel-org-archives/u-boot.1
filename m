@@ -4,76 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CE5C001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:46:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8029BC001B0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 16:40:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99EB5857BF;
-	Wed, 16 Aug 2023 17:46:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 65D6E869E9;
+	Wed, 16 Aug 2023 18:40:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iyFTcwbO";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 325FB8699B; Wed, 16 Aug 2023 17:46:22 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6990846EE
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:46:18 +0200 (CEST)
+ id 501F98697B; Wed, 16 Aug 2023 18:39:55 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id E560986926
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:39:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37GFkAh2010742;
- Wed, 16 Aug 2023 10:46:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692200770;
- bh=4AgO3NnHsn73JMSLYqYg/deh5jTPef4Nje6uy24cnqY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=iyFTcwbOJGqd4zkEyze9PlETssIAA/B54E960FRLMASavw4wFic6HmdZFk8umrX9Q
- isQbNtFNlFysRkVC72GwcMDdtQnfMOpiQOZg0G34xqH0csXe/Q4oQRkWGLGq2LGXPn
- Lng1KUbrXYcny0Z0zkqtUVPJTpJBHXTRS8j3DI3s=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37GFkAOE000595
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 16 Aug 2023 10:46:10 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Aug 2023 10:46:09 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Aug 2023 10:46:09 -0500
-Received: from [172.24.227.6] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37GFk69m016708;
- Wed, 16 Aug 2023 10:46:06 -0500
-Message-ID: <328fb0cf-5f98-019f-49f8-30674c9d34e1@ti.com>
-Date: Wed, 16 Aug 2023 21:16:05 +0530
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2A0B1D75;
+ Wed, 16 Aug 2023 09:40:31 -0700 (PDT)
+Received: from e130802.arm.com (e130802.arm.com [10.1.36.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B34DC3F762;
+ Wed, 16 Aug 2023 09:39:48 -0700 (PDT)
+Date: Wed, 16 Aug 2023 17:39:40 +0100
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: nd@arm.com, u-boot@lists.denx.de, sjg@chromium.org
+Subject: Re: [PATCH v2 2/2] nvmxip: add sandbox support
+Message-ID: <20230816163940.GA105907@e130802.arm.com>
+References: <CAPnjgZ34z865voaKeShSJpdvWcFLbN0OEWBnus4qt0W_1P4jBw@mail.gmail.com>
+ <20230816110551.86930-1-abdellatif.elkhlifi@arm.com>
+ <20230816110551.86930-2-abdellatif.elkhlifi@arm.com>
+ <2a74558f-1cf5-2333-a585-8871ea163e68@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v3 5/9] board_f: Fix corruption of relocaddr
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-CC: Bin Meng <bmeng.cn@gmail.com>, <trini@konsulko.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Nikhil M Jain <n-jain1@ti.com>, Anatolij Gustschin
- <agust@denx.de>, Michal Suchanek <msuchanek@suse.de>, Ovidiu Panait
- <ovpanait@gmail.com>, =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>, Rasmus
- Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
-References: <20230731160008.82342-5-sjg@chromium.org>
- <CAEUhbmXn0VQ6B8Qfs+XWEBuPKQ0mtVbzNeH7ZmT+V1Yh1r5qWw@mail.gmail.com>
- <CAEUhbmU14kY-DpNEZyXJEWX4vbqFY-ANgEZZskqY_gxVv4rD5Q@mail.gmail.com>
- <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
- <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
- <99f81e66-9295-8e4c-1693-86e3d81a302c@ti.com>
- <CAPnjgZ2EjOn86eQ-BdGH5F67Op3bSwG0BZb-LAbPOw955Srg0g@mail.gmail.com>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <CAPnjgZ2EjOn86eQ-BdGH5F67Op3bSwG0BZb-LAbPOw955Srg0g@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <2a74558f-1cf5-2333-a585-8871ea163e68@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,170 +56,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Marek,
 
-On 15/08/23 20:14, Simon Glass wrote:
-> Hi Devarsh,
+Please kindly find my comments below.
+
+> > arch/sandbox/dts/sandbox.dts       | 14 ++++++++++++++
 > 
-> On Tue, 15 Aug 2023 at 03:23, Devarsh Thakkar <devarsht@ti.com> wrote:
->>
->> Hi Simon, Tom,
->>
->> On 15/08/23 04:13, Simon Glass wrote:
->>> Hi Devarsh, Nikhil, Tom,
->>>
->>> On Wed, 9 Aug 2023 at 09:29, Bin Meng <bmeng.cn@gmail.com> wrote:
->>>>
->>>> On Thu, Aug 3, 2023 at 7:03 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->>>>>
->>>>> On Thu, Aug 3, 2023 at 6:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->>>>>>
->>>>>> On Tue, Aug 1, 2023 at 12:00 AM Simon Glass <sjg@chromium.org> wrote:
->>>>>>>
->>>>>>> When the video framebuffer comes from the bloblist, we should not change
->>>>>>> relocaddr to this address, since it interfers with the normal memory
->>>>>>
->>>>>> typo: interferes
->>>>>>
->>>>>>> allocation.
->>>>>>>
->>>>>>> This fixes a boot loop in qemu-x86_64
->>>>>>>
->>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>>>> Fixes: 5bc610a7d9d ("common: board_f: Pass frame buffer info from SPL to u-boot")
->>>>>>> Suggested-by: Nikhil M Jain <n-jain1@ti.com>
->>>>>>> ---
->>>>>>>
->>>>>>> Changes in v3:
->>>>>>> - Reword the Kconfig help as suggested
->>>>>>>
->>>>>>> Changes in v2:
->>>>>>> - Add a Kconfig as the suggested conditional did not work
->>>>>>>
->>>>>>>   common/board_f.c      | 3 ++-
->>>>>>>   drivers/video/Kconfig | 9 +++++++++
->>>>>>>   2 files changed, 11 insertions(+), 1 deletion(-)
->>>>>>>
->>>>>>> diff --git a/common/board_f.c b/common/board_f.c
->>>>>>> index 7d2c380e91e..5173d0a0c2d 100644
->>>>>>> --- a/common/board_f.c
->>>>>>> +++ b/common/board_f.c
->>>>>>> @@ -419,7 +419,8 @@ static int reserve_video(void)
->>>>>>>                  if (!ho)
->>>>>>>                          return log_msg_ret("blf", -ENOENT);
->>>>>>>                  video_reserve_from_bloblist(ho);
->>>>>>> -               gd->relocaddr = ho->fb;
->>>>>>> +               if (IS_ENABLED(CONFIG_VIDEO_RESERVE_SPL))
->>>>>>> +                       gd->relocaddr = ho->fb;
->>>>>>>          } else if (CONFIG_IS_ENABLED(VIDEO)) {
->>>>>>>                  ulong addr;
->>>>>>>                  int ret;
->>>>>>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
->>>>>>> index b41dc60cec5..f2e56204d52 100644
->>>>>>> --- a/drivers/video/Kconfig
->>>>>>> +++ b/drivers/video/Kconfig
->>>>>>> @@ -1106,6 +1106,15 @@ config SPL_VIDEO_REMOVE
->>>>>>>            if this  option is enabled video driver will be removed at the end of
->>>>>>>            SPL stage, beforeloading the next stage.
->>>>>>>
->>>>>>> +config VIDEO_RESERVE_SPL
->>>>>>> +       bool
->>>>>>> +       help
->>>>>>> +         This adjusts reserve_video() to redirect memory reservation when it
->>>>>>> +         sees a video handoff blob (BLOBLISTT_U_BOOT_VIDEO). This avoids the
->>>>>>> +         memory used for framebuffer from being allocated by U-Boot proper,
->>>>>>> +         thus preventing any further memory reservations done by U-Boot proper
->>>>>>> +         from overwriting the framebuffer.
->>>>>>> +
->>>>>>>   if SPL_SPLASH_SCREEN
->>>>>>>
->>>>>>>   config SPL_SPLASH_SCREEN_ALIGN
->>>>>>
->>>>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
->>>>>
->>>>> applied to u-boot-x86, thanks!
->>>>
->>>> Dropped this one from the x86 queue per the discussion.
->>>
->>> I just wanted to come back to this discussion.
->>>
->>> Do we have an agreed way forward? Who is waiting for who?
->>>
->>
->> I was waiting on feedback on
->> https://lore.kernel.org/all/3b1e8005-f161-8058-13e7-3de2316aac34@ti.com/
->> but per my opinion, I would prefer to go with "Approach 2" with a
->> Kconfig as it looks simpler to me. It would look something like below :
->>
->> if (gd->relocaddr > (unsigned long)ho->fb) {
->>       ulong fb_reloc_gap = gd->relocaddr - gd->ho->fb;
->>
->>       /* Relocate after framebuffer area if nearing too close to it */
->>       if (fb_reloc_gap < CONFIG_BLOBLIST_FB_RELOC_MIN_GAP)
->>              gd->relocaddr = ho->fb;
->> }
->>
->> Regarding CONFIG_BLOBLIST_FB_RELOC_MIN_GAP
->> -> This describes minimum gap to keep between framebuffer address and
->> relocation address to avoid overlap when framebuffer address used by
->> blob is below the current relocation address
->>
->> -> It would be selected as default when CONFIG_BLOBLIST is selected with
->>   default value set to 100Mb
->>
->> -> SoC specific Vendors can override this in their defconfigs to a
->> custom value if they feel 100Mb is not enough
->>
->> Also probably we can have some debug/error prints in the code to show
->> overlap happened (or is going happen) so that users can fine tune this
->> Kconfig if they got it wrong at first place.
->>
->> I can re-spin updated patch if we are aligned on this,
->> Kindly let me know your opinion.
+> Please separate DT change
 > 
-> I'm just nervous about the whole idea, TBH. Perhaps I am missing some
-> documentation on how people are supposed to lay out memory in SPL and
-> U-Boot properr, but I'm not really aware of any guidance we give.
+> >   configs/sandbox_defconfig          |  4 ++--
 > 
-> Perhaps we should say that the SPL frame buffer should be at the top
-> of memory, and U-Boot's reserve area should start below that?
+> Config change too, separate patch that goes last.
 
-1) As per my personal opinion, I don't like putting such constraints and would
-instead like to give some flexibility to end user for choosing
-framebuffer area as I earlier mentioned, as for that matter if we are using a
-predefined address then there is no need of using framebuffer address on
-videoblob,
+This commit is doing 1 thing: adding 32-bit sandbox support.
 
-2) Also per current reserve flow in u-boot using the reserve_video helper it
-reserve page table first and then framebuffer, so we would possibly have to
-change that order to do framebuffer reservation first at the top and that's
-why we required this condition patch at first place.
+The DT change comes into the same context.
+It makes sense to keep it in this same commit.
 
-3) Also If we are thinking on lines of putting constraints then, I think
-current constraint i.e. "Relocation will always happen below the framebuffer
-area so that there is no overlap" as we put in the patch
-https://lore.kernel.org/all/20230801140414.76216-1-devarsht@ti.com/ seems
-little better to me as it gives little bit of flexiblity and avoids problem
-mentinoed in 2)
+In previous contributions I made, it was accepted that DT
+and defconfig  are part of the same commit as the code.
 
-4) Also as per your feedback on this patch at
-https://lore.kernel.org/all/CAPnjgZ03iQ6iu3gz=Xkp1vHS43=1XXEk2TKdYgj7v4FhxVbj9g@mail.gmail.com/
-you mentioned a scenario where although framebuffer region is below current
-relocation pointer but the gap between the two is 1Gb so we don't require to
-move relocation pointer and instead continue reservations without worrying
-about overlap due to huge gap, so to address such scenarios I thought to go
-with this Kconfig approach.
+Let's see what Simon thinks.
 
-5) From my POV, Ideal solution could be to have some function that estimates
-memory requirements for reservation and relocation well in advance and then we
-can take decision on whether to continue reservation from current relocaddr or
-move it after receiving the framebuffer address from videoblob but I am not
-sure how much feasible is it at this point and hence I suggested this Kconfig
-based approach.
+I'm happy to split if that has becone a new requirement.
 
-Regards
-Devarsh
+> >   	int devnum;
+> > -#if CONFIG_IS_ENABLED(SANDBOX64)
+> > +#if CONFIG_IS_ENABLED(SANDBOX)
+> >   	sandbox_set_enable_memio(true);
+> 
+> This should not be in drivers at all, this should be in tests/ , see
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-sh/-/commit/b07772226b405d6212d4faa9329d64a09708b188
+
+Thanks, I'm happy to improve that one. I'll move it to tests in a seperate commit :)
 
 > 
-> Regards,
-> Simon
+> >   #endif
+> > @@ -62,7 +62,7 @@ static int nvmxip_post_bind(struct udevice *udev)
+> >   		return ret;
+> >   	}
+> > -	log_info("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
+> > +	log_debug("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
+> 
+> Unrelated change -> separate patch please.
+
+Valid point, I'll do thanks.
+
+> > +	l_word = readl(address);
+> > +	h_word = readl((u8 *)address + sizeof(u32));
+> > +	*value = FIELD_PREP(GENMASK_ULL(63, 32), h_word) | l_word;
+> > +#endif
+> >   	return 0;
+> >   }
+> > @@ -67,7 +76,7 @@ static ulong nvmxip_blk_read(struct udevice *dev, lbaint_t blknr, lbaint_t blkcn
+> >   	/* assumption: the data is virtually contiguous */
+> >   	for (qdata_idx = 0 ; qdata_idx < qwords ; qdata_idx++)
+> > -		nvmxip_mmio_rawread((phys_addr_t)(virt_blkaddr + qdata_idx), pdst++);
+> > +		nvmxip_mmio_rawread(virt_blkaddr + qdata_idx, pdst++);
+> 
+> Separate patch please, or just use this commit as part of this series:
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-sh/-/commit/85a662e98c44921a0f5652fa4b170625424ef9a9
+
+This is part of the 32-bit support work.
+Before this commit, it works fine on sandbox64.
+
+> >   	log_debug("[%s]:     src[0]: 0x%llx , dst[0]: 0x%llx , src[-1]: 0x%llx , dst[-1]: 0x%llx\n",
+> >   		  dev->name,
+> > diff --git a/drivers/mtd/nvmxip/nvmxip_qspi.c b/drivers/mtd/nvmxip/nvmxip_qspi.c
+> > index 7221fd1cb4..faeb99b4ad 100644
+> > --- a/drivers/mtd/nvmxip/nvmxip_qspi.c
+> > +++ b/drivers/mtd/nvmxip/nvmxip_qspi.c
+> > @@ -50,7 +50,7 @@ static int nvmxip_qspi_of_to_plat(struct udevice *dev)
+> >   		return -EINVAL;
+> >   	}
+> > -	log_debug("[%s]: XIP device base addr: 0x%llx , lba_shift: %d , lbas: %lu\n",
+> > +	log_debug("[%s]: XIP device base addr: " PHYS_ADDR_LN " , lba_shift: %d , lbas: %lu\n",
+> >   		  dev->name, plat->phys_base, plat->lba_shift, plat->lba);
+> 
+> Another separate patch.
+
+This is part of the 32-bit support work.
+
+> 
+> >   	return 0;
+> > diff --git a/test/dm/Makefile b/test/dm/Makefile
+> > index 7ed00733c1..77172d9012 100644
+> > --- a/test/dm/Makefile
+> > +++ b/test/dm/Makefile
+> > @@ -18,7 +18,7 @@ obj-$(CONFIG_UT_DM) += test-uclass.o
+> >   obj-$(CONFIG_UT_DM) += core.o
+> >   obj-$(CONFIG_UT_DM) += read.o
+> >   obj-$(CONFIG_UT_DM) += phys2bus.o
+> > -ifeq ($(CONFIG_NVMXIP_QSPI)$(CONFIG_SANDBOX64),yy)
+> > +ifeq ($(CONFIG_NVMXIP_QSPI),y)
+> 
+> Separate patch.
+> 
+> Look here for some ideas:
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-sh/-/commits/ci%2Ftest-sandbox64?ref_type=heads
+
+SANDBOX applies for both sandbox64 and sandbox.
+This is part of enabling sandbox alongside sandbox64.
+
+This has been tested and works.
+
+Kind regards
+Abdellatif
