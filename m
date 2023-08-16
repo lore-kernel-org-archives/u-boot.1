@@ -4,77 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA45C001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:38:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52078C41513
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 13:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05E5D869F2;
-	Wed, 16 Aug 2023 15:38:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B418480842;
+	Wed, 16 Aug 2023 15:43:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="R5nNJsKg";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="Qib4/2KU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85DC286A01; Wed, 16 Aug 2023 15:38:49 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9955F86784; Wed, 16 Aug 2023 15:43:29 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 044E5869F2
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:38:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6592a39e51=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 37GDEm7S002221; Wed, 16 Aug 2023 15:38:46 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=GnAUrQc5kL49IFwOnXv9fKKvaeYFfDw39MdhvomWLlg=; b=R5
- nNJsKgd9YoqUdffuM2LDL5kNZVfMZLbwj9U7nhULeSSs2gmEri4w1l05hxx2Gs1B
- RCH66XvisQFukx5J7gX3YZGLkuGgmaQRCInExCao62X5OJClr79FruhZM/cLNCqd
- LZQvaZS/O0ecyw04KvA2PkEfvr+ZQSNHCXMzw2UvUpfdd4PBfe492RKwVNXO0DGb
- MEQ73zTm3XqDBG9aCmTwZfJ3tTH+zeKCjMdthkofzM66KMbKcEncpLtEaYS36QUy
- KiLEFIHmbQtoBq6wHeWC+KIt7OwsyNTFQwtvRRJNPjM5wfUvt4T0gcsb6r6wl3Yb
- Z4n1LXHXavGmlqg7yj8A==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sgth621ft-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Aug 2023 15:38:46 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2C4D810005D;
- Wed, 16 Aug 2023 15:38:46 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 25120245516;
- Wed, 16 Aug 2023 15:38:46 +0200 (CEST)
-Received: from [10.201.20.38] (10.201.20.38) by EQNDAG1NODE4.st.com
- (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 16 Aug
- 2023 15:38:45 +0200
-Message-ID: <555aa903-74bc-855e-ebd0-7a6f5c9683f8@foss.st.com>
-Date: Wed, 16 Aug 2023 15:38:44 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] serial: stm32: extend TC timeout
-Content-Language: en-US
-To: <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Valentin Caron
- <valentin.caron@foss.st.com>
-References: <20230804140904.176552-1-patrice.chotard@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230804140904.176552-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To EQNDAG1NODE4.st.com
- (10.75.129.133)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-16_13,2023-08-15_02,2023-05-22_02
+ by phobos.denx.de (Postfix) with ESMTPS id E8C7580778
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:43:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Date: Wed, 16 Aug 2023 15:42:58 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1692193406;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CWWFF9xZ3ex7vvAm54d5jhkYq/VlvA2MjRozJBHXZxE=;
+ b=Qib4/2KU6Klx6NYYzNqKbg5WBHAREPmLgbdkgm8M+XN0Iwt90Xj1oyRZYUzmZPS7WR1uV+
+ Qa8dgoS0MdMZxQY6pxf+7YbiNARerAFx0gd1Cr4xYHRQt0xqirAcrl528hz26NvyYAxqW0
+ p77PF/e6X9WnehCzp8aQLHBnWHXaH/o0sx8wtRbdbLpBxp6QG95TwIHxTtpypyOzZ3f6To
+ bad+wQMBuX0/RCKjny12DHmZFDo1R9zL2Q5jY4GLyZ8FEFi/s/QYkXSi2Ek/6AJ0BjuF8R
+ V67ry7su8lJ9VXi1vevC54KbXcvdmwWWTS0LnqlDm6gtcsf0Jo/JATrONX/zGg==
+From: Alexander Dahl <ada@thorsis.com>
+To: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Alexander Dahl <ada@thorsis.com>,
+ Durai Manickam KR <durai.manickamkr@microchip.com>,
+ Sandeep Sheriker M <sandeep.sheriker@microchip.com>,
+ u-boot@lists.denx.de, Mihai Sain <mihai.sain@microchip.com>
+Subject: Re: [PATCH 2/4] configs: at91: sam9x60: Switch to new reset driver
+Message-ID: <20230816-onscreen-detective-13352326d0df@ifak-system.com>
+Mail-Followup-To: Eugen Hristev <eugen.hristev@collabora.com>,
+ Durai Manickam KR <durai.manickamkr@microchip.com>,
+ Sandeep Sheriker M <sandeep.sheriker@microchip.com>,
+ u-boot@lists.denx.de, Mihai Sain <mihai.sain@microchip.com>
+References: <20230809141622.231247-1-ada@thorsis.com>
+ <20230809141622.231247-3-ada@thorsis.com>
+ <b3185256-aff2-eb6e-eae3-7ce9fe2ddd87@collabora.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <b3185256-aff2-eb6e-eae3-7ce9fe2ddd87@collabora.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,60 +72,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hei hei,
 
+Am Wed, Aug 16, 2023 at 03:48:25PM +0300 schrieb Eugen Hristev:
+> 
+> Hi Alexander,
+> 
+> On 8/9/23 17:16, Alexander Dahl wrote:
+> > Since commit 61040097a9d1 ("reset: at91: Add reset driver for basic
+> > assert/deassert operations") the compatible "microchip,sam9x60-rstc" for
+> > the sam9x60 reset controller in sam9x60.dtsi is not handled by
+> > CONFIG_SYSRESET_AT91 anymore, but by CONFIG_RESET_AT91 now.  This
+> > resulted in the following error message, when trying to reset from
+> > U-Boot shell:
+> > 
+> >      U-Boot> reset
+> >      resetting ...
+> >      System reset not supported on this platform
+> >      ### ERROR ### Please RESET the board ###
+> > 
+> > Fixed with the switch to the new driver.  Tested on sam9x60-curiosity
+> > board.  Defconfigs for sam9x60ek adapted in the same way, but without
+> > testing.  These should be all sam9x60 boards affected in U-Boot here.
+> 
+> From what I remember from the top of my head, it makes sense to use the new
+> reset driver, however, you should not remove the old SYSRESET driver,
+> because that driver handles different kind of resets on the SoC and PHYs.
+> Can you double check that?
 
-On 8/4/23 16:09, Patrice Chotard wrote:
-> From: Valentin Caron <valentin.caron@foss.st.com>
-> 
-> Waiting 150us TC bit couldn't be enough.
-> 
-> If TFA lets 16 bits in USART fifo, we has to wait 16 times 87 us (time
-> of 10 bits (1 byte in most use cases) at a baud rate of 115200).
-> 
-> Fixes: b4dbc5d65a67 ("serial: stm32: Wait TC bit before performing initialization")
-> 
-> Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> 
->  drivers/serial/serial_stm32.c | 18 ++++++++++++------
->  1 file changed, 12 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/serial/serial_stm32.c b/drivers/serial/serial_stm32.c
-> index 0085113f674..23d476fba28 100644
-> --- a/drivers/serial/serial_stm32.c
-> +++ b/drivers/serial/serial_stm32.c
-> @@ -22,6 +22,14 @@
->  #include "serial_stm32.h"
->  #include <dm/device_compat.h>
->  
-> +/*
-> + * At 115200 bits/s
-> + * 1 bit = 1 / 115200 = 8,68 us
-> + * 8 bits = 69,444 us
-> + * 10 bits are needed for worst case (8 bits + 1 start + 1 stop) = 86.806 us
-> + */
-> +#define ONE_BYTE_B115200_US		87
-> +
->  static void _stm32_serial_setbrg(fdt_addr_t base,
->  				 struct stm32_uart_info *uart_info,
->  				 u32 clock_rate,
-> @@ -209,12 +217,10 @@ static int stm32_serial_probe(struct udevice *dev)
->  	 * before uart initialization, wait for TC bit (Transmission Complete)
->  	 * in case there is still chars from previous bootstage to transmit
->  	 */
-> -	ret = read_poll_timeout(readl, isr, isr & USART_ISR_TC, 10, 150,
-> -				plat->base + ISR_OFFSET(stm32f4));
-> -	if (ret) {
-> -		clk_disable(&clk);
-> -		return ret;
-> -	}
-> +	ret = read_poll_timeout(readl, isr, isr & USART_ISR_TC, 50,
-> +				16 * ONE_BYTE_B115200_US, plat->base + ISR_OFFSET(stm32f4));
-> +	if (ret)
-> +		dev_dbg(dev, "FIFO not empty, some character can be lost (%d)\n", ret);
->  
->  	ret = reset_get_by_index(dev, 0, &reset);
->  	if (!ret) {
-Applied on stm32-master
+Had a look into it and TBH it's very confusing to me.  I found no help
+in documentation.  There are two different uclass which from the
+outside seem to do the same thing.  The Kconfig help texts do not
+explain what the purpose is of one over the other.  As a user this
+creates very bad user experience: Do I need one or the other or both? 
 
+Then there's CONFIG_SYSRESET_CMD_RESET which implicates there are more
+than one possible implementations for cmd 'reset' … but which is the
+right one.  The help text does not explain.
+
+I though sysreset is old and reset is new and assumed things get
+migrated like in other subsystems.  But here it seems we have two
+entangled subsystems where one hooks into the other (as reset_at91
+does).
+
+So, I can of course _just_ enable CONFIG_RESET_AT91 and hope for the
+best here, keeping SYSRESET_CMD_RESET as is … but it would be very
+nice if someone else could explain the what and why in help texts and
+documentation!
+
+Greets
+Alex
+
+P.S.: I would have added sysreset or reset subsystem maintainer to Cc,
+but according to MAINTAINERS there is none.
+
+> > Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> > ---
+> >   configs/sam9x60_curiosity_mmc1_defconfig | 4 ++--
+> >   configs/sam9x60_curiosity_mmc_defconfig  | 4 ++--
+> >   configs/sam9x60ek_mmc_defconfig          | 4 ++--
+> >   configs/sam9x60ek_nandflash_defconfig    | 4 ++--
+> >   configs/sam9x60ek_qspiflash_defconfig    | 4 ++--
+> >   5 files changed, 10 insertions(+), 10 deletions(-)
+> > 
+> > diff --git a/configs/sam9x60_curiosity_mmc1_defconfig b/configs/sam9x60_curiosity_mmc1_defconfig
+> > index 21b2cc2edd..e8781b363b 100644
+> > --- a/configs/sam9x60_curiosity_mmc1_defconfig
+> > +++ b/configs/sam9x60_curiosity_mmc1_defconfig
+> > @@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+> >   CONFIG_DEFAULT_DEVICE_TREE="at91-sam9x60_curiosity"
+> >   CONFIG_SYS_PROMPT="U-Boot> "
+> >   CONFIG_OF_LIBFDT_OVERLAY=y
+> > +CONFIG_DM_RESET=y
+> >   CONFIG_DEBUG_UART_BASE=0xfffff200
+> >   CONFIG_DEBUG_UART_CLOCK=200000000
+> >   CONFIG_DEBUG_UART_BOARD_INIT=y
+> > @@ -79,11 +80,10 @@ CONFIG_PHY_MICREL=y
+> >   CONFIG_MACB=y
+> >   CONFIG_PINCTRL=y
+> >   CONFIG_PINCTRL_AT91=y
+> > +CONFIG_RESET_AT91=y
+> >   CONFIG_DM_SERIAL=y
+> >   CONFIG_DEBUG_UART_ANNOUNCE=y
+> >   CONFIG_ATMEL_USART=y
+> > -CONFIG_SYSRESET=y
+> > -CONFIG_SYSRESET_AT91=y
+> >   CONFIG_TIMER=y
+> >   CONFIG_MCHP_PIT64B_TIMER=y
+> >   CONFIG_W1=y
+> > diff --git a/configs/sam9x60_curiosity_mmc_defconfig b/configs/sam9x60_curiosity_mmc_defconfig
+> > index 269f015989..0f57588d8b 100644
+> > --- a/configs/sam9x60_curiosity_mmc_defconfig
+> > +++ b/configs/sam9x60_curiosity_mmc_defconfig
+> > @@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+> >   CONFIG_DEFAULT_DEVICE_TREE="at91-sam9x60_curiosity"
+> >   CONFIG_SYS_PROMPT="U-Boot> "
+> >   CONFIG_OF_LIBFDT_OVERLAY=y
+> > +CONFIG_DM_RESET=y
+> >   CONFIG_DEBUG_UART_BASE=0xfffff200
+> >   CONFIG_DEBUG_UART_CLOCK=200000000
+> >   CONFIG_DEBUG_UART_BOARD_INIT=y
+> > @@ -79,11 +80,10 @@ CONFIG_PHY_MICREL=y
+> >   CONFIG_MACB=y
+> >   CONFIG_PINCTRL=y
+> >   CONFIG_PINCTRL_AT91=y
+> > +CONFIG_RESET_AT91=y
+> >   CONFIG_DM_SERIAL=y
+> >   CONFIG_DEBUG_UART_ANNOUNCE=y
+> >   CONFIG_ATMEL_USART=y
+> > -CONFIG_SYSRESET=y
+> > -CONFIG_SYSRESET_AT91=y
+> >   CONFIG_TIMER=y
+> >   CONFIG_MCHP_PIT64B_TIMER=y
+> >   CONFIG_W1=y
+> > diff --git a/configs/sam9x60ek_mmc_defconfig b/configs/sam9x60ek_mmc_defconfig
+> > index 2a1399748c..446caceba0 100644
+> > --- a/configs/sam9x60ek_mmc_defconfig
+> > +++ b/configs/sam9x60ek_mmc_defconfig
+> > @@ -15,6 +15,7 @@ CONFIG_DM_GPIO=y
+> >   CONFIG_DEFAULT_DEVICE_TREE="sam9x60ek"
+> >   CONFIG_SYS_PROMPT="U-Boot> "
+> >   CONFIG_OF_LIBFDT_OVERLAY=y
+> > +CONFIG_DM_RESET=y
+> >   CONFIG_DEBUG_UART_BASE=0xfffff200
+> >   CONFIG_DEBUG_UART_CLOCK=200000000
+> >   CONFIG_DEBUG_UART_BOARD_INIT=y
+> > @@ -87,14 +88,13 @@ CONFIG_PHY_MICREL=y
+> >   CONFIG_MACB=y
+> >   CONFIG_PINCTRL=y
+> >   CONFIG_PINCTRL_AT91=y
+> > +CONFIG_RESET_AT91=y
+> >   CONFIG_DM_SERIAL=y
+> >   CONFIG_DEBUG_UART_ANNOUNCE=y
+> >   CONFIG_ATMEL_USART=y
+> >   CONFIG_SPI=y
+> >   CONFIG_DM_SPI=y
+> >   CONFIG_ATMEL_QSPI=y
+> > -CONFIG_SYSRESET=y
+> > -CONFIG_SYSRESET_AT91=y
+> >   CONFIG_TIMER=y
+> >   CONFIG_ATMEL_PIT_TIMER=y
+> >   CONFIG_W1=y
+> > diff --git a/configs/sam9x60ek_nandflash_defconfig b/configs/sam9x60ek_nandflash_defconfig
+> > index c6c4686658..acaa16ee49 100644
+> > --- a/configs/sam9x60ek_nandflash_defconfig
+> > +++ b/configs/sam9x60ek_nandflash_defconfig
+> > @@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+> >   CONFIG_DEFAULT_DEVICE_TREE="sam9x60ek"
+> >   CONFIG_SYS_PROMPT="U-Boot> "
+> >   CONFIG_OF_LIBFDT_OVERLAY=y
+> > +CONFIG_DM_RESET=y
+> >   CONFIG_DEBUG_UART_BASE=0xfffff200
+> >   CONFIG_DEBUG_UART_CLOCK=200000000
+> >   CONFIG_DEBUG_UART_BOARD_INIT=y
+> > @@ -89,14 +90,13 @@ CONFIG_PHY_MICREL=y
+> >   CONFIG_MACB=y
+> >   CONFIG_PINCTRL=y
+> >   CONFIG_PINCTRL_AT91=y
+> > +CONFIG_RESET_AT91=y
+> >   CONFIG_DM_SERIAL=y
+> >   CONFIG_DEBUG_UART_ANNOUNCE=y
+> >   CONFIG_ATMEL_USART=y
+> >   CONFIG_SPI=y
+> >   CONFIG_DM_SPI=y
+> >   CONFIG_ATMEL_QSPI=y
+> > -CONFIG_SYSRESET=y
+> > -CONFIG_SYSRESET_AT91=y
+> >   CONFIG_TIMER=y
+> >   CONFIG_ATMEL_PIT_TIMER=y
+> >   CONFIG_W1=y
+> > diff --git a/configs/sam9x60ek_qspiflash_defconfig b/configs/sam9x60ek_qspiflash_defconfig
+> > index ef2e2db8b8..6fb79214e5 100644
+> > --- a/configs/sam9x60ek_qspiflash_defconfig
+> > +++ b/configs/sam9x60ek_qspiflash_defconfig
+> > @@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+> >   CONFIG_DEFAULT_DEVICE_TREE="sam9x60ek"
+> >   CONFIG_SYS_PROMPT="U-Boot> "
+> >   CONFIG_OF_LIBFDT_OVERLAY=y
+> > +CONFIG_DM_RESET=y
+> >   CONFIG_DEBUG_UART_BASE=0xfffff200
+> >   CONFIG_DEBUG_UART_CLOCK=200000000
+> >   CONFIG_DEBUG_UART_BOARD_INIT=y
+> > @@ -88,14 +89,13 @@ CONFIG_PHY_MICREL=y
+> >   CONFIG_MACB=y
+> >   CONFIG_PINCTRL=y
+> >   CONFIG_PINCTRL_AT91=y
+> > +CONFIG_RESET_AT91=y
+> >   CONFIG_DM_SERIAL=y
+> >   CONFIG_DEBUG_UART_ANNOUNCE=y
+> >   CONFIG_ATMEL_USART=y
+> >   CONFIG_SPI=y
+> >   CONFIG_DM_SPI=y
+> >   CONFIG_ATMEL_QSPI=y
+> > -CONFIG_SYSRESET=y
+> > -CONFIG_SYSRESET_AT91=y
+> >   CONFIG_TIMER=y
+> >   CONFIG_ATMEL_PIT_TIMER=y
+> >   CONFIG_W1=y
+> 
