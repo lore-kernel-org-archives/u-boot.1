@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE81C001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CE5C001B0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC938846EE;
-	Wed, 16 Aug 2023 17:35:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99EB5857BF;
+	Wed, 16 Aug 2023 17:46:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f6O4Wbpd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iyFTcwbO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 921EE869D6; Wed, 16 Aug 2023 17:35:12 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 325FB8699B; Wed, 16 Aug 2023 17:46:22 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EBA580DF7
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:35:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6990846EE
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:46:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37GFZ3id116901;
- Wed, 16 Aug 2023 10:35:03 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37GFkAh2010742;
+ Wed, 16 Aug 2023 10:46:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692200103;
- bh=HLd47dUPt3fl09tXT75mPEsopih4xTk9BxknkukZmM8=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=f6O4Wbpd0DjfibD0wyP4YCdgDB5m+gQemLvN95j2G1zLTOdQfdwCyEpUzOY3I7qef
- hBcVSzbjJMEWc8QAoGqQC5bnyYpPUcwMJHiUnggyF1XT2uN04APdzpCH8YBEAnJnwT
- fGZ5OkOLIdYkYKmfOPKVOn29ltEm5/Qp77kEVB+Y=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37GFZ3gS025995
+ s=ti-com-17Q1; t=1692200770;
+ bh=4AgO3NnHsn73JMSLYqYg/deh5jTPef4Nje6uy24cnqY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=iyFTcwbOJGqd4zkEyze9PlETssIAA/B54E960FRLMASavw4wFic6HmdZFk8umrX9Q
+ isQbNtFNlFysRkVC72GwcMDdtQnfMOpiQOZg0G34xqH0csXe/Q4oQRkWGLGq2LGXPn
+ Lng1KUbrXYcny0Z0zkqtUVPJTpJBHXTRS8j3DI3s=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37GFkAOE000595
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 16 Aug 2023 10:35:03 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 16 Aug 2023 10:46:10 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
- Aug 2023 10:35:03 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2023 10:46:09 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 16 Aug 2023 10:35:03 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37GFZ3ue023675;
- Wed, 16 Aug 2023 10:35:03 -0500
-Date: Wed, 16 Aug 2023 10:35:03 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-Subject: Re: [PATCH 3/3] docs: ti: j721s2_evm: Create documentation from
- J7200 docs
-Message-ID: <20230816153503.up6ercmspho3oop6@jigsaw>
-References: <20230816-b4-upstream-j721s2-r5-pinmux-v1-0-f4548452760a@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v1-3-f4548452760a@ti.com>
+ Frontend Transport; Wed, 16 Aug 2023 10:46:09 -0500
+Received: from [172.24.227.6] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37GFk69m016708;
+ Wed, 16 Aug 2023 10:46:06 -0500
+Message-ID: <328fb0cf-5f98-019f-49f8-30674c9d34e1@ti.com>
+Date: Wed, 16 Aug 2023 21:16:05 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v1-3-f4548452760a@ti.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v3 5/9] board_f: Fix corruption of relocaddr
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+CC: Bin Meng <bmeng.cn@gmail.com>, <trini@konsulko.com>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Nikhil M Jain <n-jain1@ti.com>, Anatolij Gustschin
+ <agust@denx.de>, Michal Suchanek <msuchanek@suse.de>, Ovidiu Panait
+ <ovpanait@gmail.com>, =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>, Rasmus
+ Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
+References: <20230731160008.82342-5-sjg@chromium.org>
+ <CAEUhbmXn0VQ6B8Qfs+XWEBuPKQ0mtVbzNeH7ZmT+V1Yh1r5qWw@mail.gmail.com>
+ <CAEUhbmU14kY-DpNEZyXJEWX4vbqFY-ANgEZZskqY_gxVv4rD5Q@mail.gmail.com>
+ <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
+ <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
+ <99f81e66-9295-8e4c-1693-86e3d81a302c@ti.com>
+ <CAPnjgZ2EjOn86eQ-BdGH5F67Op3bSwG0BZb-LAbPOw955Srg0g@mail.gmail.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <CAPnjgZ2EjOn86eQ-BdGH5F67Op3bSwG0BZb-LAbPOw955Srg0g@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,327 +90,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14:53-20230816, Manorit Chawdhry wrote:
-> The documentation is based off J7200 documentation tailored for J721S2.
+Hi Simon,
+
+On 15/08/23 20:14, Simon Glass wrote:
+> Hi Devarsh,
 > 
-> TRM for J721S2: https://www.ti.com/lit/pdf/spruj28
-> Product Page: https://www.ti.com/product/TDA4AL-Q1
+> On Tue, 15 Aug 2023 at 03:23, Devarsh Thakkar <devarsht@ti.com> wrote:
+>>
+>> Hi Simon, Tom,
+>>
+>> On 15/08/23 04:13, Simon Glass wrote:
+>>> Hi Devarsh, Nikhil, Tom,
+>>>
+>>> On Wed, 9 Aug 2023 at 09:29, Bin Meng <bmeng.cn@gmail.com> wrote:
+>>>>
+>>>> On Thu, Aug 3, 2023 at 7:03 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>>>>
+>>>>> On Thu, Aug 3, 2023 at 6:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>>>>>>
+>>>>>> On Tue, Aug 1, 2023 at 12:00 AM Simon Glass <sjg@chromium.org> wrote:
+>>>>>>>
+>>>>>>> When the video framebuffer comes from the bloblist, we should not change
+>>>>>>> relocaddr to this address, since it interfers with the normal memory
+>>>>>>
+>>>>>> typo: interferes
+>>>>>>
+>>>>>>> allocation.
+>>>>>>>
+>>>>>>> This fixes a boot loop in qemu-x86_64
+>>>>>>>
+>>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>>>> Fixes: 5bc610a7d9d ("common: board_f: Pass frame buffer info from SPL to u-boot")
+>>>>>>> Suggested-by: Nikhil M Jain <n-jain1@ti.com>
+>>>>>>> ---
+>>>>>>>
+>>>>>>> Changes in v3:
+>>>>>>> - Reword the Kconfig help as suggested
+>>>>>>>
+>>>>>>> Changes in v2:
+>>>>>>> - Add a Kconfig as the suggested conditional did not work
+>>>>>>>
+>>>>>>>   common/board_f.c      | 3 ++-
+>>>>>>>   drivers/video/Kconfig | 9 +++++++++
+>>>>>>>   2 files changed, 11 insertions(+), 1 deletion(-)
+>>>>>>>
+>>>>>>> diff --git a/common/board_f.c b/common/board_f.c
+>>>>>>> index 7d2c380e91e..5173d0a0c2d 100644
+>>>>>>> --- a/common/board_f.c
+>>>>>>> +++ b/common/board_f.c
+>>>>>>> @@ -419,7 +419,8 @@ static int reserve_video(void)
+>>>>>>>                  if (!ho)
+>>>>>>>                          return log_msg_ret("blf", -ENOENT);
+>>>>>>>                  video_reserve_from_bloblist(ho);
+>>>>>>> -               gd->relocaddr = ho->fb;
+>>>>>>> +               if (IS_ENABLED(CONFIG_VIDEO_RESERVE_SPL))
+>>>>>>> +                       gd->relocaddr = ho->fb;
+>>>>>>>          } else if (CONFIG_IS_ENABLED(VIDEO)) {
+>>>>>>>                  ulong addr;
+>>>>>>>                  int ret;
+>>>>>>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+>>>>>>> index b41dc60cec5..f2e56204d52 100644
+>>>>>>> --- a/drivers/video/Kconfig
+>>>>>>> +++ b/drivers/video/Kconfig
+>>>>>>> @@ -1106,6 +1106,15 @@ config SPL_VIDEO_REMOVE
+>>>>>>>            if this  option is enabled video driver will be removed at the end of
+>>>>>>>            SPL stage, beforeloading the next stage.
+>>>>>>>
+>>>>>>> +config VIDEO_RESERVE_SPL
+>>>>>>> +       bool
+>>>>>>> +       help
+>>>>>>> +         This adjusts reserve_video() to redirect memory reservation when it
+>>>>>>> +         sees a video handoff blob (BLOBLISTT_U_BOOT_VIDEO). This avoids the
+>>>>>>> +         memory used for framebuffer from being allocated by U-Boot proper,
+>>>>>>> +         thus preventing any further memory reservations done by U-Boot proper
+>>>>>>> +         from overwriting the framebuffer.
+>>>>>>> +
+>>>>>>>   if SPL_SPLASH_SCREEN
+>>>>>>>
+>>>>>>>   config SPL_SPLASH_SCREEN_ALIGN
+>>>>>>
+>>>>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+>>>>>
+>>>>> applied to u-boot-x86, thanks!
+>>>>
+>>>> Dropped this one from the x86 queue per the discussion.
+>>>
+>>> I just wanted to come back to this discussion.
+>>>
+>>> Do we have an agreed way forward? Who is waiting for who?
+>>>
+>>
+>> I was waiting on feedback on
+>> https://lore.kernel.org/all/3b1e8005-f161-8058-13e7-3de2316aac34@ti.com/
+>> but per my opinion, I would prefer to go with "Approach 2" with a
+>> Kconfig as it looks simpler to me. It would look something like below :
+>>
+>> if (gd->relocaddr > (unsigned long)ho->fb) {
+>>       ulong fb_reloc_gap = gd->relocaddr - gd->ho->fb;
+>>
+>>       /* Relocate after framebuffer area if nearing too close to it */
+>>       if (fb_reloc_gap < CONFIG_BLOBLIST_FB_RELOC_MIN_GAP)
+>>              gd->relocaddr = ho->fb;
+>> }
+>>
+>> Regarding CONFIG_BLOBLIST_FB_RELOC_MIN_GAP
+>> -> This describes minimum gap to keep between framebuffer address and
+>> relocation address to avoid overlap when framebuffer address used by
+>> blob is below the current relocation address
+>>
+>> -> It would be selected as default when CONFIG_BLOBLIST is selected with
+>>   default value set to 100Mb
+>>
+>> -> SoC specific Vendors can override this in their defconfigs to a
+>> custom value if they feel 100Mb is not enough
+>>
+>> Also probably we can have some debug/error prints in the code to show
+>> overlap happened (or is going happen) so that users can fine tune this
+>> Kconfig if they got it wrong at first place.
+>>
+>> I can re-spin updated patch if we are aligned on this,
+>> Kindly let me know your opinion.
 > 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
->  MAINTAINERS                 |   1 +
->  doc/board/ti/j721s2_evm.rst | 228 ++++++++++++++++++++++++++++++++++++++++++++
->  doc/board/ti/k3.rst         |   1 +
->  3 files changed, 230 insertions(+)
+> I'm just nervous about the whole idea, TBH. Perhaps I am missing some
+> documentation on how people are supposed to lay out memory in SPL and
+> U-Boot properr, but I'm not really aware of any guidance we give.
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 77a8b0ac2181..1b14ce541e91 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -667,6 +667,7 @@ F:	arch/arm/mach-omap2/
->  F:	arch/arm/include/asm/arch-omap*/
->  F:	arch/arm/include/asm/ti-common/
->  F:	board/ti/
-> +F:	doc/board/ti
->  F:	drivers/dma/ti*
->  F:	drivers/firmware/ti_sci.*
->  F:	drivers/gpio/omap_gpio.c
+> Perhaps we should say that the SPL frame buffer should be at the top
+> of memory, and U-Boot's reserve area should start below that?
 
-if this is a proposal, split this into it's own patch please.
-doc/board/ti is a wide range. I'd suggest do the specific
-documentation in the board specific MAINTAINER file as well to spread
-the maintainership load over.
+1) As per my personal opinion, I don't like putting such constraints and would
+instead like to give some flexibility to end user for choosing
+framebuffer area as I earlier mentioned, as for that matter if we are using a
+predefined address then there is no need of using framebuffer address on
+videoblob,
 
+2) Also per current reserve flow in u-boot using the reserve_video helper it
+reserve page table first and then framebuffer, so we would possibly have to
+change that order to do framebuffer reservation first at the top and that's
+why we required this condition patch at first place.
 
-> diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-> new file mode 100644
-> index 000000000000..519e43610dcf
-> --- /dev/null
-> +++ b/doc/board/ti/j721s2_evm.rst
-> @@ -0,0 +1,228 @@
-> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> +.. sectionauthor:: Manorit Chawdhry <m-chawdhry@ti.com>
-> +
-> +J721S2 Platforms
-> +================
-> +
-> +Introduction:
-> +-------------
-> +The J721S2 family of SoCs are part of K3 Multicore SoC architecture platform
-> +targeting automotive applications. They are designed as a low power, high
-> +performance and highly integrated device architecture, adding significant
-> +enhancement on processing power, graphics capability, video and imaging
-> +processing, virtualization and coherent memory support.
-> +
-> +The device is partitioned into three functional domains, each containing
-> +specific processing cores and peripherals:
-> +
-> +1. Wake-up (WKUP) domain:
-> +        * Device Management and Security Controller (DMSC)
-> +
-> +2. Microcontroller (MCU) domain:
-> +        * Dual Core ARM Cortex-R5F processor
-> +
-> +3. MAIN domain:
-> +        * Dual core 64-bit ARM Cortex-A72
-> +
-> +More info can be found in TRM: https://www.ti.com/lit/pdf/spruj28
-> +
-> +Platform information:
-> +
-> +* https://www.ti.com/tool/J721S2XSOMXEVM
-> +
-> +Boot Flow:
-> +----------
-> +Below is the pictorial representation of boot flow:
-> +
-> +.. image:: img/boot_diagram_k3_current.svg
-> +
-> +- Here DMSC acts as master and provides all the critical services. R5/A72
-> +  requests DMSC to get these services done as shown in the above diagram.
+3) Also If we are thinking on lines of putting constraints then, I think
+current constraint i.e. "Relocation will always happen below the framebuffer
+area so that there is no overlap" as we put in the patch
+https://lore.kernel.org/all/20230801140414.76216-1-devarsht@ti.com/ seems
+little better to me as it gives little bit of flexiblity and avoids problem
+mentinoed in 2)
 
-Is this statement accurate? in J7200, DMSC provides a pure TIFS function.
+4) Also as per your feedback on this patch at
+https://lore.kernel.org/all/CAPnjgZ03iQ6iu3gz=Xkp1vHS43=1XXEk2TKdYgj7v4FhxVbj9g@mail.gmail.com/
+you mentioned a scenario where although framebuffer region is below current
+relocation pointer but the gap between the two is 1Gb so we don't require to
+move relocation pointer and instead continue reservations without worrying
+about overlap due to huge gap, so to address such scenarios I thought to go
+with this Kconfig approach.
 
-Maybe improve it with a version of the following, perhaps?
+5) From my POV, Ideal solution could be to have some function that estimates
+memory requirements for reservation and relocation well in advance and then we
+can take decision on whether to continue reservation from current relocaddr or
+move it after receiving the framebuffer address from videoblob but I am not
+sure how much feasible is it at this point and hence I suggested this Kconfig
+based approach.
 
-On this platform, 'TI Foundational Security' (TIFS) functions as the
-security enclave master while 'Device Manager' (DM), also known as the
-'TISCI server' in "TI terminology," offers all the essential services.
-As illustrated in the diagram above, R5 SPL manages power and clock
-services independently before handing over control to "DM." The A53 or
-the M4F (Aux core) software components request TIFS/DM to handle
-security or device management services.
+Regards
+Devarsh
 
-> +
-> +Sources:
-> +--------
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_boot_sources
-> +    :end-before: .. k3_rst_include_end_boot_sources
-> +
-> +Build procedure:
-> +----------------
-> +0. Setup the environment variables:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
-> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
-> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
-> +
-> +Set the variables corresponding to this platform:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
-> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
-> +.. code-block:: bash
-> +
-> + $ export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
-> + $ export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
-> + $ export TFA_BOARD=generic
-> + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-> + $ # This is not a typo, j784s4 is the
-> + $ # OP-TEE platform for j721s2
-> + $ export OPTEE_PLATFORM=k3-j784s4
-> + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-> +
-> +.. j721s2_evm_rst_include_start_build_steps
-> +
-> +1. Trusted Firmware-A:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_tfa
-> +    :end-before: .. k3_rst_include_end_build_steps_tfa
-> +
-> +
-> +2. OP-TEE:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_optee
-> +    :end-before: .. k3_rst_include_end_build_steps_optee
-> +
-> +3. U-Boot:
-> +
-> +* 4.1 R5:
-
-4.1 or 3.1 ?
-
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-> +
-> +* 4.2 A72:
-
-same.
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_uboot
-> +    :end-before: .. k3_rst_include_end_build_steps_uboot
-> +.. j721s2_evm_rst_include_end_build_steps
-> +
-> +Target Images
-> +--------------
-> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
-> +variant (GP, HS-FS, HS-SE) requires a different source for these files.
-> +
-> + - GP
-> +
-> +        * tiboot3-j721s2-gp-evm.bin from step 4.1
-
-I think we should just use https://docs.readthedocs.io/en/stable/guides/cross-referencing-with-sphinx.html#explicit-targets
-to do provide references than numbered scheme.
-
-
-> +        * tispl.bin_unsigned, u-boot.img_unsigned from step 4.2
-> +
-> + - HS-FS
-> +
-> +        * tiboot3-j721s2-hs-fs-evm.bin from step 4.1
-> +        * tispl.bin, u-boot.img from step 4.2
-
-These as well
-
-> +
-> + - HS-SE
-> +
-> +        * tiboot3-j721s2-hs-evm.bin from step 4.1
-> +        * tispl.bin, u-boot.img from step 4.2
-
-and here.
-
-I just noticed we have a similar problem in other rst files as well.
-might be worth a cleanup.
-
-> +
-> +Image formats:
-> +--------------
-> +
-> +- tiboot3.bin
-> +
-> +.. image:: img/multi_cert_tiboot3.bin.svg
-> +
-> +- tispl.bin
-> +
-> +.. image:: img/dm_tispl.bin.svg
-> +
-> +R5 Memory Map:
-> +--------------
-> +
-> +.. list-table::
-> +   :widths: 16 16 16
-> +   :header-rows: 1
-> +
-> +   * - Region
-> +     - Start Address
-> +     - End Address
-> +
-> +   * - SPL
-> +     - 0x41c00000
-> +     - 0x41c40000
-> +
-> +   * - EMPTY
-> +     - 0x41c40000
-> +     - 0x41c61f20
-> +
-> +   * - STACK
-> +     - 0x41c65f20
-> +     - 0x41c61f20
-> +
-> +   * - Global data
-> +     - 0x41c65f20
-> +     - 0x41c66000
-> +
-> +   * - Heap
-> +     - 0x41c66000
-> +     - 0x41c76000
-> +
-> +   * - BSS
-> +     - 0x41c76000
-> +     - 0x41c80000
-> +
-> +   * - DM DATA
-> +     - 0x41c80000
-> +     - 0x41c84130
-> +
-> +   * - EMPTY
-> +     - 0x41c84130
-> +     - 0x41cff9fc
-> +
-> +   * - MCU Scratchpad
-> +     - 0x41cff9fc
-> +     - 0x41cffbfc
-> +
-> +   * - ROM DATA
-> +     - 0x41cffbfc
-> +     - 0x41cfffff
-> +
-> +Switch Setting for Boot Mode
-> +----------------------------
-> +
-> +Boot Mode pins provide means to select the boot mode and options before the
-> +device is powered up. After every POR, they are the main source to populate
-> +the Boot Parameter Tables.
-> +
-> +The following table shows some common boot modes used on J721S2 platform.
-> +More details can be found in the Technical Reference Manual:
-> +https://www.ti.com/lit/pdf/spruj28 under the `Boot Mode Pins` section.
-> +
-> +.. list-table:: Boot Modes
-> +   :widths: 16 16 16
-> +   :header-rows: 1
-> +
-> +   * - Switch Label
-> +     - SW9: 12345678
-> +     - SW8: 12345678
-> +
-> +   * - SD
-> +     - 00000000
-> +     - 10000010
-> +
-> +   * - EMMC
-> +     - 01000000
-> +     - 10000000
-> +
-> +   * - OSPI
-> +     - 01000000
-> +     - 00000110
-> +
-> +   * - UART
-> +     - 01110000
-> +     - 00000000
-> +
-> +   * - USB DFU
-> +     - 00100000
-> +     - 10000000
-> +
-> +For SW8 and SW9, the switch state in the "ON" position = 1.
-
-We need to add the section on openOCD, but I think next does'nt have
-the commit for the same - so we might need to do that as a separate
-patch.
-
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> index d2f86b0a11a7..b0be048edb12 100644
-> --- a/doc/board/ti/k3.rst
-> +++ b/doc/board/ti/k3.rst
-> @@ -35,6 +35,7 @@ K3 Based SoCs
->     am65x_evm
->     j7200_evm
->     j721e_evm
-> +   j721s2_evm
->  
->  Boot Flow Overview
->  ------------------
 > 
-> -- 
-> 2.41.0
-> 
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> Regards,
+> Simon
