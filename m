@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0FF4C04A6A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 14:17:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC02C001E0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 14:25:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 562FD86902;
-	Wed, 16 Aug 2023 16:17:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 43E7D869D8;
+	Wed, 16 Aug 2023 16:25:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b08CEX6V";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m85fuszR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17F8586913; Wed, 16 Aug 2023 16:17:13 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id BF30A8699B; Wed, 16 Aug 2023 11:28:10 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC84C847D3
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 16:17:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FE1180748
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 11:28:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-51e2a6a3768so9023050a12.0
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 07:17:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fpidev23@gmail.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-76cee0a4b70so62737885a.0
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 02:28:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692195429; x=1692800229;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C2xJWqnLSV2enC2XxSP/JzK2nTVLO61CzOPoRHYe6bQ=;
- b=b08CEX6V+tdQq+gMDIH92Xn6fJ1GsoXcP484Vu1182J5nq4q2UHgkLnnaAbt39Qkzh
- IcfVwCOATZq6CuhusbhozfpO6Yb5HZFN2hJ/cjZfI3YyBgNr4BReVAkokNwX+fMfVCR0
- FoOgODQeg9OCGXKSUUpNytvLYyrsff+mRBN6k=
+ d=gmail.com; s=20221208; t=1692178085; x=1692782885;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=3OF1sjoMWFsZVASmvFXTzXiWVJnXD4HeHz2G+CtOW+M=;
+ b=m85fuszR/JbA4l/4faJndq/CO5LSO1MsIGyUhwThd74CsW+E5pUw+mxod0WIFMWvSi
+ TWDGt+lj9aYkzr1IeKGdg5BeAKjuMbx9j2LGOGKeeQGjVk2h7hACNKNoDgZfY+L3YtTz
+ qVChISqLoudlgBrTc7BU95Y83f1M2v59In84YAy9CI0T8hTIl9w1fmmQK8ZqbMHCeDUL
+ NBDLc+SgXtfTUXUZmUZ82QKO3kfn4lgka2f5hMkKRHqjZlKRyXdTRBiDpug96iDAW13L
+ bRfrBLpi4xlF87+l5VPijkRKYdfMWetLZ1AZSwjn+dotN3lRUsdWIDvrQ5uARxeHkmh8
+ dSDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692195429; x=1692800229;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=C2xJWqnLSV2enC2XxSP/JzK2nTVLO61CzOPoRHYe6bQ=;
- b=eWYP74Vi0dBtazqrKx22B/2KJOyXvn45edufisaswTwp+ERMYCV7AjPvdF2IBarYHC
- /eiDMvNRm0DBy+9ZSA2pUM5LlknbJMwyeEyD5LnVwAOPcsZ+V3SAwOtJ5Vy8YKoVwlKu
- qSCgba2+sfRf7Nhj+60a1UR673sYKFhq5t95XXWgjpwoLZ87SMcm0iwXUV250V2VO2yg
- jcnamdgltjWZdRGgSqgyARiMNeU3nihR9hsdJDGCWKWyN3sXxOAve+mxFx/oL359WEyB
- jKgoUOI8UT+CD7VaGTy8xxiAxmTzU7gsUuQLYN4w7Vxx3ec0ErPNQhNH3RZqHHHcwcqI
- bZMA==
-X-Gm-Message-State: AOJu0YyWXycmiQuZzo3IXyN/y0Ur3HoqykWEYDD6V1+cl9lNV8OGjohH
- gG7h5Ds5DfV6BY5H1QsDYUwu1xtBn+JotlFRzbLwDg==
-X-Google-Smtp-Source: AGHT+IFFBm6Xyb+baSndKuzF8HlFkugcQFoWZQg6eEJvLmWAuemB3MzO9mCx6NRbCnBq/wMxpfRMANWXd1A5G8GfGQ0=
-X-Received: by 2002:a05:6402:799:b0:522:1fd2:ca7a with SMTP id
- d25-20020a056402079900b005221fd2ca7amr1510847edy.29.1692195429266; Wed, 16
- Aug 2023 07:17:09 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692178085; x=1692782885;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3OF1sjoMWFsZVASmvFXTzXiWVJnXD4HeHz2G+CtOW+M=;
+ b=DK0nMHsaOCIy5mHBLJ7zJpd3GqWsA0jsWdNw1UyJp/lbyo/oF+plgmU/3toSK+QBNY
+ 68XAb5RjhEtVdhsHuOVOcrv2Cdhu7HloAt+m98fHmDSoBsabj0QOCn5fnXTdSiqb5fcP
+ 5gm2TJ58CVtifENmqAxQQUkkGGh5vsAnPG+h8IiK4wt7LPQnt695DkVomVZ8KZfEqT9U
+ qwF26uVIVUEPRnm/rfxb3lATIy1mJwsw4QU9qsDiOprwfrpv2qMzV1ONdCT0Y0ULHo72
+ XOF5YiBrpBwBYAzlqZPCfz6kujSvfpTiBEzyRNSeUzl/0PmJMytsnwIVNhxBmSJ2G2sv
+ 9UtQ==
+X-Gm-Message-State: AOJu0Yy3H2OMwb/UYSd945dJGvmCmJPruQEKDmvtQ9n5Ai1pRk2AUCKF
+ gjehHMRj3H59SM3AGarQKewmfv7Oxa+74RYXbTegdbnbowU=
+X-Google-Smtp-Source: AGHT+IHWFtmZAYjq8EZB0Nbwz1d3SQJrry3YNeyjH5NFaDYsa0QKlA4nyBsg4cL89bF5rahP/95bv1a1EI1QNwQzvkA=
+X-Received: by 2002:a05:620a:1986:b0:767:7a4c:1b9e with SMTP id
+ bm6-20020a05620a198600b007677a4c1b9emr1619524qkb.7.1692178084669; Wed, 16 Aug
+ 2023 02:28:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ2a6S_Hh_=Gb=_Cz2zr9DG7TPEJxJD9z_PU9E6LiiMPHg@mail.gmail.com>
- <ZNx2oS0qK8E3NTY5@hades>
-In-Reply-To: <ZNx2oS0qK8E3NTY5@hades>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 16 Aug 2023 08:16:57 -0600
-Message-ID: <CAPnjgZ3BLQJ_X6EfSKN08kSE1TDG36g_nrppC3C7RZcS96hGog@mail.gmail.com>
-Subject: Re: Booting Windows 11
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+From: Freddie <fpidev23@gmail.com>
+Date: Wed, 16 Aug 2023 10:27:53 +0100
+Message-ID: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
+Subject: FIT Image not working in U-Boot
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Wed, 16 Aug 2023 16:25:13 +0200
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,280 +83,616 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi,
 
-On Wed, 16 Aug 2023 at 01:11, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Tue, Aug 15, 2023 at 07:22:56PM -0600, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > I thought I would try booting Windows on U-Boot but it does not get
-> > very far. Have you tried that? I note a ew odd things below. Is there
-> > a validation suite for it?
-> >
-> > https://github.com/sjg20/u-boot/tree/efi2
-> >
-> > qemu-system-x86_64  -smp 4 -m 8G -serial mon:stdio -bios
-> > /tmp/b/qemu-x86_64/u-boot.rom -drive
-> > id=3Dfisk,file=3Droot.img,if=3Dvirtio,driver=3Draw -drive
-> > id=3Ddisk,if=3Dvirtio,file=3D/vid/software/win/Win11_22H2_English_x64v2=
-.iso
-> >
-> > Scanning bootdev 'virtio-blk#0.bootdev':
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
-> > Path, 00000000becf6848, 00000000becf6840)
-> > efi_locate_device_path()     EFI: Call:
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_handle_buffer()       EFI: Entry
-> > efi_locate_handle_buffer(2, Device Path, 0000000000000000,
-> > 00000000becf67b8, 00000000becf67b0)
-> > efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
-> > efi_locate_device_path()     EFI: 0 returned by
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
-> > efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
-> >
-> >
-> > ^ This seems unhappy because it is a virtio device?
-> >
-> >  efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6948, Device Path, 0,
-> > 00000000bdcf2040)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed1f820
-> >     efi_add_protocol()     EFI: installed device path
-> > '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e6=
-1d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4a=
-cc-aeab-82e828f3628b,8200000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828=
-f3628b,1600820000000000)'
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6948, Block IO, 0,
-> > 00000000bed1f850)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed1f820
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > Scanning bootdev 'virtio-blk#1.bootdev':
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
-> > Path, 00000000becf6848, 00000000becf6840)
-> > efi_locate_device_path()     EFI: Call:
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_handle_buffer()       EFI: Entry
-> > efi_locate_handle_buffer(2, Device Path, 0000000000000000,
-> > 00000000becf67b8, 00000000becf67b0)
-> > efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
-> > efi_locate_device_path()     EFI: 0 returned by
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
-> > efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6948, Device Path, 0,
-> > 00000000bdcf0040)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed24ef0
-> >     efi_add_protocol()     EFI: installed device path
-> > '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e6=
-1d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4a=
-cc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828=
-f3628b,1600820001000000)'
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6948, Block IO, 0,
-> > 00000000bed24f20)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed24ef0
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
-> > Path, 00000000becf6818, 00000000becf6810)
-> > efi_locate_device_path()     EFI: Call:
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_handle_buffer()       EFI: Entry
-> > efi_locate_handle_buffer(2, Device Path, 0000000000000000,
-> > 00000000becf6788, 00000000becf6780)
-> > efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
-> > efi_locate_device_path()     EFI: 0 returned by
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6918, Device Path, 0,
-> > 00000000bdced040)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed1f9e0
-> >     efi_add_protocol()     EFI: installed device path
-> > '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e6=
-1d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4a=
-cc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828=
-f3628b,1600820001000000)/CDROM(1,0x80c,0x8)'
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6918, Block IO, 0,
-> > 00000000bed1fa10)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed1f9e0
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
-> > Path, 00000000becf6818, 00000000becf6810)
-> > efi_locate_device_path()     EFI: Call:
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_handle_buffer()       EFI: Entry
-> > efi_locate_handle_buffer(2, Device Path, 0000000000000000,
-> > 00000000becf6788, 00000000becf6780)
-> > efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
-> > efi_locate_device_path()     EFI: 0 returned by
-> > efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
-> > &handles)
-> > efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_locate_device_path(protocol, &dp, &old_handle)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6918, Device Path, 0,
-> > 00000000bdceb040)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed2b050
-> >     efi_add_protocol()     EFI: installed device path
-> > '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e6=
-1d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4a=
-cc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828=
-f3628b,1600820001000000)/CDROM(2,0x814,0x0)'
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_multiple_protocol_interfaces_int() EFI: Call:
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> > efi_install_protocol_interface()   EFI: Entry
-> > efi_install_protocol_interface(00000000becf6918, Block IO, 0,
-> > 00000000bed2b080)
-> > efi_install_protocol_interface()     EFI: handle 00000000bed2b050
-> > efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_inte=
-rface: 0
-> > efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
-> > efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
-> > protocol_interface)
-> >   0  efi          ready   virtio       2  virtio-blk#1.bootdev.part
-> > efi/boot/bootx64.efi
-> > ** Booting bootflow 'virtio-blk#1.bootdev.part_2' with efi
-> > efi_set_blk_dev_to_system_partition() No EFI system partition
-> > efi_set_blk_dev_to_system_partition() No EFI system partition
-> >      efi_var_to_file() Failed to persist EFI variables
-> >     efi_add_protocol() EFI: installed device path
-> > '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e6=
-1d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/MAC(525400123456,1)'
-> > EFI using ACPI tables at f0060
-> >      efi_install_fdt() WARNING: Can't have ACPI table and device tree
-> > - ignoring DT.
-> >        efi_run_image() Booting /efi\boot\bootx64.efi
-> >       efi_load_image() EFI: Entry efi_load_image(0, 00000000becfb110,
-> > /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61=
-d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4ac=
-c-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f=
-3628b,1600820001000000)/CDROM(2,0x814,0x0)/efi\boot\bootx64.efi,
-> > 0000000001000000, 904560, 00000000becf6820)
-> >       efi_load_image() EFI: Exit: efi_load_image: 0
-> >      efi_start_image() EFI: Entry efi_start_image(00000000bed3d820,
-> > 00000000becf67e0, 00000000becf67e8)
-> >      efi_start_image()   EFI: Call: efi_open_protocol(image_handle,
-> > &efi_guid_loaded_image, &info, NULL, NULL,
-> > EFI_OPEN_PROTOCOL_GET_PROTOCOL)
-> >    efi_open_protocol()     EFI: Entry
-> > efi_open_protocol(00000000bed3d820, Loaded Image, 00000000becf6730,
-> > 0000000000000000, 0000000000000000, 0x2)
-> >    efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
-> >      efi_start_image()   EFI: 0 returned by
-> > efi_open_protocol(image_handle, &efi_guid_loaded_image, &info, NULL,
-> > NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL)
-> >      efi_start_image()   EFI: Jumping into 0x00000000bdbaf090
-> >      efi_start_image()   EFI: Call: image_obj->entry(image_handle, &sys=
-tab)
-> >    efi_open_protocol()     EFI: Entry
-> > efi_open_protocol(00000000bed3d820, Loaded Image, 00000000becf66c8,
-> > 00000000becfb110, 0000000000000000, 0x1)
-> >    efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
-> >    efi_open_protocol()     EFI: Entry
-> > efi_open_protocol(00000000bed2b050, Device Path, 00000000becf6670,
-> > 00000000becfb110, 0000000000000000, 0x1)
-> >    efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
-> > efi_allocate_pages_ext()     EFI: Entry efi_allocate_pages_ext(2, 2,
-> > 0x1, 00000000becf66d8)
-> > efi_allocate_pages_ext()       EFI: - type address
-> > efi_allocate_pages_ext()       EFI: - address 102000
-> > efi_allocate_pages_ext()       EFI: - returning memory 102000
-> > efi_allocate_pages_ext()     EFI: Exit: efi_allocate_pages_ext: 0
-> >
-> > Here it hangs for about 10 seconds, then reboots.
->
->
-> How are you launching QEMU?
-> IIRC by default the VM spawns in EL1 and sets the PSCI conduit to HVC. Bu=
-t Windows
-> issues an SMC unconditionally and blows up.  Can you try with
-> virtualization=3Don?
+I am trying to attempt to build a verified boot solution using Flattened
+Image Trees on a Raspberry Pi 3B +
+I have looked at a couple of guides online about how to do this, however
+they seem quite out of date and it hasn't worked.
 
-I actually haven't tried on ARM yet. I see instructions on booting
-Windows on rpi but have not tried with QEMU. I wonder if that would be
-easier than x86? Are there instructions anywhere?
+The two main guides I have looked at:
+#3066 <https://github.com/OP-TEE/optee_os/issues/3066>
+https://github.com/NVISOsecurity/VerifiedBootRPi3/blob/master/instructions.=
+md
 
-Regards,
-Simon
+I initially tried building a standard system following the instructions on
+the official OP-TEE documentation, which worked. However I have not been
+able to boot from a FIT file.
+
+I have very closely followed the instructions from the first link above,
+but no matter what I have changed so far, I get the error:
+Wrong Image Format for bootm command
+ERROR: can't get kernel image!
+
+This error occurs both when trying to autoboot and when trying to manually
+boot (using fatload and bootm in the command line).
+
+I have tried for around 2-3 weeks to attempt to solve this error, so I
+would really appreciate any advice or suggestions.
+
+I have tried both signed and unsigned FIT images and neither of them have
+worked.
+
+I have included the contents of my image.its, uboot.env.txt,
+rpi_3_defconfig and rpi.h files below as well as the logs from when I try
+and boot my system, please let me know if there is any other information
+that could help with solving this.
+
+
+
+/fit/image.its:
+
+/ {
+	description =3D "RPi FIT Image";
+	#address-cells =3D <1>;
+	images {
+		kernel-1 {
+			description =3D "default kernel";
+			data =3D /incbin/("kernel8.img");
+			type =3D "kernel";
+			arch =3D "arm64";
+			os =3D "linux";
+			compression =3D "none";
+			load =3D  <0x12000000>;
+			entry =3D <0x12000000>;
+			hash-1 {
+				algo =3D "sha1";
+			};
+		};
+		tee-1 {
+			description =3D "atf";
+			data =3D /incbin/("armstub8.bin");
+			type =3D "standalone";
+			arch =3D "arm64";
+			compression =3D "none";
+			load =3D  <0x08400000>;
+			entry =3D <0x08400000>;
+			hash-1 {
+				algo =3D "sha1";
+			};
+		};
+		fdt-1 {
+			description =3D "device tree";
+			data =3D /incbin/("bcm2710-rpi-3-b-plus.dtb");
+			type =3D "flat_dt";
+			arch =3D "arm64";
+			compression =3D "none";
+			load =3D <0x01000000>;
+			entry =3D <0x01000000>;
+			hash-1 {
+				algo =3D "sha1";
+			};
+		};
+	};
+	configurations {
+		default =3D "config-1";
+		config-1 {
+			description =3D "default configuration";
+			kernel =3D "kernel-1";
+			loadables =3D "tee-1";
+			fdt =3D "fdt-1";
+			signature-1 {
+				algo =3D "sha1,rsa2048";
+				key-name-hint =3D "dev";
+				sign-images =3D "fdt", "kernel", "loadables";
+			};
+		};
+	};
+};
+
+
+
+
+
+
+/optee/u-boot/configs/RPI_3_DEFCONFIG:
+
+CONFIG_ARM=3Dy
+CONFIG_ARCH_CPU_INIT=3Dy
+CONFIG_ARCH_BCM283X=3Dy
+CONFIG_SYS_TEXT_BASE=3D0x00080000
+CONFIG_TARGET_RPI_3=3Dy
+CONFIG_SYS_MALLOC_F_LEN=3D0x2000
+CONFIG_NR_DRAM_BANKS=3D1
+CONFIG_ENV_SIZE=3D0x4000
+CONFIG_DISTRO_DEFAULTS=3Dy
+CONFIG_OF_BOARD_SETUP=3Dy
+CONFIG_USE_PREBOOT=3Dy
+# CONFIG_DISPLAY_CPUINFO is not set
+CONFIG_DEFAULT_DEVICE_TREE=3D"bcm2837-rpi-3-b-plus"
+CONFIG_OF_CONTROL=3Dy
+CONFIG_FIT=3Dy
+CONFIG_FIT_SIGNATURE=3Dy
+CONFIG_RSA=3Dy
+CONFIG_FIT_VERBOSE=3Dy
+CONFIG_OF_LIBFDT=3Dy
+# CONFIG_DISPLAY_BOARDINFO is not set
+CONFIG_MISC_INIT_R=3Dy
+CONFIG_SYS_PROMPT=3D"U-Boot> "
+CONFIG_CMD_GPIO=3Dy
+CONFIG_CMD_MMC=3Dy
+CONFIG_CMD_USB=3Dy
+CONFIG_CMD_FS_UUID=3Dy
+CONFIG_OF_EMBED=3Dy
+CONFIG_ENV_FAT_DEVICE_AND_PART=3D"0:1"
+CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
+CONFIG_TFTP_TSIZE=3Dy
+CONFIG_MMC_SDHCI=3Dy
+CONFIG_MMC_SDHCI_BCM2835=3Dy
+CONFIG_PHYLIB=3DyONFIG_ARM=3Dy
+CONFIG_ARCH_CPU_INIT=3Dy
+CONFIG_ARCH_BCM283X=3Dy
+CONFIG_SYS_TEXT_BASE=3D0x00080000
+CONFIG_TARGET_RPI_3=3Dy
+CONFIG_SYS_MALLOC_F_LEN=3D0x2000
+CONFIG_NR_DRAM_BANKS=3D1
+CONFIG_ENV_SIZE=3D0x4000
+CONFIG_DISTRO_DEFAULTS=3Dy
+CONFIG_OF_BOARD_SETUP=3Dy
+CONFIG_USE_PREBOOT=3Dy`
+CONFIG_DM_ETH=3Dy
+CONFIG_PINCTRL=3Dy
+# CONFIG_PINCTRL_GENERIC is not set
+# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+CONFIG_SYSINFO=3Dy
+CONFIG_SYSINFO_SMBIOS=3Dy
+CONFIG_USB=3Dy
+CONFIG_USB_DWC2=3Dy
+CONFIG_USB_KEYBOARD=3Dy
+CONFIG_USB_HOST_ETHER=3Dy
+CONFIG_USB_ETHER_LAN78XX=3Dy
+CONFIG_USB_ETHER_SMSC95XX=3Dy
+CONFIG_DM_VIDEO=3Dy
+# CONFIG_VIDEO_BPP8 is not set
+# CONFIG_VIDEO_BPP16 is not set
+CONFIG_SYS_WHITE_ON_BLACK=3Dy
+CONFIG_CONSOLE_SCROLL_LINES=3D10
+CONFIG_PHYS_TO_BUS=3Dy
+CONFIG_OF_LIBFDT_OVERLAY=3Dy
+
+
+
+
+
+
+/optee/build/rpi3/firmware/uboot.env.txt:
+
+
+# generic params
+bootdelay=3D3
+stderr=3Dserial,lcd
+stdin=3Dserial,usbkbd
+stdout=3Dserial,lcd
+
+# CPU config
+cpu=3Darmv8
+smp=3Don
+
+# Console config
+baudrate=3D115200
+sttyconsole=3DttyS0
+ttyconsole=3Dtty0
+
+# Kernel/dtb filenames & load addresses
+boot_fit=3Dbootm ${fit_addr}
+fdt_addr_r=3D0x01000000
+fit_addr=3D0x02000000
+fdtfile=3Dbcm2710-rpi-3-b-plus.dtb
+load_fit=3Dfatload mmc 0:1 ${fit_addr} image.itb
+mmcboot=3Drun load_fit; run set_bootargs_tty set_bootargs_mmc
+set_common_args; run boot_fit
+
+
+# NFS/TFTP boot configuraton
+gatewayip=3D192.168.1.1
+netmask=3D255.255.255.0
+nfsserverip=3D192.168.1.100
+nfspath=3D/srv/nfs/rpi
+
+# bootcmd & bootargs configuration
+preboot=3Dusb start
+bootcmd=3Drun mmcboot
+nfsboot=3Drun load_kernel; run set_bootargs_tty set_bootargs_nfs
+set_common_args; run boot_it
+set_bootargs_tty=3Dsetenv bootargs console=3D${ttyconsole}
+console=3D${sttyconsole},${baudrate}
+set_bootargs_nfs=3Dsetenv bootargs ${bootargs} root=3D/dev/nfs rw
+rootfstype=3Dnfs nfsroot=3D${nfsserverip}:${nfspath},udp,vers=3D3 ip=3Ddhcp
+set_bootargs_mmc=3Dsetenv bootargs ${bootargs} root=3D/dev/mmcblk0p2 rw roo=
+tfs=3Dext4
+set_common_args=3Dsetenv bootargs ${bootargs}
+smsc95xx.macaddr=3D${ethaddr} 'ignore_loglevel dma.dmachans=3D0x7f35
+rootwait 8250.nr_uarts=3D1 elevator=3Ddeadline fsck.repair=3Dyes
+bcm2708_fb.fbwidth=3D1920 bcm2708_fb.fbheight=3D1080
+vc_mem.mem_base=3D0x3ec00000 vc_mem.mem_size=3D0x40000000
+dwc_otg.fiq_enable=3D0 dwc_otg.fiq_fsm_enable=3D0 dwc_otg.nak_holdoff=3D0'
+
+
+
+
+
+
+/optee/u-boot/include/configs/rpi.h:
+
+/* SPDX-License-Identifier: GPL-2.0 */
+/*
+ * (C) Copyright 2012-2016 Stephen Warren
+ */
+
+#ifndef __CONFIG_H
+#define __CONFIG_H
+
+#include <linux/sizes.h>
+#include <asm/arch/timer.h>
+
+#ifndef __ASSEMBLY__
+#include <asm/arch/base.h>
+#endif
+
+#if defined(CONFIG_TARGET_RPI_2) || defined(CONFIG_TARGET_RPI_3_32B)
+#define CONFIG_SKIP_LOWLEVEL_INIT
+#endif
+
+/* Architecture, CPU, etc.*/
+
+/* Use SoC timer for AArch32, but architected timer for AArch64 */
+#ifndef CONFIG_ARM64
+#define CONFIG_SYS_TIMER_RATE		1000000
+#define CONFIG_SYS_TIMER_COUNTER	\
+	(&((struct bcm2835_timer_regs *)BCM2835_TIMER_PHYSADDR)->clo)
+#endif
+
+/*
+ * 2835 is a SKU in a series for which the 27```08 is the first or primary =
+SoC,
+ * so 2708 has historically been used rather than a dedicated 2835 ID.
+ *
+ * We don't define a machine type for bcm2709/bcm2836 since the RPi Foundat=
+ion
+ * chose to use someone else's previously registered machine ID (3139, MX51=
+_GGC)
+ * rather than obtaining a valid ID:-/
+ *
+ * For the bcm2837, hopefully a machine type is not needed, since everythin=
+g
+ * is DT.
+ */
+#ifdef CONFIG_BCM2835
+#define CONFIG_MACH_TYPE		MACH_TYPE_BCM2708
+#endif
+
+/* Memory layout */
+#define CONFIG_SYS_SDRAM_BASE		0x00000000
+#define CONFIG_SYS_UBOOT_BASE		CONFIG_SYS_TEXT_BASE
+/*
+ * The board really has 256M. However, the VC (VideoCore co-processor) shar=
+es
+ * the RAM, and uses a configurable portion at the top. We tell U-Boot that=
+ a
+ * smaller amount of RAM is present in order to avoid stomping on the area
+ * the VC uses.
+ */
+#define CONFIG_SYS_SDRAM_SIZE		SZ_128M
+#define CONFIG_SYS_INIT_SP_ADDR		(CONFIG_SYS_SDRAM_BASE + \
+					 CONFIG_SYS_SDRAM_SIZE - \
+					 GENERATED_GBL_DATA_SIZE)
+#define CONFIG_SYS_MALLOC_LEN		SZ_4M
+#define CONFIG_LOADADDR			0x00200000
+
+#ifdef CONFIG_ARM64
+#endif
+
+/* Devices */
+/* GPIO */
+#define CONFIG_BCM2835_GPIO
+/* LCD */
+#define CONFIG_LCD_DT_SIMPLEFB
+#define CONFIG_VIDEO_BCM2835
+
+/* DFU over USB/UDC */
+#ifdef CONFIG_CMD_DFU
+#ifdef CONFIG_ARM64
+#define KERNEL_FILENAME		"Image"
+#else
+#define KERNEL_FILENAME		"zImage"
+#endif
+
+#define ENV_DFU_SETTINGS \
+	"dfu_alt_info=3Du-boot.bin fat 0 1;uboot.env fat 0 1;" \
+		      "config.txt fat 0 1;" \
+		      KERNEL_FILENAME " fat 0 1\0"
+#else
+#define ENV_DFU_SETTINGS ""
+#endif
+
+/* Console configuration */
+#define CONFIG_SYS_CBSIZE		1024
+
+/* Environment */
+#define CONFIG_SYS_LOAD_ADDR		0x1000000
+
+/* Shell */
+
+/* ATAGs support for bootm/bootz */
+#define CONFIG_SETUP_MEMORY_TAGS
+#define CONFIG_CMDLINE_TAG
+#define CONFIG_INITRD_TAG
+#define CONFIG_SYS_BOOTM_LEN (16 << 20)
+
+/* Environment */
+#define ENV_DEVICE_SETTINGS \
+	"stdin=3Dserial,usbkbd\0" \
+	"stdout=3Dserial,vidconsole\0" \
+	"stderr=3Dserial,vidconsole\0"
+
+#ifdef CONFIG_ARM64
+#define FDT_HIGH "ffffffffffffffff"
+#define INITRD_HIGH "ffffffffffffffff"
+#else
+#define FDT_HIGH "ffffffff"
+#define INITRD_HIGH "ffffffff"
+#endif
+
+/*
+ * Memory layout for where various images get loaded by boot scripts:
+ *
+ * I suspect address 0 is used as the SMP pen on the RPi2, so avoid this.
+ *
+ * Older versions of the boot firmware place the firmware-loaded DTB at 0x1=
+00,
+ * newer versions place it in high memory. So prevent U-Boot from doing its=
+ own
+ * DTB + initrd relocation so that we won't accidentally relocate the initr=
+d
+ * over the firmware-loaded DTB and generally try to lay out things startin=
+g
+ * from the bottom of RAM.
+ *
+ * kernel_addr_r has different constraints on ARM and Aarch64.  For 32-bit =
+ARM,
+ * it must be within the first 128M of RAM in order for the kernel's
+ * CONFIG_AUTO_ZRELADDR option to work. The kernel itself will be decompres=
+sed
+ * to 0x8000 but the decompressor clobbers 0x4000-0x8000 as well. The
+ * decompressor also likes to relocate itself to right past the end of the
+ * decompressed kernel, so in total the sum of the compressed and and
+ * decompressed kernel needs to be reserved.
+ *
+ *   For Aarch64, the kernel image is uncompressed and must be loaded at
+ *   text_offset bytes (specified in the header of the Image) into a 2MB
+ *   boundary. The 'booti' command relocates the image if necessary. Linux =
+uses
+ *   a default text_offset of 0x80000.  In summary, loading at 0x80000
+ *   satisfies all these constraints and reserving memory up to 0x02400000
+ *   permits fairly large (roughly 36M) kernels.
+ *
+ * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
+ * conflict with something else. Reserving 1M for each of them at
+ * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
+ *
+ * On ARM, both the DTB and any possible initrd must be loaded such that th=
+ey
+ * fit inside the lowmem mapping in Linux. In practice, this usually means =
+not
+ * more than ~700M away from the start of the kernel image but this number =
+can
+ * be larger OR smaller depending on e.g. the 'vmalloc=3DxxxM' command line
+ * parameter given to the kernel. So reserving memory from low to high
+ * satisfies this constraint again. Reserving 1M at 0x02600000-0x02700000 f=
+or
+ * the DTB leaves rest of the free RAM to the initrd starting at 0x02700000=
+.
+ * Even with the smallest possible CPU-GPU memory split of the CPU getting
+ * only 64M, the remaining 25M starting at 0x02700000 should allow quite
+ * large initrds before they start colliding with U-Boot.
+ */
+#define ENV_MEM_LAYOUT_SETTINGS \
+	"fdt_high=3D" FDT_HIGH "\0" \
+	"initrd_high=3D" INITRD_HIGH "\0" \
+	"kernel_addr_r=3D0x00080000\0" \
+	"scriptaddr=3D0x02400000\0" \
+	"pxefile_addr_r=3D0x02500000\0" \
+	"fdt_addr_r=3D0x02600000\0" \
+	"ramdisk_addr_r=3D0x02700000\0"
+
+#if CONFIG_IS_ENABLED(CMD_MMC)
+	#define BOOT_TARGET_MMC(func) \
+		func(MMC, mmc, 0) \
+		func(MMC, mmc, 1)
+#else
+	#define BOOT_TARGET_MMC(func)
+#endif
+
+#if CONFIG_IS_ENABLED(CMD_USB)
+	#define BOOT_TARGET_USB(func) func(USB, usb, 0)
+#else
+	#define BOOT_TARGET_USB(func)
+#endif
+
+#if CONFIG_IS_ENABLED(CMD_PXE)
+	#define BOOT_TARGET_PXE(func) func(PXE, pxe, na)
+#else
+	#define BOOT_TARGET_PXE(func)
+#endif
+
+#if CONFIG_IS_ENABLED(CMD_DHCP)
+	#define BOOT_TARGET_DHCP(func) func(DHCP, dhcp, na)
+#else
+	#define BOOT_TARGET_DHCP(func)
+#endif
+
+#define BOOT_TARGET_DEVICES(func) \
+	BOOT_TARGET_MMC(func) \
+	BOOT_TARGET_USB(func) \
+	BOOT_TARGET_PXE(func) \
+	BOOT_TARGET_DHCP(func)
+
+#include <config_distro_bootcmd.h>
+
+#define CONFIG_EXTRA_ENV_SETTINGS \
+	"dhcpuboot=3Dusb start; dhcp u-boot.uimg; bootm\0" \
+	ENV_DEVICE_SETTINGS \
+	ENV_DFU_SETTINGS \
+	ENV_MEM_LAYOUT_SETTINGS \
+	BOOTENV
+
+
+#endif
+
+
+
+* Boot Logs:*
+
+NOTICE:  Booting Trusted Firmware
+NOTICE:  BL1: v2.6(debug):v2.6
+NOTICE:  BL1: Built : 13:06:25, Aug  3 2023
+INFO:    BL1: RAM 0x100ee000 - 0x100f7000
+INFO:    BL1: cortex_a53: CPU workaround for 843419 was applied
+INFO:    BL1: cortex_a53: CPU workaround for 855873 was applied
+WARNING: BL1: cortex_a53: CPU workaround for 1530924 was missing!
+NOTICE:  rpi3: Detected: Raspberry Pi 3 Model B+ (1GB, Sony, UK) [0x00a020d=
+3]
+INFO:    BL1: Loading BL2
+INFO:    Loading image id=3D1 at address 0x100b4000
+INFO:    Image id=3D1 loaded: 0x100b4000 - 0x100bc419
+NOTICE:  BL1: Booting BL2
+INFO:    Entry point address =3D 0x100b4000
+INFO:    SPSR =3D 0x3c5
+NOTICE:  BL2: v2.6(debug):v2.6
+NOTICE:  BL2: Built : 13:06:25, Aug  3 2023
+INFO:    BL2: Doing platform setup
+INFO:    BL2: Loading image id 3
+INFO:    Loading image id=3D3 at address 0x100e0000
+INFO:    Image id=3D3 loaded: 0x100e0000 - 0x100ea073
+INFO:    BL2: Loading image id 4
+INFO:    Loading image id=3D4 at address 0x10100000
+INFO:    Image id=3D4 loaded: 0x10100000 - 0x1010001c
+INFO:    OPTEE ep=3D0x10100000
+INFO:    OPTEE header info:
+INFO:          magic=3D0x4554504f
+INFO:          version=3D0x2
+INFO:          arch=3D0x1
+INFO:          flags=3D0x0
+INFO:          nb_images=3D0x1
+INFO:    BL2: Loading image id 21
+INFO:    Loading image id=3D21 at address 0x10100000
+INFO:    Image id=3D21 loaded: 0x10100000 - 0x1017be98
+INFO:    BL2: Skip loading image id 22
+INFO:    BL2: Loading image id 5
+INFO:    Loading image id=3D5 at address 0x11000000
+INFO:    Image id=3D5 loaded: 0x11000000 - 0x11084b90
+NOTICE:  BL1: Booting BL31
+INFO:    Entry point address =3D 0x100e0000
+INFO:    SPSR =3D 0x3cd
+NOTICE:  BL31: v2.6(debug):v2.6
+NOTICE:  BL31: Built : 13:06:26, Aug  3 2023
+INFO:    rpi3: Checking DTB...
+INFO:    BL31: Initializing runtime services
+INFO:    BL31: cortex_a53: CPU workaround for 843419 was applied
+INFO:    BL31: cortex_a53: CPU workaround for 855873 was applied
+WARNING: BL31: cortex_a53: CPU workaround for 1530924 was missing!
+INFO:    BL31: Initializing BL32
+D/TC:0   plat_get_aslr_seed:118 Warning: no ASLR seed
+D/TC:0   add_phys_mem:665 VCORE_UNPG_RX_PA type TEE_RAM_RX 0x10100000
+size 0x00078000
+D/TC:0   add_phys_mem:665 VCORE_UNPG_RW_PA type TEE_RAM_RW 0x10178000
+size 0x00688000
+D/TC:0   add_phys_mem:665 ta_base type TA_RAM 0x10800000 size 0x00800000
+D/TC:0   add_phys_mem:665 CONSOLE_UART_BASE type IO_NSEC 0x3f200000
+size 0x00200000
+D/TC:0   add_phys_mem:665 TEE_SHMEM_START type NSEC_SHM 0x08000000
+size 0x00400000
+D/TC:0   add_va_space:705 type RES_VASPACE size 0x00a00000
+D/TC:0   add_va_space:705 type SHM_VASPACE size 0x02000000
+D/TC:0   dump_mmap_table:831 type TEE_RAM_RX   va
+0x10100000..0x10177fff pa 0x10100000..0x10177fff size 0x00078000
+(smallpg)
+D/TC:0   dump_mmap_table:831 type TEE_RAM_RW   va
+0x10178000..0x107fffff pa 0x10178000..0x107fffff size 0x00688000
+(smallpg)
+D/TC:0   dump_mmap_table:831 type RES_VASPACE  va
+0x10800000..0x111fffff pa 0x00000000..0x009fffff size 0x00a00000
+(pgdir)
+D/TC:0   dump_mmap_table:831 type SHM_VASPACE  va
+0x11200000..0x131fffff pa 0x00000000..0x01ffffff size 0x02000000
+(pgdir)
+D/TC:0   dump_mmap_table:831 type NSEC_SHM     va
+0x13200000..0x135fffff pa 0x08000000..0x083fffff size 0x00400000
+(pgdir)
+D/TC:0   dump_mmap_table:831 type TA_RAM       va
+0x13600000..0x13dfffff pa 0x10800000..0x10ffffff size 0x00800000
+(pgdir)
+D/TC:0   dump_mmap_table:831 type IO_NSEC      va
+0x13e00000..0x13ffffff pa 0x3f200000..0x3f3fffff size 0x00200000
+(pgdir)
+D/TC:0   core_mmu_xlat_table_alloc:526 xlat tables used 1 / 8
+D/TC:0   core_mmu_xlat_table_alloc:526 xlat tables used 2 / 8
+I/TC:
+I/TC: OP-TEE version: 3.22.0 (gcc version 11.3.1 20220712 (Arm GNU
+Toolchain 11.3.Rel1)) #1 Thu Aug  3 11:35:50 UTC 2023 aarch64
+I/TC: WARNING: This OP-TEE configuration might be insecure!
+I/TC: WARNING: Please check
+https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
+I/TC: Primary CPU initializing
+D/TC:0 0 boot_init_primary_late:1478 Executing at offset 0 with
+virtual load address 0x10100000
+D/TC:0 0 call_preinitcalls:21 level 2 mobj_mapped_shm_init()
+D/TC:0 0 mobj_mapped_shm_init:470 Shared memory address range:
+11200000, 13200000
+D/TC:0 0 call_initcalls:40 level 1 register_time_source()
+D/TC:0 0 call_initcalls:40 level 1 teecore_init_pub_ram()
+D/TC:0 0 call_initcalls:40 level 3 check_ta_store()
+D/TC:0 0 check_ta_store:417 TA store: "early TA"
+D/TC:0 0 check_ta_store:417 TA store: "Secure Storage TA"
+D/TC:0 0 check_ta_store:417 TA store: "REE"
+D/TC:0 0 call_initcalls:40 level 3 early_ta_init()
+D/TC:0 0 early_ta_init:56 Early TA
+f04a0fe7-1f5d-4b9b-abf7-619b85b4ce8c size 47637 (compressed,
+uncompressed 109256)
+D/TC:0 0 call_initcalls:40 level 3 verify_pseudo_tas_conformance()
+D/TC:0 0 call_initcalls:40 level 3 tee_cryp_init()
+D/TC:0 0 call_initcalls:40 level 4 tee_fs_init_key_manager()
+D/TC:0 0 call_initcalls:40 level 6 mobj_init()
+D/TC:0 0 call_initcalls:40 level 6 default_mobj_init()
+D/TC:0 0 call_initcalls:40 level 6 ftmn_boot_tests()
+D/TC:0 0 ftmn_boot_tests:198 Calling simple_call()
+D/TC:0 0 ftmn_boot_tests:198 Return from simple_call()
+D/TC:0 0 ftmn_boot_tests:199 Calling two_level_call()
+D/TC:0 0 ftmn_boot_tests:199 Return from two_level_call()
+D/TC:0 0 ftmn_boot_tests:200 Calling chained_calls()
+D/TC:0 0 ftmn_boot_tests:200 Return from chained_calls()
+D/TC:0 0 ftmn_boot_tests:202 **********************************************=
+***
+D/TC:0 0 ftmn_boot_tests:203 **************  Tests complete  **************=
+***
+D/TC:0 0 ftmn_boot_tests:204 **********************************************=
+***
+I/TC: Primary CPU switching to normal world boot
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address =3D 0x11000000
+INFO:    SPSR =3D 0x3c9
+
+
+U-Boot 2021.10 (Aug 03 2023 - 13:51:18 +0100)
+
+DRAM:  948 MiB
+RPI 3 Model B+ (0xa020d3)
+MMC:   mmc@7e202000: 0, sdhci@7e300000: 1
+Loading Environment from FAT... OK
+In:    serial
+Out:   serial
+Err:   serial
+Net:   No ethernet found.
+starting USB...
+Bus usb@7e980000: USB DWC2
+scanning bus usb@7e980000 for devices...
+Error: lan78xx_eth address not set.
+3 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+Hit any key to stop autoboot:  3 =EF=BF=BD=EF=BF=BD=EF=BF=BD 2 =EF=BF=BD=EF=
+=BF=BD=EF=BF=BD 1 =EF=BF=BD=EF=BF=BD=EF=BF=BD 0
+22161708 bytes read in 920 ms (23 MiB/s)
+Wrong Image Format for bootm command
+ERROR: can't get kernel image!
+U-Boot>
