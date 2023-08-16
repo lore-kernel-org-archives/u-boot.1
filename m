@@ -4,80 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08962C04A94
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 12:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9656EC04A6A
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 12:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C8F386380;
-	Wed, 16 Aug 2023 14:25:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A52B8677D;
+	Wed, 16 Aug 2023 14:46:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TrCexZYx";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="kxCvGT7n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D4D84702; Wed, 16 Aug 2023 14:25:04 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BCFD98638B; Wed, 16 Aug 2023 14:46:17 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F3DE866D0
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 14:24:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57859867F6
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 14:46:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-99c3c8adb27so879397066b.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 05:24:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692188698; x=1692793498;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pecrsmtV5lVMsQ/rnskKJeF55d89TUE4j7Uj46gSmjg=;
- b=TrCexZYx2skd+ZCa/1tfqrNgPzl0+FdxB255+VFGo+ULHyJp07FkwUPhjqFszftKee
- HoRes0ary8am2nG0y8qnqlcSIETmW6Pr49LOcl3QMbM/bl+lO1Gnidq9DmzsaH7mPd6r
- GTi5Vyj+UXAHzpNqOyDktJv5ZM76FdwsqQMckD331Biw/gpH069fxm0uoSga5DjlSH/H
- /xGTcWoMjIBq9IoBmabGGGSsPx8Z3KH7khhm9l1BjAlQL7ZPojQDkF8RtMn4XmRGMn+Q
- gN5cFcUYctJ6+qEJ4R4LjlFktpM5BDkBCnu3WsZakyhCz73vHyzNeoW0QNiOuvQlPg9U
- xwZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692188698; x=1692793498;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pecrsmtV5lVMsQ/rnskKJeF55d89TUE4j7Uj46gSmjg=;
- b=MxWjFDMU4klmDiM3BWzLcYTqDQ3ta3WgHZMAiKdbfe3VteWt3jnAhq4V0BFtFvNeDV
- ZOiuLOIe1C7pfE4h72y8Yse9/7HNwp0oUtVvQjOH10bVwxH511KSwDbopmFIGA1OQBeZ
- HoN5d1o/cMCQ+dKPzub3PWrI7rqyUMDiT76UlRij/96tgz/OdKaiyKV8oOyOriHDQGJI
- gi+Fj6uhov/Fs0OUs4kwMT0W8Bt1LTK2KwkMPIhGpRIZUTZeBL5hqWSpje0HEbe0c4+P
- OaWINZ3h6QOb1eaadS2mj+VCB/74giRfTG3YtRbFTsSmeMaNNo/dqTnwcx5/vOxDNB5e
- cGxw==
-X-Gm-Message-State: AOJu0YyrgAufuKw5WybUR1DKkC1fFPN2OPlUsRrys2Lwu5j5V4wWzZZ/
- pLaH6ODoGTapc2OF6Qhbl/IANdzvt2Ok9+sY/kQo4A==
-X-Google-Smtp-Source: AGHT+IE/alSSD5GiSr1pQq5C7NHIN2Q/hRotSoOj2wfiaZTcS9MClXRfrshCywKU0mmZqM4BY/CyNzMfJCMTo+6AvJk=
-X-Received: by 2002:a17:906:209e:b0:99c:b65b:54e2 with SMTP id
- 30-20020a170906209e00b0099cb65b54e2mr1470488ejq.55.1692188698184; Wed, 16 Aug
- 2023 05:24:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [172.20.10.2] (unknown [109.166.130.180])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 51EAF6600359;
+ Wed, 16 Aug 2023 13:46:13 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1692189973;
+ bh=11YkeYFtdyuHlp4S+xHkZHQMHLPDdEVxnNk/gyPs3MI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=kxCvGT7n77zfBqRAr+tZgIQrx5GnuI2/rxuyQb2cp9aqEEcvvwbN/d+NAx1bHp2ga
+ LAkexZLlX6LRezyVJc3gsV2QseSqERJBQIBAdilCezuvzA4ziMEwIcx4Us/QrL+ei2
+ mCijxscxdW+/PlsnXjAhCGCVywgOWcalh8kRhXmH8cZwHvoLpIfFuPrgxMMd375GZP
+ HlW9/Eb6piyaS/KUVjcOdITPqXOAhq6IkJqeEJsgnYyvhHcunXmLdN0HnaSuRz8dst
+ OAkm7LW+fqVn+4vE0xGmRV8BQ5lrg0TDVfHBy+nx3tcYy1X7CSIApqMQiQMi8lzW+R
+ dkHgWv/eI9Szw==
+Message-ID: <672e9f35-3795-7176-e081-d49108fd9f7f@collabora.com>
+Date: Wed, 16 Aug 2023 15:46:09 +0300
 MIME-Version: 1.0
-References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
- <20230814133253.4150-4-maxim.uvarov@linaro.org> <ZNo3+qhKIEqmdMTh@hades>
- <CAD8XO3a-C1oiZdcy_sk0DOzKwPEq7pBW6CsDeSHM-bmLE=RXHA@mail.gmail.com>
- <20230815144249.GM3630934@bill-the-cat>
- <CAC_iWjJm=95uNW1y=FLkEyMpcubYa29ZLM_CZooPRT8mt+jWVg@mail.gmail.com>
- <CAD8XO3a2euUOpM-JHN2p3taL=Eh=-51wyjkoDNqNFmX6pvNXfQ@mail.gmail.com>
- <CAC_iWjLXDCCx6oksQgOy+OBrrVCWwJkRMbEo8+gr0btdY5D6Jw@mail.gmail.com>
-In-Reply-To: <CAC_iWjLXDCCx6oksQgOy+OBrrVCWwJkRMbEo8+gr0btdY5D6Jw@mail.gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Wed, 16 Aug 2023 18:24:46 +0600
-Message-ID: <CAD8XO3bCckd-42zixaPZ3V_7Bj0HHgVVUhjSmExLb4ONPd5DAw@mail.gmail.com>
-Subject: Re: [PATCHv6 03/14] net/lwip: implement dns cmd
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot@lists.denx.de, 
- pbrobinson@redhat.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- goldsimon@gmx.de, lwip-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 1/4] configs: at91: sam9x60_curiosity: Sync both defconfig
+ variants
+Content-Language: en-US
+To: Alexander Dahl <ada@thorsis.com>,
+ Durai Manickam KR <durai.manickamkr@microchip.com>,
+ Sandeep Sheriker M <sandeep.sheriker@microchip.com>
+Cc: u-boot@lists.denx.de, Mihai Sain <mihai.sain@microchip.com>
+References: <20230809141622.231247-1-ada@thorsis.com>
+ <20230809141622.231247-2-ada@thorsis.com>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <20230809141622.231247-2-ada@thorsis.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,107 +76,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Aug 2023 at 17:54, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+Hi Alexander,
 
-> On Wed, 16 Aug 2023 at 14:01, Maxim Uvarov <maxim.uvarov@linaro.org>
-> wrote:
-> >
-> >
-> >
-> > On Wed, 16 Aug 2023 at 16:26, Ilias Apalodimas <
-> ilias.apalodimas@linaro.org> wrote:
-> >>
-> >> On Tue, 15 Aug 2023 at 17:42, Tom Rini <trini@konsulko.com> wrote:
-> >> >
-> >> > On Tue, Aug 15, 2023 at 06:42:14PM +0600, Maxim Uvarov wrote:
-> >> > > On Mon, 14 Aug 2023 at 20:19, Ilias Apalodimas <
-> ilias.apalodimas@linaro.org>
-> >> > > wrote:
-> >> > >
-> >> > > [...]
-> >> > >
-> >> > >
-> >> > > > > +/*
-> >> > > > > +* This function creates the DNS request to resolve a domain
-> host name.
-> >> > > > Function
-> >> > > >
-> >> > > > You need the name of the function as well.  Please have a look at
-> how the
-> >> > > > rest of the code is documented.
-> >> > > >
-> >> > > > > +* can return immediately if previous request was cached or it
-> might
-> >> > > > require
-> >> > > > > +* entering the polling loop for a request to a remote server.
-> >> > > > > +*
-> >> > > > > +* @name  dns name to resolve
-> >> > > >
-> >> > > > @name: etc
-> >> > > >
-> >> > > > > +* @varname (optional) U-Boot variable name to store the result
-> >> > > > > +* Return: ERR_OK(0) for fetching entry from the cache
-> >> > > > > +*         ERR_INPROGRESS(-5) success, can go to the polling
-> loop
-> >> > > > > +*         Other value < 0, if error
-> >> > > > > +*/
-> >> > > > >
-> >> > > >
-> >> > >
-> >> > > Is there any command to check all the files for the comments style?
-> >> >
-> >> > I suspect if you included them in docs, htmldocs/etc would note
-> >> > problems, Heinrich?
-> >> >
-> >>
-> >> Yes 'make htmldocs' blows up on errors, at least for the EFI subsystem
-> >>
-> >> Cheers
-> >> /Ilias
-> >
-> >
-> > O! Ilias thanks for the reference. First patch for
-> doc/develop/net_lwip.rst needed direct references:
-> >
-> > .. kernel-doc:: include/net/lwip.h
-> >    :internal:
-> >
-> > to force Sphinx  to generate docs for these files. (as I understand for
-> .c files it does checks and for .h files it generates docs).
-> >
-> > Without specification syntax is not validated. It will be good to do
-> something to check all U-Boot .h files for the common syntax later.
->
-> You need comments that look like this
->   /**
->    * parse_event_log_header() -  Parse and verify the event log header
-> fields
->    *
->    * @buffer:                     Pointer to the start of the eventlog
->    * @size:                       Size of the eventlog
->    * @pos:                        Return offset of the next event in
-> buffer right
->    *                              after the event header i.e specID
->    *
->    * Return:      status code
->    */
->
-> Cheers
-> /Ilias
->
+On 8/9/23 17:16, Alexander Dahl wrote:
+> The board has two SD card slots and we have two defconfigs for booting
+> from either the first (micro SD) named 'sam9x60_curiosity_mmc_defconfig'
+> or the second (full size SD) named 'sam9x60_curiosity_mmc1_defconfig'.
+> For comparable Microchip boards (sama5d27-som1-ek, sama5d29-curiosity,
+> sama7g5ek) with two card slots the defconfigs only differ in BOOTARGS,
+> BOOTCOMMAND, and ENV_FAT_DEVICE_AND_PART and the same should be the case
+> for sam9x60_curiosity.
 
+To shed some light on this: the defconfigs for different at91 boards 
+should differ only in terms of *where the env is stored*, but all the 
+drivers should be available in all defconfigs.
+The `where it boots from` sometimes is not related to the name of the 
+defconfig, because e.g. we have board_qspiflash_defconfigs, which store 
+the env in the qspi flash, but do not boot Linux from it, main reason is 
+that the QSPI flash is very small (8 Mbytes e.g.)
+Most boards have a simple boot example from the same media as where the 
+env is stored, but it's not always the case as seen above.
 
-Yes, I added html generation for these files and now I can fix style.
+> 
+> Here the 'mmc1' config has more options enabled to support the raw NAND
+> flash populated on the board, so the 'mmc' config (for mmc0) was adapted
+> by enabling additional options, instead of removing options from mmc1.
+> 
+> Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> ---
+>   configs/sam9x60_curiosity_mmc_defconfig | 15 ++++++++++++++-
+>   1 file changed, 14 insertions(+), 1 deletion(-)
+> 
+> diff --git a/configs/sam9x60_curiosity_mmc_defconfig b/configs/sam9x60_curiosity_mmc_defconfig
+> index 10937d67d7..269f015989 100644
+> --- a/configs/sam9x60_curiosity_mmc_defconfig
+> +++ b/configs/sam9x60_curiosity_mmc_defconfig
+> @@ -23,7 +23,7 @@ CONFIG_FIT=y
+>   CONFIG_SD_BOOT=y
+>   CONFIG_BOOTDELAY=3
+>   CONFIG_USE_BOOTARGS=y
+> -CONFIG_BOOTARGS="mem=128M console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
+> +CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootwait"
 
+Have you checked the Linux DT if the memory is 128M hence the `mem=128M` 
+is redundant ?
 
-> >
-> > BR,
-> > Maxim.
-> >
-> >
-> >
-> >>
-> >> > --
-> >> > Tom
->
+>   CONFIG_USE_BOOTCOMMAND=y
+>   CONFIG_BOOTCOMMAND="fatload mmc 0:1 0x21000000 at91-sam9x60_curiosity.dtb; fatload mmc 0:1 0x22000000 zImage; bootz 0x22000000 - 0x21000000"
+>   CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+> @@ -38,6 +38,8 @@ CONFIG_CMD_DM=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_I2C=y
+>   CONFIG_CMD_MMC=y
+> +CONFIG_CMD_NAND=y
+> +CONFIG_CMD_NAND_TRIMFFS=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_CMD_DHCP=y
+>   CONFIG_BOOTP_BOOTFILESIZE=y
+> @@ -50,6 +52,8 @@ CONFIG_OF_CONTROL=y
+>   CONFIG_ENV_IS_IN_FAT=y
+>   CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_REGMAP=y
+> +CONFIG_SYSCON=y
+>   CONFIG_CLK=y
+>   CONFIG_CLK_CCF=y
+>   CONFIG_CLK_AT91=y
+> @@ -60,10 +64,17 @@ CONFIG_CPU=y
+>   CONFIG_AT91_GPIO=y
+>   CONFIG_DM_I2C=y
+>   CONFIG_SYS_I2C_AT91=y
+> +CONFIG_ATMEL_EBI=y
+> +CONFIG_MFD_ATMEL_SMC=y
+>   CONFIG_I2C_EEPROM=y
+>   CONFIG_MICROCHIP_FLEXCOM=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_ATMEL=y
+> +CONFIG_MTD=y
+> +CONFIG_DM_MTD=y
+> +CONFIG_MTD_RAW_NAND=y
+> +CONFIG_DM_NAND_ATMEL=y
+> +CONFIG_SYS_NAND_ONFI_DETECTION=y
+>   CONFIG_PHY_MICREL=y
+>   CONFIG_MACB=y
+>   CONFIG_PINCTRL=y
+> @@ -71,6 +82,8 @@ CONFIG_PINCTRL_AT91=y
+>   CONFIG_DM_SERIAL=y
+>   CONFIG_DEBUG_UART_ANNOUNCE=y
+>   CONFIG_ATMEL_USART=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_SYSRESET_AT91=y
+>   CONFIG_TIMER=y
+>   CONFIG_MCHP_PIT64B_TIMER=y
+>   CONFIG_W1=y
+
