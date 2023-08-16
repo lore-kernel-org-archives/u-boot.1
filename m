@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE77C001E0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:07:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5965C001E0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA4D186A22;
-	Wed, 16 Aug 2023 17:07:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 18247869E5;
+	Wed, 16 Aug 2023 17:08:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qZpri2db";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K+lvwj8Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 894EA86A12; Wed, 16 Aug 2023 17:07:41 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 389F1807C9; Wed, 16 Aug 2023 17:08:38 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F327386A21
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:07:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 723A8869FC
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:08:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=6592a39e51=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37GEHqLT020809; Wed, 16 Aug 2023 17:07:34 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:to:cc:from:subject:content-type
- :content-transfer-encoding; s=selector1; bh=KNXNOdZz3ihQKpkpMIbS
- PiDmoqWWutnb+aeYqAhZ+DI=; b=qZpri2dbN034ob4VUUrRnQn1L3GuGXvzyyRv
- s0TZf2UDAfsUO1EIgNmicG7HeK5UrGQV03oWGWAvV7dYWVaqVkPGYHxZ4PefDbn4
- ycn3/f/ZpTrqlJV6VZVI+tkpI7JBBd2CnF8MVqaVvqCP04kONCHUNzE89P+EEf6D
- l9zafPRZ/pC6XqBfcx+qcxNsnzDyr1BDTaKpO/2tM84REkcZ4kfCqvdZiqYvqZ9X
- Xdu7mUuoEmSkr/wlTWn58VEzdAERCL3WmBf41kQAyk3ykg70Jrrsr+I4c6LF6UxE
- y14ewBPS+xKqWGubEZ11kc5XB4ETNkgSq22ZInRJxPR8j8DLVA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sh03cr82y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 16 Aug 2023 17:07:34 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 389E410005D;
- Wed, 16 Aug 2023 17:07:33 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2AAC9260282;
- Wed, 16 Aug 2023 17:07:33 +0200 (CEST)
-Received: from [10.201.20.38] (10.201.20.38) by EQNDAG1NODE4.st.com
- (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 16 Aug
- 2023 17:07:32 +0200
-Message-ID: <2eff3bb2-ebbd-b71e-3707-c3ae29419bfa@foss.st.com>
-Date: Wed, 16 Aug 2023 17:07:31 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d7225259f52so454878276.0
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 08:08:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692198513; x=1692803313;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sN1zSGVQZs3/Kj51De/cexNjnbyIlw5EPX/wd4oZllM=;
+ b=K+lvwj8YBnq+BNsxRM6atCel5koecNFhmudI1FtrZhlAfTFhAXlheE6PZlZROLcZD9
+ 0xYgyKrjOpcHjrWcBtOTpwDnBaOsjHA6UnqanRhTWqak7qASdznqoYnIpeCA6Pth3UQa
+ 9T+UKGtNbSCsjZYnyDKFW4gZVd7SBET6sM7uo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692198513; x=1692803313;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sN1zSGVQZs3/Kj51De/cexNjnbyIlw5EPX/wd4oZllM=;
+ b=EMitn6a095RsfJKgy3ftzH5mxHf2Liqg+EnyA7JKfYPbuDeVvy/Y6uvSBzNMR3KH/E
+ cxvIwdF5q7Fv9uCLkTCe6/jMiSgooEIpxoh4hPSdhY4/lx9fI4y8zYYuoA3o/cP9JyEu
+ OOZDBZtkIpy79dkMLSisP1O7Zz3OPCh/S3GMVKo540c8nHICbE7ycYpz83cHltlnnsdu
+ PvsfbtPbc9lzTCvURI0Ep1SjrXguw4K7KwHQlXfXsokoCKMRlI89g+C7TfdRgF0wvSqr
+ Xwyw462RucFEMPJtn0PCo9S+Zq81F7qP0VsTtANnZBavrY3hEu82XqFfTeUPugAt8TC7
+ UCcA==
+X-Gm-Message-State: AOJu0Yy1HAswBuz1R02rJLOhPO9uIPOeCGP+P2+Mh2t/+BzaPBD3Cggn
+ aTtFseuIXSwU9y+SkB+RPqIlDT7eDTOJplfXXv5PMYn3/FpID2Y3n/g=
+X-Google-Smtp-Source: AGHT+IGt+ZH4n1a4G8U186yoGG7u/JLNjsnBWOzdE5nWEB2KKRaGddFsNCexMns2AQz75gGVrrt2rhifdMsjm9XVx+Q=
+X-Received: by 2002:a25:d5:0:b0:ca2:f20:4139 with SMTP id
+ 204-20020a2500d5000000b00ca20f204139mr1875147yba.64.1692198512701; 
+ Wed, 16 Aug 2023 08:08:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Marek Vasut
- <marex@denx.de>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- <patrice.chotard@foss.st.com>, Valentin Caron <valentin.caron@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot master / v2023.10 =
- u-boot-stm32_20230816
+References: <20230727215433.578830-1-sjg@chromium.org>
+In-Reply-To: <20230727215433.578830-1-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 16 Aug 2023 09:08:19 -0600
+Message-ID: <CAPnjgZ2krc9eTrCye9UC6=HM8oTrpVmv8mHEGHJRu5kqu7ts+w@mail.gmail.com>
+Subject: Re: [RESEND PATCH v3 0/3] rpi: Convert to standard boot
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To EQNDAG1NODE4.st.com
- (10.75.129.133)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-16_15,2023-08-15_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,75 +83,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Matthias, Peter,
 
-Please pull the STM32 related fixes for u-boot/master, v2023.10: u-boot-stm32-20230816
+On Thu, 27 Jul 2023 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+>
+> This series moves Raspberry Pi boards over to use standard boot.
+>
+> It also moves rpi over to use a text-based environment. Unfortunately it
+> is not possible to empty the header file due to several CFG options.
+>
+> Fix the repeated "and and" while we are here.
+>
+> Note that this reduces rodata size by about 4.5KB. We could get another
+>
+> for a total image-size saving of about 15KB. This is mostly because
+> HUSH_PARSER is not enabled anymore and the environment shrinks down by
+> about 3.5K. Hush is not actually needed anymore, since standard boot does
+> not use it. Also CMD_SYSBOOT is dropped since standard boot calls the
+> pxe_utils code directly in that case.
 
-CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/17388
+It has now been about 6 months since I sent the v1 series of this.
+Even this v3 series is now out of date (in the cover letter).
 
-The following changes since commit 9b54b0e37b72aa9bfff09cbbe13465abfa143f84:
+Is rpi still maintained?
 
-  Merge tag 'efi-2023-10-rc3' of https://source.denx.de/u-boot/custodians/u-boot-efi (2023-08-15 13:08:17 -0400)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20230816
-
-for you to fetch changes up to 9e8cbea1a74516235820ccd50d513c961e43cb70:
-
-  serial: stm32: extend TC timeout (2023-08-16 15:38:23 +0200)
-
-----------------------------------------------------------------
-DHSOM: Power cycle Buck3 in reset
-DHCOM: Switch DWMAC RMII clock to MCO2
-stm32f746: fix display pinmux
-stm32mp: psci: Inhibit PDDS because CSTBYDIS is set
-stm32mp1: DT alignment with v6.4
-stm32mp1: add splashscreen with STMicroelectronics logo
-stm32mp1: clk: remove error for disabled clock in stm32mp1_clk_get_parent
-serial: stm32: Extend TC timeout
-
-----------------------------------------------------------------
-Dario Binacchi (1):
-      ARM: dts: stm32: fix display pinmux for stm32f746-disco
-
-Marek Vasut (3):
-      ARM: stm32: Power cycle Buck3 in reset on DHSOM
-      ARM: stm32: Inhibit PDDS because CSTBYDIS is set
-      ARM: dts: stm32: Switch DWMAC RMII clock to MCO2 on DHCOM
-
-Patrick Delaunay (3):
-      clk: stm32mp1: remove error for disabled clock in stm32mp1_clk_get_parent
-      ARM: dts: stm32mp: alignment with v6.4
-      board: stm32mp1: add splash screen with stmicroelectronics logo
-
-Valentin Caron (1):
-      serial: stm32: extend TC timeout
-
- MAINTAINERS                                |   1 +
- arch/arm/dts/stm32f746-disco-u-boot.dtsi   |   2 +-
- arch/arm/dts/stm32mp13-pinctrl.dtsi        | 129 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp131.dtsi               |  99 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
- arch/arm/dts/stm32mp135f-dk.dts            |  42 +++++++++++++++++++++++++++++++++++++++++-
- arch/arm/dts/stm32mp15-pinctrl.dtsi        |  34 +++++++++++++++++-----------------
- arch/arm/dts/stm32mp151.dtsi               |   4 ++--
- arch/arm/dts/stm32mp157a-dk1.dts           |   3 ---
- arch/arm/dts/stm32mp157c-dk2.dts           |   3 ---
- arch/arm/dts/stm32mp157c-ed1.dts           |  17 ++++-------------
- arch/arm/dts/stm32mp157c-ev1.dts           |   9 ++++-----
- arch/arm/dts/stm32mp15xx-dhcom-som.dtsi    |  22 ++++++++++++++++++----
- arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi |  14 ++++++++++++++
- arch/arm/dts/stm32mp15xx-dkx.dtsi          |  15 ++++++---------
- arch/arm/mach-stm32mp/psci.c               |   2 +-
- board/st/common/stpmic1.c                  |  10 +++-------
- board/st/common/stpmic1.h                  |   2 +-
- board/st/stm32mp1/spl.c                    |  13 +++++++++++--
- configs/stm32mp15_basic_defconfig          |   3 +++
- configs/stm32mp15_defconfig                |   3 +++
- configs/stm32mp15_trusted_defconfig        |   3 +++
- drivers/clk/stm32/clk-stm32mp1.c           |   3 ++-
- drivers/serial/serial_stm32.c              |  18 ++++++++++++------
- include/configs/stm32mp15_st_common.h      |   4 +++-
- tools/logos/st.bmp                         | Bin 0 -> 18244 bytes
- 25 files changed, 375 insertions(+), 80 deletions(-)
- create mode 100644 tools/logos/st.bmp
+Regards,
+Simon
