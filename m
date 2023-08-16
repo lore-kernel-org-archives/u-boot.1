@@ -4,46 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283DFC001B0
-	for <u-boot@archiver.kernel.org>; Tue, 15 Aug 2023 23:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E693C0015E
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 01:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C11E86785;
-	Wed, 16 Aug 2023 01:00:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AE2286995;
+	Wed, 16 Aug 2023 03:23:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="calI2sWz";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C12378679B; Wed, 16 Aug 2023 01:00:49 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0216D8671F
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 01:00:46 +0200 (CEST)
+ id 142B0867C7; Wed, 16 Aug 2023 03:23:12 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C545886994
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 03:23:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E549B1063;
- Tue, 15 Aug 2023 16:01:27 -0700 (PDT)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0EE033F6C4;
- Tue, 15 Aug 2023 16:00:44 -0700 (PDT)
-Date: Tue, 15 Aug 2023 23:59:46 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
- Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH 3/3] sunxi: psci: implement PSCI on R528
-Message-ID: <20230815235946.0c8b0dce@slackpad.lan>
-In-Reply-To: <225be7f9-558e-4695-0b38-b30b0229cdcd@gmail.com>
-References: <20230812003055.74527-1-CFSworks@gmail.com>
- <20230812003055.74527-4-CFSworks@gmail.com>
- <20230814151642.6f47f6b5@donnerap.manchester.arm.com>
- <225be7f9-558e-4695-0b38-b30b0229cdcd@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-99bf1f632b8so841052666b.1
+ for <u-boot@lists.denx.de>; Tue, 15 Aug 2023 18:23:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692148988; x=1692753788;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wfplmyj9Fc/hj8BtnAPD03dsC95Ro1XWbXVIHabFw3Q=;
+ b=calI2sWzVGzpVezZzblS88h5NliQrFOIx363sVzf32BmDGR82VCcPVL0tifnmD/B1Q
+ qRt9r9FG1vjlkq0KOZHuOyNWI8himaoNgY76LPy/OBOLiggU9qi6faxL1msISyOJElhR
+ gV70exYpTSXdxBicNqVA41N9p7fG9h/plj+kk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692148988; x=1692753788;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Wfplmyj9Fc/hj8BtnAPD03dsC95Ro1XWbXVIHabFw3Q=;
+ b=Dx9dqasQoVAnv2GF2Vd4ZF6GMe4JcW2Znn3qSTn38l5OEJIEsAE2aH2X1slf+EMkbn
+ iDu34M7L1ebIxsJEUF/pXpCGFAWOd9xphY3z4+aRDCoWyrgZXLUuX+5DGQP4bXr6yZbd
+ S0Ohm8TcuYKqpA/UYawDszYI/ms9qCK63TXVv1K4BR0WJFyp7WXDUijLVVjDn8VbH/vt
+ AGkW0lifVDPqCfYH8P270Fse1RxzfVGwLC3hZ3Ac5gyP0YHeIeVHpEtYNXawCeo1b5QY
+ plB0XkaV7PjTgqYpAuv4fKk/oq5+7OR1nkaP/5G78n6PFSJxz9LCV1E615kaxa+FDsAM
+ CgQw==
+X-Gm-Message-State: AOJu0YwLa5cof6UA809J0CYXkJD0hbXUOQuWCDjjG1Zj/jd+QQlmxoDN
+ GtI+nx/23p2UJIAhYwdO14gBJ5i4tdA/zm2p4/Hi+/8bLymyf92Z8K+3lA==
+X-Google-Smtp-Source: AGHT+IEVz7vzIjCpbjPQIvaEuTsA2RM+m6P7JQVVRIW9mbyiHxN/E+3BPaIzymAGiB8AKukEdAbEFNHj6WMTMUQzKcE=
+X-Received: by 2002:a17:906:1da1:b0:99b:f392:10b0 with SMTP id
+ u1-20020a1709061da100b0099bf39210b0mr224344ejh.37.1692148987716; Tue, 15 Aug
+ 2023 18:23:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 15 Aug 2023 19:22:56 -0600
+Message-ID: <CAPnjgZ2a6S_Hh_=Gb=_Cz2zr9DG7TPEJxJD9z_PU9E6LiiMPHg@mail.gmail.com>
+Subject: Booting Windows 11
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,52 +80,259 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Aug 2023 13:17:33 -0600
-Sam Edwards <cfsworks@gmail.com> wrote:
+Hi Heinrich,
 
-Hi Sam,
+I thought I would try booting Windows on U-Boot but it does not get
+very far. Have you tried that? I note a ew odd things below. Is there
+a validation suite for it?
 
-> On 8/14/23 08:16, Andre Przywara wrote:
-> > Hi Sam,
-> >   
-> >> This patch adds the necessary code to make nonsec booting and PSCI
-> >> secondary core management functional on the R528/T113.  
-> > 
-> > Unfortunately this patch breaks the build on older 32-bit SoCs, as
-> > SUNXI_CPUX_BASE is not defined there. That's a typical problem of the
-> > "C-if" approach, but typically there is a clean, albeit not trivial,
-> > solution:
-> > 
-> > It seems like SUNXI_CPUX_BASE and SUNXI_CPUCFG_BASE are mutually
-> > exclusive, and I actually carry a "#define SUNXI_CPUCFG_BASE 0" hack in my
-> > patches already.
-> > So I wonder if we should unify those two into SUNXI_CPUCFG_BASE, with the
-> > following rework:  
-> 
-> The SUNXI_CPUX_BASE -> SUNXI_CPUCFG_BASE rename worked excellently. 
-> We're having the same problem with SUNXI_R_CPUCFG_BASE as well, though. 
-> How do you want to handle that?
+https://github.com/sjg20/u-boot/tree/efi2
 
-So that's a bit more nasty indeed. I don't even know if R_CPUCFG really
-makes sense here, as the _R_ term typically refers to the management
-processor, which the D1/R528 don't have. Or at least the always-on power
-domain, but then again this hardly relates to the secondary entry
-point. I think the name was just used because the address matches the
-one used in the H6. Anyway, I got the impression that Allwinner just
-uses registers wherever they find them, and that they don't care too
-much about logical grouping or compatibility.
+qemu-system-x86_64  -smp 4 -m 8G -serial mon:stdio -bios
+/tmp/b/qemu-x86_64/u-boot.rom -drive
+id=3Dfisk,file=3Droot.img,if=3Dvirtio,driver=3Draw -drive
+id=3Ddisk,if=3Dvirtio,file=3D/vid/software/win/Win11_22H2_English_x64v2.iso
 
-So taking a step back, I wonder if we should actually just define a
-CONFIG_SUNXI_CPU_SOFT_ENTRY (or so) *Kconfig* symbol, which holds that
-address, and let the per-SoC definition be solved in Kconfig instead.
-Because SUNXI_R_CPUCFG_BASE and also SUNXI_RTC_BASE seem to be just
-used as the base address for that purpose, with some magic offset
-added, across all of U-Boot (ARMv8 FEL and v7 PSCI).
+Scanning bootdev 'virtio-blk#0.bootdev':
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+Path, 00000000becf6848, 00000000becf6840)
+efi_locate_device_path()     EFI: Call:
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_handle_buffer()       EFI: Entry
+efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+00000000becf67b8, 00000000becf67b0)
+efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+efi_locate_device_path()     EFI: 0 returned by
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
+efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
 
-So can you try to work on that base? I will take care of
-armv8/fel_utils.S, which uses some post-increment assembly trick to
-keep the code small, which wouldn't work anymore. But I have an idea
-how to solve this.
 
-Cheers,
-Andre
+^ This seems unhappy because it is a virtio device?
+
+ efi_locate_device_path(protocol, &dp, &old_handle)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6948, Device Path, 0,
+00000000bdcf2040)
+efi_install_protocol_interface()     EFI: handle 00000000bed1f820
+    efi_add_protocol()     EFI: installed device path
+'/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
+b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-a=
+eab-82e828f3628b,8200000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f362=
+8b,1600820000000000)'
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6948, Block IO, 0,
+00000000bed1f850)
+efi_install_protocol_interface()     EFI: handle 00000000bed1f820
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+Scanning bootdev 'virtio-blk#1.bootdev':
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+Path, 00000000becf6848, 00000000becf6840)
+efi_locate_device_path()     EFI: Call:
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_handle_buffer()       EFI: Entry
+efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+00000000becf67b8, 00000000becf67b0)
+efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+efi_locate_device_path()     EFI: 0 returned by
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
+efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6948, Device Path, 0,
+00000000bdcf0040)
+efi_install_protocol_interface()     EFI: handle 00000000bed24ef0
+    efi_add_protocol()     EFI: installed device path
+'/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
+b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-a=
+eab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f362=
+8b,1600820001000000)'
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6948, Block IO, 0,
+00000000bed24f20)
+efi_install_protocol_interface()     EFI: handle 00000000bed24ef0
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+Path, 00000000becf6818, 00000000becf6810)
+efi_locate_device_path()     EFI: Call:
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_handle_buffer()       EFI: Entry
+efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+00000000becf6788, 00000000becf6780)
+efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+efi_locate_device_path()     EFI: 0 returned by
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6918, Device Path, 0,
+00000000bdced040)
+efi_install_protocol_interface()     EFI: handle 00000000bed1f9e0
+    efi_add_protocol()     EFI: installed device path
+'/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
+b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-a=
+eab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f362=
+8b,1600820001000000)/CDROM(1,0x80c,0x8)'
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6918, Block IO, 0,
+00000000bed1fa10)
+efi_install_protocol_interface()     EFI: handle 00000000bed1f9e0
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+Path, 00000000becf6818, 00000000becf6810)
+efi_locate_device_path()     EFI: Call:
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_handle_buffer()       EFI: Entry
+efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+00000000becf6788, 00000000becf6780)
+efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+efi_locate_device_path()     EFI: 0 returned by
+efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+&handles)
+efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_locate_device_path(protocol, &dp, &old_handle)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6918, Device Path, 0,
+00000000bdceb040)
+efi_install_protocol_interface()     EFI: handle 00000000bed2b050
+    efi_add_protocol()     EFI: installed device path
+'/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
+b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-a=
+eab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f362=
+8b,1600820001000000)/CDROM(2,0x814,0x0)'
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_multiple_protocol_interfaces_int() EFI: Call:
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+efi_install_protocol_interface()   EFI: Entry
+efi_install_protocol_interface(00000000becf6918, Block IO, 0,
+00000000bed2b080)
+efi_install_protocol_interface()     EFI: handle 00000000bed2b050
+efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interfac=
+e: 0
+efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+protocol_interface)
+  0  efi          ready   virtio       2  virtio-blk#1.bootdev.part
+efi/boot/bootx64.efi
+** Booting bootflow 'virtio-blk#1.bootdev.part_2' with efi
+efi_set_blk_dev_to_system_partition() No EFI system partition
+efi_set_blk_dev_to_system_partition() No EFI system partition
+     efi_var_to_file() Failed to persist EFI variables
+    efi_add_protocol() EFI: installed device path
+'/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73=
+b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/MAC(525400123456,1)'
+EFI using ACPI tables at f0060
+     efi_install_fdt() WARNING: Can't have ACPI table and device tree
+- ignoring DT.
+       efi_run_image() Booting /efi\boot\bootx64.efi
+      efi_load_image() EFI: Entry efi_load_image(0, 00000000becfb110,
+/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b=
+9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-ae=
+ab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628=
+b,1600820001000000)/CDROM(2,0x814,0x0)/efi\boot\bootx64.efi,
+0000000001000000, 904560, 00000000becf6820)
+      efi_load_image() EFI: Exit: efi_load_image: 0
+     efi_start_image() EFI: Entry efi_start_image(00000000bed3d820,
+00000000becf67e0, 00000000becf67e8)
+     efi_start_image()   EFI: Call: efi_open_protocol(image_handle,
+&efi_guid_loaded_image, &info, NULL, NULL,
+EFI_OPEN_PROTOCOL_GET_PROTOCOL)
+   efi_open_protocol()     EFI: Entry
+efi_open_protocol(00000000bed3d820, Loaded Image, 00000000becf6730,
+0000000000000000, 0000000000000000, 0x2)
+   efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
+     efi_start_image()   EFI: 0 returned by
+efi_open_protocol(image_handle, &efi_guid_loaded_image, &info, NULL,
+NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL)
+     efi_start_image()   EFI: Jumping into 0x00000000bdbaf090
+     efi_start_image()   EFI: Call: image_obj->entry(image_handle, &systab)
+   efi_open_protocol()     EFI: Entry
+efi_open_protocol(00000000bed3d820, Loaded Image, 00000000becf66c8,
+00000000becfb110, 0000000000000000, 0x1)
+   efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
+   efi_open_protocol()     EFI: Entry
+efi_open_protocol(00000000bed2b050, Device Path, 00000000becf6670,
+00000000becfb110, 0000000000000000, 0x1)
+   efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
+efi_allocate_pages_ext()     EFI: Entry efi_allocate_pages_ext(2, 2,
+0x1, 00000000becf66d8)
+efi_allocate_pages_ext()       EFI: - type address
+efi_allocate_pages_ext()       EFI: - address 102000
+efi_allocate_pages_ext()       EFI: - returning memory 102000
+efi_allocate_pages_ext()     EFI: Exit: efi_allocate_pages_ext: 0
+
+Here it hangs for about 10 seconds, then reboots.
+
+Regards,
+Simon
