@@ -4,69 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC02C001E0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 14:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 159D2C001E0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 14:25:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43E7D869D8;
+	by phobos.denx.de (Postfix) with ESMTP id 8F2DE869F3;
 	Wed, 16 Aug 2023 16:25:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m85fuszR";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mAMNk12j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF30A8699B; Wed, 16 Aug 2023 11:28:10 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BE47C8699B; Wed, 16 Aug 2023 11:30:25 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2061a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eab::61a])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FE1180748
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 11:28:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64BD7868D8
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 11:30:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fpidev23@gmail.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-76cee0a4b70so62737885a.0
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 02:28:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692178085; x=1692782885;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=3OF1sjoMWFsZVASmvFXTzXiWVJnXD4HeHz2G+CtOW+M=;
- b=m85fuszR/JbA4l/4faJndq/CO5LSO1MsIGyUhwThd74CsW+E5pUw+mxod0WIFMWvSi
- TWDGt+lj9aYkzr1IeKGdg5BeAKjuMbx9j2LGOGKeeQGjVk2h7hACNKNoDgZfY+L3YtTz
- qVChISqLoudlgBrTc7BU95Y83f1M2v59In84YAy9CI0T8hTIl9w1fmmQK8ZqbMHCeDUL
- NBDLc+SgXtfTUXUZmUZ82QKO3kfn4lgka2f5hMkKRHqjZlKRyXdTRBiDpug96iDAW13L
- bRfrBLpi4xlF87+l5VPijkRKYdfMWetLZ1AZSwjn+dotN3lRUsdWIDvrQ5uARxeHkmh8
- dSDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692178085; x=1692782885;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3OF1sjoMWFsZVASmvFXTzXiWVJnXD4HeHz2G+CtOW+M=;
- b=DK0nMHsaOCIy5mHBLJ7zJpd3GqWsA0jsWdNw1UyJp/lbyo/oF+plgmU/3toSK+QBNY
- 68XAb5RjhEtVdhsHuOVOcrv2Cdhu7HloAt+m98fHmDSoBsabj0QOCn5fnXTdSiqb5fcP
- 5gm2TJ58CVtifENmqAxQQUkkGGh5vsAnPG+h8IiK4wt7LPQnt695DkVomVZ8KZfEqT9U
- qwF26uVIVUEPRnm/rfxb3lATIy1mJwsw4QU9qsDiOprwfrpv2qMzV1ONdCT0Y0ULHo72
- XOF5YiBrpBwBYAzlqZPCfz6kujSvfpTiBEzyRNSeUzl/0PmJMytsnwIVNhxBmSJ2G2sv
- 9UtQ==
-X-Gm-Message-State: AOJu0Yy3H2OMwb/UYSd945dJGvmCmJPruQEKDmvtQ9n5Ai1pRk2AUCKF
- gjehHMRj3H59SM3AGarQKewmfv7Oxa+74RYXbTegdbnbowU=
-X-Google-Smtp-Source: AGHT+IHWFtmZAYjq8EZB0Nbwz1d3SQJrry3YNeyjH5NFaDYsa0QKlA4nyBsg4cL89bF5rahP/95bv1a1EI1QNwQzvkA=
-X-Received: by 2002:a05:620a:1986:b0:767:7a4c:1b9e with SMTP id
- bm6-20020a05620a198600b007677a4c1b9emr1619524qkb.7.1692178084669; Wed, 16 Aug
- 2023 02:28:04 -0700 (PDT)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=N2Dfd4X+yQlUW8Bzs4dIeF53xmm+ZfS2iuR1LmucnIu5g8n42k9x3FXllPBDqPwowqrWoUBdShVuV11HDWducFIehWyp0Y2IKIQjOiD3GMGskqe2mkzP8e1jYpNjonMY73MjVYgWod1rqfE1iyBG4MMC+So3F6IRTXxoTXqcJdcFx85p3yRZt37ZztmdsbSuk+ymPryeOONm09VSWzwavlUEBoiH4ghlBw9gKOZ/QSua7XY/1ahBJmLlC4Ynus0wXgiBDRgSQDPPbtH1WzuePkXyvO3sfdA0EnB4Aw7HW0/knD/5/vbQod62XAkQy4nq4kqVz3Je0TUSxW/x83tJMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NSL9vfs6yJU/uf4MweVjyarU4AA0P+3vouei0pf+C0k=;
+ b=Qq8TiFaEH25HJI8WGczw5jWJe2CGmgrjQ6B+OfFyXg8KFDWcAqQIIaQViQ6bKQrahZZiR2glc4f4CNf7qN521R7d7tYuMSwZMBH0o3tKCZA6jEcGp5+jgVggiEzrsyjgOdV0SmahTHfhhATXRWOnFiZEdPsM4Kv2+XaEJl/gn1Hk3bCVPKJ/8aCFGbk/w62HMW1OC5hfmnHnuh8D/r9hCmwkRdGmduvXaW0W9v3ghvU3xBrbjsyv69BGQFcSU+ZTNMsU5rIYAZ5t01zPHtKoqb431lRhQ6dLYA+fa3yuD2N48RqoW2hLgouFdPk2ifZJEyPFusQUnEsM2O+tiJN4Fw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NSL9vfs6yJU/uf4MweVjyarU4AA0P+3vouei0pf+C0k=;
+ b=mAMNk12jh2JaNReOVI0ilfjDy6fIE9hWHf+CFfBIaSOrtmw3heOFP8bs4fUkkBMP6KSrpq/l+ANSED/6If6ULhRdkPQfs/y4b6wPpI8WEdzo8f6gszWVVZHCachqfhBo7SAbvcHyUUq8nMV0frBTP3zXwzp84ngZN2sVtacvJEY=
+Received: from DM6PR12MB3738.namprd12.prod.outlook.com (2603:10b6:5:1c7::17)
+ by SJ2PR12MB8978.namprd12.prod.outlook.com (2603:10b6:a03:545::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.30; Wed, 16 Aug
+ 2023 09:30:16 +0000
+Received: from DM6PR12MB3738.namprd12.prod.outlook.com
+ ([fe80::b338:9dec:e414:9024]) by DM6PR12MB3738.namprd12.prod.outlook.com
+ ([fe80::b338:9dec:e414:9024%7]) with mapi id 15.20.6678.029; Wed, 16 Aug 2023
+ 09:30:16 +0000
+From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+To: Simon Glass <sjg@chromium.org>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Simek, Michal"
+ <michal.simek@amd.com>, "git@xilinx.com" <git@xilinx.com>, "Algapally,
+ Santosh Sagar" <SantoshSagar.Algapally@amd.com>
+Subject: RE: [PATCH v5 2/2] serial: zynqmp: Fetch baudrate from dtb and update
+Thread-Topic: [PATCH v5 2/2] serial: zynqmp: Fetch baudrate from dtb and update
+Thread-Index: AQHZjr31KlkqZX91M0WNY4jiMzBkkq+HyR6AgGVfdnA=
+Date: Wed, 16 Aug 2023 09:30:15 +0000
+Message-ID: <DM6PR12MB3738E8F0741C8346A06846F49815A@DM6PR12MB3738.namprd12.prod.outlook.com>
+References: <20230525040259.9348-1-venkatesh.abbarapu@amd.com>
+ <20230525040259.9348-3-venkatesh.abbarapu@amd.com>
+ <CAPnjgZ05MkJna4TbFH6nkYsOVwW1WDAtSg4fQ+VSYJTaYhNAOA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ05MkJna4TbFH6nkYsOVwW1WDAtSg4fQ+VSYJTaYhNAOA@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM6PR12MB3738:EE_|SJ2PR12MB8978:EE_
+x-ms-office365-filtering-correlation-id: 7d03772a-9fd7-4f2e-d315-08db9e3b6652
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: R3H4LK59a9CHN3lJUiPhbGLErYen40a/xNNDSLHwgQ+lSHt2XafOxhkGUUCdAbGEzas4oEdpeHUU0WQll+TEWpm2AiRZRR1vVCorBNtP/5rJWfaEQfzx9rI4prMMaNlBNa3cqw8CIpZH9u6G5TkXdDTL2m2yg3aO5bpeQusnhEgb+E2w8xtkMPjHcGXlCJOiyyKfN6wvEymNnVTSrjyhfS+C4GOqbOwP4mYmBpELktTDnc0EdmWz93ecgG7ZTe9FwNkyyLynO0nzho0PlJnlx6r4KlCkiQr+nsC642O/TTyq0fEFS4FldllLAJLVoFZ1rNXtfgMHM8ggSvuHbQINhtnB4eLtdG2RoPgRSrNsjw7RFINspgsBdVrtk+jgDtesGXjH3Tr6Imj7GWptT5y40v0ri16/m4PjM7m3Ru5lzW5FwYX6WOJHWOnSzuGwVRqRVIBhxNaV3CVY3OPMdHj+fBbRE+mTzF0KG/N1RUEWvQZoXGrdm6QbC18zLeUuMUD3XbBDfvIJ08jkVnfaZlsyjpo8bhFCEVfRQw7/nqP6I/zDwjikxaWLpvNGGExIq93KtJYx2YDPDIJLqkHB6qXX9r2Rm3v8gTRqUPfoo80FjuDACN5Jy6ooIMuEZ3OeVOFU
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM6PR12MB3738.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(366004)(396003)(136003)(376002)(39860400002)(1800799009)(451199024)(186009)(15650500001)(2906002)(83380400001)(30864003)(86362001)(478600001)(7696005)(6506007)(71200400001)(33656002)(9686003)(53546011)(55016003)(5660300002)(52536014)(41300700001)(122000001)(6916009)(316002)(54906003)(66946007)(66556008)(66476007)(66446008)(64756008)(76116006)(4326008)(8676002)(8936002)(38100700002)(38070700005);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Qnk4YnZkZnoxdit4SE4rOGNFdmlXOC9RNkIyL2E4YnprbDJPVXRZQ1ZJUnFM?=
+ =?utf-8?B?NFdIeEFMM1hPSXNXSnJFblV0ZU01RW5HTGg3Q1IxR1ozS28zaDhjUjVOSGRx?=
+ =?utf-8?B?bGI5YlozZG9EdGk5a3B2WXRtNTNrU0NTdmNjQ2h4VDlTZHBRaSttTjJXTkJz?=
+ =?utf-8?B?S1dEaGp1RkNZZUdzSEF2UFRPZXU3cFpIaUtDWFZNV2NjakpGQkYyTjZudkY2?=
+ =?utf-8?B?SDFBcGw2S3I4TXk0Q3hjOHp2S2JKY1VRZWZRSUJGakxyL3ZXY3JBQ01KVjNX?=
+ =?utf-8?B?R0tkeVdhbzJ6WXQ2aHA1VWYyS0VlN01rRnFwbmhWQ3E0TzBEMUlNTlBWSHE4?=
+ =?utf-8?B?c0owM3FZTjc0K2k1aGUyNHlSYVd2TGMzQ201K2c2dWhDSjE3bHlvaW91UWZM?=
+ =?utf-8?B?QllDaWNJdTV6czBvQ1B0ZFRpT21vVnlrc24xbzNUNW8rcW5ZZ25zM1NBWVht?=
+ =?utf-8?B?MHZYamZiNFZZaWdTbXc2bVl3MkFSc1NWdkgxSjh6eFFVMythZHdacHkramVx?=
+ =?utf-8?B?SDZLKzlMaGs4Q0tGQWhBdVdibkdQZGpqd1ZuM0pjUnBhZkdZRnFQeE5HR0Y3?=
+ =?utf-8?B?UEgrN3V1K2VKZG5PVnhhVTZPY0xWMFZGRjZJU05NRTRpYW96MGx5dWtRbDVU?=
+ =?utf-8?B?VnduZVIvai9STVN3S1NpYzVySkJqY2V6ZGdwNEdRRVd2SklYTE1QOXBKNzBD?=
+ =?utf-8?B?bWtRL2JmZVk0ZlRJelpzMXkxY1ZZV2FUZG9JbDBEem9lRDV5MGpzSitiN053?=
+ =?utf-8?B?bk15RitaMWxIZUdvNk9QemIwTFhabnNzM2VIUG05dk5CY1lTbXlVWjRjdHk2?=
+ =?utf-8?B?UHljSmNRVVFKVllJenRXNWU2MjdPcjVZazJscEFQbHRkM0VxQ1NGVHlJeUtY?=
+ =?utf-8?B?aG9oQkVsdVdGMzBkM204ckFHUTRtOHpSc2tNV1d4di90QU9sei9jdXZoeCtD?=
+ =?utf-8?B?U3VObGVVSG9SRmNlR0hZVVZWSU1oNENHNkxjdkUrT0ZwZ0NKVWI2RVFxOGVC?=
+ =?utf-8?B?ZkJ0d1dDaWN5cGhyT2NGMlh5WTFFS3RGOHgvZXRDK0ZnN1BBV1NkRGI5VjVu?=
+ =?utf-8?B?S1lMWjJXSFRkcW9JbFN3ejBzZEdSTjVFTHZoMlVFMmFwNXdCMTU0VmQwNmJn?=
+ =?utf-8?B?djg2cENqS2JqZzdrVEhvQXZRTmFMbnByNXhWaFozUllRbzZPMUk1UG0wOFRu?=
+ =?utf-8?B?Zk9aMW5KR05ZcnBBSnpYbGdXWWNlbXlINTZUa21pSDcyM2pMakpCaEt3djRi?=
+ =?utf-8?B?dzlUdHp3UVJDdTIzL1JnL1NLZEgzRUJyMC9Ga2tzOXpET2JwOU5IeVBFQUFI?=
+ =?utf-8?B?VHM2QU1BYy9DZm9tRzVaaThYcUJUVWVSSHhKMERVTVJwblpkbFVuRDQ4S0Ux?=
+ =?utf-8?B?aWtjcE1xbFBnazlFbGVvTXZLZDdKZWhMWFhGb2pWZG9wbUxPalZUeWVmOUNh?=
+ =?utf-8?B?MEhmSTZwS1hGTTN6dEZGZHl0cWZQQ3Q0WVVvT0EwMkVrSHl5R244UGoyVi9H?=
+ =?utf-8?B?cngzRm9oeWJEb09wN21xTHIzZktwN1JWZjhDb2dzVXdNZnBMQVVnVmUwd3Z0?=
+ =?utf-8?B?OXdNNXJheUJSOVZxKzExYWZWdWVkMXQyclpqM3BlTUsrN29QeG1FcmRIcE12?=
+ =?utf-8?B?dXkzbFV4enpLNU5uVUNRTDZWU1UvQUVUekJzTURtaWlaWTNGdzhhZWhsYnAx?=
+ =?utf-8?B?Rnd2RnJHTjNwVUZ4ZG1Cb0xweWRLUHlrc1dpMVNSZEdOQjgwUkhockl0Wksy?=
+ =?utf-8?B?ZnRFdHZ5ZGJ2cWVOOTlqcm9UR2JlNzhTWkh6Q2FIMC9KK0tFc1ZicXVXVjMv?=
+ =?utf-8?B?VlBqNEZqQnQrVVJBLzlJbFp6cFp0N0xCSi8xbkhPd3hIbkppdU5RRFNuWlAr?=
+ =?utf-8?B?R1ZlQjZkNFdQbW1MTktJbUZjZlcyOEJrRDJCVDlneUNjamx3MjNMNHJXY09T?=
+ =?utf-8?B?Y05ndUFHdzFkaTZETktoeXJYRXhvWUVzYjFwemJxOUowNnVZWU1ZT1NGbzN1?=
+ =?utf-8?B?QzZsQVZ0ci9vQ28vWmFwckJZZWVjVGF2QmdrOG9jTFdNVDc4dTNWdUJyNUNZ?=
+ =?utf-8?B?cDI2OWlkV2ZUbVd5T25OQldLVnZuVDRFT1EwQT09?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-From: Freddie <fpidev23@gmail.com>
-Date: Wed, 16 Aug 2023 10:27:53 +0100
-Message-ID: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
-Subject: FIT Image not working in U-Boot
-To: u-boot@lists.denx.de
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3738.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7d03772a-9fd7-4f2e-d315-08db9e3b6652
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Aug 2023 09:30:15.9817 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: hT/9azaxURZlaDLULH6IpUk8SMILDFX7DnjATz/rlK3IovAiqZcZ2FhEdXAvg/Ilinezr76x5wna7TqqiIIBmQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8978
 X-Mailman-Approved-At: Wed, 16 Aug 2023 16:25:13 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,616 +147,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-I am trying to attempt to build a verified boot solution using Flattened
-Image Trees on a Raspberry Pi 3B +
-I have looked at a couple of guides online about how to do this, however
-they seem quite out of date and it hasn't worked.
-
-The two main guides I have looked at:
-#3066 <https://github.com/OP-TEE/optee_os/issues/3066>
-https://github.com/NVISOsecurity/VerifiedBootRPi3/blob/master/instructions.=
-md
-
-I initially tried building a standard system following the instructions on
-the official OP-TEE documentation, which worked. However I have not been
-able to boot from a FIT file.
-
-I have very closely followed the instructions from the first link above,
-but no matter what I have changed so far, I get the error:
-Wrong Image Format for bootm command
-ERROR: can't get kernel image!
-
-This error occurs both when trying to autoboot and when trying to manually
-boot (using fatload and bootm in the command line).
-
-I have tried for around 2-3 weeks to attempt to solve this error, so I
-would really appreciate any advice or suggestions.
-
-I have tried both signed and unsigned FIT images and neither of them have
-worked.
-
-I have included the contents of my image.its, uboot.env.txt,
-rpi_3_defconfig and rpi.h files below as well as the logs from when I try
-and boot my system, please let me know if there is any other information
-that could help with solving this.
-
-
-
-/fit/image.its:
-
-/ {
-	description =3D "RPi FIT Image";
-	#address-cells =3D <1>;
-	images {
-		kernel-1 {
-			description =3D "default kernel";
-			data =3D /incbin/("kernel8.img");
-			type =3D "kernel";
-			arch =3D "arm64";
-			os =3D "linux";
-			compression =3D "none";
-			load =3D  <0x12000000>;
-			entry =3D <0x12000000>;
-			hash-1 {
-				algo =3D "sha1";
-			};
-		};
-		tee-1 {
-			description =3D "atf";
-			data =3D /incbin/("armstub8.bin");
-			type =3D "standalone";
-			arch =3D "arm64";
-			compression =3D "none";
-			load =3D  <0x08400000>;
-			entry =3D <0x08400000>;
-			hash-1 {
-				algo =3D "sha1";
-			};
-		};
-		fdt-1 {
-			description =3D "device tree";
-			data =3D /incbin/("bcm2710-rpi-3-b-plus.dtb");
-			type =3D "flat_dt";
-			arch =3D "arm64";
-			compression =3D "none";
-			load =3D <0x01000000>;
-			entry =3D <0x01000000>;
-			hash-1 {
-				algo =3D "sha1";
-			};
-		};
-	};
-	configurations {
-		default =3D "config-1";
-		config-1 {
-			description =3D "default configuration";
-			kernel =3D "kernel-1";
-			loadables =3D "tee-1";
-			fdt =3D "fdt-1";
-			signature-1 {
-				algo =3D "sha1,rsa2048";
-				key-name-hint =3D "dev";
-				sign-images =3D "fdt", "kernel", "loadables";
-			};
-		};
-	};
-};
-
-
-
-
-
-
-/optee/u-boot/configs/RPI_3_DEFCONFIG:
-
-CONFIG_ARM=3Dy
-CONFIG_ARCH_CPU_INIT=3Dy
-CONFIG_ARCH_BCM283X=3Dy
-CONFIG_SYS_TEXT_BASE=3D0x00080000
-CONFIG_TARGET_RPI_3=3Dy
-CONFIG_SYS_MALLOC_F_LEN=3D0x2000
-CONFIG_NR_DRAM_BANKS=3D1
-CONFIG_ENV_SIZE=3D0x4000
-CONFIG_DISTRO_DEFAULTS=3Dy
-CONFIG_OF_BOARD_SETUP=3Dy
-CONFIG_USE_PREBOOT=3Dy
-# CONFIG_DISPLAY_CPUINFO is not set
-CONFIG_DEFAULT_DEVICE_TREE=3D"bcm2837-rpi-3-b-plus"
-CONFIG_OF_CONTROL=3Dy
-CONFIG_FIT=3Dy
-CONFIG_FIT_SIGNATURE=3Dy
-CONFIG_RSA=3Dy
-CONFIG_FIT_VERBOSE=3Dy
-CONFIG_OF_LIBFDT=3Dy
-# CONFIG_DISPLAY_BOARDINFO is not set
-CONFIG_MISC_INIT_R=3Dy
-CONFIG_SYS_PROMPT=3D"U-Boot> "
-CONFIG_CMD_GPIO=3Dy
-CONFIG_CMD_MMC=3Dy
-CONFIG_CMD_USB=3Dy
-CONFIG_CMD_FS_UUID=3Dy
-CONFIG_OF_EMBED=3Dy
-CONFIG_ENV_FAT_DEVICE_AND_PART=3D"0:1"
-CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
-CONFIG_TFTP_TSIZE=3Dy
-CONFIG_MMC_SDHCI=3Dy
-CONFIG_MMC_SDHCI_BCM2835=3Dy
-CONFIG_PHYLIB=3DyONFIG_ARM=3Dy
-CONFIG_ARCH_CPU_INIT=3Dy
-CONFIG_ARCH_BCM283X=3Dy
-CONFIG_SYS_TEXT_BASE=3D0x00080000
-CONFIG_TARGET_RPI_3=3Dy
-CONFIG_SYS_MALLOC_F_LEN=3D0x2000
-CONFIG_NR_DRAM_BANKS=3D1
-CONFIG_ENV_SIZE=3D0x4000
-CONFIG_DISTRO_DEFAULTS=3Dy
-CONFIG_OF_BOARD_SETUP=3Dy
-CONFIG_USE_PREBOOT=3Dy`
-CONFIG_DM_ETH=3Dy
-CONFIG_PINCTRL=3Dy
-# CONFIG_PINCTRL_GENERIC is not set
-# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-CONFIG_SYSINFO=3Dy
-CONFIG_SYSINFO_SMBIOS=3Dy
-CONFIG_USB=3Dy
-CONFIG_USB_DWC2=3Dy
-CONFIG_USB_KEYBOARD=3Dy
-CONFIG_USB_HOST_ETHER=3Dy
-CONFIG_USB_ETHER_LAN78XX=3Dy
-CONFIG_USB_ETHER_SMSC95XX=3Dy
-CONFIG_DM_VIDEO=3Dy
-# CONFIG_VIDEO_BPP8 is not set
-# CONFIG_VIDEO_BPP16 is not set
-CONFIG_SYS_WHITE_ON_BLACK=3Dy
-CONFIG_CONSOLE_SCROLL_LINES=3D10
-CONFIG_PHYS_TO_BUS=3Dy
-CONFIG_OF_LIBFDT_OVERLAY=3Dy
-
-
-
-
-
-
-/optee/build/rpi3/firmware/uboot.env.txt:
-
-
-# generic params
-bootdelay=3D3
-stderr=3Dserial,lcd
-stdin=3Dserial,usbkbd
-stdout=3Dserial,lcd
-
-# CPU config
-cpu=3Darmv8
-smp=3Don
-
-# Console config
-baudrate=3D115200
-sttyconsole=3DttyS0
-ttyconsole=3Dtty0
-
-# Kernel/dtb filenames & load addresses
-boot_fit=3Dbootm ${fit_addr}
-fdt_addr_r=3D0x01000000
-fit_addr=3D0x02000000
-fdtfile=3Dbcm2710-rpi-3-b-plus.dtb
-load_fit=3Dfatload mmc 0:1 ${fit_addr} image.itb
-mmcboot=3Drun load_fit; run set_bootargs_tty set_bootargs_mmc
-set_common_args; run boot_fit
-
-
-# NFS/TFTP boot configuraton
-gatewayip=3D192.168.1.1
-netmask=3D255.255.255.0
-nfsserverip=3D192.168.1.100
-nfspath=3D/srv/nfs/rpi
-
-# bootcmd & bootargs configuration
-preboot=3Dusb start
-bootcmd=3Drun mmcboot
-nfsboot=3Drun load_kernel; run set_bootargs_tty set_bootargs_nfs
-set_common_args; run boot_it
-set_bootargs_tty=3Dsetenv bootargs console=3D${ttyconsole}
-console=3D${sttyconsole},${baudrate}
-set_bootargs_nfs=3Dsetenv bootargs ${bootargs} root=3D/dev/nfs rw
-rootfstype=3Dnfs nfsroot=3D${nfsserverip}:${nfspath},udp,vers=3D3 ip=3Ddhcp
-set_bootargs_mmc=3Dsetenv bootargs ${bootargs} root=3D/dev/mmcblk0p2 rw roo=
-tfs=3Dext4
-set_common_args=3Dsetenv bootargs ${bootargs}
-smsc95xx.macaddr=3D${ethaddr} 'ignore_loglevel dma.dmachans=3D0x7f35
-rootwait 8250.nr_uarts=3D1 elevator=3Ddeadline fsck.repair=3Dyes
-bcm2708_fb.fbwidth=3D1920 bcm2708_fb.fbheight=3D1080
-vc_mem.mem_base=3D0x3ec00000 vc_mem.mem_size=3D0x40000000
-dwc_otg.fiq_enable=3D0 dwc_otg.fiq_fsm_enable=3D0 dwc_otg.nak_holdoff=3D0'
-
-
-
-
-
-
-/optee/u-boot/include/configs/rpi.h:
-
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
- * (C) Copyright 2012-2016 Stephen Warren
- */
-
-#ifndef __CONFIG_H
-#define __CONFIG_H
-
-#include <linux/sizes.h>
-#include <asm/arch/timer.h>
-
-#ifndef __ASSEMBLY__
-#include <asm/arch/base.h>
-#endif
-
-#if defined(CONFIG_TARGET_RPI_2) || defined(CONFIG_TARGET_RPI_3_32B)
-#define CONFIG_SKIP_LOWLEVEL_INIT
-#endif
-
-/* Architecture, CPU, etc.*/
-
-/* Use SoC timer for AArch32, but architected timer for AArch64 */
-#ifndef CONFIG_ARM64
-#define CONFIG_SYS_TIMER_RATE		1000000
-#define CONFIG_SYS_TIMER_COUNTER	\
-	(&((struct bcm2835_timer_regs *)BCM2835_TIMER_PHYSADDR)->clo)
-#endif
-
-/*
- * 2835 is a SKU in a series for which the 27```08 is the first or primary =
-SoC,
- * so 2708 has historically been used rather than a dedicated 2835 ID.
- *
- * We don't define a machine type for bcm2709/bcm2836 since the RPi Foundat=
-ion
- * chose to use someone else's previously registered machine ID (3139, MX51=
-_GGC)
- * rather than obtaining a valid ID:-/
- *
- * For the bcm2837, hopefully a machine type is not needed, since everythin=
-g
- * is DT.
- */
-#ifdef CONFIG_BCM2835
-#define CONFIG_MACH_TYPE		MACH_TYPE_BCM2708
-#endif
-
-/* Memory layout */
-#define CONFIG_SYS_SDRAM_BASE		0x00000000
-#define CONFIG_SYS_UBOOT_BASE		CONFIG_SYS_TEXT_BASE
-/*
- * The board really has 256M. However, the VC (VideoCore co-processor) shar=
-es
- * the RAM, and uses a configurable portion at the top. We tell U-Boot that=
- a
- * smaller amount of RAM is present in order to avoid stomping on the area
- * the VC uses.
- */
-#define CONFIG_SYS_SDRAM_SIZE		SZ_128M
-#define CONFIG_SYS_INIT_SP_ADDR		(CONFIG_SYS_SDRAM_BASE + \
-					 CONFIG_SYS_SDRAM_SIZE - \
-					 GENERATED_GBL_DATA_SIZE)
-#define CONFIG_SYS_MALLOC_LEN		SZ_4M
-#define CONFIG_LOADADDR			0x00200000
-
-#ifdef CONFIG_ARM64
-#endif
-
-/* Devices */
-/* GPIO */
-#define CONFIG_BCM2835_GPIO
-/* LCD */
-#define CONFIG_LCD_DT_SIMPLEFB
-#define CONFIG_VIDEO_BCM2835
-
-/* DFU over USB/UDC */
-#ifdef CONFIG_CMD_DFU
-#ifdef CONFIG_ARM64
-#define KERNEL_FILENAME		"Image"
-#else
-#define KERNEL_FILENAME		"zImage"
-#endif
-
-#define ENV_DFU_SETTINGS \
-	"dfu_alt_info=3Du-boot.bin fat 0 1;uboot.env fat 0 1;" \
-		      "config.txt fat 0 1;" \
-		      KERNEL_FILENAME " fat 0 1\0"
-#else
-#define ENV_DFU_SETTINGS ""
-#endif
-
-/* Console configuration */
-#define CONFIG_SYS_CBSIZE		1024
-
-/* Environment */
-#define CONFIG_SYS_LOAD_ADDR		0x1000000
-
-/* Shell */
-
-/* ATAGs support for bootm/bootz */
-#define CONFIG_SETUP_MEMORY_TAGS
-#define CONFIG_CMDLINE_TAG
-#define CONFIG_INITRD_TAG
-#define CONFIG_SYS_BOOTM_LEN (16 << 20)
-
-/* Environment */
-#define ENV_DEVICE_SETTINGS \
-	"stdin=3Dserial,usbkbd\0" \
-	"stdout=3Dserial,vidconsole\0" \
-	"stderr=3Dserial,vidconsole\0"
-
-#ifdef CONFIG_ARM64
-#define FDT_HIGH "ffffffffffffffff"
-#define INITRD_HIGH "ffffffffffffffff"
-#else
-#define FDT_HIGH "ffffffff"
-#define INITRD_HIGH "ffffffff"
-#endif
-
-/*
- * Memory layout for where various images get loaded by boot scripts:
- *
- * I suspect address 0 is used as the SMP pen on the RPi2, so avoid this.
- *
- * Older versions of the boot firmware place the firmware-loaded DTB at 0x1=
-00,
- * newer versions place it in high memory. So prevent U-Boot from doing its=
- own
- * DTB + initrd relocation so that we won't accidentally relocate the initr=
-d
- * over the firmware-loaded DTB and generally try to lay out things startin=
-g
- * from the bottom of RAM.
- *
- * kernel_addr_r has different constraints on ARM and Aarch64.  For 32-bit =
-ARM,
- * it must be within the first 128M of RAM in order for the kernel's
- * CONFIG_AUTO_ZRELADDR option to work. The kernel itself will be decompres=
-sed
- * to 0x8000 but the decompressor clobbers 0x4000-0x8000 as well. The
- * decompressor also likes to relocate itself to right past the end of the
- * decompressed kernel, so in total the sum of the compressed and and
- * decompressed kernel needs to be reserved.
- *
- *   For Aarch64, the kernel image is uncompressed and must be loaded at
- *   text_offset bytes (specified in the header of the Image) into a 2MB
- *   boundary. The 'booti' command relocates the image if necessary. Linux =
-uses
- *   a default text_offset of 0x80000.  In summary, loading at 0x80000
- *   satisfies all these constraints and reserving memory up to 0x02400000
- *   permits fairly large (roughly 36M) kernels.
- *
- * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
- * conflict with something else. Reserving 1M for each of them at
- * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
- *
- * On ARM, both the DTB and any possible initrd must be loaded such that th=
-ey
- * fit inside the lowmem mapping in Linux. In practice, this usually means =
-not
- * more than ~700M away from the start of the kernel image but this number =
-can
- * be larger OR smaller depending on e.g. the 'vmalloc=3DxxxM' command line
- * parameter given to the kernel. So reserving memory from low to high
- * satisfies this constraint again. Reserving 1M at 0x02600000-0x02700000 f=
-or
- * the DTB leaves rest of the free RAM to the initrd starting at 0x02700000=
-.
- * Even with the smallest possible CPU-GPU memory split of the CPU getting
- * only 64M, the remaining 25M starting at 0x02700000 should allow quite
- * large initrds before they start colliding with U-Boot.
- */
-#define ENV_MEM_LAYOUT_SETTINGS \
-	"fdt_high=3D" FDT_HIGH "\0" \
-	"initrd_high=3D" INITRD_HIGH "\0" \
-	"kernel_addr_r=3D0x00080000\0" \
-	"scriptaddr=3D0x02400000\0" \
-	"pxefile_addr_r=3D0x02500000\0" \
-	"fdt_addr_r=3D0x02600000\0" \
-	"ramdisk_addr_r=3D0x02700000\0"
-
-#if CONFIG_IS_ENABLED(CMD_MMC)
-	#define BOOT_TARGET_MMC(func) \
-		func(MMC, mmc, 0) \
-		func(MMC, mmc, 1)
-#else
-	#define BOOT_TARGET_MMC(func)
-#endif
-
-#if CONFIG_IS_ENABLED(CMD_USB)
-	#define BOOT_TARGET_USB(func) func(USB, usb, 0)
-#else
-	#define BOOT_TARGET_USB(func)
-#endif
-
-#if CONFIG_IS_ENABLED(CMD_PXE)
-	#define BOOT_TARGET_PXE(func) func(PXE, pxe, na)
-#else
-	#define BOOT_TARGET_PXE(func)
-#endif
-
-#if CONFIG_IS_ENABLED(CMD_DHCP)
-	#define BOOT_TARGET_DHCP(func) func(DHCP, dhcp, na)
-#else
-	#define BOOT_TARGET_DHCP(func)
-#endif
-
-#define BOOT_TARGET_DEVICES(func) \
-	BOOT_TARGET_MMC(func) \
-	BOOT_TARGET_USB(func) \
-	BOOT_TARGET_PXE(func) \
-	BOOT_TARGET_DHCP(func)
-
-#include <config_distro_bootcmd.h>
-
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	"dhcpuboot=3Dusb start; dhcp u-boot.uimg; bootm\0" \
-	ENV_DEVICE_SETTINGS \
-	ENV_DFU_SETTINGS \
-	ENV_MEM_LAYOUT_SETTINGS \
-	BOOTENV
-
-
-#endif
-
-
-
-* Boot Logs:*
-
-NOTICE:  Booting Trusted Firmware
-NOTICE:  BL1: v2.6(debug):v2.6
-NOTICE:  BL1: Built : 13:06:25, Aug  3 2023
-INFO:    BL1: RAM 0x100ee000 - 0x100f7000
-INFO:    BL1: cortex_a53: CPU workaround for 843419 was applied
-INFO:    BL1: cortex_a53: CPU workaround for 855873 was applied
-WARNING: BL1: cortex_a53: CPU workaround for 1530924 was missing!
-NOTICE:  rpi3: Detected: Raspberry Pi 3 Model B+ (1GB, Sony, UK) [0x00a020d=
-3]
-INFO:    BL1: Loading BL2
-INFO:    Loading image id=3D1 at address 0x100b4000
-INFO:    Image id=3D1 loaded: 0x100b4000 - 0x100bc419
-NOTICE:  BL1: Booting BL2
-INFO:    Entry point address =3D 0x100b4000
-INFO:    SPSR =3D 0x3c5
-NOTICE:  BL2: v2.6(debug):v2.6
-NOTICE:  BL2: Built : 13:06:25, Aug  3 2023
-INFO:    BL2: Doing platform setup
-INFO:    BL2: Loading image id 3
-INFO:    Loading image id=3D3 at address 0x100e0000
-INFO:    Image id=3D3 loaded: 0x100e0000 - 0x100ea073
-INFO:    BL2: Loading image id 4
-INFO:    Loading image id=3D4 at address 0x10100000
-INFO:    Image id=3D4 loaded: 0x10100000 - 0x1010001c
-INFO:    OPTEE ep=3D0x10100000
-INFO:    OPTEE header info:
-INFO:          magic=3D0x4554504f
-INFO:          version=3D0x2
-INFO:          arch=3D0x1
-INFO:          flags=3D0x0
-INFO:          nb_images=3D0x1
-INFO:    BL2: Loading image id 21
-INFO:    Loading image id=3D21 at address 0x10100000
-INFO:    Image id=3D21 loaded: 0x10100000 - 0x1017be98
-INFO:    BL2: Skip loading image id 22
-INFO:    BL2: Loading image id 5
-INFO:    Loading image id=3D5 at address 0x11000000
-INFO:    Image id=3D5 loaded: 0x11000000 - 0x11084b90
-NOTICE:  BL1: Booting BL31
-INFO:    Entry point address =3D 0x100e0000
-INFO:    SPSR =3D 0x3cd
-NOTICE:  BL31: v2.6(debug):v2.6
-NOTICE:  BL31: Built : 13:06:26, Aug  3 2023
-INFO:    rpi3: Checking DTB...
-INFO:    BL31: Initializing runtime services
-INFO:    BL31: cortex_a53: CPU workaround for 843419 was applied
-INFO:    BL31: cortex_a53: CPU workaround for 855873 was applied
-WARNING: BL31: cortex_a53: CPU workaround for 1530924 was missing!
-INFO:    BL31: Initializing BL32
-D/TC:0   plat_get_aslr_seed:118 Warning: no ASLR seed
-D/TC:0   add_phys_mem:665 VCORE_UNPG_RX_PA type TEE_RAM_RX 0x10100000
-size 0x00078000
-D/TC:0   add_phys_mem:665 VCORE_UNPG_RW_PA type TEE_RAM_RW 0x10178000
-size 0x00688000
-D/TC:0   add_phys_mem:665 ta_base type TA_RAM 0x10800000 size 0x00800000
-D/TC:0   add_phys_mem:665 CONSOLE_UART_BASE type IO_NSEC 0x3f200000
-size 0x00200000
-D/TC:0   add_phys_mem:665 TEE_SHMEM_START type NSEC_SHM 0x08000000
-size 0x00400000
-D/TC:0   add_va_space:705 type RES_VASPACE size 0x00a00000
-D/TC:0   add_va_space:705 type SHM_VASPACE size 0x02000000
-D/TC:0   dump_mmap_table:831 type TEE_RAM_RX   va
-0x10100000..0x10177fff pa 0x10100000..0x10177fff size 0x00078000
-(smallpg)
-D/TC:0   dump_mmap_table:831 type TEE_RAM_RW   va
-0x10178000..0x107fffff pa 0x10178000..0x107fffff size 0x00688000
-(smallpg)
-D/TC:0   dump_mmap_table:831 type RES_VASPACE  va
-0x10800000..0x111fffff pa 0x00000000..0x009fffff size 0x00a00000
-(pgdir)
-D/TC:0   dump_mmap_table:831 type SHM_VASPACE  va
-0x11200000..0x131fffff pa 0x00000000..0x01ffffff size 0x02000000
-(pgdir)
-D/TC:0   dump_mmap_table:831 type NSEC_SHM     va
-0x13200000..0x135fffff pa 0x08000000..0x083fffff size 0x00400000
-(pgdir)
-D/TC:0   dump_mmap_table:831 type TA_RAM       va
-0x13600000..0x13dfffff pa 0x10800000..0x10ffffff size 0x00800000
-(pgdir)
-D/TC:0   dump_mmap_table:831 type IO_NSEC      va
-0x13e00000..0x13ffffff pa 0x3f200000..0x3f3fffff size 0x00200000
-(pgdir)
-D/TC:0   core_mmu_xlat_table_alloc:526 xlat tables used 1 / 8
-D/TC:0   core_mmu_xlat_table_alloc:526 xlat tables used 2 / 8
-I/TC:
-I/TC: OP-TEE version: 3.22.0 (gcc version 11.3.1 20220712 (Arm GNU
-Toolchain 11.3.Rel1)) #1 Thu Aug  3 11:35:50 UTC 2023 aarch64
-I/TC: WARNING: This OP-TEE configuration might be insecure!
-I/TC: WARNING: Please check
-https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
-I/TC: Primary CPU initializing
-D/TC:0 0 boot_init_primary_late:1478 Executing at offset 0 with
-virtual load address 0x10100000
-D/TC:0 0 call_preinitcalls:21 level 2 mobj_mapped_shm_init()
-D/TC:0 0 mobj_mapped_shm_init:470 Shared memory address range:
-11200000, 13200000
-D/TC:0 0 call_initcalls:40 level 1 register_time_source()
-D/TC:0 0 call_initcalls:40 level 1 teecore_init_pub_ram()
-D/TC:0 0 call_initcalls:40 level 3 check_ta_store()
-D/TC:0 0 check_ta_store:417 TA store: "early TA"
-D/TC:0 0 check_ta_store:417 TA store: "Secure Storage TA"
-D/TC:0 0 check_ta_store:417 TA store: "REE"
-D/TC:0 0 call_initcalls:40 level 3 early_ta_init()
-D/TC:0 0 early_ta_init:56 Early TA
-f04a0fe7-1f5d-4b9b-abf7-619b85b4ce8c size 47637 (compressed,
-uncompressed 109256)
-D/TC:0 0 call_initcalls:40 level 3 verify_pseudo_tas_conformance()
-D/TC:0 0 call_initcalls:40 level 3 tee_cryp_init()
-D/TC:0 0 call_initcalls:40 level 4 tee_fs_init_key_manager()
-D/TC:0 0 call_initcalls:40 level 6 mobj_init()
-D/TC:0 0 call_initcalls:40 level 6 default_mobj_init()
-D/TC:0 0 call_initcalls:40 level 6 ftmn_boot_tests()
-D/TC:0 0 ftmn_boot_tests:198 Calling simple_call()
-D/TC:0 0 ftmn_boot_tests:198 Return from simple_call()
-D/TC:0 0 ftmn_boot_tests:199 Calling two_level_call()
-D/TC:0 0 ftmn_boot_tests:199 Return from two_level_call()
-D/TC:0 0 ftmn_boot_tests:200 Calling chained_calls()
-D/TC:0 0 ftmn_boot_tests:200 Return from chained_calls()
-D/TC:0 0 ftmn_boot_tests:202 **********************************************=
-***
-D/TC:0 0 ftmn_boot_tests:203 **************  Tests complete  **************=
-***
-D/TC:0 0 ftmn_boot_tests:204 **********************************************=
-***
-I/TC: Primary CPU switching to normal world boot
-INFO:    BL31: Preparing for EL3 exit to normal world
-INFO:    Entry point address =3D 0x11000000
-INFO:    SPSR =3D 0x3c9
-
-
-U-Boot 2021.10 (Aug 03 2023 - 13:51:18 +0100)
-
-DRAM:  948 MiB
-RPI 3 Model B+ (0xa020d3)
-MMC:   mmc@7e202000: 0, sdhci@7e300000: 1
-Loading Environment from FAT... OK
-In:    serial
-Out:   serial
-Err:   serial
-Net:   No ethernet found.
-starting USB...
-Bus usb@7e980000: USB DWC2
-scanning bus usb@7e980000 for devices...
-Error: lan78xx_eth address not set.
-3 USB Device(s) found
-       scanning usb for storage devices... 0 Storage Device(s) found
-Hit any key to stop autoboot:  3 =EF=BF=BD=EF=BF=BD=EF=BF=BD 2 =EF=BF=BD=EF=
-=BF=BD=EF=BF=BD 1 =EF=BF=BD=EF=BF=BD=EF=BF=BD 0
-22161708 bytes read in 920 ms (23 MiB/s)
-Wrong Image Format for bootm command
-ERROR: can't get kernel image!
-U-Boot>
+SGkgU2ltb24sDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogU2ltb24g
+R2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+DQo+IFNlbnQ6IFR1ZXNkYXksIEp1bmUgMTMsIDIwMjMg
+Mjo0OCBBTQ0KPiBUbzogQWJiYXJhcHUsIFZlbmthdGVzaCA8dmVua2F0ZXNoLmFiYmFyYXB1QGFt
+ZC5jb20+DQo+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgU2ltZWssIE1pY2hhbCA8bWljaGFs
+LnNpbWVrQGFtZC5jb20+Ow0KPiBnaXRAeGlsaW54LmNvbTsgQWxnYXBhbGx5LCBTYW50b3NoIFNh
+Z2FyIDxTYW50b3NoU2FnYXIuQWxnYXBhbGx5QGFtZC5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFU
+Q0ggdjUgMi8yXSBzZXJpYWw6IHp5bnFtcDogRmV0Y2ggYmF1ZHJhdGUgZnJvbSBkdGIgYW5kDQo+
+IHVwZGF0ZQ0KPiANCj4gSGkgVmVua2F0ZXNoLA0KPiANCj4gT24gVGh1LCAyNSBNYXkgMjAyMyBh
+dCAwNTowMywgVmVua2F0ZXNoIFlhZGF2IEFiYmFyYXB1DQo+IDx2ZW5rYXRlc2guYWJiYXJhcHVA
+YW1kLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiBGcm9tOiBBbGdhcGFsbHkgU2FudG9zaCBTYWdhciA8
+c2FudG9zaHNhZ2FyLmFsZ2FwYWxseUBhbWQuY29tPg0KPiA+DQo+ID4gVGhlIGJhdWRyYXRlIGNv
+bmZpZ3VyZWQgaW4gLmNvbmZpZyBpcyB0YWtlbiBieSBkZWZhdWx0IGJ5IHNlcmlhbC4gSWYNCj4g
+PiBjaGFuZ2Ugb2YgYmF1ZHJhdGUgaXMgcmVxdWlyZWQgdGhlbiB0aGUgLmNvbmZpZyBuZWVkcyB0
+byBjaGFuZ2VkIGFuZA0KPiA+IHUtYm9vdCByZWNvbXBpbGF0aW9uIGlzIHJlcXVpcmVkIG9yIHRo
+ZSB1LWJvb3QgZW52aXJvbm1lbnQgbmVlZHMgdG8gYmUNCj4gPiB1cGRhdGVkLg0KPiA+DQo+ID4g
+VG8gYXZvaWQgdGhpcywgc3VwcG9ydCBpcyBhZGRlZCB0byBmZXRjaCB0aGUgYmF1ZHJhdGUgZGly
+ZWN0bHkgZnJvbQ0KPiA+IHRoZSBkZXZpY2UgdHJlZSBmaWxlIGFuZCB1cGRhdGUuDQo+ID4gVGhl
+IHNlcmlhbCwgcHJpbnRzIHRoZSBsb2cgd2l0aCB0aGUgY29uZmlndXJlZCBiYXVkcmF0ZSBpbiB0
+aGUgZHRiLg0KPiA+IFRoZSBjb21taXQgYzRkZjBmNmYzMTVjICgiYXJtOiBtdmVidTogRXNwcmVz
+c29iaW46IFNldCBkZWZhdWx0IHZhbHVlDQo+ID4gZm9yICRmZHRmaWxlIGVudiB2YXJpYWJsZSIp
+IGlzIHRha2VuIGFzIHJlZmVyZW5jZSBmb3IgY2hhbmdpbmcgdGhlDQo+ID4gZGVmYXVsdCBlbnZp
+cm9ubWVudCB2YXJpYWJsZS4NCj4gPg0KPiA+IFRoZSBkZWZhdWx0IGVudmlyb25tZW50IHN0b3Jl
+cyB0aGUgZGVmYXVsdCBiYXVkcmF0ZSB2YWx1ZSwgV2hlbg0KPiA+IGRlZmF1bHQgYmF1ZHJhdGUg
+YW5kIGR0YiBiYXVkcmF0ZSBhcmUgbm90IHNhbWUgZ2xpdGNoZXMgYXJlIHNlZW4gb24gdGhlDQo+
+IHNlcmlhbC4NCj4gPiBTbywgdGhlIGVudmlyb25tZW50IGFsc28gbmVlZHMgdG8gYmUgdXBkYXRl
+ZCB3aXRoIHRoZSBkdGIgYmF1ZHJhdGUgdG8NCj4gPiBhdm9pZCB0aGUgZ2xpdGNoZXMgb24gdGhl
+IHNlcmlhbC4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEFsZ2FwYWxseSBTYW50b3NoIFNhZ2Fy
+DQo+ID4gPHNhbnRvc2hzYWdhci5hbGdhcGFsbHlAYW1kLmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5
+OiBWZW5rYXRlc2ggWWFkYXYgQWJiYXJhcHUNCj4gPHZlbmthdGVzaC5hYmJhcmFwdUBhbWQuY29t
+Pg0KPiA+IC0tLQ0KPiA+ICBkb2MvUkVBRE1FLnNlcmlhbF9kdF9iYXVkICAgICAgfCA0MQ0KPiAr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gPiAgZHJpdmVycy9jb3JlL29mbm9k
+ZS5jICAgICAgICAgIHwgMjAgKysrKysrKysrKysrKysrKw0KPiA+ICBkcml2ZXJzL3NlcmlhbC9L
+Y29uZmlnICAgICAgICAgfCAgOSArKysrKysrKw0KPiA+ICBkcml2ZXJzL3NlcmlhbC9zZXJpYWwt
+dWNsYXNzLmMgfCA0MiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIGlu
+Y2x1ZGUvZG0vb2Zub2RlLmggICAgICAgICAgICB8IDE0ICsrKysrKysrKystLQ0KPiA+ICBpbmNs
+dWRlL2Vudl9kZWZhdWx0LmggICAgICAgICAgfCAgNiArKysrLQ0KPiA+ICBpbmNsdWRlL3Nlcmlh
+bC5oICAgICAgICAgICAgICAgfCAxNSArKysrKysrKysrKysNCj4gPiAgNyBmaWxlcyBjaGFuZ2Vk
+LCAxNDQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkgIGNyZWF0ZSBtb2RlDQo+ID4gMTAw
+NjQ0IGRvYy9SRUFETUUuc2VyaWFsX2R0X2JhdWQNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kb2Mv
+UkVBRE1FLnNlcmlhbF9kdF9iYXVkIGIvZG9jL1JFQURNRS5zZXJpYWxfZHRfYmF1ZA0KPiBuZXcN
+Cj4gPiBmaWxlIG1vZGUgMTAwNjQ0IGluZGV4IDAwMDAwMDAwMDAuLjAyOTc0YWIxYTcNCj4gPiAt
+LS0gL2Rldi9udWxsDQo+ID4gKysrIGIvZG9jL1JFQURNRS5zZXJpYWxfZHRfYmF1ZA0KPiA+IEBA
+IC0wLDAgKzEsNDEgQEANCj4gPiArRmV0Y2ggc2VyaWFsIGJhdWRyYXRlIGZyb20gRFQNCj4gPiAr
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gPiArDQo+ID4gK1RvIHN1cHBvcnQgZmV0
+Y2hpbmcgb2YgYmF1ZHJhdGUgZnJvbSBEVCwgdGhlIGZvbGxvd2luZyBpcyBkb25lOi0NCj4gPiAr
+DQo+ID4gK1RoZSBiYXVkcmF0ZSBjb25maWd1cmVkIGluIEtjb25maWcgc3ltYm9sIENPTkZJR19C
+QVVEUkFURSBpcyB0YWtlbiBieQ0KPiBkZWZhdWx0IGJ5IHNlcmlhbC4NCj4gPiArSWYgY2hhbmdl
+IG9mIGJhdWRyYXRlIGlzIHJlcXVpcmVkIHRoZW4gdGhlIEtjb25maWcgc3ltYm9sDQo+ID4gK0NP
+TkZJR19CQVVEUkFURSBuZWVkcyB0byBjaGFuZ2VkIGFuZCBVLUJvb3QgcmVjb21waWxhdGlvbiBp
+cw0KPiByZXF1aXJlZCBvciB0aGUgVS1Cb290IGVudmlyb25tZW50IG5lZWRzIHRvIGJlIHVwZGF0
+ZWQuDQo+ID4gKw0KPiA+ICtUbyBhdm9pZCB0aGlzLCBhZGQgc3VwcG9ydCB0byBmZXRjaCB0aGUg
+YmF1ZHJhdGUgZGlyZWN0bHkgZnJvbSB0aGUNCj4gPiArZGV2aWNlIHRyZWUgZmlsZSBhbmQgdXBk
+YXRlIHRoZSBlbnZpcm9ubWVudC4NCj4gPiArDQo+ID4gK1RoZSBkZWZhdWx0IGVudmlyb25tZW50
+IHN0b3JlcyB0aGUgZGVmYXVsdCBiYXVkcmF0ZSB2YWx1ZS4gV2hlbg0KPiA+ICtkZWZhdWx0IGJh
+dWRyYXRlIGFuZCBkdGIgYmF1ZHJhdGUgYXJlIG5vdCBzYW1lIGdsaXRjaGVzIGFyZSBzZWVuIG9u
+IHRoZQ0KPiBzZXJpYWwuDQo+ID4gK1NvLCB0aGUgZW52aXJvbm1lbnQgYWxzbyBuZWVkcyB0byBi
+ZSB1cGRhdGVkIHdpdGggdGhlIGR0YiBiYXVkcmF0ZSB0bw0KPiA+ICthdm9pZCB0aGUgZ2xpdGNo
+ZXMgb24gdGhlIHNlcmlhbCB3aGljaCBpcyBlbmFibGVkIGJ5IFNFUklBTF9EVF9CQVVELg0KPiAN
+Cj4gVGhlIGJhdWQgcmF0ZSBpcyByZWFkIGZyb20gdGhlIGVudiBpbnRvIGdkLT5iYXVkcmF0ZSBi
+eSBpbml0X2JhdWRfcmF0ZSgpLg0KPiANCj4gVXBkYXRpbmcgdGhlIGRlZmF1bHQgZW52aXJvbm1l
+bnQgc2VlbXMgcHJldHR5IG5hc3R5IHRvIG1lLi4ud2h5IGlzIHRoYXQNCj4gbmVjZXNzYXJ5Pw0K
+PiANCj4gQ291bGQgd2UgcmVhZCBpdCBmcm9tIERUIGluIGluaXRfYmF1ZF9yYXRlKCkgPw0KDQpX
+ZSBhcmUgc2VlaW5nIGdsaXRjaGVzIGlmIHRoZSBkZWZhdWx0IGVudiBiYXVkcmF0ZSBhbmQgZHRi
+IGJhdWRyYXRlIGFyZSBub3Qgc2FtZS4gU28sIHdlIGFyZSB1cGRhdGluZyB0aGUgZGVmYXVsdCBi
+YXVkcmF0ZSB3aXRoIGR0YiBiYXVkcmF0ZSwgc2FtZSB0aGluZyBoYXMgYmVlbiBleHBsYWluZWQg
+YWJvdmUuDQoNCj4gDQo+ID4gKw0KPiA+ICtUaGUgS2NvbmZpZyBTUExfRU5WX1NVUFBPUlQgbmVl
+ZHMgdG8gYmUgZW5hYmxlZCB0byBhbGxvdyBwYXRjaGluZyBpbg0KPiBTUEwuDQo+ID4gKw0KPiA+
+ICtUaGUgS2NvbmZpZyBERUZBVUxUX0VOVl9JU19SVyB3aGljaCBpcyBlbmFibGVkIGJ5IFNFUklB
+TF9EVF9CQVVEDQo+IHdpdGgNCj4gPiArbWFraW5nIHRoZSBlbnZpcm9ubWVudCB3cml0YWJsZS4N
+Cj4gPiArDQo+ID4gK1RoZSBvZm5vZGVfcmVhZF9iYXVkKCkgZnVuY3Rpb24gcGFyc2VzIGFuZCBm
+ZXRjaGVzIHRoZSBiYXVkcmF0ZSB2YWx1ZQ0KPiA+ICtmcm9tIHRoZSBEVC4gVGhpcyB2YWx1ZSBp
+cyB2YWxpZGF0ZWQgYW5kIHVwZGF0ZWQgdG8gYmF1ZHJhdGUgZHVyaW5nDQo+ID4gK3NlcmlhbCBp
+bml0LiBQYWRkaW5nIGlzIGFkZGVkIGF0IHRoZSBlbmQgb2YgdGhlIGRlZmF1bHQgZW52aXJvbm1l
+bnQgYW5kIHRoZQ0KPiBkdCBiYXVkcmF0ZSBpcyB1cGRhdGVkIHdpdGggdGhlIGxhdGVzdCB2YWx1
+ZS4NCj4gPiArDQo+ID4gK0V4YW1wbGU6LQ0KPiA+ICsNCj4gPiArVGhlIHNlcmlhbCBwb3J0IG9w
+dGlvbnMgYXJlIG9mIHRoZSBmb3JtICJiYmJicG5mIiwgd2hlcmUgImJiYmIiIGlzDQo+ID4gK3Ro
+ZSBiYXVkIHJhdGUsICJwIiBpcyBwYXJpdHkgKCJuIiwgIm8iLCBvciAiZSIpLCAibiIgaXMgbnVt
+YmVyIG9mIGJpdHMsIGFuZCAiZiINCj4gaXMgZmxvdyBjb250cm9sICgiciIgZm9yIFJUUyBvciBv
+bWl0IGl0KS4gRGVmYXVsdCBpcyAiMTE1MjAwbjgiLg0KPiA+ICsNCj4gPiArY2hvc2VuIHsNCj4g
+PiArICAgICAgICAgICAgICAgYm9vdGFyZ3MgPSAiZWFybHljb24gY29uc29sZT10dHlQUzAsMTE1
+MjAwIGNsa19pZ25vcmVfdW51c2VkDQo+IHJvb3Q9L2Rldi9yYW0wIHJ3IGluaXRfZmF0YWxfc2g9
+MSI7DQo+ID4gKyAgICAgICAgICAgICAgIHN0ZG91dC1wYXRoID0gInNlcmlhbDA6MTE1MjAwbjgi
+Ow0KPiA+ICsgICAgICAgfTsNCj4gPiArDQo+ID4gK0Zyb20gdGhlIGNob3NlbiBub2RlLCBzdGRv
+dXQtcGF0aCBwcm9wZXJ0eSBpcyBvYnRhaW5lZCBhcyBzdHJpbmcuDQo+ID4gKw0KPiA+ICsgICAg
+ICAgc3Rkb3V0LXBhdGggPSAic2VyaWFsMDoxMTUyMDBuOCI7DQo+ID4gKw0KPiA+ICtUaGUgc3Ry
+aW5nIGlzIHBhcnNlZCB0byBnZXQgdGhlIGJhdWRyYXRlIDExNTIwMC4gVGhpcyBzdHJpbmcgaXMg
+Y29udmVydGVkIHRvDQo+IGludGVnZXIgYW5kIHVwZGF0ZWQgdG8gdGhlIGVudmlyb25tZW50Lg0K
+PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2NvcmUvb2Zub2RlLmMgYi9kcml2ZXJzL2NvcmUvb2Zu
+b2RlLmMgaW5kZXgNCj4gPiBlYzU3NGM0NDYwLi4wNGJkYjMwYjI0IDEwMDY0NA0KPiA+IC0tLSBh
+L2RyaXZlcnMvY29yZS9vZm5vZGUuYw0KPiA+ICsrKyBiL2RyaXZlcnMvY29yZS9vZm5vZGUuYw0K
+PiA+IEBAIC04NzAsNiArODcwLDI2IEBAIG9mbm9kZSBvZm5vZGVfZ2V0X2Nob3Nlbl9ub2RlKGNv
+bnN0IGNoYXINCj4gKm5hbWUpDQo+ID4gICAgICAgICByZXR1cm4gb2Zub2RlX3BhdGgocHJvcCk7
+DQo+ID4gIH0NCj4gPg0KPiA+ICsjaWZkZWYgQ09ORklHX09GX1NFUklBTF9EVF9CQVVEDQo+IA0K
+PiBZb3Ugc2hvdWxkIG5vdCBuZWVkIHRoaXMgI2lmZGVmDQoNCk9rLi4uSSB3aWxsIHJlbW92ZSB0
+aGlzIGFuZCB1cGRhdGUuDQoNCg0KPiANCj4gPiAraW50IG9mbm9kZV9yZWFkX2JhdWQodm9pZCkN
+Cj4gPiArew0KPiA+ICsgICAgICAgY29uc3QgY2hhciAqc3RyLCAqcDsNCj4gPiArICAgICAgIHUz
+MiBiYXVkOw0KPiA+ICsNCj4gPiArICAgICAgIHN0ciA9IG9mbm9kZV9yZWFkX2Nob3Nlbl9zdHJp
+bmcoInN0ZG91dC1wYXRoIik7DQo+ID4gKyAgICAgICBpZiAoIXN0cikNCj4gPiArICAgICAgICAg
+ICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gKw0KPiA+ICsgICAgICAgLyogUGFyc2Ugc3RyaW5n
+IHNlcmlhbDA6MTE1MjAwbjggKi8NCj4gPiArICAgICAgIHAgPSBzdHJjaHIoc3RyLCAnOicpOw0K
+PiA+ICsgICAgICAgaWYgKCFwKQ0KPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsN
+Cj4gPiArDQo+ID4gKyAgICAgICBiYXVkID0gZGVjdG91bChwICsgMSwgTlVMTCk7DQo+ID4gKyAg
+ICAgICByZXR1cm4gYmF1ZDsNCj4gPiArfQ0KPiA+ICsjZW5kaWYNCj4gPiArDQo+ID4gIGNvbnN0
+IHZvaWQgKm9mbm9kZV9yZWFkX2FsaWFzZXNfcHJvcChjb25zdCBjaGFyICpwcm9wbmFtZSwgaW50
+DQo+ID4gKnNpemVwKSAgew0KPiA+ICAgICAgICAgb2Zub2RlIG5vZGU7DQo+ID4gZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvc2VyaWFsL0tjb25maWcgYi9kcml2ZXJzL3NlcmlhbC9LY29uZmlnIGluZGV4
+DQo+ID4gNWM5YjkyNGU3My4uZWEyMjQ0ZTVkYiAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3Nl
+cmlhbC9LY29uZmlnDQo+ID4gKysrIGIvZHJpdmVycy9zZXJpYWwvS2NvbmZpZw0KPiA+IEBAIC0y
+NCw2ICsyNCwxNSBAQCBjb25maWcgQkFVRFJBVEUNCj4gPiAgICAgICAgICAgaW4gdGhlIFNQTCBz
+dGFnZSAobW9zdCBkcml2ZXJzKSBvciBmb3IgY2hvb3NpbmcgYSBkZWZhdWx0IGJhdWRyYXRlDQo+
+ID4gICAgICAgICAgIGluIHRoZSBhYnNlbmNlIG9mIGFuIGVudmlyb25tZW50IHNldHRpbmcgKHNl
+cmlhbF9teGMuYykuDQo+ID4NCj4gPiArY29uZmlnIE9GX1NFUklBTF9EVF9CQVVEDQo+IA0KPiBQ
+bGVhc2UgY2FuIHdlIHVzZSBPRl9TRVJJQUxfQkFVRCA/DQo+IA0KPiBPRiBzb3J0LW9mIG1lYW5z
+IERUIHNvIHdlIGRvbid0IG5lZWQgYm90aA0KDQpPay4uLnN1cmUgd2lsbCBjaGFuZ2UgdG8gT0Zf
+U0VSSUFMX0JBVUQuDQoNCj4gDQo+ID4gKyAgICAgICBib29sICJGZXRjaCBzZXJpYWwgYmF1ZHJh
+dGUgZnJvbSBkZXZpY2UgdHJlZSINCj4gPiArICAgICAgIGRlcGVuZHMgb24gRE1fU0VSSUFMICYm
+IFNQTF9FTlZfU1VQUE9SVA0KPiA+ICsgICAgICAgc2VsZWN0IERFRkFVTFRfRU5WX0lTX1JXDQo+
+ID4gKyAgICAgICBoZWxwDQo+ID4gKyAgICAgICAgIFNlbGVjdCB0aGlzIHRvIGVuYWJsZSBmZXRj
+aGluZyBhbmQgc2V0dGluZyBvZiB0aGUgYmF1ZHJhdGUNCj4gPiArICAgICAgICAgY29uZmlndXJl
+ZCBpbiB0aGUgRFQuIFJlcGxhY2UgdGhlIGRlZmF1bHQgYmF1ZHJhdGUgd2l0aCB0aGUgRFQNCj4g
+PiArICAgICAgICAgYmF1ZHJhdGUgYW5kIGFsc28gc2V0IGl0IHRvIHRoZSBlbnZpcm9ubWVudC4N
+Cj4gPiArDQo+ID4gIGNvbmZpZyBERUZBVUxUX0VOVl9JU19SVw0KPiA+ICAgICAgICAgYm9vbCAi
+TWFrZSBkZWZhdWx0IGVudmlyb25tZW50IGFzIHdyaXRhYmxlIg0KPiA+ICAgICAgICAgaGVscA0K
+PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3NlcmlhbC9zZXJpYWwtdWNsYXNzLmMNCj4gPiBiL2Ry
+aXZlcnMvc2VyaWFsL3NlcmlhbC11Y2xhc3MuYyBpbmRleCAwNjdmYWUyNjE0Li5hZmEyNWExZjE5
+IDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMvc2VyaWFsL3NlcmlhbC11Y2xhc3MuYw0KPiA+ICsr
+KyBiL2RyaXZlcnMvc2VyaWFsL3NlcmlhbC11Y2xhc3MuYw0KPiA+IEBAIC0xNTQsMTIgKzE1NCw1
+NCBAQCBzdGF0aWMgdm9pZCBzZXJpYWxfZmluZF9jb25zb2xlX29yX3BhbmljKHZvaWQpDQo+ID4g
+IH0NCj4gPiAgI2VuZGlmIC8qIENPTkZJR19TRVJJQUxfUFJFU0VOVCAqLw0KPiA+DQo+ID4gK2lu
+dCBjaGVja192YWxpZF9iYXVkcmF0ZShpbnQgYmF1ZCkNCj4gPiArew0KPiA+ICsgICAgICAgaW50
+IGk7DQo+ID4gKw0KPiA+ICsgICAgICAgZm9yIChpID0gMDsgaSA8IEFSUkFZX1NJWkUoYmF1ZHJh
+dGVfdGFibGUpOyArK2kpIHsNCj4gPiArICAgICAgICAgICAgICAgaWYgKGJhdWQgPT0gYmF1ZHJh
+dGVfdGFibGVbaV0pDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIDA7DQo+ID4g
+KyAgICAgICB9DQo+ID4gKw0KPiA+ICsgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gK30NCj4g
+PiArDQo+ID4gK2ludCBmZXRjaF9iYXVkX2Zyb21fZHRiKHZvaWQpDQo+ID4gK3sNCj4gPiArICAg
+ICAgIGludCBiYXVkX3ZhbHVlLCByZXQ7DQo+ID4gKw0KPiA+ICsgICAgICAgYmF1ZF92YWx1ZSA9
+IG9mbm9kZV9yZWFkX2JhdWQoKTsNCj4gPiArICAgICAgIHJldCA9IGNoZWNrX3ZhbGlkX2JhdWRy
+YXRlKGJhdWRfdmFsdWUpOw0KPiA+ICsgICAgICAgaWYgKHJldCkNCj4gPiArICAgICAgICAgICAg
+ICAgcmV0dXJuIHJldDsNCj4gPiArDQo+ID4gKyAgICAgICByZXR1cm4gYmF1ZF92YWx1ZTsNCj4g
+PiArfQ0KPiA+ICsNCj4gPiAgLyogQ2FsbGVkIHByaW9yIHRvIHJlbG9jYXRpb24gKi8NCj4gPiAg
+aW50IHNlcmlhbF9pbml0KHZvaWQpDQo+ID4gIHsNCj4gPiAgI2lmIENPTkZJR19JU19FTkFCTEVE
+KFNFUklBTF9QUkVTRU5UKQ0KPiA+ICAgICAgICAgc2VyaWFsX2ZpbmRfY29uc29sZV9vcl9wYW5p
+YygpOw0KPiA+ICAgICAgICAgZ2QtPmZsYWdzIHw9IEdEX0ZMR19TRVJJQUxfUkVBRFk7DQo+ID4g
+KyNpZmRlZiBDT05GSUdfT0ZfU0VSSUFMX0RUX0JBVUQNCj4gDQo+IENhbiB0aGlzIHVzZQ0KPiAN
+Cj4gaWYgKElTX0VOQUJMRUQoLi4uKSkgLi4uDQo+IA0KPiA/DQoNCk9rLi4ud2lsbCB1cGRhdGUg
+dG8gSVNfRU5BQkxFRCgpLg0KDQo+IA0KPiA+ICsgICAgICAgaW50IHJldCA9IDA7DQo+ID4gKyAg
+ICAgICBjaGFyICpwdHIgPSAmZGVmYXVsdF9lbnZpcm9ubWVudFswXTsNCj4gPiArDQo+ID4gKyAg
+ICAgICAvKg0KPiA+ICsgICAgICAgICogRmV0Y2ggdGhlIGJhdWRyYXRlIGZyb20gdGhlIGR0YiBh
+bmQgdXBkYXRlIHRoZSB2YWx1ZSBpbiB0aGUNCj4gPiArICAgICAgICAqIGRlZmF1bHQgZW52aXJv
+bm1lbnQuDQo+ID4gKyAgICAgICAgKi8NCj4gPiArICAgICAgIHJldCA9IGZldGNoX2JhdWRfZnJv
+bV9kdGIoKTsNCj4gPiArICAgICAgIGlmIChyZXQgIT0gLUVJTlZBTCAmJiByZXQgIT0gLUVGQVVM
+VCkgew0KPiA+ICsgICAgICAgICAgICAgICBnZC0+YmF1ZHJhdGUgPSByZXQ7DQo+ID4gKw0KPiA+
+ICsgICAgICAgICAgICAgICB3aGlsZSAoKnB0ciAhPSAnXDAnICYmICoocHRyICsgMSkgIT0gJ1ww
+JykNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICBwdHIrKzsNCj4gPiArICAgICAgICAgICAg
+ICAgcHRyICs9IDI7DQo+ID4gKyAgICAgICAgICAgICAgIHNwcmludGYocHRyLCAiYmF1ZHJhdGU9
+JWQiLCBnZC0+YmF1ZHJhdGUpOw0KPiA+ICsgICAgICAgfQ0KPiA+ICsjZW5kaWYNCj4gPiAgICAg
+ICAgIHNlcmlhbF9zZXRicmcoKTsNCj4gPiAgI2VuZGlmDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEv
+aW5jbHVkZS9kbS9vZm5vZGUuaCBiL2luY2x1ZGUvZG0vb2Zub2RlLmggaW5kZXgNCj4gPiA0NDNk
+YjYyNTJkLi41ZjkwYjZjNjVlIDEwMDY0NA0KPiA+IC0tLSBhL2luY2x1ZGUvZG0vb2Zub2RlLmgN
+Cj4gPiArKysgYi9pbmNsdWRlL2RtL29mbm9kZS5oDQo+ID4gQEAgLTkzMiwxMiArOTMyLDIyIEBA
+IGNvbnN0IGNoYXIgKm9mbm9kZV9yZWFkX2Nob3Nlbl9zdHJpbmcoY29uc3QNCj4gY2hhcg0KPiA+
+ICpwcm9wbmFtZSk7ICBvZm5vZGUgb2Zub2RlX2dldF9jaG9zZW5fbm9kZShjb25zdCBjaGFyICpw
+cm9wbmFtZSk7DQo+ID4NCj4gPiAgLyoqDQo+ID4gLSAqIG9mbm9kZV9yZWFkX2FsaWFzZXNfcHJv
+cCgpIC0gZ2V0IHRoZSB2YWx1ZSBvZiBhIGFsaWFzZXMgcHJvcGVydHkNCj4gPiArICogb2Zub2Rl
+X3JlYWRfYmF1ZCgpIC0gZ2V0IHRoZSBiYXVkcmF0ZSBmcm9tIHN0cmluZyB2YWx1ZSBvZiBjaG9z
+ZW4NCj4gPiArIHByb3BlcnR5DQo+ID4gICAqDQo+ID4gLSAqIFRoaXMgbG9va3MgZm9yIGEgcHJv
+cGVydHkgd2l0aGluIHRoZSAvYWxpYXNlcyBub2RlIGFuZCByZXR1cm5zIGl0cw0KPiA+IHZhbHVl
+DQo+ID4gKyAqIFRoaXMgbG9va3MgZm9yIHN0ZG91dC1wYXRoIHByb3BlcnR5IHdpdGhpbiB0aGUg
+L2Nob3NlbiBub2RlIGFuZA0KPiA+ICsgcGFyc2VzIGl0cw0KPiA+ICsgKiB2YWx1ZSB0byByZXR1
+cm4gYmF1ZHJhdGUuDQo+ID4gICAqDQo+ID4gICAqIFRoaXMgb25seSB3b3JrcyB3aXRoIHRoZSBj
+b250cm9sIEZEVC4NCj4gPiAgICoNCj4gPiArICogUmV0dXJuOiBiYXVkcmF0ZSB2YWx1ZSBpZiBm
+b3VuZCwgZWxzZSBlcnJvcg0KPiANCj4gLXZlIGVycm9yIGNvZGU/DQoNCk9ray4uLldpbGwgdXBk
+YXRlIHRoaXMuDQoNCg0KPiANCj4gPiArICovDQo+ID4gK2ludCBvZm5vZGVfcmVhZF9iYXVkKHZv
+aWQpOw0KPiA+ICsNCj4gPiArLyoqDQo+ID4gKyAqIG9mbm9kZV9yZWFkX2FsaWFzZXNfcHJvcCgp
+IC0gZ2V0IHRoZSB2YWx1ZSBvZiBhIGFsaWFzZXMgcHJvcGVydHkNCj4gPiArICoNCj4gPiArICog
+VGhpcyBsb29rcyBmb3IgYSBwcm9wZXJ0eSB3aXRoaW4gdGhlIC9hbGlhc2VzIG5vZGUgYW5kIHJl
+dHVybnMgaXRzDQo+ID4gK3ZhbHVlDQo+ID4gKyAqDQo+ID4gICAqIEBwcm9wbmFtZTogUHJvcGVy
+dHkgbmFtZSB0byBsb29rIGZvcg0KPiA+ICAgKiBAc2l6ZXA6IFJldHVybnMgc2l6ZSBvZiBwcm9w
+ZXJ0eSwgb3IgYEZEVF9FUlJfLi4uYCBlcnJvciBjb2RlIGlmIGZ1bmN0aW9uDQo+ID4gICAqICAg
+ICByZXR1cm5zIE5VTEwNCj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9lbnZfZGVmYXVsdC5oIGIv
+aW5jbHVkZS9lbnZfZGVmYXVsdC5oIGluZGV4DQo+ID4gMjI3Y2FkN2MzNC4uMWM4NTlhOGY2NSAx
+MDA2NDQNCj4gPiAtLS0gYS9pbmNsdWRlL2Vudl9kZWZhdWx0LmgNCj4gPiArKysgYi9pbmNsdWRl
+L2Vudl9kZWZhdWx0LmgNCj4gPiBAQCAtNDIsNyArNDIsNyBAQCBjb25zdCBjaGFyIGRlZmF1bHRf
+ZW52aXJvbm1lbnRbXSA9IHsgICNpZg0KPiA+IGRlZmluZWQoQ09ORklHX0JPT1RERUxBWSkNCj4g
+PiAgICAgICAgICJib290ZGVsYXk9IiAgICBfX3N0cmluZ2lmeShDT05GSUdfQk9PVERFTEFZKSAg
+ICJcMCINCj4gPiAgI2VuZGlmDQo+ID4gLSNpZiBkZWZpbmVkKENPTkZJR19CQVVEUkFURSkgJiYg
+KENPTkZJR19CQVVEUkFURSA+PSAwKQ0KPiA+ICsjaWYgIWRlZmluZWQoQ09ORklHX09GX1NFUklB
+TF9EVF9CQVVEKSAmJg0KPiBkZWZpbmVkKENPTkZJR19CQVVEUkFURSkgJiYNCj4gPiArKENPTkZJ
+R19CQVVEUkFURSA+PSAwKQ0KPiA+ICAgICAgICAgImJhdWRyYXRlPSIgICAgIF9fc3RyaW5naWZ5
+KENPTkZJR19CQVVEUkFURSkgICAgIlwwIg0KPiA+ICAjZW5kaWYNCj4gPiAgI2lmZGVmIENPTkZJ
+R19MT0FEU19FQ0hPDQo+ID4gQEAgLTExOCw2ICsxMTgsMTAgQEAgY29uc3QgY2hhciBkZWZhdWx0
+X2Vudmlyb25tZW50W10gPSB7ICAjZW5kaWYNCj4gPiAjaWZkZWYgQ0ZHX0VYVFJBX0VOVl9TRVRU
+SU5HUw0KPiA+ICAgICAgICAgQ0ZHX0VYVFJBX0VOVl9TRVRUSU5HUw0KPiA+ICsjZW5kaWYNCj4g
+PiArI2lmZGVmIENPTkZJR19PRl9TRVJJQUxfRFRfQkFVRA0KPiA+ICsgICAgICAgLyogUGFkZGlu
+ZyBmb3IgYmF1ZHJhdGUgYXQgdGhlIGVuZCB3aGVuIGVudmlyb25tZW50IGlzIHdyaXRhYmxlICov
+DQo+ID4gKyAgICAgICAiXDBcMFwwXDBcMFwwXDBcMFwwXDBcMFwwXDBcMFwwXDBcMCINCj4gPiAg
+I2VuZGlmDQo+ID4gICAgICAgICAiXDAiDQo+ID4gICNlbHNlIC8qIENPTkZJR19VU0VfREVGQVVM
+VF9FTlZfRklMRSAqLyBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9zZXJpYWwuaA0KPiA+IGIvaW5jbHVk
+ZS9zZXJpYWwuaCBpbmRleCA0MmJkZjM3NTljLi5iMDEwNDdkMDdhIDEwMDY0NA0KPiA+IC0tLSBh
+L2luY2x1ZGUvc2VyaWFsLmgNCj4gPiArKysgYi9pbmNsdWRlL3NlcmlhbC5oDQo+ID4gQEAgLTMz
+Nyw2ICszMzcsMjEgQEAgaW50IHNlcmlhbF9zZXRjb25maWcoc3RydWN0IHVkZXZpY2UgKmRldiwg
+dWludA0KPiBjb25maWcpOw0KPiA+ICAgKi8NCj4gPiAgaW50IHNlcmlhbF9nZXRpbmZvKHN0cnVj
+dCB1ZGV2aWNlICpkZXYsIHN0cnVjdCBzZXJpYWxfZGV2aWNlX2luZm8NCj4gPiAqaW5mbyk7DQo+
+ID4NCj4gPiArLyoqDQo+ID4gKyAqIGNoZWNrX3ZhbGlkX2JhdWRyYXRlKCkgLSBDaGVjayB3aGV0
+aGVyIGJhdWRyYXRlIGlzIHZhbGlkIG9yIG5vdA0KPiA+ICsgKg0KPiA+ICsgKiBAYmF1ZDogYmF1
+ZHJhdGUNCj4gDQo+IGJhdWQgcmF0ZSB0byBjaGVjaw0KDQpPay4uLndpbGwgdXBkYXRlIHRoaXMu
+DQoNCg0KPiANCj4gPiArICogUmV0dXJuOiAwIGlmIE9LLCAtdmUgb24gZXJyb3INCj4gPiArICov
+DQo+ID4gK2ludCBjaGVja192YWxpZF9iYXVkcmF0ZShpbnQgYmF1ZCk7DQo+ID4gKw0KPiA+ICsv
+KioNCj4gPiArICogZmV0Y2hfYmF1ZF9mcm9tX2R0YigpIC0gRmV0Y2ggdGhlIGJhdWRyYXRlIHZh
+bHVlIGZyb20gRFQNCj4gPiArICoNCj4gPiArICogUmV0dXJuOiBiYXVkcmF0ZSBpZiBPSywgLXZl
+IG9uIGVycm9yICAqLyBpbnQNCj4gPiArZmV0Y2hfYmF1ZF9mcm9tX2R0Yih2b2lkKTsNCj4gPiAr
+DQo+ID4gIHZvaWQgYXRtZWxfc2VyaWFsX2luaXRpYWxpemUodm9pZCk7DQo+ID4gIHZvaWQgbWNm
+X3NlcmlhbF9pbml0aWFsaXplKHZvaWQpOw0KPiA+ICB2b2lkIG1wYzg1eHhfc2VyaWFsX2luaXRp
+YWxpemUodm9pZCk7DQo+ID4gLS0NCj4gPiAyLjE3LjENCj4gPg0KPiANCj4gUmVnYXJkcywNCj4g
+U2ltb24NCg0KVGhhbmtzDQpWZW5rYXRlc2gNCg==
