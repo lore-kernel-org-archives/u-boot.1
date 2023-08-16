@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20F9C001E0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 09:12:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AD19C001E0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 09:23:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 470DA86954;
-	Wed, 16 Aug 2023 11:12:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4974D869A7;
+	Wed, 16 Aug 2023 11:23:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MnfgN3MG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hbPjqAJq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59E5F869BF; Wed, 16 Aug 2023 11:12:46 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E350869A7; Wed, 16 Aug 2023 11:23:30 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 982A2867E2
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 11:12:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89BCF847C3
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 11:23:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3159d5e409dso4385408f8f.0
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 02:12:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692177163; x=1692781963;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aEUQA5OUtxhOt+haKL64YAyHiGErmVHKmE5WGpOUGeU=;
- b=MnfgN3MGpUv5RdbjzbGZSmo+UYEVnAvaSbtO39UCle6wXQ6d+T9QIQ2C35ejBxoK04
- LLQajnokx9wNt92ujna85zDG+/L1xhPbZJhE2mr6Kz+GIZ0bgYrSq5SROTZmSkQ+HYms
- 3zs/8RasUf+5njwdxx9xhr4Eali4L6g6B9Ao5x1epCMjeUBsSXrRXkgV2lqi3yVko9bo
- lotgguJNDYlkb74DRfcQSzwgVwAOwy62eVGK4RMYS7acd1leCR2WCpOxPVsWK07YuUUt
- N5kPdFRbQHUfD33EtopZxGl2thsMTOwRtsoGc+FHDWw5GLk9Sqai+qihOHWTVLZacisZ
- YkJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692177163; x=1692781963;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aEUQA5OUtxhOt+haKL64YAyHiGErmVHKmE5WGpOUGeU=;
- b=ULa4N+ECJgrOTJjpyQ6hU6046MqnQEs4c29ICyQQjx8j47RvsRnDN6Hhb1RM13VOtx
- 4To+tBH3nWqyFW2P5VW2W/UtEjoFAeNeVPAiWaHfRv6PgLEx9XPIVAWMMyDPhTnPUM9w
- eB8dseUctHVzj+68acqucG0Njpvi/mFae1QqOmGv09T6sqCI3wkVTuNlA3iE4mUFYMCq
- ljvUKmuHRnQXBEedhAROz9IoLWvWIc4EcMpuWUiyicz8AS2uG47ISwRaQ1M1cORVjw9Y
- ZWSmz5N2+ck5L3D/qtO5d2mDbfckly6VCiOCJUuBz8uV8Pv8ut5hrFsNHqj1t0fxWXRI
- C3bg==
-X-Gm-Message-State: AOJu0YypndLrlbMA9OsAooNPZyaKnxAUCrva2fkV8D5j6rZnMmG0us4n
- 9kwaD6ZY59gqn0EtN/Dxeiw9Gg==
-X-Google-Smtp-Source: AGHT+IE5UJACdaFLsMDw0Z82nDlqiKjU9AwfpM/npjA76zMkIjpvWvHStIJmd4DlRRub1yMHqbBP4w==
-X-Received: by 2002:a5d:6108:0:b0:313:e2e3:d431 with SMTP id
- v8-20020a5d6108000000b00313e2e3d431mr3317486wrt.12.1692177163021; 
- Wed, 16 Aug 2023 02:12:43 -0700 (PDT)
-Received: from hades (ppp089210246083.access.hol.gr. [89.210.246.83])
- by smtp.gmail.com with ESMTPSA id
- y7-20020a5d6147000000b00317e77106dbsm20561777wrt.48.2023.08.16.02.12.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 02:12:42 -0700 (PDT)
-Date: Wed, 16 Aug 2023 12:12:40 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com,
- rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
- lwip-devel@nongnu.org
-Subject: Re: [PATCHv6 11/14] net/lwip: connection between cmd and lwip apps
-Message-ID: <ZNyTCPvgxbNn3+ir@hades>
-References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
- <20230814133253.4150-12-maxim.uvarov@linaro.org>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37G9NOAE031844;
+ Wed, 16 Aug 2023 04:23:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692177804;
+ bh=xlwHSyVhsWsYoi1YnpB4hQmCIg99QR/FZd3lWUTbqsw=;
+ h=From:Subject:Date:To:CC;
+ b=hbPjqAJqiWZncNHGLtUIo19tbIkNcbxx3xP9R8eJLuYqSQpps/Pc6R7G2PcL+BSCh
+ w9Xw7wXOGATPccTygorDfdn2NqbLcdBIXstI5bVzhNUsDtqKEDXHIB6jY4N8SCV3XP
+ A2so1Bo4DSiAfnpYGzJQLsKZpNQfE6o2cvurFlfA=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37G9NOaF062338
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Aug 2023 04:23:24 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Aug 2023 04:23:23 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Aug 2023 04:23:23 -0500
+Received: from [127.0.1.1] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37G9NJBi059893;
+ Wed, 16 Aug 2023 04:23:20 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH 0/3] DTS Sync from next-20230815 to u-boot
+Date: Wed, 16 Aug 2023 14:53:08 +0530
+Message-ID: <20230816-b4-upstream-j721s2-r5-pinmux-v1-0-f4548452760a@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230814133253.4150-12-maxim.uvarov@linaro.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHyV3GQC/z2NQQrCMBBFr1Jm7UATm1q8irhI0tGO0BhmWgmU3
+ t3UhcvH47+/gZIwKVybDYQ+rPxOFcypgTj59CTksTLY1p7bwfQYOlyzLkJ+xtfFGrUoDjOneS1
+ oXezi2Jtg3QA1EbwSBvEpTkfkP0xUlsNnoQeX3/3tvu9fD/yH8o4AAAA=
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Andrew Davis <afd@ti.com>,
+ Nishanth Menon <nm@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.12.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1692177799; l=2466;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=bGL0pd01ZoSvVj+RHdkG2PuNUr4gErao15HT45LawsY=;
+ b=9336wzETalRC1s8iYW/aEdLdRj602G65GYtrO1C0zGVLmyjjhuAnsLJXFr5j9FkyLwQiQhGv7
+ hd1OzuSRWNIAr/KxrX6gUJQY364Wwm2H3nYRa3meK2QWsVq2HCOUrhc
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,320 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 14, 2023 at 07:32:50PM +0600, Maxim Uvarov wrote:
+The sync tries to ensure that U-boot remains functional with the updated
+Linux DTS and all the fixes from Linux move to U-boot during the sync.
 
-Commit message missing again
+The series tries to sync from Linux next-20230815 along with addition of
+the documentation for J721S2 that had been previously missing.
 
-> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> ---
->  cmd/Makefile   |   1 +
->  cmd/net-lwip.c | 306 +++++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 307 insertions(+)
->  create mode 100644 cmd/net-lwip.c
-> +static int do_lwip_init(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		      char *const argv[])
-> +{
-> +	if (!ulwip_init())
-> +		return CMD_RET_SUCCESS;
-> +	return CMD_RET_FAILURE;
-> +}
-> +
-> +static int lwip_empty_tmo(void) { return 0; };
-> +int (*ulwip_tmo)(void) = lwip_empty_tmo;
-> +void ulwip_set_tmo(int (*tmo)(void))
-> +{
-> +	ulwip_tmo = tmo;
-> +}
-> +
-> +static void ulwip_clear_tmo(void)
-> +{
-> +	ulwip_tmo = lwip_empty_tmo;
-> +}
-> +
-> +static void ulwip_timeout_handler(void)
+Linux next-20230815 has been choosen due to certain fixes of mcu_ringacc
+being merged to -next recently that helps this sync to remove overrides
+for mcu_ringacc from -u-boot.dtsi
 
-We discussed this in the previous patchset but I am not convinced this is
-the best approach.  Instead of setting the callback function on the dhcp
-and ping commands and calling a function pointer here,  just define
-discrete function and set them during net_set_timeout_handler()
-if there is common code like eth_halt() etc just create a function with
-them
+* 702110c2be99 arm64: dts: ti: k3: Add cfg reg region to ringacc node
+* 4f1e869915b7 dt-bindings: soc: ti: k3-ringacc: Describe cfg reg region
 
-> +{
-> +	eth_halt();
-> +	ulwip_tmo();
-> +	net_set_state(NETLOOP_FAIL);	/* we did not get the reply */
-> +	ulwip_loop_set(0);
-> +}
-> +
-> +int ulwip_loop(void)
-> +{
-> +	int ret = CMD_RET_FAILURE;
-> +
-> +	ulwip_loop_set(1);
-> +	if (!net_loop(LWIP))
-> +		ret = CMD_RET_SUCCESS;
-> +	ulwip_loop_set(0);
-> +	return ret;
-> +}
-> +
-> +#if defined(CONFIG_CMD_PING)
-> +int do_lwip_ping(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		 char *const argv[])
-> +{
-> +	int ret;
-> +
-> +	if (argc < 2) {
-> +		printf("argc = %d, error\n", argc);
-> +		return CMD_RET_USAGE;
-> +	}
-> +
-> +	ret = ulwip_init();
-> +	if (ret) {
-> +		log_err("ulwip_init err %d\n", ret);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	printf("Using %s device\n", eth_get_name());
-> +	printf("pinging addr: %s\n", argv[1]);
-> +
-> +	net_set_timeout_handler(1000UL, ulwip_timeout_handler);
-> +
-> +	if (ulwip_ping(argv[1])) {
-> +		printf("ping init fail\n");
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	return ulwip_loop();
-> +}
-> +#endif /* CONFIG_CMD_PING */
-> +
-> +#if defined(CONFIG_CMD_WGET)
-> +int do_lwip_wget(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		 char *const argv[])
-> +{
-> +	char *url;
-> +	int ret;
-> +
-> +	if (argc < 2)
-> +		return CMD_RET_USAGE;
-> +
-> +	url = argv[1];
-> +
-> +	ret = ulwip_init();
-> +	if (ret) {
-> +		log_err("ulwip_init err %d\n", ret);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	ret = ulwip_wget(image_load_addr, url);
-> +	if (ret) {
-> +		log_err("lwip_wget err %d\n", ret);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +
-> +	return ulwip_loop();
-> +}
-> +#endif
-> +
-> +#if defined(CONFIG_CMD_TFTPBOOT)
-> +int do_lwip_tftp(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		 char *const argv[])
-> +{
-> +	char *filename;
-> +	ulong addr;
-> +	char *end;
-> +	int ret;
-> +
-> +	switch (argc) {
-> +	case 1:
-> +		filename = env_get("bootfile");
-> +		break;
-> +	case 2:
-> +		/*
-> +		 * Only one arg - accept two forms:
-> +		 * Just load address, or just boot file name. The latter
-> +		 * form must be written in a format which can not be
-> +		 * mis-interpreted as a valid number.
-> +		 */
-> +		addr = hextoul(argv[1], &end);
-> +		if (end == (argv[1] + strlen(argv[1]))) {
-> +			image_load_addr = addr;
-> +			filename = env_get("bootfile");
-> +		} else {
-> +			filename = argv[1];
-> +		}
-> +		break;
-> +	case 3:
-> +		image_load_addr = hextoul(argv[1], NULL);
-> +		filename = argv[2];
-> +		break;
-> +	default:
-> +		return CMD_RET_USAGE;
-> +	}
-> +
-> +	ret = ulwip_init();
-> +	if (ret) {
-> +		log_err("ulwip_init err %d\n", ret);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	ret = ulwip_tftp(image_load_addr, filename);
+DMA fixes are also being upstreamed to Linux [0]. They'll be fixed in
+U-boot post their merge in Linux.
 
-filename can be NULL.  We went through this on v4 as well.  Go through all
-the comments and fix them before v6. 
+Test Logs are included in [1]
 
-> +	if (ret)
-> +		return ret;
-> +
-> +	return ulwip_loop();
-> +}
-> +#endif /* CONFIG_CMD_TFTPBOOT */
-> +
-> +#if defined(CONFIG_CMD_DHCP)
-> +int do_lwip_dhcp(void)
-> +{
-> +	int ret;
-> +	char *filename;
-> +
-> +	ret = ulwip_init();
-> +	if (ret) {
-> +		log_err("ulwip_init err %d\n", ret);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	ret = ulwip_dhcp();
-> +
-> +	net_set_timeout_handler(2000UL, ulwip_timeout_handler);
-> +
-> +	ulwip_loop();
-> +	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-> +		ulwip_clear_tmo();
-> +
-> +		filename = env_get("bootfile");
-> +		if (!filename) {
-> +			log_notice("no bootfile\n");
-> +			return CMD_RET_SUCCESS;
-> +		}
-> +
-> +		ret = ulwip_init();
-> +		if (ret) {
-> +			log_err("ulwip_init err %d\n", ret);
-> +			return CMD_RET_FAILURE;
-> +		}
-> +
-> +		net_set_timeout_handler(20000UL, ulwip_timeout_handler);
-> +		ulwip_tftp(image_load_addr, filename);
-> +
-> +		ret =  ulwip_loop();
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int _do_lwip_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		char *const argv[])
-> +{
-> +	return do_lwip_dhcp();
-> +}
-> +#endif /* CONFIG_CMD_DHCP */
-> +
-> +#if defined(CONFIG_CMD_DNS)
-> +int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		char *const argv[])
-> +{
-> +	int ret;
-> +	char *name;
-> +	char *varname;
-> +	int LWIP_ERR_INPROGRESS = -5; /* lwip/err.h */
-> +
-> +	if (argc == 1)
-> +		return CMD_RET_USAGE;
-> +
-> +	name = argv[1];
-> +
-> +	if (argc == 3)
-> +		varname = argv[2];
-> +	else
-> +		varname = NULL;
-> +
-> +	ret = ulwip_init();
-> +	if (ret) {
-> +		log_err("ulwip_init err %d\n", ret);
-> +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	ret = ulwip_dns(name, varname);
-> +	if (ret == 0)
-> +		return CMD_RET_SUCCESS;
-> +	if (ret != LWIP_ERR_INPROGRESS)
-> +		return CMD_RET_FAILURE;
-> +
-> +	net_set_timeout_handler(1000UL, ulwip_timeout_handler);
-> +
-> +	return ulwip_loop();
-> +}
-> +#endif /* CONFIG_CMD_DNS */
-> +
-> +static struct cmd_tbl cmds[] = {
-> +	U_BOOT_CMD_MKENT(init, 1, 0, do_lwip_init,
-> +			 "initialize lwip stack", ""),
-> +#if defined(CONFIG_CMD_PING)
-> +	U_BOOT_CMD_MKENT(ping, 2, 0, do_lwip_ping,
-> +			 "send ICMP ECHO_REQUEST to network host",
-> +			 "pingAddress"),
-> +#endif
-> +#if defined(CONFIG_CMD_WGET)
-> +	U_BOOT_CMD_MKENT(wget, 2, 0, do_lwip_wget, "", ""),
-> +#endif
-> +#if defined(CONFIG_CMD_TFTPBOOT)
-> +	U_BOOT_CMD_MKENT(tftp, 3, 0, do_lwip_tftp,
-> +			"boot image via network using TFTP protocol\n",
-> +			"[loadAddress] [[hostIPaddr:]bootfilename]"),
-> +#endif
-> +#if defined(CONFIG_CMD_DHCP)
-> +	U_BOOT_CMD_MKENT(dhcp, 1, 0, _do_lwip_dhcp,
-> +			"boot image via network using DHCP/TFTP protocol",
-> +			""),
-> +#endif
-> +#if defined(CONFIG_CMD_DNS)
-> +	U_BOOT_CMD_MKENT(dns, 3, 0, do_lwip_dns,
-> +			 "lookup dns name [and store address at variable]",
-> +			 ""),
-> +#endif
-> +};
-> +
-> +static int do_ops(struct cmd_tbl *cmdtp, int flag, int argc,
-> +		     char *const argv[])
-> +{
-> +	struct cmd_tbl *cp;
-> +
-> +	cp = find_cmd_tbl(argv[1], cmds, ARRAY_SIZE(cmds));
-> +
-> +	argc--;
-> +	argv++;
-> +
-> +	if (cp == NULL || argc > cp->maxargs)
-> +		return CMD_RET_USAGE;
-> +	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
-> +		return CMD_RET_SUCCESS;
-> +
-> +	return cp->cmd(cmdtp, flag, argc, argv);
-> +}
-> +
-> +U_BOOT_CMD(
-> +	lwip, 4, 1, do_ops,
-> +	"LWIP sub system",
-> +	"init - init LWIP\n"
-> +	"ping addr - pingAddress\n"
-> +	"wget http://IPadress/url/\n"
-> +	"tftp [loadAddress] [[hostIPaddr:]bootfilename]\n"
-> +	"dhcp - boot image via network using DHCP/TFTP protocol\n"
-> +	);
-> -- 
-> 2.30.2
-> 
+[0]: https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
+[1]: https://gist.github.com/manorit2001/dbad09fd00e8b7c3872e85874c8e648c
 
-Thanks
-/Ilias
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Manorit Chawdhry (3):
+      k3-j721s2: Sync from linux-next tag next-20230815
+      k3-am68: Sync from linux-next tag next-20230815
+      docs: ti: j721s2_evm: Create documentation from J7200 docs
+
+ MAINTAINERS                                        |   1 +
+ arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi     |  57 +-
+ arch/arm/dts/k3-am68-sk-base-board.dts             | 524 +++++++++-----
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts          | 109 +--
+ arch/arm/dts/k3-am68-sk-som.dtsi                   | 112 +--
+ .../dts/k3-j721s2-common-proc-board-u-boot.dtsi    |  52 +-
+ arch/arm/dts/k3-j721s2-common-proc-board.dts       | 376 ++++++----
+ arch/arm/dts/k3-j721s2-main.dtsi                   | 777 ++++++++++++++++++++-
+ arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi             | 374 +++++++++-
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts    | 110 +--
+ arch/arm/dts/k3-j721s2-som-p0.dtsi                 | 172 ++---
+ arch/arm/dts/k3-j721s2-thermal.dtsi                | 101 +++
+ arch/arm/dts/k3-j721s2.dtsi                        |  12 +-
+ arch/arm/dts/k3-serdes.h                           | 204 ++++++
+ doc/board/ti/j721s2_evm.rst                        | 228 ++++++
+ doc/board/ti/k3.rst                                |   1 +
+ 16 files changed, 2407 insertions(+), 803 deletions(-)
+---
+base-commit: 5d3758178bc23d731897f05244bf564f8d1caf48
+change-id: 20230816-b4-upstream-j721s2-r5-pinmux-25c4cd61b258
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
