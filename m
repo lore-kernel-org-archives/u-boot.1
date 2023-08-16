@@ -4,114 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21161C001B0
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 06:55:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6480BC001DF
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 07:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A3878697E;
-	Wed, 16 Aug 2023 08:54:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 82E75868BC;
+	Wed, 16 Aug 2023 09:11:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="BjHi1mYY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RDjaXXcV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E6A78699B; Wed, 16 Aug 2023 08:54:58 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C57E38697E; Wed, 16 Aug 2023 09:11:35 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31D75867E2
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 08:54:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92A19867E2
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 09:11:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20230816065451epoutp01256f4b9a1d8b7b48c71c129bca5c6690~7yqQUwD-Y2652926529epoutp01t
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 06:54:51 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20230816065451epoutp01256f4b9a1d8b7b48c71c129bca5c6690~7yqQUwD-Y2652926529epoutp01t
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1692168891;
- bh=0wFB7qiFn29XTJfY9mBgQfqGPnQgcDnAM0GI9c1VAwY=;
- h=From:To:Cc:Subject:Date:References:From;
- b=BjHi1mYYBAWLsgrra/De3jh6PW9YL4eJcz4yW2S8BUncS8gzQ41YfSh9J+WuvWEF/
- nClvOn/E4Pnm5jnJsomkwVWkI4R9IN1yyL/mAm8fQWhd0P0RjHhfP2XRQ2YoneVTCo
- MZRE+8W5E16vdHlFRzRCTVWly3xje6lGLQVsJCaE=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230816065450epcas2p19c79473b0003ddf261d3b94bca30e02d~7yqQC67KA1705117051epcas2p1O;
- Wed, 16 Aug 2023 06:54:50 +0000 (GMT)
-Received: from epsmgec2p1.samsung.com (unknown [182.195.36.91]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4RQf5P6pK0z4x9Q0; Wed, 16 Aug
- 2023 06:54:49 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmgec2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- CD.61.49986.9B27CD46; Wed, 16 Aug 2023 15:54:49 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec~7yqOUw-Ql2691926919epcas2p3N;
- Wed, 16 Aug 2023 06:54:48 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20230816065448epsmtrp296c298513e8b1dfea12c31e14acf914d~7yqOUN-jX3023230232epsmtrp2o;
- Wed, 16 Aug 2023 06:54:48 +0000 (GMT)
-X-AuditID: b6c32a43-5f9ff7000000c342-de-64dc72b943ea
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 26.54.34491.8B27CD46; Wed, 16 Aug 2023 15:54:48 +0900 (KST)
-Received: from cometzero-ubuntu..
- (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20230816065448epsmtip23edc34d6ccc0a844aa532e6f04de9f40~7yqOJTqsz1790017900epsmtip2S;
- Wed, 16 Aug 2023 06:54:48 +0000 (GMT)
-From: Chanho Park <chanho61.park@samsung.com>
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Cc: Chanho Park <chanho61.park@samsung.com>
-Subject: [PATCH] fpga: define dummy fpga_load function for debug build
-Date: Wed, 16 Aug 2023 15:54:37 +0900
-Message-Id: <20230816065437.836392-1-chanho61.park@samsung.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-3fe426b8583so62770855e9.2
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 00:11:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692169892; x=1692774692;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IYjqM0hMn++wWcAGjjWyMEzLrgsrDL35Byhq/CVcySA=;
+ b=RDjaXXcVQdhgPJQYzhGaADQyLtQKkY2OS5lRzFf0p3i7ooqw7lciH8B61k0dFF342i
+ ZDWe0VYaiu7EyGzX5g2F4zBUl6CPqO20Kwr+QVg3r+aHLesf05ZORlvu3Cl+xPXi4Nfv
+ cdjgJtCtRlM2ZjHS1pZSE1nnloPYZb8+tKR+iuEAOn68d56LFmMwOJpIYkgNuJiIFeJY
+ qd9Rf3vagY5bGkCkkqci3qW9RgjANfJgn9yaCGA99ixITv8HqTS4dYd96Zycek5LvM8r
+ PjXchX8qQGX/BghClvshD/RffBrIuy8N4LxGirSLreVdIV/Okp5quO8TJ3k2JUK+F/Ke
+ gHIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692169892; x=1692774692;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IYjqM0hMn++wWcAGjjWyMEzLrgsrDL35Byhq/CVcySA=;
+ b=PuxBWQUrDxJEfUbdYQV4zDxoMxyssUY8hyo2MeLbqBCrlFwlBL6LvY07eTRRtJuDcw
+ WvR6VKCLafk5GNw+EpqF/GEWzZdjSrpGq0H78NEujaHhg9jB/MQISpUwhCNLmnhIzjSw
+ WFVgYF36fXtJ43WUky/BanJqAchy23LWRJUGT1TeUaSWgNtTWblGobxlhZNsUABmESVY
+ 9+h0GBv5ZvGWl5o6qA0wNapyn1EtSw4kjMu3S10meby2l8V8xwxlsJp3gxa9DRKw8K5m
+ 8Ncth6kNiZvgG9DVoBnW+nH5146BoyXL4BA4ifYl9s53cpNoDOjLRlgwRJum3vUZfbQr
+ AnPw==
+X-Gm-Message-State: AOJu0YxN0iJ09M0PmxJQQGSE5CFMncKr7WelWpzuloQBiFwFTTopaCKv
+ NjGrwa3Cs1jNPTTVeEJ7ldYNUA==
+X-Google-Smtp-Source: AGHT+IHIy/J5YX3QcDCY4M3yTh4NwRn1X3zn036S68BjznPaHFcOZSH0uxnAT1lUC+IkKuS+6GMZdA==
+X-Received: by 2002:adf:e685:0:b0:317:6639:852d with SMTP id
+ r5-20020adfe685000000b003176639852dmr825840wrm.43.1692169891989; 
+ Wed, 16 Aug 2023 00:11:31 -0700 (PDT)
+Received: from hades (ppp089210246083.access.hol.gr. [89.210.246.83])
+ by smtp.gmail.com with ESMTPSA id
+ f6-20020adffcc6000000b0031984b370f2sm5055292wrs.47.2023.08.16.00.11.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Aug 2023 00:11:31 -0700 (PDT)
+Date: Wed, 16 Aug 2023 10:11:29 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: Booting Windows 11
+Message-ID: <ZNx2oS0qK8E3NTY5@hades>
+References: <CAPnjgZ2a6S_Hh_=Gb=_Cz2zr9DG7TPEJxJD9z_PU9E6LiiMPHg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHKsWRmVeSWpSXmKPExsWy7bCmqe7OojspBh++CFhc3q9tsff4RVaL
- t3s72R2YPVov/WXzOHtnB6NH35ZVjAHMUdk2GamJKalFCql5yfkpmXnptkrewfHO8aZmBoa6
- hpYW5koKeYm5qbZKLj4Bum6ZOUCLlBTKEnNKgUIBicXFSvp2NkX5pSWpChn5xSW2SqkFKTkF
- 5gV6xYm5xaV56Xp5qSVWhgYGRqZAhQnZGYdbQwrecVRsetXH3sC4lr2LkZNDQsBE4vbpP4xd
- jFwcQgI7GCU2nf/IApIQEvjEKPG+Nw4i8Y1R4svOTXAd12Z8Z4NI7GWU2H3+MlT7NCaJdUfX
- M4FUsQnoSmx5/ooRxBYRsJV4/fwsmM0soC3R+XkK2CRhATeJTw0rwWwWAVWJKw0z2EBsXgF7
- iVUTG4HiHEDb5CUWP5CACAtKnJz5hAVijLxE89bZzCB7JQQms0s8ffyMDeI6F4nTX/qZIWxh
- iVfHt0BdLSXx+d1eNoiZ5RI7liVB9LYwSjS37YGqt5f4cXMKK0gNs4CmxPpd+hDlyhJHbkGt
- 5ZPoOPwX6jJeiY42IYhGdYkD26ezQNiyEt1zPrNC2B4S7d8WQsMzVuL/lYuMExjlZyF5ZhaS
- Z2Yh7F3AyLyKUSy1oDg3PTXZqMAQHqPJ+bmbGMEJTct5B+OV+f/0DjEycTAeYpTgYFYS4e3h
- vZUixJuSWFmVWpQfX1Sak1p8iNEUGLoTmaVEk/OBKTWvJN7QxNLAxMzM0NzI1MBcSZz3Xuvc
- FCGB9MSS1OzU1ILUIpg+Jg5OqQamKu1zTau/C/29brhkfRmn2ivXhWbHo++eFOGOjVcr17Bk
- c8iL1fz+tLf6SkabSmeV2TmTZXNvKYT6NUkka+UVLlraVXh33dM7slv/Zec3Pci/lJGxxH2L
- aE/Psns8007tm9XNcc43sLd9xYJFR/naXLT4tVfrMu4/uy/nzSpe93MXWV8zrfoeVpGc8qTo
- rYW0zOPKLV0KJ29MrJy36vWuvuN6Vyq2GK2uVfd2mnfwfn+54zOnugqfnyx2EYLiTK96+pcf
- TpqixFuxJ2BPW0XRbkmTsmQXLtb8MJcrv68LX1P9MS1+VyTLKaZJv32ZZRattOhQk7i8WONX
- HPOVl2uNsgwzu1cobv/r72igdVGJpTgj0VCLuag4EQCUOvvu8QMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplluLIzCtJLcpLzFFi42LZdlhJXndH0Z0UgxkLzSwu79e22Hv8IqvF
- 272d7A7MHq2X/rJ5nL2zg9Gjb8sqxgDmKC6blNSczLLUIn27BK6Mw60hBe84Kja96mNvYFzL
- 3sXIySEhYCJxbcZ3NhBbSGA3o8S1jfwQcVmJZ+92QNUIS9xvOcIKUTOJSWLnM28Qm01AV2LL
- 81eMILaIgL3Ei8atLCA2s4C2ROfnKWC9wgJuEp8aVoLZLAKqElcaZoDt4gWqXzWxESjOATRf
- XmLxAwmIsKDEyZlPoMbISzRvnc08gZFvFpLULCSpBYxMqxglUwuKc9Nziw0LDPNSy/WKE3OL
- S/PS9ZLzczcxgkNMS3MH4/ZVH/QOMTJxMB5ilOBgVhLh7eG9lSLEm5JYWZValB9fVJqTWnyI
- UZqDRUmcV/xFb4qQQHpiSWp2ampBahFMlomDU6qBKf423/UL+y/IFWvP36vz/6CMQlWH8DHf
- I04yImX31fc1+v+a+bXh2bSiktOGM0pbHffl39R7JRny2Krq0916tQNnb627VlB98KXcRN4F
- NWqCxT2hHvP+pkuvKz9ukrb7zFzVGLVlWwTY0qJWma3zvqVXZ/Hr09m57h/c4v/Ff51556/E
- nCbhmGOf35zbk27rfvqVYOTemwcFhGXTPzGH5k/JLp7j6jjj4vKIXemSpzemx+hXt1ta3quO
- 1Mv70Vz38nCh3u+C/GUfpmq6pfBebT52Y6b0+bsqwqu27d37/ZmMSqDhlPC6ay59DcH24i8n
- CywSfH88YrZ4gU33cu5DCuuDjgetrNdxd738QVbTXomlOCPRUIu5qDgRABE8dBOgAgAA
-X-CMS-MailID: 20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec
-References: <CGME20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec@epcas2p3.samsung.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ2a6S_Hh_=Gb=_Cz2zr9DG7TPEJxJD9z_PU9E6LiiMPHg@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,38 +91,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This fixes below build error when CC_OPTIMIZE_FOR_DEBUG is enabled and
-CONFIG_SPL_FPGA is not enabled.
+Hi Simon, 
 
-../common/spl/spl_fit.c:591: undefined reference to `fpga_load'
-collect2: error: ld returned 1 exit status
+On Tue, Aug 15, 2023 at 07:22:56PM -0600, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> I thought I would try booting Windows on U-Boot but it does not get
+> very far. Have you tried that? I note a ew odd things below. Is there
+> a validation suite for it?
+> 
+> https://github.com/sjg20/u-boot/tree/efi2
+> 
+> qemu-system-x86_64  -smp 4 -m 8G -serial mon:stdio -bios
+> /tmp/b/qemu-x86_64/u-boot.rom -drive
+> id=fisk,file=root.img,if=virtio,driver=raw -drive
+> id=disk,if=virtio,file=/vid/software/win/Win11_22H2_English_x64v2.iso
+> 
+> Scanning bootdev 'virtio-blk#0.bootdev':
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+> Path, 00000000becf6848, 00000000becf6840)
+> efi_locate_device_path()     EFI: Call:
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_handle_buffer()       EFI: Entry
+> efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+> 00000000becf67b8, 00000000becf67b0)
+> efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+> efi_locate_device_path()     EFI: 0 returned by
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
+> efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
+> 
+> 
+> ^ This seems unhappy because it is a virtio device?
+> 
+>  efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6948, Device Path, 0,
+> 00000000bdcf2040)
+> efi_install_protocol_interface()     EFI: handle 00000000bed1f820
+>     efi_add_protocol()     EFI: installed device path
+> '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,8200000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600820000000000)'
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6948, Block IO, 0,
+> 00000000bed1f850)
+> efi_install_protocol_interface()     EFI: handle 00000000bed1f820
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> Scanning bootdev 'virtio-blk#1.bootdev':
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+> Path, 00000000becf6848, 00000000becf6840)
+> efi_locate_device_path()     EFI: Call:
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_handle_buffer()       EFI: Entry
+> efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+> 00000000becf67b8, 00000000becf67b0)
+> efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+> efi_locate_device_path()     EFI: 0 returned by
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 14
+> efi_install_multiple_protocol_interfaces_int() EFI: 14 returned by
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6948, Device Path, 0,
+> 00000000bdcf0040)
+> efi_install_protocol_interface()     EFI: handle 00000000bed24ef0
+>     efi_add_protocol()     EFI: installed device path
+> '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600820001000000)'
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6948, Block IO, 0,
+> 00000000bed24f20)
+> efi_install_protocol_interface()     EFI: handle 00000000bed24ef0
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+> Path, 00000000becf6818, 00000000becf6810)
+> efi_locate_device_path()     EFI: Call:
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_handle_buffer()       EFI: Entry
+> efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+> 00000000becf6788, 00000000becf6780)
+> efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+> efi_locate_device_path()     EFI: 0 returned by
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6918, Device Path, 0,
+> 00000000bdced040)
+> efi_install_protocol_interface()     EFI: handle 00000000bed1f9e0
+>     efi_add_protocol()     EFI: installed device path
+> '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600820001000000)/CDROM(1,0x80c,0x8)'
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6918, Block IO, 0,
+> 00000000bed1fa10)
+> efi_install_protocol_interface()     EFI: handle 00000000bed1f9e0
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_locate_device_path()   EFI: Entry efi_locate_device_path(Device
+> Path, 00000000becf6818, 00000000becf6810)
+> efi_locate_device_path()     EFI: Call:
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_handle_buffer()       EFI: Entry
+> efi_locate_handle_buffer(2, Device Path, 0000000000000000,
+> 00000000becf6788, 00000000becf6780)
+> efi_locate_handle_buffer()       EFI: Exit: efi_locate_handle_buffer: 0
+> efi_locate_device_path()     EFI: 0 returned by
+> efi_locate_handle_buffer(BY_PROTOCOL, protocol, NULL, &no_handles,
+> &handles)
+> efi_locate_device_path()   EFI: Exit: efi_locate_device_path: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_locate_device_path(protocol, &dp, &old_handle)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6918, Device Path, 0,
+> 00000000bdceb040)
+> efi_install_protocol_interface()     EFI: handle 00000000bed2b050
+>     efi_add_protocol()     EFI: installed device path
+> '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600820001000000)/CDROM(2,0x814,0x0)'
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_multiple_protocol_interfaces_int() EFI: Call:
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+> efi_install_protocol_interface()   EFI: Entry
+> efi_install_protocol_interface(00000000becf6918, Block IO, 0,
+> 00000000bed2b080)
+> efi_install_protocol_interface()     EFI: handle 00000000bed2b050
+> efi_install_protocol_interface()   EFI: Exit: efi_install_protocol_interface: 0
+> efi_install_multiple_protocol_interfaces_int() EFI: 0 returned by
+> efi_install_protocol_interface(handle, protocol, EFI_NATIVE_INTERFACE,
+> protocol_interface)
+>   0  efi          ready   virtio       2  virtio-blk#1.bootdev.part
+> efi/boot/bootx64.efi
+> ** Booting bootflow 'virtio-blk#1.bootdev.part_2' with efi
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+> efi_set_blk_dev_to_system_partition() No EFI system partition
+>      efi_var_to_file() Failed to persist EFI variables
+>     efi_add_protocol() EFI: installed device path
+> '/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/MAC(525400123456,1)'
+> EFI using ACPI tables at f0060
+>      efi_install_fdt() WARNING: Can't have ACPI table and device tree
+> - ignoring DT.
+>        efi_run_image() Booting /efi\boot\bootx64.efi
+>       efi_load_image() EFI: Entry efi_load_image(0, 00000000becfb110,
+> /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,5400000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,8200000001000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600820001000000)/CDROM(2,0x814,0x0)/efi\boot\bootx64.efi,
+> 0000000001000000, 904560, 00000000becf6820)
+>       efi_load_image() EFI: Exit: efi_load_image: 0
+>      efi_start_image() EFI: Entry efi_start_image(00000000bed3d820,
+> 00000000becf67e0, 00000000becf67e8)
+>      efi_start_image()   EFI: Call: efi_open_protocol(image_handle,
+> &efi_guid_loaded_image, &info, NULL, NULL,
+> EFI_OPEN_PROTOCOL_GET_PROTOCOL)
+>    efi_open_protocol()     EFI: Entry
+> efi_open_protocol(00000000bed3d820, Loaded Image, 00000000becf6730,
+> 0000000000000000, 0000000000000000, 0x2)
+>    efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
+>      efi_start_image()   EFI: 0 returned by
+> efi_open_protocol(image_handle, &efi_guid_loaded_image, &info, NULL,
+> NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL)
+>      efi_start_image()   EFI: Jumping into 0x00000000bdbaf090
+>      efi_start_image()   EFI: Call: image_obj->entry(image_handle, &systab)
+>    efi_open_protocol()     EFI: Entry
+> efi_open_protocol(00000000bed3d820, Loaded Image, 00000000becf66c8,
+> 00000000becfb110, 0000000000000000, 0x1)
+>    efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
+>    efi_open_protocol()     EFI: Entry
+> efi_open_protocol(00000000bed2b050, Device Path, 00000000becf6670,
+> 00000000becfb110, 0000000000000000, 0x1)
+>    efi_open_protocol()     EFI: Exit: efi_open_protocol: 0
+> efi_allocate_pages_ext()     EFI: Entry efi_allocate_pages_ext(2, 2,
+> 0x1, 00000000becf66d8)
+> efi_allocate_pages_ext()       EFI: - type address
+> efi_allocate_pages_ext()       EFI: - address 102000
+> efi_allocate_pages_ext()       EFI: - returning memory 102000
+> efi_allocate_pages_ext()     EFI: Exit: efi_allocate_pages_ext: 0
+> 
+> Here it hangs for about 10 seconds, then reboots.
 
-Signed-off-by: Chanho Park <chanho61.park@samsung.com>
----
- include/fpga.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
 
-diff --git a/include/fpga.h b/include/fpga.h
-index ed688cc0fa3b..44f2755a3f10 100644
---- a/include/fpga.h
-+++ b/include/fpga.h
-@@ -60,8 +60,16 @@ int fpga_add(fpga_type devtype, void *desc);
- int fpga_count(void);
- const fpga_desc *const fpga_get_desc(int devnum);
- int fpga_is_partial_data(int devnum, size_t img_len);
-+#if CONFIG_IS_ENABLED(FPGA)
- int fpga_load(int devnum, const void *buf, size_t bsize,
- 	      bitstream_type bstype, int flags);
-+#else
-+static inline int fpga_load(int devnum, const void *buf, size_t bsize,
-+	      bitstream_type bstype, int flags)
-+{
-+	return FPGA_FAIL;
-+}
-+#endif
- int fpga_fsload(int devnum, const void *buf, size_t size,
- 		fpga_fs_info *fpga_fsinfo);
- int fpga_loads(int devnum, const void *buf, size_t size,
--- 
-2.39.2
+How are you launching QEMU? 
+IIRC by default the VM spawns in EL1 and sets the PSCI conduit to HVC. But Windows 
+issues an SMC unconditionally and blows up.  Can you try with
+virtualization=on?
 
+Regards
+/Ilias
+> 
+> Regards,
+> Simon
