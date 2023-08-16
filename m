@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BF8C04A6A
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE77C001E0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 15:07:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2BC586A19;
-	Wed, 16 Aug 2023 17:06:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BA4D186A22;
+	Wed, 16 Aug 2023 17:07:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rNAXLr+c";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="enFQyQ6k";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qZpri2db";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF22086A02; Wed, 16 Aug 2023 17:06:31 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 894EA86A12; Wed, 16 Aug 2023 17:07:41 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10E65868D8
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:06:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F327386A21
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 17:07:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RQs0h5lC7z9smM;
- Wed, 16 Aug 2023 17:06:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692198388;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mSZRGnwJ9N+Gb3NWslVvUdzkwIv/iA5EyBCdjRbxzkQ=;
- b=rNAXLr+cej9k+nEVA6/PhAUK/1OTW5kc29SB4s1PNM/iExXSKeHDVxEShLlg03z+3dpzVe
- d3JaYfSMjiUvy0HHO651MBKn+W2H6ZjX7JlHMP9lx6OxNFXK3W/wOWrDy+EDgIQzurZJwZ
- dJz2aM5yTaG1OngR43vbrXkfNuQZXqj1SuHmemcCp9QiwChbsQIN8LIw4ArI8CrlNC/1mC
- 4Ffedqle+HzGnkw77vkywqMK45hmQsHWzPVRITAesbonRrKzOUnp1VONmNcR3419mxNyyE
- OVHk5LyjJYErnrmsE/ySNKBlU2erte6/+OKlSNU8o5LlBMif8s3cvBXqCczdUQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692198386;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mSZRGnwJ9N+Gb3NWslVvUdzkwIv/iA5EyBCdjRbxzkQ=;
- b=enFQyQ6kLtvPN0AVcAEVrOcHEI3xVVe7xv0wOMUig30i4J6ogWeQSUMxp8oDaeBPS5LXNY
- Qn4P60GuxjMe2pDiMha8ACZd89B+UCqcJuaxYk5eOy8Qw259S3msifHDmGKL4EUJQ88GRq
- RLmMx17zsPYBhU2s5h0VO7SC5dy6izTxd3EuBhuYqtdHdqWevNhTSprae/BtESn70CQ0gE
- cOYoq3ySmeHiG24t1tUxS+AIoNzAQDra7b5wZ1rhyljOY+lyOONyr64vV3dlkXHxUaSAvg
- a4PzbHKoDBJ4VLGiWwMRzRYJrOpMl+OIU/9W3/Wtp70ZYPyNf9ljc6Nx8Ik2WA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Bhupesh Sharma <bhupesh.sharma@linaro.org>, Faiz Abbas <faiz_abbas@ti.com>
-Subject: [PATCH v2 7/7] ufs: Implement cache management
-Date: Wed, 16 Aug 2023 17:05:55 +0200
-Message-Id: <20230816150555.245028-7-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230816150555.245028-1-marek.vasut+renesas@mailbox.org>
-References: <20230816150555.245028-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6592a39e51=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 37GEHqLT020809; Wed, 16 Aug 2023 17:07:34 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:to:cc:from:subject:content-type
+ :content-transfer-encoding; s=selector1; bh=KNXNOdZz3ihQKpkpMIbS
+ PiDmoqWWutnb+aeYqAhZ+DI=; b=qZpri2dbN034ob4VUUrRnQn1L3GuGXvzyyRv
+ s0TZf2UDAfsUO1EIgNmicG7HeK5UrGQV03oWGWAvV7dYWVaqVkPGYHxZ4PefDbn4
+ ycn3/f/ZpTrqlJV6VZVI+tkpI7JBBd2CnF8MVqaVvqCP04kONCHUNzE89P+EEf6D
+ l9zafPRZ/pC6XqBfcx+qcxNsnzDyr1BDTaKpO/2tM84REkcZ4kfCqvdZiqYvqZ9X
+ Xdu7mUuoEmSkr/wlTWn58VEzdAERCL3WmBf41kQAyk3ykg70Jrrsr+I4c6LF6UxE
+ y14ewBPS+xKqWGubEZ11kc5XB4ETNkgSq22ZInRJxPR8j8DLVA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sh03cr82y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 16 Aug 2023 17:07:34 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 389E410005D;
+ Wed, 16 Aug 2023 17:07:33 +0200 (CEST)
+Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2AAC9260282;
+ Wed, 16 Aug 2023 17:07:33 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by EQNDAG1NODE4.st.com
+ (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 16 Aug
+ 2023 17:07:32 +0200
+Message-ID: <2eff3bb2-ebbd-b71e-3707-c3ae29419bfa@foss.st.com>
+Date: Wed, 16 Aug 2023 17:07:31 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 97b634df8983d9a27eb
-X-MBO-RS-META: ey4fudstesbzyattdbx9p6mq5kondfus
-X-Rspamd-Queue-Id: 4RQs0h5lC7z9smM
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Marek Vasut
+ <marex@denx.de>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ <patrice.chotard@foss.st.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot master / v2023.10 =
+ u-boot-stm32_20230816
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To EQNDAG1NODE4.st.com
+ (10.75.129.133)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-16_15,2023-08-15_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,129 +90,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add function to flush and invalidate cache over request and response
-queue entries, and perform flush and optional invalidate over block
-layer data that are passed into the UFS layer. This makes it possible
-to use UFS with caches enabled.
+Hi Tom
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Cc: Faiz Abbas <faiz_abbas@ti.com>
----
-V2: No change
----
- drivers/ufs/ufs.c | 42 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 41 insertions(+), 1 deletion(-)
+Please pull the STM32 related fixes for u-boot/master, v2023.10: u-boot-stm32-20230816
 
-diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index 041caee714f..7c48d57f99d 100644
---- a/drivers/ufs/ufs.c
-+++ b/drivers/ufs/ufs.c
-@@ -692,6 +692,21 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
- 	return (ufshcd_readl(hba, REG_CONTROLLER_STATUS) >> 8) & 0x7;
- }
- 
-+/**
-+ * ufshcd_cache_flush_and_invalidate - Flush and invalidate cache
-+ *
-+ * Flush and invalidate cache in aligned address..address+size range.
-+ * The invalidation is in place to avoid stale data in cache.
-+ */
-+static void ufshcd_cache_flush_and_invalidate(void *addr, unsigned long size)
-+{
-+	uintptr_t aaddr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
-+	unsigned long asize = ALIGN(size, ARCH_DMA_MINALIGN);
-+
-+	flush_dcache_range(aaddr, aaddr + asize);
-+	invalidate_dcache_range(aaddr, aaddr + asize);
-+}
-+
- /**
-  * ufshcd_prepare_req_desc_hdr() - Fills the requests header
-  * descriptor according to request
-@@ -735,6 +750,8 @@ static void ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba,
- 	req_desc->header.dword_3 = 0;
- 
- 	req_desc->prd_table_length = 0;
-+
-+	ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
- }
- 
- static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
-@@ -763,10 +780,15 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
- 	memcpy(&ucd_req_ptr->qr, &query->request.upiu_req, QUERY_OSF_SIZE);
- 
- 	/* Copy the Descriptor */
--	if (query->request.upiu_req.opcode == UPIU_QUERY_OPCODE_WRITE_DESC)
-+	if (query->request.upiu_req.opcode == UPIU_QUERY_OPCODE_WRITE_DESC) {
- 		memcpy(ucd_req_ptr + 1, query->descriptor, len);
-+		ufshcd_cache_flush_and_invalidate(ucd_req_ptr, 2 * sizeof(*ucd_req_ptr));
-+	} else {
-+		ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
-+	}
- 
- 	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
-+	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
- }
- 
- static inline void ufshcd_prepare_utp_nop_upiu(struct ufs_hba *hba)
-@@ -783,6 +805,9 @@ static inline void ufshcd_prepare_utp_nop_upiu(struct ufs_hba *hba)
- 	ucd_req_ptr->header.dword_2 = 0;
- 
- 	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
-+
-+	ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
-+	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
- }
- 
- /**
-@@ -1409,6 +1434,8 @@ void ufshcd_prepare_utp_scsi_cmd_upiu(struct ufs_hba *hba,
- 	memcpy(ucd_req_ptr->sc.cdb, pccb->cmd, cdb_len);
- 
- 	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
-+	ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
-+	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
- }
- 
- static inline void prepare_prdt_desc(struct ufshcd_sg_entry *entry,
-@@ -1423,6 +1450,7 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- {
- 	struct utp_transfer_req_desc *req_desc = hba->utrdl;
- 	struct ufshcd_sg_entry *prd_table = hba->ucd_prdt_ptr;
-+	uintptr_t aaddr = (uintptr_t)(pccb->pdata) & ~(ARCH_DMA_MINALIGN - 1);
- 	ulong datalen = pccb->datalen;
- 	int table_length;
- 	u8 *buf;
-@@ -1430,9 +1458,19 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- 
- 	if (!datalen) {
- 		req_desc->prd_table_length = 0;
-+		ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
- 		return;
- 	}
- 
-+	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
-+		flush_dcache_range(aaddr, aaddr +
-+				   ALIGN(datalen, ARCH_DMA_MINALIGN));
-+	}
-+
-+	/* In any case, invalidate cache to avoid stale data in it. */
-+	invalidate_dcache_range(aaddr, aaddr +
-+				ALIGN(datalen, ARCH_DMA_MINALIGN));
-+
- 	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
- 	buf = pccb->pdata;
- 	i = table_length;
-@@ -1446,6 +1484,8 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
- 	prepare_prdt_desc(&prd_table[table_length - i - 1], buf, datalen - 1);
- 
- 	req_desc->prd_table_length = table_length;
-+	ufshcd_cache_flush_and_invalidate(prd_table, sizeof(*prd_table) * table_length);
-+	ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
- }
- 
- static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
--- 
-2.40.1
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/17388
 
+The following changes since commit 9b54b0e37b72aa9bfff09cbbe13465abfa143f84:
+
+  Merge tag 'efi-2023-10-rc3' of https://source.denx.de/u-boot/custodians/u-boot-efi (2023-08-15 13:08:17 -0400)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20230816
+
+for you to fetch changes up to 9e8cbea1a74516235820ccd50d513c961e43cb70:
+
+  serial: stm32: extend TC timeout (2023-08-16 15:38:23 +0200)
+
+----------------------------------------------------------------
+DHSOM: Power cycle Buck3 in reset
+DHCOM: Switch DWMAC RMII clock to MCO2
+stm32f746: fix display pinmux
+stm32mp: psci: Inhibit PDDS because CSTBYDIS is set
+stm32mp1: DT alignment with v6.4
+stm32mp1: add splashscreen with STMicroelectronics logo
+stm32mp1: clk: remove error for disabled clock in stm32mp1_clk_get_parent
+serial: stm32: Extend TC timeout
+
+----------------------------------------------------------------
+Dario Binacchi (1):
+      ARM: dts: stm32: fix display pinmux for stm32f746-disco
+
+Marek Vasut (3):
+      ARM: stm32: Power cycle Buck3 in reset on DHSOM
+      ARM: stm32: Inhibit PDDS because CSTBYDIS is set
+      ARM: dts: stm32: Switch DWMAC RMII clock to MCO2 on DHCOM
+
+Patrick Delaunay (3):
+      clk: stm32mp1: remove error for disabled clock in stm32mp1_clk_get_parent
+      ARM: dts: stm32mp: alignment with v6.4
+      board: stm32mp1: add splash screen with stmicroelectronics logo
+
+Valentin Caron (1):
+      serial: stm32: extend TC timeout
+
+ MAINTAINERS                                |   1 +
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi   |   2 +-
+ arch/arm/dts/stm32mp13-pinctrl.dtsi        | 129 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp131.dtsi               |  99 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ arch/arm/dts/stm32mp135f-dk.dts            |  42 +++++++++++++++++++++++++++++++++++++++++-
+ arch/arm/dts/stm32mp15-pinctrl.dtsi        |  34 +++++++++++++++++-----------------
+ arch/arm/dts/stm32mp151.dtsi               |   4 ++--
+ arch/arm/dts/stm32mp157a-dk1.dts           |   3 ---
+ arch/arm/dts/stm32mp157c-dk2.dts           |   3 ---
+ arch/arm/dts/stm32mp157c-ed1.dts           |  17 ++++-------------
+ arch/arm/dts/stm32mp157c-ev1.dts           |   9 ++++-----
+ arch/arm/dts/stm32mp15xx-dhcom-som.dtsi    |  22 ++++++++++++++++++----
+ arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi |  14 ++++++++++++++
+ arch/arm/dts/stm32mp15xx-dkx.dtsi          |  15 ++++++---------
+ arch/arm/mach-stm32mp/psci.c               |   2 +-
+ board/st/common/stpmic1.c                  |  10 +++-------
+ board/st/common/stpmic1.h                  |   2 +-
+ board/st/stm32mp1/spl.c                    |  13 +++++++++++--
+ configs/stm32mp15_basic_defconfig          |   3 +++
+ configs/stm32mp15_defconfig                |   3 +++
+ configs/stm32mp15_trusted_defconfig        |   3 +++
+ drivers/clk/stm32/clk-stm32mp1.c           |   3 ++-
+ drivers/serial/serial_stm32.c              |  18 ++++++++++++------
+ include/configs/stm32mp15_st_common.h      |   4 +++-
+ tools/logos/st.bmp                         | Bin 0 -> 18244 bytes
+ 25 files changed, 375 insertions(+), 80 deletions(-)
+ create mode 100644 tools/logos/st.bmp
