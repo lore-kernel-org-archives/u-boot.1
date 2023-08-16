@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3967CC001DF
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 17:05:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 904D4C001B0
+	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 17:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59FBE869F1;
-	Wed, 16 Aug 2023 19:05:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B0D70869F6;
+	Wed, 16 Aug 2023 19:34:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lZJVwXuQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZjCAVdP7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D55386A00; Wed, 16 Aug 2023 19:05:44 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 0EE03869F6; Wed, 16 Aug 2023 19:34:31 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9582846EE
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 19:05:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2517A866D0
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 19:34:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2b95d5ee18dso102509451fa.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 10:05:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1bee82fab5aso12267135ad.3
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 10:34:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692205540; x=1692810340;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=WbmfiOFhYKK3BqdD3JEj4MvCO3avQe9yztWlbH9waKU=;
- b=lZJVwXuQ3w0qu6q1VJbdMoYkpsl8TuAN7XcLBN85Lrgdz2Kjksm/ouYRj2XejCZc14
- OOHyDennFdECC5Hr6AQd+sSv/QjpXBg9Nt+PfKt/9goKgSgYn8uAF8Sem05+fHXesHeL
- AMPCcFrGY1HohzNK7xOFY99mXH3pB/e9dZ8Bk=
+ d=gmail.com; s=20221208; t=1692207266; x=1692812066;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rLttHBSnbs3Ezul6zAcAmmXh/B0hjOdZT40lVe8FoW0=;
+ b=ZjCAVdP78nGEFEgp1wRMZcqFsNtw3oDOzgYdwTuF76Aa1vIAfo7NfTHQFQWUc2Ne1y
+ U14/bN68YR3/IXxw/O+C1ImmWvixaZfxMOooOrhvqXetkCtNVZNlklI78r/AuxYv7tcL
+ FXTnhbb+yItEUl8u6E7RYa5OVlNyDGZJAMUSxQRdDxPvof0EeB2ZeWIEYpVsFdV+hiB3
+ Rbko9vbk6PFbr3/X7vLu+2LoUtXvpeZmbVqcOpZEunG316tEr9rbB3bx3TqFt2w7zxZ4
+ 12kUA6hCuhxoJwHxbBrA+LeoNpL53R35xVrbg7oUZWTSsw/kTZre7h6fgTr9Z2rjMrxJ
+ htSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692205540; x=1692810340;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WbmfiOFhYKK3BqdD3JEj4MvCO3avQe9yztWlbH9waKU=;
- b=jBbf8MBLsI+YdZAgt6+3f3RXyO83s1zrQBo1s11ootIsYNJ8wq+JGP7W46yxPLEdNF
- N4u3YvB9PdRR2tUUa9pwUHhWekOPMLCo+l0nAAHRnhjMuKCDJ6unncQxP1UgZ2JjjDGe
- k/o3GEXg9BCFIvSNv0VyiN8Cg/BC9uoMXypOF/WGq3THbTy7k8BCwaIzsss4m55uXb2i
- +2sO3vCjp2VJ0dKwDv2fsqgkbS+l73BnNbmQ23NF72GIM1vRe1t/Q5/qCxPxa74t3HH8
- gLEEksbYfgOb9fZm1kDdBQClttqJ9/jdniJThyhzOxHkBgW6nuK0mV1s2WR9UIEDV+8d
- EzZQ==
-X-Gm-Message-State: AOJu0YxzXzmBg4A3/1Rshw/Wkq8yQY4llO3kPhs/LArkkKnbtijj7cNe
- 8t6QVhWIq6gCbWMN2MgYkZ5X+2Jwpdolr4oAn3cv5w==
-X-Google-Smtp-Source: AGHT+IG2ahssO7RBaPtmsOlM7s1lEgbmW78mZxiSZRm6diQtrYydF4W++n84eRj95mqP2vmNrD096oU0wul5P68uz9A=
-X-Received: by 2002:a2e:9f57:0:b0:2b6:b6c4:6e79 with SMTP id
- v23-20020a2e9f57000000b002b6b6c46e79mr2138320ljk.1.1692205539879; Wed, 16 Aug
- 2023 10:05:39 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692207266; x=1692812066;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rLttHBSnbs3Ezul6zAcAmmXh/B0hjOdZT40lVe8FoW0=;
+ b=CjL8EwWJ0bjV+8le+5You4wiLNaXU9PbR+tn8/oPei5yYX4ViacF9lpqWFBBSf+wy7
+ uFbkIAaIbuaTN0/+79tXmDIjLSHmfTytsqjr2rCLIVd4OxYprCfU8ah0mvbeMSZBn7Oj
+ Go6nvI82qrb03EbeQSznV8ebrhIurGW2SMR7mfjnGebsU1LsIjekxuPDvnpkVmBrD509
+ vMwLWQYOTy3qPFzA6+dhtmOFw+gn6AQVzZ871SrJJfW94H+pw6QaJiMdUx1uVelCO1XC
+ 7W6wif/Fr7zMhwtFsLu5n5rb7Q3NyEG5LqXToYq6FD1NQ64iLHSw+5mol9ykxp+ZoSa2
+ qD5w==
+X-Gm-Message-State: AOJu0YwinBlKIoDHU9qWielzOOPBxPI3c9Nv8YUD68Rg8A+2NU7wXjzi
+ 4h6DWmPgPZEitQW8Onry3oSQLEzZgV/oKQ==
+X-Google-Smtp-Source: AGHT+IETdtXCbWjHYE5+qvh+t35HYDiADTOp234YXgF748UF3P6BrQrl5s7Sq3PK4sh+4EXaI91wfw==
+X-Received: by 2002:a17:903:228a:b0:1bb:3498:9caa with SMTP id
+ b10-20020a170903228a00b001bb34989caamr3368027plh.58.1692207265972; 
+ Wed, 16 Aug 2023 10:34:25 -0700 (PDT)
+Received: from celestia.nettie.lan (static-198-54-134-172.cust.tzulo.com.
+ [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
+ z5-20020a1709028f8500b001b8a7e1b116sm13338631plo.191.2023.08.16.10.34.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Aug 2023 10:34:25 -0700 (PDT)
+From: Sam Edwards <cfsworks@gmail.com>
+X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
+To: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Cc: Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
+ Maksim Kiselev <bigunclemax@gmail.com>, Sam Edwards <CFSworks@gmail.com>
+Subject: [PATCH v2 0/5] Allwinner R528/T113s PSCI
+Date: Wed, 16 Aug 2023 10:34:15 -0700
+Message-ID: <20230816173420.83232-1-CFSworks@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 16 Aug 2023 11:05:27 -0600
-Message-ID: <CAPnjgZ0vPwd9v+V8Pg5Bo87OELD-vokB7ZrvU3Bv5dQ_O9z6Sg@mail.gmail.com>
-Subject: Doc style for method functions
-To: linux-doc@vger.kernel.org
-Cc: Jonathan Corbet <corbet@lwn.net>, Mark Rutland <mark.rutland@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,33 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonathan,
+Hi list,
 
-I would like to do something like this:
+This is the second version of my patchset for supporting PSCI (i.e. second core
+bringup) on R528/T113-s#, incorporating most of the feedback from Andre.
 
-struct part_driver {
-   /**
-    * get_info() - Get information about a partition
+I do not expect the final two patches in this series to be winners yet. There's
+still some back-and-forth going on to sync them up with an anticipated v2 of
+Andre's patchset for R528 support (on which this work depends). My v2 is being
+sent now mostly just to smoothen that.
 
-              ^ causes error
+However, the first 3 patches in this series ARE meant to be reviewed seriously:
+the refactoring is totally independent of the R528 effort, and I see no reason
+to wait for the R528 stuff to be nailed down to get started reviewing them.
 
-    *
-    * @desc: Block device descriptor
-    * @part: Partition number (1 = first)
-    * @info: Returns partition information
-    */
-   int (*get_info)(struct blk_desc *desc, int part, struct
-disk_partition *info);
-...
-};
+Going forward, any more changes will most likely be form over function, so
+aggressive testing of the whole 5-patch series -- on sunxis old and new -- is
+nonetheless very valuable at this point. :)
 
-But this gives:
+Changes v1->v2:
+- Power clamp is now adjusted ONLY on sun{6,7}i, H3, R40. The previous version
+  was mistakenly doing this EXCEPT on those machines.
+- Flattened sunxi_power_switch() into sunxi_cpu_set_power() for simplicity's
+  sake.
+- Moved the "power clamp is not NULL" conditional into sunxi_cpu_set_power().
+- Removed unnecessary H6 special-case, since H6 is actually ARM64.
+- Renamed SUNXI_CPUX_BASE to SUNXI_CPUCFG_BASE, to mirror expected changes in
+  Andre's v2 of the R528 series (we decided against using a new name for this
+  block).
+- Removed sunxi_cpucfg_reg struct, and stopped using the PRCM struct in psci.c.
 
-scripts/kernel-doc:292:
-   print STDERR "Incorrect use of kernel-doc format: $_";
+Cheers,
+Sam
 
-Without the brackets on get_info() it works OK. What is the purpose of
-that check, please?
+Sam Edwards (5):
+  sunxi: psci: clean away preprocessor macros
+  sunxi: psci: refactor register access to separate functions
+  sunxi: psci: stop modeling register layout with C structs
+  sunxi: psci: implement PSCI on R528
+  HACK: sunxi: psci: be compatible with v1 of R528 patchset
 
-Regards,
-Simon
+ arch/arm/cpu/armv7/sunxi/psci.c          | 195 +++++++++++++++--------
+ arch/arm/include/asm/arch-sunxi/cpucfg.h |  67 --------
+ arch/arm/mach-sunxi/Kconfig              |   2 +
+ include/configs/sunxi-common.h           |   8 +
+ 4 files changed, 136 insertions(+), 136 deletions(-)
+ delete mode 100644 arch/arm/include/asm/arch-sunxi/cpucfg.h
+
+-- 
+2.41.0
+
