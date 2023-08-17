@@ -4,57 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6512BC27C7A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8196CC27C7A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:45:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3038786A18;
+	by phobos.denx.de (Postfix) with ESMTP id 7B92486A45;
 	Thu, 17 Aug 2023 07:45:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="X2ig2ap2";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="XUoEnzYP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFBF086A33; Thu, 17 Aug 2023 07:45:06 +0200 (CEST)
-Received: from s.wrqvtbkv.outbound-mail.sendgrid.net
- (s.wrqvtbkv.outbound-mail.sendgrid.net [149.72.123.24])
+ id C573986A3B; Thu, 17 Aug 2023 07:45:06 +0200 (CEST)
+Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
+ (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF1B686A45
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:45:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4E7D86A4A
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:45:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=from:subject:mime-version:to:cc:content-transfer-encoding:
- content-type:cc:content-type:from:subject:to;
- s=s1; bh=5IYNqnjIl+SM53TqLBseV/YTS8g+ZQqiawiOe3bVa7k=;
- b=X2ig2ap2siYU+D5cH7V5DVEesuOA2joQAepfIrPTL5RXKw+pt8pg3wBXeI4NUHhrN7GC
- /3Fj58gEn8+PyocI5Akcymij7GdCjfVWJha9GT02K/xGxn9KF8YuK4FS3hEBmMYZowY/MG
- w0Hn7S9CLM5bOHUV7AcAl3h4EfGIDzS+U9r4z09h7oI7k0zkkXnDfMSntVVt2KUdIFlbiy
- zODFI7KuPX6Rr1c5CwkNkIe38aM+RExJ3nztlmBBBiABca9+OGGmPCIL7lU9iPStnfWUqY
- GdlniajTIiSwgRTe2XR/ECoZdy9rSsY7PCFtJzJekWmlxRnyiDbNm1C5Oq9S+ltA==
-Received: by filterdrecv-65f68489c8-nnkmk with SMTP id
- filterdrecv-65f68489c8-nnkmk-1-64DDB3DD-D
- 2023-08-17 05:45:01.158452216 +0000 UTC m=+8489343.094585337
+ h=from:subject:in-reply-to:references:mime-version:to:cc:
+ content-transfer-encoding:content-type:cc:content-type:from:subject:to;
+ s=s1; bh=PSZHZcDpZlS0pz0p96pYbD9Fq/WccGdkWMgccpLYFIw=;
+ b=XUoEnzYPIkwZm9VP2JSRpU1cZBX8Wcez/UbMq6iCbJaEO8/LqDjpgL3hXgI50PsL3zYz
+ jtNATR98gl+9iI37/KuuQwPED7L9nVyD38r8eAFQa5a0tHyrR38jo3HsCHCVA/qTO8BbXy
+ 8VpSXvcTVYaHzADgqxiGf992STGzgSaQ+FdudDGTX95CAD2M9N/zs+ybobmpU9Qt4ekR5B
+ QoWpEqr3De+UZ8xVoQFfKkJW1znEl85L9fH0hUFvfHh3qWaNrLNL7dhRuz6va5ZjFUGmmp
+ 9zCc8utGJFhvHjsLfBtCmOb0kAHRp3qBHMlAZdDgO4x8jNh2jYBR6vgkdZVe+5Gg==
+Received: by filterdrecv-77869f68cc-qljt4 with SMTP id
+ filterdrecv-77869f68cc-qljt4-1-64DDB3DE-14
+ 2023-08-17 05:45:02.317953713 +0000 UTC m=+8489342.760910283
 Received: from bionic.localdomain (unknown) by geopod-ismtpd-canary-0 (SG)
- with ESMTP id 3xj0WBfNTS-AQuRMXP7e6Q
- Thu, 17 Aug 2023 05:45:00.828 +0000 (UTC)
+ with ESMTP id Oqc3ZZwjQ2GMMeaVw49nCg
+ Thu, 17 Aug 2023 05:45:02.106 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 0/2] rockchip: rk356x: Enable poweroff command
-Date: Thu, 17 Aug 2023 05:45:01 +0000 (UTC)
-Message-ID: <20230817054457.472342-1-jonas@kwiboo.se>
+Subject: [PATCH v2 1/2] power: pmic: rk8xx: Use sysreset implementation of the
+ poweroff command
+Date: Thu, 17 Aug 2023 05:45:02 +0000 (UTC)
+Message-ID: <20230817054457.472342-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230817054457.472342-1-jonas@kwiboo.se>
+References: <20230817054457.472342-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h4dmEpP8WKXy=2FmeIM?=
- =?us-ascii?Q?sKnwSSBFbKlWSJAupYsn1wmXbUPgEpURR53XjQy?=
- =?us-ascii?Q?7uioxuEpkdB0G3PAYRlvDscVc7MURMSAkHDS0+A?=
- =?us-ascii?Q?JWiv44aJ5YPLZhvwC9K1GW4sAgyh8qmoMMrgdua?=
- =?us-ascii?Q?u96zhtVMC1gQZTcO6BFucUO2a7JvyWG9fukLlZ?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h7XhqrxU0Np8b2lK9?=
+ =?us-ascii?Q?8TZUJtg+oNokmfkQKO=2FIkt7femj4ssgifR46p8y?=
+ =?us-ascii?Q?0HGcjVYEzBHQf6IyQIYNzBLNtILaRa2nGbpdpOy?=
+ =?us-ascii?Q?rSmSh6w+kfuTEl4Y6u668PjAETq0IxTrvYny+Qs?=
+ =?us-ascii?Q?VJO0ui50bhUWIn+51RCBFJswQEMGA6KAC5XoXa?=
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Jaehoon Chung
+ <jh80.chung@samsung.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
 Content-Transfer-Encoding: 7bit
@@ -75,32 +79,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enable CMD_POWEROFF on a few RK356x boards that have a power
-button wired to PMIC pwron.
+Select SYSRESET_CMD_POWEROFF to use the sysreset implementation of the
+poweroff command when PMIC_RK8XX is enabled.
 
-The poweroff command is useful for testing and make it possible to
-poweroff the device from U-Boot and have it turn back on when the power
-button is pressed.
-
-First patch ensure sysreset poweroff implementation is used.
-Second patch enable poweroff cmd on a few RK356x boards.
-
-Changes in v2:
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+v2:
 - Split patch
 - Collect r-b tag
 
-Jonas Karlman (2):
-  power: pmic: rk8xx: Use sysreset implementation of the poweroff
-    command
-  rockchip: rk356x: Enable poweroff command
+ drivers/power/pmic/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
- configs/quartz64-a-rk3566_defconfig       | 1 +
- configs/quartz64-b-rk3566_defconfig       | 1 +
- configs/rock-3a-rk3568_defconfig          | 1 +
- configs/soquartz-model-a-rk3566_defconfig | 1 +
- drivers/power/pmic/Kconfig                | 1 +
- 5 files changed, 5 insertions(+)
-
+diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+index 176fb07c651a..4a6f0ce093ad 100644
+--- a/drivers/power/pmic/Kconfig
++++ b/drivers/power/pmic/Kconfig
+@@ -233,6 +233,7 @@ config PMIC_QCOM
+ 
+ config PMIC_RK8XX
+ 	bool "Enable support for Rockchip PMIC RK8XX"
++	select SYSRESET_CMD_POWEROFF if SYSRESET && CMD_POWEROFF
+ 	---help---
+ 	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
+ 	an RTC and two low Rds (resistance (drain to source)) switches. It is
 -- 
 2.41.0
 
