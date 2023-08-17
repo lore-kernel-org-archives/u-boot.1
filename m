@@ -4,49 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB485C7112F
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB749C7112F
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25AC586E72;
-	Fri, 18 Aug 2023 16:27:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E55C86E7E;
+	Fri, 18 Aug 2023 16:38:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="3uBeE83v";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0337086E74; Fri, 18 Aug 2023 16:27:36 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0888286E6E
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:27:33 +0200 (CEST)
+ id ACAD086BE8; Fri, 18 Aug 2023 01:49:20 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A80386BF2
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 01:49:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CCB2AD75;
- Fri, 18 Aug 2023 07:28:12 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 460F63F64C;
- Fri, 18 Aug 2023 07:27:31 -0700 (PDT)
-Date: Fri, 18 Aug 2023 15:27:28 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
- Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH 3/3] sunxi: psci: implement PSCI on R528
-Message-ID: <20230818152728.49dd6e4f@donnerap.manchester.arm.com>
-In-Reply-To: <1522f5e0-bdf6-cff6-3300-2bcbc3853457@gmail.com>
-References: <20230812003055.74527-1-CFSworks@gmail.com>
- <20230812003055.74527-4-CFSworks@gmail.com>
- <20230814151642.6f47f6b5@donnerap.manchester.arm.com>
- <225be7f9-558e-4695-0b38-b30b0229cdcd@gmail.com>
- <20230815235946.0c8b0dce@slackpad.lan>
- <1522f5e0-bdf6-cff6-3300-2bcbc3853457@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=tomcherry@google.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2b9338e4695so5296101fa.2
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 16:49:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20221208; t=1692316157; x=1692920957;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aaGgBbZxGehuw4LzG417WFSfJbuRMN7+LJuQT1NuoOU=;
+ b=3uBeE83vWGGjLNlLjaJ1iHYKGQ6QUkpjIBfqgaMAdJRg7btk5WNoZTlTnSRed1ahED
+ oa7dEM/O+TMDNF0QavaWOYAtMdcjNkLaY7As4eHdDTsNuR6hMGpY4/eE3sOVhJlMBGib
+ HNLTR+1Mf2dEJiO+L8djMngPf87iJAlwg62Xnjvt+mKeZoaYa4B+3QOZj6r08xUWMLqE
+ aPKPcHtqNO1joiebxU3otNjWNyGMumLkMmPa2E3XbnPi+7FRnAjNgyG+0U/rxB2haGxz
+ AQjjPpwnMMAQz06kp8j00l83PaGBBG3YyymadYEAZlL+ldLT8fgF6jcGOFwXZbXvdEPu
+ eqRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692316157; x=1692920957;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aaGgBbZxGehuw4LzG417WFSfJbuRMN7+LJuQT1NuoOU=;
+ b=aMXDW6pEOAFiiTLx/lXFp2z6w3wK0kHN0MiaYWSIDbL8Lj+giltY+zqbTggvLIALM9
+ o2Lqy62D6gAr+JgVgDc/ppIYHwOz/NlPPkEZ0+1OP6NL3DhkxnHT+gQYlWwCTqAhGPLM
+ ZgrQFvJDFOhdj8p/PAKWlkQz4wDxeO1//EKBL6pHcBDWE+EnNUBxDPlF3OUvM80eP64s
+ 2ukALhFIlMV0Ivx5o58FuA+7hfEj2K7rRpnU9moyip0kp79+Bx+q4uJG3ecagIn+rBDW
+ XyQSr8YuuK2LHdKpkY2uWX1uAI1NXh6IIGfWORV0Lt0ikivbWU2nvXstUzWYKU/9CuZY
+ LX/g==
+X-Gm-Message-State: AOJu0YyDp+51CMHizig+DuKhL7sGYeqKJTlZ7LIxj++sZMrAx518PMNv
+ hKYqzJvNG9bCkk2P4TeSc5QYbJbefkIfghJ+5oRLtQ==
+X-Google-Smtp-Source: AGHT+IFIuGLJnNx7c27TS6EWDI71hxDb6krpJ0VkLjF1TS/G7+PpWA3eellG4Bwut5QxmE0UInLd2zq3hspuRLIsXzA=
+X-Received: by 2002:a2e:9557:0:b0:2ba:7fc2:cc4c with SMTP id
+ t23-20020a2e9557000000b002ba7fc2cc4cmr544508ljh.24.1692316156519; Thu, 17 Aug
+ 2023 16:49:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20230309021221.306044-1-paul.liu@linaro.org>
+ <20230309021221.306044-2-paul.liu@linaro.org>
+ <20230815144227.GI3630934@bill-the-cat>
+ <CALG-KHwSCD=R-AFUHBCc4AxVEgyM37k8TH5aYSx9XSMnXcNXgQ@mail.gmail.com>
+In-Reply-To: <CALG-KHwSCD=R-AFUHBCc4AxVEgyM37k8TH5aYSx9XSMnXcNXgQ@mail.gmail.com>
+From: Tom Cherry <tomcherry@google.com>
+Date: Thu, 17 Aug 2023 16:49:04 -0700
+Message-ID: <CAPc65awXjZhnZk2dAU2YLnumOmM8KVrB5G9mECvL6CV_oU9=Pg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] lib/vsprintf.c: fix integer overflow in vsprintf
+To: Paul Liu <paul.liu@linaro.org>, Alistair Delva <adelva@google.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 18 Aug 2023 16:38:09 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,96 +90,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 15 Aug 2023 18:48:49 -0700
-Sam Edwards <cfsworks@gmail.com> wrote:
+On Tue, Aug 15, 2023 at 8:33=E2=80=AFAM Paul Liu <paul.liu@linaro.org> wrot=
+e:
+>
+> Hi Tom,
+>
+> Yes, I think Rasmus is correct. I didn't have any real cases that can tri=
+gger the bug.
+> So let's don't include this patch. I'll see if I can revert this in AOSP'=
+s branch.
+>
+> Yours,
+> Paul
+>
+>
+>
+> Y
+>
+> On Tue, 15 Aug 2023 at 22:42, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Thu, Mar 09, 2023 at 10:12:21AM +0800, Ying-Chun Liu (PaulLiu) wrote:
+>>
+>> > From: Tom Cherry <tomcherry@google.com>
+>> >
+>> > vsnprintf_internal() adds 'size' to 'buf' and vsprintf() sets 'size'
+>> > to 'INT_MAX' which can overflow.  This causes sprintf() to fail when
+>> > initializing the environment on 8GB.
+>> >
+>> > Instead of using 'INT_MAX', we use SIZE_MAX - buf, which is the
+>> > largest possible string that could fit without overflowing 'size'.
+>> >
+>> > Signed-off-by: Tom Cherry <tomcherry@google.com>
+>> > [ Paul: pick from the Android tree. Rebase to the upstream ]
+>> > Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+>> > Cc: Tom Rini <trini@konsulko.com>
+>> > Link: https://android.googlesource.com/platform/external/u-boot/+/43aa=
+e5d4415e0f9d744fb798acd52429d09957ce
+>>
+>> So, this link here leads back to
+>> https://issuetracker.google.com/issues/200479053 which isn't public.
+>>
+>> Rasmus followed up and asked pointed questions, that weren't followed up
+>> on.
+>>
+>> --
+>> Tom
 
-Hi Sam,
+Hi all,
 
-> On 8/15/23 15:59, Andre Przywara wrote:
-> > Hi Sam,  
-> 
-> Hi Andre,
-> 
-> > So that's a bit more nasty indeed. I don't even know if R_CPUCFG really
-> > makes sense here, as the _R_ term typically refers to the management
-> > processor, which the D1/R528 don't have. Or at least the always-on power
-> > domain, but then again this hardly relates to the secondary entry
-> > point. I think the name was just used because the address matches the
-> > one used in the H6.  
-> 
-> Oh, no. That was my doing (and my reasoning) by suggesting that for 
-> inclusion in your series. Yours is good reasoning to be rid of it.
-> 
-> > So taking a step back, I wonder if we should actually just define a
-> > CONFIG_SUNXI_CPU_SOFT_ENTRY (or so) *Kconfig* symbol, which holds that
-> > address, and let the per-SoC definition be solved in Kconfig instead.
-> > Because SUNXI_R_CPUCFG_BASE and also SUNXI_RTC_BASE seem to be just
-> > used as the base address for that purpose, with some magic offset
-> > added, across all of U-Boot (ARMv8 FEL and v7 PSCI).  
-> 
-> Mmh, since this is a block of soft registers for managing several 
-> functions of both cores, I think I'd rather point to the base of the 
-> block and still use an offset to get to the specific soft register. 
-> Allwinner may keep this layout for a 4-core chip in the near future or 
-> U-Boot may want to add code that sets the CPU0 hotplug flag, for example.
+I hadn't seen the questions from Rasmus, and I haven't had much time
+to dig into why this issue happened. I'll try to get time for this in
+the upcoming weeks.
 
-That's a neat idea, but I gave up hoping that there is some real pattern,
-especially about the memory map. In the past (up to A64/H5) that was
-pretty stable, but changed wildly multiple times already afterwards.
-So I don't know about the future, and we can always fix that should the
-need arise.
-What I do see though now is the following:
-R40: SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0
-R528: SUNXI_R_CPUCFG_BASE + SUN8I_R528_SOFT_ENTRY
-rest: SUNXI_CPUCFG_BASE + SUNXI_PRIV0
-so three totally different base addresses plus different offsets. That
-comes close to random for me.
-And that continues if you look into the ARMv8 fel_utils.S:
-==================
-#ifdef CONFIG_MACH_SUN50I_H616
-        ldr     w2, =(SUNXI_R_CPUCFG_BASE + 0x1c0)
-        str     w0, [x2], #0x4
-#elif CONFIG_MACH_SUN50I_H6
-        ldr     w2, =(SUNXI_RTC_BASE + 0x1b8)   // BOOT_CPU_HP_FLAG_REG
-        str     w0, [x2], #0x4
-#else
-        ldr     w2, =(SUNXI_CPUCFG_BASE + 0x1a4) // offset for CPU hotplug base
-	str     w0, [x2, #0x8]
-==================
-Again different entry points for each new SoC.
-So instead of trying to derive some pattern from where there is none, I'd
-rather do: config SUNXI_CPU_HOTPLUG_ADDRESS
-	hex
-	default 0x01c000bc if MACH_SUN8I_R40
-	....
-	default 0x01c25da4
-and then use that symbol in both places (v7 PSCI + v8 FEL).
-As mentioned, I can fix the pieces that break when naively doing so in the
-FEL code. That has also the rewarding property of allowing to remove both
-SUNXI_R_CPUCFG_BASE and SUNXI_RTC_BASE from the code base completely.
+I originally triggered this bug in a real-world use case. I was unable
+to boot my platform before this patch and I wrote this patch to solve
+that issue. I reverted that patch and tried booting my platform today
+and I am able to boot however I see error logs that are not present
+when this patch is applied (the below "Partition 1: invalid GUID"),
+which suggests that there are lingering issues, which I'll
+investigate.
 
-What do you think?
+With the change:
 
-Cheers,
-Andre
+U-Boot 2023.04-maybe-dirty (Jan 01 1970 - 00:00:00 +0000)
 
+DRAM:  8 GiB
+Core:  8 devices, 8 uclasses, devicetree: separate
+Hit any key to stop autoboot:  0
+ANDROID: Booting Unlocked!!
+## Android Verified Boot 2.0 version 1.1.0
 
-> I'm not unwilling to do the Kconfig route, but just out of curiosity, 
-> what would your fallback plan be?
-> 
-> > So can you try to work on that base? I will take care of
-> > armv8/fel_utils.S, which uses some post-increment assembly trick to
-> > keep the code small, which wouldn't work anymore. But I have an idea
-> > how to solve this.  
-> 
-> Before that, I think now might be a good time for me to send in the v2 
-> that I have so far; I doubt the final patch of my v2 series will pass 
-> review, but I'd like to keep us synced up (and clear away any patches in 
-> that series that do pass review off from my mental desktop).
-> 
-> > Cheers,
-> > Andre  
-> 
-> Likewise,
-> Sam
+With the change reverted:
 
+U-Boot 2023.04-maybe-dirty (Jan 01 1970 - 00:00:00 +0000)
+
+DRAM:  8 GiB
+Core:  8 devices, 8 uclasses, devicetree: separate
+Hit any key to stop autoboot:  0
+Partition 1: invalid GUID
+Partition 2: invalid GUID
+Partition 3: invalid GUID
+Partition 4: invalid GUID
+Partition 5: invalid GUID
+ANDROID: Booting Unlocked!!
+## Android Verified Boot 2.0 version 1.1.0
+
+Thanks
+Tom
