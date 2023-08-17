@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81FDEC05052
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:52:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68ACC2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9DBD86A28;
-	Thu, 17 Aug 2023 03:52:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B37786A50;
+	Thu, 17 Aug 2023 03:52:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WjZuUxGH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HJNQgNg0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1536886A2D; Thu, 17 Aug 2023 03:52:04 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id C224A86A44; Thu, 17 Aug 2023 03:52:04 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DDBE86A45
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:52:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05283847D3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:52:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-6bd3317144fso4606582a34.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:52:00 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6bca3311b4fso5712314a34.0
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:52:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692237119; x=1692841919;
+ d=chromium.org; s=google; t=1692237120; x=1692841920;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Puo6mlCLME9VLJ75a/kuYUcc3k6NCP7WWQ0T87uVTJw=;
- b=WjZuUxGHOflJQI6TPNGtaAbmbRBRa2GC+LJx8AujuQ4HJwQUCpRQBPGO1ysEIKj8Zt
- q7HWRtQ21HyP3H5Y9tTbDl/Wki8AidimJilyu+frDk0rCq64fp4ls6by7egd7R2bMS3h
- 48c8kVqQco7rcvyL3iwt0F06lSW8M6ZsBkOZw=
+ bh=7W2TpQN8yWcjO3EKJ0oz2OVVHWNxMPNgiWXDQ7WFKhQ=;
+ b=HJNQgNg076YelFYz+B7gW+y96KtTzhXIp9QavaAzSLyUBgI+kBDmiy5KYcoTN2hRVH
+ U+3HsIcD7WI/bqyIuciUkgzf87ZjAoeWBjJMTzo9R/X+t4m+E03HxPPtchllYdO+ye8m
+ 5IGI0WTKLeksVp1Hspr58XqeSxf3ovt/Xas5M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692237119; x=1692841919;
+ d=1e100.net; s=20221208; t=1692237120; x=1692841920;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Puo6mlCLME9VLJ75a/kuYUcc3k6NCP7WWQ0T87uVTJw=;
- b=ddHAmykOORm+KaAhaEpIz9Wi4Brt9Ag6do3ciFRb1bfYIuTLlh3EGoF0ytGW/1yQcw
- Mj0zEa/Otc8ZPCrICYclYLALKwzwOtfylczk/7uOBEKHQ1zvxb3+sSzvArwCZv28u+q+
- aMrWF9efmQJT4Pnupf4jBFKcMqFdxP6LIHZ2m1vqgvax7NGz/MtzQIVxTK4cNuLxBPok
- PTUuOVihi+P46NEOEIQOOxgAa9bEvMxbrJQmOOjqODENwQg9JFLtVYA+4mnX7CN11jmD
- y4BNIqIglSSf8EaPza/r8Fb2ABtt8I9VI4ZP6SAUpzxqneAWUabxB5WURbR2YgUdVyom
- dirA==
-X-Gm-Message-State: AOJu0YziZrBxuoO18e5ySbSTqc8OAjCumPgyYdv8vUvoNIH7QCq/d1cQ
- 0leuoVQuUTUdMVZfxWzChLrdPP37h9jJpQw7tXY=
-X-Google-Smtp-Source: AGHT+IFUl8GCcI8Xh0C2SdAwXWKuCgpnXVjh14o3lbSnkx5R3/2nM+Ta4NzUwKPN+F0Q4jYClXbljw==
-X-Received: by 2002:a9d:638c:0:b0:6b1:d368:557c with SMTP id
- w12-20020a9d638c000000b006b1d368557cmr3970988otk.30.1692237119646; 
- Wed, 16 Aug 2023 18:51:59 -0700 (PDT)
+ bh=7W2TpQN8yWcjO3EKJ0oz2OVVHWNxMPNgiWXDQ7WFKhQ=;
+ b=QoCOSjUYVztorGl1cg87HIcEIGs6rNTofWLS9ZPy8V6kpzO6N5dGWOqHAQFhmSXrfP
+ /3xwac0fAmwd6AvyoSVvU1n14w7+N8ooSa6lzfxA0yk9hVKf+UatdCwB2ZlxTzqmFbla
+ stOSbtSYeSa0MnDw0JvOSs94cio6gFLnFGUVIzYYD0rzUtcW/0WFJEd0jd6fooT4DqPQ
+ smpW8F3ld3gRCYu6silaDYUamCWKRid3wgjOuG6RbGy0wOK6HIdNS4jfUIP3XrNfrdR+
+ sXnv737Fz9w99l8NdWlxrC9/3k+8oQK2am682FeWSAXjbaXQHKbBbXmBGlYshK4rFJyU
+ W7jw==
+X-Gm-Message-State: AOJu0Yx99MnXr5uiXkvhPUzsIvcW/Qbu8FfDN4JbXKecfYOvsyBEQVFv
+ TGDIAMfulilGckDrMM9pOiF8ee9wx0ep0w4fd/Q=
+X-Google-Smtp-Source: AGHT+IFWLAaDFJBVZHtZkMGKDMcRL4Lj9uz9hqBA70IuLqBL2yRKPNj9MB95/vnS3Mfecy0MDy2F1g==
+X-Received: by 2002:a05:6830:4d3:b0:6bd:d95:d746 with SMTP id
+ s19-20020a05683004d300b006bd0d95d746mr3558364otd.37.1692237120485; 
+ Wed, 16 Aug 2023 18:52:00 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.51.59
+ l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.52.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 18:51:59 -0700 (PDT)
+ Wed, 16 Aug 2023 18:52:00 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/9] x86: coreboot: Rearrange arch_cpu_init()
-Date: Wed, 16 Aug 2023 19:51:36 -0600
-Message-ID: <20230817015149.774847-2-sjg@chromium.org>
+Subject: [PATCH 2/9] x86: Set the CPU vendor in SPL
+Date: Wed, 16 Aug 2023 19:51:37 -0600
+Message-ID: <20230817015149.774847-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
 In-Reply-To: <20230817015149.774847-1-sjg@chromium.org>
 References: <20230817015149.774847-1-sjg@chromium.org>
@@ -88,47 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Init errors in SPL are currently ignored by this function.
-
-Change the code to init the CPU, reporting an error if something is wrong.
-After that, look for the coreboot table.
+We don't read this information in 64-bit mode, since we don't have the
+macros for doing it. Set it to Intel by default. This allows the TSC timer
+to work correctly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/cpu/coreboot/coreboot.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ arch/x86/cpu/x86_64/cpu.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
-index d7eedbd7436e..6a551e4c6713 100644
---- a/arch/x86/cpu/coreboot/coreboot.c
-+++ b/arch/x86/cpu/coreboot/coreboot.c
-@@ -20,7 +20,14 @@
+diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86_64/cpu.c
+index d1c3873dd6a7..2647bff891f8 100644
+--- a/arch/x86/cpu/x86_64/cpu.c
++++ b/arch/x86/cpu/x86_64/cpu.c
+@@ -8,8 +8,11 @@
+ #include <cpu_func.h>
+ #include <debug_uart.h>
+ #include <init.h>
++#include <asm/cpu.h>
+ #include <asm/global_data.h>
  
- int arch_cpu_init(void)
++DECLARE_GLOBAL_DATA_PTR;
++
+ int cpu_has_64bit(void)
  {
--	int ret = get_coreboot_info(&lib_sysinfo);
-+	int ret;
-+
-+	ret = IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
-+		 x86_cpu_init_f();
-+	if (ret) 
-+		return ret;
-+
-+	ret = get_coreboot_info(&lib_sysinfo);
- 	if (ret != 0) {
- 		printf("Failed to parse coreboot tables.\n");
- 		return ret;
-@@ -28,8 +35,7 @@ int arch_cpu_init(void)
+ 	return true;
+@@ -38,6 +41,10 @@ int x86_mp_init(void)
  
- 	timestamp_init();
- 
--	return IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
--		 x86_cpu_init_f();
-+	return 0;
+ int x86_cpu_reinit_f(void)
+ {
++	/* set the vendor to Intel so that native_calibrate_tsc() works */
++	gd->arch.x86_vendor = X86_VENDOR_INTEL;
++	gd->arch.has_mtrr = true;
++
+ 	return 0;
  }
  
- int checkcpu(void)
 -- 
 2.41.0.694.ge786442a9b-goog
 
