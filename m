@@ -4,80 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53820C3DA58
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 17:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E17EC3DA65
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 18:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A34D886B96;
-	Thu, 17 Aug 2023 19:45:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BDA986BBE;
+	Thu, 17 Aug 2023 20:40:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k87Kn5WU";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Prnc8WXC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7882A86BA2; Thu, 17 Aug 2023 19:45:13 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F25B086BC3; Thu, 17 Aug 2023 20:40:47 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC42A8683C
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 19:45:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA2986961
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 20:40:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-58c4f61ca12so758557b3.3
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 10:45:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692294309; x=1692899109;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=62OxxHm22Ya0t9AnnL5xiuqfN8P4jfVS+jIwJuBu58U=;
- b=k87Kn5WUezARBvwPNZn+Vt50WP6rahfNJyIg+b95oUS7CIX5LMu95lW9QY3yeOExkt
- 4dcj0tA/ZVDuhAa1B1O9mEfRIS+HfXQi64BmSQBR3aUwR0xnVe/nKIPIyAU1Qxx6D4Al
- HfWu1VkO8gdpjbOvfkjp23UxFM90J0pd+N1Lk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692294309; x=1692899109;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=62OxxHm22Ya0t9AnnL5xiuqfN8P4jfVS+jIwJuBu58U=;
- b=J0GbTD7laeFgI9qCLAU2pFRXuTjg+Ugs33DAHJFhk2hmbn/JGfC4d/lho25r0rFYtz
- pugTboCCR52CtkCYS9lCRUBUOozPR77vF9EN0g6I2aWw/RoNOJW7Ly08vr21kMSY3xpW
- jYLsP8SutMSQdQo45usD0+KUabKX00RH/ljmui89c4a0j6nZnPoyy7bltDDFIUh67ghl
- FVLC4nmrIfunUXQ3yzR32Ru40JEGnc6apc5IBjSop93w1gLRRTngWSTCijwzzPs53d+6
- 6oeEsLYCNqIjqAtff5zB7zTSBYolnitjUdO2oQCkqNDK9PgwimdrsvrSUw12iYlaB3p2
- MgyQ==
-X-Gm-Message-State: AOJu0YxCEgVLF/e/etMWb+4iWQAY1DXB/P7E28cdLPfqFPGTuhxw+CcO
- J/+heTNPB9Nx8tlN+5zD/Pu/XTpZBn3f6I/T1j2LMw==
-X-Google-Smtp-Source: AGHT+IH3g21h+02l3CDyIkfhU2y6vdeZImho6blVYSPpKDDSdWncwBfZsI96VG9j2KX6EKJG62sGmA==
-X-Received: by 2002:a0d:ee05:0:b0:583:6839:755 with SMTP id
- x5-20020a0dee05000000b0058368390755mr64224ywe.14.1692294309498; 
- Thu, 17 Aug 2023 10:45:09 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-8f9f-218d-98ab-058b.res6.spectrum.com.
- [2603:6081:7b00:6400:8f9f:218d:98ab:58b])
- by smtp.gmail.com with ESMTPSA id
- g72-20020a0ddd4b000000b0058605521e6esm4436ywe.125.2023.08.17.10.45.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 10:45:08 -0700 (PDT)
-Date: Thu, 17 Aug 2023 13:45:07 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng@tinylab.org>,
- Devarsh Thakkar <devarsht@ti.com>, Michal Simek <michal.simek@amd.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nikhil M Jain <n-jain1@ti.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] spl: provide weak empty stub for reset_cpu()
-Message-ID: <20230817174507.GJ1515023@bill-the-cat>
-References: <20230817143540.23525-1-oleksandr.suvorov@foundries.io>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RRYjP6nTyz9sWJ;
+ Thu, 17 Aug 2023 20:40:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692297641;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rilByqYCdfFhwpZQJI2WYOgIzVLrRbkTLBbR6D5hskA=;
+ b=Prnc8WXC5HHT46CPwT5skn4D2s4kJXD2SRJGoiiyehPh+kZjGvAoTmo2gPlgVLnQHQY2j5
+ LhT/znjo4zLpGwDY9r+u33tx+0/NImgWqJSKvroWLe/d1KHmcp8A3O3BgTkhnxWFaAfbHz
+ jwevtbRktuJuL+8TmMSv881N/+nguzWHskacYHsOcI7m3wFsN+tZ4De6MprmH8fvHfyLk3
+ R0YqgIB7/VjHAt5iV3FkfkcDsJBB05+X7gN9L6hBkxaWfExNq/UsV4GFJgrdmZzkjssOm+
+ UD48it3v3Ckm/jQeXq49z3+f05VAoBt9kZWecQGJ3GWHhdcqOmEDjLOTYTZ4MA==
+Message-ID: <3e7c1df4-5a44-25e9-c762-56011edf2e73@mailbox.org>
+Date: Thu, 17 Aug 2023 20:40:40 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gNlyR0paWcpzGCDC"
-Content-Disposition: inline
-In-Reply-To: <20230817143540.23525-1-oleksandr.suvorov@foundries.io>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] MAINTAINERS: Update UFS maintainer
+Content-Language: en-US
+To: Neha Malcom Francis <n-francis@ti.com>, u-boot@lists.denx.de
+Cc: bhupesh.sharma@linaro.org, nm@ti.com, vigneshr@ti.com, u-kumar1@ti.com,
+ sjg@chromium.org, trini@konsulko.com
+References: <20230817120914.144240-1-n-francis@ti.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20230817120914.144240-1-n-francis@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 4zccn5s6txmttca819j9ayn6cyqrrk8g
+X-MBO-RS-ID: 69fbb92f01501ad195b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,63 +76,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 8/17/23 14:09, Neha Malcom Francis wrote:
+> Dropping Faiz Abbas from the UFS maintainer list as his e-mail ID is no
+> longer valid.
+> 
+> Adding Bhupesh Sharma who has been using this framework working on
+> Qualcomm Snapdragon SoCs as well as sending out fixes.
+> 
+> Adding myself as well to support in reviewing and testing patches.
+> 
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 
---gNlyR0paWcpzGCDC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add '---' here so the CC list is not part of the commit message when 
+this patch is applied, like this:
 
-On Thu, Aug 17, 2023 at 05:35:37PM +0300, Oleksandr Suvorov wrote:
+Signed-of-by: Foo User <...>
+---
+CC: Bar Example <...>
+...
+---
+V2: Did stuff
+V3: Did more stuff
 
-> This stub needs to link SPL properly.
->=20
-> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+
+> Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> Cc: Vignesh R <vigneshr@ti.com>
+> Cc: Nishnath Menon <nm@ti.com>
 > ---
->=20
->  common/spl/spl.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->=20
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index 0062f3f45d9..781858891b9 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -1026,3 +1026,11 @@ ulong bootcount_load(void)
->  	return 0;
->  }
->  #endif
-> +
-> +/**
-> + * Weak default function for board-specific reset. Provide empty stub on=
-ly.
-> + */
-> +__weak void reset_cpu(void)
-> +{
-> +	/* Nothing to do! */
-> +}
+> Based on discussion:
+> https://lore.kernel.org/u-boot/CAH=2NtzyQgximynKuG45UUux715Du=WKKusm9-aQGHcUZsWzSw@mail.gmail.com/
+> 
+>   MAINTAINERS | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 77a8b0ac21..d19e1fd60b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1585,7 +1585,8 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-ubi.git
+>   F:	drivers/mtd/ubi/
+>   
+>   UFS
+> -M:	Faiz Abbas <faiz_abbas@ti.com>
+> +M:	Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> +M:	Neha Malcom Francis <n-francis@ti.com>
+>   S:	Maintained
+>   F:	drivers/ufs/
+>   
 
-NAK, there are already architectures and SoCs that have a weak
-reset_cpu.  If you're working on one without reset_cpu, it needs to be
-implemented one way or another, not like this.
+With that fixed:
 
---=20
-Tom
+Acked-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
---gNlyR0paWcpzGCDC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTeXJkACgkQFHw5/5Y0
-tyzChwv+P/GoOt9ZaTFuBTX331SbYgeZUfFs1myEEgctF3irTbnKcHWef32Vzjva
-jp5rbQjj5+UQYfK3I45uDlAvhpuAdCI3c7HUb7E3RVNWkUcYIaIsECtCdkh+z8QR
-C3DnyZWD13YYOf0gk3ZEI6Gn/gdpMnkPReROlo3T28Mxoxx4GjOxzWftsZ/sNgY6
-SjTft0mSyAJyFdJLmZgqwbpsX2iGX3cDjSuNJGOld2RSZ6gP0/VP6ccWjWQ2bAD7
-GicQlXGyzeSrXiX+qxnYX1Wqi5yrax/VD4vHQ4vGUAn/HyLoLGQF0bOxSbl/abEj
-nE0LHAIb+WEVd6YLlWhQQcxjiGc9QesiCqoB76E6MRjgf9n7IAkxqxv2lxJDX8Hx
-3vbBoi0bFl2P6jjeBPwdehY843PvAsNP2ulEOCeEVlAesLQR7T00VI25SysJOohL
-oHnoYBe/DiMr1Vq6n33IXrJNOVmZ9keiMLk2xurHmBwzemfjhrdAcwWVxOKIZ32j
-F5XKVteB
-=7Dhf
------END PGP SIGNATURE-----
-
---gNlyR0paWcpzGCDC--
+Thanks
