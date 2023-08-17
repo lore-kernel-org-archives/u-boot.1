@@ -4,65 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7C53C2FC04
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:45:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E782FC27C7A
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C458B86A51;
-	Thu, 17 Aug 2023 07:45:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5602E8693A;
+	Thu, 17 Aug 2023 07:49:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="pOQrOVQc";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED47886A33; Thu, 17 Aug 2023 07:45:07 +0200 (CEST)
-Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
- (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BCDD8693A
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:45:05 +0200 (CEST)
+ id 4B1EF86A2B; Thu, 17 Aug 2023 07:49:14 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 32BA9866A7
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:49:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=from:subject:in-reply-to:references:mime-version:to:cc:
- content-transfer-encoding:content-type:cc:content-type:from:subject:to;
- s=s1; bh=nW65KjGed3+EtWiVzspMAR6N9gwMQqUSLtmCieeETjo=;
- b=pOQrOVQcKluNxuUn5/tBnRfYaJl1Ej3GCdWVYbkZMkXJxlbqZp35OlhCJzQa5jILE43X
- iH5NiOBhUcF3IaNLXpXJ17hyTs3aV/YFVMjXWPlDVHI2A3WF9fQyosMBO0NtxJ9DcX35Dg
- 84QtPkbCggDfV6daWQjolovirmXD78OnxEOhG6EA53mKTRD7Ev+GLoBBPea8OaJDovj3EI
- yI51gxs5Ml0HVp7WpY0Kif/DNOHuTAlobHEfUVD9G+lcLhcyvsS5GiPYVp1wbgIK1bZa5q
- rhKK0jk3hsF3KLBc9cViW1PkHKflL0WZPYnbm4LoLxoenTaL1gAxjJP+Q+bEgvjw==
-Received: by filterdrecv-d7bbbc8bf-r6vsn with SMTP id
- filterdrecv-d7bbbc8bf-r6vsn-1-64DDB3DF-93
- 2023-08-17 05:45:03.800542824 +0000 UTC m=+4364931.997297312
-Received: from bionic.localdomain (unknown) by geopod-ismtpd-canary-0 (SG)
- with ESMTP id 804i5vbcTNa_uLxZBcgMUw
- Thu, 17 Aug 2023 05:45:03.596 +0000 (UTC)
-From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 2/2] rockchip: rk356x: Enable poweroff command
-Date: Thu, 17 Aug 2023 05:45:04 +0000 (UTC)
-Message-ID: <20230817054457.472342-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230817054457.472342-1-jonas@kwiboo.se>
-References: <20230817054457.472342-1-jonas@kwiboo.se>
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 74028D75;
+ Wed, 16 Aug 2023 22:49:51 -0700 (PDT)
+Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8663E3F762;
+ Wed, 16 Aug 2023 22:49:08 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/6] capsule: Embed the public key ESL as part of build
+Date: Thu, 17 Aug 2023 11:18:50 +0530
+Message-Id: <20230817054856.2019253-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h0Lzda9GCx5D1Mysp?=
- =?us-ascii?Q?BwNclZyqU1huUP1CWoI7Ivb4YNkEb9ighUCHbwb?=
- =?us-ascii?Q?q2H=2FkfBW47HdNQIJsASIjtMCILERlyxszgZzJS=2F?=
- =?us-ascii?Q?lTHqRyt3IfsIadiLhQi3AjVZ8B+ngqqHORRmKam?=
- =?us-ascii?Q?9gqqwbHacjZnY6PTEaYsqXkApbLUjHGHTrDUzT?=
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, Akash Gajjar
- <gajjar04akash@gmail.com>
-Cc: u-boot@lists.denx.de
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,74 +54,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With PMIC_RK8XX, SYSRESET and CMD_POWEROFF options enabled it is
-possible to power down a board using the poweroff command and turn the
-board back on using a power button.
 
-Enable the poweroff command on RK356x boards that have a button wired
-to PMIC pwron.
+This series takes a different approach to embedding the public key EFI
+Signature List(ESL) needed for capsule authentication into the
+platform's DTB.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-v2:
-- Split patch
-- Collect r-b tag
+The earlier approach [1] was using a u-boot.dtsi file to embed the
+key. But this approach has a few issues. 1) The path of the incbin file
+is not relative to $(srctree), but relative to the directory of the
+dts file which is using incbin directive -- this causes problems when
+the dts files are located in different directories and they try to
+include the same binary. 2) The u-boot.dtsi file only gets included in
+the DTB if there are no other *u-boot.dtsi files being included. 3) A
+separate u-boot.dtsi is needed per arch.
 
- configs/quartz64-a-rk3566_defconfig       | 1 +
- configs/quartz64-b-rk3566_defconfig       | 1 +
- configs/rock-3a-rk3568_defconfig          | 1 +
- configs/soquartz-model-a-rk3566_defconfig | 1 +
- 4 files changed, 4 insertions(+)
+To get around these issues, this approach generates a dtsi
+file(.capsule_esl.dtsi) with the public key node during build. This
+generated dtsi file contains the resolved path to the ESL and is then
+included for the DTB generation.
 
-diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
-index d55b224feacd..6853cd6c44b4 100644
---- a/configs/quartz64-a-rk3566_defconfig
-+++ b/configs/quartz64-a-rk3566_defconfig
-@@ -52,6 +52,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_PMIC=y
-diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
-index b98c81f9dcef..aa29fff14643 100644
---- a/configs/quartz64-b-rk3566_defconfig
-+++ b/configs/quartz64-b-rk3566_defconfig
-@@ -50,6 +50,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_PMIC=y
-diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
-index 44ff054df665..409aa95acf06 100644
---- a/configs/rock-3a-rk3568_defconfig
-+++ b/configs/rock-3a-rk3568_defconfig
-@@ -49,6 +49,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_PMIC=y
-diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz-model-a-rk3566_defconfig
-index c3958579db73..a0884a797d58 100644
---- a/configs/soquartz-model-a-rk3566_defconfig
-+++ b/configs/soquartz-model-a-rk3566_defconfig
-@@ -43,6 +43,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_PMIC=y
+The first patch of the series also cleans up the logic to include the
+dtsi files, by collating all the dtsi files to be included into a
+single variable.
+
+These patches need to be applied on top of the series for generating
+the capsules as part of the build [2].
+
+[1] - https://lists.denx.de/pipermail/u-boot/2023-August/526323.html
+[2] - https://lore.kernel.org/u-boot/20230812153024.334563-1-sughosh.ganu@linaro.org/T/#m85a50079007acf8943cfe8efcc7d78d23a40db7c
+
+Changes since V1:
+* New patch which only sets the dependencies for the dtb build.
+* Put only the setting of dtsi_include_list under the ifdef, moving
+  the rest of the logic out of the ifdef.
+
+
+Sughosh Ganu (6):
+  scripts/Makefile.lib: Collate all dtsi files for inclusion
+  scripts/Makefile.lib: Add dtsi include files as deps for building DTB
+  scripts/Makefile.lib: Embed capsule public key in platform's dtb
+  sandbox: capsule: Add path to the public key ESL file
+  test: capsule: Remove logic to add public key ESL
+  doc: capsule: Document the new mechanism to embed ESL file into dtb
+
+ configs/sandbox_defconfig                    |  1 +
+ configs/sandbox_flattree_defconfig           |  1 +
+ doc/develop/uefi/uefi.rst                    | 19 ++++---------
+ lib/efi_loader/Kconfig                       |  8 ++++++
+ lib/efi_loader/capsule_esl.dtsi.in           | 11 +++++++
+ scripts/Makefile.lib                         | 30 ++++++++++++++++----
+ test/py/tests/test_efi_capsule/conftest.py   | 28 +++++-------------
+ test/py/tests/test_efi_capsule/signature.dts | 10 -------
+ 8 files changed, 58 insertions(+), 50 deletions(-)
+ create mode 100644 lib/efi_loader/capsule_esl.dtsi.in
+ delete mode 100644 test/py/tests/test_efi_capsule/signature.dts
+
 -- 
-2.41.0
+2.34.1
+
 
