@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B78D5C2FC22
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 19:29:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F27C531DC
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 19:30:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04085860AA;
-	Thu, 17 Aug 2023 21:29:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D30D860AA;
+	Thu, 17 Aug 2023 21:30:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c4ny+lK0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="McQtsf2b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4121185F9F; Thu, 17 Aug 2023 21:29:26 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id DE1F686BCE; Thu, 17 Aug 2023 21:30:55 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60EB986BC9
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 21:29:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2477D85F9F
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 21:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-56cc461f34fso150009eaf.0
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 12:29:23 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-58d40c2debeso1769227b3.2
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 12:30:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692300562; x=1692905362;
+ d=konsulko.com; s=google; t=1692300652; x=1692905452;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IlAlutvupOptEkkxyGz8Lfp2OCcFT0nWiV7FBQInhvo=;
- b=c4ny+lK05/uScgaZfz64OB4S7aD34CH8YZkC5WrmFuEzvb+xt2lwW06ZofeioSOJry
- Wu0IosWSYtMXITREkPpKjvRal4XNPN5FqmffloAkk1J25BTJg+VI7xqASmC7kmdKH1Af
- lu/PTguva/e3QcbXL+Nz+w7SgJyff8nBI+1K0=
+ bh=c+WVTRirh+AFYSBOlKe9qEXwsNjixV7Wt1GruAcUeeA=;
+ b=McQtsf2bRuVoueaXgEh0byMRNtSDZI3FzAuZY4JCBpschlw24hfK65FcvsTc8c4ueO
+ +5RJG+IUtC/Io0rtyGynY1Foc5zvz8ukpf2KO2O/8WNGpcUpup+Cdbb0fNvUJ7aUoNjH
+ ReqWaW/o3EtM4pkvTQYagVr66I7agkCaDwrEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692300562; x=1692905362;
+ d=1e100.net; s=20221208; t=1692300652; x=1692905452;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IlAlutvupOptEkkxyGz8Lfp2OCcFT0nWiV7FBQInhvo=;
- b=ReexNdf1ARuopLAl9AbUqtj3NEcwnjHntycwVw7qyY4JvRHFyuIDvFwNbfKHNB7/nw
- dbqD0e2sxmArvUg4qo/IgWgVTneiApCLZShcK5ilTSwjlNhmRVmDPHs7UQDsh0mTE6Hl
- S3LoRuWGwoqxd+GnI4/1p7Pfm136ah3IySRjVkctyivKQSEkWI53Qi3tAs9s6ycRGCl5
- AyC9toLE3kmgIxbRFVUu4YmplMbeelJC6YgsOciPI9Uy6QK5HkEWk2ykBlKU5GrnW6hW
- 59BsTvad7v783Ks6jXwqp49v48ocuqAHQTseWfzev+uXGKCSHYFrrUtMSBpIY+18J3yJ
- BsPg==
-X-Gm-Message-State: AOJu0YyNpfkeaWrO70UilOTJ40TVrNj9DZNLqp+oFOzKSGSpnPRZvnVM
- 62JQTw5h6tbVAp8c0dh4IKTj91O87K2H8NX8kWZkJg==
-X-Google-Smtp-Source: AGHT+IEFaPLBAjdP9d1dApF+5gZ2/KGT7Ccj4KPtdRGxNC0N+1VKjsccJzOP1hL0DQmCMdeGZ30pxA==
-X-Received: by 2002:a05:6358:7f1a:b0:134:d78f:67bc with SMTP id
- p26-20020a0563587f1a00b00134d78f67bcmr391359rwn.14.1692300561829; 
- Thu, 17 Aug 2023 12:29:21 -0700 (PDT)
+ bh=c+WVTRirh+AFYSBOlKe9qEXwsNjixV7Wt1GruAcUeeA=;
+ b=XFF1JfaPIZkW9mu5dJd2JfBPNs5DHFHeuGrw0JsPyy9GNXpAdHM+3wJ21ofbTHfKcm
+ 2qhJINX6SDnp29c+082dfvfXZ61gwQd69MHpdiZ2qP6pu3zcFfUSWYrjVxrIv8K/t2T2
+ wBfSP22QJkHSbWLWN2BKnvKAoCmMCe4RH0xUyOviDC8AiPm2Uoi4z6KfWuDSAPfeNZJY
+ aMLVLpqhp4OD6mnO50yXfroqm78+027CzPJaIe/+xiM1DAvR81089rpet7O4moKTsDNd
+ aQ5QRrW+KACI1cWLBxw/Iddc5J0oNXb/M5ABL96zoqc6bO4nJMqbbFBlgfTdXtAVAm5N
+ nN4Q==
+X-Gm-Message-State: AOJu0YzNYuQYXFWubY3AVRiQEkXg4V2GFsLSWtqnQEZ4oC5cgItIVglr
+ XfA9L9WZhsws6THjfTQ2uOfIHg==
+X-Google-Smtp-Source: AGHT+IHWPcaU4JEGnHNJHTltiDPb+TzgL2L4QwMiVK0RPmQ90QVu/SjUSRLpitTNOyvHRmyhEJ/8rQ==
+X-Received: by 2002:a0d:fc05:0:b0:577:3c17:5b2c with SMTP id
+ m5-20020a0dfc05000000b005773c175b2cmr380313ywf.27.1692300651862; 
+ Thu, 17 Aug 2023 12:30:51 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-8f9f-218d-98ab-058b.res6.spectrum.com.
  [2603:6081:7b00:6400:8f9f:218d:98ab:58b])
  by smtp.gmail.com with ESMTPSA id
- 203-20020a2501d4000000b00d4fc4132653sm39241ybb.11.2023.08.17.12.29.21
+ r6-20020a0de806000000b00586ba973bddsm59143ywe.110.2023.08.17.12.30.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 12:29:21 -0700 (PDT)
-Date: Thu, 17 Aug 2023 15:29:19 -0400
+ Thu, 17 Aug 2023 12:30:51 -0700 (PDT)
+Date: Thu, 17 Aug 2023 15:30:49 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] doc: rockchip: Add supported RK3566/RK3568 boards
-Message-ID: <20230817192919.GT1515023@bill-the-cat>
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Jagan Teki <jagan@edgeble.ai>, Joseph Chen <chenjh@rock-chips.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] board: rockchip: rk35xx: Add device tree files to
+ MAINTAINERS
+Message-ID: <20230817193049.GU1515023@bill-the-cat>
 References: <20230817060422.477759-1-jonas@kwiboo.se>
- <20230817060422.477759-2-jonas@kwiboo.se>
- <32a6441a-cafe-2cef-7b36-cad3fb0232c3@rock-chips.com>
+ <20230817060422.477759-3-jonas@kwiboo.se>
+ <374a63d7-096a-e3a0-807b-c69112d8c46d@theobroma-systems.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="j2KWYur3WYvTatWz"
+ protocol="application/pgp-signature"; boundary="BiRZY1EPEi/sQJ44"
 Content-Disposition: inline
-In-Reply-To: <32a6441a-cafe-2cef-7b36-cad3fb0232c3@rock-chips.com>
+In-Reply-To: <374a63d7-096a-e3a0-807b-c69112d8c46d@theobroma-systems.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,67 +101,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---j2KWYur3WYvTatWz
-Content-Type: text/plain; charset=iso-8859-1
+--BiRZY1EPEi/sQJ44
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 17, 2023 at 04:32:41PM +0800, Kever Yang wrote:
+On Thu, Aug 17, 2023 at 10:46:14AM +0200, Quentin Schulz wrote:
 > Hi Jonas,
 >=20
-> =A0=A0=A0 Thanks for your patch.
->=20
-> On 2023/8/17 14:04, Jonas Karlman wrote:
-> > Update Rockchip documentation to include RK3566/RK3568 boards already
-> > supported. Also list Pine64 boards under RK3566 and drop defconfig to
-> > match other listed boards.
+> On 8/17/23 08:04, Jonas Karlman wrote:
+> > Update MAINTAINERS files for RK3566/RK3568/RK3588 boards to include
+> > related device tree files. Also replace space with tabs.
 > >=20
 > > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > > ---
-> >   doc/board/rockchip/rockchip.rst | 20 ++++++++++++--------
-> >   1 file changed, 12 insertions(+), 8 deletions(-)
+> >   board/anbernic/rgxx3_rk3566/MAINTAINERS       |  3 ++
+> >   .../neural-compute-module-6/MAINTAINERS       |  6 +++
+> >   board/radxa/rock5a-rk3588s/MAINTAINERS        |  2 +
+> >   board/radxa/rock5b-rk3588/MAINTAINERS         |  4 +-
+> >   board/rockchip/evb_rk3568/MAINTAINERS         | 51 ++++++++++---------
+> >   board/rockchip/evb_rk3588/MAINTAINERS         |  3 +-
+> >   6 files changed, 43 insertions(+), 26 deletions(-)
 > >=20
-> > diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockc=
-hip.rst
-> > index 31aeb8567607..4668e598515e 100644
-> > --- a/doc/board/rockchip/rockchip.rst
-> > +++ b/doc/board/rockchip/rockchip.rst
-> > @@ -91,18 +91,22 @@ List of mainline supported Rockchip boards:
-> >        - Theobroma Systems RK3399-Q7 SoM - Puma (puma_rk3399)
-> >   * rk3566
-> > -     - Anbernic RGxx3 (rgxx3-rk3566)
-> > +     - Anbernic RGxx3 (anbernic-rgxx3)
+> > diff --git a/board/anbernic/rgxx3_rk3566/MAINTAINERS b/board/anbernic/r=
+gxx3_rk3566/MAINTAINERS
+> > index 1c0d3fe7b5bf..6be16a47e8eb 100644
+> > --- a/board/anbernic/rgxx3_rk3566/MAINTAINERS
+> > +++ b/board/anbernic/rgxx3_rk3566/MAINTAINERS
+> > @@ -4,3 +4,6 @@ S:	Maintained
+> >   F:	board/anbernic/rgxx3_rk3566
+> >   F:	include/configs/anbernic-rgxx3-rk3566.h
+> >   F:	configs/anbernic-rgxx3_defconfig
+> > +F:	arch/arm/dts/rk3566-anbernic-rgxx3.dts
+> > +F:	arch/arm/dts/rk3566-anbernic-rgxx3.dtsi
+> > +F:	arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
 >=20
-> This board is using anbernic-rgxx3 as defconfig name, but I would prefer
-> update this defconfig to
+> An easier way to deal with this is to use the "*" character since it's
+> supported in MAINTAINERS file apparently (ag -Q "*" **/MAINTAINERS returns
+> multiple matches in multiple files). So maybe replace it with something l=
+ike
 >=20
-> use name rgxx3-rk3566_defconfig instead, to follow all the other boards w=
-ith
-> SoC name.
+> F: arch/arm/dts/rk3566-anbernic-rgxx3*
+>=20
+> ?
+>=20
+> That way if the files eventually get split into multiple ones, get rename=
+d,
+> have one created (e.g. -u-boot.dtsi), they are all matched by that same
+> line. Less maintenance here (and hopefully precise enough that we don't h=
+ave
+> false positives).
+>=20
+> Just a suggestion,
 
-Sorry, in my rush to get more MAINTAINERS entries updated / correct I
-missed your feedback here.  Jonas, please update and I'll make sure it
-gets in to the tree.
+Using the "N:" syntax might be better-still, since you could do:
+N: anbernic-rgxx3
+And that covers anything with anbernic-rgxx3 in the name.
 
 --=20
 Tom
 
---j2KWYur3WYvTatWz
+--BiRZY1EPEi/sQJ44
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTedQgACgkQFHw5/5Y0
-tyyBJAv+P5E4z0f/fi2agqwr8vr51m5e1T8iK9gaG3do1vNMbtj84/Q55u/S+jN6
-upJbroYu5JNbjIkDiUDfe/Hu2RDefzPrt3o4JL87BeHSJwqpnAROQ+l5+hnBhYmw
-eNFmyVTHFMXUK4iy5v4/HK//AZ5QwF4SrCd6WFqrnRlr5hNQa+/gLDA7lCybd2fE
-Bhzcm9dEpc5DA6Sp8ml24wf8euTTQ1tzGqeBL0hS8HjX3oaK09+TmbvAmRYTghcH
-rKi7bIjczfce/6yGsQsvZxG5D9pUX8WQFqLDKDD/Fpz6/UCxRnmfgFqjxUDl1TH+
-+it1tKsRw03PSULaTDpTNSGLnFwOjQL0UDB4/qJFRzViEUDBNVYiK4poLsQqPyNx
-im9nJCY7qmzV6Hp90KryWKyKfTp3xTMenmieei4QzfcMh7wpjK6e36It9dkraZ6V
-Iy1m7w/FarMcDgfqfUS5+rHWMxc6HZ8c204c30WTur/RScTgRsy7drcjQbVV0mWa
-B6DTZ5dc
-=LOY6
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTedWkACgkQFHw5/5Y0
+tyzQfgv/XbG2QmqHNiN+8jiQzTnM9EH4cKrytlXc7MlBSESFdFKKs3O1mfBHeT7i
+qxId+sq6tCF+SuNVgOFCRfwbLHc0Bo5NAx0IkYU+0iZ5CR+Ogk2KmDx6C9JN4NUl
+zgeUT10jedMNblcy7KZ17gQCSLIX1ER6o/IYal7mHMb1IN6OJh7YTj0E1uyPZo1y
+AVxeR3F6qnnd8ya50AEIJ5VsJHGi+1vfoxc6R5epKzj3AKNcQUfp8gZybplVTRha
+ZRPVsbIq3Z6cDW2bvsuwP9YIo5gLsrQzbiClsYI+aT46ZzIj+JOvqSAN3RdMT3zC
+ddDraFLhXTXuRBCJoYyRloKCWK4KUm/pkA1GpXdKYCiKOEMPqm73rSnh2MPhtejN
+kJbbI/cIlyZJaXytduXzMM7FoWiP7xdFoqXF7usP/N0VU/MNEJisGqnfmlXBRXoG
+sM2tLNp6/hu2reVQFmiHO4Kapo9nlWXteB0zYiUSTolny/5BiI2AZWSY8lA/iptz
+XewAzCLx
+=NWTk
 -----END PGP SIGNATURE-----
 
---j2KWYur3WYvTatWz--
+--BiRZY1EPEi/sQJ44--
