@@ -4,68 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDB0C27C42
-	for <u-boot@archiver.kernel.org>; Wed, 16 Aug 2023 22:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBD2C05052
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:52:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A664A86A4A;
-	Thu, 17 Aug 2023 00:29:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76D1B86A43;
+	Thu, 17 Aug 2023 03:52:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VERyxLPt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iyHfgp2y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3E1A86A50; Thu, 17 Aug 2023 00:29:51 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 46AD186A03; Thu, 17 Aug 2023 03:52:02 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E63786A48
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 00:29:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8252386A40
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:51:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-51cff235226so737980a12.0
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 15:29:44 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6bcbb0c40b1so5840907a34.3
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:51:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692224984; x=1692829784;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LLKukEQRGfD/o2Ie1VCaALePFR3QNl7W6j1I6gacZVI=;
- b=VERyxLPtJl4mNe9YIw6EaPutBchgmBuj2YmFY60Zikl/QZSeKRuANOAw2gnN2INmXQ
- ZS1IL7XiJY8/NBUwcase5j7piQ154D+MY1eJLRPbcfai/D08I7Idi75L1j9DvbYd4Jx+
- i0Zps1tvHZbpVkQjtyMvWulTEh7cRclCCP2II=
+ d=chromium.org; s=google; t=1692237118; x=1692841918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LbQbI7Z25f+6JD5lVVGizMFx9IqteT0dnEjgS/o9uDs=;
+ b=iyHfgp2yPQdnLeF9oUHcGIq3ofajaXpLUKTSNmVOyYp+79m7qKnB7LhKP5lQNjhpmA
+ 5XxxAeAUDEBKDigT3OFwedI00oomHUqyIDWJURI0JVn9fzZvDgaYzjGumGZyHukEbax/
+ cANpohA2YvUaQQToYEgMw7mNQK0I7G+Wk2qks=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692224984; x=1692829784;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1692237118; x=1692841918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LLKukEQRGfD/o2Ie1VCaALePFR3QNl7W6j1I6gacZVI=;
- b=TwtYX7D8bCqzYmdX8H1T4Ljz0iWr0U3LiTD9WFN9e1wMoywI9uZmm4iqHT5q4kZ5n2
- FqmLJmgR3i5DQKgMSigs/CQ4U+H3O4TSVv4P97YT+A8kC2DLIeu27wqp03dKqvzHytjn
- /NVK6R7PRjvvN1eN2piGIkpj4DWdRZM2TDKbXbmz14I6jQhUEbn05PdqnA5jRelMYjEN
- e70Oo8ibTP6CyaKT3VlJJ3E5bjPMDh03MdWRgUdsTRVQeMeICwkdph3KZuhbE/MRNg3X
- CtcxUIn2mw4YufX435BO3q0vBmPEH9YCrvBAswA8wzOZCU7wVS7FasvPVejVeL8JSvtG
- YWHg==
-X-Gm-Message-State: AOJu0YwEMahxodiXs4bilpvzrucu9S8GHQqAYIqYdBNokW1AfS6BK/8b
- fPBNY3Gtw2f7S7GUMAhRRJjpn8eZ7/29+1YwoapXjpP4e/DN09WH26ggRg==
-X-Google-Smtp-Source: AGHT+IHVreU9eXVzf14HeTRvwVCBL0tdk3TGXhSCv6gLq9FAM2pviZi+AyKnxkuNRweiKn1MmQsKQFw4NxiXpWqfTyg=
-X-Received: by 2002:a05:6402:1219:b0:525:b29d:8dc8 with SMTP id
- c25-20020a056402121900b00525b29d8dc8mr1173576edw.5.1692224983811; Wed, 16 Aug
- 2023 15:29:43 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230805133208.788000-1-jonas@kwiboo.se>
- <CAPnjgZ216Mm5cv=NhmPdqGiGKjzc3fte4fVAcMLYwwZhq6gbVA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ216Mm5cv=NhmPdqGiGKjzc3fte4fVAcMLYwwZhq6gbVA@mail.gmail.com>
+ bh=LbQbI7Z25f+6JD5lVVGizMFx9IqteT0dnEjgS/o9uDs=;
+ b=UP/quIVZrM23n6RZNXrTN7/368xz4iNVlsKSIRW9KipRhUw2gv6BudhnQBdr4WML34
+ HDxTo+nNv+Kvrs5dKRYUlkw9GNGf/HM93dyNScklifoa9dYWkWsiOTB9j8Qr0L/ZphbR
+ 9AmF8U1ZyJFF0aZs/XFr/okGj/TVOHzHcP8zZSr7lBH6JIQmy/uULOrfZCcLVY4MLJit
+ GXRXO8a+JtVL8QszYu9qkB20zB+W2ybGcnMVhnGYcJcdBtZbo1PR7hIvnR1pgdJNeGxp
+ 2qxmhWrzWB974hoVzAIB+G4ACu56hlKyh+34kCZlxvX5xwSgz17dvnprVCqjld+wTxS3
+ WOAg==
+X-Gm-Message-State: AOJu0YwrqOjcFC1Q2LOm016WnJPfr1caUkSNO90SfxWMGZNIcgCqmrLF
+ L4AjMTBHmBGRIuHjLcWA7fstGap0e5q389yTMIE=
+X-Google-Smtp-Source: AGHT+IFAQ/ZKuzJ7ja9frttd1Z7OagSxWOrzvFWRLOY8iWv8bT6qgv1tpTGwhT41Vh6iBaVph0HnZg==
+X-Received: by 2002:a9d:63c7:0:b0:6bd:152f:9914 with SMTP id
+ e7-20020a9d63c7000000b006bd152f9914mr3721179otl.26.1692237118076; 
+ Wed, 16 Aug 2023 18:51:58 -0700 (PDT)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.51.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Aug 2023 18:51:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 16 Aug 2023 16:29:32 -0600
-Message-ID: <CAPnjgZ0yq8-pm-HQuKy2vUK5i92zmJZwsYxHeoS-4e51ERZcNg@mail.gmail.com>
-Subject: Re: [RFC] dm: core: Report bootph-pre-ram/sram node as pre-reloc
- after relocation
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Anatolij Gustschin <agust@denx.de>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Stefan Bosch <stefan_b@posteo.net>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Subject: [PATCH 0/9] x86: Fixes and improvements for coreboot
+Date: Wed, 16 Aug 2023 19:51:35 -0600
+Message-ID: <20230817015149.774847-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,73 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+This little series fixes various bugs and annoyances in coreboot and
+coreboot64:
 
-On Tue, 8 Aug 2023 at 20:03, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Jonas,
->
-> On Sat, 5 Aug 2023 at 07:32, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >
-> > Devices for nodes with e.g. bootph-pre-ram are initialized three times.
-> > 1. At SPL stage (always bind and probe only if used)
-> > 2. At U-Boot proper pre-reloc (always bind and probe)
-> > 3. At U-Boot proper normal (always bind and probe only if used)
-> >
-> > Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram prop
-> > with a pre-reloc status only after U-Boot proper pre-relocation stage.
-> > This prevents the device from being probed at U-Boot proper pre-reloc.
-> >
-> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > ---
-> > I am not sure if U-Boot proper pre-reloc behaves like this by design and
-> > if there is some other way to signal that a device should not be probed
-> > during U-Boot proper pre-reloc stage if it has been probed at SPL stage.
-> >
-> > For my use-case I added bootph-pre-ram prop to my RK8xx device node to
-> > make the PMIC usable in SPL. However, I have no need for this device to
-> > probe at U-Boot proper pre-reloc stage just after jumping out of TF-A.
-> > And moments later bind and probe yet again at U-Boot proper normal stage.
-> >
-> > The bootph-pre-ram prop was used to have the device usable in SPL, else
-> > I could have used bootph-all or added bootph-some-ram prop to indicate
-> > use at U-Boot proper pre-reloc stage.
->
-> This is changing how things work...we really need to have something
-> explicit to use this new behaviour. Perhaps we can augment the binding
-> in some way?
-
-I had another look at this. The binding seems to be silent on this
-point, so I believe this patch is correct.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+- Make coreboot64 debug UART start reliably
+- Avoid the long USB-init delay on startup
+- Correct the timer speed on coreboo64
+- Fix a bootstd cros bug (will likely be squashed into another patch)
+- Fix the terribly slow console scrolling
 
 
->
-> >
-> >  drivers/core/ofnode.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> > index 8df16e56af5c..ebd5a408ae58 100644
-> > --- a/drivers/core/ofnode.c
-> > +++ b/drivers/core/ofnode.c
-> > @@ -1353,7 +1353,7 @@ bool ofnode_pre_reloc(ofnode node)
-> >          */
-> >         if (ofnode_read_bool(node, "bootph-pre-ram") ||
-> >             ofnode_read_bool(node, "bootph-pre-sram"))
-> > -               return true;
-> > +               return !!(gd->flags & GD_FLG_RELOC);
->
-> I believe that the compiler knows how to convert 'gd->flags &
-> GD_FLG_RELOC' into a bool, so !! is not needed.
->
-> >
-> >         if (IS_ENABLED(CONFIG_OF_TAG_MIGRATE)) {
-> >                 /* detect and handle old tags */
-> > --
-> > 2.41.0
-> >
+Simon Glass (9):
+  x86: coreboot: Rearrange arch_cpu_init()
+  x86: Set the CPU vendor in SPL
+  x86: Allow APCI in SPL
+  x86: coreboot: Look for DBG2 UART in SPL too
+  x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
+  x86: coreboot: Drop USB init on startup
+  x86: coreboot: Align options between coreboot and coreboot64
+  bootstd: cros: Correct condition for reading the kernel
+  x86: coreboot: Enable VIDEO_COPY
 
-Regards,
-Simon
+ arch/x86/cpu/coreboot/coreboot.c | 16 +++++++++-------
+ arch/x86/cpu/x86_64/cpu.c        |  7 +++++++
+ arch/x86/dts/coreboot.dts        |  1 +
+ boot/bootmeth_cros.c             |  4 ++--
+ configs/coreboot64_defconfig     | 10 +++++++++-
+ configs/coreboot_defconfig       | 12 ++----------
+ drivers/serial/Kconfig           |  2 +-
+ drivers/video/coreboot.c         | 12 ++++++++++++
+ lib/Kconfig                      |  8 ++++++++
+ 9 files changed, 51 insertions(+), 21 deletions(-)
+
+-- 
+2.41.0.694.ge786442a9b-goog
+
