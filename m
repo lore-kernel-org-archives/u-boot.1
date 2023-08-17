@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37E56C2FC04
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7726BC2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8610B86A4B;
-	Thu, 17 Aug 2023 03:56:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DECE186A30;
+	Thu, 17 Aug 2023 03:58:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mvEmxkeB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WuElm7pt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A00E86A4B; Thu, 17 Aug 2023 03:56:29 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 08FA286A4B; Thu, 17 Aug 2023 03:58:07 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEEA9847D3
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:56:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BA5286A30
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:58:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so930343a12.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:56:25 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3a81437be28so1889407b6e.0
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:58:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692237385; x=1692842185;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9536EFf5V60tXmgNunccWIQXJmgxXPOhF1lEEQ+i/+M=;
- b=mvEmxkeBERKAZW82BcsHzh4gSOw+XE/ahpdc9p9NwUV1fH6IGkf7LAU0yxhz7wpWrY
- SsqXJzvGQmsvdaJIwbOgCmKAqZwO6VzEuHWOMiR6YHjD+h3ypf7WTy/wr9REiq4H7em9
- 33klVRqRKgWjCNfAihFiZCYCiW6Ego1glS6a8=
+ d=chromium.org; s=google; t=1692237482; x=1692842282;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vvb7rrFMsmNt48ACrbnRUlGAuLNNMaj92sTS5roX7B8=;
+ b=WuElm7ptP/wDjFDGvgeA4Lku1JR+zAE/Ez44JCS4zcYVuxxTrl0aa6gwy1tYH0Go4b
+ /vyolDtSE1FmFP4vNZbZP/RCtJoQwSoKvh3rZjufa1Czmf5gPpLPasSXhZorAL88DhdS
+ CP2ERSXgnCmr9dFmbUzphk3QajumyfwV/imT8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692237385; x=1692842185;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1692237482; x=1692842282;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9536EFf5V60tXmgNunccWIQXJmgxXPOhF1lEEQ+i/+M=;
- b=VhUvqb6308dQzlkT3OVhInklar91nQLz0akK+0BtF/Ck950V5pKnbFS8pRJpN0qQ1F
- BuG6Xgcsg5IRX5G3j44q9kkDbMa35dDcnj6telBeG74ZU/z3Zy758IX3v1nlXhPJhm1t
- gs1xqKUheElgg6o7lSMSK1zwI7kNgR5MJjqpPEKkfd9RMsoVZsR7zoO8hvnhTI0PHPaw
- nH5BgpRLWKT370T/aRAh8y8oIBKu3385xhGFu0vZqy3vaS6Qtb55HPQ447Z/zoGq0LW+
- Vq5rfp+deK7pkjaXFj4gKJfrKTIl5MupcmrKWYizMQwZ+pGlRmyg52mIO8tnd1Uw6hTJ
- SqWQ==
-X-Gm-Message-State: AOJu0YxBWfZNW3XrMxg7OfW8erPfEe9StcODoXBdCM3cne0CH5rDqJ3r
- 4AzUaJOe7IlvjFypHkC9bdt7up7jjLwqr8h8G/gdYw==
-X-Google-Smtp-Source: AGHT+IFjtuiy2k4CmI6AzOgth+NWshg0EUwC1sskk3GAfS3IwaV5msCPnCqXSQKjoXqNYYByxXs0+5xQTk8gYwXLqoU=
-X-Received: by 2002:a17:906:8a65:b0:992:ef60:aadd with SMTP id
- hy5-20020a1709068a6500b00992ef60aaddmr1657330ejc.13.1692237385134; Wed, 16
- Aug 2023 18:56:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230813201038.413362-1-sjg@chromium.org>
- <3a9a731f-15f8-02dd-b0d1-9626031e0c77@googlemail.com>
- <CAPnjgZ05xtrLQZiKC7t4NQvMJCAx2E7bu+LyPTqKjAmAPq-kwA@mail.gmail.com>
- <12a87716-829a-a24f-8221-c5e1ed1cb316@googlemail.com>
-In-Reply-To: <12a87716-829a-a24f-8221-c5e1ed1cb316@googlemail.com>
+ bh=vvb7rrFMsmNt48ACrbnRUlGAuLNNMaj92sTS5roX7B8=;
+ b=R9oio6R6nRNCBKFulHu4NfRxnqOgbux+7hDEEdrbaDumnLLYzDtb3r+2cnXL+uimtj
+ CDDwMP17gS4G7dZ1amzvzZrY/r5Xb90Gfv8SR/VV1N7trLFdzlkEyx+etPMlZJ0H4iov
+ LJKKZELMpDlop8mJLYNmwSeIu9TeiG8XNm+q/DA3oZwqpCc89TIxwm3ulsMyjES8IY01
+ eqDuBJyPfMAgzbCEv66bCp4ZRBvKHS4FLhifvHGOtMw2DIC9kM1vv5YdLwYGOtA/bPSx
+ yE5jx6+ZtxUDA/rvInLYfD9BvP5/oFXizyFCLzfrTfunUug4j6aYDwV9dcogq5qwHCQW
+ TLMw==
+X-Gm-Message-State: AOJu0YzIF3+erldCOTjjXW0/mRFmA2sSudjZnKcaNCRDjzSyM94i7KEm
+ p3H97DR32g2jQreyOfVnadxAidEqA/gUtUChheo=
+X-Google-Smtp-Source: AGHT+IFFHLbWEVWYBR5cGk0sGaDQDZu0z5FtACwARYlcCWAFNmNLSsflUHBlm5x2NM/8sG8g29F+Pg==
+X-Received: by 2002:a05:6808:2385:b0:3a1:e17a:b3fb with SMTP id
+ bp5-20020a056808238500b003a1e17ab3fbmr5186628oib.1.1692237482753; 
+ Wed, 16 Aug 2023 18:58:02 -0700 (PDT)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ b12-20020aca674c000000b003a7b5193909sm7026471oiy.19.2023.08.16.18.58.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 16 Aug 2023 18:58:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 16 Aug 2023 19:56:13 -0600
-Message-ID: <CAPnjgZ2qHx4egjL8x+tCPic310dRi06nNeMg-jAwTheG4UTvpA@mail.gmail.com>
-Subject: Re: [PATCH] x86: Update cbmem driver
-To: Nable <nable.maininbox@googlemail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Paul Menzel <pmenzel@molgen.mpg.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Paul Menzel <pmenzel@molgen.mpg.de>,
+ Nable <nable.maininbox@googlemail.com>,
+ Coreboot ML <coreboot@coreboot.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v3 1/2] x86: coreboot: Update cbmem table
+Date: Wed, 16 Aug 2023 19:57:51 -0600
+Message-ID: <20230817015754.776507-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,20 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nable,
+This changed a few years ago to include an overflow flag. Bring in the
+new structure.
 
-On Tue, 15 Aug 2023 at 19:41, Nable <nable.maininbox@googlemail.com> wrote:
->
-> On 15.08.2023 01:42, Simon Glass:
-> > I believe the original intent was to indicate that the buffer had
-> > overflowed. But prompted by your review I took a look at the coreboot
-> > implementation and it now has an overflow flag.
-> >
-> > So I will send a v2 incorporating this.
-> Thank you for this investigation, v2 approach definitely makes sense.
-> Btw, is there any reason to mark 'struct cbmem_console' as packed?
+This comes from coreboot commit:
 
-Not that I can see. I'll drop that too for v3.
+   6f5ead14b4 ("mb/google/nissa/var/joxer: Update eMMC DLL settings")
 
-Regards,
-Simon
+Note: There are several implementations of this in coreboot. I have chosen
+to follow the one in src/lib/cbmem_console.c
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+Changes in v3:
+- Drop __packed as it does nothing useful
+
+ arch/x86/include/asm/coreboot_tables.h | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/arch/x86/include/asm/coreboot_tables.h b/arch/x86/include/asm/coreboot_tables.h
+index 4de137fbab9d..0dfb64babb96 100644
+--- a/arch/x86/include/asm/coreboot_tables.h
++++ b/arch/x86/include/asm/coreboot_tables.h
+@@ -299,11 +299,24 @@ struct cb_vdat {
+ #define CB_TAG_TIMESTAMPS		0x0016
+ #define CB_TAG_CBMEM_CONSOLE		0x0017
+ 
++#define CBMC_CURSOR_MASK	((1 << 28) - 1)
++#define CBMC_OVERFLOW		BIT(31)
++
++/*
++ * struct cbmem_console - In-memory console buffer for coreboot
++ *
++ * Structure describing console buffer. It is overlaid on a flat memory area,
++ * with body covering the extent of the memory. Once the buffer is full,
++ * output will wrap back around to the start of the buffer. The high bit of the
++ * cursor field gets set to indicate that this happened. If the underlying
++ * storage allows this, the buffer will persist across multiple boots and append
++ * to the previous log.
++ */
+ struct cbmem_console {
+ 	u32 size;
+ 	u32 cursor;
+-	char body[0];
+-} __packed;
++	u8  body[0];
++};
+ 
+ #define CB_TAG_MRC_CACHE		0x0018
+ 
+-- 
+2.41.0.694.ge786442a9b-goog
+
