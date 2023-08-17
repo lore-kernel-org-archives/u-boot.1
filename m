@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E17EC3DA65
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 18:40:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9B28C52CDA
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 19:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BDA986BBE;
-	Thu, 17 Aug 2023 20:40:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D27B486BCC;
+	Thu, 17 Aug 2023 21:02:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Prnc8WXC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YgOtGH26";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F25B086BC3; Thu, 17 Aug 2023 20:40:47 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7472786BC5; Thu, 17 Aug 2023 21:02:09 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDA2986961
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 20:40:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8D5B86BC7
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 21:02:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RRYjP6nTyz9sWJ;
- Thu, 17 Aug 2023 20:40:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692297641;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rilByqYCdfFhwpZQJI2WYOgIzVLrRbkTLBbR6D5hskA=;
- b=Prnc8WXC5HHT46CPwT5skn4D2s4kJXD2SRJGoiiyehPh+kZjGvAoTmo2gPlgVLnQHQY2j5
- LhT/znjo4zLpGwDY9r+u33tx+0/NImgWqJSKvroWLe/d1KHmcp8A3O3BgTkhnxWFaAfbHz
- jwevtbRktuJuL+8TmMSv881N/+nguzWHskacYHsOcI7m3wFsN+tZ4De6MprmH8fvHfyLk3
- R0YqgIB7/VjHAt5iV3FkfkcDsJBB05+X7gN9L6hBkxaWfExNq/UsV4GFJgrdmZzkjssOm+
- UD48it3v3Ckm/jQeXq49z3+f05VAoBt9kZWecQGJ3GWHhdcqOmEDjLOTYTZ4MA==
-Message-ID: <3e7c1df4-5a44-25e9-c762-56011edf2e73@mailbox.org>
-Date: Thu, 17 Aug 2023 20:40:40 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-58d41109351so17746127b3.1
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 12:02:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692298925; x=1692903725;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KhFnv97nXzef9PlnF8k9GI61/4sN4auxOTF/Zypcn0s=;
+ b=YgOtGH262+0hjLD2g1CUIOYFDP4W2hdy3E7f6N9nIWpqhZt0TdLjzvYNsadU8k1jLE
+ 4kWbDwhHvnU95mVNbASViL2LLASDm8feX714Tp6jPeNcHgUngcl2KM6nSOfhmN0tbLJX
+ lq57rQMybx40KOIo7Z9WT+6XI/fWXup+FzNJg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692298925; x=1692903725;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KhFnv97nXzef9PlnF8k9GI61/4sN4auxOTF/Zypcn0s=;
+ b=fqvN1d3lRHWR7F0S7H6mQ3iaU1JfKJYYPuNSWAT9HoltyuBzkaLIVEinz0s1R3GuZC
+ J9ZNTNT8TSH1f0vlvEHbg9w/i55DgDSBA/T37BGsIV83HHqSkpuLtiMVdh4wZfIcDr7T
+ oDQxvNdEOv6PRoJJvc77HJsQ39dePv7/dVp+mtUhApCxfacsJyLYm8UTiZ2uOKtJHKxJ
+ goaiyOOsftJADGV3Jr7+aku3+iKShTez9066buXtjMTV8PGJv09OHhcca+YJ/xfNR9Td
+ RnwbNy0E0MSRoiXzbwhi1DSO7gNeOein5bJxzCWWdU4LQYxC0/T7j1xixvQu/uGuNDL8
+ 4R/g==
+X-Gm-Message-State: AOJu0YwF8UnjcVIOQcVOFxy7DdPbBta0G/aEt2b3d3rpMpSLMzRmJG1M
+ NbeII2WOuiuBKmB0uUghRSzz4RhLeEZTC3mwep27xQ==
+X-Google-Smtp-Source: AGHT+IGKsQZOKURI/9HXTJrj/BPosYDYcYamntI4nWNO9QgK+Ttsa5c+/nEHAwRNvE2ePeFb6CkvhA==
+X-Received: by 2002:a0d:d9c7:0:b0:570:2542:cc9b with SMTP id
+ b190-20020a0dd9c7000000b005702542cc9bmr315212ywe.18.1692298925139; 
+ Thu, 17 Aug 2023 12:02:05 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-8f9f-218d-98ab-058b.res6.spectrum.com.
+ [2603:6081:7b00:6400:8f9f:218d:98ab:58b])
+ by smtp.gmail.com with ESMTPSA id
+ g123-20020a0ddd81000000b0055a373a7e5asm43449ywe.131.2023.08.17.12.02.04
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Aug 2023 12:02:04 -0700 (PDT)
+Date: Thu, 17 Aug 2023 15:02:02 -0400
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: Re: [PATCH] arm: Add arch/arm/dts/Makefile specifically to MAINTAINERS
+Message-ID: <20230817190202.GL1515023@bill-the-cat>
+References: <20230807210811.667320-1-trini@konsulko.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] MAINTAINERS: Update UFS maintainer
-Content-Language: en-US
-To: Neha Malcom Francis <n-francis@ti.com>, u-boot@lists.denx.de
-Cc: bhupesh.sharma@linaro.org, nm@ti.com, vigneshr@ti.com, u-kumar1@ti.com,
- sjg@chromium.org, trini@konsulko.com
-References: <20230817120914.144240-1-n-francis@ti.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230817120914.144240-1-n-francis@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 4zccn5s6txmttca819j9ayn6cyqrrk8g
-X-MBO-RS-ID: 69fbb92f01501ad195b
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jn+yt539CauKsez0"
+Content-Disposition: inline
+In-Reply-To: <20230807210811.667320-1-trini@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,56 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/17/23 14:09, Neha Malcom Francis wrote:
-> Dropping Faiz Abbas from the UFS maintainer list as his e-mail ID is no
-> longer valid.
-> 
-> Adding Bhupesh Sharma who has been using this framework working on
-> Qualcomm Snapdragon SoCs as well as sending out fixes.
-> 
-> Adding myself as well to support in reviewing and testing patches.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 
-Add '---' here so the CC list is not part of the commit message when 
-this patch is applied, like this:
+--jn+yt539CauKsez0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-of-by: Foo User <...>
----
-CC: Bar Example <...>
-...
----
-V2: Did stuff
-V3: Did more stuff
+On Mon, Aug 07, 2023 at 05:08:11PM -0400, Tom Rini wrote:
 
+> In order to reduce the number of people that are cc'd on a patch for
+> simply touching arch/arm/dts/Makefile (which is a big common file) add
+> an entry specifically to MAINTAINERS under the ARM entry.
+>=20
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-> Cc: Vignesh R <vigneshr@ti.com>
-> Cc: Nishnath Menon <nm@ti.com>
-> ---
-> Based on discussion:
-> https://lore.kernel.org/u-boot/CAH=2NtzyQgximynKuG45UUux715Du=WKKusm9-aQGHcUZsWzSw@mail.gmail.com/
-> 
->   MAINTAINERS | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 77a8b0ac21..d19e1fd60b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1585,7 +1585,8 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-ubi.git
->   F:	drivers/mtd/ubi/
->   
->   UFS
-> -M:	Faiz Abbas <faiz_abbas@ti.com>
-> +M:	Bhupesh Sharma <bhupesh.sharma@linaro.org>
-> +M:	Neha Malcom Francis <n-francis@ti.com>
->   S:	Maintained
->   F:	drivers/ufs/
->   
+Applied to u-boot/master, thanks!
 
-With that fixed:
+--=20
+Tom
 
-Acked-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+--jn+yt539CauKsez0
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTebqQACgkQFHw5/5Y0
+tyzACAv+JZj7Mbq7exZZeX/N2YNBEYo/AvZPRDDPk/XzZndJJrZLCT79VZIkOdSw
+Tqx4k6EI+r4oWDh/vG5C+uSfJqbWaIkd8pLU/M7jMOCbO9m+fBvdLyLK0zW8uO0P
+BgEOn3Mr+5c9uiX01opDONdtdBHQaIaRjlGhvN9ZiCp+5bChBP7R8zoZZJ7BMaY5
+zvXkcQjaTGAImVBMdCCd9XcQhh62B5I3fBb/dNS7kOHS+LRd1kIz3AgnlshxwWWk
+fe+8qLmTfCQ3WJRVVS8WJpwsQ55GVA2+zet22N4AiXNBpD872t6fsyuGZBFiv4bb
+QyLsoFJ8H2KKl2JyEmItqHE3OUbdbPqd0Eerro+j+9rjFBeZecU+uKykq0NgdAdJ
+dxfhdILbM9Jx+6BzQZBoHdXWzHJTK2f4XDGcEzSihewZXKM9vEMmgH1CfBDIFKti
+Zn7CixFo4xnNLJKaQGDaxGL0pXpfmDD3yDIARDitV3GtxSSXk9tLq1kUQ0kXUBcQ
+83yOGKMi
+=2paj
+-----END PGP SIGNATURE-----
+
+--jn+yt539CauKsez0--
