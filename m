@@ -4,114 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFDA1C2FC29
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:47:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE97C2FC14
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:57:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90E7586B77;
-	Thu, 17 Aug 2023 15:47:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=de.bosch.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C83C86B61;
+	Thu, 17 Aug 2023 15:57:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=de.bosch.com header.i=@de.bosch.com header.b="FC1qp2H1";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SL86j6P9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C19F86B87; Thu, 17 Aug 2023 15:47:16 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20622.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::622])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 17E8986B65; Thu, 17 Aug 2023 15:57:02 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FDB586B69
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:47:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=de.bosch.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Thomas.Mittelstaedt@de.bosch.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=odxi0rkfx2rW8G7gVBhxxHgTIo2HFKLLyNE85aAPZCigKBUeOB2H4H5y7RLaf/4Uq9THk+bJ3qlemb2M1WW9IAo6agkZ/01P5nKV3A8BLKcUqoCq0nCaOpZ8AHE38/nNm1zsTUTFIWgfnHvpeY5FdrvrwxiYhJ5/z2N9cu91hBVBHungVL3I5bgvTgXfqgjRbaXo6Vt9GlDvhg61f+w1isb6wEJ1GGUBfwzLFBlfWQz2kIA/LpWHmFv/ZGfgj8rZiYsBzs38810CgkWpZxL3zC/poj0LmexZJlX+qs9di+MFUwoG5Sqcxx+CmhJ1XiTTiK0ryDuW3JVktkPF92n7gA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lXDCFzehC2v7bAADpMFnqrp7PLjgA3/kmCTQWboGlrs=;
- b=czQKPou/uVWABGlruGPQSEvEf770sAeJbN1DSwr3g2jgEKi77prhCZGZW5rlGaUsZihM5Y+R7qRmh/kaifHgJGGo+o4+e+zHqZxMICYuNwxtYvzrHMB+4lWIxgcRUgqXqAbdS3BHjCDgXykAkkglJAYv29Cox+9MNlaotuHzRe0KlUhjbT7+JBr/X9ptW+a39Q/A3bX0zaBTDKakTIUwFB1SwCv1vqciV5u++mcZZL1kfitsOOBRzHYmVwqKOcr5bca6eYXg17aESBGFB9EFHTuptL6TjUAahnpo9BsUxmCCwjeHr7oEn0EZDJS1jj1ediTnrKq+05dhKy81xPrP4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.201) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=de.bosch.com;
- dmarc=pass (p=reject sp=none pct=100) action=none header.from=de.bosch.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lXDCFzehC2v7bAADpMFnqrp7PLjgA3/kmCTQWboGlrs=;
- b=FC1qp2H16r+RC1t6AuWG6I+ZvrwUcgl0BhSrv3slpEnm8bLpGgxYDMjHPohwnrV7EMQvrp953korSTwhzbKWr2ZvAO3Si2MMEuf4NDNTx3rdbki6KMoh3If+ARCYaHEYAVn3iEKlfICV411HL9S9G1LlhtxhKZsxvvEeVCcDPQN/Q+dVkEmi6B6n4v6wqpeJ+16+g54iqS0ccOSHc3eyTK7nXELAOIsffVZvKpfxmrmoobfUm1Gm6eqyCxu9X5YHm99CEimeQIxmUQEXTqdSopzZ9xwCaFN4z1U9nLCPpdE1SB0sF14mWMratOgv7CkrfawLLeqFpLh4kKFl7SOmmg==
-Received: from DU2PR04CA0069.eurprd04.prod.outlook.com (2603:10a6:10:232::14)
- by GV2PR10MB6982.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:d5::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.29; Thu, 17 Aug
- 2023 13:47:09 +0000
-Received: from DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:232:cafe::6b) by DU2PR04CA0069.outlook.office365.com
- (2603:10a6:10:232::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
- Transport; Thu, 17 Aug 2023 13:47:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.201)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.201 as permitted sender)
- receiver=protection.outlook.com; 
- client-ip=139.15.153.201; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.201) by
- DBAEUR03FT065.mail.protection.outlook.com (100.127.142.147) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6699.17 via Frontend Transport; Thu, 17 Aug 2023 13:47:09 +0000
-Received: from SI-EXCAS2000.de.bosch.com (10.139.217.201) by eop.bosch-org.com
- (139.15.153.201) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.31; Thu, 17 Aug
- 2023 15:47:08 +0200
-Received: from FE-HUB2000.de.bosch.com (10.4.103.109) by
- SI-EXCAS2000.de.bosch.com (10.139.217.201) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.31; Thu, 17 Aug 2023 15:47:08 +0200
-Received: from localhost.localdomain (10.141.98.21) by FE-HUB2000.de.bosch.com
- (10.4.103.109) with Microsoft SMTP Server id 15.1.2507.31;
- Thu, 17 Aug 2023 15:47:08 +0200
-From: <thomas.mittelstaedt@de.bosch.com>
-To: <u-boot@lists.denx.de>
-CC: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 1/1] Documentation extended with specific information for
- VirtualBox
-Date: Thu, 17 Aug 2023 13:46:47 +0000
-Message-ID: <20230817134647.49259-2-thomas.mittelstaedt@de.bosch.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230817134647.49259-1-thomas.mittelstaedt@de.bosch.com>
-References: <20230817134647.49259-1-thomas.mittelstaedt@de.bosch.com>
+ by phobos.denx.de (Postfix) with ESMTPS id B146E86B6A
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:56:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fpidev23@gmail.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-589de44c7a7so4126867b3.1
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:56:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692280616; x=1692885416;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sJ5J7eTttOG23L20Oixb6uoytAGBuQ19eIROWywjyms=;
+ b=SL86j6P9d48W/QaAdWhftLNhHmVb5OMKxs3TbSXL7PiHD/2Lw2O/km3ywiGMB0lLVu
+ 1FQ7A1Lu8yFN/AUW+Llhn5kMGxoyP4UVi6h7XZDCdw6UA+iDy1ch5WulYspiwStLnn+2
+ aYvV/tII6Eo69dPiklgSaE86KSGLrF0OIx7etaAsVRAOkwDYWHYcMMquBGDZe+REBHS+
+ I2wKRyHB0i0zxCmV6nFU/UkvJ5eBGnWxVfjfudqu3EbS6TORMBhpVIm2Xv8u+b05KKyQ
+ EKPdBxf3YZq+tVrehqSgaJsvOR9PAAB7CnjuzfzRZdFKTNUdx0xB7YzSR034B/u3VvNr
+ GbyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692280616; x=1692885416;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sJ5J7eTttOG23L20Oixb6uoytAGBuQ19eIROWywjyms=;
+ b=FjOnNVUlGd6BfO9MouYpJn/fc5AiZ/d031TryHZRsNm7Hc+jayOfYxLGc7aFutnqCk
+ 5SEa1GPu5dN4kmWBdMPTox4OIYh4jaS8T5EFLKdKfQIawai3MDKd9dtBLnjaTrFBb2UR
+ N1dyTupuHRLQpFshnEhx9lMwNCyGdRQbXnfubC3praQj9aVnt1hrEQmNFAMAunsdOPp/
+ 3Ch7Z5kofWGdJorlBk11n85/TMCagsmUVQBVwLDj1BUZu78ag1b72WmFEOl/LxxrdVwn
+ V8kLfPQpRA/Fin8LiBkdcgVF+eE1RPdPowqBL96AhP+MMYNRS4Ps8Ztr0ZiqzvqYTG0c
+ /4Fg==
+X-Gm-Message-State: AOJu0YyONXNVQ7I+gqRAFDKXdm17HR3pIhGWPi9Ylx+qRTgKGVnKdRNP
+ a5es5EbabIRq8JvpCtsbvhf0HN3zySSp8pHCb1U=
+X-Google-Smtp-Source: AGHT+IGRshrIMerOB/j1+VYnWytNv7NrqtaAxhpCIaFMPJCS2LvATn9Rn2InqyeVJOYasycbt4md8+q5MK9kr92kf0M=
+X-Received: by 2002:a0d:df86:0:b0:565:a2eb:3436 with SMTP id
+ i128-20020a0ddf86000000b00565a2eb3436mr3047800ywe.1.1692280616460; Thu, 17
+ Aug 2023 06:56:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.141.98.21]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBAEUR03FT065:EE_|GV2PR10MB6982:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d72053b-18b6-48f3-a8f6-08db9f2873f3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Cit1Vw+DTMXRvoZ840yrmPE3SjTFe1dM7PsDOjV0bUcjYN2ZVznW6WUszHf9sbXAWMYzFrOzRW9ozdJuKxb6Ry257B/9rteUs61xc4kDbHZTFI0JokouSWR2KvqjQ7o2SfvZSNeGEBUBJTEjU/jbpbfv1H887Oz5PjRmUWs2V+0gSyoezrJdzVy8pkEUO8h6EI7YJ6inJSdOiJyDDlMAv0NZlDS4w+vgaXKXGRZkU9erygv4/9rHMiZtVr856WzmEjPW41Y7xLRTXEHEvPPxbbRnF6Y6VB7CNnxvBwS6PgF6Ff8hHwmiY/mHudd7NUlnlIwSEcI7CT+8b79lKgDzR1TYSNf5OVLTmp7wudvzRImYd+t4CLD0zabCgSQtydSxIiw6gBETmY2Hb7VJ8azk7wRJJO7XhO/kz2JFN2FH3k5Bu057ovjzMXsQ2eP1LnL7W3bQO81Inh3+OOMRpmL7r2plIfsBYOo/ecIQAN2hFVKQOWNZG6a2mweKmuBMuWwFvyWMUJ+9/pUUF1F/vFvno/C+V5b58uk+9B4WqL9A7U7MgSMHN1yAXHBfrdEby99rIJcDlQpOx+c9PK2O831Ecph7yImAYk4GhritLLOtmAM1uzHQxo7nsDQDSABQe7nI6RB0Fndtdm1Lg99CipnyT5KF0a7V27+2uQZbAQ/AkGSZ/Iaoi5lg94lxBnrz5fNrrO2agGdhhFsff9cQJpZXB9OePdSW4mfqcjeYS7Q7j/vftaveVlca9FSu/gAOhBPyOhV3nx/2Dv/9n801jDfaHY8dwHxjl7A8C3rs9ICqo7TwKk5c33383KjrvaD/6Hz6tHte9gaKe96qKdYALySNJrknAiiekMj9tPb2J07ORF8=
-X-Forefront-Antispam-Report: CIP:139.15.153.201; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:eop.bosch-org.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(136003)(346002)(39860400002)(396003)(186009)(451199024)(1800799009)(82310400011)(40470700004)(36840700001)(46966006)(2906002)(40460700003)(83380400001)(26005)(86362001)(40480700001)(336012)(478600001)(426003)(6666004)(2616005)(1076003)(16526019)(2876002)(5660300002)(36860700001)(41300700001)(82740400003)(356005)(316002)(54906003)(70586007)(70206006)(81166007)(6916009)(4326008)(8676002)(8936002)(82960400001)(47076005)(36900700001)(139555002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2023 13:47:09.4663 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d72053b-18b6-48f3-a8f6-08db9f2873f3
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4; Ip=[139.15.153.201];
- Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6982
+References: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
+ <CAPnjgZ1xraxjR56Peyqj8HL-HEg7pZ9EkrW2=NG+6vYG+qVfow@mail.gmail.com>
+ <CAM2g9JN9J_i5G9ctaRrimGhSepLEoQ=c4c2VJAua+HzMkB25tA@mail.gmail.com>
+ <CAPnjgZ2pcam0wMFnd43pRDwcDb3NEtckbgV6T_6CshPy4B2TdA@mail.gmail.com>
+ <CAM2g9JM4M9HtNz5rXu57J0KNjz_BTmG_XmoSy+4EiHmW-J25qg@mail.gmail.com>
+ <CAPnjgZ2-CfyNkHJwaL4uPyBnRTofgfXhtix2uLpr+a=t912xkA@mail.gmail.com>
+ <CAM2g9JNW+rtE+zh=DFH39rg46MMc7Ct=On=0ZbObK3RdqdC94g@mail.gmail.com>
+ <CAPnjgZ0xWN4V-_rPDFaq2M9EXrxPmrvE+uySqkUSwvMPySGhSg@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0xWN4V-_rPDFaq2M9EXrxPmrvE+uySqkUSwvMPySGhSg@mail.gmail.com>
+From: Freddie <fpidev23@gmail.com>
+Date: Thu, 17 Aug 2023 14:56:44 +0100
+Message-ID: <CAM2g9JMfAGdC7t9AYUtupB=BxxkQyhaiNdtO4VnWV3=0V_cw4Q@mail.gmail.com>
+Subject: Re: FIT Image not working in U-Boot
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,100 +95,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
+On Thu, Aug 17, 2023 at 2:45=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 
-Signed-off-by: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
----
- doc/develop/uefi/u-boot_on_efi.rst | 76 ++++++++++++++++++++++++++++++
- 1 file changed, 76 insertions(+)
+> Hi Freddie,
+>
+> On Thu, 17 Aug 2023 at 07:39, Freddie <fpidev23@gmail.com> wrote:
+> >
+> >
+> >
+> > On Thu, Aug 17, 2023 at 2:19=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> >>
+> >> Hi Freddie,
+> >>
+> >> On Thu, 17 Aug 2023 at 07:02, Freddie <fpidev23@gmail.com> wrote:
+> >> >
+> >> > Hi Simon,
+> >> >
+> >> > I'm quite new to this so sorry for asking so many questions but wher=
+e
+> do I run the 'dump_image -l' command and which code should I look into
+> adding print statements to?
+> >>
+> >> One thing is to add your reply at the bottom, not the top.
+> >>
+> >> Actually it is 'dumpimage -l file.fit' to list the contents of your
+> >> fit file called 'file.fit'.  The program is built in the tools/
+> >> directory or your build, or you can
+> >>
+> >> I mean if you are completely stumped, go to where the error is
+> >> generated and add lots of debugging around it. This is
+> >> boot_get_kernel() which is in v2021.10 is in common/bootm.c - so just
+> >> add lots of printf() stuff there, rebuild and run on the board and see
+> >> if you can figure out what is wrong. From my side I am really not
+> >> sure.
+> >>
+> >> Feel free to share the FIT through a link if you like.
+> >>
+> >> Also, you could try using a simple FIT without the signature part.
+> >>
+> >> >
+> >> > I have also just looked into my .config file and this is the content=
+s:
+> >> >
+> >> > #
+> >> > # Automatically generated file; DO NOT EDIT.
+> >> > # U-Boot 2021.10 Configuration
+> >> > #
+> >> >
+> >> [..]
+> >>
+> >> > #
+> >> > # Boot images
+> >> > #
+> >> > # CONFIG_ANDROID_BOOT_IMAGE is not set
+> >> > CONFIG_FIT=3Dy
+> >> > CONFIG_FIT_EXTERNAL_OFFSET=3D0x0
+> >> > CONFIG_FIT_FULL_CHECK=3Dy
+> >> > CONFIG_FIT_SIGNATURE=3Dy
+> >> > CONFIG_FIT_SIGNATURE_MAX_SIZE=3D0x10000000
+> >> > # CONFIG_FIT_RSASSA_PSS is not set
+> >> > # CONFIG_FIT_CIPHER is not set
+> >> > # CONFIG_FIT_VERBOSE is not set
+> >> > # CONFIG_FIT_BEST_MATCH is not set
+> >> > CONFIG_FIT_PRINT=3Dy
+> >> > # CONFIG_LEGACY_IMAGE_FORMAT is not set
+> >> > CONFIG_SUPPORT_RAW_INITRD=3Dy
+> >> > CONFIG_OF_BOARD_SETUP=3Dy
+> >> > # CONFIG_OF_SYSTEM_SETUP is not set
+> >> > # CONFIG_OF_STDOUT_VIA_ALIAS is not set
+> >> > CONFIG_SYS_EXTRA_OPTIONS=3D""
+> >> > CONFIG_HAVE_SYS_TEXT_BASE=3Dy
+> >> > CONFIG_ARCH_FIXUP_FDT_MEMORY=3Dy
+> >> > # CONFIG_CHROMEOS is not set
+> >> > # CONFIG_CHROMEOS_VBOOT is not set
+> >> >
+> >> [..]
+> >>
+> >> This has CONFIG_FIT and CONFIG_LEGACY_IMAGE_FORMAT is disabled (since
+> >> you have signature verification on).
+> >>
+> >> Regards,
+> >> Simon
+> >
+> >
+> > Hi Simon,
+> >
+> > Thank you for your advice, I'll make sure to reply at the bottom of the
+> message from now on.
+> >
+> > I've run the dumpimage command and this was my output:
+> > root@freddie-pi-dev:/home/fit# ../optee/u-boot/tools/dumpimage -l
+> image.fit
+> > FIT description: RPi FIT Image
+> > Created:         Thu Aug  3 15:47:15 2023
+> >  Image 0 (kernel-1)
+> >   Description:  default kernel
+> >   Created:      Thu Aug  3 15:47:15 2023
+> >   Type:         Kernel Image
+> >   Compression:  uncompressed
+> >   Data Size:    20869632 Bytes =3D 20380.50 KiB =3D 19.90 MiB
+> >   Architecture: AArch64
+> >   OS:           Linux
+> >   Load Address: 0x12000000
+> >   Entry Point:  0x12000000
+> >   Hash algo:    sha1
+> >   Hash value:   08d43ed37129fa26e0f5f9d303a211b708c66783
+> >  Image 1 (tee-1)
+> >   Description:  atf
+> >   Created:      Thu Aug  3 15:47:15 2023
+> >   Type:         Standalone Program
+> >   Compression:  uncompressed
+> >   Data Size:    1257464 Bytes =3D 1227.99 KiB =3D 1.20 MiB
+> >   Architecture: AArch64
+> >   Load Address: 0x08400000
+> >   Entry Point:  0x08400000
+> >   Hash algo:    sha1
+> >   Hash value:   4907d9c33098b2767cd6bc4bc9836f2f913464c7
+> >  Image 2 (fdt-1)
+> >   Description:  device tree
+> >   Created:      Thu Aug  3 15:47:15 2023
+> >   Type:         Flat Device Tree
+> >   Compression:  uncompressed
+> >   Data Size:    32501 Bytes =3D 31.74 KiB =3D 0.03 MiB
+> >   Architecture: AArch64
+> >   Load Address: 0x01000000
+> >   Hash algo:    sha1
+> >   Hash value:   1b5bb266752cb247d89245c63bd041acfa34c7c0
+> >  Default Configuration: 'config-1'
+> >  Configuration 0 (config-1)
+> >   Description:  default configuration
+> >   Kernel:       kernel-1
+> >   FDT:          fdt-1
+> >   Loadables:    tee-1
+> >   Sign algo:    sha1,rsa2048:dev
+> >   Sign value:
+>  22cd61395ae659917626ef88ebf82429d6d592a7975cf48eb1e301f81c8f2a9ae60e203e=
+283b8800971b72cd1b6bf93fb4f5f54d9bc4fb0f49ae0e48115ff087d8638f8080fdc9f72fb=
+fdd2228d60dba33849a75dba6958a134eefb9441b43f6f8319b7885c052c7993a7c791fe0ac=
+c577a629b04630060f02e24e82f9e5c8851c0df3d63da45ee5daeeabe198b990c2b8cbe2483=
+4763df299d8ed5a25cb90818caa23676e764d4d6e91e852451c1dae8a2946b9741e637b7556=
+b6ebf27fa9e0ad5252909d13da67179b40f5097cc29c4ac1539c0fb89b567e8ee2d56ef9270=
+7d2a9d82a090d35c66cf23e8e66e5c8da5e197ec4a0dd771ef4a3246f6f499850
+> >   Timestamp:    Thu Aug  3 15:47:15 2023
+> >
+>
+> That looks fine
+>
+> >
+> > I have tried to use an unsigned FIT before, but I also ran into the sam=
+e
+> error. In this case, do I simply disable the signature parts of the confi=
+g,
+> enable the legacy image format option and make the new image without any =
+of
+> the signing or are there other changes as well?
+>
+> Well no point in trying it then...you can normally just omit the signing
+> step.
+>
+> >
+> > Where would be an appropriate place to upload my FIT file to in order t=
+o
+> share a link?
+> >
+>
+> Google drive? Anything that allows public links.
+>
+> At this point, I think debugging it is the only option, as I mentioned
+> earlier. I don't know what rpi doesn't enable FIT by default, but
+> perhaps there is some reason.
+>
+> Regards,
+> Simon
+>
 
-diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
-index acad6397e8..927e1dc266 100644
---- a/doc/develop/uefi/u-boot_on_efi.rst
-+++ b/doc/develop/uefi/u-boot_on_efi.rst
-@@ -254,6 +254,82 @@ This shows running with serial enabled (see `include/configs/efi-x86_app.h`)::
- 
-    => QEMU: Terminated
- 
-+Run at VirtualBox (x86)
-+--------------------------
-+
-+Enable EFI
-+~~~~~~~~~~~~
-+At settings for virtual machine the flag at **System->Motherboard->Enable EFI (special OSes only)** has to be enabled.
-+
-+Installation
-+~~~~~~~~~~~~
-+Install the needed system at a VDI disk and connect this to SATA controller (type AHCI) at settings
-+for virtual machine at **System->Storage->Controller:SATA**.
-+
-+For the following description 3 partitions are assumed:
-+
-+- Partition 1: formatted as **vfat**, used for U-Boot and and its environment filesenvironment, flag **boot** set
-+- Partition 2: formatted as **ext2/ext4**, used for Linux image and boot configuration, flag **boot** set
-+- Partition 3: formatted as **ext4**, used for root file system
-+
-+Create an extlinux.conf or a boot script
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Following files are assumed to be located at system for boot configuration::
-+
-+ Partition  File                    Comment
-+ 1          EFI/BOOT/BOOTX64.efi    # renamed U-Boot EFI image
-+ 2          Image                   # Linux image 
-+ 2          Initrd                  # Initramfs of Linux
-+
-+Boot script
-+~~~~~~~~~~~
-+
-+The boot script **boot.scr** is assumed to be located at::
-+
-+ Partition  File        Comment
-+ 2          boot.scr    # Boot script, generated with mkimage from template 
-+
-+Content of **boot.scr**:
-+
-+.. code-block:: bash
-+
-+  ext4load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} ${prefix}Image
-+  setenv kernel_size ${filesize}
-+  ext4load ${devtype} ${devnum}:${distro_bootpart} ${ramdisk_addr_r} ${prefix}Initrd
-+  setenv initrd_size ${filesize}
-+  zboot  ${kernel_addr_r} ${kernel_size} ${ramdisk_addr_r} ${initrd_size}
-+
-+Extlinux configuration
-+~~~~~~~~~~~~~~~~~~~~~~
-+
-+Alternatively a configuration **extlinux.conf** can be used. **extlinux.conf** is assumed to be located at::
-+
-+ Partition  File                        Comment
-+ 2          extlinux/extlinux.conf      # Extlinux boot configuration
-+
-+Content of **extlinux.conf**:
-+
-+.. code-block:: bash
-+
-+  default l0
-+  menu title U-Boot menu
-+  prompt 0
-+  timeout 50
-+
-+  label l0
-+    menu label Linux
-+    linux /Image
-+    initrd /Initrd
-+
-+
-+Additionally something like (sda is assumed as disk device):
-+
-+.. code-block:: bash
-+
-+	append  root=/dev/sda3 console=tty0 console=ttyS0,115200n8 rootwait rw
-+
-+
- 
- Future work
- -----------
--- 
-2.30.2
 
+Hi Simon,
+
+I have uploaded my FIT file to google drive:
+https://drive.google.com/file/d/1Q4GMcrT8tzCCznPe1X_5JA3LLFarW6iO/view?usp=
+=3Ddrive_link
+
+I will now try and do some debugging, thank you very much for your help.
+
+Regards,
+Freddie
