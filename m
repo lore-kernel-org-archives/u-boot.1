@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15C80C30638
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 15:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A019C30638
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 15:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1208F86AEE;
-	Thu, 17 Aug 2023 17:10:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 56BE386B8E;
+	Thu, 17 Aug 2023 17:10:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l1JMvQ5a";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="atXIljOA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6668B86B0A; Thu, 17 Aug 2023 17:10:19 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 79A5286B67; Thu, 17 Aug 2023 17:10:26 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C5C986989
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:10:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5032486B18
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:10:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6bd0911c95dso6742719a34.3
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:10:16 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1c4de3b9072so3237104fac.3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:10:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692285015; x=1692889815;
+ d=konsulko.com; s=google; t=1692285022; x=1692889822;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kGUeifjQUdDsASUf3/rnCZ3Bhp5id9NaOLvYWKimalQ=;
- b=l1JMvQ5amdIIN9dEej4Bqqb32Qqk8z7xdYIlCvfWZpxqdI/YbD5wMNVPF9uswYp0kw
- ldydcSHa8jWbfvsjF10+09Nxcpd/0fmvOK+xNdKt3qUzwapOvwhhLPoUr9ele3yQnggd
- qS5hIkRPL70a/AmB5T8N8qKoBgUysOSw4+c8M=
+ bh=Z9pKSM5p9OxgXDNzV6fabMjU+qzT9Q5uGtLmoOH+n2M=;
+ b=atXIljOAbLUcsHxy1USPjsC4mRlLH/wYz4+Q7F9bHHuITdIC1bM9W5RB7/bzBwnZuR
+ Ozoz2qVeNDRA44ccw5wmwDnKbJA16WZ7uSRppOfcQGm7B7O00oRVGSxMabqcuQYEOqTZ
+ xc2Qpfl/TwY22ONi6P8u/7MVBSS5jNMM4XjzY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692285015; x=1692889815;
+ d=1e100.net; s=20221208; t=1692285022; x=1692889822;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kGUeifjQUdDsASUf3/rnCZ3Bhp5id9NaOLvYWKimalQ=;
- b=Vz1m63P27BNmktGpewTQfVmB3P2AvNbipXNsEax2fVAhj+Tal975ErjC33gLj0nHFf
- 0gRbv2jLY5+ZGi40x0OtfletEA7pgx3mZi+l8mq2V5GXrMWVVPzmtMnRMNCKONICMbf4
- tdnJ67DlgnFpxlJGRJSVNaW08J11qowIV7xZfNY4wEXXQEK9r9y8W31GLIMI8QtzPb1G
- Tc44Z0q3z2886huxrbO0Ae9uAZxEtBsnzRwF0bgYxbhJLj68ger4aonXnIATZvq4UbyY
- 9gaZEvpi7ZGC/wEumNQBMoH8EEJz5P0ec+4nEv5ktgdiAJzICukxcN4BOjpI7MwmIIic
- PGCQ==
-X-Gm-Message-State: AOJu0YzNs4Z8Xr5FCfj1AgDEeF4PgPof8mO4Jd+TQk5ARJC2Pm7ohJMt
- PXPL9IJDQBT4usNSx3+oUJR+tw==
-X-Google-Smtp-Source: AGHT+IHd528Fbm3QXjMDbtBvm7bq1yi1r9tPvAyjfffV+ypz/uON7fhN6afZGMPxIYalvS1ZhtqMlg==
-X-Received: by 2002:a05:6870:e40d:b0:1bb:b13c:7fa4 with SMTP id
- n13-20020a056870e40d00b001bbb13c7fa4mr6469214oag.26.1692285014765; 
- Thu, 17 Aug 2023 08:10:14 -0700 (PDT)
+ bh=Z9pKSM5p9OxgXDNzV6fabMjU+qzT9Q5uGtLmoOH+n2M=;
+ b=SarwNgN8WsZH8nE/gcSzmKtFUjeNZIci72Y8ssEcICw5DgEFPl6ijMrwSpD9EIlyDJ
+ ImGGD95Ds2Cp11DBk1xGIQQKLCejLXFGIDuIyL0V7ujqoCQoTmi7HPoHx1qB1QovkGUa
+ 3JEBYYEVC+FDf1bVOeFoEa/YNbetxelMUt8yMO4tQT58RpBRTReWLAx1ifzFuiL0U3ya
+ 0oeFNgO+KL3qvIViRKnvXLNi/yEJwQszyXK2vpZHq5wh1BE+/JG/MHevBUuQtc+Us1vF
+ QjzlY+giuTQsFipPrInMwelOF/ooOuQOFXIAyStxccUve6dCaVKHSMcCIvY0nbnsxqA8
+ JO2Q==
+X-Gm-Message-State: AOJu0YydJaeOwV+d0ri3qIUI1JXOdAe719/QoCXnOvXjGX4yTxlZKlAe
+ 1gduXafBwDh701pnt+Y+NDc5/VrAdEA2DRDxYcq7uQ==
+X-Google-Smtp-Source: AGHT+IHx4kM9issbfCbzoDacGsyb82fI73JvtmqLGrJkGJPmOBkuy6D0wQqzDnz889ACpF2uG0uTYA==
+X-Received: by 2002:a05:6871:154:b0:1c8:c37d:5e69 with SMTP id
+ z20-20020a056871015400b001c8c37d5e69mr2239538oab.52.1692285021907; 
+ Thu, 17 Aug 2023 08:10:21 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-8f9f-218d-98ab-058b.res6.spectrum.com.
  [2603:6081:7b00:6400:8f9f:218d:98ab:58b])
  by smtp.gmail.com with ESMTPSA id
- o123-20020a0dfe81000000b005773b750d95sm4634574ywf.28.2023.08.17.08.10.13
+ d63-20020a0df442000000b0057042405e2csm4656118ywf.71.2023.08.17.08.10.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 08:10:14 -0700 (PDT)
-Date: Thu, 17 Aug 2023 11:10:12 -0400
+ Thu, 17 Aug 2023 08:10:21 -0700 (PDT)
+Date: Thu, 17 Aug 2023 11:10:19 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com,
- rfried.dev@gmail.com, goldsimon@gmx.de, lwip-devel@nongnu.org
-Subject: Re: [PATCHv6 04/14] net/lwip: implement dhcp cmd
-Message-ID: <20230817151012.GC1515023@bill-the-cat>
-References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
- <20230814133253.4150-5-maxim.uvarov@linaro.org>
- <ZNo4cZtrSXa1dKXd@hades>
- <CAD8XO3a3N1j2G_Fjiws1S7praCDtLup=nrv4po--x6JmKKCfjQ@mail.gmail.com>
- <20230814152940.GZ3630934@bill-the-cat>
- <CAD8XO3Y7pYrd6nZm9kywbUpmOp7QsUchnb686XAq6WKyVBDGfw@mail.gmail.com>
- <CALeDE9MxnG4Xk=scFwG1zdrpYRQii4BRM04bxPOamzAzhhN7jQ@mail.gmail.com>
- <CAD8XO3aAyA-m6BAkOnxw9uF2w_kadgSAwF3iRU_uBw-jq9iJJA@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Strange gitlab idea
+Message-ID: <20230817151019.GD1515023@bill-the-cat>
+References: <CAPnjgZ0Gj==Q-YOU+EoD=s3h25Waw5EYa0DEOD_comoAy_bRMw@mail.gmail.com>
+ <20230813155208.GN3630934@bill-the-cat>
+ <CAPnjgZ2_y3coEzTh=3Y=-w=B+qFAmxM5CbCYsKDWvCNaeO_-Kg@mail.gmail.com>
+ <20230815145638.GY3630934@bill-the-cat>
+ <CAPnjgZ3Tj1kwVViSfnqEcApkQ=At3pkKVVrfft6zvD4JmnbMzw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7WrlGlaO/wbFeRAa"
+ protocol="application/pgp-signature"; boundary="CunrN4IHVnPZ06b0"
 Content-Disposition: inline
-In-Reply-To: <CAD8XO3aAyA-m6BAkOnxw9uF2w_kadgSAwF3iRU_uBw-jq9iJJA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3Tj1kwVViSfnqEcApkQ=At3pkKVVrfft6zvD4JmnbMzw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,164 +96,119 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7WrlGlaO/wbFeRAa
-Content-Type: text/plain; charset=utf-8
+--CunrN4IHVnPZ06b0
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 17, 2023 at 08:55:17PM +0600, Maxim Uvarov wrote:
-> On Thu, 17 Aug 2023 at 20:04, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Thu, Aug 17, 2023 at 07:41:50AM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
-> > On Thu, Aug 17, 2023 at 2:46=E2=80=AFPM Maxim Uvarov <maxim.uvarov@lina=
-ro.org>
-> > wrote:
-> > >
-> > > On Mon, 14 Aug 2023 at 21:29, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > > On Mon, Aug 14, 2023 at 09:18:19PM +0600, Maxim Uvarov wrote:
-> > > > > On Mon, 14 Aug 2023 at 20:21, Ilias Apalodimas <
-> > > > ilias.apalodimas@linaro.org>
-> > > > > wrote:
-> > > > >
-> > > > > > On Mon, Aug 14, 2023 at 07:32:43PM +0600, Maxim Uvarov wrote:
-> > > > > > > Implement function for dhcp command with lwIP variant. Usage =
-and
-> > > > output
-> > > > > > is
-> > > > > > > the same as the original command. This code called by
-> > compatibility
-> > > > code
-> > > > > > > between U-Boot and lwIP.
-> > > > > >
-> > > > > > Same as the dns command
-> > > > > >
-> > > > > > >
-> > > > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > > > > > > ---
-> > > > > > >  include/net/lwip.h             | 10 +++++++
-> > > > > > >  net/lwip/Makefile              |  1 +
-> > > > > > >  net/lwip/apps/dhcp/lwip-dhcp.c | 51
-> > > > ++++++++++++++++++++++++++++++++++
-> > > > > > >  3 files changed, 62 insertions(+)
-> > > > > > >  create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
-> > > > > > >
-> > > > > > > diff --git a/include/net/lwip.h b/include/net/lwip.h
-> > > > > > > index c83b5c8231..2f035280eb 100644
-> > > > > > > --- a/include/net/lwip.h
-> > > > > > > +++ b/include/net/lwip.h
-> > > > > > > @@ -15,3 +15,13 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int
-> > flag,
-> > > > int
-> > > > > > argc,
-> > > > > > >  *         Other value < 0, if error
-> > > > > > >  */
-> > > > > > >  int ulwip_dns(char *name, char *varname);
-> > > > > > > +
-> > > > > > > +/*
-> > > > > > > +* This function creates the DHCP request to obtain IP addres=
-s.
-> > If
-> > > > DHCP
-> > > > > > server
-> > > > > >
-> > > > > > Sphinx needs something more, please check the existing functions
-> > > > > >
-> > > > > > > +* returns file name, this file will be downloaded with tftp.
-> > After
-> > > > this
-> > > > > > > +* function you need to invoke the polling loop to process
-> > network
-> > > > > > communication.
-> > > > > > > +*
-> > > > > > > +* Return: 0 if success
-> > > > > > > +*         Other value < 0, if error
-> > > > > > > +*/
-> > > > > > > +int ulwip_dhcp(void);
-> > > > > > > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> > > > > > > index 6d2c00605b..59323fb325 100644
-> > > > > > > --- a/net/lwip/Makefile
-> > > > > > > +
-> > > > > > > +static struct dhcp dhcp;
-> > > > > > > +
-> > > > > > > +static int ulwip_dhcp_tmo(void)
-> > > > > > > +{
-> > > > > > > +     switch (dhcp.state) {
-> > > > > > > +     case DHCP_STATE_BOUND:
-> > > > > > > +             env_set("bootfile", dhcp.boot_file_name);
-> > > > > > > +             env_set("ipaddr",
-> > ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > > > > > > +             env_set("netmask",
-> > > > ip4addr_ntoa(&dhcp.offered_sn_mask));
-> > > > > > > +             env_set("serverip",
-> > > > ip4addr_ntoa(&dhcp.server_ip_addr));
-> > > > > > > +             printf("DHCP client bound to address %s\n",
-> > > > > > ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > > > > > > +             break;
-> > > > > > > +     default:
-> > > > > > > +             return -1;
-> > > > > > > +     }
-> > > > > > > +
-> > > > > > > +     return 0;
-> > > > > > > +}
-> > > > > > > +
-> > > > > > > +int ulwip_dhcp(void)
-> > > > > > > +{
-> > > > > > > +     int err;
-> > > > > > > +     struct netif *netif;
-> > > > > > > +
-> > > > > > > +     ulwip_set_tmo(ulwip_dhcp_tmo);
-> > > > > > > +     netif =3D netif_get_by_index(1);
-> > > > > >
-> > > > > > What's (1)?
-> > > > > >
-> > > > > >
-> > > > > Only one lwip netif is registered. 1 - here is the index of netif=
-=2E I
-> > > > don't
-> > > > > think that there is any definition for that...
-> > > > >
-> > > >
-> > > > And there's only ever going to be one interface (even if we have ip=
-v4
-> > > > and ipv60 ? If so, define it to something please, thanks.
-> > > >
-> > > > --
-> > > > Tom
-> > > >
-> > >
-> > > Yes, one interface has 2 addresses ipv4 and ipv6.
+> On Tue, 15 Aug 2023 at 08:56, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > What about a device like a router which may have multiple wired
-> > ethernet interface?
+> > On Tue, Aug 15, 2023 at 08:44:20AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Sun, 13 Aug 2023 at 09:52, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Sat, Aug 12, 2023 at 09:14:45PM -0600, Simon Glass wrote:
+> > > >
+> > > > > Hi Tom,
+> > > > >
+> > > > > I notice that the runners are not utilised much by the QEMU jobs,
+> > > > > since we only run one at a time.
+> > > > >
+> > > > > I wonder if we could improve this, perhaps by using a different t=
+ag
+> > > > > for the QEMU ones and then having a machine that only runs those =
+(and
+> > > > > runs 40 in parallel)?
+> > > > >
+> > > > > In general our use of the runners seems a bit primitive, since the
+> > > > > main use of parallelism is in the world builds.
+> > > >
+> > > > I'm honestly not sure. I think there's a few tweaks that we should =
+do,
+> > > > like putting the opensbi and coreboot files in to the Dockerfile lo=
+gic
+> > > > instead.  And maybe seeing if just like we can have a docker regist=
+ry
+> > > > cache, if we can setup local pypi cache too?  I'm not otherwise sure
+> > > > what's taking 23 seconds or so of
+> > > > https://source.denx.de/u-boot/u-boot/-/jobs/673565#L34 since the bu=
+ild
+> > > > and run parts aren't much.
+> > > >
+> > > > My first big worry about running 2 or 3 qemu jobs at the same time =
+on a
+> > > > host is that any wins get from a shorter queue will be lost to buil=
+dman
+> > > > doing "make -j$(nproc)" 2 or 3 times at once and so we build slower.
+> > >
+> > > Yes, perhaps.
+> > >
+> > > >
+> > > > My second big worry is that getting the right tags on runners will =
+be a
+> > > > little tricky.
+> > >
+> > > Yes, and error-prone. Also it makes it harder to deal with broken mac=
+hines.
+> > >
+> > > >
+> > > > My third big worry (but this is something you can test easy enough =
+at
+> > > > least) is that running the big sandbox tests, 2 or 3 times at once =
+on
+> > > > the same host will get much slower. I think, but profiling would be
+> > > > helpful, that those get slow due to I/O and not CPU.
+> > >
+> > > I suspect it would be fast enough.
+> > >
+> > > But actually the other problem is that I am not sure whether the jobs
+> > > would have their own filesystem?
+> >
+> > Yes, they should be properly sandboxed.  If you want to test some of
+> > these ideas, I think the best path is to just un-register temproarily
+> > (comment out the token in config.toml) some of your runners and then
+> > register them with just the DM tree and experiment.
 >=20
-> Yea, looks like we need lwip netif per U-Boots eth_devs. I did not yet
-> support several eth devices, but it will be good to add this to not break
-> existing functionality..
+> OK thanks for the idea. I tried this on tui
+>=20
+> I used a 'concurrent =3D 10' and it got up to a load of 70 or so every
+> now and then, but mostly it was much less.
+>=20
+> The whole run (of just the test.py stage) took 8 minutes, with
+> 'sandbox with clang test' taking the longest.
+>=20
+> I'm not too sure what that tells us...
 
-The general case ends up being if we have more than one interface,
-ethact is what's used.  I'm unsure off-hand if some of the fancier
-networking-centric chipsets and devices have something more complex
-setup in their stacks.
+Well, looking at
+https://source.denx.de/u-boot/u-boot/-/pipelines/17391/builds the whole
+run took 56 minutes, of which 46 minutes was on 32bit ARM world build.
+And the longest test.py stage was sandbox without LTO at just under 8
+minutes.  So I think trying to get more concurrency in this stage is
+likely to be a wash in terms of overall CI run time.
 
 --=20
 Tom
 
---7WrlGlaO/wbFeRAa
+--CunrN4IHVnPZ06b0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTeOFEACgkQFHw5/5Y0
-tyzhFQv/ROnJvuY5bd02yZerAXP4Lo7MBP3I3hFdIS+Ipx5O4Jl4N4merSNPnBvJ
-v6Jl164QpoCDFPyPkzKTOPLVK4HBc9t7CNijJ1J0UTFMEcb+TMA1iyAfZL29n6Wn
-uqLCGA1eG106nTa1GYlwbhX5/4n1aTUNMcjBdyeO4E/cUAaXeW0g/W/Z14ZccS3C
-WdK0KVxRVdIRE8HwQrC38qJ/Zf8Ryboh/Eh7B4iUWsvvhh8zvvOkrAFGHMvBKzXy
-UaZ9T/+vxQbbdl2o1prq7PFGuOEzMchR4uiLRUqOr/avBztfOe4pxRk/lePKk5qA
-8EyMbNuCEm8hV5gweNuKQ7s7Y4TXC4THsHnz7ksFL099F4Lkt3J8hiQ/UxzOlIjR
-3mP7LsyMa8WhrJo7uL8/TvdnyffVRCw+tgEHlaZABaYFQK4UqyXSM/kxfBvnKnt9
-dVoKfLI0UQajS3KeB/C7fwac25AvbJxRppnmVv/nutHboQE53ujtsDzLDkE2CZnI
-H2VCbpwC
-=2vWd
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTeOFsACgkQFHw5/5Y0
+tyzMogwAif8YIDmmuPV1YbGKvCf2OWnTF8MZIz25kstA7yoQ4jLyhp3djURtaSjE
+G9scGobYBzwKdt7TDGsX6xNw0QWRg7+kM5XUYowx5J/WmfwYuGJPNYPIQWKwD09x
+NR7JHu9orgxjsTGhBmiXBP2FiQ0pp6einOC+hDecYiCdiZGqjxniLI7nH1U9Wh4I
+dKYpi3j0+TFAkd5Jo3pVs3QEXrhX9+19WuNhg9RwS1/TeUmqxcZP/BiBvtvZfU8/
+5PsUHJxTVlalHy15DnBDByhtK3lLfrqSOicQYoZabYn5RdpadoHQiNBXLSlRKd09
+ddLSeYXCjJD6xfqWQ6NGWMTtoIodsx7YNybBV8Zjwwp4eR2bkihD8m9iBKaObqoF
+2rsNkwgj67576drEAFRTRrt8EseCILYT3jqDvu20+1quUbeR8wpRTpHd1gsnyJ+K
+80C6mgGKf5O8yZg6rBYxpc9ak5C6TDdipP03ZmpNHrAqwL9YA54+i2R/75uzinPF
+v1x2tMHD
+=8ToV
 -----END PGP SIGNATURE-----
 
---7WrlGlaO/wbFeRAa--
+--CunrN4IHVnPZ06b0--
