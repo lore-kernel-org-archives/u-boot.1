@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45FBBC2FC27
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:39:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE49AC2FC27
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:41:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B139D86B4D;
-	Thu, 17 Aug 2023 15:39:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 24F6B86B4D;
+	Thu, 17 Aug 2023 15:41:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mxJkBS51";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ewG9IT3G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACF5C86B50; Thu, 17 Aug 2023 15:39:39 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 7887286B50; Thu, 17 Aug 2023 15:41:49 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5EA186B40
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86FFB86B40
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:41:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fpidev23@gmail.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-58ddf1d7e59so1301787b3.1
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:39:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-525bd0b2b48so1454333a12.0
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:41:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692279575; x=1692884375;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KFsmxQNkyDQ/DQ1e8dVBGTulzb6sN+vCIBwX4/kMTUI=;
- b=mxJkBS51V6tB+w3Nuk9qnpSSOZPYh1b/F5l9l85MryTlgDEnOnoDwlOF3hs+BQUeQQ
- QvY6l4AUGjK2Uwd3TVm/dMsFIIx+5qqzLUy5n9hKRWBMMChUIavU/RmKQiPu4smBeXob
- A/d+lhRJoefEi29oeYGxG3yJ6+x0cDInHHVgRce72t8gSR9u7FcXREAIvz77aPMatBvE
- zUFTSm/ro9X1zm6GmzpaX5rYuKytvlLKDR6Iq621/YtOVlltCabQWrmgpiv81M2QlOKk
- 5C7vTJuBaddjnKE3frokTwTSLi1AYGU9tAl1hEYR/XU7hUIq70riOPONmz14dmE8ZWpx
- pbzA==
+ d=chromium.org; s=google; t=1692279706; x=1692884506;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fhZIrN76zoMg1/GePFauS8GBjZr6RMW8wpobafMjDXc=;
+ b=ewG9IT3GpVMfRSYbhUSwvy+I3atI9ypTx6++TQ3UReF8xyJ7SO1sj/Kkzc1CUveW5j
+ xUBMoaYah4SeuOC0+C4mRa8uGq7OKTpTItdlljowNSTfhPgaOS4Rx68DJSJ9SrNJJC/s
+ DdR4wEUSZBVSzxgkNAleFOu0IvMpxEXOkNU6o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692279575; x=1692884375;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KFsmxQNkyDQ/DQ1e8dVBGTulzb6sN+vCIBwX4/kMTUI=;
- b=AuNOtyg+fuAliZuKsjO0dHYAhwRHwHjJuopUgJ4MY8gzo2Z6EcKbd61glatsR/QjSJ
- MCNZCTVxFiLIATJvQuP2vPY7uZbF1zJOB/D0WAExf3HjJN8AQAOU0hbAu19sYpcHyTDJ
- Iyi1InDRDmR27QAeoRhzpi6DHYyFO9aOo9cEHm3ghT4WoarlvPHYVVLAyd3uFEDU/Wsp
- Oxbouv9+j6GNMHfRCroK47UOP9Khh8rWEWKTMIgH3dWuFnaD8okiKsbAQ1C2q97CCYBi
- vmftBD9P4yIOlaRBDt5scBQ+7ZmpcaczZDicC2CjFKEK6zOcA2BOYkLIS6ynloKYscNx
- WsiQ==
-X-Gm-Message-State: AOJu0YxI2mx4/FbqUYxhYg7TIMtSN3MjlJVshl3ofVLgp7wrA3fAyBfF
- gP7TYyCtoRHqmE2JzR1G1ScIAWAIVV5v5UGZugg=
-X-Google-Smtp-Source: AGHT+IHiWQD7F6B4WtUZC3JX6fu/dTwWcK9BTyj2iDIk/xbbhl3YzcD4hBnoTLG7HLfB5K0/3/oXmeWEY5CyeL+2KUE=
-X-Received: by 2002:a0d:d9c3:0:b0:573:2346:ea55 with SMTP id
- b186-20020a0dd9c3000000b005732346ea55mr3040286ywe.2.1692279575379; Thu, 17
- Aug 2023 06:39:35 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692279706; x=1692884506;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fhZIrN76zoMg1/GePFauS8GBjZr6RMW8wpobafMjDXc=;
+ b=e3z/TkO5SFMLZXryM5yGP4D+FdrUrrDgJpYqaGgUt4kLxp2Y278PDPOd4rtjEIqzgn
+ 8b+yZ444zYi3EHmOjS811dSYFUU9KjKx086/WAMGPUMxyeQR3yea2+RYtYFzygXg6+ah
+ n5jZJWmj/0y0YrTg/fqQ2X5zxAtVVFUJJsIljhVfU3pP7egrNb+XbP+jUXKX7i3PhgQH
+ EV2s50bP4eLwus9yjyGQB/5jnuxZQ+1s2sbYeuhOU65D7+gXw+jWpsOvwQKansz9Q9g0
+ tt84znjzNQkynwrMrNUISIzhD//b2SB9ovBxkSe8fq66tqdNC4dkkFIgsuSzwQG9KLcA
+ m4HQ==
+X-Gm-Message-State: AOJu0Yz5Pe1rhcTJ38AZ2ZwrHvAKPgAzZHPqK/K18FvpG/CMtyATxZrW
+ iBYHBolzfU6C9DG1FQm1aPj1+ac06ZNybJ4z3RNYJI0NnYBJh3myuwQ=
+X-Google-Smtp-Source: AGHT+IFpDjwlymUUDI2mhM11rPEg6H7zHW5rK5BdZYuhbkaWkBpLkcKTF1Z0HZ3ljohht8e5PMboPIp4rEqk55s/cO0=
+X-Received: by 2002:a05:6402:557:b0:525:76fc:f559 with SMTP id
+ i23-20020a056402055700b0052576fcf559mr3493750edx.41.1692279705870; Thu, 17
+ Aug 2023 06:41:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
- <CAPnjgZ1xraxjR56Peyqj8HL-HEg7pZ9EkrW2=NG+6vYG+qVfow@mail.gmail.com>
- <CAM2g9JN9J_i5G9ctaRrimGhSepLEoQ=c4c2VJAua+HzMkB25tA@mail.gmail.com>
- <CAPnjgZ2pcam0wMFnd43pRDwcDb3NEtckbgV6T_6CshPy4B2TdA@mail.gmail.com>
- <CAM2g9JM4M9HtNz5rXu57J0KNjz_BTmG_XmoSy+4EiHmW-J25qg@mail.gmail.com>
- <CAPnjgZ2-CfyNkHJwaL4uPyBnRTofgfXhtix2uLpr+a=t912xkA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2-CfyNkHJwaL4uPyBnRTofgfXhtix2uLpr+a=t912xkA@mail.gmail.com>
-From: Freddie <fpidev23@gmail.com>
-Date: Thu, 17 Aug 2023 14:39:23 +0100
-Message-ID: <CAM2g9JNW+rtE+zh=DFH39rg46MMc7Ct=On=0ZbObK3RdqdC94g@mail.gmail.com>
-Subject: Re: FIT Image not working in U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
+References: <20230805133208.788000-1-jonas@kwiboo.se>
+ <CAPnjgZ216Mm5cv=NhmPdqGiGKjzc3fte4fVAcMLYwwZhq6gbVA@mail.gmail.com>
+ <CAPnjgZ0yq8-pm-HQuKy2vUK5i92zmJZwsYxHeoS-4e51ERZcNg@mail.gmail.com>
+ <54280a6b-baa7-0885-26a6-0601d3a2a270@kwiboo.se>
+In-Reply-To: <54280a6b-baa7-0885-26a6-0601d3a2a270@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 17 Aug 2023 07:41:31 -0600
+Message-ID: <CAPnjgZ1uRKsJ1yorWZQuoL9xWtLCOh5HzprpAPesKFgS-oW_JQ@mail.gmail.com>
+Subject: Re: [RFC] dm: core: Report bootph-pre-ram/sram node as pre-reloc
+ after relocation
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,149 +86,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Aug 17, 2023 at 2:19=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
+Hi Jonas,
 
-> Hi Freddie,
+On Thu, 17 Aug 2023 at 00:25, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> On Thu, 17 Aug 2023 at 07:02, Freddie <fpidev23@gmail.com> wrote:
+> Hi Simon,
+>
+> On 2023-08-17 00:29, Simon Glass wrote:
+> > Hi Jonas,
 > >
-> > Hi Simon,
-> >
-> > I'm quite new to this so sorry for asking so many questions but where d=
+> > On Tue, 8 Aug 2023 at 20:03, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Jonas,
+> >>
+> >> On Sat, 5 Aug 2023 at 07:32, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>>
+> >>> Devices for nodes with e.g. bootph-pre-ram are initialized three time=
+s.
+> >>> 1. At SPL stage (always bind and probe only if used)
+> >>> 2. At U-Boot proper pre-reloc (always bind and probe)
+> >>> 3. At U-Boot proper normal (always bind and probe only if used)
+> >>>
+> >>> Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram pro=
+p
+> >>> with a pre-reloc status only after U-Boot proper pre-relocation stage=
+.
+> >>> This prevents the device from being probed at U-Boot proper pre-reloc=
+.
+> >>>
+> >>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >>> ---
+> >>> I am not sure if U-Boot proper pre-reloc behaves like this by design =
+and
+> >>> if there is some other way to signal that a device should not be prob=
+ed
+> >>> during U-Boot proper pre-reloc stage if it has been probed at SPL sta=
+ge.
+> >>>
+> >>> For my use-case I added bootph-pre-ram prop to my RK8xx device node t=
 o
-> I run the 'dump_image -l' command and which code should I look into addin=
-g
-> print statements to?
->
-> One thing is to add your reply at the bottom, not the top.
->
-> Actually it is 'dumpimage -l file.fit' to list the contents of your
-> fit file called 'file.fit'.  The program is built in the tools/
-> directory or your build, or you can
->
-> I mean if you are completely stumped, go to where the error is
-> generated and add lots of debugging around it. This is
-> boot_get_kernel() which is in v2021.10 is in common/bootm.c - so just
-> add lots of printf() stuff there, rebuild and run on the board and see
-> if you can figure out what is wrong. From my side I am really not
-> sure.
->
-> Feel free to share the FIT through a link if you like.
->
-> Also, you could try using a simple FIT without the signature part.
->
+> >>> make the PMIC usable in SPL. However, I have no need for this device =
+to
+> >>> probe at U-Boot proper pre-reloc stage just after jumping out of TF-A=
+.
+> >>> And moments later bind and probe yet again at U-Boot proper normal st=
+age.
+> >>>
+> >>> The bootph-pre-ram prop was used to have the device usable in SPL, el=
+se
+> >>> I could have used bootph-all or added bootph-some-ram prop to indicat=
+e
+> >>> use at U-Boot proper pre-reloc stage.
+> >>
+> >> This is changing how things work...we really need to have something
+> >> explicit to use this new behaviour. Perhaps we can augment the binding
+> >> in some way?
 > >
-> > I have also just looked into my .config file and this is the contents:
-> >
-> > #
-> > # Automatically generated file; DO NOT EDIT.
-> > # U-Boot 2021.10 Configuration
-> > #
-> >
-> [..]
+> > I had another look at this. The binding seems to be silent on this
+> > point, so I believe this patch is correct.
 >
-> > #
-> > # Boot images
-> > #
-> > # CONFIG_ANDROID_BOOT_IMAGE is not set
-> > CONFIG_FIT=3Dy
-> > CONFIG_FIT_EXTERNAL_OFFSET=3D0x0
-> > CONFIG_FIT_FULL_CHECK=3Dy
-> > CONFIG_FIT_SIGNATURE=3Dy
-> > CONFIG_FIT_SIGNATURE_MAX_SIZE=3D0x10000000
-> > # CONFIG_FIT_RSASSA_PSS is not set
-> > # CONFIG_FIT_CIPHER is not set
-> > # CONFIG_FIT_VERBOSE is not set
-> > # CONFIG_FIT_BEST_MATCH is not set
-> > CONFIG_FIT_PRINT=3Dy
-> > # CONFIG_LEGACY_IMAGE_FORMAT is not set
-> > CONFIG_SUPPORT_RAW_INITRD=3Dy
-> > CONFIG_OF_BOARD_SETUP=3Dy
-> > # CONFIG_OF_SYSTEM_SETUP is not set
-> > # CONFIG_OF_STDOUT_VIA_ALIAS is not set
-> > CONFIG_SYS_EXTRA_OPTIONS=3D""
-> > CONFIG_HAVE_SYS_TEXT_BASE=3Dy
-> > CONFIG_ARCH_FIXUP_FDT_MEMORY=3Dy
-> > # CONFIG_CHROMEOS is not set
-> > # CONFIG_CHROMEOS_VBOOT is not set
-> >
-> [..]
+> I agree, the documentation for binding and also for driver model make
+> this a little bit unclear:
 >
-> This has CONFIG_FIT and CONFIG_LEGACY_IMAGE_FORMAT is disabled (since
-> you have signature verification on).
+> """
+> ... Only drivers marked with DM_FLAG_PRE_RELOC or the device tree
+> =E2=80=98bootph-all=E2=80=99 property are initialised prior to relocation=
+. ...
 >
-> Regards,
-> Simon
+> ...
 >
+> It is possible to limit this to specific relocation steps, by using the
+> more specialized =E2=80=98bootph-pre-ram=E2=80=99 and =E2=80=98bootph-pre=
+-sram=E2=80=99 flags in the
+> device tree node. For U-Boot proper you can use =E2=80=98bootph-some-ram=
+=E2=80=99 which
+> means that it will be processed (and a driver bound) in U-Boot proper
+> prior to relocation, but will not be available in SPL or TPL.
+> """
+>
+> However the documentation for ofnode_pre_reloc contradict this a little:
+>
+> """
+> There are 4 settings currently in use
+> - bootph-some-ram: U-Boot proper pre-relocation only
+> - bootph-all: all phases
+> Existing platforms only use it to indicate nodes needed in
+> SPL. Should probably be replaced by bootph-pre-ram for new platforms.
+> - bootph-pre-ram: SPL and U-Boot pre-relocation
+> - bootph-pre-sram: TPL and U-Boot pre-relocation
+> """
+>
+> Should I send a v2 of this and drop the "and U-Boot pre-relocation" from
+> function doc comment? And do we need a new Kconfig option to enable or
+> opt-out of this new/changed/fixed behavior?
 
-Hi Simon,
+Yes it needs doc updates but I don't think a new Kconfig option is
+warranted at this point. We just need to clearly document how these
+options are used.
 
-Thank you for your advice, I'll make sure to reply at the bottom of the
-message from now on.
-
-I've run the dumpimage command and this was my output:
-root@freddie-pi-dev:/home/fit# ../optee/u-boot/tools/dumpimage -l image.fit
-FIT description: RPi FIT Image
-Created:         Thu Aug  3 15:47:15 2023
- Image 0 (kernel-1)
-  Description:  default kernel
-  Created:      Thu Aug  3 15:47:15 2023
-  Type:         Kernel Image
-  Compression:  uncompressed
-  Data Size:    20869632 Bytes =3D 20380.50 KiB =3D 19.90 MiB
-  Architecture: AArch64
-  OS:           Linux
-  Load Address: 0x12000000
-  Entry Point:  0x12000000
-  Hash algo:    sha1
-  Hash value:   08d43ed37129fa26e0f5f9d303a211b708c66783
- Image 1 (tee-1)
-  Description:  atf
-  Created:      Thu Aug  3 15:47:15 2023
-  Type:         Standalone Program
-  Compression:  uncompressed
-  Data Size:    1257464 Bytes =3D 1227.99 KiB =3D 1.20 MiB
-  Architecture: AArch64
-  Load Address: 0x08400000
-  Entry Point:  0x08400000
-  Hash algo:    sha1
-  Hash value:   4907d9c33098b2767cd6bc4bc9836f2f913464c7
- Image 2 (fdt-1)
-  Description:  device tree
-  Created:      Thu Aug  3 15:47:15 2023
-  Type:         Flat Device Tree
-  Compression:  uncompressed
-  Data Size:    32501 Bytes =3D 31.74 KiB =3D 0.03 MiB
-  Architecture: AArch64
-  Load Address: 0x01000000
-  Hash algo:    sha1
-  Hash value:   1b5bb266752cb247d89245c63bd041acfa34c7c0
- Default Configuration: 'config-1'
- Configuration 0 (config-1)
-  Description:  default configuration
-  Kernel:       kernel-1
-  FDT:          fdt-1
-  Loadables:    tee-1
-  Sign algo:    sha1,rsa2048:dev
-  Sign value:
-22cd61395ae659917626ef88ebf82429d6d592a7975cf48eb1e301f81c8f2a9ae60e203e283=
-b8800971b72cd1b6bf93fb4f5f54d9bc4fb0f49ae0e48115ff087d8638f8080fdc9f72fbfdd=
-2228d60dba33849a75dba6958a134eefb9441b43f6f8319b7885c052c7993a7c791fe0acc57=
-7a629b04630060f02e24e82f9e5c8851c0df3d63da45ee5daeeabe198b990c2b8cbe2483476=
-3df299d8ed5a25cb90818caa23676e764d4d6e91e852451c1dae8a2946b9741e637b7556b6e=
-bf27fa9e0ad5252909d13da67179b40f5097cc29c4ac1539c0fb89b567e8ee2d56ef92707d2=
-a9d82a090d35c66cf23e8e66e5c8da5e197ec4a0dd771ef4a3246f6f499850
-  Timestamp:    Thu Aug  3 15:47:15 2023
-
-
-I have tried to use an unsigned FIT before, but I also ran into the same
-error. In this case, do I simply disable the signature parts of the config,
-enable the legacy image format option and make the new image without any of
-the signing or are there other changes as well?
-
-Where would be an appropriate place to upload my FIT file to in order to
-share a link?
-
-Many thanks,
-Freddie
+Regards,
+SImon
