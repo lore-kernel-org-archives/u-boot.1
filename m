@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F4AC2FC04
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68A4C2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 04:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E6F386A7B;
-	Thu, 17 Aug 2023 03:58:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8E6FE86A30;
+	Thu, 17 Aug 2023 06:16:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bapMptQd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vS1Dk5pM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C89BE86A6B; Thu, 17 Aug 2023 03:58:08 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 30C7086A2B; Thu, 17 Aug 2023 06:16:08 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07B9B86A18
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:58:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14A2786927
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:16:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3a82db15081so6446b6e.0
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:58:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692237484; x=1692842284;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TipAsx+cK0KYZ5vCETNklQYS7616ixYO+ifarLLuRYg=;
- b=bapMptQd/6hsYy38sZNPpPTljVzTRLmYalWP1m1XAPxhdTeGdxFiWC4QzMfvax2qpw
- G9wD30wVJfLjsieMnETwxcQOGzI/CEpdhKaz7n/aWpzvXNdsju9uiLQjLet7jpWKvY8D
- kOSGATnlECkJYjNV8t9T1C2OkKuHLlo54utDI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692237484; x=1692842284;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TipAsx+cK0KYZ5vCETNklQYS7616ixYO+ifarLLuRYg=;
- b=DklP/hoQu5enf92LPsc3z0SqluCAwlsJePlFnyuapDt+d8DEkbdNoVh0wQLGs8Tp7a
- NPB2OdI/ndPwtuK5nc7wTTiSFcUjBmpsaRXIf9vroOJl/h6i6Ev/Sq6HZ+bH/hb+mmV3
- YCGVGBu9SSLaUeSZ3LQjDRcYm+/6ITCLo+GBZurLbsy2+Dknj5sPuViUudGXL3pLuh/y
- iVB3kMFSisgiv3sHl7XEXnZDm1oaUrToIEhn/TnPx/9wnYF3ZDFzpbRUr9OTUYOZSvHt
- kMQL9GNAZO1oCa3H6ohuw4TAUvhi7/6eEgGgMPQRmFo0M/PH9+yQdqMqjo1LKTfuCz1D
- nxpg==
-X-Gm-Message-State: AOJu0YxFXojwqDd63W0xhlgld6837rPf7BDeyqLbTwUT3Ca2sXQSn0yk
- eTx6L1nk8hr7eOhj5+uHxO1U/91qb+Q+hJSeVDM=
-X-Google-Smtp-Source: AGHT+IEwpfcmCAHRjt1+McMGtXqdXKvYmmjKT2oE+OuEeVyrwecKAJb6aNc3M+CqsU00ZTaUNrAsuA==
-X-Received: by 2002:a05:6808:1288:b0:3a7:6385:28ac with SMTP id
- a8-20020a056808128800b003a7638528acmr5382348oiw.4.1692237484619; 
- Wed, 16 Aug 2023 18:58:04 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- b12-20020aca674c000000b003a7b5193909sm7026471oiy.19.2023.08.16.18.58.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 18:58:04 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Paul Menzel <pmenzel@molgen.mpg.de>,
- Nable <nable.maininbox@googlemail.com>,
- Coreboot ML <coreboot@coreboot.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Konrad Dybcio <konrad.dybcio@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Subject: [PATCH v3 2/2] x86: Update cbmem driver
-Date: Wed, 16 Aug 2023 19:57:52 -0600
-Message-ID: <20230817015754.776507-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
-In-Reply-To: <20230817015754.776507-1-sjg@chromium.org>
-References: <20230817015754.776507-1-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37H4G2TR055347;
+ Wed, 16 Aug 2023 23:16:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692245762;
+ bh=OWvYL7Qlr+hTDigr1hD9QM/3suP9JVRC0AQJGncgtCU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=vS1Dk5pM50UiDdgvydW2aLkVNLrh3X4nTbXq9Xglg4Hj1JNbcA73vMWpWaFySh/Ro
+ 9vsAbXWK6saUZwEJPRUm2fiTSScZ1uuTOv3DHugSexMM1x8ZsiZ2QDtaIXYvGb9gD1
+ XsFIpqMljlJ9l4o52ECowtKfqOFTl8eGgETKPOLs=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37H4G2FX103523
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 16 Aug 2023 23:16:02 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 16
+ Aug 2023 23:15:57 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 16 Aug 2023 23:15:57 -0500
+Received: from [172.24.25.97] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37H4Fs1o002197;
+ Wed, 16 Aug 2023 23:15:55 -0500
+Message-ID: <787c1106-f4ec-383b-14cf-d055ceebf86b@ti.com>
+Date: Thu, 17 Aug 2023 09:45:54 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH 1/3] k3-j721s2: Sync from linux-next tag next-20230815
+To: Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>
+References: <20230816-b4-upstream-j721s2-r5-pinmux-v1-0-f4548452760a@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v1-1-f4548452760a@ti.com>
+ <20230816114445.c4c7rgdp5arhmiaq@polyester>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230816114445.c4c7rgdp5arhmiaq@polyester>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,108 +84,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver is not actually built since a Kconfig was never created for
-it.
 
-Add a Kconfig (which is already implied by COREBOOT) and update the
-implementation to avoid using unnecessary memory. Drop the #ifdef at the
-top since we can rely on Kconfig to get that right.
+On 8/16/2023 5:14 PM, Nishanth Menon wrote:
+> On 14:53-20230816, Manorit Chawdhry wrote:
+>> The following commit syncs the device tree from Linux tag
+>> next-20230815 to U-boot and fixes the following to be compatible with
+>> the future syncs -
+> [..]
+> +&mcu_timer0 {
+> +		/delete-property/ power-domains;
+> +		/delete-property/ assigned-clocks;
+> +		/delete-property/ assigned-clock-parents;
+> NAK - this should come in from R5 data.
 
-To enable it (in addition to serial and video), use:
+Having clock data for R5 will not help atleast for  timer.
 
-   setenv stdout serial,vidconsole,cbmem
+As timer is getting probed before the clk frame work comes up ,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> you should just have:
+> &mcu_timer0 {
+> 	clock-frequency = <250000000>;
+> 	bootph-pre-ram;
+> };
+>
+> Introduce the required data into the power / clock data for R5.
 
-(no changes since v2)
+> A72 side should just work fine with this since DM should be up and
+> running by this time.
 
-Changes in v2:
-- Update to support the new overflow mechanism
+This timer is not included in A72 ,
 
- drivers/misc/Kconfig         |  8 ++++++++
- drivers/misc/cbmem_console.c | 38 +++++++++++++++++++-----------------
- 2 files changed, 28 insertions(+), 18 deletions(-)
+so i suggest to keep any append/delete property in R5 specific files only
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index a6e3f62ecb09..c930e4a361bf 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -122,6 +122,14 @@ config VEXPRESS_CONFIG
- 	  configuration bus on the Arm Versatile Express boards via
- 	  a sysreg driver.
- 
-+config CBMEM_CONSOLE
-+	bool "Write console output to coreboot cbmem"
-+	depends on X86
-+	help
-+	  Enables console output to the cbmem console, which is a memory
-+	  region set up by coreboot to hold a record of all console output.
-+	  Enable this only if booting from coreboot.
-+
- config CMD_CROS_EC
- 	bool "Enable crosec command"
- 	depends on CROS_EC
-diff --git a/drivers/misc/cbmem_console.c b/drivers/misc/cbmem_console.c
-index 8bbe33d414da..7a47a814f638 100644
---- a/drivers/misc/cbmem_console.c
-+++ b/drivers/misc/cbmem_console.c
-@@ -5,27 +5,30 @@
- 
- #include <common.h>
- #include <console.h>
--#ifndef CONFIG_SYS_COREBOOT
--#error This driver requires coreboot
--#endif
--
- #include <asm/cb_sysinfo.h>
- 
--struct cbmem_console {
--	u32 buffer_size;
--	u32 buffer_cursor;
--	u8  buffer_body[0];
--}  __attribute__ ((__packed__));
--
--static struct cbmem_console *cbmem_console_p;
--
- void cbmemc_putc(struct stdio_dev *dev, char data)
- {
--	int cursor;
--
--	cursor = cbmem_console_p->buffer_cursor++;
--	if (cursor < cbmem_console_p->buffer_size)
--		cbmem_console_p->buffer_body[cursor] = data;
-+	const struct sysinfo_t *sysinfo = cb_get_sysinfo();
-+	struct cbmem_console *cons;
-+	uint pos, flags;
-+
-+	if (!sysinfo)
-+		return;
-+	cons = sysinfo->cbmem_cons;
-+	if (!cons)
-+		return;
-+
-+	pos = cons->cursor & CBMC_CURSOR_MASK;
-+	flags = cons->cursor & ~CBMC_CURSOR_MASK;
-+
-+	cons->body[pos++] = data;
-+	if (pos >= cons->size) {
-+		pos = 0;
-+		flags |= CBMC_OVERFLOW;
-+	}
-+
-+	cons->cursor = flags | pos;
- }
- 
- void cbmemc_puts(struct stdio_dev *dev, const char *str)
-@@ -40,7 +43,6 @@ int cbmemc_init(void)
- {
- 	int rc;
- 	struct stdio_dev cons_dev;
--	cbmem_console_p = lib_sysinfo.cbmem_cons;
- 
- 	memset(&cons_dev, 0, sizeof(cons_dev));
- 
--- 
-2.41.0.694.ge786442a9b-goog
 
+>
+> [...]
