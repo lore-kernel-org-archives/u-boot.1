@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8196CC27C7A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:45:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7C53C2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:45:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B92486A45;
-	Thu, 17 Aug 2023 07:45:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C458B86A51;
+	Thu, 17 Aug 2023 07:45:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="XUoEnzYP";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="pOQrOVQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C573986A3B; Thu, 17 Aug 2023 07:45:06 +0200 (CEST)
+ id ED47886A33; Thu, 17 Aug 2023 07:45:07 +0200 (CEST)
 Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
  (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4E7D86A4A
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:45:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BCDD8693A
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:45:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -29,37 +29,37 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=from:subject:in-reply-to:references:mime-version:to:cc:
  content-transfer-encoding:content-type:cc:content-type:from:subject:to;
- s=s1; bh=PSZHZcDpZlS0pz0p96pYbD9Fq/WccGdkWMgccpLYFIw=;
- b=XUoEnzYPIkwZm9VP2JSRpU1cZBX8Wcez/UbMq6iCbJaEO8/LqDjpgL3hXgI50PsL3zYz
- jtNATR98gl+9iI37/KuuQwPED7L9nVyD38r8eAFQa5a0tHyrR38jo3HsCHCVA/qTO8BbXy
- 8VpSXvcTVYaHzADgqxiGf992STGzgSaQ+FdudDGTX95CAD2M9N/zs+ybobmpU9Qt4ekR5B
- QoWpEqr3De+UZ8xVoQFfKkJW1znEl85L9fH0hUFvfHh3qWaNrLNL7dhRuz6va5ZjFUGmmp
- 9zCc8utGJFhvHjsLfBtCmOb0kAHRp3qBHMlAZdDgO4x8jNh2jYBR6vgkdZVe+5Gg==
-Received: by filterdrecv-77869f68cc-qljt4 with SMTP id
- filterdrecv-77869f68cc-qljt4-1-64DDB3DE-14
- 2023-08-17 05:45:02.317953713 +0000 UTC m=+8489342.760910283
+ s=s1; bh=nW65KjGed3+EtWiVzspMAR6N9gwMQqUSLtmCieeETjo=;
+ b=pOQrOVQcKluNxuUn5/tBnRfYaJl1Ej3GCdWVYbkZMkXJxlbqZp35OlhCJzQa5jILE43X
+ iH5NiOBhUcF3IaNLXpXJ17hyTs3aV/YFVMjXWPlDVHI2A3WF9fQyosMBO0NtxJ9DcX35Dg
+ 84QtPkbCggDfV6daWQjolovirmXD78OnxEOhG6EA53mKTRD7Ev+GLoBBPea8OaJDovj3EI
+ yI51gxs5Ml0HVp7WpY0Kif/DNOHuTAlobHEfUVD9G+lcLhcyvsS5GiPYVp1wbgIK1bZa5q
+ rhKK0jk3hsF3KLBc9cViW1PkHKflL0WZPYnbm4LoLxoenTaL1gAxjJP+Q+bEgvjw==
+Received: by filterdrecv-d7bbbc8bf-r6vsn with SMTP id
+ filterdrecv-d7bbbc8bf-r6vsn-1-64DDB3DF-93
+ 2023-08-17 05:45:03.800542824 +0000 UTC m=+4364931.997297312
 Received: from bionic.localdomain (unknown) by geopod-ismtpd-canary-0 (SG)
- with ESMTP id Oqc3ZZwjQ2GMMeaVw49nCg
- Thu, 17 Aug 2023 05:45:02.106 +0000 (UTC)
+ with ESMTP id 804i5vbcTNa_uLxZBcgMUw
+ Thu, 17 Aug 2023 05:45:03.596 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 1/2] power: pmic: rk8xx: Use sysreset implementation of the
- poweroff command
-Date: Thu, 17 Aug 2023 05:45:02 +0000 (UTC)
-Message-ID: <20230817054457.472342-2-jonas@kwiboo.se>
+Subject: [PATCH v2 2/2] rockchip: rk356x: Enable poweroff command
+Date: Thu, 17 Aug 2023 05:45:04 +0000 (UTC)
+Message-ID: <20230817054457.472342-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230817054457.472342-1-jonas@kwiboo.se>
 References: <20230817054457.472342-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h7XhqrxU0Np8b2lK9?=
- =?us-ascii?Q?8TZUJtg+oNokmfkQKO=2FIkt7femj4ssgifR46p8y?=
- =?us-ascii?Q?0HGcjVYEzBHQf6IyQIYNzBLNtILaRa2nGbpdpOy?=
- =?us-ascii?Q?rSmSh6w+kfuTEl4Y6u668PjAETq0IxTrvYny+Qs?=
- =?us-ascii?Q?VJO0ui50bhUWIn+51RCBFJswQEMGA6KAC5XoXa?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h0Lzda9GCx5D1Mysp?=
+ =?us-ascii?Q?BwNclZyqU1huUP1CWoI7Ivb4YNkEb9ighUCHbwb?=
+ =?us-ascii?Q?q2H=2FkfBW47HdNQIJsASIjtMCILERlyxszgZzJS=2F?=
+ =?us-ascii?Q?lTHqRyt3IfsIadiLhQi3AjVZ8B+ngqqHORRmKam?=
+ =?us-ascii?Q?9gqqwbHacjZnY6PTEaYsqXkApbLUjHGHTrDUzT?=
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jaehoon Chung
- <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Nicolas Frattaroli
+ <frattaroli.nicolas@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, Akash Gajjar
+ <gajjar04akash@gmail.com>
+Cc: u-boot@lists.denx.de
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset=us-ascii
@@ -79,8 +79,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select SYSRESET_CMD_POWEROFF to use the sysreset implementation of the
-poweroff command when PMIC_RK8XX is enabled.
+With PMIC_RK8XX, SYSRESET and CMD_POWEROFF options enabled it is
+possible to power down a board using the poweroff command and turn the
+board back on using a power button.
+
+Enable the poweroff command on RK356x boards that have a button wired
+to PMIC pwron.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -89,21 +93,60 @@ v2:
 - Split patch
 - Collect r-b tag
 
- drivers/power/pmic/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/quartz64-a-rk3566_defconfig       | 1 +
+ configs/quartz64-b-rk3566_defconfig       | 1 +
+ configs/rock-3a-rk3568_defconfig          | 1 +
+ configs/soquartz-model-a-rk3566_defconfig | 1 +
+ 4 files changed, 4 insertions(+)
 
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index 176fb07c651a..4a6f0ce093ad 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -233,6 +233,7 @@ config PMIC_QCOM
- 
- config PMIC_RK8XX
- 	bool "Enable support for Rockchip PMIC RK8XX"
-+	select SYSRESET_CMD_POWEROFF if SYSRESET && CMD_POWEROFF
- 	---help---
- 	The Rockchip RK808 PMIC provides four buck DC-DC convertors, 8 LDOs,
- 	an RTC and two low Rds (resistance (drain to source)) switches. It is
+diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
+index d55b224feacd..6853cd6c44b4 100644
+--- a/configs/quartz64-a-rk3566_defconfig
++++ b/configs/quartz64-a-rk3566_defconfig
+@@ -52,6 +52,7 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_PMIC=y
+diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
+index b98c81f9dcef..aa29fff14643 100644
+--- a/configs/quartz64-b-rk3566_defconfig
++++ b/configs/quartz64-b-rk3566_defconfig
+@@ -50,6 +50,7 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_PMIC=y
+diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
+index 44ff054df665..409aa95acf06 100644
+--- a/configs/rock-3a-rk3568_defconfig
++++ b/configs/rock-3a-rk3568_defconfig
+@@ -49,6 +49,7 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_PMIC=y
+diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz-model-a-rk3566_defconfig
+index c3958579db73..a0884a797d58 100644
+--- a/configs/soquartz-model-a-rk3566_defconfig
++++ b/configs/soquartz-model-a-rk3566_defconfig
+@@ -43,6 +43,7 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_PMIC=y
 -- 
 2.41.0
 
