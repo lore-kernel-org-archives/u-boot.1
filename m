@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C7CC3DA58
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 17:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7ACC3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 17:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85E1586B9A;
+	by phobos.denx.de (Postfix) with ESMTP id CEB9386BB9;
 	Thu, 17 Aug 2023 19:04:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JYrwBjfp";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FyjdG3X1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E65286BB4; Thu, 17 Aug 2023 19:04:21 +0200 (CEST)
+ id 49C7786BA1; Thu, 17 Aug 2023 19:04:21 +0200 (CEST)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D78E486B98
+ by phobos.denx.de (Postfix) with ESMTPS id D8CAC86B9A
  for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 19:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
@@ -29,39 +29,41 @@ Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 46E2A61589;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4EF9361F16;
  Thu, 17 Aug 2023 17:04:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A6C02C433C8;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AECA0C433C9;
  Thu, 17 Aug 2023 17:04:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1692291853;
- bh=HRI1qmWbSnnmrsMMWS7kDsrErXlHhOstH6hcX+XwmEQ=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=JYrwBjfpVt+2PcDnK4/4YBMq/9fIsT5QMmF7Qql+fmzz3rkX0F/ro0UozRrrsFYVr
- JyjeVCOA+S3XXoA2fSpvHZs1G2hjRKV2o65oCd3VLA1XF51ajWzX0QrLBS/EJXR729
- +2eJOthkzm/r8cElnAG0xundVmj9ReOXkYNmoF5avSnAZqlsoDZuvzJMKfmRu4kNtQ
- +RunMqDRq68F80k9fsVsJisAAuTS8Gea0oyoQt8a30iOtZ7cO+27NfzZ7IqTxZ9b5p
- Jo7xC2JA3hGpS56C9I4GnSsJj06YFzIGOiMlzvRLlkuOWYCjxcUbdQYZ+oYrGCzzmo
- jAyYGXdAMoutg==
+ bh=cKIj3uvlO/l+tZDUra4lHfkBYvbFh7g655JGfg8+a4A=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=FyjdG3X1Tq9GdesgWbY/m0tfihw5+ILQo4ugf3VsNyo4duztGQYyHXa52K+yrgS5W
+ LCgHgv1If792B+Prmd8p61NYrZZcq0C3MEXXtU9KWtHbZxbzYllUDnM7Yzlo8t3EzJ
+ tPBuxg2nGBLjxF90K2bDN6o3Sur4oJdj1GFDkgdVGP8GlVXngqXmC6IT9bcsATaV8p
+ UmP2Q+sDIgTOsAKyWGNh6lMX2xttmR22XCFtHbWStq3oMNJmH3duSPmRPS+iwIjAEw
+ ZavKvDjZI7FVQktBw+M0g1yLXBeauB2C7jczNNrMfacTDuuMdHkxa4LcHqF8gHrcUw
+ 0rLsp7Pwbu4FA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8E769C3DA54;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 9C6A6C3DA58;
  Thu, 17 Aug 2023 17:04:13 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Subject: [PATCH RESEND 0/5] clk: A few bugfixes/enhancements for CCF
-Date: Fri, 18 Aug 2023 01:03:59 +0800
-Message-Id: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
+Date: Fri, 18 Aug 2023 01:04:00 +0800
+Subject: [PATCH RESEND 1/5] clk: export clk_register_mux_table()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20230818-clk-fix-v1-1-49ec18f820bf@outlook.com>
+References: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
+In-Reply-To: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1692291852; l=867;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1692291852; l=922;
  i=forbidden405@outlook.com; s=20230724; h=from:subject:message-id;
- bh=HRI1qmWbSnnmrsMMWS7kDsrErXlHhOstH6hcX+XwmEQ=;
- b=qLjGHFPLpOBZwAplfku45AOn8a5U62PY551kdldrABgrJoHMi4bEclii61twB/JoOqa05Rxsm
- TM8yPof8cXDAnPGu4+XfSdMalaXc8CLY/J6MzDyrJycCOJV5rDeS67H
+ bh=rrxWAZujevzzupl/nb4QWkR3QDVpqMIWdYkkWfQ6VWg=;
+ b=p+Dym4mN6QSYD5cD/WWkx0ItGmcKQP+RF00a0c3G0z85VcPDKFNNGExqXyUKTqsghT5lyVEnk
+ 3MVA6fdSqeYC2xQVXWMzVzalgygVemwDIgfl/78ukSb/vsE6TGxpJVZ
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=qOD5jhp891/Xzc+H/PZ8LWVSWE3O/XCQnAg+5vdU2IU=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230724 with
@@ -84,28 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-They are found during my development for HiSilicon clock driver. Details
-are in commit logs.
+From: Yang Xiwen <forbidden405@outlook.com>
+
+It's already implemented in clk-mux.c, export it in the header file.
 
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
-Yang Xiwen (5):
-      clk: export clk_register_mux_table()
-      clk: call log_debug() instead to avoid console log printing
-      clk: also handle ENOENT in *_optional functions
-      clk: promote clk_dev_ops to linux/clk-provider.h
-      clk: ccf: call clock provided ops directly for endisable()
+ include/linux/clk-provider.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
- drivers/clk/clk-uclass.c     |  5 -----
- drivers/clk/clk.c            | 16 +++++++++++++---
- include/clk.h                |  8 +++++---
- include/linux/clk-provider.h | 11 +++++++++++
- 4 files changed, 29 insertions(+), 11 deletions(-)
----
-base-commit: 580eb31199be8a822e62f20965854a242f895d03
-change-id: 20230807-clk-fix-17e895f79817
+diff --git a/include/linux/clk-provider.h b/include/linux/clk-provider.h
+index b8acacd49e..801404480b 100644
+--- a/include/linux/clk-provider.h
++++ b/include/linux/clk-provider.h
+@@ -247,6 +247,12 @@ struct clk *clk_register_mux(struct device *dev, const char *name,
+ 		void __iomem *reg, u8 shift, u8 width,
+ 		u8 clk_mux_flags);
+ 
++struct clk *clk_register_mux_table(struct device *dev, const char *name,
++				   const char * const *parent_names, u8 num_parents,
++				   unsigned long flags,
++				   void __iomem *reg, u8 shift, u32 mask,
++				   u8 clk_mux_flags, u32 *table);
++
+ struct clk *clk_register_fixed_rate(struct device *dev, const char *name,
+ 				    ulong rate);
+ 
 
-Best regards,
 -- 
-Yang Xiwen <forbidden405@outlook.com>
+2.34.1
 
