@@ -4,89 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA1CC27C7A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 08:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9F03EB64DD
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 08:57:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F111286A92;
-	Thu, 17 Aug 2023 10:55:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 608D086AB3;
+	Thu, 17 Aug 2023 10:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="FjdL6F/l";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Nn9mEScM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 769A786A4F; Thu, 17 Aug 2023 10:55:16 +0200 (CEST)
+ id 02B9686AB2; Thu, 17 Aug 2023 10:57:26 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 552DA86AA5
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 10:55:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B1CE86A4F
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 10:57:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=T.Remmet@phytec.de
 DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1692262512; x=1694854512;
+ q=dns/txt; i=@phytec.de; t=1692262643; x=1694854643;
  h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=vZiBFzZsMzHYDQAzyPwJ0fWideW69f1jlBHy445shUk=;
- b=FjdL6F/laOtolrCO87zczutDaDSVSpthkNNPO1/tt3c+GNTFSUUK+e77m3ON3V+V
- T+50Q9B3cyZuIlIBmRsuMhmrZIda6ttl0PUKE9RN0z+QjIjv6Q33qRlyOg71JkFj
- cMrUKmNd2ZM+8n5XqW2pH9Lol+OzuV8RJs+5E4ONBw0=;
-X-AuditID: ac14000a-917fe70000007ecb-75-64dde0707312
-Received: from Diagnostix.phytec.de (Diagnostix.phytec.de [172.25.0.14])
+ bh=GkcPnTr+4LzVvQteCNczqy3fFXC8uoJciABFpcDsV+U=;
+ b=Nn9mEScMA0sE3f1rcu8ZQeRioeemyJsm4jPgyaEmhE+/5vjIm4mSr66NhvyBeJk2
+ w8EIG5jFOb7p6JyN30rmBqzUIFm6igKi6BSIngeh6zwhuAg0VyOY+5DO8XNBNNQC
+ z6q7ETmNpTgIpA/WQ1OLO/oXF9udOcPNDgBRwgVTNiM=;
+X-AuditID: ac14000a-917fe70000007ecb-ab-64dde0f308ed
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 99.C2.32459.070EDD46;
- Thu, 17 Aug 2023 10:55:12 +0200 (CEST)
-Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id A2.D2.32459.3F0EDD46;
+ Thu, 17 Aug 2023 10:57:23 +0200 (CEST)
+Received: from llp-tremmet2.fritz.box (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Thu, 17 Aug
- 2023 10:55:11 +0200
-Received: from Berlix.phytec.de ([fe80::61cc:ebf0:7375:8768]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2375.018;
- Thu, 17 Aug 2023 10:55:11 +0200
-From: Teresa Remmet <T.Remmet@phytec.de>
-To: "festevam@gmail.com" <festevam@gmail.com>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>, Yannic Moog
- <Y.Moog@phytec.de>
-CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Daniel Schultz
- <D.Schultz@phytec.de>, Wadim Egorov <W.Egorov@phytec.de>
-Subject: Re: [PATCH 6/6] board: phytec: phycore_imx8mp: Add 4000MTS RAM
- timings based on PCB rev
-Thread-Topic: [PATCH 6/6] board: phytec: phycore_imx8mp: Add 4000MTS RAM
- timings based on PCB rev
-Thread-Index: AQHZxepHENbCdF0EtUK/JHnouReFzq/uI7OA
-Date: Thu, 17 Aug 2023 08:55:11 +0000
-Message-ID: <1438ea22f208984b6614b17231bc25fbee29a737.camel@phytec.de>
-References: <20230718133555.6627-1-t.remmet@phytec.de>
- <20230718133555.6627-7-t.remmet@phytec.de>
- <cd54c5806adf6869717e5f1d27e6d9a7317ad10f.camel@phytec.de>
-In-Reply-To: <cd54c5806adf6869717e5f1d27e6d9a7317ad10f.camel@phytec.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <19F80B74A9486B40A297F9141F7DC696@phytec.de>
-Content-Transfer-Encoding: base64
+ 2023 10:57:22 +0200
+From: Teresa Remmet <t.remmet@phytec.de>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, "NXP i
+ . MX U-Boot Team" <uboot-imx@nxp.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Yannic Moog
+ <y.moog@phytec.de>, Daniel Schultz <d.schultz@phytec.de>, Wadim Egorov
+ <w.egorov@phytec.de>
+Subject: [PATCH v2 0/6] PHYTEC SoM detection for phyCORE-i.MX8MP
+Date: Thu, 17 Aug 2023 10:57:05 +0200
+Message-ID: <20230817085711.45339-1-t.remmet@phytec.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFIsWRmVeSWpSXmKPExsWyRpKBT7fgwd0Ug4bF3BYPr/pbtJ/ysXi7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPLMWRmVeSWpSXmKPExsWyRpKBR/fzg7spBo3tohYPr/pbtJ/ysXi7
  t5PdYsrj9ewW3e/UHVg95s06weKxc9Zddo+zd3YwevR3t7B6bHy3gymANYrLJiU1J7MstUjf
- LoEr49S7PcwFLQ4V/1tWsTcwbrDrYuTkkBAwkTi4eilbFyMXh5DAOiaJnqmLWSCcJ4wSx04d
- ZgOpEhLYyCjRvUIVxGYT0JB4eaKbCaRIRGAuo8TWLwtYQRxmga2MEkuaZjGCVAkLJEn0bPnL
- BGKLCCRLnHjSBmRzANlGEj8eFoCYLAKqEkf28oJU8Aq4SfQ87oRavIhRonfyelaQBKeAu8Tb
- v5+ZQWxGAVmJDRvOg9nMAuISm559Z4V4QUBiyR6IuISAqMTLx/+g4vISJ25NA1vLLKApsX6X
- PkSrhcSVD7fZIWxFiSndD9khbhCUODnzCcsERvFZSDbMQuiehaR7FpLuWUi6FzCyrmIUys1M
- zk4tyszWK8ioLElN1ktJ3cQIik8RBq4djH1zPA4xMnEwHmKU4GBWEuHt4b2VIsSbklhZlVqU
- H19UmpNafIhRmoNFSZz3fg9TopBAemJJanZqakFqEUyWiYNTqoExR/H1yv9uvxd95JxYelI7
- myMsR0D4D2NDwqyV22ulLwbHsp87zM3Pr1Z258A7rq71AiodfmcMilJZstKviXm8O9N/s8e/
- XWIyS9WP62psfnUvy5+ePFMh6z/5uFGm/P9dbyefnLHn+ZoKncTvP6K5VDZd0luyyzPxaO2U
- pp2uV5d63hGWVdiqxFKckWioxVxUnAgARTX4+r0CAAA=
+ LoEro/FvH3PBPKGKP6v/szYw3ufrYuTkkBAwkfj94jVrFyMXh5DAEiaJzjnNjBDOM0aJnXvn
+ s4NUsQloSDxdcZoJxBYRKJN42PuJGcRmFljMKLH6tyWILSzgILF9/jqwGhYBVYlD7c1gNbwC
+ 5hJPlrcxQ2yTl9h/8CxUXFDi5MwnLBBz5CWat86GmikhcfDFCzBbCCi+69JJRpjeaedeQ80J
+ lTiyaTXTBEaBWUhGzUIyahaSUQsYmVcxCuVmJmenFmVm6xVkVJakJuulpG5iBAWyCAPXDsa+
+ OR6HGJk4GA8xSnAwK4nw9vDeShHiTUmsrEotyo8vKs1JLT7EKM3BoiTOe7+HKVFIID2xJDU7
+ NbUgtQgmy8TBKdXAuMDq4H6ZIH1bZ7PzPel989IWT5+xIHBicdTugglyzac3fUzn3nZ26f89
+ DAGvDA9vXf15d7ADz6HS5DdKXz37c96F8ewXebnC/pp83VvxutW/91R2Pd0a99/onbnz/7Lm
+ uV37nWXtbsc7HLGZu+j4hViJrcxWQaZyPw+tUBB68ZXP+9vLgCdpCUosxRmJhlrMRcWJAN6m
+ AyxSAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,109 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gWWFubmljLAoKQW0gRG9ubmVyc3RhZywgZGVtIDAzLjA4LjIwMjMgdW0gMTE6MDkgKzAy
-MDAgc2NocmllYiBZYW5uaWMgTW9vZzoKPiBIZWxsbyBUZXJlc2EsCj4gCj4gT24gVHVlLCAyMDIz
-LTA3LTE4IGF0IDE1OjM1ICswMjAwLCBUZXJlc2EgUmVtbWV0IHdyb3RlOgo+ID4gU3RhcnRpbmcg
-d2l0aCBQQ0IgcmV2aXNpb24gMyB3ZSBjYW4gc2FmZWx5IG1ha2UgdXNlIG9mIGhpZ2hlciBSQU0K
-PiA+IGZyZXF1ZW5jeSBhZ2Fpbi4gTWFrZSB1c2Ugb2YgdGhlIEVFUFJPTSBkZXRlY3Rpb24gdG8g
-ZGV0ZXJtaW5lIHRoZQo+ID4gcmV2aXNpb24gYW5kIHVzZSB0aGUgdXBkYXRlZCBSQU0gdGltaW5n
-cyBmb3IgbmV3IFNvTXMuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFRlcmVzYSBSZW1tZXQgPHQu
-cmVtbWV0QHBoeXRlYy5kZT4KPiA+IC0tLQo+ID4gwqBib2FyZC9waHl0ZWMvcGh5Y29yZV9pbXg4
-bXAvc3BsLmMgfCA2MQo+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ID4gwqAx
-IGZpbGUgY2hhbmdlZCwgNjEgaW5zZXJ0aW9ucygrKQo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEvYm9h
-cmQvcGh5dGVjL3BoeWNvcmVfaW14OG1wL3NwbC5jCj4gPiBiL2JvYXJkL3BoeXRlYy9waHljb3Jl
-X2lteDhtcC9zcGwuYwo+ID4gaW5kZXggZTA4NGZlMDgxOTg3Li4yOTI5YzNjNTAwMDEgMTAwNjQ0
-Cj4gPiAtLS0gYS9ib2FyZC9waHl0ZWMvcGh5Y29yZV9pbXg4bXAvc3BsLmMKPiA+ICsrKyBiL2Jv
-YXJkL3BoeXRlYy9waHljb3JlX2lteDhtcC9zcGwuYwo+ID4gQEAgLTQ4LDYgKzQ4LDY3IEBAIHZv
-aWQgc3BsX2RyYW1faW5pdCh2b2lkKQo+ID4gwqAKPiA+IMKgwqDCoMKgwqDCoMKgwqBwaHl0ZWNf
-cHJpbnRfc29tX2luZm8oTlVMTCk7Cj4gPiDCoAo+ID4gK8KgwqDCoMKgwqDCoMKgcmV0ID0gcGh5
-dGVjX2dldF9yZXYoTlVMTCk7Cj4gPiArwqDCoMKgwqDCoMKgwqBpZiAocmV0ID49IDMgJiYgcmV0
-ICE9IFBIWVRFQ19FRVBST01fSU5WQUwpIHsKPiAKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqBkcmFtX3RpbWluZy5kZHJjX2NmZ1szXS52YWwgPSAweDEyMzM7Cj4gCj4gSSBiZWxp
-ZXZlIHlvdSBzd2FwcGVkIHRvIGRpZ2l0cyBoZXJlLCBpdCBzaG91bGQgYmUgMHgxMzIzLgoKYXJn
-aC4uIHllcy4gVGhhbmtzIGZvciB0aGUgcmV2aWV3LiBJIHdpbGwgZml4IHRoaXMgb25lIGFuZCB0
-aGUgb25lCmJlbG93IGluIHYyLgoKVGVyZXNhCgo+IAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzRdLnZhbCA9IDB4MWU4NDgwMDsKPiA+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5kZHJjX2NmZ1s1XS52YWwg
-PSAweDdhMDExODsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWlu
-Zy5kZHJjX2NmZ1s4XS52YWwgPSAweGMwMDMwN2EzOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzldLnZhbCA9IDB4YzUwMDAwOwo+ID4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzEwXS52YWwg
-PSAweGY0MDAzZjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWlu
-Zy5kZHJjX2NmZ1sxMV0udmFsID0gMHhmMzAwMDA7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdbMTRdLnZhbCA9IDB4MjAyODIyMmE7Cj4gPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdbMTVdLnZh
-bCA9IDB4ODA4M2Y7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1p
-bmcuZGRyY19jZmdbMTZdLnZhbCA9IDB4ZTBlMDAwOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzE3XS52YWwgPSAweDEyMDQwYTEyOwo+ID4g
-K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzE4XS52
-YWwgPSAweDIwNTBmMGY7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90
-aW1pbmcuZGRyY19jZmdbMTldLnZhbCA9IDB4MTAxMDAwOTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5kZHJjX2NmZ1syMF0udmFsID0gMHg1MDI7Cj4gPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdbMjFdLnZh
-bCA9IDB4MjA4MDA7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1p
-bmcuZGRyY19jZmdbMjJdLnZhbCA9IDB4ZTEwMDAwMjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqBkcmFtX3RpbWluZy5kZHJjX2NmZ1syM10udmFsID0gMHgxMjA7Cj4gPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdbMjRdLnZhbCA9
-IDB4YzgwMDY0Owo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5n
-LmRkcmNfY2ZnWzI1XS52YWwgPSAweDNlODAwMWU7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdbMjZdLnZhbCA9IDB4MzIwN2ExMjsKPiA+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5kZHJjX2NmZ1syOF0udmFs
-ID0gMHg0YTM4MjBlOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGlt
-aW5nLmRkcmNfY2ZnWzMwXS52YWwgPSAweDIzMGU7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdbMzddLnZhbCA9IDB4Nzk5Owo+ID4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzM4XS52YWwgPSAw
-eDkxNDFkMWM7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcu
-ZGRyY19jZmdbNzRdLnZhbCA9IDB4MzAyOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoGRyYW1fdGltaW5nLmRkcmNfY2ZnWzgzXS52YWwgPSAweDU5OTsKPiA+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5kZHJjX2NmZ1s5OV0udmFsID0gMHgzMDI7
-Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZGRyY19jZmdb
-MTA4XS52YWwgPSAweDU5OTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFt
-X3RpbWluZy5kZHJwaHlfY2ZnWzY2XS52YWwgPSAweDE4Owo+ID4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcnBoeV9jZmdbNzVdLnZhbCA9IDB4MWUzOwo+ID4g
-K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcnBoeV9jZmdbNzdd
-LnZhbCA9IDB4MWUzOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGlt
-aW5nLmRkcnBoeV9jZmdbNzldLnZhbCA9IDB4MWUzOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcnBoeV9jZmdbMTQ1XS52YWwgPSAweDNlODsKPiA+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5mc3BfbXNnWzBdLmRyYXRl
-ID0gNDAwMDsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5m
-c3BfbXNnWzBdLmZzcF9jZmdbMV0udmFsID0gMHhmYTA7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZnNwX21zZ1swXS5mc3BfY2ZnWzEwXS52YWwgPSAweDNm
-ZjQ7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZnNwX21z
-Z1swXS5mc3BfY2ZnWzExXS52YWwgPSAweGYzOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoGRyYW1fdGltaW5nLmZzcF9tc2dbMF0uZnNwX2NmZ1sxNV0udmFsID0gMHgzZmY0Owo+
-ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmZzcF9tc2dbMF0u
-ZnNwX2NmZ1sxNl0udmFsID0gMHhmMzsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBkcmFtX3RpbWluZy5mc3BfbXNnWzBdLmZzcF9jZmdbMjJdLnZhbCA9IDB4ZjQwMDsKPiA+ICvC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5mc3BfbXNnWzBdLmZzcF9j
-ZmdbMjNdLnZhbCA9IDB4ZjMzZjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBk
-cmFtX3RpbWluZy5mc3BfbXNnWzBdLmZzcF9jZmdbMjhdLnZhbCA9IDB4ZjQwMDsKPiA+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5mc3BfbXNnWzBdLmZzcF9jZmdb
-MjldLnZhbCA9IDB4ZjMzZjsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFt
-X3RpbWluZy5mc3BfbXNnWzNdLmRyYXRlID0gNDAwMDsKPiAKPiA+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5mc3BfbXNnWzNdLmZzcF9jZmdbMV0udmFsID0gMHhi
-Yjg7Cj4gCj4gQW5kIGZvciB0aGlzIGVudHJ5LCBJIGdldCAweGZhMC4KPiAKPiBZYW5uaWMKPiAK
-PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5mc3BfbXNnWzNd
-LmZzcF9jZmdbMTFdLnZhbCA9IDB4M2ZmNDsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBkcmFtX3RpbWluZy5mc3BfbXNnWzNdLmZzcF9jZmdbMTJdLnZhbCA9IDB4ZjM7Cj4gPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZnNwX21zZ1szXS5mc3Bf
-Y2ZnWzE2XS52YWwgPSAweDNmZjQ7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-ZHJhbV90aW1pbmcuZnNwX21zZ1szXS5mc3BfY2ZnWzE3XS52YWwgPSAweGYzOwo+ID4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmZzcF9tc2dbM10uZnNwX2NmZ1sy
-M10udmFsID0gMHhmNDAwOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1f
-dGltaW5nLmZzcF9tc2dbM10uZnNwX2NmZ1syNF0udmFsID0gMHhmMzNmOwo+ID4gK8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmZzcF9tc2dbM10uZnNwX2NmZ1syOV0u
-dmFsID0gMHhmNDAwOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGlt
-aW5nLmZzcF9tc2dbM10uZnNwX2NmZ1szMF0udmFsID0gMHhmMzNmOwo+ID4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoGRyYW1fdGltaW5nLmRkcnBoeV9waWVbNDgwXS52YWwgPSAweDQ2
-NTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBkcmFtX3RpbWluZy5kZHJwaHlf
-cGllWzQ4MV0udmFsID0gMHhmYTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBk
-cmFtX3RpbWluZy5kZHJwaHlfcGllWzQ4Ml0udmFsID0gMHg5YzQ7Cj4gPiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgZHJhbV90aW1pbmcuZnNwX3RhYmxlWzBdID0gNDAwMDsKPiA+ICvC
-oMKgwqDCoMKgwqDCoH0KPiA+ICsKPiA+IMKgb3V0Ogo+ID4gwqDCoMKgwqDCoMKgwqDCoGRkcl9p
-bml0KCZkcmFtX3RpbWluZyk7Cj4gPiDCoH0KPiAKCi0tIApQSFlURUMgTWVzc3RlY2huaWsgR21i
-SCB8IEJhcmNlbG9uYS1BbGxlZSAxIHwgNTUxMjkgTWFpbnosIEdlcm1hbnkKCkdlc2Now6RmdHNm
-w7xocmVyOiBEaXBsLi1JbmcuIE1pY2hhZWwgTWl0ZXpraSwgRGlwbC4tSW5nLiBCb2RvIEh1YmVy
-LApEaXBsLi1JbmcuIChGSCkgTWFya3VzIExpY2tlcyB8IEhhbmRlbHNyZWdpc3RlciBNYWlueiBI
-UkIgNDY1NiB8CkZpbmFuemFtdCBNYWlueiB8IFN0Lk5yLiAyNjY1MDA2MDgsIERFIDE0OTA1OTg1
-NQo=
+second version of the series to add support for EEPROM SoM detection used
+by different PHYTEC SoMs. The EEPROM data consist of 32 bytes containing
+information like PCB revision, RAM size and other SoM specific
+configuration.
+
+For SoMs of the i.MX8M family the data is written to two areas of the
+used i2c EEPROM.
+
+We initally add the detection support for phyCORE-i.MX8MP. Due to layout
+constraints phyCORE-i.MX8MP SoMs with PCB revision 2 and older can only
+make use of a lower RAM frequency. This changes with the use of newer PCB
+revisions. We make use of the factory flashed EEPROM data to detect the
+PCB revision and select the fitting RAM settings.
+
+Changes in v2:
+- fix wrong RAM Timing values as pointed out by Yannic
+- removed superfluous goto
+- removed blank line at EOF
+- fix string conversion to integer
+- fix typo s/revsions/revisions
+
+Teresa
+
+Teresa Remmet (6):
+  board: phytec: Add common PHYTEC SoM detection
+  board: phytec: common: Add imx8m specific EEPROM detection support
+  board: phytec: phycore-imx8mp: Add EEPROM detection initialisation
+  board: phytec: phycore_imx8mp: Update 2GB RAM Timings
+  board: phytec: common: phytec_som_detection: Add helper for PCB
+    revision
+  board: phytec: phycore_imx8mp: Add 4000MTS RAM timings based on PCB
+    rev
+
+ board/phytec/common/Kconfig                 |  13 +
+ board/phytec/common/Makefile                |  11 +
+ board/phytec/common/imx8m_som_detection.c   | 168 ++++++++++++
+ board/phytec/common/imx8m_som_detection.h   |  54 ++++
+ board/phytec/common/phytec_som_detection.c  | 203 ++++++++++++++
+ board/phytec/common/phytec_som_detection.h  | 109 ++++++++
+ board/phytec/phycore_imx8mp/Kconfig         |   1 +
+ board/phytec/phycore_imx8mp/lpddr4_timing.c | 278 ++++++++++----------
+ board/phytec/phycore_imx8mp/spl.c           |  78 ++++++
+ configs/phycore-imx8mp_defconfig            |   1 +
+ 10 files changed, 773 insertions(+), 143 deletions(-)
+ create mode 100644 board/phytec/common/Kconfig
+ create mode 100644 board/phytec/common/Makefile
+ create mode 100644 board/phytec/common/imx8m_som_detection.c
+ create mode 100644 board/phytec/common/imx8m_som_detection.h
+ create mode 100644 board/phytec/common/phytec_som_detection.c
+ create mode 100644 board/phytec/common/phytec_som_detection.h
+
+-- 
+2.34.1
+
