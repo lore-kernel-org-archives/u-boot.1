@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F385AEB64DD
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 06:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B553DC2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 06:04:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE3E186A63;
-	Thu, 17 Aug 2023 08:04:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E9E986A76;
+	Thu, 17 Aug 2023 08:04:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="XvOqTjNo";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="pPTJvdsO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA14186A63; Thu, 17 Aug 2023 08:04:38 +0200 (CEST)
-Received: from s.wrqvwxzv.outbound-mail.sendgrid.net
- (s.wrqvwxzv.outbound-mail.sendgrid.net [149.72.154.232])
+ id C814186A6E; Thu, 17 Aug 2023 08:04:40 +0200 (CEST)
+Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
+ (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1750586A45
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:04:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B91B86A2B
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:04:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -29,34 +29,39 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=from:subject:in-reply-to:references:mime-version:to:cc:
  content-transfer-encoding:content-type:cc:content-type:from:subject:to;
- s=s1; bh=gWAOWpgG66jBlgnYACjRRfpv2xR95eLP9s1jmAsSN6k=;
- b=XvOqTjNoResqYATareP0MGchFOkyDKQa9vkAZxahddTPuvt8Xco928j27vKob/+payPS
- XuhJZ3yFrUC08GT+f7luGdCIHPwzDUdhPL5SN+IaohQ9cCyIbG+mXVBSFH912sEh66DeCU
- KaQYuWZgT/9bW+VdMmFKMrHrKRTYh2jnPEDI/ufZUUlEufEDqFfjJNuWIZyR8lovmPMXjP
- 5Hg5LVq6MSmk181PunOlN+TFnuV7F7PR3pt4nObmZpNtMdyGPWhZlPu4RAGej+KAn6rKeA
- XEMJJH7ddQpO20Kz6sGh60feHMJqNGl7/DnXpALG5qVgzMVjxuLqKP38OyAAZYBw==
-Received: by filterdrecv-66949dbc98-2wdbb with SMTP id
- filterdrecv-66949dbc98-2wdbb-1-64DDB872-1B
- 2023-08-17 06:04:34.607999567 +0000 UTC m=+8490281.895247968
+ s=s1; bh=e8RHNDCtD7m4rHNlaZj+hOXKowghulG6VWYSwHGrLlg=;
+ b=pPTJvdsOVZBfPcNwwL9tBIPWaDwpZnC9UFq7j/11M97CEOmaJnmqYjKcjHSrGf6VeQOp
+ /FmAma//yPsYBYZ73gdA6kq2hTb1K7gZp26IZpOlqVGK8UR+/TMVt/bt4J2+ynHTw/LC/2
+ j2OcVJauzGtrrPGIkdQQhsQuSVT+af2wA2Z7aPKBptWmkwPTiE+oiAs/EumKfg0suzCdZ0
+ tcEpLlVrSO67xKULDiqYK6z2AU3bfn+612RmZ4uMRAXaFVvBReq7r3H0xSj+FKFPr+jnNP
+ tSDg71brI3faLrgKNz9XtFOBhBHA8eaHGyQ0VE6I6/m4wY3jbnCVN6DT5/J0Q/gQ==
+Received: by filterdrecv-d7bbbc8bf-b8xkx with SMTP id
+ filterdrecv-d7bbbc8bf-b8xkx-1-64DDB874-1A
+ 2023-08-17 06:04:36.455756777 +0000 UTC m=+8490289.969106039
 Received: from bionic.localdomain (unknown) by geopod-ismtpd-8 (SG) with ESMTP
- id nDKkVH-STSiQipTIqgjXiQ Thu, 17 Aug 2023 06:04:34.421 +0000 (UTC)
+ id 4nSGcpSXT72tNSG3fKi3jg Thu, 17 Aug 2023 06:04:36.195 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 1/3] doc: rockchip: Add supported RK3566/RK3568 boards
-Date: Thu, 17 Aug 2023 06:04:34 +0000 (UTC)
-Message-ID: <20230817060422.477759-2-jonas@kwiboo.se>
+Subject: [PATCH 2/3] board: rockchip: rk35xx: Add device tree files to
+ MAINTAINERS
+Date: Thu, 17 Aug 2023 06:04:36 +0000 (UTC)
+Message-ID: <20230817060422.477759-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230817060422.477759-1-jonas@kwiboo.se>
 References: <20230817060422.477759-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h6p72mrMXJRtQePd+?=
- =?us-ascii?Q?f3pdCSGddb9ibDJf=2FM4PpI1jQy1llLTqmKRP9gF?=
- =?us-ascii?Q?YPxo=2FI9EgISonT2OwjRxKlR8pbuQf75MZ7WdEHM?=
- =?us-ascii?Q?KF6RB50PA9ZI24OAaUAvHg6+M9=2FpEJuX4Tlui75?=
- =?us-ascii?Q?dVgCahSkZqYFzRNpucGkQYcExSiiF4J=2F+n4MNa?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h9oeo1yH3j1gNDv1o?=
+ =?us-ascii?Q?r=2F9YYg14xtwZ2adLVvCpHX46SsGiOaLF6r3PSkC?=
+ =?us-ascii?Q?7Uy68lBZKNRrWq7Or2ZWt4j2HPfVji5CjnLa+1S?=
+ =?us-ascii?Q?OmsNVVLIhcl6VQStTJaY57ZyvVxhig+86=2FG5v90?=
+ =?us-ascii?Q?FyfU8lZMYs4b1GII6yklJnc+txSEUMc6lex=2FFM?=
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Chris Morgan <macromorgan@hotmail.com>,
+ Jagan Teki <jagan@edgeble.ai>, Jonas Karlman <jonas@kwiboo.se>, Joseph Chen
+ <chenjh@rock-chips.com>
+Cc: u-boot@lists.denx.de
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset=us-ascii
@@ -76,50 +81,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update Rockchip documentation to include RK3566/RK3568 boards already
-supported. Also list Pine64 boards under RK3566 and drop defconfig to
-match other listed boards.
+Update MAINTAINERS files for RK3566/RK3568/RK3588 boards to include
+related device tree files. Also replace space with tabs.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- doc/board/rockchip/rockchip.rst | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+ board/anbernic/rgxx3_rk3566/MAINTAINERS       |  3 ++
+ .../neural-compute-module-6/MAINTAINERS       |  6 +++
+ board/radxa/rock5a-rk3588s/MAINTAINERS        |  2 +
+ board/radxa/rock5b-rk3588/MAINTAINERS         |  4 +-
+ board/rockchip/evb_rk3568/MAINTAINERS         | 51 ++++++++++---------
+ board/rockchip/evb_rk3588/MAINTAINERS         |  3 +-
+ 6 files changed, 43 insertions(+), 26 deletions(-)
 
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 31aeb8567607..4668e598515e 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -91,18 +91,22 @@ List of mainline supported Rockchip boards:
-      - Theobroma Systems RK3399-Q7 SoM - Puma (puma_rk3399)
+diff --git a/board/anbernic/rgxx3_rk3566/MAINTAINERS b/board/anbernic/rgxx3_rk3566/MAINTAINERS
+index 1c0d3fe7b5bf..6be16a47e8eb 100644
+--- a/board/anbernic/rgxx3_rk3566/MAINTAINERS
++++ b/board/anbernic/rgxx3_rk3566/MAINTAINERS
+@@ -4,3 +4,6 @@ S:	Maintained
+ F:	board/anbernic/rgxx3_rk3566
+ F:	include/configs/anbernic-rgxx3-rk3566.h
+ F:	configs/anbernic-rgxx3_defconfig
++F:	arch/arm/dts/rk3566-anbernic-rgxx3.dts
++F:	arch/arm/dts/rk3566-anbernic-rgxx3.dtsi
++F:	arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
+diff --git a/board/edgeble/neural-compute-module-6/MAINTAINERS b/board/edgeble/neural-compute-module-6/MAINTAINERS
+index bc7f9b0e680d..42e5df506bf3 100644
+--- a/board/edgeble/neural-compute-module-6/MAINTAINERS
++++ b/board/edgeble/neural-compute-module-6/MAINTAINERS
+@@ -5,3 +5,9 @@ F:	board/edgeble/neural-compute-module-6
+ F:	include/configs/neural-compute-module-6.h
+ F:	configs/neu6a-io-rk3588_defconfig
+ F:	configs/neu6b-io-rk3588_defconfig
++F:	arch/arm/dts/rk3588-edgeble-neu6a.dtsi
++F:	arch/arm/dts/rk3588-edgeble-neu6a-io.dts
++F:	arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
++F:	arch/arm/dts/rk3588-edgeble-neu6b.dtsi
++F:	arch/arm/dts/rk3588-edgeble-neu6b-io.dts
++F:	arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
+diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
+index 62fb6b4c0eea..05750269b8dd 100644
+--- a/board/radxa/rock5a-rk3588s/MAINTAINERS
++++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
+@@ -4,3 +4,5 @@ S:	Maintained
+ F:	board/radxa/rock5a-rk3588s
+ F:	include/configs/rock5a-rk3588s.h
+ F:	configs/rock5a-rk3588s_defconfig
++F:	arch/arm/dts/rk3588s-rock-5a.dts
++F:	arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+diff --git a/board/radxa/rock5b-rk3588/MAINTAINERS b/board/radxa/rock5b-rk3588/MAINTAINERS
+index 693751e583d9..734115a4a3dc 100644
+--- a/board/radxa/rock5b-rk3588/MAINTAINERS
++++ b/board/radxa/rock5b-rk3588/MAINTAINERS
+@@ -2,5 +2,7 @@ ROCK5B-RK3588
+ M:	Eugen Hristev <eugen.hristev@collabora.com>
+ S:	Maintained
+ F:	board/radxa/rock5b-rk3588
+-F:	include/configs/rock5b-rk3588
++F:	include/configs/rock5b-rk3588.h
+ F:	configs/rock5b-rk3588_defconfig
++F:	arch/arm/dts/rk3588-rock-5b.dts
++F:	arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+index 1cdeafcf79b2..5a2ec13e21ee 100644
+--- a/board/rockchip/evb_rk3568/MAINTAINERS
++++ b/board/rockchip/evb_rk3568/MAINTAINERS
+@@ -1,13 +1,13 @@
+ EVB-RK3568
+-M:      Joseph Chen <chenjh@rock-chips.com>
+-S:      Maintained
+-F:      board/rockchip/evb_rk3568
+-F:      include/configs/evb_rk3568.h
+-F:      configs/evb-rk3568_defconfig
+-F:	arch/arm/dts/rk3568-evb-boot.dtsi
++M:	Joseph Chen <chenjh@rock-chips.com>
++S:	Maintained
++F:	board/rockchip/evb_rk3568
++F:	include/configs/evb_rk3568.h
++F:	configs/evb-rk3568_defconfig
++F:	arch/arm/dts/rk3568-evb-u-boot.dtsi
+ F:	arch/arm/dts/rk3568-evb.dts
  
- * rk3566
--     - Anbernic RGxx3 (rgxx3-rk3566)
-+     - Anbernic RGxx3 (anbernic-rgxx3)
-+     - Pine64 Quartz64-A Board (quartz64-a-rk3566)
-+     - Pine64 Quartz64-B Board (quartz64-b-rk3566)
-+     - Pine64 SOQuartz on Blade (soquartz-blade-rk3566)
-+     - Pine64 SOQuartz on CM4-IO (soquartz-cm4-rk3566)
-+     - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
-+     - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
+-Lubancat-2
++LUBANCAT-2
+ M:	Andy Yan <andyshrk@163.com>
+ S:	Maintained
+ F:	configs/lubancat-2-rk3568_defconfig
+@@ -15,24 +15,27 @@ F:	arch/arm/dts/rk3568-lubancat-2.dts
+ F:	arch/arm/dts/rk3568-lubancat-2-u-boot.dtsi
  
- * rk3568
-      - Rockchip Evb-RK3568 (evb-rk3568)
--     - EmbedFire Lubancat 2 (lubancat-2-rk3568_defconfig)
-+     - EmbedFire LubanCat 2 (lubancat-2-rk3568)
-+     - FriendlyElec NanoPi R5C (nanopi-r5c-rk3568)
-+     - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
-      - Hardkernel ODROID-M1 (odroid-m1-rk3568)
--     - Pine64 Quartz64-A Board (quartz64-a-rk3566_defconfig)
--     - Pine64 Quartz64-B Board (quartz64-b-rk3566_defconfig)
--     - Pine64 SOQuartz on Blade (soquartz-blade-rk3566_defconfig)
--     - Pine64 SOQuartz on CM4-IO (soquartz-cm4-rk3566_defconfig)
--     - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566_defconfig)
--     - Radxa E25 Carrier Board (radxa-e25-rk3568_defconfig)
-+     - Radxa E25 Carrier Board (radxa-e25-rk3568)
-+     - Radxa ROCK 3 Model A (rock-3a-rk3568)
+ NANOPI-R5C
+-M:      Tianling Shen <cnsztl@gmail.com>
+-S:      Maintained
+-F:      configs/nanopi-r5c-rk3568_defconfig
+-F:      arch/arm/dts/rk3568-nanopi-r5c.dts
+-F:      arch/arm/dts/rk3568-nanopi-r5c-u-boot.dtsi
++M:	Tianling Shen <cnsztl@gmail.com>
++S:	Maintained
++F:	configs/nanopi-r5c-rk3568_defconfig
++F:	arch/arm/dts/rk3568-nanopi-r5c.dts
++F:	arch/arm/dts/rk3568-nanopi-r5c-u-boot.dtsi
  
- * rk3588
-      - Rockchip EVB (evb-rk3588)
+ NANOPI-R5S
+-M:      Tianling Shen <cnsztl@gmail.com>
+-S:      Maintained
+-F:      configs/nanopi-r5s-rk3568_defconfig
+-F:      arch/arm/dts/rk3568-nanopi-r5s.dts
+-F:      arch/arm/dts/rk3568-nanopi-r5s.dtsi
+-F:      arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
++M:	Tianling Shen <cnsztl@gmail.com>
++S:	Maintained
++F:	configs/nanopi-r5s-rk3568_defconfig
++F:	arch/arm/dts/rk3568-nanopi-r5s.dts
++F:	arch/arm/dts/rk3568-nanopi-r5s.dtsi
++F:	arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi
+ 
+-RADXA-CM3
++RADXA-CM3-IO
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+ F:	configs/radxa-cm3-io-rk3566_defconfig
++F:	arch/arm/dts/rk3566-radxa-cm3.dtsi
++F:	arch/arm/dts/rk3566-radxa-cm3-io.dts
++F:	arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
+ 
+ RADXA-E25
+ M:	Jonas Karlman <jonas@kwiboo.se>
+@@ -43,8 +46,8 @@ F:	arch/arm/dts/rk3568-radxa-e25.dts
+ F:	arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+ 
+ ROCK-3A
+-M:      Akash Gajjar <gajjar04akash@gmail.com>
+-S:      Maintained
+-F:      configs/rock-3a-rk3568_defconfig
+-F:      arch/arm/dts/rk3568-rock-3a.dts
+-F:      arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
++M:	Akash Gajjar <gajjar04akash@gmail.com>
++S:	Maintained
++F:	configs/rock-3a-rk3568_defconfig
++F:	arch/arm/dts/rk3568-rock-3a.dts
++F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+index 7b7df3c5a8ac..6b2c257a1705 100644
+--- a/board/rockchip/evb_rk3588/MAINTAINERS
++++ b/board/rockchip/evb_rk3588/MAINTAINERS
+@@ -4,4 +4,5 @@ S:	Maintained
+ F:	board/rockchip/evb_rk3588
+ F:	include/configs/evb_rk3588.h
+ F:	configs/evb-rk3588_defconfig
+-F:	arch/arm/dts/rk3588-evb-u-boot.dtsi
++F:	arch/arm/dts/rk3588-evb1-v10.dts
++F:	arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
 -- 
 2.41.0
 
