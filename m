@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F37C2FC29
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03DC6C2FC2D
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:45:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E8E086B85;
-	Thu, 17 Aug 2023 15:43:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 83F1386B55;
+	Thu, 17 Aug 2023 15:45:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OkZzGGY6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D31V+Wfl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE62386B84; Thu, 17 Aug 2023 15:43:07 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id DECE186B58; Thu, 17 Aug 2023 15:45:02 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02B9F86B85
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:43:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1505186B4D
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d6b0c2cca0aso3912814276.0
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:43:04 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-58c6b6b4953so21326617b3.3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:45:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692279784; x=1692884584;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8lxbpG2aIz/Q1AiOhCpYDr0O2X4IoD1bq+zSbSI7Fdw=;
- b=OkZzGGY63XzY3NCZezVMhYKl4JErD6R7LkIlNaQTF+RmXEY4a4cE0jpYdfiTOFExTw
- C3ZAouC8CWwHg7rzPSAUnft5cfFLo5gi6Sh3JA81sPb4A3uqb3e4KXDT6gE8kPfLKf2k
- YxTofL+N5M9LW13zq7Sjj15uQmh/9LelvZMdI=
+ d=chromium.org; s=google; t=1692279899; x=1692884699;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=58JnLbginDhTiA+Eh0YljyJO6SDvElN0LWnG7R0T3hE=;
+ b=D31V+WflhtiVCgwMG2QjVllLo7VhGjJglp72JbL7fSvdRYrt/695s8DSKWw0HpgMcC
+ a1EwNlXGP4CQE5Z4YHWWzvUWRN2gnU1NYyzcXyTkE8WebI8knEqmBco2HhwmAjhmNUH9
+ 0WQSGw3WwQxwBPcq1ksDA4k1mjPuXqIXQF3VM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692279784; x=1692884584;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8lxbpG2aIz/Q1AiOhCpYDr0O2X4IoD1bq+zSbSI7Fdw=;
- b=CcZ1E9PEAH2AyneSMU7xAiQVZrXqfeMl9uXkGNj+AnJjdPD//5JT8bkSotVgReFOBH
- A6IOPTXH8/NpH+z97trtg34xYWgzL6fKkOEs0zZ3OukG4/42NyVuOkN5uZqBaQleQhsS
- IFFHY/uCfsoRsLvityp8efSEvTWF6f/k+zdh7C9i/SVxqla5+Gy473vSY4MJT81Gklgu
- G2wN3dcTuc8RIiwg5TsV+RI0VsC5O2kX6wEN+8+pxT268MBSMJfqha7SQkERVjHtGQ8D
- cYyYD++oTNba2qz/E4chz9kL6KT6YfycW7H5WjZoRqSfKtTPFkrPvCX1fGJv7Q/Vezkh
- +DeQ==
-X-Gm-Message-State: AOJu0Yxr+3CFA64xAYIHHu8oSygqpzab27X2Cae0KMx2/c4NvKyZTjmE
- p/YPrV8W8rK0NEuNAO1z7Hxh7uzfN+ZDGmOWM1bIXBw5bDvibJWm5/I=
-X-Google-Smtp-Source: AGHT+IFwdEjF8fxVECQ6I6kAHMG5h27ciB322N2XAn67RR9D+TBJnq9HTA6oYKjNehekE/xNlsFQWCYUDciLcRIhXYg=
-X-Received: by 2002:a25:2d10:0:b0:d0b:f845:c831 with SMTP id
- t16-20020a252d10000000b00d0bf845c831mr5057536ybt.13.1692279783511; Thu, 17
- Aug 2023 06:43:03 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692279899; x=1692884699;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=58JnLbginDhTiA+Eh0YljyJO6SDvElN0LWnG7R0T3hE=;
+ b=bqg8TgjrCqUtkq8XrzqnbqpE5ZH0WL5iUB2dsxSWP6JJbBQ3E4hfd0VDq/0mt75f6V
+ p61xpuqq7lz2YlvG9i0CssEHnke5sE8TLURfyHIjdu9rPEatfaOTGlfhsD5hpYI8P4vW
+ LrYH7jDl8Vp72Yd+yvpn2/mPPvoaaXXQ3jK4137Zs+C09APvnh3OE+wW5ysL2cRWQqwx
+ DAulSaG2wNif3guK6SvPaVjYl5VCChwSn3qnkI9sYTs77H9GR7NCYsS8iObeJ/i39eSn
+ qnkXU8E2SKiwreq6JBf2RweZWT46hBJBUh8jkJ5lVhZZHxtuiZZ6IEq/L4NKdOPNDvO0
+ dArw==
+X-Gm-Message-State: AOJu0Yz4FzwG5rEs7GD36Jn5nFv6Trfvt70ypUWDBoSkR3EK/mZT24Fr
+ iVdfeZOzGokvt57Ql+xDCfYsF+Oi3i8Yy9D89xy1gw==
+X-Google-Smtp-Source: AGHT+IEVBwYQ0m2M5k7scz8E+L1D1eWygSvlvqQ0UhWWBE6X+fQfVuGx//eW1ZEuxCcRr5/4CUuvuO1TMX6+2QcgxmE=
+X-Received: by 2002:a25:69c8:0:b0:c4c:bff1:2f87 with SMTP id
+ e191-20020a2569c8000000b00c4cbff12f87mr5234254ybc.15.1692279898536; Thu, 17
+ Aug 2023 06:44:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230812002823.82576-1-seanedmond@linux.microsoft.com>
- <20230812002823.82576-4-seanedmond@linux.microsoft.com>
-In-Reply-To: <20230812002823.82576-4-seanedmond@linux.microsoft.com>
+References: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
+ <CAPnjgZ1xraxjR56Peyqj8HL-HEg7pZ9EkrW2=NG+6vYG+qVfow@mail.gmail.com>
+ <CAM2g9JN9J_i5G9ctaRrimGhSepLEoQ=c4c2VJAua+HzMkB25tA@mail.gmail.com>
+ <CAPnjgZ2pcam0wMFnd43pRDwcDb3NEtckbgV6T_6CshPy4B2TdA@mail.gmail.com>
+ <CAM2g9JM4M9HtNz5rXu57J0KNjz_BTmG_XmoSy+4EiHmW-J25qg@mail.gmail.com>
+ <CAPnjgZ2-CfyNkHJwaL4uPyBnRTofgfXhtix2uLpr+a=t912xkA@mail.gmail.com>
+ <CAM2g9JNW+rtE+zh=DFH39rg46MMc7Ct=On=0ZbObK3RdqdC94g@mail.gmail.com>
+In-Reply-To: <CAM2g9JNW+rtE+zh=DFH39rg46MMc7Ct=On=0ZbObK3RdqdC94g@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 17 Aug 2023 07:41:44 -0600
-Message-ID: <CAPnjgZ2kQpcBzmPzmPPLiZHhHYAVdxb_Nnya-3pcb_qYbciKYw@mail.gmail.com>
-Subject: Re: [PATCH 3/5] common: Add OS anti-rollback validation using
- security devices
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, stcarlso@linux.microsoft.com, 
- ilias.apalodimas@linaro.org, abdellatif.elkhlifi@arm.com
+Date: Thu, 17 Aug 2023 07:44:45 -0600
+Message-ID: <CAPnjgZ0xWN4V-_rPDFaq2M9EXrxPmrvE+uySqkUSwvMPySGhSg@mail.gmail.com>
+Subject: Re: FIT Image not working in U-Boot
+To: Freddie <fpidev23@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,136 +90,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Freddie,
 
-On Fri, 11 Aug 2023 at 18:28, <seanedmond@linux.microsoft.com> wrote:
+On Thu, 17 Aug 2023 at 07:39, Freddie <fpidev23@gmail.com> wrote:
 >
-> From: Stephen Carlson <stcarlso@linux.microsoft.com>
 >
-> New config CONFIG_ARBP to enable enforcement of OS anti-rollback counter
-> during image loading.
 >
-> Images with an anti-rollback counter value "arbvn" declared in the FDT will
-> be compared against the current device anti-rollback counter value, and
-> older images will not pass signature validation. If the image is newer, the
-> device anti-rollback counter value will be updated.
+> On Thu, Aug 17, 2023 at 2:19=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+>>
+>> Hi Freddie,
+>>
+>> On Thu, 17 Aug 2023 at 07:02, Freddie <fpidev23@gmail.com> wrote:
+>> >
+>> > Hi Simon,
+>> >
+>> > I'm quite new to this so sorry for asking so many questions but where =
+do I run the 'dump_image -l' command and which code should I look into addi=
+ng print statements to?
+>>
+>> One thing is to add your reply at the bottom, not the top.
+>>
+>> Actually it is 'dumpimage -l file.fit' to list the contents of your
+>> fit file called 'file.fit'.  The program is built in the tools/
+>> directory or your build, or you can
+>>
+>> I mean if you are completely stumped, go to where the error is
+>> generated and add lots of debugging around it. This is
+>> boot_get_kernel() which is in v2021.10 is in common/bootm.c - so just
+>> add lots of printf() stuff there, rebuild and run on the board and see
+>> if you can figure out what is wrong. From my side I am really not
+>> sure.
+>>
+>> Feel free to share the FIT through a link if you like.
+>>
+>> Also, you could try using a simple FIT without the signature part.
+>>
+>> >
+>> > I have also just looked into my .config file and this is the contents:
+>> >
+>> > #
+>> > # Automatically generated file; DO NOT EDIT.
+>> > # U-Boot 2021.10 Configuration
+>> > #
+>> >
+>> [..]
+>>
+>> > #
+>> > # Boot images
+>> > #
+>> > # CONFIG_ANDROID_BOOT_IMAGE is not set
+>> > CONFIG_FIT=3Dy
+>> > CONFIG_FIT_EXTERNAL_OFFSET=3D0x0
+>> > CONFIG_FIT_FULL_CHECK=3Dy
+>> > CONFIG_FIT_SIGNATURE=3Dy
+>> > CONFIG_FIT_SIGNATURE_MAX_SIZE=3D0x10000000
+>> > # CONFIG_FIT_RSASSA_PSS is not set
+>> > # CONFIG_FIT_CIPHER is not set
+>> > # CONFIG_FIT_VERBOSE is not set
+>> > # CONFIG_FIT_BEST_MATCH is not set
+>> > CONFIG_FIT_PRINT=3Dy
+>> > # CONFIG_LEGACY_IMAGE_FORMAT is not set
+>> > CONFIG_SUPPORT_RAW_INITRD=3Dy
+>> > CONFIG_OF_BOARD_SETUP=3Dy
+>> > # CONFIG_OF_SYSTEM_SETUP is not set
+>> > # CONFIG_OF_STDOUT_VIA_ALIAS is not set
+>> > CONFIG_SYS_EXTRA_OPTIONS=3D""
+>> > CONFIG_HAVE_SYS_TEXT_BASE=3Dy
+>> > CONFIG_ARCH_FIXUP_FDT_MEMORY=3Dy
+>> > # CONFIG_CHROMEOS is not set
+>> > # CONFIG_CHROMEOS_VBOOT is not set
+>> >
+>> [..]
+>>
+>> This has CONFIG_FIT and CONFIG_LEGACY_IMAGE_FORMAT is disabled (since
+>> you have signature verification on).
+>>
+>> Regards,
+>> Simon
 >
-> Signed-off-by: Stephen Carlson <stcarlso@linux.microsoft.com>
-> ---
->  boot/Kconfig         |  9 +++++
->  boot/image-fit-sig.c | 89 ++++++++++++++++++++++++++++++++++++++++++++
->  boot/image-fit.c     | 23 ++++++++++++
->  include/image.h      |  4 ++
->  4 files changed, 125 insertions(+)
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index e8fb03b801..e08c274b7c 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -103,6 +103,15 @@ config FIT_CIPHER
->           Enable the feature of data ciphering/unciphering in the tool mkimage
->           and in the u-boot support of the FIT image.
+> Hi Simon,
 >
-> +config FIT_ARBP
-
-FIT_ROLLBACK would be better
-
-arbp is really horrible :-)
-
-> +       bool "Enable Anti rollback version check for FIT images"
-> +       depends on FIT_SIGNATURE
-> +       default n
-> +       help
-> +         Enables FIT image anti-rollback protection. This feature is required
-> +         when a platform needs to retire previous versions of FIT images due to
-> +         security flaws and prevent devices from being reverted to them.
-> +
->  config FIT_VERBOSE
->         bool "Show verbose messages when FIT images fail"
->         depends on FIT
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> index 12369896fe..bf3b81a3a3 100644
-> --- a/boot/image-fit-sig.c
-> +++ b/boot/image-fit-sig.c
-> @@ -11,6 +11,8 @@
->  #include <log.h>
->  #include <malloc.h>
->  #include <asm/global_data.h>
-> +#include <dm.h>
-> +#include <dm-security.h>
-
-You don't need dm- in your headerfiles. I think this should be
-rolllback.h and that should be the name of your uclass.
-
->  DECLARE_GLOBAL_DATA_PTR;
->  #endif /* !USE_HOSTCC*/
->  #include <fdt_region.h>
-> @@ -63,6 +65,39 @@ struct image_region *fit_region_make_list(const void *fit,
->         return region;
->  }
+> Thank you for your advice, I'll make sure to reply at the bottom of the m=
+essage from now on.
 >
-> +#if !defined(USE_HOSTCC)
-
-Can we drop that?
-
-> +static int fit_image_verify_arbvn(const void *fit, int image_noffset)
-> +{
-> +       u64 image_arbvn;
-> +       u64 plat_arbvn = 0ULL;
-> +       struct udevice *dev;
-> +       int ret;
-> +
-> +       ret = fit_image_get_arbvn(fit, image_noffset, &image_arbvn);
-> +       if (ret)
-> +               return 0;
-
-?? Isn't this an error?
-
-> +
-> +       ret = uclass_first_device_err(UCLASS_SECURITY, &dev);
-> +       if (ret)
-> +               return -ENODEV;
-
-return ret
-
-> +
-> +       ret = dm_security_arbvn_get(dev, &plat_arbvn);
-> +       if (ret)
-> +               return -EIO;
-> +
-> +       if (image_arbvn < plat_arbvn) {
-> +               return -EPERM;
-> +       } else if (image_arbvn > plat_arbvn) {
-> +               ret = dm_security_arbvn_set(dev, image_arbvn);
-> +               printf(" Updating OS anti-rollback to %llu from %llu\n",
-> +                      image_arbvn, plat_arbvn);
-
-So the update happens in U-Boot? Don't we want to update it when we
-know it boots?
-
-> +               return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +#endif
-> +
->  static int fit_image_setup_verify(struct image_sign_info *info,
->                                   const void *fit, int noffset,
->                                   const void *key_blob, int required_keynode,
-> @@ -175,6 +210,16 @@ static int fit_image_verify_sig(const void *fit, int image_noffset,
->                 goto error;
->         }
+> I've run the dumpimage command and this was my output:
+> root@freddie-pi-dev:/home/fit# ../optee/u-boot/tools/dumpimage -l image.f=
+it
+> FIT description: RPi FIT Image
+> Created:         Thu Aug  3 15:47:15 2023
+>  Image 0 (kernel-1)
+>   Description:  default kernel
+>   Created:      Thu Aug  3 15:47:15 2023
+>   Type:         Kernel Image
+>   Compression:  uncompressed
+>   Data Size:    20869632 Bytes =3D 20380.50 KiB =3D 19.90 MiB
+>   Architecture: AArch64
+>   OS:           Linux
+>   Load Address: 0x12000000
+>   Entry Point:  0x12000000
+>   Hash algo:    sha1
+>   Hash value:   08d43ed37129fa26e0f5f9d303a211b708c66783
+>  Image 1 (tee-1)
+>   Description:  atf
+>   Created:      Thu Aug  3 15:47:15 2023
+>   Type:         Standalone Program
+>   Compression:  uncompressed
+>   Data Size:    1257464 Bytes =3D 1227.99 KiB =3D 1.20 MiB
+>   Architecture: AArch64
+>   Load Address: 0x08400000
+>   Entry Point:  0x08400000
+>   Hash algo:    sha1
+>   Hash value:   4907d9c33098b2767cd6bc4bc9836f2f913464c7
+>  Image 2 (fdt-1)
+>   Description:  device tree
+>   Created:      Thu Aug  3 15:47:15 2023
+>   Type:         Flat Device Tree
+>   Compression:  uncompressed
+>   Data Size:    32501 Bytes =3D 31.74 KiB =3D 0.03 MiB
+>   Architecture: AArch64
+>   Load Address: 0x01000000
+>   Hash algo:    sha1
+>   Hash value:   1b5bb266752cb247d89245c63bd041acfa34c7c0
+>  Default Configuration: 'config-1'
+>  Configuration 0 (config-1)
+>   Description:  default configuration
+>   Kernel:       kernel-1
+>   FDT:          fdt-1
+>   Loadables:    tee-1
+>   Sign algo:    sha1,rsa2048:dev
+>   Sign value:   22cd61395ae659917626ef88ebf82429d6d592a7975cf48eb1e301f81=
+c8f2a9ae60e203e283b8800971b72cd1b6bf93fb4f5f54d9bc4fb0f49ae0e48115ff087d863=
+8f8080fdc9f72fbfdd2228d60dba33849a75dba6958a134eefb9441b43f6f8319b7885c052c=
+7993a7c791fe0acc577a629b04630060f02e24e82f9e5c8851c0df3d63da45ee5daeeabe198=
+b990c2b8cbe24834763df299d8ed5a25cb90818caa23676e764d4d6e91e852451c1dae8a294=
+6b9741e637b7556b6ebf27fa9e0ad5252909d13da67179b40f5097cc29c4ac1539c0fb89b56=
+7e8ee2d56ef92707d2a9d82a090d35c66cf23e8e66e5c8da5e197ec4a0dd771ef4a3246f6f4=
+99850
+>   Timestamp:    Thu Aug  3 15:47:15 2023
 >
-> +#if !defined(USE_HOSTCC)
 
-Can you use
+That looks fine
 
-if (!tools_build())
+>
+> I have tried to use an unsigned FIT before, but I also ran into the same =
+error. In this case, do I simply disable the signature parts of the config,=
+ enable the legacy image format option and make the new image without any o=
+f the signing or are there other changes as well?
 
-?
+Well no point in trying it then...you can normally just omit the signing st=
+ep.
 
-This seems to be adding to FIT so the FIT docs should be updated.
+>
+> Where would be an appropriate place to upload my FIT file to in order to =
+share a link?
+>
+
+Google drive? Anything that allows public links.
+
+At this point, I think debugging it is the only option, as I mentioned
+earlier. I don't know what rpi doesn't enable FIT by default, but
+perhaps there is some reason.
 
 Regards,
 Simon
