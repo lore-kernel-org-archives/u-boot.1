@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81EEAC30630
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 14:55:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 411D3C30638
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 15:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C2018688B;
-	Thu, 17 Aug 2023 16:55:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FB5E86AEE;
+	Thu, 17 Aug 2023 17:02:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J+5yZL/6";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ETNgtfQv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD750868D0; Thu, 17 Aug 2023 16:55:32 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 1791286B18; Thu, 17 Aug 2023 17:02:19 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3F3D8687F
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 16:55:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7685B86AB9
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:02:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-997c4107d62so1038682066b.0
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:55:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=fpidev23@gmail.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-589a6e26349so4219887b3.1
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692284129; x=1692888929;
+ d=gmail.com; s=20221208; t=1692284534; x=1692889334;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XBmRIZ6nDgHRinmk5kirb+pVYDQ6c6PSHrezsIQEGA0=;
- b=J+5yZL/6fKZA44iM8mlSKto7fDdVvZ1QLXQM7PoYFagiyunp6JeppQQdP8cBQ1IM7X
- 2yRBEH5M0LeOpMeBYyUC4jsP0UgJ9cScXW8XfsIYUNPmDmD4xEb5i6X0VK7Q6tRe1UBe
- hk4BKmAVU5qFGS94IgGCYOO7ZzzxvLy+O8LypswtZjohU9K6egnhyUY7jTjsRO7U97gs
- 2WXPn3IbuXqyDRSGbCCnTtZyfhOLOnyt0sa6CuwAyD6xGa8Hry6uStzZ49kVYcP+k+DR
- cCX/DMExVOIwSE3vF5RcF2vjcQxwJv6h5zruRnRzCD3k6B6lj4lkXkZg6nvOlSYnlruQ
- k32A==
+ bh=ZsyOFQY8DVmur7+5z2A2/M3Dc7vmg+mzjzRhvqgZ/u0=;
+ b=ETNgtfQvgtG/oIdHFVKO6ERidcp4VUAxw/pGAvClPzuRlypuYLUbwzNE7Qku2ORmlf
+ wZazQ+nHrBa2rAFJXvhZpyrTY/hHOptDxppluAphdDLH+kgm1eh/+4wNYL7e+kXt8zKI
+ EREK7DcxgmW4AbhZbDOIPqXoq45nuo11a3lRfLRmSc79H+F6o6Lp822Wt+zqSts0ZLGy
+ 0R1GXa+3nwFDe5QMx1YH11jiVhi9Zdv4sVoF+SxB8Jx8SyJVFHchVpO9loF23mT09s+o
+ BrUY6sxcOvmP5S8GYjxXlf15QM2J3TmOkwCc/TZIAsqLOfp3y3eNKZ25yPvNnH8U1Pwh
+ 7pYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692284129; x=1692888929;
+ d=1e100.net; s=20221208; t=1692284534; x=1692889334;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XBmRIZ6nDgHRinmk5kirb+pVYDQ6c6PSHrezsIQEGA0=;
- b=NGZKmirkasogXA0rAmCSFt/rm0asB0bLMn5Rq/KInhEtkBaDpPmupduV5Rpu2EkoPZ
- 9ezEaw9HWTlGe7O7RId66qO3eNNjlWh0oD0SCV13zGwlDGp5LR64roRxyA3k9DLC0aFi
- yxw+eqOnzz+GMirX+m4+xPrFoKHbZG0oKGTNVLSdDzIkO08SzTWYiMDbHtdGJt4tdfvs
- NZgeOuMC/yP2dS88zJarwi6fuFKrC5n8+PoZfwr1p8v53/+s/leiSuitbFoVfBORAI4n
- gmeI1tgb9biUCetTQodXJi7DO03+8aBKmHG/rKqYmvRj5W6wOXc66+IxHR/ABaHX2sv9
- KWhQ==
-X-Gm-Message-State: AOJu0YwJ75DHtLndwAadq0o7KRWqxztiWosFHngtmADbL4W8FvdGYTwd
- g7biMS4M0/kCV7qr72vzYku/9MqWwUYbE9D7VSQagg==
-X-Google-Smtp-Source: AGHT+IFSVsA5DhmhiLfjSEh3TU4qEufkWnf/IlPaAvaM9eFy3r3K10zhKEjVamwV6tvr/QLO2Qo+CmBkMgQ1U8M8QHw=
-X-Received: by 2002:a17:906:8454:b0:987:5761:2868 with SMTP id
- e20-20020a170906845400b0098757612868mr3647208ejy.11.1692284129407; Thu, 17
- Aug 2023 07:55:29 -0700 (PDT)
+ bh=ZsyOFQY8DVmur7+5z2A2/M3Dc7vmg+mzjzRhvqgZ/u0=;
+ b=SKAG8T5yZoHDAGeZSvSOG2C7c5HrU36Ms8zNXzpsgBqdSpLhCYh7P4zXK4xZBJVMnP
+ hO9RtuGJD0IvFSZUNYG1hFfxuLp4CbUdFvsgICEeh38AMFZoPVSrpciwSkkAoi0xaXrX
+ 4az6lZqMEMzL330ba7asPG9KUyK1lfC4rwflW2NFVyHQmakast7FlNNmTYThjihZHOPq
+ 855RIC0Im/WYiNZGllFh7Yg6byBQY8Ds2EGkYisGiPIN+Tz6yOKQ5zD4YXqdZudpOUdz
+ oM4gIgU09QmGVq+zooWo/A2b9R5nR9HW716SmZ5nxsic0QOYsZSqq6dVfTC5KmwtTHPi
+ 6/Fw==
+X-Gm-Message-State: AOJu0YwfAQwwr/D/fI1by0Yyl/SZw+mS65kxbkN7jfneGrPpg1tkV/un
+ 0QQ+DlHJvwzgxZEjyx+knIvxrb9R/E+1HlpDyXM=
+X-Google-Smtp-Source: AGHT+IHVYNDmmy75yJfeiVr0Fe8M3w2p0NQryM8ZNNS8hGBv5JJGRmYRDQve+9g8aM+iM77ZlW/RIUELleWX93tpqbc=
+X-Received: by 2002:a81:920b:0:b0:583:f90b:f042 with SMTP id
+ j11-20020a81920b000000b00583f90bf042mr3359383ywg.0.1692284533985; Thu, 17 Aug
+ 2023 08:02:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
- <20230814133253.4150-5-maxim.uvarov@linaro.org> <ZNo4cZtrSXa1dKXd@hades>
- <CAD8XO3a3N1j2G_Fjiws1S7praCDtLup=nrv4po--x6JmKKCfjQ@mail.gmail.com>
- <20230814152940.GZ3630934@bill-the-cat>
- <CAD8XO3Y7pYrd6nZm9kywbUpmOp7QsUchnb686XAq6WKyVBDGfw@mail.gmail.com>
- <CALeDE9MxnG4Xk=scFwG1zdrpYRQii4BRM04bxPOamzAzhhN7jQ@mail.gmail.com>
-In-Reply-To: <CALeDE9MxnG4Xk=scFwG1zdrpYRQii4BRM04bxPOamzAzhhN7jQ@mail.gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Thu, 17 Aug 2023 20:55:17 +0600
-Message-ID: <CAD8XO3aAyA-m6BAkOnxw9uF2w_kadgSAwF3iRU_uBw-jq9iJJA@mail.gmail.com>
-Subject: Re: [PATCHv6 04/14] net/lwip: implement dhcp cmd
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com, 
- rfried.dev@gmail.com, goldsimon@gmx.de, lwip-devel@nongnu.org
+References: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
+ <CAPnjgZ1xraxjR56Peyqj8HL-HEg7pZ9EkrW2=NG+6vYG+qVfow@mail.gmail.com>
+ <CAM2g9JN9J_i5G9ctaRrimGhSepLEoQ=c4c2VJAua+HzMkB25tA@mail.gmail.com>
+ <CAPnjgZ2pcam0wMFnd43pRDwcDb3NEtckbgV6T_6CshPy4B2TdA@mail.gmail.com>
+ <CAM2g9JM4M9HtNz5rXu57J0KNjz_BTmG_XmoSy+4EiHmW-J25qg@mail.gmail.com>
+ <CAPnjgZ2-CfyNkHJwaL4uPyBnRTofgfXhtix2uLpr+a=t912xkA@mail.gmail.com>
+ <CAM2g9JNW+rtE+zh=DFH39rg46MMc7Ct=On=0ZbObK3RdqdC94g@mail.gmail.com>
+ <CAPnjgZ0xWN4V-_rPDFaq2M9EXrxPmrvE+uySqkUSwvMPySGhSg@mail.gmail.com>
+ <CAM2g9JMfAGdC7t9AYUtupB=BxxkQyhaiNdtO4VnWV3=0V_cw4Q@mail.gmail.com>
+ <CAPnjgZ2Mya9u3Knz_tydR=Gyuc1PT52kF=SosDwNpJ8iAT9JWA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2Mya9u3Knz_tydR=Gyuc1PT52kF=SosDwNpJ8iAT9JWA@mail.gmail.com>
+From: Freddie <fpidev23@gmail.com>
+Date: Thu, 17 Aug 2023 16:02:02 +0100
+Message-ID: <CAM2g9JNPL1YXxBx5cqO23JyzRV7viHQ1FxROYKR-RijfeRVseA@mail.gmail.com>
+Subject: Re: FIT Image not working in U-Boot
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -94,132 +97,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 17 Aug 2023 at 20:04, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Thu, Aug 17, 2023 at 3:13=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 
-> On Thu, Aug 17, 2023 at 2:46=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro=
-.org>
-> wrote:
-> >
-> > On Mon, 14 Aug 2023 at 21:29, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > > On Mon, Aug 14, 2023 at 09:18:19PM +0600, Maxim Uvarov wrote:
-> > > > On Mon, 14 Aug 2023 at 20:21, Ilias Apalodimas <
-> > > ilias.apalodimas@linaro.org>
-> > > > wrote:
-> > > >
-> > > > > On Mon, Aug 14, 2023 at 07:32:43PM +0600, Maxim Uvarov wrote:
-> > > > > > Implement function for dhcp command with lwIP variant. Usage an=
-d
-> > > output
-> > > > > is
-> > > > > > the same as the original command. This code called by
-> compatibility
-> > > code
-> > > > > > between U-Boot and lwIP.
-> > > > >
-> > > > > Same as the dns command
-> > > > >
-> > > > > >
-> > > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > > > > > ---
-> > > > > >  include/net/lwip.h             | 10 +++++++
-> > > > > >  net/lwip/Makefile              |  1 +
-> > > > > >  net/lwip/apps/dhcp/lwip-dhcp.c | 51
-> > > ++++++++++++++++++++++++++++++++++
-> > > > > >  3 files changed, 62 insertions(+)
-> > > > > >  create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
-> > > > > >
-> > > > > > diff --git a/include/net/lwip.h b/include/net/lwip.h
-> > > > > > index c83b5c8231..2f035280eb 100644
-> > > > > > --- a/include/net/lwip.h
-> > > > > > +++ b/include/net/lwip.h
-> > > > > > @@ -15,3 +15,13 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int
-> flag,
-> > > int
-> > > > > argc,
-> > > > > >  *         Other value < 0, if error
-> > > > > >  */
-> > > > > >  int ulwip_dns(char *name, char *varname);
-> > > > > > +
-> > > > > > +/*
-> > > > > > +* This function creates the DHCP request to obtain IP address.
-> If
-> > > DHCP
-> > > > > server
-> > > > >
-> > > > > Sphinx needs something more, please check the existing functions
-> > > > >
-> > > > > > +* returns file name, this file will be downloaded with tftp.
-> After
-> > > this
-> > > > > > +* function you need to invoke the polling loop to process
-> network
-> > > > > communication.
-> > > > > > +*
-> > > > > > +* Return: 0 if success
-> > > > > > +*         Other value < 0, if error
-> > > > > > +*/
-> > > > > > +int ulwip_dhcp(void);
-> > > > > > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> > > > > > index 6d2c00605b..59323fb325 100644
-> > > > > > --- a/net/lwip/Makefile
-> > > > > > +
-> > > > > > +static struct dhcp dhcp;
-> > > > > > +
-> > > > > > +static int ulwip_dhcp_tmo(void)
-> > > > > > +{
-> > > > > > +     switch (dhcp.state) {
-> > > > > > +     case DHCP_STATE_BOUND:
-> > > > > > +             env_set("bootfile", dhcp.boot_file_name);
-> > > > > > +             env_set("ipaddr",
-> ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > > > > > +             env_set("netmask",
-> > > ip4addr_ntoa(&dhcp.offered_sn_mask));
-> > > > > > +             env_set("serverip",
-> > > ip4addr_ntoa(&dhcp.server_ip_addr));
-> > > > > > +             printf("DHCP client bound to address %s\n",
-> > > > > ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > > > > > +             break;
-> > > > > > +     default:
-> > > > > > +             return -1;
-> > > > > > +     }
-> > > > > > +
-> > > > > > +     return 0;
-> > > > > > +}
-> > > > > > +
-> > > > > > +int ulwip_dhcp(void)
-> > > > > > +{
-> > > > > > +     int err;
-> > > > > > +     struct netif *netif;
-> > > > > > +
-> > > > > > +     ulwip_set_tmo(ulwip_dhcp_tmo);
-> > > > > > +     netif =3D netif_get_by_index(1);
-> > > > >
-> > > > > What's (1)?
-> > > > >
-> > > > >
-> > > > Only one lwip netif is registered. 1 - here is the index of netif. =
-I
-> > > don't
-> > > > think that there is any definition for that...
-> > > >
-> > >
-> > > And there's only ever going to be one interface (even if we have ipv4
-> > > and ipv60 ? If so, define it to something please, thanks.
-> > >
-> > > --
-> > > Tom
-> > >
-> >
-> > Yes, one interface has 2 addresses ipv4 and ipv6.
+> Hi Freddie,
 >
-> What about a device like a router which may have multiple wired
-> ethernet interface?
+> On Thu, 17 Aug 2023 at 07:57, Freddie <fpidev23@gmail.com> wrote:
+> >
+> >
+> >
+> > On Thu, Aug 17, 2023 at 2:45=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> >>
+> >> Hi Freddie,
+> >>
+> >> On Thu, 17 Aug 2023 at 07:39, Freddie <fpidev23@gmail.com> wrote:
+> >> >
+> >> >
+> >> >
+> >> > On Thu, Aug 17, 2023 at 2:19=E2=80=AFPM Simon Glass <sjg@chromium.or=
+g> wrote:
+> >> >>
+> >> >> Hi Freddie,
+> >> >>
+> >> >> On Thu, 17 Aug 2023 at 07:02, Freddie <fpidev23@gmail.com> wrote:
+> >> >> >
+> >> >> > Hi Simon,
+> >> >> >
+> >> >> > I'm quite new to this so sorry for asking so many questions but
+> where do I run the 'dump_image -l' command and which code should I look
+> into adding print statements to?
+> >> >>
+> >> >> One thing is to add your reply at the bottom, not the top.
+> >> >>
+> >> >> Actually it is 'dumpimage -l file.fit' to list the contents of your
+> >> >> fit file called 'file.fit'.  The program is built in the tools/
+> >> >> directory or your build, or you can
+> >> >>
+> >> >> I mean if you are completely stumped, go to where the error is
+> >> >> generated and add lots of debugging around it. This is
+> >> >> boot_get_kernel() which is in v2021.10 is in common/bootm.c - so ju=
+st
+> >> >> add lots of printf() stuff there, rebuild and run on the board and
+> see
+> >> >> if you can figure out what is wrong. From my side I am really not
+> >> >> sure.
+> >> >>
+> >> >> Feel free to share the FIT through a link if you like.
+> >> >>
+> >> >> Also, you could try using a simple FIT without the signature part.
+> >> >>
+> >> >> >
+> >> >> > I have also just looked into my .config file and this is the
+> contents:
+> >> >> >
+> >> >> > #
+> >> >> > # Automatically generated file; DO NOT EDIT.
+> >> >> > # U-Boot 2021.10 Configuration
+> >> >> > #
+> >> >> >
+> >> >> [..]
+> >> >>
+> >> >> > #
+> >> >> > # Boot images
+> >> >> > #
+> >> >> > # CONFIG_ANDROID_BOOT_IMAGE is not set
+> >> >> > CONFIG_FIT=3Dy
+> >> >> > CONFIG_FIT_EXTERNAL_OFFSET=3D0x0
+> >> >> > CONFIG_FIT_FULL_CHECK=3Dy
+> >> >> > CONFIG_FIT_SIGNATURE=3Dy
+> >> >> > CONFIG_FIT_SIGNATURE_MAX_SIZE=3D0x10000000
+> >> >> > # CONFIG_FIT_RSASSA_PSS is not set
+> >> >> > # CONFIG_FIT_CIPHER is not set
+> >> >> > # CONFIG_FIT_VERBOSE is not set
+> >> >> > # CONFIG_FIT_BEST_MATCH is not set
+> >> >> > CONFIG_FIT_PRINT=3Dy
+> >> >> > # CONFIG_LEGACY_IMAGE_FORMAT is not set
+> >> >> > CONFIG_SUPPORT_RAW_INITRD=3Dy
+> >> >> > CONFIG_OF_BOARD_SETUP=3Dy
+> >> >> > # CONFIG_OF_SYSTEM_SETUP is not set
+> >> >> > # CONFIG_OF_STDOUT_VIA_ALIAS is not set
+> >> >> > CONFIG_SYS_EXTRA_OPTIONS=3D""
+> >> >> > CONFIG_HAVE_SYS_TEXT_BASE=3Dy
+> >> >> > CONFIG_ARCH_FIXUP_FDT_MEMORY=3Dy
+> >> >> > # CONFIG_CHROMEOS is not set
+> >> >> > # CONFIG_CHROMEOS_VBOOT is not set
+> >> >> >
+> >> >> [..]
+> >> >>
+> >> >> This has CONFIG_FIT and CONFIG_LEGACY_IMAGE_FORMAT is disabled (sin=
+ce
+> >> >> you have signature verification on).
+> >> >>
+> >> >> Regards,
+> >> >> Simon
+> >> >
+> >> >
+> >> > Hi Simon,
+> >> >
+> >> > Thank you for your advice, I'll make sure to reply at the bottom of
+> the message from now on.
+> >> >
+> >> > I've run the dumpimage command and this was my output:
+> >> > root@freddie-pi-dev:/home/fit# ../optee/u-boot/tools/dumpimage -l
+> image.fit
+> >> > FIT description: RPi FIT Image
+> >> > Created:         Thu Aug  3 15:47:15 2023
+> >> >  Image 0 (kernel-1)
+> >> >   Description:  default kernel
+> >> >   Created:      Thu Aug  3 15:47:15 2023
+> >> >   Type:         Kernel Image
+> >> >   Compression:  uncompressed
+> >> >   Data Size:    20869632 Bytes =3D 20380.50 KiB =3D 19.90 MiB
+> >> >   Architecture: AArch64
+> >> >   OS:           Linux
+> >> >   Load Address: 0x12000000
+> >> >   Entry Point:  0x12000000
+> >> >   Hash algo:    sha1
+> >> >   Hash value:   08d43ed37129fa26e0f5f9d303a211b708c66783
+> >> >  Image 1 (tee-1)
+> >> >   Description:  atf
+> >> >   Created:      Thu Aug  3 15:47:15 2023
+> >> >   Type:         Standalone Program
+> >> >   Compression:  uncompressed
+> >> >   Data Size:    1257464 Bytes =3D 1227.99 KiB =3D 1.20 MiB
+> >> >   Architecture: AArch64
+> >> >   Load Address: 0x08400000
+> >> >   Entry Point:  0x08400000
+> >> >   Hash algo:    sha1
+> >> >   Hash value:   4907d9c33098b2767cd6bc4bc9836f2f913464c7
+> >> >  Image 2 (fdt-1)
+> >> >   Description:  device tree
+> >> >   Created:      Thu Aug  3 15:47:15 2023
+> >> >   Type:         Flat Device Tree
+> >> >   Compression:  uncompressed
+> >> >   Data Size:    32501 Bytes =3D 31.74 KiB =3D 0.03 MiB
+> >> >   Architecture: AArch64
+> >> >   Load Address: 0x01000000
+> >> >   Hash algo:    sha1
+> >> >   Hash value:   1b5bb266752cb247d89245c63bd041acfa34c7c0
+> >> >  Default Configuration: 'config-1'
+> >> >  Configuration 0 (config-1)
+> >> >   Description:  default configuration
+> >> >   Kernel:       kernel-1
+> >> >   FDT:          fdt-1
+> >> >   Loadables:    tee-1
+> >> >   Sign algo:    sha1,rsa2048:dev
+> >> >   Sign value:
+>  22cd61395ae659917626ef88ebf82429d6d592a7975cf48eb1e301f81c8f2a9ae60e203e=
+283b8800971b72cd1b6bf93fb4f5f54d9bc4fb0f49ae0e48115ff087d8638f8080fdc9f72fb=
+fdd2228d60dba33849a75dba6958a134eefb9441b43f6f8319b7885c052c7993a7c791fe0ac=
+c577a629b04630060f02e24e82f9e5c8851c0df3d63da45ee5daeeabe198b990c2b8cbe2483=
+4763df299d8ed5a25cb90818caa23676e764d4d6e91e852451c1dae8a2946b9741e637b7556=
+b6ebf27fa9e0ad5252909d13da67179b40f5097cc29c4ac1539c0fb89b567e8ee2d56ef9270=
+7d2a9d82a090d35c66cf23e8e66e5c8da5e197ec4a0dd771ef4a3246f6f499850
+> >> >   Timestamp:    Thu Aug  3 15:47:15 2023
+> >> >
+> >>
+> >> That looks fine
+> >>
+> >> >
+> >> > I have tried to use an unsigned FIT before, but I also ran into the
+> same error. In this case, do I simply disable the signature parts of the
+> config, enable the legacy image format option and make the new image
+> without any of the signing or are there other changes as well?
+> >>
+> >> Well no point in trying it then...you can normally just omit the
+> signing step.
+> >>
+> >> >
+> >> > Where would be an appropriate place to upload my FIT file to in orde=
+r
+> to share a link?
+> >> >
+> >>
+> >> Google drive? Anything that allows public links.
+> >>
+> >> At this point, I think debugging it is the only option, as I mentioned
+> >> earlier. I don't know what rpi doesn't enable FIT by default, but
+> >> perhaps there is some reason.
+> >>
+> >> Regards,
+> >> Simon
+> >
+> >
+> >
+> > Hi Simon,
+> >
+> > I have uploaded my FIT file to google drive:
+> >
+> https://drive.google.com/file/d/1Q4GMcrT8tzCCznPe1X_5JA3LLFarW6iO/view?us=
+p=3Ddrive_link
+> >
+> > I will now try and do some debugging, thank you very much for your help=
+.
+>
+> Your image works fine on my rpi_3 with v2021.10 and CONFIG_FIT but I
+> am using the 32-bit build. I am not sure of the magic needed to make
+> it boot 64-bit.
+>
+> I notice that your build date is two weeks ago...are you sure you are
+> putting the new U-Boot on the board?
+>
+> Regards,
+> Simon
 >
 
-Yea, looks like we need lwip netif per U-Boots eth_devs. I did not yet
-support several eth devices, but it will be good to add this to not break
-existing functionality..
+Hi Simon,
 
-BR,
-Maxim.
+Thank you very much for testing the file, I shall try and use the 32 bit
+version of U-Boot on my pi and see if this works. How would I go about
+switching to the 32-bit version?
+
+I think I might have accidentally sent an older FIT file from my computer,
+but I have created the images the same way every time and they are
+identical so this shouldn't be an issue. Is this what you mean about it
+being 2 weeks ago?
+
+Many thanks,
+Freddie
