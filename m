@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E6BC52CDA
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 19:02:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4197C52CDA
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 19:02:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F65786BC7;
-	Thu, 17 Aug 2023 21:02:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 625B386BD6;
+	Thu, 17 Aug 2023 21:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bxBs3/sh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oFtgTln6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAFCE86BC9; Thu, 17 Aug 2023 21:02:12 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id F2B8E86BC5; Thu, 17 Aug 2023 21:02:16 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 424C886BC5
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 21:02:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45A0D86BD3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 21:02:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-58c68c79befso1527667b3.3
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 12:02:10 -0700 (PDT)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d712d86eb96so162080276.3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 12:02:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692298929; x=1692903729;
+ d=konsulko.com; s=google; t=1692298933; x=1692903733;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9LPCpXT+pK/HPIkHSoUhmJ3kFQMI68hHa5CBaoNkEMY=;
- b=bxBs3/shreGCtvSYaNruCFl1n6aSavla/tMAdCW9Gap1+y5CmdG6s2Cd0f8KOVYTfw
- MKBznJLHZQK+Q7CxL3lFmxIhTdcFP2LbnKo+OQBCtKmG+flVg2E5iSpMWSd+mCSOeD3v
- Ulqof6xksMl5RJB9cG0isGAPMzsbDRsup1/Do=
+ bh=dBg+CxNTIU7Uy2gFkKLq70PippcxS2FmPMu6vE6ri3E=;
+ b=oFtgTln6/gfQnV64gX7LVDWVPvw0Ddr5sSDNdSZxGABNnXR/HasG/JIY0SYfhySMwU
+ vwi8dorPyaDud/RYCbI77lluZNRiMJ/GiBb5N1YfipGIwyunpLq99O2SR3rxzAk4j1Qe
+ HwIeH8tXy5OsWYoaO1Dfl8lh1Qbm8gZzXm5Qs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692298929; x=1692903729;
+ d=1e100.net; s=20221208; t=1692298933; x=1692903733;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9LPCpXT+pK/HPIkHSoUhmJ3kFQMI68hHa5CBaoNkEMY=;
- b=TkkZFiV0m+e+9cGyiaaCJVc557x0GqtSeuLOWpsIjBuRMhmIeJV5yIGwZUGvdK1AJC
- F3KZggxpR2/uQakCmMrOr2W36AsnsvtIkkwd9ew4mMqXtcbktXMgp+zcH1dRGHmgQuot
- epNYQdDpPSH7SC0BmpnjCvfApjZ540QTG1k8sHpuziGOKMvmFPU3Mo7lMI7+X2ElL7S8
- UGywCy8Fq3I132eGxexY2zozlTEJz4R0b9F2yCmP6Z2QX75fSvCsvSVKsRTuWrCl6TqF
- X1puHTTKMjZuxvjymYUe6uGurEOkEYuhrI5bWN81DPGm+nq8zoGEEG5mp0QVBJIQfHYa
- wKcg==
-X-Gm-Message-State: AOJu0YxlhVCJ5CnpjoQH1FC/xH9WYYgLUj4oJb5BXGIyBOhk5HT4HDYg
- pW+7Werwstm4sr334ahTHVM63g==
-X-Google-Smtp-Source: AGHT+IEjOXg4nzQFQ5GWFCrgE7MDzvvkcWTdsn74/B5cc+mp44RR8Bo2tYwZktFKKVdQkMCbvufedA==
-X-Received: by 2002:a81:6cd7:0:b0:589:69d4:f117 with SMTP id
- h206-20020a816cd7000000b0058969d4f117mr206506ywc.41.1692298929017; 
- Thu, 17 Aug 2023 12:02:09 -0700 (PDT)
+ bh=dBg+CxNTIU7Uy2gFkKLq70PippcxS2FmPMu6vE6ri3E=;
+ b=MYjdhbVsEiUYuTnyO+OPO2qlqvlKnYqKKbUUMT1sE79/OiOSb0CR/WpmCf3bJyUiM6
+ nCVDG019Xw4wDjVTQTdycB7ly+SD0KYwujFyFWtsO9lmDw9/Dnu3uiAaMl8oPucDZW5o
+ n00hFL/D7fRvM9qYVxOXIp1LcVeyzDQ6WKe9yoaMdhlMXvs71dD8z/mKmLWoHsKnreBk
+ dkJMroGm/IeBlYFw/G2USToe4VBj5gEXBaVQGi5T69fg2vkPDUQwPk3MiojR8AKrTAl9
+ x1MEkcZLO/i1cJLMafBMJlB1q2842r9bGc193pWKgibekCGi1+MDQ/Rqf3KBn5yxjgeF
+ h1Aw==
+X-Gm-Message-State: AOJu0YyjTGycxGut1teVyGEArhjvkweurVZrj4FyAGXdtpg2YEByhmPm
+ xpwQKpz3ZRI9VN2HIWn9u0K29w==
+X-Google-Smtp-Source: AGHT+IE4ORo9xtmoI6mGzP4JtiOujCyHhqnEQ5HmuCeRtPJr2H0ixxyURO73KmkTew6qPlb6syS2PA==
+X-Received: by 2002:a25:ca54:0:b0:d71:8813:1e72 with SMTP id
+ a81-20020a25ca54000000b00d7188131e72mr511637ybg.46.1692298932981; 
+ Thu, 17 Aug 2023 12:02:12 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-8f9f-218d-98ab-058b.res6.spectrum.com.
  [2603:6081:7b00:6400:8f9f:218d:98ab:58b])
  by smtp.gmail.com with ESMTPSA id
- d13-20020a81ab4d000000b00583b144fe51sm45170ywk.118.2023.08.17.12.02.08
+ w9-20020a25ac09000000b00d72beeb446asm26393ybi.20.2023.08.17.12.02.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 12:02:08 -0700 (PDT)
-Date: Thu, 17 Aug 2023 15:02:07 -0400
+ Thu, 17 Aug 2023 12:02:12 -0700 (PDT)
+Date: Thu, 17 Aug 2023 15:02:10 -0400
 From: Tom Rini <trini@konsulko.com>
-To: abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de, nd@arm.com, xueliang.zhong@arm.com
-Subject: Re: [PATCH] corstone1000: update maintainers
-Message-ID: <20230817190207.GM1515023@bill-the-cat>
-References: <20230811122257.1619723-1-abdellatif.elkhlifi@arm.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/3] doc: rockchip: Add supported RK3566/RK3568 boards
+Message-ID: <20230817190210.GN1515023@bill-the-cat>
+References: <20230817060422.477759-1-jonas@kwiboo.se>
+ <20230817060422.477759-2-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CU7MXWPhslN2Y5zX"
+ protocol="application/pgp-signature"; boundary="uKXrQ8qYIGygycIk"
 Content-Disposition: inline
-In-Reply-To: <20230811122257.1619723-1-abdellatif.elkhlifi@arm.com>
+In-Reply-To: <20230817060422.477759-2-jonas@kwiboo.se>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,41 +94,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---CU7MXWPhslN2Y5zX
+--uKXrQ8qYIGygycIk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 11, 2023 at 01:22:57PM +0100, abdellatif.elkhlifi@arm.com wrote:
+On Thu, Aug 17, 2023 at 06:04:34AM +0000, Jonas Karlman wrote:
 
-> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Update Rockchip documentation to include RK3566/RK3568 boards already
+> supported. Also list Pine64 boards under RK3566 and drop defconfig to
+> match other listed boards.
 >=20
-> Update MAINTAINERS of corstone1000 board.
->=20
-> Signed-off-by: Xueliang Zhong <xueliang.zhong@arm.com>
-> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---CU7MXWPhslN2Y5zX
+--uKXrQ8qYIGygycIk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTebq4ACgkQFHw5/5Y0
-tyyRpQwAgfS8CXI9uFg6H9EWQWWrASHatH6iIS1NOaF6H0coxPMBkCZlG3o3mgPT
-WcDlWTTdeTbXPit7Jl9liwTDimU0U2H+PLBjh4NNTR/Ks7Xa3TB3iTjNvxFgSVyG
-5J1vjNAtnHDI2POaNXPWkBGwPC2+FUX+Ii7n79EeLBHzmKWI6j5ACoxFbKfjR8wf
-rLegz3Hv1nKhFOWBdEwMeHO2C+cT9ud/44RiFUW/iaZxcbgRN4so/TJ2zdgjetDc
-SWhRZYsPmYa56R+npOFJGKZIjN8+RNp8k3Nc8cf5peAKy1TjqTgLuzDuHO1xaiKi
-Ki73O8X639u2U1GaMtZ2xKFhIbhCB6zpsCvFjQ7BzcTaz+eA8tbwt4AOZCGaxYgm
-4A0ovg9qipc1bS9F2OpBn0GMXFe+kvwho3BAIgwMzQhIhX+lYSKQ4Kjkw3/zKror
-UcrWBMqctofoSczvoLJoiiOW9z/+pr48O8NB+Cqhp3kGT2HiU2cC8ueMjAl1sf8p
-lnOCjCB+
-=CDDf
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTebrIACgkQFHw5/5Y0
+tywhPgwAlRWCX2hnE+Yds/2sr2g3HUKXRg9WbCVwAeTYiR+w2nkplRDdnt7664do
+iSWQhX4P2q+3Zh3jb3hzMZyE9GbLqku3QXpPeb5mnEOLrz+YTO/Q85Vfb6e9+CFl
+krO0iDZ8jBVdGcbN92k+1ylE/CmgjxuZ+ta4iZtYdxmQKwbyJjPWhFTnpMg5epRp
+qwOggKMmSi9MZ/pRKG7N0GCXoTf+rXgm4R8aUwYSIQ7T9mcTguc43Pm8L6dThcl0
+Zop6NUg++JQwrbLFhgLgcOBWrn+IsNoTxQlevq89WBm8OyUvIEKxA4hZy6ZHj0QA
+c31yY9q58KPk6CIBmYk3/gPt691JsTsMkHagsAbrly/dT+O5/ZyOw34amWAEmvVs
+QAPGAlVRsqw57VgJe9gnP1TsT+nzyjHN4auAmmc7hHK6OcTdrqQ9NyvSZV04piza
+dyuwk70HS5+eTb77IWjc5whJzy3UjKz5zn/JWN7Ejv/IP55cTDcgIxBKE51XDWTl
++f/dRC/S
+=qI5m
 -----END PGP SIGNATURE-----
 
---CU7MXWPhslN2Y5zX--
+--uKXrQ8qYIGygycIk--
