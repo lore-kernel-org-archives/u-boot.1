@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF8DEB64DD
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 06:04:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F385AEB64DD
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 06:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78DD286A50;
-	Thu, 17 Aug 2023 08:04:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE3E186A63;
+	Thu, 17 Aug 2023 08:04:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="rS4x/gg3";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="XvOqTjNo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B381686A2B; Thu, 17 Aug 2023 08:04:37 +0200 (CEST)
-Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
- (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
+ id BA14186A63; Thu, 17 Aug 2023 08:04:38 +0200 (CEST)
+Received: from s.wrqvwxzv.outbound-mail.sendgrid.net
+ (s.wrqvwxzv.outbound-mail.sendgrid.net [149.72.154.232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A66486A2B
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:04:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1750586A45
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=from:subject:mime-version:to:cc:content-transfer-encoding:
- content-type:cc:content-type:from:subject:to;
- s=s1; bh=vckpvl9sBzHB3OIKKmW29sl1pgB/g5n6slZq2ITSFHM=;
- b=rS4x/gg3AEi7MrBP0oCuLLH5x6Nn8BOHvZaSKtpYTDlkovZlC1edkfuNXfF7DeRKjI5M
- EXsCsqnn4YPnsP1M+nSFoeqesyZJOVkUIZE0qjrXx0+LdsiFqhlyyMxGQEU2pMr1LQhJVk
- rD9Ou43jeMzPZuzhZb1gnrgLMRLpGZMhpXQkolJ+GwP1/TBUHBsjzXujmW1Vizx1MoFpWM
- P2caWAHrT63XEAMI7sN4cvTymImM4zTZpfN8Dv7LoaLDTbpfUb22r7vMWVNMNRyszGbaWN
- H6IKVknANFCp0EDOyA6EDktNFhVcLLgCVNldhEHtcPpTCCmEOuv9a/GW42845nOg==
-Received: by filterdrecv-d7bbbc8bf-b8xkx with SMTP id
- filterdrecv-d7bbbc8bf-b8xkx-1-64DDB871-22
- 2023-08-17 06:04:33.386259218 +0000 UTC m=+8490286.899608433
+ h=from:subject:in-reply-to:references:mime-version:to:cc:
+ content-transfer-encoding:content-type:cc:content-type:from:subject:to;
+ s=s1; bh=gWAOWpgG66jBlgnYACjRRfpv2xR95eLP9s1jmAsSN6k=;
+ b=XvOqTjNoResqYATareP0MGchFOkyDKQa9vkAZxahddTPuvt8Xco928j27vKob/+payPS
+ XuhJZ3yFrUC08GT+f7luGdCIHPwzDUdhPL5SN+IaohQ9cCyIbG+mXVBSFH912sEh66DeCU
+ KaQYuWZgT/9bW+VdMmFKMrHrKRTYh2jnPEDI/ufZUUlEufEDqFfjJNuWIZyR8lovmPMXjP
+ 5Hg5LVq6MSmk181PunOlN+TFnuV7F7PR3pt4nObmZpNtMdyGPWhZlPu4RAGej+KAn6rKeA
+ XEMJJH7ddQpO20Kz6sGh60feHMJqNGl7/DnXpALG5qVgzMVjxuLqKP38OyAAZYBw==
+Received: by filterdrecv-66949dbc98-2wdbb with SMTP id
+ filterdrecv-66949dbc98-2wdbb-1-64DDB872-1B
+ 2023-08-17 06:04:34.607999567 +0000 UTC m=+8490281.895247968
 Received: from bionic.localdomain (unknown) by geopod-ismtpd-8 (SG) with ESMTP
- id OlPFFzOfR1igyrVAxoHl0A Thu, 17 Aug 2023 06:04:33.076 +0000 (UTC)
+ id nDKkVH-STSiQipTIqgjXiQ Thu, 17 Aug 2023 06:04:34.421 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 0/3] rockchip: Add supported RK3566/RK3568 boards to
- documentation
-Date: Thu, 17 Aug 2023 06:04:33 +0000 (UTC)
-Message-ID: <20230817060422.477759-1-jonas@kwiboo.se>
+Subject: [PATCH 1/3] doc: rockchip: Add supported RK3566/RK3568 boards
+Date: Thu, 17 Aug 2023 06:04:34 +0000 (UTC)
+Message-ID: <20230817060422.477759-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230817060422.477759-1-jonas@kwiboo.se>
+References: <20230817060422.477759-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h3MHgd5FKiQU2GEaM?=
- =?us-ascii?Q?UtwEUSJKd=2FlmYYP0BfpJwsyaVrO6=2F2GmV2p4emY?=
- =?us-ascii?Q?m8mN4Z8742MUZ4gzhlzPxfrJyelvsHKAvKuvSW8?=
- =?us-ascii?Q?07srHEHXV3Q2AJBvupmkKMlBEbDVqQnDLQLvfyc?=
- =?us-ascii?Q?NXitBKqg+kIArzKOk=2Fqs0MaaReJOrBAd0H2RcF?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h6p72mrMXJRtQePd+?=
+ =?us-ascii?Q?f3pdCSGddb9ibDJf=2FM4PpI1jQy1llLTqmKRP9gF?=
+ =?us-ascii?Q?YPxo=2FI9EgISonT2OwjRxKlR8pbuQf75MZ7WdEHM?=
+ =?us-ascii?Q?KF6RB50PA9ZI24OAaUAvHg6+M9=2FpEJuX4Tlui75?=
+ =?us-ascii?Q?dVgCahSkZqYFzRNpucGkQYcExSiiF4J=2F+n4MNa?=
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
@@ -75,27 +76,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series add missing supported RK3566/RK3568 boards to documentation
-and add related device tree files to MAINTAINERS for a few RK35xx boards.
+Update Rockchip documentation to include RK3566/RK3568 boards already
+supported. Also list Pine64 boards under RK3566 and drop defconfig to
+match other listed boards.
 
-Also added myself as a reviewer for RK3566/RK3568/RK3588 boards that I
-have and can help with review and testing of e.g. defconfig and device
-tree changes.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ doc/board/rockchip/rockchip.rst | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
 
-Jonas Karlman (3):
-  doc: rockchip: Add supported RK3566/RK3568 boards
-  board: rockchip: rk35xx: Add device tree files to MAINTAINERS
-  board: rockchip: rk35xx: Add myself as reviewer to MAINTAINERS
-
- board/anbernic/rgxx3_rk3566/MAINTAINERS       |  3 +
- .../neural-compute-module-6/MAINTAINERS       |  6 ++
- board/radxa/rock5a-rk3588s/MAINTAINERS        |  3 +
- board/radxa/rock5b-rk3588/MAINTAINERS         |  5 +-
- board/rockchip/evb_rk3568/MAINTAINERS         | 55 +++++++++++--------
- board/rockchip/evb_rk3588/MAINTAINERS         |  3 +-
- doc/board/rockchip/rockchip.rst               | 20 ++++---
- 7 files changed, 61 insertions(+), 34 deletions(-)
-
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 31aeb8567607..4668e598515e 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -91,18 +91,22 @@ List of mainline supported Rockchip boards:
+      - Theobroma Systems RK3399-Q7 SoM - Puma (puma_rk3399)
+ 
+ * rk3566
+-     - Anbernic RGxx3 (rgxx3-rk3566)
++     - Anbernic RGxx3 (anbernic-rgxx3)
++     - Pine64 Quartz64-A Board (quartz64-a-rk3566)
++     - Pine64 Quartz64-B Board (quartz64-b-rk3566)
++     - Pine64 SOQuartz on Blade (soquartz-blade-rk3566)
++     - Pine64 SOQuartz on CM4-IO (soquartz-cm4-rk3566)
++     - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
++     - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
+ 
+ * rk3568
+      - Rockchip Evb-RK3568 (evb-rk3568)
+-     - EmbedFire Lubancat 2 (lubancat-2-rk3568_defconfig)
++     - EmbedFire LubanCat 2 (lubancat-2-rk3568)
++     - FriendlyElec NanoPi R5C (nanopi-r5c-rk3568)
++     - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
+      - Hardkernel ODROID-M1 (odroid-m1-rk3568)
+-     - Pine64 Quartz64-A Board (quartz64-a-rk3566_defconfig)
+-     - Pine64 Quartz64-B Board (quartz64-b-rk3566_defconfig)
+-     - Pine64 SOQuartz on Blade (soquartz-blade-rk3566_defconfig)
+-     - Pine64 SOQuartz on CM4-IO (soquartz-cm4-rk3566_defconfig)
+-     - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566_defconfig)
+-     - Radxa E25 Carrier Board (radxa-e25-rk3568_defconfig)
++     - Radxa E25 Carrier Board (radxa-e25-rk3568)
++     - Radxa ROCK 3 Model A (rock-3a-rk3568)
+ 
+ * rk3588
+      - Rockchip EVB (evb-rk3588)
 -- 
 2.41.0
 
