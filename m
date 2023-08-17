@@ -4,77 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBD2C05052
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81FDEC05052
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:52:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D1B86A43;
-	Thu, 17 Aug 2023 03:52:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9DBD86A28;
+	Thu, 17 Aug 2023 03:52:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iyHfgp2y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WjZuUxGH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46AD186A03; Thu, 17 Aug 2023 03:52:02 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 1536886A2D; Thu, 17 Aug 2023 03:52:04 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8252386A40
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:51:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DDBE86A45
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:52:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-6bcbb0c40b1so5840907a34.3
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:51:59 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6bd3317144fso4606582a34.1
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:52:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692237118; x=1692841918;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LbQbI7Z25f+6JD5lVVGizMFx9IqteT0dnEjgS/o9uDs=;
- b=iyHfgp2yPQdnLeF9oUHcGIq3ofajaXpLUKTSNmVOyYp+79m7qKnB7LhKP5lQNjhpmA
- 5XxxAeAUDEBKDigT3OFwedI00oomHUqyIDWJURI0JVn9fzZvDgaYzjGumGZyHukEbax/
- cANpohA2YvUaQQToYEgMw7mNQK0I7G+Wk2qks=
+ d=chromium.org; s=google; t=1692237119; x=1692841919;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Puo6mlCLME9VLJ75a/kuYUcc3k6NCP7WWQ0T87uVTJw=;
+ b=WjZuUxGHOflJQI6TPNGtaAbmbRBRa2GC+LJx8AujuQ4HJwQUCpRQBPGO1ysEIKj8Zt
+ q7HWRtQ21HyP3H5Y9tTbDl/Wki8AidimJilyu+frDk0rCq64fp4ls6by7egd7R2bMS3h
+ 48c8kVqQco7rcvyL3iwt0F06lSW8M6ZsBkOZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692237118; x=1692841918;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LbQbI7Z25f+6JD5lVVGizMFx9IqteT0dnEjgS/o9uDs=;
- b=UP/quIVZrM23n6RZNXrTN7/368xz4iNVlsKSIRW9KipRhUw2gv6BudhnQBdr4WML34
- HDxTo+nNv+Kvrs5dKRYUlkw9GNGf/HM93dyNScklifoa9dYWkWsiOTB9j8Qr0L/ZphbR
- 9AmF8U1ZyJFF0aZs/XFr/okGj/TVOHzHcP8zZSr7lBH6JIQmy/uULOrfZCcLVY4MLJit
- GXRXO8a+JtVL8QszYu9qkB20zB+W2ybGcnMVhnGYcJcdBtZbo1PR7hIvnR1pgdJNeGxp
- 2qxmhWrzWB974hoVzAIB+G4ACu56hlKyh+34kCZlxvX5xwSgz17dvnprVCqjld+wTxS3
- WOAg==
-X-Gm-Message-State: AOJu0YwrqOjcFC1Q2LOm016WnJPfr1caUkSNO90SfxWMGZNIcgCqmrLF
- L4AjMTBHmBGRIuHjLcWA7fstGap0e5q389yTMIE=
-X-Google-Smtp-Source: AGHT+IFAQ/ZKuzJ7ja9frttd1Z7OagSxWOrzvFWRLOY8iWv8bT6qgv1tpTGwhT41Vh6iBaVph0HnZg==
-X-Received: by 2002:a9d:63c7:0:b0:6bd:152f:9914 with SMTP id
- e7-20020a9d63c7000000b006bd152f9914mr3721179otl.26.1692237118076; 
- Wed, 16 Aug 2023 18:51:58 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692237119; x=1692841919;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Puo6mlCLME9VLJ75a/kuYUcc3k6NCP7WWQ0T87uVTJw=;
+ b=ddHAmykOORm+KaAhaEpIz9Wi4Brt9Ag6do3ciFRb1bfYIuTLlh3EGoF0ytGW/1yQcw
+ Mj0zEa/Otc8ZPCrICYclYLALKwzwOtfylczk/7uOBEKHQ1zvxb3+sSzvArwCZv28u+q+
+ aMrWF9efmQJT4Pnupf4jBFKcMqFdxP6LIHZ2m1vqgvax7NGz/MtzQIVxTK4cNuLxBPok
+ PTUuOVihi+P46NEOEIQOOxgAa9bEvMxbrJQmOOjqODENwQg9JFLtVYA+4mnX7CN11jmD
+ y4BNIqIglSSf8EaPza/r8Fb2ABtt8I9VI4ZP6SAUpzxqneAWUabxB5WURbR2YgUdVyom
+ dirA==
+X-Gm-Message-State: AOJu0YziZrBxuoO18e5ySbSTqc8OAjCumPgyYdv8vUvoNIH7QCq/d1cQ
+ 0leuoVQuUTUdMVZfxWzChLrdPP37h9jJpQw7tXY=
+X-Google-Smtp-Source: AGHT+IFUl8GCcI8Xh0C2SdAwXWKuCgpnXVjh14o3lbSnkx5R3/2nM+Ta4NzUwKPN+F0Q4jYClXbljw==
+X-Received: by 2002:a9d:638c:0:b0:6b1:d368:557c with SMTP id
+ w12-20020a9d638c000000b006b1d368557cmr3970988otk.30.1692237119646; 
+ Wed, 16 Aug 2023 18:51:59 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.51.57
+ l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.51.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 18:51:57 -0700 (PDT)
+ Wed, 16 Aug 2023 18:51:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Anatolij Gustschin <agust@denx.de>,
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Stefan Bosch <stefan_b@posteo.net>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Subject: [PATCH 0/9] x86: Fixes and improvements for coreboot
-Date: Wed, 16 Aug 2023 19:51:35 -0600
-Message-ID: <20230817015149.774847-1-sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/9] x86: coreboot: Rearrange arch_cpu_init()
+Date: Wed, 16 Aug 2023 19:51:36 -0600
+Message-ID: <20230817015149.774847-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
+In-Reply-To: <20230817015149.774847-1-sjg@chromium.org>
+References: <20230817015149.774847-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,38 +88,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series fixes various bugs and annoyances in coreboot and
-coreboot64:
+Init errors in SPL are currently ignored by this function.
 
-- Make coreboot64 debug UART start reliably
-- Avoid the long USB-init delay on startup
-- Correct the timer speed on coreboo64
-- Fix a bootstd cros bug (will likely be squashed into another patch)
-- Fix the terribly slow console scrolling
+Change the code to init the CPU, reporting an error if something is wrong.
+After that, look for the coreboot table.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (9):
-  x86: coreboot: Rearrange arch_cpu_init()
-  x86: Set the CPU vendor in SPL
-  x86: Allow APCI in SPL
-  x86: coreboot: Look for DBG2 UART in SPL too
-  x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
-  x86: coreboot: Drop USB init on startup
-  x86: coreboot: Align options between coreboot and coreboot64
-  bootstd: cros: Correct condition for reading the kernel
-  x86: coreboot: Enable VIDEO_COPY
+ arch/x86/cpu/coreboot/coreboot.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
- arch/x86/cpu/coreboot/coreboot.c | 16 +++++++++-------
- arch/x86/cpu/x86_64/cpu.c        |  7 +++++++
- arch/x86/dts/coreboot.dts        |  1 +
- boot/bootmeth_cros.c             |  4 ++--
- configs/coreboot64_defconfig     | 10 +++++++++-
- configs/coreboot_defconfig       | 12 ++----------
- drivers/serial/Kconfig           |  2 +-
- drivers/video/coreboot.c         | 12 ++++++++++++
- lib/Kconfig                      |  8 ++++++++
- 9 files changed, 51 insertions(+), 21 deletions(-)
-
+diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
+index d7eedbd7436e..6a551e4c6713 100644
+--- a/arch/x86/cpu/coreboot/coreboot.c
++++ b/arch/x86/cpu/coreboot/coreboot.c
+@@ -20,7 +20,14 @@
+ 
+ int arch_cpu_init(void)
+ {
+-	int ret = get_coreboot_info(&lib_sysinfo);
++	int ret;
++
++	ret = IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
++		 x86_cpu_init_f();
++	if (ret) 
++		return ret;
++
++	ret = get_coreboot_info(&lib_sysinfo);
+ 	if (ret != 0) {
+ 		printf("Failed to parse coreboot tables.\n");
+ 		return ret;
+@@ -28,8 +35,7 @@ int arch_cpu_init(void)
+ 
+ 	timestamp_init();
+ 
+-	return IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
+-		 x86_cpu_init_f();
++	return 0;
+ }
+ 
+ int checkcpu(void)
 -- 
 2.41.0.694.ge786442a9b-goog
 
