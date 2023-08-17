@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0556FC2FC04
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D76E6C2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDE1386A18;
-	Thu, 17 Aug 2023 03:52:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B18E86A4B;
+	Thu, 17 Aug 2023 03:52:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YjPpNOAy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Br+tR4LZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2E2086A63; Thu, 17 Aug 2023 03:52:07 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id EA4A886A76; Thu, 17 Aug 2023 03:52:08 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21716847D3
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:52:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36A6F86A52
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:52:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6bca5d6dcedso6045361a34.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:52:05 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-1c5046642b4so2558652fac.1
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:52:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692237123; x=1692841923;
+ d=chromium.org; s=google; t=1692237124; x=1692841924;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rXsKEJWKna3JYuP44jmUfm5U65HShjxlwRay5c1RPfI=;
- b=YjPpNOAyvwJojN5R6IiPZhRuVczrycJ+k2j2FMhhuifdSijKgUp6cB2YicVes4yssz
- NI7rIRJrw8G4VntUHsUoJeF75qoEVTcMvj3hM9T/ow2swpkzEOlT2GA4keB176Z3Fcxt
- kOEYFRecOddiKt5lLjFid64eZJv3x6kAtwpB8=
+ bh=C8AAbQQ2y7GdS3KxqSyOTtK7yJJV7+vKcb0r2rMaWGM=;
+ b=Br+tR4LZZ4602ganCQGCqsChs32wftXW7syEklzLyroCAMJOC6XpvluV4mXmOkcvwe
+ wFT79lv3cJf6UXApmENFrKnxtvqG/6pwIQRvNTesKCl113OfJj0O9d4iRF2PZUiSHtEJ
+ n0gzF3Loqc9A3yBP8F5olAJkoMxylL67EteTU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692237123; x=1692841923;
+ d=1e100.net; s=20221208; t=1692237124; x=1692841924;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rXsKEJWKna3JYuP44jmUfm5U65HShjxlwRay5c1RPfI=;
- b=leENljSTNNZvd2oBvDZ2uzn9enWto762+3T+Oey7wWm8kiLanLeDhjNWE9ID4gZY1I
- Htvpz0Wp1n3maO1LJVS7SjnQP4B0NHgmFkCAJVeyu7N5gglsx7BvVQTkjyoa0Ot9tMaA
- ZadSV4dVpmnzFyHFNS08n61qlmtWkMifx4cGddLinMvecyMvoxgSSkRxeJM3ElkPACm9
- 9ImLFnI7SPHhHbOYSRaZ2W2NZzoih6slXJxcZxKZ6k7BxwLnbFB+I3kdmQtVjQ5su4Xg
- PRTPGj3oIPL/rVOL/mr9J+sZwIAyX87PenfCvMHoFzADD/BJkiLcVc0zLrm+pt2/0sfB
- 36mg==
-X-Gm-Message-State: AOJu0YxMinrKm1FCvblE2pdiNZmjFTG+blqW1SrH0myfbVUPlAUCsH70
- kR3Yws9O7hNqYm3gyFiVwpy/y/WafzPl9p3VmWk=
-X-Google-Smtp-Source: AGHT+IFBDINMnkT1c3MzRxVlwDRKDVI8ZRVlrgMJFnByvDfKI5Dx3Cj5G8Pn2ZEpRXN1fvV7bDQ0CQ==
-X-Received: by 2002:a05:6830:1498:b0:6b9:e3b0:1433 with SMTP id
- s24-20020a056830149800b006b9e3b01433mr3442383otq.37.1692237123711; 
- Wed, 16 Aug 2023 18:52:03 -0700 (PDT)
+ bh=C8AAbQQ2y7GdS3KxqSyOTtK7yJJV7+vKcb0r2rMaWGM=;
+ b=SXGCDObruxSDuU8rzeY26ey6/AFsUhf9B0pPIypH9BBMAYBD34C/ZPNobaqyPmwA3i
+ p2jsGelLHD5YvunxiBEKYAaWsdhWKC5ZP+UDywTpFQZiYnqUaWCoAMbkW+xJAD3/ah8j
+ 5EAjjp6pl/TT5j/AGh+cTY320ULmPZZ059RjlOlIxrjoKKJLtEbcdto70NeqpPsZtQV0
+ s+hGU55jaFPJWIkL/c8E7/QUegAdb513uhQ4ODuEo+xK0mppSjitiOCDk0CJ81qiUeDT
+ TS8tO6VwCylUkHxfWpiW3PmMw5RNNAkKcKUR+V/uKiH+r/IknQdAsq3tZqB6PcT1dgpu
+ T/Gw==
+X-Gm-Message-State: AOJu0Yzt5EFSkAFEwyu52b3VRxlAhqsSLXbjJU7lSIR0+nIJFmcRVaOM
+ mvIU5JJCIcTDQJydnWm9efI5z1RgqYcZBUemups=
+X-Google-Smtp-Source: AGHT+IGp7cDbewGdvpiH/ao635LF/0HdSGIZ2lW1C6+Ligq6WPlgYBSGqmiUFdEWFpPeZadDWCSd9g==
+X-Received: by 2002:a05:6870:3109:b0:1b0:408a:1d14 with SMTP id
+ v9-20020a056870310900b001b0408a1d14mr4140802oaa.44.1692237124628; 
+ Wed, 16 Aug 2023 18:52:04 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.52.03
+ l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.52.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 18:52:03 -0700 (PDT)
+ Wed, 16 Aug 2023 18:52:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 5/9] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
-Date: Wed, 16 Aug 2023 19:51:40 -0600
-Message-ID: <20230817015149.774847-6-sjg@chromium.org>
+Subject: [PATCH 6/9] x86: coreboot: Drop USB init on startup
+Date: Wed, 16 Aug 2023 19:51:41 -0600
+Message-ID: <20230817015149.774847-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
 In-Reply-To: <20230817015149.774847-1-sjg@chromium.org>
 References: <20230817015149.774847-1-sjg@chromium.org>
@@ -88,43 +88,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The debug UART on modern machines uses a 32-bit wide transfer. Without
-this, setting debug output causes a hang or no output. It is not obvious
-(when enabling CONFIG_DEBUG_UART) that this is needed.
+This is very annoying as it is quite slow on many machines. Also, U-Boot
+has an existing 'preboot' mechanism to enable this feature if desired.
 
-Enable 32-bit access to avoid this trap.
+Drop this code so that it is possible to choose whether to init USB or
+not.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- configs/coreboot64_defconfig | 1 +
- configs/coreboot_defconfig   | 1 +
- 2 files changed, 2 insertions(+)
+ arch/x86/cpu/coreboot/coreboot.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-index 9f228420cfa9..2e80b5af92ef 100644
---- a/configs/coreboot64_defconfig
-+++ b/configs/coreboot64_defconfig
-@@ -52,6 +52,7 @@ CONFIG_ATAPI=y
- CONFIG_LBA48=y
- CONFIG_SYS_64BIT_LBA=y
- # CONFIG_PCI_PNP is not set
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
- CONFIG_CONSOLE_SCROLL_LINES=5
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index 77214f1b4c06..ae44705a1d51 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -60,6 +60,7 @@ CONFIG_LBA48=y
- CONFIG_SYS_64BIT_LBA=y
- CONFIG_NVME_PCI=y
- # CONFIG_PCI_PNP is not set
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
- CONFIG_CONSOLE_SCROLL_LINES=5
+diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
+index 6a551e4c6713..5e3af5e561bc 100644
+--- a/arch/x86/cpu/coreboot/coreboot.c
++++ b/arch/x86/cpu/coreboot/coreboot.c
+@@ -82,10 +82,6 @@ static void board_final_init(void)
+ 
+ int last_stage_init(void)
+ {
+-	/* start usb so that usb keyboard can be used as input device */
+-	if (IS_ENABLED(CONFIG_USB_KEYBOARD))
+-		usb_init();
+-
+ 	board_final_init();
+ 
+ 	return 0;
 -- 
 2.41.0.694.ge786442a9b-goog
 
