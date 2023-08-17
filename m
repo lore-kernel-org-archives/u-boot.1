@@ -4,63 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2ADEC3DA4D
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 16:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95BD3C3DA50
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 16:36:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0305D86B5B;
-	Thu, 17 Aug 2023 18:03:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linux.microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C89F86B87;
+	Thu, 17 Aug 2023 18:36:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="KtQjVlO5";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="luhp3poh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24CF586B5B; Thu, 17 Aug 2023 18:03:10 +0200 (CEST)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id F278886B53
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 18:03:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
+ id DE74986B91; Thu, 17 Aug 2023 18:36:53 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4542286B7E
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 18:36:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from [192.168.1.68] (d172-218-241-181.bchsia.telus.net
- [172.218.241.181])
- by linux.microsoft.com (Postfix) with ESMTPSA id C8B32211F7B5;
- Thu, 17 Aug 2023 09:03:05 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C8B32211F7B5
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1692288185;
- bh=GPTRKL8kynTWZSqZ2YQNo2JfhG+xPLbYyjP4euwk85A=;
- h=Subject:From:To:Cc:References:Date:In-Reply-To:From;
- b=KtQjVlO5sAXLMGtpe5htLfrXI1s95Iznnr7/LFuo+MEW9dObc22aS0BanmYxPbwbP
- fX+ufOlONshnsMmNEQM9IgOwqSoR7g4Kv5og9bmykwAjNWeeusmXx/tn5ttuAv6BIM
- gDRyJAfUujnXFXIlG3lw05bpCcx6Be4k20Mhex44=
-Subject: Re: [PATCH 1/3] fdt: common API to populate kaslr seed
-From: Sean Edmond <seanedmond@linux.microsoft.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Dhananjay Phadke <dphadke@linux.microsoft.com>,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20230804233357.65214-1-seanedmond@linux.microsoft.com>
- <20230804233357.65214-2-seanedmond@linux.microsoft.com>
- <CAPnjgZ2fYDcoYw3XOS4roL3yWVrgyVwKBNS9KEXOh_NHOtPhCQ@mail.gmail.com>
- <2e6afa29-53a1-38d4-d376-045669b931cb@linux.microsoft.com>
- <CAPnjgZ1vZKO7OFwnmQaOhm0ivxYC1BzYEv0tnj8asvDchEb-uw@mail.gmail.com>
- <a0e2fd89-accf-78b5-2a9a-4a19b72b976e@linux.microsoft.com>
- <CAPnjgZ33GKr1QosmeFUMPmrFYXE03WgvuHzYrFb2U7se2-6eaw@mail.gmail.com>
- <445eea7b-c9e4-b475-82f5-541d4d7b8fbc@linux.microsoft.com>
- <CAPnjgZ2np6-bo8ZTPUcmbB06N-PKeQ9U5ZG8Mw=nk0pw-barZw@mail.gmail.com>
- <9dbad905-7a72-f7e8-d473-2140a221f102@linux.microsoft.com>
-Message-ID: <322e6148-3283-f5dd-4c51-7927b5856b7e@linux.microsoft.com>
-Date: Thu, 17 Aug 2023 09:03:04 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1692290207; x=1692895007; i=xypron.glpk@gmx.de;
+ bh=YfWdbEBoFSRqKqqQ9JDwBEP9Hm5ozpBYwDTwZf2fs/4=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=luhp3pohm0kSx13BwCdra+UMRvhEHHDMzYbrejmo1VfOsqJcI8dyrnaGdUeSga++mRXtBmo
+ VEnap2Ma13jOgOM7SBf9szJTdf3QqQGV3oXkzwbdm1f33gWzFEXKAxnVIw1N41l7vYEBlyh46
+ 1/4DbM+ufID9XSZeUoYnDPkRaB3tmKG0JIGAhm+MrFHFP6P8qHWjpttan076zFnrUYyVdSfH5
+ 6PHkw6DrtlwF3VdpbjY8hMFAYjXm2/62D9gCXkcHJiYFF4h6GH/xlVoYDnvTEFT9/LukaZm9y
+ 4AjaLNgl0t/y0WR6Ox1hng1ZtvNKxDY1GEPYATs2qRNtxroYIs+w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([62.143.244.162]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N49hB-1pp3fC05eT-0102fR; Thu, 17
+ Aug 2023 18:36:47 +0200
+Message-ID: <dfac4932-7cbc-3a4e-bde7-c2048516ddf1@gmx.de>
+Date: Thu, 17 Aug 2023 18:36:40 +0200
 MIME-Version: 1.0
-In-Reply-To: <9dbad905-7a72-f7e8-d473-2140a221f102@linux.microsoft.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: Doc style for method functions
 Content-Language: en-US
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+To: Simon Glass <sjg@chromium.org>
+Cc: linux-doc@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Jonathan Corbet <corbet@lwn.net>
+References: <CAPnjgZ0vPwd9v+V8Pg5Bo87OELD-vokB7ZrvU3Bv5dQ_O9z6Sg@mail.gmail.com>
+ <877cpusybz.fsf@meer.lwn.net>
+ <CAPnjgZ3Lo4Na7YeKPFaY30bwsv_gBGapN_DXeab+k7yhCF3uww@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAPnjgZ3Lo4Na7YeKPFaY30bwsv_gBGapN_DXeab+k7yhCF3uww@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:RAaueV9ewgc9CAWOYC5n2wrMEia0Y/KzEN23+g5Gkfw6w5WZZHx
+ +y6YSta7UoOSqD2YGirZb6wbG2sLYbDwWrA+FaePKP93lrnCGNIe11UpZtqyc/SxA++lQV5
+ R8aQYwIT9wjazJOsTO1dknEJcDTuGv7kyTT+hzxBEIeEHOR5Q8FjvvRKYhafKmbJNcN5DDR
+ OinxeZVsKYYb3a0Wxg9FQ==
+UI-OutboundReport: notjunk:1;M01:P0:ZhfQWipqPjg=;vy1XGRb6DQ6m79qCADRPI5OC3vV
+ 9MyRPJfwp9P3xNOGwqoAOWTHaIltVA8rnUUE+8mKdNJLyf18zvA/reV4vHU7OxVvcvi9XE8zP
+ lxriUcg5rVBRp0MxKgymaJPqqNG0ly1JHQrL4i4oY+GLizD1BvVZ+jkcGpJ2XbR+4d3zy9/Pr
+ 8ywPU0hiGCKlh4Nl3OHq+6dDOL48gImw5MW7muiTQotKMD4UotvVvhm4wRFWD6T1n7/Iw8HYQ
+ yHQ7DI6x4v0d/VgBwIlfW18lHnFYsX99D8kUqDFLj1i/LELZUbI4kwY9scJIVG3qqiJlWNFkg
+ 7han2kZWQHAdDm/ukoxsBCXRJf8AUYYBwbg7WLqHCdQbSrapDLoE6VXvGt3MwM9np/4uAVPHC
+ NKzPogrGueoFBoutUsQNnpTxsPbAK1IHbktq7/vG6GvdWV/HAPIvsNTOVqo60AfYHqKaP0woU
+ yilnWaryzfcFAejIfc2vKNoAvvta4YPKS531m0LSA0muH2N5Fs/9iD1FGkcjJcN5qi5XgWDGJ
+ hriw37MClayErHr81ujP0BPCeRStdbWgmnW+n3Gq6M+DdCSfZOpXWYZLbORLyCbgWhjAy/BNf
+ IcB9nEsw4+iBeKx4AJ2PWDaH+WImD74+bIwp6QR7uk1GGtWSIU2HjYRaPgF4ByAbcDoGIntbj
+ BeH8TAk8rCN3RMjoOxyo6PQAr2wD3cYD4YD5TZ7wsGk5axSf6bvBId6+/nHqpUYb68e99+ELA
+ h1ynw0cNzggjkghMRbmOUSBcApYusmJLYwdjIgvLPllCgEboBxzsukw5qjUdfGqWmcBA5gMD8
+ Y8CrVhXlhL+Ao2UM1imtpsF/wk4YrHvdf08y00T2e52ogzwSs0RTs8SCUcgM6P8s6inFjdARn
+ x3mijVxLbnpSDB71rJt8O5rtFAjyx/jGQ0UfIo0z3gZABiOdDykADy7L9Uw12jeauTmjoucky
+ WhDHi7Rw1Q5cL74rIinXENSXkag=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,175 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 2023-08-15 10:46 a.m., Sean Edmond wrote:
+On 16.08.23 19:47, Simon Glass wrote:
+> Hi Jonathan,
 >
-> On 2023-08-15 7:44 a.m., Simon Glass wrote:
->> Hi Sean,
+> On Wed, 16 Aug 2023 at 11:15, Jonathan Corbet <corbet@lwn.net> wrote:
 >>
->> On Mon, 14 Aug 2023 at 13:12, Sean Edmond
->> <seanedmond@linux.microsoft.com> wrote:
+>> Simon Glass <sjg@chromium.org> writes:
+>>
+>>> Hi Jonathan,
 >>>
->>> On 2023-08-12 6:09 a.m., Simon Glass wrote:
->>>> Hi Sean,
->>>>
->>>> On Fri, 11 Aug 2023 at 11:14, Sean Edmond 
->>>> <seanedmond@linux.microsoft.com>
->>>> wrote:
->>>>> On 2023-08-09 6:49 p.m., Simon Glass wrote:
->>>>>> Hi Sean,
->>>>>>
->>>>>> On Wed, 9 Aug 2023 at 16:35, Sean Edmond 
->>>>>> <seanedmond@linux.microsoft.com>
->>>> wrote:
->>>>>>> On 2023-08-08 7:03 p.m., Simon Glass wrote:
->>>>>>>> Hi,
->>>>>>>>
->>>>>>>> On Fri, 4 Aug 2023 at 17:34, <seanedmond@linux.microsoft.com> 
->>>>>>>> wrote:
->>>>>>>>> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
->>>>>>>>>
->>>>>>>>> fdt_fixup_kaslr_seed() will update given FDT with random seed 
->>>>>>>>> value.
->>>>>>>>> Source for random seed can be TPM or RNG driver in u-boot or sec
->>>>>>>>> firmware (ARM).
->>>>>>>>>
->>>>>>>>> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
->>>>>>>>> ---
->>>>>>>>>      arch/arm/cpu/armv8/sec_firmware.c | 32
->>>> +++++++------------------------
->>>>>>>>> common/fdt_support.c              | 31
->>>> ++++++++++++++++++++++++++++++
->>>>>>>>> include/fdt_support.h             |  3 +++
->>>>>>>>>      3 files changed, 41 insertions(+), 25 deletions(-)
->>>>>>>> We need to find a way to use the ofnode API here.
->>>>>>>>
->>>>>>>>> diff --git a/arch/arm/cpu/armv8/sec_firmware.c
->>>> b/arch/arm/cpu/armv8/sec_firmware.c
->>>>>>>>> index c0e8726346..84ba49924e 100644
->>>>>>>>> --- a/arch/arm/cpu/armv8/sec_firmware.c
->>>>>>>>> +++ b/arch/arm/cpu/armv8/sec_firmware.c
->>>>>>>>> @@ -411,46 +411,28 @@ int sec_firmware_init(const void
->>>> *sec_firmware_img,
->>>>>>>>>      /*
->>>>>>>>>       * fdt_fix_kaslr - Add kalsr-seed node in Device tree
->>>>>>>>>       * @fdt:               Device tree
->>>>>>>>> - * @eret:              0 in case of error, 1 for success
->>>>>>>>> + * @eret:              0 for success
->>>>>>>>>       */
->>>>>>>>>      int fdt_fixup_kaslr(void *fdt)
->>>>>>>> You could pass an oftree to this function, e.g. obtained with:
->>>>>>>>
->>>>>>>> oftree_from_fdt(fdt)
->>>>>>> The common API I added is fdt_fixup_kaslr_seed(), which was 
->>>>>>> added to
->>>>>>> "common/fdt_support.c".
->>>>>>>
->>>>>>> There are 3 callers:
->>>>>>> sec_firmware_init()->fdt_fixup_kaslr_seed()
->>>>>>> do_kaslr_seed()->fdt_fixup_kaslr_seed()
->>>>>>> image_setup_libfdt()->fdt_tpm_kaslr_seed->fdt_fixup_kaslr_seed()
->>>>>>>
->>>>>>> I think the ask is to create a common API that uses the ofnode API.
->>>> So,
->>>>>>> instead of fdt_fixup_kaslr_seed() I can create
->>>>>>> ofnode_fixup_kaslr_seed()?  Where should it live?
->>>>>> If you like you could add common/ofnode_support.c ?
->>>>>>
->>>>>> But it is OK to have it in the same file, I think.
->>>>>>
->>>>>>> Are you also wanting
->>>>>>> the callers (eg. fdt_tpm_kaslr_seed, fdt_fixup_kaslr) to take 
->>>>>>> oftree as
->>>>>>> input too?
->>>>>> So far as you can go, yes. Also you may want to pass an ofnode (the
->>>>>> root node) so that things can deal with adding their stuff to any
->>>>>> node.
->>>>>>
->>>>>> Regards,
->>>>>> Simon
->>>>> I re-worked the API to use the ofnode API and tested it on our 
->>>>> board.  I
->>>>> was required to explicitly enable CONFIG_OFNODE_MULTI_TREE in 
->>>>> order for
->>>>> it to work.
->>>>>
->>>>> I have concerns this will create a breaking change for users of the
->>>>> kaslr fdt touch up.  In our case, if CONFIG_OFNODE_MULTI_TREE 
->>>>> isn't set,
->>>>> the control FDT gets touched up, not the kernel FDT as required.
->>>>> Everything runs to completion, but 
->>>>> "/proc/device-tree/chosen/kaslr-seed"
->>>>> isn't present after boot.
->>>>>
->>>>> Am I missing something?  Perhaps there's a way to modify the default
->>>>> value for CONFIG_OFNODE_MULTI_TREE to ensure this works 
->>>>> out-of-the-box?
->>>>>
->>>> Yes, perhaps we should enable this when fixups are used? Is there a 
->>>> way to
->>>> tell?
->>> I don't think there's a way to tell unfortunately.  Fixups are always
->>> called if OF_LIBFDT is enabled, and if an FDT is found during bootm.
+>>> I would like to do something like this:
 >>>
->>> I'm having trouble understanding the intention of the current default
->>> for OFNODE_MULTI_TREE:
->>>       default y if EVENT && !DM_DEV_READ_INLINE && !DM_INLINE_OFNODE
->>> Could we simplify to this?
->>>           default y if !OF_LIVE
->> I don't think it will build if inlining is used, but I can't remember...
-> I wasn't able to break this by turning off DM_DEV_READ_INLINE, and 
-> enabling OFNODE_MULTI_TREE/SPL_DM_INLINE_OFNODE/TPL_DM_INLINE_OFNODE. 
-> Perhaps things have changes since this was created.
->> The EVENT thing is because there is an of-fixup event, which was the
->> original thing using ofnode fixups.
+>>> struct part_driver {
+>>>     /**
+>>>      * get_info() - Get information about a partition
+>>>
+>>>                ^ causes error
+>>>
+>>>      *
+>>>      * @desc: Block device descriptor
+>>>      * @part: Partition number (1 =3D first)
+>>>      * @info: Returns partition information
+>>>      */
+>>>     int (*get_info)(struct blk_desc *desc, int part, struct
+>>> disk_partition *info);
+>>> ...
+>>> };
+>>>
+>>> But this gives:
+>>>
+>>> scripts/kernel-doc:292:
+>>>     print STDERR "Incorrect use of kernel-doc format: $_";
+>>>
+>>> Without the brackets on get_info() it works OK. What is the purpose of
+>>> that check, please?
 >>
->> I wonder what sort of size increment this will create with !OF_LIVE ?
+>> That's how the kerneldoc syntax was defined, well before my time as the
+>> maintainer.  This could be relaxed, I guess, but one would have to look
+>> at the parsing code to be sure that the right thing happens all the way
+>> through the process.  I'm not entirely sure it's worth it...
 >
-> With default (OFNODE_MULTI_TREE is not set):
+> I see. It is inconsistent, since we use () after normal functions.
 >
-> textdatabssdechex filename
+> I think I can fix it just by removing that check.
 >
-> 9380135536846752 1040133fdf05 u-boot/u-boot/u-boot
->
->
-> With !OF_LIVE (OFNODE_MULTI_TREE is set with OFNODE_MULTI_TREE_MAX=4):
->
-> seanedmond@ovlvm106:~/code/QEMU/qemu_uboot$ sizeu-boot/u-boot/u-boot
->
-> textdatabssdechex filename
->
-> 9390165536846752 1041136fe2f0 u-boot/u-boot/u-boot
+> Regards,
+> Simon
 
-Sorry about the formatting... let's try that again.
+If the structure element in not a function pointer, we probably still
+want to forbid adding parentheses. Just dropping the check might not be
+the solution.
 
-With default (OFNODE_MULTI_TREE is not set):
+Best regards
 
-text: 938013
-data: 55368
-bss:46752
-dec: 1040133
-hex: fdf05
-
-With !OF_LIVE (OFNODE_MULTI_TREE is set with OFNODE_MULTI_TREE_MAX=4):
-
-text: 939016
-data: 55368
-bss: 46752
-dec: 1041136
-hex: fe2f0
-
->
->>
->>>> Also, we should make it return an error when attempting to use a tree
->>>> without that option enabled. I would expect oftree_ensure() to 
->>>> provide that?
->>> I'll add a check.
->> OK thanks.
->>
->> Regards,
->> Simon
->>
->>
->
->
+Heinrich
