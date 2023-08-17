@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7221BC2FC04
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:53:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37E56C2FC04
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 01:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0456C86A76;
-	Thu, 17 Aug 2023 03:52:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8610B86A4B;
+	Thu, 17 Aug 2023 03:56:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SKQqc2kl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mvEmxkeB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 984FD86A52; Thu, 17 Aug 2023 03:52:12 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 4A00E86A4B; Thu, 17 Aug 2023 03:56:29 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C975E86A75
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:52:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEEA9847D3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 03:56:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-6bca5d6dcedso6045390a34.1
- for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:52:08 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-51e28cac164so930343a12.1
+ for <u-boot@lists.denx.de>; Wed, 16 Aug 2023 18:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692237127; x=1692841927;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oWDR8IJMgWgcJCIg01y99vhhEV+uQ7u4sRXD7rHsa1I=;
- b=SKQqc2klp+h8y7vVbPTLuEu52Q0yF78yhxe6k+JxyuxuUbr236va8CIzN0C/qYuAS2
- fIrksBABabHS/f2Hzh/BwN91tt9X5AJulNUq+riuD7paiJR1Lygv8AjzQDrgxDbY0Zlx
- VegHNaysYYR45ID1jBL/VyKSdBseFSOlVDCfQ=
+ d=chromium.org; s=google; t=1692237385; x=1692842185;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9536EFf5V60tXmgNunccWIQXJmgxXPOhF1lEEQ+i/+M=;
+ b=mvEmxkeBERKAZW82BcsHzh4gSOw+XE/ahpdc9p9NwUV1fH6IGkf7LAU0yxhz7wpWrY
+ SsqXJzvGQmsvdaJIwbOgCmKAqZwO6VzEuHWOMiR6YHjD+h3ypf7WTy/wr9REiq4H7em9
+ 33klVRqRKgWjCNfAihFiZCYCiW6Ego1glS6a8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692237127; x=1692841927;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oWDR8IJMgWgcJCIg01y99vhhEV+uQ7u4sRXD7rHsa1I=;
- b=Y0D/AnUzamg1bDnjSz60mq9SpCFiM8/MOoyxAcldqw6N7OJ9YpbemxmUfZfPOJVRWx
- CATVsYrGwETb0YeomtWHX1yQrqVycP6yaLlTAzWB4Y8RFRp/246Bxs1UpHje8CSNPS7/
- MxppKM4w+8XkNyG0NmUKCkaa1OhASMtD6txYdvbohyhW9J/4fp52Jw3TGlvu1tmwbzQG
- 02r/Nr+MPh92S0PCsAG8MHjS4cYND3uaKSwIxoAo3yOfv5+8A9wPulKkB/d/4Vj1kekf
- GANZg9WjGYaOHKi0qaBrZ6MS+wiv3Iwjip1uChhDPvDxq0TupAr8o9ZRnPwWOxwyI+2r
- L1og==
-X-Gm-Message-State: AOJu0YwcMn9IvgpPnNTpI3i2Dfrv4kcwUvpvXpqUm6dt+NzGmwrG0nWW
- WD+s0w3J04wyvP162gIcj8gPRE44fi2ap6S3/cw=
-X-Google-Smtp-Source: AGHT+IFYR2edxNxfTiLKUOEnrI/Sggnbq+SD7pz3IFzSzDQeCXFbd6jnnFE6QXN9HNS9vzYMv+zImg==
-X-Received: by 2002:a05:6830:20c9:b0:6bc:c9e6:30b7 with SMTP id
- z9-20020a05683020c900b006bcc9e630b7mr3804987otq.26.1692237127374; 
- Wed, 16 Aug 2023 18:52:07 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- l18-20020a0568301d7200b006af9d8af435sm6606854oti.50.2023.08.16.18.52.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Aug 2023 18:52:07 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH 9/9] x86: coreboot: Enable VIDEO_COPY
-Date: Wed, 16 Aug 2023 19:51:44 -0600
-Message-ID: <20230817015149.774847-10-sjg@chromium.org>
-X-Mailer: git-send-email 2.41.0.694.ge786442a9b-goog
-In-Reply-To: <20230817015149.774847-1-sjg@chromium.org>
-References: <20230817015149.774847-1-sjg@chromium.org>
+ d=1e100.net; s=20221208; t=1692237385; x=1692842185;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9536EFf5V60tXmgNunccWIQXJmgxXPOhF1lEEQ+i/+M=;
+ b=VhUvqb6308dQzlkT3OVhInklar91nQLz0akK+0BtF/Ck950V5pKnbFS8pRJpN0qQ1F
+ BuG6Xgcsg5IRX5G3j44q9kkDbMa35dDcnj6telBeG74ZU/z3Zy758IX3v1nlXhPJhm1t
+ gs1xqKUheElgg6o7lSMSK1zwI7kNgR5MJjqpPEKkfd9RMsoVZsR7zoO8hvnhTI0PHPaw
+ nH5BgpRLWKT370T/aRAh8y8oIBKu3385xhGFu0vZqy3vaS6Qtb55HPQ447Z/zoGq0LW+
+ Vq5rfp+deK7pkjaXFj4gKJfrKTIl5MupcmrKWYizMQwZ+pGlRmyg52mIO8tnd1Uw6hTJ
+ SqWQ==
+X-Gm-Message-State: AOJu0YxBWfZNW3XrMxg7OfW8erPfEe9StcODoXBdCM3cne0CH5rDqJ3r
+ 4AzUaJOe7IlvjFypHkC9bdt7up7jjLwqr8h8G/gdYw==
+X-Google-Smtp-Source: AGHT+IFjtuiy2k4CmI6AzOgth+NWshg0EUwC1sskk3GAfS3IwaV5msCPnCqXSQKjoXqNYYByxXs0+5xQTk8gYwXLqoU=
+X-Received: by 2002:a17:906:8a65:b0:992:ef60:aadd with SMTP id
+ hy5-20020a1709068a6500b00992ef60aaddmr1657330ejc.13.1692237385134; Wed, 16
+ Aug 2023 18:56:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230813201038.413362-1-sjg@chromium.org>
+ <3a9a731f-15f8-02dd-b0d1-9626031e0c77@googlemail.com>
+ <CAPnjgZ05xtrLQZiKC7t4NQvMJCAx2E7bu+LyPTqKjAmAPq-kwA@mail.gmail.com>
+ <12a87716-829a-a24f-8221-c5e1ed1cb316@googlemail.com>
+In-Reply-To: <12a87716-829a-a24f-8221-c5e1ed1cb316@googlemail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 16 Aug 2023 19:56:13 -0600
+Message-ID: <CAPnjgZ2qHx4egjL8x+tCPic310dRi06nNeMg-jAwTheG4UTvpA@mail.gmail.com>
+Subject: Re: [PATCH] x86: Update cbmem driver
+To: Nable <nable.maininbox@googlemail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Paul Menzel <pmenzel@molgen.mpg.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,86 +88,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At least on modern machines the write-back mechanism for the frame buffer
-is quite slow when scrolling, since it must read the entire frame buffer
-and write it back.
+Hi Nable,
 
-Enable the VIDEO_COPY feature to resolve this problem.
+On Tue, 15 Aug 2023 at 19:41, Nable <nable.maininbox@googlemail.com> wrote:
+>
+> On 15.08.2023 01:42, Simon Glass:
+> > I believe the original intent was to indicate that the buffer had
+> > overflowed. But prompted by your review I took a look at the coreboot
+> > implementation and it now has an overflow flag.
+> >
+> > So I will send a v2 incorporating this.
+> Thank you for this investigation, v2 approach definitely makes sense.
+> Btw, is there any reason to mark 'struct cbmem_console' as packed?
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Not that I can see. I'll drop that too for v3.
 
- arch/x86/dts/coreboot.dts    |  1 +
- configs/coreboot64_defconfig |  1 +
- configs/coreboot_defconfig   |  1 +
- drivers/video/coreboot.c     | 12 ++++++++++++
- 4 files changed, 15 insertions(+)
-
-diff --git a/arch/x86/dts/coreboot.dts b/arch/x86/dts/coreboot.dts
-index f9ff5346a79b..0eb31cae42c1 100644
---- a/arch/x86/dts/coreboot.dts
-+++ b/arch/x86/dts/coreboot.dts
-@@ -42,6 +42,7 @@
- 	};
- 
- 	coreboot-fb {
-+		bootph-some-ram;
- 		compatible = "coreboot-fb";
- 	};
- };
-diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-index e5cb3f3d4ebd..54360255c691 100644
---- a/configs/coreboot64_defconfig
-+++ b/configs/coreboot64_defconfig
-@@ -59,6 +59,7 @@ CONFIG_NVME_PCI=y
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
-+CONFIG_VIDEO_COPY=y
- CONFIG_CONSOLE_SCROLL_LINES=5
- CONFIG_SPL_ACPI=y
- CONFIG_CMD_DHRYSTONE=y
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index 790b84a87bc7..78694d635532 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -54,6 +54,7 @@ CONFIG_NVME_PCI=y
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
-+CONFIG_VIDEO_COPY=y
- CONFIG_CONSOLE_SCROLL_LINES=5
- CONFIG_CMD_DHRYSTONE=y
- # CONFIG_GZIP is not set
-diff --git a/drivers/video/coreboot.c b/drivers/video/coreboot.c
-index c586475e41ed..5b718ae3e5a5 100644
---- a/drivers/video/coreboot.c
-+++ b/drivers/video/coreboot.c
-@@ -73,6 +73,17 @@ err:
- 	return ret;
- }
- 
-+static int coreboot_video_bind(struct udevice *dev)
-+{
-+	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-+
-+	/* Set the maximum supported resolution */
-+	uc_plat->size = 4096 * 2160 * 4;
-+	log_debug("%s: Frame buffer size %x\n", __func__, uc_plat->size);
-+
-+	return 0;
-+}
-+
- static const struct udevice_id coreboot_video_ids[] = {
- 	{ .compatible = "coreboot-fb" },
- 	{ }
-@@ -82,5 +93,6 @@ U_BOOT_DRIVER(coreboot_video) = {
- 	.name	= "coreboot_video",
- 	.id	= UCLASS_VIDEO,
- 	.of_match = coreboot_video_ids,
-+	.bind	= coreboot_video_bind,
- 	.probe	= coreboot_video_probe,
- };
--- 
-2.41.0.694.ge786442a9b-goog
-
+Regards,
+Simon
