@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C486EB64DD
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 11:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25CDC41513
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 11:54:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C1D586AE5;
-	Thu, 17 Aug 2023 13:47:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F9A686AD8;
+	Thu, 17 Aug 2023 13:54:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wVPn7Njd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BQfL2BxS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6261B86AE6; Thu, 17 Aug 2023 13:47:49 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EF4DD86AE7; Thu, 17 Aug 2023 13:54:53 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF55E86ADB
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 13:47:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CA9E86AB0
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 13:54:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37HBliOI071713;
- Thu, 17 Aug 2023 06:47:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692272864;
- bh=s1RJt4ol1SOig/EgPpUNOYetK93bI5p5NWkuDdjVRvY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=wVPn7Njdy2w7itnGvJ/7888+EYPxW+b9bildX4Ak5/771mkZ+R1ALASeaWybPdGM6
- e5Dn9Y4O32OXVgODaKj1EGFu6vZuulRVVuFIvtUF09FsxkJDhqE95Lselz1CaxU16m
- hwkfqcRJuzz+LT/UebPxwAmRUg9+kP2PLnglPARI=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37HBliWl004239
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 17 Aug 2023 06:47:44 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 17
- Aug 2023 06:47:44 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 17 Aug 2023 06:47:44 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37HBlima099188;
- Thu, 17 Aug 2023 06:47:44 -0500
-Date: Thu, 17 Aug 2023 06:47:44 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-Subject: Re: [PATCH 3/3] docs: ti: j721s2_evm: Create documentation from
- J7200 docs
-Message-ID: <20230817114744.uqrh2oxnm553bu2t@mummy>
-References: <20230816-b4-upstream-j721s2-r5-pinmux-v1-0-f4548452760a@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v1-3-f4548452760a@ti.com>
- <20230816153503.up6ercmspho3oop6@jigsaw>
- <20230817081214.m6xxym6y2imtseux@ula0497581>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2bbac8ec902so1036801fa.1
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 04:54:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692273290; x=1692878090;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LNoLOEsd0Dt8uMB9IHOamYjC2o/ixae3bsrOf2y1YdE=;
+ b=BQfL2BxSw63svI2QesInzMlM9saIj3A4ELZ8CSrLiELVDs7WrTw6XJMqCvY04o4wDH
+ CxCQT1xVkkQH8Et98M+ZCG9rzKCyebfij8iqIM0lKiC3pDEVuy2FhzwtlbnjZVVQu8Fz
+ 6sEfJNThVVE+5YcP3uV4zXF3pvAkhsB3x5jsGJq2QwB/H+81VsGJyZ08w0bw/cpcqUGm
+ 3LcaB5+hNqIJ+20hsXN1hBdDDUFTeLPYpWK8oMFMglZDnes9A/FTaR5BJDssnF+2Yn7k
+ rY93N6dg6sGNS2wPZFWweppixX0Ryt5OCb3LyB7jjufw2NiHgIdhyyzb2ZLC5QdWWMXe
+ hFWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692273290; x=1692878090;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LNoLOEsd0Dt8uMB9IHOamYjC2o/ixae3bsrOf2y1YdE=;
+ b=ZMJbeS+FdoFH1FBFzQA0H0XeQUQP5WUVKfjArWTimogP3M3b6DaSi4pFQYniGohl9q
+ UHlef9Ya9haFlQbwPUKCexQ2ktxfgi0VJ+LkIBlIc7KYa13cL4/Eiyksq00V/X0NdfmK
+ teqXbBNzJspL+7XQ6B+C3DxBw/48bEPdEVUSxqtlgXJs8/A1thdhJBv+cWvc/w3iCZu5
+ ec7EWFF/AIWKtkZrClXQh5tSr6QlXkVImJ83qeGsySMmFIRqPyG5K3UlahU8PVD4+lvo
+ c0LZyd6ti2dYX0q47wt0+2e56TrLWOWtUggp9O+viKzgcvVlgVZz/by1VglBdYjheOSR
+ l+zg==
+X-Gm-Message-State: AOJu0Yzqzk7+HCjZATSaFxaFlfkahDnDgWsuq2dSDuLU3XxVXx5lbbpG
+ LqBVIobRCh5PR+e3tuP5DIvp61+U+DOg2dkk6BmyPnPuStwa0aRgSfIIqw==
+X-Google-Smtp-Source: AGHT+IFnOSyRT65QjKm9JyAut9YxMyDP2U6rYgtaCLmPXAWBt/Vz2k0smSpih+gYdmuSk2gBrYkQfkHiuHtanJDhufI=
+X-Received: by 2002:a19:3810:0:b0:4fe:a2e:890c with SMTP id
+ f16-20020a193810000000b004fe0a2e890cmr3197896lfa.49.1692273290289; Thu, 17
+ Aug 2023 04:54:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230817081214.m6xxym6y2imtseux@ula0497581>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230817054856.2019253-1-sughosh.ganu@linaro.org>
+ <20230817054856.2019253-2-sughosh.ganu@linaro.org>
+In-Reply-To: <20230817054856.2019253-2-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 17 Aug 2023 14:54:14 +0300
+Message-ID: <CAC_iWjKM1b9h9MVVS1J=F404DpBnBgnG-UT8VmXG-uL9mj+81Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] scripts/Makefile.lib: Collate all dtsi files for
+ inclusion
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,18 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13:42-20230817, Manorit Chawdhry wrote:
-[...]
-> 
-> Ah yes, I hadn't found the board specific MAINTAINER file. 
-> 
-> Can you suggest whom to keep the MAINTAINER for J721S2? The previous 
-> maintainer seems stale, Aswath Govindraju <a-govindraju@ti.com> is no 
-> longer in TI. Let me know if I can take the ownership for J721S2.
+On Thu, 17 Aug 2023 at 08:49, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> At the time of building a device-tree file, all the *u-boot.dtsi files
+> are looked for, in a particular order, and the first file found is
+> included. Then, the list of files specified in the
+> CONFIG_DEVICE_TREE_INCLUDES symbol are included.
+>
+> Combine these files that are to be included into a variable, and then
+> include all these files in one go.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
+> Changes since V1: None
+>
+>  scripts/Makefile.lib | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
+>
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index f5ab7af0f4..368b5a3e28 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -179,10 +179,13 @@ ifdef DEVICE_TREE_DEBUG
+>  u_boot_dtsi_options_debug = $(warning $(u_boot_dtsi_options_raw))
+>  endif
+>
+> -# We use the first match
+> -u_boot_dtsi = $(strip $(u_boot_dtsi_options_debug) \
+> +# We use the first match to be included
+> +dtsi_include_list = $(strip $(u_boot_dtsi_options_debug) \
+>         $(notdir $(firstword $(u_boot_dtsi_options))))
+>
+> +# The CONFIG_DEVICE_TREE_INCLUDES also need to be included
+> +dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
+> +
+>  # Modified for U-Boot
+>  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
+>                  $(UBOOTINCLUDE)                                         \
+> @@ -320,8 +323,8 @@ quiet_cmd_dtc = DTC     $@
+>  # Bring in any U-Boot-specific include at the end of the file
+>  # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
+>  cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+> -       (cat $<; $(if $(u_boot_dtsi),echo '$(pound)include "$(u_boot_dtsi)"')) > $(pre-tmp); \
+> -       $(foreach f,$(subst $(quote),,$(CONFIG_DEVICE_TREE_INCLUDES)), \
+> +       (cat $< > $(pre-tmp)); \
+> +       $(foreach f,$(subst $(quote),,$(dtsi_include_list)), \
+>           echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+>         $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+>         $(DTC) -O dtb -o $@ -b 0 \
+> --
+> 2.34.1
+>
 
-Please propose as a patch if you are able to volunteer.
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
