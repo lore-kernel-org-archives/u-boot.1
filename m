@@ -4,76 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72159C2FC2F
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:46:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61B3C2FC2E
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 13:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC5CD86B40;
-	Thu, 17 Aug 2023 15:46:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4071A86B60;
+	Thu, 17 Aug 2023 15:47:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=de.bosch.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lwHBNAUJ";
+	dkim=pass (2048-bit key; unprotected) header.d=de.bosch.com header.i=@de.bosch.com header.b="qUuvG8xc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CBE586B4D; Thu, 17 Aug 2023 15:46:18 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 744D786B84; Thu, 17 Aug 2023 15:47:13 +0200 (CEST)
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur01on062c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1e::62c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACFB586AEE
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:46:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-99bfcf4c814so1026563466b.0
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 06:46:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692279975; x=1692884775;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EsAt1OdfthERp/nDn+PMgQZQhe+w26wC4JD5+H4qqbA=;
- b=lwHBNAUJ9FCn9gzgbuHcSTG2ggMYscSpORV9LDfuC6yuDeeA/XiqzNn7N7ablOt+8M
- uMgjOO1Pk6eY0ceQxvwbXL226+jgrnV2w9gLe1QcVRUOiNIdfOHFh3rCKLN3Z1mGN4Hx
- T4tbJ5K88dlJ8Jg2/KTryrK/WxcG45Qz9LT3xX0TPaEQEVORy6B1fHL1ghDypZ61L61T
- m1x9zTaQijnDHb014h9HO5+75RxfvvG7usHk4VctkN87wSo9Eww8eg0mEe7JuGy9RG7O
- dxJnr8jumHUB2LA6QyryJoQ8LEUUKJj03nI+mc8DgADJuTy1yiBrFW3Fg5575fvd59FI
- rmYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692279975; x=1692884775;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EsAt1OdfthERp/nDn+PMgQZQhe+w26wC4JD5+H4qqbA=;
- b=dc0Uy3f2n3VAPaUDUQ0xlEVEEMYcN9bVvxfRXNqH52Sb7L194U59s4jBIzTELqtLGU
- Rgv34bBsXOkOqsodx6rU56RF+xjDrSQfSLQ1j563qHCcwWOPGAhh3nDQ6+u5YaIVejRP
- ZA8eCq8JLapcD8Q7ZwpbGLx4BVJvm34XHBfZtXuYrGiu6xcVMtu+HXMto9gLyBDMCiG4
- trfdXcpL66xY7e/MjMR1NrjELPghML3GAhLiVP0miCQeG/coqgT0pkYLmVLs9UEZnCoN
- hCqGQdHW/SspjxDMhWpunxA2kVp0eM8f97XDE0swDJcbQBia+PGffFnQgAAImX/jpHSt
- oEOg==
-X-Gm-Message-State: AOJu0YxQ2hyYZmVGGYNpQI7qgS94vuXvNYwsymFL4ZuKcBtVilqYUw1v
- 2QaO83kAaKdIhOSMPy9b/cpCySuQ/9GBg/KM1vOI7w==
-X-Google-Smtp-Source: AGHT+IHNtCkUQq7HLulTN6cOoICKbA717hNXWw8oyBq2sE1bmrQykCUpULxANSNY2JEAC2DtEJWBlc2Xv3vX6VKi6ic=
-X-Received: by 2002:a17:907:11d0:b0:99c:1b9a:b09e with SMTP id
- va16-20020a17090711d000b0099c1b9ab09emr5420064ejb.75.1692279975255; Thu, 17
- Aug 2023 06:46:15 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DB8886AEE
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 15:47:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=de.bosch.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Thomas.Mittelstaedt@de.bosch.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IyG/Z6dZz5PXwlg1QfcxQb5reP2xQbhZKsg5ZbvuT5qqf5FWT/o7lzmHqPuZFoQsCYk1Xh9fETmTExuBppP66yel31UoM5T3oY/TMVuL1uHUOFHpvDkNL1lDblryrqNFarj4pHK68/9bQYm993Wtb306HikspP9xUejWfpCss5DrVnEaR45/FWW/xIX0tOzNOFRQ6Xv3VT3f9lSjEnT2XKgx5zIAHiXnYCEfGiGf1/TOSyGjoowtY4scnivZKzTlJ7EBnylsBLPWPyHpHZmvc+D5P/BmO4rDjoFVXe8uVjpEgCo0QOxeYpoDuBi6xdSF/m5XPmnRUGEIh6w6+S0iUQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FAtGPEZ+RRB0AOxOmAVZItkExH0oCtpeD91LQ1WN5P8=;
+ b=d9rLb58Gi+yIMUzqirOL8bVjab0X1RD10w5pGoDVGlBH9+PiGR3ybpHt73YvzBHIFSZMHdEKdBvFgBVv2dW46qwUfJ5Ei29+W2WKhRVn4xBm0Ay7mBbPeudHeGtO7m7+FHh4x9mJKtCsilhUXC2XEnt6fUf1gZYCaD2OQXbvp+qK/fKRw/+RWhHhyl3W6e3NzNUyC7Ui/3kHlnLsADb7oWlL+pyugUJT6bdZi3LB9zGMIkkXggttu5PSNLcdkcOwlxOEUGnFw7MPTjysQFmFeA5B6BrtqUqPwEG2pCJgrckx7Qm2XYEQsv4e9W0MqWheE75fjHre6b+1esdxqOBCXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 139.15.153.201) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=de.bosch.com;
+ dmarc=pass (p=reject sp=none pct=100) action=none header.from=de.bosch.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FAtGPEZ+RRB0AOxOmAVZItkExH0oCtpeD91LQ1WN5P8=;
+ b=qUuvG8xcut/IvYqHpBHBHFnmNAhPmKCdroM0Fkc3wxI9xPy+Yjp5q+vYavwrB3LUtJBqDxpo3VEm8u40A6HNi8RHrGX0mU1SGEDLFJA99D0IovrQJfwLXZImpZhucHhTVg5ntfALBuLPI0rsTw7J9kWhpoxywLvAMETQDvlHTgDsazjF6O+6elMOslFEVyanqD1iI0QDGALd/eysyK1bEXaJdtygYR5t3wLAAXisWQmIqqSxWtTzwuKGfWrGdpQeMue9Fo4GerE7iNt1l9GzZuiLQPyotUPR9cqpVlmhOQXxTYPqpN8j7qmaT2XvYmwHIi6/5mvXANgHWa6sM1Gniw==
+Received: from DU2PR04CA0082.eurprd04.prod.outlook.com (2603:10a6:10:232::27)
+ by DU0PR10MB5432.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:32b::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.31; Thu, 17 Aug
+ 2023 13:47:09 +0000
+Received: from DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:232:cafe::2d) by DU2PR04CA0082.outlook.office365.com
+ (2603:10a6:10:232::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
+ Transport; Thu, 17 Aug 2023 13:47:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.201)
+ smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=de.bosch.com;
+Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
+ 139.15.153.201 as permitted sender)
+ receiver=protection.outlook.com; 
+ client-ip=139.15.153.201; helo=eop.bosch-org.com; pr=C
+Received: from eop.bosch-org.com (139.15.153.201) by
+ DBAEUR03FT065.mail.protection.outlook.com (100.127.142.147) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6699.17 via Frontend Transport; Thu, 17 Aug 2023 13:47:09 +0000
+Received: from SI-EXCAS2001.de.bosch.com (10.139.217.202) by eop.bosch-org.com
+ (139.15.153.201) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.31; Thu, 17 Aug
+ 2023 15:47:08 +0200
+Received: from FE-HUB2000.de.bosch.com (10.4.103.109) by
+ SI-EXCAS2001.de.bosch.com (10.139.217.202) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.31; Thu, 17 Aug 2023 15:47:08 +0200
+Received: from localhost.localdomain (10.141.98.21) by FE-HUB2000.de.bosch.com
+ (10.4.103.109) with Microsoft SMTP Server id 15.1.2507.31;
+ Thu, 17 Aug 2023 15:47:08 +0200
+From: <thomas.mittelstaedt@de.bosch.com>
+To: <u-boot@lists.denx.de>
+CC: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH 0/1] *** Documentation to set up U-Boot with VirtualBox ***
+Date: Thu, 17 Aug 2023 13:46:46 +0000
+Message-ID: <20230817134647.49259-1-thomas.mittelstaedt@de.bosch.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
- <20230814133253.4150-5-maxim.uvarov@linaro.org> <ZNo4cZtrSXa1dKXd@hades>
- <CAD8XO3a3N1j2G_Fjiws1S7praCDtLup=nrv4po--x6JmKKCfjQ@mail.gmail.com>
- <20230814152940.GZ3630934@bill-the-cat>
-In-Reply-To: <20230814152940.GZ3630934@bill-the-cat>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Thu, 17 Aug 2023 19:46:02 +0600
-Message-ID: <CAD8XO3Y7pYrd6nZm9kywbUpmOp7QsUchnb686XAq6WKyVBDGfw@mail.gmail.com>
-Subject: Re: [PATCHv6 04/14] net/lwip: implement dhcp cmd
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- pbrobinson@redhat.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- goldsimon@gmx.de, lwip-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.141.98.21]
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DBAEUR03FT065:EE_|DU0PR10MB5432:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea0b1264-10da-48e1-acdd-08db9f2873b5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 8ovNwmr1U3Cux5GvdqA0Z7st1rAzz+nxHQvbIrrFTJnnp/TrqCaO+D9h/w7sPkDDv1OGrlvBK8TVvN+WSCLrusjXylFYfN6/dHBck9VQ5aebURg3Zp6SaK+fUc9T1GSWq3gtAFvsJg1pmWrJ5y9vyfpVPwgT5Cl1WkV23eZjdhHwPmMQkxY7YklAcA6RnyMdQv1EYAnlYQlWTU/sb6QHxmpLf6kQ6TU3en0K3LWAT9/bFbkMD9xifcin5Og+t/Lco4i+HrTgGHRoBalXOHBKo082YqEUcv6qKIp6Ddwx+JCSC41hmwRhC9CGEbqMcA1P/eNu/U2YrxV86cmSRI57VoZB8iduH24Pf0QsL6Ykaaw+zAc6JIvtr+24HuXYURxxR4buyc6+MdVwr02h+xHQKKcb2n0hOhHs0s8ZQriEAdmhT3FyaPQG7DT3XCKRBrSVROZHi8G4SZlHp/PcdX0RuTWNi146kh1OQyREvKrxF6V/t16jDoOCEnGKsuNDB3M4/0ka/BASp2XDoZmKPWUeO7ubCq4rh0pmxOsaW4ANvuTijDYpAw27mFQaa/JODgJ/IrceTMxPYPFXfaOQ6HSVGYbQbO+SHrMXDwUa0z+0SJSkAN/iO4t6e+qQE4q1cH8++mblCzusEo/XddjECxH3vzicjtaLBsgwljsVSHIbwSygrbyl/N+7pvo5mwabnLBMl+ly1+kMhynbPClJldy2RrWKJWAUBs3x8YFCjCCuhFefA08Aw2GDvbhG+OmX0RnomZO8bEFSoGv4/LAzN5t9AB8pL+lEOvWUTB2DUN464tUA9TH7fyOZ7/4oJxYlriUD
+X-Forefront-Antispam-Report: CIP:139.15.153.201; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:eop.bosch-org.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(396003)(136003)(376002)(346002)(82310400011)(1800799009)(186009)(451199024)(46966006)(36840700001)(40470700004)(40480700001)(40460700003)(2906002)(47076005)(2876002)(426003)(4744005)(36860700001)(336012)(478600001)(6916009)(70586007)(70206006)(54906003)(316002)(6666004)(2616005)(16526019)(5660300002)(1076003)(26005)(4326008)(8676002)(41300700001)(8936002)(86362001)(81166007)(82740400003)(82960400001)(356005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: de.bosch.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Aug 2023 13:47:09.0601 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea0b1264-10da-48e1-acdd-08db9f2873b5
+X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4; Ip=[139.15.153.201];
+ Helo=[eop.bosch-org.com]
+X-MS-Exchange-CrossTenant-AuthSource: DBAEUR03FT065.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5432
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,107 +125,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 14 Aug 2023 at 21:29, Tom Rini <trini@konsulko.com> wrote:
+From: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
 
-> On Mon, Aug 14, 2023 at 09:18:19PM +0600, Maxim Uvarov wrote:
-> > On Mon, 14 Aug 2023 at 20:21, Ilias Apalodimas <
-> ilias.apalodimas@linaro.org>
-> > wrote:
-> >
-> > > On Mon, Aug 14, 2023 at 07:32:43PM +0600, Maxim Uvarov wrote:
-> > > > Implement function for dhcp command with lwIP variant. Usage and
-> output
-> > > is
-> > > > the same as the original command. This code called by compatibility
-> code
-> > > > between U-Boot and lwIP.
-> > >
-> > > Same as the dns command
-> > >
-> > > >
-> > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > > > ---
-> > > >  include/net/lwip.h             | 10 +++++++
-> > > >  net/lwip/Makefile              |  1 +
-> > > >  net/lwip/apps/dhcp/lwip-dhcp.c | 51
-> ++++++++++++++++++++++++++++++++++
-> > > >  3 files changed, 62 insertions(+)
-> > > >  create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
-> > > >
-> > > > diff --git a/include/net/lwip.h b/include/net/lwip.h
-> > > > index c83b5c8231..2f035280eb 100644
-> > > > --- a/include/net/lwip.h
-> > > > +++ b/include/net/lwip.h
-> > > > @@ -15,3 +15,13 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int flag,
-> int
-> > > argc,
-> > > >  *         Other value < 0, if error
-> > > >  */
-> > > >  int ulwip_dns(char *name, char *varname);
-> > > > +
-> > > > +/*
-> > > > +* This function creates the DHCP request to obtain IP address. If
-> DHCP
-> > > server
-> > >
-> > > Sphinx needs something more, please check the existing functions
-> > >
-> > > > +* returns file name, this file will be downloaded with tftp.  After
-> this
-> > > > +* function you need to invoke the polling loop to process network
-> > > communication.
-> > > > +*
-> > > > +* Return: 0 if success
-> > > > +*         Other value < 0, if error
-> > > > +*/
-> > > > +int ulwip_dhcp(void);
-> > > > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> > > > index 6d2c00605b..59323fb325 100644
-> > > > --- a/net/lwip/Makefile
-> > > > +
-> > > > +static struct dhcp dhcp;
-> > > > +
-> > > > +static int ulwip_dhcp_tmo(void)
-> > > > +{
-> > > > +     switch (dhcp.state) {
-> > > > +     case DHCP_STATE_BOUND:
-> > > > +             env_set("bootfile", dhcp.boot_file_name);
-> > > > +             env_set("ipaddr", ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > > > +             env_set("netmask",
-> ip4addr_ntoa(&dhcp.offered_sn_mask));
-> > > > +             env_set("serverip",
-> ip4addr_ntoa(&dhcp.server_ip_addr));
-> > > > +             printf("DHCP client bound to address %s\n",
-> > > ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > > > +             break;
-> > > > +     default:
-> > > > +             return -1;
-> > > > +     }
-> > > > +
-> > > > +     return 0;
-> > > > +}
-> > > > +
-> > > > +int ulwip_dhcp(void)
-> > > > +{
-> > > > +     int err;
-> > > > +     struct netif *netif;
-> > > > +
-> > > > +     ulwip_set_tmo(ulwip_dhcp_tmo);
-> > > > +     netif = netif_get_by_index(1);
-> > >
-> > > What's (1)?
-> > >
-> > >
-> > Only one lwip netif is registered. 1 - here is the index of netif. I
-> don't
-> > think that there is any definition for that...
-> >
->
-> And there's only ever going to be one interface (even if we have ipv4
-> and ipv60 ? If so, define it to something please, thanks.
->
-> --
-> Tom
->
+This documentation explains concrete steps to install and run U-Boot at VirtualBox with x86 images.
 
-Yes, one interface has 2 addresses ipv4 and ipv6.
+Thomas Mittelstaedt (1):
+  Documentation extended with specific information for VirtualBox
+
+ doc/develop/uefi/u-boot_on_efi.rst | 76 ++++++++++++++++++++++++++++++
+ 1 file changed, 76 insertions(+)
+
+-- 
+2.30.2
+
