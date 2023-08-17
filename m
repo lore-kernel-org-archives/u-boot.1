@@ -4,44 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF3A9C27C7A
-	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 05:50:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF8DEB64DD
+	for <u-boot@archiver.kernel.org>; Thu, 17 Aug 2023 06:04:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F389D86A18;
-	Thu, 17 Aug 2023 07:49:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 78DD286A50;
+	Thu, 17 Aug 2023 08:04:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="rS4x/gg3";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A32D86A5D; Thu, 17 Aug 2023 07:49:31 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 790B386A18
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 07:49:28 +0200 (CEST)
+ id B381686A2B; Thu, 17 Aug 2023 08:04:37 +0200 (CEST)
+Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
+ (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A66486A2B
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 08:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AB0E9D75;
- Wed, 16 Aug 2023 22:50:08 -0700 (PDT)
-Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7EB6F3F762;
- Wed, 16 Aug 2023 22:49:25 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 6/6] doc: capsule: Document the new mechanism to embed ESL
- file into dtb
-Date: Thu, 17 Aug 2023 11:18:56 +0530
-Message-Id: <20230817054856.2019253-7-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230817054856.2019253-1-sughosh.ganu@linaro.org>
-References: <20230817054856.2019253-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=from:subject:mime-version:to:cc:content-transfer-encoding:
+ content-type:cc:content-type:from:subject:to;
+ s=s1; bh=vckpvl9sBzHB3OIKKmW29sl1pgB/g5n6slZq2ITSFHM=;
+ b=rS4x/gg3AEi7MrBP0oCuLLH5x6Nn8BOHvZaSKtpYTDlkovZlC1edkfuNXfF7DeRKjI5M
+ EXsCsqnn4YPnsP1M+nSFoeqesyZJOVkUIZE0qjrXx0+LdsiFqhlyyMxGQEU2pMr1LQhJVk
+ rD9Ou43jeMzPZuzhZb1gnrgLMRLpGZMhpXQkolJ+GwP1/TBUHBsjzXujmW1Vizx1MoFpWM
+ P2caWAHrT63XEAMI7sN4cvTymImM4zTZpfN8Dv7LoaLDTbpfUb22r7vMWVNMNRyszGbaWN
+ H6IKVknANFCp0EDOyA6EDktNFhVcLLgCVNldhEHtcPpTCCmEOuv9a/GW42845nOg==
+Received: by filterdrecv-d7bbbc8bf-b8xkx with SMTP id
+ filterdrecv-d7bbbc8bf-b8xkx-1-64DDB871-22
+ 2023-08-17 06:04:33.386259218 +0000 UTC m=+8490286.899608433
+Received: from bionic.localdomain (unknown) by geopod-ismtpd-8 (SG) with ESMTP
+ id OlPFFzOfR1igyrVAxoHl0A Thu, 17 Aug 2023 06:04:33.076 +0000 (UTC)
+From: Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/3] rockchip: Add supported RK3566/RK3568 boards to
+ documentation
+Date: Thu, 17 Aug 2023 06:04:33 +0000 (UTC)
+Message-ID: <20230817060422.477759-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h3MHgd5FKiQU2GEaM?=
+ =?us-ascii?Q?UtwEUSJKd=2FlmYYP0BfpJwsyaVrO6=2F2GmV2p4emY?=
+ =?us-ascii?Q?m8mN4Z8742MUZ4gzhlzPxfrJyelvsHKAvKuvSW8?=
+ =?us-ascii?Q?07srHEHXV3Q2AJBvupmkKMlBEbDVqQnDLQLvfyc?=
+ =?us-ascii?Q?NXitBKqg+kIArzKOk=2Fqs0MaaReJOrBAd0H2RcF?=
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,46 +75,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the document to specify how the EFI Signature List(ESL) file
-can be embedded into the platform's dtb as part of the U-Boot build.
+This series add missing supported RK3566/RK3568 boards to documentation
+and add related device tree files to MAINTAINERS for a few RK35xx boards.
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
-Changes since V1: None
+Also added myself as a reviewer for RK3566/RK3568/RK3588 boards that I
+have and can help with review and testing of e.g. defconfig and device
+tree changes.
 
- doc/develop/uefi/uefi.rst | 19 +++++--------------
- 1 file changed, 5 insertions(+), 14 deletions(-)
+Jonas Karlman (3):
+  doc: rockchip: Add supported RK3566/RK3568 boards
+  board: rockchip: rk35xx: Add device tree files to MAINTAINERS
+  board: rockchip: rk35xx: Add myself as reviewer to MAINTAINERS
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 3ce579d46e..950f4d1a5a 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -539,20 +539,11 @@ and used by the steps highlighted below.
-             ...
-     }
- 
--You can do step-4 manually with
--
--.. code-block:: console
--
--    $ dtc -@ -I dts -O dtb -o signature.dtbo signature.dts
--    $ fdtoverlay -i orig.dtb -o new.dtb -v signature.dtbo
--
--where signature.dts looks like::
--
--    &{/} {
--            signature {
--                    capsule-key = /incbin/("CRT.esl");
--            };
--    };
-+You can perform step-4 by defining the Kconfig symbol
-+CONFIG_EFI_CAPSULE_ESL_FILE. This symbol defines the path to the esl
-+file generated in step-2. Once the symbol has been populated with the
-+path to the esl file, the esl file will automatically get embedded
-+into the platform's dtb as part of U-Boot build.
- 
- Anti-rollback Protection
- ************************
+ board/anbernic/rgxx3_rk3566/MAINTAINERS       |  3 +
+ .../neural-compute-module-6/MAINTAINERS       |  6 ++
+ board/radxa/rock5a-rk3588s/MAINTAINERS        |  3 +
+ board/radxa/rock5b-rk3588/MAINTAINERS         |  5 +-
+ board/rockchip/evb_rk3568/MAINTAINERS         | 55 +++++++++++--------
+ board/rockchip/evb_rk3588/MAINTAINERS         |  3 +-
+ doc/board/rockchip/rockchip.rst               | 20 ++++---
+ 7 files changed, 61 insertions(+), 34 deletions(-)
+
 -- 
-2.34.1
+2.41.0
 
