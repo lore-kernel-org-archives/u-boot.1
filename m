@@ -4,46 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39535C71156
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:58:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6322C71156
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 15:00:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C6CA86E9F;
-	Fri, 18 Aug 2023 16:58:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1FDDC86AC2;
+	Fri, 18 Aug 2023 17:00:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TVOHuc3n";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB65586EA0; Fri, 18 Aug 2023 16:58:09 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8AFF786E9F
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:57:57 +0200 (CEST)
+ id A146D86AC2; Fri, 18 Aug 2023 17:00:09 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B02FF8522C
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 17:00:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6EEE6D75;
- Fri, 18 Aug 2023 07:58:37 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E246F3F64C;
- Fri, 18 Aug 2023 07:57:55 -0700 (PDT)
-Date: Fri, 18 Aug 2023 15:57:53 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
- Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH v2 2/5] sunxi: psci: refactor register access to
- separate functions
-Message-ID: <20230818155753.388aa967@donnerap.manchester.arm.com>
-In-Reply-To: <20230816173420.83232-3-CFSworks@gmail.com>
-References: <20230816173420.83232-1-CFSworks@gmail.com>
- <20230816173420.83232-3-CFSworks@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-4ff9b389677so1484387e87.3
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 08:00:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692370802; x=1692975602;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=llsZvzD6cRnuvxnQcKZycup/elJHks9TtS96HYlYIQ0=;
+ b=TVOHuc3nS2Wx+VsFLUx0qrq/rLRoKpK4snA7rB8Z9PmzmwrcYSBzANyrfPAsIwQknt
+ dRRZRzCWbR8lTPZlF0xR62Ei4aa0U1i3naGcxGza+4rlS4j0uKIiE0pgVWI/kgTOXDD6
+ klSp3fcm5DMjpWhPswzirIXigg4bWnv0JxyfI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692370802; x=1692975602;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=llsZvzD6cRnuvxnQcKZycup/elJHks9TtS96HYlYIQ0=;
+ b=b89isSDfTvWjk3Lh3vXDR9IWIBGdNPTt9QGb4pgO7NS9iFHeL2V8UYWRvhwI1EsRqE
+ E1b54mU71at6Il6Hk292aHyCJIuRnHLaF1b7WQ6TWStIh+o+Vb5LD558rAidA2WDsd4h
+ oLVkdKha/S8ENXEevC4C7L2Geygaiv5LY5aBIeyBo1Jb4q+PENR3uFZyPeuYFLxiBJH3
+ ITLTCSQugo4FagtaL1eiAhMYUWz74+Bmkd+VIuz65j5pQ0RJe+zv22RAEhTW/7XPlSAD
+ kQdBOp9aXtWdffbpahybLYU4OvTc+l5Rc3y6ExXgfb4as+AU4epym2lHTtU+R0IVde7t
+ AjtQ==
+X-Gm-Message-State: AOJu0YyiXUZxq224Uvj7WICEvz+2GtUP5G9DPXzUqnPB5qHd2bRhr5pi
+ B6kfqJZznYTOORHHVvmzgiDCP4b429x2GXsua4zWcA==
+X-Google-Smtp-Source: AGHT+IHsh1bLojCUOomU6vuGrkxQgmqFeKkYOIjnKbvpxH7S5hTc/89W3jtTqDC2sN5WVB9mUI5R7Gh/5j1sb55EZQ4=
+X-Received: by 2002:a05:6512:2215:b0:4fb:745e:dd01 with SMTP id
+ h21-20020a056512221500b004fb745edd01mr2607971lfu.45.1692370801446; Fri, 18
+ Aug 2023 08:00:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <CAPnjgZ0vPwd9v+V8Pg5Bo87OELD-vokB7ZrvU3Bv5dQ_O9z6Sg@mail.gmail.com>
+ <877cpusybz.fsf@meer.lwn.net>
+ <CAPnjgZ3Lo4Na7YeKPFaY30bwsv_gBGapN_DXeab+k7yhCF3uww@mail.gmail.com>
+ <dfac4932-7cbc-3a4e-bde7-c2048516ddf1@gmx.de>
+In-Reply-To: <dfac4932-7cbc-3a4e-bde7-c2048516ddf1@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 18 Aug 2023 08:59:50 -0600
+Message-ID: <CAPnjgZ07G=+QZU9+qT23x+aZw4VES0jNkXUTu4Axm400NF-hzQ@mail.gmail.com>
+Subject: Re: Doc style for method functions
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: linux-doc@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Jonathan Corbet <corbet@lwn.net>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,173 +84,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Aug 2023 10:34:17 -0700
-Sam Edwards <cfsworks@gmail.com> wrote:
+Hi Heinrich,
 
-Hi Sam,
+On Thu, 17 Aug 2023 at 10:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 16.08.23 19:47, Simon Glass wrote:
+> > Hi Jonathan,
+> >
+> > On Wed, 16 Aug 2023 at 11:15, Jonathan Corbet <corbet@lwn.net> wrote:
+> >>
+> >> Simon Glass <sjg@chromium.org> writes:
+> >>
+> >>> Hi Jonathan,
+> >>>
+> >>> I would like to do something like this:
+> >>>
+> >>> struct part_driver {
+> >>>     /**
+> >>>      * get_info() - Get information about a partition
+> >>>
+> >>>                ^ causes error
+> >>>
+> >>>      *
+> >>>      * @desc: Block device descriptor
+> >>>      * @part: Partition number (1 = first)
+> >>>      * @info: Returns partition information
+> >>>      */
+> >>>     int (*get_info)(struct blk_desc *desc, int part, struct
+> >>> disk_partition *info);
+> >>> ...
+> >>> };
+> >>>
+> >>> But this gives:
+> >>>
+> >>> scripts/kernel-doc:292:
+> >>>     print STDERR "Incorrect use of kernel-doc format: $_";
+> >>>
+> >>> Without the brackets on get_info() it works OK. What is the purpose of
+> >>> that check, please?
+> >>
+> >> That's how the kerneldoc syntax was defined, well before my time as the
+> >> maintainer.  This could be relaxed, I guess, but one would have to look
+> >> at the parsing code to be sure that the right thing happens all the way
+> >> through the process.  I'm not entirely sure it's worth it...
+> >
+> > I see. It is inconsistent, since we use () after normal functions.
+> >
+> > I think I can fix it just by removing that check.
+> >
+> > Regards,
+> > Simon
+>
+> If the structure element in not a function pointer, we probably still
+> want to forbid adding parentheses. Just dropping the check might not be
+> the solution.
 
-> This is to prepare for R528, which does not have the typical
-> "CPUCFG" block; it has a "CPUX" block which provides these
-> same functions but is organized differently.
-> 
-> Moving the hardware-access bits to their own functions separates the
-> logic from the hardware so we can reuse the same logic.
+Is that the purpose of this check? Is it likely that someone would add
+a bracket immediately after a variable?
 
-That's a very nice cleanup, thanks for doing that!
-
-Another one of those hard-to-reason-about diffs, but I placed the register
-access back into the place of the new function call, somewhat playing your
-patch backwards, manually, and that ended up at a very similar code to
-before the patch, so I think it's legit.
-Again, needs some testing, but looks good from a diff point of view.
-
-Two smaller things, with them fixed:
-
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-Cheers,
-Andre
-
-> ---
->  arch/arm/cpu/armv7/sunxi/psci.c | 66 +++++++++++++++++++++++----------
->  1 file changed, 47 insertions(+), 19 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
-> index 7804e0933b..e2845f21ab 100644
-> --- a/arch/arm/cpu/armv7/sunxi/psci.c
-> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> @@ -92,7 +92,7 @@ static void __secure clamp_set(u32 *clamp)
->  	writel(0xff, clamp);
->  }
->  
-> -static void __secure sunxi_set_entry_address(void *entry)
-> +static void __secure sunxi_cpu_set_entry(int __always_unused cpu, void *entry)
-
-So what is the reasoning behind this change?
-If *none* of the Allwinner SoCs have independent secondary entry point
-registers, we should not give the impression some do in the prototype.
-Should later a SoC emerge that changes this, adjusting this one is the
-least of our problems then.
-
->  {
->  	/* secondary core entry address is programmed differently on R40 */
->  	if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
-> @@ -148,30 +148,60 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
->  	}
->  }
->  
-> -void __secure sunxi_cpu_power_off(u32 cpuid)
-> +static void __secure sunxi_cpu_set_reset(int cpu, bool reset)
-> +{
-> +	struct sunxi_cpucfg_reg *cpucfg =
-> +		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +
-> +	writel(reset ? 0b00 : 0b11, &cpucfg->cpu[cpu].rst);
-> +}
-> +
-> +static void __secure sunxi_cpu_set_locking(int cpu, bool lock)
->  {
->  	struct sunxi_cpucfg_reg *cpucfg =
->  		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +
-> +	if (lock)
-> +		clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +	else
-> +		setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +}
-> +
-> +static bool __secure sunxi_cpu_poll_wfi(int cpu)
-> +{
-> +	struct sunxi_cpucfg_reg *cpucfg =
-> +		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +
-> +	return !!(readl(&cpucfg->cpu[cpu].status) & BIT(2));
-> +}
-> +
-> +static void __secure sunxi_cpu_invalidate_cache(int cpu)
-> +{
-> +	struct sunxi_cpucfg_reg *cpucfg =
-> +		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +
-> +	clrbits_le32(&cpucfg->gen_ctrl, BIT(cpu));
-> +}
-> +
-> +void __secure sunxi_cpu_power_off(u32 cpuid)
-
-Can you please mark this as static on the way? That does not seem to be
-used anywhere, and even the name suggests it's local.
-Saves 8 bytes of .text ;-)
-
-> +{
->  	u32 cpu = cpuid & 0x3;
->  
->  	/* Wait for the core to enter WFI */
-> -	while (1) {
-> -		if (readl(&cpucfg->cpu[cpu].status) & BIT(2))
-> -			break;
-> +	while (!sunxi_cpu_poll_wfi(cpu))
->  		__mdelay(1);
-> -	}
->  
->  	/* Assert reset on target CPU */
-> -	writel(0, &cpucfg->cpu[cpu].rst);
-> +	sunxi_cpu_set_reset(cpu, true);
->  
->  	/* Lock CPU (Disable external debug access) */
-> -	clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +	sunxi_cpu_set_locking(cpu, true);
->  
->  	/* Power down CPU */
->  	sunxi_cpu_set_power(cpuid, false);
->  
-> -	/* Unlock CPU (Disable external debug access) */
-> -	setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +	/* Unlock CPU (Reenable external debug access) */
-> +	sunxi_cpu_set_locking(cpu, false);
->  }
->  
->  static u32 __secure cp15_read_scr(void)
-> @@ -228,33 +258,31 @@ out:
->  int __secure psci_cpu_on(u32 __always_unused unused, u32 mpidr, u32 pc,
->  			 u32 context_id)
->  {
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
->  	u32 cpu = (mpidr & 0x3);
->  
->  	/* store target PC and context id */
->  	psci_save(cpu, pc, context_id);
->  
->  	/* Set secondary core power on PC */
-> -	sunxi_set_entry_address(&psci_cpu_entry);
-> +	sunxi_cpu_set_entry(cpu, &psci_cpu_entry);
->  
->  	/* Assert reset on target CPU */
-> -	writel(0, &cpucfg->cpu[cpu].rst);
-> +	sunxi_cpu_set_reset(cpu, true);
->  
->  	/* Invalidate L1 cache */
-> -	clrbits_le32(&cpucfg->gen_ctrl, BIT(cpu));
-> +	sunxi_cpu_invalidate_cache(cpu);
->  
->  	/* Lock CPU (Disable external debug access) */
-> -	clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +	sunxi_cpu_set_locking(cpu, true);
->  
->  	/* Power up target CPU */
->  	sunxi_cpu_set_power(cpu, true);
->  
->  	/* De-assert reset on target CPU */
-> -	writel(BIT(1) | BIT(0), &cpucfg->cpu[cpu].rst);
-> +	sunxi_cpu_set_reset(cpu, false);
->  
-> -	/* Unlock CPU (Disable external debug access) */
-> -	setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +	/* Unlock CPU (Reenable external debug access) */
-> +	sunxi_cpu_set_locking(cpu, false);
->  
->  	return ARM_PSCI_RET_SUCCESS;
->  }
-
+Regards,
+Simon
