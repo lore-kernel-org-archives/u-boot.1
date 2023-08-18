@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C28C71159
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39535C71156
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26E7386E98;
-	Fri, 18 Aug 2023 16:55:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C6CA86E9F;
+	Fri, 18 Aug 2023 16:58:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bbBwIXTQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90F4386E97; Fri, 18 Aug 2023 16:55:28 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A279586E9A
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:55:25 +0200 (CEST)
+ id DB65586EA0; Fri, 18 Aug 2023 16:58:09 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 8AFF786E9F
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:57:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-525bd0b2b48so1342376a12.0
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 07:55:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692370525; x=1692975325;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MwB5AQ2h1dqVInRQSVvG3OphljZOD27E6GfbtEtB6ns=;
- b=bbBwIXTQHEZuKGyEibKpiyfyuPwWsGU2qheixa+gWTv11MPl9VEDuc47yKeC24HWFz
- JZUrhi/HpTYD3p/KBBhS7y+7IKdO1rlEcsji+HMam9VAM8S8WXO71j63k4ZrZ0anAJQp
- mMUwkNV940Goh9FHxdSoYZaTY/c0gqQuhhb68=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692370525; x=1692975325;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MwB5AQ2h1dqVInRQSVvG3OphljZOD27E6GfbtEtB6ns=;
- b=CGTw6InAOPqOPYIvHbQS5xaR6pWQlwygXtmmiOPUXwM7iitTA7MZNTyzq863lDjb+A
- Hq2GB0+txG2KPLjcLA34tyYBl2kicgA7Q5tVEzh14nKWPYWcp8aqMLMOaOALxwq2hgvT
- hh5dY+q9rPUr4uU23L9yhA8/fdWKzX+Q6qi9mJwWhxXJuzGw4lXVNnnFvQeGmHMW5eAt
- uLUokel2eVtxexWpYIRu0jcY0aq6yWpOGn007Pbhq7weBndSwfq2CmjMDRSLv9cBmVOa
- S1csVqQl4FMHqU3y3CjNYGXevczcHMnBtY7lyv6875Pq/oCMB1SGOXeNoPLER91QjzE/
- eH2g==
-X-Gm-Message-State: AOJu0YzngBgpsHxtfkSUP7Kq4bIpyfPuKdXe68w1vRqNBp1AJLBOv96L
- if2mPFXDHWUjYYDsifs3Rb+JP3CIWfQ/V1X+s34lKw==
-X-Google-Smtp-Source: AGHT+IEpbdWHgo4wiR+Voz/q75j3CyxiT9+baWcAB7IZHzIPzAT5zNA4XbHlU3LtP8bxen/1HIyqY1AXukMbCBXNxLo=
-X-Received: by 2002:a05:6402:328:b0:523:37ff:1170 with SMTP id
- q8-20020a056402032800b0052337ff1170mr2593698edw.16.1692370524958; Fri, 18 Aug
- 2023 07:55:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6EEE6D75;
+ Fri, 18 Aug 2023 07:58:37 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E246F3F64C;
+ Fri, 18 Aug 2023 07:57:55 -0700 (PDT)
+Date: Fri, 18 Aug 2023 15:57:53 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
+ Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
+Subject: Re: [PATCH v2 2/5] sunxi: psci: refactor register access to
+ separate functions
+Message-ID: <20230818155753.388aa967@donnerap.manchester.arm.com>
+In-Reply-To: <20230816173420.83232-3-CFSworks@gmail.com>
+References: <20230816173420.83232-1-CFSworks@gmail.com>
+ <20230816173420.83232-3-CFSworks@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <20230818002706.853550-1-sjg@chromium.org>
- <20230818002706.853550-12-sjg@chromium.org>
- <66F95452-EFB7-4A8B-AE7A-9533CE12C0CA@gmx.de>
-In-Reply-To: <66F95452-EFB7-4A8B-AE7A-9533CE12C0CA@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Aug 2023 08:55:13 -0600
-Message-ID: <CAPnjgZ2wgdzGFLTHzOhqpzBosVt7yjP4hcH7S0FgUvRuKzQGow@mail.gmail.com>
-Subject: Re: [PATCH v2 11/20] efi: x86: Correct the condition for installing
- ACPI tables
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,74 +60,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Wed, 16 Aug 2023 10:34:17 -0700
+Sam Edwards <cfsworks@gmail.com> wrote:
 
-On Thu, 17 Aug 2023 at 19:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> Am 18. August 2023 02:26:50 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >It is not always the case that U-Boot builds the ACPI tables itself. For
-> >example, when booting from coreboot, the ACPI tables are built by
-> >coreboot.
-> >
-> >Correct the Makefile condition so that U-Boot can pass on tables built
-> >by a previous firmware stage.
-> >
-> >Tidy up the installation-condition code while we are here.
-> >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
-> >---
-> >
-> >Changes in v2:
-> >- Add new patch
-> >
-> > lib/efi_loader/Makefile    |  2 +-
-> > lib/efi_loader/efi_setup.c | 10 +++++-----
-> > 2 files changed, 6 insertions(+), 6 deletions(-)
-> >
-> >diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> >index 1a8c8d7cab5c..0eb748ff1a59 100644
-> >--- a/lib/efi_loader/Makefile
-> >+++ b/lib/efi_loader/Makefile
-> >@@ -78,7 +78,7 @@ obj-$(CONFIG_EFI_ESRT) += efi_esrt.o
-> > obj-$(CONFIG_VIDEO) += efi_gop.o
-> > obj-$(CONFIG_BLK) += efi_disk.o
-> > obj-$(CONFIG_NETDEVICES) += efi_net.o
-> >-obj-$(CONFIG_GENERATE_ACPI_TABLE) += efi_acpi.o
-> >+obj-$(CONFIG_ACPI) += efi_acpi.o
-> > obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += efi_smbios.o
-> > obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
-> > obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
-> >diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> >index 58d4e1340233..ad719afd6328 100644
-> >--- a/lib/efi_loader/efi_setup.c
-> >+++ b/lib/efi_loader/efi_setup.c
-> >@@ -321,11 +321,11 @@ efi_status_t efi_init_obj_list(void)
-> >       if (ret != EFI_SUCCESS)
-> >               goto out;
-> > #endif
-> >-#ifdef CONFIG_GENERATE_ACPI_TABLE
-> >-      ret = efi_acpi_register();
-> >-      if (ret != EFI_SUCCESS)
-> >-              goto out;
-> >-#endif
-> >+      if (IS_ENABLED(CONFIG_ACPI)) {
-> >+              ret = efi_acpi_register();
-> >+              if (ret != EFI_SUCCESS)
-> >+                      goto out;
-> >+      }
-> > #ifdef CONFIG_GENERATE_SMBIOS_TABLE
->
-> Shouldn't this become CONFIG_SMBIOS?
->
-> It would help my review work if you would stop suppressing half of your patch series when sending mails.
+Hi Sam,
 
-Do you mean you only receive some of the emails? If so, the whole
-series was emailed to you. I checked my 'sent' box and see you in each
-one.
+> This is to prepare for R528, which does not have the typical
+> "CPUCFG" block; it has a "CPUX" block which provides these
+> same functions but is organized differently.
+> 
+> Moving the hardware-access bits to their own functions separates the
+> logic from the hardware so we can reuse the same logic.
 
-If you mean something else, please let me know.
+That's a very nice cleanup, thanks for doing that!
 
-Regards,
-Simon
+Another one of those hard-to-reason-about diffs, but I placed the register
+access back into the place of the new function call, somewhat playing your
+patch backwards, manually, and that ended up at a very similar code to
+before the patch, so I think it's legit.
+Again, needs some testing, but looks good from a diff point of view.
+
+Two smaller things, with them fixed:
+
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+>  arch/arm/cpu/armv7/sunxi/psci.c | 66 +++++++++++++++++++++++----------
+>  1 file changed, 47 insertions(+), 19 deletions(-)
+> 
+> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
+> index 7804e0933b..e2845f21ab 100644
+> --- a/arch/arm/cpu/armv7/sunxi/psci.c
+> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
+> @@ -92,7 +92,7 @@ static void __secure clamp_set(u32 *clamp)
+>  	writel(0xff, clamp);
+>  }
+>  
+> -static void __secure sunxi_set_entry_address(void *entry)
+> +static void __secure sunxi_cpu_set_entry(int __always_unused cpu, void *entry)
+
+So what is the reasoning behind this change?
+If *none* of the Allwinner SoCs have independent secondary entry point
+registers, we should not give the impression some do in the prototype.
+Should later a SoC emerge that changes this, adjusting this one is the
+least of our problems then.
+
+>  {
+>  	/* secondary core entry address is programmed differently on R40 */
+>  	if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
+> @@ -148,30 +148,60 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
+>  	}
+>  }
+>  
+> -void __secure sunxi_cpu_power_off(u32 cpuid)
+> +static void __secure sunxi_cpu_set_reset(int cpu, bool reset)
+> +{
+> +	struct sunxi_cpucfg_reg *cpucfg =
+> +		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> +
+> +	writel(reset ? 0b00 : 0b11, &cpucfg->cpu[cpu].rst);
+> +}
+> +
+> +static void __secure sunxi_cpu_set_locking(int cpu, bool lock)
+>  {
+>  	struct sunxi_cpucfg_reg *cpucfg =
+>  		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> +
+> +	if (lock)
+> +		clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +	else
+> +		setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +}
+> +
+> +static bool __secure sunxi_cpu_poll_wfi(int cpu)
+> +{
+> +	struct sunxi_cpucfg_reg *cpucfg =
+> +		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> +
+> +	return !!(readl(&cpucfg->cpu[cpu].status) & BIT(2));
+> +}
+> +
+> +static void __secure sunxi_cpu_invalidate_cache(int cpu)
+> +{
+> +	struct sunxi_cpucfg_reg *cpucfg =
+> +		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> +
+> +	clrbits_le32(&cpucfg->gen_ctrl, BIT(cpu));
+> +}
+> +
+> +void __secure sunxi_cpu_power_off(u32 cpuid)
+
+Can you please mark this as static on the way? That does not seem to be
+used anywhere, and even the name suggests it's local.
+Saves 8 bytes of .text ;-)
+
+> +{
+>  	u32 cpu = cpuid & 0x3;
+>  
+>  	/* Wait for the core to enter WFI */
+> -	while (1) {
+> -		if (readl(&cpucfg->cpu[cpu].status) & BIT(2))
+> -			break;
+> +	while (!sunxi_cpu_poll_wfi(cpu))
+>  		__mdelay(1);
+> -	}
+>  
+>  	/* Assert reset on target CPU */
+> -	writel(0, &cpucfg->cpu[cpu].rst);
+> +	sunxi_cpu_set_reset(cpu, true);
+>  
+>  	/* Lock CPU (Disable external debug access) */
+> -	clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +	sunxi_cpu_set_locking(cpu, true);
+>  
+>  	/* Power down CPU */
+>  	sunxi_cpu_set_power(cpuid, false);
+>  
+> -	/* Unlock CPU (Disable external debug access) */
+> -	setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +	/* Unlock CPU (Reenable external debug access) */
+> +	sunxi_cpu_set_locking(cpu, false);
+>  }
+>  
+>  static u32 __secure cp15_read_scr(void)
+> @@ -228,33 +258,31 @@ out:
+>  int __secure psci_cpu_on(u32 __always_unused unused, u32 mpidr, u32 pc,
+>  			 u32 context_id)
+>  {
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+>  	u32 cpu = (mpidr & 0x3);
+>  
+>  	/* store target PC and context id */
+>  	psci_save(cpu, pc, context_id);
+>  
+>  	/* Set secondary core power on PC */
+> -	sunxi_set_entry_address(&psci_cpu_entry);
+> +	sunxi_cpu_set_entry(cpu, &psci_cpu_entry);
+>  
+>  	/* Assert reset on target CPU */
+> -	writel(0, &cpucfg->cpu[cpu].rst);
+> +	sunxi_cpu_set_reset(cpu, true);
+>  
+>  	/* Invalidate L1 cache */
+> -	clrbits_le32(&cpucfg->gen_ctrl, BIT(cpu));
+> +	sunxi_cpu_invalidate_cache(cpu);
+>  
+>  	/* Lock CPU (Disable external debug access) */
+> -	clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +	sunxi_cpu_set_locking(cpu, true);
+>  
+>  	/* Power up target CPU */
+>  	sunxi_cpu_set_power(cpu, true);
+>  
+>  	/* De-assert reset on target CPU */
+> -	writel(BIT(1) | BIT(0), &cpucfg->cpu[cpu].rst);
+> +	sunxi_cpu_set_reset(cpu, false);
+>  
+> -	/* Unlock CPU (Disable external debug access) */
+> -	setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +	/* Unlock CPU (Reenable external debug access) */
+> +	sunxi_cpu_set_locking(cpu, false);
+>  
+>  	return ARM_PSCI_RET_SUCCESS;
+>  }
+
