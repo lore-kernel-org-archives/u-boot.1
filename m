@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D902EE498B
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 17:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A09EE498B
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 17:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4866686F5A;
-	Fri, 18 Aug 2023 19:49:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BFCA86F24;
+	Fri, 18 Aug 2023 19:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rjG/RWmE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IG6BuWd2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D6D686EFF; Fri, 18 Aug 2023 19:49:51 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 6305786F17; Fri, 18 Aug 2023 19:49:55 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3A7A8082A
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 19:49:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA29E8082A
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 19:49:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-58fa51a0d97so2320857b3.3
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 10:49:48 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-58d41109351so31783807b3.1
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 10:49:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692380987; x=1692985787;
+ d=konsulko.com; s=google; t=1692380991; x=1692985791;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pYHVFMMezMY07RArJmG/zes0ft6ctcHRJrWzui9XUKg=;
- b=rjG/RWmEhTjn1tbDq3g8Zy13v5xb1ao8wo/bK7aiNkbuBJpGKS3lgxaExqsjTBONnF
- BCowR2b5J8NWpiCRT7XcH/iA0+10UcYmEUF1R02sI9rFSCS2sYZLrHxYlJqbvx6HCWv7
- dAMMJVIFukz1rCe5AFpVxyZPjq5f85nIvoNqk=
+ bh=G2G0gcFssZJ1vN2VsSuZT4PJBptriMerskDbHGBkKyg=;
+ b=IG6BuWd2q7hvrJ8dhN1Z660z0YZu+4Y6kylAjiXeVf4EG+2PPdCQ2GYKfBBNSD0ub8
+ isDo7vYmRZckLfbsu5F7bkm9wOby1sK7Rqe9rm493s2AYfxcTeLY4qQjyFW8VsMtNYSp
+ pkTERcuLpx6Ok7obweRfkM7b0zDPP96LjkNyo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692380987; x=1692985787;
+ d=1e100.net; s=20221208; t=1692380991; x=1692985791;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pYHVFMMezMY07RArJmG/zes0ft6ctcHRJrWzui9XUKg=;
- b=k0c5Ae6RETDNdwCgR3ylEXuradnC9J6KCunpzeF/8qpXy6KM7boMY5nf32GcXrDpFL
- GzxGqD3Vt/ADgVmJ4GDHlHPf2atddItdRtNZvtQ38RDAe9B0koC2tkX71UEyDenJFnPg
- MOk7NrVg7qQDd17jwn7IY2yt66hiWfEfQflN6XPFqHJ574rgKZOJF7WCqDzy8MpR7xi/
- hQR4g01BzzSSccSd42J1nPrQe3e5f05Ta1/PfK8SJazPLSx8SH/H2YYMoqJlz756Lg9j
- ZH0assqNtaOyUBeg0DcMd7hzdzkngMPeMzHHFaNfP/MulkcBAGDNjyJf6beun33ItfeM
- hTnQ==
-X-Gm-Message-State: AOJu0YzMonogUlicylK5AiHMrgtpMJVk/IQAqlN6kqt6xnc+oAtiQ4xF
- bJohxurePrNbiw96Q/SotFwtAQ==
-X-Google-Smtp-Source: AGHT+IHdjw8wqg3u2GFnTZI4fbTcj/+U6yYG+M0vavbb4OZDpgFnNe9Tfs+yYbFE0PvHai1oRcCQZQ==
-X-Received: by 2002:a0d:cd04:0:b0:585:fb08:157a with SMTP id
- p4-20020a0dcd04000000b00585fb08157amr3287377ywd.50.1692380987560; 
- Fri, 18 Aug 2023 10:49:47 -0700 (PDT)
+ bh=G2G0gcFssZJ1vN2VsSuZT4PJBptriMerskDbHGBkKyg=;
+ b=TCVQuqRtrLsqyhcadDr/rhUpViaK+wED2BoDvvlNh+75pgqwK0UZuYjn9rVoeEmcyQ
+ X/fTY2dB7UTBtgXsbO0RW5bP9bugxGAr+4xB/0+8W+LXEr8qco9lZvQd5ZHvl/sZZNfr
+ dpzprocpjrwxV710GmobiPY8heGFV8CnJk19F+lgv5hyPbxoxtKjx27Py5XkqdTx73Bz
+ wP+FzWTJ5X0ZhqdxeAYrigrCG2vmeg6SN9eU9UvdjgBjfZQ4Lh8GYwh1lMvTM97XN0nW
+ w+1Pm2M/Qa6SlVTGtkzbYVJjQfmyaWKGUxKVxAMn12qzV7IJtBqwsgQdYyz+E0ncPa/i
+ YNBA==
+X-Gm-Message-State: AOJu0YxRlKhlk64pnJ6QMMbA7erTwzNATxfiVag7pMIuX8tBoWencYYi
+ XyNQEoCSdTqf4pYcHqCrTtuEps5U1nA5+nNlDm3qLw==
+X-Google-Smtp-Source: AGHT+IFuQ/NhQn0c35rFGDvSOx7DfYar4ZLXzNgfjMQxUkLiI709AFWAnBCDY5SnMwAJwdM/axqNpA==
+X-Received: by 2002:a0d:e645:0:b0:589:a4c7:ee40 with SMTP id
+ p66-20020a0de645000000b00589a4c7ee40mr8710036ywe.2.1692380991444; 
+ Fri, 18 Aug 2023 10:49:51 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-38f7-b1b8-9b5e-5709.res6.spectrum.com.
  [2603:6081:7b00:6400:38f7:b1b8:9b5e:5709])
  by smtp.gmail.com with ESMTPSA id
- p4-20020a0dff04000000b0058bcea54fc2sm632571ywf.57.2023.08.18.10.49.46
+ z1-20020a818901000000b005869d9535dcsm636828ywf.55.2023.08.18.10.49.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Aug 2023 10:49:47 -0700 (PDT)
-Date: Fri, 18 Aug 2023 13:49:45 -0400
+ Fri, 18 Aug 2023 10:49:51 -0700 (PDT)
+Date: Fri, 18 Aug 2023 13:49:49 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Frank Wunderlich <linux@fw-web.de>
 Cc: u-boot@lists.denx.de, Frank Wunderlich <frank-w@public-files.de>,
  Weijie Gao <weijie.gao@mediatek.com>, Daniel Golle <daniel@makrotopia.org>
-Subject: Re: [PATCH] arm: dts: mediatek: convert gmac link mode to 2500base-x
- for r3
-Message-ID: <20230818174945.GF1515023@bill-the-cat>
-References: <20230803165258.14744-1-linux@fw-web.de>
+Subject: Re: [PATCH] arm: mediatek: add usb support for MT7988
+Message-ID: <20230818174949.GG1515023@bill-the-cat>
+References: <20230803180001.22130-1-linux@fw-web.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="heLgaJeS4vnpU82t"
+ protocol="application/pgp-signature"; boundary="BcmaVQwj1AgGo7iY"
 Content-Disposition: inline
-In-Reply-To: <20230803165258.14744-1-linux@fw-web.de>
+In-Reply-To: <20230803180001.22130-1-linux@fw-web.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,50 +93,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---heLgaJeS4vnpU82t
+--BcmaVQwj1AgGo7iY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 03, 2023 at 06:52:58PM +0200, Frank Wunderlich wrote:
+On Thu, Aug 03, 2023 at 08:00:01PM +0200, Frank Wunderlich wrote:
 
 > From: Frank Wunderlich <frank-w@public-files.de>
 >=20
-> Ethernet on Bananapi-r3 is broken after
->=20
-> commit bd70f3cea353 ("net: mediatek: add support for SGMII 1Gbps auto-neg=
-otiation mode")
->=20
-> because changes from this commit were not applied to bpi-r3 devicetree to=
-o:
->=20
-> commit aef54ea16cac ("arm: dts: medaitek: convert gmac link mode to 2500b=
-ase-x")
+> MT7988 has a t-phy and an x-phy controller. There is already a driver for
+> t-phy so we can add USB support for this phy type.
 >=20
 > Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
-> Reviewed-by: Weijie Gao <weijie.gao@mediatek.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---heLgaJeS4vnpU82t
+--BcmaVQwj1AgGo7iY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTfrzkACgkQFHw5/5Y0
-tyxq+gv+P/3Esa7zR1E36QBdbvgHsclP8DlVmJ/Zhtq/FiDQJOVCwhjQ1zhgtpyj
-S6smvDrY7wSmjt/awUJTVj6k+mLwZnrFFq1c+Z3rRz26s5R4fBBjpHUKjm7wwW+t
-fdinMeBOu8MsPDZiTCuFIBC0k5+tu0ElgZfWLp7AVzftKgULSP5z8fQY8Zt8Eh9S
-rgaioMaOZ3+GmvVBJ01fFQD9nY7tlt9L2y7/SejxNqFNVZZpbMguixrEtWpzoiOS
-L/JRN0+ytfMhloSNodvEwjXvdhdwrZNIVJNjs9OzYqyhatFh/ERPawwlFxOUEZJt
-IcrvhaQ2pZW1B2NNgL2eMAbEgSSvak2llHKTSChR4bKH72j8EYhFkIRj8OtPK1Up
-/Nbq4JVep7xzhAE3cMjD9OQxxx+57fGSdCyz8oavp6+e51ahxmwn3J1UIa/tyqF/
-NrGxJwmpRfwxrv31qbwuo6DCdtbIwpjgdMz45yiKOqJbaj73b2B8xPlvioZPHnTU
-m+U1sQBz
-=WZgm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTfrz0ACgkQFHw5/5Y0
+tyzdpAv+M15ViocupcoBx6M5k5NbtkqEgOjjtJ/72sUQSB5kqS12swnHziLty3ks
+I1LUIPG1Gml0b+sgvajYzcDRqP6IOoOD/Gcx6ghR+KYEZiMW1XtOg+gQZ6tAHY50
+rzcuOftNEq8HvT8485emciZMduYlxsjaBD+jMeTd1ClfGmIKNFpMPzRalcuXmWWr
+U3K2RmyXiR6VLAYeWwvdmwffrOLuDirMJ408fCJzeYBSaQEErkWWNdKa4c6ZMEJm
+eDkay/nrES5E95ab41mEHZOywacKsDOcwsflTPYEOxg5hdymixEMcV6AWVCOHbff
+QG0IQ+0li26i2XDcbSAxvOwH3WQZ5irGOuTYzF5miifGa/YmBcn7ouD2eAo/jhQW
+vxGAzgYC1r4L+oPFI4scCrs4hlWhUveEGV4GoGS8dqkEdo/icEnGoHiazRRbI7Fs
+BIG9QnXveGm1KDU7MMCRIBbLR3q8Q4vuKw1hFzonI40/owozK3zmc7zdgBJxlxnE
+bDwAnywP
+=gqCN
 -----END PGP SIGNATURE-----
 
---heLgaJeS4vnpU82t--
+--BcmaVQwj1AgGo7iY--
