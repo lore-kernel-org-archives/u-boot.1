@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 848BAC7112B
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 08:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C212C05052
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 09:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 765B886B5D;
-	Fri, 18 Aug 2023 10:33:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B8DCC86C7A;
+	Fri, 18 Aug 2023 11:05:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cTlNhuf5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g+cMm+VO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CECD886C66; Fri, 18 Aug 2023 10:33:52 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9A22C86C39; Fri, 18 Aug 2023 11:05:10 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33BB5833DB
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 10:33:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB11486C62
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 11:05:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1692347628; x=1692952428; i=xypron.glpk@gmx.de;
- bh=NfMiD5ZDJZMmnGaqqiSO5kUkqCLsd4tAeY6w9oJHmNU=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=cTlNhuf5CaRty3eC1MNmPuGDgmUKFO2Q453yrhmBamswaz5270VtbY0FRJbq+m5flT1NUf9
- GkOb0QvWTdBoLoRU21ewucq0d2T9FO7CIvkGIRfYDAPKilIH/dzw1uz5vVqNjFWc//DBhoflE
- zssuyGnSBibXIrzuhUsDJRvLrcYuq/7fP3Lb0LyqmOZEvfrftaM3DVjSn3vL3YbyHqQI5H91d
- 14/ZR59yknzHZRYEwJDr8eCxoZecgMGwSjcFTrl9lLpm29DBHqmW1T39vHD1PP86sFSmRDy8q
- vxYoAGA3U1uU/oHOjMqV2tG438JFUKpSAnV57zIFvPtOJ3zNHNfg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MBUqF-1qbY151eyF-00Cz2G; Fri, 18
- Aug 2023 10:33:48 +0200
-Message-ID: <2936e5c1-d401-e26c-9cea-83315273ddb7@gmx.de>
-Date: Fri, 18 Aug 2023 10:33:41 +0200
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-99bf1f632b8so83373166b.1
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:05:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692349507; x=1692954307;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sn+wK1s3wZg4/d+ZzcV+ka8rH9zIYFexhMho+xXjrGI=;
+ b=g+cMm+VOvz78SZqH8iraqIY7mbO8QKhm9zM2PLLgrMggcf6zMB8rbnI+Goh1FjXBY3
+ pibYSaQO7qx5XhFDZL7IjPEb1IoX+ERTWda1baz7tSJF1/skSbrlkLp+a8EHwma6LV3h
+ nVOSR++cBrPBUUKjx9jdWNL4UOMO6455kvCGq6F8Ct8ipUqJsNPQzprOGbVwwR66EP3K
+ rDJFitsCnL/8MrPdvbN//rPC6H4lU2R6TCcR+4uaubyFty8MSAz76MQnhtPzCJvXlu+Y
+ NQEVXoDZWfzToF0zT47Gk/IDRri/NEsAxSPwbv2LbJAgt29Sx/EjkW/hMf+UxvsC2WF9
+ awLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692349507; x=1692954307;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sn+wK1s3wZg4/d+ZzcV+ka8rH9zIYFexhMho+xXjrGI=;
+ b=P1RuIpS4+lWHl2vSzhBFGEKt8KBeQkL+Y54pDYj1tEObiXddQFFNlXyAuJ9vliRoNG
+ YGn6xiTgAmtBHD3vq6550GEC1+9tZrzHbiq1nOJcHvKqfLvbRrt16/cvz7fldgsNkySv
+ PBUjE7xpD17vHfTD3sLJF2fUQcrn8p4GTrg5EkwQxG+sfyPve8A2RQEGp84QfHQSDTZC
+ RMsMPVMPJV/0U4oDCUmcMW3ovB1+Cpgf89yVAvwgwx0soLBCtFtWYzsjk7ufh5Fe/nZi
+ KGGjnLhNRb5VaIiqD3uJtH4qiRaj6LghgIiEFpJaCgX6ilFrGEO1PWWqknZK4BzYgc7A
+ 9bNg==
+X-Gm-Message-State: AOJu0Yyb7WdHOI2Fn9SDBVA1hIVCBBaLpBo9hRl4xRcW3szFjy/K2oOh
+ weMAw6YFiBIOrcNDygvXCWM=
+X-Google-Smtp-Source: AGHT+IHOiubJIHgZq8cy7M7pUcfA9qSqFxZ2F1RWVUioPjKdUsGWX4qb3JlV4XQwtl93Ic8JVc5wNg==
+X-Received: by 2002:a17:906:328d:b0:99b:415f:2e4f with SMTP id
+ 13-20020a170906328d00b0099b415f2e4fmr1352967ejw.57.1692349507175; 
+ Fri, 18 Aug 2023 02:05:07 -0700 (PDT)
+Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
+ va30-20020a17090711de00b0099ce025f8ccsm926772ejb.186.2023.08.18.02.05.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Aug 2023 02:05:06 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Maxim Schwalm <maxim.schwalm@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v9 0/7] Tegra: add ASUS/Google Nexus 7 (2012) support
+Date: Fri, 18 Aug 2023 12:04:40 +0300
+Message-Id: <20230818090447.348820-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 1/1] Documentation extended with specific information for
- VirtualBox
-Content-Language: en-US
-To: thomas.mittelstaedt@de.bosch.com
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20230817134647.49259-1-thomas.mittelstaedt@de.bosch.com>
- <20230817134647.49259-2-thomas.mittelstaedt@de.bosch.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230817134647.49259-2-thomas.mittelstaedt@de.bosch.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KFNeKuTgC3etsns+Le6tfYrEabL0qQLDBx+LBIazRTm1XrwE3AY
- O1ozu7bH/ZoxWloMjcChk0cwxYOUugFqNK1IbtcXicqjgaIgyxUWE6jXx/gqpL9JuzLBvgQ
- VL3LWnymazc8w64yzdyYiMCKou6MDcaVQnFMRVSWaOb8a2JWnApOm40huRhPjCtuwe009Nf
- eim58Nmi2z05sjC5o8+Lw==
-UI-OutboundReport: notjunk:1;M01:P0:dq+mmfEjsfE=;+ZF3kHxY7PEDNS9suuOQAVnxUW0
- +GFw1bFXMiqsE40KJwEdDKzq/GZ/OQFviuYlr5BiOciQ85RVkehcuhiW18HQnJaUhH20PruSv
- yqEXkjgFCXfV9jvnIoZgpDQ8hXB716NosmVXeJ96E8k8p3wEc0cq/4XOTp0lx9+aQMau7g7eF
- TST5p/qeQDbZzYldatTZSpPJhQJHgIbUm6PIa74TSz8vw1iNLy7G4XS7JsXanX0yfPg8wyewk
- ng4DEqTqpr6gEi22giGHggM2EMgQMWIvnVkPiataTOzGqes6aIuVH+LQZPTLuPo1+IqzR/DZ7
- S36Pu9uat2XckzH/3IV72qDN1XrKsVtxCB0JUJs+ctEZ9C2n967sPDoc2sxg+Np2CAQMeDA+a
- B+Ksd8HeaZos9jC2F1Bu1Q4ovm4WFUash8Z8NQJhNx5/Yn5VK8CUKdTY7ztpcuv9QnADqCi2k
- R5SNIbBq0kcSO3BRR83gNV3BSc8NpyHBmbLeiTamEODtLuznhJlzTWGei1/E6mZqZTPBBYTCE
- OfScC0IyPy8B8xQ0LKnhpEpA1L3V2oplzT7fD5eKH4VPU+UgmBOwVZEImdZih+KvOVmnrJfo4
- q5VfKtr3O89Fi/zpNDJWXIqSlVi55C+5KpyxqKq9TzYMoOLfc/Nb4fgTwxXDA0tS7UBhVqN1C
- DEHK5ovON7JhAcjQIWrvT7j1FmWXJj5gP3AKHjPDknJpwKSX/3FIRhfkEHvEFkW6K+Jx67LTY
- 7DtSeiELpYbJVCFppnjqBiraPU8E6CZPfrLkAaWj2a4/Z4/vKn7bYLv7x7kZSz/2mwMpTVuQI
- J6KyGX059Pl/bTUeqlJg5+qeS6SESRTVce787+jZWNwhiCfdh0wOVAK3fy5mAXQmecS9OKbkG
- xiW8bD9lZvp5uMXEBcNy1ItLMpWcNhlKPdrNCigMp2oHKdtMs/bca9ViHVgip3eBUTvWeG0Ui
- iSwzO5cWaEcGGpXYITVJlJ6CzAY=
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,164 +91,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17.08.23 15:46, thomas.mittelstaedt@de.bosch.com wrote:
-> From: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
->
-> Signed-off-by: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
-> ---
->   doc/develop/uefi/u-boot_on_efi.rst | 76 ++++++++++++++++++++++++++++++
->   1 file changed, 76 insertions(+)
->
-> diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boo=
-t_on_efi.rst
-> index acad6397e8..927e1dc266 100644
-> --- a/doc/develop/uefi/u-boot_on_efi.rst
-> +++ b/doc/develop/uefi/u-boot_on_efi.rst
-> @@ -254,6 +254,82 @@ This shows running with serial enabled (see `includ=
-e/configs/efi-x86_app.h`)::
->
->      =3D> QEMU: Terminated
->
-> +Run at VirtualBox (x86)
+This patchset adds support for native use of U-Boot on:
+- ASUS T30 Transformers (7 devices, all models);
+- ASUS/Google Nexus 7 (2012), both grouper and tilapia
+- LG Optimus 4X HD (P880) and Optimus Vu (P895)
+- HTC One X (endeavoru)
+as a replacement for the vendor bootloader.
 
-%s/at/on/
+Current commits are designed to work on re-crypted devices but can
+be used on clean unmodified devices with slight restrictions (like
+no booting/mounting emmc and no self updating feature).
 
-Below you assume a 64bit machine: %s/x86/x86_64/
+All device setup commits fall under the same pattern. Alongside device
+bringup tegra requires few small patches:
+ - add gpio keyboard as stdin device
+ - make networking boot options optional
+ - add a small tool to generate SoC UID
 
-> +--------------------------
+Commits passed ./tools/buildman/buildman tegra
+Building current source for 30 boards (12 threads, 1 job per thread)
+   30    0    0 /30             0:00:06  : apalis_t30
+Completed: 30 total built, 30 newly), duration 0:05:16, rate 0.09
 
-The line length must match the heading.
+---
+Changes from v8:
+- separated tf600t and p1801-t device trees since they use
+  different video path bindings
+- enabled booting from usb devices (USB > SD > eMMC)
+- fixed tf201 dock usb line binding
+- removed transformer board pmic gpios setup
+- fixed typos in documentation
+- refresh USB option converted into enter console for transformers
 
-> +
-> +Enable EFI
-> +~~~~~~~~~~~~
+Changes from v7:
+- endeavoru dtb included into Makefile
 
-ditto
+Changes from v6:
+- fixed typos
+- changed grouper base defconfig in doc
+- fixed references too microsd card for grouper, lg and htc
+- fixed name of p1801
+- removed pwm from p1801
+- added section about flashing uboot to tf600t
+- changed tf600t behavior (power off after update, not reboot)
 
-> +At settings for virtual machine the flag at **System->Motherboard->Enab=
-le EFI (special OSes only)** has to be enabled.
+Changes from v5:
+- fixed maintained files inclusion
 
-Limit lines to 80 characters.
+Changes from v4:
+- fixed documentation
+- fixed CONFIG_* definitions
 
-> +
-> +Installation
-> +~~~~~~~~~~~~
-> +Install the needed system at a VDI disk and connect this to SATA contro=
-ller (type AHCI) at settings
+Changes from v3:
+- extended amount of devices supported
 
-Provide the preinstalled Linux system as a Virtual Disk Image (VDI) and
-assign it to a SATA controller (type AHCI) using the settings for the
-virtual machine at menu item **System->Storage->Controller:SATA**.
+Changes from v2:
+ - fuse build is excluded for T186 (it is not supported in it anyway)
 
-> +for virtual machine at **System->Storage->Controller:SATA**.
-> +
-> +For the following description 3 partitions are assumed:
+Changes from v1:
+ - fix fuse headers for newer Tegra generations
+ - allow grouper_common_defconfig to pass without fragments
+---
 
-three GPT partitions
+Jonas Schwöbel (1):
+  configs: tegra-common-post: make PXE and DHCP boot targets optional
 
-> +
-> +- Partition 1: formatted as **vfat**, used for U-Boot and and its envir=
-onment filesenvironment, flag **boot** set
+Svyatoslav Ryhel (6):
+  configs: tegra-common-post: add GPIO keyboard as STDIN device
+  ARM: tegra: add SoC UID calculation function
+  board: asus: transformer: add ASUS Transformer T30 family support
+  board: asus: grouper: add Google Nexus 7 (2012) support
+  board: lg: x3: add Optimus 4X HD and Optimus Vu support
+  board: htc: endeavoru: add One X support
 
-formatted as FAT file-system and marked as EFI system partition
-(partition type 0xEF00) used for the U-Boot EFI binary.
+ arch/arm/dts/Makefile                         |  13 +
+ arch/arm/dts/tegra30-asus-grouper-common.dtsi | 156 ++++++
+ .../dts/tegra30-asus-nexus7-grouper-E1565.dts |  43 ++
+ .../dts/tegra30-asus-nexus7-grouper-PM269.dts |  36 ++
+ .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |  62 +++
+ arch/arm/dts/tegra30-asus-p1801-t.dts         | 209 ++++++++
+ arch/arm/dts/tegra30-asus-tf201.dts           |  16 +
+ arch/arm/dts/tegra30-asus-tf300t.dts          |  18 +
+ arch/arm/dts/tegra30-asus-tf300tg.dts         |   9 +
+ arch/arm/dts/tegra30-asus-tf300tl.dts         |   9 +
+ arch/arm/dts/tegra30-asus-tf600t.dts          | 225 +++++++++
+ arch/arm/dts/tegra30-asus-tf700t.dts          |  13 +
+ arch/arm/dts/tegra30-asus-transformer.dtsi    | 209 ++++++++
+ arch/arm/dts/tegra30-htc-endeavoru.dts        | 177 +++++++
+ arch/arm/dts/tegra30-lg-p880.dts              |  40 ++
+ arch/arm/dts/tegra30-lg-p895.dts              |  50 ++
+ arch/arm/dts/tegra30-lg-x3.dtsi               | 177 +++++++
+ arch/arm/include/asm/arch-tegra/fuse.h        |   7 +
+ arch/arm/mach-tegra/Makefile                  |   4 +
+ arch/arm/mach-tegra/fuse.c                    | 151 ++++++
+ arch/arm/mach-tegra/tegra30/Kconfig           |  20 +
+ board/asus/grouper/Kconfig                    |  22 +
+ board/asus/grouper/MAINTAINERS                |  10 +
+ board/asus/grouper/Makefile                   |  14 +
+ board/asus/grouper/grouper-spl-max.c          |  45 ++
+ board/asus/grouper/grouper-spl-ti.c           |  41 ++
+ board/asus/grouper/grouper.c                  | 202 ++++++++
+ board/asus/grouper/pinmux-config-grouper.h    | 362 ++++++++++++++
+ board/asus/transformer-t30/Kconfig            |  23 +
+ board/asus/transformer-t30/MAINTAINERS        |  15 +
+ board/asus/transformer-t30/Makefile           |  11 +
+ .../pinmux-config-transformer.h               | 365 ++++++++++++++
+ .../transformer-t30/transformer-t30-spl.c     |  41 ++
+ board/asus/transformer-t30/transformer-t30.c  | 176 +++++++
+ board/htc/endeavoru/Kconfig                   |  12 +
+ board/htc/endeavoru/MAINTAINERS               |   7 +
+ board/htc/endeavoru/Makefile                  |  11 +
+ board/htc/endeavoru/endeavoru-spl.c           |  47 ++
+ board/htc/endeavoru/endeavoru.c               | 116 +++++
+ board/htc/endeavoru/pinmux-config-endeavoru.h | 362 ++++++++++++++
+ board/lg/x3-t30/Kconfig                       |  26 +
+ board/lg/x3-t30/MAINTAINERS                   |   9 +
+ board/lg/x3-t30/Makefile                      |  11 +
+ board/lg/x3-t30/pinmux-config-x3.h            | 449 ++++++++++++++++++
+ board/lg/x3-t30/x3-t30-spl.c                  |  48 ++
+ board/lg/x3-t30/x3-t30.c                      | 176 +++++++
+ configs/endeavoru_defconfig                   |  83 ++++
+ configs/grouper_E1565.config                  |   2 +
+ configs/grouper_PM269.config                  |   2 +
+ configs/grouper_common_defconfig              |  80 ++++
+ configs/p1801-t.config                        |   2 +
+ configs/p880.config                           |   4 +
+ configs/p895.config                           |   4 +
+ configs/tf201.config                          |   2 +
+ configs/tf300t.config                         |   2 +
+ configs/tf300tg.config                        |   2 +
+ configs/tf300tl.config                        |   2 +
+ configs/tf600t.config                         |   5 +
+ configs/tf700t.config                         |   2 +
+ configs/tilapia.config                        |   3 +
+ configs/transformer_t30_defconfig             |  83 ++++
+ configs/x3_t30_defconfig                      |  87 ++++
+ doc/board/asus/grouper_common.rst             |  94 ++++
+ doc/board/asus/index.rst                      |  10 +
+ doc/board/asus/transformer_t30.rst            | 116 +++++
+ doc/board/htc/endeavoru.rst                   |  89 ++++
+ doc/board/htc/index.rst                       |   9 +
+ doc/board/index.rst                           |   3 +
+ doc/board/lg/index.rst                        |   9 +
+ doc/board/lg/x3_t30.rst                       |  93 ++++
+ include/configs/endeavoru.h                   |  65 +++
+ include/configs/grouper.h                     |  61 +++
+ include/configs/tegra-common-post.h           |  28 +-
+ include/configs/transformer-common.h          |  89 ++++
+ include/configs/transformer-t30.h             |  23 +
+ include/configs/x3-t30.h                      |  77 +++
+ 76 files changed, 5371 insertions(+), 5 deletions(-)
+ create mode 100644 arch/arm/dts/tegra30-asus-grouper-common.dtsi
+ create mode 100644 arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-p1801-t.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-tf201.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-tf300t.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-tf300tg.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-tf300tl.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-tf600t.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-tf700t.dts
+ create mode 100644 arch/arm/dts/tegra30-asus-transformer.dtsi
+ create mode 100644 arch/arm/dts/tegra30-htc-endeavoru.dts
+ create mode 100644 arch/arm/dts/tegra30-lg-p880.dts
+ create mode 100644 arch/arm/dts/tegra30-lg-p895.dts
+ create mode 100644 arch/arm/dts/tegra30-lg-x3.dtsi
+ create mode 100644 arch/arm/mach-tegra/fuse.c
+ create mode 100644 board/asus/grouper/Kconfig
+ create mode 100644 board/asus/grouper/MAINTAINERS
+ create mode 100644 board/asus/grouper/Makefile
+ create mode 100644 board/asus/grouper/grouper-spl-max.c
+ create mode 100644 board/asus/grouper/grouper-spl-ti.c
+ create mode 100644 board/asus/grouper/grouper.c
+ create mode 100644 board/asus/grouper/pinmux-config-grouper.h
+ create mode 100644 board/asus/transformer-t30/Kconfig
+ create mode 100644 board/asus/transformer-t30/MAINTAINERS
+ create mode 100644 board/asus/transformer-t30/Makefile
+ create mode 100644 board/asus/transformer-t30/pinmux-config-transformer.h
+ create mode 100644 board/asus/transformer-t30/transformer-t30-spl.c
+ create mode 100644 board/asus/transformer-t30/transformer-t30.c
+ create mode 100644 board/htc/endeavoru/Kconfig
+ create mode 100644 board/htc/endeavoru/MAINTAINERS
+ create mode 100644 board/htc/endeavoru/Makefile
+ create mode 100644 board/htc/endeavoru/endeavoru-spl.c
+ create mode 100644 board/htc/endeavoru/endeavoru.c
+ create mode 100644 board/htc/endeavoru/pinmux-config-endeavoru.h
+ create mode 100644 board/lg/x3-t30/Kconfig
+ create mode 100644 board/lg/x3-t30/MAINTAINERS
+ create mode 100644 board/lg/x3-t30/Makefile
+ create mode 100644 board/lg/x3-t30/pinmux-config-x3.h
+ create mode 100644 board/lg/x3-t30/x3-t30-spl.c
+ create mode 100644 board/lg/x3-t30/x3-t30.c
+ create mode 100644 configs/endeavoru_defconfig
+ create mode 100644 configs/grouper_E1565.config
+ create mode 100644 configs/grouper_PM269.config
+ create mode 100644 configs/grouper_common_defconfig
+ create mode 100644 configs/p1801-t.config
+ create mode 100644 configs/p880.config
+ create mode 100644 configs/p895.config
+ create mode 100644 configs/tf201.config
+ create mode 100644 configs/tf300t.config
+ create mode 100644 configs/tf300tg.config
+ create mode 100644 configs/tf300tl.config
+ create mode 100644 configs/tf600t.config
+ create mode 100644 configs/tf700t.config
+ create mode 100644 configs/tilapia.config
+ create mode 100644 configs/transformer_t30_defconfig
+ create mode 100644 configs/x3_t30_defconfig
+ create mode 100644 doc/board/asus/grouper_common.rst
+ create mode 100644 doc/board/asus/index.rst
+ create mode 100644 doc/board/asus/transformer_t30.rst
+ create mode 100644 doc/board/htc/endeavoru.rst
+ create mode 100644 doc/board/htc/index.rst
+ create mode 100644 doc/board/lg/index.rst
+ create mode 100644 doc/board/lg/x3_t30.rst
+ create mode 100644 include/configs/endeavoru.h
+ create mode 100644 include/configs/grouper.h
+ create mode 100644 include/configs/transformer-common.h
+ create mode 100644 include/configs/transformer-t30.h
+ create mode 100644 include/configs/x3-t30.h
 
-(If VirtualBox is UEFI compliant, it should recognize the ESP as the
-boot partition.)
-
-> +- Partition 2: formatted as **ext2/ext4**, used for Linux image and boo=
-t configuration, flag **boot** set
-
-ext2 or ext4
-
-
-> +- Partition 3: formatted as **ext4**, used for root file system
-> +
-> +Create an extlinux.conf or a boot script
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Following files are assumed to be located at system for boot configurat=
-ion::
-> +
-> + Partition  File                    Comment
-> + 1          EFI/BOOT/BOOTX64.efi    # renamed U-Boot EFI image
-
-EFI/BOOT/BOOTX64.EFI
-
-Please, tell the reader which defconfig to use and which U-Boot file to
-copy.
-
-> + 2          Image                   # Linux image
-
-Please, remove the blank space at the end of line.
-
-> + 2          Initrd                  # Initramfs of Linux
-> +
-> +Boot script
-> +~~~~~~~~~~~
-> +
-> +The boot script **boot.scr** is assumed to be located at::
-> +
-> + Partition  File        Comment
-> + 2          boot.scr    # Boot script, generated with mkimage from temp=
-late
-
-Please, remove the blank space at the end of line.
-
-> +
-> +Content of **boot.scr**:
-> +
-> +.. code-block:: bash
-> +
-> +  ext4load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} ${p=
-refix}Image
-> +  setenv kernel_size ${filesize}
-> +  ext4load ${devtype} ${devnum}:${distro_bootpart} ${ramdisk_addr_r} ${=
-prefix}Initrd
-> +  setenv initrd_size ${filesize}
-> +  zboot  ${kernel_addr_r} ${kernel_size} ${ramdisk_addr_r} ${initrd_siz=
-e}
-
-Doesn't U-Boot need this file on the boot partition i.e. the ESP?
-
-Best regards
-
-Heinrich
-
-> +
-> +Extlinux configuration
-> +~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Alternatively a configuration **extlinux.conf** can be used. **extlinux=
-.conf** is assumed to be located at::
-> +
-> + Partition  File                        Comment
-> + 2          extlinux/extlinux.conf      # Extlinux boot configuration
-> +
-> +Content of **extlinux.conf**:
-> +
-> +.. code-block:: bash
-> +
-> +  default l0
-> +  menu title U-Boot menu
-> +  prompt 0
-> +  timeout 50
-> +
-> +  label l0
-> +    menu label Linux
-> +    linux /Image
-> +    initrd /Initrd
-> +
-> +
-> +Additionally something like (sda is assumed as disk device):
-> +
-> +.. code-block:: bash
-> +
-> +	append  root=3D/dev/sda3 console=3Dtty0 console=3DttyS0,115200n8 rootw=
-ait rw
-> +
-> +
->
->   Future work
->   -----------
+-- 
+2.39.2
 
