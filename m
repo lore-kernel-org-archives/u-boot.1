@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0685DC678DC
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BEBC2FC0E
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:30:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E38EA86C27;
-	Fri, 18 Aug 2023 02:27:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37AF186C58;
+	Fri, 18 Aug 2023 02:27:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gD/iK73w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XlpjiUmB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4743386C23; Fri, 18 Aug 2023 02:27:32 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 68CE386C03; Fri, 18 Aug 2023 02:27:32 +0200 (CEST)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D38686C1D
+ by phobos.denx.de (Postfix) with ESMTPS id DD0F586C04
  for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:27:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-34ba9d6f033so1412985ab.2
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-34aa0a1a2fbso1406895ab.3
  for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692318446; x=1692923246;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IHiEmy1rt0+w9/t1sHWQc21EnV8VTkBGaJ29S8icSeQ=;
- b=gD/iK73w85Jbp/ov8XUNNO9Y1jFRjJCEj1dlLAkSDdVeviKVZzFuHatPXsnCppoys4
- QA7ch89VsU/1jTdWecI2EcN0HXUZ2RJAtnkPBm5u6cLXywn3EIuVyIrZgjTuHdhVhlZp
- WbDi2FJ4K+KwmycFM/hoANjt0cuFWLXyyM1yA=
+ bh=Lw+fXDGW0ORqQGpeFAJg7lg0B6ppN/S3FqAkTBvF5tg=;
+ b=XlpjiUmBmpOo+LuPOl6L2Ea5eD1Kd0H6fCr8/4iPMHVQEAUpITXqEkXXFO+2/6jYQG
+ xJS9PcEXQzEw+JnkFwmdHjWOUhsg/uiernKwXsxYOFjxEzqwVDJjzkk6YiYVTYYaijtS
+ k0knV/MvntKXxJvBJienwIBAdiyb5BBreUUss=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692318446; x=1692923246;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IHiEmy1rt0+w9/t1sHWQc21EnV8VTkBGaJ29S8icSeQ=;
- b=BPyxFGNeRrjbuGuBiMbuvBqeJoyS13Jgjsah6/9DtbAgyNOQeFnSDKuVk41rA9nBu/
- Xv+ma+p0nhVEzQbAAqV+YvlS/lhqNPhVkmoY94Zm440PtTNMIgCq5vY36WdqqYBr0LPB
- anDli/yq+9LQRVZN5gZKtBIKhVL3o0B13lGdenys+PBbnWOI/8uA4SuCWv2gzejLddBp
- +g1aSrvM+ETs3EZArqKdP5ieyInKCTZUtxHzLKhKibpkCSfL6C1fACpQvcDbKN8gZrLX
- PAbTDe5CQL3/OjI6FpcLa59KH/GfMtDAxOkIYEVdu9v17z9fBUGMRkBp4X6UBxkPwBtz
- j0XA==
-X-Gm-Message-State: AOJu0YxOqc6msGVrA0kkQ0y5iVOv+pWT89qbTvpj9duI5aJloqgUGuPt
- iIhtOlojBrvdZYvxpWyaEm4ssF62/2BcmrFa5GU=
-X-Google-Smtp-Source: AGHT+IEXoA2uV/KTgcCtXxktsdwB1A7nL8yJOv9NXtlPw06+U/fh108muyg32HM1Ut8hcJhK5ccJWg==
-X-Received: by 2002:a05:6e02:c25:b0:34a:a340:c04b with SMTP id
- q5-20020a056e020c2500b0034aa340c04bmr1228894ilg.28.1692318445891; 
- Thu, 17 Aug 2023 17:27:25 -0700 (PDT)
+ bh=Lw+fXDGW0ORqQGpeFAJg7lg0B6ppN/S3FqAkTBvF5tg=;
+ b=b76dbMLeCP1lx1MIvJzXFYroYEsGuGqYxOzkleTemtg4imJ5eIR+cPrIyetvZHuP6i
+ 5OEhp4dBcf6U6u8my5+T1NcZvabAkR/4/xaC+Z2VlJVFLA+gPZER0VShUzhXbKe5l/Bd
+ YU6Lp1jvP+Z6vcaQphGrIjxA2g1y1B7257FYDiZK6NRxjhptu9J+2XbN2fiHphS0dujW
+ QZ8b/8FO1Oc3AG6OtkZ+HtOtXQ5+mVR7NiY/TqfXNnAedZqC4QsE/gSpSNQFa35lAjph
+ nrVps05g7A/lc4j9JEi/f+tTjsvlDfVuxlqRk0KPOqCGuXS5aT/SCcjCHOBRh+aR3k9c
+ jk5Q==
+X-Gm-Message-State: AOJu0YxyDwrAP69a4M/SVMOlYu7kIPInKseObtNgfBg+SRGSD66Nl4xq
+ VogyeRfCGuCWaGYk0K3rouGly3jZ8lNRdljw93g=
+X-Google-Smtp-Source: AGHT+IH0NNi33/rJs4Si6trGkkaHMJgM0JSTkx0G6dt47t+w+dkjimYFACxB/MsZt6aN3VFAbG5sEA==
+X-Received: by 2002:a05:6e02:1241:b0:34a:a178:637a with SMTP id
+ j1-20020a056e02124100b0034aa178637amr1222792ilq.24.1692318446606; 
+ Thu, 17 Aug 2023 17:27:26 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.25
+ i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 17:27:25 -0700 (PDT)
+ Thu, 17 Aug 2023 17:27:26 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2 15/20] efi: x86: Install the SMBIOS tables if present
-Date: Thu, 17 Aug 2023 18:26:54 -0600
-Message-ID: <20230818002706.853550-16-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Coreboot ML <coreboot@coreboot.org>
+Subject: [PATCH v2 16/20] x86: coreboot: Record the position of the SMBIOS
+ tables
+Date: Thu, 17 Aug 2023 18:26:55 -0600
+Message-ID: <20230818002706.853550-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230818002706.853550-1-sjg@chromium.org>
 References: <20230818002706.853550-1-sjg@chromium.org>
@@ -89,8 +89,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When these are available in memory, whether generated by U-Boot or by an
-earlier firmware stage, install them.
+Make a note of where coreboot installed the SMBIOS tables so that we can
+pass this on to EFI.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -98,22 +98,21 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 Changes in v2:
 - Add new patch
 
- lib/efi_loader/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/lib/coreboot/cb_sysinfo.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 0eb748ff1a59..8d31fc61c601 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -79,7 +79,7 @@ obj-$(CONFIG_VIDEO) += efi_gop.o
- obj-$(CONFIG_BLK) += efi_disk.o
- obj-$(CONFIG_NETDEVICES) += efi_net.o
- obj-$(CONFIG_ACPI) += efi_acpi.o
--obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += efi_smbios.o
-+obj-$(CONFIG_SMBIOS) += efi_smbios.o
- obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
- obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
- obj-$(CONFIG_EFI_RISCV_BOOT_PROTOCOL) += efi_riscv.o
+diff --git a/arch/x86/lib/coreboot/cb_sysinfo.c b/arch/x86/lib/coreboot/cb_sysinfo.c
+index dfbc80c430e1..f7fd9ea5bcbb 100644
+--- a/arch/x86/lib/coreboot/cb_sysinfo.c
++++ b/arch/x86/lib/coreboot/cb_sysinfo.c
+@@ -471,6 +471,7 @@ int get_coreboot_info(struct sysinfo_t *info)
+ 		return -ENOENT;
+ 	gd->arch.coreboot_table = addr;
+ 	gd_set_acpi_start(map_to_sysmem(info->rsdp));
++	gd_set_smbios_start(info->smbios_start);
+ 	gd->flags |= GD_FLG_SKIP_LL_INIT;
+ 
+ 	return 0;
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
