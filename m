@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1279C678DC
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 09:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB27C678DC
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 09:39:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43D1D86C7C;
-	Fri, 18 Aug 2023 11:34:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D29EA86C7C;
+	Fri, 18 Aug 2023 11:39:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kHvR/vaB";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZzIKQmgi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2121D86C7D; Fri, 18 Aug 2023 11:34:50 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id A5A2086C93; Fri, 18 Aug 2023 11:39:38 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8700386C5C
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 11:34:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB1E386C5C
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 11:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-4fe4762173bso982209e87.3
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:34:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-99bf8e5ab39so87996266b.2
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:39:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692351286; x=1692956086;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Q23Hy0uzIDH0iZ1eRHCnBhM/4vpPMj1PCM3CpkBFz5Y=;
- b=kHvR/vaBupH5qzW+KyVEuMu0/2MLnzHsM6EYjhEfNitqiHhK89yhK6DnYqOXsXBL75
- u8D946qzQR7YvVrUjgKDwd87THArJ8BrBCP4uLrMWz1+psibWOdRFBd7ZXyZLxx4z3uy
- NnpHwBJph9AJI2cdqBWiSbtY72mKUWyK/kYQQ2T8OaSHaNwfMCdV07L8HYKZTF8cUR7Z
- dhBGQpO3FrHdUfE0U7v83645W6CJYyNy6k+MjmiBwbUs32icIPd0B5qZ2oBF3K0B6JcC
- stxORdATA0GFFSRuNQ6lrREpH/ejY3qrYXSKldJ0TptLZeFRK8TzYSvkXnxhQGraZ2LV
- 6AiQ==
+ d=linaro.org; s=google; t=1692351575; x=1692956375;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=OfB7R4logPqPYCYG09zUZmRxHqBHYLlZsqZAIe46SGE=;
+ b=ZzIKQmgiQxFowB06kvey9jaQSNbg8WASxvq8OpkP9eyjEOaR6e8FRLYTQQVFxmj/tF
+ wD0kOEC9WRj5IymexnqAfv+xWD/dGd+ikWvkJcRnY8eLjFs9/x7oxdwpP4ID1kxvNPOx
+ md8abiTNZqwhZ/7bdLKHPAk21DO2Ds64XY3YaPmBIqj24P8oIR1BQcfbLwlFzi0MqwAw
+ zRB3/l44khxhN7fSzBAqmm+qcM/vLqGLJFSWyAUSbfJQZFBI5sdE1xFpnIhaerBAVntG
+ pjK0oIIyfsVag8nIq3xY4HSRQk8QtLWvZ5F0YIQ0tVD2sKEx+SNhP3kl+Shw5CVg67H5
+ Jl9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692351286; x=1692956086;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1692351575; x=1692956375;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Q23Hy0uzIDH0iZ1eRHCnBhM/4vpPMj1PCM3CpkBFz5Y=;
- b=hiuvNCgzRvsHlaQDnmHhSOZqRLI0E3mQV2kvTOkB5h3hE4GpK0kYZFFMhoqH+ZRqz9
- htHwn6P2FvsK4pXdQdGHXAf+e3H2r61CApEtTA80paTxMl731+Qc4vQ5fSeTL9SRHzs9
- 71i1v60JLhgFq8r9qCOiH1XdjVQS3OYdycCiXAazamwl4kPCrJbqe4aWZpKtD0E0QTl6
- o7fGvXvb9emesObTjgC79k+3p/tVK3x34/XYHhwVB48+n/rhcH6HFB9XcaUCeIFFHchu
- o/W6kj5AjxRQXLv2dq0ojGhTQIobW8EgNbGZ1jLH0DzPRLy2/A28sVR+fFtXDPXrrRaB
- UXaQ==
-X-Gm-Message-State: AOJu0Yw7u0iso0BKAysRQ0XM2j8aL1814U9SjN0wR0uY+g3mAGC8X6Ea
- WHJdQbznpHgf4kBwSL7uWgDD9+qMrlY=
-X-Google-Smtp-Source: AGHT+IGohPFTE207cyb2/DM4hr3U7s/kjY8uicemmespANFQ+pCMW4xkYvoBWyMXQ8TxnvXP49V27A==
-X-Received: by 2002:a19:711d:0:b0:4ff:a25b:bca2 with SMTP id
- m29-20020a19711d000000b004ffa25bbca2mr1155986lfc.46.1692351286142; 
- Fri, 18 Aug 2023 02:34:46 -0700 (PDT)
-Received: from user-PC.. ([92.51.95.194]) by smtp.gmail.com with ESMTPSA id
- z7-20020a19f707000000b004fe3e0956ffsm266540lfe.142.2023.08.18.02.34.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Aug 2023 02:34:45 -0700 (PDT)
-From: Maksim Kiselev <bigunclemax@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maksim Kiselev <bigunclemax@gmail.com>
-Subject: [PATCH v1] serial-uclass: reset gd->cur_serial_dev to NULL if serial
- not found
-Date: Fri, 18 Aug 2023 12:34:30 +0300
-Message-Id: <20230818093430.2755595-1-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ bh=OfB7R4logPqPYCYG09zUZmRxHqBHYLlZsqZAIe46SGE=;
+ b=mGvu+qSHUaY4SX5m3Wud0yMkzNjFSXty22MOxajG85C/tdgdAwErFMNnMau7tCMiKT
+ 1/3KF3WzeYOIgsxiLmSHCMYiquBxiPkPsvGC+Br/OhNpe1DXytGUrdH4vo1MjTP9L/Q8
+ YB3hkSQsmrRzp0FkjBdCzsqyDJ/Vr/9n30RZ4IooqVg29mDnUHG+4JaohBF9tMhpCjw9
+ zMvlQO8+BfQvBUiJSAgSqf9vAfrgrw5L8zpEx5Ipe/ME5koug0pNhs9iQf5Mvpqjul88
+ bS9+AER7+4oiwmhM18N6rWsUnKj+TdauRnoA1xRGRj7gJW5o6+XR3HVsZoJKJDXFTCfp
+ r9tw==
+X-Gm-Message-State: AOJu0YxhU6eWQB3gldkOOqzIBVgbH8D4bz4+oG94QM91bnWc/jKYt9u8
+ HRqU3RVzv0uNr+XN8M1bjFthlmDKmI1988YtoTDgCw==
+X-Google-Smtp-Source: AGHT+IGXD8LDMWbJNB+YST9SVxblxU5Tj5gsMe4zHmySEw71ni5upCjZvur9hVSzYgiDSFaGmACCghPF2CG3JGd1MWQ=
+X-Received: by 2002:a17:907:7855:b0:994:542c:8718 with SMTP id
+ lb21-20020a170907785500b00994542c8718mr1669228ejc.76.1692351575263; Fri, 18
+ Aug 2023 02:39:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230814133253.4150-1-maxim.uvarov@linaro.org>
+ <20230814133253.4150-5-maxim.uvarov@linaro.org> <ZNo4cZtrSXa1dKXd@hades>
+ <CAD8XO3a3N1j2G_Fjiws1S7praCDtLup=nrv4po--x6JmKKCfjQ@mail.gmail.com>
+ <20230814152940.GZ3630934@bill-the-cat>
+ <CAD8XO3Y7pYrd6nZm9kywbUpmOp7QsUchnb686XAq6WKyVBDGfw@mail.gmail.com>
+ <CALeDE9MxnG4Xk=scFwG1zdrpYRQii4BRM04bxPOamzAzhhN7jQ@mail.gmail.com>
+ <CAD8XO3aAyA-m6BAkOnxw9uF2w_kadgSAwF3iRU_uBw-jq9iJJA@mail.gmail.com>
+ <20230817151012.GC1515023@bill-the-cat>
+In-Reply-To: <20230817151012.GC1515023@bill-the-cat>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Fri, 18 Aug 2023 15:39:23 +0600
+Message-ID: <CAD8XO3YD2XTfjBN90gJuSSdn9J40+JYk3WZ_CY7K7yA_r+XaRA@mail.gmail.com>
+Subject: Re: [PATCHv6 04/14] net/lwip: implement dhcp cmd
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ u-boot@lists.denx.de, pbrobinson@redhat.com, joe.hershberger@ni.com, 
+ rfried.dev@gmail.com, goldsimon@gmx.de, lwip-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +96,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reset gd->cur_serial_dev pointer to avoid calling non-relocated code
-from relocated code if a serial driver is not found and
-CONFIG_REQUIRE_SERIAL_CONSOLE is disabled.
+On Thu, 17 Aug 2023 at 21:10, Tom Rini <trini@konsulko.com> wrote:
 
-Here is detailed explanation of what this patch is trying to fix.
+> On Thu, Aug 17, 2023 at 08:55:17PM +0600, Maxim Uvarov wrote:
+> > On Thu, 17 Aug 2023 at 20:04, Peter Robinson <pbrobinson@gmail.com>
+> wrote:
+> >
+> > > On Thu, Aug 17, 2023 at 2:46=E2=80=AFPM Maxim Uvarov <maxim.uvarov@li=
+naro.org>
+> > > wrote:
+> > > >
+> > > > On Mon, 14 Aug 2023 at 21:29, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > > On Mon, Aug 14, 2023 at 09:18:19PM +0600, Maxim Uvarov wrote:
+> > > > > > On Mon, 14 Aug 2023 at 20:21, Ilias Apalodimas <
+> > > > > ilias.apalodimas@linaro.org>
+> > > > > > wrote:
+> > > > > >
+> > > > > > > On Mon, Aug 14, 2023 at 07:32:43PM +0600, Maxim Uvarov wrote:
+> > > > > > > > Implement function for dhcp command with lwIP variant. Usag=
+e
+> and
+> > > > > output
+> > > > > > > is
+> > > > > > > > the same as the original command. This code called by
+> > > compatibility
+> > > > > code
+> > > > > > > > between U-Boot and lwIP.
+> > > > > > >
+> > > > > > > Same as the dns command
+> > > > > > >
+> > > > > > > >
+> > > > > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > > > > > > > ---
+> > > > > > > >  include/net/lwip.h             | 10 +++++++
+> > > > > > > >  net/lwip/Makefile              |  1 +
+> > > > > > > >  net/lwip/apps/dhcp/lwip-dhcp.c | 51
+> > > > > ++++++++++++++++++++++++++++++++++
+> > > > > > > >  3 files changed, 62 insertions(+)
+> > > > > > > >  create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
+> > > > > > > >
+> > > > > > > > diff --git a/include/net/lwip.h b/include/net/lwip.h
+> > > > > > > > index c83b5c8231..2f035280eb 100644
+> > > > > > > > --- a/include/net/lwip.h
+> > > > > > > > +++ b/include/net/lwip.h
+> > > > > > > > @@ -15,3 +15,13 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, i=
+nt
+> > > flag,
+> > > > > int
+> > > > > > > argc,
+> > > > > > > >  *         Other value < 0, if error
+> > > > > > > >  */
+> > > > > > > >  int ulwip_dns(char *name, char *varname);
+> > > > > > > > +
+> > > > > > > > +/*
+> > > > > > > > +* This function creates the DHCP request to obtain IP
+> address.
+> > > If
+> > > > > DHCP
+> > > > > > > server
+> > > > > > >
+> > > > > > > Sphinx needs something more, please check the existing
+> functions
+> > > > > > >
+> > > > > > > > +* returns file name, this file will be downloaded with tft=
+p.
+> > > After
+> > > > > this
+> > > > > > > > +* function you need to invoke the polling loop to process
+> > > network
+> > > > > > > communication.
+> > > > > > > > +*
+> > > > > > > > +* Return: 0 if success
+> > > > > > > > +*         Other value < 0, if error
+> > > > > > > > +*/
+> > > > > > > > +int ulwip_dhcp(void);
+> > > > > > > > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+> > > > > > > > index 6d2c00605b..59323fb325 100644
+> > > > > > > > --- a/net/lwip/Makefile
+> > > > > > > > +
+> > > > > > > > +static struct dhcp dhcp;
+> > > > > > > > +
+> > > > > > > > +static int ulwip_dhcp_tmo(void)
+> > > > > > > > +{
+> > > > > > > > +     switch (dhcp.state) {
+> > > > > > > > +     case DHCP_STATE_BOUND:
+> > > > > > > > +             env_set("bootfile", dhcp.boot_file_name);
+> > > > > > > > +             env_set("ipaddr",
+> > > ip4addr_ntoa(&dhcp.offered_ip_addr));
+> > > > > > > > +             env_set("netmask",
+> > > > > ip4addr_ntoa(&dhcp.offered_sn_mask));
+> > > > > > > > +             env_set("serverip",
+> > > > > ip4addr_ntoa(&dhcp.server_ip_addr));
+> > > > > > > > +             printf("DHCP client bound to address %s\n",
+> > > > > > > ip4addr_ntoa(&dhcp.offered_ip_addr));
+> > > > > > > > +             break;
+> > > > > > > > +     default:
+> > > > > > > > +             return -1;
+> > > > > > > > +     }
+> > > > > > > > +
+> > > > > > > > +     return 0;
+> > > > > > > > +}
+> > > > > > > > +
+> > > > > > > > +int ulwip_dhcp(void)
+> > > > > > > > +{
+> > > > > > > > +     int err;
+> > > > > > > > +     struct netif *netif;
+> > > > > > > > +
+> > > > > > > > +     ulwip_set_tmo(ulwip_dhcp_tmo);
+> > > > > > > > +     netif =3D netif_get_by_index(1);
+> > > > > > >
+> > > > > > > What's (1)?
+> > > > > > >
+> > > > > > >
+> > > > > > Only one lwip netif is registered. 1 - here is the index of
+> netif. I
+> > > > > don't
+> > > > > > think that there is any definition for that...
+> > > > > >
+> > > > >
+> > > > > And there's only ever going to be one interface (even if we have
+> ipv4
+> > > > > and ipv60 ? If so, define it to something please, thanks.
+> > > > >
+> > > > > --
+> > > > > Tom
+> > > > >
+> > > >
+> > > > Yes, one interface has 2 addresses ipv4 and ipv6.
+> > >
+> > > What about a device like a router which may have multiple wired
+> > > ethernet interface?
+> >
+> > Yea, looks like we need lwip netif per U-Boots eth_devs. I did not yet
+> > support several eth devices, but it will be good to add this to not bre=
+ak
+> > existing functionality..
+>
+> The general case ends up being if we have more than one interface,
+> ethact is what's used.  I'm unsure off-hand if some of the fancier
+> networking-centric chipsets and devices have something more complex
+> setup in their stacks.
+>
+> --
+> Tom
+>
 
-U-boot calls the serial_find_console_or_panic() function twice.
-The first console setup occurs before U-boot relocation in
-the serial_init(). This stage uses simple FDT parsing and
-assigns gd->cur_serial_dev to a "serial" device that lives in
-non-relocated code too.
+Likely the bootloader uses the only one ethernet interface for loading. And
+it might
+be enough to have an IP stack on top of the active eth device only. This is
+a model
+that I am following in these patches.
 
-The second console setup after U-boot relocation(from serial_initialize())
-may use full live DT (if OF_LIVE enabled) probe sequence with buses,
-clocks, resets, etc... And if the console setup fails at this step,
-than we should be caught by panic_str("No serial driver found").
-
-But... If we disable CONFIG_REQUIRE_SERIAL_CONSOLE, than we
-return from serial_init() with gd->cur_serial_dev pointing
-to the "old"(non-relocated) serial device.
-
-And if this area, where "old" serial device is placed, is changed
-(e.g. Linux kernel may be relocated at this address), than we will get
-an unexpected crash on the next call of printf().
-
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
- drivers/serial/serial-uclass.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
-index 067fae2614..e954f0189b 100644
---- a/drivers/serial/serial-uclass.c
-+++ b/drivers/serial/serial-uclass.c
-@@ -151,6 +151,7 @@ static void serial_find_console_or_panic(void)
- #ifdef CONFIG_REQUIRE_SERIAL_CONSOLE
- 	panic_str("No serial driver found");
- #endif
-+	gd->cur_serial_dev = NULL;
- }
- #endif /* CONFIG_SERIAL_PRESENT */
- 
--- 
-2.39.2
-
+BR,
+Maxim.
