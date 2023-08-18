@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0814C001DE
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 06:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDF5C7112B
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 06:51:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D10A286AF3;
-	Fri, 18 Aug 2023 08:49:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B98886C4B;
+	Fri, 18 Aug 2023 08:51:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y3EkKLHV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zo2IKl4y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73D3E86B11; Fri, 18 Aug 2023 08:49:51 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 7B72D86C4D; Fri, 18 Aug 2023 08:51:34 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2BE286AEB
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 08:49:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DC3E86C43
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 08:51:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2b9338e4695so8733061fa.2
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 23:49:48 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-4fe2de785e7so777843e87.1
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 23:51:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692341388; x=1692946188;
+ d=linaro.org; s=google; t=1692341491; x=1692946291;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cGpDLWulV2AnFcgdbWZpYyEh3J2cofFA3VMUwTmrP0M=;
- b=y3EkKLHVSOkkPlhJmFjkJHMzpgc/Nlroex1LVBP+wm3nroe/wJNkBe+eEu6yGvqoTk
- 9ol+3ADe+sknavqhIEQOSkK3vLKwTPP1vp4DFeCXgPZQLUsxLhCKxl0G5wRuI+xA+Ga8
- DU40ugR0GYKVItmKyWxegcvF1oz1EQy9eHNf4V6L5ZXwu7/oqqP3d4P7UER0w4e4p+A8
- 7Bo84FcqUUW992aUUNATxfQzNq00u8KtwxZ73WknCmMeq5AzdnXttpv+4BTI8vCrBjfc
- 91ouKFPtcgYoPbS7i/dMlKyk9HMvyNAdquU3ZzNbL+dQAy30DfYbRxdKZlAKRyTG5BH0
- Vinw==
+ bh=5rmIv8nF2PaAr2k6j9kcFUuJ2rymv/QEwCL6xVvnonA=;
+ b=zo2IKl4yPgwGFSKrgK9YvqExdrfPirgmgpWH9Qqq4IJFWmhQGnIeh5IywwhL2EHrZL
+ B2AbvlCctCwE9x0HVRicJ82Xh4dD3+tCjncf7U68Mg72VUDbzVlXO8fLjzyqFq1J7Ttd
+ cjzQ2OBM4oQ+saJL8dvILUvArZuX1T1I2747bXcjNdXd5juvDv705rbQhIpLYixUt4Fw
+ yW3hs2l1I7+JLS1bOhrV5ggLyEAiANYd6mwVno8N39cN3/Q02ponWqGv8OC0ZB7NPBLY
+ jga87hWM7IN2Wwww8z+3IgEqcB8pFuEkzoZpT9uxoPodaqYN2KvOKjWtxac08+TeOWQV
+ alVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692341388; x=1692946188;
+ d=1e100.net; s=20221208; t=1692341491; x=1692946291;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cGpDLWulV2AnFcgdbWZpYyEh3J2cofFA3VMUwTmrP0M=;
- b=KOK5ZW7lM/YP7dHrtstMWkIXmK6VWh63nkNINhL0pzoHSDSAg/dlE2/j9He/+Vt2Dr
- +rU4ff865hRgo8ILkK8yLHnJkNjMR65NBiM2VwtGgd0nlfxykxJlLt4P3voQmJX0N6ve
- 64d6jljwEX8HIbWOj7ZbpOf0MFoVJqwaeYeIlAI/mpi/PUwsi7+p75nd0kEruUSdptf3
- JWU6laurNeIG4JvKBtU9R/TKyu3kTitNX5oLL2A/13NQI6VLl9CmmVOBkS2FTBAlCwmJ
- bUNc+F3HhIwfVIgHVeCzS/2M8uBAMNGQuxlhkqXq0RHeZAIuGwv8dggFf0VTpOn2gfkC
- OQjA==
-X-Gm-Message-State: AOJu0YwU3bgbbV/ipJdiS2ESOL8OYBpG7zmmVrKlUmiPSrcKWkiKx+0p
- F0+0+UbXEAX5CeKcI0K6zRrajpuwg2pNriemVRybEg==
-X-Google-Smtp-Source: AGHT+IHQKORkilQNd2bYOmOZj+MWU9t/9HLmfX9hFxJSgb0WY7UOVUm8OGSmUqY3MFed1RAMv9kkgTYeQWGycvLTZ8g=
-X-Received: by 2002:a2e:b60e:0:b0:2b9:dd96:5340 with SMTP id
- r14-20020a2eb60e000000b002b9dd965340mr984531ljn.50.1692341387971; Thu, 17 Aug
- 2023 23:49:47 -0700 (PDT)
+ bh=5rmIv8nF2PaAr2k6j9kcFUuJ2rymv/QEwCL6xVvnonA=;
+ b=ad1ejaDJnEwnrM3Ja3pYmW7qeWs9QGCT0Ms528Fx/4smeKVC6/lnfT8vojCld9zHYH
+ ll7L3fx8SBTWQz22Aolhy6MXnDEglNbxB2k20YOrca0MrJsDJZHUp9GJSwhJORioagts
+ 2XK2koNe/51TBlX65E4I/GfnX0Iv42dNq2JrbqS0nXCrK6mCAZLPyZC5YzS4xCpc/KXi
+ NzqsXjuB72ld3ns66Zx8DYabea0sRpXDdM4CaS/ruDvBHmq6amGcFFkwpPZcPpF3hMOi
+ EiMCGwyTrkNPhua2bEL/nA4TteMc22QQc8p6VfoJdbNdr3GQ5Z+ofYo+ubb/+eq/s9dZ
+ pYgg==
+X-Gm-Message-State: AOJu0YxUSSSzyQ7ukgZW2NQPl6befyRRAoNv1Tl+7hlS79vUm/ccQb4X
+ 5AB6QgZS3vtoiQkk4ffa/9kRtRoYXbQLSzXOFsSlTCuooQL09Zf5b9Y=
+X-Google-Smtp-Source: AGHT+IEUjkxlJaMjMuSgn3jB2iDEapsgx6o4n2qrwg47h0jDEupeSlWH7hLFdUzLVKbUPA7SNtEdMiqecOCM+fcFY0E=
+X-Received: by 2002:a05:6512:3f08:b0:4fb:7626:31a8 with SMTP id
+ y8-20020a0565123f0800b004fb762631a8mr1234993lfa.27.1692341490649; Thu, 17 Aug
+ 2023 23:51:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230818002706.853550-1-sjg@chromium.org>
- <20230818002706.853550-12-sjg@chromium.org>
- <66F95452-EFB7-4A8B-AE7A-9533CE12C0CA@gmx.de>
-In-Reply-To: <66F95452-EFB7-4A8B-AE7A-9533CE12C0CA@gmx.de>
+ <20230818002706.853550-15-sjg@chromium.org>
+ <DC7E1FFE-0327-425D-A9E9-D8C22188F93A@gmx.de>
+In-Reply-To: <DC7E1FFE-0327-425D-A9E9-D8C22188F93A@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 18 Aug 2023 09:49:11 +0300
-Message-ID: <CAC_iWj+-SmhjU5fXDg8U76W93jqxJWTev-yOTOx5K4mYBDW23g@mail.gmail.com>
-Subject: Re: [PATCH v2 11/20] efi: x86: Correct the condition for installing
- ACPI tables
+Date: Fri, 18 Aug 2023 09:50:54 +0300
+Message-ID: <CAC_iWjJvi7R+0HyhUkQzukkf-=BcSHK-TWUVdiTkj59hNE+X9w@mail.gmail.com>
+Subject: Re: [PATCH v2 14/20] efi: x86: Use the installed SMBIOS tables
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
  Bin Meng <bmeng.cn@gmail.com>
@@ -88,17 +87,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 18 Aug 2023 at 04:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Fri, 18 Aug 2023 at 04:19, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 >
 >
-> Am 18. August 2023 02:26:50 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >It is not always the case that U-Boot builds the ACPI tables itself. For
-> >example, when booting from coreboot, the ACPI tables are built by
-> >coreboot.
-> >
-> >Correct the Makefile condition so that U-Boot can pass on tables built
-> >by a previous firmware stage.
+> Am 18. August 2023 02:26:53 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> >U-Boot sets up the SMBIOS tables during startup. Rather than creating a
+> >new set, install the existing ones. Rely on the ACPI table's memory-map
+> >record to cover the tables.
 > >
 > >Tidy up the installation-condition code while we are here.
 > >
@@ -107,56 +103,92 @@ On Fri, 18 Aug 2023 at 04:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > >
 > >Changes in v2:
 > >- Add new patch
+
+In the ACPI changes, the makefile and code changes are in a single
+patch which makes more sense.  Can you squash #15 in this one as well?
+
+Thanks
+/Ilias
+
 > >
-> > lib/efi_loader/Makefile    |  2 +-
-> > lib/efi_loader/efi_setup.c | 10 +++++-----
-> > 2 files changed, 6 insertions(+), 6 deletions(-)
+> > lib/efi_loader/efi_setup.c  | 10 +++++-----
+> > lib/efi_loader/efi_smbios.c | 37 +++++++------------------------------
+> > 2 files changed, 12 insertions(+), 35 deletions(-)
 > >
-> >diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> >index 1a8c8d7cab5c..0eb748ff1a59 100644
-> >--- a/lib/efi_loader/Makefile
-> >+++ b/lib/efi_loader/Makefile
-> >@@ -78,7 +78,7 @@ obj-$(CONFIG_EFI_ESRT) += efi_esrt.o
-> > obj-$(CONFIG_VIDEO) += efi_gop.o
-> > obj-$(CONFIG_BLK) += efi_disk.o
-> > obj-$(CONFIG_NETDEVICES) += efi_net.o
-> >-obj-$(CONFIG_GENERATE_ACPI_TABLE) += efi_acpi.o
-> >+obj-$(CONFIG_ACPI) += efi_acpi.o
-> > obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += efi_smbios.o
-> > obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
-> > obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
 > >diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> >index 58d4e1340233..ad719afd6328 100644
+> >index ad719afd6328..e6de685e8795 100644
 > >--- a/lib/efi_loader/efi_setup.c
 > >+++ b/lib/efi_loader/efi_setup.c
-> >@@ -321,11 +321,11 @@ efi_status_t efi_init_obj_list(void)
-> >       if (ret != EFI_SUCCESS)
-> >               goto out;
-> > #endif
-> >-#ifdef CONFIG_GENERATE_ACPI_TABLE
-> >-      ret = efi_acpi_register();
+> >@@ -326,11 +326,11 @@ efi_status_t efi_init_obj_list(void)
+> >               if (ret != EFI_SUCCESS)
+> >                       goto out;
+> >       }
+> >-#ifdef CONFIG_GENERATE_SMBIOS_TABLE
+> >-      ret = efi_smbios_register();
 > >-      if (ret != EFI_SUCCESS)
 > >-              goto out;
 > >-#endif
-> >+      if (IS_ENABLED(CONFIG_ACPI)) {
-> >+              ret = efi_acpi_register();
+> >+      if (IS_ENABLED(CONFIG_SMBIOS)) {
+> >+              ret = efi_smbios_register();
 > >+              if (ret != EFI_SUCCESS)
 > >+                      goto out;
 > >+      }
-> > #ifdef CONFIG_GENERATE_SMBIOS_TABLE
+> >       ret = efi_watchdog_register();
+> >       if (ret != EFI_SUCCESS)
+> >               goto out;
+> >diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> >index 306c0bc54f90..0e6454a8fe0b 100644
+> >--- a/lib/efi_loader/efi_smbios.c
+> >+++ b/lib/efi_loader/efi_smbios.c
+> >@@ -20,36 +20,13 @@
+> >  */
+> > efi_status_t efi_smbios_register(void)
+> > {
+> >-      /* Map within the low 32 bits, to allow for 32bit SMBIOS tables */
+> >-      u64 dmi_addr = U32_MAX;
+> >-      efi_status_t ret;
+> >-      void *dmi;
+> >+      ulong addr;
+> >
+> >-      /* Reserve 4kiB page for SMBIOS */
+> >-      ret = efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
+> >-                               EFI_RUNTIME_SERVICES_DATA, 1, &dmi_addr);
+> >+      /* space for all tables is marked in efi_acpi_register() */
+> >+      addr = gd->arch.smbios_start;
+> >+      printf("EFI using SMBIOS tables at %lx\n", addr);
 >
-> Shouldn't this become CONFIG_SMBIOS?
-
-This is renamed on a later patch
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->
-> It would help my review work if you would stop suppressing half of your patch series when sending mails.
+> This is should be log_debug() as typically only developers will ever need this address.
 >
 > Best regards
 >
 > Heinrich
 >
-> >       ret = efi_smbios_register();
-> >       if (ret != EFI_SUCCESS)
+>
+> >
+> >-      if (ret != EFI_SUCCESS) {
+> >-              /* Could not find space in lowmem, use highmem instead */
+> >-              ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+> >-                                       EFI_RUNTIME_SERVICES_DATA, 1,
+> >-                                       &dmi_addr);
+> >-
+> >-              if (ret != EFI_SUCCESS)
+> >-                      return ret;
+> >-      }
+> >-
+> >-      /*
+> >-       * Generate SMBIOS tables - we know that efi_allocate_pages() returns
+> >-       * a 4k-aligned address, so it is safe to assume that
+> >-       * write_smbios_table() will write the table at that address.
+> >-       */
+> >-      assert(!(dmi_addr & 0xf));
+> >-      dmi = (void *)(uintptr_t)dmi_addr;
+> >-      if (write_smbios_table(map_to_sysmem(dmi)))
+> >-              /* Install SMBIOS information as configuration table */
+> >-              return efi_install_configuration_table(&smbios_guid, dmi);
+> >-      efi_free_pages(dmi_addr, 1);
+> >-      log_err("Cannot create SMBIOS table\n");
+> >-      return EFI_SUCCESS;
+> >+      /* Install SMBIOS information as configuration table */
+> >+      return efi_install_configuration_table(&smbios_guid,
+> >+                                             map_sysmem(addr, 0));
+> > }
