@@ -4,64 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BDFEE498E
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 19:27:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F3FEEE4997
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 21:17:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C42B986EB7;
-	Fri, 18 Aug 2023 21:27:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4994E869FD;
+	Fri, 18 Aug 2023 23:17:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tkFQoni+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LHflqjPA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61E3E86EAF; Fri, 18 Aug 2023 21:27:11 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DA8DB86A01; Fri, 18 Aug 2023 23:17:15 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E48186EB9
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 21:27:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0220F869F9
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 23:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9DC4B60E09;
- Fri, 18 Aug 2023 19:27:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECE53C433C8;
- Fri, 18 Aug 2023 19:27:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692386825;
- bh=2LPvZUeXit5kFBxJ6bq2S3eENg4+pMTX7d7stwwu91o=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=tkFQoni+d8sbJQuQtNocZ2FPlAzS2gVEbY2jwVyncQ6IfIPEIdDWXXXRBMUhuw8MO
- mbn2HI9/fjj51tz1I6aQ7SHkV9ljNn9mVHdBSosNkpmuiowyj3PiNC3FvlbiikabnM
- ulLWPxdZyScK/syfTUZ2nV7sRrmBH+718Cx2hGK1ipw6ufQ4/2FFdWmW5upXGwrlrh
- I5iQvpqrxL76UPeSLDDOxbCzDy7k++LfC74cgQc9fNiwDw28f1Zp68d/7DARyfRs+i
- VdnHo3PqIqiqOxE9j3MhmHOIhCj5OHgxrKPOCt1gBUsVzukGMwgwHTsLX/NxTmBTqX
- pI57lPJyTs0YA==
-Message-ID: <295e1b8b-c190-c892-6586-38595e8e65eb@kernel.org>
-Date: Fri, 18 Aug 2023 22:26:59 +0300
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6889078ee66so1161359b3a.0
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 14:17:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692393431; x=1692998231;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+bY416MCVOS84biPL7WwkgwRJmTleF5gMDuvxRfEriA=;
+ b=LHflqjPAIelL/AsElZMZIDBJGUxpduo7y0u5ug5kE/hmL6Rm66bq6pg3nsUAWH3B0E
+ VPXeQnVzCmq7mcgaaroEj0/8VWqJwb3t2A0KyBr94o9rh85hLGdPiWv+oT2IeErRjriB
+ 6GRXi0zovwt698bZjDt2vFfJSGapG1/3K4MfcZ/jt7XNcqjzFwigtTps27ZCTE3ozKtM
+ Ac6T1Si/0u7WIPQbsFs0zT/m0fLKwzMnhfEwaPznsWNJU/FpvQFQprk7Int4pha7eC61
+ tb9Who0xngyilBkYoP7BIRfqn5D8OjLsX/MDmL+x5Ol6UQZgTL9o4AchZI4q9t7Z5e/3
+ mo1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692393431; x=1692998231;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+bY416MCVOS84biPL7WwkgwRJmTleF5gMDuvxRfEriA=;
+ b=I18tneHGgfGe7uNJ7PWNolgP199rugbuxi4yY7WCUxvSxWQ+ISUTE0y3ucRskyGvNd
+ ASNAEsMW+wy5WEakIxsbn4IScUzLMH2w/taGxHzzysp31cOyHkbQ8t7Sg+l/uOzDQMqz
+ jypp0CEj05M3E2tCM/0YfDCsUUXrkIGPGnxulsbHM6R+4Tkt4Ix8FmUy/v7YJxWQUrqw
+ ryuxCCZ0CB8M8mcRRpYrDBKwL7IQxuByQA3lijUR7hVqlIfVTWGmh/dxxoEJ0WajqyE5
+ kq8PatIMaNJozSbHmblZJA5+ScSTEpwb+xDQ5NuBnUBdJQS8BWMzIV5QZvdY3z9qQ+xU
+ wigw==
+X-Gm-Message-State: AOJu0Ywg5X/+ZvyOOJVJRtYO536MNm+Rx2t24MLgkb7C7oWrooNQkdmm
+ /uwpRAtbcKHQoToT33iG2KA=
+X-Google-Smtp-Source: AGHT+IFbnGhUKKa29F8RthlQ8FqP6AUPCz/HQ/ksyOCl5zehSBxB38inieSLras0ZONnodIP8TaGzw==
+X-Received: by 2002:a05:6a00:21cf:b0:687:1be4:46e7 with SMTP id
+ t15-20020a056a0021cf00b006871be446e7mr525956pfj.9.1692393431132; 
+ Fri, 18 Aug 2023 14:17:11 -0700 (PDT)
+Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
+ [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
+ c24-20020aa781d8000000b00686a80f431dsm1936317pfn.126.2023.08.18.14.17.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Aug 2023 14:17:10 -0700 (PDT)
+Message-ID: <00d8e7d3-15a0-20cc-90bd-7a2fbc1867e8@gmail.com>
+Date: Fri, 18 Aug 2023 14:17:07 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v3 09/12] usb: cdns3: Handle otg mode as peripheral
+ Thunderbird/102.12.0
+Subject: Re: [PATCH v2 1/5] sunxi: psci: clean away preprocessor macros
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
-Cc: Julien Panis <jpanis@baylibre.com>, u-boot@lists.denx.de,
- tony@atomide.com, r-gunasekaran@ti.com, vigneshr@ti.com, nm@ti.com
-References: <20230706-handle-otg-as-periph-v3-0-27e24fa17345@baylibre.com>
- <20230706-handle-otg-as-periph-v3-9-27e24fa17345@baylibre.com>
- <20230814171755.GB3630934@bill-the-cat>
- <d1c121d2-35b7-5097-4a02-308541c50d29@kernel.org>
- <20230818184841.GO1515023@bill-the-cat>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20230818184841.GO1515023@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
+From: Sam Edwards <cfsworks@gmail.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
+ Maksim Kiselev <bigunclemax@gmail.com>
+References: <20230816173420.83232-1-CFSworks@gmail.com>
+ <20230816173420.83232-2-CFSworks@gmail.com>
+ <20230818151103.3fe5a32e@donnerap.manchester.arm.com>
+ <ba7bf86f-3f4d-036a-9531-72a97d741f91@gmail.com>
+In-Reply-To: <ba7bf86f-3f4d-036a-9531-72a97d741f91@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,61 +100,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 18/08/2023 21:48, Tom Rini wrote:
-> On Thu, Aug 17, 2023 at 11:15:17AM +0300, Roger Quadros wrote:
->> Hi Tom,
->>
->> On 14/08/2023 20:17, Tom Rini wrote:
->>> On Thu, Jul 13, 2023 at 03:45:42PM +0200, Julien Panis wrote:
->>>
->>>> Override 'otg' to 'peripheral' mode, since 'otg' mode
->>>> is not yet supported by u-boot.
->>>>
->>>> Signed-off-by: Julien Panis <jpanis@baylibre.com>
->>>> Suggested-by: Roger Quadros <rogerq@kernel.org>
->>>> ---
->>>>  drivers/usb/cdns3/core.c | 4 ++++
->>>>  1 file changed, 4 insertions(+)
->>>>
->>>> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
->>>> index 644a9791b9c9..bd763fc593e1 100644
->>>> --- a/drivers/usb/cdns3/core.c
->>>> +++ b/drivers/usb/cdns3/core.c
->>>> @@ -149,6 +149,10 @@ static int cdns3_core_init_role(struct cdns3 *cdns)
->>>>  
->>>>  	dr_mode = best_dr_mode;
->>>>  
->>>> +	/* u-boot doesn't yet support OTG so limit to PERIPHERAL */
->>>> +	if (dr_mode == USB_DR_MODE_OTG)
->>>> +		dr_mode = USB_DR_MODE_PERIPHERAL;
->>>> +
->>>>  #if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
->>>>  	if (dr_mode == USB_DR_MODE_OTG || dr_mode == USB_DR_MODE_HOST) {
->>>>  		ret = cdns3_host_init(cdns);
->>>
->>> Julien, why don't we support otg mode here?
->>>
->>
->> dr_mode will never be OTG at this point as the previous if condition
->> would have forced it to PERIPHERAL.
->>
->> My understanding was that u-boot USB framework doesn't support OTG mode
->> so we force it to PERIPHERAL.
+On 8/18/23 10:40, Sam Edwards wrote:
+> On 8/18/23 07:11, Andre Przywara wrote:
 > 
-> Well, the first part of this series is "make unknown state be OTG" for
-> DWC3, so we do in general (and Marek told me off-list he's used it on
-> DWC2 as well), so it sounds like these (CDNS3, MUSB) drivers need fixing
-> / updating.
+> Hi Andre,
 > 
+>> The resulting object file is different (8 byte larger,
+>> even), so it's hard to prove
+> 
+> I'm no stranger to reading object code. Since the output should be 
+> identical in principle, I'll spend a little bit of time today seeing if 
+> I can identify what's changing. If it's easy enough, I'd like to adjust 
+> my patch so that the optimizer does produce the same output. (Keep in 
+> mind I'm on Clang, though. If Clang already gives the same output for 
+> both, I'll just report back to use that when comparing.)
 
-CDNS3 does not have an internal OTG state machine. We mostly really care
-about role switching and not the full OTG stack. There needs to be
-some kind of SW framework to do that in u-boot.
+I built only psci.o from every ARM32 sunxi for which we have a defconfig 
+(and for which PSCI is supported), for 81 targets total (though there 
+are only 4 variations: R40, sun7i, H3/sun6i, and "everything else"). I 
+am working with Clang version 16.0.6.
 
-Marek could you please advise what can be done here?
+I compared only the secure text section. The command to extract this 
+looks like:
+llvm-objcopy -O binary --only-section=._secure.text psci.o text.bin
+This is important because there are debug sections that will change when 
+the source file line numbers change, so we must ignore those when comparing.
 
--- 
-cheers,
--roger
+In the majority of cases, there are no changes to the text section 
+introduced by this patch. In the R40 case, there's a small change where 
+the compiler adds a NULL check onto the result of the `(void *)cpucfg + 
+SUN8I_R40_PWR_CLAMP(cpu)` computation, which we can ignore as it won't 
+affect anything in practice. In the sun7i case, the only changes are 
+because I am NOT hardcoding the CPU to 0, which does look like I broke 
+it (since that means it will use cpu=1). So I'm going to need to fix 
+that in v3.
+
+For good measure, I also applied the same methodology to patch 2 in this 
+series, and that introduces no text section changes whatsoever in any of 
+the tested cases. So patch 2 (theoretically, anyway) needs no bugfixes 
+or hardware testing.
+
+Patch 3 does cause a text section change for all targets. I will have to 
+investigate why, in case I messed up any of the offsets when migrating 
+off of structs.
+
+Regards,
+Sam
