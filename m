@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802A9C678DC
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC29AC678DC
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:27:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9FD286C10;
-	Fri, 18 Aug 2023 02:27:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1DD3386C09;
+	Fri, 18 Aug 2023 02:27:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FM0lmiXs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cEQf1MMp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9113386B7E; Fri, 18 Aug 2023 02:27:19 +0200 (CEST)
+ id A935686B7E; Fri, 18 Aug 2023 02:27:19 +0200 (CEST)
 Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
  [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0636986C04
+ by phobos.denx.de (Postfix) with ESMTPS id D606586C06
  for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:27:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3491568afd4so1434655ab.0
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:15 -0700 (PDT)
+ e9e14a558f8ab-34ac2e3064cso1353035ab.1
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692318434; x=1692923234;
+ d=chromium.org; s=google; t=1692318435; x=1692923235;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KMgLVwW+yCQMIjyVBsdgTLS/l1b6gl6ACRyyjBjz88w=;
- b=FM0lmiXsu55yBgzmiUNjsCZsqoReSii9S5MckPxO1avni4e3Hs3KZqTkzvHjrv8Tbb
- Txwxe6clnimdugCna77n5114gjPpKzfaYddped7O7/xTHw69dn148oZEaFVxc7Y9tBpi
- 9dCTVrpLx6RIo1HZKBN5aNwnxSKfwXtett3Bw=
+ bh=Gn0rzQjV3ooaUKS2tiDI/lnvil2w7qFv9/n1bJkA7Ec=;
+ b=cEQf1MMpRTcGbICY6+/DKqn0Q+E0aN9HxSbcHXXNAAk7T6fvRLsCERtcAE/ZftamTJ
+ rPXaAE30M9ic7/NBaB1Edt16Q2kprGWOPcxoUJXDtS81BOUxhODddRrnfb+pI1AvNQfp
+ rlpte8bpGjJJZwle44g3RUleDVGNChH9g5ToQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692318434; x=1692923234;
+ d=1e100.net; s=20221208; t=1692318435; x=1692923235;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KMgLVwW+yCQMIjyVBsdgTLS/l1b6gl6ACRyyjBjz88w=;
- b=ikJ1wk4hBh+Ac6l3ZmLRbVK7SbS0TZMYQyCy0qTGtq9p7/al08Ym+HzTslsULSMgeC
- NkdmGE6jMeC9iFieII63ICv0Q340nzqFOxQq7/Dotc4kfCEqAM/9d4+lYAuqmstrXoK6
- OVyPkbKDy8O0kv3icqGr4B5b3aeJF8XDIDGzFAM9ksSpvvPTGs/7vt5/anOoIDx942Fk
- ef6Z/M2k7adEvmab8nIvmK7jlKULw0kCLpPU9qxgzF2yV1tKZwNrul6evJhJqwe7+WBm
- WFJNO4WStgd6yyfk+4y3+hh1lVzPWoU8HkpsJt90UMXLVjFyuL5IeAmYJJVt+3WYhvTx
- x6Cw==
-X-Gm-Message-State: AOJu0Yzz+OVTm3IKOMpv30LK9JsaJp1F3P5bBni4N4vziTi1qBzK5FZB
- rs1az76Zj5G1hEQ/GLd4ZSefIrf8coXj50NMMcI=
-X-Google-Smtp-Source: AGHT+IEsftIN6XHOj1ftsb43StsVjO07vcFqfLdR+ccreFOLyrEL3oY24nPUY7JgKJtxbi77RxZN9Q==
-X-Received: by 2002:a92:c54d:0:b0:348:8b42:47d with SMTP id
- a13-20020a92c54d000000b003488b42047dmr1339569ilj.28.1692318434606; 
- Thu, 17 Aug 2023 17:27:14 -0700 (PDT)
+ bh=Gn0rzQjV3ooaUKS2tiDI/lnvil2w7qFv9/n1bJkA7Ec=;
+ b=hdIrLfXtx0DA/or4PWYS1Vq+5ibUuFt5KkXZ23aKjzLaZlA8KnvwQVv1BQy5kuUZBa
+ hawem9w8VRnWf6TRqmmDz+tpPoN3LTSEolf1/HTZXhbTBSuQ26Fmx5xEcFMFuvTqf9Qc
+ ETJrWhmk1K5HHPOCNGzOP7pIKkopSs2O2eARcK44tfS+S151eg6Eu8EZAfWnaDxXIM3t
+ Yfqyil4Gkhp43qx3QYtizxiqJRpEGvusWoP9D2EIGGtFJ3Bf0aSUFHUPC6rb7w8+9nXo
+ OdsLUXm7DiZ/QpajIalrjKe9mCtt8pwwv//2HQHvQIcTl9M8Oarozd3gbhP+jzoiJNwV
+ RQZw==
+X-Gm-Message-State: AOJu0YyLAzYj/gAKWpowIBryacJUPBFMG5RirubwqrZ19wfw03kihsUp
+ 9lhFQ5WTQJwbq4Trh1GBDW85Dkzpd4iLwwm3qBo=
+X-Google-Smtp-Source: AGHT+IGyCr1eEYpDv6xvf1AcZEqyG00kSfuLmlpsJXRU4rW8S3WkICfBPQxzR+T9g9hS/aAYUNVQ+g==
+X-Received: by 2002:a05:6e02:931:b0:34b:f3b:77b5 with SMTP id
+ o17-20020a056e02093100b0034b0f3b77b5mr946927ilt.30.1692318435521; 
+ Thu, 17 Aug 2023 17:27:15 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.14
+ i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 17:27:14 -0700 (PDT)
+ Thu, 17 Aug 2023 17:27:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Coreboot ML <coreboot@coreboot.org>
-Subject: [PATCH v2 01/20] x86: coreboot: Add IDE and SATA
-Date: Thu, 17 Aug 2023 18:26:40 -0600
-Message-ID: <20230818002706.853550-2-sjg@chromium.org>
+Subject: [PATCH v2 02/20] x86: coreboot: Enable standard boot
+Date: Thu, 17 Aug 2023 18:26:41 -0600
+Message-ID: <20230818002706.853550-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230818002706.853550-1-sjg@chromium.org>
 References: <20230818002706.853550-1-sjg@chromium.org>
@@ -88,92 +88,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add these options to permit access to more disk types.
-
-Add some documentation as well.
+Enable bootstd options and provide instructions on how to boot a linux
+distro using coreboot.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- configs/coreboot64_defconfig    |  1 +
- configs/coreboot_defconfig      |  9 +++++++++
- doc/board/coreboot/coreboot.rst | 20 ++++++++++++++++++++
- 3 files changed, 30 insertions(+)
+ configs/coreboot64_defconfig    | 14 ++------------
+ configs/coreboot_defconfig      |  1 +
+ doc/board/coreboot/coreboot.rst | 16 ++++++++++++++--
+ 3 files changed, 17 insertions(+), 14 deletions(-)
 
 diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-index 8aadaa68c279..ded0e6f2422d 100644
+index ded0e6f2422d..602465175d20 100644
 --- a/configs/coreboot64_defconfig
 +++ b/configs/coreboot64_defconfig
-@@ -26,6 +26,7 @@ CONFIG_SYS_PBSIZE=532
- CONFIG_CMD_IDE=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PART=y
-+CONFIG_CMD_SATA=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index 8e11de663819..56cc542df6c6 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -22,8 +22,10 @@ CONFIG_LOGF_FUNC=y
+@@ -10,40 +10,30 @@ CONFIG_VENDOR_COREBOOT=y
+ CONFIG_TARGET_COREBOOT=y
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SYS_MONITOR_BASE=0x01120000
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="ext2load scsi 0:3 01000000 /boot/vmlinuz; zboot 01000000"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
  CONFIG_DISPLAY_BOARDINFO_LATE=y
  CONFIG_LAST_STAGE_INIT=y
- CONFIG_PCI_INIT_R=y
-+CONFIG_CMD_IDE=y
+ CONFIG_SPL_NO_BSS_LIMIT=y
+-CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_CMD_IDE=y
  CONFIG_CMD_MMC=y
- CONFIG_CMD_PART=y
-+CONFIG_CMD_SATA=y
+-CONFIG_CMD_PART=y
+ CONFIG_CMD_SATA=y
  CONFIG_CMD_USB=y
  # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
-@@ -48,6 +50,13 @@ CONFIG_USE_ROOTPATH=y
- CONFIG_REGMAP=y
- CONFIG_SYSCON=y
- # CONFIG_ACPIGEN is not set
-+CONFIG_SYS_IDE_MAXDEVICE=4
-+CONFIG_SYS_ATA_DATA_OFFSET=0
-+CONFIG_SYS_ATA_REG_OFFSET=0
-+CONFIG_SYS_ATA_ALT_OFFSET=0
-+CONFIG_ATAPI=y
-+CONFIG_LBA48=y
-+CONFIG_SYS_64BIT_LBA=y
- CONFIG_NVME_PCI=y
- # CONFIG_PCI_PNP is not set
- CONFIG_SOUND=y
+-CONFIG_CMD_DHCP=y
+ CONFIG_BOOTP_BOOTFILESIZE=y
+-CONFIG_CMD_PING=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_SOUND=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_EXT4=y
+ CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+ CONFIG_MAC_PARTITION=y
+ # CONFIG_SPL_MAC_PARTITION is not set
+ # CONFIG_SPL_DOS_PARTITION is not set
+-CONFIG_ISO_PARTITION=y
+-CONFIG_EFI_PARTITION=y
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index 56cc542df6c6..735cd6eb4c22 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -10,6 +10,7 @@ CONFIG_TARGET_COREBOOT=y
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SYS_MONITOR_BASE=0x01110000
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
 diff --git a/doc/board/coreboot/coreboot.rst b/doc/board/coreboot/coreboot.rst
-index d660a223d9c8..be5b0de5495e 100644
+index be5b0de5495e..88437c27740e 100644
 --- a/doc/board/coreboot/coreboot.rst
 +++ b/doc/board/coreboot/coreboot.rst
-@@ -41,6 +41,26 @@ At present it seems that for Minnowboard Max, coreboot does not pass through
- the video information correctly (it always says the resolution is 0x0). This
- works correctly for link though.
+@@ -67,9 +67,21 @@ To use 4GB of memory, typically necessary for booting Linux distros, add
+ In addition to the 32-bit 'coreboot' build there is a 'coreboot64' build. This
+ produces an image which can be booted from coreboot (32-bit). Internally it
+ works by using a 32-bit SPL binary to switch to 64-bit for running U-Boot. It
+-can be useful for running UEFI applications, for example.
++can be useful for running UEFI applications, for example with the coreboot
++build in `$CBDIR`::
++
++   DISK=ubuntu-23.04-desktop-amd64.iso
++   CBDIR=~/coreboot/build
++
++   cp $CBDIR/coreboot.rom.in coreboot.rom
++   cbfstool coreboot.rom add-flat-binary -f u-boot-x86-with-spl.bin \
++      -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000
++
++   qemu-system-x86_64 -m 2G -smp 4 -bios coreboot.rom \
++      -drive id=disk,file=$DISK,if=none \
++      -device ahci,id=ahci \
++      -device ide-hd,drive=disk,bus=ahci.0 \
  
-+You can run via QEMU using::
-+
-+  qemu-system-x86_64 -bios build/coreboot.rom -serial mon:stdio
-+
-+The `-serial mon:stdio` part shows both output in the display and on the
-+console. It is optional. You can add `nographic` as well to *only* get console
-+output.
-+
-+To run with a SATA drive called `$DISK`::
-+
-+  qemu-system-x86_64 -bios build/coreboot.rom -serial mon:stdio \
-+	-drive id=disk,file=$DISK,if=none \
-+	-device ahci,id=ahci \
-+	-device ide-hd,drive=disk,bus=ahci.0
-+
-+Then you can scan it with `scsi scan` and access it normally.
-+
-+To use 4GB of memory, typically necessary for booting Linux distros, add
-+`-m 4GB`.
-+
- 64-bit U-Boot
- -------------
+-This has only been lightly tested.
  
+ CBFS access
+ -----------
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
