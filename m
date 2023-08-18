@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B590C678DC
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E663AC2FC0E
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:28:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F06286C3E;
-	Fri, 18 Aug 2023 02:27:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BF4F986C26;
+	Fri, 18 Aug 2023 02:27:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S7F0WY+w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZlcSw11r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B032986C03; Fri, 18 Aug 2023 02:27:23 +0200 (CEST)
+ id A3EB686C1E; Fri, 18 Aug 2023 02:27:24 +0200 (CEST)
 Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
  [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03F5486C01
+ by phobos.denx.de (Postfix) with ESMTPS id E6CDA86C13
  for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:27:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34a8bd1a7fbso1423605ab.1
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:20 -0700 (PDT)
+ e9e14a558f8ab-349783c5d43so1393895ab.3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692318439; x=1692923239;
+ d=chromium.org; s=google; t=1692318440; x=1692923240;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B/XW+6HRwbJQa/jbXIP3F3Dmjrphj9qJlYuLRh+lDN4=;
- b=S7F0WY+wqoJ7eMS026jLvv8nXKCWlGf0mMMZDynduLUtQkwYdWj1QZljYuMDGSPfec
- 3TiZSqX1kjuVIwOxxmVFjQmxu4M3uZUlqYBx8dqBkjruMYYYjvsv7x/8+s6sL7hypIYr
- vMdI43d+oGTpP992XbFUqlkGSP2G06W3kOvY8=
+ bh=y8+FJsVNDZ7VRFBk7SEfIPC76wLQi3w6JjLh3SbFliw=;
+ b=ZlcSw11rS3TJFjGtuQD6yVPDthlUCoBjy2b5tHvqIo3g6sgSOBNjDxsMIZ9DUD4zYJ
+ yg2Xlu1t0S5G3l7EdJtu+8Mbtyt0zi/E6sBUxGzoRPrc9zgYCJHb7xxJs+H40T+W54H/
+ CcuzxV5EF6d5IjDFpVeo1OdSxBTimTMhmj5Q8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692318439; x=1692923239;
+ d=1e100.net; s=20221208; t=1692318440; x=1692923240;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B/XW+6HRwbJQa/jbXIP3F3Dmjrphj9qJlYuLRh+lDN4=;
- b=g4MsIcSTLDZj67haYXwTNaXUn5a3tf3Fcn68TuxF2+RiuXJIeKTma2xEFGQIirhwC9
- kbFmQ9IsoacQslsKgD2f/OtsVxX6dXOBTHGOjiIOK2Ys37umdsF62cYheC27oANQhTX7
- SGHNNoa/wcksGEZoORoMzFDKBTnm1xsWMzaqtsmyU2uHSjlZDWYh70dBnxYrtzA2+WvJ
- poMZbOTYyksYf1EiZVyf55FzC+CKkBi/io6ZwrVaFNQ395d43uYitDB5jxf4VadKjePC
- eZ4bNSzs95bt47vQXIHobnzNjZpJ2HoO4r2R42NGTqlK1qrqDUMe/qZiulzdXtXnkNaz
- fBqA==
-X-Gm-Message-State: AOJu0YzHud5zns8eKFN0K+IIMomYr2ZQECDzkj5c6gMpDd0/9Hw8/RnW
- GOQQuELj8ae+OXaRe0NYs7TIAsMw4dWjWoht51k=
-X-Google-Smtp-Source: AGHT+IEPxKpoFZQi/BL79PczFV3E64c3tnnn51QBT7hfG1JPGHpBPmoT22PD6seLVpZtEjTCshSBgg==
-X-Received: by 2002:a05:6e02:963:b0:34a:c28f:9423 with SMTP id
- q3-20020a056e02096300b0034ac28f9423mr1127916ilt.8.1692318439598; 
- Thu, 17 Aug 2023 17:27:19 -0700 (PDT)
+ bh=y8+FJsVNDZ7VRFBk7SEfIPC76wLQi3w6JjLh3SbFliw=;
+ b=WKdH22UzimCDcGh6L10rjfsOmFiavsTiPTn6DWVHnbSWVnG9k4Or6ETxL2MKH80A3k
+ 6JdUbphD9XfC7JHz4vIC+FkA+WAXzkSaghiCuYPGqp7CHup1ie53++PzE6fc3a0YSWce
+ oimmv0U2i8nu9eQ4iVEGBhQ9hgaPONpDpYaQZRntDxhS3KYELX9juWU4z5R+1ri9NTMx
+ 9lHTwvgXBSM2U88JMyeTrwuxGpNgGfPsVv9zBTQfo0A8dH8GlmDUTJstK2fjuGo7ZuY5
+ wsXjfOI37lx8BMvdYtVeQEbltaUYrF6LDr7hxz+knJaBi7BoNovA+po83FLCD2cIY8Pi
+ IPKA==
+X-Gm-Message-State: AOJu0YwDItO7ASpW6IUTbeAVcjQvlPYayv92seaxY3fYhwIy4/VpQ5ui
+ zAxU4Vpmbd8Hd657aasAaZlVbzswQ4d1/i05R/U=
+X-Google-Smtp-Source: AGHT+IGESLreRHAoxCMfcGkTwfqurtfbzTZ0PhLqU4GyVRLwPQcYsb+AbHl8Ag4SKs6QE7ueofTkJA==
+X-Received: by 2002:a05:6e02:1152:b0:349:76c3:e8af with SMTP id
+ o18-20020a056e02115200b0034976c3e8afmr1205383ill.16.1692318440545; 
+ Thu, 17 Aug 2023 17:27:20 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 17:27:19 -0700 (PDT)
+ Thu, 17 Aug 2023 17:27:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Coreboot ML <coreboot@coreboot.org>
-Subject: [PATCH v2 07/20] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
-Date: Thu, 17 Aug 2023 18:26:46 -0600
-Message-ID: <20230818002706.853550-8-sjg@chromium.org>
+Subject: [PATCH v2 08/20] x86: coreboot: Drop USB init on startup
+Date: Thu, 17 Aug 2023 18:26:47 -0600
+Message-ID: <20230818002706.853550-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230818002706.853550-1-sjg@chromium.org>
 References: <20230818002706.853550-1-sjg@chromium.org>
@@ -88,45 +88,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The debug UART on modern machines uses a 32-bit wide transfer. Without
-this, setting debug output causes a hang or no output. It is not obvious
-(when enabling CONFIG_DEBUG_UART) that this is needed.
+This is very annoying as it is quite slow on many machines. Also, U-Boot
+has an existing 'preboot' mechanism to enable this feature if desired.
 
-Enable 32-bit access to avoid this trap.
+Drop this code so that it is possible to choose whether to init USB or
+not.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- configs/coreboot64_defconfig | 1 +
- configs/coreboot_defconfig   | 1 +
- 2 files changed, 2 insertions(+)
+ arch/x86/cpu/coreboot/coreboot.c | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-index a094a7c24234..29b68d6929c7 100644
---- a/configs/coreboot64_defconfig
-+++ b/configs/coreboot64_defconfig
-@@ -52,6 +52,7 @@ CONFIG_ATAPI=y
- CONFIG_LBA48=y
- CONFIG_SYS_64BIT_LBA=y
- # CONFIG_PCI_PNP is not set
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
- CONFIG_CONSOLE_SCROLL_LINES=5
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index 735cd6eb4c22..2961908f29cd 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -60,6 +60,7 @@ CONFIG_LBA48=y
- CONFIG_SYS_64BIT_LBA=y
- CONFIG_NVME_PCI=y
- # CONFIG_PCI_PNP is not set
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
- CONFIG_CONSOLE_SCROLL_LINES=5
+diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
+index a0c62cce2293..fa3daeff8229 100644
+--- a/arch/x86/cpu/coreboot/coreboot.c
++++ b/arch/x86/cpu/coreboot/coreboot.c
+@@ -82,10 +82,6 @@ static void board_final_init(void)
+ 
+ int last_stage_init(void)
+ {
+-	/* start usb so that usb keyboard can be used as input device */
+-	if (IS_ENABLED(CONFIG_USB_KEYBOARD))
+-		usb_init();
+-
+ 	board_final_init();
+ 
+ 	return 0;
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
