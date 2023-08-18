@@ -4,78 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B46AFC71149
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 13:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 565F4C71149
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B42386E38;
-	Fri, 18 Aug 2023 15:45:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
+	by phobos.denx.de (Postfix) with ESMTP id 5305586E54;
+	Fri, 18 Aug 2023 16:11:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dawes-za-net.20221208.gappssmtp.com header.i=@dawes-za-net.20221208.gappssmtp.com header.b="UwUkPFzI";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C35CA86E38; Fri, 18 Aug 2023 15:45:34 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5EC986E3A
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 15:45:31 +0200 (CEST)
+ id 3770886E55; Fri, 18 Aug 2023 16:11:11 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 2C3E686D0F
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:11:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dawes.za.net
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogan.dawes@gmail.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-1c8c44053e8so498216fac.1
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 06:45:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dawes-za-net.20221208.gappssmtp.com; s=20221208; t=1692366330; x=1692971130; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sDs83L8oXaD4RnN8xCcC6ysXIayt5w8YK1MyM/x1k9w=;
- b=UwUkPFzIQdgixwmklNNSrMIj8ftsAWRbhEgPim75kJdGKrW9AFTkFTqQ4li+HdSbdU
- zJeaN/07no2TPFAOncYJTyD8yhy3trX75Z9kpfLvw3c2715TyEDZ4sox1BKDwWsVeMJ4
- xvwfQ+XsMXDgK5dkd6x/mVc54kBq2YQEoHhGuF+4MLY4pNlfYfV/Vqw9fiJWMe1z2hSj
- b3cZzbUSr2rojMAzu01EBJO3GutGi+kQY2abP7MGo+NqL+REWainmNRjLZhtJfHQxIvE
- +s44BUot1SuWmuh4+mAU0mKacge8uGOMT1wMr/K7NSmIj/ijA5IaKjlnZuyr+rsW6Y5s
- UkPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692366330; x=1692971130;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sDs83L8oXaD4RnN8xCcC6ysXIayt5w8YK1MyM/x1k9w=;
- b=ZVEKqc3MtS0H3PfYo+A8eE14xr7Qhcd+RU1MmW6dabmggjwDLLX3Mn9ZTzx3ohV5M4
- OjMbxzWaNi+HXIjCZpLp0VTyFi9oGL8+/IstGNKygrNC6p3XXTbsWdZ+7sN/m/zposcN
- Qq3lrqaWSmVHxrWVi1KUMf55gWfRbAlzNBSY7Lq3C43pZfweRDytiOOrXysMdOpjDm2J
- ayTpXa3/Qr/3DQ2gkO+kU9nSq42aS7gfHyZhu7esLu52/W8iJ4SpYG4fRjF2dTTDM/z6
- bTs52a4rTbW98PlDE7dcfP/jmo4LAYx+JXmM+tjcM4iaZ7GkJfvpidn7xhlMfbYDhwJx
- 8zHg==
-X-Gm-Message-State: AOJu0Yw6bveRUVEFpr+ZqemSwnBr8uGIc+WLaYhf/NF+oCAGysQOdzhp
- Dzu5BBO8DEjsdb4aOzSrmsUNjDw/QwZYGyj0Xxs=
-X-Google-Smtp-Source: AGHT+IHB9LulyOMUjf+nl7Oi3wP/suA/++43sFg96dO6Wb8U1PynWMRWEGl11O+IIGSBmTuKntIgexE2pgLhGFo4dO4=
-X-Received: by 2002:a05:6870:330a:b0:1bb:b392:3b97 with SMTP id
- x10-20020a056870330a00b001bbb3923b97mr1796906oae.6.1692366330334; Fri, 18 Aug
- 2023 06:45:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 05701D75;
+ Fri, 18 Aug 2023 07:11:48 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D52C3F64C;
+ Fri, 18 Aug 2023 07:11:06 -0700 (PDT)
+Date: Fri, 18 Aug 2023 15:11:03 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
+ Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
+Subject: Re: [PATCH v2 1/5] sunxi: psci: clean away preprocessor macros
+Message-ID: <20230818151103.3fe5a32e@donnerap.manchester.arm.com>
+In-Reply-To: <20230816173420.83232-2-CFSworks@gmail.com>
+References: <20230816173420.83232-1-CFSworks@gmail.com>
+ <20230816173420.83232-2-CFSworks@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
- <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
- <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
- <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
- <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
- <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
- <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
-In-Reply-To: <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
-From: Rogan Dawes <rogan@dawes.za.net>
-Date: Fri, 18 Aug 2023 15:45:19 +0200
-Message-ID: <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
-Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,115 +59,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Circling back to this, I wanted to get a modern u-boot running on the
-Wink Hub v1 as well. Since it is possible to invoke SDP over USB
-(having soldered on a suitable microUSB connector), I have no concern
-about bricking it now. It's also a LOT easier than JTAG!
+On Wed, 16 Aug 2023 10:34:16 -0700
+Sam Edwards <cfsworks@gmail.com> wrote:
 
-I tried to build and flash the mx28evk_defconfig, but failed to get
-any output on the serial console. This is likely to be unsurprising,
-due to the already established alternative configuration of the UART
-identified by Fabio.
+Hi Sam,
 
-I then patched imx28.dtsi to add duart_pins_c as per Fabio's previous
-patch for the Linux kernel:
+thanks for the update.
 
-+ duart_pins_c: duart@2 {
-+ reg =3D <2>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_I2C0_SCL__DUART_RX
-+ MX28_PAD_I2C0_SDA__DUART_TX
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_8mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+
+> This patch restructures psci.c to get away from the "many different
+> function definitions switched by #ifdef" paradigm to the preferred style
+> of having a single function definition with `if (IS_ENABLED(...))` to
+> make the optimizer include only the appropriate function bodies instead.
+> 
+> There are no functional changes here.
 
-And updated mx28evk_defconfig to use duart_pins_c instead of
-duart_pins_a. However, I still got no output after using:
+So this diff is hard to read - not your fault, this seems to be common for
+those kind of refactorings - but I convinced myself by comparing old and
+new side-by-side and test-compiling that this doesn't introduce any
+functional change. The resulting object file is different (8 byte larger,
+even), so it's hard to prove, and I still have to actually test it on some
+boards, but the idea is a good one and it's the right direction, so to
+move things forward:
 
-sudo $(which snagrecover) --soc imx28 -f
-src/snagrecover/templates/imx28-evk.yaml
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 
-with u-boot.sb in the current directory.
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
-I also tried using the complete imx28-wink-hub-v1.dts as created by
-Fabio, and updated the .config to reference that instead of the
-imx28-evk, but I suspect that I may not have made the updates
-sufficiently well, if the name of the board needs to correspond with
-any details of the device tree? Neither of these resulted in any
-output.
+Cheers,
+Andre
 
-Any other suggestions?
+> ---
+>  arch/arm/cpu/armv7/sunxi/psci.c | 102 +++++++++++++-------------------
+>  1 file changed, 42 insertions(+), 60 deletions(-)
+> 
+> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
+> index e1d3638b5c..7804e0933b 100644
+> --- a/arch/arm/cpu/armv7/sunxi/psci.c
+> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
+> @@ -76,11 +76,8 @@ static void __secure __mdelay(u32 ms)
+>  	isb();
+>  }
+>  
+> -static void __secure clamp_release(u32 __maybe_unused *clamp)
+> +static void __secure clamp_release(u32 *clamp)
+>  {
+> -#if defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN7I) || \
+> -	defined(CONFIG_MACH_SUN8I_H3) || \
+> -	defined(CONFIG_MACH_SUN8I_R40)
+>  	u32 tmp = 0x1ff;
+>  	do {
+>  		tmp >>= 1;
+> @@ -88,83 +85,68 @@ static void __secure clamp_release(u32 __maybe_unused *clamp)
+>  	} while (tmp);
+>  
+>  	__mdelay(10);
+> -#endif
+>  }
+>  
+> -static void __secure clamp_set(u32 __maybe_unused *clamp)
+> +static void __secure clamp_set(u32 *clamp)
+>  {
+> -#if defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN7I) || \
+> -	defined(CONFIG_MACH_SUN8I_H3) || \
+> -	defined(CONFIG_MACH_SUN8I_R40)
+>  	writel(0xff, clamp);
+> -#endif
+>  }
+>  
+> -static void __secure sunxi_power_switch(u32 *clamp, u32 *pwroff, bool on,
+> -					int cpu)
+> +static void __secure sunxi_set_entry_address(void *entry)
+>  {
+> -	if (on) {
+> -		/* Release power clamp */
+> -		clamp_release(clamp);
+> -
+> -		/* Clear power gating */
+> -		clrbits_le32(pwroff, BIT(cpu));
+> +	/* secondary core entry address is programmed differently on R40 */
+> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
+> +		writel((u32)entry,
+> +		       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
+>  	} else {
+> -		/* Set power gating */
+> -		setbits_le32(pwroff, BIT(cpu));
+> +		struct sunxi_cpucfg_reg *cpucfg =
+> +			(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+>  
+> -		/* Activate power clamp */
+> -		clamp_set(clamp);
+> +		writel((u32)entry, &cpucfg->priv0);
+>  	}
+>  }
+>  
+> -#ifdef CONFIG_MACH_SUN8I_R40
+> -/* secondary core entry address is programmed differently on R40 */
+> -static void __secure sunxi_set_entry_address(void *entry)
+> -{
+> -	writel((u32)entry,
+> -	       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
+> -}
+> -#else
+> -static void __secure sunxi_set_entry_address(void *entry)
+> +static void __secure sunxi_cpu_set_power(int cpu, bool on)
+>  {
+> +	u32 *clamp = NULL;
+> +	u32 *pwroff;
+>  	struct sunxi_cpucfg_reg *cpucfg =
+>  		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+>  
+> -	writel((u32)entry, &cpucfg->priv0);
+> -}
+> -#endif
+> +	/* sun7i (A20) is different from other single cluster SoCs */
+> +	if (IS_ENABLED(CONFIG_MACH_SUN7I)) {
+> +		clamp = &cpucfg->cpu1_pwr_clamp;
+> +		pwroff = &cpucfg->cpu1_pwroff;
+> +	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
+> +		clamp = (void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu);
+> +		pwroff = (void *)cpucfg + SUN8I_R40_PWROFF;
+> +	} else {
+> +		struct sunxi_prcm_reg *prcm =
+> +			(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+>  
+> -#ifdef CONFIG_MACH_SUN7I
+> -/* sun7i (A20) is different from other single cluster SoCs */
+> -static void __secure sunxi_cpu_set_power(int __always_unused cpu, bool on)
+> -{
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> +		if (IS_ENABLED(CONFIG_MACH_SUN6I) ||
+> +		    IS_ENABLED(CONFIG_MACH_SUN8I_H3))
+> +			clamp = &prcm->cpu_pwr_clamp[cpu];
+>  
+> -	sunxi_power_switch(&cpucfg->cpu1_pwr_clamp, &cpucfg->cpu1_pwroff,
+> -			   on, 0);
+> -}
+> -#elif defined CONFIG_MACH_SUN8I_R40
+> -static void __secure sunxi_cpu_set_power(int cpu, bool on)
+> -{
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> +		pwroff = &prcm->cpu_pwroff;
+> +	}
+>  
+> -	sunxi_power_switch((void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu),
+> -			   (void *)cpucfg + SUN8I_R40_PWROFF,
+> -			   on, cpu);
+> -}
+> -#else /* ! CONFIG_MACH_SUN7I && ! CONFIG_MACH_SUN8I_R40 */
+> -static void __secure sunxi_cpu_set_power(int cpu, bool on)
+> -{
+> -	struct sunxi_prcm_reg *prcm =
+> -		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> +	if (on) {
+> +		/* Release power clamp */
+> +		if (clamp)
+> +			clamp_release(clamp);
+>  
+> -	sunxi_power_switch(&prcm->cpu_pwr_clamp[cpu], &prcm->cpu_pwroff,
+> -			   on, cpu);
+> +		/* Clear power gating */
+> +		clrbits_le32(pwroff, BIT(cpu));
+> +	} else {
+> +		/* Set power gating */
+> +		setbits_le32(pwroff, BIT(cpu));
+> +
+> +		/* Activate power clamp */
+> +		if (clamp)
+> +			clamp_set(clamp);
+> +	}
+>  }
+> -#endif /* CONFIG_MACH_SUN7I */
+>  
+>  void __secure sunxi_cpu_power_off(u32 cpuid)
+>  {
 
-Regards,
-
-Rogan Dawes
-
-On Fri, 23 Jun 2023 at 03:25, Fabio Estevam <festevam@gmail.com> wrote:
->
-> Hi Rogan,
->
-> On Thu, Jun 22, 2023 at 10:03=E2=80=AFPM Fabio Estevam <festevam@gmail.co=
-m> wrote:
-> >
-> > Hi Rogan,
-> >
-> > On Thu, Jun 22, 2023 at 7:43=E2=80=AFPM Fabio Estevam <festevam@gmail.c=
-om> wrote:
-> >
-> > > You should also pass the kernel command line: console=3DttyAMA0,11520=
-0n8
-> > >
-> > > As far as I recall, the 2.6.35 kernel used a different console device=
-.
-> >
-> > Yes, 2.6.35  uses ttyAM0. Mainline uses ttyAMA0 (note the extra A).
-> >
-> > Please adjust it accordingly.
->
-> Also, I validated booting a uImage on a imx28-evk using the same procedur=
-e.
->
-> I used kernel 6.1.34.
->
-> $ grep DTB .config
-> CONFIG_ARM_APPENDED_DTB=3Dy
-> CONFIG_ARM_ATAG_DTB_COMPAT=3Dy
-> CONFIG_ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER=3Dy
-> # CONFIG_ARM_ATAG_DTB_COMPAT_CMDLINE_EXTEND is not set
->
-> =3D> setenv bootargs 'console=3DttyAMA0,115200 root=3D/dev/mmcblk0p3 rw r=
-ootwait'
-> =3D> print loadaddr
-> loadaddr=3D0x42000000
-> =3D> load mmc 0:2 $loadaddr uImage_with_dtb
-> 5916489 bytes read in 1778 ms (3.2 MiB/s)
-> =3D> bootm
-> ## Booting kernel from Legacy Image at 42000000 ...
->    Image Name:
->    Created:      2023-06-23   1:17:21 UTC
->    Image Type:   ARM Linux Kernel Image (uncompressed)
->    Data Size:    5916425 Bytes =3D 5.6 MiB
->    Load Address: 40008000
->    Entry Point:  40008000
->    Verifying Checksum ... OK
->    Loading Kernel Image
->
-> Starting kernel ...
->
-> [    0.000000] Booting Linux on physical CPU 0x0
-> [    0.000000] Linux version 6.1.34-00030-ga03745a375fa-dirty
-> (fabio@fabio-Precision-3551) (arm-linux-gnueabihf-gcc (Ubuntu
-> 11.3.0-1ubuntu1~22.04.1) 11.3.0, GNU ld (GNU Binutils for Ubuntu)
-> 2.38) #31 Thu Jun 22 22:12:44 -03 2023
-> [    0.000000] CPU: ARM926EJ-S [41069265] revision 5 (ARMv5TEJ), cr=3D000=
-5317f
-> [    0.000000] CPU: VIVT data cache, VIVT instruction cache
-> [    0.000000] OF: fdt: Machine model: Freescale i.MX28 Evaluation Kit
-> ...
->
-> Most likely the ttyAMA0 change should allow you to boot.
->
-> Cheers
