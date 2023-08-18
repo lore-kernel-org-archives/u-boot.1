@@ -4,45 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 565F4C71149
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:11:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C46EC71156
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 14:23:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5305586E54;
-	Fri, 18 Aug 2023 16:11:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5031586E65;
+	Fri, 18 Aug 2023 16:23:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kyq6cBgG";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3770886E55; Fri, 18 Aug 2023 16:11:11 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2C3E686D0F
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:11:08 +0200 (CEST)
+ id B69EF86E64; Fri, 18 Aug 2023 16:23:44 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0499086E58
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 16:23:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 05701D75;
- Fri, 18 Aug 2023 07:11:48 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D52C3F64C;
- Fri, 18 Aug 2023 07:11:06 -0700 (PDT)
-Date: Fri, 18 Aug 2023 15:11:03 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
- Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH v2 1/5] sunxi: psci: clean away preprocessor macros
-Message-ID: <20230818151103.3fe5a32e@donnerap.manchester.arm.com>
-In-Reply-To: <20230816173420.83232-2-CFSworks@gmail.com>
-References: <20230816173420.83232-1-CFSworks@gmail.com>
- <20230816173420.83232-2-CFSworks@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d63457dd8b8so972391276.1
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 07:23:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692368620; x=1692973420;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rEEt/H1YfovvwpoR3elnDKhKdFBN5mXfUmoEvJw2Gqo=;
+ b=kyq6cBgGLdXcOwwsCorX/Zd7AvQNlx4ctTzcUnraHmJ0/tlHt67bk4JwEPEl6crcJW
+ u4O88JMBusMMZYsSp/QRc7Ta8EdxtPoTFrMVoQqRLtYfFGGZ+pgsegWY12RRtpCHIFME
+ tsOqZQ1PD90IcCjSfDpPYOE8m6i2hA4nmjFHo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692368620; x=1692973420;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rEEt/H1YfovvwpoR3elnDKhKdFBN5mXfUmoEvJw2Gqo=;
+ b=CqqctVrYmAJRbEfAyK4f9+QOHW7mqbMkd/6fwN54WmXaTyekJWk6w5y72usn8Wt3CP
+ poQg2Tzyg4QtkX5rgBIwaewhnuvPYV6mg4yVcVVRuXbIsknmgwiXAGUk+Lb9Aw8+63Sb
+ SCAcqGa5tjFYn6AmbckIxF7TZ9OC8Uld1oFCSoO8tHxcnwki7ztMljS3AloOr5cDEjzY
+ gyFhKKcMPPzYqrilbajwERkbEmDajWxd2dbtGGiPIMWmgLSwqPIlthpt7yibITOavLQR
+ /q5q6dWJ7XTi0AmKOY1oDiwxqDQ4CtzKobJd5pzBdzXDYzf6o0sm0gsm1GdgRCqfGGwo
+ TwUA==
+X-Gm-Message-State: AOJu0Yzivw6PLvKxgeRRnpXmN9y9wsOrTD69Pexgmqflwybctggo4Mle
+ GJLSplmfUYm+gpa92n2/z+5kHQ==
+X-Google-Smtp-Source: AGHT+IGIXQrU7x6EpPJEtxA/dGUuuS8Zdgc/hEpDzV38M87AGDXCOlq8FnhIrIoHKzwEVnU/3fgUww==
+X-Received: by 2002:a25:40ca:0:b0:d4e:ea00:dfb6 with SMTP id
+ n193-20020a2540ca000000b00d4eea00dfb6mr2803898yba.58.1692368620612; 
+ Fri, 18 Aug 2023 07:23:40 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-38f7-b1b8-9b5e-5709.res6.spectrum.com.
+ [2603:6081:7b00:6400:38f7:b1b8:9b5e:5709])
+ by smtp.gmail.com with ESMTPSA id
+ z9-20020a25e309000000b00d728a2738f1sm433560ybd.61.2023.08.18.07.23.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Aug 2023 07:23:40 -0700 (PDT)
+Date: Fri, 18 Aug 2023 10:23:38 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Joshua Watt <jpewhacker@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/6] cmd: gpt: Remove confusing help text
+Message-ID: <20230818142338.GV1515023@bill-the-cat>
+References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
+ <20230815162726.1524958-2-JPEWhacker@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="buILZ61PhF/Yyfc4"
+Content-Disposition: inline
+In-Reply-To: <20230815162726.1524958-2-JPEWhacker@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,179 +92,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 16 Aug 2023 10:34:16 -0700
-Sam Edwards <cfsworks@gmail.com> wrote:
 
-Hi Sam,
+--buILZ61PhF/Yyfc4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-thanks for the update.
+On Tue, Aug 15, 2023 at 10:26:55AM -0600, Joshua Watt wrote:
 
-> This patch restructures psci.c to get away from the "many different
-> function definitions switched by #ifdef" paradigm to the preferred style
-> of having a single function definition with `if (IS_ENABLED(...))` to
-> make the optimizer include only the appropriate function bodies instead.
-> 
-> There are no functional changes here.
+> This help text appears to be a fragment of the text shown when
+> CONFIG_CMD_GPT_RENAME is enabled, but is confusing so remove it.
+>=20
+> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 
-So this diff is hard to read - not your fault, this seems to be common for
-those kind of refactorings - but I convinced myself by comparing old and
-new side-by-side and test-compiling that this doesn't introduce any
-functional change. The resulting object file is different (8 byte larger,
-even), so it's hard to prove, and I still have to actually test it on some
-boards, but the idea is a good one and it's the right direction, so to
-move things forward:
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+--=20
+Tom
 
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+--buILZ61PhF/Yyfc4
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Cheers,
-Andre
+-----BEGIN PGP SIGNATURE-----
 
-> ---
->  arch/arm/cpu/armv7/sunxi/psci.c | 102 +++++++++++++-------------------
->  1 file changed, 42 insertions(+), 60 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
-> index e1d3638b5c..7804e0933b 100644
-> --- a/arch/arm/cpu/armv7/sunxi/psci.c
-> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> @@ -76,11 +76,8 @@ static void __secure __mdelay(u32 ms)
->  	isb();
->  }
->  
-> -static void __secure clamp_release(u32 __maybe_unused *clamp)
-> +static void __secure clamp_release(u32 *clamp)
->  {
-> -#if defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN7I) || \
-> -	defined(CONFIG_MACH_SUN8I_H3) || \
-> -	defined(CONFIG_MACH_SUN8I_R40)
->  	u32 tmp = 0x1ff;
->  	do {
->  		tmp >>= 1;
-> @@ -88,83 +85,68 @@ static void __secure clamp_release(u32 __maybe_unused *clamp)
->  	} while (tmp);
->  
->  	__mdelay(10);
-> -#endif
->  }
->  
-> -static void __secure clamp_set(u32 __maybe_unused *clamp)
-> +static void __secure clamp_set(u32 *clamp)
->  {
-> -#if defined(CONFIG_MACH_SUN6I) || defined(CONFIG_MACH_SUN7I) || \
-> -	defined(CONFIG_MACH_SUN8I_H3) || \
-> -	defined(CONFIG_MACH_SUN8I_R40)
->  	writel(0xff, clamp);
-> -#endif
->  }
->  
-> -static void __secure sunxi_power_switch(u32 *clamp, u32 *pwroff, bool on,
-> -					int cpu)
-> +static void __secure sunxi_set_entry_address(void *entry)
->  {
-> -	if (on) {
-> -		/* Release power clamp */
-> -		clamp_release(clamp);
-> -
-> -		/* Clear power gating */
-> -		clrbits_le32(pwroff, BIT(cpu));
-> +	/* secondary core entry address is programmed differently on R40 */
-> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
-> +		writel((u32)entry,
-> +		       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
->  	} else {
-> -		/* Set power gating */
-> -		setbits_le32(pwroff, BIT(cpu));
-> +		struct sunxi_cpucfg_reg *cpucfg =
-> +			(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
->  
-> -		/* Activate power clamp */
-> -		clamp_set(clamp);
-> +		writel((u32)entry, &cpucfg->priv0);
->  	}
->  }
->  
-> -#ifdef CONFIG_MACH_SUN8I_R40
-> -/* secondary core entry address is programmed differently on R40 */
-> -static void __secure sunxi_set_entry_address(void *entry)
-> -{
-> -	writel((u32)entry,
-> -	       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
-> -}
-> -#else
-> -static void __secure sunxi_set_entry_address(void *entry)
-> +static void __secure sunxi_cpu_set_power(int cpu, bool on)
->  {
-> +	u32 *clamp = NULL;
-> +	u32 *pwroff;
->  	struct sunxi_cpucfg_reg *cpucfg =
->  		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
->  
-> -	writel((u32)entry, &cpucfg->priv0);
-> -}
-> -#endif
-> +	/* sun7i (A20) is different from other single cluster SoCs */
-> +	if (IS_ENABLED(CONFIG_MACH_SUN7I)) {
-> +		clamp = &cpucfg->cpu1_pwr_clamp;
-> +		pwroff = &cpucfg->cpu1_pwroff;
-> +	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
-> +		clamp = (void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu);
-> +		pwroff = (void *)cpucfg + SUN8I_R40_PWROFF;
-> +	} else {
-> +		struct sunxi_prcm_reg *prcm =
-> +			(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
->  
-> -#ifdef CONFIG_MACH_SUN7I
-> -/* sun7i (A20) is different from other single cluster SoCs */
-> -static void __secure sunxi_cpu_set_power(int __always_unused cpu, bool on)
-> -{
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +		if (IS_ENABLED(CONFIG_MACH_SUN6I) ||
-> +		    IS_ENABLED(CONFIG_MACH_SUN8I_H3))
-> +			clamp = &prcm->cpu_pwr_clamp[cpu];
->  
-> -	sunxi_power_switch(&cpucfg->cpu1_pwr_clamp, &cpucfg->cpu1_pwroff,
-> -			   on, 0);
-> -}
-> -#elif defined CONFIG_MACH_SUN8I_R40
-> -static void __secure sunxi_cpu_set_power(int cpu, bool on)
-> -{
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> +		pwroff = &prcm->cpu_pwroff;
-> +	}
->  
-> -	sunxi_power_switch((void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu),
-> -			   (void *)cpucfg + SUN8I_R40_PWROFF,
-> -			   on, cpu);
-> -}
-> -#else /* ! CONFIG_MACH_SUN7I && ! CONFIG_MACH_SUN8I_R40 */
-> -static void __secure sunxi_cpu_set_power(int cpu, bool on)
-> -{
-> -	struct sunxi_prcm_reg *prcm =
-> -		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
-> +	if (on) {
-> +		/* Release power clamp */
-> +		if (clamp)
-> +			clamp_release(clamp);
->  
-> -	sunxi_power_switch(&prcm->cpu_pwr_clamp[cpu], &prcm->cpu_pwroff,
-> -			   on, cpu);
-> +		/* Clear power gating */
-> +		clrbits_le32(pwroff, BIT(cpu));
-> +	} else {
-> +		/* Set power gating */
-> +		setbits_le32(pwroff, BIT(cpu));
-> +
-> +		/* Activate power clamp */
-> +		if (clamp)
-> +			clamp_set(clamp);
-> +	}
->  }
-> -#endif /* CONFIG_MACH_SUN7I */
->  
->  void __secure sunxi_cpu_power_off(u32 cpuid)
->  {
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTffucACgkQFHw5/5Y0
+tyyPDQv+PJ/6EhfJCZ7ay97u2ggYBon0335QNSDAPYQ4KI/zR+/R6cd9NdQsAkqS
+HmKHVnu6wIb+RyCFgqBCpe5eqRHhE2ld+pkbseuW4trJ+c0XiqxQ/nrXsDi8bRFH
+uS/yiLDrkCXZoBozXsfeiEGXh8ej0oErUtPY1WEBHhEJap+5XVtNMsONJAfbVpee
+ueXXzukGgTfbiJv1gKrpHwyCuHAhF2v7Z9rs55072AB/rdMjmR3J+W4C6U1QW57h
+WqMkL6pz0Tf7hv+TpNRJQ+nhy1K5mbXTk+Fo/8F2CQW7jDTek9ZhUACetZP192X1
+7FgDCPR5MiuN+dvToUlQNgGvK5zAcLpmOkqvymHu2qfZfkEBzfNV2qh732P7JSK/
+CtF/7of+4FEE9Wl4Pr+9tdbrkDo+Z0z/r+1efzvHgjB+nTSdIuNBHYYvS6QtJ24k
+s06oJ9ZIC+bUQnjl/kY01PtiVaorqnnc7AIk3MLB4lRniSNirO25rg2mhP73zwcC
+VpU0BUfp
+=CgmQ
+-----END PGP SIGNATURE-----
 
+--buILZ61PhF/Yyfc4--
