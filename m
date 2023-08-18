@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F28FC678DC
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:30:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84EB9C2FC0E
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 00:30:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2B0886C67;
-	Fri, 18 Aug 2023 02:27:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12BA886BFE;
+	Fri, 18 Aug 2023 02:27:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VOqdfn01";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J9fgk0cj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6B4D86C03; Fri, 18 Aug 2023 02:27:33 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id BF81386C27; Fri, 18 Aug 2023 02:27:34 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85E3186C1F
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:27:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05EA386C56
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 02:27:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-34ac2e3064cso1353495ab.1
- for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:29 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-34b0f3b792dso1386135ab.3
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 17:27:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692318448; x=1692923248;
+ d=chromium.org; s=google; t=1692318449; x=1692923249;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RXs1VkkDWKgWjzcUYCrC3rGNzFi8ZsxfSu4TS/L9Csk=;
- b=VOqdfn01Tvp5yfjR2OJAr1qZ1fsm/980n4VhNCkWIUE4OY+cHW+P7YkibPTIoGlnHM
- MRjlC5amxpp4HLIyRStgk3ELyffRukFuC/ManSb3PYG9c3dQYcpKWACMUaiSstFhIWmG
- vxQfmT079mGUTDiAHqFicTEqWSU/xDoNhv+zs=
+ bh=N78vJe4BlzGTbM/DBt5oXYAhkNvldGR1j59twyIqBMg=;
+ b=J9fgk0cji8soeSmafHVHIItkjv8/NW7U/hgNlzW1uzufKxWZVW/URx16RLRTKuN8jr
+ HdGqHE65oPUOLTNtdq5CVknOd7MkIejqpw3eiVcTa8drdWCbvcB0ugB+btnvGKTJLMK0
+ rZFw7JFzESziAIzTPN2WM5qW7Drf8r7xDT//M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692318448; x=1692923248;
+ d=1e100.net; s=20221208; t=1692318449; x=1692923249;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RXs1VkkDWKgWjzcUYCrC3rGNzFi8ZsxfSu4TS/L9Csk=;
- b=cCGBLUlt8Gbxgg0xqjqYISopgiBpOTPg4TgquYTc+HNn5XmyJ+kfZ8y4tVAF/E9HoS
- vzNbLPlenf07XReFVpHLJf5o7TitF+fJnaXqRUI75jqCH60cUc5vaK4e1szKzXOY2P3Y
- RTtHsHGxcVcrQFsZBShc+USlUfvpodjzX0Rd3MRoAV2n/GeFy6FPFvaaqvBoGjcbSUVf
- NoCRPhlCiwV/yMZvm2QhbU19nXexgD5FAxHrDqVi5RL5Vri4gygEYHzt+2XPG+jLLtSR
- 5P24g3rJ3VxrtfcgEU8S56IvMnYUHFe0F53lo8aIZpsglp5u9fsiR15XHk4MHyrloBlU
- BOMg==
-X-Gm-Message-State: AOJu0YyPojuOA9qyv3ubBOhrmUYo8dlqKZl/Dy2EvoNiYCiWRCSvKib2
- xErKcMI2OzcANnNORp6gW/oxxNqwgNeC8THEeRM=
-X-Google-Smtp-Source: AGHT+IF9xd1+HSSgqgxZzg9nGtZ4TxxI/rz28/BY69uswdrh2cF+ax8+Flyo577J9MPH0Q/CZUTY3Q==
-X-Received: by 2002:a05:6e02:1523:b0:345:a6c5:1ce8 with SMTP id
- i3-20020a056e02152300b00345a6c51ce8mr1786415ilu.14.1692318448138; 
- Thu, 17 Aug 2023 17:27:28 -0700 (PDT)
+ bh=N78vJe4BlzGTbM/DBt5oXYAhkNvldGR1j59twyIqBMg=;
+ b=cvSQcHUd8mE26QUvEzO12gn7Zxw/sO+aTqX5cB/a9p79xziIcu0E9os09jwolfKczz
+ hzBm0VpKShpcYhKqCWbCB1ZESRB+sgYMFk6jqtbrnjNH6a858//ZhFs7mN63H7/DVVwC
+ tXdjFU1nMfgCEdlatDqeJGhM+T+TginkfcV0DrGvjy3Zvf8fPOVQqE526aiFIa/z0hfa
+ kfIxe0sCW5npY29R3R5JJht+RqSjgtRAPY0okJq5vu3anQjNVkoAkxp80KxmptmtScpM
+ /FY8jF/DqOPI2Z6CdEeeNj+1NJ2pL15bAjklHueEMVeN7COJVZP0O6sibkO3i9f2STyd
+ e2wA==
+X-Gm-Message-State: AOJu0YwzAfdwnInL8Znev3ZIc6xUgnVCSMwf/e2O7bhkxZRFOTVhtniZ
+ xCuasveQjXv0W6TnLZohDxeiH6apXKnSEZYFgB0=
+X-Google-Smtp-Source: AGHT+IFN4RlXMXFCjJ0HRQoWsugx0gr+3kaPxTwYIKYUXrUBxFaiPXyLOaKhpp0Wd9/Fon9yPg5dNw==
+X-Received: by 2002:a05:6e02:1c43:b0:349:501:129f with SMTP id
+ d3-20020a056e021c4300b003490501129fmr1547357ilg.2.1692318449643; 
+ Thu, 17 Aug 2023 17:27:29 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.27
+ i14-20020a056e02054e00b0034bad471d1fsm190376ils.3.2023.08.17.17.27.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Aug 2023 17:27:27 -0700 (PDT)
+ Thu, 17 Aug 2023 17:27:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 18/20] x86: doc: Update summaries and add links
-Date: Thu, 17 Aug 2023 18:26:57 -0600
-Message-ID: <20230818002706.853550-19-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Coreboot ML <coreboot@coreboot.org>
+Subject: [PATCH v2 20/20] x86: doc: coreboot: Mention 64-bit Linux distros
+Date: Thu, 17 Aug 2023 18:26:59 -0600
+Message-ID: <20230818002706.853550-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230818002706.853550-1-sjg@chromium.org>
 References: <20230818002706.853550-1-sjg@chromium.org>
@@ -88,8 +88,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refresh the summary information so it is more up-to-date. Add links to
-the coreboot and slimbootloader docs.
+Add a little more detail as to why coreboot64 is preferred for booting
+Linux distros.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -97,56 +97,22 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 Changes in v2:
 - Add new patch
 
- doc/arch/x86/x86.rst | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+ doc/board/coreboot/coreboot.rst | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/doc/arch/x86/x86.rst b/doc/arch/x86/x86.rst
-index ef6970b88a59..e75b5a73ffc0 100644
---- a/doc/arch/x86/x86.rst
-+++ b/doc/arch/x86/x86.rst
-@@ -11,9 +11,9 @@ including supported boards, build instructions, todo list, etc.
- Status
- ------
- U-Boot supports running as a `coreboot`_ payload on x86. So far only Link
--(Chromebook Pixel) and `QEMU`_ x86 targets have been tested, but it should
--work with minimal adjustments on other x86 boards since coreboot deals with
--most of the low-level details.
-+(Chromebook Pixel), Brya (Alder Lake Chromebook) and `QEMU`_ x86 targets have
-+been tested, but it should work with minimal adjustments on other x86 boards
-+since coreboot deals with most of the low-level details.
+diff --git a/doc/board/coreboot/coreboot.rst b/doc/board/coreboot/coreboot.rst
+index 88437c27740e..a32c3a864f90 100644
+--- a/doc/board/coreboot/coreboot.rst
++++ b/doc/board/coreboot/coreboot.rst
+@@ -82,6 +82,8 @@ build in `$CBDIR`::
+       -device ahci,id=ahci \
+       -device ide-hd,drive=disk,bus=ahci.0 \
  
- U-Boot is a main bootloader on Intel Edison board.
++This allows booting and installing various distros, many of which are
++64-bit-only, so cannot work with the 32-bit 'coreboot' build.
  
-@@ -31,12 +31,14 @@ are supported:
-    - Link (Chromebook Pixel)
-    - Minnowboard MAX
-    - Samus (Chromebook Pixel 2015)
-+   - Coral (Apollo Lake Chromebooks circa 2017)
-    - QEMU x86 (32-bit & 64-bit)
- 
- As for loading an OS, U-Boot supports directly booting a 32-bit or 64-bit
- Linux kernel as part of a FIT image. It also supports a compressed zImage.
- U-Boot supports loading an x86 VxWorks kernel. Please check README.vxworks
--for more details.
-+for more details. Finally, U-Boot can boot Linux distributions with a UEFI
-+interface.
- 
- Build Instructions for U-Boot as BIOS replacement (bare mode)
- -------------------------------------------------------------
-@@ -700,9 +702,10 @@ for details of EFI support in U-Boot.
- 
- Chain-loading
- -------------
--U-Boot can be chain-loaded from another bootloader, such as coreboot or
--Slim Bootloader. Typically this is done by building for targets 'coreboot' or
--'slimbootloader'.
-+U-Boot can be chain-loaded from another bootloader, such as
-+:doc:`../../board/coreboot/index` coreboot or
-+:doc:`../../board/intel/slimbootloader`. Typically this is done by building for
-+targets 'coreboot' or 'slimbootloader'.
- 
- For example, at present we have a 'coreboot' target but this runs very
- different code from the bare-metal targets, such as coral. There is very little
+ CBFS access
+ -----------
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
