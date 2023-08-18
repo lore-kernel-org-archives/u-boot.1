@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABEC2EE4982
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 17:40:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E398EE4987
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 17:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E17A86E9A;
-	Fri, 18 Aug 2023 19:40:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 64BB986DBD;
+	Fri, 18 Aug 2023 19:49:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kxGaOMsy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NTNPvAXz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDBE686E9C; Fri, 18 Aug 2023 19:40:34 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id EB5AC86EB9; Fri, 18 Aug 2023 19:49:37 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C38086E52
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 19:40:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 368F08082A
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 19:49:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6887ccba675so997086b3a.3
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 10:40:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-58c656824c1so12047817b3.1
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 10:49:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692380430; x=1692985230;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=tBHpOWId06CW8tvaYdewDHgVi2FR3qVK7sLLRbrZ5FE=;
- b=kxGaOMsy6rF+Mx+1sdF3QjT5Rp4irhOr4vtroNWKx8MOqIVZ8fKiFdyzYOAa8yXiIw
- NQRDq/+Ul0Ls9Jh10AGZInWBeB7t3w2/lkE1DyDOyKYd/KV2ywLFz5yOmT/XN1RNqZfy
- TJdczpiW8hQrPX58fQiM0re8QfTBU8cRExXQDM+NhCqItLiyMC7bSeP+f05fpsBu9Q0z
- 5S2diV0YjeC4w/kg+cqvjYNbnbqAZAw0dMOb9SNqSRv0DcNBZbKmpatrrmNzcJNoUO+G
- RtGWWVUpOoAAGgTz/x3xG4CQNGTdR6/dEW5OnKKDTxbYhUyCN7rrtbZE+wU6o96uRMFY
- OJhA==
+ d=konsulko.com; s=google; t=1692380974; x=1692985774;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=itWFXWQYxIccvypjTz60DBtKFGbNquQiH0WYBU6aUjU=;
+ b=NTNPvAXzlOUUYHaFa06jxZdY6O17FWV0kvHBWQMg10nYHHxX8lO8nJEBEr7x6JVZEF
+ n2ZhmmU629X4k5CXrpAfhR2gxs8lD8x/msghuL2VJ6NWrC/QwJLVFaG/PuUUFBtA8LNN
+ lAzmpKV2ZLsgAj4YNh4K70iL/B25LK47pcYJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692380430; x=1692985230;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tBHpOWId06CW8tvaYdewDHgVi2FR3qVK7sLLRbrZ5FE=;
- b=gv2mZLGyFnLCbjZ5fvNVWaO79aKgkDF46yyhVnkcVq7hFM60GIjuJWjtF5GKg21kGa
- kjPdo43FGlMAbDWJwL7JzH87chbPdhPmxVky2BrCOSuY/VTU6tPrlxhUm/o2NTtQknvl
- sDxGqektSDMvibCeR++VYEWji0zBnxaM7iFP1z7+DTgpNL2Tj8GOg5aqHdgWNWOmC78a
- 4MijUNzk4sIOqpaHzAQn+WgNjV57Gq2XHZ5py3Q5FLrdTarsIP1Zy+anBlxQMkc/AimM
- 9E76+9SLbvIglvjPHf3NJjyDpyR5YtBxFFSQE2+VO/SL6Ph67L+EGKmp2M7z97WHiy/a
- FGLw==
-X-Gm-Message-State: AOJu0Yy3oO6ZotP0F9ahE/GYBNO79Nrnb/PKLxiOYRes9kL8GIRSLiku
- Lwn7sr9U9OQm8v68RXaFN+w=
-X-Google-Smtp-Source: AGHT+IEmnsSOh4uOrhxXGaf5QEGyDhlJUv5bRr/VUi2LFe7inOF+NlItXWDuzNLJWC26L9b4xsM0yA==
-X-Received: by 2002:a05:6a20:297:b0:12c:e745:78b3 with SMTP id
- 23-20020a056a20029700b0012ce74578b3mr3421649pza.62.1692380430380; 
- Fri, 18 Aug 2023 10:40:30 -0700 (PDT)
-Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
- [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
- u20-20020aa78494000000b00688431379f6sm1786739pfn.115.2023.08.18.10.40.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Aug 2023 10:40:29 -0700 (PDT)
-Message-ID: <ba7bf86f-3f4d-036a-9531-72a97d741f91@gmail.com>
-Date: Fri, 18 Aug 2023 10:40:28 -0700
+ d=1e100.net; s=20221208; t=1692380974; x=1692985774;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=itWFXWQYxIccvypjTz60DBtKFGbNquQiH0WYBU6aUjU=;
+ b=bK+c67JRuUL/miKjLSULP32FDyto3vFOTLGL2a6dlkRxsHDbz9tJiEKnEsbStA46jL
+ I4XahM/AHVXGu+M/S7YkoQdZzKvelkut/Wc+y5GQlxfoRe718igBeKDUCE6cAyC3MXck
+ FHECr8jfR/TiI1YqM280rXGTgnL9peE9ZyPSKj6BCS9dQHl42LfA+9tT0hqq3c9xxy48
+ HrQ+s7N1BcfSDswjuKjE9h/Nwn6FH+cOcwaJub0BDU72XrH6L+4x5JBMwFn4okCK1vPA
+ UO3/qpeBDpqVyjPRkAC3lhlaiIItTVbwrdTfeDnKN7RpCxmdySiDHS6O1pD+GmUmoLTB
+ i2Ew==
+X-Gm-Message-State: AOJu0YwsZUggGp8QglC6Wl5I+fgy+8ZbDeP6nzHkm+ZRfKyxcDkw5wW+
+ TIN20bw5LvXQB983yztsRVGKHA==
+X-Google-Smtp-Source: AGHT+IFnSHHKlhMJ5DKTzExhq9nYNw5/LdhOwmEHZfOEMEnACk8m9G/g+QrFDa+ZewTu+NMCIK9ylg==
+X-Received: by 2002:a0d:ffc5:0:b0:57a:40aa:3fe4 with SMTP id
+ p188-20020a0dffc5000000b0057a40aa3fe4mr3010663ywf.22.1692380973907; 
+ Fri, 18 Aug 2023 10:49:33 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-38f7-b1b8-9b5e-5709.res6.spectrum.com.
+ [2603:6081:7b00:6400:38f7:b1b8:9b5e:5709])
+ by smtp.gmail.com with ESMTPSA id
+ q62-20020a815c41000000b0057736c436f1sm618097ywb.141.2023.08.18.10.49.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Aug 2023 10:49:33 -0700 (PDT)
+Date: Fri, 18 Aug 2023 13:49:31 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sean Anderson <sean.anderson@seco.com>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>
+Subject: Re: [PATCH] arm: Use builtins for ffs/fls
+Message-ID: <20230818174931.GC1515023@bill-the-cat>
+References: <20230731212734.7256-1-sean.anderson@seco.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH v2 1/5] sunxi: psci: clean away preprocessor macros
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
- Maksim Kiselev <bigunclemax@gmail.com>
-References: <20230816173420.83232-1-CFSworks@gmail.com>
- <20230816173420.83232-2-CFSworks@gmail.com>
- <20230818151103.3fe5a32e@donnerap.manchester.arm.com>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <20230818151103.3fe5a32e@donnerap.manchester.arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GE4EKprh8VkLEpNr"
+Content-Disposition: inline
+In-Reply-To: <20230731212734.7256-1-sean.anderson@seco.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,29 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/18/23 07:11, Andre Przywara wrote:
 
-Hi Andre,
+--GE4EKprh8VkLEpNr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> The resulting object file is different (8 byte larger,
-> even), so it's hard to prove
+On Mon, Jul 31, 2023 at 05:27:33PM -0400, Sean Anderson wrote:
 
-I'm no stranger to reading object code. Since the output should be 
-identical in principle, I'll spend a little bit of time today seeing if 
-I can identify what's changing. If it's easy enough, I'd like to adjust 
-my patch so that the optimizer does produce the same output. (Keep in 
-mind I'm on Clang, though. If Clang already gives the same output for 
-both, I'll just report back to use that when comparing.)
+> Since ARMv5, the clz instruction allows for efficient implementation of
+> ffs/fls with builtins. Until ARMv7 (with Thumb-2), this instruction is
+> only available in ARM mode. LTO makes it difficult to force specific
+> functions to be in ARM mode, as it is effectively a form of very
+> aggressive inlining. To work around this, fls/ffs are implemented in
+> assembly for ARMv5 and ARMv6 when compiling U-Boot in Thumb mode.
+> Overall, this saves around 75 bytes per call.
+>=20
+> This code is synced with v5.15 of the Linux kernel.
+>=20
+> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
->> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> 
-> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+Applied to u-boot/next, thanks!
 
-Thank you!
+--=20
+Tom
 
-> 
-> Cheers,
-> Andre
+--GE4EKprh8VkLEpNr
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Likewise,
-Sam
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTfryYACgkQFHw5/5Y0
+tywdVgv9FAmQoSVee1UfhUKfXsHlTgu1zhVyezNQL5+Nr+K4tfjv5A0HhcxymsWf
+ju7MtsHtaPcIuusB+0Cmi+P44lSSaXx03/0S1EwzRj5nrZujwzvhiF9G5UAaS4ru
+ELJYgencKZZN0BMmv8/I53X3QQ9zOqQW93bVrDnm53o4S3YTagylf/Jjg3XEOPMa
+4gk52++ZBGiZ5CoBg61p1RxRFBIWL5pMZImqNaZvseVLQXeYMrLGOJ48nsOaH/Gy
+D5yonV8QK6BWVPuU8k0/QQEQeoLhXkSkdj+c5x5bW3qad8PvZU4UxRoaxAnumDDL
+QMlVWrRa2HwR3vuvhQ/GpbuE+o+TfowOPjyLqfBEZzKVYRi99m9UYlWE2MRD0/RC
+HKzLHzZm55aWTdCz/N5ylxupY478k3Sg7CHSSZWjIaOYDJB8jNuPIrNCb7VUk1YJ
+psA3GdinxoAZsYNt9QwJqXNmP/H8M5f8/Z/I0KUmlre71/awriofkbII385wSeQG
+Ka6I9JPQ
+=BFQR
+-----END PGP SIGNATURE-----
+
+--GE4EKprh8VkLEpNr--
