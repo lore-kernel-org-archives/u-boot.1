@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23FD8C71132
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 01:35:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06FB1C001DE
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 03:10:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79ACA86C26;
-	Fri, 18 Aug 2023 03:35:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 117BD86C23;
+	Fri, 18 Aug 2023 05:10:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rHwjcLv5";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h143WD30";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 992B286C27; Fri, 18 Aug 2023 03:35:19 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AE9E686C3E; Fri, 18 Aug 2023 05:10:09 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 062C286C23
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 03:35:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7BD186BFF
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 05:10:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1692322515; x=1692927315; i=xypron.glpk@gmx.de;
- bh=PMCAq0hGumekhwcw/Wp1ITDlC5nPGqBDoTNAr9uZy2c=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=rHwjcLv5Flylryga0c0olVdRi7hYa3mwRGyV2P5BLX5FeGgJR0/zrJtWhEczgaX1rNHyXtt
- QFpebcQ5HH0WEebkD2/kmzcA23KJkELaEaWyYgkjJDLzUNScy9i4G7ylnRKt/9tCCB5pNZCAR
- zWGGgYlBscnD3+JiW5wvZtA3vbcuzklvyK7F2/HWb265zdROu9xqJJq9EW+ghxA++dRrJVW1r
- rHCfxxbiEO/T5hNP/DBluLdZuFyT79WpHMbNzFACOdPEgI5Jamef796XsPi6AGrCTg9wvpdMS
- E3v+XccUP/kTMaEOM22wAX/XRN0XDjuvVgBmZRqQ3ngnyA96qHaw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([62.143.244.162]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MvK4Z-1pg5HW2bDN-00rH8i; Fri, 18
- Aug 2023 03:35:15 +0200
-Date: Fri, 18 Aug 2023 03:35:18 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_11/20=5D_efi=3A_x86=3A_Correct_?=
- =?US-ASCII?Q?the_condition_for_installing_ACPI_tables?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230818002706.853550-12-sjg@chromium.org>
-References: <20230818002706.853550-1-sjg@chromium.org>
- <20230818002706.853550-12-sjg@chromium.org>
-Message-ID: <66F95452-EFB7-4A8B-AE7A-9533CE12C0CA@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-4ff88239785so595181e87.0
+ for <u-boot@lists.denx.de>; Thu, 17 Aug 2023 20:10:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692328206; x=1692933006;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XYi0r9NI13Z/Itq51fHDW0FulEMzvFFZVNNWRo2U6aI=;
+ b=h143WD308g+MavUR+orBRTSpEpCaH4fe+Y84K9jphXr8m7vRAEeWxWMG7E58gyckVK
+ xApvzfMjNjpYzY1CBpEBkZ14ZgNfwh55+EpYtPkqIGxZENd7oUo1hnlTOsGXWJym2e7m
+ 0c9vKLaVSf+IlJu3vvJjd0+OKWHxScty1GUss=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692328206; x=1692933006;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XYi0r9NI13Z/Itq51fHDW0FulEMzvFFZVNNWRo2U6aI=;
+ b=htjxNh6jrHxMoGo7h2NqZiezzDAELf6moJLYbkQg/KysJXHXNWUD4UnJQwL4wmYHlx
+ huaSSfj1nMMxedvY4OGZ8S9VSheK7o5skRM4la/zMokysaH9oQ0TFWy7/hbIrRsraEd8
+ 98T1JSUhh4shzSyk6rHa/psRnQL8/MNWXAtHU5eilWiz0PDj/GyQacR8KPGGhWelfemh
+ UDO7ULXfBweGQWis4uqYLTHgI7tfqKXIMxP3znqs1PWd8Kk6Takcn2yKm4l4+eHwI/BU
+ yMf9Mw4AjakBn5hCTtwos/QZWBRGQQ3baUzKRJfQfrCupc8nUqQfos2Tz8ImuXZ5/+Oa
+ PkGw==
+X-Gm-Message-State: AOJu0Yz5OfPnnhkN5QSqlQXNcoNzZik0rn84tD7n+8VgEnRVggOJPOXk
+ 8MrRVKVTbR/cKf4ZDkc+U5xPC/DiYETgbqLIw7xjzg==
+X-Google-Smtp-Source: AGHT+IFWQrxLjsn+D3/omxsouKlZ3RjT9Ttvys5KAcN8hv5EwIU0lCx26PMFT9ZosMoOwANt4koB1i33hlVNBcaLDvg=
+X-Received: by 2002:a05:6512:3d0f:b0:4ff:793f:fbf8 with SMTP id
+ d15-20020a0565123d0f00b004ff793ffbf8mr845138lfv.51.1692328205728; Thu, 17 Aug
+ 2023 20:10:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:pDJskm0gwvUVJjMMMw56CYw4G5NmfHx+mOgtdu1R5UrB67AKT9W
- KtnDz1MUxe/Mf6tlpJnrIYjcT2gEg2jhEUG0F0KOzlpOB8P/JhsseACHVr5Texhdo+PeNu5
- OrU+VzN/undaEyGI4o2ECE8ByD9gIMx2L15krMQC/QBRqZXk+d0eGHQ/gnqSgENTKY4/gS+
- mVa/rlDO6sU3a6SY4cPHg==
-UI-OutboundReport: notjunk:1;M01:P0:1O6Xigvns5o=;c7pGeN68KNPh2dN7G2tP8jjZdT+
- 1XGGHNr3otxUb6PbE1w/CVLIJELyuZd27x7BWeOhQVAePEl/4i32tUYylxyY2BsrutCMQVpVu
- ts4Y7VomAtWYZwOy0gFfgI6M7rOC8RTOSHLXHDMJ/R2X60MA97q4r1Eq4wpuMjbKbNqEMiixg
- BQgPa0nnlxRVdLCyl7xXlhUJ+jS/XkyIkOeGT/Pyx3iykAFOzU7zKUQuT+stkYOCuFdIjBNlk
- G4qk3JPukcafmsegUB7KR7QZz4yX1byX3pYUdnq486+KtZzmOKPA65GlHjr7XwLQNzxwkq+Ni
- 6f+Dd/jL1r6Phu2zUfUglfprJSKOWJn59aPTYmZ00wu/VK1ZGXPpZDFaveEGB68yLM9h2zP8M
- XGfEvuriK7LRyra1Us3c6B5z794jAvSzd/THSBlCzVrvOLrjkwYQi2ApTuY+h4mXlNFleLfpR
- 3x7WAs1nxrXJJzDA7nYOOQhwgRfRMmDaGB2prGQM9dBbeCnhi8cj+Z4/Myss3k9KnaBXeubKd
- DcJgQ+Yt/2b+tUtj9YNHsu+6I2Q2LK8v1+4PsO7HkNV+0w5jPDIL8LyMtjHFE3i1WIcsxPfuu
- 4ERUEZaxnuE35PCPy2VpaCqhU4DjVmKi9Eo7nNppRP61bVuLqIDxQZteU+ubfLfQzurMIE4dz
- S3ZeRmzkqYYA//FfzKOQwa0DaG2IgGh/VU+FijCBRCpKLDmlRVDpk4o0R01AFoArnwZmZ7OPn
- PK8CkiQNqEpqrUSrYm86NYiz6edHJWZqGJg411q/W2vt9pgVK28Ugi4yWajLx5pMzKL1DUbsd
- ybYwGobsXg+kkLe0U5nGKdni2S/5Sm3GifxkQJg8eW9J8bHmK/L3FX/gXo52E+8KTkIamZeB7
- dAEvs6PLaVbnD9st18qjawZ0PHRlTju74YHzzuiabQCe2jVdNN2CR2gV9dDXpgvrf5R9aZ0rl
- JEamZXzSsB8HXBzqlL1w+3On8Js=
+References: <20230804233357.65214-1-seanedmond@linux.microsoft.com>
+ <20230804233357.65214-2-seanedmond@linux.microsoft.com>
+ <CAPnjgZ2fYDcoYw3XOS4roL3yWVrgyVwKBNS9KEXOh_NHOtPhCQ@mail.gmail.com>
+ <2e6afa29-53a1-38d4-d376-045669b931cb@linux.microsoft.com>
+ <CAPnjgZ1vZKO7OFwnmQaOhm0ivxYC1BzYEv0tnj8asvDchEb-uw@mail.gmail.com>
+ <a0e2fd89-accf-78b5-2a9a-4a19b72b976e@linux.microsoft.com>
+ <CAPnjgZ33GKr1QosmeFUMPmrFYXE03WgvuHzYrFb2U7se2-6eaw@mail.gmail.com>
+ <445eea7b-c9e4-b475-82f5-541d4d7b8fbc@linux.microsoft.com>
+ <CAPnjgZ2np6-bo8ZTPUcmbB06N-PKeQ9U5ZG8Mw=nk0pw-barZw@mail.gmail.com>
+ <9dbad905-7a72-f7e8-d473-2140a221f102@linux.microsoft.com>
+ <322e6148-3283-f5dd-4c51-7927b5856b7e@linux.microsoft.com>
+In-Reply-To: <322e6148-3283-f5dd-4c51-7927b5856b7e@linux.microsoft.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 17 Aug 2023 21:09:56 -0600
+Message-ID: <CAPnjgZ1GMZppabF9e8x=B6R_2zgJR2p_1R85r6=J5ww12=ttCg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] fdt: common API to populate kaslr seed
+To: Sean Edmond <seanedmond@linux.microsoft.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Dhananjay Phadke <dphadke@linux.microsoft.com>, 
+ Chris Morgan <macromorgan@hotmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,71 +93,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sean,
 
-
-Am 18=2E August 2023 02:26:50 MESZ schrieb Simon Glass <sjg@chromium=2Eorg=
->:
->It is not always the case that U-Boot builds the ACPI tables itself=2E Fo=
-r
->example, when booting from coreboot, the ACPI tables are built by
->coreboot=2E
+On Thu, 17 Aug 2023 at 10:03, Sean Edmond <seanedmond@linux.microsoft.com>
+wrote:
 >
->Correct the Makefile condition so that U-Boot can pass on tables built
->by a previous firmware stage=2E
 >
->Tidy up the installation-condition code while we are here=2E
+> On 2023-08-15 10:46 a.m., Sean Edmond wrote:
 >
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
 >
->Changes in v2:
->- Add new patch
+> On 2023-08-15 7:44 a.m., Simon Glass wrote:
 >
-> lib/efi_loader/Makefile    |  2 +-
-> lib/efi_loader/efi_setup=2Ec | 10 +++++-----
-> 2 files changed, 6 insertions(+), 6 deletions(-)
+> Hi Sean,
 >
->diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
->index 1a8c8d7cab5c=2E=2E0eb748ff1a59 100644
->--- a/lib/efi_loader/Makefile
->+++ b/lib/efi_loader/Makefile
->@@ -78,7 +78,7 @@ obj-$(CONFIG_EFI_ESRT) +=3D efi_esrt=2Eo
-> obj-$(CONFIG_VIDEO) +=3D efi_gop=2Eo
-> obj-$(CONFIG_BLK) +=3D efi_disk=2Eo
-> obj-$(CONFIG_NETDEVICES) +=3D efi_net=2Eo
->-obj-$(CONFIG_GENERATE_ACPI_TABLE) +=3D efi_acpi=2Eo
->+obj-$(CONFIG_ACPI) +=3D efi_acpi=2Eo
-> obj-$(CONFIG_GENERATE_SMBIOS_TABLE) +=3D efi_smbios=2Eo
-> obj-$(CONFIG_EFI_RNG_PROTOCOL) +=3D efi_rng=2Eo
-> obj-$(CONFIG_EFI_TCG2_PROTOCOL) +=3D efi_tcg2=2Eo
->diff --git a/lib/efi_loader/efi_setup=2Ec b/lib/efi_loader/efi_setup=2Ec
->index 58d4e1340233=2E=2Ead719afd6328 100644
->--- a/lib/efi_loader/efi_setup=2Ec
->+++ b/lib/efi_loader/efi_setup=2Ec
->@@ -321,11 +321,11 @@ efi_status_t efi_init_obj_list(void)
-> 	if (ret !=3D EFI_SUCCESS)
-> 		goto out;
-> #endif
->-#ifdef CONFIG_GENERATE_ACPI_TABLE
->-	ret =3D efi_acpi_register();
->-	if (ret !=3D EFI_SUCCESS)
->-		goto out;
->-#endif
->+	if (IS_ENABLED(CONFIG_ACPI)) {
->+		ret =3D efi_acpi_register();
->+		if (ret !=3D EFI_SUCCESS)
->+			goto out;
->+	}
-> #ifdef CONFIG_GENERATE_SMBIOS_TABLE
+> On Mon, 14 Aug 2023 at 13:12, Sean Edmond
+> <seanedmond@linux.microsoft.com> wrote:
+>
+>
+> On 2023-08-12 6:09 a.m., Simon Glass wrote:
+>
+> Hi Sean,
+>
+> On Fri, 11 Aug 2023 at 11:14, Sean Edmond <seanedmond@linux.microsoft.com>
+> wrote:
+>
+> On 2023-08-09 6:49 p.m., Simon Glass wrote:
+>
+> Hi Sean,
+>
+> On Wed, 9 Aug 2023 at 16:35, Sean Edmond <seanedmond@linux.microsoft.com>
+>
+> wrote:
+>
+> On 2023-08-08 7:03 p.m., Simon Glass wrote:
+>
+> Hi,
+>
+> On Fri, 4 Aug 2023 at 17:34, <seanedmond@linux.microsoft.com> wrote:
+>
+> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+>
+> fdt_fixup_kaslr_seed() will update given FDT with random seed value.
+> Source for random seed can be TPM or RNG driver in u-boot or sec
+> firmware (ARM).
+>
+> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
+> ---
+>      arch/arm/cpu/armv8/sec_firmware.c | 32
+>
+> +++++++------------------------
+>
+>      common/fdt_support.c              | 31
+>
+> ++++++++++++++++++++++++++++++
+>
+>      include/fdt_support.h             |  3 +++
+>      3 files changed, 41 insertions(+), 25 deletions(-)
+>
+> We need to find a way to use the ofnode API here.
+>
+> diff --git a/arch/arm/cpu/armv8/sec_firmware.c
+>
+> b/arch/arm/cpu/armv8/sec_firmware.c
+>
+> index c0e8726346..84ba49924e 100644
+> --- a/arch/arm/cpu/armv8/sec_firmware.c
+> +++ b/arch/arm/cpu/armv8/sec_firmware.c
+> @@ -411,46 +411,28 @@ int sec_firmware_init(const void
+>
+> *sec_firmware_img,
+>
+>      /*
+>       * fdt_fix_kaslr - Add kalsr-seed node in Device tree
+>       * @fdt:               Device tree
+> - * @eret:              0 in case of error, 1 for success
+> + * @eret:              0 for success
+>       */
+>      int fdt_fixup_kaslr(void *fdt)
+>
+> You could pass an oftree to this function, e.g. obtained with:
+>
+> oftree_from_fdt(fdt)
+>
+> The common API I added is fdt_fixup_kaslr_seed(), which was added to
+> "common/fdt_support.c".
+>
+> There are 3 callers:
+> sec_firmware_init()->fdt_fixup_kaslr_seed()
+> do_kaslr_seed()->fdt_fixup_kaslr_seed()
+> image_setup_libfdt()->fdt_tpm_kaslr_seed->fdt_fixup_kaslr_seed()
+>
+> I think the ask is to create a common API that uses the ofnode API.
+>
+> So,
+>
+> instead of fdt_fixup_kaslr_seed() I can create
+> ofnode_fixup_kaslr_seed()?  Where should it live?
+>
+> If you like you could add common/ofnode_support.c ?
+>
+> But it is OK to have it in the same file, I think.
+>
+> Are you also wanting
+> the callers (eg. fdt_tpm_kaslr_seed, fdt_fixup_kaslr) to take oftree as
+> input too?
+>
+> So far as you can go, yes. Also you may want to pass an ofnode (the
+> root node) so that things can deal with adding their stuff to any
+> node.
+>
+> Regards,
+> Simon
+>
+> I re-worked the API to use the ofnode API and tested it on our board.  I
+> was required to explicitly enable CONFIG_OFNODE_MULTI_TREE in order for
+> it to work.
+>
+> I have concerns this will create a breaking change for users of the
+> kaslr fdt touch up.  In our case, if CONFIG_OFNODE_MULTI_TREE isn't set,
+> the control FDT gets touched up, not the kernel FDT as required.
+> Everything runs to completion, but "/proc/device-tree/chosen/kaslr-seed"
+> isn't present after boot.
+>
+> Am I missing something?  Perhaps there's a way to modify the default
+> value for CONFIG_OFNODE_MULTI_TREE to ensure this works out-of-the-box?
+>
+> Yes, perhaps we should enable this when fixups are used? Is there a way to
+> tell?
+>
+> I don't think there's a way to tell unfortunately.  Fixups are always
+> called if OF_LIBFDT is enabled, and if an FDT is found during bootm.
+>
+> I'm having trouble understanding the intention of the current default
+> for OFNODE_MULTI_TREE:
+>       default y if EVENT && !DM_DEV_READ_INLINE && !DM_INLINE_OFNODE
+> Could we simplify to this?
+>           default y if !OF_LIVE
+>
+> I don't think it will build if inlining is used, but I can't remember...
+>
+> I wasn't able to break this by turning off DM_DEV_READ_INLINE, and
+enabling OFNODE_MULTI_TREE/SPL_DM_INLINE_OFNODE/TPL_DM_INLINE_OFNODE.
+Perhaps things have changes since this was created.
+>
+> The EVENT thing is because there is an of-fixup event, which was the
+> original thing using ofnode fixups.
+>
+> I wonder what sort of size increment this will create with !OF_LIVE ?
+>
+>
+> With default (OFNODE_MULTI_TREE is not set):
+>
+> textdatabssdechex filename
+>
+> 9380135536846752 1040133fdf05 u-boot/u-boot/u-boot
+>
+>
+> With !OF_LIVE (OFNODE_MULTI_TREE is set with OFNODE_MULTI_TREE_MAX=4):
+>
+> seanedmond@ovlvm106:~/code/QEMU/qemu_uboot$ sizeu-boot/u-boot/u-boot
+>
+> textdatabssdechex filename
+>
+> 9390165536846752 1041136fe2f0 u-boot/u-boot/u-boot
+>
+>
+> Sorry about the formatting... let's try that again.
+>
+> With default (OFNODE_MULTI_TREE is not set):
+>
+>    text: 938013
+>    data:  55368
+>    bss: 46752
+>    dec:  1040133
+>    hex: fdf05
+>
+> With !OF_LIVE (OFNODE_MULTI_TREE is set with OFNODE_MULTI_TREE_MAX=4):
+>
+>    text: 939016
+>    data: 55368
+>    bss: 46752
+>    dec: 1041136
+>    hex: fe2f0
+>
+>
+>
+> Also, we should make it return an error when attempting to use a tree
+> without that option enabled. I would expect oftree_ensure() to provide
+that?
+>
+> I'll add a check.
+>
+> OK thanks.
 
-Shouldn't this become CONFIG_SMBIOS?
+Something odd about this email, but anyway, please consider whether (with
+your changes) there is any point in still having the inline options. If
+not, we should remove them in the same series, but need to explain the
+code-size cost.
 
-It would help my review work if you would stop suppressing half of your pa=
-tch series when sending mails=2E
-
-Best regards
-
-Heinrich=20
-
-> 	ret =3D efi_smbios_register();
-> 	if (ret !=3D EFI_SUCCESS)
+Regards,
+Simon
