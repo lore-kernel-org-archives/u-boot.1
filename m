@@ -4,69 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6322C71156
-	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 15:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A266FC71155
+	for <u-boot@archiver.kernel.org>; Fri, 18 Aug 2023 15:00:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FDDC86AC2;
-	Fri, 18 Aug 2023 17:00:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6AC4386EA8;
+	Fri, 18 Aug 2023 17:00:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TVOHuc3n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RvXxdTOM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A146D86AC2; Fri, 18 Aug 2023 17:00:09 +0200 (CEST)
+ id 20D7A86EA4; Fri, 18 Aug 2023 17:00:14 +0200 (CEST)
 Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
  [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B02FF8522C
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 17:00:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 781B386E97
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 17:00:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-4ff9b389677so1484387e87.3
- for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 08:00:03 -0700 (PDT)
+ 2adb3069b0e04-4ff91f2d7e2so1371188e87.0
+ for <u-boot@lists.denx.de>; Fri, 18 Aug 2023 08:00:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692370802; x=1692975602;
+ d=chromium.org; s=google; t=1692370811; x=1692975611;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=llsZvzD6cRnuvxnQcKZycup/elJHks9TtS96HYlYIQ0=;
- b=TVOHuc3nS2Wx+VsFLUx0qrq/rLRoKpK4snA7rB8Z9PmzmwrcYSBzANyrfPAsIwQknt
- dRRZRzCWbR8lTPZlF0xR62Ei4aa0U1i3naGcxGza+4rlS4j0uKIiE0pgVWI/kgTOXDD6
- klSp3fcm5DMjpWhPswzirIXigg4bWnv0JxyfI=
+ bh=970M0x5kanbKN0q6KOW47SSfLjOG0/UFE3z8cNj39L8=;
+ b=RvXxdTOM/V2FSTIb8lN1Bnhy01fTzNGN1QLGEPy/QskgY5G8y5b38imfk/s8gZdfSs
+ 3KTA+VjbtF1X/Z/PA04gBO8hXiHX6Ki0+ahr4CgFc0LagcLvZ8ReoJENueCvbuj8HPh9
+ wRAigxkQ4tE2TJofHFOvE+WJmV34FRWfjItCw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692370802; x=1692975602;
+ d=1e100.net; s=20221208; t=1692370811; x=1692975611;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=llsZvzD6cRnuvxnQcKZycup/elJHks9TtS96HYlYIQ0=;
- b=b89isSDfTvWjk3Lh3vXDR9IWIBGdNPTt9QGb4pgO7NS9iFHeL2V8UYWRvhwI1EsRqE
- E1b54mU71at6Il6Hk292aHyCJIuRnHLaF1b7WQ6TWStIh+o+Vb5LD558rAidA2WDsd4h
- oLVkdKha/S8ENXEevC4C7L2Geygaiv5LY5aBIeyBo1Jb4q+PENR3uFZyPeuYFLxiBJH3
- ITLTCSQugo4FagtaL1eiAhMYUWz74+Bmkd+VIuz65j5pQ0RJe+zv22RAEhTW/7XPlSAD
- kQdBOp9aXtWdffbpahybLYU4OvTc+l5Rc3y6ExXgfb4as+AU4epym2lHTtU+R0IVde7t
- AjtQ==
-X-Gm-Message-State: AOJu0YyiXUZxq224Uvj7WICEvz+2GtUP5G9DPXzUqnPB5qHd2bRhr5pi
- B6kfqJZznYTOORHHVvmzgiDCP4b429x2GXsua4zWcA==
-X-Google-Smtp-Source: AGHT+IHsh1bLojCUOomU6vuGrkxQgmqFeKkYOIjnKbvpxH7S5hTc/89W3jtTqDC2sN5WVB9mUI5R7Gh/5j1sb55EZQ4=
-X-Received: by 2002:a05:6512:2215:b0:4fb:745e:dd01 with SMTP id
- h21-20020a056512221500b004fb745edd01mr2607971lfu.45.1692370801446; Fri, 18
- Aug 2023 08:00:01 -0700 (PDT)
+ bh=970M0x5kanbKN0q6KOW47SSfLjOG0/UFE3z8cNj39L8=;
+ b=lDI/79+VcqCP6lFmgdQr+ujJhEHohJOYrF9nVIBQz3qTf0Zx8xLkEdiOercIcln1fo
+ 2ovWETtVnEgkofEoSCWYvs53cD96hMXJjPPOeiLIF/x6MJVMvro0BDD02ArzgUPXOimF
+ lOltJPtsO6zS3zi9fbe5tS6A+xhXFLwjy5g8iQH7feVBy3rhDXrtZCxfbnEqtAc35ROW
+ 5PcilyEw9bAVOg8yU8qcOnlwFRkXEO0wMrq337gDxx4LGpt2c97fxmGVDYozC3Ly8iXL
+ iJkxDq6UbHDjaU/jc9EvCFLgcXnE6LUkkK0qhygTR+1G2QrWNaJGxv9o83YY+NxQkg9D
+ fcOA==
+X-Gm-Message-State: AOJu0YyG3iG6R/2j1dmv3p8dAyFnFhXdl/2wKBo7vND1bEvgQP4OLkDC
+ BRdiw9DmqmTSjFWrr8bU6fDhnGuvtDHrXnJZLboHVBF3fvwl+XMboxA=
+X-Google-Smtp-Source: AGHT+IGvNyFgyFdAyNmjWU1R/H/Qj6O8j3IW4peF4TF4xQ1GKx+ch7G1JZaDwdN2RA05q3onXJ+HnfABRwnrylb1xc8=
+X-Received: by 2002:a19:520b:0:b0:4f8:766f:8dc3 with SMTP id
+ m11-20020a19520b000000b004f8766f8dc3mr1848825lfb.32.1692370807746; Fri, 18
+ Aug 2023 08:00:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ0vPwd9v+V8Pg5Bo87OELD-vokB7ZrvU3Bv5dQ_O9z6Sg@mail.gmail.com>
- <877cpusybz.fsf@meer.lwn.net>
- <CAPnjgZ3Lo4Na7YeKPFaY30bwsv_gBGapN_DXeab+k7yhCF3uww@mail.gmail.com>
- <dfac4932-7cbc-3a4e-bde7-c2048516ddf1@gmx.de>
-In-Reply-To: <dfac4932-7cbc-3a4e-bde7-c2048516ddf1@gmx.de>
+References: <20230818145413.280037-1-pbrobinson@gmail.com>
+In-Reply-To: <20230818145413.280037-1-pbrobinson@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 18 Aug 2023 08:59:50 -0600
-Message-ID: <CAPnjgZ07G=+QZU9+qT23x+aZw4VES0jNkXUTu4Axm400NF-hzQ@mail.gmail.com>
-Subject: Re: Doc style for method functions
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: linux-doc@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Jonathan Corbet <corbet@lwn.net>
+Date: Fri, 18 Aug 2023 08:59:56 -0600
+Message-ID: <CAPnjgZ3BmHmvwG47zrnZ3yYWyTPz688RF_BxCifvHksSExmf2Q@mail.gmail.com>
+Subject: Re: [PATCH] boot: Fix reference to bootmenu doc
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,63 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Thu, 17 Aug 2023 at 10:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Fri, 18 Aug 2023 at 08:54, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> On 16.08.23 19:47, Simon Glass wrote:
-> > Hi Jonathan,
-> >
-> > On Wed, 16 Aug 2023 at 11:15, Jonathan Corbet <corbet@lwn.net> wrote:
-> >>
-> >> Simon Glass <sjg@chromium.org> writes:
-> >>
-> >>> Hi Jonathan,
-> >>>
-> >>> I would like to do something like this:
-> >>>
-> >>> struct part_driver {
-> >>>     /**
-> >>>      * get_info() - Get information about a partition
-> >>>
-> >>>                ^ causes error
-> >>>
-> >>>      *
-> >>>      * @desc: Block device descriptor
-> >>>      * @part: Partition number (1 = first)
-> >>>      * @info: Returns partition information
-> >>>      */
-> >>>     int (*get_info)(struct blk_desc *desc, int part, struct
-> >>> disk_partition *info);
-> >>> ...
-> >>> };
-> >>>
-> >>> But this gives:
-> >>>
-> >>> scripts/kernel-doc:292:
-> >>>     print STDERR "Incorrect use of kernel-doc format: $_";
-> >>>
-> >>> Without the brackets on get_info() it works OK. What is the purpose of
-> >>> that check, please?
-> >>
-> >> That's how the kerneldoc syntax was defined, well before my time as the
-> >> maintainer.  This could be relaxed, I guess, but one would have to look
-> >> at the parsing code to be sure that the right thing happens all the way
-> >> through the process.  I'm not entirely sure it's worth it...
-> >
-> > I see. It is inconsistent, since we use () after normal functions.
-> >
-> > I think I can fix it just by removing that check.
-> >
-> > Regards,
-> > Simon
+> The Kconfig references a readme file that's moved and
+> converted to rst so update the reference.
 >
-> If the structure element in not a function pointer, we probably still
-> want to forbid adding parentheses. Just dropping the check might not be
-> the solution.
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> ---
+>  boot/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Is that the purpose of this check? Is it likely that someone would add
-a bracket immediately after a variable?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
+
+>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index e8fb03b8016..86c2787dc53 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -1439,7 +1439,7 @@ config AUTOBOOT_MENU_SHOW
+>           This enables the boot menu, controlled by environment variables
+>           defined by the board. The menu starts after running the 'preboot'
+>           environmnent variable (if enabled) and before handling the boot delay.
+> -         See README.bootmenu for more details.
+> +         See doc/usage/cmd/bootmenu.rst for more details.
+>
+>  config BOOTMENU_DISABLE_UBOOT_CONSOLE
+>         bool "Disallow bootmenu to enter the U-Boot console"
+> --
+> 2.41.0
+>
