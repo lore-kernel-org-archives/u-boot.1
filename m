@@ -4,68 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81947EE4981
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 07:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A679EE4993
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 11:01:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 136E7869B9;
-	Sat, 19 Aug 2023 09:00:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id E74A8868D8;
+	Sat, 19 Aug 2023 13:01:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arvanta.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uc42EGUb";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8ECB869CA; Sat, 19 Aug 2023 09:00:43 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 033C2869B4
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 09:00:41 +0200 (CEST)
+ id 77831869B0; Sat, 19 Aug 2023 13:01:56 +0200 (CEST)
+Received: from fx.arvanta.net (unknown [109.72.52.77])
+ by phobos.denx.de (Postfix) with ESMTP id E37C3867DE
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 13:01:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 715556102F;
- Sat, 19 Aug 2023 07:00:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DF34C433C8;
- Sat, 19 Aug 2023 07:00:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692428438;
- bh=FUPBxnLIUeEdD7fZXcXGK9OACN0v32QamPOaMgF6LmU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=uc42EGUbgcGplsWh/kMSHRpr7tPHEZruF2M8FEKpU9QwMm7aapWFO8GIFVuHsu/lx
- 3zwaoNwXBIF26ACi26h8wSD0TZ5KHWupGlm7MkqzodRyoHRwxJAm3QtclqbK8E8CMe
- w40Xr7u385A01PiLcZ94qcuWOktRmNdgHrtLWZDANsecNavL83wu9BgjkK8EbKpfpq
- uKpi5Buug++5KwscAX2BEJq36H0KYfFmowC66k8KM+oYY7ak7XLIvYJY7fPBGtOH2t
- sjBQbom+v9vhGugb1SuW8UmX5qXLt70nHbExTo9AWsv5qMq6WNIlCfKoVYVxDvGPc6
- pnjIUGTn9FNuw==
-Message-ID: <fc205109-fd3d-ea79-abcc-f1638115d0d3@kernel.org>
-Date: Sat, 19 Aug 2023 10:00:33 +0300
+ dmarc=none (p=none dis=none) header.from=arvanta.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mps@arvanta.net
+Received: from m1 (ab.arvanta.net [10.5.1.5])
+ by fx.arvanta.net (Postfix) with ESMTP id BA8177386;
+ Sat, 19 Aug 2023 13:01:50 +0200 (CEST)
+Date: Sat, 19 Aug 2023 13:01:49 +0200
+From: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
+To: Chanho Park <chanho61.park@samsung.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] dm: event: add EVT_DM_POST_INIT_R event type
+Message-ID: <20230819110149.GC3096@m1>
+References: <20230818051103.2427590-1-chanho61.park@samsung.com>
+ <CGME20230818052645epcas2p48c419f6e6318ddadb425749319fbc3b8@epcas2p4.samsung.com>
+ <20230818051103.2427590-2-chanho61.park@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v3 09/12] usb: cdns3: Handle otg mode as peripheral
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Peter Chen <peter.chen@kernel.org>, Pawel Laszczak <pawell@cadence.com>
-Cc: Julien Panis <jpanis@baylibre.com>, u-boot@lists.denx.de,
- tony@atomide.com, r-gunasekaran@ti.com, vigneshr@ti.com, nm@ti.com
-References: <20230706-handle-otg-as-periph-v3-0-27e24fa17345@baylibre.com>
- <20230706-handle-otg-as-periph-v3-9-27e24fa17345@baylibre.com>
- <20230814171755.GB3630934@bill-the-cat>
- <d1c121d2-35b7-5097-4a02-308541c50d29@kernel.org>
- <20230818184841.GO1515023@bill-the-cat>
- <295e1b8b-c190-c892-6586-38595e8e65eb@kernel.org>
- <cc4a93dc-aa16-006e-e184-4ccc38c86f48@denx.de>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <cc4a93dc-aa16-006e-e184-4ccc38c86f48@denx.de>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230818051103.2427590-2-chanho61.park@samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,71 +52,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Peter & Pawel.
+It works.
 
-On 19/08/2023 02:47, Marek Vasut wrote:
-> On 8/18/23 21:26, Roger Quadros wrote:
->>
->>
->> On 18/08/2023 21:48, Tom Rini wrote:
->>> On Thu, Aug 17, 2023 at 11:15:17AM +0300, Roger Quadros wrote:
->>>> Hi Tom,
->>>>
->>>> On 14/08/2023 20:17, Tom Rini wrote:
->>>>> On Thu, Jul 13, 2023 at 03:45:42PM +0200, Julien Panis wrote:
->>>>>
->>>>>> Override 'otg' to 'peripheral' mode, since 'otg' mode
->>>>>> is not yet supported by u-boot.
->>>>>>
->>>>>> Signed-off-by: Julien Panis <jpanis@baylibre.com>
->>>>>> Suggested-by: Roger Quadros <rogerq@kernel.org>
->>>>>> ---
->>>>>>   drivers/usb/cdns3/core.c | 4 ++++
->>>>>>   1 file changed, 4 insertions(+)
->>>>>>
->>>>>> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
->>>>>> index 644a9791b9c9..bd763fc593e1 100644
->>>>>> --- a/drivers/usb/cdns3/core.c
->>>>>> +++ b/drivers/usb/cdns3/core.c
->>>>>> @@ -149,6 +149,10 @@ static int cdns3_core_init_role(struct cdns3 *cdns)
->>>>>>         dr_mode = best_dr_mode;
->>>>>>   +    /* u-boot doesn't yet support OTG so limit to PERIPHERAL */
->>>>>> +    if (dr_mode == USB_DR_MODE_OTG)
->>>>>> +        dr_mode = USB_DR_MODE_PERIPHERAL;
->>>>>> +
->>>>>>   #if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
->>>>>>       if (dr_mode == USB_DR_MODE_OTG || dr_mode == USB_DR_MODE_HOST) {
->>>>>>           ret = cdns3_host_init(cdns);
->>>>>
->>>>> Julien, why don't we support otg mode here?
->>>>>
->>>>
->>>> dr_mode will never be OTG at this point as the previous if condition
->>>> would have forced it to PERIPHERAL.
->>>>
->>>> My understanding was that u-boot USB framework doesn't support OTG mode
->>>> so we force it to PERIPHERAL.
->>>
->>> Well, the first part of this series is "make unknown state be OTG" for
->>> DWC3, so we do in general (and Marek told me off-list he's used it on
->>> DWC2 as well), so it sounds like these (CDNS3, MUSB) drivers need fixing
->>> / updating.
->>>
->>
->> CDNS3 does not have an internal OTG state machine. We mostly really care
->> about role switching and not the full OTG stack. There needs to be
->> some kind of SW framework to do that in u-boot.
->>
->> Marek could you please advise what can be done here?
+On Fri, 2023-08-18 at 14:11, Chanho Park wrote:
+> This patch introduces EVT_DM_POST_INIT_R event type for handling hooks
+> after relocation.
 > 
-> As far as I can tell, MX8MM (CI HDRC), STM32MP1 (DWC2) all can do the host/peripheral switching. Why is that a problem with CDNS3 ? I am not familiar with this controller btw.
+> Fixes: 55171aedda88 ("dm: Emit the arch_cpu_init_dm() even only before relocation")
+> Suggested-by: Simon Glass <sjg at chromium.org>
+> Cc: Bin Meng <bmeng.cn at gmail.com>
+> Signed-off-by: Chanho Park <chanho61.park at samsung.com>
+Tested-by: Milan P. Stanić <mps@arvanta.net>
 
-So for MX8MM and STM32MP1, do  we support on the fly host/peripheral switching based on USB plug type?
-As we don't have interrupts, do you keep polling for ID status change?
-
-CDNS3 does support host/peripheral switching. i.e. cdsn3_hw_role_state_machine() and drd.c.
-What we are missing is the interrupt logic to map ID pin status change to role change.
-
--- 
-cheers,
--roger
+> ---
+>  drivers/core/root.c | 6 ++++--
+>  include/event.h     | 1 +
+>  2 files changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/core/root.c b/drivers/core/root.c
+> index 6775fb0b6575..79d871ab291a 100644
+> --- a/drivers/core/root.c
+> +++ b/drivers/core/root.c
+> @@ -436,8 +436,10 @@ int dm_init_and_scan(bool pre_reloc_only)
+>  			return ret;
+>  		}
+>  	}
+> -	if (CONFIG_IS_ENABLED(DM_EVENT) && !(gd->flags & GD_FLG_RELOC)) {
+> -		ret = event_notify_null(EVT_DM_POST_INIT_F);
+> +	if (CONFIG_IS_ENABLED(DM_EVENT)) {
+> +		ret = event_notify_null(gd->flags & GD_FLG_RELOC ?
+> +					EVT_DM_POST_INIT_R :
+> +					EVT_DM_POST_INIT_F);
+>  		if (ret)
+>  			return log_msg_ret("ev", ret);
+>  	}
+> diff --git a/include/event.h b/include/event.h
+> index daf44bf8a83b..bb38ba98e73b 100644
+> --- a/include/event.h
+> +++ b/include/event.h
+> @@ -24,6 +24,7 @@ enum event_t {
+>  
+>  	/* Events related to driver model */
+>  	EVT_DM_POST_INIT_F,
+> +	EVT_DM_POST_INIT_R,
+>  	EVT_DM_PRE_PROBE,
+>  	EVT_DM_POST_PROBE,
+>  	EVT_DM_PRE_REMOVE,
+> -- 
+> 2.39.2
+> 
