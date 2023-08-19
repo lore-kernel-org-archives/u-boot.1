@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B932EE49A5
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 21:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD9DEE49A6
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 21:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE27A87010;
-	Sat, 19 Aug 2023 23:23:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B0028701B;
+	Sat, 19 Aug 2023 23:23:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mx6RFN9k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jg2IvzvF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE0DD86E8E; Sat, 19 Aug 2023 23:23:26 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 00B9286ED6; Sat, 19 Aug 2023 23:23:27 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 837D586ED6
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 23:23:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4500886EE9
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 23:23:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7911dfc9824so80265839f.2
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 14:23:23 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-790fc019c62so52617639f.0
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 14:23:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692480202; x=1693085002;
+ d=chromium.org; s=google; t=1692480203; x=1693085003;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9x3uiU5Y18KO4NomZO3T5cmrnLhli0YswUsOeEnCgHI=;
- b=mx6RFN9kRMpRIzFUtkaMRS2o2FkxqIku41BKIy9MX6EoEiVQQhMOSDDqNGKy9a5TJS
- bjqfg83/oMRsunsBtKrr+j04O19R50SwfxqYU4x723syrruWjtUlH43LHPWL7l9Kh8wa
- bzlcgPpBKfUIN6n6VFkgXdgMgfmrLVWsi2ii0=
+ bh=F1woV8r8krwRNYNmEX0yorDZSMHeeoB/U0cAb5edDW8=;
+ b=jg2IvzvFyaea+7tFSoj5YfgBIwjxsg/XFg0BAr/xwSPhKFgdlpYoEpgzIIsGz4ebBi
+ lxTctJGhUMb2SusJs859G7I9IVtv6TT+/DKUUdYYxEI8CRWBwhLxDp9cFmrzTvFO9iSh
+ RhZpRB4c7M5C30ac9LazMIJTI7XYatocV8QL0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692480202; x=1693085002;
+ d=1e100.net; s=20221208; t=1692480203; x=1693085003;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9x3uiU5Y18KO4NomZO3T5cmrnLhli0YswUsOeEnCgHI=;
- b=bLU65QSVJLMBk3gImRkiy5Ij/BHYyFnUbB1NSKRcSlV3DWhG+tA0OMvNCUPjy7DC4/
- lp2blyVkfRaPAbbadtSv4WAxlxLUgnHpuxME4mPesA3KKNC12WzE3gnlBkj2qay6Pwio
- aVhajFCasB5JcMaYAo3UYuni8k6smxZmsgmBg1LIcsbFXlENNHIVBi/pZECUtOB0bmml
- VAW04g2TnGN1zHh6jQNk1SVBynza1jCC8p8Y+66m+sFYuMyhBiLRuBl/yFTb95egRTtB
- 6GLnMGu1nZF8S9c0FSJGONgIjrEE779va6b37bZxsAJQFcWPHjoxG2+04GmPlKm1RFeg
- +2RA==
-X-Gm-Message-State: AOJu0YwIK6NFTOUaCHb8vGg4ulndtbPBkiOCIVle6SEZDF1wgJvzM+aZ
- JDOrcIzm6zdPZ5/4wBLlVaejm0MFyZVWnd0gzdc=
-X-Google-Smtp-Source: AGHT+IFTbI7MwZEyZENe4zB2G5tQSM2HhVbRS0Vh3Lm21Va2pQKyoQQH7qiWCkNvCs+2Px60EF8ijQ==
-X-Received: by 2002:a6b:e217:0:b0:760:e308:107e with SMTP id
- z23-20020a6be217000000b00760e308107emr3995685ioc.0.1692480202088; 
+ bh=F1woV8r8krwRNYNmEX0yorDZSMHeeoB/U0cAb5edDW8=;
+ b=X+dRkanpx3XhnEGaFtUApjx0pqjyMFGRBL4s52fNJEPg7s93Y2qgRQu7AKn3yqmZh/
+ RdYxYiEbyD7VOsg1SVLceciVAYWfdMIWTd8kRaqw8LYITzB++n4Nplj/RyLCPrJU6Dwo
+ arBZmo35a9bDpbFEI0+qML0syWe2/mu0qjjG4wrjpbWU1e1LQAmAB3ZoteccSCtHIgMv
+ nji79MYbpwF0DqfPnUmS3aSXYxkyn+fZEdBTrGmcCTzYt2BwcrPccYgsoG2qyyHTYd6O
+ qhIYMA4yTU1enX7pqOVPZsEp4ma+vrerWbKqa+qSC8eR8jOiXbUerlP8gJXsrwFKv5Zp
+ C8RA==
+X-Gm-Message-State: AOJu0YxnYXIWsWDoO8zTbN0bmE0rLmmHpaCmYhnUvP/PM7vnxW9eyXWl
+ XtvvrGXFZY8bvAE64e2crV32jprM7ScfQZWePio=
+X-Google-Smtp-Source: AGHT+IGBCO0/9/MBN/RXBnjcgvjraMyaeDVfUmMsnnEUqKFrXwv+2XVmGJ4uhkn00XBFbf/kLulICQ==
+X-Received: by 2002:a6b:671b:0:b0:780:c872:5df7 with SMTP id
+ b27-20020a6b671b000000b00780c8725df7mr3948985ioc.9.1692480202893; 
  Sat, 19 Aug 2023 14:23:22 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- c22-20020a6bec16000000b00786f5990435sm1507256ioh.7.2023.08.19.14.23.21
+ c22-20020a6bec16000000b00786f5990435sm1507256ioh.7.2023.08.19.14.23.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Aug 2023 14:23:21 -0700 (PDT)
+ Sat, 19 Aug 2023 14:23:22 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 05/19] x86: Allow APCI in SPL
-Date: Sat, 19 Aug 2023 15:22:43 -0600
-Message-ID: <20230819212309.1094440-6-sjg@chromium.org>
+Subject: [PATCH v3 06/19] x86: coreboot: Look for DBG2 UART in SPL too
+Date: Sat, 19 Aug 2023 15:22:44 -0600
+Message-ID: <20230819212309.1094440-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230819212309.1094440-1-sjg@chromium.org>
 References: <20230819212309.1094440-1-sjg@chromium.org>
@@ -88,36 +88,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is needed so we can find the DBG2 table provided by coreboot. Add a
-Kconfig so it can be enabled.
+If coreboot does not set up sysinfo for the UART, SPL currently hangs.
+Use the DBG2 teechnique there as well. This allows coreboot64 to boot from
+coreboot even if the console info is missing from sysinfo
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/Kconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/coreboot64_defconfig | 1 +
+ drivers/serial/Kconfig       | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 07e61de5b641..a9dca5f52b5a 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -289,6 +289,14 @@ config ACPI
- 	  not necessarily include generation of tables
- 	  (see GENERATE_ACPI_TABLE), but allows for tables to be located.
- 
-+config SPL_ACPI
-+	bool "Enable support for ACPI libraries in SPL"
-+	depends on SPL && SUPPORT_ACPI
-+	help
-+	  Provides library functions for dealing with ACPI tables in SPL. This
-+	  does not necessarily include generation of tables
-+	  (see GENERATE_ACPI_TABLE), but allows for tables to be located.
-+
- config GENERATE_ACPI_TABLE
- 	bool "Generate an ACPI (Advanced Configuration and Power Interface) table"
- 	depends on ACPI
+diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+index 602465175d20..a094a7c24234 100644
+--- a/configs/coreboot64_defconfig
++++ b/configs/coreboot64_defconfig
+@@ -55,4 +55,5 @@ CONFIG_SYS_64BIT_LBA=y
+ CONFIG_SOUND=y
+ CONFIG_SOUND_I8254=y
+ CONFIG_CONSOLE_SCROLL_LINES=5
++CONFIG_SPL_ACPI=y
+ # CONFIG_GZIP is not set
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index a1e089962a91..01100b6d93f3 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -672,7 +672,7 @@ config COREBOOT_SERIAL
+ config COREBOOT_SERIAL_FROM_DBG2
+ 	bool "Obtain UART from ACPI tables"
+ 	depends on COREBOOT_SERIAL
+-	default y if !SPL
++	default y
+ 	help
+ 	  Select this to try to find a DBG2 record in the ACPI tables, in the
+ 	  event that coreboot does not provide information about the UART in the
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
