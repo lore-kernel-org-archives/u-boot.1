@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA95EE4993
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 13:12:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B823EE49A8
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 13:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1FDD87002;
-	Sat, 19 Aug 2023 15:12:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2019E8700E;
+	Sat, 19 Aug 2023 15:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vhk5ilI1";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NZ7vR1MO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6131B807B4; Sat, 19 Aug 2023 15:12:35 +0200 (CEST)
+ id A87BA87008; Sat, 19 Aug 2023 15:12:36 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A891D86FF7
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 15:12:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A64987001
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 15:12:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,28 +31,28 @@ Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 26D88400A8; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7F587400AC; 
  Sat, 19 Aug 2023 13:12:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1692450751;
- bh=IpbzGsl77TJXLiiObJU2DElmf9aUzoDwcOoBMMbioXQ=;
+ bh=y6BboHVphk/rVMJOZDeUSw7eGIdAeSA8NJ3fOLLWYRs=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=vhk5ilI15lPHU3O2lPlutnHHBRsLTBXpxuyZX1joH6/ZTXDOiF1bKM798SasboEEN
- Kj1WhTM4778HN02B/A465jFa17NZk6ntGHrX2FTKLNKEd072mSRqPDqF5dQtkxkL6L
- lfnJxCl33Y3QRbnb2dldkZARbugxluvn6kHit8kLhVxn8sXy3uuoUGd2mr6p43Qb5n
- yO37r3kyFikMEPk2qxniE623+fnHU49bZtOCJgoEkIFd65uPgxBalfDyi6r61o+n7B
- AFcjx1/T/QXFwdQ9wGoomgDFBKsDySoYZkvu8aUgv4rh6OcMMYRHJ4He/iBvEuD2EQ
- BUcrWYhVxFhyA==
+ b=NZ7vR1MOUZxO5wxEpznfsstv52TDwDy5qGuWDHqPMvW8CJvgqZSTsn39UkELLWtcl
+ 3i5TNlQmdTeBZgqIDeUIbVlZ3vXhpst7UweBizg4aBFPR4mbOvFuUIrDCWaU0QbXID
+ fsqWncHmVMdIlEHPm3PauAUF8Wbwjee9WiA0A78AMi1df6g8UCCIord0JoR+N4p0d0
+ DtVSO81aDAbo0F3mevdd21FQ3qXma/TyaQaWsyxPWgMgV3h/QNyxkD02WdU33yzAM0
+ 158H4A6xPi6xmqbziZepUxTid4ommn7t1zj4Jl/SqJbd8UdN//bdMslAe7n0XvW12l
+ VBpz3YCHQqhAg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Rick Chen <rick@andestech.com>,
 	Leo <ycliang@andestech.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Anup Patel <apatel@ventanamicro.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/2] risc-v: implement DBCN write byte
-Date: Sat, 19 Aug 2023 15:12:49 +0200
-Message-Id: <20230819131250.10251-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/2] risc-v: implement DBCN based debug console
+Date: Sat, 19 Aug 2023 15:12:50 +0200
+Message-Id: <20230819131250.10251-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230819131250.10251-1-heinrich.schuchardt@canonical.com>
 References: <20230819131250.10251-1-heinrich.schuchardt@canonical.com>
@@ -74,53 +74,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DBCN extension provides a Console Write Byte call.
-Implement function sbi_dbcn_write_byte to invoke it.
+Use the DBCN SBI extension to implement a debug console.
+Make it the default for S-mode RISC-V.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/riscv/include/asm/sbi.h |  1 +
- arch/riscv/lib/sbi.c         | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+)
+ drivers/serial/Kconfig      |  3 ++-
+ drivers/serial/serial_sbi.c | 19 +++++++++++++++++++
+ 2 files changed, 21 insertions(+), 1 deletion(-)
 
-diff --git a/arch/riscv/include/asm/sbi.h b/arch/riscv/include/asm/sbi.h
-index 009a26885c..bf4c9af622 100644
---- a/arch/riscv/include/asm/sbi.h
-+++ b/arch/riscv/include/asm/sbi.h
-@@ -170,5 +170,6 @@ int sbi_get_mvendorid(long *mvendorid);
- int sbi_get_marchid(long *marchid);
- int sbi_get_mimpid(long *mimpid);
- void sbi_srst_reset(unsigned long type, unsigned long reason);
-+int sbi_dbcn_write_byte(unsigned char ch);
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index a1e089962a..8421c5c047 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -218,6 +218,7 @@ config DEBUG_UART
+ choice
+ 	prompt "Select which UART will provide the debug UART"
+ 	depends on DEBUG_UART
++	default DEBUG_SBI_CONSOLE if RISCV_SMODE
+ 	default DEBUG_UART_NS16550
  
- #endif
-diff --git a/arch/riscv/lib/sbi.c b/arch/riscv/lib/sbi.c
-index 8724e3a460..55a3bc3b5c 100644
---- a/arch/riscv/lib/sbi.c
-+++ b/arch/riscv/lib/sbi.c
-@@ -204,6 +204,22 @@ void sbi_srst_reset(unsigned long type, unsigned long reason)
- 		  0, 0, 0, 0);
+ config DEBUG_UART_ALTERA_JTAGUART
+@@ -289,7 +290,7 @@ config DEBUG_EFI_CONSOLE
+ 
+ config DEBUG_SBI_CONSOLE
+ 	bool "SBI"
+-	depends on SBI_V01
++	depends on RISCV_SMODE
+ 	help
+ 	  Select this to enable a debug console which calls back to SBI to
+ 	  output to the console. This can be useful for early debugging of
+diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
+index b9f35ed36e..093c7309d3 100644
+--- a/drivers/serial/serial_sbi.c
++++ b/drivers/serial/serial_sbi.c
+@@ -3,6 +3,8 @@
+ #include <debug_uart.h>
+ #include <asm/sbi.h>
+ 
++#ifdef CONFIG_SBI_V01
++
+ static inline void _debug_uart_init(void)
+ {
+ }
+@@ -13,4 +15,21 @@ static inline void _debug_uart_putc(int c)
+ 		sbi_console_putchar(c);
  }
  
-+/**
-+ * sbi_dbcn_write_byte() - write byte to debug console
-+ *
-+ * @ch:		byte to be written
-+ * Return:	SBI error code (SBI_SUCCESS = 0 on success)
-+ */
-+int sbi_dbcn_write_byte(unsigned char ch)
-+{
-+	struct sbiret ret;
++#else
 +
-+	ret = sbi_ecall(SBI_EXT_DBCN,
-+			SBI_EXT_DBCN_CONSOLE_WRITE_BYTE,
-+			ch, 0, 0, 0, 0, 0);
-+	return ret.error;
++static int sbi_dbcn_available;
++
++static inline void _debug_uart_init(void)
++{
++	sbi_dbcn_available = sbi_probe_extension(SBI_EXT_DBCN);
 +}
 +
- #ifdef CONFIG_SBI_V01
- 
- /**
++static inline void _debug_uart_putc(int ch)
++{
++	if (sbi_dbcn_available)
++		sbi_dbcn_write_byte(ch);
++}
++
++#endif
++
+ DEBUG_UART_FUNCS
 -- 
 2.40.1
 
