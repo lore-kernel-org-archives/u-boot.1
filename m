@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7258FEE4993
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:25:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2690DEE49A8
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 807EB8704C;
+	by phobos.denx.de (Postfix) with ESMTP id CF41087052;
 	Sat, 19 Aug 2023 16:24:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1692455083;
-	bh=QGPmx7CO/S8R6DCmDzE7TTFwJa3Q/tQnGFpVD7+b/Bk=;
+	bh=3YIn+e6s/BHk/+eJnK9lZKNXIy9vets3cyS7jpPmuxA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LbPvmQv+5ArAEVh5RlVvkG0OcI9baf8bO44CTNu2bHs3kQFbZN2GjxRbCZhWZiNbX
-	 RpUH/A6ILR0MJjcE9/De3Iz/E1pXCfRbpzBaWW2gr8uL2z1nilCpY8Zhdh1Qm9DjKp
-	 uvm8T/GpolORr8/4iYY1boEsUPHe9blFBILwy0PIJO4zYV9CX+15nm067CR06+kAoD
-	 +dPoKD50ufy/J22K+ZuBhkVfpCB8nF8EsKq/0OEj/VqUg0iXY4Y9OUjpwxhjp4dseA
-	 nmwY1CZ/kaEMphqBtLmonaVvNueNveIsuT9U9kWaz9U1JgF872sxEM/pfGoEyeSkM0
-	 MRbY8GjhhnURw==
+	b=RQuSSNF4/YAVkAC2d4pggtQDKJymr4re9EXI3h2EpEigrarDryzygdJNq6QmyPqA9
+	 nGRBnVAiRHrOmQInjWKKF/pD8fr88E9MRnX3HZShDdGUtxUtLGGXmT09z4eTg7Qyig
+	 4guk8tvkMrx258i/qOou0DHHFWkhhZsdbxRwUMTCQBv+VoY1WOcb3agpKAnraaW8ZG
+	 w7TQO8UWLVYjR2l5AQYMcu7gJDAKuNFEb5zW8rhRQecf1LrIKt6NFS8S7/wotgsQj7
+	 qIX2RHBzYDG+pS5tdlDXQ9AkT3aGC8bhiT5XTHOUyizcI33pjmohy85exL6/nuA5Qq
+	 uZztzcnODtfnw==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E04C087022;
- Sat, 19 Aug 2023 16:24:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8984887026;
+ Sat, 19 Aug 2023 16:24:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692455080;
- bh=QGPmx7CO/S8R6DCmDzE7TTFwJa3Q/tQnGFpVD7+b/Bk=;
+ s=phobos-20191101; t=1692455081;
+ bh=3YIn+e6s/BHk/+eJnK9lZKNXIy9vets3cyS7jpPmuxA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=EzQAWswuDT0rABDJTcB+UXABVDiteT3ZSqT+6HkKvEeMv302eKN404qJyCCOf8ooQ
- M6OQhKV6XTHu1JWXvD39XTWZDTo2xE9OO35WMWGy1etAak8J8Mf1jNaAl50FPh1rKe
- 5eExEZzRiluU5Cb1oaS/pz+A8lJ76Wd4M4Hbra2x6A2A4cUz4atodTG7DfAWaBlkpn
- HviD8sVVP231LaBKMseTOo7nhdtGasJLruDPXjg/YDyhJvL5IWO7obTe7sx7YzqcTZ
- 9irWlzD96HowpTYlSWzttiCFuLCURSa9lKHpevQrAajep4tfGjSFPN4w1hvfXuzxHL
- mP6N7jv4fsszA==
+ b=Z/C59tfu1OkunWItZLclMe8yrcDJAk16ObvFF2ETajorS9AYF+2HO28zwlWCdfvI+
+ Irb3rIsi8VYG/NEmTgQK4npq1DPEwUM8kTT9Gem5dKgQfoIYrhOgFRPrUT2qo8LeAE
+ NGT2dZ1uNmFkj0tk3Fv1OdLufBxtk9ZcCPapvwkm8iTbjI1bd6vdFiTT22AYz8G56F
+ h61vLaxPi74eWO1nDz8q832bGnhFbyKWmaRbwAEdToQ8oosdcxa4tFyKcV8qaUUoRg
+ 5itskNmXqauMgbNnBe/2raNiFeH3tNIDdN6SMNTK8wBYX+fB4BlHLM/GZPQl3z/HSP
+ 7h27dGHwd9Zxw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
@@ -51,9 +51,9 @@ Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, kernel@puri.sm
-Subject: [PATCH 06/17] cmd: sdp: Reorder variable declaration
-Date: Sat, 19 Aug 2023 16:23:56 +0200
-Message-Id: <20230819142407.49632-6-marex@denx.de>
+Subject: [PATCH 07/17] cmd: thordown: Reorder variable declaration
+Date: Sat, 19 Aug 2023 16:23:57 +0200
+Message-Id: <20230819142407.49632-7-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230819142407.49632-1-marex@denx.de>
 References: <20230819142407.49632-1-marex@denx.de>
@@ -95,29 +95,44 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Stefan Roese <sr@denx.de>
 Cc: kernel@puri.sm
 ---
- cmd/usb_gadget_sdp.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ cmd/thordown.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/cmd/usb_gadget_sdp.c b/cmd/usb_gadget_sdp.c
-index 1af82e11366..784d1b49768 100644
---- a/cmd/usb_gadget_sdp.c
-+++ b/cmd/usb_gadget_sdp.c
-@@ -14,13 +14,13 @@
+diff --git a/cmd/thordown.c b/cmd/thordown.c
+index 838764ccef7..0d8dcee5314 100644
+--- a/cmd/thordown.c
++++ b/cmd/thordown.c
+@@ -15,22 +15,23 @@
  
- static int do_sdp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ int do_thor_down(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  {
++	char *interface, *devstring;
 +	int controller_index;
- 	int ret;
- 
- 	if (argc < 2)
++	int ret;
++
+ 	if (argc < 4)
  		return CMD_RET_USAGE;
  
 -	char *usb_controller = argv[1];
+-	char *interface = argv[2];
+-	char *devstring = argv[3];
+-
+-	int ret;
+-
+ 	puts("TIZEN \"THOR\" Downloader\n");
+ 
++	interface = argv[2];
++	devstring = argv[3];
++
+ 	ret = dfu_init_env_entities(interface, devstring);
+ 	if (ret)
+ 		goto done;
+ 
 -	int controller_index = simple_strtoul(usb_controller, NULL, 0);
 +	controller_index = simple_strtoul(argv[1], NULL, 0);
- 	usb_gadget_initialize(controller_index);
- 
- 	g_dnl_clear_detach();
+ 	ret = usb_gadget_initialize(controller_index);
+ 	if (ret) {
+ 		pr_err("USB init failed: %d\n", ret);
 -- 
 2.40.1
 
