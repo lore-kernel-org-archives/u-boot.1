@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D645BEE4993
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE27EE4993
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:26:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 266F48705F;
+	by phobos.denx.de (Postfix) with ESMTP id 7660387068;
 	Sat, 19 Aug 2023 16:24:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1692455084;
-	bh=qrCHkqbq3SOfbpMWbpSvto+JNg8yz6oTKPPc3BPxOX0=;
+	bh=Ijap/iB61Dz8xUKj2EgQVECLKnRmIw+YAknbIt5+OMo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lhEHhi6Le5Acc5ASVobGHlpyldn+DN9qzj0vnNqsvt5xA+4JkXkdl0kGmmAfzN8U8
-	 6i9xmBf610XTNYFRbKrPPvOlNmGSKPb06ECh6KE2h1B38601xIj9Hp7stFXR1yWNDi
-	 kf+MezCVklKTqANs53F+JSmpf/ta5D2fRZtYyZ6yHpTkzABvkrRjeR3YDtkMFQyPnZ
-	 goYx0Ed+LfKt1bPnOJUGvBIP81mLvySfyMWrUIKzr1Xixsco4/ePm8uO97Aj4J8V6R
-	 bQqfLBHRBJDycBdZvFABGUs0gt0x+9XzRMtr2QA4NJCroXPDNEl69y3jaZhKGzehtB
-	 I2QYA33vaxnaQ==
+	b=reasUA7YBYSc/yzfuvANMCLLurR3Woo74emoNOBjNVRyOxYOm/523dtkPhr0+Hso2
+	 Q0tuB17gLtJH1T2TZ1kSXivvEnmawD4x6TGZNS4vQXuOUZm0ua9Im3SrEPlim1LptH
+	 DV0Cal1frWKB6PEHoXGEfVGmWVXW7YnRq9mZW3kvy9XyUw8QFGHKS/WnF6QXzy7S1J
+	 areBM/ZzJ4kfhJa/2vBdV3vr261FVrlXPhIeJFUfNolrvMl06IDxZaeDr6LVqbDrvN
+	 owYZzLA9QllohoxORUZTRpUWSmkPmXPmBD33cboZA8vcHSrppDyxKoDLQxvJTKJGDf
+	 22Sx/cjPkm5OQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 31F0C86F9B;
+ by phobos.denx.de (Postfix) with ESMTPSA id CCC3C86FCA;
  Sat, 19 Aug 2023 16:24:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692455081;
- bh=qrCHkqbq3SOfbpMWbpSvto+JNg8yz6oTKPPc3BPxOX0=;
+ s=phobos-20191101; t=1692455082;
+ bh=Ijap/iB61Dz8xUKj2EgQVECLKnRmIw+YAknbIt5+OMo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=n9JMEFOW2nF6paINBmaplA02CwXA2kWiZYHPRkLcbPIxLQcspDgm0PbSMoXTQgSG2
- ntaYUWiRlIysNtXDvy0x4nJF4/yiXMTAsv+rjA6OYt2d5YBh7NV6WvdO0qM2ifM0tx
- F7UZrDzboSQamucbS610Hz6gGPbjvbwMIQ8eXC3gaMmwHqO/bJHkh77Myzh61+FWud
- fM0IsB6rsg6W5C2h0rd7yvVxWCCBhxiP2oW62cZ08y+sZiU1z5kH+yAN44GgSEXqpx
- hZjNsJPi3qIvKAqEgdGFwIDqRvJKB25UNXUGe1L/kKZK/9uAtuycQz1AL+6laHlQxo
- UQfDxlv/mAR8Q==
+ b=Uo6u+foPko7U0LUdcoslHWLQkgr0i1b+SKKpe0b8mj4jaPV08Je2tzBUxy5IPUg6a
+ Vnk0o/jEsf6GikvtpbOz0vQQnu/AGkIytUjXn4kmAPy2jP9Tsik3gPWupEtnuAblSc
+ IgEssTk+EjjtkxT2Hu7N2cYiqOg6lw2v/krNGtO+VJjuUiPK1/RUWM3XAznBz4slRk
+ l6tYn7Yp6jC9k5zoLgL32Vx/QuhsiJl+Z/L+kYx31tm+I5C3+H/ebl6sxW46gyMAKc
+ aDBjUW5AiY8tJZCfa3LTT9M88cIdndyXlBr1CNptCk3CBhUerSeUp69lurW3PdkHfb
+ qZXecK5pgvV+g==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
@@ -51,10 +51,9 @@ Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, kernel@puri.sm
-Subject: [PATCH 08/17] cmd: ums: Use plain udevice for UDC controller
- interaction
-Date: Sat, 19 Aug 2023 16:23:58 +0200
-Message-Id: <20230819142407.49632-8-marex@denx.de>
+Subject: [PATCH 09/17] dfu: Detach the controller on error
+Date: Sat, 19 Aug 2023 16:23:59 +0200
+Message-Id: <20230819142407.49632-9-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230819142407.49632-1-marex@denx.de>
 References: <20230819142407.49632-1-marex@denx.de>
@@ -76,8 +75,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert to plain udevice interaction with UDC controller
-device, avoid the use of UDC uclass dev_array .
+In case anything errors out during the DFU registration, detach
+the controller instead of bailing out right away. This way, the
+controller can be reattached on next attempt.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -96,107 +96,31 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Stefan Roese <sr@denx.de>
 Cc: kernel@puri.sm
 ---
- cmd/usb_mass_storage.c              | 10 ++++++----
- drivers/usb/gadget/f_mass_storage.c |  8 ++++----
- include/usb_mass_storage.h          |  2 +-
- 3 files changed, 11 insertions(+), 9 deletions(-)
+ common/dfu.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/usb_mass_storage.c b/cmd/usb_mass_storage.c
-index c3cc1975f9d..9c51ae0967f 100644
---- a/cmd/usb_mass_storage.c
-+++ b/cmd/usb_mass_storage.c
-@@ -143,6 +143,7 @@ static int do_usb_mass_storage(struct cmd_tbl *cmdtp, int flag,
- 	const char *devtype;
- 	const char *devnum;
- 	unsigned int controller_index;
-+	struct udevice *udc;
- 	int rc;
- 	int cable_ready_timeout __maybe_unused;
- 
-@@ -164,13 +165,14 @@ static int do_usb_mass_storage(struct cmd_tbl *cmdtp, int flag,
- 
- 	controller_index = (unsigned int)(simple_strtoul(
- 				usb_controller,	NULL, 0));
--	if (usb_gadget_initialize(controller_index)) {
-+	rc = udc_device_get_by_index(controller_index, &udc);
-+	if (rc) {
- 		pr_err("Couldn't init USB controller.\n");
- 		rc = CMD_RET_FAILURE;
- 		goto cleanup_ums_init;
+diff --git a/common/dfu.c b/common/dfu.c
+index 96190889ab7..32fba84da16 100644
+--- a/common/dfu.c
++++ b/common/dfu.c
+@@ -34,7 +34,8 @@ int run_usb_dnl_gadget(int usbctrl_index, char *usb_dnl_gadget)
+ 	ret = g_dnl_register(usb_dnl_gadget);
+ 	if (ret) {
+ 		pr_err("g_dnl_register failed");
+-		return CMD_RET_FAILURE;
++		ret = CMD_RET_FAILURE;
++		goto err_detach;
  	}
  
--	rc = fsg_init(ums, ums_count, controller_index);
-+	rc = fsg_init(ums, ums_count, udc);
- 	if (rc) {
- 		pr_err("fsg_init failed\n");
- 		rc = CMD_RET_FAILURE;
-@@ -215,7 +217,7 @@ static int do_usb_mass_storage(struct cmd_tbl *cmdtp, int flag,
+ #ifdef CONFIG_DFU_TIMEOUT
+@@ -106,6 +107,7 @@ int run_usb_dnl_gadget(int usbctrl_index, char *usb_dnl_gadget)
  	}
- 
- 	while (1) {
--		usb_gadget_handle_interrupts(controller_index);
-+		dm_usb_gadget_handle_interrupts(udc);
- 
- 		rc = fsg_main_thread(NULL);
- 		if (rc) {
-@@ -247,7 +249,7 @@ static int do_usb_mass_storage(struct cmd_tbl *cmdtp, int flag,
- cleanup_register:
+ exit:
  	g_dnl_unregister();
- cleanup_board:
--	usb_gadget_release(controller_index);
-+	udc_device_put(udc);
- cleanup_ums_init:
- 	ums_fini();
++err_detach:
+ 	usb_gadget_release(usbctrl_index);
  
-diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index f46829eb7ad..1d17331cb03 100644
---- a/drivers/usb/gadget/f_mass_storage.c
-+++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -435,7 +435,7 @@ static void set_bulk_out_req_length(struct fsg_common *common,
- static struct ums *ums;
- static int ums_count;
- static struct fsg_common *the_fsg_common;
--static unsigned int controller_index;
-+static struct udevice *udcdev;
- 
- static int fsg_set_halt(struct fsg_dev *fsg, struct usb_ep *ep)
- {
-@@ -680,7 +680,7 @@ static int sleep_thread(struct fsg_common *common)
- 			k = 0;
- 		}
- 
--		usb_gadget_handle_interrupts(controller_index);
-+		dm_usb_gadget_handle_interrupts(udcdev);
- 	}
- 	common->thread_wakeup_needed = 0;
- 	return rc;
-@@ -2764,11 +2764,11 @@ int fsg_add(struct usb_configuration *c)
- 	return fsg_bind_config(c->cdev, c, fsg_common);
- }
- 
--int fsg_init(struct ums *ums_devs, int count, unsigned int controller_idx)
-+int fsg_init(struct ums *ums_devs, int count, struct udevice *udc)
- {
- 	ums = ums_devs;
- 	ums_count = count;
--	controller_index = controller_idx;
-+	udcdev = udc;
- 
- 	return 0;
- }
-diff --git a/include/usb_mass_storage.h b/include/usb_mass_storage.h
-index 08ccc97cf22..83ab93b530d 100644
---- a/include/usb_mass_storage.h
-+++ b/include/usb_mass_storage.h
-@@ -25,7 +25,7 @@ struct ums {
- 	struct blk_desc block_dev;
- };
- 
--int fsg_init(struct ums *ums_devs, int count, unsigned int controller_idx);
-+int fsg_init(struct ums *ums_devs, int count, struct udevice *udc);
- void fsg_cleanup(void);
- int fsg_main_thread(void *);
- int fsg_add(struct usb_configuration *c);
+ 	if (dfu_reset)
 -- 
 2.40.1
 
