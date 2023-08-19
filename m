@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A38EE4993
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:25:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A56EE4993
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:25:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E712B87041;
-	Sat, 19 Aug 2023 16:24:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37D1C87046;
+	Sat, 19 Aug 2023 16:24:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692455080;
-	bh=JcJCaS4/uYJ1gHQ6LIkvBreOiZf/5N8CkKnVkbY6608=;
+	s=phobos-20191101; t=1692455081;
+	bh=2xHNtc08hngj2uyUeQgqQcPOWreROMmTFwF29su909w=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZUWrx40zhb3kQRnu7foXAWx+XmIySqyIr5CCqYFkdN8lmSSg8MI/oMc6LW5BmhMwu
-	 sKRB3yEHAUa5BjWq0lSe2XtIcqakDUpU2iMMUngX9Uif5fTRytY9nCV7NUbc4uSdi/
-	 Q9E7m+cD1+N5k9gam8HfEUGbDNe7CyIuqYKo5wcwL6kwTfXuFOBa4rRWFdifzLwibJ
-	 +xErdmkXjZFWZSzAv+B8Zdp829CcpymLWafhynoa7RC2qxk374wikD7djS342vSWoC
-	 mzMXBlqCmle8m6mB1fWPnvrT5JYIGQ3DvLEotvyvDjVK/lTZDjCVk/rvxNPkaUZz3c
-	 qwPRrvA7h5wtg==
+	b=RizFm0nZSBZ5Akeh8f9v2PxITos6TCcloL+gPegl3W4ZsN239lexed5iRB9pUNHE/
+	 aVAMSMW0703gBM3ciHnBmoksiA9l83GJFsHMWo4Fy3nXxyF+PWNStF1Ml6CfsDpsOZ
+	 yxISxaSN3/FopzXxLmXXVVHrq/e6qlqGky3WyJvs0G31b88XKA0Q06v/Wmoip1mhi+
+	 ktOAxTcn/L4GMpYMR0+xUcmUNerhCwA5RR7i0UI+dnaFp4avhbXGbvCYQWe3IYN4Lc
+	 G8+F/9pkdkbfMohyh3VmVYc3YMBlMINiTCHQrFSiOM8qmEkLX6167hEISffNXlKC9l
+	 N+/8G7yPTy9MA==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9E95986FDF;
- Sat, 19 Aug 2023 16:24:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4587587012;
+ Sat, 19 Aug 2023 16:24:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1692455079;
- bh=JcJCaS4/uYJ1gHQ6LIkvBreOiZf/5N8CkKnVkbY6608=;
+ bh=2xHNtc08hngj2uyUeQgqQcPOWreROMmTFwF29su909w=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=z0DDRzS44GES38egWz/m78O0wrQMO9BxRXtAlV0qAbDlOPKDDZai5coi9wgJlLA6d
- hzHYGbWreWSOqPkG6y9xZ/JZALWgdlbf1MArLkkzVguOU/aRSNZ4rsguXLYIXYugoZ
- ND94K3y2/H7n+kfOQ3+5/5zR8S9Qj/jVm3mTubRAhlp9yF+jmaXSssxD0xH9L4RWYW
- eIFOfOfpTwi0nUWDN59YAiP7oVa81XwbHjZ2wQb5jsPXk28ToJfHP+hx1mFJIuuxtL
- 0AywGRyVDIo1crevV4Jnj4hgJXo8GEa5OKWpB75Jq+QOKbxlZZUAM45MclL6W781wP
- aECqWWHNehk3w==
+ b=ntmF1bC2bKKH3HR8tBzswhkSLHSkUUmH0/qTNj+pLSGKaqW4QI4d1++nexrD0htDY
+ aK/PNTp6AZxDPLkXCWobBKH2KtHbr93Xs18m69UzfkK/LGs5CqApH1/xWDSTvvQxAi
+ h5pWqDvY1lyKbmPyWwwWUqmzetM6kbL/5U3Bwjbqv5MeJaKBVsKNmaHDLPkGrXsGjv
+ 3yWpieFGlnla+lFASVR4dXmwS3gWU28KLYQVNl2JydT2KDVP77Jr6dHzqYWe2QqF+8
+ zIMRlvfP5AJY/HJcTvontEOR2xK7/gfKiinUm+ypVU244mWYtlarzj1guBMULovQGy
+ iHH3mdoXjtRTQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
@@ -51,10 +51,10 @@ Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, kernel@puri.sm
-Subject: [PATCH 04/17] cmd: fastboot: Use plain udevice for UDC controller
+Subject: [PATCH 05/17] cmd: rockusb: Use plain udevice for UDC controller
  interaction
-Date: Sat, 19 Aug 2023 16:23:54 +0200
-Message-Id: <20230819142407.49632-4-marex@denx.de>
+Date: Sat, 19 Aug 2023 16:23:55 +0200
+Message-Id: <20230819142407.49632-5-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230819142407.49632-1-marex@denx.de>
 References: <20230819142407.49632-1-marex@denx.de>
@@ -96,46 +96,47 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Stefan Roese <sr@denx.de>
 Cc: kernel@puri.sm
 ---
- cmd/fastboot.c | 7 ++++---
+ cmd/rockusb.c | 7 ++++---
  1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/fastboot.c b/cmd/fastboot.c
-index 3d5ff951eb6..17fb0a0aa7b 100644
---- a/cmd/fastboot.c
-+++ b/cmd/fastboot.c
-@@ -61,6 +61,7 @@ static int do_fastboot_usb(int argc, char *const argv[],
+diff --git a/cmd/rockusb.c b/cmd/rockusb.c
+index f181ec61119..07088564a10 100644
+--- a/cmd/rockusb.c
++++ b/cmd/rockusb.c
+@@ -15,6 +15,7 @@ static int do_rockusb(struct cmd_tbl *cmdtp, int flag, int argc,
  {
- 	int controller_index;
+ 	int controller_index, dev_index;
  	char *usb_controller;
 +	struct udevice *udc;
- 	char *endp;
+ 	char *devtype;
+ 	char *devnum;
  	int ret;
- 
-@@ -79,7 +80,7 @@ static int do_fastboot_usb(int argc, char *const argv[],
- 		return CMD_RET_FAILURE;
- 	}
+@@ -34,7 +35,7 @@ static int do_rockusb(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	dev_index = simple_strtoul(devnum, NULL, 0);
+ 	rockusb_dev_init(devtype, dev_index);
  
 -	ret = usb_gadget_initialize(controller_index);
 +	ret = udc_device_get_by_index(controller_index, &udc);
  	if (ret) {
- 		pr_err("USB init failed: %d\n", ret);
+ 		printf("USB init failed: %d\n", ret);
  		return CMD_RET_FAILURE;
-@@ -103,13 +104,13 @@ static int do_fastboot_usb(int argc, char *const argv[],
+@@ -56,14 +57,14 @@ static int do_rockusb(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			break;
  		if (ctrlc())
  			break;
- 		schedule();
 -		usb_gadget_handle_interrupts(controller_index);
 +		dm_usb_gadget_handle_interrupts(udc);
  	}
- 
  	ret = CMD_RET_SUCCESS;
  
  exit:
--	usb_gadget_release(controller_index);
-+	udc_device_put(udc);
  	g_dnl_unregister();
  	g_dnl_clear_detach();
+-	usb_gadget_release(controller_index);
++	udc_device_put(udc);
  
+ 	return ret;
+ }
 -- 
 2.40.1
 
