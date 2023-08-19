@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD13EE49A5
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 21:25:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1F8EE49A5
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 21:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CE6E87047;
+	by phobos.denx.de (Postfix) with ESMTP id 4BDA58704C;
 	Sat, 19 Aug 2023 23:23:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R8M6L/3R";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jjHY2ofd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E83668700E; Sat, 19 Aug 2023 23:23:32 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 22C208700E; Sat, 19 Aug 2023 23:23:33 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2996387022
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 23:23:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C036786C20
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 23:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7914633a110so71382739f.0
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 14:23:30 -0700 (PDT)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-79210064604so50056639f.3
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 14:23:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692480209; x=1693085009;
+ d=chromium.org; s=google; t=1692480207; x=1693085007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4UYnbBLRuomK1Z6pcgfMJ1sLhkmin8Bre/aRX4FJtFM=;
- b=R8M6L/3R7vdhaGyjtLFVAXFrxdw85oht4BpMrDerrckWOYFb1E7OMWqNQRlUzqS5ek
- RPiF4RnojLB7MF3eAWav801NaOEmjReScTQBZgEqKw+bbF62B+nymkrJPxVwH+vIMM1G
- MXphElwoKrqNgAtXrEmrQCag9OL9+kbpKNqig=
+ bh=oXYjzViUsnUG/ZXUfwQGaAPljaNx51SDyFNMQN6zgRc=;
+ b=jjHY2ofdMxwy732iGrRp0T/hhbTCmBKFfPaaDi+yUPq+fvVJUABdiFVhnnvrD+KPBK
+ V8DagqZ+aqVfAlNypr4ojxXA3eCbgxuMfXHZQaTZhUbCA2zIE4O/QSAvp3MWozyxtDO1
+ XandVYPA0Hsy+efDwlJ/pN8IXSDX7NdT9eTNo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692480209; x=1693085009;
+ d=1e100.net; s=20221208; t=1692480207; x=1693085007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4UYnbBLRuomK1Z6pcgfMJ1sLhkmin8Bre/aRX4FJtFM=;
- b=MNmbsf4W8dC9SUfMY55PaGqX6mVXr+ZBY+gP37qGwyP2MoJ6awiNJMezLlq3e0Qzlk
- gHR0MXBqan6z35Vuhsr8yci5VawRD+oCCo+jI2g5fddkvEWxPNsg7YDW8um4K+IRShLx
- 5DyzcITWMJSnAeVioGbBgxPk0P1hZ1LSwFRc0AVqxHDQpJormBkHNoOf9coV07METY11
- gdr9hjZoTKdJQAisOv0BwqwvP3/O4IES5rVmw0eYkABkGiry9bjmWXUE5Brxw+D7C9jk
- 9WlOgHCJRhtDubt4ohx0UhlpdFAe2fXQfAHTWIeF3TG5zO9BIc4tvkE8CSPOIaN+7/FA
- 9tcw==
-X-Gm-Message-State: AOJu0Ywji3lE1KrHKCe1la1N3rUBPH0CNkKdHxPPX7VHoL8espvLlNoO
- PIEPrbLwxvKTCTEH9/swrMAt5N5/oNDJ1sPk8+w=
-X-Google-Smtp-Source: AGHT+IECEFsg6dOr5T+81b6glTmd6AF7jGz0JYjv6OSMZFF54oebe8S55o8VM7AkCq9YnLUahd7S+g==
-X-Received: by 2002:a5e:c003:0:b0:791:6aa4:2d89 with SMTP id
- u3-20020a5ec003000000b007916aa42d89mr4079945iol.21.1692480208854; 
- Sat, 19 Aug 2023 14:23:28 -0700 (PDT)
+ bh=oXYjzViUsnUG/ZXUfwQGaAPljaNx51SDyFNMQN6zgRc=;
+ b=C2vvbN2SniDUsxSE6ccZ/nYZm84ZeE4slhP+mXbp9kINpnzVUJ7f4oF6nHMJj9Nje5
+ DFk5dHUgZRYW/O0wpTH8bTp+j/Y2VviJ5Rs1kZf8fbRWtMX69Jwx1lkuP8JS9Flsm1x8
+ jyEENAviTnD/orT2nX4GgT1jex4h3uNgRfs3AC4jyNwj2mTRTkO/znXTgye4RTqPOPVi
+ h6ug9xpVpBMc3uZuSwhBDV01bdspoONmsU5pNJrayo/Z66Rc/y4mRwsdAVDF6dDb05V0
+ ahGMjJiL7ETBaHRK9yVIlwNXf0+qqibOyWDY8p/CAxzX8knzSR0QxsKZx35oUTkwjGB3
+ evZQ==
+X-Gm-Message-State: AOJu0YxDSDbeD02PfnVL+D4tfHV6N4oDkDPeUeTWhgvZcKYMg3wV40l5
+ jefgN+PCtyIxtKwSC8+31fkRpnQlRJPTIKx09ZU=
+X-Google-Smtp-Source: AGHT+IHxxW20N2bF8GHMURu79SU/7ckh1UlOQmi7KQmaMUOSvWeaBBpWLLsQr7A5oYc7a/vGwAeq9Q==
+X-Received: by 2002:a05:6602:2c87:b0:791:8856:a8e9 with SMTP id
+ i7-20020a0566022c8700b007918856a8e9mr6086767iow.3.1692480207415; 
+ Sat, 19 Aug 2023 14:23:27 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- c22-20020a6bec16000000b00786f5990435sm1507256ioh.7.2023.08.19.14.23.28
+ c22-20020a6bec16000000b00786f5990435sm1507256ioh.7.2023.08.19.14.23.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Aug 2023 14:23:28 -0700 (PDT)
+ Sat, 19 Aug 2023 14:23:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 14/19] efi: x86: Use the installed SMBIOS tables
-Date: Sat, 19 Aug 2023 15:22:52 -0600
-Message-ID: <20230819212309.1094440-15-sjg@chromium.org>
+Subject: [PATCH v3 12/19] x86: smbios: Add a Kconfig indicating SMBIOS-table
+ presence
+Date: Sat, 19 Aug 2023 15:22:50 -0600
+Message-ID: <20230819212309.1094440-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230819212309.1094440-1-sjg@chromium.org>
 References: <20230819212309.1094440-1-sjg@chromium.org>
@@ -88,109 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot sets up the SMBIOS tables during startup. Rather than creating a
-new set, install the existing ones. Rely on the ACPI table's memory-map
-record to cover the tables.
+When booted from coreboot, U-Boot does not build the SMBIOS tables, but
+it should still pass them on to the OS. Add a new option which indicates
+whether SMBIOS tables are present, however they were built.
 
-Tidy up the installation-condition code while we are here.
+Flip the ordering so that the dependency is listed first, which is less
+confusing.
+
+Adjust GENERATE_SMBIOS_TABLE to depend on this new symbol.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v3:
-- Use log_debug() to show the message
-- Squash in the next patch
+- Allow SMBIOS if EFI_LOADER is enabled
+- Reword the help
 
 Changes in v2:
 - Add new patch
 
- lib/efi_loader/Makefile     |  2 +-
- lib/efi_loader/efi_setup.c  | 10 +++++-----
- lib/efi_loader/efi_smbios.c | 37 +++++++------------------------------
- 3 files changed, 13 insertions(+), 36 deletions(-)
+ lib/Kconfig | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 0eb748ff1a59..8d31fc61c601 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -79,7 +79,7 @@ obj-$(CONFIG_VIDEO) += efi_gop.o
- obj-$(CONFIG_BLK) += efi_disk.o
- obj-$(CONFIG_NETDEVICES) += efi_net.o
- obj-$(CONFIG_ACPI) += efi_acpi.o
--obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += efi_smbios.o
-+obj-$(CONFIG_SMBIOS) += efi_smbios.o
- obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
- obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
- obj-$(CONFIG_EFI_RISCV_BOOT_PROTOCOL) += efi_riscv.o
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index ad719afd6328..e6de685e8795 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -326,11 +326,11 @@ efi_status_t efi_init_obj_list(void)
- 		if (ret != EFI_SUCCESS)
- 			goto out;
- 	}
--#ifdef CONFIG_GENERATE_SMBIOS_TABLE
--	ret = efi_smbios_register();
--	if (ret != EFI_SUCCESS)
--		goto out;
--#endif
-+	if (IS_ENABLED(CONFIG_SMBIOS)) {
-+		ret = efi_smbios_register();
-+		if (ret != EFI_SUCCESS)
-+			goto out;
-+	}
- 	ret = efi_watchdog_register();
- 	if (ret != EFI_SUCCESS)
- 		goto out;
-diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-index 306c0bc54f90..06f62d58dc96 100644
---- a/lib/efi_loader/efi_smbios.c
-+++ b/lib/efi_loader/efi_smbios.c
-@@ -20,36 +20,13 @@
-  */
- efi_status_t efi_smbios_register(void)
- {
--	/* Map within the low 32 bits, to allow for 32bit SMBIOS tables */
--	u64 dmi_addr = U32_MAX;
--	efi_status_t ret;
--	void *dmi;
-+	ulong addr;
+diff --git a/lib/Kconfig b/lib/Kconfig
+index a9dca5f52b5a..8901b3a87fc2 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -984,8 +984,8 @@ config BLOBLIST_TABLES
  
--	/* Reserve 4kiB page for SMBIOS */
--	ret = efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
--				 EFI_RUNTIME_SERVICES_DATA, 1, &dmi_addr);
-+	/* space for all tables is marked in efi_acpi_register() */
-+	addr = gd->arch.smbios_start;
-+	log_debug("EFI using SMBIOS tables at %lx\n", addr);
+ config GENERATE_SMBIOS_TABLE
+ 	bool "Generate an SMBIOS (System Management BIOS) table"
++	depends on SMBIOS
+ 	default y
+-	depends on X86 || EFI_LOADER
+ 	help
+ 	  The System Management BIOS (SMBIOS) specification addresses how
+ 	  motherboard and system vendors present management information about
+@@ -1054,6 +1054,19 @@ config SPL_OID_REGISTRY
+ 	  unambiguous persistent name (https://en.wikipedia.org/wiki/Object_identifier).
+ 	  Enable fast lookup object identifier registry in the SPL.
  
--	if (ret != EFI_SUCCESS) {
--		/* Could not find space in lowmem, use highmem instead */
--		ret = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
--					 EFI_RUNTIME_SERVICES_DATA, 1,
--					 &dmi_addr);
--
--		if (ret != EFI_SUCCESS)
--			return ret;
--	}
--
--	/*
--	 * Generate SMBIOS tables - we know that efi_allocate_pages() returns
--	 * a 4k-aligned address, so it is safe to assume that
--	 * write_smbios_table() will write the table at that address.
--	 */
--	assert(!(dmi_addr & 0xf));
--	dmi = (void *)(uintptr_t)dmi_addr;
--	if (write_smbios_table(map_to_sysmem(dmi)))
--		/* Install SMBIOS information as configuration table */
--		return efi_install_configuration_table(&smbios_guid, dmi);
--	efi_free_pages(dmi_addr, 1);
--	log_err("Cannot create SMBIOS table\n");
--	return EFI_SUCCESS;
-+	/* Install SMBIOS information as configuration table */
-+	return efi_install_configuration_table(&smbios_guid,
-+					       map_sysmem(addr, 0));
- }
++config SMBIOS
++	bool "SMBIOS support"
++	depends on X86 || EFI_LOADER
++	default y
++	help
++	  Indicates that this platform can support System Management BIOS
++	  (SMBIOS) tables. These provide various pieces of information about
++	  the board, such as the manufacturer and the model name.
++
++	  See GENERATE_SMBIOS_TABLE which controls whether U-Boot actually
++	  creates these tables, rather than them coming from a previous firmware
++	  stage.
++
+ config SMBIOS_PARSER
+ 	bool "SMBIOS parser"
+ 	help
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
