@@ -4,78 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86F23EE49A3
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 15:35:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD03EE4993
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 18:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79FC987012;
-	Sat, 19 Aug 2023 17:35:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 700E986C8E;
+	Sat, 19 Aug 2023 20:15:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="r9MHqpIq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="M/KpTbgX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DA0A86F7A; Sat, 19 Aug 2023 17:35:15 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0AB3186C8E; Sat, 19 Aug 2023 20:15:04 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B371387000
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 17:35:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C2D186C1E
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 20:15:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-99c1f6f3884so241906466b.0
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 08:35:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692459312; x=1693064112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tVG4jMR5E9BkTo87iPmFp6En1ZQGdzWo1lwohssY+H4=;
- b=r9MHqpIqzlqRGmarycqVpten920LN3c9aGppdYGSbpyMhscsDb3N31eRU6VznWWO0J
- rQr20ntstLtapPrSt5fWq5WKj1VYcm2zo4WB4UyCC+lQoJBY4flU6D5Jr0OjgR2uV95S
- 2eJ845ToXOLH9A6oMVkrRx20PDDLaozJjH4T2GazkUkeX+/kBYin1huHSu5BcYMU2hKY
- pB5chwh7E2aw30bsSSmi0B23qEQynACNWX5PupGOELU2QaVt1cQyD/g5mgTYaj6vA97a
- gcHfMG+4DPfJJ+CxGkem38bmG8MXVJMOy5KDnRxSL/8Y1CUxTDjNfl0umQ3WS6B2UHHm
- JHXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692459312; x=1693064112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tVG4jMR5E9BkTo87iPmFp6En1ZQGdzWo1lwohssY+H4=;
- b=Wg7ox++CNwWbGGRhsktYpBB1RStc/hdUhqn97eCOX17vLsnQjAC4E+hAEoDlhKDxG1
- Wfi9op9RvceFp/cuoo22OP9QHdKCKAWpXB4LPGTNFn6/4kH2OwNS75TqxMDhhMBqW81B
- r+kzLMmIq/RfvbK72+5ZZD8TmIOuM38ggVZtbi74+zhnBXoLNcNz6k2E9PY7ovpBkW5f
- HJo9KKRb7s26Z9L/Uaj3yZDpRcaWkJ4YZNDlJqDEBsBhfH3MZ57/vmf6UYxCOTmqdGxy
- mR3uWTz98fKf1cJzUY55po+cjq2ZNNwtbx3Q4o+n2jivZt193jjx9YWU+rUkSVIy8130
- ks9A==
-X-Gm-Message-State: AOJu0YyQljq7M7AX9iXg/Th58b6BaUjMw+t0MMoyHyg+1NPVjGGsXhqH
- +MoavAiJmv8Z/FRjh3uJvdo=
-X-Google-Smtp-Source: AGHT+IH92VzNauvG7Ut7aIa38wDXhlGXpIaQnKVXXpjY17B59eKPr1w0EMqGlkJWbhbH/EU78mQ7JA==
-X-Received: by 2002:a17:906:76d5:b0:99e:23a:d01b with SMTP id
- q21-20020a17090676d500b0099e023ad01bmr1685364ejn.19.1692459312184; 
- Sat, 19 Aug 2023 08:35:12 -0700 (PDT)
-Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- pv21-20020a170907209500b009829dc0f2a0sm2839737ejb.111.2023.08.19.08.35.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 19 Aug 2023 08:35:11 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] mmc: tegra: get default-tap and default-trim from
- device tree
-Date: Sat, 19 Aug 2023 18:35:01 +0300
-Message-Id: <20230819153501.77245-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230819153501.77245-1-clamor95@gmail.com>
-References: <20230819153501.77245-1-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 55D1360D2C;
+ Sat, 19 Aug 2023 18:14:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46C14C433C8;
+ Sat, 19 Aug 2023 18:14:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1692468898;
+ bh=EfkoC+4BpxnQKPd/B1+/MWlCCiu4A4hYttquQcxxwPI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=M/KpTbgXAM8W6utlVe/22um8GZxlVfrzHSYSfL9+gIrf2yJwzCx4+A/x2qiRmqXu+
+ UWf1/qZp8MQEfPMd6yuFRkgXYVuU/LSd1UNWM5y82nCzYJbCjNJ3UcjnLtmwhe1tat
+ +wmiftPgkr7VZF5WHmW2fVIw7airJcWo1Q5BmLo2J7gyET3u057nXscwvjxNhDX4pu
+ F2oFC/xvU4Z0hVyKhGFlE7xzPZV26RGJigfpBe5WLMIbgQdYVfOrXcQ4O15/rvqBkE
+ jFfc0OIsQIUNu5XsdOTZA0L9wOjW68/vPp+yjS5fJUvyiYVojVGm9SxQemxu7ACFfO
+ v69ffzOr+7+VQ==
+Message-ID: <62c5fe13-7f0e-e736-273e-31a8bbddbf13@kernel.org>
+Date: Sat, 19 Aug 2023 21:14:53 +0300
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v3 09/12] usb: cdns3: Handle otg mode as peripheral
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peter Chen <peter.chen@kernel.org>, Pawel Laszczak <pawell@cadence.com>,
+ Julien Panis <jpanis@baylibre.com>
+Cc: u-boot@lists.denx.de, tony@atomide.com, r-gunasekaran@ti.com,
+ vigneshr@ti.com, nm@ti.com
+References: <20230706-handle-otg-as-periph-v3-0-27e24fa17345@baylibre.com>
+ <20230706-handle-otg-as-periph-v3-9-27e24fa17345@baylibre.com>
+ <20230814171755.GB3630934@bill-the-cat>
+ <d1c121d2-35b7-5097-4a02-308541c50d29@kernel.org>
+ <20230818184841.GO1515023@bill-the-cat>
+ <295e1b8b-c190-c892-6586-38595e8e65eb@kernel.org>
+ <cc4a93dc-aa16-006e-e184-4ccc38c86f48@denx.de>
+ <fc205109-fd3d-ea79-abcc-f1638115d0d3@kernel.org>
+ <1e7e74f3-b54c-0002-e2a8-e32d0087ed9c@denx.de>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <1e7e74f3-b54c-0002-e2a8-e32d0087ed9c@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,131 +84,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Default-tap and default-trim values are used for eMMC setup
-mostly on T114+ devices. As for now, those values are hardcoded
-for T210 and ignored for all other Tegra generations. Fix this
-by passing tap and trim values from dts.
 
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF701T
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- arch/arm/include/asm/arch-tegra/tegra_mmc.h | 17 ++++----
- drivers/mmc/tegra_mmc.c                     | 46 ++++++++++-----------
- 2 files changed, 30 insertions(+), 33 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-tegra/tegra_mmc.h b/arch/arm/include/asm/arch-tegra/tegra_mmc.h
-index d6a55764ba..750c7d809e 100644
---- a/arch/arm/include/asm/arch-tegra/tegra_mmc.h
-+++ b/arch/arm/include/asm/arch-tegra/tegra_mmc.h
-@@ -128,21 +128,22 @@ struct tegra_mmc {
- 
- /* SDMMC1/3 settings from SDMMCx Initialization Sequence of TRM */
- #define MEMCOMP_PADCTRL_VREF	7
--#define AUTO_CAL_ENABLE		(1 << 29)
--#define AUTO_CAL_ACTIVE		(1 << 31)
--#define AUTO_CAL_START		(1 << 31)
-+#define AUTO_CAL_ENABLE		BIT(29)
-+#define AUTO_CAL_ACTIVE		BIT(31)
-+#define AUTO_CAL_START		BIT(31)
-+
- #if defined(CONFIG_TEGRA210)
- #define AUTO_CAL_PD_OFFSET	(0x7D << 8)
- #define AUTO_CAL_PU_OFFSET	(0 << 0)
--#define IO_TRIM_BYPASS_MASK	(1 << 2)
--#define TRIM_VAL_SHIFT		24
--#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
--#define TAP_VAL_SHIFT		16
--#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
- #else
- #define AUTO_CAL_PD_OFFSET	(0x70 << 8)
- #define AUTO_CAL_PU_OFFSET	(0x62 << 0)
- #endif
- 
-+#define TRIM_VAL_SHIFT		24
-+#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
-+#define TAP_VAL_SHIFT		16
-+#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
-+
- #endif	/* __ASSEMBLY__ */
- #endif	/* __TEGRA_MMC_H_ */
-diff --git a/drivers/mmc/tegra_mmc.c b/drivers/mmc/tegra_mmc.c
-index f76fee3ea0..7627800261 100644
---- a/drivers/mmc/tegra_mmc.c
-+++ b/drivers/mmc/tegra_mmc.c
-@@ -37,6 +37,9 @@ struct tegra_mmc_priv {
- 	unsigned int version;	/* SDHCI spec. version */
- 	unsigned int clock;	/* Current clock (MHz) */
- 	int mmc_id;		/* peripheral id */
-+
-+	u32 tap_value;
-+	u32 trim_value;
- };
- 
- static void tegra_mmc_set_power(struct tegra_mmc_priv *priv,
-@@ -526,31 +529,6 @@ static void tegra_mmc_pad_init(struct tegra_mmc_priv *priv)
- 		printf("%s: Warning: Autocal timed out!\n", __func__);
- 		/* TBD: Set CFG2TMC_SDMMC1_PAD_CAL_DRV* regs here */
- 	}
--
--#if defined(CONFIG_TEGRA210)
--	u32 tap_value, trim_value;
--
--	/* Set tap/trim values for SDMMC1/3 @ <48MHz here */
--	val = readl(&priv->reg->venspictl);	/* aka VENDOR_SYS_SW_CNTL */
--	val &= IO_TRIM_BYPASS_MASK;
--	if (id == PERIPH_ID_SDMMC1) {
--		tap_value = 4;			/* default */
--		if (val)
--			tap_value = 3;
--		trim_value = 2;
--	} else {				/* SDMMC3 */
--		tap_value = 3;
--		trim_value = 3;
--	}
--
--	val = readl(&priv->reg->venclkctl);
--	val &= ~TRIM_VAL_MASK;
--	val |= (trim_value << TRIM_VAL_SHIFT);
--	val &= ~TAP_VAL_MASK;
--	val |= (tap_value << TAP_VAL_SHIFT);
--	writel(val, &priv->reg->venclkctl);
--	debug("%s: VENDOR_CLOCK_CNTRL = 0x%08X\n", __func__, val);
--#endif	/* T210 */
- #endif	/* T30/T210 */
- }
- 
-@@ -588,6 +566,21 @@ static void tegra_mmc_reset(struct tegra_mmc_priv *priv, struct mmc *mmc)
- 
- 	/* Make sure SDIO pads are set up */
- 	tegra_mmc_pad_init(priv);
-+
-+	if (priv->tap_value || priv->trim_value) {
-+		u32 val;
-+
-+		val = readl(&priv->reg->venclkctl);
-+
-+		val &= ~TRIM_VAL_MASK;
-+		val |= (priv->trim_value << TRIM_VAL_SHIFT);
-+
-+		val &= ~TAP_VAL_MASK;
-+		val |= (priv->tap_value << TAP_VAL_SHIFT);
-+
-+		writel(val, &priv->reg->venclkctl);
-+		debug("%s: VENDOR_CLOCK_CNTRL = 0x%08X\n", __func__, val);
-+	}
- }
- 
- static int tegra_mmc_init(struct udevice *dev)
-@@ -742,6 +735,9 @@ static int tegra_mmc_probe(struct udevice *dev)
- 	if (dm_gpio_is_valid(&priv->pwr_gpio))
- 		dm_gpio_set_value(&priv->pwr_gpio, 1);
- 
-+	priv->tap_value = dev_read_u32_default(dev, "nvidia,default-tap", 0);
-+	priv->trim_value = dev_read_u32_default(dev, "nvidia,default-trim", 0);
-+
- 	upriv->mmc = &plat->mmc;
- 
- 	return tegra_mmc_init(dev);
+On 19/08/2023 15:20, Marek Vasut wrote:
+> On 8/19/23 09:00, Roger Quadros wrote:
+>> +Peter & Pawel.
+>>
+>> On 19/08/2023 02:47, Marek Vasut wrote:
+>>> On 8/18/23 21:26, Roger Quadros wrote:
+>>>>
+>>>>
+>>>> On 18/08/2023 21:48, Tom Rini wrote:
+>>>>> On Thu, Aug 17, 2023 at 11:15:17AM +0300, Roger Quadros wrote:
+>>>>>> Hi Tom,
+>>>>>>
+>>>>>> On 14/08/2023 20:17, Tom Rini wrote:
+>>>>>>> On Thu, Jul 13, 2023 at 03:45:42PM +0200, Julien Panis wrote:
+>>>>>>>
+>>>>>>>> Override 'otg' to 'peripheral' mode, since 'otg' mode
+>>>>>>>> is not yet supported by u-boot.
+>>>>>>>>
+>>>>>>>> Signed-off-by: Julien Panis <jpanis@baylibre.com>
+>>>>>>>> Suggested-by: Roger Quadros <rogerq@kernel.org>
+>>>>>>>> ---
+>>>>>>>>    drivers/usb/cdns3/core.c | 4 ++++
+>>>>>>>>    1 file changed, 4 insertions(+)
+>>>>>>>>
+>>>>>>>> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+>>>>>>>> index 644a9791b9c9..bd763fc593e1 100644
+>>>>>>>> --- a/drivers/usb/cdns3/core.c
+>>>>>>>> +++ b/drivers/usb/cdns3/core.c
+>>>>>>>> @@ -149,6 +149,10 @@ static int cdns3_core_init_role(struct cdns3 *cdns)
+>>>>>>>>          dr_mode = best_dr_mode;
+>>>>>>>>    +    /* u-boot doesn't yet support OTG so limit to PERIPHERAL */
+>>>>>>>> +    if (dr_mode == USB_DR_MODE_OTG)
+>>>>>>>> +        dr_mode = USB_DR_MODE_PERIPHERAL;
+>>>>>>>> +
+>>>>>>>>    #if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
+>>>>>>>>        if (dr_mode == USB_DR_MODE_OTG || dr_mode == USB_DR_MODE_HOST) {
+>>>>>>>>            ret = cdns3_host_init(cdns);
+>>>>>>>
+>>>>>>> Julien, why don't we support otg mode here?
+>>>>>>>
+>>>>>>
+>>>>>> dr_mode will never be OTG at this point as the previous if condition
+>>>>>> would have forced it to PERIPHERAL.
+>>>>>>
+>>>>>> My understanding was that u-boot USB framework doesn't support OTG mode
+>>>>>> so we force it to PERIPHERAL.
+>>>>>
+>>>>> Well, the first part of this series is "make unknown state be OTG" for
+>>>>> DWC3, so we do in general (and Marek told me off-list he's used it on
+>>>>> DWC2 as well), so it sounds like these (CDNS3, MUSB) drivers need fixing
+>>>>> / updating.
+>>>>>
+>>>>
+>>>> CDNS3 does not have an internal OTG state machine. We mostly really care
+>>>> about role switching and not the full OTG stack. There needs to be
+>>>> some kind of SW framework to do that in u-boot.
+>>>>
+>>>> Marek could you please advise what can be done here?
+>>>
+>>> As far as I can tell, MX8MM (CI HDRC), STM32MP1 (DWC2) all can do the host/peripheral switching. Why is that a problem with CDNS3 ? I am not familiar with this controller btw.
+>>
+>> So for MX8MM and STM32MP1, do  we support on the fly host/peripheral switching based on USB plug type?
+>> As we don't have interrupts, do you keep polling for ID status change?
+> 
+> Nope, you just plug in one cable or the other and run the matching command -- either 'usb reset' for Host or 'ums/dfu/...' for Peripheral .
+
+OK.
+> 
+>> CDNS3 does support host/peripheral switching. i.e. cdsn3_hw_role_state_machine() and drd.c.
+>> What we are missing is the interrupt logic to map ID pin status change to role change.
+> 
+> I don't think you need any interrupt logic for this to work ?
+
+For the use case you described, no.
+Julien, I think this can be easily achieved with the current driver.
+Would be nice if driver prevents user from setting incorrect role than
+what cable is set to.
+
 -- 
-2.39.2
-
+cheers,
+-roger
