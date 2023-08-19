@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF9DEE49A3
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46675EE49A3
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 14:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BA9987081;
-	Sat, 19 Aug 2023 16:24:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72F098705C;
+	Sat, 19 Aug 2023 16:24:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692455088;
-	bh=BSKOq5DBgn5EMiNfsgl9uIXfiT2Hb7+EVJQM1uNUswk=;
+	s=phobos-20191101; t=1692455091;
+	bh=YTfcxbByv0tcp91XU2sHNvcex1ZYjHNPm+DUYpeKbGc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xOLR4FftNR9m18tAsaAyfaf0hD6VVLtGBncgHlblrz95Z6VniYJ3SD8z2BL1rOR5Z
-	 IRVQBJH35sLVJMSd8H6E6QNkvdzWLpvBRU5yJ7U/sS/NxqqBGZq9dUvl4CSlUgU6zs
-	 8v5uUgnucdCmmkY/QA5uRWM/g4VwYVDJxaD/JCCriFaDVWbQic1qw48M5JohlUrp0+
-	 /2fg437dxEXDrVcSEIFLF1T4In5bCpFdeH3lhamkN39bWnZLZ2SDIA++cSsviYj4lz
-	 cp7gQ+sD2INiovDNoS61m/bH3QjmndHVrwte+WDkp4W8y9CPWs6ywn7teouN21PR/n
-	 uKN345DS7xBrQ==
+	b=MaR1S6QH1EwryxKy9ZnwJjvbnU3vjwbAYzHTcsrENX+VaVCWoaTrlpO8Y8W4fXXx0
+	 syOCgdz/H/sQwyrUvZfV7muYds56s45IoCeBdpxNNmy2yBy1O4Nu1KnjPxKZMRRye1
+	 7kTGLyw+zGfczIcW0KyntI+VcRciDIS5Z3QIV4ID0t/fupLN8i1MJIN4EmorJ9oqSC
+	 skumNaaLZ+i42ZM7+FUuofWsXmDYNTOG36W+pcT/xdFbE5YeTbMHjVgeYtQGjUa0VP
+	 e1z954gRD1lZEwjf4QJ/aeo8+X8yZj7LhLhSVonrw17Rxt2IZpK1ndTCyFgZSY8sLT
+	 cZkzRM0Ktq6CQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9EB0486FC6;
- Sat, 19 Aug 2023 16:24:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 439198706B;
+ Sat, 19 Aug 2023 16:24:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1692455086;
- bh=BSKOq5DBgn5EMiNfsgl9uIXfiT2Hb7+EVJQM1uNUswk=;
+ bh=YTfcxbByv0tcp91XU2sHNvcex1ZYjHNPm+DUYpeKbGc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uTfZhIVWBNO2MtyFjPTMr0X2eCuVclA3dKrJZ90J9/bdO8H6LSJKTcfaKSNFEPfDZ
- i7XTQXEcSLD9SJjnPjmqbVOa489bfJdgnYKjc0mW6L5TZomT0vdE2UIE9xHY3rVQSm
- o82kI/wSspM9JnTsRLT2KIZUO2yZ7iv7whNZ25qG/R4PrijJLuUwrEqUKO7SzeiFpr
- QYOxQ+1gNK7Rx2v5UNZpKji469GzcNGWwABu3APpSQp8rfq/34sUOeiAlmM2NJ4z6T
- ormJ+GGPrYgif9fwtY54zf4iWyceHjpCHipbES2wJQGE+Vbe1HQF82dZ9FipW9wl7m
- +iNgc1R3l7ukw==
+ b=KFLNtHfcxisFgUD64fwK8HnmBugbyPqn8Xe4/ZUWDBho/cNGWOBphyK3JM2n2Q/Xd
+ 93mlAVVpHs2OAxY72A7lbNaITeXknA/EtlCOZqohgfciBL/YyoNxZAMT6peqPsMwt/
+ 1UQVz7az4o0e8Jx8VQnrUcRMSc7moFig00MKMy7suCIVsSeADd6bot5BBPHkZnqLmo
+ +ZMiI63oSYBzmzcyX3VFmERlk75g6vhi9CSRePVaCJ+IWh++AEJq73xPTJEB6oo+fE
+ WfCNdzIk4fbZRh7N/IAK/8F+naSNZWtNf3W/H49mujGPmX4WJW5FPt78ElNgAZcdHz
+ /9PEGCpfpAP+g==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
@@ -51,10 +51,9 @@ Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, kernel@puri.sm
-Subject: [PATCH 15/17] usb: gadget: ether: Use plain udevice for UDC
- controller interaction
-Date: Sat, 19 Aug 2023 16:24:05 +0200
-Message-Id: <20230819142407.49632-15-marex@denx.de>
+Subject: [PATCH 16/17] dm: usb: udc: Drop legacy udevice handler functions
+Date: Sat, 19 Aug 2023 16:24:06 +0200
+Message-Id: <20230819142407.49632-16-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230819142407.49632-1-marex@denx.de>
 References: <20230819142407.49632-1-marex@denx.de>
@@ -76,8 +75,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert to plain udevice interaction with UDC controller
-device, avoid the use of UDC uclass dev_array .
+Remove legacy functions limited by the dev_array array,
+those are no longer used anywhere, all the code uses
+plain udevice based access now.
+
+The usb_gadget_handle_interrupts() is doing udevice look up
+until all call sites use dm_usb_gadget_handle_interrupts().
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -96,105 +99,102 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Stefan Roese <sr@denx.de>
 Cc: kernel@puri.sm
 ---
- drivers/usb/gadget/ether.c | 22 +++++++++++++++-------
- 1 file changed, 15 insertions(+), 7 deletions(-)
+ drivers/usb/gadget/udc/udc-uclass.c | 44 ++++-------------------------
+ include/linux/usb/gadget.h          | 17 -----------
+ 2 files changed, 6 insertions(+), 55 deletions(-)
 
-diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
-index 5ff06d3814b..cb1317fd9f3 100644
---- a/drivers/usb/gadget/ether.c
-+++ b/drivers/usb/gadget/ether.c
-@@ -137,6 +137,7 @@ struct eth_dev {
- struct ether_priv {
- 	struct eth_dev ethdev;
- 	struct udevice *netdev;
-+	struct udevice *udcdev;
- 	struct usb_gadget_driver eth_driver;
- };
+diff --git a/drivers/usb/gadget/udc/udc-uclass.c b/drivers/usb/gadget/udc/udc-uclass.c
+index b4271b4be9f..7f54a3b00cb 100644
+--- a/drivers/usb/gadget/udc/udc-uclass.c
++++ b/drivers/usb/gadget/udc/udc-uclass.c
+@@ -12,9 +12,6 @@
+ #include <linux/usb/gadget.h>
  
-@@ -1895,7 +1896,7 @@ static int eth_stop(struct eth_dev *dev)
- 		/* Wait until host receives OID_GEN_MEDIA_CONNECT_STATUS */
- 		ts = get_timer(0);
- 		while (get_timer(ts) < timeout)
--			usb_gadget_handle_interrupts(0);
-+			dm_usb_gadget_handle_interrupts(priv->udcdev);
+ #if CONFIG_IS_ENABLED(DM_USB_GADGET)
+-#define MAX_UDC_DEVICES 4
+-static struct udevice *dev_array[MAX_UDC_DEVICES];
+-
+ int udc_device_get_by_index(int index, struct udevice **udev)
+ {
+ 	struct udevice *dev = NULL;
+@@ -45,45 +42,16 @@ int udc_device_put(struct udevice *udev)
  #endif
- 
- 		rndis_uninit(dev->rndis_config);
-@@ -2300,7 +2301,7 @@ static int usb_eth_start(struct udevice *udev)
- 			pr_err("The remote end did not respond in time.");
- 			goto fail;
- 		}
--		usb_gadget_handle_interrupts(0);
-+		dm_usb_gadget_handle_interrupts(priv->udcdev);
- 	}
- 
- 	packet_received = 0;
-@@ -2370,7 +2371,7 @@ static int usb_eth_send(struct udevice *udev, void *packet, int length)
- 			printf("timeout sending packets to usb ethernet\n");
- 			return -1;
- 		}
--		usb_gadget_handle_interrupts(0);
-+		dm_usb_gadget_handle_interrupts(priv->udcdev);
- 	}
- 	free(rndis_pkt);
- 
-@@ -2406,7 +2407,7 @@ static void usb_eth_stop(struct udevice *udev)
- 
- 	/* Clear pending interrupt */
- 	if (dev->network_started) {
--		usb_gadget_handle_interrupts(0);
-+		dm_usb_gadget_handle_interrupts(priv->udcdev);
- 		dev->network_started = 0;
- 	}
  }
-@@ -2416,7 +2417,7 @@ static int usb_eth_recv(struct udevice *dev, int flags, uchar **packetp)
- 	struct ether_priv *priv = dev_get_priv(dev);
- 	struct eth_dev *ethdev = &priv->ethdev;
  
--	usb_gadget_handle_interrupts(0);
-+	dm_usb_gadget_handle_interrupts(priv->udcdev);
- 
- 	if (packet_received) {
- 		if (ethdev->rx_req) {
-@@ -2452,6 +2453,7 @@ static const struct eth_ops usb_eth_ops = {
- 
- int usb_ether_init(void)
+-int usb_gadget_initialize(int index)
+-{
+-	int ret;
+-	struct udevice *dev = NULL;
+-
+-	if (index < 0 || index >= ARRAY_SIZE(dev_array))
+-		return -EINVAL;
+-	if (dev_array[index])
+-		return 0;
+-	ret = udc_device_get_by_index(index, &dev);
+-	if (!dev || ret) {
+-		pr_err("No USB device found\n");
+-		return -ENODEV;
+-	}
+-	dev_array[index] = dev;
+-	return 0;
+-}
+-
+-int usb_gadget_release(int index)
++int usb_gadget_handle_interrupts(int index)
  {
-+	struct ether_priv *priv;
- 	struct udevice *usb_dev;
+-#if CONFIG_IS_ENABLED(DM_DEVICE_REMOVE)
++	struct udevice *udc;
  	int ret;
+-	if (index < 0 || index >= ARRAY_SIZE(dev_array))
+-		return -EINVAL;
  
-@@ -2467,7 +2469,8 @@ int usb_ether_init(void)
- 		return ret;
- 	}
+-	ret = device_remove(dev_array[index]);
+-	if (!ret)
+-		dev_array[index] = NULL;
+-	return ret;
+-#else
+-	return -ENOSYS;
+-#endif
+-}
++	ret = udc_device_get_by_index(index, &udc);
++	if (ret)
++		return ret;
  
--	return usb_gadget_initialize(0);
-+	priv = dev_get_priv(usb_dev);
-+	return udc_device_get_by_index(0, &priv->udcdev);
+-int usb_gadget_handle_interrupts(int index)
+-{
+-	if (index < 0 || index >= ARRAY_SIZE(dev_array))
+-		return -EINVAL;
+-	return dm_usb_gadget_handle_interrupts(dev_array[index]);
++	return dm_usb_gadget_handle_interrupts(udc);
  }
+ #else
+ /* Backwards hardware compatibility -- switch to DM_USB_GADGET */
+diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
+index 5e9a6513d5b..54875d2716e 100644
+--- a/include/linux/usb/gadget.h
++++ b/include/linux/usb/gadget.h
+@@ -1023,21 +1023,4 @@ int udc_device_get_by_index(int index, struct udevice **udev);
+  */
+ int udc_device_put(struct udevice *udev);
  
- static int usb_eth_probe(struct udevice *dev)
-@@ -2478,6 +2481,9 @@ static int usb_eth_probe(struct udevice *dev)
- 	priv->netdev = dev;
- 	l_priv = priv;
- 
-+	if (!priv->udcdev)
-+		priv->udcdev = dev->parent;
-+
- 	get_ether_addr(CONFIG_USBNET_DEV_ADDR, pdata->enetaddr);
- 	eth_env_set_enetaddr("usbnet_devaddr", pdata->enetaddr);
- 
-@@ -2528,7 +2534,9 @@ static int usb_eth_remove(struct udevice *dev)
- 
- static int usb_eth_unbind(struct udevice *dev)
- {
--	usb_gadget_release(0);
-+	struct ether_priv *priv = dev_get_priv(dev);
-+
-+	udc_device_put(priv->udcdev);
- 
- 	return 0;
- }
+-#if CONFIG_IS_ENABLED(DM_USB_GADGET)
+-int usb_gadget_initialize(int index);
+-int usb_gadget_release(int index);
+-int dm_usb_gadget_handle_interrupts(struct udevice *dev);
+-#else
+-#include <usb.h>
+-static inline int usb_gadget_initialize(int index)
+-{
+-	return board_usb_init(index, USB_INIT_DEVICE);
+-}
+-
+-static inline int usb_gadget_release(int index)
+-{
+-	return board_usb_cleanup(index, USB_INIT_DEVICE);
+-}
+-#endif
+-
+ #endif	/* __LINUX_USB_GADGET_H */
 -- 
 2.40.1
 
