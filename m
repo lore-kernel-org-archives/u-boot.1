@@ -4,84 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C881EEE49A3
-	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 20:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC6DEE49A5
+	for <u-boot@archiver.kernel.org>; Sat, 19 Aug 2023 21:23:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEB4D86ED6;
-	Sat, 19 Aug 2023 22:44:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 515C986E97;
+	Sat, 19 Aug 2023 23:23:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G6ye5GZA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jfdamg66";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8D4086C9F; Sat, 19 Aug 2023 22:44:57 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id DDFDC86E8E; Sat, 19 Aug 2023 23:23:21 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C27F486C35
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 22:44:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A58086C1C
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 23:23:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5298e43bb67so3018373a12.1
- for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 13:44:54 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-790930d78e8so61229639f.1
+ for <u-boot@lists.denx.de>; Sat, 19 Aug 2023 14:23:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692477894; x=1693082694;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4B7Hua+UHTcINLupap4WJussw9TJNMw8+z5Wn3cU/aM=;
- b=G6ye5GZAK+5FNbLrE0N5fTpfhbrCg8xvWqOd7FVl4tnprmxK4gzsPJMTZRY2XpdERH
- 0KEHYOE7Yw48Q2shWin9NbmvK7v5h/t99Sb19oqm+CzyF7c75xEWbN5EI66z6w++//9f
- 20hO9rrAs5bkUACOX9ZLadWVVTXbytl50OP3c=
+ d=chromium.org; s=google; t=1692480197; x=1693084997;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+WxX56uIbZ6L7Prp9BBIifLVhO8uMW/QuXK+4q/lq5I=;
+ b=jfdamg66s7qKZkJq6Dgq/bDNWD5oD4TqVL+sudzHwbMKzvym5Z/Y0lL8DUBHBq2TqY
+ OG1b8j1rnheITBmAvfXiujesAbgIWh5rSeXuJQwWnLpbXtmITTmE70iUlR/FzcrEUG/8
+ 0ybBbp0C+nfC0V1JbcS/coFlFf9hTz2cHysDM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692477894; x=1693082694;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4B7Hua+UHTcINLupap4WJussw9TJNMw8+z5Wn3cU/aM=;
- b=hzCUjAASgKBu1A/9zrVjGDQaaooD53C0KcbSEmNB9GCAd7FE8hrvxBhPStxvGJM3ml
- 3HEx828Bk2fb96bbj7i1WkWUKN0vU61ghTxdidKM44nezJzhnj4ZRTwLJqywWZwlA3iU
- MXDTnYiyhi+cz8/Yvef7tfgi/M9+3gbmPuCiVDwTjec7XN4k3iwno+DVPmOvRt0iMSTw
- DGEHiuV3drYuHW3yj7ZCIDTSF8ef3z935bQycH4Rp0Xc56YASKRevL5tyq8BKJdmiCuY
- 4EMhDC/wUTZIx3Y437nGI4m05rOj4WFu/WDG1FvXEm2z3OHjDoo7YElJd1nKXWN2+jfa
- L9VQ==
-X-Gm-Message-State: AOJu0YyiNhPVQ/3mU1s8PllD9mJPCnuD8CdqyK7fRDz9UBTPzWzisv89
- qVIxNy63ePV3zykDK+KI5DXK6o7DCYqxAiISJLFP3g==
-X-Google-Smtp-Source: AGHT+IGKJlj0bO1jpFx/g1VMqqWBfrdnQh3tfLr4oYUE9Fg8cpIDF8eTsZmD6m4zsLuUz8Ch4WOwhU52qezOY5qXOzg=
-X-Received: by 2002:aa7:d058:0:b0:522:18b6:c01f with SMTP id
- n24-20020aa7d058000000b0052218b6c01fmr3035602edo.3.1692477893938; Sat, 19 Aug
- 2023 13:44:53 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAM2g9JMptku2ZMmWeYxvYeV_MXkFDknL3rTXueVJz3otYhE5hQ@mail.gmail.com>
- <CAPnjgZ1xraxjR56Peyqj8HL-HEg7pZ9EkrW2=NG+6vYG+qVfow@mail.gmail.com>
- <CAM2g9JN9J_i5G9ctaRrimGhSepLEoQ=c4c2VJAua+HzMkB25tA@mail.gmail.com>
- <CAPnjgZ2pcam0wMFnd43pRDwcDb3NEtckbgV6T_6CshPy4B2TdA@mail.gmail.com>
- <CAM2g9JM4M9HtNz5rXu57J0KNjz_BTmG_XmoSy+4EiHmW-J25qg@mail.gmail.com>
- <CAPnjgZ2-CfyNkHJwaL4uPyBnRTofgfXhtix2uLpr+a=t912xkA@mail.gmail.com>
- <CAM2g9JNW+rtE+zh=DFH39rg46MMc7Ct=On=0ZbObK3RdqdC94g@mail.gmail.com>
- <CAPnjgZ0xWN4V-_rPDFaq2M9EXrxPmrvE+uySqkUSwvMPySGhSg@mail.gmail.com>
- <CAM2g9JMfAGdC7t9AYUtupB=BxxkQyhaiNdtO4VnWV3=0V_cw4Q@mail.gmail.com>
- <CAPnjgZ2Mya9u3Knz_tydR=Gyuc1PT52kF=SosDwNpJ8iAT9JWA@mail.gmail.com>
- <CAM2g9JNPL1YXxBx5cqO23JyzRV7viHQ1FxROYKR-RijfeRVseA@mail.gmail.com>
- <CAPnjgZ2ArCugg8HemnWmn-D6=gYO-j4Tq8O4rWzZHrVke3aLDw@mail.gmail.com>
- <CAM2g9JMG2sUSGYuxU-_PjuydMvUxFeE1B7tUFft2MkU80X=LoA@mail.gmail.com>
- <CAM2g9JMffDt1uDMZ5u0jr-tLZWCrK-sP7LTimmkDA8xxGY1e1g@mail.gmail.com>
-In-Reply-To: <CAM2g9JMffDt1uDMZ5u0jr-tLZWCrK-sP7LTimmkDA8xxGY1e1g@mail.gmail.com>
+ d=1e100.net; s=20221208; t=1692480197; x=1693084997;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+WxX56uIbZ6L7Prp9BBIifLVhO8uMW/QuXK+4q/lq5I=;
+ b=a1EfxMU6UWrhvlkkUlEySlXB/IPW1FHf/es3ezLLU/q9R7tUcb/g9G6sSpzSO0bjAd
+ ikEkbqGBzy2ZNfS4HLimpiMZHkXftxSAU2GuYu2/pu/uk7Kq/aYCWd9+FZAEe14ycxV4
+ Spszg+oCsyN8SVzwIn+99dwoLYscMSTA5bmWYSMOOjT7BfRXdoGcRVu5nLjvNKOmDhdb
+ HEEspmymk+pMoC+RH+XpVFKA229FsY+3+5YOuX4E54IehVyMdz5wUCa5CEaUoajg31aR
+ pPlkT4p/UUF/HNqIJrzpJxxiba3/okszcBi+yZ8fbheQwjW5l85OxyX7TFPeGsRUjwKX
+ TtHg==
+X-Gm-Message-State: AOJu0YwF673tFIuJy/pxgZaxvFY/YUltidEXCe8HqmeGQWeetMOi32et
+ ojBCT9iUl6AnfhWD8bqqZJ06JXgoi0pHXPKh/U0=
+X-Google-Smtp-Source: AGHT+IEb2eIHWqo+AIy3Y2bcZFLoXp0C+mhwpcawfCym7s5uuvuf+IwpmiufcS1isllilV1yzVHjJQ==
+X-Received: by 2002:a6b:7001:0:b0:790:f733:2f99 with SMTP id
+ l1-20020a6b7001000000b00790f7332f99mr3837692ioc.17.1692480197631; 
+ Sat, 19 Aug 2023 14:23:17 -0700 (PDT)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ c22-20020a6bec16000000b00786f5990435sm1507256ioh.7.2023.08.19.14.23.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 19 Aug 2023 14:23:17 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 19 Aug 2023 14:44:42 -0600
-Message-ID: <CAPnjgZ1q3C7RKjUeNVmU35XAiaZ=VF21Qfqb-+opgmpdEj-UsA@mail.gmail.com>
-Subject: Re: FIT Image not working in U-Boot
-To: Freddie <fpidev23@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Matthias Brugger <mbrugger@suse.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 00/19] x86: efi: Fixes and improvements for coreboot
+Date: Sat, 19 Aug 2023 15:22:38 -0600
+Message-ID: <20230819212309.1094440-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,282 +85,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Freddie,
+This little series fixes various bugs and annoyances in coreboot and
+coreboot64.
 
-On Fri, 18 Aug 2023 at 09:10, Freddie <fpidev23@gmail.com> wrote:
->
->
-> On Thu, Aug 17, 2023 at 4:55=E2=80=AFPM Freddie <fpidev23@gmail.com> wrot=
-e:
->>
->>
->>
->> On Thu, 17 Aug 2023 at 16:51, Simon Glass <sjg@chromium.org> wrote:
->>>
->>> Hi Freddie,
->>>
->>> On Thu, 17 Aug 2023 at 09:02, Freddie <fpidev23@gmail.com> wrote:
->>> >
->>> >
->>> >
->>> > On Thu, Aug 17, 2023 at 3:13=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
->>> >>
->>> >> Hi Freddie,
->>> >>
->>> >> On Thu, 17 Aug 2023 at 07:57, Freddie <fpidev23@gmail.com> wrote:
->>> >> >
->>> >> >
->>> >> >
->>> >> > On Thu, Aug 17, 2023 at 2:45=E2=80=AFPM Simon Glass <sjg@chromium.=
-org> wrote:
->>> >> >>
->>> >> >> Hi Freddie,
->>> >> >>
->>> >> >> On Thu, 17 Aug 2023 at 07:39, Freddie <fpidev23@gmail.com> wrote:
->>> >> >> >
->>> >> >> >
->>> >> >> >
->>> >> >> > On Thu, Aug 17, 2023 at 2:19=E2=80=AFPM Simon Glass <sjg@chromi=
-um.org> wrote:
->>> >> >> >>
->>> >> >> >> Hi Freddie,
->>> >> >> >>
->>> >> >> >> On Thu, 17 Aug 2023 at 07:02, Freddie <fpidev23@gmail.com> wro=
-te:
->>> >> >> >> >
->>> >> >> >> > Hi Simon,
->>> >> >> >> >
->>> >> >> >> > I'm quite new to this so sorry for asking so many questions =
-but where do I run the 'dump_image -l' command and which code should I look=
- into adding print statements to?
->>> >> >> >>
->>> >> >> >> One thing is to add your reply at the bottom, not the top.
->>> >> >> >>
->>> >> >> >> Actually it is 'dumpimage -l file.fit' to list the contents of=
- your
->>> >> >> >> fit file called 'file.fit'.  The program is built in the tools=
-/
->>> >> >> >> directory or your build, or you can
->>> >> >> >>
->>> >> >> >> I mean if you are completely stumped, go to where the error is
->>> >> >> >> generated and add lots of debugging around it. This is
->>> >> >> >> boot_get_kernel() which is in v2021.10 is in common/bootm.c - =
-so just
->>> >> >> >> add lots of printf() stuff there, rebuild and run on the board=
- and see
->>> >> >> >> if you can figure out what is wrong. From my side I am really =
-not
->>> >> >> >> sure.
->>> >> >> >>
->>> >> >> >> Feel free to share the FIT through a link if you like.
->>> >> >> >>
->>> >> >> >> Also, you could try using a simple FIT without the signature p=
-art.
->>> >> >> >>
->>> >> >> >> >
->>> >> >> >> > I have also just looked into my .config file and this is the=
- contents:
->>> >> >> >> >
->>> >> >> >> > #
->>> >> >> >> > # Automatically generated file; DO NOT EDIT.
->>> >> >> >> > # U-Boot 2021.10 Configuration
->>> >> >> >> > #
->>> >> >> >> >
->>> >> >> >> [..]
->>> >> >> >>
->>> >> >> >> > #
->>> >> >> >> > # Boot images
->>> >> >> >> > #
->>> >> >> >> > # CONFIG_ANDROID_BOOT_IMAGE is not set
->>> >> >> >> > CONFIG_FIT=3Dy
->>> >> >> >> > CONFIG_FIT_EXTERNAL_OFFSET=3D0x0
->>> >> >> >> > CONFIG_FIT_FULL_CHECK=3Dy
->>> >> >> >> > CONFIG_FIT_SIGNATURE=3Dy
->>> >> >> >> > CONFIG_FIT_SIGNATURE_MAX_SIZE=3D0x10000000
->>> >> >> >> > # CONFIG_FIT_RSASSA_PSS is not set
->>> >> >> >> > # CONFIG_FIT_CIPHER is not set
->>> >> >> >> > # CONFIG_FIT_VERBOSE is not set
->>> >> >> >> > # CONFIG_FIT_BEST_MATCH is not set
->>> >> >> >> > CONFIG_FIT_PRINT=3Dy
->>> >> >> >> > # CONFIG_LEGACY_IMAGE_FORMAT is not set
->>> >> >> >> > CONFIG_SUPPORT_RAW_INITRD=3Dy
->>> >> >> >> > CONFIG_OF_BOARD_SETUP=3Dy
->>> >> >> >> > # CONFIG_OF_SYSTEM_SETUP is not set
->>> >> >> >> > # CONFIG_OF_STDOUT_VIA_ALIAS is not set
->>> >> >> >> > CONFIG_SYS_EXTRA_OPTIONS=3D""
->>> >> >> >> > CONFIG_HAVE_SYS_TEXT_BASE=3Dy
->>> >> >> >> > CONFIG_ARCH_FIXUP_FDT_MEMORY=3Dy
->>> >> >> >> > # CONFIG_CHROMEOS is not set
->>> >> >> >> > # CONFIG_CHROMEOS_VBOOT is not set
->>> >> >> >> >
->>> >> >> >> [..]
->>> >> >> >>
->>> >> >> >> This has CONFIG_FIT and CONFIG_LEGACY_IMAGE_FORMAT is disabled=
- (since
->>> >> >> >> you have signature verification on).
->>> >> >> >>
->>> >> >> >> Regards,
->>> >> >> >> Simon
->>> >> >> >
->>> >> >> >
->>> >> >> > Hi Simon,
->>> >> >> >
->>> >> >> > Thank you for your advice, I'll make sure to reply at the botto=
-m of the message from now on.
->>> >> >> >
->>> >> >> > I've run the dumpimage command and this was my output:
->>> >> >> > root@freddie-pi-dev:/home/fit# ../optee/u-boot/tools/dumpimage =
--l image.fit
->>> >> >> > FIT description: RPi FIT Image
->>> >> >> > Created:         Thu Aug  3 15:47:15 2023
->>> >> >> >  Image 0 (kernel-1)
->>> >> >> >   Description:  default kernel
->>> >> >> >   Created:      Thu Aug  3 15:47:15 2023
->>> >> >> >   Type:         Kernel Image
->>> >> >> >   Compression:  uncompressed
->>> >> >> >   Data Size:    20869632 Bytes =3D 20380.50 KiB =3D 19.90 MiB
->>> >> >> >   Architecture: AArch64
->>> >> >> >   OS:           Linux
->>> >> >> >   Load Address: 0x12000000
->>> >> >> >   Entry Point:  0x12000000
->>> >> >> >   Hash algo:    sha1
->>> >> >> >   Hash value:   08d43ed37129fa26e0f5f9d303a211b708c66783
->>> >> >> >  Image 1 (tee-1)
->>> >> >> >   Description:  atf
->>> >> >> >   Created:      Thu Aug  3 15:47:15 2023
->>> >> >> >   Type:         Standalone Program
->>> >> >> >   Compression:  uncompressed
->>> >> >> >   Data Size:    1257464 Bytes =3D 1227.99 KiB =3D 1.20 MiB
->>> >> >> >   Architecture: AArch64
->>> >> >> >   Load Address: 0x08400000
->>> >> >> >   Entry Point:  0x08400000
->>> >> >> >   Hash algo:    sha1
->>> >> >> >   Hash value:   4907d9c33098b2767cd6bc4bc9836f2f913464c7
->>> >> >> >  Image 2 (fdt-1)
->>> >> >> >   Description:  device tree
->>> >> >> >   Created:      Thu Aug  3 15:47:15 2023
->>> >> >> >   Type:         Flat Device Tree
->>> >> >> >   Compression:  uncompressed
->>> >> >> >   Data Size:    32501 Bytes =3D 31.74 KiB =3D 0.03 MiB
->>> >> >> >   Architecture: AArch64
->>> >> >> >   Load Address: 0x01000000
->>> >> >> >   Hash algo:    sha1
->>> >> >> >   Hash value:   1b5bb266752cb247d89245c63bd041acfa34c7c0
->>> >> >> >  Default Configuration: 'config-1'
->>> >> >> >  Configuration 0 (config-1)
->>> >> >> >   Description:  default configuration
->>> >> >> >   Kernel:       kernel-1
->>> >> >> >   FDT:          fdt-1
->>> >> >> >   Loadables:    tee-1
->>> >> >> >   Sign algo:    sha1,rsa2048:dev
->>> >> >> >   Sign value:   22cd61395ae659917626ef88ebf82429d6d592a7975cf48=
-eb1e301f81c8f2a9ae60e203e283b8800971b72cd1b6bf93fb4f5f54d9bc4fb0f49ae0e4811=
-5ff087d8638f8080fdc9f72fbfdd2228d60dba33849a75dba6958a134eefb9441b43f6f8319=
-b7885c052c7993a7c791fe0acc577a629b04630060f02e24e82f9e5c8851c0df3d63da45ee5=
-daeeabe198b990c2b8cbe24834763df299d8ed5a25cb90818caa23676e764d4d6e91e852451=
-c1dae8a2946b9741e637b7556b6ebf27fa9e0ad5252909d13da67179b40f5097cc29c4ac153=
-9c0fb89b567e8ee2d56ef92707d2a9d82a090d35c66cf23e8e66e5c8da5e197ec4a0dd771ef=
-4a3246f6f499850
->>> >> >> >   Timestamp:    Thu Aug  3 15:47:15 2023
->>> >> >> >
->>> >> >>
->>> >> >> That looks fine
->>> >> >>
->>> >> >> >
->>> >> >> > I have tried to use an unsigned FIT before, but I also ran into=
- the same error. In this case, do I simply disable the signature parts of t=
-he config, enable the legacy image format option and make the new image wit=
-hout any of the signing or are there other changes as well?
->>> >> >>
->>> >> >> Well no point in trying it then...you can normally just omit the =
-signing step.
->>> >> >>
->>> >> >> >
->>> >> >> > Where would be an appropriate place to upload my FIT file to in=
- order to share a link?
->>> >> >> >
->>> >> >>
->>> >> >> Google drive? Anything that allows public links.
->>> >> >>
->>> >> >> At this point, I think debugging it is the only option, as I ment=
-ioned
->>> >> >> earlier. I don't know what rpi doesn't enable FIT by default, but
->>> >> >> perhaps there is some reason.
->>> >> >>
->>> >> >> Regards,
->>> >> >> Simon
->>> >> >
->>> >> >
->>> >> >
->>> >> > Hi Simon,
->>> >> >
->>> >> > I have uploaded my FIT file to google drive:
->>> >> > https://drive.google.com/file/d/1Q4GMcrT8tzCCznPe1X_5JA3LLFarW6iO/=
-view?usp=3Ddrive_link
->>> >> >
->>> >> > I will now try and do some debugging, thank you very much for your=
- help.
->>> >>
->>> >> Your image works fine on my rpi_3 with v2021.10 and CONFIG_FIT but I
->>> >> am using the 32-bit build. I am not sure of the magic needed to make
->>> >> it boot 64-bit.
->>> >>
->>> >> I notice that your build date is two weeks ago...are you sure you ar=
-e
->>> >> putting the new U-Boot on the board?
->>> >>
->>> >> Regards,
->>> >> Simon
->>> >
->>> >
->>> > Hi Simon,
->>> >
->>> > Thank you very much for testing the file, I shall try and use the 32 =
-bit version of U-Boot on my pi and see if this works. How would I go about =
-switching to the 32-bit version?
->>>
->>> I wouldn't worry about that for now as I can't imagine it will help.
->>>
->>> >
->>> > I think I might have accidentally sent an older FIT file from my comp=
-uter, but I have created the images the same way every time and they are id=
-entical so this shouldn't be an issue. Is this what you mean about it being=
- 2 weeks ago?
->>>
->>> Well, try building U-Boot again, and boot it, to make sure that you
->>> have the correct version (i.e. the build tag shows today).
->>>
->>> Regards,
->>> Simon
->>
->> Hi Simon,
->>
->> Unfortunately, I am out of office now, but I will try this when I=E2=80=
-=99m in again tomorrow.
->>
->> Thank you once again for your help
->>
->> Regards,
->> Freddie
->
->
-> Hi Simon,
->
-> I have built U-Boot on its own, completely separate from the OPTEE instru=
-ctions and have then overwritten the OPTEE files with this.
->
-> This has worked completely and so my next step is to ensure it is reprodu=
-cible.
->
-> I will make sure to post my findings on this to the appropriate forums as=
- I=E2=80=99m sure this will be of use to the community.
->
-> I=E2=80=99d like to once again thank you for your help, I really apprecia=
-te it.
+With this both coreboot and coreboot64 start up and work reasonably well
+on Brya (x86 Chromebook) and U-Boot can boot common Linux distros.
 
-OK, that is good to hear. I hope you can update any incorrect/outdated
-instructions in OPTEE!
+- Make coreboot64 debug UART start reliably
+- Avoid the long USB-init delay on startup
+- Correct the timer speed on coreboo64
+- Fix a bootstd cros bug (will likely be squashed into another patch)
+- Fix the terribly slow console scrolling
 
-Regards,
-Simon
+With v2 I have also brought in some lost x86 patches so they are all in
+one series.
+
+Changes in v3:
+- Allow SMBIOS if EFI_LOADER is enabled
+- Reword the help
+- Use log_debug() to show the message
+- Squash in the next patch
+
+Changes in v2:
+- Update the malloc size too
+- Add new patch
+- Add new patch
+- Add new patch
+- Add new patch
+- Add new patch
+- Add new patch
+- Add new patch
+- Add new patch
+- Add new patch
+
+Simon Glass (19):
+  x86: coreboot: Add IDE and SATA
+  x86: coreboot: Enable standard boot
+  x86: coreboot: Rearrange arch_cpu_init()
+  x86: Set the CPU vendor in SPL
+  x86: Allow APCI in SPL
+  x86: coreboot: Look for DBG2 UART in SPL too
+  x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
+  x86: coreboot: Drop USB init on startup
+  x86: coreboot: Align options between coreboot and coreboot64
+  x86: coreboot: Enable VIDEO_COPY
+  efi: x86: Correct the condition for installing ACPI tables
+  x86: smbios: Add a Kconfig indicating SMBIOS-table presence
+  x86: Record the position of the SMBIOS tables
+  efi: x86: Use the installed SMBIOS tables
+  x86: coreboot: Record the position of the SMBIOS tables
+  x86: doc: Move into its own directory
+  x86: doc: Update summaries and add links
+  x86: doc: Split out manual booting into its own file
+  x86: doc: coreboot: Mention 64-bit Linux distros
+
+ arch/sandbox/include/asm/global_data.h |   1 +
+ arch/x86/cpu/coreboot/coreboot.c       |  16 +-
+ arch/x86/cpu/x86_64/cpu.c              |   7 +
+ arch/x86/dts/coreboot.dts              |   1 +
+ arch/x86/include/asm/global_data.h     |   1 +
+ arch/x86/lib/coreboot/cb_sysinfo.c     |   1 +
+ arch/x86/lib/tables.c                  |   3 +
+ configs/coreboot64_defconfig           |  25 ++-
+ configs/coreboot_defconfig             |  21 +-
+ doc/arch/index.rst                     |   2 +-
+ doc/arch/x86/index.rst                 |  12 +
+ doc/arch/x86/manual_boot.rst           | 276 +++++++++++++++++++++++
+ doc/arch/{ => x86}/x86.rst             | 295 ++-----------------------
+ doc/board/coreboot/coreboot.rst        |  38 +++-
+ drivers/serial/Kconfig                 |   2 +-
+ drivers/video/coreboot.c               |  12 +
+ include/asm-generic/global_data.h      |   8 +
+ lib/Kconfig                            |  23 +-
+ lib/efi_loader/Makefile                |   4 +-
+ lib/efi_loader/efi_setup.c             |  20 +-
+ lib/efi_loader/efi_smbios.c            |  37 +---
+ 21 files changed, 451 insertions(+), 354 deletions(-)
+ create mode 100644 doc/arch/x86/index.rst
+ create mode 100644 doc/arch/x86/manual_boot.rst
+ rename doc/arch/{ => x86}/x86.rst (64%)
+
+-- 
+2.42.0.rc1.204.g551eb34607-goog
+
