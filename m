@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0646DEE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 21:57:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27813EE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 21:58:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FB2286EFF;
+	by phobos.denx.de (Postfix) with ESMTP id 8096286FAA;
 	Sun, 20 Aug 2023 23:57:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K5UNHffO";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DaApWb66";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8B3286EE9; Sun, 20 Aug 2023 23:57:35 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id E1EE886B7E; Sun, 20 Aug 2023 23:57:35 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6866E86B7E
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 23:57:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CBB886B88
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 23:57:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-31977ace1c8so2489368f8f.1
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 14:57:32 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-51cff235226so5663170a12.0
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 14:57:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692568652; x=1693173452;
+ d=chromium.org; s=google; t=1692568653; x=1693173453;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jb9ZrHV/mwrIrzcRuP+7U8m3N+YrBbFCOQRUDEQmW2g=;
- b=K5UNHffOofzZcW0JUhOXZVymQ+Is5vJ7mEYKlYLgZ7urXkGGoI2iw8aezxHbvSh3g8
- eK7LJlUgkWFomBgn4/u7Ga9hRb7q98hv3zfhHJ1gru8l1xymukKo5+/8pZyc80noFUuy
- OJlaAw3p93r76VQpzgRAI9IEBYqEMa/v4GWB8=
+ bh=iFcVTD2oo0WbqxiKvgbu5MkamO89bIzU92yWfPS04Kk=;
+ b=DaApWb666MrnAlgEZI8KUpyIqzaeGAO/YVtH24SVUWK7xo+pl6iXA27iuae9wWoCZo
+ zprQ3ZxQjxjFfDdz0YINKGwU9cINDqeyEtpPJW/5qG1cX4IXi49wckobtVRI5zfOWx0o
+ fxaZx09VZeD07IPBTH3X59eheQWbNpWugn1zk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692568652; x=1693173452;
+ d=1e100.net; s=20221208; t=1692568653; x=1693173453;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jb9ZrHV/mwrIrzcRuP+7U8m3N+YrBbFCOQRUDEQmW2g=;
- b=E58Jlqg94s/iuuhXvj/yz7jrWdbwN4PdUp4KotV//aL4CLZZLgTfQM/1o1znXW7udD
- 29nOiij8MknxbwsgmBgpjUFu09dD6EpWqZlD/At5QayqKNEBupoqfKpSzmnlrVBSZxYS
- MljeALxzi8ohKQrhKg79YAY5SZW8B3FPPfEuJt2c5llwDLuDiu1urrxYgQLHciRN8+qG
- VNmk0G67ADAuVL9LQRqFNfW9heQvNGWD3sw8tVGAsd8t7eujxuwIR1p4DOcW+2lHE/dd
- mCsomYUtfLbfD+8BDJzNSqdjvb3oK8pbsSahrqjMYhbYyGGuyuhTihkpfzb++VqoO3pW
- SeTA==
-X-Gm-Message-State: AOJu0Yzqw48C0yFqbyTQrAOYJ85YdfA0x8AfcFW/sjM73cKqrrSp4PZy
- jN651EQNi9UHcCf56Sxp+flB0wRG6NBrLKQxlFhGog==
-X-Google-Smtp-Source: AGHT+IGgDfcVLbXcb1MhYYPmyK1N5AcyZCnBVEf4rCRPnyzIqRSWiMkjhH8f2X1YI6mtzFgs6yNSiT9wruvz21OKaKc=
-X-Received: by 2002:a5d:5263:0:b0:319:6e71:d1dd with SMTP id
- l3-20020a5d5263000000b003196e71d1ddmr3010372wrc.12.1692568651780; Sun, 20 Aug
- 2023 14:57:31 -0700 (PDT)
+ bh=iFcVTD2oo0WbqxiKvgbu5MkamO89bIzU92yWfPS04Kk=;
+ b=Au57CQHnt3flTpdPywk3REBnJ//p2bjMRbuOjt8jSav4j0VlFORxoI+q7w4QQaQO+b
+ NP5yEelbaLqiyTaz+UDTolVGZ1e2AL1W/8gtNAaUUuqwYOd7cyfvmJk+aJwJVaE8ZvvU
+ l3quUgED+BX6r4Z5tiixJkdc6WleieV8eonFXKDszrmORp8DO2g92TPNms0vm4Ypwp53
+ EQ7FYKG60jIlqwAsCJBwx8hVCbWEl3zmQTolOcE2ScGDLQn1xeRPSujHP5QW9zlrVn1R
+ Xa0FgmIsk6QKqPsUPuVCeDiriDXZcwFLV37rOlKKCBbUmB3lcwgSI6pkgbFUKTMCRAFZ
+ ZaSg==
+X-Gm-Message-State: AOJu0Yyc6DjHATdgNQJk9BsKNSEJ22K1T8SwxQXVCEDn/SWMn4YyUXA5
+ bu1E5PXLalnKXNLQz8fPllnVecF3ZX5TuGr4utyekg==
+X-Google-Smtp-Source: AGHT+IHMI26M15LySC7fQsIFqkfpCvrr6ehv49S37zYzYwa4CLRYfNVmxyjYL/wPVN5JKr7lpkAGAhvZD1kYZNgTe1o=
+X-Received: by 2002:a05:6402:430f:b0:527:1855:be59 with SMTP id
+ m15-20020a056402430f00b005271855be59mr5391841edc.3.1692568652720; Sun, 20 Aug
+ 2023 14:57:32 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
  HTTPREST; Sun, 20 Aug 2023 14:57:30 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ0vTW9mPfkv4X=gPHQRkmB=TayZdbpA1TjdzJUq3UW5Sw@mail.gmail.com>
-References: <CAPnjgZ0vTW9mPfkv4X=gPHQRkmB=TayZdbpA1TjdzJUq3UW5Sw@mail.gmail.com>
- <20230813195029.159409-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <CAPnjgZ0isu_t-y3VeuEw6Sg=4P9_jVHdSK0stJukNOzzjUn0kw@mail.gmail.com>
+References: <CAPnjgZ0isu_t-y3VeuEw6Sg=4P9_jVHdSK0stJukNOzzjUn0kw@mail.gmail.com>
+ <20230813051506.612351-1-marek.vasut+renesas@mailbox.org>
+ <20230813051506.612351-2-marek.vasut+renesas@mailbox.org>
 Date: Sun, 20 Aug 2023 14:57:30 -0700
-X-Google-Sender-Auth: LnvxDZ_z04iHOfrURp_ucwkMHDQ
-Message-ID: <CAPnjgZ3D_CQt8SomCYtaqhHTtSQ9Cn3EZGdrJtCSutxFc9YsRA@mail.gmail.com>
-Subject: Re: [PATCH] configs: sandbox64: Enable clock CCF driver
+X-Google-Sender-Auth: FpcD-NOrM0-Jvy9-kdHAMhO6mFg
+Message-ID: <CAPnjgZ3ARU-eed4M6BHYb3V40JCk1CDnn28P8_0p9diLhX69Tw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] configs: sandbox64: Enable video 12x22 font support
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -84,19 +85,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 13 Aug 2023 at 13:50, Marek Vasut
+On Sat, 12 Aug 2023 at 23:15, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
 > Align the sandbox64 defconfig with sandbox defconfig. Enable missing
-> CCF and Sandbox CCF drivers. This fixes ut_dm_dm_test_clk_ccf test .
+> 12x22 font support. This fixes ut_dm_dm_test_video_text_12x22 test .
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  configs/sandbox64_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
->
+>  configs/sandbox64_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
