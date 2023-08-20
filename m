@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F969EE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 21:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56CF5EE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 21:59:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36C0E87012;
+	by phobos.denx.de (Postfix) with ESMTP id 784BA87026;
 	Sun, 20 Aug 2023 23:57:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GaUZ+8yi";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DJaM/74k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EB9286EB7; Sun, 20 Aug 2023 23:57:44 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 01BB586B7E; Sun, 20 Aug 2023 23:57:47 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F06D087000
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 23:57:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6845086F67
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 23:57:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-51cff235226so5663292a12.0
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 14:57:41 -0700 (PDT)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-4fe655796faso4088232e87.2
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 14:57:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692568661; x=1693173461;
+ d=chromium.org; s=google; t=1692568656; x=1693173456;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FC7P9mlZ4qcccuye3W8ZjOGZr6JtJeBPvIqw/IOpMs4=;
- b=GaUZ+8yi1W4ZTjEW0qycqP1vCFUbr5o9e8WygzaPgBHEGZbFax1S4aLO7jsW5r6q2g
- 0z/sEapyqlUb34CYjQZUQB4zyNKhjlhb9nq/BIN9R+fwwef7bVcqV77DvArRVmP5I7rt
- 8v4u14197PVStUq0Eo1TxikCKzMOuuw1jOm/k=
+ bh=NsVxffB7VBhKtUNA7h6nJ5w3RqsvqsaNp9A/WswqJLk=;
+ b=DJaM/74kxRSG9gzE9SiyaRAXJLcNv3rt/A9zDjAzd7TzDWZUXeosIcPR/XaMOG9wen
+ LCWyBR7qKw4pF+XgNg2KP1UO3KqInSUtJk+KkfjCMlBY/zEuJ5XLd95wQOGPmT+hbtaX
+ pjT0Qnc3PixQHpe37GFARn4qkC1qJmKroKI0g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692568661; x=1693173461;
+ d=1e100.net; s=20221208; t=1692568656; x=1693173456;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FC7P9mlZ4qcccuye3W8ZjOGZr6JtJeBPvIqw/IOpMs4=;
- b=jWU3hycNRPII7yii5JKxpZ3QpO/SKPRfEWogjy8DExvZGBb5TOmLsePqxUsxR3nRRX
- uEUnv4WhNf/f4oTE60fuAbC0WPifzYa/OTcbTXG6nndb/eia23ai0oTtMdH+KVSvS1ub
- Z8LskIdhVAlPzzwW5s8psTnSNY7SZu1kLeNdHyC9+fq48yAEX4o5kpckaeJsoG0GIuEC
- STNubrYUtIeLY0nFut+ndOHm49VbBJtAzxhZnNHcGe5LlF9fBoHUArmVVfkehlcs7mTO
- y1q80EFiCX/1RI27jZCxDZNvhuU1pYIgIrY6ZlqyrDwcn+akec6L8Zh1joiMh4/nVB+x
- sayQ==
-X-Gm-Message-State: AOJu0Ywk880wN8p7ISmYQbS93q5L5wCcjqIeB2f93LZsiriB4uAMiqmC
- EH9hF0XOa9EEUo7ex7juxfKVko+UtJ1MokWa7fF4Zg==
-X-Google-Smtp-Source: AGHT+IHRsfCH7+WTDZvz72zyZGtGO88wZnlXGJ17g8cys6rG/Cnm3hgVLwUq3Cm6+mcAGujUbmJjLZrtAIaUP9j5m7E=
-X-Received: by 2002:a05:6402:d56:b0:525:4d74:be8c with SMTP id
- ec22-20020a0564020d5600b005254d74be8cmr4414172edb.14.1692568661464; Sun, 20
- Aug 2023 14:57:41 -0700 (PDT)
+ bh=NsVxffB7VBhKtUNA7h6nJ5w3RqsvqsaNp9A/WswqJLk=;
+ b=NSU8QTnv6sZ8Hy8fkSkakExFhL2sGibbLotlptiCFGRF5uO3OLbh8cw6dm3xPyFJMo
+ s5REGyLqsBTITRJvLV2mC7bw2Mr+bhYK7hUsW9f3oSEM9yI2mnPyENJDIB/AHWRlgokS
+ Goho1rhCvnNwcXTGCUzuEv1wdFMgw/9RA+tCGMuBsLomca2bwLig3HPl+FbpO85jowL1
+ XpfYoQ1sjpOOyRDcAAIVGOxjDXtTOxRNi0NZYR7HXEFhllausEIU8aCi83ywLGe++kqv
+ UgZjcZutPYrJLghtCWUL0NM+KdbyuZ4S1NBoaFjo2CosgfqMruzGqemU1uHM8A07LbU7
+ PkFQ==
+X-Gm-Message-State: AOJu0YyEd7MLSz65veebWtLz/5VwTpk1xHo2u/8zXWu9/gmQQV4bNID7
+ hz7zeEml5HGIPYVHBSmhIyYgNbwl3aLuaO0JnIW7TQ==
+X-Google-Smtp-Source: AGHT+IG507Wsaq6f7NRrMe/bPKXKy/idcaIS+fU19eUVZ0drBtu0nc8jz9nvEP8xWmm/9iUvVYxQxWdHVjQxvIBPHJU=
+X-Received: by 2002:a05:6512:b94:b0:4ff:8c0f:a745 with SMTP id
+ b20-20020a0565120b9400b004ff8c0fa745mr4099937lfv.54.1692568656395; Sun, 20
+ Aug 2023 14:57:36 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 20 Aug 2023 14:57:40 -0700
+ HTTPREST; Sun, 20 Aug 2023 14:57:35 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ1Rm7u_=XeJJdw=KJc-8MUQ8ggqmDaQRSYOoZfauJBGtw@mail.gmail.com>
-References: <CAPnjgZ1Rm7u_=XeJJdw=KJc-8MUQ8ggqmDaQRSYOoZfauJBGtw@mail.gmail.com>
- <20230813001553.286403-1-marek.vasut+renesas@mailbox.org>
-Date: Sun, 20 Aug 2023 14:57:40 -0700
-X-Google-Sender-Auth: cWtkmTVy4TMhQdn9CtVovHgtrgw
-Message-ID: <CAPnjgZ02MkDF=OKwPXWcN2A3fC=9iMP2jsBbONb3e+23O1vS5g@mail.gmail.com>
-Subject: Re: [PATCH] configs: sandbox64: Enable SF bootdev
+In-Reply-To: <CAPnjgZ0gXL0npRfKW2BYLDEFJpS-VnHjH+iDkoLC4A6ii__OWA@mail.gmail.com>
+References: <CAPnjgZ0gXL0npRfKW2BYLDEFJpS-VnHjH+iDkoLC4A6ii__OWA@mail.gmail.com>
+ <20230813033209.486168-1-marek.vasut+renesas@mailbox.org>
+Date: Sun, 20 Aug 2023 14:57:35 -0700
+X-Google-Sender-Auth: wzDIgN2EsNK5OlOjnzqmWMh0WTk
+Message-ID: <CAPnjgZ2ma+_p13ZjuUPKJ_R94rzWmNsh_M0sYyY_7FQEw2fy+w@mail.gmail.com>
+Subject: Re: [PATCH 1/2] test: dm: pinmux: Handle %pa in pinctrl-single mux
+ output
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mario Six <mario.six@gdsys.cc>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,19 +85,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 12 Aug 2023 at 18:16, Marek Vasut
+On Sat, 12 Aug 2023 at 21:32, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
-> Align the sandbox64 defconfig with sandbox defconfig. Enable missing
-> SPI NOT bootdev. This fixes ut_bootstd_bootdev_test_cmd_hunt test .
+> The pinctrl-single driver uses %pa to print register value
+> in its single_get_pin_muxing() output. Handle this properly
+> in the test based on CONFIG_PHYS_64BIT .
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
-> Cc: Mario Six <mario.six@gdsys.cc>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  configs/sandbox64_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  test/dm/pinmux.c | 92 +++++++++++++++++++++++++++---------------------
+>  1 file changed, 51 insertions(+), 41 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
