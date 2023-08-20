@@ -4,44 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 210B7EE4993
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 08:35:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0163FEE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 10:00:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A5BE86B86;
-	Sun, 20 Aug 2023 10:35:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id C811C86EE9;
+	Sun, 20 Aug 2023 12:00:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 899BD86963; Sun, 20 Aug 2023 10:35:01 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id C78B186963
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 10:34:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.01,187,1684767600"; 
- d="asc'?scan'208";a="177080151"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 20 Aug 2023 17:34:55 +0900
-Received: from [10.226.92.31] (unknown [10.226.92.31])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id E0B0C400449F;
- Sun, 20 Aug 2023 17:34:53 +0900 (JST)
-Message-ID: <694a4c65-adfb-6838-3347-185369ca3410@bp.renesas.com>
-Date: Sun, 20 Aug 2023 09:34:52 +0100
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KPaJqpuS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B121A86EF7; Sun, 20 Aug 2023 12:00:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A167C86824
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 12:00:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1692525640; x=1693130440; i=xypron.glpk@gmx.de;
+ bh=egka8db7gpcSOmdEnKKUst5JrODYdJ3yQtfJ1AQ8rD8=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=KPaJqpuSg9oAwmu4Sct25e7vlo63Gqu7nKfZqQjGDgwORCNHXQQi0k645k1ZjRuJISvX4Dj
+ TNYyUoi+zNHK9mG7HDOpoeZLp1Dik3l17/hZRLJTJ6rnFiWUE4j0NusArNphL2la745cPD3nH
+ kKUaQzApy5obBi0nDpjotVmd8BcUxoFRBbNpiaiavmYO/nBzCfrZ2r8hds5I7/DsCDgjHUyGd
+ MDHYjHSJBCa+DsI1VTw0UJepKo8cbANPa5L/WP+9sB+qtQJjx6O8lX2FS/tMFE8fB78rtSpCQ
+ Iz/MynLad2SSOMVkzbX1aFcmI+A08SvB613t46dMsX5fN7qEMAsA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MrQEn-1pvHpP0mGN-00oT3P; Sun, 20
+ Aug 2023 12:00:40 +0200
+Message-ID: <4d09f5d8-bf1f-f9fe-e607-c6cf648789b6@gmx.de>
+Date: Sun, 20 Aug 2023 12:01:23 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH] ARM: rmobile: Clean up rmobile_cpuinfo_idx()
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
-References: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------ZH1AT20F2qGYgbox0jLgvRLP"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v3 12/19] x86: smbios: Add a Kconfig indicating
+ SMBIOS-table presence
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20230819212309.1094440-1-sjg@chromium.org>
+ <20230819212309.1094440-13-sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230819212309.1094440-13-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:fDcEZTpy/eEXAeH59JPGEAKxQTGaaVyvym96n4Gk7j4jMr/DKmq
+ TX3DoeRYiipDpBeWxs9GJXvdYNOouSXhUE/4uljXEQoJeUygEwc/gXPV8zLP98T5vqikPjG
+ Dwa0MqkcmkzuBbcizwgx1pGZmWJ8kTGsOMqKw520Ghis/Q7J+s79jW50DY95QD87W7g0gZN
+ a/utZS3GVKkMKANTfTdzg==
+UI-OutboundReport: notjunk:1;M01:P0:8Uz5lgtrehY=;rPfPklUq/RR0j2ezPaDBWpCAF1b
+ NKr81IkOJ19pA6Yt+DVXZfLtx8Qx3gizxu0aYLZG828fqoMSqJJst5a3xeVd/2D4edP7R/M7t
+ 1e7sxAR7YItYDiADJFHdhO61eJQCduZMhpxLtH9Ypu7Tnmrmv1XxgyePEuJJPlKIC5SK7quH2
+ AI1307H89Zd57ol3h5mXBGq5PvhGd5n+hWMRvJvywTJIS2+LPhk4d/WIxwodTYbVNQ/WEpCgq
+ jozLP/tdRYhIj9H3sTFYG1wVk0vLFMyf8twI8Ox5Bp0w5vxpiMfjfwlggxP2ez4+meiFs/Ppi
+ EXE2TQ/HZY/863PJfRtuGO8i2jjxNbeJQljZVYmF/ZbbH7Bgb1oLHvaPc/U0xz9/dd+rMGDPP
+ pSZgTKldQhyg4p7srEjH4xJEQmTRBbalpXv13U5/Q71rkctfSOFs8qSWKBHEYKdJERQpdyZKL
+ B3XwApvQ1wyCRvkrJGoSkF6UX+x8HCBC4UOQTNUDaWVFahlhs1ZLQBvsFBX+QrAmd5Jl2nhR9
+ ++ogViu8ESchgkCnHWH3IY0zhFYLdt8idBUsswsfMeCSISXBMW/qnVpbbN439FLKLc22HiR1Y
+ TMovBAGXnSq52DiY26RqtsV/s5eQu6tIHY/nx02DTv6e7Vsddzzko20LaiZWSZsSWdWe2FB9L
+ 2IxvsL8RmVRHt2nYoQNW4bgR/vbD2h7OsM7o80OThXSg7OndT4UGT1oprpHn3qsWmupX8NQuT
+ otYEE73cajRoXxoDu+vG33Zoo3OEih5Eel2t1EljKh/WHlZV+qmRpAnbc1UbAWwdImFLiuzy/
+ S9Yo6DVIvexVishMg1H+BZt1rWkU4YEzI2w7pN23dggjtGsx5DSsu6UvlzWKfFj3pkWPSNiEv
+ gzJvQJykOEILBRxLhkJj+22VfkvbyiGXFSmsHrLcuJUmeUjYaL77PVzLzXYMaGvsp2FsAPOXY
+ fVRnJAL129ONKziOnc89U54U66o=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,144 +90,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------ZH1AT20F2qGYgbox0jLgvRLP
-Content-Type: multipart/mixed; boundary="------------H0eMhYPKshn6K1XCFX0hBrEn";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
-Message-ID: <694a4c65-adfb-6838-3347-185369ca3410@bp.renesas.com>
-Subject: Re: [PATCH] ARM: rmobile: Clean up rmobile_cpuinfo_idx()
-References: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
-
---------------H0eMhYPKshn6K1XCFX0hBrEn
-Content-Type: multipart/mixed; boundary="------------j9Nj5hSO6U00ESBh00qR8kAN"
-
---------------j9Nj5hSO6U00ESBh00qR8kAN
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 19/08/2023 15:39, Marek Vasut wrote:
-> Clean the function up a bit further. Return immediatelly on match
-> and return ARRAY_SIZE() - 1 on failure. Add proper comment in that
-> case.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On 8/19/23 23:22, Simon Glass wrote:
+> When booted from coreboot, U-Boot does not build the SMBIOS tables, but
+> it should still pass them on to the OS. Add a new option which indicates
+> whether SMBIOS tables are present, however they were built.
+>
+> Flip the ordering so that the dependency is listed first, which is less
+> confusing.
+>
+> Adjust GENERATE_SMBIOS_TABLE to depend on this new symbol.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
-> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> ---
->  arch/arm/mach-rmobile/cpu_info.c | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
->=20
-> diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-rmobile/c=
-pu_info.c
-> index 7651e43bd0f..6804b1da2cd 100644
-> --- a/arch/arm/mach-rmobile/cpu_info.c
-> +++ b/arch/arm/mach-rmobile/cpu_info.c
-> @@ -83,14 +83,15 @@ static const struct {
-> =20
->  static int rmobile_cpuinfo_idx(void)
->  {
-> -	int i =3D 0;
->  	u32 cpu_type =3D rmobile_get_cpu_type();
-> +	int i;
-> =20
-> -	for (; i < ARRAY_SIZE(rmobile_cpuinfo) - 1; i++)
-> +	for (i =3D 0; i < ARRAY_SIZE(rmobile_cpuinfo) - 1; i++)
->  		if (rmobile_cpuinfo[i].cpu_type =3D=3D cpu_type)
-> -			break;
-> +			return i;
-> =20
-> -	return i;
-> +	/* Unknown "CPU" entry */
-> +	return ARRAY_SIZE(rmobile_cpuinfo) - 1;
->  }
-> =20
->  static const u8 *get_cpu_name(int idx)
+>
+> Changes in v3:
+> - Allow SMBIOS if EFI_LOADER is enabled
+> - Reword the help
+>
+> Changes in v2:
+> - Add new patch
+>
+>   lib/Kconfig | 15 ++++++++++++++-
+>   1 file changed, 14 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index a9dca5f52b5a..8901b3a87fc2 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -984,8 +984,8 @@ config BLOBLIST_TABLES
+>
+>   config GENERATE_SMBIOS_TABLE
+>   	bool "Generate an SMBIOS (System Management BIOS) table"
+> +	depends on SMBIOS
+>   	default y
+> -	depends on X86 || EFI_LOADER
+>   	help
+>   	  The System Management BIOS (SMBIOS) specification addresses how
+>   	  motherboard and system vendors present management information about
+> @@ -1054,6 +1054,19 @@ config SPL_OID_REGISTRY
+>   	  unambiguous persistent name (https://en.wikipedia.org/wiki/Object_i=
+dentifier).
+>   	  Enable fast lookup object identifier registry in the SPL.
+>
+> +config SMBIOS
+> +	bool "SMBIOS support"
+> +	depends on X86 || EFI_LOADER
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
---------------j9Nj5hSO6U00ESBh00qR8kAN
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Is there a calling convention for the legacy entry point of Linux to
+pass SMBIOS tables on arm64 and riscv64?
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+> +	default y
+> +	help
+> +	  Indicates that this platform can support System Management BIOS
+> +	  (SMBIOS) tables. These provide various pieces of information about
+> +	  the board, such as the manufacturer and the model name.
+> +
+> +	  See GENERATE_SMBIOS_TABLE which controls whether U-Boot actually
+> +	  creates these tables, rather than them coming from a previous firmwa=
+re
 
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
+Thanks for updating the help text.
 
---------------j9Nj5hSO6U00ESBh00qR8kAN--
+This implies that CONFIG_SMBIOS must be used to decide if
+efi_smbios_register() is called in efi_init_obj_list(). This change is
+in patch 14/19.
 
---------------H0eMhYPKshn6K1XCFX0hBrEn--
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
---------------ZH1AT20F2qGYgbox0jLgvRLP
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZOHQLAUDAAAAAAAKCRDbaV4Vf/JGvU2b
-AQD6sNCWNYgGmvXUVRW6NS6bHSnXJ546dX62yjiiKwq+CwEAmDiNzoayodPCPyB99gPdg89ecjU8
-7H0E6wJ3TtdF+wY=
-=kU5k
------END PGP SIGNATURE-----
-
---------------ZH1AT20F2qGYgbox0jLgvRLP--
+> +	  stage.
+> +
+>   config SMBIOS_PARSER
+>   	bool "SMBIOS parser"
+>   	hel
