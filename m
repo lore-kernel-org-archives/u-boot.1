@@ -4,60 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACAE0EE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 22:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D571EE4996
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 23:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19D5386B86;
-	Mon, 21 Aug 2023 00:03:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3DC3E86B86;
+	Mon, 21 Aug 2023 01:31:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="JIWG+7T+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VoqBetor";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB83F86B7E; Mon, 21 Aug 2023 00:03:22 +0200 (CEST)
-Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
- (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
+ id 15C2686AF4; Mon, 21 Aug 2023 01:31:28 +0200 (CEST)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3EB486BB2
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 00:03:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B54286923
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:31:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=from:subject:mime-version:to:cc:content-transfer-encoding:
- content-type:cc:content-type:from:subject:to;
- s=s1; bh=NU6qtZ1EZGYS3MDXoL9SQWFel89XqnNqwf/+febGscA=;
- b=JIWG+7T+DDtEPcgFrdwNgINGl/i/+qA+qckRiS6UZltPFIf867oTDe3GkmPmKTyAsofQ
- Siw9NvZT1j4FVhT8cgL7pebsYANkKyFqDXYVMdm3QceRLOC4cuGa7qeguXyPvgmJEWIClv
- xX7tq0gdkvNANss7he1ZYB7ZCIr88sNr5Y4L4FF/79O22a0nQJ6EgGdcckZRelzRcBVcuW
- vpYzRlma1mxqjJPdwNEoUjb94fSwXO/yZqeAzoGcksFwA9C6sn5lETj9m6dxOhwPNSkBzI
- Tm/Am8kHE6ZH5qP3IIyVGHXX5R5A7tKm6UtTebcF8jEtxbaerURi8xKnJX/6vjpw==
-Received: by filterdrecv-d7bbbc8bf-nzpnk with SMTP id
- filterdrecv-d7bbbc8bf-nzpnk-1-64E28DA6-2C
- 2023-08-20 22:03:18.486924057 +0000 UTC m=+8807005.431115623
-Received: from bionic.localdomain (unknown) by geopod-ismtpd-8 (SG) with ESMTP
- id J3VR7207RKePWscx8uOr6w Sun, 20 Aug 2023 22:03:18.098 +0000 (UTC)
-From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2] dm: core: Report bootph-pre-ram/sram node as pre-reloc
- after relocation
-Date: Sun, 20 Aug 2023 22:03:18 +0000 (UTC)
-Message-ID: <20230820220316.3517102-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-68a1af910e0so600031b3a.2
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 16:31:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692574283; x=1693179083;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4rNhs+3uDBc2nwfBSa50Nq4m3adQv8cFDgJsu0f51Lk=;
+ b=VoqBetorBaleCwZK+bP7EzSBp8EERdGJOOn9cF/eqXOlkjzgjrcuocEeu46i7FvAGu
+ /mlZE1n9OxLvxG2aWf6M1nfPPgGHB7mQOBqUW4kqPRafDO+/App0HjbwTVdj7+3uTJ17
+ RL85dvUtE1ehbaFvjnZD/5e5rjeTe9r9IIS250Rz4EGY+Cf00w/OmQvoaLQJh0rzhzL1
+ SWQd8k5MN985Pc0OH3FhBeoSDMGrmI8zXTwgJyw/ao44vSIgi07xJdSm9uosnXCvYdi/
+ iuwHjVyrFhKPQc8XYQ5XWuWi3St9kTJPCHVbqO3gsz+HN4yafqG2FK95SqbzEdQ/kJX9
+ FTIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692574283; x=1693179083;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4rNhs+3uDBc2nwfBSa50Nq4m3adQv8cFDgJsu0f51Lk=;
+ b=J3AbUMfIH8rq4IebqPeMfatuzOekHvnMdcArSABQDkWW1oscIf5Ngo7DkSZQPF9PUt
+ /BzMjf5eyJ21N4lTUplHtJF0FV4B7SV1krNS0ej3pF/z9QkQ40BqlXhZKxiyzuolTwVI
+ ENUH8D7k5iw47CtpoTlYLMSymHO6LIDsHJJwlRjLrfF53XhkWlDVkeX6nlRpwWckkOcp
+ 9rvb/uq4xs3ReuxdaG33Y7WM2WLdgX+zf8eg/t8vGn3oSqSi+tUNbpfk1g5j57Fkur49
+ gW+MhJMbH50u+loepefKAzKrjxZ5x4Ak7hNIKjbNuSjMmfKo6FZYN2QrMmOQbT4C+2Uj
+ 53kA==
+X-Gm-Message-State: AOJu0YzfHH6a13PZZ4cm5lLkg781vHlNuYmXm6lOirBfkb5fEbTgkIfm
+ PR8ptSj4HBuWFXix2wtrhDR+SiH9iMyJmQ==
+X-Google-Smtp-Source: AGHT+IGfJbkjkKe8CowB4+ZgP/epdL2mYmAFUPsGk63Ml67lMN5RNVhowh83nXyIzE0i20+ZVsqXPg==
+X-Received: by 2002:a05:6a21:7788:b0:131:6464:217b with SMTP id
+ bd8-20020a056a21778800b001316464217bmr3516873pzc.16.1692574283031; 
+ Sun, 20 Aug 2023 16:31:23 -0700 (PDT)
+Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:a119:6030:1ae3:c940])
+ by smtp.gmail.com with ESMTPSA id
+ ja20-20020a170902efd400b001bde440e693sm5650082plb.44.2023.08.20.16.31.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 20 Aug 2023 16:31:22 -0700 (PDT)
+From: Chris Packham <judge.packham@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Chris Packham <judge.packham@gmail.com>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] ARM64: dts: marvell: cn9310: Use appropriate label for
+ spi1 pins
+Date: Mon, 21 Aug 2023 11:31:04 +1200
+Message-ID: <20230820233113.575818-1-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h=2F=2FwZoAdzh5=2FzxlrK?=
- =?us-ascii?Q?JCxyG5B5Hj0VWsr0f53+1EaNjwHPncgbaBuoRyY?=
- =?us-ascii?Q?53fZnyxGgU7Yfq7rhw+Fkzj4+NlJhDp=2FHopx=2FKt?=
- =?us-ascii?Q?AHwNcHsxLr7tycY8wL3nkiU0UdTY3FsGu=2FdukQz?=
- =?us-ascii?Q?gXr=2FBEf5h7bE0ywOUwruZ2Sr5eoX53pq1lm6Pa?=
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,74 +90,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nodes with bootph-pre-sram/ram props are bound in multiple phases:
-1. At TPL (bootph-pre-sram) or SPL (bootph-pre-ram) phase
-2. At U-Boot proper pre-relocation phase
-3. At U-Boot proper normal phase
+The CN9130-DB uses the SPI1 interface but had the pinctrl node labelled
+as "cp0_spi0_pins". Use the label "cp0_spi1_pins" and update the node
+name to "cp0-spi-pins-1" to avoid confusion with the pinctrl options for
+SPI0.
 
-However the binding and U-Boot Driver Model documentation indicate that
-only nodes marked with bootph-all or bootph-some-ram should be bound in
-the U-Boot proper pre-relocation phase.
-
-Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram prop
-with a pre-reloc status only after U-Boot proper pre-relocation phase.
-Also update the ofnode_pre_reloc documentation to closer reflect the
-binding and driver model documentation.
-
-This changes behavior of what nodes are bound in the U-Boot proper
-pre-relocation phase. Change to bootph-all or add bootph-some-ram prop
-to restore prior behavior.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
-Changes in v2:
-- Drop use of !! to convert into bool
-- Update documentation for ofnode_pre_reloc
-- Rewrite commit message
-- Collect r-b tag
 
- drivers/core/ofnode.c | 2 +-
- include/dm/ofnode.h   | 8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ arch/arm/dts/cn9130-db.dtsi | 2 +-
+ arch/arm/dts/cn9130.dtsi    | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 8df16e56af5c..b1e94b2d60df 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -1353,7 +1353,7 @@ bool ofnode_pre_reloc(ofnode node)
- 	 */
- 	if (ofnode_read_bool(node, "bootph-pre-ram") ||
- 	    ofnode_read_bool(node, "bootph-pre-sram"))
--		return true;
-+		return gd->flags & GD_FLG_RELOC;
- 
- 	if (IS_ENABLED(CONFIG_OF_TAG_MIGRATE)) {
- 		/* detect and handle old tags */
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 0f38b3e736de..13700f8266d7 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -1198,15 +1198,15 @@ int ofnode_read_simple_size_cells(ofnode node);
-  * determine if a node was bound in one of SPL/TPL stages.
-  *
-  * There are 4 settings currently in use
-- * - bootph-some-ram: U-Boot proper pre-relocation only
-+ * - bootph-some-ram: U-Boot proper pre-relocation phase
-  * - bootph-all: all phases
-  * Existing platforms only use it to indicate nodes needed in
-  * SPL. Should probably be replaced by bootph-pre-ram for new platforms.
-- * - bootph-pre-ram: SPL and U-Boot pre-relocation
-- * - bootph-pre-sram: TPL and U-Boot pre-relocation
-+ * - bootph-pre-ram: SPL phase
-+ * - bootph-pre-sram: TPL phase
-  *
-  * @node: node to check
-- * Return: true if node is needed in SPL/TL, false otherwise
-+ * Return: true if node should be or was bound, false otherwise
-  */
- bool ofnode_pre_reloc(ofnode node);
- 
+diff --git a/arch/arm/dts/cn9130-db.dtsi b/arch/arm/dts/cn9130-db.dtsi
+index 1b28732ee752..4b21ff46d507 100644
+--- a/arch/arm/dts/cn9130-db.dtsi
++++ b/arch/arm/dts/cn9130-db.dtsi
+@@ -183,7 +183,7 @@
+ /* U55 */
+ &cp0_spi1 {
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&cp0_spi0_pins>;
++	pinctrl-0 = <&cp0_spi1_pins>;
+ 	reg = <0x700680 0x50>,		/* control */
+ 	      <0x2000000 0x1000000>,	/* CS0 */
+ 	      <0 0xffffffff>,		/* CS1 */
+diff --git a/arch/arm/dts/cn9130.dtsi b/arch/arm/dts/cn9130.dtsi
+index 68b767a70639..efcb2e906b91 100644
+--- a/arch/arm/dts/cn9130.dtsi
++++ b/arch/arm/dts/cn9130.dtsi
+@@ -66,7 +66,7 @@
+ 		marvell,pins = < 56 57 58 59 60 61 >;
+ 		marvell,function = <14>;
+ 	};
+-	cp0_spi0_pins: cp0-spi-pins-0 {
++	cp0_spi1_pins: cp0-spi-pins-1 {
+ 		marvell,pins = < 13 14 15 16 >;
+ 		marvell,function = <3>;
+ 	};
 -- 
 2.41.0
 
