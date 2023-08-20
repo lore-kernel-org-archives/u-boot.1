@@ -4,69 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E2D6EE49A3
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 01:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3026EE49A5
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 02:23:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 210FF8634D;
-	Sun, 20 Aug 2023 03:43:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8B81786BAA;
+	Sun, 20 Aug 2023 04:23:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NKn8Sm5z";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pFsv6QuM";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D510686C9E; Sun, 20 Aug 2023 03:43:51 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692498195;
+	bh=fs/rWFqV0wmncUCE4qw31YfVIETCuVNLjWnus2T7ZJ8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=CXfEERQj8XKZizlv9puSDzle0e94fLkH1slVK1EwsAPI00jblU5+zi0nGLgvU5Xta
+	 p+2P8J3Fpgd1uMAxaJ5slSYzFthSflfVCtEPQfAFqU6DSCcCPe0ZpXUp6Xu/qwrN6A
+	 wCbA0m6ix3hjOzCicarFj6MDtY8aLieBJ48cr7pRYhPZEKjXUn7BLws/t8xH5oGgWP
+	 VC60G4i1EvNgZjasU3Nge+Op2mnFiOGdVXHJcgAJWuyY6NpM1/dZYb4fxglbpKjGRV
+	 Nc1t8VlaoEXWdmpg9ouGECJjWzFqt1Y9h5O/uZhsvlAmBlPh9vUlUPTUOhH3xAPAcp
+	 rq81+yXUde5nA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF49586C1C
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 03:43:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RSz0h4DP4z9sWt;
- Sun, 20 Aug 2023 03:43:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692495828;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=m2dfVYnv8VrZAohxtqYy7HVkiXGhZHe6NL8gn5Pbbsg=;
- b=NKn8Sm5z9eRORaT3sblKdn/9n4y/XTUTMzJer5zcCo/cgNS0qaSImI28vgpNdxinIxCiGL
- fmk5Mn62xF3uckyYM86xRW3c7NsjvvFFL6N8FfmwsL7O+3h62L9JDH5swbtSm8p4oXBk4E
- vQh8MpuaKpCvFX+fxu8LZNb+J9gB5+vQz8KhoYioeoZo2d9ROd6cqhJtJ69glJvnqjXzhR
- O1YmEF/um2r8BPmTe0kXFyzJbTW8HgHcW6K3ASam55/FNncTMGw01jLbJ+c650k1SjFsRm
- 136GnT4GAf4HnkXJDtX8G3TNZ6SykFWTYB3eezA5fFR+k/9a2jfRwD2coypGyQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692495825;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=m2dfVYnv8VrZAohxtqYy7HVkiXGhZHe6NL8gn5Pbbsg=;
- b=pFsv6QuMzuwTBPJAI9xv9IMPvrwc0+lrr659z0ycT4iay95WZXS4zV/GVMzvitKpPxBpbn
- 5fyUXHzBxoXFlLJoI8hVXF6ewTcK61iYWHxXw9azczax6Em6X81BigXEKYxgY2ALPRXRIR
- 2HQaPpqzBlJu7Nm3yFlr0JGzmDJ8fpmQtEoRzS8lrg2vcDs1X4CI7vzrVhHk8rTE+qm+Uc
- vLfeqI/Pf/f9Gb7ro0Th+EzVwVMMSVDcPloLkEqdQJ3T5WAzLcl0JmFdKW9GRR8dktCA19
- yvjgPoHN1NpcA7JFmZnJvK1MVll/VurMrNHux67yc51oL9CppXub1bkxc1pO3A==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Sun, 20 Aug 2023 03:43:28 +0200
-Message-Id: <20230820014328.779175-1-marek.vasut+renesas@mailbox.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9E31A86A69;
+ Sun, 20 Aug 2023 04:23:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1692498194;
+ bh=fs/rWFqV0wmncUCE4qw31YfVIETCuVNLjWnus2T7ZJ8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=u0fWgzY2zZh86szk2YQGdpbCw04KV41CdTH/YXGMLXcZjmyZUF237Ut8Da4wZy8R4
+ BLb6DxkFaPjfBpQcq19x7tT4BUwxicSiKCXE6rMUJlTLO+b3ybRMx6y2dLt2fmfgb2
+ ICTf2ykwQr34mLZx6IYRt0tZAUm1ZFlpm+b0yaqqeCcl4b7cErDdGItvcC6pVQD3IE
+ CDGLFjbCHkQuZjol4tLnNtxNJ/HUuHaX+kQjxj4zqr1KtyFkw5+gWkU1MicYgHobcA
+ VoRdJOc9rPl9SGSihZvEETjE/JV6fH4+GcdMwRwWEXPjJmiJwMgkj0lHje9upkbdUu
+ he2pjZ5ZPBuUA==
+Message-ID: <a0d1a60d-6a95-abf5-4892-ae1269c478eb@denx.de>
+Date: Sun, 20 Aug 2023 04:23:14 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b4ea364244afff1c46f
-X-MBO-RS-META: gigctmbas3m7ojjcju7eh5fcbbngfw9i
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v1 1/1] usb: host: tegra: implement dts based xcvr setup
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20230819150619.76455-1-clamor95@gmail.com>
+ <20230819150619.76455-2-clamor95@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20230819150619.76455-2-clamor95@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,29 +70,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit a5899cc69a99379f01e8e2f9f98e0e09b24f1656:
+On 8/19/23 17:06, Svyatoslav Ryhel wrote:
+> Some devices (like ASUS TF201) may not have fuse based xcvr setup
+> which will result in not working USB line. To fix this situation
+> allow xcvr setup to be performed from device tree values if
+> nvidia,xcvr-setup-use-fuses is not defined.
+> 
+> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF201
 
-  Merge https://source.denx.de/u-boot/custodians/u-boot-watchdog (2023-08-10 11:40:09 -0400)
+I would hope so. Usually T-B tags are not added by the patch author, but 
+that's a detail, and here it has the added model value, so keep it.
 
-are available in the Git repository at:
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>   drivers/usb/host/ehci-tegra.c | 53 +++++++++++++++++++++++++++++++----
+>   1 file changed, 48 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegra.c
+> index 2cf1625670..f24baf8f0c 100644
+> --- a/drivers/usb/host/ehci-tegra.c
+> +++ b/drivers/usb/host/ehci-tegra.c
+> @@ -81,6 +81,8 @@ struct fdt_usb {
+>   	enum periph_id periph_id;/* peripheral id */
+>   	struct gpio_desc vbus_gpio;	/* GPIO for vbus enable */
+>   	struct gpio_desc phy_reset_gpio; /* GPIO to reset ULPI phy */
+> +	bool xcvr_setup_use_fuses; /* Indicates that the value is read from the on-chip fuses */
+> +	u32 xcvr_setup;	/* Input of XCVR cell, HS driver output control */
+>   };
+>   
+>   /*
+> @@ -464,10 +466,21 @@ static int init_utmi_usb_controller(struct fdt_usb *config,
+>   
+>   		/* Recommended PHY settings for EYE diagram */
+>   		val = readl(&usbctlr->utmip_xcvr_cfg0);
+> -		clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+> -				0x4 << UTMIP_XCVR_SETUP_SHIFT);
+> -		clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+> -				0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
+> +
+> +		if (!config->xcvr_setup_use_fuses) {
+> +			clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+> +					config->xcvr_setup <<
+> +					UTMIP_XCVR_SETUP_SHIFT);
+> +			clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+> +					config->xcvr_setup <<
+> +					UTMIP_XCVR_SETUP_MSB_SHIFT);
+> +		} else {
+> +			clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+> +					0x4 << UTMIP_XCVR_SETUP_SHIFT);
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+What is this hard-coded value ?
 
-for you to fetch changes up to dbada49554edd16da39134815635fd0015725c9e:
+Why not place this value into config->xcvr_setup in e.g. probe() and 
+drop this if/else statement ?
 
-  arm: rmobile: Fix off-by-one error in cpuinfo (2023-08-19 16:34:41 +0200)
+> +			clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+> +					0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
+> +		}
+> +
+>   		clrsetbits_le32(&val, UTMIP_XCVR_HSSLEW_MSB_MASK,
+>   				0x8 << UTMIP_XCVR_HSSLEW_MSB_SHIFT);
+>   		writel(val, &usbctlr->utmip_xcvr_cfg0);
+> @@ -522,7 +535,9 @@ static int init_utmi_usb_controller(struct fdt_usb *config,
+>   	setbits_le32(&usbctlr->utmip_bat_chrg_cfg0, UTMIP_PD_CHRG);
+>   
+>   	clrbits_le32(&usbctlr->utmip_xcvr_cfg0, UTMIP_XCVR_LSBIAS_SE);
+> -	setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
+> +
+> +	if (config->xcvr_setup_use_fuses)
+> +		setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
+>   
+>   	/*
+>   	 * Configure the UTMIP_IDLE_WAIT and UTMIP_ELASTIC_LIMIT
+> @@ -843,6 +858,8 @@ static const struct ehci_ops tegra_ehci_ops = {
+>   static int ehci_usb_of_to_plat(struct udevice *dev)
+>   {
+>   	struct fdt_usb *priv = dev_get_priv(dev);
+> +	u32 usb_phy_phandle;
+> +	ofnode usb_phy_node;
+>   	int ret;
+>   
+>   	ret = fdt_decode_usb(dev, priv);
+> @@ -851,6 +868,32 @@ static int ehci_usb_of_to_plat(struct udevice *dev)
+>   
+>   	priv->type = dev_get_driver_data(dev);
+>   
+> +	ret = ofnode_read_u32(dev_ofnode(dev), "nvidia,phy", &usb_phy_phandle);
+> +	if (ret) {
+> +		log_debug("%s: required usb phy node isn't provided\n", __func__);
+> +		priv->xcvr_setup_use_fuses = true;
+> +		return 0;
+> +	}
+> +
+> +	usb_phy_node = ofnode_get_by_phandle(usb_phy_phandle);
+> +	if (!ofnode_valid(usb_phy_node)) {
+> +		log_err("%s: failed to find usb phy node\n", __func__);
+> +		return -EINVAL;
+> +	}
 
-----------------------------------------------------------------
-Hai Pham (1):
-      ARM: rmobile: Update little‐endian byte order option in srec_cat command
+dev_read_phandle() should replace the above
 
-Marek Vasut (1):
-      clk: renesas: Tear clock controller down last before booting OS
+> +	priv->xcvr_setup_use_fuses = ofnode_read_bool(
+> +		usb_phy_node, "nvidia,xcvr-setup-use-fuses");
 
-Paul Barker (1):
-      arm: rmobile: Fix off-by-one error in cpuinfo
+dev_read_bool()
 
- arch/arm/mach-rmobile/Makefile      | 55 +++++++++++++++++++++----------------
- arch/arm/mach-rmobile/cpu_info.c    |  2 +-
- drivers/clk/renesas/clk-rcar-gen3.c |  2 ++
- 3 files changed, 34 insertions(+), 25 deletions(-)
+> +	if (!priv->xcvr_setup_use_fuses) {
+> +		ret = ofnode_read_u32(usb_phy_node, "nvidia,xcvr-setup",
+> +				      &priv->xcvr_setup);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	log_debug("%s: xcvr_setup_use_fuses %d, xcvr_setup %d\n",
+> +		  __func__, priv->xcvr_setup_use_fuses, priv->xcvr_setup);
+
+Is xcvr_setup always initialized, e.g. in case 
+priv->xcvr_setup_use_fuses=true ?
