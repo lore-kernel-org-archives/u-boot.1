@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D571EE4996
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 23:31:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB76EE4996
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 23:35:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DC3E86B86;
-	Mon, 21 Aug 2023 01:31:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D93986923;
+	Mon, 21 Aug 2023 01:35:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VoqBetor";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GBfTxS5h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C2686AF4; Mon, 21 Aug 2023 01:31:28 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 81B258683C; Mon, 21 Aug 2023 01:35:43 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B54286923
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:31:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C15C386A0F
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:35:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-68a1af910e0so600031b3a.2
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 16:31:25 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1bf3a2f4528so19239975ad.2
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 16:35:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692574283; x=1693179083;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4rNhs+3uDBc2nwfBSa50Nq4m3adQv8cFDgJsu0f51Lk=;
- b=VoqBetorBaleCwZK+bP7EzSBp8EERdGJOOn9cF/eqXOlkjzgjrcuocEeu46i7FvAGu
- /mlZE1n9OxLvxG2aWf6M1nfPPgGHB7mQOBqUW4kqPRafDO+/App0HjbwTVdj7+3uTJ17
- RL85dvUtE1ehbaFvjnZD/5e5rjeTe9r9IIS250Rz4EGY+Cf00w/OmQvoaLQJh0rzhzL1
- SWQd8k5MN985Pc0OH3FhBeoSDMGrmI8zXTwgJyw/ao44vSIgi07xJdSm9uosnXCvYdi/
- iuwHjVyrFhKPQc8XYQ5XWuWi3St9kTJPCHVbqO3gsz+HN4yafqG2FK95SqbzEdQ/kJX9
- FTIg==
+ d=gmail.com; s=20221208; t=1692574536; x=1693179336;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zTjawZhXdGRDgT0w4oz4Lhc1NZU3j9BrndxU33RMYqw=;
+ b=GBfTxS5h6Q8JmmGoVbpMZ26FiKiZlEZwiXGy0ZANEjTu+ld0VMVFFvraAcQh/W8R1r
+ aJaGTfN+99MDEp9Sbe3XppthW0r2F7K8eI7lrgrb9+QR0YuSOb+iXg85ap1qfXr4tVdg
+ c69PIiDP6EWz2Fvt77KxKgWplZ0wVnpZNVIVaB5z4SsCgx0oJCV8afJA3daqIc4ZJQ5Z
+ 1I+MFLWm5tOUcpK++jJWbm9U877gayavlGtOmz+5j4kdv3n8W6u1KV7QnoSDMe7AHDTJ
+ /if0cllcMhEndiABN2Q5LJ1GZLyGVlEkzRGQ5id+YcZzmsHgdQB4vUHIwJp3vVEzK6E0
+ r6Wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692574283; x=1693179083;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4rNhs+3uDBc2nwfBSa50Nq4m3adQv8cFDgJsu0f51Lk=;
- b=J3AbUMfIH8rq4IebqPeMfatuzOekHvnMdcArSABQDkWW1oscIf5Ngo7DkSZQPF9PUt
- /BzMjf5eyJ21N4lTUplHtJF0FV4B7SV1krNS0ej3pF/z9QkQ40BqlXhZKxiyzuolTwVI
- ENUH8D7k5iw47CtpoTlYLMSymHO6LIDsHJJwlRjLrfF53XhkWlDVkeX6nlRpwWckkOcp
- 9rvb/uq4xs3ReuxdaG33Y7WM2WLdgX+zf8eg/t8vGn3oSqSi+tUNbpfk1g5j57Fkur49
- gW+MhJMbH50u+loepefKAzKrjxZ5x4Ak7hNIKjbNuSjMmfKo6FZYN2QrMmOQbT4C+2Uj
- 53kA==
-X-Gm-Message-State: AOJu0YzfHH6a13PZZ4cm5lLkg781vHlNuYmXm6lOirBfkb5fEbTgkIfm
- PR8ptSj4HBuWFXix2wtrhDR+SiH9iMyJmQ==
-X-Google-Smtp-Source: AGHT+IGfJbkjkKe8CowB4+ZgP/epdL2mYmAFUPsGk63Ml67lMN5RNVhowh83nXyIzE0i20+ZVsqXPg==
-X-Received: by 2002:a05:6a21:7788:b0:131:6464:217b with SMTP id
- bd8-20020a056a21778800b001316464217bmr3516873pzc.16.1692574283031; 
- Sun, 20 Aug 2023 16:31:23 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692574536; x=1693179336;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zTjawZhXdGRDgT0w4oz4Lhc1NZU3j9BrndxU33RMYqw=;
+ b=OcmETNV9piEKkaL/A96UwU4AktLE6k13pO/Zp/TomNmFCHg1ro7Lsxh8Z2NPBS40w+
+ 1EXsSvvJdYqQw9AP2Ma/FSoP6YMnDR2F3p6Jd9W5U1jJXH07ghIQ26Ct+2bXCXF83W7M
+ yZ7DyTAo4haNG+3BIrESP9J3mOU0TyNi9x67wJ4TVBBPU++mZs/JcaG8TsMukkY49gp4
+ AbRjneeUqRBkKz/ICoSjTNbZOiMvuvuwFy13HjTuYjgdvxTXlp3Fri9vshXEeRDB6ykf
+ 0NvUqhtIvJjAPGnLB0Aplmx8sqMUMGwO7ajh1oDziH83FYBL7g8JPDQpvLv1PRrRU5Pe
+ eUAg==
+X-Gm-Message-State: AOJu0YwJ/jcq171oG/hlQ08l2uWqBrdv4TwqJ0iwVIu1SpvJP21Ntwcg
+ ZT5M3vw/cEWvgNwP3fvUxl3l3LBmsY01lA==
+X-Google-Smtp-Source: AGHT+IHUTfoQAJKGDauI7rJiu4quKnWiguUQ+PvX3nVRQKc3VQkkqhQjL/u9TXfro8Qn7maftQV/ew==
+X-Received: by 2002:a17:903:2446:b0:1b8:e41:f43f with SMTP id
+ l6-20020a170903244600b001b80e41f43fmr7594576pls.27.1692574536612; 
+ Sun, 20 Aug 2023 16:35:36 -0700 (PDT)
 Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:a119:6030:1ae3:c940])
  by smtp.gmail.com with ESMTPSA id
- ja20-20020a170902efd400b001bde440e693sm5650082plb.44.2023.08.20.16.31.20
+ ja20-20020a170902efd400b001bde440e693sm5650082plb.44.2023.08.20.16.35.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Aug 2023 16:31:22 -0700 (PDT)
+ Sun, 20 Aug 2023 16:35:36 -0700 (PDT)
 From: Chris Packham <judge.packham@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Chris Packham <judge.packham@gmail.com>, Stefan Roese <sr@denx.de>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] ARM64: dts: marvell: cn9310: Use appropriate label for
- spi1 pins
-Date: Mon, 21 Aug 2023 11:31:04 +1200
-Message-ID: <20230820233113.575818-1-judge.packham@gmail.com>
+Subject: [PATCH 2/2] ARM64: dts: marvell: cn9310-crb: Remove duplicate pinctrl
+Date: Mon, 21 Aug 2023 11:31:05 +1200
+Message-ID: <20230820233113.575818-2-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230820233113.575818-1-judge.packham@gmail.com>
+References: <20230820233113.575818-1-judge.packham@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,44 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CN9130-DB uses the SPI1 interface but had the pinctrl node labelled
-as "cp0_spi0_pins". Use the label "cp0_spi1_pins" and update the node
-name to "cp0-spi-pins-1" to avoid confusion with the pinctrl options for
-SPI0.
+The cn9130.dtsi defines a pinctrl node for SPI1 (until recently it was
+mislabeled as spi0). Use this instead of having a duplicate definition
+with a different label.
 
 Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
 
- arch/arm/dts/cn9130-db.dtsi | 2 +-
- arch/arm/dts/cn9130.dtsi    | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/dts/cn9130-crb.dtsi | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-diff --git a/arch/arm/dts/cn9130-db.dtsi b/arch/arm/dts/cn9130-db.dtsi
-index 1b28732ee752..4b21ff46d507 100644
---- a/arch/arm/dts/cn9130-db.dtsi
-+++ b/arch/arm/dts/cn9130-db.dtsi
-@@ -183,7 +183,7 @@
- /* U55 */
+diff --git a/arch/arm/dts/cn9130-crb.dtsi b/arch/arm/dts/cn9130-crb.dtsi
+index b229725184a9..7dd36cae282b 100644
+--- a/arch/arm/dts/cn9130-crb.dtsi
++++ b/arch/arm/dts/cn9130-crb.dtsi
+@@ -125,11 +125,6 @@
+ 		marvell,function = <0>;
+ 	};
+ 
+-	cp0_spi1_pins_crb: cp0-spi-pins-crb {
+-		marvell,pins = < 13 14 15 16 >;
+-		marvell,function = <3>;
+-	};
+-
+ 	cp0_smi_pins_crb: cp0-smi-pins-crb {
+ 		marvell,pins = < 40 41 >;
+ 		marvell,function = <8>;
+@@ -170,7 +165,7 @@
+ 
  &cp0_spi1 {
  	pinctrl-names = "default";
--	pinctrl-0 = <&cp0_spi0_pins>;
+-	pinctrl-0 = <&cp0_spi1_pins_crb>;
 +	pinctrl-0 = <&cp0_spi1_pins>;
  	reg = <0x700680 0x50>,		/* control */
  	      <0x2000000 0x1000000>,	/* CS0 */
  	      <0 0xffffffff>,		/* CS1 */
-diff --git a/arch/arm/dts/cn9130.dtsi b/arch/arm/dts/cn9130.dtsi
-index 68b767a70639..efcb2e906b91 100644
---- a/arch/arm/dts/cn9130.dtsi
-+++ b/arch/arm/dts/cn9130.dtsi
-@@ -66,7 +66,7 @@
- 		marvell,pins = < 56 57 58 59 60 61 >;
- 		marvell,function = <14>;
- 	};
--	cp0_spi0_pins: cp0-spi-pins-0 {
-+	cp0_spi1_pins: cp0-spi-pins-1 {
- 		marvell,pins = < 13 14 15 16 >;
- 		marvell,function = <3>;
- 	};
 -- 
 2.41.0
 
