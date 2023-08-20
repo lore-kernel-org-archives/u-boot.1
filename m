@@ -4,74 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67774EE49A5
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 07:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 210B7EE4993
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 08:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B1DD869C8;
-	Sun, 20 Aug 2023 09:14:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A5BE86B86;
+	Sun, 20 Aug 2023 10:35:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lTs8GYgw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A037386CA7; Sun, 20 Aug 2023 09:14:08 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93E2286963
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 09:14:05 +0200 (CEST)
+ id 899BD86963; Sun, 20 Aug 2023 10:35:01 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id C78B186963
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 10:34:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3159d5e409dso2121666f8f.0
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 00:14:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692515645; x=1693120445;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YSUOg1zumej0kBihskkvszBFvJPPBero8vTEdDhPw24=;
- b=lTs8GYgwuemdjVvMe/sKsgOZiBvLm97v7GVWkhUieNcN+K9dKjAktS6m6ydkFpjcZf
- vHen3bP2YlyTauyp4TQ/Hgr19RSlpr7Zj7Htam6WALjDa+soZPmaPyGE1M5NwJDp+aJy
- 6pV9eUx5nctOQ1IdbT4jc1q87KGMTYHr8JtMUswYGUZRIFrewfpD46cDGs0E3mcYXoXS
- X2qJwKgcT4MmmP14QmxFakBh2L829Q3hwEi5pjG6GHqbV/rYOuDe7FYhRJc83pcrvVjM
- dOlBbVjwRiqjF3O9HMtv0uh/wQ6EH6txTgVRNAQIA+zM9iH3oPPx/LymBvVcL0hNdEhv
- QfpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692515645; x=1693120445;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YSUOg1zumej0kBihskkvszBFvJPPBero8vTEdDhPw24=;
- b=FWPH7+WtIYthAdCeRwYNhN4AQCMdw+JYAgbLDkBh75jwIFSPijlEBTBd9QRrnAp5I8
- EPRiCHmt0TGvicL1+1SoaMjgtTZBgDklqLtTOGFxI377v3FM10z2MFihnFcHBBTNCV1T
- iNILFIGlj10y6Ee8+S6SKSx0AuHQ2USYpsAFnpLPrFgEMUq7zNvyyLklJ8CW8DD40AFe
- bNYfAVzAF/GJCUk2dorPrJTuhHMWEnnDBNq9fFBibXBb7l0sfCrErVRaSeVwVWG20ML8
- mCnCFUB1eq1dku/Rp1fyXfBEaa/4gP/tD8o5RSY2MagkW3P4Zhla3Szp1KzZ/qxsLzft
- onIw==
-X-Gm-Message-State: AOJu0YwiLYYFNOeDNBPJ6R1yDfLkf9h+tfVljM5wkEh+uWmGKPY4g65i
- 3p+17qxZLg98xdWNxip1OGAhCuGB585wGC8smws=
-X-Google-Smtp-Source: AGHT+IGjFyCsjn1L6b74j7QmGnsBN1vLN/tUZgfrhbiydCvsbXKf4B4Z9iZYQwvOfZhndAlcrEuWoBWxhjJbBPaRI5U=
-X-Received: by 2002:a5d:5412:0:b0:319:735f:92c5 with SMTP id
- g18-20020a5d5412000000b00319735f92c5mr4666222wrv.32.1692515644668; Sun, 20
- Aug 2023 00:14:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.01,187,1684767600"; 
+ d="asc'?scan'208";a="177080151"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 20 Aug 2023 17:34:55 +0900
+Received: from [10.226.92.31] (unknown [10.226.92.31])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id E0B0C400449F;
+ Sun, 20 Aug 2023 17:34:53 +0900 (JST)
+Message-ID: <694a4c65-adfb-6838-3347-185369ca3410@bp.renesas.com>
+Date: Sun, 20 Aug 2023 09:34:52 +0100
 MIME-Version: 1.0
-References: <20230819150619.76455-1-clamor95@gmail.com>
- <20230819150619.76455-2-clamor95@gmail.com>
- <a0d1a60d-6a95-abf5-4892-ae1269c478eb@denx.de>
-In-Reply-To: <a0d1a60d-6a95-abf5-4892-ae1269c478eb@denx.de>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sun, 20 Aug 2023 10:13:53 +0300
-Message-ID: <CAPVz0n3mmd1doFA=nbMZVC3Tm+aM9FUhGyZ8AEjtvC0k0TM9Rw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] usb: host: tegra: implement dts based xcvr setup
-To: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] ARM: rmobile: Clean up rmobile_cpuinfo_idx()
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+References: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------ZH1AT20F2qGYgbox0jLgvRLP"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,149 +58,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-20 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 05:23:14 GMT+03:00, Ma=
-rek Vasut <marex@denx.de> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=D0=
-=BB=D0=B0):
->On 8/19/23 17:06, Svyatoslav Ryhel wrote:
->> Some devices (like ASUS TF201) may not have fuse based xcvr setup
->> which will result in not working USB line. To fix this situation
->> allow xcvr setup to be performed from device tree values if
->> nvidia,xcvr-setup-use-fuses is not defined.
->>
->> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF201
->
->I would hope so. Usually T-B tags are not added by the patch author, but t=
-hat's a detail, and here it has the added model value, so keep it.
->
->> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
->> ---
->>   drivers/usb/host/ehci-tegra.c | 53 +++++++++++++++++++++++++++++++----
->>   1 file changed, 48 insertions(+), 5 deletions(-)
->>
->> diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegra=
-.c
->> index 2cf1625670..f24baf8f0c 100644
->> --- a/drivers/usb/host/ehci-tegra.c
->> +++ b/drivers/usb/host/ehci-tegra.c
->> @@ -81,6 +81,8 @@ struct fdt_usb {
->>      enum periph_id periph_id;/* peripheral id */
->>      struct gpio_desc vbus_gpio;     /* GPIO for vbus enable */
->>      struct gpio_desc phy_reset_gpio; /* GPIO to reset ULPI phy */
->> +    bool xcvr_setup_use_fuses; /* Indicates that the value is read from=
- the on-chip fuses */
->> +    u32 xcvr_setup; /* Input of XCVR cell, HS driver output control */
->>   };
->>     /*
->> @@ -464,10 +466,21 @@ static int init_utmi_usb_controller(struct fdt_usb=
- *config,
->>              /* Recommended PHY settings for EYE diagram */
->>              val =3D readl(&usbctlr->utmip_xcvr_cfg0);
->> -            clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
->> -                            0x4 << UTMIP_XCVR_SETUP_SHIFT);
->> -            clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
->> -                            0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
->> +
->> +            if (!config->xcvr_setup_use_fuses) {
->> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
->> +                                    config->xcvr_setup <<
->> +                                    UTMIP_XCVR_SETUP_SHIFT);
->> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
->> +                                    config->xcvr_setup <<
->> +                                    UTMIP_XCVR_SETUP_MSB_SHIFT);
->> +            } else {
->> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
->> +                                    0x4 << UTMIP_XCVR_SETUP_SHIFT);
->
->What is this hard-coded value ?
->
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------ZH1AT20F2qGYgbox0jLgvRLP
+Content-Type: multipart/mixed; boundary="------------H0eMhYPKshn6K1XCFX0hBrEn";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+Message-ID: <694a4c65-adfb-6838-3347-185369ca3410@bp.renesas.com>
+Subject: Re: [PATCH] ARM: rmobile: Clean up rmobile_cpuinfo_idx()
+References: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230819143913.54523-1-marek.vasut+renesas@mailbox.org>
 
-0x4 and 0x3 (not same) but those are not in the device tree. Mainline linux
-driver seems not set this at all if use_fuses is enabled but I decided to k=
-eep
-original setup just to not cause regressions.
+--------------H0eMhYPKshn6K1XCFX0hBrEn
+Content-Type: multipart/mixed; boundary="------------j9Nj5hSO6U00ESBh00qR8kAN"
 
-https://github.com/clamor-s/linux/blob/transformer/drivers/usb/phy/phy-tegr=
-a-usb.c#L587-L590
+--------------j9Nj5hSO6U00ESBh00qR8kAN
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
->Why not place this value into config->xcvr_setup in e.g. probe() and drop =
-this if/else statement ?
->
+On 19/08/2023 15:39, Marek Vasut wrote:
+> Clean the function up a bit further. Return immediatelly on match
+> and return ARRAY_SIZE() - 1 on failure. Add proper comment in that
+> case.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Biju Das <biju.das.jz@bp.renesas.com>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> ---
+>  arch/arm/mach-rmobile/cpu_info.c | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-rmobile/c=
+pu_info.c
+> index 7651e43bd0f..6804b1da2cd 100644
+> --- a/arch/arm/mach-rmobile/cpu_info.c
+> +++ b/arch/arm/mach-rmobile/cpu_info.c
+> @@ -83,14 +83,15 @@ static const struct {
+> =20
+>  static int rmobile_cpuinfo_idx(void)
+>  {
+> -	int i =3D 0;
+>  	u32 cpu_type =3D rmobile_get_cpu_type();
+> +	int i;
+> =20
+> -	for (; i < ARRAY_SIZE(rmobile_cpuinfo) - 1; i++)
+> +	for (i =3D 0; i < ARRAY_SIZE(rmobile_cpuinfo) - 1; i++)
+>  		if (rmobile_cpuinfo[i].cpu_type =3D=3D cpu_type)
+> -			break;
+> +			return i;
+> =20
+> -	return i;
+> +	/* Unknown "CPU" entry */
+> +	return ARRAY_SIZE(rmobile_cpuinfo) - 1;
+>  }
+> =20
+>  static const u8 *get_cpu_name(int idx)
 
-Because config->xcvr_setup should matter only if use_fuses is disabled
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+--------------j9Nj5hSO6U00ESBh00qR8kAN
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
->> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
->> +                                    0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
->> +            }
->> +
->>              clrsetbits_le32(&val, UTMIP_XCVR_HSSLEW_MSB_MASK,
->>                              0x8 << UTMIP_XCVR_HSSLEW_MSB_SHIFT);
->>              writel(val, &usbctlr->utmip_xcvr_cfg0);
->> @@ -522,7 +535,9 @@ static int init_utmi_usb_controller(struct fdt_usb *=
-config,
->>      setbits_le32(&usbctlr->utmip_bat_chrg_cfg0, UTMIP_PD_CHRG);
->>      clrbits_le32(&usbctlr->utmip_xcvr_cfg0, UTMIP_XCVR_LSBIAS_SE);
->> -    setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
->> +
->> +    if (config->xcvr_setup_use_fuses)
->> +            setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
->>      /*
->>       * Configure the UTMIP_IDLE_WAIT and UTMIP_ELASTIC_LIMIT
->> @@ -843,6 +858,8 @@ static const struct ehci_ops tegra_ehci_ops =3D {
->>   static int ehci_usb_of_to_plat(struct udevice *dev)
->>   {
->>      struct fdt_usb *priv =3D dev_get_priv(dev);
->> +    u32 usb_phy_phandle;
->> +    ofnode usb_phy_node;
->>      int ret;
->>      ret =3D fdt_decode_usb(dev, priv);
->> @@ -851,6 +868,32 @@ static int ehci_usb_of_to_plat(struct udevice *dev)
->>      priv->type =3D dev_get_driver_data(dev);
->>   +  ret =3D ofnode_read_u32(dev_ofnode(dev), "nvidia,phy", &usb_phy_pha=
-ndle);
->> +    if (ret) {
->> +            log_debug("%s: required usb phy node isn't provided\n", __f=
-unc__);
->> +            priv->xcvr_setup_use_fuses =3D true;
->> +            return 0;
->> +    }
->> +
->> +    usb_phy_node =3D ofnode_get_by_phandle(usb_phy_phandle);
->> +    if (!ofnode_valid(usb_phy_node)) {
->> +            log_err("%s: failed to find usb phy node\n", __func__);
->> +            return -EINVAL;
->> +    }
->
->dev_read_phandle() should replace the above
->
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-Goal of this piece is to get phy of_node by the phandle provided in the
-controller node. Controller node has not only single nvidia,phy phandle
-reference but also clock and reset reference. How will dev_read_phandle
-return me a phandle of "nvidia,phy"?
+xsFNBGS4BNsBEADEc28TO+aryCgRIuhxWAviuJl+f2TcZ1JeeaMzRLgSXKuXzkiI
+g6JIVfNvThjwJaBmb7+/5+D7kDLJuutu9MFfOzTS0QOQWppwIPgbfktvMvwwsq3m
+7e9Qb+S1LVeV0/ldZfuzgzAzHFDwmzryfIyt2JEbsBsGTq/QE+7hvLAe8R9xofIn
+z6/IndiiTYhNCNf06nFPR4Y5ZDZPGb9aw5Jisqh+OSxtc0BFHDSV8/35yWM/JLQ1
+Ja8AOHw1kP9KO+iE9rHMt0+7lH3mN1GBabxH26EdgFfPShsi14qmziLOuUlGLuwO
+ApIYqvdtCs+zlMA8PsiJIMuxizZ6qCLur3r2b+/YXoJjuFDcax9M+Pr0D7rZX0Hk
+6PW3dtvDQHfspwLY0FIlXbbtCfCqGLe47VaS7lvG0XeMlo3dUEsf707Q2h0+G1tm
+wyeuWSPEzZQq/KI7JIFlxr3N/3VCdGa9qVf/40QF0BXPfJdcwTEzmPlYetRgA11W
+bglw8DxWBv24a2gWeUkwBWFScR3QV4FAwVjmlCqrkw9dy/JtrFf4pwDoqSFUcofB
+95u6qlz/PC+ho9uvUo5uIwJyz3J5BIgfkMAPYcHNZZ5QrpI3mdwf66im1TOKKTuf
+3Sz/GKc14qAIQhxuUWrgAKTexBJYJmzDT0Mj4ISjlr9K6VXrQwTuj2zC4QARAQAB
+zStQYXVsIEJhcmtlciA8cGF1bC5iYXJrZXIuY3RAYnAucmVuZXNhcy5jb20+wsGU
+BBMBCgA+FiEE9KKf333+FIzPGaxOJ/SzRZ8AIlcFAmS4BNsCGwEFCQPCZwAFCwkI
+BwIGFQoJCAsCBBYCAwECHgECF4AACgkQJ/SzRZ8AIlfxaQ/8CM36qjfad7eBfwja
+cI1LlH1NwbSJ239rE0X7hU/5yra72egr3T5AUuYTt9ECNQ8Ld03BYhbC6hPki5rb
+OlFM2hEPUQYeohcJ4Na5iIFpTxoIuC49Hp2ce6ikvt9Hc4O2FAntabg+9hE8WA4f
+QWW+Qo5ve5OJ0sGylzu0mRZ2I3mTaDsxuDkXOICF5ggSdjT+rcd/pRVOugImjpZv
+/jzSgUfKV2wcZ8vVK0616K21tyPiRjYtDQjJAKff8gBY6ZvP5REPl+fYNvZm1y4l
+hsVupGHL3aV+BKooMsKRZIMTiKJCIy6YFKHOcgWFG62cuRrFDf4r54MJuUGzyeoF
+1XNFzbe1ySoRfU/HrEuBNqC+1CEBiduumh89BitfDNh6ecWVLw24fjsF1Ke6vYpU
+lK9/yGLV26lXYEN4uEJ9i6PjgJ+Q8fubizCVXVDPxmWSZIoJg8EspZ+Max03Lk3e
+flWQ0E3l6/VHmsFgkvqhjNlzFRrj/k86IKdOi0FOd0xtKh1p34rQ8S/4uUN9XCVj
+KtmyLfQgqPVEC6MKv7yFbextPoDUrFAzEgi4OBdqDJjPbdU9wUjONxuWJRrzRFcr
+nTIG7oC4dae0p1rs5uTlaSIKpB2yulaJLKjnNstAj9G9Evf4SE2PKH4l4Jlo/Hu1
+wOUqmCLRo3vFbn7xvfr1u0Z+oMTOOARkuAhwEgorBgEEAZdVAQUBAQdAcuNbK3VT
+WrRYypisnnzLAguqvKX3Vc1OpNE4f8pOcgMDAQgHwsF2BBgBCgAgFiEE9KKf333+
+FIzPGaxOJ/SzRZ8AIlcFAmS4CHACGwwACgkQJ/SzRZ8AIlc90BAAr0hmx8XU9KCj
+g4nJqfavlmKUZetoX5RB9g3hkpDlvjdQZX6lenw3yUzPj53eoiDKzsM03Tak/KFU
+FXGeq7UtPOfXMyIh5UZVdHQRxC4sIBMLKumBfC7LM6XeSegtaGEX8vSzjQICIbaI
+roF2qVUOTMGal2mvcYEvmObC08bUZuMd4nxLnHGiej2t85+9F3Y7GAKsA25EXbbm
+ziUg8IVXw3TojPNrNoQ3if2Z9NfKBhv0/s7x/3WhhIzOht+rAyZaaW+31btDrX4+
+Y1XLAzg9DAfuqkL6knHDMd9tEuK6m2xCOAeZazXaNeOTjQ/XqCHmZ+691VhmAHCI
+7Z7EBPh++TjEqn4ZH+4KPn6XD52+ruWXGbJP29zc+3bwQ+ZADfUaL3ADj69ySxzm
+bO24USHBAg+BhZAZMBkbkygbTen/umT6tBxG91krqbKlDdc8mhGonBN6i+nz8qv1
+6MdC5P1rDbo834rxNLvoFMSLCcpjoafiprl9qk0wQLq48WGphs9DX7V75ZAU5Lt6
+yA+je8i799EZJsVlB933Gpj688H4csaZqEMBjq7vMvI+a5MnLCGcjwRhsUfogpRb
+AWTx9ddVau4MJgEHzB7UU/VFyP2vku7XPj6mgSfSHyNVf2hqxwISQ8eZLoyxauOD
+Y61QMX6YFL170ylToSFjH627h6TzlUDOMwRkuAiAFgkrBgEEAdpHDwEBB0Bibkmu
+Sf7yECzrkBmjD6VGWNVxTdiqb2RuAfGFY9RjRsLB7QQYAQoAIBYhBPSin999/hSM
+zxmsTif0s0WfACJXBQJkuAiAAhsCAIEJECf0s0WfACJXdiAEGRYIAB0WIQSiu8gv
+1Xr0fIw/aoLbaV4Vf/JGvQUCZLgIgAAKCRDbaV4Vf/JGvZP9AQCwV06n3DZvuce3
+/BtzG5zqUuf6Kp2Esgr2FrD4fKVbogD/ZHpXfi9ELdH/JTSVyujaTqhuxQ5B7UzV
+CUIb1qbg1APIEA/+IaLJIBySehy8dHDZQXit/XQYeROQLTT9PvyM35rZVMGH6VG8
+Zb23BPCJ3N0ISOtVdG402lSP0ilP/zSyQAbJN6F0o2tiPd558lPerFd/KpbCIp8N
+kYaLlHWIDiN2AE3c6sfCiCPMtXOR7HCeQapGQBS/IMh1qYHffuzuEy7tbrMvjdra
+VN9Rqtp7PSuRTbO3jAhm0Oe4lDCAK4zyZfjwiZGxnj9s1dyEbxYB2GhTOgkiX/96
+Nw+m/ShaKqTM7o3pNUEs9J3oHeGZFCCaZBv97ctqrYhnNB4kzCxAaZ6K9HAAmcKe
+WT2q4JdYzwB6vEeHnvxl7M0Dj9pUTMujW77Qh5IkUQLYZ2XQYnKAV2WI90B0R1p9
+bXP+jqqkaNCrxKHV1tYOB6037CziGcZmiDneiTlM765MTLJLlHNqlXxDCzRwEazU
+y9dNzITjVT0qhc6th8/vqN9dqvQaAGa13u86Gbv4XPYdE+5MXPM/fTgkKaPBYcIV
+QMvLfoZxyaTk4nzNbBxwwEEHrvTcWDdWxGNtkWRZw0+U5JpXCOi9kBCtFrJ701UG
+UFs56zWndQUS/2xDyGk8GObGBSRLCwsXsKsF6hSX5aKXHyrAAxEUEscRaAmzd6O3
+ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
 
-https://github.com/clamor-s/u-boot/blob/master/arch/arm/dts/tegra30.dtsi#L7=
-98-L834
+--------------j9Nj5hSO6U00ESBh00qR8kAN--
 
->> +    priv->xcvr_setup_use_fuses =3D ofnode_read_bool(
->> +            usb_phy_node, "nvidia,xcvr-setup-use-fuses");
->
->dev_read_bool()
->
+--------------H0eMhYPKshn6K1XCFX0hBrEn--
 
-This value is set in phy node, not controllers unfortunately.
+--------------ZH1AT20F2qGYgbox0jLgvRLP
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
->> +    if (!priv->xcvr_setup_use_fuses) {
->> +            ret =3D ofnode_read_u32(usb_phy_node, "nvidia,xcvr-setup",
->> +                                  &priv->xcvr_setup);
->> +            if (ret)
->> +                    return ret;
->> +    }
->> +
->> +    log_debug("%s: xcvr_setup_use_fuses %d, xcvr_setup %d\n",
->> +              __func__, priv->xcvr_setup_use_fuses, priv->xcvr_setup);
->
->Is xcvr_setup always initialized, e.g. in case priv->xcvr_setup_use_fuses=
-=3Dtrue ?
+-----BEGIN PGP SIGNATURE-----
 
-Yes, xcvr_setup is always initialized, unless the device needs it to
-be disabled.
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZOHQLAUDAAAAAAAKCRDbaV4Vf/JGvU2b
+AQD6sNCWNYgGmvXUVRW6NS6bHSnXJ546dX62yjiiKwq+CwEAmDiNzoayodPCPyB99gPdg89ecjU8
+7H0E6wJ3TtdF+wY=
+=kU5k
+-----END PGP SIGNATURE-----
+
+--------------ZH1AT20F2qGYgbox0jLgvRLP--
