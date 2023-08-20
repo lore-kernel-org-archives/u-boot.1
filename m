@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C8EEE49A6
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 21:58:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E286FEE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 21:58:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C57586B86;
+	by phobos.denx.de (Postfix) with ESMTP id A43AB86FFB;
 	Sun, 20 Aug 2023 23:57:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B16qPHgG";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KPMvjoRa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B30BC86BB2; Sun, 20 Aug 2023 23:57:40 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id D8D6586B7E; Sun, 20 Aug 2023 23:57:42 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CC2C86FD9
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 23:57:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6155386B86
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 23:57:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5254f9eda36so3436890a12.1
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 14:57:38 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5298e43bb67so4431456a12.1
+ for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 14:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692568657; x=1693173457;
+ d=chromium.org; s=google; t=1692568660; x=1693173460;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BBd/lOnE9PshW4foc7mdZ4CfCjgUhmEYm8YQXjP5uvM=;
- b=B16qPHgGMNJ7Vg2E6DVd1qjTJ32ePwQeoNrfFt3iWHd5X6riz4LzZpfSK6A+A4NEWU
- gARhPwyyLB2QVcxEalN22h0MdBiAgAW6aWImEKGB4yItdmsWxNKsI7Dbe1kv0Y5yZbdu
- 62eCM0HQc7F0P8fCYGzgLDeD6GrkoMn/wCKBc=
+ bh=FLJ6SypCjBbxjOYeS0v56/5W50z+rlSpkUtmj2eBDA0=;
+ b=KPMvjoRax8OyepgHYpe3MBlfv1KU2L6qTCI6dp1AxEEmki3n8gps/qGxguprZZohwW
+ rZajRp60v5/N2+LiIqFmrYniXWu7AfDUWQuzxmTvlQho7FDjcX2jyT5udLlIQexprtZN
+ gTbjCQX5dhFNUTYepkqMLpC4+kAU5xCcqgkjY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692568657; x=1693173457;
+ d=1e100.net; s=20221208; t=1692568660; x=1693173460;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BBd/lOnE9PshW4foc7mdZ4CfCjgUhmEYm8YQXjP5uvM=;
- b=ftOcpsr1WqUMIwGE4daX8VM/m10BAQPcfySOVtkg7Z5SMDYniGYv9REf31enEGpXGU
- j59DWRF7EU3Tb5O5m1z7BQhm+ibDWBBWwZt2S9xEhfoPOj2Y8KlS6QJY1dt35HWWI1ie
- gNvorhCZaVPD89hf3k66fvr0sb1bm+ch9oJEZyIl4IxevfvyH30nLRk/EE//wSK5Sr8b
- mnuvT6HMx/kQiFnn9t6dfmAPgL17DdoH0LxizCs45dB4dt/JMRliyzbIymI+LS41afwb
- go9/gybGwLRON59SlF5yp51J8XdTmtaxsKQnQ37MBEqDdliuJLkbJbddHtfD1JlBcWsu
- 5jMQ==
-X-Gm-Message-State: AOJu0YxnEXKB5c+9jrOGMoOj2HqUhZx4pJ5QBL5udcZPjFe2Lugkp/Kr
- LJAO257OmxWUYCa4I0XcVz6pHmwyW6jKbtVIkGnazCYbw/xNAAQXDHo=
-X-Google-Smtp-Source: AGHT+IEXgOnfImaxRorlJAWzIFoOJ8dETEINv/pae8FYV8EBSI27JqCQDgctND9YY6WrKEPuJXopnr2DCHoBHcAq0+c=
-X-Received: by 2002:aa7:cd50:0:b0:523:b121:4228 with SMTP id
- v16-20020aa7cd50000000b00523b1214228mr2954387edw.41.1692568657697; Sun, 20
- Aug 2023 14:57:37 -0700 (PDT)
+ bh=FLJ6SypCjBbxjOYeS0v56/5W50z+rlSpkUtmj2eBDA0=;
+ b=kyS4dSiR/Ue+xQzcD2H2DKp21Oc+n43vvTE8wWaGnAq4mcHIdToyvQsTws9+T72qT5
+ DuPJOS6Q+FDXX2N2qzO3YEUGXMoTvQnRMJ31/I1f1EkV7aK0CcTJ6zq9P5qdXvop/c0V
+ XwPa6nKy6LpaJmGtOh9NnayrOaQ7eFywcizcbs0aN72a9u9Cfe/ukqjNIt4JoLgIRx9I
+ WQ+cFp3POllHgYKU6SsZeps7pVQ7IUmoY4si5ZQld4K6ohm19c3U1QXJiY3iOzssdTGS
+ ezpY/YH6BkOOf7KaY7bmVuMTtHCMn+Up0x/aj//4fW6JdyVZKp/XPNupTzc6BYGOrcVb
+ UJzA==
+X-Gm-Message-State: AOJu0YzXeKY7GUH4FjqywO1DyXpRxjStD5ivN1Mmw7iSMnEAlNocL9um
+ mwzewNUekeBaAetZ2CV6RB177caikUB7wJxgn7pHxA==
+X-Google-Smtp-Source: AGHT+IForRosdwb1J1norfPQCPeAi+G8eSHS8/AwnYUBlzEFf+Yq/RwM5jwoqxE7Yq8CqVpazCYgHciC6vs9fjR4SOc=
+X-Received: by 2002:a05:6402:26c2:b0:522:ddeb:cdcb with SMTP id
+ x2-20020a05640226c200b00522ddebcdcbmr5927832edd.18.1692568659962; Sun, 20 Aug
+ 2023 14:57:39 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 20 Aug 2023 14:57:36 -0700
+ HTTPREST; Sun, 20 Aug 2023 14:57:39 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ2P7tCQDpCz1ke67buvYrGiD_T8SUG_N8h=4q73ag++wA@mail.gmail.com>
-References: <CAPnjgZ2P7tCQDpCz1ke67buvYrGiD_T8SUG_N8h=4q73ag++wA@mail.gmail.com>
- <20230813030552.421275-1-marek.vasut+renesas@mailbox.org>
-Date: Sun, 20 Aug 2023 14:57:36 -0700
-X-Google-Sender-Auth: Md1d89_RfVfvtnZBCeorq8nPQ08
-Message-ID: <CAPnjgZ29pmNXoTtmzdm6qcDbX+k57O=9S+EZm=eB2w+tfXURdQ@mail.gmail.com>
-Subject: Re: [PATCH] configs: sandbox64: Enable BUTTON_ADC driver
+In-Reply-To: <CAPnjgZ0LQD1HvWFY5xFvkX-1Bq0kddNNGK5f_YbH_8yvdLLJXw@mail.gmail.com>
+References: <CAPnjgZ0LQD1HvWFY5xFvkX-1Bq0kddNNGK5f_YbH_8yvdLLJXw@mail.gmail.com>
+ <20230813025701.417028-1-marek.vasut+renesas@mailbox.org>
+Date: Sun, 20 Aug 2023 14:57:39 -0700
+X-Google-Sender-Auth: wdFytU4j-JqFxKbTpJvkjA-ISSM
+Message-ID: <CAPnjgZ3CC=Kks+iQ_HYx1N-OtAox4xUtMi10NB_0=mK7ah_bdg@mail.gmail.com>
+Subject: Re: [PATCH] configs: sandbox64: Enable MC34708 driver
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -84,11 +84,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 12 Aug 2023 at 21:06, Marek Vasut
+On Sat, 12 Aug 2023 at 20:57, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
 > Align the sandbox64 defconfig with sandbox defconfig. Enable missing
-> BUTTON ADC driver. This fixes ut_dm_dm_test_button_keys_adc test .
+> MC34708 PMIC driver. This fixes ut_dm_dm_test_power_pmic_mc34708_get test .
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -98,9 +98,5 @@ On Sat, 12 Aug 2023 at 21:06, Marek Vasut
 >  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-As Tom mentioned there is likely not that much reason to have as many
-differences between the sandbox configs as we do...so you could do a
-bulk meld if it is easier.
 
 Applied to u-boot-dm, thanks!
