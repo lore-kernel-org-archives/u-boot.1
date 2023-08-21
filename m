@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5803EEE49A5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3782AEE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5329986722;
+	by phobos.denx.de (Postfix) with ESMTP id 99448867C3;
 	Mon, 21 Aug 2023 21:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ACwzDPRf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a7iPTYYi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C5BA8717B; Mon, 21 Aug 2023 21:13:51 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 1A26B80727; Mon, 21 Aug 2023 21:13:54 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F59B871DF
+ by phobos.denx.de (Postfix) with ESMTPS id A18CC871E5
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-d71dd633f33so3803786276.2
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6bdba622d1cso62209a34.1
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I9l2lf+VGiR7RfTSgv2adKCh/z/cr473s3t2o62ozoE=;
- b=ACwzDPRf5jEknOTG+qHBDULl92hSOo8suobYVfNKrl7roJoEWHh1QvKPzR5y5EXZEw
- RwlN60Zu910BcaLR8FBtfbrAO8TjvyfqbR4yFZUYkk/OSYpAbvnZI5/RQTm94cWeptSM
- fg8T/C0K+0Cefg93vYP69xzvbMWXBAn+6UtRo=
+ bh=ZrvX/+Y+xBV4GzVOui8hB07YDsT+Fy9wVNWzIvOE/QQ=;
+ b=a7iPTYYiGFowaVuOPpE0yxIvMMf1LY4mLcfrNzqLoa/EMLhhOQu8UowfkwxXGSkTtV
+ 2xb0CMT9pf2NHdTP2az5IR/Sk5l2D5L0GWh6HzZObmshKS8GcKiixY7585dSIEIikuHw
+ pVsLj6ZEhCiBsu57o7uiTj1/ZMZkVctRtjPyU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I9l2lf+VGiR7RfTSgv2adKCh/z/cr473s3t2o62ozoE=;
- b=ajgccSwQ4J4d34hUNSYl4A0p5Y39ian09TYsyxf0Xk7zCRe+c0I75rxkZLpC/PZ38X
- IiDLArrjMgyvk6GchhayEOE/ezqNvYb2WZtCpXqskBwqEOBrp68i5J0Njq+DO52LpOPm
- iy3Go6cBJ5/yEaTTI3xyDtjjbBOV4aizK6rnGsXjPU6SmrC95NFh1FS/Z7zfnToJAdV9
- xO8h3z8fiIncUfw2HaLpc9nflIlpPGUVFwTpOCFTcdbgGI2Cggy+aR8WK8weaujUo/Ia
- EypckzHBogj0K8x8w+bEbj8Z1ecbmWMudsMXPgqQt0MlicqjptO0xFOvDdWSIRUwlMg4
- ZO5g==
-X-Gm-Message-State: AOJu0Yy5XZ91DGTguxlHVASIlbPbJpbOSzXBhp2vCnm84JslvixHLI7R
- k1JKq4gt5AAVCjrIsmc0Ay7ZQ9ePvlpztHo6upy53Q==
-X-Google-Smtp-Source: AGHT+IEnF+jT1Z3/avsJt1ftzordFasavsoKtdgzgwGOO9+XwOXG2nhzmGg0hq4MzleXC1ghsRkRFbEBjefOMXUg/Kc=
-X-Received: by 2002:a25:f81b:0:b0:d15:e204:a7be with SMTP id
- u27-20020a25f81b000000b00d15e204a7bemr7408289ybd.8.1692645218725; Mon, 21 Aug
+ bh=ZrvX/+Y+xBV4GzVOui8hB07YDsT+Fy9wVNWzIvOE/QQ=;
+ b=Pp3epr1o3clSy0cFyfsiNEXJqqBmmkEGsN+9BUeEPgxVFzIl2avZzdvStvZiYERLq3
+ qc1rO8bzmcRFS/xqcb4szm/BqS25g8pVe63NKwXhFtPxmRgVQ6o4YOAlWMGt/dFJWSj2
+ KP2U/yUVZON86KRVHq0YVL24IfJeeAdVldN/AlbnLoTmU1OqxS0T0m+P5V/aKuFZMGlO
+ P4X4X+g4iik+i56bWBg+42Nbs6M4yRFHsmwJ85M9KAgPdZEFf9YTwRgJx+EUPzIKN3KP
+ p9vhEx88W1jMFWohUYmvVRP5ctCy59dTfA/oxfIRBypaS0arQAHu3ZxoWqAsM6ajDTR7
+ HPoA==
+X-Gm-Message-State: AOJu0Ywnjq/q5pV7Bl1+KfS0+1gixS8qcriE4Rlh3B1MAOsFXaWm5v7l
+ 7n4hgN4x+PI8CWEqjJFbn7akIMAv73CXrpkI+/5geQ==
+X-Google-Smtp-Source: AGHT+IF73LEANYqP925WGPT78QJlqd/bqVgU6FHI9UBCx8jj0DInYWNHg7FC3HJLATGN7UDr4F+1ZO5UzfhpxRTgmLM=
+X-Received: by 2002:a05:6358:7246:b0:134:eed0:3bc5 with SMTP id
+ i6-20020a056358724600b00134eed03bc5mr7625388rwa.9.1692645218757; Mon, 21 Aug
  2023 12:13:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-7-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-7-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-8-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-8-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:51 -0600
-Message-ID: <CAPnjgZ1e89kjsZLndKxh7U02GsfRzw+rhKJvza6LDiq+QahH+Q@mail.gmail.com>
-Subject: Re: [PATCH v5 06/13] vidconsole: Add damage notifications to all
- vidconsole drivers
+Date: Mon, 21 Aug 2023 13:11:55 -0600
+Message-ID: <CAPnjgZ2HEjkAHXVh4utmnJUh=hE5XxCKorXRGQqkEUptxN_WBg@mail.gmail.com>
+Subject: Re: [PATCH v5 07/13] video: test: Test video damage tracking via
+ vidconsole
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
  Jagan Teki <jagan@amarulasolutions.com>,
@@ -96,37 +96,21 @@ X-Virus-Status: Clean
 
 On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> From: Alexander Graf <agraf@csgraf.de>
+> With VIDEO_DAMAGE, the video uclass tracks updated regions of the frame
+> buffer in order to avoid unnecessary work during a video sync. Enable
+> the config in sandbox and add a test for it, by printing strings at a
+> few locations and checking the tracked region.
 >
-> Now that we have a damage tracking API, let's populate damage done by
-> vidconsole drivers. We try to declare as little memory as damaged as
-> possible.
->
-> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> Reported-by: Da Xue <da@libre.computer>
-> [Alper: Rebase for met->baseline, fontdata->height/width, make rotated
->         console_putc_xy() damages pass tests, edit patch message]
-> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > ---
+> This is hard to test because most things issue video syncs that process
+> and reset the damaged region.
 >
 > Changes in v5:
-> - Use met->baseline instead of priv->baseline
-> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-> - Update console_rotate.c video_damage() calls to pass video tests
-> - Remove mention about not having minimal damage for console_rotate.c
+> - Add patch "video: test: Test video damage tracking via vidconsole"
 >
-> Changes in v2:
-> - Fix ranges in truetype target
-> - Limit rotate to necessary damage
->
->  drivers/video/console_normal.c   | 18 +++++++++++
->  drivers/video/console_rotate.c   | 54 ++++++++++++++++++++++++++++++++
->  drivers/video/console_truetype.c | 21 +++++++++++++
->  drivers/video/video-uclass.c     |  1 +
->  4 files changed, 94 insertions(+)
->
+>  configs/sandbox_defconfig |  1 +
+>  test/dm/video.c           | 56 +++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 57 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Suggest dropping the change to the final file
