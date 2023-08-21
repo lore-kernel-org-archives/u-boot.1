@@ -4,119 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D9A9EE49A6
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 01:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58FECEE49A4
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 01:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D90786A8F;
-	Mon, 21 Aug 2023 03:04:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C66F486B7E;
+	Mon, 21 Aug 2023 03:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="s8J6pyQs";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="c2ey2U5n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF5CD86BF8; Mon, 21 Aug 2023 03:04:12 +0200 (CEST)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ id 15AB586A8F; Mon, 21 Aug 2023 03:04:14 +0200 (CEST)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A204086A8F
+ by phobos.denx.de (Postfix) with ESMTPS id A0AA486A69
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 03:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20230821010403epoutp043b7be5dedf9e9567bd9c4f166227cadf~9QGZjiWuy0809208092epoutp04F
+Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20230821010403epoutp01ebdf18ff17c8a972fe40ea639b246cdb~9QGZgsTWL1286512865epoutp01u
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:04:03 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20230821010403epoutp043b7be5dedf9e9567bd9c4f166227cadf~9QGZjiWuy0809208092epoutp04F
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20230821010403epoutp01ebdf18ff17c8a972fe40ea639b246cdb~9QGZgsTWL1286512865epoutp01u
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
  s=mail20170921; t=1692579843;
- bh=BtozO3mJUkcuJLMhR0467hVidx8I5RnNIWgnk/GAKRE=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=s8J6pyQs7H8mK44AmyHxM/KoR3/8d+OTaGRTrdS2sa+KV1X2C4JCwOfxAiTTWAjIf
- qpslYilRvqaOV3pmfV+yxVYWv+dLgBDgLSgoqPN7jXx2+gAqh/neEVYsX5nHL4sHsY
- qxsuWZ8C6Q/jtPNc23+NDcYOjxc/UF5m3JbTNxBk=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ bh=pb5R4/uKftRLiZ4URoTj9KHJ1CElzaiG+t5Vd1rZDr4=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=c2ey2U5neiXs/8NXMDebnmIqxzXgbYAJvS5x5yV3moO2jWzXCOoQPsPvGN8cFadeV
+ tNiUwPy9B7AGT1UWFgLwwu0szfBYLEbo27LQ2znodYjvYnqtQZnv5zAlGr7D5OzyNv
+ fwtNlv5JbRJ/UMbIoelUCMnGc83q2Fu2MQjkF6Vs=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
  epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230821010403epcas2p130c2fef3b2b0048c015c73f426a73a79~9QGZRvqkz2944329443epcas2p10;
+ 20230821010403epcas2p1618d1ba5ea4d3b59d990a58cb2fea522~9QGZQOYPQ2492924929epcas2p1E;
  Mon, 21 Aug 2023 01:04:03 +0000 (GMT)
-Received: from epsmgec2p1-new.samsung.com (unknown [182.195.36.99]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4RTZ4L3wwZz4x9QM; Mon, 21 Aug
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.101]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4RTZ4L45nyz4x9Pv; Mon, 21 Aug
  2023 01:04:02 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmgec2p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 3B.97.50232.208B2E46; Mon, 21 Aug 2023 10:04:02 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ A7.D3.32606.208B2E46; Mon, 21 Aug 2023 10:04:02 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
  epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
- 20230821010401epcas2p45a647001722e345bcb98bd2c79831eda~9QGYJh2St0964809648epcas2p4_;
+ 20230821010401epcas2p49970d58c843b6a7a9baf272f67b26224~9QGYAvRdj0964809648epcas2p49;
  Mon, 21 Aug 2023 01:04:01 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20230821010401epsmtrp13b3db4d474c227d7bc46e9c0e203052d~9QGYI535N0926909269epsmtrp1N;
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20230821010401epsmtrp2f243d65782ce85d7c01e73138f258cb3~9QGX_1mqg0968109681epsmtrp2T;
  Mon, 21 Aug 2023 01:04:01 +0000 (GMT)
-X-AuditID: b6c32a4d-36bff7000006c438-ed-64e2b802610d
+X-AuditID: b6c32a47-9cbff70000007f5e-8e-64e2b8020934
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- D1.ED.64355.108B2E46; Mon, 21 Aug 2023 10:04:01 +0900 (KST)
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ B9.8B.30535.108B2E46; Mon, 21 Aug 2023 10:04:01 +0900 (KST)
 Received: from cometzero-ubuntu..
  (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20230821010401epsmtip2360777b4790481a6af61a2ecbb0bff8b~9QGX4bHAt1197211972epsmtip2E;
+ 20230821010401epsmtip281ac24deeff429a258822e705553bcbb~9QGXx0d871197311973epsmtip2-;
  Mon, 21 Aug 2023 01:04:01 +0000 (GMT)
 From: Chanho Park <chanho61.park@samsung.com>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Simon Glass
  <sjg@chromium.org>, u-boot@lists.denx.de
 Cc: Chanho Park <chanho61.park@samsung.com>
-Subject: [PATCH 1/3] riscv: bootstage: correct bootstage_report guard
-Date: Mon, 21 Aug 2023 10:03:48 +0900
-Message-Id: <20230821010350.324112-2-chanho61.park@samsung.com>
+Subject: [PATCH 0/3] bootstage support for risc-v
+Date: Mon, 21 Aug 2023 10:03:47 +0900
+Message-Id: <20230821010350.324112-1-chanho61.park@samsung.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230821010350.324112-1-chanho61.park@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNKsWRmVeSWpSXmKPExsWy7bCmqS7TjkcpBlvaJC0u79e2ePviLKPF
- ty3bGC3e7u1kt3h86DWTA6vHntOzmD1mN1xk8Th7ZwejR9+WVYwBLFHZNhmpiSmpRQqpecn5
- KZl56bZK3sHxzvGmZgaGuoaWFuZKCnmJuam2Si4+AbpumTlAe5UUyhJzSoFCAYnFxUr6djZF
- +aUlqQoZ+cUltkqpBSk5BeYFesWJucWleel6eaklVoYGBkamQIUJ2RkHOnIKetgrjr9+wNbA
- +Iy1i5GTQ0LAROLrhd9MXYxcHEICexgl5i/ezQjhfGKUuDTjNSucs+9EFxtMy7LHb9lBbCGB
- nYwSh2aZQtjTmCROT+EHsdkEdCW2PH8FNImDQ0SgXOLYPbAws4C2ROfnKWCtwgKuElOOfWUG
- KWERUJX4/aUcJMwrYC+xfd0WFpCwhIC8xOIHEiBhTgEHidsn5jFBlAhKnJz5hAViorxE89bZ
- zCBXSgicY5eYdOU2M8SVLhJrb/cyQtjCEq+Ob2GHsKUkXva3sUPML5fYsSwJoreFUaK5bQ9U
- r73Ej5tTWEFqmAU0Jdbv0ocoV5Y4cgtqLZ9Ex+G/UFN4JTrahCAa1SUObJ/OAmHLSnTP+QwN
- ZQ+JI+vmsEDCcjKjxK7me2wTGBVmIflmFpJvZiEsXsDIvIpRKrWgODc9NdmowFA3L7UcHr/J
- +bmbGMGpUMt3B+Pr9X/1DjEycTAeYpTgYFYS4ZX+/jBFiDclsbIqtSg/vqg0J7X4EKMpMLQn
- MkuJJucDk3FeSbyhiaWBiZmZobmRqYG5kjjvvda5KUIC6YklqdmpqQWpRTB9TBycUg1McdqG
- E54WGOdmCV3vrJr151C2jMJJs6L97F9YEjz+3brje4b76dWqkyce2vzdv+PSnb9J6YcTl1xY
- Oyfr/MMzy37svayyrHGGwnHGpflq125ueJXneDR8xb4fYhYrp0xVrnZt27R+3xF7/xWvLgV2
- Pj6UKm7vkRdz9eFf1XytWybnpk/lkMqPXpz3omJ269ysE5PF8w29HzscLpobl9+uPWmHgdx7
- i4cf1rZGNYosWsjZcN8u8vu6ifu6JX0iCnVPzzmRX9W526/8HXtiV/+EvcciH6av77gfx3u6
- qlfToqHJfEnJRauZ0wRuWq68/1fl2b6H6k3LJzCnilgf6/gw5+/qT/sFJK22plTPuC/JrqLE
- UpyRaKjFXFScCACNkK3jDgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrALMWRmVeSWpSXmKPExsWy7bCSvC7jjkcpBv8fGFpc3q9t8fbFWUaL
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrLKsWRmVeSWpSXmKPExsWy7bCmmS7TjkcpBjfmclpc3q9t8fbFWUaL
+ b1u2MVq83dvJbvH40GsmB1aPPadnMXvMbrjI4nH2zg5Gj74tqxgDWKKybTJSE1NSixRS85Lz
+ UzLz0m2VvIPjneNNzQwMdQ0tLcyVFPISc1NtlVx8AnTdMnOA9ioplCXmlAKFAhKLi5X07WyK
+ 8ktLUhUy8otLbJVSC1JyCswL9IoTc4tL89L18lJLrAwNDIxMgQoTsjMWTPrHUrCPpeLThSuM
+ DYznmbsYOTkkBEwkTl34xdbFyMUhJLCDUWLCyu3sEM4nRompV4+wgFQJCXxjlGj5LgjTsanl
+ ChNE0V5Giaa9p6DapzFJzNx7gAmkik1AV2LL81eMXYwcHCIC5RLH7vGDhJkFtCU6P09hB7GF
+ BQwlnvzYwQpiswioStx83MEIYvMK2EsserudBaRVQkBeYvEDCYiwoMTJmU9YIMbISzRvnc0M
+ slZCYBe7xNdL01ggjnOR2H10KSuELSzx6vgWdghbSuLzu71sEDPLJXYsS4LobWGUaG7bAw0K
+ e4kfN6ewgtQwC2hKrN+lD1GuLHHkFtRaPomOw3/ZIcK8Eh1tQhCN6hIHtk+HOkBWonvOZ6gD
+ PCTaT9xkh4RgrMTKdVdZJjDKz0LyzCwkz8xC2LuAkXkVo1hqQXFuemqxUYExPEaT83M3MYLT
+ nZb7DsYZbz/oHWJk4mA8xCjBwawkwiv9/WGKEG9KYmVValF+fFFpTmrxIUZTYOhOZJYSTc4H
+ Jty8knhDE0sDEzMzQ3MjUwNzJXHee61zU4QE0hNLUrNTUwtSi2D6mDg4pRqY/Eum3j/96Kq2
+ Uk9f86otn4X8DQ9fL9g1Z0fbP48iCZnO3RKd52/uddSaWXGGs4Ol/qzOV48q7u17jFdnMRi+
+ 8RKe2mbm7cnM8/KA1inZay9nmBSdFdC3ePrjI5duisvsGXcmfJ3dkr4m/2tifsqiK4bsbA0O
+ z3gbfmU48WTMa/03XeWdipyB+6T4a1tPvvcTOBf85Pnj46I+nIcKcx+ZbF0QuK3upvO6S8f/
+ efndtek9vu9jLKPV8ZdlN1/5eymobf7veO7Mt41P5p2z19x6/OrXWbGVyz+9e8s3dcHvhLuM
+ 2xTYDWt6TliJznMVC/dy6E8qm2K0b3FX4fpzrz/dkFxyXvN9WbSem/0RwZts2UosxRmJhlrM
+ RcWJAM32zJEABAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprHLMWRmVeSWpSXmKPExsWy7bCSvC7jjkcpBrMmaFtc3q9t8fbFWUaL
  b1u2MVq83dvJbvH40GsmB1aPPadnMXvMbrjI4nH2zg5Gj74tqxgDWKK4bFJSczLLUov07RK4
- Mg505BT0sFccf/2ArYHxGWsXIyeHhICJxLLHb9lBbCGB7YwSd9oNIeKyEs/e7WCHsIUl7rcc
- AarnAqqZxCSxbeFksGY2AV2JLc9fMYLYIgLVEs8f7WADsZkFtCU6P08BaxYWcJWYcuwrcxcj
- BweLgKrE7y/lIGFeAXuJ7eu2sICEJQTkJRY/kAAJcwo4SNw+MY8J4hx7iScnPjFClAtKnJz5
- hAViurxE89bZzBMYBWYhSc1CklrAyLSKUTS1oDg3PTe5wFCvODG3uDQvXS85P3cTIzhQtYJ2
- MC5b/1fvECMTB+MhRgkOZiURXunvD1OEeFMSK6tSi/Lji0pzUosPMUpzsCiJ8yrndKYICaQn
- lqRmp6YWpBbBZJk4OKUamNbUflE+37iscFJhJJN5960ANqX2OxZ3ua2uaWnLSArP//pz0wbx
- vIYvL15XcMkX+S32nGcmkrBsyY/5OT1LFfZnZE2Y+66jlqPFZ2pUjYX1SsXjz+PzDk45ps57
- xOzVSnk/owm+/Ar5PhZPtPYujWI7OH/a6TuXFDY4fHvS3vORLy/8dF236LTOvviaGoFT/bOj
- ZnWkLdePNEj37a2//ocp+NXX5dMNvgSpTbn66Nhfj7596515Hu8q92XMfZiY+CbY6eW74/u/
- Xnht0/5g1bJX15ND117iYmjLzXQxn7Xu0IYDe1Zb2nTFKRZuT7idMW3ynJk7NB9uDtqj2Tmt
- OS1qe0HGxN9MggtKtERWcyuxFGckGmoxFxUnAgDav98LwwIAAA==
-X-CMS-MailID: 20230821010401epcas2p45a647001722e345bcb98bd2c79831eda
+ MhZM+sdSsI+l4tOFK4wNjOeZuxg5OSQETCQ2tVxhArGFBHYzSjxf4g8Rl5V49m4HO4QtLHG/
+ 5QhrFyMXUM0kJolVn/6ygCTYBHQltjx/xQhiiwhUSzx/tIMNxGYW0Jbo/DwFrFlYwFDiyY8d
+ rCA2i4CqxM3HHWD1vAL2EovebgeawwG0QF5i8QMJiLCgxMmZT1ggxshLNG+dzTyBkW8WktQs
+ JKkFjEyrGCVTC4pz03OLDQuM8lLL9YoTc4tL89L1kvNzNzGCg1BLawfjnlUf9A4xMnEwHmKU
+ 4GBWEuGV/v4wRYg3JbGyKrUoP76oNCe1+BCjNAeLkjjvt9e9KUIC6YklqdmpqQWpRTBZJg5O
+ qQamyj8X+5nFpzouef+roGRq2EE1zV2qJY/tpk3nFkx9fkLzQpDOa3OzLf8SP8f9TwrYu/7m
+ rFMaQjtWOQT84qiu6lpi/c308wmm6dx/RFe7Z64OMll1+Plr4dIrhw/vumclU/duesYDB7F9
+ xX0V6WtmcPj2txrJOgs+Kja9+cpn8v37r/keTt3G7NvZGfJt9dFbP0vX7Av2X5yT5j/Nv3pd
+ iKjCw38tvD9EP4jXPXEwSFw6a8KGsMtn2uY3e+2e8fHE9lcJ9zhF4jykeES1npQcX5a38oGP
+ ZxHH7Kd73BL8pZ6rbeR86LthwmS+iN8Hsyd9ffPpZ6/ZadkJ9aw18o0ar97dCpzqtUYsMdT/
+ pOXDHUosxRmJhlrMRcWJAK9eNZ+xAgAA
+X-CMS-MailID: 20230821010401epcas2p49970d58c843b6a7a9baf272f67b26224
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: AUTO_CONFIDENTIAL
 CMS-TYPE: 102P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230821010401epcas2p45a647001722e345bcb98bd2c79831eda
-References: <20230821010350.324112-1-chanho61.park@samsung.com>
- <CGME20230821010401epcas2p45a647001722e345bcb98bd2c79831eda@epcas2p4.samsung.com>
+X-CMS-RootMailID: 20230821010401epcas2p49970d58c843b6a7a9baf272f67b26224
+References: <CGME20230821010401epcas2p49970d58c843b6a7a9baf272f67b26224@epcas2p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,34 +131,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Below warning can be occurred when CONFIG_BOOTSTAGE and
-!CONFIG_SPL_BOOTSTAGE. It should be guarded by using CONFIG_IS_ENABLED
-for SPL build.
+This adds to support bootstage for risc-v. timer_get_boot_us function
+is required to record each boot stages with microsecond timestamp.
 
-arch/riscv/lib/bootm.c:46:9: warning: implicit declaration of
-function 'bootstage_report'
-   46 |         bootstage_report();
-      |         ^~~~~~~~~~~~~~~~
-      |         bootstage_error
+Chanho Park (3):
+  riscv: bootstage: correct bootstage_report guard
+  riscv: timer: add timer_get_boot_us for BOOTSTAGE
+  timer: riscv_aclint_timer: add timer_get_boot_us for BOOTSTAGE
 
-Signed-off-by: Chanho Park <chanho61.park@samsung.com>
----
- arch/riscv/lib/bootm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/riscv/lib/bootm.c             |  2 +-
+ drivers/timer/riscv_aclint_timer.c | 22 ++++++++++++++++++++++
+ drivers/timer/riscv_timer.c        | 21 +++++++++++++++++++++
+ 3 files changed, 44 insertions(+), 1 deletion(-)
 
-diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
-index 276677a5e2f9..cc30efc90498 100644
---- a/arch/riscv/lib/bootm.c
-+++ b/arch/riscv/lib/bootm.c
-@@ -42,7 +42,7 @@ static void announce_and_cleanup(int fake)
- #ifdef CONFIG_BOOTSTAGE_FDT
- 	bootstage_fdt_add_report();
- #endif
--#ifdef CONFIG_BOOTSTAGE_REPORT
-+#if CONFIG_IS_ENABLED(BOOTSTAGE_REPORT)
- 	bootstage_report();
- #endif
- 
 -- 
 2.39.2
 
