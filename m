@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0FEEE4996
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695DAEE4996
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 606438704F;
-	Mon, 21 Aug 2023 21:45:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D118C8704F;
+	Mon, 21 Aug 2023 21:48:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ejNNQ3pX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="donK6i77";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6855B87066; Mon, 21 Aug 2023 21:45:40 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB6B887046; Mon, 21 Aug 2023 21:48:36 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C82C887046
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:45:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA39987072
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:48:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1692647134; x=1693251934; i=xypron.glpk@gmx.de;
- bh=iqCHCXKOO1iG+ysFWrqqs7rz/35g9oeTkQ26UArU7es=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=ejNNQ3pXVbeuYLgHlDHELTy1JsWl/VtrLAv0cHF4Bska1B8z6B/nbhS8nU/mNpx33dQ/sv1
- RLSh0ZSaT4TfJhD1r8nr5V3yg6MUN208U1if99PKRvUqcXGjzVFBuO8bI9fXSDVmCghih3UeV
- zrJ6x0Yz5AI265CyIiepgucTjtIjd3caHQDbnQGT0/k1txRLPd3jsgFR3NlNgaEgF9Jk2AFoi
- QsdRealEee00AsuTMRc5jRLLAz0QMnciz/NGwkrTEWRRIYGIGeqgNgJV53hl2/+rLYFro7Xt/
- lFek70GiTheGb9Th/ozqnAj/U0nPW18sUSthuZGaAibi5fJ/S50g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MUGiJ-1q6z3W3Mbj-00RLYR; Mon, 21
- Aug 2023 21:45:33 +0200
-Message-ID: <66d25d72-4556-6085-064a-7f7cb79fa061@gmx.de>
-Date: Mon, 21 Aug 2023 21:45:19 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-790f831c6fbso126799139f.2
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:48:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692647312; x=1693252112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3N7X/HZKiODl+6+MNX6JndqNW1xPMfJ5KlQEIhhEp20=;
+ b=donK6i774XrVXYP+eFrBY/Un4gIoAVwXckSA4zoLb4QBZYzF5hY1hU1F0BosScRQZ7
+ l8eJtPP5cxDUF78dsofEIp4j0EcKrNglBt9oSms17GThKXCDrYdb5byaw/WwyU/nlFex
+ UW6rQKBjf9lgmZW8uJ/Z05szJXngqVckaTEWQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692647312; x=1693252112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3N7X/HZKiODl+6+MNX6JndqNW1xPMfJ5KlQEIhhEp20=;
+ b=aS4saMgClZMyPnoL/tgy/K8ud1oD7yuikccp5VRQQv08sm2hKFzhiz+fbpI2RccoFx
+ 2jvPXcIFgEDvUSEVwLQuWM7G9QiOajMOkpJhBUlqtnwnUvyS4ZlqGlD0qWZV+UKTr6ay
+ xjq8Gb618+2srgJZhELkvVoD7RXBKyRuXYUc8QPaKKwM3CiE/L8S7UXLMEltWaCISr9C
+ GhOufvnppYFgNJuSGmKuflCmyDe/W1mbt5J8m7DQ0bux8xaaPK96Sb4MHIxEKZHohf2Y
+ SMl11EUr6z/isApLLjMvShhLfu/en2rknbuewXx0UHZa432prgy4zHZiC25+YFwzB3Ow
+ 4PUQ==
+X-Gm-Message-State: AOJu0YxHcXB6pQpIs4ppkiG8qAOxPyDMeKeYCCsrQRtqqSZMHnmWMNjp
+ qbWH/oPgBuvzEB8r5ehyx7J9mA==
+X-Google-Smtp-Source: AGHT+IFcu3IPYhGGuLvsyVJO8RzW3hUh7Hrcr3zrfVG6DkyEQPecWurr30tfPYr4FOJh+8GUA9xkMA==
+X-Received: by 2002:a05:6602:690:b0:785:5917:a35f with SMTP id
+ dp16-20020a056602069000b007855917a35fmr10766390iob.8.1692647312413; 
+ Mon, 21 Aug 2023 12:48:32 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:9102:8976:7620:5093])
+ by smtp.gmail.com with ESMTPSA id
+ o21-20020a02c6b5000000b0042b0ce92dddsm2552076jan.161.2023.08.21.12.48.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Aug 2023 12:48:32 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: Lean Sheng Tan <sheng.tan@9elements.com>, Tom Rini <trini@konsulko.com>,
+ lkml <linux-kernel@vger.kernel.org>, linux-acpi@vger.kernel.org,
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2] schemas: Add a schema for memory map
+Date: Mon, 21 Aug 2023 13:48:19 -0600
+Message-ID: <20230821194821.2961213-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: Doc style for method functions
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: linux-doc@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Jonathan Corbet <corbet@lwn.net>
-References: <CAPnjgZ0vPwd9v+V8Pg5Bo87OELD-vokB7ZrvU3Bv5dQ_O9z6Sg@mail.gmail.com>
- <877cpusybz.fsf@meer.lwn.net>
- <CAPnjgZ3Lo4Na7YeKPFaY30bwsv_gBGapN_DXeab+k7yhCF3uww@mail.gmail.com>
- <dfac4932-7cbc-3a4e-bde7-c2048516ddf1@gmx.de>
- <CAPnjgZ07G=+QZU9+qT23x+aZw4VES0jNkXUTu4Axm400NF-hzQ@mail.gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAPnjgZ07G=+QZU9+qT23x+aZw4VES0jNkXUTu4Axm400NF-hzQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:BValcThMPwSVJHYiyNu04DP8lfKkgS3GwfAXbaMH0qXT0yma8pZ
- t9rEixAofv+zGUGyYryJop688DhKi7Yd8hDR4u8duvuCoHW+SSD9xSpeiHXJDY2wJB8zcfw
- Od6dfxnkhNeCbSq2ireJOWRB4KC9mekK0FOZqFfSkq4koSoIfGLSSR4jNRFsoC3SrPo/qTl
- xTtnKwsyuNQBDqTpW3lWA==
-UI-OutboundReport: notjunk:1;M01:P0:Wu2NKnCj2Q4=;a2J44LizWt7ZpqPDjFd1qsGW6n7
- 5JsplRubC+nmjZ4tB6wwoCT/Db4OOgQQlSg/nW+LIoTJh+Df2prwAI0sEMZVuDLJxRkCEcr/y
- WFmx7VrWa3daDt2YPm37mD2qPC0C0t8qWPC5LtDWOfclrNNaLZt/HGtbdCzMZXv7TzSKlLlt2
- brm5/zqHC7iJDDOuXbYHo06aLgVjhfwMZv2T+icUz2z8CD70agU4nF83J25mwZ+PyG7mM++3U
- ZfG9QNv3phUif1yduwFjNEl+40Qs+rYylhkwvOQyYvX3Ar0yYkytoEt+rspTwdzVQPicP05s+
- UxylK9auTlt2Xy5NIyS2eRQnIf+RX459oOVEo/kxYPCNidILO/z8vvWY1kHTauGTawFkKS4W+
- 8q/6Z4a/2HGDPVaKEHCLbqLoyCDAtdzbzum4dnaq4u+rsG3aD4JPx1FWXzjOB2xxfo5fFjdrR
- uoQglNV3y+eGOQyrn8noENLa4BFm3GetzSf9Qm7eLQj7PR+cSNyf2QTnRdofLpG3Ub8ikuPah
- sWzxw3sQZNO7P3O2OMXVYF6B5A3BbG3didscb3eloEDX+1pMgWg6rqg46Rcg00nXEWve8QVKE
- 8KghfZ7UTogH48WlRWcVwdUcFkKuzic5gx3B566ocJlIrgpY6GtZKTvKniWv8e8G3E4KaSkit
- TAPuQ8yJ4I1DIJWMHD52/A+kmeadwnsX/ceO6Ut7jTGdFm0QB8owQETuHVJrXimN6ltwxFy3y
- H2jcRaHUpxBm1zea1nWqsW00O3Cpzl4qlJymyAqjhLOJoNWqi1IsCoQiVYnv13nJ18ClHICyk
- oq2XUpZyuSfV6MyJqa7m/1FC5xyomvmRTF4+wQXZmajoySc8c7dsenqE5em+/6spSuczhyjRF
- QSAj2wf9xEOsr5Cmbb38BpT0Sl/J2sGJf/vL6OxinXc/Fl0kSiYh62EZqh5/5wJhPKBVIHdI6
- 2isB/r6VoiquKYF1FTugQh/XRuE=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,84 +88,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18.08.23 16:59, Simon Glass wrote:
-> Hi Heinrich,
->
-> On Thu, 17 Aug 2023 at 10:36, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
->>
->> On 16.08.23 19:47, Simon Glass wrote:
->>> Hi Jonathan,
->>>
->>> On Wed, 16 Aug 2023 at 11:15, Jonathan Corbet <corbet@lwn.net> wrote:
->>>>
->>>> Simon Glass <sjg@chromium.org> writes:
->>>>
->>>>> Hi Jonathan,
->>>>>
->>>>> I would like to do something like this:
->>>>>
->>>>> struct part_driver {
->>>>>      /**
->>>>>       * get_info() - Get information about a partition
->>>>>
->>>>>                 ^ causes error
->>>>>
->>>>>       *
->>>>>       * @desc: Block device descriptor
->>>>>       * @part: Partition number (1 =3D first)
->>>>>       * @info: Returns partition information
->>>>>       */
->>>>>      int (*get_info)(struct blk_desc *desc, int part, struct
->>>>> disk_partition *info);
->>>>> ...
->>>>> };
->>>>>
->>>>> But this gives:
->>>>>
->>>>> scripts/kernel-doc:292:
->>>>>      print STDERR "Incorrect use of kernel-doc format: $_";
->>>>>
->>>>> Without the brackets on get_info() it works OK. What is the purpose =
-of
->>>>> that check, please?
->>>>
->>>> That's how the kerneldoc syntax was defined, well before my time as t=
-he
->>>> maintainer.  This could be relaxed, I guess, but one would have to lo=
-ok
->>>> at the parsing code to be sure that the right thing happens all the w=
-ay
->>>> through the process.  I'm not entirely sure it's worth it...
->>>
->>> I see. It is inconsistent, since we use () after normal functions.
->>>
->>> I think I can fix it just by removing that check.
->>>
->>> Regards,
->>> Simon
->>
->> If the structure element in not a function pointer, we probably still
->> want to forbid adding parentheses. Just dropping the check might not be
->> the solution.
->
-> Is that the purpose of this check? Is it likely that someone would add
-> a bracket immediately after a variable?
+The Devicespec specification skips over handling of a logical view of
+the memory map, pointing users to the UEFI specification.
 
-We don't want anything but a colon ':' after a structure member name.
-This excludes white space, parentheses (), brackets[], and braces {} and
-a lot more.
+It is common to split firmware into 'Platform Init', which does the
+initial hardware setup and a "Payload" which selects the OS to be booted.
+Thus an handover interface is required between these two pieces.
 
-A structure member name relating to a function pointer should be the
-only exception. Here we expect the parentheses and the colon to follow
-immediately without white space.
+Where UEFI boot-time services are not available, but UEFI firmware is
+present on either side of this interface, information about memory usage
+and attributes must be presented to the "Payload" in some form.
 
-Best regards
+This aims to provide an initial schema for this mapping.
 
-Heinrich
+Note that this is separate from the existing /memory and /reserved-memory
+nodes, since it is mostly concerned with what the memory is used for. It
+may cover only a small fraction of available memory, although it could be
+used to signal which area of memory has ECC.
 
+For now, no attempt is made to create an exhaustive binding, so there are
+some example types lists. This can be completed once this has passed
+initial review.
 
->
-> Regards,
-> Simon
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+Changes in v2:
+- Reword commit message
+
+ dtschema/schemas/memory-map.yaml | 51 ++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
+ create mode 100644 dtschema/schemas/memory-map.yaml
+
+diff --git a/dtschema/schemas/memory-map.yaml b/dtschema/schemas/memory-map.yaml
+new file mode 100644
+index 0000000..97e531e
+--- /dev/null
++++ b/dtschema/schemas/memory-map.yaml
+@@ -0,0 +1,51 @@
++# SPDX-License-Identifier: BSD-2-Clause
++# Copyright 2023 Google LLC
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/memory-map.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: /memory-map nodes
++description: |
++  Common properties always required in /memory-map nodes. These nodes are
++  intended to resolve the nonchalant clause 3.4.1 ("/memory node and UEFI")
++  in the Devicetree Specification.
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++properties:
++  $nodename:
++    const: '/'
++  usage:
++    $ref: /schemas/types.yaml#/definitions/string
++    description: |
++      Describes the usage of the memory region, e.g.:
++
++        "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
++        "runtime-code", "runtime-data"
++  attr:
++    $ref: /schemas/types.yaml#/definitions/string-array
++    description: |
++      Attributes possessed by this memory region:
++
++        "single-bit-ecc" - supports single-bit ECC
++        "multi-bit-ecc" - supports multiple-bit ECC
++        "no-ecc" - non-ECC memory
++
++patternProperties:
++  "^([a-z][a-z0-9\\-]+@[0-9a-f]+)?$":
++    type: object
++    additionalProperties: false
++
++    properties:
++      reg:
++        minItems: 1
++        maxItems: 1024
++
++    required:
++      - reg
++
++additionalProperties: true
++
++...
+-- 
+2.42.0.rc1.204.g551eb34607-goog
 
