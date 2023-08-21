@@ -4,56 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF8AEE4996
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 22:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB949EE49A0
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 23:03:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A48F5871D0;
-	Tue, 22 Aug 2023 00:44:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
+	by phobos.denx.de (Postfix) with ESMTP id 008EE87044;
+	Tue, 22 Aug 2023 01:03:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A8B59871C8; Tue, 22 Aug 2023 00:44:42 +0200 (CEST)
-Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by phobos.denx.de (Postfix) with ESMTP id ACEC9871CB
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=csgraf.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
-Received: from [192.168.106.118]
- (dynamic-077-009-010-235.77.9.pool.telefonica.de [77.9.10.235])
- by csgraf.de (Postfix) with ESMTPSA id 9BF4460807CB;
- Tue, 22 Aug 2023 00:44:38 +0200 (CEST)
-Message-ID: <1b8f64c7-deab-ae3a-3d22-a69fd74bdae9@csgraf.de>
-Date: Tue, 22 Aug 2023 00:44:38 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fgw5yo5B";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1BF6C87044; Tue, 22 Aug 2023 01:03:35 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 022F1865B6
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 01:03:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-525bd0b2b48so4830155a12.0
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 16:03:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692659011; x=1693263811;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=s4A0PDdltQdUCTeyKDBOyQNts1uds5FvyFVVbI78s+E=;
+ b=Fgw5yo5BLiDU1GGBAK8/gNBjequHXxFk1YKRtauoaujJi3ylOk2RQzOvIej9A4GSAe
+ Uqwpyguvy9yPA/hRozGL6gRMyKYjY7M6rshZHE0Bi7Aby6so6pUrCspvIvAkCs7H/o40
+ 5ApjGpsTJNFtkDQhJa8WWqmW8hc8aM7QJRDRM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692659011; x=1693263811;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s4A0PDdltQdUCTeyKDBOyQNts1uds5FvyFVVbI78s+E=;
+ b=UEJue3asZH8wU3rg7aPjce6VaBs9L+OYyQLudagWHZ0v/zq5JRwIeQF/rfOCbZkaJt
+ 2rYpzBNb8eedrqGtdM9F1AQR3c4Hmjim/7RYN+bpTTQfQtEHQgtqGtURR3juDLKE5zz8
+ Zm0jX0e6tRa2huzgti2EaP+pi8NktIAwVBy5WoHKYeW6unAK3OwMWJtM9M0gWtgW+zNb
+ kAuC63B/jvt6xZcqR+BSot8ZJvrKvDP7BURzh2i35kmRUnInfU5HTsODj5/Kpi3SINba
+ SyRh44OYCWpE8kQn/A5mtWgv3rrH39kKvoebM3bYT1kDkWRK0oaB5M+xEjcpdRrUmN8T
+ s6bg==
+X-Gm-Message-State: AOJu0YxscUW5ReJLS87oX68M3qmnjidJ0hmsbeECM+2rBcWSACeKl/om
+ 63w3VF9QUOIUcO1fa3gxyU+ABoHirncR73azn+PqFw==
+X-Google-Smtp-Source: AGHT+IEeYs6h/5iuEUUqPrkQiiBE7W9uB8L998JEUv8M6pU3pqRlzxwIPxVH1YzlGECljdo2oJhVxt6G3yO6gQ9JOYc=
+X-Received: by 2002:aa7:d9cd:0:b0:523:4025:49f0 with SMTP id
+ v13-20020aa7d9cd000000b00523402549f0mr5501485eds.26.1692659011354; Mon, 21
+ Aug 2023 16:03:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.14.0
-Subject: Re: [PATCH v5 10/13] video: Only dcache flush damaged lines
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
- Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
- <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
  <20230821135111.3558478-11-alpernebiyasak@gmail.com>
  <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
  <e24d94b4-d519-4491-a38b-488510059a2a@csgraf.de>
  <CAPnjgZ2HqmyOPixmec8v9g2V9mvCQ2mnG4+jUL4-4=qXPOvsOw@mail.gmail.com>
-From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <CAPnjgZ2HqmyOPixmec8v9g2V9mvCQ2mnG4+jUL4-4=qXPOvsOw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <1b8f64c7-deab-ae3a-3d22-a69fd74bdae9@csgraf.de>
+In-Reply-To: <1b8f64c7-deab-ae3a-3d22-a69fd74bdae9@csgraf.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 21 Aug 2023 17:03:19 -0600
+Message-ID: <CAPnjgZ2wivMkM407VxYfgOsgrZnLY7UXVMgZt1OfzJzjiKgKjg@mail.gmail.com>
+Subject: Re: [PATCH v5 10/13] video: Only dcache flush damaged lines
+To: Alexander Graf <agraf@csgraf.de>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de, 
+ Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, 
+ Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,108 +96,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alex,
 
-On 22.08.23 00:10, Simon Glass wrote:
-> Hi Alex,
+On Mon, 21 Aug 2023 at 16:44, Alexander Graf <agraf@csgraf.de> wrote:
 >
-> On Mon, 21 Aug 2023 at 13:59, Alexander Graf <agraf@csgraf.de> wrote:
->>
->> On 21.08.23 21:11, Simon Glass wrote:
->>> Hi Alper,
->>>
->>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->>>> From: Alexander Graf <agraf@csgraf.de>
->>>>
->>>> Now that we have a damage area tells us which parts of the frame buffer
->>>> actually need updating, let's only dcache flush those on video_sync()
->>>> calls. With this optimization in place, frame buffer updates - especially
->>>> on large screen such as 4k displays - speed up significantly.
->>>>
->>>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->>>> Reported-by: Da Xue <da@libre.computer>
->>>> [Alper: Use damage.xstart/yend, IS_ENABLED()]
->>>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>>> ---
->>>>
->>>> Changes in v5:
->>>> - Use xstart, ystart, xend, yend as names for damage region
->>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>>>
->>>> Changes in v2:
->>>> - Fix dcache range; we were flushing too much before
->>>> - Remove ifdefs
->>>>
->>>>    drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
->>>>    1 file changed, 36 insertions(+), 5 deletions(-)
->>> This is a little strange, since flushing the whole cache will only
->>> actually write out data that was actually written (to the display). Is
->>> there a benefit to this patch, in terms of performance?
->>
->> I'm happy to see you go through the same thought process I went through
->> when writing these: "This surely can't be the problem, can it?". The
->> answer is "simple" in hindsight:
->>
->> Have a look at the ARMv8 cache flush function. It does the only "safe"
->> thing you can expect it to do: Clean+Invalidate to POC because we use it
->> for multiple things, clearing modified code among others:
->>
->> ENTRY(__asm_flush_dcache_range)
->>           mrs     x3, ctr_el0
->>           ubfx    x3, x3, #16, #4
->>           mov     x2, #4
->>           lsl     x2, x2, x3              /* cache line size */
->>
->>           /* x2 <- minimal cache line size in cache system */
->>           sub     x3, x2, #1
->>           bic     x0, x0, x3
->> 1:      dc      civac, x0       /* clean & invalidate data or unified
->> cache */
->>           add     x0, x0, x2
->>           cmp     x0, x1
->>           b.lo    1b
->>           dsb     sy
->>           ret
->> ENDPROC(__asm_flush_dcache_range)
->>
->>
->> Looking at the "dc civac" call, we find this documentation page from
->> ARM:
->> https://developer.arm.com/documentation/ddi0601/2022-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC
->>
->> This says we're writing any dirtyness of this cache line up to the POC
->> and then invalidate (remove the cache line) also up to POC. That means
->> when you look at a typical SBC, this will either be L2 or system level
->> cache. Every read afterwards needs to go and pull it all the way back to
->> L1 to modify it (or not) on the next character write and then flush it
->> again.
->>
->> Even worse: Because of the invalidate, we may even evict it from caches
->> that the display controller uses to read the frame buffer. So depending
->> on the SoC's cache topology and implementation, we may force the display
->> controller to refetch the full FB content on its next screen refresh cycle.
->>
->> I faintly remember that I tried to experiment with CVAC instead to only
->> flush without invalidating. I don't fully remember the results anymore
->> though. I believe CVAC just behaved identical to CIVAC on the A53
->> platform I was working on. And then I looked at Cortex-A53 errata like
->> [1] and just accepted that doing anything but restricting the flushing
->> range is a waste of time :)
-> Yuck I didn't know it was invalidating too. That is horrible. Is there
-> no way to fix it?
+>
+> On 22.08.23 00:10, Simon Glass wrote:
+> > Hi Alex,
+> >
+> > On Mon, 21 Aug 2023 at 13:59, Alexander Graf <agraf@csgraf.de> wrote:
+> >>
+> >> On 21.08.23 21:11, Simon Glass wrote:
+> >>> Hi Alper,
+> >>>
+> >>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>>> From: Alexander Graf <agraf@csgraf.de>
+> >>>>
+> >>>> Now that we have a damage area tells us which parts of the frame buffer
+> >>>> actually need updating, let's only dcache flush those on video_sync()
+> >>>> calls. With this optimization in place, frame buffer updates - especially
+> >>>> on large screen such as 4k displays - speed up significantly.
+> >>>>
+> >>>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+> >>>> Reported-by: Da Xue <da@libre.computer>
+> >>>> [Alper: Use damage.xstart/yend, IS_ENABLED()]
+> >>>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >>>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >>>> ---
+> >>>>
+> >>>> Changes in v5:
+> >>>> - Use xstart, ystart, xend, yend as names for damage region
+> >>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+> >>>>
+> >>>> Changes in v2:
+> >>>> - Fix dcache range; we were flushing too much before
+> >>>> - Remove ifdefs
+> >>>>
+> >>>>    drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
+> >>>>    1 file changed, 36 insertions(+), 5 deletions(-)
+> >>> This is a little strange, since flushing the whole cache will only
+> >>> actually write out data that was actually written (to the display). Is
+> >>> there a benefit to this patch, in terms of performance?
+> >>
+> >> I'm happy to see you go through the same thought process I went through
+> >> when writing these: "This surely can't be the problem, can it?". The
+> >> answer is "simple" in hindsight:
+> >>
+> >> Have a look at the ARMv8 cache flush function. It does the only "safe"
+> >> thing you can expect it to do: Clean+Invalidate to POC because we use it
+> >> for multiple things, clearing modified code among others:
+> >>
+> >> ENTRY(__asm_flush_dcache_range)
+> >>           mrs     x3, ctr_el0
+> >>           ubfx    x3, x3, #16, #4
+> >>           mov     x2, #4
+> >>           lsl     x2, x2, x3              /* cache line size */
+> >>
+> >>           /* x2 <- minimal cache line size in cache system */
+> >>           sub     x3, x2, #1
+> >>           bic     x0, x0, x3
+> >> 1:      dc      civac, x0       /* clean & invalidate data or unified
+> >> cache */
+> >>           add     x0, x0, x2
+> >>           cmp     x0, x1
+> >>           b.lo    1b
+> >>           dsb     sy
+> >>           ret
+> >> ENDPROC(__asm_flush_dcache_range)
+> >>
+> >>
+> >> Looking at the "dc civac" call, we find this documentation page from
+> >> ARM:
+> >> https://developer.arm.com/documentation/ddi0601/2022-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC
+> >>
+> >> This says we're writing any dirtyness of this cache line up to the POC
+> >> and then invalidate (remove the cache line) also up to POC. That means
+> >> when you look at a typical SBC, this will either be L2 or system level
+> >> cache. Every read afterwards needs to go and pull it all the way back to
+> >> L1 to modify it (or not) on the next character write and then flush it
+> >> again.
+> >>
+> >> Even worse: Because of the invalidate, we may even evict it from caches
+> >> that the display controller uses to read the frame buffer. So depending
+> >> on the SoC's cache topology and implementation, we may force the display
+> >> controller to refetch the full FB content on its next screen refresh cycle.
+> >>
+> >> I faintly remember that I tried to experiment with CVAC instead to only
+> >> flush without invalidating. I don't fully remember the results anymore
+> >> though. I believe CVAC just behaved identical to CIVAC on the A53
+> >> platform I was working on. And then I looked at Cortex-A53 errata like
+> >> [1] and just accepted that doing anything but restricting the flushing
+> >> range is a waste of time :)
+> > Yuck I didn't know it was invalidating too. That is horrible. Is there
+> > no way to fix it?
+>
+>
+> Before building all of this damage logic, I tried, but failed. I'd
+> welcome anyone else to try again :). I'm not even convinced yet that it
+> is actually fixable: Depending on the SoC's internal cache logic, it may
+> opt to always invalidate I think.
 
+Wow, that is crazy! How is anyone supposed to make the system run well
+with logic like that??!
 
-Before building all of this damage logic, I tried, but failed. I'd 
-welcome anyone else to try again :). I'm not even convinced yet that it 
-is actually fixable: Depending on the SoC's internal cache logic, it may 
-opt to always invalidate I think.
+>
+> That said, this patch set really also makes sense outside of the
+> particular invalidate problem. It creates a generic abstraction between
+> the copy and non-copy code path and allows us to reduce the amount of
+> work spent for both, generically for any video sync operation.
 
-That said, this patch set really also makes sense outside of the 
-particular invalidate problem. It creates a generic abstraction between 
-the copy and non-copy code path and allows us to reduce the amount of 
-work spent for both, generically for any video sync operation.
+Sure...my question was really why it helps so much, given what I
+understood the caches to be doing. If they are invalidating, then it
+is amazing anything gets done...
 
-
-Alex
-
-
+Regards,
+SImon
