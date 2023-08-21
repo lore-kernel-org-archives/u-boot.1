@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25ECEE49A6
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62BFDEE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 707D8871F1;
+	by phobos.denx.de (Postfix) with ESMTP id B80E4871DD;
 	Mon, 21 Aug 2023 21:13:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BLfj27KM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b9lpHhJE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83CCA87180; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id A1C4087180; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E088871D7
+ by phobos.denx.de (Postfix) with ESMTPS id 35140871DB
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d650a22abd7so3865412276.3
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d45caf42d73so3663364276.2
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+QxzdAGUkhRPKHpFg4eIRrv6KWKZvae7lBIKLUMW37E=;
- b=BLfj27KMh7vIHMzzN7YsRK/jnkMXAb82ng9KBI/b8oyXibSiwtXvQDU1FIbVzDWeW5
- WO3+MBX0VADUM8FEDRgVSUDP0QBhHphHMOdV0eXBa05HD88WNKeF35fPB8TMwAYuLdoT
- GoM2RWg64dOUdpbs40Aet+etvQ39dr0d4gpwo=
+ bh=wrHPGPV+rJ0zVUExLA2bPtPFKxsZ1tfddRhCzAQvQDw=;
+ b=b9lpHhJE/mYtNcE4zAx/3kFf0oa9jJSlumD2iUc3hIsM7LnYKhz92Lix9luQdZYDwm
+ 6I8W/vfyIABAS+RiImGMo6eJWxFZv0Z43qCFqTdhg/1aBNfccVQdi69WJ+7uDSGbIK2/
+ HZWJVwBX5vknWNbOLQCQNpBXlGGkhFLINWlgY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+QxzdAGUkhRPKHpFg4eIRrv6KWKZvae7lBIKLUMW37E=;
- b=XOXL4ZROKCbcuv749uFeyto58sjCVvdLZq8nk4de65QdoVEzV+g5IOTtYmQImASoUi
- gyfFFD8O9JJJyNLfGxqpiFEERdt/1cfhPwcWvN05VnWX3WUq8ixXsug9BmnVWH9lb54H
- z+diY93/MQTimNFVDmeSr0tjbK8P8KiiXXJgmpxL2XIND4QYdrZuWKyUTn5szuj7kYAd
- wbXxfp3PF9lB8OU5uq0vh47nS0fCSsMA0qU+qP+SNs6K8VRQwG9mrqctth9pHI+b460s
- PKkNZd+74d39AoSDbUwTGILLUImW0olRCdwsG1pniqLcj1HCMlttmGoxD6YNL/ENJA/4
- 70Fg==
-X-Gm-Message-State: AOJu0Yy6J2Vuw2dIalaGBHNosGRqD/TeYi/4tbEQhaDPrjYthegRt30v
- tr4bpGvq8sXhbo1bVlODLCTuzjTCqrpafs2hqzsz1w==
-X-Google-Smtp-Source: AGHT+IEKpUcrWeRlNWq23CqQKX95HNTYrG6zoQ+0vOxYYtXVY7N3MC0hq4zcxixhk0WFae5x+hJ88qQD5h4C5qVMpho=
-X-Received: by 2002:a5b:d45:0:b0:cb9:41ad:8938 with SMTP id
- f5-20020a5b0d45000000b00cb941ad8938mr7139743ybr.3.1692645218734; Mon, 21 Aug
- 2023 12:13:38 -0700 (PDT)
+ bh=wrHPGPV+rJ0zVUExLA2bPtPFKxsZ1tfddRhCzAQvQDw=;
+ b=GGf/r82Ia5GbIcX0DwGjxKqlpMvl074f91jqrC/lCFEiA22OF6926Wm4NppdNpUDxg
+ 5KdRWRyrNBg+uOkF7M9Bl7ySsqJhSg5dmPqtxbAOM8M95nvs+5u1roBr7A/coaMnwt6G
+ X93/rFk8cWdFYLquxDdDer6sFFrdbeqeiRhIfRZTAGdX9DIOHpJDWZOZUKGGrYK/rPWQ
+ nU3LV6JqkM5U+qPmk7YKj3YNZrMLIRBRzhaPB5QXGUjcR+zt9Mt/5oayGsp1KQkKxsOp
+ KpmqzaUtfHqxcseY40yfZ1OBFobfIYnBZrot0Dt34d2bwKZB/5PO0+hH8XCGT3rfxXr+
+ 7+HQ==
+X-Gm-Message-State: AOJu0YzVh6EoCQ24/s3RBBqE9S0wgXLvaPYbc3qiwhc77FPt2FAfSG3g
+ OGj0pzLYtI87N+21mUGJdf62YVsBYafv9MBud9Im6A==
+X-Google-Smtp-Source: AGHT+IHUSWDesZbAxqSOnsa4OXjDVG6/61Y8rTwnQJnak052erAbLStEX39cLZAwcROdtMdPCdncwprS9FU6Z/+hluE=
+X-Received: by 2002:a5b:c0e:0:b0:d23:d12:edf5 with SMTP id
+ f14-20020a5b0c0e000000b00d230d12edf5mr8140214ybq.44.1692645218723; 
+ Mon, 21 Aug 2023 12:13:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-6-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-6-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-11-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-11-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:49 -0600
-Message-ID: <CAPnjgZ3NpWp479MQk8edxH3eGnM50sJaS4+P46ZCpL+Ev_LcUg@mail.gmail.com>
-Subject: Re: [PATCH v5 05/13] dm: video: Add damage notification on display
- fills
+Date: Mon, 21 Aug 2023 13:11:57 -0600
+Message-ID: <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
+Subject: Re: [PATCH v5 10/13] video: Only dcache flush damaged lines
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
  Jagan Teki <jagan@amarulasolutions.com>,
@@ -94,25 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alper,
+
 On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
 > From: Alexander Graf <agraf@csgraf.de>
 >
-> Let's report the video damage when we fill parts of the screen. This
-> way we can later lazily flush only relevant regions to hardware.
+> Now that we have a damage area tells us which parts of the frame buffer
+> actually need updating, let's only dcache flush those on video_sync()
+> calls. With this optimization in place, frame buffer updates - especially
+> on large screen such as 4k displays - speed up significantly.
 >
 > Signed-off-by: Alexander Graf <agraf@csgraf.de>
 > Reported-by: Da Xue <da@libre.computer>
-> [Alper: Call video_damage() in video_fill_part(), edit commit message]
+> [Alper: Use damage.xstart/yend, IS_ENABLED()]
+> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > ---
-> Does video_fill_part() need a video_sync(dev, false) here?
 >
 > Changes in v5:
-> - Call video_damage() also in video_fill_part()
+> - Use xstart, ystart, xend, yend as names for damage region
+> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
 >
->  drivers/video/video-uclass.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Changes in v2:
+> - Fix dcache range; we were flushing too much before
+> - Remove ifdefs
 >
+>  drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
+>  1 file changed, 36 insertions(+), 5 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This is a little strange, since flushing the whole cache will only
+actually write out data that was actually written (to the display). Is
+there a benefit to this patch, in terms of performance?
+
+Regards,
+Simon
