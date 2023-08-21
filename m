@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99471EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:15:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F98FEE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:15:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E66987075;
+	by phobos.denx.de (Postfix) with ESMTP id 79BE787094;
 	Mon, 21 Aug 2023 21:13:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YOdkDu7V";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="YlO3/hBm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 261B58664A; Mon, 21 Aug 2023 21:13:54 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id 3292C80770; Mon, 21 Aug 2023 21:13:54 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97720871CB
+ by phobos.denx.de (Postfix) with ESMTPS id 96AF1871CA
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-bcb6dbc477eso3630230276.1
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-d7225259f52so3832014276.0
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692645213; x=1693250013;
+ d=google.com; s=20221208; t=1692645213; x=1693250013;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FH3eOxQscQ5CAcOn0+VC0pA6Dmlur/T4lBfA3IEN4wo=;
- b=YOdkDu7ViaDsC5BZPnPn1WC/Ng+P/Fr8bvL3mLJ6CZDIKNlF+AWggY0MaZAp+NhKO/
- q3Eoa7FhYyGHmq7mJfF2TAAIrOQMrap3gMd3iOMTH2kxS1nTdGO8eYjLWHJqA5r4cebD
- w/+E0a2dUeNxIxoUht9qbdas6hnQyxgd3AOOw=
+ bh=HKxBms1ZPr8kP4GP+nLSTF20h7US2qEv6KZ3iMNF4PY=;
+ b=YlO3/hBm4FsvmVKVa2ZQLac50pAVqibnyQm9WrWE+gUBLyJC6611pEH1lC5pLXxSvy
+ 8bAavGXAgSwWAdYeS5cDkArgTs0Me+25DhepxLvicFfE2qajCZKe2Lb9BStFwnREMlHW
+ gZi685mGmdRckU+CZKSbKvYzqlW9fcUhv3s59vDJP+sCclUhWzZdmzlG46Y8kZrUZoUA
+ ytd71DyJ5dJqHPZXW2QFtVSC9P0yL2zaH5QDffCZBTqZeHVqLwWLayf0GyWxriIneQy0
+ g6CVE6/jKZDeWMfon86nuUdrhUmyuKg8QQINj6hQ86Ui/w0RvgxhNR9jSlzmIKWcNM6h
+ skfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692645213; x=1693250013;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FH3eOxQscQ5CAcOn0+VC0pA6Dmlur/T4lBfA3IEN4wo=;
- b=lYRbVvXJE4AArJi1gRr4o8uKrKv7DsG/0PbHJuEG9HQfkoyzfM4AFAphP3fJ2TOvMW
- ZDpR4aelwzdxCZGiFNYKOBL4MF5hufffMvEoNPsXIv20EphVlWv6qbAL1Fv9e+lTIA2+
- skrOcwiwqxrshqwQI1ZFv+mc/oD4RBbEuQIChDuY8TcJdmFI+3BUxcgv9gXdgrwVVfDY
- rtaiZw6g+grAxsvJXUAWWg090vcIIVR2yDsCyy/dxwdQNNlWqnhb9DvdusAFSNps4EEI
- 2ccLYmQOeiUV882lx11AWWm1VJIXb/bzoYz9Se8ps2dAuDExBz6lTCC3kMS1qiDfR8CO
- p7eA==
-X-Gm-Message-State: AOJu0YyyvQoo3r0GklwRdyfIHOiG32VUrPnRDvRO3KZllmOycmL9+1AK
- DI9I6eE0sWaVTiJKE3/mWjwXfCrgzEJZNWiO9dMUag==
-X-Google-Smtp-Source: AGHT+IE7suHGnf0gmADvcf8XCIbakY8DW6RMnsLPMiGUm8Q8Uz3Olc8CbsWIlctiQlhOphLfBnREyw9QyMVEkJC8WXk=
-X-Received: by 2002:a5b:dc3:0:b0:d62:bc43:426e with SMTP id
- t3-20020a5b0dc3000000b00d62bc43426emr7076775ybr.43.1692645213133; Mon, 21 Aug
- 2023 12:13:33 -0700 (PDT)
+ bh=HKxBms1ZPr8kP4GP+nLSTF20h7US2qEv6KZ3iMNF4PY=;
+ b=GorGTYNfJ076UnAvG/AsGBZaFNPvu1vjw0NbcwP8f+UC+HZX2kQeBuy1y3yfqG3FI9
+ V6xO/IY+JYMc8f2ak72y8b8sD6++tNOsqXhR9720yq3qcO/6nga/jDuTnZU0tYYNie+8
+ 1nwWfkCZ8ANYay4VBqHZPUAPnb7Cpk2GhakhGt0U9N/HnIvZZpf1YuQYbTJX5omijXZC
+ c/BW2qlw4AF3kvo8BjU8dbAkmC5843HJ+OoyGdBEGhP7LOhLWvCm3JonYKr/fkK6Qtm0
+ szrOFpRTmtvQekpToxPT1ixgCGgHFkyTNwJEwOW0DSwB6sQSVX84riKvkbdxO8pC/AiP
+ 9sYQ==
+X-Gm-Message-State: AOJu0YxsPGK0NwENg5/nQsY/3ggptaySzl9ArsjbWkLct/WS6Q9IuvBt
+ cKuk01g4IgR7Syn6MnMLv3RD926xYMQk/xuemxBg7Q==
+X-Google-Smtp-Source: AGHT+IFhWqpdw4VkA78VQ2dzGPcgT2w1tWfpKTOoA7RO27/R3Sua3HcVTXKcFKDLvD74aLcpuiH9P6QE5QTUTRkVdic=
+X-Received: by 2002:a25:2693:0:b0:d6e:3544:9874 with SMTP id
+ m141-20020a252693000000b00d6e35449874mr7386484ybm.58.1692645213120; Mon, 21
+ Aug 2023 12:13:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-5-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-5-alpernebiyasak@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:50 -0600
-Message-ID: <CAPnjgZ20VRYsP=5S5HJWjR2sNvmOudseHiXUcjnZmDCA=0jfnw@mail.gmail.com>
-Subject: Re: [PATCH v5 04/13] dm: video: Add damage tracking API
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
+References: <20230706112020.24528-1-avromanov@sberdevices.ru>
+ <20230706112020.24528-2-avromanov@sberdevices.ru>
+ <CAPnjgZ1AqUYxAU0BNhxZLXc+y_h5XKbuoLBDekbkqzaJeon-1Q@mail.gmail.com>
+ <20230707084313.vecmsr5z3aj4gqxs@cab-wsm-0029881>
+ <CAPnjgZ3Wfnc_rMJBVZTv_eikUu7vpPWsL1MQ_SruXySV9EZi3A@mail.gmail.com>
+ <20230710083443.fuw74gbvwoha75ab@cab-wsm-0029881>
+ <CAPnjgZ1aZsFBaX2eBh35CXVExaE90YJHQ98S+2XOWJrJ9pz37w@mail.gmail.com>
+ <20230711102459.phpyem2ehlya7osz@cab-wsm-0029881.sigma.sbrf.ru>
+ <CAPnjgZ2t2xf05PSgCbQr7MUvJrpQPcRs_Zoux804h4UmTrZRKw@mail.gmail.com>
+ <ZLDdaIyXjp9yN5aW@laputa>
+ <CAPnjgZ3oQ1qZtWFpezNfV-dZhbCrnqbi1+B=JKb1sfJP6xk-cA@mail.gmail.com>
+ <6303961e-3edc-4356-905b-89820a52b227@linaro.org>
+In-Reply-To: <6303961e-3edc-4356-905b-89820a52b227@linaro.org>
+From: Simon Glass <sjg@google.com>
+Date: Mon, 21 Aug 2023 13:11:58 -0600
+Message-ID: <CAPnjgZ2GA7ktNi9HVJ1Mw=4nuqcQJALVBqHQr1_JtVmkzEVgdw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] drivers: firmware: introduce Meson Secure Monitor
+ driver
+To: neil.armstrong@linaro.org
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Alexey Romanov <AVRomanov@sberdevices.ru>, 
+ "narmstrong@baylibre.com" <narmstrong@baylibre.com>, 
+ "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ kernel <kernel@sberdevices.ru>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,49 +100,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->
-> From: Alexander Graf <agraf@csgraf.de>
->
-> We are going to introduce image damage tracking to fasten up screen
-> refresh on large displays. This patch adds damage tracking for up to
-> one rectangle of the screen which is typically enough to hold blt or
-> text print updates. Callers into this API and a reduced dcache flush
-> code path will follow in later patches.
->
-> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> Reported-by: Da Xue <da@libre.computer>
-> [Alper: Use xstart/yend, document new fields, return void from
->         video_damage(), declare priv, drop headers, use IS_ENABLED()]
-> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> ---
->
-> Changes in v5:
-> - Use xstart, ystart, xend, yend as names for damage region
-> - Document damage struct and fields in struct video_priv comment
-> - Return void from video_damage()
-> - Fix undeclared priv error in video_sync()
-> - Drop unused headers from video-uclass.c
-> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->
-> Changes in v4:
-> - Move damage clear to patch "dm: video: Add damage tracking API"
-> - Simplify first damage logic
-> - Remove VIDEO_DAMAGE default for ARM
->
-> Changes in v3:
-> - Adapt to always assume DM is used
->
-> Changes in v2:
-> - Remove ifdefs
->
->  drivers/video/Kconfig        | 13 ++++++++++++
->  drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++++---
->  include/video.h              | 32 ++++++++++++++++++++++++++--
->  3 files changed, 81 insertions(+), 5 deletions(-)
->
+Hi Neil,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 21 Aug 2023 at 03:16, neil.armstrong@linaro.org
+<neil.armstrong@linaro.org> wrote:
+>
+> Hi,
+>
+> On 16/07/2023 01:40, Simon Glass wrote:
+> > Hi,
+> >
+> > On Thu, 13 Jul 2023 at 23:30, AKASHI Takahiro
+> > <takahiro.akashi@linaro.org> wrote:
+> >>
+> >> On Tue, Jul 11, 2023 at 01:13:29PM -0600, Simon Glass wrote:
+> >>> +AKASHI Takahiro
+> >>
+> >> Me?
+> >
+> > Yes, I'm asking for your help to try to clean this stuff up.
+>
+> The thread is long and hard to answer directly, but as AKASHI
+> said there's no point to add a SMC class since it's only the message
+> passing instruction, and there's no point using remoteproc since the
+> firmware runs on a separate secure state of the same CPU.
+>
+> And I don't see how we can actually define a finite set of ops because
+> none of the secure firmware interfaces has even similar functions.
+>
+> So a new UCLASS for each firmware interface should be added, not sure
+> this is scalable or required since those firmwares are mainly SoC or
+> vendor specific, except the PSCI or other ARM specific interfaces of course.
+>
+> So I think UCLASS_FIRMWARE is good enough since it avoids using UCLASS_MISC,
+> but it should be probably documented somewhere that the ops are implementation
+> defined.
 
-But I suggest an empty static inline in the case where the feature is disabled?
+Yes it needs docs...but what exactly is the 'firmware' uclass? I
+assumed it was for loading firmware into a device, but it seems that
+it is something else?
+
+Perhaps we should have a UCLASS_SVC (supervisor call) or something
+like that, rather than continuing with firmware?
+
+[..]
+
+Regards,
+Simon
