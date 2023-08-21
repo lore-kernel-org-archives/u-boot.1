@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D25C3EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 18:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16300EE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 18:14:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CE308705F;
-	Mon, 21 Aug 2023 20:14:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA7758705D;
+	Mon, 21 Aug 2023 20:14:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hEbjbNpc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CiDre5Uz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F0AC8707C; Mon, 21 Aug 2023 20:13:58 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 6C76386F7A; Mon, 21 Aug 2023 20:14:00 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AC5E8700F
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:13:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E3E8705F
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-31768ce2e81so3297771f8f.1
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 11:13:55 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-3fe8242fc4dso36292225e9.1
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 11:13:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692641635; x=1693246435;
+ d=gmail.com; s=20221208; t=1692641636; x=1693246436;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E9PD0IEAv+I/k7btdDOBwttUa6zTCBandZoPoxHEZgQ=;
- b=hEbjbNpckDyQ+zuLLJ7yP0llE7JpIjeAEBP1LgTetc4gOz1d5vy1rXBE0Zek5jeWQ8
- vQ82AHIikqZ6dD+RHIdFNvxZrdQHhcz1MqRNEZRyEpdXK4Dj7GALVuNQMNgnB9uyhCqM
- njuNvkbpIPIF2mzwIm/OB8QmZD/j5BQzRxvJ7FRaYib5gWKYV7vp6v/E2V2O4N6/h7q4
- 6HB0Sa2+dVRPr5cwCK23w5R+7u6ozeCDiDPVOonqnskYritYVZ2NUw8tS2tamldxaiqh
- P44AOiYLqRPhHta9VmYvLzBzY28/7RPjzJa8AKHUF/7BDdxHh6B5UPzdh+Wx/biHOldW
- tJqA==
+ bh=g41reL+MuagRh2sR3CbYPQP43TJsuuxN6qaXC7xWmPY=;
+ b=CiDre5UzPPG53zK3pgGTi+YIaRhpfFi2e85WfeCVEdKv+KF7vW26jIZJFZ+DOKKlTw
+ mhSN5O9nQp3BpbinAToBDFYAYLpmQ16JWEdP3EcfVR1UiiD8hEMkLy22vW8Rz/9PwCl5
+ 8mVJGDLmyOcTKtV+xENoGNCU5nZth9uVPIxBK8FU7hXMk8rhp1Zye21IZIe6FYi31Twb
+ R0iz9IuR7PgpVPLVYDBBFiUFCpvA9ubVrIrtf0JTTiFEOttkW9qcfa2YEOYGMsfaYbiY
+ sSSDYdolrQL28C5TTbeOQcBZvukXfpYJkFj7pYt63XmfvYIjmQqkCKxlAeGAcnqMdJ+w
+ VQiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692641635; x=1693246435;
+ d=1e100.net; s=20221208; t=1692641636; x=1693246436;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E9PD0IEAv+I/k7btdDOBwttUa6zTCBandZoPoxHEZgQ=;
- b=JQYAyFI9oOFHGn5eZoKp7mElsYzJUyaov+DMG/symtU5wsl2cIGnR2AY++ZTsx8arj
- S5tFNv/WdTOvg8O27d1MXHgE67kOe4/8sakPz+At7ozl2wfjQ+Fhj9z1XE+JQdSUuVVF
- PSLLFT7q7387VjeanseJmIxiZwUQB6tJwf7OrGNuOnzXSNLa6LWhjny+ITwak7EAqjw6
- 8jdh6RiZJFrQGi+gyU1p4ZO7LWxQDTMQbDCvDVHlAvoAFfxl/7v7lu9CgIcjcG19TLtE
- fv79vQL8JH8iCxysBpGMjfFsxgqNaoLb2LwjBGpQ36MIfva1oPK9+ZMXumBA18vgZPpT
- t20g==
-X-Gm-Message-State: AOJu0YzyLU/QJuU/wYMB+tXeyn/zWd8W8p2D8CZ+JrWvNiW3HGATakxA
- zrQvJxVwdILUgNRVXgI0Fm4Mh07G+eM=
-X-Google-Smtp-Source: AGHT+IGqw7QLkiKYydDmZG7mXzaV84Nue32NQqx/rhgky7LElF8NIjbj2WQCSKy5WnfZefd+dedMWA==
-X-Received: by 2002:adf:f8c5:0:b0:31a:d54c:f002 with SMTP id
- f5-20020adff8c5000000b0031ad54cf002mr5182448wrq.19.1692641635004; 
- Mon, 21 Aug 2023 11:13:55 -0700 (PDT)
+ bh=g41reL+MuagRh2sR3CbYPQP43TJsuuxN6qaXC7xWmPY=;
+ b=iySanZ0rviX55Ph23GT45IQ/FLi1kgtlv7GLTMr5xgqtcZAw0sGofCs+gFIOxHeBac
+ sB8HTgYpOcGsJ/XDGJVHZIsJHT17NRrhy2pTCODdlm5UnVCNw4qbPxRVGKCu+woz9L8R
+ Dkfbh/U0wJaYaHI/JVuaNUG0p6PqARRdDsbM6A3ikB837RlTHNAwnmkX4Q07yOcwXvM7
+ 94OdI8GEID/dKNznKJ4P93Pk6wIe0W+nha3COTm9CXETOzYVxxhZRWzs3XTxGCeUPMck
+ tNpaHxw9PGHMaOHzCYG5vW5QmqIVOfN9083P7OMCBY6q7DY6W63YeqeMQCRqHOL0VuLE
+ 7V8g==
+X-Gm-Message-State: AOJu0Yw/zaX/gpuKSRWSLK7SV+4+pEG5LqEa4OI/kN+oOabZ+DcQxV57
+ ufAJhtcViq5/aw5vKYgQfMHjsOv1U9g=
+X-Google-Smtp-Source: AGHT+IEdn39UUI7afYXzpw+9rktaGHYD87BuYpECpzL2n2qYJhjn7DuPLB9V8sqRQJoPKNbUZF/2Rw==
+X-Received: by 2002:adf:e608:0:b0:316:f3cf:6f12 with SMTP id
+ p8-20020adfe608000000b00316f3cf6f12mr5298976wrm.48.1692641636585; 
+ Mon, 21 Aug 2023 11:13:56 -0700 (PDT)
 Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- z1-20020adfd0c1000000b003143c9beeaesm13192025wrh.44.2023.08.21.11.13.54
+ z1-20020adfd0c1000000b003143c9beeaesm13192025wrh.44.2023.08.21.11.13.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 11:13:54 -0700 (PDT)
+ Mon, 21 Aug 2023 11:13:56 -0700 (PDT)
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Anatolij Gustschin <agust@denx.de>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH 4/5] sandbox: video: Move sandbox video sync to a driver
- operation
-Date: Mon, 21 Aug 2023 21:13:38 +0300
-Message-Id: <20230821181339.4135800-5-alpernebiyasak@gmail.com>
+Subject: [RFC PATCH 5/5] sandbox: video: Use partial updates for SDL display
+Date: Mon, 21 Aug 2023 21:13:39 +0300
+Message-Id: <20230821181339.4135800-6-alpernebiyasak@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230821181339.4135800-1-alpernebiyasak@gmail.com>
 References: <20230821181339.4135800-1-alpernebiyasak@gmail.com>
@@ -93,108 +92,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The sandbox SDL video sync is handled in the uclass because there has
-been a sync rate limiter and a way to bypass that. Previous patches
-move the rate limit code into SDL-specific files, and provide a generic
-way to defer and force video syncs.
-
-Sandbox code shouldn't be in the uclasses if possible. Move the
-remaining sandbox sync call into the driver ops. Now that sandbox video
-sync attempts can defer without resetting video damage, force a video
-sync before checking that video syncs reset video damage.
+Now that we have video damage tracking, try to reduce the SDL display
+work by copying only the updated regions onto the SDL texture instead of
+the entire framebuffer. We still have to do RenderClear and RenderCopy
+the whole texture onto the renderer, but that allegedly happens in the
+GPU.
 
 Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 ---
+The second half of copy_to_texture is untested.
 
- drivers/video/sandbox_sdl.c  | 16 ++++++++++++++++
- drivers/video/video-uclass.c | 14 --------------
- test/dm/video.c              |  2 +-
- 3 files changed, 17 insertions(+), 15 deletions(-)
+ arch/sandbox/cpu/sdl.c         | 25 +++++++++++++++++--------
+ arch/sandbox/include/asm/sdl.h |  9 +++++++--
+ drivers/video/sandbox_sdl.c    | 16 +++++++++++++++-
+ 3 files changed, 39 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/video/sandbox_sdl.c b/drivers/video/sandbox_sdl.c
-index 9081c7da62e4..7dc2787a5d25 100644
---- a/drivers/video/sandbox_sdl.c
-+++ b/drivers/video/sandbox_sdl.c
-@@ -99,6 +99,17 @@ int sandbox_sdl_set_bpp(struct udevice *dev, enum video_log2_bpp l2bpp)
+diff --git a/arch/sandbox/cpu/sdl.c b/arch/sandbox/cpu/sdl.c
+index 48fae20b4c2d..3a3221d89066 100644
+--- a/arch/sandbox/cpu/sdl.c
++++ b/arch/sandbox/cpu/sdl.c
+@@ -192,8 +192,10 @@ int sandbox_sdl_init_display(int width, int height, int log2_bpp,
  	return 0;
  }
  
-+static int sandbox_sdl_video_sync(struct udevice *dev)
-+{
-+	struct video_priv *priv = dev_get_uclass_priv(dev);
-+	void *fb = priv->fb;
-+
-+	if (IS_ENABLED(CONFIG_VIDEO_COPY))
-+		fb = priv->copy_fb;
-+
-+	return sandbox_sdl_sync(fb);
-+}
-+
- static int sandbox_sdl_remove(struct udevice *dev)
+-static int copy_to_texture(void *lcd_base)
++static int copy_to_texture(void *lcd_base, int xstart, int ystart,
++			   int xend, int yend)
  {
- 	/*
-@@ -133,6 +144,10 @@ static const struct udevice_id sandbox_sdl_ids[] = {
- 	{ }
- };
++	struct SDL_Rect rect;
+ 	char *dest;
+ 	int pitch, x, y;
+ 	int src_pitch;
+@@ -201,8 +203,15 @@ static int copy_to_texture(void *lcd_base)
+ 	char *src;
+ 	int ret;
  
-+static struct video_ops sandbox_sdl_ops = {
-+	.video_sync = sandbox_sdl_video_sync,
-+};
++	rect.x = xstart;
++	rect.y = ystart;
++	rect.w = xend - xstart + 1;
++	rect.h = yend - ystart + 1;
 +
- U_BOOT_DRIVER(sandbox_lcd_sdl) = {
- 	.name	= "sandbox_lcd_sdl",
- 	.id	= UCLASS_VIDEO,
-@@ -141,4 +156,5 @@ U_BOOT_DRIVER(sandbox_lcd_sdl) = {
- 	.probe	= sandbox_sdl_probe,
- 	.remove	= sandbox_sdl_remove,
- 	.plat_auto	= sizeof(struct sandbox_sdl_plat),
-+	.ops	= &sandbox_sdl_ops,
- };
-diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index d867185da539..2632216c05ae 100644
---- a/drivers/video/video-uclass.c
-+++ b/drivers/video/video-uclass.c
-@@ -23,9 +23,6 @@
- #include <dm/device_compat.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
--#ifdef CONFIG_SANDBOX
--#include <asm/sdl.h>
--#endif
+ 	if (sdl.src_depth == sdl.depth) {
+-		SDL_UpdateTexture(sdl.texture, NULL, lcd_base, sdl.pitch);
++		src_pitch = sdl.width * sdl.src_depth / 8;
++		src = lcd_base + src_pitch * rect.y + rect.x * sdl.src_depth / 8;
++		SDL_UpdateTexture(sdl.texture, &rect, src, src_pitch);
+ 		return 0;
+ 	}
  
- /*
-  * Theory of operation:
-@@ -454,17 +451,6 @@ int video_sync(struct udevice *vid, bool force)
+@@ -215,7 +224,7 @@ static int copy_to_texture(void *lcd_base)
+ 		return -EINVAL;
+ 	}
  
- 	video_flush_dcache(vid);
+-	ret = SDL_LockTexture(sdl.texture, NULL, &pixels, &pitch);
++	ret = SDL_LockTexture(sdl.texture, &rect, &pixels, &pitch);
+ 	if (ret) {
+ 		printf("SDL lock %d: %s\n", ret, SDL_GetError());
+ 		return ret;
+@@ -223,12 +232,12 @@ static int copy_to_texture(void *lcd_base)
  
--#if defined(CONFIG_VIDEO_SANDBOX_SDL)
--	void *fb = priv->fb;
--
--	if (IS_ENABLED(CONFIG_VIDEO_COPY))
--		fb = priv->copy_fb;
--
--	ret = sandbox_sdl_sync(fb);
--	while (force && ret == -EAGAIN)
--		ret = sandbox_sdl_sync(fb);
--#endif
--
- 	if (IS_ENABLED(CONFIG_VIDEO_DAMAGE)) {
- 		priv->damage.xstart = priv->xsize;
- 		priv->damage.ystart = priv->ysize;
-diff --git a/test/dm/video.c b/test/dm/video.c
-index 4c3bcd26e94f..487e4d4a73a2 100644
---- a/test/dm/video.c
-+++ b/test/dm/video.c
-@@ -756,7 +756,7 @@ static int dm_test_video_damage(struct unit_test_state *uts)
- 	ut_asserteq(1280, priv->damage.xend);
- 	ut_asserteq(510, priv->damage.yend);
+ 	/* Copy the pixels one by one */
+ 	src_pitch = sdl.width * sdl.src_depth / 8;
+-	for (y = 0; y < sdl.height; y++) {
++	for (y = 0; y < rect.h; y++) {
+ 		char val;
  
--	video_sync(dev, false);
-+	video_sync(dev, true);
- 	ut_asserteq(priv->xsize, priv->damage.xstart);
- 	ut_asserteq(priv->ysize, priv->damage.ystart);
- 	ut_asserteq(0, priv->damage.xend);
+ 		dest = pixels + y * pitch;
+-		src = lcd_base + src_pitch * y;
+-		for (x = 0; x < sdl.width; x++, dest += 4) {
++		src = lcd_base + src_pitch * (ystart + y) + xstart;
++		for (x = 0; x < rect.w; x++, dest += 4) {
+ 			val = *src++;
+ 			dest[0] = val;
+ 			dest[1] = val;
+@@ -241,7 +250,7 @@ static int copy_to_texture(void *lcd_base)
+ 	return 0;
+ }
+ 
+-int sandbox_sdl_sync(void *lcd_base)
++int sandbox_sdl_sync(void *lcd_base, int xstart, int ystart, int xend, int yend)
+ {
+ 	struct SDL_Rect rect;
+ 	int ret;
+@@ -253,7 +262,7 @@ int sandbox_sdl_sync(void *lcd_base)
+ 		return -EAGAIN;
+ 
+ 	SDL_RenderClear(sdl.renderer);
+-	ret = copy_to_texture(lcd_base);
++	ret = copy_to_texture(lcd_base, xstart, ystart, xend, yend);
+ 	if (ret) {
+ 		printf("copy_to_texture: %d: %s\n", ret, SDL_GetError());
+ 		return -EIO;
+diff --git a/arch/sandbox/include/asm/sdl.h b/arch/sandbox/include/asm/sdl.h
+index 1ace7d1a1217..c7c73ef3a3e6 100644
+--- a/arch/sandbox/include/asm/sdl.h
++++ b/arch/sandbox/include/asm/sdl.h
+@@ -41,10 +41,14 @@ int sandbox_sdl_remove_display(void);
+  * system resources too much.
+  *
+  * @lcd_base: Base of frame buffer
++ * @xstart:   X start position of updated region in pixels from the left
++ * @ystart:   Y start position of updated region in pixels from the top
++ * @xend:     X end position of updated region in pixels from the left
++ * @yend:     Y end position of updated region in pixels from the top
+  * Return: 0 if screen was updated, -ENODEV is there is no screen.
+  *	   -EAGAIN if screen was not updated due to sync rate limit.
+  */
+-int sandbox_sdl_sync(void *lcd_base);
++int sandbox_sdl_sync(void *lcd_base, int xstart, int ystart, int xend, int yend);
+ 
+ /**
+  * sandbox_sdl_scan_keys() - scan for pressed keys
+@@ -118,7 +122,8 @@ static inline int sandbox_sdl_remove_display(void)
+ 	return -ENODEV;
+ }
+ 
+-static inline int sandbox_sdl_sync(void *lcd_base)
++static inline int sandbox_sdl_sync(void *lcd_base, int xstart, int ystart,
++				   int xend, int yend)
+ {
+ 	return -ENODEV;
+ }
+diff --git a/drivers/video/sandbox_sdl.c b/drivers/video/sandbox_sdl.c
+index 7dc2787a5d25..eb424072b6fe 100644
+--- a/drivers/video/sandbox_sdl.c
++++ b/drivers/video/sandbox_sdl.c
+@@ -103,11 +103,25 @@ static int sandbox_sdl_video_sync(struct udevice *dev)
+ {
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
+ 	void *fb = priv->fb;
++	int xstart = 0;
++	int ystart = 0;
++	int xend = priv->xsize;
++	int yend = priv->ysize;
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO_COPY))
+ 		fb = priv->copy_fb;
+ 
+-	return sandbox_sdl_sync(fb);
++	if (IS_ENABLED(CONFIG_VIDEO_DAMAGE)) {
++		if (!priv->damage.xend && !priv->damage.yend)
++			return 0;
++
++		xstart = priv->damage.xstart;
++		ystart = priv->damage.ystart;
++		xend = priv->damage.xend;
++		yend = priv->damage.yend;
++	}
++
++	return sandbox_sdl_sync(fb, xstart, ystart, xend, yend);
+ }
+ 
+ static int sandbox_sdl_remove(struct udevice *dev)
 -- 
 2.40.1
 
