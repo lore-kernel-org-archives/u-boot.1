@@ -4,78 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB76EE4996
-	for <u-boot@archiver.kernel.org>; Sun, 20 Aug 2023 23:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E64EE49A6
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 01:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D93986923;
-	Mon, 21 Aug 2023 01:35:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 34A4A86C53;
+	Mon, 21 Aug 2023 03:04:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GBfTxS5h";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="F5AODmhH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81B258683C; Mon, 21 Aug 2023 01:35:43 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8B29386BE9; Mon, 21 Aug 2023 03:04:11 +0200 (CEST)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C15C386A0F
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:35:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0A73869C4
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 03:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1bf3a2f4528so19239975ad.2
- for <u-boot@lists.denx.de>; Sun, 20 Aug 2023 16:35:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692574536; x=1693179336;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zTjawZhXdGRDgT0w4oz4Lhc1NZU3j9BrndxU33RMYqw=;
- b=GBfTxS5h6Q8JmmGoVbpMZ26FiKiZlEZwiXGy0ZANEjTu+ld0VMVFFvraAcQh/W8R1r
- aJaGTfN+99MDEp9Sbe3XppthW0r2F7K8eI7lrgrb9+QR0YuSOb+iXg85ap1qfXr4tVdg
- c69PIiDP6EWz2Fvt77KxKgWplZ0wVnpZNVIVaB5z4SsCgx0oJCV8afJA3daqIc4ZJQ5Z
- 1I+MFLWm5tOUcpK++jJWbm9U877gayavlGtOmz+5j4kdv3n8W6u1KV7QnoSDMe7AHDTJ
- /if0cllcMhEndiABN2Q5LJ1GZLyGVlEkzRGQ5id+YcZzmsHgdQB4vUHIwJp3vVEzK6E0
- r6Wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692574536; x=1693179336;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zTjawZhXdGRDgT0w4oz4Lhc1NZU3j9BrndxU33RMYqw=;
- b=OcmETNV9piEKkaL/A96UwU4AktLE6k13pO/Zp/TomNmFCHg1ro7Lsxh8Z2NPBS40w+
- 1EXsSvvJdYqQw9AP2Ma/FSoP6YMnDR2F3p6Jd9W5U1jJXH07ghIQ26Ct+2bXCXF83W7M
- yZ7DyTAo4haNG+3BIrESP9J3mOU0TyNi9x67wJ4TVBBPU++mZs/JcaG8TsMukkY49gp4
- AbRjneeUqRBkKz/ICoSjTNbZOiMvuvuwFy13HjTuYjgdvxTXlp3Fri9vshXEeRDB6ykf
- 0NvUqhtIvJjAPGnLB0Aplmx8sqMUMGwO7ajh1oDziH83FYBL7g8JPDQpvLv1PRrRU5Pe
- eUAg==
-X-Gm-Message-State: AOJu0YwJ/jcq171oG/hlQ08l2uWqBrdv4TwqJ0iwVIu1SpvJP21Ntwcg
- ZT5M3vw/cEWvgNwP3fvUxl3l3LBmsY01lA==
-X-Google-Smtp-Source: AGHT+IHUTfoQAJKGDauI7rJiu4quKnWiguUQ+PvX3nVRQKc3VQkkqhQjL/u9TXfro8Qn7maftQV/ew==
-X-Received: by 2002:a17:903:2446:b0:1b8:e41:f43f with SMTP id
- l6-20020a170903244600b001b80e41f43fmr7594576pls.27.1692574536612; 
- Sun, 20 Aug 2023 16:35:36 -0700 (PDT)
-Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:a119:6030:1ae3:c940])
- by smtp.gmail.com with ESMTPSA id
- ja20-20020a170902efd400b001bde440e693sm5650082plb.44.2023.08.20.16.35.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Aug 2023 16:35:36 -0700 (PDT)
-From: Chris Packham <judge.packham@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Chris Packham <judge.packham@gmail.com>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] ARM64: dts: marvell: cn9310-crb: Remove duplicate pinctrl
-Date: Mon, 21 Aug 2023 11:31:05 +1200
-Message-ID: <20230820233113.575818-2-judge.packham@gmail.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230820233113.575818-1-judge.packham@gmail.com>
-References: <20230820233113.575818-1-judge.packham@gmail.com>
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20230821010403epoutp01e5cdb0ff8ceb6d3f185373381b47c72c~9QGZvwqc71181811818epoutp01b
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:04:03 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20230821010403epoutp01e5cdb0ff8ceb6d3f185373381b47c72c~9QGZvwqc71181811818epoutp01b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1692579843;
+ bh=Z6836NvZBGUjQv+ZlkaqMYupHNhZF9Rc6ZNoURmErm0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=F5AODmhHZAy4AFlFI0dquRYTFSu/nw7R4qZKfopXoPAfGbcr/6WHZ4YCP34NvswSq
+ sr0ZBHejl8Q180MZSRcHk1SFVQvsnGyWXxK6DHOhtlnw+JgEN0w9vrVm3NXl2nx3zM
+ qecxHLbpXsmTNurY5IiJRcGEy5q7gMgCb+NHHG1s=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTP id
+ 20230821010403epcas2p2eb62ff15fb5bc0b778cbd8dcfaa6dfc1~9QGZI6iQ21056610566epcas2p2w;
+ Mon, 21 Aug 2023 01:04:03 +0000 (GMT)
+Received: from epsmges2p1.samsung.com (unknown [182.195.36.97]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4RTZ4L3CQ6z4x9Q3; Mon, 21 Aug
+ 2023 01:04:02 +0000 (GMT)
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ B0.9A.49913.208B2E46; Mon, 21 Aug 2023 10:04:02 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20230821010401epcas2p2ae4be39a1b5b176e6144b9b26e218fcd~9QGYLxDQe1296912969epcas2p2B;
+ Mon, 21 Aug 2023 01:04:01 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20230821010401epsmtrp1cd284948978200ca88e7b8e85393b5c7~9QGYKeTrG0926909269epsmtrp1O;
+ Mon, 21 Aug 2023 01:04:01 +0000 (GMT)
+X-AuditID: b6c32a45-83dfd7000000c2f9-c4-64e2b802a0ce
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ DD.2B.14748.108B2E46; Mon, 21 Aug 2023 10:04:01 +0900 (KST)
+Received: from cometzero-ubuntu..
+ (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20230821010401epsmtip2400cf12cc5a2f108df2271cea2b95980~9QGX_5Coq1075110751epsmtip20;
+ Mon, 21 Aug 2023 01:04:01 +0000 (GMT)
+From: Chanho Park <chanho61.park@samsung.com>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Simon Glass
+ <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Chanho Park <chanho61.park@samsung.com>
+Subject: [PATCH 2/3] riscv: timer: add timer_get_boot_us for BOOTSTAGE
+Date: Mon, 21 Aug 2023 10:03:49 +0900
+Message-Id: <20230821010350.324112-3-chanho61.park@samsung.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230821010350.324112-1-chanho61.park@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrBKsWRmVeSWpSXmKPExsWy7bCmhS7TjkcpBpePillc3q9t8fbFWUaL
+ b1u2MVq83dvJbvH40GsmB1aPPadnMXvMbrjI4nH2zg5Gj74tqxgDWKKybTJSE1NSixRS85Lz
+ UzLz0m2VvIPjneNNzQwMdQ0tLcyVFPISc1NtlVx8AnTdMnOA9ioplCXmlAKFAhKLi5X07WyK
+ 8ktLUhUy8otLbJVSC1JyCswL9IoTc4tL89L18lJLrAwNDIxMgQoTsjPevbnDWtDDWbHi+XbW
+ BsY97F2MnBwSAiYSfW0v2boYuTiEBHYwSpz438AI4XxilDj38AE7hPONUeL6i39ADgdYS3tj
+ GkR8L6PE4ubtLBDONCaJ1rvnmEDmsgnoSmx5/ooRpEFEoFzi2D1+kDCzgLZE5+cpYKuFBdwk
+ /p7/DWazCKhK7Jq0khXE5hWwl/h04D4TxC55icUPJEDCnAIOErdPzGOCKBGUODnzCQvESHmJ
+ 5q2zmUFOkBC4xi5x/P5kqF4Xif0XPCG+FJZ4dXwL1MdSEi/726BeKZfYsSwJorWFUaK5bQ8z
+ RI29xI+bU1hBapgFNCXW79KHKFeWOHILaiufRMfhv1BTeCU62oQgGtUlDmyfzgJhy0p0z/nM
+ ClHiIfH2ligkmCYzSvyc2cw4gVFhFpJfZiH5ZRbC3gWMzKsYxVILinPTU4uNCgzhkZucn7uJ
+ EZwEtVx3ME5++0HvECMTB+MhRgkOZiURXunvD1OEeFMSK6tSi/Lji0pzUosPMZoCA3ois5Ro
+ cj4wDeeVxBuaWBqYmJkZmhuZGpgrifPea52bIiSQnliSmp2aWpBaBNPHxMEp1cAU0eXE94t/
+ crGLqMFRnSktZ7fnnfp/J6mdPzFoxUZtpRfPz08RmfwjkYtr0YkH071VNvkf959S7imkZHyV
+ 69/uRQH6m+7Gc20yEOWfOMlhWq77hbWbDjGfTbBZ7nlu14l1gc9XnjrEJHWA4+513Z6UQyvi
+ BWa2zed42e7vW9P1366IP2d7tOW7a7uPrNi8KvfhtfdvlusK7lHlulja8naFx6bQRZ8KkoVi
+ l8zIdbKsVWM67FVQx1mSpMF68/Tq/7Ez1Mz2VJ7bayCcIHZJzqB71eoGzcnrX3xZ/oEh9XHA
+ 4gaWKdt4bk2o1m9e+On4x/wy/tKHz7+6Zrze8KJm/g1OtVUt6dmznjXPjL43U6vophJLcUai
+ oRZzUXEiAAVABdULBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKLMWRmVeSWpSXmKPExsWy7bCSvC7jjkcpBhc7LCwu79e2ePviLKPF
+ ty3bGC3e7u1kt3h86DWTA6vHntOzmD1mN1xk8Th7ZwejR9+WVYwBLFFcNimpOZllqUX6dglc
+ Ge/e3GEt6OGsWPF8O2sD4x72LkYODgkBE4n2xrQuRk4OIYHdjBLnt0qA2BICshLP3u1gh7CF
+ Je63HGHtYuQCqpnEJNG1/x8TSIJNQFdiy/NXjCC2iEC1xPNHO9hAbGYBbYnOz1PAmoUF3CT+
+ nv8NZrMIqErsmrSSFcTmFbCX+HTgPhPEDfISix+A7eUUcJC4fWIeE8Q99hJPTnxihCgXlDg5
+ 8wkLxHh5ieats5knMArMQpKahSS1gJFpFaNkakFxbnpusmGBYV5quV5xYm5xaV66XnJ+7iZG
+ cMhqaexgvDf/n94hRiYOxkOMEhzMSiK80t8fpgjxpiRWVqUW5ccXleakFh9ilOZgURLnNZwx
+ O0VIID2xJDU7NbUgtQgmy8TBKdXAFLp8goHwviN8qyVK1h2IZEje9+jpwtZ9O00f1Ky/9vUz
+ V98s86VHs1/kxc24obDjw6JbtXnrf9QUHz57ssYva6vQqQYp95UWcWZPFva0mL3SWMwmf47p
+ gPbr8vp7FqI5p1I+H1AyEtY98Psdi+lqwYCEV+UyLJn7rl/YXDN9jaFr4IQXn9+z72P4WP1F
+ TmD58tWR4hVd/od8P9eX3m3c5JVgm7Nmxqzvvfl+8h7zK869TzzKwrdpnqTd/NoFx76b3eTa
+ 9uq3T2Tf4zCnPS2/Za99lNDl+L1M3iFq119/1+etUTY1nz9WtehMOXbMYkXUocTFaxw2/i+5
+ fWzRIsWG3crvt+20XGscLRHBK5kvNleJpTgj0VCLuag4EQClyKkkyAIAAA==
+X-CMS-MailID: 20230821010401epcas2p2ae4be39a1b5b176e6144b9b26e218fcd
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230821010401epcas2p2ae4be39a1b5b176e6144b9b26e218fcd
+References: <20230821010350.324112-1-chanho61.park@samsung.com>
+ <CGME20230821010401epcas2p2ae4be39a1b5b176e6144b9b26e218fcd@epcas2p2.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +133,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The cn9130.dtsi defines a pinctrl node for SPI1 (until recently it was
-mislabeled as spi0). Use this instead of having a duplicate definition
-with a different label.
+timer_get_boot_us function is required to record the boot stages as
+us-based timestamp.
 
-Signed-off-by: Chris Packham <judge.packham@gmail.com>
+Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 ---
+ drivers/timer/riscv_timer.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
- arch/arm/dts/cn9130-crb.dtsi | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
-
-diff --git a/arch/arm/dts/cn9130-crb.dtsi b/arch/arm/dts/cn9130-crb.dtsi
-index b229725184a9..7dd36cae282b 100644
---- a/arch/arm/dts/cn9130-crb.dtsi
-+++ b/arch/arm/dts/cn9130-crb.dtsi
-@@ -125,11 +125,6 @@
- 		marvell,function = <0>;
- 	};
+diff --git a/drivers/timer/riscv_timer.c b/drivers/timer/riscv_timer.c
+index 3627ed79b819..f9fc7dae37d0 100644
+--- a/drivers/timer/riscv_timer.c
++++ b/drivers/timer/riscv_timer.c
+@@ -11,6 +11,7 @@
+  */
  
--	cp0_spi1_pins_crb: cp0-spi-pins-crb {
--		marvell,pins = < 13 14 15 16 >;
--		marvell,function = <3>;
--	};
--
- 	cp0_smi_pins_crb: cp0-smi-pins-crb {
- 		marvell,pins = < 40 41 >;
- 		marvell,function = <8>;
-@@ -170,7 +165,7 @@
+ #include <common.h>
++#include <div64.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <timer.h>
+@@ -50,6 +51,26 @@ u64 notrace timer_early_get_count(void)
+ }
+ #endif
  
- &cp0_spi1 {
- 	pinctrl-names = "default";
--	pinctrl-0 = <&cp0_spi1_pins_crb>;
-+	pinctrl-0 = <&cp0_spi1_pins>;
- 	reg = <0x700680 0x50>,		/* control */
- 	      <0x2000000 0x1000000>,	/* CS0 */
- 	      <0 0xffffffff>,		/* CS1 */
++#if CONFIG_IS_ENABLED(BOOTSTAGE)
++ulong timer_get_boot_us(void)
++{
++	int ret;
++	u64 ticks = 0;
++	u32 rate;
++
++	ret = dm_timer_init();
++	if (!ret) {
++		rate = timer_get_rate(gd->timer);
++		timer_get_count(gd->timer, &ticks);
++	} else {
++		rate = RISCV_SMODE_TIMER_FREQ;
++		ticks = riscv_timer_get_count(NULL);
++	}
++
++	return lldiv(ticks * 1000, (rate / 1000));
++}
++#endif
++
+ static int riscv_timer_probe(struct udevice *dev)
+ {
+ 	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
 -- 
-2.41.0
+2.39.2
 
