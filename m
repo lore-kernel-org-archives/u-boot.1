@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37277EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 14:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 264EEEE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 14:06:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B69258679C;
-	Mon, 21 Aug 2023 16:00:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 887AE86BF8;
+	Mon, 21 Aug 2023 16:06:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VTW45Qwv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HSZ8oDls";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D01687051; Mon, 21 Aug 2023 16:00:05 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id E235B86813; Mon, 21 Aug 2023 16:06:44 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02397807BC
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 16:00:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AB498707D
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 16:06:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2bba6a9b565so52336161fa.2
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 07:00:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-3fe4a89e8c4so32521385e9.3
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 07:06:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692626401; x=1693231201;
- h=user-agent:in-reply-to:content-disposition:mime-version:references
- :message-id:subject:cc:to:from:date:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hMaCd92uhFHwh3Zl5BaovKmJEd2JolrEuXaMt/DkfZw=;
- b=VTW45Qwvixqz3kat5H9py59/1l1Q05nKaXa+yKvLC5J7DeAPeBFOhnSuXmrm6N9XRS
- wJWvAQgChhRsG83kjCvHZJfSJs3K+o3jKXPuorerPMjVxdykCLJI0m8aJASqpf2GWI27
- 9ysKqNSw5xIzcguXn5rQDr7ZMilC2KrhTUHFWEg8UsCwMooZY60J66rOUNF8k/WXuij1
- HWDSQDbDx3+bz3Ek5UDpzslZr+cKHaRooG+x1dsx9YJrU+DIygof6hmYp/dNtrOXTOde
- gPM0GjhqbE4NIUPzAA0jcxVjLDRDGCfEJL92zqBIcNhb8t0fDIPT234f/30NYpPBEqC2
- 1Z6w==
+ d=gmail.com; s=20221208; t=1692626802; x=1693231602;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=VcWOzEQkKE5H7yKnVIurJc2u8NzzwOFVNuhZdwRkx1s=;
+ b=HSZ8oDlsCmyL4zphZq5ZV1UzZBgAHlPMqlloWmjnZBEooxAwSh4glAaShbp5mBsQmh
+ HeoALAMZ0j8a8mqh6kZXMYwDFR54teSNBn9rZk33uSbwQWX1zCvFji3wF9SacrKldK80
+ CfOZrn+FwvJD3u+eG5MMPtxCtwpg0zFWHGFWvG88qpJMpO2wdBpB2OFsbc0S8mjcGI0Q
+ Rw1MsCe1R9ZZORfAz5taWBVkQTWCcDVRrNG6gLI9IkoJT0qC0k9/NsBngP01eb8C6yp2
+ ZdTzgp0f3fBXXWgiR7OpdGLjgpyd5rZR4rMSTbeDm1KUQN3H4zoKL3ewG/4CQZsZVIxR
+ NBNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692626401; x=1693231201;
- h=user-agent:in-reply-to:content-disposition:mime-version:references
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hMaCd92uhFHwh3Zl5BaovKmJEd2JolrEuXaMt/DkfZw=;
- b=COKEyOQfe+Sfh/y1PCFf9vjflMdonHo420OCBTN82fIsMxw4NMkU50bpaVcEZ21MnW
- M+qbL9Vb2ryBmwIMEvOxU0PDD6g3Cf3I2rO9oiGNneoVZ0pcs3cGUch1SYGzkYUbZ8cB
- P19t1Rqv+VrtuvPCaVXeK2LWu22fYmwkLY1IkT3GSO/PpZN0vkCwGqlK4RBXKIyvlECE
- SnObcHiVviLBfBlzrRTsGk6Xm18cXKEIPmSAXaWnLxgqFvKHR6L7UKUaUNr1eXIWe+Tq
- Zu3R8jWsV5XQZrlqV86NxX/ThPji2nT9WSDTo4B2XOyv4ilsIYepw1Thv5M+TjAmrCye
- HrBQ==
-X-Gm-Message-State: AOJu0Yz9LXBrqQFZtptmPKBqpuvx50j7bOpLVKiA37v5Vg6FPVjjXYQH
- AtGQDTIWxRuTkwr8SfTsjOQ=
-X-Google-Smtp-Source: AGHT+IFhXs5M1vgjEfc1f8mczzYukAyh/4UMyw3hsD5hCVVQ6dBUsq/3NPqLJ8R6NOG0Cn0RvrlHfg==
-X-Received: by 2002:ac2:5bd0:0:b0:4ff:8cf1:4242 with SMTP id
- u16-20020ac25bd0000000b004ff8cf14242mr3831632lfn.3.1692626400851; 
- Mon, 21 Aug 2023 07:00:00 -0700 (PDT)
-Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
- [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
- by smtp.gmail.com with ESMTPSA id
- h3-20020aa7c603000000b005256ae8494asm5991866edq.17.2023.08.21.07.00.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 07:00:00 -0700 (PDT)
-Date: Mon, 21 Aug 2023 15:59:58 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [GIT PULL] ARM: tegra: Changes for v2023.10-rc1
-Message-ID: <ZONt3v3Hb8foJdup@orome>
-References: <20230818133923.286332-1-thierry.reding@gmail.com>
- <20230818164943.GZ1515023@bill-the-cat>
- <0C415156-B22C-4B86-94C6-1D03ED4287ED@gmail.com>
+ d=1e100.net; s=20221208; t=1692626802; x=1693231602;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VcWOzEQkKE5H7yKnVIurJc2u8NzzwOFVNuhZdwRkx1s=;
+ b=VnhHNCHEfTB3vKm+MMGtG7zuJxry4JYPav8Emi26u2SuwlwYJpBFDgAacNyMLMNmKd
+ ev1kmoeLu23MCeckAvdzuKJmOwn4snjxY/NiBCOFBKPtYnC38Bk3r/KMsvuqzjJG52h5
+ 4+481/TYXQ51psckhUiYE2gWquWECQOna+BumZFoWxB5e/ypYH2OwpE3oczv4psghZc8
+ FHMfcQftoi3Px1KhKlEFgccDh78FOc7HApPqnOOQvx0Z9u+Je4JsBjrvCV2LJyyerkgd
+ ZelM3mw5rYC86MS/95UlvBGym87bGR5G64ZLaCNxNHwUiQ0UROdULLFLA6jNqPx1DDgj
+ g7+A==
+X-Gm-Message-State: AOJu0YzSew2r3aEMlvykKXn6L+QQ2wMTw0TAVOhqdskO2iWB0UoET69T
+ qIdy7TUFsqMFGRLZwlZl4XtAMfMdmxi6xg==
+X-Google-Smtp-Source: AGHT+IHIlp0AX4TTDxVbrRgGxOIZaXcQ0Hizjvt/udGdKFGCGEswUzMG5fx5R0Ti9wiGdiLQfO9T1w==
+X-Received: by 2002:adf:e482:0:b0:31a:dc27:e10 with SMTP id
+ i2-20020adfe482000000b0031adc270e10mr4754096wrm.65.1692626801365; 
+ Mon, 21 Aug 2023 07:06:41 -0700 (PDT)
+Received: from [127.0.0.1] ([46.211.148.65]) by smtp.gmail.com with ESMTPSA id
+ k25-20020aa7c059000000b0052889d090bfsm6047925edo.79.2023.08.21.07.06.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Aug 2023 07:06:41 -0700 (PDT)
+Date: Mon, 21 Aug 2023 17:06:41 +0300
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
+CC: u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/1] usb: host: tegra: implement dts based xcvr setup
+User-Agent: K-9 Mail for Android
+In-Reply-To: <8864abd1-58c9-d529-9084-4707077f4f21@denx.de>
+References: <20230821111953.5919-1-clamor95@gmail.com>
+ <20230821111953.5919-2-clamor95@gmail.com>
+ <8864abd1-58c9-d529-9084-4707077f4f21@denx.de>
+Message-ID: <9FA3D118-5D1A-4293-A37A-8D280D62A805@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="wwlnnbFDYsJpoIhS"
-Content-Disposition: inline
-In-Reply-To: <0C415156-B22C-4B86-94C6-1D03ED4287ED@gmail.com>
-User-Agent: Mutt/2.2.10 (2023-03-25)
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,115 +94,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---wwlnnbFDYsJpoIhS
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Aug 18, 2023 at 08:02:30PM +0300, Svyatoslav Ryhel wrote:
->=20
->=20
-> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 19:49:43 GMT+03:00, =
-Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
+21 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 16:41:51 GMT+03:00, =
+Marek Vasut <marex@denx=2Ede> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
 =D0=BB=D0=B0):
-> >On Fri, Aug 18, 2023 at 03:39:22PM +0200, Thierry Reding wrote:
-> >
-> >> From: Thierry Reding <treding@nvidia.com>
-> >>=20
-> >> Hi Tom,
-> >>=20
-> >> The following changes since commit 68c07fc5fdf34f0926cf06fc0c4ebd6f2f3=
-afe19:
-> >>=20
-> >>   Merge https://source.denx.de/u-boot/custodians/u-boot-usb (2023-06-2=
-1 14:42:50 -0400)
-> >>=20
-> >> are available in the Git repository at:
-> >>=20
-> >>   git@source.denx.de:u-boot/custodians/u-boot-tegra.git tags/tegra-for=
--2023.10-rc1
-> >
-> >FYI, in your .git/config you can do:
-> >	url =3D https://source.denx.de/u-boot/custodians/u-boot-tegra.git
-> >	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-tegra.git
-> >
-> >And this part looks "nicer".  Not a big deal, just an FYI.
-> >
-> >> for you to fetch changes up to bdf9dead86f06c7d6980c399a4a6339430b531e=
-c:
-> >>=20
-> >>   board: htc: endeavoru: add One X support (2023-06-30 15:20:37 +0200)
-> >>=20
-> >> This passes CI successfully:
-> >>=20
-> >>   https://source.denx.de/u-boot/custodians/u-boot-tegra/-/pipelines/17=
-411
-> >>=20
-> >> Thanks,
-> >> Thierry
-> >>=20
-> >> ----------------------------------------------------------------
-> >> ARM: tegra: Changes for v2023.10-rc1
-> >>=20
-> >> This adds support for various new Tegra30 boards (ASUS, LG and HTC) and
-> >> has some other minor enhancements, such as enabling the poweroff comma=
-nd
-> >> on several Tegra210 and Tegra186 boards.
-> >>=20
-> >> ----------------------------------------------------------------
-> >> Jonas Schw=C3=B6bel (1):
-> >>       configs: tegra-common-post: make PXE and DHCP boot targets optio=
-nal
-> >>=20
-> >> Svyatoslav Ryhel (6):
-> >>       configs: tegra-common-post: add GPIO keyboard as STDIN device
-> >>       ARM: tegra: add SoC UID calculation function
-> >>       board: asus: transformer: add ASUS Transformer T30 family support
-> >>       board: asus: grouper: add Google Nexus 7 (2012) support
-> >>       board: lg: x3: add Optimus 4X HD and Optimus Vu support
-> >>       board: htc: endeavoru: add One X support
-> >>=20
-> >> Thierry Reding (2):
-> >>       ARM: tegra: Enable poweroff command on Jetson TX1 and Jetson Nano
-> >>       ARM: tegra: Enable poweroff command on Jetson TX2
-> >>=20
-> >> Tomasz Maciej Nowak (1):
-> >>       ARM: dts: trimslice: sync SPI node with Linux dts
-> >
-> >Since I'm not sure if this is v8 or v9, given when v9 was posted, I've
-> >applied this PR now, as I had said I wanted this in.  I do have two
-> >requests for you Svyatoslav, however.  First, if there's changes that
-> >are missing in master, please post those ASAP and we'll get them in, for
-> >v2023.10.=20
->=20
-> Patches Thierry applied are v8, while v9 has significant improvements.
+>On 8/21/23 13:19, Svyatoslav Ryhel wrote:
+>> Some devices (like ASUS TF201) may not use fuse based xcvr setup
+>> which will result in not working USB line=2E To fix this situation
+>> allow xcvr setup to be performed from device tree values if
+>> nvidia,xcvr-setup-use-fuses is not defined=2E
+>>=20
+>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
+>> ---
+>>   drivers/usb/host/ehci-tegra=2Ec | 48 +++++++++++++++++++++++++++++++-=
+---
+>>   1 file changed, 43 insertions(+), 5 deletions(-)
+>>=20
+>> diff --git a/drivers/usb/host/ehci-tegra=2Ec b/drivers/usb/host/ehci-te=
+gra=2Ec
+>> index 2cf1625670=2E=2Ea9aee908f3 100644
+>> --- a/drivers/usb/host/ehci-tegra=2Ec
+>> +++ b/drivers/usb/host/ehci-tegra=2Ec
+>> @@ -81,6 +81,8 @@ struct fdt_usb {
+>>   	enum periph_id periph_id;/* peripheral id */
+>>   	struct gpio_desc vbus_gpio;	/* GPIO for vbus enable */
+>>   	struct gpio_desc phy_reset_gpio; /* GPIO to reset ULPI phy */
+>> +	bool xcvr_setup_use_fuses; /* Indicates that the value is read from t=
+he on-chip fuses */
+>> +	u32 xcvr_setup;	/* Input of XCVR cell, HS driver output control */
+>>   };
+>>     /*
+>> @@ -464,10 +466,16 @@ static int init_utmi_usb_controller(struct fdt_us=
+b *config,
+>>     		/* Recommended PHY settings for EYE diagram */
+>>   		val =3D readl(&usbctlr->utmip_xcvr_cfg0);
+>> -		clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+>> -				0x4 << UTMIP_XCVR_SETUP_SHIFT);
+>> -		clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+>> -				0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
+>> +
+>> +		if (!config->xcvr_setup_use_fuses) {
+>> +			clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+>> +					config->xcvr_setup <<
+>> +					UTMIP_XCVR_SETUP_SHIFT);
+>> +			clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+>> +					config->xcvr_setup <<
+>> +					UTMIP_XCVR_SETUP_MSB_SHIFT);
+>> +		}
+>> +
+>>   		clrsetbits_le32(&val, UTMIP_XCVR_HSSLEW_MSB_MASK,
+>>   				0x8 << UTMIP_XCVR_HSSLEW_MSB_SHIFT);
+>>   		writel(val, &usbctlr->utmip_xcvr_cfg0);
+>> @@ -522,7 +530,9 @@ static int init_utmi_usb_controller(struct fdt_usb =
+*config,
+>>   	setbits_le32(&usbctlr->utmip_bat_chrg_cfg0, UTMIP_PD_CHRG);
+>>     	clrbits_le32(&usbctlr->utmip_xcvr_cfg0, UTMIP_XCVR_LSBIAS_SE);
+>> -	setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
+>> +
+>> +	if (config->xcvr_setup_use_fuses)
+>> +		setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
+>>     	/*
+>>   	 * Configure the UTMIP_IDLE_WAIT and UTMIP_ELASTIC_LIMIT
+>> @@ -843,6 +853,8 @@ static const struct ehci_ops tegra_ehci_ops =3D {
+>>   static int ehci_usb_of_to_plat(struct udevice *dev)
+>>   {
+>>   	struct fdt_usb *priv =3D dev_get_priv(dev);
+>> +	u32 usb_phy_phandle;
+>> +	ofnode usb_phy_node;
+>>   	int ret;
+>>     	ret =3D fdt_decode_usb(dev, priv);
+>> @@ -851,6 +863,32 @@ static int ehci_usb_of_to_plat(struct udevice *dev=
+)
+>>     	priv->type =3D dev_get_driver_data(dev);
+>>   +	ret =3D ofnode_read_u32(dev_ofnode(dev), "nvidia,phy", &usb_phy_pha=
+ndle);
+>> +	if (ret) {
+>> +		log_debug("%s: required usb phy node isn't provided\n", __func__);
+>> +		priv->xcvr_setup_use_fuses =3D true;
+>> +		return 0;
+>> +	}
+>> +
+>> +	usb_phy_node =3D ofnode_get_by_phandle(usb_phy_phandle);
+>> +	if (!ofnode_valid(usb_phy_node)) {
+>> +		log_err("%s: failed to find usb phy node\n", __func__);
+>> +		return -EINVAL;
+>> +	}
+>
+>Can we get a simple PHY driver instead of this hackage please ?
+>
+>See the generic PHY stuff in other ehci drivers for example of how to int=
+eract with PHY drivers, and drivers/phy/ for PHY driver examples=2E
 
-I'm a little surprised by how this series developed. You've been urging
-me since v6 to apply this, so I assumed this was mostly done. Having
-another 3 versions with significant improvements come in after that
-point indicates the opposite was true.
-
-Thierry
-
---wwlnnbFDYsJpoIhS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTjbd4ACgkQ3SOs138+
-s6E/aQ/+PQl1oFiwF3JckIosQO2Jz0rkcrN/KBIYj5Mn/wdhkOxeXPuWSvZQ4Rfz
-DTsIYk3CUe0YS3zvW9QJJ1bp1GfhRPii1ktufhPFDi/Z+SnsTPNiH+zD1jaaNIkA
-h//1yyf6MEorDHFi0/eBr/6AKgj3/BFYbKEeZko/7egO8qpGKnJWIOmzhtknVSzF
-qdSP4RNtayzmqt0OUJkPVDtH6vYM3nQXOKNCO9fMzYr/BHHXy3GXJ8FhaFuktkAv
-AJjjoI/tOmwu5npdKSBFRVhVhYCV+UW8XrRw+gR70fXY+7UVCQWc02aL3tXcoMXt
-14zp+Foj4dmHRjjX9YA+6VJ0NxKS3kyYxsd6OyfJXQ9zPh8J5gHx61W2l3k+PtYu
-hUwl7kUlC9i7Za4EvgvLZub6nwUQ51E9LJrId3wKszOY60NitbJBHiGm2tIN5kAE
-uv/3nW0BY1VWQh1NoKj5e3jQ2rfD7SPXZZGlpD1U7Yj+3LUpyUpjTBDJiFFsLnL5
-9mzlR1qNuzio6SgnO+M2LTE+jzMhczJv5qRKQQW7ZF74wXpYk1I4Oqz0SG1c9ZZ6
-wITTbnxTAJ1X7gOjFyzHHXqAfTO5/mP1D3/4zb5WVvpTwgItf9dk9j7yPoMApXJ1
-61ugB7pDJSIhZOEopbzwor0ihQDKPJz82kJBww2GkjITRH4QoJc=
-=Rqml
------END PGP SIGNATURE-----
-
---wwlnnbFDYsJpoIhS--
+No we can't=2E As I said, I will not start a split of tegra-echi to chipid=
+ea controller and phy because of this small tweak=2E It seems that you don'=
+t understand what your are requesting=2E Sorry for bothering=2E
