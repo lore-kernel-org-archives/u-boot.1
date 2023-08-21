@@ -4,51 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15807EE49A0
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 20:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5853CEE49A5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 20:18:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 588BB87189;
-	Mon, 21 Aug 2023 22:07:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
+	by phobos.denx.de (Postfix) with ESMTP id 48A5E870BF;
+	Mon, 21 Aug 2023 22:18:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BE33387169; Mon, 21 Aug 2023 22:07:01 +0200 (CEST)
-Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by phobos.denx.de (Postfix) with ESMTP id C78D08717B
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 22:06:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=csgraf.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
-Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
- [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 94F4160807C7;
- Mon, 21 Aug 2023 22:06:53 +0200 (CEST)
-Message-ID: <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
-Date: Mon, 21 Aug 2023 22:06:52 +0200
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ll/MMeo4";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 67AD3870BF; Mon, 21 Aug 2023 22:18:09 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C38487110
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 22:18:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-d63c0a6568fso3945406276.0
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 13:18:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692649085; x=1693253885;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DnvmlYUNNUUpUfcxAQKHRoSW2aQauayFD+gPWDBg1ZI=;
+ b=ll/MMeo4uzg7qUIvkVA+IvmvQF9dcaCVxvhuxsv2FJdREWqBssqCSxMAXsA1uxmjij
+ TKbVfQp7kNPMvPd1RaCvAvd+e92oXP1KVDswr9XQEgJo3UBed1DCAR/CUh3jkRDewsG4
+ vtlnyANLBtvBRQeO+lOLKM9Gb+1fiW8oh2SaY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692649085; x=1693253885;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DnvmlYUNNUUpUfcxAQKHRoSW2aQauayFD+gPWDBg1ZI=;
+ b=bREQf3iIWGg/XM1XUNPuXwaRse+sH++XHvhHLB75vCDxMMk/QfwuWGTVU6ckbbTVlI
+ 5YnhnIsLiSk8knCxnlOMo/9MDJlRsA+nzn9diRGNegH2XyO4hHWnQVEviJUeDpD0Ptwh
+ tvrTiZ8IxfLZodZVRb9gvvXvjIBX2vR5s9QVwCDs8fLskVraZzQ42KZOlC4jv6nHe7PO
+ jh67XN2ebzxqIrhSbBUrugKxTvS+6g04kIa5Sb4+DZt0J00+BsgQrAdlzRl20C0NPlkN
+ A82mYDEM/79YRrbM8k5/T8Tr02jYT+Svesh+EE7snysnZCmbxkKP7GJy5ugpCzvuihXL
+ PmPw==
+X-Gm-Message-State: AOJu0YzZdRIBegf3MjNxVX6G3Kg7joDEMbhhiPLa0fINkRtCsXwYSwqE
+ zD65Wl6XFagocAcBWJ2gRhUycg==
+X-Google-Smtp-Source: AGHT+IF4emoPmUmXSuPSjnDPx0cKt99ag0lOBNLayl73fNuCDI2tQpwhCsDK3al0G+fiOLXExhM8Sg==
+X-Received: by 2002:a25:bcc7:0:b0:d06:f0ab:e17b with SMTP id
+ l7-20020a25bcc7000000b00d06f0abe17bmr7807841ybm.55.1692649084869; 
+ Mon, 21 Aug 2023 13:18:04 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-49e5-7fcb-0da2-d03f.res6.spectrum.com.
+ [2603:6081:7b00:6400:49e5:7fcb:da2:d03f])
+ by smtp.gmail.com with ESMTPSA id
+ l6-20020a056902000600b00d677aec54ffsm1921544ybh.60.2023.08.21.13.18.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Aug 2023 13:18:04 -0700 (PDT)
+Date: Mon, 21 Aug 2023 16:18:02 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-dm
+Message-ID: <20230821201802.GI3953269@bill-the-cat>
+References: <CAPnjgZ3SvbMcbPWijcy3JCyh=Cp6X7MMC8vT2Ojk-miFa470GA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 11/13] video: Use VIDEO_DAMAGE for VIDEO_COPY
-Content-Language: en-GB
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
- <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-12-alpernebiyasak@gmail.com>
- <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
-From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hkXsJpCsjmaV1HwA"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3SvbMcbPWijcy3JCyh=Cp6X7MMC8vT2Ojk-miFa470GA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,180 +92,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 21.08.23 21:11, Simon Glass wrote:
-> Hi Alper,
->
-> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->> From: Alexander Graf <agraf@csgraf.de>
->>
->> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
->> print a single character, it will always copy the full range of bytes
->> from the top left corner of the character to the lower right onto the
->> uncached frame buffer. This includes pretty much the full line contents
->> of the printed character.
->>
->> Since we now have proper damage tracking, let's make use of that to reduce
->> the amount of data we need to copy. With this patch applied, we will only
->> copy the tiny rectangle surrounding characters when we print them,
->> speeding up the video console.
-> I suppose for rotated consoles it copies whole lines, but otherwise it
-> does a lot of small copies?
+--hkXsJpCsjmaV1HwA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Aug 21, 2023 at 01:11:38PM -0600, Simon Glass wrote:
 
-I tried to keep the code as simple as possible and only track an "upper 
-left" and "lower right" corner of modifications. So sync will always 
-copy/flush a single rectangle.
+> Hi Tom,
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/17449
+> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D47&view=
+=3Dresults
+>=20
+>=20
+> The following changes since commit 17aad803551500e1a3d87339a6559e99b7fad4=
+79:
+>=20
+>   Merge branch 'master' of
+> https://source.denx.de/u-boot/custodians/u-boot-sh (2023-08-20
+> 11:09:11 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-pull-20aug23
+>=20
+> for you to fetch changes up to 25a9be71ec1ca779aac8bcb1d8a363725ff0ac7f:
+>=20
+>   test: cpu: Handle both 32bit and 64bit CPUs (2023-08-20 15:55:27 -0600)
+>=20
 
+Applied to u-boot/master, thanks!
 
->
->> After this, changes to the main frame buffer are not immediately copied
->> to the copy frame buffer, but postponed until the next video device
->> sync. So issue an explicit sync before inspecting the copy frame buffer
->> contents for the video tests.
-> So how does the sync get done in this case?
+--=20
+Tom
 
+--hkXsJpCsjmaV1HwA
+Content-Type: application/pgp-signature; name="signature.asc"
 
-It gets called as part of video_sync():
+-----BEGIN PGP SIGNATURE-----
 
-+static void video_flush_copy(struct udevice *vid)
-+{
-+	struct video_priv *priv = dev_get_uclass_priv(vid);
-+
-+	if (!priv->copy_fb)
-+		return;
-+
-+	if (priv->damage.xend && priv->damage.yend) {
-+		int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
-+		int lend = priv->damage.xend * VNBYTES(priv->bpix);
-+		int y;
-+
-+		for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
-+			ulong offset = (y * priv->line_length) + lstart;
-+			ulong len = lend - lstart;
-+
-+			memcpy(priv->copy_fb + offset, priv->fb + offset, len);
-+		}
-+	}
-+}
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTjxm8ACgkQFHw5/5Y0
+tywOEwwAqaSqh76mrxanmkrlg5dl8U61b2g/5rwnKQTOOX5u8o0K5aXD/Yl3NUro
+6NYd6x3KxTyl/snOPxB7sPXNi/ykO58xLwuF2JTXchbG4Kwf2E3hRh8NXfBT7suD
+Z6b56jeDViOTJ5VkZpF7pU3eLTXdJQv3kGVoul1yqwmhJ6j/vuogZGIDbgVbKNcE
+Tz/0AdL5pe3Pd1igYeLMrlku9eJftsdX+aWi+Y5LOLCpffyexL+P9V6rbtuqcgHH
+bhrgzYu2m/KTQkuwlZ/JE+lDwE7guyJEPJbC9+82bx99tJTSCmrmg+tjvNBSH70F
+6Sq0eCnHW647V7zkWiU9BwMjN+8oC8LdWhuXb7cYFURWXXQQkG9fKOTdliN/qOvO
+6wErRz2XepEiaX7YWH1RxrVE3/X6TzLbT0Cki3xK4pS2WqiSW7wHrPk5PrD1VpUA
+wi1gxdtjHDbSOYZrq9Ch7eIWZiGfF8HCa/UZ/x4Lc+IfCLIBaNBtS0+PrY0793oQ
+kkhJJsRO
+=dhUd
+-----END PGP SIGNATURE-----
 
-
->
->> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
->>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
->>          call video_sync() before copy_fb check, update video_copy test]
->> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> ---
->>
->> Changes in v5:
->> - Remove video_sync_copy() also from video_fill(), video_fill_part()
->> - Fix memmove() calls by removing the extra dev argument
->> - Call video_sync() before checking copy_fb in video tests
->> - Use xstart, ystart, xend, yend as names for damage region
->> - Use met->baseline instead of priv->baseline
->> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
->> - Use xstart, ystart, xend, yend as names for damage region
->> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
->> - Update dm_test_video_copy test added in a new patch
->>
->> Changes in v3:
->> - Make VIDEO_COPY always select VIDEO_DAMAGE
->>
->> Changes in v2:
->> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
->>
->>   configs/sandbox_defconfig         |  1 -
->>   drivers/video/Kconfig             |  5 ++
->>   drivers/video/console_normal.c    | 13 +----
->>   drivers/video/console_rotate.c    | 44 +++-----------
->>   drivers/video/console_truetype.c  | 16 +----
->>   drivers/video/vidconsole-uclass.c | 16 -----
->>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
->>   drivers/video/video_bmp.c         |  7 ---
->>   include/video.h                   | 37 ------------
->>   include/video_console.h           | 52 -----------------
->>   test/dm/video.c                   |  3 +-
->>   11 files changed, 43 insertions(+), 248 deletions(-)
->>
->> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
->> index 51b820f13121..259f31f26cee 100644
->> --- a/configs/sandbox_defconfig
->> +++ b/configs/sandbox_defconfig
->> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
->>   CONFIG_VIDEO=y
->>   CONFIG_VIDEO_FONT_SUN12X22=y
->>   CONFIG_VIDEO_COPY=y
->> -CONFIG_VIDEO_DAMAGE=y
->>   CONFIG_CONSOLE_ROTATION=y
->>   CONFIG_CONSOLE_TRUETYPE=y
->>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
->> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
->> index 97f494a1340b..b3fbd9d7d9ca 100644
->> --- a/drivers/video/Kconfig
->> +++ b/drivers/video/Kconfig
->> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
->>
->>   config VIDEO_COPY
->>          bool "Enable copying the frame buffer to a hardware copy"
->> +       select VIDEO_DAMAGE
->>          help
->>            On some machines (e.g. x86), reading from the frame buffer is very
->>            slow because it is uncached. To improve performance, this feature
->>            allows the frame buffer to be kept in cached memory (allocated by
->>            U-Boot) and then copied to the hardware frame-buffer as needed.
->> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
->> +         and will only copy actually touched regions.
->>
->>            To use this, your video driver must set @copy_base in
->>            struct video_uc_plat.
->> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
->>            regions of the frame buffer that were modified before, speeding up
->>            screen refreshes significantly.
->>
->> +         It is also used by VIDEO_COPY to identify which regions changed.
->> +
->>   config BACKLIGHT_PWM
->>          bool "Generic PWM based Backlight Driver"
->>          depends on BACKLIGHT && DM_PWM
->> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
->> index a19ce6a2bc11..c44aa09473a3 100644
->> --- a/drivers/video/console_normal.c
->> +++ b/drivers/video/console_normal.c
->> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
->>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
->>          end = dst;
->>
->> -       ret = vidconsole_sync_copy(dev, line, end);
->> -       if (ret)
->> -               return ret;
->> -
->>          video_damage(dev->parent,
->>                       0,
->>                       fontdata->height * row,
->> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
->>          void *dst;
->>          void *src;
->>          int size;
->> -       int ret;
->>
->>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
->>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
->>          size = fontdata->height * vid_priv->line_length * count;
->> -       ret = vidconsole_memmove(dev, dst, src, size);
->> -       if (ret)
->> -               return ret;
->> +       memmove(dst, src, size);
-> Why are you making that change?
-
-
-There is no point in keeping a special vidconsole_memmove() around 
-anymore, since we don't actually need to call vidconsole_sync_copy() 
-after the move. The damage call that we introduced to all call sites in 
-combination with a video_sync() call takes over the job of the sync copy.
-
-
-Alex
-
-
+--hkXsJpCsjmaV1HwA--
