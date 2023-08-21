@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C4D4EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BE8EE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8E2B871D2;
-	Mon, 21 Aug 2023 21:13:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2737F871DB;
+	Mon, 21 Aug 2023 21:13:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b5u55BLT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RhXqEdoW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47ED98717E; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 805E6871D2; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23657871D5
+ by phobos.denx.de (Postfix) with ESMTPS id 2E489871D8
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-d62bdd1a97dso3765817276.3
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d63c0a6568fso3892152276.0
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WMUW6TO7s4OLrsUBbRmCbu/zPPoacMK3PJUQrMs8n/A=;
- b=b5u55BLTy7pouY6+gwfhqvLKEDUxrhsRmUV1KahwHSLnEExOvw7yfyqcUYvOdRQCJR
- XvC645v0lf2wIttAFZbgAm6aeJxRaC0TLipkTzbUhBIdbT2vzb9ka9f1mWSq9fNjpcWA
- HIcLhd3+Eq0l008Pdo/6g3TEM6sl3aabVCkhI=
+ bh=gMx4SAEmCOEjypXqFCdH/BNDX1/vIZARR/zYEociwpo=;
+ b=RhXqEdoWW/phumjtMZ6oVIIfsHpnZY+nsmeAqb82rsJCcxlqai7RfH9TWpNInLO52M
+ gycx9U8pKYiJ+hc0Y6JBkuAkmw5Z5f3Lo/y3QzyDKcK8Fy2XMpp+rzCxsVVzUfjnsrBZ
+ QpxzRIDJkxWkAe/2AP3H18Pc94C3UUx30pBhQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WMUW6TO7s4OLrsUBbRmCbu/zPPoacMK3PJUQrMs8n/A=;
- b=M853loD69FmvUjVAfa+GsddtPd8eWEasEdsD4ilMGKs5D4K9nK+Gnup6uIGEFtJeHh
- lpy0doXvXLkwiGVQE3x6GWO2ePAeivKu+pyGsmstYGvPeG/+/+DVU6vEjECV0Si3a5LK
- IkTCyA6SrB8Umoe64v0uW34avads57KEIjbAyLmWe0ZSx91WLAJCWGQuAB7NJ99BIRGb
- doU+hkncQmMhafk7o47WKTcUI/JwCjudHa/ETqo5JlnJ2IQjug03tTCyCXQmr8DHkfa0
- Anw87WJZQPZYNdXFZq4gQi2Nq+oZ37XEB3kADEDBElTd5bncEq4i2nGW29nZrbxp0JYt
- m4Kw==
-X-Gm-Message-State: AOJu0Yz2nKKPzTheSqml9IvQN7nCbrqpXGSwtKsD1Rm4dhiZvtR+xvtm
- IPZDcJ15xptqCDQbs1dLSFp9HiQqVpHqkzafaHn9vQ==
-X-Google-Smtp-Source: AGHT+IHQ8ACty7XUYY5fYJQe5Mv4PycpHviuRMD838wb6yQ8F1vGISm07MO6Fh4CTcLow3LoDqRPk8BR//6tQoK0l5I=
-X-Received: by 2002:a25:6954:0:b0:d4c:f456:d558 with SMTP id
- e81-20020a256954000000b00d4cf456d558mr7590941ybc.13.1692645218715; Mon, 21
+ bh=gMx4SAEmCOEjypXqFCdH/BNDX1/vIZARR/zYEociwpo=;
+ b=EIXlHiIF8BWKYKaXnoY/hGK7cq8ur9PcF02aRTaKoEpBjSaHclubhXTAuUTVmUuFkZ
+ B8B3XSbHvDRCt1VkcY0zF4Icz2Ztp4KAi7wFSypetQMWxyQ9iEW2pdpYcp1vfRw9koTO
+ dSzWFhVnePA101vIhaT1JkoQR//GS/qpM9VtPIIcC2O2lhKkoAzbUjV2ZKp0oZjhnyJe
+ k+qg0KUppjCz3QmmGFDyTEv1b7Ku7aWSL7Xb3TGu+ElyYNavqEguS4aYyz0QEv5g8X5F
+ YS/jmnqBK/txsVPapJLeBH/OGKrrC3A2+tyBVKO0xblT8YGnCSbENJeik1R5I+5dTxsY
+ JBpg==
+X-Gm-Message-State: AOJu0YxzZGFPipl79+6T5biRAxXBPO0ltHhpqWglLEUFBQKZ5sBUeL/5
+ ft/BOsYwxddcz/0+y1+oa0hqrmYPXIOrL4LZHnQsJA==
+X-Google-Smtp-Source: AGHT+IEVvHfYOacHVBGBIAhLYpfCDFP69Fhjan2SdnF/CmIsSiJQ0rgd3ECVipfuWc/GSYjqvjU5CjCCqDlxlIU2Ne0=
+X-Received: by 2002:a05:6902:18c6:b0:d53:f8e6:8447 with SMTP id
+ ck6-20020a05690218c600b00d53f8e68447mr11064045ybb.15.1692645218711; Mon, 21
  Aug 2023 12:13:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-2-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-2-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-4-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-4-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:46 -0600
-Message-ID: <CAPnjgZ29b2X0NXWMUXE=FY=3mojzqjPpDgqmJvZNdTBtg8UiYQ@mail.gmail.com>
-Subject: Re: [PATCH v5 01/13] video: test: Split copy frame buffer check into
- a function
+Date: Mon, 21 Aug 2023 13:11:48 -0600
+Message-ID: <CAPnjgZ3Tpz+3EbxnS_qU=vHRyeCx4bT14J75ZP_B5+CiF_5v8w@mail.gmail.com>
+Subject: Re: [PATCH v5 03/13] video: test: Test partial updates of hardware
+ frame buffer
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
  Jagan Teki <jagan@amarulasolutions.com>,
@@ -96,21 +96,19 @@ X-Virus-Status: Clean
 
 On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> While checking frame buffer contents, the video tests also check if the
-> copy frame buffer contents match the main frame buffer. To test if only
-> the modified regions are updated after a sync, we will need to create
-> situations where the two are mismatched. Split this check into another
-> function that we can skip calling, since we won't want it to error on
-> those mismatched cases.
+> With VIDEO_COPY enabled, only the modified parts of the frame buffer are
+> intended to be copied to the hardware. Add a test that checks this, by
+> overwriting contents we prepared without telling the video uclass and
+> then checking if the overwritten contents have been redrawn on the next
+> sync.
 >
 > Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > ---
 >
 > Changes in v5:
-> - Add patch "video: test: Split copy frame buffer check into a function"
+> - Add patch "video: test: Test partial updates of hardware frame buffer"
 >
->  test/dm/video.c | 69 +++++++++++++++++++++++++++++++++++++++++--------
->  1 file changed, 58 insertions(+), 11 deletions(-)
->
+>  test/dm/video.c | 54 +++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 54 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
