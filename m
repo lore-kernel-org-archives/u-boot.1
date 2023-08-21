@@ -4,66 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69BC7EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:12:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3797EE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:12:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEED28716E;
-	Mon, 21 Aug 2023 21:11:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BBD0871AE;
+	Mon, 21 Aug 2023 21:11:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="FZBIBqWw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RD7UwwO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02E498716E; Mon, 21 Aug 2023 21:11:55 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 30A6587110; Mon, 21 Aug 2023 21:11:57 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 152A987110
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44CA087072
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:11:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-51cff235226so7659161a12.0
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:11:52 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-525597d891fso4727767a12.3
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:11:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1692645111; x=1693249911;
+ d=chromium.org; s=google; t=1692645114; x=1693249914;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e0vGgwZYqzaA4AsuJ0JENY1fctuAheG2seUYtsvRHPU=;
- b=FZBIBqWwMHrMK39rEhMZaDSoOQlerwj7Uq1eNF1PZxvhv6LiFGKj9Hd+ZC6+1qRGqG
- NttOi5pCZslyaaD3+xL3JX2Q80KGBymvFdyukPe51dvsaWgBNd1ToDsVAqceqLOveTl6
- CijBeOS7YCMd+8iFMJ+5anWnUhNVtm5mUDNiPOuMpz/9daz+WHq1bweL5ontJQ7m9qyx
- 5bqCHg8giU5c+5NIezR7nUirFd31Nr643yCV9+gBG41MYJr8uXLeHAjEJKoIa7HVW7f5
- jFCXQ6hQf38xKEMnyr5k4EqcRJJnW5Zj82OZxifoebzbJ3XPLnpQsH/OjYsRPz10EOqA
- Wz0w==
+ bh=Rd6RW0flI+K86nFojj54+O+48Isdroab7wBBqU7ihsk=;
+ b=RD7UwwO6mUK2WPdYI/eUMZ9iKrM14KC5An4LB/31iiyvAd8k6FnFpEWynkx3wHC+pf
+ hxVLHn/J7cMpMwHNljANCdK9sUgZGV/lSij0d/O4TsjuwCKudpcEqRFmNJSloxPRu1Gb
+ 4KX2vJZpa+n9ZoJH5LBxuoEm6HRmucJytDFM0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692645111; x=1693249911;
+ d=1e100.net; s=20221208; t=1692645114; x=1693249914;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=e0vGgwZYqzaA4AsuJ0JENY1fctuAheG2seUYtsvRHPU=;
- b=CpQXrEvyw8u65yFLur/8q5y7e7U+ACpNmFTFssYc+DixkoEUzJ0/7CNkbzWqxr9ZsO
- 1vKRCg9tRpKNgyMqEt7cZKKA4il90KiyOKp/5+ma6WIiCfzgg1OQ2I8l1065278dsK27
- 4xb74nXnHUapPiGGp5v/I2kCO8HH9ja30UIBZGKvf/3fVhYNlMHXS1Q4DHIUMmfGTVvo
- Q4FduS1FHfjEVqcBcCkMwvmhDclcqDCivIVZ28w19mN/heljMfnU5I0wKwIxow7t9vTy
- GwfzK3AEZpfnQAuvd20x3tkasn9jofVdK0DxQgUFEdGYiY1Le3T+YW6BuvMHpTtRrXJH
- TKCg==
-X-Gm-Message-State: AOJu0YxiI5/84rYZZDvOVo4faYXk4m7VLMemkwssgbUUj2PUkPe8lwAo
- HprXySEDKyAzaiIFDRloAd0gWfPps2QAk7AfUCcmbOy9U7IlOJ1tOJ4=
-X-Google-Smtp-Source: AGHT+IHtKzYeTkbbM8M4caM4wfNw10KAPEbOBSwfjcmcf3VjUMil5iZzOcseuLxEXD2rQrqYdcCoehICCzcSBAMBt88=
-X-Received: by 2002:aa7:c414:0:b0:523:b133:5c7a with SMTP id
- j20-20020aa7c414000000b00523b1335c7amr7125332edq.21.1692645111513; Mon, 21
- Aug 2023 12:11:51 -0700 (PDT)
+ bh=Rd6RW0flI+K86nFojj54+O+48Isdroab7wBBqU7ihsk=;
+ b=FFROp2J4RZnIBbbSqQlA4pLH6yS9epPv4KFGblG02Nhu2I6GU5G5N6iDlD9E/9dt4n
+ EH7ciD7tR5PDLL+wrWJzv1l2NQa3HrOSZ43S+Ji72iMQ7Kf2FvEiq7geox4kLqpZJzLE
+ r/09TAaDnu/nI5nT6Isc9EKKaHu2Rco8nDHF6rJxVD0HkDSJgnNLUoB62R7WaTPOFQ+t
+ kYp0jNtiwe39sQ0ZCMk71bruLl9TiwTCkqxATkN2S1i6dm5rfNM0+lIcxYOlLFmFiJPm
+ Edb8JixCoTp8M0VsoORMutHtEpsB3uFWRJCoAu5Gs2u0G9aZ626WuyF466P/k0HdH7iq
+ NMfg==
+X-Gm-Message-State: AOJu0YynHoMFuPrG5vg/4rCwUOTGsZst2ZePH4i5gtNdMVt1hc6hYLLh
+ EEE3YAEzLMpPDOY/gsQKfVZrHkhiSxLypq2hQJuI1Eoy7rhHg7PSLDs=
+X-Google-Smtp-Source: AGHT+IFNExPczKC3NExESVBvVwCmMebG4J5F8KwZISZCld0bFcyyjaSjlKJ/+oP0N1IFupzu+tz032lVHpmyevFg9ek=
+X-Received: by 2002:aa7:dad5:0:b0:523:33d7:e324 with SMTP id
+ x21-20020aa7dad5000000b0052333d7e324mr5883465eds.38.1692645113800; Mon, 21
+ Aug 2023 12:11:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230820173129.781985-1-trini@konsulko.com>
-In-Reply-To: <20230820173129.781985-1-trini@konsulko.com>
-From: Simon Glass <sjg@google.com>
-Date: Mon, 21 Aug 2023 13:11:40 -0600
-Message-ID: <CAPnjgZ0oibrdxdquNUMeQ+Uim5e0LhdaPWq4m07=+YKYFHrtVw@mail.gmail.com>
-Subject: Re: [PATCH 1/4] Azure: Set the timeout for jobs to the maximum
+ <20230820173129.781985-2-trini@konsulko.com>
+In-Reply-To: <20230820173129.781985-2-trini@konsulko.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 21 Aug 2023 13:11:41 -0600
+Message-ID: <CAPnjgZ36=nfdSOESkpUDQS+hC-cMaE9Mn0P4oXyDUWJxKfmPFQ@mail.gmail.com>
+Subject: Re: [PATCH 2/4] Azure: Rework build the world jobs
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -85,16 +83,25 @@ X-Virus-Status: Clean
 
 On Sun, 20 Aug 2023 at 11:31, Tom Rini <trini@konsulko.com> wrote:
 >
-> As per current Azure Pipelines documentation we qualify for 3600 minutes
-> per job, if specified, as the timeout. The default unspecified timeout
-> is 60 minutes. Rework things to specify 0 as the timeout (and so maximum
-> allowed) so that we don't have failures due to running slightly past 60
-> minutes total.
+> Now that we have 3600 minutes per build job, condense and rework things
+> such that our overall time largely doesn't change, but we can also
+> largely avoid having to re-tweak this job to avoid timeouts.  Given that
+> we have 10 threads, we also move a few of the specific sandbox test
+> builds to a prior stage.
+>
+> Note that while sandbox builds with address sanitization enabled (ASAN)
+> not all tests pass, so we limit ourselves to just checking that the
+> version test passes for now.
 >
 > Link: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/phases?view=azure-devops&tabs=yaml#timeouts
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->  .azure-pipelines.yml | 1 +
->  1 file changed, 1 insertion(+)
+> Cc: Simon Glass <sjg@chromium.org>
+>
+> I believe we merged ASAN with the intention of fixing some of the found
+> issues later, so this isn't really a functional change.
+> ---
+>  .azure-pipelines.yml | 100 +++++++++++--------------------------------
+>  1 file changed, 25 insertions(+), 75 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
