@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20120EE49AA
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 22:30:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2238EE4996
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 22:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C5EA871DC;
-	Tue, 22 Aug 2023 00:30:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7524A871F6;
+	Tue, 22 Aug 2023 00:30:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="oz46ocDi";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="MM9C0KZX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5010D871DB; Tue, 22 Aug 2023 00:30:28 +0200 (CEST)
-Received: from s.wrqvtbkv.outbound-mail.sendgrid.net
- (s.wrqvtbkv.outbound-mail.sendgrid.net [149.72.123.24])
+ id DB2EE871EC; Tue, 22 Aug 2023 00:30:30 +0200 (CEST)
+Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
+ (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84325871BA
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:30:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B8CD87141
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:30:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -29,38 +29,38 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=from:subject:in-reply-to:references:mime-version:to:cc:
  content-transfer-encoding:content-type:cc:content-type:from:subject:to;
- s=s1; bh=ML2SSdiIe0AABaA1JYw0ERuYJUiztmtHMYBBHvoE9Vs=;
- b=oz46ocDimW1/QbZ9TjHZzBeyEuSYjsQuHT1gnec9Pj/gRQGenKjvYc8ZtVTDppLw8KVB
- hooP06VA4a6ks7dHpOgH5fLtoE/k2f8Y5DrLfpRAL+qaBjqxkrJSJ+/wHtqi1H+Bc5KGEu
- nZdgX/mxuVyh5ncPYzspEiVnnnZA/PCkok4mFUIf36hygB/ggEg1CnPtBmwUH64NBhmX+x
- FwW1G8G1p1hZAKHtQj/5uXjSSASXCaAVofGOo7eksPDEbWaZnezf5q2VwPG6LRj5u1NKoU
- fEF/ig4I5hlMZ7YmrvzQzThNDS0hVwCYhDj7v3XP2GtbduBQ1mGcHBjyZeKMWtbA==
-Received: by filterdrecv-65f68489c8-knmdt with SMTP id
- filterdrecv-65f68489c8-knmdt-1-64E3E57F-4B
- 2023-08-21 22:30:23.818256013 +0000 UTC m=+8895265.754192256
+ s=s1; bh=jqoXBi4yOFVzry9sebCRkPg/w5jtXFkl21osCppfTtk=;
+ b=MM9C0KZXkF8/dDt1jPrM8+zkQGSEOoguesZltvoimjZbrkRXKwVIQNeOiVdu4P4UYBqm
+ u5zpVOf5jdn3fYTpUCuIe/QysglFu/vUunoZVvKaUkiCGAijb6sIc6DWQCRv4B7WV0jl71
+ 8pWrDSnxXjaN18glL7Vta2/dLAaDanoaTybYgh7EXkZ/y56SKAWccwCT9o3e+CUehdB+y3
+ QWqz6gRzGwN9Bm97zeDlp29A5AaMVtiVY3V35DSoP46Uox2szbF/AzHBy+rd++PIJ8OHl/
+ mf/XTEkKqsFbi54YdxhKH9Aok9px4gEw8esmAjMGlJM8I7kOlPRZ31Xpo1w/pMtA==
+Received: by filterdrecv-7765c6879f-vtjd5 with SMTP id
+ filterdrecv-7765c6879f-vtjd5-1-64E3E582-2F
+ 2023-08-21 22:30:26.631219319 +0000 UTC m=+977713.104966274
 Received: from bionic.localdomain (unknown) by geopod-ismtpd-7 (SG) with ESMTP
- id 9RgmB5ovRs6IR0jK352Djw Mon, 21 Aug 2023 22:30:23.524 +0000 (UTC)
+ id 8TaGmFaZQRefHLF6yYqaDA Mon, 21 Aug 2023 22:30:26.411 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 1/5] power: regulator: Only run autoset once for each
- regulator
-Date: Mon, 21 Aug 2023 22:30:24 +0000 (UTC)
-Message-ID: <20230821223020.3918620-2-jonas@kwiboo.se>
+Subject: [PATCH v2 3/5] regulator: rk8xx: Return correct voltage for switchout
+ converters
+Date: Mon, 21 Aug 2023 22:30:26 +0000 (UTC)
+Message-ID: <20230821223020.3918620-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230821223020.3918620-1-jonas@kwiboo.se>
 References: <20230821223020.3918620-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h+an1LGJ5Y4syCliu?=
- =?us-ascii?Q?5UulLfa84OEDKVEJYbt22=2F2KS4pDKsOeufVmaeM?=
- =?us-ascii?Q?OfgCgsZMAYT6bMrHyEXAvmCbnvMtdIO6wqiLymZ?=
- =?us-ascii?Q?80XBa1LqsXs7N4M9Tz0gGhuPkZKvouHwo0gUyw=2F?=
- =?us-ascii?Q?Hw051+FvjmGYM+UiIdO3tB5SSmuNpC+dZBy36Z?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h=2FJpaTMi2J+YAZQoa?=
+ =?us-ascii?Q?zjl0pHyj3jpnvojE7JshtFq6oXZ774vJkV98NgA?=
+ =?us-ascii?Q?uVJ0sjrsJZ0qzgpKJnH8kCgiWMaS4Q6zUg6WKPd?=
+ =?us-ascii?Q?=2F6WiJIJnVzMa2UX6=2FcNPr3hzBk=2FVrX8VtIpmgFx?=
+ =?us-ascii?Q?X7zeo1GQofkN9lNaLjelPKX9PpVcmhlH4yC=2FG+?=
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Jaehoon Chung
- <jh80.chung@samsung.com>, Eugen Hristev <eugen.hristev@collabora.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>, Svyatoslav Ryhel
- <clamor95@gmail.com>
+ <jh80.chung@samsung.com>, Joseph Chen <chenjh@rock-chips.com>, Elaine Zhang
+ <zhangqing@rock-chips.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>, shengfei Xu
+ <xsf@rock-chips.com>
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset=us-ascii
@@ -80,85 +80,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the commit 4fcba5d556b4 ("regulator: implement basic reference
-counter"), keeping regulator enablement in balance become more important.
-Calling regulator_autoset multiple times on a fixed regulator increase
-the enable count for each call, resulting in an unbalanced enable count.
+From: shengfei Xu <xsf@rock-chips.com>
 
-Introduce a AUTOSET_DONE flag and use it to mark that autoset has run
-for the regulator. Return -EALREADY on any subsequent call to autoset.
+The voltage value for switchout converters is always reported as 0 uV.
+When the switch is enabled, it's voltage is same as input supply.
 
-This fixes so that the enable count is only ever increased by one per
-regulator for autoset.
+Fix this by implementing get_value for switchout converters.
 
-Fixes: 4fcba5d556b4 ("regulator: implement basic reference counter")
+Fixes: ee30068fa574 ("power: pmic: rk809: support rk809 pmic")
+Signed-off-by: shengfei Xu <xsf@rock-chips.com>
+[jonas@kwiboo.se: fix checkpatch error, update commit message]
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
----
 v2:
-- No change
+- New patch
 
- drivers/power/regulator/regulator-uclass.c | 18 ++++++++++++++----
- include/power/regulator.h                  |  1 +
- 2 files changed, 15 insertions(+), 4 deletions(-)
+ drivers/power/regulator/rk8xx.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index 3a6ba69f6d5f..77d101f262e2 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -293,6 +293,9 @@ int regulator_autoset(struct udevice *dev)
- 
- 	uc_pdata = dev_get_uclass_plat(dev);
- 
-+	if (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_DONE)
-+		return -EALREADY;
+diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
+index 9444daa85c19..e80bd6c37230 100644
+--- a/drivers/power/regulator/rk8xx.c
++++ b/drivers/power/regulator/rk8xx.c
+@@ -1032,6 +1032,25 @@ static int switch_get_suspend_enable(struct udevice *dev)
+  */
+ static int switch_get_value(struct udevice *dev)
+ {
++	static const char * const supply_name_rk809[] = {
++		"vcc9-supply",
++		"vcc8-supply",
++	};
++	struct rk8xx_priv *priv = dev_get_priv(dev->parent);
++	struct udevice *supply;
++	int id = dev->driver_data - 1;
 +
- 	ret = regulator_set_suspend_enable(dev, uc_pdata->suspend_on);
- 	if (ret == -ENOSYS)
- 		ret = 0;
-@@ -306,11 +309,15 @@ int regulator_autoset(struct udevice *dev)
- 			return ret;
- 	}
- 
--	if (!uc_pdata->always_on && !uc_pdata->boot_on)
--		return -EMEDIUMTYPE;
-+	if (!uc_pdata->always_on && !uc_pdata->boot_on) {
-+		ret = -EMEDIUMTYPE;
-+		goto out;
-+	}
- 
--	if (uc_pdata->type == REGULATOR_TYPE_FIXED)
--		return regulator_set_enable(dev, true);
-+	if (uc_pdata->type == REGULATOR_TYPE_FIXED) {
-+		ret = regulator_set_enable(dev, true);
-+		goto out;
-+	}
- 
- 	if (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UV)
- 		ret = regulator_set_value(dev, uc_pdata->min_uV);
-@@ -322,6 +329,9 @@ int regulator_autoset(struct udevice *dev)
- 	if (!ret)
- 		ret = regulator_set_enable(dev, true);
- 
-+out:
-+	uc_pdata->flags |= REGULATOR_FLAG_AUTOSET_DONE;
++	if (!switch_get_enable(dev))
++		return 0;
 +
- 	return ret;
++	if (priv->variant == RK809_ID) {
++		if (!uclass_get_device_by_phandle(UCLASS_REGULATOR,
++						  dev->parent,
++						  supply_name_rk809[id],
++						  &supply))
++			return regulator_get_value(supply);
++	}
++
+ 	return 0;
  }
  
-diff --git a/include/power/regulator.h b/include/power/regulator.h
-index ff1bfc2435ae..200652cb3d7a 100644
---- a/include/power/regulator.h
-+++ b/include/power/regulator.h
-@@ -134,6 +134,7 @@ struct dm_regulator_mode {
- enum regulator_flag {
- 	REGULATOR_FLAG_AUTOSET_UV	= 1 << 0,
- 	REGULATOR_FLAG_AUTOSET_UA	= 1 << 1,
-+	REGULATOR_FLAG_AUTOSET_DONE	= 1 << 2,
- };
- 
- /**
 -- 
 2.41.0
 
