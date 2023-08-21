@@ -4,78 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16300EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 18:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC680EE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 18:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA7758705D;
-	Mon, 21 Aug 2023 20:14:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 698F3870D5;
+	Mon, 21 Aug 2023 20:20:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CiDre5Uz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uWttBj1+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C76386F7A; Mon, 21 Aug 2023 20:14:00 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id D1704870BD; Mon, 21 Aug 2023 20:20:34 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31E3E8705F
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:13:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8CAF87093
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:20:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-3fe8242fc4dso36292225e9.1
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 11:13:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-bc379e4c1cbso3734110276.2
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 11:20:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692641636; x=1693246436;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=g41reL+MuagRh2sR3CbYPQP43TJsuuxN6qaXC7xWmPY=;
- b=CiDre5UzPPG53zK3pgGTi+YIaRhpfFi2e85WfeCVEdKv+KF7vW26jIZJFZ+DOKKlTw
- mhSN5O9nQp3BpbinAToBDFYAYLpmQ16JWEdP3EcfVR1UiiD8hEMkLy22vW8Rz/9PwCl5
- 8mVJGDLmyOcTKtV+xENoGNCU5nZth9uVPIxBK8FU7hXMk8rhp1Zye21IZIe6FYi31Twb
- R0iz9IuR7PgpVPLVYDBBFiUFCpvA9ubVrIrtf0JTTiFEOttkW9qcfa2YEOYGMsfaYbiY
- sSSDYdolrQL28C5TTbeOQcBZvukXfpYJkFj7pYt63XmfvYIjmQqkCKxlAeGAcnqMdJ+w
- VQiQ==
+ d=konsulko.com; s=google; t=1692642030; x=1693246830;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YI23NUT5RqMFmB9E3qy8wldb60j9LWL5u+HWm2Q3GK8=;
+ b=uWttBj1+Cd3uCFcKkQDNZIW7FZ0bAm54Q+LM3/oMNQTSZ6HbG1Y7y2sBesrCT9T/Fs
+ Cd6mCi8hiG2KfQ+q6Zm4MFU43JCd9EkRgtdKyixCYuxC60DPgZuoWaBzTqRVasBS+V54
+ JFUE6QlRLLPI6gHbNhtWfsUl9P7ASLVi41N3U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692641636; x=1693246436;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=g41reL+MuagRh2sR3CbYPQP43TJsuuxN6qaXC7xWmPY=;
- b=iySanZ0rviX55Ph23GT45IQ/FLi1kgtlv7GLTMr5xgqtcZAw0sGofCs+gFIOxHeBac
- sB8HTgYpOcGsJ/XDGJVHZIsJHT17NRrhy2pTCODdlm5UnVCNw4qbPxRVGKCu+woz9L8R
- Dkfbh/U0wJaYaHI/JVuaNUG0p6PqARRdDsbM6A3ikB837RlTHNAwnmkX4Q07yOcwXvM7
- 94OdI8GEID/dKNznKJ4P93Pk6wIe0W+nha3COTm9CXETOzYVxxhZRWzs3XTxGCeUPMck
- tNpaHxw9PGHMaOHzCYG5vW5QmqIVOfN9083P7OMCBY6q7DY6W63YeqeMQCRqHOL0VuLE
- 7V8g==
-X-Gm-Message-State: AOJu0Yw/zaX/gpuKSRWSLK7SV+4+pEG5LqEa4OI/kN+oOabZ+DcQxV57
- ufAJhtcViq5/aw5vKYgQfMHjsOv1U9g=
-X-Google-Smtp-Source: AGHT+IEdn39UUI7afYXzpw+9rktaGHYD87BuYpECpzL2n2qYJhjn7DuPLB9V8sqRQJoPKNbUZF/2Rw==
-X-Received: by 2002:adf:e608:0:b0:316:f3cf:6f12 with SMTP id
- p8-20020adfe608000000b00316f3cf6f12mr5298976wrm.48.1692641636585; 
- Mon, 21 Aug 2023 11:13:56 -0700 (PDT)
-Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- z1-20020adfd0c1000000b003143c9beeaesm13192025wrh.44.2023.08.21.11.13.55
+ d=1e100.net; s=20221208; t=1692642030; x=1693246830;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YI23NUT5RqMFmB9E3qy8wldb60j9LWL5u+HWm2Q3GK8=;
+ b=bNkyXrbABOjBbTEjg6JrgDV5PsAPSmwmeUlZarI4RIrXW7M7yK85nuW1Gl5XHcJljM
+ r2XGXtf6WFQag9gW2LQJPQnuHMhjKnU7idx1p8tuHN3qjIgLaZWkn/K9rqeiskEEMJch
+ A9XvPDBwUBUTEAjvG+D+ExuDx4xTFlmoRCiBtaVHJPEMYPaAPA6HAQpz0ryuVk/DWrDx
+ LjCJtDQO0yKHA3Zeh02OAlsP0EQC07sEoUFsli+yP8d+8s5XTAZVSmRDQI/oRhAUEChO
+ pGtB2ZiBla772BPlpvyKmBsq9XmOULZY8G5WkfSxTWGxDMlnVS0JGO45xaqeIUyofHUD
+ LDFQ==
+X-Gm-Message-State: AOJu0YwGBN2todfMBGX0WBEVpQQKFsjdht1ffFDinhIooCV8DpKBfFeE
+ nKvXh3sk2BzCFbLwrfbuZwUEzg==
+X-Google-Smtp-Source: AGHT+IE9o/vM0pa/544BEwHqaZbl8GwDzB7t6vBVF5a9mYejeEXM9ibs3jh0Faueodh3YpagwsgMqQ==
+X-Received: by 2002:a25:ce92:0:b0:d47:3d16:7025 with SMTP id
+ x140-20020a25ce92000000b00d473d167025mr8447424ybe.15.1692642030403; 
+ Mon, 21 Aug 2023 11:20:30 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-49e5-7fcb-0da2-d03f.res6.spectrum.com.
+ [2603:6081:7b00:6400:49e5:7fcb:da2:d03f])
+ by smtp.gmail.com with ESMTPSA id
+ n82-20020a25da55000000b00d5d4bae6fdfsm1970988ybf.30.2023.08.21.11.20.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 11:13:56 -0700 (PDT)
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Anatolij Gustschin <agust@denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [RFC PATCH 5/5] sandbox: video: Use partial updates for SDL display
-Date: Mon, 21 Aug 2023 21:13:39 +0300
-Message-Id: <20230821181339.4135800-6-alpernebiyasak@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230821181339.4135800-1-alpernebiyasak@gmail.com>
-References: <20230821181339.4135800-1-alpernebiyasak@gmail.com>
+ Mon, 21 Aug 2023 11:20:28 -0700 (PDT)
+Date: Mon, 21 Aug 2023 14:20:26 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: "nm@ti.com" <nm@ti.com>, "sjoerd@collabora.com" <sjoerd@collabora.com>,
+ "a-govindraju@ti.com" <a-govindraju@ti.com>,
+ "d-gole@ti.com" <d-gole@ti.com>, "d-gerlach@ti.com" <d-gerlach@ti.com>,
+ "jpanis@baylibre.com" <jpanis@baylibre.com>,
+ "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>,
+ "g-tammana@ti.com" <g-tammana@ti.com>, "kamlesh@ti.com" <kamlesh@ti.com>,
+ "vigneshr@ti.com" <vigneshr@ti.com>, "marex@denx.de" <marex@denx.de>,
+ "hayashi.kunihiko@socionext.com" <hayashi.kunihiko@socionext.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "angus@akkea.ca" <angus@akkea.ca>,
+ "g-vlaev@ti.com" <g-vlaev@ti.com>, "s-anna@ti.com" <s-anna@ti.com>,
+ "sjg@chromium.org" <sjg@chromium.org>
+Subject: Re: [PATCH v2 0/8] Add DFU, emmc and usb boot for TI am62x
+Message-ID: <20230821182026.GH3953269@bill-the-cat>
+References: <20230406185542.1179073-1-sjoerd@collabora.com>
+ <20230531211403.GA980359@bill-the-cat>
+ <3f8f03e9736aa93b87a26e8056037d53bb50db56.camel@collabora.com>
+ <df470ed11d3c7f748a171cf221102b0bcd2ead23.camel@toradex.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+A40Ju1MmxiNCJpT"
+Content-Disposition: inline
+In-Reply-To: <df470ed11d3c7f748a171cf221102b0bcd2ead23.camel@toradex.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,158 +105,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have video damage tracking, try to reduce the SDL display
-work by copying only the updated regions onto the SDL texture instead of
-the entire framebuffer. We still have to do RenderClear and RenderCopy
-the whole texture onto the renderer, but that allegedly happens in the
-GPU.
 
-Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
----
-The second half of copy_to_texture is untested.
+--+A40Ju1MmxiNCJpT
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- arch/sandbox/cpu/sdl.c         | 25 +++++++++++++++++--------
- arch/sandbox/include/asm/sdl.h |  9 +++++++--
- drivers/video/sandbox_sdl.c    | 16 +++++++++++++++-
- 3 files changed, 39 insertions(+), 11 deletions(-)
+On Mon, Aug 21, 2023 at 04:13:32PM +0000, Marcel Ziswiler wrote:
+> Hi Sjoerd
+>=20
+> On Thu, 2023-06-01 at 08:37 +0200, Sjoerd Simons wrote:
+> > On Wed, 2023-05-31 at 17:14 -0400, Tom Rini wrote:
+> > > On Thu, Apr 06, 2023 at 08:55:34PM +0200, Sjoerd Simons wrote:
+> > >=20
+> > > > This series adds more boot sources for the TI am62x. For that the
+> > > > dts'
+> > > > are synced from the upstream ti-next git tree (to add usb nodes),
+> > > > some
+> > > > dwc3 glue is and finally the default configuration is tuned to add
+> > > > support for DFU and USB (host and gadget)
+> > >=20
+> > > This seems, conceptually, fine.=A0 But as we're getting the TI dts
+> > > files
+> > > in sync with the kernel, I'm deferring this version and you'll want
+> > > to
+> > > rebase and re-post once everything has settled.
+> >=20
+> > Thanks for the update/hint ;) I also got a few review comments so the
+> > plan is to include those and repost.. Just my may has been stupidly
+> > busy causing me to not get around it in the first place, so maybe that
+> > turned into good timing in the end.
+>=20
+> Any progress on this?
+>=20
+> I still carry your re-based series on top of latest master [1] and USB DF=
+U is working very well on Verdin AM62.
+>=20
+> Thanks!
+>=20
+> [1] https://github.com/ziswiler/u-boot/tree/verdin-am62-usb-support
 
-diff --git a/arch/sandbox/cpu/sdl.c b/arch/sandbox/cpu/sdl.c
-index 48fae20b4c2d..3a3221d89066 100644
---- a/arch/sandbox/cpu/sdl.c
-+++ b/arch/sandbox/cpu/sdl.c
-@@ -192,8 +192,10 @@ int sandbox_sdl_init_display(int width, int height, int log2_bpp,
- 	return 0;
- }
- 
--static int copy_to_texture(void *lcd_base)
-+static int copy_to_texture(void *lcd_base, int xstart, int ystart,
-+			   int xend, int yend)
- {
-+	struct SDL_Rect rect;
- 	char *dest;
- 	int pitch, x, y;
- 	int src_pitch;
-@@ -201,8 +203,15 @@ static int copy_to_texture(void *lcd_base)
- 	char *src;
- 	int ret;
- 
-+	rect.x = xstart;
-+	rect.y = ystart;
-+	rect.w = xend - xstart + 1;
-+	rect.h = yend - ystart + 1;
-+
- 	if (sdl.src_depth == sdl.depth) {
--		SDL_UpdateTexture(sdl.texture, NULL, lcd_base, sdl.pitch);
-+		src_pitch = sdl.width * sdl.src_depth / 8;
-+		src = lcd_base + src_pitch * rect.y + rect.x * sdl.src_depth / 8;
-+		SDL_UpdateTexture(sdl.texture, &rect, src, src_pitch);
- 		return 0;
- 	}
- 
-@@ -215,7 +224,7 @@ static int copy_to_texture(void *lcd_base)
- 		return -EINVAL;
- 	}
- 
--	ret = SDL_LockTexture(sdl.texture, NULL, &pixels, &pitch);
-+	ret = SDL_LockTexture(sdl.texture, &rect, &pixels, &pitch);
- 	if (ret) {
- 		printf("SDL lock %d: %s\n", ret, SDL_GetError());
- 		return ret;
-@@ -223,12 +232,12 @@ static int copy_to_texture(void *lcd_base)
- 
- 	/* Copy the pixels one by one */
- 	src_pitch = sdl.width * sdl.src_depth / 8;
--	for (y = 0; y < sdl.height; y++) {
-+	for (y = 0; y < rect.h; y++) {
- 		char val;
- 
- 		dest = pixels + y * pitch;
--		src = lcd_base + src_pitch * y;
--		for (x = 0; x < sdl.width; x++, dest += 4) {
-+		src = lcd_base + src_pitch * (ystart + y) + xstart;
-+		for (x = 0; x < rect.w; x++, dest += 4) {
- 			val = *src++;
- 			dest[0] = val;
- 			dest[1] = val;
-@@ -241,7 +250,7 @@ static int copy_to_texture(void *lcd_base)
- 	return 0;
- }
- 
--int sandbox_sdl_sync(void *lcd_base)
-+int sandbox_sdl_sync(void *lcd_base, int xstart, int ystart, int xend, int yend)
- {
- 	struct SDL_Rect rect;
- 	int ret;
-@@ -253,7 +262,7 @@ int sandbox_sdl_sync(void *lcd_base)
- 		return -EAGAIN;
- 
- 	SDL_RenderClear(sdl.renderer);
--	ret = copy_to_texture(lcd_base);
-+	ret = copy_to_texture(lcd_base, xstart, ystart, xend, yend);
- 	if (ret) {
- 		printf("copy_to_texture: %d: %s\n", ret, SDL_GetError());
- 		return -EIO;
-diff --git a/arch/sandbox/include/asm/sdl.h b/arch/sandbox/include/asm/sdl.h
-index 1ace7d1a1217..c7c73ef3a3e6 100644
---- a/arch/sandbox/include/asm/sdl.h
-+++ b/arch/sandbox/include/asm/sdl.h
-@@ -41,10 +41,14 @@ int sandbox_sdl_remove_display(void);
-  * system resources too much.
-  *
-  * @lcd_base: Base of frame buffer
-+ * @xstart:   X start position of updated region in pixels from the left
-+ * @ystart:   Y start position of updated region in pixels from the top
-+ * @xend:     X end position of updated region in pixels from the left
-+ * @yend:     Y end position of updated region in pixels from the top
-  * Return: 0 if screen was updated, -ENODEV is there is no screen.
-  *	   -EAGAIN if screen was not updated due to sync rate limit.
-  */
--int sandbox_sdl_sync(void *lcd_base);
-+int sandbox_sdl_sync(void *lcd_base, int xstart, int ystart, int xend, int yend);
- 
- /**
-  * sandbox_sdl_scan_keys() - scan for pressed keys
-@@ -118,7 +122,8 @@ static inline int sandbox_sdl_remove_display(void)
- 	return -ENODEV;
- }
- 
--static inline int sandbox_sdl_sync(void *lcd_base)
-+static inline int sandbox_sdl_sync(void *lcd_base, int xstart, int ystart,
-+				   int xend, int yend)
- {
- 	return -ENODEV;
- }
-diff --git a/drivers/video/sandbox_sdl.c b/drivers/video/sandbox_sdl.c
-index 7dc2787a5d25..eb424072b6fe 100644
---- a/drivers/video/sandbox_sdl.c
-+++ b/drivers/video/sandbox_sdl.c
-@@ -103,11 +103,25 @@ static int sandbox_sdl_video_sync(struct udevice *dev)
- {
- 	struct video_priv *priv = dev_get_uclass_priv(dev);
- 	void *fb = priv->fb;
-+	int xstart = 0;
-+	int ystart = 0;
-+	int xend = priv->xsize;
-+	int yend = priv->ysize;
- 
- 	if (IS_ENABLED(CONFIG_VIDEO_COPY))
- 		fb = priv->copy_fb;
- 
--	return sandbox_sdl_sync(fb);
-+	if (IS_ENABLED(CONFIG_VIDEO_DAMAGE)) {
-+		if (!priv->damage.xend && !priv->damage.yend)
-+			return 0;
-+
-+		xstart = priv->damage.xstart;
-+		ystart = priv->damage.ystart;
-+		xend = priv->damage.xend;
-+		yend = priv->damage.yend;
-+	}
-+
-+	return sandbox_sdl_sync(fb, xstart, ystart, xend, yend);
- }
- 
- static int sandbox_sdl_remove(struct udevice *dev)
--- 
-2.40.1
+As the am62 files have been re-synced, re-basing this and re-posting for
+next would be appropriate at this point.
 
+--=20
+Tom
+
+--+A40Ju1MmxiNCJpT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTjquEACgkQFHw5/5Y0
+tyxFdQv+OG44FkM6cYEPKFo80Xi+YVAADsXmiATUnm7Wf1svHLxdPNGyH0+lTTLG
+F4axWHNOLyBfHG9gQMgMWqoAAjvN0cSznokTNlacegHi/+Il+dEFFs11YUl7V1nv
+pUxenRw+osQxdVxhpS0pYvH4voNd0ljm+173KRosyNE99kjApMiVfR9gF6mbSwpU
+8Easns5oR/Zf0oVLxcg7uPBRsvISVNbUYiHZCcumulleS8sNX07CxCp1BI8Ekg88
+3vikFmBvyoj3WSYJXP/ZEwX4tTDKSP1tOMIOZ/GBaE3vnRzEI2GS6hn3P/2Tw9p5
+RrmDwS1mfFxmIzEHzGqTMV/s9wNRuUMpUbMaIUk1qhqtrV3L6g1Pe/mpqUxHHJ5r
+NANZp3YzRmo7zGPoJemf+LWfv8TIK4qDq9etItVfp+v3RzALwYt/Yut9gJ9XevrQ
+GeVeTwD2Bsmc82nzcM2fuNIKC9vWCKE9/4eMw+ooK6GGoWODF0/D69NuNqCXqCsP
+jSXG0cWt
+=ZH8E
+-----END PGP SIGNATURE-----
+
+--+A40Ju1MmxiNCJpT--
