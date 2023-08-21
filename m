@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66615EE49A6
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 13:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D5CEE4996
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 13:53:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B23478708D;
-	Mon, 21 Aug 2023 15:51:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04C3A87091;
+	Mon, 21 Aug 2023 15:51:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rvkBTDGo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SJ3CoTwS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E994E87081; Mon, 21 Aug 2023 15:51:47 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 79C6786F0A; Mon, 21 Aug 2023 15:51:50 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A29E8708E
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 15:51:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3F3B86E80
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 15:51:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-31427ddd3fbso3057122f8f.0
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 06:51:45 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-31aeef88a55so1551204f8f.2
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 06:51:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692625905; x=1693230705;
+ d=gmail.com; s=20221208; t=1692625907; x=1693230707;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NHWfOmBWnCfG15vLo7N7Y/b5x/nSoPE0dmgy30xOm9Q=;
- b=rvkBTDGokSsZ+zHSmCyephYHOa1zCgYEH1V/eHcDIaJehG3LF1h3ZetBhv0F1WCnRL
- dg0OqSl4nhT+d01IqkhLNI1FTeIJQeE/FHwY83jActydA9RdIKB97V7VAmOnABjsedPs
- n/m1fNRUpKdpm/TBglBcCWTlhrozxmO+plcVOAjMhNlQQGUGkRo1eq/yHOw8pzfiIQVT
- 4G4hJi3ePKSsEYbd1YuMZSkrzN70N+Erw/eeRb2QAdkn4J6xcJyPMEWirh7uNV2erutB
- ZzxtmQOTBV9y19HeQkYKJeCnpReJ2LaLzTJj72ehPZpZqbYfj67OE+MeCC6Yt/m3YILh
- fpGQ==
+ bh=l/DCoXVnGlEMqWseytQAYuhC9MvrFlVv7QEu+lzOB9U=;
+ b=SJ3CoTwShv0m1a2l77IYGRiPJhE773qxJozbJ8TLkbWb/Fs3vzMjaetMjO1LteCIix
+ nxWVY9KC93yaMYqJT6SqYWKi1BaFToYnd6muvummJcQpRouAllJWg2nVkF0e6rb8GdHn
+ kEvHDvCo4Xq4Lrpvs6/W0ONesn+kGcCJbX3+BARXOoTD87bHAQpb5gcTr6FjYwUraYf/
+ 31t1qEak7+tRD5cuPx0ItVaX8KSHeAMuueL0gEw6Wt64zNUyAO7W7cCRNJFMIsBkB2Lw
+ IOsoOk7kBgIqU/InShFLnIoLlW9EafAood5bDff+/ADKYaXgkgxpBbWQWgtF6tmmvjGO
+ gfgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692625905; x=1693230705;
+ d=1e100.net; s=20221208; t=1692625907; x=1693230707;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NHWfOmBWnCfG15vLo7N7Y/b5x/nSoPE0dmgy30xOm9Q=;
- b=i5Ecd9fdl1ZJU0VqAc78F3Pmf9jo/gquJagwYJOv+0Gs8ayWCAJVUNkBV1a10fi3YU
- uHNi0JjDvPtp8HPET+X5ywPbVDMbGOtad+ZjijeZL+mbC+Zc+lN2Oy35AoZjAeiYYqcL
- qr+tjpJBWmj7lsr4rZ+Tqpc5m93dDUcxAeKZeOas3KQ+oM/S5zaPEb6puDJuVXTGbx9/
- NF+fyUg6I5MN+ZrT/+2pj8da5MpJaSlYzzymyg7JmdELwMKcBJsOuVNFfj+kXHLAmapY
- MCO+hRidacGMoSYFLc/PHU7rU1qZqAWuizW35JPJmGYWschbDBhU5HWTPkJ8ifdZ9dqO
- 7kkA==
-X-Gm-Message-State: AOJu0YxlhwAy04+v9sqR7+z6BpzMYlqGrKNxnrBV5TAuFHvCn94+0y5X
- UCsHr11K/guiHrF8/+oTMNTEUjwCaRQ=
-X-Google-Smtp-Source: AGHT+IF9A6Dqme3W/tV3JyovhEsU6i4A15qi8QyYKIlOrt7P6EPMkzmv+B+4oB2S58BxD/9oTr/SHQ==
-X-Received: by 2002:a5d:4988:0:b0:31a:e6c2:770d with SMTP id
- r8-20020a5d4988000000b0031ae6c2770dmr4196623wrq.36.1692625904737; 
- Mon, 21 Aug 2023 06:51:44 -0700 (PDT)
+ bh=l/DCoXVnGlEMqWseytQAYuhC9MvrFlVv7QEu+lzOB9U=;
+ b=Tx8Anl+tKgGLw4YpMhb5VbWFhDaaZ7izCBtT/Mun3zxxONGjrw/1uYrQVf/HxeEzcw
+ 0VQqKGIC9Kek3RaHw20BGPdbmmDTmaVo3IGNrikhp2qDmM0bBH2AVbn0K5MV5t9dwKsA
+ U5D/cFon6pqj8sco6Dd5oVBskjrgqlgNtd3HXzCrfuFmFtsXxecVmlgKOnnE8Kj+CGGI
+ D2EMM/0yQCq/vuxC4/ISIiaRk0/6GCX55V8DYg+claM+h691kk/LGeEGXJqs5X1wFGQU
+ EZeKiKrY2VvqZ7yOXoriyel6QE7BvHmCmurDC+oji/do1hnGp/6NPxPFV/ABKsRmjPGY
+ V6Eg==
+X-Gm-Message-State: AOJu0YxqpYt8rTBNvBZ9hiz/qYI+xhkc2uURaJNeyYssFbd+tACGWJtX
+ 6fE/7qVWobRKTs1ZWXtn3qcomaeF/nc=
+X-Google-Smtp-Source: AGHT+IHlrJ5IlwhVESQ4N6S+FeCJPNau4Ry7TWJN4H6yUmdpI19HJsGEPwtYtoPvcLuI4yNltjc9CQ==
+X-Received: by 2002:a5d:4483:0:b0:317:dada:2417 with SMTP id
+ j3-20020a5d4483000000b00317dada2417mr4326536wrq.31.1692625907186; 
+ Mon, 21 Aug 2023 06:51:47 -0700 (PDT)
 Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.42
+ r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 06:51:44 -0700 (PDT)
+ Mon, 21 Aug 2023 06:51:46 -0700 (PDT)
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Kever Yang <kever.yang@rock-chips.com>,
@@ -80,9 +80,9 @@ Cc: Kever Yang <kever.yang@rock-chips.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH v5 09/13] efi_loader: GOP: Add damage notification on BLT
-Date: Mon, 21 Aug 2023 16:51:06 +0300
-Message-Id: <20230821135111.3558478-10-alpernebiyasak@gmail.com>
+Subject: [PATCH v5 10/13] video: Only dcache flush damaged lines
+Date: Mon, 21 Aug 2023 16:51:07 +0300
+Message-Id: <20230821135111.3558478-11-alpernebiyasak@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
@@ -106,77 +106,88 @@ X-Virus-Status: Clean
 
 From: Alexander Graf <agraf@csgraf.de>
 
-Now that we have a damage tracking API, let's populate damage done by
-UEFI payloads when they BLT data onto the screen.
+Now that we have a damage area tells us which parts of the frame buffer
+actually need updating, let's only dcache flush those on video_sync()
+calls. With this optimization in place, frame buffer updates - especially
+on large screen such as 4k displays - speed up significantly.
 
 Signed-off-by: Alexander Graf <agraf@csgraf.de>
 Reported-by: Da Xue <da@libre.computer>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-[Alper: Add struct comment for new member]
+[Alper: Use damage.xstart/yend, IS_ENABLED()]
+Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 ---
 
 Changes in v5:
-- Document new vdev field in struct efi_gop_obj comment
-
-Changes in v4:
-- Skip damage on EfiBltVideoToBltBuffer
-
-Changes in v3:
-- Adapt to always assume DM is used
+- Use xstart, ystart, xend, yend as names for damage region
+- Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
 
 Changes in v2:
-- Remove ifdefs from gop
+- Fix dcache range; we were flushing too much before
+- Remove ifdefs
 
- lib/efi_loader/efi_gop.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
+ 1 file changed, 36 insertions(+), 5 deletions(-)
 
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 778b693f983a..db6535e080c4 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -24,6 +24,7 @@ static const efi_guid_t efi_gop_guid = EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID;
-  * @ops:	graphical output protocol interface
-  * @info:	graphical output mode information
-  * @mode:	graphical output mode
-+ * @vdev:	backing video device
-  * @bpix:	bits per pixel
-  * @fb:		frame buffer
-  */
-@@ -32,6 +33,7 @@ struct efi_gop_obj {
- 	struct efi_gop ops;
- 	struct efi_gop_mode_info info;
- 	struct efi_gop_mode mode;
-+	struct udevice *vdev;
- 	/* Fields we only have access to during init */
- 	u32 bpix;
- 	void *fb;
-@@ -120,6 +122,7 @@ static __always_inline efi_status_t gop_blt_int(struct efi_gop *this,
- 	u32 *fb32 = gopobj->fb;
- 	u16 *fb16 = gopobj->fb;
- 	struct efi_gop_pixel *buffer = __builtin_assume_aligned(bufferp, 4);
-+	bool blt_to_video = (operation != EFI_BLT_VIDEO_TO_BLT_BUFFER);
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index 8bfcbc88dda7..a50220bcc684 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -385,6 +385,41 @@ void video_damage(struct udevice *vid, int x, int y, int width, int height)
+ 	priv->damage.yend = max(yend, priv->damage.yend);
+ }
  
- 	if (delta) {
- 		/* Check for 4 byte alignment */
-@@ -243,6 +246,9 @@ static __always_inline efi_status_t gop_blt_int(struct efi_gop *this,
- 		dlineoff += dwidth;
- 	}
- 
-+	if (blt_to_video)
-+		video_damage(gopobj->vdev, dx, dy, width, height);
++#if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
++static void video_flush_dcache(struct udevice *vid)
++{
++	struct video_priv *priv = dev_get_uclass_priv(vid);
 +
- 	return EFI_SUCCESS;
- }
++	if (!priv->flush_dcache)
++		return;
++
++	if (!IS_ENABLED(CONFIG_VIDEO_DAMAGE)) {
++		flush_dcache_range((ulong)priv->fb,
++				   ALIGN((ulong)priv->fb + priv->fb_size,
++					 CONFIG_SYS_CACHELINE_SIZE));
++
++		return;
++	}
++
++	if (priv->damage.xend && priv->damage.yend) {
++		int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
++		int lend = priv->damage.xend * VNBYTES(priv->bpix);
++		int y;
++
++		for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
++			ulong fb = (ulong)priv->fb;
++			ulong start = fb + (y * priv->line_length) + lstart;
++			ulong end = start + lend - lstart;
++
++			start = ALIGN_DOWN(start, CONFIG_SYS_CACHELINE_SIZE);
++			end = ALIGN(end, CONFIG_SYS_CACHELINE_SIZE);
++
++			flush_dcache_range(start, end);
++		}
++	}
++}
++#endif
++
+ /* Flush video activity to the caches */
+ int video_sync(struct udevice *vid, bool force)
+ {
+@@ -404,11 +439,7 @@ int video_sync(struct udevice *vid, bool force)
+ 	 * out whether it exists? For now, ARM is safe.
+ 	 */
+ #if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
+-	if (priv->flush_dcache) {
+-		flush_dcache_range((ulong)priv->fb,
+-				   ALIGN((ulong)priv->fb + priv->fb_size,
+-					 CONFIG_SYS_CACHELINE_SIZE));
+-	}
++	video_flush_dcache(vid);
+ #elif defined(CONFIG_VIDEO_SANDBOX_SDL)
+ 	static ulong last_sync;
  
-@@ -548,6 +554,7 @@ efi_status_t efi_gop_register(void)
- 	gopobj->info.pixels_per_scanline = col;
- 	gopobj->bpix = bpix;
- 	gopobj->fb = fb;
-+	gopobj->vdev = vdev;
- 
- 	return EFI_SUCCESS;
- }
 -- 
 2.40.1
 
