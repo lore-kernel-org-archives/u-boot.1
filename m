@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BE8EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25ECEE49A6
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2737F871DB;
+	by phobos.denx.de (Postfix) with ESMTP id 707D8871F1;
 	Mon, 21 Aug 2023 21:13:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RhXqEdoW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BLfj27KM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 805E6871D2; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 83CCA87180; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E489871D8
+ by phobos.denx.de (Postfix) with ESMTPS id 2E088871D7
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-d63c0a6568fso3892152276.0
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-d650a22abd7so3865412276.3
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gMx4SAEmCOEjypXqFCdH/BNDX1/vIZARR/zYEociwpo=;
- b=RhXqEdoWW/phumjtMZ6oVIIfsHpnZY+nsmeAqb82rsJCcxlqai7RfH9TWpNInLO52M
- gycx9U8pKYiJ+hc0Y6JBkuAkmw5Z5f3Lo/y3QzyDKcK8Fy2XMpp+rzCxsVVzUfjnsrBZ
- QpxzRIDJkxWkAe/2AP3H18Pc94C3UUx30pBhQ=
+ bh=+QxzdAGUkhRPKHpFg4eIRrv6KWKZvae7lBIKLUMW37E=;
+ b=BLfj27KMh7vIHMzzN7YsRK/jnkMXAb82ng9KBI/b8oyXibSiwtXvQDU1FIbVzDWeW5
+ WO3+MBX0VADUM8FEDRgVSUDP0QBhHphHMOdV0eXBa05HD88WNKeF35fPB8TMwAYuLdoT
+ GoM2RWg64dOUdpbs40Aet+etvQ39dr0d4gpwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gMx4SAEmCOEjypXqFCdH/BNDX1/vIZARR/zYEociwpo=;
- b=EIXlHiIF8BWKYKaXnoY/hGK7cq8ur9PcF02aRTaKoEpBjSaHclubhXTAuUTVmUuFkZ
- B8B3XSbHvDRCt1VkcY0zF4Icz2Ztp4KAi7wFSypetQMWxyQ9iEW2pdpYcp1vfRw9koTO
- dSzWFhVnePA101vIhaT1JkoQR//GS/qpM9VtPIIcC2O2lhKkoAzbUjV2ZKp0oZjhnyJe
- k+qg0KUppjCz3QmmGFDyTEv1b7Ku7aWSL7Xb3TGu+ElyYNavqEguS4aYyz0QEv5g8X5F
- YS/jmnqBK/txsVPapJLeBH/OGKrrC3A2+tyBVKO0xblT8YGnCSbENJeik1R5I+5dTxsY
- JBpg==
-X-Gm-Message-State: AOJu0YxzZGFPipl79+6T5biRAxXBPO0ltHhpqWglLEUFBQKZ5sBUeL/5
- ft/BOsYwxddcz/0+y1+oa0hqrmYPXIOrL4LZHnQsJA==
-X-Google-Smtp-Source: AGHT+IEVvHfYOacHVBGBIAhLYpfCDFP69Fhjan2SdnF/CmIsSiJQ0rgd3ECVipfuWc/GSYjqvjU5CjCCqDlxlIU2Ne0=
-X-Received: by 2002:a05:6902:18c6:b0:d53:f8e6:8447 with SMTP id
- ck6-20020a05690218c600b00d53f8e68447mr11064045ybb.15.1692645218711; Mon, 21
- Aug 2023 12:13:38 -0700 (PDT)
+ bh=+QxzdAGUkhRPKHpFg4eIRrv6KWKZvae7lBIKLUMW37E=;
+ b=XOXL4ZROKCbcuv749uFeyto58sjCVvdLZq8nk4de65QdoVEzV+g5IOTtYmQImASoUi
+ gyfFFD8O9JJJyNLfGxqpiFEERdt/1cfhPwcWvN05VnWX3WUq8ixXsug9BmnVWH9lb54H
+ z+diY93/MQTimNFVDmeSr0tjbK8P8KiiXXJgmpxL2XIND4QYdrZuWKyUTn5szuj7kYAd
+ wbXxfp3PF9lB8OU5uq0vh47nS0fCSsMA0qU+qP+SNs6K8VRQwG9mrqctth9pHI+b460s
+ PKkNZd+74d39AoSDbUwTGILLUImW0olRCdwsG1pniqLcj1HCMlttmGoxD6YNL/ENJA/4
+ 70Fg==
+X-Gm-Message-State: AOJu0Yy6J2Vuw2dIalaGBHNosGRqD/TeYi/4tbEQhaDPrjYthegRt30v
+ tr4bpGvq8sXhbo1bVlODLCTuzjTCqrpafs2hqzsz1w==
+X-Google-Smtp-Source: AGHT+IEKpUcrWeRlNWq23CqQKX95HNTYrG6zoQ+0vOxYYtXVY7N3MC0hq4zcxixhk0WFae5x+hJ88qQD5h4C5qVMpho=
+X-Received: by 2002:a5b:d45:0:b0:cb9:41ad:8938 with SMTP id
+ f5-20020a5b0d45000000b00cb941ad8938mr7139743ybr.3.1692645218734; Mon, 21 Aug
+ 2023 12:13:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-4-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-4-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-6-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-6-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:48 -0600
-Message-ID: <CAPnjgZ3Tpz+3EbxnS_qU=vHRyeCx4bT14J75ZP_B5+CiF_5v8w@mail.gmail.com>
-Subject: Re: [PATCH v5 03/13] video: test: Test partial updates of hardware
- frame buffer
+Date: Mon, 21 Aug 2023 13:11:49 -0600
+Message-ID: <CAPnjgZ3NpWp479MQk8edxH3eGnM50sJaS4+P46ZCpL+Ev_LcUg@mail.gmail.com>
+Subject: Re: [PATCH v5 05/13] dm: video: Add damage notification on display
+ fills
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
  Jagan Teki <jagan@amarulasolutions.com>,
@@ -96,19 +96,23 @@ X-Virus-Status: Clean
 
 On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> With VIDEO_COPY enabled, only the modified parts of the frame buffer are
-> intended to be copied to the hardware. Add a test that checks this, by
-> overwriting contents we prepared without telling the video uclass and
-> then checking if the overwritten contents have been redrawn on the next
-> sync.
+> From: Alexander Graf <agraf@csgraf.de>
 >
+> Let's report the video damage when we fill parts of the screen. This
+> way we can later lazily flush only relevant regions to hardware.
+>
+> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+> Reported-by: Da Xue <da@libre.computer>
+> [Alper: Call video_damage() in video_fill_part(), edit commit message]
 > Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > ---
+> Does video_fill_part() need a video_sync(dev, false) here?
 >
 > Changes in v5:
-> - Add patch "video: test: Test partial updates of hardware frame buffer"
+> - Call video_damage() also in video_fill_part()
 >
->  test/dm/video.c | 54 +++++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 54 insertions(+)
+>  drivers/video/video-uclass.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
