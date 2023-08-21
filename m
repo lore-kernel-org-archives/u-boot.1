@@ -4,77 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5853CEE49A5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 20:18:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82117EE49A5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 20:20:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48A5E870BF;
-	Mon, 21 Aug 2023 22:18:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ABC7287135;
+	Mon, 21 Aug 2023 22:20:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ll/MMeo4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67AD3870BF; Mon, 21 Aug 2023 22:18:09 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C38487110
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 22:18:06 +0200 (CEST)
+ id 4553D870BF; Mon, 21 Aug 2023 22:20:13 +0200 (CEST)
+Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
+ by phobos.denx.de (Postfix) with ESMTP id 3B3E08717E
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 22:20:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d63c0a6568fso3945406276.0
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 13:18:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692649085; x=1693253885;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DnvmlYUNNUUpUfcxAQKHRoSW2aQauayFD+gPWDBg1ZI=;
- b=ll/MMeo4uzg7qUIvkVA+IvmvQF9dcaCVxvhuxsv2FJdREWqBssqCSxMAXsA1uxmjij
- TKbVfQp7kNPMvPd1RaCvAvd+e92oXP1KVDswr9XQEgJo3UBed1DCAR/CUh3jkRDewsG4
- vtlnyANLBtvBRQeO+lOLKM9Gb+1fiW8oh2SaY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692649085; x=1693253885;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DnvmlYUNNUUpUfcxAQKHRoSW2aQauayFD+gPWDBg1ZI=;
- b=bREQf3iIWGg/XM1XUNPuXwaRse+sH++XHvhHLB75vCDxMMk/QfwuWGTVU6ckbbTVlI
- 5YnhnIsLiSk8knCxnlOMo/9MDJlRsA+nzn9diRGNegH2XyO4hHWnQVEviJUeDpD0Ptwh
- tvrTiZ8IxfLZodZVRb9gvvXvjIBX2vR5s9QVwCDs8fLskVraZzQ42KZOlC4jv6nHe7PO
- jh67XN2ebzxqIrhSbBUrugKxTvS+6g04kIa5Sb4+DZt0J00+BsgQrAdlzRl20C0NPlkN
- A82mYDEM/79YRrbM8k5/T8Tr02jYT+Svesh+EE7snysnZCmbxkKP7GJy5ugpCzvuihXL
- PmPw==
-X-Gm-Message-State: AOJu0YzZdRIBegf3MjNxVX6G3Kg7joDEMbhhiPLa0fINkRtCsXwYSwqE
- zD65Wl6XFagocAcBWJ2gRhUycg==
-X-Google-Smtp-Source: AGHT+IF4emoPmUmXSuPSjnDPx0cKt99ag0lOBNLayl73fNuCDI2tQpwhCsDK3al0G+fiOLXExhM8Sg==
-X-Received: by 2002:a25:bcc7:0:b0:d06:f0ab:e17b with SMTP id
- l7-20020a25bcc7000000b00d06f0abe17bmr7807841ybm.55.1692649084869; 
- Mon, 21 Aug 2023 13:18:04 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-49e5-7fcb-0da2-d03f.res6.spectrum.com.
- [2603:6081:7b00:6400:49e5:7fcb:da2:d03f])
- by smtp.gmail.com with ESMTPSA id
- l6-20020a056902000600b00d677aec54ffsm1921544ybh.60.2023.08.21.13.18.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 13:18:04 -0700 (PDT)
-Date: Mon, 21 Aug 2023 16:18:02 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-dm
-Message-ID: <20230821201802.GI3953269@bill-the-cat>
-References: <CAPnjgZ3SvbMcbPWijcy3JCyh=Cp6X7MMC8vT2Ojk-miFa470GA@mail.gmail.com>
+ dmarc=none (p=none dis=none) header.from=csgraf.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
+Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 1582660807C7;
+ Mon, 21 Aug 2023 22:20:06 +0200 (CEST)
+Message-ID: <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+Date: Mon, 21 Aug 2023 22:20:05 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hkXsJpCsjmaV1HwA"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3SvbMcbPWijcy3JCyh=Cp6X7MMC8vT2Ojk-miFa470GA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+Content-Language: en-GB
+To: Simon Glass <sjg@chromium.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
+ <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+From: Alexander Graf <agraf@csgraf.de>
+In-Reply-To: <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,57 +68,213 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hkXsJpCsjmaV1HwA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 21.08.23 21:57, Simon Glass wrote:
+> Hi Alex,
+>
+> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
+>>
+>> On 21.08.23 21:11, Simon Glass wrote:
+>>> Hi Alper,
+>>>
+>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>> This is a rebase of Alexander Graf's video damage tracking series, with
+>>>> some tests and other changes. The original cover letter is as follows:
+>>>>
+>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+>>>>>
+>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+>>>>> but need it accessible by the display controller which reads directly
+>>>>> from a later point of consistency. Hence, we flush the frame buffer to
+>>>>> DRAM on every change. The full frame buffer.
+>>> It should not, see below.
+>>>
+>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+>>>>> printed space triggers a cache flush.
+>>> That is a bug somewhere in EFI.
+>>
+>> Unfortunately not :). You may call it a bug in grub: It literally prints
+>> over space characters for every character in its menu that it wants
+>> cleared. On every text screen draw.
+>>
+>> This wouldn't be a big issue if we only flush the reactangle that gets
+>> modified. But without this patch set, we're flushing the full DRAM
+>> buffer on every u-boot text console character write, which means for
+>> every character (as that's the only API UEFI has).
+>>
+>> As a nice side effect, we speed up the normal U-Boot text console as
+>> well with this patch set, because even "normal" text prints that write
+>> for example a single line of text on the screen today flush the full
+>> frame buffer to DRAM.
+> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+> after every character. It doesn't do that for normal character output
+> and I don't think it makes sense to do it for EFI either.
 
-On Mon, Aug 21, 2023 at 01:11:38PM -0600, Simon Glass wrote:
 
-> Hi Tom,
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/17449
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D47&view=
-=3Dresults
->=20
->=20
-> The following changes since commit 17aad803551500e1a3d87339a6559e99b7fad4=
-79:
->=20
->   Merge branch 'master' of
-> https://source.denx.de/u-boot/custodians/u-boot-sh (2023-08-20
-> 11:09:11 -0400)
->=20
-> are available in the Git repository at:
->=20
->   git://git.denx.de/u-boot-dm.git tags/dm-pull-20aug23
->=20
-> for you to fetch changes up to 25a9be71ec1ca779aac8bcb1d8a363725ff0ac7f:
->=20
->   test: cpu: Handle both 32bit and 64bit CPUs (2023-08-20 15:55:27 -0600)
->=20
+I see. Let's trace the calls:
 
-Applied to u-boot/master, thanks!
+efi_cout_output_string()
+-> fputs()
+-> vidconsole_puts()
+-> video_sync()
+-> flush_dcache_range()
 
---=20
-Tom
+Unfortunately grub abstracts character backends down to the "print 
+character" level, so it calls UEFI's sopisticated "output_string" 
+callback with single characters at a time, which means we do a full 
+dcache flush for every character that we print:
 
---hkXsJpCsjmaV1HwA
-Content-Type: application/pgp-signature; name="signature.asc"
+https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTjxm8ACgkQFHw5/5Y0
-tywOEwwAqaSqh76mrxanmkrlg5dl8U61b2g/5rwnKQTOOX5u8o0K5aXD/Yl3NUro
-6NYd6x3KxTyl/snOPxB7sPXNi/ykO58xLwuF2JTXchbG4Kwf2E3hRh8NXfBT7suD
-Z6b56jeDViOTJ5VkZpF7pU3eLTXdJQv3kGVoul1yqwmhJ6j/vuogZGIDbgVbKNcE
-Tz/0AdL5pe3Pd1igYeLMrlku9eJftsdX+aWi+Y5LOLCpffyexL+P9V6rbtuqcgHH
-bhrgzYu2m/KTQkuwlZ/JE+lDwE7guyJEPJbC9+82bx99tJTSCmrmg+tjvNBSH70F
-6Sq0eCnHW647V7zkWiU9BwMjN+8oC8LdWhuXb7cYFURWXXQQkG9fKOTdliN/qOvO
-6wErRz2XepEiaX7YWH1RxrVE3/X6TzLbT0Cki3xK4pS2WqiSW7wHrPk5PrD1VpUA
-wi1gxdtjHDbSOYZrq9Ch7eIWZiGfF8HCa/UZ/x4Lc+IfCLIBaNBtS0+PrY0793oQ
-kkhJJsRO
-=dhUd
------END PGP SIGNATURE-----
+>
+>>
+>>>>> This patch set implements the easiest mitigation against this problem:
+>>>>> Damage tracking. We remember the lowest common denominator region that was
+>>>>> touched since the last video_sync() call and only flush that. The most
+>>>>> typical writer to the frame buffer is the video console, which always
+>>>>> writes rectangles of characters on the screen and syncs afterwards.
+>>>>>
+>>>>> With this patch set applied, we reduce drawing a large grub menu (with
+>>>>> serial console attached for size information) on an RK3399-ROC system
+>>>>> at 1440p from 55 seconds to less than 1 second.
+>>>>>
+>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+>>>>> overhead compared to before as well. So even x86 systems should be faster
+>>>>> with this now :).
+>>>>>
+>>>>>
+>>>>> Alternatives considered:
+>>>>>
+>>>>>     1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+>>>>>        so often. We are missing timers to do this generically.
+>>>>>
+>>>>>     2) Double buffering - We could try to identify whether anything changed
+>>>>>        at all and only draw to the FB if it did. That would require
+>>>>>        maintaining a second buffer that we need to scan.
+>>>>>
+>>>>>     3) Text buffer - Maintain a buffer of all text printed on the screen with
+>>>>>        respective location. Don't write if the old and new character are
+>>>>>        identical. This would limit applicability to text only and is an
+>>>>>        optimization on top of this patch set.
+>>>>>
+>>>>>     4) Hash screen lines - Create a hash (sha256?) over every line when it
+>>>>>        changes. Only flush when it does. I'm not sure if this would waste
+>>>>>        more time, memory and cache than the current approach. It would make
+>>>>>        full screen updates much more expensive.
+>>> 5) Fix the bug mentioned above?
+>>>
+>>>> Changes in v5:
+>>>> - Add patch "video: test: Split copy frame buffer check into a function"
+>>>> - Add patch "video: test: Support checking copy frame buffer contents"
+>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>> - Document damage struct and fields in struct video_priv comment
+>>>> - Return void from video_damage()
+>>>> - Fix undeclared priv error in video_sync()
+>>>> - Drop unused headers from video-uclass.c
+>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>> - Call video_damage() also in video_fill_part()
+>>>> - Use met->baseline instead of priv->baseline
+>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+>>>> - Update console_rotate.c video_damage() calls to pass video tests
+>>>> - Remove mention about not having minimal damage for console_rotate.c
+>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+>>>> - Document new vdev field in struct efi_gop_obj comment
+>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>>>> - Fix memmove() calls by removing the extra dev argument
+>>>> - Call video_sync() before checking copy_fb in video tests
+>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>>>>
+>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>>>>
+>>>> Changes in v4:
+>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+>>>> - Simplify first damage logic
+>>>> - Remove VIDEO_DAMAGE default for ARM
+>>>> - Skip damage on EfiBltVideoToBltBuffer
+>>>> - Add patch "video: Always compile cache flushing code"
+>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+>>>>
+>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>>>>
+>>>> Changes in v3:
+>>>> - Adapt to always assume DM is used
+>>>> - Adapt to always assume DM is used
+>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>>>
+>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>>>>
+>>>> Changes in v2:
+>>>> - Remove ifdefs
+>>>> - Fix ranges in truetype target
+>>>> - Limit rotate to necessary damage
+>>>> - Remove ifdefs from gop
+>>>> - Fix dcache range; we were flushing too much before
+>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>>>
+>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>>>>
+>>>> Alexander Graf (9):
+>>>>     dm: video: Add damage tracking API
+>>>>     dm: video: Add damage notification on display fills
+>>>>     vidconsole: Add damage notifications to all vidconsole drivers
+>>>>     video: Add damage notification on bmp display
+>>>>     efi_loader: GOP: Add damage notification on BLT
+>>>>     video: Only dcache flush damaged lines
+>>>>     video: Use VIDEO_DAMAGE for VIDEO_COPY
+>>>>     video: Always compile cache flushing code
+>>>>     video: Enable VIDEO_DAMAGE for drivers that need it
+>>>>
+>>>> Alper Nebi Yasak (4):
+>>>>     video: test: Split copy frame buffer check into a function
+>>>>     video: test: Support checking copy frame buffer contents
+>>>>     video: test: Test partial updates of hardware frame buffer
+>>>>     video: test: Test video damage tracking via vidconsole
+>>>>
+>>>>    arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>>>>    arch/arm/mach-sunxi/Kconfig       |   1 +
+>>>>    drivers/video/Kconfig             |  26 +++
+>>>>    drivers/video/console_normal.c    |  27 ++--
+>>>>    drivers/video/console_rotate.c    |  94 +++++++----
+>>>>    drivers/video/console_truetype.c  |  37 +++--
+>>>>    drivers/video/exynos/Kconfig      |   1 +
+>>>>    drivers/video/imx/Kconfig         |   1 +
+>>>>    drivers/video/meson/Kconfig       |   1 +
+>>>>    drivers/video/rockchip/Kconfig    |   1 +
+>>>>    drivers/video/stm32/Kconfig       |   1 +
+>>>>    drivers/video/tegra20/Kconfig     |   1 +
+>>>>    drivers/video/tidss/Kconfig       |   1 +
+>>>>    drivers/video/vidconsole-uclass.c |  16 --
+>>>>    drivers/video/video-uclass.c      | 190 ++++++++++++----------
+>>>>    drivers/video/video_bmp.c         |   7 +-
+>>>>    include/video.h                   |  59 +++----
+>>>>    include/video_console.h           |  52 ------
+>>>>    lib/efi_loader/efi_gop.c          |   7 +
+>>>>    test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+>>>>    20 files changed, 483 insertions(+), 297 deletions(-)
+>>> It is good to see this tidied up into something that can be applied!
+>>>
+>>> I am unsure what is going on with the EFI performance, though. It
+>>> should not flush the cache after every character, only after a new
+>>> line. Is there something wrong in here? If so, we should fix that bug
+>>> first and it should be patch 1 of this series.
+>>
+>> Before I came up with this series, I was trying to identify the UEFI bug
+>> in question as well, because intuition told me surely this is a bug in
+>> UEFI :). Turns out it really isn't this time around.
+> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+> implementation. Where did you look for the bug?
 
---hkXsJpCsjmaV1HwA--
+
+The "real" bug is in grub. But given that it's reasonably simple to work 
+around in U-Boot and even with it "fixed" in grub we would still see 
+performance benefits from flushing only parts of the screen, I think 
+it's worth living with the grub deficiency.
+
+
+Alex
+
+
