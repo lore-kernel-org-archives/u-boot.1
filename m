@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22C0EE49A5
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 18:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13BFBEE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 18:14:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8FF287072;
-	Mon, 21 Aug 2023 20:13:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 265DC87060;
+	Mon, 21 Aug 2023 20:14:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GJ5Mk5VZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="q/7CWjBO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D040F8705D; Mon, 21 Aug 2023 20:13:55 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 79DAF87061; Mon, 21 Aug 2023 20:13:57 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F20786802
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:13:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 083B987072
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:13:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-3fbd33a57b6so34828245e9.2
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 11:13:53 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3159d5e409dso2987161f8f.0
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 11:13:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692641632; x=1693246432;
+ d=gmail.com; s=20221208; t=1692641633; x=1693246433;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UESOwfDyr2zxOdqADMaJvgSddFJtVF9j7tTGno2uk7E=;
- b=GJ5Mk5VZbzT5/kpC4CRPsb9fUuj7MtlL/udxWgTPg7MC1cW0LjXsWDhP3bJbtgF/7x
- fc8QJSrqWqPyD6N+oL1uM5V+gKqhvWL8a1xIZYyDiFffGZoSNuRR9oMQeBEUN28rp8oW
- nIxs2tS5JW35d6cOKwdvdIS4939LVcC6IB7m3qZM/b+yX9bElZshf8u2on3jh/eiWE1V
- 1ufGF0lOkPuCqY4oEj0aY0FW99FIUUJJ6AMDogy2o5n57LCU/BGjC7sXW70mqENu0dH3
- +xAufn0VT6lFx2JMpZ/4c2QcWR4iZI6FxDdm10nMvJHZI3DelD0xcGpYRaBqAkEVUKau
- zW1A==
+ bh=SkTXwqxYdD+/DRD6BfjtRhFPLw2dDR7Jl/iLhlBHKn4=;
+ b=q/7CWjBOCJDvAA4PnfircCAH0sg0zW1agzeJ6jZYJoYGZcBOQzsCzAq5ra9SuNKYUT
+ ZwMA6GYatNayob6Uu+aC8YZOL6OHrpGhD0y9TmlwQiA4WCepJF8XdQKQeNu+fgNX7iqR
+ 6Z2KsTpN4j9Hczdmv6Phi5tA/ia2mbtf2V8nD+RdzpefSHg9OBQzg0LMSjKCcHKbeEgj
+ 02Aly/ZC6LUywpkRAH6Eq+gXyr1B/zG9Ug+zFy3Nda9MIGIT1FKoh2a4uKsF934U/PtE
+ qcdCV4MqNH8/yLzo17sRiJ1mFbcENmiaR5oYyAy1iFG68RVvPhFt4rPWWT7v375Rg6MN
+ E53Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692641632; x=1693246432;
+ d=1e100.net; s=20221208; t=1692641633; x=1693246433;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UESOwfDyr2zxOdqADMaJvgSddFJtVF9j7tTGno2uk7E=;
- b=R61OOOZGExKC+YU0MeLZcgd6J7aTTshJwsuQ5A6baV1AjP6dTP8KyH3dqcIoPGgMEr
- AjANeyJLwzVbZ7smIg91tUYNs2ReduMahl8CybDr6p4AlON7pgFLvrEwagU/0/LggmYh
- 6Bz6+bFWyPqO+g1I33y/Uouu1dyuqEVisK94kryGBn5x3PA4Yru3a752+GwpQvIeYQmu
- irzbsBnC0SG2ej0yxqVLjhr+uf84Gg3Yo7km93vQ5PqDelfLPL5yNCCh59sr9GzVpZvI
- l1gtNnxLHUrAdzGrPYv0GrLyphMjl+BN/24PI5LOOfQXR7CvZTPNYvDKnwjsEQbXbBRu
- mFTg==
-X-Gm-Message-State: AOJu0YwSdfqU22O0D8MFyqls2Ff3QpRlf+HJnaZsKsV2htOcbSdWYxZ/
- RfYCL4LwhqWyadibIOgc0wFVGyJkAGk=
-X-Google-Smtp-Source: AGHT+IFmExRt5+n5FmCNSFJpPQNGHtAcaRWPDDxUiQHfjH+EPcowYTbDu/m5rWgrjO4lKN3FVV2Pqg==
-X-Received: by 2002:adf:f287:0:b0:315:9993:1caa with SMTP id
- k7-20020adff287000000b0031599931caamr5516499wro.12.1692641631913; 
- Mon, 21 Aug 2023 11:13:51 -0700 (PDT)
+ bh=SkTXwqxYdD+/DRD6BfjtRhFPLw2dDR7Jl/iLhlBHKn4=;
+ b=axvzQ1gXiSr27ei4W1x5zcTe7MjoVnrluFz49pxym98sPkPLhuuCtRr55lUzRvzjNu
+ ZQ6MEnx8FZ2Af8D2jVtr7QkAuqO9b7+GGSdtyGtenYs7r5UnaTvIg4tI16svrsUQnZyU
+ S2DP6wqz8L9jlKc0ICouQeWjfcEcDlQieU2/5lDqNzYhYIMRIuR9xQbebCjsFlU2zEPj
+ uuSzrXEgbDq/oWZnp5RbGkAsGo5ojdtHB1lf2lOFmUwwSo6DaajYodjd3iegxKKswFnN
+ qrTD2Zt0WKQbZtwosEj84yanHfwaEuy3jAEZR9umJUR+j+Jp3R4Rzb0kWB/mqDz5vgmd
+ F0lw==
+X-Gm-Message-State: AOJu0Yx5NfVNSO244bfwM4D4TwSiEJBoJypUthurFuUfK9rmO4ZT0mEG
+ o/JdkDq6G92n6ECEL2Lv5jJnDm1Zk7A=
+X-Google-Smtp-Source: AGHT+IER78GBY/qoofaegk1Vrfr4Nx2s+c8tshL5UJHbj4pDcToPEN5s5wVmlwJ4zw49bY9tvcP+lw==
+X-Received: by 2002:adf:e5c1:0:b0:314:3e96:bd7e with SMTP id
+ a1-20020adfe5c1000000b003143e96bd7emr5323968wrn.4.1692641633450; 
+ Mon, 21 Aug 2023 11:13:53 -0700 (PDT)
 Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- z1-20020adfd0c1000000b003143c9beeaesm13192025wrh.44.2023.08.21.11.13.50
+ z1-20020adfd0c1000000b003143c9beeaesm13192025wrh.44.2023.08.21.11.13.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 11:13:51 -0700 (PDT)
+ Mon, 21 Aug 2023 11:13:53 -0700 (PDT)
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Anatolij Gustschin <agust@denx.de>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH 2/5] video: Allow deferring and retrying driver-specific video
- sync
-Date: Mon, 21 Aug 2023 21:13:36 +0300
-Message-Id: <20230821181339.4135800-3-alpernebiyasak@gmail.com>
+Subject: [PATCH 3/5] sandbox: video: Move sync rate limit into SDL code
+Date: Mon, 21 Aug 2023 21:13:37 +0300
+Message-Id: <20230821181339.4135800-4-alpernebiyasak@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230821181339.4135800-1-alpernebiyasak@gmail.com>
 References: <20230821181339.4135800-1-alpernebiyasak@gmail.com>
@@ -93,52 +92,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The sandbox SDL driver has some code in the video uclass to rate limit
-video syncs by postponing them, and forcing a sync nonetheless with a
-"force" argument.
-
-Add infrastructure for doing this through driver ops, where the driver
-can request to defer a sync with -EAGAIN, and the uclass can force it by
-calling the op again it until it does something.
+As a first step of removing sandbox-specific code from the video uclass,
+move the sync rate limiter into the SDL code. We lose the ability to
+immediately force a screen refresh, but can retry until it does.
 
 Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 ---
-Alternatively, add "force" argument into the driver ops->video_sync().
-But I think it should go away instead. The problem is video_sync() being
-called irregularly and too frequently, maybe we can call it only from
-cyclic at the hardware refresh rate?
 
- drivers/video/video-uclass.c | 2 ++
- include/video.h              | 3 ++-
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ arch/sandbox/cpu/sdl.c         | 9 +++++++++
+ arch/sandbox/include/asm/sdl.h | 4 +++-
+ drivers/video/video-uclass.c   | 8 +++-----
+ 3 files changed, 15 insertions(+), 6 deletions(-)
 
+diff --git a/arch/sandbox/cpu/sdl.c b/arch/sandbox/cpu/sdl.c
+index 590e406517bf..48fae20b4c2d 100644
+--- a/arch/sandbox/cpu/sdl.c
++++ b/arch/sandbox/cpu/sdl.c
+@@ -48,6 +48,7 @@ struct buf_info {
+  * @screen: SDL window to use
+  * @src_depth: Number of bits per pixel in the source frame buffer (that we read
+  * from and render to SDL)
++ * @last_sync: Timestamp of last display update in milliseconds
+  */
+ static struct sdl_info {
+ 	int width;
+@@ -67,6 +68,7 @@ static struct sdl_info {
+ 	SDL_Renderer *renderer;
+ 	SDL_Window *screen;
+ 	int src_depth;
++	int last_sync;
+ } sdl;
+ 
+ static void sandbox_sdl_poll_events(void)
+@@ -148,6 +150,7 @@ int sandbox_sdl_init_display(int width, int height, int log2_bpp,
+ 		sdl.vis_width = sdl.width;
+ 		sdl.vis_height = sdl.height;
+ 	}
++	sdl.last_sync = 0;
+ 
+ 	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+ 		printf("Unable to init hinting: %s", SDL_GetError());
+@@ -245,6 +248,10 @@ int sandbox_sdl_sync(void *lcd_base)
+ 
+ 	if (!sdl.texture)
+ 		return 0;
++
++	if (SDL_GetTicks() - sdl.last_sync < 100)
++		return -EAGAIN;
++
+ 	SDL_RenderClear(sdl.renderer);
+ 	ret = copy_to_texture(lcd_base);
+ 	if (ret) {
+@@ -268,6 +275,8 @@ int sandbox_sdl_sync(void *lcd_base)
+ 	SDL_RenderDrawRect(sdl.renderer, &rect);
+ 
+ 	SDL_RenderPresent(sdl.renderer);
++	sdl.last_sync = SDL_GetTicks();
++
+ 	sandbox_sdl_poll_events();
+ 
+ 	return 0;
+diff --git a/arch/sandbox/include/asm/sdl.h b/arch/sandbox/include/asm/sdl.h
+index ee4991f7c24a..1ace7d1a1217 100644
+--- a/arch/sandbox/include/asm/sdl.h
++++ b/arch/sandbox/include/asm/sdl.h
+@@ -37,10 +37,12 @@ int sandbox_sdl_remove_display(void);
+  * sandbox_sdl_sync() - Sync current U-Boot LCD frame buffer to SDL
+  *
+  * This must be called periodically to update the screen for SDL so that the
+- * user can see it.
++ * user can see it. It is internally rate limited to 10 Hz to avoid using
++ * system resources too much.
+  *
+  * @lcd_base: Base of frame buffer
+  * Return: 0 if screen was updated, -ENODEV is there is no screen.
++ *	   -EAGAIN if screen was not updated due to sync rate limit.
+  */
+ int sandbox_sdl_sync(void *lcd_base);
+ 
 diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index 7cec6362570f..accf486509cb 100644
+index accf486509cb..d867185da539 100644
 --- a/drivers/video/video-uclass.c
 +++ b/drivers/video/video-uclass.c
-@@ -446,6 +446,8 @@ int video_sync(struct udevice *vid, bool force)
+@@ -455,16 +455,14 @@ int video_sync(struct udevice *vid, bool force)
+ 	video_flush_dcache(vid);
  
- 	if (ops && ops->video_sync) {
- 		ret = ops->video_sync(vid);
-+		while (force && ret == -EAGAIN)
-+			ret = ops->video_sync(vid);
- 		if (ret)
- 			return ret;
- 	}
-diff --git a/include/video.h b/include/video.h
-index 42e57b44188d..5c4327d4e455 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -137,7 +137,8 @@ struct video_priv {
-  *		displays needs synchronization when data in an FB is available.
-  *		For these devices implement video_sync hook to call a sync
-  *		function. vid is pointer to video device udevice. Function
-- *		should return 0 on success video_sync and error code otherwise
-+ *		should return 0 on success video_sync, -EAGAIN if it was
-+ *		deferred and should be tried again, and error code otherwise
-  */
- struct video_ops {
- 	int (*video_sync)(struct udevice *vid);
+ #if defined(CONFIG_VIDEO_SANDBOX_SDL)
+-	static ulong last_sync;
+ 	void *fb = priv->fb;
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO_COPY))
+ 		fb = priv->copy_fb;
+ 
+-	if (force || get_timer(last_sync) > 100) {
+-		sandbox_sdl_sync(fb);
+-		last_sync = get_timer(0);
+-	}
++	ret = sandbox_sdl_sync(fb);
++	while (force && ret == -EAGAIN)
++		ret = sandbox_sdl_sync(fb);
+ #endif
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO_DAMAGE)) {
 -- 
 2.40.1
 
