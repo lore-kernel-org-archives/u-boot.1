@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48686EE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF21AEE4996
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:47:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D3E08707A;
+	by phobos.denx.de (Postfix) with ESMTP id 906CD871D1;
 	Tue, 22 Aug 2023 05:47:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rucky.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rucky.eu header.i=@rucky.eu header.b="AJSPfTJa";
+	dkim=pass (2048-bit key; unprotected) header.d=rucky.eu header.i=@rucky.eu header.b="qN7lE3Jo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A20587047; Mon, 21 Aug 2023 20:00:03 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 183FA87015; Mon, 21 Aug 2023 20:02:13 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBD8086813
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:00:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 582B286813
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:02:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=rucky.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=roland@rucky.eu
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RV0cZ2QJ5z9sjc;
- Mon, 21 Aug 2023 19:59:58 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RV0g35DqKz9spd;
+ Mon, 21 Aug 2023 20:02:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rucky.eu; s=MBO0001;
- t=1692640798;
+ t=1692640927;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=lsGkLIG8ejFbCVU9PB7EN9KcD1gXSOHx0ELYka/kPvI=;
- b=AJSPfTJaerCEaSllcZ0ShrROI/0228JgI09/qSBXbAyePHndXOQDAc61NQGLogtin+nuwt
- afauAyYJhYeBymppyHB1Zn1QmX51lfAkPFu/Mygraw+PD+SO6rRlCBNvVUqLVIguLnwwDQ
- Y1jSA57Xl2DDfYiKlpU3ZDSBmsH7h61Zaxi28fmhe/4RgGa92l2MO+VSm85U3ZZxcnNbn/
- 5weAUk1FRQZjOSjuUCqIh7ykqrPZdTvVldiPoZXqW6MShP3pIXghJcSJ6QrIRvaaicBF85
- e3jDu+BLNkL9068w7CubqJMcl4czZDkXtf3Xnl5swGMc3rUSdBdLHq3GFdDLnw==
-Message-ID: <13e08d65-8c3b-4804-8e16-4399076e45dc@rucky.eu>
-Date: Mon, 21 Aug 2023 19:59:56 +0200
+ bh=mm4QX4pM2laWWU9302315dWsg+ecRg9iKviuZ/BttxE=;
+ b=qN7lE3JotuVcKokSVafcq3gRsZU3njHaKNlMRfk1PdQC+jgKgeEi/pHFsFzikO919ZIXZl
+ 1F/2cFQUxniOYt6nFpHC7wuibgZUWWhgvPfTP61BkscW3WOoNOHzEGWHV4PgX8z8LgX2lU
+ zgUPCSXNHaCj1BLH9m8I4mw9A4BExYmMSGC8FcL9CG4eakYbvUmx8Uxvit16AXGxvOsjtA
+ kxgdzBIqyN5sTWGG8czXG1uysZBbMY8KeCTfDqcGGxTeRYh6eK6D443UTl3T8H45+nYpO/
+ pyTQCdoqifxzcEi9Q6sx5tscogx7gSu6zD2T82w7Pg6bCCEaOEVrfq8wEHAsYQ==
+Message-ID: <f2a1b35d-3c3f-45f0-9f7e-9c516be0089f@rucky.eu>
+Date: Mon, 21 Aug 2023 20:02:06 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/2] dm: event: add EVT_DM_POST_INIT_R event type
+Subject: Re: [PATCH v2 2/2] riscv: cpu: make riscv_cpu_probe to
+ EVT_DM_POST_INIT_R callback
+Content-Language: en-US
 To: Chanho Park <chanho61.park@samsung.com>
 References: <20230818051103.2427590-1-chanho61.park@samsung.com>
- <CGME20230818052645epcas2p48c419f6e6318ddadb425749319fbc3b8@epcas2p4.samsung.com>
- <20230818051103.2427590-2-chanho61.park@samsung.com>
-Content-Language: en-US
+ <CGME20230818052645epcas2p3df52c8522cd903f869d366fed46ea89d@epcas2p3.samsung.com>
+ <20230818051103.2427590-3-chanho61.park@samsung.com>
 Cc: u-boot@lists.denx.de
 From: Roland Ruckerbauer <roland@rucky.eu>
-In-Reply-To: <20230818051103.2427590-2-chanho61.park@samsung.com>
+In-Reply-To: <20230818051103.2427590-3-chanho61.park@samsung.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4RV0cZ2QJ5z9sjc
 X-Mailman-Approved-At: Tue, 22 Aug 2023 05:47:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,50 +74,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tested on visionfive2 board, it works. Thanks for taking a look into this.
+Tested on visionfive2, it works.
 
 On 18.08.23 07:11, Chanho Park wrote:
-> This patch introduces EVT_DM_POST_INIT_R event type for handling hooks
-> after relocation.
+> Since the Patch 55171aedda88, VisionFive2 booting has been broken [1].
+> VisionFive2 board requires to enable CONFIG_TIMER_EARLY but booting went
+> to panic from initr_dm_devices due to lack of a timer device.
 >
-> Fixes: 55171aedda88 ("dm: Emit the arch_cpu_init_dm() even only before relocation")
-> Suggested-by: Simon Glass <sjg@chromium.org>
+> - Error logs
+> initcall sequence 00000000fffd8d38 failed at call 00000000402185e4
+> (err=-19)
+>
+> Thus, we need to move riscv_cpu_probe function in order to register
+> the timer earlier than initr_dm_devices.
+>
+> Fixes: 7fe32b3442f0 ("event: Convert arch_cpu_init_dm() to use events")
+> Cc: Simon Glass <sjg@chromium.org>
 > Cc: Bin Meng <bmeng.cn@gmail.com>
 > Signed-off-by: Chanho Park <chanho61.park@samsung.com>
-
 Tested-by: Roland Ruckerbauer <mail@ruabmbua.dev>
-
 > ---
->   drivers/core/root.c | 6 ++++--
->   include/event.h     | 1 +
->   2 files changed, 5 insertions(+), 2 deletions(-)
+>   arch/riscv/cpu/cpu.c | 11 +++--------
+>   1 file changed, 3 insertions(+), 8 deletions(-)
 >
-> diff --git a/drivers/core/root.c b/drivers/core/root.c
-> index 6775fb0b6575..79d871ab291a 100644
-> --- a/drivers/core/root.c
-> +++ b/drivers/core/root.c
-> @@ -436,8 +436,10 @@ int dm_init_and_scan(bool pre_reloc_only)
->   			return ret;
->   		}
->   	}
-> -	if (CONFIG_IS_ENABLED(DM_EVENT) && !(gd->flags & GD_FLG_RELOC)) {
-> -		ret = event_notify_null(EVT_DM_POST_INIT_F);
-> +	if (CONFIG_IS_ENABLED(DM_EVENT)) {
-> +		ret = event_notify_null(gd->flags & GD_FLG_RELOC ?
-> +					EVT_DM_POST_INIT_R :
-> +					EVT_DM_POST_INIT_F);
->   		if (ret)
->   			return log_msg_ret("ev", ret);
->   	}
-> diff --git a/include/event.h b/include/event.h
-> index daf44bf8a83b..bb38ba98e73b 100644
-> --- a/include/event.h
-> +++ b/include/event.h
-> @@ -24,6 +24,7 @@ enum event_t {
+> diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+> index ecfb1fb08c4b..0b4208e72199 100644
+> --- a/arch/riscv/cpu/cpu.c
+> +++ b/arch/riscv/cpu/cpu.c
+> @@ -66,7 +66,7 @@ static inline bool supports_extension(char ext)
+>   #endif /* CONFIG_CPU */
+>   }
 >   
->   	/* Events related to driver model */
->   	EVT_DM_POST_INIT_F,
-> +	EVT_DM_POST_INIT_R,
->   	EVT_DM_PRE_PROBE,
->   	EVT_DM_POST_PROBE,
->   	EVT_DM_PRE_REMOVE,
+> -static int riscv_cpu_probe(void)
+> +static int riscv_cpu_probe(void *ctx, struct event *event)
+>   {
+>   #ifdef CONFIG_CPU
+>   	int ret;
+> @@ -79,6 +79,7 @@ static int riscv_cpu_probe(void)
+>   
+>   	return 0;
+>   }
+> +EVENT_SPY(EVT_DM_POST_INIT_R, riscv_cpu_probe);
+>   
+>   /*
+>    * This is called on secondary harts just after the IPI is init'd. Currently
+> @@ -95,7 +96,7 @@ int riscv_cpu_setup(void *ctx, struct event *event)
+>   {
+>   	int ret;
+>   
+> -	ret = riscv_cpu_probe();
+> +	ret = riscv_cpu_probe(ctx, event);
+>   	if (ret)
+>   		return ret;
+>   
+> @@ -149,12 +150,6 @@ EVENT_SPY(EVT_DM_POST_INIT_F, riscv_cpu_setup);
+>   
+>   int arch_early_init_r(void)
+>   {
+> -	int ret;
+> -
+> -	ret = riscv_cpu_probe();
+> -	if (ret)
+> -		return ret;
+> -
+>   	if (IS_ENABLED(CONFIG_SYSRESET_SBI))
+>   		device_bind_driver(gd->dm_root, "sbi-sysreset",
+>   				   "sbi-sysreset", NULL);
