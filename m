@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F16AEE49A8
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 21:09:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E07EE49A0
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 22:11:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2529787077;
-	Mon, 21 Aug 2023 23:09:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 06E7E871D5;
+	Tue, 22 Aug 2023 00:11:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IntnNWLn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZPjT9Sm/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 999648704F; Mon, 21 Aug 2023 23:09:33 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 1F3E2871DB; Tue, 22 Aug 2023 00:10:59 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF5D387085
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 23:09:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C96A686898
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:10:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-58dfe2d5b9aso52050107b3.1
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 14:09:30 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-523100882f2so4625067a12.2
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 15:10:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692652169; x=1693256969;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=FsRGN9fg5fov2wjxXQLdeWunP/x6Bz2tBjPEoT7P0NM=;
- b=IntnNWLnHWEjuYHlRuIiTXhLdmGWDjr5fD/SncJKiKg1q5rWpTS7ahmrMd/JGP8Hgn
- mHpR0uKWn4YD2a879JWOrtWDKwZBTM3Pkxehad565dbaf3g3dlxflzz79S/ZiMpl6xiB
- hafXVpL+oNuXTgzyTJVhBBUQvfAL7RvhhKpdU=
+ d=chromium.org; s=google; t=1692655855; x=1693260655;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+g11ZAnXeUMkSUTgLQdM3i3olAFjq0+aRFg0wErzzfo=;
+ b=ZPjT9Sm/gnHxNp7NKrRZiqbxkb/N6WlHZasSgvU+bt0fTbYjIqmFw5bnX2ShVapWa1
+ aBhgsxLa5RefrnS1Sz3HFvLtgBv6sAxox/B9Cy5RgkOAzpFbVrD6APEMlyOQiREgjji+
+ xQ6rg0SByFrCtO9pXSaNQNfmEjw5CV9ytl7Vs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692652169; x=1693256969;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FsRGN9fg5fov2wjxXQLdeWunP/x6Bz2tBjPEoT7P0NM=;
- b=ReyK4bqhcq/HJQaSz6Xvyd+hJ5/5xHjs+tKBjq5FkQpnXmYwNzq0E0QhM1223aEcFB
- AzxCXznlnLFZGqVPg2yG+4OuL8V936fHsyMct4bfdWnD8yr7HwQPbDyNEADdNebeWWIe
- 4+4Vvu5rW+5yrQ4Cd/GqdKUGmaWCe6WMZouD5q5Rxs/odOSJ4bzJDpWvnHCguEqZZunz
- 8CPEfK/lfAaB+QKqzDO7nW+A6SQ65qTM02LGkRJgzJ7sk3jkUy8HUGmjnIQ9L6ItWpn+
- 7jrvmhwl31scxvJYkeN3vFNiu1KvVoMUUiEGpbGixZf4Pi8nqZTX/8WVL3+xX3Gz0mNS
- 8WqQ==
-X-Gm-Message-State: AOJu0YzqVLZ0E7Ko+pUG2A+cTzemY+O33WER6+f6EglB/XiA4d9LW3H9
- tzDNlPeDxk+b61xuO0GmamkSJl9ZzHJOpYO/phq13Q==
-X-Google-Smtp-Source: AGHT+IEuvn9s5Yv8lDQeWgoXXkNNGTpqn0xd6TjFmo+nbgE8zncbaG7OAsytC8+WMDtA0WzWlSPgkQ==
-X-Received: by 2002:a81:6c46:0:b0:583:aca3:469c with SMTP id
- h67-20020a816c46000000b00583aca3469cmr5908292ywc.2.1692652169318; 
- Mon, 21 Aug 2023 14:09:29 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-49e5-7fcb-0da2-d03f.res6.spectrum.com.
- [2603:6081:7b00:6400:49e5:7fcb:da2:d03f])
- by smtp.gmail.com with ESMTPSA id
- g123-20020a0ddd81000000b0055a373a7e5asm2436796ywe.131.2023.08.21.14.09.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 14:09:28 -0700 (PDT)
-Date: Mon, 21 Aug 2023 17:09:27 -0400
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de,
- Alvaro Fernando =?iso-8859-1?Q?Garc=EDa?= <alvarofernandogarcia@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20230821210927.GL3953269@bill-the-cat>
+ d=1e100.net; s=20221208; t=1692655855; x=1693260655;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+g11ZAnXeUMkSUTgLQdM3i3olAFjq0+aRFg0wErzzfo=;
+ b=bSrAKhwfQWXzBhRwfJuUIEHKaKxNbnDCthNUKJ+xbz7a7W6N3WJuw6o9niZ57YUxeF
+ TQNzPoG3hIXEYtAUiwFqHGulqO2i2APLfTsO/mVjbjD+KJqbjhodGNV9Aoja4FS7wwVk
+ pSrDEXhhF2vRMmzuYbJkdCZyVj266q/f4Yd7MvVLV0Pp1913cOv2n0iLoWzT8rlQ1xjH
+ lTVE7FYO+Jyr5NXfiPswitG3TWws66Tfl1NtGF9TLLhk/F1YZt3HE0T8MqSrucbEoTbt
+ LLLgdPWTniZbZFjnlRrA01ybiKUUpFDrYjDN7uhcM+6KslPjQXb7j4vAQIVZt5SUYyQ5
+ QbwQ==
+X-Gm-Message-State: AOJu0Yw6XTziZJ+bvDu1vnv+TDCZgo+V/8oTJDFSWo/ruISgUa+N9BrI
+ UM4lv7RaWUzG9HrchfkMB/dZug87oG5q81hwLsHzOw==
+X-Google-Smtp-Source: AGHT+IFGeJApwpc9zzD3ZpULuOOvIhk69vrvbZMRR9R15Oacga9mxVCOfdSsChYVNtkPvoQPLMiZzt7uEVfJ7befXvI=
+X-Received: by 2002:a05:6402:5178:b0:523:4d60:71c0 with SMTP id
+ d24-20020a056402517800b005234d6071c0mr3620559ede.33.1692655855103; Mon, 21
+ Aug 2023 15:10:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1XpdCwwUDSyubd1u"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+In-Reply-To: <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 21 Aug 2023 16:10:43 -0600
+Message-ID: <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+To: Alexander Graf <agraf@csgraf.de>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de, 
+ Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, 
+ Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,170 +95,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alex,
 
---1XpdCwwUDSyubd1u
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
+>
+>
+> On 21.08.23 21:57, Simon Glass wrote:
+> > Hi Alex,
+> >
+> > On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
+> >>
+> >> On 21.08.23 21:11, Simon Glass wrote:
+> >>> Hi Alper,
+> >>>
+> >>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>>> This is a rebase of Alexander Graf's video damage tracking series, with
+> >>>> some tests and other changes. The original cover letter is as follows:
+> >>>>
+> >>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+> >>>>>
+> >>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+> >>>>> but need it accessible by the display controller which reads directly
+> >>>>> from a later point of consistency. Hence, we flush the frame buffer to
+> >>>>> DRAM on every change. The full frame buffer.
+> >>> It should not, see below.
+> >>>
+> >>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+> >>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+> >>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+> >>>>> printed space triggers a cache flush.
+> >>> That is a bug somewhere in EFI.
+> >>
+> >> Unfortunately not :). You may call it a bug in grub: It literally prints
+> >> over space characters for every character in its menu that it wants
+> >> cleared. On every text screen draw.
+> >>
+> >> This wouldn't be a big issue if we only flush the reactangle that gets
+> >> modified. But without this patch set, we're flushing the full DRAM
+> >> buffer on every u-boot text console character write, which means for
+> >> every character (as that's the only API UEFI has).
+> >>
+> >> As a nice side effect, we speed up the normal U-Boot text console as
+> >> well with this patch set, because even "normal" text prints that write
+> >> for example a single line of text on the screen today flush the full
+> >> frame buffer to DRAM.
+> > No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+> > after every character. It doesn't do that for normal character output
+> > and I don't think it makes sense to do it for EFI either.
+>
+>
+> I see. Let's trace the calls:
+>
+> efi_cout_output_string()
+> -> fputs()
+> -> vidconsole_puts()
+> -> video_sync()
+> -> flush_dcache_range()
+>
+> Unfortunately grub abstracts character backends down to the "print
+> character" level, so it calls UEFI's sopisticated "output_string"
+> callback with single characters at a time, which means we do a full
+> dcache flush for every character that we print:
+>
+> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
+>
+>
+> >
+> >>
+> >>>>> This patch set implements the easiest mitigation against this problem:
+> >>>>> Damage tracking. We remember the lowest common denominator region that was
+> >>>>> touched since the last video_sync() call and only flush that. The most
+> >>>>> typical writer to the frame buffer is the video console, which always
+> >>>>> writes rectangles of characters on the screen and syncs afterwards.
+> >>>>>
+> >>>>> With this patch set applied, we reduce drawing a large grub menu (with
+> >>>>> serial console attached for size information) on an RK3399-ROC system
+> >>>>> at 1440p from 55 seconds to less than 1 second.
+> >>>>>
+> >>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+> >>>>> overhead compared to before as well. So even x86 systems should be faster
+> >>>>> with this now :).
+> >>>>>
+> >>>>>
+> >>>>> Alternatives considered:
+> >>>>>
+> >>>>>     1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+> >>>>>        so often. We are missing timers to do this generically.
+> >>>>>
+> >>>>>     2) Double buffering - We could try to identify whether anything changed
+> >>>>>        at all and only draw to the FB if it did. That would require
+> >>>>>        maintaining a second buffer that we need to scan.
+> >>>>>
+> >>>>>     3) Text buffer - Maintain a buffer of all text printed on the screen with
+> >>>>>        respective location. Don't write if the old and new character are
+> >>>>>        identical. This would limit applicability to text only and is an
+> >>>>>        optimization on top of this patch set.
+> >>>>>
+> >>>>>     4) Hash screen lines - Create a hash (sha256?) over every line when it
+> >>>>>        changes. Only flush when it does. I'm not sure if this would waste
+> >>>>>        more time, memory and cache than the current approach. It would make
+> >>>>>        full screen updates much more expensive.
+> >>> 5) Fix the bug mentioned above?
+> >>>
+> >>>> Changes in v5:
+> >>>> - Add patch "video: test: Split copy frame buffer check into a function"
+> >>>> - Add patch "video: test: Support checking copy frame buffer contents"
+> >>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+> >>>> - Use xstart, ystart, xend, yend as names for damage region
+> >>>> - Document damage struct and fields in struct video_priv comment
+> >>>> - Return void from video_damage()
+> >>>> - Fix undeclared priv error in video_sync()
+> >>>> - Drop unused headers from video-uclass.c
+> >>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+> >>>> - Call video_damage() also in video_fill_part()
+> >>>> - Use met->baseline instead of priv->baseline
+> >>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+> >>>> - Update console_rotate.c video_damage() calls to pass video tests
+> >>>> - Remove mention about not having minimal damage for console_rotate.c
+> >>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+> >>>> - Document new vdev field in struct efi_gop_obj comment
+> >>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+> >>>> - Fix memmove() calls by removing the extra dev argument
+> >>>> - Call video_sync() before checking copy_fb in video tests
+> >>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+> >>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+> >>>>
+> >>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+> >>>>
+> >>>> Changes in v4:
+> >>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+> >>>> - Simplify first damage logic
+> >>>> - Remove VIDEO_DAMAGE default for ARM
+> >>>> - Skip damage on EfiBltVideoToBltBuffer
+> >>>> - Add patch "video: Always compile cache flushing code"
+> >>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+> >>>>
+> >>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+> >>>>
+> >>>> Changes in v3:
+> >>>> - Adapt to always assume DM is used
+> >>>> - Adapt to always assume DM is used
+> >>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+> >>>>
+> >>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+> >>>>
+> >>>> Changes in v2:
+> >>>> - Remove ifdefs
+> >>>> - Fix ranges in truetype target
+> >>>> - Limit rotate to necessary damage
+> >>>> - Remove ifdefs from gop
+> >>>> - Fix dcache range; we were flushing too much before
+> >>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+> >>>>
+> >>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+> >>>>
+> >>>> Alexander Graf (9):
+> >>>>     dm: video: Add damage tracking API
+> >>>>     dm: video: Add damage notification on display fills
+> >>>>     vidconsole: Add damage notifications to all vidconsole drivers
+> >>>>     video: Add damage notification on bmp display
+> >>>>     efi_loader: GOP: Add damage notification on BLT
+> >>>>     video: Only dcache flush damaged lines
+> >>>>     video: Use VIDEO_DAMAGE for VIDEO_COPY
+> >>>>     video: Always compile cache flushing code
+> >>>>     video: Enable VIDEO_DAMAGE for drivers that need it
+> >>>>
+> >>>> Alper Nebi Yasak (4):
+> >>>>     video: test: Split copy frame buffer check into a function
+> >>>>     video: test: Support checking copy frame buffer contents
+> >>>>     video: test: Test partial updates of hardware frame buffer
+> >>>>     video: test: Test video damage tracking via vidconsole
+> >>>>
+> >>>>    arch/arm/mach-omap2/omap3/Kconfig |   1 +
+> >>>>    arch/arm/mach-sunxi/Kconfig       |   1 +
+> >>>>    drivers/video/Kconfig             |  26 +++
+> >>>>    drivers/video/console_normal.c    |  27 ++--
+> >>>>    drivers/video/console_rotate.c    |  94 +++++++----
+> >>>>    drivers/video/console_truetype.c  |  37 +++--
+> >>>>    drivers/video/exynos/Kconfig      |   1 +
+> >>>>    drivers/video/imx/Kconfig         |   1 +
+> >>>>    drivers/video/meson/Kconfig       |   1 +
+> >>>>    drivers/video/rockchip/Kconfig    |   1 +
+> >>>>    drivers/video/stm32/Kconfig       |   1 +
+> >>>>    drivers/video/tegra20/Kconfig     |   1 +
+> >>>>    drivers/video/tidss/Kconfig       |   1 +
+> >>>>    drivers/video/vidconsole-uclass.c |  16 --
+> >>>>    drivers/video/video-uclass.c      | 190 ++++++++++++----------
+> >>>>    drivers/video/video_bmp.c         |   7 +-
+> >>>>    include/video.h                   |  59 +++----
+> >>>>    include/video_console.h           |  52 ------
+> >>>>    lib/efi_loader/efi_gop.c          |   7 +
+> >>>>    test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+> >>>>    20 files changed, 483 insertions(+), 297 deletions(-)
+> >>> It is good to see this tidied up into something that can be applied!
+> >>>
+> >>> I am unsure what is going on with the EFI performance, though. It
+> >>> should not flush the cache after every character, only after a new
+> >>> line. Is there something wrong in here? If so, we should fix that bug
+> >>> first and it should be patch 1 of this series.
+> >>
+> >> Before I came up with this series, I was trying to identify the UEFI bug
+> >> in question as well, because intuition told me surely this is a bug in
+> >> UEFI :). Turns out it really isn't this time around.
+> > I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+> > implementation. Where did you look for the bug?
+>
+>
+> The "real" bug is in grub. But given that it's reasonably simple to work
+> around in U-Boot and even with it "fixed" in grub we would still see
+> performance benefits from flushing only parts of the screen, I think
+> it's worth living with the grub deficiency.
 
-Here's the latest report
+OK thanks for digging into it. I suggest we add a param to
+vidconsole_puts() to tell it whether to sync or not, then the EFI code
+can indicate this and try to be a bit smarter about it.
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Aug 21, 2023 at 4:30=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
-
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to Das
-U-Boot found with Coverity Scan.
-
-4 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-
-
-New defect(s) Reported-by: Coverity Scan
-Showing 4 of 4 defect(s)
-
-
-** CID 464362:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
-/drivers/video/pwm_backlight.c: 68 in set_pwm()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 464362:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
-/drivers/video/pwm_backlight.c: 68 in set_pwm()
-62     {
-63      u64 width;
-64      uint duty_cycle;
-65      int ret;
-66
-67      if (priv->period_ns) {
->>>     CID 464362:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
->>>     Potentially overflowing expression "priv->period_ns * (priv->cur_le=
-vel - priv->min_level)" with type "unsigned int" (32 bits, unsigned) is eva=
-luated using 32-bit arithmetic, and then used in a context that expects an =
-expression of type "u64" (64 bits, unsigned).
-68              width =3D priv->period_ns * (priv->cur_level - priv->min_le=
-vel);
-69              duty_cycle =3D div_u64(width,
-70                                   (priv->max_level - priv->min_level));
-71              ret =3D pwm_set_config(priv->pwm, priv->channel, priv->peri=
-od_ns,
-72                                   duty_cycle);
-73      } else {
-
-** CID 464361:  Control flow issues  (DEADCODE)
-/drivers/firmware/arm-ffa/arm-ffa-uclass.c: 148 in ffa_print_error_log()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 464361:  Control flow issues  (DEADCODE)
-/drivers/firmware/arm-ffa/arm-ffa-uclass.c: 148 in ffa_print_error_log()
-142
-143             if (ffa_id < FFA_FIRST_ID || ffa_id > FFA_LAST_ID)
-144                     return -EINVAL;
-145
-146             abi_idx =3D FFA_ID_TO_ERRMAP_ID(ffa_id);
-147             if (abi_idx < 0 || abi_idx >=3D FFA_ERRMAP_COUNT)
->>>     CID 464361:  Control flow issues  (DEADCODE)
->>>     Execution cannot reach this statement: "return -22;".
-148                     return -EINVAL;
-149
-150             if (!err_msg_map[abi_idx].err_str[err_idx])
-151                     return -EINVAL;
-152
-153             log_err("%s\n", err_msg_map[abi_idx].err_str[err_idx]);
-
-** CID 464360:  Control flow issues  (NO_EFFECT)
-/drivers/firmware/arm-ffa/arm-ffa-uclass.c: 207 in ffa_get_version_hdlr()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 464360:  Control flow issues  (NO_EFFECT)
-/drivers/firmware/arm-ffa/arm-ffa-uclass.c: 207 in ffa_get_version_hdlr()
-201             major =3D GET_FFA_MAJOR_VERSION(res.a0);
-202             minor =3D GET_FFA_MINOR_VERSION(res.a0);
-203
-204             log_debug("FF-A driver %d.%d\nFF-A framework %d.%d\n",
-205                      FFA_MAJOR_VERSION, FFA_MINOR_VERSION, major, minor=
-);
-206
->>>     CID 464360:  Control flow issues  (NO_EFFECT)
->>>     This greater-than-or-equal-to-zero comparison of an unsigned value =
-is always true. "minor >=3D 0".
-207             if (major =3D=3D FFA_MAJOR_VERSION && minor >=3D FFA_MINOR_=
-VERSION) {
-208                     log_debug("FF-A versions are compatible\n");
-209
-210                     if (dev) {
-211                             uc_priv =3D dev_get_uclass_priv(dev);
-212                             if (uc_priv)
-
-** CID 464359:    (PASS_BY_VALUE)
-/drivers/firmware/arm-ffa/arm-ffa-uclass.c: 168 in invoke_ffa_fn()
-/drivers/firmware/arm-ffa/ffa-emul-uclass.c: 673 in invoke_ffa_fn()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 464359:    (PASS_BY_VALUE)
-/drivers/firmware/arm-ffa/arm-ffa-uclass.c: 168 in invoke_ffa_fn()
-162      * @args: FF-A ABI arguments to be copied to Xn registers
-163      * @res: FF-A ABI return data to be copied from Xn registers
-164      *
-165      * Calls low level SMC implementation.
-166      * This function should be implemented by the user driver.
-167      */
->>>     CID 464359:    (PASS_BY_VALUE)
->>>     Passing parameter args of type "ffa_value_t" (size 144 bytes) by va=
-lue, which exceeds the low threshold of 128 bytes.
-168     void __weak invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
-169     {
-170     }
-171
-172     /**
-173      * ffa_get_version_hdlr() - FFA_VERSION handler function
-/drivers/firmware/arm-ffa/ffa-emul-uclass.c: 673 in invoke_ffa_fn()
-667      * invoke_ffa_fn() - SMC wrapper
-668      * @args: FF-A ABI arguments to be copied to Xn registers
-669      * @res: FF-A ABI return data to be copied from Xn registers
-670      *
-671      * Calls the emulated SMC call.
-672      */
->>>     CID 464359:    (PASS_BY_VALUE)
->>>     Passing parameter args of type "ffa_value_t" (size 144 bytes) by va=
-lue, which exceeds the low threshold of 128 bytes.
-673     void invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
-674     {
-675             sandbox_arm_ffa_smccc_smc(&args, res);
-676     }
-677
-678     /**
-
---=20
-Tom
-
---1XpdCwwUDSyubd1u
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTj0oQACgkQFHw5/5Y0
-tyxwgQwAg+pCrfpUgiXFytS5u0LMxYDvgzgyHOYs23PbCNoJauEGeIe9ckpgT5k5
-3ucRIdUsoUxTUQo1fpYVBfMv/8WyO4bk7yz2ySOVrs4kTQM5IpgadbURKCqx0tX5
-Uhdml4zsPhWG/DOS5TXcFndHX+iDpfjgks3NXR3PjeNK10tNSnxmXFwsMMJEMF4c
-1cI0V+pH+sQ3plvrjQRFJAX5Cirej5hhn5KxXmZ1r3/goMPy0rG5SK8LFzdR69Dh
-ZTE/LEl4va4FSN9ulDIgvf3+2oDlg/Z8w/E+V4Ur0PRhluOP1cuvbBjbT9vHIOa5
-0hr4VlmDX1hQGnzapcoXRLt7BMyW3CV3p7VCkrT+6i7Q8FYaFTDlac9xAIzRGOhh
-2D7h4nLupZlg5Byl837XN/5RO57mkvDlmE7PGyG3oXyiVs0mGxQHnpxyWTelG7oE
-GSPWw2IVShqJy42si0V+eeHruv41/9eIs3ZoOUlhtGeqR9GLcFNIcDbKIl8EHJNB
-Gon5DwFQ
-=BXSB
------END PGP SIGNATURE-----
-
---1XpdCwwUDSyubd1u--
+Regards,
+Simon
