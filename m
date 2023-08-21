@@ -4,38 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4545EE4996
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 07:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2381BEE49A5
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 07:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0D408694A;
-	Mon, 21 Aug 2023 09:29:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2BB08701B;
+	Mon, 21 Aug 2023 09:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C65986ED6; Mon, 21 Aug 2023 09:29:30 +0200 (CEST)
+ id 7600887015; Mon, 21 Aug 2023 09:29:32 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4217B86932
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 09:29:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id CADF18695F
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 09:29:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2ADA72F4;
- Mon, 21 Aug 2023 00:30:07 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E93412F4;
+ Mon, 21 Aug 2023 00:30:09 -0700 (PDT)
 Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 67FC03F740;
- Mon, 21 Aug 2023 00:29:24 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EA81E3F740;
+ Mon, 21 Aug 2023 00:29:26 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 0/6] capsule: Embed the public key ESL as part of build
-Date: Mon, 21 Aug 2023 12:59:03 +0530
-Message-Id: <20230821072909.2387400-1-sughosh.ganu@linaro.org>
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v3 1/6] scripts/Makefile.lib: Collate all dtsi files for
+ inclusion
+Date: Mon, 21 Aug 2023 12:59:04 +0530
+Message-Id: <20230821072909.2387400-2-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230821072909.2387400-1-sughosh.ganu@linaro.org>
+References: <20230821072909.2387400-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -54,58 +58,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+At the time of building a device-tree file, all the *u-boot.dtsi files
+are looked for, in a particular order, and the first file found is
+included. Then, the list of files specified in the
+CONFIG_DEVICE_TREE_INCLUDES symbol are included.
 
-This series takes a different approach to embedding the public key EFI
-Signature List(ESL) needed for capsule authentication into the
-platform's DTB.
+Combine these files that are to be included into a variable, and then
+include all these files in one go.
 
-The earlier approach [1] was using a u-boot.dtsi file to embed the
-key. But this approach has a few issues. 1) The path of the incbin file
-is not relative to $(srctree), but relative to the directory of the
-dts file which is including the dtsi -- this causes problems when the
-dts file are located in different directories. 2) The u-boot.dtsi file
-only gets included in the DTB if there are no other *u-boot.dtsi files
-being included. 3) A separate u-boot.dtsi is needed per arch.
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Changes since V2: None
 
-To get around these issues, this approach generates a dtsi
-file(.capsule_esl.dtsi) with the public key node during build. This
-generated dtsi file contains the resolved path to the ESL and is then
-included for the DTB generation.
+ scripts/Makefile.lib | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-The first patch of the series also cleans up the logic to include the
-dtsi files, by collating all the dtsi files to be included into a
-single variable.
-
-These patches need to be applied on top of the series for generating
-the capsules as part of the build [2].
-
-[1] - https://lists.denx.de/pipermail/u-boot/2023-August/526323.html
-[2] - https://lore.kernel.org/u-boot/20230812153024.334563-1-sughosh.ganu@linaro.org/T/#m85a50079007acf8943cfe8efcc7d78d23a40db7c
-
-Changes since V2:
-* Rephrase the statements in a couple of places as suggested by Ilias.
-
-Sughosh Ganu (6):
-  scripts/Makefile.lib: Collate all dtsi files for inclusion
-  scripts/Makefile.lib: Add dtsi include files as deps for building DTB
-  scripts/Makefile.lib: Embed capsule public key in platform's dtb
-  sandbox: capsule: Add path to the public key ESL file
-  test: capsule: Remove logic to add public key ESL
-  doc: capsule: Document the new mechanism to embed ESL file into dtb
-
- configs/sandbox_defconfig                    |  1 +
- configs/sandbox_flattree_defconfig           |  1 +
- doc/develop/uefi/uefi.rst                    | 19 ++++---------
- lib/efi_loader/Kconfig                       |  8 ++++++
- lib/efi_loader/capsule_esl.dtsi.in           | 11 +++++++
- scripts/Makefile.lib                         | 30 ++++++++++++++++----
- test/py/tests/test_efi_capsule/conftest.py   | 28 +++++-------------
- test/py/tests/test_efi_capsule/signature.dts | 10 -------
- 8 files changed, 58 insertions(+), 50 deletions(-)
- create mode 100644 lib/efi_loader/capsule_esl.dtsi.in
- delete mode 100644 test/py/tests/test_efi_capsule/signature.dts
-
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index f5ab7af0f4..368b5a3e28 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -179,10 +179,13 @@ ifdef DEVICE_TREE_DEBUG
+ u_boot_dtsi_options_debug = $(warning $(u_boot_dtsi_options_raw))
+ endif
+ 
+-# We use the first match
+-u_boot_dtsi = $(strip $(u_boot_dtsi_options_debug) \
++# We use the first match to be included
++dtsi_include_list = $(strip $(u_boot_dtsi_options_debug) \
+ 	$(notdir $(firstword $(u_boot_dtsi_options))))
+ 
++# The CONFIG_DEVICE_TREE_INCLUDES also need to be included
++dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
++
+ # Modified for U-Boot
+ dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
+ 		 $(UBOOTINCLUDE)                                         \
+@@ -320,8 +323,8 @@ quiet_cmd_dtc = DTC     $@
+ # Bring in any U-Boot-specific include at the end of the file
+ # And finally any custom .dtsi fragments specified with CONFIG_DEVICE_TREE_INCLUDES
+ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+-	(cat $<; $(if $(u_boot_dtsi),echo '$(pound)include "$(u_boot_dtsi)"')) > $(pre-tmp); \
+-	$(foreach f,$(subst $(quote),,$(CONFIG_DEVICE_TREE_INCLUDES)), \
++	(cat $< > $(pre-tmp)); \
++	$(foreach f,$(subst $(quote),,$(dtsi_include_list)), \
+ 	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+ 	$(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+ 	$(DTC) -O dtb -o $@ -b 0 \
 -- 
 2.34.1
-
 
