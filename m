@@ -4,73 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D1A7EE4993
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C4D4EE4993
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:14:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93763871F2;
-	Mon, 21 Aug 2023 21:13:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8E2B871D2;
+	Mon, 21 Aug 2023 21:13:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VGAXve+k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b5u55BLT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4A0C871E9; Mon, 21 Aug 2023 21:13:40 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 47ED98717E; Mon, 21 Aug 2023 21:13:46 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94CF6871C9
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23657871D5
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d7485d37283so2100787276.1
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:34 -0700 (PDT)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d62bdd1a97dso3765817276.3
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 12:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692645213; x=1693250013;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bVUO7AaGOJGe/LxZeA64YdDb+FisPfOJq+a5FMHBqsg=;
- b=VGAXve+k0rcwXJCndguXAKS/PiRE8MYikyszSNkQXVWTfZ0y7Eiq63TcCaiQznEsAA
- 1D0AhJ7Qg1VtuugTuKPy6HQrqv6zD3qx2IKcjKk+/61JFC8a9O8LhM/C7RqJEsz0mMBr
- RXfAprSpRYHhPahZxkvZLJyqrYfYDbUhDmVhs=
+ d=chromium.org; s=google; t=1692645219; x=1693250019;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WMUW6TO7s4OLrsUBbRmCbu/zPPoacMK3PJUQrMs8n/A=;
+ b=b5u55BLTy7pouY6+gwfhqvLKEDUxrhsRmUV1KahwHSLnEExOvw7yfyqcUYvOdRQCJR
+ XvC645v0lf2wIttAFZbgAm6aeJxRaC0TLipkTzbUhBIdbT2vzb9ka9f1mWSq9fNjpcWA
+ HIcLhd3+Eq0l008Pdo/6g3TEM6sl3aabVCkhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692645213; x=1693250013;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bVUO7AaGOJGe/LxZeA64YdDb+FisPfOJq+a5FMHBqsg=;
- b=fssOMY7PfFi8NGt/bCI5wx10uXd7Haew1U3RF/70X8QEnh6wwyHzwZTEI2Kt7DQPcH
- 7sk8IVfFWyqvI26znskvhtWIET7CXApZ1nQzUQiXlEbpnKDr3u8k9pYV77MnSc+FtpFY
- HsZozHA+2PbBLhXiyDW+uue2ZUjkr4QqYg/250P7dzxtDmnt+GohmRCzg8aqyT1tc96i
- 1ZmrGbjCQfPlLf5Fa7CbavhsDACOAdTTV0eDvR4LlG4UKaNbf4YyU9LpLQVRFbEUCRge
- FIV9FSp8hYfdtEVYJTbqOUTItRDb7O6yfECGQPvEijIcviRFhmTLwfbOxI2N4ieiexEn
- DSmA==
-X-Gm-Message-State: AOJu0YzMtsOi5dNZUSGNYlAp0JsKmo3elNEw9P8aQgtUqtVCkTQHV45V
- anGEITHUt4wYXhAo2tsuPYmD9PRhfJsNOU0FF8Rj9Q==
-X-Google-Smtp-Source: AGHT+IEkApL/Gn7dgSpLYWJ+uHfjgg7oHMEeMiO3CzZSnlScGZwlepN8QtOcle3DGHa4yacUHINyEu6zozuF4NOGhfI=
-X-Received: by 2002:a05:6902:1141:b0:d14:c33c:391a with SMTP id
- p1-20020a056902114100b00d14c33c391amr10057411ybu.52.1692645213118; Mon, 21
- Aug 2023 12:13:33 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692645219; x=1693250019;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WMUW6TO7s4OLrsUBbRmCbu/zPPoacMK3PJUQrMs8n/A=;
+ b=M853loD69FmvUjVAfa+GsddtPd8eWEasEdsD4ilMGKs5D4K9nK+Gnup6uIGEFtJeHh
+ lpy0doXvXLkwiGVQE3x6GWO2ePAeivKu+pyGsmstYGvPeG/+/+DVU6vEjECV0Si3a5LK
+ IkTCyA6SrB8Umoe64v0uW34avads57KEIjbAyLmWe0ZSx91WLAJCWGQuAB7NJ99BIRGb
+ doU+hkncQmMhafk7o47WKTcUI/JwCjudHa/ETqo5JlnJ2IQjug03tTCyCXQmr8DHkfa0
+ Anw87WJZQPZYNdXFZq4gQi2Nq+oZ37XEB3kADEDBElTd5bncEq4i2nGW29nZrbxp0JYt
+ m4Kw==
+X-Gm-Message-State: AOJu0Yz2nKKPzTheSqml9IvQN7nCbrqpXGSwtKsD1Rm4dhiZvtR+xvtm
+ IPZDcJ15xptqCDQbs1dLSFp9HiQqVpHqkzafaHn9vQ==
+X-Google-Smtp-Source: AGHT+IHQ8ACty7XUYY5fYJQe5Mv4PycpHviuRMD838wb6yQ8F1vGISm07MO6Fh4CTcLow3LoDqRPk8BR//6tQoK0l5I=
+X-Received: by 2002:a25:6954:0:b0:d4c:f456:d558 with SMTP id
+ e81-20020a256954000000b00d4cf456d558mr7590941ybc.13.1692645218715; Mon, 21
+ Aug 2023 12:13:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230727215433.578830-1-sjg@chromium.org>
- <CAPnjgZ2krc9eTrCye9UC6=HM8oTrpVmv8mHEGHJRu5kqu7ts+w@mail.gmail.com>
- <CALeDE9OF_a-e=BOCfDG90uju4Ma7_mrLczAwOSo9rjvjR5sahw@mail.gmail.com>
-In-Reply-To: <CALeDE9OF_a-e=BOCfDG90uju4Ma7_mrLczAwOSo9rjvjR5sahw@mail.gmail.com>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-2-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-2-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:12:00 -0600
-Message-ID: <CAPnjgZ0yfn6wvgP04scMm03v2irHCbCHdejZJoT+p+_NQrLkug@mail.gmail.com>
-Subject: Re: [RESEND PATCH v3 0/3] rpi: Convert to standard boot
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Matthias Brugger <mbrugger@suse.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Date: Mon, 21 Aug 2023 13:11:46 -0600
+Message-ID: <CAPnjgZ29b2X0NXWMUXE=FY=3mojzqjPpDgqmJvZNdTBtg8UiYQ@mail.gmail.com>
+Subject: Re: [PATCH v5 01/13] video: test: Split copy frame buffer check into
+ a function
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, 
+ Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,56 +94,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
-
-On Sat, 19 Aug 2023 at 07:53, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> On Wed, Aug 16, 2023 at 4:08=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Matthias, Peter,
-> >
-> > On Thu, 27 Jul 2023 at 15:54, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > This series moves Raspberry Pi boards over to use standard boot.
-> > >
-> > > It also moves rpi over to use a text-based environment. Unfortunately=
- it
-> > > is not possible to empty the header file due to several CFG options.
-> > >
-> > > Fix the repeated "and and" while we are here.
-> > >
-> > > Note that this reduces rodata size by about 4.5KB. We could get anoth=
-er
-> > >
-> > > for a total image-size saving of about 15KB. This is mostly because
-> > > HUSH_PARSER is not enabled anymore and the environment shrinks down b=
-y
-> > > about 3.5K. Hush is not actually needed anymore, since standard boot =
-does
-> > > not use it. Also CMD_SYSBOOT is dropped since standard boot calls the
-> > > pxe_utils code directly in that case.
-> >
-> > It has now been about 6 months since I sent the v1 series of this.
-> > Even this v3 series is now out of date (in the cover letter).
-> >
-> > Is rpi still maintained?
+> While checking frame buffer contents, the video tests also check if the
+> copy frame buffer contents match the main frame buffer. To test if only
+> the modified regions are updated after a sync, we will need to create
+> situations where the two are mismatched. Split this check into another
+> function that we can skip calling, since we won't want it to error on
+> those mismatched cases.
 >
-> Yes, but we've had conversations about this in the past and snide
-> comments and regressions don't enamor me to your patches...
-
-I'm sorry for the snide comments.
-
+> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> ---
 >
-> That said without seeing this email I actually started tested them yester=
-day.
+> Changes in v5:
+> - Add patch "video: test: Split copy frame buffer check into a function"
 >
-> U-Boot isn't part of my $dayjob and I've had limited time of late,
-> that's slowly getting better.
+>  test/dm/video.c | 69 +++++++++++++++++++++++++++++++++++++++++--------
+>  1 file changed, 58 insertions(+), 11 deletions(-)
+>
 
-OK, good. We have seen quite a few regressions and bugs. I expect that
-to continue for at least a few more releases, as more boards pick this
-up.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
