@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60636EE49A6
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 19:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15807EE49A0
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 20:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2B7087064;
-	Mon, 21 Aug 2023 21:59:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 588BB87189;
+	Mon, 21 Aug 2023 22:07:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A84A486FAA; Mon, 21 Aug 2023 21:59:56 +0200 (CEST)
+ id BE33387169; Mon, 21 Aug 2023 22:07:01 +0200 (CEST)
 Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by phobos.denx.de (Postfix) with ESMTP id C393B87067
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:59:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id C78D08717B
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 22:06:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
 Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
- [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 9842A60807C7;
- Mon, 21 Aug 2023 21:59:51 +0200 (CEST)
-Message-ID: <e24d94b4-d519-4491-a38b-488510059a2a@csgraf.de>
-Date: Mon, 21 Aug 2023 21:59:50 +0200
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 94F4160807C7;
+ Mon, 21 Aug 2023 22:06:53 +0200 (CEST)
+Message-ID: <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
+Date: Mon, 21 Aug 2023 22:06:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 10/13] video: Only dcache flush damaged lines
+Subject: Re: [PATCH v5 11/13] video: Use VIDEO_DAMAGE for VIDEO_COPY
 Content-Language: en-GB
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
@@ -43,12 +43,12 @@ Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-11-alpernebiyasak@gmail.com>
- <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
+ <20230821135111.3558478-12-alpernebiyasak@gmail.com>
+ <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
 From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,88 +72,174 @@ On 21.08.23 21:11, Simon Glass wrote:
 > On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >> From: Alexander Graf <agraf@csgraf.de>
 >>
->> Now that we have a damage area tells us which parts of the frame buffer
->> actually need updating, let's only dcache flush those on video_sync()
->> calls. With this optimization in place, frame buffer updates - especially
->> on large screen such as 4k displays - speed up significantly.
+>> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
+>> print a single character, it will always copy the full range of bytes
+>> from the top left corner of the character to the lower right onto the
+>> uncached frame buffer. This includes pretty much the full line contents
+>> of the printed character.
 >>
+>> Since we now have proper damage tracking, let's make use of that to reduce
+>> the amount of data we need to copy. With this patch applied, we will only
+>> copy the tiny rectangle surrounding characters when we print them,
+>> speeding up the video console.
+> I suppose for rotated consoles it copies whole lines, but otherwise it
+> does a lot of small copies?
+
+
+I tried to keep the code as simple as possible and only track an "upper 
+left" and "lower right" corner of modifications. So sync will always 
+copy/flush a single rectangle.
+
+
+>
+>> After this, changes to the main frame buffer are not immediately copied
+>> to the copy frame buffer, but postponed until the next video device
+>> sync. So issue an explicit sync before inspecting the copy frame buffer
+>> contents for the video tests.
+> So how does the sync get done in this case?
+
+
+It gets called as part of video_sync():
+
++static void video_flush_copy(struct udevice *vid)
++{
++	struct video_priv *priv = dev_get_uclass_priv(vid);
++
++	if (!priv->copy_fb)
++		return;
++
++	if (priv->damage.xend && priv->damage.yend) {
++		int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
++		int lend = priv->damage.xend * VNBYTES(priv->bpix);
++		int y;
++
++		for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
++			ulong offset = (y * priv->line_length) + lstart;
++			ulong len = lend - lstart;
++
++			memcpy(priv->copy_fb + offset, priv->fb + offset, len);
++		}
++	}
++}
+
+
+>
 >> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->> Reported-by: Da Xue <da@libre.computer>
->> [Alper: Use damage.xstart/yend, IS_ENABLED()]
+>> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
+>>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
+>>          call video_sync() before copy_fb check, update video_copy test]
 >> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 >> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 >> ---
 >>
 >> Changes in v5:
+>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>> - Fix memmove() calls by removing the extra dev argument
+>> - Call video_sync() before checking copy_fb in video tests
+>> - Use xstart, ystart, xend, yend as names for damage region
+>> - Use met->baseline instead of priv->baseline
+>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
 >> - Use xstart, ystart, xend, yend as names for damage region
 >> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
+>> - Update dm_test_video_copy test added in a new patch
+>>
+>> Changes in v3:
+>> - Make VIDEO_COPY always select VIDEO_DAMAGE
 >>
 >> Changes in v2:
->> - Fix dcache range; we were flushing too much before
->> - Remove ifdefs
+>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
 >>
->>   drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
->>   1 file changed, 36 insertions(+), 5 deletions(-)
-> This is a little strange, since flushing the whole cache will only
-> actually write out data that was actually written (to the display). Is
-> there a benefit to this patch, in terms of performance?
+>>   configs/sandbox_defconfig         |  1 -
+>>   drivers/video/Kconfig             |  5 ++
+>>   drivers/video/console_normal.c    | 13 +----
+>>   drivers/video/console_rotate.c    | 44 +++-----------
+>>   drivers/video/console_truetype.c  | 16 +----
+>>   drivers/video/vidconsole-uclass.c | 16 -----
+>>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
+>>   drivers/video/video_bmp.c         |  7 ---
+>>   include/video.h                   | 37 ------------
+>>   include/video_console.h           | 52 -----------------
+>>   test/dm/video.c                   |  3 +-
+>>   11 files changed, 43 insertions(+), 248 deletions(-)
+>>
+>> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+>> index 51b820f13121..259f31f26cee 100644
+>> --- a/configs/sandbox_defconfig
+>> +++ b/configs/sandbox_defconfig
+>> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
+>>   CONFIG_VIDEO=y
+>>   CONFIG_VIDEO_FONT_SUN12X22=y
+>>   CONFIG_VIDEO_COPY=y
+>> -CONFIG_VIDEO_DAMAGE=y
+>>   CONFIG_CONSOLE_ROTATION=y
+>>   CONFIG_CONSOLE_TRUETYPE=y
+>>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
+>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+>> index 97f494a1340b..b3fbd9d7d9ca 100644
+>> --- a/drivers/video/Kconfig
+>> +++ b/drivers/video/Kconfig
+>> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
+>>
+>>   config VIDEO_COPY
+>>          bool "Enable copying the frame buffer to a hardware copy"
+>> +       select VIDEO_DAMAGE
+>>          help
+>>            On some machines (e.g. x86), reading from the frame buffer is very
+>>            slow because it is uncached. To improve performance, this feature
+>>            allows the frame buffer to be kept in cached memory (allocated by
+>>            U-Boot) and then copied to the hardware frame-buffer as needed.
+>> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
+>> +         and will only copy actually touched regions.
+>>
+>>            To use this, your video driver must set @copy_base in
+>>            struct video_uc_plat.
+>> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
+>>            regions of the frame buffer that were modified before, speeding up
+>>            screen refreshes significantly.
+>>
+>> +         It is also used by VIDEO_COPY to identify which regions changed.
+>> +
+>>   config BACKLIGHT_PWM
+>>          bool "Generic PWM based Backlight Driver"
+>>          depends on BACKLIGHT && DM_PWM
+>> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
+>> index a19ce6a2bc11..c44aa09473a3 100644
+>> --- a/drivers/video/console_normal.c
+>> +++ b/drivers/video/console_normal.c
+>> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
+>>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
+>>          end = dst;
+>>
+>> -       ret = vidconsole_sync_copy(dev, line, end);
+>> -       if (ret)
+>> -               return ret;
+>> -
+>>          video_damage(dev->parent,
+>>                       0,
+>>                       fontdata->height * row,
+>> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
+>>          void *dst;
+>>          void *src;
+>>          int size;
+>> -       int ret;
+>>
+>>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
+>>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
+>>          size = fontdata->height * vid_priv->line_length * count;
+>> -       ret = vidconsole_memmove(dev, dst, src, size);
+>> -       if (ret)
+>> -               return ret;
+>> +       memmove(dst, src, size);
+> Why are you making that change?
 
 
-I'm happy to see you go through the same thought process I went through 
-when writing these: "This surely can't be the problem, can it?". The 
-answer is "simple" in hindsight:
-
-Have a look at the ARMv8 cache flush function. It does the only "safe" 
-thing you can expect it to do: Clean+Invalidate to POC because we use it 
-for multiple things, clearing modified code among others:
-
-ENTRY(__asm_flush_dcache_range)
-         mrs     x3, ctr_el0
-         ubfx    x3, x3, #16, #4
-         mov     x2, #4
-         lsl     x2, x2, x3              /* cache line size */
-
-         /* x2 <- minimal cache line size in cache system */
-         sub     x3, x2, #1
-         bic     x0, x0, x3
-1:      dc      civac, x0       /* clean & invalidate data or unified 
-cache */
-         add     x0, x0, x2
-         cmp     x0, x1
-         b.lo    1b
-         dsb     sy
-         ret
-ENDPROC(__asm_flush_dcache_range)
-
-
-Looking at the "dc civac" call, we find this documentation page from 
-ARM: 
-https://developer.arm.com/documentation/ddi0601/2022-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC
-
-This says we're writing any dirtyness of this cache line up to the POC 
-and then invalidate (remove the cache line) also up to POC. That means 
-when you look at a typical SBC, this will either be L2 or system level 
-cache. Every read afterwards needs to go and pull it all the way back to 
-L1 to modify it (or not) on the next character write and then flush it 
-again.
-
-Even worse: Because of the invalidate, we may even evict it from caches 
-that the display controller uses to read the frame buffer. So depending 
-on the SoC's cache topology and implementation, we may force the display 
-controller to refetch the full FB content on its next screen refresh cycle.
-
-I faintly remember that I tried to experiment with CVAC instead to only 
-flush without invalidating. I don't fully remember the results anymore 
-though. I believe CVAC just behaved identical to CIVAC on the A53 
-platform I was working on. And then I looked at Cortex-A53 errata like 
-[1] and just accepted that doing anything but restricting the flushing 
-range is a waste of time :)
+There is no point in keeping a special vidconsole_memmove() around 
+anymore, since we don't actually need to call vidconsole_sync_copy() 
+after the move. The damage call that we introduced to all call sites in 
+combination with a video_sync() call takes over the job of the sync copy.
 
 
 Alex
-
-
-[1] 
-https://patchwork.kernel.org/project/xen-devel/patch/1462466065-30212-14-git-send-email-julien.grall@arm.com/
 
 
