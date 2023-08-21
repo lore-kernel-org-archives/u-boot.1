@@ -4,83 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E309EEE49A8
-	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 08:28:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDFADEE4996
+	for <u-boot@archiver.kernel.org>; Mon, 21 Aug 2023 08:40:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE6328700F;
-	Mon, 21 Aug 2023 10:28:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E9F087015;
+	Mon, 21 Aug 2023 10:40:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="uU4YtCOD";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="isHOYRnA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C4E68700F; Mon, 21 Aug 2023 10:28:42 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9464287015; Mon, 21 Aug 2023 10:40:04 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [217.70.183.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56B7B86C35
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 10:28:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D28AE86FAA
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 10:40:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jpanis@baylibre.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-991c786369cso403699466b.1
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 01:28:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692606516; x=1693211316; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ugf9iwbVsZ+0LJnlG0/aioqKJ2i/89gBX+SImrML7iA=;
- b=uU4YtCODOPH35iaNLq60l7mMitUcTs2n8foCIKD8wixJEOi8Oo8Gpg8ouVqMfgRwJ4
- 9bA8dwHPDyG7Z0yua8xL01Bo0EsvBy45EQROZ7p70PQ2p+wmQVvnCpKqFMNbeTZHBk5u
- b9i2YdRVSswur9Csy45xsIWwJSeGbQPHGen7fg3ZrqBcLtUsDMpkVEeWNDr1UweHKwpI
- EjT9ES8agco4YE6VSlWlCaRpCczByiF/9WQ8FoSUapRIyyI02QNhcauLR+yveTAxiZo+
- H5pjhxq6zrwK44Va06WtsA35pECTniT8dFTX9PGDzkDYdKkqhuaSU7ZMq37J7IEQs15Y
- XxAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692606516; x=1693211316;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ugf9iwbVsZ+0LJnlG0/aioqKJ2i/89gBX+SImrML7iA=;
- b=dSht9nOq3MCPLK23ZtspEOuXjmEHyG9G7d5AZzuF0YqopFmK16B+22KbSIml9tTrTX
- EJIYo8a/IAEsSK0025uAo4389lfgY7dYLDwNAZv6nVYhcwg3CGs4jxbPgVGs/KwE9NGo
- s+oCg58GbI1UHH9U3EouYdnMK3GgWvFwlXzjTr598dl82LbjX3RcnHkyzHW8TX4F8FnQ
- +wIDJOIPu7FLgbUA7feoQzp4SS2RWcKUZmu1MBVDckMn87rWgga2AdHPMRS6ANJUbe3L
- 6tD70cm+Uotmp81jTyz7YOcvJHkOb12NoHES57nDaRgB5GD3kbxf2XYDmI3tP5icNfsy
- J/Tg==
-X-Gm-Message-State: AOJu0YxdsjedxG3kZXG/p1DtfLvivcxtdE+IJYbz08XVDRK/gDQ6oJdQ
- viKI+JNGqaGierKjlaGJxLOkXg==
-X-Google-Smtp-Source: AGHT+IELFd/sgNuy9Vg7aYOUe527GrI8Zmt/apiWIGqNv27vZLWUFRQg3DifJi7pKu3dDZd+r0jH9Q==
-X-Received: by 2002:a17:906:8477:b0:993:dcca:9607 with SMTP id
- hx23-20020a170906847700b00993dcca9607mr4714504ejc.2.1692606515678; 
- Mon, 21 Aug 2023 01:28:35 -0700 (PDT)
-Received: from [192.168.1.70] ([86.71.62.228])
- by smtp.gmail.com with ESMTPSA id
- e22-20020a170906249600b0099cc1ffd8f5sm6095752ejb.53.2023.08.21.01.28.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Aug 2023 01:28:34 -0700 (PDT)
-Message-ID: <500449e0-0d65-44b4-aa0b-3596292f79e3@baylibre.com>
-Date: Mon, 21 Aug 2023 10:28:33 +0200
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 01A2BE0011;
+ Mon, 21 Aug 2023 08:39:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1692607201;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4yFKq+Vv7xR2IutP1CjWq+ZQWpr9L6l97o+Ycmw50Qo=;
+ b=isHOYRnA3lOg2lkbwUr+DfHa0qjbFCrGC2g72URU4eznBmR6ZyYQLxGrK+QVg6J9Sb3mVZ
+ OQzHw+2XkDZAhWjNtGdTobMeuABYnlXWslsLpGxi8TWMQ6u1iz5k/DaAbIjIyUgly2PRJX
+ hHyFsuNSb6TY8BRtXMegKwPselk3NHsPV9AHBjrwWQUlAoBJYAZMM5pZBUKGmxQm2Q2Rx4
+ 2HhcRWo+cZRFtrpShm5ey264QZs2Jh8atOyxo8OqV55fvDcrTksjvZRAwkSYQV16Hmc83e
+ 4yO5ERG1tzNDhe3j3+o2lOnJZW0ecJIs8T55GCoKojzSWaKzBPQSQVypUQOTOA==
+Date: Mon, 21 Aug 2023 10:39:57 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev
+ <dimorinny@google.com>, Eddie Cai <eddie.cai.linux@gmail.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Nishanth Menon <nm@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>, kernel@puri.sm
+Subject: Re: [PATCH 01/17] dm: usb: udc: Factor out plain udevice handler
+ functions
+Message-ID: <20230821103957.40bc8ad1@xps-13>
+In-Reply-To: <20230819142407.49632-1-marex@denx.de>
+References: <20230819142407.49632-1-marex@denx.de>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/2] musb-new: ti-musb: Handle usb dual-role feature as
- peripheral
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, tony@atomide.com,
- rogerq@kernel.org, vigneshr@ti.com, nm@ti.com
-References: <20230621-fix_usb_ether_init-v4-0-5f4977bb7678@baylibre.com>
- <20230621-fix_usb_ether_init-v4-1-5f4977bb7678@baylibre.com>
- <20230814171801.GC3630934@bill-the-cat>
-From: Julien Panis <jpanis@baylibre.com>
-In-Reply-To: <20230814171801.GC3630934@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,32 +77,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/14/23 19:18, Tom Rini wrote:
-> On Thu, Jul 06, 2023 at 12:40:22PM +0200, Julien Panis wrote:
->
->> This prevents from getting some 'No USB device found' error,
->> in usb_ether_init() function for instance.
->>
->> Signed-off-by: Julien Panis <jpanis@baylibre.com>
->> Reviewed-by: Tony Lindgren <tony@atomide.com>
->> Reviewed-by: Nishanth Menon <nm@ti.com>
->> ---
->>   drivers/usb/musb-new/ti-musb.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-musb.c
->> index 3be3f93dd85d..44697dc31387 100644
->> --- a/drivers/usb/musb-new/ti-musb.c
->> +++ b/drivers/usb/musb-new/ti-musb.c
->> @@ -302,6 +302,7 @@ static int ti_musb_wrapper_bind(struct udevice *parent)
->>   		dr_mode = usb_get_dr_mode(node);
->>   		switch (dr_mode) {
->>   		case USB_DR_MODE_PERIPHERAL:
->> +		case USB_DR_MODE_OTG:
->>   			/* Bind MUSB device */
->>   			ret = device_bind_driver_to_node(parent,
->>   							 "ti-musb-peripheral",
-> Julien, why don't we support OTG mode here instead?
->
+Hi Marek,
 
-Roger, can this be achieved with this controller ?
+marex@denx.de wrote on Sat, 19 Aug 2023 16:23:51 +0200:
+
+> Pull the functionality of UDC uclass that operates on plain udevice
+> and does not use this dev_array array into separate functions and
+> expose those functions, so that as much code as possible can be
+> switched over to these functions and the dev_array can be dropped.
+>=20
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Angus Ainslie <angus@akkea.ca>
+> Cc: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: kernel@puri.sm
+> ---
+
+Would you mind adding a cover letter to your series? It would be easier
+for us to (a) know what is the final purpose of the series and (b) have
+a location where to send global feedback.
+
+Indeed, I did not yet investigate, in particular because every time
+fastboot is broken I cannot easily test new images without going
+through a whole recovery step with another image, but it seems like the
+network over USB is no longer working (not 100% sure about that one,
+sometimes the network is capricious) and anyway just calling unbind
+crashes:
+
+=3D> dm tree
+[...]
+ misc          0  [ + ]   ti-musb-wrapper       |   |-- usb@47400000
+ usb           0  [ + ]   ti-musb-peripheral    |   |   |-- usb@47401000
+ ethernet      1  [ + ]   usb_ether             |   |   |   `-- usb_ether
+ bootdev       3  [   ]   eth_bootdev           |   |   |       `-- usb_eth=
+er.bootdev
+ usb           0  [   ]   ti-musb-host          |   |   `-- usb@47401800
+=3D> unbind ethernet 1
+data abort
+pc : [<9ff9a0e6>]          lr : [<9ff9a0e7>]
+reloc pc : [<808350e6>]    lr : [<808350e7>]
+sp : 9df2f998  ip : 0000001c     fp : 00000003
+r10: 9df4d800  r9 : 9df44ea0     r8 : 9ffe4a0c
+r7 : 9ff82ad9  r6 : 9df4d800     r5 : 84000000  r4 : 9df4cf48
+r3 : 9ff9a0e1  r2 : 00000000     r1 : 00000000  r0 : 00000000
+Flags: NzCv  IRQs off  FIQs on  Mode SVC_32 (T)
+Code: 9ffd b508 f7ec fe63 (f8d0) 00b0=20
+Resetting CPU ...
+
+Thanks,
+Miqu=C3=A8l
