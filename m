@@ -4,84 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD732EE4993
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 07:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01691EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 07:47:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D0A98422F;
-	Tue, 22 Aug 2023 09:40:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4235286407;
+	Tue, 22 Aug 2023 09:47:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NinTw86L";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A21E285991; Tue, 22 Aug 2023 09:40:50 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E4CF805CB
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:40:47 +0200 (CEST)
+ id A4CFE85DD2; Tue, 22 Aug 2023 09:47:12 +0200 (CEST)
+Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
+ by phobos.denx.de (Postfix) with ESMTP id 8A2A986407
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:47:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-99c47ef365cso564060866b.0
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:40:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692690047; x=1693294847;
- h=user-agent:in-reply-to:content-disposition:mime-version:references
- :message-id:subject:cc:to:from:date:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2u8AuwZfEvl8gSV2vH8t7UtlCGt64dWJqFk8PY/6NxU=;
- b=NinTw86LIWnwlE1ENF0DzudpSJd6+wf/vmKe9bVBIlofR1TMbkDOEcE7lO0UVZRU2W
- Z3hDYm4+sXVqlU7VkbIQ/g6BkrtMsciW+r4INdJCr7v93IO6ZSk27Je7R6Y8E6DmkAks
- xQiNeyiqEzXtfp0Xlyf3RK/V48ULtAFRtQaPOaO6bjTkC8TbPZOhB6OTOsiJZgG006Yp
- gT86zmqaIBKrXSa5cPZW6xuz1gksJILeDJcwOjZX9rSAsQSoFF7TKbSC2+VJEfJspLLY
- c11ltXeFFkqDV3e648/m4DuU9fnqok3ZMQ6JB1kvOd/oLVI1ZQMg8VflOFExPuQRKSJq
- QylQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692690047; x=1693294847;
- h=user-agent:in-reply-to:content-disposition:mime-version:references
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2u8AuwZfEvl8gSV2vH8t7UtlCGt64dWJqFk8PY/6NxU=;
- b=juvqJ5WQwINO6c4Su8WiTI7PjwaJb0u+juUSX15rIcNPu4fp4NCTDisy2S62XW2qh8
- 2+xIPK8nyf+t7KQn+8398Sxuvm/3YAfeDdB33ueqk5pu35eeqN15/ixdPwYiuO1unSIo
- L1zLFFtPoDoRGEz2VkwzCiKYdQO47LTwT8AroJK4n6hRLPzmoF6E1Z4HG/2T5krXnk/j
- mxXr2A+CnFQY0HmojzfDAqtvTgLu+MsqwRkEKZx4UkcxELhRtm1kdArWuF1ES0VBx6dX
- KAQj+GBaXBccAZFEv/YVabl7SMqHy20akO0TZO1fCSFkMuWEaNOtrevD+lXMjVYaM5cm
- LqcA==
-X-Gm-Message-State: AOJu0Yzgk3klI1j/Tqir0jdcr+Vj7cgdiTlIZshckDkQrMdcwxkKuYHY
- +YhkZaKUWnf88rXtVyq/RQg=
-X-Google-Smtp-Source: AGHT+IHqjxdllXQnD3DJ6oaX6h15C3QzquCwfmqSxnAfX6DrvquUUsnRFZq3mH4G5SXPuLpkQLdrJQ==
-X-Received: by 2002:a17:906:3089:b0:9a1:c216:c89c with SMTP id
- 9-20020a170906308900b009a1c216c89cmr251495ejv.66.1692690046783; 
- Tue, 22 Aug 2023 00:40:46 -0700 (PDT)
-Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
- [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
- by smtp.gmail.com with ESMTPSA id
- bx8-20020a170906a1c800b0098e0a937a6asm7718385ejb.69.2023.08.22.00.40.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 00:40:46 -0700 (PDT)
-Date: Tue, 22 Aug 2023 09:40:44 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [GIT PULL] ARM: tegra: Changes for v2023.10-rc1
-Message-ID: <ZORmfDblupZkjoh-@orome>
-References: <20230818133923.286332-1-thierry.reding@gmail.com>
- <20230818164943.GZ1515023@bill-the-cat>
- <0C415156-B22C-4B86-94C6-1D03ED4287ED@gmail.com>
- <20230818170447.GA1515023@bill-the-cat>
- <5DFCCFFB-D137-4530-8AF9-C72071842A60@gmail.com>
+ dmarc=none (p=none dis=none) header.from=csgraf.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
+Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 2D6FB6080287;
+ Tue, 22 Aug 2023 09:47:07 +0200 (CEST)
+Message-ID: <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+Date: Tue, 22 Aug 2023 09:47:06 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="k5xEj+3NEZzCDXuo"
-Content-Disposition: inline
-In-Reply-To: <5DFCCFFB-D137-4530-8AF9-C72071842A60@gmail.com>
-User-Agent: Mutt/2.2.10 (2023-03-25)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+To: Simon Glass <sjg@chromium.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
+ <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+ <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+ <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
+ <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+Content-Language: en-GB
+From: Alexander Graf <agraf@csgraf.de>
+In-Reply-To: <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,156 +72,240 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---k5xEj+3NEZzCDXuo
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 22.08.23 01:03, Simon Glass wrote:
+> Hi Alex,
+>
+> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrote:
+>>
+>> On 22.08.23 00:10, Simon Glass wrote:
+>>> Hi Alex,
+>>>
+>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
+>>>> On 21.08.23 21:57, Simon Glass wrote:
+>>>>> Hi Alex,
+>>>>>
+>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>> On 21.08.23 21:11, Simon Glass wrote:
+>>>>>>> Hi Alper,
+>>>>>>>
+>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>>>>>> This is a rebase of Alexander Graf's video damage tracking series, with
+>>>>>>>> some tests and other changes. The original cover letter is as follows:
+>>>>>>>>
+>>>>>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+>>>>>>>>>
+>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+>>>>>>>>> but need it accessible by the display controller which reads directly
+>>>>>>>>> from a later point of consistency. Hence, we flush the frame buffer to
+>>>>>>>>> DRAM on every change. The full frame buffer.
+>>>>>>> It should not, see below.
+>>>>>>>
+>>>>>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+>>>>>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+>>>>>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+>>>>>>>>> printed space triggers a cache flush.
+>>>>>>> That is a bug somewhere in EFI.
+>>>>>> Unfortunately not :). You may call it a bug in grub: It literally prints
+>>>>>> over space characters for every character in its menu that it wants
+>>>>>> cleared. On every text screen draw.
+>>>>>>
+>>>>>> This wouldn't be a big issue if we only flush the reactangle that gets
+>>>>>> modified. But without this patch set, we're flushing the full DRAM
+>>>>>> buffer on every u-boot text console character write, which means for
+>>>>>> every character (as that's the only API UEFI has).
+>>>>>>
+>>>>>> As a nice side effect, we speed up the normal U-Boot text console as
+>>>>>> well with this patch set, because even "normal" text prints that write
+>>>>>> for example a single line of text on the screen today flush the full
+>>>>>> frame buffer to DRAM.
+>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+>>>>> after every character. It doesn't do that for normal character output
+>>>>> and I don't think it makes sense to do it for EFI either.
+>>>> I see. Let's trace the calls:
+>>>>
+>>>> efi_cout_output_string()
+>>>> -> fputs()
+>>>> -> vidconsole_puts()
+>>>> -> video_sync()
+>>>> -> flush_dcache_range()
+>>>>
+>>>> Unfortunately grub abstracts character backends down to the "print
+>>>> character" level, so it calls UEFI's sopisticated "output_string"
+>>>> callback with single characters at a time, which means we do a full
+>>>> dcache flush for every character that we print:
+>>>>
+>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
+>>>>
+>>>>
+>>>>>>>>> This patch set implements the easiest mitigation against this problem:
+>>>>>>>>> Damage tracking. We remember the lowest common denominator region that was
+>>>>>>>>> touched since the last video_sync() call and only flush that. The most
+>>>>>>>>> typical writer to the frame buffer is the video console, which always
+>>>>>>>>> writes rectangles of characters on the screen and syncs afterwards.
+>>>>>>>>>
+>>>>>>>>> With this patch set applied, we reduce drawing a large grub menu (with
+>>>>>>>>> serial console attached for size information) on an RK3399-ROC system
+>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
+>>>>>>>>>
+>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+>>>>>>>>> overhead compared to before as well. So even x86 systems should be faster
+>>>>>>>>> with this now :).
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> Alternatives considered:
+>>>>>>>>>
+>>>>>>>>>       1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+>>>>>>>>>          so often. We are missing timers to do this generically.
+>>>>>>>>>
+>>>>>>>>>       2) Double buffering - We could try to identify whether anything changed
+>>>>>>>>>          at all and only draw to the FB if it did. That would require
+>>>>>>>>>          maintaining a second buffer that we need to scan.
+>>>>>>>>>
+>>>>>>>>>       3) Text buffer - Maintain a buffer of all text printed on the screen with
+>>>>>>>>>          respective location. Don't write if the old and new character are
+>>>>>>>>>          identical. This would limit applicability to text only and is an
+>>>>>>>>>          optimization on top of this patch set.
+>>>>>>>>>
+>>>>>>>>>       4) Hash screen lines - Create a hash (sha256?) over every line when it
+>>>>>>>>>          changes. Only flush when it does. I'm not sure if this would waste
+>>>>>>>>>          more time, memory and cache than the current approach. It would make
+>>>>>>>>>          full screen updates much more expensive.
+>>>>>>> 5) Fix the bug mentioned above?
+>>>>>>>
+>>>>>>>> Changes in v5:
+>>>>>>>> - Add patch "video: test: Split copy frame buffer check into a function"
+>>>>>>>> - Add patch "video: test: Support checking copy frame buffer contents"
+>>>>>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>>>>>> - Document damage struct and fields in struct video_priv comment
+>>>>>>>> - Return void from video_damage()
+>>>>>>>> - Fix undeclared priv error in video_sync()
+>>>>>>>> - Drop unused headers from video-uclass.c
+>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>>>>>> - Call video_damage() also in video_fill_part()
+>>>>>>>> - Use met->baseline instead of priv->baseline
+>>>>>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+>>>>>>>> - Update console_rotate.c video_damage() calls to pass video tests
+>>>>>>>> - Remove mention about not having minimal damage for console_rotate.c
+>>>>>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
+>>>>>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>>>>>>>> - Fix memmove() calls by removing the extra dev argument
+>>>>>>>> - Call video_sync() before checking copy_fb in video tests
+>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>>>>>>>>
+>>>>>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>>>>>>>>
+>>>>>>>> Changes in v4:
+>>>>>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+>>>>>>>> - Simplify first damage logic
+>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
+>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
+>>>>>>>> - Add patch "video: Always compile cache flushing code"
+>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+>>>>>>>>
+>>>>>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>>>>>>>>
+>>>>>>>> Changes in v3:
+>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>>>>>>>
+>>>>>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>>>>>>>>
+>>>>>>>> Changes in v2:
+>>>>>>>> - Remove ifdefs
+>>>>>>>> - Fix ranges in truetype target
+>>>>>>>> - Limit rotate to necessary damage
+>>>>>>>> - Remove ifdefs from gop
+>>>>>>>> - Fix dcache range; we were flushing too much before
+>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>>>>>>>
+>>>>>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>>>>>>>>
+>>>>>>>> Alexander Graf (9):
+>>>>>>>>       dm: video: Add damage tracking API
+>>>>>>>>       dm: video: Add damage notification on display fills
+>>>>>>>>       vidconsole: Add damage notifications to all vidconsole drivers
+>>>>>>>>       video: Add damage notification on bmp display
+>>>>>>>>       efi_loader: GOP: Add damage notification on BLT
+>>>>>>>>       video: Only dcache flush damaged lines
+>>>>>>>>       video: Use VIDEO_DAMAGE for VIDEO_COPY
+>>>>>>>>       video: Always compile cache flushing code
+>>>>>>>>       video: Enable VIDEO_DAMAGE for drivers that need it
+>>>>>>>>
+>>>>>>>> Alper Nebi Yasak (4):
+>>>>>>>>       video: test: Split copy frame buffer check into a function
+>>>>>>>>       video: test: Support checking copy frame buffer contents
+>>>>>>>>       video: test: Test partial updates of hardware frame buffer
+>>>>>>>>       video: test: Test video damage tracking via vidconsole
+>>>>>>>>
+>>>>>>>>      arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>>>>>>>>      arch/arm/mach-sunxi/Kconfig       |   1 +
+>>>>>>>>      drivers/video/Kconfig             |  26 +++
+>>>>>>>>      drivers/video/console_normal.c    |  27 ++--
+>>>>>>>>      drivers/video/console_rotate.c    |  94 +++++++----
+>>>>>>>>      drivers/video/console_truetype.c  |  37 +++--
+>>>>>>>>      drivers/video/exynos/Kconfig      |   1 +
+>>>>>>>>      drivers/video/imx/Kconfig         |   1 +
+>>>>>>>>      drivers/video/meson/Kconfig       |   1 +
+>>>>>>>>      drivers/video/rockchip/Kconfig    |   1 +
+>>>>>>>>      drivers/video/stm32/Kconfig       |   1 +
+>>>>>>>>      drivers/video/tegra20/Kconfig     |   1 +
+>>>>>>>>      drivers/video/tidss/Kconfig       |   1 +
+>>>>>>>>      drivers/video/vidconsole-uclass.c |  16 --
+>>>>>>>>      drivers/video/video-uclass.c      | 190 ++++++++++++----------
+>>>>>>>>      drivers/video/video_bmp.c         |   7 +-
+>>>>>>>>      include/video.h                   |  59 +++----
+>>>>>>>>      include/video_console.h           |  52 ------
+>>>>>>>>      lib/efi_loader/efi_gop.c          |   7 +
+>>>>>>>>      test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+>>>>>>>>      20 files changed, 483 insertions(+), 297 deletions(-)
+>>>>>>> It is good to see this tidied up into something that can be applied!
+>>>>>>>
+>>>>>>> I am unsure what is going on with the EFI performance, though. It
+>>>>>>> should not flush the cache after every character, only after a new
+>>>>>>> line. Is there something wrong in here? If so, we should fix that bug
+>>>>>>> first and it should be patch 1 of this series.
+>>>>>> Before I came up with this series, I was trying to identify the UEFI bug
+>>>>>> in question as well, because intuition told me surely this is a bug in
+>>>>>> UEFI :). Turns out it really isn't this time around.
+>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+>>>>> implementation. Where did you look for the bug?
+>>>> The "real" bug is in grub. But given that it's reasonably simple to work
+>>>> around in U-Boot and even with it "fixed" in grub we would still see
+>>>> performance benefits from flushing only parts of the screen, I think
+>>>> it's worth living with the grub deficiency.
+>>> OK thanks for digging into it. I suggest we add a param to
+>>> vidconsole_puts() to tell it whether to sync or not, then the EFI code
+>>> can indicate this and try to be a bit smarter about it.
+>>
+>> It doesn't know when to sync either. From its point of view, any
+>> "console output" could be the last one. There is no API in UEFI that
+>> says "please flush console output now".
+> Yes, I understand. I was not suggesting we were missing an API. But
+> some sort of heuristic would do, e.g. only flush on a newline, flush
+> every 50 chars, etc.
 
-On Tue, Aug 22, 2023 at 08:16:29AM +0300, Svyatoslav Ryhel wrote:
->=20
->=20
-> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 20:04:47 GMT+03:00, =
-Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
-=D0=BB=D0=B0):
-> >On Fri, Aug 18, 2023 at 08:02:30PM +0300, Svyatoslav Ryhel wrote:
-> >>=20
-> >>=20
-> >> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 19:49:43 GMT+03:0=
-0, Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2=
-(-=D0=BB=D0=B0):
-> >> >On Fri, Aug 18, 2023 at 03:39:22PM +0200, Thierry Reding wrote:
-> >> >
-> >> >> From: Thierry Reding <treding@nvidia.com>
-> >> >>=20
-> >> >> Hi Tom,
-> >> >>=20
-> >> >> The following changes since commit 68c07fc5fdf34f0926cf06fc0c4ebd6f=
-2f3afe19:
-> >> >>=20
-> >> >>   Merge https://source.denx.de/u-boot/custodians/u-boot-usb (2023-0=
-6-21 14:42:50 -0400)
-> >> >>=20
-> >> >> are available in the Git repository at:
-> >> >>=20
-> >> >>   git@source.denx.de:u-boot/custodians/u-boot-tegra.git tags/tegra-=
-for-2023.10-rc1
-> >> >
-> >> >FYI, in your .git/config you can do:
-> >> >	url =3D https://source.denx.de/u-boot/custodians/u-boot-tegra.git
-> >> >	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-tegra.git
-> >> >
-> >> >And this part looks "nicer".  Not a big deal, just an FYI.
-> >> >
-> >> >> for you to fetch changes up to bdf9dead86f06c7d6980c399a4a6339430b5=
-31ec:
-> >> >>=20
-> >> >>   board: htc: endeavoru: add One X support (2023-06-30 15:20:37 +02=
-00)
-> >> >>=20
-> >> >> This passes CI successfully:
-> >> >>=20
-> >> >>   https://source.denx.de/u-boot/custodians/u-boot-tegra/-/pipelines=
-/17411
-> >> >>=20
-> >> >> Thanks,
-> >> >> Thierry
-> >> >>=20
-> >> >> ----------------------------------------------------------------
-> >> >> ARM: tegra: Changes for v2023.10-rc1
-> >> >>=20
-> >> >> This adds support for various new Tegra30 boards (ASUS, LG and HTC)=
- and
-> >> >> has some other minor enhancements, such as enabling the poweroff co=
-mmand
-> >> >> on several Tegra210 and Tegra186 boards.
-> >> >>=20
-> >> >> ----------------------------------------------------------------
-> >> >> Jonas Schw=C3=B6bel (1):
-> >> >>       configs: tegra-common-post: make PXE and DHCP boot targets op=
-tional
-> >> >>=20
-> >> >> Svyatoslav Ryhel (6):
-> >> >>       configs: tegra-common-post: add GPIO keyboard as STDIN device
-> >> >>       ARM: tegra: add SoC UID calculation function
-> >> >>       board: asus: transformer: add ASUS Transformer T30 family sup=
-port
-> >> >>       board: asus: grouper: add Google Nexus 7 (2012) support
-> >> >>       board: lg: x3: add Optimus 4X HD and Optimus Vu support
-> >> >>       board: htc: endeavoru: add One X support
-> >> >>=20
-> >> >> Thierry Reding (2):
-> >> >>       ARM: tegra: Enable poweroff command on Jetson TX1 and Jetson =
-Nano
-> >> >>       ARM: tegra: Enable poweroff command on Jetson TX2
-> >> >>=20
-> >> >> Tomasz Maciej Nowak (1):
-> >> >>       ARM: dts: trimslice: sync SPI node with Linux dts
-> >> >
-> >> >Since I'm not sure if this is v8 or v9, given when v9 was posted, I've
-> >> >applied this PR now, as I had said I wanted this in.  I do have two
-> >> >requests for you Svyatoslav, however.  First, if there's changes that
-> >> >are missing in master, please post those ASAP and we'll get them in, =
-for
-> >> >v2023.10.=20
-> >>=20
-> >> Patches Thierry applied are v8, while v9 has significant improvements.
-> >
-> >OK, I've updated patchwork to try and reflect this too.
-> >
->=20
-> Merged patches are not the most recent I have sent. How to fix this?
+I can't think of any heuristic that would reliably work. Relevant for 
+this conversation, UEFI provides 2 calls:
 
-Usually once something has been merged it's difficult to back it out. So
-unless Tom can (and is willing to) somehow redo the merge with the
-newest patches, you're going to have to rebase what you have and send
-out as follow-up patches.
+   * Write string to screen (efi_cout_output_string)
+   * Set text cursor position to X, Y (efi_cout_set_cursor_position)
 
-That's one of the reasons why you shouldn't keep sending new versions of
-patches once things have settled down and there haven't been any more
-review comments on the list. The assumption is that when you send
-patches out you think they are all done. They may still need to be
-updated based on review comments and that's fine because there's
-communication on the mailing list to indicate so. Once discussions have
-stopped it is assumed that the patches are done. This doesn't
-necessarily mean that they get picked up right away, because people
-might be busy.
+It's perfectly legal for a UEFI application to do something like
 
-The prudent thing to do in such cases, in my experience, is to leave the
-patches as-is and do any subsequent changes in follow-up patches. If you
-quickly notice that there will need to be more changes, then let people
-know as soon as possible, otherwise they may apply patches and run tests
-on them, all of which will have to be redone if you repost a new version
-later on.
+efi_cout_set_cursor_position(10, 10);
+efi_cout_output_string("f");
+efi_cout_output_string("o");
+efi_cout_output_string("o") ;
 
-In this particular case I was in the process of preparing the pull
-request to Tom and didn't see v9 until I had sent out the PR.
+to update contents of a virtual text box on the screen. Where in this 
+chain of events would we call video_sync(), but on every call to 
+efi_cout_output_string()?
 
-Depending on who you're sending patches to the "point of no return"
-could be a lot sooner. Once patches are applied to a custodian tree and
-other patches have been applied on top, switching out new versions of
-patches can become really messy. Once they hit the mainline it often
-becomes impossible.
 
-Thierry
+Alex
 
---k5xEj+3NEZzCDXuo
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTkZnoACgkQ3SOs138+
-s6Gd9hAApkCEONx6VxC+PYeHLF11adOPxTc27Qoj0cQspPZWZDwigD1CE+aNND5z
-7IpdAalFFBPx5B9mdXagZ9zBy426o5F6r7dFyAysk5aeE/DamGR4bSLWGBKa0mIJ
-GiPB+yXDgm9ZNfnZTDg2LAU6ZUqfksxG4WjZznD9VSC93Bk4OtD3GQmSpdmIdpPA
-J8jW5H9crvf/D29OLrUnKHvteMUxUlJNWLw4n1unSiFs3nD52pPmTq+HMGe9NjDd
-sDJ1mu+uGRKVDmRMj1SJ9Fb6KFqbYiCUmt68qisB9XaR7N31Djd4Bq/82B+VMo8H
-ib8e+PGh7vlqvQ3Z88D9eRfvkXqLK2TBStrxom9UAx8IFercYrg6TLpDYLO+9x5g
-NatwUMVU29B4k+G8njRvNKRaGXqj9RzSGRyHQNwdsYIcD+g0/NO98HDxU8gD7EE0
-vSyAtAm1r+BIQkKHVXu98I1bss24exsH2/fohuIB3O1oh5B/ugRYPtsAY6oOclyw
-waAwzTmLuhNMbvtXwbXJuohC6OdL4kh3qnjjg0p0A9KRGQAY0vI0xyv6cvkx/XIC
-RRagdKbTDBtMdLq7Gh++CgCo+AeHCjqb97oPPq8mCUNnRuM6amasJjX7at2MsahC
-o+6BHT0Xr/1B4ab6wNzgNQtV9Kaypd1+JwHqSNMkIGrlNSO+JqI=
-=2c6J
------END PGP SIGNATURE-----
-
---k5xEj+3NEZzCDXuo--
