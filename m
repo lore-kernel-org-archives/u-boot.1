@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E77EE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06EF6EE49A3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FBA8864A9;
-	Tue, 22 Aug 2023 13:22:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74BF6864A1;
+	Tue, 22 Aug 2023 13:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oSkcaqEY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WQ2X4YgF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9217586410; Tue, 22 Aug 2023 13:22:45 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id CAB34864B1; Tue, 22 Aug 2023 13:22:47 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD62D86489
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:22:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78D43864A0
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:22:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-523d2ef19e4so5499776a12.2
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:22:42 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-99c93638322so896171966b.1
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:22:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692703362; x=1693308162;
+ d=gmail.com; s=20221208; t=1692703364; x=1693308164;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pgwm56R5UdUGcnl46pkb/lf+7QPD0s2f5aJVNbmtOu0=;
- b=oSkcaqEYVtzxrNAWtF+HwurLpRgQSjgBl6nmCG3d/OA7lCh6wf/7+/iXonnxOt+o73
- hq/rIV60Yvt6wlM0K+u3gb/OfziQBunz/BSVF18kOnQd8p1BWF7tERFBDzyM/FOE9RpQ
- QOTv6FcFxaFesxPNBSs4UxB3ENyLsUgscPjKtN58FRpt7boUVekVb0O/SUehv4+K1svQ
- LOG3dutXouaUlZwJUtVChLrt2GE1qP++xJUB3c3o/x27C/Yma8VhbH+KkHHfD2VtMQ0A
- VuB0fYP7+tyy0uFAlWTHXh10HJIw5ELV1pMWouTL+eJIu0YSDDTcrttUHwQZ4yOhb4r9
- dTwg==
+ bh=VGTKi5hyg288FhatKgnvBzU0s7qfbulM2J8mlAxkUNE=;
+ b=WQ2X4YgFuFpR0Xtcd281J0QqhA08Z8J+vhU01o/qZWfsF/hd4E0mPSmxs7zVHFbKqW
+ GGXbGKlcK81d4rUxpMecQy0+1BQPLHrSrdvu+4N4ZefwCjWt2VixPrq647ldq3WqmA8a
+ +tzupJhG/lXp1B/1mooBePsckBQD5XF8iPLMd2Wj4h6MTNlS0oRUX/uHTv8tr4e8D8zq
+ STpbuCsYZbydgkEorO60ntr0M1lVmw+F1FS5XV+/T82gZHeR30CYHxC8TqknrZJKMUTJ
+ OB67MZ5aKG78VOMntXeJy2kn/A9W3qxHh1LgJdmAx8sbUtEHKKxNVxhDqtJe+YLiUf7Z
+ eIiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692703362; x=1693308162;
+ d=1e100.net; s=20221208; t=1692703364; x=1693308164;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pgwm56R5UdUGcnl46pkb/lf+7QPD0s2f5aJVNbmtOu0=;
- b=ITQMgxgecaZaMJklNF6boCKkuGk1dyOAOZaqF4+KfN9pzeJhPor6WUSXGsHBMfi7mo
- v+c0D/U4aWAc5E5pL/CiYSrpxg6EXjySlONKqiEOG1sbsBjs4KwRVmT9G/z2bOXWZDEg
- gjM0dvc12FBYwQoh+si0+MdPLUbvqO9thjBTpwqkQ5boJ7+4cUb5Z6Mo84/93oAEiPdz
- K198LkHJSExtuU++6yIwBThxLYaU8wkUj0YRRxsIUsUKztgdKLpeV5llsJJXfdtz+qSW
- TazSh01ruYSl5byBZQ8TyZkw9sRAcuS43jkzFfwbk89iXo64ee7Jy2onl/ILz2DHqpUO
- 077g==
-X-Gm-Message-State: AOJu0Yx2hqqfabAZPlGFi9vOY1GApNJqIzEDlbi79oRVkrLOMRmWbgpw
- D3wwdbeNXtIgTimw0jHSEiG+0V1iTOyrww==
-X-Google-Smtp-Source: AGHT+IF0dxpgzns9Rk15M6Y/qLT+33s5x9EZcymVBmb7S8GZf+aoZ94xNZhY4q4kWcjW/0MyjGt5UQ==
-X-Received: by 2002:a17:907:8194:b0:98e:2097:f23e with SMTP id
- iy20-20020a170907819400b0098e2097f23emr5846879ejc.77.1692703362327; 
- Tue, 22 Aug 2023 04:22:42 -0700 (PDT)
+ bh=VGTKi5hyg288FhatKgnvBzU0s7qfbulM2J8mlAxkUNE=;
+ b=BbJZ1XpIGrgjwAJyW0ypXkksqBAGZhCH1q2c8x24CUuDJNhGkBzqW8oVMDRjnDE8Bw
+ LzGeqfgd85YOH6yuky7LQsH2XSCO2HM1nuevBSMolT/c9gsIbtpWwQHY5z7qiG0QSLzs
+ LxCCLBoYi7vUCmKbCTcrIfo+bHmeN7HlqU5TNdnYA3M+DJKWDEtCckeP7etJqzC5glUf
+ ++aKxcTjIPy/+lEYuxM9RBJdMmWhO/sqjvNl1MPRWQgtNVGxkTE5iEJ2qY3zyHaeKFfR
+ lbGPUGXjJg3XxyWtsXL3EE7Q/lxHnLL34jNwA9shD9KlwTK/Utc5YPYQmaefe4fVItAo
+ /rFA==
+X-Gm-Message-State: AOJu0Yy8ikeRMK8eiYirjoSChd5DuxgiK+Fp276HCUgdZa/4sNp6Hffd
+ QcM+Wsm1jKEWI3AVJqtftvbU8+DUY2pQUQ==
+X-Google-Smtp-Source: AGHT+IGEkAqpxm5IDTYIuTkpwAIOBZXGl5pbWAtgzpjVAUS33mjk1H6E9Q1F0MpkUd7sd91GehzkTQ==
+X-Received: by 2002:a17:907:a04a:b0:994:5407:9ac9 with SMTP id
+ gz10-20020a170907a04a00b0099454079ac9mr9792371ejc.5.1692703363737; 
+ Tue, 22 Aug 2023 04:22:43 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- mh9-20020a170906eb8900b009934855d8f1sm8041456ejb.34.2023.08.22.04.22.41
+ mh9-20020a170906eb8900b009934855d8f1sm8041456ejb.34.2023.08.22.04.22.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 04:22:42 -0700 (PDT)
+ Tue, 22 Aug 2023 04:22:43 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 01/19] ARM: dts: p1801-t: separate from common transformers
- tree
-Date: Tue, 22 Aug 2023 14:21:59 +0300
-Message-Id: <20230822112217.4646-2-clamor95@gmail.com>
+Subject: [PATCH v1 03/19] configs: transformer_t30: support booting from USB
+Date: Tue, 22 Aug 2023 14:22:01 +0300
+Message-Id: <20230822112217.4646-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230822112217.4646-1-clamor95@gmail.com>
 References: <20230822112217.4646-1-clamor95@gmail.com>
@@ -91,236 +90,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-P1801-T has significant differences (hdmi panel and backlight,
-own power supply system) which makes use of common transformer
-device tree complicated.
+Change boot logic to primary try to boot from USB in dock, then
+from microSD and lastly from eMMC.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-asus-p1801-t.dts | 205 +++++++++++++++++++++++++-
- 1 file changed, 198 insertions(+), 7 deletions(-)
+ configs/tf600t.config             | 2 +-
+ configs/transformer_t30_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-asus-p1801-t.dts b/arch/arm/dts/tegra30-asus-p1801-t.dts
-index 4b2dc61713..39f7caf8d0 100644
---- a/arch/arm/dts/tegra30-asus-p1801-t.dts
-+++ b/arch/arm/dts/tegra30-asus-p1801-t.dts
-@@ -1,18 +1,209 @@
- // SPDX-License-Identifier: GPL-2.0
- /dts-v1/;
- 
--#include "tegra30-asus-transformer.dtsi"
-+#include <dt-bindings/input/input.h>
-+#include "tegra30.dtsi"
- 
- / {
- 	model = "ASUS Portable AiO P1801-T";
- 	compatible = "asus,p1801-t", "nvidia,tegra30";
- 
--	/delete-node/ host1x@50000000;
--	/delete-node/ pwm@7000a000;
-+	chosen {
-+		stdout-path = &uarta;
-+	};
- 
--	/delete-node/ backlight;
--	/delete-node/ panel;
-+	aliases {
-+		i2c0 = &pwr_i2c;
-+		i2c1 = &hdmi_ddc;
- 
--	/delete-node/ regulator-pnl;
--	/delete-node/ regulator-bl;
-+		mmc0 = &sdmmc4;	/* eMMC */
-+		mmc1 = &sdmmc1; /* uSD slot */
-+
-+		rtc0 = &pmic;
-+		rtc1 = "/rtc@7000e000";
-+
-+		usb0 = &usb1;
-+		usb1 = &usb2; /* Mini USB */
-+		usb2 = &usb3; /* Dock USB */
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0x80000000 0x80000000>;
-+	};
-+
-+	host1x@50000000 {
-+		dc@54200000 {
-+			clocks = <&tegra_car TEGRA30_CLK_DISP1>,
-+				 <&tegra_car TEGRA30_CLK_PLL_D_OUT0>;
-+
-+			rgb {
-+				status = "okay";
-+
-+				nvidia,panel = <&hdmi>;
-+			};
-+		};
-+
-+		hdmi: hdmi@54280000 {
-+			clocks = <&tegra_car TEGRA30_CLK_HDMI>,
-+				 <&tegra_car TEGRA30_CLK_PLL_D_OUT0>;
-+
-+			status = "okay";
-+
-+			hdmi-supply = <&hdmi_5v0_sys>;
-+			pll-supply = <&vdd_1v8_vio>;
-+			vdd-supply = <&hdmi_3v3_vdd>;
-+
-+			/* low: tablet, high: dock */
-+			nvidia,hpd-gpio = <&gpio TEGRA_GPIO(H, 4) GPIO_ACTIVE_LOW>;
-+			nvidia,ddc-i2c-bus = <&hdmi_ddc>;
-+		};
-+	};
-+
-+	uarta: serial@70006000 {
-+		status = "okay";
-+	};
-+
-+	hdmi_ddc: i2c@7000c700 {
-+		status = "okay";
-+		clock-frequency = <33000>;
-+	};
-+
-+	pwr_i2c: i2c@7000d000 {
-+		status = "okay";
-+		clock-frequency = <400000>;
-+
-+		/* Texas Instruments TPS659110 PMIC */
-+		pmic: tps65911@2d {
-+			compatible = "ti,tps65911";
-+			reg = <0x2d>;
-+
-+			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
-+			#interrupt-cells = <2>;
-+			interrupt-controller;
-+
-+			ti,system-power-controller;
-+
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+
-+			regulators {
-+				vdd_1v8_vio: vddio {
-+					regulator-name = "vdd_1v8_gen";
-+					regulator-min-microvolt = <1800000>;
-+					regulator-max-microvolt = <1800000>;
-+					regulator-always-on;
-+					regulator-boot-on;
-+				};
-+
-+				/* eMMC VDD */
-+				vcore_emmc: ldo1 {
-+					regulator-name = "vdd_emmc_core";
-+					regulator-min-microvolt = <3300000>;
-+					regulator-max-microvolt = <3300000>;
-+				};
-+
-+				/* uSD slot VDD */
-+				vdd_usd: ldo2 {
-+					regulator-name = "vdd_usd";
-+					regulator-min-microvolt = <3100000>;
-+					regulator-max-microvolt = <3100000>;
-+				};
-+
-+				/* uSD slot VDDIO */
-+				vddio_usd: ldo3 {
-+					regulator-name = "vddio_usd";
-+					regulator-min-microvolt = <3100000>;
-+					regulator-max-microvolt = <3100000>;
-+					regulator-always-on;
-+					regulator-boot-on;
-+				};
-+			};
-+		};
-+	};
-+
-+	sdmmc1: sdhci@78000000 {
-+		status = "okay";
-+		bus-width = <4>;
-+
-+		cd-gpios = <&gpio TEGRA_GPIO(I, 5) GPIO_ACTIVE_LOW>;
-+		power-gpios = <&gpio TEGRA_GPIO(D, 7) GPIO_ACTIVE_HIGH>;
-+
-+		vmmc-supply = <&vdd_usd>;
-+		vqmmc-supply = <&vddio_usd>;
-+	};
-+
-+	sdmmc4: sdhci@78000600 {
-+		status = "okay";
-+		bus-width = <8>;
-+		non-removable;
-+
-+		vmmc-supply = <&vcore_emmc>;
-+		vqmmc-supply = <&vdd_1v8_vio>;
-+	};
-+
-+	/* USB via ASUS connector */
-+	usb1: usb@7d000000 {
-+		status = "okay";
-+		dr_mode = "otg";
-+	};
-+
-+	/* Mini USB port */
-+	usb2: usb@7d004000 {
-+		status = "okay";
-+		nvidia,vbus-gpio = <&gpio TEGRA_GPIO(H, 7) GPIO_ACTIVE_HIGH>;
-+	};
-+
-+	/* Dock's USB port */
-+	usb3: usb@7d008000 {
-+		status = "okay";
-+	};
-+
-+	/* PMIC has a built-in 32KHz oscillator which is used by PMC */
-+	clk32k_in: clock-32k {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <32768>;
-+		clock-output-names = "pmic-oscillator";
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		key-power {
-+			label = "Power";
-+			gpios = <&gpio TEGRA_GPIO(V, 0) GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_ENTER>;
-+		};
-+
-+		key-volume-up {
-+			label = "Volume Up";
-+			gpios = <&gpio TEGRA_GPIO(Q, 2) GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_UP>;
-+		};
-+
-+		key-volume-down {
-+			label = "Volume Down";
-+			gpios = <&gpio TEGRA_GPIO(Q, 3) GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_DOWN>;
-+		};
-+	};
-+
-+	hdmi_3v3_vdd: regulator-vdd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "hdmi_3v3_vdd";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		gpio = <&gpio TEGRA_GPIO(H, 3) GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	hdmi_5v0_sys: regulator-hdmi {
-+		compatible = "regulator-fixed";
-+		regulator-name = "hdmi_5v0_sys";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		gpio = <&gpio TEGRA_GPIO(P, 2) GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
- };
+diff --git a/configs/tf600t.config b/configs/tf600t.config
+index 89d8db4eb1..18ab4fbd87 100644
+--- a/configs/tf600t.config
++++ b/configs/tf600t.config
+@@ -1,4 +1,4 @@
+ CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-tf600t"
+ CONFIG_TRANSFORMER_SPI_BOOT=y
+-CONFIG_BOOTCOMMAND="setenv gpio_button 222; if run check_button; then poweroff; fi; setenv gpio_button 132; if run check_button; then echo Starting SPI flash update ...; run update_spi; fi; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
++CONFIG_BOOTCOMMAND="setenv gpio_button 222; if run check_button; then poweroff; fi; setenv gpio_button 132; if run check_button; then echo Starting SPI flash update ...; run update_spi; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4d00
+diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
+index 6fe6f2548d..840431ff38 100644
+--- a/configs/transformer_t30_defconfig
++++ b/configs/transformer_t30_defconfig
+@@ -22,7 +22,7 @@ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_KEYED_CTRLC=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
++CONFIG_BOOTCOMMAND="setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -- 
 2.39.2
 
