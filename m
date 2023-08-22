@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15B26EE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 16:42:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F19BEE4996
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 16:42:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0800B864F6;
-	Tue, 22 Aug 2023 18:41:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 511F9864B6;
+	Tue, 22 Aug 2023 18:41:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CSi7k7m2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NEQ0B61N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BF138648C; Tue, 22 Aug 2023 18:41:20 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 8317A864DB; Tue, 22 Aug 2023 18:41:22 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5250864B2
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 18:41:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BC18864CF
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 18:41:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37MGfBEj078800;
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37MGfBTE118287;
  Tue, 22 Aug 2023 11:41:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692722471;
- bh=eX1pQbU7/14Lx1QYLes3GhkNsgi/SkS+jR0xpIGfxv4=;
+ bh=GsmT/A4NArA75jtnu2FixVmqTGWvjoQptTF9P7lTqkc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=CSi7k7m2PGT+igymDuNHx6uF5Su/9ACvDeDQThfFrcg2Zn9YNo92m8/+jiRWmTZ4i
- sUvc42j3kMQRfKvExVBHGDN3Q25Tc8BoGgd0bmkTy8HT5JH8nPnnLKPFDjLNjdweFV
- iOtBCYHnOZiSSKAFFF87SwvWi1m7zHjodq28OK04=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37MGfA3l105296
+ b=NEQ0B61NuFtk0NnqepWjtduLxAazESoowchrB3A+tx8K+69iDvcKNioQCfKBlc+JM
+ /Zd7KnXL/40gj2qEr839/9iKoX8i/ZfQV2uv3Z9UA+k5gXp/ZOe/DtRmWeaRRmKtrX
+ PM9jKnCZFPfIBdJQpHj1rXwrrfRC9SQkb/gG8k1I=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37MGfBwP105306
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Aug 2023 11:41:10 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 22 Aug 2023 11:41:11 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Aug 2023 11:41:10 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2023 11:41:11 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Aug 2023 11:41:10 -0500
+ Frontend Transport; Tue, 22 Aug 2023 11:41:11 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37MGfA7S022028;
- Tue, 22 Aug 2023 11:41:10 -0500
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37MGfBJM022039;
+ Tue, 22 Aug 2023 11:41:11 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Neha Malcom Francis
  <n-francis@ti.com>, <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 01/13] doc: board: ti: k3: image alt texts
-Date: Tue, 22 Aug 2023 11:40:55 -0500
-Message-ID: <20230822164107.2272231-2-nm@ti.com>
+Subject: [PATCH 09/13] doc: board: ti: am64x: Fix build step numbering
+Date: Tue, 22 Aug 2023 11:41:03 -0500
+Message-ID: <20230822164107.2272231-10-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230822164107.2272231-1-nm@ti.com>
 References: <20230822164107.2272231-1-nm@ti.com>
@@ -79,51 +79,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Fix up build step numbering.
 
-Provide alternative texts for images.
-
-Fixes: 6e8fa0611f19 ("board: ti: k3: Convert boot flow ascii flow to svg")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Fixes: 4bf49bade124 ("doc: board: ti: am64: Add boot flow diagram")
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
+ doc/board/ti/am64x_evm.rst | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Changes since v1:
-* Minor expansion of WKUP domain, main domain.
-
-V1: https://lore.kernel.org/r/20230819024948.30103-1-heinrich.schuchardt@canonical.com
-
- doc/board/ti/k3.rst | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 5f9bd4dfcbe9..843e66eb2e60 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -48,6 +48,7 @@ including a 32bit U-Boot SPL, (called the wakup SPL) that ROM will jump
- to after it has finished loading everything into internal SRAM.
+diff --git a/doc/board/ti/am64x_evm.rst b/doc/board/ti/am64x_evm.rst
+index 01e536dac9d7..db27461cb14d 100644
+--- a/doc/board/ti/am64x_evm.rst
++++ b/doc/board/ti/am64x_evm.rst
+@@ -93,13 +93,13 @@ Set the variables corresponding to this platform:
  
- .. image:: img/boot_flow_01.svg
-+  :alt: Boot flow up to wakeup domain SPL
+ 3. U-Boot:
  
- The wakeup SPL, running on a wakeup domain core, will initialize DDR and
- any peripherals needed load the larger binaries inside the `tispl.bin`
-@@ -57,6 +58,7 @@ starting with Trusted Firmware-A (TF-A), before moving on to start
- OP-TEE and the main domain's U-Boot SPL.
+-* 4.1 R5:
++* 3.1 R5:
  
- .. image:: img/boot_flow_02.svg
-+  :alt: Boot flow up to main domain SPL
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_build_steps_spl_r5
+     :end-before: .. k3_rst_include_end_build_steps_spl_r5
  
- The main domain's SPL, running on a 64bit application core, has
- virtually unlimited space (billions of bytes now that DDR is working) to
-@@ -65,6 +67,7 @@ which loads more firmware into the micro-controller & wakeup domains and
- finally prepare the main domain to run Linux.
+-* 4.2 A53:
++* 3.2 A53:
  
- .. image:: img/boot_flow_03.svg
-+  :alt: Complete boot flow up to Linux
- 
- This is the typical boot flow for all K3 based SoCs, however this flow
- offers quite a lot in the terms of flexibility, especially on High
+ .. include::  k3.rst
+     :start-after: .. k3_rst_include_start_build_steps_uboot
 -- 
 2.40.0
 
