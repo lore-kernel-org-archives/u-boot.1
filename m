@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE31FEE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 05:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0BEEE49A8
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 06:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03C5A862B6;
-	Tue, 22 Aug 2023 07:16:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC807871EC;
+	Tue, 22 Aug 2023 08:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gSlJi07F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m8yDGvgd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0530D871BC; Tue, 22 Aug 2023 07:16:35 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id BF66C87067; Tue, 22 Aug 2023 08:32:42 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEED08522C
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 07:16:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A4B87067
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 08:32:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-4ff09632194so5659437e87.2
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 22:16:31 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-51cff235226so8500044a12.0
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 23:32:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692681391; x=1693286191;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=mA+2o0zhzpMSYYxBNU+WJuvV5oW5AmhLkmE+F8g8v0k=;
- b=gSlJi07Fyw9+n76LNWbxzkw1YTIt+HLLplvi98BcseR2HFBO4EvnvUBDhk8NjjfTC4
- YdBo1t/kMpt6ZW2oDXQ5P8yw28yQZYtke+DEtYADmPbVj3A67o4b0GsLz4d92IqgoPkJ
- 2GX/IBSxsBAT1ku2GBtPG2h4V7a0VgSqQmQJfi6rQLji3shwlwNJNC2RHCEKZxUCIeJz
- zvI60vL5im6hgruHneX7I+b1fp3qs6GjoM8zLTZC8QCj+UU3m9qxQLuGVXxqI8jMjKNm
- 4Mvqoi4aZvv5iMfqc6yZiG8ZSosQt0yvnPXjS3qziyN9I1auBjrM2IupWNKPSQLXvKFv
- YqyQ==
+ d=gmail.com; s=20221208; t=1692685959; x=1693290759;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O1gIpMeW6xyCndGtWljSfDBjemmB4VbBnjI9Bbh5V3I=;
+ b=m8yDGvgd5mHg6bG2rOC52Qb6dFxigB4yduNJJGuM/nQ4byUcCmYBBXdBkLjT1AQMEe
+ z0m8R9W6bo1KfFNVk9DYrcqILyLCrtf57UAMY8R/i9q14PFfUvB+7/hecW08Xw8GPFRU
+ r1rHStmwRfK7MuS07N01nlQW97GXDqWtBr0AqfsjDF92EzzYsZdPy8S21rG3GHiQiDFO
+ GF+hAr4SfMC5k1HgKgqqdG/8qKwyRy6c/3wjSK3As1MDX8m5GdaLE9t3/7BY9vyPdBev
+ pBOZkZle8p94S9r4lZzmgYN4q+2vP4RIsB1X1XTHRKWVWkBuGDPU1hsu35xZx9YKjGMu
+ 8u4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692681391; x=1693286191;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mA+2o0zhzpMSYYxBNU+WJuvV5oW5AmhLkmE+F8g8v0k=;
- b=BmWq1+nPuzotXpRFNp2AmaR0V69+IP+St5jTVh7ja9oJaXZfVYYLMODDrEKb5pfbyl
- ve2OX5W6GTMCuxnibwzTO8UwjwRSqXR9Zb9TMrZCaBcuvyPXsGVul5LXYc34YJCXGd75
- DSSfIAjunNeSK8/e8/vOnBJWV7T6jwIctS4y7Wzp/4HjuSWOriApePZq614Z2DSt8s/z
- W49pMzbzJ/yQUAJ3DcBAqi3s/AMWtPl6DFWoQGn4o2jWcC8wMyNvuxz4l1XO9p+qM72+
- tGAneOXnc3TaMuVO7NzzJMxm+9fl/nul4JLl72w46n1yKbfk3cHwwCNENEVaN4xF0y8a
- 8Liw==
-X-Gm-Message-State: AOJu0YxcrwMICT326qDuitg97nGGTP7/jPVXY7/YE3XDLE3s3gOM+0eW
- ydWZpKLA36Prm4dAhp8D7G8=
-X-Google-Smtp-Source: AGHT+IGheF7QdR4aDRAIcJsUP4T0hijSWxgkAJ7WK1dw7KzV9PSEdUqOSHZ8jZg02lzptBbYqRMZKA==
-X-Received: by 2002:a19:4f0d:0:b0:500:7c2a:30da with SMTP id
- d13-20020a194f0d000000b005007c2a30damr3303388lfb.60.1692681390794; 
- Mon, 21 Aug 2023 22:16:30 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.153.74]) by smtp.gmail.com with ESMTPSA id
- p6-20020aa7d306000000b0052574ef0da1sm6917548edq.28.2023.08.21.22.16.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Aug 2023 22:16:30 -0700 (PDT)
-Date: Tue, 22 Aug 2023 08:16:29 +0300
+ d=1e100.net; s=20221208; t=1692685959; x=1693290759;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O1gIpMeW6xyCndGtWljSfDBjemmB4VbBnjI9Bbh5V3I=;
+ b=FAS2tqKAfkQtMr4yBDSGkcD2P9PKcRG+v5roG1TaFgiVQibhmnJA1bajFkD+fu6DhF
+ XtSHbvkEyOBqzj9mKvUt7eZ2FQhf6k9NA8v0/oHwA1vaU+vTD2XDoaL/mPScX/LkTwE4
+ wgOoQqJV1YU7RF4L3K6gz5kaRzv8iAKTyJxzVe6o0ZzRBtsA10DJ8BJfNZkL4WDCVGVx
+ gByOPGsYWd2Ice8wkHPbUB4fw14WPhUWrca3e/BHttC4iQZGXnQLmNAdVRv62U0E7bi7
+ Qg+Zb+8zLeF5wiZM4CEah7ZmHc/jHe8Rf8HEvTEy3wBv69yZRID11103y/UC5Iu4fYRT
+ 7hiQ==
+X-Gm-Message-State: AOJu0Yy9lg+nsGWGEHXFXy+QD/vvtl3G71DkWgp8GQ9HR5jwdbQf3mOJ
+ X+1Pi3SE2AzLBMlpV+pM0B4=
+X-Google-Smtp-Source: AGHT+IGcnwlcILc89V0dLLKtwMcNNTBgBIHrVss8DZCvxYL0NrJCt1WSqksNHEfzB152QeYhc7fEhQ==
+X-Received: by 2002:aa7:de12:0:b0:522:3149:159b with SMTP id
+ h18-20020aa7de12000000b005223149159bmr10367412edv.2.1692685959366; 
+ Mon, 21 Aug 2023 23:32:39 -0700 (PDT)
+Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
+ dy21-20020a05640231f500b0052a19a75372sm784320edb.90.2023.08.21.23.32.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Aug 2023 23:32:38 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Thierry Reding <thierry.reding@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [GIT PULL] ARM: tegra: Changes for v2023.10-rc1
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230818170447.GA1515023@bill-the-cat>
-References: <20230818133923.286332-1-thierry.reding@gmail.com>
- <20230818164943.GZ1515023@bill-the-cat>
- <0C415156-B22C-4B86-94C6-1D03ED4287ED@gmail.com>
- <20230818170447.GA1515023@bill-the-cat>
-Message-ID: <5DFCCFFB-D137-4530-8AF9-C72071842A60@gmail.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v6 0/8] Add support for PMICs used on Tegra 3 devices
+Date: Tue, 22 Aug 2023 09:32:12 +0300
+Message-Id: <20230822063220.5191-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,110 +88,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Patch set adds basic support for PMICs used in many Tegra 3 devices.
+All PMIC drivers are based on datasheets provided by vendors.
+Implemented API include regulator set/get voltage enable/disable and
+basic PMIC r/w capabilities.
 
+Drivers were tested by me on LG P895 (max77663), HTC One X (TPS80032)
+and ASUS TF300T (tps65911). Calculations and behavior were correct,
+predictable and reproducible.
 
-18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 20:04:47 GMT+03:00,=
- Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2=
-(-=D0=BB=D0=B0):
->On Fri, Aug 18, 2023 at 08:02:30PM +0300, Svyatoslav Ryhel wrote:
->>=20
->>=20
->> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 19:49:43 GMT+03:=
-00, Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=
-=B2(-=D0=BB=D0=B0):
->> >On Fri, Aug 18, 2023 at 03:39:22PM +0200, Thierry Reding wrote:
->> >
->> >> From: Thierry Reding <treding@nvidia=2Ecom>
->> >>=20
->> >> Hi Tom,
->> >>=20
->> >> The following changes since commit 68c07fc5fdf34f0926cf06fc0c4ebd6f2=
-f3afe19:
->> >>=20
->> >>   Merge https://source=2Edenx=2Ede/u-boot/custodians/u-boot-usb (202=
-3-06-21 14:42:50 -0400)
->> >>=20
->> >> are available in the Git repository at:
->> >>=20
->> >>   git@source=2Edenx=2Ede:u-boot/custodians/u-boot-tegra=2Egit tags/t=
-egra-for-2023=2E10-rc1
->> >
->> >FYI, in your =2Egit/config you can do:
->> >	url =3D https://source=2Edenx=2Ede/u-boot/custodians/u-boot-tegra=2Eg=
-it
->> >	pushurl =3D git@source=2Edenx=2Ede:u-boot/custodians/u-boot-tegra=2Eg=
-it
->> >
->> >And this part looks "nicer"=2E  Not a big deal, just an FYI=2E
->> >
->> >> for you to fetch changes up to bdf9dead86f06c7d6980c399a4a6339430b53=
-1ec:
->> >>=20
->> >>   board: htc: endeavoru: add One X support (2023-06-30 15:20:37 +020=
-0)
->> >>=20
->> >> This passes CI successfully:
->> >>=20
->> >>   https://source=2Edenx=2Ede/u-boot/custodians/u-boot-tegra/-/pipeli=
-nes/17411
->> >>=20
->> >> Thanks,
->> >> Thierry
->> >>=20
->> >> ----------------------------------------------------------------
->> >> ARM: tegra: Changes for v2023=2E10-rc1
->> >>=20
->> >> This adds support for various new Tegra30 boards (ASUS, LG and HTC) =
-and
->> >> has some other minor enhancements, such as enabling the poweroff com=
-mand
->> >> on several Tegra210 and Tegra186 boards=2E
->> >>=20
->> >> ----------------------------------------------------------------
->> >> Jonas Schw=C3=B6bel (1):
->> >>       configs: tegra-common-post: make PXE and DHCP boot targets opt=
-ional
->> >>=20
->> >> Svyatoslav Ryhel (6):
->> >>       configs: tegra-common-post: add GPIO keyboard as STDIN device
->> >>       ARM: tegra: add SoC UID calculation function
->> >>       board: asus: transformer: add ASUS Transformer T30 family supp=
-ort
->> >>       board: asus: grouper: add Google Nexus 7 (2012) support
->> >>       board: lg: x3: add Optimus 4X HD and Optimus Vu support
->> >>       board: htc: endeavoru: add One X support
->> >>=20
->> >> Thierry Reding (2):
->> >>       ARM: tegra: Enable poweroff command on Jetson TX1 and Jetson N=
-ano
->> >>       ARM: tegra: Enable poweroff command on Jetson TX2
->> >>=20
->> >> Tomasz Maciej Nowak (1):
->> >>       ARM: dts: trimslice: sync SPI node with Linux dts
->> >
->> >Since I'm not sure if this is v8 or v9, given when v9 was posted, I've
->> >applied this PR now, as I had said I wanted this in=2E  I do have two
->> >requests for you Svyatoslav, however=2E  First, if there's changes tha=
-t
->> >are missing in master, please post those ASAP and we'll get them in, f=
-or
->> >v2023=2E10=2E=20
->>=20
->> Patches Thierry applied are v8, while v9 has significant improvements=
-=2E
->
->OK, I've updated patchwork to try and reflect this too=2E
->
+Poweroff functional will be added after this basic drivers are merged.
 
-Merged patches are not the most recent I have sent=2E How to fix this?
+---
+Changes from v5:
+ - pass tps6591x regulator children directly via udevice_id data field
 
->> Second, on Monday after I release -rc3 and merge that in to
->> >next, in the next branch we allow for (and encourage!) config fragment=
-s
->>=20
->> I will apply fragments move in the next patchset for t20/t30 devices
->> which will be send once this pathes are applied=2E This is acceptable
->> for you?
->
->Yes, I think this will be fine, thanks!
->
+Changes from v4:
+ - used private structure for TPS80031 SPMS driver so that internal
+   flags do not interfere with those from dm_regulator_uclass_plat
+ - fixed detection on ldoln and ldousb for palmas ldo driver
+
+Changes from v3:
+ - expanded descriptions in Kconfigs for pmics and regulators
+ - replaced ret with other variable name if it is not used for return
+ - dropped prefixed with pmic name
+ - dropped () in ~(var) type expressions
+ - return dm_i2c_* output in pmic_read/write functions
+ - switched to log_debug in some places
+ - added descryptions for some "non obvious" functions
+ - fixed tps80031 spms voltage calculation in non linear region
+ - adjsuted tps65911 vio voltage calculation
+ 
+Changes from v2:
+ - removed all previously made poweroff API in favour to use sysreset
+ after this patchset is accepted
+
+Changes from v1:
+ - created poweroff API for PMIC and integrated it call into do_poweroff
+ - added poweroff function to submitted max77663, tps80032 and tps65911
+ drivers
+ - fixed registers asignments for regulators with non-numeric name
+ (ldoln, ldousb, vddctrl)
+---
+
+Svyatoslav Ryhel (8):
+  power: pmic: palmas: support TI TPS65913 PMIC
+  power: regulator: palmas: fix ldoln and ldousb detection
+  power: pmic: add the base MAX77663 PMIC support
+  power: regulator: max77663: add regulator support
+  power: pmic: add the base TPS80031 PMIC support
+  power: regulator: tps80031: add regulator support
+  power: pmic: tps65910: add TPS65911 PMIC support
+  power: regulator: tps65911: add regulator support
+
+ doc/device-tree-bindings/pmic/max77663.txt   |  84 ++++
+ doc/device-tree-bindings/pmic/tps65911.txt   |  78 ++++
+ doc/device-tree-bindings/pmic/tps80031.txt   |  76 ++++
+ drivers/power/pmic/Kconfig                   |  20 +
+ drivers/power/pmic/Makefile                  |   2 +
+ drivers/power/pmic/max77663.c                |  86 ++++
+ drivers/power/pmic/palmas.c                  |   1 +
+ drivers/power/pmic/pmic_tps65910_dm.c        |  15 +-
+ drivers/power/pmic/tps80031.c                |  87 ++++
+ drivers/power/regulator/Kconfig              |  28 ++
+ drivers/power/regulator/Makefile             |   3 +
+ drivers/power/regulator/max77663_regulator.c | 378 ++++++++++++++++++
+ drivers/power/regulator/palmas_regulator.c   |  24 +-
+ drivers/power/regulator/tps65911_regulator.c | 397 +++++++++++++++++++
+ drivers/power/regulator/tps80031_regulator.c | 350 ++++++++++++++++
+ include/power/max77663.h                     |  42 ++
+ include/power/tps65910_pmic.h                |  44 ++
+ include/power/tps80031.h                     |  45 +++
+ 18 files changed, 1747 insertions(+), 13 deletions(-)
+ create mode 100644 doc/device-tree-bindings/pmic/max77663.txt
+ create mode 100644 doc/device-tree-bindings/pmic/tps65911.txt
+ create mode 100644 doc/device-tree-bindings/pmic/tps80031.txt
+ create mode 100644 drivers/power/pmic/max77663.c
+ create mode 100644 drivers/power/pmic/tps80031.c
+ create mode 100644 drivers/power/regulator/max77663_regulator.c
+ create mode 100644 drivers/power/regulator/tps65911_regulator.c
+ create mode 100644 drivers/power/regulator/tps80031_regulator.c
+ create mode 100644 include/power/max77663.h
+ create mode 100644 include/power/tps80031.h
+
+-- 
+2.39.2
+
