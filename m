@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F605EE49AF
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:58:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50354EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED0486500;
-	Tue, 22 Aug 2023 20:58:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 55AA5864C9;
+	Tue, 22 Aug 2023 20:58:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lOnPuLC3";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="PPDnFU0V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FF05864C8; Tue, 22 Aug 2023 20:58:01 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 259CF86400; Tue, 22 Aug 2023 20:58:04 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5251186400
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:57:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A72A864E6
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:58:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-bcb6dbc477eso4566746276.1
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:57:52 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d67869054bfso4831911276.3
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:58:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692730671; x=1693335471;
+ d=google.com; s=20221208; t=1692730679; x=1693335479;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NdBtZl0Kwt6aQT1urYuSUUp+f8sfrIkChyRlXyBQ8do=;
- b=lOnPuLC3fCC7qngxE8LwniDPtb1BHzq0zV3TBzFw4ZmsEY35OhzbHh0EMHZWa0uWGc
- JJ/orE7vBmEAtIvrJjl1X1Q4W8EA6667+NxwDLdgg6UyHCZsB6EG1sn1hBmi9Z8IROma
- TbFWZYX/YCTFoHyWJ8Ct3e56XG2P10Q0QyI6w=
+ bh=TjhV1vBQ0u55+CVsMxPzmQ11Swv7ocfJOcS1lze8JUA=;
+ b=PPDnFU0VIzbDX1QjYUzh6z2KuhSYBZx4n9P9NWehonzdNadT9MArbE9Gjw9Z+Ytqtc
+ KQDt1zLDy2lJC0vrVJ3xr1zEdllpSdGy3qKFUxt4gOcTufZ5QlD/9C/H6D0vRxoMcczx
+ lmgZaZwn3NK+jXaJQQZsqMDsjOoSOe+L4ixxxR5/gn/18I71oGih8HJN91DP7YjVlMxB
+ WFn5eBNsVknG3yq0GthcGzFEiHd5Zf6iQ0zcf/MXog18TZMC3VMjd1XKTzOK/Ei1Tui0
+ 8oudsDztKRY6a2r4UkErpA0VqyXDHp7tTceux4K0i/z6Nkb9/7G5rjVeukBdkNQUEK5s
+ m7wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692730671; x=1693335471;
+ d=1e100.net; s=20221208; t=1692730679; x=1693335479;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NdBtZl0Kwt6aQT1urYuSUUp+f8sfrIkChyRlXyBQ8do=;
- b=CdQCCcGI4etuex5n3CLVrQpXYjSx42iemBliWAmHbgpF3JFLb1Z8dBc0DMDAXrJRzo
- 51GC0Px9QH4+EXX6jxMfYjnM2coXxS4bVp84oOORssZjWy0vogy1C6BrhHHxHA6/xP5Y
- WY7uctBWzstZbN0B8i0+j7hxtWdgU76TM+eMMHhiBrsdmcs54wvcnYJszyN7M/VBAuF9
- CuW5tXEu2vCjE1q2gmLXflVLoY5nadK4VkYt4+4WxYEZ7ZfF4vLwiZN8N+8dllSr2jsC
- D8XnXstgWTs32O1mL+OjS4xxue7Omd65oeXtkyOm43b7fxDiUCRKdAYuYn450m1CVIR9
- CUmQ==
-X-Gm-Message-State: AOJu0Yxf9suZNUxMZB/Y6kFXCdLVCCTRII6Iouvcl7nEhOOvjvX9EBco
- dupxgqG7cdHgPMhKrAxiotIM1OlwmF/vLbFe2/eEww==
-X-Google-Smtp-Source: AGHT+IFhGyeOQ+8c+gCtX2ZKXBZ8aEG8wMi2LJWkaV07Xr/spL+rWmvste6LaqF52wBwHc75OBWzBbTjZTCDu/MSXr8=
-X-Received: by 2002:a25:cf88:0:b0:d74:6c30:d467 with SMTP id
- f130-20020a25cf88000000b00d746c30d467mr11766806ybg.13.1692730670835; Tue, 22
- Aug 2023 11:57:50 -0700 (PDT)
+ bh=TjhV1vBQ0u55+CVsMxPzmQ11Swv7ocfJOcS1lze8JUA=;
+ b=TfaDGgO7fReS68ZHyt8OGS57KCjku7SyWbKAtrgtgSV5b+8cyGumCZ5pOxq10nOXHP
+ F/viwhJk7rehTp4UdpxjUy9UA/FaavYUE+jJDaa99D8qE6QoxtBdU6HUnqMZTlVcvnCy
+ RtT9KTHuSV8HwbM0y8iYn+XoxULVel3XzRDfijARLe1tMomxWxbKRUv2To2gy7x9GMs8
+ UoQa7FzCYrDGxiJd9MzzyhFgrwPbc0D+gh1y0r1Nx3N10tAqufh7Zj9/V2YwOV8cJLwH
+ +FNh+GEWHkPmWsnMUMVC2JLA0NUrWrJTioHmYIPpT+8O1itQdII7lUO5JA5jrenVcL4B
+ aeLQ==
+X-Gm-Message-State: AOJu0YwQdJxfvBAeJmYNxmS5xpK078f3+zVpLURSDzYdKt+sijMjFGho
+ EaMcxbnxqmQpcOgsXqZsswT77ZO3zOh92mGKSghUuw==
+X-Google-Smtp-Source: AGHT+IEzKRYdlFXPC1GcPQmY9poaRS2R6l6Y/sJvBaOk9iUYDmGFI2fDcNHNxu9Gl/G6k93ucmL8kzhyTGWP1czXlrI=
+X-Received: by 2002:a5b:610:0:b0:d74:62df:e802 with SMTP id
+ d16-20020a5b0610000000b00d7462dfe802mr9423273ybq.0.1692730678856; Tue, 22 Aug
+ 2023 11:57:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
- <20230822121026.1007105-8-alpernebiyasak@gmail.com>
-In-Reply-To: <20230822121026.1007105-8-alpernebiyasak@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Aug 2023 12:56:38 -0600
-Message-ID: <CAPnjgZ36NmL0jkHaRyeCSQQm78bDaYwei84WVLt32-ZX0M_J1w@mail.gmail.com>
-Subject: Re: [PATCH v2 7/7] x86: qemu: Enable ramfb by default
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Asherah Connor <ashe@kivikakk.ee>, Alexander Graf <agraf@csgraf.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>
+References: <20230822084306.91806-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230822084306.91806-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 22 Aug 2023 12:56:39 -0600
+Message-ID: <CAPnjgZ2pqtgQ3mR2+njDOG1V3diP_d7h2-K_GXnJyc3THJVX2g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] lib: parameter check in hash_calculate
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@ti.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,163 +83,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
-
-On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+On Tue, 22 Aug 2023 at 02:43, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Now that we have everything in place to support ramfb, let's wire it up
-> by default in the x86 QEMU targets. That way, we can use ramfb graphical
-> console instead of the default by passing -vga none -device ramfb to the
-> QEMU command line.
+> If hash_calculate is invoked with region_count = 0, it will try to hash
+> INT_MAX regions. We should check this parameter.
 >
-> Also increase SYS_MALLOC_F_LEN for QEMU x86_64 to be the same as its SPL
-> counterpart, because we're running out of alloc space in pre-reloc stage
-> with ramfb enabled.
+> * Avoid a comparison with different signedness.
+> * Check that region_count is at least 1.
+> * Avoid a superfluous assignment.
 >
-> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> Fixes: b37b46f042cc ("rsa: Use checksum algorithms from struct hash_algo")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> This also suffers from the same issue with distros as the Bochs display
-> driver [1], where it results in a hang after GRUB menu selection before
-> the kernel can display anything. Couldn't reproduce on arm*/riscv*.
+>  lib/hash-checksum.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 
-Yes I see that problem too. I wonder how we can debug it?
-
->
-> But just having it enabled doesn't seem to cause problems unless you run
-> QEMU with -device ramfb, so this (unlike the Bochs video driver) can
-> actually be co-enabled with VIDEO_VESA.
-
-Indeed...which makes me wonder if we can do something similar with
-Bochs, so that (from the cmdline) it is possible to chose ramfb, bochs
-or vesa?
-
->
-> [1] https://lore.kernel.org/u-boot/20230724145210.304917-4-sjg@chromium.org/
->
-> Changes in v2:
-> - Add patch "x86: qemu: Enable ramfb by default"
->
->  arch/x86/cpu/qemu/Kconfig           |  4 +++
->  board/emulation/qemu-x86/qemu-x86.c | 47 +++++++++++++++++++++++++++++
->  configs/qemu-x86_64_defconfig       |  4 +--
->  configs/qemu-x86_defconfig          |  1 -
->  4 files changed, 52 insertions(+), 4 deletions(-)
->
-> diff --git a/arch/x86/cpu/qemu/Kconfig b/arch/x86/cpu/qemu/Kconfig
-> index f8f2f6473088..e0a57ac2d687 100644
-> --- a/arch/x86/cpu/qemu/Kconfig
-> +++ b/arch/x86/cpu/qemu/Kconfig
-> @@ -13,6 +13,10 @@ config QEMU
->         imply USB
->         imply USB_EHCI_HCD
->         imply VIDEO_VESA
-> +       imply VIDEO_RAMFB
-> +       imply BOARD_EARLY_INIT_F
-> +       imply BOARD_EARLY_INIT_R
-> +       imply CMD_QFW
->
->  if QEMU
->
-> diff --git a/board/emulation/qemu-x86/qemu-x86.c b/board/emulation/qemu-x86/qemu-x86.c
-> index e69de29bb2d1..3a8a580cc591 100644
-> --- a/board/emulation/qemu-x86/qemu-x86.c
-> +++ b/board/emulation/qemu-x86/qemu-x86.c
-> @@ -0,0 +1,47 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <init.h>
-> +#include <log.h>
-> +#include <qfw.h>
-> +
-> +int board_early_init_f(void)
-> +{
-> +       struct udevice *dev;
-> +       int ret;
-> +
-> +       /*
-> +        * Make sure we enumerate the QEMU Firmware device to bind ramfb
-> +        * so video_reserve() can reserve memory for it.
-> +        */
-> +       if (IS_ENABLED(CONFIG_QFW)) {
-> +               ret = qfw_get_dev(&dev);
-> +               if (ret) {
-> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
-> +                       return ret;
-> +               }
-> +       }
-> +
-> +       return 0;
-
-Same point about DT here.
-
-> +}
-> +
-> +int board_early_init_r(void)
-> +{
-> +       struct udevice *dev;
-> +       int ret;
-> +
-> +       /*
-> +        * Make sure we enumerate the QEMU Firmware device to find ramfb
-> +        * before console_init.
-> +        */
-> +       if (IS_ENABLED(CONFIG_QFW)) {
-> +               ret = qfw_get_dev(&dev);
-> +               if (ret) {
-> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
-> +                       return ret;
-> +               }
-> +       }
-> +
-> +       return 0;
-> +}
-> diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-> index c6f30674a8fc..c9ad6eebd35c 100644
-> --- a/configs/qemu-x86_64_defconfig
-> +++ b/configs/qemu-x86_64_defconfig
-> @@ -1,13 +1,12 @@
->  CONFIG_X86=y
->  CONFIG_TEXT_BASE=0x1110000
-> -CONFIG_SYS_MALLOC_F_LEN=0x1000
-> +CONFIG_SYS_MALLOC_F_LEN=0x2000
->  CONFIG_NR_DRAM_BANKS=8
->  CONFIG_ENV_SIZE=0x40000
->  CONFIG_MAX_CPUS=2
->  CONFIG_SPL_DM_SPI=y
->  CONFIG_DEFAULT_DEVICE_TREE="qemu-x86_i440fx"
->  CONFIG_SPL_TEXT_BASE=0xfffd8000
-> -CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
->  CONFIG_DEBUG_UART_BASE=0x3f8
->  CONFIG_DEBUG_UART_CLOCK=1843200
->  CONFIG_X86_RUN_64BIT=y
-> @@ -59,7 +58,6 @@ CONFIG_CMD_USB=y
->  CONFIG_BOOTP_BOOTFILESIZE=y
->  CONFIG_CMD_EFIDEBUG=y
->  CONFIG_CMD_TIME=y
-> -CONFIG_CMD_QFW=y
-
-What is happening here? Why disable it?
-
->  CONFIG_CMD_BOOTSTAGE=y
->  CONFIG_CMD_EXT4_WRITE=y
->  CONFIG_ENV_OVERWRITE=y
-> diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-> index 24682a5387df..8a2311720f02 100644
-> --- a/configs/qemu-x86_defconfig
-> +++ b/configs/qemu-x86_defconfig
-> @@ -37,7 +37,6 @@ CONFIG_CMD_USB=y
->  CONFIG_BOOTP_BOOTFILESIZE=y
->  CONFIG_CMD_EFIDEBUG=y
->  CONFIG_CMD_TIME=y
-> -CONFIG_CMD_QFW=y
->  CONFIG_CMD_BOOTSTAGE=y
->  CONFIG_CMD_EXT4_WRITE=y
->  CONFIG_MAC_PARTITION=y
-> --
-> 2.40.1
->
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
