@@ -4,72 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 389AAEE49AE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:57:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF85EE49AE
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:57:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B49D1864B0;
-	Tue, 22 Aug 2023 20:56:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14D4486443;
+	Tue, 22 Aug 2023 20:57:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iy31p8vd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AHmhaOcu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E49A2864C7; Tue, 22 Aug 2023 20:56:53 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 0E151864D7; Tue, 22 Aug 2023 20:57:55 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35EE5864AF
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:56:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55A02864B7
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5007c8308c3so4318539e87.0
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:56:49 -0700 (PDT)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d77b9d574f8so117243276.2
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692730608; x=1693335408;
+ d=chromium.org; s=google; t=1692730671; x=1693335471;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B5GWiCuxSf4YhHFnDbmwKugqV3xUEqlk/1Jz4gajUBM=;
- b=iy31p8vdE75pOO45SEpOs8X2NEJSNfy19eySNBjB0HxBpc7QY4sZKBHNXXIb5NR9W1
- NKUbpiXtnlknMmwpeeJ3IpIuX0k9LcRPCZsKtUuQ9RjTcl2583LpVII5OZywRJhHlU0f
- x28rXLJB4RoldCFE1/+8yptiHiLxwe1jYmxX0=
+ bh=avgWV7HD6o0HIjKFXdTdLNtsebO3f8kTDKeBXJR/UBE=;
+ b=AHmhaOcuMVadYC71vkh8jCCIwOMzNeGC2mnJNYEiC3POrj4naFqtgEK1cT9MmZVJV7
+ EC2n/AHlWSmFpgr8NIEbBiOjsm0HCkckOnwIjHJKoliyPDCt882S3Cww7xlzzGwYJ5Xl
+ 3hzOm1Hgx+KXxZUtDyYTWx+1na2jURZOpXDxM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692730608; x=1693335408;
+ d=1e100.net; s=20221208; t=1692730671; x=1693335471;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=B5GWiCuxSf4YhHFnDbmwKugqV3xUEqlk/1Jz4gajUBM=;
- b=A+rbH7swhCSfUt8WNlqDQ3YreZsf9mkFidxoGEp9ogj+i9IT1o+mND1EDf8Qj+znnR
- 0WyHQizuOLkWysITHL1SrDBi5XNqmq9+AAu3Xf7wCj79R7aqGFqZYeKdrlgs9oJkEoeN
- y+DllkJIUgWRmEVdzTOFSPEhbYPKpLhGr9Eb1wy3UzeowU4ogapLLd72BQydxGH+yyMR
- eFPqmZXLljota8xx1ZxSHEIPMLtzDV1D0c6dqNy9U0Q4+TDP8EnCHRbedx7oHhzZwoDm
- Y1qxXz6mRmskDTc51t2dcmkyat+WBgWZDKX2/pJG+c84jKvbPLoQiBBBjhhuzFpJ/I1T
- 0mDw==
-X-Gm-Message-State: AOJu0Yx+EDEqTLXyA1qAKoH/2h5ps1GmjpJll5oP9JwSjWa1HJ9t0PMh
- eKdnl1rNTZ4dmEGodcoUUj+LaRDlfrm8rlin4JzSKA==
-X-Google-Smtp-Source: AGHT+IGJgB0xUcQ2JSSQM+bGXsrtxZqJR5QIkR7stJOnOONjF0VOvjgZVzq1Q0oRn2vR5pZR0ZYjdoV62aJJigCYq7M=
-X-Received: by 2002:a05:6512:304d:b0:4fb:be3c:d8b7 with SMTP id
- b13-20020a056512304d00b004fbbe3cd8b7mr9174844lfb.51.1692730607982; Tue, 22
- Aug 2023 11:56:47 -0700 (PDT)
+ bh=avgWV7HD6o0HIjKFXdTdLNtsebO3f8kTDKeBXJR/UBE=;
+ b=M7sKXtL+ZUBHay8TwSzhfm+UbH8f5ianxA3FZpFyXTrM4SnDFFShdt7HpivSd1vEKA
+ C4bN5ez2A0mHRTiQaNto2Gqs/+7FgExQUNwmzJYj0Ad1Xkaws4zu71M/An5ZsF8L/mPv
+ fenENHXQsxjv3TGyxd9OEqj8sJkjBAfFqKwlq+qpKhO6XKgF+8V5cYNHWe/VlMrsagrM
+ dWO/EP1Gg3vgeGcV5WyGcSP4ANJbXfYZnQrhaRupt29d43b9xVzPKIYIVcl2EP77ozOY
+ uThbqkM2TdX0ldaF7IEwnnqCUJO7YNqip64WLw98haiTxnj09YlWi/ud/vkpiGs9vsx9
+ qPyA==
+X-Gm-Message-State: AOJu0Yxn3NHYWyF+7tnkAcdYk5cSdYTOEC2vHUoIjy1tVzYU+bGPfdbB
+ hA/IdQZWZoSQyrK9L2GOSHVOPI9CEwadwzmbmPh8kg==
+X-Google-Smtp-Source: AGHT+IGmvc7IyJZM9E5b8IFfFxIXtZoVqDU9H3lqW7GyFhKh788KZzEaICzm6Yec2xIck6GlMchA6YpGO20n+nriB7Y=
+X-Received: by 2002:a25:ac82:0:b0:d0f:65db:dc0e with SMTP id
+ x2-20020a25ac82000000b00d0f65dbdc0emr10637653ybi.39.1692730670831; Tue, 22
+ Aug 2023 11:57:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
- <20230822121026.1007105-4-alpernebiyasak@gmail.com>
-In-Reply-To: <20230822121026.1007105-4-alpernebiyasak@gmail.com>
+References: <20230822102113.129996-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230822102113.129996-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Aug 2023 12:56:34 -0600
-Message-ID: <CAPnjgZ1f14MJFz0vy8SNnzud4VFEkHunu8_+Md1C1UOW2pKTwA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/7] qfw: Spawn ramfb device if its file is present
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Asherah Connor <ashe@kivikakk.ee>, Alexander Graf <agraf@csgraf.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>
+Date: Tue, 22 Aug 2023 12:56:33 -0600
+Message-ID: <CAPnjgZ3LA=mqrwyLie2=GoMgTrOUykRLoimbk4A7Mq=tyK3i-w@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: setexpr: fix printf_str()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Roland Gaudig <roland.gaudig@weidmueller.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,88 +80,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
-
-On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+On Tue, 22 Aug 2023 at 04:21, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> From: Alexander Graf <agraf@csgraf.de>
+> If vsnprintf() returns a negative number, (i >= remaining) will
+> possibly be true:
 >
-> Now that we have a ramfb device driver, let's add the necessary glueing
-> magic to also spawn it when we find its qfw file node.
-
-So then how do we select which video driver is used? I think we should
-have this in the DT so there is some control.
-
+> 'i' is of type signed int and 'remaining' is of the unsigned type size_t.
+> The C language will convert i to an unsigned type before the comparison.
 >
-> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> [Alper: Use if IS_ENABLED() instead of #ifdef]
-> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> This can result in the wrong error type being indicated.
+>
+> Checking for negative i should be done first.
+>
+> Fixes: f4f8d8bb1abc ("cmd: setexpr: add format string handling")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->
-> Changes in v2:
-> - Use if (IS_ENABLED(CONFIG_VIDEO_RAMFB)) instead of #ifdef
->
->  drivers/misc/qfw.c | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->
-> diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
-> index 7c01bf23d53b..4e4260982cce 100644
-> --- a/drivers/misc/qfw.c
-> +++ b/drivers/misc/qfw.c
-> @@ -16,6 +16,7 @@
->  #include <malloc.h>
->  #include <qfw.h>
->  #include <dm.h>
-> +#include <dm/lists.h>
->  #include <misc.h>
->  #include <tables_csum.h>
->  #include <asm/acpi_table.h>
-> @@ -307,6 +308,27 @@ void qfw_read_entry(struct udevice *dev, u16 entry, u32 size, void *address)
->                 qfw_read_entry_io(qdev, entry, size, address);
->  }
->
-> +static void qfw_bind_ramfb(struct udevice *dev)
-> +{
-> +       struct fw_file *file;
-> +       int ret;
-> +
-> +       if (!IS_ENABLED(CONFIG_VIDEO_RAMFB))
-> +               return;
-
-Needs an error-code return
-
-> +
-> +       ret = qfw_read_firmware_list(dev);
-> +       if (ret)
-> +               return;
-> +
-> +       file = qfw_find_file(dev, "etc/ramfb");
-> +       if (!file) {
-> +               /* No ramfb available. */
-> +               return;
-> +       }
-> +
-> +       device_bind_driver(dev, "ramfb", "qfw-ramfb", NULL);
-
-check error
-
-> +}
-> +
->  int qfw_register(struct udevice *dev)
->  {
->         struct qfw_dev *qdev = dev_get_uclass_priv(dev);
-> @@ -323,6 +345,8 @@ int qfw_register(struct udevice *dev)
->         if (dma_enabled & FW_CFG_DMA_ENABLED)
->                 qdev->dma_present = true;
->
-> +       qfw_bind_ramfb(dev);
-> +
->         return 0;
->  }
->
-> --
-> 2.40.1
+>  cmd/printf.c | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
