@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E899EE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 07:51:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 317CDEE4996
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 07:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 597698642C;
-	Tue, 22 Aug 2023 09:51:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A53A586416;
+	Tue, 22 Aug 2023 09:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vQfQ3yXw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tUXEMbtw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63BD38642C; Tue, 22 Aug 2023 09:51:31 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 82FC686415; Tue, 22 Aug 2023 09:52:07 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86EE686415
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:51:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CFCF86419
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:52:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1bbc87ded50so26565235ad.1
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:51:28 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1bddac1b7bfso28317045ad.0
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:52:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692690686; x=1693295486;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1692690723; x=1693295523;
+ h=content-transfer-encoding:in-reply-to:references:subject:to:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0B9Pr4vcy2/i4HUXWV6hdXmlscBCPXb7dubV880j6IA=;
- b=vQfQ3yXw6UOirxAY6R5yKs8CTEFzcyrcvrh/smmosfdVJHPYJK1YocxQJlLwFExE/h
- Bw0Ri6Th76YrMud/RdXm0NKJievfjChieUnQUIrG2sjonW9bYkBeNyU3v06HB9AZGRKv
- mbSDKzfD9/jMw53Fl8JsfUMsFVOz14Wt6zTv5QyGSH77xxyD8XuacduorZMgANyM4MmA
- CIWi/sPSClc1L464CJoLrRcJctb0EwuhD0Gy5Ax0/PYvFQaW5NRULlTyFC+8k6tSh+5G
- IGZdyFQR0yvtLvHrFUzqFMFKj5OCfkV4KGL+IkqYmAxRtsJfZAoDbFGhwKMeVgxT2YQi
- 0t1Q==
+ bh=tG76fqhDXyAtyKKh6T2uSqDcFVzBM/iEV5c4rvtUJbM=;
+ b=tUXEMbtwAqe02+32wUUCUtoHf6TNSMWT2IOz3u07Y2FH9C6MyZAjESPHQFCu52GVRB
+ SajzAA4vA1RMy0L+YIqGVSSAvzoOChHo6cVY919h4JnpkdkQbiAhYSJCZPAr8NkV8ZJE
+ 6UMqWBqs341Mlqof/U48ySj58a61C4VeiV0h2Tsguyisyb6gbs6mBXSRYLMT6Evuvv6J
+ J/rqE59TGsee9HWnpYohzcwKKfLGTXf9u3Eir+nvspDcs9djUN+BHAfVKE+BKuwp4xrB
+ HRBGZgHEgMnP1LO6S14a4LQlJ4PGdCUdX/zvZU7F1HrvQehlg+BiHLPYwHy90elrPgD9
+ xNBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692690686; x=1693295486;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0B9Pr4vcy2/i4HUXWV6hdXmlscBCPXb7dubV880j6IA=;
- b=lqLxD22QcNKtesxRdOEKjFgyoPpCWBagmgWDTXdKMhHcSjJZ1KewHpusmtw2KgVEbD
- rsE7f7mDHmOLlG2K+44UNjSgEXdWydq0eZvzrlbmXh996TaGAVPdYAFAYMHedAGAMjt8
- t/6c95CF5Ic3IykefcM1ur0g86ldB1Du/Zb0wdahAPS/wp1DDJIpttKCtenXMqQ7KVCb
- KWsjJIm07SwE+7oumARFupfnZU6/3ewaOYEkVjxscgNcSrwCcOr+FD4lcR6ZcCUU3ZSH
- VTapmFVpI0myjqkdqpiGO0iwU6QrDjtqWRH6Lvp/DqgDldf2VPts4PbkMS6Sn6qpaxeK
- /RDg==
-X-Gm-Message-State: AOJu0YxwNPOIG218TlW5nzyk8CcF1JzpAYu6nbhiS9nlYaDnWZGEcDKd
- 5SykrQOXymt5pZIu4SUMGduHM/36UsiC0GcgWfI=
-X-Google-Smtp-Source: AGHT+IH2pQGRmK1J5Dl3NI+Pi/ZzrQMKqLhy48BRZIC3hFgesuMRi9ukIwgLvgHFi3e47/71ZkFJdA==
-X-Received: by 2002:a17:902:f68d:b0:1bd:ca21:c85 with SMTP id
- l13-20020a170902f68d00b001bdca210c85mr7154118plg.69.1692690686585; 
- Tue, 22 Aug 2023 00:51:26 -0700 (PDT)
-Received: from localhost.localdomain
+ d=1e100.net; s=20221208; t=1692690723; x=1693295523;
+ h=content-transfer-encoding:in-reply-to:references:subject:to:from
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=tG76fqhDXyAtyKKh6T2uSqDcFVzBM/iEV5c4rvtUJbM=;
+ b=WjNI88qQTJIu8gp0OTfCC8PxmZRGBGFBuSWi4Uadxr9b1XllOntyFnllzTiS6hUBxm
+ AHGgk4+HrIcclZJ3GKfmv0slCv/+Af2a6mfEgxAL8iLmAWs6PC6IfrTvrzML1XpVREbq
+ qMs1d5QUmS77ADfb3OlS6BMAODW1j8IN2DkL3z822kR/PNgq/wl4SgVT66b1lZbewcnp
+ DZOP3PxVSLWs+tBLXB0JExCKpjZFpcZoz6LmAHUlzC1EwTsPL4jo4kdaZIkoJtXuzMEX
+ MO6nz7WGc15YX0hOtdBerWoi+HGNGVQSr2CA7I+lKLLSR/WCYSO8vJA6FhwgRODyJHw/
+ fb3g==
+X-Gm-Message-State: AOJu0YyPmD89PGgidiCO24+rqjEdRXsBlXfSocVoZ6FpEodBuH/l0trk
+ 1kDAiqjjM75CHfo+8jlYuueOmj2P6SNqyVlNDXg=
+X-Google-Smtp-Source: AGHT+IE0PO7msy8F5CQgmBP1l2mWd7Sx3D3XE+1vSwS77kEce/kuSsTkl3gLMBjn+Qe1gV86EHUImg==
+X-Received: by 2002:a17:902:f54a:b0:1bc:1e17:6d70 with SMTP id
+ h10-20020a170902f54a00b001bc1e176d70mr13601391plf.24.1692690723028; 
+ Tue, 22 Aug 2023 00:52:03 -0700 (PDT)
+Received: from ?IPV6:2401:4900:1f3b:3924:9d49:2d2a:63e6:8974?
  ([2401:4900:1f3b:3924:9d49:2d2a:63e6:8974])
  by smtp.gmail.com with ESMTPSA id
- ix21-20020a170902f81500b001bb8895848bsm8422199plb.71.2023.08.22.00.51.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 00:51:26 -0700 (PDT)
-From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.sharma@linaro.org,
- bhupesh.linux@gmail.com, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v2 2/2] armv8: Disable SYS_DCACHE_OFF & SYS_ICACHE_OFF for
- ARM64
-Date: Tue, 22 Aug 2023 13:21:12 +0530
-Message-Id: <20230822075112.717992-3-bhupesh.sharma@linaro.org>
-X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
-References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
+ q6-20020a170902a3c600b001b89045ff03sm8485054plb.233.2023.08.22.00.52.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Aug 2023 00:52:02 -0700 (PDT)
+Message-ID: <f73130b1-0926-d413-bf58-49adcaca112e@linaro.org>
+Date: Tue, 22 Aug 2023 13:21:59 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+From: bhupesh.sharma@linaro.org
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, sjg@chromium.org,
+ bhupesh.linux@gmail.com, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH 1/1] armv8: Fix compilation error with SYS_DCACHE_OFF
+References: <20230811054228.3721455-1-bhupesh.sharma@linaro.org>
+ <20230811140136.GD3630934@bill-the-cat>
+In-Reply-To: <20230811140136.GD3630934@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,71 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ideally SYS_ICACHE_OFF and SYS_DCACHE_OFF should never be set for
-ARM64 (ARMv8) platforms, as it makes booting u-boot slower on these
-platforms.
 
-However, if some platforms require ICACHE or DCACHE  to be disabled
-only for the smaller SPL stage, we should support such configurations
-in u-boot as well.
+On 8/11/23 7:31 PM, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, Aug 11, 2023 at 11:12:28AM +0530, Bhupesh Sharma wrote:
+> 
+> > If CONFIG_SYS_ICACHE_OFF and CONFIG_SYS_DCACHE_OFF are set, we see the
+> > following errors while compiling u-boot:
+> >
+> >    arch/arm/cpu/armv8/cpu.c:60: undefined reference to `icache_disable'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/cpu/armv8/cpu.c:68: undefined reference to `dcache_disable'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/cpu/armv8/cpu.c:69: undefined reference to `invalidate_dcache_all'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/cpu/armv8/exception_level.o: in function `entry_non_secure':
+> >    arch/arm/cpu/armv8/exception_level.c:29: undefined reference to `dcache_enable'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/cpu/armv8/exception_level.o: in function `switch_to_non_secure_mode':
+> >    arch/arm/cpu/armv8/exception_level.c:52: undefined reference to `dcache_disable'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/lib/relocate_64.o: in function `relocate_done':
+> >    arch/arm/lib/relocate_64.S:92: undefined reference to `__asm_flush_dcache_range'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/lib/relocate_64.S:93: undefined reference to `__asm_flush_l3_dcache'
+> >    aarch64-linux-gnu-ld.bfd: arch/arm/lib/bootm.o: in function `do_nonsec_virt_switch':
+> >    arch/arm/lib/bootm.c:191: undefined reference to `dcache_disable'
+> >    aarch64-linux-gnu-ld.bfd: boot/bootm_os.o: in function `do_bootm_qnxelf':
+> >    boot/bootm_os.c:392: undefined reference to `dcache_status'
+> >    aarch64-linux-gnu-ld.bfd: boot/bootm_os.c:394: undefined reference to `dcache_disable'
+> >    aarch64-linux-gnu-ld.bfd: boot/bootm_os.c:399: undefined reference to `dcache_enable'
+> >    aarch64-linux-gnu-ld.bfd: cmd/elf.o: in function `do_bootvx':
+> >    cmd/elf.c:280: undefined reference to `dcache_disable'
+> >
+> > While the following error message is expected when SYS_DCACHE_OFF is
+> > set:
+> >    arch/arm/cpu/armv8/cache_v8.c:697:2: error:
+> >        #error Please describe your MMU layout in CONFIG_SYS_MEM_MAP and enable dcache.
+> >
+> > the rest of the compilation errors should be fixed.
+> >
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > Cc: Peng Fan <peng.fan@nxp.com>
+> > Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> > ---
+> >   arch/arm/cpu/armv8/Makefile | 6 ++----
+> >   1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> We should disable SYS_DCACHE_OFF (and SYS_ICACHE_OFF?) for ARMv8, and
+> then rework the Makefiles too.
 
-Compile-tested for:
-- qemu arm64
-- imx8
-- stm32
 
-and run-tested on:
-- Qualcomm RB3 platform
+Ok, I have sent a v2 accordingly. Please help review the same.
 
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
----
- arch/arm/Kconfig            | 2 ++
- arch/arm/cpu/armv8/Makefile | 4 ++--
- 2 files changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 36ee1e9a3c..92bff715e3 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -141,6 +141,7 @@ config THUMB2_KERNEL
- 
- config SYS_ICACHE_OFF
- 	bool "Do not enable icache"
-+	depends on !ARM64
- 	help
- 	  Do not enable instruction cache in U-Boot.
- 
-@@ -153,6 +154,7 @@ config SPL_SYS_ICACHE_OFF
- 
- config SYS_DCACHE_OFF
- 	bool "Do not enable dcache"
-+	depends on !ARM64
- 	help
- 	  Do not enable data cache in U-Boot.
- 
-diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-index bba4f570db..0d0c1728e4 100644
---- a/arch/arm/cpu/armv8/Makefile
-+++ b/arch/arm/cpu/armv8/Makefile
-@@ -5,13 +5,13 @@
- 
- extra-y	:= start.o
- 
-+obj-y	+= cache_v8.o
- obj-y	+= cpu.o
- ifndef CONFIG_$(SPL_TPL_)TIMER
- obj-$(CONFIG_SYS_ARCH_TIMER) += generic_timer.o
- endif
- ifndef CONFIG_$(SPL_)SYS_DCACHE_OFF
--obj-y	+= cache_v8.o
--obj-y	+= cache.o
-+obj-y  += cache.o
- endif
- ifdef CONFIG_SPL_BUILD
- obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) += exceptions.o
--- 
-2.38.1
-
+Thanks,
+Bhupesh
