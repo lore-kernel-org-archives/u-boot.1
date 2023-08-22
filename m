@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F31D2EE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:19:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B084EE49A3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:19:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEB3D8728B;
-	Tue, 22 Aug 2023 05:17:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1829587293;
+	Tue, 22 Aug 2023 05:17:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JS6U7i8k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Enljsvs0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AED44871C2; Tue, 22 Aug 2023 05:17:24 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id D5547871C2; Tue, 22 Aug 2023 05:17:24 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC4EE8726F
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 05:17:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9562D8728E
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 05:17:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-34bbc5eb310so11528565ab.2
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:17:20 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-349a94f3d69so12304365ab.1
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:17:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692674239; x=1693279039;
+ d=chromium.org; s=google; t=1692674240; x=1693279040;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1cSOD/v38JWsOXEBgfqXVSjVgz00+saIjMcw3I4cd6A=;
- b=JS6U7i8ko7nkRtSbFMd35EBThLfP262AY18EmZH2cXgGUW3m7LTbOWGBSZNoI6qyGF
- IZlyrGrnUiUaKAwMNFGVUDhge2u4HYv4let2h/BakbqCYMU6AIDw4/8az2agjs8jsMxt
- /uqrcvycOVTm6U6g/J+IvgO15eKildOzyZEtM=
+ bh=pOuzJexSRntoZLsgrAAoPaTL8MyH7zE3QLdaV8kibh0=;
+ b=Enljsvs08d7qcj1TPeIsYuBD8bXiVWGDfibQCA2KBhq0sBUJ7R7FwMnuLxn41H0A1U
+ poy6sRIxowLTcVeZhcR61Qi+5GoE5F/7U87NP8FGDr8QKpgJlEjdvgyTPCNAhi18oF5g
+ gy9A8KylT5Qtnht1dDf2DK0kROCHAL6lTMTcw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692674239; x=1693279039;
+ d=1e100.net; s=20221208; t=1692674240; x=1693279040;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1cSOD/v38JWsOXEBgfqXVSjVgz00+saIjMcw3I4cd6A=;
- b=auywHttqHZCKauMF30HpxHBQRHz1w1VNhUZg1QK2FUjMoW8Ixadt2fX61HE3OL2zyk
- hNhkz3C2Ycjzsr1mEhdda4buAN3dp3zt0stklQBsKmk2GVjuwOwYBYIc5mDahP9/kpJ8
- MaVfX4EpLKN1w7bTgqkdH8mxZNYY4refoMN5G/s1lfVNstIzv/94GTmyOYkdi9p7nHYG
- nIyFCMTGHBF/ExpNZTy5C0eBkVtQBz27mahdM67YYGgfN1W28WLGNhnne8hMDEV0Ju62
- NlBdy6r4J1RCxJw/zAumBqT2aYL4z3+NhaMzMibxQk/bvbhZFM9lrFsqt+tlkG6tKXxC
- tdvg==
-X-Gm-Message-State: AOJu0YxBfOHPGgRJhUig5FKR/TPD55MFJlP0Q+TdeTAsYyRhTR//F3cp
- Juc9FfxqWdu68KSlgrn5Id092CEHXc3RwmPvrrU=
-X-Google-Smtp-Source: AGHT+IG9QDx2levpNlC/LZyf85vu8sFkaPh3LL5FvmKM6g1RFVbVVlh6WLh1AJFlvSq/ZcBYEg+9/g==
-X-Received: by 2002:a05:6e02:194a:b0:349:614f:8d9c with SMTP id
- x10-20020a056e02194a00b00349614f8d9cmr11562934ilu.31.1692674239467; 
- Mon, 21 Aug 2023 20:17:19 -0700 (PDT)
+ bh=pOuzJexSRntoZLsgrAAoPaTL8MyH7zE3QLdaV8kibh0=;
+ b=VFrZy4u1UMZxDP4H25djxmEjE73W6UI2x7/QiFkJQKtWtZRkNG2hZhXWieI7/z0yNr
+ VpAUA6Auzq/U38GdUrPT3Dhur68i8NJzKXhENeKleEZjCRC6K0ttK+KKq+aFJmnqkfTA
+ PmesbHss56tXZtrJ19hAyCMMdjDqklcgNputec3FTxDhpWAsCmGPUqaZlEWsDbURT1SL
+ ciQAxmdzzfsV/8WppIs5XYJ0ipWtvjyJgOWG1zNIkw38bdC3yea1CIJAl9/nRmNpE9Lp
+ 16G9cmXqZJHcaBFWu0exdxIbtkP69Ywk0XX3yA/XEKuJXTdCzaKU6CMjp6vDpFgIBjBg
+ 47SA==
+X-Gm-Message-State: AOJu0YwoygGeVg9TzBi3CLTk9IIosCjnFzxxXFxvyH/HQi6hX9OwL7Vh
+ 0jBOg8xgI5IOsY1nseqm0X4o/MsWQrtyv27DPBc=
+X-Google-Smtp-Source: AGHT+IELZV4QN0ljW2GkqH8KB2gJCT065Sr/Pzsc0UK9wHs+lRTX4ICW6s72mQHS3ZWGtFR0/MdFzw==
+X-Received: by 2002:a05:6e02:1066:b0:346:4f37:9ee7 with SMTP id
+ q6-20020a056e02106600b003464f379ee7mr7522631ilj.13.1692674240186; 
+ Mon, 21 Aug 2023 20:17:20 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  gv14-20020a0566382e4e00b0042b37dda71asm2722735jab.136.2023.08.21.20.17.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 20:17:19 -0700 (PDT)
+ Mon, 21 Aug 2023 20:17:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Alexander Graf <agraf@csgraf.de>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 12/14] x86: Convert arch_fsp_init() to use events
-Date: Mon, 21 Aug 2023 21:16:59 -0600
-Message-ID: <20230822031705.1340941-13-sjg@chromium.org>
+Subject: [PATCH 13/14] freescale: Drop call to init_func_vid() in the init
+ sequence
+Date: Mon, 21 Aug 2023 21:17:00 -0600
+Message-ID: <20230822031705.1340941-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230822031705.1340941-1-sjg@chromium.org>
 References: <20230822031705.1340941-1-sjg@chromium.org>
@@ -88,119 +89,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert this to use events instead of calling a function directly in the
-init sequence.
+Use the misc_init_f event instead, which is designed for this purpose.
 
-Rename it to arch_fsp_init_f() to distinguish it from the one that happens
-after relocation.
-
-For FSPv2 nothing needs to be done here, so drop the empty function.
+All boards with CONFIG_VID already enable CONFIG_EVENT.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/lib/fsp1/fsp_common.c |  1 +
- arch/x86/lib/fsp2/fsp_common.c |  5 -----
- common/board_f.c               |  4 +---
- common/event.c                 |  1 +
- include/event.h                |  9 +++++++++
- include/init.h                 | 11 -----------
- 6 files changed, 12 insertions(+), 19 deletions(-)
+ arch/arm/cpu/armv8/fsl-layerscape/spl.c |  5 +++++
+ board/freescale/ls1088a/ls1088a.c       |  3 ++-
+ board/freescale/lx2160a/lx2160a.c       |  2 ++
+ common/board_f.c                        | 10 ----------
+ include/init.h                          |  3 ---
+ 5 files changed, 9 insertions(+), 14 deletions(-)
 
-diff --git a/arch/x86/lib/fsp1/fsp_common.c b/arch/x86/lib/fsp1/fsp_common.c
-index 20926171822d..df18f4767562 100644
---- a/arch/x86/lib/fsp1/fsp_common.c
-+++ b/arch/x86/lib/fsp1/fsp_common.c
-@@ -101,3 +101,4 @@ int arch_fsp_init(void)
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/spl.c b/arch/arm/cpu/armv8/fsl-layerscape/spl.c
+index 61fced451eb5..033f48d04b90 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/spl.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/spl.c
+@@ -78,6 +78,11 @@ void tzpc_init(void)
+ #endif
+ }
+ 
++__weak int init_func_vid(void)
++{
++	return 0;
++}
++
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+diff --git a/board/freescale/ls1088a/ls1088a.c b/board/freescale/ls1088a/ls1088a.c
+index 7a1047a77f73..f2b8bec03729 100644
+--- a/board/freescale/ls1088a/ls1088a.c
++++ b/board/freescale/ls1088a/ls1088a.c
+@@ -181,13 +181,14 @@ unsigned long long get_qixis_addr(void)
+ #endif
+ 
+ #if defined(CONFIG_VID)
+-int init_func_vid(void)
++static int setup_core_voltage(void)
+ {
+ 	if (adjust_vdd(0) < 0)
+ 		printf("core voltage not adjusted\n");
  
  	return 0;
  }
-+EVENT_SPY_SIMPLE(EVT_FSP_INIT_F, arch_fsp_init);
-diff --git a/arch/x86/lib/fsp2/fsp_common.c b/arch/x86/lib/fsp2/fsp_common.c
-index 20c3f6406adf..d802a86967d5 100644
---- a/arch/x86/lib/fsp2/fsp_common.c
-+++ b/arch/x86/lib/fsp2/fsp_common.c
-@@ -8,11 +8,6 @@
- #include <init.h>
- #include <asm/fsp/fsp_support.h>
++EVENT_SPY_SIMPLE(EVT_MISC_INIT_F, setup_core_voltage);
  
--int arch_fsp_init(void)
+ u16 soc_get_fuse_vid(int vid_index)
+ {
+diff --git a/board/freescale/lx2160a/lx2160a.c b/board/freescale/lx2160a/lx2160a.c
+index d631a11ff667..2883848550af 100644
+--- a/board/freescale/lx2160a/lx2160a.c
++++ b/board/freescale/lx2160a/lx2160a.c
+@@ -13,6 +13,7 @@
+ #include <i2c.h>
+ #include <malloc.h>
+ #include <errno.h>
++#include <event.h>
+ #include <netdev.h>
+ #include <fsl_ddr.h>
+ #include <asm/io.h>
+@@ -242,6 +243,7 @@ int init_func_vid(void)
+ 	return 0;
+ }
+ #endif
++EVENT_SPY_SIMPLE(EVT_MISC_INIT_F, init_func_vid);
+ 
+ int checkboard(void)
+ {
+diff --git a/common/board_f.c b/common/board_f.c
+index 46008bac6595..aef395b1354e 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -280,13 +280,6 @@ static int init_func_i2c(void)
+ }
+ #endif
+ 
+-#if defined(CONFIG_VID)
+-__weak int init_func_vid(void)
 -{
 -	return 0;
 -}
--
- void board_final_cleanup(void)
- {
- 	u32 status;
-diff --git a/common/board_f.c b/common/board_f.c
-index a485ba62fa17..46008bac6595 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -855,9 +855,7 @@ static const init_fnc_t init_sequence_f[] = {
- #if defined(CONFIG_CONSOLE_RECORD_INIT_F)
- 	console_record_init,
- #endif
--#if defined(CONFIG_HAVE_FSP)
--	arch_fsp_init,
 -#endif
-+	INITCALL_EVENT(EVT_FSP_INIT_F),
- 	arch_cpu_init,		/* basic arch cpu dependent setup */
- 	mach_cpu_init,		/* SoC/machine dependent CPU setup */
- 	initf_dm,
-diff --git a/common/event.c b/common/event.c
-index 55f6932ef62c..8a6190888845 100644
---- a/common/event.c
-+++ b/common/event.c
-@@ -35,6 +35,7 @@ const char *const type_name[] = {
- 
- 	/* init hooks */
- 	"misc_init_f",
-+	"fsp_init_r",
- 
- 	/* Fpga load hook */
- 	"fpga_load",
-diff --git a/include/event.h b/include/event.h
-index b2cfd65c9f8b..85269aa317aa 100644
---- a/include/event.h
-+++ b/include/event.h
-@@ -32,6 +32,15 @@ enum event_t {
- 	/* Init hooks */
- 	EVT_MISC_INIT_F,
- 
-+	/*
-+	 * Emitted before relocation to set up Firmware Support Package
-+	 *
-+	 * Where U-Boot relies on binary blobs to handle part of the system
-+	 * init, this event can be used to set up the blobs. This is used on
-+	 * some Intel platforms
-+	 */
-+	EVT_FSP_INIT_F,
-+
- 	/* Fpga load hook */
- 	EVT_FPGA_LOAD,
- 
+-
+ static int setup_mon_len(void)
+ {
+ #if defined(__ARM__) || defined(__MICROBLAZE__)
+@@ -896,9 +889,6 @@ static const init_fnc_t init_sequence_f[] = {
+ 	INIT_FUNC_WATCHDOG_RESET
+ #if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
+ 	init_func_i2c,
+-#endif
+-#if defined(CONFIG_VID) && !defined(CONFIG_SPL)
+-	init_func_vid,
+ #endif
+ 	announce_dram_init,
+ 	dram_init,		/* configure available RAM banks */
 diff --git a/include/init.h b/include/init.h
-index 3bf30476a2e0..1bf76e4eff72 100644
+index 1bf76e4eff72..13579db75900 100644
 --- a/include/init.h
 +++ b/include/init.h
-@@ -57,17 +57,6 @@ int arch_cpu_init(void);
-  */
- int mach_cpu_init(void);
+@@ -276,9 +276,6 @@ int set_cpu_clk_info(void);
+ int update_flash_size(int flash_size);
+ int arch_early_init_r(void);
+ int misc_init_r(void);
+-#if defined(CONFIG_VID)
+-int init_func_vid(void);
+-#endif
  
--/**
-- * arch_fsp_init() - perform firmware support package init
-- *
-- * Where U-Boot relies on binary blobs to handle part of the system init, this
-- * function can be used to set up the blobs. This is used on some Intel
-- * platforms.
-- *
-- * Return: 0
-- */
--int arch_fsp_init(void);
--
- /**
-  * arch_fsp_init() - perform post-relocation firmware support package init
-  *
+ /* common/board_info.c */
+ int checkboard(void);
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
