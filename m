@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08819EE49A5
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 19:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B064EE49AB
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 19:58:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DB42864A0;
-	Tue, 22 Aug 2023 21:46:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6863486497;
+	Tue, 22 Aug 2023 21:58:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XaVb8So0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G+JucykY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 103338649F; Tue, 22 Aug 2023 21:46:54 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 884AB86482; Tue, 22 Aug 2023 21:58:22 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DBC9864AC
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 21:46:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F1EB8647E
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 21:58:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-523476e868dso6042224a12.3
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 12:46:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692733609; x=1693338409;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Oxpdm7iPqFIM3zmYDlu28yywhCMGmNyb1z1h4rrkEvU=;
- b=XaVb8So0kHxAZPI6qF7udPogb54rtfUBMfF+0XJ11Fxe0Six5Etp514xfELlfzWh+p
- z47XKCV78Uhl9HDE++UGwk9ZjWPJHObbzzLZHY396hGQvBvTp634tprPKnCD9aGlQGNI
- qPP8n1N2ICgm4MNMhgVdu+Law0T4xOa7upe+I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692733609; x=1693338409;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Oxpdm7iPqFIM3zmYDlu28yywhCMGmNyb1z1h4rrkEvU=;
- b=XoBr5pc4D7khxvAJF+Q+O37oQwolZMlT3KlTiwlUDvjAcHY5ZfiMg/ZM0Vsz12x8oQ
- WfUsn+OCkzS7hAZBwFoDvMoFOrU422KtLWRlZLlzrvxheh/LcNyPk8pH7KSSJep5jv8T
- VBnn4RbjCMxHsmF3+3Z++GzZlInfUussEXScRNU2Cwu7CmRBivO0hthH0ga6r7qaJ5+X
- FUFZnonIiSd4M6ciF/rjKS/8YRpm2oeWsofSvklccI9PNBzyWinNia9enpFbuDh0MNvK
- MQ1fJfkNgsqnTR9C1F7DttSX3zcqW4bkdcLZ7jE3uucQyrJ5ZldHxgQC320GmMh8xwYI
- 0F+w==
-X-Gm-Message-State: AOJu0YwYS3jqr5HGGp58xmApnN4itiQEPPtKbLvOOHtZkWKrtfU8vl4T
- eXokQGYiCNmJE6QjorfoGv1MmrGfGTdsmSNdN1Q+9HgAb4sI4g9UJrLAbw==
-X-Google-Smtp-Source: AGHT+IEX3jZLZ/6sZ2i5njydFFDXC3shE3l/tQfstNIv4Ag2XhzJcd4YMxvxcCjBqLjHbYJECkCKtXoJlZvK6C+W5V0=
-X-Received: by 2002:aa7:d6cd:0:b0:526:9cfb:c12 with SMTP id
- x13-20020aa7d6cd000000b005269cfb0c12mr7981058edr.38.1692733608644; Tue, 22
- Aug 2023 12:46:48 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37MJwCVl070384;
+ Tue, 22 Aug 2023 14:58:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692734292;
+ bh=b77JCZ6O/DLii2oMlV0yDOw9JAVvW5dhGNCMSmXoAiM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=G+JucykYyS2iFCP4Opyht+1xgkOU7kRKTN0oFVKhhKMBD2mMp5RxgoiqzKtDBgqJd
+ e02wtVtBPSquKx7fxsat0xfTtbvB6MeEZVoi4zW7L18TanmS7n702SzxKe244xtu1S
+ rmqSLqM0hUMmXHwTi9PtNvRLHDq/5vLIfFK/zWNY=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37MJwB1b069909
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 22 Aug 2023 14:58:11 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
+ Aug 2023 14:58:11 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 22 Aug 2023 14:58:11 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37MJwBFJ004440;
+ Tue, 22 Aug 2023 14:58:11 -0500
+Date: Tue, 22 Aug 2023 14:58:11 -0500
+From: reidt <reidt@ti.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <afd@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>
+Subject: Re: [PATCH] arm: dts: j7200: dtb sync with Linux 6.5-rc1
+Message-ID: <20230822195811.hhmtkfjobawtcd7f@reidt-HP-Z2>
+References: <20230822185725.6718-1-reidt@ti.com>
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Aug 2023 13:46:36 -0600
-Message-ID: <CAPnjgZ1h135x7Sp7yXj2FxFdwr8zvVvM-JgzB_s+Ra=9yDMObQ@mail.gmail.com>
-Subject: Please pull u-boot-dm
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230822185725.6718-1-reidt@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,37 +78,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom.
+On 13:57-20230822, Reid Tonking wrote:
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/17476
+[...]
 
+> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> index e62f9218e8..bd4be7215f 100644
+> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> @@ -41,44 +31,34 @@
+>  		ti,sci-host-id = <10>;
+>  		bootph-pre-ram;
+>  	};
+> -
+> -	clk_200mhz: dummy_clock_200mhz {
+> -		compatible = "fixed-clock";
+> -		#clock-cells = <0>;
+> -		clock-frequency = <200000000>;
+> -		bootph-pre-ram;
+> -	};
+> -
+> -	clk_19_2mhz: dummy_clock_19_2mhz {
+> -		compatible = "fixed-clock";
+> -		#clock-cells = <0>;
+> -		clock-frequency = <19200000>;
+> -		bootph-pre-ram;
+> -	};
+>  };
+>  
+>  &memorycontroller {
+>  	power-domains = <&k3_pds 8 TI_SCI_PD_SHARED>,
+>  			<&k3_pds 90 TI_SCI_PD_SHARED>;
+>  	clocks = <&k3_clks 8 5>, <&k3_clks 30 9>;
+> +	bootph-pre-ram;
+> +};
+> +
+> +&mcu_timer0 {
+> +	/delete-property/ power-domains;
+> +	ti,timer-alwon;
+> +	clock-frequency = <25000000>;
+> +	bootph-pre-ram;
+>  };
 
-The following changes since commit 976fb2ffa3875a7bed9866bf5cf939a81c423ef8:
+This needs to be..
+$mcu_timer0 {
+clock-frequency = <25000000>;
+bootph-pre-ram;
+};
 
-  Prepare v2023.10-rc3 (2023-08-21 16:19:59 -0400)
+This fix was accidently left out of the commit, so it'll be changed for
+v2. The change to dev-data.c allows this.
 
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-pull-22aug23
-
-for you to fetch changes up to 1c55d62fb9ccc107cb4fefa9bb04cb16395ca84c:
-
-  riscv: cpu: make riscv_cpu_probe to EVT_DM_POST_INIT_R callback
-(2023-08-22 08:07:54 -0600)
-
-----------------------------------------------------------------
-RISC-V fix for CPU init
-
-----------------------------------------------------------------
-Chanho Park (2):
-      dm: event: add EVT_DM_POST_INIT_R event type
-      riscv: cpu: make riscv_cpu_probe to EVT_DM_POST_INIT_R callback
-
- arch/riscv/cpu/cpu.c | 11 +++--------
- common/event.c       |  1 +
- drivers/core/root.c  |  6 ++++--
- include/event.h      |  1 +
- 4 files changed, 9 insertions(+), 10 deletions(-)
-
-Regards,
-Simon
+-Reid
