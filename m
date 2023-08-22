@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 100D3EE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 04:09:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 690B0EE49A3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 04:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC0D871FF;
-	Tue, 22 Aug 2023 06:09:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E470A87245;
+	Tue, 22 Aug 2023 06:10:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="byeW7iTq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lXCDJjoy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5BBE871D5; Tue, 22 Aug 2023 06:09:24 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id EDFE487110; Tue, 22 Aug 2023 06:10:27 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 109038687F
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 06:09:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECE0D8687F
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 06:10:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1bf11b1c7d0so32031295ad.0
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:09:21 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-68a3236a414so2022720b3a.0
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:10:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692677360; x=1693282160;
+ d=linaro.org; s=google; t=1692677423; x=1693282223;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PZAjI7KHN/EwNiLfKGbcZWJYD7IewslrGpD7qEzJKvg=;
- b=byeW7iTqOp8wuPHsKWvoSqpiqPEwy7zv+86peTebJZO/dbZvYWe42iQtBFzUU9mfXJ
- WXWgpjxBWqx0NrEYDERvaNuSiq9sHmaA298l3CxXvHxle/TkHl8DAVLehTwnpGjosDIb
- BRgthG8HLdg2nkPkpsew4ipQpsdLZP3lUUu8rWpaPn/Smxls13sTkDT5u+PTe13dAodk
- SpV2/1gNd27q+/T5amgQ31jv1+BIAAR9nudiHB59nQ8QcnRJ+tIcSStfvIYQCuc0HXr+
- ++NSv9T5FJi0NCcoCJ00N/XK0P5uskiR98YmfV1fRpOHw/7ejYqy/WXZqQrWNkoThKLp
- vMAQ==
+ bh=vv1j2/FNtcg2xf5psUYbt3OTbk++ESjT6DtqZu9sAjg=;
+ b=lXCDJjoyxjxty0RMdxpFnjUZ7fbIqzQbBMMj2kH76ctmAl3V0+K1t4j5273VPqy8nW
+ beUktCXUtrExjjXN7/BA3y82YBBYoRAJenGNbsQw3df2PcX6dJBbRC3+minaRUv5sCnE
+ ln7l/AI5HKeas2elDMKr0NlaheHLzAP6i3YlI0B3mhbK7nlkgFm8XeNHG2PRkYiEKtsd
+ rvN/2B8UdlFOkzceVzm7JDaAkP15pQ1DDe9eROkdNRVL+cO7jYC9s+ClaVVMMk7GYesN
+ XhJupfFQHutDo4v6RdIAQ83SaO/RlOJpVbBiRhccSz0+hTUHJQXOjze17lnYYAgKPazC
+ L+7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692677360; x=1693282160;
+ d=1e100.net; s=20221208; t=1692677423; x=1693282223;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PZAjI7KHN/EwNiLfKGbcZWJYD7IewslrGpD7qEzJKvg=;
- b=jBZhBAGUUBT374tedsk1wXqbVWyUyix6iPq0WxtSilo/YyYDF8pbEU/igY6VJ6UZhM
- 5Pe4xpog8oaaKfF2p4hQ/SqB0uvnoKQ/ppfrfZiSeMXDD76yl/Bdi5jlYIycDeLkXre3
- vM1MqajjQ/UK3Dr9Vw5HMMRE2rYZVWYLjKWRbdv/XpMNW20HNWMbnXjz4pHqcgmhgmxa
- yHnxT8l8AcchiIliAoum+M/nMLHB3xZV0RHsbGIT/jqkr9i6XdDG6aGu/VHx2jdrkOCI
- 7Yial4q1yFnUeNDWujPxEKwgQ43p3GZNJODSqVxEJq0JuJqy78qToE/zMSZKC4S4pIoF
- U64w==
-X-Gm-Message-State: AOJu0Yz1aUMrKnQ7yGyVcS+yPuCSG8C8gRSnZdA2yutg6yNYkw/KSq6u
- jGl7q8NZny9pbc2aze+tZQAohkU/eeNWLSsQcLk=
-X-Google-Smtp-Source: AGHT+IHwefh2dBjfZlfM/qiBGVpKlIcb3BnAjz1vniLcaTqxxAilTnd92nZOUAjWN0eNH8fe2yTpiw==
-X-Received: by 2002:a17:90b:1e02:b0:261:219b:13b3 with SMTP id
- pg2-20020a17090b1e0200b00261219b13b3mr12546993pjb.16.1692677360195; 
- Mon, 21 Aug 2023 21:09:20 -0700 (PDT)
+ bh=vv1j2/FNtcg2xf5psUYbt3OTbk++ESjT6DtqZu9sAjg=;
+ b=bJ2rLeObwHAtj+9qkUzschkWrLsGX0Xrr4mVfliDiAThECO1oTIFb0As1IOzgwAlhs
+ CtS+r6JxoRsPUeFJJDEtwn8sIF6M/t+hk64pT+t/9RNDSbRyAaUSugBGydfxYcuphzlY
+ PNBhxIa6TNnzOmyynLhymlu/3yD7FW+YsdcCNlm40IsYuYnHicRHleCdZFXA5x9asu7U
+ DpZw49vjEB+WXFyNfef5M0WBvU4LukaLeyj8e3O1ExQ4m3E+TlwOWhtbljrWmgjbKwyn
+ ifXB2CA3ggFhdFYRJER298KBiSmEayfpTaXol0e/b4MLrTZ6Mn0AAqFgJZAvNXnsO0Lh
+ LQXA==
+X-Gm-Message-State: AOJu0YyeDuo3o/sJ590/P4x8DuwNvJhHUxNARMEJGHga6Oe4yUbkZzr6
+ jrG+8oKCgk3XCBodZzz5qYFf5Q==
+X-Google-Smtp-Source: AGHT+IFeG+Xdk5HvWszHMjKWN5S7vXGYO3ZCjbO9hHlShTMg4dkusvLt4FMODz9JaiHerVNLNbTPIA==
+X-Received: by 2002:a05:6a20:3d81:b0:12f:382d:2a37 with SMTP id
+ s1-20020a056a203d8100b0012f382d2a37mr12032637pzi.15.1692677423308; 
+ Mon, 21 Aug 2023 21:10:23 -0700 (PDT)
 Received: from ?IPV6:2401:4900:1f3b:3924:9d49:2d2a:63e6:8974?
  ([2401:4900:1f3b:3924:9d49:2d2a:63e6:8974])
  by smtp.gmail.com with ESMTPSA id
- n14-20020a17090ac68e00b002636dfcc6f5sm6847438pjt.3.2023.08.21.21.09.18
+ fe10-20020a056a002f0a00b006889348ba6asm2013939pfb.81.2023.08.21.21.10.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Aug 2023 21:09:19 -0700 (PDT)
-Message-ID: <be817bd9-21b7-ab27-e35b-dafcb1a284de@linaro.org>
-Date: Tue, 22 Aug 2023 09:39:17 +0530
+ Mon, 21 Aug 2023 21:10:23 -0700 (PDT)
+Message-ID: <3f6e0cbc-bf04-b22d-68aa-614430e4a16a@linaro.org>
+Date: Tue, 22 Aug 2023 09:40:19 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
-Subject: Re: [PATCH v2 6/7] ufs: Use utp_transfer_req_desc pointer in
- ufshcd_get_tr_ocs
+Subject: Re: [PATCH v2 7/7] ufs: Implement cache management
 Content-Language: en-US
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: n-francis@ti.com
 References: <20230816150555.245028-1-marek.vasut+renesas@mailbox.org>
- <20230816150555.245028-6-marek.vasut+renesas@mailbox.org>
+ <20230816150555.245028-7-marek.vasut+renesas@mailbox.org>
 From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-In-Reply-To: <20230816150555.245028-6-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230816150555.245028-7-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,12 +96,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
 On 8/16/23 8:35 PM, Marek Vasut wrote:
-> Use utp_transfer_req_desc pointer to reference to utrdl queue
-> instead of referencing the queue directly. This makes the code
-> more consistent. No functional change.
+> Add function to flush and invalidate cache over request and response
+> queue entries, and perform flush and optional invalidate over block
+> layer data that are passed into the UFS layer. This makes it possible
+> to use UFS with caches enabled.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -111,24 +109,117 @@ On 8/16/23 8:35 PM, Marek Vasut wrote:
 > ---
 > V2: No change
 > ---
->   drivers/ufs/ufs.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
+>   drivers/ufs/ufs.c | 42 +++++++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 41 insertions(+), 1 deletion(-)
 > 
 > diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-> index da1009e2c14..041caee714f 100644
+> index 041caee714f..7c48d57f99d 100644
 > --- a/drivers/ufs/ufs.c
 > +++ b/drivers/ufs/ufs.c
-> @@ -858,7 +858,9 @@ static inline int ufshcd_get_req_rsp(struct utp_upiu_rsp *ucd_rsp_ptr)
->    */
->   static inline int ufshcd_get_tr_ocs(struct ufs_hba *hba)
->   {
-> -	return le32_to_cpu(hba->utrdl->header.dword_2) & MASK_OCS;
-> +	struct utp_transfer_req_desc *req_desc = hba->utrdl;
-> +
-> +	return le32_to_cpu(req_desc->header.dword_2) & MASK_OCS;
+> @@ -692,6 +692,21 @@ static inline u8 ufshcd_get_upmcrs(struct ufs_hba *hba)
+>   	return (ufshcd_readl(hba, REG_CONTROLLER_STATUS) >> 8) & 0x7;
 >   }
 >   
->   static inline int ufshcd_get_rsp_upiu_result(struct utp_upiu_rsp *ucd_rsp_ptr)
+> +/**
+> + * ufshcd_cache_flush_and_invalidate - Flush and invalidate cache
+> + *
+> + * Flush and invalidate cache in aligned address..address+size range.
+> + * The invalidation is in place to avoid stale data in cache.
+> + */
+> +static void ufshcd_cache_flush_and_invalidate(void *addr, unsigned long size)
+> +{
+> +	uintptr_t aaddr = (uintptr_t)addr & ~(ARCH_DMA_MINALIGN - 1);
+> +	unsigned long asize = ALIGN(size, ARCH_DMA_MINALIGN);
+> +
+> +	flush_dcache_range(aaddr, aaddr + asize);
+> +	invalidate_dcache_range(aaddr, aaddr + asize);
+> +}
+> +
+>   /**
+>    * ufshcd_prepare_req_desc_hdr() - Fills the requests header
+>    * descriptor according to request
+> @@ -735,6 +750,8 @@ static void ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba,
+>   	req_desc->header.dword_3 = 0;
+>   
+>   	req_desc->prd_table_length = 0;
+> +
+> +	ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
+>   }
+>   
+>   static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
+> @@ -763,10 +780,15 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
+>   	memcpy(&ucd_req_ptr->qr, &query->request.upiu_req, QUERY_OSF_SIZE);
+>   
+>   	/* Copy the Descriptor */
+> -	if (query->request.upiu_req.opcode == UPIU_QUERY_OPCODE_WRITE_DESC)
+> +	if (query->request.upiu_req.opcode == UPIU_QUERY_OPCODE_WRITE_DESC) {
+>   		memcpy(ucd_req_ptr + 1, query->descriptor, len);
+> +		ufshcd_cache_flush_and_invalidate(ucd_req_ptr, 2 * sizeof(*ucd_req_ptr));
+> +	} else {
+> +		ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
+> +	}
+>   
+>   	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
+> +	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
+>   }
+>   
+>   static inline void ufshcd_prepare_utp_nop_upiu(struct ufs_hba *hba)
+> @@ -783,6 +805,9 @@ static inline void ufshcd_prepare_utp_nop_upiu(struct ufs_hba *hba)
+>   	ucd_req_ptr->header.dword_2 = 0;
+>   
+>   	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
+> +
+> +	ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
+> +	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
+>   }
+>   
+>   /**
+> @@ -1409,6 +1434,8 @@ void ufshcd_prepare_utp_scsi_cmd_upiu(struct ufs_hba *hba,
+>   	memcpy(ucd_req_ptr->sc.cdb, pccb->cmd, cdb_len);
+>   
+>   	memset(hba->ucd_rsp_ptr, 0, sizeof(struct utp_upiu_rsp));
+> +	ufshcd_cache_flush_and_invalidate(ucd_req_ptr, sizeof(*ucd_req_ptr));
+> +	ufshcd_cache_flush_and_invalidate(hba->ucd_rsp_ptr, sizeof(*hba->ucd_rsp_ptr));
+>   }
+>   
+>   static inline void prepare_prdt_desc(struct ufshcd_sg_entry *entry,
+> @@ -1423,6 +1450,7 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   {
+>   	struct utp_transfer_req_desc *req_desc = hba->utrdl;
+>   	struct ufshcd_sg_entry *prd_table = hba->ucd_prdt_ptr;
+> +	uintptr_t aaddr = (uintptr_t)(pccb->pdata) & ~(ARCH_DMA_MINALIGN - 1);
+>   	ulong datalen = pccb->datalen;
+>   	int table_length;
+>   	u8 *buf;
+> @@ -1430,9 +1458,19 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   
+>   	if (!datalen) {
+>   		req_desc->prd_table_length = 0;
+> +		ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
+>   		return;
+>   	}
+>   
+> +	if (pccb->dma_dir == DMA_TO_DEVICE) {	/* Write to device */
+> +		flush_dcache_range(aaddr, aaddr +
+> +				   ALIGN(datalen, ARCH_DMA_MINALIGN));
+> +	}
+> +
+> +	/* In any case, invalidate cache to avoid stale data in it. */
+> +	invalidate_dcache_range(aaddr, aaddr +
+> +				ALIGN(datalen, ARCH_DMA_MINALIGN));
+> +
+>   	table_length = DIV_ROUND_UP(pccb->datalen, MAX_PRDT_ENTRY);
+>   	buf = pccb->pdata;
+>   	i = table_length;
+> @@ -1446,6 +1484,8 @@ static void prepare_prdt_table(struct ufs_hba *hba, struct scsi_cmd *pccb)
+>   	prepare_prdt_desc(&prd_table[table_length - i - 1], buf, datalen - 1);
+>   
+>   	req_desc->prd_table_length = table_length;
+> +	ufshcd_cache_flush_and_invalidate(prd_table, sizeof(*prd_table) * table_length);
+> +	ufshcd_cache_flush_and_invalidate(req_desc, sizeof(*req_desc));
+>   }
+>   
+>   static int ufs_scsi_exec(struct udevice *scsi_dev, struct scsi_cmd *pccb)
 
 Reviewed-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 Tested-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
