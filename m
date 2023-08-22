@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3289EE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:25:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED2EEE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:25:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A8B3864E3;
-	Tue, 22 Aug 2023 13:22:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2F4A864C1;
+	Tue, 22 Aug 2023 13:23:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oMTJ23M8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ABjJ+2Rp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4428C864A3; Tue, 22 Aug 2023 13:22:55 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 278CF864DD; Tue, 22 Aug 2023 13:22:56 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0E62864AE
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:22:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B15C864C7
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:22:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2b9c907bc68so73320081fa.2
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:22:51 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-99bcc0adab4so560029466b.2
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:22:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692703371; x=1693308171;
+ d=gmail.com; s=20221208; t=1692703372; x=1693308172;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qPtXOOiwEFwSldlz/wVEYOL86VQ0DtI+RVkc2puDFQI=;
- b=oMTJ23M8G3ajOp13ReIa7sFJ+uSUfXPty3UJ3XC66fZTnsaEYciLwTndE2u4KDadNo
- yB1YriKvMNJd7fRfwGTNsjAP2D41KXfUpxS6XlrKCpqdA57WqltDxoe1wMi9DNt4v+jf
- jNtqKaLcNoRzXbJSQYpTgSXwavQr3RAPCmNmAgn4YnvW6pvl24W9A4OPlJobpgT8SyXM
- KwFIP4iF73oEc8eknMgeF9O85abm0JRGIjXuPSMrGZmypZQXotvTdUH9txhePFRlZfCO
- B5OYfWt6xUi8MvEQUzJVA68atogEdvzfgfi5FE4+iVYeCChrAfKV3WKhdgJ53yf+PQGv
- 48lg==
+ bh=UUzmiGsM+CBVI2t21fk1UNwMwq+HMhJ7S0OUYqJCFtI=;
+ b=ABjJ+2RpXg2dT0iDCSGbxu2rdFpAL5uJzaayJES657JgmwJE6S/bN8vI+oD/bJzZfH
+ hCQXqYJMeq5jP9zmYjM9bq/a4dpl7PuTz6v9bh0JT1ZrvGKemdvMmuiM+TP4ChfOxiYo
+ Nqdby9kdQYalAY/4I138EjTP1wSFNlMMIKHP5GwPXv06LywxQI9jjxJz07Pieatrkq6i
+ X9zPbKjuUPdIxgTIsUGGOsk0Fpk31je+H1Mbnk8d1hWnITCEw/E7GGO2rnxR6bNs12Bm
+ Md4pO6KpDLAIl9PEj2xsI5GqZDHpJttFogcBXJBjS22d7IIy/lfZvQE9z0Tcr+z9SgBR
+ IGdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692703371; x=1693308171;
+ d=1e100.net; s=20221208; t=1692703372; x=1693308172;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qPtXOOiwEFwSldlz/wVEYOL86VQ0DtI+RVkc2puDFQI=;
- b=aZknY2+YlAZJ1OihPjlKKPAEdO464hsVsfeW5QTuKp+Yg2GSM9ABK3zX0bXiYQFprT
- uDoUIWj4eFxz7oLDcpPGgfVnlvJw3NAzCrAzUXW++07SvS284f/XrKcC2jBxGQSMFq3P
- qTcsNQdg7LUUSZohWE8w5fHvetTD3MQ51h6ZsypEEaEUb7G3myZoIpH/lPQLU55Yb2Ea
- ukadtvZ5dts7Ms5fvf4VxRUHV5rMoTtko2r6bTSjGC2/8eQyadRvOe1BKFnaz3k45q/P
- wCrkjF2z79mOD0R0ZnC57kz5QEFycL+lUpefIVMmJSRcB36KYpz0R/eb2rxa3kiLaXeL
- V8+A==
-X-Gm-Message-State: AOJu0YxjCFDNNh1RAvIB9/jl+/tzJBgeEqBKXu33MOfXkFF6maBtfQkf
- 8Vv4hgI87jpIMDdM5+2NCRo=
-X-Google-Smtp-Source: AGHT+IGj8hfbXajM27njP+erov4/gCYmFH9OrY4UWZbDD8swtO1EhBQMrwRPgnpLw/b1dgaKAof4IQ==
-X-Received: by 2002:a2e:b603:0:b0:2bc:ba71:ddf2 with SMTP id
- r3-20020a2eb603000000b002bcba71ddf2mr4962144ljn.15.1692703371137; 
+ bh=UUzmiGsM+CBVI2t21fk1UNwMwq+HMhJ7S0OUYqJCFtI=;
+ b=J4u8PzVgE9JJurcUn0r7I6oDf+F4ixtSZOmlaWaZHg9b4uedhIldPY4mo4yPDLWCZZ
+ YSQaMP3tFhvidb5bA0YQT37j6E5jmCzroW6dLgJeyVOEQSPnWAud2x2s1soane0zgitO
+ umk/bza51iZW0HzWp22SEuijaEJH4/ebMeAEOCl8PEmBikRaKH7kB4z9LXCnJeZ2znyS
+ IzR8JZDra4mlz7Im4SK95fb4UzoEt9M9Mc+BvEs8bBH17BAUT1yrgW+ClcRZmB/0Egn4
+ K8nXP8m5l251RJGjcNxgD/HeWH5fcpI/RoXZ4Um5rEZyuQ4kTRohx/g2Q4YK0pAjCYgh
+ 1QmA==
+X-Gm-Message-State: AOJu0Yxf7XjZEY+JLiTmm11g1DdxL/JOp6JoVZ3HGTUapjjw3IbhLYsh
+ bnHiNH7GNJZ9Dwjxri8MGGV7PvuAFXzHUQ==
+X-Google-Smtp-Source: AGHT+IHN9IZmdLIXDE5nVvUg7PJ3Ck3m3+c5QnePyYTHp63qQzl5uYQGl3yzyH55wkqpkkpXe6F4XA==
+X-Received: by 2002:a17:907:7757:b0:9a1:aede:edfb with SMTP id
+ kx23-20020a170907775700b009a1aedeedfbmr1762747ejc.12.1692703371895; 
  Tue, 22 Aug 2023 04:22:51 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- mh9-20020a170906eb8900b009934855d8f1sm8041456ejb.34.2023.08.22.04.22.50
+ mh9-20020a170906eb8900b009934855d8f1sm8041456ejb.34.2023.08.22.04.22.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 04:22:50 -0700 (PDT)
+ Tue, 22 Aug 2023 04:22:51 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 13/19] ARM: tegra210: set default-tap and default-trim
- values in sdhci nodes
-Date: Tue, 22 Aug 2023 14:22:11 +0300
-Message-Id: <20230822112217.4646-14-clamor95@gmail.com>
+Subject: [PATCH v1 14/19] ARM: tegra20: tegra30: support EBTUPDATE on
+ non-encrypted devices
+Date: Tue, 22 Aug 2023 14:22:12 +0300
+Message-Id: <20230822112217.4646-15-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230822112217.4646-1-clamor95@gmail.com>
 References: <20230822112217.4646-1-clamor95@gmail.com>
@@ -91,55 +91,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tegra MMC driver has hardcoded tap and trim values as for now.
-Set default-tap and default-trim values in sdhci nodes to avoid
-regressions in case Tegra MMC driver is upated to use dts values.
+Re-crypt support was extended to devices without burnt SBK. In case
+SBK is not set, place from where it is read is filled with zeroes.
+This patch adds support for ebtupdate function to detect nosbk device
+and avoid crypto operations for it.
 
+Tested-by: Maksim Kurnosenko <asusx2@mail.ru>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra210.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm/mach-tegra/tegra20/bct.c | 30 ++++++++++++++++++++----------
+ arch/arm/mach-tegra/tegra30/bct.c | 30 ++++++++++++++++++++----------
+ 2 files changed, 40 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/dts/tegra210.dtsi b/arch/arm/dts/tegra210.dtsi
-index a521a43d6c..28ecd2b467 100644
---- a/arch/arm/dts/tegra210.dtsi
-+++ b/arch/arm/dts/tegra210.dtsi
-@@ -704,6 +704,8 @@
- 		clock-names = "sdhci";
- 		resets = <&tegra_car 14>;
- 		reset-names = "sdhci";
-+		nvidia,default-tap = <0x2>;
-+		nvidia,default-trim = <0x4>;
- 		status = "disabled";
- 	};
+diff --git a/arch/arm/mach-tegra/tegra20/bct.c b/arch/arm/mach-tegra/tegra20/bct.c
+index 5eb48990b6..b2c44f3d23 100644
+--- a/arch/arm/mach-tegra/tegra20/bct.c
++++ b/arch/arm/mach-tegra/tegra20/bct.c
+@@ -11,6 +11,9 @@
+ #include "bct.h"
+ #include "uboot_aes.h"
  
-@@ -715,6 +717,8 @@
- 		clock-names = "sdhci";
- 		resets = <&tegra_car 9>;
- 		reset-names = "sdhci";
-+		nvidia,default-tap = <0x8>;
-+		nvidia,default-trim = <0x0>;
- 		status = "disabled";
- 	};
++/* Device with "sbk burned: false" will expose zero key */
++const u8 nosbk[AES128_KEY_LENGTH] = { 0 };
++
+ /*
+  * @param  bct		boot config table start in RAM
+  * @param  ect		bootloader start in RAM
+@@ -23,22 +26,27 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	u8 ebt_hash[AES128_KEY_LENGTH] = { 0 };
+ 	u8 sbk[AES128_KEY_LENGTH] = { 0 };
+ 	u8 *bct_hash = bct;
++	bool encrypted;
+ 	int ret;
  
-@@ -726,6 +730,8 @@
- 		clock-names = "sdhci";
- 		resets = <&tegra_car 69>;
- 		reset-names = "sdhci";
-+		nvidia,default-tap = <0x3>;
-+		nvidia,default-trim = <0x3>;
- 		status = "disabled";
- 	};
+ 	bct += BCT_HASH;
  
-@@ -737,6 +743,8 @@
- 		clock-names = "sdhci";
- 		resets = <&tegra_car 15>;
- 		reset-names = "sdhci";
-+		nvidia,default-tap = <0x8>;
-+		nvidia,default-trim = <0x0>;
- 		status = "disabled";
- 	};
++	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++
+ 	memcpy(sbk, (u8 *)(bct + BCT_LENGTH),
+ 	       NVBOOT_CMAC_AES_HASH_LENGTH * 4);
  
+-	ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	encrypted = memcmp(&sbk, &nosbk, AES128_KEY_LENGTH);
+ 
+-	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++	if (encrypted) {
++		ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
+ 
+-	ret = encrypt_data_block(ebt, ebt_size, sbk);
+-	if (ret)
+-		return 1;
++		ret = encrypt_data_block(ebt, ebt_size, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(ebt, ebt_size, ebt_hash, sbk);
+ 	if (ret)
+@@ -52,9 +60,11 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	bct_tbl->bootloader[0].load_addr = CONFIG_SPL_TEXT_BASE;
+ 	bct_tbl->bootloader[0].length = ebt_size;
+ 
+-	ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	if (encrypted) {
++		ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(bct, BCT_LENGTH, bct_hash, sbk);
+ 	if (ret)
+diff --git a/arch/arm/mach-tegra/tegra30/bct.c b/arch/arm/mach-tegra/tegra30/bct.c
+index c56958da69..cff1a3e98d 100644
+--- a/arch/arm/mach-tegra/tegra30/bct.c
++++ b/arch/arm/mach-tegra/tegra30/bct.c
+@@ -11,6 +11,9 @@
+ #include "bct.h"
+ #include "uboot_aes.h"
+ 
++/* Device with "sbk burned: false" will expose zero key */
++const u8 nosbk[AES128_KEY_LENGTH] = { 0 };
++
+ /*
+  * @param  bct		boot config table start in RAM
+  * @param  ect		bootloader start in RAM
+@@ -23,22 +26,27 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	u8 ebt_hash[AES128_KEY_LENGTH] = { 0 };
+ 	u8 sbk[AES128_KEY_LENGTH] = { 0 };
+ 	u8 *bct_hash = bct;
++	bool encrypted;
+ 	int ret;
+ 
+ 	bct += BCT_HASH;
+ 
++	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++
+ 	memcpy(sbk, (u8 *)(bct + BCT_LENGTH),
+ 	       NVBOOT_CMAC_AES_HASH_LENGTH * 4);
+ 
+-	ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	encrypted = memcmp(&sbk, &nosbk, AES128_KEY_LENGTH);
+ 
+-	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++	if (encrypted) {
++		ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
+ 
+-	ret = encrypt_data_block(ebt, ebt_size, sbk);
+-	if (ret)
+-		return 1;
++		ret = encrypt_data_block(ebt, ebt_size, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(ebt, ebt_size, ebt_hash, sbk);
+ 	if (ret)
+@@ -52,9 +60,11 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	bct_tbl->bootloader[0].load_addr = CONFIG_SPL_TEXT_BASE;
+ 	bct_tbl->bootloader[0].length = ebt_size;
+ 
+-	ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	if (encrypted) {
++		ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(bct, BCT_LENGTH, bct_hash, sbk);
+ 	if (ret)
 -- 
 2.39.2
 
