@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98221EE49AE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 17:43:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D87D0EE49AE
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 17:43:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 642028650B;
-	Tue, 22 Aug 2023 19:41:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A50E58650A;
+	Tue, 22 Aug 2023 19:41:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DE438650B; Tue, 22 Aug 2023 19:41:16 +0200 (CEST)
+ id D38498650A; Tue, 22 Aug 2023 19:41:18 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 841E5864F7
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 19:41:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3CD15864F7
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 19:41:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E140811FB;
- Tue, 22 Aug 2023 10:41:53 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9823E11FB;
+ Tue, 22 Aug 2023 10:41:56 -0700 (PDT)
 Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CB6033F762;
- Tue, 22 Aug 2023 10:41:10 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 81D243F762;
+ Tue, 22 Aug 2023 10:41:13 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -33,9 +33,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v11 14/15] test: capsule: Remove logic to add public key ESL
-Date: Tue, 22 Aug 2023 23:10:07 +0530
-Message-Id: <20230822174008.626239-15-sughosh.ganu@linaro.org>
+Subject: [PATCH v11 15/15] doc: capsule: Document the new mechanism to embed
+ ESL file into dtb
+Date: Tue, 22 Aug 2023 23:10:08 +0530
+Message-Id: <20230822174008.626239-16-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230822174008.626239-1-sughosh.ganu@linaro.org>
 References: <20230822174008.626239-1-sughosh.ganu@linaro.org>
@@ -57,65 +58,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The public key EFI Signature List(ESL) needed for capsule
-authentication is now embedded into the platform's DTB as part of the
-build. Remove the superfluous logic from the test setup.
+Update the document to specify how the EFI Signature List(ESL) file
+can be embedded into the platform's dtb as part of the U-Boot build.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes since V10: None
 
- test/py/tests/test_efi_capsule/conftest.py   | 14 ++++----------
- test/py/tests/test_efi_capsule/signature.dts | 10 ----------
- 2 files changed, 4 insertions(+), 20 deletions(-)
- delete mode 100644 test/py/tests/test_efi_capsule/signature.dts
+ doc/develop/uefi/uefi.rst | 19 +++++--------------
+ 1 file changed, 5 insertions(+), 14 deletions(-)
 
-diff --git a/test/py/tests/test_efi_capsule/conftest.py b/test/py/tests/test_efi_capsule/conftest.py
-index 9160f294e6..dd41da9284 100644
---- a/test/py/tests/test_efi_capsule/conftest.py
-+++ b/test/py/tests/test_efi_capsule/conftest.py
-@@ -51,21 +51,15 @@ def efi_capsule_data(request, u_boot_config):
-             check_call('cp %s/capsule_pub_key_bad.crt %s/SIGNER2.crt'
-                        % (key_dir, data_dir), shell=True)
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index f27cabbcce..68f9b332d1 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -562,20 +562,11 @@ and used by the steps highlighted below.
+             ...
+     }
  
--            # Update dtb adding capsule certificate
--            check_call('cd %s; '
--                       'cp %s/test/py/tests/test_efi_capsule/signature.dts .'
--                       % (data_dir, u_boot_config.source_dir), shell=True)
--            check_call('cd %s; '
--                       'dtc -@ -I dts -O dtb -o signature.dtbo signature.dts; '
--                       'fdtoverlay -i %s/arch/sandbox/dts/test.dtb '
--                            '-o test_sig.dtb signature.dtbo'
--                       % (data_dir, u_boot_config.build_dir), shell=True)
+-You can do step-4 manually with
 -
-         # Update dtb to add the version information
-         check_call('cd %s; '
-                    'cp %s/test/py/tests/test_efi_capsule/version.dts .'
-                    % (data_dir, u_boot_config.source_dir), shell=True)
-+
-         if capsule_auth_enabled:
-+            check_call('cd %s; '
-+                       'cp %s/arch/sandbox/dts/test.dtb test_sig.dtb'
-+                       % (data_dir, u_boot_config.build_dir), shell=True)
-             check_call('cd %s; '
-                        'dtc -@ -I dts -O dtb -o version.dtbo version.dts; '
-                        'fdtoverlay -i test_sig.dtb '
-diff --git a/test/py/tests/test_efi_capsule/signature.dts b/test/py/tests/test_efi_capsule/signature.dts
-deleted file mode 100644
-index 078cfc76c9..0000000000
---- a/test/py/tests/test_efi_capsule/signature.dts
-+++ /dev/null
-@@ -1,10 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
+-.. code-block:: console
 -
--/dts-v1/;
--/plugin/;
+-    $ dtc -@ -I dts -O dtb -o signature.dtbo signature.dts
+-    $ fdtoverlay -i orig.dtb -o new.dtb -v signature.dtbo
 -
--&{/} {
--	signature {
--		capsule-key = /incbin/("SIGNER.esl");
--	};
--};
+-where signature.dts looks like::
+-
+-    &{/} {
+-            signature {
+-                    capsule-key = /incbin/("CRT.esl");
+-            };
+-    };
++You can perform step-4 through the Kconfig symbol
++CONFIG_EFI_CAPSULE_ESL_FILE. This symbol points to the esl file
++generated in step-2. Once the symbol has been populated with the path
++to the esl file, it will automatically get embedded into the
++platform's dtb as part of U-Boot build.
+ 
+ Anti-rollback Protection
+ ************************
 -- 
 2.34.1
 
