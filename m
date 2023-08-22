@@ -4,55 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC93EE4993
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 08:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77AA6EE4996
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 08:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE0086473;
-	Tue, 22 Aug 2023 10:43:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A134E86403;
+	Tue, 22 Aug 2023 10:57:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="F4AnN4iO";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="AwrZmKHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A292286475; Tue, 22 Aug 2023 10:43:19 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0AC5A86405; Tue, 22 Aug 2023 10:57:01 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEF568646E
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 10:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 529A786402
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 10:56:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from workstation5.fritz.box
- (ip-062-143-244-162.um16.pools.vodafone-ip.de [62.143.244.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 3C0DA3F1FE; 
- Tue, 22 Aug 2023 08:43:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1692693796;
- bh=QV1Srsx9Y4ccpozaWtJF/gsSe0gjbnnoZ6pjmXdgmf8=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=F4AnN4iO6H9+kqdGE4nKEBobVn9a3nwayckG3uTm7sr3Z88U+Qd1lD8kqh1Tl70sV
- OgrxyawFv2IyhkZuaQCixUaqo5ZiEmWbBezOxwx2ZaljFk16atTUgp0AKz7nlMBhXU
- KSvri+h3sniujGJtR8yaGxTeKQuZYVRs6xCgMVkITI3WytlGQWC54d2rzxHunrPSgJ
- a5d7IRADiKz+R+clFoE2U7opaER0KrPXiV6CAkJ76U6Q6WXz3k6jobiUV1r+FgWojV
- K7syYlc6dpUGXjsLa/ycR/Labz6D1TIa4XYlpzUFsdzRfuVbBh048QRtQWH1iacfkJ
- tkQSgOwJfEMkw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@ti.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] lib: parameter check in hash_calculate
-Date: Tue, 22 Aug 2023 10:43:06 +0200
-Message-Id: <20230822084306.91806-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ smtp.mailfrom=prvs=6598ad4e9d=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37M7v9LE002583; Tue, 22 Aug 2023 10:56:56 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=8IcwPz/
+ CLdqRkLdRNUkAkU4cpP/77kloTrdGq4FEvVI=; b=AwrZmKHofrEQdRUYvZjajRM
+ 6fTmWB0p6OJHuK05v5vpA8v+8wcM9tum05gR4jUgL2lsotiux6x2iy5eeA/eO7lG
+ /0YgLRO9J3d8IuCSh3g04GMxAkYDMsdlUOEvWqDImYK8xjLyYWfLdaUN/qedTPX5
+ 01y7CAHqANf2oX0aLCxxUq2BAIownZR6ykKatfisLpEeiNTqlX3V2dXP33SrvNgl
+ To54zsmj4M2+pCfEZKYekwdlkVoMQ13vPocqh7H+RYxoTdCvSeunx59ma//k97u/
+ CCMR8vZz8zJ1bKnfWywqHEB74qjrIX8Z97jvmSsQhyeCUGEm2NmEIpZ8T9JpTsw=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3smbmktjsd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 22 Aug 2023 10:56:56 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A710E100057;
+ Tue, 22 Aug 2023 10:56:55 +0200 (CEST)
+Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 972CE231536;
+ Tue, 22 Aug 2023 10:56:55 +0200 (CEST)
+Received: from localhost (10.201.20.38) by EQNDAG1NODE4.st.com (10.75.129.133)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 22 Aug
+ 2023 10:56:55 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Etienne Carriere
+ <etienne.carriere@foss.st.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ARM: dts: stm32: disable SYSRAM SCMI shared memory in
+ stm32mp15-scmi
+Date: Tue, 22 Aug 2023 10:56:52 +0200
+Message-ID: <20230822085653.237076-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To EQNDAG1NODE4.st.com
+ (10.75.129.133)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-22_08,2023-08-18_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,36 +89,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If hash_calculate is invoked with region_count = 0, it will try to hash
-INT_MAX regions. We should check this parameter.
+Changes scmi node to not use a statically defined sram shared memory
+buffer. This change makes SCMI OP-TEE transport to use shared memory
+allocated used OP-TEE generic shared memory resources.
 
-* Avoid a comparison with different signedness.
-* Check that region_count is at least 1.
-* Avoid a superfluous assignment.
+Removes the sram definition in the DTSI files since no more used.
 
-Fixes: b37b46f042cc ("rsa: Use checksum algorithms from struct hash_algo")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Etienne Carriere <etienne.carriere@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- lib/hash-checksum.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/lib/hash-checksum.c b/lib/hash-checksum.c
-index 8f2a42f9a0..68c290d64d 100644
---- a/lib/hash-checksum.c
-+++ b/lib/hash-checksum.c
-@@ -23,8 +23,10 @@ int hash_calculate(const char *name,
- 	struct hash_algo *algo;
- 	int ret = 0;
- 	void *ctx;
--	uint32_t i;
--	i = 0;
-+	int i;
-+
-+	if (region_count < 1)
-+		return -EINVAL;
+ arch/arm/dts/stm32mp15-scmi.dtsi | 16 ----------------
+ 1 file changed, 16 deletions(-)
+
+diff --git a/arch/arm/dts/stm32mp15-scmi.dtsi b/arch/arm/dts/stm32mp15-scmi.dtsi
+index 543f24c2f4f..ad2584213d9 100644
+--- a/arch/arm/dts/stm32mp15-scmi.dtsi
++++ b/arch/arm/dts/stm32mp15-scmi.dtsi
+@@ -16,7 +16,6 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 			linaro,optee-channel-id = <0>;
+-			shmem = <&scmi_shm>;
  
- 	ret = hash_progressive_lookup_algo(name, &algo);
- 	if (ret)
+ 			scmi_clk: protocol@14 {
+ 				reg = <0x14>;
+@@ -60,21 +59,6 @@
+ 			};
+ 		};
+ 	};
+-
+-	soc {
+-		scmi_sram: sram@2ffff000 {
+-			compatible = "mmio-sram";
+-			reg = <0x2ffff000 0x1000>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges = <0 0x2ffff000 0x1000>;
+-
+-			scmi_shm: scmi-sram@0 {
+-				compatible = "arm,scmi-shmem";
+-				reg = <0 0x80>;
+-			};
+-		};
+-	};
+ };
+ 
+ &reg11 {
 -- 
-2.40.1
+2.25.1
 
