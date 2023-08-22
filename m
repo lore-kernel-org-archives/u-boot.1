@@ -4,63 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78627EE49AE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBFFEEE49AB
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:53:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C362885CB5;
-	Tue, 22 Aug 2023 20:49:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 50A6185CB5;
+	Tue, 22 Aug 2023 20:53:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rF11UH/h";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mNV0oY6d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A0DB86488; Tue, 22 Aug 2023 20:49:17 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 45A9C864A6; Tue, 22 Aug 2023 20:53:01 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52C23855CE
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:49:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED802855CE
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:52:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37MInAuI051473;
- Tue, 22 Aug 2023 13:49:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692730150;
- bh=5uBDv9PjETgWHDyDJ19BCVIYKPGfrDyz4CPVDWfngug=;
- h=From:To:CC:Subject:Date;
- b=rF11UH/hLx4bd4sxeAPFd4qcSEuaZBaR3xxUL3GoqGFGVgnyNzJf7Bn+mtmyb3R+0
- /N4vqCvlxt97fYzhzKXYbc6b9+gGLb9lzhs7mv7aBZ+97sE+lvnNrqK/ZKjNKx41UZ
- EjlTzXQZ/bUXZn2y9oJ5uVuY5naY0iBchY8HFBRA=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37MInApR108823
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 22 Aug 2023 13:49:10 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 22
- Aug 2023 13:49:09 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 22 Aug 2023 13:49:10 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37MIn9b6009069;
- Tue, 22 Aug 2023 13:49:09 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>, Nishanth
- Menon <nm@ti.com>, Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH] doc: board: ti: k3: Fix up OpenOCD references and debug info
-Date: Tue, 22 Aug 2023 13:49:03 -0500
-Message-ID: <20230822184903.2331330-1-nm@ti.com>
-X-Mailer: git-send-email 2.40.0
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1ECC665D48
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 18:52:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81991C433C7
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 18:52:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1692730375;
+ bh=y2UELRC+XrfrXIM+d1BDwygTgdYn21N6QRXFuKS7+aI=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=mNV0oY6dloiYoJX/7q5qbg/uqnNeprKkg4mGaVd7UTCBTwxf7z9L5nAapNlV90Rss
+ sDE/cMuDC326VPLmunXf68EHPmsUaRD/BRkYr8gtZjanH0jNeA95x+zB6Yi26tg1SM
+ O3UuuvrrEPciTyvjX7Yb+aXvKepEcc04c7ozzej+TG3DdfvPZhAg4nL8Vyzn3RJPYh
+ ZXgJjQqQpE/pe3adSfqZQ/nf/3KpSwOZU6DG4kmjmmdjlzsYpQrggC0O89LkUYJgmk
+ xM5ACCkUkqAfU7e3OcZMLyiAW5MJfFl8iqT9REnaBgUU5QSnqM64VHVVCLv6XngA77
+ gWenBzj5gZuzQ==
+Received: by mail-lj1-f178.google.com with SMTP id
+ 38308e7fff4ca-2bcb89b476bso44422951fa.1
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:52:55 -0700 (PDT)
+X-Gm-Message-State: AOJu0YxXq6pqoUPS9I0+KvmJssEUWyqweUgP8ej2Cj9u6ggCPu/AzSe3
+ Ll51dDRm3cL1Xe7DtPXsxmJlRtnOLbji5ITefg==
+X-Google-Smtp-Source: AGHT+IEEMIR41THd0LMOBZubTsjgagaLMHV572WPlVXzbt4x3ZGS4hiPTCQhKUt6KcVET9reHOKhSgkJ+dgKFh2X5wU=
+X-Received: by 2002:a2e:b049:0:b0:2bc:c38a:bd7c with SMTP id
+ d9-20020a2eb049000000b002bcc38abd7cmr4455281ljl.33.1692730373473; Tue, 22 Aug
+ 2023 11:52:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230821194821.2961213-1-sjg@chromium.org>
+In-Reply-To: <20230821194821.2961213-1-sjg@chromium.org>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 22 Aug 2023 13:52:40 -0500
+X-Gmail-Original-Message-ID: <CAL_Jsq+jYexj8CR86cktxeiXyo7X+8i35+Ao0GBMhinVPNUoEw@mail.gmail.com>
+Message-ID: <CAL_Jsq+jYexj8CR86cktxeiXyo7X+8i35+Ao0GBMhinVPNUoEw@mail.gmail.com>
+Subject: Re: [PATCH v2] schemas: Add a schema for memory map
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Tom Rini <trini@konsulko.com>, lkml <linux-kernel@vger.kernel.org>, 
+ linux-acpi@vger.kernel.org, Chiu Chasel <chasel.chiu@intel.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,51 +83,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jonathan Humphreys <j-humphreys@ti.com>
+On Mon, Aug 21, 2023 at 2:48=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> The Devicespec specification skips over handling of a logical view of
+> the memory map, pointing users to the UEFI specification.
 
-Fix minor path and config macro name updates to sync with latest
-OpenOCD and U-Boot configurations.
+It's more that the DT spec defines what is not used with UEFI. If UEFI
+covers more than the DT Spec defined, then we should look at that.
 
-Fixes: effe50854a69 ("doc: board: ti: k3: Add a guide to debugging with OpenOCD")
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+I would look some into (IBM) PowerPC for any prior art in this area.
+Unfortunately, not publicly documented other than any users.
 
- doc/board/ti/k3.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+> It is common to split firmware into 'Platform Init', which does the
+> initial hardware setup and a "Payload" which selects the OS to be booted.
+> Thus an handover interface is required between these two pieces.
+>
+> Where UEFI boot-time services are not available, but UEFI firmware is
+> present on either side of this interface, information about memory usage
+> and attributes must be presented to the "Payload" in some form.
+>
+> This aims to provide an initial schema for this mapping.
+>
+> Note that this is separate from the existing /memory and /reserved-memory
+> nodes, since it is mostly concerned with what the memory is used for. It
+> may cover only a small fraction of available memory, although it could be
+> used to signal which area of memory has ECC.
+>
+> For now, no attempt is made to create an exhaustive binding, so there are
+> some example types lists. This can be completed once this has passed
+> initial review.
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 83fb0f121bb9..f9336b3a3622 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -601,7 +601,7 @@ correctly to ensure a sane system.
-   $ cd openocd
-   # Copy the udev rules to the correct system location
-   $ sudo cp ./contrib/60-openocd.rules \
--      ./src/JTAG/drivers/libjaylink/contrib/99-libjaylink.rules \
-+      ./src/jtag/drivers/libjaylink/contrib/99-libjaylink.rules \
-       /etc/udev/rules.d/
-   # Get Udev to load the new rules up
-   $ sudo udevadm control --reload-rules
-@@ -792,7 +792,7 @@ Code modification
-   In this example, we will debug ``board_init_f`` inside
-   ``arch/arm/mach-k3/{soc}_init.c``. Since some sections of U-Boot
-   will be executed multiple times during the bootup process of K3
--  devices, we will need to include either ``CONFIG_CPU_ARM64`` or
-+  devices, we will need to include either ``CONFIG_ARM64`` or
-   ``CONFIG_CPU_V7R`` to catch the CPU at the desired place during the
-   bootup process (Main or Wakeup domains). For example, modify the
-   file as follows (depending on need):
-@@ -810,7 +810,7 @@ Code modification
-       }
-       ...
-       /* Code to run on the ARMV8 (Main Domain) */
--      if (IS_ENABLED(CONFIG_CPU_ARM64)) {
-+      if (IS_ENABLED(CONFIG_ARM64)) {
-           volatile int x = 1;
-           while(x) {};
-       }
--- 
-2.40.0
+I don't have much interest in picking this up unless there's some
+wider agreement. From the previously referenced discussion[1], it
+didn't seem like there was. But none of those folk are Cc'ed here.
 
+> ---
+>
+> Changes in v2:
+> - Reword commit message
+>
+>  dtschema/schemas/memory-map.yaml | 51 ++++++++++++++++++++++++++++++++
+>  1 file changed, 51 insertions(+)
+>  create mode 100644 dtschema/schemas/memory-map.yaml
+>
+> diff --git a/dtschema/schemas/memory-map.yaml b/dtschema/schemas/memory-m=
+ap.yaml
+> new file mode 100644
+> index 0000000..97e531e
+> --- /dev/null
+> +++ b/dtschema/schemas/memory-map.yaml
+> @@ -0,0 +1,51 @@
+> +# SPDX-License-Identifier: BSD-2-Clause
+> +# Copyright 2023 Google LLC
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/memory-map.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: /memory-map nodes
+> +description: |
+> +  Common properties always required in /memory-map nodes. These nodes ar=
+e
+> +  intended to resolve the nonchalant clause 3.4.1 ("/memory node and UEF=
+I")
+> +  in the Devicetree Specification.
+> +
+> +maintainers:
+> +  - Simon Glass <sjg@chromium.org>
+> +
+> +properties:
+> +  $nodename:
+> +    const: '/'
+
+This goes in the root node?
+
+> +  usage:
+> +    $ref: /schemas/types.yaml#/definitions/string
+> +    description: |
+> +      Describes the usage of the memory region, e.g.:
+> +
+> +        "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
+> +        "runtime-code", "runtime-data"
+
+Can't these be covered by reserved-memory? The client is free to
+reclaim any regions if it knows what they are.
+
+> +  attr:
+> +    $ref: /schemas/types.yaml#/definitions/string-array
+> +    description: |
+> +      Attributes possessed by this memory region:
+> +
+> +        "single-bit-ecc" - supports single-bit ECC
+> +        "multi-bit-ecc" - supports multiple-bit ECC
+> +        "no-ecc" - non-ECC memory
+
+Isn't this pretty much a property of a memory region as a whole. IOW,
+couldn't it just go into /memory node(s)?
+
+> +
+> +patternProperties:
+> +  "^([a-z][a-z0-9\\-]+@[0-9a-f]+)?$":
+> +    type: object
+> +    additionalProperties: false
+> +
+> +    properties:
+> +      reg:
+> +        minItems: 1
+> +        maxItems: 1024
+> +
+> +    required:
+> +      - reg
+> +
+> +additionalProperties: true
+> +
+> +...
+> --
+> 2.42.0.rc1.204.g551eb34607-goog
+
+[1] https://patches.linaro.org/project/linux-acpi/patch/20230426034001.16-1=
+-cuiyunhui@bytedance.com/
