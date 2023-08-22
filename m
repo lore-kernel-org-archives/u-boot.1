@@ -4,114 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE717EE49A4
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 13:49:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296B7EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 14:34:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D588F86422;
-	Tue, 22 Aug 2023 15:49:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=de.bosch.com
+	by phobos.denx.de (Postfix) with ESMTP id E143A86485;
+	Tue, 22 Aug 2023 16:34:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=de.bosch.com header.i=@de.bosch.com header.b="iSNxw8ef";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="Am4AGR66";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C525864A0; Tue, 22 Aug 2023 15:49:27 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaf::609])
+ id CA31E86485; Tue, 22 Aug 2023 16:34:33 +0200 (CEST)
+Received: from JPN01-TYC-obe.outbound.protection.outlook.com
+ (mail-tycjpn01acsn2080b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:7010::80b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0999B8641F
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 15:49:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=de.bosch.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Thomas.Mittelstaedt@de.bosch.com
+ by phobos.denx.de (Postfix) with ESMTPS id C357486484
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 16:34:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=wiagn233@outlook.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=aDvD/w8tm7izfBCfI2Y88MiF9K3un0h7pnegPKdsPekdakcDeOdVlR2E4lbACacxP+DssVGK9TjIlqQ8pDAwg6DcU4xOAzV7nQxA3uraKyO0isQ9vtzM+zLOf9LQfVGr/zZkUhg1PZvggzuOU1s0Q/PQy5sUnrICKbdAI/MNblIvO91s79tFAA0EEOaUBTpBqzV3XjPXaOVAsSaAK0+yO2BfoUGWmhfDQsFWaChkgm0bMqJFD2Ifx4Uw1nOjGZ80CaR0KD6j+D+Y9TPFJyj38hAxgIhOUIi8DG7Dd57ClhKwEXy+9NVIRHmpuNS3qja9CJ6awf5l/2F40TLRRRXeIw==
+ b=nFzXGIwfT4pLHFSAYuJl+mfWM7/T5wnX+ZLIF6zf/MFpwDy7DcGX1bjYnvETjuPINWLiqpBlycJjroh2ARvV0YikueJmR5pf6u3g3YkDhY0I7x7DOg3EUHl5A1mSWILisgC5jImBFJeGbmUyajkVRl9RzZ5ObnzVWBka0FuUEJ7FQDnTuS6w36rBS1g0d5CeLkbpjr1DuoeKlScsBPMaySqdMNhtAWg/EYa4MgHeqz1SNWbWElEICpalgUA10UVy45csj1p7sW63UyUObIzwpdxNXrwUEPj14jc+IwZIv0KzIsPdH1MVYBu8eZRjNtYn+xSfdg+1F8/IY9auBQdGjQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k3r0Fqu7Mj3ZRCr5FuCzWOkEGUw/YV8JTguMiZsJR18=;
- b=E+KacKMkVJEoPbUWsHWsb2YWdTYATy2CwQiPj/IT0MrSus4p+lPIAVd5SpZur2q594M/kvhiiD/GYaeX9DlB+01bFYqD+AyHC5Fl91UOln+mY/YLEId9fxN0oliTKTQWbBqSSEuKpfkwH3MplnC4WFHgeQF7xfTwPPclK1cSreVQZtKSrpnI2I0Nxgk9nXFUQjAJckdKvHHXfCG4M1Mc8i5k54TaeabG8ZOcD2IPiK5BDoeIgJZfKB9BLwnTxqNHrCVYxb+hB6RibO8R48W6GGDHsa8sdqRqVNUCR+0BSGlwbUGTkP/a/scYuz81L4+Mv/Ok4t3dF0sWCdRpycHj1w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.201) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=de.bosch.com;
- dmarc=pass (p=reject sp=none pct=100) action=none header.from=de.bosch.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
+ bh=VDlRUijImWtFsZasnZEjqX+zJPmLzk/veAYHB8EnZpI=;
+ b=Whw2O0eacTFSnM8EN1l6aUAprw5KqwuD2JXEFjHavRguUGZeu/kjfq6f/ItRv8D5DomT0ZbVEoVhE/OSF6FzGDDnA4l5FZkqBwe9xmai0u6pTzIn+nQJmGEzdL6OMgRZEKcXnFzsZmiKerZqWwpTGx26blH4lWCZJiV/caJhVQAgcAUjWHje22dMdThyNSJgYXDTY/LU91OXr4ca2zkn7WiWp8oFETru+y+SCoCwrZ4LFOf5uyRdjJ4Q/k/K1smVtS9mnWwOsl084P3FCTIdlzdDCPNGDc+zJ11AwMxBitYjHIMcH1P8wx6Yj6i3T3WMN7+JpJv1QB6aQdX532TfBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k3r0Fqu7Mj3ZRCr5FuCzWOkEGUw/YV8JTguMiZsJR18=;
- b=iSNxw8efI8ku51JFP2gZXs0Jwc8VCl1RUlZFahSccxbUbLl/vv95N29aOJaW+Iqyzri9fd0MGdzHdg/HwWcHslWoAzD9YLRtAfuCQz7nKI+GToR055j+xAwGy8LOQ9/DkKQ0af9+gvT9ckiS4rV3qpo7H2UsOqFfbpTkvOwwJKjDRlaSgR9DZLwrazkiZ28QCvhMoOibH4xyUihp/V0DYJbp2WcJhYEAswaOA72IKZkwV52DuRQtkFDDkBUdnEf2DYvZHMPABfTfDfdeC+tIY4unD9FpGE7tfMqTJFv+ZTJrWsyUzUpVLVgm0rZgb1IAs6+aP9NmcKW58PUlq5FZ2g==
-Received: from AM6PR0502CA0063.eurprd05.prod.outlook.com
- (2603:10a6:20b:56::40) by AM0PR10MB3618.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:153::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.24; Tue, 22 Aug
- 2023 13:49:23 +0000
-Received: from AM7EUR03FT019.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:56:cafe::12) by AM6PR0502CA0063.outlook.office365.com
- (2603:10a6:20b:56::40) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.25 via Frontend
- Transport; Tue, 22 Aug 2023 13:49:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.201)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.201 as permitted sender)
- receiver=protection.outlook.com; 
- client-ip=139.15.153.201; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.201) by
- AM7EUR03FT019.mail.protection.outlook.com (100.127.140.245) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6723.15 via Frontend Transport; Tue, 22 Aug 2023 13:49:23 +0000
-Received: from SI-EXCAS2001.de.bosch.com (10.139.217.202) by eop.bosch-org.com
- (139.15.153.201) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.31; Tue, 22 Aug
- 2023 15:49:17 +0200
-Received: from SI-HUB2000.de.bosch.com (10.4.103.108) by
- SI-EXCAS2001.de.bosch.com (10.139.217.202) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.31; Tue, 22 Aug 2023 15:49:17 +0200
-Received: from localhost.localdomain (10.34.189.209) by
- SI-HUB2000.de.bosch.com (10.4.103.108) with Microsoft SMTP Server id
- 15.1.2507.31; Tue, 22 Aug 2023 15:49:16 +0200
-From: <thomas.mittelstaedt@de.bosch.com>
-To: <u-boot@lists.denx.de>
-CC: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v3 1/1] Documentation extended with specific information for
- VirtualBox
-Date: Tue, 22 Aug 2023 13:49:02 +0000
-Message-ID: <20230822134902.33032-2-thomas.mittelstaedt@de.bosch.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230822134902.33032-1-thomas.mittelstaedt@de.bosch.com>
-References: <20230822134902.33032-1-thomas.mittelstaedt@de.bosch.com>
-MIME-Version: 1.0
+ bh=VDlRUijImWtFsZasnZEjqX+zJPmLzk/veAYHB8EnZpI=;
+ b=Am4AGR66aGD/Xmtkr5o3Zz3ZyGjO5Q5afNPzYJJa4EkjB5c+4PPwetS1aqe/6LeDLT59oYViJSzVXTVuVkONbh32Cn1OCUZtJuXDozycAxGAlwMlqFaF2MnzUIsMSDJ1WQ8rtqX1khBU22kzQjV2WuuSz6HXxIdXGVKX6EIiVyq3HUi77M+kzTJzFbUTts7EB7gaJ7TnG9wCbmYjbtsWVjE8eybFLeEMD/0mR6hPMEwkSql0CVc00fpfYEogfsh7AaLEV5LhZ2KGDochRAsKBlf/St5oVnudLDIPnnmPLY5PiqmHf52vOkh074LJtJMEE3FWTIcuemqq91W+Y4GA3A==
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:23e::10)
+ by OSZP286MB1847.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:166::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6723.14; Tue, 22 Aug
+ 2023 14:34:25 +0000
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::bfaf:cb8:24b7:f67b]) by TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::bfaf:cb8:24b7:f67b%6]) with mapi id 15.20.6723.013; Tue, 22 Aug 2023
+ 14:34:25 +0000
+From: Shengyu Qu <wiagn233@outlook.com>
+To: xypron.glpk@gmx.de, chanho61.park@samsung.com, ycliang@andestech.com,
+ yanhong.wang@starfivetech.com, u-boot@lists.denx.de
+Cc: mps@arvanta.net,
+	Shengyu Qu <wiagn233@outlook.com>
+Subject: [PATCH v1 0/2] Enable PCIE and USB by default on Visionfive 2
+Date: Tue, 22 Aug 2023 22:33:55 +0800
+Message-ID: <TY3P286MB2611878AE57C8A60482C661D981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+X-Mailer: git-send-email 2.42.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [10.34.189.209]
-X-EOPAttributedMessage: 0
+X-TMN: [M/2g9SS7EvyDcupYs3xdffG82IL1Jwrw]
+X-ClientProxiedBy: PSBPR02CA0008.apcprd02.prod.outlook.com (2603:1096:301::18)
+ To TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:23e::10)
+X-Microsoft-Original-Message-ID: <20230822143357.2818-1-wiagn233@outlook.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM7EUR03FT019:EE_|AM0PR10MB3618:EE_
-X-MS-Office365-Filtering-Correlation-Id: d688da44-3090-4f10-f42b-08dba31697c9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
+X-MS-TrafficTypeDiagnostic: TY3P286MB2611:EE_|OSZP286MB1847:EE_
+X-MS-Office365-Filtering-Correlation-Id: 201249bf-0e6a-4ec8-d9a5-08dba31ce222
+X-MS-Exchange-SLBlob-MailProps: 0wLWl8rLpvtspoS0ND55m/FdCMInfiCoWHam8EVyQmTSo5XNuGbUP74myCQskH/laJtjVKngA3U7Z2Pd2JkId5GSBESX1aTQ+gJHOg2PhaPcgW+iOgY5hCCfFx8ZSmcWSKiSEz09kczgoxXk1OrzutHOTohNcYvPPO0Cy/cx8r45WJcOw8nUbY8hqyUv505KB8/niOhExljT0/jqcRKFXNu+TjdGl8ysK6ADEQbownbcU+Ifv5hFl4/rZgcd5sdiL1OUG2DpQMcCPHQ5WJ/tp15Sbq1OvGd0j1QIPXAL8VyGaqHBjJIjwPKuOJsSDd9El36ySxdAMMHBsvanoZAyZ4A5wZeI4jNWcz5NjADJe52cF997/ZbsFCbXpr9KImZj0DXgGanuihtZJOuNc/QR6/0+LJRoU02BS4seDE2P2sqQybbLSRdCPATJn/a165mzq6Uh+8TTcWKSwzgrvUaSdR+Iera0xk44V8To3lHDhNiAb6WpYVsXAVy8s8xbYyQjzGaZ66QpMkZ9otTYsZPxLl3WZSoHkqbaKh5+6BsggCw8dYGkXK9ajGGkviQxxj72jVyySgXMHQxdoPuvClu8/UC068l8qJeDYlfymhFp6tJQd6uIl0FWircG2wwWH3Wtpfdl1831NoAGVt0wfTF4wOSOMbUIgbeTlVwz6kaxde/wwPUUfLTWAlzf/d/DkQOxdDpnawcgpIOvbR0k3ysVR/CbzwGNQfl9YwXvWLMKvA9D5mgf6IbjW2CbAyr5ULmLUAW4rMbXf/A=
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: EhfXDJR7lcWc9ekcfBBYIW/xmv4knd7ClBav3Ys/Rm/b7c4s5wVxFo6PYI3vqImZML7VBTUw6o8Ii52riEyUG8wf4GBeJk6LHaxQFkjIfbfUz5RhxFTQKdO6/dQwgAa7KhT9E9KaCGd86ts4o6IznBJ3BO9KCxkGeiIFjaVV/CrjNvdI87K7mnC8HJkkROKLtnHjsO7Ngd544/OBE+SxC5b+L2sJk9dajCzhu4EDesc97jIDyVPqb/P83fHkfE8XVHthmi3bTD96mEo/OqDrLtLc9zx3iftRQtkPLo/i5PlpGcb1NTj2zVQZEILXi1XTUpHBHHB2G7Gt/K7q0FwJRAZVCS7maFkWAHWn6qmb8a9BTmO/iGrD100kGE88iHgQezNzW3symerlWzMPbprqINVvAAC8mU6PVjJUKCy7uxleWFd07AjBYeSP+eh53u20tQECx6gl3iPN4w3F085lfd5azIDuNtQi3Oo0O/D4gHOPOaEpIvWElZqEye1n4QjhbiqIkusHUp8QoRbVmXnlYASNDpC+rNErm6MRK3W+sFV6FeSjAvZ0VwkVS3nPbDJAZFZfvJDJ2mqSePGLAm3wuKW5CG1eD3lBVJc8LYYulTdBK5Hynh0aZELOw8WjfUsElb8WjKXVpVGgmp+2UFK6cuosdsHbwvB5xrL48L5ol94agyWbXo0miTeLBJp30fVHCCMfXxNhQGvlubw5RIxiuJo0iZFXK2GtTBbT/pjA5Sv5HOfd+pZWQZVvV/E+2seYMH2Cv7CHvEtB3r6MrZv8ISzdZdWZe4MpmRVVarreTaerEmqzxZmx0++dkXTxifIJI3pYud7V8YTXkqvMD4BTorZ5yZ1VIlpi+qXlAms37UE=
-X-Forefront-Antispam-Report: CIP:139.15.153.201; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:eop.bosch-org.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(39860400002)(396003)(376002)(136003)(451199024)(82310400011)(1800799009)(186009)(36840700001)(40470700004)(46966006)(2906002)(40480700001)(83380400001)(5660300002)(336012)(426003)(16526019)(26005)(86362001)(36860700001)(47076005)(2876002)(8676002)(2616005)(8936002)(4326008)(316002)(70586007)(6916009)(54906003)(70206006)(82960400001)(478600001)(356005)(82740400003)(81166007)(6666004)(40460700003)(1076003)(41300700001)(36900700001)(139555002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2023 13:49:23.3322 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d688da44-3090-4f10-f42b-08dba31697c9
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4; Ip=[139.15.153.201];
- Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM7EUR03FT019.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3618
+X-Microsoft-Antispam-Message-Info: A4Na/W6t/+HMHOq3RxczW2gWLy5064MIOIfn2jQZWu3aYuj8/1567ReujauRT1Pd3NWL+XPDfkZfdaCLmlDwA9DE4yvJ6mLMgohbXUgNIh/E9lOQ/PQKVedaRwkowpiqwl5PzYfErX7o5RKJiMn0GPWYhGvO9IKg6Ks7PEMVgqQ1+2awZNnqo8yXQsz6m2Pwywq2PPQ684Kb1DGCLA0QctDTeVHg/Scsehigad9mbYqr8+wjUT1M/bOQrAAlEEsOOGdQX37in6vdvfwx9k1FHZoUp934Z7GncH+qVM/ZuTgTkkUvYQhNo3wnRn7eIYOGsrylVS/v9RVojsgr9DUDoZHigthkxh49nXrMQ+vy7KlUhE9qKGMolvzGOZuoUK5P/ljMCHzqKbQv8rEeFtpUeMGCLppj979aLCX2ls1GX4oyrEYXrtS00VPbFKv+GJFqiwecgxFWd9MAsjQYdrFyHpXpJu6xiNaa9svTRMi5EeHDlXlSvHADuc11ek7CYx8zmC+KHcpeuX6O43CMK4uXdScKgYWWE1fJEKCAAXdFKcTyBhDG9r+32Dh6SRZeG4kI1cE3tdhU7lxW1nZ4lgrYsFikGw3zNzEVtXcVoKa8I0KzE5+yB0G4mEtHiDooFEji
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ldj9jnsXmPIZfFaJuRUO+n7aHlWQ9utq4Sq5rGqRl3zdBFRTh965v1vYr0iv?=
+ =?us-ascii?Q?jRm+KFAOHtb20Q2yqB9RkqCSslukPwQNjEIH/ABc8x+UJjvjggEl4mHnx2oP?=
+ =?us-ascii?Q?SNSJR8Ldp+78SnnHpRl8SgzXpjTCzXif7uNytaC4dYMks1ho1BQ35fWog1Ra?=
+ =?us-ascii?Q?vAjVikV0/A3VROekIhiSUzyRWvIkk0NW7ynGAxHSbushRb/AAjGU0FNOWdeO?=
+ =?us-ascii?Q?vvfT7Y36T4HB610yvf5uNySH6sk0h9Rdi2cM3XqEjTdl+xW9qzAuw3iuGMG/?=
+ =?us-ascii?Q?ZOHD1DKxKEioo9Jwsd9OC546onG5MkRNyYisH+P8HJfWNPEH0iuqOoMHvfCe?=
+ =?us-ascii?Q?ymr59aGVJGwRTVkgsm+ycvduT7bQsI2Bxahyw9eKCgm35HaWXqAj6hNWjjpe?=
+ =?us-ascii?Q?ndXRDDWcJ/i6CmCmq34jxOVFjg9YiyskPQ0k+PNsblhNxp+YYWHrzrgw5/Zr?=
+ =?us-ascii?Q?R18Fs1ZzkuXgXIYxSkqNjdYVZ8/i2ua9lV/FN2gyWkTKPqvv03HgrVchKSCi?=
+ =?us-ascii?Q?zYiBSJksNPpL+ZbztoPSu/xqJVt0nt7+ekKzexY7ZsetWcNQSyQlshizcs2/?=
+ =?us-ascii?Q?vdwgLBDSfDizsVsd+n3LSjvRvs1AhXLVEVqw+qIt3QfCZvqyD5nKTi0H/0sX?=
+ =?us-ascii?Q?DDzXbawGwwB7d+q+tzQOZShuGEICILwE4j8sUBI3umQcwx00JCiYC3EB5SBe?=
+ =?us-ascii?Q?GrWU/1lFt1k73VEDCQtfyRTTHBCMEZ2xclVnOak7RTAIwcN80FhE9bfC0F/I?=
+ =?us-ascii?Q?nhicsBVNTdcW8Z9GaShdHZ1VEhMd0S0bcMv4dMk7gIhTr8joDTnayQWp0/aN?=
+ =?us-ascii?Q?UEBzdcPb/WpOLcTJouEfGgAsuMU02+ATqA1dujjsTCP2EJD4DdPDAkBJ5Mx4?=
+ =?us-ascii?Q?kFOX3acPK5j0sd9sQgpqe4XsbSDZ/uGZiRmk8d7xU+fkl2iqOBqBDWZ18MoJ?=
+ =?us-ascii?Q?xNxd0dtBTnGVyBAsbSHGPobNICBRPp6+Zj33n/ekPP/I/rHKwl50y6Bo1n4n?=
+ =?us-ascii?Q?0Vm7KnfuFzG7JxEE0B/okYk+Yyyyo2IIc28nwRSaQQOqRdktLTVDUAIlW/6n?=
+ =?us-ascii?Q?8qlSNx9JqhKmPIOoJsTfwF4BGi427Cct0SCtm0sUD9IyQOZnGpTTNLtlQvFc?=
+ =?us-ascii?Q?+9aAdjWe5Zkzk4dRdshVqV4ACv1MAgMpiQ/ehf9jPXg2u98dsf07H1rULQG1?=
+ =?us-ascii?Q?LTKRa8Lnx43u9g/a3y7VxkgSNw+2ASKXmHCe7Q=3D=3D?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 201249bf-0e6a-4ec8-d9a5-08dba31ce222
+X-MS-Exchange-CrossTenant-AuthSource: TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2023 14:34:25.6779 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSZP286MB1847
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,113 +121,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
+Since PLDA PCIE driver and dts already merged in upstream for JH7110,
+add relative defconfig item for Starfive Visionfive 2 and make document
+consist with actual code.
 
-The configuration for EFI is enhanced to start U-Boot at VirtualBox (x86_64)
-with all features like booting with help of boot scripts and extended linux.
-This documentation describes how to use U-Boot at VirtualBox to boot
-Linux systems with a some simple example.
+Shengyu Qu (2):
+  configs: starfive: Enable PCIE auto enum and NVME/USB stuff for
+    Starfive Visionfive 2
+  doc: board: starfive: Add more info about supported driver
 
-Signed-off-by: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
----
- doc/develop/uefi/u-boot_on_efi.rst | 84 ++++++++++++++++++++++++++++++
- 1 file changed, 84 insertions(+)
+ configs/starfive_visionfive2_defconfig | 8 +++++++-
+ doc/board/starfive/visionfive2.rst     | 2 ++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
-index acad6397e8..0d4927807c 100644
---- a/doc/develop/uefi/u-boot_on_efi.rst
-+++ b/doc/develop/uefi/u-boot_on_efi.rst
-@@ -254,6 +254,90 @@ This shows running with serial enabled (see `include/configs/efi-x86_app.h`)::
- 
-    => QEMU: Terminated
- 
-+Run on VirtualBox (x86_64)
-+--------------------------
-+
-+Enable EFI
-+~~~~~~~~~~
-+At settings for virtual machine the flag at **System->Motherboard->Enable EFI
-+(special OSes only)** has to be enabled.
-+
-+Installation
-+~~~~~~~~~~~~
-+Provide the preinstalled Linux system as a Virtual Disk Image (VDI) and assign
-+it to a SATA controller (type AHCI) using the settings for the virtual machine
-+at menu item **System->Storage->Controller:SATA**.
-+
-+For the following description three GPT partitions are assumed:
-+
-+- Partition 1: formatted as FAT file-system and marked as EFI system partition
-+  (partition type 0xEF00) used for the U-Boot EFI binary. (If VirtualBox is UEFI
-+  compliant, it should recognize the ESP as the boot partition.)
-+
-+- Partition 2: formatted as **ext4**, used for root file system
-+
-+Create an extlinux.conf or a boot script
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Following files are assumed to be located at system for boot configuration::
-+
-+ Partition  File                    Comment
-+ 1          EFI/BOOT/BOOTX64.efi    # renamed U-Boot EFI image
-+ 1          Image                   # Linux image
-+ 1          Initrd                  # Initramfs of Linux
-+
-+**EFI/BOOT/BOOTX64.efi** is a renamed build result **u-boot-payload.efi**, built with
-+**efi-x86_payload64_defconfig** configuration.
-+
-+Boot script
-+~~~~~~~~~~~
-+
-+The boot script **boot.scr** is assumed to be located at::
-+
-+ Partition  File        Comment
-+ 1          boot.scr    # Boot script, generated with mkimage from template
-+
-+Content of **boot.scr**:
-+
-+.. code-block:: bash
-+
-+  ext4load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} ${prefix}Image
-+  setenv kernel_size ${filesize}
-+  ext4load ${devtype} ${devnum}:${distro_bootpart} ${ramdisk_addr_r} ${prefix}Initrd
-+  setenv initrd_size ${filesize}
-+  zboot  ${kernel_addr_r} ${kernel_size} ${ramdisk_addr_r} ${initrd_size}
-+
-+Extlinux configuration
-+~~~~~~~~~~~~~~~~~~~~~~
-+
-+Alternatively a configuration **extlinux.conf** can be used. **extlinux.conf**
-+is assumed to be located at::
-+
-+ Partition  File                        Comment
-+ 1          extlinux/extlinux.conf      # Extlinux boot configuration
-+
-+Content of **extlinux.conf**:
-+
-+.. code-block:: bash
-+
-+  default l0
-+  menu title U-Boot menu
-+  prompt 0
-+  timeout 50
-+
-+  label l0
-+    menu label Linux
-+    linux /Image
-+    initrd /Initrd
-+
-+
-+Additionally something like (sda is assumed as disk device):
-+
-+.. code-block:: bash
-+
-+	append  root=/dev/sda2 console=tty0 console=ttyS0,115200n8 rootwait rw
-+
-+
- 
- Future work
- -----------
 -- 
-2.30.2
+2.42.0
 
