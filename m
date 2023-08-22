@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A2D9EE49AE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 17:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8618EE49AF
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 17:42:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF570864D7;
-	Tue, 22 Aug 2023 19:41:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 06B9C864F0;
+	Tue, 22 Aug 2023 19:41:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3390C864D4; Tue, 22 Aug 2023 19:41:00 +0200 (CEST)
+ id EF977864F0; Tue, 22 Aug 2023 19:41:02 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6C9F9864D3
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 19:40:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 51AE8864D3
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 19:41:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B142A11FB;
- Tue, 22 Aug 2023 10:41:37 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 67E3F11FB;
+ Tue, 22 Aug 2023 10:41:40 -0700 (PDT)
 Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B4193F762;
- Tue, 22 Aug 2023 10:40:54 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 51A113F762;
+ Tue, 22 Aug 2023 10:40:57 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -33,10 +33,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v11 08/15] doc: Add documentation to highlight capsule
- generation related updates
-Date: Tue, 22 Aug 2023 23:10:01 +0530
-Message-Id: <20230822174008.626239-9-sughosh.ganu@linaro.org>
+Subject: [PATCH v11 09/15] sandbox: trace: Increase trace buffer size
+Date: Tue, 22 Aug 2023 23:10:02 +0530
+Message-Id: <20230822174008.626239-10-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230822174008.626239-1-sughosh.ganu@linaro.org>
 References: <20230822174008.626239-1-sughosh.ganu@linaro.org>
@@ -58,77 +57,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI capsules can now be generated as part of U-Boot build, through
-binman. Highlight these changes in the documentation.
+When running the trace test on the sandbox platform, the current size
+of 16MiB is no longer large enough for capturing the entire trace
+history, and results in truncation. Use a size of 32MiB for the trace
+buffer on the sandbox platform while running the trace test.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since V10:
-* Add an example binman capsule node which shows how a capsule can be
-  generated through binman.
+Changes since V10: None
 
- doc/develop/uefi/uefi.rst | 40 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
+ .azure-pipelines.yml        | 2 +-
+ .gitlab-ci.yml              | 2 +-
+ test/py/tests/test_trace.py | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index a7a41f2fac..f27cabbcce 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -318,6 +318,9 @@ Run the following command
-       --guid <image GUID> \
-       <capsule_file_name>
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 0be317b388..d4591234c4 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -275,7 +275,7 @@ stages:
+           TEST_PY_BD: "sandbox"
+           BUILD_ENV: "FTRACE=1 NO_LTO=1"
+           TEST_PY_TEST_SPEC: "trace"
+-          OVERRIDE: "-a CONFIG_TRACE=y -a CONFIG_TRACE_EARLY=y -a CONFIG_TRACE_EARLY_SIZE=0x01000000"
++          OVERRIDE: "-a CONFIG_TRACE=y -a CONFIG_TRACE_EARLY=y -a CONFIG_TRACE_EARLY_SIZE=0x01000000 -a CONFIG_TRACE_BUFFER_SIZE=0x02000000"
+         coreboot:
+           TEST_PY_BD: "coreboot"
+           TEST_PY_ID: "--id qemu"
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 5750d82023..cef42aca8c 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -315,7 +315,7 @@ sandbox trace_test.py:
+     TEST_PY_BD: "sandbox"
+     BUILD_ENV: "FTRACE=1 NO_LTO=1"
+     TEST_PY_TEST_SPEC: "trace"
+-    OVERRIDE: "-a CONFIG_TRACE=y -a CONFIG_TRACE_EARLY=y -a CONFIG_TRACE_EARLY_SIZE=0x01000000"
++    OVERRIDE: "-a CONFIG_TRACE=y -a CONFIG_TRACE_EARLY=y -a CONFIG_TRACE_EARLY_SIZE=0x01000000 -a CONFIG_TRACE_BUFFER_SIZE=0x02000000"
+   <<: *buildman_and_testpy_dfn
  
-+Capsule with firmware version
-+*****************************
-+
- The UEFI specification does not define the firmware versioning mechanism.
- EDK II reference implementation inserts the FMP Payload Header right before
- the payload. It coutains the fw_version and lowest supported version,
-@@ -345,6 +348,43 @@ add --fw-version option in mkeficapsule tool.
- If the --fw-version option is not set, FMP Payload Header is not inserted
- and fw_version is set as 0.
+ evb-ast2500 test.py:
+diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+index ac3e95925e..ad2250920d 100644
+--- a/test/py/tests/test_trace.py
++++ b/test/py/tests/test_trace.py
+@@ -61,7 +61,7 @@ def collect_trace(cons):
  
-+Capsule Generation through binman
-+*********************************
-+
-+Support has also been added to generate capsules during U-Boot build
-+through binman. This requires the platform's DTB to be populated with
-+the capsule entry nodes for binman. The capsules then can be generated
-+by specifying the capsule parameters as properties in the capsule
-+entry node.
-+
-+Check the test/py/tests/test_efi_capsule/capsule_gen_binman.dts file
-+as reference for how a typical binman node for capsule generation
-+looks like. For generating capsules as part of the platform's build, a
-+capsule node would then have to be included into the platform's
-+devicetree.
-+
-+A typical binman node for generating a capsule would look like::
-+
-+	capsule {
-+		filename = "u-boot.capsule";
-+		efi-capsule {
-+			image-index = <0x1>;
-+			image-guid = "09d7cf52-0720-4710-91d1-08469b7fe9c8";
-+
-+			u-boot {
-+			};
-+		};
-+	};
-+
-+In the above example, a capsule file named u-boot.capsule will be
-+generated with u-boot.bin as it's input payload. The capsule
-+generation parameters like image-index and image-guid are being
-+specified as properties. Similarly, other properties like the private
-+and public key certificate can be specified for generating signed
-+capsules. Refer :ref:`etype_efi_capsule` for documentation about the
-+efi-capsule binman entry type, which describes all the properties that
-+can be specified.
-+
- Performing the update
- *********************
- 
+     # Read out the trace data
+     addr = 0x02000000
+-    size = 0x01000000
++    size = 0x02000000
+     out = cons.run_command(f'trace calls {addr:x} {size:x}')
+     print(out)
+     fname = os.path.join(TMPDIR, 'trace')
 -- 
 2.34.1
 
