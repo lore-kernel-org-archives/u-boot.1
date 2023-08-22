@@ -4,55 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADFE9EE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 10:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C42EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:01:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DC408642D;
-	Tue, 22 Aug 2023 12:21:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1318C86483;
+	Tue, 22 Aug 2023 13:00:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dkStUVnO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rua6B2Td";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F29A486434; Tue, 22 Aug 2023 12:21:23 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AA7F78648E; Tue, 22 Aug 2023 13:00:58 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E878642B
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 12:21:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C85886461
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:00:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from workstation5.fritz.box
- (ip-062-143-244-162.um16.pools.vodafone-ip.de [62.143.244.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 302813F1F8; 
- Tue, 22 Aug 2023 10:21:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1692699680;
- bh=AB7oEgpQS4fgfjuwecxbn4DirfNEKkAYYgrnL/GP724=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=dkStUVnO04laTo/cdSM8FSpXNfCFrZefab6kjMKuIWTxakVh4JAAmHJfqAXB7IROl
- jPJXs0pVgE6Kn+cG95Vatl8XGTo82w08xrhOfJC3xYmXCdGcjfQNYAnftJIeQRmUlK
- CjKB6wACMJCWe2TSnXN5ZY5QksDACVrUsHYn4Cq3e1jY5N8zTZ3a+CQfYaAIQYwnl7
- Lncpdl6HH/VK6EtFxUBjzBmGhXGEmqzLk+kxKW9j6UkhUV2NtD2hSIqzBCK560oahA
- 4LkjcLv7SQRuno37Fl/MXUFTihtIz2TbAKtnXNQuz1d7ul7E0aQpcW6GXunqj/+VZ1
- h5oRmn6NcBeug==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Roland Gaudig <roland.gaudig@weidmueller.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: setexpr: fix printf_str()
-Date: Tue, 22 Aug 2023 12:21:13 +0200
-Message-Id: <20230822102113.129996-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2bbac8ec902so67789211fa.1
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:00:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692702055; x=1693306855;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2cO9G1G0HYpPVp+Zo6t/OewuY8gye6OJP3OEPIHi2uY=;
+ b=rua6B2TdEOvWAd46e+UDDqHwHswTCKQGz2dDatlSBe4WtGrC4OwJZGmxWI9yF4GEa4
+ k4tVSVPtqrKzYSfs3qIED7aXkBzNvL6A0Qx+wor6ErEASPKoB8ihbue/QJzDs1YXuyRD
+ O6hAO9RKqOWfxmDon46eaZ+5jeqDijQdOZg1UHv0hOJkSElU12eyXZLG9HGu6XJM7sZT
+ 9ySXYp7tVxvMGmmnZTytS4CibSd333c7zjQmcVWcxQS/1k4uOEqUMkopNmEgBZTzYbI0
+ VQR3EwP/Ltx5hlHO+w4pVH2FQ/2SIR/5OYjm+zKIK/1I2oUsya1dU74uypymIElXgdp6
+ vLqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692702055; x=1693306855;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2cO9G1G0HYpPVp+Zo6t/OewuY8gye6OJP3OEPIHi2uY=;
+ b=a/0Tww/FpR98Qcgi+XgFcAO39crIqjpWx5J2q1UeRBGQidz7khgjlT81DIpf3LOuR6
+ k2dXHYVP8xYXgATXbhhAQyIq4qvKcQbYpwbaH0tht1RiKHhCt4LAPC5KDD4cCVkaeFnr
+ VObxDypjzIq1YMIjJuBFmIbzOtNRIl2Uu9l9j679KxwUj2Up1zWRfHoVY+jrwuwIO5Kw
+ /hHbWSNczzKTNCkChd+Eq9AVGv6YSsUnoibeiHVyN0Le6BR2rN2T7A+lx9fuj+v1w/Cj
+ hX94nzIm1vvGSMh2Np8QAkrH2Fb+YH5XgU+PYbiXPVrCEwe4DkjyERbL12e66htSkV+d
+ 6mgw==
+X-Gm-Message-State: AOJu0YxyXWmq9l7U9xwDOkKx6fKJrYZ8mYaJgRL5kDVDvPiG4RFD3lDl
+ lPNEjm2JnTPrmRMmOC/uTU2skfxUbF+sk4Nw7jA=
+X-Google-Smtp-Source: AGHT+IHHBJwrcdmIOdMwgT68uUZ7YRVdxm/pC/nARoC0TN9ZniUOj0XH6RLssWWo1ihZEzDHa4/sIcKfmHRzyYR2hI8=
+X-Received: by 2002:a2e:8815:0:b0:2bc:bf29:18d3 with SMTP id
+ x21-20020a2e8815000000b002bcbf2918d3mr4583280ljh.31.1692702055033; Tue, 22
+ Aug 2023 04:00:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <f79d2161-eb57-f6a1-256b-f814598a0dd3@oracle.com>
+ <7faf3aa3-ca1e-8768-f470-427fd9183e3f@oracle.com>
+In-Reply-To: <7faf3aa3-ca1e-8768-f470-427fd9183e3f@oracle.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 22 Aug 2023 12:00:43 +0100
+Message-ID: <CALeDE9NQ8zZGOevwzxeCct+2NSvCD_U+qp1WWspVK+zO7wPOCw@mail.gmail.com>
+Subject: Re: RPi Zero 2 W usb keyboard support?
+To: =?UTF-8?Q?Filip_=C5=BDaludek?= <filip.zaludek@oracle.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,40 +85,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If vsnprintf() returns a negative number, (i >= remaining) will
-possibly be true:
+Hi,
 
-'i' is of type signed int and 'remaining' is of the unsigned type size_t.
-The C language will convert i to an unsigned type before the comparison.
+> > Hi,
+> >    is supposed usb keyboard to work in u-boot 2023.04 on RPi Zero 2 W?
+> > Configured as rpi_arm64_defconfig, no usb devices found but subsequent
+> > kernel works as expected.
+> >
+> >
+> > [pi02]
+> > kernel=u-boot.bin
+> > otg_mode=0
+> > dtoverlay=dwc2,dr_mode=host
+> >
+> >
+>
+>
+> Hello,
+>   I see, increasing usb_pgood_delay makes the trick.
 
-This can result in the wrong error type being indicated.
+I wonder if it's device specific, my Logitech wireless keyboard is
+detected with the defaults:
 
-Checking for negative i should be done first.
-
-Fixes: f4f8d8bb1abc ("cmd: setexpr: add format string handling")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/printf.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/cmd/printf.c b/cmd/printf.c
-index e024676743..9d30678188 100644
---- a/cmd/printf.c
-+++ b/cmd/printf.c
-@@ -144,10 +144,10 @@ static void printf_str(struct print_inf *inf, char *format, ...)
- 	i = vsnprintf(inf->str + inf->offset, remaining, format, args);
- 	va_end(args);
- 
--	if (i >= remaining)
--		inf->error |= PRINT_TRUNCATED_ERROR;
--	else if (i < 0)
-+	if (i < 0)
- 		inf->error |= PRINT_CONVERSION_ERROR;
-+	else if ((unsigned int)i >= remaining)
-+		inf->error |= PRINT_TRUNCATED_ERROR;
- 	else
- 		inf->offset += i;
- }
--- 
-2.40.1
-
+U-Boot>
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |   U-Boot Root Hub
+  |
+  +-2  Human Interface (12 Mb/s, 98mA)
+       Logitech USB Receiver
