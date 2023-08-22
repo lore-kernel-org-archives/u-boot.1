@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A220EE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 16:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4491EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 16:24:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 773228647D;
-	Tue, 22 Aug 2023 18:22:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DEB8F864B0;
+	Tue, 22 Aug 2023 18:24:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YriIFj7z";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="BAvhSOoH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A69286477; Tue, 22 Aug 2023 18:22:41 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 54F8D8647D; Tue, 22 Aug 2023 18:24:45 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8326D864AB
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 18:22:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDCE9864B0
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 18:24:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2690803a368so848105a91.1
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:22:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-31aeedbb264so2871197f8f.0
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:24:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692721357; x=1693326157;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tks0nFm8+zaS9+o7iB7Zg2nJm9t7Oag+QFyMsrwcC9A=;
- b=YriIFj7zORCRqi4QpV6SGbhiKoqpSLwrWiiWZtbepf2isuNY+hTVElB0B5HAT+b3r7
- JHg6zcRiMyT0P2//FBYJwPOGIWnSBrhuyoHfGAo86LztGAXzmDl0jtWPuy7AApoLHQcm
- 7+SpK1mXiFib99pz8AjnAkXOXLbfGiiIPqD38NQz5yipagEOR8g5zX4N347/xbXnySDI
- 70nQHZN1AZ/6zgzz5XQrZ1Vfi3SZWK1ZZDb191B9SkO4U8E7XrrZHGwHcL2BGB+leYMA
- 9o1sKUQDotdLYw5+NFc2ElBjuBy0pCtidl2hITtUM6Qgox0J1uzzbQhN/eFilEhXNqFL
- c/yA==
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692721481; x=1693326281; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=tS1BY/qmCDU0wHcS4pRac8I0vO2dT1rOVb3t0TV6ao4=;
+ b=BAvhSOoH1M3ZcgOOkWmkkhWWvAVDErtX72BhNwrQTaW3nbF6MLIqWaxnb30hAj1+P+
+ NRP5gEN5AknPOp67qgWbeLNauL1s3LXG7+qW0UgwtAPPXI8HR0kbApxl3sBi/7bYhVSy
+ z1pC4G2mW/Vrp6j1DWZuDJPXVBLhhE2FgNFLpR7peVjY2duEnRRaAwGIZmXlN9Xnxfch
+ zd4X6rrtcU3wvlhuQyqPpQCetgDVsH8rNDTSGxM42B03URiSzSogXTXk89HYL30vyjMI
+ k2D4NGex/xN1fa+oWPkm3t8Lqqvp/ko2SHlyiB62m8xAgBFEiU/emLNJ+TEXst/HGp8b
+ Aruw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692721357; x=1693326157;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1692721481; x=1693326281;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tks0nFm8+zaS9+o7iB7Zg2nJm9t7Oag+QFyMsrwcC9A=;
- b=lkewsZsz/SwSrNfpf/nXzkcitbmCFkJm9ZA+86L95/IbeKvh+01lP4+O+YiSxRhRvH
- uSFihcJGt0DS6y6A86QS5/kOkqCT+iYz9ihES01VvEpZpbbVOpgsnrNx+VpCPptrps2M
- goe0wRS/+nsfJkkF7INY9NeQyvJeVb2E7GMDWBQHTN98GbG8Lovi+WhIBSuvaPp/MX/M
- F5O6soIXaAJ0MKOmHrJX9iftc5Q3UL14zy9h8hFDq+0zC4LD7RJlTWgRwT9Hfp9R+hen
- 6PSbUDDyAHGjdDkhYgmrgefv9yglZXOxmyBcO0utrfUefyxTZOT6kS+holV1vckniWB+
- uWJQ==
-X-Gm-Message-State: AOJu0YzlQEzBHvlHltfcIEnsaGuKnNI9rsLdfuh0ah5zrqTDrgyth6os
- AxwNSRbhVyOVL0QTKSr6rjwO62QjadN/qiJkCKM=
-X-Google-Smtp-Source: AGHT+IGq2vX5MxqunAWYeeT83j/WnFgivESsWELJ+GGJkPvob4VZfSve6Mx9A/wwaE48W7nJtXbCwW87JwdXkwGYMOc=
-X-Received: by 2002:a17:90a:13cb:b0:26d:4695:4040 with SMTP id
- s11-20020a17090a13cb00b0026d46954040mr9122078pjf.4.1692721356805; Tue, 22 Aug
- 2023 09:22:36 -0700 (PDT)
+ bh=tS1BY/qmCDU0wHcS4pRac8I0vO2dT1rOVb3t0TV6ao4=;
+ b=PMX4u+3v4np+mkylB3uzpmpAgATzwnEu1T9xUUYvlf67CIHlqKc8N+KnCD6zfa3Zdm
+ OLrIqLqOH8msSxcqzRJI/jea9JSrudcTTxDn97B7OiNgR+smX1s4QHYEVQkSNUrBb4eE
+ K9sv/fXU9bCp+l6i92yGE4bqCW0tH1ZCUs55PeNBGvnZ5YR5nkYkC7QirGLXzBnc3Wgt
+ /0QeqUOrU2K/7pjJAxcjBimA+QqE1ErgvWju78b9/wIj/NV3Im1gbpEMnhvOdAakVshZ
+ DJ2JpFmW3yK+C3EofPW/4obVo9i+bcxgAIQn1EuabgtkhaAQmMNCTW/OD4RHifBKyq3B
+ hoFQ==
+X-Gm-Message-State: AOJu0YzAw10y8F+9L1YPp877fFHcA29fVNjDhGK7GdwsQEDTwEgDOExl
+ oOmWppN6UDH+QPzJSHMEbe0uWg==
+X-Google-Smtp-Source: AGHT+IFteuaF/dxWof0UabTv1VhekIqLt05aOhfdeB5pCiaRNnsPuqv+xqe92BS4mVCR2Y1iImO9eA==
+X-Received: by 2002:a5d:4488:0:b0:317:f18b:a950 with SMTP id
+ j8-20020a5d4488000000b00317f18ba950mr6916157wrq.26.1692721481049; 
+ Tue, 22 Aug 2023 09:24:41 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ k14-20020a5d628e000000b00317eee26bf0sm16330839wru.69.2023.08.22.09.24.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Aug 2023 09:24:40 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>, Dmitrii
+ Merkurev <dimorinny@google.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nishanth Menon <nm@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Stefan Roese
+ <sr@denx.de>, kernel@puri.sm
+Subject: Re: [PATCH 06/17] cmd: sdp: Reorder variable declaration
+In-Reply-To: <20230819142407.49632-6-marex@denx.de>
+References: <20230819142407.49632-1-marex@denx.de>
+ <20230819142407.49632-6-marex@denx.de>
+Date: Tue, 22 Aug 2023 18:24:39 +0200
+Message-ID: <87bkezrqns.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20230822155312.53131-1-oleksandr.suvorov@foundries.io>
-In-Reply-To: <20230822155312.53131-1-oleksandr.suvorov@foundries.io>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 22 Aug 2023 13:22:24 -0300
-Message-ID: <CAOMZO5BX1+_5FxjgSVna5i3A+uWANwjfqrtgftumpq5gGcEPbg@mail.gmail.com>
-Subject: Re: [PATCH] spl: watchdog: introduce SPL_HW_WATCHDOG
-To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@foundries.io>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Andre Przywara <andre.przywara@arm.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Claudiu Beznea <claudiu.beznea@microchip.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut <marex@denx.de>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Nikhil M Jain <n-jain1@ti.com>, 
- Paul Barker <paul.barker@sancloud.com>, Roger Quadros <rogerq@kernel.org>, 
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,30 +97,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Oleksandr,
+On sam., ao=C3=BBt 19, 2023 at 16:23, Marek Vasut <marex@denx.de> wrote:
 
-On Tue, Aug 22, 2023 at 12:53=E2=80=AFPM Oleksandr Suvorov
-<oleksandr.suvorov@foundries.io> wrote:
-
->                 ddr-1d-imem-fw {
-> -                       filename =3D "lpddr4_pmu_train_1d_imem_202006.bin=
-";
-> +                       filename =3D "lpddr4_pmu_train_1d_imem.bin";
->                         type =3D "blob-ext";
->                         align-end =3D <4>;
->                 };
+> Move the variable declaration around to improve code readability.
+> No functional change.
 >
->                 ddr-1d-dmem-fw {
-> -                       filename =3D "lpddr4_pmu_train_1d_dmem_202006.bin=
-";
-> +                       filename =3D "lpddr4_pmu_train_1d_dmem.bin";
->                         type =3D "blob-ext";
->                         align-end =3D <4>;
->                 };
->
->                 ddr-2d-imem-fw {
-> -                       filename =3D "lpddr4_pmu_train_2d_imem_202006.bin=
-";
-> +                       filename =3D "lpddr4_pmu_train_2d_imem.bin";
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Angus Ainslie <angus@akkea.ca>
+> Cc: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: kernel@puri.sm
+> ---
+>  cmd/usb_gadget_sdp.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-Unrelated changes?
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+>
+> diff --git a/cmd/usb_gadget_sdp.c b/cmd/usb_gadget_sdp.c
+> index 1af82e11366..784d1b49768 100644
+> --- a/cmd/usb_gadget_sdp.c
+> +++ b/cmd/usb_gadget_sdp.c
+> @@ -14,13 +14,13 @@
+>=20=20
+>  static int do_sdp(struct cmd_tbl *cmdtp, int flag, int argc, char *const=
+ argv[])
+>  {
+> +	int controller_index;
+>  	int ret;
+>=20=20
+>  	if (argc < 2)
+>  		return CMD_RET_USAGE;
+>=20=20
+> -	char *usb_controller =3D argv[1];
+> -	int controller_index =3D simple_strtoul(usb_controller, NULL, 0);
+> +	controller_index =3D simple_strtoul(argv[1], NULL, 0);
+>  	usb_gadget_initialize(controller_index);
+>=20=20
+>  	g_dnl_clear_detach();
+> --=20
+> 2.40.1
