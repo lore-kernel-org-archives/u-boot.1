@@ -4,67 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7002EE49A6
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 01:48:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B68BEE4996
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 02:33:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69B4C871C3;
-	Tue, 22 Aug 2023 03:48:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8DC2686F16;
+	Tue, 22 Aug 2023 04:33:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qjJwQe3a";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lNBgtJQo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jRqfbow8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DED486997; Tue, 22 Aug 2023 03:48:15 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4838C870AF; Tue, 22 Aug 2023 04:33:20 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4F46871D1
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 03:48:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0ABF867E2
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RVC0r3LS2z9sTs;
- Tue, 22 Aug 2023 03:48:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692668892;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WKzv2UcP2/NK74W4c0TT3CYpIbV2JFvsTIdj7lNgSn4=;
- b=qjJwQe3aePGmaU85B3nyQ9EKjFC0yyURuuog9YK2hbzMSphO5g3X7kNxa3Rw1cLUCwNwwi
- 6Pta0G/XJHRJ4OBy0/LRpApJekhrcch2flxcmm4YaLBmRwipqwJ/etFGKzN0DVPZMjQJU+
- u6BvgNyZynb2+MTny7XS0QalfEaHMi/3CKvGLk3WzWJl9zWX6yE6Lz5+D/jRRCetKeEuHD
- Q65ydaXIofENEWaPtYl7bbOsIw8BGrRTG0k3dD+Kyo+0YzZ6MMYZwnPbWA7uWsrKlLfszP
- c4+y9YXD1b1J1REHR0yCp6MAS3Tvl0sP4V2I2qIHuHPkLskGU/1AsKBtP2lzFg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692668890;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WKzv2UcP2/NK74W4c0TT3CYpIbV2JFvsTIdj7lNgSn4=;
- b=lNBgtJQo+kwxxjnQtWlI0t6/hqzkV+hYDBbTi9HQ6bucWwiTfk6vijnk0f0iAi93y1LykZ
- ZkUlOACawF0eOgk14ajk5eF6uJucMn3oRC0t9V1Q60F2A5QvqXSnHcruw0vZtEoiOXS2X6
- cHJRAw3tBNUz2flWsRK9TZB35WEPkCzqCQn+UyVsetHirrDMiEw+/qJmezsommRqUywYtm
- y5kGINUIKGfF7Ef1gxAWDDE1hJ4zS0KHIRC1pKOIHyKY4luhWl46cnJJLjutxTwLFPuRjE
- +6cPUlmpYVASD6CN63QtnZN0x18PnvEmvBKqEbfdSEP9L5+qjECLnFF5kr9MWg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Faiz Abbas <faiz_abbas@ti.com>
-Subject: [PATCH] ARM: renesas: Enable UFS on R8A779F0 S4 Spider
-Date: Tue, 22 Aug 2023 03:47:56 +0200
-Message-Id: <20230822014756.138165-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-68824a0e747so912193b3a.1
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 19:33:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692671595; x=1693276395;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ld/CmeCQPQx3Z4k6LXwTbJvue7rTlStd3hnippcOj9Q=;
+ b=jRqfbow8TyHQDl6icAqy5GJeDDPpJV/W/vNmg1QRVKUGL2fSMoHDWygtz3fKdOGt5/
+ FKH2ANrzznq3/nvw/HOMPOP+A1QPtmvHxeT2/O1mgdjr+n4cYspAha015zQLutkqLjJ+
+ d3Dqw8rVKL/GOwNePYTGvoJx0+EJckF/jVVFcFpuyG7plfjCBCIp5OoWdhRtcEyqUND2
+ 1ynNyDgM9EppdMxzyPJljQcHLIiOpS4wi2uV0I7HEwc1NUfZJlzqLx6W+dvcbRkAzjfx
+ fk5+hAp456Sw+fUNeC13b9Ebx0s/Q3ulJjBBzi/sBMe3Brttrja11LPBp+fcIzRu6C6p
+ fz/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692671595; x=1693276395;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ld/CmeCQPQx3Z4k6LXwTbJvue7rTlStd3hnippcOj9Q=;
+ b=LN8sFzyYf9sZREdfWwgxFjYw70pX1TdK2ExY/h3soC6RnXkX9hD3ljljwkppNXEgGU
+ JhCt1edOsRc4niDugJ58XlfDlQwDFNYS7DZrw+I5O0m41yAu1HRAlsN6+EkYpEWNAcEo
+ JE9jynCryAg5swpiQ40LLa3FVxfMTBXzG5FdEgV+gJP2gIxPQVslt8MCZObEZ+ZYp+7L
+ Jv25IiLmip/Mt3y98+XAUQuJ7Pg7yV+HssbUMY8aZzWhYieXkoEdde6zTc1Q/0yYGdX7
+ J23PlVNOv3X+oqflO9dFxOJqXWSC64QFkTEZJKkYEVCbDMrrJqkBxPYg1HGDRZDvSz0H
+ WZaw==
+X-Gm-Message-State: AOJu0YzER3YXku8SAVKhUr5+0YU8zo8dPPeOecXEyVvQnd73xg4Z3vJE
+ u7PiG/S1wzqZFUjr6Fo9Z9URTUoCmBwpgi3ZhOsWjwajNgw=
+X-Google-Smtp-Source: AGHT+IHwDDzG0+C/uupPVOjbvjUliQzAEo0oSx7oYjqWNRpZ6lu+JYR/9kc/Z1cMj9RxBph1G1HUYmVafonfwcM1gso=
+X-Received: by 2002:a17:90a:7524:b0:26b:27f6:9027 with SMTP id
+ q33-20020a17090a752400b0026b27f69027mr7375434pjk.1.1692671594948; Mon, 21 Aug
+ 2023 19:33:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: cf06d56668afef116f1
-X-MBO-RS-META: iyzme7art5pn7nxro69gmfzrkik9in11
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+In-Reply-To: <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 21 Aug 2023 23:33:02 -0300
+Message-ID: <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Rogan Dawes <rogan@dawes.za.net>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,72 +93,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable UFS controller driver and matching UFS and SCSI commands. The
-former is used to initialize the device, the later is used to perform
-low level access to the SCSI interface of the UFS device.
+Hi Rogan,
 
-Enable R8A779F0 S4 Spider specific dependencies, the PCA953x driver
-and GPIO clock gate driver. This setup is used to toggle 38.4 MHz
-clock for the UFS controller.
+On Fri, Aug 18, 2023 at 10:45=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> w=
+rote:
+>
+> Circling back to this, I wanted to get a modern u-boot running on the
+> Wink Hub v1 as well. Since it is possible to invoke SDP over USB
+> (having soldered on a suitable microUSB connector), I have no concern
+> about bricking it now. It's also a LOT easier than JTAG!
+>
+> I tried to build and flash the mx28evk_defconfig, but failed to get
+> any output on the serial console. This is likely to be unsurprising,
+> due to the already established alternative configuration of the UART
+> identified by Fabio.
+>
+> I then patched imx28.dtsi to add duart_pins_c as per Fabio's previous
+> patch for the Linux kernel:
+>
+> + duart_pins_c: duart@2 {
+> + reg =3D <2>;
+> + fsl,pinmux-ids =3D <
+> + MX28_PAD_I2C0_SCL__DUART_RX
+> + MX28_PAD_I2C0_SDA__DUART_TX
+> + >;
+> + fsl,drive-strength =3D <MXS_DRIVE_8mA>;
+> + fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
+> + fsl,pull-up =3D <MXS_PULL_DISABLE>;
+> + };
+> +
+>
+> And updated mx28evk_defconfig to use duart_pins_c instead of
+> duart_pins_a. However, I still got no output after using:
+>
+> sudo $(which snagrecover) --soc imx28 -f
+> src/snagrecover/templates/imx28-evk.yaml
 
-Enable support for 48bit LBA in block layer to address disks larger
-than 512*2^32 ~= 144 PiB. Enable use of 64bit LBA variables in the
-rest of U-Boot, instead of the default 32bit ones.
+I am not familiar with this tool. I was only aware of the one below:
 
-Increase FAT cluster size to 128k as that is what is used by the
-filesystem that is populated on the UFS device.
+https://source.denx.de/denx/mxsldr
 
-Use 'ufs init && scsi scan' to start the UFS device from U-Boot prompt.
+Are you able to load the original vendor U-Boot with it?
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Faiz Abbas <faiz_abbas@ti.com>
----
- configs/r8a779f0_spider_defconfig | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Also, is the original vendor U-Boot source code available?
 
-diff --git a/configs/r8a779f0_spider_defconfig b/configs/r8a779f0_spider_defconfig
-index 0edacc4d569..f250d1a13c1 100644
---- a/configs/r8a779f0_spider_defconfig
-+++ b/configs/r8a779f0_spider_defconfig
-@@ -31,7 +31,9 @@ CONFIG_CMD_BOOTZ=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
- CONFIG_CMD_SPI=y
-+CONFIG_CMD_UFS=y
- CONFIG_CMD_DHCP=y
- CONFIG_CMD_MII=y
- CONFIG_CMD_PING=y
-@@ -46,9 +48,13 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_VERSION_VARIABLE=y
- CONFIG_REGMAP=y
- CONFIG_SYSCON=y
-+CONFIG_LBA48=y
-+CONFIG_SYS_64BIT_LBA=y
- CONFIG_CLK=y
-+CONFIG_CLK_GPIO=y
- CONFIG_CLK_RENESAS=y
- CONFIG_RCAR_GPIO=y
-+CONFIG_DM_PCA953X=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_RCAR_I2C=y
- CONFIG_MMC_IO_VOLTAGE=y
-@@ -67,8 +73,13 @@ CONFIG_PHY_R8A779F0_ETHERNET_SERDES=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_SCSI=y
-+CONFIG_DM_SCSI=y
- CONFIG_BAUDRATE=1843200
- CONFIG_SCIF_CONSOLE=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_RENESAS_RPC_SPI=y
-+CONFIG_UFS=y
-+CONFIG_UFS_RENESAS=y
-+CONFIG_FS_FAT_MAX_CLUSTSIZE=131072
--- 
-2.40.1
+It is important to re-use the same DDR initialization from the original U-B=
+oot.
 
+> with u-boot.sb in the current directory.
+>
+> I also tried using the complete imx28-wink-hub-v1.dts as created by
+> Fabio, and updated the .config to reference that instead of the
+> imx28-evk, but I suspect that I may not have made the updates
+> sufficiently well, if the name of the board needs to correspond with
+> any details of the device tree? Neither of these resulted in any
+> output.
+>
+> Any other suggestions?
+
+Please check board/freescale/mx28evk/iomux.c:
+
+const iomux_cfg_t iomux_setup[] =3D {
+/* DUART */
+MX28_PAD_PWM0__DUART_RX,
+MX28_PAD_PWM1__DUART_TX,
+
+The DUART pins need to be changed here as well.
