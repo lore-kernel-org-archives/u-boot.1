@@ -4,84 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AA60EE4993
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F605EE49AF
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A49E686503;
-	Tue, 22 Aug 2023 20:58:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0ED0486500;
+	Tue, 22 Aug 2023 20:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="glII45v5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lOnPuLC3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45BC2855CE; Tue, 22 Aug 2023 20:57:58 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 9FF05864C8; Tue, 22 Aug 2023 20:58:01 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1A20864D2
+ by phobos.denx.de (Postfix) with ESMTPS id 5251186400
  for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3a812843f0fso2937972b6e.2
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-bcb6dbc477eso4566746276.1
  for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692730671; x=1693335471;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DZVRGfmBOabu1wOEPPuYW3gyh2bZLY1wdIdhvnWyWK0=;
- b=glII45v5dlryN8ldctkMdTJaqSnv+fZgqAfdkMRw8yiQKhoZSx7JHcKUU1Zk54xRZj
- nb3OuOiKl1pnO+3Mj83QaKVcVeJouZZVh78NT/0YuzBYqYsQdLnKo0tyrVW25pCmhWw2
- 7UpL876FncTMAjyfDJjo7NXsalHktthEhWyVE=
+ bh=NdBtZl0Kwt6aQT1urYuSUUp+f8sfrIkChyRlXyBQ8do=;
+ b=lOnPuLC3fCC7qngxE8LwniDPtb1BHzq0zV3TBzFw4ZmsEY35OhzbHh0EMHZWa0uWGc
+ JJ/orE7vBmEAtIvrJjl1X1Q4W8EA6667+NxwDLdgg6UyHCZsB6EG1sn1hBmi9Z8IROma
+ TbFWZYX/YCTFoHyWJ8Ct3e56XG2P10Q0QyI6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692730671; x=1693335471;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DZVRGfmBOabu1wOEPPuYW3gyh2bZLY1wdIdhvnWyWK0=;
- b=e6esETXc2WOGN/3xeuwepSwhr9J52X8DPyBuBB4r4AUb4QRn/LXle3DftbN/UQ2w/H
- WHSRBOE31A4Eshz2A7ZmuQufxX61saJVKX0Lpv3I5gAwxo7oTTrB3/8sdNK9Vg6JkNwy
- wgV9YolmkWLlMpQkyR3xO6XBWMVd/KaOZ273QoYuE4fvkXVIqwDiI1TO+gFshEn2pVwd
- aYkayHOGjuUtRQqj27GFXfzIJMPZngXxOX2/DkaST51dObAjgUjGRTUItEurYqjbTsuP
- uOmMII127Bahm3qIVa+dF+vP3Wcrx50sDbPZYHrvjHeuGiZVT/vgYOVpiJK4jVxTPz3l
- XUhg==
-X-Gm-Message-State: AOJu0Yxb985x2qDyjcAn4bVz/4L41meGWAjkZClQzU4ih7lyFGUMYOcx
- 7/st8sTWT7cfEpepuneNctGdq3Zuj1CEjJnXYT5NpQ==
-X-Google-Smtp-Source: AGHT+IHLM6yan8hnPIGrS8HQD/qTIPzHnGKkUAcYUlcjLk5cal9wLxkLuIrYBF2JoPr0gFByaaoQWX2G/5I/JpLeffs=
-X-Received: by 2002:a05:6358:5284:b0:134:d030:e5da with SMTP id
- g4-20020a056358528400b00134d030e5damr5276158rwa.21.1692730670856; Tue, 22 Aug
- 2023 11:57:50 -0700 (PDT)
+ bh=NdBtZl0Kwt6aQT1urYuSUUp+f8sfrIkChyRlXyBQ8do=;
+ b=CdQCCcGI4etuex5n3CLVrQpXYjSx42iemBliWAmHbgpF3JFLb1Z8dBc0DMDAXrJRzo
+ 51GC0Px9QH4+EXX6jxMfYjnM2coXxS4bVp84oOORssZjWy0vogy1C6BrhHHxHA6/xP5Y
+ WY7uctBWzstZbN0B8i0+j7hxtWdgU76TM+eMMHhiBrsdmcs54wvcnYJszyN7M/VBAuF9
+ CuW5tXEu2vCjE1q2gmLXflVLoY5nadK4VkYt4+4WxYEZ7ZfF4vLwiZN8N+8dllSr2jsC
+ D8XnXstgWTs32O1mL+OjS4xxue7Omd65oeXtkyOm43b7fxDiUCRKdAYuYn450m1CVIR9
+ CUmQ==
+X-Gm-Message-State: AOJu0Yxf9suZNUxMZB/Y6kFXCdLVCCTRII6Iouvcl7nEhOOvjvX9EBco
+ dupxgqG7cdHgPMhKrAxiotIM1OlwmF/vLbFe2/eEww==
+X-Google-Smtp-Source: AGHT+IFhGyeOQ+8c+gCtX2ZKXBZ8aEG8wMi2LJWkaV07Xr/spL+rWmvste6LaqF52wBwHc75OBWzBbTjZTCDu/MSXr8=
+X-Received: by 2002:a25:cf88:0:b0:d74:6c30:d467 with SMTP id
+ f130-20020a25cf88000000b00d746c30d467mr11766806ybg.13.1692730670835; Tue, 22
+ Aug 2023 11:57:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
- <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
- <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
- <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
- <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
- <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
- <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
- <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
-In-Reply-To: <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
+ <20230822121026.1007105-8-alpernebiyasak@gmail.com>
+In-Reply-To: <20230822121026.1007105-8-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Aug 2023 12:56:40 -0600
-Message-ID: <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
-Subject: Re: [PATCH v5 00/13] Add video damage tracking
-To: Alexander Graf <agraf@csgraf.de>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de, 
- Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
+Date: Tue, 22 Aug 2023 12:56:38 -0600
+Message-ID: <CAPnjgZ36NmL0jkHaRyeCSQQm78bDaYwei84WVLt32-ZX0M_J1w@mail.gmail.com>
+Subject: Re: [PATCH v2 7/7] x86: qemu: Enable ramfb by default
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Asherah Connor <ashe@kivikakk.ee>, Alexander Graf <agraf@csgraf.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,254 +87,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alex,
+Hi Alper,
 
-On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
+On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
+> Now that we have everything in place to support ramfb, let's wire it up
+> by default in the x86 QEMU targets. That way, we can use ramfb graphical
+> console instead of the default by passing -vga none -device ramfb to the
+> QEMU command line.
 >
-> On 22.08.23 01:03, Simon Glass wrote:
-> > Hi Alex,
-> >
-> > On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrote:
-> >>
-> >> On 22.08.23 00:10, Simon Glass wrote:
-> >>> Hi Alex,
-> >>>
-> >>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
-> >>>> On 21.08.23 21:57, Simon Glass wrote:
-> >>>>> Hi Alex,
-> >>>>>
-> >>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
-> >>>>>> On 21.08.23 21:11, Simon Glass wrote:
-> >>>>>>> Hi Alper,
-> >>>>>>>
-> >>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >>>>>>>> This is a rebase of Alexander Graf's video damage tracking series, with
-> >>>>>>>> some tests and other changes. The original cover letter is as follows:
-> >>>>>>>>
-> >>>>>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
-> >>>>>>>>>
-> >>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
-> >>>>>>>>> but need it accessible by the display controller which reads directly
-> >>>>>>>>> from a later point of consistency. Hence, we flush the frame buffer to
-> >>>>>>>>> DRAM on every change. The full frame buffer.
-> >>>>>>> It should not, see below.
-> >>>>>>>
-> >>>>>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
-> >>>>>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
-> >>>>>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
-> >>>>>>>>> printed space triggers a cache flush.
-> >>>>>>> That is a bug somewhere in EFI.
-> >>>>>> Unfortunately not :). You may call it a bug in grub: It literally prints
-> >>>>>> over space characters for every character in its menu that it wants
-> >>>>>> cleared. On every text screen draw.
-> >>>>>>
-> >>>>>> This wouldn't be a big issue if we only flush the reactangle that gets
-> >>>>>> modified. But without this patch set, we're flushing the full DRAM
-> >>>>>> buffer on every u-boot text console character write, which means for
-> >>>>>> every character (as that's the only API UEFI has).
-> >>>>>>
-> >>>>>> As a nice side effect, we speed up the normal U-Boot text console as
-> >>>>>> well with this patch set, because even "normal" text prints that write
-> >>>>>> for example a single line of text on the screen today flush the full
-> >>>>>> frame buffer to DRAM.
-> >>>>> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
-> >>>>> after every character. It doesn't do that for normal character output
-> >>>>> and I don't think it makes sense to do it for EFI either.
-> >>>> I see. Let's trace the calls:
-> >>>>
-> >>>> efi_cout_output_string()
-> >>>> -> fputs()
-> >>>> -> vidconsole_puts()
-> >>>> -> video_sync()
-> >>>> -> flush_dcache_range()
-> >>>>
-> >>>> Unfortunately grub abstracts character backends down to the "print
-> >>>> character" level, so it calls UEFI's sopisticated "output_string"
-> >>>> callback with single characters at a time, which means we do a full
-> >>>> dcache flush for every character that we print:
-> >>>>
-> >>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
-> >>>>
-> >>>>
-> >>>>>>>>> This patch set implements the easiest mitigation against this problem:
-> >>>>>>>>> Damage tracking. We remember the lowest common denominator region that was
-> >>>>>>>>> touched since the last video_sync() call and only flush that. The most
-> >>>>>>>>> typical writer to the frame buffer is the video console, which always
-> >>>>>>>>> writes rectangles of characters on the screen and syncs afterwards.
-> >>>>>>>>>
-> >>>>>>>>> With this patch set applied, we reduce drawing a large grub menu (with
-> >>>>>>>>> serial console attached for size information) on an RK3399-ROC system
-> >>>>>>>>> at 1440p from 55 seconds to less than 1 second.
-> >>>>>>>>>
-> >>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
-> >>>>>>>>> overhead compared to before as well. So even x86 systems should be faster
-> >>>>>>>>> with this now :).
-> >>>>>>>>>
-> >>>>>>>>>
-> >>>>>>>>> Alternatives considered:
-> >>>>>>>>>
-> >>>>>>>>>       1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
-> >>>>>>>>>          so often. We are missing timers to do this generically.
-> >>>>>>>>>
-> >>>>>>>>>       2) Double buffering - We could try to identify whether anything changed
-> >>>>>>>>>          at all and only draw to the FB if it did. That would require
-> >>>>>>>>>          maintaining a second buffer that we need to scan.
-> >>>>>>>>>
-> >>>>>>>>>       3) Text buffer - Maintain a buffer of all text printed on the screen with
-> >>>>>>>>>          respective location. Don't write if the old and new character are
-> >>>>>>>>>          identical. This would limit applicability to text only and is an
-> >>>>>>>>>          optimization on top of this patch set.
-> >>>>>>>>>
-> >>>>>>>>>       4) Hash screen lines - Create a hash (sha256?) over every line when it
-> >>>>>>>>>          changes. Only flush when it does. I'm not sure if this would waste
-> >>>>>>>>>          more time, memory and cache than the current approach. It would make
-> >>>>>>>>>          full screen updates much more expensive.
-> >>>>>>> 5) Fix the bug mentioned above?
-> >>>>>>>
-> >>>>>>>> Changes in v5:
-> >>>>>>>> - Add patch "video: test: Split copy frame buffer check into a function"
-> >>>>>>>> - Add patch "video: test: Support checking copy frame buffer contents"
-> >>>>>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
-> >>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
-> >>>>>>>> - Document damage struct and fields in struct video_priv comment
-> >>>>>>>> - Return void from video_damage()
-> >>>>>>>> - Fix undeclared priv error in video_sync()
-> >>>>>>>> - Drop unused headers from video-uclass.c
-> >>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
-> >>>>>>>> - Call video_damage() also in video_fill_part()
-> >>>>>>>> - Use met->baseline instead of priv->baseline
-> >>>>>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-> >>>>>>>> - Update console_rotate.c video_damage() calls to pass video tests
-> >>>>>>>> - Remove mention about not having minimal damage for console_rotate.c
-> >>>>>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
-> >>>>>>>> - Document new vdev field in struct efi_gop_obj comment
-> >>>>>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
-> >>>>>>>> - Fix memmove() calls by removing the extra dev argument
-> >>>>>>>> - Call video_sync() before checking copy_fb in video tests
-> >>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
-> >>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
-> >>>>>>>>
-> >>>>>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
-> >>>>>>>>
-> >>>>>>>> Changes in v4:
-> >>>>>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
-> >>>>>>>> - Simplify first damage logic
-> >>>>>>>> - Remove VIDEO_DAMAGE default for ARM
-> >>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
-> >>>>>>>> - Add patch "video: Always compile cache flushing code"
-> >>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
-> >>>>>>>>
-> >>>>>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
-> >>>>>>>>
-> >>>>>>>> Changes in v3:
-> >>>>>>>> - Adapt to always assume DM is used
-> >>>>>>>> - Adapt to always assume DM is used
-> >>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
-> >>>>>>>>
-> >>>>>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
-> >>>>>>>>
-> >>>>>>>> Changes in v2:
-> >>>>>>>> - Remove ifdefs
-> >>>>>>>> - Fix ranges in truetype target
-> >>>>>>>> - Limit rotate to necessary damage
-> >>>>>>>> - Remove ifdefs from gop
-> >>>>>>>> - Fix dcache range; we were flushing too much before
-> >>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
-> >>>>>>>>
-> >>>>>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
-> >>>>>>>>
-> >>>>>>>> Alexander Graf (9):
-> >>>>>>>>       dm: video: Add damage tracking API
-> >>>>>>>>       dm: video: Add damage notification on display fills
-> >>>>>>>>       vidconsole: Add damage notifications to all vidconsole drivers
-> >>>>>>>>       video: Add damage notification on bmp display
-> >>>>>>>>       efi_loader: GOP: Add damage notification on BLT
-> >>>>>>>>       video: Only dcache flush damaged lines
-> >>>>>>>>       video: Use VIDEO_DAMAGE for VIDEO_COPY
-> >>>>>>>>       video: Always compile cache flushing code
-> >>>>>>>>       video: Enable VIDEO_DAMAGE for drivers that need it
-> >>>>>>>>
-> >>>>>>>> Alper Nebi Yasak (4):
-> >>>>>>>>       video: test: Split copy frame buffer check into a function
-> >>>>>>>>       video: test: Support checking copy frame buffer contents
-> >>>>>>>>       video: test: Test partial updates of hardware frame buffer
-> >>>>>>>>       video: test: Test video damage tracking via vidconsole
-> >>>>>>>>
-> >>>>>>>>      arch/arm/mach-omap2/omap3/Kconfig |   1 +
-> >>>>>>>>      arch/arm/mach-sunxi/Kconfig       |   1 +
-> >>>>>>>>      drivers/video/Kconfig             |  26 +++
-> >>>>>>>>      drivers/video/console_normal.c    |  27 ++--
-> >>>>>>>>      drivers/video/console_rotate.c    |  94 +++++++----
-> >>>>>>>>      drivers/video/console_truetype.c  |  37 +++--
-> >>>>>>>>      drivers/video/exynos/Kconfig      |   1 +
-> >>>>>>>>      drivers/video/imx/Kconfig         |   1 +
-> >>>>>>>>      drivers/video/meson/Kconfig       |   1 +
-> >>>>>>>>      drivers/video/rockchip/Kconfig    |   1 +
-> >>>>>>>>      drivers/video/stm32/Kconfig       |   1 +
-> >>>>>>>>      drivers/video/tegra20/Kconfig     |   1 +
-> >>>>>>>>      drivers/video/tidss/Kconfig       |   1 +
-> >>>>>>>>      drivers/video/vidconsole-uclass.c |  16 --
-> >>>>>>>>      drivers/video/video-uclass.c      | 190 ++++++++++++----------
-> >>>>>>>>      drivers/video/video_bmp.c         |   7 +-
-> >>>>>>>>      include/video.h                   |  59 +++----
-> >>>>>>>>      include/video_console.h           |  52 ------
-> >>>>>>>>      lib/efi_loader/efi_gop.c          |   7 +
-> >>>>>>>>      test/dm/video.c                   | 256 ++++++++++++++++++++++++------
-> >>>>>>>>      20 files changed, 483 insertions(+), 297 deletions(-)
-> >>>>>>> It is good to see this tidied up into something that can be applied!
-> >>>>>>>
-> >>>>>>> I am unsure what is going on with the EFI performance, though. It
-> >>>>>>> should not flush the cache after every character, only after a new
-> >>>>>>> line. Is there something wrong in here? If so, we should fix that bug
-> >>>>>>> first and it should be patch 1 of this series.
-> >>>>>> Before I came up with this series, I was trying to identify the UEFI bug
-> >>>>>> in question as well, because intuition told me surely this is a bug in
-> >>>>>> UEFI :). Turns out it really isn't this time around.
-> >>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
-> >>>>> implementation. Where did you look for the bug?
-> >>>> The "real" bug is in grub. But given that it's reasonably simple to work
-> >>>> around in U-Boot and even with it "fixed" in grub we would still see
-> >>>> performance benefits from flushing only parts of the screen, I think
-> >>>> it's worth living with the grub deficiency.
-> >>> OK thanks for digging into it. I suggest we add a param to
-> >>> vidconsole_puts() to tell it whether to sync or not, then the EFI code
-> >>> can indicate this and try to be a bit smarter about it.
-> >>
-> >> It doesn't know when to sync either. From its point of view, any
-> >> "console output" could be the last one. There is no API in UEFI that
-> >> says "please flush console output now".
-> > Yes, I understand. I was not suggesting we were missing an API. But
-> > some sort of heuristic would do, e.g. only flush on a newline, flush
-> > every 50 chars, etc.
+> Also increase SYS_MALLOC_F_LEN for QEMU x86_64 to be the same as its SPL
+> counterpart, because we're running out of alloc space in pre-reloc stage
+> with ramfb enabled.
 >
-> I can't think of any heuristic that would reliably work. Relevant for
-> this conversation, UEFI provides 2 calls:
->
->    * Write string to screen (efi_cout_output_string)
->    * Set text cursor position to X, Y (efi_cout_set_cursor_position)
->
-> It's perfectly legal for a UEFI application to do something like
->
-> efi_cout_set_cursor_position(10, 10);
-> efi_cout_output_string("f");
-> efi_cout_output_string("o");
-> efi_cout_output_string("o") ;
->
-> to update contents of a virtual text box on the screen. Where in this
-> chain of events would we call video_sync(), but on every call to
-> efi_cout_output_string()?
+> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> ---
+> This also suffers from the same issue with distros as the Bochs display
+> driver [1], where it results in a hang after GRUB menu selection before
+> the kernel can display anything. Couldn't reproduce on arm*/riscv*.
 
-Actually U-Boot has the same problem, but we have managed to work out something.
+Yes I see that problem too. I wonder how we can debug it?
 
-I do think it is still to flush the cache on every char. I suspect you
-will find that even a simple heuristic like I mentioned would be good
-enough.
+>
+> But just having it enabled doesn't seem to cause problems unless you run
+> QEMU with -device ramfb, so this (unlike the Bochs video driver) can
+> actually be co-enabled with VIDEO_VESA.
 
-Also I notice that EFI calls notify? all the time, so U-Boot probably
-does have the ability to sync the video every 10ms if we wanted to.
+Indeed...which makes me wonder if we can do something similar with
+Bochs, so that (from the cmdline) it is possible to chose ramfb, bochs
+or vesa?
 
-It seems from this discussion that we have made great the enemy of the good.
+>
+> [1] https://lore.kernel.org/u-boot/20230724145210.304917-4-sjg@chromium.org/
+>
+> Changes in v2:
+> - Add patch "x86: qemu: Enable ramfb by default"
+>
+>  arch/x86/cpu/qemu/Kconfig           |  4 +++
+>  board/emulation/qemu-x86/qemu-x86.c | 47 +++++++++++++++++++++++++++++
+>  configs/qemu-x86_64_defconfig       |  4 +--
+>  configs/qemu-x86_defconfig          |  1 -
+>  4 files changed, 52 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/x86/cpu/qemu/Kconfig b/arch/x86/cpu/qemu/Kconfig
+> index f8f2f6473088..e0a57ac2d687 100644
+> --- a/arch/x86/cpu/qemu/Kconfig
+> +++ b/arch/x86/cpu/qemu/Kconfig
+> @@ -13,6 +13,10 @@ config QEMU
+>         imply USB
+>         imply USB_EHCI_HCD
+>         imply VIDEO_VESA
+> +       imply VIDEO_RAMFB
+> +       imply BOARD_EARLY_INIT_F
+> +       imply BOARD_EARLY_INIT_R
+> +       imply CMD_QFW
+>
+>  if QEMU
+>
+> diff --git a/board/emulation/qemu-x86/qemu-x86.c b/board/emulation/qemu-x86/qemu-x86.c
+> index e69de29bb2d1..3a8a580cc591 100644
+> --- a/board/emulation/qemu-x86/qemu-x86.c
+> +++ b/board/emulation/qemu-x86/qemu-x86.c
+> @@ -0,0 +1,47 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include <common.h>
+> +#include <dm.h>
+> +#include <init.h>
+> +#include <log.h>
+> +#include <qfw.h>
+> +
+> +int board_early_init_f(void)
+> +{
+> +       struct udevice *dev;
+> +       int ret;
+> +
+> +       /*
+> +        * Make sure we enumerate the QEMU Firmware device to bind ramfb
+> +        * so video_reserve() can reserve memory for it.
+> +        */
+> +       if (IS_ENABLED(CONFIG_QFW)) {
+> +               ret = qfw_get_dev(&dev);
+> +               if (ret) {
+> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
+> +                       return ret;
+> +               }
+> +       }
+> +
+> +       return 0;
+
+Same point about DT here.
+
+> +}
+> +
+> +int board_early_init_r(void)
+> +{
+> +       struct udevice *dev;
+> +       int ret;
+> +
+> +       /*
+> +        * Make sure we enumerate the QEMU Firmware device to find ramfb
+> +        * before console_init.
+> +        */
+> +       if (IS_ENABLED(CONFIG_QFW)) {
+> +               ret = qfw_get_dev(&dev);
+> +               if (ret) {
+> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
+> +                       return ret;
+> +               }
+> +       }
+> +
+> +       return 0;
+> +}
+> diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
+> index c6f30674a8fc..c9ad6eebd35c 100644
+> --- a/configs/qemu-x86_64_defconfig
+> +++ b/configs/qemu-x86_64_defconfig
+> @@ -1,13 +1,12 @@
+>  CONFIG_X86=y
+>  CONFIG_TEXT_BASE=0x1110000
+> -CONFIG_SYS_MALLOC_F_LEN=0x1000
+> +CONFIG_SYS_MALLOC_F_LEN=0x2000
+>  CONFIG_NR_DRAM_BANKS=8
+>  CONFIG_ENV_SIZE=0x40000
+>  CONFIG_MAX_CPUS=2
+>  CONFIG_SPL_DM_SPI=y
+>  CONFIG_DEFAULT_DEVICE_TREE="qemu-x86_i440fx"
+>  CONFIG_SPL_TEXT_BASE=0xfffd8000
+> -CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
+>  CONFIG_DEBUG_UART_BASE=0x3f8
+>  CONFIG_DEBUG_UART_CLOCK=1843200
+>  CONFIG_X86_RUN_64BIT=y
+> @@ -59,7 +58,6 @@ CONFIG_CMD_USB=y
+>  CONFIG_BOOTP_BOOTFILESIZE=y
+>  CONFIG_CMD_EFIDEBUG=y
+>  CONFIG_CMD_TIME=y
+> -CONFIG_CMD_QFW=y
+
+What is happening here? Why disable it?
+
+>  CONFIG_CMD_BOOTSTAGE=y
+>  CONFIG_CMD_EXT4_WRITE=y
+>  CONFIG_ENV_OVERWRITE=y
+> diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
+> index 24682a5387df..8a2311720f02 100644
+> --- a/configs/qemu-x86_defconfig
+> +++ b/configs/qemu-x86_defconfig
+> @@ -37,7 +37,6 @@ CONFIG_CMD_USB=y
+>  CONFIG_BOOTP_BOOTFILESIZE=y
+>  CONFIG_CMD_EFIDEBUG=y
+>  CONFIG_CMD_TIME=y
+> -CONFIG_CMD_QFW=y
+>  CONFIG_CMD_BOOTSTAGE=y
+>  CONFIG_CMD_EXT4_WRITE=y
+>  CONFIG_MAC_PARTITION=y
+> --
+> 2.40.1
+>
 
 Regards,
 Simon
