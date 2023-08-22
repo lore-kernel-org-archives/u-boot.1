@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB178EE4993
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 09:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76C4CEE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 09:38:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B22786484;
-	Tue, 22 Aug 2023 11:38:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 645108649C;
+	Tue, 22 Aug 2023 11:38:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MVBTA3M7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hoxg/+eX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D52BF86487; Tue, 22 Aug 2023 11:38:25 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 2BB2F8649B; Tue, 22 Aug 2023 11:38:28 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC9FA86483
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:38:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1191686485
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:38:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2bc63e0d8cdso41415221fa.2
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 02:38:22 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2b95d5ee18dso66644481fa.1
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 02:38:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692697101; x=1693301901;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pauOOzPigbLRQbjddrYQYTslWma+kJ49KyfEuFCkD14=;
- b=MVBTA3M7/tj6n8HzT/W3lYfBCRA19ozoKQEX0cQX1EZRYCY9tt51SyGGcHCSpf6Cc+
- vDUN6kjTBeU4NnQR4Gi57dLhqD1w1EkgtW0+Ps4kH+3lLZr/SAgdSVuaN9MJA2JEDFST
- ulvP5VmySBl1OVYr7DdLp8TraMMa47wkFhkdD1WQB2Em6Ll1h5F4Z0cRH5iXeZOEAZ0v
- m1Y/vxEpVsFdDPIIWRe6FAwj4ZKCYsAjHRBH20AnL1kX5AKpIYY08x3VJXlOWk456p+r
- /ESr4PdwgGo3Hhz94fV58cXg9cW/+3Gs1G3Nh/QUVL0ZNB85k2Sr8zwk3R6tspZVuZRa
- ZCXw==
+ d=linaro.org; s=google; t=1692697104; x=1693301904;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8zF1z8x596ZFPGv6nhkRshR4N1Qx5hz0TD2Q54CzOIo=;
+ b=hoxg/+eXEc+rTeZkDXZDCBECs4043EXJ10qxSGe7/iytjYZ0W2VAuSWEUxZ3r8t98R
+ g1sAR9aWW2TlFeIC8iCcEJ5oXmh6l7Ck2x1X3GCqGdgIPCShGStkPCBclxhl2tAIDMmC
+ anAHd2lnRMH0JAqE6w+rjJmr+aWod+usPzMmJgTQB89Fv2s3YP8SyT/qlmKhlrdU2FVL
+ T25/fD4S/zkYIDUuV5516k0UvgpjN4podCgE57yVyAdBO1DgxnONoJQv3/d6ztk7SOHv
+ NHsQcskfRd8gyc9B8ToQRhIOgjtRLWaoIZByG11yiWDaxAt/vz4PYC+gxMjM93+nau/L
+ Z9ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692697101; x=1693301901;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pauOOzPigbLRQbjddrYQYTslWma+kJ49KyfEuFCkD14=;
- b=IIf+S+OltOrZ8O4snuUoUQPzwXnKLBXyB5/EvU6CbwmLeDK1LDqF4rFaw9VhGYMiN5
- bRI0bN9YjWYvzjWKk9omtMsmmMmKaOe3F4KfRXMFhpZtI8KcBTBg8rYKPFviLOAjlJFG
- oG0AGLK+SDn02W3H1a80rdqNMXKALXiOqevl0PaDp4CvCzWxGsRC5PriDkKgFzhAKVtr
- bsSfI6IWnTV8belSDK6op5GNOX3Tci1VbzgbM8xiOGvj9f2Htrfv7Gp9iFz8fRLRpF6e
- 87KRY+XXCB/Y/oYVTC8E32csB13HnKP4EMvpnT+sTWh03ox7jUOGkk1BL/4g4xqQAncJ
- hKKw==
-X-Gm-Message-State: AOJu0YwyvTQvKBGhSkvnyJf3kaulA6DCFuzNs+scVn9KhOp6xmVrXhB9
- 6xy5j9lfDdafx0VIoBMQ2phxehoYx+tLyWn2Ck/+Ng==
-X-Google-Smtp-Source: AGHT+IFVzOGbdIr9Qf3n4uGzffDP2t4eziqsp/gvfaocqE0qmquJDTi/VcdF6kJDKJSUpvBA6NRCMQ==
-X-Received: by 2002:a2e:3016:0:b0:2b6:dc55:c3c7 with SMTP id
- w22-20020a2e3016000000b002b6dc55c3c7mr6879367ljw.20.1692697101644; 
- Tue, 22 Aug 2023 02:38:21 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692697104; x=1693301904;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8zF1z8x596ZFPGv6nhkRshR4N1Qx5hz0TD2Q54CzOIo=;
+ b=NmdvSyXGNatCh7koqzAUUNZzCJmRMReTqne4e5+PRFg2uFAb2HcAcDjuz3Kabb7A2v
+ Hie09XRRe0WGGf2/rK2MKDxNVrRZDL0rO8RE2to3luAf1/Z2RXrM8IJd/V18yA5Jk+y+
+ 00tWufJ4F4Nfaj/Qr3vClTDtZs/epf8JNMwFcGoDyI4lnil3iMaV33db+Hgd0IuH4a1n
+ /FrY1c+CEaR33p5gvBud6bJGdW+JK78+EbcTN2REayNMdyipyXCtOIWvFYd3lf0P/kyc
+ ZC6Smh4hDuo0tAZnjpkE74kx6K/oxO9UXUn7/G9mmLBM5Z8IyVtBuQKWitD5qOl2AKOt
+ bdFg==
+X-Gm-Message-State: AOJu0YzVziVz6pJuqBvyukeB9Kn41me4tEDN0qkd509mfqfg1uSePGOJ
+ v8xv4bI33scZpKG+0KcZZK6QTSAWyyJoTyz3yPmYlA==
+X-Google-Smtp-Source: AGHT+IHMi8eTyHaJk3bdqdqf+j3oHHib5/2d7YSBU6zHhHzjQAyXvsTUe0uWrZBe7yv9u7J3KRqMIw==
+X-Received: by 2002:a2e:740d:0:b0:2b9:df49:b818 with SMTP id
+ p13-20020a2e740d000000b002b9df49b818mr6237873ljc.53.1692697104036; 
+ Tue, 22 Aug 2023 02:38:24 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- i9-20020a2e8089000000b002b724063010sm2649637ljg.47.2023.08.22.02.38.19
+ i9-20020a2e8089000000b002b724063010sm2649637ljg.47.2023.08.22.02.38.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 02:38:21 -0700 (PDT)
+ Tue, 22 Aug 2023 02:38:23 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
- Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv7 00/15] net/lwip: add lwip library for the network stack
-Date: Tue, 22 Aug 2023 15:35:59 +0600
-Message-Id: <20230822093614.4717-1-maxim.uvarov@linaro.org>
+ Maxim Uvarov <maxim.uvarov@linaro.org>, Simon Glass <sjg@chromium.org>
+Subject: [PATCHv7 01/15] net/lwip: add doc/develop/net_lwip.rst
+Date: Tue, 22 Aug 2023 15:36:00 +0600
+Message-Id: <20230822093614.4717-2-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20230822093614.4717-1-maxim.uvarov@linaro.org>
+References: <20230822093614.4717-1-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,124 +94,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Add initial documentation of lwIP network IP stack integration
+to the U-Boot (net_lwip.rst).
 
-I'm sending v7, with all v6 comments getting fixed. The only thing left is a pointer
-to timeout callback which 2 applications use. I will rework this timeout
-in next v8. I started take a look at it, and want to fix this together
-with background applications support in v8.
-
-changelog:
-	v7: - more review fixes.
-	    - support of multiply eth devices, were "ethact" selects the
-	      active device.
-	v6: - fixed review comments for v5 (thanks Ilias and Simon).
-	    - lwip is not under /net, so prior applying patch following
-	      commit is needed to create lwIP merge into U-Boot:
-	      git subtree add --prefix net/lwip/lwip-external https://git.savannah.nongnu.org/git/lwip.git master --squash
-
-	v5: - fixed Iliases comments and split big patch on the small
-		ones.
-	    You also need to issue command:
-    	git subtree add --prefix lib/lwip/lwip-external https://git.savannah.nongnu.org/git/lwip.git master --squash
-	Which will create merge commit of lwip library placing sources
-	into lib/lwip/lwip-external directory. I do not send it a patch
-	due to 1. merges are not friendly with git format-patch and 2.
-	the source code of lwip is 78kb. 
-	v4: - tested with tests/py/ did some minor fixes (out of tree
-		build, variables set after downloads).
-	    - accounted review comments for documentation.
-	    - implemented dns command
-            - corrected wget command to not use serverip variable and use just
-		url string.
-	v3: - use lwip commands for ping,tftp,wget,dhcp if this patch
-	      applied. Drop CONFIG_LIB_LWIP_REPLACE_<COMMAND> option.
-	    - docs: use rst variant and drop references to RFC.
-
-Maxim Uvarov (15):
-  net/lwip: add doc/develop/net_lwip.rst
-  net/lwip: integrate lwIP library
-  net/lwip: implement dns cmd
-  net/lwip: implement dhcp cmd
-  net/lwip: implement tftp cmd
-  net/lwip: implement wget cmd
-  net/lwip: implement ping cmd
-  net/lwip: add lwIP configuration
-  net/lwip: implement lwIP port to U-Boot
-  net/lwip: update .gitignore with lwIP
-  net/lwip: connection between cmd and lwip apps
-  net/lwip: replace original net commands with lwip
-  net/lwip: split net.h to net.h, arp.h and eth.h
-  net/lwip: drop old net/wget
-  net/lwip/wget add port selection
-
- boot/bootmeth_efi.c                   |  18 +-
- boot/bootmeth_pxe.c                   |  21 +-
- cmd/Makefile                          |   1 +
- cmd/net-lwip.c                        | 306 ++++++++++++++++++
- cmd/net.c                             |  86 +----
- cmd/pxe.c                             |  19 +-
- doc/develop/index.rst                 |   1 +
- doc/develop/net_lwip.rst              |  76 +++++
- include/net.h                         | 197 +-----------
- include/net/arp.h                     |   7 +
- include/net/eth.h                     | 190 +++++++++++
- include/net/lwip.h                    |  73 +++++
- include/net/ulwip.h                   |  76 +++++
- include/net/wget.h                    |  22 --
- net/Kconfig                           |   3 +
- net/Makefile                          |   2 +-
- net/eth-uclass.c                      |   8 +
- net/lwip/.gitignore                   |   8 +
- net/lwip/Kconfig                      |  55 ++++
- net/lwip/Makefile                     |  72 +++++
- net/lwip/apps/dhcp/lwip-dhcp.c        |  62 ++++
- net/lwip/apps/dns/lwip-dns.c          |  46 +++
- net/lwip/apps/http/Makefile           |  13 +
- net/lwip/apps/http/lwip-wget.c        | 134 ++++++++
- net/lwip/apps/ping/Makefile           |  11 +
- net/lwip/apps/ping/lwip_ping.c        |  37 +++
- net/lwip/apps/ping/lwip_ping.h        |  15 +
- net/lwip/apps/ping/ping.h             |  19 ++
- net/lwip/apps/tftp/Makefile           |  16 +
- net/lwip/apps/tftp/lwip-tftp.c        | 124 ++++++++
- net/lwip/lwipopts.h                   | 197 ++++++++++++
- net/lwip/port/if.c                    | 343 ++++++++++++++++++++
- net/lwip/port/include/arch/cc.h       |  38 +++
- net/lwip/port/include/arch/sys_arch.h |  10 +
- net/lwip/port/include/limits.h        |   0
- net/lwip/port/sys-arch.c              |  13 +
- net/net.c                             |  26 +-
- net/wget.c                            | 440 --------------------------
- 38 files changed, 2028 insertions(+), 757 deletions(-)
- create mode 100644 cmd/net-lwip.c
+Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ doc/develop/index.rst    |  1 +
+ doc/develop/net_lwip.rst | 76 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 77 insertions(+)
  create mode 100644 doc/develop/net_lwip.rst
- create mode 100644 include/net/arp.h
- create mode 100644 include/net/eth.h
- create mode 100644 include/net/lwip.h
- create mode 100644 include/net/ulwip.h
- delete mode 100644 include/net/wget.h
- create mode 100644 net/lwip/.gitignore
- create mode 100644 net/lwip/Kconfig
- create mode 100644 net/lwip/Makefile
- create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
- create mode 100644 net/lwip/apps/dns/lwip-dns.c
- create mode 100644 net/lwip/apps/http/Makefile
- create mode 100644 net/lwip/apps/http/lwip-wget.c
- create mode 100644 net/lwip/apps/ping/Makefile
- create mode 100644 net/lwip/apps/ping/lwip_ping.c
- create mode 100644 net/lwip/apps/ping/lwip_ping.h
- create mode 100644 net/lwip/apps/ping/ping.h
- create mode 100644 net/lwip/apps/tftp/Makefile
- create mode 100644 net/lwip/apps/tftp/lwip-tftp.c
- create mode 100644 net/lwip/lwipopts.h
- create mode 100644 net/lwip/port/if.c
- create mode 100644 net/lwip/port/include/arch/cc.h
- create mode 100644 net/lwip/port/include/arch/sys_arch.h
- create mode 100644 net/lwip/port/include/limits.h
- create mode 100644 net/lwip/port/sys-arch.c
- delete mode 100644 net/wget.c
 
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 5b230d0321..4764990f25 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -48,6 +48,7 @@ Implementation
+    spl
+    falcon
+    uefi/index
++   net_lwip
+    vbe
+    version
+ 
+diff --git a/doc/develop/net_lwip.rst b/doc/develop/net_lwip.rst
+new file mode 100644
+index 0000000000..cd85de92a1
+--- /dev/null
++++ b/doc/develop/net_lwip.rst
+@@ -0,0 +1,76 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++LWIP IP stack intergation for U-Boot
++====================================
++
++Intro
++-----
++
++LWIP is a library implementing network protocols, which is commonly used
++on embedded devices.
++
++https://savannah.nongnu.org/projects/lwip/
++
++LwIP  license:
++LwIP is licensed under a BSD-style license: http://lwip.wikia.com/wiki/License.
++
++Main features include:
++
++* Protocols: IP, IPv6, ICMP, ND, MLD, UDP, TCP, IGMP, ARP, PPPoS, PPPoE
++
++* DHCP client, DNS client (incl. mDNS hostname resolver),
++  AutoIP/APIPA (Zeroconf), SNMP agent (v1, v2c, v3, private MIB support
++  & MIB compiler)
++
++* APIs: specialized APIs for enhanced performance, optional Berkeley-alike
++  socket API
++
++* Extended features: IP forwarding over multiple network interfaces, TCP
++  congestion control, RTT estimation and fast recovery/fast retransmit
++
++* Addon applications: HTTP(S) server, SNTP client, SMTP(S) client, ping,
++  NetBIOS nameserver, mDNS responder, MQTT client, TFTP server
++
++U-Boot implementation details
++-----------------------------
++
++1. In general we can build lwIP as a library and link it against U-Boot or
++   compile it in the U-Boot tree in the same way as other U-Boot files. There
++   are few reasons why second variant was selected: lwIP is very customizable
++   with defines for features, memory size, types of allocation, some internal
++   types and platform specific code. It turned out easier to enable/disable
++   debug which is also done with defines, and is needed periodically.
++
++2. lwIP has 2 APIs - raw mode and sequential (as lwIP names it, or socket API
++   as we name it in Linux). For now only raw API is supported.
++
++In raw IP mode a callback function for RX path is registered and will be called
++when packet is passed to the IP stack and is ready for the application.
++
++One example is the unmodified working ping example from lwip sources which
++registered the callback:
++
++.. code-block:: c
++
++        ping_pcb = raw_new(IP_PROTO_ICMP);
++        raw_recv(ping_pcb, ping_recv, NULL); <- ping_recv is app callback.
++        raw_bind(ping_pcb, IP_ADDR_ANY)
++
++3.  Input and output
++
++RX packet path is injected to U-Boot eth_rx() polling loop and TX patch is in
++eth_send() accordingly. That way we can leave the driver code unmodified and
++consume packets once they are ready. So we do not touch any drivers code and
++just eat packets when they are ready.
++
++U-Boot lwIP Applications
++========================
++
++.. kernel-doc:: include/net/lwip.h
++   :internal:
++
++lwIP API to control polling loop
++================================
++
++.. kernel-doc:: include/net/ulwip.h
++   :internal:
 -- 
 2.30.2
 
