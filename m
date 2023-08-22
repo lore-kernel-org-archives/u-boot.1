@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28ECAEE49A4
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61F87EE49A3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B75A871FC;
+	by phobos.denx.de (Postfix) with ESMTP id 520228723A;
 	Tue, 22 Aug 2023 05:17:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GrJ0hZF8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ka2t6/J5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBA95871DB; Tue, 22 Aug 2023 05:17:16 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id D46E1871D5; Tue, 22 Aug 2023 05:17:16 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF870871D5
+ by phobos.denx.de (Postfix) with ESMTPS id 28F7B871CB
  for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 05:17:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-79210064604so116693439f.3
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-7923483bb68so46296939f.3
  for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:17:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692674231; x=1693279031;
+ d=chromium.org; s=google; t=1692674230; x=1693279030;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z2dycOpSN/kJqD+T7tdC5LgasU04smWxjQugWw6/3UA=;
- b=GrJ0hZF8FWaRqRkW77d/Dx/ikEI/39RozgaFJvImdskBd32FvawKF7HgZsf6WG0Zlp
- QhUpv1XgL9WDmd8zHlp/Slp/dkDp5VkewlE6xHXLCw9IT/50l/5mX7bYzYooyAYsm1Mp
- 03SeiKp/wCpWCmPErhdGLRMpcl5wadewZAGWk=
+ bh=yrYyH5UuD4RVe0aArX9a0J8biH7Oazqj+BPhPrDD/jQ=;
+ b=ka2t6/J5jfmxFDVxdcQbmgZBYRGXHx81RkzcazzUtPAnuq6X8/YgE6U5cvzkn2IKrn
+ S8qHdxP7aaFufLh5IwWucwbbDTQ7TM9F51b2DoJm/zrO390emo5ht6UBJHk3Vyupoiza
+ 5Z9yQ+ZDVtpd9M8Dhv+otRGU07hgJeMjJUdzg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692674231; x=1693279031;
+ d=1e100.net; s=20221208; t=1692674230; x=1693279030;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z2dycOpSN/kJqD+T7tdC5LgasU04smWxjQugWw6/3UA=;
- b=PNNhijziXvUqJhjhgiK3BQEnl29Am1sQ/rlru9ZKISg8s1ET25pAoaByWEBmNEBkCi
- r4UbZfZ+AKo0T6C317IQ15gyO3AycIEPEKAWd2Eqkhmiz6+pJHQnmBKRkqEi5peOTTUA
- J/NTbUlZ8FYHKBobHZciV+Z6JtDK2tX7kPqznCzp8PtxDQs7FNRjqYUle7TiJ/AVf1PV
- 3bDTLoz2NaHlHYWFSNTtoP6VbWYcpbhMyxC9Hji40MAbWJP7JCHZpnAlS72sXcnGA4Mq
- wpmZkLK01NhcpBBxlXIsw11XzEEg/r7SuDoBRyhL1m1o+X/eSbXRnzKNFZ6FI5XHTuTV
- sjBw==
-X-Gm-Message-State: AOJu0YzJIBOx+0/b4q+8azjCVKj5IyDjGsvV95aKE73puuO+jW5VDij0
- R1Y5UTUJryRHhohDD0DRhcb7qfiWY2QZqniDS44=
-X-Google-Smtp-Source: AGHT+IE9hTnQUK/Va7FjRTRqJIRX1rJx4TqGCf0yO0mQ17nTt9YYB2LRaGM8nzGRoNbicXsalo9r+g==
-X-Received: by 2002:a6b:610a:0:b0:790:b399:3ae9 with SMTP id
- v10-20020a6b610a000000b00790b3993ae9mr11106214iob.14.1692674231583; 
- Mon, 21 Aug 2023 20:17:11 -0700 (PDT)
+ bh=yrYyH5UuD4RVe0aArX9a0J8biH7Oazqj+BPhPrDD/jQ=;
+ b=R7DLr/q/xk1wxwffI3SS4com7dfKPV/6hN4L8XdAZJwDxrXFkGpfbzYo/595Q4W1Gq
+ iz1IfoeG3vr+u+s33+UWl7VyAD076WfVzYzjhAYHWKMVp6xV3XYai9ZpVMGpnSiu1WzB
+ iAbnNoyY+GdWK2FHda/T4kLdCMn4vT8LPWEsZe0pwVTan9gFKbwM1eZTLTPgQvcjeXwR
+ V7Zzy+DDxKXxACz0ZJDkiKH9NCwH+pwozIlSeghctP43t80uqQplE2nt9VRyE2OAa38b
+ ylbs5SX/yFqbCMbPqBclzJQ4fc8x1O3247mdRED3JjHz71RM0heIXJSt5WdurLCcyF+c
+ tJTg==
+X-Gm-Message-State: AOJu0YyRYco7k/0YjYsUEcxRc1RsKJaW62KM90YdXrwTZ3knjnTLhI9j
+ Z4VXW9CLhFLx1NqPm1wtc6eIXx5yngm309/5qKE=
+X-Google-Smtp-Source: AGHT+IF3kkBeROTLn125clcZyiH8IdzQ1+g3GyFDM0CAvzkMkeyXXQF8tA/9dXRQVevNkVreUjxVIA==
+X-Received: by 2002:a05:6e02:1523:b0:34b:b16d:aa38 with SMTP id
+ i3-20020a056e02152300b0034bb16daa38mr11094070ilu.29.1692674230735; 
+ Mon, 21 Aug 2023 20:17:10 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- gv14-20020a0566382e4e00b0042b37dda71asm2722735jab.136.2023.08.21.20.17.11
+ gv14-20020a0566382e4e00b0042b37dda71asm2722735jab.136.2023.08.21.20.17.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 20:17:11 -0700 (PDT)
+ Mon, 21 Aug 2023 20:17:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Alexander Graf <agraf@csgraf.de>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 02/14] Revert "initcall: Move to inline function"
-Date: Mon, 21 Aug 2023 21:16:49 -0600
-Message-ID: <20230822031705.1340941-3-sjg@chromium.org>
+Subject: [PATCH 01/14] event: Support a simple spy record
+Date: Mon, 21 Aug 2023 21:16:48 -0600
+Message-ID: <20230822031705.1340941-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230822031705.1340941-1-sjg@chromium.org>
 References: <20230822031705.1340941-1-sjg@chromium.org>
@@ -88,163 +88,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Somehow I do not see any inlining with initcalls now. I was sure I saw
-it when this commit went in, but now it seems to make things worse.
+The current event spy is always passed the event context and the event.
+The context is always NULL for a static spy. The event is not often used.
 
-This reverts commit 47870afab92fca6e672c03d0dea802a55e200675.
+Introduce a 'simple' spy which takes no arguments. This allows us to drop
+the adaptation code that many of these spy records use.
+
+Update the event script to find these in the image.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/board_r.c   |  5 ++++-
- include/initcall.h | 46 +---------------------------------------
- lib/Makefile       |  1 +
- lib/initcall.c     | 52 ++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 58 insertions(+), 46 deletions(-)
- create mode 100644 lib/initcall.c
+ common/event.c                   |  9 ++++++-
+ include/event.h                  | 41 ++++++++++++++++++++++++++++++--
+ scripts/event_dump.py            | 12 ++++++----
+ test/common/event.c              | 22 +++++++++++++++++
+ test/py/tests/test_event_dump.py |  3 ++-
+ 5 files changed, 79 insertions(+), 8 deletions(-)
 
-diff --git a/common/board_r.c b/common/board_r.c
-index 598155c7753d..85860861f0ac 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -583,7 +583,10 @@ static int run_main_loop(void)
+diff --git a/common/event.c b/common/event.c
+index 3224e2812224..7e2590eb0400 100644
+--- a/common/event.c
++++ b/common/event.c
+@@ -71,7 +71,14 @@ static int notify_static(struct event *ev)
+ 
+ 			log_debug("Sending event %x/%s to spy '%s'\n", ev->type,
+ 				  event_type_name(ev->type), event_spy_id(spy));
+-			ret = spy->func(NULL, ev);
++			if (spy->flags & EVSPYF_SIMPLE) {
++				const struct evspy_info_simple *simple;
++
++				simple = (struct evspy_info_simple *)spy;
++				ret = simple->func();
++			} else {
++				ret = spy->func(NULL, ev);
++			}
+ 
+ 			/*
+ 			 * TODO: Handle various return codes to
+diff --git a/include/event.h b/include/event.h
+index daf44bf8a83b..0e3222c2e243 100644
+--- a/include/event.h
++++ b/include/event.h
+@@ -99,19 +99,48 @@ struct event {
+ 	union event_data data;
+ };
+ 
++/* Flags for event spy */
++enum evspy_flags {
++	EVSPYF_SIMPLE	= 1 << 0,
++};
++
+ /** Function type for event handlers */
+ typedef int (*event_handler_t)(void *ctx, struct event *event);
+ 
++/** Function type for simple event handlers */
++typedef int (*event_handler_simple_t)(void);
++
+ /**
+  * struct evspy_info - information about an event spy
+  *
+  * @func: Function to call when the event is activated (must be first)
+  * @type: Event type
++ * @flag: Flags for this spy
+  * @id: Event id string
+  */
+ struct evspy_info {
+ 	event_handler_t func;
+-	enum event_t type;
++	u8 type;
++	u8 flags;
++#if CONFIG_IS_ENABLED(EVENT_DEBUG)
++	const char *id;
++#endif
++};
++
++/**
++ * struct evspy_info_simple - information about an event spy
++ *
++ * THis is the 'simple' record, the only difference being the handler function
++ *
++ * @func: Function to call when the event is activated (must be first)
++ * @type: Event type
++ * @flag: Flags for this spy
++ * @id: Event id string
++ */
++struct evspy_info_simple {
++	event_handler_simple_t func;
++	u8 type;
++	u8 flags;
+ #if CONFIG_IS_ENABLED(EVENT_DEBUG)
+ 	const char *id;
+ #endif
+@@ -119,9 +148,11 @@ struct evspy_info {
+ 
+ /* Declare a new event spy */
+ #if CONFIG_IS_ENABLED(EVENT_DEBUG)
+-#define _ESPY_REC(_type, _func)   { _func, _type, #_func, }
++#define _ESPY_REC(_type, _func)   { _func, _type, 0, #_func, }
++#define _ESPY_REC_SIMPLE(_type, _func)  { _func, _type, EVSPYF_SIMPLE, #_func, }
+ #else
+ #define _ESPY_REC(_type, _func)   { _func, _type, }
++#define _ESPY_REC_SIMPLE(_type, _func)  { _func, _type, EVSPYF_SIMPLE }
+ #endif
+ 
+ static inline const char *event_spy_id(struct evspy_info *spy)
+@@ -168,6 +199,12 @@ static inline const char *event_spy_id(struct evspy_info *spy)
+ 	__used ll_entry_declare(struct evspy_info, _type ## _3_ ## _func, \
+ 		evspy_info) = _ESPY_REC(_type, _func)
+ 
++/* Simple spy with no function arguemnts */
++#define EVENT_SPY_SIMPLE(_type, _func) \
++	__used ll_entry_declare(struct evspy_info_simple, \
++		_type ## _3_ ## _func, \
++		evspy_info) = _ESPY_REC_SIMPLE(_type, _func)
++
+ /**
+  * event_register - register a new spy
+  *
+diff --git a/scripts/event_dump.py b/scripts/event_dump.py
+index 0117457526ef..24dfe2bda91f 100755
+--- a/scripts/event_dump.py
++++ b/scripts/event_dump.py
+@@ -19,8 +19,10 @@ from u_boot_pylib import tools
+ 
+ # A typical symbol looks like this:
+ #   _u_boot_list_2_evspy_info_2_EVT_MISC_INIT_F_3_sandbox_misc_init_f
+-PREFIX = '_u_boot_list_2_evspy_info_2_'
+-RE_EVTYPE = re.compile('%s(.*)_3_.*' % PREFIX)
++PREFIX_FULL = '_u_boot_list_2_evspy_info_2_'
++PREFIX_SIMPLE = '_u_boot_list_2_evspy_info_simple_2_'
++RE_EVTYPE_FULL = re.compile('%s(.*)_3_.*' % PREFIX_FULL)
++RE_EVTYPE_SIMPLE = re.compile('%s(.*)_3_.*' % PREFIX_SIMPLE)
+ 
+ def show_sym(fname, data, endian, evtype, sym):
+     """Show information about an evspy entry
+@@ -88,12 +90,14 @@ def show_event_spy_list(fname, endian):
+         fname (str): Filename of ELF file
+         endian (str): Endianness to use ('little', 'big', 'auto')
+     """
+-    syms = elf.GetSymbolFileOffset(fname, [PREFIX])
++    syms = elf.GetSymbolFileOffset(fname, [PREFIX_FULL, PREFIX_SIMPLE])
+     data = tools.read_file(fname)
+     print('%-20s  %-30s  %s' % ('Event type', 'Id', 'Source location'))
+     print('%-20s  %-30s  %s' % ('-' * 20, '-' * 30, '-' * 30))
+     for name, sym in syms.items():
+-        m_evtype = RE_EVTYPE.search(name)
++        m_evtype = RE_EVTYPE_FULL.search(name)
++        if not m_evtype:
++            m_evtype = RE_EVTYPE_SIMPLE.search(name)
+         evtype = m_evtype .group(1)
+         show_sym(fname, data, endian, evtype, sym)
+ 
+diff --git a/test/common/event.c b/test/common/event.c
+index 6037ae2ce3bc..c0912a3437bb 100644
+--- a/test/common/event.c
++++ b/test/common/event.c
+@@ -18,6 +18,8 @@ struct test_state {
+ 	int val;
+ };
+ 
++static bool called;
++
+ static int h_adder(void *ctx, struct event *event)
+ {
+ 	struct event_data_test *data = &event->data.test;
+@@ -28,6 +30,14 @@ static int h_adder(void *ctx, struct event *event)
+ 	return 0;
  }
  
- /*
-- * We hope to remove most of the driver-related init and do it if/when
-+ * Over time we hope to remove these functions with code fragments and
-+ * stub functions, and instead call the relevant function directly.
-+ *
-+ * We also hope to remove most of the driver-related init and do it if/when
-  * the driver is later used.
-  *
-  * TODO: perhaps reset the watchdog in the initcall function after each call?
-diff --git a/include/initcall.h b/include/initcall.h
-index 69ce26807051..01f3f2833f10 100644
---- a/include/initcall.h
-+++ b/include/initcall.h
-@@ -8,50 +8,6 @@
- 
- typedef int (*init_fnc_t)(void);
- 
--#include <log.h>
--#ifdef CONFIG_EFI_APP
--#include <efi.h>
--#endif
--#include <asm/global_data.h>
--
--/*
-- * To enable debugging. add #define DEBUG at the top of the including file.
-- *
-- * To find a symbol, use grep on u-boot.map
-- */
--static inline int initcall_run_list(const init_fnc_t init_sequence[])
--{
--	const init_fnc_t *init_fnc_ptr;
--
--	for (init_fnc_ptr = init_sequence; *init_fnc_ptr; ++init_fnc_ptr) {
--		unsigned long reloc_ofs = 0;
--		int ret;
--
--		/*
--		 * Sandbox is relocated by the OS, so symbols always appear at
--		 * the relocated address.
--		 */
--		if (IS_ENABLED(CONFIG_SANDBOX) || (gd->flags & GD_FLG_RELOC))
--			reloc_ofs = gd->reloc_off;
--#ifdef CONFIG_EFI_APP
--		reloc_ofs = (unsigned long)image_base;
--#endif
--		if (reloc_ofs)
--			debug("initcall: %p (relocated to %p)\n",
--					(char *)*init_fnc_ptr - reloc_ofs,
--					(char *)*init_fnc_ptr);
--		else
--			debug("initcall: %p\n", (char *)*init_fnc_ptr - reloc_ofs);
--
--		ret = (*init_fnc_ptr)();
--		if (ret) {
--			printf("initcall sequence %p failed at call %p (err=%d)\n",
--			       init_sequence,
--			       (char *)*init_fnc_ptr - reloc_ofs, ret);
--			return -1;
--		}
--	}
--	return 0;
--}
-+int initcall_run_list(const init_fnc_t init_sequence[]);
- 
- #endif
-diff --git a/lib/Makefile b/lib/Makefile
-index 8d8ccc8bbc39..839872d804b5 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -44,6 +44,7 @@ obj-$(CONFIG_GZIP_COMPRESSED) += gzip.o
- obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbios.o
- obj-$(CONFIG_SMBIOS_PARSER) += smbios-parser.o
- obj-$(CONFIG_IMAGE_SPARSE) += image-sparse.o
-+obj-y += initcall.o
- obj-y += ldiv.o
- obj-$(CONFIG_XXHASH) += xxhash.o
- obj-y += net_utils.o
-diff --git a/lib/initcall.c b/lib/initcall.c
-new file mode 100644
-index 000000000000..eedb0fbf1d5c
---- /dev/null
-+++ b/lib/initcall.c
-@@ -0,0 +1,52 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2013 The Chromium OS Authors.
-+ */
-+
-+#include <common.h>
-+#include <efi.h>
-+#include <initcall.h>
-+#include <log.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/*
-+ * To enable debugging. add #define DEBUG at the top of the including file.
-+ *
-+ * To find a symbol, use grep on u-boot.map
-+ */
-+int initcall_run_list(const init_fnc_t init_sequence[])
++static int h_adder_simple(void)
 +{
-+	const init_fnc_t *init_fnc_ptr;
++	called = true;
 +
-+	for (init_fnc_ptr = init_sequence; *init_fnc_ptr; ++init_fnc_ptr) {
-+		unsigned long reloc_ofs = 0;
-+		int ret;
-+
-+		/*
-+		 * Sandbox is relocated by the OS, so symbols always appear at
-+		 * the relocated address.
-+		 */
-+		if (IS_ENABLED(CONFIG_SANDBOX) || (gd->flags & GD_FLG_RELOC))
-+			reloc_ofs = gd->reloc_off;
-+#ifdef CONFIG_EFI_APP
-+		reloc_ofs = (unsigned long)image_base;
-+#endif
-+		if (reloc_ofs)
-+			debug("initcall: %p (relocated to %p)\n",
-+			      (char *)*init_fnc_ptr - reloc_ofs,
-+			      (char *)*init_fnc_ptr);
-+		else
-+			debug("initcall: %p\n", (char *)*init_fnc_ptr - reloc_ofs);
-+
-+		ret = (*init_fnc_ptr)();
-+		if (ret) {
-+			printf("initcall sequence %p failed at call %p (err=%d)\n",
-+			       init_sequence,
-+			       (char *)*init_fnc_ptr - reloc_ofs, ret);
-+			return -1;
-+		}
-+	}
 +	return 0;
 +}
++EVENT_SPY_SIMPLE(EVT_TEST, h_adder_simple);
++
+ static int test_event_base(struct unit_test_state *uts)
+ {
+ 	struct test_state state;
+@@ -46,6 +56,18 @@ static int test_event_base(struct unit_test_state *uts)
+ }
+ COMMON_TEST(test_event_base, 0);
+ 
++static int test_event_simple(struct unit_test_state *uts)
++{
++	called = false;
++
++	/* Check that the handler is called */
++	ut_assertok(event_notify_null(EVT_TEST));
++	ut_assert(called);
++
++	return 0;
++}
++COMMON_TEST(test_event_simple, 0);
++
+ static int h_probe(void *ctx, struct event *event)
+ {
+ 	struct test_state *test_state = ctx;
+diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
+index da196df4c3e6..041f8f9c9790 100644
+--- a/test/py/tests/test_event_dump.py
++++ b/test/py/tests/test_event_dump.py
+@@ -18,5 +18,6 @@ def test_event_dump(u_boot_console):
+ --------------------  ------------------------------  ------------------------------
+ EVT_FT_FIXUP          bootmeth_vbe_ft_fixup           .*boot/vbe_request.c:.*
+ EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
+-EVT_MISC_INIT_F       sandbox_misc_init_f             .*arch/sandbox/cpu/start.c:'''
++EVT_MISC_INIT_F       sandbox_misc_init_f             .*arch/sandbox/cpu/start.c:.*
++EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
+     assert re.match(expect, out, re.MULTILINE) is not None
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
