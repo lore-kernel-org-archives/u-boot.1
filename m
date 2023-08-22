@@ -4,42 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E5BEE49AE
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C9BEE49AE
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 18:11:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 049578648E;
-	Tue, 22 Aug 2023 20:10:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B783864AB;
+	Tue, 22 Aug 2023 20:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03137864A8; Tue, 22 Aug 2023 20:10:44 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 926CC86478
+ id 0B583864A8; Tue, 22 Aug 2023 20:10:45 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id E38178647A
  for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 20:10:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.01,193,1684767600"; d="scan'208";a="173605714"
+X-IronPort-AV: E=Sophos;i="6.01,193,1684767600"; d="scan'208";a="177305233"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 23 Aug 2023 03:10:37 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 23 Aug 2023 03:10:40 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.37])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id B4F93406ED4D;
- Wed, 23 Aug 2023 03:10:35 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 8A811406ED4D;
+ Wed, 23 Aug 2023 03:10:38 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Hai Pham <hai.pham.ud@renesas.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/2] serial: sh: Fix compile error when lacking HSCIF support
-Date: Tue, 22 Aug 2023 19:10:23 +0100
-Message-Id: <20230822181025.339748-2-paul.barker.ct@bp.renesas.com>
+ Biju Das <biju.das.jz@bp.renesas.com>
+Subject: [PATCH 2/2] serial: sh: Tidy up pre-processor directive indentation
+Date: Tue, 22 Aug 2023 19:10:24 +0100
+Message-Id: <20230822181025.339748-3-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230822181025.339748-1-paul.barker.ct@bp.renesas.com>
 References: <20230822181025.339748-1-paul.barker.ct@bp.renesas.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -57,45 +56,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If we attempt to compile serial_sh.c for a system which lacks HSCIF
-support (e.g. R8A7740), we see the following compilation error:
+Let's make the indentation of pre-processor macros and conditionals in
+serial_sh.h consistent before we add to the confusion with a new SoC.
 
-    In file included from drivers/serial/serial_sh.c:20:
-    drivers/serial/serial_sh.c: In function ‘sh_serial_init_generic’:
-    drivers/serial/serial_sh.h:429:35: warning: implicit declaration of function ‘sci_HSSRR_out’; did you mean ‘sci_SCSCR_out’? [-Wimplicit-function-declaration]
-      429 | #define sci_out(port, reg, value) sci_##reg##_out(port, value)
-          |                                   ^~~~
-    drivers/serial/serial_sh.c:62:17: note: in expansion of macro ‘sci_out’
-       62 |                 sci_out(port, HSSRR, HSSRR_SRE | HSSRR_SRCYC8);
-          |                 ^~~~~~~
-
-To fix this, only try to support access to the HSSRR register for SoCs
-where it actually exists.
-
-Fixes: bbe36e29ca2c ('serial: sh: Add HSCIF support for R-Car SoC')
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Simon Glass <sjg@chromium.org>
+Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
 ---
- drivers/serial/serial_sh.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/serial/serial_sh.h | 84 +++++++++++++++++++-------------------
+ 1 file changed, 42 insertions(+), 42 deletions(-)
 
-diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
-index 20cda5dbe272..cd9bcf4f0a25 100644
---- a/drivers/serial/serial_sh.c
-+++ b/drivers/serial/serial_sh.c
-@@ -58,8 +58,10 @@ static void sh_serial_init_generic(struct uart_port *port)
- 	sci_out(port, SCSPTR, 0x0003);
+diff --git a/drivers/serial/serial_sh.h b/drivers/serial/serial_sh.h
+index 149ec1fe7397..3109c5a946b9 100644
+--- a/drivers/serial/serial_sh.h
++++ b/drivers/serial/serial_sh.h
+@@ -116,9 +116,9 @@ struct uart_port {
+ 	defined(CONFIG_CPU_SH7751R) || \
+ 	defined(CONFIG_CPU_SH7763)  || \
+ 	defined(CONFIG_CPU_SH7780)
+-#define SCI_CTRL_FLAGS_REIE 0x08 /* 7750 SCIF */
++# define SCI_CTRL_FLAGS_REIE 0x08 /* 7750 SCIF */
+ #else
+-#define SCI_CTRL_FLAGS_REIE 0
++# define SCI_CTRL_FLAGS_REIE 0
+ #endif
+ /*		SCI_CTRL_FLAGS_MPIE 0x08  * 7707 SCI, 7708 SCI, 7709 SCI, 7750 SCI */
+ /*		SCI_CTRL_FLAGS_TEIE 0x04  * 7707 SCI, 7708 SCI, 7709 SCI, 7750 SCI */
+@@ -174,7 +174,7 @@ struct uart_port {
  #endif
  
-+#if defined(CONFIG_RCAR_GEN2) || defined(CONFIG_RCAR_GEN3) || defined(CONFIG_RCAR_GEN4)
- 	if (port->type == PORT_HSCIF)
- 		sci_out(port, HSSRR, HSSRR_SRE | HSSRR_SRCYC8);
-+#endif
- }
+ #ifndef SCIF_ORER
+-#define SCIF_ORER	0x0000
++# define SCIF_ORER	0x0000
+ #endif
  
- static void
+ #define SCxSR_TEND(port)\
+@@ -282,45 +282,45 @@ static inline void sci_##name##_out(struct uart_port *port,\
+ 	}
+ 
+ #if defined(CONFIG_R8A7740)
+-#if defined(CONFIG_CPU_SH7721) || \
++# if defined(CONFIG_CPU_SH7721) || \
+ 	defined(CONFIG_SH73A0)
+-#define SCIF_FNS(name, scif_offset, scif_size) \
++#  define SCIF_FNS(name, scif_offset, scif_size) \
+ 	CPU_SCIF_FNS(name, scif_offset, scif_size)
+-#elif defined(CONFIG_R8A7740)
+-#define SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
++# elif defined(CONFIG_R8A7740)
++#  define SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
+ 				sh4_scifb_offset, sh4_scifb_size) \
+ 	CPU_SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
+ 				sh4_scifb_offset, sh4_scifb_size)
+-#define SCIF_FNS(name, scif_offset, scif_size) \
++#  define SCIF_FNS(name, scif_offset, scif_size) \
+ 	CPU_SCIF_FNS(name, scif_offset, scif_size)
+-#else
+-#define SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
++# else
++#  define SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
+ 				sh4_sci_offset, sh4_sci_size, \
+ 				sh3_scif_offset, sh3_scif_size,\
+ 				sh4_scif_offset, sh4_scif_size, \
+ 				h8_sci_offset, h8_sci_size) \
+ 	CPU_SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
+ 				sh3_scif_offset, sh3_scif_size)
+-#define SCIF_FNS(name, sh3_scif_offset, sh3_scif_size,\
++#  define SCIF_FNS(name, sh3_scif_offset, sh3_scif_size,\
+ 				sh4_scif_offset, sh4_scif_size) \
+ 	CPU_SCIF_FNS(name, sh3_scif_offset, sh3_scif_size)
+-#endif
++# endif
+ #elif defined(CONFIG_CPU_SH7723)
+-		#define SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
+-					sh4_scif_offset, sh4_scif_size) \
+-			CPU_SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
+-					sh4_scif_offset, sh4_scif_size)
+-		#define SCIF_FNS(name, sh4_scif_offset, sh4_scif_size) \
+-			CPU_SCIF_FNS(name, sh4_scif_offset, sh4_scif_size)
++# define SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
++			sh4_scif_offset, sh4_scif_size) \
++	CPU_SCIx_FNS(name, sh4_scifa_offset, sh4_scifa_size,\
++			sh4_scif_offset, sh4_scif_size)
++# define SCIF_FNS(name, sh4_scif_offset, sh4_scif_size) \
++	CPU_SCIF_FNS(name, sh4_scif_offset, sh4_scif_size)
+ #else
+-#define SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
++# define SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
+ 				sh4_sci_offset, sh4_sci_size, \
+ 				sh3_scif_offset, sh3_scif_size,\
+ 				sh4_scif_offset, sh4_scif_size, \
+ 				h8_sci_offset, h8_sci_size) \
+ 	CPU_SCIx_FNS(name, sh4_sci_offset, sh4_sci_size,\
+ 					sh4_scif_offset, sh4_scif_size)
+-#define SCIF_FNS(name, sh3_scif_offset, sh3_scif_size, \
++# define SCIF_FNS(name, sh3_scif_offset, sh3_scif_size, \
+ 				sh4_scif_offset, sh4_scif_size) \
+ 	CPU_SCIF_FNS(name, sh4_scif_offset, sh4_scif_size)
+ #endif
+@@ -382,11 +382,11 @@ SCIF_FNS(SCSPTR, 0,  0, 0x20, 16)
+ SCIF_FNS(DL,     0,  0, 0x30, 16)
+ SCIF_FNS(CKS,    0,  0, 0x34, 16)
+ SCIF_FNS(HSSRR,  0,  0, 0x40, 16) /* HSCIF only */
+-#if defined(CFG_SCIF_A)
++# if defined(CFG_SCIF_A)
+ SCIF_FNS(SCLSR,  0,  0, 0x14, 16)
+-#else
++# else
+ SCIF_FNS(SCLSR,  0,  0, 0x24, 16)
+-#endif
++# endif
+ #else
+ /*      reg      SCI/SH3   SCI/SH4  SCIF/SH3   SCIF/SH4  SCI/H8*/
+ /*      name     off  sz   off  sz   off  sz   off  sz   off  sz*/
+@@ -397,13 +397,13 @@ SCIx_FNS(SCxTDR, 0x06,  8, 0x0c,  8, 0x06,  8, 0x0C,  8, 0x03,  8)
+ SCIx_FNS(SCxSR,  0x08,  8, 0x10,  8, 0x08, 16, 0x10, 16, 0x04,  8)
+ SCIx_FNS(SCxRDR, 0x0a,  8, 0x14,  8, 0x0A,  8, 0x14,  8, 0x05,  8)
+ SCIF_FNS(SCFCR,                      0x0c,  8, 0x18, 16)
+-#if defined(CONFIG_CPU_SH7780)
++# if defined(CONFIG_CPU_SH7780)
+ SCIF_FNS(SCFDR,			     0x0e, 16, 0x1C, 16)
+ SCIF_FNS(SCTFDR,		     0x0e, 16, 0x1C, 16)
+ SCIF_FNS(SCRFDR,		     0x0e, 16, 0x20, 16)
+ SCIF_FNS(SCSPTR,			0,  0, 0x24, 16)
+ SCIF_FNS(SCLSR,				0,  0, 0x28, 16)
+-#elif defined(CONFIG_CPU_SH7763)
++# elif defined(CONFIG_CPU_SH7763)
+ SCIF_FNS(SCFDR,				0,  0, 0x1C, 16)
+ SCIF_FNS(SCSPTR2,			0,  0, 0x20, 16)
+ SCIF_FNS(SCLSR2,			0,  0, 0x24, 16)
+@@ -411,16 +411,16 @@ SCIF_FNS(SCTFDR,		     0x0e, 16, 0x1C, 16)
+ SCIF_FNS(SCRFDR,		     0x0e, 16, 0x20, 16)
+ SCIF_FNS(SCSPTR,			0,  0, 0x24, 16)
+ SCIF_FNS(SCLSR,				0,  0, 0x28, 16)
+-#else
++# else
+ 
+ SCIF_FNS(SCFDR,			     0x0e, 16, 0x1C, 16)
+-#if defined(CONFIG_CPU_SH7722)
++#  if defined(CONFIG_CPU_SH7722)
+ SCIF_FNS(SCSPTR,			0,  0, 0, 0)
+-#else
++#  else
+ SCIF_FNS(SCSPTR,			0,  0, 0x20, 16)
+-#endif
++#  endif
+ SCIF_FNS(SCLSR,				0,  0, 0x24, 16)
+-#endif
++# endif
+ SCIF_FNS(DL,				0,  0, 0x30, 16)
+ SCIF_FNS(CKS,				0,  0, 0x34, 16)
+ SCIF_FNS(HSSRR,				0,  0, 0x40, 16) /* HSCIF only */
+@@ -479,10 +479,10 @@ static inline int sci_rxd_in(struct uart_port *port)
+  */
+ 
+ #if defined(CONFIG_CPU_SH7780)
+-#define SCBRR_VALUE(bps, clk) ((clk+16*bps)/(16*bps)-1)
++# define SCBRR_VALUE(bps, clk) ((clk+16*bps)/(16*bps)-1)
+ #elif defined(CONFIG_CPU_SH7721) || \
+ 	defined(CONFIG_R8A7740)
+-#define SCBRR_VALUE(bps, clk) (((clk*2)+16*bps)/(32*bps)-1)
++# define SCBRR_VALUE(bps, clk) (((clk*2)+16*bps)/(32*bps)-1)
+ #elif defined(CONFIG_CPU_SH7723)
+ static inline int scbrr_calc(struct uart_port *port, int bps, int clk)
+ {
+@@ -491,14 +491,14 @@ static inline int scbrr_calc(struct uart_port *port, int bps, int clk)
+ 	else
+ 		return ((clk*2)+16*bps)/(16*bps)-1;
+ }
+-#define SCBRR_VALUE(bps, clk) scbrr_calc(port, bps, clk)
++# define SCBRR_VALUE(bps, clk) scbrr_calc(port, bps, clk)
+ #elif defined(CONFIG_RCAR_GEN2)
+-#define DL_VALUE(bps, clk) (clk / bps / 16) /* External Clock */
+- #if defined(CFG_SCIF_A) || defined(CFG_HSCIF)
+-  #define SCBRR_VALUE(bps, clk) (clk / bps / 16 - 1) /* Internal Clock */
+- #else
+-  #define SCBRR_VALUE(bps, clk) (clk / bps / 32 - 1) /* Internal Clock */
+- #endif
++# define DL_VALUE(bps, clk) (clk / bps / 16) /* External Clock */
++# if defined(CFG_SCIF_A) || defined(CFG_HSCIF)
++#  define SCBRR_VALUE(bps, clk) (clk / bps / 16 - 1) /* Internal Clock */
++# else
++#  define SCBRR_VALUE(bps, clk) (clk / bps / 32 - 1) /* Internal Clock */
++# endif
+ #elif defined(CONFIG_RCAR_64)
+ static inline int scbrr_calc(struct uart_port *port, int bps, int clk)
+ {
+@@ -507,11 +507,11 @@ static inline int scbrr_calc(struct uart_port *port, int bps, int clk)
+ 	else /* PORT_HSCIF */
+ 		return clk / bps / 8 / 2 - 1; /* Internal Clock, Sampling rate = 8 */
+ }
+-#define SCBRR_VALUE(bps, clk) scbrr_calc(port, bps, clk)
++# define SCBRR_VALUE(bps, clk) scbrr_calc(port, bps, clk)
+ #else /* Generic SH */
+-#define SCBRR_VALUE(bps, clk) ((clk+16*bps)/(32*bps)-1)
++# define SCBRR_VALUE(bps, clk) ((clk+16*bps)/(32*bps)-1)
+ #endif
+ 
+ #ifndef DL_VALUE
+-#define DL_VALUE(bps, clk) 0
++# define DL_VALUE(bps, clk) 0
+ #endif
 -- 
 2.34.1
 
