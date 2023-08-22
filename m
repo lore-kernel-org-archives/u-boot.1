@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0BEEE49A8
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 06:32:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66848EE49AB
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 06:32:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC807871EC;
-	Tue, 22 Aug 2023 08:32:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3414871D0;
+	Tue, 22 Aug 2023 08:32:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m8yDGvgd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nsdAIu6m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF66C87067; Tue, 22 Aug 2023 08:32:42 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 4EA5B87244; Tue, 22 Aug 2023 08:32:45 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25A4B87067
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 08:32:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4342E871C8
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 08:32:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-51cff235226so8500044a12.0
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 23:32:40 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5259cf39154so5152293a12.2
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 23:32:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692685959; x=1693290759;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=O1gIpMeW6xyCndGtWljSfDBjemmB4VbBnjI9Bbh5V3I=;
- b=m8yDGvgd5mHg6bG2rOC52Qb6dFxigB4yduNJJGuM/nQ4byUcCmYBBXdBkLjT1AQMEe
- z0m8R9W6bo1KfFNVk9DYrcqILyLCrtf57UAMY8R/i9q14PFfUvB+7/hecW08Xw8GPFRU
- r1rHStmwRfK7MuS07N01nlQW97GXDqWtBr0AqfsjDF92EzzYsZdPy8S21rG3GHiQiDFO
- GF+hAr4SfMC5k1HgKgqqdG/8qKwyRy6c/3wjSK3As1MDX8m5GdaLE9t3/7BY9vyPdBev
- pBOZkZle8p94S9r4lZzmgYN4q+2vP4RIsB1X1XTHRKWVWkBuGDPU1hsu35xZx9YKjGMu
- 8u4g==
+ d=gmail.com; s=20221208; t=1692685961; x=1693290761;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GFx0DoHCa25pyZwi5z7omycT0PwlW346NuZX94LtBgg=;
+ b=nsdAIu6mqX7lhcfJv2LagRg3Th2EPltDPddhcBVV5EtQj+yVRdLm+Zat9559680mKl
+ HIMuxa9OthMjgHKCXb9jKScF+SwRwPNh2w5uRv1HG6iEbx8ibHX4jbH6sW2TkuaNsFf5
+ 0UtH6QFGWprS3jWE0WKOeDiZRj4YDzwEZH3hdQ35ICl2g2rrgzfeELFK3uBjjfpAPYHN
+ qxbx5XZq2CfkvI6MCj4NDu3Rj4AhjYBE8xgSJxaoe2epv/cRKu5T6KvNmYGW6IKsEXUy
+ 56dpMFifQmmA4wK4j7lv1643QWzLtNIZ0ph+AEjGaGdzGl6bXD2cUFAHb3oNFTJE/j2C
+ AI2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692685959; x=1693290759;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O1gIpMeW6xyCndGtWljSfDBjemmB4VbBnjI9Bbh5V3I=;
- b=FAS2tqKAfkQtMr4yBDSGkcD2P9PKcRG+v5roG1TaFgiVQibhmnJA1bajFkD+fu6DhF
- XtSHbvkEyOBqzj9mKvUt7eZ2FQhf6k9NA8v0/oHwA1vaU+vTD2XDoaL/mPScX/LkTwE4
- wgOoQqJV1YU7RF4L3K6gz5kaRzv8iAKTyJxzVe6o0ZzRBtsA10DJ8BJfNZkL4WDCVGVx
- gByOPGsYWd2Ice8wkHPbUB4fw14WPhUWrca3e/BHttC4iQZGXnQLmNAdVRv62U0E7bi7
- Qg+Zb+8zLeF5wiZM4CEah7ZmHc/jHe8Rf8HEvTEy3wBv69yZRID11103y/UC5Iu4fYRT
- 7hiQ==
-X-Gm-Message-State: AOJu0Yy9lg+nsGWGEHXFXy+QD/vvtl3G71DkWgp8GQ9HR5jwdbQf3mOJ
- X+1Pi3SE2AzLBMlpV+pM0B4=
-X-Google-Smtp-Source: AGHT+IGcnwlcILc89V0dLLKtwMcNNTBgBIHrVss8DZCvxYL0NrJCt1WSqksNHEfzB152QeYhc7fEhQ==
-X-Received: by 2002:aa7:de12:0:b0:522:3149:159b with SMTP id
- h18-20020aa7de12000000b005223149159bmr10367412edv.2.1692685959366; 
- Mon, 21 Aug 2023 23:32:39 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692685961; x=1693290761;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GFx0DoHCa25pyZwi5z7omycT0PwlW346NuZX94LtBgg=;
+ b=ZUir8UW19Cn/9ET7u95w/ANY8q3zEKYnKkui8ngnRnjfZIcl4cF0zKiLq7G2c4Xnw8
+ +0KxZ6Lk50ws3rcPe/aK3juGbACON7lKtPmC/2EpMnCR5VutpGJj7QD0e1g5nHFA4xcD
+ GFGMMmAAkGfcCahuRKzWEYoO5liUZr2Co98ggWL2P4rOVJyO+smV/koBlgkdx2XHI9+i
+ PAC+RnQ3W7ikmDtcKbsxp52krahPbcdaH7BmlF81FsXW4UP8Kq8J8gSs5xYKyjixxYJ7
+ k3Pr6/uddP8G8CY8O//7vuyiparCa1pMJawMLcjmlH8vMIHHPsrnF7+97A+o4T7j9slP
+ UUvQ==
+X-Gm-Message-State: AOJu0Yw4tuDwOF08ppXFJzE9DXGTi+aMiq9O9S3JkNJVb65Upb4jqiwU
+ xNG/4CKadSBhlIx2Y/xQUcpt2W61yAygMQ==
+X-Google-Smtp-Source: AGHT+IHAOSc2/xfH1CI9xCNMpysQ8riGjgJrJqXLVkmuaCZTE5lLUpgejR4BKbTCGnPhBMjOLeZkuQ==
+X-Received: by 2002:aa7:c48f:0:b0:523:b665:e48e with SMTP id
+ m15-20020aa7c48f000000b00523b665e48emr7291674edq.7.1692685960574; 
+ Mon, 21 Aug 2023 23:32:40 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- dy21-20020a05640231f500b0052a19a75372sm784320edb.90.2023.08.21.23.32.38
+ dy21-20020a05640231f500b0052a19a75372sm784320edb.90.2023.08.21.23.32.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 23:32:38 -0700 (PDT)
+ Mon, 21 Aug 2023 23:32:39 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
  Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 0/8] Add support for PMICs used on Tegra 3 devices
-Date: Tue, 22 Aug 2023 09:32:12 +0300
-Message-Id: <20230822063220.5191-1-clamor95@gmail.com>
+Subject: [PATCH v6 1/8] power: pmic: palmas: support TI TPS65913 PMIC
+Date: Tue, 22 Aug 2023 09:32:13 +0300
+Message-Id: <20230822063220.5191-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230822063220.5191-1-clamor95@gmail.com>
+References: <20230822063220.5191-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,89 +91,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Patch set adds basic support for PMICs used in many Tegra 3 devices.
-All PMIC drivers are based on datasheets provided by vendors.
-Implemented API include regulator set/get voltage enable/disable and
-basic PMIC r/w capabilities.
+Existing PALMAS PMIC driver is fully compatible with TI TPS65913
+PMIC found in many Tegra 4 devices, like Tegra Note 7 and ASUS
+TF701T. TPS65913 shares same structure of regulators like TPS659038
+so data can be reused.
 
-Drivers were tested by me on LG P895 (max77663), HTC One X (TPS80032)
-and ASUS TF300T (tps65911). Calculations and behavior were correct,
-predictable and reproducible.
-
-Poweroff functional will be added after this basic drivers are merged.
-
+Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # NVIDIA Tegratab
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes from v5:
- - pass tps6591x regulator children directly via udevice_id data field
+ drivers/power/pmic/palmas.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Changes from v4:
- - used private structure for TPS80031 SPMS driver so that internal
-   flags do not interfere with those from dm_regulator_uclass_plat
- - fixed detection on ldoln and ldousb for palmas ldo driver
-
-Changes from v3:
- - expanded descriptions in Kconfigs for pmics and regulators
- - replaced ret with other variable name if it is not used for return
- - dropped prefixed with pmic name
- - dropped () in ~(var) type expressions
- - return dm_i2c_* output in pmic_read/write functions
- - switched to log_debug in some places
- - added descryptions for some "non obvious" functions
- - fixed tps80031 spms voltage calculation in non linear region
- - adjsuted tps65911 vio voltage calculation
+diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
+index 6080cbff0b..d6eb9cb433 100644
+--- a/drivers/power/pmic/palmas.c
++++ b/drivers/power/pmic/palmas.c
+@@ -87,6 +87,7 @@ static struct dm_pmic_ops palmas_ops = {
  
-Changes from v2:
- - removed all previously made poweroff API in favour to use sysreset
- after this patchset is accepted
-
-Changes from v1:
- - created poweroff API for PMIC and integrated it call into do_poweroff
- - added poweroff function to submitted max77663, tps80032 and tps65911
- drivers
- - fixed registers asignments for regulators with non-numeric name
- (ldoln, ldousb, vddctrl)
----
-
-Svyatoslav Ryhel (8):
-  power: pmic: palmas: support TI TPS65913 PMIC
-  power: regulator: palmas: fix ldoln and ldousb detection
-  power: pmic: add the base MAX77663 PMIC support
-  power: regulator: max77663: add regulator support
-  power: pmic: add the base TPS80031 PMIC support
-  power: regulator: tps80031: add regulator support
-  power: pmic: tps65910: add TPS65911 PMIC support
-  power: regulator: tps65911: add regulator support
-
- doc/device-tree-bindings/pmic/max77663.txt   |  84 ++++
- doc/device-tree-bindings/pmic/tps65911.txt   |  78 ++++
- doc/device-tree-bindings/pmic/tps80031.txt   |  76 ++++
- drivers/power/pmic/Kconfig                   |  20 +
- drivers/power/pmic/Makefile                  |   2 +
- drivers/power/pmic/max77663.c                |  86 ++++
- drivers/power/pmic/palmas.c                  |   1 +
- drivers/power/pmic/pmic_tps65910_dm.c        |  15 +-
- drivers/power/pmic/tps80031.c                |  87 ++++
- drivers/power/regulator/Kconfig              |  28 ++
- drivers/power/regulator/Makefile             |   3 +
- drivers/power/regulator/max77663_regulator.c | 378 ++++++++++++++++++
- drivers/power/regulator/palmas_regulator.c   |  24 +-
- drivers/power/regulator/tps65911_regulator.c | 397 +++++++++++++++++++
- drivers/power/regulator/tps80031_regulator.c | 350 ++++++++++++++++
- include/power/max77663.h                     |  42 ++
- include/power/tps65910_pmic.h                |  44 ++
- include/power/tps80031.h                     |  45 +++
- 18 files changed, 1747 insertions(+), 13 deletions(-)
- create mode 100644 doc/device-tree-bindings/pmic/max77663.txt
- create mode 100644 doc/device-tree-bindings/pmic/tps65911.txt
- create mode 100644 doc/device-tree-bindings/pmic/tps80031.txt
- create mode 100644 drivers/power/pmic/max77663.c
- create mode 100644 drivers/power/pmic/tps80031.c
- create mode 100644 drivers/power/regulator/max77663_regulator.c
- create mode 100644 drivers/power/regulator/tps65911_regulator.c
- create mode 100644 drivers/power/regulator/tps80031_regulator.c
- create mode 100644 include/power/max77663.h
- create mode 100644 include/power/tps80031.h
-
+ static const struct udevice_id palmas_ids[] = {
+ 	{ .compatible = "ti,tps659038", .data = TPS659038 },
++	{ .compatible = "ti,tps65913" , .data = TPS659038 },
+ 	{ .compatible = "ti,tps65917" , .data = TPS65917 },
+ 	{ }
+ };
 -- 
 2.39.2
 
