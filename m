@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAEAEE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 13:27:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E26DEE4996
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 13:36:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F2D9864D4;
-	Tue, 22 Aug 2023 15:27:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 48F1B8648E;
+	Tue, 22 Aug 2023 15:36:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wg1lXIqw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GYa+Oxmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF670864BA; Tue, 22 Aug 2023 15:27:21 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id BE355864A3; Tue, 22 Aug 2023 15:35:58 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25AA1864D9
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 15:27:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7D3C86297
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 15:35:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-500760b296aso3253921e87.0
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 06:27:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-4fe61ae020bso6828008e87.2
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 06:35:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692710833; x=1693315633;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2atq8xQ1ocvOZX/e1gjac1idNFLyOCBPBEVXz9pu5v8=;
- b=wg1lXIqwBpeYaMF48Qinmaj87+XYxuQId0BuJinCL8D/XFdF1t2xSSbznQHmZ9s63s
- h5a0r1s9PBNreUn/rNVgyAtHnxnjNU4Tz/45SUTxJlYAElbRhzMWfcokNmIekGrpUoXd
- VJSPrlPTVvfYClg3QKAkh1uxoQdWCqynrEr8AIy/F7IGLgaxevE477X/mWnLauLRgv5D
- TiQjfndLYrr5QhLVEPBltCeSkSp1zo5lwS8LQpr0YzfLHM9Y8n3Y7TNGL1Y84Bupe/lg
- 5VWCLJ5ByyAlw3Iqad9+h63VMFu3/zzKPkB2LcJ5hPGJdmJqzNvqf5GBNErRwne69Eal
- eM2g==
+ d=gmail.com; s=20221208; t=1692711355; x=1693316155;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=uXGsq/z+wQcYHfjsphZ76QdV7D18eRCddDwK5qXXrig=;
+ b=GYa+Oxmgp2KZl5P657QvdsU/n01S5n0QnR9BWCkjfj1W3m9p4AbVGGb9V6hQCpUjBZ
+ 4BrhDLUMjO0y8sugCk8kV9fHw2fks5wMt4d0IvhJf0kSQMGhbVnPXczJPkou+hEhgLbq
+ syJ7MG127wJAn+pEaqMA+kb6/EK/SDGKR7/jEPLWcZhFob4fQf76u763eRkX1dRYnWIg
+ Kn7nUBGuvwapNEyL26N8bj202XaMZ8fzeCfdNYm4qCShv9Uw/Sl2XhzgYibFByqn7wuR
+ Holcwyx3mnJzxvfpm9Cevu10bsSipTajc9Jt6b7wtUik9W5SkuiBTKnFosJYTidIqy4n
+ QEDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692710833; x=1693315633;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2atq8xQ1ocvOZX/e1gjac1idNFLyOCBPBEVXz9pu5v8=;
- b=kJU3EjNIE5q2ISHvz/5xT2ZqtQYdh2dyZyrLOgBNUgOvhKkNbcbWgsHSBiHQNp6qNm
- dV7El1AskpNSE+cwGCCdS5j0gbKBdlbt1lNlra968dGq8Nt0gkHje26r6VReF5I9Scp/
- +KprehjjMolJaC7UvbuyMeFESZeEhVKoGtu6qhfkk7FTlkVqb9Mjh1aMD9vjPHeeSk6a
- yvtk1t8n60nchiOH8CNcOrLRqDutkL+NI52E6u7u+F+Di2CWgHCWdJ/ddZE/b3PJPs4i
- EN2oyEhB7xMbknITIbeM9WKMul72cD9wrpL4edQD0iM6NZ4VTWH2QSl+JuHn35w6S7Z4
- d4pA==
-X-Gm-Message-State: AOJu0YzMX8OhMh5PXR8woUBUQsa3Kwjb9y/5EcN0FpGKwc420meGB7yA
- 02wwpDITObrcQ6JBgrd4nVhmPua9A8DLFtKawTEMRaZ8Schd/0mhXQE=
-X-Google-Smtp-Source: AGHT+IHmBz4yPT9UWLxaLU9K3nstrip/iYe382N9blovOfveDqV4YjeFIroN90ml0u0BsZV1ZHjaymf6uvRYNh5um1Q=
-X-Received: by 2002:a05:6512:114d:b0:4fd:f6db:a7d9 with SMTP id
- m13-20020a056512114d00b004fdf6dba7d9mr4215441lfg.32.1692710832549; Tue, 22
- Aug 2023 06:27:12 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692711355; x=1693316155;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uXGsq/z+wQcYHfjsphZ76QdV7D18eRCddDwK5qXXrig=;
+ b=KbatCsEu+hiIrCVA+ot6qB8ezslDIX3R5VZr0BPTE+7xNI58ZFUSc+DkKnp2fbAbI2
+ scbX2v/bMrcpUKb7Zw1EyZkK1+NUHUH6WW9BgTE50Fqj6xM33WDVOHmLdNOZiExowVo0
+ OTYZ9/cwfcU4FR3DD8AJFtL14g59cz0gI5WfXfMWab757EIClRAtn1XOZX6PIzKzcDcb
+ qXu+0HnCgbBs3wZRxnvlIa6v8PYO1Fz8pHmMqGeUUmhsL8Sisu/7LL7BS6xhsXi2giDl
+ S0BC+AV4oIRmEOWSb5cCWeilF/3LSzYAjb8InnxoCj4MHwjxqSTZSSQhzOj4WhSSM0RQ
+ BQqg==
+X-Gm-Message-State: AOJu0YwVCmGbKbObaNf1+xWJN7MR6jyhJ+fSxsqo321XWx+sGwkZPh3o
+ e1EM+Ec9QNnGVHNWaDJxuPk=
+X-Google-Smtp-Source: AGHT+IEPjpCypfcRNmNwJcbq/m3ngV0ZPd1iMXClK2StjvuL4JjRYhn6sDrd5VxpgPxs13TpAA1ymg==
+X-Received: by 2002:a05:6512:2506:b0:4f7:6685:2c5f with SMTP id
+ be6-20020a056512250600b004f766852c5fmr8822883lfb.61.1692711354628; 
+ Tue, 22 Aug 2023 06:35:54 -0700 (PDT)
+Received: from [127.0.0.1] ([46.211.19.215]) by smtp.gmail.com with ESMTPSA id
+ w9-20020a056402070900b00525683f9b2fsm7571535edx.5.2023.08.22.06.35.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Aug 2023 06:35:54 -0700 (PDT)
+Date: Tue, 22 Aug 2023 16:35:53 +0300
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <thierry.reding@gmail.com>
+CC: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] ARM: tegra: Changes for v2023.10-rc1
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20230822131305.GM3953269@bill-the-cat>
+References: <20230818133923.286332-1-thierry.reding@gmail.com>
+ <20230818164943.GZ1515023@bill-the-cat>
+ <0C415156-B22C-4B86-94C6-1D03ED4287ED@gmail.com>
+ <20230818170447.GA1515023@bill-the-cat>
+ <5DFCCFFB-D137-4530-8AF9-C72071842A60@gmail.com> <ZORmfDblupZkjoh-@orome>
+ <20230822131305.GM3953269@bill-the-cat>
+Message-ID: <2FC03DB7-07CC-47A6-BA4A-34789E4DDA16@gmail.com>
 MIME-Version: 1.0
-References: <20230822125858.8018-1-thomas.mittelstaedt@de.bosch.com>
- <20230822125858.8018-3-thomas.mittelstaedt@de.bosch.com>
-In-Reply-To: <20230822125858.8018-3-thomas.mittelstaedt@de.bosch.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 22 Aug 2023 16:26:36 +0300
-Message-ID: <CAC_iWjJRih=5BCQJNZ2Mvp-m1QDt_+D61VLS5HSNh-8dNXu-2w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] Documentation extended with specific information
- for VirtualBox
-To: thomas.mittelstaedt@de.bosch.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,119 +97,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Thomas
+22 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 16:13:05 GMT+03:00, =
+Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(=
+-=D0=BB=D0=B0):
+>On Tue, Aug 22, 2023 at 09:40:44AM +0200, Thierry Reding wrote:
+>> On Tue, Aug 22, 2023 at 08:16:29AM +0300, Svyatoslav Ryhel wrote:
+>> >=20
+>> >=20
+>> > 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 20:04:47 GMT+0=
+3:00, Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=
+=D0=B2(-=D0=BB=D0=B0):
+>> > >On Fri, Aug 18, 2023 at 08:02:30PM +0300, Svyatoslav Ryhel wrote:
+>> > >>=20
+>> > >>=20
+>> > >> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 19:49:43 GM=
+T+03:00, Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
+=B0=D0=B2(-=D0=BB=D0=B0):
+>> > >> >On Fri, Aug 18, 2023 at 03:39:22PM +0200, Thierry Reding wrote:
+>> > >> >
+>> > >> >> From: Thierry Reding <treding@nvidia=2Ecom>
+>> > >> >>=20
+>> > >> >> Hi Tom,
+>> > >> >>=20
+>> > >> >> The following changes since commit 68c07fc5fdf34f0926cf06fc0c4e=
+bd6f2f3afe19:
+>> > >> >>=20
+>> > >> >>   Merge https://source=2Edenx=2Ede/u-boot/custodians/u-boot-usb=
+ (2023-06-21 14:42:50 -0400)
+>> > >> >>=20
+>> > >> >> are available in the Git repository at:
+>> > >> >>=20
+>> > >> >>   git@source=2Edenx=2Ede:u-boot/custodians/u-boot-tegra=2Egit t=
+ags/tegra-for-2023=2E10-rc1
+>> > >> >
+>> > >> >FYI, in your =2Egit/config you can do:
+>> > >> >	url =3D https://source=2Edenx=2Ede/u-boot/custodians/u-boot-tegr=
+a=2Egit
+>> > >> >	pushurl =3D git@source=2Edenx=2Ede:u-boot/custodians/u-boot-tegr=
+a=2Egit
+>> > >> >
+>> > >> >And this part looks "nicer"=2E  Not a big deal, just an FYI=2E
+>> > >> >
+>> > >> >> for you to fetch changes up to bdf9dead86f06c7d6980c399a4a63394=
+30b531ec:
+>> > >> >>=20
+>> > >> >>   board: htc: endeavoru: add One X support (2023-06-30 15:20:37=
+ +0200)
+>> > >> >>=20
+>> > >> >> This passes CI successfully:
+>> > >> >>=20
+>> > >> >>   https://source=2Edenx=2Ede/u-boot/custodians/u-boot-tegra/-/p=
+ipelines/17411
+>> > >> >>=20
+>> > >> >> Thanks,
+>> > >> >> Thierry
+>> > >> >>=20
+>> > >> >> ---------------------------------------------------------------=
+-
+>> > >> >> ARM: tegra: Changes for v2023=2E10-rc1
+>> > >> >>=20
+>> > >> >> This adds support for various new Tegra30 boards (ASUS, LG and =
+HTC) and
+>> > >> >> has some other minor enhancements, such as enabling the powerof=
+f command
+>> > >> >> on several Tegra210 and Tegra186 boards=2E
+>> > >> >>=20
+>> > >> >> ---------------------------------------------------------------=
+-
+>> > >> >> Jonas Schw=C3=B6bel (1):
+>> > >> >>       configs: tegra-common-post: make PXE and DHCP boot target=
+s optional
+>> > >> >>=20
+>> > >> >> Svyatoslav Ryhel (6):
+>> > >> >>       configs: tegra-common-post: add GPIO keyboard as STDIN de=
+vice
+>> > >> >>       ARM: tegra: add SoC UID calculation function
+>> > >> >>       board: asus: transformer: add ASUS Transformer T30 family=
+ support
+>> > >> >>       board: asus: grouper: add Google Nexus 7 (2012) support
+>> > >> >>       board: lg: x3: add Optimus 4X HD and Optimus Vu support
+>> > >> >>       board: htc: endeavoru: add One X support
+>> > >> >>=20
+>> > >> >> Thierry Reding (2):
+>> > >> >>       ARM: tegra: Enable poweroff command on Jetson TX1 and Jet=
+son Nano
+>> > >> >>       ARM: tegra: Enable poweroff command on Jetson TX2
+>> > >> >>=20
+>> > >> >> Tomasz Maciej Nowak (1):
+>> > >> >>       ARM: dts: trimslice: sync SPI node with Linux dts
+>> > >> >
+>> > >> >Since I'm not sure if this is v8 or v9, given when v9 was posted,=
+ I've
+>> > >> >applied this PR now, as I had said I wanted this in=2E  I do have=
+ two
+>> > >> >requests for you Svyatoslav, however=2E  First, if there's change=
+s that
+>> > >> >are missing in master, please post those ASAP and we'll get them =
+in, for
+>> > >> >v2023=2E10=2E=20
+>> > >>=20
+>> > >> Patches Thierry applied are v8, while v9 has significant improveme=
+nts=2E
+>> > >
+>> > >OK, I've updated patchwork to try and reflect this too=2E
+>> > >
+>> >=20
+>> > Merged patches are not the most recent I have sent=2E How to fix this=
+?
+>>=20
+>> Usually once something has been merged it's difficult to back it out=2E=
+ So
+>> unless Tom can (and is willing to) somehow redo the merge with the
+>> newest patches, you're going to have to rebase what you have and send
+>> out as follow-up patches=2E
+>
+>I would hope that locally, doing a git diff between master with this PR
+>applied and a branch with v9 on it instead would yield a set of changes
+>that are easy to turn in to a follow up patch or series of patches=2E I
+>really don't want to revert the merge and bring in a new PR instead=2E
+>
 
-On Tue, 22 Aug 2023 at 15:59, <thomas.mittelstaedt@de.bosch.com> wrote:
->
-> From: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
->
-
-You need a reasonable commit message explaining why you want to change
-those files
-
-> Signed-off-by: Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
-> ---
->  doc/develop/uefi/u-boot_on_efi.rst | 84 ++++++++++++++++++++++++++++++
->  1 file changed, 84 insertions(+)
->
-> diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
-> index acad6397e8..0d4927807c 100644
-> --- a/doc/develop/uefi/u-boot_on_efi.rst
-> +++ b/doc/develop/uefi/u-boot_on_efi.rst
-> @@ -254,6 +254,90 @@ This shows running with serial enabled (see `include/configs/efi-x86_app.h`)::
->
->     => QEMU: Terminated
->
-> +Run on VirtualBox (x86_64)
-> +--------------------------
-> +
-> +Enable EFI
-> +~~~~~~~~~~
-> +At settings for virtual machine the flag at **System->Motherboard->Enable EFI
-> +(special OSes only)** has to be enabled.
-> +
-> +Installation
-> +~~~~~~~~~~~~
-> +Provide the preinstalled Linux system as a Virtual Disk Image (VDI) and assign
-> +it to a SATA controller (type AHCI) using the settings for the virtual machine
-> +at menu item **System->Storage->Controller:SATA**.
-> +
-> +For the following description three GPT partitions are assumed:
-> +
-> +- Partition 1: formatted as FAT file-system and marked as EFI system partition
-> +  (partition type 0xEF00) used for the U-Boot EFI binary. (If VirtualBox is UEFI
-> +  compliant, it should recognize the ESP as the boot partition.)
-> +
-> +- Partition 2: formatted as **ext4**, used for root file system
-> +
-> +Create an extlinux.conf or a boot script
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Following files are assumed to be located at system for boot configuration::
-> +
-> + Partition  File                    Comment
-> + 1          EFI/BOOT/BOOTX64.efi    # renamed U-Boot EFI image
-> + 1          Image                   # Linux image
-> + 1          Initrd                  # Initramfs of Linux
-> +
-> +**EFI/BOOT/BOOTX64.efi** is a renamed build result **u-boot-payload.efi**, built with
-> +**efi-x86_payload64_defconfig** configuration.
-> +
-> +Boot script
-> +~~~~~~~~~~~
-> +
-> +The boot script **boot.scr** is assumed to be located at::
-> +
-> + Partition  File        Comment
-> + 1          boot.scr    # Boot script, generated with mkimage from template
-> +
-> +Content of **boot.scr**:
-> +
-> +.. code-block:: bash
-> +
-> +  ext4load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} ${prefix}Image
-> +  setenv kernel_size ${filesize}
-> +  ext4load ${devtype} ${devnum}:${distro_bootpart} ${ramdisk_addr_r} ${prefix}Initrd
-> +  setenv initrd_size ${filesize}
-> +  zboot  ${kernel_addr_r} ${kernel_size} ${ramdisk_addr_r} ${initrd_size}
-> +
-> +Extlinux configuration
-> +~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +Alternatively a configuration **extlinux.conf** can be used. **extlinux.conf**
-> +is assumed to be located at::
-> +
-> + Partition  File                        Comment
-> + 1          extlinux/extlinux.conf      # Extlinux boot configuration
-> +
-> +Content of **extlinux.conf**:
-> +
-> +.. code-block:: bash
-> +
-> +  default l0
-> +  menu title U-Boot menu
-> +  prompt 0
-> +  timeout 50
-> +
-> +  label l0
-> +    menu label Linux
-> +    linux /Image
-> +    initrd /Initrd
-> +
-> +
-> +Additionally something like (sda is assumed as disk device):
-> +
-> +.. code-block:: bash
-> +
-> +       append  root=/dev/sda2 console=tty0 console=ttyS0,115200n8 rootwait rw
-> +
-> +
->
->  Future work
->  -----------
-> --
-> 2.30.2
->
-
-Thanks
-/Ilias
+Alright, done=2E
