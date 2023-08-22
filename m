@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42FF6EE4993
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:26:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86225EE49A3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 11:45:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 553E9864FF;
-	Tue, 22 Aug 2023 13:23:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D733F864A9;
+	Tue, 22 Aug 2023 13:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ntsUlIhz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sNK/gjPX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 744BB8649F; Tue, 22 Aug 2023 13:22:59 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 23927864A8; Tue, 22 Aug 2023 13:45:07 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3EC3864E5
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:22:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5B4A8649B
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 13:45:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9936b3d0286so584087366b.0
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:22:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-26fa19322b5so43678a91.0
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 04:45:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692703376; x=1693308176;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20221208; t=1692704702; x=1693309502;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GhHy/gbx5fgaYaEj2DSWQipG3mUbqExdYXyeqnr5XLs=;
- b=ntsUlIhz1Ml35AYv4aej91+wN748+ZVwm3y33SB4UANpyMInSng9NOeIN4CofJUfPu
- OKuw+JRAav6fei5vYKfgV0QbHfDVSPvp+GdknzGNQHkM3CsAT26RaF65/xIhfCOnc5mj
- L+O5dfmVaHho9OA0SdQozVKxlSCHW80VNPFbVl2Jar+zTvQ52W4+uavuEm4iROR3CTg7
- xbx0mdMjQUOaZFL34/ctxBEBOSqwQe/PKOwkc8ehcsDFcUxHgpTQ/fVQKUt4IxCPI+nx
- cajtRNvbjinWSzrGkXTzfF2zam0nCs4SUuDGqzpKrHM6oamcssFEj5uaFJGI7BCZfA/x
- t1Lw==
+ bh=9ZoHJqU4VqLzZiMBoZO/HOAwSv1Aq+wRFHYHrdcZHug=;
+ b=sNK/gjPXx4lK2aPdgFonC4bHxCUSLsV6znudL/wU6WD200tie11i5NyrHv/cv5UN7N
+ gYXgZJ63P3fLtCleviyh5GR8znNVvrDxcDQVXabDE6lgh/y/LJwFvq/La7QxrSd3Cvgy
+ uStqid8wn97DP9waZD5MqHF189W1vTbfAo/2nxp9nvi7fDuj/GCBhgWhvFGF753GZJYq
+ doAEnWSQ23mA09CR0q9myu2DIv6HP1mPVCxFKgxwQm8jaYA78EIydwrJ7BKhJfgk/kzH
+ LqSw0VNWRIZFUyXCcruVcAdWrb/fDxi/acgir0sruQBavh4Z+HfjQXOmaLEwe2wPzDJi
+ mgCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692703376; x=1693308176;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1692704702; x=1693309502;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GhHy/gbx5fgaYaEj2DSWQipG3mUbqExdYXyeqnr5XLs=;
- b=KWHWsxbEZIusMvKxXNu+ilpeQmbiv7utydTp+SmetGehdEQ3siOpt3KEcw15wy6e2t
- JJYDNvRqgTmGm+1w+oo1xcNv6g3YNc6Ta6JgX3QN3Krl1lqiHsMIrHdB5KoPm63o9iFg
- 7ws8UM1GQC/sHp7+GvMsz02mRgzEbBGGqGoz4LjLOwqeV1DzQwvVnX2O1aEcNk3ykUnh
- WZGaL56tI6yYuFnykM5Tyy99U4UknG4OLwGKdW+WYsDm2tSGB3/9UBcGYEMDFDtXkRh0
- CVimSbe6enfcmonjUd20kv04BGj53wSA7Xsi+Q7dWpSTC7OZyd74xWRyMrwDv7DNcaEB
- CVnQ==
-X-Gm-Message-State: AOJu0Ywvm3KKs2B8vI/ZaTSS9WmOHWDI5biYU89UTOQMat34LVokr/pi
- VjiEabqFQpNmbHPNmqwX0b4FTuUdKviGZw==
-X-Google-Smtp-Source: AGHT+IGAUAhtKeV2oAl+2mMGBTbS6ucI8QbHYHtq3g63ziRet4WYiAmein3N39E5BjSLLuUK4qU+Gg==
-X-Received: by 2002:a17:906:cd2:b0:99e:1041:f849 with SMTP id
- l18-20020a1709060cd200b0099e1041f849mr7537855ejh.20.1692703375868; 
- Tue, 22 Aug 2023 04:22:55 -0700 (PDT)
-Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- mh9-20020a170906eb8900b009934855d8f1sm8041456ejb.34.2023.08.22.04.22.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 04:22:55 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 19/19] board: asus: lg: move config fragments into device
- boards
-Date: Tue, 22 Aug 2023 14:22:17 +0300
-Message-Id: <20230822112217.4646-20-clamor95@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230822112217.4646-1-clamor95@gmail.com>
-References: <20230822112217.4646-1-clamor95@gmail.com>
+ bh=9ZoHJqU4VqLzZiMBoZO/HOAwSv1Aq+wRFHYHrdcZHug=;
+ b=PNze97sAjzsJA2mKsOtm3HcwqDejXFyGLiG+LObScedQuRN2TJsW8Q2HSA4OSfIO+n
+ KyEdZ+x5G5YfgqpSqp8J89kzfRm1Hreu9J/TY3YYA/lrWkgdG1R8Ia5fAF2g7z8Wqx5j
+ 70PTJ6ZtbVNXX5dCIMTU8sr6cODXPXjjt35mcF+l6Lu6lXlxcpLr7KCN2fTBEdYYxyyp
+ vA9JEBApfNm6qdg4l9ooIoYeER52WNdgQdxfwfxks1qG4I3naDfMhkTSfdq4xUy9jbz4
+ Jt66HfzWYq/XRgCJld1vZWWYDNgfvTHQlt02kv8I0V+Lnn7EdrBoXgkYTqVIZJGJkshT
+ RjQQ==
+X-Gm-Message-State: AOJu0Yy93UAu+KZcSvzcUl84oaHs/FLzwzsd+guLP0lZodCk97knSWPK
+ c/5MbjzcySqz3fp6dZwilNRfLv11PFytbwwOD4g=
+X-Google-Smtp-Source: AGHT+IHDXn14wZfsgHgOkEAzbbKI+mov1KN6VUzySwrgQwaBoCGbkKaakbmDeRurfCx+ijqARyLFe9HxBL4Bpwydsfk=
+X-Received: by 2002:a17:90a:7524:b0:26b:27f6:9027 with SMTP id
+ q33-20020a17090a752400b0026b27f69027mr8169686pjk.1.1692704702091; Tue, 22 Aug
+ 2023 04:45:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+ <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+ <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+In-Reply-To: <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 22 Aug 2023 08:44:49 -0300
+Message-ID: <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Rogan Dawes <rogan@dawes.za.net>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,133 +95,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move ASUS Transformers, Grouper, P895 and P880 config fragments into
-their respective device directory in /board/../configs/
+Hi Rogan,
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- board/asus/grouper/MAINTAINERS                             | 3 ---
- .../asus/grouper/configs}/grouper_E1565.config             | 0
- .../asus/grouper/configs}/grouper_PM269.config             | 0
- {configs => board/asus/grouper/configs}/tilapia.config     | 0
- board/asus/transformer-t30/MAINTAINERS                     | 7 -------
- .../asus/transformer-t30/configs}/p1801-t.config           | 0
- .../asus/transformer-t30/configs}/tf201.config             | 0
- .../asus/transformer-t30/configs}/tf300t.config            | 0
- .../asus/transformer-t30/configs}/tf300tg.config           | 0
- .../asus/transformer-t30/configs}/tf300tl.config           | 0
- .../asus/transformer-t30/configs}/tf600t.config            | 0
- .../asus/transformer-t30/configs}/tf700t.config            | 0
- board/lg/x3-t30/MAINTAINERS                                | 2 --
- {configs => board/lg/x3-t30/configs}/p880.config           | 0
- {configs => board/lg/x3-t30/configs}/p895.config           | 0
- 15 files changed, 12 deletions(-)
- rename {configs => board/asus/grouper/configs}/grouper_E1565.config (100%)
- rename {configs => board/asus/grouper/configs}/grouper_PM269.config (100%)
- rename {configs => board/asus/grouper/configs}/tilapia.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/p1801-t.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/tf201.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/tf300t.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/tf300tg.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/tf300tl.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/tf600t.config (100%)
- rename {configs => board/asus/transformer-t30/configs}/tf700t.config (100%)
- rename {configs => board/lg/x3-t30/configs}/p880.config (100%)
- rename {configs => board/lg/x3-t30/configs}/p895.config (100%)
+On Tue, Aug 22, 2023 at 6:42=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> wr=
+ote:
+>
+> Hi Fabio,
+>
+> As far as I am aware, the U-boot source for the Wink hub has not been
+> made available anywhere. That said, the RAM chip in use on the board
 
-diff --git a/board/asus/grouper/MAINTAINERS b/board/asus/grouper/MAINTAINERS
-index 18b4f0641f..f4068d8562 100644
---- a/board/asus/grouper/MAINTAINERS
-+++ b/board/asus/grouper/MAINTAINERS
-@@ -2,9 +2,6 @@ GROUPER BOARD
- M:	Svyatoslav Ryhel <clamor95@gmail.com>
- S:	Maintained
- F:	board/asus/grouper/
--F:	configs/grouper_E1565.config
--F:	configs/grouper_PM269.config
--F:	configs/tilapia.config
- F:	configs/grouper_common_defconfig
- F:	doc/board/asus/grouper_common.rst
- F:	include/configs/grouper.h
-diff --git a/configs/grouper_E1565.config b/board/asus/grouper/configs/grouper_E1565.config
-similarity index 100%
-rename from configs/grouper_E1565.config
-rename to board/asus/grouper/configs/grouper_E1565.config
-diff --git a/configs/grouper_PM269.config b/board/asus/grouper/configs/grouper_PM269.config
-similarity index 100%
-rename from configs/grouper_PM269.config
-rename to board/asus/grouper/configs/grouper_PM269.config
-diff --git a/configs/tilapia.config b/board/asus/grouper/configs/tilapia.config
-similarity index 100%
-rename from configs/tilapia.config
-rename to board/asus/grouper/configs/tilapia.config
-diff --git a/board/asus/transformer-t30/MAINTAINERS b/board/asus/transformer-t30/MAINTAINERS
-index c6c15323b2..071a9c04b8 100644
---- a/board/asus/transformer-t30/MAINTAINERS
-+++ b/board/asus/transformer-t30/MAINTAINERS
-@@ -2,13 +2,6 @@ TRANSFORMER BOARD
- M:	Svyatoslav Ryhel <clamor95@gmail.com>
- S:	Maintained
- F:	board/asus/transformer-t30/
--F:	configs/p1801-t.config
--F:	configs/tf201.config
--F:	configs/tf300t.config
--F:	configs/tf300tg.config
--F:	configs/tf300tl.config
--F:	configs/tf600t.config
--F:	configs/tf700t.config
- F:	configs/transformer_t30_defconfig
- F:	doc/board/asus/transformer_t30.rst
- F:	include/configs/transformer-common.h
-diff --git a/configs/p1801-t.config b/board/asus/transformer-t30/configs/p1801-t.config
-similarity index 100%
-rename from configs/p1801-t.config
-rename to board/asus/transformer-t30/configs/p1801-t.config
-diff --git a/configs/tf201.config b/board/asus/transformer-t30/configs/tf201.config
-similarity index 100%
-rename from configs/tf201.config
-rename to board/asus/transformer-t30/configs/tf201.config
-diff --git a/configs/tf300t.config b/board/asus/transformer-t30/configs/tf300t.config
-similarity index 100%
-rename from configs/tf300t.config
-rename to board/asus/transformer-t30/configs/tf300t.config
-diff --git a/configs/tf300tg.config b/board/asus/transformer-t30/configs/tf300tg.config
-similarity index 100%
-rename from configs/tf300tg.config
-rename to board/asus/transformer-t30/configs/tf300tg.config
-diff --git a/configs/tf300tl.config b/board/asus/transformer-t30/configs/tf300tl.config
-similarity index 100%
-rename from configs/tf300tl.config
-rename to board/asus/transformer-t30/configs/tf300tl.config
-diff --git a/configs/tf600t.config b/board/asus/transformer-t30/configs/tf600t.config
-similarity index 100%
-rename from configs/tf600t.config
-rename to board/asus/transformer-t30/configs/tf600t.config
-diff --git a/configs/tf700t.config b/board/asus/transformer-t30/configs/tf700t.config
-similarity index 100%
-rename from configs/tf700t.config
-rename to board/asus/transformer-t30/configs/tf700t.config
-diff --git a/board/lg/x3-t30/MAINTAINERS b/board/lg/x3-t30/MAINTAINERS
-index 0ad29563e9..13c8588d0b 100644
---- a/board/lg/x3-t30/MAINTAINERS
-+++ b/board/lg/x3-t30/MAINTAINERS
-@@ -2,8 +2,6 @@ X3 BOARD
- M:	Svyatoslav Ryhel <clamor95@gmail.com>
- S:	Maintained
- F:	board/lg/x3-t30/
--F:	configs/p880.config
--F:	configs/p895.config
- F:	configs/x3_t30_defconfig
- F:	doc/board/lg/x3_t30.rst
- F:	include/configs/x3-t30.h
-diff --git a/configs/p880.config b/board/lg/x3-t30/configs/p880.config
-similarity index 100%
-rename from configs/p880.config
-rename to board/lg/x3-t30/configs/p880.config
-diff --git a/configs/p895.config b/board/lg/x3-t30/configs/p895.config
-similarity index 100%
-rename from configs/p895.config
-rename to board/lg/x3-t30/configs/p895.config
--- 
-2.39.2
+Was there a formal request for the U-Boot source code to Wink?
 
+As per the GPL license, they have to share the U-Boot source code.
+
+> is marked D9LPX, which apparently corresponds to the following item:
+> https://media-www.micron.com/-/media/client/global/documents/products/dat=
+a-sheet/dram/ddr2/512mbddr2.pdf?rev=3D2c70f8a2b207452584b2bf040de8d771
+
+There is a tool from NXP that helps with the i.MX28 DDR2 controller
+initialization for a specific DDR model:
+
+https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-processors/=
+9552/1/MX28_DDR2_register_programming_aid_v0.2.xlsx
+
+The DDR initialization values obtained from this tool are then used in
+U-Boot inside the 'mxs_dram_vals' array.
+
+There is a common DDR configuration at
+arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c.
+
+Most likely, in your case, it will require a custom mxs_dram_vals
+initialization, like it is done at board/liebherr/xea/spl_xea.c.
+
+> I did try to change the iomux_cfg_t as suggested above, built using
+> make mx28evk_defconfig && make u-boot.sb, and used mxsldr to try load
+> it, to no avail. There was no output on the serial port at all, or any
+> other suggestion that anything was running.
+
+It has been a long time since I used the mxsldr tool.
+
+When time permits, I can try to load a recent U-Boot over USB using
+this tool on a imx28-evk.
+
+Cheers
