@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92395EE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 06:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD732EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 07:40:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C9DF8727F;
-	Tue, 22 Aug 2023 08:32:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D0A98422F;
+	Tue, 22 Aug 2023 09:40:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xw54wGGD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NinTw86L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 070588726F; Tue, 22 Aug 2023 08:32:51 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id A21E285991; Tue, 22 Aug 2023 09:40:50 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BFBB871DB
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 08:32:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E4CF805CB
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 09:40:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-522dd6b6438so4887150a12.0
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 23:32:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=thierry.reding@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-99c47ef365cso564060866b.0
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 00:40:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692685967; x=1693290767;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20221208; t=1692690047; x=1693294847;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZFECjWNCTNIXdNVKOdlbK/s4Wr46IvqmBZkGkvXEyvc=;
- b=Xw54wGGDmSg+8heVOsf0gne7nBeUFGg2Asag0AX/NTRu0WXiG4DFv372Vfmbf7NE+7
- 83enefyZOrwQ2cWojAqypHdvFj0QRV3sfBeU0cf5lPhHqPlSNu26ZN3b/vNjiE8ff0/4
- FjqgpoEMhZ7kO62DZDZmSOQnkOygk4yi7rBDUsWaaOOKf222u5Ua3RTOC+KBKMs6SJU/
- CB+m09osphPcrsRxBYBV3iWV7XBzgLBUF2UmeZMapcSKUqQhUCCRUfOwlnKk4PQpzZSS
- QR5ODmrdbCTKbcnWMA259jyXf6WS1RGpJjbOC7VExEytwz0sgN6HNWHy5uO0zc/XHUPE
- JCDw==
+ bh=2u8AuwZfEvl8gSV2vH8t7UtlCGt64dWJqFk8PY/6NxU=;
+ b=NinTw86LIWnwlE1ENF0DzudpSJd6+wf/vmKe9bVBIlofR1TMbkDOEcE7lO0UVZRU2W
+ Z3hDYm4+sXVqlU7VkbIQ/g6BkrtMsciW+r4INdJCr7v93IO6ZSk27Je7R6Y8E6DmkAks
+ xQiNeyiqEzXtfp0Xlyf3RK/V48ULtAFRtQaPOaO6bjTkC8TbPZOhB6OTOsiJZgG006Yp
+ gT86zmqaIBKrXSa5cPZW6xuz1gksJILeDJcwOjZX9rSAsQSoFF7TKbSC2+VJEfJspLLY
+ c11ltXeFFkqDV3e648/m4DuU9fnqok3ZMQ6JB1kvOd/oLVI1ZQMg8VflOFExPuQRKSJq
+ QylQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692685967; x=1693290767;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1692690047; x=1693294847;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZFECjWNCTNIXdNVKOdlbK/s4Wr46IvqmBZkGkvXEyvc=;
- b=IHUDRyG9x0/C/kZlYoxeivF2RPDOBPD6TSZOss8qzC27GNcx4OqM5BU8CVq8dSnM87
- Oze6Zeooq6NU20KLgeJvax5uFGkRqMZvWRKc7oot5TtJap+oQ8bQrRZamgHQVcx0hmIr
- BwuyVaYGv7KvAKWX1X1VDxhqncDgA4myvnJFcl+h5XiTkkGnfgSivzTGlZSii3x1Cab2
- yuQhFOXYr0pcy6ZNTEAIyk6ZjakPpxcxtMwcDr2bZ9XODc4EWEZanZ+OGw57MsIOk1nZ
- 3NBEttpkLTT0VubCtpbWg8q6R1VDMxzfBCRf1ltWy7TBkirW36ET7gudJvJJ3oV/mSHN
- xQJw==
-X-Gm-Message-State: AOJu0Yzu8MZ/A46HM4MfejUjZY2zy7k5niKAEUvAwl8OYIGlT1p80SNU
- Mjq12Xo9C+A5kzBv9VkPODs=
-X-Google-Smtp-Source: AGHT+IGJd7Fh1F2SmWg9D+G+7tz+Jnw5MgDU1xzUV18KFNPJhdL9jdU4196wmBvMHoxvV68jz6Fl2w==
-X-Received: by 2002:aa7:c30d:0:b0:522:3a37:a463 with SMTP id
- l13-20020aa7c30d000000b005223a37a463mr6700793edq.20.1692685967113; 
- Mon, 21 Aug 2023 23:32:47 -0700 (PDT)
-Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- dy21-20020a05640231f500b0052a19a75372sm784320edb.90.2023.08.21.23.32.46
+ bh=2u8AuwZfEvl8gSV2vH8t7UtlCGt64dWJqFk8PY/6NxU=;
+ b=juvqJ5WQwINO6c4Su8WiTI7PjwaJb0u+juUSX15rIcNPu4fp4NCTDisy2S62XW2qh8
+ 2+xIPK8nyf+t7KQn+8398Sxuvm/3YAfeDdB33ueqk5pu35eeqN15/ixdPwYiuO1unSIo
+ L1zLFFtPoDoRGEz2VkwzCiKYdQO47LTwT8AroJK4n6hRLPzmoF6E1Z4HG/2T5krXnk/j
+ mxXr2A+CnFQY0HmojzfDAqtvTgLu+MsqwRkEKZx4UkcxELhRtm1kdArWuF1ES0VBx6dX
+ KAQj+GBaXBccAZFEv/YVabl7SMqHy20akO0TZO1fCSFkMuWEaNOtrevD+lXMjVYaM5cm
+ LqcA==
+X-Gm-Message-State: AOJu0Yzgk3klI1j/Tqir0jdcr+Vj7cgdiTlIZshckDkQrMdcwxkKuYHY
+ +YhkZaKUWnf88rXtVyq/RQg=
+X-Google-Smtp-Source: AGHT+IHqjxdllXQnD3DJ6oaX6h15C3QzquCwfmqSxnAfX6DrvquUUsnRFZq3mH4G5SXPuLpkQLdrJQ==
+X-Received: by 2002:a17:906:3089:b0:9a1:c216:c89c with SMTP id
+ 9-20020a170906308900b009a1c216c89cmr251495ejv.66.1692690046783; 
+ Tue, 22 Aug 2023 00:40:46 -0700 (PDT)
+Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
+ by smtp.gmail.com with ESMTPSA id
+ bx8-20020a170906a1c800b0098e0a937a6asm7718385ejb.69.2023.08.22.00.40.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 23:32:46 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v6 8/8] power: regulator: tps65911: add regulator support
-Date: Tue, 22 Aug 2023 09:32:20 +0300
-Message-Id: <20230822063220.5191-9-clamor95@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230822063220.5191-1-clamor95@gmail.com>
-References: <20230822063220.5191-1-clamor95@gmail.com>
+ Tue, 22 Aug 2023 00:40:46 -0700 (PDT)
+Date: Tue, 22 Aug 2023 09:40:44 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [GIT PULL] ARM: tegra: Changes for v2023.10-rc1
+Message-ID: <ZORmfDblupZkjoh-@orome>
+References: <20230818133923.286332-1-thierry.reding@gmail.com>
+ <20230818164943.GZ1515023@bill-the-cat>
+ <0C415156-B22C-4B86-94C6-1D03ED4287ED@gmail.com>
+ <20230818170447.GA1515023@bill-the-cat>
+ <5DFCCFFB-D137-4530-8AF9-C72071842A60@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="k5xEj+3NEZzCDXuo"
+Content-Disposition: inline
+In-Reply-To: <5DFCCFFB-D137-4530-8AF9-C72071842A60@gmail.com>
+User-Agent: Mutt/2.2.10 (2023-03-25)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,455 +98,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The driver provides regulator set/get voltage enable/disable
-functions for TI TPS5911 PMIC.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- drivers/power/regulator/Kconfig              |  11 +
- drivers/power/regulator/Makefile             |   1 +
- drivers/power/regulator/tps65911_regulator.c | 397 +++++++++++++++++++
- 3 files changed, 409 insertions(+)
- create mode 100644 drivers/power/regulator/tps65911_regulator.c
+--k5xEj+3NEZzCDXuo
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index 6454c54855..102ec7bc5f 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -346,6 +346,17 @@ config DM_REGULATOR_TPS65910
- 	regulator types of the TPS65910 (BUCK, BOOST and LDO). It implements
- 	the get/set api for value and enable.
- 
-+config DM_REGULATOR_TPS65911
-+	bool "Enable driver for TPS65911 PMIC regulators"
-+	depends on DM_PMIC_TPS65910
-+	---help---
-+	This config enables implementation of driver-model regulator
-+	uclass features for the TPS65911 PMIC. The driver supports Step-Down
-+	DC-DC Converters for Processor Cores (VDD1 and VDD2), Step-Down DC-DC
-+	Converter for I/O Power (VIO), Controller for External FETs (VDDCtrl)
-+	and LDO Voltage Regulators found in TPS65911 PMIC and implements
-+	get/set api for value and enable.
-+
- config DM_REGULATOR_TPS62360
- 	bool "Enable driver for TPS6236x Power Regulator"
- 	depends on DM_REGULATOR
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index 3ef55dc534..f79932d833 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -32,6 +32,7 @@ obj-$(CONFIG_$(SPL_)DM_REGULATOR_LP873X) += lp873x_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_LP87565) += lp87565_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_STM32_VREFBUF) += stm32-vrefbuf.o
- obj-$(CONFIG_DM_REGULATOR_TPS65910) += tps65910_regulator.o
-+obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS65911) += tps65911_regulator.o
- obj-$(CONFIG_DM_REGULATOR_TPS62360) += tps62360_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS80031) += tps80031_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_STPMIC1) += stpmic1.o
-diff --git a/drivers/power/regulator/tps65911_regulator.c b/drivers/power/regulator/tps65911_regulator.c
-new file mode 100644
-index 0000000000..ba80ed7c54
---- /dev/null
-+++ b/drivers/power/regulator/tps65911_regulator.c
-@@ -0,0 +1,397 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <log.h>
-+#include <power/pmic.h>
-+#include <power/regulator.h>
-+#include <power/tps65910_pmic.h>
-+
-+/* fist row is control registers, second is voltage registers */
-+static const char tps65911_vdd_reg[][TPS65911_VDD_NUM] = {
-+	{ TPS65911_REG_VDD1, TPS65911_REG_VDD2,
-+	  TPS65911_REG_VDDCTRL, TPS65911_REG_VIO },
-+	{ TPS65911_REG_VDD1_OP, TPS65911_REG_VDD2_OP,
-+	  TPS65911_REG_VDDCTRL_OP, 0x00 },
-+};
-+
-+static const char tps65911_ldo_reg[TPS65911_LDO_NUM] = {
-+	TPS65911_REG_LDO1, TPS65911_REG_LDO2, TPS65911_REG_LDO3,
-+	TPS65911_REG_LDO4, TPS65911_REG_LDO5, TPS65911_REG_LDO6,
-+	TPS65911_REG_LDO7, TPS65911_REG_LDO8
-+};
-+
-+static int tps65911_regulator_enable(struct udevice *dev, int op, bool *enable)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->ctrl_reg;
-+	int val, ret;
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		if (val & TPS65910_SUPPLY_STATE_ON)
-+			*enable = true;
-+		else
-+			*enable = false;
-+
-+		return 0;
-+	} else if (op == PMIC_OP_SET) {
-+		val &= ~TPS65910_SUPPLY_STATE_MASK;
-+
-+		if (*enable)
-+			val |= TPS65910_SUPPLY_STATE_ON;
-+
-+		ret = pmic_reg_write(dev->parent, adr, val);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int tps65911_get_enable(struct udevice *dev)
-+{
-+	bool enable = false;
-+	int ret;
-+
-+	ret = tps65911_regulator_enable(dev, PMIC_OP_GET, &enable);
-+	if (ret)
-+		return ret;
-+
-+	return enable;
-+}
-+
-+static int tps65911_set_enable(struct udevice *dev, bool enable)
-+{
-+	return tps65911_regulator_enable(dev, PMIC_OP_SET, &enable);
-+}
-+
-+/**
-+ * tps65911_vdd_volt2hex() - convert voltage in uV into
-+ *			     applicable to register hex value
-+ *
-+ * @uV:		voltage in uV
-+ *
-+ * Return: voltage in hex on success, -ve on failure
-+ */
-+static int tps65911_vdd_volt2hex(int uV)
-+{
-+	if (uV > TPS65911_VDD_VOLT_MAX)
-+		return -EINVAL;
-+
-+	if (uV < TPS65911_VDD_VOLT_MIN)
-+		uV = TPS65911_VDD_VOLT_MIN;
-+
-+	return (uV - TPS65911_VDD_VOLT_BASE) / 12500;
-+}
-+
-+/**
-+ * tps65911_vdd_hex2volt() - convert register hex value into
-+ *			     actual voltage in uV
-+ *
-+ * @hex:	hex value of register
-+ *
-+ * Return: voltage in uV on success, -ve on failure
-+ */
-+static int tps65911_vdd_hex2volt(int hex)
-+{
-+	if (hex > TPS65910_VDD_SEL_MAX)
-+		return -EINVAL;
-+
-+	if (hex < TPS65910_VDD_SEL_MIN)
-+		hex = TPS65910_VDD_SEL_MIN;
-+
-+	return TPS65911_VDD_VOLT_BASE + hex * 12500;
-+}
-+
-+static int tps65911_vio_range[4] = {
-+	1500000, 1800000, 2500000, 3300000
-+};
-+
-+static int tps65911_vio_val(struct udevice *dev, int op, int *uV)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->volt_reg;
-+	int i, val;
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		*uV = 0;
-+
-+		val &= TPS65910_SEL_MASK;
-+
-+		*uV = tps65911_vio_range[val >> 2];
-+
-+		return 0;
-+	}
-+
-+	val &= ~TPS65910_SEL_MASK;
-+
-+	for (i = 0; i < ARRAY_SIZE(tps65911_vio_range); i++)
-+		if (*uV <= tps65911_vio_range[i])
-+			break;
-+
-+	return pmic_reg_write(dev->parent, adr, val | i << 2);
-+}
-+
-+static int tps65911_vdd_val(struct udevice *dev, int op, int *uV)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->volt_reg;
-+	int val, ret;
-+
-+	/* in case vdd is vio */
-+	if (!adr)
-+		return tps65911_vio_val(dev, op, uV);
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		*uV = 0;
-+
-+		ret = tps65911_vdd_hex2volt(val);
-+		if (ret < 0)
-+			return ret;
-+
-+		*uV = ret;
-+		return 0;
-+	}
-+
-+	val = tps65911_vdd_volt2hex(*uV);
-+	if (val < 0)
-+		return val;
-+
-+	return pmic_reg_write(dev->parent, adr, val);
-+}
-+
-+static int tps65911_vdd_probe(struct udevice *dev)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+
-+	uc_pdata->type = REGULATOR_TYPE_BUCK;
-+
-+	/* check for vddctrl and vddio cases */
-+	if (!strcmp("vddctrl", dev->name)) {
-+		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][2];
-+		uc_pdata->volt_reg = tps65911_vdd_reg[1][2];
-+		return 0;
-+	}
-+
-+	if (!strcmp("vddio", dev->name)) {
-+		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][3];
-+		uc_pdata->volt_reg = tps65911_vdd_reg[1][3];
-+		return 0;
-+	}
-+
-+	if (dev->driver_data > 0) {
-+		u8 idx = dev->driver_data - 1;
-+
-+		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][idx];
-+		uc_pdata->volt_reg = tps65911_vdd_reg[1][idx];
-+	}
-+
-+	return 0;
-+}
-+
-+static int vdd_get_value(struct udevice *dev)
-+{
-+	int uV;
-+	int ret;
-+
-+	ret = tps65911_vdd_val(dev, PMIC_OP_GET, &uV);
-+	if (ret)
-+		return ret;
-+
-+	return uV;
-+}
-+
-+static int vdd_set_value(struct udevice *dev, int uV)
-+{
-+	return tps65911_vdd_val(dev, PMIC_OP_SET, &uV);
-+}
-+
-+static const struct dm_regulator_ops tps65911_vdd_ops = {
-+	.get_value  = vdd_get_value,
-+	.set_value  = vdd_set_value,
-+	.get_enable = tps65911_get_enable,
-+	.set_enable = tps65911_set_enable,
-+};
-+
-+U_BOOT_DRIVER(tps65911_vdd) = {
-+	.name = TPS65911_VDD_DRIVER,
-+	.id = UCLASS_REGULATOR,
-+	.ops = &tps65911_vdd_ops,
-+	.probe = tps65911_vdd_probe,
-+};
-+
-+/**
-+ * tps65911_ldo_volt2hex() - convert voltage in uV into
-+ *			     applicable to register hex value
-+ *
-+ * @idx:	regulator index
-+ * @uV:		voltage in uV
-+ *
-+ * Return: voltage in hex on success, -ve on failure
-+ */
-+static int tps65911_ldo_volt2hex(int idx, int uV)
-+{
-+	int step;
-+
-+	if (uV > TPS65911_LDO_VOLT_MAX)
-+		return -EINVAL;
-+
-+	if (uV < TPS65911_LDO_VOLT_BASE)
-+		uV = TPS65911_LDO_VOLT_BASE;
-+
-+	switch (idx) {
-+	case 1:
-+	case 2:
-+	case 4:
-+		step = TPS65911_LDO124_VOLT_STEP;
-+		break;
-+	case 3:
-+	case 5:
-+	case 6:
-+	case 7:
-+	case 8:
-+		step = TPS65911_LDO358_VOLT_STEP;
-+		break;
-+	default:
-+		return -EINVAL;
-+	};
-+
-+	return ((uV - TPS65911_LDO_VOLT_BASE) / step) << 2;
-+}
-+
-+/**
-+ * tps65911_ldo_hex2volt() - convert register hex value into
-+ *			     actual voltage in uV
-+ *
-+ * @idx:	regulator index
-+ * @hex:	hex value of register
-+ *
-+ * Return: voltage in uV on success, -ve on failure
-+ */
-+static int tps65911_ldo_hex2volt(int idx, int hex)
-+{
-+	int step;
-+
-+	switch (idx) {
-+	case 1:
-+	case 2:
-+	case 4:
-+		if (hex > TPS65911_LDO124_VOLT_MAX_HEX)
-+			return -EINVAL;
-+
-+		step = TPS65911_LDO124_VOLT_STEP;
-+		break;
-+	case 3:
-+	case 5:
-+	case 6:
-+	case 7:
-+	case 8:
-+		if (hex > TPS65911_LDO358_VOLT_MAX_HEX)
-+			return -EINVAL;
-+
-+		if (hex < TPS65911_LDO358_VOLT_MIN_HEX)
-+			hex = TPS65911_LDO358_VOLT_MIN_HEX;
-+
-+		step = TPS65911_LDO358_VOLT_STEP;
-+		break;
-+	default:
-+		return -EINVAL;
-+	};
-+
-+	return TPS65911_LDO_VOLT_BASE + hex * step;
-+}
-+
-+static int tps65911_ldo_val(struct udevice *dev, int op, int *uV)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->ctrl_reg;
-+	int idx = dev->driver_data;
-+	int val, hex, ret;
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		*uV = 0;
-+		val &= TPS65911_LDO_SEL_MASK;
-+
-+		ret = tps65911_ldo_hex2volt(idx, val >> 2);
-+		if (ret < 0)
-+			return ret;
-+
-+		*uV = ret;
-+		return 0;
-+	}
-+
-+	hex = tps65911_ldo_volt2hex(idx, *uV);
-+	if (hex < 0)
-+		return hex;
-+
-+	val &= ~TPS65911_LDO_SEL_MASK;
-+
-+	return pmic_reg_write(dev->parent, adr, val | hex);
-+}
-+
-+static int tps65911_ldo_probe(struct udevice *dev)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u8 idx = dev->driver_data - 1;
-+
-+	uc_pdata->type = REGULATOR_TYPE_LDO;
-+	uc_pdata->ctrl_reg = tps65911_ldo_reg[idx];
-+
-+	return 0;
-+}
-+
-+static int ldo_get_value(struct udevice *dev)
-+{
-+	int uV;
-+	int ret;
-+
-+	ret = tps65911_ldo_val(dev, PMIC_OP_GET, &uV);
-+	if (ret)
-+		return ret;
-+
-+	return uV;
-+}
-+
-+static int ldo_set_value(struct udevice *dev, int uV)
-+{
-+	return tps65911_ldo_val(dev, PMIC_OP_SET, &uV);
-+}
-+
-+static const struct dm_regulator_ops tps65911_ldo_ops = {
-+	.get_value  = ldo_get_value,
-+	.set_value  = ldo_set_value,
-+	.get_enable = tps65911_get_enable,
-+	.set_enable = tps65911_set_enable,
-+};
-+
-+U_BOOT_DRIVER(tps65911_ldo) = {
-+	.name = TPS65911_LDO_DRIVER,
-+	.id = UCLASS_REGULATOR,
-+	.ops = &tps65911_ldo_ops,
-+	.probe = tps65911_ldo_probe,
-+};
--- 
-2.39.2
+On Tue, Aug 22, 2023 at 08:16:29AM +0300, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 20:04:47 GMT+03:00, =
+Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
+=D0=BB=D0=B0):
+> >On Fri, Aug 18, 2023 at 08:02:30PM +0300, Svyatoslav Ryhel wrote:
+> >>=20
+> >>=20
+> >> 18 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 19:49:43 GMT+03:0=
+0, Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2=
+(-=D0=BB=D0=B0):
+> >> >On Fri, Aug 18, 2023 at 03:39:22PM +0200, Thierry Reding wrote:
+> >> >
+> >> >> From: Thierry Reding <treding@nvidia.com>
+> >> >>=20
+> >> >> Hi Tom,
+> >> >>=20
+> >> >> The following changes since commit 68c07fc5fdf34f0926cf06fc0c4ebd6f=
+2f3afe19:
+> >> >>=20
+> >> >>   Merge https://source.denx.de/u-boot/custodians/u-boot-usb (2023-0=
+6-21 14:42:50 -0400)
+> >> >>=20
+> >> >> are available in the Git repository at:
+> >> >>=20
+> >> >>   git@source.denx.de:u-boot/custodians/u-boot-tegra.git tags/tegra-=
+for-2023.10-rc1
+> >> >
+> >> >FYI, in your .git/config you can do:
+> >> >	url =3D https://source.denx.de/u-boot/custodians/u-boot-tegra.git
+> >> >	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-tegra.git
+> >> >
+> >> >And this part looks "nicer".  Not a big deal, just an FYI.
+> >> >
+> >> >> for you to fetch changes up to bdf9dead86f06c7d6980c399a4a6339430b5=
+31ec:
+> >> >>=20
+> >> >>   board: htc: endeavoru: add One X support (2023-06-30 15:20:37 +02=
+00)
+> >> >>=20
+> >> >> This passes CI successfully:
+> >> >>=20
+> >> >>   https://source.denx.de/u-boot/custodians/u-boot-tegra/-/pipelines=
+/17411
+> >> >>=20
+> >> >> Thanks,
+> >> >> Thierry
+> >> >>=20
+> >> >> ----------------------------------------------------------------
+> >> >> ARM: tegra: Changes for v2023.10-rc1
+> >> >>=20
+> >> >> This adds support for various new Tegra30 boards (ASUS, LG and HTC)=
+ and
+> >> >> has some other minor enhancements, such as enabling the poweroff co=
+mmand
+> >> >> on several Tegra210 and Tegra186 boards.
+> >> >>=20
+> >> >> ----------------------------------------------------------------
+> >> >> Jonas Schw=C3=B6bel (1):
+> >> >>       configs: tegra-common-post: make PXE and DHCP boot targets op=
+tional
+> >> >>=20
+> >> >> Svyatoslav Ryhel (6):
+> >> >>       configs: tegra-common-post: add GPIO keyboard as STDIN device
+> >> >>       ARM: tegra: add SoC UID calculation function
+> >> >>       board: asus: transformer: add ASUS Transformer T30 family sup=
+port
+> >> >>       board: asus: grouper: add Google Nexus 7 (2012) support
+> >> >>       board: lg: x3: add Optimus 4X HD and Optimus Vu support
+> >> >>       board: htc: endeavoru: add One X support
+> >> >>=20
+> >> >> Thierry Reding (2):
+> >> >>       ARM: tegra: Enable poweroff command on Jetson TX1 and Jetson =
+Nano
+> >> >>       ARM: tegra: Enable poweroff command on Jetson TX2
+> >> >>=20
+> >> >> Tomasz Maciej Nowak (1):
+> >> >>       ARM: dts: trimslice: sync SPI node with Linux dts
+> >> >
+> >> >Since I'm not sure if this is v8 or v9, given when v9 was posted, I've
+> >> >applied this PR now, as I had said I wanted this in.  I do have two
+> >> >requests for you Svyatoslav, however.  First, if there's changes that
+> >> >are missing in master, please post those ASAP and we'll get them in, =
+for
+> >> >v2023.10.=20
+> >>=20
+> >> Patches Thierry applied are v8, while v9 has significant improvements.
+> >
+> >OK, I've updated patchwork to try and reflect this too.
+> >
+>=20
+> Merged patches are not the most recent I have sent. How to fix this?
 
+Usually once something has been merged it's difficult to back it out. So
+unless Tom can (and is willing to) somehow redo the merge with the
+newest patches, you're going to have to rebase what you have and send
+out as follow-up patches.
+
+That's one of the reasons why you shouldn't keep sending new versions of
+patches once things have settled down and there haven't been any more
+review comments on the list. The assumption is that when you send
+patches out you think they are all done. They may still need to be
+updated based on review comments and that's fine because there's
+communication on the mailing list to indicate so. Once discussions have
+stopped it is assumed that the patches are done. This doesn't
+necessarily mean that they get picked up right away, because people
+might be busy.
+
+The prudent thing to do in such cases, in my experience, is to leave the
+patches as-is and do any subsequent changes in follow-up patches. If you
+quickly notice that there will need to be more changes, then let people
+know as soon as possible, otherwise they may apply patches and run tests
+on them, all of which will have to be redone if you repost a new version
+later on.
+
+In this particular case I was in the process of preparing the pull
+request to Tom and didn't see v9 until I had sent out the PR.
+
+Depending on who you're sending patches to the "point of no return"
+could be a lot sooner. Once patches are applied to a custodian tree and
+other patches have been applied on top, switching out new versions of
+patches can become really messy. Once they hit the mainline it often
+becomes impossible.
+
+Thierry
+
+--k5xEj+3NEZzCDXuo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTkZnoACgkQ3SOs138+
+s6Gd9hAApkCEONx6VxC+PYeHLF11adOPxTc27Qoj0cQspPZWZDwigD1CE+aNND5z
+7IpdAalFFBPx5B9mdXagZ9zBy426o5F6r7dFyAysk5aeE/DamGR4bSLWGBKa0mIJ
+GiPB+yXDgm9ZNfnZTDg2LAU6ZUqfksxG4WjZznD9VSC93Bk4OtD3GQmSpdmIdpPA
+J8jW5H9crvf/D29OLrUnKHvteMUxUlJNWLw4n1unSiFs3nD52pPmTq+HMGe9NjDd
+sDJ1mu+uGRKVDmRMj1SJ9Fb6KFqbYiCUmt68qisB9XaR7N31Djd4Bq/82B+VMo8H
+ib8e+PGh7vlqvQ3Z88D9eRfvkXqLK2TBStrxom9UAx8IFercYrg6TLpDYLO+9x5g
+NatwUMVU29B4k+G8njRvNKRaGXqj9RzSGRyHQNwdsYIcD+g0/NO98HDxU8gD7EE0
+vSyAtAm1r+BIQkKHVXu98I1bss24exsH2/fohuIB3O1oh5B/ugRYPtsAY6oOclyw
+waAwzTmLuhNMbvtXwbXJuohC6OdL4kh3qnjjg0p0A9KRGQAY0vI0xyv6cvkx/XIC
+RRagdKbTDBtMdLq7Gh++CgCo+AeHCjqb97oPPq8mCUNnRuM6amasJjX7at2MsahC
+o+6BHT0Xr/1B4ab6wNzgNQtV9Kaypd1+JwHqSNMkIGrlNSO+JqI=
+=2c6J
+-----END PGP SIGNATURE-----
+
+--k5xEj+3NEZzCDXuo--
