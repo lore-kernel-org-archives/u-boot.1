@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACB7EE49A3
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 09:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7DD0EE4993
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 09:39:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1612D864B7;
-	Tue, 22 Aug 2023 11:38:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5614D864C3;
+	Tue, 22 Aug 2023 11:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z297Z67h";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rljex4VG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78C7D864B4; Tue, 22 Aug 2023 11:38:40 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 8FAD1864BF; Tue, 22 Aug 2023 11:38:42 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C25B1864AF
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:38:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF0E0864B1
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 11:38:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2b9b5ee9c5aso66999451fa.1
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 02:38:37 -0700 (PDT)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2ba1e9b1fa9so66013531fa.3
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 02:38:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692697117; x=1693301917;
+ d=linaro.org; s=google; t=1692697119; x=1693301919;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SvRHG8MlVJT0eTt3Mg5xTPVVHznraxxGDudki/j9xKA=;
- b=Z297Z67hhzHQEoujgz1WgWCXoxXhBDGbq8euRuYwkzjK0iaDTjCx+/ng9taS2fHh22
- MEKE8T5C9iAF9nYbIHie+f2Fqpp7b/FYG2ApUUL2jRb0Ziqu1U8SCvRX3+ojaoaKeJb7
- VWk+pHSXbIm7CU/lhqeUe6wizNw98cE5wBysh2fr3eQJ4YBmJOPqc6qJat5SSc65BJqt
- nykYtw2Z6BNT+5E9NL/lmkl4628Vyir4lm0q2hYwrth8F784gplJOLuJW5bM0afUiqyE
- HYpiHCQJLC0jNeZKJPE195X0lvt0lydWBZWAcSb93iHyIBQKcU+/2foB9th7o2P0ijoI
- s9Pg==
+ bh=8mFBP3OcXYCjMtYhgV1zzotGbPe2QNHmJQzyLd2LlzM=;
+ b=Rljex4VGqibEFjB3qLyg2uXUm+IVUCk4oWT+fVIYRB1WNEDFi8YaoyHYgCxXJkCPgi
+ 2gqiJN2+NjfFXuV+KL5BCETo88iD8fRysFZXB/9qQOn+xy1xMMu+6kTqKTfmtMzmNne/
+ GEWZBtE/VyDN8Dj23/HdCLG3nVNMYUbxO6BfSRNGlifO2850lt9aqk/iFR2nkvDp0W75
+ Kf9yqqXujZyevOn7p9bwiDaz0P8FDkbFlrZvYWWh/k3zf2LipXwuE0fqst7tYNNdXu+c
+ K4MiivcitTbrD9DDjLTHstTu9UcwmBDnIPwpnS9yNLQUyqQtVhuOlQxGd7rgm4XbVuRR
+ 8PCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692697117; x=1693301917;
+ d=1e100.net; s=20221208; t=1692697119; x=1693301919;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SvRHG8MlVJT0eTt3Mg5xTPVVHznraxxGDudki/j9xKA=;
- b=P1IqFKxOM1AJEHVJU4J3mBteHC1vkhVm2T4DXvGQTPCuskk40uMlLZ2o/+sln46jNu
- hNY2zgqFXNpuHC1ShMT0qJyYmY+9QQulISgc3JA93Yv6Tc++NT04Gbxu5o3jUkQ4TQO4
- FFwIo8/BVSYsiVBZuqxoqP7kyO5RhFHQpbjiPAG63zpNDofhetznWiW4iJ8FJZ3JY9rD
- rLSWyhhynbqaKJQdLi4M00d55lqHb7YXLN43QhkKJteFo5ihNgVaPzdH1TuIHOnNskHB
- eOlkE97Lh3UYWDHWiJRXBgNTU9yCGfWsXxQVdxAuQ8eT9Jr01MnG7KC1sWBjMOg0LHsQ
- tciA==
-X-Gm-Message-State: AOJu0YyhOU94JmhHd+YF+F8rRPwr0Y2LFwszXPKAKTM3Uc0E7draKWHa
- qe9PjYgMRSsTmZFkW2ZSJdknBF9L9Y6YUHsUJuM8YA==
-X-Google-Smtp-Source: AGHT+IEyj8uxJhzXo3jm39RNgLeCAvdVSOrcgewuZ3152yw5XifIYuAaNLW+kp5li/xYDg0wD5yRTQ==
-X-Received: by 2002:a2e:a0cf:0:b0:2b6:ebc6:1e86 with SMTP id
- f15-20020a2ea0cf000000b002b6ebc61e86mr6970642ljm.47.1692697116889; 
- Tue, 22 Aug 2023 02:38:36 -0700 (PDT)
+ bh=8mFBP3OcXYCjMtYhgV1zzotGbPe2QNHmJQzyLd2LlzM=;
+ b=eLEtTMXLUKeN2D2f662YyS0BWyEn1YYpJNJlcPjAwXhNR6ja38IMy67lrdDILxlUo+
+ FVgvFumkHFg2qzDP0ywd3aWB460EpMLjKgqjSsqrAY/RRHkP/6PTX+OVqzjopVZtZ5Xs
+ xdswQy181lj0vlzi0Yo8bCG0IBbOZaRfpoq2U42u8w58duIcffadrMN6Nzw1pb56bJK0
+ JAWKBxfG3XM/PoQBD1pCpyuzsfowbMyyO6ZePcDm5qU0wGUzogZiMB3erxyW52ZWOfle
+ EPAd+nqnuxWdQMvBt+7yQi5DM711C3Pv50hUlH8PGi4RCKujH6jA6Cjps+cxQA0v9k40
+ wfxQ==
+X-Gm-Message-State: AOJu0Yzfgdtgu2J+zHJ3k4ylToMC8OC92SpkTP+a+8SVMp71zgHuJgHe
+ DWdgNJIwrhTW4fMfWLlbbwtOqGSLRXLow5SNoN8UyQ==
+X-Google-Smtp-Source: AGHT+IGeVhEvSYNCExwhJISQmTKhFmR00XF7Kei6hoEuds1MGb6I2s8kVYY4U2GLWNh2hODE8uQqeA==
+X-Received: by 2002:a2e:9b97:0:b0:2bc:b694:6d6e with SMTP id
+ z23-20020a2e9b97000000b002bcb6946d6emr4910776lji.27.1692697119116; 
+ Tue, 22 Aug 2023 02:38:39 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- i9-20020a2e8089000000b002b724063010sm2649637ljg.47.2023.08.22.02.38.35
+ i9-20020a2e8089000000b002b724063010sm2649637ljg.47.2023.08.22.02.38.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Aug 2023 02:38:36 -0700 (PDT)
+ Tue, 22 Aug 2023 02:38:38 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv7 07/15] net/lwip: implement ping cmd
-Date: Tue, 22 Aug 2023 15:36:06 +0600
-Message-Id: <20230822093614.4717-8-maxim.uvarov@linaro.org>
+Subject: [PATCHv7 08/15] net/lwip: add lwIP configuration
+Date: Tue, 22 Aug 2023 15:36:07 +0600
+Message-Id: <20230822093614.4717-9-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230822093614.4717-1-maxim.uvarov@linaro.org>
 References: <20230822093614.4717-1-maxim.uvarov@linaro.org>
@@ -93,171 +93,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot recently got support for an alternative network stack using LWIP.
-Replace ping command with the LWIP variant while keeping the output and
-error messages identical. ping uses lwIP contrib/apps/ping/ping.c code.
+lwip configuration can be tuned with header file.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- include/net/lwip.h             | 15 ++++++++++++++
- net/lwip/Makefile              |  1 +
- net/lwip/apps/ping/Makefile    | 11 ++++++++++
- net/lwip/apps/ping/lwip_ping.c | 37 ++++++++++++++++++++++++++++++++++
- net/lwip/apps/ping/lwip_ping.h | 15 ++++++++++++++
- net/lwip/apps/ping/ping.h      | 19 +++++++++++++++++
- 6 files changed, 98 insertions(+)
- create mode 100644 net/lwip/apps/ping/Makefile
- create mode 100644 net/lwip/apps/ping/lwip_ping.c
- create mode 100644 net/lwip/apps/ping/lwip_ping.h
- create mode 100644 net/lwip/apps/ping/ping.h
+ net/lwip/lwipopts.h | 197 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 197 insertions(+)
+ create mode 100644 net/lwip/lwipopts.h
 
-diff --git a/include/net/lwip.h b/include/net/lwip.h
-index 724f68b148..aa82d71715 100644
---- a/include/net/lwip.h
-+++ b/include/net/lwip.h
-@@ -2,6 +2,8 @@
- 
- int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
- 		char *const argv[]);
-+int do_lwip_ping(struct cmd_tbl *cmdtp, int flag, int argc,
-+		 char *const argv[]);
- 
- /**
-  * ulwip_dns() - creates the DNS request to resolve a domain host name
-@@ -56,3 +58,16 @@ int ulwip_tftp(ulong addr, const char *filename);
-  * Returns: 0 for success, !0 if error
- */
- int ulwip_wget(ulong addr, char *url);
-+
-+/**
-+ * ulwip_ping - create the ping request
-+ *
-+ * This function creates the ping for  address provided in parameters.
-+ * After this function you need to invoke the polling
-+ * loop to process network communication.
-+ *
-+ *
-+ * @ping_addr: IP address to ping
-+ * Returns: 0 for success, !0 if error
-+*/
-+int ulwip_ping(char *ping_addr);
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 4c6df94807..8b3e843426 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -67,5 +67,6 @@ obj-$(CONFIG_NET) += port/sys-arch.o
- 
- obj-$(CONFIG_CMD_DHCP) += apps/dhcp/lwip-dhcp.o
- obj-$(CONFIG_CMD_DNS) += apps/dns/lwip-dns.o
-+obj-$(CONFIG_CMD_PING) += apps/ping/
- obj-$(CONFIG_CMD_TFTPBOOT) += apps/tftp/
- obj-$(CONFIG_CMD_WGET) += apps/http/
-diff --git a/net/lwip/apps/ping/Makefile b/net/lwip/apps/ping/Makefile
+diff --git a/net/lwip/lwipopts.h b/net/lwip/lwipopts.h
 new file mode 100644
-index 0000000000..dc63feb7b5
+index 0000000000..dec7638cd4
 --- /dev/null
-+++ b/net/lwip/apps/ping/Makefile
-@@ -0,0 +1,11 @@
-+ccflags-y += -I$(srctree)/net/lwip/port/include
-+ccflags-y += -I$(srctree)/net/lwip/lwip-external/src/include -I$(srctree)/net/lwip
-+ccflags-y += -I$(obj)
-+
-+.PHONY: $(obj)/ping.c
-+$(obj)/ping.o: $(obj)/ping.c
-+$(obj)/ping.c:
-+	cp $(srctree)/net/lwip/lwip-external/contrib/apps/ping/ping.c $(obj)/ping.c
-+
-+obj-$(CONFIG_CMD_PING) += ping.o
-+obj-$(CONFIG_CMD_PING) += lwip_ping.o
-diff --git a/net/lwip/apps/ping/lwip_ping.c b/net/lwip/apps/ping/lwip_ping.c
-new file mode 100644
-index 0000000000..a2fe58f5e9
---- /dev/null
-+++ b/net/lwip/apps/ping/lwip_ping.c
-@@ -0,0 +1,37 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+/*
-+ * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
-+ */
-+
-+#include "lwip/opt.h"
-+#include "lwip/ip_addr.h"
-+#include "ping.h"
-+#include "lwip_ping.h"
-+
-+static ip_addr_t ip_target;
-+
-+static int ulwip_ping_tmo(void)
-+{
-+
-+	log_err("ping failed; host %s is not alive\n", ipaddr_ntoa(&ip_target));
-+	return 1;
-+}
-+
-+int ulwip_ping(char *ping_addr)
-+{
-+	int err;
-+
-+	err = ipaddr_aton(ping_addr, &ip_target);
-+	if (!err) {
-+		log_err("Invalid ip address\n");
-+		return -1;
-+	}
-+
-+	ulwip_set_tmo(ulwip_ping_tmo);
-+
-+	ping_init(&ip_target);
-+	ping_send_now();
-+
-+	return 0;
-+}
-diff --git a/net/lwip/apps/ping/lwip_ping.h b/net/lwip/apps/ping/lwip_ping.h
-new file mode 100644
-index 0000000000..0374f07d9e
---- /dev/null
-+++ b/net/lwip/apps/ping/lwip_ping.h
-@@ -0,0 +1,15 @@
++++ b/net/lwip/lwipopts.h
+@@ -0,0 +1,197 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +
 +/*
 + * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
 + */
 +
-+#ifndef LWIP_PING_H
-+#define LWIP_PING_H
++#ifndef LWIP_LWIPOPTS_H
++#define LWIP_LWIPOPTS_H
 +
-+#include <lwip/ip_addr.h>
++#include "lwipopts.h"
 +
-+void ping_raw_init(void);
-+void ping_send_now(void);
++#if defined(CONFIG_LWIP_LIB_DEBUG)
++#define LWIP_DEBUG 1
++#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_ALL
++#define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
++#define ETHARP_DEBUG                    LWIP_DBG_ON
++#define NETIF_DEBUG                     LWIP_DBG_ON
++#define PBUF_DEBUG                      LWIP_DBG_OFF
++#define API_LIB_DEBUG                   LWIP_DBG_ON
++#define API_MSG_DEBUG                   LWIP_DBG_OFF
++#define SOCKETS_DEBUG                   LWIP_DBG_OFF
++#define ICMP_DEBUG                      LWIP_DBG_OFF
++#define IGMP_DEBUG                      LWIP_DBG_OFF
++#define INET_DEBUG                      LWIP_DBG_OFF
++#define IP_DEBUG                        LWIP_DBG_ON
++#define IP_REASS_DEBUG                  LWIP_DBG_OFF
++#define RAW_DEBUG                       LWIP_DBG_OFF
++#define MEM_DEBUG                       LWIP_DBG_OFF
++#define MEMP_DEBUG                      LWIP_DBG_OFF
++#define SYS_DEBUG                       LWIP_DBG_OFF
++#define TIMERS_DEBUG                    LWIP_DBG_OFF
++#define TCP_DEBUG                       LWIP_DBG_OFF
++#define TCP_INPUT_DEBUG                 LWIP_DBG_OFF
++#define TCP_FR_DEBUG                    LWIP_DBG_OFF
++#define TCP_RTO_DEBUG                   LWIP_DBG_OFF
++#define TCP_CWND_DEBUG                  LWIP_DBG_OFF
++#define TCP_WND_DEBUG                   LWIP_DBG_OFF
++#define TCP_OUTPUT_DEBUG                LWIP_DBG_OFF
++#define TCP_RST_DEBUG                   LWIP_DBG_OFF
++#define TCP_QLEN_DEBUG                  LWIP_DBG_OFF
++#define UDP_DEBUG                       LWIP_DBG_OFF
++#define TCPIP_DEBUG                     LWIP_DBG_OFF
++#define SLIP_DEBUG                      LWIP_DBG_OFF
++#define DHCP_DEBUG                      LWIP_DBG_ON
++#define AUTOIP_DEBUG                    LWIP_DBG_ON
++#define DNS_DEBUG                       LWIP_DBG_ON
++#define IP6_DEBUG                       LWIP_DBG_OFF
++#define DHCP6_DEBUG                     LWIP_DBG_OFF
++#else
++#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_ALL
++#define LWIP_DBG_TYPES_ON               LWIP_DBG_OFF
++#define ETHARP_DEBUG                    LWIP_DBG_OFF
++#define NETIF_DEBUG                     LWIP_DBG_OFF
++#define PBUF_DEBUG                      LWIP_DBG_OFF
++#define API_LIB_DEBUG                   LWIP_DBG_OFF
++#define API_MSG_DEBUG                   LWIP_DBG_OFF
++#define SOCKETS_DEBUG                   LWIP_DBG_OFF
++#define ICMP_DEBUG                      LWIP_DBG_OFF
++#define IGMP_DEBUG                      LWIP_DBG_OFF
++#define INET_DEBUG                      LWIP_DBG_OFF
++#define IP_DEBUG                        LWIP_DBG_OFF
++#define IP_REASS_DEBUG                  LWIP_DBG_OFF
++#define RAW_DEBUG                       LWIP_DBG_OFF
++#define MEM_DEBUG                       LWIP_DBG_OFF
++#define MEMP_DEBUG                      LWIP_DBG_OFF
++#define SYS_DEBUG                       LWIP_DBG_OFF
++#define TIMERS_DEBUG                    LWIP_DBG_OFF
++#define TCP_DEBUG                       LWIP_DBG_OFF
++#define TCP_INPUT_DEBUG                 LWIP_DBG_OFF
++#define TCP_FR_DEBUG                    LWIP_DBG_OFF
++#define TCP_RTO_DEBUG                   LWIP_DBG_OFF
++#define TCP_CWND_DEBUG                  LWIP_DBG_OFF
++#define TCP_WND_DEBUG                   LWIP_DBG_OFF
++#define TCP_OUTPUT_DEBUG                LWIP_DBG_OFF
++#define TCP_RST_DEBUG                   LWIP_DBG_OFF
++#define TCP_QLEN_DEBUG                  LWIP_DBG_OFF
++#define UDP_DEBUG                       LWIP_DBG_OFF
++#define TCPIP_DEBUG                     LWIP_DBG_OFF
++#define SLIP_DEBUG                      LWIP_DBG_OFF
++#define DHCP_DEBUG                      LWIP_DBG_OFF
++#define AUTOIP_DEBUG                    LWIP_DBG_OFF
++#define DNS_DEBUG                       LWIP_DBG_OFF
++#define IP6_DEBUG                       LWIP_DBG_OFF
++#define DHCP6_DEBUG                     LWIP_DBG_OFF
++#endif
++#define LWIP_TESTMODE                   0
 +
-+#endif /* LWIP_PING_H */
-diff --git a/net/lwip/apps/ping/ping.h b/net/lwip/apps/ping/ping.h
-new file mode 100644
-index 0000000000..006a18c658
---- /dev/null
-+++ b/net/lwip/apps/ping/ping.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++#if defined(CONFIG_LWIP_LIB_NOASSERT)
++#define LWIP_NOASSERT 1
++#define LWIP_ASSERT(message, assertion)
++#endif
 +
-+#include <net/ulwip.h>
-+#include "lwip/ip_addr.h"
++#include "lwip/debug.h"
 +
-+#define LWIP_DEBUG 1 /* ping_time is under ifdef*/
-+#define PING_RESULT(cond) { \
-+	if (cond == 1) { \
-+		printf("host %s a alive\n", ipaddr_ntoa(addr)); \
-+		printf(" %"U32_F" ms\n", (sys_now() - ping_time)); \
-+		ulwip_exit(0); \
-+	} else { \
-+		printf("ping failed; host %s in not alive\n",\
-+		       ipaddr_ntoa(addr)); \
-+		ulwip_exit(-1); \
-+	} \
-+     } while (0);
++#define SYS_LIGHTWEIGHT_PROT            0
++#define NO_SYS                          1
 +
-+void ping_init(const ip_addr_t *ping_addr);
++#define LWIP_IPV6			0
++
++#define MEM_ALIGNMENT                   1
++#define MEM_SIZE                        1600
++
++#define MEMP_NUM_PBUF                   4
++#define MEMP_NUM_RAW_PCB                2
++#define MEMP_NUM_UDP_PCB                4
++#define MEMP_NUM_TCP_PCB                2
++#define MEMP_NUM_TCP_PCB_LISTEN         2
++#define MEMP_NUM_TCP_SEG                16
++#define MEMP_NUM_REASSDATA              1
++#define MEMP_NUM_ARP_QUEUE              2
++#define MEMP_NUM_SYS_TIMEOUT            4
++#define MEMP_NUM_NETBUF                 2
++#define MEMP_NUM_NETCONN               32
++#define MEMP_NUM_TCPIP_MSG_API          8
++#define MEMP_NUM_TCPIP_MSG_INPKT        8
++#define PBUF_POOL_SIZE                  8
++
++#define LWIP_ARP                        1
++#define ARP_TABLE_SIZE			10
++#define ARP_QUEUEING			1
++
++#define IP_FORWARD                      0
++#define IP_OPTIONS_ALLOWED              1
++#define IP_REASSEMBLY                   1
++#define IP_FRAG                         1
++#define IP_REASS_MAXAGE                 3
++#define IP_REASS_MAX_PBUFS              4
++#define IP_FRAG_USES_STATIC_BUF         0
++
++#define IP_DEFAULT_TTL                  255
++
++#define LWIP_ICMP                       1
++
++#define LWIP_RAW                        1
++
++#if defined(CONFIG_LWIP_LIB_DHCP)
++#define LWIP_DHCP                       1
++#define LWIP_DHCP_BOOTP_FILE		1
++#else
++#define LWIP_DHCP                       0
++#endif
++#define LWIP_DHCP_DOES_ACD_CHECK	0
++
++#define LWIP_AUTOIP                     0
++
++#define LWIP_SNMP                       0
++
++#define LWIP_IGMP                       0
++
++#if defined(CONFIG_LWIP_LIB_DNS)
++#define LWIP_DNS                        1
++#else
++#define LWIP_DNS                        0
++#endif
++
++#if defined(CONFIG_LWIP_LIB_TCP)
++#define LWIP_UDP                        1
++#else
++#define LWIP_UDP                        0
++#endif
++
++#if defined(CONFIG_LWIP_LIB_TCP)
++#define LWIP_TCP                        1
++#else
++#define LWIP_TCP                        0
++#endif
++
++#define LWIP_LISTEN_BACKLOG             0
++
++#define PBUF_LINK_HLEN                  14
++#define PBUF_POOL_BUFSIZE               LWIP_MEM_ALIGN_SIZE(TCP_MSS + 40 + PBUF_LINK_HLEN)
++
++#define LWIP_HAVE_LOOPIF                0
++
++#define LWIP_NETCONN                    0
++#define LWIP_DISABLE_MEMP_SANITY_CHECKS 1
++
++#define LWIP_SOCKET                     0
++#define SO_REUSE                        0
++
++#define LWIP_STATS                      0
++
++#define PPP_SUPPORT                     0
++
++#define LWIP_TCPIP_CORE_LOCKING		0
++
++#if defined(CONFIG_LWIP_LIB_LOOPBACK)
++#define LWIP_NETIF_LOOPBACK		1
++#else
++#define LWIP_NETIF_LOOPBACK		0
++#endif
++/* use malloc instead of pool */
++#define MEMP_MEM_MALLOC                 1
++#define MEMP_MEM_INIT			1
++#define MEM_LIBC_MALLOC			1
++
++#endif /* LWIP_LWIPOPTS_H */
 -- 
 2.30.2
 
