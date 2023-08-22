@@ -4,60 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF21AEE4996
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 03:47:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 770E7EE49A3
+	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 04:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 906CD871D1;
-	Tue, 22 Aug 2023 05:47:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rucky.eu
+	by phobos.denx.de (Postfix) with ESMTP id 9BBF286993;
+	Tue, 22 Aug 2023 06:01:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=rucky.eu header.i=@rucky.eu header.b="qN7lE3Jo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oR1qicdg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 183FA87015; Mon, 21 Aug 2023 20:02:13 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF9FE871C8; Tue, 22 Aug 2023 06:01:29 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 582B286813
- for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 20:02:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0188F86986
+ for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 06:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=rucky.eu
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=roland@rucky.eu
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RV0g35DqKz9spd;
- Mon, 21 Aug 2023 20:02:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rucky.eu; s=MBO0001;
- t=1692640927;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mm4QX4pM2laWWU9302315dWsg+ecRg9iKviuZ/BttxE=;
- b=qN7lE3JotuVcKokSVafcq3gRsZU3njHaKNlMRfk1PdQC+jgKgeEi/pHFsFzikO919ZIXZl
- 1F/2cFQUxniOYt6nFpHC7wuibgZUWWhgvPfTP61BkscW3WOoNOHzEGWHV4PgX8z8LgX2lU
- zgUPCSXNHaCj1BLH9m8I4mw9A4BExYmMSGC8FcL9CG4eakYbvUmx8Uxvit16AXGxvOsjtA
- kxgdzBIqyN5sTWGG8czXG1uysZBbMY8KeCTfDqcGGxTeRYh6eK6D443UTl3T8H45+nYpO/
- pyTQCdoqifxzcEi9Q6sx5tscogx7gSu6zD2T82w7Pg6bCCEaOEVrfq8wEHAsYQ==
-Message-ID: <f2a1b35d-3c3f-45f0-9f7e-9c516be0089f@rucky.eu>
-Date: Mon, 21 Aug 2023 20:02:06 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-26f3e26e59cso1428621a91.0
+ for <u-boot@lists.denx.de>; Mon, 21 Aug 2023 21:01:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692676885; x=1693281685;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=eHTwR6vMgwGFqQy7CPmYT2JG6w8jiwetazFIj+f4NRA=;
+ b=oR1qicdg7Uu9BWtxqhcuAW9HyN3kL1zZ5fOCfpdoYRtiV6yIUh03r0UIQoYiOgNc5d
+ 0YhH4bSnTxcusEReEqESiGdDoLspX4BU5Z68J7/S2ULM+0kRLbV+DT/rwTf4sri8zvhw
+ M+8GtSyM6d9+xdzb+ew32jkLc8cSJ1gKa1vPu9zwKDY/L/JfRxw38XJWlTbwVjC7DN0G
+ xf6uZ1aEmE4dknnzVZGOACVGM9nTS8vN0T5uLqjXmKUvTZa4HUteeFW3Gavxp2hgHIeh
+ ixDBEFsPlNHT/su7Vk1OkQZgq1yDdhyOAUalkBydBKTURGRhATjMbUJpYUDROXeLjFnh
+ ZkZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692676885; x=1693281685;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=eHTwR6vMgwGFqQy7CPmYT2JG6w8jiwetazFIj+f4NRA=;
+ b=L+7K7UjuKYwXedBOkJifkVCkiQnR55UdOtc2qkljU+aWYDnt4o/IoIW5MFjuouz2ab
+ +pgIldspWCr0ov+1rMuDeDGSZLVadl9/tGyW6c6TSzbdc5Kw/GPvJijrsVHgAPDmCNZf
+ DQMLcsnB24J4YqoHkNDUOfTJiMLoIC65bJdj54ed4m95PAJBCwD4qJAM2mqje7r+W2FH
+ aS4ycMLNJXZnMc2yNlHvhBeulUH5cafQjyyhax4b8Tj5CZJtH2W4REo5hsVm0YnafBKy
+ BP1oJe/fUHYuh2DzzHQgBsKTv8R5hvEX0E+308PmOR4GFdcNTp3toS4PZfexrHbaH8eg
+ p3LA==
+X-Gm-Message-State: AOJu0YyTYtc+2oeK+mN+hr0IjxF9gxCyUfm1ZlC9RNaFKf7e4SU7rca5
+ mtjIe+5VZaesaiacWBBSFjVZjw==
+X-Google-Smtp-Source: AGHT+IEuFnCJNlmzBBsRYJZDLkGHdsBG2aF9VgoLQKN/jdqqNf8yY0DHIFJpbHeFyr8jDQvY2tBWHw==
+X-Received: by 2002:a17:90b:1c8f:b0:26b:455b:8d61 with SMTP id
+ oo15-20020a17090b1c8f00b0026b455b8d61mr12070222pjb.22.1692676885214; 
+ Mon, 21 Aug 2023 21:01:25 -0700 (PDT)
+Received: from ?IPV6:2401:4900:1f3b:3924:9d49:2d2a:63e6:8974?
+ ([2401:4900:1f3b:3924:9d49:2d2a:63e6:8974])
+ by smtp.gmail.com with ESMTPSA id
+ b3-20020a17090a6e0300b0026596b8f33asm8532960pjk.40.2023.08.21.21.01.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Aug 2023 21:01:24 -0700 (PDT)
+Message-ID: <1698468d-2980-6662-78ca-23da240b06f5@linaro.org>
+Date: Tue, 22 Aug 2023 09:31:21 +0530
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] riscv: cpu: make riscv_cpu_probe to
- EVT_DM_POST_INIT_R callback
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Subject: Re: [PATCH v2 1/7] ufs: Convert quirks to BIT() macro
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: n-francis@ti.com
+References: <20230816150555.245028-1-marek.vasut+renesas@mailbox.org>
 Content-Language: en-US
-To: Chanho Park <chanho61.park@samsung.com>
-References: <20230818051103.2427590-1-chanho61.park@samsung.com>
- <CGME20230818052645epcas2p3df52c8522cd903f869d366fed46ea89d@epcas2p3.samsung.com>
- <20230818051103.2427590-3-chanho61.park@samsung.com>
-Cc: u-boot@lists.denx.de
-From: Roland Ruckerbauer <roland@rucky.eu>
-In-Reply-To: <20230818051103.2427590-3-chanho61.park@samsung.com>
+From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+In-Reply-To: <20230816150555.245028-1-marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 22 Aug 2023 05:47:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,69 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tested on visionfive2, it works.
-
-On 18.08.23 07:11, Chanho Park wrote:
-> Since the Patch 55171aedda88, VisionFive2 booting has been broken [1].
-> VisionFive2 board requires to enable CONFIG_TIMER_EARLY but booting went
-> to panic from initr_dm_devices due to lack of a timer device.
->
-> - Error logs
-> initcall sequence 00000000fffd8d38 failed at call 00000000402185e4
-> (err=-19)
->
-> Thus, we need to move riscv_cpu_probe function in order to register
-> the timer earlier than initr_dm_devices.
->
-> Fixes: 7fe32b3442f0 ("event: Convert arch_cpu_init_dm() to use events")
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
-Tested-by: Roland Ruckerbauer <mail@ruabmbua.dev>
+On 8/16/23 8:35 PM, Marek Vasut wrote:
+> Use BIT() macro for quirks, no functional change.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
->   arch/riscv/cpu/cpu.c | 11 +++--------
->   1 file changed, 3 insertions(+), 8 deletions(-)
->
-> diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
-> index ecfb1fb08c4b..0b4208e72199 100644
-> --- a/arch/riscv/cpu/cpu.c
-> +++ b/arch/riscv/cpu/cpu.c
-> @@ -66,7 +66,7 @@ static inline bool supports_extension(char ext)
->   #endif /* CONFIG_CPU */
->   }
+> Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> Cc: Faiz Abbas <faiz_abbas@ti.com>
+> ---
+> V2: New patch
+> ---
+>   drivers/ufs/ufs.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+> index 8a38832b05f..5a5c13aefdf 100644
+> --- a/drivers/ufs/ufs.h
+> +++ b/drivers/ufs/ufs.h
+> @@ -717,7 +717,7 @@ struct ufs_hba {
+>    * the LCC transmission on UFS device (by clearing TX_LCC_ENABLE
+>    * attribute of device to 0).
+>    */
+> -#define UFSHCD_QUIRK_BROKEN_LCC				0x1
+> +#define UFSHCD_QUIRK_BROKEN_LCC				BIT(0)
 >   
-> -static int riscv_cpu_probe(void)
-> +static int riscv_cpu_probe(void *ctx, struct event *event)
->   {
->   #ifdef CONFIG_CPU
->   	int ret;
-> @@ -79,6 +79,7 @@ static int riscv_cpu_probe(void)
->   
->   	return 0;
->   }
-> +EVENT_SPY(EVT_DM_POST_INIT_R, riscv_cpu_probe);
->   
->   /*
->    * This is called on secondary harts just after the IPI is init'd. Currently
-> @@ -95,7 +96,7 @@ int riscv_cpu_setup(void *ctx, struct event *event)
->   {
->   	int ret;
->   
-> -	ret = riscv_cpu_probe();
-> +	ret = riscv_cpu_probe(ctx, event);
->   	if (ret)
->   		return ret;
->   
-> @@ -149,12 +150,6 @@ EVENT_SPY(EVT_DM_POST_INIT_F, riscv_cpu_setup);
->   
->   int arch_early_init_r(void)
->   {
-> -	int ret;
-> -
-> -	ret = riscv_cpu_probe();
-> -	if (ret)
-> -		return ret;
-> -
->   	if (IS_ENABLED(CONFIG_SYSRESET_SBI))
->   		device_bind_driver(gd->dm_root, "sbi-sysreset",
->   				   "sbi-sysreset", NULL);
+>   	/* Virtual memory reference */
+>   	struct utp_transfer_cmd_desc *ucdl;
+
+Reviewed-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
