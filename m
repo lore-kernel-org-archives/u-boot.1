@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A51EEC3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:11:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 056B2C3DA6F
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45092864F3;
+	by phobos.denx.de (Postfix) with ESMTP id 89273864FA;
 	Wed, 23 Aug 2023 23:11:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FYjqX59i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F+Tt5Wmh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFECC864F2; Wed, 23 Aug 2023 23:11:14 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 8FCA6864F2; Wed, 23 Aug 2023 23:11:15 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5344864E1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:11:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FD55855CE
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:11:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-79264ca4b34so23657939f.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:11:12 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-79231457b7fso127244839f.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692825071; x=1693429871;
+ d=chromium.org; s=google; t=1692825072; x=1693429872;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m4aIZPdmD8FnWlSQa+HAN+bDEF5lfsohzHamkcCokDI=;
- b=FYjqX59iUWqC2kAYsDGzEG14jYWZGV6c4iKFEIODzMPRuB7q23Iuh8cbYNf3TF0NBh
- 0Shx2T7zJrmmnh80ONaMp8n8WHWN2cqIZuI+eplU+5YlS1eRrJLyMhHCpY1MKAmVZgaV
- HEwhd9KC6ooj6L0n+rux5JzFFewDIcHr1LBGc=
+ bh=NYz1gi8zN996oK2EufVc5asTI4fDQTc+8sSPxlHiKeA=;
+ b=F+Tt5Wmh4sEyYdzrk6sbpabf/9JimoCitZS7tszHpgBCebv2zJClqp/30LTjgjAl6a
+ pXdehD01XPvw9vV+qEh+JzsTd1AB/LBhGyimaT7BUA34UP6cpVaKwIogAXIP6zQMxXGP
+ dUM4NYSJ/O+2ZIk7HuKDVt3PKq484+rnN2OMg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692825071; x=1693429871;
+ d=1e100.net; s=20221208; t=1692825072; x=1693429872;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m4aIZPdmD8FnWlSQa+HAN+bDEF5lfsohzHamkcCokDI=;
- b=f9nzj+kEKyjNy3E1sOe6Jm4zsWRI2pF4LZ+cC9NACU5TU60B0LBKLVamwhEFK58ung
- NIiDuYIhthgieZInH6qLRNaCXpMRb84mcQmOjDMMFEdIv2G98KGw3qxTrCvMx6fY8044
- E5WoUx5x2pwmlwMJKQrpDon9oojrpARENDM8U5YkOnE0JdKvYygARrLkmSQ1GlF/ix+J
- YbUH0zEi+b1zi+PaiG+P49KCXNp3UwFTQVqS2u+qC9tKuT6tTn5NTSJD0QD8B4ckBW7X
- 3Z4Z8U8GZ7pT7lfeU8IHJML9Khh53o/VRWialJynQL7ULPHW50YC5i+c/RdKvWe3+XLO
- x+0Q==
-X-Gm-Message-State: AOJu0YzxzaU/+rVBs5YbnZ8+Yp+Re/E6TUnwCn98FmmwPYfpLvfzld4r
- KQdfDaMWyF3RErAhxj1WZWugfRTkgCJGZjiX22w=
-X-Google-Smtp-Source: AGHT+IGfG3LqUzfnoNIvTTwzMsEzSNamkW935n0ldCmVWnI7bGQ7Ugx29uIYnrbzfX/Ca+K4xCdOkg==
-X-Received: by 2002:a6b:620d:0:b0:783:4bc6:636e with SMTP id
- f13-20020a6b620d000000b007834bc6636emr3744736iog.21.1692825071244; 
- Wed, 23 Aug 2023 14:11:11 -0700 (PDT)
+ bh=NYz1gi8zN996oK2EufVc5asTI4fDQTc+8sSPxlHiKeA=;
+ b=j0Arxe/JSXqJ0ej4clw+zxbOOTVpDX7O1ufdJN8xSiPPMh/l1NCCRUDX0T/4AFyAE5
+ M3TtstIZKTIvIegEbokYRcy/sMbnSfDty3fDsAiaAI5HZi37Y0fgPO8hNOG7kYU7ZCwR
+ j1tTjYk44eyTME+rZjTIOchjfs27SHnYlX8k9MJTprGGom9E6XkTizwQjZLJLQArQMUq
+ nJJmtetXdyZZv6e1/QUAB1hbknbAe26EziGvHA1UZHRzDj8Q+dTGwffZcQP6Kc7e6u8j
+ 0JBjHNwwDdpZhuOgwj3vZ+2kzZ0DuNTOacegWaqGh5pgvbOysQ9U0s2jhmNgkV7POyls
+ OFDg==
+X-Gm-Message-State: AOJu0Yx832g+ktDO+ACiUMzRjZkVGUCe9AhOKqpQFxaXU+zsUxng7e3H
+ AT7P+0mW7JkLFqHwBahYwrXz3tyIWUoAomcSJns=
+X-Google-Smtp-Source: AGHT+IGYwQ+7O0/JaKv0cBabrNnb8QQ0B5KRTaXmpzOUYxy5hejhPYTzzxNoap3/rf4TCG2uh2g40A==
+X-Received: by 2002:a05:6e02:1a6d:b0:34b:aa34:a5d1 with SMTP id
+ w13-20020a056e021a6d00b0034baa34a5d1mr4631491ilv.26.1692825072066; 
+ Wed, 23 Aug 2023 14:11:12 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
  by smtp.gmail.com with ESMTPSA id
- c15-20020a02c9cf000000b0041627abe120sm3921075jap.160.2023.08.23.14.11.10
+ c15-20020a02c9cf000000b0041627abe120sm3921075jap.160.2023.08.23.14.11.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 14:11:10 -0700 (PDT)
+ Wed, 23 Aug 2023 14:11:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 04/20] x86: Set the CPU vendor in SPL
-Date: Wed, 23 Aug 2023 15:10:21 -0600
-Message-ID: <20230823211059.1235147-5-sjg@chromium.org>
+Subject: [PATCH v4 05/20] x86: Allow APCI in SPL
+Date: Wed, 23 Aug 2023 15:10:22 -0600
+Message-ID: <20230823211059.1235147-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230823211059.1235147-1-sjg@chromium.org>
 References: <20230823211059.1235147-1-sjg@chromium.org>
@@ -88,45 +88,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't read this information in 64-bit mode, since we don't have the
-macros for doing it. Set it to Intel by default. This allows the TSC timer
-to work correctly.
+This is needed so we can find the DBG2 table provided by coreboot. Add a
+Kconfig so it can be enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/cpu/x86_64/cpu.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ lib/Kconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86_64/cpu.c
-index d1c3873dd6a..2647bff891f 100644
---- a/arch/x86/cpu/x86_64/cpu.c
-+++ b/arch/x86/cpu/x86_64/cpu.c
-@@ -8,8 +8,11 @@
- #include <cpu_func.h>
- #include <debug_uart.h>
- #include <init.h>
-+#include <asm/cpu.h>
- #include <asm/global_data.h>
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 42e559ad0b5..1d63099b8e1 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -289,6 +289,14 @@ config ACPI
+ 	  not necessarily include generation of tables
+ 	  (see GENERATE_ACPI_TABLE), but allows for tables to be located.
  
-+DECLARE_GLOBAL_DATA_PTR;
++config SPL_ACPI
++	bool "Enable support for ACPI libraries in SPL"
++	depends on SPL && SUPPORT_ACPI
++	help
++	  Provides library functions for dealing with ACPI tables in SPL. This
++	  does not necessarily include generation of tables
++	  (see GENERATE_ACPI_TABLE), but allows for tables to be located.
 +
- int cpu_has_64bit(void)
- {
- 	return true;
-@@ -38,6 +41,10 @@ int x86_mp_init(void)
- 
- int x86_cpu_reinit_f(void)
- {
-+	/* set the vendor to Intel so that native_calibrate_tsc() works */
-+	gd->arch.x86_vendor = X86_VENDOR_INTEL;
-+	gd->arch.has_mtrr = true;
-+
- 	return 0;
- }
- 
+ config GENERATE_ACPI_TABLE
+ 	bool "Generate an ACPI (Advanced Configuration and Power Interface) table"
+ 	depends on ACPI
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
