@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228ABC3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:43:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3FEFC3DA66
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:50:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3118864D5;
-	Wed, 23 Aug 2023 19:43:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE0248645F;
+	Wed, 23 Aug 2023 19:50:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hpo5CwnW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ug2Fiw7j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A441F864DE; Wed, 23 Aug 2023 19:43:29 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 034CA8645E; Wed, 23 Aug 2023 19:50:18 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB253864D5
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:43:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE6578647B
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d67869054bfso5794207276.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:43:27 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d62bdd1a97dso5789814276.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:50:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692812606; x=1693417406;
+ d=konsulko.com; s=google; t=1692813014; x=1693417814;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=58SravXfhuW+MyXLLEXmkROSXTEQLjynXHNxQeieiNE=;
- b=Hpo5CwnWTAwknmkXrTiJAFooPiDvCJbvk46j3qsd52ULO00BQbT/ibpvuxFaellk6c
- 42yhBf+6YYF0mhcUQ59Z2itZ/KKcyv/A67im9Gd4y2gv4kObrUdldJZILDfIoG9eK5+O
- LbzFSl0vqC7oxkxjBruAUO5R0C3vmiQBQ3ku4=
+ bh=GBGVvlBiqFuooJJeETkSAXBy52/3hgXt8dJgpMlgYWo=;
+ b=ug2Fiw7jXMr4mNSanwKPoC5MT0EvJWQz/VFuCIrG3eFV4iBaHPfWki9eqo0vJEE7qa
+ q361FPa2pwRJSescQEJwb3CvcJOtEJ71FYcTdbsTX64Nw6cBJ8rBQ7i8xz8eZ8nyjDbX
+ cyfqVUnMlQkUVg79pfkaV693lWFDHXjcJ2leI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692812606; x=1693417406;
+ d=1e100.net; s=20221208; t=1692813014; x=1693417814;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=58SravXfhuW+MyXLLEXmkROSXTEQLjynXHNxQeieiNE=;
- b=EM10rqF5bJo2tH5F+WrC37+OuGEcFpyqObgh3TMODnuZvCxkyPY2t5kaeNRb0Qr33w
- azHt1PeVD0hoOXM4xfoKYMfeU3RJ0XhrZmy66zWJ7nrb5BS8mwRYDufw+5dEJJUCtxQN
- fV9fsP9wXLKnx8eMDSWN2CR59tbhu3Rw7+gXZbdrNAIErxgltbgDjJFvrhfobTbrn/KQ
- eB3oxBRZUqkiEUsvI4HygZ51u9IDF150qbOzmUZrs7xaWT7MDCYsr++wcaJ34h0S80Po
- f1BHUFuZjuvWD64aPtpGpxrOKmZFI34aEV1bj4zG/+mNsW0Ts7lx43NhXGcE4nkNrqaA
- +ZwQ==
-X-Gm-Message-State: AOJu0YwkXSIR8pLLc3vyNJCKJwCbKrgkLMDxe4cQE5MmrimNF1yyr6VN
- l4EnRM1QaXqwmyOGfobKBh6GQA==
-X-Google-Smtp-Source: AGHT+IGxlb3o48ewAKlRMfEGPoh3TVW/GI+nr2BQKInECPyWDPNdEAR71v3yOwdKw++Osh4X8ZdATw==
-X-Received: by 2002:a81:9197:0:b0:58c:4fbb:1bb7 with SMTP id
- i145-20020a819197000000b0058c4fbb1bb7mr12559718ywg.5.1692812606451; 
- Wed, 23 Aug 2023 10:43:26 -0700 (PDT)
+ bh=GBGVvlBiqFuooJJeETkSAXBy52/3hgXt8dJgpMlgYWo=;
+ b=JAkBzJoUG0wqSwJOLM0gTJ4tjxr7riiu4RSzGAg5T3OR2rTn1V9CqNja+v+M8zP+gC
+ LpCXItL5TsE761cJA9lchKjgJlBUYg1KoI7dI9tDJ9HMyzk5iH8v0JLLnfLu4gpnGUpU
+ FMxF0zlLyX51EV3Ig20z4sohk61zZrNKAHx/ba1XDghGirIhnSc4uE+MHYdNkNG64RP2
+ 9WKtgMZ6tBPM4uuSjIOhmxVF2XMwg8x6R5Pl41jY8k7oLM2vXN3Kg4PmXbeJBQM3AsGb
+ jL0eZcG3RPLrEVYE0vk4IzFhCi3lGERNu+ap2V15tyAW3D1PtfV4qL5fIXAY0sgCPWwb
+ NWzA==
+X-Gm-Message-State: AOJu0YzGXp3jJ0cbdIb3OD4BFJN8zx6qZgDxnmR2VNxz9CvgS9hIhNkw
+ FEfDQKfTuFX80d8qiP9YQY+cK3ufVU+BaVS+vOcQyw==
+X-Google-Smtp-Source: AGHT+IGnRNjP2S0uHtZoER7M1auV4ECVZ/JjR7r2sV411ydzivtl7IDkdZjtxMpwdQyRcn1bdIX8LQ==
+X-Received: by 2002:a25:ac19:0:b0:d0b:fe82:8b99 with SMTP id
+ w25-20020a25ac19000000b00d0bfe828b99mr13061917ybi.44.1692813014589; 
+ Wed, 23 Aug 2023 10:50:14 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- j189-20020a816ec6000000b0058fafe95f98sm2738092ywc.114.2023.08.23.10.43.25
+ 203-20020a2501d4000000b00d4fc4132653sm2941303ybb.11.2023.08.23.10.50.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 10:43:26 -0700 (PDT)
-Date: Wed, 23 Aug 2023 13:43:24 -0400
+ Wed, 23 Aug 2023 10:50:14 -0700 (PDT)
+Date: Wed, 23 Aug 2023 13:50:12 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Shengyu Qu <wiagn233@outlook.com>
-Cc: rick@andestech.com, ycliang@andestech.com, sjg@chromium.org,
- andre.przywara@arm.com, marek.vasut+renesas@mailbox.org,
- michal.simek@amd.com, xypron.glpk@gmx.de, jbx6244@gmail.com,
- hai.pham.ud@renesas.com, ganboing@gmail.com, bmeng@tinylab.org,
- yanhong.wang@starfivetech.com, minda.chen@starfivetech.com,
- seanga2@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 2/3] dlmalloc: Add support for
- SPL_SYS_MALLOC_CLEAR_ON_INIT
-Message-ID: <20230823174324.GV3953269@bill-the-cat>
-References: <20230823032107.1792-1-wiagn233@outlook.com>
- <TY3P286MB26119C4B919D90BAF5082198981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH] mmc: spl: select SPL_BLK for SPL_DM_MMC
+Message-ID: <20230823175012.GW3953269@bill-the-cat>
+References: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SHOIX4tAnk16KmVX"
+ protocol="application/pgp-signature"; boundary="ZHjQjpk99e0E+rUW"
 Content-Disposition: inline
-In-Reply-To: <TY3P286MB26119C4B919D90BAF5082198981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,41 +93,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---SHOIX4tAnk16KmVX
+--ZHjQjpk99e0E+rUW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 11:21:05AM +0800, Shengyu Qu wrote:
+On Wed, Aug 23, 2023 at 06:45:45PM +0300, Oleksandr Suvorov wrote:
 
-> To support SPL_SYS_MALLOC_CLEAR_ON_INIT, we have to modify
-> #ifdef CONFIG_SYS_MALLOC_CLEAR_ON_INIT
-> to #if CONFIG_IS_ENABLED(SYS_MALLOC_CLEAR_ON_INIT)
+> mmc_bind() in mmc-uclass.c calls blk_create_devicef() which is
+> defined in blk-uclass.c, so SPL_BLK is required by SPL_DM_MMC.
+> Implicitly select SPL_BLK for SPL_DM_MMC.
 >=20
-> Signed-off-by: Bo Gan <ganboing@gmail.com>
-> Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
+> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---SHOIX4tAnk16KmVX
+--ZHjQjpk99e0E+rUW
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmRTwACgkQFHw5/5Y0
-tyx06Qv+K3mBNUiatD9qZF1NJSH1RQKVqj37u/ZA15yMPrmoHBMpu91QSYJzalZf
-/KpOn15P2laLaVI2ALOSMqZVbz5bBExPEvfrOtcNC7Hq2O/McSb7X6wCPuKfkN5m
-I8+iruuse49g5UCkMe6Zmcgp06klom/qH9pgC7xmVtPDlhx0rol2RfVk8oJ10GK1
-82TAeY0Gv0uCphM7ENjzJC417XLyKk6ie8P3eqgykbLrKa8hw9jo4iAkPKE5Gnc6
-/tI92UcsPbSPr88F4Ho/2uku+/xzfyBDg/w4nx6ls0OdXAYfq0dt/MvvIXEJ0je2
-ZijcvG8+ZVPJwnGmNlI3jNS+MtBHn8RM5KOXbJyr1PTX11rq8dMGuDU8sdSQSXea
-sC01Y7mHX7E5+7wf8ypwYyupCrKAHc1QUUh7qXcl04KdLcpRkJyq20HBf91CRXP4
-eUsYbuCLgORtlxpdXCDcYaPJE5+M4wIqrbv5UdmojxAJCiKZdLCOWA5ByfUBUofZ
-f7hsmDVO
-=NrqG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmRtQACgkQFHw5/5Y0
+tyyrkwv8CNmA9sqhfzM5xzr0pspIyGR1RyrWvn6GnDQ+iLX+qXzYVgtV9TScEr89
+Jj7kRhVRAA/caxB6nvIGBaQS2p/0XsDiFY4TYlIRI2Sw/WSHgZM8zdrzsdIEpgxc
+AHVsD/Eww/xaX1fwncns+q/aeWrbfI43CaVLioh80tgBL7Q0EkAHjlnYUDUwgP2v
+tdfc2cw+Go58MAO4cLOjzV7+z/Ku0QiOB4/Ajmh16Qpz5z8+BSTP4wQfN4d0cp5I
+KiEt13JSy40FA+lfY9EO/67sYobCGvgNF9rjalwriPxkJcMIkoWe4MgxjwF7S9QF
+CCQYhvw2Czx5bibCF8mcCf1LLe1gSUA9CNRQexLmhXP6hYjFcK/sWjEbIAV0SI4R
+b3rfMuGzpDLy8dfLUK7wVrWUsjeBBl1F+ppkMA3/ywJqvGcsV5Sl2DY2sX9B2jHS
+dYwrMmRvIsYF7NGp/d8ZOLANe+PNb19sVtA0YTwa8ONPRev5DUlKadYQ0+mZhZCj
+sgob6W07
+=lXzb
 -----END PGP SIGNATURE-----
 
---SHOIX4tAnk16KmVX--
+--ZHjQjpk99e0E+rUW--
