@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754BFEE49B0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B141DEE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:42:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A49BB864B6;
-	Wed, 23 Aug 2023 13:42:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 06D37864B6;
+	Wed, 23 Aug 2023 13:42:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S6ZmURdw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ikeDztgq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB94C864C3; Wed, 23 Aug 2023 13:42:23 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B1D82864CC; Wed, 23 Aug 2023 13:42:55 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD2E1808E6
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:42:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F98C86406
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:42:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-4ffa94a7a47so7129161e87.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 04:42:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692790936; x=1693395736;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=WjeVrbeqtSFNJpB8okFMfPHVIzLgK3JxDbVM0Wg1GSE=;
- b=S6ZmURdw/ccxbATGHW4mBa8gIz8DV944Ahf2nCyzJoVnkiGqW12K/0WSru/ER9tDcj
- OAMDjZ+z8HKKNux2/CmznXsVzxqNav812patHoPuFaXW26Y6Z2+SJFgpYoRXNu7E9Cz/
- heFcTzRp/lDedQQqmHliNRgEQsFL4MU+7fPD6mBuHX6f6vt6fAAbLluNXWsh/cds3sVd
- VLWKC4jU5qU7m9xTZulBEbU2BXguW78e0J5iq27ffImt+d31PviVC+zV/WQpcH2NX0M0
- +KpYYC5eOFDZldYijeE4qbE66+P6I57ABzsPcjbInkd/5jjH0rTw7hj7lXo1lNn9qn0I
- I30A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692790936; x=1693395736;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WjeVrbeqtSFNJpB8okFMfPHVIzLgK3JxDbVM0Wg1GSE=;
- b=NnckmYzwBnqgqyvp+S+Yjlv55KlZkjUMTQDLbb/MFA8rhpDqS2TwyHAKw2ScBLroaD
- AP0C6HDyn5D7uvncMyKhz4lAoM/CtpKgGd+Oa0fQ8TsmMT5KFuIYS7Q2+zU5MzHmO1/Q
- nTbfVTUboxyaajwftO3J2NR1pU7QLd1qmtENFzFJjjRlHIAcuCTdtOoEVFbDOtrJl62u
- 5NYI8tZ2O5gzAx2WGabW98m9ap00zFKZQYNGrgFwvUbnCqMamXWOsTm4uos4xcESOKQp
- g5Jbtm1xM0+OvfW5KySFTznPbd7C07ffzPMd6Y63n3HPhOLNbR0UMK62tWYd6DJjGR8v
- wDaA==
-X-Gm-Message-State: AOJu0Yxrpw+jm5XBhzG18NQio3Ze2DwcVPyqX3TXFqAor0P0XVg4MzRI
- Xad4wp1+YJaeIiUDuLOBH0tcnrWsLCNvMw==
-X-Google-Smtp-Source: AGHT+IF0ZYUi2JE3LN03iaySQBQD6B9BRjr45+O6AZoal/omL5qcfP6H1h4bY2p3oshG9tCd7l95RQ==
-X-Received: by 2002:a05:6512:3b9e:b0:500:9a67:d40e with SMTP id
- g30-20020a0565123b9e00b005009a67d40emr464672lfv.60.1692790936443; 
- Wed, 23 Aug 2023 04:42:16 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.10.167]) by smtp.gmail.com with ESMTPSA id
- a16-20020aa7cf10000000b00521d2f7459fsm9152211edy.49.2023.08.23.04.42.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 04:42:16 -0700 (PDT)
-Date: Wed, 23 Aug 2023 14:42:15 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-CC: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 15/19] ARM: tegra: board2: add generic late init
-User-Agent: K-9 Mail for Android
-In-Reply-To: <ZOXpx6oq8MYkoHcw@orome>
-References: <20230822112217.4646-1-clamor95@gmail.com>
- <20230822112217.4646-16-clamor95@gmail.com> <ZOXpx6oq8MYkoHcw@orome>
-Message-ID: <09EF2F83-FAAE-4494-AF36-C84DA5BB5349@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NBgmKS078599;
+ Wed, 23 Aug 2023 06:42:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692790968;
+ bh=1s7E3SR2CwM+YMU4ZDoW/oR4xLQ4TQr4zRVoeucqkwE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ikeDztgq9X/iW3/aQjKUxXD0JHF7cSX7XPidkJ/Ggbr8ZAP1LUHsRR+ZH6VnJfprP
+ soXQ20MHlSCUofwUTCW6DWba/rdZDj/N4NM3H97UVE7LubqFGQ/ump6U0kgT6LT6xT
+ Coq9Y7XsIDRGgtXiOp9CSVkltR/n/6E2IhCr3raY=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NBgm4T063081
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 06:42:48 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 06:42:47 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 06:42:47 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NBglsm100648;
+ Wed, 23 Aug 2023 06:42:47 -0500
+Date: Wed, 23 Aug 2023 06:42:47 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Bryan
+ <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH V4 1/8] env_default: Allow CONFIG_EXTRA_ENV_TEXT to
+ override CFG_EXTRA_ENV_SETTINGS
+Message-ID: <20230823114247.jzs7ivbnpwtzay7e@gumming>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-2-nm@ti.com>
+ <CAPnjgZ0p5YkgvYM_F0j97bvAoM1qieafyjFQ_neyUoDuNFyN2g@mail.gmail.com>
+ <20230822233358.geaqdn2vi34a5no2@uniformly>
+ <CAPnjgZ1HhohnyqxnxSXUSwJh=UkH+Ot3nowwXg8JW=3BFuZkxQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1HhohnyqxnxSXUSwJh=UkH+Ot3nowwXg8JW=3BFuZkxQ@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,86 +86,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 20:34-20230822, Simon Glass wrote:
+> Hi Nishanth,
+> 
+> On Tue, 22 Aug 2023 at 17:34, Nishanth Menon <nm@ti.com> wrote:
+> >
+> > On 17:16-20230822, Simon Glass wrote:
+> > > Hi Nishanth,
+> > >
+> > > On Tue, 22 Aug 2023 at 12:41, Nishanth Menon <nm@ti.com> wrote:
+> > > >
+> > > > CFG_EXTRA_ENV_SETTINGS is set in common board config files, This allows
+> > > > for majority of the settings to be set in a common manner. However, the
+> > > > minor variations between various board can be addressed by the board.env
+> > > > files. The board.env files are converted into CONFIG_EXTRA_ENV_TEXT.
+> > > >
+> > > > However, this creates a minor problem. For example:
+> > > > distro_bootcmd.h and used by ti_armv7_common.h uses it as:
+> > > >  #define BOOT_TARGET_DEVICES(func) \
+> > > >         func(MMC, mmc, 0) \
+> > > >         func(MMC, mmc, 1)
+> > >
+> > > OK, but we should be using bootstd for new boards.
+> >
+> > Agreed, and I think I am using bootstd[1] unless I am missing something
+> > completely.
+> 
+> Then why do you have BOOT_TARGET_DEVICES() ?
+
+we used to do distro_boot as I recollect right.. This stuff is still in
+the process of migration.. And I think this patch aids that ;)
+
+> 
+> >
+> > we still have a problem with EXTRA_ENV_SETTINGS and ENV_TEXT. This patch
+> > helps enforce priority of ENV_TEXT.
+> >
+> > But overall, I agree that we need to move off from EXTRA_ENV to text..
+> > probably in stages, I guess.
+> 
+> OK good
+> 
+> >V
+> > > >
+> > > > Which in turn generates:
+> > > > boot_targets=mmc0 mmc1
+> > > >
+> > > > And this probably works fine for most boards, However when the
+> > > > boot_targets need to be reversed, the preferred behavior would have been
+> > > > to define it in board.env file as:
+> > > > boot_targets=mmc1 mmc0
+> > > >
+> > > > By changing the order of the inclusion, we allow for the
+> > > > CONFIG_EXTRA_ENV_TEXT to have a higher priority in the definition.
+> > > >
+> > > > Signed-off-by: Nishanth Menon <nm@ti.com>
+> > > > ---
+> > > > Cc: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > New patch
+> > > >
+> > > >  include/env_default.h | 6 +++---
+> > > >  1 file changed, 3 insertions(+), 3 deletions(-)
+> > > >
+> > > > diff --git a/include/env_default.h b/include/env_default.h
+> > > > index b16c22d5a28c..714dfa9e845e 100644
+> > > > --- a/include/env_default.h
+> > > > +++ b/include/env_default.h
+> > > > @@ -112,12 +112,12 @@ const char default_environment[] = {
+> > > >  #ifdef CONFIG_MTDPARTS_DEFAULT
+> > > >         "mtdparts="     CONFIG_MTDPARTS_DEFAULT         "\0"
+> > > >  #endif
+> > > > +#ifdef CFG_EXTRA_ENV_SETTINGS
+> > > > +       CFG_EXTRA_ENV_SETTINGS
+> > > > +#endif
+> > > >  #ifdef CONFIG_EXTRA_ENV_TEXT
+> > > >         /* This is created in the Makefile */
+> > > >         CONFIG_EXTRA_ENV_TEXT
+> > > > -#endif
+> > > > -#ifdef CFG_EXTRA_ENV_SETTINGS
+> > > > -       CFG_EXTRA_ENV_SETTINGS
+> > > >  #endif
+> > >
+> > > and text environment
+> >
+> > Could you clarify what I am missing?
+> 
+> I'm not sure about that. I have no objection to this patch.
 
 
-23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:13:11 GMT+03:00,=
- Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Tue, Aug 22, 2023 at 02:22:13PM +0300, Svyatoslav Ryhel wrote:
->> Board specific late init allows vendors to set up different device
->> or board specific env variables (like serial number, platform name)=2E
->> In case this information is missing, u-boot will lack info regards
->> serial or platform=2E
->>=20
->> To avoid this prior nvidia_board_late_init internal generic function
->> is called which fills required data=2E In this case platform name is
->> obtained from get_chip and serialno is filled with SoC id=2E
->>=20
->> Though SoC id is not dedicated to be devices serial but it fits well
->> in case of restriction of data about device and since SoC is basically
->> a main chip of the device=2E
->>=20
->> Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo=2Ecom> # ASUS Transfor=
-mers
->> Tested-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom> # Nvidia Tegratab
->> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> ---
->>  arch/arm/mach-tegra/board2=2Ec | 43 ++++++++++++++++++++++++++++++++++=
-++
->>  1 file changed, 43 insertions(+)
->>=20
->> diff --git a/arch/arm/mach-tegra/board2=2Ec b/arch/arm/mach-tegra/board=
-2=2Ec
->> index 981768bb0e=2E=2Eee69cb657a 100644
->> --- a/arch/arm/mach-tegra/board2=2Ec
->> +++ b/arch/arm/mach-tegra/board2=2Ec
->> @@ -26,6 +26,10 @@
->>  #include <asm/arch-tegra/gpu=2Eh>
->>  #include <asm/arch-tegra/usb=2Eh>
->>  #include <asm/arch-tegra/xusb-padctl=2Eh>
->> +#ifndef CONFIG_TEGRA186
->> +#include <asm/arch-tegra/fuse=2Eh>
->> +#include <asm/arch/gp_padctrl=2Eh>
->> +#endif
->>  #if IS_ENABLED(CONFIG_TEGRA_CLKRST)
->>  #include <asm/arch/clock=2Eh>
->>  #endif
->> @@ -256,6 +260,37 @@ int board_early_init_f(void)
->>  }
->>  #endif	/* EARLY_INIT */
->> =20
->> +#ifndef CONFIG_TEGRA186
->> +static void nvidia_board_late_init_generic(void)
->> +{
->> +	char serialno_str[17];
->> +
->> +	/* Set chip id as serialno */
->> +	sprintf(serialno_str, "%016llx", tegra_chip_uid());
->> +	env_set("serial#", serialno_str);
->> +
->> +	switch (tegra_get_chip()) {
->> +	case CHIPID_TEGRA20:
->> +		env_set("platform", "Tegra 2 T20");
->> +		break;
->> +	case CHIPID_TEGRA30:
->> +		env_set("platform", "Tegra 3 T30");
->> +		break;
->> +	case CHIPID_TEGRA114:
->> +		env_set("platform", "Tegra 4 T114");
->> +		break;
->> +	case CHIPID_TEGRA124:
->> +		env_set("platform", "Tegra K1 T124");
->> +		break;
->> +	case CHIPID_TEGRA210:
->> +		env_set("platform", "Tegra X1 T210");
->
->This variable is presumably something that you'd want to match on in a
->script, so perhaps we can settle on something a bit more canonical=2E In
->upstream Linux we use tegraXYZ quite consistently and you'll see that
->reflected in things like compatible strings, so I'd suggest reusing the
->same naming scheme here to simplify and avoid confusion=2E
+Is there anything I can do to improve this patch for your reviewed-by ?
 
-I chose this look because it looks nice if call fastboot getvar platform=
-=2E You can choose anything you want, I do not care=2E
-
->Thierry
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
