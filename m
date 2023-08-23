@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB91CC3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:11:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E389C3DA6F
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:11:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D93E864DB;
-	Wed, 23 Aug 2023 23:11:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 612FC864E6;
+	Wed, 23 Aug 2023 23:11:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I7OwzWu4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KtzjBciE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13FF0864CD; Wed, 23 Aug 2023 23:11:11 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 2CE93864E1; Wed, 23 Aug 2023 23:11:12 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B70CC855CE
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:11:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BF1D8644F
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:11:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34bad74fb3dso20341525ab.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:11:08 -0700 (PDT)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-79231a521bbso114635839f.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:11:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692825067; x=1693429867;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MTms7vHMET3h+O5CE49RbVmJwpBDFDE0OKwGgNTamp0=;
- b=I7OwzWu4WAaa1Ku5/ZaEBXNxqsZ/pocMGDAfnYI+ZhbmQZ/DuVAIPn432xk/fAFE1j
- a5a6DZtRQcsm73vGyV4B9n93PCuXGqFOaTCMWIG/36hbbNLRhl86ml26Ix6VCsmf22KZ
- s7Ph057my0mLxv/cTmQey7+YUDD02iM1GRIIM=
+ d=chromium.org; s=google; t=1692825068; x=1693429868;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=f27k70q48JPemCQbaVKTW3DBQEYuDkQ7erBg3ab4x2A=;
+ b=KtzjBciE3gHCo+OrNkoD4Q0jipIOKm3pzDaY+3kg0hgin4qh9II00YjLUgLqhXbKen
+ 0hJ3+B324u8b7XOyuvIGnlDYWLIUJ+V8elCzSbSNg8aVF96oUmnlDubnuVc0THNzh1uY
+ 1Ol3OzQfns6BfCTWVM5YUemXVufNBj6OqOOo0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692825067; x=1693429867;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MTms7vHMET3h+O5CE49RbVmJwpBDFDE0OKwGgNTamp0=;
- b=J0pXDeF/9HfETuIogN5WHNhtY9WMJNzKbm9Lc9tdG16EDOVLsjlzSG/udQcftNfJWA
- tvml7TIvQRulFseTjILa/FG9a01S3yzg+S5lXUZiY1YO5hKImjhWy5l4jwzGbYf+y4Ps
- lW9wFAHZOk50T7+Oo1l6VX18NPqwTQGQ4J9YwfM363FxuyzIvX/H4pz0gcFTTs/ufhoz
- 60O+J5jRrK5iV35Aqwore81afrld/4940EucRVmdLALPpyFWRmDbUq1Rmo3z8PExpJBy
- sOWsPdmdEkm+rakfWLANLSZqzvQyq1HySF+MkqJCV0px71W6B20/cqL1JcZAltimlICX
- MvXQ==
-X-Gm-Message-State: AOJu0YxFp2ZkA2SjJHVjDlZy4TMil1nbmfO3WifSbhfVFu7GBLesRG14
- oQ1PuQy0TF1bUuiw5gLWqWF9GIyEPav0DNJwZyA=
-X-Google-Smtp-Source: AGHT+IHpV7HoI0+/q4Yxb8QCvqXQ1vI/raoY8JZqHiXovBASOvM26uP4jSz6TyrRDEHSaHgM8qV67A==
-X-Received: by 2002:a05:6e02:2199:b0:349:501:129f with SMTP id
- j25-20020a056e02219900b003490501129fmr5066528ila.2.1692825067260; 
- Wed, 23 Aug 2023 14:11:07 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692825068; x=1693429868;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=f27k70q48JPemCQbaVKTW3DBQEYuDkQ7erBg3ab4x2A=;
+ b=HzajHitqOGpGOW61dztwMH4t86jnXo4h+I35CM39jt7cNgspJSByyhsyU4rd3iCcW4
+ gFGN6KOWsQmUizKQP8rjIoHZtmmBpP03Cn6cQ8nv6fLDTMzIMPEPV5vHhshFdptzaMj/
+ KxCDXGv/NaycpF2qrgWfWxdVQNjMZlx6fdS73z6NpeclXvWrPdYfss1mlTtmdMFE9Ki5
+ 539zrEttIAplTa2ecb/C5+mrPmsVhpgzhuls7XYS0MfL9oFDW3dPME03WgfBTdL595xQ
+ JImy4qA/ytz+cF/0ky2kxo8iXIU0hTcxrNDUPbYz9fMOvBBjYrH0PPtVff5tfhLU1qrc
+ EYiw==
+X-Gm-Message-State: AOJu0YyXGXYc0i4p+lq5AtmEDXLdbZOV9ZyhSN+u2Vk8PiDjUJq3O/K/
+ yLdyLnSekll5vGwzF8Xb+NgRJdWjsQ1R9o5/LEk=
+X-Google-Smtp-Source: AGHT+IGepgdXPxXf0CU9DEnzkq4vpcujxlbGPmPWGoSLvj7EHME+A9YUwpd48ZriREvULTBJKsbgTg==
+X-Received: by 2002:a05:6e02:1d8f:b0:349:191:af05 with SMTP id
+ h15-20020a056e021d8f00b003490191af05mr4458995ila.16.1692825068537; 
+ Wed, 23 Aug 2023 14:11:08 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
  by smtp.gmail.com with ESMTPSA id
- c15-20020a02c9cf000000b0041627abe120sm3921075jap.160.2023.08.23.14.11.06
+ c15-20020a02c9cf000000b0041627abe120sm3921075jap.160.2023.08.23.14.11.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 14:11:06 -0700 (PDT)
+ Wed, 23 Aug 2023 14:11:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 00/20] x86: efi: Fixes and improvements for coreboot
-Date: Wed, 23 Aug 2023 15:10:17 -0600
-Message-ID: <20230823211059.1235147-1-sjg@chromium.org>
+Subject: [PATCH v4 01/20] x86: coreboot: Add IDE and SATA
+Date: Wed, 23 Aug 2023 15:10:18 -0600
+Message-ID: <20230823211059.1235147-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
+In-Reply-To: <20230823211059.1235147-1-sjg@chromium.org>
+References: <20230823211059.1235147-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,98 +88,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series fixes various bugs and annoyances in coreboot and
-coreboot64.
+Add these options to permit access to more disk types.
 
-With this both coreboot and coreboot64 start up and work reasonably well
-on Brya (x86 Chromebook) and U-Boot can boot common Linux distros.
+Add some documentation as well.
 
-- Make coreboot64 debug UART start reliably
-- Avoid the long USB-init delay on startup
-- Correct the timer speed on coreboo64
-- Fix a bootstd cros bug (will likely be squashed into another patch)
-- Fix the terribly slow console scrolling
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-With v2 I have also brought in some lost x86 patches so they are all in
-one series.
+(no changes since v1)
 
-Changes in v4:
-- Fix arm and riscv
-- Rewrite this to use events instead
+ configs/coreboot64_defconfig    |  1 +
+ configs/coreboot_defconfig      |  9 +++++++++
+ doc/board/coreboot/coreboot.rst | 20 ++++++++++++++++++++
+ 3 files changed, 30 insertions(+)
 
-Changes in v3:
-- Allow SMBIOS if EFI_LOADER is enabled
-- Reword the help
-- Use log_debug() to show the message
-- Squash in the next patch
-
-Changes in v2:
-- Update the malloc size too
-- Add new patch
-- Add new patch
-- Add new patch
-- Add new patch
-- Add new patch
-- Add new patch
-- Add new patch
-- Add new patch
-- Add new patch
-
-Simon Glass (20):
-  x86: coreboot: Add IDE and SATA
-  x86: coreboot: Enable standard boot
-  x86: coreboot: Rearrange arch_cpu_init()
-  x86: Set the CPU vendor in SPL
-  x86: Allow APCI in SPL
-  x86: coreboot: Look for DBG2 UART in SPL too
-  x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
-  x86: coreboot: Drop USB init on startup
-  x86: coreboot: Align options between coreboot and coreboot64
-  x86: coreboot: Enable VIDEO_COPY
-  efi: x86: Correct the condition for installing ACPI tables
-  x86: smbios: Add a Kconfig indicating SMBIOS-table presence
-  bootstd: Keep track of use of usb stop
-  Record the position of the SMBIOS tables
-  efi: Use the installed SMBIOS tables
-  x86: coreboot: Record the position of the SMBIOS tables
-  x86: doc: Move into its own directory
-  x86: doc: Update summaries and add links
-  x86: doc: Split out manual booting into its own file
-  x86: doc: coreboot: Mention 64-bit Linux distros
-
- arch/arm/include/asm/global_data.h      |   3 +
- arch/riscv/include/asm/global_data.h    |   3 +
- arch/sandbox/include/asm/global_data.h  |   1 +
- arch/x86/cpu/coreboot/coreboot.c        |  16 +-
- arch/x86/cpu/x86_64/cpu.c               |   7 +
- arch/x86/dts/coreboot.dts               |   1 +
- arch/x86/include/asm/global_data.h      |   1 +
- arch/x86/lib/coreboot/cb_sysinfo.c      |   1 +
- arch/x86/lib/tables.c                   |   3 +
- board/Marvell/mvebu_armada-37xx/board.c |   2 +
- boot/bootdev-uclass.c                   |  27 +++
- configs/coreboot64_defconfig            |  25 +-
- configs/coreboot_defconfig              |  21 +-
- doc/arch/index.rst                      |   2 +-
- doc/arch/x86/index.rst                  |  12 +
- doc/arch/x86/manual_boot.rst            | 276 ++++++++++++++++++++++
- doc/arch/{ => x86}/x86.rst              | 295 ++----------------------
- doc/board/coreboot/coreboot.rst         |  38 ++-
- drivers/serial/Kconfig                  |   2 +-
- drivers/usb/host/usb-uclass.c           |   8 +
- drivers/video/coreboot.c                |  12 +
- include/asm-generic/global_data.h       |   8 +
- include/bootdev.h                       |   9 +
- lib/Kconfig                             |  24 +-
- lib/efi_loader/Makefile                 |   4 +-
- lib/efi_loader/efi_setup.c              |  20 +-
- lib/efi_loader/efi_smbios.c             |  72 +++---
- test/py/tests/test_event_dump.py        |   1 +
- 28 files changed, 544 insertions(+), 350 deletions(-)
- create mode 100644 doc/arch/x86/index.rst
- create mode 100644 doc/arch/x86/manual_boot.rst
- rename doc/arch/{ => x86}/x86.rst (64%)
-
+diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+index 2793e2c0b9d..a456547a25d 100644
+--- a/configs/coreboot64_defconfig
++++ b/configs/coreboot64_defconfig
+@@ -25,6 +25,7 @@ CONFIG_SYS_PBSIZE=532
+ CONFIG_CMD_IDE=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
++CONFIG_CMD_SATA=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_DHCP=y
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index f196ed776d0..aedad4c93c3 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -21,8 +21,10 @@ CONFIG_LOGF_LINE=y
+ CONFIG_LOGF_FUNC=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_PCI_INIT_R=y
++CONFIG_CMD_IDE=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
++CONFIG_CMD_SATA=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_DHCP=y
+@@ -47,6 +49,13 @@ CONFIG_USE_ROOTPATH=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ # CONFIG_ACPIGEN is not set
++CONFIG_SYS_IDE_MAXDEVICE=4
++CONFIG_SYS_ATA_DATA_OFFSET=0
++CONFIG_SYS_ATA_REG_OFFSET=0
++CONFIG_SYS_ATA_ALT_OFFSET=0
++CONFIG_ATAPI=y
++CONFIG_LBA48=y
++CONFIG_SYS_64BIT_LBA=y
+ CONFIG_NVME_PCI=y
+ # CONFIG_PCI_PNP is not set
+ CONFIG_SOUND=y
+diff --git a/doc/board/coreboot/coreboot.rst b/doc/board/coreboot/coreboot.rst
+index d660a223d9c..be5b0de5495 100644
+--- a/doc/board/coreboot/coreboot.rst
++++ b/doc/board/coreboot/coreboot.rst
+@@ -41,6 +41,26 @@ At present it seems that for Minnowboard Max, coreboot does not pass through
+ the video information correctly (it always says the resolution is 0x0). This
+ works correctly for link though.
+ 
++You can run via QEMU using::
++
++  qemu-system-x86_64 -bios build/coreboot.rom -serial mon:stdio
++
++The `-serial mon:stdio` part shows both output in the display and on the
++console. It is optional. You can add `nographic` as well to *only* get console
++output.
++
++To run with a SATA drive called `$DISK`::
++
++  qemu-system-x86_64 -bios build/coreboot.rom -serial mon:stdio \
++	-drive id=disk,file=$DISK,if=none \
++	-device ahci,id=ahci \
++	-device ide-hd,drive=disk,bus=ahci.0
++
++Then you can scan it with `scsi scan` and access it normally.
++
++To use 4GB of memory, typically necessary for booting Linux distros, add
++`-m 4GB`.
++
+ 64-bit U-Boot
+ -------------
+ 
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
