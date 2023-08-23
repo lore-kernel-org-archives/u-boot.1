@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0D0C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 00:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B56C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 00:00:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 268D98650F;
+	by phobos.denx.de (Postfix) with ESMTP id 6832B86517;
 	Thu, 24 Aug 2023 01:59:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bEHOB+iW";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="DZo8OpEE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B85E78651E; Thu, 24 Aug 2023 01:59:25 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 7D239864FF; Thu, 24 Aug 2023 01:59:26 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE57186503
+ by phobos.denx.de (Postfix) with ESMTPS id F221D86508
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:59:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d6fcffce486so5893428276.3
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d66f105634eso5594269276.1
  for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:59:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692835156; x=1693439956;
+ d=google.com; s=20221208; t=1692835156; x=1693439956;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wo3Iy9ewyGSDtWSMvwex7p0dCiBF1TP0+K7qgb8A0Ww=;
- b=bEHOB+iWUTsq9i+8dUGQ8Oo5zseeRphi0pl+1BEi1xmimjJ0FpoUOuBPJcum/9hrvM
- YNZYICIOlZMNZiEcX4/qGf5VvoBPsGHxzzix+cjliYq5KrbVmrzvlkGzGDwj3k4GhA6f
- Bte2YK4vbmBmGNSItk1XxIgidzTSShlRotmxg=
+ bh=4YDAo5w8lg1HQTJgaC1Dt0ef480DoxZMKD+KWxnAgTc=;
+ b=DZo8OpEEhEjGOiTn8Y9bjREjpA4dHAwrnms9mpSbzzYbSKlVXbnDKz//LqsWfl5dnY
+ jSHUUy37Dy4HO8rt66DgdMOWoPrYLSKPXBdAoW5Vgw+tRO+0xPqpfvdL/uFCsQrOnKEP
+ g+Y5pLh/52/nISy2YeFUC85VLacFvnk4Z7+BgcX3tOZWV50e8O9JvyqlBs9yJ2q7KrDx
+ suBRQ87+Ku3/V5+4RkUVDNKEr6yEfsQAdNobfF1ZbYgneb/alzdWCaLNxfizINjq7K4k
+ cTKeP5hwGJdeZ821cbImXTzuhAV4oo4i6yn2frB9WlL4mbHZ3kW8sJufhoOoNuIt/txd
+ xSEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692835156; x=1693439956;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wo3Iy9ewyGSDtWSMvwex7p0dCiBF1TP0+K7qgb8A0Ww=;
- b=GmbMu28Uuh6eWdrVVw024e6G/oT5O5FYtDz9vqcI8j9M7CSzYiauHnip3tGDlzjQl/
- tWZ52NvFIiD8ictp7L8feWanKBqhI1+08zmUfR8aOUng+I2YQdLR8lhttpUFg3njQyhu
- oKY20T7Mrto/tcR7aCOjo3zOCciu8hC/r0VXu2B7QKOlkR034XeA2x93Yo9OZORvFN/L
- x4s9sjirntfd2v6CnFlo2Q8hI1hQtZloZvIb6yK8IePxSFvaN915ToSL6fYclgj3V6xX
- mhEVPpXOfLqmuqFVHeXO7hV7LI0ed7rJY/Tv+8Y48d+TudsywjxQ3pcGePsg6TC7LetG
- YxSQ==
-X-Gm-Message-State: AOJu0Yw2iLGtzIdGcxCJ1bEwn96N3z1zUr+uGsMS+Bk741r/0dWuZMkq
- ohrZDUcD8A39BGPoRTGM+mIx6kTB30jbC9iPLFB71Vtm8D//7oz1oVM=
-X-Google-Smtp-Source: AGHT+IGcwKXkyqfrtGH2oBQO3gT2Ms5RDuzhWvi1mM/SPNBKKXYTla/EQ7vzUwGvv1MzlsgGB5NqkQIgwsoZU9EP7Ak=
-X-Received: by 2002:a25:d1c9:0:b0:d4d:b6de:69bd with SMTP id
- i192-20020a25d1c9000000b00d4db6de69bdmr12926805ybg.23.1692835156449; Wed, 23
+ bh=4YDAo5w8lg1HQTJgaC1Dt0ef480DoxZMKD+KWxnAgTc=;
+ b=BNnZmjNJckaJBnvXS5O8c/QwvT/2QMA0ow4XNs6nQH0jOhDWM7iEXkITB5LuU6NyDd
+ 6iwGEgdUyswud3Vu9vdyXhcqn1jSM9l9YNq+/oiRIX41vqulluQFSzmt7/4HRyvrhq50
+ yiZYTFOD0Igyfky7oEGC/xYhC44BclfltljTMG3PXE7GAycHVFpvP9GEoeAFr5/0nvsD
+ Yd/9KwUkRMKiRK8aCTlp4LEbun3kZTHxnln/0tlzQcw8yfGMNGbSpWRcFFm7JLceAsgX
+ OGAwx5/2YtvrWjMLpvp6+634LM9Viw8RgXf5maieQNW5eVJ3W+0REzjkGdbkOTb30ZqM
+ juZQ==
+X-Gm-Message-State: AOJu0YzHxYtQL1XKCgnJfJncX5DxVsiLRCrFI7ppUK6bWTLa69H/7ZR5
+ I12Bk2Ynkr3EIKen6U5L3w+tfOaS8rNZ9Tx//sYxmw==
+X-Google-Smtp-Source: AGHT+IFqf1NBvEc9xytyj7IQXitePOncOcOcKk7FIu2zH5/N9jLagHqgSUJANCikXGVE7bUJuadz81RbfxedkT+5y9g=
+X-Received: by 2002:a05:6902:531:b0:d3a:28bb:2c95 with SMTP id
+ y17-20020a056902053100b00d3a28bb2c95mr13698092ybs.22.1692835156457; Wed, 23
  Aug 2023 16:59:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
- <20230823164755.2874792-1-JPEWhacker@gmail.com>
- <20230823164755.2874792-7-JPEWhacker@gmail.com>
-In-Reply-To: <20230823164755.2874792-7-JPEWhacker@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 23 Aug 2023 17:57:46 -0600
-Message-ID: <CAPnjgZ1TRVx3=zBNSSt5nzimYzv=iE7MZDbmNJs8vfBSo=F=3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 6/8] cmd: gpt: Preserve type GUID if enabled
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: u-boot@lists.denx.de, Enric Balletbo i Serra <eballetb@redhat.com>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-9-nm@ti.com>
+ <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
+ <20230823171502.GQ3953269@bill-the-cat>
+In-Reply-To: <20230823171502.GQ3953269@bill-the-cat>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 23 Aug 2023 17:57:48 -0600
+Message-ID: <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
+Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
+To: Tom Rini <trini@konsulko.com>
+Cc: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, 
+ Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,173 +92,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Joshua,
+Hi Tom,
 
-On Wed, 23 Aug 2023 at 10:48, Joshua Watt <jpewhacker@gmail.com> wrote:
+On Wed, 23 Aug 2023 at 11:15, Tom Rini <trini@konsulko.com> wrote:
 >
-> If CONFIG_PARTITION_TYPE_GUID is enabled, the type GUID will be
-> preserved when writing out the partition string. It was already
-> respected when writing out partitions; this ensures that if you capture
-> the current partition layout and write it back (such as when renaming),
-> the type GUIDs are preserved.
+> On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
+> > Hi Nishanth,
+> >
+> > On Tue, 22 Aug 2023 at 12:43, Nishanth Menon <nm@ti.com> wrote:
+> > >
+> > > Add base documentation for BeaglePlay
+> > >
+> > > Signed-off-by: Nishanth Menon <nm@ti.com>
+> > > ---
+> > > Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >
+> > > Changes Since V3:
+> > > * Updated documentation to give a more clear overview of MMC partitions
+> > >   and flashing information.
+> > > * Added OpenOCD debug documentation
+> > > * Added LED status information and indication of various boot stages
+> > >
+> > > V3: https://lore.kernel.org/all/20230815164440.2713726-5-nm@ti.com/
+> > > V2: https://lore.kernel.org/u-boot/20230727234446.3651836-5-nm@ti.com/
+> > > V1: https://lore.kernel.org/all/20230725185253.2123433-7-nm@ti.com/
+> > >
+> > >  doc/board/ti/am62x_beagleplay.rst    | 256 ++++++++++
+> > >  doc/board/ti/img/beagleplay_emmc.svg | 697 +++++++++++++++++++++++++++
+> > >  doc/board/ti/k3.rst                  |   1 +
+> > >  3 files changed, 954 insertions(+)
+> > >  create mode 100644 doc/board/ti/am62x_beagleplay.rst
+> > >  create mode 100644 doc/board/ti/img/beagleplay_emmc.svg
+> > >
+> >
+> > Great docs, an example to others.
+> >
+> > Some nits below.
+> >
+> > The bigger problem is that we cannot build this with buildman since it
+> > needs config fragments and we don't have a way to describe them. In
+> > fact none of my existing flows can build this board and it breaks all
+> > my scripts, etc.
+> >
+> > I don't think anyone else sees this as a problem?
+> >
+> > Anyway, I'll send a separate email on the topic.
+> >
+> > > diff --git a/doc/board/ti/am62x_beagleplay.rst b/doc/board/ti/am62x_beagleplay.rst
+> > > new file mode 100644
+> > > index 000000000000..5adb7b4c9ace
+> > > --- /dev/null
+> > > +++ b/doc/board/ti/am62x_beagleplay.rst
+> > > @@ -0,0 +1,256 @@
+> > > +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+> > > +.. sectionauthor:: Nishanth Menon <nm@ti.com>
+> > > +
+> > > +AM62x Beagleboard.org Beagleplay
+> > > +================================
+> > > +
+> > > +Introduction:
+> > > +-------------
+> > > +
+> > > +BeagleBoard.org BeaglePlay is an easy to use, affordable open source
+> > > +hardware single board computer based on the Texas Instruments AM625
+> > > +SoC that allows you to create connected devices that work even at long
+> > > +distances using IEEE 802.15.4g LR-WPAN and IEEE 802.3cg 10Base-T1L.
+> > > +Expansion is provided over open standards based mikroBUS, Grove and
+> > > +QWIIC headers among other interfaces.
+> > > +
+> > > +Further information can be found at:
+> > > +
+> > > +* Product Page: https://beagleplay.org/
+> > > +* Hardware documentation: https://git.beagleboard.org/beagleplay/beagleplay
+> > > +
+> > > +Boot Flow:
+> > > +----------
+> > > +Below is the pictorial representation of boot flow:
+> > > +
+> > > +.. image:: img/boot_diagram_k3_current.svg
+> > > +  :alt: Boot flow diagram
+> > > +
+> > > +- On this platform, 'TI Foundational Security' (TIFS) functions as the
+> > > +  security enclave master while 'Device Manager' (DM), also known as the
+> > > +  'TISCI server' in "TI terminology", offers all the essential services.
+> > > +  The A53/M4F (Aux core) sends requests to TIFS/DM to accomplish these
+> > > +  services, as illustrated in the diagram above.
+> > > +
+> > > +Sources:
+> > > +--------
+> > > +.. include::  k3.rst
+> > > +    :start-after: .. k3_rst_include_start_boot_sources
+> > > +    :end-before: .. k3_rst_include_end_boot_sources
+> > > +
+> > > +Build procedure:
+> > > +----------------
+> > > +0. Setup the environment variables:
+> > > +
+> > > +.. include::  k3.rst
+> > > +    :start-after: .. k3_rst_include_start_common_env_vars_desc
+> > > +    :end-before: .. k3_rst_include_end_common_env_vars_desc
+> > > +
+> > > +.. include::  k3.rst
+> > > +    :start-after: .. k3_rst_include_start_board_env_vars_desc
+> > > +    :end-before: .. k3_rst_include_end_board_env_vars_desc
+> > > +
+> > > +Set the variables corresponding to this platform:
+> > > +
+> > > +.. include::  k3.rst
+> > > +    :start-after: .. k3_rst_include_start_common_env_vars_defn
+> > > +    :end-before: .. k3_rst_include_end_common_env_vars_defn
+> > > +.. code-block:: bash
+> > > +
+> > > + $ export UBOOT_CFG_CORTEXR="am62x_evm_r5_defconfig beagleplay_r5.config"
+> > > + $ export UBOOT_CFG_CORTEXA="am62x_evm_a53_defconfig beagleplay_a53.config"
+> >
+> > Can you drop those two variables? It seems to just confuse the matter.
+> > They are only used once. We are used to seeing a 'defconfig' target
+> > when configuring, and this just obfuscates things.
 >
-> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> ---
->  cmd/gpt.c                 | 16 +++++++++++
->  test/py/tests/test_gpt.py | 57 +++++++++++++++++++++++++++++++++++++++
->  2 files changed, 73 insertions(+)
->
-> diff --git a/cmd/gpt.c b/cmd/gpt.c
-> index 70a01f7da1..fdd9c429f6 100644
-> --- a/cmd/gpt.c
-> +++ b/cmd/gpt.c
-> @@ -173,6 +173,9 @@ static int calc_parts_list_len(int numparts)
->         /* see part.h for definition of struct disk_partition */
->         partlistlen += numparts * (strlen("start=MiB,") + sizeof(lbaint_t) + 1);
->         partlistlen += numparts * (strlen("size=MiB,") + sizeof(lbaint_t) + 1);
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +       partlistlen += numparts * (strlen("type=,") + UUID_STR_LEN + 1);
-> +#endif
->         partlistlen += numparts * (strlen("uuid=;") + UUID_STR_LEN + 1);
->         /* for the terminating null */
->         partlistlen++;
-> @@ -211,6 +214,11 @@ static struct disk_part *allocate_disk_part(struct disk_partition *info,
->                 PART_TYPE_LEN);
->         newpart->gpt_part_info.type[PART_TYPE_LEN - 1] = '\0';
->         newpart->gpt_part_info.bootable = info->bootable;
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +       strncpy(newpart->gpt_part_info.type_guid, (const char *)info->type_guid,
-> +               UUID_STR_LEN);
-> +       newpart->gpt_part_info.type_guid[UUID_STR_LEN] = '\0';
-> +#endif
->  #ifdef CONFIG_PARTITION_UUIDS
->         strncpy(newpart->gpt_part_info.uuid, (const char *)info->uuid,
->                 UUID_STR_LEN);
-> @@ -252,6 +260,9 @@ static void print_gpt_info(void)
->                        curr->gpt_part_info.name);
->                 printf("Type %s, bootable %d\n", curr->gpt_part_info.type,
->                        curr->gpt_part_info.bootable & PART_BOOTABLE);
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +               printf("Type GUID %s\n", curr->gpt_part_info.type_guid);
-> +#endif
->  #ifdef CONFIG_PARTITION_UUIDS
->                 printf("UUID %s\n", curr->gpt_part_info.uuid);
->  #endif
-> @@ -299,6 +310,11 @@ static int create_gpt_partitions_list(int numparts, const char *guid,
->                                             curr->gpt_part_info.blksz);
->                 strncat(partitions_list, partstr, PART_NAME_LEN + 1);
->
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +               strcat(partitions_list, ",type=");
-> +               strncat(partitions_list, curr->gpt_part_info.type_guid,
-> +                       UUID_STR_LEN + 1);
-> +#endif
->                 strcat(partitions_list, ",uuid=");
->                 strncat(partitions_list, curr->gpt_part_info.uuid,
->                         UUID_STR_LEN + 1);
-> diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-> index 8203515e05..f9351f0274 100644
-> --- a/test/py/tests/test_gpt.py
-> +++ b/test/py/tests/test_gpt.py
-> @@ -16,6 +16,26 @@ the test.
->  # Mark all tests here as slow
->  pytestmark = pytest.mark.slow
->
-> +def parse_gpt_parts(s):
-> +    """Part a partition string into a list of partitions"""
+> This is how we have a common bit of rST for how to build N boards,
+> without having to do a literal copy and paste N times.
 
-Please remember to fully comment functions, including arg and return value.
+How about using this?
 
-Also 's' can be used in loops but not as a var or param. I think we
-need to use 3 chars or more.
-
-> +    parts = []
-> +    for part_str in s.split(';'):
-> +        part = {}
-> +        for option in part_str.split(","):
-> +            if not option:
-> +                continue
-> +
-> +            if "=" in option:
-> +                k, v = option.split("=")
-> +                part[k] = v
-> +            else:
-> +                part[option] = True
-> +
-> +        if part:
-> +            parts.append(part)
-> +
-> +    return parts
-> +
->  class GptTestDiskImage(object):
->      """Disk Image used by the GPT tests."""
->
-> @@ -49,11 +69,13 @@ class GptTestDiskImage(object):
->                  u_boot_utils.run_and_log(u_boot_console, cmd)
->                  # part1 offset 1MB size 1MB
->                  cmd = ('sgdisk', '--new=1:2048:4095', '--change-name=1:part1',
-> +                    '--partition-guid=1:33194895-67f6-4561-8457-6fdeed4f50a3',
->                      '-A 1:set:2',
->                      persistent)
->                  # part2 offset 2MB size 1.5MB
->                  u_boot_utils.run_and_log(u_boot_console, cmd)
->                  cmd = ('sgdisk', '--new=2:4096:7167', '--change-name=2:part2',
-> +                    '--partition-guid=2:cc9c6e4a-6551-4cb5-87be-3210f96c86fb',
->                      persistent)
->                  u_boot_utils.run_and_log(u_boot_console, cmd)
->                  cmd = ('sgdisk', '--load-backup=' + persistent)
-> @@ -88,6 +110,40 @@ def test_gpt_read(state_disk_image, u_boot_console):
->      assert '0x00000800 0x00000fff      "part1"' in output
->      assert '0x00001000 0x00001bff      "part2"' in output
->
-> +@pytest.mark.boardspec('sandbox')
-> +@pytest.mark.buildconfigspec('cmd_gpt')
-> +@pytest.mark.buildconfigspec('partition_type_guid')
-> +@pytest.mark.requiredtool('sgdisk')
-> +def test_gpt_read_var(state_disk_image, u_boot_console):
-> +    """Test the gpt read command."""
-> +
-> +    u_boot_console.run_command('host bind 0 ' + state_disk_image.path)
-> +    output = u_boot_console.run_command('gpt read host 0 gpt_parts')
-> +    assert 'success!' in output
-> +
-> +    output = u_boot_console.run_command('echo ${gpt_parts}')
-> +    parts = parse_gpt_parts(output.rstrip())
-> +
-> +    assert parts == [
-> +        {
-> +            "uuid_disk": "375a56f7-d6c9-4e81-b5f0-09d41ca89efe",
-> +        },
-> +        {
-> +            "name": "part1",
-
-single quotes
-
-> +            "start": "0x100000",
-> +            "size": "0x100000",
-> +            "type": "0fc63daf-8483-4772-8e79-3d69d8477de4",
-> +            "uuid": "33194895-67f6-4561-8457-6fdeed4f50a3",
-> +        },
-> +        {
-> +            "name": "part2",
-> +            "start": "0x200000",
-> +            "size": "0x180000",
-> +            "type": "0fc63daf-8483-4772-8e79-3d69d8477de4",
-> +            "uuid": "cc9c6e4a-6551-4cb5-87be-3210f96c86fb",
-> +        },
-> +    ]
-> +
->  @pytest.mark.boardspec('sandbox')
->  @pytest.mark.buildconfigspec('cmd_gpt')
->  @pytest.mark.requiredtool('sgdisk')
-> @@ -263,3 +319,4 @@ def test_gpt_write(state_disk_image, u_boot_console):
->      assert '0x00001000 0x00001bff      "second"' in output
->      output = u_boot_console.run_command('gpt guid host 0')
->      assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
-> +
-> --
-> 2.33.0
->
+https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
 
 Regards,
 Simon
