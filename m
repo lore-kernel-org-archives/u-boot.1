@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A5ECC3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:29:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC56C3DA66
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:48:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A4858620C;
-	Wed, 23 Aug 2023 20:29:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id ACA608643C;
+	Wed, 23 Aug 2023 20:48:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692815386;
-	bh=aHmpTRQfoMsaoiggBO71Vf9scpClImfTtfs6ZgzhOAU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bm8BtJ2+MeuZEHrcI6NNMIp8wDxh7RMKJSR73y3mvuCNtl86jne5zwSDv7NWgkJKQ
-	 dhR9nbHOjWDmXqfULZi/+ilNdnb/+ymTlESfhbYpiAHOONTwILnuRmOHkCtiQoOoik
-	 P/k1dotu2Up7vhYJl+fJFG09EN0zLYITQtZRP3QvmkImd4prMHSy5vfTz4cuEJa296
-	 WIg8JezfXEnMRTK9tEgILJBkB442weymj9mdVm3HHg2PYVlgyu0SGHvecorO97FSoK
-	 3OpsXDC3tuDpbc0S/c5Z1a+iB0+iLL2AjMiT6cgwdiqiwuzbSP1fLOSW8pdPLKg4TX
-	 RVj+SmxPfVo+A==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hg/NZYgf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 29FF086443; Wed, 23 Aug 2023 20:48:01 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D2AA386146;
- Wed, 23 Aug 2023 20:29:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692815385;
- bh=aHmpTRQfoMsaoiggBO71Vf9scpClImfTtfs6ZgzhOAU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ayy/RkJEv9g3zCtRlCdKF6GQuK3YYaMM+xAgrpC64tsRP9MTd5wtXFENJI+zeWY+I
- 7nbG9eB1ApBPWaucye5fzBPoss2lbQl6wl/f4nvT7tSqdE/ZKPPTbSofnyzk//fhwk
- 7yWznawn3VR2+cQ267TZunuSkg/1NuJjbe7HA4PkTMf7+C58uMul9kGxTY9tNb+X4t
- kmwS1yKhTydsZXKXfInQJJABKCbw7CBXwBMo8eHBK+Nfp5lMr/GnDzRgJSnxEh2fmj
- nbqNG67xgusI5OkxdJ+kxtEU8c5N5mONcNPIayBmGBnCH7Fi5Y6/rudJ3/2ZdNt7wk
- 8PumGY2LAmXNg==
-Message-ID: <3ff9dce0-4eee-16b8-9e8b-26842b4c9aef@denx.de>
-Date: Wed, 23 Aug 2023 20:29:44 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id D7D5E86434
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:47:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7923ae72111so104373639f.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:47:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692816476; x=1693421276;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Pf5j5Tax6ly5DM5Tk13B+qAdfHyOEUqnLp8jRE+meIw=;
+ b=hg/NZYgfMGae036hw5FhgIlbCB+lVCIsxLawBdhIBRHAaRSVJvd0fWpf+J6BPg1kGV
+ uAburuGDmBQiZNjj9hJ99f2WBE1wHLj4JlHmnB6rcpXoZZvzrmOE4QjFPp7ZM2PNJ0MX
+ tGltx06BsUH8EkhfFhsRfwJKs2bNWmc9n5PTU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692816476; x=1693421276;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Pf5j5Tax6ly5DM5Tk13B+qAdfHyOEUqnLp8jRE+meIw=;
+ b=X6RGc4ySfBsWOQebklX6b8TLbgPfrqFGa0Ti7H58cAT0cNGewXXKGdKGXYHuFKHMOE
+ Q80cMWVxutPq+OWAwUivmiU3KdSSUWgAVNf7JAPMZGylN/wW7yCT3xedez7NsnNQ96jL
+ KReRdi1sgfQqqIl5/qszVT/+8SUhLUWkNPm88OXs9PViQiW8aZ/UODHXRwpHmG9AiIZt
+ 01C0KTF5cYfcPP4ZLjQprUWa9btP0rGkx0t20qLDnnxu+jNNJKXcIvYnVpnN9doUJ97v
+ JZZEx2IHH4+O/BAfVi18ttP/qeSgpLXxd8cCBQ5gVDbk2Y7JEW0Awhz9gU/Q2bQjg6kB
+ X3cA==
+X-Gm-Message-State: AOJu0YyYhpOXR30gGOssqsOGNhmv6Pl1K4Nza9QsaNSH3XZFNTQFmtI4
+ 4IKygSpIVnpzUCEkFeuqpMsCZjE7adlTl9JcrGg=
+X-Google-Smtp-Source: AGHT+IHOTGfZ7QauUahIL40RqsjaQY7RUrhbFr82OnFpar8BuAhv4Bv3Ox8+orPGBttpFENEMIv/pQ==
+X-Received: by 2002:a6b:917:0:b0:791:1e87:b47e with SMTP id
+ t23-20020a6b0917000000b007911e87b47emr3736339ioi.15.1692816476420; 
+ Wed, 23 Aug 2023 11:47:56 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
+ by smtp.gmail.com with ESMTPSA id
+ u20-20020a02c054000000b004182f88c368sm4070929jam.67.2023.08.23.11.47.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 11:47:55 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@denx.de>, Michal Suchanek <msuchanek@suse.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
+ Shiji Yang <yangshiji66@outlook.com>
+Subject: [PATCH 0/8] x86: Fixes for chromebook_link64 and chromebook_samus_tpl
+Date: Wed, 23 Aug 2023 12:47:33 -0600
+Message-ID: <20230823184746.842091-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v2] usb: dwc3: Fix renaming SPL_USB_HOST_SUPPORT to
- SPL_USB_HOST
-Content-Language: en-US
-To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-References: <20230823182156.32353-1-oleksandr.suvorov@foundries.io>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230823182156.32353-1-oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,39 +90,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/23/23 20:21, Oleksandr Suvorov wrote:
-> In the usb/dwc3-layerscape driver the first option should be renamed
-> to the latter as well. Do it.
-> 
-> Fixes: 333e4a621df ("Rename SPL_USB_HOST_SUPPORT to SPL_USB_HOST")
-> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-> ---
-> 
-> Changes in v2:
-> - [asked by Tom Rini] shrink the code using CONFIG_IS_ENABLED()
-> 
->   drivers/usb/dwc3/dwc3-layerscape.c | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-layerscape.c
-> index 79cf71f7a85..58baa017ad1 100644
-> --- a/drivers/usb/dwc3/dwc3-layerscape.c
-> +++ b/drivers/usb/dwc3/dwc3-layerscape.c
-> @@ -134,8 +134,7 @@ U_BOOT_DRIVER(dwc3_layerscape_peripheral) = {
->   };
->   #endif
->   
-> -#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || \
-> -	!defined(CONFIG_SPL_BUILD) && defined(CONFIG_USB_HOST)
-> +#if CONFIG_IS_ENABLED(USB_HOST)
->   static int dwc3_layerscape_host_probe(struct udevice *dev)
->   {
->   	struct xhci_hcor *hcor;
-> @@ -194,7 +193,7 @@ static int dwc3_layerscape_bind(struct udevice *dev)
->   		driver = "dwc3-layerscape-peripheral";
->   		break;
->   #endif
-> -#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || !defined(CONFIG_SPL_BUILD)
-> +#if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
+These boards have various problems which prevent them from booting. In
+the case of link there was a recent regression with PCI probing added to
+SPL. For samus_tpl it needs a few tweaks to get things back up and
+running.
 
-Why not CONFIG_IS_ENABLED(USB_HOST) here too ?
+This series resolves all known issues.
+
+
+Simon Glass (8):
+  x86: broadwell: Show the memory delay
+  x86: Add some log categories
+  x86: samus_tpl: Correct text base and alloc sizes
+  x86: spl: Change the condition for copying U-Boot to RAM
+  x86: broadwell: Avoid initing the CPU twice
+  x86: broadwell: Set up MTRRs
+  spl: x86: Avoid starting up PCI automatically in SPL
+  x86: doc: Update the list of supported Chromebooks
+
+ arch/x86/cpu/broadwell/cpu.c           | 10 +++++-----
+ arch/x86/cpu/broadwell/sdram.c         |  2 ++
+ arch/x86/cpu/intel_common/mrc.c        | 18 +++++++++++++++++-
+ arch/x86/dts/chromebook_samus.dts      |  1 +
+ arch/x86/lib/init_helpers.c            |  7 +++----
+ arch/x86/lib/spl.c                     |  2 +-
+ arch/x86/lib/tpl.c                     |  2 ++
+ common/spl/spl.c                       |  2 +-
+ configs/chromebook_samus_tpl_defconfig |  4 +++-
+ doc/arch/x86.rst                       |  5 +++--
+ 10 files changed, 38 insertions(+), 15 deletions(-)
+
+-- 
+2.42.0.rc1.204.g551eb34607-goog
+
