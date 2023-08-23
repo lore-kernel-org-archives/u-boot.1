@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F81EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:00:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B8E6EE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:00:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F39FD864CC;
-	Wed, 23 Aug 2023 15:59:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 463F8864D3;
+	Wed, 23 Aug 2023 15:59:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="npPktE8V";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="jNKIQFay";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F20B8645F; Wed, 23 Aug 2023 15:59:31 +0200 (CEST)
+ id 6E1B886459; Wed, 23 Aug 2023 15:59:32 +0200 (CEST)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 345C18645A
+ by phobos.denx.de (Postfix) with ESMTPS id 8465F864AA
  for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:59:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
 Received: from adahl by ada.ifak-system.com with local (Exim 4.94.2)
  (envelope-from <ada@thorsis.com>)
- id 1qYoNs-001Zv3-9n; Wed, 23 Aug 2023 15:58:56 +0200
+ id 1qYoNs-001ZvC-Bq; Wed, 23 Aug 2023 15:58:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
  t=1692799167;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8KdfaD5r969r3VHqQJv4AMvB4RxjNZ9sldnpUink2ys=;
- b=npPktE8VLRZ3eYtowEVQeFTOYM69ewB8VIBSOCPFROGtnvrAH17xhf0lUI0X5vVoJ3YMqr
- cDd8HdehetcGw26zMrL9DE8CpCT/WkC21jsk9uZDGoGXPfwE1kIYQJSojSWkH+CMPAJgxo
- 1BH0acTYx3jtWgULQSl24rdSI/rOiHBEfxM9urqfpGSi2YhLK5cch2j+pEdGJekEvb1/vE
- nec0nLb+Q9h5HON+wR/t214XBs3bQwSVnIFtMw4bJACUsVjkYmEeGKIIcnZ8OVo0orGfZV
- XN+blu4GAnxNBPUuEA3TNO+2686dHQBFU7ypiLs2yWMgfwQ0r6HerELupPPkdQ==
+ bh=bFIflozD1UVopLQkrP+Zhuqui+zzlAO0P2/DIXZ68Cw=;
+ b=jNKIQFaySDCixcR9TWDysrn7NuCSZ8fNmXCzbeqScO3ngR+8Pgk1PEhOCLKQVSVnd70b7/
+ LhOnim8LFD7XBrta9LZ8eHOoZ98aoJUPf3G3bR8woeJAQalOgs50+GKFwuzwMTB697ANyE
+ klc9gpPuAizoAJ3+3mbB/4S7E2gsAoEcMPlduCm4mikBs/gWbHx7NdSJivLsKnH+AmjPef
+ 5nHZyg5w80IyMVTfdCbBMgzw1pmcZ6PjgLUBtXEBfRHYB4dv3sukfUmBSQ4uJMfDypRziq
+ tp69i9Hs7fCiYYcxVuw90VByFDRsIiV35ONQarEbranJ5K2npsZW2c6e83gM/g==
 From: Alexander Dahl <ada@thorsis.com>
 To: Eugen Hristev <eugen.hristev@collabora.com>,
  Durai Manickam KR <durai.manickamkr@microchip.com>,
  Sandeep Sheriker M <sandeep.sheriker@microchip.com>
 Cc: Sergiu Moga <sergiu.moga@microchip.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 1/5] configs: at91: sam9x60_curiosity: Sync both defconfig
- variants
-Date: Wed, 23 Aug 2023 15:58:52 +0200
-Message-Id: <20230823135856.376351-2-ada@thorsis.com>
+Subject: [PATCH v2 4/5] board: sam9x60-curiosity: Let LED subsystem init leds
+ if enabled
+Date: Wed, 23 Aug 2023 15:58:55 +0200
+Message-Id: <20230823135856.376351-5-ada@thorsis.com>
 In-Reply-To: <20230823135856.376351-1-ada@thorsis.com>
 References: <20230823135856.376351-1-ada@thorsis.com>
 Content-Transfer-Encoding: 8bit
@@ -67,93 +67,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The board has two SD card slots and we have two defconfigs for booting
-from either the first (micro SD) named 'sam9x60_curiosity_mmc_defconfig'
-or the second (full size SD) named 'sam9x60_curiosity_mmc1_defconfig'.
-For comparable Microchip boards (sama5d27-som1-ek, sama5d29-curiosity,
-sama7g5ek) with two card slots the defconfigs only differ in BOOTARGS,
-BOOTCOMMAND, and ENV_FAT_DEVICE_AND_PART and the same should be the case
-for sam9x60_curiosity.
+If CONFIG_LED and CONFIG_LED_GPIO are enabled, it is not necessary to
+initialize the RGB LED on the board by manually setting hardcoded GPIOs
+anymore.  Everything is well defined in dts and can be used like on
+boards of other vendors.
 
-Here the 'mmc1' config has more options enabled to support the raw NAND
-flash populated on the board, so the 'mmc' config (for mmc0) was adapted
-by enabling additional options, instead of removing options from mmc1.
+Keep the old behaviour as fallback, though.
 
-The 'mem=128M' argument can be dropped from kernel command line, because
-it is redundant to memory node in dts in both Linux and U-Boot:
-
-        memory@20000000 {
-                reg = <0x20000000 0x8000000>;
-        };
+With all this in place enabling CONFIG_CMD_LED gives us a working 'led'
+command on the U-Boot shell.
 
 Signed-off-by: Alexander Dahl <ada@thorsis.com>
 ---
+ .../arm/dts/at91-sam9x60_curiosity-u-boot.dtsi | 18 ++++++++++++++++++
+ .../sam9x60_curiosity/sam9x60_curiosity.c      | 18 ++++++++++++++++++
+ 2 files changed, 36 insertions(+)
 
-Notes:
-    v1 -> v2:
-      - reworded commit message
-
- configs/sam9x60_curiosity_mmc_defconfig | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
-
-diff --git a/configs/sam9x60_curiosity_mmc_defconfig b/configs/sam9x60_curiosity_mmc_defconfig
-index 10937d67d7..269f015989 100644
---- a/configs/sam9x60_curiosity_mmc_defconfig
-+++ b/configs/sam9x60_curiosity_mmc_defconfig
-@@ -23,7 +23,7 @@ CONFIG_FIT=y
- CONFIG_SD_BOOT=y
- CONFIG_BOOTDELAY=3
- CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="mem=128M console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait"
-+CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/mmcblk0p2 rw rootwait"
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="fatload mmc 0:1 0x21000000 at91-sam9x60_curiosity.dtb; fatload mmc 0:1 0x22000000 zImage; bootz 0x22000000 - 0x21000000"
- CONFIG_SYS_CONSOLE_IS_IN_ENV=y
-@@ -38,6 +38,8 @@ CONFIG_CMD_DM=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_NAND=y
-+CONFIG_CMD_NAND_TRIMFFS=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
- CONFIG_BOOTP_BOOTFILESIZE=y
-@@ -50,6 +52,8 @@ CONFIG_OF_CONTROL=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_REGMAP=y
-+CONFIG_SYSCON=y
- CONFIG_CLK=y
- CONFIG_CLK_CCF=y
- CONFIG_CLK_AT91=y
-@@ -60,10 +64,17 @@ CONFIG_CPU=y
- CONFIG_AT91_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_AT91=y
-+CONFIG_ATMEL_EBI=y
-+CONFIG_MFD_ATMEL_SMC=y
- CONFIG_I2C_EEPROM=y
- CONFIG_MICROCHIP_FLEXCOM=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ATMEL=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_RAW_NAND=y
-+CONFIG_DM_NAND_ATMEL=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
- CONFIG_PHY_MICREL=y
- CONFIG_MACB=y
- CONFIG_PINCTRL=y
-@@ -71,6 +82,8 @@ CONFIG_PINCTRL_AT91=y
- CONFIG_DM_SERIAL=y
- CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_ATMEL_USART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_AT91=y
- CONFIG_TIMER=y
- CONFIG_MCHP_PIT64B_TIMER=y
- CONFIG_W1=y
+diff --git a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
+index a1b76e94d1..dd4623311c 100644
+--- a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
++++ b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
+@@ -20,6 +20,24 @@
+ 	chosen {
+ 		bootph-all;
+ 	};
++
++	config {
++		u-boot,boot-led = "blue";
++	};
++
++	leds {
++		led-red {
++			default-state = "off";
++		};
++
++		led-green {
++			default-state = "off";
++		};
++
++		led-blue {
++			default-state = "off";
++		};
++	};
+ };
+ 
+ &clk32 {
+diff --git a/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c b/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
+index 0fe0de9fde..f53d359404 100644
+--- a/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
++++ b/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
+@@ -9,6 +9,7 @@
+ #include <debug_uart.h>
+ #include <fdtdec.h>
+ #include <init.h>
++#include <led.h>
+ #include <asm/arch/at91_common.h>
+ #include <asm/arch/at91_rstc.h>
+ #include <asm/arch/at91_sfr.h>
+@@ -18,6 +19,7 @@
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/mach-types.h>
++#include <dm/ofnode.h>
+ 
+ extern void at91_pda_detect(void);
+ 
+@@ -27,9 +29,25 @@ void at91_prepare_cpu_var(void);
+ 
+ static void board_leds_init(void)
+ {
++#if CONFIG_IS_ENABLED(LED)
++	const char *led_name;
++	struct udevice *dev;
++	int ret;
++
++	led_name = ofnode_conf_read_str("u-boot,boot-led");
++	if (!led_name)
++		return;
++
++	ret = led_get_by_label(led_name, &dev);
++	if (ret)
++		return;
++
++	led_set_state(dev, LEDST_ON);
++#else
+ 	at91_set_pio_output(AT91_PIO_PORTD, 17, 0);	/* LED RED */
+ 	at91_set_pio_output(AT91_PIO_PORTD, 19, 0);	/* LED GREEN */
+ 	at91_set_pio_output(AT91_PIO_PORTD, 21, 1);	/* LED BLUE */
++#endif
+ }
+ 
+ int board_late_init(void)
 -- 
 2.30.2
 
