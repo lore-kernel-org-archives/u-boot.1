@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5988EEE49A5
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 00:19:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37072EE49A5
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 00:19:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F196F864D0;
-	Wed, 23 Aug 2023 02:18:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F6DF864D7;
+	Wed, 23 Aug 2023 02:18:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eVLgu2+Z";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BEMRulJl";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="sgZ33Eb2";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BwxqZGHk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7009E864C3; Wed, 23 Aug 2023 02:18:48 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 75FEB864C1; Wed, 23 Aug 2023 02:18:48 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93A53864C0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 02:18:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E071C864BE
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 02:18:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,20 +31,20 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RVmz92lLhz9snh;
- Wed, 23 Aug 2023 02:18:45 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RVmz85fv9z9sdD;
+ Wed, 23 Aug 2023 02:18:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692749925;
+ s=mail20150812; t=1692749924;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=b8tZfRE59qEZWA3Pw4lRk78K2DV5rZclFCB4RaA/d9I=;
- b=eVLgu2+Zw49pxn7kVnEvLD7LoqhlmdPV9NOazAashzXBm0wb0xJGGtMtJdoTP+OEi30Fwz
- QJtuCa35i/pKwyZ5GTJo4wfZfFptEMD3QxpK6+COlbJyYJayRJgwyEyhk2g5QBoqoLohHH
- ss67Csct3HhG3mfd4Pt0+KnnrDjEaaIW3uJv/R7ZoZNtvwY7DMSmHjm5L/IBasvzLPdlD8
- 2Ite3GSlFHWsW7Q2Y0JCH+Y9Y33ELlM6ljxikFQsy1xOvGHge7qTYEjMIVvVhX3hQj9z8K
- 341IMJ5zRyOVQGslg6OJW941WF1JWOlheK1nrZ9hdv8CvumDicRGUhtwIRQuNw==
+ bh=/SowIvMIi1je9gCrbCNGyFgx85iUhmQKUq8pnEGetqw=;
+ b=sgZ33Eb2AN3abv6aP7w9q/wDDTCGJEZPfnBmSoieuhXUll96J8vDEyANpWZLYeQlQaZ7rs
+ rVhBP86j8NVxy9bsdiheAJDdJQbXElYUtDixw+TCyjkhF1sVL480DTIAB18j+XK8myJ8ua
+ Or9ATdonx9VXNmK7hBqxQdULFYor+WixeklRoOoGcrltw1txaeCfVdiLF9v6FG38jwO6gC
+ w6Jy1vlwI0FzgySG2BaNIyHf9He/qLrp9znXuPQUXxpUdM5PH0OBH8VI5uNXW9o61DXVG+
+ ZLNKquTvmw/Wl3P/lDZARqw8VnkIHDH4YF48X/5Ejp9Q2u6/KqVgOFsUY0hEgA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1692749922;
@@ -51,25 +52,26 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=b8tZfRE59qEZWA3Pw4lRk78K2DV5rZclFCB4RaA/d9I=;
- b=BEMRulJlRQ5/nmuysaATx83/DBDE92uPx2jh+1+1FTrybb45YUJnQmHnnD9AiHg6hx5k3F
- 561MdYt9q+eBN7gEzYXISQm5/RskG2VfaQHUiwkmF/8NVGgiYpqCYgc5u3TU4S+yHNCivN
- jKbyieVTtOHzHEo2jAV6biGTmuX2GM48fy7m4cDF+Qul1ElVYobSnep+89OVUIiRslzhYg
- El0OR0RfgUtmiakwomg86bTaUbxMfPIOuumUAdXMDYLKoTLXDYLAw44dD1bNUSPE5YBNlH
- jqIJsMOMWpvwdwa+Ik0PiTs4sqALdfBywc5p/CI6BAMGrbGYWPsX6K4lN197lQ==
+ bh=/SowIvMIi1je9gCrbCNGyFgx85iUhmQKUq8pnEGetqw=;
+ b=BwxqZGHkBs+LcHUZVq82zevVe3WHtc3Do7crOELkifH7QJrBvYSK9mxPQtlDxMBOHUi99j
+ 7lZSI6kyRigjL1XBA7+uY3qChckNnkg7dkEQgHgVV8j7LIRtxUhtRSceSiOpr7GXw4bR2X
+ TFkeotrgCLpjdwjhNH4q9s4QlW6zm5U/IvOlVcRu9yDbTu5PmDhPr4PYGQQZvJj+fVWWUJ
+ /YQUTyTWAl//RutPJxB3X2bINtRwZagHMBWLXtg9jyf1m+2hAD0ngiPF0a0D4D1czy0KoE
+ Z/U75iBeu7vaNxmjoRnw87EIt3Aa7E2Ds0CTjDpq80Dufftpo43yvxnm9A6Sww==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 5/5] configs: sandbox: Enable NVMXIP QSPI driver
-Date: Wed, 23 Aug 2023 02:18:21 +0200
-Message-Id: <20230823001821.266578-5-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 4/5] drivers/mtd/nvmxip: Move sandbox_set_enable_memio() to
+ test
+Date: Wed, 23 Aug 2023 02:18:20 +0200
+Message-Id: <20230823001821.266578-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230823001821.266578-1-marek.vasut+renesas@mailbox.org>
 References: <20230823001821.266578-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 9jfcrgzcst5amtfjhuo744s1fceq7iom
-X-MBO-RS-ID: 1626091aa1ff01d9ca3
+X-MBO-RS-META: t9fry5bn7fbc3bf7taiu4e1gdradf1qg
+X-MBO-RS-ID: 7cd0a63843757b0c480
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,31 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable NVMXIP QSPI driver on sandbox, since it is already enabled
-on sandbox64.
+The sandbox_set_enable_memio() should only ever be set during
+sandbox testing, not within driver itself, move it back to test/ .
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Cc: Simon Glass <sjg@chromium.org>
 ---
-V2: No change
+V2: New patch
 ---
- configs/sandbox_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/mtd/nvmxip/nvmxip-uclass.c | 4 ----
+ test/dm/nvmxip.c                   | 2 ++
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index a57ab23d9a2..e1203714c60 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -226,6 +226,7 @@ CONFIG_SPI_FLASH_SPANSION=y
- CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_SPI_FLASH_SST=y
- CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_NVMXIP_QSPI=y
- CONFIG_MULTIPLEXER=y
- CONFIG_MUX_MMIO=y
- CONFIG_NVME_PCI=y
+diff --git a/drivers/mtd/nvmxip/nvmxip-uclass.c b/drivers/mtd/nvmxip/nvmxip-uclass.c
+index 36eb056c213..9a316d1de39 100644
+--- a/drivers/mtd/nvmxip/nvmxip-uclass.c
++++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
+@@ -29,10 +29,6 @@ int nvmxip_probe(struct udevice *udev)
+ 	char bdev_name[NVMXIP_BLKDEV_NAME_SZ + 1];
+ 	int devnum;
+ 
+-#if CONFIG_IS_ENABLED(SANDBOX64)
+-	sandbox_set_enable_memio(true);
+-#endif
+-
+ 	devnum = uclass_id_count(UCLASS_NVMXIP);
+ 	snprintf(bdev_name, NVMXIP_BLKDEV_NAME_SZ, "blk#%d", devnum);
+ 
+diff --git a/test/dm/nvmxip.c b/test/dm/nvmxip.c
+index 89bf481f616..f0ad47d4efe 100644
+--- a/test/dm/nvmxip.c
++++ b/test/dm/nvmxip.c
+@@ -103,6 +103,8 @@ static int dm_test_nvmxip(struct unit_test_state *uts)
+ 	void *buffer = NULL;
+ 	unsigned long flashsz;
+ 
++	sandbox_set_enable_memio(true);
++
+ 	/* set the flash content first for both devices */
+ 	dm_nvmxip_flash_sanity(uts, 0, NULL);
+ 	dm_nvmxip_flash_sanity(uts, 1, NULL);
 -- 
 2.40.1
 
