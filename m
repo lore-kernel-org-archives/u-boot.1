@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5076CEE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48F02EE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:42:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC141864CE;
-	Wed, 23 Aug 2023 16:42:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1849F864DF;
+	Wed, 23 Aug 2023 16:42:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VyrrVGEa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HVbEllaT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D2A5864CC; Wed, 23 Aug 2023 16:42:14 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id B3E53864D2; Wed, 23 Aug 2023 16:42:18 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F18CD864D2
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:42:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF013864D7
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:42:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5924093a9b2so23778907b3.2
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:42:11 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d7485d37283so3888988276.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:42:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692801728; x=1693406528;
+ d=konsulko.com; s=google; t=1692801733; x=1693406533;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4joqseWqDEfQGtJj/05gkFsWZXSkilZcpDRjMypxVJ4=;
- b=VyrrVGEaLouXzlWL+cz3zlM4rBL5Y/QznQ4o7cyY2KFiuXBXOapOFutd7me6hxfu24
- QWiDvbM2IN6A2wfXt1ewdeARXaHpU7PYnomYvp0eMr9MVup8nz90Njop89l5Lpt1Yq4P
- oYlYFFg1q6/qnpd1FmItWPdKssUdxTEr/Qfv8=
+ bh=8dHmm8pUJ6w+C0GspRs6HYZ+p1ioji/1zQHycQnlvzk=;
+ b=HVbEllaT7riBywIMNTAoASISmTaOAzXP+RUvQYqNUUcCw7Yrj7krGl+udqgSJ2e587
+ GP3yPyoXUhQOp43BYMBzjCeCd2FTciQUHpFvsNVL1RN5kiIgLmkjZIYHkEFNgcOfUsG+
+ x9Iuz8pV9T0mSCd5ED79sDkSAWkl89kyH+TX4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692801728; x=1693406528;
+ d=1e100.net; s=20221208; t=1692801733; x=1693406533;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4joqseWqDEfQGtJj/05gkFsWZXSkilZcpDRjMypxVJ4=;
- b=PD4h0TssS5QdeFbq7EEjnZG0DKvETIjPObHEohGAbYnJLDtCCGpRmWUh7wwoIz+xI8
- uqNVE3lOt21O7++YjHt/IHvm0oHIaI9+/o5syzXhijSCurop9d8QU8iRKa7q1saGKKgx
- ErZPKtuPBGiiM98Q5stejDyH+b6C0h/ypJVBM2vM+CfGeXqEWlHnMz8bMeN0+e7zqAbV
- Zlbo18Z7MyZr3jL8/RrJvu7p9RGXJh/+rrOzq6o952kQr6d5yMWNDeBhzfxNtMX0EFxv
- Y50R7SRZGQlqOwJyjkWy9ORi7esk+KguKHBJGJKnMnv2ZCZt6B+If4CS3T/mOtldjtKT
- ujkg==
-X-Gm-Message-State: AOJu0Yx/f8Vv4HoUG+1wvK4lq472XVpYZzrMEb/TEWjL/UOeXS7Lp+sr
- nvtQ6zaRnDKzLnpBRI0OsW4wm//08Sutd+7NYAEYEw==
-X-Google-Smtp-Source: AGHT+IGe7dwpZNXUOdIIMNskvRiCGMIJHssCfXzd4uRWTRR7bOJx6T+F500guPwczNpkkeZS8Q0YCA==
-X-Received: by 2002:a81:920a:0:b0:58c:a87b:6e65 with SMTP id
- j10-20020a81920a000000b0058ca87b6e65mr15243280ywg.26.1692801727957; 
- Wed, 23 Aug 2023 07:42:07 -0700 (PDT)
+ bh=8dHmm8pUJ6w+C0GspRs6HYZ+p1ioji/1zQHycQnlvzk=;
+ b=kvJLC7plgUCGCgnRofPb4JQPirS6DimMNnD8VBXz7wwihkeuc8aBTIidI7R8zdad1J
+ yJBolSQBcgVxq3N6RlpLOU11FcevWM0X8D0MxtSRLTUpul8xsnkz9AmHtZreuRZ8QjyE
+ Qhjpp5v+EnMRrPk/txeIVEpnlFzGyKWmcmFDzxRXKrmjJksj1Is+lXkf4F159tNvBo+B
+ FEiJnBWdqU2Y/OUBgpPIF9FLXWssk6Fqaj6DSoUHqmMA+z6XB67nPUf9ohiZdkVthKH8
+ puwtaDAkppVyGBBSoITzHPX+I+ZJha8JUvddYQBcG0g3jcuRn5YSggXPtPjeMmaPLPbZ
+ GUJg==
+X-Gm-Message-State: AOJu0YzLlj2n43uTX0s3BFhitCO7IkY2zTxPo2s62VmophNP+AB76azn
+ VH8H4f/ATzCIFDujBoxBsVvxgg==
+X-Google-Smtp-Source: AGHT+IFfaTMJO2YL66B4pRsbPCKkx9OzTwAj3sgPrMSybj/vdC2ErTWTH1krgV7x1jIfZl+4aRv39Q==
+X-Received: by 2002:a05:6902:290:b0:d74:5f4c:823 with SMTP id
+ v16-20020a056902029000b00d745f4c0823mr12675364ybh.16.1692801733127; 
+ Wed, 23 Aug 2023 07:42:13 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- h6-20020a816c06000000b005707f542f62sm3354592ywc.25.2023.08.23.07.42.07
+ v17-20020a259111000000b00d74b8fa3497sm1475141ybl.20.2023.08.23.07.42.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 07:42:07 -0700 (PDT)
-Date: Wed, 23 Aug 2023 10:42:05 -0400
+ Wed, 23 Aug 2023 07:42:12 -0700 (PDT)
+Date: Wed, 23 Aug 2023 10:42:10 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>,
@@ -71,15 +71,16 @@ Cc: u-boot@lists.denx.de, AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Joshua Watt <jpewhacker@gmail.com>,
  Michal Suchanek <msuchanek@suse.de>, Simon Glass <sjg@chromium.org>,
  Tobias Waldekranz <tobias@waldekranz.com>
-Subject: Re: [PATCH 2/8] disk: Simplify disk_blk_read() using blk_read()
-Message-ID: <20230823144205.GT3953269@bill-the-cat>
+Subject: Re: [PATCH 3/8] disk: Simplify disk_blk_{write, erase}() using
+ blk_{write, erase}()
+Message-ID: <20230823144210.GU3953269@bill-the-cat>
 References: <20230813234648.591083-1-marek.vasut+renesas@mailbox.org>
- <20230813234648.591083-2-marek.vasut+renesas@mailbox.org>
+ <20230813234648.591083-3-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9v8eU9WydGA9OdLj"
+ protocol="application/pgp-signature"; boundary="ZXFOVtcMmaHua7s7"
 Content-Disposition: inline
-In-Reply-To: <20230813234648.591083-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230813234648.591083-3-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,28 +99,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9v8eU9WydGA9OdLj
+--ZXFOVtcMmaHua7s7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 14, 2023 at 01:46:42AM +0200, Marek Vasut wrote:
+On Mon, Aug 14, 2023 at 01:46:43AM +0200, Marek Vasut wrote:
 
-> The disk_blk_read() can be simplified using blk_read(), the only
-> things which needs to be handled are the read offset based on the
-> partition properties, and the block device ops which are coming
-> from the parent udevice, not the partition udevice.
+> These two functions are basically identical, just call the blk_*()
+> functions from disk_blk_*() functions. The only difference is that
+> the disk_blk_*() functions have to use parent block device as the
+> udevice implementing block device operations.
 >=20
-> The later is currently not implemented correctly as far as I can
-> tell, since the current code extracts block device descriptor from
-> the parent udevice which is OK, but extracts block device operations
-> from the partition udevice, which does not seem OK.
->=20
-> Switching to the blk_read() fixes that too.
->=20
-> The dev_get_blk() usage is simplified using UCLASS_PARTITION check.
->=20
-> Add non-confusing documentation what this really does.
+> Add documentation on what those functions really do. The documentation
+> is not wrong even though it likely does look that way. The write/erase
+> functions really do not take into account the partition offset. This
+> will be fixed in the next patch.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -128,22 +123,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---9v8eU9WydGA9OdLj
+--ZXFOVtcMmaHua7s7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGr0ACgkQFHw5/5Y0
-tyzyRQv+LIW4jOxoqxaytdk8lxA5R9cQgOzzcTeaGEOFz/aspG7edyswwwc4A+lW
-U0+HoBnUTCZFBMQ35O9iwS7WW++kZ+2R9p2tjoCcEdYwx3oVIw2Z75tf973ktX6O
-PAL3WEYv5UMBZP1JqklThRvj7eM+Dsold57qRF2pTS6FQqVuzH+nBNMxvWQIgDsb
-DaW/ATf28WYlzOEIUH/0Kn65XsAdFdGuXS/Mdj/7ZO7KcYLHK1p8eJeVu3NCozAV
-QseAnKmQhvdhWBgNyILgoi+u7isWl0Cu+kWQYteK37dZsM70yPduRlKqg0BiGSaB
-BiQQu0f0WMPEaaz1s+0yaRyc/76cYRW3fgYcHkzOntKO0or+syhzAgwJcQ2yZ5or
-Lni1sES8q3nkDSQYJiHDFF9i1qcrW4kYTVM3VQmqVHEd7Tqn137szJrE1EveWXKH
-MRV73LTz9uYjCLc64T+FM3m0scJ50o3Wl7yYhLbv8mkXKeJVLT7CgvA5ysNYA3CT
-4lNz6Vwd
-=E9BO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGsIACgkQFHw5/5Y0
+tyxglAv+IZ3r4MLijHErhvzNkrXQRqoy5Hp8U8WfbRh/j5NlZIf+GxzMeFJxiToW
+5DQ5dubQNnXdaxJOTNBl9VC9ioa11plXSyRNVFJywqkx/edBQlQnehDx515UVn5M
+P9HGwsU5TCyZ8EDRyrQ7b7UMpKkrlBt84Me3C07YjgBEpG74LAI2+kJBji1ArZMh
+rkaiV0tXgsONvpGLyskQF+/LivkGGohW3QcEHm7k5DIVnm1j1HRzFzUGKsgLskuG
+BWNVMwkuyA/rJULU3mNXZmfJHng8liWbFh0U+rPc83t9AR30lBzsrxJQtaZk6qxn
+JPOq63ZYi3gTo72MZGRR0K7oo1rgooSe5krP39kZV0wMMplAh9DUpbcbqYlFTLgh
+m38FZcp9DlKsSytp53hsR054wJRoO2KdrmB/+wQ9lllP+lXc8/cLKPO7QT05w1rv
+K3AuBAcpABOg+EQIQ+d5CHv/YWIJ0NKPvA8FKpKciFRGv/E3DGWy1odWx8fQ9XRh
+5o7QyoxU
+=wJfK
 -----END PGP SIGNATURE-----
 
---9v8eU9WydGA9OdLj--
+--ZXFOVtcMmaHua7s7--
