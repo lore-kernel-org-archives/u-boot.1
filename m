@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6113EE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38519EE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:44:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 286218650C;
-	Wed, 23 Aug 2023 16:43:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 703518650A;
+	Wed, 23 Aug 2023 16:43:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oH2EB7yj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VbCXoZvQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38A4186504; Wed, 23 Aug 2023 16:42:59 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 4431086504; Wed, 23 Aug 2023 16:43:03 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21429864FA
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:42:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F04BF864FA
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:43:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d7485d37283so3889765276.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:42:57 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-590685a3be5so39943877b3.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:43:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692801776; x=1693406576;
+ d=konsulko.com; s=google; t=1692801779; x=1693406579;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CdlRF/mJoSd4lgTSgbKuXIR4/WbyRIRkLfDlo1M2v3w=;
- b=oH2EB7yjJ+c6I3s3ji4IZaAd8rvxGvs2sLEFwbyYSfLWWEzcKw8SlUejFZAUxO/4K2
- +fT7sWrTC5B6HEs30t7r6O2Gfv/mmat3fn1Kb4T3YHh9v8I/axYLcQdnRMBKBOdGOXUj
- nHqTKZkEXiGLasJKz34hGxmPcRUvCvXdlAVF4=
+ bh=RhGQH8bgFJa0xEJeRPCdHSz1RJzXAmvwBkOimC99Yik=;
+ b=VbCXoZvQgy/txhNnZV7wBEQScXKhguQXSlLRSmcMmvfwDGQepfQn4MJBu3c9E20Hzj
+ EUY4gcsDBREPDLXgYpswA9X/T0QWwhq17CyDVotpg2T0VEbhKyjPXQ5fXHtrbNqJAMZ0
+ I27VCECt+WtiYBVKmeRgsoxJASdHM1CJN9zBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692801776; x=1693406576;
+ d=1e100.net; s=20221208; t=1692801779; x=1693406579;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CdlRF/mJoSd4lgTSgbKuXIR4/WbyRIRkLfDlo1M2v3w=;
- b=iTak+0V7+NVKD+6NGwcCqH5dqqTQjRdIA63yOl+LUu/VorfgweBnIIRkK8gxviCybs
- YZIm1QaKMXajUgBNyAxTT0SXx+lZ0d4ZkAETYXTejYG4t/tr/n/+3elqSmuTsawLifVH
- W/e+b/lanXxvIuO8dKp/82ewuRsivZ+chs5cwdMXAnrDg7Bgv+lFZVNr4uQ57lB4FHIR
- sSNYcKu66tFFQgLSaFjzwnDPEf6Lmwdv4QQytjpuQBcQEYZgphi1EDUwLsFbeX2C8boF
- VfT3/62NIz66CWjCuK3uYjswvQfmbzLMg15lhSTSiV8378LSESLP89CJxkgNYnDM8qE2
- kXYw==
-X-Gm-Message-State: AOJu0Yy15W1REt34cx9foqmGAJUMZhr/2ociFI+Nxz2milBrweYrIN/n
- F3BFo9balEb8HzrJzFsP3iA2Ew==
-X-Google-Smtp-Source: AGHT+IGHZzrPOahhkyVjZxstlTxTfwnImL2+8M4AsqQEtzyicTdRCAwTgzvK5AX2aGCuhszmtNpHcw==
-X-Received: by 2002:a25:9243:0:b0:d1c:2b66:30a with SMTP id
- e3-20020a259243000000b00d1c2b66030amr12355175ybo.8.1692801775731; 
- Wed, 23 Aug 2023 07:42:55 -0700 (PDT)
+ bh=RhGQH8bgFJa0xEJeRPCdHSz1RJzXAmvwBkOimC99Yik=;
+ b=GVrofet/63RypSi6suZEqn0FPEziJat5vp0VoGWKX+QGGABoyO9zE3PElshnDqwJDR
+ OOEknaM3o3mtXJpDJJLxIfHq/HYaG8HEsrOWqiDMw8MzES2TzOI4d/1j483yjYiTrgO7
+ fz61xYv0J5ojffOhSLZk5pyxyvpg+mLtSirtb67/+CweT/BgwFZuzxPuvC3rOK9OG4zX
+ 87Kpo7+jKsaFGSaPtu1Dvt5QtWpigUGBOEEriCu5CV5WwVWzW4KPKvKtIdkc8zjpMXAg
+ qGOjJAIP5AhJ6w9hnOdRrPICQoN9klFb2Mg2MeKts2D/GG7ElivWwqzLtc9F7eA2vptX
+ TzJw==
+X-Gm-Message-State: AOJu0YzadZpjTYh1eWObv6CZwiv4T/kw0OniNqRzKb1uubeZ99xt16mD
+ gbm8BGJFRyHHo1k/5QvYyLrEjg==
+X-Google-Smtp-Source: AGHT+IFmA6ZG7QUB0jWATGpukYWhGFIe3H5cK5cjs4eMqlG7UnOmMul8KIuitNLB4Bb3ouq+S1f3AA==
+X-Received: by 2002:a05:690c:2c8a:b0:58d:71c0:34d1 with SMTP id
+ ep10-20020a05690c2c8a00b0058d71c034d1mr10325926ywb.6.1692801779704; 
+ Wed, 23 Aug 2023 07:42:59 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- f9-20020a056902038900b00d071631665fsm2738006ybs.59.2023.08.23.07.42.54
+ i63-20020a0df842000000b005772e9388cdsm3345949ywf.62.2023.08.23.07.42.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 07:42:55 -0700 (PDT)
-Date: Wed, 23 Aug 2023 10:42:53 -0400
+ Wed, 23 Aug 2023 07:42:59 -0700 (PDT)
+Date: Wed, 23 Aug 2023 10:42:57 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Nishanth Menon <nm@ti.com>
 Cc: Neha Francis <n-francis@ti.com>, Bryan <bb@ti.com>,
  Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH V4 1/8] env_default: Allow CONFIG_EXTRA_ENV_TEXT to
- override CFG_EXTRA_ENV_SETTINGS
-Message-ID: <20230823144253.GF3953269@bill-the-cat>
+ Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH V4 7/8] board: ti: am62x: Add am62x_beagleplay_*
+ defconfigs and env file
+Message-ID: <20230823144257.GG3953269@bill-the-cat>
 References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-2-nm@ti.com>
+ <20230822184135.2328409-8-nm@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RPgU1yc4cgpcoAAm"
+ protocol="application/pgp-signature"; boundary="lAnw5ImbmygkAuz4"
 Content-Disposition: inline
-In-Reply-To: <20230822184135.2328409-2-nm@ti.com>
+In-Reply-To: <20230822184135.2328409-8-nm@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,87 +98,65 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RPgU1yc4cgpcoAAm
+--lAnw5ImbmygkAuz4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 22, 2023 at 01:41:28PM -0500, Nishanth Menon wrote:
-
-> CFG_EXTRA_ENV_SETTINGS is set in common board config files, This allows
-> for majority of the settings to be set in a common manner. However, the
-> minor variations between various board can be addressed by the board.env
-> files. The board.env files are converted into CONFIG_EXTRA_ENV_TEXT.
->=20
-> However, this creates a minor problem. For example:
-> distro_bootcmd.h and used by ti_armv7_common.h uses it as:
->  #define BOOT_TARGET_DEVICES(func) \
-> 	func(MMC, mmc, 0) \
-> 	func(MMC, mmc, 1)
->=20
-> Which in turn generates:
-> boot_targets=3Dmmc0 mmc1
->=20
-> And this probably works fine for most boards, However when the
-> boot_targets need to be reversed, the preferred behavior would have been
-> to define it in board.env file as:
-> boot_targets=3Dmmc1 mmc0
->=20
-> By changing the order of the inclusion, we allow for the
-> CONFIG_EXTRA_ENV_TEXT to have a higher priority in the definition.
+On Tue, Aug 22, 2023 at 01:41:34PM -0500, Nishanth Menon wrote:
+> Add defconfig fragments for am625 based beagleplay and corresponding
+> customized environment file for beagleplay.
 >=20
 > Signed-off-by: Nishanth Menon <nm@ti.com>
 > ---
-> Cc: Simon Glass <sjg@chromium.org>
+> Changes:
+> * new env file to override boot targets, led sequence etc.
+> * config files updates for GPIO, I2C etc for A53.
+> * Speed up of A53 mmc support.
 >=20
-> New patch
+> V3: https://lore.kernel.org/all/20230815164440.2713726-4-nm@ti.com/
+> V2: https://lore.kernel.org/u-boot/20230727234446.3651836-4-nm@ti.com/
+> V1: https://lore.kernel.org/all/20230725185253.2123433-6-nm@ti.com/
+>  board/ti/am62x/beagleplay.env        | 23 ++++++++++++
+>  board/ti/am62x/beagleplay_a53.config | 55 ++++++++++++++++++++++++++++
+>  board/ti/am62x/beagleplay_r5.config  | 15 ++++++++
+>  3 files changed, 93 insertions(+)
+>  create mode 100644 board/ti/am62x/beagleplay.env
+>  create mode 100644 board/ti/am62x/beagleplay_a53.config
+>  create mode 100644 board/ti/am62x/beagleplay_r5.config
 >=20
->  include/env_default.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/include/env_default.h b/include/env_default.h
-> index b16c22d5a28c..714dfa9e845e 100644
-> --- a/include/env_default.h
-> +++ b/include/env_default.h
-> @@ -112,12 +112,12 @@ const char default_environment[] =3D {
->  #ifdef CONFIG_MTDPARTS_DEFAULT
->  	"mtdparts=3D"	CONFIG_MTDPARTS_DEFAULT		"\0"
->  #endif
-> +#ifdef	CFG_EXTRA_ENV_SETTINGS
-> +	CFG_EXTRA_ENV_SETTINGS
-> +#endif
->  #ifdef CONFIG_EXTRA_ENV_TEXT
->  	/* This is created in the Makefile */
->  	CONFIG_EXTRA_ENV_TEXT
-> -#endif
-> -#ifdef	CFG_EXTRA_ENV_SETTINGS
-> -	CFG_EXTRA_ENV_SETTINGS
->  #endif
->  	"\0"
->  #else /* CONFIG_USE_DEFAULT_ENV_FILE */
+> diff --git a/board/ti/am62x/beagleplay.env b/board/ti/am62x/beagleplay.env
+> new file mode 100644
+> index 000000000000..8f39fb214333
+> --- /dev/null
+> +++ b/board/ti/am62x/beagleplay.env
+> @@ -0,0 +1,23 @@
+> +#include <env/ti/ti_armv7_common.env>
 
-The problem is that I believe we intend for CFG_EXTRA_ENV_SETTINGS to be
-where we can override things in a more final manner.
+On a related note, we should really rename that.  The ti_armv7_common
+files predate TI having armv8 platforms.  So whatever parts really are
+common in the .env and .h files should just be in a slightly more
+generically named file.
 
 --=20
 Tom
 
---RPgU1yc4cgpcoAAm
+--lAnw5ImbmygkAuz4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGu0ACgkQFHw5/5Y0
-tyza8Av/ftz6rb/KkiwCYGWkaR4WvIlSc1yuTZ9lHqPv1anN5K0rFTkunUeSMxjW
-0aaTavMXiuO7bwvmh2LYUbx/c6VpZ8FrM9MmKUsWl+7rUlKRkOjTxZB6bZsYjB9R
-bVbkeX/qPpfaozQC/wzBTO6UyD4W02N7jKSa+r+UR2dWGdwmVE1OgCardI0Lyuwe
-eNDc/7ydanlyuBFenetwKgcgCq6IFfSgEvB+hOIoSCbFpD5JGdjXZtbc/kZGTcUf
-TvAXSDgW/CW5gI7ez6w2/ML6wsrT/ULEJp6yZQ15iBZBnHtRmLLKpuWc0diaItkB
-zVfLSTMN/ZRZj1g1L8878a1lX85VqV2LZIQnYt0sXqaYWQh9u6XijKl/jGPwhZ11
-etCyxb2R2UjCLnqQJIUvOk/Strom75vzSLc323BKKjr5DgDF9xS+CwFBvIHLV27d
-K0/hmeEVkJ9L2M1TizappVLiTnGYrLQvqD1Ew1eb17Ea8NlyuBpmR4zJXGC92gst
-i0IbqmdT
-=rDsG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGvEACgkQFHw5/5Y0
+tyzQ0QwAqYEUz7Kw0D9nTkEt259EfbgmjdHPCPGKJgK753UZztjDEa+q5a9RSLqV
+dgqHrBCxqZuTVWjz3i+lh4t6hGci278jrhWk4s3vfpzxr2UJSkaS4cV3UFD+vHDi
+qJamjrmyR224IpE6PmeLDL3kvmTGyko8T9DLEA/3kMCq+uhhHiag02V23n8MSmPa
+H+gO1t94ZNzVZ2gxZyXAh9ge/WMfYsz43ZNd1MJAhSi0V1vU0D1VY6p9NNq1FF4E
+Qp3xFlcL3ULI6pgki2ZdYXTzHLOTeM2nQX5EnGa9ksnXdko6zi3jWWROWBJCu/pp
+1xITGpfX9Bee01JDPGJfDxGRA69Usz9z8W6kqtFJp7k+iGy0qYKu9q5BaLcKb7te
+XHt0AwoxMIWZ5iVKSTxG8tDJPfbaKUxTip8mZNSzSDRCqdsrQBGRvrBokk+DiUBT
+Er7bPFqZiIXKBVga+uy8C3bi1eioojBk+6QZ8eewkoTteqs0s9L/6cH9cLAwNRv3
+y8n79KGZ
+=EB1D
 -----END PGP SIGNATURE-----
 
---RPgU1yc4cgpcoAAm--
+--lAnw5ImbmygkAuz4--
