@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E05E7EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:22:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6092EE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:22:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F002880842;
-	Wed, 23 Aug 2023 16:22:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 42C8D80842;
+	Wed, 23 Aug 2023 16:22:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pBvJTePw";
+	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="X02457o6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 356CC8642E; Wed, 23 Aug 2023 16:22:01 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DCF61807D4; Wed, 23 Aug 2023 16:22:34 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A59807D4
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:21:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7786D8649A
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:22:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NELqXE126261;
- Wed, 23 Aug 2023 09:21:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692800512;
- bh=CJYy2WukI6GVSn0gVwhfqQETyqGI03s+V20rrB/DVt0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=pBvJTePwXiPRod+b6Vd9klXSuujgYgA52k59g+HJm43NM5TOlsu99PpgpMDKyQJWT
- FxeNOihGLnt3KNLhy3jP/2cgQiULQuso6lXYQq4ouAMgc69W9GaokNJJqvnZipTA6Y
- 6GbSTVyiZqKOjoNcMSfxxME3trJiYrx61/z07B7M=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NELqlg041457
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Aug 2023 09:21:52 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Aug 2023 09:21:51 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Aug 2023 09:21:51 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NELpd4111173;
- Wed, 23 Aug 2023 09:21:51 -0500
-Date: Wed, 23 Aug 2023 09:21:51 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Nitin Yadav <n-yadav@ti.com>
-CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Neha Francis
- <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
- Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH V4 4/8] drivers: mmc: am654_sdhci: Update OTAP/ITAP delay
-Message-ID: <20230823142151.e46pt2xdbttnyu5f@imperial>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-5-nm@ti.com> <87r0nufaik.fsf@baylibre.com>
- <9ffa96cd-df18-d298-41c2-080a187b7410@ti.com>
- <caab6d37-199a-7d1c-6b60-9297e3838fd5@ti.com>
- <20230823113816.b5qrst4ut77e4d5r@lucid>
+ dmarc=pass (p=none dis=none) header.from=foundries.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-4ff882397ecso8692173e87.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:22:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=foundries.io; s=google; t=1692800551; x=1693405351;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1PQJvwcezBX9NNdK6J01j+9PpOBK0MsiBdmg1LmQK+A=;
+ b=X02457o6byHtIrEyZgcTWWWlTNRn/OKvblyneMOgq7uGODbt/iZU5KGdNnkQtOupN5
+ av0SqG+IGZ9Vvpi6PatGKMFhKO6ocFIsOznznkIIGFrvsXVhOCC+N3WTy79H3mc4Hmv3
+ NQu0mj0slDfBA4CPp3lWSZvo9B5Df8x5/Ixk317FaNXR77uzEoH6kqamp5cil2M6s9LP
+ FFLYzA7dnoagHn1qfVaY3t7cEJcdNrpnqEkk+mB0dlh/F2nKVO/z6+NodF32bOhOsAgx
+ FzSyBnsNtZjOIqeB5zw1y9FtV9cGs2E+Fb52X+Hvj6mcLNTJPeP+PFOmYwKthN3GFmyW
+ KtdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692800551; x=1693405351;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1PQJvwcezBX9NNdK6J01j+9PpOBK0MsiBdmg1LmQK+A=;
+ b=I9CGCdOqkxixel7+jYim1Ng8nWumeFOFvqAJJjjFzkR2G5HdZmMNHliD58mxCckhoG
+ W81U1LbgpP9IrxNwBFjeN2nZRa1gHUJi0EWeDlnLEVqKinkAgSNvWyW4D7pkaOy74WjX
+ F0ljeTd4LDJgma/oTWfrJY0PvhhTf5ehs+1m/GUP+Q3ZcXSyACMVGNxAonw7uzdzyt/Z
+ bVNZNwAaheE5OFqdE5+RV2YKL/kVMz2IG9DFzVMJY7IR9spUSg7xTh0Sz2Zg7uSof+e1
+ /GM9DeXhOCTW2VBIcvTewHSjN+h7IEGF/Z0DHf+EHLcAWv8uHB0kHtXUpscJ6RxFMAoC
+ Qkrw==
+X-Gm-Message-State: AOJu0YzBjtPTjqnv6ydSAH1NwTkhT6EVIsXzEih1nvKtB7S5YrBC/AD/
+ DL8+3h6irxQb70UJfg5pJ0G1jadq06YDqO5GLDI=
+X-Google-Smtp-Source: AGHT+IFFBkaoSXjUiunSuxEvc34mvXnPYwcE2zIOTwCfjpm9iNM4W3zy1GPxlQXl6u4Safn1zNY7Jg==
+X-Received: by 2002:a05:6512:1584:b0:4fb:94c6:fd63 with SMTP id
+ bp4-20020a056512158400b004fb94c6fd63mr11617811lfb.17.1692800551153; 
+ Wed, 23 Aug 2023 07:22:31 -0700 (PDT)
+Received: from cryobook.. ([93.188.34.55]) by smtp.gmail.com with ESMTPSA id
+ n23-20020a195517000000b005008cd9396bsm759983lfe.25.2023.08.23.07.22.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 07:22:30 -0700 (PDT)
+From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH] usb: dwc3: Fix renaming SPL_USB_HOST_SUPPORT to SPL_USB_HOST
+Date: Wed, 23 Aug 2023 17:22:19 +0300
+Message-ID: <20230823142227.69923-1-oleksandr.suvorov@foundries.io>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230823113816.b5qrst4ut77e4d5r@lucid>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,33 +88,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06:38-20230823, Nishanth Menon wrote:
-> On 15:48-20230823, Nitin Yadav wrote:
-> [...]
-> 
-> > > > > -    for (i = MMC_HS; i <= MMC_HS_400; i++) {
-> > > > > +    for (i = MMC_LEGACY; i <= MMC_HS_400; i++) {
-> > > > 
-> > > > I'm not super familiar with mmc drivers in general, but it feels like
-> > > > this bit does not really belong in this patch. >
-> > > > Is this another bugfix for removing otap-del-sel for MMC_LEGACY devices
-> > > > or does U1 UHS SD cards are considered to be of MMC_LEGACY type ?
-> > > yes, its two different fix. Internally I posted two patches for them.
-> > > can be referred in below links:
-> > > 
-> > > https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=b5a2f7972fd142df03a15ba58829aa068c891abf
-> > > 
-> > > https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=527095165281cbc60a1b42995c1e55e6756cbe93
-> > > 
-> > For uboot somehow it got merged as single patch as It was one of my first
-> > fix :) .
-> 
-> Thanks for the pointer. I will pick the latest up for V5.
+In the usb/dwc3-layerscape driver the first option should be renamed
+to the latter as well. Do it.
 
-After a bit of offline discussions with Nitin and other folks, looks
-like sdhci fixes need to be it's own series. will drop that from V5.
+Fixes: 333e4a621df ("Rename SPL_USB_HOST_SUPPORT to SPL_USB_HOST")
+Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+---
 
+ drivers/usb/dwc3/dwc3-layerscape.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-layerscape.c
+index 79cf71f7a85..77801c10084 100644
+--- a/drivers/usb/dwc3/dwc3-layerscape.c
++++ b/drivers/usb/dwc3/dwc3-layerscape.c
+@@ -134,7 +134,7 @@ U_BOOT_DRIVER(dwc3_layerscape_peripheral) = {
+ };
+ #endif
+ 
+-#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || \
++#if defined(CONFIG_SPL_USB_HOST) || \
+ 	!defined(CONFIG_SPL_BUILD) && defined(CONFIG_USB_HOST)
+ static int dwc3_layerscape_host_probe(struct udevice *dev)
+ {
+@@ -194,7 +194,7 @@ static int dwc3_layerscape_bind(struct udevice *dev)
+ 		driver = "dwc3-layerscape-peripheral";
+ 		break;
+ #endif
+-#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || !defined(CONFIG_SPL_BUILD)
++#if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
+ 	case USB_DR_MODE_HOST:
+ 		dev_dbg(dev, "Using host mode\n");
+ 		driver = "dwc3-layerscape-host";
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.41.0
+
