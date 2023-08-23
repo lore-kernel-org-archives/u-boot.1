@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA311C27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:43:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228ABC3DA66
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:43:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C566864CD;
-	Wed, 23 Aug 2023 19:43:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E3118864D5;
+	Wed, 23 Aug 2023 19:43:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EN9bccBU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hpo5CwnW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FD8386473; Wed, 23 Aug 2023 19:43:27 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id A441F864DE; Wed, 23 Aug 2023 19:43:29 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7463D864D5
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:43:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB253864D5
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:43:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-58d31f142eeso62647327b3.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:43:23 -0700 (PDT)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-d67869054bfso5794207276.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:43:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692812602; x=1693417402;
+ d=konsulko.com; s=google; t=1692812606; x=1693417406;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=v3nYrOsNIwiEj5xx29VBYqBwCuDxD07ya+YifRRIxJc=;
- b=EN9bccBUdKVs+HMFzVFjbhrEGcyQoiuWT1t71CzN7BzvcNGW4g2hRBUfO9+nRMO2/q
- v9UHw4lUsGaI4mPH5MFFVJ8KnOd1jgC9sTa/qFc0PEWYnVbtsDHsU9PDUjbdGDRshBOm
- plxauAZ/2wNkkLuk90V9gylEM1Te/aYjT/e64=
+ bh=58SravXfhuW+MyXLLEXmkROSXTEQLjynXHNxQeieiNE=;
+ b=Hpo5CwnWTAwknmkXrTiJAFooPiDvCJbvk46j3qsd52ULO00BQbT/ibpvuxFaellk6c
+ 42yhBf+6YYF0mhcUQ59Z2itZ/KKcyv/A67im9Gd4y2gv4kObrUdldJZILDfIoG9eK5+O
+ LbzFSl0vqC7oxkxjBruAUO5R0C3vmiQBQ3ku4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692812602; x=1693417402;
+ d=1e100.net; s=20221208; t=1692812606; x=1693417406;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v3nYrOsNIwiEj5xx29VBYqBwCuDxD07ya+YifRRIxJc=;
- b=EDBbr26vmUiZ4fUqb+4LcxmvdAzB3AiT0DPFdDAnawItCAtxTQ3lqJifVDxp82xigA
- UcubqAtcvsCYfK9PVOwaFVu3whS16ht/snRXrQ3MqGJUWQUJuQFNXUzjhLxKtPo/wkPD
- NSGGO0bc63PHqCyR1YcgGtHH7Tii+NKBYxJIBdbnBN3hh/gmoja2f55K8BZzNTRX/MMR
- m6cdqZd2go05rlf++kiyGuuA21x9Z4VdSvr7LEJEOHgCrlV19h8X/qiyLj4y8ZSftp9B
- laKyx58TPBogeZ94oLcABd0Uk7Tl70hTR8sM/n765XU7Eg3DzjPcr6zE4Ddy6VNg7Q1I
- 5Ieg==
-X-Gm-Message-State: AOJu0Ywm/saShthaGJGl5Qdh+sCopYy7yeGm7tBG+8yBUY+n3+iuleu2
- MGsLOFpiQEsf8WTnt/hOfUjXXQ==
-X-Google-Smtp-Source: AGHT+IGnFpR/UH5PAVfS6aeTq5SR6UIcar8oCnefRq06W9emYen6YVIL/k0WOZ1axT2dkZoaiIZHRA==
-X-Received: by 2002:a81:b661:0:b0:58c:676c:b3ef with SMTP id
- h33-20020a81b661000000b0058c676cb3efmr13820291ywk.6.1692812602225; 
- Wed, 23 Aug 2023 10:43:22 -0700 (PDT)
+ bh=58SravXfhuW+MyXLLEXmkROSXTEQLjynXHNxQeieiNE=;
+ b=EM10rqF5bJo2tH5F+WrC37+OuGEcFpyqObgh3TMODnuZvCxkyPY2t5kaeNRb0Qr33w
+ azHt1PeVD0hoOXM4xfoKYMfeU3RJ0XhrZmy66zWJ7nrb5BS8mwRYDufw+5dEJJUCtxQN
+ fV9fsP9wXLKnx8eMDSWN2CR59tbhu3Rw7+gXZbdrNAIErxgltbgDjJFvrhfobTbrn/KQ
+ eB3oxBRZUqkiEUsvI4HygZ51u9IDF150qbOzmUZrs7xaWT7MDCYsr++wcaJ34h0S80Po
+ f1BHUFuZjuvWD64aPtpGpxrOKmZFI34aEV1bj4zG/+mNsW0Ts7lx43NhXGcE4nkNrqaA
+ +ZwQ==
+X-Gm-Message-State: AOJu0YwkXSIR8pLLc3vyNJCKJwCbKrgkLMDxe4cQE5MmrimNF1yyr6VN
+ l4EnRM1QaXqwmyOGfobKBh6GQA==
+X-Google-Smtp-Source: AGHT+IGxlb3o48ewAKlRMfEGPoh3TVW/GI+nr2BQKInECPyWDPNdEAR71v3yOwdKw++Osh4X8ZdATw==
+X-Received: by 2002:a81:9197:0:b0:58c:4fbb:1bb7 with SMTP id
+ i145-20020a819197000000b0058c4fbb1bb7mr12559718ywg.5.1692812606451; 
+ Wed, 23 Aug 2023 10:43:26 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- p66-20020a0de645000000b00589dbcf16cbsm3478692ywe.35.2023.08.23.10.43.21
+ j189-20020a816ec6000000b0058fafe95f98sm2738092ywc.114.2023.08.23.10.43.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 10:43:21 -0700 (PDT)
-Date: Wed, 23 Aug 2023 13:43:19 -0400
+ Wed, 23 Aug 2023 10:43:26 -0700 (PDT)
+Date: Wed, 23 Aug 2023 13:43:24 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Shengyu Qu <wiagn233@outlook.com>
 Cc: rick@andestech.com, ycliang@andestech.com, sjg@chromium.org,
@@ -71,15 +71,16 @@ Cc: rick@andestech.com, ycliang@andestech.com, sjg@chromium.org,
  hai.pham.ud@renesas.com, ganboing@gmail.com, bmeng@tinylab.org,
  yanhong.wang@starfivetech.com, minda.chen@starfivetech.com,
  seanga2@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 1/3] Kconfig: Add SPL_SYS_MALLOC_CLEAR_ON_INIT
-Message-ID: <20230823174319.GU3953269@bill-the-cat>
+Subject: Re: [PATCH v5 2/3] dlmalloc: Add support for
+ SPL_SYS_MALLOC_CLEAR_ON_INIT
+Message-ID: <20230823174324.GV3953269@bill-the-cat>
 References: <20230823032107.1792-1-wiagn233@outlook.com>
- <TY3P286MB2611136D3ECB23E5003256A4981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+ <TY3P286MB26119C4B919D90BAF5082198981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NoXuFcpOJZry+N5S"
+ protocol="application/pgp-signature"; boundary="SHOIX4tAnk16KmVX"
 Content-Disposition: inline
-In-Reply-To: <TY3P286MB2611136D3ECB23E5003256A4981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <TY3P286MB26119C4B919D90BAF5082198981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,63 +99,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---NoXuFcpOJZry+N5S
+--SHOIX4tAnk16KmVX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 11:21:04AM +0800, Shengyu Qu wrote:
+On Wed, Aug 23, 2023 at 11:21:05AM +0800, Shengyu Qu wrote:
 
-> Add SPL version of SYS_MALLOC_CLEAR_ON_INIT, this would help devices
-> that need to clear ram before use to work correctly.
+> To support SPL_SYS_MALLOC_CLEAR_ON_INIT, we have to modify
+> #ifdef CONFIG_SYS_MALLOC_CLEAR_ON_INIT
+> to #if CONFIG_IS_ENABLED(SYS_MALLOC_CLEAR_ON_INIT)
 >=20
 > Signed-off-by: Bo Gan <ganboing@gmail.com>
 > Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
-> ---
->  Kconfig | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->=20
-> diff --git a/Kconfig b/Kconfig
-> index 91170bf8d2..588acbaf9b 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -372,6 +372,17 @@ if EXPERT
->  	  When disabling this, please check if malloc calls, maybe
->  	  should be replaced by calloc - if one expects zeroed memory.
-> =20
-> +	config SPL_SYS_MALLOC_CLEAR_ON_INIT
-> +	bool "Init with zeros the memory reserved for malloc (slow) in SPL"
-> +	depends on SPL
-> +	default SYS_MALLOC_CLEAR_ON_INIT
-> +	help
-> +	  Same as SYS_MALLOC_CLEAR_ON_INIT, but for SPL. It's possible to
-> +	  Enable it without SYS_MALLOC_CLEAR_ON_INIT. It's useful for boards
-> +	  that must have particular memory regions zero'ed before first use.
-> +	  If SYS_SPL_MALLOC_START is configured to be in such region, this
-> +	  option should be enabled.
-> +
 
-Please fix the whitespace here.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---NoXuFcpOJZry+N5S
+--SHOIX4tAnk16KmVX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmRTcACgkQFHw5/5Y0
-tyzeiAv+Kiv/L4ZgiL7agjyI7B/jrFvtY8er6EM2EEd/InpCJhgpOsgc+gatN+Z0
-5tNOandld1iHhtdnrehdX+NtB5P2HfpZCNExPciJQHZ9anU8yuZPj/AVssldW8Bx
-nsSTyMhq4iEeWDfIyVr6Jqvw2uaRb9uzlsPPDiAsAKY7hazRdE3aDGYsQdZztM9B
-fOTOSqQrSrnJ628jzPkSHw4wevDvgAxp2wl+Bq45C1ky4yoSysrZvrGvyc2d4tVB
-bQvgYxyKuqX5EZXHttB1xmZQU5BQjiLBzlhFkREJm6VITIyWFOk8K/A6NakqY5CG
-bbyZYCwBcuNyt3clANUZFuRDWVUG+bJuzSC4GE+8fbDFk9HpKc//2WLF9Owy26Km
-/dLBqKYsuXHpX6PT+CC10njVOq0YgxCDjqrehVwWmHftEdiT70lywQkWcXYeH91t
-uREg7Y6SLOhHbfxDZh3qo4/tkdkx4Pl+qB9LYvMl0lHroS8tMpeIAMvu7eN2Z/u3
-o10/YOo0
-=Y+Bb
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmRTwACgkQFHw5/5Y0
+tyx06Qv+K3mBNUiatD9qZF1NJSH1RQKVqj37u/ZA15yMPrmoHBMpu91QSYJzalZf
+/KpOn15P2laLaVI2ALOSMqZVbz5bBExPEvfrOtcNC7Hq2O/McSb7X6wCPuKfkN5m
+I8+iruuse49g5UCkMe6Zmcgp06klom/qH9pgC7xmVtPDlhx0rol2RfVk8oJ10GK1
+82TAeY0Gv0uCphM7ENjzJC417XLyKk6ie8P3eqgykbLrKa8hw9jo4iAkPKE5Gnc6
+/tI92UcsPbSPr88F4Ho/2uku+/xzfyBDg/w4nx6ls0OdXAYfq0dt/MvvIXEJ0je2
+ZijcvG8+ZVPJwnGmNlI3jNS+MtBHn8RM5KOXbJyr1PTX11rq8dMGuDU8sdSQSXea
+sC01Y7mHX7E5+7wf8ypwYyupCrKAHc1QUUh7qXcl04KdLcpRkJyq20HBf91CRXP4
+eUsYbuCLgORtlxpdXCDcYaPJE5+M4wIqrbv5UdmojxAJCiKZdLCOWA5ByfUBUofZ
+f7hsmDVO
+=NrqG
 -----END PGP SIGNATURE-----
 
---NoXuFcpOJZry+N5S--
+--SHOIX4tAnk16KmVX--
