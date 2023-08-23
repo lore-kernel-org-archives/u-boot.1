@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E81CEE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 13:26:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82E8EEE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 13:26:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E89F86366;
-	Wed, 23 Aug 2023 15:26:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9AA01864C4;
+	Wed, 23 Aug 2023 15:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="VAQc/P/7";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="eYGhvS6u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FBBB864AA; Wed, 23 Aug 2023 15:26:02 +0200 (CEST)
+ id BEE9F864B3; Wed, 23 Aug 2023 15:26:06 +0200 (CEST)
 Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0627.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::627])
+ (mail-db3eur04on0607.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0c::607])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E3DD8634D
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:26:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37E06864BA
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=laurentiu.tudor@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iV0cUFnYHguEbJ0vNCJfYgOkcY9Upt9Yuijr/sMcxemJNHqUiI2esShhcUiKk8jSwFdU0Crjwwu15wexC/o8GDG1EQ+TzDB/wAl7sQcriyGxxNtQdy0WS6cl2REKe8xIx2NENYO6oFH2xMJc2shbqtPHj4gcpzj8JWHx7Gak0adOt/5Vv0/qabwU5MBloNp86b8jHhmJoJwYuNUc9u1FFo1HeoQD3sQLwh6QeWjYWOVpFkxHQUwGklLcTtq+FklCmdDXYtz120ycJ+hBgJc2Nc3y/WigDTS7U+M+WSwBOIDXYpA0URPOnEltGq9G+WVyRkTYYT8gcGk+xpv5aqrwew==
+ b=lueVEdj09GHALfgTKeL4qVRYi2mShpDqaHE21kU5X4LyzaEHurz6P3eJuOftk9X5WFk5A0vSK9qZB+lie8xzQXM6Ve3ZWvXLjR+Vtsjzi5VQKFeJlV3jUbL6PJLq+y3+SD5aNFznAn5FnZguXRTBE6kSOqfTIjLqWZrKZ2FcGA16ymPs4L24mvINWqw6s7AIXYZ38IUtCyP5ng99o+btW6WrZ6HjhjDV4//jUYgZShbn0Jm24D36+NXSHXhpfOGRxj1bWeocy4tHNDqQ4Bm0qHazF+D6w0j6WHmaL6CNqkbCr+KdBf07NYfjnHD3lCoCo50/F490c77QAY03UIY+WA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gGaMMIdWi1l09APkYIBNYgt2G9lIcwdn20rErZt9a4I=;
- b=KQKEQ5NBuj/xxKpHRFtL/qFuVM2Jp7GJ7G/DOi1VN2KdPbKrTEL2qDVdrK66rETp4C+yqCItJozXiegCbGtJ4A9YUN8Az+5onRvbRb/KkD0zLGuyigSz/EH5EM26SP+3OOucyIW8cMB2FIM7uzvfKj2QrS+l9uk9McTxJdT499RM3Ql4SlU0sy/I2jGcjjh6QUluyteXfcL+MP2CpVAiWapBclIKCUEYcnEhP1ihXEhl3evaHCgSlTMyXFM6F/79JEz1/CoSSP7LFjkPSzMMHDu7jx+aRVnCDQThhB9z5SyfMo1ecClOURJ9QBbEKCyUdHIFJU83AZbPyWCw3BSyRw==
+ bh=KdoNT5r82NDxEeO8/EU5Faybd05ECELsNCYSKLCy2TI=;
+ b=c580INHg/H6fxOZVMSRe9zXW4amf3T4Zwry+5rNgjNySODfr78/VTQ6lXfyEAJDhiPnssey8+1swa1NxpApLLVabuAbxIRKyca7TJ4W3u623R+7ajexsoNjjw9BJreRdOArEmU8P57Irt/VujBvlK1tfB2bnsXcafk/WpGOcfuJIv/2+ThWR4jSPVkppdSzT2Rc03+NMpfhIQLerYEjeUktN+Cpt8+Tdss3G51Mb+yYC7Z4W9XFULJiqweZEL/RjTSwri16zjJQDCYx9sV8IYcSngoLfHum6gGQVchTPRvf/oJIDGFsrodQcncubJ+9HdpQQFuWtxORZMz+6fs5Leg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gGaMMIdWi1l09APkYIBNYgt2G9lIcwdn20rErZt9a4I=;
- b=VAQc/P/7oKWKy635NATaH2u52HSJKqgObgUQrYHr0N2kGeAEubyWUemLcG89cSZd5SLvbjXD4dqr//enCgSFgNP9KCDC8RMwTbU65vt48oN8l0KGwkXWp8ku0WQRwNS+AWKulJhRwtKmDRP0Cv4KzXNxghHBlq5hMeQfGFbG3oE=
+ bh=KdoNT5r82NDxEeO8/EU5Faybd05ECELsNCYSKLCy2TI=;
+ b=eYGhvS6ufFpIfPdzqoVM0zcAiiipbwK3fURDKbZKOxMFcuzEkPHixqoCNap5CxlT00uGACWq4owlV6iPQEIiIIofRBURCIDw9xkfb5zIB+e53++UmE3uMPP8PkDsTbwXDiujwilI3Vms5HlQlk5WSTnC8nHBeA48zp6GTXLYzVo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AS1PR04MB9382.eurprd04.prod.outlook.com (2603:10a6:20b:4da::15)
  by DB9PR04MB8252.eurprd04.prod.outlook.com (2603:10a6:10:24d::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.26; Wed, 23 Aug
- 2023 13:25:57 +0000
+ 2023 13:26:01 +0000
 Received: from AS1PR04MB9382.eurprd04.prod.outlook.com
  ([fe80::efa8:cb35:bebd:3d10]) by AS1PR04MB9382.eurprd04.prod.outlook.com
  ([fe80::efa8:cb35:bebd:3d10%7]) with mapi id 15.20.6699.026; Wed, 23 Aug 2023
- 13:25:57 +0000
+ 13:26:01 +0000
 From: laurentiu.tudor@nxp.com
 To: rajesh.bhagat@nxp.com, pramod.kumar_1@nxp.com, andy.tang@nxp.com,
  mingkai.hu@nxp.com, Ashish.Kumar@nxp.com, priyanka.jain@nxp.com,
@@ -60,11 +60,13 @@ To: rajesh.bhagat@nxp.com, pramod.kumar_1@nxp.com, andy.tang@nxp.com,
  u-boot@lists.denx.de
 Cc: michael@walle.cc, camelia.groza@nxp.com, ioana.ciornei@nxp.com,
  vladimir.oltean@nxp.com, Laurentiu Tudor <laurentiu.tudor@nxp.com>
-Subject: [PATCH v3 0/3] fsl-layerscape: drop support for obsolete PPA secure
- firmware
-Date: Wed, 23 Aug 2023 16:25:43 +0300
-Message-Id: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
+Subject: [PATCH v3 3/3] fsl-layerscape: drop obsolete PPA secure firmware
+ support
+Date: Wed, 23 Aug 2023 16:25:46 +0300
+Message-Id: <20230823132546.6048-4-laurentiu.tudor@nxp.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
+References: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
 Content-Type: text/plain
 X-ClientProxiedBy: AS4P251CA0009.EURP251.PROD.OUTLOOK.COM
  (2603:10a6:20b:5d2::20) To AS1PR04MB9382.eurprd04.prod.outlook.com
@@ -72,52 +74,52 @@ X-ClientProxiedBy: AS4P251CA0009.EURP251.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS1PR04MB9382:EE_|DB9PR04MB8252:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2f19ec34-b934-4845-829f-08dba3dc7c30
+X-MS-Office365-Filtering-Correlation-Id: 3787e1a0-0066-44bc-0c06-08dba3dc7ea1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: YeqTzvTgrHfMOrYsbfB/5VcaFJvKpXa0ianRXZu7tc+BVAwCnYSzSaDFGeMLetLfBHqnucHN51GGztRitEoQsutdcLaTQW99zIiXzbMA/zYy2YrqeYZV0MKLZNRdYdfCGKjeLToM8HnAD8IPfLtmZ9ARjmBS1BpZ81H4z0oQWVHiD5v+gMkkUtfGYF9IZuKkphO/H0p/KmrXlsN4RiEvWcpGEBQ5u/j8bltqOuTL5RiWg4jmZQhO0TKwxEBuN2Kd1w5aTvysVOF/bwrAS3axSgRtNwi12dtozB6N2kG0C4xPhESIdsfCZ2Q/kPU+GVNCCQKwXQNPnZ18Hd+01IrKOSuDms8UkPbwh4KTK4IQTv9D5chx2g6fgDfLfy+e9NzNiPJl5gX9t46kAaM9/G6Kayk3v8pwm83PYMgZCN+Bdtj9djF6tNolztsB6F2dbcXcbk3BmWQamQ+0lt9nxRtfLdElxmoRDV2s6XYsziXpCdXB3Sy7EOHyHG2waukMH2JBkaHzS2zeJqcjsz/UOQKXfHd+SCGQD4clc3MlpaV1t4miZTqIQphRaGIVWPZ2gdRAqVsiZX0TC4RxbHf6D4u9pCydcfsPaE5EEkr8nwjuKUPqfFhNIyXOpLr4YijulG3mSIFNcovAUH9zNuR383v2wA==
+X-Microsoft-Antispam-Message-Info: vCGo9tFf8pHhyYSw2eusP7ryZ+P/zpR1tlmhGBM4LXeRKkUNa/H1S8Hjl055MKrrQ6t1Fedjed6cLGmHl0VcI7mk2tCblhuxJ/o9d9ELO0KNzNzKOr9NTnpr5ZndEZcop0ZhvoqIbaqWFH2P1E7qbTBX2lUt30EFxaevyzGhDk0GeYms5ZCrzRgbFDRqx32xX6xkPc8e929jBsoBahr72ly0CNXvwtBS8/GTNqX/Fl8Q97wadEdvAaq/FaGQKaeC6yamGmI8LkKG9GqsAoZHmLPAfgdiwTLDJVOeRbbN3IV+W4zvC4K2oKE2cTApj//wQCf4o4Bd1xEm8CwFJdP8DVAGOdNK96IGDuil47NXImM4pqaCCC7kcvgVMt42GiVI+LED55/J8st+bxXciNFnH5qfoLdkOlB+vrc13zASaAMC8Pjuba37tuVmVug47s7ajDKCQ/IW5ie+2UVdMTy7Dc+eehmhxsqLCoJzZYVTdHfCOEwemarF8GPOiialQrKDmnkpdFfOqbEwMo93kixfEwbN94J7lYaYOp/SaYMjznxK+iKuIlAVbTEAPL6jgrSvA/qPuBtAZmEyLfm6XE45ZPdCFC1i7zD0w06v41QVWnRiy0dNmKVx9E4gFRs6YOgXeBXKVc1vtBkKu52KqleGjJuuRgeJyRQZCSFrSW8/b5c=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS1PR04MB9382.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(396003)(136003)(366004)(346002)(39860400002)(1800799009)(186009)(451199024)(83380400001)(2906002)(921005)(38100700002)(38350700002)(86362001)(36756003)(6512007)(9686003)(41300700001)(66556008)(66476007)(66946007)(6506007)(6486002)(316002)(52116002)(2616005)(4326008)(8936002)(8676002)(478600001)(6666004)(26005)(1076003)(5660300002);
+ SFS:(13230031)(376002)(396003)(136003)(366004)(346002)(39860400002)(1800799009)(186009)(451199024)(83380400001)(30864003)(2906002)(921005)(38100700002)(38350700002)(86362001)(36756003)(6512007)(9686003)(41300700001)(66556008)(66476007)(66946007)(6506007)(6486002)(316002)(52116002)(2616005)(4326008)(8936002)(8676002)(478600001)(6666004)(26005)(1076003)(5660300002)(21314003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?di/8dkXrqdxAx9+lVUAsbGaG/BC7nHMqhHYqnWdGUCMxqjjN1uT10r2JsUE9?=
- =?us-ascii?Q?jNeEcPldsO6mH8Fhz3qlZjLL/kfiReETSLtlNFKd20am90OlOQF/1TykShko?=
- =?us-ascii?Q?jsr7oXDXIvnz2SovJthLComV3+JhP2w+oKHe4vmBs4IgAATBGrImGuIzXt0y?=
- =?us-ascii?Q?gJPHocDapypAZr04n6dpDLncPDupuNpyvwFaORVVIctRtW39x+8UdIB/Af3+?=
- =?us-ascii?Q?lLu9EDI9u66DvQPwhA174e6gdkDAtGuTCz/il9u1AS3rPIogZh+gQ1E/h8yL?=
- =?us-ascii?Q?ah7q6o9Xg0tAlmZmUe823can0btoas2UyoJOraH+an7OZTFguvLLV+mr67E9?=
- =?us-ascii?Q?lgIPEvEw5bm1zDaMDVQ6AnfeKOXJsv9XPKh5oFsHQ15eWpAN++grM0cl+USf?=
- =?us-ascii?Q?37eIxATI1hEjhvfTLKvjMK9JcQc1jFVk5PS9sph1OJIWdorWIPx0fTdKRM42?=
- =?us-ascii?Q?PI49cGHzGVMc49/UgQ0gGLSbQi7XevNo4zA23dMuEVLxWhQfhkxjopz5N1aN?=
- =?us-ascii?Q?gsiTPXrT/NTIAkoOryIWOVn7MGCS4uXcMIIVAEtdn4UeHknsbL9DYoi+9TdG?=
- =?us-ascii?Q?VtCu/UH/yYQLlyPm5EHQC/vS+Zi3YN2jpm/fXdax/ArV5nAR+Wqvcp2edAp9?=
- =?us-ascii?Q?nmVnteYA9laHgNyvk5WuR7/jpT1gUziGmM8MPWUeRoB9EdPnBqeeoTLMJ2x2?=
- =?us-ascii?Q?roC+LFno0O/Q544AsbaSW/M5M/qayh9IrCsr1DuZamhvEXpu4YOjeMtkGBtk?=
- =?us-ascii?Q?0XMBz8p1708q4OrbjPL6LE4zzOFm/GVvvYIgi0DmYdWzsQ8gtWL4drlUSiqE?=
- =?us-ascii?Q?HdGUbVXQJrPY3Tlv7W/Z6HYjY3n2gWF1gpqSefm7HiqnToPhpw/9tiQZVH6o?=
- =?us-ascii?Q?bbpjJtnym+qQDqaDpAL5cE2aJFjf1nI/oF6jWYyRl+zKQ/Apphn0Thv0vp4y?=
- =?us-ascii?Q?Q0vmS9yaBDB8dAZR5CVswqKzO/G3LjpYDhDPlAh1CqFqsTmMo8HxYDymjJAy?=
- =?us-ascii?Q?DZ45lhfbQwELEJyffP8Iqb7dBmgKwHqRiqYrnugUrjWvov/OTxSlNz43+DJj?=
- =?us-ascii?Q?zKoynOEJ5jL81XGsf7pOJnnouyD1ncuCOYiz5WAVIOnIFuBErdJ6jZbhOD0c?=
- =?us-ascii?Q?l6daB6tBNnOmuo6Z7jL334EvMEzrnDOqi0A2KmgAmmP7+hrQeyRQPAOmUE/T?=
- =?us-ascii?Q?7cXwfMqKaEzUMv50iHyg8aeaA5qPsd5KM6pwC1ksL+Jfs8B1ygEA6vSvDymR?=
- =?us-ascii?Q?ElNBHUGpYvi85m8mF12C8kF6HEXF/hx4bNBMBy5jqTPxl/lrpC7PAGHEeKay?=
- =?us-ascii?Q?QK97WfHRSunK5nf/N77Q8U75G48LOxW7gl+G60Eo96cQWcneLYAGu1a8vXuf?=
- =?us-ascii?Q?g2nJlfh0MOp+RYd9FtMEhY688nNWZtF8D1Xb1jro7z0EPDLndXPajJKTiHDx?=
- =?us-ascii?Q?84Ro2EPSQrY5VzpAZPpPGCNnfPodJUOrDH3GoWyT1lFLahavvxGTIiDQS1s/?=
- =?us-ascii?Q?9JASnW72EAs0j5HMUcbxlutiKbIY41uJ6jK1aqHT4m+9sagpHXtMMFI9Oh5e?=
- =?us-ascii?Q?jLBi6O482q0PjIkhq3zzirWMOiEq9i17gU4R4Arw?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?laFPjum72h0gd8m+wtvLM9rj/PRHJd8sN4zvCYmtDR3V3kco/x0QmrwG15CR?=
+ =?us-ascii?Q?7rRpNDpXs486i1r5cbNRq9la7j5A9CyaqkcSKFgaLSeacf1l/D6fTaVr4BTr?=
+ =?us-ascii?Q?AKMXSBQFrpXg5G6E9byvwPxgizAoL5OgU/DJCCnyZFdaXU3zRZKUGqbDJ95e?=
+ =?us-ascii?Q?kfhYE83JnYJY3BCSIq11KDEaGmgMHMQh/DWQ9ZaJQKrGJWW8VJ1gBST9EcKe?=
+ =?us-ascii?Q?FnHKGzIGsenQSOyADF6QAdV92LuKEYaxIHqaxwNALaZqBhxfvW8Wd5/u+CLJ?=
+ =?us-ascii?Q?lYSQZqTiiMK+1zzER7wvBLCaugOqP7HIW62dOTkCMhXaPGqtsodGIzSMiqwq?=
+ =?us-ascii?Q?I77i+BkpDKi7s5VNwVYvLJtQ3oTvBHBD4nomAOIb2wPA5vOHdvqjiwooI8Of?=
+ =?us-ascii?Q?d2hC/iKNVYF4OuVzojot1KQ2D4Pf3NfZDfxm0ZuXQTiJUPMYNy2i0au59VbI?=
+ =?us-ascii?Q?TILZlYh2bw1UqTsoIxOiqTOsRpWKwIKjCyq4pyiJwNV0xFPqovIdn/th5bzb?=
+ =?us-ascii?Q?Fo8q2yZ0RVqUzpdC7m7TWOc/9qjaSb3hYK5zHNCORa5pvzhUajwQceUjC5RL?=
+ =?us-ascii?Q?w84rpZ0LZEC8HACX+d1iT5T1fLvRI9PVrfy853MNHyabI1GJt6ICeAcdhrZ7?=
+ =?us-ascii?Q?wnAJcBJ7M1n1jr8f7KiykbH5NpQfmyRKJEZyuzpD/NEhTEZPKwLCG3l4p2ai?=
+ =?us-ascii?Q?T11NZbSm9FtfksXwu0+tFLFbOlkeEteZchRcR1/L3L6USEhjbTJa9/nXo1+L?=
+ =?us-ascii?Q?9W0Oi3Ru/s28E/1833iB37UzFhWjb52qnkBxILox7vyWMTtB9zPl3aVda4RI?=
+ =?us-ascii?Q?6C5oDIQl/RFwqqLjjNkEAa5s0pDSRRJirA9nx1RwTcKC5dYnI9YxEGKDgfgj?=
+ =?us-ascii?Q?hFDQnkWO/Kx+qYSVYCgqRK9easfB/N3K6ntJX0I63qhrO5f5f5gV+0aX5KcX?=
+ =?us-ascii?Q?c/sg3sP79I4xJVLnZH5f4TJyHvbLHKwjYPGaVrD0xE5GdfWWAFVFDA6NpZm7?=
+ =?us-ascii?Q?zIYZYgcMrywEYZOJxCqAGSpbXjdjo13M6E5Xn/jku+zgM1AM3Y7nzgdMvxWD?=
+ =?us-ascii?Q?LgCVjlhxj8+AwyBAb8bWDJZfHR2rcaa4uu6x656URyQ/OZ8niCzhV1o2L4zx?=
+ =?us-ascii?Q?JtWxoFB3CxbHAJJqRKnzFGOgxCifxCTfUMW+MM0eBvRNNSj0u+pFYbQtMaO+?=
+ =?us-ascii?Q?3Vdzf+yD17msS+Z7zpiXsR3STBHlTAb2y3QZhs668XC/rlevjCgTVNqVlrlz?=
+ =?us-ascii?Q?EHE5VChdcxNGPooHzyDWub+zy3taVsbaoETb5d0WyllGyZfUdA9lNw8dxG/G?=
+ =?us-ascii?Q?T5Q6VB6qYTZh/O83mgvC20Oi4dtYGwQz4hTmgPvzsHoDqq+jw66Fz0GqDyxP?=
+ =?us-ascii?Q?MBlfAX4bAfSLc/4HKubY3R4EQGbPR+TX62u51w3z20FotVGzqFtL4AZ4XakH?=
+ =?us-ascii?Q?zA+0xPUjRHVXqT/eA7EDqe4qBtxiikqHIjPdZksXDFdMLtUx+7t2l9fuXshi?=
+ =?us-ascii?Q?vjIDit79psVJ3wJaRF69MF/LEPC2gD0UFL39Vi5Jc/XNiZYPrFPTzgLddpvn?=
+ =?us-ascii?Q?oj1CtCkpTOVjxDZUq9e7nFxPygZwogU1orbXOYKj?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f19ec34-b934-4845-829f-08dba3dc7c30
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3787e1a0-0066-44bc-0c06-08dba3dc7ea1
 X-MS-Exchange-CrossTenant-AuthSource: AS1PR04MB9382.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 13:25:57.6348 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 13:26:01.7127 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LG2K2/XAs0fnCdpAoSO0PBKcMJOTdHAx3XiH2oWCxJOvNrJNwzb2tNBeIN35OIF7VlJxi+8Itffz8xF6IPR/lQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3YDEpcEyNHDneHxtyXPBVDtdKwJOJCIsGo3DU2EZlxwmxdKDyFBiTQ/oqJdSCyBrco0WAATEBNXyQTD+Z8qo2g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8252
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -137,23 +139,12 @@ X-Virus-Status: Clean
 
 From: Laurentiu Tudor <laurentiu.tudor@nxp.com>
 
-Support for this in-house secure firmware was discontinued long time
-ago so remove it. First couple of patches delete the defconfigs that
-use it (split in two to be <100KB) and the third one removes the
-actual PPA support.
+PPA was a secure firmware developed in-house which is no longer
+supported and replaced by TF-A quite some years ago. Drop support
+for it.
 
-Changes in v3:
- - fixed some merge conflicts
-
-Changes in v2:
- - split the defconfig removal patch in two because it was too big and
-   was filtered out by the ML
-
-Laurentiu Tudor (3):
-  configs: layerscape: delete defconfigs using legacy PPA secure FW (part1)
-  configs: layerscape: delete defconfigs using legacy PPA secure FW (part2)
-  fsl-layerscape: drop obsolete PPA secure firmware support
-
+Signed-off-by: Laurentiu Tudor <laurentiu.tudor@nxp.com>
+---
  arch/arm/cpu/armv8/fsl-layerscape/Kconfig     |  60 ----
  arch/arm/cpu/armv8/fsl-layerscape/Makefile    |   1 -
  arch/arm/cpu/armv8/fsl-layerscape/ppa.c       | 284 ------------------
@@ -183,112 +174,1072 @@ Laurentiu Tudor (3):
  board/freescale/ls2080ardb/Kconfig            |  16 -
  board/freescale/ls2080ardb/ls2080ardb.c       |   5 -
  board/traverse/ten64/ten64.c                  |   1 -
- configs/ls1012a2g5rdb_qspi_defconfig          |  69 -----
- configs/ls1012afrdm_qspi_defconfig            |  67 -----
- .../ls1012afrwy_qspi_SECURE_BOOT_defconfig    |  72 -----
- configs/ls1012afrwy_qspi_defconfig            |  72 -----
- configs/ls1012aqds_qspi_defconfig             |  95 ------
- configs/ls1012ardb_qspi_SECURE_BOOT_defconfig |  77 -----
- configs/ls1012ardb_qspi_defconfig             |  77 -----
- configs/ls1043aqds_defconfig                  | 107 -------
- configs/ls1043aqds_lpuart_defconfig           | 109 -------
- configs/ls1043aqds_nand_defconfig             | 138 ---------
- configs/ls1043aqds_nor_ddr3_defconfig         | 108 -------
- configs/ls1043aqds_qspi_defconfig             |  98 ------
- configs/ls1043aqds_sdcard_ifc_defconfig       | 135 ---------
- configs/ls1043aqds_sdcard_qspi_defconfig      | 124 --------
- configs/ls1043ardb_SECURE_BOOT_defconfig      |  99 ------
- configs/ls1043ardb_defconfig                  | 100 ------
- configs/ls1043ardb_nand_SECURE_BOOT_defconfig | 124 --------
- configs/ls1043ardb_nand_defconfig             | 128 --------
- .../ls1043ardb_sdcard_SECURE_BOOT_defconfig   | 124 --------
- configs/ls1043ardb_sdcard_defconfig           | 126 --------
- configs/ls1046aqds_SECURE_BOOT_defconfig      | 108 -------
- configs/ls1046aqds_defconfig                  | 110 -------
- configs/ls1046aqds_lpuart_defconfig           | 112 -------
- configs/ls1046aqds_nand_defconfig             | 139 ---------
- configs/ls1046aqds_qspi_defconfig             | 101 -------
- configs/ls1046aqds_sdcard_ifc_defconfig       | 139 ---------
- configs/ls1046aqds_sdcard_qspi_defconfig      | 128 --------
- configs/ls1046ardb_emmc_defconfig             | 122 --------
- configs/ls1046ardb_qspi_SECURE_BOOT_defconfig |  99 ------
- configs/ls1046ardb_qspi_defconfig             | 102 -------
- configs/ls1046ardb_qspi_spl_defconfig         | 130 --------
- .../ls1046ardb_sdcard_SECURE_BOOT_defconfig   | 123 --------
- configs/ls1046ardb_sdcard_defconfig           | 122 --------
- configs/ls1088aqds_defconfig                  | 112 -------
- configs/ls1088aqds_qspi_SECURE_BOOT_defconfig | 107 -------
- configs/ls1088aqds_qspi_defconfig             | 108 -------
- configs/ls1088aqds_sdcard_ifc_defconfig       | 130 --------
- configs/ls1088aqds_sdcard_qspi_defconfig      | 128 --------
- configs/ls1088ardb_qspi_SECURE_BOOT_defconfig | 104 -------
- configs/ls1088ardb_qspi_defconfig             | 105 -------
- ...1088ardb_sdcard_qspi_SECURE_BOOT_defconfig | 124 --------
- configs/ls1088ardb_sdcard_qspi_defconfig      | 124 --------
- configs/ls2080aqds_SECURE_BOOT_defconfig      | 108 -------
- configs/ls2080aqds_defconfig                  | 109 -------
- configs/ls2080aqds_sdcard_defconfig           | 116 -------
- configs/ls2080ardb_SECURE_BOOT_defconfig      | 106 -------
- configs/ls2080ardb_defconfig                  | 107 -------
- configs/ls2081ardb_defconfig                  |  96 ------
- configs/ls2088ardb_qspi_SECURE_BOOT_defconfig |  96 ------
- configs/ls2088ardb_qspi_defconfig             | 101 -------
  env/Kconfig                                   |   2 +-
  include/configs/ls1046a_common.h              |   3 +-
- 81 files changed, 2 insertions(+), 6092 deletions(-)
+ 31 files changed, 2 insertions(+), 627 deletions(-)
  delete mode 100644 arch/arm/cpu/armv8/fsl-layerscape/ppa.c
  delete mode 100644 arch/arm/include/asm/arch-fsl-layerscape/ppa.h
- delete mode 100644 configs/ls1012a2g5rdb_qspi_defconfig
- delete mode 100644 configs/ls1012afrdm_qspi_defconfig
- delete mode 100644 configs/ls1012afrwy_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1012afrwy_qspi_defconfig
- delete mode 100644 configs/ls1012aqds_qspi_defconfig
- delete mode 100644 configs/ls1012ardb_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1012ardb_qspi_defconfig
- delete mode 100644 configs/ls1043aqds_defconfig
- delete mode 100644 configs/ls1043aqds_lpuart_defconfig
- delete mode 100644 configs/ls1043aqds_nand_defconfig
- delete mode 100644 configs/ls1043aqds_nor_ddr3_defconfig
- delete mode 100644 configs/ls1043aqds_qspi_defconfig
- delete mode 100644 configs/ls1043aqds_sdcard_ifc_defconfig
- delete mode 100644 configs/ls1043aqds_sdcard_qspi_defconfig
- delete mode 100644 configs/ls1043ardb_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1043ardb_defconfig
- delete mode 100644 configs/ls1043ardb_nand_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1043ardb_nand_defconfig
- delete mode 100644 configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1043ardb_sdcard_defconfig
- delete mode 100644 configs/ls1046aqds_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1046aqds_defconfig
- delete mode 100644 configs/ls1046aqds_lpuart_defconfig
- delete mode 100644 configs/ls1046aqds_nand_defconfig
- delete mode 100644 configs/ls1046aqds_qspi_defconfig
- delete mode 100644 configs/ls1046aqds_sdcard_ifc_defconfig
- delete mode 100644 configs/ls1046aqds_sdcard_qspi_defconfig
- delete mode 100644 configs/ls1046ardb_emmc_defconfig
- delete mode 100644 configs/ls1046ardb_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1046ardb_qspi_defconfig
- delete mode 100644 configs/ls1046ardb_qspi_spl_defconfig
- delete mode 100644 configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1046ardb_sdcard_defconfig
- delete mode 100644 configs/ls1088aqds_defconfig
- delete mode 100644 configs/ls1088aqds_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1088aqds_qspi_defconfig
- delete mode 100644 configs/ls1088aqds_sdcard_ifc_defconfig
- delete mode 100644 configs/ls1088aqds_sdcard_qspi_defconfig
- delete mode 100644 configs/ls1088ardb_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1088ardb_qspi_defconfig
- delete mode 100644 configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1088ardb_sdcard_qspi_defconfig
- delete mode 100644 configs/ls2080aqds_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls2080aqds_defconfig
- delete mode 100644 configs/ls2080aqds_sdcard_defconfig
- delete mode 100644 configs/ls2080ardb_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls2080ardb_defconfig
- delete mode 100644 configs/ls2081ardb_defconfig
- delete mode 100644 configs/ls2088ardb_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls2088ardb_qspi_defconfig
 
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/Kconfig b/arch/arm/cpu/armv8/fsl-layerscape/Kconfig
+index a8b493e2f875..c45e4e63b4bb 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/Kconfig
++++ b/arch/arm/cpu/armv8/fsl-layerscape/Kconfig
+@@ -390,66 +390,6 @@ config HAS_FEATURE_ENHANCED_MSI
+ 	bool
+ 	default y if ARCH_LS1043A
+ 
+-menu "Layerscape PPA"
+-config FSL_LS_PPA
+-	bool "FSL Layerscape PPA firmware support"
+-	depends on !ARMV8_PSCI
+-	select ARMV8_SEC_FIRMWARE_SUPPORT
+-	select SEC_FIRMWARE_ARMV8_PSCI
+-	select ARMV8_SEC_FIRMWARE_ERET_ADDR_REVERT if FSL_LSCH2
+-	help
+-	  The FSL Primary Protected Application (PPA) is a software component
+-	  which is loaded during boot stage, and then remains resident in RAM
+-	  and runs in the TrustZone after boot.
+-	  Say y to enable it.
+-
+-config SPL_FSL_LS_PPA
+-	bool "FSL Layerscape PPA firmware support for SPL build"
+-	depends on !ARMV8_PSCI
+-	select SPL_ARMV8_SEC_FIRMWARE_SUPPORT
+-	select SEC_FIRMWARE_ARMV8_PSCI
+-	select ARMV8_SEC_FIRMWARE_ERET_ADDR_REVERT if FSL_LSCH2
+-	help
+-	  The FSL Primary Protected Application (PPA) is a software component
+-	  which is loaded during boot stage, and then remains resident in RAM
+-	  and runs in the TrustZone after boot. This is to load PPA during SPL
+-	  stage instead of the RAM version of U-Boot. Once PPA is initialized,
+-	  the rest of U-Boot (including RAM version) runs at EL2.
+-choice
+-	prompt "FSL Layerscape PPA firmware loading-media select"
+-	depends on FSL_LS_PPA
+-	default SYS_LS_PPA_FW_IN_MMC if SD_BOOT
+-	default SYS_LS_PPA_FW_IN_NAND if NAND_BOOT
+-	default SYS_LS_PPA_FW_IN_XIP
+-
+-config SYS_LS_PPA_FW_IN_XIP
+-	bool "XIP"
+-	help
+-	  Say Y here if the PPA firmware locate at XIP flash, such
+-	  as NOR or QSPI flash.
+-
+-config SYS_LS_PPA_FW_IN_MMC
+-	bool "eMMC or SD Card"
+-	help
+-	  Say Y here if the PPA firmware locate at eMMC/SD card.
+-
+-config SYS_LS_PPA_FW_IN_NAND
+-	bool "NAND"
+-	help
+-	  Say Y here if the PPA firmware locate at NAND flash.
+-
+-endchoice
+-
+-config LS_PPA_ESBC_HDR_SIZE
+-	hex "Length of PPA ESBC header"
+-	depends on FSL_LS_PPA && CHAIN_OF_TRUST && !SYS_LS_PPA_FW_IN_XIP
+-	default 0x2000
+-	help
+-	  Length (in bytes) of PPA ESBC header to be copied from MMC/SD or
+-	  NAND to memory to validate PPA image.
+-
+-endmenu
+-
+ config SYS_FSL_ERRATUM_A008997
+ 	bool "Workaround for USB PHY erratum A008997"
+ 
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/Makefile b/arch/arm/cpu/armv8/fsl-layerscape/Makefile
+index 598c36ee660a..eefdf12369c3 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/Makefile
++++ b/arch/arm/cpu/armv8/fsl-layerscape/Makefile
+@@ -10,7 +10,6 @@ obj-$(CONFIG_MP) += mp.o spintable.o
+ obj-$(CONFIG_OF_LIBFDT) += fdt.o
+ endif
+ obj-$(CONFIG_SPL) += spl.o
+-obj-$(CONFIG_$(SPL_)FSL_LS_PPA) += ppa.o
+ 
+ ifneq ($(CONFIG_FSL_LSCH3),)
+ obj-y += fsl_lsch3_speed.o
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/ppa.c b/arch/arm/cpu/armv8/fsl-layerscape/ppa.c
+deleted file mode 100644
+index 117b7a053c51..000000000000
+--- a/arch/arm/cpu/armv8/fsl-layerscape/ppa.c
++++ /dev/null
+@@ -1,284 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright 2016 NXP Semiconductor, Inc.
+- */
+-#include <common.h>
+-#include <log.h>
+-#include <malloc.h>
+-#include <config.h>
+-#include <errno.h>
+-#include <asm/cache.h>
+-#include <asm/global_data.h>
+-#include <asm/system.h>
+-#include <asm/types.h>
+-#include <asm/arch/soc.h>
+-#ifdef CONFIG_FSL_LSCH3
+-#include <asm/arch/immap_lsch3.h>
+-#elif defined(CONFIG_FSL_LSCH2)
+-#include <asm/arch/immap_lsch2.h>
+-#endif
+-#if CONFIG_IS_ENABLED(ARMV8_SEC_FIRMWARE_SUPPORT)
+-#include <asm/armv8/sec_firmware.h>
+-#endif
+-#ifdef CONFIG_CHAIN_OF_TRUST
+-#include <fsl_validate.h>
+-#endif
+-
+-#ifdef CONFIG_SYS_LS_PPA_FW_IN_NAND
+-#include <nand.h>
+-#elif defined(CONFIG_SYS_LS_PPA_FW_IN_MMC)
+-#include <mmc.h>
+-#endif
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-int ppa_init(void)
+-{
+-	unsigned int el = current_el();
+-	void *ppa_fit_addr;
+-	u32 *boot_loc_ptr_l, *boot_loc_ptr_h;
+-	u32 *loadable_l, *loadable_h;
+-	int ret;
+-
+-#ifdef CONFIG_CHAIN_OF_TRUST
+-	uintptr_t ppa_esbc_hdr = 0;
+-	uintptr_t ppa_img_addr = 0;
+-#if defined(CONFIG_SYS_LS_PPA_FW_IN_MMC) || \
+-	defined(CONFIG_SYS_LS_PPA_FW_IN_NAND)
+-	void *ppa_hdr_ddr;
+-#endif
+-#endif
+-
+-	/* Skip if running at lower exception level */
+-	if (el < 3) {
+-		debug("Skipping PPA init, running at EL%d\n", el);
+-		return 0;
+-	}
+-
+-#ifdef CONFIG_SYS_LS_PPA_FW_IN_XIP
+-	ppa_fit_addr = (void *)CONFIG_SYS_LS_PPA_FW_ADDR;
+-	debug("%s: PPA image load from XIP\n", __func__);
+-#ifdef CONFIG_CHAIN_OF_TRUST
+-	ppa_esbc_hdr = CONFIG_SYS_LS_PPA_ESBC_ADDR;
+-#endif
+-#else /* !CONFIG_SYS_LS_PPA_FW_IN_XIP */
+-	size_t fw_length, fdt_header_len = sizeof(struct fdt_header);
+-
+-	/* Copy PPA image from MMC/SD/NAND to allocated memory */
+-#ifdef CONFIG_SYS_LS_PPA_FW_IN_MMC
+-	struct mmc *mmc;
+-	int dev = CONFIG_SYS_MMC_ENV_DEV;
+-	struct fdt_header *fitp;
+-	u32 cnt;
+-	u32 blk;
+-
+-	debug("%s: PPA image load from eMMC/SD\n", __func__);
+-
+-	ret = mmc_initialize(gd->bd);
+-	if (ret) {
+-		printf("%s: mmc_initialize() failed\n", __func__);
+-		return ret;
+-	}
+-	mmc = find_mmc_device(dev);
+-	if (!mmc) {
+-		printf("PPA: MMC cannot find device for PPA firmware\n");
+-		return -ENODEV;
+-	}
+-
+-	ret = mmc_init(mmc);
+-	if (ret) {
+-		printf("%s: mmc_init() failed\n", __func__);
+-		return ret;
+-	}
+-
+-	fitp = malloc(roundup(fdt_header_len, 512));
+-	if (!fitp) {
+-		printf("PPA: malloc failed for FIT header(size 0x%zx)\n",
+-		       roundup(fdt_header_len, 512));
+-		return -ENOMEM;
+-	}
+-
+-	blk = CONFIG_SYS_LS_PPA_FW_ADDR / 512;
+-	cnt = DIV_ROUND_UP(fdt_header_len, 512);
+-	debug("%s: MMC read PPA FIT header: dev # %u, block # %u, count %u\n",
+-	      __func__, dev, blk, cnt);
+-	ret = blk_dread(mmc_get_blk_desc(mmc), blk, cnt, fitp);
+-	if (ret != cnt) {
+-		free(fitp);
+-		printf("MMC/SD read of PPA FIT header at offset 0x%x failed\n",
+-		       CONFIG_SYS_LS_PPA_FW_ADDR);
+-		return -EIO;
+-	}
+-
+-	ret = fdt_check_header(fitp);
+-	if (ret) {
+-		free(fitp);
+-		printf("%s: fdt_check_header() failed\n", __func__);
+-		return ret;
+-	}
+-
+-#ifdef CONFIG_CHAIN_OF_TRUST
+-	ppa_hdr_ddr = malloc(CONFIG_LS_PPA_ESBC_HDR_SIZE);
+-	if (!ppa_hdr_ddr) {
+-		printf("PPA: malloc failed for PPA header\n");
+-		return -ENOMEM;
+-	}
+-
+-	blk = CONFIG_SYS_LS_PPA_ESBC_ADDR >> 9;
+-	cnt = DIV_ROUND_UP(CONFIG_LS_PPA_ESBC_HDR_SIZE, 512);
+-	ret = blk_dread(mmc_get_blk_desc(mmc), blk, cnt, ppa_hdr_ddr);
+-	if (ret != cnt) {
+-		free(ppa_hdr_ddr);
+-		printf("MMC/SD read of PPA header failed\n");
+-		return -EIO;
+-	}
+-	debug("Read PPA header to 0x%p\n", ppa_hdr_ddr);
+-
+-	ppa_esbc_hdr = (uintptr_t)ppa_hdr_ddr;
+-#endif
+-
+-	fw_length = fdt_totalsize(fitp);
+-	free(fitp);
+-
+-	fw_length = roundup(fw_length, 512);
+-	ppa_fit_addr = malloc(fw_length);
+-	if (!ppa_fit_addr) {
+-		printf("PPA: malloc failed for PPA image(size 0x%zx)\n",
+-		       fw_length);
+-		return -ENOMEM;
+-	}
+-
+-	blk = CONFIG_SYS_LS_PPA_FW_ADDR / 512;
+-	cnt = DIV_ROUND_UP(fw_length, 512);
+-	debug("%s: MMC read PPA FIT image: dev # %u, block # %u, count %u\n",
+-	      __func__, dev, blk, cnt);
+-	ret = blk_dread(mmc_get_blk_desc(mmc), blk, cnt, ppa_fit_addr);
+-	if (ret != cnt) {
+-		free(ppa_fit_addr);
+-		printf("MMC/SD read of PPA FIT header at offset 0x%x failed\n",
+-		       CONFIG_SYS_LS_PPA_FW_ADDR);
+-		return -EIO;
+-	}
+-
+-#elif defined(CONFIG_SYS_LS_PPA_FW_IN_NAND)
+-	struct fdt_header fit;
+-
+-	debug("%s: PPA image load from NAND\n", __func__);
+-
+-	nand_init();
+-	ret = nand_read(get_nand_dev_by_index(0),
+-			(loff_t)CONFIG_SYS_LS_PPA_FW_ADDR,
+-			&fdt_header_len, (u_char *)&fit);
+-	if (ret == -EUCLEAN) {
+-		printf("NAND read of PPA FIT header at offset 0x%x failed\n",
+-		       CONFIG_SYS_LS_PPA_FW_ADDR);
+-		return -EIO;
+-	}
+-
+-	ret = fdt_check_header(&fit);
+-	if (ret) {
+-		printf("%s: fdt_check_header() failed\n", __func__);
+-		return ret;
+-	}
+-
+-#ifdef CONFIG_CHAIN_OF_TRUST
+-	ppa_hdr_ddr = malloc(CONFIG_LS_PPA_ESBC_HDR_SIZE);
+-	if (!ppa_hdr_ddr) {
+-		printf("PPA: malloc failed for PPA header\n");
+-		return -ENOMEM;
+-	}
+-
+-	fw_length = CONFIG_LS_PPA_ESBC_HDR_SIZE;
+-
+-	ret = nand_read(get_nand_dev_by_index(0),
+-			(loff_t)CONFIG_SYS_LS_PPA_ESBC_ADDR,
+-			&fw_length, (u_char *)ppa_hdr_ddr);
+-	if (ret == -EUCLEAN) {
+-		free(ppa_hdr_ddr);
+-		printf("NAND read of PPA firmware at offset 0x%x failed\n",
+-		       CONFIG_SYS_LS_PPA_FW_ADDR);
+-		return -EIO;
+-	}
+-	debug("Read PPA header to 0x%p\n", ppa_hdr_ddr);
+-
+-	ppa_esbc_hdr = (uintptr_t)ppa_hdr_ddr;
+-#endif
+-
+-	fw_length = fdt_totalsize(&fit);
+-
+-	ppa_fit_addr = malloc(fw_length);
+-	if (!ppa_fit_addr) {
+-		printf("PPA: malloc failed for PPA image(size 0x%zx)\n",
+-		       fw_length);
+-		return -ENOMEM;
+-	}
+-
+-	ret = nand_read(get_nand_dev_by_index(0),
+-			(loff_t)CONFIG_SYS_LS_PPA_FW_ADDR,
+-			&fw_length, (u_char *)ppa_fit_addr);
+-	if (ret == -EUCLEAN) {
+-		free(ppa_fit_addr);
+-		printf("NAND read of PPA firmware at offset 0x%x failed\n",
+-		       CONFIG_SYS_LS_PPA_FW_ADDR);
+-		return -EIO;
+-	}
+-#else
+-#error "No CONFIG_SYS_LS_PPA_FW_IN_xxx defined"
+-#endif
+-
+-#endif
+-
+-#ifdef CONFIG_CHAIN_OF_TRUST
+-	ppa_img_addr = (uintptr_t)ppa_fit_addr;
+-	if (fsl_check_boot_mode_secure() != 0) {
+-		/*
+-		 * In case of failure in validation, fsl_secboot_validate
+-		 * would not return back in case of Production environment
+-		 * with ITS=1. In Development environment (ITS=0 and
+-		 * SB_EN=1), the function may return back in case of
+-		 * non-fatal failures.
+-		 */
+-		ret = fsl_secboot_validate(ppa_esbc_hdr,
+-					   PPA_KEY_HASH,
+-					   &ppa_img_addr);
+-		if (ret != 0)
+-			printf("SEC firmware(s) validation failed\n");
+-		else
+-			printf("SEC firmware(s) validation Successful\n");
+-	}
+-#if defined(CONFIG_SYS_LS_PPA_FW_IN_MMC) || \
+-	defined(CONFIG_SYS_LS_PPA_FW_IN_NAND)
+-	free(ppa_hdr_ddr);
+-#endif
+-#endif
+-
+-#ifdef CONFIG_FSL_LSCH3
+-	struct ccsr_gur __iomem *gur = (void *)(CFG_SYS_FSL_GUTS_ADDR);
+-	boot_loc_ptr_l = &gur->bootlocptrl;
+-	boot_loc_ptr_h = &gur->bootlocptrh;
+-
+-	/* Assign addresses to loadable ptrs */
+-	loadable_l = &gur->scratchrw[4];
+-	loadable_h = &gur->scratchrw[5];
+-#elif defined(CONFIG_FSL_LSCH2)
+-	struct ccsr_scfg __iomem *scfg = (void *)(CFG_SYS_FSL_SCFG_ADDR);
+-	boot_loc_ptr_l = &scfg->scratchrw[1];
+-	boot_loc_ptr_h = &scfg->scratchrw[0];
+-
+-	/* Assign addresses to loadable ptrs */
+-	loadable_l = &scfg->scratchrw[2];
+-	loadable_h = &scfg->scratchrw[3];
+-#endif
+-
+-	debug("fsl-ppa: boot_loc_ptr_l = 0x%p, boot_loc_ptr_h =0x%p\n",
+-	      boot_loc_ptr_l, boot_loc_ptr_h);
+-	ret = sec_firmware_init(ppa_fit_addr, boot_loc_ptr_l, boot_loc_ptr_h,
+-				loadable_l, loadable_h);
+-
+-#if defined(CONFIG_SYS_LS_PPA_FW_IN_MMC) || \
+-	defined(CONFIG_SYS_LS_PPA_FW_IN_NAND)
+-	free(ppa_fit_addr);
+-#endif
+-
+-	return ret;
+-}
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/spl.c b/arch/arm/cpu/armv8/fsl-layerscape/spl.c
+index 61fced451eb5..94aa5eeeea44 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/spl.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/spl.c
+@@ -21,7 +21,6 @@
+ #include <i2c.h>
+ #include <fsl_csu.h>
+ #include <asm/arch/fdt.h>
+-#include <asm/arch/ppa.h>
+ #include <asm/arch/soc.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -62,9 +61,6 @@ void spl_board_init(void)
+ #ifdef CONFIG_LAYERSCAPE_NS_ACCESS
+ 	enable_layerscape_ns_access();
+ #endif
+-#ifdef CONFIG_SPL_FSL_LS_PPA
+-	ppa_init();
+-#endif
+ }
+ 
+ void tzpc_init(void)
+@@ -115,36 +111,6 @@ void board_init_f(ulong dummy)
+ 	init_func_vid();
+ #endif
+ 	dram_init();
+-#ifdef CONFIG_SPL_FSL_LS_PPA
+-#ifndef CFG_SYS_MEM_RESERVE_SECURE
+-#error Need secure RAM for PPA
+-#endif
+-	/*
+-	 * Secure memory location is determined in dram_init_banksize().
+-	 * gd->ram_size is deducted by the size of secure ram.
+-	 */
+-	dram_init_banksize();
+-
+-	/*
+-	 * After dram_init_bank_size(), we know U-Boot only uses the first
+-	 * memory bank regardless how big the memory is.
+-	 */
+-	gd->ram_top = gd->bd->bi_dram[0].start + gd->bd->bi_dram[0].size;
+-
+-	/*
+-	 * If PPA is loaded, U-Boot will resume running at EL2.
+-	 * Cache and MMU will be enabled. Need a place for TLB.
+-	 * U-Boot will be relocated to the end of available memory
+-	 * in first bank. At this point, we cannot know how much
+-	 * memory U-Boot uses. Put TLB table lower by SPL_TLB_SETBACK
+-	 * to avoid overlapping. As soon as the RAM version U-Boot sets
+-	 * up new MMU, this space is no longer needed.
+-	 */
+-	gd->ram_top -= SPL_TLB_SETBACK;
+-	gd->arch.tlb_size = PGTABLE_SIZE;
+-	gd->arch.tlb_addr = (gd->ram_top - gd->arch.tlb_size) & ~(0x10000 - 1);
+-	gd->arch.tlb_allocated = gd->arch.tlb_addr;
+-#endif	/* CONFIG_SPL_FSL_LS_PPA */
+ #if defined(CONFIG_QSPI_AHB_INIT) && defined(CONFIG_QSPI_BOOT)
+ 	qspi_ahb_init();
+ #endif
+diff --git a/arch/arm/include/asm/arch-fsl-layerscape/ppa.h b/arch/arm/include/asm/arch-fsl-layerscape/ppa.h
+deleted file mode 100644
+index f0c4a84f7ca4..000000000000
+--- a/arch/arm/include/asm/arch-fsl-layerscape/ppa.h
++++ /dev/null
+@@ -1,12 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright 2016 NXP Semiconductor, Inc.
+- */
+-
+-#ifndef __FSL_PPA_H_
+-#define __FSL_PPA_H_
+-
+-#ifdef CONFIG_FSL_LS_PPA
+-int ppa_init(void);
+-#endif
+-#endif
+diff --git a/arch/arm/include/asm/fsl_secure_boot.h b/arch/arm/include/asm/fsl_secure_boot.h
+index 6a9d198cb811..15627c96e906 100644
+--- a/arch/arm/include/asm/fsl_secure_boot.h
++++ b/arch/arm/include/asm/fsl_secure_boot.h
+@@ -9,15 +9,6 @@
+ 
+ #ifdef CONFIG_CHAIN_OF_TRUST
+ #ifndef CONFIG_SPL_BUILD
+-#ifdef CONFIG_FSL_LS_PPA
+-/* Define the key hash here if SRK used for signing PPA image is
+- * different from SRK hash put in SFP used for U-Boot.
+- * Example
+- * #define PPA_KEY_HASH \
+- *	"41066b564c6ffcef40ccbc1e0a5d0d519604000c785d97bbefd25e4d288d1c8b"
+- */
+-#define PPA_KEY_HASH		NULL
+-#endif /* ifdef CONFIG_FSL_LS_PPA */
+ 
+ #endif /* #ifndef CONFIG_SPL_BUILD */
+ #endif /* #ifdef CONFIG_CHAIN_OF_TRUST */
+diff --git a/board/freescale/ls1012afrdm/Kconfig b/board/freescale/ls1012afrdm/Kconfig
+index 75de782afc9c..a7e59e626565 100644
+--- a/board/freescale/ls1012afrdm/Kconfig
++++ b/board/freescale/ls1012afrdm/Kconfig
+@@ -20,9 +20,6 @@ config SYS_LS_PFE_FW_LENGTH
+ 	hex "length of PFE firmware"
+ 	default 0x40000
+ 
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x40400000
+ endif
+ 
+ if FSL_PFE
+@@ -73,14 +70,6 @@ config SYS_LS_PFE_FW_LENGTH
+ 	hex "length of PFE firmware"
+ 	default 0x40000
+ 
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x40060000
+-
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x401f4000
+-
+ config SYS_LS_PFE_ESBC_ADDR
+ 	hex "PFE Firmware HDR Addr"
+ 	default 0x401f8000
+diff --git a/board/freescale/ls1012afrdm/ls1012afrdm.c b/board/freescale/ls1012afrdm/ls1012afrdm.c
+index f2b8750a3f38..271072bf7a1c 100644
+--- a/board/freescale/ls1012afrdm/ls1012afrdm.c
++++ b/board/freescale/ls1012afrdm/ls1012afrdm.c
+@@ -12,9 +12,6 @@
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/fsl_serdes.h>
+-#ifdef CONFIG_FSL_LS_PPA
+-#include <asm/arch/ppa.h>
+-#endif
+ #include <asm/arch/mmu.h>
+ #include <asm/arch/soc.h>
+ #include <fsl_esdhc.h>
+@@ -171,9 +168,6 @@ int board_init(void)
+ 	if (current_el() == 3)
+ 		out_le32(&cci->ctrl_ord, CCI400_CTRLORD_EN_BARRIER);
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+ 	return 0;
+ }
+ 
+diff --git a/board/freescale/ls1012aqds/Kconfig b/board/freescale/ls1012aqds/Kconfig
+index 991ba6044db8..d333069898fb 100644
+--- a/board/freescale/ls1012aqds/Kconfig
++++ b/board/freescale/ls1012aqds/Kconfig
+@@ -12,15 +12,7 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1012aqds"
+ 
+-config SYS_LS_PPA_FW_ADDR
+-        hex "PPA Firmware Addr"
+-        default 0x40400000
+-
+ if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x40680000
+-
+ config SYS_LS_PFE_ESBC_ADDR
+ 	hex "PFE Firmware HDR Addr"
+ 	default 0x40700000
+diff --git a/board/freescale/ls1012aqds/ls1012aqds.c b/board/freescale/ls1012aqds/ls1012aqds.c
+index 194b5d27295b..a5ea8d634edc 100644
+--- a/board/freescale/ls1012aqds/ls1012aqds.c
++++ b/board/freescale/ls1012aqds/ls1012aqds.c
+@@ -13,9 +13,6 @@
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/fsl_serdes.h>
+-#ifdef CONFIG_FSL_LS_PPA
+-#include <asm/arch/ppa.h>
+-#endif
+ #include <asm/arch/fdt.h>
+ #include <asm/arch/mmu.h>
+ #include <asm/arch/soc.h>
+@@ -150,9 +147,6 @@ int board_init(void)
+ 	erratum_a010315();
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+ 	return 0;
+ }
+ 
+diff --git a/board/freescale/ls1012ardb/Kconfig b/board/freescale/ls1012ardb/Kconfig
+index aa15f5a027e8..b55660d485fa 100644
+--- a/board/freescale/ls1012ardb/Kconfig
++++ b/board/freescale/ls1012ardb/Kconfig
+@@ -12,15 +12,7 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1012ardb"
+ 
+-config SYS_LS_PPA_FW_ADDR
+-        hex "PPA Firmware Addr"
+-        default 0x40400000
+-
+ if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x40680000
+-
+ config SYS_LS_PFE_ESBC_ADDR
+ 	hex "PFE Firmware HDR Addr"
+ 	default 0x40640000
+@@ -79,10 +71,6 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+         default "ls1012a2g5rdb"
+ 
+-config SYS_LS_PPA_FW_ADDR
+-        hex "PPA Firmware Addr"
+-        default 0x40400000
+-
+ if FSL_PFE
+ 
+ config BOARD_SPECIFIC_OPTIONS # dummy
+diff --git a/board/freescale/ls1012ardb/ls1012ardb.c b/board/freescale/ls1012ardb/ls1012ardb.c
+index 62c935e4d3ec..18f92089caef 100644
+--- a/board/freescale/ls1012ardb/ls1012ardb.c
++++ b/board/freescale/ls1012ardb/ls1012ardb.c
+@@ -15,9 +15,6 @@
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/fsl_serdes.h>
+-#ifdef CONFIG_FSL_LS_PPA
+-#include <asm/arch/ppa.h>
+-#endif
+ #include <asm/arch/mmu.h>
+ #include <asm/arch/soc.h>
+ #include <hwconfig.h>
+@@ -173,9 +170,6 @@ int board_init(void)
+ 	erratum_a010315();
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+ 	return 0;
+ }
+ 
+diff --git a/board/freescale/ls1028a/Kconfig b/board/freescale/ls1028a/Kconfig
+index 7d73d20c8f0e..fb6ee17ce897 100644
+--- a/board/freescale/ls1028a/Kconfig
++++ b/board/freescale/ls1028a/Kconfig
+@@ -20,18 +20,6 @@ config TEXT_BASE
+ 	default 0x82000000 if TFABOOT
+ 	default 0x20100000
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x20400000 if SYS_LS_PPA_FW_IN_XIP && ARCH_LS1028A
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC && ARCH_LS1028A
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA header Addr"
+-	default 0x20600000 if SYS_LS_PPA_FW_IN_XIP && ARCH_LS1028A
+-endif
+-endif
+-
+ endif
+ 
+ if TARGET_LS1028ARDB
+diff --git a/board/freescale/ls1028a/ls1028a.c b/board/freescale/ls1028a/ls1028a.c
+index faecb6099240..7f181ab3dfb7 100644
+--- a/board/freescale/ls1028a/ls1028a.c
++++ b/board/freescale/ls1028a/ls1028a.c
+@@ -20,9 +20,6 @@
+ #include <asm/arch-fsl-layerscape/fsl_icid.h>
+ #include <i2c.h>
+ #include <asm/arch/soc.h>
+-#ifdef CONFIG_FSL_LS_PPA
+-#include <asm/arch/ppa.h>
+-#endif
+ #include <fsl_immap.h>
+ #include <netdev.h>
+ 
+@@ -74,10 +71,6 @@ u32 get_lpuart_clk(void)
+ 
+ int board_init(void)
+ {
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #ifndef CONFIG_SYS_EARLY_PCI_INIT
+ 	pci_init();
+ #endif
+diff --git a/board/freescale/ls1043aqds/Kconfig b/board/freescale/ls1043aqds/Kconfig
+index 4be445e8c8f8..7e27f8f5b139 100644
+--- a/board/freescale/ls1043aqds/Kconfig
++++ b/board/freescale/ls1043aqds/Kconfig
+@@ -12,20 +12,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1043aqds"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x40400000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x60400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x40680000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x60680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls1043aqds/ls1043aqds.c b/board/freescale/ls1043aqds/ls1043aqds.c
+index 841d8b59bb4c..b87da41e4083 100644
+--- a/board/freescale/ls1043aqds/ls1043aqds.c
++++ b/board/freescale/ls1043aqds/ls1043aqds.c
+@@ -15,7 +15,6 @@
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/fsl_serdes.h>
+-#include <asm/arch/ppa.h>
+ #include <asm/arch/fdt.h>
+ #include <asm/arch/mmu.h>
+ #include <asm/arch/cpu.h>
+@@ -533,10 +532,6 @@ int board_init(void)
+ 	config_serdes_mux();
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ 	return 0;
+ }
+ 
+diff --git a/board/freescale/ls1043ardb/Kconfig b/board/freescale/ls1043ardb/Kconfig
+index 56502f9f9c63..51818ec58016 100644
+--- a/board/freescale/ls1043ardb/Kconfig
++++ b/board/freescale/ls1043ardb/Kconfig
+@@ -13,18 +13,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1043ardb"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x60400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x60680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls1043ardb/ls1043ardb.c b/board/freescale/ls1043ardb/ls1043ardb.c
+index 741a4d64ea9e..18869d8c1df5 100644
+--- a/board/freescale/ls1043ardb/ls1043ardb.c
++++ b/board/freescale/ls1043ardb/ls1043ardb.c
+@@ -25,7 +25,6 @@
+ #ifdef CONFIG_U_QE
+ #include <fsl_qe.h>
+ #endif
+-#include <asm/arch/ppa.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -211,10 +210,6 @@ int board_init(void)
+ 	out_le32(SMMU_NSCR0, val);
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #if !defined(CONFIG_SYS_EARLY_PCI_INIT) && defined(CONFIG_DM_ETH)
+ 	pci_init();
+ #endif
+diff --git a/board/freescale/ls1046aqds/Kconfig b/board/freescale/ls1046aqds/Kconfig
+index adf325f4efd0..723f4ba90a07 100644
+--- a/board/freescale/ls1046aqds/Kconfig
++++ b/board/freescale/ls1046aqds/Kconfig
+@@ -12,20 +12,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1046aqds"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x40400000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x60400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x40680000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x60680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls1046aqds/ls1046aqds.c b/board/freescale/ls1046aqds/ls1046aqds.c
+index 3d0881643cd9..2faac54a0e23 100644
+--- a/board/freescale/ls1046aqds/ls1046aqds.c
++++ b/board/freescale/ls1046aqds/ls1046aqds.c
+@@ -14,7 +14,6 @@
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/fsl_serdes.h>
+-#include <asm/arch/ppa.h>
+ #include <asm/arch/fdt.h>
+ #include <asm/arch/mmu.h>
+ #include <asm/arch/cpu.h>
+@@ -402,10 +401,6 @@ int board_init(void)
+ 	if (adjust_vdd(0))
+ 		printf("Warning: Adjusting core voltage failed.\n");
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #ifdef CONFIG_NXP_ESBC
+ 	/*
+ 	 * In case of Secure Boot, the IBR configures the SMMU
+diff --git a/board/freescale/ls1046ardb/Kconfig b/board/freescale/ls1046ardb/Kconfig
+index 1fb391c991c6..a62255c78dbb 100644
+--- a/board/freescale/ls1046ardb/Kconfig
++++ b/board/freescale/ls1046ardb/Kconfig
+@@ -13,18 +13,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1046ardb"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x40400000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x40680000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls1046ardb/ls1046ardb.c b/board/freescale/ls1046ardb/ls1046ardb.c
+index 1d12d9189b78..26e69db55f74 100644
+--- a/board/freescale/ls1046ardb/ls1046ardb.c
++++ b/board/freescale/ls1046ardb/ls1046ardb.c
+@@ -14,7 +14,6 @@
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/fsl_serdes.h>
+-#include <asm/arch/ppa.h>
+ #include <asm/arch/soc.h>
+ #include <asm/arch-fsl-layerscape/fsl_icid.h>
+ #include <hwconfig.h>
+@@ -96,10 +95,6 @@ int board_init(void)
+ 	out_le32(SMMU_NSCR0, val);
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #if !defined(CONFIG_SYS_EARLY_PCI_INIT) && defined(CONFIG_DM_ETH)
+ 	pci_init();
+ #endif
+diff --git a/board/freescale/ls1088a/Kconfig b/board/freescale/ls1088a/Kconfig
+index f1a45236061b..1ada661743ed 100644
+--- a/board/freescale/ls1088a/Kconfig
++++ b/board/freescale/ls1088a/Kconfig
+@@ -12,20 +12,6 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1088aqds"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-        hex "PPA Firmware Addr"
+-	default 0x20400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x20680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+ 
+ if TARGET_LS1088ARDB
+@@ -42,18 +28,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls1088ardb"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-        hex "PPA Firmware Addr"
+-	default 0x20400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x20680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls1088a/ls1088a.c b/board/freescale/ls1088a/ls1088a.c
+index 7a1047a77f73..65593f10a3f5 100644
+--- a/board/freescale/ls1088a/ls1088a.c
++++ b/board/freescale/ls1088a/ls1088a.c
+@@ -22,7 +22,6 @@
+ #include <fsl-mc/fsl_mc.h>
+ #include <env_internal.h>
+ #include <asm/arch-fsl-layerscape/soc.h>
+-#include <asm/arch/ppa.h>
+ #include <hwconfig.h>
+ #include <asm/arch/fsl_serdes.h>
+ #include <asm/arch/soc.h>
+@@ -820,10 +819,6 @@ int board_init(void)
+ 	out_le32(irq_ccsr + IRQCR_OFFSET / 4, AQR105_IRQ_MASK);
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #if !defined(CONFIG_SYS_EARLY_PCI_INIT)
+ 	pci_init();
+ #endif
+diff --git a/board/freescale/ls2080aqds/Kconfig b/board/freescale/ls2080aqds/Kconfig
+index 1036f33c61fa..2f997e9de1ac 100644
+--- a/board/freescale/ls2080aqds/Kconfig
++++ b/board/freescale/ls2080aqds/Kconfig
+@@ -13,20 +13,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls2080aqds"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x20400000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x580400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x20680000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x580680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls2080aqds/ls2080aqds.c b/board/freescale/ls2080aqds/ls2080aqds.c
+index ab5ff6f62ce0..ba25e9b0b8fc 100644
+--- a/board/freescale/ls2080aqds/ls2080aqds.c
++++ b/board/freescale/ls2080aqds/ls2080aqds.c
+@@ -23,7 +23,6 @@
+ #include <rtc.h>
+ #include <asm/arch/soc.h>
+ #include <hwconfig.h>
+-#include <asm/arch/ppa.h>
+ #include <asm/arch-fsl-layerscape/fsl_icid.h>
+ #include "../common/i2c_mux.h"
+ 
+@@ -223,10 +222,6 @@ int board_init(void)
+ #endif
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #if !defined(CONFIG_SYS_EARLY_PCI_INIT)
+ 	pci_init();
+ #endif
+diff --git a/board/freescale/ls2080ardb/Kconfig b/board/freescale/ls2080ardb/Kconfig
+index c8b0b94596b5..671eead5f7f0 100644
+--- a/board/freescale/ls2080ardb/Kconfig
++++ b/board/freescale/ls2080ardb/Kconfig
+@@ -12,20 +12,4 @@ config SYS_SOC
+ config SYS_CONFIG_NAME
+ 	default "ls2080ardb"
+ 
+-if FSL_LS_PPA
+-config SYS_LS_PPA_FW_ADDR
+-	hex "PPA Firmware Addr"
+-	default 0x20400000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x580400000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x400000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-
+-if CHAIN_OF_TRUST
+-config SYS_LS_PPA_ESBC_ADDR
+-	hex "PPA Firmware HDR Addr"
+-	default 0x20680000 if SYS_LS_PPA_FW_IN_XIP && QSPI_BOOT
+-	default 0x580680000 if SYS_LS_PPA_FW_IN_XIP
+-	default 0x680000 if SYS_LS_PPA_FW_IN_MMC || SYS_LS_PPA_FW_IN_NAND
+-endif
+-endif
+-
+ endif
+diff --git a/board/freescale/ls2080ardb/ls2080ardb.c b/board/freescale/ls2080ardb/ls2080ardb.c
+index a7fc2b207660..8d340f17a256 100644
+--- a/board/freescale/ls2080ardb/ls2080ardb.c
++++ b/board/freescale/ls2080ardb/ls2080ardb.c
+@@ -24,7 +24,6 @@
+ #include <i2c.h>
+ #include <asm/arch/mmu.h>
+ #include <asm/arch/soc.h>
+-#include <asm/arch/ppa.h>
+ #include <asm/arch-fsl-layerscape/fsl_icid.h>
+ #include "../common/i2c_mux.h"
+ 
+@@ -288,10 +287,6 @@ int board_init(void)
+ 	QIXIS_WRITE(rst_ctl, QIXIS_RST_CTL_RESET_EN);
+ #endif
+ 
+-#ifdef CONFIG_FSL_LS_PPA
+-	ppa_init();
+-#endif
+-
+ #ifdef CONFIG_FSL_MC_ENET
+ 	/* invert AQR405 IRQ pins polarity */
+ 	out_le32(irq_ccsr + IRQCR_OFFSET / 4, AQR405_IRQ_MASK);
+diff --git a/board/traverse/ten64/ten64.c b/board/traverse/ten64/ten64.c
+index df9f0afe1a4f..6ff5312d6d79 100644
+--- a/board/traverse/ten64/ten64.c
++++ b/board/traverse/ten64/ten64.c
+@@ -26,7 +26,6 @@
+ #include <fsl-mc/fsl_mc.h>
+ #include <env_internal.h>
+ #include <asm/arch-fsl-layerscape/soc.h>
+-#include <asm/arch/ppa.h>
+ #include <hwconfig.h>
+ #include <asm/arch/fsl_serdes.h>
+ #include <asm/arch/soc.h>
+diff --git a/env/Kconfig b/env/Kconfig
+index 13e32104b4c1..b8bbe246c541 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -645,7 +645,7 @@ config SYS_RELOC_GD_ENV_ADDR
+ 
+ config SYS_MMC_ENV_DEV
+ 	int "mmc device number"
+-	depends on ENV_IS_IN_MMC || ENV_IS_IN_FAT || SYS_LS_PPA_FW_IN_MMC || \
++	depends on ENV_IS_IN_MMC || ENV_IS_IN_FAT || \
+ 		CMD_MVEBU_BUBT || FMAN_ENET || QE || PHY_CORTINA
+ 	default 0
+ 	help
+diff --git a/include/configs/ls1046a_common.h b/include/configs/ls1046a_common.h
+index 38fb1d45bcb3..867b098a0732 100644
+--- a/include/configs/ls1046a_common.h
++++ b/include/configs/ls1046a_common.h
+@@ -21,8 +21,7 @@
+ 	(defined(CONFIG_NAND_BOOT) || defined(CONFIG_QSPI_BOOT))
+ #define SPL_NO_MMC
+ #endif
+-#if defined(CONFIG_SPL_BUILD)		&& \
+-	!defined(CONFIG_SPL_FSL_LS_PPA)
++#if defined(CONFIG_SPL_BUILD)
+ #define SPL_NO_IFC
+ #endif
+ 
 -- 
 2.17.1
 
