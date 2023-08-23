@@ -4,53 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B8E6EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E05E7EE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 463F8864D3;
-	Wed, 23 Aug 2023 15:59:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id F002880842;
+	Wed, 23 Aug 2023 16:22:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="jNKIQFay";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pBvJTePw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E1B886459; Wed, 23 Aug 2023 15:59:32 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 356CC8642E; Wed, 23 Aug 2023 16:22:01 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8465F864AA
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:59:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from adahl by ada.ifak-system.com with local (Exim 4.94.2)
- (envelope-from <ada@thorsis.com>)
- id 1qYoNs-001ZvC-Bq; Wed, 23 Aug 2023 15:58:56 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
- t=1692799167;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bFIflozD1UVopLQkrP+Zhuqui+zzlAO0P2/DIXZ68Cw=;
- b=jNKIQFaySDCixcR9TWDysrn7NuCSZ8fNmXCzbeqScO3ngR+8Pgk1PEhOCLKQVSVnd70b7/
- LhOnim8LFD7XBrta9LZ8eHOoZ98aoJUPf3G3bR8woeJAQalOgs50+GKFwuzwMTB697ANyE
- klc9gpPuAizoAJ3+3mbB/4S7E2gsAoEcMPlduCm4mikBs/gWbHx7NdSJivLsKnH+AmjPef
- 5nHZyg5w80IyMVTfdCbBMgzw1pmcZ6PjgLUBtXEBfRHYB4dv3sukfUmBSQ4uJMfDypRziq
- tp69i9Hs7fCiYYcxVuw90VByFDRsIiV35ONQarEbranJ5K2npsZW2c6e83gM/g==
-From: Alexander Dahl <ada@thorsis.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>,
- Durai Manickam KR <durai.manickamkr@microchip.com>,
- Sandeep Sheriker M <sandeep.sheriker@microchip.com>
-Cc: Sergiu Moga <sergiu.moga@microchip.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2 4/5] board: sam9x60-curiosity: Let LED subsystem init leds
- if enabled
-Date: Wed, 23 Aug 2023 15:58:55 +0200
-Message-Id: <20230823135856.376351-5-ada@thorsis.com>
-In-Reply-To: <20230823135856.376351-1-ada@thorsis.com>
-References: <20230823135856.376351-1-ada@thorsis.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 55A59807D4
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:21:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NELqXE126261;
+ Wed, 23 Aug 2023 09:21:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692800512;
+ bh=CJYy2WukI6GVSn0gVwhfqQETyqGI03s+V20rrB/DVt0=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=pBvJTePwXiPRod+b6Vd9klXSuujgYgA52k59g+HJm43NM5TOlsu99PpgpMDKyQJWT
+ FxeNOihGLnt3KNLhy3jP/2cgQiULQuso6lXYQq4ouAMgc69W9GaokNJJqvnZipTA6Y
+ 6GbSTVyiZqKOjoNcMSfxxME3trJiYrx61/z07B7M=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NELqlg041457
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 09:21:52 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 09:21:51 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 09:21:51 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NELpd4111173;
+ Wed, 23 Aug 2023 09:21:51 -0500
+Date: Wed, 23 Aug 2023 09:21:51 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Nitin Yadav <n-yadav@ti.com>
+CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Neha Francis
+ <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH V4 4/8] drivers: mmc: am654_sdhci: Update OTAP/ITAP delay
+Message-ID: <20230823142151.e46pt2xdbttnyu5f@imperial>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-5-nm@ti.com> <87r0nufaik.fsf@baylibre.com>
+ <9ffa96cd-df18-d298-41c2-080a187b7410@ti.com>
+ <caab6d37-199a-7d1c-6b60-9297e3838fd5@ti.com>
+ <20230823113816.b5qrst4ut77e4d5r@lucid>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230823113816.b5qrst4ut77e4d5r@lucid>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,97 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG_LED and CONFIG_LED_GPIO are enabled, it is not necessary to
-initialize the RGB LED on the board by manually setting hardcoded GPIOs
-anymore.  Everything is well defined in dts and can be used like on
-boards of other vendors.
+On 06:38-20230823, Nishanth Menon wrote:
+> On 15:48-20230823, Nitin Yadav wrote:
+> [...]
+> 
+> > > > > -    for (i = MMC_HS; i <= MMC_HS_400; i++) {
+> > > > > +    for (i = MMC_LEGACY; i <= MMC_HS_400; i++) {
+> > > > 
+> > > > I'm not super familiar with mmc drivers in general, but it feels like
+> > > > this bit does not really belong in this patch. >
+> > > > Is this another bugfix for removing otap-del-sel for MMC_LEGACY devices
+> > > > or does U1 UHS SD cards are considered to be of MMC_LEGACY type ?
+> > > yes, its two different fix. Internally I posted two patches for them.
+> > > can be referred in below links:
+> > > 
+> > > https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=b5a2f7972fd142df03a15ba58829aa068c891abf
+> > > 
+> > > https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=527095165281cbc60a1b42995c1e55e6756cbe93
+> > > 
+> > For uboot somehow it got merged as single patch as It was one of my first
+> > fix :) .
+> 
+> Thanks for the pointer. I will pick the latest up for V5.
 
-Keep the old behaviour as fallback, though.
+After a bit of offline discussions with Nitin and other folks, looks
+like sdhci fixes need to be it's own series. will drop that from V5.
 
-With all this in place enabling CONFIG_CMD_LED gives us a working 'led'
-command on the U-Boot shell.
-
-Signed-off-by: Alexander Dahl <ada@thorsis.com>
----
- .../arm/dts/at91-sam9x60_curiosity-u-boot.dtsi | 18 ++++++++++++++++++
- .../sam9x60_curiosity/sam9x60_curiosity.c      | 18 ++++++++++++++++++
- 2 files changed, 36 insertions(+)
-
-diff --git a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-index a1b76e94d1..dd4623311c 100644
---- a/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-+++ b/arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi
-@@ -20,6 +20,24 @@
- 	chosen {
- 		bootph-all;
- 	};
-+
-+	config {
-+		u-boot,boot-led = "blue";
-+	};
-+
-+	leds {
-+		led-red {
-+			default-state = "off";
-+		};
-+
-+		led-green {
-+			default-state = "off";
-+		};
-+
-+		led-blue {
-+			default-state = "off";
-+		};
-+	};
- };
- 
- &clk32 {
-diff --git a/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c b/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
-index 0fe0de9fde..f53d359404 100644
---- a/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
-+++ b/board/atmel/sam9x60_curiosity/sam9x60_curiosity.c
-@@ -9,6 +9,7 @@
- #include <debug_uart.h>
- #include <fdtdec.h>
- #include <init.h>
-+#include <led.h>
- #include <asm/arch/at91_common.h>
- #include <asm/arch/at91_rstc.h>
- #include <asm/arch/at91_sfr.h>
-@@ -18,6 +19,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/mach-types.h>
-+#include <dm/ofnode.h>
- 
- extern void at91_pda_detect(void);
- 
-@@ -27,9 +29,25 @@ void at91_prepare_cpu_var(void);
- 
- static void board_leds_init(void)
- {
-+#if CONFIG_IS_ENABLED(LED)
-+	const char *led_name;
-+	struct udevice *dev;
-+	int ret;
-+
-+	led_name = ofnode_conf_read_str("u-boot,boot-led");
-+	if (!led_name)
-+		return;
-+
-+	ret = led_get_by_label(led_name, &dev);
-+	if (ret)
-+		return;
-+
-+	led_set_state(dev, LEDST_ON);
-+#else
- 	at91_set_pio_output(AT91_PIO_PORTD, 17, 0);	/* LED RED */
- 	at91_set_pio_output(AT91_PIO_PORTD, 19, 0);	/* LED GREEN */
- 	at91_set_pio_output(AT91_PIO_PORTD, 21, 1);	/* LED BLUE */
-+#endif
- }
- 
- int board_late_init(void)
 -- 
-2.30.2
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
