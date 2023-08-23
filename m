@@ -4,60 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D3AC27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5AFC27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEA4686456;
-	Wed, 23 Aug 2023 22:25:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 50A3286412;
+	Wed, 23 Aug 2023 22:28:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692822340;
-	bh=SwZXPNIINPKUn6rqXiqtnS8BX1EfrcAI0mQdFa2MDwA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=I6p3PJmaBCu7xvv8oHOEEJym7jCoEp1u656Ne/tmIuoW6nkpReqL84MeFUNT9SppB
-	 +i6H0pAOjxeOTV/lJwm2I1CWX1YgwjOz/cU+nJE4R3nU6SWKpCgFKez9VC3Hr/9Q15
-	 WbYc8YPoFHnpihcFqLZCXUDkt9ttRSOwDarVIKN3/gTsG0Kaa0+fcM1kJCveHroM7s
-	 /z/A9FYPLXhr1tedHQgE6xsHjbPNAq8rXO/uTqun/wtj09qHrBn15JZkGNnS8FhJQD
-	 CVuLhUoFoKTxOaxT/Ckn5YVKLNVcIyknOFTURFqbPyFHiR2Gnyz29cxAikS0zNaFIt
-	 ZWy/XRtCe8gfw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FA7y4H4r";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F1F8E864C7; Wed, 23 Aug 2023 22:27:59 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 616A68640E;
- Wed, 23 Aug 2023 22:25:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692822340;
- bh=SwZXPNIINPKUn6rqXiqtnS8BX1EfrcAI0mQdFa2MDwA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=e602x1XCPgCLD88+7nrEIJHWT83JP1+nvjzIoeglrNrHqF8DXWttkMPKX0o8MN2Rc
- cwbtIHr6QtVW1vgCJDZfRztFbgTcYNik71K6tyXZBAzytt4O3InTu4gQJy1JZBE8K+
- 2PAj9XHZuagklwi4H2oQLxjLDwPHBcTbF0szGbTPtjzhZ7JUc+mtR7MQxYmC5bQn95
- v2h1eHT1Q+Xi31xJKRIJ4anxnrhCVcUz0sU3zu2SRw4It0kDIxFsPYxzvx/oIjJlrh
- o/QdR09/u7PNUeMrEEWFgvovs7LURJ633oG0FGZQ6xnUocnSKmZe0s2m3h6renjCby
- PTXKOnP704e5g==
-Message-ID: <993cc97e-9887-68d1-fc65-2cb3aa7adf12@denx.de>
-Date: Wed, 23 Aug 2023 22:25:38 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
+ by phobos.denx.de (Postfix) with ESMTPS id 2B09186414
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 22:27:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-d6fcffce486so5766696276.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:27:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692822476; x=1693427276;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LphW74+7BFr+DSGC7KWR8TMRQY3fhX6yDP54fKUMqWA=;
+ b=FA7y4H4ru0Q+XSdFraBABRgmUX6HNOg57fKv3BiM8XB1nDrZD04M8LiZVy528xBNLS
+ sT4qKQNLPEkQ6vpESP8wWWbsh3MS9sZX0L+NlVyGHGbXEh/LsaP9q/45Usm+EW7RlLFk
+ 1cNai02zdSJk+Pl83hzm13nFySelLiqm5XcOU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692822476; x=1693427276;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LphW74+7BFr+DSGC7KWR8TMRQY3fhX6yDP54fKUMqWA=;
+ b=fVzCEf7FN2LaWVrQP1dZSsE2pH+zUu4JlIf1rdCMsC2S3hZCjO1CQtAbGIdThj/L8/
+ GU0sACuNVDSxikpAy3DVKYQmKak5EfIyhcPR1eazOiq4IDC3XZ0qfm0xJ+DzXDDyoMb/
+ WiqjvQefjIHHhRVjrMk6y4UUr05UJA0JEuHsagI+kW2V6Vdo7W0X1cZ3eWHfLNmOK47v
+ C9VMM473/PuvuOAJwGiCCj3CTI3H5McJ0Le+uNuWrxVQG4hyYeQtpfHLj6egAivZDOoH
+ Sif2xntUQQLxnYTA84mGBpL7YHhbHzOL3gSoaKj5KI1reoRwe9AH5d1AN4cY0bYEdGxA
+ /YjA==
+X-Gm-Message-State: AOJu0YyzibRiPchWnIjPfj1YCl0G6Ioqd5ZyuGhgH1HT3H9TT9RulgMP
+ pbh/tc+EM9vVLEnvV+MprKnQZQ==
+X-Google-Smtp-Source: AGHT+IF/57Rw4y0HpqRkNJ3D4COAlN4eLNyVC+eQqlpSZPqPFJqHMvGV8g0wlu/1SFsE3plr0MptWA==
+X-Received: by 2002:a25:dc03:0:b0:c5d:f2af:5a24 with SMTP id
+ y3-20020a25dc03000000b00c5df2af5a24mr13811103ybe.14.1692822475874; 
+ Wed, 23 Aug 2023 13:27:55 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
+ [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
+ by smtp.gmail.com with ESMTPSA id
+ b9-20020a25ae89000000b00d1dffdd7a97sm3007623ybj.57.2023.08.23.13.27.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 13:27:55 -0700 (PDT)
+Date: Wed, 23 Aug 2023 16:27:53 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>,
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 Subject: Re: [PATCH 1/1] doc: describe TPL/VPL/SPL boot
-Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
- =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
+Message-ID: <20230823202753.GD3953269@bill-the-cat>
 References: <20230823195728.39438-1-heinrich.schuchardt@canonical.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230823195728.39438-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <20230823201400.m4l6hl7zy6x6srzd@pali>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="boEVjMCF1iC7gXJv"
+Content-Disposition: inline
+In-Reply-To: <20230823201400.m4l6hl7zy6x6srzd@pali>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,391 +96,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/23/23 21:57, Heinrich Schuchardt wrote:
-> This is a stub describing how TPL, VPL, and SPL load the next boot stages
-> on a detail level for users.
-> 
-> For sure we will need a few patches on top to catch the whole complexity.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->   doc/usage/index.rst    |   1 +
->   doc/usage/spl_boot.rst | 309 +++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 310 insertions(+)
->   create mode 100644 doc/usage/spl_boot.rst
-> 
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 072db53614..7f0b26cc5a 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -4,6 +4,7 @@ Use U-Boot
->   .. toctree::
->      :maxdepth: 1
->   
-> +   spl_boot
->      blkmap
->      dfu
->      environment
-> diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
-> new file mode 100644
-> index 0000000000..05a3bf390d
-> --- /dev/null
-> +++ b/doc/usage/spl_boot.rst
-> @@ -0,0 +1,309 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +Booting from TPL/SPL
-> +====================
-> +
-> +The main U-Boot binary may be to 
 
-too
+--boEVjMCF1iC7gXJv
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> large to be loaded directly by the Boot ROM.
-> +This was the main driver for splitting up U-Boot into multiple boot stages with
-> +successively larger binaries.
+On Wed, Aug 23, 2023 at 10:14:00PM +0200, Pali Roh=E1r wrote:
+> On Wednesday 23 August 2023 21:57:28 Heinrich Schuchardt wrote:
+> > +Booting from TPL/SPL
+> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > +
+> > +The main U-Boot binary may be to large to be loaded directly by the Bo=
+ot ROM.
+> > +This was the main driver for splitting up U-Boot into multiple boot st=
+ages with
+> > +successively larger binaries.
+> > +
+> > +U-Boot typically goes through the following boot phases where TPL, VPL=
+, and SPL
+> > +are optional. While many boards use SPL only few use TPL.
+> > +
+> > +TPL
+> > +   Very early init, as tiny as possible. This loads SPL (or VPL if ena=
+bled).
+>=20
+> This is not truth. SPL loads TPL. Or at least it was about year ago for p=
+owerpc plat.
+>=20
+> > +VPL
+> > +   Optional verification step, which can select one of several SPL bin=
+aries,
+> > +   if A/B verified boot is enabled. Implementation of the VPL logic is
+> > +   work-in-progress. For now it just boots into SPL.
+> > +
+> > +SPL
+> > +   Secondary program loader. Sets up SDRAM and loads U-Boot proper. It=
+ may also
+> > +   load other firmware components.
+>=20
+> SPL initializes NAND then loads TPL from NAND, TPL initialize DDR and the=
+n loads U-Boot.
 
-Maybe not binaries, but something like "code working set" or so, since 
-e.g. ATF BL31 may be smaller than SPL, but it is still loaded and 
-started by SPL as PSCI provided e.g. on NXP MX8M.
+One of the long standing issues here is that PowerPC is different from
+everyone else, in terms of terminology here.
 
-> +U-Boot typically goes through the following boot phases where TPL, VPL, and SPL
-> +are optional. While many boards use SPL only few use TPL.
-> +
-> +TPL
-> +   Very early init, as tiny as possible. This loads SPL (or VPL if enabled).
+--=20
+Tom
 
-Tiny Program Loader ?
+--boEVjMCF1iC7gXJv
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> +VPL
-> +   Optional verification step, which can select one of several SPL binaries,
-> +   if A/B verified boot is enabled. Implementation of the VPL logic is
-> +   work-in-progress. For now it just boots into SPL.
-> +
-> +SPL
-> +   Secondary program loader. Sets up SDRAM and loads U-Boot proper. It may also
-> +   load other firmware components.
-> +
-> +U-Boot
-> +   U-Boot proper, containing the command line and boot logic.
+-----BEGIN PGP SIGNATURE-----
 
-boot logic can also be in SPL btw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTma78ACgkQFHw5/5Y0
+tyyQcwwAkiMVv6SJ44aK8fbV5hAQzz0ZWwBOiA++VqVSJm/YuUXA6UL/UgTbwqTg
+QXbsVUSTNXP334yo9gR3ZzSFigvLEeCQui5aVT6dEY2me/prtN6fbuB2OBJwUeoR
+d8zRWCcyPpj76ohY8OWf+LQ0Tc+SV9grhlIoM5Rverzxao5tLTwLcg3hZX6tylHE
+eXzn9DTGG/ozqoMNquSCUT4ZjBM/LG+AtNCGOUJyyRrGxKeMK+dSQNYG/LO7sqtr
+iH6EQFX78+SEn0fE8LsKjrEvgkqWeeCTvtJwD+PjKNeymbaUy8EGIsjjSYwTIQV1
+Bo6w9dVNGSalMI9tMTYxrrtzTHY0nU2qbxd9Po0a91jDsLOhxJs6cuD9AidvLS7o
+HGyiDt1kdF3fXqrLYSc/+JawjYdJjbMVkFQMzRJOkNIEDNqinSi8Bj0NfEInDmg6
+SNs2NNKOr4mRXXSydsh2tpTPlyNhS4ceu+3pBgpFRdI6rL4izISLwD9qwVWLFXfY
+IoWfP7k3
+=IzA9
+-----END PGP SIGNATURE-----
 
-> +Only main U-Boot has a command line interface.
-> +
-> +Further usages for U-Boot SPL comprise:
-> +
-> +* Launching BL31 of ARM Trusted Firmware which invokes U-Boot as BL33
-> +* launching EDK II
-> +* launching Linux
-> +* launching RISC-V OpenSBI which invokes main U-Boot
-
-Launching in caps or lowercase , consistency please.
-
-> +Target binaries
-> +---------------
-> +
-> +Binaries loaded by SPL/TPL can be:
-> +
-> +* raw binaries where the entry address equals the start address. This is the
-> +  only binary format supported by TPL.
-> +* :doc:`FIT <fit/index>` images
-> +* legacy U-Boot images
-
-fitImages too .
-
-Also mention authentication of next stage.
-
-> +Configuration
-> +~~~~~~~~~~~~~
-> +
-> +Raw images are only supported in SPL if CONFIG_SPL_RAW_IMAGE_SUPPORT=y.
-
-Shouldn't raw (non-fitImage) images be discouraged , as there is no 
-protection from bitrot in those ?
-
-> +CONFIG_SPL_FIT=y and CONFIG_SPL_LOAD_FIT=y are needed to load FIT images.
-> +
-> +CONFIG_SPL_LEGACY_IMAGE_FORMAT=y is needed to load legacy U-Boot images.
-> +CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y enables checking the CRC32 of legacy U-Boot
-> +images.
-> +
-> +Image load methods
-> +------------------
-> +
-> +The image boot methods available for a board must be defined in two places:
-> +
-> +The board code implements a function board_boot_order() enumerating up to
-> +six boot methods
-
-Why six ?
-
-I have an idea why, but this should be documented.
-
-> and the sequence in which they are tried. If there is only one
-> +boot method function, spl_boot_device() may be implemented instead.
-> +
-> +The configuration controls which of these boot methods are actually available.
-> +
-> +BOOTROM
-> +    The binary is loaded by the boot ROM.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_BOOTROM_SUPPORT=y or CONFIG_TPL_BOOTROM_SUPPORT=y
-> +
-> +DFU
-> +    :doc:`Device Firmware Upgrade <dfu>` is used to load the binary into RAM.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_DFU=y
-> +
-> +    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG TPL_RAM_SUPPORT=y
-> +
-> +Ethernet (CPGMAC)
-
-Wat's CPGMAC ?
-
-> +    This method loads an image over Ethernet. The BOOTP protocol is used to find
-> +    a TFTP server and binary name. The binary is downloaded via the TFTP
-> +    protocol. Required configuration settings include:
-> +
-> +    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
-> +
-> +    * CONFIG_SPL_ETH_DEVICE
-> +
-> +FEL
-> +    This method does not actually load an image for U-Boot.
-> +    FEL is a routine contained in the boot ROM of Allwinner SoCs which serves
-> +    for the initial programming or recovery via USB
-> +
-> +MMC1, MMC2, MMC2_2
-> +    These methods read an image from SD card or eMMC. The first digit after
-> +    'MMC' indicates the device number. Required configuration settings include:
-> +
-> +    * CONFIG_SPL_MMC=y or CONFIG_TPL_MMC=y
-> +
-> +    To use a PCI connected MMC controller you need to additionally specify:
-> +
-> +    * CONFIG_SPL_PCI=y
-> +
-> +    * CONFIG_SPL_PCI_PNP=y
-> +
-> +    * CONFIG_MMC=y
-
-Why CONFIG_MMC for PCI connected SDMMC controller in SPL ?
-
-> +    * CONFIG_MMC_PCI=y
-> +
-> +    * CONFIG_MMC_SDHCI=y
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-> +
-> +NAND
-> +    This method loads the image from NAND flash. To read from raw NAND the
-> +    following configuraton settings are required:
-
-configuration (typo, missing i)
-
-> +    * CONFIG_SPL_NAND_SUPPORT=y or CONFIG_TPL_NAND_SUPPORT=y
-> +
-> +    If CONFIG_SPL_NAND_RAW_ONLY=y only raw images can be loaded.
-> +
-> +    For using the Ubi file system
-
-UBI, abbreviation of Unsorted Block Images (iirc)
-
-You also need to discern UBI (as in the FTL) and UBIFS (as in the 
-filesystem on top of UBI)
-
-
-> to read from NAND the following configuration
-> +    settings are required:
-> +
-> +    * CONFIG_SPL_UBI=y of CONFIG_TPL_UBI=y
-> +
-> +NOR
-> +    This method loads the image from NOR flash.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_NOR_SUPPORT=y or CONFIG_TPL_NOR_SUPPORT=y
-> +
-> +NVMe
-> +    This methods load the image from an NVMe drive.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_PCI=y
-> +
-> +    * CONFIG_SPL_PCI_PNP=y
-> +
-> +    * CONFIG_SPL_NVME=y
-> +
-> +    * CONFIG_SPL_NVME_PCI=y
-> +
-> +    * CONFIG_SPL_NVME_BOOT_DEVICE (number of the NVMe device)
-> +
-> +    * CONFIG_SYS_NVME_BOOT_PARTITION (partition to read from)
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-> +
-> +OneNAND
-> +    This methods loads the image from a OneNAND device. To read from raw OneNAND
-> +    the following configuraton settings are required:
-
-configuration, typo
-
-> +    * CONFIG_SPL_ONENAND_SUPPORT=y or CONFIG_TPL_ONENAND_SUPPORT=y
-> +
-> +    For using the Ubi file system to read from NAND the following configuration
-> +    settings are required:
-> +
-> +    * CONFIG_SPL_UBI=y of CONFIG_TPL_UBI=y
-
-Maybe you should group the boot media in some logical manner, like, 
-flash based (NOR, NAND, OneNAND) and block based (SDMMC, SCSI, NVMe...).
-
-> +RAM
-> +    This method uses an image preloaded into RAM.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG_TPL_RAM_SUPPORT=y
-> +
-> +    * CONFIG_RAM_DEVICE=y
-> +
-> +sandbox_file
-> +    On the sandbox this method loads an image from the host file system.
-> +
-> +sandbox_image
-> +    On the sandbox this method loads an image from the host file system.
-> +
-> +SATA
-> +    This method reads an image from a SATA drive.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SATA=y or CONFIG_TPL_SATA=y
-> +
-> +    To use a PCIe connecte SATA controller you additionally need:
-> +
-> +    * CONFIG_SPL_PCI=y
-> +
-> +    * CONFIG_SPL_SATA=y
-> +
-> +    * CONFIG_SPL_AHCI_PCI=y
-> +
-> +    * CONFIG_SPL_PCI_PNP=y
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=y
-> +
-> +    * CONFIG_SYS_SATA_FAT_BOOT_PARTITION=<partition number>
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-> +
-> +SEMIHOSTING
-> +    When running in an ARM or RISC-V virtual machine the semihosting method can
-> +    be used to load an image from the host file system.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SEMIHOSTING=y
-> +
-> +    * CONFIG_SPL_SEMIHOSTING_FALLBACK=y
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=<path to file>
-> +
-> +SPI
-> +    This method loads an image form SPI NOR flash.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_DM_SPI=y
-> +
-> +    * CONFIG_SPL_SPI_FLASH=y
-> +
-> +    * CONFIG_SPI_LOAD=y or CONFIG_TPL_SPI_LOAD=y
-> +
-> +
-> +sunxi SPI
-> +    This method which is specific to Allwinner SoCs loads an image form SPI NOR
-> +    flash. Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SPI_SUNXI=y
-> +
-> +UART
-> +    This method loads an image via the Y-Modem protocol from the UART.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_YMODEM_SUPPORT=y or CONFIG_TPL_YMODEM_SUPPORT=y
-> +
-> +USB
-> +    The USB method loads an image from a USB block device.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_USB_HOST=y
-> +
-> +    * CONFIG_SPL_USB_STORAGE=y
-> +
-> +    To use a PCI connected USB 3.0 controller you additionally need:
-> +
-> +    * CONFIG_SPL_FS_FAT=y
-> +
-> +    * CONFIG_SPL_PCI=y
-> +
-> +    * CONFIG_SPL_PCI_PNP=y
-> +
-> +    * CONFIG_USB=y
-> +
-> +    * CONFIG_USB_XHCI_HCD=y
-> +
-> +    * CONFIG_USB_XHCI_PCI=y
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-> +
-> +    * CONFIG_SYS_USB_FAT_BOOT_PARTITION=<partition number>
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-> +
-> +USB eth
-> +    This method loads an image over Ethernet. The BOOTP protocol is used to find
-> +    a TFTP server and binary name. The binary is downloaded via the TFTP
-> +    protocol. Required configuration settings include:
-> +
-> +    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
-> +
-> +    * CONFIG_DM_USB_GADGET=y.
-> +
-> +USB SDP
-> +    This method loads the image using the Serial Download Protocol as
-> +    implemented by the boot ROM of the i.MX family of SoCs.
-> +
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SERIAL=y
-> +
-> +    * CONFIG_SPL_USB_SDP_SUPPORT=y or CONFIG_TPL_USB_SDP_SUPPORT
-> +
-> +vbe_simple
-> +    This method is used by the VPL stage to extract the next stage image from
-> +    the loaded image.
-> +
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_VPL=y
-> +
-> +    * CONFIG_SPL_BOOTMETH_VBE_SIMPLE_FW=y or CONFIG_TPL_BOOTMETH_VBE_SIMPLE_FW=y
-> +
-> +XIP
-> +    This method executes an image in place.
-> +
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_XIP_SUPPORT
-[...]
+--boEVjMCF1iC7gXJv--
