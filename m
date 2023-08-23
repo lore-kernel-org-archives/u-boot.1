@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18ED9EE49A5
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 00:17:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C828EE49A5
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 00:17:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7450986407;
-	Wed, 23 Aug 2023 02:17:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C03C8864B3;
+	Wed, 23 Aug 2023 02:17:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UOrehcHm";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="pNtv3H+O";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CUoI1Q80";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fag79Bzk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AE1D86460; Wed, 23 Aug 2023 02:17:13 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 5405F864B9; Wed, 23 Aug 2023 02:17:22 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D745786403
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 02:17:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D3A8864C1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 02:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RVmxL5Zdqz9skp;
- Wed, 23 Aug 2023 02:17:10 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RVmxV6Yt6z9skp;
+ Wed, 23 Aug 2023 02:17:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692749830;
+ s=mail20150812; t=1692749838;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=l0h3/TW1BKq6zklogBuIdpHG+wIXfZv+qUFPWnDF+ZU=;
- b=UOrehcHm+TsqrLuSy7AdCSk+Jf8M1prmjR5vJYxr93V8xQpezYE69xNWFWOeURVoB2XHIn
- F/9YizycAc4/Bl6Em2hgwPI7t4vsE69zIKpSsC5m1k5NiU0mo04z8xapm4LZEVmHhmy1wq
- WVMrWTb3gLtkwfF+PJ2dzdxwrC0z+qU6ZkYXuOIRbg1mQ4lDdKJXrkL0C8jD/VFTDo694t
- 3sI0umYV75/fy1DbCBwjerc5Ht4wCKPC8n0OMUHFqzMq7NyIrB9aqKbC3A3XUj/j8n3EIS
- j3J/oaeuouH/1Q1uMrw8tx9lCvZXY29rSpJd9KIgIYfm6ZbUVwxdBQGK0w3LAQ==
+ bh=dv6NxLJXMjpARlPRU7QOT6GSYVWFSdv49RcuFoJf15U=;
+ b=CUoI1Q80HIB3SjNu+hgqsJz3Mmv4GbBXNVKnWtXsOkNqOft0aBRX5Vq5PdMZgt7ChYEnlk
+ 4mTkWgAJa7aWWqzckW164udFhzlsow4MjbEz6CYVkszdWHSXeQ+LphlrzHh8+5vP1iy+Ql
+ mh0rxV23W5ZHkHD/xXvlWx96I5zsLH6qY3lUdeOL/MGY9sWYfrM8zKgx5vw+B3F0A1qyc+
+ V2OnYskQaKXjpRHBRFoOwpdendOYLk+27Kd9bonm/0oI1r0GtZ0It/y/cSHK0cNTgJT0l9
+ r+vCE5XbuknmQND/ZyFOqS81lODHkxoEwO56U0AqUus1ksvEc2SAuLfXepbNuw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692749827;
+ s=mail20150812; t=1692749836;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=l0h3/TW1BKq6zklogBuIdpHG+wIXfZv+qUFPWnDF+ZU=;
- b=pNtv3H+OI8nZoVyDYrAltUu4IaKtXz2N8SCzK/O6rKSX4+m99w+3dz+UaZIsE3cVycogxW
- IDXhqJz71+r4ULJpGDyti2B3yxZWkU4wBgTNEpIrMRdIMehPF1Gmccbde0nV7dpQg1dKZN
- XkyUSlUghgMQUq2OLeM6Sszaf9LjgElKDk606fTF1B7F3Q4jYwntXWiwr8hpgGBxhGQYHk
- P3U3mdSjxQEI5yCjpbOkYt9ecSBAMvwY1nRbiWmNjfGABYjvy0xKYTutlfFmcZjP9cX9ke
- 5R2GaUYig/dhVopNuRj35putJ548lxX0xD7Zx/ciJVjWP9nWFgoS2zE5my2dCw==
+ bh=dv6NxLJXMjpARlPRU7QOT6GSYVWFSdv49RcuFoJf15U=;
+ b=fag79BzkgZXVaxLyp2qq4TXOIXLCKJXgxqDO44VLglIUzOyI4CkHBE/39UeBUtuCpUFfhI
+ fTJysBFD792C0Ikgm4iNQy3VJL0b1yOPDbMfhhAXQpXe8xzJFfa3wig+lzoQ1gDC17RzcC
+ 52jPgaC+HpGc0R9MlTZh708zS9MYBbVoHnKwejk2KMj8w5ixrQOE5sI/A6mWcbi6Ld0l9l
+ f+DFhUDw9FoT3nKTXC/RxN9GbUUreV0hzjRVInBeqB8VjbAGacZOy3MC0AiFFMG31DRKYF
+ TcRB+yl7M5Ei7lswntnJ1LlBKTh+bjiMBWpdVRc6NKiwLy0n3bsstQzyC79E9A==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH] fwu: Initialize global fwu library state during CI test
-Date: Wed, 23 Aug 2023 02:16:52 +0200
-Message-Id: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
+ Jonas Karlman <jonas@kwiboo.se>, Mario Six <mario.six@gdsys.cc>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] configs: sandbox64: Enable legacy image format support
+Date: Wed, 23 Aug 2023 02:17:12 +0200
+Message-Id: <20230823001712.266249-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 09c3141cb6c7896c7c6
-X-MBO-RS-META: fa1mwg4ftid1kpwytnpfwkxfoesmrhdy
+X-MBO-RS-META: t3semqwbpbaqbnonxsx9gquycf37qk76
+X-MBO-RS-ID: b06f0d2352c6b94f4a1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,86 +82,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current CI test worked by sheer luck, the g_dev global pointer
-in the fwu library was never initialized and the test equally well
-failed on sandbox64. Trigger the main loop in sandbox tests too to
-initialize that global state, and move the sandbox specific exit
-from fwu_boottime_checks after g_dev is initialized.
+Align the sandbox64 defconfig with sandbox defconfig. Enable missing
+legacy image format support. This fixes ut_bootstd_bootflow_cmd_menu
+test.
 
+Suggested-by: Jonas Karlman <jonas@kwiboo.se>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Etienne Carriere <etienne.carriere@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jassi Brar <jaswinder.singh@linaro.org>
-Cc: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Mario Six <mario.six@gdsys.cc>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- lib/fwu_updates/fwu.c | 12 ++++++------
- test/dm/fwu_mdata.c   | 12 ++++++++++++
- 2 files changed, 18 insertions(+), 6 deletions(-)
+ configs/sandbox64_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-index 4d0c8b84b9d..22bdc78df59 100644
---- a/lib/fwu_updates/fwu.c
-+++ b/lib/fwu_updates/fwu.c
-@@ -623,18 +623,18 @@ static int fwu_boottime_checks(void *ctx, struct event *event)
- 	int ret;
- 	u32 boot_idx, active_idx;
- 
--	/* Don't have boot time checks on sandbox */
--	if (IS_ENABLED(CONFIG_SANDBOX)) {
--		boottime_check = 1;
--		return 0;
--	}
--
- 	ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
- 	if (ret) {
- 		log_debug("Cannot find fwu device\n");
- 		return ret;
- 	}
- 
-+	/* Don't have boot time checks on sandbox */
-+	if (IS_ENABLED(CONFIG_SANDBOX)) {
-+		boottime_check = 1;
-+		return 0;
-+	}
-+
- 	ret = fwu_get_mdata(NULL);
- 	if (ret) {
- 		log_debug("Unable to read meta-data\n");
-diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
-index 8b5c83ef4e2..52018f610fe 100644
---- a/test/dm/fwu_mdata.c
-+++ b/test/dm/fwu_mdata.c
-@@ -93,6 +93,12 @@ static int dm_test_fwu_mdata_read(struct unit_test_state *uts)
- 	struct udevice *dev;
- 	struct fwu_mdata mdata = { 0 };
- 
-+	/*
-+	 * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
-+	 * to populate g_dev global pointer in that library.
-+	 */
-+	event_notify_null(EVT_MAIN_LOOP);
-+
- 	ut_assertok(uclass_first_device_err(UCLASS_FWU_MDATA, &dev));
- 	ut_assertok(setup_blk_device(uts));
- 	ut_assertok(populate_mmc_disk_image(uts));
-@@ -112,6 +118,12 @@ static int dm_test_fwu_mdata_write(struct unit_test_state *uts)
- 	struct udevice *dev;
- 	struct fwu_mdata mdata = { 0 };
- 
-+	/*
-+	 * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
-+	 * to populate g_dev global pointer in that library.
-+	 */
-+	event_notify_null(EVT_MAIN_LOOP);
-+
- 	ut_assertok(setup_blk_device(uts));
- 	ut_assertok(populate_mmc_disk_image(uts));
- 	ut_assertok(write_mmc_blk_device(uts));
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 55a01b7eb9d..b97380544a3 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -13,6 +13,7 @@ CONFIG_SYS_MEMTEST_END=0x00101000
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
 -- 
 2.40.1
 
