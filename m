@@ -4,45 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A7D7EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 08:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 112CCEE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 10:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97882864A6;
-	Wed, 23 Aug 2023 10:59:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 21EF7864B8;
+	Wed, 23 Aug 2023 12:15:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lutrLk+W";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21359864AA; Wed, 23 Aug 2023 10:59:06 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8A7DC86489
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:59:03 +0200 (CEST)
+ id B1840864B9; Wed, 23 Aug 2023 12:15:22 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BE8C864B3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 12:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.rutland@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2E50D1042;
- Wed, 23 Aug 2023 01:59:43 -0700 (PDT)
-Received: from FVFF77S0Q05N (unknown [10.57.3.204])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A51B53F740;
- Wed, 23 Aug 2023 01:59:00 -0700 (PDT)
-Date: Wed, 23 Aug 2023 09:58:54 +0100
-From: Mark Rutland <mark.rutland@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, Rob Herring <robh@kernel.org>,
- Ard Biesheuvel <ardb@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Gua Guo <gua.guo@intel.com>, linux-acpi@vger.kernel.org,
- lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>,
- ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>,
- Lean Sheng Tan <sheng.tan@9elements.com>
-Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
-Message-ID: <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
-References: <20230822203446.4111742-1-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-yadav@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NAFHes073068;
+ Wed, 23 Aug 2023 05:15:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692785717;
+ bh=dHTRJtQv1cs/wfwm0iXbnfyjcv5zAbDxUZHzn+oeb+U=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=lutrLk+WwS3laQ0gmcYHsVQHP7Y05g1MsgOfOrJujzrS48NoNKE6kZ4KDRyRGXoWv
+ TSM0GjT9HOVNIdqN3M0knjSWYIKpspoAjax1SlTTMQI94/3+77Q0AOElrLc8Ui/vBR
+ PbFDMjqyqQsbAnX1sXNLu6CXAeqIA+rI7YAefWhI=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NAFHxV102239
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 05:15:17 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 05:15:16 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 05:15:16 -0500
+Received: from [10.24.69.29] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NAFC4F028667;
+ Wed, 23 Aug 2023 05:15:13 -0500
+Message-ID: <9ffa96cd-df18-d298-41c2-080a187b7410@ti.com>
+Date: Wed, 23 Aug 2023 15:45:12 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230822203446.4111742-1-sjg@chromium.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH V4 4/8] drivers: mmc: am654_sdhci: Update OTAP/ITAP delay
+Content-Language: en-US
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nishanth Menon
+ <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+CC: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
+ Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Jan Kiszka <jan.kiszka@siemens.com>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-5-nm@ti.com> <87r0nufaik.fsf@baylibre.com>
+From: Nitin Yadav <n-yadav@ti.com>
+In-Reply-To: <87r0nufaik.fsf@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,134 +84,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Aug 22, 2023 at 02:34:42PM -0600, Simon Glass wrote:
-> The Devicetree specification skips over handling of a logical view of
-> the memory map, pointing users to the UEFI specification.
-> 
-> It is common to split firmware into 'Platform Init', which does the
-> initial hardware setup and a "Payload" which selects the OS to be booted.
-> Thus an handover interface is required between these two pieces.
-> 
-> Where UEFI boot-time services are not available, but UEFI firmware is
-> present on either side of this interface, information about memory usage
-> and attributes must be presented to the "Payload" in some form.
+Hi Mattijs,
 
-Today Linux does that by passing:
+On 23/08/23 13:36, Mattijs Korpershoek wrote:
+> On mar., août 22, 2023 at 13:41, Nishanth Menon <nm@ti.com> wrote:
+> 
+>> From: Nitin Yadav <n-yadav@ti.com>
+>>
+>> U-Boot is fail to boot class U1 UHS SD cards (such as microcenter)
+>> due to incorrect OTAP and ITAP delay select values. Update OTAP and
+>> ITAP delay select values based on recommeded RIOT values to fix boot
+>> issue.
+> 
+> nitpick: recommeded -> recommended
+> 
+>>
+>> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
+>> Signed-off-by: Nishanth Menon <nm@ti.com>
+>> ---
+>> Picked up from TI u-boot
+>> New patch in the series
+>>
+>>   drivers/mmc/am654_sdhci.c | 14 ++++++++++----
+>>   1 file changed, 10 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
+>> index fd667aeafdaa..d0b51c0707d4 100644
+>> --- a/drivers/mmc/am654_sdhci.c
+>> +++ b/drivers/mmc/am654_sdhci.c
+>> @@ -442,12 +442,18 @@ static int j721e_4bit_sdhci_set_ios_post(struct sdhci_host *host)
+>>   {
+>>   	struct udevice *dev = host->mmc->dev;
+>>   	struct am654_sdhci_plat *plat = dev_get_plat(dev);
+>> -	u32 otap_del_sel, mask, val;
+>> +	u32 otap_del_sel, itap_del_sel, mask, val;
+>>   
+>>   	otap_del_sel = plat->otap_del_sel[host->mmc->selected_mode];
+>> -	mask = OTAPDLYENA_MASK | OTAPDLYSEL_MASK;
+>> -	val = (1 << OTAPDLYENA_SHIFT) | (otap_del_sel << OTAPDLYSEL_SHIFT);
+>> +	itap_del_sel = plat->itap_del_sel[host->mmc->selected_mode];
+>> +	mask = OTAPDLYENA_MASK | OTAPDLYSEL_MASK | ITAPDLYSEL_MASK |
+>> +		ITAPDLYENA_MASK;
+>> +	val = (1 << OTAPDLYENA_SHIFT) | (otap_del_sel << OTAPDLYSEL_SHIFT) |
+>> +		(1 << ITAPDLYENA_SHIFT) | (itap_del_sel << ITAPDLYSEL_SHIFT);
+>> +	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK,
+>> +			   1 << ITAPCHGWIN_SHIFT);
+>>   	regmap_update_bits(plat->base, PHY_CTRL4, mask, val);
+>> +	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK, 0);
+>>   
+>>   	regmap_update_bits(plat->base, PHY_CTRL5, CLKBUFSEL_MASK,
+>>   			   plat->clkbuf_sel);
+>> @@ -501,7 +507,7 @@ static int sdhci_am654_get_otap_delay(struct udevice *dev,
+>>   	 * Remove the corresponding capability if an otap-del-sel
+>>   	 * value is not found
+>>   	 */
+>> -	for (i = MMC_HS; i <= MMC_HS_400; i++) {
+>> +	for (i = MMC_LEGACY; i <= MMC_HS_400; i++) {
+> 
+> I'm not super familiar with mmc drivers in general, but it feels like
+> this bit does not really belong in this patch. >
+> Is this another bugfix for removing otap-del-sel for MMC_LEGACY devices
+> or does U1 UHS SD cards are considered to be of MMC_LEGACY type ?
+yes, its two different fix. Internally I posted two patches for them. 
+can be referred in below links:
 
-  /chosen/linux,uefi-mmap-start
-  /chosen/linux,uefi-mmap-size
-  /chosen/linux,uefi-mmap-desc-size
-  /chosen/linux,uefi-mmap-desc-ver
+https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=b5a2f7972fd142df03a15ba58829aa068c891abf
 
-... or /chosen/xen,* variants of those.
-
-Can't we document / genericise that?
-
-Pointing to that rather than re-encoding it in DT means that it stays in-sync
-with the EFI spec and we won't back ourselves into a corner where we cannot
-encode something due to a structural difference. I don't think it's a good idea
-to try to re-encode it, or we're just setting ourselves up for futher pain.
-
-Thanks,
-Mark.
+https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=527095165281cbc60a1b42995c1e55e6756cbe93
 
 > 
-> This aims to provide an initial schema for this mapping.
-> 
-> Note that this is separate from the existing /memory and /reserved-memory
-> nodes, since it is mostly concerned with what the memory is used for. It
-> may cover only a small fraction of available memory.
-> 
-> For now, no attempt is made to create an exhaustive binding, so there are
-> some example types listed. This can be completed once this has passed
-> initial review.
-> 
-> This binding does not include a binding for the memory 'attribute'
-> property, defined by EFI_BOOT_SERVICES.GetMemoryMap(). It may be useful
-> to have that as well, but perhaps not as a bit mask.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> Changes in v3:
-> - Reword commit message again
-> - cc a lot more people, from the FFI patch
-> - Split out the attributes into the /memory nodes
-> 
-> Changes in v2:
-> - Reword commit message
-> 
->  dtschema/schemas/memory-map.yaml | 61 ++++++++++++++++++++++++++++++++
->  1 file changed, 61 insertions(+)
->  create mode 100644 dtschema/schemas/memory-map.yaml
-> 
-> diff --git a/dtschema/schemas/memory-map.yaml b/dtschema/schemas/memory-map.yaml
-> new file mode 100644
-> index 0000000..4b06583
-> --- /dev/null
-> +++ b/dtschema/schemas/memory-map.yaml
-> @@ -0,0 +1,61 @@
-> +# SPDX-License-Identifier: BSD-2-Clause
-> +# Copyright 2023 Google LLC
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/memory-map.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: /memory-map nodes
-> +description: |
-> +  Common properties always required in /memory-map nodes. These nodes are
-> +  intended to resolve the nonchalant clause 3.4.1 ("/memory node and UEFI")
-> +  in the Devicetree Specification.
-> +
-> +maintainers:
-> +  - Simon Glass <sjg@chromium.org>
-> +
-> +properties:
-> +  $nodename:
-> +    const: 'memory-map'
-> +
-> +patternProperties:
-> +  "^([a-z][a-z0-9\\-]+@[0-9a-f]+)?$":
-> +    type: object
-> +    additionalProperties: false
-> +
-> +    properties:
-> +      reg:
-> +        minItems: 1
-> +        maxItems: 1024
-> +
-> +      usage:
-> +        $ref: /schemas/types.yaml#/definitions/string
-> +        description: |
-> +          Describes the usage of the memory region, e.g.:
-> +
-> +            "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
-> +            "runtime-code", "runtime-data".
-> +
-> +            See enum EFI_MEMORY_TYPE in "Unified Extensible Firmware Interface
-> +            (UEFI) Specification" for all the types. For now there are not
-> +            listed here.
-> +
-> +    required:
-> +      - reg
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    memory-map {
-> +        acpi@f0000 {
-> +            reg = <0xf0000 0x4000>;
-> +            usage = "acpi-reclaim";
-> +        };
-> +
-> +        runtime@12300000 {
-> +            reg = <0x12300000 0x28000>;
-> +            usage = "runtime-code";
-> +        };
-> +    };
-> +...
-> -- 
-> 2.42.0.rc1.204.g551eb34607-goog
-> 
+>>   		ret = dev_read_u32(dev, td[i].otap_binding,
+>>   				   &plat->otap_del_sel[i]);
+>>   		if (ret) {
+>> -- 
+>> 2.40.0
+
+-- 
+Regards,
+Nitin
