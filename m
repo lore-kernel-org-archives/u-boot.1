@@ -4,39 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C69FC27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:39:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A49C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:44:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B94298645D;
-	Wed, 23 Aug 2023 22:39:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arvanta.net
+	by phobos.denx.de (Postfix) with ESMTP id 6429F86434;
+	Wed, 23 Aug 2023 22:44:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 187C8864CE; Wed, 23 Aug 2023 22:39:14 +0200 (CEST)
-Received: from fx.arvanta.net (unknown [109.72.52.77])
- by phobos.denx.de (Postfix) with ESMTP id 4EAEC86432
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 22:39:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=arvanta.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mps@arvanta.net
-Received: from m1 (ab.arvanta.net [10.5.1.5])
- by fx.arvanta.net (Postfix) with ESMTP id B847E74DF;
- Wed, 23 Aug 2023 22:39:10 +0200 (CEST)
-Date: Wed, 23 Aug 2023 22:39:09 +0200
-From: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
-To: Shengyu Qu <wiagn233@outlook.com>
-Cc: xypron.glpk@gmx.de, chanho61.park@samsung.com, ycliang@andestech.com,
- yanhong.wang@starfivetech.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 2/2] doc: board: starfive: Add more info about
- supported driver
-Message-ID: <20230823203909.GB21828@m1>
-References: <20230822143357.2818-1-wiagn233@outlook.com>
- <TY3P286MB26115DF6D963C38835BCBE30981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692823489;
+	bh=UFgWzFZanX6xJYt3NLVXzYVfE4jMRlvsUN5l2IuJGYw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=eF83xj+oE8oWBeXsAYgdnHWV7sHaDpTiyrCmJRQ6iLuTJXqpOd9XuNU7FVL61uiJW
+	 yf7PbvTCrQDmwPgyrPYSI7wNJqZdmKR0R183Qjx5DQtvgyiV6W2IOUPAb59THA0/wr
+	 2CZ6UDfZNYMjqQgbsa/g8HOAkd19/qCSd5uxJj0x4StxWFLBK0Tg0ZcJvKp//Q/ext
+	 cFmk2PASaI3cPrjRCGFolNkgKxvWCBmu8ku44T+RfAiUx2cPGGVmT9IRTVCZiJnwIZ
+	 kzi+3oQbkjW797+LKDENzDRhxBU6jHJNJTksWPQKoC1/Bspi/o5HRIpCHePDJdJKSU
+	 23wQ36yrPrJ5A==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 89ABD86432;
+ Wed, 23 Aug 2023 22:44:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1692823488;
+ bh=UFgWzFZanX6xJYt3NLVXzYVfE4jMRlvsUN5l2IuJGYw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=AKUH8gInS3TBKcqBGBECPyEYK1WyC57cfo8wli6EmbDr4pYZjexo+e6z3K9H/I23e
+ 2NSnPEKsgDHr2LWdFuFnc85W6xmM6mhTC7RY/mgUsqgQbK8oxhdpD4wdAVBgLc22sy
+ nioBZJnHSMvfpoYOurV1L2SSvBFWYlT3i0stM1jKDzh+I8xl91PHACWyRlQHidkXI3
+ LoAOxXsAAFWb+m2qUUTk5z5WUpmZvH/fYKnWxHQuICeeEK3f8DdhtPxjZrQj9nYMeu
+ La6YWpBE9r9VmydW2LpN9gHrJkDKExB9dzTzYhoTO0FckgBs8kXPSP/8X4/+LQK3uA
+ VAcfFAeJlL7cg==
+Message-ID: <a64baf05-e96e-d12a-6ab5-a7139680c6d6@denx.de>
+Date: Wed, 23 Aug 2023 20:03:32 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <TY3P286MB26115DF6D963C38835BCBE30981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] usb: xhci: Define 'XHCI_MAX_HALT_USEC' macro only once
+To: Bhupesh Sharma <bhupesh.sharma@linaro.org>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com, bhupesh.linux@gmail.com,
+ bmeng.cn@gmail.com
+References: <20230823154123.859927-1-bhupesh.sharma@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20230823154123.859927-1-bhupesh.sharma@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,31 +70,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2023-08-22 at 22:33, Shengyu Qu wrote:
-> Since PLDA PCIE driver is added and VL805 support is enabled in
-> defconfig for Starfive Visionfive 2, modify the document to keep
-> consistent.
+On 8/23/23 17:41, Bhupesh Sharma wrote:
+> Right now xhci header file defines XHCI_MAX_HALT_USEC macro
+> twice. Fix the same.
 > 
-> Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
-Tested-by: Milan P. Stanić <mps@arvanta.net>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
 
+This Cc: ^ stufff
+
+> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 > ---
->  doc/board/starfive/visionfive2.rst | 2 ++
->  1 file changed, 2 insertions(+)
+
+Should go here , below the ---
+
+and then add another --- and the diffstat, i.e. this:
+
+Commit
+Message
+Blah blah
+Blah
+
+Signed-of-by:...
+---
+Cc: Foo User <blah@example.com>
+Cc: Another User ...
+---
+Changelog/Diffstat/patch
+
+>   include/usb/xhci.h | 2 --
+>   1 file changed, 2 deletions(-)
 > 
-> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
-> index 941899a0a4..460f23aec3 100644
-> --- a/doc/board/starfive/visionfive2.rst
-> +++ b/doc/board/starfive/visionfive2.rst
-> @@ -20,6 +20,8 @@ The support for following drivers are already enabled:
->  3. StarFive JH7110 reset Driver.
->  4. Cadence QSPI controller Driver.
->  5. MMC SPI Driver for MMC/SD support.
-> +6. PLDA PCIE controller driver.
-> +7. On-board VL805 PCIE-USB controller driver.
->  
->  Booting from MMC using U-Boot SPL
->  ---------------------------------
-> -- 
-> 2.42.0
-> 
+> diff --git a/include/usb/xhci.h b/include/usb/xhci.h
+> index 4a4ac10229..958c94bfa7 100644
+> --- a/include/usb/xhci.h
+> +++ b/include/usb/xhci.h
+> @@ -1136,8 +1136,6 @@ void xhci_hcd_stop(int index);
+>   /*************************************************************
+>   	EXTENDED CAPABILITY DEFINITIONS
+>   *************************************************************/
+> -/* Up to 16 ms to halt an HC */
+> -#define XHCI_MAX_HALT_USEC	(16*1000)
+>   /* HC not running - set to 1 when run/stop bit is cleared. */
+>   #define XHCI_STS_HALT		(1 << 0)
+
+Reviewed-by: Marek Vasut <marex@denx.de>
+
+The patch is obviously correct, fix up the CC list and send a V2 please.
+
+btw if you include the --- in commit message, git will retain the Cc: 
+list below --- too.
