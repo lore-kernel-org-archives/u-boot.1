@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12E56C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 00:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7D1CC3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 00:01:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EC0486540;
+	by phobos.denx.de (Postfix) with ESMTP id D58C086546;
 	Thu, 24 Aug 2023 01:59:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="M9JriNTH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lfgPFW+p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9538A864F9; Thu, 24 Aug 2023 01:59:28 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 07BAD864F9; Thu, 24 Aug 2023 01:59:29 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8B0F86515
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:59:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 164C08651A
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:59:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d746ea563f9so4757217276.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:59:18 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d77f614243aso269760276.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:59:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1692835156; x=1693439956;
+ d=chromium.org; s=google; t=1692835157; x=1693439957;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NGmqAAZOwDuwljgc8eX29z6OYSLGbeaQC7aoRbGYlmg=;
- b=M9JriNTHCRcXwDoy4b6/dkrKYozj3lEHDC0meKz1QvMCekj8f/+lrubtEPngsjwxW5
- LkD2yxJbrtyDoo2b8Cn1hYtFB7h1kt9S9OmPyxLTF1ANGSV3ehleIXxrfjVlFnE+cmug
- zDclepMfzjExxuzss/cqf6F2+nAAV2otvPzWD6L/U2ME8b7oIN8eHNyP/zMG1lZd/G5x
- HWGKafrHbe1BBhdtqYxmX/0p0pbbQ8Shx38gzDaVibZHSvca/POZfO0fCiv9tvU3x6mS
- dkwh0uIk/y6UfSia14TOE4mwT6AvzXb/zyn3oMTTzlV2CPNbMbf7dEBiZ3daPi/yaFF5
- X71Q==
+ bh=wGrRN4Eds33fAeZ63HevS2Ij3FDMhrHg1nP7QtNoaPY=;
+ b=lfgPFW+pJfFiSiEOO8VXUs8KGKh+X2hNV0uzXB+jB+h2mxEisYfgGGRMtrhCZ8CC4I
+ trN6PjfH+uzysGfk0krA6S+xej9naA4UL9sllQqnp+3Xq30n5XxAbmTtWaR4nQol84R8
+ 8SYiQ3vGT/+ypuaxgfQ36Be6EmEQbHp3zNqvU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692835156; x=1693439956;
+ d=1e100.net; s=20221208; t=1692835157; x=1693439957;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NGmqAAZOwDuwljgc8eX29z6OYSLGbeaQC7aoRbGYlmg=;
- b=hOA97Dwx1YMarccj+z8B8ENZpl3nx3/k5z3fxWzINCXO/tGK1J4vvMmCTA1Ig9ID29
- KsoaXF5xaCCVz2ohBpU8JsGKfUlMMXorO3tpjFXPzM2/w8SiqKhC4G/o/BqSEimDtk8q
- Ka8e2KDVhba1QvuxvlMV5Ruacsswxu1xhuZ/C1369jW34Rks1N5bWLolIJXa1gtO6yWs
- CIXhZna5hO6W2fo+ErYgMrD8fyJDt4mh923zDsEvcuBet/JEW7BMHlHEcWtcYmQYIbn5
- INY1J0Gk4jLc7Q1/+2Z1kB72Rtj2ht7Yhtki+ewZmwFN3uWEByGscoZIEjpfrGI++uFO
- yGfA==
-X-Gm-Message-State: AOJu0Yzigi6NwpF5cZjnVLNb7jB7WievLTZky3/Ty7kRkUQJ/tjK3/nT
- OeVPAfbRalPVEvDgg1jxZ9medBkyU/y6bTHsFfzdDw==
-X-Google-Smtp-Source: AGHT+IFlFFf82VWTwZcv4eMbfSPz2/u63pNj0fKLJceEzNSOlFTGCPtCY/kcYnFZZxneedRtKoiZkek2at/IVJBP5tY=
-X-Received: by 2002:a25:bb85:0:b0:d15:454e:8ecd with SMTP id
- y5-20020a25bb85000000b00d15454e8ecdmr13339784ybg.13.1692835156468; Wed, 23
+ bh=wGrRN4Eds33fAeZ63HevS2Ij3FDMhrHg1nP7QtNoaPY=;
+ b=esfi0cq6bZIrx/AVjd1mxtfaMAm00HxKyreJkRxngs1Zvtkt5W7qFK9j0E15qms9Gi
+ RgNr5A/U37A9zd76BedRu2NDmKN+2paUesCIWE+RxNnbm1hRfIY4RbwkCVUAHnvi55QQ
+ vijUhC7egncLZGLloDBue50d/QbKRmTs7elXOE/QppgNfxsn7fCgIOW3NHU6567txpRD
+ YXowH98L0NpzqWOQ5sd241hw65P0tYp96qFGtMkU8VT18B/W0ofwh1dtYOrc8NOrRP/D
+ jJqWJsIVk1y8ri11bl/9ufSsmheCmmkGDVKpKcqDDe8oYhZNfZwyXOnaYej+NTpTpT20
+ /isA==
+X-Gm-Message-State: AOJu0YzDSSxXmLvNqNNsE5nUpmyOCed3ZlB3gsVGum6rR9IuVZlkfhC8
+ 5ETAgnfF+Xr2PMvmkVL84ToTqrnWJj/pzql+Hnv3wA==
+X-Google-Smtp-Source: AGHT+IGDhCNpl5ydDdFlx5id9geO0ws6hXkg1wUEyBMSmuuvQk7E8rS6YqbNNKBGGF7XjpgTPizHW9/L3vuVyW32jEI=
+X-Received: by 2002:a25:7445:0:b0:d00:cc5b:8a9f with SMTP id
+ p66-20020a257445000000b00d00cc5b8a9fmr14509888ybc.16.1692835156461; Wed, 23
  Aug 2023 16:59:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822112217.4646-1-clamor95@gmail.com>
- <20230822112217.4646-16-clamor95@gmail.com>
-In-Reply-To: <20230822112217.4646-16-clamor95@gmail.com>
-From: Simon Glass <sjg@google.com>
-Date: Wed, 23 Aug 2023 17:57:34 -0600
-Message-ID: <CAPnjgZ3zyLjoX5-2zvC9X3Bz+h2KzODpq6X8kNAqR038qtaFVA@mail.gmail.com>
-Subject: Re: [PATCH v1 15/19] ARM: tegra: board2: add generic late init
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+References: <20230823184746.842091-1-sjg@chromium.org>
+ <20230823184746.842091-8-sjg@chromium.org>
+ <6f1ea3e9-7284-22d3-e2ee-071523b7dbac@gmx.de>
+In-Reply-To: <6f1ea3e9-7284-22d3-e2ee-071523b7dbac@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 23 Aug 2023 17:57:55 -0600
+Message-ID: <CAPnjgZ3i9EDe3CyU64WRpE+oR0-xS2iffQR=2hVBZRzA2KkC6Q@mail.gmail.com>
+Subject: Re: [PATCH 7/8] spl: x86: Avoid starting up PCI automatically in SPL
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,108 +87,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
+Hi Heinrich,
 
-On Tue, 22 Aug 2023 at 05:25, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+On Wed, 23 Aug 2023 at 14:19, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Board specific late init allows vendors to set up different device
-> or board specific env variables (like serial number, platform name).
-> In case this information is missing, u-boot will lack info regards
-> serial or platform.
+> On 8/23/23 20:47, Simon Glass wrote:
+> > For x86 platforms, PCI is core to their operation and is managed in
+> > arch-specific code. Each platform has its own way of doing this. For TPL
+> > and some SPL implementations, the full driver model PCI is not used.
+> >
+> > A recent change enabled full PCI in TPL/SPL for all boards. This breaks
+> > some x86 boards, so adjust it to skip that for x86.
 >
-> To avoid this prior nvidia_board_late_init internal generic function
-> is called which fills required data. In this case platform name is
-> obtained from get_chip and serialno is filled with SoC id.
+> Could you, please, give some more detail?
 >
-> Though SoC id is not dedicated to be devices serial but it fits well
-> in case of restriction of data about device and since SoC is basically
-> a main chip of the device.
->
-> Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Transformers
-> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  arch/arm/mach-tegra/board2.c | 43 ++++++++++++++++++++++++++++++++++++
->  1 file changed, 43 insertions(+)
->
-> diff --git a/arch/arm/mach-tegra/board2.c b/arch/arm/mach-tegra/board2.c
-> index 981768bb0e..ee69cb657a 100644
-> --- a/arch/arm/mach-tegra/board2.c
-> +++ b/arch/arm/mach-tegra/board2.c
-> @@ -26,6 +26,10 @@
->  #include <asm/arch-tegra/gpu.h>
->  #include <asm/arch-tegra/usb.h>
->  #include <asm/arch-tegra/xusb-padctl.h>
-> +#ifndef CONFIG_TEGRA186
-> +#include <asm/arch-tegra/fuse.h>
-> +#include <asm/arch/gp_padctrl.h>
-> +#endif
->  #if IS_ENABLED(CONFIG_TEGRA_CLKRST)
->  #include <asm/arch/clock.h>
->  #endif
-> @@ -256,6 +260,37 @@ int board_early_init_f(void)
->  }
->  #endif /* EARLY_INIT */
->
-> +#ifndef CONFIG_TEGRA186
-> +static void nvidia_board_late_init_generic(void)
-> +{
-> +       char serialno_str[17];
-> +
-> +       /* Set chip id as serialno */
-> +       sprintf(serialno_str, "%016llx", tegra_chip_uid());
-> +       env_set("serial#", serialno_str);
-> +
-> +       switch (tegra_get_chip()) {
-> +       case CHIPID_TEGRA20:
-> +               env_set("platform", "Tegra 2 T20");
-> +               break;
-> +       case CHIPID_TEGRA30:
-> +               env_set("platform", "Tegra 3 T30");
-> +               break;
-> +       case CHIPID_TEGRA114:
-> +               env_set("platform", "Tegra 4 T114");
-> +               break;
-> +       case CHIPID_TEGRA124:
-> +               env_set("platform", "Tegra K1 T124");
-> +               break;
-> +       case CHIPID_TEGRA210:
-> +               env_set("platform", "Tegra X1 T210");
-> +               break;
-> +       default:
-> +               return;
-> +       }
-> +}
-> +#endif
-> +
->  int board_late_init(void)
->  {
->  #if defined(CONFIG_TEGRA_SUPPORT_NON_SECURE)
-> @@ -268,6 +303,14 @@ int board_late_init(void)
->  #endif
->         start_cpu_fan();
->         cboot_late_init();
-> +
-> +       /*
-> +        * Perform generic env setup in case
-> +        * vendor does not provide it.
-> +        */
-> +#ifndef CONFIG_TEGRA186
-> +       nvidia_board_late_init_generic();
-> +#endif
->         nvidia_board_late_init();
->
->         return 0;
-> --
-> 2.39.2
->
+> * Which boards are broken?
 
-This would be better done with events. I just sent a series that
-converts board_late_init() to use events [1] and with that you can add
-as many 'spy' functions as you like [2].
+For example, chromebook_samus and chromebook_samus_tpl
+
+> * Don't these boards have a pci_init() function?
+
+Yes, the same one you are calling.
+
+> * In what way does calling pci_init() lead to a failure?
+
+It probes and sets up PCI devices and uses a lot of pre-alloc RAM.
+
+>
+> It would be preferable to have all architectures and boards use the same
+> high level API. Excluding x86 here looks more like a (necessary) hack
+> than like a target state.
+
+Fair enough, but on x86 we access PCI long before driver model is up.
+Generally we don't fully enumerate it in SPL as it is expensive. It is
+also pointless, since U-Boot proper does it again later.
 
 Regards,
 Simon
 
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=369742
-[2] https://u-boot.readthedocs.io/en/latest/develop/event.html
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   common/spl/spl.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/common/spl/spl.c b/common/spl/spl.c
+> > index 0062f3f45d9..13d7b1a742f 100644
+> > --- a/common/spl/spl.c
+> > +++ b/common/spl/spl.c
+> > @@ -800,7 +800,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+> >           IS_ENABLED(CONFIG_SPL_ATF))
+> >               dram_init_banksize();
+> >
+> > -     if (CONFIG_IS_ENABLED(PCI)) {
+> > +     if (CONFIG_IS_ENABLED(PCI) && !IS_ENABLED(CONFIG_X86)) {
+> >               ret = pci_init();
+> >               if (ret)
+> >                       puts(SPL_TPL_PROMPT "Cannot initialize PCI\n");
+>
