@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586FDC3DA6F
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:22:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E1BFC3DA6F
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:22:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BDF0855CE;
-	Wed, 23 Aug 2023 20:22:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id B20408620C;
+	Wed, 23 Aug 2023 20:22:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="EUvDvioq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BGEzQB5x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9008847D3; Wed, 23 Aug 2023 20:22:03 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id CA4A68620C; Wed, 23 Aug 2023 20:22:24 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D138609B
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:22:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE53886420
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:22:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foundries.io
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-4ffae5bdc9aso7015445e87.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:22:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d74a012e613so169593276.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:22:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1692814921; x=1693419721;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=a0FXJvkq+3jL5EX4/J2EIR99c3X9P7ggiQsCPQOU9Pw=;
- b=EUvDvioqoOqTb2K1z1iKU76RR846Qx5qIb0SpH6V2nPEXZ8fxCkkWz1SqwXlz6VG0w
- 2qX5kzsocXGpbw8c0GPvAjq7h2vcr9D3iMhnP4Ba6+cQZyZMEnS8tVojIbB5lGz++kHU
- KoDDQe639tf7F72LbCZ+WZgDxDqZe7zogrHtduW18mWx/CrdTqAr2SBm9d7fhQ6BDyGC
- BX3Zrnmg36ll/j6FuWYxp4DJhNnY/rus9S5Xj69CNegjaYB876t4WIklQpD+wzv6H5Ij
- XwZ3rxMul4RMA9F9ikqapNYxvmuvPkeqco4CfQPEhCnZXv/TdXaPPJDLpeyIlRqihxA/
- VnJQ==
+ d=konsulko.com; s=google; t=1692814941; x=1693419741;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b26EaREW7c6bTBbg/y6Xme/3hZ6ZlQKtCgC+ba8vOPA=;
+ b=BGEzQB5x4s1b7Y1iS2/3o63zQ0A3yrbzF7a2ncCxCJZFVvCjm+CqHvuEQLQVW0/88n
+ cD3Gz3B98g8FHeudZAfxtcJn2hWoUq2peTLG+VAZ+5aaljdNJw0nxIN/PGKQdoQourz5
+ XstgdAavfn0ZDdRJoBzXMfZvVY3WtEEV4+LyY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692814921; x=1693419721;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a0FXJvkq+3jL5EX4/J2EIR99c3X9P7ggiQsCPQOU9Pw=;
- b=G+jt04KlE2LT2dxWhp6exyZS4P2ss2pA1YsWeyIu5QVI1yR/dZH6fKNCWMiXuteVMQ
- qFD23cqyJ5zotEcIjhUCGkGcWia1OSxrdoxz7EOVZ+BUvx5YxqmIOwsYfpHMfDXy12tu
- oIhkrlFqOsBC6WB2KQWM9CDnAnA7rdmwZLtwq0WmhNWxSm4ebhYLqvFLdGdz90BbVvV3
- VGuV9za1MiqYyMNSZYhNXqiByVdU2JoTH4gjLwYuBrHWDVyboP1DtcnfoUyUDHybLvhB
- HHYsOmifQ14gdSuSL6el7Le2K+D0tfQ62EP1ku4Qg2ESeQPpmvTyvQSLyX9f8nwmF9qk
- IBAQ==
-X-Gm-Message-State: AOJu0YwpCa4Fy6lHiy0BPu4utMEH9Mr3TVrCUOfcwSrL5SNm7bJs8DOX
- QY1KXsbgPwR5v1A/2fz3SJxiQMnlC5CFugeEcZE=
-X-Google-Smtp-Source: AGHT+IFVY4dL3d2pfmTRIiO2RHv0VP8GcGEvFlX7RsjC7F+wSSMKTxIvLQbhTAhxZRXtH+H4/zACkg==
-X-Received: by 2002:ac2:5f81:0:b0:500:9214:b309 with SMTP id
- r1-20020ac25f81000000b005009214b309mr3073120lfe.56.1692814920900; 
- Wed, 23 Aug 2023 11:22:00 -0700 (PDT)
-Received: from cryobook.. ([93.188.34.55]) by smtp.gmail.com with ESMTPSA id
- x2-20020ac259c2000000b004fe432108absm1789155lfn.182.2023.08.23.11.21.59
+ d=1e100.net; s=20221208; t=1692814941; x=1693419741;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b26EaREW7c6bTBbg/y6Xme/3hZ6ZlQKtCgC+ba8vOPA=;
+ b=CUuzSxJSHHPlVC+QdBPjGh5Dk3qtkyPpN9bmq88J7yfBrppJ9VI81WAwWj9XOB6DQ4
+ 1Ou9qq0NIVODoWr/+DAnOpwTDHVeUgNoG4B4zgPMO+k7oY1HQicEvtCyuwJy3YTWcp2b
+ s6sVwpAEjG2U3chcdPIiamOChI1Sbow/pKeZS7SYEJ2lfG5pJw5WwamEs0mhJn75sp5e
+ o5oroIGGq5vIfEyPoCKz1uWbISQz5YkqZ6nLzKXCOtcdaDRf8H+JUK+OaPLszR+xuLSq
+ xHjxThY6RmzGEmdl6MfdcsLSOt7iqYxfxyPJUHMbYUhWLXjxiB/GcaxhGuofsBMMkZXz
+ mCEQ==
+X-Gm-Message-State: AOJu0YzEDewc7e66TAAMLJdRNUfAUYphnfr/xe+zX8SH+rdaRYa2GL0X
+ kBoLBCO2jUNGq9y/maPJISnXtA==
+X-Google-Smtp-Source: AGHT+IHvMw9pav81zd12Ol8RRRuH074APu5MgXp4XUdx6rAK6J+d3OYL3ezsd6TO+HckBjmQUuSP+w==
+X-Received: by 2002:a25:ca03:0:b0:cee:639a:be94 with SMTP id
+ a3-20020a25ca03000000b00cee639abe94mr12299647ybg.0.1692814941469; 
+ Wed, 23 Aug 2023 11:22:21 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
+ [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
+ by smtp.gmail.com with ESMTPSA id
+ l14-20020a25bf8e000000b00d636d05d3e6sm2830078ybk.19.2023.08.23.11.22.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 11:22:00 -0700 (PDT)
-From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-To: u-boot@lists.denx.de
-Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2] usb: dwc3: Fix renaming SPL_USB_HOST_SUPPORT to
- SPL_USB_HOST
-Date: Wed, 23 Aug 2023 21:21:48 +0300
-Message-ID: <20230823182156.32353-1-oleksandr.suvorov@foundries.io>
-X-Mailer: git-send-email 2.41.0
+ Wed, 23 Aug 2023 11:22:20 -0700 (PDT)
+Date: Wed, 23 Aug 2023 14:22:18 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>
+Subject: Re: [PATCH] arm: mach-imx: loose enabling FSL_CAAM
+Message-ID: <20230823182218.GB3953269@bill-the-cat>
+References: <20230823181038.30280-1-oleksandr.suvorov@foundries.io>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pT98PpJOAjh/2Y18"
+Content-Disposition: inline
+In-Reply-To: <20230823181038.30280-1-oleksandr.suvorov@foundries.io>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,42 +92,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the usb/dwc3-layerscape driver the first option should be renamed
-to the latter as well. Do it.
 
-Fixes: 333e4a621df ("Rename SPL_USB_HOST_SUPPORT to SPL_USB_HOST")
-Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
----
+--pT98PpJOAjh/2Y18
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v2:
-- [asked by Tom Rini] shrink the code using CONFIG_IS_ENABLED()
+On Wed, Aug 23, 2023 at 09:10:33PM +0300, Oleksandr Suvorov wrote:
 
- drivers/usb/dwc3/dwc3-layerscape.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+> HAS_CAAM should be enabled for all architecture support it. Whereas
+> FSL_CAAM enables a driver for a device which may be managed by
+> another system, like OP-TEE. Allow disabling u-boot FSL CAAM driver
+> on systems with CAAM to prevent access conflicts.
+>=20
+> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+> ---
+>=20
+>  arch/arm/mach-imx/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+> index d94b5828d0d..3c178fb435f 100644
+> --- a/arch/arm/mach-imx/Kconfig
+> +++ b/arch/arm/mach-imx/Kconfig
+> @@ -52,7 +52,7 @@ config USE_IMXIMG_PLUGIN
+>  config IMX_HAB
+>  	bool "Support i.MX HAB features"
+>  	depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5 || ARCH_IMX8M || ARCH_MX7ULP
+> -	select FSL_CAAM if HAS_CAAM
+> +	imply FSL_CAAM if HAS_CAAM
+>  	imply CMD_DEKBLOB if HAS_CAAM
+>  	help
+>  	  This option enables the support for secure boot (HAB).
 
-diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-layerscape.c
-index 79cf71f7a85..58baa017ad1 100644
---- a/drivers/usb/dwc3/dwc3-layerscape.c
-+++ b/drivers/usb/dwc3/dwc3-layerscape.c
-@@ -134,8 +134,7 @@ U_BOOT_DRIVER(dwc3_layerscape_peripheral) = {
- };
- #endif
- 
--#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || \
--	!defined(CONFIG_SPL_BUILD) && defined(CONFIG_USB_HOST)
-+#if CONFIG_IS_ENABLED(USB_HOST)
- static int dwc3_layerscape_host_probe(struct udevice *dev)
- {
- 	struct xhci_hcor *hcor;
-@@ -194,7 +193,7 @@ static int dwc3_layerscape_bind(struct udevice *dev)
- 		driver = "dwc3-layerscape-peripheral";
- 		break;
- #endif
--#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || !defined(CONFIG_SPL_BUILD)
-+#if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
- 	case USB_DR_MODE_HOST:
- 		dev_dbg(dev, "Using host mode\n");
- 		driver = "dwc3-layerscape-host";
--- 
-2.41.0
+What's the use-case here? FSL_CAAM is one of those extremely long lived
+symbols / IP blocks on NXP/Freescale parts and getting the Kconfig
+logic such that (as best I could see) we didn't change in-tree behavior
+here was tricky.
 
+--=20
+Tom
+
+--pT98PpJOAjh/2Y18
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmTloACgkQFHw5/5Y0
+tyzMsAwAoliQnjL16GgveCxaQa0ptumOJsh9HO5Eo1hEnpGm9vuFSOz1rvLR3kF6
+zNUUBbZrl+xL7XLEdCwjqXRgTDGOAf+ccNXHHhxv8trVROUaYKbjP/q5PnQIpNqF
+G2evUQK9oRLR1jSe299h9qFl8KFbW7qSeb48YjuHXHXDekau57+FVAMrOlUgE/xX
+lj0CvwWrloVxQS1F2qHzfBLwG4W38yqgiHOe9GKRzBlI0IZtUe/oHNjviFwpxHnq
+203fDFZS7O4fPBOlPQ6ZFrMtcUtRA7Ak+PA1iiNJh81UHaTFN+ehEh3zO63GNDtM
+IHGHSk4smf/TT0rbvuqogh0SpnQoDWSVUq8yK/G9LvOIpefvs65I1NJcgd80Esbr
+JvIV3qVRyCCa7bR0jWKtnTfCbCkTucoAGSgEfBIxtr8vmNO2U6sfPZl2ned2s5sj
+fAcr/RFq5ScAz2i14CTGeL38qJ3CT3zIDcVVRc9G9CWHBn+rtUobYqz9OQykmRlP
+OCDi/YQj
+=X7tS
+-----END PGP SIGNATURE-----
+
+--pT98PpJOAjh/2Y18--
