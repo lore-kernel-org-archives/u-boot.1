@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB23C3DA6F
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F08C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C2186429;
-	Wed, 23 Aug 2023 19:59:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 077BB86427;
+	Wed, 23 Aug 2023 19:59:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CHyHmd/S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MWw1dYpJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA61E86427; Wed, 23 Aug 2023 19:59:25 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 2627986473; Wed, 23 Aug 2023 19:59:28 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF9B686411
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:59:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CC3C86411
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3a751bd3372so657372b6e.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:59:23 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3a8586813cfso591166b6e.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692813562; x=1693418362;
+ d=gmail.com; s=20221208; t=1692813564; x=1693418364;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HBfHJKEJNbUDEB+mm3XnXjqoZC5SqA1wcq/W7CI61/g=;
- b=CHyHmd/S1yF1yrrQEMATrkWtMSzsnDfC1+0qLqnqcmZNQ6YxeISEuZVPQrHWODG4ox
- h4B2YbF+UIwveLWVt+BaaYHNATGjSf18ijPmsFe0iyvlzfs/7Of1NodmhBj416hDQhNi
- k/93+CuamsUFoqvkRMTUBy/cBogsdjqVq0ND2q2/p+5qLppTAmZrepyFaqs9ngGW8hGt
- OFplN1U5F1XTm1BQsQwCBuZ0HXzfjJmvfBi44+3vlbuFtIujnoDmqwUGqMCoVdVO5mE/
- 1Gs4K4WDhQKVPy1dVvjdULlC38Ur+JzSuZrHIXd387sSqXisuakr1FXCYlCIoY4BHae+
- pSPw==
+ bh=mV9+uGNPS3fg0oeVjhBYaL1jMQSOnX1qSJMPyCXgt+o=;
+ b=MWw1dYpJETl4UwL9mp0LSmsS7/8s5q1yQu1CQQbqcCGnjq+4MufLMQk6GzSpFDcLpA
+ DHdJ8AbHMW3CZTBBhtMOqckb8pbmASqL6aP1D41isWvNEYaVm8P7TyHsmnHYuBpSOPSm
+ 6Iv4jqID8BQ3JUhPG2Z7uu3qIPzFqwvIQQ1lsdxSQPz31prSSlJZYa6AQPV9IsWO0enC
+ ptMo4C0NT64ER7LuUjuaLJ7Fd1lBpbwafVLpI6wCRxTYKJi2Vxdyc6uSw3Z9kHtsbc4w
+ B1p3TNirTl9Q3vS7r4Qq55tTtB5CQlgbdqJaLymlKx0rkNIlp/sowHEa1vIcIlfxXnc9
+ 0L4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692813562; x=1693418362;
+ d=1e100.net; s=20221208; t=1692813564; x=1693418364;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HBfHJKEJNbUDEB+mm3XnXjqoZC5SqA1wcq/W7CI61/g=;
- b=EFhnyx0m0wvtzN0HmEHuOxsKBlel8Q2/lkooK2nWZzY+iSKNXlPRleWNtqzNeO8OSI
- ove3tyl5U9by0a5LOaO1qMrR2JrkuLWOmI2aC3CV5cP8vzin9sNVXb5NK3LBESFbFqrx
- Rf0NknGiR8YBg3TsQkHaGInAVlsV7uNl05yKNWiVaqrZcmiMvduqz1esTR6fl+RdIvhc
- T4OBnYrNNIC6lnOA2uA5wm8v0I4og1Ubba/YjOO7LVz6dWYCToml/+UJuK5MU9IhwCSq
- poNyuQCo+lnevWtAPc0n8bNWG1InXst6RqK77gaQB7CVE/VT18apQxD7DoGmDpGtE1xM
- WJbw==
-X-Gm-Message-State: AOJu0Yy92jPfO0oNne14lGg7Vg3MoW/JCmnzFo/C6Xj4VLT3kz1GQuu5
- DNGcfPXC8ZPZfbW4t/Jw0Po=
-X-Google-Smtp-Source: AGHT+IFmbX/p8ys4vZYwogd0di7nhQYTKaO7gISbspYZEoYlSfqmdzz0o1u//p26EAKl7SRYd7maUQ==
-X-Received: by 2002:a05:6808:2022:b0:3a8:8aa8:a4c8 with SMTP id
- q34-20020a056808202200b003a88aa8a4c8mr650167oiw.2.1692813562346; 
- Wed, 23 Aug 2023 10:59:22 -0700 (PDT)
+ bh=mV9+uGNPS3fg0oeVjhBYaL1jMQSOnX1qSJMPyCXgt+o=;
+ b=WivEZwS9vpAl1hOPf88TQf6DmgV+7AVJkPU4UsjtT8h5oI6/3AzPTwQFmh3e+GN5B3
+ 7Ch2hgBcCjMe25dA8WsGdPdhMD45yt6xSxcPXu0vIx8yI0ASuut9siEIOmiRwaBtd2/Y
+ 4+09gvpUqrysHeMiNpxnleFPtaJnwyQ2du03c/f68it0+YiG06K+OWEbaW/fSxCnHhlL
+ 0JpGj9IqQtlWc8EntvVPZi7ApZmVimXvLwTceQY1dI6gVkxg6ekNyJ7O8h/Yr8RVVIwG
+ xClJl5c+Q0emJwitMofN5lSItcX/v++d6z6K9obPl7v24KiIzMtHy+WMsuds7dT/84tA
+ Z+1g==
+X-Gm-Message-State: AOJu0YxUk1BsdMOS0JUh97f5SXbIueKtCqJEqEv5Kia1hN6MWCcBfbCY
+ DqI7tz1Ea9LanCcoTM6tG1E7h+Bf1o8=
+X-Google-Smtp-Source: AGHT+IHUsNS1JkeeJR64qeQDlCnMw+3ZSQ85/NUIAqlEIH9qVawdlO9KN8/clIOmSZ6iIvAyCgS0IQ==
+X-Received: by 2002:a05:6808:1528:b0:3a7:49b9:20c with SMTP id
+ u40-20020a056808152800b003a749b9020cmr15629351oiw.0.1692813564709; 
+ Wed, 23 Aug 2023 10:59:24 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b51c:1cae:f70f:7819])
  by smtp.gmail.com with ESMTPSA id
- 17-20020aca2811000000b003a842626b62sm5625271oix.22.2023.08.23.10.59.20
+ 17-20020aca2811000000b003a842626b62sm5625271oix.22.2023.08.23.10.59.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 10:59:21 -0700 (PDT)
+ Wed, 23 Aug 2023 10:59:24 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de
 Cc: peng.fan@nxp.com, trini@konsulko.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 2/5] thermal: imx_tmu: Fix the polling default
-Date: Wed, 23 Aug 2023 14:59:08 -0300
-Message-Id: <20230823175911.319414-2-festevam@gmail.com>
+Subject: [PATCH v2 3/5] thermal: imx_tmu: Increase the log level for high
+ temperatures
+Date: Wed, 23 Aug 2023 14:59:09 -0300
+Message-Id: <20230823175911.319414-3-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230823175911.319414-1-festevam@gmail.com>
 References: <20230823175911.319414-1-festevam@gmail.com>
@@ -94,54 +95,31 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-When the 'polling-delay' property is not passed via devicetree,
-pdata->polling_delay keeps at 0. This causes the imx_tmu driver to get
-stuck inside the busy while() loop when the CPU temperature is above
-the alert point.
-
-Fix this problem by passing a one second polling interval, which provides
-a proper delay to let the system to cool down and exit the while() loop
-when the temperature is below the alert point.
+dev_info() message is not printed by default. Increase the log level
+to dev_crit(). This allows the critical messages related to the temperature
+getting beyong the alert threshold to be displayed.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
 Changes since v1:
-- None
+- Use dev_crit() instead of selecting LOG via Kconfig. (Tom)
 
- drivers/thermal/imx_tmu.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/thermal/imx_tmu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/thermal/imx_tmu.c b/drivers/thermal/imx_tmu.c
-index 97efc55044..d9a04eaf79 100644
+index d9a04eaf79fb..d2ea084d2d2f 100644
 --- a/drivers/thermal/imx_tmu.c
 +++ b/drivers/thermal/imx_tmu.c
-@@ -37,6 +37,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define TER_ADC_PD		0x40000000
- #define TER_ALPF		0x3
+@@ -238,7 +238,7 @@ int imx_tmu_get_temp(struct udevice *dev, int *temp)
+ 		return ret;
  
-+#define IMX_TMU_POLLING_DELAY_MS	1000
- /*
-  * i.MX TMU Registers
-  */
-@@ -574,6 +575,8 @@ static int imx_tmu_parse_fdt(struct udevice *dev)
- 
- 	dev_dbg(dev, "%s\n", __func__);
- 
-+	pdata->polling_delay = IMX_TMU_POLLING_DELAY_MS;
-+
- 	if (pdata->zone_node) {
- 		pdata->regs = (union tmu_regs *)dev_read_addr_ptr(dev);
- 
-@@ -602,7 +605,8 @@ static int imx_tmu_parse_fdt(struct udevice *dev)
- 
- 	dev_dbg(dev, "args.args_count %d, id %d\n", args.args_count, pdata->id);
- 
--	pdata->polling_delay = dev_read_u32_default(dev, "polling-delay", 1000);
-+	pdata->polling_delay = dev_read_u32_default(dev, "polling-delay",
-+						    IMX_TMU_POLLING_DELAY_MS);
- 
- 	trips_np = ofnode_path("/thermal-zones/cpu-thermal/trips");
- 	ofnode_for_each_subnode(trips_np, trips_np) {
+ 	while (cpu_tmp >= pdata->alert) {
+-		dev_info(dev, "CPU Temperature (%dC) has beyond alert (%dC), close to critical (%dC) waiting...\n",
++		dev_crit(dev, "CPU Temperature (%dC) has beyond alert (%dC), close to critical (%dC) waiting...\n",
+ 			 cpu_tmp, pdata->alert, pdata->critical);
+ 		mdelay(pdata->polling_delay);
+ 		ret = read_temperature(dev, &cpu_tmp);
 -- 
 2.34.1
 
