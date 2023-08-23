@@ -4,59 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECC1C7113B
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3C8EC3DA6F
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 22:10:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F27F864E6;
-	Wed, 23 Aug 2023 23:49:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E987A846C0;
+	Thu, 24 Aug 2023 00:10:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AC13s6AV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YlZTKSE/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00FF7864E8; Wed, 23 Aug 2023 23:49:14 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D8434864EF; Thu, 24 Aug 2023 00:10:01 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C71A38644F
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:49:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26C13805CA
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 00:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
- [62.143.244.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id BA6073F1DA; 
- Wed, 23 Aug 2023 21:49:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1692827351;
- bh=OQVSErzXPSbk9qzWgZP0B41qsr5v9qBrRLqqUanSzGI=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=AC13s6AVk/sIxMPMze77MtrY9gzL16E6nrS41Jzw+CKI/Raw/ZP6Nq2I77Nj8F86l
- NdoDARuQfzMGGvpdUNkk6uscbGurkovjIJuQhymlHe+k9X9xQYmf4CvNBo1+VDUfXt
- aOOk0XMTrunl7Ozr/30wnAruxK25bCikt+j04l3JfNofCALWtVKLClvshJ2IQKPPw0
- 8RIK/eWuEyQKMEaIY+yqJr9ILDwVwQ+FF2efbwNI0hbwkmehB2/JMxxP8jczgFwA7o
- c/+C/AbRcNVl7GOhMHDO46qPdQ6ErxygTN3YlXLX6SNeQeGZDSj9ut9FpaRjunPJu8
- 5WzNtbEuZjbiQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] doc: describe TPL/VPL/SPL boot
-Date: Wed, 23 Aug 2023 23:49:55 +0200
-Message-Id: <20230823214955.60872-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hnagalla@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NM9pUk014611;
+ Wed, 23 Aug 2023 17:09:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692828591;
+ bh=+8nY9NQwRcS7jtBI8MrAyjS5HMyfgBDJxO+HRj+/lNg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=YlZTKSE/Jk3vMCYSy44xbqDmvcG2/JiMyGRR8gl5Xi+pGB0jYw+vcqKuNp8PLWmgP
+ PvlwCh88rOFooiD5A0Jd20pCakWaZPpnS+ABx/zNUviJ+cZ8bD21O0d6tDs1WH7Q2O
+ 0w8eACtq/I1xllAwvBJY8lx10XdzBGG1ognqAD/0=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NM9pJI079036
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 17:09:51 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 17:09:51 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 17:09:51 -0500
+Received: from [10.249.48.175] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NM9oLs025138;
+ Wed, 23 Aug 2023 17:09:50 -0500
+Message-ID: <2e7b6227-c608-790f-0842-0fd8dbf7f2c9@ti.com>
+Date: Wed, 23 Aug 2023 17:09:50 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2 00/10] Introduce initial TI's J784S4 support
+To: Enric Balletbo i Serra <eballetb@redhat.com>
+CC: <trini@konsulko.com>, <lukma@denx.de>, <seanga2@gmail.com>,
+ <jh80.chung@samsung.com>, <nm@ti.com>, <afd@ti.com>, <a-nandan@ti.com>,
+ <u-boot@lists.denx.de>, "Kumar, Udit" <u-kumar1@ti.com>, "Nandan, Apurva"
+ <a-nandan@ti.com>
+References: <20230321141028.24456-1-hnagalla@ti.com>
+ <CALE0LRse=69tbj8g8m0L7FHu=D1MVtzL_pBN3Vm-2eOv3_HtKQ@mail.gmail.com>
+Content-Language: en-US
+From: Hari Nagalla <hnagalla@ti.com>
+In-Reply-To: <CALE0LRse=69tbj8g8m0L7FHu=D1MVtzL_pBN3Vm-2eOv3_HtKQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,363 +84,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a stub describing how TPL, VPL, and SPL load the next boot stages
-on a detail level for users.
+On 8/22/23 03:18, Enric Balletbo i Serra wrote:
+>> * Temperature sensors, user push buttons and LEDs
+>> * 40-pin User Expansion Connector
+>> * x2 ENET Expansion Connector, x1 GESI expander, x2 Display connector
+>> * x1 15-pin CSI header
+>> * x6 MCAN instances
+>>
+>> Schematics:https://www.ti.com/lit/zip/sprr458
+>>
+>> bootlog:https://paste.sr.ht/~hnagalla/f14840abc854519f912923662f1fdc8075d92107
+>>
+> Many thanks for this patchset.
+> 
+> There is any plan to rebase all this patchset, fix the comments and
+> send it again to upstream? I'd be really interested in help on this
+> patchset.
+> 
+> Thanks,
+>    Enric
+> 
+Hi Enric,
 
-For sure we will need a few patches on top to catch the whole complexity.
+Yes, we will rebase and send the patch set shortly.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	Mention that PowerPC uses a different naming convention.
-	Group boot devices by type
-	Correct reference to UBI
-	Fix typos
----
- doc/usage/index.rst    |   1 +
- doc/usage/spl_boot.rst | 321 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 322 insertions(+)
- create mode 100644 doc/usage/spl_boot.rst
+Sorry for the delay.
 
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 072db53614..7f0b26cc5a 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -4,6 +4,7 @@ Use U-Boot
- .. toctree::
-    :maxdepth: 1
- 
-+   spl_boot
-    blkmap
-    dfu
-    environment
-diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
-new file mode 100644
-index 0000000000..7234d0b1b2
---- /dev/null
-+++ b/doc/usage/spl_boot.rst
-@@ -0,0 +1,321 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Booting from TPL/SPL
-+====================
-+
-+The main U-Boot binary may be too large to be loaded directly by the Boot ROM.
-+This was the own driver for splitting up U-Boot into multiple boot stages.
-+
-+U-Boot typically goes through the following boot phases where TPL, VPL, and SPL
-+are optional. While many boards use SPL only few use TPL.
-+
-+TPL
-+   Tiny program loader. Very early init, as tiny as possible. This loads SPL
-+   (or VPL if enabled).
-+
-+VPL
-+   Optional verification step, which can select one of several SPL binaries,
-+   if A/B verified boot is enabled. Implementation of the VPL logic is
-+   work-in-progress. For now it just boots into SPL.
-+
-+SPL
-+   Secondary program loader. Sets up SDRAM and loads U-Boot proper. It may also
-+   load other firmware components.
-+
-+U-Boot
-+   U-Boot proper, containing the command line and the logic to load an
-+   operating system, e.g. via UEFI.
-+
-+The naming convention on the PowerPC architecture deviates from the other
-+archtitectures. Here the boot sequence is SPL->TPL->U-Boot.
-+
-+Only main U-Boot has a command line interface.
-+
-+Further usages for U-Boot SPL comprise:
-+
-+* launching BL31 of ARM Trusted Firmware which invokes U-Boot as BL33
-+* launching EDK II
-+* launching Linux
-+* launching RISC-V OpenSBI which invokes main U-Boot
-+
-+Target binaries
-+---------------
-+
-+Binaries loaded by SPL/TPL can be:
-+
-+* raw binaries where the entry address equals the start address. This is the
-+  only binary format supported by TPL.
-+* :doc:`FIT <fit/index>` images
-+* legacy U-Boot images
-+
-+Configuration
-+~~~~~~~~~~~~~
-+
-+Raw images are only supported in SPL if CONFIG_SPL_RAW_IMAGE_SUPPORT=y.
-+
-+CONFIG_SPL_FIT=y and CONFIG_SPL_LOAD_FIT=y are needed to load FIT images.
-+
-+CONFIG_SPL_LEGACY_IMAGE_FORMAT=y is needed to load legacy U-Boot images.
-+CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y enables checking the CRC32 of legacy U-Boot
-+images.
-+
-+Image load methods
-+------------------
-+
-+The image boot methods available for a board must be defined in two places:
-+
-+The board code implements a function board_boot_order() enumerating up to
-+five boot methods and the sequence in which they are tried. (The maximum
-+number of boot methods is currently hard coded as variable spl_boot_list[]).
-+If there is only one boot method function, spl_boot_device() may be implemented
-+instead.
-+
-+The configuration controls which of these boot methods are actually available.
-+
-+Loading from block devices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+MMC1, MMC2, MMC2_2
-+    These methods read an image from SD card or eMMC. The first digit after
-+    'MMC' indicates the device number. Required configuration settings include:
-+
-+    * CONFIG_SPL_MMC=y or CONFIG_TPL_MMC=y
-+
-+    To use a PCI connected MMC controller you need to additionally specify:
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    * CONFIG_MMC=y
-+
-+    * CONFIG_MMC_PCI=y
-+
-+    * CONFIG_MMC_SDHCI=y
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+NVMe
-+    This methods load the image from an NVMe drive.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    * CONFIG_SPL_NVME=y
-+
-+    * CONFIG_SPL_NVME_PCI=y
-+
-+    * CONFIG_SPL_NVME_BOOT_DEVICE (number of the NVMe device)
-+
-+    * CONFIG_SYS_NVME_BOOT_PARTITION (partition to read from)
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+SATA
-+    This method reads an image from a SATA drive.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_SATA=y or CONFIG_TPL_SATA=y
-+
-+    To use a PCIe connecte SATA controller you additionally need:
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_SATA=y
-+
-+    * CONFIG_SPL_AHCI_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y
-+
-+    * CONFIG_SYS_SATA_FAT_BOOT_PARTITION=<partition number>
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+USB
-+    The USB method loads an image from a USB block device.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_USB_HOST=y
-+
-+    * CONFIG_SPL_USB_STORAGE=y
-+
-+    To use a PCI connected USB 3.0 controller you additionally need:
-+
-+    * CONFIG_SPL_FS_FAT=y
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    * CONFIG_USB=y
-+
-+    * CONFIG_USB_XHCI_HCD=y
-+
-+    * CONFIG_USB_XHCI_PCI=y
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-+
-+    * CONFIG_SYS_USB_FAT_BOOT_PARTITION=<partition number>
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+Loading from flash devices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+NAND
-+    This method loads the image from NAND flash. To read from raw NAND the
-+    following configuration settings are required:
-+
-+    * CONFIG_SPL_NAND_SUPPORT=y or CONFIG_TPL_NAND_SUPPORT=y
-+
-+    If CONFIG_SPL_NAND_RAW_ONLY=y only raw images can be loaded.
-+
-+    For using UBI (Unsorted Block Images) volumes to read from NAND the
-+    following configuration settings are required:
-+
-+    * CONFIG_SPL_UBI=y or CONFIG_TPL_UBI=y
-+
-+    The UBI volume to read can either be specified
-+
-+    * by name using CONFIG_SPL_UBI_LOAD_BY_VOLNAME or
-+
-+    * by number using CONFIG_SPL_UBI_LOAD_MONITOR_ID.
-+
-+NOR
-+    This method loads the image from NOR flash.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_NOR_SUPPORT=y or CONFIG_TPL_NOR_SUPPORT=y
-+
-+OneNAND
-+    This methods loads the image from a OneNAND device. To read from raw OneNAND
-+    the following configuration settings are required:
-+
-+    * CONFIG_SPL_ONENAND_SUPPORT=y or CONFIG_TPL_ONENAND_SUPPORT=y
-+
-+    For using the Ubi file system to read from NAND the following configuration
-+    settings are required:
-+
-+    * CONFIG_SPL_UBI=y or CONFIG_TPL_UBI=y
-+
-+SPI
-+    This method loads an image form SPI NOR flash.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_DM_SPI=y
-+
-+    * CONFIG_SPL_SPI_FLASH=y
-+
-+    * CONFIG_SPI_LOAD=y or CONFIG_TPL_SPI_LOAD=y
-+
-+
-+Sunxi SPI
-+    This method which is specific to Allwinner SoCs loads an image form SPI NOR
-+    flash. Required configuration settings include:
-+
-+    * CONFIG_SPL_SPI_SUNXI=y
-+
-+Loading from other devices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+BOOTROM
-+    The binary is loaded by the boot ROM.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_BOOTROM_SUPPORT=y or CONFIG_TPL_BOOTROM_SUPPORT=y
-+
-+DFU
-+    :doc:`Device Firmware Upgrade <dfu>` is used to load the binary into RAM.
-+    Required configuration settings include:
-+
-+    * CONFIG_DFU=y
-+
-+    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG TPL_RAM_SUPPORT=y
-+
-+Ethernet
-+    This method loads an image over Ethernet. The BOOTP protocol is used to find
-+    a TFTP server and binary name. The binary is downloaded via the TFTP
-+    protocol. Required configuration settings include:
-+
-+    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
-+
-+    * CONFIG_SPL_ETH_DEVICE=y or CONFIG_DM_USB_GADGET=y
-+
-+FEL
-+    This method does not actually load an image for U-Boot.
-+    FEL is a routine contained in the boot ROM of Allwinner SoCs which serves
-+    for the initial programming or recovery via USB
-+
-+RAM
-+    This method uses an image preloaded into RAM.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG_TPL_RAM_SUPPORT=y
-+
-+    * CONFIG_RAM_DEVICE=y
-+
-+Sandbox file
-+    On the sandbox this method loads an image from the host file system.
-+
-+Sandbox image
-+    On the sandbox this method loads an image from the host file system.
-+
-+SEMIHOSTING
-+    When running in an ARM or RISC-V virtual machine the semihosting method can
-+    be used to load an image from the host file system.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_SEMIHOSTING=y
-+
-+    * CONFIG_SPL_SEMIHOSTING_FALLBACK=y
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=<path to file>
-+
-+UART
-+    This method loads an image via the Y-Modem protocol from the UART.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_YMODEM_SUPPORT=y or CONFIG_TPL_YMODEM_SUPPORT=y
-+
-+USB SDP
-+    This method loads the image using the Serial Download Protocol as
-+    implemented by the boot ROM of the i.MX family of SoCs.
-+
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_SERIAL=y
-+
-+    * CONFIG_SPL_USB_SDP_SUPPORT=y or CONFIG_TPL_USB_SDP_SUPPORT
-+
-+VBE Simple
-+    This method is used by the VPL stage to extract the next stage image from
-+    the loaded image.
-+
-+    Required configuration settings include:
-+
-+    * CONFIG_VPL=y
-+
-+    * CONFIG_SPL_BOOTMETH_VBE_SIMPLE_FW=y or CONFIG_TPL_BOOTMETH_VBE_SIMPLE_FW=y
-+
-+XIP
-+    This method executes an image in place.
-+
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_XIP_SUPPORT
--- 
-2.40.1
-
+Thanks
+Hari
