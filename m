@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542EEEE49AE
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 07:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E7B2EE49AE
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 08:02:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8EE085DEA;
-	Wed, 23 Aug 2023 09:54:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9AB7D864B8;
+	Wed, 23 Aug 2023 10:02:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="W8I6lMNW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vVn219DA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7909B863B2; Wed, 23 Aug 2023 09:54:19 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A449864BA; Wed, 23 Aug 2023 10:02:40 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96706846C0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:54:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B15BD864B1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:02:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-3fef3c3277bso23352495e9.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 00:54:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692777257; x=1693382057; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=TyaKjGK/p0CeN/4hnDvyasKZojGwCqVvR+UDntFeYdU=;
- b=W8I6lMNW6RtsnGEmR4LtAM9VBIG0LiF8ds2bhcAJQHu2+7E0vnXHJEC0Zino/pgSgy
- F5Orr/ohYZSwO1HowJqf+cyIAZH5Kn2Xg8PR7yAYIyq53XxtExzbpSSny4dNKLJzm+b/
- AmKu+4YNYNkukpO91SdjinbZ+VPa/MeHiboQRPf/wa04Us2pD+Nb0sHfDxBK57ikJob2
- JlrPD3JiYKnZwdDpUUYiUWyQKyJxUiJJ+KRlJd4tb+7jN4Wws0UoB8SugdMPBE4OHNbn
- jR2fdTsbF0Ml0K6av+RzGWq1YqhDSXCuae7/xEQTuAI1WJ2o1RO/yhiifVkf19l450fa
- Wp9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692777257; x=1693382057;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TyaKjGK/p0CeN/4hnDvyasKZojGwCqVvR+UDntFeYdU=;
- b=jbcGbpND2my+lsO4hBCwhVrru7QMoz9C4vzGoZbH24mZ2V+LeM7YCQ6Y8QjcLmsmI7
- YED1vCitbMf2WjJVL88Tnp1cEjqKWK2zA8trno5KSk3myNAq87gP7fenQnmzk62II+kK
- 33yJiXUw+PnLgr/XzskpWp/HwH9BDRC/rCspvWjVWReYMdNGIGyKV2HvhQb9EVMhCWHG
- mPv44rRHrQoVTjKtxegys3XoaGHn8J+JhNHEiS4s7q+lec34qDC1nAYo5aCqERsy1xjp
- KDQ96GzrivSN+bGu012a71fkX/CyzUOwDZbpQLbXLp6F8Dc2nu/DL3ikBCU7cz4qCS9i
- maxg==
-X-Gm-Message-State: AOJu0YzPnsKar+2we5CkVhQDZx0DmgsMWCvWMpXInSRxg/pWv4N7Qxmq
- of5RMgs2L3erKGHftWQBtqfgyBE+Liln0pIuwsE=
-X-Google-Smtp-Source: AGHT+IFB2sn0A3h4KNHq1WWmGEjQg9tDUxRYnO5xnDu59Sdr8kebIlUibduDE4hRsidCB9DEDFUrNA==
-X-Received: by 2002:a05:600c:c5:b0:3fe:1db2:5179 with SMTP id
- u5-20020a05600c00c500b003fe1db25179mr8800090wmm.19.1692777256906; 
- Wed, 23 Aug 2023 00:54:16 -0700 (PDT)
-Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
- by smtp.gmail.com with ESMTPSA id
- c1-20020a7bc001000000b003fee567235bsm13753187wmb.1.2023.08.23.00.54.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 00:54:16 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
- <trini@konsulko.com>
-Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
- Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Jan
- Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH V4 3/8] arm: mach-k3: am625: Add support for UDA FS
-In-Reply-To: <20230822184135.2328409-4-nm@ti.com>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-4-nm@ti.com>
-Date: Wed, 23 Aug 2023 09:54:15 +0200
-Message-ID: <87ttsqfb2w.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37N82WTo006615;
+ Wed, 23 Aug 2023 03:02:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692777752;
+ bh=PBrB9iBWRcnzeTooLitkKBhfbosBcwcJae+KpT8o85M=;
+ h=Date:CC:Subject:To:References:From:In-Reply-To;
+ b=vVn219DAxWgWxw9z3665qiT4sm6k7N1BCuuFNQiei3LJuSvau8DxbKbB2/guT8yD4
+ n8Rq7mWpL4UIB8busLg6X5ddkAsVZ3rQxIpOCXEgLkrJ9b5XpactW9n5yEI1G6hxlh
+ nq2KjgNkbOmgDDLLNqFmdaod5vGf5MrNl7Wg1FVo=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37N82WW5013163
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 03:02:32 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 03:02:31 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 03:02:31 -0500
+Received: from [172.24.227.9] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37N82SfB043326;
+ Wed, 23 Aug 2023 03:02:28 -0500
+Message-ID: <040137da-f0bb-3aee-6dcd-4474bc2f4171@ti.com>
+Date: Wed, 23 Aug 2023 13:32:27 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+CC: <u-boot@lists.denx.de>, <nm@ti.com>, <joe.hershberger@ni.com>,
+ <robertcnelson@gmail.com>, <jkridner@beagleboard.org>,
+ <r-gunasekaran@ti.com>, <srk@ti.com>, <trini@konsulko.com>, Ramon Fried
+ <rfried.dev@gmail.com>, <s-vadapalli@ti.com>
+Subject: Re: [PATCH 1/2] net: ti: am65-cpsw-nuss: Workaround for buggy
+ PHY/Board
+Content-Language: en-US
+To: Roger Quadros <rogerq@kernel.org>
+References: <20230822121350.51324-1-rogerq@kernel.org>
+ <20230822121350.51324-2-rogerq@kernel.org>
+ <0348ec9c-a50e-1e03-2f7d-c7b82fefc1ed@ti.com>
+ <de614af1-28b1-a6c9-e0e0-454646d0aba6@kernel.org>
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <de614af1-28b1-a6c9-e0e0-454646d0aba6@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,49 +88,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mar., ao=C3=BBt 22, 2023 at 13:41, Nishanth Menon <nm@ti.com> wrote:
 
-> While boot partition support with EMMC boot is useful, it is
-> constrained by the size of boot hardware partition itself.
->
-> In the case of K3 devices, tispl images can contain OP-TEE images that
-> can substantially vary in size and the u-boot image itself can vary over
-> time as we enable various features.
->
-> So use the CSD information in the case of EMMC_BOOT configuration being
-> enabled to pick boot partition or UDA FS mode operation to pick.
->
-> If EMMC_BOOT is disabled, then depend on filesystem configuration to
-> pick data from UDA.
->
-> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+On 23/08/23 13:22, Roger Quadros wrote:
+> Hi Siddharth,
+> 
+> On 23/08/2023 07:35, Siddharth Vadapalli wrote:
+>> Roger,
+>>
+>> On 22/08/23 17:43, Roger Quadros wrote:
+>>> Beagleplay has a buggy Ethernet PHY implementation for the Gigabit
+>>> PHY in the sense that it is non responsive over MDIO immediately
+>>> after power-up/reset.
+>>>
+>>> We need to either try multiple times or wait sufficiently long enough
+>>> (couple of 10s of ms?) before the PHY begins to respond correctly.
+>>
+>> Based on the datasheet at:
+>> https://datasheet.lcsc.com/lcsc/1912111437_Realtek-Semicon-RTL8211F-CG_C187932.pdf
+>> in the section 7.17. PHY Reset (Hardware Reset), it is stated that
+>> software has to wait for at least 50 ms before accessing the PHY
+>> registers. Is this why the for-loop in the code below tries for at most
+>> 5 times with a delay of 10 ms before the next try? If yes, then isn't it
+> 
+> Good catch. This might be the reason why PHY is not responding in the first
+> few attempts.
+> 
+>> better to move the delay into the realtek PHY driver at
+>> drivers/net/phy/realtek.c
+> 
+> We are currently at the MDIO bus driver where we don't even know what PHY
+> is on the bus. So this delay cannot come at the realtec PHY driver.
+> It has to come at the MDIO bus driver level.
 
-> ---
-> New patch
->  arch/arm/mach-k3/am625_init.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-> index 0e5d44269ebf..ad61030a56fa 100644
-> --- a/arch/arm/mach-k3/am625_init.c
-> +++ b/arch/arm/mach-k3/am625_init.c
-> @@ -228,7 +228,13 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boo=
-t_device)
->=20=20
->  	switch (bootmode) {
->  	case BOOT_DEVICE_EMMC:
-> +#if CONFIG_IS_ENABLED(SUPPORT_EMMC_BOOT)
-> +		return (spl_mmc_emmc_boot_partition(mmc) ? MMCSD_MODE_EMMCBOOT : MMCSD=
-_MODE_FS);
-> +#elif defined(CONFIG_SPL_FS_FAT) || defined(CONFIG_SPL_FS_EXT4)
-> +		return MMCSD_MODE_FS;
-> +#else
->  		return MMCSD_MODE_EMMCBOOT;
-> +#endif
->  	case BOOT_DEVICE_MMC:
->  		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
->  			return MMCSD_MODE_RAW;
-> --=20
-> 2.40.0
+Thank you for clarifying.
+
+> 
+>> Shouldn't it be the PHY driver which ensures that any reads/writes to the PHY
+>> registers are valid? It can ensure this by having a one time 50ms delay for the
+>> very first access to the PHY registers.> 
+
+...
+
+>>
+> 
+
+-- 
+Regards,
+Siddharth.
