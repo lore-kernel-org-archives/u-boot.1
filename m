@@ -4,72 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD01C3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECC1C7113B
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 21:49:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F032586525;
-	Wed, 23 Aug 2023 23:11:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F27F864E6;
+	Wed, 23 Aug 2023 23:49:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h1YbLXvN";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AC13s6AV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 687128652B; Wed, 23 Aug 2023 23:11:28 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00FF7864E8; Wed, 23 Aug 2023 23:49:14 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39B4486445
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:11:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C71A38644F
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 23:49:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34bbe9e916cso17351675ab.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:11:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692825084; x=1693429884;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rPnBLLsNfcoFxVMASOcbqO1QLjkh4ak0AeB8yLGd1/Q=;
- b=h1YbLXvNFYcZ4pinen97/s3YhlGMsXs18tddhvFQEebxdKSLlPhdQlq8pRO8Besr8V
- XsO31sRJRLJJyu20A2Kjv/zXfC18r5LQwy39+hsT4lpeq7AsDdeNQgf2XxUv0yBno0N+
- fWdsgjThLBqj+5SbbE+2jC9f+araZc+4Xu47g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692825084; x=1693429884;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rPnBLLsNfcoFxVMASOcbqO1QLjkh4ak0AeB8yLGd1/Q=;
- b=YhVZCfm/nL45xsGSFdd8mPDRcNX/sJQHfx1L+pZP0o/XK9z+3wpBQJ+32VGbWlB6Df
- kIn2V6eU7SKFQuMQqTVSGGL8nv5Ewz3DefZcM2qF03DsbwmnTqhm+dofD9c//nxp2S0o
- RYofdZ6GfZ/sd9FbDN7Py3UzX7GjQ51GVg5u7TXLP2wM1TmTGwGggI7Cr+npo+iQ8sVb
- 2VoDZE6XfrbXTnCmaOappskvz15P4ivAApwHNXkT3+qNj5COCv7A+YOONEV0yzXM6oHh
- U3LkneD4nEB2W2QCBGgX+aMgy67H31Gz9W8jB+aG94B867NF+2ZXYKb5UoQLm4VWiqEW
- xcPg==
-X-Gm-Message-State: AOJu0Yy4As2ucuaQ70HmO4J/zOHFbLdjRcQQAbwCPXVAgwBibKU1nhmH
- DwYsysF0SlkKbKxuepphyGIvc2MOGyib1v4veTU=
-X-Google-Smtp-Source: AGHT+IEHwo1JGvhUjzBhJD3KPyCmXnneEpBgwItNIZxcxASxnXsZ1Fte80MR0oxroZBg41bEY1rXrA==
-X-Received: by 2002:a05:6e02:1343:b0:34b:abfe:25c7 with SMTP id
- k3-20020a056e02134300b0034babfe25c7mr3476062ilr.22.1692825083304; 
- Wed, 23 Aug 2023 14:11:23 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
- by smtp.gmail.com with ESMTPSA id
- c15-20020a02c9cf000000b0041627abe120sm3921075jap.160.2023.08.23.14.11.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 14:11:23 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 19/20] x86: doc: Split out manual booting into its own file
-Date: Wed, 23 Aug 2023 15:10:36 -0600
-Message-ID: <20230823211059.1235147-20-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
-In-Reply-To: <20230823211059.1235147-1-sjg@chromium.org>
-References: <20230823211059.1235147-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
+ [62.143.244.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id BA6073F1DA; 
+ Wed, 23 Aug 2023 21:49:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1692827351;
+ bh=OQVSErzXPSbk9qzWgZP0B41qsr5v9qBrRLqqUanSzGI=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=AC13s6AVk/sIxMPMze77MtrY9gzL16E6nrS41Jzw+CKI/Raw/ZP6Nq2I77Nj8F86l
+ NdoDARuQfzMGGvpdUNkk6uscbGurkovjIJuQhymlHe+k9X9xQYmf4CvNBo1+VDUfXt
+ aOOk0XMTrunl7Ozr/30wnAruxK25bCikt+j04l3JfNofCALWtVKLClvshJ2IQKPPw0
+ 8RIK/eWuEyQKMEaIY+yqJr9ILDwVwQ+FF2efbwNI0hbwkmehB2/JMxxP8jczgFwA7o
+ c/+C/AbRcNVl7GOhMHDO46qPdQ6ErxygTN3YlXLX6SNeQeGZDSj9ut9FpaRjunPJu8
+ 5WzNtbEuZjbiQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] doc: describe TPL/VPL/SPL boot
+Date: Wed, 23 Aug 2023 23:49:55 +0200
+Message-Id: <20230823214955.60872-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,603 +73,363 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this out of the main file since for simple users it is easier to
-rely on standard boot.
+This is a stub describing how TPL, VPL, and SPL load the next boot stages
+on a detail level for users.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+For sure we will need a few patches on top to catch the whole complexity.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
+v2:
+	Mention that PowerPC uses a different naming convention.
+	Group boot devices by type
+	Correct reference to UBI
+	Fix typos
+---
+ doc/usage/index.rst    |   1 +
+ doc/usage/spl_boot.rst | 321 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 322 insertions(+)
+ create mode 100644 doc/usage/spl_boot.rst
 
-(no changes since v2)
-
-Changes in v2:
-- Add new patch
-
- doc/arch/x86/index.rst       |   1 +
- doc/arch/x86/manual_boot.rst | 276 +++++++++++++++++++++++++++++++++++
- doc/arch/x86/x86.rst         | 272 +---------------------------------
- 3 files changed, 280 insertions(+), 269 deletions(-)
- create mode 100644 doc/arch/x86/manual_boot.rst
-
-diff --git a/doc/arch/x86/index.rst b/doc/arch/x86/index.rst
-index 3dc19d603d4..69db0a5d648 100644
---- a/doc/arch/x86/index.rst
-+++ b/doc/arch/x86/index.rst
-@@ -9,3 +9,4 @@ x86
-    :maxdepth: 2
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 072db53614..7f0b26cc5a 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -4,6 +4,7 @@ Use U-Boot
+ .. toctree::
+    :maxdepth: 1
  
-    x86
-+   manual_boot
-diff --git a/doc/arch/x86/manual_boot.rst b/doc/arch/x86/manual_boot.rst
++   spl_boot
+    blkmap
+    dfu
+    environment
+diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
 new file mode 100644
-index 00000000000..ec069f2c397
+index 0000000000..7234d0b1b2
 --- /dev/null
-+++ b/doc/arch/x86/manual_boot.rst
-@@ -0,0 +1,276 @@
-+Booting Ubuntu Manually
-+-----------------------
++++ b/doc/usage/spl_boot.rst
+@@ -0,0 +1,321 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
 +
-+This shows a manual approach to booting Ubuntu without standard boot or the EFI
-+interface.
++Booting from TPL/SPL
++====================
 +
-+As an example of how to set up your boot flow with U-Boot, here are
-+instructions for starting Ubuntu from U-Boot. These instructions have been
-+tested on Minnowboard MAX with a SATA drive but are equally applicable on
-+other platforms and other media. There are really only four steps and it's a
-+very simple script, but a more detailed explanation is provided here for
-+completeness.
++The main U-Boot binary may be too large to be loaded directly by the Boot ROM.
++This was the own driver for splitting up U-Boot into multiple boot stages.
 +
-+Note: It is possible to set up U-Boot to boot automatically using syslinux.
-+It could also use the grub.cfg file (/efi/ubuntu/grub.cfg) to obtain the
-+GUID. If you figure these out, please post patches to this README.
++U-Boot typically goes through the following boot phases where TPL, VPL, and SPL
++are optional. While many boards use SPL only few use TPL.
 +
-+Firstly, you will need Ubuntu installed on an available disk. It should be
-+possible to make U-Boot start a USB start-up disk but for now let's assume
-+that you used another boot loader to install Ubuntu.
++TPL
++   Tiny program loader. Very early init, as tiny as possible. This loads SPL
++   (or VPL if enabled).
 +
-+Use the U-Boot command line to find the UUID of the partition you want to
-+boot. For example our disk is SCSI device 0::
++VPL
++   Optional verification step, which can select one of several SPL binaries,
++   if A/B verified boot is enabled. Implementation of the VPL logic is
++   work-in-progress. For now it just boots into SPL.
 +
-+   => part list scsi 0
++SPL
++   Secondary program loader. Sets up SDRAM and loads U-Boot proper. It may also
++   load other firmware components.
 +
-+   Partition Map for SCSI device 0  --   Partition Type: EFI
++U-Boot
++   U-Boot proper, containing the command line and the logic to load an
++   operating system, e.g. via UEFI.
 +
-+      Part	Start LBA	End LBA		Name
-+        Attributes
-+        Type GUID
-+        Partition GUID
-+      1	0x00000800	0x001007ff	""
-+        attrs:	0x0000000000000000
-+        type:	c12a7328-f81f-11d2-ba4b-00a0c93ec93b
-+        guid:	9d02e8e4-4d59-408f-a9b0-fd497bc9291c
-+      2	0x00100800	0x037d8fff	""
-+        attrs:	0x0000000000000000
-+        type:	0fc63daf-8483-4772-8e79-3d69d8477de4
-+        guid:	965c59ee-1822-4326-90d2-b02446050059
-+      3	0x037d9000	0x03ba27ff	""
-+        attrs:	0x0000000000000000
-+        type:	0657fd6d-a4ab-43c4-84e5-0933c84b4f4f
-+        guid:	2c4282bd-1e82-4bcf-a5ff-51dedbf39f17
-+      =>
++The naming convention on the PowerPC architecture deviates from the other
++archtitectures. Here the boot sequence is SPL->TPL->U-Boot.
 +
-+This shows that your SCSI disk has three partitions. The really long hex
-+strings are called Globally Unique Identifiers (GUIDs). You can look up the
-+'type' ones `here`_. On this disk the first partition is for EFI and is in
-+VFAT format (DOS/Windows)::
++Only main U-Boot has a command line interface.
 +
-+   => fatls scsi 0:1
-+               efi/
++Further usages for U-Boot SPL comprise:
 +
-+   0 file(s), 1 dir(s)
++* launching BL31 of ARM Trusted Firmware which invokes U-Boot as BL33
++* launching EDK II
++* launching Linux
++* launching RISC-V OpenSBI which invokes main U-Boot
++
++Target binaries
++---------------
++
++Binaries loaded by SPL/TPL can be:
++
++* raw binaries where the entry address equals the start address. This is the
++  only binary format supported by TPL.
++* :doc:`FIT <fit/index>` images
++* legacy U-Boot images
++
++Configuration
++~~~~~~~~~~~~~
++
++Raw images are only supported in SPL if CONFIG_SPL_RAW_IMAGE_SUPPORT=y.
++
++CONFIG_SPL_FIT=y and CONFIG_SPL_LOAD_FIT=y are needed to load FIT images.
++
++CONFIG_SPL_LEGACY_IMAGE_FORMAT=y is needed to load legacy U-Boot images.
++CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y enables checking the CRC32 of legacy U-Boot
++images.
++
++Image load methods
++------------------
++
++The image boot methods available for a board must be defined in two places:
++
++The board code implements a function board_boot_order() enumerating up to
++five boot methods and the sequence in which they are tried. (The maximum
++number of boot methods is currently hard coded as variable spl_boot_list[]).
++If there is only one boot method function, spl_boot_device() may be implemented
++instead.
++
++The configuration controls which of these boot methods are actually available.
++
++Loading from block devices
++~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++MMC1, MMC2, MMC2_2
++    These methods read an image from SD card or eMMC. The first digit after
++    'MMC' indicates the device number. Required configuration settings include:
++
++    * CONFIG_SPL_MMC=y or CONFIG_TPL_MMC=y
++
++    To use a PCI connected MMC controller you need to additionally specify:
++
++    * CONFIG_SPL_PCI=y
++
++    * CONFIG_SPL_PCI_PNP=y
++
++    * CONFIG_MMC=y
++
++    * CONFIG_MMC_PCI=y
++
++    * CONFIG_MMC_SDHCI=y
++
++    To load from a file system use:
++
++    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
++
++    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
++
++NVMe
++    This methods load the image from an NVMe drive.
++    Required configuration settings include:
++
++    * CONFIG_SPL_PCI=y
++
++    * CONFIG_SPL_PCI_PNP=y
++
++    * CONFIG_SPL_NVME=y
++
++    * CONFIG_SPL_NVME_PCI=y
++
++    * CONFIG_SPL_NVME_BOOT_DEVICE (number of the NVMe device)
++
++    * CONFIG_SYS_NVME_BOOT_PARTITION (partition to read from)
++
++    To load from a file system use:
++
++    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
++
++    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
++
++SATA
++    This method reads an image from a SATA drive.
++    Required configuration settings include:
++
++    * CONFIG_SPL_SATA=y or CONFIG_TPL_SATA=y
++
++    To use a PCIe connecte SATA controller you additionally need:
++
++    * CONFIG_SPL_PCI=y
++
++    * CONFIG_SPL_SATA=y
++
++    * CONFIG_SPL_AHCI_PCI=y
++
++    * CONFIG_SPL_PCI_PNP=y
++
++    To load from a file system use:
++
++    * CONFIG_SPL_FS_FAT=y
++
++    * CONFIG_SYS_SATA_FAT_BOOT_PARTITION=<partition number>
++
++    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
++
++USB
++    The USB method loads an image from a USB block device.
++    Required configuration settings include:
++
++    * CONFIG_SPL_USB_HOST=y
++
++    * CONFIG_SPL_USB_STORAGE=y
++
++    To use a PCI connected USB 3.0 controller you additionally need:
++
++    * CONFIG_SPL_FS_FAT=y
++
++    * CONFIG_SPL_PCI=y
++
++    * CONFIG_SPL_PCI_PNP=y
++
++    * CONFIG_USB=y
++
++    * CONFIG_USB_XHCI_HCD=y
++
++    * CONFIG_USB_XHCI_PCI=y
++
++    To load from a file system use:
++
++    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
++
++    * CONFIG_SYS_USB_FAT_BOOT_PARTITION=<partition number>
++
++    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
++
++Loading from flash devices
++~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++NAND
++    This method loads the image from NAND flash. To read from raw NAND the
++    following configuration settings are required:
++
++    * CONFIG_SPL_NAND_SUPPORT=y or CONFIG_TPL_NAND_SUPPORT=y
++
++    If CONFIG_SPL_NAND_RAW_ONLY=y only raw images can be loaded.
++
++    For using UBI (Unsorted Block Images) volumes to read from NAND the
++    following configuration settings are required:
++
++    * CONFIG_SPL_UBI=y or CONFIG_TPL_UBI=y
++
++    The UBI volume to read can either be specified
++
++    * by name using CONFIG_SPL_UBI_LOAD_BY_VOLNAME or
++
++    * by number using CONFIG_SPL_UBI_LOAD_MONITOR_ID.
++
++NOR
++    This method loads the image from NOR flash.
++    Required configuration settings include:
++
++    * CONFIG_SPL_NOR_SUPPORT=y or CONFIG_TPL_NOR_SUPPORT=y
++
++OneNAND
++    This methods loads the image from a OneNAND device. To read from raw OneNAND
++    the following configuration settings are required:
++
++    * CONFIG_SPL_ONENAND_SUPPORT=y or CONFIG_TPL_ONENAND_SUPPORT=y
++
++    For using the Ubi file system to read from NAND the following configuration
++    settings are required:
++
++    * CONFIG_SPL_UBI=y or CONFIG_TPL_UBI=y
++
++SPI
++    This method loads an image form SPI NOR flash.
++    Required configuration settings include:
++
++    * CONFIG_SPL_DM_SPI=y
++
++    * CONFIG_SPL_SPI_FLASH=y
++
++    * CONFIG_SPI_LOAD=y or CONFIG_TPL_SPI_LOAD=y
 +
 +
-+Partition 2 is 'Linux filesystem data' so that will be our root disk. It is
-+in ext2 format::
++Sunxi SPI
++    This method which is specific to Allwinner SoCs loads an image form SPI NOR
++    flash. Required configuration settings include:
 +
-+   => ext2ls scsi 0:2
-+   <DIR>       4096 .
-+   <DIR>       4096 ..
-+   <DIR>      16384 lost+found
-+   <DIR>       4096 boot
-+   <DIR>      12288 etc
-+   <DIR>       4096 media
-+   <DIR>       4096 bin
-+   <DIR>       4096 dev
-+   <DIR>       4096 home
-+   <DIR>       4096 lib
-+   <DIR>       4096 lib64
-+   <DIR>       4096 mnt
-+   <DIR>       4096 opt
-+   <DIR>       4096 proc
-+   <DIR>       4096 root
-+   <DIR>       4096 run
-+   <DIR>      12288 sbin
-+   <DIR>       4096 srv
-+   <DIR>       4096 sys
-+   <DIR>       4096 tmp
-+   <DIR>       4096 usr
-+   <DIR>       4096 var
-+   <SYM>         33 initrd.img
-+   <SYM>         30 vmlinuz
-+   <DIR>       4096 cdrom
-+   <SYM>         33 initrd.img.old
-+   =>
++    * CONFIG_SPL_SPI_SUNXI=y
 +
-+and if you look in the /boot directory you will see the kernel::
++Loading from other devices
++~~~~~~~~~~~~~~~~~~~~~~~~~~
 +
-+   => ext2ls scsi 0:2 /boot
-+   <DIR>       4096 .
-+   <DIR>       4096 ..
-+   <DIR>       4096 efi
-+   <DIR>       4096 grub
-+            3381262 System.map-3.13.0-32-generic
-+            1162712 abi-3.13.0-32-generic
-+             165611 config-3.13.0-32-generic
-+             176500 memtest86+.bin
-+             178176 memtest86+.elf
-+             178680 memtest86+_multiboot.bin
-+            5798112 vmlinuz-3.13.0-32-generic
-+             165762 config-3.13.0-58-generic
-+            1165129 abi-3.13.0-58-generic
-+            5823136 vmlinuz-3.13.0-58-generic
-+           19215259 initrd.img-3.13.0-58-generic
-+            3391763 System.map-3.13.0-58-generic
-+            5825048 vmlinuz-3.13.0-58-generic.efi.signed
-+           28304443 initrd.img-3.13.0-32-generic
-+   =>
++BOOTROM
++    The binary is loaded by the boot ROM.
++    Required configuration settings include:
 +
-+The 'vmlinuz' files contain a packaged Linux kernel. The format is a kind of
-+self-extracting compressed file mixed with some 'setup' configuration data.
-+Despite its size (uncompressed it is >10MB) this only includes a basic set of
-+device drivers, enough to boot on most hardware types.
++    * CONFIG_SPL_BOOTROM_SUPPORT=y or CONFIG_TPL_BOOTROM_SUPPORT=y
 +
-+The 'initrd' files contain a RAM disk. This is something that can be loaded
-+into RAM and will appear to Linux like a disk. Ubuntu uses this to hold lots
-+of drivers for whatever hardware you might have. It is loaded before the
-+real root disk is accessed.
++DFU
++    :doc:`Device Firmware Upgrade <dfu>` is used to load the binary into RAM.
++    Required configuration settings include:
 +
-+The numbers after the end of each file are the version. Here it is Linux
-+version 3.13. You can find the source code for this in the Linux tree with
-+the tag v3.13. The '.0' allows for additional Linux releases to fix problems,
-+but normally this is not needed. The '-58' is used by Ubuntu. Each time they
-+release a new kernel they increment this number. New Ubuntu versions might
-+include kernel patches to fix reported bugs. Stable kernels can exist for
-+some years so this number can get quite high.
++    * CONFIG_DFU=y
 +
-+The '.efi.signed' kernel is signed for EFI's secure boot. U-Boot has its own
-+secure boot mechanism - see `this`_ & `that`_. It cannot read .efi files
-+at present.
++    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG TPL_RAM_SUPPORT=y
 +
-+To boot Ubuntu from U-Boot the steps are as follows:
++Ethernet
++    This method loads an image over Ethernet. The BOOTP protocol is used to find
++    a TFTP server and binary name. The binary is downloaded via the TFTP
++    protocol. Required configuration settings include:
 +
-+1. Set up the boot arguments. Use the GUID for the partition you want to boot::
++    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
 +
-+   => setenv bootargs root=/dev/disk/by-partuuid/965c59ee-1822-4326-90d2-b02446050059 ro
++    * CONFIG_SPL_ETH_DEVICE=y or CONFIG_DM_USB_GADGET=y
 +
-+Here root= tells Linux the location of its root disk. The disk is specified
-+by its GUID, using '/dev/disk/by-partuuid/', a Linux path to a 'directory'
-+containing all the GUIDs Linux has found. When it starts up, there will be a
-+file in that directory with this name in it. It is also possible to use a
-+device name here, see later.
++FEL
++    This method does not actually load an image for U-Boot.
++    FEL is a routine contained in the boot ROM of Allwinner SoCs which serves
++    for the initial programming or recovery via USB
 +
-+2. Load the kernel. Since it is an ext2/4 filesystem we can do::
++RAM
++    This method uses an image preloaded into RAM.
++    Required configuration settings include:
 +
-+   => ext2load scsi 0:2 03000000 /boot/vmlinuz-3.13.0-58-generic
++    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG_TPL_RAM_SUPPORT=y
 +
-+The address 30000000 is arbitrary, but there seem to be problems with using
-+small addresses (sometimes Linux cannot find the ramdisk). This is 48MB into
-+the start of RAM (which is at 0 on x86).
++    * CONFIG_RAM_DEVICE=y
 +
-+3. Load the ramdisk (to 64MB)::
++Sandbox file
++    On the sandbox this method loads an image from the host file system.
 +
-+   => ext2load scsi 0:2 04000000 /boot/initrd.img-3.13.0-58-generic
++Sandbox image
++    On the sandbox this method loads an image from the host file system.
 +
-+4. Start up the kernel. We need to know the size of the ramdisk, but can use
-+   a variable for that. U-Boot sets 'filesize' to the size of the last file it
-+   loaded::
++SEMIHOSTING
++    When running in an ARM or RISC-V virtual machine the semihosting method can
++    be used to load an image from the host file system.
++    Required configuration settings include:
 +
-+   => zboot 03000000 0 04000000 ${filesize}
++    * CONFIG_SPL_SEMIHOSTING=y
 +
-+Type 'help zboot' if you want to see what the arguments are. U-Boot on x86 is
-+quite verbose when it boots a kernel. You should see these messages from
-+U-Boot::
++    * CONFIG_SPL_SEMIHOSTING_FALLBACK=y
 +
-+   Valid Boot Flag
-+   Setup Size = 0x00004400
-+   Magic signature found
-+   Using boot protocol version 2.0c
-+   Linux kernel version 3.13.0-58-generic (buildd@allspice) #97-Ubuntu SMP Wed Jul 8 02:56:15 UTC 2015
-+   Building boot_params at 0x00090000
-+   Loading bzImage at address 100000 (5805728 bytes)
-+   Magic signature found
-+   Initial RAM disk at linear address 0x04000000, size 19215259 bytes
-+   Kernel command line: "root=/dev/disk/by-partuuid/965c59ee-1822-4326-90d2-b02446050059 ro"
++    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=<path to file>
 +
-+   Starting kernel ...
++UART
++    This method loads an image via the Y-Modem protocol from the UART.
++    Required configuration settings include:
 +
-+U-Boot prints out some bootstage timing. This is more useful if you put the
-+above commands into a script since then it will be faster::
++    * CONFIG_SPL_YMODEM_SUPPORT=y or CONFIG_TPL_YMODEM_SUPPORT=y
 +
-+   Timer summary in microseconds:
-+          Mark    Elapsed  Stage
-+             0          0  reset
-+       241,535    241,535  board_init_r
-+     2,421,611  2,180,076  id=64
-+     2,421,790        179  id=65
-+     2,428,215      6,425  main_loop
-+    48,860,584 46,432,369  start_kernel
++USB SDP
++    This method loads the image using the Serial Download Protocol as
++    implemented by the boot ROM of the i.MX family of SoCs.
 +
-+   Accumulated time:
-+                  240,329  ahci
-+                1,422,704  vesa display
++    Required configuration settings include:
 +
-+Now the kernel actually starts (if you want to examine kernel boot up message on
-+the serial console, append "console=ttyS0,115200" to the kernel command line)::
++    * CONFIG_SPL_SERIAL=y
 +
-+   [    0.000000] Initializing cgroup subsys cpuset
-+   [    0.000000] Initializing cgroup subsys cpu
-+   [    0.000000] Initializing cgroup subsys cpuacct
-+   [    0.000000] Linux version 3.13.0-58-generic (buildd@allspice) (gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1) ) #97-Ubuntu SMP Wed Jul 8 02:56:15 UTC 2015 (Ubuntu 3.13.0-58.97-generic 3.13.11-ckt22)
-+   [    0.000000] Command line: root=/dev/disk/by-partuuid/965c59ee-1822-4326-90d2-b02446050059 ro console=ttyS0,115200
++    * CONFIG_SPL_USB_SDP_SUPPORT=y or CONFIG_TPL_USB_SDP_SUPPORT
 +
-+It continues for a long time. Along the way you will see it pick up your
-+ramdisk::
++VBE Simple
++    This method is used by the VPL stage to extract the next stage image from
++    the loaded image.
 +
-+   [    0.000000] RAMDISK: [mem 0x04000000-0x05253fff]
-+   ...
-+   [    0.788540] Trying to unpack rootfs image as initramfs...
-+   [    1.540111] Freeing initrd memory: 18768K (ffff880004000000 - ffff880005254000)
-+   ...
++    Required configuration settings include:
 +
-+Later it actually starts using it::
++    * CONFIG_VPL=y
 +
-+   Begin: Running /scripts/local-premount ... done.
++    * CONFIG_SPL_BOOTMETH_VBE_SIMPLE_FW=y or CONFIG_TPL_BOOTMETH_VBE_SIMPLE_FW=y
 +
-+You should also see your boot disk turn up::
++XIP
++    This method executes an image in place.
 +
-+   [    4.357243] scsi 1:0:0:0: Direct-Access     ATA      ADATA SP310      5.2  PQ: 0 ANSI: 5
-+   [    4.366860] sd 1:0:0:0: [sda] 62533296 512-byte logical blocks: (32.0 GB/29.8 GiB)
-+   [    4.375677] sd 1:0:0:0: Attached scsi generic sg0 type 0
-+   [    4.381859] sd 1:0:0:0: [sda] Write Protect is off
-+   [    4.387452] sd 1:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
-+   [    4.399535]  sda: sda1 sda2 sda3
++    Required configuration settings include:
 +
-+Linux has found the three partitions (sda1-3). Mercifully it doesn't print out
-+the GUIDs. In step 1 above we could have used::
-+
-+   setenv bootargs root=/dev/sda2 ro
-+
-+instead of the GUID. However if you add another drive to your board the
-+numbering may change whereas the GUIDs will not. So if your boot partition
-+becomes sdb2, it will still boot. For embedded systems where you just want to
-+boot the first disk, you have that option.
-+
-+The last thing you will see on the console is mention of plymouth (which
-+displays the Ubuntu start-up screen) and a lot of 'Starting' messages::
-+
-+   * Starting Mount filesystems on boot                                   [ OK ]
-+
-+After a pause you should see a login screen on your display and you are done.
-+
-+If you want to put this in a script you can use something like this::
-+
-+   setenv bootargs root=UUID=b2aaf743-0418-4d90-94cc-3e6108d7d968 ro
-+   setenv boot zboot 03000000 0 04000000 \${filesize}
-+   setenv bootcmd "ext2load scsi 0:2 03000000 /boot/vmlinuz-3.13.0-58-generic; ext2load scsi 0:2 04000000 /boot/initrd.img-3.13.0-58-generic; run boot"
-+   saveenv
-+
-+The \ is to tell the shell not to evaluate ${filesize} as part of the setenv
-+command.
-+
-+You can also bake this behaviour into your build by hard-coding the
-+environment variables if you add this to minnowmax.h:
-+
-+.. code-block:: c
-+
-+	#undef CONFIG_BOOTCOMMAND
-+	#define CONFIG_BOOTCOMMAND	\
-+		"ext2load scsi 0:2 03000000 /boot/vmlinuz-3.13.0-58-generic; " \
-+		"ext2load scsi 0:2 04000000 /boot/initrd.img-3.13.0-58-generic; " \
-+		"run boot"
-+
-+	#undef CFG_EXTRA_ENV_SETTINGS
-+	#define CFG_EXTRA_ENV_SETTINGS "boot=zboot 03000000 0 04000000 ${filesize}"
-+
-+and change CONFIG_BOOTARGS value in configs/minnowmax_defconfig to::
-+
-+   CONFIG_BOOTARGS="root=/dev/sda2 ro"
-+
-+.. _here: https://en.wikipedia.org/wiki/GUID_Partition_Table
-+.. _this: http://events.linuxfoundation.org/sites/events/files/slides/chromeos_and_diy_vboot_0.pdf
-+.. _that: http://events.linuxfoundation.org/sites/events/files/slides/elce-2014.pdf
-diff --git a/doc/arch/x86/x86.rst b/doc/arch/x86/x86.rst
-index e75b5a73ffc..c435225da4e 100644
---- a/doc/arch/x86/x86.rst
-+++ b/doc/arch/x86/x86.rst
-@@ -97,272 +97,9 @@ mtrr
- 
- Booting Ubuntu
- --------------
--As an example of how to set up your boot flow with U-Boot, here are
--instructions for starting Ubuntu from U-Boot. These instructions have been
--tested on Minnowboard MAX with a SATA drive but are equally applicable on
--other platforms and other media. There are really only four steps and it's a
--very simple script, but a more detailed explanation is provided here for
--completeness.
--
--Note: It is possible to set up U-Boot to boot automatically using syslinux.
--It could also use the grub.cfg file (/efi/ubuntu/grub.cfg) to obtain the
--GUID. If you figure these out, please post patches to this README.
--
--Firstly, you will need Ubuntu installed on an available disk. It should be
--possible to make U-Boot start a USB start-up disk but for now let's assume
--that you used another boot loader to install Ubuntu.
--
--Use the U-Boot command line to find the UUID of the partition you want to
--boot. For example our disk is SCSI device 0::
--
--   => part list scsi 0
--
--   Partition Map for SCSI device 0  --   Partition Type: EFI
--
--      Part	Start LBA	End LBA		Name
--        Attributes
--        Type GUID
--        Partition GUID
--      1	0x00000800	0x001007ff	""
--        attrs:	0x0000000000000000
--        type:	c12a7328-f81f-11d2-ba4b-00a0c93ec93b
--        guid:	9d02e8e4-4d59-408f-a9b0-fd497bc9291c
--      2	0x00100800	0x037d8fff	""
--        attrs:	0x0000000000000000
--        type:	0fc63daf-8483-4772-8e79-3d69d8477de4
--        guid:	965c59ee-1822-4326-90d2-b02446050059
--      3	0x037d9000	0x03ba27ff	""
--        attrs:	0x0000000000000000
--        type:	0657fd6d-a4ab-43c4-84e5-0933c84b4f4f
--        guid:	2c4282bd-1e82-4bcf-a5ff-51dedbf39f17
--      =>
--
--This shows that your SCSI disk has three partitions. The really long hex
--strings are called Globally Unique Identifiers (GUIDs). You can look up the
--'type' ones `here`_. On this disk the first partition is for EFI and is in
--VFAT format (DOS/Windows)::
--
--   => fatls scsi 0:1
--               efi/
--
--   0 file(s), 1 dir(s)
--
--
--Partition 2 is 'Linux filesystem data' so that will be our root disk. It is
--in ext2 format::
--
--   => ext2ls scsi 0:2
--   <DIR>       4096 .
--   <DIR>       4096 ..
--   <DIR>      16384 lost+found
--   <DIR>       4096 boot
--   <DIR>      12288 etc
--   <DIR>       4096 media
--   <DIR>       4096 bin
--   <DIR>       4096 dev
--   <DIR>       4096 home
--   <DIR>       4096 lib
--   <DIR>       4096 lib64
--   <DIR>       4096 mnt
--   <DIR>       4096 opt
--   <DIR>       4096 proc
--   <DIR>       4096 root
--   <DIR>       4096 run
--   <DIR>      12288 sbin
--   <DIR>       4096 srv
--   <DIR>       4096 sys
--   <DIR>       4096 tmp
--   <DIR>       4096 usr
--   <DIR>       4096 var
--   <SYM>         33 initrd.img
--   <SYM>         30 vmlinuz
--   <DIR>       4096 cdrom
--   <SYM>         33 initrd.img.old
--   =>
--
--and if you look in the /boot directory you will see the kernel::
--
--   => ext2ls scsi 0:2 /boot
--   <DIR>       4096 .
--   <DIR>       4096 ..
--   <DIR>       4096 efi
--   <DIR>       4096 grub
--            3381262 System.map-3.13.0-32-generic
--            1162712 abi-3.13.0-32-generic
--             165611 config-3.13.0-32-generic
--             176500 memtest86+.bin
--             178176 memtest86+.elf
--             178680 memtest86+_multiboot.bin
--            5798112 vmlinuz-3.13.0-32-generic
--             165762 config-3.13.0-58-generic
--            1165129 abi-3.13.0-58-generic
--            5823136 vmlinuz-3.13.0-58-generic
--           19215259 initrd.img-3.13.0-58-generic
--            3391763 System.map-3.13.0-58-generic
--            5825048 vmlinuz-3.13.0-58-generic.efi.signed
--           28304443 initrd.img-3.13.0-32-generic
--   =>
--
--The 'vmlinuz' files contain a packaged Linux kernel. The format is a kind of
--self-extracting compressed file mixed with some 'setup' configuration data.
--Despite its size (uncompressed it is >10MB) this only includes a basic set of
--device drivers, enough to boot on most hardware types.
--
--The 'initrd' files contain a RAM disk. This is something that can be loaded
--into RAM and will appear to Linux like a disk. Ubuntu uses this to hold lots
--of drivers for whatever hardware you might have. It is loaded before the
--real root disk is accessed.
--
--The numbers after the end of each file are the version. Here it is Linux
--version 3.13. You can find the source code for this in the Linux tree with
--the tag v3.13. The '.0' allows for additional Linux releases to fix problems,
--but normally this is not needed. The '-58' is used by Ubuntu. Each time they
--release a new kernel they increment this number. New Ubuntu versions might
--include kernel patches to fix reported bugs. Stable kernels can exist for
--some years so this number can get quite high.
--
--The '.efi.signed' kernel is signed for EFI's secure boot. U-Boot has its own
--secure boot mechanism - see `this`_ & `that`_. It cannot read .efi files
--at present.
--
--To boot Ubuntu from U-Boot the steps are as follows:
--
--1. Set up the boot arguments. Use the GUID for the partition you want to boot::
--
--   => setenv bootargs root=/dev/disk/by-partuuid/965c59ee-1822-4326-90d2-b02446050059 ro
--
--Here root= tells Linux the location of its root disk. The disk is specified
--by its GUID, using '/dev/disk/by-partuuid/', a Linux path to a 'directory'
--containing all the GUIDs Linux has found. When it starts up, there will be a
--file in that directory with this name in it. It is also possible to use a
--device name here, see later.
--
--2. Load the kernel. Since it is an ext2/4 filesystem we can do::
--
--   => ext2load scsi 0:2 03000000 /boot/vmlinuz-3.13.0-58-generic
--
--The address 30000000 is arbitrary, but there seem to be problems with using
--small addresses (sometimes Linux cannot find the ramdisk). This is 48MB into
--the start of RAM (which is at 0 on x86).
--
--3. Load the ramdisk (to 64MB)::
--
--   => ext2load scsi 0:2 04000000 /boot/initrd.img-3.13.0-58-generic
--
--4. Start up the kernel. We need to know the size of the ramdisk, but can use
--   a variable for that. U-Boot sets 'filesize' to the size of the last file it
--   loaded::
--
--   => zboot 03000000 0 04000000 ${filesize}
--
--Type 'help zboot' if you want to see what the arguments are. U-Boot on x86 is
--quite verbose when it boots a kernel. You should see these messages from
--U-Boot::
--
--   Valid Boot Flag
--   Setup Size = 0x00004400
--   Magic signature found
--   Using boot protocol version 2.0c
--   Linux kernel version 3.13.0-58-generic (buildd@allspice) #97-Ubuntu SMP Wed Jul 8 02:56:15 UTC 2015
--   Building boot_params at 0x00090000
--   Loading bzImage at address 100000 (5805728 bytes)
--   Magic signature found
--   Initial RAM disk at linear address 0x04000000, size 19215259 bytes
--   Kernel command line: "root=/dev/disk/by-partuuid/965c59ee-1822-4326-90d2-b02446050059 ro"
--
--   Starting kernel ...
--
--U-Boot prints out some bootstage timing. This is more useful if you put the
--above commands into a script since then it will be faster::
--
--   Timer summary in microseconds:
--          Mark    Elapsed  Stage
--             0          0  reset
--       241,535    241,535  board_init_r
--     2,421,611  2,180,076  id=64
--     2,421,790        179  id=65
--     2,428,215      6,425  main_loop
--    48,860,584 46,432,369  start_kernel
--
--   Accumulated time:
--                  240,329  ahci
--                1,422,704  vesa display
--
--Now the kernel actually starts (if you want to examine kernel boot up message on
--the serial console, append "console=ttyS0,115200" to the kernel command line)::
--
--   [    0.000000] Initializing cgroup subsys cpuset
--   [    0.000000] Initializing cgroup subsys cpu
--   [    0.000000] Initializing cgroup subsys cpuacct
--   [    0.000000] Linux version 3.13.0-58-generic (buildd@allspice) (gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1) ) #97-Ubuntu SMP Wed Jul 8 02:56:15 UTC 2015 (Ubuntu 3.13.0-58.97-generic 3.13.11-ckt22)
--   [    0.000000] Command line: root=/dev/disk/by-partuuid/965c59ee-1822-4326-90d2-b02446050059 ro console=ttyS0,115200
--
--It continues for a long time. Along the way you will see it pick up your
--ramdisk::
--
--   [    0.000000] RAMDISK: [mem 0x04000000-0x05253fff]
--   ...
--   [    0.788540] Trying to unpack rootfs image as initramfs...
--   [    1.540111] Freeing initrd memory: 18768K (ffff880004000000 - ffff880005254000)
--   ...
--
--Later it actually starts using it::
--
--   Begin: Running /scripts/local-premount ... done.
--
--You should also see your boot disk turn up::
--
--   [    4.357243] scsi 1:0:0:0: Direct-Access     ATA      ADATA SP310      5.2  PQ: 0 ANSI: 5
--   [    4.366860] sd 1:0:0:0: [sda] 62533296 512-byte logical blocks: (32.0 GB/29.8 GiB)
--   [    4.375677] sd 1:0:0:0: Attached scsi generic sg0 type 0
--   [    4.381859] sd 1:0:0:0: [sda] Write Protect is off
--   [    4.387452] sd 1:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
--   [    4.399535]  sda: sda1 sda2 sda3
--
--Linux has found the three partitions (sda1-3). Mercifully it doesn't print out
--the GUIDs. In step 1 above we could have used::
--
--   setenv bootargs root=/dev/sda2 ro
--
--instead of the GUID. However if you add another drive to your board the
--numbering may change whereas the GUIDs will not. So if your boot partition
--becomes sdb2, it will still boot. For embedded systems where you just want to
--boot the first disk, you have that option.
--
--The last thing you will see on the console is mention of plymouth (which
--displays the Ubuntu start-up screen) and a lot of 'Starting' messages::
--
--   * Starting Mount filesystems on boot                                   [ OK ]
--
--After a pause you should see a login screen on your display and you are done.
--
--If you want to put this in a script you can use something like this::
--
--   setenv bootargs root=UUID=b2aaf743-0418-4d90-94cc-3e6108d7d968 ro
--   setenv boot zboot 03000000 0 04000000 \${filesize}
--   setenv bootcmd "ext2load scsi 0:2 03000000 /boot/vmlinuz-3.13.0-58-generic; ext2load scsi 0:2 04000000 /boot/initrd.img-3.13.0-58-generic; run boot"
--   saveenv
--
--The \ is to tell the shell not to evaluate ${filesize} as part of the setenv
--command.
--
--You can also bake this behaviour into your build by hard-coding the
--environment variables if you add this to minnowmax.h:
--
--.. code-block:: c
--
--	#undef CONFIG_BOOTCOMMAND
--	#define CONFIG_BOOTCOMMAND	\
--		"ext2load scsi 0:2 03000000 /boot/vmlinuz-3.13.0-58-generic; " \
--		"ext2load scsi 0:2 04000000 /boot/initrd.img-3.13.0-58-generic; " \
--		"run boot"
--
--	#undef CFG_EXTRA_ENV_SETTINGS
--	#define CFG_EXTRA_ENV_SETTINGS "boot=zboot 03000000 0 04000000 ${filesize}"
--
--and change CONFIG_BOOTARGS value in configs/minnowmax_defconfig to::
--
--   CONFIG_BOOTARGS="root=/dev/sda2 ro"
-+Typically U-Boot boots distributions automatically so long an `CONFIG_BOOTSTD`,
-+`CONFIG_BOOTSTD_DEFAULTS` and `CONFIG_EFI_LOADER` are enabled. See
-+:doc:`manual_boot` for how to do this manually.
- 
- Test with SeaBIOS
- -----------------
-@@ -747,8 +484,5 @@ TODO List
- .. _microcode: http://en.wikipedia.org/wiki/Microcode
- .. _SFI: http://simplefirmware.org
- .. _MP: http://www.intel.com/design/archives/processors/pro/docs/242016.htm
--.. _here: https://en.wikipedia.org/wiki/GUID_Partition_Table
--.. _this: http://events.linuxfoundation.org/sites/events/files/slides/chromeos_and_diy_vboot_0.pdf
--.. _that: http://events.linuxfoundation.org/sites/events/files/slides/elce-2014.pdf
- .. _SeaBIOS: http://www.seabios.org/SeaBIOS
- .. _ACPI: http://www.acpi.info
++    * CONFIG_SPL_XIP_SUPPORT
 -- 
-2.42.0.rc1.204.g551eb34607-goog
+2.40.1
 
