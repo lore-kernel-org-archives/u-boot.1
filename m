@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A7CFEE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 03:23:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE3FEE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 03:23:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 543D88647F;
-	Wed, 23 Aug 2023 05:23:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A9E986434;
+	Wed, 23 Aug 2023 05:23:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="iC/YNqWe";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="mraektMA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCB6B8643C; Wed, 23 Aug 2023 05:23:08 +0200 (CEST)
+ id A1715864B8; Wed, 23 Aug 2023 05:23:12 +0200 (CEST)
 Received: from JPN01-TYC-obe.outbound.protection.outlook.com
- (mail-tycjpn01acsn20808.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:7010::808])
+ (mail-tycjpn01olkn20803.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:7010::803])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0702833DB
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 05:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E90D2833DB
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 05:23:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=wiagn233@outlook.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bGhfnh4CXFmVrbZ8e3WU+FBGFhBwrXObo9CiDBRm7wYcjiESb0lgh1xE6s4OAaRBO4nVjlJuH8OpFdtDTCox9P+io+BWAG5oBG+p8OBAR917o6Mx5GLl38HxLuFrjwLA94k3k4CJUJDRQDPN+8QQwHGOSO9fULwHyLM9+ba8U4lnqKnCS3PVHrhaGeCsw1Ci5hTOMk62SwlgiJBJh297FMdYFriTR0w7fwxsOpl/VFh5UDxTGrvX0yVS8nvaRW7tpB0oG6YwTF3wPu0RfcXJD30pOI4/hq/86LsPk3DGe0f2v/iWpZkrJIXHHwjixW+2Gxr5qnNcdEP6dIy9NkZyJg==
+ b=ltdpAp/+cuiR30xNSKvpaoti1BrItskgBYVKS7OupqEqlmV1D5molaOa98XTRnWKxte+Pallyd+ixtcBGW5OAA43wvg4l0Rq2S4TU+lzvyBDgIKlP2ZxJrqzKptFZgAjN7SVFDG2/70I5pCy0qmP/ZYXKlm1hg5I1PTPwRPD5lG42FKu8K6LS76o1wXAQJ7iF0bxEe484v5MgUitV3T55QnGfseKufPLWuLrz1VY17+qjN2JKOG/ffgJ2GYGUZWU8pHKK7JbpNZH9nweknHm/5As7CB+RqpQo3SS12U6S5X68Ry2JLpo7BsHORiQX9TUZDGMjw+iXqK5EpZQjQIp2Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pibq29IaUaZ5OBg46/2KN/0IYkCC9mhEAFI0ytDizXA=;
- b=nMotDchhGhfQY1p2eZAMOdcO41iv1z6JQq9XENaQX3WHG0v51r5WvZVl/8pjxBTxXd9oqGKho3QPdFgMwRXMviPB4NWtjNjeEXOCRZq+kMWbBX89h0TfpFmmDhFnbagEpD2zVi4j+1hZyxV1CPZnq0WeyD/hGtOiElMFzvbBY3TA+qCwAgslEn6lBjTbAHIvCzX4ImhDmauCGyDVh0vbo+andK2lsXw7Mlq714d/gza12MR6HA3ZBq51pV97hpG4NUoaaY//Tb5Vzf389uFU1oUDvBKZ3z7v78NZIPGRjcSjXCDsNsLt2XjQeGe6NNC7QLxpOzYIZkb3/QFuSYO+LA==
+ bh=zOnWvr/D7kr1r66QElcZNdcjb/bJLJCdd8ePJie5wSU=;
+ b=UNgbSufK2iibybvPIKywHeLYa9t07XLfxzsq606lSYWxCJjokaAwWX4j90uf3z5b2+8JKGMtXXB/74XhnabMaU/OpUBfGHKm4AAv2WsvWlGVwSK6igvfkotRz5LiyN6P6KGqTyb8CUqzVDQMUluZWFTUqtIaU5mFKQ8RTcUZlWwJvG2qPBQqAdAomuVII8+x6QT8Y+EvPGrMyoXS8Yjl5O+o/MQc58Af4Kx+EKJ3Or1Od7ATeO6kcp7QJz2CUhrSMk5+wRxAIOXFNaIT5cf9NZRQ6kxZb8kMBNbAbSShcN9zSfxcPIfrQWEoofMOTGqNKCtZBYqGPd2mmlV9rWUstw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pibq29IaUaZ5OBg46/2KN/0IYkCC9mhEAFI0ytDizXA=;
- b=iC/YNqWeWRELqquFQWR/lz2brzqLT5d6T46T9Vd+NFdWSa36aPKrEIXsNms2HhUQB0KMOR6Ip9JS3AULC4oKaIu+DEnq5onx6JlAlokKwWCqowZQudUPdURtdRwUdLEwDGVYD9TYbBcj/YXj7+6pS/Yth63+4dJLZXjLVH5FI4FMNNF+BZG0u9iUfRmDufqctlv05vxFhRyWb9wWZsR7FvRDl68l6DjGpbXFyvoSHOPT3/fFcR/NFt/Bz0zCsTkIHLfqorxCvJPL7tYW14tIvYnBtObpbspmnAU+L91xgPW8mECUWmz71KIlGNGxsZ2jzTIg3m0SglVvwQ9G3rZKsA==
+ bh=zOnWvr/D7kr1r66QElcZNdcjb/bJLJCdd8ePJie5wSU=;
+ b=mraektMAoGgEkz0U9WzkujdKnNQVo57FrI2moz6Xm5Dpgz6FJQGZuoB6ywfOx9pKFphBvJi9A0MnJJ3kIM7upMsBAgZszbFLR4EwSmS2mcpBufZrwuf3aFKWpuPTUL08HQD11ozePAasLOk2HDLDA9wuUV4zO1KT6s9psb8h+PV6hN9j1S6kClikFo5Z4+Uqquy6JP1w7ZArQKynw9F9QHzsNcWL/oB+fzhBer1/WuLlZp+rLUJbfIBzIc8v6QXRf8ZDWOYUtr3+fSyOl5vg03phjlBQSG24T1GBj/H42NK7VxEqiQ+Ce2QVDFWmhdxsgMYQt50dQrVxLn++uDd7EA==
 Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:23e::10)
  by TYWP286MB3125.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2a1::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6723.14; Wed, 23 Aug
- 2023 03:22:59 +0000
+ 2023 03:23:03 +0000
 Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
  ([fe80::bfaf:cb8:24b7:f67b]) by TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
  ([fe80::bfaf:cb8:24b7:f67b%6]) with mapi id 15.20.6723.015; Wed, 23 Aug 2023
- 03:22:59 +0000
+ 03:23:03 +0000
 From: Shengyu Qu <wiagn233@outlook.com>
 To: rick@andestech.com, ycliang@andestech.com, sjg@chromium.org,
  andre.przywara@arm.com, marek.vasut+renesas@mailbox.org,
@@ -58,53 +58,55 @@ To: rick@andestech.com, ycliang@andestech.com, sjg@chromium.org,
  yanhong.wang@starfivetech.com, minda.chen@starfivetech.com,
  seanga2@gmail.com, u-boot@lists.denx.de
 Cc: Shengyu Qu <wiagn233@outlook.com>
-Subject: [PATCH v5 0/3] arch: riscv: jh7110: Correctly zero L2 LIM
-Date: Wed, 23 Aug 2023 11:21:03 +0800
-Message-ID: <TY3P286MB261133AB5D40B0C5AAA0FDDC981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+Subject: [PATCH v5 1/3] Kconfig: Add SPL_SYS_MALLOC_CLEAR_ON_INIT
+Date: Wed, 23 Aug 2023 11:21:04 +0800
+Message-ID: <TY3P286MB2611136D3ECB23E5003256A4981CA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
 X-Mailer: git-send-email 2.42.0.windows.1
+In-Reply-To: <20230823032107.1792-1-wiagn233@outlook.com>
+References: <20230823032107.1792-1-wiagn233@outlook.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-TMN: [HkCT3D5YSSXGMtp3j7J3LXAPhaI1T3P2qbXfyCmw75wa5m4JqqFvOjN32hDIIUxr]
+X-TMN: [51rCeW6w2ybGJqXBFPmAgaj7Q+Cz7W5vhV7vOTxlecThiOzmJlJloqWIGpsvPym8]
 X-ClientProxiedBy: SI2PR06CA0005.apcprd06.prod.outlook.com
  (2603:1096:4:186::12) To TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:400:23e::10)
-X-Microsoft-Original-Message-ID: <20230823032107.1792-1-wiagn233@outlook.com>
+X-Microsoft-Original-Message-ID: <20230823032107.1792-2-wiagn233@outlook.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY3P286MB2611:EE_|TYWP286MB3125:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0764e141-1529-45aa-cd39-08dba3883fd4
-X-MS-Exchange-SLBlob-MailProps: 0wLWl8rLpvtspoS0ND55m3zeS6sGOowrgC/yw6osDGptHv13UpDRsuIKgAfbzof4y+zdS26Vz+IWWIy5kAV3xAQFZiBwtlqTmQKVjcNs3AJvFNKwQmFHhehUURKdvS8vVX7VTRo3+OJeTwKHIA0HvukKyuBZ4fLqID8ACpxlx46r2MjFKy4k8DaC4Z/Fk3nxK9TdD40KgqHlJzwb3BSrSuzLitMiFG7GPmbjk3HZB+IScFXQm0ZkWMuNhDq+/V9Gsi6oIl2Q+Ww1u5tosnjrA5Zujq0IYr1LSuHRSKB+rmNRXT5z/buU1PnWHxRZTwJtyhJa9dxUL1tDb5ubAzf3il3DJjnSwq+h+477Eb9k6zDyAwaXEXk+1wm0beWCsipbXwegNlESV1JK3gV1XKLVvtN+rerim/VaZ8komBwB99myaX3adz3chIZneaomJkdwWQ544px+33KX+Wye2GcAHlIOaPSjhlXNkxlRAms6EituoRZejc5gduMwESFc8PI58vvuyX+D/Unh9I8nXZyjaIB/de/pgM2peLEhV9X1VPq/mtdbRIeN1i9t1R6EzkLrPNCqzZMyvQMOxfDHuALfMx+ORX5FsYurcTk2Hv1iXffVjJusUlkq5xN4wdxNFDIMah4QTn3L4ItL7wkamOSWdHWEPti5aChtRqZeWgabVem2DtsX1cJQSnOn9McK/CLsvEiT1gvLzehBQoRdnt8TQ3UKs4u2U0FngGnphPkoMJedQzzhhu8mVQJWhjXkqPEuPZd0GpAV5Rc=
+X-MS-Office365-Filtering-Correlation-Id: af8698ae-e014-4714-fe4d-08dba38842b2
+X-MS-Exchange-SLBlob-MailProps: YfhX3sd/0TWiCif6GDuV3ScvVn8CDwm+8lU1G1qo03AZh6Yv76g9twEXU7AAHXXWBOhH8ALCOPgUbdcEZu671vVUfxem4HaGLKd1KpKizPgcFT2CLn+wX73G6oWif9HvnHmt29Rh8KYyGUF6Qejp0TCJ+c1o0vg25oGYKRCUKnTjamDDeYEqfUoya03ia61N8c4xhFf1qVODbD4HzTqDYSxSG6do+7dbKzaNg0987EFqPxTYzOFWlv30gHlJEdjPxWycbDpb/CdI4BDOa5BN1GW1l8ENGJQBJLV2ulM4F0nrp4+FUzD7XsI+EQSS6TNeFe0RAeXSPspklVblRBFccCmL6ke5/ZpPjMZWApVV3AlnSVJ/V38vSoT8tcVUaNGf+QRpfVK8xfd3okphbUq67qaIPLqMfKYn4FqTKA0niTvzOf7ljxrs7wAf8kWtXWxJMPcz8H8qCp9h2F1yQv0ALMzb0eGeC9kOCVO35trl4ZsHGhRCXHJDK8w0qNaOY6+do5Sswv8FnVAsjgye70c8A3cG2b1whtoegQSkX7mZ5dfURCkq9eI025+JC7Z5KQlN1OcMlNX8kpVnLsLGnvV3djp23c0w05JTSnrf2Iab9zno7S0WJtsfM5sQZIuxkPArvTudOnnZryK11yqHi32m+4gV2qFicunzy4FTa1lrN3PjuGt3Q0uDmvyf9fiGETIeH2G/J6WwR8FLMFhwVYFPX+UaN6iQNir5Dzy+NjmaoSTzPiRn1LsnCqMFm5I3iKV5/h6zrJ8cCc6aP39DYtAL8sUbkew0E+KP0SJ8NZTddR0=
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: jtA9bcjdoRdRdnP47BpvYC3cwElibtc6ZmxkTQheT01o34tgsfyFLUXD5Kz+jiC07ejJfe04iBDm+Cwk280EntQsZ7nSGSrgv2iOS9Oz+9YReJ9X4RgeGse/1BAGcMZHVIODdG3N0wf/UY/rgkkdYH1Iw72soA3lVcQZofErG7FSaHRjUiYSEC8u+MwZY2r2DYLMEBMdih2Lwm+4rSL3WpqdfdMwdbyIUonCdwVYvPtWtuX0IeVAr1Qa00DGarkyefR2Baz2kXajGLxBJvI+wO3BZMUOxmesGib40y0d9bMA0BzOr6dmiKPNB6U9EVazEZXuvT0zQ+AsC3uizn9LnjPN+HH+QHMw/8QIiwck3mcaVOZjn2xQLSehbfigYrv6Jc5BRMBppM8E1kmfq9Xo55MOGPNkl3i4tIv/92ORE9aSFiXTiFN82DBcJS60jIrLBIpJIIDYV6upo3lX0S8zZo+6S17u2rNBpL7dl6Wpal33kEsES3qwEa3UksL3YS+PDd7+av1rxShnXRw6SSY2Gg211peAajrO+m4cllxTwL5GRa8KLouhw95xJOkIIEL6k1cXhTaT1BZ4Q9KAb26lSJUNAD88p2DhOTQYwEWzfHlhfGPHH986DPxQbczwY88x
+X-Microsoft-Antispam-Message-Info: xgEd3LdW2/45gGcJEV8LofD4al4ezO6ACqk+eRmdu5iuX8ZC763QogQda7tpS+Uu86sU1Mn2OHxPP/YTPZFOWqPYLEbGh9y8a47/4wE4spbLGivfTauzTT5u+cdYlZhpB6AOjgLn2MG4XO1KZ0eFErMQs8y/OiSxE8+7WXJcBbHFklQHa/sLa7ubGBGqSj+Pi0n8Y2q8KxqaioWzUfutxBGo2NmPrdYndEpK5jFGS8XX7wNWTq8grd1TG86kKzhwGp3eQhH2DpYC0WRp22OKYisQY+rCe+odEKoj7gVuI+ad02cB88RpzfY4HJwxdSQooAlGeTnYRd+53RHFh+svblXeg/olya6LxU892OxF+cvwBkxa1yeE3if1t3jOsWpo7L2tQ2CHes2/wq/KRWkW9FglpIXyhY0hXbTn8/3sUxrp1v9NaYouZzsBN1pvFO5MmSA96AWA+1nixu6cgrJkkUHeyWA5W2jn0BDzDdGa/0jMGjZkrolvLRMwlaNctMqWhnqKRysE2bmAXDLzkOqTtORxgE6axTRGhv/FpV5ZsjivOQmJGwVnvPzODRKq+cJcpVviaM7LeIfdGFx0UGWB2rWC0b2+9EtvCiNSv0ALNzSH1+HuaNsIdskashoe4OzL
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KobcwSHdDBp5QsDlZEpKUWtS5m+GNDOJM7v9GH4efaDHET01Ll31Sx+dqkS3?=
- =?us-ascii?Q?VRb92zAHaCDdNkAnf42c3MtbYpR2ZirCWVCfKS7iWLmuPaA7Npt7fdIAjRY/?=
- =?us-ascii?Q?zVpwmKTki+irONGkee6/BEBHuyCLDL3M3vVWfqp1UaPpE8MQYo6D5kgZSweD?=
- =?us-ascii?Q?JxEqI+vnL5EZSaoHe4Ohu3W/Gv/sMS34UwsVpzcsSYo7pXpwXJyOP8109Fqw?=
- =?us-ascii?Q?2sfa8TEMD+VKtc5Aj7Hb7fdk3edBzf8wj90h435GnJL5jnibErUqO9AFWmky?=
- =?us-ascii?Q?h1l0+Gz5lrqINot+52why+1B0042hO00ROSIdRuUz7YS+gGpEwwW6VOedvom?=
- =?us-ascii?Q?j3wj27AW6ly4g9YCu/PNC6wGwpfVQs8+18TlumCpJ4ukntdbqmSjLNgJlGh9?=
- =?us-ascii?Q?klfpiP3VUYsx7s9fCZVRUaOS3IJWbGuZxgTe/m3383ZJ3RQUdzxv6uTcXTMu?=
- =?us-ascii?Q?5D9LfZDFyb4i2/9IX4D5vrhsHtBoI+SpPS/6snpxs+ytPJWjqOy7kpaPkpgP?=
- =?us-ascii?Q?O70n4VpzeA/vXngKw60QV/M9+MSDm3lhv3ZZwOVF6MTGILStnopXmNcB0y/z?=
- =?us-ascii?Q?1kvjWqiCyUSu0qlBa4QuwzngbjGeMXTqAVEbqhDZYCFXXB1hIiV5Yay+c2F8?=
- =?us-ascii?Q?68MC61OP22/B2tCifqvwtUWk1RKKnB+gS304uOyyfoo9NFqz8CUCDpdlp/ln?=
- =?us-ascii?Q?71X+nNhrGmZTcI2qyAatEbEnqDMUVurFxAoy+dwuDga5KqrADudFGCIhR1QZ?=
- =?us-ascii?Q?nlkEaKuGVKygR1/f1Tz9LvnoP/JjOyNNoTJBjZjn9aWr4ubmOyob1Y3pxw4B?=
- =?us-ascii?Q?UUzktu366o1BTQ9gViN655mIJTGChWZ1e6VukJlIvBQbTOQI4KB+tntwO/lb?=
- =?us-ascii?Q?DwuZsHvsjQq+CQsRR7xprXMm+PKTKxfMqlOWSAVRpSQ60Ayd/59xgou2q5pb?=
- =?us-ascii?Q?ReAotiEeFF6dn9s3dL6O4bzcinHZU0ilUgn2GuToGODXQ9Bd4gpOC98dI/lo?=
- =?us-ascii?Q?w89WlmknMqL/7VsBrcuWPJ9QQgof8SaWjY7hhdPEHdy7nNEMTFM9vZXSEARN?=
- =?us-ascii?Q?qOnjjuYFVYhYFVFGXUjezpxjKilPGN7IrZT+DK+n2Tr/V/C6o4oFouAybdRf?=
- =?us-ascii?Q?m7jshDEyUaLrZLDX68eRyjtH9LlZRLaPEKBeLPJySgrbWGoy0Vb8pYEnP5Ez?=
- =?us-ascii?Q?B5GG1UnTF04iLhJvrLe1gV0xr3eJx8b8jvTVyEtVirRvkj/w4HCuFTT8zNs/?=
- =?us-ascii?Q?VYySsAtvu6gHClR4p8dKcDLTskV7aGG5KRiOHFGYzg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1J2HHEDRLSZEH5CLXlD0FHBQcS1NJ9+Yu6evZozLAVIt1uEcSj1zZ+nDUuS0?=
+ =?us-ascii?Q?fS15jBuwSTu8PfVB38w/iMKlW/DvCxEOEozx5d++SlHJmzO8XtV3qy6Ubvwt?=
+ =?us-ascii?Q?bTt9z/a9LV3eP++/Rnve0AstKEX+Kp9ZfFFPDaSEJj0t0Teq9a/4ZYKwM4qF?=
+ =?us-ascii?Q?jjo8P/cHfwvOyHCwP4XZYE8OplX+LrLzDxvbtgLLAdSdZOvx8VvS6jC4+A9b?=
+ =?us-ascii?Q?7L0V2HKJxpHOiyOxCgf17AbWHMZO6Bkp7kAdpAGhfm5JZbizH7FOZMYnlrGU?=
+ =?us-ascii?Q?GmGU99cH8GmUu6YltLkvmgOZ1eInl5DKmzy6iRIgqPvNSsuV/p34u8UQT1cI?=
+ =?us-ascii?Q?j9Z9I1RxoX0Se5jCmRm/ev54+Ha/lZYzcGdAfca/0fMu08Ltxnza7hzXZT+U?=
+ =?us-ascii?Q?yiA9FiQSHWmn+F5Prf+v1QAj7fRhQyUEbCS6vlOT3cjZI4bzH4rmQ7Q4v+Td?=
+ =?us-ascii?Q?2ZjDRmf5kRpst1h9RhizW1f1phDdFP7uEH4BOSMQ38uOT1xFBuqng/PInSNd?=
+ =?us-ascii?Q?m2r6LNwDOoMMxuwwZS7PgtDgFnEgHnaHcVcaXcIEJxu0WessmqmiBs18yWgy?=
+ =?us-ascii?Q?ddnQTDJ1+ky7lIguaSKG1k6yKuDhTKnv1GDvd7ayTwGmCVeGU034MlaFNfsf?=
+ =?us-ascii?Q?uJCr5Ug6pYAo7tCXVJ8uluSpXQ843QFx4odwL5jqtbub2YFzwZuuoVaOtfmT?=
+ =?us-ascii?Q?YDfkdvqUE3CZPDPPqS4SHgFPQoRkW+uZmLaKVYR2/HF0d2PVyDakAxUWvWFv?=
+ =?us-ascii?Q?mwtJQzCkTQchBCm3qHewNDIgJ1eRbqkmBiTCQxayuFhBLfUOXnbt2kT6o97G?=
+ =?us-ascii?Q?EjOhYkKDGEtDZAI0/b9qgDlhfBf2ow9oJS+uw+iHwwET2ec6vftRVefU4DD7?=
+ =?us-ascii?Q?qogZdVF9xUooWGRrrb4wo+e0uzRWg/OzA/YEae29oREoXs85fjoPYlNTS78S?=
+ =?us-ascii?Q?yGtI7LW0ahc0i8cG+OvpmrQOTAC0jWtURXjQuv5vpoYhaYCev6chT21EeN14?=
+ =?us-ascii?Q?WsKMI1MvLBB7Dc6xtGupKO5UBv4vmOyHHil0qwybpIW7sD0qJcN1kGsUQMk5?=
+ =?us-ascii?Q?Av05siS6gVuUMtlS1axovonQW48WyKCaK8dGEwp3sz4hLcbb5Q7uwYHPJWEE?=
+ =?us-ascii?Q?/JQ40dkWksikoK+GWaIh17lu0n03Dzp9/9ndlQYD38U+XMA+jKJtMhgP6WSm?=
+ =?us-ascii?Q?CDuTQIt3Mp8SBmN7MExYmibAKYY7U0pQmjssMmX13d49JagIJKwFypxp2Y2E?=
+ =?us-ascii?Q?nceZa1k7nXHOVetjr5XFm3p4uLmmH0NHVKZDdGoWyw=3D=3D?=
 X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0764e141-1529-45aa-cd39-08dba3883fd4
+X-MS-Exchange-CrossTenant-Network-Message-Id: af8698ae-e014-4714-fe4d-08dba38842b2
 X-MS-Exchange-CrossTenant-AuthSource: TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 03:22:59.1331 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 03:23:03.8046 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
@@ -125,64 +127,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series is the fifth version of Bo Gan's L2 LIM series.
+Add SPL version of SYS_MALLOC_CLEAR_ON_INIT, this would help devices
+that need to clear ram before use to work correctly.
 
-Background information:
- JH7110 SPL runs in L2 LIM (2M in size mapped at 0x8000000). It
- consists of 16 0x20000 sized regions, each one can be used as
- either L2 cache way or SRAM (not both). From top to bottom, there're
- ways 0-15. The way 0 is always enabled, at most 0x1e0000 can be used.
+Signed-off-by: Bo Gan <ganboing@gmail.com>
+Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
+---
+ Kconfig | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-In SPL, we don't enable any cache ways, thus all 15 (except way 0)
-ways can be used. However, due to HW requirement, we must zero the
-LIM before use. This is because ECC is applied to LIM, and if not
-cleared first, the ECC part is invalid, which can trigger ECC errors
-when reading/writing data.
-
-There are several issues currently. We clear L2 LIM from __bss_end
-to 0x81FFFFF in `harts_early_init`. This is wrong because:
-
- 1. Each hart (in the middle of a function call) overwriting its own
-    stack and other harts' stacks.
-    (data-race and data-corruption)
- 2. Lottery winner hart can be doing `board_init_f_init_reserve`,
-    while other harts're in the middle of zeroing L2 LIM.
-    (data-race)
-
-To fix this, we split the job, such that there's one and only one
-owner of zeroing a specific region (No data-race). A new SPL config
-option `SPL_ZERO_MEM_BEFORE_USE` is introduced. Allowing The zeroing
-to happen in the same code path. (much easier to reason about).
-
-Besides, currently we use DDR ram for SPL malloc arena on Visionfive 2
-board in defconfig, but it's also possible to use L2 LIM as SPL malloc
-arena. To avoid triggering ECC error in this scenario, we add support
-SYS_MALLOC_CLEAR_ON_INIT in SPL, and imply SPL_SYS_MALLOC_CLEAR_ON_INIT
-on JH7110 as default.
-
-Changes since v1:
- - Separate single patch into several patches
-
-Changes since v2:
- - Fix typo (ZERO_MEM_BEFORE_USE to SPL_ZERO_MEM_BEFORE_USE)
-
-Changes since v3:
- - Revert v3's fix since original implementation is actually right
-
-Changes since v4:
- - Add support for SPL_SYS_MALLOC_CLEAR_ON_INIT
- - Remove already merged patches
-
-Shengyu Qu (3):
-  Kconfig: Add SPL_SYS_MALLOC_CLEAR_ON_INIT
-  dlmalloc: Add support for SPL_SYS_MALLOC_CLEAR_ON_INIT
-  riscv: cpu: jh7110: Imply SPL_SYS_MALLOC_CLEAR_ON_INIT
-
- Kconfig                       | 11 +++++++++++
- arch/riscv/cpu/jh7110/Kconfig |  1 +
- common/dlmalloc.c             |  6 +++---
- 3 files changed, 15 insertions(+), 3 deletions(-)
-
+diff --git a/Kconfig b/Kconfig
+index 91170bf8d2..588acbaf9b 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -372,6 +372,17 @@ if EXPERT
+ 	  When disabling this, please check if malloc calls, maybe
+ 	  should be replaced by calloc - if one expects zeroed memory.
+ 
++	config SPL_SYS_MALLOC_CLEAR_ON_INIT
++	bool "Init with zeros the memory reserved for malloc (slow) in SPL"
++	depends on SPL
++	default SYS_MALLOC_CLEAR_ON_INIT
++	help
++	  Same as SYS_MALLOC_CLEAR_ON_INIT, but for SPL. It's possible to
++	  Enable it without SYS_MALLOC_CLEAR_ON_INIT. It's useful for boards
++	  that must have particular memory regions zero'ed before first use.
++	  If SYS_SPL_MALLOC_START is configured to be in such region, this
++	  option should be enabled.
++
+ config SYS_MALLOC_DEFAULT_TO_INIT
+ 	bool "Default malloc to init while reserving the memory for it"
+ 	help
 -- 
 2.38.1.windows.1
 
