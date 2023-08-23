@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38519EE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:44:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A5EE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:45:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 703518650A;
-	Wed, 23 Aug 2023 16:43:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B500886504;
+	Wed, 23 Aug 2023 16:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VbCXoZvQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="daT5AkO3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4431086504; Wed, 23 Aug 2023 16:43:03 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id C298C8646D; Wed, 23 Aug 2023 16:43:12 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F04BF864FA
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:43:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFEBB86504
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:43:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-590685a3be5so39943877b3.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:43:00 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d77a4e30e97so1323410276.2
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:43:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692801779; x=1693406579;
+ d=konsulko.com; s=google; t=1692801789; x=1693406589;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RhGQH8bgFJa0xEJeRPCdHSz1RJzXAmvwBkOimC99Yik=;
- b=VbCXoZvQgy/txhNnZV7wBEQScXKhguQXSlLRSmcMmvfwDGQepfQn4MJBu3c9E20Hzj
- EUY4gcsDBREPDLXgYpswA9X/T0QWwhq17CyDVotpg2T0VEbhKyjPXQ5fXHtrbNqJAMZ0
- I27VCECt+WtiYBVKmeRgsoxJASdHM1CJN9zBE=
+ bh=omfUvlyEasD7ZxjKuyVmrubtp9IBvIiHCpxQw7+OGQ0=;
+ b=daT5AkO3DIuF4YZsUJO86qB+GHS475oCV/uzWo55yL/rVqFdJWqmK3bX4+qKoB3E/e
+ AG+c+oubWtgjsNprdOlDwQxC9BR5rhUYuB39i7GYUYeeSsc+8mRYP0c+3ta+jPjx3kLO
+ BrrMgz15bEJCTlGgHWafsRtrxkBphh1qsOkpA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692801779; x=1693406579;
+ d=1e100.net; s=20221208; t=1692801789; x=1693406589;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RhGQH8bgFJa0xEJeRPCdHSz1RJzXAmvwBkOimC99Yik=;
- b=GVrofet/63RypSi6suZEqn0FPEziJat5vp0VoGWKX+QGGABoyO9zE3PElshnDqwJDR
- OOEknaM3o3mtXJpDJJLxIfHq/HYaG8HEsrOWqiDMw8MzES2TzOI4d/1j483yjYiTrgO7
- fz61xYv0J5ojffOhSLZk5pyxyvpg+mLtSirtb67/+CweT/BgwFZuzxPuvC3rOK9OG4zX
- 87Kpo7+jKsaFGSaPtu1Dvt5QtWpigUGBOEEriCu5CV5WwVWzW4KPKvKtIdkc8zjpMXAg
- qGOjJAIP5AhJ6w9hnOdRrPICQoN9klFb2Mg2MeKts2D/GG7ElivWwqzLtc9F7eA2vptX
- TzJw==
-X-Gm-Message-State: AOJu0YzadZpjTYh1eWObv6CZwiv4T/kw0OniNqRzKb1uubeZ99xt16mD
- gbm8BGJFRyHHo1k/5QvYyLrEjg==
-X-Google-Smtp-Source: AGHT+IFmA6ZG7QUB0jWATGpukYWhGFIe3H5cK5cjs4eMqlG7UnOmMul8KIuitNLB4Bb3ouq+S1f3AA==
-X-Received: by 2002:a05:690c:2c8a:b0:58d:71c0:34d1 with SMTP id
- ep10-20020a05690c2c8a00b0058d71c034d1mr10325926ywb.6.1692801779704; 
- Wed, 23 Aug 2023 07:42:59 -0700 (PDT)
+ bh=omfUvlyEasD7ZxjKuyVmrubtp9IBvIiHCpxQw7+OGQ0=;
+ b=ljNgZg+nZmSNQOVh8HbkFHnne1CgIxa6DDSIbgpJxNiTqlpeLTjRU4Fp3XUSE+U40H
+ N36ihcgY0Vf+IEE5zpcH1UqUgDHx9BqADxpfqn2tf0REqjuupz+Xaz25XywzSnB3Icft
+ fdDnSsQqnq7dVuiG8n3Z6A0K/iyvEybtE/68U9rJTfFVvR6K+IWBYtLE8vqCTXUrAJMm
+ hjvwK3EFE++XY80tSlosJ75TNVNxx+5h34wScbKtiZtM3VxoRA2VtbGuXuGeK7UwUDSP
+ FR+hbp5EI6kdX/Om9wAMD3zBfdHVQwdE7d3Ika8Qyrb2FNBeyf0bN+tIwwu/eHAfWjwb
+ i03w==
+X-Gm-Message-State: AOJu0YyVfpv8Snzd351DyqS1L5OF19/ObeGnZYjF48hoDn678VH/pZQB
+ XOUl17B0WUaM0kFaAUx5CMk2GA==
+X-Google-Smtp-Source: AGHT+IFN40XubWFD/NYZhgSi51x+ZM8rNWT3Bh5ZjBr/patk36mqDj0RaZHSzxVm2pPNqa1V3DSguw==
+X-Received: by 2002:a25:1c2:0:b0:d6e:3544:9875 with SMTP id
+ 185-20020a2501c2000000b00d6e35449875mr12114814ybb.42.1692801789418; 
+ Wed, 23 Aug 2023 07:43:09 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- i63-20020a0df842000000b005772e9388cdsm3345949ywf.62.2023.08.23.07.42.58
+ 64-20020a251443000000b00d74c9618c6fsm1467481ybu.1.2023.08.23.07.43.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 07:42:59 -0700 (PDT)
-Date: Wed, 23 Aug 2023 10:42:57 -0400
+ Wed, 23 Aug 2023 07:43:09 -0700 (PDT)
+Date: Wed, 23 Aug 2023 10:43:07 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Neha Francis <n-francis@ti.com>, Bryan <bb@ti.com>,
- Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH V4 7/8] board: ti: am62x: Add am62x_beagleplay_*
- defconfigs and env file
-Message-ID: <20230823144257.GG3953269@bill-the-cat>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-8-nm@ti.com>
+To: laurentiu.tudor@nxp.com
+Cc: rajesh.bhagat@nxp.com, pramod.kumar_1@nxp.com, andy.tang@nxp.com,
+ mingkai.hu@nxp.com, Ashish.Kumar@nxp.com, priyanka.jain@nxp.com,
+ wasim.khan@nxp.com, matt@traverse.com.au, udit.agarwal@nxp.com,
+ joe.hershberger@ni.com, peng.fan@nxp.com, sjg@chromium.org,
+ u-boot@lists.denx.de, michael@walle.cc, camelia.groza@nxp.com,
+ ioana.ciornei@nxp.com, vladimir.oltean@nxp.com
+Subject: Re: [PATCH v3 0/3] fsl-layerscape: drop support for obsolete PPA
+ secure firmware
+Message-ID: <20230823144307.GI3953269@bill-the-cat>
+References: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lAnw5ImbmygkAuz4"
+ protocol="application/pgp-signature"; boundary="awVTnUwCg8IcE9wF"
 Content-Disposition: inline
-In-Reply-To: <20230822184135.2328409-8-nm@ti.com>
+In-Reply-To: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,65 +98,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lAnw5ImbmygkAuz4
+--awVTnUwCg8IcE9wF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 22, 2023 at 01:41:34PM -0500, Nishanth Menon wrote:
-> Add defconfig fragments for am625 based beagleplay and corresponding
-> customized environment file for beagleplay.
+On Wed, Aug 23, 2023 at 04:25:43PM +0300, laurentiu.tudor@nxp.com wrote:
+> From: Laurentiu Tudor <laurentiu.tudor@nxp.com>
 >=20
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
-> Changes:
-> * new env file to override boot targets, led sequence etc.
-> * config files updates for GPIO, I2C etc for A53.
-> * Speed up of A53 mmc support.
+> Support for this in-house secure firmware was discontinued long time
+> ago so remove it. First couple of patches delete the defconfigs that
+> use it (split in two to be <100KB) and the third one removes the
+> actual PPA support.
 >=20
-> V3: https://lore.kernel.org/all/20230815164440.2713726-4-nm@ti.com/
-> V2: https://lore.kernel.org/u-boot/20230727234446.3651836-4-nm@ti.com/
-> V1: https://lore.kernel.org/all/20230725185253.2123433-6-nm@ti.com/
->  board/ti/am62x/beagleplay.env        | 23 ++++++++++++
->  board/ti/am62x/beagleplay_a53.config | 55 ++++++++++++++++++++++++++++
->  board/ti/am62x/beagleplay_r5.config  | 15 ++++++++
->  3 files changed, 93 insertions(+)
->  create mode 100644 board/ti/am62x/beagleplay.env
->  create mode 100644 board/ti/am62x/beagleplay_a53.config
->  create mode 100644 board/ti/am62x/beagleplay_r5.config
+> Changes in v3:
+>  - fixed some merge conflicts
 >=20
-> diff --git a/board/ti/am62x/beagleplay.env b/board/ti/am62x/beagleplay.env
-> new file mode 100644
-> index 000000000000..8f39fb214333
-> --- /dev/null
-> +++ b/board/ti/am62x/beagleplay.env
-> @@ -0,0 +1,23 @@
-> +#include <env/ti/ti_armv7_common.env>
+> Changes in v2:
+>  - split the defconfig removal patch in two because it was too big and
+>    was filtered out by the ML
 
-On a related note, we should really rename that.  The ti_armv7_common
-files predate TI having armv8 platforms.  So whatever parts really are
-common in the .env and .h files should just be in a slightly more
-generically named file.
+Note that you don't need to split large patches, they just need to be
+approved before they're sent out to the list, which typically happens
+during normal US business hours (when I'm awake).
 
 --=20
 Tom
 
---lAnw5ImbmygkAuz4
+--awVTnUwCg8IcE9wF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGvEACgkQFHw5/5Y0
-tyzQ0QwAqYEUz7Kw0D9nTkEt259EfbgmjdHPCPGKJgK753UZztjDEa+q5a9RSLqV
-dgqHrBCxqZuTVWjz3i+lh4t6hGci278jrhWk4s3vfpzxr2UJSkaS4cV3UFD+vHDi
-qJamjrmyR224IpE6PmeLDL3kvmTGyko8T9DLEA/3kMCq+uhhHiag02V23n8MSmPa
-H+gO1t94ZNzVZ2gxZyXAh9ge/WMfYsz43ZNd1MJAhSi0V1vU0D1VY6p9NNq1FF4E
-Qp3xFlcL3ULI6pgki2ZdYXTzHLOTeM2nQX5EnGa9ksnXdko6zi3jWWROWBJCu/pp
-1xITGpfX9Bee01JDPGJfDxGRA69Usz9z8W6kqtFJp7k+iGy0qYKu9q5BaLcKb7te
-XHt0AwoxMIWZ5iVKSTxG8tDJPfbaKUxTip8mZNSzSDRCqdsrQBGRvrBokk+DiUBT
-Er7bPFqZiIXKBVga+uy8C3bi1eioojBk+6QZ8eewkoTteqs0s9L/6cH9cLAwNRv3
-y8n79KGZ
-=EB1D
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGvoACgkQFHw5/5Y0
+tyyc7gv+OoWNjYBpYGNrjLVaS0OIPWh2/akPJjrwigjCZGNS69bNMHGWGTgTwwVf
+MvuZz6BPX7+OvpBWfRX3SH10+6eOUOpY2N4nNlwUJFp+emU8mtR37Wfd22rw02LW
+ccCZbYxyro894qjomHvdpzLuN+z2BoxF+JNEftgSPsOoce7h8hgoia9t8Er8aKLK
+1h9Zza05MSV/c/DeguVQN3xBokJubxDZgbDXVCpSfx5ml6TrQAt4NpXMHI1eCycY
+SS728TTlhELBNhVJ/z8DneXS28RA6RZVWySC1J6cxg+Cs7Yt3Cl+F4ZcZ8crZHm9
+N4JfmWeQJ5fUU2dZ2qMNeA5k1fbEd3aJJb/6TnL2rQnBIG5oWuJkJSvXhopjQIvZ
+LUgiyyJgXYdn733drL4L6ZovYNX8ZANjhHE5Sqe2+VR3n+eft/JxYjIgKGCrrnH0
+4fw4yPcw4mMJE3GSsD4opTwMRHNKFLfzEiT6CnfjnETeixvlZO8qen73SUwW9G/A
+nwjaz/UK
+=exTF
 -----END PGP SIGNATURE-----
 
---lAnw5ImbmygkAuz4--
+--awVTnUwCg8IcE9wF--
