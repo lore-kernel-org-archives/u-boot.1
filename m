@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ED5EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1948EE49B2
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A51638645E;
-	Wed, 23 Aug 2023 17:11:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AB7386446;
+	Wed, 23 Aug 2023 17:14:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NXFQGZRb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L4eQxijv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 970BA864C1; Wed, 23 Aug 2023 17:11:22 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id B8FEB8644D; Wed, 23 Aug 2023 17:14:06 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE6238640C
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:11:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7D68863F6
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:14:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-986d8332f50so766699066b.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:11:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3a85c5854deso2286477b6e.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:14:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692803480; x=1693408280;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ZqyPI1IwWtVCVEoN00hhKd+gUzlhrNfZ+bem0GSaO0M=;
- b=NXFQGZRbqJvU6p/BWcDvv4jgVsmjipYUf4540ZK9rqWRJm9MWn6wuoyby7o8i29Fa0
- 7AtgQqZil0EUVwAVSQE5khfitf7rR8LbW5P9eDAeFWBxIkyPLDWZMVEprpVOK5RXUeGX
- q/m+EzaOVcxK3YP6v71J2kocUPktXepJxk6yCxaDpbCkiz0wstePdBasfR/G60okcDj5
- /Z+72YN8wzy2WCzu7SFhLzV4fC+8zZZu8awV9CxDflagyOkNwKXUBNF5wuE9XWzTuDxc
- 2uAioxXDU4M/52O9nz4AYS7rwx9bB3tHWg3CcWb2sMQGD9tXFRs/CQlEODoOXMVdYdP4
- 9FGg==
+ d=konsulko.com; s=google; t=1692803643; x=1693408443;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8/q0DcJ2Ef6TIgULkZX+6Jh7LNmI4g9brB5+Yz6D+5s=;
+ b=L4eQxijvBiT6CcKGG8FrFKGyUnjHzwmf8DEtH7dgJdYxMC9DrHa0CzCl2L3fYCXrwD
+ lMQiJvfvhL9iYdsX5ufz+4AmQ7bavyYy/ZFhmYzeIjGkf3nsD3Ud92UP7KM+wGDTw3wk
+ hAgQq7KD8iPcBAJ1LMm7oPCyjirA9glXcV3IY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692803480; x=1693408280;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZqyPI1IwWtVCVEoN00hhKd+gUzlhrNfZ+bem0GSaO0M=;
- b=hXXo0UYhttx26uxVOnSiD/LCCtXKum44MvLQzYSQpZR3pekpqMIjJJGZrZARPkP08L
- SVTotmHOomImWvfBvyi5YPFgppFDw0GS5SKGMsIojI8kXUhOKWC1bFr400Md5W0SPLAB
- d0Z27WDLiFzfrOzIwmqwgR8dEuP9QdT3/o6ttPaSD7QZP1p/0LaSohHpEYaXiWQ6xk6Q
- tqT38RqGKYqEdz+bVKnun5ldK6uEjhS2cDJG66NSjTqcvlhCAHnkreJTU0N+QtJ/CmfY
- YVjyyUkl4WQpuqGhFunhdo67k7736fQJopuMXAp+g8sFj6WuMXkE9jhoG3kyCsct3tIk
- Fcqg==
-X-Gm-Message-State: AOJu0YxhVN0QI7Np49WgZGKDrK9viIP9xIwhPjlrxZldwaAWoj5JLdld
- vRiRXFEycGGhC1FuZRiNkE4CrFboimfa1g==
-X-Google-Smtp-Source: AGHT+IHd5+MUJmklM5MBrmEfeXqcONhrXm9Z8bD1eTck1rH2DUMKCcORBMKZyNwjemYSG/FNkVlrwg==
-X-Received: by 2002:a17:907:7715:b0:9a1:f21e:cdfe with SMTP id
- kw21-20020a170907771500b009a1f21ecdfemr940977ejc.58.1692803480082; 
- Wed, 23 Aug 2023 08:11:20 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.148.241]) by smtp.gmail.com with ESMTPSA id
- ci16-20020a170906c35000b0098e34446464sm9896560ejb.25.2023.08.23.08.11.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 08:11:19 -0700 (PDT)
-Date: Wed, 23 Aug 2023 18:11:18 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@google.com>
-CC: Thierry Reding <thierry.reding@gmail.com>,
- Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1_17/19=5D_ARM=3A_tegra=3A_dt-set?=
- =?US-ASCII?Q?up=3A_convert_TrustZone_remove_into_config?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAPnjgZ2G6V3WqO6ZP4Fsuuz4AWKV6LMQ4Fxmk=nRmOsEZ7zpag@mail.gmail.com>
-References: <20230822112217.4646-1-clamor95@gmail.com>
- <20230822112217.4646-18-clamor95@gmail.com> <ZOXq0SrF9h0Z9uHw@orome>
- <86A72122-840F-46B1-9C25-0B6F5AFB82A1@gmail.com>
- <CAPnjgZ2G6V3WqO6ZP4Fsuuz4AWKV6LMQ4Fxmk=nRmOsEZ7zpag@mail.gmail.com>
-Message-ID: <B16634BB-1C5E-4AA5-83AF-AE6037A03B44@gmail.com>
+ d=1e100.net; s=20221208; t=1692803643; x=1693408443;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8/q0DcJ2Ef6TIgULkZX+6Jh7LNmI4g9brB5+Yz6D+5s=;
+ b=Dm5uhia2X0Rg/2s3J3eYI6bWVSLVxRRK2+Go5zJIMkTIEOhPM100irn1jYt/t9kgmn
+ c8Csz0Ii9G8AYlaJdX2SSOUD793/3BH7sSivkAyHXSAnLx9L4wiQ3l6CjSS4mU2YetbS
+ 7yY6TeiEl6o8O8mWUk6J85oo6IuJJk3IMsjr0zLMbYLgjOM/NM0syusPKOt5nCmsg6Id
+ DdZeB73KG9WZtO0i9gxNXbrH6H0B/b6Cu74FaBwgyMfRdYpFFII/3mUK808GXaH2HKMW
+ c1DidV9fXskfrNPz9hevh+VEWOtee1Ke29SZIsbrGhHSaRt9O3msT6+T8rlklSF7tbwX
+ ycmQ==
+X-Gm-Message-State: AOJu0YwZaWYOopA1v0b0N0mKe5PyVrNNdDD2IjNtpg44kAprd6D8PGTK
+ xYEvLRl7H6uPasjjmERxgkk5bQ==
+X-Google-Smtp-Source: AGHT+IEFS+El2vQPW2mHWvwNM/pg5rDyaecg7kLEJY9DjzNYRyLWPn3Lu6C6c82G31M+5ZJBTOM6WQ==
+X-Received: by 2002:a05:6358:c3a7:b0:134:e952:16a8 with SMTP id
+ fl39-20020a056358c3a700b00134e95216a8mr11343154rwb.24.1692803643217; 
+ Wed, 23 Aug 2023 08:14:03 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
+ [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
+ by smtp.gmail.com with ESMTPSA id
+ e13-20020a5b0ccd000000b00d74c54dea92sm1427287ybr.25.2023.08.23.08.14.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 08:14:02 -0700 (PDT)
+Date: Wed, 23 Aug 2023 11:14:00 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sjoerd Simons <sjoerd@collabora.com>
+Subject: Re: [PATCH 7/7] fs: Fix a confusing error about overlapping regions
+Message-ID: <20230823151400.GK3953269@bill-the-cat>
+References: <20230823134209.1450567-1-sjg@chromium.org>
+ <20230823134209.1450567-8-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ivjmPz9OeM96BJWm"
+Content-Disposition: inline
+In-Reply-To: <20230823134209.1450567-8-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,64 +97,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--ivjmPz9OeM96BJWm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 17:54:21 GMT+03:00,=
- Simon Glass <sjg@google=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(=
--=D0=BB=D0=B0):
->Hi,
->
->On Wed, 23 Aug 2023 at 05:47, Svyatoslav Ryhel <clamor95@gmail=2Ecom> wro=
-te:
->>
->>
->>
->> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:17:37 GMT+03:=
-00, Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->> >On Tue, Aug 22, 2023 at 02:22:15PM +0300, Svyatoslav Ryhel wrote:
->> >> Remove of TrustZone nodes is required by many product devices
->> >> which require repetable calls of same function from device board=2E
->> >> To simplify this, TZ remove is converted into Kconfig option=2E
->> >>
->> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> >> ---
->> >>  arch/arm/mach-tegra/Kconfig    | 14 ++++++++++++++
->> >>  arch/arm/mach-tegra/dt-setup=2Ec |  7 +++++++
->> >>  2 files changed, 21 insertions(+)
->> >
->> >I kind of preferred the original because it's very explicit=2E There's
->> >also no big advantage in consolidating this because the code is unlike=
-ly
->> >to ever require changing (the libfdt API is quite stable and these nod=
-es
->> >are all hard-coded anyway)=2E This new variant put non-generic code (i=
-t
->> >requires a Kconfig option after all) into a generic place, so it seems=
- a
->> >bit backwards=2E
->>
->> So you say that I have to add same function to boards over and over for=
- all devices I plan to mainline? Unneeded code duplication in action=2E
->>
->> List of devices which need this:
->> - transformers t30
->> - transformers t114
->> - grouper
->> - lg x3
->> - endeavoru
->> - tegratab
->> - wexler qc750 and basically ALL t30 and t114
->>
->> Ok, fine=2E Dropping and moving on=2E
->
->Where is the binding for this node? I have never heard of it=2E
+On Wed, Aug 23, 2023 at 07:42:03AM -0600, Simon Glass wrote:
 
-This is manipulation of linux kernel device tree=2E Vendor bootloader can =
-establish trustzone while u-boot cannot since vendors do not provide trust =
-OS image=2E To have a compromise linux trees have trustzone set which allow=
-s them to boot on vendor bootloaders, while u-boot removes it before linux =
-kernel boot allowing the same tree to boot on u-boot as well=2E Without rem=
-oving those nodes linux kernel will just stuck=2E
+> When lmb runs out of space in its internal tables, it gives errors on
+> every fs load operation. This is horribly confusing, as the poor user
+> tries different memory regions one at a time.
+>=20
+> Use the updated API to check the error code and print a helpful message.
+> Also, allow the operation to proceed.
+>=20
+> Update the tests accordingly.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> +	if (ret =3D=3D -E2BIG) {
+> +		log_warning("Reservation tables exhausted: see CONFIG_LMB_USE_MAX_REGI=
+ONS\n");
+> +		return 0;
+> +	}
 
->Regards,
->Simon
+This isn't the right option.  Everyone has CONFIG_LMB_USE_MAX_REGIONS
+set.  You would want to increase CONFIG_LMB_MAX_REGIONS.
+
+But it sounds like what you've found and fixed is an underlying problem
+as to why 16 regions isn't enough in some common cases now?  So we could
+possibly avoid the string size growth here and have a comment that also
+matches up with the help under LMB_MAX_REGIONS?
+
+--=20
+Tom
+
+--ivjmPz9OeM96BJWm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmIjUACgkQFHw5/5Y0
+tyxCFgwAn2hEdUF6elFXmDwMHqrP6YN3auwZhtKtByx5R4HZJkMO7F+RzGoblBBu
+E4unS1xMTmdIYuX0dVtn1RJDX2iGAb986iwtD6mKSKNvCt4e6i0ksFtDVkQcW7gm
+2sb0wVlyM2Nnw7IXzsLc0dsT0P6hexzS062FNM/bamnc1nDh+2/rRIsAvyWi40YI
+9jrEfhjjK8N3eWsyYwLcrNJkMb95sncDlh0hvt8kIRSwjV5tHrFZJl/zfl7d5DZJ
+dzGkG73QYiDOpBzSmZSg4Ds+F/Nm2qm3wfZfPJ4hfAeR9Rp2rXLbDH59yFsSIVGC
+xkAHV6v+n2APC7DJdnwUHkcGcyll6Ytdih4jQMpTT0KS0VCslVHqmUUhr18ABzeh
+PGHA0Ifbkq3PWskpfQWXfHuLeI9xTq0eEz2/geyppHq1SnLCQe2Yb1H+n6CCerpo
+kcfkqICSArlP5yUGJqOR+SPE8eLl7BNT/aw7yxR0oVXpcQJ4DoGWZjMNKhfasBC+
++zPalaQv
+=CSTC
+-----END PGP SIGNATURE-----
+
+--ivjmPz9OeM96BJWm--
