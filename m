@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B40C3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 16:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52802C3DA66
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:11:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98D7F864DE;
-	Wed, 23 Aug 2023 18:49:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7CA4D8647B;
+	Wed, 23 Aug 2023 19:11:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LplMAXVe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GPmy9App";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0029F80702; Wed, 23 Aug 2023 18:49:34 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id A6DFE8647B; Wed, 23 Aug 2023 19:11:27 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 308F9864C1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 18:49:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 529A686478
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:11:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-579de633419so65035987b3.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:49:32 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-58dce1f42d6so923577b3.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:11:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692809371; x=1693414171;
+ d=konsulko.com; s=google; t=1692810684; x=1693415484;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bKJOhZX5Mrmi/Gl5owyUZtJlhSW3w5Ts86O8wphjJcM=;
- b=LplMAXVeFnXn3VtVilClzFBgkNAQVLv538V4xVi3tXrAsgCRemFhIKYr8DTSWuuIlA
- Faz7eeMmMUJToXkRC7VCcj6qdmUK2tEPVAkiAbjsPHUIjSTJ+/079xby5MZ2oSJz8hnz
- HukkgYbKYxKHedB9WW4QHUKyYASc7/AAMNwKQ=
+ bh=3dN4ymocaYpxXgZRCm7jR2sdVM6ot45wXvvYh5YHeK4=;
+ b=GPmy9App6YgsHkFWDjpdzDO7fv4lFI4f8h4qyspi2LS1mGscK4qkoF5nSs3+XOyu1H
+ CWIQVXJ+lw4t6o/cQLOX3E7nVf3h/hlSCNEHQ9ue9DcitzM6dS7RJBSl7e/dhYqKvQSP
+ DfrXYhQXPva2H/N/ITRqaAWz90H/cYkBQqGdU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692809371; x=1693414171;
+ d=1e100.net; s=20221208; t=1692810684; x=1693415484;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bKJOhZX5Mrmi/Gl5owyUZtJlhSW3w5Ts86O8wphjJcM=;
- b=HsCMocRBexCEaXM2IwHavLdkDDU1T9PFNLUNE/QJBIlBL4gAAPMAjFYzT55HWWm3l7
- llItGDwVwO71Jp5V4fdzFNKshY5F+12B3OusWVgD7iHiXzmN7cNY5Hs2w87PbzWSpjKi
- Kkgy48AsPeRCN3soumOCqBhwesrKg6TazCWxG0RzQ2LqH2YeGR6Txm5m7+V57QkOFgwj
- R//IzL+4kajU6jSZQ3da40eCgEI6L7vWBpdrVWTTmeYXQTG/DJ8aEtYV36APFxWxJZVK
- 0q9UN1e6qUSPtvDt7hPZHtD6f3g07JvCjQWVi6C05euKM7RFgcATGZWRI8A9eMHQZNqd
- lvqQ==
-X-Gm-Message-State: AOJu0YxRNRH7eRhsJFHd4lasg9IXOsKp9U0ajbmVrrJWCZutaf6Iupc0
- jIeAEU6YzDhc+7UtANEgah49qg==
-X-Google-Smtp-Source: AGHT+IEpQIaG5RPkys7yRxp9muW9NX8Jm8FX12KA3kfjXYI677wrwRJHiRuWZ/vnW/S48dQd2JbCvQ==
-X-Received: by 2002:a81:9289:0:b0:58c:54f8:bd45 with SMTP id
- j131-20020a819289000000b0058c54f8bd45mr13823648ywg.44.1692809370893; 
- Wed, 23 Aug 2023 09:49:30 -0700 (PDT)
+ bh=3dN4ymocaYpxXgZRCm7jR2sdVM6ot45wXvvYh5YHeK4=;
+ b=bvxPqjlb3bhePnFFt1mkNEBpKGMT8JK7YYT+dmnr8ugNrO4W+oC2WolVAAeFVYUhiC
+ tmtsZ5j7M7E4hlRsnfVQPnTfp4vTMq0r1SyrhBjSq5vcnTEIouN0nwUYX5l+GpvJ6UJz
+ 34KPKZ5VLkMX50EswHXE4LBEBV8KpM47Sw6dEQszdZT7iVFYmw6e7i1PC52PhUvM9TAF
+ f9eFEcxCc/5zRSmX6NXJRcakjKAfOhiMBO8UMx8oQzuve+O0/z9jWnY8rAH6oOBLuQa0
+ CxiVf8aZs9HVwohZkdGwU0D+thTFBTySI4oKXjKWyRPgjApQujT+4IuHUrIrua0k2pDL
+ s15A==
+X-Gm-Message-State: AOJu0YysbWOK5LNqVWfMad+1f5BF6FnbbK6RD93epN+WucP+HKQHgmei
+ rLz8hyxuXIXb4V82E8wyAPApq+xjWM2aBhPYdtv6XA==
+X-Google-Smtp-Source: AGHT+IEUrlKzYqxARICwpzUDSmDmCh7tKvGxRq+Ho2XzKGU+whdBPhAJCaTt0EemsgbID5nzoakQMQ==
+X-Received: by 2002:a81:9290:0:b0:58e:c394:37c9 with SMTP id
+ j138-20020a819290000000b0058ec39437c9mr11955064ywg.10.1692810684030; 
+ Wed, 23 Aug 2023 10:11:24 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- v20-20020a81a554000000b00589a5bbeb43sm3407664ywg.117.2023.08.23.09.49.30
+ y123-20020a0dd681000000b0058e37788bf7sm3446685ywd.72.2023.08.23.10.11.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 09:49:30 -0700 (PDT)
-Date: Wed, 23 Aug 2023 12:49:28 -0400
+ Wed, 23 Aug 2023 10:11:23 -0700 (PDT)
+Date: Wed, 23 Aug 2023 13:11:21 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Config fragments
-Message-ID: <20230823164928.GO3953269@bill-the-cat>
-References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
- <20230823155558.GM3953269@bill-the-cat>
+To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] usb: dwc3: Fix renaming SPL_USB_HOST_SUPPORT to
+ SPL_USB_HOST
+Message-ID: <20230823171121.GP3953269@bill-the-cat>
+References: <20230823142227.69923-1-oleksandr.suvorov@foundries.io>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/yRqouLdXwSNVbZ5"
+ protocol="application/pgp-signature"; boundary="dUyFiHg7C4BGyGZB"
 Content-Disposition: inline
-In-Reply-To: <20230823155558.GM3953269@bill-the-cat>
+In-Reply-To: <20230823142227.69923-1-oleksandr.suvorov@foundries.io>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,42 +94,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/yRqouLdXwSNVbZ5
+--dUyFiHg7C4BGyGZB
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 11:55:58AM -0400, Tom Rini wrote:
+On Wed, Aug 23, 2023 at 05:22:19PM +0300, Oleksandr Suvorov wrote:
 
-[snip]
-> Using the TI
-> examples, I don't know that you can use buildman today to generate a
-> functional binary (and if you can, if --keep will retain the right
-> files).
+> In the usb/dwc3-layerscape driver the first option should be renamed
+> to the latter as well. Do it.
+>=20
+> Fixes: 333e4a621df ("Rename SPL_USB_HOST_SUPPORT to SPL_USB_HOST")
+> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+> ---
+>=20
+>  drivers/usb/dwc3/dwc3-layerscape.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-l=
+ayerscape.c
+> index 79cf71f7a85..77801c10084 100644
+> --- a/drivers/usb/dwc3/dwc3-layerscape.c
+> +++ b/drivers/usb/dwc3/dwc3-layerscape.c
+> @@ -134,7 +134,7 @@ U_BOOT_DRIVER(dwc3_layerscape_peripheral) =3D {
+>  };
+>  #endif
+> =20
+> -#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || \
+> +#if defined(CONFIG_SPL_USB_HOST) || \
+>  	!defined(CONFIG_SPL_BUILD) && defined(CONFIG_USB_HOST)
+>  static int dwc3_layerscape_host_probe(struct udevice *dev)
+>  {
+> @@ -194,7 +194,7 @@ static int dwc3_layerscape_bind(struct udevice *dev)
+>  		driver =3D "dwc3-layerscape-peripheral";
+>  		break;
+>  #endif
+> -#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || !defined(CONFIG_SPL_BUILD)
+> +#if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
+>  	case USB_DR_MODE_HOST:
+>  		dev_dbg(dev, "Using host mode\n");
+>  		driver =3D "dwc3-layerscape-host";
 
-This specific point is wrong (export BINMAN_INDIRS/BL31/TEE, buildman is
-fine) but instead has me down a side-track of what the heck we're
-doing/not doing without --keep-outputs right now.
+This is incomplete as now that we have CONFIG_SPL_USB_HOST instead of
+CONFIG_SPL_USB_HOST_SUPPORT that means we can use
+CONFIG_IS_ENABLED(USB_HOST) which is true for (SPL_BUILD&&SPL_USB_HOST) ||
+(!SPL_BUILD&&USB_HOST).
 
 --=20
 Tom
 
---/yRqouLdXwSNVbZ5
+--dUyFiHg7C4BGyGZB
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmOJUACgkQFHw5/5Y0
-tyy7Fgv/QULE0CSGwGhr2xQjYstXenHX+FvuFH/pG/XlW8M0vfwXfBMr93DwiPLc
-hFNstNt5sTPBFF/1Bzp+S3QVbhkVZEyJBE5q4K7jwkyTo1Le6/66l87tcMyidXMp
-k4iR5XgofhbGqhFn0Em10+eQKdOfPRU9OHyxYNiNEF2perA3OprbkGnrCPthvzZA
-8u8wvYpwNT+mFzNyjOwuuyYgxjkfWJD4gBNgkJ/NvSb7Y0XzCA+Uy94TwXDTG5cI
-yBSWy2Yjp/h8qecUajoQi0ekIfQTwZMABojhGhxo5jcJcsr7lhRu5lEU8I0QrHnY
-+kWFs103u9gmKXuPDxppX2yJ+yiK8FYDAh7Dgav/luQ90+TT3iLQgw6VdSTUKog3
-NigIrhRAcOy0+/N6pS4vumcZ9Yt57FQJkFgi3qhIWrs6YfL0ROOxvFqQQegqoTcM
-QZ8xGgqIisWdWv5sNB2Var36sMdcu5Ky+vFRMhTcG9wkpNCO6DpSdgxZt2/RhTsp
-TWY5feMs
-=GWEM
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmPbYACgkQFHw5/5Y0
+tyx4cwv/VXQ+xck71JFDtUfPap+5C1MTms0rUgaxOpfLNHo1uaE877Aer8eZBGqU
+Z6OCZSzP9VB+diLPq84srYg21gvVkL1Qe5bswUyl9DxsoQSLOIsybG3llkSQmFXG
+1laKtYmFG3w5G+iCcoc8fJZvOrRJCPMMh3aVT/4dLz+nkf0L5i8jeEYMTHGlavCg
+UNFULCNHI6mYfFvuPlEhaPWCQjvuAaP3BYDisVjyiwlLEso/k56bC4c2kAkdj3+C
+runwvkZCZx2WDGHuKZ9vlDWkaKcNfhvMu6je4ta/4rhpojv4W/R+ALCBFMJGW5Ka
+BfO6IBvd8cRZ/1V9Uu9JFBTof3BMEoIAQzK202K1aizCrdeTabsiUg3VyHoKWYjE
+U7T+UdohD4eHQrsmJokYffhCVkyfkDLkAI1IQ1NXDEUjyW+15l+GyBazS/FGNOu1
+RzoDlpf/pJqN5rieWl69MbLVeUvCyJ1bozuP28RNNwORSyHoletdO94GhMh1gkqL
+BHNPVi2+
+=DcIg
 -----END PGP SIGNATURE-----
 
---/yRqouLdXwSNVbZ5--
+--dUyFiHg7C4BGyGZB--
