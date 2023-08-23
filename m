@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3FEFC3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:50:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 215C4C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 17:59:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE0248645F;
-	Wed, 23 Aug 2023 19:50:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 743B586416;
+	Wed, 23 Aug 2023 19:59:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ug2Fiw7j";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qP3OtfHY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 034CA8645E; Wed, 23 Aug 2023 19:50:18 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 600AA86411; Wed, 23 Aug 2023 19:59:23 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE6578647B
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:50:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 568F586414
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:59:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d62bdd1a97dso5789814276.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:50:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3a81591c73dso818589b6e.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:59:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692813014; x=1693417814;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GBGVvlBiqFuooJJeETkSAXBy52/3hgXt8dJgpMlgYWo=;
- b=ug2Fiw7jXMr4mNSanwKPoC5MT0EvJWQz/VFuCIrG3eFV4iBaHPfWki9eqo0vJEE7qa
- q361FPa2pwRJSescQEJwb3CvcJOtEJ71FYcTdbsTX64Nw6cBJ8rBQ7i8xz8eZ8nyjDbX
- cyfqVUnMlQkUVg79pfkaV693lWFDHXjcJ2leI=
+ d=gmail.com; s=20221208; t=1692813560; x=1693418360;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p//zV1vGQNOwYQgahHfX8Dc5ck1+cqd1Sk9miLsy/hE=;
+ b=qP3OtfHY26eNljvPsADulQEj+ie7MnfSQLYMgG5eSF4a9x87U3e7Bphd541tShdxdR
+ GvsxHh7Y/hlLiLaWi5FVgvSkUZMk8EyeCck7ysF6FRcBKCfGKw9urinvFGxYomhsEzJn
+ DSNdkq0meeI25FvrOXir59WUqwagSAys6V55n+gw6WT9Y8HeIr6YgQXxYPAr5cR8ldQh
+ iV9zq4OapTiFMpy8x0WZQ16SV9DqZu3aTNz1f5zwTyYnDwhImCXqYzFIDjk3n7lyTuxJ
+ OE7YrATjb4eYD/od2fmsQGVMJi4oucpUlnok86Zz+XH4J0RLRnYGRkiAzfr9jlElBRqU
+ D2rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692813014; x=1693417814;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GBGVvlBiqFuooJJeETkSAXBy52/3hgXt8dJgpMlgYWo=;
- b=JAkBzJoUG0wqSwJOLM0gTJ4tjxr7riiu4RSzGAg5T3OR2rTn1V9CqNja+v+M8zP+gC
- LpCXItL5TsE761cJA9lchKjgJlBUYg1KoI7dI9tDJ9HMyzk5iH8v0JLLnfLu4gpnGUpU
- FMxF0zlLyX51EV3Ig20z4sohk61zZrNKAHx/ba1XDghGirIhnSc4uE+MHYdNkNG64RP2
- 9WKtgMZ6tBPM4uuSjIOhmxVF2XMwg8x6R5Pl41jY8k7oLM2vXN3Kg4PmXbeJBQM3AsGb
- jL0eZcG3RPLrEVYE0vk4IzFhCi3lGERNu+ap2V15tyAW3D1PtfV4qL5fIXAY0sgCPWwb
- NWzA==
-X-Gm-Message-State: AOJu0YzGXp3jJ0cbdIb3OD4BFJN8zx6qZgDxnmR2VNxz9CvgS9hIhNkw
- FEfDQKfTuFX80d8qiP9YQY+cK3ufVU+BaVS+vOcQyw==
-X-Google-Smtp-Source: AGHT+IGnRNjP2S0uHtZoER7M1auV4ECVZ/JjR7r2sV411ydzivtl7IDkdZjtxMpwdQyRcn1bdIX8LQ==
-X-Received: by 2002:a25:ac19:0:b0:d0b:fe82:8b99 with SMTP id
- w25-20020a25ac19000000b00d0bfe828b99mr13061917ybi.44.1692813014589; 
- Wed, 23 Aug 2023 10:50:14 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
- [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
+ d=1e100.net; s=20221208; t=1692813560; x=1693418360;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p//zV1vGQNOwYQgahHfX8Dc5ck1+cqd1Sk9miLsy/hE=;
+ b=aMIVveLpVwBn5PjdrBHtHzKnQGRSoEstiZyGvK2NyIXptdN1qvsvlzYRyIfCrFzSZQ
+ pwkTglX3O5PXIfFkenX9RN7m7oWKeHpLl6dCiG8ahF5mRf3dU1gEeGu0gYnYpivQTuMV
+ oel6K2aOjw3CxyB0XPrxymlAhUyZX5gPueNkgVOqKvohiPySr12wHfxdg42369hEAZXN
+ 32eP83Gh38f3XchV5Knr7Ya89WmeQqxhM2gApu3p/ThWDuXmXO/gNLjjpTwWB7e+bFCr
+ jxz56E34mw7XYf+9aY5X19b5MOrvXJUErHd9oMzCx8tpTcc1xB1kY2YykGXif2D0dgox
+ uASw==
+X-Gm-Message-State: AOJu0Yzu6jZqCYMD2XLup77zdAuP+Y4GE6yq93TfaBPzgp/hk8EONFLm
+ 4oe4e2zo4uG0piTQMafkAME=
+X-Google-Smtp-Source: AGHT+IFTTxj+oxLSGUmgLYB+2Mi5rQmmUeQNo3aex1MQW2fmpYxUz6sUza6/QwdW18q/4GKQ3+7dcg==
+X-Received: by 2002:a05:6808:1a84:b0:3a6:f8e5:edad with SMTP id
+ bm4-20020a0568081a8400b003a6f8e5edadmr12367430oib.4.1692813559805; 
+ Wed, 23 Aug 2023 10:59:19 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b51c:1cae:f70f:7819])
  by smtp.gmail.com with ESMTPSA id
- 203-20020a2501d4000000b00d4fc4132653sm2941303ybb.11.2023.08.23.10.50.13
+ 17-20020aca2811000000b003a842626b62sm5625271oix.22.2023.08.23.10.59.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 10:50:14 -0700 (PDT)
-Date: Wed, 23 Aug 2023 13:50:12 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] mmc: spl: select SPL_BLK for SPL_DM_MMC
-Message-ID: <20230823175012.GW3953269@bill-the-cat>
-References: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
+ Wed, 23 Aug 2023 10:59:19 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: peng.fan@nxp.com, trini@konsulko.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2 1/5] imx8mm_evk_defconfig: Select CONFIG_IMX_TMU
+Date: Wed, 23 Aug 2023 14:59:07 -0300
+Message-Id: <20230823175911.319414-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZHjQjpk99e0E+rUW"
-Content-Disposition: inline
-In-Reply-To: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +89,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Fabio Estevam <festevam@denx.de>
 
---ZHjQjpk99e0E+rUW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Select the i.MX8MM thermal driver as it is useful for displaying
+the CPU temperature and its grading:
 
-On Wed, Aug 23, 2023 at 06:45:45PM +0300, Oleksandr Suvorov wrote:
+CPU:   Commercial temperature grade (0C to 95C) at 38C
 
-> mmc_bind() in mmc-uclass.c calls blk_create_devicef() which is
-> defined in blk-uclass.c, so SPL_BLK is required by SPL_DM_MMC.
-> Implicitly select SPL_BLK for SPL_DM_MMC.
->=20
-> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+It also prevents booting when the temperature is above the alert
+point.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Changes since v1:
+- None
 
---=20
-Tom
+ configs/imx8mm_evk_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
---ZHjQjpk99e0E+rUW
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
+index ac9810fe1b..822c2fbfab 100644
+--- a/configs/imx8mm_evk_defconfig
++++ b/configs/imx8mm_evk_defconfig
+@@ -104,6 +104,7 @@ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_PSCI=y
+ CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_DM_THERMAL=y
++CONFIG_IMX_TMU=y
+ CONFIG_USB=y
+ CONFIG_SPL_USB_HOST=y
+ CONFIG_USB_EHCI_HCD=y
+-- 
+2.34.1
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmRtQACgkQFHw5/5Y0
-tyyrkwv8CNmA9sqhfzM5xzr0pspIyGR1RyrWvn6GnDQ+iLX+qXzYVgtV9TScEr89
-Jj7kRhVRAA/caxB6nvIGBaQS2p/0XsDiFY4TYlIRI2Sw/WSHgZM8zdrzsdIEpgxc
-AHVsD/Eww/xaX1fwncns+q/aeWrbfI43CaVLioh80tgBL7Q0EkAHjlnYUDUwgP2v
-tdfc2cw+Go58MAO4cLOjzV7+z/Ku0QiOB4/Ajmh16Qpz5z8+BSTP4wQfN4d0cp5I
-KiEt13JSy40FA+lfY9EO/67sYobCGvgNF9rjalwriPxkJcMIkoWe4MgxjwF7S9QF
-CCQYhvw2Czx5bibCF8mcCf1LLe1gSUA9CNRQexLmhXP6hYjFcK/sWjEbIAV0SI4R
-b3rfMuGzpDLy8dfLUK7wVrWUsjeBBl1F+ppkMA3/ywJqvGcsV5Sl2DY2sX9B2jHS
-dYwrMmRvIsYF7NGp/d8ZOLANe+PNb19sVtA0YTwa8ONPRev5DUlKadYQ0+mZhZCj
-sgob6W07
-=lXzb
------END PGP SIGNATURE-----
-
---ZHjQjpk99e0E+rUW--
