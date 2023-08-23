@@ -4,56 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38442C27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB6AC3DA6F
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A4CE86429;
-	Wed, 23 Aug 2023 20:06:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id DA2CB86416;
+	Wed, 23 Aug 2023 20:10:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692814017;
-	bh=LSJiSGP/bulY0gyAutr2OZ4P8F8pPlT+coyglAe5VZM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lmMJUy3cm/zmt2/GwB5prigurFL/KcDJEObCqXIJmGP7FEt8wUczGw4GK5zla2VLv
-	 1WMckkh39BVd059rCmDTlt4oCQR8NRDEw4QjVSl0LiJf0nl4bPyHqLtBieY3JyODhy
-	 oBDnAQcrO4H6xHUkKrPSAJxROvvXCwJGz+xugAEuakpwMK6GXqPFqDzhX2rhtOeLOC
-	 HId/Bx5KOq0i6Gf+aqvDiWtJI7KjOOQRM4HT6KVvf7ralLz8qND2HHOHI6G/NA/xUy
-	 s7KN0kUcC60AUAGj4W61o+uAHaMAtBM7FLUbts8so9SQ1QBEV7KIsZBeiyyD8yIDjz
-	 I0I0flg2L+hPg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="Ug+h9Mox";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0483A86413; Wed, 23 Aug 2023 20:10:48 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 29C0385DD2;
- Wed, 23 Aug 2023 20:06:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692814016;
- bh=LSJiSGP/bulY0gyAutr2OZ4P8F8pPlT+coyglAe5VZM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=k2EV6LcQNy84s5iTpw+PpxAuec3dNk72doBdKyR1HSIEaJjjheUeLPuOtUXR1jtqT
- gaR8XqrZhEnvY0HZRRvm/PxYq5Dd/SlDJcxPy6Xruh27rYASPp8/tizIaPCE4YOp8x
- efX017l0yzbYpUReRY7XAab+1QhH8TWw7INJOg+KlQsAajKjZu57YvKDpqlQ/Y7L/R
- /jP/RE7u6o87ZSv/gs51eFCo7ooKRRfDkog+ppGt98k45896ahVkGSNIompuKbXf7E
- rfU2OEQbc+rrIqSEW6b2exJfqCf+ea2OBPC7bHdJJZjYKoZQoTqXtBYv19nxIue5ck
- HydxGruTIlFIQ==
-Message-ID: <40263db2-e42a-4997-ddcc-7a1ea7d44d31@denx.de>
-Date: Wed, 23 Aug 2023 20:06:55 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A073E8645F
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:10:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foundries.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2bcc14ea414so50264121fa.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:10:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=foundries.io; s=google; t=1692814243; x=1693419043;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9AU2sph846FXX3t2PiYDMWMrSeLQmUONcWC5tFgsGoc=;
+ b=Ug+h9Moxz10vygvjdaqln0Qc3e5TCziXmDIlNKhrTOAqGw+8Egc6G0EHojMt8SP75Z
+ VTIXNzRAP8mejiM1J+aIYPrBVLFYDyieLKXEq9QD6PlgAJG9KKPEbgivOHdkPE8Cl5yO
+ /tP8mUGrD2Gr6+2IB4p3zzq4ngfhrkSU/6UpphJ9hIoLHzomN0kpOmqfmemmo7UHXfs1
+ m8QMJBlFGNOVrsZPa92PQD1aACA1McCp/fQfDeDk8ZrxSVwBRKLGfbaShDU4DffWy93o
+ s28H+nhpKaSIU7NjxeSnt3OVe2ZsXaf4iDaBaOideOF/H55fnsd+B2COgOmwVq5l0i09
+ C/QA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692814243; x=1693419043;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9AU2sph846FXX3t2PiYDMWMrSeLQmUONcWC5tFgsGoc=;
+ b=ZAFDW5Rc+kz9dNYH6mRco3POI9rgdrIOKAT1p4bNl0LHm4uU1GVGlh0NgvlOpY9uwU
+ 7W5XOeMwtSiqM02jRteaE/+ASON79eFIy/Rwycr/FQ2azbAbLnsX4qQEpgpPbL75bOrK
+ gJ9/BIAteLUsIBxUocIv6IXQQUnDQe7KE0gFeXkZX4irBpC50KZCYTlrM3FovEQ8UVjf
+ 0brh5qDemtQIqdU8EHDydKlG/GmuBbrqylFxujbur0Xek6sHYMLJwsR2ygqIkLfPkgdZ
+ lp3z5rWmCyIcMGttjbEfzcClOF7sKauXVafxgu+qsQfZuIibyb1UlpX0etiC05kGR67P
+ uZKA==
+X-Gm-Message-State: AOJu0YxEEgsw3VAfgxFH5fzJ7w5h1G2SEu0h9zcqHWsvXjsfou5jkj0p
+ Y+VXRxbj/VKDrhZfQJgFlEyi/TEsDGfNHcG6E4c=
+X-Google-Smtp-Source: AGHT+IHbR1GT+xgVgMS897TYYQCvpG9USEku8aJeASVRGjuy31VmrbYuc9PL7I5dgBNI917A0K0nuA==
+X-Received: by 2002:a2e:a0c7:0:b0:2b6:df23:2117 with SMTP id
+ f7-20020a2ea0c7000000b002b6df232117mr10403374ljm.43.1692814243455; 
+ Wed, 23 Aug 2023 11:10:43 -0700 (PDT)
+Received: from cryobook.. ([93.188.34.55]) by smtp.gmail.com with ESMTPSA id
+ j22-20020a2e8516000000b002b9f0b25ff6sm3324520lji.4.2023.08.23.11.10.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 11:10:42 -0700 (PDT)
+From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] arm: mach-imx: loose enabling FSL_CAAM
+Date: Wed, 23 Aug 2023 21:10:33 +0300
+Message-ID: <20230823181038.30280-1-oleksandr.suvorov@foundries.io>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH] tools: ensure zeroed padding in external FIT images
-Content-Language: en-US
-To: Roman Azarenko <roman.azarenko@iopsys.eu>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Massimo Pegorer <massimo.pegorer@vimar.com>, Tom Rini <trini@konsulko.com>
-References: <20230823121417.270511-1-roman.azarenko@iopsys.eu>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230823121417.270511-1-roman.azarenko@iopsys.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,104 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/23/23 14:14, Roman Azarenko wrote:
-> Padding the header of an external FIT image is achieved by growing the
-> existing temporary FIT file to match the given alignment requirement
-> before appending image data. Reusing an existing file this way means
-> that the padding will likely contain a portion of the original data not
-> overwritten by the new header.
-> 
-> Truncate the temporary FIT file to unpadded header length first, so
-> that the subsequent truncate operation extends the file with null
-> bytes, making padding predictably zeroed.
-> 
-> Fixes: 7946a814a319 ("Revert "mkimage: fit: Do not tail-pad fitImage with external data"")
-> Signed-off-by: Roman Azarenko <roman.azarenko@iopsys.eu>
-> ---
-> This fix was prompted by an observation that there is unexpected data
-> in the padding between the FIT header and the first image in a
-> generated external FIT file.
-> 
-> Having non-zero data in padding doesn't have any negative practical
-> consequences, these FIT files work fine just like any other. However
-> I'm not aware of any reason of making the padding depend on the
-> contents of an internal/intermediate FIT file. In my opinion, padding
-> should be predictably zeroed.
-> 
-> Steps to reproduce:
-> 
-> 1. Generate a random binary blob representing a fake rootfs image:
-> 
-> 	$ dd if=/dev/urandom of=rootfs bs=1M count=1
-> 
-> 2. Define a minimalistic FIT source file:
-> 
-> 	/dts-v1/;
-> 	/ {
-> 		description = "Padding demo";
-> 		#address-cells = <0x01>;
-> 		images {
-> 			rootfs {
-> 				data = /incbin/("rootfs");
-> 				type = "filesystem";
-> 				compression = "none";
-> 				hash-1 {
-> 					algo = "sha256";
-> 				};
-> 			};
-> 		};
-> 
-> 		configurations {
-> 			default = "config";
-> 
-> 			config {
-> 				rootfs = "rootfs";
-> 			};
-> 		};
-> 	};
-> 
-> 3. Build an external FIT image with 4096 bytes of padding:
-> 
-> 	$ mkimage -f source.dts -E -B 1000 output.dtb
-> 
-> Observe how the header is padded to 4096 bytes (0x1000) with a part of
-> an existing dummy rootfs image, which happened to be in that place in
-> the internal/intermediate FIT file.
-> ---
->   tools/fit_image.c | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
-> 
-> diff --git a/tools/fit_image.c b/tools/fit_image.c
-> index 9fe69ea0d9f8..7a7b68f96ed8 100644
-> --- a/tools/fit_image.c
-> +++ b/tools/fit_image.c
-> @@ -497,7 +497,7 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
->   {
->   	void *buf = NULL;
->   	int buf_ptr;
-> -	int fit_size, new_size;
-> +	int fit_size, unpadded_size, new_size;
->   	int fd;
->   	struct stat sbuf;
->   	void *fdt;
-> @@ -564,14 +564,15 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
->   	/* Pack the FDT and place the data after it */
->   	fdt_pack(fdt);
->   
-> -	new_size = fdt_totalsize(fdt);
-> -	new_size = ALIGN(new_size, align_size);
-> +	unpadded_size = fdt_totalsize(fdt);
-> +	new_size = ALIGN(unpadded_size, align_size);
->   	fdt_set_totalsize(fdt, new_size);
->   	debug("Size reduced from %x to %x\n", fit_size, fdt_totalsize(fdt));
->   	debug("External data size %x\n", buf_ptr);
->   	munmap(fdt, sbuf.st_size);
->   
-> -	if (ftruncate(fd, new_size)) {
-> +	/* Truncate to unpadded size first to ensure zero-filled padding */
-> +	if (ftruncate(fd, unpadded_size) || ftruncate(fd, new_size)) {
->   		debug("%s: Failed to truncate file: %s\n", __func__,
->   		      strerror(errno));
->   		ret = -EIO;
+HAS_CAAM should be enabled for all architecture support it. Whereas
+FSL_CAAM enables a driver for a device which may be managed by
+another system, like OP-TEE. Allow disabling u-boot FSL CAAM driver
+on systems with CAAM to prevent access conflicts.
 
-Can we use memset and zero out the trailing part of the buffer instead ?
+Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+---
+
+ arch/arm/mach-imx/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+index d94b5828d0d..3c178fb435f 100644
+--- a/arch/arm/mach-imx/Kconfig
++++ b/arch/arm/mach-imx/Kconfig
+@@ -52,7 +52,7 @@ config USE_IMXIMG_PLUGIN
+ config IMX_HAB
+ 	bool "Support i.MX HAB features"
+ 	depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5 || ARCH_IMX8M || ARCH_MX7ULP
+-	select FSL_CAAM if HAS_CAAM
++	imply FSL_CAAM if HAS_CAAM
+ 	imply CMD_DEKBLOB if HAS_CAAM
+ 	help
+ 	  This option enables the support for secure boot (HAB).
+-- 
+2.41.0
+
