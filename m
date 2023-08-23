@@ -4,80 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E10B7C3DA6F
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:00:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38442C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:06:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D82486416;
-	Wed, 23 Aug 2023 20:00:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A4CE86429;
+	Wed, 23 Aug 2023 20:06:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bLXopeMR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C1F24864AD; Wed, 23 Aug 2023 20:00:01 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692814017;
+	bh=LSJiSGP/bulY0gyAutr2OZ4P8F8pPlT+coyglAe5VZM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lmMJUy3cm/zmt2/GwB5prigurFL/KcDJEObCqXIJmGP7FEt8wUczGw4GK5zla2VLv
+	 1WMckkh39BVd059rCmDTlt4oCQR8NRDEw4QjVSl0LiJf0nl4bPyHqLtBieY3JyODhy
+	 oBDnAQcrO4H6xHUkKrPSAJxROvvXCwJGz+xugAEuakpwMK6GXqPFqDzhX2rhtOeLOC
+	 HId/Bx5KOq0i6Gf+aqvDiWtJI7KjOOQRM4HT6KVvf7ralLz8qND2HHOHI6G/NA/xUy
+	 s7KN0kUcC60AUAGj4W61o+uAHaMAtBM7FLUbts8so9SQ1QBEV7KIsZBeiyyD8yIDjz
+	 I0I0flg2L+hPg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC36C86412
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5925e580f12so10423247b3.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:59:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692813598; x=1693418398;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yUjmLJZleTqGWh0Mj+grXiohMrtCOB+pC937HSHk7sE=;
- b=bLXopeMRC98d5Lz/8Yww8B0Wcd95/PQxSQfRvxj8Jqebwt7TjJnKqePaSPTc+YeRBZ
- J5ba92RgRZgnrQjnMI2IVEEbJCnXWcQ1LbxQdYhnOEPRXbmHH6qgKY3HNVv6uJ61kdt3
- tFkpdKPx3LAZIBQ9Himgwo007vu3GTLcpAPfs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692813598; x=1693418398;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yUjmLJZleTqGWh0Mj+grXiohMrtCOB+pC937HSHk7sE=;
- b=mGu32KErgASLPX3+KtHmkj2FZEdyqUGkds7svreB/93L5j5LRvtsgUWO+EqGaKXRS1
- kez59/GHGwedI+Rgs7pRK/DRRmxS4wgTQhf6IndwkvYZB8pD0cXvb/a80n9Vp57xqJSH
- btiqyGDTBf3jGI5CzLAdKZ/4D451//fKwyjukDyTb0FJgMzHSvlgQ+Vm8uLuI6sWwVvn
- mLP1fD7PkF32n8RPQYBzpRy5anMV/JNIRjj+yyULpGWO5NEeBu3fNCXtR9jjd+VYwiWH
- rFAAiTkCa+I9dB4KFRZ6J61ii+GxuME7apQImvLnbkPAK0mXJXIMvOZ0zAMgSDrzEwOr
- 6+IA==
-X-Gm-Message-State: AOJu0YykjmuUyc1snm9U0suXi3LM+hX5J36w4diSSI7dQANDDKe1HhM1
- 6ovsYYogEpZxC8w92fB7qIqF6Q==
-X-Google-Smtp-Source: AGHT+IGDMVhUos4FXq9BXGh/utC0q+149Wx6Yv2NbdIp4v0p8rDyZosvGivFlqA/ROZ/T6LohSqL+A==
-X-Received: by 2002:a81:4843:0:b0:561:cb45:d7de with SMTP id
- v64-20020a814843000000b00561cb45d7demr13486311ywa.31.1692813598572; 
- Wed, 23 Aug 2023 10:59:58 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
- [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
- by smtp.gmail.com with ESMTPSA id
- u80-20020a0deb53000000b00592236855cesm1641039ywe.61.2023.08.23.10.59.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 10:59:57 -0700 (PDT)
-Date: Wed, 23 Aug 2023 13:59:56 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, peng.fan@nxp.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: Re: [PATCH v2 3/5] thermal: imx_tmu: Increase the log level for high
- temperatures
-Message-ID: <20230823175956.GY3953269@bill-the-cat>
-References: <20230823175911.319414-1-festevam@gmail.com>
- <20230823175911.319414-3-festevam@gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 29C0385DD2;
+ Wed, 23 Aug 2023 20:06:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1692814016;
+ bh=LSJiSGP/bulY0gyAutr2OZ4P8F8pPlT+coyglAe5VZM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=k2EV6LcQNy84s5iTpw+PpxAuec3dNk72doBdKyR1HSIEaJjjheUeLPuOtUXR1jtqT
+ gaR8XqrZhEnvY0HZRRvm/PxYq5Dd/SlDJcxPy6Xruh27rYASPp8/tizIaPCE4YOp8x
+ efX017l0yzbYpUReRY7XAab+1QhH8TWw7INJOg+KlQsAajKjZu57YvKDpqlQ/Y7L/R
+ /jP/RE7u6o87ZSv/gs51eFCo7ooKRRfDkog+ppGt98k45896ahVkGSNIompuKbXf7E
+ rfU2OEQbc+rrIqSEW6b2exJfqCf+ea2OBPC7bHdJJZjYKoZQoTqXtBYv19nxIue5ck
+ HydxGruTIlFIQ==
+Message-ID: <40263db2-e42a-4997-ddcc-7a1ea7d44d31@denx.de>
+Date: Wed, 23 Aug 2023 20:06:55 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lsG+8Y3HvCAde/hh"
-Content-Disposition: inline
-In-Reply-To: <20230823175911.319414-3-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] tools: ensure zeroed padding in external FIT images
+Content-Language: en-US
+To: Roman Azarenko <roman.azarenko@iopsys.eu>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+ Massimo Pegorer <massimo.pegorer@vimar.com>, Tom Rini <trini@konsulko.com>
+References: <20230823121417.270511-1-roman.azarenko@iopsys.eu>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20230823121417.270511-1-roman.azarenko@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,44 +70,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 8/23/23 14:14, Roman Azarenko wrote:
+> Padding the header of an external FIT image is achieved by growing the
+> existing temporary FIT file to match the given alignment requirement
+> before appending image data. Reusing an existing file this way means
+> that the padding will likely contain a portion of the original data not
+> overwritten by the new header.
+> 
+> Truncate the temporary FIT file to unpadded header length first, so
+> that the subsequent truncate operation extends the file with null
+> bytes, making padding predictably zeroed.
+> 
+> Fixes: 7946a814a319 ("Revert "mkimage: fit: Do not tail-pad fitImage with external data"")
+> Signed-off-by: Roman Azarenko <roman.azarenko@iopsys.eu>
+> ---
+> This fix was prompted by an observation that there is unexpected data
+> in the padding between the FIT header and the first image in a
+> generated external FIT file.
+> 
+> Having non-zero data in padding doesn't have any negative practical
+> consequences, these FIT files work fine just like any other. However
+> I'm not aware of any reason of making the padding depend on the
+> contents of an internal/intermediate FIT file. In my opinion, padding
+> should be predictably zeroed.
+> 
+> Steps to reproduce:
+> 
+> 1. Generate a random binary blob representing a fake rootfs image:
+> 
+> 	$ dd if=/dev/urandom of=rootfs bs=1M count=1
+> 
+> 2. Define a minimalistic FIT source file:
+> 
+> 	/dts-v1/;
+> 	/ {
+> 		description = "Padding demo";
+> 		#address-cells = <0x01>;
+> 		images {
+> 			rootfs {
+> 				data = /incbin/("rootfs");
+> 				type = "filesystem";
+> 				compression = "none";
+> 				hash-1 {
+> 					algo = "sha256";
+> 				};
+> 			};
+> 		};
+> 
+> 		configurations {
+> 			default = "config";
+> 
+> 			config {
+> 				rootfs = "rootfs";
+> 			};
+> 		};
+> 	};
+> 
+> 3. Build an external FIT image with 4096 bytes of padding:
+> 
+> 	$ mkimage -f source.dts -E -B 1000 output.dtb
+> 
+> Observe how the header is padded to 4096 bytes (0x1000) with a part of
+> an existing dummy rootfs image, which happened to be in that place in
+> the internal/intermediate FIT file.
+> ---
+>   tools/fit_image.c | 9 +++++----
+>   1 file changed, 5 insertions(+), 4 deletions(-)
+> 
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> index 9fe69ea0d9f8..7a7b68f96ed8 100644
+> --- a/tools/fit_image.c
+> +++ b/tools/fit_image.c
+> @@ -497,7 +497,7 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
+>   {
+>   	void *buf = NULL;
+>   	int buf_ptr;
+> -	int fit_size, new_size;
+> +	int fit_size, unpadded_size, new_size;
+>   	int fd;
+>   	struct stat sbuf;
+>   	void *fdt;
+> @@ -564,14 +564,15 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
+>   	/* Pack the FDT and place the data after it */
+>   	fdt_pack(fdt);
+>   
+> -	new_size = fdt_totalsize(fdt);
+> -	new_size = ALIGN(new_size, align_size);
+> +	unpadded_size = fdt_totalsize(fdt);
+> +	new_size = ALIGN(unpadded_size, align_size);
+>   	fdt_set_totalsize(fdt, new_size);
+>   	debug("Size reduced from %x to %x\n", fit_size, fdt_totalsize(fdt));
+>   	debug("External data size %x\n", buf_ptr);
+>   	munmap(fdt, sbuf.st_size);
+>   
+> -	if (ftruncate(fd, new_size)) {
+> +	/* Truncate to unpadded size first to ensure zero-filled padding */
+> +	if (ftruncate(fd, unpadded_size) || ftruncate(fd, new_size)) {
+>   		debug("%s: Failed to truncate file: %s\n", __func__,
+>   		      strerror(errno));
+>   		ret = -EIO;
 
---lsG+8Y3HvCAde/hh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Aug 23, 2023 at 02:59:09PM -0300, Fabio Estevam wrote:
-
-> From: Fabio Estevam <festevam@denx.de>
->=20
-> dev_info() message is not printed by default. Increase the log level
-> to dev_crit(). This allows the critical messages related to the temperatu=
-re
-> getting beyong the alert threshold to be displayed.
->=20
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---lsG+8Y3HvCAde/hh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmSRwACgkQFHw5/5Y0
-tywlVAv/e6pAiHh/zjv3KCZXEBoczLJGGRGTcHXRb4Ly92GoqIjXbr2r6cuUcMam
-7skTWoa48cai7t6mByE/jesR4qAfp8LS+C0VU5enftxzsc4r+QVHbnqcs16Lv/2m
-DbbaRYDUF4PLP3enlKd6Qrqwf+MV+I9l7zv86TdHYW4P/I0+jvM1x+QkTymazJce
-B14Lbwq9JsFPfFtDeILwUQwXpkhNvqWSuvr12PebRfeQ6Fed+9KXm7TKcXNG1drq
-qIdy+ix3zCZ8ni7Dpoe45cgCKsWG6wpKDgvBM+YRrktEVvlbkIvWD9XmJa0mLeCd
-n4TEMvKAhCGDHVzyO/KwCFSv1eN9HCqwLxE+huFwbVBfzXQEnr7guJRPIvSMY1M2
-6L3ESsNRkgP8+pyNT97XPRDxGhNtilux6rPsBjbYK0YmySC/n56j69Vv2qwK+ElS
-PLgFC/WvXZG5hD7Qyf0nW2ciIHrNp/tBN8qhWW7CHkOxsnSh+g0qx6fcdpQCr/QE
-BpqCETDu
-=J92z
------END PGP SIGNATURE-----
-
---lsG+8Y3HvCAde/hh--
+Can we use memset and zero out the trailing part of the buffer instead ?
