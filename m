@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F07C27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586FDC3DA6F
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:22:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3DCD864CE;
-	Wed, 23 Aug 2023 20:15:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BDF0855CE;
+	Wed, 23 Aug 2023 20:22:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KaDUQ9Mz";
+	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="EUvDvioq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53F0586451; Wed, 23 Aug 2023 20:15:47 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id D9008847D3; Wed, 23 Aug 2023 20:22:03 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC56E8647B
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:15:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06D138609B
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:22:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-58c92a2c52dso64038717b3.2
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:15:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-4ffae5bdc9aso7015445e87.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:22:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692814543; x=1693419343;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bW4Pzyi1GwYUnObZTDp66h/IowrguUAversKGLfilj0=;
- b=KaDUQ9MzmQsBM2pbi8Hu7HiRsdqnq7KVMsEuOyVR91rQOLoQu9GnX+tVYF2HaqCpMi
- wCft06Ny1i/ar5M3zlqxYKU40Oe6dfqmE4wYVrN4quiDHwKQEsw62ZH3oSsK4B+iooTE
- aJMymv5tTRl9UBwG9lNBecgXgxUZ6i/rObReY=
+ d=foundries.io; s=google; t=1692814921; x=1693419721;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a0FXJvkq+3jL5EX4/J2EIR99c3X9P7ggiQsCPQOU9Pw=;
+ b=EUvDvioqoOqTb2K1z1iKU76RR846Qx5qIb0SpH6V2nPEXZ8fxCkkWz1SqwXlz6VG0w
+ 2qX5kzsocXGpbw8c0GPvAjq7h2vcr9D3iMhnP4Ba6+cQZyZMEnS8tVojIbB5lGz++kHU
+ KoDDQe639tf7F72LbCZ+WZgDxDqZe7zogrHtduW18mWx/CrdTqAr2SBm9d7fhQ6BDyGC
+ BX3Zrnmg36ll/j6FuWYxp4DJhNnY/rus9S5Xj69CNegjaYB876t4WIklQpD+wzv6H5Ij
+ XwZ3rxMul4RMA9F9ikqapNYxvmuvPkeqco4CfQPEhCnZXv/TdXaPPJDLpeyIlRqihxA/
+ VnJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692814543; x=1693419343;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bW4Pzyi1GwYUnObZTDp66h/IowrguUAversKGLfilj0=;
- b=YCalvpO4o2mwiLAOszU0sDG0c6KO0NCJezWmoGmTcpZblzLigVjGWnMKWddwJNvy2G
- e/C9JkuApzoltdJqJXCUPObitsIlJPajMzm7R08yDfquORus97iqrbmE06TIRyBOS7Ou
- 2PPwKLKSCyInHs3m6nWX3iTdkpEuTen/kXG+kG8iKmsBFVABtVk7nnkiaRHUzCrXO455
- 21Izq6l+0vHXy4IDv1H8g32o59JazaQapKucMFxKKGFTj7SIVjAxlsMNvzAER/V/WeMp
- s/uFthEJLhICoiGcDc/9A40+OLEPpytg3tcmS2ru1FpX4owZwVU0WBtAkZWW2QW5TDzr
- QQYA==
-X-Gm-Message-State: AOJu0YyFEojpomL7P7b8njvjrhmDU1oB6odksKr4bakazzluJtXBUAtR
- 5ZU/iqeBsJxx8yIrXmig0paqvw==
-X-Google-Smtp-Source: AGHT+IHOleP5r5uZfqh1TLFauuqWOMcSWHVWdbqdSDOoGLC95KSY1HMPtru6uVZCz/wL1nIGxnBHiA==
-X-Received: by 2002:a0d:d145:0:b0:581:5cb9:6c2b with SMTP id
- t66-20020a0dd145000000b005815cb96c2bmr12497365ywd.45.1692814543643; 
- Wed, 23 Aug 2023 11:15:43 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
- [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
- by smtp.gmail.com with ESMTPSA id
- j1-20020a0dc701000000b0058ddb62f99bsm3516121ywd.38.2023.08.23.11.15.42
+ d=1e100.net; s=20221208; t=1692814921; x=1693419721;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a0FXJvkq+3jL5EX4/J2EIR99c3X9P7ggiQsCPQOU9Pw=;
+ b=G+jt04KlE2LT2dxWhp6exyZS4P2ss2pA1YsWeyIu5QVI1yR/dZH6fKNCWMiXuteVMQ
+ qFD23cqyJ5zotEcIjhUCGkGcWia1OSxrdoxz7EOVZ+BUvx5YxqmIOwsYfpHMfDXy12tu
+ oIhkrlFqOsBC6WB2KQWM9CDnAnA7rdmwZLtwq0WmhNWxSm4ebhYLqvFLdGdz90BbVvV3
+ VGuV9za1MiqYyMNSZYhNXqiByVdU2JoTH4gjLwYuBrHWDVyboP1DtcnfoUyUDHybLvhB
+ HHYsOmifQ14gdSuSL6el7Le2K+D0tfQ62EP1ku4Qg2ESeQPpmvTyvQSLyX9f8nwmF9qk
+ IBAQ==
+X-Gm-Message-State: AOJu0YwpCa4Fy6lHiy0BPu4utMEH9Mr3TVrCUOfcwSrL5SNm7bJs8DOX
+ QY1KXsbgPwR5v1A/2fz3SJxiQMnlC5CFugeEcZE=
+X-Google-Smtp-Source: AGHT+IFVY4dL3d2pfmTRIiO2RHv0VP8GcGEvFlX7RsjC7F+wSSMKTxIvLQbhTAhxZRXtH+H4/zACkg==
+X-Received: by 2002:ac2:5f81:0:b0:500:9214:b309 with SMTP id
+ r1-20020ac25f81000000b005009214b309mr3073120lfe.56.1692814920900; 
+ Wed, 23 Aug 2023 11:22:00 -0700 (PDT)
+Received: from cryobook.. ([93.188.34.55]) by smtp.gmail.com with ESMTPSA id
+ x2-20020ac259c2000000b004fe432108absm1789155lfn.182.2023.08.23.11.21.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 11:15:43 -0700 (PDT)
-Date: Wed, 23 Aug 2023 14:15:41 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/8] doc: Add gpt command documentation
-Message-ID: <20230823181541.GA3953269@bill-the-cat>
-References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
- <20230823164755.2874792-1-JPEWhacker@gmail.com>
- <20230823164755.2874792-3-JPEWhacker@gmail.com>
+ Wed, 23 Aug 2023 11:22:00 -0700 (PDT)
+From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2] usb: dwc3: Fix renaming SPL_USB_HOST_SUPPORT to
+ SPL_USB_HOST
+Date: Wed, 23 Aug 2023 21:21:48 +0300
+Message-ID: <20230823182156.32353-1-oleksandr.suvorov@foundries.io>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cRclv/BoCz07UjvR"
-Content-Disposition: inline
-In-Reply-To: <20230823164755.2874792-3-JPEWhacker@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,45 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In the usb/dwc3-layerscape driver the first option should be renamed
+to the latter as well. Do it.
 
---cRclv/BoCz07UjvR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 333e4a621df ("Rename SPL_USB_HOST_SUPPORT to SPL_USB_HOST")
+Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+---
 
-On Wed, Aug 23, 2023 at 10:47:38AM -0600, Joshua Watt wrote:
+Changes in v2:
+- [asked by Tom Rini] shrink the code using CONFIG_IS_ENABLED()
 
-> Adds initial documentation for the gpt command
->=20
-> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> ---
->  doc/usage/cmd/gpt.rst | 139 ++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 139 insertions(+)
->  create mode 100644 doc/usage/cmd/gpt.rst
+ drivers/usb/dwc3/dwc3-layerscape.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-You need to update the index too so it's included (and doesn't trigger
-an error about orphan files).  Please do a 'make htmldocs' to make sure
-everything else is clean, thanks.
+diff --git a/drivers/usb/dwc3/dwc3-layerscape.c b/drivers/usb/dwc3/dwc3-layerscape.c
+index 79cf71f7a85..58baa017ad1 100644
+--- a/drivers/usb/dwc3/dwc3-layerscape.c
++++ b/drivers/usb/dwc3/dwc3-layerscape.c
+@@ -134,8 +134,7 @@ U_BOOT_DRIVER(dwc3_layerscape_peripheral) = {
+ };
+ #endif
+ 
+-#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || \
+-	!defined(CONFIG_SPL_BUILD) && defined(CONFIG_USB_HOST)
++#if CONFIG_IS_ENABLED(USB_HOST)
+ static int dwc3_layerscape_host_probe(struct udevice *dev)
+ {
+ 	struct xhci_hcor *hcor;
+@@ -194,7 +193,7 @@ static int dwc3_layerscape_bind(struct udevice *dev)
+ 		driver = "dwc3-layerscape-peripheral";
+ 		break;
+ #endif
+-#if defined(CONFIG_SPL_USB_HOST_SUPPORT) || !defined(CONFIG_SPL_BUILD)
++#if defined(CONFIG_SPL_USB_HOST) || !defined(CONFIG_SPL_BUILD)
+ 	case USB_DR_MODE_HOST:
+ 		dev_dbg(dev, "Using host mode\n");
+ 		driver = "dwc3-layerscape-host";
+-- 
+2.41.0
 
---=20
-Tom
-
---cRclv/BoCz07UjvR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmTM0ACgkQFHw5/5Y0
-tywYbgwAmBPfQ++OHfb3GTQP2qKdenexjYU7o5H9KIsH8wJ1/1fpv51dr6ZV+FG2
-HwhCAWXl14h1t0PyhyL1OmoAtxO31ORhp4wMO0KJIJgv3+z7N2VyLMnsJVsmmvZm
-Q+UMTvV8ePCqkmfJrdfHNfVxCho4W0CrNDEY52hiO8XaE3K1lyxUfisebaGWBmIN
-TIIXlrmBRUpUNr+v1N8nFNc4ZbUOJFtk+4t2OxwRWyqzcd+AI745Bz0srdnHwMcf
-RNOUB1wMsAOwr9kQkUpiYhCh4bPXWegPi48DqXEO3wXXhecXrIyfqsBgTYUfysx5
-XmvcbTPl3X/yITNxv+UMHW+Fb47AdgrXzgZ26SJt8FhJ0thRRYQX1lEzW7Kh8inW
-sSBolJIpWQXEvjwWgQTCNW3EE9Xt4qUd3wYLdczi/QFXXKM/Q1vdzKVW7xRX7iFa
-QVCApdVW7AvHbTccCtTbdlJ9/x5ekGs0DB8lpRpdgos7qJFhfM+8/NBVZ3vAYD3s
-1EQ6Vb65
-=Roht
------END PGP SIGNATURE-----
-
---cRclv/BoCz07UjvR--
