@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B56C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 00:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802D6C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 00:00:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6832B86517;
+	by phobos.denx.de (Postfix) with ESMTP id ADDF38651F;
 	Thu, 24 Aug 2023 01:59:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="DZo8OpEE";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="OwXXQMbs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D239864FF; Thu, 24 Aug 2023 01:59:26 +0200 (CEST)
+ id A2B83864FF; Thu, 24 Aug 2023 01:59:26 +0200 (CEST)
 Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
  [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F221D86508
+ by phobos.denx.de (Postfix) with ESMTPS id F30998650C
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:59:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d66f105634eso5594269276.1
+ 3f1490d57ef6-d678b44d1f3so541810276.0
  for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:59:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=google.com; s=20221208; t=1692835156; x=1693439956;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4YDAo5w8lg1HQTJgaC1Dt0ef480DoxZMKD+KWxnAgTc=;
- b=DZo8OpEEhEjGOiTn8Y9bjREjpA4dHAwrnms9mpSbzzYbSKlVXbnDKz//LqsWfl5dnY
- jSHUUy37Dy4HO8rt66DgdMOWoPrYLSKPXBdAoW5Vgw+tRO+0xPqpfvdL/uFCsQrOnKEP
- g+Y5pLh/52/nISy2YeFUC85VLacFvnk4Z7+BgcX3tOZWV50e8O9JvyqlBs9yJ2q7KrDx
- suBRQ87+Ku3/V5+4RkUVDNKEr6yEfsQAdNobfF1ZbYgneb/alzdWCaLNxfizINjq7K4k
- cTKeP5hwGJdeZ821cbImXTzuhAV4oo4i6yn2frB9WlL4mbHZ3kW8sJufhoOoNuIt/txd
- xSEg==
+ bh=SVtJ74RyTaNUvHjnJGPfWwmHxTuvN2xNdQKvBm6bnX4=;
+ b=OwXXQMbsCZiYmxuR5vJR8Nxxl0L5OFQmzHT5vZTgiYQbVChlYmD4Y2pELLkIxBbkIn
+ ZbvJ9UZ1hVXxQ/Sj8dTYoZmFR0WZKPS0VvQ2KLD4nmZakncWop1XxSgnx/qTZ8O1lHEL
+ OmKWlgH9IOTvPd1JxiJIe0aZ+bkiaUN2DDnDYckDDuCH1Yp1Rz0HMasIwHnmt43ujnnl
+ +vSomAwulh1R729brl7J87sIQifGae8/TtEMR4Lh116uoao20iJWFt4Wjxrozjn3hwOv
+ h42sB4TkH1B0vgKdGsslf5+lLcJtle+Ehj6DS2h++XV0mAUr2FWKJ1fz5t+6dCJm6T3C
+ ehKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692835156; x=1693439956;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4YDAo5w8lg1HQTJgaC1Dt0ef480DoxZMKD+KWxnAgTc=;
- b=BNnZmjNJckaJBnvXS5O8c/QwvT/2QMA0ow4XNs6nQH0jOhDWM7iEXkITB5LuU6NyDd
- 6iwGEgdUyswud3Vu9vdyXhcqn1jSM9l9YNq+/oiRIX41vqulluQFSzmt7/4HRyvrhq50
- yiZYTFOD0Igyfky7oEGC/xYhC44BclfltljTMG3PXE7GAycHVFpvP9GEoeAFr5/0nvsD
- Yd/9KwUkRMKiRK8aCTlp4LEbun3kZTHxnln/0tlzQcw8yfGMNGbSpWRcFFm7JLceAsgX
- OGAwx5/2YtvrWjMLpvp6+634LM9Viw8RgXf5maieQNW5eVJ3W+0REzjkGdbkOTb30ZqM
- juZQ==
-X-Gm-Message-State: AOJu0YzHxYtQL1XKCgnJfJncX5DxVsiLRCrFI7ppUK6bWTLa69H/7ZR5
- I12Bk2Ynkr3EIKen6U5L3w+tfOaS8rNZ9Tx//sYxmw==
-X-Google-Smtp-Source: AGHT+IFqf1NBvEc9xytyj7IQXitePOncOcOcKk7FIu2zH5/N9jLagHqgSUJANCikXGVE7bUJuadz81RbfxedkT+5y9g=
-X-Received: by 2002:a05:6902:531:b0:d3a:28bb:2c95 with SMTP id
- y17-20020a056902053100b00d3a28bb2c95mr13698092ybs.22.1692835156457; Wed, 23
+ bh=SVtJ74RyTaNUvHjnJGPfWwmHxTuvN2xNdQKvBm6bnX4=;
+ b=WnCRlyDAeRbWIAdwTNLSfPCgEw3aGs61BC2ViVsgwhnBUQRSagpXKHBzwy6U72QhJS
+ bI2vWKmDNhZabAXL/EbJHk2l6Dqnm5TPVXJ8JpgEdFcpmvM0lnk+nHtsx0uCWd2xI5LK
+ c12dr8RK7T8VRHX4WzYG8eDg0s+SHYvpQLsFJgQNglwh+unEHXgWb1+fhxc0PaxkfGZD
+ xDcRzmbxjRyw4olL0ks1iDc3xqu+VigsyIiRHuFFDek2GX1hyxKG0j/H2WdEZdvtSXlG
+ ERL2tdBmfgT/lq3voQk/GRZ5D/YZR5CEOmB4S0/7Axp7O9t2CIOqPjh4Gfdf0IJ98F9h
+ iguw==
+X-Gm-Message-State: AOJu0YxHZh3T6yAP6U10Yvr/Yyaq0qf4mx7QOdEfjv9bTLjPepQGs/RM
+ uSnG31/jkuc2cjwlxmpwQ0L2Q+gmTaNN+tR4eB557Q==
+X-Google-Smtp-Source: AGHT+IHn2YSPzSOGBRBGqQ3LW6LvBs+CC/A24h7K/Tc5bWtUGOvkWOvv8H04sDMAakf4HYDNrJTP5gTmLpycg3dkLYE=
+X-Received: by 2002:a25:bed0:0:b0:cb2:7e6:191c with SMTP id
+ k16-20020a25bed0000000b00cb207e6191cmr12834489ybm.20.1692835156434; Wed, 23
  Aug 2023 16:59:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-9-nm@ti.com>
- <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
- <20230823171502.GQ3953269@bill-the-cat>
-In-Reply-To: <20230823171502.GQ3953269@bill-the-cat>
+References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
+ <20230823083721.1318097-3-masahisa.kojima@linaro.org>
+In-Reply-To: <20230823083721.1318097-3-masahisa.kojima@linaro.org>
 From: Simon Glass <sjg@google.com>
-Date: Wed, 23 Aug 2023 17:57:48 -0600
-Message-ID: <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
-Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-To: Tom Rini <trini@konsulko.com>
-Cc: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>,
- Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, 
- Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Wed, 23 Aug 2023 17:57:35 -0600
+Message-ID: <CAPnjgZ1Lkw8Y5g9txvp3JffAB9VrODghN=2K_PrZ3xhw44SsRw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] efi_loader: support boot from URI device path
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,130 +85,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Masahisa,
 
-On Wed, 23 Aug 2023 at 11:15, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 23 Aug 2023 at 02:38, Masahisa Kojima
+<masahisa.kojima@linaro.org> wrote:
 >
-> On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
-> > Hi Nishanth,
-> >
-> > On Tue, 22 Aug 2023 at 12:43, Nishanth Menon <nm@ti.com> wrote:
-> > >
-> > > Add base documentation for BeaglePlay
-> > >
-> > > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > > ---
-> > > Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > >
-> > > Changes Since V3:
-> > > * Updated documentation to give a more clear overview of MMC partitions
-> > >   and flashing information.
-> > > * Added OpenOCD debug documentation
-> > > * Added LED status information and indication of various boot stages
-> > >
-> > > V3: https://lore.kernel.org/all/20230815164440.2713726-5-nm@ti.com/
-> > > V2: https://lore.kernel.org/u-boot/20230727234446.3651836-5-nm@ti.com/
-> > > V1: https://lore.kernel.org/all/20230725185253.2123433-7-nm@ti.com/
-> > >
-> > >  doc/board/ti/am62x_beagleplay.rst    | 256 ++++++++++
-> > >  doc/board/ti/img/beagleplay_emmc.svg | 697 +++++++++++++++++++++++++++
-> > >  doc/board/ti/k3.rst                  |   1 +
-> > >  3 files changed, 954 insertions(+)
-> > >  create mode 100644 doc/board/ti/am62x_beagleplay.rst
-> > >  create mode 100644 doc/board/ti/img/beagleplay_emmc.svg
-> > >
-> >
-> > Great docs, an example to others.
-> >
-> > Some nits below.
-> >
-> > The bigger problem is that we cannot build this with buildman since it
-> > needs config fragments and we don't have a way to describe them. In
-> > fact none of my existing flows can build this board and it breaks all
-> > my scripts, etc.
-> >
-> > I don't think anyone else sees this as a problem?
-> >
-> > Anyway, I'll send a separate email on the topic.
-> >
-> > > diff --git a/doc/board/ti/am62x_beagleplay.rst b/doc/board/ti/am62x_beagleplay.rst
-> > > new file mode 100644
-> > > index 000000000000..5adb7b4c9ace
-> > > --- /dev/null
-> > > +++ b/doc/board/ti/am62x_beagleplay.rst
-> > > @@ -0,0 +1,256 @@
-> > > +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> > > +.. sectionauthor:: Nishanth Menon <nm@ti.com>
-> > > +
-> > > +AM62x Beagleboard.org Beagleplay
-> > > +================================
-> > > +
-> > > +Introduction:
-> > > +-------------
-> > > +
-> > > +BeagleBoard.org BeaglePlay is an easy to use, affordable open source
-> > > +hardware single board computer based on the Texas Instruments AM625
-> > > +SoC that allows you to create connected devices that work even at long
-> > > +distances using IEEE 802.15.4g LR-WPAN and IEEE 802.3cg 10Base-T1L.
-> > > +Expansion is provided over open standards based mikroBUS, Grove and
-> > > +QWIIC headers among other interfaces.
-> > > +
-> > > +Further information can be found at:
-> > > +
-> > > +* Product Page: https://beagleplay.org/
-> > > +* Hardware documentation: https://git.beagleboard.org/beagleplay/beagleplay
-> > > +
-> > > +Boot Flow:
-> > > +----------
-> > > +Below is the pictorial representation of boot flow:
-> > > +
-> > > +.. image:: img/boot_diagram_k3_current.svg
-> > > +  :alt: Boot flow diagram
-> > > +
-> > > +- On this platform, 'TI Foundational Security' (TIFS) functions as the
-> > > +  security enclave master while 'Device Manager' (DM), also known as the
-> > > +  'TISCI server' in "TI terminology", offers all the essential services.
-> > > +  The A53/M4F (Aux core) sends requests to TIFS/DM to accomplish these
-> > > +  services, as illustrated in the diagram above.
-> > > +
-> > > +Sources:
-> > > +--------
-> > > +.. include::  k3.rst
-> > > +    :start-after: .. k3_rst_include_start_boot_sources
-> > > +    :end-before: .. k3_rst_include_end_boot_sources
-> > > +
-> > > +Build procedure:
-> > > +----------------
-> > > +0. Setup the environment variables:
-> > > +
-> > > +.. include::  k3.rst
-> > > +    :start-after: .. k3_rst_include_start_common_env_vars_desc
-> > > +    :end-before: .. k3_rst_include_end_common_env_vars_desc
-> > > +
-> > > +.. include::  k3.rst
-> > > +    :start-after: .. k3_rst_include_start_board_env_vars_desc
-> > > +    :end-before: .. k3_rst_include_end_board_env_vars_desc
-> > > +
-> > > +Set the variables corresponding to this platform:
-> > > +
-> > > +.. include::  k3.rst
-> > > +    :start-after: .. k3_rst_include_start_common_env_vars_defn
-> > > +    :end-before: .. k3_rst_include_end_common_env_vars_defn
-> > > +.. code-block:: bash
-> > > +
-> > > + $ export UBOOT_CFG_CORTEXR="am62x_evm_r5_defconfig beagleplay_r5.config"
-> > > + $ export UBOOT_CFG_CORTEXA="am62x_evm_a53_defconfig beagleplay_a53.config"
-> >
-> > Can you drop those two variables? It seems to just confuse the matter.
-> > They are only used once. We are used to seeing a 'defconfig' target
-> > when configuring, and this just obfuscates things.
+> This supports to boot from the URI device path.
+> When user selects the URI device path, bootmgr downloads
+> the file using wget into the address specified by loadaddr
+> env variable.
+> If the file is .iso or .img file, mount the image with blkmap
+> then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> If the file is .efi file, load and start the downloaded file.
 >
-> This is how we have a common bit of rST for how to build N boards,
-> without having to do a literal copy and paste N times.
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>  lib/efi_loader/efi_bootmgr.c | 213 +++++++++++++++++++++++++++++++++++
+>  1 file changed, 213 insertions(+)
+>
 
-How about using this?
+Much of this code should be factored out into a help which can be
+called from other code. See comments below.
 
-https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index a40762c74c..8b20f486f2 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -7,10 +7,14 @@
+>
+>  #define LOG_CATEGORY LOGC_EFI
+>
+> +#include <blk.h>
+> +#include <blkmap.h>
+>  #include <common.h>
+>  #include <charset.h>
+> +#include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> +#include <net.h>
+>  #include <efi_default_filename.h>
+>  #include <efi_loader.h>
+>  #include <efi_variable.h>
+> @@ -168,6 +172,209 @@ out:
+>         return ret;
+>  }
+>
+> +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
+> +/**
+> + * mount_image() - mount the image
+> + *
+> + * @lo_label   label of load option
+> + * @file_size  file size
+> + * @handle:    pointer to handle for newly installed image
+> + * Return:     status code
+> + */
+> +static efi_status_t mount_image(u16 *lo_label, int file_size,
+> +                               efi_handle_t *handle)
+> +{
+> +       int err;
+> +       efi_status_t ret;
+> +       char *label = NULL, *p;
+> +       lbaint_t blknum;
+> +       struct udevice *bm_dev;
+> +       efi_handle_t bm_handle;
+> +       struct udevice *blk, *partition;
+> +       struct efi_handler *handler;
+> +       struct efi_device_path *file_path;
+> +       struct efi_device_path *device_path;
+> +
+> +       label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
+> +       if (!label)
+> +               return EFI_OUT_OF_RESOURCES;
+> +
+
+From here:
+
+> +       p = label;
+> +       utf16_utf8_strcpy(&p, lo_label);
+> +       err = blkmap_create(label, NULL);
+> +       if (err) {
+> +               log_err("failed to create blkmap\n");
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +       bm_dev = blkmap_from_label(label);
+> +       if (!bm_dev) {
+> +               log_err("\"%s\" is not the name of any known blkmap\n", label);
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +
+> +       blknum = file_size / 512; /* TODO: don't use literal value. */
+> +       err = blkmap_map_pmem(bm_dev, 0, blknum, image_load_addr);
+> +       if (err) {
+> +               log_err("Unable to map %#llx at block %d : %d\n",
+> +                       (unsigned long long)image_load_addr, 0, err);
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +       log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
+> +                (unsigned long long)image_load_addr);
+> +
+> +       /* TODO: without calling this, partition devices are not binded. */
+> +       blk_list_part(UCLASS_BLKMAP);
+> +
+> +       /*
+> +        * Search the partition having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
+> +        * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> +        */
+> +       device_foreach_child(blk, bm_dev)
+> +       {
+
+check code style
+
+> +               device_foreach_child(partition, blk)
+> +               {
+
+to here.
+
+Perhaps have partition_first() and partition_next() iterators?
+
+From here is EFI code:
+
+> +                       if (dev_tag_get_ptr(partition, DM_TAG_EFI,
+> +                                           (void **)&bm_handle)) {
+> +                               log_warning("DM_TAG_EFI not found\n");
+> +                               continue;
+> +                       }
+> +
+> +                       ret = efi_search_protocol(
+> +                               bm_handle,
+> +                               &efi_simple_file_system_protocol_guid,
+> +                               &handler);
+> +                       if (ret != EFI_SUCCESS)
+> +                               continue;
+> +
+> +                       ret = efi_search_protocol(
+> +                               bm_handle, &efi_guid_device_path, &handler);
+> +                       if (ret != EFI_SUCCESS)
+> +                               continue;
+> +
+> +                       ret = efi_protocol_open(handler, (void **)&device_path,
+> +                                               efi_root, NULL,
+> +                                               EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> +                       if (ret != EFI_SUCCESS)
+> +                               continue;
+> +
+> +                       file_path = expand_media_path(device_path);
+> +                       ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
+> +                                                     NULL, 0, handle));
+> +                       efi_free_pool(file_path);
+> +                       if (ret == EFI_SUCCESS)
+> +                               goto out;
+> +               }
+> +       }
+> +
+> +out:
+> +       efi_free_pool(label);
+> +
+> +       return ret;
+> +}
+> +
+> +/**
+> + * try_load_from_uri_path() - Handle the URI device path
+> + *
+> + * @uridp:     uri device path
+> + * @lo_label   label of load option
+> + * @handle:    pointer to handle for newly installed image
+> + * Return:     status code
+> + */
+> +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> +                                          u16 *lo_label,
+> +                                          efi_handle_t *handle)
+> +{
+> +       efi_status_t ret;
+> +       int file_size, file_name_len;
+> +       char *s, *host_name, *file_name, *str_copy;
+> +
+
+From here should be normal caode:
+
+> +       /*
+> +        * Download file using wget.
+> +        *
+> +        * URI device path content is like http://www.example.com/sample/test.iso.
+> +        * U-Boot wget takes the target uri in this format.
+> +        *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
+> +        * Need to resolve the http server ip address before starting wget.
+> +        */
+> +
+> +       /* only support "http://" */
+> +       if (strncmp(uridp->uri, "http://", 7)) {
+> +               log_err("Error: uri must start with http://\n");
+> +               return EFI_INVALID_PARAMETER;
+> +       }
+> +
+> +       str_copy = strdup(uridp->uri);
+> +       if (!str_copy)
+> +               return EFI_OUT_OF_RESOURCES;
+> +       s = str_copy + strlen("http://");
+> +       host_name = strsep(&s, "/");
+> +       if (!s) {
+> +               log_err("Error: invalied uri, no file path\n");
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +       file_name = s;
+> +       net_dns_resolve = host_name;
+> +       net_dns_env_var = "httpserverip";
+> +       if (net_loop(DNS) < 0) {
+> +               log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +       s = env_get("httpserverip");
+> +       if (!s) {
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +
+> +       /*
+> +        * WGET requires that "net_boot_file_name" and "image_load_addr" global
+> +        * variables are properly set in advance.
+> +        */
+> +       strlcpy(net_boot_file_name, s, 1024);
+> +       strlcat(net_boot_file_name, ":/", 1024); /* append '/' which is removed by strsep() */
+> +       strlcat(net_boot_file_name, file_name, 1024);
+> +       s = env_get("loadaddr");
+> +       if (!s) {
+> +               log_err("Error: loadaddr is not set\n");
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +       image_load_addr = hextoul(s, NULL);
+> +
+> +       file_size = net_loop(WGET);
+> +       if (file_size < 0) {
+> +               log_err("Error: downloading file failed\n");
+> +               ret = EFI_INVALID_PARAMETER;
+> +               goto out;
+> +       }
+> +
+> +       /*
+> +        * Identify file type by file extension.
+> +        * If the file extension is ".iso" or ".img", mount it and boot with default file.
+> +        * If the file is ".efi", load and start the downloaded file.
+> +        */
+> +       file_name_len = strlen(net_boot_file_name);
+
+to here.
+
+You could package that up into a function which returns the filename.
+Then the EFI code is this:
+
+> +       if (!strncmp(&net_boot_file_name[file_name_len - 4], ".iso", 4) ||
+> +           !strncmp(&net_boot_file_name[file_name_len - 4], ".img", 4)) {
+> +               ret = mount_image(lo_label, file_size, handle);
+> +       } else if (!strncmp(&net_boot_file_name[file_name_len - 4], ".efi", 4)) {
+> +               ret = efi_run_image((void *)image_load_addr, file_size);
+> +       } else {
+> +               log_err("Error: file type is not supported\n");
+> +               ret = EFI_INVALID_PARAMETER;
+> +       }
+> +
+> +out:
+> +       free(str_copy);
+> +
+> +       return ret;
+> +}
+> +#endif
+> +
+>  /**
+>   * try_load_entry() - try to load image for boot option
+>   *
+> @@ -211,6 +418,12 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
+>                 if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
+>                         /* file_path doesn't contain a device path */
+>                         ret = try_load_from_short_path(lo.file_path, handle);
+> +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
+> +               } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
+P> +                       ret = try_load_from_uri_path(
+> +                               (struct efi_device_path_uri *)lo.file_path,
+> +                               lo.label, handle);
+> +#endif
+>                 } else {
+>                         file_path = expand_media_path(lo.file_path);
+>                         ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
+> --
+> 2.34.1
+>
+
+Also please consider how to test this. With the changes I mention
+above, you can fairly easily test the partition stuff (we have several
+mmc images for testing).
 
 Regards,
 Simon
