@@ -4,82 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76CBEE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64AB8EE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:57:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 325E18648B;
-	Wed, 23 Aug 2023 17:57:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
+	by phobos.denx.de (Postfix) with ESMTP id 7C3A98645B;
+	Wed, 23 Aug 2023 17:57:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dawes-za-net.20221208.gappssmtp.com header.i=@dawes-za-net.20221208.gappssmtp.com header.b="rtX5mhXC";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fmMOB9xJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C691A8647B; Wed, 23 Aug 2023 17:57:15 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9BAFE864C1; Wed, 23 Aug 2023 17:57:18 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E67A986422
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:57:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B51486422
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:57:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dawes.za.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogan.dawes@gmail.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6b9e478e122so4100247a34.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:57:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dawes-za-net.20221208.gappssmtp.com; s=20221208; t=1692806231; x=1693411031; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uWGgXAdgNf84P4Q2USTAwfoSZF0AnTzqGyt3d1V5qms=;
- b=rtX5mhXC4GVe9afx2CPDpRD5GBzAIcZ/eVyfgOlAgjjBI3SoBwRE4ysJ1IqLvh0SD2
- UX+E8vFptnwvVR/ny16Tw8KfIufOzr2bvU31VK9pvbzg4yVA0novAfsOn+vp1VGkQbY9
- SVwlaDMUtcSi/WOemx3aZ9wm65qfrQBuzeOMRPgiNxA5iZs3HamH+yH15Mu5FY/6+OWw
- xbQMh268uqyFPbhRe1z7OcabEt6mvv0jhPE1Suarj66jVFL1XD9ZuaLNDaxuVjYRl24a
- AfF3/WiRCECQPMMln2H5LuEzrrvajSq2d+xfHetlsEqsDJItohN1b8MttquvOcNgI6+d
- UimA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E4C7E3FA97
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:57:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1692806235;
+ bh=NQIFa7zt6Q04gapXY4Yulb0k0BlUL2Y6i2ZVyKjYvYk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=fmMOB9xJfr24+rPM7RgF4QqWukqb5pGn28CTfX442Ph03zRe+YdtZ+voJZWpDU65L
+ AyKuHX38SXOQje0YWNajBDIaTlAdNICsAjYBMRt1BkeXWOH5aI1Fx/zQpTg90P8Iw2
+ kWBNG80a7bor9nLE66oHRHgsqK2xMbWmt2ZMMtYLznhJ5I5WyrPzCs1poDAmh5FlPC
+ La5zF+KqD+X4R8VOPlqLndO+hZFN6dYyFHtEssUiygFeGSIHXwp8yVaoYn5BpPsZz9
+ XQGhKnNkyAVsQtTBAQqjhEXoT/ykMo5khdHImOINyrwqz3iBDtFRUP3Uldv1BbgY5D
+ Y4mXqWAS0Ytkw==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-31c5adb698aso1955360f8f.2
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:57:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692806231; x=1693411031;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uWGgXAdgNf84P4Q2USTAwfoSZF0AnTzqGyt3d1V5qms=;
- b=HWNgArhssxb8pUg7Fgiv6ehcON6mzvIEce3y0VK4unYoIPbv+QQFKyHR8/2Mr2P9uV
- tNnkI9RMjVbS2v9bhFqarLNBvMQX/cArmVnzvKDHYaGVCJWUG8xJkdQg937Q56i7vFTL
- CSXCk9xRKCaiZS1ABSuX2NlrpSj7GesKWekcKdOV/W3pME+dm2gp6EaicWLzQcb2wbXk
- 5Y/KRiHlJ91DqYipQlau8py//lmVmgRy6+rx3dGjhM/S1OaaUQ889aKHKF58G7CUj0dh
- A/SFcKe1n03s4cHgvIc8E1AoZqYUPLaI4TBLLiOqSuamCbZ6gcxM/f0q1dlTkP/JRed0
- fWYQ==
-X-Gm-Message-State: AOJu0YxMB+tjwocVN51M8DsyGtk9ydoeCccALzyAFXRJpDtUaO6doIbO
- JopQq/ODv+6grafmpnUK7tx6/v2T5SsbrKd7WBQ=
-X-Google-Smtp-Source: AGHT+IFivvJDEyxiyU6oyay21IOiOnT1tRwVgE5g/ZPhgYp91NI5OUB0v+l1mh4Ctfvu4asqV9rDKKMavpt7ZKTxcHw=
-X-Received: by 2002:a05:6830:3b0c:b0:6b9:db92:9bd3 with SMTP id
- dk12-20020a0568303b0c00b006b9db929bd3mr14225411otb.13.1692806231381; Wed, 23
- Aug 2023 08:57:11 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692806235; x=1693411035;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NQIFa7zt6Q04gapXY4Yulb0k0BlUL2Y6i2ZVyKjYvYk=;
+ b=FcLknHXLK0dugTdcJk/N3VYLIdB59BdcADW2Q9JGKJ/dqMJHchRZIxK0KVymTrn5CM
+ uahX2WnbMRx3lLok+7XQkfIddqP9QO0o1NxdRjMHZsKnK0uBfURgJMGe2OQWV7ORG9a9
+ YvJI1DMVsCf/DyvkGZQWYyuSg2l+4ZycA7Ol3nHJYbyczI0+1v5OuHUtzeJlFuu1jAJY
+ DgSOZda4Yh8c4V+2bIpIV28+q/+ZNnCaed4rCq0WjiQpClK4QcbgCL1kUwEDDc3EBjqy
+ 5GVhRiTPkQkiQq35J1+UW8DF95/bPxnyC1bYEuKw5xtvyGsoNKOKfnKRi8KrImioes4M
+ PdNw==
+X-Gm-Message-State: AOJu0YzqKUJNbbDPxN/GsKbWmGx41hVRLYf9oIFrY/Jkb69WY+MyfYSz
+ flG7f403MPI/WMKaB/rTxXUxTwUHvN9tDC+pmGCOzLtxnDtzKBsg1i7tX/oY5bbh4ToxVknmJxU
+ NQrDuHvBiXkIiC9lbBXNkQ/VhlTqk0fU=
+X-Received: by 2002:adf:e78f:0:b0:319:84dd:4596 with SMTP id
+ n15-20020adfe78f000000b0031984dd4596mr10839262wrm.5.1692806235568; 
+ Wed, 23 Aug 2023 08:57:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEkzyJP9dKsGI2J8Cqm6j9SPz9Gof0EK4AqxuA3iI/XsJgOkzo747HM/79Wb7lLQ56z2wUgzA==
+X-Received: by 2002:adf:e78f:0:b0:319:84dd:4596 with SMTP id
+ n15-20020adfe78f000000b0031984dd4596mr10839246wrm.5.1692806235206; 
+ Wed, 23 Aug 2023 08:57:15 -0700 (PDT)
+Received: from [192.168.123.67] (ip-062-143-244-162.um16.pools.vodafone-ip.de.
+ [62.143.244.162]) by smtp.gmail.com with ESMTPSA id
+ x8-20020a5d4448000000b0031432f1528csm19511189wrr.45.2023.08.23.08.57.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Aug 2023 08:57:14 -0700 (PDT)
+Message-ID: <40e50527-0408-da17-9d33-194f9b71366f@canonical.com>
+Date: Wed, 23 Aug 2023 17:57:13 +0200
 MIME-Version: 1.0
-References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
- <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
- <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
- <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
- <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
- <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
- <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
- <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
- <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
- <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
- <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
-In-Reply-To: <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
-From: Rogan Dawes <rogan@dawes.za.net>
-Date: Wed, 23 Aug 2023 17:56:59 +0200
-Message-ID: <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
-Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: Config fragments
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Neha Francis <n-francis@ti.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,68 +109,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+On 23.08.23 17:30, Simon Glass wrote:
+> Hi,
+> 
+> Up until 2023.04 it has been possible to build all the defconfigs but
+> with 2023.07 that changed. Tom mentioned this to me recently.
 
-On Tue, 22 Aug 2023 at 13:44, Fabio Estevam <festevam@gmail.com> wrote:
->
-> Hi Rogan,
->
-> On Tue, Aug 22, 2023 at 6:42=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> =
-wrote:
-> >
-> > Hi Fabio,
-> >
-> > As far as I am aware, the U-boot source for the Wink hub has not been
-> > made available anywhere. That said, the RAM chip in use on the board
->
-> Was there a formal request for the U-Boot source code to Wink?
->
-> As per the GPL license, they have to share the U-Boot source code.
->
+Could you, please, explain why there are defconfig that can't be built. 
+The CI should have thrown an error in this case.
 
-I have just asked them for it, so let's see what happens. I'm not
-optimistic, though, given their financial troubles. I am not aware of
-anyone else asking them. However, I do believe that there have been
-requests for the kernel sources for the Wink Hub 2, which were
-ignored, suggesting that they are not the best GPL citizen.
+Why don't we delete defconfigs that don't build?
 
-> > is marked D9LPX, which apparently corresponds to the following item:
-> > https://media-www.micron.com/-/media/client/global/documents/products/d=
-ata-sheet/dram/ddr2/512mbddr2.pdf?rev=3D2c70f8a2b207452584b2bf040de8d771
->
-> There is a tool from NXP that helps with the i.MX28 DDR2 controller
-> initialization for a specific DDR model:
->
-> https://community.nxp.com/pwmxy87654/attachments/pwmxy87654/imx-processor=
-s/9552/1/MX28_DDR2_register_programming_aid_v0.2.xlsx
->
-> The DDR initialization values obtained from this tool are then used in
-> U-Boot inside the 'mxs_dram_vals' array.
->
-> There is a common DDR configuration at
-> arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c.
->
-> Most likely, in your case, it will require a custom mxs_dram_vals
-> initialization, like it is done at board/liebherr/xea/spl_xea.c.
->
-> > I did try to change the iomux_cfg_t as suggested above, built using
-> > make mx28evk_defconfig && make u-boot.sb, and used mxsldr to try load
-> > it, to no avail. There was no output on the serial port at all, or any
-> > other suggestion that anything was running.
->
-> It has been a long time since I used the mxsldr tool.
->
-> When time permits, I can try to load a recent U-Boot over USB using
-> this tool on a imx28-evk.
->
-> Cheers
+> 
+> Up until 2023.04 we can enumerate all the board configs that can be
+> built. We can build any of them using a single name and a single
+> defconfig. The boards.cfg file which buildman creates contains a full
+> list of things that can be built.
+> 
+>  From 2023.07 this changes and we now have random .config files
+> sprinkled about the place. I say random because they are not connected
+> to anything. For example, here is
+> board/ti/am62x/MAINTAINERS:
+> 
+> AM62x BOARD
+> M: Dave Gerlach <d-gerlach@ti.com>
+> M: Tom Rini <trini@konsulko.com>
+> S: Maintained
+> F: board/ti/am62x/
+> F: include/configs/am62x_evm.h
+> F: configs/am62x_evm_r5_defconfig
+> F: configs/am62x_evm_a53_defconfig
+> 
+> BEAGLEPLAY BOARD
+> M:     Nishanth Menon <nm@ti.com>
+> M:     Robert Nelson <robertcnelson@gmail.com>
+> M:     Tom Rini <trini@konsulko.com>
+> S:     Maintained
+> N:     beagleplay
+> 
+> In most cases the MAINTAINERS file tells us about each board and until
+> [1] I had assumed that was the case. With that patch reverted, these
+> are the only 'orphaned' MAINTAINERS entries (buildman
+> --maintainer-check):
+> 
+> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
+> ending at line 8
+> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS ending at line 44
+> WARNING: orphaned defconfig in
+> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
+> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending at line 6
+> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending at line 15
 
-I think fiddling with RAM timings is a little more in the weeds than I
-am ready to go at this point. I did see this post
-(http://web.archive.org/web/20151005053615/http://jalderman.org/?p=3D348),
-suggesting that it was not too difficult to get it working using
-mainline u-boot. That said, I also note that some teardowns mention
-that the RAM is a Nanya part, while I have Micron, so perhaps I should
-not place too much reliance on that.
+Why should we care about the maintainer status when building a defconfig?
 
-Rogan
+> 
+> But Tom advised me that MAINTAINERS is not intended for this purpose,
+
+Enumerating configs/*defconfig would make more sense to me.
+
+Best regards
+
+Heinrich
+
+> so the check has been dropped. I am not suggesting we bring it back,
+> necessarily, but if we did, we could use it to specify the .config and
+> defconfig files which are used by each board.
+> 
+> *Failing that*, I suggest a new 'name.brd' file in the board directory
+> to contain this information, e.g.
+> 
+> # Contents of board/ti/am62x/beagleplay.brd:
+> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5.config
+> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53.config
+> 
+> This could be parsed by buildman and other tools, to produce a list of
+> available boards and to build each using a single name (e.g. make
+> beagleplay-r5_defconfig)
+> 
+> What do people think?
+> 
+> Regards,
+> Simon
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230803185144.1760729-2-sjg@chromium.org/
+
