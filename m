@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B44EE49AB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 07:04:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11D8AEE49AE
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 07:44:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72ACE86432;
-	Wed, 23 Aug 2023 09:04:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 133728642E;
+	Wed, 23 Aug 2023 09:44:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="E78Uqr9+";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="RY8ipl8+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1584864AB; Wed, 23 Aug 2023 09:04:24 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8A33E8645D; Wed, 23 Aug 2023 09:44:13 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82BFC833DB
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:04:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3654580B98
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1692774245; x=1693379045; i=xypron.glpk@gmx.de;
- bh=+Vka7fdS+KHusLg40264pPBWPi01GcVTFHqkExS3URw=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=E78Uqr9+8/Nrr8EQ8NPURyD64dmZIb5Y7jSpICjaXCxoPKWoVln5zn7QJmiPBVXQLRSXHeY
- dx4LLtn5vU9kqdeZ0tcmnCMODbZZKZtWWJmc6ecADrGyLDCFzZt0b2EtAsozDpE0DyaG4pLkq
- ynVYqImsc2C94M4Z7fX/KRTa+9u2ywdp5mcbOncAfPI6Q4vkHoutNXwIR76OrV59dryiVt7bc
- OTSJEGbUQilfdYmTwIOH9RBSKxPAIg6g4vLXeq8ltBdGg58v+GGs5cZjsnCL58WhcjMixHLo8
- PIeiGZqWtYKdc3ho7+H6O8BAq5ru2yK54T7fgE2NqrD9yYvYDj3w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MRTNF-1qKDIW2eRx-00NOgL; Wed, 23
- Aug 2023 09:04:05 +0200
-Message-ID: <fbe36d84-9e06-3f2f-9a5c-b1a6f4d32df4@gmx.de>
-Date: Wed, 23 Aug 2023 09:04:51 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-31c6d17aec4so140136f8f.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 00:44:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692776650; x=1693381450; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=LmEn1+H+4t3EB+mFHcYOcWnoGGgmn8BllpKp3HV4Uj4=;
+ b=RY8ipl8+T0LIiCU31fVa5heTTi7wzxjFO6xDwROxlVO6ro9iOWC4srUoz94B9XJiFu
+ k8a3d37TtnpovRWLCJ5XrWcSF4PD0f9p4EN7QVIuDq5+iQziEYtZ/bsSdPoZEMzyGtH9
+ 2lcbnr1zrctrTsFfMOoTjP+ubyRaJBPLLY6/ORdyGy7MfG2LcdgMJ5B6BKchYgbh7QJF
+ odLGINhGBNOsC9TERBdmr23pPHIa9+iMPfEqP1hFjyB+SV6bewASGaCLV2N5iKslZBeB
+ j3T7VBO3lFs/wJr/lteuFsnNLEwcdMosPNipA1J0vo35PgsZxONAumscj7BgqRwg3kDH
+ fmYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692776650; x=1693381450;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LmEn1+H+4t3EB+mFHcYOcWnoGGgmn8BllpKp3HV4Uj4=;
+ b=j+xiWnFnIPh2AfgGHQ9xNbbCzgx8JGpZuyt8VhosPE7SgBvyFU0ZB101JvlgHS59gW
+ pNtO0Y1iiydfobO4P6Dgb9OKrj4CnKkle5yXYgmBZ8MpDG7dD64PrHuPYobxYwnogD8L
+ zWZgJTJSxLxaVSeLk7RLGgMUzgwbCHMmA6pJcR93L5Fy/1EHhLwVi0OkRMJcikR2tjcg
+ 47K8PYoUFaL2+YqS7cxjrQz0JGd+Zz81MkrST//E7IeKl3TWeb/GBuQQri0IoMyU6kMu
+ lwpOyUh4tKri4lXtWssePB2BYXjVvrQlzDgk82owpmNVXhLCFoRnuBOcqhXCmOn3zWrJ
+ IgGw==
+X-Gm-Message-State: AOJu0YwVYKtMbDkj8i32k37VXlY3BqIHpFLUePnherqKkb8TxBS1zQ85
+ o9Oim6VL/U5+yLPFKr9/06s2YA==
+X-Google-Smtp-Source: AGHT+IEqp8QRUqTN0LraGpCUb5qiPFtZfMZLoIYa4miujNX/jNgHylc25U/MCCbjeCMYkNVF3vuorQ==
+X-Received: by 2002:a5d:62ce:0:b0:31a:e972:3601 with SMTP id
+ o14-20020a5d62ce000000b0031ae9723601mr9479141wrv.54.1692776650441; 
+ Wed, 23 Aug 2023 00:44:10 -0700 (PDT)
+Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
+ by smtp.gmail.com with ESMTPSA id
+ n15-20020a5d484f000000b003197869bcd7sm18270479wrs.13.2023.08.23.00.44.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 00:44:09 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
+ <trini@konsulko.com>
+Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
+ Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ u-boot@lists.denx.de, Jan
+ Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH V4 0/8] board: ti: Add support for BeaglePlay
+In-Reply-To: <20230822184135.2328409-1-nm@ti.com>
+References: <20230822184135.2328409-1-nm@ti.com>
+Date: Wed, 23 Aug 2023 09:44:09 +0200
+Message-ID: <874jkqgq46.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jonathan Humphreys <j-humphreys@ti.com>, Nishanth Menon <nm@ti.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request for doc-2023-10-rc4
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:34/LaD7r95Cc3gTEH9MEbI8Zz75b4ZS5hSA49vRr5R1RizEu55C
- KvYiyECbjra4aurrUTIJn6e52MMGNKlLHe+cbHU016hDTgoxWlg7lg02/1xACxy8wJQDTa8
- TavelljzFUG8wpfT0NcrrR4z+hefcdkDw962R1LBvNGjtHFm4w5h4o9rMKR21Ym9TaDIuWA
- +aAE42yH2WZ2+DM2Iy+8w==
-UI-OutboundReport: notjunk:1;M01:P0:g0eg2oDYA7U=;oEbF/KxzfjfBVjvNv5YpygWG42/
- zamMvrRZsk/AYVQk8OoNH8WG2+J5KD+MspjJnDBk9G27DoX64WNKXaTCmsmcb31JUBthc/TOI
- qpndleGWBOQdDLtpm/MX6q3+8VG/+LV0EvAGIGj+AWnGyDtW+v6DJoLqWDvmk51vRaeM4HZbl
- PT2i9AiFQ2brPulmZyAgi/hk54ipQwEKyfgGpYzJD5L5qckm/XqEESRU3QwEhoKs+tYrULueN
- al/lcamDBxuHdBSnV4SfQfld2RopFL4K+lyXmQOKvzs06iHe+qbsVCUcBf6DPazRd2EcaU+lx
- 4GbNDd8XgOBksgMkwoExDtn8k6cnvuoTinm++Rf6lBG2Xi/3IQZVSea5izIYLcQDJQ1S30TVe
- ktmPka7B+T2Dsgkfur15Idf264TVnuwgfoeNn6OAI5Og9qD0ndK6MVZlT6VBuWEZpO7qFxqFf
- 4FnD9KDKoPhknBIQPwVG3Lxu2bJkELN8OGb1HvcWlPHNynOy3DLIKv04/0bnVDUkj0YB/YM/N
- EEsIGE6vWeY2NMnxcKlwQBtxbWC+P0wtrkdVdPxvY6TR/QyaXYPFRsLsROd1D5wnOMvio3V4E
- GjqIWkmpoPgf9IMVDuYmXR/GuS1b6ejo6p6soyunMynb/QelTIZFy1C8zR3wPLG/1kcJIXI/H
- 9dihAt/S60FixzrJoRRqe0H9FtMcLLSnpuF5DjUVDo0chMMuvQdu0zaSlRvTNRd9xuEa+cVYQ
- fTZ8688GSSq7u6K+wiDCg2chAlch1lqetLkdgkVCuj0126WCazP19vG0NkVxoIcTmjvuP1pb1
- ZEizjziDkKWRRe2+jKfgGFQDI3PgWg7nEwWjZ12H8OUJU05DNxoR7oIX3csPsTb9aAKoIa4VF
- 0SAR6voo/nGcXMPiSDtTjAUugk8kONvhcXajo5VU2egIdcJlqhEcXGkdfkcEvUFjYWOlQqwuk
- Jj/Glg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,75 +94,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Hi Nishanth,
 
-The following changes since commit 976fb2ffa3875a7bed9866bf5cf939a81c423ef=
-8:
+On mar., ao=C3=BBt 22, 2023 at 13:41, Nishanth Menon <nm@ti.com> wrote:
 
-   Prepare v2023.10-rc3 (2023-08-21 16:19:59 -0400)
+> Hi,
+>
+> Add support for BeaglePlay - rev 4
+>
+> Full series: https://github.com/nmenon/fix-k3-dt-u-boot/commits/beaglepla=
+y-v4.2
+>
+> Caveats:
+> * networking: pending https://lore.kernel.org/all/20230822121350.51324-1-=
+rogerq@kernel.org/
+> * 32kclk and usb: pending:
+>   https://lore.kernel.org/u-boot/20230725185253.2123433-4-nm@ti.com/
+>   OR https://github.com/nmenon/fix-k3-dt-u-boot/commit/853b29d63c1ca642be=
+316f1afb0fb778610dec46
+>   being properly resolved (NOTE: without this patch, wlan is broken in
+>   Linux as the 32kclk from SoC is incorrectly supplied to wlan as 25MHz)
+> * There seems to be a bug in Linux kernel with sdhci that seems to
+>   depend on u-boot initialization of sdhci for functionality.
+>
+> Changes since V3:
+> * GPIO, LEDs, PMIC enabled at u-boot level.
+> * eMMC boot fixed in a manner not to break existing SK and other EVM
+>   solutions. UDA FS solution similar to commit 5019170970ad
+>   ("arch: arm: mach-k3: j721e: add support for UDA FS") introduced.
+> * env file for beagleplay introduced to keep things consistent with the
+>   behavior expected on BeaglePlay
+> * Documentation updates to fixup alt, references, added OpenOCD debug
+>   info etc.
+> * New patch to ensure env files have priority over header included env
+>   variables.
+>
+> Bootlog:
+> emmc with no SD: https://gist.github.com/nmenon/5755228ff424c55245f453454=
+8827ab9
+> emmc with SD: https://gist.github.com/nmenon/8571dba9e942e77e48e52fe59cf7=
+1aac
+> SD boot: https://gist.github.com/nmenon/1cc850c37469fe7c86b26842fe0910f8
+>
+> Baseline: 7e6e40c57233 (origin/next) Merge tag 'v2023.10-rc3' into next
+>
+> V3: https://lore.kernel.org/all/20230815164440.2713726-1-nm@ti.com/
+> V2: https://lore.kernel.org/u-boot/20230727234446.3651836-1-nm@ti.com/
+> V1: https://lore.kernel.org/all/20230725185253.2123433-1-nm@ti.com/
+>
+> Nishanth Menon (6):
+>   env_default: Allow CONFIG_EXTRA_ENV_TEXT to override
+>     CFG_EXTRA_ENV_SETTINGS
+>   configs: am62x_evm*: Enable EMMC_BOOT configuration
+>   arm: mach-k3: am625: Add support for UDA FS
+>   arm: dts: k3-am625-sk-binman: Add labels for unsigned binary
+>   board: ti: am62x: Add am62x_beagleplay_* defconfigs and env file
+>   doc: board: ti: Add BeaglePlay documentation
+>
+> Nitin Yadav (1):
+>   drivers: mmc: am654_sdhci: Update OTAP/ITAP delay
+>
+> Robert Nelson (1):
+>   arm: dts: Add k3-am625-beagleplay
 
-are available in the Git repository at:
+Using baseline 7e6e40c57233 ("Merge tag 'v2023.10-rc3' into next"), I
+could boot all the way to U-boot proper shell.
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/doc-2023-10-rc4
+And the LEDs work for me as well with:
 
-for you to fetch changes up to 4e73b0153cce064e10dee4722cb2b6833361c227:
+  =3D> led led-0 toggle
 
-   doc: Highlight the most relevant u-boot talks (2023-08-23 08:03:00 +020=
-0)
+So for the whole series:
 
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/17486
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-=2D---------------------------------------------------------------
-Pull request for doc-2023-10-rc4
-
-Documentation:
-
-* Fix documentation for TI boards
-* Describe running on VirtualBox
-* List build dependencies for building documenation
-* Add references to U-Boot talks
-
-Other:
-
-* Fix error handling in the setexpr command (printf_str)
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (4):
-       cmd: setexpr: fix printf_str()
-       doc: board: ti: k3: image alt texts
-       doc: board: ti: am62x: provide image alt texts
-       doc: board: ti: am65x: provide image alt text
-
-Jonathan Humphreys (1):
-       doc: board: ti: k3: Fix up OpenOCD references and debug info
-
-Nishanth Menon (8):
-       doc: board: ti: k3: Fixup alt text for openocd sequence
-       doc: board: ti: j7200: provide image alt text
-       doc: board: ti: j721e: provide image alt text
-       doc: board: ti: am62x: Fix build step numbering
-       doc: board: ti: am65x: Fix build step numbering
-       doc: board: ti: j7200: Fix build step numbering
-       doc: board: ti: j721e: Fix build step numbering
-       doc: board: ti: k3: Elaborate on various firmware
-
-Paul Barker (2):
-       doc: Explicitly list build dependencies for docs
-       doc: Highlight the most relevant u-boot talks
-
-Thomas Mittelstaedt (1):
-       Documentation extended with specific information for VirtualBox
-
-  cmd/printf.c                       |  6 +--
-  doc/board/ti/am62x_sk.rst          |  7 +++-
-  doc/board/ti/am65x_evm.rst         | 18 +++++---
-  doc/board/ti/j7200_evm.rst         | 23 ++++++-----
-  doc/board/ti/j721e_evm.rst         | 21 ++++++----
-  doc/board/ti/k3.rst                | 31 ++++++++++++--
-  doc/build/documentation.rst        | 11 +++++
-  doc/develop/uefi/u-boot_on_efi.rst | 84
-++++++++++++++++++++++++++++++++++++++
-  doc/learn/talks.rst                | 15 +++++--
-  9 files changed, 180 insertions(+), 36 deletions(-)
+>
+>  arch/arm/dts/Makefile                         |    2 +
+>  .../dts/k3-am625-beagleplay-ddr4-1600MTs.dtsi | 2195 +++++++++++++++++
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  196 ++
+>  arch/arm/dts/k3-am625-beagleplay.dts          |  758 ++++++
+>  arch/arm/dts/k3-am625-r5-beagleplay.dts       |   87 +
+>  arch/arm/dts/k3-am625-sk-binman.dtsi          |    4 +-
+>  arch/arm/mach-k3/am625_init.c                 |    6 +
+>  board/ti/am62x/MAINTAINERS                    |    7 +
+>  board/ti/am62x/beagleplay.env                 |   23 +
+>  board/ti/am62x/beagleplay_a53.config          |   55 +
+>  board/ti/am62x/beagleplay_r5.config           |   15 +
+>  configs/am62x_evm_a53_defconfig               |    1 +
+>  configs/am62x_evm_r5_defconfig                |    1 +
+>  doc/board/ti/am62x_beagleplay.rst             |  256 ++
+>  doc/board/ti/img/beagleplay_emmc.svg          |  697 ++++++
+>  doc/board/ti/k3.rst                           |    1 +
+>  drivers/mmc/am654_sdhci.c                     |   14 +-
+>  include/env_default.h                         |    6 +-
+>  18 files changed, 4315 insertions(+), 9 deletions(-)
+>  create mode 100644 arch/arm/dts/k3-am625-beagleplay-ddr4-1600MTs.dtsi
+>  create mode 100644 arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/k3-am625-beagleplay.dts
+>  create mode 100644 arch/arm/dts/k3-am625-r5-beagleplay.dts
+>  create mode 100644 board/ti/am62x/beagleplay.env
+>  create mode 100644 board/ti/am62x/beagleplay_a53.config
+>  create mode 100644 board/ti/am62x/beagleplay_r5.config
+>  create mode 100644 doc/board/ti/am62x_beagleplay.rst
+>  create mode 100644 doc/board/ti/img/beagleplay_emmc.svg
+>
+> --=20
+> 2.40.0
