@@ -4,95 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64AB8EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:57:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8960EE49A3
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 16:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C3A98645B;
-	Wed, 23 Aug 2023 17:57:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CF148645B;
+	Wed, 23 Aug 2023 18:02:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fmMOB9xJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OVIGy5AB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BAFE864C1; Wed, 23 Aug 2023 17:57:18 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 29A0A8648B; Wed, 23 Aug 2023 18:01:59 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B51486422
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:57:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B43386422
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 18:01:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E4C7E3FA97
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:57:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1692806235;
- bh=NQIFa7zt6Q04gapXY4Yulb0k0BlUL2Y6i2ZVyKjYvYk=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=fmMOB9xJfr24+rPM7RgF4QqWukqb5pGn28CTfX442Ph03zRe+YdtZ+voJZWpDU65L
- AyKuHX38SXOQje0YWNajBDIaTlAdNICsAjYBMRt1BkeXWOH5aI1Fx/zQpTg90P8Iw2
- kWBNG80a7bor9nLE66oHRHgsqK2xMbWmt2ZMMtYLznhJ5I5WyrPzCs1poDAmh5FlPC
- La5zF+KqD+X4R8VOPlqLndO+hZFN6dYyFHtEssUiygFeGSIHXwp8yVaoYn5BpPsZz9
- XQGhKnNkyAVsQtTBAQqjhEXoT/ykMo5khdHImOINyrwqz3iBDtFRUP3Uldv1BbgY5D
- Y4mXqWAS0Ytkw==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-31c5adb698aso1955360f8f.2
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:57:15 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-99df431d4bfso754517666b.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:01:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692806517; x=1693411317;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=cRpvKmnIXRD4AyLJ+jZOZhrW0sVjM/x2kbYeUROeo4E=;
+ b=OVIGy5ABs6EXLmxtZNvUEvWGKQv34Lw/WPceZXbf6AHCNv3iS6Zmt//MuKTg1qodd5
+ DPAXd+iXWeYn4rZE2TlXGsaUa8GHZb6l+dzLr7PkgaIBKv9YG26qhDPOyiHBlobw7d18
+ /ICMmHXPoRAukAa9qT4iAMEHiwz2ZQHbksmAQHmgoo5QeGya0hx3BhaO/E7CLcxn/Oa/
+ XPIeeEjFFaSN+EljqiiL2Au23eGHeieFr14Po/ODRhFBRhLRSiwN1+VQy6ZvdCxJOYNQ
+ e8BcqQaoEtHvIoduPsh7Q8Vrt4KvSCwqPkt4ZWAMXtmHEFhI0yS9axoSF5T7t3poWwws
+ +eug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692806235; x=1693411035;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NQIFa7zt6Q04gapXY4Yulb0k0BlUL2Y6i2ZVyKjYvYk=;
- b=FcLknHXLK0dugTdcJk/N3VYLIdB59BdcADW2Q9JGKJ/dqMJHchRZIxK0KVymTrn5CM
- uahX2WnbMRx3lLok+7XQkfIddqP9QO0o1NxdRjMHZsKnK0uBfURgJMGe2OQWV7ORG9a9
- YvJI1DMVsCf/DyvkGZQWYyuSg2l+4ZycA7Ol3nHJYbyczI0+1v5OuHUtzeJlFuu1jAJY
- DgSOZda4Yh8c4V+2bIpIV28+q/+ZNnCaed4rCq0WjiQpClK4QcbgCL1kUwEDDc3EBjqy
- 5GVhRiTPkQkiQq35J1+UW8DF95/bPxnyC1bYEuKw5xtvyGsoNKOKfnKRi8KrImioes4M
- PdNw==
-X-Gm-Message-State: AOJu0YzqKUJNbbDPxN/GsKbWmGx41hVRLYf9oIFrY/Jkb69WY+MyfYSz
- flG7f403MPI/WMKaB/rTxXUxTwUHvN9tDC+pmGCOzLtxnDtzKBsg1i7tX/oY5bbh4ToxVknmJxU
- NQrDuHvBiXkIiC9lbBXNkQ/VhlTqk0fU=
-X-Received: by 2002:adf:e78f:0:b0:319:84dd:4596 with SMTP id
- n15-20020adfe78f000000b0031984dd4596mr10839262wrm.5.1692806235568; 
- Wed, 23 Aug 2023 08:57:15 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEkzyJP9dKsGI2J8Cqm6j9SPz9Gof0EK4AqxuA3iI/XsJgOkzo747HM/79Wb7lLQ56z2wUgzA==
-X-Received: by 2002:adf:e78f:0:b0:319:84dd:4596 with SMTP id
- n15-20020adfe78f000000b0031984dd4596mr10839246wrm.5.1692806235206; 
- Wed, 23 Aug 2023 08:57:15 -0700 (PDT)
-Received: from [192.168.123.67] (ip-062-143-244-162.um16.pools.vodafone-ip.de.
- [62.143.244.162]) by smtp.gmail.com with ESMTPSA id
- x8-20020a5d4448000000b0031432f1528csm19511189wrr.45.2023.08.23.08.57.14
+ d=1e100.net; s=20221208; t=1692806517; x=1693411317;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=cRpvKmnIXRD4AyLJ+jZOZhrW0sVjM/x2kbYeUROeo4E=;
+ b=aR8UVYQPQtsI2olNoJ/8zXp0U+rL2SPeE54AylPPKKchKtCHmiISm3QxtfsjNKtdo0
+ PtoOEQ7Hkar4Gza087f626uzgDJ1Hq7t5kYcYtQaWuuV1FslzGDjeP1KAGmTVYM0UPno
+ AWp8xTWaIbw8g1vhkk+qUo/W4BhmZmWgUPnbDtTcRp4v8rkFhbnLuCVwM6YXCLzgw0LP
+ uLP14VPGN/6GuwZ6YwI1artMVIjeScJSq5aZzo8m9cH1OzTuY02ZRlBPz07lNzzm35fh
+ RtrDpcLpysHNePKnAFAybUZdb+uVPyKNvoubhOkctLEKObW6lhM933Cb7/d7mo6d6OXC
+ dHkg==
+X-Gm-Message-State: AOJu0YzOIDoVNWB5v7IItfzlioKlg021/ECpmWsOv3nMj2fCUKG65r0t
+ l9aCkV0bYoLWKEALOiRi+X0=
+X-Google-Smtp-Source: AGHT+IHR3wa/ul2Jcl28YcDf42+SRtBTZQIx956JqPQ+tDn1iwVRaZqM4S+hVaNsHmhzmwj/vnVmuQ==
+X-Received: by 2002:a17:906:9bd8:b0:9a1:c812:cbb9 with SMTP id
+ de24-20020a1709069bd800b009a1c812cbb9mr2872863ejc.31.1692806516499; 
+ Wed, 23 Aug 2023 09:01:56 -0700 (PDT)
+Received: from [127.0.0.1] ([46.211.148.241]) by smtp.gmail.com with ESMTPSA id
+ r25-20020a170906a21900b00992f309cfe8sm9903884ejy.178.2023.08.23.09.01.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 08:57:14 -0700 (PDT)
-Message-ID: <40e50527-0408-da17-9d33-194f9b71366f@canonical.com>
-Date: Wed, 23 Aug 2023 17:57:13 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: Config fragments
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Neha Francis <n-francis@ti.com>,
+ Wed, 23 Aug 2023 09:01:56 -0700 (PDT)
+Date: Wed, 23 Aug 2023 19:01:55 +0300
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Neha Francis <n-francis@ti.com>,
  Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: Config fragments
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20230823155558.GM3953269@bill-the-cat>
 References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <20230823155558.GM3953269@bill-the-cat>
+Message-ID: <9C8F8C88-3C64-408B-B4D9-E01AF79A05EF@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,87 +98,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23.08.23 17:30, Simon Glass wrote:
-> Hi,
-> 
-> Up until 2023.04 it has been possible to build all the defconfigs but
-> with 2023.07 that changed. Tom mentioned this to me recently.
 
-Could you, please, explain why there are defconfig that can't be built. 
-The CI should have thrown an error in this case.
 
-Why don't we delete defconfigs that don't build?
+23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 18:55:58 GMT+03:00,=
+ Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2=
+(-=D0=BB=D0=B0):
+>On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
+>
+>> Hi,
+>>=20
+>> Up until 2023=2E04 it has been possible to build all the defconfigs but
+>> with 2023=2E07 that changed=2E Tom mentioned this to me recently=2E
+>
+>I'm adding Svyatoslav who is the person that brought in all of the
+>config fragments that are going to be in v2023=2E07=2E
+>
+>> Up until 2023=2E04 we can enumerate all the board configs that can be
+>> built=2E We can build any of them using a single name and a single
+>> defconfig=2E The boards=2Ecfg file which buildman creates contains a fu=
+ll
+>> list of things that can be built=2E
+>>=20
+>> From 2023=2E07 this changes and we now have random =2Econfig files
+>> sprinkled about the place=2E I say random because they are not connecte=
+d
+>> to anything=2E For example, here is
+>
+>They aren't random=2E  They're, just for v2023=2E07, in configs/ and then
+>moving forward, they're in the board directory=2E  I would like to see
+>them in more places possibly, but that's not something I'm sure enough
+>on right now=2E
+>
+>> board/ti/am62x/MAINTAINERS:
+>>
+>> AM62x BOARD
+>> M: Dave Gerlach <d-gerlach@ti=2Ecom>
+>> M: Tom Rini <trini@konsulko=2Ecom>
+>> S: Maintained
+>> F: board/ti/am62x/
+>> F: include/configs/am62x_evm=2Eh
+>> F: configs/am62x_evm_r5_defconfig
+>> F: configs/am62x_evm_a53_defconfig
+>>=20
+>> BEAGLEPLAY BOARD
+>> M:     Nishanth Menon <nm@ti=2Ecom>
+>> M:     Robert Nelson <robertcnelson@gmail=2Ecom>
+>> M:     Tom Rini <trini@konsulko=2Ecom>
+>> S:     Maintained
+>> N:     beagleplay
+>>=20
+>> In most cases the MAINTAINERS file tells us about each board and until
+>> [1] I had assumed that was the case=2E With that patch reverted, these
+>> are the only 'orphaned' MAINTAINERS entries (buildman
+>> --maintainer-check):
+>>=20
+>> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
+>> ending at line 8
+>> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS ending a=
+t line 44
+>> WARNING: orphaned defconfig in
+>> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
+>> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending at li=
+ne 6
+>> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending at lin=
+e 15
+>>=20
+>> But Tom advised me that MAINTAINERS is not intended for this purpose,
+>> so the check has been dropped=2E I am not suggesting we bring it back,
+>> necessarily, but if we did, we could use it to specify the =2Econfig an=
+d
+>> defconfig files which are used by each board=2E
+>
+>Note that the "N" syntax has been in use, for defconfigs for a lot
+>longer, and is why the CI check for unmaintained / orphaned boards
+>stopped working=2E
+>
+>> *Failing that*, I suggest a new 'name=2Ebrd' file in the board director=
+y
+>> to contain this information, e=2Eg=2E
+>>=20
+>> # Contents of board/ti/am62x/beagleplay=2Ebrd:
+>> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5=2Econfig
+>> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53=2Econfig
+>>=20
+>> This could be parsed by buildman and other tools, to produce a list of
+>> available boards and to build each using a single name (e=2Eg=2E make
+>> beagleplay-r5_defconfig)
+>>=20
+>> What do people think?
+>
+>I'm not sure I like this direction honestly=2E  Do we want CI to cover
+>these configurations?  Maybe=2E  But it's just for CI=2E  Using the TI
+>examples, I don't know that you can use buildman today to generate a
+>functional binary (and if you can, if --keep will retain the right
+>files)=2E
+>
+>Maybe we just need to make it clear that if you use config fragments
+>then you're opting out of CI for that specific platform=2E  That should b=
+e
+>fine for example for the TI ones that will be built in OE a bunch
+>anyhow so accidental failure to builds will be caught=2E  I don't know
+>about the Tegra platforms=2E
 
-> 
-> Up until 2023.04 we can enumerate all the board configs that can be
-> built. We can build any of them using a single name and a single
-> defconfig. The boards.cfg file which buildman creates contains a full
-> list of things that can be built.
-> 
->  From 2023.07 this changes and we now have random .config files
-> sprinkled about the place. I say random because they are not connected
-> to anything. For example, here is
-> board/ti/am62x/MAINTAINERS:
-> 
-> AM62x BOARD
-> M: Dave Gerlach <d-gerlach@ti.com>
-> M: Tom Rini <trini@konsulko.com>
-> S: Maintained
-> F: board/ti/am62x/
-> F: include/configs/am62x_evm.h
-> F: configs/am62x_evm_r5_defconfig
-> F: configs/am62x_evm_a53_defconfig
-> 
-> BEAGLEPLAY BOARD
-> M:     Nishanth Menon <nm@ti.com>
-> M:     Robert Nelson <robertcnelson@gmail.com>
-> M:     Tom Rini <trini@konsulko.com>
-> S:     Maintained
-> N:     beagleplay
-> 
-> In most cases the MAINTAINERS file tells us about each board and until
-> [1] I had assumed that was the case. With that patch reverted, these
-> are the only 'orphaned' MAINTAINERS entries (buildman
-> --maintainer-check):
-> 
-> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
-> ending at line 8
-> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS ending at line 44
-> WARNING: orphaned defconfig in
-> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
-> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending at line 6
-> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending at line 15
-
-Why should we care about the maintainer status when building a defconfig?
-
-> 
-> But Tom advised me that MAINTAINERS is not intended for this purpose,
-
-Enumerating configs/*defconfig would make more sense to me.
-
-Best regards
-
-Heinrich
-
-> so the check has been dropped. I am not suggesting we bring it back,
-> necessarily, but if we did, we could use it to specify the .config and
-> defconfig files which are used by each board.
-> 
-> *Failing that*, I suggest a new 'name.brd' file in the board directory
-> to contain this information, e.g.
-> 
-> # Contents of board/ti/am62x/beagleplay.brd:
-> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5.config
-> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53.config
-> 
-> This could be parsed by buildman and other tools, to produce a list of
-> available boards and to build each using a single name (e.g. make
-> beagleplay-r5_defconfig)
-> 
-> What do people think?
-> 
-> Regards,
-> Simon
-> 
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230803185144.1760729-2-sjg@chromium.org/
-
+Thanks! Only 3 recently merged Tegra boards actually have config fragments=
+ (transformer, grouper and x3)=2E ATM all common defconfigs are designed to=
+ be self sufficient and pass buildman even without fragment call=2E
