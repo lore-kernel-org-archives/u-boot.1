@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D960BC79F60
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 16:48:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4108C79F6B
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 16:48:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F08BE864C4;
-	Wed, 23 Aug 2023 18:48:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41C52864C1;
+	Wed, 23 Aug 2023 18:48:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ppd0FLhw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bgpu6XL6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2A3486467; Wed, 23 Aug 2023 18:48:06 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id F393586467; Wed, 23 Aug 2023 18:48:09 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E717786470
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 18:48:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F008F864C3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 18:48:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jpewhacker@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6bd04558784so4332001a34.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:48:04 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6bd0c953fd9so3833078a34.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 09:48:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692809283; x=1693414083;
+ d=gmail.com; s=20221208; t=1692809286; x=1693414086;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ozPdEM2RatCWxQpE1poT9rucFLU5XGCKA11EDJDOByo=;
- b=Ppd0FLhwOH33mDO/PcQMOz4MPa9j/SNCIb8lhKZaQkcvLE1l6NW8R4guT4NA5aBSkx
- nZV3sVFCPOl/6ntNkuHlEEuRzihwKh0aByGyz2tX+mo2/38SCcThT9lJtkZturf2AA4z
- icT7VC/J1mktf6U8nkS59gzldievAuSpoyiaDndwO+Rc7CIH/XYF4M0kJsIHB5taYzhw
- GkvoqPh+3AcalaW5cODuVVyzhXOLkE8vUZ0zBFaOEYOcMFYT71DS388I6NIY+nqL0Qa3
- RorrxodDAHLyCL4Wfuqm3o17Jazms0cNs9IsnXDemfVyWYok5yASW6WiLJIr8F5iD6cY
- tjwQ==
+ bh=2JQCCOiL9CY0VpvCGD3c1moaNFvFJAGXuLxmp7hknjU=;
+ b=bgpu6XL6GPVaNtcbWGOUnOV4x8uuMwMagPDg0HO1DzBTlxd34dLSSw23Ra/p2V/hnB
+ EixF2Xv1Lbtu185B2LQyfU0LbpK+DL0vVjiAW8QbH0WLclSf2HhNxqs+zWJBvtjG/Cij
+ qAQEzbErAXORZxmbfAY/FDdyrwjHeMM3D2flnI/lcyFqpXlhWlcKtpuM89oSXoF10mtv
+ WeW2phtralj8Qj26HomeXjRZQsmVaPwdvd95rc8+1HEhuY2OFHX5speyd0ItMEz5tGGb
+ EvaGBliKCD1TvUGA66M/yiU+ORQGXG+TTida7iy13kGe/YtwM6+zr7vKLUBMCYuyYeAD
+ rbFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692809283; x=1693414083;
+ d=1e100.net; s=20221208; t=1692809286; x=1693414086;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ozPdEM2RatCWxQpE1poT9rucFLU5XGCKA11EDJDOByo=;
- b=HRXIJYT3TZWZ771xJj9PVmimrUHnmtxOc5mOjZk9a5ChBlyQgvbiN3Pji3oeNzRvQv
- 4Xz/yTq72OFtcSxHMRlwpheRuQ/Oe/fL8w+qsGy8Vf3Ombx7EjYgifx+w5Md/dQKnGP1
- x77N/LfrK/YgzJHDKvqi2TD+ZkBKFxxpDuyrXDnLCjmSKoK/HmF5ykNX1jf5vhahxdKP
- mVLJpR6tXvZN0HjIrqzBq+Cq3LNJURNPQnyj8fWkThrNdlUvBz1JB+JQtjJs4Wn16cM6
- 3ZYkXFCEPtVNScY8bCoDnpn1wWU1W4YYVf6WelqGpbSmNCQuzqct43BS9A/xniFZ4N69
- QPPw==
-X-Gm-Message-State: AOJu0Yx3zVROaupugghX4CX8g7jgeic4GhraRyz1z02UvFvUBU+4FyN1
- aHQ1lQmszFE3OI8byYagCJXkWyBMJmM=
-X-Google-Smtp-Source: AGHT+IGSTtWFxp+s7SfEJOERfBdbmssZ1Z85Y/R5hI/TgOf67qLgjFsbvyX8NC7LT+/eNrXXCMrvTQ==
-X-Received: by 2002:a9d:64cd:0:b0:6b7:5452:df79 with SMTP id
- n13-20020a9d64cd000000b006b75452df79mr13551803otl.0.1692809282736; 
- Wed, 23 Aug 2023 09:48:02 -0700 (PDT)
+ bh=2JQCCOiL9CY0VpvCGD3c1moaNFvFJAGXuLxmp7hknjU=;
+ b=GOq4wdXJFGVzPR+plx4FlGkj2DiUGLYTm72OwhotN70HPzWJESsapwriS6ktP25n7p
+ OV/7ghMngQHgmaFniwnUTAgt4dED8QWIJM8ulXu2IL1bMg8CEznaUf80NhOcL/kkP3cK
+ xjP4XJ3knicOS5ci4mpjyteuTR4mTWB1Xxf91G8VO/5SFdt8T+0hU3Dr4U37mgyq87Ky
+ A26F1VFRJt5LKDPvNRQLOdBykUENgZO5T83F69QS3zPiWeFWdPe1lmpRdt4ocz+mLLPR
+ yqf+L7ner2lw1XEhFyaz5tWdzYvmv9rez573OI8EckFDBT86IuvznV2loyS/o/EMDnjV
+ ExZA==
+X-Gm-Message-State: AOJu0YzQ/CyePLaWkelBlVqU8ikvXPHL2CEGVn8nGQ2pKfo9Vl5Kpoo8
+ j/VBMNpLB9HLMBMb61P9G77nM5JGRq0=
+X-Google-Smtp-Source: AGHT+IFUl9PC+G7be2BATkDfSZWY1ZbMoHvqiWu0SI1vJ2h5WSRTCGVIFP7GbLbn7MWhNMcztM1uUA==
+X-Received: by 2002:a05:6830:1690:b0:6b9:8feb:8337 with SMTP id
+ k16-20020a056830169000b006b98feb8337mr12598114otr.9.1692809286021; 
+ Wed, 23 Aug 2023 09:48:06 -0700 (PDT)
 Received: from localhost.localdomain ([2601:282:4300:19e0::751c])
  by smtp.gmail.com with ESMTPSA id
- f22-20020a056830205600b006b9cb784553sm5794042otp.36.2023.08.23.09.48.01
+ f22-20020a056830205600b006b9cb784553sm5794042otp.36.2023.08.23.09.48.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 09:48:02 -0700 (PDT)
+ Wed, 23 Aug 2023 09:48:05 -0700 (PDT)
 From: Joshua Watt <jpewhacker@gmail.com>
 X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Joshua Watt <JPEWhacker@gmail.com>
-Subject: [PATCH v2 0/8] cmd: gpt: GPT manipulation improvements
-Date: Wed, 23 Aug 2023 10:47:36 -0600
-Message-Id: <20230823164755.2874792-1-JPEWhacker@gmail.com>
+Subject: [PATCH v2 1/8] cmd: gpt: Remove confusing help text
+Date: Wed, 23 Aug 2023 10:47:37 -0600
+Message-Id: <20230823164755.2874792-2-JPEWhacker@gmail.com>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20230815162726.1524958-1-JPEWhacker@gmail.com>
+In-Reply-To: <20230823164755.2874792-1-JPEWhacker@gmail.com>
 References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
+ <20230823164755.2874792-1-JPEWhacker@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,38 +93,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds several improvements and additions to the gpt command processing,
-specifically (although not exclusively) for the purpose of supporting
-"ping-pong" booting when doing A/B boot partitions with u-boot itself.
+This help text appears to be a fragment of the text shown when
+CONFIG_CMD_GPT_RENAME is enabled, but is confusing so remove it.
 
-In this mechanism, u-boot must boot up, and then check if the correct
-boot partition is active, and if not switch the GPT partition table to
-the other boot partition and reboot to activate the other u-boot.
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+---
+ cmd/gpt.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-In order to facilitate this, the gpt command needs to be better at
-preserving entry attributes when manipulating the partition table. It
-also learns two new commands, one which can swap the order of partitions
-in the table, and another that lets it change which partitions have the
-bootable flag.
-
-V2: Add documentation and tests
-
-Joshua Watt (8):
-  cmd: gpt: Remove confusing help text
-  doc: Add gpt command documentation
-  tests: gpt: Remove test order dependency
-  cmd: gpt: Add gpt_partition_bootable variable
-  cmd: gpt: Add command to set bootable flags
-  cmd: gpt: Preserve type GUID if enabled
-  cmd: gpt: Preserve bootable flag
-  cmd: gpt: Add command to swap partition order
-
- cmd/gpt.c                 | 159 ++++++++++++++++++++++++++++++++--
- doc/usage/cmd/gpt.rst     | 174 ++++++++++++++++++++++++++++++++++++++
- test/py/tests/test_gpt.py | 151 ++++++++++++++++++++++++++++++---
- 3 files changed, 466 insertions(+), 18 deletions(-)
- create mode 100644 doc/usage/cmd/gpt.rst
-
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index 007a68eaa7..e6f7b0319a 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -1060,8 +1060,6 @@ U_BOOT_CMD(gpt, CONFIG_SYS_MAXARGS, 1, do_gpt,
+ 	"      gpt_partition_name, gpt_partition_entry\n"
+ 	" gpt enumerate mmc 0\n"
+ 	"    - store list of partitions to gpt_partition_list environment variable\n"
+-	" read <interface> <dev>\n"
+-	"    - read GPT into a data structure for manipulation\n"
+ 	" gpt guid <interface> <dev>\n"
+ 	"    - print disk GUID\n"
+ 	" gpt guid <interface> <dev> <varname>\n"
 -- 
 2.33.0
 
