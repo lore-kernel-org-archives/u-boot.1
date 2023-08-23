@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 770C9EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88669EE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:41:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7C2A863F5;
-	Wed, 23 Aug 2023 16:23:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C5F28645E;
+	Wed, 23 Aug 2023 16:41:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="keenKXhd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NW20n4MQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B0DC863E9; Wed, 23 Aug 2023 16:23:58 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C0F94863F5; Wed, 23 Aug 2023 16:41:51 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB57B863F6
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:23:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADE608645F
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:41:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B2E5A66372
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:23:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25B25C433AB
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:23:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692800632;
- bh=L6RLKjcjf0wClZapR3eDem9qqnd+Wm/UZw5H508dK38=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=keenKXhdWPmWW/UM6/jrm2f8lqu83XeL3axzHEty84wzUfz6iGm5yF92b4siEMhVs
- x8HPi9BfV6x6Wd1aPa7pAzzLryu8pXkMYpD9/Up/qFNIqQuYpvr/zlHw+XASC82WEU
- c5pL7lAIOfIIIfyL5s+A/KitTVzaJAfYu6FhVYR1T+WtWnQwcWVmevz60wL+ECUAoG
- 21tKPiwWMQX9idR8sjPIq5gKfzDz21TiKyuCvYl3kpMHr3tBqJM6wjb9s3tJOtQX6C
- c4t8X13CnFHlr6QBpHjf69YZrPhztbdJhbAJ9TlOu22oqPw0Tjfn7+4bwFY682wkkr
- P9ohjVJcixSCA==
-Received: by mail-lf1-f41.google.com with SMTP id
- 2adb3069b0e04-50087d47d4dso3687864e87.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:23:52 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yxabd6ckwM3HIEAJ6wadg54Xc935Wd6kE7EX3+YyoxmSRup0Q+X
- W2byTqjx6Wfw9jAby5/kyCM15kUX3+U3pbcwPWE=
-X-Google-Smtp-Source: AGHT+IG+v0ql3xKgaaIRw2aNIMl4q7zemhhsd+/yB6IX6qUsIPOxXeEVctDDZNhBJ7VyqtLoumpqJTdkynEQuahFz/w=
-X-Received: by 2002:a19:651d:0:b0:4ff:8fdd:4be4 with SMTP id
- z29-20020a19651d000000b004ff8fdd4be4mr9463042lfb.29.1692800629839; Wed, 23
- Aug 2023 07:23:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-591ba8bd094so40696387b3.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:41:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692801708; x=1693406508;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=socls220x+rZRb9SXSLGJ8uW678J0mnc8WYxf9jiM8Q=;
+ b=NW20n4MQx7gmLzjoE5XtU3BrMTxCMILUUaG6A4UZe0ImdfzvY4VRDSe+JVQvptmMjE
+ I29MjPmWiDM1P03RcbGJ2KmqR3r6gt6lHKDVowmriaa0+OFuUXAgnladKKKib2AQntzO
+ UN+ERHYFbc79E5x0Ph+lit7BQMfk9ONVZ3E8I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692801708; x=1693406508;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=socls220x+rZRb9SXSLGJ8uW678J0mnc8WYxf9jiM8Q=;
+ b=kn2F/Trn40ewz4ENlhr8Fz9eVvHTB8Jor1biRmu/xF0dDOdAmGaDL4CP6oUq+vDx8X
+ OPDFnNY7uJoGNlUY51ajAh8bbIPqnf3fPhh2ObDuOQEXjDyYjsGMyZO77RkO51y+kCe+
+ uPxYy0K4PXbfaGQedqcaGsb+QGKyXsbKg5WSSkx/djvPRlPidYeyFlbESe4rFE0X0Hhd
+ SeMmDbu/+rE+LBzeAowZbJWWpuQn/MPas0hNpuLfCJ0JXJAHjfdli7KjeWAhnowT+Ssc
+ aMfNsBXn6EHy24qMchHXq8V3Tql01WwnV1wHpbU1irWWPSZuRKmNxZJ7o0c9dunF05g2
+ oEDg==
+X-Gm-Message-State: AOJu0Yxt+rxoaN1SOQo4/82gqdS3aR9usFxQLfT9QfaNmR2r1/B5ug8X
+ aMteZTZqIzIdStGRu0g+xt10og==
+X-Google-Smtp-Source: AGHT+IFKCNYpj5Sr2yUmnqR4JPvHCvB2u4/YBrkVNU3nDRZzTdxU7ZgCi0+s6k6sL8rWKAtiwg+hKA==
+X-Received: by 2002:a0d:fbc2:0:b0:575:4b1c:e5ea with SMTP id
+ l185-20020a0dfbc2000000b005754b1ce5eamr14589075ywf.47.1692801706877; 
+ Wed, 23 Aug 2023 07:41:46 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
+ [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
+ by smtp.gmail.com with ESMTPSA id
+ o63-20020a817342000000b0058fc7604f45sm2378830ywc.130.2023.08.23.07.41.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 07:41:46 -0700 (PDT)
+Date: Wed, 23 Aug 2023 10:41:44 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, bhupesh.linux@gmail.com,
+ Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH v2 2/2] armv8: Disable SYS_DCACHE_OFF & SYS_ICACHE_OFF
+ for ARM64
+Message-ID: <20230823144144.GO3953269@bill-the-cat>
+References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
+ <20230822075112.717992-3-bhupesh.sharma@linaro.org>
 MIME-Version: 1.0
-References: <20230822203446.4111742-1-sjg@chromium.org>
- <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
-In-Reply-To: <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Wed, 23 Aug 2023 16:23:38 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
-Message-ID: <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
-To: Mark Rutland <mark.rutland@arm.com>
-Cc: Simon Glass <sjg@chromium.org>, devicetree@vger.kernel.org, 
- Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
- linux-acpi@vger.kernel.org, 
- lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
- ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yi8nK0stCbFa6iq6"
+Content-Disposition: inline
+In-Reply-To: <20230822075112.717992-3-bhupesh.sharma@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,194 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Aug 2023 at 10:59, Mark Rutland <mark.rutland@arm.com> wrote:
->
-> On Tue, Aug 22, 2023 at 02:34:42PM -0600, Simon Glass wrote:
-> > The Devicetree specification skips over handling of a logical view of
-> > the memory map, pointing users to the UEFI specification.
-> >
-> > It is common to split firmware into 'Platform Init', which does the
-> > initial hardware setup and a "Payload" which selects the OS to be booted.
-> > Thus an handover interface is required between these two pieces.
-> >
-> > Where UEFI boot-time services are not available, but UEFI firmware is
-> > present on either side of this interface, information about memory usage
-> > and attributes must be presented to the "Payload" in some form.
 
-Not quite.
+--yi8nK0stCbFa6iq6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This seems to be intended for consumption by Linux booting in ACPI
-mode, but not via UEFI, right? Some proposed changes to support that
-were rejected on the basis that ACPI on non-x86 is strictly tied to
-ACPI boot, not only because the ACPI root table (rsdp) can only be
-discovered via UEFI, but also because the ACPI subsystem in Linux
-cross-references any memory mappings created from AML code against the
-UEFI memory map.
+On Tue, Aug 22, 2023 at 01:21:12PM +0530, Bhupesh Sharma wrote:
 
-Unfortunately, having a vague, non-exhaustive approximation of the
-UEFI memory map is unlikely to be sufficient here. The existing logic
-assumes that addresses not covered by the UEFI memory map are MMIO,
-which means that either a) the UEFI memory map needs to describe all
-RAM exhaustively or b) the existing logic needs to be modified to take
-memblock or other information sources into account as well in order to
-reason about whether a certain address requires device or normal
-memory attributes.
+> Ideally SYS_ICACHE_OFF and SYS_DCACHE_OFF should never be set for
+> ARM64 (ARMv8) platforms, as it makes booting u-boot slower on these
+> platforms.
+>=20
+> However, if some platforms require ICACHE or DCACHE  to be disabled
+> only for the smaller SPL stage, we should support such configurations
+> in u-boot as well.
+>=20
+> Compile-tested for:
+> - qemu arm64
+> - imx8
+> - stm32
+>=20
+> and run-tested on:
+> - Qualcomm RB3 platform
+>=20
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
 
-Note that the ACPI spec only lists EFI as a valid way to obtain the
-root table pointer on architectures other than x86. If other ways are
-needed, they should be contributed to the spec, rather than being
-added to Linux as an ad hoc workaround for bootloaders that have
-trouble implementing the spec as is.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
->
-> Today Linux does that by passing:
->
->   /chosen/linux,uefi-mmap-start
->   /chosen/linux,uefi-mmap-size
->   /chosen/linux,uefi-mmap-desc-size
->   /chosen/linux,uefi-mmap-desc-ver
->
-> ... or /chosen/xen,* variants of those.
->
-> Can't we document / genericise that?
->
+--=20
+Tom
 
-Given the ACPI angle, promoting this to external ABI would introduce a
-DT dependency to ACPI boot. So we'll at least have to be very clear
-about which takes precedence, or maybe disregard everything except the
-/chosen node when doing ACPI boot?
+--yi8nK0stCbFa6iq6
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This also argues for not creating an ordinary binding for this (i.e.,
-describing it as part of the platform topology), but putting it under
-/chosen as a Linux-only boot tweak.
+-----BEGIN PGP SIGNATURE-----
 
-> Pointing to that rather than re-encoding it in DT means that it stays in-sync
-> with the EFI spec and we won't back ourselves into a corner where we cannot
-> encode something due to a structural difference. I don't think it's a good idea
-> to try to re-encode it, or we're just setting ourselves up for futher pain.
->
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGqUACgkQFHw5/5Y0
+tyy/7Qv/ahGtPfbx1VNdTNoVuBhYWTCoJ2B9rXPbYGCgxGCgi6q41K0hTRDnl1JG
+Top5Ue55SN+FnKikkwSzsgp/yaEUp+lZvA2B1qUYkgwgCi7aIqsJkpCi7tcG+CEs
+RyINodS4tOCP+Zad71XkgRGajLcRNulZmXvyC6jGBuHXrlLQvCRzNR6cAQ7wR0kS
+gfApKauuK2eCmAwD6Sw2EJ+tfv0PSEpo+b3mad4E1vpqOI8alWfxQkv+7V+QO2t2
+Qz5g4Hp+Rl5fxk+ii28uZ6jIJ7KlMu4Pi4eLqpQkkOkGjpcyS551bnqKLZTW8k96
+FZz/CJt9QC1ghw3jrCyJ1kkLiedlfmSX4MZwfZSOfJ1JUt69EyXHtGHt6mL4vM0L
+EhwZ3p+u3WYkH0HCVXJt7VP6KsOaIxRY+/vchH7JN50n+bZBoBDu8G7fH/HjPlg0
+YkFGUQU2UXQB9aACEyu/0NWNp60bRuv2dBzozqQNwUY73TtWayqeiVQjh4hJRkTC
+nuYRI9pV
+=8Pmg
+-----END PGP SIGNATURE-----
 
-What I would prefer is to formalize pseudo-EFI boot and define the
-bare required minimum (system table + memory map + config tables) in
-an arch-agnostic manner. That way, the only thing that needs to be
-passed via DT/boot_params/etc is the (pseudo-)EFI system table
-address, and everything else (SMBIOS, ACPI as well as the EFI memory
-map and even the initrd) can be passed via config tables as usual, all
-of which is already supported in (mostly) generic kernel code.
-
-This means that booting via the EFI stub would not be required, nor is
-implementing boot services or runtime services or any of the other
-things that people appear to hate with such a passion.
-
-I'd actually prefer not to use those /chosen DT nodes, but pass the
-memory map via a config table. This, however, requires* that the
-runtime services memory regions are mapped 1:1 so it is not something
-we can do for all currently supported systems. But for pseudo-EFI
-boot, stipulating 1:1 runtime mappings is fine (or no runtime mappings
-at all if the firmware does not expose runtime services)
-
-* SetVirtualAddressMap() relocates the config table array, and without
-a memory map, it is not possible to convert those address back to
-physical. SetVirtualAddressMap() is evil and needs to die, but this is
-off-topic for the thread at hand.
-
-> >
-> > This aims to provide an initial schema for this mapping.
-> >
-> > Note that this is separate from the existing /memory and /reserved-memory
-> > nodes, since it is mostly concerned with what the memory is used for. It
-> > may cover only a small fraction of available memory.
-> >
-> > For now, no attempt is made to create an exhaustive binding, so there are
-> > some example types listed. This can be completed once this has passed
-> > initial review.
-> >
-> > This binding does not include a binding for the memory 'attribute'
-> > property, defined by EFI_BOOT_SERVICES.GetMemoryMap(). It may be useful
-> > to have that as well, but perhaps not as a bit mask.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v3:
-> > - Reword commit message again
-> > - cc a lot more people, from the FFI patch
-> > - Split out the attributes into the /memory nodes
-> >
-> > Changes in v2:
-> > - Reword commit message
-> >
-> >  dtschema/schemas/memory-map.yaml | 61 ++++++++++++++++++++++++++++++++
-> >  1 file changed, 61 insertions(+)
-> >  create mode 100644 dtschema/schemas/memory-map.yaml
-> >
-> > diff --git a/dtschema/schemas/memory-map.yaml b/dtschema/schemas/memory-map.yaml
-> > new file mode 100644
-> > index 0000000..4b06583
-> > --- /dev/null
-> > +++ b/dtschema/schemas/memory-map.yaml
-> > @@ -0,0 +1,61 @@
-> > +# SPDX-License-Identifier: BSD-2-Clause
-> > +# Copyright 2023 Google LLC
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/memory-map.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: /memory-map nodes
-> > +description: |
-> > +  Common properties always required in /memory-map nodes. These nodes are
-> > +  intended to resolve the nonchalant clause 3.4.1 ("/memory node and UEFI")
-> > +  in the Devicetree Specification.
-> > +
-> > +maintainers:
-> > +  - Simon Glass <sjg@chromium.org>
-> > +
-> > +properties:
-> > +  $nodename:
-> > +    const: 'memory-map'
-> > +
-> > +patternProperties:
-> > +  "^([a-z][a-z0-9\\-]+@[0-9a-f]+)?$":
-> > +    type: object
-> > +    additionalProperties: false
-> > +
-> > +    properties:
-> > +      reg:
-> > +        minItems: 1
-> > +        maxItems: 1024
-> > +
-> > +      usage:
-> > +        $ref: /schemas/types.yaml#/definitions/string
-> > +        description: |
-> > +          Describes the usage of the memory region, e.g.:
-> > +
-> > +            "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
-> > +            "runtime-code", "runtime-data".
-> > +
-> > +            See enum EFI_MEMORY_TYPE in "Unified Extensible Firmware Interface
-> > +            (UEFI) Specification" for all the types. For now there are not
-> > +            listed here.
-> > +
-> > +    required:
-> > +      - reg
-> > +
-> > +additionalProperties: false
-> > +
-> > +examples:
-> > +  - |
-> > +    memory-map {
-> > +        acpi@f0000 {
-> > +            reg = <0xf0000 0x4000>;
-> > +            usage = "acpi-reclaim";
-> > +        };
-> > +
-> > +        runtime@12300000 {
-> > +            reg = <0x12300000 0x28000>;
-> > +            usage = "runtime-code";
-> > +        };
-> > +    };
-> > +...
-> > --
-> > 2.42.0.rc1.204.g551eb34607-goog
-> >
+--yi8nK0stCbFa6iq6--
