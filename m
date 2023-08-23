@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7ECEE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 13:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8055BEE4993
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 13:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0357864B3;
-	Wed, 23 Aug 2023 15:26:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 53625864BF;
+	Wed, 23 Aug 2023 15:26:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="G2XVoRlP";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="eajy1mMv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99DDF864C1; Wed, 23 Aug 2023 15:26:14 +0200 (CEST)
+ id 2F7B5864D5; Wed, 23 Aug 2023 15:26:18 +0200 (CEST)
 Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0626.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::626])
+ (mail-db3eur04on061f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0c::61f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E29558634D
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:26:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C6B1864BE
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:26:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=laurentiu.tudor@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HskbHn2SYNNMF88nkci3UunhAHL18S1njrCPcG+3xI8lZlZZRKpYiGimJwnZ4/pmdx8q7kLA4ABFzk0MygmBbvbro3Gztmujw8SZGKQziMzhVtWVEiIPn5RNvD08XXQFRer8nkrj1BGTVPN6EJGAuZ5FSMMK5HHdj2ApYAdUX4hvD/OM8BsphEjC5uzOrIE54RQ0EKsQCXLjrXKfWhOQVVPyy2RUzWibjFcIgjZOC2V8afQ7VV/Gwx9QztVslk3j6yV9/uqx5QOk9ZKFfme+uD8Lot17g+U+DIiHc2v387h3j8HLYOFfcrMJv9m4ZEwclsWyTlqswEjQlkq8CoKgKQ==
+ b=GX9AkUJ320to+AJmOErSnFscqYXX/jB48QNjtYrFjTTwlUZYHnVF4t/mW17/FH7MuzqUOJx2Qnx9VZuNO389LwMFq/lXlDZ+pvQ3zDGtqUsFEyr7n/MYrh0GCoTYsCJWiyc7E53vE15DD/w82pjjUkdqjwegOYpqrtCFgKe59giqKkXYsQ7jL8l6t530uONx1KcFPMV+rKUi5cxtBlcFWWATqZqkbPBpzYnK74vE7HSwKJAjBFCMD+e9ylx8NGyTuon1fCPVuzHMnCzzXiAXJhqCJ23jUDwDZzhyTxlVJY0HH+1VXBMZ0MDN8pkFGCgJEGuLp1lW1j7qzF0TubNX1Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NO5p3r6Jui4e9i9kzeOwaRj4692aRG7s/U6PhUoD1kY=;
- b=keTY9Jq9FW8iQw8IZh/TyWUr/EhoNtnA/1lZU1QdcwOIR0IN9chgnNKZgGTsTnJwziN6jUtJQQXWDNZWIOBPBMpBtDjUtHP+tY7sDjPfLUASKuPnrsxPc8BFsGFYlK8r1eAG+DE9UGueubRlRkhFEEk4qGlM/seeyAM6JNcWHeY2yJgg2HT2fMG9dqlHPo+7liR9WIdpa21336gy/B8QzKIQMq8+cXXv6Tb9oZuQEHyKPO/a3ZOo4b/96i1TsHRWDx8K4lPj/ydPJl87NWpTZ1Z3AIynSF76AkClMFHCSk5ZmVNU0M/b56CTTibgBLqbzSXuSAb+HNdnaaH+5pQUEQ==
+ bh=8A8qFYiEu75yRc57Ut2QAW2XF759VYl2XyUXd3PGVsY=;
+ b=BcQ41OO0CHcaKXGh1fxmlSiP6Kttmm1kkST5f4AQsp2FvJ390RUnbtZqr24zMfjHRvOu+DVcNb+NPcIGCBlxcNPAL35ZJPQYy/eecZx170pEDAAyAw+veM16GA8sioRnolnF+XbcPLrnbV3x+WJZonDBGGR8BeaHIfWF1/d/raN/6p6nLyhnqqATA9XlJQ0Q9wNEs3jDLHpVU750LMlT6G8hZWJzoFnTh6PtBasq45+rFbV/a//suhFWsRzd+dI4gwWrUKXCNbCZ9OFt78YqY9nSUlwkJ0/tP5xNCBD4orNCJB24HXDy43GBo6LaFC5aJC4LPyYD+pNfD5ImpyHa4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NO5p3r6Jui4e9i9kzeOwaRj4692aRG7s/U6PhUoD1kY=;
- b=G2XVoRlPeobmanI+zkypBEmn/YacIR9F741skE4I5c/TwOy4FBArLJEtUvSoGb9hYGzlBcMsPuga7ArULjLrmq96bM0iNFDX3xLhZsgSpz3RrSeW1nKU/y9ggsdYoBEfK997IIWUbBpa+adDUrRsk1lwtlES6IsymzyIKlnVdA4=
+ bh=8A8qFYiEu75yRc57Ut2QAW2XF759VYl2XyUXd3PGVsY=;
+ b=eajy1mMvYhRe6q05upmadnGJPhtcJfb4kV2l+uhG+Zq3gBu64MNYXLR6wtoKHXpTCeqMfqOvmTOn4bXCba9xqthqrAjfs4IEqL2cYrCaeTD5fbO3fz4HroIB7qkxRTGGwZWC4UqBZ0BXANQCg0x9iAUc9tOpqged4/ZnAsCqeQw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AS1PR04MB9382.eurprd04.prod.outlook.com (2603:10a6:20b:4da::15)
  by DB9PR04MB8252.eurprd04.prod.outlook.com (2603:10a6:10:24d::7) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.26; Wed, 23 Aug
- 2023 13:25:59 +0000
+ 2023 13:26:00 +0000
 Received: from AS1PR04MB9382.eurprd04.prod.outlook.com
  ([fe80::efa8:cb35:bebd:3d10]) by AS1PR04MB9382.eurprd04.prod.outlook.com
  ([fe80::efa8:cb35:bebd:3d10%7]) with mapi id 15.20.6699.026; Wed, 23 Aug 2023
- 13:25:59 +0000
+ 13:26:00 +0000
 From: laurentiu.tudor@nxp.com
 To: rajesh.bhagat@nxp.com, pramod.kumar_1@nxp.com, andy.tang@nxp.com,
  mingkai.hu@nxp.com, Ashish.Kumar@nxp.com, priyanka.jain@nxp.com,
@@ -60,10 +60,10 @@ To: rajesh.bhagat@nxp.com, pramod.kumar_1@nxp.com, andy.tang@nxp.com,
  u-boot@lists.denx.de
 Cc: michael@walle.cc, camelia.groza@nxp.com, ioana.ciornei@nxp.com,
  vladimir.oltean@nxp.com, Laurentiu Tudor <laurentiu.tudor@nxp.com>
-Subject: [PATCH v3 1/3] configs: layerscape: delete defconfigs using legacy
- PPA secure FW (part1)
-Date: Wed, 23 Aug 2023 16:25:44 +0300
-Message-Id: <20230823132546.6048-2-laurentiu.tudor@nxp.com>
+Subject: [PATCH v3 2/3] configs: layerscape: delete defconfigs using legacy
+ PPA secure FW (part2)
+Date: Wed, 23 Aug 2023 16:25:45 +0300
+Message-Id: <20230823132546.6048-3-laurentiu.tudor@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
 References: <20230823132546.6048-1-laurentiu.tudor@nxp.com>
@@ -74,52 +74,52 @@ X-ClientProxiedBy: AS4P251CA0009.EURP251.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS1PR04MB9382:EE_|DB9PR04MB8252:EE_
-X-MS-Office365-Filtering-Correlation-Id: 60f88668-42c0-4cb7-4745-08dba3dc7d02
+X-MS-Office365-Filtering-Correlation-Id: 851638af-60d1-4bd3-6e1d-08dba3dc7dd6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NmXIrlHY+KjlRgZbjNlPnAH9+ymIMmQ/eOZz2hmWyRG+IjdViN0OFZcx/v8vgzjLqadItBfgfeUQ7nyG2NunbVYGgzBHG1AN2GZHpG4LhBnOtTzXAPChVJNLrTEoCKdOzzk0J95+sACxL7wtyalFCbNvZ8Ma0qgdZVrkLs9m4yYYWswHf59M48mtORuOOR5sz8tdkmDcVebyVtJCkPj7i66iINpXH+TtxauCVOgqQime80kDvG5E6ocGL2YQOXRHPNbq/4/2ma7+aZKHlfS/6nkOTVbpJ2uY8FDkHGrT2WPBqvQNOI/TobUC1fV3trT5B0GezqKT4xiQJQWf22G5fsGWiF20aEdTgtp32oWq++unXzVvt7acMvnpi1ZFxyVNjp4jydhx4CL2t8I5hwGtvzq8vnpmjMXopVt/JDi+UHmyyD0XSiD/aZsnW2ZhfDNqNyRywJrQ+9LyLaPtg6OYflIjUslcPGVXt5pz+SsNzAW2GgF4ihNcw7sJetpwVtVw5ezt/NvTapO6ZA0y+HO1GYpZQoy2S05gy/4niAANBfKQ9xyCWsHoBgSY93O3C84OUfOVsisJ+J3ZykKm/x5Bye1KlCCd+sPJDLTWC24cUdK0y5sfmMjAN9yxfBp+tBA6RUymMLz5KFvGcrV6E+hFcw==
+X-Microsoft-Antispam-Message-Info: dXOxzcAXX/xCUhKe1y69RLhhAH0TW6aW8y2/gkKwUYKfe42CbTjfEXeU9Qjp2gUMIWqOtLaYICAVZLdIS8hHYCcI+Ae/5T0VdG1dZw2NKhTnaxKoF2B0gjOljc3y/0urhpwFzJ/x44s7kQqoURAqfk2bqr/EgpEYH4KtzdDVTpUUE2hauguibrmihdsek5MSB/u5QJE1sT2uuG1FDxT9mLkwMxNa6Oqh2Frv/+TFcNw93MwHhGp78wpHA71WXv1DEPeWhdidTaKkBFvjRZwFJETMvDrj2rxObFwoqdCOmXfyKq9k3qlVDwWUCYta4sBrXwcO/wPrQACRpCcp6h4zRzaX8ZmMMbjluN4rTxRBc7M06ZdISrT6lWKFYaT82BaIBdX5QNhAxwiZpS45C090jRrBKLR/3r0FNuBFRf6BsaejVLqRxezMI58iAWFqH4IwY+VirQ3GE0pGO0XkrA8uCIqPCyVebMtjF0SuFd3jbaHV7PRm9fAYgAVrOgLCkHNjp90JsbYx1JnWZpM8a9VIoLvec67tn12CYdCyOghf9F9MdtTSHZAcjgcwvL/4n7jSmtd9w910TiorRgKtblW7hU3qfDOmdVgNbFNyg2Fp5dxNG8EJ3OiDICumMKBtyGbo8NlP7jmz+JGxiwCnd7/RNw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS1PR04MB9382.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(376002)(396003)(136003)(366004)(346002)(39860400002)(1800799009)(186009)(451199024)(83380400001)(30864003)(2906002)(921005)(38100700002)(38350700002)(86362001)(36756003)(6512007)(9686003)(41300700001)(66556008)(66476007)(66946007)(6506007)(6486002)(316002)(52116002)(2616005)(4326008)(8936002)(8676002)(478600001)(6666004)(26005)(1076003)(5660300002)(579004)(559001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kXxC5QlRT1KFD2MqshrdwfJE0Sf8wj4m2aqqhNoqZH7+8YJNDc3v3k9fwvq+?=
- =?us-ascii?Q?ydRLMp86g4UvTqrZTuNCwyuLJOBiFZR09y+G7rZQATO0UCH8biRmrB7oFg/J?=
- =?us-ascii?Q?grsLQM1tn4J5CAP/Bh383CujxorzCiVCF2V4ZPSy7ZFjmnEPdDdBdWKvgWpX?=
- =?us-ascii?Q?hvMtjy3oZNKiAMc633FcVYzbW9c+aTZKjoIal3IH72W/yvbuJhZsunBhq0jT?=
- =?us-ascii?Q?YOfLhfWAa86yPNfWH8JewVxZl36WSfh5KpOAU42bn9EFcKkiapHEpPkbtAY6?=
- =?us-ascii?Q?UX50P4l/csLI7ALClpGtdVEK/g1DpP5j4C62t04ZbbtGYPoRsm+iEAhtWFfp?=
- =?us-ascii?Q?m7mTSCNG1SY/VoJzuPlzM5F7i4eeGDHIuuLTHVlsr/uaZK0qRjovN2pV3+f7?=
- =?us-ascii?Q?PnSzRLPGrl8KnzA5/86fopqr/Dj08aZirwuas3LhZg0RBpJNzLNdW/ZXt9U5?=
- =?us-ascii?Q?Cg4PiSSxqSAYPjgndXcJl+U9MBC2zEgQQQMu8zF/bMUlOPiNAg1/aZmxCFBi?=
- =?us-ascii?Q?cUuamk9kasxblioG2BECsKlrq5JA8m6bzygl86t792QZJ9fAhua3T1lR31J2?=
- =?us-ascii?Q?V69CxZxvRQtwZlFQ3nGGvMGcL74ZP2Yne2xJjkbRUBQCzebAFpoORXrw4hey?=
- =?us-ascii?Q?SR92dCnUmQh+VB7BEnDRVsR/85eBNYy161T43DUfSAOScd5CpnKjQJelP2hw?=
- =?us-ascii?Q?/jCSRTWdIk7Sk8TZTFEO6BzYncnjb+By6PM7093zFiAttCeA7MTWHiNPa94/?=
- =?us-ascii?Q?Fs5be5cjZs60uPNtdotgeGEsXVr4uzICSevq8MDZoB2jPGdOsKLxRGHm9Loz?=
- =?us-ascii?Q?xVFy7dRECh6dXgPbH4pGKjHs5Ke7BkOTDjtLbgmMA9iqzka8LKawsGN9u6FV?=
- =?us-ascii?Q?2sP0nECoHotlOKp9+wSCebE2UanK8PS2NU+1AIVWD43x7UOUOCt33ZTRM8qt?=
- =?us-ascii?Q?bcPc3iq4RxvsN8nIBQWuc5ghLxHgrGTlLOQY6JGy9HQLSTZMZCg40lhcEApC?=
- =?us-ascii?Q?ZY9uFbSpY3HdB9YoZkT0MzkKg8RNF3tC+ZTkAKmSsvhmoCaTYwXQIQZuRFQl?=
- =?us-ascii?Q?U/AwhmYucA2Tkt0zV56bpmg+8inExGrsZkFy8FUzfyENiTC6JGVjYNZK9aPM?=
- =?us-ascii?Q?RY9/7MZW9OqG54Ll8sLa9b2xA1aCu7v/GRQ3gAUmiDahQBOxwBGAYrHc8N71?=
- =?us-ascii?Q?pExDkACfLXDJvXwiWNNbTdXK77Fd06BCibfLkVMeh8pxsoEQ59uplcKcbjBu?=
- =?us-ascii?Q?IJIIs+68EZPimvmT5XJgNaEhxE7zmautzFby3D+Bc5F4YPa6pZlPzs9XdUlo?=
- =?us-ascii?Q?tqXI7YlbblpEqBebJe9f6BfgpqvRx+I5L6svAcKJrTL+wuzZriN6vkxpga0R?=
- =?us-ascii?Q?LIRwO+so8Ig29wmT49zgcNSrlmJzfGU600oeT01Pfu4lRLq18sFrAKZphUoB?=
- =?us-ascii?Q?8x077CW9UaKGF8tPvnHAevtSJUczr/TAAt/3hE607UX5iyIaKxZopgUPNIPX?=
- =?us-ascii?Q?MrZr52uDsPnVjrMARcHX3hhvlROtEX8Hzg6+fRMxbrwQhwi4d+S83Ghsq6My?=
- =?us-ascii?Q?Caozru1uqaevvfP/W4mmPvpT7bn9DBt988tqzgRd?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Dm3BlvTAVSOnpbrX9O7nQ2JCqBq+cyiOM2TZr1UuhIzIIqwT2tRqlh2JfaNy?=
+ =?us-ascii?Q?AcxzroD0w0oGPIV0xb57dpCYay9LmlJIICJTzviq5myz/vQpnFSKVvLIeJoO?=
+ =?us-ascii?Q?tXcOqsrnlXrDCqUAR1C+sIDDgw8wFG7IqV245o+TJjGuB7Gqf0RuP1WAeioP?=
+ =?us-ascii?Q?j9/Ka57ki9a1cQEafzbjqZY81PGacvB4YJhiIxGQtT4QG+1TVwEoM7TMDJsc?=
+ =?us-ascii?Q?pHEDo7jpzQv7m8OU99Y5i9QnsLI8qcJfIsYFZUiBwF5xvJkU6ldTLWCdGNCM?=
+ =?us-ascii?Q?TNjLQsGvi78UzLhn36tDoSYXkySPRUqHkBMwoNsWZBIC9yqSPOQYMKZe/jmZ?=
+ =?us-ascii?Q?hHZRfbBrlowzK6FXzRp7MfJwn1AvlNEZGMDbD2d1FEGRPwMnEG2XxcErnD+Y?=
+ =?us-ascii?Q?pMTomjJBXnOkPZw8xCuBMLyhCwnDlxZjv7fWcQt4c4+BMwt9fmkyh/2JdjqA?=
+ =?us-ascii?Q?cKS62+8wdSWdIP+ltHkDPOGhogrpZ7V/XDfBpFNjCRkxP5HdYRlV18pgoE0L?=
+ =?us-ascii?Q?8H881BVWVXEQsBtetcwlezwubFONiV9tnAEaBEAROVvpKY75DxKIqQ/zWs1g?=
+ =?us-ascii?Q?mFGjtKmnXdHl0sJd6oCB/5tbhavk165sBEKVVVvyduHkBAtZUSwOvSB3Zapk?=
+ =?us-ascii?Q?sHvI9uN8cDCsFfKb9cpTL10iT6GUpcAAEpVRf6/qQrPSPZ9q3ydpFWs58Mm0?=
+ =?us-ascii?Q?qzocRKcxgwhqsEvxBXmoyOCaiG6pTOww1L0rplgKuhopkE8SQaipY8m8ZJJa?=
+ =?us-ascii?Q?gSXlemLNWoKaO8Pu7L7y3IolML2VSSv5ZBxbd2ZEbRtKngux+s14BAKNSXaz?=
+ =?us-ascii?Q?/05ECiiVI0xZwuSmbTPDuXCBvXZOf2yNAUKAmZP9Qa8L/Fp0DQ9zNVSGfFPJ?=
+ =?us-ascii?Q?Gf7Cu/OKXF/a4QCXvYIWFFQ1B4FveuZ4WlSrP2BY/bII4SsYQwWzglxJfZpV?=
+ =?us-ascii?Q?aFGEQxDcHKf44YHTWUkqDnICtxfjNKbkySr0yFgSg+5MLWaM920Vh92cFGNX?=
+ =?us-ascii?Q?NE9P2yXbdeDLP3ePCFKZeyWdLv/mHJjNv2BWMW9S2zTkna8t7CQj46SprHT0?=
+ =?us-ascii?Q?r18m8RQAZWx+idce3LpRYsuT5RriRCtFr6vRq50fo24YQZiGbacYytXlvv7i?=
+ =?us-ascii?Q?cGj7F0Z8O1Ac/4IiGYkdX3fiAL958zocvM2qq+UoJg0Ozy1zmQpt1QYTyXgX?=
+ =?us-ascii?Q?fd5LG/X3xBj0XnfG9Y1HoKZSdFRwWBMTLgBcUBfBgNFFbux3ftV8Jvkvci6t?=
+ =?us-ascii?Q?wnpKMfulPb/PDi3mCVw4Ja10hy12GNq5XUjC9AL32YboWSpUzQ/Pj/rxZr5F?=
+ =?us-ascii?Q?Ttfghe+QEvMH+x3K35GxaVSTUYl092pDpbkiFIV/FrCv4LK/EFzTeo/zCZo0?=
+ =?us-ascii?Q?8S/1YVvXtlE5rgxJzYeca+yo8JdfUCtXRbQA0vx3eNmP8fVCEpNc/vmtG4qz?=
+ =?us-ascii?Q?QxCVF/cSS7kGUcxbe2MYMc+hnOY1ajsCrQDEbfIifw9si+nsj0NOYyObAil3?=
+ =?us-ascii?Q?xyWIz7vasnoneL1VzAUAMKGawwpDlhM7BlqDRv12y/LxuDiHOnH3VBZzRGSe?=
+ =?us-ascii?Q?8cUxlq9EUzcJ5dYtGwjZ5ymaPSl3RDFTmr9c2ugx?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60f88668-42c0-4cb7-4745-08dba3dc7d02
+X-MS-Exchange-CrossTenant-Network-Message-Id: 851638af-60d1-4bd3-6e1d-08dba3dc7dd6
 X-MS-Exchange-CrossTenant-AuthSource: AS1PR04MB9382.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 13:25:59.1611 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Aug 2023 13:26:00.5352 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GKx+EOXyBGEY8NFhtiRR3Xfx16lmLGgIVsV4buGIn/bNwWL0UuUroK+Ag9XOQnqHpwyJ0dapZwAm2VcM0LJEFg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: /1STjJmUOziE+/60mIMyyKAUyQnSnbwT0hgcnNJ+iwytMNEqFyUdwWYcxHmM18KrQjwyFiEj/fcqoJUYg/ywvA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8252
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -145,662 +145,90 @@ the defconfigs that make use of PPA obsolete, so remove them.
 
 Signed-off-by: Laurentiu Tudor <laurentiu.tudor@nxp.com>
 ---
- configs/ls1012a2g5rdb_qspi_defconfig          |  69 ---------
- configs/ls1012afrdm_qspi_defconfig            |  67 ---------
- .../ls1012afrwy_qspi_SECURE_BOOT_defconfig    |  72 ---------
- configs/ls1012afrwy_qspi_defconfig            |  72 ---------
- configs/ls1012aqds_qspi_defconfig             |  95 ------------
- configs/ls1012ardb_qspi_SECURE_BOOT_defconfig |  77 ----------
- configs/ls1012ardb_qspi_defconfig             |  77 ----------
- configs/ls1043aqds_defconfig                  | 107 --------------
- configs/ls1043aqds_lpuart_defconfig           | 109 --------------
- configs/ls1043aqds_nand_defconfig             | 138 ------------------
- configs/ls1043aqds_nor_ddr3_defconfig         | 108 --------------
- configs/ls1043aqds_qspi_defconfig             |  98 -------------
- configs/ls1043aqds_sdcard_ifc_defconfig       | 135 -----------------
- configs/ls1043aqds_sdcard_qspi_defconfig      | 124 ----------------
- configs/ls1043ardb_SECURE_BOOT_defconfig      |  99 -------------
- configs/ls1043ardb_defconfig                  | 100 -------------
- configs/ls1043ardb_nand_SECURE_BOOT_defconfig | 124 ----------------
- configs/ls1043ardb_nand_defconfig             | 128 ----------------
- .../ls1043ardb_sdcard_SECURE_BOOT_defconfig   | 124 ----------------
- configs/ls1043ardb_sdcard_defconfig           | 126 ----------------
- configs/ls2080aqds_SECURE_BOOT_defconfig      | 108 --------------
- configs/ls2080aqds_defconfig                  | 109 --------------
- configs/ls2080aqds_sdcard_defconfig           | 116 ---------------
- configs/ls2080ardb_SECURE_BOOT_defconfig      | 106 --------------
- configs/ls2080ardb_defconfig                  | 107 --------------
- 25 files changed, 2595 deletions(-)
- delete mode 100644 configs/ls1012a2g5rdb_qspi_defconfig
- delete mode 100644 configs/ls1012afrdm_qspi_defconfig
- delete mode 100644 configs/ls1012afrwy_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1012afrwy_qspi_defconfig
- delete mode 100644 configs/ls1012aqds_qspi_defconfig
- delete mode 100644 configs/ls1012ardb_qspi_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1012ardb_qspi_defconfig
- delete mode 100644 configs/ls1043aqds_defconfig
- delete mode 100644 configs/ls1043aqds_lpuart_defconfig
- delete mode 100644 configs/ls1043aqds_nand_defconfig
- delete mode 100644 configs/ls1043aqds_nor_ddr3_defconfig
- delete mode 100644 configs/ls1043aqds_qspi_defconfig
- delete mode 100644 configs/ls1043aqds_sdcard_ifc_defconfig
- delete mode 100644 configs/ls1043aqds_sdcard_qspi_defconfig
- delete mode 100644 configs/ls1043ardb_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1043ardb_defconfig
- delete mode 100644 configs/ls1043ardb_nand_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1043ardb_nand_defconfig
- delete mode 100644 configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls1043ardb_sdcard_defconfig
- delete mode 100644 configs/ls2080aqds_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls2080aqds_defconfig
- delete mode 100644 configs/ls2080aqds_sdcard_defconfig
- delete mode 100644 configs/ls2080ardb_SECURE_BOOT_defconfig
- delete mode 100644 configs/ls2080ardb_defconfig
+ configs/ls1046aqds_SECURE_BOOT_defconfig      | 108 --------------
+ configs/ls1046aqds_defconfig                  | 110 --------------
+ configs/ls1046aqds_lpuart_defconfig           | 112 --------------
+ configs/ls1046aqds_nand_defconfig             | 139 ------------------
+ configs/ls1046aqds_qspi_defconfig             | 101 -------------
+ configs/ls1046aqds_sdcard_ifc_defconfig       | 139 ------------------
+ configs/ls1046aqds_sdcard_qspi_defconfig      | 128 ----------------
+ configs/ls1046ardb_emmc_defconfig             | 122 ---------------
+ configs/ls1046ardb_qspi_SECURE_BOOT_defconfig |  99 -------------
+ configs/ls1046ardb_qspi_defconfig             | 102 -------------
+ configs/ls1046ardb_qspi_spl_defconfig         | 130 ----------------
+ .../ls1046ardb_sdcard_SECURE_BOOT_defconfig   | 123 ----------------
+ configs/ls1046ardb_sdcard_defconfig           | 122 ---------------
+ configs/ls1088aqds_defconfig                  | 112 --------------
+ configs/ls1088aqds_qspi_SECURE_BOOT_defconfig | 107 --------------
+ configs/ls1088aqds_qspi_defconfig             | 108 --------------
+ configs/ls1088aqds_sdcard_ifc_defconfig       | 130 ----------------
+ configs/ls1088aqds_sdcard_qspi_defconfig      | 128 ----------------
+ configs/ls1088ardb_qspi_SECURE_BOOT_defconfig | 104 -------------
+ configs/ls1088ardb_qspi_defconfig             | 105 -------------
+ ...1088ardb_sdcard_qspi_SECURE_BOOT_defconfig | 124 ----------------
+ configs/ls1088ardb_sdcard_qspi_defconfig      | 124 ----------------
+ configs/ls2081ardb_defconfig                  |  96 ------------
+ configs/ls2088ardb_qspi_SECURE_BOOT_defconfig |  96 ------------
+ configs/ls2088ardb_qspi_defconfig             | 101 -------------
+ 25 files changed, 2870 deletions(-)
+ delete mode 100644 configs/ls1046aqds_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls1046aqds_defconfig
+ delete mode 100644 configs/ls1046aqds_lpuart_defconfig
+ delete mode 100644 configs/ls1046aqds_nand_defconfig
+ delete mode 100644 configs/ls1046aqds_qspi_defconfig
+ delete mode 100644 configs/ls1046aqds_sdcard_ifc_defconfig
+ delete mode 100644 configs/ls1046aqds_sdcard_qspi_defconfig
+ delete mode 100644 configs/ls1046ardb_emmc_defconfig
+ delete mode 100644 configs/ls1046ardb_qspi_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls1046ardb_qspi_defconfig
+ delete mode 100644 configs/ls1046ardb_qspi_spl_defconfig
+ delete mode 100644 configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls1046ardb_sdcard_defconfig
+ delete mode 100644 configs/ls1088aqds_defconfig
+ delete mode 100644 configs/ls1088aqds_qspi_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls1088aqds_qspi_defconfig
+ delete mode 100644 configs/ls1088aqds_sdcard_ifc_defconfig
+ delete mode 100644 configs/ls1088aqds_sdcard_qspi_defconfig
+ delete mode 100644 configs/ls1088ardb_qspi_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls1088ardb_qspi_defconfig
+ delete mode 100644 configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls1088ardb_sdcard_qspi_defconfig
+ delete mode 100644 configs/ls2081ardb_defconfig
+ delete mode 100644 configs/ls2088ardb_qspi_SECURE_BOOT_defconfig
+ delete mode 100644 configs/ls2088ardb_qspi_defconfig
 
-diff --git a/configs/ls1012a2g5rdb_qspi_defconfig b/configs/ls1012a2g5rdb_qspi_defconfig
+diff --git a/configs/ls1046aqds_SECURE_BOOT_defconfig b/configs/ls1046aqds_SECURE_BOOT_defconfig
 deleted file mode 100644
-index 72b590a73b4c..000000000000
---- a/configs/ls1012a2g5rdb_qspi_defconfig
+index 5bdcc868ba20..000000000000
+--- a/configs/ls1046aqds_SECURE_BOOT_defconfig
 +++ /dev/null
-@@ -1,69 +0,0 @@
+@@ -1,108 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012A2G5RDB=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x300000
--CONFIG_ENV_SECT_SIZE=0x40000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-2g5rdb"
--CONFIG_FSL_LS_PPA=y
--CONFIG_QSPI_AHB_INIT=y
--CONFIG_AHCI=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SCSI_AHCI=y
--CONFIG_SATA_CEVA=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--# CONFIG_SPI_FLASH_BAR is not set
--CONFIG_SPI_FLASH_SPANSION=y
--# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
--CONFIG_FSL_PFE=y
--CONFIG_DM_RTC=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_QSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1012afrdm_qspi_defconfig b/configs/ls1012afrdm_qspi_defconfig
-deleted file mode 100644
-index 7e12f6ef546b..000000000000
---- a/configs/ls1012afrdm_qspi_defconfig
-+++ /dev/null
-@@ -1,67 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012AFRDM=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x300000
--CONFIG_ENV_SECT_SIZE=0x40000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-frdm"
--CONFIG_FSL_LS_PPA=y
--CONFIG_QSPI_AHB_INIT=y
--CONFIG_PCI=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd;run qspi_bootcmd"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--# CONFIG_MMC is not set
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--# CONFIG_SPI_FLASH_BAR is not set
--CONFIG_SPI_FLASH_SPANSION=y
--# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
--CONFIG_FSL_PFE=y
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_RTC=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_QSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1012afrwy_qspi_SECURE_BOOT_defconfig b/configs/ls1012afrwy_qspi_SECURE_BOOT_defconfig
-deleted file mode 100644
-index 4e5079dcc492..000000000000
---- a/configs/ls1012afrwy_qspi_SECURE_BOOT_defconfig
-+++ /dev/null
-@@ -1,72 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012AFRWY=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-frwy"
--CONFIG_FSL_LS_PPA=y
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_NXP_ESBC=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run sd_bootcmd; env exists secureboot && esbc_halt;"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SATA_CEVA=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_FSL_SEC_MON_BE=y
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--# CONFIG_SPI_FLASH_BAR is not set
--CONFIG_SPI_FLASH_WINBOND=y
--CONFIG_FSL_PFE=y
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_RTC=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_QSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
--CONFIG_RSA=y
--CONFIG_RSA_SOFTWARE_EXP=y
-diff --git a/configs/ls1012afrwy_qspi_defconfig b/configs/ls1012afrwy_qspi_defconfig
-deleted file mode 100644
-index b944f803f70c..000000000000
---- a/configs/ls1012afrwy_qspi_defconfig
-+++ /dev/null
-@@ -1,72 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012AFRWY=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x1D0000
--CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-frwy"
--CONFIG_FSL_LS_PPA=y
--CONFIG_ENV_ADDR=0x401D0000
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run sd_bootcmd; env exists secureboot && esbc_halt;"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SATA_CEVA=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_WINBOND=y
--CONFIG_FSL_PFE=y
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_RTC=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1012aqds_qspi_defconfig b/configs/ls1012aqds_qspi_defconfig
-deleted file mode 100644
-index 34bdb1abafc7..000000000000
---- a/configs/ls1012aqds_qspi_defconfig
-+++ /dev/null
-@@ -1,95 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012AQDS=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x300000
--CONFIG_ENV_SECT_SIZE=0x40000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-qds"
--CONFIG_FSL_LS_PPA=y
--CONFIG_QSPI_AHB_INIT=y
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_FSL_QIXIS=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_MISC_INIT_R=y
--CONFIG_ID_EEPROM=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_EEPROM=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_SPI=y
--CONFIG_DEFAULT_SPI_BUS=1
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_ENV_SPI_BUS=0
--CONFIG_ENV_SPI_MAX_HZ=1000000
--CONFIG_ENV_SPI_MODE=0x03
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SCSI_AHCI=y
--CONFIG_SATA_CEVA=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x57
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SF_DEFAULT_BUS=1
--# CONFIG_SPI_FLASH_BAR is not set
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
--# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
--CONFIG_FSL_PFE=y
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PCF8563=y
--CONFIG_SCSI=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_DSPI=y
--CONFIG_FSL_QSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1012ardb_qspi_SECURE_BOOT_defconfig b/configs/ls1012ardb_qspi_SECURE_BOOT_defconfig
-deleted file mode 100644
-index dcd18b4eb8cc..000000000000
---- a/configs/ls1012ardb_qspi_SECURE_BOOT_defconfig
-+++ /dev/null
-@@ -1,77 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012ARDB=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-rdb"
--CONFIG_FSL_LS_PPA=y
--CONFIG_QSPI_AHB_INIT=y
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_NXP_ESBC=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SATA_CEVA=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_FSL_SEC_MON_BE=y
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--# CONFIG_SPI_FLASH_BAR is not set
--CONFIG_SPI_FLASH_SPANSION=y
--# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_DM_PCI_COMPAT=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_RTC=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_DSPI=y
--CONFIG_FSL_QSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
--CONFIG_RSA=y
--CONFIG_RSA_SOFTWARE_EXP=y
-diff --git a/configs/ls1012ardb_qspi_defconfig b/configs/ls1012ardb_qspi_defconfig
-deleted file mode 100644
-index 10fe826f99a0..000000000000
---- a/configs/ls1012ardb_qspi_defconfig
-+++ /dev/null
-@@ -1,77 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1012ARDB=y
--CONFIG_TEXT_BASE=0x40100000
--CONFIG_SYS_MALLOC_LEN=0x500000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x300000
--CONFIG_ENV_SECT_SIZE=0x40000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1012a-rdb"
--CONFIG_FSL_LS_PPA=y
--CONFIG_QSPI_AHB_INIT=y
--CONFIG_ENV_ADDR=0x40300000
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_QSPI_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 quiet lpj=250000"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;"
--# CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SATA_CEVA=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--# CONFIG_SPI_FLASH_BAR is not set
--CONFIG_SPI_FLASH_SPANSION=y
--# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
--CONFIG_FSL_PFE=y
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_RTC=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_DSPI=y
--CONFIG_FSL_QSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_defconfig b/configs/ls1043aqds_defconfig
-deleted file mode 100644
-index 18bf4bd8792c..000000000000
---- a/configs/ls1043aqds_defconfig
-+++ /dev/null
-@@ -1,107 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
+-CONFIG_TARGET_LS1046AQDS=y
 -CONFIG_TEXT_BASE=0x60100000
 -CONFIG_SYS_MALLOC_LEN=0x120000
 -CONFIG_NR_DRAM_BANKS=2
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
 -CONFIG_ENV_SIZE=0x20000
--CONFIG_ENV_SECT_SIZE=0x20000
 -CONFIG_SYS_I2C_MXC_I2C1=y
 -CONFIG_SYS_I2C_MXC_I2C2=y
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
 -CONFIG_FSL_LS_PPA=y
--CONFIG_ENV_ADDR=0x60300000
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
+-CONFIG_NXP_ESBC=y
 -CONFIG_LAYERSCAPE_NS_ACCESS=y
 -CONFIG_PCIE1=y
 -CONFIG_PCIE2=y
 -CONFIG_PCIE3=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
 -CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
 -CONFIG_VOL_MONITOR_INA220=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
 -CONFIG_FSL_QIXIS=y
@@ -815,9 +243,8 @@ index 18bf4bd8792c..000000000000
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
--CONFIG_ARCH_MISC_INIT=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run nor_bootcmd; env exists secureboot && esbc_halt;;"
 -CONFIG_MISC_INIT_R=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
@@ -832,22 +259,21 @@ index 18bf4bd8792c..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_FLASH=y
 -CONFIG_SATA=y
 -CONFIG_SATA_CEVA=y
--CONFIG_FSL_CAAM=y
 -CONFIG_DYNAMIC_DDR_CLK_FREQ=y
 -CONFIG_DDR_ECC=y
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_FSL_SEC_MON_BE=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
 -CONFIG_MTD=y
@@ -859,6 +285,7 @@ index 18bf4bd8792c..000000000000
 -CONFIG_SYS_FLASH_CFI=y
 -CONFIG_SYS_FLASH_QUIET_TEST=y
 -CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
 -CONFIG_MTD_RAW_NAND=y
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
@@ -874,22 +301,25 @@ index 18bf4bd8792c..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_lpuart_defconfig b/configs/ls1043aqds_lpuart_defconfig
+-CONFIG_RSA=y
+diff --git a/configs/ls1046aqds_defconfig b/configs/ls1046aqds_defconfig
 deleted file mode 100644
-index 9dcbe71ad0c1..000000000000
---- a/configs/ls1043aqds_lpuart_defconfig
+index 51aa5dcbf504..000000000000
+--- a/configs/ls1046aqds_defconfig
 +++ /dev/null
-@@ -1,109 +0,0 @@
+@@ -1,110 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
+-CONFIG_TARGET_LS1046AQDS=y
 -CONFIG_TEXT_BASE=0x60100000
 -CONFIG_SYS_MALLOC_LEN=0x120000
 -CONFIG_NR_DRAM_BANKS=2
@@ -902,7 +332,7 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-lpuart"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_ENV_ADDR=0x60300000
 -CONFIG_PCI=y
@@ -913,7 +343,7 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_PCIE3=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
 -CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
 -CONFIG_VOL_MONITOR_INA220=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
 -CONFIG_FSL_QIXIS=y
@@ -928,8 +358,8 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run nor_bootcmd; env exists secureboot && esbc_halt;;"
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
 -CONFIG_SYS_MAXARGS=64
@@ -945,9 +375,10 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_FLASH=y
@@ -959,7 +390,6 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
@@ -972,6 +402,7 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_SYS_FLASH_CFI=y
 -CONFIG_SYS_FLASH_QUIET_TEST=y
 -CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
 -CONFIG_MTD_RAW_NAND=y
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
@@ -987,24 +418,142 @@ index 9dcbe71ad0c1..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+diff --git a/configs/ls1046aqds_lpuart_defconfig b/configs/ls1046aqds_lpuart_defconfig
+deleted file mode 100644
+index 9c1df2416aa5..000000000000
+--- a/configs/ls1046aqds_lpuart_defconfig
++++ /dev/null
+@@ -1,112 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=25000000
+-CONFIG_TARGET_LS1046AQDS=y
+-CONFIG_TEXT_BASE=0x60100000
+-CONFIG_SYS_MALLOC_LEN=0x120000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
+-CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+-CONFIG_SYS_I2C_MXC_I2C4=y
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-lpuart"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_ENV_ADDR=0x60300000
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_LAYERSCAPE_NS_ACCESS=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
+-CONFIG_VOL_MONITOR_INA220=y
+-CONFIG_VOL_MONITOR_IR36021_SET=y
+-CONFIG_FSL_QIXIS=y
+-# CONFIG_QIXIS_I2C_ACCESS is not set
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run nor_bootcmd; env exists secureboot && esbc_halt;;"
+-CONFIG_ARCH_MISC_INIT=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_BOOTZ=y
+-CONFIG_CMD_IMLS=y
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_SATA=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DYNAMIC_DDR_CLK_FREQ=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SF_DEFAULT_BUS=1
+-CONFIG_SPI_FLASH_EON=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_SST=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHYLIB_10G=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_E1000=y
+-CONFIG_NVME_PCI=y
+-CONFIG_DM_PCI_COMPAT=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
 -CONFIG_DM_SCSI=y
 -CONFIG_DM_SERIAL=y
 -CONFIG_FSL_LPUART=y
 -CONFIG_LPUART=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_nand_defconfig b/configs/ls1043aqds_nand_defconfig
+diff --git a/configs/ls1046aqds_nand_defconfig b/configs/ls1046aqds_nand_defconfig
 deleted file mode 100644
-index e5f570a3b3c1..000000000000
---- a/configs/ls1043aqds_nand_defconfig
+index 95616f970549..000000000000
+--- a/configs/ls1046aqds_nand_defconfig
 +++ /dev/null
-@@ -1,138 +0,0 @@
+@@ -1,139 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
+-CONFIG_TARGET_LS1046AQDS=y
 -CONFIG_TEXT_BASE=0x82000000
 -CONFIG_SYS_MALLOC_LEN=0x102000
 -CONFIG_SPL_LIBCOMMON_SUPPORT=y
@@ -1019,13 +568,13 @@ index e5f570a3b3c1..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
 -CONFIG_SPL_TEXT_BASE=0x10000000
 -CONFIG_FSL_LS_PPA=y
--CONFIG_SYS_MONITOR_LEN=1048576
+-CONFIG_SYS_MONITOR_LEN=655360
 -CONFIG_SPL_SERIAL=y
 -CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001d000
+-CONFIG_SPL_STACK=0x1001f000
 -CONFIG_SPL=y
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
@@ -1035,7 +584,7 @@ index e5f570a3b3c1..000000000000
 -CONFIG_PCIE3=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
 -CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
 -CONFIG_VOL_MONITOR_INA220=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
 -CONFIG_FSL_QIXIS=y
@@ -1048,28 +597,27 @@ index e5f570a3b3c1..000000000000
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_DYNAMIC_SYS_CLK_FREQ=y
 -CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043aqds/ls1043aqds_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043aqds/ls1043aqds_rcw_nand.cfg"
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046aqds/ls1046aqds_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046aqds/ls1046aqds_rcw_nand.cfg"
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_NAND_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run nand_bootcmd; env exists secureboot && esbc_halt;;"
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x1a000
--CONFIG_SPL_PAD_TO=0x20000
+-CONFIG_SPL_MAX_SIZE=0x17000
+-CONFIG_SPL_PAD_TO=0x40000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x80100000
+-CONFIG_SPL_BSS_START_ADDR=0x8f000000
 -CONFIG_SPL_BSS_MAX_SIZE=0x80000
 -CONFIG_SPL_FSL_PBL=y
+-CONFIG_SPL_BOARD_INIT=y
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SYS_SPL_MALLOC=y
--CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
--CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x80200000
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xf0
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x110
 -CONFIG_SPL_ENV_SUPPORT=y
 -CONFIG_SPL_I2C=y
 -CONFIG_SPL_MPC8XXX_INIT_DDR=y
@@ -1088,10 +636,10 @@ index e5f570a3b3c1..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_SPL_EFI_PARTITION is not set
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_NAND=y
@@ -1104,7 +652,6 @@ index e5f570a3b3c1..000000000000
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
@@ -1117,10 +664,11 @@ index e5f570a3b3c1..000000000000
 -CONFIG_SYS_FLASH_CFI=y
 -CONFIG_SYS_FLASH_QUIET_TEST=y
 -CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
 -CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x40000
 -CONFIG_SF_DEFAULT_BUS=1
 -CONFIG_SPI_FLASH_EON=y
 -CONFIG_SPI_FLASH_STMICRO=y
@@ -1133,136 +681,24 @@ index e5f570a3b3c1..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_nor_ddr3_defconfig b/configs/ls1043aqds_nor_ddr3_defconfig
+diff --git a/configs/ls1046aqds_qspi_defconfig b/configs/ls1046aqds_qspi_defconfig
 deleted file mode 100644
-index 67d8288abb00..000000000000
---- a/configs/ls1043aqds_nor_ddr3_defconfig
+index f3796f3771f2..000000000000
+--- a/configs/ls1046aqds_qspi_defconfig
 +++ /dev/null
-@@ -1,108 +0,0 @@
+@@ -1,101 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
--CONFIG_TEXT_BASE=0x60100000
--CONFIG_SYS_MALLOC_LEN=0x120000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x20000
--CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_SYS_I2C_MXC_I2C1=y
--CONFIG_SYS_I2C_MXC_I2C2=y
--CONFIG_SYS_I2C_MXC_I2C3=y
--CONFIG_SYS_I2C_MXC_I2C4=y
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
--CONFIG_FSL_LS_PPA=y
--CONFIG_ENV_ADDR=0x60300000
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PCIE3=y
--CONFIG_FSL_USE_PCA9547_MUX=y
--CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
--CONFIG_VOL_MONITOR_INA220=y
--CONFIG_VOL_MONITOR_IR36021_SET=y
--CONFIG_FSL_QIXIS=y
--# CONFIG_QIXIS_I2C_ACCESS is not set
--CONFIG_SYS_MEMTEST_START=0x80000000
--CONFIG_SYS_MEMTEST_END=0x9fffffff
--CONFIG_REMAKE_ELF=y
--CONFIG_MP=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_DYNAMIC_SYS_CLK_FREQ=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
--CONFIG_ARCH_MISC_INIT=y
--CONFIG_MISC_INIT_R=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_IMLS=y
--CONFIG_CMD_GREPENV=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_SATA=y
--CONFIG_SATA_CEVA=y
--CONFIG_FSL_CAAM=y
--CONFIG_DYNAMIC_DDR_CLK_FREQ=y
--CONFIG_SYS_FSL_DDR3=y
--CONFIG_DDR_ECC=y
--CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x57
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
--CONFIG_PHYLIB=y
--CONFIG_PHYLIB_10G=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
--CONFIG_E1000=y
--CONFIG_NVME_PCI=y
--CONFIG_DM_PCI_COMPAT=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_qspi_defconfig b/configs/ls1043aqds_qspi_defconfig
-deleted file mode 100644
-index fa0b47fde8c4..000000000000
---- a/configs/ls1043aqds_qspi_defconfig
-+++ /dev/null
-@@ -1,98 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
+-CONFIG_TARGET_LS1046AQDS=y
 -CONFIG_TEXT_BASE=0x40100000
 -CONFIG_SYS_MALLOC_LEN=0x102000
 -CONFIG_NR_DRAM_BANKS=2
@@ -1276,7 +712,7 @@ index fa0b47fde8c4..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_ENV_ADDR=0x40300000
 -CONFIG_PCI=y
@@ -1287,7 +723,7 @@ index fa0b47fde8c4..000000000000
 -CONFIG_PCIE3=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
 -CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
 -CONFIG_VOL_MONITOR_INA220=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
 -CONFIG_FSL_QIXIS=y
@@ -1302,8 +738,8 @@ index fa0b47fde8c4..000000000000
 -CONFIG_QSPI_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run nor_bootcmd; env exists secureboot && esbc_halt;;"
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
 -CONFIG_SYS_MAXARGS=64
@@ -1317,9 +753,10 @@ index fa0b47fde8c4..000000000000
 -CONFIG_CMD_GPT=y
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:2m(uboot),14m(free)"
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_SPI_FLASH=y
@@ -1332,7 +769,6 @@ index fa0b47fde8c4..000000000000
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_SYS_I2C_EARLY_INIT=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
@@ -1342,6 +778,7 @@ index fa0b47fde8c4..000000000000
 -CONFIG_SPI_FLASH_SPANSION=y
 -CONFIG_SPI_FLASH_STMICRO=y
 -CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHYLIB_10G=y
 -CONFIG_PHY_REALTEK=y
@@ -1350,23 +787,25 @@ index fa0b47fde8c4..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_sdcard_ifc_defconfig b/configs/ls1043aqds_sdcard_ifc_defconfig
+diff --git a/configs/ls1046aqds_sdcard_ifc_defconfig b/configs/ls1046aqds_sdcard_ifc_defconfig
 deleted file mode 100644
-index 6cb961d33dcc..000000000000
---- a/configs/ls1043aqds_sdcard_ifc_defconfig
+index 179fa70f4ee2..000000000000
+--- a/configs/ls1046aqds_sdcard_ifc_defconfig
 +++ /dev/null
-@@ -1,135 +0,0 @@
+@@ -1,139 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
+-CONFIG_TARGET_LS1046AQDS=y
 -CONFIG_TEXT_BASE=0x82000000
 -CONFIG_SYS_MALLOC_LEN=0x102000
 -CONFIG_SPL_LIBCOMMON_SUPPORT=y
@@ -1381,14 +820,14 @@ index 6cb961d33dcc..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
 -CONFIG_SPL_TEXT_BASE=0x10000000
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_SYS_MONITOR_LEN=1048576
 -CONFIG_SPL_MMC=y
 -CONFIG_SPL_SERIAL=y
 -CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001e000
+-CONFIG_SPL_STACK=0x10020000
 -CONFIG_SPL=y
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
@@ -1398,7 +837,7 @@ index 6cb961d33dcc..000000000000
 -CONFIG_PCIE3=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
 -CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
 -CONFIG_VOL_MONITOR_INA220=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
 -CONFIG_FSL_QIXIS=y
@@ -1411,26 +850,27 @@ index 6cb961d33dcc..000000000000
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_DYNAMIC_SYS_CLK_FREQ=y
 -CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043aqds/ls1043aqds_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043aqds/ls1043aqds_rcw_sd_ifc.cfg"
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046aqds/ls1046aqds_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046aqds/ls1046aqds_rcw_sd_ifc.cfg"
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_SD_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run sd_bootcmd; env exists secureboot && esbc_halt;;"
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x17000
--CONFIG_SPL_PAD_TO=0x1d000
+-CONFIG_SPL_MAX_SIZE=0x1f000
+-CONFIG_SPL_PAD_TO=0x21000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 -CONFIG_SPL_BSS_START_ADDR=0x8f000000
 -CONFIG_SPL_BSS_MAX_SIZE=0x80000
 -CONFIG_SPL_FSL_PBL=y
+-CONFIG_SPL_BOARD_INIT=y
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SYS_SPL_MALLOC=y
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xf0
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x110
 -CONFIG_SPL_ENV_SUPPORT=y
 -CONFIG_SPL_I2C=y
 -CONFIG_SPL_MPC8XXX_INIT_DDR=y
@@ -1448,9 +888,10 @@ index 6cb961d33dcc..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:4m(nand_uboot),36m(nand_kernel),472m(nand_free);spi0.0:2m(uboot),14m(free)"
 -# CONFIG_SPL_EFI_PARTITION is not set
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
@@ -1464,7 +905,6 @@ index 6cb961d33dcc..000000000000
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
@@ -1477,6 +917,7 @@ index 6cb961d33dcc..000000000000
 -CONFIG_SYS_FLASH_CFI=y
 -CONFIG_SYS_FLASH_QUIET_TEST=y
 -CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
 -CONFIG_MTD_RAW_NAND=y
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
@@ -1492,22 +933,24 @@ index 6cb961d33dcc..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043aqds_sdcard_qspi_defconfig b/configs/ls1043aqds_sdcard_qspi_defconfig
+diff --git a/configs/ls1046aqds_sdcard_qspi_defconfig b/configs/ls1046aqds_sdcard_qspi_defconfig
 deleted file mode 100644
-index 4e41508251da..000000000000
---- a/configs/ls1043aqds_sdcard_qspi_defconfig
+index b571eaadf629..000000000000
+--- a/configs/ls1046aqds_sdcard_qspi_defconfig
 +++ /dev/null
-@@ -1,124 +0,0 @@
+@@ -1,128 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043AQDS=y
+-CONFIG_TARGET_LS1046AQDS=y
 -CONFIG_TEXT_BASE=0x82000000
 -CONFIG_SYS_MALLOC_LEN=0x102000
 -CONFIG_SPL_LIBCOMMON_SUPPORT=y
@@ -1522,14 +965,14 @@ index 4e41508251da..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-qds-duart"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-qds-duart"
 -CONFIG_SPL_TEXT_BASE=0x10000000
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_SYS_MONITOR_LEN=1048576
 -CONFIG_SPL_MMC=y
 -CONFIG_SPL_SERIAL=y
 -CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001e000
+-CONFIG_SPL_STACK=0x10020000
 -CONFIG_SPL=y
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
@@ -1539,7 +982,7 @@ index 4e41508251da..000000000000
 -CONFIG_PCIE3=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
 -CONFIG_VID=y
--CONFIG_VID_FLS_ENV="ls1043aqds_vdd_mv"
+-CONFIG_VID_FLS_ENV="ls1046aqds_vdd_mv"
 -CONFIG_VOL_MONITOR_INA220=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
 -CONFIG_FSL_QIXIS=y
@@ -1551,27 +994,28 @@ index 4e41508251da..000000000000
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_DYNAMIC_SYS_CLK_FREQ=y
 -CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043aqds/ls1043aqds_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043aqds/ls1043aqds_rcw_sd_qspi.cfg"
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046aqds/ls1046aqds_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046aqds/ls1046aqds_rcw_sd_qspi.cfg"
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_SD_BOOT=y
 -CONFIG_SD_BOOT_QSPI=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:2m(uboot),14m(free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run sd_bootcmd; env exists secureboot && esbc_halt;;"
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x17000
--CONFIG_SPL_PAD_TO=0x1d000
+-CONFIG_SPL_MAX_SIZE=0x1f000
+-CONFIG_SPL_PAD_TO=0x21000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 -CONFIG_SPL_BSS_START_ADDR=0x8f000000
 -CONFIG_SPL_BSS_MAX_SIZE=0x80000
 -CONFIG_SPL_FSL_PBL=y
+-CONFIG_SPL_BOARD_INIT=y
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SYS_SPL_MALLOC=y
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xf0
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x110
 -CONFIG_SPL_ENV_SUPPORT=y
 -CONFIG_SPL_I2C=y
 -CONFIG_SPL_MPC8XXX_INIT_DDR=y
@@ -1587,9 +1031,10 @@ index 4e41508251da..000000000000
 -CONFIG_CMD_GPT=y
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:2m(uboot),14m(free)"
 -# CONFIG_SPL_EFI_PARTITION is not set
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
@@ -1603,7 +1048,6 @@ index 4e41508251da..000000000000
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_SYS_I2C_EARLY_INIT=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
@@ -1613,6 +1057,7 @@ index 4e41508251da..000000000000
 -CONFIG_SPI_FLASH_SPANSION=y
 -CONFIG_SPI_FLASH_STMICRO=y
 -CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHYLIB_10G=y
 -CONFIG_PHY_REALTEK=y
@@ -1621,364 +1066,25 @@ index 4e41508251da..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls1043ardb_SECURE_BOOT_defconfig b/configs/ls1043ardb_SECURE_BOOT_defconfig
+diff --git a/configs/ls1046ardb_emmc_defconfig b/configs/ls1046ardb_emmc_defconfig
 deleted file mode 100644
-index ea195d7c5041..000000000000
---- a/configs/ls1043ardb_SECURE_BOOT_defconfig
+index 924ff78b4593..000000000000
+--- a/configs/ls1046ardb_emmc_defconfig
 +++ /dev/null
-@@ -1,99 +0,0 @@
+@@ -1,122 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043ARDB=y
--CONFIG_TEXT_BASE=0x60100000
--CONFIG_SYS_MALLOC_LEN=0x120000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x20000
--CONFIG_SYS_I2C_MXC_I2C1=y
--CONFIG_SYS_I2C_MXC_I2C2=y
--CONFIG_SYS_I2C_MXC_I2C3=y
--CONFIG_SYS_I2C_MXC_I2C4=y
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-rdb"
--CONFIG_FSL_LS_PPA=y
--CONFIG_PCI=y
--CONFIG_OF_BOARD_FIXUP=y
--CONFIG_NXP_ESBC=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PCIE3=y
--CONFIG_REMAKE_ELF=y
--CONFIG_MP=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run nor_bootcmd; env exists secureboot && esbc_halt;"
--CONFIG_MISC_INIT_R=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_DM=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="FM1@DTSEC3"
--# CONFIG_DDR_SPD is not set
--CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_FSL_SEC_MON_BE=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x53
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
--CONFIG_PHYLIB=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_FMAN_ENET=y
--CONFIG_SYS_FMAN_FW_ADDR=0x60900000
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_SYS_QE_FW_ADDR=0x60940000
--CONFIG_SYS_QE_FMAN_FW_IN_NOR=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYS_NS16550=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
--CONFIG_RSA=y
--CONFIG_RSA_SOFTWARE_EXP=y
--CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
-diff --git a/configs/ls1043ardb_defconfig b/configs/ls1043ardb_defconfig
-deleted file mode 100644
-index ae8600ffd958..000000000000
---- a/configs/ls1043ardb_defconfig
-+++ /dev/null
-@@ -1,100 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043ARDB=y
--CONFIG_TEXT_BASE=0x60100000
--CONFIG_SYS_MALLOC_LEN=0x120000
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x20000
--CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_SYS_I2C_MXC_I2C1=y
--CONFIG_SYS_I2C_MXC_I2C2=y
--CONFIG_SYS_I2C_MXC_I2C3=y
--CONFIG_SYS_I2C_MXC_I2C4=y
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-rdb"
--CONFIG_FSL_LS_PPA=y
--CONFIG_ENV_ADDR=0x60300000
--CONFIG_PCI=y
--CONFIG_OF_BOARD_FIXUP=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PCIE3=y
--CONFIG_REMAKE_ELF=y
--CONFIG_MP=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run nor_bootcmd; env exists secureboot && esbc_halt;"
--CONFIG_ARCH_MISC_INIT=y
--CONFIG_MISC_INIT_R=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_DM=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="FM1@DTSEC3"
--CONFIG_FSL_CAAM=y
--# CONFIG_DDR_SPD is not set
--CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x53
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
--CONFIG_PHYLIB=y
--CONFIG_PHY_AQUANTIA=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
--CONFIG_DM_MDIO=y
--CONFIG_E1000=y
--CONFIG_FMAN_ENET=y
--CONFIG_SYS_FMAN_FW_ADDR=0x60900000
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_SYS_QE_FW_ADDR=0x60940000
--CONFIG_SYS_QE_FMAN_FW_IN_NOR=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYS_NS16550=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
--CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
-diff --git a/configs/ls1043ardb_nand_SECURE_BOOT_defconfig b/configs/ls1043ardb_nand_SECURE_BOOT_defconfig
-deleted file mode 100644
-index d9ff0fd16a58..000000000000
---- a/configs/ls1043ardb_nand_SECURE_BOOT_defconfig
-+++ /dev/null
-@@ -1,124 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043ARDB=y
--CONFIG_TEXT_BASE=0x82000000
--CONFIG_SYS_MALLOC_LEN=0x102000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_NR_DRAM_BANKS=2
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-rdb"
--CONFIG_SPL_TEXT_BASE=0x10000000
--CONFIG_FSL_LS_PPA=y
--CONFIG_SYS_MONITOR_LEN=1064960
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001d000
--CONFIG_SPL=y
--CONFIG_PCI=y
--CONFIG_OF_BOARD_FIXUP=y
--CONFIG_NXP_ESBC=y
--CONFIG_LAYERSCAPE_NS_ACCESS=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PCIE3=y
--CONFIG_REMAKE_ELF=y
--CONFIG_MP=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043ardb/ls1043ardb_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043ardb/ls1043ardb_rcw_nand.cfg"
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_NAND_BOOT=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_USE_BOOTCOMMAND is not set
--CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x1a000
--CONFIG_SPL_PAD_TO=0x20000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x80100000
--CONFIG_SPL_BSS_MAX_SIZE=0x80000
--CONFIG_SPL_FSL_PBL=y
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
--CONFIG_SYS_SPL_MALLOC=y
--CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
--CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x80200000
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xf0
--CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_MPC8XXX_INIT_DDR=y
--CONFIG_SPL_NAND_SUPPORT=y
--CONFIG_SPL_WATCHDOG=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_DM=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--# CONFIG_SPL_EFI_PARTITION is not set
--CONFIG_OF_CONTROL=y
--CONFIG_SPL_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="FM1@DTSEC3"
--CONFIG_SPL_DM=y
--CONFIG_MPC8XXX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_FSL_SEC_MON_BE=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x53
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
--CONFIG_PHYLIB=y
--CONFIG_PHY_AQUANTIA=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
--CONFIG_DM_MDIO=y
--CONFIG_E1000=y
--CONFIG_FMAN_ENET=y
--CONFIG_SYS_FMAN_FW_ADDR=0x900000
--CONFIG_NVME_PCI=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_SYS_QE_FMAN_FW_IN_NAND=y
--CONFIG_SPECIFY_CONSOLE_INDEX=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYS_NS16550=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
--# CONFIG_SPL_USE_TINY_PRINTF is not set
--CONFIG_RSA=y
--CONFIG_SPL_RSA=y
--CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
-diff --git a/configs/ls1043ardb_nand_defconfig b/configs/ls1043ardb_nand_defconfig
-deleted file mode 100644
-index ad118187432e..000000000000
---- a/configs/ls1043ardb_nand_defconfig
-+++ /dev/null
-@@ -1,128 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043ARDB=y
+-CONFIG_TARGET_LS1046ARDB=y
 -CONFIG_TEXT_BASE=0x82000000
 -CONFIG_SYS_MALLOC_LEN=0x102000
 -CONFIG_SPL_LIBCOMMON_SUPPORT=y
@@ -1993,16 +1099,17 @@ index ad118187432e..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-rdb"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-rdb"
 -CONFIG_SPL_TEXT_BASE=0x10000000
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_SYS_MONITOR_LEN=1048576
+-CONFIG_SPL_MMC=y
 -CONFIG_SPL_SERIAL=y
 -CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001d000
+-CONFIG_SPL_STACK=0x10020000
 -CONFIG_SPL=y
 -CONFIG_PCI=y
--CONFIG_OF_BOARD_FIXUP=y
+-CONFIG_AHCI=y
 -CONFIG_LAYERSCAPE_NS_ACCESS=y
 -CONFIG_PCIE1=y
 -CONFIG_PCIE2=y
@@ -2012,37 +1119,33 @@ index ad118187432e..000000000000
 -CONFIG_FIT_VERBOSE=y
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043ardb/ls1043ardb_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043ardb/ls1043ardb_rcw_nand.cfg"
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046ardb/ls1046ardb_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046ardb/ls1046ardb_rcw_emmc.cfg"
 -CONFIG_DISTRO_DEFAULTS=y
--CONFIG_NAND_BOOT=y
+-CONFIG_SD_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
 -# CONFIG_USE_BOOTCOMMAND is not set
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x1a000
--CONFIG_SPL_PAD_TO=0x20000
+-CONFIG_SPL_MAX_SIZE=0x1f000
+-CONFIG_SPL_PAD_TO=0x21000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x80100000
+-CONFIG_SPL_BSS_START_ADDR=0x8f000000
 -CONFIG_SPL_BSS_MAX_SIZE=0x80000
 -CONFIG_SPL_FSL_PBL=y
 -CONFIG_SPL_BOARD_INIT=y
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SYS_SPL_MALLOC=y
--CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
--CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x80200000
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xf0
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x110
 -CONFIG_SPL_ENV_SUPPORT=y
 -CONFIG_SPL_I2C=y
 -CONFIG_SPL_MPC8XXX_INIT_DDR=y
--CONFIG_SPL_NAND_SUPPORT=y
 -CONFIG_SPL_WATCHDOG=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
 -CONFIG_CMD_DM=y
 -CONFIG_CMD_GPIO=y
@@ -2050,89 +1153,82 @@ index ad118187432e..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
 -# CONFIG_SPL_EFI_PARTITION is not set
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_IS_IN_MMC=y
 -CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 -CONFIG_USE_ETHPRIME=y
 -CONFIG_ETHPRIME="FM1@DTSEC3"
+-CONFIG_SATA=y
+-CONFIG_SATA_CEVA=y
 -CONFIG_FSL_CAAM=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x53
 -CONFIG_FSL_ESDHC=y
 -CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_MTD_RAW_NAND=y
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHY_AQUANTIA=y
 -CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
 -CONFIG_DM_MDIO=y
 -CONFIG_E1000=y
 -CONFIG_FMAN_ENET=y
 -CONFIG_SYS_FMAN_FW_ADDR=0x900000
 -CONFIG_NVME_PCI=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_SYS_QE_FMAN_FW_IN_NAND=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_POWER_LEGACY=y
+-CONFIG_POWER_I2C=y
+-CONFIG_SYS_QE_FMAN_FW_IN_MMC=y
+-CONFIG_DM_SCSI=y
 -CONFIG_DM_SERIAL=y
 -CONFIG_SPL_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
--# CONFIG_SPL_USE_TINY_PRINTF is not set
 -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
-diff --git a/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig b/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
+diff --git a/configs/ls1046ardb_qspi_SECURE_BOOT_defconfig b/configs/ls1046ardb_qspi_SECURE_BOOT_defconfig
 deleted file mode 100644
-index fe0dd04f1f90..000000000000
---- a/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
+index bb278845e069..000000000000
+--- a/configs/ls1046ardb_qspi_SECURE_BOOT_defconfig
 +++ /dev/null
-@@ -1,124 +0,0 @@
+@@ -1,99 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043ARDB=y
--CONFIG_TEXT_BASE=0x82000000
+-CONFIG_TARGET_LS1046ARDB=y
+-CONFIG_TEXT_BASE=0x40100000
 -CONFIG_SYS_MALLOC_LEN=0x102000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
 -CONFIG_NR_DRAM_BANKS=2
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
 -CONFIG_ENV_SIZE=0x2000
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+-CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-rdb"
--CONFIG_SPL_TEXT_BASE=0x10000000
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-rdb"
 -CONFIG_FSL_LS_PPA=y
--CONFIG_SYS_MONITOR_LEN=1064960
--CONFIG_SPL_MMC=y
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001e000
--CONFIG_SPL=y
+-CONFIG_QSPI_AHB_INIT=y
 -CONFIG_PCI=y
--CONFIG_OF_BOARD_FIXUP=y
+-CONFIG_AHCI=y
 -CONFIG_NXP_ESBC=y
 -CONFIG_LAYERSCAPE_NS_ACCESS=y
 -CONFIG_PCIE1=y
@@ -2143,17 +1239,373 @@ index fe0dd04f1f90..000000000000
 -CONFIG_FIT_VERBOSE=y
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043ardb/ls1043ardb_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043ardb/ls1043ardb_rcw_sd.cfg"
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046ardb/ls1046ardb_qspi_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046ardb/ls1046ardb_rcw_qspi.cfg"
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;;"
+-CONFIG_MISC_INIT_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC3"
+-CONFIG_SATA=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_FSL_SEC_MON_BE=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_AQUANTIA=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_DM_MDIO=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0x40900000
+-CONFIG_NVME_PCI=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_POWER_LEGACY=y
+-CONFIG_POWER_I2C=y
+-CONFIG_SYS_QE_FMAN_FW_IN_SPIFLASH=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SPECIFY_CONSOLE_INDEX=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_RSA=y
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+diff --git a/configs/ls1046ardb_qspi_defconfig b/configs/ls1046ardb_qspi_defconfig
+deleted file mode 100644
+index 0fb1a6c281e5..000000000000
+--- a/configs/ls1046ardb_qspi_defconfig
++++ /dev/null
+@@ -1,102 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=25000000
+-CONFIG_TARGET_LS1046ARDB=y
+-CONFIG_TEXT_BASE=0x40100000
+-CONFIG_SYS_MALLOC_LEN=0x102000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_ENV_SECT_SIZE=0x40000
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+-CONFIG_SYS_I2C_MXC_I2C4=y
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-rdb"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_ENV_ADDR=0x40300000
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_LAYERSCAPE_NS_ACCESS=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_RAMBOOT_PBL=y
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046ardb/ls1046ardb_qspi_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046ardb/ls1046ardb_rcw_qspi.cfg"
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;;"
+-CONFIG_ARCH_MISC_INIT=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC3"
+-CONFIG_SATA=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_AQUANTIA=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_DM_MDIO=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0x40900000
+-CONFIG_NVME_PCI=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_POWER_LEGACY=y
+-CONFIG_POWER_I2C=y
+-CONFIG_SYS_QE_FMAN_FW_IN_SPIFLASH=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SPECIFY_CONSOLE_INDEX=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+diff --git a/configs/ls1046ardb_qspi_spl_defconfig b/configs/ls1046ardb_qspi_spl_defconfig
+deleted file mode 100644
+index eb0184c59276..000000000000
+--- a/configs/ls1046ardb_qspi_spl_defconfig
++++ /dev/null
+@@ -1,130 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=25000000
+-CONFIG_TARGET_LS1046ARDB=y
+-CONFIG_TEXT_BASE=0x82000000
+-CONFIG_SYS_MALLOC_LEN=0x102000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_ENV_SECT_SIZE=0x40000
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+-CONFIG_SYS_I2C_MXC_I2C4=y
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-rdb"
+-CONFIG_SPL_TEXT_BASE=0x10000000
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_SPL_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_SYS_MONITOR_LEN=1048576
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x10020000
+-CONFIG_SPL=y
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_LAYERSCAPE_NS_ACCESS=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_RAMBOOT_PBL=y
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046ardb/ls1046ardb_qspi_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046ardb/ls1046ardb_rcw_qspi.cfg"
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd; run qspi_bootcmd; env exists secureboot && esbc_halt;;"
+-CONFIG_ARCH_MISC_INIT=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_SPL_MAX_SIZE=0x1f000
+-CONFIG_SPL_PAD_TO=0x20000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x8f000000
+-CONFIG_SPL_BSS_MAX_SIZE=0x80000
+-CONFIG_SPL_BOARD_INIT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SYS_SPL_MALLOC=y
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_SPL_NOR_SUPPORT=y
+-CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x90000000
+-CONFIG_SYS_OS_BASE=0x40980000
+-CONFIG_SPL_WATCHDOG=y
+-CONFIG_SPL_TARGET="spl/u-boot-spl.pbl"
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_SPL=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-# CONFIG_SPL_EFI_PARTITION is not set
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SPL_ENV_IS_NOWHERE=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="FM1@DTSEC3"
+-CONFIG_SATA=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_DM_I2C=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_FMAN_ENET=y
+-CONFIG_SYS_FMAN_FW_ADDR=0x40900000
+-CONFIG_NVME_PCI=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_POWER_LEGACY=y
+-CONFIG_POWER_I2C=y
+-CONFIG_SYS_QE_FMAN_FW_IN_SPIFLASH=y
+-CONFIG_DM_SCSI=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_SPL_GZIP=y
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+diff --git a/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig b/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
+deleted file mode 100644
+index 2813c79f5975..000000000000
+--- a/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
++++ /dev/null
+@@ -1,123 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=25000000
+-CONFIG_TARGET_LS1046ARDB=y
+-CONFIG_TEXT_BASE=0x82000000
+-CONFIG_SYS_MALLOC_LEN=0x102000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_SYS_I2C_MXC_I2C1=y
+-CONFIG_SYS_I2C_MXC_I2C2=y
+-CONFIG_SYS_I2C_MXC_I2C3=y
+-CONFIG_SYS_I2C_MXC_I2C4=y
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-rdb"
+-CONFIG_SPL_TEXT_BASE=0x10000000
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_SYS_MONITOR_LEN=1064960
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x10020000
+-CONFIG_SPL=y
+-CONFIG_PCI=y
+-CONFIG_NXP_ESBC=y
+-CONFIG_LAYERSCAPE_NS_ACCESS=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PCIE3=y
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_RAMBOOT_PBL=y
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046ardb/ls1046ardb_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046ardb/ls1046ardb_rcw_sd.cfg"
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_SD_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run sd_bootcmd; env exists secureboot && esbc_halt;"
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd;run sd_bootcmd; env exists secureboot && esbc_halt;"
 -CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x17000
--CONFIG_SPL_PAD_TO=0x1d000
+-CONFIG_SPL_MAX_SIZE=0x1f000
+-CONFIG_SPL_PAD_TO=0x21000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 -CONFIG_SPL_BSS_START_ADDR=0x8f000000
 -CONFIG_SPL_BSS_MAX_SIZE=0x80000
@@ -2163,12 +1615,11 @@ index fe0dd04f1f90..000000000000
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x110
 -CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
 -CONFIG_SPL_MPC8XXX_INIT_DDR=y
 -CONFIG_SPL_WATCHDOG=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
--CONFIG_CMD_SPL=y
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
 -CONFIG_CMD_DM=y
 -CONFIG_CMD_GPIO=y
@@ -2176,9 +1627,10 @@ index fe0dd04f1f90..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
 -# CONFIG_SPL_EFI_PARTITION is not set
 -CONFIG_OF_CONTROL=y
 -CONFIG_SPL_OF_CONTROL=y
@@ -2188,61 +1640,57 @@ index fe0dd04f1f90..000000000000
 -CONFIG_ETHPRIME="FM1@DTSEC3"
 -CONFIG_SPL_DM=y
 -# CONFIG_SPL_BLK is not set
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
+-# CONFIG_SPL_DM_I2C is not set
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_FSL_SEC_MON_BE=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x53
 -# CONFIG_SPL_DM_MMC is not set
 -CONFIG_FSL_ESDHC=y
 -CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
 -CONFIG_MTD_RAW_NAND=y
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
+-CONFIG_PHY_AQUANTIA=y
 -CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
 -CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
 -CONFIG_E1000=y
 -CONFIG_FMAN_ENET=y
 -CONFIG_SYS_FMAN_FW_ADDR=0x900000
 -CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_SYS_QE_FW_ADDR=0x940000
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_POWER_LEGACY=y
+-CONFIG_POWER_I2C=y
 -CONFIG_SYS_QE_FMAN_FW_IN_MMC=y
+-CONFIG_SCSI_AHCI_PLAT=y
 -CONFIG_SPECIFY_CONSOLE_INDEX=y
 -CONFIG_DM_SERIAL=y
 -CONFIG_SYS_NS16550=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
--# CONFIG_SPL_USE_TINY_PRINTF is not set
 -CONFIG_RSA=y
 -CONFIG_SPL_RSA=y
 -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
-diff --git a/configs/ls1043ardb_sdcard_defconfig b/configs/ls1043ardb_sdcard_defconfig
+diff --git a/configs/ls1046ardb_sdcard_defconfig b/configs/ls1046ardb_sdcard_defconfig
 deleted file mode 100644
-index aa5404cbb50e..000000000000
---- a/configs/ls1043ardb_sdcard_defconfig
+index a621859aa792..000000000000
+--- a/configs/ls1046ardb_sdcard_defconfig
 +++ /dev/null
-@@ -1,126 +0,0 @@
+@@ -1,122 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_TARGET_LS1043ARDB=y
+-CONFIG_TARGET_LS1046ARDB=y
 -CONFIG_TEXT_BASE=0x82000000
 -CONFIG_SYS_MALLOC_LEN=0x102000
 -CONFIG_SPL_LIBCOMMON_SUPPORT=y
@@ -2257,17 +1705,17 @@ index aa5404cbb50e..000000000000
 -CONFIG_SYS_I2C_MXC_I2C3=y
 -CONFIG_SYS_I2C_MXC_I2C4=y
 -CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1043a-rdb"
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1046a-rdb"
 -CONFIG_SPL_TEXT_BASE=0x10000000
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_SYS_MONITOR_LEN=1048576
 -CONFIG_SPL_MMC=y
 -CONFIG_SPL_SERIAL=y
 -CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK=0x1001e000
+-CONFIG_SPL_STACK=0x10020000
 -CONFIG_SPL=y
 -CONFIG_PCI=y
--CONFIG_OF_BOARD_FIXUP=y
+-CONFIG_AHCI=y
 -CONFIG_LAYERSCAPE_NS_ACCESS=y
 -CONFIG_PCIE1=y
 -CONFIG_PCIE2=y
@@ -2277,18 +1725,18 @@ index aa5404cbb50e..000000000000
 -CONFIG_FIT_VERBOSE=y
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_RAMBOOT_PBL=y
--CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1043ardb/ls1043ardb_pbi.cfg"
--CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1043ardb/ls1043ardb_rcw_sd.cfg"
+-CONFIG_SYS_FSL_PBL_PBI="board/freescale/ls1046ardb/ls1046ardb_pbi.cfg"
+-CONFIG_SYS_FSL_PBL_RCW="board/freescale/ls1046ardb/ls1046ardb_rcw_sd.cfg"
 -CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_SD_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
--CONFIG_BOOTCOMMAND="run distro_bootcmd; run sd_bootcmd; env exists secureboot && esbc_halt;"
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
+-CONFIG_BOOTCOMMAND="run distro_bootcmd;run sd_bootcmd; env exists secureboot && esbc_halt;"
 -CONFIG_ARCH_MISC_INIT=y
 -CONFIG_MISC_INIT_R=y
--CONFIG_SPL_MAX_SIZE=0x17000
--CONFIG_SPL_PAD_TO=0x1d000
+-CONFIG_SPL_MAX_SIZE=0x1f000
+-CONFIG_SPL_PAD_TO=0x21000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
 -CONFIG_SPL_BSS_START_ADDR=0x8f000000
 -CONFIG_SPL_BSS_MAX_SIZE=0x80000
@@ -2297,14 +1745,13 @@ index aa5404cbb50e..000000000000
 -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 -CONFIG_SYS_SPL_MALLOC=y
 -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0xf0
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x110
 -CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
 -CONFIG_SPL_MPC8XXX_INIT_DDR=y
 -CONFIG_SPL_WATCHDOG=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
--CONFIG_CMD_SPL=y
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
 -CONFIG_CMD_DM=y
 -CONFIG_CMD_GPIO=y
@@ -2312,9 +1759,10 @@ index aa5404cbb50e..000000000000
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -CONFIG_CMD_CACHE=y
--CONFIG_MTDPARTS_DEFAULT="mtdparts=60000000.nor:2m@0x100000(nor_bank0_uboot),40m@0x1100000(nor_bank0_fit),7m(nor_bank0_user),2m@0x4100000(nor_bank4_uboot),40m@0x5100000(nor_bank4_fit),-(nor_bank4_user);7e800000.flash:1m(nand_uboot),1m(nand_uboot_env),20m(nand_fit);spi0.0:1m(uboot),5m(kernel),1m(dtb),9m(file_system)"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=1550000.spi-0:1m(rcw),15m(u-boot),48m(kernel.itb);7e800000.flash:16m(nand_uboot),48m(nand_kernel),448m(nand_free)"
 -# CONFIG_SPL_EFI_PARTITION is not set
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
@@ -2322,190 +1770,77 @@ index aa5404cbb50e..000000000000
 -CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 -CONFIG_USE_ETHPRIME=y
 -CONFIG_ETHPRIME="FM1@DTSEC3"
+-CONFIG_SATA=y
+-CONFIG_SATA_CEVA=y
 -CONFIG_FSL_CAAM=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_MPC8XXX_GPIO=y
 -CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
 -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x53
 -CONFIG_FSL_ESDHC=y
 -CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_CFI_FLASH_USE_WEAK_ACCESSORS=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
 -CONFIG_MTD_RAW_NAND=y
 -CONFIG_NAND_FSL_IFC=y
 -CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SF_DEFAULT_BUS=1
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHY_AQUANTIA=y
 -CONFIG_PHY_REALTEK=y
--CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
 -CONFIG_DM_MDIO=y
 -CONFIG_E1000=y
 -CONFIG_FMAN_ENET=y
 -CONFIG_SYS_FMAN_FW_ADDR=0x900000
 -CONFIG_NVME_PCI=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_SYS_QE_FW_ADDR=0x940000
+-CONFIG_PCIE_LAYERSCAPE_EP=y
+-CONFIG_POWER_LEGACY=y
+-CONFIG_POWER_I2C=y
 -CONFIG_SYS_QE_FMAN_FW_IN_MMC=y
+-CONFIG_DM_SCSI=y
 -CONFIG_DM_SERIAL=y
 -CONFIG_SPL_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
--# CONFIG_SPL_USE_TINY_PRINTF is not set
 -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
-diff --git a/configs/ls2080aqds_SECURE_BOOT_defconfig b/configs/ls2080aqds_SECURE_BOOT_defconfig
+diff --git a/configs/ls1088aqds_defconfig b/configs/ls1088aqds_defconfig
 deleted file mode 100644
-index d8416265cfb3..000000000000
---- a/configs/ls2080aqds_SECURE_BOOT_defconfig
+index f53fbad3d316..000000000000
+--- a/configs/ls1088aqds_defconfig
 +++ /dev/null
-@@ -1,108 +0,0 @@
+@@ -1,112 +0,0 @@
 -CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
 -CONFIG_GIC_V3_ITS=y
--CONFIG_TARGET_LS2080AQDS=y
+-CONFIG_TARGET_LS1088AQDS=y
 -CONFIG_TEXT_BASE=0x30100000
--CONFIG_SYS_MALLOC_LEN=0x202000
--CONFIG_NR_DRAM_BANKS=3
+-CONFIG_SYS_MALLOC_LEN=0x0220000
+-CONFIG_NR_DRAM_BANKS=2
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
--CONFIG_ENV_SIZE=0x2000
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-qds"
--CONFIG_FSL_LS_PPA=y
--CONFIG_SYS_MONITOR_LEN=1048576
--CONFIG_PCI=y
--CONFIG_AHCI=y
--CONFIG_NXP_ESBC=y
--CONFIG_FSL_USE_PCA9547_MUX=y
--CONFIG_FSL_QIXIS=y
--# CONFIG_QIXIS_I2C_ACCESS is not set
--# CONFIG_SYS_MALLOC_F is not set
--CONFIG_REMAKE_ELF=y
--CONFIG_MP=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DYNAMIC_SYS_CLK_FREQ=y
--CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x2000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
--CONFIG_BOOTCOMMAND="fsl_mc apply dpl 0x580d00000 && cp.b $kernel_start $kernel_load $kernel_size && bootm $kernel_load"
--CONFIG_RESET_PHY_R=y
--CONFIG_SYS_MAXARGS=64
--CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
--CONFIG_CMD_GREPENV=y
--CONFIG_CMD_EEPROM=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_DATE=y
--# CONFIG_ISO_PARTITION is not set
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="DPMAC1@xgmii"
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_SATA=y
--CONFIG_SATA_CEVA=y
--CONFIG_DYNAMIC_DDR_CLK_FREQ=y
--CONFIG_DIMM_SLOTS_PER_CTLR=2
--CONFIG_SYS_FSL_DDR_MAIN_NUM_CTRLS=2
--CONFIG_DDR_ECC=y
--CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
--CONFIG_SYS_FSL_DDR_INTLV_256B=y
--CONFIG_SYS_I2C_LEGACY=y
--CONFIG_SYS_I2C_EEPROM_ADDR=0x57
--CONFIG_FSL_ESDHC=y
--CONFIG_ESDHC_DETECT_QUIRK=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_SYS_MAX_FLASH_BANKS=2
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=256
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
--CONFIG_PHYLIB=y
--CONFIG_PHYLIB_10G=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_TERANETICS=y
--CONFIG_PHY_VITESSE=y
--CONFIG_FSL_MEMAC=y
--CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_NVME_PCI=y
--CONFIG_DM_PCI_COMPAT=y
--CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_RTC_ENABLE_32KHZ_OUTPUT=y
--CONFIG_RTC_DS3231=y
--CONFIG_DM_SCSI=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_DSPI=y
--CONFIG_USB=y
--CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
--CONFIG_RSA=y
--CONFIG_RSA_SOFTWARE_EXP=y
-diff --git a/configs/ls2080aqds_defconfig b/configs/ls2080aqds_defconfig
-deleted file mode 100644
-index be08d5ba86a8..000000000000
---- a/configs/ls2080aqds_defconfig
-+++ /dev/null
-@@ -1,109 +0,0 @@
--CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
--CONFIG_GIC_V3_ITS=y
--CONFIG_TARGET_LS2080AQDS=y
--CONFIG_TEXT_BASE=0x30100000
--CONFIG_SYS_MALLOC_LEN=0x202000
--CONFIG_NR_DRAM_BANKS=3
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
--CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_SIZE=0x20000
 -CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-qds"
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-qds"
 -CONFIG_FSL_LS_PPA=y
--CONFIG_SYS_MONITOR_LEN=1048576
 -CONFIG_ENV_ADDR=0x80300000
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls1088aqds_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
 -CONFIG_FSL_QIXIS=y
--# CONFIG_QIXIS_I2C_ACCESS is not set
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
 -# CONFIG_SYS_MALLOC_F is not set
 -CONFIG_REMAKE_ELF=y
 -CONFIG_MP=y
@@ -2513,28 +1848,30 @@ index be08d5ba86a8..000000000000
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_OF_STDOUT_VIA_ALIAS=y
 -CONFIG_DYNAMIC_SYS_CLK_FREQ=y
--CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x2000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
--CONFIG_BOOTCOMMAND="fsl_mc apply dpl 0x580d00000 && cp.b $kernel_start $kernel_load $kernel_size && bootm $kernel_load"
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="fsl_mc lazyapply dpl 0x580d00000 && cp.b $kernel_start $kernel_load $kernel_size && bootm $kernel_load"
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
 -CONFIG_RESET_PHY_R=y
+-CONFIG_HUSH_PARSER=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
 -CONFIG_CMD_GREPENV=y
--CONFIG_CMD_EEPROM=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_GPT=y
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
 -CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_PING=y
 -CONFIG_CMD_CACHE=y
--CONFIG_CMD_DATE=y
--# CONFIG_ISO_PARTITION is not set
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_FLASH=y
@@ -2542,15 +1879,14 @@ index be08d5ba86a8..000000000000
 -CONFIG_ETHPRIME="DPMAC1@xgmii"
 -CONFIG_NET_RANDOM_ETHADDR=y
 -CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
 -CONFIG_SATA_CEVA=y
--CONFIG_FSL_CAAM=y
 -CONFIG_DYNAMIC_DDR_CLK_FREQ=y
--CONFIG_DIMM_SLOTS_PER_CTLR=2
--CONFIG_SYS_FSL_DDR_MAIN_NUM_CTRLS=2
 -CONFIG_DDR_ECC=y
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
--CONFIG_SYS_FSL_DDR_INTLV_256B=y
+-CONFIG_MPC8XXX_GPIO=y
 -CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EARLY_INIT=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
 -CONFIG_ESDHC_DETECT_QUIRK=y
@@ -2569,9 +1905,6 @@ index be08d5ba86a8..000000000000
 -CONFIG_SYS_NAND_MAX_OOBFREE=2
 -CONFIG_SYS_NAND_MAX_ECCPOS=256
 -CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_EON=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_SST=y
 -CONFIG_PHYLIB=y
 -CONFIG_PHYLIB_10G=y
 -CONFIG_PHY_REALTEK=y
@@ -2585,37 +1918,263 @@ index be08d5ba86a8..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_RTC_ENABLE_32KHZ_OUTPUT=y
--CONFIG_RTC_DS3231=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_USB_GADGET=y
+diff --git a/configs/ls1088aqds_qspi_SECURE_BOOT_defconfig b/configs/ls1088aqds_qspi_SECURE_BOOT_defconfig
+deleted file mode 100644
+index 921240cd149e..000000000000
+--- a/configs/ls1088aqds_qspi_SECURE_BOOT_defconfig
++++ /dev/null
+@@ -1,107 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088AQDS=y
+-CONFIG_TEXT_BASE=0x20100000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-qds"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_NXP_ESBC=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls1088aqds_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-CONFIG_BOOTCOMMAND="sf probe 0:0;sf read 0x80001000 0xd00000 0x100000; fsl_mc lazyapply dpl 0x80001000 && sf read $kernel_load $kernel_start $kernel_size && bootm $kernel_load"
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_ESDHC_DETECT_QUIRK=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_EON=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHYLIB_10G=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_TERANETICS=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_DM_PCI_COMPAT=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
 -CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls2080aqds_sdcard_defconfig b/configs/ls2080aqds_sdcard_defconfig
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_GADGET=y
+-CONFIG_RSA=y
+-CONFIG_RSA_SOFTWARE_EXP=y
+diff --git a/configs/ls1088aqds_qspi_defconfig b/configs/ls1088aqds_qspi_defconfig
 deleted file mode 100644
-index b45819f87b3e..000000000000
---- a/configs/ls2080aqds_sdcard_defconfig
+index 45c93c838198..000000000000
+--- a/configs/ls1088aqds_qspi_defconfig
 +++ /dev/null
-@@ -1,116 +0,0 @@
+@@ -1,108 +0,0 @@
 -CONFIG_ARM=y
--CONFIG_COUNTER_FREQUENCY=25000000
 -CONFIG_GIC_V3_ITS=y
--CONFIG_TARGET_LS2080AQDS=y
--CONFIG_TEXT_BASE=0x80400000
--CONFIG_SYS_MALLOC_LEN=0x0220000
--CONFIG_SYS_MALLOC_F_LEN=0x400
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_NR_DRAM_BANKS=3
+-CONFIG_TARGET_LS1088AQDS=y
+-CONFIG_TEXT_BASE=0x20100000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_NR_DRAM_BANKS=2
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
--CONFIG_ENV_SIZE=0x20000
+-CONFIG_ENV_SIZE=0x2000
 -CONFIG_ENV_OFFSET=0x300000
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-qds"
+-CONFIG_ENV_SECT_SIZE=0x40000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-qds"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_ENV_ADDR=0x20300000
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls1088aqds_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-CONFIG_BOOTCOMMAND="sf probe 0:0;sf read 0x80001000 0xd00000 0x100000; fsl_mc lazyapply dpl 0x80001000 && sf read $kernel_load $kernel_start $kernel_size && bootm $kernel_load"
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_ESDHC_DETECT_QUIRK=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_EON=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHYLIB_10G=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_TERANETICS=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_DM_PCI_COMPAT=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_GADGET=y
+diff --git a/configs/ls1088aqds_sdcard_ifc_defconfig b/configs/ls1088aqds_sdcard_ifc_defconfig
+deleted file mode 100644
+index 1f52769ac216..000000000000
+--- a/configs/ls1088aqds_sdcard_ifc_defconfig
++++ /dev/null
+@@ -1,130 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088AQDS=y
+-CONFIG_TEXT_BASE=0x80400000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-qds"
 -CONFIG_SPL_TEXT_BASE=0x1800a000
 -CONFIG_FSL_LS_PPA=y
 -CONFIG_SYS_MONITOR_LEN=1048576
@@ -2627,18 +2186,164 @@ index b45819f87b3e..000000000000
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_SPL_VID=y
+-CONFIG_VID_FLS_ENV="ls1088aqds_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
 -CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_SD_BOOT=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="mmcinfo;mmc read 0x80001000 0x6800 0x800; fsl_mc lazyapply dpl 0x80001000 && mmc read $kernel_load $kernel_start $kernel_size && bootm $kernel_load"
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SPL_MAX_SIZE=0x16000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x80100000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SYS_SPL_MALLOC=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x8b0
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_SPL_TARGET="u-boot-with-spl.bin"
+-CONFIG_HUSH_PARSER=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DYNAMIC_DDR_CLK_FREQ=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EARLY_INIT=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_ESDHC_DETECT_QUIRK=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=1024
+-CONFIG_SYS_MAX_FLASH_BANKS=2
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_PHYLIB=y
+-CONFIG_PHYLIB_10G=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_TERANETICS=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_DM_PCI_COMPAT=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_USB_GADGET=y
+diff --git a/configs/ls1088aqds_sdcard_qspi_defconfig b/configs/ls1088aqds_sdcard_qspi_defconfig
+deleted file mode 100644
+index 93d07829b4b9..000000000000
+--- a/configs/ls1088aqds_sdcard_qspi_defconfig
++++ /dev/null
+@@ -1,128 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088AQDS=y
+-CONFIG_TEXT_BASE=0x80400000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-qds"
+-CONFIG_SPL_TEXT_BASE=0x1800a000
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_SYS_MONITOR_LEN=1048576
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x18009ff0
+-CONFIG_SPL=y
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_SPL_VID=y
+-CONFIG_VID_FLS_ENV="ls1088aqds_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
 -CONFIG_REMAKE_ELF=y
 -CONFIG_MP=y
 -CONFIG_FIT_VERBOSE=y
 -CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_SD_BOOT=y
--CONFIG_BOOTDELAY=10
+-CONFIG_SD_BOOT_QSPI=y
 -CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x2000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
--CONFIG_BOOTCOMMAND="mmc read 0x80200000 0x6800 0x800; fsl_mc apply dpl 0x80200000 && mmc read $kernel_load $kernel_start $kernel_size && bootm $kernel_load"
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-CONFIG_BOOTCOMMAND="mmcinfo;mmc read 0x80001000 0x6800 0x800; fsl_mc lazyapply dpl 0x80001000 && mmc read $kernel_load $kernel_start $kernel_size && bootm $kernel_load"
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
 -CONFIG_RESET_PHY_R=y
 -CONFIG_SPL_MAX_SIZE=0x16000
 -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
@@ -2656,6 +2361,9 @@ index b45819f87b3e..000000000000
 -CONFIG_SYS_PBSIZE=532
 -CONFIG_CMD_GREPENV=y
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_GPIO=y
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
 -CONFIG_CMD_NAND=y
@@ -2663,9 +2371,7 @@ index b45819f87b3e..000000000000
 -CONFIG_CMD_USB=y
 -# CONFIG_CMD_SETEXPR is not set
 -CONFIG_CMD_CACHE=y
--CONFIG_CMD_DATE=y
 -CONFIG_OF_CONTROL=y
--CONFIG_OF_EMBED=y
 -CONFIG_ENV_OVERWRITE=y
 -CONFIG_ENV_IS_IN_MMC=y
 -CONFIG_SYS_RELOC_GD_ENV_ADDR=y
@@ -2673,15 +2379,12 @@ index b45819f87b3e..000000000000
 -CONFIG_ETHPRIME="DPMAC1@xgmii"
 -CONFIG_NET_RANDOM_ETHADDR=y
 -CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
 -CONFIG_SATA_CEVA=y
--CONFIG_DYNAMIC_DDR_CLK_FREQ=y
--CONFIG_DIMM_SLOTS_PER_CTLR=2
--CONFIG_SYS_FSL_DDR_MAIN_NUM_CTRLS=2
 -CONFIG_DDR_ECC=y
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
--CONFIG_SYS_FSL_DDR_INTLV_256B=y
+-CONFIG_MPC8XXX_GPIO=y
 -CONFIG_SYS_I2C_LEGACY=y
--CONFIG_SYS_I2C_EARLY_INIT=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
 -CONFIG_ESDHC_DETECT_QUIRK=y
@@ -2693,7 +2396,11 @@ index b45819f87b3e..000000000000
 -CONFIG_SYS_NAND_MAX_ECCPOS=256
 -CONFIG_DM_SPI_FLASH=y
 -# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_EON=y
 -CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_SST=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHYLIB_10G=y
 -CONFIG_PHY_REALTEK=y
@@ -2707,34 +2414,620 @@ index b45819f87b3e..000000000000
 -CONFIG_NVME_PCI=y
 -CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
--CONFIG_RTC_ENABLE_32KHZ_OUTPUT=y
--CONFIG_RTC_DS3231=y
 -CONFIG_DM_SCSI=y
 -CONFIG_SYS_NS16550_SERIAL=y
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
 -CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
-diff --git a/configs/ls2080ardb_SECURE_BOOT_defconfig b/configs/ls2080ardb_SECURE_BOOT_defconfig
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_GADGET=y
+diff --git a/configs/ls1088ardb_qspi_SECURE_BOOT_defconfig b/configs/ls1088ardb_qspi_SECURE_BOOT_defconfig
 deleted file mode 100644
-index bcd83018112c..000000000000
---- a/configs/ls2080ardb_SECURE_BOOT_defconfig
+index 48bd56beb3e8..000000000000
+--- a/configs/ls1088ardb_qspi_SECURE_BOOT_defconfig
 +++ /dev/null
-@@ -1,106 +0,0 @@
+@@ -1,104 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088ARDB=y
+-CONFIG_TEXT_BASE=0x20100000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-rdb"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_NXP_ESBC=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls1088ardb_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-# CONFIG_USE_BOOTCOMMAND is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_MXC_I2C1_SPEED=40000000
+-CONFIG_SYS_MXC_I2C2_SPEED=40000000
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_GADGET=y
+-CONFIG_RSA=y
+-CONFIG_RSA_SOFTWARE_EXP=y
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+diff --git a/configs/ls1088ardb_qspi_defconfig b/configs/ls1088ardb_qspi_defconfig
+deleted file mode 100644
+index 7dcd12db0c83..000000000000
+--- a/configs/ls1088ardb_qspi_defconfig
++++ /dev/null
+@@ -1,105 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088ARDB=y
+-CONFIG_TEXT_BASE=0x20100000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_ENV_SECT_SIZE=0x40000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-rdb"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_ENV_ADDR=0x20300000
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls1088ardb_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-# CONFIG_USE_BOOTCOMMAND is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_MXC_I2C1_SPEED=40000000
+-CONFIG_SYS_MXC_I2C2_SPEED=40000000
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_GADGET=y
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+diff --git a/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig b/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
+deleted file mode 100644
+index c0812a983d5c..000000000000
+--- a/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
++++ /dev/null
+@@ -1,124 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088ARDB=y
+-CONFIG_TEXT_BASE=0x80400000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-rdb"
+-CONFIG_SPL_TEXT_BASE=0x1800a000
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_SYS_MONITOR_LEN=1064960
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x18009ff0
+-CONFIG_SPL=y
+-CONFIG_PCI=y
+-CONFIG_NXP_ESBC=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_SPL_VID=y
+-CONFIG_VID_FLS_ENV="ls1088ardb_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_SD_BOOT=y
+-CONFIG_SD_BOOT_QSPI=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-# CONFIG_USE_BOOTCOMMAND is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SPL_MAX_SIZE=0x16000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x80100000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SYS_SPL_MALLOC=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x8b0
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_SPL_TARGET="u-boot-with-spl.bin"
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_SPL_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SPL_DM=y
+-CONFIG_SCSI_AHCI=y
+-# CONFIG_SPL_BLK is not set
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_MXC_I2C1_SPEED=40000000
+-CONFIG_SYS_MXC_I2C2_SPEED=40000000
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-# CONFIG_SPL_DM_MMC is not set
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_SCSI_AHCI_PLAT=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_RSA=y
+-CONFIG_SPL_RSA=y
+diff --git a/configs/ls1088ardb_sdcard_qspi_defconfig b/configs/ls1088ardb_sdcard_qspi_defconfig
+deleted file mode 100644
+index b98825cdb92a..000000000000
+--- a/configs/ls1088ardb_sdcard_qspi_defconfig
++++ /dev/null
+@@ -1,124 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS1088ARDB=y
+-CONFIG_TEXT_BASE=0x80400000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls1088a-rdb"
+-CONFIG_SPL_TEXT_BASE=0x1800a000
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_SYS_MONITOR_LEN=1048576
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_DRIVERS_MISC=y
+-CONFIG_SPL_STACK=0x18009ff0
+-CONFIG_SPL=y
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_SPL_VID=y
+-CONFIG_VID_FLS_ENV="ls1088ardb_vdd_mv"
+-CONFIG_VOL_MONITOR_LTC3882_READ=y
+-CONFIG_VOL_MONITOR_LTC3882_SET=y
+-CONFIG_SYS_FSL_NUM_CC_PLLS=3
+-CONFIG_FSL_QIXIS=y
+-CONFIG_SYS_MEMTEST_START=0x80000000
+-CONFIG_SYS_MEMTEST_END=0x9fffffff
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_SD_BOOT=y
+-CONFIG_SD_BOOT_QSPI=y
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0500 ramdisk_size=0x3000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-# CONFIG_USE_BOOTCOMMAND is not set
+-# CONFIG_DISPLAY_BOARDINFO is not set
+-CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_MISC_INIT_R=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SPL_MAX_SIZE=0x16000
+-CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-CONFIG_SPL_BSS_START_ADDR=0x80100000
+-CONFIG_SPL_BSS_MAX_SIZE=0x100000
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SYS_SPL_MALLOC=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x8b0
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_SPL_TARGET="u-boot-with-spl.bin"
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_NAND=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_MPC8XXX_GPIO=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_MXC_I2C1_SPEED=40000000
+-CONFIG_SYS_MXC_I2C2_SPEED=40000000
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_IFC=y
+-CONFIG_SYS_NAND_ONFI_DETECTION=y
+-CONFIG_SYS_NAND_MAX_OOBFREE=2
+-CONFIG_SYS_NAND_MAX_ECCPOS=256
+-CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_DM_SCSI=y
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_GADGET=y
+diff --git a/configs/ls2081ardb_defconfig b/configs/ls2081ardb_defconfig
+deleted file mode 100644
+index 1ee92831bc51..000000000000
+--- a/configs/ls2081ardb_defconfig
++++ /dev/null
+@@ -1,96 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
 -CONFIG_GIC_V3_ITS=y
--CONFIG_TARGET_LS2080ARDB=y
--CONFIG_TEXT_BASE=0x30100000
+-CONFIG_TARGET_LS2081ARDB=y
+-CONFIG_TEXT_BASE=0x20100000
 -CONFIG_SYS_MALLOC_LEN=0x202000
 -CONFIG_NR_DRAM_BANKS=3
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
 -CONFIG_ENV_SIZE=0x2000
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-rdb"
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_ENV_SECT_SIZE=0x40000
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2081a-rdb"
 -CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
+-CONFIG_SYS_MONITOR_LEN=1048576
+-CONFIG_PCI=y
+-CONFIG_AHCI=y
+-CONFIG_FSL_USE_PCA9547_MUX=y
+-CONFIG_VID=y
+-CONFIG_VID_FLS_ENV="ls2080ardb_vdd_mv"
+-CONFIG_VOL_MONITOR_IR36021_READ=y
+-CONFIG_VOL_MONITOR_IR36021_SET=y
+-CONFIG_FSL_QIXIS=y
+-# CONFIG_SYS_MALLOC_F is not set
+-CONFIG_REMAKE_ELF=y
+-CONFIG_MP=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_QSPI_BOOT=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS1,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0600 ramdisk_size=0x2000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
+-CONFIG_BOOTCOMMAND="sf probe 0:0; sf read 0x806c0000 0x6c0000 0x40000; env exists mcinitcmd && env exists secureboot && esbc_validate 0x806C0000; sf read 0x80d00000 0xd00000 0x100000; env exists mcinitcmd && fsl_mc lazyapply dpl 0x80d00000; run distro_bootcmd;run qspi_bootcmd; env exists secureboot && esbc_halt;"
+-CONFIG_MISC_INIT_R=y
+-CONFIG_RESET_PHY_R=y
+-CONFIG_SYS_MAXARGS=64
+-CONFIG_SYS_PBSIZE=532
+-CONFIG_CMD_GREPENV=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_GPT=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-# CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_CACHE=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="DPMAC1@xgmii"
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+-CONFIG_SATA_CEVA=y
+-CONFIG_FSL_CAAM=y
+-CONFIG_DDR_CLK_FREQ=133333333
+-CONFIG_DIMM_SLOTS_PER_CTLR=2
+-CONFIG_SYS_FSL_DDR_MAIN_NUM_CTRLS=2
+-CONFIG_DDR_ECC=y
+-CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
+-CONFIG_SYS_FSL_DDR_INTLV_256B=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EARLY_INIT=y
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x57
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_AQUANTIA=y
+-CONFIG_PHY_CORTINA=y
+-CONFIG_CORTINA_FW_ADDR=0x980000
+-CONFIG_FSL_MEMAC=y
+-CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_NVME_PCI=y
+-CONFIG_DM_PCI_COMPAT=y
+-CONFIG_PCIE_LAYERSCAPE_RC=y
+-CONFIG_RTC_PCF8563=y
+-CONFIG_SCSI=y
+-CONFIG_DM_SCSI=y
+-CONFIG_CONS_INDEX=2
+-CONFIG_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
+-CONFIG_USB=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+diff --git a/configs/ls2088ardb_qspi_SECURE_BOOT_defconfig b/configs/ls2088ardb_qspi_SECURE_BOOT_defconfig
+deleted file mode 100644
+index 268740c0fff5..000000000000
+--- a/configs/ls2088ardb_qspi_SECURE_BOOT_defconfig
++++ /dev/null
+@@ -1,96 +0,0 @@
+-CONFIG_ARM=y
+-CONFIG_COUNTER_FREQUENCY=25000000
+-CONFIG_GIC_V3_ITS=y
+-CONFIG_TARGET_LS2080ARDB=y
+-CONFIG_TEXT_BASE=0x20100000
+-CONFIG_SYS_MALLOC_LEN=0x202000
+-CONFIG_NR_DRAM_BANKS=3
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2088a-rdb-qspi"
+-CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
 -CONFIG_SYS_MONITOR_LEN=1048576
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
@@ -2744,8 +3037,6 @@ index bcd83018112c..000000000000
 -CONFIG_VID_FLS_ENV="ls2080ardb_vdd_mv"
 -CONFIG_VOL_MONITOR_IR36021_READ=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
--CONFIG_FSL_QIXIS=y
--# CONFIG_QIXIS_I2C_ACCESS is not set
 -# CONFIG_SYS_MALLOC_F is not set
 -CONFIG_REMAKE_ELF=y
 -CONFIG_MP=y
@@ -2753,30 +3044,26 @@ index bcd83018112c..000000000000
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_OF_STDOUT_VIA_ALIAS=y
 -CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_QSPI_BOOT=y
 -CONFIG_BOOTDELAY=10
--CONFIG_USE_BOOTARGS=y
--CONFIG_BOOTARGS="console=ttyS1,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0600 ramdisk_size=0x2000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
--CONFIG_BOOTCOMMAND="env exists mcinitcmd && env exists secureboot && esbc_validate 0x5806C0000; env exists mcinitcmd && fsl_mc lazyapply dpl 0x580d00000;run distro_bootcmd;run nor_bootcmd; env exists secureboot && esbc_halt;"
+-CONFIG_BOOTCOMMAND="sf probe 0:0; sf read 0x806c0000 0x6c0000 0x40000; env exists mcinitcmd && env exists secureboot && esbc_validate 0x806C0000; sf read 0x80d00000 0xd00000 0x100000; env exists mcinitcmd && fsl_mc lazyapply dpl 0x80d00000; run distro_bootcmd;run qspi_bootcmd; env exists secureboot && esbc_halt;"
 -CONFIG_MISC_INIT_R=y
 -CONFIG_RESET_PHY_R=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
 -CONFIG_CMD_GREPENV=y
--CONFIG_CMD_EEPROM=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
 -CONFIG_CMD_GPT=y
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
--CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -# CONFIG_CMD_SETEXPR is not set
 -CONFIG_CMD_CACHE=y
--CONFIG_CMD_DATE=y
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 -CONFIG_USE_ETHPRIME=y
 -CONFIG_ETHPRIME="DPMAC1@xgmii"
 -CONFIG_NET_RANDOM_ETHADDR=y
@@ -2788,34 +3075,26 @@ index bcd83018112c..000000000000
 -CONFIG_DDR_ECC=y
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_SYS_FSL_DDR_INTLV_256B=y
+-CONFIG_MPC8XXX_GPIO=y
 -CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EARLY_INIT=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
 -CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=256
 -CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
 -CONFIG_SPI_FLASH_STMICRO=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHY_AQUANTIA=y
 -CONFIG_PHY_CORTINA=y
--CONFIG_CORTINA_FW_ADDR=0x580980000
+-CONFIG_CORTINA_FW_ADDR=0x980000
 -CONFIG_FSL_MEMAC=y
 -CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
 -CONFIG_E1000=y
 -CONFIG_MII=y
 -CONFIG_NVME_PCI=y
--CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
 -CONFIG_RTC_DS3231=y
 -CONFIG_DM_SCSI=y
@@ -2824,32 +3103,37 @@ index bcd83018112c..000000000000
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
 -CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
 -CONFIG_RSA=y
 -CONFIG_RSA_SOFTWARE_EXP=y
-diff --git a/configs/ls2080ardb_defconfig b/configs/ls2080ardb_defconfig
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
+diff --git a/configs/ls2088ardb_qspi_defconfig b/configs/ls2088ardb_qspi_defconfig
 deleted file mode 100644
-index 38ec438c3bca..000000000000
---- a/configs/ls2080ardb_defconfig
+index f38f77b37f4a..000000000000
+--- a/configs/ls2088ardb_qspi_defconfig
 +++ /dev/null
-@@ -1,107 +0,0 @@
+@@ -1,101 +0,0 @@
 -CONFIG_ARM=y
 -CONFIG_COUNTER_FREQUENCY=25000000
 -CONFIG_GIC_V3_ITS=y
 -CONFIG_TARGET_LS2080ARDB=y
--CONFIG_TEXT_BASE=0x30100000
+-CONFIG_TEXT_BASE=0x20100000
 -CONFIG_SYS_MALLOC_LEN=0x202000
 -CONFIG_NR_DRAM_BANKS=3
 -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
 -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1800fff0
 -CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-rdb"
+-CONFIG_ENV_OFFSET=0x300000
+-CONFIG_ENV_SECT_SIZE=0x40000
+-CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2088a-rdb-qspi"
 -CONFIG_FSL_LS_PPA=y
+-CONFIG_QSPI_AHB_INIT=y
 -CONFIG_SYS_MONITOR_LEN=1048576
--CONFIG_ENV_ADDR=0x80300000
+-CONFIG_ENV_ADDR=0x20300000
 -CONFIG_PCI=y
 -CONFIG_AHCI=y
 -CONFIG_FSL_USE_PCA9547_MUX=y
@@ -2857,8 +3141,6 @@ index 38ec438c3bca..000000000000
 -CONFIG_VID_FLS_ENV="ls2080ardb_vdd_mv"
 -CONFIG_VOL_MONITOR_IR36021_READ=y
 -CONFIG_VOL_MONITOR_IR36021_SET=y
--CONFIG_FSL_QIXIS=y
--# CONFIG_QIXIS_I2C_ACCESS is not set
 -# CONFIG_SYS_MALLOC_F is not set
 -CONFIG_REMAKE_ELF=y
 -CONFIG_MP=y
@@ -2866,31 +3148,30 @@ index 38ec438c3bca..000000000000
 -CONFIG_OF_BOARD_SETUP=y
 -CONFIG_OF_STDOUT_VIA_ALIAS=y
 -CONFIG_DYNAMIC_SYS_CLK_FREQ=y
+-CONFIG_QSPI_BOOT=y
 -CONFIG_BOOTDELAY=10
 -CONFIG_USE_BOOTARGS=y
 -CONFIG_BOOTARGS="console=ttyS1,115200 root=/dev/ram0 earlycon=uart8250,mmio,0x21c0600 ramdisk_size=0x2000000 default_hugepagesz=2m hugepagesz=2m hugepages=256"
--CONFIG_BOOTCOMMAND="env exists mcinitcmd && env exists secureboot && esbc_validate 0x5806C0000; env exists mcinitcmd && fsl_mc lazyapply dpl 0x580d00000;run distro_bootcmd;run nor_bootcmd; env exists secureboot && esbc_halt;"
+-CONFIG_BOOTCOMMAND="sf probe 0:0; sf read 0x806c0000 0x6c0000 0x40000; env exists mcinitcmd && env exists secureboot && esbc_validate 0x806C0000; sf read 0x80d00000 0xd00000 0x100000; env exists mcinitcmd && fsl_mc lazyapply dpl 0x80d00000; run distro_bootcmd;run qspi_bootcmd; env exists secureboot && esbc_halt;"
 -CONFIG_MISC_INIT_R=y
 -CONFIG_RESET_PHY_R=y
 -CONFIG_SYS_MAXARGS=64
 -CONFIG_SYS_PBSIZE=532
--CONFIG_CMD_IMLS=y
 -CONFIG_CMD_GREPENV=y
--CONFIG_CMD_EEPROM=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
 -CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_DM=y
+-CONFIG_CMD_GPIO=y
 -CONFIG_CMD_GPT=y
 -CONFIG_CMD_I2C=y
 -CONFIG_CMD_MMC=y
--CONFIG_CMD_NAND=y
 -CONFIG_CMD_PCI=y
 -CONFIG_CMD_USB=y
 -# CONFIG_CMD_SETEXPR is not set
 -CONFIG_CMD_CACHE=y
--CONFIG_CMD_DATE=y
 -CONFIG_OF_CONTROL=y
 -CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 -CONFIG_USE_ETHPRIME=y
 -CONFIG_ETHPRIME="DPMAC1@xgmii"
 -CONFIG_NET_RANDOM_ETHADDR=y
@@ -2903,34 +3184,26 @@ index 38ec438c3bca..000000000000
 -CONFIG_DDR_ECC=y
 -CONFIG_ECC_INIT_VIA_DDRCONTROLLER=y
 -CONFIG_SYS_FSL_DDR_INTLV_256B=y
+-CONFIG_MPC8XXX_GPIO=y
 -CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_EARLY_INIT=y
 -CONFIG_SYS_I2C_EEPROM_ADDR=0x57
 -CONFIG_FSL_ESDHC=y
 -CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=1024
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_IFC=y
--CONFIG_SYS_NAND_ONFI_DETECTION=y
--CONFIG_SYS_NAND_MAX_OOBFREE=2
--CONFIG_SYS_NAND_MAX_ECCPOS=256
 -CONFIG_DM_SPI_FLASH=y
+-# CONFIG_SPI_FLASH_BAR is not set
+-CONFIG_SPI_FLASH_SPANSION=y
 -CONFIG_SPI_FLASH_STMICRO=y
+-# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
 -CONFIG_PHYLIB=y
 -CONFIG_PHY_AQUANTIA=y
 -CONFIG_PHY_CORTINA=y
--CONFIG_CORTINA_FW_ADDR=0x580980000
+-CONFIG_CORTINA_FW_ADDR=0x980000
 -CONFIG_FSL_MEMAC=y
 -CONFIG_SYS_MEMAC_LITTLE_ENDIAN=y
 -CONFIG_E1000=y
 -CONFIG_MII=y
 -CONFIG_NVME_PCI=y
--CONFIG_DM_PCI_COMPAT=y
 -CONFIG_PCIE_LAYERSCAPE_RC=y
 -CONFIG_RTC_DS3231=y
 -CONFIG_DM_SCSI=y
@@ -2939,9 +3212,11 @@ index 38ec438c3bca..000000000000
 -CONFIG_SPI=y
 -CONFIG_DM_SPI=y
 -CONFIG_FSL_DSPI=y
+-CONFIG_FSL_QSPI=y
 -CONFIG_USB=y
 -CONFIG_USB_XHCI_HCD=y
 -CONFIG_USB_XHCI_DWC3=y
+-CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
 -- 
 2.17.1
 
