@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88669EE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB61EE49A3
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 14:42:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C5F28645E;
-	Wed, 23 Aug 2023 16:41:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B3EF0864AD;
+	Wed, 23 Aug 2023 16:41:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NW20n4MQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V6xKY7ER";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0F94863F5; Wed, 23 Aug 2023 16:41:51 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 86D7186473; Wed, 23 Aug 2023 16:41:55 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADE608645F
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:41:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39AF2863F5
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 16:41:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-591ba8bd094so40696387b3.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:41:49 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5922380064bso31751497b3.2
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 07:41:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692801708; x=1693406508;
+ d=konsulko.com; s=google; t=1692801712; x=1693406512;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=socls220x+rZRb9SXSLGJ8uW678J0mnc8WYxf9jiM8Q=;
- b=NW20n4MQx7gmLzjoE5XtU3BrMTxCMILUUaG6A4UZe0ImdfzvY4VRDSe+JVQvptmMjE
- I29MjPmWiDM1P03RcbGJ2KmqR3r6gt6lHKDVowmriaa0+OFuUXAgnladKKKib2AQntzO
- UN+ERHYFbc79E5x0Ph+lit7BQMfk9ONVZ3E8I=
+ bh=FYOQ7mUSYkLO8i7j99v8oEPdBVKczcB03k88rv5Plf0=;
+ b=V6xKY7ERmKAQjfVbOhoP3HXvsu0hNLP7q0nESddactq9vYZKnA44tKW4WVp1qUiwef
+ dYbgKAvFnfzoEyzuBTejleuWBVCaqapr7Mpwku2yb/80K8m6K2M0a0/uoEfaH6oswD3F
+ ktQD6HZAb3nP8zPbYmAUuYnH5zgTtQVnTtODs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692801708; x=1693406508;
+ d=1e100.net; s=20221208; t=1692801712; x=1693406512;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=socls220x+rZRb9SXSLGJ8uW678J0mnc8WYxf9jiM8Q=;
- b=kn2F/Trn40ewz4ENlhr8Fz9eVvHTB8Jor1biRmu/xF0dDOdAmGaDL4CP6oUq+vDx8X
- OPDFnNY7uJoGNlUY51ajAh8bbIPqnf3fPhh2ObDuOQEXjDyYjsGMyZO77RkO51y+kCe+
- uPxYy0K4PXbfaGQedqcaGsb+QGKyXsbKg5WSSkx/djvPRlPidYeyFlbESe4rFE0X0Hhd
- SeMmDbu/+rE+LBzeAowZbJWWpuQn/MPas0hNpuLfCJ0JXJAHjfdli7KjeWAhnowT+Ssc
- aMfNsBXn6EHy24qMchHXq8V3Tql01WwnV1wHpbU1irWWPSZuRKmNxZJ7o0c9dunF05g2
- oEDg==
-X-Gm-Message-State: AOJu0Yxt+rxoaN1SOQo4/82gqdS3aR9usFxQLfT9QfaNmR2r1/B5ug8X
- aMteZTZqIzIdStGRu0g+xt10og==
-X-Google-Smtp-Source: AGHT+IFKCNYpj5Sr2yUmnqR4JPvHCvB2u4/YBrkVNU3nDRZzTdxU7ZgCi0+s6k6sL8rWKAtiwg+hKA==
-X-Received: by 2002:a0d:fbc2:0:b0:575:4b1c:e5ea with SMTP id
- l185-20020a0dfbc2000000b005754b1ce5eamr14589075ywf.47.1692801706877; 
- Wed, 23 Aug 2023 07:41:46 -0700 (PDT)
+ bh=FYOQ7mUSYkLO8i7j99v8oEPdBVKczcB03k88rv5Plf0=;
+ b=Jpe1MRW9HuoeF9Y0nzZ2l/EFRMx1ne+VL+2YiSp/lfn5jNIUD/yZYtKSr0Qy4yd0WJ
+ 6ouh2LWCF+ecz210QKhgzZAzcCnhRD3GNjROJJDShoCt/GxXZ5Vl4cA4xzGyX8Vq5G9N
+ hFfQJv+2Iqf0R/Swk/90qBZKrMSPX8JhxrMSHzgz7Bbye9pXxNVDZ8d8OWUeBk7F/qR8
+ nkTwnAmerZSGDQff2Y4IrrDv2CeYPBwGyUcIlJ3tHZGvToCStNuo6Zy5mU3bGfzpdcUd
+ iYH3qLt09/fBSdWqDPK7w1VIwzPxiitBb0CqHCqert2zRJO12kUSflZmHlqpKaIPJwh/
+ SgIg==
+X-Gm-Message-State: AOJu0YxhzXGnbsdLd81HtdQY5sOzfLzwb0SHeylLw7Ro/hI2TrjAfDUS
+ NhFWKsRwGPFs6rHrJBfRPz5mwQ==
+X-Google-Smtp-Source: AGHT+IHfLzjr9dQ/mVmCT00WlEzUE7sBPor0ZrysNVCFN/HedzuR5Z164OBsB+LUAAclMHP49sw3BQ==
+X-Received: by 2002:a0d:ca0b:0:b0:58d:f1fe:5954 with SMTP id
+ m11-20020a0dca0b000000b0058df1fe5954mr13307066ywd.32.1692801711941; 
+ Wed, 23 Aug 2023 07:41:51 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
  [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
  by smtp.gmail.com with ESMTPSA id
- o63-20020a817342000000b0058fc7604f45sm2378830ywc.130.2023.08.23.07.41.46
+ m139-20020a0dca91000000b0058c55d40765sm907612ywd.106.2023.08.23.07.41.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 07:41:46 -0700 (PDT)
-Date: Wed, 23 Aug 2023 10:41:44 -0400
+ Wed, 23 Aug 2023 07:41:51 -0700 (PDT)
+Date: Wed, 23 Aug 2023 10:41:50 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, bhupesh.linux@gmail.com,
- Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH v2 2/2] armv8: Disable SYS_DCACHE_OFF & SYS_ICACHE_OFF
- for ARM64
-Message-ID: <20230823144144.GO3953269@bill-the-cat>
-References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
- <20230822075112.717992-3-bhupesh.sharma@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-dm
+Message-ID: <20230823144150.GP3953269@bill-the-cat>
+References: <CAPnjgZ1h135x7Sp7yXj2FxFdwr8zvVvM-JgzB_s+Ra=9yDMObQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yi8nK0stCbFa6iq6"
+ protocol="application/pgp-signature"; boundary="2LmLkleafCXzBp0a"
 Content-Disposition: inline
-In-Reply-To: <20230822075112.717992-3-bhupesh.sharma@linaro.org>
+In-Reply-To: <CAPnjgZ1h135x7Sp7yXj2FxFdwr8zvVvM-JgzB_s+Ra=9yDMObQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,55 +92,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yi8nK0stCbFa6iq6
+--2LmLkleafCXzBp0a
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 22, 2023 at 01:21:12PM +0530, Bhupesh Sharma wrote:
+On Tue, Aug 22, 2023 at 01:46:36PM -0600, Simon Glass wrote:
 
-> Ideally SYS_ICACHE_OFF and SYS_DCACHE_OFF should never be set for
-> ARM64 (ARMv8) platforms, as it makes booting u-boot slower on these
-> platforms.
+> Hi Tom.
 >=20
-> However, if some platforms require ICACHE or DCACHE  to be disabled
-> only for the smaller SPL stage, we should support such configurations
-> in u-boot as well.
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/17476
 >=20
-> Compile-tested for:
-> - qemu arm64
-> - imx8
-> - stm32
 >=20
-> and run-tested on:
-> - Qualcomm RB3 platform
+> The following changes since commit 976fb2ffa3875a7bed9866bf5cf939a81c423e=
+f8:
 >=20
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+>   Prepare v2023.10-rc3 (2023-08-21 16:19:59 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-pull-22aug23
+>=20
+> for you to fetch changes up to 1c55d62fb9ccc107cb4fefa9bb04cb16395ca84c:
+>=20
+>   riscv: cpu: make riscv_cpu_probe to EVT_DM_POST_INIT_R callback
+> (2023-08-22 08:07:54 -0600)
+>=20
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---yi8nK0stCbFa6iq6
+--2LmLkleafCXzBp0a
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGqUACgkQFHw5/5Y0
-tyy/7Qv/ahGtPfbx1VNdTNoVuBhYWTCoJ2B9rXPbYGCgxGCgi6q41K0hTRDnl1JG
-Top5Ue55SN+FnKikkwSzsgp/yaEUp+lZvA2B1qUYkgwgCi7aIqsJkpCi7tcG+CEs
-RyINodS4tOCP+Zad71XkgRGajLcRNulZmXvyC6jGBuHXrlLQvCRzNR6cAQ7wR0kS
-gfApKauuK2eCmAwD6Sw2EJ+tfv0PSEpo+b3mad4E1vpqOI8alWfxQkv+7V+QO2t2
-Qz5g4Hp+Rl5fxk+ii28uZ6jIJ7KlMu4Pi4eLqpQkkOkGjpcyS551bnqKLZTW8k96
-FZz/CJt9QC1ghw3jrCyJ1kkLiedlfmSX4MZwfZSOfJ1JUt69EyXHtGHt6mL4vM0L
-EhwZ3p+u3WYkH0HCVXJt7VP6KsOaIxRY+/vchH7JN50n+bZBoBDu8G7fH/HjPlg0
-YkFGUQU2UXQB9aACEyu/0NWNp60bRuv2dBzozqQNwUY73TtWayqeiVQjh4hJRkTC
-nuYRI9pV
-=8Pmg
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmGq0ACgkQFHw5/5Y0
+tyxVzgv/UUCvXDBX0UmXBk8sh5m6lFTR7LUv0esUV/KpdU6xX20Wd68xgmAka92i
+QHJnRCmMhILLtl51Hu8nk2jE9MdBQrUnQf76i04nDNTjAfxJh05jenu6FKOB0Bnh
+O8H7n+wtE4lKhknCjYS3QWZcMnrhsCPLPYGfoaATZkOWgGZN31vupC6MfBKNvpRT
+npgLDUPLOGChmYVz4c0RlJRXk0kSt8AGep5X2+O2YI0dMddz9M/zLynPP6apJTgc
+8CT65Venv2mBJBh4Hlyt/NH1lE/qO6Z1aXvEfQTJzkZ+4QNSzAYEYi93wD7lQn7I
+QL4AyX3AUkxALY4061wH+caGKeWXupRuYPV2OK8D3B6mNTt9SWlyEBBbO1vU59mE
+LbXE5w6fnS3hLLKY693hU3E/lzQf3vLtDUxdt3LPqpDGz6yWN06zGB/dy8Mid2vd
+8yMEi77/LcgScouoKO8K4DHYzMdhYcyLjfKcFqD7gqPLpz0zQOoYkoQDENS0jovt
+yd4jxq6k
+=lfV4
 -----END PGP SIGNATURE-----
 
---yi8nK0stCbFa6iq6--
+--2LmLkleafCXzBp0a--
