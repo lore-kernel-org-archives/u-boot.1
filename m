@@ -4,64 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7104DC27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BF47C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:38:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA40586434;
-	Wed, 23 Aug 2023 22:35:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6A26C86435;
+	Wed, 23 Aug 2023 22:38:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arvanta.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="GGiExLln";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EB608644F; Wed, 23 Aug 2023 22:35:33 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64E1E86432
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 22:35:31 +0200 (CEST)
+ id B943C86432; Wed, 23 Aug 2023 22:38:44 +0200 (CEST)
+Received: from fx.arvanta.net (unknown [109.72.52.77])
+ by phobos.denx.de (Postfix) with ESMTP id DC84A86456
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 22:38:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pali@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2D4A260EE9;
- Wed, 23 Aug 2023 20:35:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27214C433C8;
- Wed, 23 Aug 2023 20:35:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1692822929;
- bh=HVF/IqL4a6jfQMW/tvdMQOuUX6rIRTEbI73uPMwgZ6A=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=GGiExLlnvhO0DqL5/Y8qalGGVHiqNdy+mDaY4jKule+caAnQb40TcuMRyvzVA2HpP
- dInYE2QnOuSIF6HJH3l4wmuvYecgQnHhlUF04Qhjlfgul9X5Wx8CQyi2OwGzIhWfkH
- RfBMU+mvV29u32PKv92CbDoV2Jdt+WoVEfVLtrdjLTYOonNY92hmwsCwSyHLZ92FyW
- Vqa7Q3cSPMkkDrN1xXODyfQ/w8ghTxy1QpkJLxB/DU9XHgNfFhuvnPZGocs8UvXHeg
- utRA5fd9leWMAq2g3RQ7dC+nQwn3KGSU0YzevrzGkbDHOqrw7qehS2EcTnBkfzB76g
- z21IVU0B8AK4A==
-Received: by pali.im (Postfix)
- id 6807B7F5; Wed, 23 Aug 2023 22:35:26 +0200 (CEST)
-Date: Wed, 23 Aug 2023 22:35:26 +0200
-From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
- Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>,
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] doc: describe TPL/VPL/SPL boot
-Message-ID: <20230823203526.domqjv74ttdwfo73@pali>
-References: <20230823195728.39438-1-heinrich.schuchardt@canonical.com>
- <20230823201400.m4l6hl7zy6x6srzd@pali>
- <c1ed8f80-5752-df54-192d-c1b8c16e4f28@canonical.com>
+ dmarc=none (p=none dis=none) header.from=arvanta.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mps@arvanta.net
+Received: from m1 (ab.arvanta.net [10.5.1.5])
+ by fx.arvanta.net (Postfix) with ESMTP id 4E19874DE;
+ Wed, 23 Aug 2023 22:38:40 +0200 (CEST)
+Date: Wed, 23 Aug 2023 22:38:38 +0200
+From: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
+To: Shengyu Qu <wiagn233@outlook.com>
+Cc: xypron.glpk@gmx.de, chanho61.park@samsung.com, ycliang@andestech.com,
+ yanhong.wang@starfivetech.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/2] configs: starfive: Enable PCIE auto enum and
+ NVME/USB stuff for Starfive Visionfive 2
+Message-ID: <20230823203838.GA21828@m1>
+References: <20230822143357.2818-1-wiagn233@outlook.com>
+ <TY3P286MB2611C9AD6E5BB3756A959E89981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <c1ed8f80-5752-df54-192d-c1b8c16e4f28@canonical.com>
-User-Agent: NeoMutt/20180716
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <TY3P286MB2611C9AD6E5BB3756A959E89981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,12 +53,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wednesday 23 August 2023 22:32:18 Heinrich Schuchardt wrote:
-> Looking at the MAINTAINER file it seems that POWERPC should be set to
-> orphaned.
+On Tue, 2023-08-22 at 22:33, Shengyu Qu wrote:
+> Although PCIE driver already exists, board defconfig isn't configured to
+> enable PCIE enum on boot, thus USB storage device and NVME drive are not
+> supported by default. So modify defconfig to enable PCIE auto enum, then
+> start USB subsystem and scan nvme drive on boot.
+> 
+> Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
+Tested-by: Milan P. Stanić <mps@arvanta.net>
 
-And this is only just because of your fault folks here, as you have been
-completely ignoring any my patches for improving this situation here and
-finally after more than year of my reminders more of you wrote me
-officially that would ignore any changes from me.
-So go and complain to somebody else, not me.
+> ---
+>  configs/starfive_visionfive2_defconfig | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
+> 
+> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+> index e9b63e5b84..3002c96f0e 100644
+> --- a/configs/starfive_visionfive2_defconfig
+> +++ b/configs/starfive_visionfive2_defconfig
+> @@ -30,6 +30,7 @@ CONFIG_SPL_SPI=y
+>  CONFIG_SYS_LOAD_ADDR=0x82000000
+>  CONFIG_SYS_PCI_64BIT=y
+>  CONFIG_PCI=y
+> +CONFIG_PCI_INIT_R=y
+>  CONFIG_TARGET_STARFIVE_VISIONFIVE2=y
+>  CONFIG_SPL_OPENSBI_LOAD_ADDR=0x40000000
+>  CONFIG_ARCH_RV64I=y
+> @@ -43,7 +44,7 @@ CONFIG_SD_BOOT=y
+>  CONFIG_USE_BOOTARGS=y
+>  CONFIG_BOOTARGS="console=ttyS0,115200 debug rootwait earlycon=sbi"
+>  CONFIG_USE_PREBOOT=y
+> -CONFIG_PREBOOT="setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};"
+> +CONFIG_PREBOOT="nvme scan; usb start; setenv fdt_addr ${fdtcontroladdr}; fdt addr ${fdtcontroladdr};"
+>  CONFIG_DEFAULT_FDT_FILE="starfive/jh7110-starfive-visionfive-2.dtb"
+>  CONFIG_DISPLAY_CPUINFO=y
+>  CONFIG_DISPLAY_BOARDINFO=y
+> @@ -124,4 +125,9 @@ CONFIG_TIMER_EARLY=y
+>  CONFIG_USB=y
+>  CONFIG_USB_XHCI_HCD=y
+>  CONFIG_USB_XHCI_PCI=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_PCI=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_PCI=y
+> +CONFIG_USB_STORAGE=y
+>  CONFIG_USB_KEYBOARD=y
+> -- 
+> 2.42.0
+> 
