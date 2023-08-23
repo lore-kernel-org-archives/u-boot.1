@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC3B8EE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:38:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754BFEE49B0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:42:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 242B4808E6;
-	Wed, 23 Aug 2023 13:38:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A49BB864B6;
+	Wed, 23 Aug 2023 13:42:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eBv/wGyn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S6ZmURdw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CDDD864B3; Wed, 23 Aug 2023 13:38:55 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id BB94C864C3; Wed, 23 Aug 2023 13:42:23 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B8AF807C4
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:38:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD2E1808E6
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:42:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-99c0290f0a8so698974366b.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 04:38:53 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-4ffa94a7a47so7129161e87.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 04:42:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692790730; x=1693395530;
+ d=gmail.com; s=20221208; t=1692790936; x=1693395736;
  h=content-transfer-encoding:mime-version:message-id:references
  :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to;
- bh=M8VYYfUeNKBbLJXfwp8IRWdrtgSFqkigRC/xngQpQ+g=;
- b=eBv/wGynY9jla7y5c9MmFo0kMkRwCsdv5JCStwYXVKMYZrhCDbrDA2Cxo2K1ePYIC5
- VlhmQVvIntmg9zT5Jz+vWZRCSNEtIf3GhCM3koCqPEwWQsTA26DOnP82AykZwNqPftMW
- G4Nj48oCtmo+BgT29SyES0mcG70WWBO/S312fk+3ffBbPf8+FE7RKnab5X7R9OwYJxDP
- OXWY9GyfA8zXGWJjPvNaF+ocKJbCwpSCofkdD/yo/cfxl1FruogJBq6rT7xhjceAHvTN
- blb7iUY8i9IzmV9WoaQo15glgtar/bKB9Uo19YIeS695fDZ94YWaC6OBDTz/s8vonVOj
- gWQg==
+ bh=WjeVrbeqtSFNJpB8okFMfPHVIzLgK3JxDbVM0Wg1GSE=;
+ b=S6ZmURdw/ccxbATGHW4mBa8gIz8DV944Ahf2nCyzJoVnkiGqW12K/0WSru/ER9tDcj
+ OAMDjZ+z8HKKNux2/CmznXsVzxqNav812patHoPuFaXW26Y6Z2+SJFgpYoRXNu7E9Cz/
+ heFcTzRp/lDedQQqmHliNRgEQsFL4MU+7fPD6mBuHX6f6vt6fAAbLluNXWsh/cds3sVd
+ VLWKC4jU5qU7m9xTZulBEbU2BXguW78e0J5iq27ffImt+d31PviVC+zV/WQpcH2NX0M0
+ +KpYYC5eOFDZldYijeE4qbE66+P6I57ABzsPcjbInkd/5jjH0rTw7hj7lXo1lNn9qn0I
+ I30A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692790730; x=1693395530;
+ d=1e100.net; s=20221208; t=1692790936; x=1693395736;
  h=content-transfer-encoding:mime-version:message-id:references
  :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=M8VYYfUeNKBbLJXfwp8IRWdrtgSFqkigRC/xngQpQ+g=;
- b=FK5/CL0bC5+IK3qlSLH2J+bgOwHZRUdOAhtLlCpyaGvZXW+UBd0vhABoMd0P9sFlim
- zH97xI03lELGWqzfOt5porudbiALI7PtszR/irkW0Phxhuhn6w+uZbXyz6YpEimduO0B
- Lm0XkOJruAgeFSvaij6XN9S2fPBX9xUYzCqCEro2IEmQWtXhYAuXRpDMhU4SxibIorS0
- sgeTi6drnsnDoSLtqRr7ASQZbXwljIIyKUepG3o8EyCn2SFbsvgKdmLop4NxtMwY2qQr
- ViukH5xlFVKmCIVgmHiuZb/9mwGxOsxRPwDGtzfKz56QqKqJVc5Maegjb6f3Egfv3KfM
- UHEg==
-X-Gm-Message-State: AOJu0YzKX515t8kXU71H1wVKkYq3a7w27zUjzekjMW5Sdu8vE4lQkEcK
- gMMoq6hRx28gYY3zKUfwFQ2bG8QjzesCKQ==
-X-Google-Smtp-Source: AGHT+IF3TyVNXhVWcxPTi+R/mPCTdWHR/L+CPLoHpa/7loXI1I+qmNcdLMhfLelVn1y9lGeYS3JKRA==
-X-Received: by 2002:a17:906:200a:b0:99c:5056:4e2e with SMTP id
- 10-20020a170906200a00b0099c50564e2emr8590934ejo.31.1692790729764; 
- Wed, 23 Aug 2023 04:38:49 -0700 (PDT)
+ bh=WjeVrbeqtSFNJpB8okFMfPHVIzLgK3JxDbVM0Wg1GSE=;
+ b=NnckmYzwBnqgqyvp+S+Yjlv55KlZkjUMTQDLbb/MFA8rhpDqS2TwyHAKw2ScBLroaD
+ AP0C6HDyn5D7uvncMyKhz4lAoM/CtpKgGd+Oa0fQ8TsmMT5KFuIYS7Q2+zU5MzHmO1/Q
+ nTbfVTUboxyaajwftO3J2NR1pU7QLd1qmtENFzFJjjRlHIAcuCTdtOoEVFbDOtrJl62u
+ 5NYI8tZ2O5gzAx2WGabW98m9ap00zFKZQYNGrgFwvUbnCqMamXWOsTm4uos4xcESOKQp
+ g5Jbtm1xM0+OvfW5KySFTznPbd7C07ffzPMd6Y63n3HPhOLNbR0UMK62tWYd6DJjGR8v
+ wDaA==
+X-Gm-Message-State: AOJu0Yxrpw+jm5XBhzG18NQio3Ze2DwcVPyqX3TXFqAor0P0XVg4MzRI
+ Xad4wp1+YJaeIiUDuLOBH0tcnrWsLCNvMw==
+X-Google-Smtp-Source: AGHT+IF0ZYUi2JE3LN03iaySQBQD6B9BRjr45+O6AZoal/omL5qcfP6H1h4bY2p3oshG9tCd7l95RQ==
+X-Received: by 2002:a05:6512:3b9e:b0:500:9a67:d40e with SMTP id
+ g30-20020a0565123b9e00b005009a67d40emr464672lfv.60.1692790936443; 
+ Wed, 23 Aug 2023 04:42:16 -0700 (PDT)
 Received: from [127.0.0.1] ([46.211.10.167]) by smtp.gmail.com with ESMTPSA id
- g4-20020a1709064e4400b009a1be9c29d7sm2278937ejw.179.2023.08.23.04.38.49
+ a16-20020aa7cf10000000b00521d2f7459fsm9152211edy.49.2023.08.23.04.42.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 04:38:49 -0700 (PDT)
-Date: Wed, 23 Aug 2023 14:38:48 +0300
+ Wed, 23 Aug 2023 04:42:16 -0700 (PDT)
+Date: Wed, 23 Aug 2023 14:42:15 +0300
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>
-CC: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1_1/1=5D_mmc=3A_tegra=3A_get_defau?=
- =?US-ASCII?Q?lt-tap_and_default-trim_from_device_tree?=
+CC: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 15/19] ARM: tegra: board2: add generic late init
 User-Agent: K-9 Mail for Android
-In-Reply-To: <ZOXnfY5hKrhSpOlY@orome>
-References: <20230819153501.77245-1-clamor95@gmail.com>
- <20230819153501.77245-2-clamor95@gmail.com> <ZOXnfY5hKrhSpOlY@orome>
-Message-ID: <B2FF6549-4F01-4010-968E-D790E72AE2EE@gmail.com>
+In-Reply-To: <ZOXpx6oq8MYkoHcw@orome>
+References: <20230822112217.4646-1-clamor95@gmail.com>
+ <20230822112217.4646-16-clamor95@gmail.com> <ZOXpx6oq8MYkoHcw@orome>
+Message-ID: <09EF2F83-FAAE-4494-AF36-C84DA5BB5349@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
@@ -97,166 +95,84 @@ X-Virus-Status: Clean
 
 
 
-23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:03:25 GMT+03:00,=
+23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:13:11 GMT+03:00,=
  Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
 =81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Sat, Aug 19, 2023 at 06:35:01PM +0300, Svyatoslav Ryhel wrote:
->> Default-tap and default-trim values are used for eMMC setup
->> mostly on T114+ devices=2E As for now, those values are hardcoded
->> for T210 and ignored for all other Tegra generations=2E Fix this
->> by passing tap and trim values from dts=2E
+>On Tue, Aug 22, 2023 at 02:22:13PM +0300, Svyatoslav Ryhel wrote:
+>> Board specific late init allows vendors to set up different device
+>> or board specific env variables (like serial number, platform name)=2E
+>> In case this information is missing, u-boot will lack info regards
+>> serial or platform=2E
 >>=20
->> Tested-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom> # ASUS TF701T
+>> To avoid this prior nvidia_board_late_init internal generic function
+>> is called which fills required data=2E In this case platform name is
+>> obtained from get_chip and serialno is filled with SoC id=2E
+>>=20
+>> Though SoC id is not dedicated to be devices serial but it fits well
+>> in case of restriction of data about device and since SoC is basically
+>> a main chip of the device=2E
+>>=20
+>> Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo=2Ecom> # ASUS Transfor=
+mers
+>> Tested-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom> # Nvidia Tegratab
 >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
 >> ---
->>  arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh | 17 ++++----
->>  drivers/mmc/tegra_mmc=2Ec                     | 46 ++++++++++---------=
---
->>  2 files changed, 30 insertions(+), 33 deletions(-)
+>>  arch/arm/mach-tegra/board2=2Ec | 43 ++++++++++++++++++++++++++++++++++=
+++
+>>  1 file changed, 43 insertions(+)
 >>=20
->> diff --git a/arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh b/arch/arm/i=
-nclude/asm/arch-tegra/tegra_mmc=2Eh
->> index d6a55764ba=2E=2E750c7d809e 100644
->> --- a/arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh
->> +++ b/arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh
->> @@ -128,21 +128,22 @@ struct tegra_mmc {
->> =20
->>  /* SDMMC1/3 settings from SDMMCx Initialization Sequence of TRM */
->>  #define MEMCOMP_PADCTRL_VREF	7
->> -#define AUTO_CAL_ENABLE		(1 << 29)
->> -#define AUTO_CAL_ACTIVE		(1 << 31)
->> -#define AUTO_CAL_START		(1 << 31)
->> +#define AUTO_CAL_ENABLE		BIT(29)
->> +#define AUTO_CAL_ACTIVE		BIT(31)
->> +#define AUTO_CAL_START		BIT(31)
->> +
->>  #if defined(CONFIG_TEGRA210)
->>  #define AUTO_CAL_PD_OFFSET	(0x7D << 8)
->>  #define AUTO_CAL_PU_OFFSET	(0 << 0)
->> -#define IO_TRIM_BYPASS_MASK	(1 << 2)
->> -#define TRIM_VAL_SHIFT		24
->> -#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
->> -#define TAP_VAL_SHIFT		16
->> -#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
->>  #else
->>  #define AUTO_CAL_PD_OFFSET	(0x70 << 8)
->>  #define AUTO_CAL_PU_OFFSET	(0x62 << 0)
+>> diff --git a/arch/arm/mach-tegra/board2=2Ec b/arch/arm/mach-tegra/board=
+2=2Ec
+>> index 981768bb0e=2E=2Eee69cb657a 100644
+>> --- a/arch/arm/mach-tegra/board2=2Ec
+>> +++ b/arch/arm/mach-tegra/board2=2Ec
+>> @@ -26,6 +26,10 @@
+>>  #include <asm/arch-tegra/gpu=2Eh>
+>>  #include <asm/arch-tegra/usb=2Eh>
+>>  #include <asm/arch-tegra/xusb-padctl=2Eh>
+>> +#ifndef CONFIG_TEGRA186
+>> +#include <asm/arch-tegra/fuse=2Eh>
+>> +#include <asm/arch/gp_padctrl=2Eh>
+>> +#endif
+>>  #if IS_ENABLED(CONFIG_TEGRA_CLKRST)
+>>  #include <asm/arch/clock=2Eh>
 >>  #endif
->> =20
->> +#define TRIM_VAL_SHIFT		24
->> +#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
->> +#define TAP_VAL_SHIFT		16
->> +#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
->> +
->>  #endif	/* __ASSEMBLY__ */
->>  #endif	/* __TEGRA_MMC_H_ */
->> diff --git a/drivers/mmc/tegra_mmc=2Ec b/drivers/mmc/tegra_mmc=2Ec
->> index f76fee3ea0=2E=2E7627800261 100644
->> --- a/drivers/mmc/tegra_mmc=2Ec
->> +++ b/drivers/mmc/tegra_mmc=2Ec
->> @@ -37,6 +37,9 @@ struct tegra_mmc_priv {
->>  	unsigned int version;	/* SDHCI spec=2E version */
->>  	unsigned int clock;	/* Current clock (MHz) */
->>  	int mmc_id;		/* peripheral id */
->> +
->> +	u32 tap_value;
->> +	u32 trim_value;
->>  };
->> =20
->>  static void tegra_mmc_set_power(struct tegra_mmc_priv *priv,
->> @@ -526,31 +529,6 @@ static void tegra_mmc_pad_init(struct tegra_mmc_pr=
-iv *priv)
->>  		printf("%s: Warning: Autocal timed out!\n", __func__);
->>  		/* TBD: Set CFG2TMC_SDMMC1_PAD_CAL_DRV* regs here */
->>  	}
->> -
->> -#if defined(CONFIG_TEGRA210)
->> -	u32 tap_value, trim_value;
->> -
->> -	/* Set tap/trim values for SDMMC1/3 @ <48MHz here */
->> -	val =3D readl(&priv->reg->venspictl);	/* aka VENDOR_SYS_SW_CNTL */
->> -	val &=3D IO_TRIM_BYPASS_MASK;
->> -	if (id =3D=3D PERIPH_ID_SDMMC1) {
->> -		tap_value =3D 4;			/* default */
->> -		if (val)
->> -			tap_value =3D 3;
->> -		trim_value =3D 2;
->> -	} else {				/* SDMMC3 */
->> -		tap_value =3D 3;
->> -		trim_value =3D 3;
->> -	}
->> -
->> -	val =3D readl(&priv->reg->venclkctl);
->> -	val &=3D ~TRIM_VAL_MASK;
->> -	val |=3D (trim_value << TRIM_VAL_SHIFT);
->> -	val &=3D ~TAP_VAL_MASK;
->> -	val |=3D (tap_value << TAP_VAL_SHIFT);
->> -	writel(val, &priv->reg->venclkctl);
->> -	debug("%s: VENDOR_CLOCK_CNTRL =3D 0x%08X\n", __func__, val);
->> -#endif	/* T210 */
->>  #endif	/* T30/T210 */
+>> @@ -256,6 +260,37 @@ int board_early_init_f(void)
 >>  }
+>>  #endif	/* EARLY_INIT */
 >> =20
->> @@ -588,6 +566,21 @@ static void tegra_mmc_reset(struct tegra_mmc_priv =
-*priv, struct mmc *mmc)
->> =20
->>  	/* Make sure SDIO pads are set up */
->>  	tegra_mmc_pad_init(priv);
+>> +#ifndef CONFIG_TEGRA186
+>> +static void nvidia_board_late_init_generic(void)
+>> +{
+>> +	char serialno_str[17];
 >> +
->> +	if (priv->tap_value || priv->trim_value) {
+>> +	/* Set chip id as serialno */
+>> +	sprintf(serialno_str, "%016llx", tegra_chip_uid());
+>> +	env_set("serial#", serialno_str);
+>> +
+>> +	switch (tegra_get_chip()) {
+>> +	case CHIPID_TEGRA20:
+>> +		env_set("platform", "Tegra 2 T20");
+>> +		break;
+>> +	case CHIPID_TEGRA30:
+>> +		env_set("platform", "Tegra 3 T30");
+>> +		break;
+>> +	case CHIPID_TEGRA114:
+>> +		env_set("platform", "Tegra 4 T114");
+>> +		break;
+>> +	case CHIPID_TEGRA124:
+>> +		env_set("platform", "Tegra K1 T124");
+>> +		break;
+>> +	case CHIPID_TEGRA210:
+>> +		env_set("platform", "Tegra X1 T210");
 >
->I think 0 is a valid value for both tap and trim, so you want to be able
->to write that=2E I suggest getting rid of the conditional and always
->writing these values and rely on defaults to make sure that a good value
->is always programmed=2E
+>This variable is presumably something that you'd want to match on in a
+>script, so perhaps we can settle on something a bit more canonical=2E In
+>upstream Linux we use tegraXYZ quite consistently and you'll see that
+>reflected in things like compatible strings, so I'd suggest reusing the
+>same naming scheme here to simplify and avoid confusion=2E
 
-Tegra 3 uses 0x0F on all my devices which is not 0=2E
-
->Alternatively if you really only want to program these when they've been
->specified, use an extra variable (or something like -1 as a default
->value) to discriminate=2E
-
-Why 0 value cannot be used as "flag" to skip tap and trim setup if values =
-are not set? Using any value but 0 will cause additional comparation in con=
-dition and will definitely not improve readability=2E
-
->
->The former is superior, in my opinion, because it also allows to avoid
->to regression=2E
-
-Regression can be avoided if merge "General tegra and board improvements" =
-first=2E
+I chose this look because it looks nice if call fastboot getvar platform=
+=2E You can choose anything you want, I do not care=2E
 
 >Thierry
->
->> +		u32 val;
->> +
->> +		val =3D readl(&priv->reg->venclkctl);
->> +
->> +		val &=3D ~TRIM_VAL_MASK;
->> +		val |=3D (priv->trim_value << TRIM_VAL_SHIFT);
->> +
->> +		val &=3D ~TAP_VAL_MASK;
->> +		val |=3D (priv->tap_value << TAP_VAL_SHIFT);
->> +
->> +		writel(val, &priv->reg->venclkctl);
->> +		debug("%s: VENDOR_CLOCK_CNTRL =3D 0x%08X\n", __func__, val);
->> +	}
->>  }
->> =20
->>  static int tegra_mmc_init(struct udevice *dev)
->> @@ -742,6 +735,9 @@ static int tegra_mmc_probe(struct udevice *dev)
->>  	if (dm_gpio_is_valid(&priv->pwr_gpio))
->>  		dm_gpio_set_value(&priv->pwr_gpio, 1);
->> =20
->> +	priv->tap_value =3D dev_read_u32_default(dev, "nvidia,default-tap", 0=
-);
->> +	priv->trim_value =3D dev_read_u32_default(dev, "nvidia,default-trim",=
- 0);
->> +
->>  	upriv->mmc =3D &plat->mmc;
->> =20
->>  	return tegra_mmc_init(dev);
->> --=20
->> 2=2E39=2E2
->>=20
