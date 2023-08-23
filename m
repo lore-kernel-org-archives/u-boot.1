@@ -4,64 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607FFEE49AB
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 06:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE04EE49AB
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 06:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F54D864A6;
-	Wed, 23 Aug 2023 08:28:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A7B3864A6;
+	Wed, 23 Aug 2023 08:33:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="n3of/LYA";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7721C864AA; Wed, 23 Aug 2023 08:28:58 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 748E5864A4
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:28:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ id 08E83864B6; Wed, 23 Aug 2023 08:33:33 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 86B1E864A4
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:33:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-Received: from [192.168.0.125] (unknown [82.76.24.202])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 962F9660716C;
- Wed, 23 Aug 2023 07:28:55 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1692772136;
- bh=y16+tUx77Ag1yqDzl7FjSQY2fnzcxUN7N6M0kQP7PVw=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=n3of/LYAVDb6NY1HzXOnlPJ3kKXQ6pQ9KP2Vuwq9+a6GRXxCFCILP9fb2LlNJB17m
- 1mfQ5nQX33/g/CPRyHFPVNXu7noSihrX+gwF0svidgk+NtX79rz6vkvRHf5H80LYpb
- FtkdyiKbQMCT2LiaF0LW/PuvddvgI1pqz0xcQtEgL4AT+BxXoJiYjfeOQY8LQ1KSQS
- /AVclYbdVibmvJrbTyUcru0+0nv5xYWidmDhJDLu75sSJcMe68FEe+Aqf85FL6gIDq
- paqqz3W5ay3iKstVQzxUhJjCDRFZT3iBPIFZakxYcV70pFwCq7fV3XuNXutmJZbF5W
- 1ddUaGelCSIOw==
-Message-ID: <e913d8c6-3daf-0a58-3813-253cb5dee79c@collabora.com>
-Date: Wed, 23 Aug 2023 09:28:52 +0300
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.01,195,1684767600"; 
+ d="asc'?scan'208";a="177372845"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 23 Aug 2023 15:33:29 +0900
+Received: from [10.226.92.175] (unknown [10.226.92.175])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 6C9D2419B1C0;
+ Wed, 23 Aug 2023 15:33:27 +0900 (JST)
+Message-ID: <6d463cc3-ec6b-bd5b-b40d-c1dd57be3961@bp.renesas.com>
+Date: Wed, 23 Aug 2023 07:33:25 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 2/2] mtd: nand: raw: atmel: Add error handling when
- rb-gpios missing
-Content-Language: en-US
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- u-boot@lists.denx.de, Mihai Sain <mihai.sain@microchip.com>
-References: <20230808130250.188588-1-ada@thorsis.com>
- <20230808130250.188588-3-ada@thorsis.com>
- <CAOf5uwkgaoGyB3kS7Kf4GZyvAcGDJMTRPajXa4SQVy7LU6BJDA@mail.gmail.com>
- <20230808-elusive-apple-4e3ce1331b5a@ifak-system.com>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <20230808-elusive-apple-4e3ce1331b5a@ifak-system.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+References: <20230822181025.339748-1-paul.barker.ct@bp.renesas.com>
+ <20230822181025.339748-3-paul.barker.ct@bp.renesas.com>
+ <0b3dbe70-c0ae-9b83-1983-520b4c7df41b@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: Re: [PATCH 2/2] serial: sh: Tidy up pre-processor directive
+ indentation
+In-Reply-To: <0b3dbe70-c0ae-9b83-1983-520b4c7df41b@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Yk0SWOLndc3k05BttBpKM1n1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,104 +63,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Yk0SWOLndc3k05BttBpKM1n1
+Content-Type: multipart/mixed; boundary="------------Edzp6IAH0Uz33XIzm91eYerW";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+Message-ID: <6d463cc3-ec6b-bd5b-b40d-c1dd57be3961@bp.renesas.com>
+Subject: Re: [PATCH 2/2] serial: sh: Tidy up pre-processor directive
+ indentation
+References: <20230822181025.339748-1-paul.barker.ct@bp.renesas.com>
+ <20230822181025.339748-3-paul.barker.ct@bp.renesas.com>
+ <0b3dbe70-c0ae-9b83-1983-520b4c7df41b@mailbox.org>
+In-Reply-To: <0b3dbe70-c0ae-9b83-1983-520b4c7df41b@mailbox.org>
 
-On 8/8/23 18:03, Alexander Dahl wrote:
-> Hello Michael,
-> 
-> Am Tue, Aug 08, 2023 at 03:49:45PM +0200 schrieb Michael Nazzareno Trimarchi:
->> Hi
->>
->> On Tue, Aug 8, 2023 at 3:03 PM Alexander Dahl <ada@thorsis.com> wrote:
->>>
->>> Adapt behaviour to Linux kernel driver.
->>>
->>> The return value of gpio_request_by_name_nodev() was not checked before,
->>> and thus in case 'rb-gpios' was missing in DT, rb.type was set to
->>> ATMEL_NAND_GPIO_RB nevertheless, leading to output like this for
->>> example (on sam9x60-curiosity with the line removed from dts):
->>>
->>>      NAND:  Could not find valid ONFI parameter page; aborting
->>>      device found, Manufacturer ID: 0xc2, Chip ID: 0xdc
->>>      Macronix NAND 512MiB 3,3V 8-bit
->>>      512 MiB, SLC, erase size: 256 KiB, page size: 4096, OOB size: 64
->>>      atmel-nand-controller nand-controller: NAND scan failed: -22
->>>      Failed to probe nand driver (err = -22)
->>>      Failed to initialize NAND controller. (error -22)
->>>      0 MiB
->>>
->>> Note: not having that gpio assigned in dts is fine, the driver does not
->>> override nand_chip->dev_ready() then and a generic solution is used.
->>>
->>> Fixes: 6a8dfd57220d ("nand: atmel: Add DM based NAND driver")
->>> Signed-off-by: Alexander Dahl <ada@thorsis.com>
->>> ---
->>>   drivers/mtd/nand/raw/atmel/nand-controller.c | 11 +++++++----
->>>   1 file changed, 7 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/nand/raw/atmel/nand-controller.c
->>> index 2b29c8def6..8e745a5111 100644
->>> --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
->>> +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
->>> @@ -1600,10 +1600,13 @@ static struct atmel_nand *atmel_nand_create(struct atmel_nand_controller *nc,
->>>                          nand->cs[i].rb.type = ATMEL_NAND_NATIVE_RB;
->>>                          nand->cs[i].rb.id = val;
->>>                  } else {
->>> -                       gpio_request_by_name_nodev(np, "rb-gpios", 0,
->>> -                                                  &nand->cs[i].rb.gpio,
->>> -                                                  GPIOD_IS_IN);
->>> -                       nand->cs[i].rb.type = ATMEL_NAND_GPIO_RB;
->>> +                       ret = gpio_request_by_name_nodev(np, "rb-gpios", 0,
->>> +                                                        &nand->cs[i].rb.gpio,
->>> +                                                        GPIOD_IS_IN);
->>> +                       if (ret)
->>> +                               dev_err(nc->dev, "Failed to get R/B gpio (err = %d)\n", ret);
->>
->> Should not then an error here
-> 
-> Different log level or no message at all?
-> 
-> Note: Linux prints the same message with error level in that case.
-> 
-> Greets
-> Alex
-> 
+--------------Edzp6IAH0Uz33XIzm91eYerW
+Content-Type: multipart/mixed; boundary="------------NWO3guHWqq9AY0O4MRnOHvXg"
 
-Since the rb-gpios is optional, we can continue probing without it. 
-Throwing an error message is optional and pure informative. So I am fine 
-with it
+--------------NWO3guHWqq9AY0O4MRnOHvXg
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-What I wanted to ask is what happens with nand->cs[i].rb.type , is it 0 
-by default ?
+On 22/08/2023 22:40, Marek Vasut wrote:
+> On 8/22/23 20:10, Paul Barker wrote:
+>> Let's make the indentation of pre-processor macros and conditionals in=
 
-Other than that, I can apply this patch, Michael, do you have any more 
-comments on it ?
+>> serial_sh.h consistent before we add to the confusion with a new SoC.
+>=20
+> What exactly is this patch doing, adding spaces to ifdeffery ?
+>=20
+> I would be tempted to say, can we clean up the ifdeffery instead ?
+> It is some hideous mess.
+
+The header is a mess for sure. I was hoping to make it slightly more
+easy to follow with this patch.
+
+We can drop this for now if you think it's not a clear improvement. I'll
+see if I can do some more extensive clean up on this header while I'm
+adding the RZ/G2L support.
 
 Thanks,
-Eugen
->>
->> Michael
->>
->>> +                       else
->>> +                               nand->cs[i].rb.type = ATMEL_NAND_GPIO_RB;
->>>                  }
->>>
->>>                  gpio_request_by_name_nodev(np, "cs-gpios", 0,
->>> --
->>> 2.30.2
->>>
->>
->>
->> -- 
->> Michael Nazzareno Trimarchi
->> Co-Founder & Chief Executive Officer
->> M. +39 347 913 2170
->> michael@amarulasolutions.com
->> __________________________________
->>
->> Amarula Solutions BV
->> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
->> T. +31 (0)85 111 9172
->> info@amarulasolutions.com
->> www.amarulasolutions.com
+Paul
+--------------NWO3guHWqq9AY0O4MRnOHvXg
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------NWO3guHWqq9AY0O4MRnOHvXg--
+
+--------------Edzp6IAH0Uz33XIzm91eYerW--
+
+--------------Yk0SWOLndc3k05BttBpKM1n1
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZOWoNgUDAAAAAAAKCRDbaV4Vf/JGvUoV
+AQDb3SE7k2wPpOlvY7oBh38S6Vgv8r1AMIOPx3geIISt0AEAn3mx2eaY4a+Rf+uq5vvLj6fcny/8
+wWAZATNYJSRpbAc=
+=GePi
+-----END PGP SIGNATURE-----
+
+--------------Yk0SWOLndc3k05BttBpKM1n1--
