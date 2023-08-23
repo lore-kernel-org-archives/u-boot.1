@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B31C27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F1D4C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:48:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C65586458;
-	Wed, 23 Aug 2023 20:48:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F9A6864C4;
+	Wed, 23 Aug 2023 20:48:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lv1F8YVm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R0oP5kfl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EBED86440; Wed, 23 Aug 2023 20:48:02 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id D9FB186445; Wed, 23 Aug 2023 20:48:03 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9536586427
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:48:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1FDA86434
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:48:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-792399277bcso106614239f.3
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:48:00 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-79243040c2cso86999739f.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:48:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692816479; x=1693421279;
+ d=chromium.org; s=google; t=1692816480; x=1693421280;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4f3Vhn/iihXyOJryotNiesUPHAKBa3qICuoBXTcDW3w=;
- b=lv1F8YVmFPGAZKT1rPlVn2AOCB7gjMH4TkrTxfzitgziwcQ6xz1sZvNvNprJKoM+Ld
- Uv/TFlw7MzjkfWO55lmK1db+sT11ZAEN7Iy3gwdT9fT8xjDHNVOAN5UmCO+h6VJgYUmn
- RZ3wA8jA0eoJ7USdQjHsmcSe0qcwtnCOHmCdM=
+ bh=g19pHIxHIt+B41cocTlgAXT7AUhzyofbbk7x4IJHpcE=;
+ b=R0oP5kflhPY/HyfjHc+fb/hR1tyP4BZt6YnlgHPNLCUDOnbsC3sDILDk0jMYpsXhAE
+ nwVwVMWCdlN3iFhrGWjBDbnSPhwRAAvYIlILqAthDkvTbWO4HfUnF0Vrz4V+gNkdaRy7
+ 3rQZ+mFj1/NfEiYYwBXVSC9DI/+YoFvoH2dDM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692816479; x=1693421279;
+ d=1e100.net; s=20221208; t=1692816480; x=1693421280;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4f3Vhn/iihXyOJryotNiesUPHAKBa3qICuoBXTcDW3w=;
- b=eTKyGUmn5zvxZxfPRZmOTjUivJH4R7xXg6v3d7sOaaTJwAL12tVSyvCz/zSxs8sdeZ
- mTEmQ8JptxF73xFmGe/yX1FPMUeTEFdtxBh4ZHVGsPnYVXCpnRwJnaVaCPPmNfu1BCIh
- Md2IQmpIdoc4RcJAYVGMRgA6SURs0Pr6ooY4dPiI0cj1d47s51NTgH07dzAgT/bdsT+B
- qWf1gZIMNY18LhVPT79d1FloN+nCXsnFo8qWUtvMksmgxh9a/TVtLvN50PUSXtKdaxqX
- 1sxQQVH3MjCc9ACGRlloBCkUwoLnt9tF8nGv41nN4dLZqFWlhwPpCAVAE83TEIJ5a6xM
- +Lzw==
-X-Gm-Message-State: AOJu0Yx7+cVgyapUA4UyJ0SZbv66gWcQU4g+PU2XBpQ+hve/MaG0vh9F
- e/AC7VUQ5LL4y6A2blyD6IS68S1GNByPLh7sJjQ=
-X-Google-Smtp-Source: AGHT+IFNFR49nWdYEliYHTUHQ7dIrUrigbcackZbqnGQGH2O1SaoPFLM62FaWSSE395QmF3DQuUfxQ==
-X-Received: by 2002:a5e:d915:0:b0:787:822:30f1 with SMTP id
- n21-20020a5ed915000000b00787082230f1mr3529715iop.1.1692816479218; 
- Wed, 23 Aug 2023 11:47:59 -0700 (PDT)
+ bh=g19pHIxHIt+B41cocTlgAXT7AUhzyofbbk7x4IJHpcE=;
+ b=SBi7lSEuY1H+0sstdEbTAwn/u5for2xaqGvitW6qeTwhpHHHYHl8sLYllHgSAGqd5n
+ MXFGf/lDXUx34wdqWWDCQ+7ywjAACpbJlF67WZb3mcSwcvG6wd3V9ypMKwoP+o564Zz1
+ AFyw6rMoOt8bioumwI67Bh8+NB8ztx/UzpH0imUgGGzFuhQfY69eKvXGoG37mfvEPZgg
+ SLo2ZhXjc/JDrsHSEJyKVYVyLYI/jq35yG41YWPXTaf0iu7onJNNB+SJVsOX3Na63RFn
+ I3AIN5/JZDH2V9wuh+B5DQwJBxd66Cb8hcPTMZS4xcXw39AADc4KCaL8sxenE58iccy2
+ Go+A==
+X-Gm-Message-State: AOJu0YwKK9jXqXRleSfgAecICVokCygJLeG138HLujlsiCcOxpk+daA+
+ I4dxuVCMuj1glGS4UTY/iOaZiBc0yEhD9ZkxlS0=
+X-Google-Smtp-Source: AGHT+IHjswD1qvqc+QnDP+JbxOSi6l96xD4Mi7cw4DdkdjKmqqxKiLENaYxFmzrpTUgacGmeLRH0Rg==
+X-Received: by 2002:a05:6602:1783:b0:790:d6aa:5921 with SMTP id
+ y3-20020a056602178300b00790d6aa5921mr3921136iox.6.1692816480473; 
+ Wed, 23 Aug 2023 11:48:00 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
  by smtp.gmail.com with ESMTPSA id
- u20-20020a02c054000000b004182f88c368sm4070929jam.67.2023.08.23.11.47.58
+ u20-20020a02c054000000b004182f88c368sm4070929jam.67.2023.08.23.11.47.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 11:47:58 -0700 (PDT)
+ Wed, 23 Aug 2023 11:47:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 2/8] x86: Add some log categories
-Date: Wed, 23 Aug 2023 12:47:35 -0600
-Message-ID: <20230823184746.842091-3-sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 3/8] x86: samus_tpl: Correct text base and alloc sizes
+Date: Wed, 23 Aug 2023 12:47:36 -0600
+Message-ID: <20230823184746.842091-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230823184746.842091-1-sjg@chromium.org>
 References: <20230823184746.842091-1-sjg@chromium.org>
@@ -88,41 +88,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some missing log categories to a few files.
+Make sure that CONFIG_TEXT_BASE is the same as CONFIG_X86_OFFSET_U_BOOT
+since this boards boots into U-Boot proper in flash, not RAM. Also exapnd
+the SPL malloc() size a little, to avoid an error.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/cpu/broadwell/sdram.c | 2 ++
- arch/x86/lib/tpl.c             | 2 ++
- 2 files changed, 4 insertions(+)
+ configs/chromebook_samus_tpl_defconfig | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/cpu/broadwell/sdram.c b/arch/x86/cpu/broadwell/sdram.c
-index f477d513efc..d30ebee021e 100644
---- a/arch/x86/cpu/broadwell/sdram.c
-+++ b/arch/x86/cpu/broadwell/sdram.c
-@@ -5,6 +5,8 @@
-  * From coreboot src/soc/intel/broadwell/romstage/raminit.c
-  */
- 
-+#define LOG_CATEGORY UCLASS_RAM
-+
- #include <common.h>
- #include <dm.h>
- #include <init.h>
-diff --git a/arch/x86/lib/tpl.c b/arch/x86/lib/tpl.c
-index 18b05b2f672..273e9c8e1ca 100644
---- a/arch/x86/lib/tpl.c
-+++ b/arch/x86/lib/tpl.c
-@@ -3,6 +3,8 @@
-  * Copyright (c) 2018 Google, Inc
-  */
- 
-+#define LOG_CATEGORY	LOGC_BOOT
-+
- #include <common.h>
- #include <debug_uart.h>
- #include <dm.h>
+diff --git a/configs/chromebook_samus_tpl_defconfig b/configs/chromebook_samus_tpl_defconfig
+index 4cfaf4bc5c7..6fefe2ddc25 100644
+--- a/configs/chromebook_samus_tpl_defconfig
++++ b/configs/chromebook_samus_tpl_defconfig
+@@ -1,6 +1,8 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0xffed0000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
++CONFIG_TPL_SYS_MALLOC_F_LEN=0x2000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x3000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x3F8000
+@@ -19,7 +21,7 @@ CONFIG_HAVE_MRC=y
+ CONFIG_HAVE_REFCODE=y
+ CONFIG_SMP=y
+ CONFIG_HAVE_VGA_BIOS=y
+-CONFIG_X86_OFFSET_U_BOOT=0xffee0000
++CONFIG_X86_OFFSET_U_BOOT=0xffed0000
+ CONFIG_SYS_MONITOR_BASE=0xFFED0000
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
