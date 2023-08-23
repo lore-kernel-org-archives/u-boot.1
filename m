@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C84BEC27C40
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0B2C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 19:38:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3DDF864D9;
-	Wed, 23 Aug 2023 20:48:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1820D86441;
+	Wed, 23 Aug 2023 21:38:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d6lgH2vS";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Rg8H2osC";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ulTI/8s/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D6A7864D7; Wed, 23 Aug 2023 20:48:12 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8F92B86445; Wed, 23 Aug 2023 21:38:02 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35C4886456
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:48:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B715C86439
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 21:38:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-34cb5c41777so9173475ab.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:48:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692816488; x=1693421288;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dSZ4S3SBGweqYoyX9KKS4ryytd+o46w0MKdKUaY3gZs=;
- b=d6lgH2vSe/ksyxYxsGaOKI4WJ7KdDS64YxGg1xyCDzC/nZFGkOrXm2j1eYVTQVm/cv
- q8z+phqz0DMFGPosE1qkD9EhicxqQ+ZimIvBkYhZAzC31HFVvYo54giSHIIo99IOyWJG
- 02qli+zJxYqW66LJvmnSDt5Kdp+jkqKcVT0xo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692816488; x=1693421288;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dSZ4S3SBGweqYoyX9KKS4ryytd+o46w0MKdKUaY3gZs=;
- b=UFS/x1qgJUWW/F5XciYqC0DA9k1k1tgoFRG2O0lG0bhelRhJm9ljHWLi4OHmWS2MdW
- mP1OP67E0KRNdWWejkB88fOVHdNPPR4p4TsAgPckz4kKxWMaw/NHL1n8h+wlLdDkGDQN
- 8BANM9Ff1w/zOfzPhk3Y31vtrDeeo0V68eL9KQ6ZinltevYpaqqljDRBKza1b5728SgL
- ZZgOctDjpqIdyaOMAfIw93OCwl2Fh/MypLsNuDvAL7W3e8s8yimD+Qv9vg7e0KTViq5l
- apH44pO4tUlp8CPukbZRjIrnO3O79NfFfdD+XMJFK7VkKd09PukXlkByIlJ/tI5jB+Zj
- fwcA==
-X-Gm-Message-State: AOJu0YyIbnRSMunfvWrQOkofv3SzdzTujc4S6CrSsWexOe1i1tBfYtQ5
- 6/oUKv/ISLN/SXltrUjbIBAXsmw/GAZfrNIJORQ=
-X-Google-Smtp-Source: AGHT+IFHrHuODE2/G5DxS8pcDyRwwBU1wf/bguR+E1O4nJfS8Q8rTTKFMl2112pYP+nvTA58n1dABA==
-X-Received: by 2002:a05:6e02:1d85:b0:34c:ceaf:b627 with SMTP id
- h5-20020a056e021d8500b0034cceafb627mr1518128ila.29.1692816488803; 
- Wed, 23 Aug 2023 11:48:08 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
- by smtp.gmail.com with ESMTPSA id
- u20-20020a02c054000000b004182f88c368sm4070929jam.67.2023.08.23.11.48.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 11:48:08 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 8/8] x86: doc: Update the list of supported Chromebooks
-Date: Wed, 23 Aug 2023 12:47:41 -0600
-Message-ID: <20230823184746.842091-9-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
-In-Reply-To: <20230823184746.842091-1-sjg@chromium.org>
-References: <20230823184746.842091-1-sjg@chromium.org>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RWGhm4hZrz9srl;
+ Wed, 23 Aug 2023 21:38:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692819480;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=n6bal8qFDbgUUtesAFS7Hwxhyt4/kq1n4z6Fff8XEXQ=;
+ b=Rg8H2osCLyZ5z44B0K5jaqf1WN7yUzE46afT9fmE+32P+M0zAmJgSzOm7jIpKPlf+b/zJM
+ lvR6x1J+l3jyz6qBtkSYD/vWT/hvRPwFAXHHgnbNJr6zDbsZFCy6WhGjYpEdpWBOqub1Ls
+ O/lHt3CVs1LZj2suG57zfERR/5JS2kaya1D81g3FP94RMyQ+y4llaeotXck8bXTtf3HYbs
+ 3C3T0fKFmHrT9xdedkc7j8ZEXaqpGIzfNNCuaels6IJBKY8TOufBB0rQQLUQofhMfUSys9
+ p/eM05cCqukEc1OK63sGMKFZj6VjGB1BX9Xfjb6Z4Skz+xxGI/0pTZecCD90hg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1692819478;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=n6bal8qFDbgUUtesAFS7Hwxhyt4/kq1n4z6Fff8XEXQ=;
+ b=ulTI/8s/IGAHfDCYZ16fJ90nRVQNGAxER3WVdkYGBZ7nGL2EmTzq02p2kYf4tM/TSa5rXM
+ lSSPUIBSlawZqytQw6Vep3ICsHRY799HkSJtAygtoE2mx8Yw7BStQqMt6hbLqotiAKSIYj
+ D9p6eol6P0QjOF9ERa7CxNUqJzzyU7IZ9oT81IQJVo4GI0XaQ5Ptan5ioi0AXnhQ3fWhOZ
+ MBYdvgrn10HxtnMrMmsoovuvZlEikUc99Zi7pxx8n2ETKteFlqxPIER0GxW1R4cwjRHrUP
+ Vh1oRJx1cpKFLLUjacOwRbh6arPwfCUNm7T4Yi8KCOhZ9GoqgOfcv4K61yP+JA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mario Six <mario.six@gdsys.cc>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH] test: dm: test-fdt: Use fdtdec_get_int() in dm_check_devices()
+Date: Wed, 23 Aug 2023 21:37:44 +0200
+Message-Id: <20230823193744.64172-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 4cf23473eabc2452eb7
+X-MBO-RS-META: jf8sfg7mxnhhnrz1bhwghptjc1apqubs
+X-Rspamd-Queue-Id: 4RWGhm4hZrz9srl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +84,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-One is missing, so add it. Also mention the SoC used in each.
+The current fdtdec_get_addr() takes into consideration #address-cells
+and #size-cells for "ping-expect" property which is clearly neither.
+Use fdtdec_get_int() instead and return negative one in case the
+property is not in DT or the platform under test is not DT based,
+i.e. mimic the current fdtdec_get_addr() behavior.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+This fixes ut dm dm_test_bus_children test.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
+Cc: Mario Six <mario.six@gdsys.cc>
+Cc: Simon Glass <sjg@chromium.org>
+---
+ test/dm/test-fdt.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- doc/arch/x86.rst | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/doc/arch/x86.rst b/doc/arch/x86.rst
-index 725a1ae5863..89d3e7ba0e4 100644
---- a/doc/arch/x86.rst
-+++ b/doc/arch/x86.rst
-@@ -25,12 +25,13 @@ are supported:
-    - Bayley Bay CRB
-    - Cherry Hill CRB
-    - Congatec QEVAL 2.0 & conga-QA3/E3845
-+   - Coral (Apollo Lake - Chromebook 2017)
-    - Cougar Canyon 2 CRB
-    - Crown Bay CRB
-    - Galileo
--   - Link (Chromebook Pixel)
-+   - Link (Ivy Bridge - Chromebook Pixel)
-    - Minnowboard MAX
--   - Samus (Chromebook Pixel 2015)
-+   - Samus (Broadwell - Chromebook Pixel 2015)
-    - QEMU x86 (32-bit & 64-bit)
+diff --git a/test/dm/test-fdt.c b/test/dm/test-fdt.c
+index eeecd1dc2de..72d0eb57e21 100644
+--- a/test/dm/test-fdt.c
++++ b/test/dm/test-fdt.c
+@@ -135,8 +135,8 @@ int dm_check_devices(struct unit_test_state *uts, int num_devices)
+ 		 * want to test the code that sets that up
+ 		 * (testfdt_drv_probe()).
+ 		 */
+-		base = fdtdec_get_addr(gd->fdt_blob, dev_of_offset(dev),
+-				       "ping-expect");
++		base = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
++				      "ping-expect", -1);
+ 		debug("dev=%d, base=%d: %s\n", i, base,
+ 		      fdt_get_name(gd->fdt_blob, dev_of_offset(dev), NULL));
  
- As for loading an OS, U-Boot supports directly booting a 32-bit or 64-bit
 -- 
-2.42.0.rc1.204.g551eb34607-goog
+2.40.1
 
