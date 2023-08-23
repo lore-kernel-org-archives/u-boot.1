@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66712EE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:47:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAB1BEE49B2
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 12:00:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD09C864B6;
-	Wed, 23 Aug 2023 13:47:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EA29F833DE;
+	Wed, 23 Aug 2023 14:00:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AsjWPN1m";
+	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="E92h7WJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAB30864D2; Wed, 23 Aug 2023 13:47:15 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 15C5D80812; Wed, 23 Aug 2023 14:00:29 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9438864A6
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:47:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6ED11846DF
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 14:00:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-99357737980so725983466b.2
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 04:47:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-4ffa01fc987so6757155e87.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 05:00:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692791233; x=1693396033;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=6ifTN7WuZGrU3fIhHGpiYbeKy77ExnX+IsH/KVWN0Fk=;
- b=AsjWPN1mVmmanTbAs79Xuv33CbtrBzH309BQI/XKJfWQKNrnp0k1+wYaWb72KkAQtA
- LyxkzyA/R4VGyTlxD2cfyCyU6ldghOqFUeun8G2+86VAWlFaTMoWy0VqixV9pU1GPCrz
- Is30T2ejPAEHseAYCc1bhJnEHh85uWr+8zB7wJ3YW1ZFSgIMjkrIVbten3OIlXe5lkdb
- G58odLmf+hpiciEvlxIQBPDH+FH3uxCHnPE89L09dDFGu320LFQo44UShX38Z2YmnjI2
- UeDPUrV7uZPaJK9UM0ECkrM2a+JJv2KvW+VbBGsjKfy6yYC037slt9t7hcU93CFSHCd6
- DtOQ==
+ d=foundries.io; s=google; t=1692792025; x=1693396825;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P+b4/09sc9FNiK90QnaP2FexWSKddzBnrCjkwo1kGjU=;
+ b=E92h7WJzkRYCpqpGRZAM5+AhQi4UoiamAZcNcqZ+Pdr28eRnwna46oHfibhd2KFAoi
+ HRK4SqbCspyF7iEN/WRmfIe++/ni4sx/XDjUw1dNvMOQ8NJXWlDvlXXpGgQgdQjdW0O9
+ /zF0jVWbOoD7Kc1AhfwXhieJnhOLU7sOrv4W76ZiKk7JW/hdPYWdrwVQbCIxnALoslS6
+ b8nL3Qo94l6StoJ/IP7Lf/fi8SqX0IVSMWjIudpagjmTPDTxiRZr+jh2APO/wjPiyAbw
+ qbe9Z4w7t9uOWmfLwthfE5mwaI5koE+mR5odszOe8LhA5KxNEQGWSAz+qucNTOXxccKx
+ c45w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692791233; x=1693396033;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6ifTN7WuZGrU3fIhHGpiYbeKy77ExnX+IsH/KVWN0Fk=;
- b=NIAYXY9cT2on/mH3OOOO892NhLXRPPv0gEglRI4QkRJdbQZ551z+FjWTz7rPWJcgOI
- lFDn/i8fty1aG6pERRTW72OAtXgzK2t8Xp5IcQnf3eAxoTvbLhDmHNMSRg4H2JOzF3pE
- /Vj/sRHiD93mYV0470zmCLEorAutlYQscWtAZAi4whxnbdZn9f2Am0o5gbDtwtpNap8z
- GGv6Ya83vtI+V5JyLDk45RkWji3QrqXECRHSvAc85it1epfSGVzDItA0BySwpoSD+xU5
- 08hEJlepOCgsk+FT2ngpMhXEx41puln6H33+SETbL1L7zqnM1KksPR3qANVXiXXU1JvT
- +X2A==
-X-Gm-Message-State: AOJu0Yz2ybEwGfLSzuHfPhsccxzCowJ5I81jGDGy5QSLvrqgHAHH8F4m
- 7+GYhE6kEXrYcDx6pWudBWGwDANSzjuyBA==
-X-Google-Smtp-Source: AGHT+IF4WCV65sMBIgxtqDLPrlBn8bmlCEVDed/WukYnPKnK/5ZXXG8pJcDhoVQ7az6IgLdW7sWTNA==
-X-Received: by 2002:a17:906:3018:b0:99e:6a0:5f64 with SMTP id
- 24-20020a170906301800b0099e06a05f64mr10363187ejz.36.1692791233125; 
- Wed, 23 Aug 2023 04:47:13 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.10.167]) by smtp.gmail.com with ESMTPSA id
- dv11-20020a170906b80b00b00997d7aa59fasm9830566ejb.14.2023.08.23.04.47.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 04:47:12 -0700 (PDT)
-Date: Wed, 23 Aug 2023 14:47:11 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-CC: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1_17/19=5D_ARM=3A_tegra=3A_dt-set?=
- =?US-ASCII?Q?up=3A_convert_TrustZone_remove_into_config?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <ZOXq0SrF9h0Z9uHw@orome>
-References: <20230822112217.4646-1-clamor95@gmail.com>
- <20230822112217.4646-18-clamor95@gmail.com> <ZOXq0SrF9h0Z9uHw@orome>
-Message-ID: <86A72122-840F-46B1-9C25-0B6F5AFB82A1@gmail.com>
+ d=1e100.net; s=20221208; t=1692792025; x=1693396825;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P+b4/09sc9FNiK90QnaP2FexWSKddzBnrCjkwo1kGjU=;
+ b=lDUXyGP6Um2GVZ31tGnIU69K5r1tU8ZdrRjt4sEHlQQ4hwgJBlDTmnvzsXx5FpWQ5U
+ nTRRh6Eg1JOu/ZaN3I22T2nWtJZKlCNU0cxGJPC+5LNmCVUaPMy+JqiX/Hewt0tpTn3h
+ AvvhQfK5BWMvM1OCKbTbLzA4W3OX4RLHb3/QCcMjSYsZpNMG26w9G7ZwYG+gAM2FmB1Q
+ rECxMwDVnHbnRSeNhQepWJwnCa4EA8z1+V8FkLXgW3f2AfgAXSqm5gE/LsIlGF4MPgDR
+ vkU9l6Tw17jQoLJuy3UyOjgPamwONqYtnA7BMhkjsHbvV5cjLaBrPZZlrmCE6v9DmX98
+ 2c9Q==
+X-Gm-Message-State: AOJu0YxN8xEKdzMMdFkrYucZXwrpbEaV8xyrmy/R6OxSF6cTNUjPPXHf
+ nu7qGpBQhqq5ptdXNKuAbS3uYAgOp1UOx1q93JFRdA==
+X-Google-Smtp-Source: AGHT+IGW0VG9FmULx2SDDsTuGDNUmnQsSCzt8OwBp0c7ms38G27ZSA+6Av1pU1TAxJrTvRRpTvEi8Q==
+X-Received: by 2002:a05:6512:282c:b0:4fb:8ff3:1f74 with SMTP id
+ cf44-20020a056512282c00b004fb8ff31f74mr5075069lfb.20.1692792025242; 
+ Wed, 23 Aug 2023 05:00:25 -0700 (PDT)
+Received: from cryobook.. ([93.188.34.55]) by smtp.gmail.com with ESMTPSA id
+ f16-20020ac251b0000000b004ff71ecaebcsm2623665lfk.268.2023.08.23.05.00.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Aug 2023 05:00:24 -0700 (PDT)
+From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Claudiu Beznea <claudiu.beznea@microchip.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Paul Barker <paul.barker@sancloud.com>, Roger Quadros <rogerq@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH v2] spl: watchdog: introduce SPL_HW_WATCHDOG
+Date: Wed, 23 Aug 2023 15:00:14 +0300
+Message-ID: <20230823120021.50146-1-oleksandr.suvorov@foundries.io>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,41 +102,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add SPL_HW_WATCHDOG Kconfig symbol which can be used to enable
+non-WDT hardware watchdog in SPL.
 
+Co-developed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+---
 
-23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:17:37 GMT+03:00,=
- Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Tue, Aug 22, 2023 at 02:22:15PM +0300, Svyatoslav Ryhel wrote:
->> Remove of TrustZone nodes is required by many product devices
->> which require repetable calls of same function from device board=2E
->> To simplify this, TZ remove is converted into Kconfig option=2E
->>=20
->> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> ---
->>  arch/arm/mach-tegra/Kconfig    | 14 ++++++++++++++
->>  arch/arm/mach-tegra/dt-setup=2Ec |  7 +++++++
->>  2 files changed, 21 insertions(+)
->
->I kind of preferred the original because it's very explicit=2E There's
->also no big advantage in consolidating this because the code is unlikely
->to ever require changing (the libfdt API is quite stable and these nodes
->are all hard-coded anyway)=2E This new variant put non-generic code (it
->requires a Kconfig option after all) into a generic place, so it seems a
->bit backwards=2E
+Changes in v2:
+- remove mistakenly included unwanted changes
 
-So you say that I have to add same function to boards over and over for al=
-l devices I plan to mainline? Unneeded code duplication in action=2E
+ common/spl/Kconfig        | 1 -
+ drivers/Makefile          | 1 +
+ drivers/sysreset/Kconfig  | 6 ++++++
+ drivers/sysreset/Makefile | 2 +-
+ drivers/watchdog/Kconfig  | 4 ++++
+ 5 files changed, 12 insertions(+), 2 deletions(-)
 
-List of devices which need this:
-- transformers t30
-- transformers t114
-- grouper
-- lg x3
-- endeavoru
-- tegratab=20
-- wexler qc750 and basically ALL t30 and t114
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index c5dd476db58..07d9dac29bd 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1351,7 +1351,6 @@ config SPL_THERMAL
+ 
+ config SPL_WATCHDOG
+ 	bool "Support watchdog drivers"
+-	imply SPL_WDT if !HW_WATCHDOG
+ 	help
+ 	  Enable support for watchdog drivers in SPL. A watchdog is
+ 	  typically a hardware peripheral which can reset the system when it
+diff --git a/drivers/Makefile b/drivers/Makefile
+index efc2a4afb24..2eb8ec0a894 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -62,6 +62,7 @@ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/common/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/udc/
+ obj-$(CONFIG_SPL_WATCHDOG) += watchdog/
++obj-$(CONFIG_SPL_HW_WATCHDOG) += watchdog/
+ obj-$(CONFIG_SPL_USB_HOST) += usb/host/
+ obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+ obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+index bdbe2a95364..0d21673e402 100644
+--- a/drivers/sysreset/Kconfig
++++ b/drivers/sysreset/Kconfig
+@@ -157,6 +157,12 @@ config SYSRESET_WATCHDOG
+ 	help
+ 	  Reboot support for generic watchdog reset.
+ 
++config SPL_SYSRESET_WATCHDOG
++	bool "Enable support for watchdog reboot driver in SPL mode"
++	select SPL_WDT
++	help
++	  Reboot support for generic watchdog reset in SPL mode.
++
+ config SYSRESET_WATCHDOG_AUTO
+ 	bool "Automatically register first watchdog with sysreset"
+ 	depends on SYSRESET_WATCHDOG
+diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+index 40c876764af..e5a7fc07a81 100644
+--- a/drivers/sysreset/Makefile
++++ b/drivers/sysreset/Makefile
+@@ -18,7 +18,7 @@ obj-$(CONFIG_SYSRESET_SOCFPGA) += sysreset_socfpga.o
+ obj-$(CONFIG_SYSRESET_SOCFPGA_SOC64) += sysreset_socfpga_soc64.o
+ obj-$(CONFIG_SYSRESET_TI_SCI) += sysreset-ti-sci.o
+ obj-$(CONFIG_SYSRESET_SYSCON) += sysreset_syscon.o
+-obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
++obj-$(CONFIG_$(SPL_)SYSRESET_WATCHDOG) += sysreset_watchdog.o
+ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+ obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
+ obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 07fc4940e91..d696a04fc18 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -39,9 +39,13 @@ config WATCHDOG_TIMEOUT_MSECS
+ config HW_WATCHDOG
+ 	bool
+ 
++config SPL_HW_WATCHDOG
++	bool
++
+ config IMX_WATCHDOG
+ 	bool "Enable Watchdog Timer support for IMX and LSCH2 of NXP"
+ 	select HW_WATCHDOG if !WDT
++	select SPL_HW_WATCHDOG if !SPL_WDT
+ 	help
+ 	  Select this to enable the IMX and LSCH2 of Layerscape watchdog
+ 	  driver.
+-- 
+2.41.0
 
-Ok, fine=2E Dropping and moving on=2E
-
->Thierry
