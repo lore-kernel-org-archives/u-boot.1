@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE78EE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:30:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C585EE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E23B805C5;
-	Wed, 23 Aug 2023 13:30:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CD105864B4;
+	Wed, 23 Aug 2023 13:38:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FhvFRCf4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g4/XKbcN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 422A4864B9; Wed, 23 Aug 2023 13:30:52 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 937D4864B6; Wed, 23 Aug 2023 13:38:28 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 732A6805C1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:30:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43773864B3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:38:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so13377588a12.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 04:30:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692790250; x=1693395050;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=JLaKpFwV/C1aTo+nAKlxj3gzc/TSkHsbxML5nE548l0=;
- b=FhvFRCf4bJczgxZjXbiUSwDnTp/zBRUekxAMNjXY0uFyHcON625CzoeE5azSoEwPgI
- W5UF9+w0TmAZqJ62ITLy9SlE8zTsktqkKDbu9xkuic5z+lVBwhDvM4hN7XZuYf5QSSWa
- YYpStnAUPALPB/JQfaMePwoh//K7bgD+C15EhYhL3lPk+e+Dcb4lSBCfp/O28e06cw9r
- JKUptCSSisk8bZkYXRYOIV7+DXrqMb3CY9IrJe+CNUfMOQbaW1o1HQZ2NtoBAlUruLbm
- fh59f+aks1RlIVtM2RHDrQJvBlXs+4zKIbnuLzVrUQx6GuPjCqucO6BW0OLByRLFr7zE
- oDAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692790250; x=1693395050;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JLaKpFwV/C1aTo+nAKlxj3gzc/TSkHsbxML5nE548l0=;
- b=KM9F3jXwJ7WjxYjICDjreqaePs39GS3zuC6OT5GYqsJZ6DbfQ2/5MtA8WEV9+4mZaj
- cu3O5W52Zq0djS+OpgFUllUAvusm7STTRrI1XoMSxMAzkSgj4II3hXgr/XxxToFeinDt
- zK+GIr5BTuj3aRHPchawrCRCnjeFke6adne/U4JNaPg0l1fBN0nFbpHgk3MkzW0UOW4q
- muFIWnY+M8if/uTCdd1MFNwUocsZSs9Dvh2N1lyfsC1BdW1Ut9af8pINMTKMIkIOBhAe
- kZk4Kf/OB2MzoQUi2CmceI/5Yaj7DJimVhan+YwzQZFi6MA/dT6lrCi37o42EkA3TDBX
- MZlg==
-X-Gm-Message-State: AOJu0Yyiq/gTnvW3M0KnxaAMeKovPmqbN6XzPZuoGQ5+lkIgotBnhMOc
- SacquTkpQh09RyX/bQ/UbIw=
-X-Google-Smtp-Source: AGHT+IEN7PeQ2lJB9rYCPKTCz8gM2HaoZBOPhHcB3mwBrJbru1aXtZWXv1w3XfktHwDxG4Muw1NMFg==
-X-Received: by 2002:a05:6402:350e:b0:51e:5206:d69e with SMTP id
- b14-20020a056402350e00b0051e5206d69emr14442947edd.10.1692790249807; 
- Wed, 23 Aug 2023 04:30:49 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.10.167]) by smtp.gmail.com with ESMTPSA id
- z8-20020aa7c648000000b0052544bca116sm9102344edr.13.2023.08.23.04.30.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Aug 2023 04:30:49 -0700 (PDT)
-Date: Wed, 23 Aug 2023 14:30:48 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-CC: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 0/1] tegra_mmc: get tap and trim from dts
-User-Agent: K-9 Mail for Android
-In-Reply-To: <ZOXlJmZicgBUINlb@orome>
-References: <20230819153501.77245-1-clamor95@gmail.com>
- <ZOXlJmZicgBUINlb@orome>
-Message-ID: <10578B16-04A2-4CE3-83B8-2BF7FBDB7711@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NBcHRT094414;
+ Wed, 23 Aug 2023 06:38:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692790697;
+ bh=udsDkkHdl3PbcpDyxZ3+3QQFICMjokiNy/DBhj1uKRE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=g4/XKbcNgDmbJ5PZNSCmNapLRExmd0W+ljvg8Jlwvm5KTET2yJJngcvLN3dERfya6
+ Qj7r4ELWvoHeM7dZPiAIZ7LW84cmt9tQWJtiVyny7xtf18k1sV2zlxB5bGV3v6tKdk
+ hxEgCY6Kzi4EnTf2Z9vqlBNQIZJQSQLP5YkkLxwc=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NBcH1U019168
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 06:38:17 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 06:38:16 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 06:38:16 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NBcGpU077226;
+ Wed, 23 Aug 2023 06:38:16 -0500
+Date: Wed, 23 Aug 2023 06:38:16 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Nitin Yadav <n-yadav@ti.com>
+CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Neha Francis
+ <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH V4 4/8] drivers: mmc: am654_sdhci: Update OTAP/ITAP delay
+Message-ID: <20230823113816.b5qrst4ut77e4d5r@lucid>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-5-nm@ti.com> <87r0nufaik.fsf@baylibre.com>
+ <9ffa96cd-df18-d298-41c2-080a187b7410@ti.com>
+ <caab6d37-199a-7d1c-6b60-9297e3838fd5@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <caab6d37-199a-7d1c-6b60-9297e3838fd5@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,28 +85,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 15:48-20230823, Nitin Yadav wrote:
+[...]
 
+> > > > -    for (i = MMC_HS; i <= MMC_HS_400; i++) {
+> > > > +    for (i = MMC_LEGACY; i <= MMC_HS_400; i++) {
+> > > 
+> > > I'm not super familiar with mmc drivers in general, but it feels like
+> > > this bit does not really belong in this patch. >
+> > > Is this another bugfix for removing otap-del-sel for MMC_LEGACY devices
+> > > or does U1 UHS SD cards are considered to be of MMC_LEGACY type ?
+> > yes, its two different fix. Internally I posted two patches for them.
+> > can be referred in below links:
+> > 
+> > https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=b5a2f7972fd142df03a15ba58829aa068c891abf
+> > 
+> > https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/?h=ti-linux-6.1.y-cicd&id=527095165281cbc60a1b42995c1e55e6756cbe93
+> > 
+> For uboot somehow it got merged as single patch as It was one of my first
+> fix :) .
 
-23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 13:53:26 GMT+03:00,=
- Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Sat, Aug 19, 2023 at 06:35:00PM +0300, Svyatoslav Ryhel wrote:
->> Default-tap and default-trim values are used for eMMC setup
->> mostly on T114+ devices=2E As for now, those values are hardcoded
->> for T210 and ignored for all other Tegra generations=2E Fix this
->> by passing tap and trim values from dts=2E
->>=20
->> This commit will cause regression on T210 (emmc may not work),
->> fix is applied in tegra210=2Edtsi and will be sent next week=2E
->
->Heh=2E=2E=2E I don't think so=2E If you already know that this will cause=
- a
->regression on Tegra210 you need to rework this=2E Adding regressions
->accidentally is already bad enough, but doing so knowingly is a big
->no-no=2E
+Thanks for the pointer. I will pick the latest up for V5.
 
-DTS change for t210 was sent in "General tegra and board improvements" pat=
-chset=2E This is why this pathset contains only 1 (one) patch and a warning=
-=2E It has a dependency=2E
-
->Thierry
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
