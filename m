@@ -4,48 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E67EE4993
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 13:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E34BEE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 13:59:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB97086421;
-	Wed, 23 Aug 2023 15:59:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E22E864C1;
+	Wed, 23 Aug 2023 15:59:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="dh1zQ/oN";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="U2BjJsMz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B43BE864BA; Wed, 23 Aug 2023 15:59:29 +0200 (CEST)
+ id C094B86421; Wed, 23 Aug 2023 15:59:29 +0200 (CEST)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB5118641F
+ by phobos.denx.de (Postfix) with ESMTPS id D6B7B86416
  for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 15:59:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
 Received: from adahl by ada.ifak-system.com with local (Exim 4.94.2)
  (envelope-from <ada@thorsis.com>)
- id 1qYoNs-001Zv1-98; Wed, 23 Aug 2023 15:58:56 +0200
+ id 1qYoNs-001Zv6-AZ; Wed, 23 Aug 2023 15:58:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
  t=1692799167;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
- bh=f2SD+flkWK0M7JQ3P7+7Dxxky3MekCe6ZHVt3q5kq1A=;
- b=dh1zQ/oNdYAU/RfbzyAKZjUYAeMLXTnGieGBjYr3pKFXxOuY2r2r8beskTpd9tIv9yzsV0
- x9SSNVzZraL2WjuiZ3I+D+y/3N7nHskEqVY5hjf1sUntlLhR2PDHch2TnxY2edWng7Igc/
- Fgtfeur8OJqx41TDNaLJTpbTZutkW5sbvvmmi8lUhNnpzHNJ2UVP+C+IOGlT5PDq7W1TEX
- YHWADcyJWlyaEhWvRM/zyRqaLW5L/xugprDwDfjjPUZVN08w0gNKbJDJGjWT3B2RgrSVsZ
- YQt8EXu7r5LI5JK8pLp3KCpfXq1E8aDFhcNBCj5gfkXj2azpa5pfB2JA3J4EWA==
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=J1YLUQmeIe1kNpdD3A2ESp8qJzfNC5c2xH4iUJDU3W8=;
+ b=U2BjJsMzcSzd2Pud9dgTDmh9Y/NqgXCCPnCUjTd9SQhC7wd43xaiQ2RroYW0plut+yrnm4
+ sjR4+5uq3hILAeTOMeyWRdMTs7qERW8lo1iKaXADFh4l/USmB5xMDI4NKykP3bS0Ba3AuI
+ 9UrLgvIo8QxBBhVfhQoBKWBAFI3+gxwt354rfoueGQ5h6YIMVLo7SD5VsRYnI0GBM85nP4
+ 56x1FJfhW1m/+QLuWOnA6IvP25ddgQTtn/mo1ER6RnuKurlggeYTqpTNlCG4WyT2HfDOgc
+ NfQuVohdhGpwsLyqjxmwJkXDeeihk30JZvtVnvBszvVSYTDDQSyZYO+hWUPb7w==
 From: Alexander Dahl <ada@thorsis.com>
 To: Eugen Hristev <eugen.hristev@collabora.com>,
  Durai Manickam KR <durai.manickamkr@microchip.com>,
  Sandeep Sheriker M <sandeep.sheriker@microchip.com>
 Cc: Sergiu Moga <sergiu.moga@microchip.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 0/5] at91: sam9x60-curiosity: Misc improvements
-Date: Wed, 23 Aug 2023 15:58:51 +0200
-Message-Id: <20230823135856.376351-1-ada@thorsis.com>
+Subject: [PATCH v2 2/5] configs: at91: sam9x60: Switch to new reset driver
+Date: Wed, 23 Aug 2023 15:58:53 +0200
+Message-Id: <20230823135856.376351-3-ada@thorsis.com>
+In-Reply-To: <20230823135856.376351-1-ada@thorsis.com>
+References: <20230823135856.376351-1-ada@thorsis.com>
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -63,50 +66,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hei hei,
+Since commit 61040097a9d1 ("reset: at91: Add reset driver for basic
+assert/deassert operations") the compatible "microchip,sam9x60-rstc" for
+the sam9x60 reset controller in sam9x60.dtsi is not handled by
+CONFIG_SYSRESET_AT91 anymore, but by CONFIG_RESET_AT91 now.  This
+resulted in the following error message, when trying to reset from
+U-Boot shell:
 
-while working with the sam9x60-curiosity board I noticed some things
-still have rough edges on U-Boot shell for that device.  With these
-patches (and some more config options enabled), the following commands
-now work as expected: reset, led, button.
+    U-Boot> reset
+    resetting ...
+    System reset not supported on this platform
+    ### ERROR ### Please RESET the board ###
 
-The whole series is based on atmel/next.
+Fixed by enabling the new driver in the relevant defconfigs.  Tested on
+sam9x60-curiosity board.  Defconfigs for sam9x60ek adapted in the same
+way, but without testing.  These should be all sam9x60 boards affected
+in U-Boot here.
 
-Note: some things here might be useful to implement for other Microchip
-boards.  However I currently only have this one board, and I'm not sure
-if this is a direction appreciated by Microchip?  So you might see all
-this as suggestion.
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+---
 
-See notes on patches for specific changes from v1 to v2 and below for
-summary of the changes.
+Notes:
+    v1 -> v2:
+      - re-enabled SYSRESET and SYSRESET_AT91
 
-Greets
-Alex
+ configs/sam9x60_curiosity_mmc1_defconfig | 2 ++
+ configs/sam9x60_curiosity_mmc_defconfig  | 2 ++
+ configs/sam9x60ek_mmc_defconfig          | 2 ++
+ configs/sam9x60ek_nandflash_defconfig    | 2 ++
+ configs/sam9x60ek_qspiflash_defconfig    | 2 ++
+ 5 files changed, 10 insertions(+)
 
-v1 -> v2:
-  - reworded some commit messages
-  - reenabled CONFIG_SYSRESET and CONFIG_SYSRESET_AT91
-  - split up LED patch in two new patches
-
-Alexander Dahl (5):
-  configs: at91: sam9x60_curiosity: Sync both defconfig variants
-  configs: at91: sam9x60: Switch to new reset driver
-  ARM: dts: at91: sam9x60-curiosity: Sync LED nodes from Linux
-  board: sam9x60-curiosity: Let LED subsystem init leds if enabled
-  ARM: dts: at91: sam9x60-curiosity: Sync gpio button from Linux
-
- .../dts/at91-sam9x60_curiosity-u-boot.dtsi    | 18 +++++++
- arch/arm/dts/at91-sam9x60_curiosity.dts       | 50 +++++++++++++++++++
- .../sam9x60_curiosity/sam9x60_curiosity.c     | 18 +++++++
- configs/sam9x60_curiosity_mmc1_defconfig      |  2 +
- configs/sam9x60_curiosity_mmc_defconfig       | 17 ++++++-
- configs/sam9x60ek_mmc_defconfig               |  2 +
- configs/sam9x60ek_nandflash_defconfig         |  2 +
- configs/sam9x60ek_qspiflash_defconfig         |  2 +
- 8 files changed, 110 insertions(+), 1 deletion(-)
-
-
-base-commit: 0498ff933813932ff057cdc314ab46df4a596d06
+diff --git a/configs/sam9x60_curiosity_mmc1_defconfig b/configs/sam9x60_curiosity_mmc1_defconfig
+index 21b2cc2edd..bb5e7d8ed0 100644
+--- a/configs/sam9x60_curiosity_mmc1_defconfig
++++ b/configs/sam9x60_curiosity_mmc1_defconfig
+@@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sam9x60_curiosity"
+ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xfffff200
+ CONFIG_DEBUG_UART_CLOCK=200000000
+ CONFIG_DEBUG_UART_BOARD_INIT=y
+@@ -79,6 +80,7 @@ CONFIG_PHY_MICREL=y
+ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_AT91=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sam9x60_curiosity_mmc_defconfig b/configs/sam9x60_curiosity_mmc_defconfig
+index 269f015989..a0f819c002 100644
+--- a/configs/sam9x60_curiosity_mmc_defconfig
++++ b/configs/sam9x60_curiosity_mmc_defconfig
+@@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="at91-sam9x60_curiosity"
+ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xfffff200
+ CONFIG_DEBUG_UART_CLOCK=200000000
+ CONFIG_DEBUG_UART_BOARD_INIT=y
+@@ -79,6 +80,7 @@ CONFIG_PHY_MICREL=y
+ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_AT91=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sam9x60ek_mmc_defconfig b/configs/sam9x60ek_mmc_defconfig
+index 2a1399748c..c70c41c278 100644
+--- a/configs/sam9x60ek_mmc_defconfig
++++ b/configs/sam9x60ek_mmc_defconfig
+@@ -15,6 +15,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="sam9x60ek"
+ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xfffff200
+ CONFIG_DEBUG_UART_CLOCK=200000000
+ CONFIG_DEBUG_UART_BOARD_INIT=y
+@@ -87,6 +88,7 @@ CONFIG_PHY_MICREL=y
+ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_AT91=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sam9x60ek_nandflash_defconfig b/configs/sam9x60ek_nandflash_defconfig
+index c6c4686658..569b4e747c 100644
+--- a/configs/sam9x60ek_nandflash_defconfig
++++ b/configs/sam9x60ek_nandflash_defconfig
+@@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="sam9x60ek"
+ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xfffff200
+ CONFIG_DEBUG_UART_CLOCK=200000000
+ CONFIG_DEBUG_UART_BOARD_INIT=y
+@@ -89,6 +90,7 @@ CONFIG_PHY_MICREL=y
+ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_AT91=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
+diff --git a/configs/sam9x60ek_qspiflash_defconfig b/configs/sam9x60ek_qspiflash_defconfig
+index ef2e2db8b8..135cd787f9 100644
+--- a/configs/sam9x60ek_qspiflash_defconfig
++++ b/configs/sam9x60ek_qspiflash_defconfig
+@@ -14,6 +14,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="sam9x60ek"
+ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_DEBUG_UART_BASE=0xfffff200
+ CONFIG_DEBUG_UART_CLOCK=200000000
+ CONFIG_DEBUG_UART_BOARD_INIT=y
+@@ -88,6 +89,7 @@ CONFIG_PHY_MICREL=y
+ CONFIG_MACB=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_AT91=y
++CONFIG_RESET_AT91=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_ATMEL_USART=y
 -- 
 2.30.2
 
