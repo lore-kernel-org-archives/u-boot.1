@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36C7C3DA66
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCDB0C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 18:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1813E86478;
+	by phobos.denx.de (Postfix) with ESMTP id 5B18E864BA;
 	Wed, 23 Aug 2023 20:48:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aIkdFC7F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Foz2uUZH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EF05864CB; Wed, 23 Aug 2023 20:48:08 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id C4D4D86473; Wed, 23 Aug 2023 20:48:09 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E8AD86427
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:48:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60AC6864C0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:48:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7921006459cso165467739f.2
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:48:06 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-34bbb4b580eso18684725ab.0
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 11:48:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692816483; x=1693421283;
+ d=chromium.org; s=google; t=1692816486; x=1693421286;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5udvm7lPqjeLb6FSAX9VPZ6RIch5vHKq5PyZArJCA1A=;
- b=aIkdFC7FQ80FJ9sdLsCwPIdgxA0A0VmCAeQ+HyklZ6GY9AVmkTwFiy4a9xpxbWHTih
- NEYYhcYKv2/vsaw+o9HvVc6V874n/xGVfp4ik0db2OWPlkt42qwkecxVFk61LCAOtZBj
- Ha4lAzhECSF58hT8WUWRuM3PEv/2rCPmWRIWc=
+ bh=4/NTkFkxx+uamYabwvDLLvBCDtTYJwcQJN0gYSfD9WU=;
+ b=Foz2uUZHAFvViQvZfzoDGFw9UuEAux14ZdrVQUv245HHv1/LYZUH5hBnNXbp0r6x/j
+ njcLjRk7e/6jt0xaNrVrBgQUCU2Ijr1b+zvb6HLXpgTtBWZ/W92bKpefUS1DFN0UFzvX
+ bhbCQjjaG8HGPaDr8sAooEQMPa03P+TCizPt0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692816483; x=1693421283;
+ d=1e100.net; s=20221208; t=1692816486; x=1693421286;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5udvm7lPqjeLb6FSAX9VPZ6RIch5vHKq5PyZArJCA1A=;
- b=ZBo061c4D7ACb50oH7XGuoaAu0IIBpjEX/RpfTQ4lBj8GUrjKyHPrPfrwhGmpKOTQh
- Si2356GLyclBw93inLhd2MX4t9Z+gmjydZLb9Z1uMVuc5Vz3qh4QiIu/pS4uaivgWduJ
- OZK88jfLAU1DvFb2gPS3yYYisEy8P4BF5h588fix1sJbhHD9kihGPEgrC/uhsjAF7HeV
- MZAjGwsST+y0O/Ec30n4oWfW8UZ6E1Re9wGfSzRg8vpHAGu4sc0ocHU6QETvvgCgZ2M3
- iZb8lT5kk1Qx45PbtmRFBKfS+hawh/p4aVbIug8fX9ESEk4W63EtBH2L10g9Zktu41z4
- 5Hhw==
-X-Gm-Message-State: AOJu0Ywc/olqlWCsmOpX8VfTuEQVvprRAmGMrWldiBqitYitxtlKEzrK
- +XQ+vuWrBC/vfDBcdlgIOQ9HzBCYsBJdf1VfTZQ=
-X-Google-Smtp-Source: AGHT+IG/YWFC2W7VEeDNmrxciJQJjK6w8PTw3BTXf+++fAMP8tu3Dc/EFeMya2fX93aPijJr1Kx3+Q==
-X-Received: by 2002:a6b:7206:0:b0:791:1951:1df0 with SMTP id
- n6-20020a6b7206000000b0079119511df0mr3738941ioc.18.1692816482996; 
- Wed, 23 Aug 2023 11:48:02 -0700 (PDT)
+ bh=4/NTkFkxx+uamYabwvDLLvBCDtTYJwcQJN0gYSfD9WU=;
+ b=bxAxBEGngLI5yj4lt88AJXnwzuREu8rQfPhH6dPPtJX8G/Q34R1WPiE4pMNIFPLEcJ
+ yWlfVwrobhIe5V5CC+9Es/D868Fetd5yI9qmQDnkKpbAqM6vyncUF988IoGTFC92dRCT
+ bSn87UkgVZOzYsYlbnA2I9qydh4cfWJ3q4re9HImEmWuS4bkM9kDXgSTEsrRvaZz03C/
+ qzt7Pa0hYKQlB6y9TD7vaoP+lI4ydmB9vAW7qpGxPC/cja3aTt4Zwc9qNPOeuO2DH0pb
+ 4bVdfoe97WzVZlNAILu7+/VMJvd0iW629Ib+vQnoQI1xPAWXVoTbBzlCMiyfs/Zftb3I
+ naQw==
+X-Gm-Message-State: AOJu0Yw9BLMQ7/2zu7S0lD0XlaNygsFb3l0Xuh9w3DCVJ+R1lgU01rNE
+ 5Mj4/FURA/h862c9Dx/oWM21YOPr03O02AZfheY=
+X-Google-Smtp-Source: AGHT+IHCOW9eCxEscHkHZiLgtsHo4jG3YO9mqMnVhyYG7YIUVsnXMt7o5dy0AZ6us+VgS8dcRMdqYQ==
+X-Received: by 2002:a05:6e02:1523:b0:34b:b16d:aa38 with SMTP id
+ i3-20020a056e02152300b0034bb16daa38mr4058409ilu.29.1692816485953; 
+ Wed, 23 Aug 2023 11:48:05 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:938f:460b:b19c:dee2])
  by smtp.gmail.com with ESMTPSA id
- u20-20020a02c054000000b004182f88c368sm4070929jam.67.2023.08.23.11.48.00
+ u20-20020a02c054000000b004182f88c368sm4070929jam.67.2023.08.23.11.48.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 11:48:01 -0700 (PDT)
+ Wed, 23 Aug 2023 11:48:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Shiji Yang <yangshiji66@outlook.com>
-Subject: [PATCH 4/8] x86: spl: Change the condition for copying U-Boot to RAM
-Date: Wed, 23 Aug 2023 12:47:37 -0600
-Message-ID: <20230823184746.842091-5-sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 6/8] x86: broadwell: Set up MTRRs
+Date: Wed, 23 Aug 2023 12:47:39 -0600
+Message-ID: <20230823184746.842091-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230823184746.842091-1-sjg@chromium.org>
 References: <20230823184746.842091-1-sjg@chromium.org>
@@ -88,29 +88,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make this depend on whether the address matches the offset, rather than
-a particular board build. For samus_tpl we don't need to copy, for
-example.
+The current condition does not handle the samus_tpl case where it sets
+up the RAM in SPL but needs to commit the MTRRs in U-Boot proper.
+
+Add another case to handle this and update the comment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/lib/spl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/lib/init_helpers.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/arch/x86/lib/spl.c b/arch/x86/lib/spl.c
-index 58fa572b71a..335dacf47fd 100644
---- a/arch/x86/lib/spl.c
-+++ b/arch/x86/lib/spl.c
-@@ -258,7 +258,7 @@ static int spl_board_load_image(struct spl_image_info *spl_image,
- 	spl_image->os = IH_OS_U_BOOT;
- 	spl_image->name = "U-Boot";
+diff --git a/arch/x86/lib/init_helpers.c b/arch/x86/lib/init_helpers.c
+index 60a2707dcf1..bf0c921577d 100644
+--- a/arch/x86/lib/init_helpers.c
++++ b/arch/x86/lib/init_helpers.c
+@@ -15,7 +15,8 @@ DECLARE_GLOBAL_DATA_PTR;
+ int init_cache_f_r(void)
+ {
+ 	bool do_mtrr = CONFIG_IS_ENABLED(X86_32BIT_INIT) ||
+-		 IS_ENABLED(CONFIG_FSP_VERSION2);
++		 IS_ENABLED(CONFIG_FSP_VERSION2) ||
++		 (IS_ENABLED(CONFIG_TPL) && IS_ENABLED(CONFIG_HAVE_MRC));
+ 	int ret;
  
--	if (!IS_ENABLED(CONFIG_SYS_COREBOOT)) {
-+	if (spl_image->load_addr != spl_get_image_pos()) {
- 		/* Copy U-Boot from ROM */
- 		memcpy((void *)spl_image->load_addr,
- 		       (void *)spl_get_image_pos(), spl_get_image_size());
+ 	/*
+@@ -23,11 +24,9 @@ int init_cache_f_r(void)
+ 	 *
+ 	 * booting from slimbootloader - MTRRs are already set up
+ 	 * booting with FSPv1 - MTRRs are already set up
+-	 * booting with FSPv2 - MTRRs must be set here
++	 * booting with FSPv2 or MRC - MTRRs must be set here
+ 	 * booting from coreboot - in this case there is no SPL, so we set up
+ 	 *	the MTRRs here
+-	 * Note: if there is an SPL, then it has already set up MTRRs so we
+-	 *	don't need to do that here
+ 	 */
+ 	do_mtrr &= !IS_ENABLED(CONFIG_FSP_VERSION1) &&
+ 		!IS_ENABLED(CONFIG_SYS_SLIMBOOTLOADER);
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
