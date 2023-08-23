@@ -4,78 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D690DEE49AE
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 08:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E905EE49AF
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 08:56:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA6AE864CA;
-	Wed, 23 Aug 2023 10:38:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 320A6864AA;
+	Wed, 23 Aug 2023 10:56:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sf/Lp6KS";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A304864C8; Wed, 23 Aug 2023 10:38:35 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E84864CA
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:38:33 +0200 (CEST)
+ id 76FCE864A6; Wed, 23 Aug 2023 10:56:45 +0200 (CEST)
+Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
+ by phobos.denx.de (Postfix) with ESMTP id 029C3864AB
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 10:56:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-68a40d8557eso2222306b3a.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 01:38:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692779911; x=1693384711;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EXso1edERymhBFfXr1gjPdjcU4abvx9CRP772g7aCWo=;
- b=sf/Lp6KSlI5XUsSLO2pG8TjEXCctdwMxF3fgHw1erTBzjiXAqF67U8KPrhrZLCFM87
- hQeSswPjLpEcxgOxllFuacgWfMQPyHy8BKx0AgmS098vEE5gZpXVROynAL3vL7or3WNz
- BM3QU+tc5TyzTcAI/S+emgp5oofyu7szHHEzo7dvhumhAmDKiR6qB8h0M94BCdBzdWaR
- Vr78EqZhmXIIT8byY7FVJ2fZMIf0ghwHDso1FLcEji39OsczgrUp77NkEidlVfvwxDI9
- GN84Ul1vHap9uiI4+Yr+TBy6SMTCLqiNzqzgr82GNy9KqYQbzaQpPMi5sx+cUttB4ZAP
- LXmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692779911; x=1693384711;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EXso1edERymhBFfXr1gjPdjcU4abvx9CRP772g7aCWo=;
- b=eaTFBLKz8S+vPszsjXWaM0bkPC1Ci77Ob/Uy2Kmy7D/AMBeMWSGYTm6KPPlC4cRI5y
- f1B2GfaP06F1iyXvaKNjxKHOaxdeloL4zkJYZxBS13CRjICH1GnPEok6pJgGd0t+3Tn7
- n2S5QkMaIdInUi5Eu/rleZAS5Zvokp5kboOT+Y/jkvD/snkc174fJoeKd0ThjKBV6ya7
- RZa46AUosNObhmpi2kmta5MMpAAj4TT6ol6l0Un9pK4s6SmrsMkAumr2SEdFlPcnXSL+
- qLHO3X0Hl8AXaqw/rEkCC928U2UmF3fMDuWAo2he/ICZIUWWqwPBq6h/7zIfGoTONvbP
- OxgQ==
-X-Gm-Message-State: AOJu0Yxgz6FxhMT0U0weYEOog2mdd8SQTJLzMG11szBc2mHnVD0R9Wk7
- a/Z0jRTqGQyuC/rPxYz3c26p50ycFWCNasowBm0=
-X-Google-Smtp-Source: AGHT+IHCvK3Jvchx426nsyWkVMCCXsohjywCelHrjH8T5kggeblXk/iDLWPqHTedAfL6sdr2U1iTnA==
-X-Received: by 2002:a05:6a00:23d5:b0:687:9909:3c78 with SMTP id
- g21-20020a056a0023d500b0068799093c78mr15747854pfc.0.1692779910929; 
- Wed, 23 Aug 2023 01:38:30 -0700 (PDT)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- x17-20020aa79191000000b006871fdde2c7sm8936369pfa.110.2023.08.23.01.38.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 01:38:30 -0700 (PDT)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 2/2] efi_loader: support boot from URI device path
-Date: Wed, 23 Aug 2023 17:37:20 +0900
-Message-Id: <20230823083721.1318097-3-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
-References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
+ dmarc=none (p=none dis=none) header.from=csgraf.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
+Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id C403F6080508;
+ Wed, 23 Aug 2023 10:56:40 +0200 (CEST)
+Message-ID: <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
+Date: Wed, 23 Aug 2023 10:56:40 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+Content-Language: en-GB
+To: Simon Glass <sjg@chromium.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
+ <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+ <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+ <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
+ <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+ <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+ <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
+From: Alexander Graf <agraf@csgraf.de>
+In-Reply-To: <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,261 +73,280 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This supports to boot from the URI device path.
-When user selects the URI device path, bootmgr downloads
-the file using wget into the address specified by loadaddr
-env variable.
-If the file is .iso or .img file, mount the image with blkmap
-then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-If the file is .efi file, load and start the downloaded file.
+Hey Simon,
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
----
- lib/efi_loader/efi_bootmgr.c | 213 +++++++++++++++++++++++++++++++++++
- 1 file changed, 213 insertions(+)
+On 22.08.23 20:56, Simon Glass wrote:
+> Hi Alex,
+>
+> On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
+>>
+>> On 22.08.23 01:03, Simon Glass wrote:
+>>> Hi Alex,
+>>>
+>>> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrote:
+>>>> On 22.08.23 00:10, Simon Glass wrote:
+>>>>> Hi Alex,
+>>>>>
+>>>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>> On 21.08.23 21:57, Simon Glass wrote:
+>>>>>>> Hi Alex,
+>>>>>>>
+>>>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>>>> On 21.08.23 21:11, Simon Glass wrote:
+>>>>>>>>> Hi Alper,
+>>>>>>>>>
+>>>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>>>>>>>> This is a rebase of Alexander Graf's video damage tracking series, with
+>>>>>>>>>> some tests and other changes. The original cover letter is as follows:
+>>>>>>>>>>
+>>>>>>>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+>>>>>>>>>>>
+>>>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+>>>>>>>>>>> but need it accessible by the display controller which reads directly
+>>>>>>>>>>> from a later point of consistency. Hence, we flush the frame buffer to
+>>>>>>>>>>> DRAM on every change. The full frame buffer.
+>>>>>>>>> It should not, see below.
+>>>>>>>>>
+>>>>>>>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+>>>>>>>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+>>>>>>>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+>>>>>>>>>>> printed space triggers a cache flush.
+>>>>>>>>> That is a bug somewhere in EFI.
+>>>>>>>> Unfortunately not :). You may call it a bug in grub: It literally prints
+>>>>>>>> over space characters for every character in its menu that it wants
+>>>>>>>> cleared. On every text screen draw.
+>>>>>>>>
+>>>>>>>> This wouldn't be a big issue if we only flush the reactangle that gets
+>>>>>>>> modified. But without this patch set, we're flushing the full DRAM
+>>>>>>>> buffer on every u-boot text console character write, which means for
+>>>>>>>> every character (as that's the only API UEFI has).
+>>>>>>>>
+>>>>>>>> As a nice side effect, we speed up the normal U-Boot text console as
+>>>>>>>> well with this patch set, because even "normal" text prints that write
+>>>>>>>> for example a single line of text on the screen today flush the full
+>>>>>>>> frame buffer to DRAM.
+>>>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+>>>>>>> after every character. It doesn't do that for normal character output
+>>>>>>> and I don't think it makes sense to do it for EFI either.
+>>>>>> I see. Let's trace the calls:
+>>>>>>
+>>>>>> efi_cout_output_string()
+>>>>>> -> fputs()
+>>>>>> -> vidconsole_puts()
+>>>>>> -> video_sync()
+>>>>>> -> flush_dcache_range()
+>>>>>>
+>>>>>> Unfortunately grub abstracts character backends down to the "print
+>>>>>> character" level, so it calls UEFI's sopisticated "output_string"
+>>>>>> callback with single characters at a time, which means we do a full
+>>>>>> dcache flush for every character that we print:
+>>>>>>
+>>>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
+>>>>>>
+>>>>>>
+>>>>>>>>>>> This patch set implements the easiest mitigation against this problem:
+>>>>>>>>>>> Damage tracking. We remember the lowest common denominator region that was
+>>>>>>>>>>> touched since the last video_sync() call and only flush that. The most
+>>>>>>>>>>> typical writer to the frame buffer is the video console, which always
+>>>>>>>>>>> writes rectangles of characters on the screen and syncs afterwards.
+>>>>>>>>>>>
+>>>>>>>>>>> With this patch set applied, we reduce drawing a large grub menu (with
+>>>>>>>>>>> serial console attached for size information) on an RK3399-ROC system
+>>>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
+>>>>>>>>>>>
+>>>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+>>>>>>>>>>> overhead compared to before as well. So even x86 systems should be faster
+>>>>>>>>>>> with this now :).
+>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> Alternatives considered:
+>>>>>>>>>>>
+>>>>>>>>>>>        1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+>>>>>>>>>>>           so often. We are missing timers to do this generically.
+>>>>>>>>>>>
+>>>>>>>>>>>        2) Double buffering - We could try to identify whether anything changed
+>>>>>>>>>>>           at all and only draw to the FB if it did. That would require
+>>>>>>>>>>>           maintaining a second buffer that we need to scan.
+>>>>>>>>>>>
+>>>>>>>>>>>        3) Text buffer - Maintain a buffer of all text printed on the screen with
+>>>>>>>>>>>           respective location. Don't write if the old and new character are
+>>>>>>>>>>>           identical. This would limit applicability to text only and is an
+>>>>>>>>>>>           optimization on top of this patch set.
+>>>>>>>>>>>
+>>>>>>>>>>>        4) Hash screen lines - Create a hash (sha256?) over every line when it
+>>>>>>>>>>>           changes. Only flush when it does. I'm not sure if this would waste
+>>>>>>>>>>>           more time, memory and cache than the current approach. It would make
+>>>>>>>>>>>           full screen updates much more expensive.
+>>>>>>>>> 5) Fix the bug mentioned above?
+>>>>>>>>>
+>>>>>>>>>> Changes in v5:
+>>>>>>>>>> - Add patch "video: test: Split copy frame buffer check into a function"
+>>>>>>>>>> - Add patch "video: test: Support checking copy frame buffer contents"
+>>>>>>>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+>>>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>>>>>>>> - Document damage struct and fields in struct video_priv comment
+>>>>>>>>>> - Return void from video_damage()
+>>>>>>>>>> - Fix undeclared priv error in video_sync()
+>>>>>>>>>> - Drop unused headers from video-uclass.c
+>>>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>>>>>>>> - Call video_damage() also in video_fill_part()
+>>>>>>>>>> - Use met->baseline instead of priv->baseline
+>>>>>>>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+>>>>>>>>>> - Update console_rotate.c video_damage() calls to pass video tests
+>>>>>>>>>> - Remove mention about not having minimal damage for console_rotate.c
+>>>>>>>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+>>>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
+>>>>>>>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>>>>>>>>>> - Fix memmove() calls by removing the extra dev argument
+>>>>>>>>>> - Call video_sync() before checking copy_fb in video tests
+>>>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+>>>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>>>>>>>>>>
+>>>>>>>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>>>>>>>>>>
+>>>>>>>>>> Changes in v4:
+>>>>>>>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+>>>>>>>>>> - Simplify first damage logic
+>>>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
+>>>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
+>>>>>>>>>> - Add patch "video: Always compile cache flushing code"
+>>>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+>>>>>>>>>>
+>>>>>>>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>>>>>>>>>>
+>>>>>>>>>> Changes in v3:
+>>>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>>>>>>>>>
+>>>>>>>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>>>>>>>>>>
+>>>>>>>>>> Changes in v2:
+>>>>>>>>>> - Remove ifdefs
+>>>>>>>>>> - Fix ranges in truetype target
+>>>>>>>>>> - Limit rotate to necessary damage
+>>>>>>>>>> - Remove ifdefs from gop
+>>>>>>>>>> - Fix dcache range; we were flushing too much before
+>>>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>>>>>>>>>
+>>>>>>>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>>>>>>>>>>
+>>>>>>>>>> Alexander Graf (9):
+>>>>>>>>>>        dm: video: Add damage tracking API
+>>>>>>>>>>        dm: video: Add damage notification on display fills
+>>>>>>>>>>        vidconsole: Add damage notifications to all vidconsole drivers
+>>>>>>>>>>        video: Add damage notification on bmp display
+>>>>>>>>>>        efi_loader: GOP: Add damage notification on BLT
+>>>>>>>>>>        video: Only dcache flush damaged lines
+>>>>>>>>>>        video: Use VIDEO_DAMAGE for VIDEO_COPY
+>>>>>>>>>>        video: Always compile cache flushing code
+>>>>>>>>>>        video: Enable VIDEO_DAMAGE for drivers that need it
+>>>>>>>>>>
+>>>>>>>>>> Alper Nebi Yasak (4):
+>>>>>>>>>>        video: test: Split copy frame buffer check into a function
+>>>>>>>>>>        video: test: Support checking copy frame buffer contents
+>>>>>>>>>>        video: test: Test partial updates of hardware frame buffer
+>>>>>>>>>>        video: test: Test video damage tracking via vidconsole
+>>>>>>>>>>
+>>>>>>>>>>       arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>>>>>>>>>>       arch/arm/mach-sunxi/Kconfig       |   1 +
+>>>>>>>>>>       drivers/video/Kconfig             |  26 +++
+>>>>>>>>>>       drivers/video/console_normal.c    |  27 ++--
+>>>>>>>>>>       drivers/video/console_rotate.c    |  94 +++++++----
+>>>>>>>>>>       drivers/video/console_truetype.c  |  37 +++--
+>>>>>>>>>>       drivers/video/exynos/Kconfig      |   1 +
+>>>>>>>>>>       drivers/video/imx/Kconfig         |   1 +
+>>>>>>>>>>       drivers/video/meson/Kconfig       |   1 +
+>>>>>>>>>>       drivers/video/rockchip/Kconfig    |   1 +
+>>>>>>>>>>       drivers/video/stm32/Kconfig       |   1 +
+>>>>>>>>>>       drivers/video/tegra20/Kconfig     |   1 +
+>>>>>>>>>>       drivers/video/tidss/Kconfig       |   1 +
+>>>>>>>>>>       drivers/video/vidconsole-uclass.c |  16 --
+>>>>>>>>>>       drivers/video/video-uclass.c      | 190 ++++++++++++----------
+>>>>>>>>>>       drivers/video/video_bmp.c         |   7 +-
+>>>>>>>>>>       include/video.h                   |  59 +++----
+>>>>>>>>>>       include/video_console.h           |  52 ------
+>>>>>>>>>>       lib/efi_loader/efi_gop.c          |   7 +
+>>>>>>>>>>       test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+>>>>>>>>>>       20 files changed, 483 insertions(+), 297 deletions(-)
+>>>>>>>>> It is good to see this tidied up into something that can be applied!
+>>>>>>>>>
+>>>>>>>>> I am unsure what is going on with the EFI performance, though. It
+>>>>>>>>> should not flush the cache after every character, only after a new
+>>>>>>>>> line. Is there something wrong in here? If so, we should fix that bug
+>>>>>>>>> first and it should be patch 1 of this series.
+>>>>>>>> Before I came up with this series, I was trying to identify the UEFI bug
+>>>>>>>> in question as well, because intuition told me surely this is a bug in
+>>>>>>>> UEFI :). Turns out it really isn't this time around.
+>>>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+>>>>>>> implementation. Where did you look for the bug?
+>>>>>> The "real" bug is in grub. But given that it's reasonably simple to work
+>>>>>> around in U-Boot and even with it "fixed" in grub we would still see
+>>>>>> performance benefits from flushing only parts of the screen, I think
+>>>>>> it's worth living with the grub deficiency.
+>>>>> OK thanks for digging into it. I suggest we add a param to
+>>>>> vidconsole_puts() to tell it whether to sync or not, then the EFI code
+>>>>> can indicate this and try to be a bit smarter about it.
+>>>> It doesn't know when to sync either. From its point of view, any
+>>>> "console output" could be the last one. There is no API in UEFI that
+>>>> says "please flush console output now".
+>>> Yes, I understand. I was not suggesting we were missing an API. But
+>>> some sort of heuristic would do, e.g. only flush on a newline, flush
+>>> every 50 chars, etc.
+>> I can't think of any heuristic that would reliably work. Relevant for
+>> this conversation, UEFI provides 2 calls:
+>>
+>>     * Write string to screen (efi_cout_output_string)
+>>     * Set text cursor position to X, Y (efi_cout_set_cursor_position)
+>>
+>> It's perfectly legal for a UEFI application to do something like
+>>
+>> efi_cout_set_cursor_position(10, 10);
+>> efi_cout_output_string("f");
+>> efi_cout_output_string("o");
+>> efi_cout_output_string("o") ;
+>>
+>> to update contents of a virtual text box on the screen. Where in this
+>> chain of events would we call video_sync(), but on every call to
+>> efi_cout_output_string()?
+> Actually U-Boot has the same problem, but we have managed to work out something.
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a40762c74c..8b20f486f2 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -7,10 +7,14 @@
- 
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blk.h>
-+#include <blkmap.h>
- #include <common.h>
- #include <charset.h>
-+#include <dm.h>
- #include <log.h>
- #include <malloc.h>
-+#include <net.h>
- #include <efi_default_filename.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-@@ -168,6 +172,209 @@ out:
- 	return ret;
- }
- 
-+#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-+/**
-+ * mount_image() - mount the image
-+ *
-+ * @lo_label	label of load option
-+ * @file_size	file size
-+ * @handle:	pointer to handle for newly installed image
-+ * Return:	status code
-+ */
-+static efi_status_t mount_image(u16 *lo_label, int file_size,
-+				efi_handle_t *handle)
-+{
-+	int err;
-+	efi_status_t ret;
-+	char *label = NULL, *p;
-+	lbaint_t blknum;
-+	struct udevice *bm_dev;
-+	efi_handle_t bm_handle;
-+	struct udevice *blk, *partition;
-+	struct efi_handler *handler;
-+	struct efi_device_path *file_path;
-+	struct efi_device_path *device_path;
-+
-+	label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
-+	if (!label)
-+		return EFI_OUT_OF_RESOURCES;
-+
-+	p = label;
-+	utf16_utf8_strcpy(&p, lo_label);
-+	err = blkmap_create(label, NULL);
-+	if (err) {
-+		log_err("failed to create blkmap\n");
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+	bm_dev = blkmap_from_label(label);
-+	if (!bm_dev) {
-+		log_err("\"%s\" is not the name of any known blkmap\n", label);
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+
-+	blknum = file_size / 512; /* TODO: don't use literal value. */
-+	err = blkmap_map_pmem(bm_dev, 0, blknum, image_load_addr);
-+	if (err) {
-+		log_err("Unable to map %#llx at block %d : %d\n",
-+			(unsigned long long)image_load_addr, 0, err);
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
-+		 (unsigned long long)image_load_addr);
-+
-+	/* TODO: without calling this, partition devices are not binded. */
-+	blk_list_part(UCLASS_BLKMAP);
-+
-+	/*
-+	 * Search the partition having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-+	 * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-+	 */
-+	device_foreach_child(blk, bm_dev)
-+	{
-+		device_foreach_child(partition, blk)
-+		{
-+			if (dev_tag_get_ptr(partition, DM_TAG_EFI,
-+					    (void **)&bm_handle)) {
-+				log_warning("DM_TAG_EFI not found\n");
-+				continue;
-+			}
-+
-+			ret = efi_search_protocol(
-+				bm_handle,
-+				&efi_simple_file_system_protocol_guid,
-+				&handler);
-+			if (ret != EFI_SUCCESS)
-+				continue;
-+
-+			ret = efi_search_protocol(
-+				bm_handle, &efi_guid_device_path, &handler);
-+			if (ret != EFI_SUCCESS)
-+				continue;
-+
-+			ret = efi_protocol_open(handler, (void **)&device_path,
-+						efi_root, NULL,
-+						EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+			if (ret != EFI_SUCCESS)
-+				continue;
-+
-+			file_path = expand_media_path(device_path);
-+			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-+						      NULL, 0, handle));
-+			efi_free_pool(file_path);
-+			if (ret == EFI_SUCCESS)
-+				goto out;
-+		}
-+	}
-+
-+out:
-+	efi_free_pool(label);
-+
-+	return ret;
-+}
-+
-+/**
-+ * try_load_from_uri_path() - Handle the URI device path
-+ *
-+ * @uridp:	uri device path
-+ * @lo_label	label of load option
-+ * @handle:	pointer to handle for newly installed image
-+ * Return:	status code
-+ */
-+static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-+					   u16 *lo_label,
-+					   efi_handle_t *handle)
-+{
-+	efi_status_t ret;
-+	int file_size, file_name_len;
-+	char *s, *host_name, *file_name, *str_copy;
-+
-+	/*
-+	 * Download file using wget.
-+	 *
-+	 * URI device path content is like http://www.example.com/sample/test.iso.
-+	 * U-Boot wget takes the target uri in this format.
-+	 *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
-+	 * Need to resolve the http server ip address before starting wget.
-+	 */
-+
-+	/* only support "http://" */
-+	if (strncmp(uridp->uri, "http://", 7)) {
-+		log_err("Error: uri must start with http://\n");
-+		return EFI_INVALID_PARAMETER;
-+	}
-+
-+	str_copy = strdup(uridp->uri);
-+	if (!str_copy)
-+		return EFI_OUT_OF_RESOURCES;
-+	s = str_copy + strlen("http://");
-+	host_name = strsep(&s, "/");
-+	if (!s) {
-+		log_err("Error: invalied uri, no file path\n");
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+	file_name = s;
-+	net_dns_resolve = host_name;
-+	net_dns_env_var = "httpserverip";
-+	if (net_loop(DNS) < 0) {
-+		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+	s = env_get("httpserverip");
-+	if (!s) {
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+
-+	/*
-+	 * WGET requires that "net_boot_file_name" and "image_load_addr" global
-+	 * variables are properly set in advance.
-+	 */
-+	strlcpy(net_boot_file_name, s, 1024);
-+	strlcat(net_boot_file_name, ":/", 1024); /* append '/' which is removed by strsep() */
-+	strlcat(net_boot_file_name, file_name, 1024);
-+	s = env_get("loadaddr");
-+	if (!s) {
-+		log_err("Error: loadaddr is not set\n");
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+	image_load_addr = hextoul(s, NULL);
-+
-+	file_size = net_loop(WGET);
-+	if (file_size < 0) {
-+		log_err("Error: downloading file failed\n");
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+
-+	/*
-+	 * Identify file type by file extension.
-+	 * If the file extension is ".iso" or ".img", mount it and boot with default file.
-+	 * If the file is ".efi", load and start the downloaded file.
-+	 */
-+	file_name_len = strlen(net_boot_file_name);
-+	if (!strncmp(&net_boot_file_name[file_name_len - 4], ".iso", 4) ||
-+	    !strncmp(&net_boot_file_name[file_name_len - 4], ".img", 4)) {
-+		ret = mount_image(lo_label, file_size, handle);
-+	} else if (!strncmp(&net_boot_file_name[file_name_len - 4], ".efi", 4)) {
-+		ret = efi_run_image((void *)image_load_addr, file_size);
-+	} else {
-+		log_err("Error: file type is not supported\n");
-+		ret = EFI_INVALID_PARAMETER;
-+	}
-+
-+out:
-+	free(str_copy);
-+
-+	return ret;
-+}
-+#endif
-+
- /**
-  * try_load_entry() - try to load image for boot option
-  *
-@@ -211,6 +418,12 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
- 		if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
- 			/* file_path doesn't contain a device path */
- 			ret = try_load_from_short_path(lo.file_path, handle);
-+#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-+		} else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-+			ret = try_load_from_uri_path(
-+				(struct efi_device_path_uri *)lo.file_path,
-+				lo.label, handle);
-+#endif
- 		} else {
- 			file_path = expand_media_path(lo.file_path);
- 			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
--- 
-2.34.1
+
+U-Boot as a code base has a much easier stance: It can add APIs when it 
+needs them in places that require them. With UEFI (as well as the U-Boot 
+native API), we're stuck with what's there.
+
+I also don't understand what you mean by "we have managed to work out 
+something". This patch set is not a UEFI fix - it fixes generic U-Boot 
+behavior and speeds up non-UEFI boots as well. The improvement there is 
+just not as impressive as with grub :).
+
+
+> I do think it is still to flush the cache on every char. I suspect you
+> will find that even a simple heuristic like I mentioned would be good
+> enough.
+>
+> Also I notice that EFI calls notify? all the time, so U-Boot probably
+> does have the ability to sync the video every 10ms if we wanted to.
+
+
+I fail to see how invalidating the frame buffer for the screen every 
+10ms is any better than doing flush+invalidate operations only on screen 
+areas that changed? It's more fragile, more difficult to understand and 
+also significantly more expensive given that most of the time very 
+little on the screen actually changes.
+
+
+>
+> It seems from this discussion that we have made great the enemy of the good.
+
+
+I agree. Damage tracking in this patch set is elegant, simple, 
+predictable, low overhead and basically just abstracts the video copy 
+code path to a generic solution. All while it pretty much solves the 
+issue for good. I don't understand what's not to like about it :)
+
+
+Alex
+
 
