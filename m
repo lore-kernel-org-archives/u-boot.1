@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71281EE49B0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAC4EE49B2
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 15:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9564D8645E;
-	Wed, 23 Aug 2023 17:03:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 22C818645F;
+	Wed, 23 Aug 2023 17:07:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c4Nzq56j";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ysGUfJju";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035188645F; Wed, 23 Aug 2023 17:03:04 +0200 (CEST)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E625E8646D; Wed, 23 Aug 2023 17:07:06 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDD10863F9
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:03:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52D668645E
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 17:07:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-d748d8cf074so5261459276.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 08:03:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692802980; x=1693407780;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R/0Riv2Bg2VbS+m5FY9brwIMDR/bGMMcoulO6aD8tbg=;
- b=c4Nzq56j4918oRbftJw2laVs7oMp8d4YwosR+0qNodalbXG1p/NjUDy7ItK0cx88Vx
- bDhNWwcjWlTuxmfsc/khsOTUvqDxj6MFG7mr4ForENWGXm4dg8ImXH0MM1UygSYXNT+2
- zrZbyzVlNt5IauudgcGfnVltQCczP5+5YBzCs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692802980; x=1693407780;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R/0Riv2Bg2VbS+m5FY9brwIMDR/bGMMcoulO6aD8tbg=;
- b=lqC6/C0LSwvCGvd6l78CQ3HISgsb6Cc5kFfh9ClyLJXPNsWeJut9bEOSr2fHdQyXiX
- +gPG3QE4Jwgo3oX3Cc3mcSwmfn6YmirajgBA/HY+K6TFE4RU3bLj2xpBm799KnJjdSmG
- nPciyA9X/qM6uHK6PCOY6EwwAigtiTX5aw2pUS8/gS+rMjnreBwUbxq+O1GPGXmr0Gcd
- 4QtbdD2FGQIuYL+O+cCy0mDmnWrLmx0/AJ6s6/V3yQL8zDr/L+Ul9kGS5QArreNWUPuu
- FnPhqD6o7/u0oR1qW1Ve91dVPNnrQpO3GrQC0soNOaTxwnkCfbq7q8FJg99gaIDMjUpi
- Ysog==
-X-Gm-Message-State: AOJu0Yx8w5th7sQFlFIL1t82TWfKFOodjWtkSR3A7/2c+F6qZRcHtSw8
- 2mzeWK3RvjeKu2LElWY6KA9akvqtr58ocWlPDkv8hw==
-X-Google-Smtp-Source: AGHT+IFhrr4ySFL4wnKJdMiZX99zXLoVEnsHXC3kxslAl0Eh1GnRDxPeAqE7lCB3TNa/OFMw4Oco0g==
-X-Received: by 2002:a25:d38e:0:b0:d4a:499d:a881 with SMTP id
- e136-20020a25d38e000000b00d4a499da881mr12007651ybf.9.1692802980609; 
- Wed, 23 Aug 2023 08:03:00 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5ca1-6af2-305a-b62a.res6.spectrum.com.
- [2603:6081:7b00:6400:5ca1:6af2:305a:b62a])
- by smtp.gmail.com with ESMTPSA id
- v71-20020a252f4a000000b00d1732567560sm2858165ybv.5.2023.08.23.08.02.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 08:03:00 -0700 (PDT)
-Date: Wed, 23 Aug 2023 11:02:58 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: u-boot@lists.denx.de, Alexandru Gagniuc <mr.nuke.me@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Kautuk Consul <kconsul@ventanamicro.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH] spl: crypto: fix including SHA* object files in SPL
-Message-ID: <20230823150258.GJ3953269@bill-the-cat>
-References: <20230823145633.10948-1-oleksandr.suvorov@foundries.io>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NF6xLX007992;
+ Wed, 23 Aug 2023 10:06:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692803219;
+ bh=FyYPYRUt6IMcRs/rhSx5PoIU+rcs9DqpgmsSC0CA+5c=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ysGUfJjucalSbqaQqnnuA1K1SW3Z3GjQKXdJ+i3MmhJrpkVzDGyM8Rz+W+gWJCthJ
+ a9+otOJyFEentGPbZlpDc6rJ/H64XEPARf/nb8vMxYe3K+MWP/mz++C1bTtlUv15Fv
+ 8S8P4FB8L45IZlCspWUMB0tb2zSCcmr9OjvUJx8A=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NF6xgY028267
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 23 Aug 2023 10:06:59 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
+ Aug 2023 10:06:58 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 23 Aug 2023 10:06:58 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NF6w6V025378;
+ Wed, 23 Aug 2023 10:06:58 -0500
+Date: Wed, 23 Aug 2023 10:06:58 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Neha Francis <n-francis@ti.com>, Bryan <bb@ti.com>, Praneeth
+ <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH V4 1/8] env_default: Allow CONFIG_EXTRA_ENV_TEXT to
+ override CFG_EXTRA_ENV_SETTINGS
+Message-ID: <20230823150658.tjfr7svhuhmbx5wt@vertical>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-2-nm@ti.com>
+ <20230823144253.GF3953269@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KZViapVAysKb9LxF"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230823145633.10948-1-oleksandr.suvorov@foundries.io>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20230823144253.GF3953269@bill-the-cat>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,42 +84,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10:42-20230823, Tom Rini wrote:
+[...]
 
---KZViapVAysKb9LxF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> > diff --git a/include/env_default.h b/include/env_default.h
+> > index b16c22d5a28c..714dfa9e845e 100644
+> > --- a/include/env_default.h
+> > +++ b/include/env_default.h
+> > @@ -112,12 +112,12 @@ const char default_environment[] = {
+> >  #ifdef CONFIG_MTDPARTS_DEFAULT
+> >  	"mtdparts="	CONFIG_MTDPARTS_DEFAULT		"\0"
+> >  #endif
+> > +#ifdef	CFG_EXTRA_ENV_SETTINGS
+> > +	CFG_EXTRA_ENV_SETTINGS
+> > +#endif
+> >  #ifdef CONFIG_EXTRA_ENV_TEXT
+> >  	/* This is created in the Makefile */
+> >  	CONFIG_EXTRA_ENV_TEXT
+> > -#endif
+> > -#ifdef	CFG_EXTRA_ENV_SETTINGS
+> > -	CFG_EXTRA_ENV_SETTINGS
+> >  #endif
+> >  	"\0"
+> >  #else /* CONFIG_USE_DEFAULT_ENV_FILE */
+> 
+> The problem is that I believe we intend for CFG_EXTRA_ENV_SETTINGS to be
+> where we can override things in a more final manner.
 
-On Wed, Aug 23, 2023 at 05:56:27PM +0300, Oleksandr Suvorov wrote:
+I am confused - if the intent is to move to text env, it should have
+priority over the extra_env settings.
 
-> If one of SHA* algorithms is disabled in u-boot, its code is not
-> included in SPL even if a given SHA* option is enabled in SPL. Fix
-> this.
->=20
-> Fixes: 603d15a572d ("spl: cypto: Bring back SPL_ versions of SHA")
-> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---KZViapVAysKb9LxF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTmH54ACgkQFHw5/5Y0
-tyxptgv+Nq6ovpnA+P50P0adXRmOWDk1GAmdPcwOLd/1xfQTnJ/hbojLhU97FnsQ
-iJUl94soATx6+Or3jyAKyNFfBrA34Cwj5/cylsgStsB5T9xygwASqbUCvmoq1Her
-/CuRN4k1gPdqRGjwvbxTKR3HNaa2aki5D3oe86AriKcPwaIkpKk+5J5CxkEApLco
-ITw36UMiHpNAlxRRmcdvCEeJxjVZjsamA+jVHLqZB8Z6lbRF9Az1EIRhxeljoXpX
-4xpiA7M+TZh/pwL58BeSQGOWIUJre4ijQFXN/amRmgq5mrGqoqbaNLnEsw6lpL/0
-JKeAl9MHwkh5XNXwr8bSxFl1smUi6l4ypy/qwMCgt6D3te9FRypt+2PQV1brvqqe
-F5VFV2ED/dHXMWmrmFDQXRPpbrTJ36zgKi0JvPC1+sSWASS8vxWCiWQOeqN1OjvT
-R4Yw3LdmWtpMQ2U0CpHxil+ldIU6z+AWQobWOPAaqBy7TfsiP0bAb7HJmnqu+OPo
-fZBwtUt5
-=bZZe
------END PGP SIGNATURE-----
-
---KZViapVAysKb9LxF--
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
