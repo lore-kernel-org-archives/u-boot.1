@@ -4,57 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C220DC3DA6F
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00D52C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 20:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 194AB864CB;
-	Wed, 23 Aug 2023 22:31:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 673BC8644F;
+	Wed, 23 Aug 2023 22:31:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692822671;
-	bh=PZqSSNV3gduXseSOzMczvP+Tg73PWjOaXDx0uf8KJ3E=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mKaIkAZXdVgUITPx1jXgzqfXVaWogmEbAnj1OLW4Cp5jTeuq+SoPMhu+KDYV/Qr52
-	 gmIPSsuFCXXVLavnE/u9c4F1ZHCW7YL1/NGtp8UHakwCnQQ95zBBRKiLby2wP/up0I
-	 dUfGI7+51HjhGr++/AWsA0CCueENh0+JVriFXBiWUZSc5BOehquFK/z18yScOA8TZ7
-	 5pUw99Q+Yb1BMmVo5zhaPPFrk269nBe5TwX3kc98dcdDePHeltmpcaM/dsiP+okU1B
-	 6QOYUQZ1skjufPOWeUIKR97JS0kAwDdWQ+llL0ezWtCfBv6Arc1NXWJ/CIFYCtSIB6
-	 PW/cwoa0p4tzg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Me8ealCz";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C39A68640E; Wed, 23 Aug 2023 22:31:33 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 16E268640E;
- Wed, 23 Aug 2023 22:31:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692822670;
- bh=PZqSSNV3gduXseSOzMczvP+Tg73PWjOaXDx0uf8KJ3E=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XeDDvhkADx6wteC0uvGCEZyRSjC/1A4C1I0uKqFTuPrkBcMV3EZG6DYEG/sZUN2Rn
- zjulkhAe6R0IJIEok0vhxVuwvoROkjquUJnsWogFU3NxuKwRde9AMyu1rtlqzOtQSX
- no4bvsLNZ27HcEdhEhnqKKAzn1cVMPQYX6qCDE3OmQW6QbUaRBZL/m1Lq+oU7SCwg0
- M/DwCaBwl0dajEsoBW/shBylRr5RH8k0yIsqUI4HQx78rka9voFEO+PVj9Qq9nfdc8
- IvdyNWg9IIRt4xnO4LYWa3et4NJGKvyVnBMKYXqhqRNKPRjAaCAoP8VHCSHqAcg8Zt
- vx//LIW18sL3w==
-Message-ID: <43d7298d-682b-5011-f76c-7d951fbfe065@denx.de>
-Date: Wed, 23 Aug 2023 22:31:09 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 45F63864DD
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 22:31:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EA2F43FA9F
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:31:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1692822689;
+ bh=VO7D5djsZdAF3wXb59K85/oTjgFnaW1aetIf9r3Wmos=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Me8ealCzCpH9znSuAS7WSVE1rmxS8hPiDeOvolaYg4HDNsXE8TcTXRSM6Nv57tp1H
+ ekrabNs0cmMWSZOXS67n7yDbqCCs6knM4L4zeUVvcfuVTW56RyqLP8KoAHszuSydDI
+ yx2/sBLam5nnJAfDhnWui1gi3msBfuKKSfokmhO819A86Uz6imL/b+Brpyle9NDN3a
+ k4BtHEFTj0hO7x9VOGzzTiT+yrxcEIygzSvfCvLfXzFaW4sg1pCUBEpbJZGPzlQYB6
+ bODy0u//30xJtVQH3LovX+zve3obVssVZq71YWjJnVe6DDb9oIswrlAbQzKzw5Kmrg
+ ByC6cIvm6jCiw==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4014945c0a9so68235e9.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:31:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692822689; x=1693427489;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VO7D5djsZdAF3wXb59K85/oTjgFnaW1aetIf9r3Wmos=;
+ b=hqOHTTurnpMmpyhpLFCXb396BdBjRMyl5iA7LPva5yrKzIr69hLE9EWm1kPY+hyXJr
+ do5NXUzLSJVpFjLBTCTYRflxxIMfKKwjRVB5fS70kOevaHuPOYH1C9g6TWQy+G4riXLW
+ 9c2w4+hFXm7RTkd+kaePRwdyx+P1iC2Sdcr+3VK4BRxZMHqGrgqFMZG4JR8zUa/cxYFq
+ joMXPBfLA5qvKa2U54sdtm+ZLSmmFTt9QT+wVrwu5za4m6qzK5GrrHk1NJlDah7w8WN1
+ lTQGNkp7cA9gEH/1hqQR3x71TfzipXRCCsqFTu1hYnOOeMocgVTEaPf9DrpaZDuAeveC
+ Z/kA==
+X-Gm-Message-State: AOJu0YxL28KqLHPd1zTYf0Tz061Rb3nzjV2rWK7jLxbQtdNARl0YIVlU
+ YdvOzPgPomyI7Z41o+cO8rws75r/u4r1YVpzSFBS0MR0elbsShOFjEFNAdbD6sOIMZ0IL8kHBEq
+ F7PaAqKnYNYqf/1/DV1vWTQ/sV4Q8RlKGV6xzyCE=
+X-Received: by 2002:a05:600c:3799:b0:3fe:d7b9:8251 with SMTP id
+ o25-20020a05600c379900b003fed7b98251mr10095489wmr.2.1692822689357; 
+ Wed, 23 Aug 2023 13:31:29 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGjM3U2GjgxleBdTiUPaCXAJNuWYGtNDpECojdVuTj6rUDw1Lri/mpFTfdc4ugrKxy00cwKww==
+X-Received: by 2002:a05:600c:3799:b0:3fe:d7b9:8251 with SMTP id
+ o25-20020a05600c379900b003fed7b98251mr10095471wmr.2.1692822688949; 
+ Wed, 23 Aug 2023 13:31:28 -0700 (PDT)
+Received: from [192.168.123.94] (ip-062-143-244-162.um16.pools.vodafone-ip.de.
+ [62.143.244.162]) by smtp.gmail.com with ESMTPSA id
+ p11-20020adfe60b000000b003176c6e87b1sm20114010wrm.81.2023.08.23.13.31.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Aug 2023 13:31:28 -0700 (PDT)
+Message-ID: <c1ed8f80-5752-df54-192d-c1b8c16e4f28@canonical.com>
+Date: Wed, 23 Aug 2023 22:32:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
+ Thunderbird/102.13.0
 Subject: Re: [PATCH 1/1] doc: describe TPL/VPL/SPL boot
-Content-Language: en-US
-To: =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Content-Language: en-US, de-DE
+To: =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
+ Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>,
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 References: <20230823195728.39438-1-heinrich.schuchardt@canonical.com>
  <20230823201400.m4l6hl7zy6x6srzd@pali>
-From: Marek Vasut <marex@denx.de>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 In-Reply-To: <20230823201400.m4l6hl7zy6x6srzd@pali>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
@@ -74,6 +108,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+
+
 On 8/23/23 22:14, Pali Rohár wrote:
 > On Wednesday 23 August 2023 21:57:28 Heinrich Schuchardt wrote:
 >> +Booting from TPL/SPL
@@ -91,14 +127,32 @@ On 8/23/23 22:14, Pali Rohár wrote:
 > 
 > This is not truth. SPL loads TPL. Or at least it was about year ago for powerpc plat.
 
-It goes both ways.
-- It can be either TPL as the Tiny Program Loader, usually hand-rolled 
-in assembly, used e.g. on OneNAND devices to fit into the OneNAND memory 
-mapped window and used to load the next stage (SPL) from that OneNAND 
-memory into SoC SRAM, and then jump to that next stage.
-- It can be SPL that loads TPL as Tertiary Program Loader , apparently 
-on PPC.
+Thanks for reviewing.
 
+Cf. doc/arch/sandbox/sandbox.rst
+
+For roc-cc-rk3328_defconfig TPL is much smaller than SPL:
+
+78224 spl/u-boot-spl-nodtb.bin
+20744 tpl/u-boot-tpl-nodtb.bin
+
+For P2020RDB-PC_NAND_defconfig SPL is much smaller than TPL:
+
+63624 tpl/u-boot-tpl-nodtb.bin
+4096 spl/u-boot-spl-nodtb.bin
+
+If some boards are running TPL->SPL and others SPL->TPL, we really have 
+a naming convention issue. We cannot expect any user to understand such 
+a confusion.
+
+Looking at the MAINTAINER file it seems that POWERPC should be set to 
+orphaned.
+
+Best regards
+
+Heinrich
+
+> 
 >> +VPL
 >> +   Optional verification step, which can select one of several SPL binaries,
 >> +   if A/B verified boot is enabled. Implementation of the VPL logic is
@@ -109,5 +163,3 @@ on PPC.
 >> +   load other firmware components.
 > 
 > SPL initializes NAND then loads TPL from NAND, TPL initialize DDR and then loads U-Boot.
-
-Nope.
