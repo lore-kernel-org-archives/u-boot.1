@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B141DEE49A0
-	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7413DEE49A0
+	for <u-boot@archiver.kernel.org>; Wed, 23 Aug 2023 11:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06D37864B6;
-	Wed, 23 Aug 2023 13:42:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 87B19864B6;
+	Wed, 23 Aug 2023 13:46:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ikeDztgq";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B1D82864CC; Wed, 23 Aug 2023 13:42:55 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692791183;
+	bh=jXrOtlGRhFgWxp86ZyMwMKrb7eLxB2aQOzdJDoOwbRw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=yXHaSMr5jeF+VLZJ/H7zr7SW0J6xDXD/OO25nKHv20Kl9gzQLjkAP+3AKisSpcJyV
+	 DC8O+Q3Xv8cYuJGC6yA2303Br7DTnHd46A+ZVciMqzgeIUsSXeoGsSB+8WHKRM6RS0
+	 9F7H4BLsWFZMFUIQUraqwSJA4Xk80QLLyLAXJrTzc74/C7P6eEF2HNyzZPfhrgDEps
+	 9ci0yu9K7S61mbemTpJk9rLm1UScsaA1EFzIJv3bOl3ti+GtsL2tqEFr0DTNXCXQRl
+	 9RvvuMXFB8DjIlAVxoSqi6Rx+oSzla4s4ke3ilPRVDuLtCxkQbMv3oGIeILbWedgVM
+	 /WVnYWJ8L7pcg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F98C86406
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 13:42:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37NBgmKS078599;
- Wed, 23 Aug 2023 06:42:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692790968;
- bh=1s7E3SR2CwM+YMU4ZDoW/oR4xLQ4TQr4zRVoeucqkwE=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=ikeDztgq9X/iW3/aQjKUxXD0JHF7cSX7XPidkJ/Ggbr8ZAP1LUHsRR+ZH6VnJfprP
- soXQ20MHlSCUofwUTCW6DWba/rdZDj/N4NM3H97UVE7LubqFGQ/ump6U0kgT6LT6xT
- Coq9Y7XsIDRGgtXiOp9CSVkltR/n/6E2IhCr3raY=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37NBgm4T063081
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Aug 2023 06:42:48 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Aug 2023 06:42:47 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Aug 2023 06:42:47 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37NBglsm100648;
- Wed, 23 Aug 2023 06:42:47 -0500
-Date: Wed, 23 Aug 2023 06:42:47 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Simon Glass <sjg@chromium.org>
-CC: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Bryan
- <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH V4 1/8] env_default: Allow CONFIG_EXTRA_ENV_TEXT to
- override CFG_EXTRA_ENV_SETTINGS
-Message-ID: <20230823114247.jzs7ivbnpwtzay7e@gumming>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-2-nm@ti.com>
- <CAPnjgZ0p5YkgvYM_F0j97bvAoM1qieafyjFQ_neyUoDuNFyN2g@mail.gmail.com>
- <20230822233358.geaqdn2vi34a5no2@uniformly>
- <CAPnjgZ1HhohnyqxnxSXUSwJh=UkH+Ot3nowwXg8JW=3BFuZkxQ@mail.gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7BC46864A6;
+ Wed, 23 Aug 2023 13:46:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1692791182;
+ bh=jXrOtlGRhFgWxp86ZyMwMKrb7eLxB2aQOzdJDoOwbRw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=gxMlvkzKiLekF+WAW8FVdFYTPpcDzT6Xcf/zIAbJnq07UDKkiCF4I3/DEEUdyq5dL
+ ByPEAWKS2Zdvzdia7i+HHl/qRcEXJ4wk241/QBy8O+d0N7mmKFS6cIOq9L1yFN678i
+ FkZcz72lTS80J6fbMrJYxW7GiWlWYNdb2/nAszbLElkWPHaImE2/94EU6/Oh8jmmKg
+ TpL7ytK0rPECc/0eQH0erlUrCix4hb94byRMBwde0E7pYEXIfYeTd6JbgKbeUuuLwo
+ 4aXgkH+qgED1gbD/9flidxqp2za9zWF53dC/6IvB8fF7YRogi6zROmJxqxLn+SCxN1
+ pMEZRIZ4EHIVg==
+Message-ID: <d396324b-9ba7-b791-51e4-668cf82233b9@denx.de>
+Date: Wed, 23 Aug 2023 13:46:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1HhohnyqxnxSXUSwJh=UkH+Ot3nowwXg8JW=3BFuZkxQ@mail.gmail.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v1 1/1] usb: host: tegra: implement dts based xcvr setup
+Content-Language: en-US
+To: Thierry Reding <thierry.reding@gmail.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20230819150619.76455-1-clamor95@gmail.com>
+ <20230819150619.76455-2-clamor95@gmail.com>
+ <a0d1a60d-6a95-abf5-4892-ae1269c478eb@denx.de>
+ <CAPVz0n3mmd1doFA=nbMZVC3Tm+aM9FUhGyZ8AEjtvC0k0TM9Rw@mail.gmail.com>
+ <8c8b9849-9960-4f88-ef93-5a41b6d006bb@denx.de>
+ <7F964CFB-304C-41F4-81AA-52C412965CB1@gmail.com>
+ <678cdb50-6d4a-3e04-1c10-b8d410d76a9f@denx.de> <ZOXkLmctTCKWx84G@orome>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <ZOXkLmctTCKWx84G@orome>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,98 +76,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20:34-20230822, Simon Glass wrote:
-> Hi Nishanth,
+On 8/23/23 12:49, Thierry Reding wrote:
+> On Sun, Aug 20, 2023 at 09:10:17PM +0200, Marek Vasut wrote:
+>> On 8/20/23 20:32, Svyatoslav Ryhel wrote:
+>>> 20 серпня 2023 р. 21:14:15 GMT+03:00, Marek Vasut <marex@denx.de> написав(-ла):
+>>>> On 8/20/23 09:13, Svyatoslav Ryhel wrote:
+>>>>> 20 серпня 2023 р. 05:23:14 GMT+03:00, Marek Vasut <marex@denx.de> написав(-ла):
+>>>>>> On 8/19/23 17:06, Svyatoslav Ryhel wrote:
+>>>>>>> Some devices (like ASUS TF201) may not have fuse based xcvr setup
+>>>>>>> which will result in not working USB line. To fix this situation
+>>>>>>> allow xcvr setup to be performed from device tree values if
+>>>>>>> nvidia,xcvr-setup-use-fuses is not defined.
+>>>>>>>
+>>>>>>> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF201
+>>>>>>
+>>>>>> I would hope so. Usually T-B tags are not added by the patch author, but that's a detail, and here it has the added model value, so keep it.
+>>>>>>
+>>>>>>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>>>>>>> ---
+>>>>>>>      drivers/usb/host/ehci-tegra.c | 53 +++++++++++++++++++++++++++++++----
+>>>>>>>      1 file changed, 48 insertions(+), 5 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/drivers/usb/host/ehci-tegra.c b/drivers/usb/host/ehci-tegra.c
+>>>>>>> index 2cf1625670..f24baf8f0c 100644
+>>>>>>> --- a/drivers/usb/host/ehci-tegra.c
+>>>>>>> +++ b/drivers/usb/host/ehci-tegra.c
+>>>>>>> @@ -81,6 +81,8 @@ struct fdt_usb {
+>>>>>>>         enum periph_id periph_id;/* peripheral id */
+>>>>>>>         struct gpio_desc vbus_gpio;     /* GPIO for vbus enable */
+>>>>>>>         struct gpio_desc phy_reset_gpio; /* GPIO to reset ULPI phy */
+>>>>>>> +    bool xcvr_setup_use_fuses; /* Indicates that the value is read from the on-chip fuses */
+>>>>>>> +    u32 xcvr_setup; /* Input of XCVR cell, HS driver output control */
+>>>>>>>      };
+>>>>>>>        /*
+>>>>>>> @@ -464,10 +466,21 @@ static int init_utmi_usb_controller(struct fdt_usb *config,
+>>>>>>>                 /* Recommended PHY settings for EYE diagram */
+>>>>>>>                 val = readl(&usbctlr->utmip_xcvr_cfg0);
+>>>>>>> -            clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+>>>>>>> -                            0x4 << UTMIP_XCVR_SETUP_SHIFT);
+>>>>>>> -            clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+>>>>>>> -                            0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
+>>>>>>> +
+>>>>>>> +            if (!config->xcvr_setup_use_fuses) {
+>>>>>>> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+>>>>>>> +                                    config->xcvr_setup <<
+>>>>>>> +                                    UTMIP_XCVR_SETUP_SHIFT);
+>>>>>>> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+>>>>>>> +                                    config->xcvr_setup <<
+>>>>>>> +                                    UTMIP_XCVR_SETUP_MSB_SHIFT);
+>>>>>>> +            } else {
+>>>>>>> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MASK,
+>>>>>>> +                                    0x4 << UTMIP_XCVR_SETUP_SHIFT);
+>>>>>>
+>>>>>> What is this hard-coded value ?
+>>>>>>
+>>>>>
+>>>>> 0x4 and 0x3 (not same) but those are not in the device tree. Mainline linux
+>>>>> driver seems not set this at all if use_fuses is enabled but I decided to keep
+>>>>> original setup just to not cause regressions.
+>>>>>
+>>>>> https://github.com/clamor-s/linux/blob/transformer/drivers/usb/phy/phy-tegra-usb.c#L587-L590
+>>>>>
+>>>>>> Why not place this value into config->xcvr_setup in e.g. probe() and drop this if/else statement ?
+>>>>>>
+>>>>>
+>>>>> Because config->xcvr_setup should matter only if use_fuses is disabled
+>>>>
+>>>> Can it matter always instead ?
+>>>>
+>>>
+>>> No, it cannot. You are inversing hw design. Xcvr_setup matters only if use_fuses is disabled. If use_fuses is on (which is default state) xcvr values are taken from chip fuse.
+>>
+>> The way I read this block of code is, some value is written into the
+>> register if config->xcvr_setup_use_fuses is false, another value if
+>> config->xcvr_setup_use_fuses is true . Why not do this determination once in
+>> probe and then just program the appropriate value instead ?
+>>
+>>>>>>> +                    clrsetbits_le32(&val, UTMIP_XCVR_SETUP_MSB_MASK,
+>>>>>>> +                                    0x3 << UTMIP_XCVR_SETUP_MSB_SHIFT);
+>>>>>>> +            }
+>>>>>>> +
+>>>>>>>                 clrsetbits_le32(&val, UTMIP_XCVR_HSSLEW_MSB_MASK,
+>>>>>>>                                 0x8 << UTMIP_XCVR_HSSLEW_MSB_SHIFT);
+>>>>>>>                 writel(val, &usbctlr->utmip_xcvr_cfg0);
+>>>>>>> @@ -522,7 +535,9 @@ static int init_utmi_usb_controller(struct fdt_usb *config,
+>>>>>>>         setbits_le32(&usbctlr->utmip_bat_chrg_cfg0, UTMIP_PD_CHRG);
+>>>>>>>         clrbits_le32(&usbctlr->utmip_xcvr_cfg0, UTMIP_XCVR_LSBIAS_SE);
+>>>>>>> -    setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
+>>>>>>> +
+>>>>>>> +    if (config->xcvr_setup_use_fuses)
+>>>>>>> +            setbits_le32(&usbctlr->utmip_spare_cfg0, FUSE_SETUP_SEL);
+>>>>>>>         /*
+>>>>>>>          * Configure the UTMIP_IDLE_WAIT and UTMIP_ELASTIC_LIMIT
+>>>>>>> @@ -843,6 +858,8 @@ static const struct ehci_ops tegra_ehci_ops = {
+>>>>>>>      static int ehci_usb_of_to_plat(struct udevice *dev)
+>>>>>>>      {
+>>>>>>>         struct fdt_usb *priv = dev_get_priv(dev);
+>>>>>>> +    u32 usb_phy_phandle;
+>>>>>>> +    ofnode usb_phy_node;
+>>>>>>>         int ret;
+>>>>>>>         ret = fdt_decode_usb(dev, priv);
+>>>>>>> @@ -851,6 +868,32 @@ static int ehci_usb_of_to_plat(struct udevice *dev)
+>>>>>>>         priv->type = dev_get_driver_data(dev);
+>>>>>>>      +  ret = ofnode_read_u32(dev_ofnode(dev), "nvidia,phy", &usb_phy_phandle);
+>>>>>>> +    if (ret) {
+>>>>>>> +            log_debug("%s: required usb phy node isn't provided\n", __func__);
+>>>>>>> +            priv->xcvr_setup_use_fuses = true;
+>>>>>>> +            return 0;
+>>>>>>> +    }
+>>>>>>> +
+>>>>>>> +    usb_phy_node = ofnode_get_by_phandle(usb_phy_phandle);
+>>>>>>> +    if (!ofnode_valid(usb_phy_node)) {
+>>>>>>> +            log_err("%s: failed to find usb phy node\n", __func__);
+>>>>>>> +            return -EINVAL;
+>>>>>>> +    }
+>>>>>>
+>>>>>> dev_read_phandle() should replace the above
+>>>>>>
+>>>>>
+>>>>> Goal of this piece is to get phy of_node by the phandle provided in the
+>>>>> controller node. Controller node has not only single nvidia,phy phandle
+>>>>> reference but also clock and reset reference. How will dev_read_phandle
+>>>>> return me a phandle of "nvidia,phy"?
+>>>>>
+>>>>> https://github.com/clamor-s/u-boot/blob/master/arch/arm/dts/tegra30.dtsi#L798-L834
+>>>>>
+>>>>>>> +    priv->xcvr_setup_use_fuses = ofnode_read_bool(
+>>>>>>> +            usb_phy_node, "nvidia,xcvr-setup-use-fuses");
+>>>>>>
+>>>>>> dev_read_bool()
+>>>>>>
+>>>>>
+>>>>> This value is set in phy node, not controllers unfortunately.
+>>>>
+>>>> The question that comes to mind is, would it make sense to implement a PHY driver similar to what e.g. imx does -- drivers/phy/phy-imx8mq-usb.c -- for the tegra PHY ?
+>>>
+>>> Yes, but not by me or at least not now. I have already invested too much of my time and effort in this and I will not invest even more into refactoring all this code into 2 separate drivers. Existing code satisfies me apart from this small tweak.
+>>
+>> The PHY driver implementation is trivial, example is the imx driver above,
+>> then just call phy on/off in the right place. Linux also has a PHY driver
+>> for tegra, maybe you can reuse it ?
 > 
-> On Tue, 22 Aug 2023 at 17:34, Nishanth Menon <nm@ti.com> wrote:
-> >
-> > On 17:16-20230822, Simon Glass wrote:
-> > > Hi Nishanth,
-> > >
-> > > On Tue, 22 Aug 2023 at 12:41, Nishanth Menon <nm@ti.com> wrote:
-> > > >
-> > > > CFG_EXTRA_ENV_SETTINGS is set in common board config files, This allows
-> > > > for majority of the settings to be set in a common manner. However, the
-> > > > minor variations between various board can be addressed by the board.env
-> > > > files. The board.env files are converted into CONFIG_EXTRA_ENV_TEXT.
-> > > >
-> > > > However, this creates a minor problem. For example:
-> > > > distro_bootcmd.h and used by ti_armv7_common.h uses it as:
-> > > >  #define BOOT_TARGET_DEVICES(func) \
-> > > >         func(MMC, mmc, 0) \
-> > > >         func(MMC, mmc, 1)
-> > >
-> > > OK, but we should be using bootstd for new boards.
-> >
-> > Agreed, and I think I am using bootstd[1] unless I am missing something
-> > completely.
-> 
-> Then why do you have BOOT_TARGET_DEVICES() ?
+> The Linux USB PHY driver is something that in retrospect I would've done
+> differently. The problem is that it shares resources (registers and
+> clock/reset lines) with the USB controller and it's caused a lot of
+> headaches to support it in Linux.
 
-we used to do distro_boot as I recollect right.. This stuff is still in
-the process of migration.. And I think this patch aids that ;)
+Clock and reset are not a problem, since they are abstracted by clock 
+and reset subsystems respectively. Shared registers can be handled by 
+syscon too. As far as I can tell, the chipidea HDRC core should be well 
+isolated, wherever I came in contact with it, it was. Which shared 
+registers are you talking about ?
 
-> 
-> >
-> > we still have a problem with EXTRA_ENV_SETTINGS and ENV_TEXT. This patch
-> > helps enforce priority of ENV_TEXT.
-> >
-> > But overall, I agree that we need to move off from EXTRA_ENV to text..
-> > probably in stages, I guess.
-> 
-> OK good
-> 
-> >V
-> > > >
-> > > > Which in turn generates:
-> > > > boot_targets=mmc0 mmc1
-> > > >
-> > > > And this probably works fine for most boards, However when the
-> > > > boot_targets need to be reversed, the preferred behavior would have been
-> > > > to define it in board.env file as:
-> > > > boot_targets=mmc1 mmc0
-> > > >
-> > > > By changing the order of the inclusion, we allow for the
-> > > > CONFIG_EXTRA_ENV_TEXT to have a higher priority in the definition.
-> > > >
-> > > > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > > > ---
-> > > > Cc: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > New patch
-> > > >
-> > > >  include/env_default.h | 6 +++---
-> > > >  1 file changed, 3 insertions(+), 3 deletions(-)
-> > > >
-> > > > diff --git a/include/env_default.h b/include/env_default.h
-> > > > index b16c22d5a28c..714dfa9e845e 100644
-> > > > --- a/include/env_default.h
-> > > > +++ b/include/env_default.h
-> > > > @@ -112,12 +112,12 @@ const char default_environment[] = {
-> > > >  #ifdef CONFIG_MTDPARTS_DEFAULT
-> > > >         "mtdparts="     CONFIG_MTDPARTS_DEFAULT         "\0"
-> > > >  #endif
-> > > > +#ifdef CFG_EXTRA_ENV_SETTINGS
-> > > > +       CFG_EXTRA_ENV_SETTINGS
-> > > > +#endif
-> > > >  #ifdef CONFIG_EXTRA_ENV_TEXT
-> > > >         /* This is created in the Makefile */
-> > > >         CONFIG_EXTRA_ENV_TEXT
-> > > > -#endif
-> > > > -#ifdef CFG_EXTRA_ENV_SETTINGS
-> > > > -       CFG_EXTRA_ENV_SETTINGS
-> > > >  #endif
-> > >
-> > > and text environment
-> >
-> > Could you clarify what I am missing?
-> 
-> I'm not sure about that. I have no objection to this patch.
+> Maybe within U-Boot this isn't such a big deal, but for Linux I would've
+> preferred a single driver that is both a USB controller and a USB PHY. I
+> suppose it could expose some sort of PHY object for abstraction, but
+> that would probably be a bit of overkill since this is really only used
+> within the USB controller driver.
 
-
-Is there anything I can do to improve this patch for your reviewed-by ?
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+This isn't about providing a PHY abstraction to the outside, but about 
+keeping the CI HDRC control code (which is basically EHCI-HCD) separate 
+from multiple disparate PHYs which are separate IPs.
