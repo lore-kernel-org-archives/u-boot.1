@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1355CC3DA66
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A57C3DA66
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CDFC864BA;
-	Thu, 24 Aug 2023 05:27:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B01A6864B4;
+	Thu, 24 Aug 2023 05:29:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gUA4/X5k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ow3itMMe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0CC8864BA; Thu, 24 Aug 2023 05:27:23 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2442C80727; Thu, 24 Aug 2023 05:29:30 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F93186556
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:27:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F370864DD
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:29:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3R9Nn102860;
- Wed, 23 Aug 2023 22:27:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692847629;
- bh=KwuKf6I0rM5kJ0zAPZnBc0ILhBKjJaswItpeoNZoFYQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=gUA4/X5k1hVUNqZ7c8ZzoB1sdKEEf/sXFt8AEO+/rgE3co7wByC55KX7mZQQcCV8t
- 8VWigS7DZBeA9w/yKE73XxCA602gCKrg+eVrzG/lr4UWSAL9eONcWVXSePXsBpj0eI
- bj0B2RDU5ZRSgZlU7W/Ag768fHtnWx8/j3dr57jM=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3R9Wp008371
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 23 Aug 2023 22:27:09 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Aug 2023 22:27:09 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Aug 2023 22:27:09 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3R9x3026638;
- Wed, 23 Aug 2023 22:27:09 -0500
-Date: Wed, 23 Aug 2023 22:27:09 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Simon Glass <sjg@google.com>
-CC: Tom Rini <trini@konsulko.com>, Neha Francis <n-francis@ti.com>, Bryan
- <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Heinrich Schuchardt
- <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-Message-ID: <20230824032709.phneggflsw2ps2dv@reanalyze>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-9-nm@ti.com>
- <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
- <20230823171502.GQ3953269@bill-the-cat>
- <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
- <20230824001848.vgzl7rcphic3gu2n@carnival>
- <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jpewhacker@gmail.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2bcc187e0b5so58146901fa.1
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:29:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692847767; x=1693452567;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jhUYjVfW4Prq/Ym/d27VmZ+BGqoDf3e78BP82khjlj4=;
+ b=ow3itMMeeYR/hYyYYiqpGLbBDYvYHut1EiUftUwC1A0j1JNG/ZPY6Ujy5umNPrUgqx
+ OvhYv8LmBV9TLNhiMji2DOsq1vaHA117lU3w1LfPaKAQQpi5MEOjGRuYwDeTJKg7JPzy
+ Uo50ep4upLJOrngld9eNqvgRBfnypArw/G/7j3EA8C1WyeJia2C1JeXJ6BxvSWVG0WHR
+ /+IGVkKm/0eD+iMQBd/7Szv8QveLFcXfl9rEPM+vLB+MTQFfrbxzFljxjIfHhSfMI7zr
+ BZedIeqRaa0+cp5N1rrQWpOiDg4gtR8FdredEIBogIOkB+djLcUdMgjYwnIHpTWrY0WS
+ LpXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692847767; x=1693452567;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jhUYjVfW4Prq/Ym/d27VmZ+BGqoDf3e78BP82khjlj4=;
+ b=HV/8OGlalvEPprtKlhHckiufPC6QchVP7no7CfvKi850sdXOtTN8wLIOsY7zF/mIs6
+ 6XP/q6IgrxUYBlzUoOaccySKkbGRpFt8nfi0oTzjmUBg5VGpFP0m13kZjLSjJ4a8QwxQ
+ zoO0jvHzKMKu/12IYQ5o0V9/XKqIh19wImKqtfRpXaky5mpQGBjAmS8Mm9JwSm40FFu2
+ VgPKjq3IXigYgEKisJ42702w7eafGYCNn8c7kZxtt1KJZgjjhc4ZioZ/lOf72kQZvk2T
+ p6RrJ3lvnhyuHR/qiErfGhD9JsrikDzDtN6RPyuR7KH31CL40tFjZ+iZ8WltEB8Cetow
+ m4Dw==
+X-Gm-Message-State: AOJu0Yzt6VAV0Pr25LIRsC4hSQZwJF03yCZ0aUTOhyFG7uvwoWZ8OvcV
+ 9OCKcphDDR/sjBcSpPCRURePtDcN+X6Nr5/wbbliLx5k
+X-Google-Smtp-Source: AGHT+IEz5X88ue1xhJT4jBESll4Psy55hH+xvxuR3KSEcuwPmJ4cnBwXjkMwsHej7posWOpZDSo44Sl6ypDsOiHgnrQ=
+X-Received: by 2002:a2e:9656:0:b0:2b9:aa4d:3728 with SMTP id
+ z22-20020a2e9656000000b002b9aa4d3728mr10207487ljh.29.1692847766386; Wed, 23
+ Aug 2023 20:29:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230815162726.1524958-1-JPEWhacker@gmail.com>
+ <20230823164755.2874792-1-JPEWhacker@gmail.com>
+ <20230823164755.2874792-4-JPEWhacker@gmail.com>
+ <CAPnjgZ3Zorddu5krWzPjdZ34LcDUgP47PLmWGZp1MRDpYxG9mA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3Zorddu5krWzPjdZ34LcDUgP47PLmWGZp1MRDpYxG9mA@mail.gmail.com>
+From: Joshua Watt <jpewhacker@gmail.com>
+Date: Wed, 23 Aug 2023 21:29:14 -0600
+Message-ID: <CAJdd5Gb-dg2grdYLkoWwozq9JGEbktCnuzH3pOro4x7mipeuyw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/8] tests: gpt: Remove test order dependency
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Enric Balletbo i Serra <eballetb@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,94 +89,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 21:01-20230823, Simon Glass wrote:
-> Hi Nishanth,
-> 
-> On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
+On Wed, Aug 23, 2023 at 5:59=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Joshua,
+>
+> On Wed, 23 Aug 2023 at 10:48, Joshua Watt <jpewhacker@gmail.com> wrote:
 > >
-> > On 17:57-20230823, Simon Glass wrote:
-> > [...]
-> > > > This is how we have a common bit of rST for how to build N boards,
-> > > > without having to do a literal copy and paste N times.
-> > >
-> > > How about using this?
-> > >
-> > > https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
+> > Re-create a clean disk image for each test to prevent modifications fro=
+m
+> > one test affecting another
 > >
-> > I was not able to succeed with complex includes such as:
-> > https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rst?plain=1#L89
-> >
-> > am62x complete build procedure defined once and reused in other am62x
-> > platforms.. But the am62x build procedure itself is reused from common
-> > k3 build steps.
-> 
-> I followed through these instructions. I find the env vars quite
-> confusing, since I don't really know what it is doing. It feels like a
-> script:
-> 
-> do $a $b $c
-> do $f $e
-> 
-> it is pretty hard to follow. I think it would be better to write
-> everything out in full for each board, like rockchip does.
+> > Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+> > ---
+> >  test/py/tests/test_gpt.py | 20 ++++++++------------
+> >  1 file changed, 8 insertions(+), 12 deletions(-)
+>
+> I suppose this is OK, but is it expensive in terms of time?
 
-Unfortunately, this is a few major steps that is repeated for
-(currently):
-	AM62x SK
-	Toradex Verdin
-	(pending: beagleplay - )
-	(once all the dust clears up, hopefully phytec)
-	SK-LP
-	....
+There wasn't a noticeable slowdown in test execution time on my
+(admittedly powerful) workstation.
 
-I have no reasonable way to offer to keep them all in sync.
-	https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
-is kind of why I went down this path.S
-
-> 
-> Some other minor feedback:
-> 
-> - The 'make' lines should really have -j $(nproc) added
-
-Different styles of shells..
-
-> - The $ signs at the start of each command in the docs are a pain
-> since it stops me copying the commands into the terminal - can you
-> remove them?
-
-hehe.. "dont" let people blindly copy paste without understanding what is
-going on argument?
-
-If folks are OK, I sure can send a different patch series for that.. (or
-maybe motivate someone to do that instead of me ;))
-
-
-> - It doesn't build for me:
-> 
->   BINMAN  .binman_stamp
-> Image 'ti-dm' is missing external blobs and is non-functional: blob-ext
-> 
-> /binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f):
->    Missing blob
-> 
-> Some images are invalid
-> make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1115:
-> .binman_stamp] Error 103
-> make[1]: Leaving directory '/tmp/b/play'
-> make: *** [Makefile:177: sub-make] Error 2
-
-
-^^ Neha: This is what I was complaining about.
-
-https://u-boot.readthedocs.io/en/latest/board/ti/am62x_sk.html?highlight=am62#sources
-
-source: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
-is missing, we never used to break build previously binman converted now does.
-
-I am wondering if I need to explicitly call out git clone instructions
-out..
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> Regards,
+> Simon
