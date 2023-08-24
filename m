@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827D0C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D7A3C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:59:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67AC586A23;
+	by phobos.denx.de (Postfix) with ESMTP id A8E6886A51;
 	Thu, 24 Aug 2023 21:56:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eMdPnjXf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MlrdRZRX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3C3486A1B; Thu, 24 Aug 2023 21:56:21 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id B2B49869E9; Thu, 24 Aug 2023 21:56:22 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDDEB868D0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 862DF869E5
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-79264ca4b34so7684039f.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:18 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7927f36120cso1483039f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692906977; x=1693511777;
+ d=chromium.org; s=google; t=1692906978; x=1693511778;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NCcMny4bayrZo9YHzO0EWGTNgSgc4KSuspR92K47bDk=;
- b=eMdPnjXfUXtzZro2xmQKt+GRdKXn1TXed8YqzwLiw/qlchm9O27gH4QWgHCbeqqTDO
- lOR+rpDYEqeBydZENexKiDGc1Vt0BGdVJgi4L5npDJrIfuuGdR7SG4Xw+cSUlZqCJXLm
- uo5A9q9/Vs1nfg6iWKeWpIsAavFT57+CVE0QI=
+ bh=JEuypTXF35O4EMeI9lCzfAZATvhNKpQlPnlrIIuF+vM=;
+ b=MlrdRZRXMYxvsoWK+zYmp7XtJbJxvhdwP4t0qN2eJxUXKyIweLqARI0YBAjaWZHUa2
+ /bhoj2CSPtzEEIiIIZG+omPyxrERbz1dsU0nT10ueUTV4/HkxJI5ysW915Gzyg7hNlE1
+ 2au2L14dmFkdeGlhkLa595DJ7vIskBVooBf9c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692906977; x=1693511777;
+ d=1e100.net; s=20221208; t=1692906978; x=1693511778;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NCcMny4bayrZo9YHzO0EWGTNgSgc4KSuspR92K47bDk=;
- b=HBsN2zVzI8K3E8HEWQswPGDepKHzRgbkUW6twN+8SoSVGq1g71MdmsygzEfAHnPDVt
- Qy/cIiodtUHZeYnHoApBI2W2Hi6I26XeMGTBxmZGjjt1tue9tdczo/r0YI6gYeGq3lRi
- Cxx9/YPrhWG9NAJ5w/oASBdn6etUUi2EaCYDWe9RvPfmA2Rdz32jsvZ2JhqHpt+j8GXE
- Y0qP5OUptCKdbNzou1YHGm5lF06c53Q66H9j8uAjoRtEqn4J4xsWFc2xT4sZCeswUgte
- Jxjv50EimElh56lzv2ue74CNECNtoKktx7C5WGnfInLJZxsYSCJ+MiAsm8B925r7c4tf
- Mohg==
-X-Gm-Message-State: AOJu0YylWL8lG0RSZd84IboanHbz9cZ3DvY8xT42laadDvUC5wfoAodn
- qcqC3kOXd5LgFQ9kj1wCL1cVEa/H2Z5bGk7LS2Y=
-X-Google-Smtp-Source: AGHT+IEh7iBKFhIc+U0RdSOmFSbGfLIhjZT9RWYIxlTKCmxWKGkV+ecZxtTJS/MzTbxgz+0mKXHp9A==
-X-Received: by 2002:a6b:db0a:0:b0:790:6629:b222 with SMTP id
- t10-20020a6bdb0a000000b007906629b222mr7168819ioc.5.1692906977559; 
- Thu, 24 Aug 2023 12:56:17 -0700 (PDT)
+ bh=JEuypTXF35O4EMeI9lCzfAZATvhNKpQlPnlrIIuF+vM=;
+ b=CkOmY4mUugT7mmYP05p01ijSbXSZn8ukX5zf2YjND+t7ydny5GQlzMOKOUiNt5mtrS
+ qrXooEP3x84QD0FFRzGtraBoO6+4H/DZgHL7onneYyaa64JtEcMjnFHcEBsMR9NTm0pT
+ H5GRBrZhnmKwG+vTvZUQu8GlD/uIzpO4FD/Pwc42Se2WjeGyaqRmezpOpuJSUWKIL+rv
+ VTd41rfM0pHyZJsSolOnuKGBvs4iiFLuLycyuOFnHvsHO+1daMutxyvCjZ9tVSquOLm5
+ ejHiKhKfn/T+W03VvEJnb3npYIRT0ciCE+QZcRkc3Hvr8Wr9vhD9dX6RSgGzkueGVG2r
+ pmUA==
+X-Gm-Message-State: AOJu0YzFfejD4mDW0tFhQm8E0UcIJ0hZZOsUf8hgetxXOsmmS8Kgn+vY
+ o4p12goBlu6MLwQYofrj29fXUfuLl03iCRs6gOo=
+X-Google-Smtp-Source: AGHT+IHaSBgeqfCI77J/xQslsoL4C65/zZlF+TTkYptuPFoOKdZttLw0izSgEfKMpHL3JFRWwaFYyA==
+X-Received: by 2002:a6b:da09:0:b0:787:34d:f1ea with SMTP id
+ x9-20020a6bda09000000b00787034df1eamr7142551iob.8.1692906978211; 
+ Thu, 24 Aug 2023 12:56:18 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:56:17 -0700 (PDT)
+ Thu, 24 Aug 2023 12:56:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH v2 22/23] bootstd: cros: Allow detection of any kernel
- partition
-Date: Thu, 24 Aug 2023 13:55:45 -0600
-Message-ID: <20230824195553.1685996-23-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 23/23] CI: Add ChromiumOS utilities
+Date: Thu, 24 Aug 2023 13:55:46 -0600
+Message-ID: <20230824195553.1685996-24-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
 References: <20230824195553.1685996-1-sjg@chromium.org>
@@ -88,180 +87,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing ChromiumOS bootmeth only supports reading a single kernel
-partition, either 2 or 4. In fact there are normally two options
-available.
-
-Use the GUID to detect kernel partitions, with the BOOTMETHF_ANY_PART
-flag, so that bootstd does not require a valid filesystem before calling
-the bootmeth.
-
-Tidy up and improve the logging while we are here.
+We need cgpt and futility for building test images. Add them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 ---
 
-Changes in v2:
-- Rebase to -next
+(no changes since v1)
 
- boot/Kconfig         |  2 ++
- boot/bootmeth_cros.c | 48 +++++++++++++++++++++++++++-----------------
- test/boot/bootflow.c |  5 +++--
- 3 files changed, 35 insertions(+), 20 deletions(-)
+ tools/docker/Dockerfile | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 5e2d4286aeaa..b385902b53fe 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -466,6 +466,8 @@ config BOOTMETH_CROS
- 	bool "Bootdev support for Chromium OS"
- 	depends on X86 || ARM || SANDBOX
- 	default y if !ARM
-+	select PARTITION_TYPE_GUID
-+	select PARTITION_UUIDS
- 	help
- 	  Enables support for booting Chromium OS using bootdevs. This uses the
- 	  kernel A slot and obtains the kernel command line from the parameters
-diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
-index 1776fb1838c6..20e0b1e89c36 100644
---- a/boot/bootmeth_cros.c
-+++ b/boot/bootmeth_cros.c
-@@ -16,16 +16,19 @@
- #include <bootmeth.h>
- #include <display_options.h>
- #include <dm.h>
-+#include <efi.h>
- #include <malloc.h>
- #include <mapmem.h>
- #include <part.h>
- #include <linux/sizes.h>
- #include "bootmeth_cros.h"
- 
-+static const efi_guid_t cros_kern_type = PARTITION_CROS_KERNEL;
-+
- /*
-  * Layout of the ChromeOS kernel
-  *
-- * Partitions 2 and 4 contain kernels
-+ * Partitions 2 and 4 contain kernels with type GUID_CROS_KERNEL
-  *
-  * Contents are:
-  *
-@@ -145,13 +148,25 @@ static int scan_part(struct udevice *blk, int partnum,
- {
- 	struct blk_desc *desc = dev_get_uclass_plat(blk);
- 	struct vb2_keyblock *hdr;
-+	struct uuid type;
- 	ulong num_blks;
- 	int ret;
- 
-+	if (!partnum)
-+		return log_msg_ret("efi", -ENOENT);
-+
- 	ret = part_get_info(desc, partnum, info);
- 	if (ret)
- 		return log_msg_ret("part", ret);
- 
-+	/* Check for kernel partition type */
-+	log_debug("part %x: type=%s\n", partnum, info->type_guid);
-+	if (uuid_str_to_bin(info->type_guid, (u8 *)&type, UUID_STR_FORMAT_GUID))
-+		return log_msg_ret("typ", -EINVAL);
-+
-+	if (memcmp(&cros_kern_type, &type, sizeof(type)))
-+		return log_msg_ret("typ", -ENOEXEC);
-+
- 	/* Make a buffer for the header information */
- 	num_blks = PROBE_SIZE >> desc->log2blksz;
- 	log_debug("Reading header, blk=%s, start=%lx, blocks=%lx\n",
-@@ -167,6 +182,7 @@ static int scan_part(struct udevice *blk, int partnum,
- 
- 	if (memcmp(VB2_KEYBLOCK_MAGIC, hdr->magic, VB2_KEYBLOCK_MAGIC_SIZE)) {
- 		free(hdr);
-+		log_debug("no magic\n");
- 		return -ENOENT;
- 	}
- 
-@@ -340,24 +356,16 @@ static int cros_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 	struct vb2_keyblock *hdr;
- 	const char *uuid = NULL;
- 	struct cros_priv *priv;
--	int part, ret;
--
--	log_debug("starting, part=%d\n", bflow->part);
-+	int ret;
- 
--	/* We consider the whole disk, not any one partition */
--	if (bflow->part)
--		return log_msg_ret("max", -ENOENT);
-+	log_debug("starting, part=%x\n", bflow->part);
- 
--	/* Check partition 2 then 4 */
--	part = 2;
--	ret = scan_part(bflow->blk, part, &info, &hdr);
-+	/* Check for kernel partitions */
-+	ret = scan_part(bflow->blk, bflow->part, &info, &hdr);
- 	if (ret) {
--		part = 4;
--		ret = scan_part(bflow->blk, part, &info, &hdr);
--		if (ret)
--			return log_msg_ret("scan", ret);
-+		log_debug("- scan failed: err=%d\n", ret);
-+		return log_msg_ret("scan", ret);
- 	}
--	bflow->part = part;
- 
- 	priv = malloc(sizeof(struct cros_priv));
- 	if (!priv) {
-@@ -366,8 +374,8 @@ static int cros_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 	}
- 	bflow->bootmeth_priv = priv;
- 
--	log_info("Selected partition %d, header at %lx\n", bflow->part,
--		 (ulong)map_to_sysmem(hdr));
-+	log_debug("Selected partition %d, header at %lx\n", bflow->part,
-+		  (ulong)map_to_sysmem(hdr));
- 
- 	/* Grab a few things from the preamble */
- 	preamble = (void *)hdr + hdr->keyblock_size;
-@@ -381,8 +389,11 @@ static int cros_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 	ret = cros_read_info(bflow, uuid, preamble);
- 	preamble = NULL;
- 	free(hdr);
--	if (ret)
-+	if (ret) {
-+		free(priv->info_buf);
-+		free(priv);
- 		return log_msg_ret("inf", ret);
-+	}
- 	bflow->size = priv->body_size;
- 	bflow->state = BOOTFLOWST_READY;
- 
-@@ -437,6 +448,7 @@ static int cros_bootmeth_bind(struct udevice *dev)
- 	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
- 
- 	plat->desc = "ChromiumOS boot";
-+	plat->flags = BOOTMETHF_ANY_PART;
- 
- 	return 0;
- }
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index ae34370981cb..1ff2320c0365 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -983,9 +983,10 @@ static int bootflow_cros(struct unit_test_state *uts)
- 	ut_assert_nextlinen("Seq");
- 	ut_assert_nextlinen("---");
- 	ut_assert_nextlinen("  0  extlinux");
--	ut_assert_nextlinen("  1  cros         ready   mmc          2  mmc5.bootdev.whole       ");
-+	ut_assert_nextlinen("  1  cros         ready   mmc          2  mmc5.bootdev.part_2       ");
-+	ut_assert_nextlinen("  2  cros         ready   mmc          4  mmc5.bootdev.part_4       ");
- 	ut_assert_nextlinen("---");
--	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-+	ut_assert_skip_to_line("(3 bootflows, 3 valid)");
- 
- 	ut_assert_console_end();
- 
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 3d2b64a355f3..6e6ae9ebed40 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -39,6 +39,7 @@ RUN apt-get update && apt-get install -y \
+ 	binutils-dev \
+ 	bison \
+ 	build-essential \
++	cgpt \
+ 	clang-16 \
+ 	coreutils \
+ 	cpio \
+@@ -115,6 +116,8 @@ RUN apt-get update && apt-get install -y \
+ 	util-linux \
+ 	uuid-dev \
+ 	virtualenv \
++	vboot-kernel-utils \
++	vboot-utils \
+ 	xxd \
+ 	zip \
+ 	&& rm -rf /var/lib/apt/lists/*
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
