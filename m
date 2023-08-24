@@ -4,71 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0357AC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 18:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44238C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 18:05:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40692862EB;
-	Thu, 24 Aug 2023 20:04:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 94FE2862EB;
+	Thu, 24 Aug 2023 20:05:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TE9Dzzbc";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20221208.gappssmtp.com header.i=@gateworks-com.20221208.gappssmtp.com header.b="Qpa5TFmu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68D3486401; Thu, 24 Aug 2023 20:04:43 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 13163865A6; Thu, 24 Aug 2023 20:05:45 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DD6D852DB
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 20:04:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BBB68675B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 20:05:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37OI4ZNS125883;
- Thu, 24 Aug 2023 13:04:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692900275;
- bh=FFq372DUTj3yJx5fjnsJCov130okrtlXSf++s3nJEFI=;
- h=Date:CC:Subject:To:References:From:In-Reply-To;
- b=TE9DzzbcZzlxqWDzrgbPEICjKUPltZN+b06BvzfdE0L1WrMjiy2tvAx3IYR5fDwuR
- 99pWhfDcFDfAwTOLV4D39eMZfRJqGYQUzsPZQ0dAwPH9fQvXne+jXEfGcFlV4ZgVTw
- rlZuU2MyJbdWdt2MPGsnuQ0ux+8ZAaXEWqwlPmuQ=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37OI4Z8F018477
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 24 Aug 2023 13:04:35 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
- Aug 2023 13:04:34 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 24 Aug 2023 13:04:34 -0500
-Received: from [10.249.131.186] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37OI4UYM048198;
- Thu, 24 Aug 2023 13:04:31 -0500
-Message-ID: <12738ca9-ac8c-b587-c0bf-c8abc8fd3f48@ti.com>
-Date: Thu, 24 Aug 2023 23:34:29 +0530
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-99c353a395cso4331666b.2
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 11:05:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks-com.20221208.gappssmtp.com; s=20221208; t=1692900341; x=1693505141;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2gVonDjKOww6Eq6C0RDjt57EeQzuDG/r9E6VcdIYbY4=;
+ b=Qpa5TFmuPDSCKO7AZNOw+G05Y4IyM+z95dIvyNifuF+P51H5NVAw3dM838QAsTQbnV
+ Q8oem6uz8gash7M1YIwbvwcmYm0TXqrEli8WQZt2eEN1lA/HY5LWOws51DgrjajHUw21
+ /HhVMfMirpKfYLAkKzNzOjXTtc39/459OhXEq4L++uuzg3zlzphUktUFPKooLIVS9arX
+ y7EvtoYo6gW6uVx6BAq4gn3YR1GH0qsk4t4tpCaU6ws6kGZ7j2J/vhuK/ai7ZDfeCY6p
+ EEGoHNboGKdtIRLm/xDgS7ob1rQrgnFhLKx1Fk+uvividPBEWlSptDTVRDrPBL+ajjU/
+ OiSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692900341; x=1693505141;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2gVonDjKOww6Eq6C0RDjt57EeQzuDG/r9E6VcdIYbY4=;
+ b=dq3B9q69Epdwduu2cQyA+L6oXdR8VNRW6MKO57yPykM4Yxf/9L+gR0CrEhM6hrBC+Z
+ JsWPTX9S/AKYy6bZTOZxnOnWq2sk6HiAsy3YsavsXjLBMNkTlZp8RV2ALTyec3Db8a/M
+ dbTYm2pX6T1dzoJjOYtMEOtXudMg9ZAu5tVWxr5F2IxOisk+WSeQ+pBcuEZ2jgyTfPBV
+ p6Z53mS9LC5OIlnQ4/IbMe5BcEy/nLpzPULT05vLvHbQ2926Bj6mEMAKjRVd5+e11aRD
+ szACUugN/YRdXJmdJaBJnjiYVHc65ZOSmigxceTjQa1kuI+3y5E0VwQTphZrl9tsvsdH
+ b03w==
+X-Gm-Message-State: AOJu0Yz8D3PwqpuOOHXMjOeTrQ7U1k8l0zmpohWp6meQgfw6y4ze9I5X
+ TLYpDXqyyEXlxnR+yYV8PImnuUaTEyQT/shGb2Y8wQ==
+X-Google-Smtp-Source: AGHT+IEm5yD8SpfZ/bXAsRLMKc/++RWCZwwCkQ831SpeqDdqdauObVpqezUoGQYHiTUc/c+TDKFhw1n+gJYtdiPeq+s=
+X-Received: by 2002:a17:907:a05b:b0:9a1:e371:d9a9 with SMTP id
+ gz27-20020a170907a05b00b009a1e371d9a9mr4523587ejc.16.1692900341626; Thu, 24
+ Aug 2023 11:05:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-CC: <nm@ti.com>, <joe.hershberger@ni.com>, <robertcnelson@gmail.com>,
- <jkridner@beagleboard.org>, <r-gunasekaran@ti.com>, <srk@ti.com>,
- <trini@konsulko.com>, <u-boot@lists.denx.de>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH 1/2] net: ti: am65-cpsw-nuss: Workaround for buggy
- PHY/Board
-To: Roger Quadros <rogerq@kernel.org>
-References: <20230822121350.51324-1-rogerq@kernel.org>
- <20230822121350.51324-2-rogerq@kernel.org>
-Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <20230822121350.51324-2-rogerq@kernel.org>
+References: <20230713185608.3647122-1-tharvey@gateworks.com>
+ <20230713185608.3647122-2-tharvey@gateworks.com>
+ <98904f52-9deb-9fb7-35cd-7880b1f19155@denx.de>
+In-Reply-To: <98904f52-9deb-9fb7-35cd-7880b1f19155@denx.de>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 24 Aug 2023 11:05:28 -0700
+Message-ID: <CAJ+vNU3Ardy1i-4dO-ywKusDUC7vj0zAuDvfzvnpFejTjQa16A@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] phy: phy-imx8mq-usb: clean up clock code
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>, 
+ Adam Ford <aford173@gmail.com>, Martyn Welch <martyn.welch@collabora.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,100 +92,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Roger,
+On Thu, Jul 13, 2023 at 12:17=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> On 7/13/23 20:56, Tim Harvey wrote:
+> > use CONFIG_IS_ENABLED for clock enable/disable and change printf's
+> > to dev_err. Additionlly remove the comment that does not make sense.
+> >
+> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+>
+> Thanks!
 
-On 22-08-2023 17:43, Roger Quadros wrote:
-> Beagleplay has a buggy Ethernet PHY implementation for the Gigabit
-> PHY in the sense that it is non responsive over MDIO immediately
-> after power-up/reset.
-> 
-> We need to either try multiple times or wait sufficiently long enough
-> (couple of 10s of ms?) before the PHY begins to respond correctly.
-> 
-> One theory is that the PHY is configured to operate on MDIO address 0
-> which it treats as a special broadcast address.
-> 
-> Datasheet states:
-> "PHYAD (config pins) sets the PHY address for the device.
-> The RTL8211F(I)/RTL8211FD(I) supports PHY addresses from 0x01 to 0x07.
-> Note 1: An MDIO command with PHY address=0 is a broadcast from the MAC;
-> each PHY device should respond."
-> 
-> This issue is not seen with the other PHY (different make) on the board
-> which is configured for address 0x1.
-> 
-> As a woraround we try to probe the PHY multiple times instead of giving
-> up on the first attempt.
-> 
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> ---
->  drivers/net/ti/am65-cpsw-nuss.c | 19 ++++++++++++++-----
->  1 file changed, 14 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
-> index 51a8167d14..4f8a2f9b93 100644
-> --- a/drivers/net/ti/am65-cpsw-nuss.c
-> +++ b/drivers/net/ti/am65-cpsw-nuss.c
-> @@ -27,6 +27,7 @@
->  #include <syscon.h>
->  #include <linux/bitops.h>
->  #include <linux/soc/ti/ti-udma.h>
-> +#include <linux/delay.h>
->  
->  #include "cpsw_mdio.h"
->  
-> @@ -678,14 +679,22 @@ static int am65_cpsw_phy_init(struct udevice *dev)
->  	struct am65_cpsw_priv *priv = dev_get_priv(dev);
->  	struct am65_cpsw_common *cpsw_common = priv->cpsw_common;
->  	struct eth_pdata *pdata = dev_get_plat(dev);
-> -	struct phy_device *phydev;
->  	u32 supported = PHY_GBIT_FEATURES;
-> +	struct phy_device *phydev;
-> +	int tries;
->  	int ret;
->  
-> -	phydev = phy_connect(cpsw_common->bus,
-> -			     priv->phy_addr,
-> -			     priv->dev,
-> -			     pdata->phy_interface);
-> +	/* Some boards (e.g. beagleplay) don't work on first go */
-> +	for (tries = 1; tries <= 5; tries++) {
-> +		phydev = phy_connect(cpsw_common->bus,
-> +				     priv->phy_addr,
-> +				     priv->dev,
-> +				     pdata->phy_interface);
-> +		if (phydev)
-> +			break;
-> +
-> +		mdelay(10);
-> +	}
+Hi Marek,
 
-After rethinking about the above implementation and the second patch of
-this series, the second patch could be dropped altogether if the
-following implementation is acceptable:
+Who's tree do the phy patches go through?
 
-phydev = phy_connect(cpsw_common->bus,
-		     priv->phy_addr,
-		     priv->dev,
-		     pdata->phy_interface);
+Best regards,
 
-if (!phydev) {
-	/* Some boards (e.g. beagleplay) don't work on first go */
-	mdelay(50);
-	phydev = phy_connect(cpsw_common->bus,
-			     priv->phy_addr,
-			     priv->dev,
-			     pdata->phy_interface);
-}
-
-if (!phydev) {
-	dev_err(dev, "phy_connect() failed\n");
-...
-
-With this, there would be at most one "PHY not found" print, which
-should be fine. The mdelay value of 50 could be replaced with a
-sufficiently large value which guarantees success for Beagleplay.
-
--- 
-Regards,
-Siddharth.
+Tim
