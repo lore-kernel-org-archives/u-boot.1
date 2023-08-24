@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0CD4C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:57:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C0E6C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1446986A01;
+	by phobos.denx.de (Postfix) with ESMTP id 5A90B86A11;
 	Thu, 24 Aug 2023 21:56:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JWUKKWMU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="db6Xqy1A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24319869C2; Thu, 24 Aug 2023 21:56:14 +0200 (CEST)
+ id 3AF9B86940; Thu, 24 Aug 2023 21:56:14 +0200 (CEST)
 Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
  [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 470DE86940
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03440868D0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-7927952ca67so6241539f.2
+ ca18e2360f4ac-7926b7f8636so7758739f.1
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692906968; x=1693511768;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RMRMil6Lw0IPrc/fRwGDQB4zswzxxce2IHmZNmBw29s=;
- b=JWUKKWMUD1ds2Us73IRZV0JX1kXfePOj6I7paMQCNDaRXoDfOpBy1xpotXMJPkHGmN
- sPVX2Yguittw+fms3QtOekTgtEl8r3zaDW1FJs/7aEjeFAlIxucmdHm+xSooNN3UQy6a
- bHvmDzlIaiOnW35iXs80CNvNFuMb7BEbnkyyE=
+ bh=jzrZadK5ex5Vo397SmAi24MaUsB88Q555oYC2iPbkVw=;
+ b=db6Xqy1A0rr22U/0HbbQAebbWb60HUsi8Uf5tDCDP8XYq7sRQLjB1TOytvyIGf9Lcf
+ FRqZvRRqpRRRbhjsBUk+Ub7TWWf7Q4RdX3NV/y8npa1vKoE49/Z3oM9kXyf959sb6nOp
+ a6/04JDJb2KPPBc+RXAQXlIY13wxl03p/gNrg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692906968; x=1693511768;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RMRMil6Lw0IPrc/fRwGDQB4zswzxxce2IHmZNmBw29s=;
- b=GE8G/yoXpRgDZDlmceiS62TPYlXW+uDGZe6vMGx4DqZw3WlaIeiBIjEsoEH0dk/gnx
- IbrLW5D+A5k6dbK4NVFvbsi++N3riq84WB2RViebjUqXjapLE16FWDmb6Kc3D2zWZL25
- FqC7IYvnzczTWIsgtBceScLmKF98WDGZ2Olw/yPmZYfahDhIuxZrWJuDm6sqg+ffkDQ4
- YcAE8klibxlv+gLzrEmjhBUmBChtD9QL5PEEFRV5/hOYWA9vbTDeDCHPEvibXW2Ww+ZH
- 2pxSg1AkdieIeWF2R7pjUPbB/JB1uOVTTBUX6lQjtJU5keBMZO1xBl2u9N3jCnu2N9U9
- cHDQ==
-X-Gm-Message-State: AOJu0YwDlKg2DqM1549DmUcsZRAhIJFYNAvVxSMgxq10w2vgMnOdKQ4A
- 5nOP8m9xveySis2eggmAxue15pTp0GGi6y8s3RU=
-X-Google-Smtp-Source: AGHT+IHE92B53XgXcpzJ+RJ5Nn9uixcP36AukKLYv6dsEV5HGv3kd25yGhrm00DLTZVnTzTek9zGjg==
-X-Received: by 2002:a5e:8811:0:b0:790:adce:d553 with SMTP id
- l17-20020a5e8811000000b00790adced553mr7077183ioj.21.1692906967942; 
- Thu, 24 Aug 2023 12:56:07 -0700 (PDT)
+ bh=jzrZadK5ex5Vo397SmAi24MaUsB88Q555oYC2iPbkVw=;
+ b=MURa3XmrpAaH3GepMfMXzDzOiGVqntCe+fZ6/H9wk/q5aJiMQjsFDDYAgmfjiXBgxj
+ SWRvjjqr9fDHy5/2OT8BeFgFz9oLdV+k7zXyu2yA8pvKfWar8GVlyJ2hLbulNLp3/Yyh
+ Uz4tKdjiNo4gdhej+AGIlzNJHWoq6KvX9VVT6+NfjANpD21hIMKAK3n9rxBVHNvIAUv1
+ cZIzT3iJXqfeC+jJRXu0z1pTZ9a6eDZpqwuXuS0J3NrZAuFl3VLtoVaI9NGy2Yn1k1V6
+ y5gKqR7i5LIl9nCXD2pKU/k9GL5dwv9c8z7GJVsqzf7nCcJYSVNIPb8pdilrbzA0nBcn
+ UDpw==
+X-Gm-Message-State: AOJu0YzdJWAEGbNkI0l+6FpClk4gTEPDL0vT7Ytp43iTrXNjHo3Lxz+Y
+ 0tCyFqt3Z2VpWzjlCbRalXlnmH4FUtTvp0Mz92g=
+X-Google-Smtp-Source: AGHT+IEYn3F1miS9TvCniRTs6oVXQUkZ7jtXgr0aFb9NFlfy7gycPcWFlMsMiStD2Xv8g/gj+CHfig==
+X-Received: by 2002:a6b:6d05:0:b0:790:b44f:b9ee with SMTP id
+ a5-20020a6b6d05000000b00790b44fb9eemr5348378iod.10.1692906968668; 
+ Thu, 24 Aug 2023 12:56:08 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.07
+ b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:56:07 -0700 (PDT)
+ Thu, 24 Aug 2023 12:56:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 10/23] part: Add an accessor for struct disk_partition
- sys_ind
-Date: Thu, 24 Aug 2023 13:55:33 -0600
-Message-ID: <20230824195553.1685996-11-sjg@chromium.org>
+Subject: [PATCH v2 11/23] part: efi: Add debugging for the signature check
+Date: Thu, 24 Aug 2023 13:55:34 -0600
+Message-ID: <20230824195553.1685996-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
 References: <20230824195553.1685996-1-sjg@chromium.org>
@@ -88,64 +87,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This field is only present when a CONFIG is set. To avoid annoying #ifdefs
-in the source code, add an accessor. Update the only usage.
-
-Note that the accessor is optional. It can be omitted if it is known that
-the option is enabled.
+Add a little more debugging for the initial signature check. Drop the
+pointless check for NULL. Also set a log category while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootdev-uclass.c |  7 +++----
- include/part.h        | 12 ++++++++++++
- 2 files changed, 15 insertions(+), 4 deletions(-)
+ disk/part_efi.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index fa52bc3a9c4e..c4044d87dc3e 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -184,12 +184,11 @@ int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
- 		if (ret)
- 			return log_msg_ret("fs", ret);
- 
--		/* Use an #ifdef due to info.sys_ind */
--#ifdef CONFIG_DOS_PARTITION
- 		log_debug("%s: Found partition %x type %x fstype %d\n",
--			  blk->name, bflow->part, info.sys_ind,
-+			  blk->name, bflow->part,
-+			  IS_ENABLED(CONFIG_DOS_PARTITION) ?
-+			  disk_partition_sys_ind(&info) : 0,
- 			  ret ? -1 : fs_get_type());
--#endif
- 		bflow->blk = blk;
- 		bflow->state = BOOTFLOWST_FS;
- 	}
-diff --git a/include/part.h b/include/part.h
-index 5cf1c5ec96f0..16ba8c102535 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -135,6 +135,18 @@ static inline void disk_partition_clr_type_guid(struct disk_partition *info)
- #endif
- }
- 
-+/* Accessors for struct disk_partition field ->sys_ind */
-+extern int __invalid_use_of_disk_partition_sys_ind;
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 208675213822..39382c5faee0 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -9,6 +9,9 @@
+  *   when CONFIG_SYS_64BIT_LBA is not defined, lbaint_t is 32 bits; this
+  *   limits the maximum size of addressable storage to < 2 tebibytes
+  */
 +
-+static inline uint disk_partition_sys_ind(const struct disk_partition *info)
-+{
-+#ifdef CONFIG_DOS_PARTITION
-+	return info->sys_ind;
-+#else
-+	return __invalid_use_of_disk_partition_sys_ind;
-+#endif
-+}
++#define LOG_CATEGORY LOGC_FS
 +
- struct disk_part {
- 	int partnum;
- 	struct disk_partition gpt_part_info;
+ #include <common.h>
+ #include <blk.h>
+ #include <log.h>
+@@ -976,17 +979,23 @@ static int pmbr_part_valid(struct partition *part)
+ /*
+  * is_pmbr_valid(): test Protective MBR for validity
+  *
++ * @mbr: Pointer to Master Boot-Record data
++ *
+  * Returns: 1 if PMBR is valid, 0 otherwise.
+  * Validity depends on two things:
+  *  1) MSDOS signature is in the last two bytes of the MBR
+  *  2) One partition of type 0xEE is found, checked by pmbr_part_valid()
+  */
+-static int is_pmbr_valid(legacy_mbr * mbr)
++static int is_pmbr_valid(legacy_mbr *mbr)
+ {
++	uint sig = le16_to_cpu(mbr->signature);
+ 	int i = 0;
+ 
+-	if (!mbr || le16_to_cpu(mbr->signature) != MSDOS_MBR_SIGNATURE)
++	if (sig != MSDOS_MBR_SIGNATURE) {
++		log_debug("Invalid signature %x\n", sig);
+ 		return 0;
++	}
++	log_debug("Signature %x valid\n", sig);
+ 
+ 	for (i = 0; i < 4; i++) {
+ 		if (pmbr_part_valid(&mbr->partition_record[i])) {
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
