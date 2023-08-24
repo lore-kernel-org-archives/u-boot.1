@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA06C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB1FC27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:54:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59B1F8477A;
-	Thu, 24 Aug 2023 15:44:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E74786433;
+	Thu, 24 Aug 2023 15:54:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gXaWNrUj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kl9o9kAS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BBD185F9F; Thu, 24 Aug 2023 15:44:02 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id B3B3486504; Thu, 24 Aug 2023 15:54:47 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EE20846EE
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:43:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0A19863F6
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so1882645a12.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:43:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-58fc4eaa04fso54827167b3.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:54:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692884639; x=1693489439;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=khC6UdxxIJJtwSSrNXcIYrDuSZeZLlhidvp9qAsMnuU=;
- b=gXaWNrUjuoHjegPpdGllTF7sPo+7A9QEpFeBx8tSrirO1oYrjpmT2PsTpwe4bu3lDC
- lN/LnJhh7dvGriiZPPKZXwlbSUomdHxVyqYH7u69NfGS8I4N59nSt/NADKN0AlqPfS1Y
- 2b0KA0axVEn6yUW68l20SiCFAlCWByQTxpOTCgnu2K7bitZVkCE1LKqfuEIoaTYQDPHr
- 0iNTY4PERqZXjq46/bf55WZ/KCtIpXPcLMRIj5i0mADawY1CUXrxaIOHn1NDTCWTG3+1
- yWhjRto1/uTUcjLZbzc6Y4hjewMOYnFNSTWiLeu2c5YyDXknJrBCu1Vcwo9Bgy8QOgMD
- BJtw==
+ d=konsulko.com; s=google; t=1692885284; x=1693490084;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=33zFg+ISerCZc7+YXTKT5VtdiqdXHxCAxIe5saMFIYI=;
+ b=Kl9o9kASXWhPDcXEvGlnNzXGD8GC9N90eOYeUx0jyGSrFqwKtdkjTDNCaiHbcKfDRa
+ SCQF4LHVCzO0spnZQ7DO0+CkNtpMvDU2+giDW7M45HtUBRb8Yb9ZpY/sBYmUCMRf2c0C
+ i+QCKAxQG6A2toEL3H62tuoVG0nAzedifHnZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692884639; x=1693489439;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=khC6UdxxIJJtwSSrNXcIYrDuSZeZLlhidvp9qAsMnuU=;
- b=M6PYvB+HfAU5G0El2kkMb16gIDWVI3kdijUts0KFNIYkUO/5i1FP89tD++UpBsexU+
- nVcKSk1TvoMEed1K0J7ilbRCwshK2xpjtj/+b/6C0kfbP0GXvzLvsCcIuHzYtrj1Bx8W
- u9GcElzqY1yA0WjbLLQKc1GalOW9vNdfh1fU0iZkznwEIT+QyzfebgPastcyLPuvSmWI
- mtGage2ei1L5SK+fS79AZxYRnoMMgGbJiCgTYv4x64WGxJ1NKlW2bndiXmFrwrO4VQF2
- Hv+pJJrc8I+gR+rW184b88dvyle57bj9PWU05U1FdVrsh5EWg5RpxrnPwLkCr6F/FcqY
- Gf7g==
-X-Gm-Message-State: AOJu0YwtWkA3nDxj606t9Wn8nwj2mqUKJXqGmgZ3EWnNBVoGhBNvHNDJ
- D9g0Pk+9phUlr7wwIXIbjxQ=
-X-Google-Smtp-Source: AGHT+IF7zJdV1AVoobIAq557ZfwpaUP44n9SimYV+AtCoOvD380zt4PVtQtWzmVacmuxJfYRHmu/gQ==
-X-Received: by 2002:a05:6402:440f:b0:525:4696:336d with SMTP id
- y15-20020a056402440f00b005254696336dmr19115071eda.8.1692884639007; 
- Thu, 24 Aug 2023 06:43:59 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.238.14]) by smtp.gmail.com with ESMTPSA id
- d5-20020aa7d5c5000000b00521953ce6e0sm10531736eds.93.2023.08.24.06.43.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Aug 2023 06:43:58 -0700 (PDT)
-Date: Thu, 24 Aug 2023 16:43:57 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-CC: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1_17/19=5D_ARM=3A_tegra=3A_dt-set?=
- =?US-ASCII?Q?up=3A_convert_TrustZone_remove_into_config?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <ZOdcPHTsyKxN9OzS@orome>
-References: <20230822112217.4646-1-clamor95@gmail.com>
- <20230822112217.4646-18-clamor95@gmail.com> <ZOXq0SrF9h0Z9uHw@orome>
- <86A72122-840F-46B1-9C25-0B6F5AFB82A1@gmail.com> <ZOdcPHTsyKxN9OzS@orome>
-Message-ID: <91C94CCB-A214-4D97-B835-34969DCADB1B@gmail.com>
+ d=1e100.net; s=20221208; t=1692885284; x=1693490084;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=33zFg+ISerCZc7+YXTKT5VtdiqdXHxCAxIe5saMFIYI=;
+ b=fs14lWuWOTmPbn+0jKOzOPcbUZgQKeCC9Sx5UuoVGvS3MgJhti7ypgWQSLFlcbM+y5
+ xsFyNGohsskwxR/2BPW6W3fhY8ppA8w3kH5DevKz5huX0aVLQazuW+MiyZKdNf0A450s
+ uyWvqzhqZsz/y1xNW4OUZSaXhCa2NddycMCN8W/fV7dZPcMJuRXejwI95VbR/yLdLLgS
+ Mr/c1c0kgcKS6XkMOdiU2bN+Dh4ydGaYvDEbNKlDyuHD0hJhX5aJbxzC7/QXUAu1kQAg
+ fW2WdwLiKGIlSFWDeuSzfdDs2FPfmymfu4lCMbDOr6MSK1nR1sA31jEtBOgvpITBlkQO
+ laRg==
+X-Gm-Message-State: AOJu0YwZC6B6+9jr6VTMpXmYB3En8Gvvs2e1uK39i/r4YXEd1k+mfe6C
+ wpb7T8m/PygeLz3N43zYA1Rt6g==
+X-Google-Smtp-Source: AGHT+IHWm5a8wTuUzVYE1zFbDoM7jy+VkZoKs/lnauKmnb6S/D/F0xjAiwQnTDwetjHqH+wMEnfwuQ==
+X-Received: by 2002:a81:4a56:0:b0:592:5def:5c03 with SMTP id
+ x83-20020a814a56000000b005925def5c03mr5176866ywa.22.1692885283761; 
+ Thu, 24 Aug 2023 06:54:43 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
+ [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
+ by smtp.gmail.com with ESMTPSA id
+ w12-20020a0dd40c000000b005463e45458bsm3953158ywd.123.2023.08.24.06.54.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 06:54:43 -0700 (PDT)
+Date: Thu, 24 Aug 2023 09:54:41 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Michael Walle <michael@walle.cc>, u-boot@lists.denx.de
+Subject: Re: [PATCH] MAINTAINERS: remove Vikas Manocha
+Message-ID: <20230824135441.GJ3953269@bill-the-cat>
+References: <20230824074436.2929639-1-michael@walle.cc>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/UdwykLl+gZH4Fdk"
+Content-Disposition: inline
+In-Reply-To: <20230824074436.2929639-1-michael@walle.cc>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,52 +93,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--/UdwykLl+gZH4Fdk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-24 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 16:33:48 GMT+03:00,=
- Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Wed, Aug 23, 2023 at 02:47:11PM +0300, Svyatoslav Ryhel wrote:
->>=20
->>=20
->> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:17:37 GMT+03:=
-00, Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->> >On Tue, Aug 22, 2023 at 02:22:15PM +0300, Svyatoslav Ryhel wrote:
->> >> Remove of TrustZone nodes is required by many product devices
->> >> which require repetable calls of same function from device board=2E
->> >> To simplify this, TZ remove is converted into Kconfig option=2E
->> >>=20
->> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> >> ---
->> >>  arch/arm/mach-tegra/Kconfig    | 14 ++++++++++++++
->> >>  arch/arm/mach-tegra/dt-setup=2Ec |  7 +++++++
->> >>  2 files changed, 21 insertions(+)
->> >
->> >I kind of preferred the original because it's very explicit=2E There's
->> >also no big advantage in consolidating this because the code is unlike=
-ly
->> >to ever require changing (the libfdt API is quite stable and these nod=
-es
->> >are all hard-coded anyway)=2E This new variant put non-generic code (i=
-t
->> >requires a Kconfig option after all) into a generic place, so it seems=
- a
->> >bit backwards=2E
->>=20
->> So you say that I have to add same function to boards over and over
->> for all devices I plan to mainline? Unneeded code duplication in
->> action=2E
->
->There's a balance to be struck between duplication and readability=2E If
->you insert this board-specific code into a generic code path, that
->generic code path becomes difficult to read given the extra #ifdef
->guards etc=2E If you're really worried about duplicating code you can mov=
-e
->the two libfdt calls into a separate function and call that function
->from each of the boards that need it=2E
+On Thu, Aug 24, 2023 at 09:44:36AM +0200, Michael Walle wrote:
 
-I propose for now to drop this patches and when time comes to Simon Glass =
-suggestion about events just create a call for this or handle it in some wa=
-y=2E
+> The mails are bouncing with
+>   550 5.1.1 User Unknown (in reply to RCPT TO command)
+>=20
+> Remove the entry and mark the ARM STM STV0991 arch as Orphan.
+>=20
+> Signed-off-by: Michael Walle <michael@walle.cc>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+> CCing other ST people, maybe someone want to take over instead.
+> ---
+>  MAINTAINERS | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>=20
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 84de9de531..57ede4bea9 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -641,8 +641,7 @@ N:	stm32
+> =20
+> =20
+>  ARM STM STV0991
+> -M:	Vikas Manocha <vikas.manocha@st.com>
+> -S:	Maintained
+> +S:	Orphan
+>  F:	arch/arm/cpu/armv7/stv0991/
+>  F:	arch/arm/include/asm/arch-stv0991/
 
->Thierry
+This misses board/st/stv0991/MAINTAINERS where he's also listed.  So,
+someone needs to step up to maintain it all, or we should look at
+dropping it.  Thanks!
+
+--=20
+Tom
+
+--/UdwykLl+gZH4Fdk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnYRsACgkQFHw5/5Y0
+tyxCAgwApfSb+dgyEzItUwU7QAsmOkrFnT2cjbi6Zqhh8BzzOciWIerYcbbM1dq9
+xsqD530NvE1o8Mb7fOzqMkNHFGBOQJIlAd7g+BdhtHsZQ1IRBS6zDWN4ubjBdGpj
+ssltKj7bxXNKdX7hdVVLpNgOSMoVbnKwwqK0BsBOilL/lHoExEW3qPDtH2fKxYJt
+pGvPsfGp9QnRX5SgzaWeRJ8jEmCiWGwYqpjeHuPM4om2zHz7nCmtT3TsodFjWCuW
+BshfD8nyfBb+XEdV4tSTtz0lK1a7Tj7JrsaZlXZdSkxWEBKPblKLWahCQusHeRzR
+AP+nyLGN6MVl1yCOmdWUweZ3rlzi18YEQzFbynlaPH6KLy0TUQJ3vY+ZldYl8Gj8
+z/RO1PO8YidifoC0fBVkXe5uvP1g//pKAJkM9L9J5JHaKiijwhi58yu0p/jR+bNT
+eBU0LbOkPFSrKXr8sNuZr71MLC00n++RgFJf3wBJ1NPjCp6LpFO+JbZ7IA2jUvqf
+uWigosK/
+=X9g/
+-----END PGP SIGNATURE-----
+
+--/UdwykLl+gZH4Fdk--
