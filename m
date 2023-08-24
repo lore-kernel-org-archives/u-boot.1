@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 876BFC3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A79C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:12:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC5198658E;
-	Thu, 24 Aug 2023 05:11:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19F3386555;
+	Thu, 24 Aug 2023 05:11:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cLSCrsuU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ob7yr+mR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B08A086548; Thu, 24 Aug 2023 05:11:21 +0200 (CEST)
+ id E33A886590; Thu, 24 Aug 2023 05:11:23 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEE568654E
+ by phobos.denx.de (Postfix) with ESMTPS id ECAFF86537
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BA06109473;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAfW109478;
  Wed, 23 Aug 2023 22:11:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692846670;
- bh=XwtDKSWvBddXAkF+jBFexty0jRPvFnf7LKF7Q/Y5h34=;
+ bh=yk962jhEJ9PuI0MnE0R4SiekTDMdr4wmSWHB+f6J+eg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=cLSCrsuUnscbMJABLW+dyykTO8GTltbiXXs91IZoACm1LQyRRpq8DTBjdYhHF0DZ5
- lvWf2h3UZ5Zj2Y3eNjz9tGjVNDAot37eYKVLIFnwTMHKj3IUYwTt/bHffGvbF/1i1t
- QSqXm3U/Qaue1uE7j/HK6yaC4H/LdK3MydZ1F2gc=
+ b=Ob7yr+mRDdNocXfrd+bs/YbYCthuE1dUK7C0aKTQLdqHEBoNNduzUj7CPiMXATkUS
+ KpnVfAZZSh2Q8yX/o7MiOEyBAPis+GZi2th9ihi5TjOcRwTWLICDDvWAtjzxUUX2av
+ qbYuTgCsIIsOFwBRUM5JMFcnH8AEUg1PZpidK7Lw=
 Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3BAmx030868
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3BAfo053096
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 23 Aug 2023 22:11:10 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE109.ent.ti.com
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
  (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
  Aug 2023 22:11:10 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 23 Aug 2023 22:11:10 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAaF013355;
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAAs006644;
  Wed, 23 Aug 2023 22:11:10 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Simon
@@ -56,9 +56,9 @@ CC: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V5 09/17] board: ti: am62x: am62x.env: Use default findfdt
-Date: Wed, 23 Aug 2023 22:10:53 -0500
-Message-ID: <20230824031101.3460411-10-nm@ti.com>
+Subject: [PATCH V5 13/17] arm: mach-k3: am625: Add support for UDA FS
+Date: Wed, 23 Aug 2023 22:10:57 -0500
+Message-ID: <20230824031101.3460411-14-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230824031101.3460411-1-nm@ti.com>
 References: <20230824031101.3460411-1-nm@ti.com>
@@ -82,30 +82,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the default findfdt using CONFIG_DEFAULT_DEVICE_TREE
+While boot partition support with EMMC boot is useful, it is
+constrained by the size of boot hardware partition itself.
+
+In the case of K3 devices, tispl images can contain OP-TEE images that
+can substantially vary in size and the u-boot image itself can vary over
+time as we enable various features.
+
+So use the CSD information in the case of EMMC_BOOT configuration being
+enabled to pick boot partition or UDA FS mode operation to pick.
+
+If EMMC_BOOT is disabled, then depend on filesystem configuration to
+pick data from UDA.
+
+While at this, drop the extraneous whitespace.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
-New patch (part of bootstd transition)
+Changes since V4:
+- Did'nt pickup Mattijs' reviewed-by - no more iffdeffery - so might be
+good to relook.
 
- board/ti/am62x/am62x.env | 4 ----
- 1 file changed, 4 deletions(-)
+V4: https://lore.kernel.org/r/20230822184135.2328409-4-nm@ti.com
 
-diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
-index 1ef948df83d7..68b26703bf7f 100644
---- a/board/ti/am62x/am62x.env
-+++ b/board/ti/am62x/am62x.env
-@@ -1,10 +1,6 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/mmc.env>
+ arch/arm/mach-k3/am625_init.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+index 499cb57267b9..8fa36f7b913e 100644
+--- a/arch/arm/mach-k3/am625_init.c
++++ b/arch/arm/mach-k3/am625_init.c
+@@ -220,9 +220,15 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+ 	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
+ 			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
  
--default_device_tree=ti/k3-am625-sk.dtb
--findfdt=
--	setenv name_fdt ${default_device_tree};
--	setenv fdtfile ${name_fdt}
- name_kern=Image
- console=ttyS2,115200n8
- args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+-
+ 	switch (bootmode) {
+ 	case BOOT_DEVICE_EMMC:
++		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT)) {
++			if (spl_mmc_emmc_boot_partition(mmc))
++				return MMCSD_MODE_EMMCBOOT;
++			return MMCSD_MODE_FS;
++		}
++		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
++			return MMCSD_MODE_FS;
+ 		return MMCSD_MODE_EMMCBOOT;
+ 	case BOOT_DEVICE_MMC:
+ 		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
 -- 
 2.40.0
 
