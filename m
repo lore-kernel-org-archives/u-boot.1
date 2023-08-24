@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53152C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6270C7EE2C
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:53:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97FEE86504;
-	Thu, 24 Aug 2023 16:50:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1048786699;
+	Thu, 24 Aug 2023 16:53:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rrjyGcaF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XFT33NsG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2B2486672; Thu, 24 Aug 2023 16:50:35 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 7147286699; Thu, 24 Aug 2023 16:53:13 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E03386504
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:50:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACEFE86414
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:53:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2b703a0453fso112759881fa.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:50:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d6b1025fc7aso6294036276.3
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:53:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692888632; x=1693493432;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Roq0PwkIZZJH0Jk4cYXftNPetkb9AhGhzGmbAUAeOp4=;
- b=rrjyGcaFWRgNcVFbg/fkW5220wdEhtAKUcCB6uHtMsekuQ8xhF7iWNLVACIaLqHrE5
- G1H6ZDCil8cpdMRTIZ3EOSWHgtGlVMJ/sOAZcAkloY4NVsCE8D9znL/sREyH4dlLYa9V
- 0S95lFVbmSePYZTXaCiDFfvrVJOTgsEtNYCyTAwTwGuKw1AVU+izxENQn6dJ5a+Pqh2H
- TbXARGfcLNBolJjzeaCPT9gI8L8+vbBOT+y4cV2Zt58K/bGKIOXRuvmvfY3yyb/2GsGz
- r3irou1sCPWaJ10bypIpCSdFgkzmBjTUUhGMrO/h9Hi/xsIXEsBkjxeZb4Qx2oLNFCok
- xlAQ==
+ d=konsulko.com; s=google; t=1692888789; x=1693493589;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=obX14rZo/JPSs830QO2h5dtej4u/Q0NY6KgAlt7nDTM=;
+ b=XFT33NsGYGLsGgILCAqJQG64HV3s6CLLj7fKaoN99ah2ty+cuCwe/24KQL9QnTtSyv
+ bwatZgdBjlr97N2RU/kOVRXVF3xN4zd58oF3ccOP0Smm+A6l8TNWbyCzkzro5QYo4SKk
+ NQzk5hs6JAB02YHTAm9ZjHpkaibYQGgAuMVCE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692888632; x=1693493432;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Roq0PwkIZZJH0Jk4cYXftNPetkb9AhGhzGmbAUAeOp4=;
- b=AYpyN3i9B8n7AjI83/iesrKLTG5OwsUgInMx2O47Ijx290U3C6fyGYkuKrfOjF4kFx
- 2NWTBobd2Avh1i/WIG+sqYj7lW42gzzid2iR7aIOOAKJ2rUfR/UXho//OMYGYMWeYh6g
- 9yJYkHvqiDJJjrdXt1grQwqU0M8X41rbgo876SCTSCYmPScpH7fjQkdSnNROjfUS/3sE
- mkaKqM5bmOo9qr08RZaUqP5qILNAZIPNXGRstTBo3gqjOTHiQRyuuabjNqpXcv7++bFz
- DSxA1wEheerWA2wJvqSiQwmbGeKf9KSjS0525OgDdJbCTYJacxg0QPBBlp5P6a4iN5Z4
- jj7w==
-X-Gm-Message-State: AOJu0Yx2VZAX6NU9eoMHI1pT57STJoEvZ6DyM4pkfezsyMhoDbc4+uvN
- zG6A/sg19qNZ4jWu9aW/SAc6ViwLTiwtmCqF57ujxg==
-X-Google-Smtp-Source: AGHT+IEBT+iGZ3fYrGmuzEgcg69sy7Z9az/Zc4hpZeUSMFniff5qjZQybdTX2HL0xc7a1w5JgLqieHgWqfeQXDGYthI=
-X-Received: by 2002:a05:6512:12c4:b0:4f8:74b5:b4ec with SMTP id
- p4-20020a05651212c400b004f874b5b4ecmr12777550lfg.41.1692888631667; Thu, 24
- Aug 2023 07:50:31 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692888789; x=1693493589;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=obX14rZo/JPSs830QO2h5dtej4u/Q0NY6KgAlt7nDTM=;
+ b=k2yc7BwPRoxQU/U0RYgNTLTI1ZZZ61QVeIzRllYwmhhmBezSCSLGQhfEbUneR8Zb/J
+ f1DQNbW/L8NQeM8ykwpNYeQNExd9tPaPPx5KwYz9r7xCilwXJbgRlKQ9df3oOooL3SLI
+ cUf8FDK38gs8kf+d+OHXEGQY0i0D5PWz6V8WY9pGBSWsEczuIWyadqs0eU2icS3or71i
+ 0lHwmz90li2IHfgjpJnIjsI9VJeCHEgaWMP3QbhJSVs1NH07JJDePWCknfRHq/fQpENZ
+ XvfffH2W1VlZTE8K3BaOr3sTjatj8krSiq3SqYHOXlPYGcO2gspcKM0WoLU7Hkskj1BT
+ QQuQ==
+X-Gm-Message-State: AOJu0YyfInN9XG6wnAwFhakhisatIYEov857E6FzgicSOuDsX1J2aAIN
+ Lw/G8RSlmY3ZByhYlSpeWOnDOw==
+X-Google-Smtp-Source: AGHT+IFB2Y7IKel+Wb4TngPlhwkpRspx/8CXLfXbzYWlGEjiM6XukEfw4HiI4lhtMyGO4uhg9k02BA==
+X-Received: by 2002:a25:ae10:0:b0:d77:e7c1:5537 with SMTP id
+ a16-20020a25ae10000000b00d77e7c15537mr3702285ybj.18.1692888789229; 
+ Thu, 24 Aug 2023 07:53:09 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
+ [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
+ by smtp.gmail.com with ESMTPSA id
+ l80-20020a252553000000b00d7823cc7d62sm54750ybl.19.2023.08.24.07.53.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 07:53:08 -0700 (PDT)
+Date: Thu, 24 Aug 2023 10:53:06 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Nishanth Menon <nm@ti.com>
+Cc: Neha Francis <n-francis@ti.com>, Simon Glass <sjg@google.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH V5 03/17] include: configs: am62x_evm: Wrap distroboot
+ with CONFIG_DISTRO_DEFAULTS
+Message-ID: <20230824145306.GQ3953269@bill-the-cat>
+References: <20230824031101.3460411-1-nm@ti.com>
+ <20230824031101.3460411-4-nm@ti.com>
 MIME-Version: 1.0
-References: <20230824142109.2401528-1-ilias.apalodimas@linaro.org>
- <CAPnjgZ0JZCrPOCUZDgL10zXdB+LQQtv2MXZPcpcxXDY+u8MhHw@mail.gmail.com>
- <CAC_iWjLWQhZrZkhK02dS=gQG7Z7y2-cQ6LtKnnrm3tur3J4KPA@mail.gmail.com>
-In-Reply-To: <CAC_iWjLWQhZrZkhK02dS=gQG7Z7y2-cQ6LtKnnrm3tur3J4KPA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 24 Aug 2023 17:49:55 +0300
-Message-ID: <CAC_iWjJm9r3cgBX5fuANp_BwJzi4r_jdXgFMDYRw3V=1QYjiog@mail.gmail.com>
-Subject: Re: [PATCH v2] efi_loader: delete handle from events when a protocol
- is uninstalled
-To: Simon Glass <sjg@google.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QWfyESdllmLeqMlk"
+Content-Disposition: inline
+In-Reply-To: <20230824031101.3460411-4-nm@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,56 +97,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 24 Aug 2023 at 17:47, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Thu, 24 Aug 2023 at 17:41, Simon Glass <sjg@google.com> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Thu, 24 Aug 2023 at 08:21, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > When a notification event is registered for a protocol the handle of the
-> > > protocol is added in our event notification list.  When all the protocols
-> > > of the handle are uninstalled we delete the handle but we do not remove
-> > > it from the event notification list.
-> > >
-> > > Clean up the protocol removal functions and add a wrapper which
-> > > - Removes the to-be deleted handle from any lists it participates
-> > > - Remove the handle if no more protocols are present
-> > >
-> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > ---
-> > > Changes since v1:
-> > > - use the non safe list traversing macros on efi_register_notify_events since
-> > >   we don't delete anythig from that list
-> > > - Add a comment explaining the code that preserves the handle in case of a
-> > >   removal failure
-> > >
-> > >  lib/efi_loader/efi_boottime.c | 89 +++++++++++++++++++++++++----------
-> > >  1 file changed, 65 insertions(+), 24 deletions(-)
-> >
-> > Is there a test for this behaviour?
->
-> Not in -master.  I've sent it in the past [0].  But instead of merging
-> that series, we decided with Heinrich that a bigger cleanup was
-> needed.
-> So we had to do a bigger cleanup of protocol handling [1] [2]
->
 
-Forgot the first link... apologize for the noise
-[0] https://lore.kernel.org/u-boot/20230601120625.1843555-2-ilias.apalodimas@linaro.org/
+--QWfyESdllmLeqMlk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> [1] https://lore.kernel.org/u-boot/20230620061932.113292-1-ilias.apalodimas@linaro.org/
-> [2] https://lore.kernel.org/u-boot/a222ec75-32ef-9dce-0855-afde2702c618@gmx.de/
->
-> Once the last part gets merged, I'll rebase the test and send it over
->
-> Thanks
-> /Ilias
-> >
-> > Regards,
-> > Simon
+On Wed, Aug 23, 2023 at 10:10:47PM -0500, Nishanth Menon wrote:
+
+> Wrap the distro_boot options with CONFIG_DISTRO_DEFAULTS.
+>=20
+> This is an intermediate step for us to switch over to
+> CONFIG_BOOTSTD_DEFAULTS and drop this section in follow on patches.
+>=20
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--QWfyESdllmLeqMlk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnbtIACgkQFHw5/5Y0
+tyx2Kwv/ValN0aheI+c5d3oVGZs4B9+CaJbDmwVFOrIFxfA9EqZOwU6cXFG9Br88
+gOGxsW5kZp88LUW8Ty7EnzX7GOeG+jeF0wSIVX/egXXV69rXdtS6ws+AkbAkKTrN
+YcBydOfgHa6lrZBPWqbOeyZNiasV+b9CEzbIe0V+twuz2MrxYrY3smH8XkluSfPu
+WS3Hf2bnqu1u8vKsAs05koQPd9D0tJy3NKe67BlKFOtVPUP26vTKG9oHTthc5MSj
+RhvxeZ3zY7JrkzE3Hab7A0/cryALP+6/DP0WhL7tBHXdtU+J4cgrtXUbdI9z8y8x
+QFmwXFVtKN6A/e3TcgkOZ1tbpthyAEpN8SeFIxxKS5Ecnxbx5k/euGUTv7QMZEUr
+sVWOEKq32Fmei+h1CGIfyG5YSCnfQ8nR6uSw1Y3YONi/35D9RNXyjvhuXU1LxOL0
+YMXemwQMyKK2Qf8jjOuKncggcujo6Uyzff08d6jySrYbGZ50/nqN9nfd8oSwtQX6
+wtfjr1od
+=UmNr
+-----END PGP SIGNATURE-----
+
+--QWfyESdllmLeqMlk--
