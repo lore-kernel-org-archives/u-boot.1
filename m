@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 643A5C7EE43
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:41:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2592C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:41:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A6EF865AF;
-	Thu, 24 Aug 2023 16:41:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 765EA86529;
+	Thu, 24 Aug 2023 16:41:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g+EFOOV+";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="HzMXImXh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 133A68522C; Thu, 24 Aug 2023 16:41:39 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 1B777865AF; Thu, 24 Aug 2023 16:41:40 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E240486604
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:41:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E524E86414
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:41:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-523b066d7ceso8592627a12.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:41:34 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-4ff9abf18f9so10545950e87.2
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692888094; x=1693492894;
+ d=google.com; s=20221208; t=1692888096; x=1693492896;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QmASuGLsFXPZGYQTVN/ZvkeattiPcp0s5R3XOCfrqCw=;
- b=g+EFOOV+7qlp6m3fXwRhIVnb9i9mxFBED7C7aZm+YF8q33ft1NnDsR3EGITlLw4Wu5
- Ny04lgxY8V5lx2Y+yT8jFr610gAtgQWfa5c+uLmkMcIkoSd6WV5mLAVXdz8uZmM/KOWH
- xBPweCzpVtCaNVuUHjS5UjSYbkR9qGso1ba9c=
+ bh=uLaJ/j8NxW6yR3qxt0lCqUZtbm6v9JpgWEwv3XtA6sM=;
+ b=HzMXImXhKDOC49LTXyAdjUt+FbyMyoyDAUN9O61+TdxBMGCq78LdorOkbVbyLILu0g
+ 1cChcvTe5VRQ/RVBJ1IjnoqokGWBmxmeuVPjLJizgZIUWzJ1028UCkkwB6gpKqg57MqG
+ E4rwV3q8zeKx7EAQsnvO7tB3e9RI7zZnfbNWSg6WGd09OO24H7T/aDgstq7OXB5ne4lv
+ tPF24dI3uxVjC/EQRezPR6AnxNRlzt1hePRCYn7UDyvu+N5CynT3LwvFOe/9/x187J6Q
+ Km/gf5kg4WSHFQc2f5ExIt0BLmRFKVKV8D5MUa9oBc+sjGVTE8GFf+Lm6Zqam+EmXjsK
+ JU6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692888094; x=1693492894;
+ d=1e100.net; s=20221208; t=1692888096; x=1693492896;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QmASuGLsFXPZGYQTVN/ZvkeattiPcp0s5R3XOCfrqCw=;
- b=b3Ou3Jcx1OJMSz8Ny7UKPY7rlFXb+q24CYRhJVFnDJXwgN329geUHGtS7gYbVejyU8
- GxIGlTgj2ddFG3a4+g3sCWYmxi+jNLP8fSMvx/NGSU6MlqnbQDcJESefuSCimR4WIMcG
- o78y4lwNW+iKkbCTqA9SUwnOaig4ry4NmJ4OU6Cr+8cJasITqO9GCTcsAf6ljkmek/JR
- jVuxQZe+bZSBJTsQQhS8MT4yLo+tL4xE5yolkCoKfAMOx19m+YGdHYivOLqxQB4UhmgN
- W0jUvCNQiFKi/K5/FyoV/S/XsL9mfwlngY2ZH9sbhj4OgE79E3pE9MZS/DfF2qeKIh43
- Y9gA==
-X-Gm-Message-State: AOJu0YyCxi24CWIOfJa/VtamiC0I2htE78fKaKt5UCTsAV61dnIEQ2oU
- ADZ0aAlUMcvSz56pDXdZ1/loWEOmcyWV7PrqBVAZcA==
-X-Google-Smtp-Source: AGHT+IGKO7oElkao32t6ejJDI9IY552stF77URpGFQm6fkzYN8+qdr3VKQZDOsZqFRPSsY8QRPd3zPAoFlGaEZdeiVE=
-X-Received: by 2002:aa7:c648:0:b0:525:7e46:940 with SMTP id
- z8-20020aa7c648000000b005257e460940mr13477843edr.24.1692888094318; Thu, 24
- Aug 2023 07:41:34 -0700 (PDT)
+ bh=uLaJ/j8NxW6yR3qxt0lCqUZtbm6v9JpgWEwv3XtA6sM=;
+ b=BZMMj3WzjTlY1o8Uc8OQc9ZEfJQ033k6RjsCBAyNxkn54mvcqxHSMCA1kUBtxJ7Yjv
+ VVA+G2PhFnfPU7x1NH2qD0nNJvPYmp6ISPmV+9upF4vIxU+yvwf8uJ8w8xSgWSM5dWFX
+ LVlZ/I4ITivPrNY03pKt2nfIt4j1r05Jp6/w8+E8p4b0PJ+mBoiMEeH0NPTMc38QGl9Z
+ /hCainHa+oS95D7lhBaQ/MWYGF0xmlrWFcKG50T67YVLVnm1HNDq/oTFEwzUvnLfM09A
+ Qq9a9uWZVRxTuu/m7z4reNodGpp0yGZG1uUSlg93CFJ+ef6ODSh5HC607viARRvbzr2T
+ bHMg==
+X-Gm-Message-State: AOJu0Yy4wrCwFvdAcT3eSaaUK6ZtMfddqCKXZGqSZzlgRlKsbvhQlF3c
+ 8V46XYIJcOJKdprWYfyqQKJ5gJBcn53ZZuhb4WDImg==
+X-Google-Smtp-Source: AGHT+IF64ukT/xUKGuFOG6FpzIvk+5FagvDrLm7OH7oR09NrKaU0esX+JU2CwepZIJkkHGKABvcmTWwQyFrkD+X9n4s=
+X-Received: by 2002:a05:6512:2fc:b0:4fe:193c:de74 with SMTP id
+ m28-20020a05651202fc00b004fe193cde74mr10700706lfq.18.1692888095828; Thu, 24
+ Aug 2023 07:41:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230824030304.1555547-1-sjg@chromium.org>
- <20230824133814.GH3953269@bill-the-cat>
-In-Reply-To: <20230824133814.GH3953269@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 24 Aug 2023 08:41:21 -0600
-Message-ID: <CAPnjgZ1oY9SRWNj9RUe2L8=1ndE2LfxkmqqEj-MNtxL_ff-QyQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
- output
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-9-nm@ti.com>
+ <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
+ <20230823171502.GQ3953269@bill-the-cat>
+ <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
+ <20230824001848.vgzl7rcphic3gu2n@carnival>
+ <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
+ <20230824032709.phneggflsw2ps2dv@reanalyze>
+ <a3af68c4-490d-f3e2-a9ed-acd650ac0452@ti.com>
+ <20230824142050.GL3953269@bill-the-cat>
+In-Reply-To: <20230824142050.GL3953269@bill-the-cat>
+From: Simon Glass <sjg@google.com>
+Date: Thu, 24 Aug 2023 08:41:23 -0600
+Message-ID: <CAPnjgZ23_aCG6XqJBwnVkrm3kcuwkz=-geQTX5BbX9rP+w49fA@mail.gmail.com>
+Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Dillon Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
- Marek Vasut <marex@denx.de>, 
- Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com
+Cc: Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, 
+ Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,117 +98,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Thu, 24 Aug 2023 at 07:38, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 24 Aug 2023 at 08:20, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Aug 23, 2023 at 09:02:53PM -0600, Simon Glass wrote:
+> On Thu, Aug 24, 2023 at 06:46:57PM +0530, Neha Malcom Francis wrote:
+> > Hi Simon, Nishanth
+> >
+> > On 24/08/23 08:57, Nishanth Menon wrote:
+> > > On 21:01-20230823, Simon Glass wrote:
+> > > > Hi Nishanth,
+> > > >
+> > > > On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
+> > > > >
+> > > > > On 17:57-20230823, Simon Glass wrote:
+> > > > > [...]
+> > > > > > > This is how we have a common bit of rST for how to build N boards,
+> > > > > > > without having to do a literal copy and paste N times.
+> > > > > >
+> > > > > > How about using this?
+> > > > > >
+> > > > > > https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
+> > > > >
+> > > > > I was not able to succeed with complex includes such as:
+> > > > > https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rst?plain=1#L89
+> > > > >
+> > > > > am62x complete build procedure defined once and reused in other am62x
+> > > > > platforms.. But the am62x build procedure itself is reused from common
+> > > > > k3 build steps.
+> > > >
+> > > > I followed through these instructions. I find the env vars quite
+> > > > confusing, since I don't really know what it is doing. It feels like a
+> > > > script:
+> > > >
+> > > > do $a $b $c
+> > > > do $f $e
+> > > >
+> > > > it is pretty hard to follow. I think it would be better to write
+> > > > everything out in full for each board, like rockchip does.
+> > >
+> > > Unfortunately, this is a few major steps that is repeated for
+> > > (currently):
+> > >     AM62x SK
+> > >     Toradex Verdin
+> > >     (pending: beagleplay - )
+> > >     (once all the dust clears up, hopefully phytec)
+> > >     SK-LP
+> > >     ....
+> > >
+> > > I have no reasonable way to offer to keep them all in sync.
+> > >     https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
+> > > is kind of why I went down this path.S
+> > >
+> > > >
+> > > > Some other minor feedback:
+> > > >
+> > > > - The 'make' lines should really have -j $(nproc) added
+> > >
+> > > Different styles of shells..
+> > >
+> > > > - The $ signs at the start of each command in the docs are a pain
+> > > > since it stops me copying the commands into the terminal - can you
+> > > > remove them?
+> > >
+> > > hehe.. "dont" let people blindly copy paste without understanding what is
+> > > going on argument?
+> > >
+> > > If folks are OK, I sure can send a different patch series for that.. (or
+> > > maybe motivate someone to do that instead of me ;))
+> > >
+> > >
+> > > > - It doesn't build for me:
+> > > >
+> > > >    BINMAN  .binman_stamp
+> > > > Image 'ti-dm' is missing external blobs and is non-functional: blob-ext
+> > > >
+> > > > /binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f):
+> > > >     Missing blob
+> > > >
+> > > > Some images are invalid
+> > > > make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1115:
+> > > > .binman_stamp] Error 103
+> > > > make[1]: Leaving directory '/tmp/b/play'
+> > > > make: *** [Makefile:177: sub-make] Error 2
+> > >
+> > >
+> > > ^^ Neha: This is what I was complaining about.
+> > >
+> > > https://u-boot.readthedocs.io/en/latest/board/ti/am62x_sk.html?highlight=am62#sources
+> > >
+> > > source: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
+> > > is missing, we never used to break build previously binman converted now does.
+> > >
+> > > I am wondering if I need to explicitly call out git clone instructions
+> > > out..
+> > >
+> >
+> > Right... this does seem to be a complaint that keeps coming up.
+> >
+> > Simon, my intention at the time of sending out the patch was that anyone
+> > building the board should "not NOT" have the DM binary. The way we
+> > structured the filename was that it looks at BINMAN_INDIRS to find
+> > ti-dm/ipc_echo_testb_mcu1_0_release_strip.xer5f but I guess this is a
+> > confusing way to put it across. Maybe we should rework that. Or not throw an
+> > error at all when DM isn't found.
 >
-> > In this early stage of using binman to produce output files, we are mostly
-> > seeing people using common extensions such as '.bin' and '.rom'
-> >
-> > But unusual extensions appear in some places.
-> >
-> > We would like 'buildman -k' to keep the build outputs, but this is hard if
-> > there is no consistency as to the extension used.
-> >
-> > This series adjusts binman to enforce just 4 extensions for output images:
-> >
-> >    .bin
-> >    .rom
-> >    .itb
-> >    .img
-> >
-> > Other extensions will produce an error. With this rule observed, buildman
-> > can keep the required files.
-> >
-> > Some patches are included to fix up some easy problems. But the following
-> > boards generate 'custMpk.pem' and it is not clear how to fix this, so I am
-> > asking for help from the maintainers:
-> >
-> >    am62ax_evm_r5 am62x_evm_r5 am64x_evm_r5 am65x_evm_r5
-> >    am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc am65x_hs_evm_r5
-> >    j7200_evm_r5 j721e_evm_r5 j721s2_evm_r5 verdin-am62_r5
-> >    am62ax_evm_a53 am62x_evm_a53 am64x_evm_a53 am65x_evm_a53
-> >    am65x_hs_evm_a53 j7200_evm_a72 j721e_evm_a72 j721s2_evm_a72
-> >    verdin-am62_a53
-> >
-> > It looks like the .pem files are listed as top-level images, e.g.:
-> >
-> >    &custmpk_pem {
-> >       filename = "../../ti/keys/custMpk.pem";
-> >    };
-> >
-> > but if the only objective is to pick up an existing file, it is better to
-> > set BINMAN_INDIRS to include that directory. Also we should only have
-> > simple leafnames in the 'filename' property, so the '../../ti/keys' is not
-> > correct. It makes it harder for people to get the files from other places.
-> > Making this easier is one of binman's goals.
-> >
-> > Most likely the custmpk_pem node can be removed and the .pem file can be
-> > included directly in the place that needs it, e.g. by adjusting the
-> > ti-secure-rom etype (or ex509_cert) to use tools.get_input_filename() when
-> > reading the key file.
-> >
-> > For example, this:
-> >
-> >    custMpk {
-> >       filename = "custMpk.pem";
-> >       custmpk_pem: blob-ext {
-> >          filename = "../keys/custMpk.pem";
-> >       };
-> >    };
-> >
-> > is really just copying a file from '../keys/custMpk.pem' to 'custMpk.pem'
-> > so is equivalent to:
-> >
-> >    custMpk {
-> >       type = "blob";
-> >       filename = "custMpk.pem";
-> >    }
-> >
-> > (note that blob-ext implies that the blob may be missing, so blob is a
-> > better choice, since the key cannot be missing)
-> >
-> > The fact that the .pem files are at the top level means that they are
-> > output images, which surely is not intended. They should be buried in the
-> > image description, at a lower level, as part of something else.
-> >
-> > So please take a loke at the above and see if the binman descriptions can
-> > be reworked slightly to follow these new rules.
-> >
-> >
-> > Simon Glass (6):
-> >   binman: Require image filenames to have certain extensions
-> >   buildman: Keep all permitted output files
-> >   buildman: Show progress when regenerating the board.cfg file
-> >   buildman: Start the clock when the build starts
-> >   kontron_sl28: Use u-boot-update.bin instead of u-boot.update
-> >   stm32mp15: Use u-boot-spl-stm32.bin instead of u-boot-spl.stm32
-> >
-> >  .../dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi   |  2 +-
-> >  arch/arm/dts/stm32mp15-u-boot.dtsi             |  2 +-
-> >  doc/board/kontron/sl28.rst                     |  4 ++--
-> >  doc/board/st/stm32mp1.rst                      | 18 +++++++++---------
-> >  include/configs/stm32mp15_dh_dhsom.h           |  2 +-
-> >  tools/binman/binman.rst                        |  5 +++++
-> >  tools/binman/etype/section.py                  |  3 +--
-> >  tools/binman/ftest.py                          | 12 ++++++++++--
-> >  tools/binman/image.py                          |  9 +++++++++
-> >  tools/binman/test/022_image_name.dts           |  4 ++--
-> >  tools/binman/test/311_bad_image_name.dts       | 17 +++++++++++++++++
-> >  tools/buildman/boards.py                       | 15 ++++++++++++---
-> >  tools/buildman/builder.py                      |  3 ++-
-> >  tools/buildman/builderthread.py                | 11 +++++++----
-> >  tools/buildman/control.py                      |  3 ++-
-> >  15 files changed, 81 insertions(+), 29 deletions(-)
-> >  create mode 100644 tools/binman/test/311_bad_image_name.dts
->
-> This doesn't seem to address the ones I pointed out on IRC as being the
-> first order (to me anyhow) problem of needing the _unsigned files on the
-> platforms you list above for PEM files.
+> Well, is DM required or not? If it's optional, we have flags to mark it
+> optional.  If it's required, we have flags for make and buildman to tell
+> binman "fake it".  I am wondering if we still have the ability to have a
+> more verbose "need it, can't find it" error message, and so that's where
+> it should say that you forgot to set BINMAN_INDIRS or clone the firmware
+> repository.
 
-I think it should be xxx-unsigned.bin instead of xxx.bin_unsigned
+If it is optional, use the 'optional' tag on the entry You will get a
+warning but not an error. At the moment it is saying that the image is
+non-functional, which is not good.
 
 Regards,
 Simon
