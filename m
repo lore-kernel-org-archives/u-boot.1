@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E33C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF6FEC3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:27:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70AFC869B9;
+	by phobos.denx.de (Postfix) with ESMTP id B4BBA86961;
 	Thu, 24 Aug 2023 21:26:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oHAxpgEQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="q+bjz95V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFE53869B9; Thu, 24 Aug 2023 21:26:56 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 1E3F186961; Thu, 24 Aug 2023 21:26:57 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE9C28698D
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E2D68675B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-3fee843b44cso1631815e9.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:53 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-52a1132b685so341716a12.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692905213; x=1693510013;
+ d=gmail.com; s=20221208; t=1692905214; x=1693510014;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nkSynOGWPqBWY/Jr3KDbDKbN2rDKko8pZ38Gh5RHUEA=;
- b=oHAxpgEQdg6004oJjB5Hc9n+H8IaQbbZNHZqCk2Bi9P9r5RgFAK1PriOZ0ednRZUoN
- 2CQvtX3CsISZ97ES9SA+zRSGKUcpMuX3PE4Dtr12ea+nU8QW1cgQkkB60KH4T5+trhld
- +byhcgQuCj9LfOA00ZLCp+bYLs3ia1/rgpUrND+x9FDwyVnQaR8stBjqlxIA+cwq6VL2
- HwHKUP7AHtHrgoBhTTmYitA3lxLkHy+Q5pbMBd8b23HwOKugQqrAezE96CYtBKGhdbjY
- RS5LjFLx4Q4CEo4OA9QT5V1kJh6lntB5m0mSH5nOdkrNrk69veeO9Ir8d62alFWcVbW0
- jraQ==
+ bh=GpBKOJnyExK5FUhPY8qHpFnuQEKA7o+eM49Y7TW9504=;
+ b=q+bjz95VIsbqy6nmYXqUhkZ/X0qcgVwHjNJZYtrMngmATk7EblmYSb08Evv4bRo9Lz
+ pGQIo8G1nZrfAKcPabJbKlC5WJLQs43RAUMRJF77/1Y4CAl3crobY1BLeZ4x3EgsUySw
+ /qLlE230tWJ5KOBrJhPIxouon/ITzrIYle1OxTGmZO8cMIiApE+8QyT4tvKDwG27mTKh
+ 4z7L1DyOXuoctoq9zDR0tEF1Eh8XhTKflL+mTHUTQDx+RTKy3kzbntcBZu5lZIRvb66n
+ vkBFLDyYFzLqTihnPmb20O+ICIO58/yD4X5rCm//Ud/gNszt/tcPLNkYQ5vskhCyyuEG
+ 1nOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692905213; x=1693510013;
+ d=1e100.net; s=20221208; t=1692905214; x=1693510014;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nkSynOGWPqBWY/Jr3KDbDKbN2rDKko8pZ38Gh5RHUEA=;
- b=cjWYPgp05uWe7k27Z7+Ibbi6mj0pYmjQUTWZK3uhrAlkTqhX0fmi1WUIWAGGyodCDE
- EyPFY9D+Q0iJfnM34tOhvVszIGNZWIk2SUinivoAAJcG0mACFiLQ8SwdCoadqq5zOlsr
- TX9smV5JWVH7YnqXbkyV0rKq+KydZAKUxWHXQGxpY7fGCcst1urdRJC++7+sJjgc3qw+
- Dd9rEQGPpXlPoqWgo1/fLu5faDihKrk8+EdIwmqxeWsHe9rMBanun5hFc6hFesB205w1
- Kz5YGDIYlZTzwi9+iGmUSGj+KvGSKrHJg7qiGr4ZVn7oKHmtMLuUVLQ6veGB3HcP1m9o
- 9xJQ==
-X-Gm-Message-State: AOJu0YymGiTWeVxfC3lxdPL0CM3roVUkyvEnWEo3dPB14U2dfWIlar/F
- MSdWyut92fM5u4jLruxzzRi2BkeRebl1Gw==
-X-Google-Smtp-Source: AGHT+IEgPnR7WzU87GD8HdkqhekXbBpdZaF15Gg/MmkxbJSS7Q7IRI6NGclooOcBd+UfI60VHF7f8w==
-X-Received: by 2002:a5d:6041:0:b0:31a:e5e8:1d8e with SMTP id
- j1-20020a5d6041000000b0031ae5e81d8emr11861348wrt.5.1692905213167; 
- Thu, 24 Aug 2023 12:26:53 -0700 (PDT)
+ bh=GpBKOJnyExK5FUhPY8qHpFnuQEKA7o+eM49Y7TW9504=;
+ b=A9vfoB2YpO4NePvxqL/lR3FhJyy2FXnwbFvOltbvAfJ6vmpu17a0wIyZ++80FrzSQs
+ Rxzp9j+nROV5mOTC/v4GkBmzUQU2Zq29Q/qgvlNi1fPRjRxBXgA1yEGW6j+OUgVSqNo0
+ q5zNtwNeiU+/CP1yZF9PvZdtTN/tMxrZvOTcNk/ukJVKZpC5cHTfHP6sGNjbucgsMTCt
+ o3KFPySZovTiK3IrQgCg24ahHPlmjhhnOA/y7iFBmNk/PYnp48LETi8b20hw8lVl4Fyx
+ vMCmL9TiWQtka2T9U+/nsvNwrUiXq9KMS62loJgFA+Ygg1L+0kInw/PtDI0q3dB99NxA
+ URFA==
+X-Gm-Message-State: AOJu0YxwpMTxjySsXuarDCKh/gXuWnRqy7f7laKfQCPZgYtFGiMvL0OF
+ ewFd4vgw7lWvEQRMEk0Yc4c=
+X-Google-Smtp-Source: AGHT+IGM1xghCKm4SlEVt2a2pZiRyzzRXEfYNOe5wyUg4OuagKEQuVU2eBKJTa68Tz6HS9WcrsN+CQ==
+X-Received: by 2002:aa7:cd50:0:b0:523:b121:4228 with SMTP id
+ v16-20020aa7cd50000000b00523b1214228mr10734586edw.41.1692905214089; 
+ Thu, 24 Aug 2023 12:26:54 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.52
+ be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:26:52 -0700 (PDT)
+ Thu, 24 Aug 2023 12:26:53 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 05/16] board: asus: transformer-t30: remove PMIC GPIOs
- configuration
-Date: Thu, 24 Aug 2023 22:25:52 +0300
-Message-Id: <20230824192603.240104-6-clamor95@gmail.com>
+Subject: [PATCH v2 06/16] configs: transformer_t30: convert bootmenu option
+Date: Thu, 24 Aug 2023 22:25:53 +0300
+Message-Id: <20230824192603.240104-7-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230824192603.240104-1-clamor95@gmail.com>
 References: <20230824192603.240104-1-clamor95@gmail.com>
@@ -91,57 +90,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Default configuration matches values which are set in the board
-so this configuration is not required.
+Convert refresh USB to enter console. Transformers have full size
+USB and a dock keyboard so access to U-Boot console would be handy.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- board/asus/transformer-t30/transformer-t30.c | 25 --------------------
- 1 file changed, 25 deletions(-)
+ configs/transformer_t30_defconfig    | 2 +-
+ include/configs/transformer-common.h | 7 +------
+ 2 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/board/asus/transformer-t30/transformer-t30.c b/board/asus/transformer-t30/transformer-t30.c
-index b6fd19d28e..5c1bac004f 100644
---- a/board/asus/transformer-t30/transformer-t30.c
-+++ b/board/asus/transformer-t30/transformer-t30.c
-@@ -33,11 +33,6 @@
- #define TPS65911_LDO5			0x32
- #define TPS65911_LDO6			0x35
+diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
+index 840431ff38..802dcb1786 100644
+--- a/configs/transformer_t30_defconfig
++++ b/configs/transformer_t30_defconfig
+@@ -22,7 +22,7 @@ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_KEYED_CTRLC=y
+ CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
++CONFIG_BOOTCOMMAND="setenv skip_boot 0; setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; if test ${skip_boot} -eq 1; then; else run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff; fi"
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+diff --git a/include/configs/transformer-common.h b/include/configs/transformer-common.h
+index dcdda1ec5b..3b7db0ab14 100644
+--- a/include/configs/transformer-common.h
++++ b/include/configs/transformer-common.h
+@@ -64,19 +64,14 @@
+ 		"else echo SPI flash backup FAILED! Aborting ...;" \
+ 			"poweroff; fi\0"
  
--#define TPS65911_GPIO0			0x60
--#define TPS65911_GPIO6			0x66
--#define TPS65911_GPIO7			0x67
--#define TPS65911_GPIO8			0x68
+-#define TRANSFORMER_REFRESH_USB \
+-	"refresh_usb=usb start; usb reset; usb tree; usb info;" \
+-		"pause 'Press ANY key to return to bootmenu...'; bootmenu\0"
 -
- #define TPS65911_DEVCTRL		0x3F
- #define   DEVCTRL_PWR_OFF_MASK		BIT(7)
- #define   DEVCTRL_DEV_ON_MASK		BIT(2)
-@@ -146,26 +141,6 @@ static void tps65911_voltage_init(void)
- 		if (ret)
- 			log_debug("vddio_usd set failed: %d\n", ret);
- 	}
--
--	/* TPS659110: GPIO0_REG output high to VDD_5V0_SBY */
--	ret = dm_i2c_reg_write(dev, TPS65911_GPIO0, 0x07);
--	if (ret)
--		log_debug("vdd_5v0_sby set failed: %d\n", ret);
--
--	/* TPS659110: GPIO6_REG output high to VDD_3V3_SYS */
--	ret = dm_i2c_reg_write(dev, TPS65911_GPIO6, 0x07);
--	if (ret)
--		log_debug("vdd_3v3_sys set failed: %d\n", ret);
--
--	/* TPS659110: GPIO7_REG output high to VDD_1V5_DDR */
--	ret = dm_i2c_reg_write(dev, TPS65911_GPIO7, 0x07);
--	if (ret)
--		log_debug("vdd_1v5_ddr set failed: %d\n", ret);
--
--	/* TPS659110: GPIO8_REG pull_down output high to VDD_5V0_SYS */
--	ret = dm_i2c_reg_write(dev, TPS65911_GPIO8, 0x0f);
--	if (ret)
--		log_debug("vdd_5v0_sys set failed: %d\n", ret);
- }
- 
- /*
+ #define TRANSFORMER_BOOTMENU \
+ 	TRANSFORMER_FLASH_UBOOT \
+ 	TRANSFORMER_FLASH_SPI \
+-	TRANSFORMER_REFRESH_USB \
+ 	"bootmenu_0=mount internal storage=usb start && ums 0 mmc 0; bootmenu\0" \
+ 	"bootmenu_1=mount external storage=usb start && ums 0 mmc 1; bootmenu\0" \
+ 	"bootmenu_2=fastboot=echo Starting Fastboot protocol ...; fastboot usb 0; bootmenu\0" \
+ 	"bootmenu_3=update bootloader=run flash_uboot\0" \
+-	"bootmenu_4=refresh USB=run refresh_usb\0" \
++	"bootmenu_4=enter console=usb start; setenv skip_boot 1; exit\0" \
+ 	"bootmenu_5=reboot RCM=enterrcm\0" \
+ 	"bootmenu_6=reboot=reset\0" \
+ 	"bootmenu_7=power off=poweroff\0" \
 -- 
 2.39.2
 
