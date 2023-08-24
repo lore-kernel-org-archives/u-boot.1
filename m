@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A79C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CB0C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:12:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19F3386555;
+	by phobos.denx.de (Postfix) with ESMTP id 5CBD186563;
 	Thu, 24 Aug 2023 05:11:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ob7yr+mR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QoOIpfXs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E33A886590; Thu, 24 Aug 2023 05:11:23 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 3B51586574; Thu, 24 Aug 2023 05:11:24 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECAFF86537
+ by phobos.denx.de (Postfix) with ESMTPS id 080328655F
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAfW109478;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAFd053221;
  Wed, 23 Aug 2023 22:11:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692846670;
- bh=yk962jhEJ9PuI0MnE0R4SiekTDMdr4wmSWHB+f6J+eg=;
+ bh=WzCg1zuQ1eMAN9Zw/pLZVjIUYRal+GEmVEIXCdkxvjY=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Ob7yr+mRDdNocXfrd+bs/YbYCthuE1dUK7C0aKTQLdqHEBoNNduzUj7CPiMXATkUS
- KpnVfAZZSh2Q8yX/o7MiOEyBAPis+GZi2th9ihi5TjOcRwTWLICDDvWAtjzxUUX2av
- qbYuTgCsIIsOFwBRUM5JMFcnH8AEUg1PZpidK7Lw=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3BAfo053096
+ b=QoOIpfXsR527Y3KLY32cOitetlfiKNS6/amFSUGq09ZrD5qJH8UiscridNCkkone/
+ 2Ec2GIYiCjFVu1Kjowpne+OJZGAsoLfNq8TMRv/caCN1dCCGsAZD4Mc6a/PWqSZN/5
+ EXbSN57yKiTLBOPlJMKuckMgEgQ/gw56UJEI1CkI=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3BA84030871
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 23 Aug 2023 22:11:10 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
  Aug 2023 22:11:10 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 23 Aug 2023 22:11:10 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAAs006644;
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BA1b015467;
  Wed, 23 Aug 2023 22:11:10 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Simon
@@ -56,9 +56,9 @@ CC: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V5 13/17] arm: mach-k3: am625: Add support for UDA FS
-Date: Wed, 23 Aug 2023 22:10:57 -0500
-Message-ID: <20230824031101.3460411-14-nm@ti.com>
+Subject: [PATCH V5 10/17] arm: mach-k3: am625_init: Use IS_ENABLED()
+Date: Wed, 23 Aug 2023 22:10:54 -0500
+Message-ID: <20230824031101.3460411-11-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230824031101.3460411-1-nm@ti.com>
 References: <20230824031101.3460411-1-nm@ti.com>
@@ -82,53 +82,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While boot partition support with EMMC boot is useful, it is
-constrained by the size of boot hardware partition itself.
-
-In the case of K3 devices, tispl images can contain OP-TEE images that
-can substantially vary in size and the u-boot image itself can vary over
-time as we enable various features.
-
-So use the CSD information in the case of EMMC_BOOT configuration being
-enabled to pick boot partition or UDA FS mode operation to pick.
-
-If EMMC_BOOT is disabled, then depend on filesystem configuration to
-pick data from UDA.
-
-While at this, drop the extraneous whitespace.
+Drop the #ifdeffery and use IS_ENABLED() inline check and let the compiler
+do it's thing.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
-Changes since V4:
-- Did'nt pickup Mattijs' reviewed-by - no more iffdeffery - so might be
-good to relook.
+new patch (cleanup before modifying for adding UDA-FS)
 
-V4: https://lore.kernel.org/r/20230822184135.2328409-4-nm@ti.com
-
- arch/arm/mach-k3/am625_init.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/am625_init.c | 35 +++++++++++++++++------------------
+ 1 file changed, 17 insertions(+), 18 deletions(-)
 
 diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-index 499cb57267b9..8fa36f7b913e 100644
+index 0e5d44269ebf..165bca6885ef 100644
 --- a/arch/arm/mach-k3/am625_init.c
 +++ b/arch/arm/mach-k3/am625_init.c
-@@ -220,9 +220,15 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
- 			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+@@ -121,10 +121,10 @@ void board_init_f(ulong dummy)
+ 	struct udevice *dev;
+ 	int ret;
  
--
- 	switch (bootmode) {
- 	case BOOT_DEVICE_EMMC:
-+		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT)) {
-+			if (spl_mmc_emmc_boot_partition(mmc))
-+				return MMCSD_MODE_EMMCBOOT;
-+			return MMCSD_MODE_FS;
-+		}
-+		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+			return MMCSD_MODE_FS;
- 		return MMCSD_MODE_EMMCBOOT;
- 	case BOOT_DEVICE_MMC:
- 		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
+-#if defined(CONFIG_CPU_V7R)
+-	setup_k3_mpu_regions();
+-	rtc_erratumi2327_init();
+-#endif
++	if (IS_ENABLED(CONFIG_CPU_V7R)) {
++		setup_k3_mpu_regions();
++		rtc_erratumi2327_init();
++	}
+ 
+ 	/*
+ 	 * Cannot delay this further as there is a chance that
+@@ -156,29 +156,28 @@ void board_init_f(ulong dummy)
+ 
+ 	preloader_console_init();
+ 
+-#ifdef CONFIG_K3_EARLY_CONS
+ 	/*
+ 	 * Allow establishing an early console as required for example when
+ 	 * doing a UART-based boot. Note that this console may not "survive"
+ 	 * through a SYSFW PM-init step and will need a re-init in some way
+ 	 * due to changing module clock frequencies.
+ 	 */
+-	early_console_init();
+-#endif
++	if (IS_ENABLED(CONFIG_K3_EARLY_CONS))
++		early_console_init();
+ 
+-#if defined(CONFIG_K3_LOAD_SYSFW)
+ 	/*
+ 	 * Configure and start up system controller firmware. Provide
+ 	 * the U-Boot console init function to the SYSFW post-PM configuration
+ 	 * callback hook, effectively switching on (or over) the console
+ 	 * output.
+ 	 */
+-	ret = is_rom_loaded_sysfw(&bootdata);
+-	if (!ret)
+-		panic("ROM has not loaded TIFS firmware\n");
++	if (IS_ENABLED(CONFIG_K3_LOAD_SYSFW)) {
++		ret = is_rom_loaded_sysfw(&bootdata);
++		if (!ret)
++			panic("ROM has not loaded TIFS firmware\n");
+ 
+-	k3_sysfw_loader(true, NULL, NULL);
+-#endif
++		k3_sysfw_loader(true, NULL, NULL);
++	}
+ 
+ 	/*
+ 	 * Force probe of clk_k3 driver here to ensure basic default clock
+@@ -209,11 +208,11 @@ void board_init_f(ulong dummy)
+ 		enable_mcu_esm_reset();
+ 	}
+ 
+-#if defined(CONFIG_K3_AM64_DDRSS)
+-	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+-	if (ret)
+-		panic("DRAM init failed: %d\n", ret);
+-#endif
++	if (IS_ENABLED(CONFIG_K3_AM64_DDRSS)) {
++		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
++		if (ret)
++			panic("DRAM init failed: %d\n", ret);
++	}
+ 	spl_enable_dcache();
+ }
+ 
 -- 
 2.40.0
 
