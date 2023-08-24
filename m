@@ -4,72 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7449DC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:07:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CAD4C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:11:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E15B88642B;
-	Thu, 24 Aug 2023 15:07:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6E72986435;
+	Thu, 24 Aug 2023 15:11:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CWwQvNqb";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 449FA864AA; Thu, 24 Aug 2023 15:07:16 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692882669;
+	bh=NYh5iM+9tU9Q/n6e5tucDct/ve/cBN8lgVl5zDmdG5I=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IyQVQr5aXxaPEjYU48XnWAYwCnZplXQXRcRx4IZy2tR7qxZzMGFdMx2JiSPn9W1ap
+	 sOg8I6KXLFRI5EVTEfeE0SwO1dyXiijErAOyFzaBivzHhqSonPBbffT9WaSAioehok
+	 FeOgxSxnXWFd1EQiEB2w0+oeK189BrU5b8hkJbvOQ2Ma2Jh3c5VMTqzqQNmECWRLeA
+	 u7sZsNjr+6sNZIBVJMZzNJPKlCqjolndy8N8Dfb5trT4tfeiWDPO0pnbwe1j4CsHVx
+	 Xzjpux/bRxh8PntOb3EcHmYhmh5Zogl7Z//0Aq33tOKod+ubq7EmJLCZdzGLAfHgpU
+	 tNHUZjqCdhqtw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 916DE86418
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:07:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-4fe15bfb1adso10253871e87.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:07:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692882433; x=1693487233;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eDIuv22Y+ImSkPeU75ov3NYeSl7oYOQq4umDqV7tGZ4=;
- b=CWwQvNqbwWJBAQM12AtLQISK3/yLqyrQRAYh9f1cP7xZkBSzpqMqCfiTUbOrUNR/d6
- h2adtD7SzEDamm1i7bDKLWMa7BQUA30fNCMyEBt285vBps5H0g38RXaZllWEpMc/NTYU
- vyo1r03TjQZeF9xCrvjmSgNkFe+qUTZeU4gRxUn0kr23gRBTva5AJ6pXOXMuNVSFjPfP
- 27FQUfvZhhWgGcKjfCGhx8nHmDGoU4EHQLcjbkh5HvXFp0MkXI97ykLpLn3dAVKMl1kw
- 7ZPyoR8VXvvOySpv915UdQRlT9zoWa2/jgpmy/o86q3SyQeeH0n+g1nzzyls2hSFWOjI
- FVJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692882433; x=1693487233;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=eDIuv22Y+ImSkPeU75ov3NYeSl7oYOQq4umDqV7tGZ4=;
- b=B7zRHGnmXG35wwwU0Ih5Ld1+KW831sYpqXr/xjwGIdC8cGW/r775wl/MNEtPTNSw2U
- Vn4rDl+blnKY1R4qU4TNCH+5hxdp4qqESMVI/mSa7QEwn+RraYS1VOgx1RjdTk/1S7ZR
- 8DoFVRXSLoEYtVEcgTNYnhgxRl6GIIHKCodmZ4Sgif7t6zIolFZOBZ2Mcazkz4sZ6Owq
- Z/XUx7M3IwATPwQH2tcEiC8Hc6uePmy8G8yMCJLx6G9Zq+uP2KiVFxnBEAr/uOCnx1Bv
- 983OYjd30EkBkOez+MCYAGYpDcCDxqIH9oYtPsgVkNSABhzmrwccoMlttaUHeuZE+NMH
- jC+Q==
-X-Gm-Message-State: AOJu0YzdYN3WK35JHUB91DK3Lt16qEWOsTZS24e2NNhptDEhs67fUbjN
- MlbvO7+o1fnEZYdE/6/pNflEemSMlpy1ABd7W57gPA==
-X-Google-Smtp-Source: AGHT+IHjL/gUTrRuccWf4GUEMLF8kLo1UZSJ/GbrnoySSNpcohiKsHAOQvTgex9dx62q8/B3wQecWSls3TmbgCl5MOE=
-X-Received: by 2002:a05:6512:6c3:b0:4f8:7614:48a5 with SMTP id
- u3-20020a05651206c300b004f8761448a5mr13826842lff.66.1692882432802; Thu, 24
- Aug 2023 06:07:12 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id A4C618609B;
+ Thu, 24 Aug 2023 15:11:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1692882668;
+ bh=NYh5iM+9tU9Q/n6e5tucDct/ve/cBN8lgVl5zDmdG5I=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=RSv+uRLZRvcdLEBDw5UFMd/UViHgDYZi1EFlAax7unRU/XZhXpYyBOaLCHTkvCCBO
+ 5oBByDMQes2RswDO1w+DYFJREQu5nNdTuiCum6aqrQ6WrYqz8/++s2EcVR+YpqQN2x
+ 9rVOEv1AtUgrLZwlOMOCifBKMAK9wCXqAqB42rsrQgILqXDJDNtXgP/XA3nMDlLBfz
+ FkBkIrxjNVTJ10U/5SO89BeiXysWiO53BagOuRjehQispB+R4/zy+d3rHRcw5TwR3E
+ qBcWowziNEun5jdt115aJczKLMxRv4XS9FEvtMQk8C/ph9s1oivEPiOh6XNkaoudaz
+ kRlFbr2HmYUBQ==
+Message-ID: <d966ce20-61d3-384d-8d66-aa8bb58a5d7c@denx.de>
+Date: Thu, 24 Aug 2023 15:11:07 +0200
 MIME-Version: 1.0
-References: <20230824115500.2388636-1-ilias.apalodimas@linaro.org>
- <b84b35df-c146-5255-f9b6-427688cd7eeb@gmx.de>
-In-Reply-To: <b84b35df-c146-5255-f9b6-427688cd7eeb@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 24 Aug 2023 16:06:36 +0300
-Message-ID: <CAC_iWjLUFe=tBAZTndrzusDLpuFExSFRjjRxgzeZ1iL=_y57Kg@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: delete handle from events when a protocol is
- uninstalled
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] tools: ensure zeroed padding in external FIT images
+Content-Language: en-US
+To: Roman Azarenko <roman.azarenko@iopsys.eu>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "sjg@chromium.org" <sjg@chromium.org>,
+ "massimo.pegorer@vimar.com" <massimo.pegorer@vimar.com>,
+ "trini@konsulko.com" <trini@konsulko.com>
+References: <20230823121417.270511-1-roman.azarenko@iopsys.eu>
+ <40263db2-e42a-4997-ddcc-7a1ea7d44d31@denx.de>
+ <603b051b057bb632fc9213cb0abc7d2887bf2b67.camel@iopsys.eu>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <603b051b057bb632fc9213cb0abc7d2887bf2b67.camel@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,78 +74,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Henrich
+On 8/24/23 12:17, Roman Azarenko wrote:
+> Hello Marek,
+> 
+> On Wed, 2023-08-23 at 20:06 +0200, Marek Vasut wrote:
+>> Can we use memset and zero out the trailing part of the buffer instead
+>> ?
+> 
+> That is what I started with, but at the time the ftruncate() approach
+> seemed simpler.
+> 
+> Now that you suggested memset yourself, I took a stab at it again. I
+> think I got to the point where I'm happy with the logic, and will submit
+> v2 tomorrow to give some more time if anyone else has more comments on
+> v1.
 
-
-> >
-> > +/**
-> > + * efi_purge_handle() - Clean the deleted handle from the various lists
-> > + * @handle: handle to remove
-> > + *
-> > + * Return: status code
-> > + */
-> > +static efi_status_t efi_purge_handle(efi_handle_t handle)
-> > +{
-> > +     struct efi_register_notify_event *item, *next;
-> > +
-> > +     if (!list_empty(&handle->protocols))
-> > +             return EFI_ACCESS_DENIED;
-> > +     /* The handle is about to be freed. Remove it from events */
-> > +     list_for_each_entry_safe(item, next, &efi_register_notify_events, link) {
->
-> You are not deleting from efi_register_notify_events.
-
-I am not sure I understand this.  I am not trying to delete the event
-here, but the handle on which the notified protocol was installed.
-
->  Why do you use the safe version of the iterator?
-
-No particular reason, I just tend to prefer it over the unsafe one.
-The latter is perfectly fine here.
-
-[...]
-
-> >
-> > -     /* If the last protocol has been removed, delete the handle. */
-> > -     if (list_empty(&handle->protocols)) {
->
-> >       size_t i = 0;
-> > @@ -2795,25 +2827,25 @@ efi_uninstall_multiple_protocol_interfaces_int(efi_handle_t handle,
-> >               return EFI_INVALID_PARAMETER;
-> >
-> >       efi_va_copy(argptr_copy, argptr);
-> > +     protocol = efi_va_arg(argptr, efi_guid_t*);
-> >       for (;;) {
-> > -             protocol = efi_va_arg(argptr, efi_guid_t*);
-> > +             bool preserve = true;
-> > +
-> >               if (!protocol)
-> >                       break;
-> >               protocol_interface = efi_va_arg(argptr, void*);
-> > +             next_protocol = efi_va_arg(argptr, efi_guid_t*);
-> > +             if (!next_protocol)
-> > +                     preserve = false;
->
-> Is your idea that if 5 protocols are to be removed but only the first 3
-> are installed your want to reinstall the first 3?
-
-Not only that. Image you install 2 protocols and then someone tries to
-uninstall 3. If the invalid guid/protocol is at the beginning or the
-middle of the list you'll be fine.  The current code will reinstall
-the previously removed protocols.
-However, if the invalid protocol is last, you will have removed 2
-valid protocols and the handle will be empty.  In that case, we will
-delete the handle before trying to reinstall the uninstalled
-protocols.
-
->
-> Can we have some code comment describing what the function should do? In
-> 5 years nobody will remember why the code was implemented this way.
->
-
-Of course
-
-[...]
-
-Cheers
-/Ilias
+Nice, thanks!
