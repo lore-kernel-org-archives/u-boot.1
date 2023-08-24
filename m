@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6784C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 02:24:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8824CC71134
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 02:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2100886519;
-	Thu, 24 Aug 2023 04:24:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BFADD86532;
+	Thu, 24 Aug 2023 04:30:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qJmV9Pgi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iDH9/o0H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78AFD864FA; Thu, 24 Aug 2023 04:24:40 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id D326A8651B; Thu, 24 Aug 2023 04:30:58 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1F1486529
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:24:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAB348651B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3a86b1114ceso337322b6e.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:24:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-76ce59842c1so372983985a.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692843875; x=1693448675;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kbRveNJ2gjqiKsfs57YjCsUaSjlGD6/kr/a5BxSrsXg=;
- b=qJmV9PgiSYoZlHiWfgW2MNTFmC7YBJssQwfIfd+fzGlddNCOaKlR9OgKuvGv0E9tYi
- H9ABwJC7cLlUECsCSYA3nb0w6N4IEG0Fds+jB1mP/yyfHRWhiqMkskriNm6pCj2cM0sg
- YiDqHOhLO3E3CVFs/JavFmBBPShbALrsOjbEcJMPGlY1aXixdizLt+zu8a5zmfJ2gC64
- 0mocLzDVVEdR0/+aXKiUS9LRGwZPGZ9jTa5qJKHIyBwv3pmqt8SSdQURSg7GP/J0m6xp
- GdynCraPKvUrpKfiCwlBTM9/kbQIBqRsMBaYTZXQsGiMYf/9a7dz30FH9cqlygdyiKuy
- kx1A==
+ d=gmail.com; s=20221208; t=1692844254; x=1693449054;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dNtNtAg5sOu2yTXG7NYDd7WQU5t4wP5NXGSNZeTn0ws=;
+ b=iDH9/o0HwuR2FpLbNuxqHLG+kZ7i6ZWuk37qdt+O61GOIMBYNflWx480wgVD8ENjkc
+ 2a8VlmAG7yMxSkBtXHRxXFaFAEEWutYXFCS5o/nBKEJ3f68iB+pJ8PSgq//uGFqz0k3V
+ BE2Tr6KYm0GdyrhHOff9TaVqRQLzANSxNHmJyiRT3UVCsqmo16hluPqIIf9g+NiycovB
+ 4Y+QKImwzl/XAt9fJNVQSk4U/90vupQWcOknd+SGKcJ6UJvqODVNX/LIqtRS6HQDMHud
+ hcu+TGyk/j+aeS/kAUOe6OThZDh68MCBmwS/Ue85JZE5wrAtDj9faYmJ5pTBmnvsLGiY
+ SjwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692843875; x=1693448675;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kbRveNJ2gjqiKsfs57YjCsUaSjlGD6/kr/a5BxSrsXg=;
- b=hOKmS/j9zX7n1wKI6RbO8KW7l+I01BgeY5NUGjpV8lqPRYcC0G4cbFnuQURnLSfS5a
- mLEvV52bHHAwH7cmunBfiNEkNl3ySWGlWa6yQ4BFwTjqE2sEj1adtKOi5NjQHL+1ni9s
- e597ztLef3VBTiHzuZLJbL81e3GHBTaDbdtRxrH1Dq+Hn72WSCmYfy+gQXpAueoSlZzX
- Q8Oja04hAzIw1xz7MZ8RbKsrUGQCINmexH90SgvuqyuKwNnBEPw0oz/cT8X8J3XSa4JZ
- Xi+xUmSNlrNyI8/TyAbSk4a/AN2Kv5hrATAtZFhEG//C4NWZjJc7NmIUbtxmwQLB/x3S
- 1oAg==
-X-Gm-Message-State: AOJu0YxgAqjE66dBCMgV6WMBaiugK6XSCESE9DSwFc0Mo8q/0dEfumVT
- LR5nm2Aly+w/zUQhnpBmgwI0Qw==
-X-Google-Smtp-Source: AGHT+IFxIuqBPEncDRJSq3efbv7A5ZrFcLiSwJ22B0fi/ztohZQmPEIMQU3W9t19vmw9HZ24j+vVmg==
-X-Received: by 2002:a05:6359:b97:b0:13c:b9a8:fe5b with SMTP id
- gf23-20020a0563590b9700b0013cb9a8fe5bmr2532371rwb.3.1692843875197; 
- Wed, 23 Aug 2023 19:24:35 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:97b2:8257:1926:eed6])
+ d=1e100.net; s=20221208; t=1692844254; x=1693449054;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dNtNtAg5sOu2yTXG7NYDd7WQU5t4wP5NXGSNZeTn0ws=;
+ b=N74iQdrDpnRRnV6SOColUeEMwXrPsidW+EGC0y008PTvk2GjNOq+k+1hczXthSbaKO
+ UM7oNxQXo230R6Gf7fvMHwqdLWFgJjYTbeYZDdDCHDvSlZ2IyrKa1/20KygsjW73gVwD
+ K2jIR+APGf5GGIASw71psO3Mx9s1ZJjy+lRbc59LzZi39/lYjExIykHCNhSwQ+tbA0zv
+ upf3mC6s6/5LIiaHRwclTFvkVsHFryHm561rYj0Otp84GHhXtbki5Df/eAgav3uSpQkC
+ N8Ok6xiy6iZx3t42zQ3paY+YUzup5IInmb6PnxbA8XIXkymnmirHyYwakbqn7Ezaq2Du
+ xtNw==
+X-Gm-Message-State: AOJu0Yw9RvsX8/WCc+jMg4ZiHvWkQeN60qq83SJ7VolzhRrlDJCvI9l3
+ P+lEw3muw685pcwsROeA7OD1A9pwuWw=
+X-Google-Smtp-Source: AGHT+IEojaDe7JkKjx7aUFZV9jm6Z9DKLmOfox2srpKbhCHGCcjvz/MwC7X9KHuublKQfrheXE0LIA==
+X-Received: by 2002:a05:620a:44c1:b0:76d:b6ef:941a with SMTP id
+ y1-20020a05620a44c100b0076db6ef941amr6332995qkp.13.1692844254106; 
+ Wed, 23 Aug 2023 19:30:54 -0700 (PDT)
+Received: from jesse-desktop.jtp-bos.lab
+ ([2600:4040:57a3:100:88f2:4286:b3e9:c854])
  by smtp.gmail.com with ESMTPSA id
- s26-20020a639e1a000000b0055b5f206ea2sm10351381pgd.39.2023.08.23.19.24.33
+ o13-20020ae9f50d000000b00767da10efb6sm4312756qkg.97.2023.08.23.19.30.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 19:24:34 -0700 (PDT)
-Date: Thu, 24 Aug 2023 11:24:31 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 2/2] efi_loader: support boot from URI device path
-Message-ID: <ZOa/X1DMZOMgotSB@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
+ Wed, 23 Aug 2023 19:30:53 -0700 (PDT)
+From: Jesse Taube <mr.bossman075@gmail.com>
+X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
+To: u-boot@lists.denx.de
+Cc: "Andrew F . Davis" <afd@ti.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Jesse Taube <Mr.Bossman075@gmail.com>, Stefan Roese <sr@denx.de>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Mingming lee <mingming.lee@mediatek.com>,
+ Mauro Condarelli <mc5686@mclink.it>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
- <20230823083721.1318097-3-masahisa.kojima@linaro.org>
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marex@denx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Roger Quadros <rogerq@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] Convert CFG_SYS_UBOOT_START to Kconfig
+Date: Wed, 23 Aug 2023 22:30:52 -0400
+Message-Id: <20230824023052.655362-1-Mr.Bossman075@gmail.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230823083721.1318097-3-masahisa.kojima@linaro.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,295 +109,362 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Kojima-san,
+Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*")
+renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
+this meant that the value was no longer available to the Makefile. This
+caused imxrt to fail to boot. All the other boards that used this
+variable were unaffected because they were using the default value
+which is CONFIG_TEXT_BASE.
 
-On Wed, Aug 23, 2023 at 05:37:20PM +0900, Masahisa Kojima wrote:
-> This supports to boot from the URI device path.
-> When user selects the URI device path, bootmgr downloads
-> the file using wget into the address specified by loadaddr
-> env variable.
-> If the file is .iso or .img file, mount the image with blkmap
-> then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> If the file is .efi file, load and start the downloaded file.
+This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the default
+value to CONFIG_TEXT_BASE.
 
-Is this behavior part of UEFI specification?
-Even so, it would be better to describe it in uefi.rst (or else),
-including URI usage.
+Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
+Suggested-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+---
+ Makefile                                       | 16 ++++------------
+ arch/arm/mach-k3/config_secure.mk              |  2 +-
+ arch/arm/mach-omap2/config_secure.mk           |  2 +-
+ boot/Kconfig                                   | 16 ++++++++++++++++
+ common/spl/spl.c                               |  6 +-----
+ common/spl/spl_fit.c                           |  2 +-
+ configs/imxrt1020-evk_defconfig                |  2 ++
+ configs/imxrt1050-evk_defconfig                |  2 ++
+ configs/imxrt1170-evk_defconfig                |  2 ++
+ include/configs/gardena-smart-gateway-mt7688.h |  4 ----
+ include/configs/imxrt1020-evk.h                |  6 ------
+ include/configs/imxrt1050-evk.h                |  6 ------
+ include/configs/imxrt1170-evk.h                |  3 ---
+ include/configs/linkit-smart-7688.h            |  4 ----
+ include/configs/mt7620.h                       |  3 ---
+ include/configs/mt7628.h                       |  3 ---
+ include/configs/mt8512.h                       |  2 --
+ include/configs/vocore2.h                      |  4 ----
+ include/spl.h                                  |  2 +-
+ 19 files changed, 31 insertions(+), 56 deletions(-)
 
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
->  lib/efi_loader/efi_bootmgr.c | 213 +++++++++++++++++++++++++++++++++++
->  1 file changed, 213 insertions(+)
-> 
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index a40762c74c..8b20f486f2 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -7,10 +7,14 @@
->  
->  #define LOG_CATEGORY LOGC_EFI
->  
-> +#include <blk.h>
-> +#include <blkmap.h>
->  #include <common.h>
->  #include <charset.h>
-> +#include <dm.h>
->  #include <log.h>
->  #include <malloc.h>
-> +#include <net.h>
->  #include <efi_default_filename.h>
->  #include <efi_loader.h>
->  #include <efi_variable.h>
-> @@ -168,6 +172,209 @@ out:
->  	return ret;
->  }
->  
-> +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-> +/**
-> + * mount_image() - mount the image
-> + *
-> + * @lo_label	label of load option
-> + * @file_size	file size
-> + * @handle:	pointer to handle for newly installed image
-> + * Return:	status code
-> + */
-> +static efi_status_t mount_image(u16 *lo_label, int file_size,
-> +				efi_handle_t *handle)
+diff --git a/Makefile b/Makefile
+index 9b90204bfe..13d4c63439 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1364,14 +1364,6 @@ OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
+ u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
+ 	$(call if_changed,objcopy)
+ 
+-#
+-# U-Boot entry point, needed for booting of full-blown U-Boot
+-# from the SPL U-Boot version.
+-#
+-ifndef CFG_SYS_UBOOT_START
+-CFG_SYS_UBOOT_START := $(CONFIG_TEXT_BASE)
+-endif
+-
+ # Boards with more complex image requirements can provide an .its source file
+ # or a generator script
+ # NOTE: Please do not use this. We are migrating away from Makefile rules to use
+@@ -1391,7 +1383,7 @@ endif
+ 
+ ifdef CONFIG_SPL_LOAD_FIT
+ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+-	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
++	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-p $(CONFIG_FIT_EXTERNAL_OFFSET) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+ 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(DEVICE_TREE))) \
+@@ -1399,10 +1391,10 @@ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+ 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
+ else
+ MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
+-	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
++	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+ MKIMAGEFLAGS_u-boot-ivt.img = -A $(ARCH) -T firmware_ivt -C none -O u-boot \
+-	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
++	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+ u-boot-ivt.img: MKIMAGEOUTPUT = u-boot-ivt.img.log
+ endif
+@@ -1433,7 +1425,7 @@ MKIMAGEFLAGS_u-boot.pbl = -n $(srctree)/$(CONFIG_SYS_FSL_PBL_RCW:"%"=%) \
+ UBOOT_BIN := u-boot.bin
+ 
+ MKIMAGEFLAGS_u-boot-lzma.img = -A $(ARCH) -T standalone -C lzma -O u-boot \
+-	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
++	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+ 
+ u-boot.bin.lzma: u-boot.bin FORCE
+diff --git a/arch/arm/mach-k3/config_secure.mk b/arch/arm/mach-k3/config_secure.mk
+index 7bc8af813a..9cc1f9eb24 100644
+--- a/arch/arm/mach-k3/config_secure.mk
++++ b/arch/arm/mach-k3/config_secure.mk
+@@ -30,7 +30,7 @@ tispl.bin_HS: $(obj)/u-boot-spl-nodtb.bin_HS $(patsubst %,$(obj)/dts/%.dtb_HS,$(
+ 	$(call if_changed,mkfitimage)
+ 
+ MKIMAGEFLAGS_u-boot.img_HS = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+-	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
++	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+ 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_OF_LIST)))
+ 
+diff --git a/arch/arm/mach-omap2/config_secure.mk b/arch/arm/mach-omap2/config_secure.mk
+index 24ddcdb961..f76262bb0c 100644
+--- a/arch/arm/mach-omap2/config_secure.mk
++++ b/arch/arm/mach-omap2/config_secure.mk
+@@ -102,7 +102,7 @@ u-boot_HS_XIP_X-LOADER: $(obj)/u-boot.bin FORCE
+ ifdef CONFIG_SPL_LOAD_FIT
+ 
+ MKIMAGEFLAGS_u-boot_HS.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+-	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
++	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+ 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+ 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_OF_LIST)))
+ 
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 5e2d4286ae..f2f7821cc1 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -737,6 +737,22 @@ config TEXT_BASE
+ 	default 0x4a000000 if SUNXI_MINIMUM_DRAM_MB >= 256
+ 	default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >= 64
+ 	hex "Text Base"
++	help
++	  The address in memory that U-Boot will be copied from, initially.
++
++config HAVE_SYS_UBOOT_START
++	bool
++	depends on HAVE_TEXT_BASE
++	prompt "Use custom U-Boot Start"
++	help
++	  By default, the address in memory that U-Boot will be copied from(TEXT_BASE) and the
++	  entry point are the same. Select this to set a different U-Boot start address.
++
++config SYS_UBOOT_START
++	hex
++	depends on HAVE_TEXT_BASE
++	default TEXT_BASE
++	prompt "U-Boot entry" if HAVE_SYS_UBOOT_START
+ 	help
+ 	  The address in memory that U-Boot will be running from, initially.
+ 
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 0062f3f45d..f4b30b3cf3 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -45,10 +45,6 @@
+ DECLARE_GLOBAL_DATA_PTR;
+ DECLARE_BINMAN_MAGIC_SYM;
+ 
+-#ifndef CFG_SYS_UBOOT_START
+-#define CFG_SYS_UBOOT_START	CONFIG_TEXT_BASE
+-#endif
+-
+ u32 *boot_params_ptr = NULL;
+ 
+ #if CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS)
+@@ -252,7 +248,7 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
+ 		spl_image->entry_point = u_boot_pos;
+ 		spl_image->load_addr = u_boot_pos;
+ 	} else {
+-		spl_image->entry_point = CFG_SYS_UBOOT_START;
++		spl_image->entry_point = CONFIG_SYS_UBOOT_START;
+ 		spl_image->load_addr = CONFIG_TEXT_BASE;
+ 	}
+ 	spl_image->os = IH_OS_U_BOOT;
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 730639f756..3d39e70e65 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -816,7 +816,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 	}
+ 
+ 	/*
+-	 * If a platform does not provide CFG_SYS_UBOOT_START, U-Boot's
++	 * If a platform does not provide CONFIG_SYS_UBOOT_START, U-Boot's
+ 	 * Makefile will set it to 0 and it will end up as the entry point
+ 	 * here. What it actually means is: use the load address.
+ 	 */
+diff --git a/configs/imxrt1020-evk_defconfig b/configs/imxrt1020-evk_defconfig
+index 40210a5f0b..6b63b80895 100644
+--- a/configs/imxrt1020-evk_defconfig
++++ b/configs/imxrt1020-evk_defconfig
+@@ -19,6 +19,8 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_SIZE_LIMIT=0x20000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x20209000
++CONFIG_HAVE_SYS_UBOOT_START=y
++CONFIG_SYS_UBOOT_START=0x800023FD
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SD_BOOT=y
+ # CONFIG_USE_BOOTCOMMAND is not set
+diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
+index 8f7a36fea7..cbf9469b24 100644
+--- a/configs/imxrt1050-evk_defconfig
++++ b/configs/imxrt1050-evk_defconfig
+@@ -21,6 +21,8 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_SIZE_LIMIT=0x20000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x20209000
++CONFIG_HAVE_SYS_UBOOT_START=y
++CONFIG_SYS_UBOOT_START=0x800023FD
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SD_BOOT=y
+ # CONFIG_USE_BOOTCOMMAND is not set
+diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
+index 8320c091d2..83825da6de 100644
+--- a/configs/imxrt1170-evk_defconfig
++++ b/configs/imxrt1170-evk_defconfig
+@@ -21,6 +21,8 @@ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_SIZE_LIMIT=0x20000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x202C0000
++CONFIG_HAVE_SYS_UBOOT_START=y
++CONFIG_SYS_UBOOT_START=0x202403FD
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SD_BOOT=y
+ # CONFIG_USE_BOOTCOMMAND is not set
+diff --git a/include/configs/gardena-smart-gateway-mt7688.h b/include/configs/gardena-smart-gateway-mt7688.h
+index 0ba4efe67a..1b97ae22fc 100644
+--- a/include/configs/gardena-smart-gateway-mt7688.h
++++ b/include/configs/gardena-smart-gateway-mt7688.h
+@@ -11,10 +11,6 @@
+ 
+ #define CFG_SYS_INIT_SP_OFFSET	0x400000
+ 
+-/* SPL */
+-
+-#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
+-
+ /* Dummy value */
+ #define CFG_SYS_UBOOT_BASE		0
+ 
+diff --git a/include/configs/imxrt1020-evk.h b/include/configs/imxrt1020-evk.h
+index e180387c68..cd6af93454 100644
+--- a/include/configs/imxrt1020-evk.h
++++ b/include/configs/imxrt1020-evk.h
+@@ -18,10 +18,4 @@
+ #define DMAMEM_BASE			(PHYS_SDRAM + PHYS_SDRAM_SIZE - \
+ 					 DMAMEM_SZ_ALL)
+ 
+-/*
+- * Configuration of the external SDRAM memory
+- */
+-
+-#define CFG_SYS_UBOOT_START		0x800023FD
+-
+ #endif /* __IMXRT1020_EVK_H */
+diff --git a/include/configs/imxrt1050-evk.h b/include/configs/imxrt1050-evk.h
+index 7688464841..2af2dde2ae 100644
+--- a/include/configs/imxrt1050-evk.h
++++ b/include/configs/imxrt1050-evk.h
+@@ -25,10 +25,4 @@
+ 		"stderr=serial,vidconsole\0"
+ #endif
+ 
+-/*
+- * Configuration of the external SDRAM memory
+- */
+-
+-#define CFG_SYS_UBOOT_START		0x800023FD
+-
+ #endif /* __IMXRT1050_EVK_H */
+diff --git a/include/configs/imxrt1170-evk.h b/include/configs/imxrt1170-evk.h
+index f83429082a..1ccaa15bc1 100644
+--- a/include/configs/imxrt1170-evk.h
++++ b/include/configs/imxrt1170-evk.h
+@@ -22,8 +22,5 @@
+ #define DMAMEM_SZ_ALL			(1 * 1024 * 1024)
+ #define DMAMEM_BASE			(PHYS_SDRAM + PHYS_SDRAM_SIZE - \
+ 					 DMAMEM_SZ_ALL)
+-/* For SPL */
+-#define CFG_SYS_UBOOT_START		0x202403FD
+-/* For SPL ends */
+ 
+ #endif /* __IMXRT1170_EVK_H */
+diff --git a/include/configs/linkit-smart-7688.h b/include/configs/linkit-smart-7688.h
+index f16c7e9122..e8f7a59c40 100644
+--- a/include/configs/linkit-smart-7688.h
++++ b/include/configs/linkit-smart-7688.h
+@@ -11,10 +11,6 @@
+ 
+ #define CFG_SYS_INIT_SP_OFFSET	0x400000
+ 
+-/* SPL */
+-
+-#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
+-
+ /* Dummy value */
+ #define CFG_SYS_UBOOT_BASE		0
+ 
+diff --git a/include/configs/mt7620.h b/include/configs/mt7620.h
+index d69d35fa96..3bc0c18a1e 100644
+--- a/include/configs/mt7620.h
++++ b/include/configs/mt7620.h
+@@ -12,9 +12,6 @@
+ 
+ #define CFG_SYS_INIT_SP_OFFSET		0x400000
+ 
+-/* SPL */
+-#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
+-
+ /* Dummy value */
+ #define CFG_SYS_UBOOT_BASE		0
+ 
+diff --git a/include/configs/mt7628.h b/include/configs/mt7628.h
+index 0ac376d33c..1df06811d6 100644
+--- a/include/configs/mt7628.h
++++ b/include/configs/mt7628.h
+@@ -22,9 +22,6 @@
+ #define CFG_SYS_BAUDRATE_TABLE		{ 9600, 19200, 38400, 57600, 115200, \
+ 					  230400, 460800, 921600 }
+ 
+-/* SPL */
+-#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
+-
+ /* Dummy value */
+ #define CFG_SYS_UBOOT_BASE		0
+ 
+diff --git a/include/configs/mt8512.h b/include/configs/mt8512.h
+index c0fc8688ca..4e70291e94 100644
+--- a/include/configs/mt8512.h
++++ b/include/configs/mt8512.h
+@@ -10,8 +10,6 @@
+ #define __MT8512_H
+ 
+ /* Uboot definition */
+-#define CFG_SYS_UBOOT_START			CONFIG_TEXT_BASE
+-
+ #define ENV_BOOT_READ_IMAGE \
+ 	"boot_rd_img=mmc dev 0" \
+ 	";mmc read ${loadaddr} 0x27000 0x8000" \
+diff --git a/include/configs/vocore2.h b/include/configs/vocore2.h
+index 43050d61c3..eb87633661 100644
+--- a/include/configs/vocore2.h
++++ b/include/configs/vocore2.h
+@@ -11,10 +11,6 @@
+ 
+ #define CFG_SYS_INIT_SP_OFFSET	0x400000
+ 
+-/* SPL */
+-
+-#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
+-
+ /* Dummy value */
+ #define CFG_SYS_UBOOT_BASE		0
+ 
+diff --git a/include/spl.h b/include/spl.h
+index 92bcaa90a4..57da1484f0 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -484,7 +484,7 @@ unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+  * spl_set_header_raw_uboot() - Set up a standard SPL image structure
+  *
+  * This sets up the given spl_image which the standard values obtained from
+- * config options: CONFIG_SYS_MONITOR_LEN, CFG_SYS_UBOOT_START,
++ * config options: CONFIG_SYS_MONITOR_LEN, CONFIG_SYS_UBOOT_START,
+  * CONFIG_TEXT_BASE.
+  *
+  * @spl_image: Image description to set up
+-- 
+2.40.0
 
-I wonder why not adding "address" parameter to make this function
-more generic as Simon suggested.
-
-> +{
-> +	int err;
-> +	efi_status_t ret;
-> +	char *label = NULL, *p;
-> +	lbaint_t blknum;
-> +	struct udevice *bm_dev;
-> +	efi_handle_t bm_handle;
-> +	struct udevice *blk, *partition;
-> +	struct efi_handler *handler;
-> +	struct efi_device_path *file_path;
-> +	struct efi_device_path *device_path;
-> +
-> +	label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
-> +	if (!label)
-> +		return EFI_OUT_OF_RESOURCES;
-> +
-> +	p = label;
-> +	utf16_utf8_strcpy(&p, lo_label);
-> +	err = blkmap_create(label, NULL);
-> +	if (err) {
-> +		log_err("failed to create blkmap\n");
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +	bm_dev = blkmap_from_label(label);
-> +	if (!bm_dev) {
-> +		log_err("\"%s\" is not the name of any known blkmap\n", label);
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +
-> +	blknum = file_size / 512; /* TODO: don't use literal value. */
-> +	err = blkmap_map_pmem(bm_dev, 0, blknum, image_load_addr);
-> +	if (err) {
-> +		log_err("Unable to map %#llx at block %d : %d\n",
-> +			(unsigned long long)image_load_addr, 0, err);
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
-> +		 (unsigned long long)image_load_addr);
-> +
-> +	/* TODO: without calling this, partition devices are not binded. */
-> +	blk_list_part(UCLASS_BLKMAP);
-
-I think that blkmap should provide a way to *probe* its child block
-device. In fact,
-        struct blkmap *bm = dev_get_plat(bm_dev);
-        device_probe(bm->blk);
-should work. (Not tested though)
-
-> +
-> +	/*
-> +	 * Search the partition having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> +	 * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> +	 */
-> +	device_foreach_child(blk, bm_dev)
-
-Does bm_dev have more than one block devices?
-
-> +	{
-> +		device_foreach_child(partition, blk)
-> +		{
-> +			if (dev_tag_get_ptr(partition, DM_TAG_EFI,
-> +					    (void **)&bm_handle)) {
-> +				log_warning("DM_TAG_EFI not found\n");
-> +				continue;
-> +			}
-> +
-> +			ret = efi_search_protocol(
-> +				bm_handle,
-> +				&efi_simple_file_system_protocol_guid,
-> +				&handler);
-> +			if (ret != EFI_SUCCESS)
-> +				continue;
-> +
-> +			ret = efi_search_protocol(
-> +				bm_handle, &efi_guid_device_path, &handler);
-> +			if (ret != EFI_SUCCESS)
-> +				continue;
-> +
-> +			ret = efi_protocol_open(handler, (void **)&device_path,
-> +						efi_root, NULL,
-> +						EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> +			if (ret != EFI_SUCCESS)
-> +				continue;
-> +
-> +			file_path = expand_media_path(device_path);
-> +			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-> +						      NULL, 0, handle));
-> +			efi_free_pool(file_path);
-> +			if (ret == EFI_SUCCESS)
-> +				goto out;
-> +		}
-> +	}
-
-Another idea would be to create a new boot option (as a removable
-media) and to invoke it from bootmgr.
-
-> +
-> +out:
-> +	efi_free_pool(label);
-> +
-> +	return ret;
-> +}
-> +
-> +/**
-> + * try_load_from_uri_path() - Handle the URI device path
-> + *
-> + * @uridp:	uri device path
-> + * @lo_label	label of load option
-> + * @handle:	pointer to handle for newly installed image
-> + * Return:	status code
-> + */
-> +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> +					   u16 *lo_label,
-> +					   efi_handle_t *handle)
-> +{
-> +	efi_status_t ret;
-> +	int file_size, file_name_len;
-> +	char *s, *host_name, *file_name, *str_copy;
-> +
-> +	/*
-> +	 * Download file using wget.
-> +	 *
-> +	 * URI device path content is like http://www.example.com/sample/test.iso.
-> +	 * U-Boot wget takes the target uri in this format.
-> +	 *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
-> +	 * Need to resolve the http server ip address before starting wget.
-> +	 */
-> +
-> +	/* only support "http://" */
-> +	if (strncmp(uridp->uri, "http://", 7)) {
-> +		log_err("Error: uri must start with http://\n");
-> +		return EFI_INVALID_PARAMETER;
-> +	}
-> +
-> +	str_copy = strdup(uridp->uri);
-> +	if (!str_copy)
-> +		return EFI_OUT_OF_RESOURCES;
-> +	s = str_copy + strlen("http://");
-> +	host_name = strsep(&s, "/");
-> +	if (!s) {
-> +		log_err("Error: invalied uri, no file path\n");
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +	file_name = s;
-> +	net_dns_resolve = host_name;
-> +	net_dns_env_var = "httpserverip";
-> +	if (net_loop(DNS) < 0) {
-> +		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +	s = env_get("httpserverip");
-> +	if (!s) {
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +
-> +	/*
-> +	 * WGET requires that "net_boot_file_name" and "image_load_addr" global
-> +	 * variables are properly set in advance.
-> +	 */
-> +	strlcpy(net_boot_file_name, s, 1024);
-> +	strlcat(net_boot_file_name, ":/", 1024); /* append '/' which is removed by strsep() */
-> +	strlcat(net_boot_file_name, file_name, 1024);
-> +	s = env_get("loadaddr");
-> +	if (!s) {
-> +		log_err("Error: loadaddr is not set\n");
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +	image_load_addr = hextoul(s, NULL);
-> +
-> +	file_size = net_loop(WGET);
-> +	if (file_size < 0) {
-> +		log_err("Error: downloading file failed\n");
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
-> +
-> +	/*
-> +	 * Identify file type by file extension.
-> +	 * If the file extension is ".iso" or ".img", mount it and boot with default file.
-> +	 * If the file is ".efi", load and start the downloaded file.
-> +	 */
-> +	file_name_len = strlen(net_boot_file_name);
-> +	if (!strncmp(&net_boot_file_name[file_name_len - 4], ".iso", 4) ||
-> +	    !strncmp(&net_boot_file_name[file_name_len - 4], ".img", 4)) {
-> +		ret = mount_image(lo_label, file_size, handle);
-> +	} else if (!strncmp(&net_boot_file_name[file_name_len - 4], ".efi", 4)) {
-> +		ret = efi_run_image((void *)image_load_addr, file_size);
-
-Nak.
-try_load_from_uri_path() is called from try_load_entry().
-This function's purpose is solely to load an image.
-The execution should be triggered later.
-
--Takahiro Akashi
-
-
-> +	} else {
-> +		log_err("Error: file type is not supported\n");
-> +		ret = EFI_INVALID_PARAMETER;
-> +	}
-> +
-> +out:
-> +	free(str_copy);
-> +
-> +	return ret;
-> +}
-> +#endif
-> +
->  /**
->   * try_load_entry() - try to load image for boot option
->   *
-> @@ -211,6 +418,12 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
->  		if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
->  			/* file_path doesn't contain a device path */
->  			ret = try_load_from_short_path(lo.file_path, handle);
-> +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-> +		} else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-> +			ret = try_load_from_uri_path(
-> +				(struct efi_device_path_uri *)lo.file_path,
-> +				lo.label, handle);
-> +#endif
->  		} else {
->  			file_path = expand_media_path(lo.file_path);
->  			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-> -- 
-> 2.34.1
-> 
