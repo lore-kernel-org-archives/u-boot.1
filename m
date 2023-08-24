@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FCE5C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB06AC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:49:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD334865A5;
-	Thu, 24 Aug 2023 16:48:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 44EBE86504;
+	Thu, 24 Aug 2023 16:49:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H3XeDmxC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QYKf1ooq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9732986672; Thu, 24 Aug 2023 16:48:20 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id E336B86414; Thu, 24 Aug 2023 16:49:50 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C9548077D
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:48:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C0C286504
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2bcc187e0b5so66600671fa.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:48:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-51cff235226so2107966a12.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:49:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692888497; x=1693493297;
+ d=chromium.org; s=google; t=1692888587; x=1693493387;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RHWA1SJKu0dI6PLS8zYcuguRnKLlN6fUAgdyEuRSEzM=;
- b=H3XeDmxCkYWAXkjl9/miUeYTRuC5/rfgpQrFEB0blVVscv+1uDuySLOjbhOkMxz7rF
- UpR55V8LJp+TqJBvsKFZXCD9Sb0DPdoCRgfdFjBMvhvPV6PYzn1UAibEbEiougglS/Kh
- b9QFX9O1Q6TBfvphf9UiyERUwaZnQvRakiJxMIb0DcIVOqMFgwcqZwYVDt1SZlXqPDeA
- kAYTxxB3sWXqq7OD0EVlzVgs/AHkQKml9S2ojbSx5LJv1UjFD6JYdByXmSDxfekY53S8
- W33gj+fRy/+7vrM/2cEE+140dLhjZMeOv/o76WnZGpuJKfxeio35yC4Y4f/p/Dfg21lT
- vUjw==
+ bh=jo5yTwACgNKISyKoQ2ECwBq1iLOWfVnl1zj2mZwxM9w=;
+ b=QYKf1ooqy9V5vh753H8lwarnxJ+HNQyBFllVWO0/zwxuAQmH/YVJYRIItc/Fw4NAZz
+ VUeuD7hUcRn6Ww94MR4lBaIohVKLO/fRhUpkogW3jaQn1I3uCAiFKxQbAJZL8ZvQSaPA
+ +miM+GtN/lEnCQdu0otaN8IAm90gNrrH4Ar2g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692888497; x=1693493297;
+ d=1e100.net; s=20221208; t=1692888587; x=1693493387;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RHWA1SJKu0dI6PLS8zYcuguRnKLlN6fUAgdyEuRSEzM=;
- b=XpyIWYcNnymB583usUDljOR32qdyzkbUonx1GYNkP6yJR2WlaYf0ZuPKqbCNg6dXe5
- R0JB0296UcjwjSfslaanl+amNj8E2Pkq/+iXPlRzTYmnL4jfmDBZuOIYPHGt1bu/qy46
- 7+chPlSG5S6vh6JkAXq+fn9sNgmqjNSdCKEcm4gIjAdkwXV7YUDrSavn89TGegbB9zZz
- hbcxzF6pLtm5WkRGAVaEMSRwpDR3qWZ0CRHlu4z1/N3UlP5V4GX9JUpZmbmc/WyXWbSL
- 0ZIrGyTTltEXAZ4xK6rB9LreLIDbOfo1L3zE5qT36OoqK1wkLA47/ikmFtnmkm8kjFxw
- zIaw==
-X-Gm-Message-State: AOJu0YyGmIqUqQOGJEmHtebsCoNnk+GscR97NpUo8DHgZzjtD83/GPCN
- 7o+oYnbIwnl7kU6D0IrnYMziZiPz+PCVRMm5PHZXCg==
-X-Google-Smtp-Source: AGHT+IFbjRq3YEkXbYbV+e1IJFG9O5fKaGBrn7cMEz07NVG4ElqmJfYlZI8BPirq68g/J9KM7X/yjM2UpOkuEWjmkts=
-X-Received: by 2002:a05:651c:224:b0:2bc:d7d6:258f with SMTP id
- z4-20020a05651c022400b002bcd7d6258fmr5178227ljn.35.1692888496703; Thu, 24 Aug
- 2023 07:48:16 -0700 (PDT)
+ bh=jo5yTwACgNKISyKoQ2ECwBq1iLOWfVnl1zj2mZwxM9w=;
+ b=BBzBC54hIxHqu4y9IaV8tg6OTg9ce+oUuWyxzyOZWmmE287EZxWFnnlAXpkrJSa3W5
+ 1IRd16ehsbjWZd9YeYJPzvQugn14mb7Hq0k3sCTclfak5gU7xcdqhWf2EdZ22UE3XueT
+ TfkftzLKGJPi69MmR8lqhh2YIVUDjfdELcmiEXIzLxK1SzCIkryW1xweQCcPOqnMw4ec
+ AWIA3o6V2VUKwActyQ8Mp5yRFPoZ+LGMVjKZUEw8GgYx7RogAmbB7J9g4/otILz+thsZ
+ TQ/t7DA/99oWVlOveQhK7sjQ+QB8rRQ2incAyGzkO5syEa28dA1oYjI8PbpW4EDqUIKx
+ EBNg==
+X-Gm-Message-State: AOJu0YwlWEuJ6pvbsUG9NdBpoWBT73WGYegVgyOn1qsW72AVMy46Rrlq
+ KKJLxXo9H4Xwlh92laDHVxrk2sEznAKY7///8K4Low==
+X-Google-Smtp-Source: AGHT+IHndDXK/FnrEo2bTH1g2H/6fCkujZCmn8E942aV70u6PP3xC79HP3cxfSRmjlq6f86KQO5GMtHnzMT6ZlJ9WA8=
+X-Received: by 2002:a05:6402:d56:b0:525:4d74:be8c with SMTP id
+ ec22-20020a0564020d5600b005254d74be8cmr14675349edb.14.1692888587523; Thu, 24
+ Aug 2023 07:49:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230824142109.2401528-1-ilias.apalodimas@linaro.org>
- <CAPnjgZ0JZCrPOCUZDgL10zXdB+LQQtv2MXZPcpcxXDY+u8MhHw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0JZCrPOCUZDgL10zXdB+LQQtv2MXZPcpcxXDY+u8MhHw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 24 Aug 2023 17:47:40 +0300
-Message-ID: <CAC_iWjLWQhZrZkhK02dS=gQG7Z7y2-cQ6LtKnnrm3tur3J4KPA@mail.gmail.com>
-Subject: Re: [PATCH v2] efi_loader: delete handle from events when a protocol
- is uninstalled
-To: Simon Glass <sjg@google.com>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <20230824133814.GH3953269@bill-the-cat>
+ <CAPnjgZ1oY9SRWNj9RUe2L8=1ndE2LfxkmqqEj-MNtxL_ff-QyQ@mail.gmail.com>
+ <20230824144535.GP3953269@bill-the-cat>
+In-Reply-To: <20230824144535.GP3953269@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 24 Aug 2023 08:49:36 -0600
+Message-ID: <CAPnjgZ3Xh0HY3psNbWSZViLgECuDSfdg1zmh7c=OsaiL4a_TjA@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
+ output
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Dillon Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
+ Marek Vasut <marex@denx.de>, 
+ Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com, 
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,49 +95,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Tom,
 
-On Thu, 24 Aug 2023 at 17:41, Simon Glass <sjg@google.com> wrote:
+On Thu, 24 Aug 2023 at 08:45, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Ilias,
+> On Thu, Aug 24, 2023 at 08:41:21AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 24 Aug 2023 at 07:38, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Aug 23, 2023 at 09:02:53PM -0600, Simon Glass wrote:
+> > >
+> > > > In this early stage of using binman to produce output files, we are mostly
+> > > > seeing people using common extensions such as '.bin' and '.rom'
+> > > >
+> > > > But unusual extensions appear in some places.
+> > > >
+> > > > We would like 'buildman -k' to keep the build outputs, but this is hard if
+> > > > there is no consistency as to the extension used.
+> > > >
+> > > > This series adjusts binman to enforce just 4 extensions for output images:
+> > > >
+> > > >    .bin
+> > > >    .rom
+> > > >    .itb
+> > > >    .img
+> > > >
+> > > > Other extensions will produce an error. With this rule observed, buildman
+> > > > can keep the required files.
+> > > >
+> > > > Some patches are included to fix up some easy problems. But the following
+> > > > boards generate 'custMpk.pem' and it is not clear how to fix this, so I am
+> > > > asking for help from the maintainers:
+> > > >
+> > > >    am62ax_evm_r5 am62x_evm_r5 am64x_evm_r5 am65x_evm_r5
+> > > >    am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc am65x_hs_evm_r5
+> > > >    j7200_evm_r5 j721e_evm_r5 j721s2_evm_r5 verdin-am62_r5
+> > > >    am62ax_evm_a53 am62x_evm_a53 am64x_evm_a53 am65x_evm_a53
+> > > >    am65x_hs_evm_a53 j7200_evm_a72 j721e_evm_a72 j721s2_evm_a72
+> > > >    verdin-am62_a53
+> > > >
+> > > > It looks like the .pem files are listed as top-level images, e.g.:
+> > > >
+> > > >    &custmpk_pem {
+> > > >       filename = "../../ti/keys/custMpk.pem";
+> > > >    };
+> > > >
+> > > > but if the only objective is to pick up an existing file, it is better to
+> > > > set BINMAN_INDIRS to include that directory. Also we should only have
+> > > > simple leafnames in the 'filename' property, so the '../../ti/keys' is not
+> > > > correct. It makes it harder for people to get the files from other places.
+> > > > Making this easier is one of binman's goals.
+> > > >
+> > > > Most likely the custmpk_pem node can be removed and the .pem file can be
+> > > > included directly in the place that needs it, e.g. by adjusting the
+> > > > ti-secure-rom etype (or ex509_cert) to use tools.get_input_filename() when
+> > > > reading the key file.
+> > > >
+> > > > For example, this:
+> > > >
+> > > >    custMpk {
+> > > >       filename = "custMpk.pem";
+> > > >       custmpk_pem: blob-ext {
+> > > >          filename = "../keys/custMpk.pem";
+> > > >       };
+> > > >    };
+> > > >
+> > > > is really just copying a file from '../keys/custMpk.pem' to 'custMpk.pem'
+> > > > so is equivalent to:
+> > > >
+> > > >    custMpk {
+> > > >       type = "blob";
+> > > >       filename = "custMpk.pem";
+> > > >    }
+> > > >
+> > > > (note that blob-ext implies that the blob may be missing, so blob is a
+> > > > better choice, since the key cannot be missing)
+> > > >
+> > > > The fact that the .pem files are at the top level means that they are
+> > > > output images, which surely is not intended. They should be buried in the
+> > > > image description, at a lower level, as part of something else.
+> > > >
+> > > > So please take a loke at the above and see if the binman descriptions can
+> > > > be reworked slightly to follow these new rules.
+> > > >
+> > > >
+> > > > Simon Glass (6):
+> > > >   binman: Require image filenames to have certain extensions
+> > > >   buildman: Keep all permitted output files
+> > > >   buildman: Show progress when regenerating the board.cfg file
+> > > >   buildman: Start the clock when the build starts
+> > > >   kontron_sl28: Use u-boot-update.bin instead of u-boot.update
+> > > >   stm32mp15: Use u-boot-spl-stm32.bin instead of u-boot-spl.stm32
+> > > >
+> > > >  .../dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi   |  2 +-
+> > > >  arch/arm/dts/stm32mp15-u-boot.dtsi             |  2 +-
+> > > >  doc/board/kontron/sl28.rst                     |  4 ++--
+> > > >  doc/board/st/stm32mp1.rst                      | 18 +++++++++---------
+> > > >  include/configs/stm32mp15_dh_dhsom.h           |  2 +-
+> > > >  tools/binman/binman.rst                        |  5 +++++
+> > > >  tools/binman/etype/section.py                  |  3 +--
+> > > >  tools/binman/ftest.py                          | 12 ++++++++++--
+> > > >  tools/binman/image.py                          |  9 +++++++++
+> > > >  tools/binman/test/022_image_name.dts           |  4 ++--
+> > > >  tools/binman/test/311_bad_image_name.dts       | 17 +++++++++++++++++
+> > > >  tools/buildman/boards.py                       | 15 ++++++++++++---
+> > > >  tools/buildman/builder.py                      |  3 ++-
+> > > >  tools/buildman/builderthread.py                | 11 +++++++----
+> > > >  tools/buildman/control.py                      |  3 ++-
+> > > >  15 files changed, 81 insertions(+), 29 deletions(-)
+> > > >  create mode 100644 tools/binman/test/311_bad_image_name.dts
+> > >
+> > > This doesn't seem to address the ones I pointed out on IRC as being the
+> > > first order (to me anyhow) problem of needing the _unsigned files on the
+> > > platforms you list above for PEM files.
+> >
+> > I think it should be xxx-unsigned.bin instead of xxx.bin_unsigned
 >
-> On Thu, 24 Aug 2023 at 08:21, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > When a notification event is registered for a protocol the handle of the
-> > protocol is added in our event notification list.  When all the protocols
-> > of the handle are uninstalled we delete the handle but we do not remove
-> > it from the event notification list.
-> >
-> > Clean up the protocol removal functions and add a wrapper which
-> > - Removes the to-be deleted handle from any lists it participates
-> > - Remove the handle if no more protocols are present
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> > Changes since v1:
-> > - use the non safe list traversing macros on efi_register_notify_events since
-> >   we don't delete anythig from that list
-> > - Add a comment explaining the code that preserves the handle in case of a
-> >   removal failure
-> >
-> >  lib/efi_loader/efi_boottime.c | 89 +++++++++++++++++++++++++----------
-> >  1 file changed, 65 insertions(+), 24 deletions(-)
+> As I was saying on IRC, you need to make that change then, if we're
+> going to go down this path, before v2023.10 is out.
+
+Yes I can do that one...but I am stuck on the PEM files so need the
+maintainer there to figure out what is up, as described in detail in
+the cover letter.
+
 >
-> Is there a test for this behaviour?
+> And to repeat what I said inside another part of the thread, the u-boot*
+> glob is hiding other "arbitrary" extensions that we've had in-use for
+> forever.
 
-Not in -master.  I've sent it in the past [0].  But instead of merging
-that series, we decided with Heinrich that a bigger cleanup was
-needed.
-So we had to do a bigger cleanup of protocol handling [1] [2]
+Yes, understood. Do you think that is a problem? I should improve the
+docs for buildman -k too.
 
-[1] https://lore.kernel.org/u-boot/20230620061932.113292-1-ilias.apalodimas@linaro.org/
-[2] https://lore.kernel.org/u-boot/a222ec75-32ef-9dce-0855-afde2702c618@gmx.de/
-
-Once the last part gets merged, I'll rebase the test and send it over
-
-Thanks
-/Ilias
->
-> Regards,
-> Simon
+Regrads,
+Simon
