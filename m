@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709DFC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA9AAC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:31:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E330A86430;
-	Thu, 24 Aug 2023 15:30:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47D6F8653C;
+	Thu, 24 Aug 2023 15:31:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nm0Ll/X4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GepzrabS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3E3286433; Thu, 24 Aug 2023 15:30:23 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 12B1786553; Thu, 24 Aug 2023 15:31:46 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B028642B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:30:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 785AB8653B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:31:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-3fee87dd251so46762375e9.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:30:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5230a22cfd1so8758880a12.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:31:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692883821; x=1693488621;
- h=user-agent:in-reply-to:content-disposition:mime-version:references
- :message-id:subject:cc:to:from:date:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mfzEakQ4TiP6pmwnxnXX1Ia1ZDZBBNZB18PcZfkvudA=;
- b=nm0Ll/X4Q0NJz4VgoBz8GW9NXTtJuj+CUEC70TQBFPDl+HFEBUNUBdUge/+mp0Cb5c
- N0epAH07eS+eJ7a0OyHrtYYLraPyb9jZsTnsdl4sc5pP817w8bI24lHwNOZLfdq5gQrN
- Ut/ck8j03Gc7VskJsM3L2NhE3Aqu7pDU38INO9Tv/NvoOTxX59gOdyWN630xUrm6lXlA
- /IqpDCd5+HN2rZb1uz0lY+JCqT2ssEOr15Dmg0bnPQvtkZsu89nbknv/OHte2aFVm29w
- EmSG653OUvvtnkgvb7PF9ESb1D7U1r5ueiKbllVT5rmFyzwHIMRXYEBP79JfCzq7ENT8
- bJEw==
+ d=gmail.com; s=20221208; t=1692883903; x=1693488703;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=QxQaBeaB/1HZuu7y1vofRYzKvCp6JOf41c/Q4K7SEUw=;
+ b=GepzrabSsN8krwHb8zCpBT8yy+3We/lQllbR8MEesXkCGnkMdHWEeGjlDeTVGO3YKr
+ 2z5R6I7HFtrsMDMTOU0lAHI4RvqGYIJh68ptXlAKjxQxLcOvlF2w+teYRSecX96LAFUw
+ X2GNSlmiOo6TchE49dZl+nI55dB5Xp9ekkYYRI7e4iJP5qrTtef5QuJgi1glnt9jTPWm
+ OVBCDSReCEqvRTr52+C+a/2ZFx5BA+J+clyoBRXN5TWq8Hw/ifMkWN90pNZ401RTyil9
+ 2Mop8BZ/WEgm3rb8BSfuzrF0DTJ950JN8r2RSi5OijWQA9GLHeCNovXz/5Y7WofaTATt
+ 0NZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692883821; x=1693488621;
- h=user-agent:in-reply-to:content-disposition:mime-version:references
- :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mfzEakQ4TiP6pmwnxnXX1Ia1ZDZBBNZB18PcZfkvudA=;
- b=Tz5QPFOHBNe3pb7yAKB8BXjoUmQMvJ9XVKEZ06rVHTVa98lNrHj4FrkmvpZJ7gNm8i
- OjpMey7hmehz+euLV94tDo1T2ERjU61VFa+jen9gysWek39VL2zTgyOz0Io1R82KUFcr
- i2Op8atyy+coBbHFYEKPlf4wQxseMGCwkjIpwqn2tXD+95VtBSJ5eZoRIdIudt9UclIu
- cAqW+rnfrDYI+R89rnnuSxGsvZmcYq6Q2Kg7y/V2d6HgapLHZgVr4TnLZ8jVUksdct5i
- +dKINoFxqc0yFHVpi3jzqlQLz/UjTQfzyoYNS34G0gTm8gxmj8AlVFkl/7Og1yAXXKDG
- 8Ezg==
-X-Gm-Message-State: AOJu0YxTAHprbufyVh/kIimnTGel/bXagMpZMePDtvwmM8k+0Zev/iCh
- q6p8rlOYQFuCbVTTTg0flkw=
-X-Google-Smtp-Source: AGHT+IFl1q+x425czgU+2CV9SWkpHHi/CwOTq+IOmFdd0jgY6BUI83I6pf6ZEADZGUEnzBiNviHV9g==
-X-Received: by 2002:a7b:cc87:0:b0:3fe:2140:f504 with SMTP id
- p7-20020a7bcc87000000b003fe2140f504mr12390426wma.20.1692883820621; 
- Thu, 24 Aug 2023 06:30:20 -0700 (PDT)
-Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
- [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
- by smtp.gmail.com with ESMTPSA id
- o5-20020a1c7505000000b003fee8502999sm2650514wmc.18.2023.08.24.06.30.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 06:30:20 -0700 (PDT)
-Date: Thu, 24 Aug 2023 15:30:18 +0200
-From: Thierry Reding <thierry.reding@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
+ d=1e100.net; s=20221208; t=1692883903; x=1693488703;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QxQaBeaB/1HZuu7y1vofRYzKvCp6JOf41c/Q4K7SEUw=;
+ b=KEzBsOkIzOAdQcJiogeIFvqYCxa1ddBbLFMPK9BSpgfY+9fq9uC5Xov+ClSNm3hq42
+ TaicftTRqXZTl+S4yu7Qc17A36H6moE1ZEhbpeIfyiWG+UZXOEC7Go44sl1zdqCXGFQP
+ VjGIeyjTpVTKws3FlOpQdihR07HeHf8xzb90ITpAG6HwnVJ3I+j1yl6vLN/GYeygkCib
+ qtq4MTA/EdEfH4/KBqJV1QEJXIJpdrtKjaFD4BwE3X6tzNH3cgV/vtzC1frfc6QZvO7L
+ eweoFjBemzekKi+MM+hXp84z4Nif7q9ru/98VqBZUAjgK7rdmVeZC02kyfNFOac0cBGI
+ lwYw==
+X-Gm-Message-State: AOJu0YzgH6L8f2O5KNbF/fM2duZw5EITtxeRW2TtKJFTeuSN4Ju9FkvX
+ +cRnvUDfei6q/BpuY0mhAlIk3zqp1Xz/uQ==
+X-Google-Smtp-Source: AGHT+IEZ9Yy8TVn7a9ErkpcYLgkIWc2PopixCPPEnOOZVuLESgb3mPaAR+M5wtdyPfHy69vklHBY3w==
+X-Received: by 2002:a17:906:32d3:b0:9a1:8a54:145f with SMTP id
+ k19-20020a17090632d300b009a18a54145fmr8915802ejk.40.1692883902658; 
+ Thu, 24 Aug 2023 06:31:42 -0700 (PDT)
+Received: from [127.0.0.1] ([46.211.238.14]) by smtp.gmail.com with ESMTPSA id
+ m14-20020a1709066d0e00b0099b7276235esm11023322ejr.93.2023.08.24.06.31.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Aug 2023 06:31:41 -0700 (PDT)
+Date: Thu, 24 Aug 2023 16:31:40 +0300
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <thierry.reding@gmail.com>
+CC: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] mmc: tegra: get default-tap and default-trim from
- device tree
-Message-ID: <ZOdbaul2TQ4CwndZ@orome>
+Subject: Re: [PATCH v1 0/1] tegra_mmc: get tap and trim from dts
+User-Agent: K-9 Mail for Android
+In-Reply-To: <ZOdat7QlHuhU5TVZ@orome>
 References: <20230819153501.77245-1-clamor95@gmail.com>
- <20230819153501.77245-2-clamor95@gmail.com>
- <ZOXnfY5hKrhSpOlY@orome>
- <E8D9B66C-E23C-4359-928F-D510C8D4AF22@gmail.com>
+ <ZOXlJmZicgBUINlb@orome> <10578B16-04A2-4CE3-83B8-2BF7FBDB7711@gmail.com>
+ <ZOdat7QlHuhU5TVZ@orome>
+Message-ID: <8C157F37-0AE0-40C3-B9E4-C72E93351A7E@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="6trSTmE4GvfO0tqA"
-Content-Disposition: inline
-In-Reply-To: <E8D9B66C-E23C-4359-928F-D510C8D4AF22@gmail.com>
-User-Agent: Mutt/2.2.10 (2023-03-25)
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,156 +96,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6trSTmE4GvfO0tqA
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 03:02:42PM +0300, Svyatoslav Ryhel wrote:
->=20
->=20
-> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 14:03:25 GMT+03:00, =
-Thierry Reding <thierry.reding@gmail.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
-=B0=D0=B2(-=D0=BB=D0=B0):
-> >On Sat, Aug 19, 2023 at 06:35:01PM +0300, Svyatoslav Ryhel wrote:
-> >> Default-tap and default-trim values are used for eMMC setup
-> >> mostly on T114+ devices. As for now, those values are hardcoded
-> >> for T210 and ignored for all other Tegra generations. Fix this
-> >> by passing tap and trim values from dts.
-> >>=20
-> >> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF701T
-> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> >> ---
-> >>  arch/arm/include/asm/arch-tegra/tegra_mmc.h | 17 ++++----
-> >>  drivers/mmc/tegra_mmc.c                     | 46 ++++++++++-----------
-> >>  2 files changed, 30 insertions(+), 33 deletions(-)
-> >>=20
-> >> diff --git a/arch/arm/include/asm/arch-tegra/tegra_mmc.h b/arch/arm/in=
-clude/asm/arch-tegra/tegra_mmc.h
-> >> index d6a55764ba..750c7d809e 100644
-> >> --- a/arch/arm/include/asm/arch-tegra/tegra_mmc.h
-> >> +++ b/arch/arm/include/asm/arch-tegra/tegra_mmc.h
-> >> @@ -128,21 +128,22 @@ struct tegra_mmc {
-> >> =20
-> >>  /* SDMMC1/3 settings from SDMMCx Initialization Sequence of TRM */
-> >>  #define MEMCOMP_PADCTRL_VREF	7
-> >> -#define AUTO_CAL_ENABLE		(1 << 29)
-> >> -#define AUTO_CAL_ACTIVE		(1 << 31)
-> >> -#define AUTO_CAL_START		(1 << 31)
-> >> +#define AUTO_CAL_ENABLE		BIT(29)
-> >> +#define AUTO_CAL_ACTIVE		BIT(31)
-> >> +#define AUTO_CAL_START		BIT(31)
-> >> +
-> >>  #if defined(CONFIG_TEGRA210)
-> >>  #define AUTO_CAL_PD_OFFSET	(0x7D << 8)
-> >>  #define AUTO_CAL_PU_OFFSET	(0 << 0)
-> >> -#define IO_TRIM_BYPASS_MASK	(1 << 2)
-> >> -#define TRIM_VAL_SHIFT		24
-> >> -#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
-> >> -#define TAP_VAL_SHIFT		16
-> >> -#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
-> >>  #else
-> >>  #define AUTO_CAL_PD_OFFSET	(0x70 << 8)
-> >>  #define AUTO_CAL_PU_OFFSET	(0x62 << 0)
-> >>  #endif
-> >> =20
-> >> +#define TRIM_VAL_SHIFT		24
-> >> +#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
-> >> +#define TAP_VAL_SHIFT		16
-> >> +#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
-> >> +
-> >>  #endif	/* __ASSEMBLY__ */
-> >>  #endif	/* __TEGRA_MMC_H_ */
-> >> diff --git a/drivers/mmc/tegra_mmc.c b/drivers/mmc/tegra_mmc.c
-> >> index f76fee3ea0..7627800261 100644
-> >> --- a/drivers/mmc/tegra_mmc.c
-> >> +++ b/drivers/mmc/tegra_mmc.c
-> >> @@ -37,6 +37,9 @@ struct tegra_mmc_priv {
-> >>  	unsigned int version;	/* SDHCI spec. version */
-> >>  	unsigned int clock;	/* Current clock (MHz) */
-> >>  	int mmc_id;		/* peripheral id */
-> >> +
-> >> +	u32 tap_value;
-> >> +	u32 trim_value;
-> >>  };
-> >> =20
-> >>  static void tegra_mmc_set_power(struct tegra_mmc_priv *priv,
-> >> @@ -526,31 +529,6 @@ static void tegra_mmc_pad_init(struct tegra_mmc_p=
-riv *priv)
-> >>  		printf("%s: Warning: Autocal timed out!\n", __func__);
-> >>  		/* TBD: Set CFG2TMC_SDMMC1_PAD_CAL_DRV* regs here */
-> >>  	}
-> >> -
-> >> -#if defined(CONFIG_TEGRA210)
-> >> -	u32 tap_value, trim_value;
-> >> -
-> >> -	/* Set tap/trim values for SDMMC1/3 @ <48MHz here */
-> >> -	val =3D readl(&priv->reg->venspictl);	/* aka VENDOR_SYS_SW_CNTL */
-> >> -	val &=3D IO_TRIM_BYPASS_MASK;
-> >> -	if (id =3D=3D PERIPH_ID_SDMMC1) {
-> >> -		tap_value =3D 4;			/* default */
-> >> -		if (val)
-> >> -			tap_value =3D 3;
-> >> -		trim_value =3D 2;
-> >> -	} else {				/* SDMMC3 */
-> >> -		tap_value =3D 3;
-> >> -		trim_value =3D 3;
-> >> -	}
-> >> -
-> >> -	val =3D readl(&priv->reg->venclkctl);
-> >> -	val &=3D ~TRIM_VAL_MASK;
-> >> -	val |=3D (trim_value << TRIM_VAL_SHIFT);
-> >> -	val &=3D ~TAP_VAL_MASK;
-> >> -	val |=3D (tap_value << TAP_VAL_SHIFT);
-> >> -	writel(val, &priv->reg->venclkctl);
-> >> -	debug("%s: VENDOR_CLOCK_CNTRL =3D 0x%08X\n", __func__, val);
-> >> -#endif	/* T210 */
-> >>  #endif	/* T30/T210 */
-> >>  }
-> >> =20
-> >> @@ -588,6 +566,21 @@ static void tegra_mmc_reset(struct tegra_mmc_priv=
- *priv, struct mmc *mmc)
-> >> =20
-> >>  	/* Make sure SDIO pads are set up */
-> >>  	tegra_mmc_pad_init(priv);
-> >> +
-> >> +	if (priv->tap_value || priv->trim_value) {
-> >
-> >I think 0 is a valid value for both tap and trim, so you want to be able
-> >to write that. I suggest getting rid of the conditional and always
-> >writing these values and rely on defaults to make sure that a good value
-> >is always programmed.
-> >
-> >Alternatively if you really only want to program these when they've been
-> >specified, use an extra variable (or something like -1 as a default
-> >value) to discriminate.
->=20
-> I may propose a compromise. Do not set default value at all and when time=
- comes just check if tap or trim is not error.
+24 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 16:27:19 GMT+03:00,=
+ Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
+=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>On Wed, Aug 23, 2023 at 02:30:48PM +0300, Svyatoslav Ryhel wrote:
+>>=20
+>>=20
+>> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 13:53:26 GMT+03:=
+00, Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
+=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>> >On Sat, Aug 19, 2023 at 06:35:00PM +0300, Svyatoslav Ryhel wrote:
+>> >> Default-tap and default-trim values are used for eMMC setup
+>> >> mostly on T114+ devices=2E As for now, those values are hardcoded
+>> >> for T210 and ignored for all other Tegra generations=2E Fix this
+>> >> by passing tap and trim values from dts=2E
+>> >>=20
+>> >> This commit will cause regression on T210 (emmc may not work),
+>> >> fix is applied in tegra210=2Edtsi and will be sent next week=2E
+>> >
+>> >Heh=2E=2E=2E I don't think so=2E If you already know that this will ca=
+use a
+>> >regression on Tegra210 you need to rework this=2E Adding regressions
+>> >accidentally is already bad enough, but doing so knowingly is a big
+>> >no-no=2E
+>>=20
+>> DTS change for t210 was sent in "General tegra and board improvements"
+>> patchset=2E This is why this pathset contains only 1 (one) patch and a
+>> warning=2E It has a dependency=2E
+>
+>For U-Boot this may not matter as much because the control DTB is always
+>linked into the binary, but for Linux for example we need to make sure
+>that the kernel always remains backwards compatible with older device
+>trees=2E I think that's good to follow in general, so making sure there
+>are sensible defaults to fall back to if the DTB is missing some
+>properties is good practice=2E
+>
+>Anyway, the way you posted these there was a future dependency, so if
+>someone had applied the driver change without the DTB change having been
+>applied first this would've caused a regression, which is always bad if
+>it happens at random points because it makes things like bisections very
+>painful=2E
+>
+>So unless the patch is fixed to fall back to defaults for Tegra210 we
+>need to carefully coordinate in which order these patches go in=2E The DT
+>change needs to go in first, followed by the driver change that relies
+>on the DTB update=2E
+>
 
-Yes, that's essentially a variant of the second option and it should
-work.
+You are right, it was my miss that I did not include tegra210 fix here=2E =
+I will add it in v2=2E Thanks=2E
 
-Thierry
-
---6trSTmE4GvfO0tqA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTnW2oACgkQ3SOs138+
-s6GTfQ//bZZ9vq8iGkj/uKTFe6r3XQhgNwmN6RY5jkbdWFVJ2vRfBm0Hxpgne9KR
-9J3kOVVa3ef3xvenKy9eRdBkUleRZ+N6Gg1zXluRmCHh+MHluh1NZyshQKeJ0IU2
-ByeFAq/h2fGI9xK1FNrmOyWQjdFW1L7s7hEfjRD3YINOsPbxRNEtomI7494G4QrX
-R+PAEattCyRYbHocbwVbgTwmZdBB4SAobkXEF3n583k8hkcr8aj1Ix1PwNUUOfRK
-8fNqddXanj31lflbkHS4KVEUFQnZh8yoc7ggGXOmd9KBbBYBwV2KXO7mM8ByAHJF
-07rJYyAtsmGN2TXTdlwoHqrvpDOf3gXnW2bEsizHwKICmLpllUlKoNZs7mKg1LWH
-/Kcx83ZMJz7rwVRGTYwE0KEoTBC0J4nn9XcmK2iBsYAMsFk2irE1DV5esGz0rm0v
-2lFvuAgE7rS+DlB5sM5zA3hb1u4dtktfcfIXkEdr/yiJx7sB3FSKFa+RruDI6Lmk
-pFvw5DBeuRDKhgcBVL/1P7xr+qeMTO4QHlCPz1+jyE/fFo0rBfGaYJCnY23Qif3V
-9CTzXc+H5BSwbIjt7V6JBFqIT4uo0hiV9/gR5Gbr+vL9Dz3cJoRTnZcXcfdhXPEF
-UoQJF6pdXwF/TJnvel5TbnQfcxy5+cwp6dDWecDCGAQJAVwODr0=
-=jQnN
------END PGP SIGNATURE-----
-
---6trSTmE4GvfO0tqA--
+>Thierry
