@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5003CC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 20:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36984C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 20:01:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5443A86A81;
+	by phobos.denx.de (Postfix) with ESMTP id 9939386A84;
 	Thu, 24 Aug 2023 21:59:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PgufnzTy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AjeYnDe+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3458C86A57; Thu, 24 Aug 2023 21:59:40 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id A9DA986A6C; Thu, 24 Aug 2023 21:59:41 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84CE186A5A
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:59:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF3E486970
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:59:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7927f84525dso316939f.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:59:36 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-7927182dfe3so8032739f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:59:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692907175; x=1693511975;
+ d=chromium.org; s=google; t=1692907176; x=1693511976;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hYhPSu/31EKFQ9auzzTQmzn43V5Qt9ZcDp1B0GS6jvM=;
- b=PgufnzTyXytbnWBoB9zRibwry1LSenFrGXVzHXQ4hKtUAvs6LqgiB0ob7SnfER7UQ9
- QzxxwjOWZn7N+5iJjxRPVbw14r757Io23VGO10zQzv58jx/THN9U/qMiasaJYe1FpnDm
- CsvPr1xWqs8MJxYVb/Yyvj8cD9sDnf33Ffd/I=
+ bh=unrAzs+YoCgcDwcgfx0x5WAMXAhPV7QR7bkNZW7e8GE=;
+ b=AjeYnDe+2W0z5H9e4Wey/RpI5Du1lt4NBhVWOU3tEl9KsuAHTUKxtMVojCiVwb3bvc
+ AAQFnASQSJco+RLfNIf4bod03RZO3vo9An9GZdYxQutroGfyesRtiMjQYWBrtMLxGBwM
+ MxC0XsE1R7jUw++TeYx/0PkTpeFRR4NFMa3UI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692907175; x=1693511975;
+ d=1e100.net; s=20221208; t=1692907176; x=1693511976;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hYhPSu/31EKFQ9auzzTQmzn43V5Qt9ZcDp1B0GS6jvM=;
- b=cSHnw+mOTzXHZXLVJXFlh+g08pCMTvy9Ab4wpjy6ivrbZIZc+IZsWJSf05yF4ZKIYb
- k/Gerqv/YVA25bKygh1sBouc1MAfE0SYOL+DLOxqGNGmbUVijIwGoTR6QcZ4uae+ebVC
- mYFgOujWY7vSB4mgjJsAIQQqnwATeArrZ0jNAMtqcb6KUADyaqOWhW4lY/4nd27YlTKM
- X3ZRaTjUjTcZQuDkEt1pzZxt1aqHlgZE+kFcum47IpM2w+SN8Y/OW3101q5c2joSgo5A
- fQsf4fSYc61IeHfIAhwStc09s9uEttqh6iu5hjB4uZv/Va0vv02Q0EMOV0IDGu8s8HBX
- 6oXw==
-X-Gm-Message-State: AOJu0Yyw03vPOCJGEcMde6THHo7FpsUBBMlMjQgxa7Qi0eafUM6FYRHp
- 7XmvVaVs42YMJOmmIYX05MtawZJl5WGPlkA5XLQ=
-X-Google-Smtp-Source: AGHT+IEnCNDm8CfqoDrMY5y2KqeE5J6P3eiKsEv9uYq7q3gWXvL+bC1VEUG39mPva1FiWUHvq1dnZg==
-X-Received: by 2002:a5e:cb49:0:b0:790:a905:5fbf with SMTP id
- h9-20020a5ecb49000000b00790a9055fbfmr6582635iok.11.1692907175168; 
- Thu, 24 Aug 2023 12:59:35 -0700 (PDT)
+ bh=unrAzs+YoCgcDwcgfx0x5WAMXAhPV7QR7bkNZW7e8GE=;
+ b=SiuB/xpe699nBMgCLJ7xVcRyQULwJJjZtRy+vYVr5D7DF7ypxDrHrkgDbi/LSbKWG7
+ Z+kr1A5SiOWD3Kjv52UrHemy7PRq9fFqEjwX0wNdXacimbHWyLDXhBnop6bsqT5a6QSg
+ wb8mcYN/7m6w1o8dJh1vi9wyDPBlXnC7BEZiCe7LwYKYQ4YKeGoVDzLyzxyyH5tP1DwF
+ LTuFNwDR0s4zyFkx3pTatx4BRbCP61HuyqICNoB76Fhq/FleirtkNBbOJIhBvPuC8G1B
+ mJZeFIVbCsGH3gbYrpbvUxqZLSCTfRHQ6yccOxvbxy6+uBFjleeGkTcnUA6jPiDWKDRR
+ bCIA==
+X-Gm-Message-State: AOJu0YyMQDM4Ov3DlH3bSSpPVi2H8uvgnY+9vgRgrTqY1qrJiym77Tjh
+ p+i2Oc/45XQCdFr1c0TjLBhLWRRxWP5050zZRWo=
+X-Google-Smtp-Source: AGHT+IENLavPKLDh8MDtLcRE1eBA8bEDW3mlphdlfor1BLsBvw8b1EDexBXf/ldpNMJEPY1HJ4scjQ==
+X-Received: by 2002:a6b:e30b:0:b0:792:7f26:dc95 with SMTP id
+ u11-20020a6be30b000000b007927f26dc95mr163388ioc.14.1692907176427; 
+ Thu, 24 Aug 2023 12:59:36 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- c11-20020a5e8f0b000000b00786fe5039b8sm9744iok.46.2023.08.24.12.59.34
+ c11-20020a5e8f0b000000b00786fe5039b8sm9744iok.46.2023.08.24.12.59.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:59:34 -0700 (PDT)
+ Thu, 24 Aug 2023 12:59:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, Nikhil M Jain <n-jain1@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Marek Vasut <marex@denx.de>,
+ Nikhil M Jain <n-jain1@ti.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
-Subject: [PATCH 08/19] boot: Move fdt_support to boot/
-Date: Thu, 24 Aug 2023 13:58:59 -0600
-Message-ID: <20230824195917.1687886-9-sjg@chromium.org>
+Subject: [PATCH 09/19] Move fdt_simplefb to boot/
+Date: Thu, 24 Aug 2023 13:59:00 -0600
+Message-ID: <20230824195917.1687886-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195917.1687886-1-sjg@chromium.org>
 References: <20230824195917.1687886-1-sjg@chromium.org>
@@ -94,63 +93,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This relates to booting since it fixes up the devicetree for the OS. Move
-it into the boot/ directory.
+This relates to booting, so move it there. Create a new Kconfig menu for
+things related to devicetree fixup.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/Makefile                  | 3 +++
- {common => boot}/fdt_support.c | 0
- common/Makefile                | 2 --
- 3 files changed, 3 insertions(+), 2 deletions(-)
- rename {common => boot}/fdt_support.c (100%)
+ boot/Kconfig                    | 16 ++++++++++++++++
+ boot/Makefile                   |  1 +
+ {common => boot}/fdt_simplefb.c |  0
+ common/Kconfig                  |  9 ---------
+ common/Makefile                 |  1 -
+ 5 files changed, 17 insertions(+), 10 deletions(-)
+ rename {common => boot}/fdt_simplefb.c (100%)
 
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 5e2d4286aeaa..1b2ac7451a61 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1535,6 +1535,22 @@ config SPL_IMAGE_PRE_LOAD_SIG
+ 
+ endmenu
+ 
++if OF_LIBFDT
++
++menu "Devicetree fixup"
++
++config FDT_SIMPLEFB
++	bool "FDT tools for simplefb support"
++	help
++	  Enable the fdt tools to manage the simple fb nodes in device tree.
++	  These functions can be used by board to indicate to the OS
++	  the presence of the simple frame buffer with associated reserved
++	  memory
++
++endmenu
++
++endif # OF_LIBFDT
++
+ config USE_BOOTARGS
+ 	bool "Enable boot arguments"
+ 	help
 diff --git a/boot/Makefile b/boot/Makefile
-index 10f015722378..f15a161614ff 100644
+index f15a161614ff..6ce983b83fa4 100644
 --- a/boot/Makefile
 +++ b/boot/Makefile
-@@ -16,6 +16,7 @@ obj-$(CONFIG_QFW) += bootmeth_qfw.o
+@@ -39,6 +39,7 @@ obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
  endif
  
- obj-y += image.o image-board.o
-+
- obj-$(CONFIG_ANDROID_AB) += android_ab.o
- obj-$(CONFIG_ANDROID_BOOT_IMAGE) += image-android.o image-android-dt.o
+ obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
++obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) += fdt_simplefb.o
  
-@@ -37,6 +38,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
- obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
- endif
- 
-+obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
-+
  obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += image-fdt.o
  obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) += fdt_region.o
- obj-$(CONFIG_$(SPL_TPL_)FIT) += image-fit.o
-diff --git a/common/fdt_support.c b/boot/fdt_support.c
+diff --git a/common/fdt_simplefb.c b/boot/fdt_simplefb.c
 similarity index 100%
-rename from common/fdt_support.c
-rename to boot/fdt_support.c
+rename from common/fdt_simplefb.c
+rename to boot/fdt_simplefb.c
+diff --git a/common/Kconfig b/common/Kconfig
+index 2f46fdb3f62c..9693c0ac426f 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1156,14 +1156,5 @@ config VPL_IMAGE_SIGN_INFO
+ 
+ endif
+ 
+-config FDT_SIMPLEFB
+-	bool "FDT tools for simplefb support"
+-	depends on OF_LIBFDT
+-	help
+-	  Enable the fdt tools to manage the simple fb nodes in device tree.
+-	  These functions can be used by board to indicate to the OS
+-	  the presence of the simple frame buffer with associated reserved
+-	  memory
+-
+ config IO_TRACE
+ 	bool
 diff --git a/common/Makefile b/common/Makefile
-index 0a3f75f2f1c8..0948721d0b47 100644
+index 0948721d0b47..5c1617206f07 100644
 --- a/common/Makefile
 +++ b/common/Makefile
-@@ -18,7 +18,6 @@ obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
+@@ -17,7 +17,6 @@ obj-y += board_r.o
+ obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
  obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
  
- obj-$(CONFIG_FDT_SIMPLEFB) += fdt_simplefb.o
--obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
+-obj-$(CONFIG_FDT_SIMPLEFB) += fdt_simplefb.o
  obj-$(CONFIG_MII) += miiphyutil.o
  obj-$(CONFIG_CMD_MII) += miiphyutil.o
  obj-$(CONFIG_PHYLIB) += miiphyutil.o
-@@ -51,7 +50,6 @@ ifdef CONFIG_SPL_DFU
- obj-$(CONFIG_DFU_OVER_USB) += dfu.o
- endif
- obj-$(CONFIG_SPL_NET) += miiphyutil.o
--obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
- 
- obj-$(CONFIG_SPL_USB_HOST) += usb.o usb_hub.o
- obj-$(CONFIG_SPL_USB_STORAGE) += usb_storage.o
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
