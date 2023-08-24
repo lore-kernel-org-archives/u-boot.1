@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC94C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 20:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0247BC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 20:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA7C486A9C;
-	Thu, 24 Aug 2023 21:59:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2ACA186A60;
+	Thu, 24 Aug 2023 21:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W430nN6Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JbvbyrPL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9FA4868B8; Thu, 24 Aug 2023 21:59:42 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 18C42869A1; Thu, 24 Aug 2023 21:59:43 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C26C1869A1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:59:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A9F486A76
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-79277cfc73bso7839939f.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:59:38 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7927f36120cso1604539f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692907177; x=1693511977;
+ d=chromium.org; s=google; t=1692907178; x=1693511978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lklG9Mva/SkwZNcTSiLTDx6LvZm07ICDslJipHqVZJM=;
- b=W430nN6ZoKakDFBWjvQeXCa8aujk9LMhF4Z4IqATFTJtLVBf/qabPlOYGXL6aWP+C+
- XeGE4J13JLDEbqx69HSslUbmniDVUOMPpCh0I1TdChPBa1kMZNLGeBbp9czOYauOuOxQ
- LyVMTRnueWk+TGdlrqG4wTpWkjR0TinGA+tCc=
+ bh=1R3zqWnGbT8o6q2UFtEnV1SGDMvXFkJW02x764+M5xM=;
+ b=JbvbyrPLfoqG5um3WlO83jxF6Jq/z94gggwOyXG9E2uZJIgbqNWkAi9AIsZOLWCdBR
+ KMGzP9rMAuL+tbeA1N2HIIUcqZbmn1SM+0pz73lF0XF2Zdldgynouv+ozz8T6zeMLS2F
+ sBcnImZ6ZvJScr3X7CN29sSufCLmuSg/+Bi/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692907177; x=1693511977;
+ d=1e100.net; s=20221208; t=1692907178; x=1693511978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lklG9Mva/SkwZNcTSiLTDx6LvZm07ICDslJipHqVZJM=;
- b=edV3C+gtpxc/0cGRyXLOIFcGQlDwV6ojP/oMDEYJok4EfgzDtEOaRNkXoiZW33EI+W
- EcbfTDwCfdZD5cugs7z9G9YBmwzD7G2WiT6Q9joiXIsErhvX9FZTVw8zHe5Vd9ELitxH
- btwo3FA15moKPl03W+b80hwpznLuvGG1GEroOlv3Uowmu+8vo0/WqV4HA7TpFn3SAS81
- J/gZtzfbwRWJI2LcAeK2F/g3qd5VTRJwGB2S/2RuPNOVf0L9klp/y6qOxSbLPgKcWbA2
- qpfE7kgwS9nsVxhHtSX3CJ5C4L/MrheD/xKVzwAqp6VcyZo1RGSYyONO0pqZa+4xc/Ip
- TAkQ==
-X-Gm-Message-State: AOJu0YwdZNL8pAVJtUbgI66OE6PycstneKj7XJFnspuwarFnbxb6s2IH
- u4rLXzWtKF5DNH8C22aTTlUHlGG8ijfGcX2uyWw=
-X-Google-Smtp-Source: AGHT+IGWgyvyCG52l+XHJ519e+3ei211WLziAivcHiIzgkd7XTCZGESyvnRKbBkkN/kUZR4pY/Ghsg==
-X-Received: by 2002:a5d:930c:0:b0:790:fab3:2052 with SMTP id
- l12-20020a5d930c000000b00790fab32052mr6816322ion.5.1692907177349; 
- Thu, 24 Aug 2023 12:59:37 -0700 (PDT)
+ bh=1R3zqWnGbT8o6q2UFtEnV1SGDMvXFkJW02x764+M5xM=;
+ b=F5TZBNOc1RLimYrU7vG4MnZ7zxkUo4C2wFlXuFNxYrzCeFMMfyLZ3IIw1TDziYRCcH
+ Tr4iGzaaiIzgwVCyzH67o9aMxATTldj8V3dlzxnMppoJnBxd4GvcqWfg6HzcwQsp4L16
+ aKSe8k0vXBe9zWcfyv0eMwAVoX8GAV5ZMOQ1ZJxDDVZ/xwBvtyUvVd2SOg0HRRvX0MnL
+ zU+TqLH4w1WfRbLETs/hkJOIhfkxydoYCUnwM9r0jtpz+3AO8BMswzQJymgl2a3tUb68
+ AfuK4BmT+Qnnh8hviS2YLAbGWqUzXlhVkWOXyKWkLmJswg8o8dkVrscMqXy9tFVIwcWK
+ 9PSA==
+X-Gm-Message-State: AOJu0YytaXawC0dAXWCqz5ZbaxlTUtEnAM17lxHzJqGqEWJ9mB7I0Y/9
+ PLA047uhlXEV77vhESEvB4AfvzWWH5Vyv9zKjKI=
+X-Google-Smtp-Source: AGHT+IHXahK97dh9BFrJRIy+1o5zpzChykv/PiWA5E99PqPlLnxC9s+u3GY+5u/lbbn9RT1J21fiuw==
+X-Received: by 2002:a6b:7e01:0:b0:787:1557:3834 with SMTP id
+ i1-20020a6b7e01000000b0078715573834mr6725356iom.20.1692907178228; 
+ Thu, 24 Aug 2023 12:59:38 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- c11-20020a5e8f0b000000b00786fe5039b8sm9744iok.46.2023.08.24.12.59.36
+ c11-20020a5e8f0b000000b00786fe5039b8sm9744iok.46.2023.08.24.12.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:59:37 -0700 (PDT)
+ Thu, 24 Aug 2023 12:59:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 10/19] boot: Move some other fdt-fixup options to the same menu
-Date: Thu, 24 Aug 2023 13:59:01 -0600
-Message-ID: <20230824195917.1687886-11-sjg@chromium.org>
+Subject: [PATCH 11/19] boot: Rename Android-boot text
+Date: Thu, 24 Aug 2023 13:59:02 -0600
+Message-ID: <20230824195917.1687886-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195917.1687886-1-sjg@chromium.org>
 References: <20230824195917.1687886-1-sjg@chromium.org>
@@ -88,88 +88,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move more options relating to fixing up a device tree into the new
-devicetree-fixup menu.
+Phrases like 'Enable support for' are pointless since this is an option
+which enables things. Drop that part so it is easier to follow.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/Kconfig | 55 +++++++++++++++++++++++++---------------------------
- 1 file changed, 26 insertions(+), 29 deletions(-)
+ boot/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 1b2ac7451a61..daec68034c72 100644
+index daec68034c72..e378d9cdb4ff 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -693,35 +693,6 @@ config SUPPORT_RAW_INITRD
- 	  address of the initrd must be augmented by it's size, in the following
- 	  format: "<initrd address>:<initrd size>".
+@@ -3,7 +3,7 @@ menu "Boot options"
+ menu "Boot images"
  
--config OF_BOARD_SETUP
--	bool "Set up board-specific details in device tree before boot"
--	depends on OF_LIBFDT
--	help
--	  This causes U-Boot to call ft_board_setup() before booting into
--	  the Operating System. This function can set up various
--	  board-specific information in the device tree for use by the OS.
--	  The device tree is then passed to the OS.
--
--config OF_SYSTEM_SETUP
--	bool "Set up system-specific details in device tree before boot"
--	depends on OF_LIBFDT
--	help
--	  This causes U-Boot to call ft_system_setup() before booting into
--	  the Operating System. This function can set up various
--	  system-specific information in the device tree for use by the OS.
--	  The device tree is then passed to the OS.
--
--config OF_STDOUT_VIA_ALIAS
--	bool "Update the device-tree stdout alias from U-Boot"
--	depends on OF_LIBFDT
--	help
--	  This uses U-Boot's serial alias from the aliases node to update
--	  the device tree passed to the OS. The "linux,stdout-path" property
--	  in the chosen node is set to point to the correct serial node.
--	  This option currently references CONFIG_CONS_INDEX, which is
--	  incorrect when used with device tree as this option does not
--	  exist / should not be used.
--
- config HAVE_TEXT_BASE
- 	bool
- 	depends on !NIOS2 && !XTENSA
-@@ -1539,6 +1510,32 @@ if OF_LIBFDT
- 
- menu "Devicetree fixup"
- 
-+config OF_BOARD_SETUP
-+	bool "Set up board-specific details in device tree before boot"
-+	help
-+	  This causes U-Boot to call ft_board_setup() before booting into
-+	  the Operating System. This function can set up various
-+	  board-specific information in the device tree for use by the OS.
-+	  The device tree is then passed to the OS.
-+
-+config OF_SYSTEM_SETUP
-+	bool "Set up system-specific details in device tree before boot"
-+	help
-+	  This causes U-Boot to call ft_system_setup() before booting into
-+	  the Operating System. This function can set up various
-+	  system-specific information in the device tree for use by the OS.
-+	  The device tree is then passed to the OS.
-+
-+config OF_STDOUT_VIA_ALIAS
-+	bool "Update the device-tree stdout alias from U-Boot"
-+	help
-+	  This uses U-Boot's serial alias from the aliases node to update
-+	  the device tree passed to the OS. The "linux,stdout-path" property
-+	  in the chosen node is set to point to the correct serial node.
-+	  This option currently references CONFIG_CONS_INDEX, which is
-+	  incorrect when used with device tree as this option does not
-+	  exist / should not be used.
-+
- config FDT_SIMPLEFB
- 	bool "FDT tools for simplefb support"
+ config ANDROID_BOOT_IMAGE
+-	bool "Enable support for Android Boot Images"
++	bool "Android Boot Images"
+ 	default y if FASTBOOT
  	help
+ 	  This enables support for booting images which use the Android
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
