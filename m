@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CDD8C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93150C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61ADF86759;
-	Thu, 24 Aug 2023 16:55:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D1E3E865FB;
+	Thu, 24 Aug 2023 16:58:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="PfIFWDer";
+	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="lEYrTCmk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7073186750; Thu, 24 Aug 2023 16:55:57 +0200 (CEST)
-Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
+ id 93BC1865FB; Thu, 24 Aug 2023 16:58:46 +0200 (CEST)
+Received: from mail.3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B139865FB
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:55:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B9EB864E9
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:58:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=walle.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
@@ -28,42 +28,31 @@ Received: from 3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id BDAB330A;
- Thu, 24 Aug 2023 16:55:52 +0200 (CEST)
+ by mail.3ffe.de (Postfix) with ESMTPSA id 437F430A;
+ Thu, 24 Aug 2023 16:58:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
- s=mail2022082101; t=1692888952;
+ s=mail2022082101; t=1692889123;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=p1D+TVsNqKCuLpBY/Car4bHZCl3xd6V0XKxLVKgWlhc=;
- b=PfIFWDer9nQgfhct64zDzzWOCQl5YM7xsTjguwqPt7o5q3dZajlhqiFli10iBS0TR41IFb
- sVUwMGDfj7RYSS+W2OnqxHryghtGq7Ngo6Ky5HycBt6nAfXq6IbsNJRCUJGpSdfWq5Hzny
- XPJqCuQgpQiTrM2afg8njN9nZ+oC7a7OqIjNR3LEW6vdmGnqUU/N8zmcg+pc40G8jGyh/y
- EEUPRI+1f4sIcufWz4N9R1F2HIhzolB4pQPwtrmZfmRezla7UT1SYuPOWeA00HboRSigx2
- fXuqxNy0h1yGKul84N14Y6QOjrRksAsiOF9Oy3GfHh/zW7bV29aWzEVlpxC4Ug==
+ bh=hlsq3Sy6Xm8bgSqBCc+kxEGOyZDpN4p883v+weqgxhI=;
+ b=lEYrTCmkcAqptx/VnC8bO9IL+I/YyMbyl3wY3v456E7B4AWuRFIO9nspA3s2cuq0nwOQin
+ G+3FT92I5TaoFehqg0lG6EV0eKg6ZNqUaBQvJZt5PXB7kPZLuMymWgeomvIwxRqe2aM6ld
+ PPa50ohEE0t1mjizCpwoohVI8WN+gn9GC5sU51xT/itAzqIRIO1xt8aR5NW+NuDFHB3CCS
+ Iqk/JkQ++yg6aJUFnWh/cM3ikhQgQLK4a9oYDjCNR8aytTBuUtv+YzFAVXwjXVmnxxzIOu
+ S0H+jkaaw7smS+CEmSoWkoHz5afH+jki5OUBdFdBvUHTTQOPuLNSWa7KcZj2Jg==
 MIME-Version: 1.0
-Date: Thu, 24 Aug 2023 16:55:52 +0200
+Date: Thu, 24 Aug 2023 16:58:42 +0200
 From: Michael Walle <michael@walle.cc>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, Dillon
- Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas
- Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut
- <marex@denx.de>, Neha Malcom Francis <n-francis@ti.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Philippe Reynes
- <philippe.reynes@softathome.com>, Stefan Herbrechtsmeier
- <stefan.herbrechtsmeier@weidmueller.com>, Vikas Manocha
- <vikas.manocha@st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
- output
-In-Reply-To: <CAPnjgZ0MNb5aAtmz9Yk+JiHxQt+qwhQW=WccgiiRRqfQ-a1OBQ@mail.gmail.com>
-References: <20230824030304.1555547-1-sjg@chromium.org>
- <9f4019b9e46d3fae5bbfad6d06ff6bf9@walle.cc>
- <CAPnjgZ0MNb5aAtmz9Yk+JiHxQt+qwhQW=WccgiiRRqfQ-a1OBQ@mail.gmail.com>
-Message-ID: <6cb6ee52ccd550d3c8fddd76bc84a282@walle.cc>
+To: Tom Rini <trini@konsulko.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] MAINTAINERS: remove Vikas Manocha
+In-Reply-To: <20230824135441.GJ3953269@bill-the-cat>
+References: <20230824074436.2929639-1-michael@walle.cc>
+ <20230824135441.GJ3953269@bill-the-cat>
+Message-ID: <65e136440cd981cc84b5388569c7934b@walle.cc>
 X-Sender: michael@walle.cc
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -86,36 +75,42 @@ X-Virus-Status: Clean
 
 Hi,
 
->> > This series adjusts binman to enforce just 4 extensions for output
->> > images:
->> >
->> >    .bin
->> >    .rom
->> >    .itb
->> >    .img
->> >
->> > Other extensions will produce an error. With this rule observed,
->> > buildman
->> > can keep the required files.
+>> The mails are bouncing with
+>>   550 5.1.1 User Unknown (in reply to RCPT TO command)
 >> 
->> How does this work? I didn't get all the patches from this series, 
->> which
->> makes
->> it really hard to review or ack the individual patches.
+>> Remove the entry and mark the ARM STM STV0991 arch as Orphan.
 >> 
->> Are we just whitelisting any files with these extension? Honestly, 
->> this
->> sounds like an arbitrary restriction to me. But maybe I'm missing some
->> context.
+>> Signed-off-by: Michael Walle <michael@walle.cc>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>> CCing other ST people, maybe someone want to take over instead.
+>> ---
+>>  MAINTAINERS | 3 +--
+>>  1 file changed, 1 insertion(+), 2 deletions(-)
+>> 
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 84de9de531..57ede4bea9 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -641,8 +641,7 @@ N:	stm32
+>> 
+>> 
+>>  ARM STM STV0991
+>> -M:	Vikas Manocha <vikas.manocha@st.com>
+>> -S:	Maintained
+>> +S:	Orphan
+>>  F:	arch/arm/cpu/armv7/stv0991/
+>>  F:	arch/arm/include/asm/arch-stv0991/
 > 
-> You can see the full series here:
-> 
-> https://patchwork.ozlabs.org/project/uboot/list/?series=370121
+> This misses board/st/stv0991/MAINTAINERS where he's also listed.  So,
+> someone needs to step up to maintain it all, or we should look at
+> dropping it.  Thanks!
 
-I know the archives/patchwork. All I was saying is that sending just 
-parts
-of a patch series to specific ppl doesn't make any sense, because you 
-always
-miss the context and for that you have to look at the archives.
+Ah, dang. I forgot about u-boots special per board MAINTAINERS. If 
+there's
+no reply (maybe in like a week or so). I'll respin and put the board on
+Orphan.
 
 -michael
+
