@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA32C3DA66
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 02:32:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A7F7C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:02:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28AC18652D;
-	Thu, 24 Aug 2023 04:32:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2AE118651D;
+	Thu, 24 Aug 2023 05:02:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MBWh9YKf";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="F5qt/wkS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3E108651B; Thu, 24 Aug 2023 04:32:32 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id D5F1F86537; Thu, 24 Aug 2023 05:01:59 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 726ED864FA
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:32:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C831F8647E
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:01:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1b89b0c73d7so10550385ad.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 19:32:29 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-4fe1b00fce2so9659957e87.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:01:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1692844347; x=1693449147;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=QbzegbJ7R5e1TH2mD/PDD71/AAqqJ9HPZA5h6zE4N/4=;
- b=MBWh9YKfLvs1XeJa3OH7Bb6dvEZmXpGWXGzktyeN4QBma1v52bsbLVlC6KeO3PN5zV
- t/c9LsRNjx4cfAYstq7yL1tJ6L3owXZ459t19OjWDxjpxVs0RDscF3q/YWoTDfP9SYpU
- sf6XJdbA9MqyGn8EDd7eUx61CRBD1clX6tFxoWPGC7bI8lklEUdpBpFKTCTd8Gg6mSYW
- 6QX8pGhxXYwBXOR7DZEWx3m7+Js/EUwL6wqKJaWOgNlc7P0VPiNmEOxW/nKXqjK9IL1R
- H+fo8iS8v98TLt2oHEjfCr/2q4cn4AWQc6Ii4Q1f1/PVn30QvsV/YzLHQjf5yiklU7+i
- 9Hsg==
+ d=google.com; s=20221208; t=1692846116; x=1693450916;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KuGnw7SLcHFZ10nL9oYuEQxgwCl24sDV9CvOSreDWRQ=;
+ b=F5qt/wkSMz3A+7AGBzYsnmLG4+yMdOT2vbkFiR7KGH5VoyXuRWtHCdc3MJTQgsIKNI
+ qS+Rq9fketXrErWdiV9Jb+hV603mrnJvMCNmCqjJvHv3MqmqdRxUJhBgznwfGurn8nyY
+ D0ALRz2z82WiVqdaaB7P0jGXYZtpFQm9NBRzp3JOiLWPwup84qPQMFXCt54Db/+Gfd0c
+ nI3qWY1Res7Zb909zG52l6HF7EJQyoeUkeaHWfKy5DB74pyfejBTEDO4vba/bh78f8/K
+ 0VA7iu3ecm/REVH8/x+i1kZCJWsQQVEu0nE2F9q9F9hXUA/JkEHzWHcdtVEek1/e27Gt
+ 1iGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692844347; x=1693449147;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QbzegbJ7R5e1TH2mD/PDD71/AAqqJ9HPZA5h6zE4N/4=;
- b=ev5ky3STH33+31URQ6Mc9+smmZjLxmqncIN0gLsJ6ThiG+r4uzKOg8QzKdEPI8u75M
- X3BhMTizzHiPGJjlaXoOGaK4FdOXH45ImHET9M3eioP442XXswM3sMDmTv/DSsP2SDPX
- qOgYCR2QBcANJO5+HlZX6SDdcPOYiMmzxTIa2f+yXEs+kmlltdtT47K7oHN+oHjFkJ9l
- e95DzSEzIz6R7CxOQ8MTn4HoVGmVHldk7wTG1T1bEuv7vGC0kMNR30EmzgeGTLnwd8lI
- VpvdWk0Knx2jaHzrEcX+XW3oxxAVPoJFV9oZx/kI6DVuqrscQqZorIrVENocj7bnj8IS
- Bvuw==
-X-Gm-Message-State: AOJu0Yxb1rg53EHhBQwteL8b+0w31WtfzXqVSg01YILgTT+kzFClYeho
- NFoK6Pxvejy4fWpHj1XjkZtxQg==
-X-Google-Smtp-Source: AGHT+IGvaxnwJIYQjVCYdSLgWRjXi9EmI5/+xwDp5qWqyyjOJmw8HayFhfMHK+xmIy87Je0NrMAFoA==
-X-Received: by 2002:a17:902:ec90:b0:1b8:95fc:cfe with SMTP id
- x16-20020a170902ec9000b001b895fc0cfemr16114225plg.3.1692844347560; 
- Wed, 23 Aug 2023 19:32:27 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:97b2:8257:1926:eed6])
- by smtp.gmail.com with ESMTPSA id
- y16-20020a170902b49000b001a5260a6e6csm11614884plr.206.2023.08.23.19.32.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 19:32:27 -0700 (PDT)
-Date: Thu, 24 Aug 2023 11:32:24 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 2/2] efi_loader: support boot from URI device path
-Message-ID: <ZObBOIFw8ApPcSpN@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
- <20230823083721.1318097-3-masahisa.kojima@linaro.org>
- <ZOa/X1DMZOMgotSB@octopus>
+ d=1e100.net; s=20221208; t=1692846116; x=1693450916;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KuGnw7SLcHFZ10nL9oYuEQxgwCl24sDV9CvOSreDWRQ=;
+ b=OCow6BslY6T2rLrYSih1yrCFCEER3eqTX0IjAv5fWzN2oODcjTnk7jKzI2s7bspAbN
+ 9Ri/t0MDJEWJaLlz7THZVbS0XsOU7LfEmwNG7VxWw9Yleh+NcVbrVQ0yWopTdIWbroYa
+ uh3K1xPjVY0BfggFtBpIDe/2yzY90V31cknbW79ES+cOvEZtNQQ8haVJIIQRdRaKkm3Q
+ Dd0EzT83sJnSZU6mKUHlLYZRvxytvcJdC9aQnzdm6gEO9i1biNPonNYMjv8TNZ+LZDGc
+ cExlEbXEHAv9TCAyYu1zIHkDzMZpIUcGw0NGrnbur+8AlMwUv1sLnk4uutKyCTlZC9gW
+ 7Ijg==
+X-Gm-Message-State: AOJu0YyfIq4Nj9S2Tv2gfWMGOlouseSgYXJKyDM+gz0II7lCrGIY28gC
+ U3jfJsPiu1VuAMq5qbM6afYZpqlmGSOv+UE2e4Xw6g==
+X-Google-Smtp-Source: AGHT+IHe3KNXYZSIMAWvF1oKPfzsmpCoUAlsV+bE9L+fC98oA7zLvYeR97ivJNFsrPhUnx33EILSlpBG5uWlONNPAUM=
+X-Received: by 2002:a05:6512:2fc:b0:4fe:193c:de74 with SMTP id
+ m28-20020a05651202fc00b004fe193cde74mr9642580lfq.18.1692846115704; Wed, 23
+ Aug 2023 20:01:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZOa/X1DMZOMgotSB@octopus>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-9-nm@ti.com>
+ <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
+ <20230823171502.GQ3953269@bill-the-cat>
+ <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
+ <20230824001848.vgzl7rcphic3gu2n@carnival>
+In-Reply-To: <20230824001848.vgzl7rcphic3gu2n@carnival>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 23 Aug 2023 21:01:44 -0600
+Message-ID: <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
+Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
+To: Nishanth Menon <nm@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Neha Francis <n-francis@ti.com>,
+ Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, 
+ Vignesh <vigneshr@ti.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,301 +94,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Aug 24, 2023 at 11:24:31AM +0900, AKASHI Takahiro wrote:
-> Kojima-san,
-> 
-> On Wed, Aug 23, 2023 at 05:37:20PM +0900, Masahisa Kojima wrote:
-> > This supports to boot from the URI device path.
-> > When user selects the URI device path, bootmgr downloads
-> > the file using wget into the address specified by loadaddr
-> > env variable.
-> > If the file is .iso or .img file, mount the image with blkmap
-> > then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > If the file is .efi file, load and start the downloaded file.
-> 
-> Is this behavior part of UEFI specification?
-> Even so, it would be better to describe it in uefi.rst (or else),
-> including URI usage.
-> 
-> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > ---
-> >  lib/efi_loader/efi_bootmgr.c | 213 +++++++++++++++++++++++++++++++++++
-> >  1 file changed, 213 insertions(+)
-> > 
-> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> > index a40762c74c..8b20f486f2 100644
-> > --- a/lib/efi_loader/efi_bootmgr.c
-> > +++ b/lib/efi_loader/efi_bootmgr.c
-> > @@ -7,10 +7,14 @@
-> >  
-> >  #define LOG_CATEGORY LOGC_EFI
-> >  
-> > +#include <blk.h>
-> > +#include <blkmap.h>
-> >  #include <common.h>
-> >  #include <charset.h>
-> > +#include <dm.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> > +#include <net.h>
-> >  #include <efi_default_filename.h>
-> >  #include <efi_loader.h>
-> >  #include <efi_variable.h>
-> > @@ -168,6 +172,209 @@ out:
-> >  	return ret;
-> >  }
-> >  
-> > +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-> > +/**
-> > + * mount_image() - mount the image
-> > + *
-> > + * @lo_label	label of load option
-> > + * @file_size	file size
-> > + * @handle:	pointer to handle for newly installed image
-> > + * Return:	status code
-> > + */
-> > +static efi_status_t mount_image(u16 *lo_label, int file_size,
-> > +				efi_handle_t *handle)
-> 
-> I wonder why not adding "address" parameter to make this function
-> more generic as Simon suggested.
-> 
-> > +{
-> > +	int err;
-> > +	efi_status_t ret;
-> > +	char *label = NULL, *p;
-> > +	lbaint_t blknum;
-> > +	struct udevice *bm_dev;
-> > +	efi_handle_t bm_handle;
-> > +	struct udevice *blk, *partition;
-> > +	struct efi_handler *handler;
-> > +	struct efi_device_path *file_path;
-> > +	struct efi_device_path *device_path;
-> > +
-> > +	label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
-> > +	if (!label)
-> > +		return EFI_OUT_OF_RESOURCES;
-> > +
-> > +	p = label;
-> > +	utf16_utf8_strcpy(&p, lo_label);
-> > +	err = blkmap_create(label, NULL);
-> > +	if (err) {
-> > +		log_err("failed to create blkmap\n");
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +	bm_dev = blkmap_from_label(label);
-> > +	if (!bm_dev) {
-> > +		log_err("\"%s\" is not the name of any known blkmap\n", label);
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +
-> > +	blknum = file_size / 512; /* TODO: don't use literal value. */
-> > +	err = blkmap_map_pmem(bm_dev, 0, blknum, image_load_addr);
-> > +	if (err) {
-> > +		log_err("Unable to map %#llx at block %d : %d\n",
-> > +			(unsigned long long)image_load_addr, 0, err);
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
-> > +		 (unsigned long long)image_load_addr);
-> > +
-> > +	/* TODO: without calling this, partition devices are not binded. */
-> > +	blk_list_part(UCLASS_BLKMAP);
-> 
-> I think that blkmap should provide a way to *probe* its child block
-> device. In fact,
->         struct blkmap *bm = dev_get_plat(bm_dev);
->         device_probe(bm->blk);
-> should work. (Not tested though)
-> 
-> > +
-> > +	/*
-> > +	 * Search the partition having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> > +	 * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > +	 */
-> > +	device_foreach_child(blk, bm_dev)
-> 
-> Does bm_dev have more than one block devices?
-> 
-> > +	{
-> > +		device_foreach_child(partition, blk)
-> > +		{
-> > +			if (dev_tag_get_ptr(partition, DM_TAG_EFI,
-> > +					    (void **)&bm_handle)) {
-> > +				log_warning("DM_TAG_EFI not found\n");
-> > +				continue;
-> > +			}
-> > +
-> > +			ret = efi_search_protocol(
-> > +				bm_handle,
-> > +				&efi_simple_file_system_protocol_guid,
-> > +				&handler);
-> > +			if (ret != EFI_SUCCESS)
-> > +				continue;
-> > +
-> > +			ret = efi_search_protocol(
-> > +				bm_handle, &efi_guid_device_path, &handler);
-> > +			if (ret != EFI_SUCCESS)
-> > +				continue;
-> > +
-> > +			ret = efi_protocol_open(handler, (void **)&device_path,
-> > +						efi_root, NULL,
-> > +						EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-> > +			if (ret != EFI_SUCCESS)
-> > +				continue;
-> > +
-> > +			file_path = expand_media_path(device_path);
-> > +			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-> > +						      NULL, 0, handle));
-> > +			efi_free_pool(file_path);
-> > +			if (ret == EFI_SUCCESS)
-> > +				goto out;
-> > +		}
-> > +	}
-> 
-> Another idea would be to create a new boot option (as a removable
-> media) and to invoke it from bootmgr.
+Hi Nishanth,
 
-Never mind this comment.
+On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
+>
+> On 17:57-20230823, Simon Glass wrote:
+> [...]
+> > > This is how we have a common bit of rST for how to build N boards,
+> > > without having to do a literal copy and paste N times.
+> >
+> > How about using this?
+> >
+> > https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
+>
+> I was not able to succeed with complex includes such as:
+> https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rst?plain=1#L89
+>
+> am62x complete build procedure defined once and reused in other am62x
+> platforms.. But the am62x build procedure itself is reused from common
+> k3 build steps.
 
--Takahiro Akashi
+I followed through these instructions. I find the env vars quite
+confusing, since I don't really know what it is doing. It feels like a
+script:
 
-> 
-> > +
-> > +out:
-> > +	efi_free_pool(label);
-> > +
-> > +	return ret;
-> > +}
-> > +
-> > +/**
-> > + * try_load_from_uri_path() - Handle the URI device path
-> > + *
-> > + * @uridp:	uri device path
-> > + * @lo_label	label of load option
-> > + * @handle:	pointer to handle for newly installed image
-> > + * Return:	status code
-> > + */
-> > +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> > +					   u16 *lo_label,
-> > +					   efi_handle_t *handle)
-> > +{
-> > +	efi_status_t ret;
-> > +	int file_size, file_name_len;
-> > +	char *s, *host_name, *file_name, *str_copy;
-> > +
-> > +	/*
-> > +	 * Download file using wget.
-> > +	 *
-> > +	 * URI device path content is like http://www.example.com/sample/test.iso.
-> > +	 * U-Boot wget takes the target uri in this format.
-> > +	 *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
-> > +	 * Need to resolve the http server ip address before starting wget.
-> > +	 */
-> > +
-> > +	/* only support "http://" */
-> > +	if (strncmp(uridp->uri, "http://", 7)) {
-> > +		log_err("Error: uri must start with http://\n");
-> > +		return EFI_INVALID_PARAMETER;
-> > +	}
-> > +
-> > +	str_copy = strdup(uridp->uri);
-> > +	if (!str_copy)
-> > +		return EFI_OUT_OF_RESOURCES;
-> > +	s = str_copy + strlen("http://");
-> > +	host_name = strsep(&s, "/");
-> > +	if (!s) {
-> > +		log_err("Error: invalied uri, no file path\n");
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +	file_name = s;
-> > +	net_dns_resolve = host_name;
-> > +	net_dns_env_var = "httpserverip";
-> > +	if (net_loop(DNS) < 0) {
-> > +		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +	s = env_get("httpserverip");
-> > +	if (!s) {
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +
-> > +	/*
-> > +	 * WGET requires that "net_boot_file_name" and "image_load_addr" global
-> > +	 * variables are properly set in advance.
-> > +	 */
-> > +	strlcpy(net_boot_file_name, s, 1024);
-> > +	strlcat(net_boot_file_name, ":/", 1024); /* append '/' which is removed by strsep() */
-> > +	strlcat(net_boot_file_name, file_name, 1024);
-> > +	s = env_get("loadaddr");
-> > +	if (!s) {
-> > +		log_err("Error: loadaddr is not set\n");
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +	image_load_addr = hextoul(s, NULL);
-> > +
-> > +	file_size = net_loop(WGET);
-> > +	if (file_size < 0) {
-> > +		log_err("Error: downloading file failed\n");
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +		goto out;
-> > +	}
-> > +
-> > +	/*
-> > +	 * Identify file type by file extension.
-> > +	 * If the file extension is ".iso" or ".img", mount it and boot with default file.
-> > +	 * If the file is ".efi", load and start the downloaded file.
-> > +	 */
-> > +	file_name_len = strlen(net_boot_file_name);
-> > +	if (!strncmp(&net_boot_file_name[file_name_len - 4], ".iso", 4) ||
-> > +	    !strncmp(&net_boot_file_name[file_name_len - 4], ".img", 4)) {
-> > +		ret = mount_image(lo_label, file_size, handle);
-> > +	} else if (!strncmp(&net_boot_file_name[file_name_len - 4], ".efi", 4)) {
-> > +		ret = efi_run_image((void *)image_load_addr, file_size);
-> 
-> Nak.
-> try_load_from_uri_path() is called from try_load_entry().
-> This function's purpose is solely to load an image.
-> The execution should be triggered later.
-> 
-> -Takahiro Akashi
-> 
-> 
-> > +	} else {
-> > +		log_err("Error: file type is not supported\n");
-> > +		ret = EFI_INVALID_PARAMETER;
-> > +	}
-> > +
-> > +out:
-> > +	free(str_copy);
-> > +
-> > +	return ret;
-> > +}
-> > +#endif
-> > +
-> >  /**
-> >   * try_load_entry() - try to load image for boot option
-> >   *
-> > @@ -211,6 +418,12 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
-> >  		if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
-> >  			/* file_path doesn't contain a device path */
-> >  			ret = try_load_from_short_path(lo.file_path, handle);
-> > +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-> > +		} else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-> > +			ret = try_load_from_uri_path(
-> > +				(struct efi_device_path_uri *)lo.file_path,
-> > +				lo.label, handle);
-> > +#endif
-> >  		} else {
-> >  			file_path = expand_media_path(lo.file_path);
-> >  			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-> > -- 
-> > 2.34.1
-> > 
+do $a $b $c
+do $f $e
+
+it is pretty hard to follow. I think it would be better to write
+everything out in full for each board, like rockchip does.
+
+Some other minor feedback:
+
+- The 'make' lines should really have -j $(nproc) added
+- The $ signs at the start of each command in the docs are a pain
+since it stops me copying the commands into the terminal - can you
+remove them?
+- It doesn't build for me:
+
+  BINMAN  .binman_stamp
+Image 'ti-dm' is missing external blobs and is non-functional: blob-ext
+
+/binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f):
+   Missing blob
+
+Some images are invalid
+make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1115:
+.binman_stamp] Error 103
+make[1]: Leaving directory '/tmp/b/play'
+make: *** [Makefile:177: sub-make] Error 2
+
+Regards,
+Simon
