@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF6FEC3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD78BC3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:28:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4BBA86961;
-	Thu, 24 Aug 2023 21:26:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01461869C3;
+	Thu, 24 Aug 2023 21:27:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="q+bjz95V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TjpDTJFu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E3F186961; Thu, 24 Aug 2023 21:26:57 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 0BB4686900; Thu, 24 Aug 2023 21:26:58 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E2D68675B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4310886995
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-52a1132b685so341716a12.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:54 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-51a52a7d859so2618284a12.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692905214; x=1693510014;
+ d=gmail.com; s=20221208; t=1692905215; x=1693510015;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GpBKOJnyExK5FUhPY8qHpFnuQEKA7o+eM49Y7TW9504=;
- b=q+bjz95VIsbqy6nmYXqUhkZ/X0qcgVwHjNJZYtrMngmATk7EblmYSb08Evv4bRo9Lz
- pGQIo8G1nZrfAKcPabJbKlC5WJLQs43RAUMRJF77/1Y4CAl3crobY1BLeZ4x3EgsUySw
- /qLlE230tWJ5KOBrJhPIxouon/ITzrIYle1OxTGmZO8cMIiApE+8QyT4tvKDwG27mTKh
- 4z7L1DyOXuoctoq9zDR0tEF1Eh8XhTKflL+mTHUTQDx+RTKy3kzbntcBZu5lZIRvb66n
- vkBFLDyYFzLqTihnPmb20O+ICIO58/yD4X5rCm//Ud/gNszt/tcPLNkYQ5vskhCyyuEG
- 1nOg==
+ bh=yuQ4iWKY6sR5mEfnYSqXtkZWwArfdK8Y1eLh6Iceoas=;
+ b=TjpDTJFu+5FqjulMpyWoSiI177b5WNtnVbVkESZwdv1euhwd+fpirPQvoghEIsRxLp
+ 1Xrow4cZibcAFIacwP7DxeUiU3LFi452N3jfLwcoz8rEnhFdYTXEaEi1b6u53Xs4IO7m
+ ewv27zXyBZe0xpfohQtOhmVfzT0zx705KLbL1fATXCEsb1UCV0D24jjpF31ld7TwfEvJ
+ iSl04H8FauBNcbr6UhY3E7quWzKwWMvH5FHHSb2HNrwL6VLjD7MMTUnkfkPIeiB+OrUV
+ TPO8CWk+/gb7eBb6tfEAu0aMrX2PmYzpGKigN7d5T0dwM4Rs51jk6eTutG/SKtEOTwR/
+ xdOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692905214; x=1693510014;
+ d=1e100.net; s=20221208; t=1692905215; x=1693510015;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GpBKOJnyExK5FUhPY8qHpFnuQEKA7o+eM49Y7TW9504=;
- b=A9vfoB2YpO4NePvxqL/lR3FhJyy2FXnwbFvOltbvAfJ6vmpu17a0wIyZ++80FrzSQs
- Rxzp9j+nROV5mOTC/v4GkBmzUQU2Zq29Q/qgvlNi1fPRjRxBXgA1yEGW6j+OUgVSqNo0
- q5zNtwNeiU+/CP1yZF9PvZdtTN/tMxrZvOTcNk/ukJVKZpC5cHTfHP6sGNjbucgsMTCt
- o3KFPySZovTiK3IrQgCg24ahHPlmjhhnOA/y7iFBmNk/PYnp48LETi8b20hw8lVl4Fyx
- vMCmL9TiWQtka2T9U+/nsvNwrUiXq9KMS62loJgFA+Ygg1L+0kInw/PtDI0q3dB99NxA
- URFA==
-X-Gm-Message-State: AOJu0YxwpMTxjySsXuarDCKh/gXuWnRqy7f7laKfQCPZgYtFGiMvL0OF
- ewFd4vgw7lWvEQRMEk0Yc4c=
-X-Google-Smtp-Source: AGHT+IGM1xghCKm4SlEVt2a2pZiRyzzRXEfYNOe5wyUg4OuagKEQuVU2eBKJTa68Tz6HS9WcrsN+CQ==
-X-Received: by 2002:aa7:cd50:0:b0:523:b121:4228 with SMTP id
- v16-20020aa7cd50000000b00523b1214228mr10734586edw.41.1692905214089; 
+ bh=yuQ4iWKY6sR5mEfnYSqXtkZWwArfdK8Y1eLh6Iceoas=;
+ b=fUS313ZILeddmlvsLz0tLC+upBsbpPiyiUV10Vgz4iAlhVrTm0+f8t1opIYiNGIoVe
+ VS8c206/awAeWpyhhzBD5odkrBJsdxhU6cd4lMTX/O0TepWDzul5m+ZEvRpHniD2ZuRd
+ DfRkSPV5qSJPi/SnhpbJOt69QvFRACoccMwIqHKLyzZEaurIsJoSQJA2T0TOBGQXxRcj
+ Y6mfl5w8vS7PAZN4CvN33toxFKGzsx3v48EyVWDbw3QtnknNird1pdkh1LxIGkjv+3VN
+ eOtUfleb63KQkRk8oZqOfLvhSz0+bmQ6EdZWtss4KScD2fy1eAXJw83AoJaEESpOrAZ2
+ g4Rg==
+X-Gm-Message-State: AOJu0YzZpPWR6osRiPj30TipFMZN0KqUDUpsVD1DVLE8EZOgzKV9saFQ
+ nHGpOEvaw1udl2n1iICbq1Y=
+X-Google-Smtp-Source: AGHT+IFwglRXdTJ7KOanBFPJ6Q12cGas0EoUsMQMMHHHPtnA+nsqSNtgxenGujbOfxNvWQOy1phHxQ==
+X-Received: by 2002:a05:6402:3586:b0:522:b9ae:db3c with SMTP id
+ y6-20020a056402358600b00522b9aedb3cmr17336651edc.6.1692905214802; 
  Thu, 24 Aug 2023 12:26:54 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.53
+ be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:26:53 -0700 (PDT)
+ Thu, 24 Aug 2023 12:26:54 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 06/16] configs: transformer_t30: convert bootmenu option
-Date: Thu, 24 Aug 2023 22:25:53 +0300
-Message-Id: <20230824192603.240104-7-clamor95@gmail.com>
+Subject: [PATCH v2 07/16] ARM: dts: transformer-t30: complete missing bindings
+Date: Thu, 24 Aug 2023 22:25:54 +0300
+Message-Id: <20230824192603.240104-8-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230824192603.240104-1-clamor95@gmail.com>
 References: <20230824192603.240104-1-clamor95@gmail.com>
@@ -90,53 +90,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Convert refresh USB to enter console. Transformers have full size
-USB and a dock keyboard so access to U-Boot console would be handy.
+Clean up the tree and prepare for DM PMIC migration.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- configs/transformer_t30_defconfig    | 2 +-
- include/configs/transformer-common.h | 7 +------
- 2 files changed, 2 insertions(+), 7 deletions(-)
+ arch/arm/dts/tegra30-asus-transformer.dtsi | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
 
-diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
-index 840431ff38..802dcb1786 100644
---- a/configs/transformer_t30_defconfig
-+++ b/configs/transformer_t30_defconfig
-@@ -22,7 +22,7 @@ CONFIG_BOOTDELAY=0
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_KEYED_CTRLC=y
- CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
-+CONFIG_BOOTCOMMAND="setenv skip_boot 0; setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; if test ${skip_boot} -eq 1; then; else run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff; fi"
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-diff --git a/include/configs/transformer-common.h b/include/configs/transformer-common.h
-index dcdda1ec5b..3b7db0ab14 100644
---- a/include/configs/transformer-common.h
-+++ b/include/configs/transformer-common.h
-@@ -64,19 +64,14 @@
- 		"else echo SPI flash backup FAILED! Aborting ...;" \
- 			"poweroff; fi\0"
+diff --git a/arch/arm/dts/tegra30-asus-transformer.dtsi b/arch/arm/dts/tegra30-asus-transformer.dtsi
+index d144a56445..888f9ca74e 100644
+--- a/arch/arm/dts/tegra30-asus-transformer.dtsi
++++ b/arch/arm/dts/tegra30-asus-transformer.dtsi
+@@ -1,7 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
  
--#define TRANSFORMER_REFRESH_USB \
--	"refresh_usb=usb start; usb reset; usb tree; usb info;" \
--		"pause 'Press ANY key to return to bootmenu...'; bootmenu\0"
+ #include <dt-bindings/input/input.h>
 -
- #define TRANSFORMER_BOOTMENU \
- 	TRANSFORMER_FLASH_UBOOT \
- 	TRANSFORMER_FLASH_SPI \
--	TRANSFORMER_REFRESH_USB \
- 	"bootmenu_0=mount internal storage=usb start && ums 0 mmc 0; bootmenu\0" \
- 	"bootmenu_1=mount external storage=usb start && ums 0 mmc 1; bootmenu\0" \
- 	"bootmenu_2=fastboot=echo Starting Fastboot protocol ...; fastboot usb 0; bootmenu\0" \
- 	"bootmenu_3=update bootloader=run flash_uboot\0" \
--	"bootmenu_4=refresh USB=run refresh_usb\0" \
-+	"bootmenu_4=enter console=usb start; setenv skip_boot 1; exit\0" \
- 	"bootmenu_5=reboot RCM=enterrcm\0" \
- 	"bootmenu_6=reboot=reset\0" \
- 	"bootmenu_7=power off=poweroff\0" \
+ #include "tegra30.dtsi"
+ 
+ / {
+@@ -70,12 +69,19 @@
+ 			gpio-controller;
+ 
+ 			regulators {
++				vdd_1v8_vio: vddio {
++					regulator-name = "vdd_1v8_gen";
++					regulator-min-microvolt = <1800000>;
++					regulator-max-microvolt = <1800000>;
++					regulator-always-on;
++					regulator-boot-on;
++				};
++
+ 				/* eMMC VDD */
+ 				vcore_emmc: ldo1 {
+ 					regulator-name = "vdd_emmc_core";
+-					regulator-min-microvolt = <1000000>;
++					regulator-min-microvolt = <3300000>;
+ 					regulator-max-microvolt = <3300000>;
+-					regulator-always-on;
+ 				};
+ 
+ 				/* uSD slot VDD */
+@@ -88,8 +94,10 @@
+ 				/* uSD slot VDDIO */
+ 				vddio_usd: ldo3 {
+ 					regulator-name = "vddio_usd";
+-					regulator-min-microvolt = <1800000>;
++					regulator-min-microvolt = <3100000>;
+ 					regulator-max-microvolt = <3100000>;
++					regulator-always-on;
++					regulator-boot-on;
+ 				};
+ 			};
+ 		};
+@@ -110,6 +118,9 @@
+ 		status = "okay";
+ 		bus-width = <8>;
+ 		non-removable;
++
++		vmmc-supply = <&vcore_emmc>;
++		vqmmc-supply = <&vdd_1v8_vio>;
+ 	};
+ 
+ 	/* USB via ASUS connector */
+@@ -208,7 +219,6 @@
+ 		regulator-name = "vdd_5v0_bl";
+ 		regulator-min-microvolt = <5000000>;
+ 		regulator-max-microvolt = <5000000>;
+-		regulator-boot-on;
+ 		gpio = <&gpio TEGRA_GPIO(H, 3) GPIO_ACTIVE_HIGH>;
+ 		enable-active-high;
+ 	};
 -- 
 2.39.2
 
