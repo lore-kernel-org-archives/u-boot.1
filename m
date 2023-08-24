@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3E1C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55F3C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:27:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DB5A86435;
-	Thu, 24 Aug 2023 15:17:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EF1C786433;
+	Thu, 24 Aug 2023 15:27:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eH/VVspd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JUOdPWd6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E04278644B; Thu, 24 Aug 2023 15:17:15 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 21C9086435; Thu, 24 Aug 2023 15:27:25 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DFFC86414
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:17:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EE5986430
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:27:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37ODH39J077017;
- Thu, 24 Aug 2023 08:17:03 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692883023;
- bh=oLu9uF7zDLmSjp5V56kbxCaA0rr9aKzqNkgiUNOlE6k=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=eH/VVspdP0GNwFf7tsqh1vggdvbx6lr3giyb7DCYCO5xA/Wn4UQMipatHKprwhiQs
- kVRkHlQaIOlJcpX2NRNrPmnCamQGHEv+o7RnQ4jmRtLOJr5j/GJYyMZDstfah9JN3y
- dkY2hMYIOBGBL5btzzV0N1SlGMxLWvl4OIYblz+U=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37ODH23Y087628
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 24 Aug 2023 08:17:03 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
- Aug 2023 08:17:02 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 24 Aug 2023 08:17:02 -0500
-Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37ODGwCp019668;
- Thu, 24 Aug 2023 08:16:58 -0500
-Message-ID: <a3af68c4-490d-f3e2-a9ed-acd650ac0452@ti.com>
-Date: Thu, 24 Aug 2023 18:46:57 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=thierry.reding@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-99c353a395cso903492066b.2
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:27:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692883642; x=1693488442;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EBotSSCkQL3DrtMdMgqtjaHwgMG/BF/adN1fVYWa4ws=;
+ b=JUOdPWd6IeRg6Vlo9paeygil23e/MUn1TFa2YrPsRpW9TcTiOG4abCquGO6KY99Z+Z
+ 4jj8oh/U89sEBc01ZgttcjSOciXwy2eCor0GbT8GIWJrIAwMNO6mfUPuveQF0OE8x6pS
+ f28EXc8SqPgRFx/juJriMeD/9+6JVUhd/XkLNrsJ3ENVlkn1EgmIWsUkydYPm5jWCaZQ
+ dbBU3uUyXRkDKqxLT4+6LZ00pE0yskn2UGbmvfQmqxVZxnNG9C+670eESF5VoQM2lMRH
+ XapKbDSwccXGmaeWjphF782o1hHc/vh5XYE6bqSNLyTEB9jgFhGHm+bL7wS6SPEIo5/V
+ 58ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692883642; x=1693488442;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EBotSSCkQL3DrtMdMgqtjaHwgMG/BF/adN1fVYWa4ws=;
+ b=D0mMZAao+GUhCtM8BkhOJ1cvt92tfoUvHTghjRHjh0U7JkDcx6EwsmSHbOQN9Ow27L
+ 6SyQ/ezt9BJKBYGl0ll6nImFHhpsWLoRUqsTKJc2xboWFNByD/7Flf9n7gow0a6YiXRJ
+ I30GUH47WLM5DR5T/Jg97rIiQBshdElFFbAANTdT5RvnTn17Gcm3k0yl5GrRJAL6D1Mh
+ xZ3VDqnAjzuMAgTMXPvPe8CSHY9mOupZY/VPKVI3ozUi7E5tZMKh8AokLDqLjuYlArBv
+ 6akGrxPbWLpFVbI4FjkYoxPdmwh4xXmUQgJW4ub6yFvDCGEcmbmOIqGLvOVV8Mo1wwRg
+ wQUg==
+X-Gm-Message-State: AOJu0YyZiNGvbfyPBdevjVtrz88uQvajUjHcM0z2vONUymQDy4ITQzOA
+ bNTuYauZIG4+XULUpCNzJrc=
+X-Google-Smtp-Source: AGHT+IGksADuB9rDZvsIr9EYuyjw8umhA+1+11Oa5oVYY28t0Z7MmOPut5w0tEcz3OzrUWkbr4+MuQ==
+X-Received: by 2002:a17:907:78d2:b0:99d:9adc:d69c with SMTP id
+ kv18-20020a17090778d200b0099d9adcd69cmr11832108ejc.14.1692883641815; 
+ Thu, 24 Aug 2023 06:27:21 -0700 (PDT)
+Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
+ by smtp.gmail.com with ESMTPSA id
+ ja25-20020a170907989900b009929d998abcsm10987228ejc.209.2023.08.24.06.27.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 06:27:21 -0700 (PDT)
+Date: Thu, 24 Aug 2023 15:27:19 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/1] tegra_mmc: get tap and trim from dts
+Message-ID: <ZOdat7QlHuhU5TVZ@orome>
+References: <20230819153501.77245-1-clamor95@gmail.com>
+ <ZOXlJmZicgBUINlb@orome>
+ <10578B16-04A2-4CE3-83B8-2BF7FBDB7711@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Simon Glass <sjg@google.com>
-CC: Tom Rini <trini@konsulko.com>, Bryan <bb@ti.com>, Praneeth
- <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Heinrich Schuchardt
- <heinrich.schuchardt@canonical.com>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-9-nm@ti.com>
- <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
- <20230823171502.GQ3953269@bill-the-cat>
- <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
- <20230824001848.vgzl7rcphic3gu2n@carnival>
- <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
- <20230824032709.phneggflsw2ps2dv@reanalyze>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230824032709.phneggflsw2ps2dv@reanalyze>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="B3QXKp+CpqknrVS4"
+Content-Disposition: inline
+In-Reply-To: <10578B16-04A2-4CE3-83B8-2BF7FBDB7711@gmail.com>
+User-Agent: Mutt/2.2.10 (2023-03-25)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,106 +97,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, Nishanth
 
-On 24/08/23 08:57, Nishanth Menon wrote:
-> On 21:01-20230823, Simon Glass wrote:
->> Hi Nishanth,
->>
->> On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
->>>
->>> On 17:57-20230823, Simon Glass wrote:
->>> [...]
->>>>> This is how we have a common bit of rST for how to build N boards,
->>>>> without having to do a literal copy and paste N times.
->>>>
->>>> How about using this?
->>>>
->>>> https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
->>>
->>> I was not able to succeed with complex includes such as:
->>> https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rst?plain=1#L89
->>>
->>> am62x complete build procedure defined once and reused in other am62x
->>> platforms.. But the am62x build procedure itself is reused from common
->>> k3 build steps.
->>
->> I followed through these instructions. I find the env vars quite
->> confusing, since I don't really know what it is doing. It feels like a
->> script:
->>
->> do $a $b $c
->> do $f $e
->>
->> it is pretty hard to follow. I think it would be better to write
->> everything out in full for each board, like rockchip does.
-> 
-> Unfortunately, this is a few major steps that is repeated for
-> (currently):
-> 	AM62x SK
-> 	Toradex Verdin
-> 	(pending: beagleplay - )
-> 	(once all the dust clears up, hopefully phytec)
-> 	SK-LP
-> 	....
-> 
-> I have no reasonable way to offer to keep them all in sync.
-> 	https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
-> is kind of why I went down this path.S
-> 
->>
->> Some other minor feedback:
->>
->> - The 'make' lines should really have -j $(nproc) added
-> 
-> Different styles of shells..
-> 
->> - The $ signs at the start of each command in the docs are a pain
->> since it stops me copying the commands into the terminal - can you
->> remove them?
-> 
-> hehe.. "dont" let people blindly copy paste without understanding what is
-> going on argument?
-> 
-> If folks are OK, I sure can send a different patch series for that.. (or
-> maybe motivate someone to do that instead of me ;))
-> 
-> 
->> - It doesn't build for me:
->>
->>    BINMAN  .binman_stamp
->> Image 'ti-dm' is missing external blobs and is non-functional: blob-ext
->>
->> /binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f):
->>     Missing blob
->>
->> Some images are invalid
->> make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1115:
->> .binman_stamp] Error 103
->> make[1]: Leaving directory '/tmp/b/play'
->> make: *** [Makefile:177: sub-make] Error 2
-> 
-> 
-> ^^ Neha: This is what I was complaining about.
-> 
-> https://u-boot.readthedocs.io/en/latest/board/ti/am62x_sk.html?highlight=am62#sources
-> 
-> source: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
-> is missing, we never used to break build previously binman converted now does.
-> 
-> I am wondering if I need to explicitly call out git clone instructions
-> out..
-> 
+--B3QXKp+CpqknrVS4
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Right... this does seem to be a complaint that keeps coming up.
+On Wed, Aug 23, 2023 at 02:30:48PM +0300, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 13:53:26 GMT+03:00, =
+Thierry Reding <thierry.reding@gmail.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
+=B0=D0=B2(-=D0=BB=D0=B0):
+> >On Sat, Aug 19, 2023 at 06:35:00PM +0300, Svyatoslav Ryhel wrote:
+> >> Default-tap and default-trim values are used for eMMC setup
+> >> mostly on T114+ devices. As for now, those values are hardcoded
+> >> for T210 and ignored for all other Tegra generations. Fix this
+> >> by passing tap and trim values from dts.
+> >>=20
+> >> This commit will cause regression on T210 (emmc may not work),
+> >> fix is applied in tegra210.dtsi and will be sent next week.
+> >
+> >Heh... I don't think so. If you already know that this will cause a
+> >regression on Tegra210 you need to rework this. Adding regressions
+> >accidentally is already bad enough, but doing so knowingly is a big
+> >no-no.
+>=20
+> DTS change for t210 was sent in "General tegra and board improvements"
+> patchset. This is why this pathset contains only 1 (one) patch and a
+> warning. It has a dependency.
 
-Simon, my intention at the time of sending out the patch was that anyone 
-building the board should "not NOT" have the DM binary. The way we structured 
-the filename was that it looks at BINMAN_INDIRS to find 
-ti-dm/ipc_echo_testb_mcu1_0_release_strip.xer5f but I guess this is a confusing 
-way to put it across. Maybe we should rework that. Or not throw an error at all 
-when DM isn't found.
+For U-Boot this may not matter as much because the control DTB is always
+linked into the binary, but for Linux for example we need to make sure
+that the kernel always remains backwards compatible with older device
+trees. I think that's good to follow in general, so making sure there
+are sensible defaults to fall back to if the DTB is missing some
+properties is good practice.
 
--- 
-Thanking You
-Neha Malcom Francis
+Anyway, the way you posted these there was a future dependency, so if
+someone had applied the driver change without the DTB change having been
+applied first this would've caused a regression, which is always bad if
+it happens at random points because it makes things like bisections very
+painful.
+
+So unless the patch is fixed to fall back to defaults for Tegra210 we
+need to carefully coordinate in which order these patches go in. The DT
+change needs to go in first, followed by the driver change that relies
+on the DTB update.
+
+Thierry
+
+--B3QXKp+CpqknrVS4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTnWrUACgkQ3SOs138+
+s6HPrhAAhh9mr/g/x9HyRt/JtBGlT8dUNf1+XE49SLMielPPwiDttPDE0ZA2U0xB
+J+9xI7uJ2KOISM90GTX5kk1W2qhm0BfDceP+zIzmcdLOwc+IRwyY13DZvuvzhxQK
+QgCcTETBTnINnzU8vj9Z6rHDaljM4g/o+pZlGKcgNVJE613290cFGExoO0UpFTcm
+Mzna2vSMhbxXEBwF2P0ehKcbyMoxXZ8dHjZkxFTaMhgkEVAjEX7csP86NXY55zkT
+GWMR2ETN0xqVWW0NSgifRT6UG/iHQePHU+4KHVGtLfAFCoU1XE2vho+gU7GaTxPS
+WVl21UJQweAOAqc4Hy5V8NswYFMY5EFI0ZqjGQcgPEsqLvzmrJkDrl9B8R52yOVM
+Pzt3hKlPKg9lLUKY73mutDcbOCuAEDYt/nvRfUwW/A6sYeg+shenzZAuFqvXBsh5
+6xEMSIl0t+CLtrFBbei4laoGVnyM06ZdFZ4K4lxs5axxnmA7jMpjTZnDbynntv/N
+zs+dNjFQk2+snOdUQ2sbRUQh2uMXzIpGHp5iRNbMdrJmE9cQV6NzWPIHS7c/8IP7
+WGw/X/JrifeYrMUamNWAjpSMunJdQAIQ9k6YMcJ9SUOGpPieyQDh+Nl5HzDL9jAs
+CQKf8brJNeoq4zwkr0O4LTnWnBoueZCJdLH/3p/N8GrpPZtmW24=
+=1KpQ
+-----END PGP SIGNATURE-----
+
+--B3QXKp+CpqknrVS4--
