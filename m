@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17A89C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:03:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FED4C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81F5F8653D;
-	Thu, 24 Aug 2023 05:03:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE24286537;
+	Thu, 24 Aug 2023 05:03:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oC91obQM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ht3sTgqr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9309486543; Thu, 24 Aug 2023 05:03:24 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id A552D86544; Thu, 24 Aug 2023 05:03:25 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30B9D86537
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:03:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6CF68647E
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:03:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-34ca1aadce9so15071025ab.1
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:03:21 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-34cafafa50eso11554465ab.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 20:03:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692846200; x=1693451000;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0TaNjr1wGiZnLNvnl6HUfz8BPmbHk1j3DsY8RftT8y0=;
- b=oC91obQM4rtPBj4XhY0KAMz/72aKsIwkhq2K1kWjHhjAzCS3uQ3ZvxH2XeuCICKFdL
- HlK8JJtR66t/0tgLEq+CrtrioKieyINLNkAKDX/4QL8MbLNr28ykRvDs+x5EMo7ri7Yw
- 7JrBcZ2e+rnxw6+snZZmQ7DPxdAzAvjD+qO6w=
+ d=chromium.org; s=google; t=1692846201; x=1693451001;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ekMqLCwercIjcp7N9w7tNofzaTl+ERxQoTGVBl9Rml8=;
+ b=ht3sTgqr7Wuj3FjZXowdjvIFGDTLSnfkzsPSid7f/eVKp0dndEPiBWvw80T/xkt60I
+ vMmbGPJflkEzw8fkwSA13FPFSXFK1MOpn3doL7ijPtSu6+/eIvvqt/h4xP/xkhPdTxbe
+ 2Ps55JzuuwoUgAjJA7jjg0IZdbfoHzEzGGl6M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692846200; x=1693451000;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0TaNjr1wGiZnLNvnl6HUfz8BPmbHk1j3DsY8RftT8y0=;
- b=LFtu2Y7LmObW2KCujTCKhEciwhrZJcpJJePpJbv3A2vtdmY6VoSIHnMCM+DWaIkVoM
- fWj5dguhsFMwh4yz6wC6Lsp/5qkv9uCDiOfP4Ko7OGDnchgFC1hbkn1FKS/gB2NaiLeh
- sa2h5nFXiAw1y03TtGkb3msnA3lHJZNp92AJPPVYwoRW0Awfnu36w9CYvSbHKGRfCSiR
- kVBf3iulrXFndw27iAvXHkgM9qKBvC6kL2AXga4PHNeFvtO/FPF729Xx8DFzG/qqmcLJ
- 0k9nySksHQZdlAy114hfCYSxDTssAo3rcByWlFlt5xXkQYSBP351CFZnCxbPUfMh3mxd
- 2KFQ==
-X-Gm-Message-State: AOJu0YxEwf5Kn2ouwo2vLMwYrYhzj5UsxDbswefn/X2sTVEFHrwsrKCo
- shA3/MBuo/44lNEq7nFDFfh2rm5MTfYRgxKvQBw=
-X-Google-Smtp-Source: AGHT+IHalleRke17z3NHQzBiJyQ8WEfQmejlVxy5wHxJXaX7Eo4fsCNy5BGT4fbBwkRtFZef6FrQWw==
-X-Received: by 2002:a05:6e02:11ad:b0:349:2bb0:c87d with SMTP id
- 13-20020a056e0211ad00b003492bb0c87dmr3706852ilj.32.1692846199597; 
- Wed, 23 Aug 2023 20:03:19 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692846201; x=1693451001;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ekMqLCwercIjcp7N9w7tNofzaTl+ERxQoTGVBl9Rml8=;
+ b=Ngsvkxjr2DPJGtbbAHSAez5OrfL8zZkrmOQT7aAz8PVmzS7HJFARwR8TfKXQub7p74
+ 4uTvV8tCMyvwJNw50DLQlJtvqlITRUJEnjwWxgr5s0kdB5ntjP99H7p/RKVX18oGDMnR
+ lCxChI/Wc0bv3pdMxbMqvYLpDm7E3mdbARmyMGS7u4hVOif/u8Q9/KqmVAt4PwhdPs8+
+ XW668iR5nu2mczP53cOJ5ysu5EfWD168Az0wuvfQ9ge5Q8EcTB4U4FXTRyjw794+1593
+ isb1fvbEYbtV7SwEvO1MM4k+PJtW80UOLaGoL/R+O5nb9cEYYmK6DyKhA9wLd4E61tkM
+ r/HA==
+X-Gm-Message-State: AOJu0YyYzUJsDmxxzv1j5v0d6p7yx/YaDBHFWGmF1W3muBQJ8mjTOq/O
+ Mga3tuRpmIV7vunPDdldBaJYbP+1edEvrXptCOA=
+X-Google-Smtp-Source: AGHT+IEJMsA1MhiwK24E+50tFdO+3oPmZ+QCt2zBB/vWJL4JTIgjs0AI3byucfMry2mZZAQwLV6lVw==
+X-Received: by 2002:a05:6e02:1147:b0:347:7421:9d85 with SMTP id
+ o7-20020a056e02114700b0034774219d85mr4129539ill.29.1692846201293; 
+ Wed, 23 Aug 2023 20:03:21 -0700 (PDT)
 Received: from localhost.localdomain (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- u4-20020a92ccc4000000b00345fcbce508sm4274117ilq.39.2023.08.23.20.03.18
+ u4-20020a92ccc4000000b00345fcbce508sm4274117ilq.39.2023.08.23.20.03.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 20:03:19 -0700 (PDT)
+ Wed, 23 Aug 2023 20:03:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Dillon Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
- Marek Vasut <marex@denx.de>, Michael Walle <michael@walle.cc>,
- Neha Malcom Francis <n-francis@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 0/6] Attempt to enforce standard extensions for build output
-Date: Wed, 23 Aug 2023 21:02:53 -0600
-Message-ID: <20230824030304.1555547-1-sjg@chromium.org>
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: [PATCH 1/6] binman: Require image filenames to have certain extensions
+Date: Wed, 23 Aug 2023 21:02:54 -0600
+Message-ID: <20230824030304.1555547-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
+In-Reply-To: <20230824030304.1555547-1-sjg@chromium.org>
+References: <20230824030304.1555547-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,106 +92,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this early stage of using binman to produce output files, we are mostly
-seeing people using common extensions such as '.bin' and '.rom'
+It is helpful to be able to distinguish output files from other files when
+building U-Boot. This is useful for buildman, for example, which can
+preserve output files when requested.
 
-But unusual extensions appear in some places.
+Most images use extensions like .bin or .rom but some use other ones.
 
-We would like 'buildman -k' to keep the build outputs, but this is hard if
-there is no consistency as to the extension used.
+Introduce a check and produce an error if an image filename does not have
+an allowed extension.
 
-This series adjusts binman to enforce just 4 extensions for output images:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-   .bin
-   .rom
-   .itb
-   .img
-
-Other extensions will produce an error. With this rule observed, buildman
-can keep the required files.
-
-Some patches are included to fix up some easy problems. But the following
-boards generate 'custMpk.pem' and it is not clear how to fix this, so I am
-asking for help from the maintainers:
-
-   am62ax_evm_r5 am62x_evm_r5 am64x_evm_r5 am65x_evm_r5
-   am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc am65x_hs_evm_r5
-   j7200_evm_r5 j721e_evm_r5 j721s2_evm_r5 verdin-am62_r5
-   am62ax_evm_a53 am62x_evm_a53 am64x_evm_a53 am65x_evm_a53
-   am65x_hs_evm_a53 j7200_evm_a72 j721e_evm_a72 j721s2_evm_a72
-   verdin-am62_a53
-
-It looks like the .pem files are listed as top-level images, e.g.:
-
-   &custmpk_pem {
-      filename = "../../ti/keys/custMpk.pem";
-   };
-
-but if the only objective is to pick up an existing file, it is better to
-set BINMAN_INDIRS to include that directory. Also we should only have
-simple leafnames in the 'filename' property, so the '../../ti/keys' is not
-correct. It makes it harder for people to get the files from other places.
-Making this easier is one of binman's goals.
-
-Most likely the custmpk_pem node can be removed and the .pem file can be
-included directly in the place that needs it, e.g. by adjusting the
-ti-secure-rom etype (or ex509_cert) to use tools.get_input_filename() when
-reading the key file.
-
-For example, this:
-
-   custMpk {
-      filename = "custMpk.pem";
-      custmpk_pem: blob-ext {
-         filename = "../keys/custMpk.pem";
-      };
-   };
-
-is really just copying a file from '../keys/custMpk.pem' to 'custMpk.pem'
-so is equivalent to:
-
-   custMpk {
-      type = "blob";
-      filename = "custMpk.pem";
-   }
-
-(note that blob-ext implies that the blob may be missing, so blob is a
-better choice, since the key cannot be missing)
-
-The fact that the .pem files are at the top level means that they are
-output images, which surely is not intended. They should be buried in the
-image description, at a lower level, as part of something else.
-
-So please take a loke at the above and see if the binman descriptions can
-be reworked slightly to follow these new rules.
-
-
-Simon Glass (6):
-  binman: Require image filenames to have certain extensions
-  buildman: Keep all permitted output files
-  buildman: Show progress when regenerating the board.cfg file
-  buildman: Start the clock when the build starts
-  kontron_sl28: Use u-boot-update.bin instead of u-boot.update
-  stm32mp15: Use u-boot-spl-stm32.bin instead of u-boot-spl.stm32
-
- .../dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi   |  2 +-
- arch/arm/dts/stm32mp15-u-boot.dtsi             |  2 +-
- doc/board/kontron/sl28.rst                     |  4 ++--
- doc/board/st/stm32mp1.rst                      | 18 +++++++++---------
- include/configs/stm32mp15_dh_dhsom.h           |  2 +-
- tools/binman/binman.rst                        |  5 +++++
- tools/binman/etype/section.py                  |  3 +--
- tools/binman/ftest.py                          | 12 ++++++++++--
- tools/binman/image.py                          |  9 +++++++++
- tools/binman/test/022_image_name.dts           |  4 ++--
- tools/binman/test/311_bad_image_name.dts       | 17 +++++++++++++++++
- tools/buildman/boards.py                       | 15 ++++++++++++---
- tools/buildman/builder.py                      |  3 ++-
- tools/buildman/builderthread.py                | 11 +++++++----
- tools/buildman/control.py                      |  3 ++-
- 15 files changed, 81 insertions(+), 29 deletions(-)
+ tools/binman/binman.rst                  |  5 +++++
+ tools/binman/etype/section.py            |  3 +--
+ tools/binman/ftest.py                    | 12 ++++++++++--
+ tools/binman/image.py                    |  9 +++++++++
+ tools/binman/test/022_image_name.dts     |  4 ++--
+ tools/binman/test/311_bad_image_name.dts | 17 +++++++++++++++++
+ 6 files changed, 44 insertions(+), 6 deletions(-)
  create mode 100644 tools/binman/test/311_bad_image_name.dts
 
+diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+index aeea33fddb95..3c24a8313c47 100644
+--- a/tools/binman/binman.rst
++++ b/tools/binman/binman.rst
+@@ -678,6 +678,11 @@ filename:
+     put into the entry. If binman knows about the entry type (like
+     u-boot-bin), then there is no need to specify this.
+ 
++    Note that image filenames must have one of a limited set of extensions:
++    `.bin`, `.rom`, `.itb` or `.img`. Others will generate an error. This is
++    so that it is clear which output files are images. It allows buildman to
++    preserve them when its `-k` option is used, for example.
++
+ type:
+     Sets the type of an entry. This defaults to the entry name, but it is
+     possible to use any name, and then add (for example) 'type = "u-boot"'
+diff --git a/tools/binman/etype/section.py b/tools/binman/etype/section.py
+index fb49e85a7634..8074f181ea58 100644
+--- a/tools/binman/etype/section.py
++++ b/tools/binman/etype/section.py
+@@ -10,6 +10,7 @@ images to be created.
+ 
+ from collections import OrderedDict
+ import concurrent.futures
++import os
+ import re
+ import sys
+ 
+@@ -20,7 +21,6 @@ from u_boot_pylib import tools
+ from u_boot_pylib import tout
+ from u_boot_pylib.tools import to_hex_size
+ 
+-
+ class Entry_section(Entry):
+     """Entry that contains other entries
+ 
+@@ -203,7 +203,6 @@ class Entry_section(Entry):
+         self.align_default = fdt_util.GetInt(self._node, 'align-default', 0)
+         self._filename = fdt_util.GetString(self._node, 'filename',
+                                             self._filename)
+-
+         self.ReadEntries()
+ 
+     def ReadEntries(self):
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 1293e9dbf423..5b54239827d4 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -1107,11 +1107,11 @@ class TestFunctional(unittest.TestCase):
+         retcode = self._DoTestFile('022_image_name.dts')
+         self.assertEqual(0, retcode)
+         image = control.images['image1']
+-        fname = tools.get_output_filename('test-name')
++        fname = tools.get_output_filename('test-name.bin')
+         self.assertTrue(os.path.exists(fname))
+ 
+         image = control.images['image2']
+-        fname = tools.get_output_filename('test-name.xx')
++        fname = tools.get_output_filename('test-name.img')
+         self.assertTrue(os.path.exists(fname))
+ 
+     def testBlobFilename(self):
+@@ -7216,5 +7216,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertRegex(err,
+                          "Image 'image'.*missing bintools.*: bootgen")
+ 
++    def testBadImageName(self):
++        """Test that image files can be named"""
++        with self.assertRaises(ValueError) as e:
++            self._DoTestFile('311_bad_image_name.dts')
++        self.assertIn(
++            "Image filename 'test-name.what' must use a permitted extension: .bin, .rom, .itb, .img",
++            str(e.exception))
++
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tools/binman/image.py b/tools/binman/image.py
+index e77b5d0d97cd..71dc28854412 100644
+--- a/tools/binman/image.py
++++ b/tools/binman/image.py
+@@ -21,6 +21,9 @@ from dtoc import fdt_util
+ from u_boot_pylib import tools
+ from u_boot_pylib import tout
+ 
++# Extensions allowed for images (keep in sync with buildman/builderthread.py)
++ALLOWED_EXTS = ['.bin', '.rom', '.itb', '.img']
++
+ class Image(section.Entry_section):
+     """A Image, representing an output from binman
+ 
+@@ -97,6 +100,12 @@ class Image(section.Entry_section):
+         self.allow_repack = fdt_util.GetBool(self._node, 'allow-repack')
+         self._symlink = fdt_util.GetString(self._node, 'symlink')
+ 
++        if self.section is None:
++            ext = os.path.splitext(self._filename)[1]
++            if ext not in ALLOWED_EXTS:
++                self.Raise(
++                    f"Image filename '{self._filename}' must use a permitted extension: {', '.join(ALLOWED_EXTS)}")
++
+     @classmethod
+     def FromFile(cls, fname):
+         """Convert an image file into an Image for use in binman
+diff --git a/tools/binman/test/022_image_name.dts b/tools/binman/test/022_image_name.dts
+index 94fc069c1764..2da68ab06921 100644
+--- a/tools/binman/test/022_image_name.dts
++++ b/tools/binman/test/022_image_name.dts
+@@ -7,13 +7,13 @@
+ 	binman {
+ 		multiple-images;
+ 		image1 {
+-			filename = "test-name";
++			filename = "test-name.bin";
+ 			u-boot {
+ 			};
+ 		};
+ 
+ 		image2 {
+-			filename = "test-name.xx";
++			filename = "test-name.img";
+ 			u-boot {
+ 			};
+ 		};
+diff --git a/tools/binman/test/311_bad_image_name.dts b/tools/binman/test/311_bad_image_name.dts
+new file mode 100644
+index 000000000000..30192957c447
+--- /dev/null
++++ b/tools/binman/test/311_bad_image_name.dts
+@@ -0,0 +1,17 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		multiple-images;
++		image1 {
++			filename = "test-name.what";
++			u-boot {
++			};
++		};
++	};
++};
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
