@@ -4,90 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E740C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA06C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:44:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A99586536;
-	Thu, 24 Aug 2023 15:38:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 59B1F8477A;
+	Thu, 24 Aug 2023 15:44:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QppgnsAQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gXaWNrUj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 996D58659E; Thu, 24 Aug 2023 15:38:24 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 1BBD185F9F; Thu, 24 Aug 2023 15:44:02 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A199686435
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:38:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EE20846EE
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:43:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5920efd91c7so47044747b3.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:38:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-51e28cac164so1882645a12.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:43:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692884299; x=1693489099;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Yrbh4XXrEwvm465dl46OB0euZP8IGrBy6pB070Hyhhw=;
- b=QppgnsAQDVfOXZ3fZO4UexPsVpD3OEcex9qdF8dkpWHtuxOVRb1vC9crmfLuDr99b5
- yTMlT+ZDUnwjF6mrCh7sJfQv2EzG6duHLLCobB81MIwEdkrlcQYye9Z7ivDMab5ovtow
- 2VJX+N6Iau9NqYRsQbo7A2wNRREPVgqpCJWJU=
+ d=gmail.com; s=20221208; t=1692884639; x=1693489439;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=khC6UdxxIJJtwSSrNXcIYrDuSZeZLlhidvp9qAsMnuU=;
+ b=gXaWNrUjuoHjegPpdGllTF7sPo+7A9QEpFeBx8tSrirO1oYrjpmT2PsTpwe4bu3lDC
+ lN/LnJhh7dvGriiZPPKZXwlbSUomdHxVyqYH7u69NfGS8I4N59nSt/NADKN0AlqPfS1Y
+ 2b0KA0axVEn6yUW68l20SiCFAlCWByQTxpOTCgnu2K7bitZVkCE1LKqfuEIoaTYQDPHr
+ 0iNTY4PERqZXjq46/bf55WZ/KCtIpXPcLMRIj5i0mADawY1CUXrxaIOHn1NDTCWTG3+1
+ yWhjRto1/uTUcjLZbzc6Y4hjewMOYnFNSTWiLeu2c5YyDXknJrBCu1Vcwo9Bgy8QOgMD
+ BJtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692884299; x=1693489099;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Yrbh4XXrEwvm465dl46OB0euZP8IGrBy6pB070Hyhhw=;
- b=Ds2gxkRqJI0U1feM+5rNmoDtGCxsRz3jKHHe/vpA5VcYBP0aHLQmpf02xaOPdctWGP
- YfghJWBfDLRMd8EFC5KrPnVgx8kZVUCHN5AdUZ6y+Sl9YAV2P6fEuoPPFFCitusD2B34
- 6TJWBzv4xIKvvTZHWmqud47Onw95XhinA4syBCcQwS/KifQh+5v3chk5w3YU1OJe4yGp
- 85ZhXsaT9TvJ7wQW/CRu2RZcZ6+eXG9DtwoE2gL77fuJZDREIDVe+5jdDKLafcOoU1ZU
- w+9a0TjhIhvFNJUq9+jsl8yPIpOjXexWD1zPxNZnIPAGSUmVTwmFmJ7ekNCa2SaSzzA9
- RoAQ==
-X-Gm-Message-State: AOJu0YzkadU8IeHjT/NDMv0W/4KtujZ3I7QlSyz9Nkx+d8FOzB8gehOP
- IE2HSsoJp6xX6TLTtaDrhXMvbQ==
-X-Google-Smtp-Source: AGHT+IGaVRguzVl0o/i5IdiqHb0ohDah7AlRmoKqTtU2/duNjLiyBlNS76QacmNuGSciSXCPg7gykg==
-X-Received: by 2002:a81:bb4f:0:b0:592:ffc:c787 with SMTP id
- a15-20020a81bb4f000000b005920ffcc787mr12756376ywl.30.1692884298437; 
- Thu, 24 Aug 2023 06:38:18 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
- [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
- by smtp.gmail.com with ESMTPSA id
- p4-20020a0dff04000000b0058bcea54fc2sm3921080ywf.57.2023.08.24.06.38.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 06:38:17 -0700 (PDT)
-Date: Thu, 24 Aug 2023 09:38:14 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Dillon Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
- Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
- output
-Message-ID: <20230824133814.GH3953269@bill-the-cat>
-References: <20230824030304.1555547-1-sjg@chromium.org>
+ d=1e100.net; s=20221208; t=1692884639; x=1693489439;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=khC6UdxxIJJtwSSrNXcIYrDuSZeZLlhidvp9qAsMnuU=;
+ b=M6PYvB+HfAU5G0El2kkMb16gIDWVI3kdijUts0KFNIYkUO/5i1FP89tD++UpBsexU+
+ nVcKSk1TvoMEed1K0J7ilbRCwshK2xpjtj/+b/6C0kfbP0GXvzLvsCcIuHzYtrj1Bx8W
+ u9GcElzqY1yA0WjbLLQKc1GalOW9vNdfh1fU0iZkznwEIT+QyzfebgPastcyLPuvSmWI
+ mtGage2ei1L5SK+fS79AZxYRnoMMgGbJiCgTYv4x64WGxJ1NKlW2bndiXmFrwrO4VQF2
+ Hv+pJJrc8I+gR+rW184b88dvyle57bj9PWU05U1FdVrsh5EWg5RpxrnPwLkCr6F/FcqY
+ Gf7g==
+X-Gm-Message-State: AOJu0YwtWkA3nDxj606t9Wn8nwj2mqUKJXqGmgZ3EWnNBVoGhBNvHNDJ
+ D9g0Pk+9phUlr7wwIXIbjxQ=
+X-Google-Smtp-Source: AGHT+IF7zJdV1AVoobIAq557ZfwpaUP44n9SimYV+AtCoOvD380zt4PVtQtWzmVacmuxJfYRHmu/gQ==
+X-Received: by 2002:a05:6402:440f:b0:525:4696:336d with SMTP id
+ y15-20020a056402440f00b005254696336dmr19115071eda.8.1692884639007; 
+ Thu, 24 Aug 2023 06:43:59 -0700 (PDT)
+Received: from [127.0.0.1] ([46.211.238.14]) by smtp.gmail.com with ESMTPSA id
+ d5-20020aa7d5c5000000b00521953ce6e0sm10531736eds.93.2023.08.24.06.43.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Aug 2023 06:43:58 -0700 (PDT)
+Date: Thu, 24 Aug 2023 16:43:57 +0300
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <thierry.reding@gmail.com>
+CC: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1_17/19=5D_ARM=3A_tegra=3A_dt-set?=
+ =?US-ASCII?Q?up=3A_convert_TrustZone_remove_into_config?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <ZOdcPHTsyKxN9OzS@orome>
+References: <20230822112217.4646-1-clamor95@gmail.com>
+ <20230822112217.4646-18-clamor95@gmail.com> <ZOXq0SrF9h0Z9uHw@orome>
+ <86A72122-840F-46B1-9C25-0B6F5AFB82A1@gmail.com> <ZOdcPHTsyKxN9OzS@orome>
+Message-ID: <91C94CCB-A214-4D97-B835-34969DCADB1B@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yEtdhzA18XLNGmL+"
-Content-Disposition: inline
-In-Reply-To: <20230824030304.1555547-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,136 +96,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yEtdhzA18XLNGmL+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 09:02:53PM -0600, Simon Glass wrote:
+24 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 16:33:48 GMT+03:00,=
+ Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
+=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>On Wed, Aug 23, 2023 at 02:47:11PM +0300, Svyatoslav Ryhel wrote:
+>>=20
+>>=20
+>> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:17:37 GMT+03:=
+00, Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
+=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>> >On Tue, Aug 22, 2023 at 02:22:15PM +0300, Svyatoslav Ryhel wrote:
+>> >> Remove of TrustZone nodes is required by many product devices
+>> >> which require repetable calls of same function from device board=2E
+>> >> To simplify this, TZ remove is converted into Kconfig option=2E
+>> >>=20
+>> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
+>> >> ---
+>> >>  arch/arm/mach-tegra/Kconfig    | 14 ++++++++++++++
+>> >>  arch/arm/mach-tegra/dt-setup=2Ec |  7 +++++++
+>> >>  2 files changed, 21 insertions(+)
+>> >
+>> >I kind of preferred the original because it's very explicit=2E There's
+>> >also no big advantage in consolidating this because the code is unlike=
+ly
+>> >to ever require changing (the libfdt API is quite stable and these nod=
+es
+>> >are all hard-coded anyway)=2E This new variant put non-generic code (i=
+t
+>> >requires a Kconfig option after all) into a generic place, so it seems=
+ a
+>> >bit backwards=2E
+>>=20
+>> So you say that I have to add same function to boards over and over
+>> for all devices I plan to mainline? Unneeded code duplication in
+>> action=2E
+>
+>There's a balance to be struck between duplication and readability=2E If
+>you insert this board-specific code into a generic code path, that
+>generic code path becomes difficult to read given the extra #ifdef
+>guards etc=2E If you're really worried about duplicating code you can mov=
+e
+>the two libfdt calls into a separate function and call that function
+>from each of the boards that need it=2E
 
-> In this early stage of using binman to produce output files, we are mostly
-> seeing people using common extensions such as '.bin' and '.rom'
->=20
-> But unusual extensions appear in some places.
->=20
-> We would like 'buildman -k' to keep the build outputs, but this is hard if
-> there is no consistency as to the extension used.
->=20
-> This series adjusts binman to enforce just 4 extensions for output images:
->=20
->    .bin
->    .rom
->    .itb
->    .img
->=20
-> Other extensions will produce an error. With this rule observed, buildman
-> can keep the required files.
->=20
-> Some patches are included to fix up some easy problems. But the following
-> boards generate 'custMpk.pem' and it is not clear how to fix this, so I am
-> asking for help from the maintainers:
->=20
->    am62ax_evm_r5 am62x_evm_r5 am64x_evm_r5 am65x_evm_r5
->    am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc am65x_hs_evm_r5
->    j7200_evm_r5 j721e_evm_r5 j721s2_evm_r5 verdin-am62_r5
->    am62ax_evm_a53 am62x_evm_a53 am64x_evm_a53 am65x_evm_a53
->    am65x_hs_evm_a53 j7200_evm_a72 j721e_evm_a72 j721s2_evm_a72
->    verdin-am62_a53
->=20
-> It looks like the .pem files are listed as top-level images, e.g.:
->=20
->    &custmpk_pem {
->       filename =3D "../../ti/keys/custMpk.pem";
->    };
->=20
-> but if the only objective is to pick up an existing file, it is better to
-> set BINMAN_INDIRS to include that directory. Also we should only have
-> simple leafnames in the 'filename' property, so the '../../ti/keys' is not
-> correct. It makes it harder for people to get the files from other places.
-> Making this easier is one of binman's goals.
->=20
-> Most likely the custmpk_pem node can be removed and the .pem file can be
-> included directly in the place that needs it, e.g. by adjusting the
-> ti-secure-rom etype (or ex509_cert) to use tools.get_input_filename() when
-> reading the key file.
->=20
-> For example, this:
->=20
->    custMpk {
->       filename =3D "custMpk.pem";
->       custmpk_pem: blob-ext {
->          filename =3D "../keys/custMpk.pem";
->       };
->    };
->=20
-> is really just copying a file from '../keys/custMpk.pem' to 'custMpk.pem'
-> so is equivalent to:
->=20
->    custMpk {
->       type =3D "blob";
->       filename =3D "custMpk.pem";
->    }
->=20
-> (note that blob-ext implies that the blob may be missing, so blob is a
-> better choice, since the key cannot be missing)
->=20
-> The fact that the .pem files are at the top level means that they are
-> output images, which surely is not intended. They should be buried in the
-> image description, at a lower level, as part of something else.
->=20
-> So please take a loke at the above and see if the binman descriptions can
-> be reworked slightly to follow these new rules.
->=20
->=20
-> Simon Glass (6):
->   binman: Require image filenames to have certain extensions
->   buildman: Keep all permitted output files
->   buildman: Show progress when regenerating the board.cfg file
->   buildman: Start the clock when the build starts
->   kontron_sl28: Use u-boot-update.bin instead of u-boot.update
->   stm32mp15: Use u-boot-spl-stm32.bin instead of u-boot-spl.stm32
->=20
->  .../dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi   |  2 +-
->  arch/arm/dts/stm32mp15-u-boot.dtsi             |  2 +-
->  doc/board/kontron/sl28.rst                     |  4 ++--
->  doc/board/st/stm32mp1.rst                      | 18 +++++++++---------
->  include/configs/stm32mp15_dh_dhsom.h           |  2 +-
->  tools/binman/binman.rst                        |  5 +++++
->  tools/binman/etype/section.py                  |  3 +--
->  tools/binman/ftest.py                          | 12 ++++++++++--
->  tools/binman/image.py                          |  9 +++++++++
->  tools/binman/test/022_image_name.dts           |  4 ++--
->  tools/binman/test/311_bad_image_name.dts       | 17 +++++++++++++++++
->  tools/buildman/boards.py                       | 15 ++++++++++++---
->  tools/buildman/builder.py                      |  3 ++-
->  tools/buildman/builderthread.py                | 11 +++++++----
->  tools/buildman/control.py                      |  3 ++-
->  15 files changed, 81 insertions(+), 29 deletions(-)
->  create mode 100644 tools/binman/test/311_bad_image_name.dts
+I propose for now to drop this patches and when time comes to Simon Glass =
+suggestion about events just create a call for this or handle it in some wa=
+y=2E
 
-This doesn't seem to address the ones I pointed out on IRC as being the
-first order (to me anyhow) problem of needing the _unsigned files on the
-platforms you list above for PEM files.
-
---=20
-Tom
-
---yEtdhzA18XLNGmL+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnXTwACgkQFHw5/5Y0
-tywOqwwAkiZdUIeTqfAT5L/JNdpmaVD3Awn2B5la6lJzgGWrOBrQCZ7M9jNpvYUM
-4CX8uMvlJxjLHQreACM5e6nu09+ZeBPoIpLZZdvD+vUMnp3HFT45/Cw/7sTkOkmL
-lFN2mf5dqzyBSfYQCSlqC2NBTxQKYenKNpFPn+FlWzyTkVX9qAvhThPQfWN8qu/T
-Z8IsRJJhSGr41J1insHZAs99HSUA4ljCMD6u7DSd4ra/jo9eoluJwEZT6lHts+3j
-nk1C3fJmHoQAMSiwe6FlqcLrHgefG2M0wX1zk4CH5RBEHiNcU5MnyFmVfyAxi8xC
-hEwvWZ02PVZs7N5YQRhjBbNCKRrwHRfDOiTetwT/w70VBCLSBm70USRVNrvHzLxu
-ySJk8X/aQyb+6+D4w233j2qqjr6Q5OBW6kVYqb+Jh+pXMpXobYUJNq0NlL7iYDtw
-cWQFSqA2cOWJCyc5Vun0snlTKngHffIxsXNEQCDgvrGm5LIDunbgYy/+XjUBebJy
-43ra1Xha
-=fXoK
------END PGP SIGNATURE-----
-
---yEtdhzA18XLNGmL+--
+>Thierry
