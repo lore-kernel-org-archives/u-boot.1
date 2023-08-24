@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22258C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF1A7C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 03:13:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B9EB8657C;
+	by phobos.denx.de (Postfix) with ESMTP id 815CF86584;
 	Thu, 24 Aug 2023 05:11:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EniJerrZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ff7nDLAt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A74833DB; Thu, 24 Aug 2023 05:11:26 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id CE798833DB; Thu, 24 Aug 2023 05:11:26 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46F9286565
+ by phobos.denx.de (Postfix) with ESMTPS id 91B1386566
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAWQ097621;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAEM085382;
  Wed, 23 Aug 2023 22:11:10 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692846670;
- bh=CkcGmaSCgTooRcma+6FxQMtNCRTaMATplAHwm6wUC54=;
+ bh=pszZJAG5y1aqkbUjOGuNSTdc2Hs7rIc5+/DMaW9tXwI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=EniJerrZuxMNdeggMADqC3xQXn/dWtHqOC//PsgIS4VGFrnB9bk97BiyAn3DnVXtv
- uTLPvAzn7RG8lJ0uYdT2e1hu9wlwMMU/yOuwEtEGHiETAEjdYHKgJiwUJpGHbxz/YU
- 2Vo0MnPl+ucDTRJeSvdvFOOvIydYvao54Cy7q+2o=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3BAcR030877
+ b=ff7nDLAtred35/Ly7xXJ68UDYMwdse4U/W2DrceB0OiHji1mkf9jnzj+3DJO77gvq
+ BLiJq8/iiW6oLtQxNv+XW0idsHZzPaHsg6qwMGngWFKvQrz+3xzV1sPP6D4xweM4xV
+ Re5tj4bFrQuVT9FThhFAgT5qj2okNXT2fiDpiAZg=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37O3BAA0053092
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 23 Aug 2023 22:11:10 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 23
- Aug 2023 22:11:09 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2023 22:11:10 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 23 Aug 2023 22:11:10 -0500
+ Frontend Transport; Wed, 23 Aug 2023 22:11:09 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3BAYf006633;
- Wed, 23 Aug 2023 22:11:10 -0500
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37O3B9Dj006630;
+ Wed, 23 Aug 2023 22:11:09 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Simon
  Glass <sjg@google.com>
 CC: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V5 08/17] include: env: ti: ti_common: Add a generic findfdt
-Date: Wed, 23 Aug 2023 22:10:52 -0500
-Message-ID: <20230824031101.3460411-9-nm@ti.com>
+ Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH V5 05/17] configs: am62x_evm_a53_defconfig: Switch to bootstd
+Date: Wed, 23 Aug 2023 22:10:49 -0500
+Message-ID: <20230824031101.3460411-6-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230824031101.3460411-1-nm@ti.com>
 References: <20230824031101.3460411-1-nm@ti.com>
@@ -82,44 +83,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ti_mmc bootmethod uses a findfdt routine that is expected to be
-implemented by all platforms.
+Switch to using bootstd. Note with this change, we will stop using
+distro_bootcmd and instead depend entirely on bootflow method of
+starting the system up.
 
-Define a default findfdt based on configured DEFAULT_DEVICE_TREE option
-for u-boot. This saves duplication across multiple boards and handles
-architecture folder location changes centrally.
-
-TI ARMV7 platforms will need to override default_device_tree_subarch
-in the env file to point to the appropriate platform. Note: default
-"omap" is used to cater to "most common" default.
-
+Suggested-by: Tom Rini <trini@konsulko.com>
+Suggested-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
 New patch (part of bootstd transition)
 
- include/env/ti/ti_common.env | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ configs/am62x_evm_a53_defconfig | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
-index e87a41a6590b..322f849a5560 100644
---- a/include/env/ti/ti_common.env
-+++ b/include/env/ti/ti_common.env
-@@ -32,3 +32,15 @@ bootcmd_ti_mmc=
- 	else;
- 		run get_kern_${boot}; run get_fdt_${boot}; run get_overlay_${boot}; run run_kern;
- 	fi;
-+default_device_tree=CONFIG_DEFAULT_DEVICE_TREE
-+default_device_tree_arch=ti
-+#ifdef CONFIG_ARM64
-+findfdt=
-+	setenv name_fdt ${default_device_tree_arch}/${default_device_tree}.dtb;
-+	setenv fdtfile ${name_fdt}
-+#else
-+default_device_tree_subarch=omap
-+findfdt=
-+	setenv name_fdt ${default_device_tree_arch}/${default_device_tree_subarch}/${default_device_tree}.dtb;
-+	setenv fdtfile ${name_fdt}
-+#endif
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index d55caabe22c9..1807df8bbee9 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -28,8 +28,9 @@ CONFIG_SPL_SPI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
++CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
+ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x80c80000
 -- 
 2.40.0
 
