@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21758C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8094FC27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:29:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E47C869EB;
+	by phobos.denx.de (Postfix) with ESMTP id DA7A4869F5;
 	Thu, 24 Aug 2023 21:27:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QB0LVFIw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sclIMiUM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E652D86995; Thu, 24 Aug 2023 21:27:01 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id AECCD869B7; Thu, 24 Aug 2023 21:27:02 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52E198690B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34DAF8698E
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:27:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-52a39a1c4d5so318532a12.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:59 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-52a1ce529fdso363745a12.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:27:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692905219; x=1693510019;
+ d=gmail.com; s=20221208; t=1692905220; x=1693510020;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VtuZa1yDI4jU6hOW/P1KFr1PEN+hHWyFrCubcZCbl1E=;
- b=QB0LVFIwUEnPKNNmESUTQsfXnYSpvyYFskmkeMNP4fuov/PyPFs/KruAtCLNiqzNoq
- KkacNw3lhhrGs76yYBsxhreGjzhMa6gN9FaxIMkGgyk256MCtG88Y/SO6lXFFN1qAdS/
- 8Ecl1C2YsI3fn5bAg1C5z2u9cpXr21Rjjc4HOZ7D3mrFGgEJzs8smsZztHSKXJI8//L+
- jzoV8Ktc0bEiX8FFRhSPsPFgeWWIO/HpAMBxI8PQrtqNzmZuxsFLyCYi+UeX4qV+7vLY
- UpVnHoif6bFgAR3nCeNrS2VWPj5kWGIhiQiTJO4yvPknUbRVYhu4GhAEjhFI4+bf28j7
- SZ4A==
+ bh=bygunJWYl1ElIdCSMdreG1O6wMAtNDcf5g2o+t8Lc9E=;
+ b=sclIMiUMzWVgjm30Wp5pgkcPEBNlcqQdNCWW0bxnQEnHa/6DutWUwHh4yjVshYONIR
+ mwGPgyubpXe2aX/8aDm/39u3HcDZCWHvTwoCA23br4A22oRNcnwZB4zFwO1WSfjEbloC
+ yOy4882H9a5mnD8lhjukgJsYt9KpNO3n9V1dkQ615jq+ZRVYNvrWLUmIk+4ys2uOlBBW
+ 0/4QSZ1GJObvcykIAPYGAEchfDvwXRvMf8+STUC+Y6ssqLOaunccqjkbkSRnTBbV/Ju+
+ 1o/XYf9vYmjBk9Dlr1k1nit3c7ce+duCCoD1WAhGMHjh777DHHv8ZncAyXM+rXl2EFGv
+ /LiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692905219; x=1693510019;
+ d=1e100.net; s=20221208; t=1692905220; x=1693510020;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VtuZa1yDI4jU6hOW/P1KFr1PEN+hHWyFrCubcZCbl1E=;
- b=I2bZLUe+04MmOR5ThnnLbONE0g7Jw9ekcOTIvCQjPpNolUdoKY9w4MEDXxJxoLof+w
- JMNen6xsgiHpXcmcPA/fr06URYCpcbsLF55wsNUXnVr/9YDGBFColInNFI0yOeAMIHep
- XxRdmSpY/1J39XO7QD9VKLiEfzZQph711lf85bZZnGEGwDqF8OrRRp2jAo+vqJOhJ+YJ
- hYhRVWATpIeyKWd8364ri+uovhYx9j72ymSUgB2bLYc0QvO1ZWMDekwxnnLbok2UzRW+
- 0ZYMD1BllxTZnHD6Ud5a9BKplhqRz1dnfZiKWcRz+Wt58F1eL4GNx2j0LCRqE82POB3D
- IZ9Q==
-X-Gm-Message-State: AOJu0YyFauck5w0ButsuNp1exCAFJPHWGZbfRRg+hcje0eATWAR89+PO
- SiP57bIQxafETs3xsrOKcWY=
-X-Google-Smtp-Source: AGHT+IGZ6NUkkx2+RKXCH5HdYfpNb2jWcZFjN9XrInR9kGUxwfK+v2xIVXtf5TbIeF9rU1ydf/arTA==
-X-Received: by 2002:aa7:d058:0:b0:522:4c7a:d5a9 with SMTP id
- n24-20020aa7d058000000b005224c7ad5a9mr13581172edo.3.1692905218854; 
- Thu, 24 Aug 2023 12:26:58 -0700 (PDT)
+ bh=bygunJWYl1ElIdCSMdreG1O6wMAtNDcf5g2o+t8Lc9E=;
+ b=B746dlN7ZilcrRvdOuW6O6ViWPkggIPUHFDssiZIJb8JfhIgI5nd3QbcmVCG08lU9n
+ +gMP0pHXnH3juCkd2VQmND+14ZB8x9l/bL51edoOLzRZuKT1Zdq4+3JKDmZpnSxEBAFi
+ B/GHDta75hiQdRD4H+0rL4gIZOhgY8XyrL+dstSnvD/V6QwIkzNHcUPqFmwp7frtBJ5S
+ gMViUS/v+7DXXKtjoJiclipzu1WuQf8lmIBWEHXMFwTGXuPE92eatYRbSzdYi1W9l1VP
+ 5YMO9KTSYxXys58T/KiZGO8yPURw2S+RpzOVzAHiJsFRZRTGGIHOB2Vwb0RVtxuKHZTZ
+ d7ZQ==
+X-Gm-Message-State: AOJu0YyAZ8bJYM1BXdZ/RfzAyUOMeOLVAf2z/2ERZlGreOIr61pjgx4R
+ A/hRKLu6NxafJbw/iQLPxDk=
+X-Google-Smtp-Source: AGHT+IHpPJYbUZ/UJ2l6+9T/XK+O4nrs8BZsZqOGWxDJUWDJ5wQUhoBGz0Vts8fn2raT23V6EWWWYQ==
+X-Received: by 2002:a05:6402:12cb:b0:528:89d0:90b7 with SMTP id
+ k11-20020a05640212cb00b0052889d090b7mr14434371edx.16.1692905219767; 
+ Thu, 24 Aug 2023 12:26:59 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.57
+ be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:26:58 -0700 (PDT)
+ Thu, 24 Aug 2023 12:26:59 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 11/16] configs: transformer_t30: grouper: lg-x3: endeavoru:
- sync defconfigs
-Date: Thu, 24 Aug 2023 22:25:58 +0300
-Message-Id: <20230824192603.240104-12-clamor95@gmail.com>
+Subject: [PATCH v2 12/16] ARM: tegra114: enable base voltages setup from board
+Date: Thu, 24 Aug 2023 22:25:59 +0300
+Message-Id: <20230824192603.240104-13-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230824192603.240104-1-clamor95@gmail.com>
 References: <20230824192603.240104-1-clamor95@gmail.com>
@@ -91,113 +90,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tegra 4, same as Tegra 3, requires configuration of CPU and CORE
+voltages in the SPL stage to boot properly. Expose function to be
+able perform this configuration in the SPL section of the device
+board.
+
+Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF701T
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- configs/endeavoru_defconfig       | 2 --
- configs/grouper_common_defconfig  | 4 ----
- configs/tf600t.config             | 1 +
- configs/transformer_t30_defconfig | 2 --
- configs/x3_t30_defconfig          | 2 --
- 5 files changed, 1 insertion(+), 10 deletions(-)
+ arch/arm/mach-tegra/tegra114/cpu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/configs/endeavoru_defconfig b/configs/endeavoru_defconfig
-index 38f26f2dcc..feb481170a 100644
---- a/configs/endeavoru_defconfig
-+++ b/configs/endeavoru_defconfig
-@@ -21,7 +21,6 @@ CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTDELAY=0
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_KEYED_CTRLC=y
--CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="if run check_button; then bootmenu; fi; run bootcmd_mmc0; poweroff;"
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
-@@ -44,7 +43,6 @@ CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_UMS_ABORT_KEYED=y
- # CONFIG_CMD_SETEXPR is not set
--# CONFIG_CMD_NFS is not set
- CONFIG_CMD_PAUSE=y
- CONFIG_CMD_EXT4_WRITE=y
- # CONFIG_SPL_DOS_PARTITION is not set
-diff --git a/configs/grouper_common_defconfig b/configs/grouper_common_defconfig
-index 8dc88851f5..36ad0980e7 100644
---- a/configs/grouper_common_defconfig
-+++ b/configs/grouper_common_defconfig
-@@ -21,7 +21,6 @@ CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTDELAY=0
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_KEYED_CTRLC=y
--CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="if run check_button; then bootmenu; fi; run bootcmd_mmc0; poweroff;"
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
-@@ -43,7 +42,6 @@ CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_UMS_ABORT_KEYED=y
- # CONFIG_CMD_SETEXPR is not set
--# CONFIG_CMD_NFS is not set
- CONFIG_CMD_PAUSE=y
- CONFIG_CMD_EXT4_WRITE=y
- # CONFIG_SPL_DOS_PARTITION is not set
-@@ -61,8 +59,6 @@ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_GPIO_HOG=y
- CONFIG_SYS_I2C_TEGRA=y
--CONFIG_I2C_MUX=y
--CONFIG_I2C_MUX_GPIO=y
- CONFIG_BUTTON_KEYBOARD=y
- CONFIG_DM_PMIC=y
- CONFIG_DM_REGULATOR=y
-diff --git a/configs/tf600t.config b/configs/tf600t.config
-index 18ab4fbd87..ee1b827bea 100644
---- a/configs/tf600t.config
-+++ b/configs/tf600t.config
-@@ -2,3 +2,4 @@ CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-tf600t"
- CONFIG_TRANSFORMER_SPI_BOOT=y
- CONFIG_BOOTCOMMAND="setenv gpio_button 222; if run check_button; then poweroff; fi; setenv gpio_button 132; if run check_button; then echo Starting SPI flash update ...; run update_spi; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
- CONFIG_USB_GADGET_PRODUCT_NUM=0x4d00
-+CONFIG_VIDEO_DSI_TEGRA30=y
-diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
-index 802dcb1786..eaff0697bb 100644
---- a/configs/transformer_t30_defconfig
-+++ b/configs/transformer_t30_defconfig
-@@ -21,7 +21,6 @@ CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTDELAY=0
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_KEYED_CTRLC=y
--CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="setenv skip_boot 0; setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; if test ${skip_boot} -eq 1; then; else run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff; fi"
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
-@@ -45,7 +44,6 @@ CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_UMS_ABORT_KEYED=y
- # CONFIG_CMD_SETEXPR is not set
--# CONFIG_CMD_NFS is not set
- CONFIG_CMD_PAUSE=y
- CONFIG_CMD_EXT4_WRITE=y
- # CONFIG_SPL_DOS_PARTITION is not set
-diff --git a/configs/x3_t30_defconfig b/configs/x3_t30_defconfig
-index 540c43096d..98744ec89d 100644
---- a/configs/x3_t30_defconfig
-+++ b/configs/x3_t30_defconfig
-@@ -22,7 +22,6 @@ CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTDELAY=0
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_KEYED_CTRLC=y
--CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="if run check_button; then bootmenu; fi; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
- CONFIG_SPL_FOOTPRINT_LIMIT=y
- CONFIG_SPL_MAX_FOOTPRINT=0x8000
-@@ -45,7 +44,6 @@ CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_UMS_ABORT_KEYED=y
- # CONFIG_CMD_SETEXPR is not set
--# CONFIG_CMD_NFS is not set
- CONFIG_CMD_PAUSE=y
- CONFIG_CMD_EXT4_WRITE=y
- # CONFIG_SPL_DOS_PARTITION is not set
+diff --git a/arch/arm/mach-tegra/tegra114/cpu.c b/arch/arm/mach-tegra/tegra114/cpu.c
+index 62c1053630..7d8f080c31 100644
+--- a/arch/arm/mach-tegra/tegra114/cpu.c
++++ b/arch/arm/mach-tegra/tegra114/cpu.c
+@@ -13,9 +13,13 @@
+ #include <asm/arch/tegra.h>
+ #include <asm/arch-tegra/clk_rst.h>
+ #include <asm/arch-tegra/pmc.h>
++#include <asm/arch-tegra/tegra_i2c.h>
+ #include <linux/delay.h>
+ #include "../cpu.h"
+ 
++/* In case this function is not defined */
++__weak void pmic_enable_cpu_vdd(void) {}
++
+ /* Tegra114-specific CPU init code */
+ static void enable_cpu_power_rail(void)
+ {
+@@ -254,6 +258,7 @@ void start_cpu(u32 reset_vector)
+ 
+ 	/* Enable VDD_CPU */
+ 	enable_cpu_power_rail();
++	pmic_enable_cpu_vdd();
+ 
+ 	/* Get the CPU(s) running */
+ 	enable_cpu_clocks();
 -- 
 2.39.2
 
