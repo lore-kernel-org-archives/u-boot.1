@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD05C7EE43
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 15:26:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D695C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 15:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50D648669C;
-	Thu, 24 Aug 2023 17:26:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A88928082A;
+	Thu, 24 Aug 2023 17:40:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692890766;
-	bh=6s8cWWlyfIBhZUO7513pV36nguCNywdgdGXhyMqgxXA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ogrBOxeKk/0dGiY1GnoIRa8ebf9SzFF8Ir2X5gbrB6vMK1oYe1j6VvYMLXVqjg++7
-	 dn3uBNgT92qgx6ZJWxVqaBkKErZ9zytGTVk1SU58/D3ZMwMmrDY1+h7KedIGoGpI2p
-	 nQoQiANIqVa6D1fN0nGt1q58Wd5pIpA002dozYIxpVTU6xj1jHeY/POCl+YjywI3+8
-	 8aaMwoOAJTv56hFF3t6clXay/yBTXmV17+5Vj8WXSQTtDiUz4+5TO9SIDtC8cbVKhP
-	 niFz/XJkhtFa7Ezk7UUfrfFUsifUefpORoMDh9cvQFPaJNdHYQ7xHpWv2SKegheJ5v
-	 76qUeqaQAzpVg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pfynpus4";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 285F3865B1; Thu, 24 Aug 2023 17:40:47 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B2DCA8468A;
- Thu, 24 Aug 2023 17:26:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1692890764;
- bh=6s8cWWlyfIBhZUO7513pV36nguCNywdgdGXhyMqgxXA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ykmJrSYvLUKm5nDRAa1pQWgahGGrw2MLsNrDBN1E/zAPpSziqgg+xL5UoFXmJVa4p
- TuZ2NrV6PHY1kUo+hjsrOcrvjNmCnMbHnlM/ObHiRQSiZVe+ODsS/6TfLZRhxEDa9N
- i7X7pAZ27DjpghoAF/RAZ/NbC69yRvQirWc6MJ6SHRVQoNVOkd6psUXOyIpI+mxA1m
- aveFbz6QtLAea35pnd3FAQhvWrg36TLPr3K1cKETtvahM3WOV9luQ8LA89MQjx/D6m
- ujDgx6b0MVjDIHfw32iuWEqgf3yUCKrtKVacnHyCc0KHjhWsLZMXNTVDVDtf6foKvP
- rBiJ8UpSUGVCg==
-Message-ID: <7fc90036-0be8-6567-fb3b-b97fa7643180@denx.de>
-Date: Thu, 24 Aug 2023 17:26:03 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id DD5768056A
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 17:40:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37OFebE1072469;
+ Thu, 24 Aug 2023 10:40:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692891637;
+ bh=Cy4lMMXuNkMtbrNZL4zZERjI1NMdXOs6EsuQOA5/o5U=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=pfynpus4bICGe2OwYwdnx0taLVDr+v02C5OkDnGTWR4bZE7/rmtqu8JqE4R7LmycF
+ 4bAsvmfY7nGPJzSZAhwq5v89cFdk5qAlOCRlO12nRKOKdpfqT8HIewL9unRbOmbC6B
+ n01wCvL6TC9TRiBi799j4ad/hhO00twj4rn3cfH8=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37OFebnc056619
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 24 Aug 2023 10:40:37 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
+ Aug 2023 10:40:37 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 24 Aug 2023 10:40:37 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37OFebMH041319;
+ Thu, 24 Aug 2023 10:40:37 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Neha Francis
+ <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>
+Subject: [RFC PATCH 1/2] doc: sphinx: Add sphinx-prompt
+Date: Thu, 24 Aug 2023 10:40:35 -0500
+Message-ID: <20230824154036.3650607-2-nm@ti.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20230824154036.3650607-1-nm@ti.com>
+References: <20230824154036.3650607-1-nm@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH 6/6] stm32mp15: Use u-boot-spl-stm32.bin instead of
- u-boot-spl.stm32
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Dillon Min <dillon.minfei@gmail.com>,
- Kamil Lulko <kamil.lulko@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20230824030304.1555547-1-sjg@chromium.org>
- <20230824030304.1555547-7-sjg@chromium.org>
- <3ab486b0-be22-48b9-7417-742ed8360f0f@denx.de>
- <20230824142505.GM3953269@bill-the-cat>
- <4cbffed6-6a07-1a56-bf10-7303e2aff78b@denx.de>
- <20230824151419.GU3953269@bill-the-cat>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230824151419.GU3953269@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,32 +80,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/24/23 17:14, Tom Rini wrote:
-> On Thu, Aug 24, 2023 at 05:09:07PM +0200, Marek Vasut wrote:
->> On 8/24/23 16:25, Tom Rini wrote:
->>> On Thu, Aug 24, 2023 at 05:12:45AM +0200, Marek Vasut wrote:
->>>> On 8/24/23 05:02, Simon Glass wrote:
->>>>> A '.stm32' extension is not allowed anymore, so change it.
->>>>
->>>> Why?
->>>>
->>>> This will likely break a huge amount of scripts, I'm tempted to NAK it
->>>> unless there is a very good reason.
->>>
->>> This is in the cover letter.  Today, buildman --keep-outputs doesn't
->>> actually keep the needed for booting outputs from a build for a number
->>> of platforms.  Simon's response is to stop having a free-form list of
->>> outputs. With I guess the caveat being ROM-defined names (for example,
->>> we still keep "MLO" because that is the literal filename TI ROM looks
->>> for on FAT partitions, on mos of their 32bit platforms).
->>
->> Why not just place the free-form files into some output/ directory and be
->> done with it ? Then they can have whatever extension they want, as long as
->> the output/ directory name is stable.
-> 
-> Yes, an alternative here is to just extend the list that's removed in
-> patch 2/6.
+Sphinx-prompt[1] helps bring-in '.. prompt::' option that allows a
+better rendered documentation, yet be able to copy paste without
+picking up the prompt from rendered documentation.
 
-I ... am not on CC of that patch ...
+[1] https://lore.kernel.org/all/87fs48rgto.fsf@baylibre.com/
+Suggested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Version picked is the best that works with Sphinx 3.4.3
 
-It would be really good if Simon CCed everyone involved on all the patches.
+ doc/conf.py                 | 2 +-
+ doc/sphinx/requirements.txt | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/doc/conf.py b/doc/conf.py
+index 00f241366477..5e2ff1c8f5e2 100644
+--- a/doc/conf.py
++++ b/doc/conf.py
+@@ -39,7 +39,7 @@ needs_sphinx = '2.4.4'
+ extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
+               'kfigure', 'sphinx.ext.ifconfig', # 'automarkup',
+               'maintainers_include', 'sphinx.ext.autosectionlabel',
+-              'kernel_abi', 'kernel_feat']
++              'kernel_abi', 'kernel_feat', 'sphinx-prompt']
+ 
+ #
+ # cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
+diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
+index 4f411f78d030..6ccbe527ee79 100644
+--- a/doc/sphinx/requirements.txt
++++ b/doc/sphinx/requirements.txt
+@@ -15,6 +15,7 @@ requests==2.31.0
+ six==1.16.0
+ snowballstemmer==2.2.0
+ Sphinx==3.4.3
++sphinx-prompt==1.5.0
+ sphinx-rtd-theme==1.0.0
+ sphinxcontrib-applehelp==1.0.2
+ sphinxcontrib-devhelp==1.0.2
+-- 
+2.40.0
+
