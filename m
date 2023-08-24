@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21F7C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B371C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:28:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 423F1864B7;
-	Thu, 24 Aug 2023 15:27:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C3BF86433;
+	Thu, 24 Aug 2023 15:28:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X1SeX/Cp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="asfRu178";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05112864E7; Thu, 24 Aug 2023 15:27:44 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 664B886519; Thu, 24 Aug 2023 15:28:48 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7397286430
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D777A86430
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:28:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-9a1de3417acso190023866b.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:27:41 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-52889bc61b6so8945325a12.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:28:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692883661; x=1693488461;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y1/zlCjxRDq62vroj74qt6HhBerE62FD8hD0wt+AnJg=;
- b=X1SeX/CpStLNf4yhqL6dslfTkMcdrnFh85lqQ5JR6yz2q1vyHyJ3GSFGKjM9Yxayyo
- hl6nSpElB3AsmV0ZHkXX5hhBkBpRwVIAiFLOgOTFFosQ7bs2Xxb6ztNvxXMOhAK3dpvH
- kidfKlJKXHwvq7RMb2g5YQI6oUtUFy5MYwFkzxvSShJfIR2+mA4YVPH5c4oMYyFaiYXX
- lYdk6cDoBtXJDO4aKIKkSMhE+zHSjkkddu0Ot61BTVo7Eo3bQCUHBk77c8JchbSAJzvF
- sSLGf1YnUCY+Lel+BV4vjK30fT0h1YaQLjX0Ebgu/pHPb7/SXbJl4z7Wv6Dg7+EIsYH2
- KAVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692883661; x=1693488461;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ d=gmail.com; s=20221208; t=1692883725; x=1693488525;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=y1/zlCjxRDq62vroj74qt6HhBerE62FD8hD0wt+AnJg=;
- b=Jh8IYTYIg9X6LMMwxN9WvONVSPSSJwy7qz/ev4TQ9Py21MjlNJ7ywEHLI6RWDgaiqq
- 0Rg6WnQuqVeZnQI7DsG1ZbiyGROF79qoQAng3s16JgctBkEBEXd62mO0BDzzQma/HlA0
- 0VhWGLywBECNsqxp+g0h0rOEIC0cPna7ALxdltrwsKyOr5v/QHhtHUAqCpvYPihYdS2D
- RLTrGChxXizfijmIv/1zL2fAWSLppGdFqrhC/fxUL7l6Oo4kdu+R6UidFa6TfBP9ewLa
- dTIcHpxcELMsYo1teCslyvMS9hs/3EURVG2YesnPl0UjMS7yflM2+xjqekp9zGp5dmGE
- aHnw==
-X-Gm-Message-State: AOJu0YyOh7fHQRc1XYEJCbtNFtv3yCbQCxxO/E6t9c84yGvjnkZsVVXH
- DA8CqWJt141HSTlkb2jLAWbxg80/Lcs=
-X-Google-Smtp-Source: AGHT+IEQRUTh3BvfAiNghRpONUwgGJYDs2gfvfqI8B2WZ+kPxAgBeUWS7buBUeEst5hkmcAsIaCINA==
-X-Received: by 2002:a17:907:6093:b0:966:1bf2:2af5 with SMTP id
- ht19-20020a170907609300b009661bf22af5mr16353770ejc.22.1692883660748; 
- Thu, 24 Aug 2023 06:27:40 -0700 (PDT)
+ bh=hHC6toSgG3MDkKltZ6DDJWBnY7M4gWrz4pgIcXVVVmg=;
+ b=asfRu1788dL8KGmqSiPXMFHMUbdPKptsfxNrxbNkyAY2Xq2jNS2YN9E3n1GcWQAwDh
+ NuJHtqWRgsIHEMWfo7TAs8yMfGs7Rgk6LE+JN9I3lLlWBikWE8GbvmIRxWoN19A/A8RW
+ YmQj7gDYQ9R4iFln9BIPZNqTJl2Jg9Pu9+pMnSWTj4bEc49oIkTFpyewcpRCfSICbsrH
+ 4MpTaPQ7+3ebtP2G+QEjwcuJSq9ahBgEi/51wCSI8U9gurnRFKGUhl1Wvh/C9JCQG8HG
+ ZDbzcZK5cwvzDBdX869XAJvYR8y2Q4FF8amd6eqVL0leA5d7SSFV0pibvJpV+zvyWqXX
+ 59uA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692883725; x=1693488525;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=hHC6toSgG3MDkKltZ6DDJWBnY7M4gWrz4pgIcXVVVmg=;
+ b=Xqh4RwL4Yggm2HIZPZ29mSnw6grUEo/Fj6r4vMc82KU0kLlrNQmWU231I4QM159SHq
+ /OaS+HfVevlPnAjG4ABqzG8h3NC8alhrfaMrLJy3VdCFZtPNzMhI8/jznPil83MMesEv
+ eMdb8YHzayN2rCT53LrvSwB6ur1tljUMLnsGVYn9NkflJed4OfkrG8SaSg1k3zOoZCsS
+ agYX9AyGEKT1UyDP1iPp1yXV75CTKc5Cimlk/dgCPBu3fARbgwI6z8TCTATQtF1PRONi
+ +FsgXPeVB82Sr2k34Fjq/s6f6j2TEzB8vsIK45+U02tGu/Tdc00eDCxAAUe6R3gTbOv4
+ Waug==
+X-Gm-Message-State: AOJu0YxxaN89YuPaW41YhfbopgcHP4KibipNnDWUNG7oU0owpWfA2wO1
+ ZwA41fqFcDgMrg2O3rc81vY=
+X-Google-Smtp-Source: AGHT+IHuVTkPNL1wHNgO9kho4T6v3vkKEdRAU0KwQPwZcX2NtN3AImi0cnM2261SQ4mGSLGSCsm2qw==
+X-Received: by 2002:a50:ef0d:0:b0:52a:250e:a04a with SMTP id
+ m13-20020a50ef0d000000b0052a250ea04amr4869979eds.7.1692883725130; 
+ Thu, 24 Aug 2023 06:28:45 -0700 (PDT)
 Received: from [192.168.2.2] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- t23-20020a170906269700b00992b50fbbe9sm11045409ejc.90.2023.08.24.06.27.39
+ z8-20020aa7c648000000b0052544bca116sm10437024edr.13.2023.08.24.06.28.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Aug 2023 06:27:40 -0700 (PDT)
-Message-ID: <cbbaecb0-19fc-018d-df63-c5f265156024@gmail.com>
-Date: Thu, 24 Aug 2023 15:27:38 +0200
+ Thu, 24 Aug 2023 06:28:44 -0700 (PDT)
+Message-ID: <58111810-f29d-ee4b-dbc3-3b30864f2a95@gmail.com>
+Date: Thu, 24 Aug 2023 15:28:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 0/3] Add rockmtd command
+Subject: [PATCH v1 1/3] mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN
+ option
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, michael@amarulasolutions.com, 
  dario.binacchi@amarulasolutions.com, u-boot@lists.denx.de
+References: <cbbaecb0-19fc-018d-df63-c5f265156024@gmail.com>
 Content-Language: en-US
+In-Reply-To: <cbbaecb0-19fc-018d-df63-c5f265156024@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,89 +96,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockmtd creates a virtual block device to transfer Rockchip
-boot block data to and from NAND with block orientated tools
-like "ums" and "rockusb".
+On Rockchip SoCs the first boot stages are written on NAND
+with help of manufacturer software that uses a different format
+then the MTD framework. Skip the automatic BBT scan with the
+NAND_SKIP_BBTSCAN option to be able to pass the driver probe
+function and to let the original data unchanged.
 
-It uses the Rockchip MTD driver to scan for boot blocks and copies
-data from the first block in a GPT formatted virtual disk.
-Data must be written in U-boot "idbloader.img" format and start at
-partition "loader1" offset 64. The data header is parsed
-for length and offset. When the last sector is received
-it erases up to 5 erase blocks on NAND and writes boot blocks
-in a pattern depending on the NAND ID. Data is then verified.
-When a block turns out bad the block header is discarded.
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+---
+ drivers/mtd/nand/raw/Kconfig        | 9 +++++++++
+ drivers/mtd/nand/raw/rockchip_nfc.c | 3 +++
+ 2 files changed, 12 insertions(+)
 
-Limitations:
-Support for Rockchip boot block header type 1 only.
-Pattern for listed NAND IDs only. (Logic still not disclosed by Rockchip)
-The MTD framework driver data and NAND ID must be extracted at a lower level.
-Only tested with rk3066 NFC v6.0.
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index d624589a892b..72547f00fbec 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -611,6 +611,15 @@ config ROCKCHIP_NAND
+ 	    NFC v800: RK3308, RV1108
+ 	    NFC v900: PX30, RK3326
 
-Available rockmtd commands:
-rockmtd bind <label>      - bind ROCKMTD device
-rockmtd unbind <label>    - unbind ROCKMTD device
-rockmtd info [<label>]    - show all available ROCKMTD devices
-rockmtd dev [<label>]     - show or set current ROCKMTD device
++config ROCKCHIP_NAND_SKIP_BBTSCAN
++	bool "Skip the automatic BBT scan with Rockchip NAND controllers"
++	depends on ROCKCHIP_NAND
++	default n
++	help
++	  Skip the automatic BBT scan with the NAND_SKIP_BBTSCAN
++	  option when data content is not in MTD format or
++	  must remain unchanged.
++
+ config TEGRA_NAND
+ 	bool "Support for NAND controller on Tegra SoCs"
+ 	depends on ARCH_TEGRA
+diff --git a/drivers/mtd/nand/raw/rockchip_nfc.c b/drivers/mtd/nand/raw/rockchip_nfc.c
+index 6ad51df4acff..df6742c2f9bb 100644
+--- a/drivers/mtd/nand/raw/rockchip_nfc.c
++++ b/drivers/mtd/nand/raw/rockchip_nfc.c
+@@ -981,6 +981,9 @@ static int rk_nfc_nand_chip_init(ofnode node, struct rk_nfc *nfc, int devnum)
+ 	chip->bbt_options = NAND_BBT_USE_FLASH | NAND_BBT_NO_OOB;
+ 	chip->options |= NAND_NO_SUBPAGE_WRITE | NAND_USE_BOUNCE_BUFFER;
 
-U-boot settings:
-Config to enable Rockchip MTD support:
-CONFIG_MTD=y
-CONFIG_MTD_RAW_NAND=y
-CONFIG_SYS_NAND_DRIVER_ECC_LAYOUT=y
-CONFIG_SYS_NAND_USE_FLASH_BBT=y
-CONFIG_ROCKCHIP_NAND=y
-
-Option to keep existing NAND data unchanged:
-CONFIG_ROCKCHIP_NAND_SKIP_BBTSCAN=y
-
-Commands to enable:
-CONFIG_CMD_USB=y
-CONFIG_CMD_ROCKMTD=y
-CONFIG_CMD_ROCKUSB=y
-CONFIG_CMD_USB_MASS_STORAGE=y
-
-Linux Host (PC) tool commands combinations that work:
-
-U-boot					Linux
-rockmtd bind 0
-
-# rockusb
-rockusb 0 rkmtd 0
-					upgrade_tool pl
-					upgrade_tool wl 64 idbloader.img
-					upgrade_tool rl 64 512 upgrade_tool_rl_64_512.img
-					upgrade_tool rd
-
-					rkdeveloptool ppt
-					rkdeveloptool wlx loader1 idbloader.img
-					rkdeveloptool wl 64 idbloader.img
-					rkdeveloptool rl 64 512 rkdeveloptool_rl_64_512.img
-					rkdeveloptool rd
-
-					rkflashtool w 64 512 < idbloader.img
-					rkflashtool r 64 512 > rkflashtool_r_64_512.img
-# ums
-ums 0 rkmtd 0
-					dd if=idbloader.img of=/dev/sda1
-					dd if=/dev/sda1 of=ums_0_idb_0_rd.img
-
-Johan Jonker (3):
-  mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN option
-  dm: prepare rkmtd UCLASS
-  rockchip: cmd: add rockmtd command
-
- cmd/Kconfig                         |    7 +
- cmd/Makefile                        |    1 +
- cmd/rockmtd.c                       | 1429 +++++++++++++++++++++++++++
- disk/part.c                         |    4 +
- drivers/block/blk-uclass.c          |    1 +
- drivers/mtd/nand/raw/Kconfig        |    9 +
- drivers/mtd/nand/raw/rockchip_nfc.c |    3 +
- include/dm/uclass-id.h              |    1 +
- 8 files changed, 1455 insertions(+)
- create mode 100644 cmd/rockmtd.c
-
++	if (IS_ENABLED(CONFIG_ROCKCHIP_NAND_SKIP_BBTSCAN))
++		chip->options |= NAND_SKIP_BBTSCAN;
++
+ 	rk_nfc_hw_init(nfc);
+ 	ret = nand_scan_ident(mtd, nsels, NULL);
+ 	if (ret)
 --
 2.30.2
 
