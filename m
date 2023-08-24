@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55A4C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4071CC27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:10:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21B80868D7;
-	Thu, 24 Aug 2023 21:07:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CAEB8692E;
+	Thu, 24 Aug 2023 21:10:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="osbN1Arv";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="R9jp+WM4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4AFF83F7B; Thu, 24 Aug 2023 21:07:53 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1058E86940; Thu, 24 Aug 2023 21:10:00 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E303868D7
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:07:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D884C86532
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-592972da9a6so1362557b3.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:07:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692904069; x=1693508869;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DsHZJUYhixBFUW9IVU8Utf2oe57oSpdzKBh4XXPMXwY=;
- b=osbN1Arv4Y7VUpwEVu94NPmLIu1/J4KOF+rnC6QhKBrajSGuBMKCpCATPK/sEHUXDE
- KBAw6u7VHLNTCkX0pbkvogPY/6/MZHw4xxcpiVrzDd7zZ1ZaL+tcj56DZA3pZKEjR5sl
- 1wx8LqeMp3OG/ve+wrI85V+e9N7AeyuQTTVG9L8fBJgh6oHRMkT2C8TgZQ6sLgOiV3SV
- Y/j3fmUHK0jDVeO7pEJou63p64H9EHDwN5OcT9DbXt88o7V5uwMXA4Cv8FGnxAUYjdsh
- /ZaQ9ofMqNfshnMzkpq4GGFdQ9zVwB3iEe7LqrUSK+gAjQks52W7zeC3awJrW5oDQQ/u
- YK2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692904069; x=1693508869;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DsHZJUYhixBFUW9IVU8Utf2oe57oSpdzKBh4XXPMXwY=;
- b=A6o/YMGgy5BcuOGsbC9ISIpsJJ0BPMR40jfoFNdpdRP7aOhZOttd0MFaA4XSSKLTb9
- oKoSYV348uFzvD6Smp0YZJC+YBs311EQVa+Z2CrmqX1VTB4SFjmqvv8RMoiZ7C//r2ma
- LaWNdm1Kj44Vbofg3UUGPBQyEaXJurtr6oWUWC9m/fe9gS03bwNtaG9vM1KCeYjjcLR+
- VoxkpqhCRnrgFeLBBLhHYXnquZJOvQA/zaXGwFVHbrR/CdAc6/Vw3QkvclN64q5qWl+q
- ZtRi4wHQBxFCdevMNGk0yPlq1IEmLSOB95RXaTPGT86aBpoy+9e6lT2FrnrQoutlIE6/
- jqjw==
-X-Gm-Message-State: AOJu0YwmWfaUoj87v3/AHyZe+rD/4+SewOTt71b/dc+csvv5hpT54vrx
- Jbvv+Hh/Bu2WiCFR2fbpN47jfLMWdUs=
-X-Google-Smtp-Source: AGHT+IFpKn3z66ok7pwG3t7X2nCCPlKy+QZDthVW8K7ZOETubQq9sXQTHs+v3K3aAV8/OXbdVOWK0w==
-X-Received: by 2002:a0d:f804:0:b0:577:3eaa:8d97 with SMTP id
- i4-20020a0df804000000b005773eaa8d97mr17855440ywf.17.1692904069420; 
- Thu, 24 Aug 2023 12:07:49 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- i129-20020a819187000000b0058c4e33b2d6sm49869ywg.90.2023.08.24.12.07.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:07:49 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>,
-	Stefan Roese <sr@denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH] arm: kirkwood: Pogo v4: Enable LTO
-Date: Thu, 24 Aug 2023 12:07:12 -0700
-Message-Id: <20230824190713.30866-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1136360A1D;
+ Thu, 24 Aug 2023 19:09:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CE56C433C7;
+ Thu, 24 Aug 2023 19:09:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1692904194;
+ bh=y00E/6HajS95R/j1F2ruPBOzCThbuyJ9gkOLvYjiXmc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=R9jp+WM443ssUKrS1xh4EJx0vm0n6/YJAdGpYA7/o3bK9kyLw2IyJRWD4HvEJdVll
+ R4prYXwa81CVcmz1aiF5Kw+4k8uHWYfBeF4Y8/43WI6mPTHRizl8JAjoiTffGkddp/
+ CXWsdKaPV+Dhfc5USU0Ynf0tJiAA4Xy21NDVSDt5AywDQtqpNEAsEz3YOoKqFyFnPB
+ Ni7qmpZsU+tFTD81BLitJSIRs/RvuNec7fm7H2nOERbZE4gSagi6T+vhzgppuJ/7eP
+ pTHkQeZnMHok+O7XVtzd3FYD++sgLeEa1EAaiG3laJOnx4a9MFmIumRePXxeMkBxbo
+ 7YMkf1TkFJJbQ==
+Message-ID: <203072fb-c847-b896-a249-eabe3c2631a0@kernel.org>
+Date: Thu, 24 Aug 2023 22:09:49 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH 1/2] net: ti: am65-cpsw-nuss: Workaround for buggy
+ PHY/Board
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: nm@ti.com, joe.hershberger@ni.com, robertcnelson@gmail.com,
+ jkridner@beagleboard.org, r-gunasekaran@ti.com, srk@ti.com,
+ u-boot@lists.denx.de
+References: <20230822121350.51324-1-rogerq@kernel.org>
+ <20230822121350.51324-2-rogerq@kernel.org>
+ <12738ca9-ac8c-b587-c0bf-c8abc8fd3f48@ti.com>
+ <20230824182431.GE3953269@bill-the-cat>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20230824182431.GE3953269@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,27 +81,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable building Pogo V4 u-boot image with LTO, which results in about 30K
-reduction in size.
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
 
- configs/pogo_v4_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+On 24/08/2023 21:24, Tom Rini wrote:
+> On Thu, Aug 24, 2023 at 11:34:29PM +0530, Siddharth Vadapalli wrote:
+>> Hello Roger,
+>>
+>> On 22-08-2023 17:43, Roger Quadros wrote:
+>>> Beagleplay has a buggy Ethernet PHY implementation for the Gigabit
+>>> PHY in the sense that it is non responsive over MDIO immediately
+>>> after power-up/reset.
+>>>
+>>> We need to either try multiple times or wait sufficiently long enough
+>>> (couple of 10s of ms?) before the PHY begins to respond correctly.
+>>>
+>>> One theory is that the PHY is configured to operate on MDIO address 0
+>>> which it treats as a special broadcast address.
+>>>
+>>> Datasheet states:
+>>> "PHYAD (config pins) sets the PHY address for the device.
+>>> The RTL8211F(I)/RTL8211FD(I) supports PHY addresses from 0x01 to 0x07.
+>>> Note 1: An MDIO command with PHY address=0 is a broadcast from the MAC;
+>>> each PHY device should respond."
+>>>
+>>> This issue is not seen with the other PHY (different make) on the board
+>>> which is configured for address 0x1.
+>>>
+>>> As a woraround we try to probe the PHY multiple times instead of giving
+>>> up on the first attempt.
+>>>
+>>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+>>> ---
+>>>  drivers/net/ti/am65-cpsw-nuss.c | 19 ++++++++++++++-----
+>>>  1 file changed, 14 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+>>> index 51a8167d14..4f8a2f9b93 100644
+>>> --- a/drivers/net/ti/am65-cpsw-nuss.c
+>>> +++ b/drivers/net/ti/am65-cpsw-nuss.c
+>>> @@ -27,6 +27,7 @@
+>>>  #include <syscon.h>
+>>>  #include <linux/bitops.h>
+>>>  #include <linux/soc/ti/ti-udma.h>
+>>> +#include <linux/delay.h>
+>>>  
+>>>  #include "cpsw_mdio.h"
+>>>  
+>>> @@ -678,14 +679,22 @@ static int am65_cpsw_phy_init(struct udevice *dev)
+>>>  	struct am65_cpsw_priv *priv = dev_get_priv(dev);
+>>>  	struct am65_cpsw_common *cpsw_common = priv->cpsw_common;
+>>>  	struct eth_pdata *pdata = dev_get_plat(dev);
+>>> -	struct phy_device *phydev;
+>>>  	u32 supported = PHY_GBIT_FEATURES;
+>>> +	struct phy_device *phydev;
+>>> +	int tries;
+>>>  	int ret;
+>>>  
+>>> -	phydev = phy_connect(cpsw_common->bus,
+>>> -			     priv->phy_addr,
+>>> -			     priv->dev,
+>>> -			     pdata->phy_interface);
+>>> +	/* Some boards (e.g. beagleplay) don't work on first go */
+>>> +	for (tries = 1; tries <= 5; tries++) {
+>>> +		phydev = phy_connect(cpsw_common->bus,
+>>> +				     priv->phy_addr,
+>>> +				     priv->dev,
+>>> +				     pdata->phy_interface);
+>>> +		if (phydev)
+>>> +			break;
+>>> +
+>>> +		mdelay(10);
+>>> +	}
+>>
+>> After rethinking about the above implementation and the second patch of
+>> this series, the second patch could be dropped altogether if the
+>> following implementation is acceptable:
+>>
+>> phydev = phy_connect(cpsw_common->bus,
+>> 		     priv->phy_addr,
+>> 		     priv->dev,
+>> 		     pdata->phy_interface);
+>>
+>> if (!phydev) {
+>> 	/* Some boards (e.g. beagleplay) don't work on first go */
+>> 	mdelay(50);
+>> 	phydev = phy_connect(cpsw_common->bus,
+>> 			     priv->phy_addr,
+>> 			     priv->dev,
+>> 			     pdata->phy_interface);
+>> }
+>>
+>> if (!phydev) {
+>> 	dev_err(dev, "phy_connect() failed\n");
+>> ...
+>>
+>> With this, there would be at most one "PHY not found" print, which
+>> should be fine. The mdelay value of 50 could be replaced with a
+>> sufficiently large value which guarantees success for Beagleplay.
+> 
+> Ramon, thoughts?
+> 
 
-diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
-index 3e3e811543..ad36da712b 100644
---- a/configs/pogo_v4_defconfig
-+++ b/configs/pogo_v4_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
- CONFIG_SYS_PROMPT="Pogo_V4> "
- CONFIG_IDENT_STRING="\nPogoplug V4"
- CONFIG_SYS_LOAD_ADDR=0x800000
-+CONFIG_LTO=y
- CONFIG_PCI=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
+Even a single "PHY not found" print is not OK. It looks like an
+error while it should not.
+
+The correct solution is to use the MDIO uclass framework and add
+some generic handling in the class driver. drivers/net/eth-phy-uclass.c
+
+We could provide the delay time in the 'reset-deassert-us' property.
+Although I'm not sure if this is the correct property for this case
+as there is no RESET GPIO on the board. What we really want is delay
+from power-on-reset. Which means we might have to introduce a new property
+and use time from boot to determine if PHY is ready or not?
+
+NOTE: PHY ready time is different for hardware reset and power-on-reset.
+50ms vs 150ms
+
 -- 
-2.39.2
-
+cheers,
+-roger
