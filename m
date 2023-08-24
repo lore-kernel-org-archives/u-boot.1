@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7171C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A348EC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 440618642B;
-	Thu, 24 Aug 2023 15:29:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BDA88657A;
+	Thu, 24 Aug 2023 15:29:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UvL3On9Z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H0/ZM08Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0944B80750; Thu, 24 Aug 2023 15:29:23 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 8A0288653D; Thu, 24 Aug 2023 15:29:27 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6609786529
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:29:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E29558653B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:29:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-523bf06f7f8so8365308a12.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:29:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=thierry.reding@gmail.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-52683b68c2fso8496058a12.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:29:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692883759; x=1693488559;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=KZReqV5lXefOiUEze66YDhHhHX9ZXfSrGdUqOmANNOI=;
- b=UvL3On9ZD87AWoU3+20ruzhOUJGUZO+6qZd1ALEPtTjYbCvrpcE3XJMhrVEUPdLnse
- tCLE2dq1Mg/ToV48RLYZ6wsd1VUjxhr9YGtGEBvEVsZJHQrY74DOcRED9VjDXk8XJFgA
- deuSpx6rwQgRRGxquzN0QoUknZuggE2x0L9LJb/usnr+wN7GImM7oA0Ydfwq3syEu2fl
- SYS3OrTb22ALrcFR0RoASgk+Zhw/N3Zn6tTPe00yXGs9EwfdB48ubB/WSKI0iXEXUoj7
- 2MTzoACVffhPFmVHbp3S7WtuNkXzwpFyVM13O7iJVGhtK6PISG9L8CLwTRBYV5A1BUk+
- dXrA==
+ d=gmail.com; s=20221208; t=1692883764; x=1693488564;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=D2r+BOb7255P8mHHzvJVb3XU8ybvvWYg5LAjNUTvPSw=;
+ b=H0/ZM08ZbCC5v6Nhv3WGUyp48X90rRBhuHmMRXKZEiZnQDDNSOIsCSA8Z7IPeBdI56
+ hhiPIGAoIi90/TmnZQDK3XWemM0F5I+oXQaMQ4/sgpcQo47NCtDBGx3PmLbI2kM3qW+a
+ GJNEwmGmzEyg6j2dApwg4bP2w6a7zVgZeTQT20sWRQFovswQtKf3CrH05W4vCosVmH5Y
+ 4X7CwPKzzpgfXJnbFMjiK3EbqPNmA2ZK52CCeqvq5pOcxcginSdMeO+/0/pwH3BToNQK
+ 2LmmydxFyMZoeu9ZZ2VYcb/d9Swkbe7X5atLUrc8hc4ruDjB7+PAVGYjeNBt16ugNHp8
+ 3ajQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692883759; x=1693488559;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KZReqV5lXefOiUEze66YDhHhHX9ZXfSrGdUqOmANNOI=;
- b=NzWeHI8RA0znHoQ61ckWY28j3TOHBhX2NlBttlARHiVuF8u4VwsX4CcitPI08ZaXE0
- KV4iBB1NpSqeZd76Uk7HCBy4Dx49JEng/at9FIUALxhFB55RB1XZi9dCAUNr2aur8q++
- XveGvhYdU9JxcHW2VoHuhDfP756OrVGWLG7kIhQkw9/rvAIXzZwEAN7VYI3NPoMq9yl8
- OIhXXXrRG33PNZ8LHiR7elw67gxkGUT+zBbtkqAPcRjs91Pp32u0BWRFe+nQvdFNfNIx
- qET8JFzhssrPPewaWF4qvkf3HP7TmneZnQEH1e59KGjJpu3rUzjc9U0j+DYT4gWGA+t+
- 4jKQ==
-X-Gm-Message-State: AOJu0YxTRvgdc1aV61VrPk4/bTomV+VRBwS3R4BXU51Tz0XAM/N1bRYy
- cvcQzfyNhgPEE4z5qIusGBdoUjSuRFQ=
-X-Google-Smtp-Source: AGHT+IFA8SlCK8WeJPYbcw/USo38OMyiouZM4zFoK13nzn4xhw4fmlT/UuvhLwDUrPei1PdZvWAeXQ==
-X-Received: by 2002:a05:6402:204c:b0:523:bfec:4912 with SMTP id
- bc12-20020a056402204c00b00523bfec4912mr12269194edb.11.1692883758482; 
- Thu, 24 Aug 2023 06:29:18 -0700 (PDT)
-Received: from [192.168.2.2] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ d=1e100.net; s=20221208; t=1692883764; x=1693488564;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=D2r+BOb7255P8mHHzvJVb3XU8ybvvWYg5LAjNUTvPSw=;
+ b=H8WK5rhKnSK/92NygCs3o19/7F8yxZ+MRU/6cZ236hjb8Yfh9c7sKeUm6K6RaW9juN
+ AaDzroKAYXa9xU+NSN28N4ZSbBLmGbEPaiRJEDRbJV0jzJX4iaflbdqyDcRbLwgmcGNM
+ awtcEpJoHZf/8aWJb4wvriZf2mJmLqyCsO4llphqwTXvuIhIBRt3ChQ5lmPSsnpY6iD8
+ ewcqD6hsddJZbME/ei6LeQEpk/L8pYDJSzOWwUkyw4505y9bR4v/8YvNBwnRlp5i9Tro
+ /yk/E3pSxx4/1ga3Cl18CuPOxYHpbyZxyND/nMKu0yB1BfUtVYOPqJ/vvK2qVq9/SOea
+ PZxA==
+X-Gm-Message-State: AOJu0YwOG9sv8umBw1JC7rT8sPVFRikYClg4kepLp20aAkuEtLFluwPr
+ ML9JM1HKtCWPKgcodNtXd/LcHGIiEFg=
+X-Google-Smtp-Source: AGHT+IG1TqduTZS0Zm772W3zT6Aj+fZv08wJqUB7WvB5ndpS1ZaACLEJnNQe4kKYispC60iQfMV6RQ==
+X-Received: by 2002:a17:906:9d1:b0:99c:dc3e:f8e3 with SMTP id
+ r17-20020a17090609d100b0099cdc3ef8e3mr11899846eje.28.1692883764229; 
+ Thu, 24 Aug 2023 06:29:24 -0700 (PDT)
+Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
  by smtp.gmail.com with ESMTPSA id
- x24-20020aa7d6d8000000b005232c051605sm10439617edr.19.2023.08.24.06.29.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Aug 2023 06:29:18 -0700 (PDT)
-Message-ID: <55066888-6b41-6ae5-2b92-f6f0b37748e9@gmail.com>
-Date: Thu, 24 Aug 2023 15:29:16 +0200
+ z14-20020a170906240e00b00982d0563b11sm11048449eja.197.2023.08.24.06.29.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 06:29:23 -0700 (PDT)
+Date: Thu, 24 Aug 2023 15:29:22 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/1] mmc: tegra: get default-tap and default-trim from
+ device tree
+Message-ID: <ZOdbMq68QtVbrGVM@orome>
+References: <20230819153501.77245-1-clamor95@gmail.com>
+ <20230819153501.77245-2-clamor95@gmail.com>
+ <ZOXnfY5hKrhSpOlY@orome>
+ <B2FF6549-4F01-4010-968E-D790E72AE2EE@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1 3/3] rockchip: cmd: add rockmtd command
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, michael@amarulasolutions.com, 
- dario.binacchi@amarulasolutions.com, u-boot@lists.denx.de
-References: <cbbaecb0-19fc-018d-df63-c5f265156024@gmail.com>
-Content-Language: en-US
-In-Reply-To: <cbbaecb0-19fc-018d-df63-c5f265156024@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="HLWpqPx4XZYkemr3"
+Content-Disposition: inline
+In-Reply-To: <B2FF6549-4F01-4010-968E-D790E72AE2EE@gmail.com>
+User-Agent: Mutt/2.2.10 (2023-03-25)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,1492 +99,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockmtd creates a virtual block device to transfer Rockchip
-boot block data to and from NAND with block orientated tools
-like "ums" and "rockusb".
 
-It uses the Rockchip MTD driver to scan for boot blocks and copies
-data from the first block in a GPT formated virtual disk.
-Data must be written in U-boot "idbloader.img" format and start at
-partition "loader1" offset 64. The data header is parsed
-for length and offset. When the last sector is received
-it erases up to 5 erase blocks on NAND and writes bootblocks
-in a pattern depending on the NAND ID. Data is then verified.
-When a block turns out bad the block header is discarded.
+--HLWpqPx4XZYkemr3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
----
- cmd/Kconfig   |    7 +
- cmd/Makefile  |    1 +
- cmd/rockmtd.c | 1429 +++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 1437 insertions(+)
- create mode 100644 cmd/rockmtd.c
+On Wed, Aug 23, 2023 at 02:38:48PM +0300, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 14:03:25 GMT+03:00, =
+Thierry Reding <thierry.reding@gmail.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
+=B0=D0=B2(-=D0=BB=D0=B0):
+> >On Sat, Aug 19, 2023 at 06:35:01PM +0300, Svyatoslav Ryhel wrote:
+> >> Default-tap and default-trim values are used for eMMC setup
+> >> mostly on T114+ devices. As for now, those values are hardcoded
+> >> for T210 and ignored for all other Tegra generations. Fix this
+> >> by passing tap and trim values from dts.
+> >>=20
+> >> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF701T
+> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> >> ---
+> >>  arch/arm/include/asm/arch-tegra/tegra_mmc.h | 17 ++++----
+> >>  drivers/mmc/tegra_mmc.c                     | 46 ++++++++++-----------
+> >>  2 files changed, 30 insertions(+), 33 deletions(-)
+> >>=20
+> >> diff --git a/arch/arm/include/asm/arch-tegra/tegra_mmc.h b/arch/arm/in=
+clude/asm/arch-tegra/tegra_mmc.h
+> >> index d6a55764ba..750c7d809e 100644
+> >> --- a/arch/arm/include/asm/arch-tegra/tegra_mmc.h
+> >> +++ b/arch/arm/include/asm/arch-tegra/tegra_mmc.h
+> >> @@ -128,21 +128,22 @@ struct tegra_mmc {
+> >> =20
+> >>  /* SDMMC1/3 settings from SDMMCx Initialization Sequence of TRM */
+> >>  #define MEMCOMP_PADCTRL_VREF	7
+> >> -#define AUTO_CAL_ENABLE		(1 << 29)
+> >> -#define AUTO_CAL_ACTIVE		(1 << 31)
+> >> -#define AUTO_CAL_START		(1 << 31)
+> >> +#define AUTO_CAL_ENABLE		BIT(29)
+> >> +#define AUTO_CAL_ACTIVE		BIT(31)
+> >> +#define AUTO_CAL_START		BIT(31)
+> >> +
+> >>  #if defined(CONFIG_TEGRA210)
+> >>  #define AUTO_CAL_PD_OFFSET	(0x7D << 8)
+> >>  #define AUTO_CAL_PU_OFFSET	(0 << 0)
+> >> -#define IO_TRIM_BYPASS_MASK	(1 << 2)
+> >> -#define TRIM_VAL_SHIFT		24
+> >> -#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
+> >> -#define TAP_VAL_SHIFT		16
+> >> -#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
+> >>  #else
+> >>  #define AUTO_CAL_PD_OFFSET	(0x70 << 8)
+> >>  #define AUTO_CAL_PU_OFFSET	(0x62 << 0)
+> >>  #endif
+> >> =20
+> >> +#define TRIM_VAL_SHIFT		24
+> >> +#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
+> >> +#define TAP_VAL_SHIFT		16
+> >> +#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
+> >> +
+> >>  #endif	/* __ASSEMBLY__ */
+> >>  #endif	/* __TEGRA_MMC_H_ */
+> >> diff --git a/drivers/mmc/tegra_mmc.c b/drivers/mmc/tegra_mmc.c
+> >> index f76fee3ea0..7627800261 100644
+> >> --- a/drivers/mmc/tegra_mmc.c
+> >> +++ b/drivers/mmc/tegra_mmc.c
+> >> @@ -37,6 +37,9 @@ struct tegra_mmc_priv {
+> >>  	unsigned int version;	/* SDHCI spec. version */
+> >>  	unsigned int clock;	/* Current clock (MHz) */
+> >>  	int mmc_id;		/* peripheral id */
+> >> +
+> >> +	u32 tap_value;
+> >> +	u32 trim_value;
+> >>  };
+> >> =20
+> >>  static void tegra_mmc_set_power(struct tegra_mmc_priv *priv,
+> >> @@ -526,31 +529,6 @@ static void tegra_mmc_pad_init(struct tegra_mmc_p=
+riv *priv)
+> >>  		printf("%s: Warning: Autocal timed out!\n", __func__);
+> >>  		/* TBD: Set CFG2TMC_SDMMC1_PAD_CAL_DRV* regs here */
+> >>  	}
+> >> -
+> >> -#if defined(CONFIG_TEGRA210)
+> >> -	u32 tap_value, trim_value;
+> >> -
+> >> -	/* Set tap/trim values for SDMMC1/3 @ <48MHz here */
+> >> -	val =3D readl(&priv->reg->venspictl);	/* aka VENDOR_SYS_SW_CNTL */
+> >> -	val &=3D IO_TRIM_BYPASS_MASK;
+> >> -	if (id =3D=3D PERIPH_ID_SDMMC1) {
+> >> -		tap_value =3D 4;			/* default */
+> >> -		if (val)
+> >> -			tap_value =3D 3;
+> >> -		trim_value =3D 2;
+> >> -	} else {				/* SDMMC3 */
+> >> -		tap_value =3D 3;
+> >> -		trim_value =3D 3;
+> >> -	}
+> >> -
+> >> -	val =3D readl(&priv->reg->venclkctl);
+> >> -	val &=3D ~TRIM_VAL_MASK;
+> >> -	val |=3D (trim_value << TRIM_VAL_SHIFT);
+> >> -	val &=3D ~TAP_VAL_MASK;
+> >> -	val |=3D (tap_value << TAP_VAL_SHIFT);
+> >> -	writel(val, &priv->reg->venclkctl);
+> >> -	debug("%s: VENDOR_CLOCK_CNTRL =3D 0x%08X\n", __func__, val);
+> >> -#endif	/* T210 */
+> >>  #endif	/* T30/T210 */
+> >>  }
+> >> =20
+> >> @@ -588,6 +566,21 @@ static void tegra_mmc_reset(struct tegra_mmc_priv=
+ *priv, struct mmc *mmc)
+> >> =20
+> >>  	/* Make sure SDIO pads are set up */
+> >>  	tegra_mmc_pad_init(priv);
+> >> +
+> >> +	if (priv->tap_value || priv->trim_value) {
+> >
+> >I think 0 is a valid value for both tap and trim, so you want to be able
+> >to write that. I suggest getting rid of the conditional and always
+> >writing these values and rely on defaults to make sure that a good value
+> >is always programmed.
+>=20
+> Tegra 3 uses 0x0F on all my devices which is not 0.
+>=20
+> >Alternatively if you really only want to program these when they've been
+> >specified, use an extra variable (or something like -1 as a default
+> >value) to discriminate.
+>=20
+> Why 0 value cannot be used as "flag" to skip tap and trim setup if values=
+ are not set? Using any value but 0 will cause additional comparation in co=
+ndition and will definitely not improve readability.
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 2d6e5f993f04..87f862076355 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1553,6 +1553,13 @@ config CMD_USB_SDP
- 	  Enables the command "sdp" which is used to have U-Boot emulating the
- 	  Serial Download Protocol (SDP) via USB.
+If you use 0 as a flag it implies that you can never set 0 as a value
+explicitly. So if some SoC or board ever needs to set that exact value
+it can't.
 
-+config CMD_ROCKMTD
-+	bool "rockmtd"
-+	help
-+	  Rockmtd creates a virtual block device to transfer Rockchip
-+	  boot block data to and from NAND with block orientated tools
-+	  like "ums" and "rockusb".
-+
- config CMD_ROCKUSB
- 	bool "rockusb"
- 	depends on USB_FUNCTION_ROCKUSB
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 9f8c0b058bea..19b609ace782 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -150,6 +150,7 @@ obj-$(CONFIG_CMD_REISER) += reiser.o
- obj-$(CONFIG_CMD_REMOTEPROC) += remoteproc.o
- obj-$(CONFIG_CMD_RNG) += rng.o
- obj-$(CONFIG_CMD_KASLRSEED) += kaslrseed.o
-+obj-$(CONFIG_CMD_ROCKMTD) += rockmtd.o
- obj-$(CONFIG_CMD_ROCKUSB) += rockusb.o
- obj-$(CONFIG_CMD_RTC) += rtc.o
- obj-$(CONFIG_SANDBOX) += host.o
-diff --git a/cmd/rockmtd.c b/cmd/rockmtd.c
-new file mode 100644
-index 000000000000..cf5259ecb4d7
---- /dev/null
-+++ b/cmd/rockmtd.c
-@@ -0,0 +1,1429 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) 2023 Johan Jonker <jbx6244@gmail.com>
-+ */
-+
-+#include <blk.h>
-+#include <command.h>
-+#include <common.h>
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
-+#include <dm/root.h>
-+#include <dm/uclass-internal.h>
-+#include <efi_api.h>
-+#include <nand.h>
-+#include <linux/mtd/mtd.h>
-+#include <linux/mtd/rawnand.h>
-+#include <memalign.h>
-+#include <part.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <u-boot/crc.h>
-+
-+#define LBA			64 + 512 + 33
-+
-+#define RK_TAG			0xFCDC8C3B
-+#define NFC_SYS_DATA_SIZE	4
-+
-+struct nand_para_info {
-+	u8 id_bytes;
-+	u8 nand_id[6];
-+	u8 vendor;
-+	u8 die_per_chip;
-+	u8 sec_per_page;
-+	u16 page_per_blk;
-+	u8 cell;
-+	u8 plane_per_die;
-+	u16 blk_per_plane;
-+	u16 operation_opt;
-+	u8 lsb_mode;
-+	u8 read_retry_mode;
-+	u8 ecc_bits;
-+	u8 access_freq;
-+	u8 opt_mode;
-+	u8 die_gap;
-+	u8 bad_block_mode;
-+	u8 multi_plane_mode;
-+	u8 slc_mode;
-+	u8 reserved[5];
-+};
-+
-+struct bootblk {
-+	int blk;
-+	int boot_size;
-+	int offset;
-+};
-+
-+struct rockmtd_dev {
-+	struct blk_desc *desc;
-+	char *label;
-+	legacy_mbr *mbr;
-+	gpt_header *gpt_h;
-+	gpt_header *gpt_h2;
-+	gpt_entry *gpt_e;
-+	char *check;
-+	char *idb;
-+	char *str;
-+	char uuid_part_str[UUID_STR_LEN + 1];
-+	char uuid_disk_str[UUID_STR_LEN + 1];
-+	char *datbuf;
-+	char *oobbuf;
-+	struct mtd_info *mtd;
-+	struct nand_para_info *info;
-+	u16 page_table[512];
-+	u32 idb_need_write_back;
-+	struct bootblk idblock[5];
-+	u32 blk_counter;
-+	u32 boot_blks;
-+	u32 offset;
-+	u32 boot_size;
-+};
-+
-+struct sector0 {
-+	u32 magic;
-+	u8  reserved[4];
-+	u32 rc4_flag;
-+	u16 boot_code1_offset;
-+	u16 boot_code2_offset;
-+	u8  reserved1[490];
-+	u16 flash_data_size;
-+	u16 flash_boot_size;
-+	u8  reserved2[2];
-+} __packed;
-+
-+struct rk_nfc_nand_chip {
-+	struct nand_chip chip;
-+
-+	u16 boot_blks;
-+	u16 metadata_size;
-+	u32 boot_ecc;
-+	u32 timing;
-+
-+	u8 nsels;
-+	u8 sels[0];
-+	/* Nothing after this field. */
-+};
-+
-+struct nand_para_info nand_para_tbl[] = {
-+	{6, {0x2c, 0x64, 0x44, 0x4b, 0xa9, 0x00}, 4, 1, 16,  256, 2, 2, 2048, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x44, 0x44, 0x4b, 0xa9, 0x00}, 4, 1, 16,  256, 2, 2, 1064, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x68, 0x04, 0x4a, 0xa9, 0x00}, 4, 1,  8,  256, 2, 2, 2048, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x88, 0x04, 0x4b, 0xa9, 0x00}, 4, 1, 16,  256, 2, 2, 2048, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0xa8, 0x05, 0xcb, 0xa9, 0x00}, 4, 2, 16,  256, 2, 2, 2048, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x68, 0x04, 0x46, 0x89, 0x00}, 4, 1,  8,  256, 2, 2, 2048, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x48, 0x04, 0x4a, 0xa5, 0x00}, 4, 1,  8,  256, 2, 2, 1024, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x84, 0x64, 0x3c, 0xa5, 0x00}, 4, 1, 32,  512, 2, 2, 1024, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0x64, 0x54, 0xa9, 0x00}, 4, 1, 32,  512, 2, 2, 1024, 0x01df,  4, 18, 60, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0xd7, 0x94, 0x3e, 0x84, 0x00}, 4, 1,  8,  128, 2, 2, 4096, 0x0117,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x48, 0x04, 0x46, 0x85, 0x00}, 4, 1,  8,  256, 2, 2, 1024, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x88, 0x05, 0xc6, 0x89, 0x00}, 4, 2,  8,  256, 2, 2, 2048, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x88, 0x24, 0x4b, 0xa9, 0x00}, 4, 1, 16,  256, 2, 2, 2048, 0x011f,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x68, 0x00, 0x27, 0xa9, 0x00}, 4, 1, 16,  128, 1, 2, 2048, 0x011f,  0,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x64, 0x64, 0x56, 0xa5, 0x00}, 4, 1, 24,  512, 2, 2,  700, 0x01df,  4, 18, 60, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0x84, 0xc5, 0x4b, 0xa9, 0x00}, 4, 2, 16,  256, 2, 2, 2048, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0xd5, 0xd1, 0xa6, 0x68, 0x00}, 4, 2,  8,   64, 1, 2, 2048, 0x0117,  0,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0xdc, 0x90, 0xa6, 0x54, 0x00}, 4, 1,  8,   64, 1, 2, 1024, 0x0117,  0,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x64, 0x64, 0x54, 0xa4, 0x00}, 4, 1, 32,  512, 2, 1, 1024, 0x01df,  4, 18, 60, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0x44, 0x32, 0xaa, 0x00}, 4, 1, 32,  512, 2, 1, 2184, 0x05c7,  5, 19, 60, 32, 1, 0, 1, 0, 1, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x64, 0x44, 0x32, 0xa5, 0x00}, 4, 1, 32,  512, 2, 1, 1048, 0x05c7,  5, 19, 60, 32, 1, 0, 1, 0, 1, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x64, 0x64, 0x3c, 0xa5, 0x00}, 4, 1, 32,  512, 2, 1, 1044, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0x44, 0x32, 0xaa, 0x00}, 4, 1, 32,  512, 2, 1, 2184, 0x05c7,  5, 19, 60, 32, 1, 0, 4, 0, 1, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0x44, 0x34, 0xaa, 0x00}, 4, 1, 32,  512, 2, 1, 2184, 0x05c7,  5, 19, 60, 32, 1, 0, 4, 0, 1, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0xc4, 0x34, 0xaa, 0x00}, 4, 1, 32,  512, 2, 1, 2184, 0x05c7,  5, 19, 60, 32, 1, 0, 1, 0, 1, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0x44, 0x34, 0xa4, 0x00}, 4, 1, 32,  512, 2, 1, 2184, 0x05c7,  5, 19, 60, 32, 1, 0, 1, 0, 1, {0, 0, 0, 0, 0}},
-+	{5, {0x2c, 0x84, 0x64, 0x3c, 0xa9, 0x00}, 4, 1, 32,  512, 2, 2, 1024, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x2c, 0xa4, 0x64, 0x32, 0xaa, 0x04}, 4, 1, 32, 1024, 2, 1, 2192, 0x05c7, 10, 19, 60, 32, 1, 0, 4, 0, 1, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xde, 0x94, 0xd2, 0x04, 0x43}, 2, 1, 16,  256, 2, 2, 2048, 0x01d9,  1,  1, 24, 32, 4, 0, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xd7, 0x94, 0xda, 0x74, 0xc3}, 2, 1, 16,  256, 2, 2, 1024, 0x01d9,  1,  2, 40, 32, 4, 0, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xd7, 0x94, 0x91, 0x60, 0x44}, 2, 1, 16,  256, 2, 2, 1046, 0x01d9,  1,  3, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xde, 0x94, 0xda, 0x74, 0xc4}, 2, 1, 16,  256, 2, 2, 2090, 0x01d9,  1,  4, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xde, 0x94, 0xeb, 0x74, 0x44}, 2, 1, 32,  256, 2, 2, 1066, 0x01d9,  1,  7, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xd5, 0x94, 0xda, 0x74, 0xc4}, 2, 1, 16,  256, 2, 2,  530, 0x01d9,  1,  3, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xd7, 0x94, 0x9a, 0x74, 0x42}, 2, 1, 16,  256, 2, 2, 1024, 0x0119,  1,  0, 24, 32, 4, 0, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xde, 0x14, 0xa7, 0x42, 0x4a}, 2, 1, 32,  256, 2, 2, 1060, 0x01d9,  2,  5, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xd7, 0x14, 0x9e, 0x34, 0x4a}, 2, 1, 16,  256, 2, 2, 1056, 0x01d9,  2,  5, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xde, 0x94, 0xa7, 0x42, 0x48}, 2, 1, 32,  256, 2, 2, 1060, 0x01d9,  2,  5, 40, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xde, 0x14, 0xab, 0x42, 0x4a}, 2, 1, 32,  256, 2, 2, 1056, 0x01d9,  2,  6, 40, 32, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0x3a, 0x14, 0xab, 0x42, 0x4a}, 2, 1, 32,  256, 2, 2, 2092, 0x01d9,  2,  5, 40, 32, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0xd5, 0x94, 0x9a, 0x74, 0x42}, 2, 1, 16,  256, 2, 1, 1024, 0x0111,  1,  0, 24, 32, 4, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xad, 0x3a, 0x14, 0x03, 0x08, 0x50}, 2, 1, 32,  388, 2, 2, 1362, 0x01d9,  9,  8, 40, 32, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x64, 0x44, 0x4b, 0xa9, 0x00}, 7, 1, 16,  256, 2, 2, 2048, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x88, 0x24, 0x4b, 0xa9, 0x84}, 7, 1, 16,  256, 2, 2, 2048, 0x01df,  3, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x88, 0x24, 0x4b, 0xa9, 0x00}, 7, 1, 16,  256, 2, 2, 2048, 0x0117,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x68, 0x24, 0x4a, 0xa9, 0x00}, 7, 1,  8,  256, 2, 2, 2048, 0x0117,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x68, 0x04, 0x4a, 0xa9, 0x00}, 7, 1,  8,  256, 2, 2, 2048, 0x0117,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0xd7, 0x94, 0x3e, 0x84, 0x00}, 7, 1,  8,  256, 2, 2, 2048, 0x0117,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x68, 0x04, 0x46, 0xa9, 0x00}, 7, 1,  8,  256, 2, 2, 2048, 0x0117,  1,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x89, 0x64, 0x64, 0x3c, 0xa1, 0x00}, 7, 1, 32,  512, 2, 1, 1024, 0x01c7,  4, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{5, {0x89, 0x84, 0x64, 0x3c, 0xa5, 0x00}, 7, 1, 32,  512, 2, 2, 1024, 0x01c7,  4, 17, 40, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x89, 0x88, 0x24, 0x3b, 0xa9, 0x00}, 7, 1, 16,  192, 2, 2, 2048, 0x0117, 12,  0, 24, 32, 1, 0, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xd7, 0x84, 0x93, 0x72, 0x57}, 1, 1, 32,  256, 2, 1, 1060, 0x05c1,  2, 33, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xde, 0x84, 0x93, 0x72, 0x57}, 1, 1, 32,  256, 2, 1, 2092, 0x05c1,  2, 33, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0x3a, 0x85, 0x93, 0x76, 0x57}, 1, 2, 32,  256, 2, 1, 2092, 0x05e1,  2, 33, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xd5, 0x84, 0x32, 0x72, 0x56}, 1, 1, 16,  128, 2, 1, 2056, 0x05c1,  2, 33, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xd7, 0x94, 0x32, 0x76, 0x56}, 1, 1, 16,  128, 2, 2, 2058, 0x05d1,  2, 33, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xde, 0x94, 0x82, 0x76, 0x56}, 1, 1, 16,  256, 2, 2, 2062, 0x05d1,  1, 33, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xde, 0x94, 0x93, 0x76, 0x50}, 1, 1, 32,  256, 2, 2, 1066, 0x05d9,  2, 34, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0x3a, 0x95, 0x93, 0x7a, 0x50}, 1, 2, 32,  256, 2, 2, 1066, 0x05d9,  2, 34, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xd7, 0x94, 0x32, 0x76, 0x55}, 1, 1, 16,  128, 2, 2, 2050, 0x0191,  2,  0, 24, 32, 1, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xde, 0x94, 0x93, 0x76, 0x57}, 1, 1, 32,  256, 2, 2, 1058, 0x05d9,  2, 33, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xd7, 0x84, 0x93, 0x72, 0x50}, 1, 1, 32,  256, 2, 1, 1060, 0x05c1,  2, 34, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xde, 0x94, 0x93, 0x76, 0x51}, 1, 1, 32,  256, 2, 2, 1074, 0x05d9,  2, 35, 40, 32, 3, 1, 4, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0x3a, 0x94, 0x93, 0x76, 0x51}, 1, 1, 32,  256, 2, 2, 2106, 0x05d9,  2, 35, 40, 32, 3, 1, 4, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xd7, 0x84, 0x93, 0x72, 0x51}, 1, 1, 32,  256, 2, 1, 1056, 0x05d9,  2, 35, 40, 32, 3, 1, 4, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x98, 0xde, 0x94, 0x93, 0x76, 0xd1}, 1, 1, 32,  256, 2, 2, 1074, 0x05d9,  2, 35, 40, 32, 3, 1, 4, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0x94, 0x93, 0x76, 0x57}, 8, 1, 32,  256, 2, 2, 1058, 0x05d9,  2, 66, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xd7, 0x84, 0x93, 0x72, 0x57}, 8, 1, 32,  256, 2, 1, 1060, 0x05c1,  2, 66, 40, 32, 2, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0xa4, 0x82, 0x76, 0x56}, 8, 1, 16,  256, 2, 2, 2082, 0x01d9,  1, 65, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0x94, 0x93, 0x76, 0x50}, 8, 1, 32,  256, 2, 2, 1066, 0x05d9,  2, 67, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xd7, 0x84, 0x93, 0x72, 0x50}, 8, 1, 32,  256, 2, 1, 1060, 0x05c1,  2, 67, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0xa4, 0x82, 0x76, 0xd7}, 8, 1, 16,  256, 2, 2, 2090, 0x04d9,  1, 66, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0x84, 0x93, 0x72, 0x57}, 8, 1, 32,  256, 2, 1, 2092, 0x05c1,  2, 66, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0x3a, 0x94, 0x93, 0x76, 0x51}, 8, 1, 32,  256, 2, 2, 2106, 0x01d9,  2, 68, 40, 32, 3, 1, 4, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0x94, 0x93, 0x76, 0x51}, 8, 1, 32,  256, 2, 2, 1074, 0x01d9,  2, 68, 40, 32, 3, 1, 4, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0x3a, 0xa4, 0x93, 0x7a, 0x50}, 8, 1, 32,  256, 2, 2, 2138, 0x05d9,  2,  0, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0x94, 0x82, 0x76, 0x56}, 8, 1, 16,  256, 2, 2, 2062, 0x01d9,  1,  0, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0x45, 0xde, 0x94, 0x93, 0x76, 0xd7}, 8, 1, 32,  256, 2, 2, 1058, 0x05d9,  2, 66, 40, 32, 3, 1, 1, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xd7, 0x94, 0x7e, 0x64, 0x44}, 0, 1, 16,  128, 2, 2, 2048, 0x01d9,  2, 49, 60, 36, 3, 0, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xde, 0xd5, 0x7e, 0x68, 0x44}, 0, 2, 16,  128, 2, 2, 2048, 0x01f9,  2, 49, 60, 36, 3, 0, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xd7, 0x94, 0x7a, 0x54, 0x43}, 0, 1, 16,  128, 2, 2, 2076, 0x0199,  2,  0, 40, 36, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xde, 0xd5, 0x7a, 0x58, 0x43}, 0, 2, 16,  128, 2, 2, 2076, 0x01b9,  2,  0, 40, 36, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xd5, 0x94, 0x76, 0x54, 0x43}, 0, 1, 16,  128, 2, 2, 1038, 0x0119,  2,  0, 24, 36, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xd7, 0x14, 0x76, 0x54, 0xc2}, 0, 1, 16,  128, 2, 2, 2076, 0x0491,  2,  0, 24, 40, 3, 1, 3, 0, 0, {0, 0, 0, 0, 0}},
-+	{6, {0xec, 0xde, 0x94, 0xc3, 0xa4, 0xca}, 0, 1, 32,  792, 2, 1,  688, 0x04c1, 11, 50, 40, 32, 3, 1, 1, 0, 1, {0, 0, 0, 0, 0}},
-+};
-+
-+void rockmtd_rc4(u8 *buf, u32 len)
-+{
-+	u8 S[256], K[256], temp;
-+	u32 i, j, t, x;
-+	u8 key[16] = { 124, 78, 3, 4, 85, 5, 9, 7, 45, 44, 123, 56, 23, 13, 23, 17};
-+
-+	j = 0;
-+	for (i = 0; i < 256; i++) {
-+		S[i] = (u8)i;
-+		j &= 0x0f;
-+		K[i] = key[j];
-+		j++;
-+	}
-+
-+	j = 0;
-+	for (i = 0; i < 256; i++) {
-+		j = (j + S[i] + K[i]) % 256;
-+		temp = S[i];
-+		S[i] = S[j];
-+		S[j] = temp;
-+	}
-+
-+	i = 0;
-+	j = 0;
-+	for (x = 0; x < len; x++) {
-+		i = (i + 1) % 256;
-+		j = (j + S[i]) % 256;
-+		temp = S[i];
-+		S[i] = S[j];
-+		S[j] = temp;
-+		t = (S[i] + (S[j] % 256)) % 256;
-+		buf[x] = buf[x] ^ S[t];
-+	}
-+}
-+
-+static int rockmtd_write_oob(struct mtd_info *mtd, ulong off, u_char *datbuf, u_char *oobbuf)
-+{
-+	off &= ~(mtd->writesize - 1);
-+	loff_t addr = (loff_t)off;
-+	struct mtd_oob_ops ops;
-+	int ret;
-+
-+	memset(&ops, 0, sizeof(ops));
-+	ops.datbuf = datbuf;
-+	ops.oobbuf = oobbuf;
-+	ops.len = mtd->writesize;
-+	ops.ooblen = mtd->oobsize;
-+	ops.mode = MTD_OPS_PLACE_OOB;
-+	ret = mtd_write_oob(mtd, addr, &ops);
-+	if (ret < 0) {
-+		debug("Error (%d) writing page %08lx\n", ret, off);
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+static int rockmtd_read_oob(struct mtd_info *mtd, ulong off, u_char *datbuf, u_char *oobbuf)
-+{
-+	off &= ~(mtd->writesize - 1);
-+	loff_t addr = (loff_t)off;
-+	struct mtd_oob_ops ops;
-+	int ret;
-+
-+	memset(&ops, 0, sizeof(ops));
-+	ops.datbuf = datbuf;
-+	ops.oobbuf = oobbuf;
-+	ops.len = mtd->writesize;
-+	ops.ooblen = mtd->oobsize;
-+	ops.mode = MTD_OPS_PLACE_OOB;
-+	ret = mtd_read_oob(mtd, addr, &ops);
-+	if (ret < 0) {
-+		debug("error (%d) reading page %08lx\n", ret, off);
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+static int rockmtd_erase(struct mtd_info *mtd, ulong off)
-+{
-+	off &= ~(mtd->writesize - 1);
-+	loff_t addr = (loff_t)off;
-+	struct erase_info info;
-+	int ret;
-+
-+	memset(&info, 0, sizeof(info));
-+	info.mtd = mtd;
-+	info.addr = addr;
-+	info.len = mtd->erasesize;
-+	info.scrub = 1;
-+	ret = mtd_erase(mtd, &info);
-+	if (ret) {
-+		debug("error (%d) erasing page %08lx\n", ret, off);
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+void rockmtd_scan_block(struct rockmtd_dev *plat)
-+{
-+	u32 blk;
-+
-+	plat->blk_counter = 0;
-+
-+	for (blk = 0; blk < plat->boot_blks; blk++) {
-+		rockmtd_read_oob(plat->mtd, blk * plat->mtd->erasesize, plat->datbuf, plat->oobbuf);
-+		if (*(u32 *)plat->datbuf == RK_TAG) {
-+			struct sector0 *sec0 = (struct sector0 *)plat->datbuf;
-+
-+			rockmtd_rc4(plat->datbuf, 512);
-+
-+			plat->idblock[plat->blk_counter].blk = blk;
-+			plat->idblock[plat->blk_counter].offset = sec0->boot_code1_offset;
-+			plat->idblock[plat->blk_counter].boot_size = sec0->flash_boot_size;
-+
-+			debug("\nblk       : %d\n", plat->idblock[plat->blk_counter].blk);
-+			debug("offset    : %d\n", plat->idblock[plat->blk_counter].offset);
-+			debug("boot_size : %d\n", plat->idblock[plat->blk_counter].boot_size);
-+
-+			plat->blk_counter += 1;
-+
-+			if (plat->blk_counter >= ARRAY_SIZE(plat->idblock))
-+				return;
-+		}
-+	}
-+}
-+
-+void rockmtd_read_block(struct rockmtd_dev *plat, u32 idx, u8 *buf)
-+{
-+	ulong off = plat->idblock[idx].blk * plat->mtd->erasesize;
-+	struct nand_chip *chip = mtd_to_nand(plat->mtd);
-+	struct nand_ecc_ctrl *ecc = &chip->ecc;
-+	int counter = 0;
-+	u32 spare0 = 0;
-+	u32 *p_spare;
-+	int sector;
-+	int page;
-+
-+	rockmtd_read_oob(plat->mtd, off,
-+			 plat->datbuf, plat->oobbuf);
-+
-+	memcpy(buf, plat->datbuf, 2048);
-+
-+	while (counter < plat->idblock[idx].boot_size) {
-+		if (spare0)
-+			page = (plat->idblock[idx].offset + spare0) / 4;
-+		else
-+			page = (plat->idblock[idx].offset + counter) / 4;
-+
-+		rockmtd_read_oob(plat->mtd,
-+				 off + page * plat->mtd->writesize,
-+				 plat->datbuf, plat->oobbuf);
-+
-+		sector = plat->idblock[idx].offset + counter;
-+
-+		memcpy(&buf[(sector / 4) * 2048], plat->datbuf, 2048);
-+
-+		p_spare = (u32 *)&plat->oobbuf[(ecc->steps - 1) * NFC_SYS_DATA_SIZE];
-+
-+		spare0 = *p_spare;
-+		if (spare0 == -1)
-+			break;
-+
-+		counter += 4;
-+	}
-+}
-+
-+void rockmtd_write_block(struct rockmtd_dev *plat, u32 idx, u8 *buf)
-+{
-+	ulong off = plat->idblock[idx].blk * plat->mtd->erasesize;
-+	struct nand_chip *chip = mtd_to_nand(plat->mtd);
-+	struct nand_ecc_ctrl *ecc = &chip->ecc;
-+	int counter = 0;
-+	u32 *p_spare;
-+	int sector;
-+	int page;
-+	int j, w, r;
-+
-+	rockmtd_erase(plat->mtd, off);
-+
-+	memset(plat->datbuf, 0xff, plat->mtd->writesize);
-+	memcpy(plat->datbuf, buf, 2048);
-+	memset(plat->oobbuf, 0xff, plat->mtd->oobsize);
-+
-+	rockmtd_write_oob(plat->mtd, off,
-+			  plat->datbuf, plat->oobbuf);
-+
-+	while (counter < plat->idblock[idx].boot_size) {
-+		sector = plat->idblock[idx].offset + counter;
-+
-+		memset(plat->datbuf, 0xff, plat->mtd->writesize);
-+		memcpy(plat->datbuf, &buf[(sector / 4) * 2048], 2048);
-+		memset(plat->oobbuf, 0xff, plat->mtd->oobsize);
-+
-+		p_spare = (u32 *)&plat->oobbuf[(ecc->steps - 1) * NFC_SYS_DATA_SIZE];
-+
-+		*p_spare = (plat->page_table[sector / 4 + 1] - 1) * 4;
-+
-+		page = plat->page_table[sector / 4];
-+
-+		rockmtd_write_oob(plat->mtd,
-+				  off + page * plat->mtd->writesize,
-+				  plat->datbuf, plat->oobbuf);
-+
-+		counter += 4;
-+	}
-+
-+	memset(plat->check, 0xff, 512 * 512);
-+	rockmtd_read_block(plat, idx, plat->check);
-+
-+	for (j = 0; j < 2048; j++) {
-+		w = *(buf + j);
-+		r = *(plat->check + j);
-+
-+		if (r != w)
-+			goto dumpblock;
-+	}
-+
-+	for (j = 0; j < (plat->idblock[idx].boot_size * 512); j++) {
-+		w = *(buf + plat->idblock[idx].offset * 512 + j);
-+		r = *(plat->check + plat->idblock[idx].offset * 512  + j);
-+
-+		if (r != w)
-+			goto dumpblock;
-+	}
-+
-+	debug("write OK\n");
-+	return;
-+
-+dumpblock:
-+	debug("write and check error:%x r=%x w=%x\n", j, r, w);
-+
-+	plat->idblock[idx].offset = 0;
-+	plat->idblock[idx].boot_size = 0;
-+
-+	memset(plat->datbuf, 0xff, plat->mtd->writesize);
-+	memset(plat->datbuf, 0, 2048);
-+	memset(plat->oobbuf, 0xff, plat->mtd->oobsize);
-+
-+	rockmtd_write_oob(plat->mtd, off, plat->datbuf, plat->oobbuf);
-+}
-+
-+ulong rockmtd_bread(struct udevice *udev, lbaint_t start,
-+		    lbaint_t blkcnt, void *dst)
-+{
-+	struct blk_desc *block_dev = dev_get_uclass_plat(udev);
-+	struct udevice *parent_dev = dev_get_parent(udev);
-+	struct rockmtd_dev *plat = dev_get_plat(parent_dev);
-+	char *buf = dst;
-+	int i;
-+
-+	if (blkcnt == 0)
-+		return 0;
-+
-+	if (start > (block_dev->lba - 1) ||
-+	    (start + blkcnt) > block_dev->lba)
-+		return 0;
-+
-+	memset(dst, 0xff, blkcnt * block_dev->blksz);
-+
-+	for (i = start; i < (start + blkcnt); i++) {
-+		if (i == 0)  {
-+			debug("mbr     : %d\n", i);
-+
-+			memcpy(&buf[(i - start) * block_dev->blksz],
-+			       plat->mbr, sizeof(legacy_mbr));
-+		} else if (i == 1) {
-+			debug("gpt_h   : %d\n", i);
-+
-+			memcpy(&buf[(i - start) * block_dev->blksz],
-+			       plat->gpt_h, sizeof(gpt_header));
-+		} else if (i == (block_dev->lba - 1)) {
-+			debug("gpt_h2  : %d\n", i);
-+
-+			memcpy(&buf[(i - start) * block_dev->blksz],
-+			       plat->gpt_h2, sizeof(gpt_header));
-+		} else if (i == 2 || i == (block_dev->lba - 33)) {
-+			debug("gpt_e   : %d\n", i);
-+
-+			memcpy(&buf[(i - start) * block_dev->blksz],
-+			       plat->gpt_e, sizeof(gpt_entry));
-+		} else if (i >= 64 && i < (block_dev->lba - 33)) {
-+			debug("idb rd  : %d\n", i);
-+
-+			memcpy(&buf[(i - start) * block_dev->blksz],
-+			       &plat->idb[(i - 64) * block_dev->blksz], block_dev->blksz);
-+		}
-+	}
-+
-+	return blkcnt;
-+}
-+
-+ulong rockmtd_bwrite(struct udevice *udev, lbaint_t start,
-+		     lbaint_t blkcnt, const void *src)
-+{
-+	struct blk_desc *block_dev = dev_get_uclass_plat(udev);
-+	struct udevice *parent_dev = dev_get_parent(udev);
-+	struct rockmtd_dev *plat = dev_get_plat(parent_dev);
-+	int i, j;
-+
-+	if (blkcnt == 0)
-+		return 0;
-+
-+	if (start > (block_dev->lba - 1) ||
-+	    (start + blkcnt) > block_dev->lba)
-+		return 0;
-+
-+	for (i = start; i < (start + blkcnt); i++) {
-+		debug("idb wr  : %d\n", i);
-+
-+		if (i >= 64 && i < (block_dev->lba - 33)) {
-+			if (i == 64) {
-+				debug("first block\n");
-+
-+				plat->idb_need_write_back = 1;
-+				memset(plat->idb, 0xff, 512 * 512);
-+			}
-+
-+			if (plat->idb_need_write_back) {
-+				char *buf = (char *)src;
-+
-+				memcpy(&plat->idb[(i - 64) * block_dev->blksz],
-+				       &buf[(i - start) * block_dev->blksz],
-+				       block_dev->blksz);
-+
-+				if (i == 64) {
-+					memcpy(plat->check, plat->idb, 512);
-+
-+					if (*(u32 *)plat->check == RK_TAG) {
-+						struct sector0 *sec0 = (struct sector0 *)plat->check;
-+
-+						rockmtd_rc4(plat->check, 512);
-+
-+						plat->offset = sec0->boot_code1_offset;
-+						plat->boot_size = sec0->flash_boot_size;
-+
-+						if (plat->offset + plat->boot_size > 512) {
-+							debug("max size limit\n");
-+							plat->idb_need_write_back = 0;
-+						}
-+					} else {
-+						debug("no IDB block found\n");
-+						plat->idb_need_write_back = 0;
-+					}
-+				}
-+
-+				if (i == (64 + plat->offset + plat->boot_size - 1)) {
-+					debug("last block\n");
-+
-+					plat->idb_need_write_back = 0;
-+
-+					if (!plat->blk_counter) {
-+						plat->idblock[0].blk = 2;
-+						plat->idblock[1].blk = 3;
-+						plat->idblock[2].blk = 4;
-+						plat->idblock[3].blk = 5;
-+						plat->idblock[4].blk = 6;
-+						plat->blk_counter = 5;
-+					}
-+
-+					for (j = 0; j < plat->blk_counter; j++) {
-+						if (plat->idblock[j].blk < plat->boot_blks) {
-+							plat->idblock[j].offset = plat->offset;
-+							plat->idblock[j].boot_size = plat->boot_size;
-+							rockmtd_write_block(plat, j, plat->idb);
-+						}
-+					}
-+
-+					rockmtd_scan_block(plat);
-+
-+					memset(plat->idb, 0xff, 512 * 512);
-+
-+					if (plat->blk_counter)
-+						rockmtd_read_block(plat, 0, plat->idb);
-+				}
-+			}
-+		} else if (plat->idb_need_write_back) {
-+			plat->idb_need_write_back = 0;
-+
-+			memset(plat->idb, 0xff, 512 * 512);
-+
-+			if (plat->blk_counter)
-+				rockmtd_read_block(plat, 0, plat->idb);
-+		}
-+	}
-+
-+	return blkcnt;
-+}
-+
-+static const struct blk_ops rockmtd_blk_ops = {
-+	.read	= rockmtd_bread,
-+	.write	= rockmtd_bwrite,
-+};
-+
-+U_BOOT_DRIVER(rockmtd_blk) = {
-+	.name		= "rockmtd_blk",
-+	.id		= UCLASS_BLK,
-+	.ops		= &rockmtd_blk_ops,
-+};
-+
-+void rockmtd_build_page_table(struct rockmtd_dev *plat, u32 lsb_mode)
-+{
-+	u32 counter;
-+	u32 counter2;
-+
-+	switch (lsb_mode) {
-+	case 0:
-+		counter = 0;
-+		do {
-+			u16 val = counter;
-+
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	case 1:
-+		counter = 0;
-+		do {
-+			u16 val = counter;
-+
-+			if (counter > 3) {
-+				u16 offset;
-+
-+				if (counter & 1)
-+					offset = 3;
-+				else
-+					offset = 2;
-+				val = 2 * counter - offset;
-+			}
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	case 2:
-+		counter = 0;
-+		do {
-+			u16 val = counter;
-+
-+			if (counter > 1)
-+				val = 2 * counter - 1;
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	case 3:
-+		counter = 0;
-+		do {
-+			u16 val = counter;
-+
-+			if (counter > 5) {
-+				u16 offset;
-+
-+				if (counter & 1)
-+					offset = 5;
-+				else
-+					offset = 4;
-+				val = 2 * counter - offset;
-+			}
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	case 4:
-+		counter = 8;
-+		plat->page_table[0] = 0;
-+		plat->page_table[1] = 1;
-+		plat->page_table[2] = 2;
-+		plat->page_table[3] = 3;
-+		plat->page_table[4] = 4;
-+		plat->page_table[5] = 5;
-+		plat->page_table[6] = 7;
-+		plat->page_table[7] = 8;
-+		do {
-+			u32 offset;
-+			u32 val;
-+
-+			if (counter & 1)
-+				offset = 7;
-+			else
-+				offset = 6;
-+			val = 2 * counter - offset;
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	case 5:
-+		counter = 0;
-+		counter2 = 16;
-+		do {
-+			u16 val = counter;
-+
-+			plat->page_table[counter++] = val;
-+		} while (counter != 16);
-+		do {
-+			plat->page_table[counter++] = counter2;
-+			counter2 = counter2 + 2;
-+		} while (counter != 512);
-+		break;
-+	case 6:
-+		counter = 0;
-+		counter2 = 0;
-+		do {
-+			u16 val = counter;
-+
-+			if (counter > 5) {
-+				u16 offset;
-+
-+				if (counter & 1)
-+					offset = 12;
-+				else
-+					offset = 10;
-+				val = counter2 - offset;
-+			}
-+			plat->page_table[counter++] = val;
-+			counter2 = counter2 + 3;
-+		} while (counter != 512);
-+		break;
-+	case 9:
-+		counter = 3;
-+		counter2 = 3;
-+		plat->page_table[0] = 0;
-+		plat->page_table[1] = 1;
-+		plat->page_table[2] = 2;
-+		do {
-+			plat->page_table[counter++] = counter2;
-+			counter2 = counter2 + 2;
-+		} while (counter != 512);
-+		break;
-+	case 10:
-+		counter = 0;
-+		counter2 = 63;
-+		do {
-+			u16 val = counter;
-+
-+			plat->page_table[counter++] = val;
-+		} while (counter != 63);
-+		do {
-+			plat->page_table[counter++] = counter2;
-+			counter2 = counter2 + 2;
-+		} while (counter != 512);
-+		break;
-+	case 11:
-+		counter = 0;
-+		do {
-+			u16 val = counter;
-+
-+			plat->page_table[counter++] = val;
-+		} while (counter != 8);
-+		do {
-+			u32 offset;
-+			u32 val;
-+
-+			if (counter & 1)
-+				offset = 7;
-+			else
-+				offset = 6;
-+			val = 2 * counter - offset;
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	case 12:
-+		counter = 4;
-+		plat->page_table[0] = 0;
-+		plat->page_table[1] = 1;
-+		plat->page_table[2] = 2;
-+		plat->page_table[3] = 3;
-+		do {
-+			u32 val = counter - 1 + (counter >> 1);
-+
-+			plat->page_table[counter++] = val;
-+		} while (counter != 512);
-+		break;
-+	}
-+}
-+
-+static inline u32 efi_crc32(const void *buf, u32 len)
-+{
-+	return crc32(0, buf, len);
-+}
-+
-+int rockmtd_init_plat(struct udevice *dev)
-+{
-+	static const efi_guid_t partition_basic_data_guid = PARTITION_BASIC_DATA_GUID;
-+	struct rockmtd_dev *plat = dev_get_plat(dev);
-+	size_t efiname_len, dosname_len;
-+	uchar name[] = "loader1";
-+	u32 calc_crc32;
-+	int k;
-+
-+	if (!plat)
-+		debug("no plat ptr!\n");
-+
-+	gen_rand_uuid_str(plat->uuid_disk_str, UUID_STR_FORMAT_GUID);
-+	gen_rand_uuid_str(plat->uuid_part_str, UUID_STR_FORMAT_GUID);
-+
-+	debug("uuid_part_str          : %s\n", plat->uuid_part_str);
-+	debug("uuid_disk_str          : %s\n", plat->uuid_disk_str);
-+
-+	plat->idb = malloc_cache_aligned(512 * 512);
-+
-+	if (!plat->idb) {
-+		debug("idb malloc failed\n");
-+		return -ENOMEM;
-+	}
-+
-+	plat->check = malloc_cache_aligned(512 * 512);
-+
-+	if (!plat->check) {
-+		debug("check malloc failed\n");
-+		free(plat->idb);
-+		return -ENOMEM;
-+	}
-+
-+	plat->mbr = malloc(sizeof(legacy_mbr));
-+
-+	if (!plat->mbr) {
-+		debug("mbr malloc failed\n");
-+		free(plat->idb);
-+		free(plat->check);
-+		return -ENOMEM;
-+	}
-+
-+	plat->gpt_e = malloc(sizeof(gpt_entry));
-+
-+	if (!plat->gpt_e) {
-+		debug("gpt_e malloc failed\n");
-+		free(plat->idb);
-+		free(plat->check);
-+		free(plat->mbr);
-+		return -ENOMEM;
-+	}
-+
-+	plat->gpt_h = malloc(sizeof(gpt_header));
-+
-+	if (!plat->gpt_h) {
-+		debug("gpt_h malloc failed\n");
-+		free(plat->idb);
-+		free(plat->check);
-+		free(plat->mbr);
-+		free(plat->gpt_e);
-+		return -ENOMEM;
-+	}
-+
-+	plat->gpt_h2 = malloc(sizeof(gpt_header));
-+
-+	if (!plat->gpt_h2) {
-+		debug("gpt_h2 malloc failed\n");
-+		free(plat->idb);
-+		free(plat->check);
-+		free(plat->mbr);
-+		free(plat->gpt_e);
-+		free(plat->gpt_h);
-+		return -ENOMEM;
-+	}
-+
-+	/* Init idb */
-+	memset(plat->idb, 0xff, 512 * 512);
-+
-+	/* Init mbr */
-+	memset((char *)plat->mbr, 0, sizeof(legacy_mbr));
-+
-+	plat->mbr->signature = MSDOS_MBR_SIGNATURE;
-+	plat->mbr->partition_record[0].sys_ind = EFI_PMBR_OSTYPE_EFI_GPT;
-+	plat->mbr->partition_record[0].start_sect = 1;
-+	plat->mbr->partition_record[0].nr_sects = LBA - 1;
-+
-+	/* Init gpt_e */
-+	memset(plat->gpt_e, 0, sizeof(gpt_entry));
-+
-+	plat->gpt_e->starting_lba = cpu_to_le64(64);
-+	plat->gpt_e->ending_lba = cpu_to_le64(LBA - 34);
-+
-+	debug("starting_lba           : %llu\n", le64_to_cpu(plat->gpt_e->starting_lba));
-+	debug("ending_lba             : %llu\n", le64_to_cpu(plat->gpt_e->ending_lba));
-+
-+	memcpy(plat->gpt_e->partition_type_guid.b, &partition_basic_data_guid, 16);
-+
-+	uuid_str_to_bin(plat->uuid_part_str, plat->gpt_e->unique_partition_guid.b,
-+			UUID_STR_FORMAT_GUID);
-+
-+	efiname_len = sizeof(plat->gpt_e->partition_name) / sizeof(efi_char16_t);
-+	dosname_len = sizeof(name);
-+
-+	for (k = 0; k < min(dosname_len, efiname_len); k++)
-+		plat->gpt_e->partition_name[k] = (efi_char16_t)(name[k]);
-+
-+	/* Init gpt_h */
-+	memset(plat->gpt_h, 0, sizeof(gpt_header));
-+
-+	plat->gpt_h->signature = cpu_to_le64(GPT_HEADER_SIGNATURE_UBOOT);
-+	plat->gpt_h->revision = cpu_to_le32(GPT_HEADER_REVISION_V1);
-+	plat->gpt_h->header_size = cpu_to_le32(sizeof(gpt_header));
-+	plat->gpt_h->first_usable_lba = cpu_to_le64(64);
-+	plat->gpt_h->last_usable_lba = cpu_to_le64(LBA - 34);
-+	plat->gpt_h->num_partition_entries = cpu_to_le32(1);
-+	plat->gpt_h->sizeof_partition_entry = cpu_to_le32(sizeof(gpt_entry));
-+
-+	uuid_str_to_bin(plat->uuid_disk_str, plat->gpt_h->disk_guid.b,
-+			UUID_STR_FORMAT_GUID);
-+
-+	plat->gpt_h->partition_entry_array_crc32 = 0;
-+	calc_crc32 = efi_crc32((const unsigned char *)plat->gpt_e,
-+			       le32_to_cpu(plat->gpt_h->num_partition_entries) *
-+			       le32_to_cpu(plat->gpt_h->sizeof_partition_entry));
-+	plat->gpt_h->partition_entry_array_crc32 = cpu_to_le32(calc_crc32);
-+
-+	debug("partition crc32        : 0x%08x\n", calc_crc32);
-+
-+	plat->gpt_h->my_lba = cpu_to_le64(1);
-+	plat->gpt_h->partition_entry_lba = cpu_to_le64(2);
-+	plat->gpt_h->alternate_lba = cpu_to_le64(LBA - 1);
-+
-+	plat->gpt_h->header_crc32 = 0;
-+	calc_crc32 = efi_crc32((const unsigned char *)plat->gpt_h,
-+			       le32_to_cpu(plat->gpt_h->header_size));
-+	plat->gpt_h->header_crc32 = cpu_to_le32(calc_crc32);
-+
-+	debug("header h1 crc32        : 0x%08x\n", calc_crc32);
-+
-+	/* Init gpt_h2 */
-+	memcpy(plat->gpt_h2, plat->gpt_h, sizeof(gpt_header));
-+
-+	plat->gpt_h2->my_lba = cpu_to_le64(LBA - 1);
-+	plat->gpt_h2->partition_entry_lba =
-+		cpu_to_le64(le64_to_cpu(plat->gpt_h2->last_usable_lba) + 1);
-+	plat->gpt_h2->alternate_lba = cpu_to_le64(1);
-+
-+	plat->gpt_h2->header_crc32 = 0;
-+	calc_crc32 = efi_crc32((const unsigned char *)plat->gpt_h2,
-+			       le32_to_cpu(plat->gpt_h2->header_size));
-+	plat->gpt_h2->header_crc32 = cpu_to_le32(calc_crc32);
-+
-+	debug("header h2 crc32        : 0x%08x\n", calc_crc32);
-+
-+	part_init(plat->desc);
-+
-+	return 0;
-+}
-+
-+static int rockmtd_sb_bind(struct udevice *dev)
-+{
-+	struct rockmtd_dev *plat = dev_get_plat(dev);
-+	struct udevice *bdev;
-+	struct blk_desc *desc;
-+	int ret;
-+
-+	ret = blk_create_devicef(dev, "rockmtd_blk", "blk", UCLASS_RKMTD,
-+				 -1, 512, 0, &bdev);
-+	if (ret)
-+		return log_msg_ret("blk", ret);
-+
-+	desc = dev_get_uclass_plat(bdev);
-+	desc->lba = LBA;
-+	sprintf(desc->vendor, "0x%.4x", 0x2207);
-+	memcpy(desc->product, "ROCKMTD", sizeof("ROCKMTD"));
-+	memcpy(desc->revision, "V1.00", sizeof("V1.00"));
-+	plat->desc = desc;
-+
-+	return 0;
-+}
-+
-+static inline struct rk_nfc_nand_chip *rk_nfc_to_rknand(struct nand_chip *chip)
-+{
-+	return container_of(chip, struct rk_nfc_nand_chip, chip);
-+}
-+
-+static int rockmtd_sb_attach_mtd(struct udevice *dev)
-+{
-+	struct rockmtd_dev *plat = dev_get_plat(dev);
-+	struct rk_nfc_nand_chip *rknand;
-+	struct nand_chip *chip;
-+	struct mtd_info *mtd;
-+	struct udevice *blk;
-+	int ret;
-+	u8 id[6];
-+	int i, j;
-+
-+	/* Sanity check that rockmtd_sb_bind() has been used */
-+	ret = blk_find_from_parent(dev, &blk);
-+	if (ret)
-+		return ret;
-+
-+	mtd = get_nand_dev_by_index(0);
-+	if (!mtd)
-+		return -ENOSYS;
-+
-+	chip = mtd_to_nand(mtd);
-+	rknand = rk_nfc_to_rknand(chip);
-+	plat->boot_blks = rknand->boot_blks;
-+	plat->mtd = mtd;
-+
-+	if (chip->select_chip)
-+		chip->select_chip(mtd, 0);
-+
-+	nand_readid_op(chip, 0, id, 6);
-+
-+	if (chip->select_chip)
-+		chip->select_chip(mtd, -1);
-+
-+	for (i = 0; i < ARRAY_SIZE(nand_para_tbl); i++) {
-+		plat->info = (struct nand_para_info *)&nand_para_tbl[i];
-+		for (j = 0; j < plat->info->id_bytes; j++) {
-+			if (plat->info->nand_id[j] != id[j])
-+				break;
-+			if (j == plat->info->id_bytes - 1)
-+				goto valid;
-+		}
-+	}
-+
-+	debug("no nand_para_info found\n");
-+	return -ENODEV;
-+valid:
-+	debug("FLASH ID :");
-+
-+	for (j = 0; j < plat->info->id_bytes; j++)
-+		debug(" %x", id[j]);
-+
-+	debug("\n");
-+
-+	rockmtd_build_page_table(plat, plat->info->lsb_mode);
-+
-+	plat->datbuf = malloc(mtd->writesize);
-+	if (!plat->datbuf) {
-+		debug("No memory for page buffer\n");
-+		return -ENOMEM;
-+	}
-+
-+	plat->oobbuf = malloc(mtd->oobsize);
-+	if (!plat->oobbuf) {
-+		debug("No memory for page buffer\n");
-+		free(plat->datbuf);
-+		return -ENOMEM;
-+	}
-+
-+	debug("erasesize     %8d\n", mtd->erasesize);
-+	debug("writesize     %8d\n", mtd->writesize);
-+	debug("oobsize       %8d\n", mtd->oobsize);
-+	debug("boot_blks     %8d\n", rknand->boot_blks);
-+	debug("lsb_mode      %8d\n", plat->info->lsb_mode);
-+
-+	ret = rockmtd_init_plat(dev);
-+	if (ret) {
-+		debug("rockmtd_init_plat failed\n");
-+		free(plat->datbuf);
-+		free(plat->oobbuf);
-+		return -ENOENT;
-+	}
-+
-+	rockmtd_scan_block(plat);
-+
-+	memset(plat->idb, 0xff, 512 * 512);
-+
-+	if (plat->blk_counter)
-+		rockmtd_read_block(plat, 0, plat->idb);
-+
-+	return 0;
-+}
-+
-+int rockmtd_sb_detach_mtd(struct udevice *dev)
-+{
-+	struct rockmtd_dev *plat = dev_get_plat(dev);
-+	int ret;
-+
-+	free(plat->idb);
-+	free(plat->check);
-+	free(plat->mbr);
-+	free(plat->gpt_e);
-+	free(plat->gpt_h);
-+	free(plat->gpt_h2);
-+	free(plat->datbuf);
-+	free(plat->oobbuf);
-+
-+	ret = device_remove(dev, DM_REMOVE_NORMAL);
-+	if (ret)
-+		return log_msg_ret("rem", ret);
-+
-+	ret = device_chld_unbind(dev, NULL);
-+	if (ret)
-+		return log_msg_ret("unb", ret);
-+
-+	return 0;
-+}
-+
-+struct rockmtd_ops {
-+	int (*attach_mtd)(struct udevice *dev);
-+	int (*detach_mtd)(struct udevice *dev);
-+};
-+
-+#define rockmtd_get_ops(dev)        ((struct rockmtd_ops *)(dev)->driver->ops)
-+
-+struct rockmtd_ops rockmtd_sb_ops = {
-+	.attach_mtd	= rockmtd_sb_attach_mtd,
-+	.detach_mtd	= rockmtd_sb_detach_mtd,
-+};
-+
-+U_BOOT_DRIVER(rockmtd_drv) = {
-+	.name		= "rockmtd_drv",
-+	.id		= UCLASS_RKMTD,
-+	.ops		= &rockmtd_sb_ops,
-+	.bind		= rockmtd_sb_bind,
-+	.plat_auto	= sizeof(struct rockmtd_dev),
-+};
-+
-+struct rockmtd_priv {
-+	struct udevice *cur_dev;
-+};
-+
-+struct udevice *rockmtd_get_cur_dev(void)
-+{
-+	struct uclass *uc = uclass_find(UCLASS_RKMTD);
-+
-+	if (uc) {
-+		struct rockmtd_priv *priv = uclass_get_priv(uc);
-+
-+		return priv->cur_dev;
-+	}
-+
-+	return NULL;
-+}
-+
-+void rockmtd_set_cur_dev(struct udevice *dev)
-+{
-+	struct uclass *uc = uclass_find(UCLASS_RKMTD);
-+
-+	if (uc) {
-+		struct rockmtd_priv *priv = uclass_get_priv(uc);
-+
-+		priv->cur_dev = dev;
-+	}
-+}
-+
-+struct udevice *rockmtd_find_by_label(const char *label)
-+{
-+	struct udevice *dev;
-+	struct uclass *uc;
-+
-+	uclass_id_foreach_dev(UCLASS_RKMTD, dev, uc) {
-+		struct rockmtd_dev *plat = dev_get_plat(dev);
-+
-+		if (plat->label && !strcmp(label, plat->label))
-+			return dev;
-+	}
-+
-+	return NULL;
-+}
-+
-+int rockmtd_attach_mtd(struct udevice *dev)
-+{
-+	struct rockmtd_ops *ops = rockmtd_get_ops(dev);
-+
-+	if (!ops->attach_mtd)
-+		return -ENOSYS;
-+
-+	return ops->attach_mtd(dev);
-+}
-+
-+int rockmtd_detach_mtd(struct udevice *dev)
-+{
-+	struct rockmtd_ops *ops = rockmtd_get_ops(dev);
-+
-+	if (!ops->detach_mtd)
-+		return -ENOSYS;
-+
-+	if (dev == rockmtd_get_cur_dev())
-+		rockmtd_set_cur_dev(NULL);
-+
-+	return ops->detach_mtd(dev);
-+}
-+
-+int rockmtd_create_device(const char *label, struct udevice **devp)
-+{
-+	char dev_name[30], *str, *label_new;
-+	struct rockmtd_dev *plat;
-+	struct udevice *dev, *blk;
-+	int ret;
-+
-+	/* unbind any existing device with this label */
-+	dev = rockmtd_find_by_label(label);
-+	if (dev) {
-+		ret = rockmtd_detach_mtd(dev);
-+		if (ret)
-+			return log_msg_ret("det", ret);
-+
-+		ret = device_unbind(dev);
-+		if (ret)
-+			return log_msg_ret("unb", ret);
-+	}
-+
-+	snprintf(dev_name, sizeof(dev_name), "rockmtd-%s", label);
-+	str = strdup(dev_name);
-+	if (!str)
-+		return -ENOMEM;
-+
-+	label_new = strdup(label);
-+	if (!label_new) {
-+		ret = -ENOMEM;
-+		goto no_label;
-+	}
-+
-+	ret = device_bind_driver(dm_root(), "rockmtd_drv", str, &dev);
-+	if (ret)
-+		goto no_dev;
-+
-+	device_set_name_alloced(dev);
-+
-+	if (!blk_find_from_parent(dev, &blk)) {
-+		struct blk_desc *desc = dev_get_uclass_plat(blk);
-+
-+		desc->removable = true;
-+	}
-+
-+	plat = dev_get_plat(dev);
-+	plat->label = label_new;
-+	*devp = dev;
-+
-+	return 0;
-+
-+no_dev:
-+	free(label_new);
-+no_label:
-+	free(str);
-+
-+	return ret;
-+}
-+
-+int rockmtd_create_attach_mtd(const char *label, struct udevice **devp)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = rockmtd_create_device(label, &dev);
-+	if (ret)
-+		return log_msg_ret("cre", ret);
-+
-+	ret = rockmtd_attach_mtd(dev);
-+	if (ret) {
-+		device_unbind(dev);
-+		return log_msg_ret("att", ret);
-+	}
-+	*devp = dev;
-+
-+	return 0;
-+}
-+
-+UCLASS_DRIVER(rockmtd) = {
-+	.name		= "rockmtd",
-+	.id		= UCLASS_RKMTD,
-+	.post_bind	= dm_scan_fdt_dev,
-+	.priv_auto	= sizeof(struct rockmtd_priv),
-+};
-+
-+static int do_rockmtd_bind(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	struct udevice *dev;
-+	const char *label;
-+	int ret;
-+
-+	argc--;
-+	argv++;
-+
-+	if (argc < 1)
-+		return CMD_RET_USAGE;
-+
-+	if (argc > 1)
-+		return CMD_RET_USAGE;
-+
-+	label = argv[0];
-+	ret = rockmtd_create_attach_mtd(label, &dev);
-+	if (ret) {
-+		printf("Cannot create device / bind mtd\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return 0;
-+}
-+
-+static struct udevice *parse_rockmtd_label(const char *label)
-+{
-+	struct udevice *dev;
-+
-+	dev = rockmtd_find_by_label(label);
-+	if (!dev) {
-+		int devnum;
-+		char *ep;
-+
-+		devnum = hextoul(label, &ep);
-+		if (*ep ||
-+		    uclass_find_device_by_seq(UCLASS_RKMTD, devnum, &dev)) {
-+			printf("No such device '%s'\n", label);
-+			return NULL;
-+		}
-+	}
-+
-+	return dev;
-+}
-+
-+static int do_rockmtd_unbind(struct cmd_tbl *cmdtp, int flag, int argc,
-+			     char *const argv[])
-+{
-+	struct udevice *dev;
-+	const char *label;
-+	int ret;
-+
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	label = argv[1];
-+	dev = parse_rockmtd_label(label);
-+	if (!dev)
-+		return CMD_RET_FAILURE;
-+
-+	ret = rockmtd_detach_mtd(dev);
-+	if (ret) {
-+		printf("Cannot detach mtd\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	ret = device_unbind(dev);
-+	if (ret) {
-+		printf("Cannot unbind device '%s'\n", dev->name);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return 0;
-+}
-+
-+static void show_rockmtd_dev(struct udevice *dev)
-+{
-+	struct rockmtd_dev *plat = dev_get_plat(dev);
-+	struct blk_desc *desc;
-+	struct udevice *blk;
-+	int ret;
-+
-+	printf("%3d ", dev_seq(dev));
-+
-+	ret = blk_get_from_parent(dev, &blk);
-+	if (ret)
-+		return;
-+
-+	desc = dev_get_uclass_plat(blk);
-+	printf("%12lu %-15s\n", (unsigned long)desc->lba, plat->label);
-+}
-+
-+static int do_rockmtd_info(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	struct udevice *dev;
-+
-+	if (argc < 1)
-+		return CMD_RET_USAGE;
-+
-+	dev = NULL;
-+	if (argc >= 2) {
-+		dev = parse_rockmtd_label(argv[1]);
-+		if (!dev)
-+			return CMD_RET_FAILURE;
-+	}
-+
-+	printf("%3s %12s %-15s\n", "dev", "blocks", "label");
-+	if (dev) {
-+		show_rockmtd_dev(dev);
-+	} else {
-+		struct uclass *uc;
-+
-+		uclass_id_foreach_dev(UCLASS_RKMTD, dev, uc)
-+			show_rockmtd_dev(dev);
-+	}
-+
-+	return 0;
-+}
-+
-+static int do_rockmtd_dev(struct cmd_tbl *cmdtp, int flag, int argc,
-+			  char *const argv[])
-+{
-+	struct udevice *dev;
-+	const char *label;
-+
-+	if (argc < 1 || argc > 3)
-+		return CMD_RET_USAGE;
-+
-+	if (argc == 1) {
-+		struct rockmtd_dev *plat;
-+
-+		dev = rockmtd_get_cur_dev();
-+		if (!dev) {
-+			printf("No current rockmtd device\n");
-+			return CMD_RET_FAILURE;
-+		}
-+		plat = dev_get_plat(dev);
-+		printf("Current rockmtd device: %d: %s\n", dev_seq(dev),
-+		       plat->label);
-+		return 0;
-+	}
-+
-+	label = argv[1];
-+	dev = parse_rockmtd_label(argv[1]);
-+	if (!dev)
-+		return CMD_RET_FAILURE;
-+
-+	rockmtd_set_cur_dev(dev);
-+
-+	return 0;
-+}
-+
-+static struct cmd_tbl cmd_rockmtd_sub[] = {
-+	U_BOOT_CMD_MKENT(bind, 4, 0, do_rockmtd_bind, "", ""),
-+	U_BOOT_CMD_MKENT(unbind, 4, 0, do_rockmtd_unbind, "", ""),
-+	U_BOOT_CMD_MKENT(info, 3, 0, do_rockmtd_info, "", ""),
-+	U_BOOT_CMD_MKENT(dev, 0, 1, do_rockmtd_dev, "", ""),
-+};
-+
-+static int do_rockmtd(struct cmd_tbl *cmdtp, int flag, int argc,
-+		      char *const argv[])
-+{
-+	struct cmd_tbl *c;
-+
-+	argc--;
-+	argv++;
-+
-+	c = find_cmd_tbl(argv[0], cmd_rockmtd_sub, ARRAY_SIZE(cmd_rockmtd_sub));
-+
-+	if (c)
-+		return c->cmd(cmdtp, flag, argc, argv);
-+	else
-+		return CMD_RET_USAGE;
-+}
-+
-+U_BOOT_CMD(
-+	rockmtd, 8, 1, do_rockmtd,
-+	"Rockchip MTD sub-system",
-+	"bind <label>      - bind ROCKMTD device\n"
-+	"rockmtd unbind <label>    - unbind ROCKMTD device\n"
-+	"rockmtd info [<label>]    - show all available ROCKMTD devices\n"
-+	"rockmtd dev [<label>]     - show or set current ROCKMTD device\n"
-+);
---
-2.30.2
+Thierry
 
+--HLWpqPx4XZYkemr3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTnWzIACgkQ3SOs138+
+s6HxlxAAlr3Efg2yVMKNaVlfCwr8Hy4GmLEWVome8st6dJWaA8nO4TAMIMY4qdMq
+T5QxhKu8Nxr5Tpyd3w0TMKIuBB+goih2c7Dy5rv9b6LlBwBhxwo//MyXtvwi/LHp
+1nI/gLuBlYYwizFf6t44rKfP1ln+x1Z2vUv4hPfCkwd3nTShMwCg7jvFOBQtx4rJ
+yqOb3uYAkvIhK1Dj1lw1n5cXqg1WCLTRVR8k/wr1MUJPfPJjtyzbH1drfww7NPzl
+0yXmcY7NT9MIo/rpSLGNKxtXVyOcgFlq/lSD5lxvrxAZ5lySs0p5V/I0I1+RRrmF
+0jLJK10UeZHLLjtY+TEfYzYcGxq5CJezW3AyZrlg+mtTBfek2gZbM6jIyLPdwBdn
+cQcnGYQtuu1+muV5MADxXTxZ6klR55ASnHzClYE9IrOGw27gxbj9A1tlDuPJl7BX
+Hz7Y81s00BXvrBX8HYDZyzBFm5o+lXsA3uj4UvSbDYXLewsA78gZfldGDboguG87
+JIFL2jA4g2sVOqpiYMSLdiQHYAE5VViZGTCulq+Exof60wF1F8XdQr+e1RVj99XE
+mjKWWmeGZVnkS0a9iziTUZyLFGrA+4st7oM6dj+hTULPMeqFB4FUZ2wya8JHFnpe
++TXftPOS0NerPqp3jXiwLwJ7/daNPvAQdPBfQKI/3ICgUiLHnjs=
+=JKTQ
+-----END PGP SIGNATURE-----
+
+--HLWpqPx4XZYkemr3--
