@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FF6C3DA66
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 01:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8FFFC3DA66
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 02:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 905518651E;
-	Thu, 24 Aug 2023 03:18:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 13B2E8652A;
+	Thu, 24 Aug 2023 04:11:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XUo2QMen";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YrUWHD+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5CE88651B; Thu, 24 Aug 2023 03:18:29 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 768338652D; Thu, 24 Aug 2023 04:11:26 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECFC98640E
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 03:18:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6849864FA
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:11:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-34bbb4b580eso19645365ab.0
- for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 18:18:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692839905; x=1693444705;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xCobZR7odq9uGbIETy6jMbiBLMb1hOIjCjPwxyh/+GA=;
- b=XUo2QMen6zkKKv2qlAqKpp4a04tG2Jz3qSNzFZ2Qvo99vpv0sdWb/h5Fq5BvhvtZ3E
- Yt4UBOii9kmQCexgxJBJwdp4acgXD1YQIhfUzJw9zD2AoaCVQcQrDPROTfgT8ftWpBIq
- XLkc4vDkVKp288EK1o86Phev3cqUa3jtsIuC4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692839905; x=1693444705;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xCobZR7odq9uGbIETy6jMbiBLMb1hOIjCjPwxyh/+GA=;
- b=aiNWZPHITGyMmnjJ6Y4KVves61H7oY3+KNcff0aHozKHLn296Chx72RLqTEFGbpglu
- S+uSyWB7XVY2W9NqhzrpfAHTZir2jmaVUm/q12T+6TTs4dOkmoquUQ4unicaSiRiv5FE
- 19+CEF1MgUJP1HOH4ril1FigbuRmFSbKRxgqrFTAH+mT3IymNea3YGMH3qRC8E1+ZOc1
- +Z2uvm95VpqDWo7yptyMjJ0YuwzKRjLs1k2Vd9ngUdia4pKD3RiCQTiA06E/3XECm5mF
- j8CNMnEAukuPivfFbFMJiv0SNC4DxXQymyjFFlblXoI438C8WTdKnGrHz+9zKQB7wY+m
- PwWQ==
-X-Gm-Message-State: AOJu0YzJ7L97+SRsrLUB418RsuRGYXHbK/RCEw2S2+2/ELvbmLMmT6gM
- XwbsB+spRe2VkdpTshxsRcOLgxH4dV+LjMJH2Dk=
-X-Google-Smtp-Source: AGHT+IFHzmSRhyBwv1UJ2B1Ov78C3fEaDWRXR3SlJ2+RfuMgtZWxL94/nMdb0O9UkLlUQSIEZWlmsg==
-X-Received: by 2002:a92:c5c9:0:b0:348:8b42:47d with SMTP id
- s9-20020a92c5c9000000b003488b42047dmr3872024ilt.28.1692839905566; 
- Wed, 23 Aug 2023 18:18:25 -0700 (PDT)
-Received: from localhost.localdomain (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- g10-20020a0566380c4a00b0042b3bf0baacsm4053793jal.138.2023.08.23.18.18.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Aug 2023 18:18:25 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH 2/2] Revert "binman: Add a temporary hack for duplicate
- phandles"
-Date: Wed, 23 Aug 2023 19:18:02 -0600
-Message-ID: <20230824011804.1501058-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
-In-Reply-To: <20230824011804.1501058-1-sjg@chromium.org>
-References: <20230824011804.1501058-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1692843078; x=1693447878; i=xypron.glpk@gmx.de;
+ bh=AxHDkWsYZVVi3k87npgtIgvhCphqtL6k74s8NIr6aAw=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
+ b=YrUWHD+heMqXVX0jqGnn90S4f5I8CDAXQesVDfwhFNmAXzgI7+t2QxhH4CLIgtIO1p+z2eq
+ gszXJkwTzRLyKd9ceVdK3IGtri2/vOkA09y2PFGYu0uam4YasLq5YzGrYIebxl7Pdw94iWjHd
+ UadCuD4RJ6VrwLyVFWg3p2pdiNrVOFB04USfgr1txKM19Xx/va2faDArXtg0YfwTUORek2HmW
+ gyaknDbgI6MOX5a3ii2QbRsv4JIbYU/h3bnQi9FdVkiJVLuCnhjztc+IGErPgEcQC/URsWNuG
+ wXQCC/RqoTNQR6zZLvV2rL4NP8d5gRWu4NiOrN7A/aAOHMRr+hOg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([62.143.244.162]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYNNo-1qCT000t2Q-00VQQL; Thu, 24
+ Aug 2023 04:11:18 +0200
+Date: Thu, 24 Aug 2023 04:11:16 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+CC: Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 7/8] spl: x86: Avoid starting up PCI automatically in SPL
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAPnjgZ3i9EDe3CyU64WRpE+oR0-xS2iffQR=2hVBZRzA2KkC6Q@mail.gmail.com>
+References: <20230823184746.842091-1-sjg@chromium.org>
+ <20230823184746.842091-8-sjg@chromium.org>
+ <6f1ea3e9-7284-22d3-e2ee-071523b7dbac@gmx.de>
+ <CAPnjgZ3i9EDe3CyU64WRpE+oR0-xS2iffQR=2hVBZRzA2KkC6Q@mail.gmail.com>
+Message-ID: <2058DF5A-619E-4B47-A80E-4B5C56FC3573@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:NmIzdMu5fuRcmzTIlcyI2UmARsDwrSIxflS7eI0AuIr4puhAAzp
+ l7YqMHLQZsLKCNX3IVIfIo0gXvH/BAjND1A3v+cjYw7ws/WsUwA/Jn0OXsjmCjXm41Py6ZO
+ UqOSQHyvIAOs+CjGvHXUUZwFKv8lPI/NFlkEJgNiKtk5sjk+p3aeb1GR5jXJ7D9C85D0+zu
+ ykg0OPRC14pm7bLb3lplA==
+UI-OutboundReport: notjunk:1;M01:P0:+ZEPn0bLe7M=;x4MnnIIq7N9N9rb1po1InLd7K5P
+ tr1WHBaD76v4WLiXA5SaMb2ZMjkcOD24hQY2zV+sWJcNdZiGbv/QesfA4kxbq8ua4dOy26fZJ
+ auu41vYzRlCw3YBhTVBA5cZY1wfLPGMnk+DWXnPlnv++dw+lcuGGxhtc2ULtKQJkQN/DKm/rp
+ e+xfHSITzQ5ItagAdrRXEO+EbLQJAJLYnf+8ZE9Q1/bmFei29ZAQhGUS0zQF//Y/LT1lzUSJg
+ QBzwgcUpYwRbKLabkY7rdgVxfwGAD6ORVWLyM2MN4Y9vUDgZhVjeQho/V+oy0lKQlaaYM6Hpy
+ hc2zVVj79w/e+lhjw509Sf7fMTsnZsUkunZOSudxcKevu0P3sMwuy070ftz2LGz2MRb/14HkL
+ ZOlo3XjRKb4dE5/+A7usFnGq+2np4ddFacI3/zStQAv6axJ9mTK+DCOUmTIjfXauXV0U8HAnt
+ SDzouAgd26rbjWdeJ6ddkWGxhy+JEPmvj4U/ZXBpHt8s1xqH6fqsJRxymJBA/eTew11ofxJaR
+ HnNeYxmmhmY8lLyx2QqG+n2u9DSk2VX1wxN2iCnB2ubMx6xmF/wZ1gCvlyGb1D9EsD1+ZiVxk
+ WqWQd+QcLFVsm+YMvob1SG9v9zy9MhEwiC8fsdGirYfKydaboM6eLrhT5svhy39LdYdn+n9QB
+ Je1RHRTek9zj10cPqMa7XvU604k3Dwsc7qIrTwV9qIsHYUYT/GKHmrf/hV5571IjMuQuaoAzX
+ YC+S2RENQzwaEt32CuNVwdQSO+uapYyNVUGmkXfjsI9qTpvZZdd5WmMoYNxgtOQpz/KMIXUiC
+ fNAB4YlGtAmdyiMHTFnyCBgCyIhRvQSTUyhxgBrwe+LEb9DjtPkFT+8sY7FdJRiL3L/VjRCxa
+ gPuwH/k/wuSBje4NfOOLExA+2ASmAXRspq9kRccIKZtj2yn87IlVtQ4vC1esKouC3Fl5zoXXD
+ lausA4I9J/lCbZdRrb3IEzwFmJw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,109 +94,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The affected boards have been fixed, so drop this hack.
 
-This reverts commit 288ae53cb73605500b7fc01e5919753c878466be.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Am 24=2E August 2023 01:57:55 MESZ schrieb Simon Glass <sjg@chromium=2Eorg=
+>:
+>Hi Heinrich,
+>
+>On Wed, 23 Aug 2023 at 14:19, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede=
+> wrote:
+>>
+>> On 8/23/23 20:47, Simon Glass wrote:
+>> > For x86 platforms, PCI is core to their operation and is managed in
+>> > arch-specific code=2E Each platform has its own way of doing this=2E =
+For TPL
+>> > and some SPL implementations, the full driver model PCI is not used=
+=2E
+>> >
+>> > A recent change enabled full PCI in TPL/SPL for all boards=2E This br=
+eaks
+>> > some x86 boards, so adjust it to skip that for x86=2E
+>>
+>> Could you, please, give some more detail?
+>>
+>> * Which boards are broken?
+>
+>For example, chromebook_samus and chromebook_samus_tpl
+>
+>> * Don't these boards have a pci_init() function?
+>
+>Yes, the same one you are calling=2E
+>
+>> * In what way does calling pci_init() lead to a failure?
+>
+>It probes and sets up PCI devices and uses a lot of pre-alloc RAM=2E
+>
+>>
+>> It would be preferable to have all architectures and boards use the sam=
+e
+>> high level API=2E Excluding x86 here looks more like a (necessary) hack
+>> than like a target state=2E
+>
+>Fair enough, but on x86 we access PCI long before driver model is up=2E
+>Generally we don't fully enumerate it in SPL as it is expensive=2E It is
+>also pointless, since U-Boot proper does it again later=2E
+>
+>Regards,
+>Simon
+>
 
- Makefile                |  6 ------
- tools/binman/cmdline.py |  2 --
- tools/binman/control.py |  5 -----
- tools/dtoc/fdt.py       | 12 ++++--------
- 4 files changed, 4 insertions(+), 21 deletions(-)
+Acked-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
 
-diff --git a/Makefile b/Makefile
-index 9b90204bfe6b..033daf1695c0 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1328,11 +1328,6 @@ u-boot.ldr:	u-boot
- # Use 'make BINMAN_VERBOSE=3' to set vebosity level
- default_dt := $(if $(DEVICE_TREE),$(DEVICE_TREE),$(CONFIG_DEFAULT_DEVICE_TREE))
- 
--# Temporary workaround for Venice boards
--ifneq ($(CONFIG_TARGET_IMX8MM_VENICE),$(CONFIG_TARGET_IMX8MN_VENICE),$(CONFIG_TARGET_IMX8MP_VENICE),)
--ignore_dups := --ignore-dup-phandles
--endif
--
- quiet_cmd_binman = BINMAN  $@
- cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		$(foreach f,$(BINMAN_TOOLPATHS),--toolpath $(f)) \
-@@ -1354,7 +1349,6 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		-a spl-dtb=$(CONFIG_SPL_OF_REAL) \
- 		-a tpl-dtb=$(CONFIG_TPL_OF_REAL) \
- 		-a pre-load-key-path=${PRE_LOAD_KEY_PATH} \
--		$(ignore_dups) \
- 		$(BINMAN_$(@F))
- 
- OBJCOPYFLAGS_u-boot.ldr.hex := -I binary -O ihex
-diff --git a/tools/binman/cmdline.py b/tools/binman/cmdline.py
-index 39c61c2c0322..9632ec115e5d 100644
---- a/tools/binman/cmdline.py
-+++ b/tools/binman/cmdline.py
-@@ -126,8 +126,6 @@ controlled by a description in the board device tree.'''
-             help='Comma-separated list of bintools to consider missing (for testing)')
-     build_parser.add_argument('-i', '--image', type=str, action='append',
-             help='Image filename to build (if not specified, build all)')
--    build_parser.add_argument('--ignore-dup-phandles', action='store_true',
--            help='Temporary option to ignore duplicate phandles')
-     build_parser.add_argument('-I', '--indir', action='append',
-             help='Add a path to the list of directories to use for input files')
-     build_parser.add_argument('-m', '--map', action='store_true',
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index 459489558125..c6d3205b8c25 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -22,7 +22,6 @@ from binman import bintool
- from binman import cbfs_util
- from binman import elf
- from binman import entry
--from dtoc import fdt
- from dtoc import fdt_util
- from u_boot_pylib import command
- from u_boot_pylib import tools
-@@ -817,10 +816,6 @@ def Binman(args):
-         cbfs_util.VERBOSE = args.verbosity > 2
-         state.use_fake_dtb = args.fake_dtb
- 
--        # Temporary hack
--        if args.ignore_dup_phandles: # pragma: no cover
--            fdt.IGNORE_DUP_PHANDLES = True
--
-         # Normally we replace the 'u-boot' etype with 'u-boot-expanded', etc.
-         # When running tests this can be disabled using this flag. When not
-         # updating the FDT in image, it is not needed by binman, but we use it
-diff --git a/tools/dtoc/fdt.py b/tools/dtoc/fdt.py
-index 0b20d52f3136..5963925146a5 100644
---- a/tools/dtoc/fdt.py
-+++ b/tools/dtoc/fdt.py
-@@ -15,9 +15,6 @@ from libfdt import QUIET_NOTFOUND
- from u_boot_pylib import tools
- from u_boot_pylib import tout
- 
--# Temporary hack
--IGNORE_DUP_PHANDLES = False
--
- # This deals with a device tree, presenting it as an assortment of Node and
- # Prop objects, representing nodes and properties, respectively. This file
- # contains the base classes and defines the high-level API. You can use
-@@ -342,11 +339,10 @@ class Node:
-         if phandle:
-             dup = self._fdt.phandle_to_node.get(phandle)
-             if dup:
--                if not IGNORE_DUP_PHANDLES:
--                    raise ValueError(
--                        f'Duplicate phandle {phandle} in nodes {dup.path} and {self.path}')
--            else:
--                self._fdt.phandle_to_node[phandle] = self
-+                raise ValueError(
-+                    f'Duplicate phandle {phandle} in nodes {dup.path} and {self.path}')
-+
-+            self._fdt.phandle_to_node[phandle] = self
- 
-         offset = fdt_obj.first_subnode(self.Offset(), QUIET_NOTFOUND)
-         while offset >= 0:
--- 
-2.42.0.rc1.204.g551eb34607-goog
-
+>
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>> >
+>> > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>> > ---
+>> >
+>> >   common/spl/spl=2Ec | 2 +-
+>> >   1 file changed, 1 insertion(+), 1 deletion(-)
+>> >
+>> > diff --git a/common/spl/spl=2Ec b/common/spl/spl=2Ec
+>> > index 0062f3f45d9=2E=2E13d7b1a742f 100644
+>> > --- a/common/spl/spl=2Ec
+>> > +++ b/common/spl/spl=2Ec
+>> > @@ -800,7 +800,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+>> >           IS_ENABLED(CONFIG_SPL_ATF))
+>> >               dram_init_banksize();
+>> >
+>> > -     if (CONFIG_IS_ENABLED(PCI)) {
+>> > +     if (CONFIG_IS_ENABLED(PCI) && !IS_ENABLED(CONFIG_X86)) {
+>> >               ret =3D pci_init();
+>> >               if (ret)
+>> >                       puts(SPL_TPL_PROMPT "Cannot initialize PCI\n");
+>>
