@@ -4,43 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D285C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 11:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B629C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 11:24:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3A8086597;
-	Thu, 24 Aug 2023 13:20:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 83EBF8658B;
+	Thu, 24 Aug 2023 13:24:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1692876271;
+	bh=s+R5iZdsiUjNGd1dV5ZF5lujF4tgxamHGFhc6MSwh94=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FYXUXPbGqTi3585flB7rDsiTIwCbjB/9t5xgcW0+mWPJbcSxF8iZ+lk4JDP7CYx3c
+	 h7wu4DYfpvAel0q+ASacRPWiF4FVDgRTSrVtrrI6wPabJSMIl6KbfgWSj5UYUQXCmD
+	 iAeV31OveTey22yhgmq/J3WWnPt6eUhY1vbcvROgfaUAGSmsIIqhkl0RIjHXi1spl9
+	 7tAciUbDRvIux6SDzRFDG1hK2hktE3TikWCkZtaSVOgXX5B9L43QcND025nCfOglJy
+	 ECWAnaiUSFnYl5vxKrI7g/mUsE2baKXwgzpNKk2dC8RV89GjC8kM0RlEcnbM0Y9CTW
+	 ytCkrsnu/TmLA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1FF286597; Thu, 24 Aug 2023 13:20:29 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id C7B648659C; Thu, 24 Aug 2023 13:24:29 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D05A8658B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 13:20:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38D788657A
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 13:24:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb.int.toradex.com (31-10-206-125.static.upc.ch
- [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id 6051420395;
- Thu, 24 Aug 2023 13:20:26 +0200 (CEST)
-Date: Thu, 24 Aug 2023 13:20:25 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: u-boot@lists.denx.de, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
- Bryan Brattlof <bb@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: Re: [PATCH v1 2/2] board: verdin-am62: fix check for minimum memory
- size
-Message-ID: <ZOc8+bnS1RRqB5yo@francesco-nb.int.toradex.com>
-References: <20230824080850.1755724-1-ghidoliemanuele@gmail.com>
- <20230824080850.1755724-3-ghidoliemanuele@gmail.com>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4RWghm3T7Pz9sTM;
+ Thu, 24 Aug 2023 13:24:24 +0200 (CEST)
+Message-ID: <65aced18-8116-9501-07ad-13281a3498b6@denx.de>
+Date: Thu, 24 Aug 2023 13:24:22 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230824080850.1755724-3-ghidoliemanuele@gmail.com>
+Subject: Re: [PATCH v2] spl: watchdog: introduce SPL_HW_WATCHDOG
+Content-Language: en-US
+To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Claudiu Beznea
+ <claudiu.beznea@microchip.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Paul Barker <paul.barker@sancloud.com>, Roger Quadros <rogerq@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+References: <20230823120021.50146-1-oleksandr.suvorov@foundries.io>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20230823120021.50146-1-oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,16 +80,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Aug 24, 2023 at 10:08:50AM +0200, Emanuele Ghidoli wrote:
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> 
-> verdin am62 SKUs comes in multiple memory configuration, check that
-> the detected memory is at least 512MB since we have some
-> reserved memory just before this threshold and therefore
-> the module cannot work with less memory.
-> 
-> Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
-> Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+On 8/23/23 14:00, Oleksandr Suvorov wrote:
+> Add SPL_HW_WATCHDOG Kconfig symbol which can be used to enable
+> non-WDT hardware watchdog in SPL.
 
-Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Hmmm, my hope / plan was to completely drop HW_WATCHDOG at some point.
+It's some old relict and if I don't miss something completely, it's more
+a "normal" watchdog that needs to get triggered very early in most
+cases (PowerPC etc). So adding some more *_HW_WATCHDOG stuff does not
+sound appealing to me.
 
+Could you perhaps investigate a bit, if your HW_WATCHDOG use case can
+be converted to the "normal" watchdog support instead?
+
+Thanks,
+Stefan
+
+> Co-developed-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+> ---
+> 
+> Changes in v2:
+> - remove mistakenly included unwanted changes
+> 
+>   common/spl/Kconfig        | 1 -
+>   drivers/Makefile          | 1 +
+>   drivers/sysreset/Kconfig  | 6 ++++++
+>   drivers/sysreset/Makefile | 2 +-
+>   drivers/watchdog/Kconfig  | 4 ++++
+>   5 files changed, 12 insertions(+), 2 deletions(-)
+> 
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index c5dd476db58..07d9dac29bd 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1351,7 +1351,6 @@ config SPL_THERMAL
+>   
+>   config SPL_WATCHDOG
+>   	bool "Support watchdog drivers"
+> -	imply SPL_WDT if !HW_WATCHDOG
+>   	help
+>   	  Enable support for watchdog drivers in SPL. A watchdog is
+>   	  typically a hardware peripheral which can reset the system when it
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index efc2a4afb24..2eb8ec0a894 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -62,6 +62,7 @@ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
+>   obj-$(CONFIG_SPL_USB_GADGET) += usb/common/
+>   obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/udc/
+>   obj-$(CONFIG_SPL_WATCHDOG) += watchdog/
+> +obj-$(CONFIG_SPL_HW_WATCHDOG) += watchdog/
+>   obj-$(CONFIG_SPL_USB_HOST) += usb/host/
+>   obj-$(CONFIG_SPL_SATA) += ata/ scsi/
+>   obj-$(CONFIG_SPL_LEGACY_BLOCK) += block/
+> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+> index bdbe2a95364..0d21673e402 100644
+> --- a/drivers/sysreset/Kconfig
+> +++ b/drivers/sysreset/Kconfig
+> @@ -157,6 +157,12 @@ config SYSRESET_WATCHDOG
+>   	help
+>   	  Reboot support for generic watchdog reset.
+>   
+> +config SPL_SYSRESET_WATCHDOG
+> +	bool "Enable support for watchdog reboot driver in SPL mode"
+> +	select SPL_WDT
+> +	help
+> +	  Reboot support for generic watchdog reset in SPL mode.
+> +
+>   config SYSRESET_WATCHDOG_AUTO
+>   	bool "Automatically register first watchdog with sysreset"
+>   	depends on SYSRESET_WATCHDOG
+> diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
+> index 40c876764af..e5a7fc07a81 100644
+> --- a/drivers/sysreset/Makefile
+> +++ b/drivers/sysreset/Makefile
+> @@ -18,7 +18,7 @@ obj-$(CONFIG_SYSRESET_SOCFPGA) += sysreset_socfpga.o
+>   obj-$(CONFIG_SYSRESET_SOCFPGA_SOC64) += sysreset_socfpga_soc64.o
+>   obj-$(CONFIG_SYSRESET_TI_SCI) += sysreset-ti-sci.o
+>   obj-$(CONFIG_SYSRESET_SYSCON) += sysreset_syscon.o
+> -obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
+> +obj-$(CONFIG_$(SPL_)SYSRESET_WATCHDOG) += sysreset_watchdog.o
+>   obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
+>   obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
+>   obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 07fc4940e91..d696a04fc18 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -39,9 +39,13 @@ config WATCHDOG_TIMEOUT_MSECS
+>   config HW_WATCHDOG
+>   	bool
+>   
+> +config SPL_HW_WATCHDOG
+> +	bool
+> +
+>   config IMX_WATCHDOG
+>   	bool "Enable Watchdog Timer support for IMX and LSCH2 of NXP"
+>   	select HW_WATCHDOG if !WDT
+> +	select SPL_HW_WATCHDOG if !SPL_WDT
+>   	help
+>   	  Select this to enable the IMX and LSCH2 of Layerscape watchdog
+>   	  driver.
+
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
