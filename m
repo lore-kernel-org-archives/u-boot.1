@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D51FC27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA913C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 062608687F;
+	by phobos.denx.de (Postfix) with ESMTP id 4FFAA869D3;
 	Thu, 24 Aug 2023 21:56:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NWj4huDR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rkv9FUAy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C4088687F; Thu, 24 Aug 2023 21:56:07 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 1A819869D2; Thu, 24 Aug 2023 21:56:09 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A4CE8683C
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E93586940
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-792717ef3c9so6140539f.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:04 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-7927182dfe3so7913139f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692906962; x=1693511762;
+ d=chromium.org; s=google; t=1692906964; x=1693511764;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ABTgwjH33zNVbu3zk74Ezfde3bYxIayNRmAicX+NU9Y=;
- b=NWj4huDRVCNLoeu2pE4dnsurMhDd3QWs2FqllOUIsMBfRVi0vCg8k1P6lyXuD3OtJp
- t3K2w+DO9us3rAtskG56IDNkCZfFh6iDEKcMUkxytdycoPEqB1z+Hd2NxBgtnh+HE1Ca
- /nxj6Pb2LW+0SXNliB+C/Xl7Zgr74MtEfyRRE=
+ bh=M+5sgyqJ0tx/MdmsiQ52P1HXjY2EJ+Jh7MwCN58wAOg=;
+ b=Rkv9FUAyv+zzWkZyonO9ajjkRpPIPyUz9cSJ1iLXA+aXgC39QuSBvaJhZsZ2HeECg9
+ mxKYV4T1l74IUtCuMy9qF0Yk3PcbyVAoL7zHh7YSujl6+t8OoeyIWZZ2EgRRvpmaQzJA
+ ri+y3pEVkFjVMwkKbX14+uBIeVcqKLY4T8cQ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692906962; x=1693511762;
+ d=1e100.net; s=20221208; t=1692906964; x=1693511764;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ABTgwjH33zNVbu3zk74Ezfde3bYxIayNRmAicX+NU9Y=;
- b=LxDHCitjjNivJ7I1D03GMg0IKs1tbb80Ef2VROSNDQ/kqFfM4WLE+kZ3DgZ/OEoSuX
- /e4zNA3Z/e02FeFaukW1MewxVs/BaB6E/g5h2R6KPS1cLgIT45Df1aeI1vfGGbWDDqYE
- Lc/Gj2KFR728uZje/x3NYUyrnev+kyspMHx7NPKs1Xmhu4/TFMGQborhPLDx5ZXdO+93
- xjRhod+2rXeopkJuehVcHpnj+KVbDoiKVV+iaVJphFAaQMRSL9nglgyRB7E5aO8CiURV
- 77+W83hPHF8ytmUXJlbzuNgM/4mSZArd6lMyhbIXQhzQyHIgTot4vRpeX0Zg16F8qMcX
- 4gpg==
-X-Gm-Message-State: AOJu0YzR3gvNHV0c5CNJ0+D7sOZJhk862ZWVfdcdOzyVVdwUcMW5Wlxi
- 4AwnbGnIdL5jHONH0HB2FKeODlFYL11Yf3TuM6w=
-X-Google-Smtp-Source: AGHT+IF12E0zw0T42w/6zCETCF2U95v1EbbN88oaDMI5AnUEgj6tUi5v25FLHlbUiX0afe7JJ8jveg==
-X-Received: by 2002:a05:6602:19d9:b0:790:a010:4c42 with SMTP id
- ba25-20020a05660219d900b00790a0104c42mr7759432iob.13.1692906962517; 
- Thu, 24 Aug 2023 12:56:02 -0700 (PDT)
+ bh=M+5sgyqJ0tx/MdmsiQ52P1HXjY2EJ+Jh7MwCN58wAOg=;
+ b=OmXz1qOqyIFitDVETT7A1y9AlK8s6CZk/3NMJ863JI520R6xQde/1SW4mg5AySWI5J
+ l7tqT25m0+zUMS4UZbMfAgsZIHt4WjFwJN3maJqHsi5DuV6PvzD+rHW+LUIW4R3S0Pi2
+ qvYFXOUcijlwkQcPS28Oe790eTb5lHlZNVQ8mQVjVvsfQfHRMQJdbUCHf/lO0aN9STi+
+ 4POVbq7HEWfNQoui/n6Cmgqlw/nYNmaZRS0MKeeIl6ghUX7obNIK5dSohF5CRASMfPRd
+ 8SFNxMFdWSy3gfoslIh0Uz43TNpZorPnSHDHCT+I9bFHDMRYIkwWNV0DzYhBBMSaKaHR
+ FsjQ==
+X-Gm-Message-State: AOJu0Yyz2mt+CK4O/TBae9Q6VLnSW9Ea023p8HKtv7n8YI3795PV567b
+ ugyfwp+fOjpLAndRWCW0r1Ex6xTEux+KMCS0mmg=
+X-Google-Smtp-Source: AGHT+IFLUrPT4oDcc1XZRPj2HbjeFcngnF+Yaa6WsfqUuPXqntaiNka4aQEfJ1AtFwTckW4d0aPtkw==
+X-Received: by 2002:a05:6602:2579:b0:792:6cb2:e92c with SMTP id
+ dj25-20020a056602257900b007926cb2e92cmr3709157iob.3.1692906964769; 
+ Thu, 24 Aug 2023 12:56:04 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.02
+ b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:56:02 -0700 (PDT)
+ Thu, 24 Aug 2023 12:56:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 03/23] part: dos: Use desc instead of dev_desc
-Date: Thu, 24 Aug 2023 13:55:26 -0600
-Message-ID: <20230824195553.1685996-4-sjg@chromium.org>
+Subject: [PATCH v2 06/23] part: nac: Use desc instead of dev_desc
+Date: Thu, 24 Aug 2023 13:55:29 -0600
+Message-ID: <20230824195553.1685996-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
 References: <20230824195553.1685996-1-sjg@chromium.org>
@@ -88,207 +88,178 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 The dev_ prefix is a hangover from the pre-driver model days. The device
-is now a different thing, with driver model. Update the dos code to
+is now a different thing, with driver model. Update the mac code to
 just use 'desc'.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Rebase to -next
+(no changes since v1)
 
- disk/part_dos.c | 63 ++++++++++++++++++++++++-------------------------
- 1 file changed, 31 insertions(+), 32 deletions(-)
+ disk/part_mac.c | 59 ++++++++++++++++++++++---------------------------
+ 1 file changed, 27 insertions(+), 32 deletions(-)
 
-diff --git a/disk/part_dos.c b/disk/part_dos.c
-index 1b81297d967f..cc050ca8c49f 100644
---- a/disk/part_dos.c
-+++ b/disk/part_dos.c
-@@ -98,27 +98,26 @@ static int test_block_type(unsigned char *buffer)
- 	return -1;
- }
- 
--static int part_test_dos(struct blk_desc *dev_desc)
-+static int part_test_dos(struct blk_desc *desc)
- {
- #ifndef CONFIG_SPL_BUILD
- 	ALLOC_CACHE_ALIGN_BUFFER(legacy_mbr, mbr,
--			DIV_ROUND_UP(dev_desc->blksz, sizeof(legacy_mbr)));
-+			DIV_ROUND_UP(desc->blksz, sizeof(legacy_mbr)));
- 
--	if (blk_dread(dev_desc, 0, 1, (ulong *)mbr) != 1)
-+	if (blk_dread(desc, 0, 1, (ulong *)mbr) != 1)
- 		return -1;
- 
- 	if (test_block_type((unsigned char *)mbr) != DOS_MBR)
- 		return -1;
- 
--	if (dev_desc->sig_type == SIG_TYPE_NONE &&
--	    mbr->unique_mbr_signature != 0) {
--		dev_desc->sig_type = SIG_TYPE_MBR;
--		dev_desc->mbr_sig = mbr->unique_mbr_signature;
-+	if (desc->sig_type == SIG_TYPE_NONE && mbr->unique_mbr_signature) {
-+		desc->sig_type = SIG_TYPE_MBR;
-+		desc->mbr_sig = mbr->unique_mbr_signature;
- 	}
- #else
--	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
-+	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, desc->blksz);
- 
--	if (blk_dread(dev_desc, 0, 1, (ulong *)buffer) != 1)
-+	if (blk_dread(desc, 0, 1, (ulong *)buffer) != 1)
- 		return -1;
- 
- 	if (test_block_type(buffer) != DOS_MBR)
-@@ -130,12 +129,12 @@ static int part_test_dos(struct blk_desc *dev_desc)
- 
- /*  Print a partition that is relative to its Extended partition table
-  */
--static void print_partition_extended(struct blk_desc *dev_desc,
-+static void print_partition_extended(struct blk_desc *desc,
- 				     lbaint_t ext_part_sector,
- 				     lbaint_t relative,
- 				     int part_num, unsigned int disksig)
- {
--	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
-+	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, desc->blksz);
- 	dos_partition_t *pt;
- 	int i;
- 
-@@ -146,9 +145,9 @@ static void print_partition_extended(struct blk_desc *dev_desc,
- 		return;
-     }
- 
--	if (blk_dread(dev_desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
-+	if (blk_dread(desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
- 		printf ("** Can't read partition table on %d:" LBAFU " **\n",
--			dev_desc->devnum, ext_part_sector);
-+			desc->devnum, ext_part_sector);
- 		return;
- 	}
- 	i=test_block_type(buffer);
-@@ -189,9 +188,9 @@ static void print_partition_extended(struct blk_desc *dev_desc,
- 			lbaint_t lba_start
- 				= get_unaligned_le32 (pt->start4) + relative;
- 
--			print_partition_extended(dev_desc, lba_start,
--				ext_part_sector == 0  ? lba_start : relative,
--				part_num, disksig);
-+			print_partition_extended(desc, lba_start,
-+						 !ext_part_sector ? lba_start :
-+						 relative, part_num, disksig);
- 		}
- 	}
- 
-@@ -201,12 +200,12 @@ static void print_partition_extended(struct blk_desc *dev_desc,
- 
- /*  Print a partition that is relative to its Extended partition table
-  */
--static int part_get_info_extended(struct blk_desc *dev_desc,
-+static int part_get_info_extended(struct blk_desc *desc,
- 				  lbaint_t ext_part_sector, lbaint_t relative,
- 				  int part_num, int which_part,
- 				  struct disk_partition *info, uint disksig)
- {
--	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
-+	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, desc->blksz);
- 	struct disk_partition wdinfo = { 0 };
- 	dos_partition_t *pt;
- 	int i, ret;
-@@ -219,9 +218,9 @@ static int part_get_info_extended(struct blk_desc *dev_desc,
- 		return -1;
-     }
- 
--	if (blk_dread(dev_desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
-+	if (blk_dread(desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
- 		printf ("** Can't read partition table on %d:" LBAFU " **\n",
--			dev_desc->devnum, ext_part_sector);
-+			desc->devnum, ext_part_sector);
- 		return -1;
- 	}
- 	if (buffer[DOS_PART_MAGIC_OFFSET] != 0x55 ||
-@@ -237,7 +236,7 @@ static int part_get_info_extended(struct blk_desc *dev_desc,
- 		disksig = get_unaligned_le32(&buffer[DOS_PART_DISKSIG_OFFSET]);
+diff --git a/disk/part_mac.c b/disk/part_mac.c
+index ae8263f755ae..db5e203be592 100644
+--- a/disk/part_mac.c
++++ b/disk/part_mac.c
+@@ -31,21 +31,20 @@ extern ldiv_t ldiv (long int __numer, long int __denom);
  #endif
  
--	ret = part_get_info_whole_disk(dev_desc, &wdinfo);
-+	ret = part_get_info_whole_disk(desc, &wdinfo);
- 	if (ret)
- 		return ret;
  
-@@ -259,7 +258,7 @@ static int part_get_info_extended(struct blk_desc *dev_desc,
- 			info->start = (lbaint_t)(ext_part_sector +
- 					get_unaligned_le32(pt->start4));
- 			info->size  = (lbaint_t)get_unaligned_le32(pt->size4);
--			part_set_generic_name(dev_desc, part_num,
-+			part_set_generic_name(desc, part_num,
- 					      (char *)info->name);
- 			/* sprintf(info->type, "%d, pt->sys_ind); */
- 			strcpy((char *)info->type, "U-Boot");
-@@ -285,7 +284,7 @@ static int part_get_info_extended(struct blk_desc *dev_desc,
- 			lbaint_t lba_start
- 				= get_unaligned_le32 (pt->start4) + relative;
+-static int part_mac_read_ddb(struct blk_desc *dev_desc,
+-			     mac_driver_desc_t *ddb_p);
+-static int part_mac_read_pdb(struct blk_desc *dev_desc, int part,
++static int part_mac_read_ddb(struct blk_desc *desc, mac_driver_desc_t *ddb_p);
++static int part_mac_read_pdb(struct blk_desc *desc, int part,
+ 			     mac_partition_t *pdb_p);
  
--			return part_get_info_extended(dev_desc, lba_start,
-+			return part_get_info_extended(desc, lba_start,
- 				 ext_part_sector == 0 ? lba_start : relative,
- 				 part_num, which_part, info, disksig);
+ /*
+  * Test for a valid MAC partition
+  */
+-static int part_test_mac(struct blk_desc *dev_desc)
++static int part_test_mac(struct blk_desc *desc)
+ {
+ 	ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+ 	ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+ 	ulong i, n;
+ 
+-	if (part_mac_read_ddb (dev_desc, ddesc)) {
++	if (part_mac_read_ddb(desc, ddesc)) {
+ 		/*
+ 		 * error reading Driver Descriptor Block,
+ 		 * or no valid Signature
+@@ -55,8 +54,8 @@ static int part_test_mac(struct blk_desc *dev_desc)
+ 
+ 	n = 1;	/* assuming at least one partition */
+ 	for (i=1; i<=n; ++i) {
+-		if ((blk_dread(dev_desc, i, 1, (ulong *)mpart) != 1) ||
+-		    (mpart->signature != MAC_PARTITION_MAGIC) ) {
++		if ((blk_dread(desc, i, 1, (ulong *)mpart) != 1) ||
++		    mpart->signature != MAC_PARTITION_MAGIC) {
+ 			return (-1);
  		}
-@@ -296,7 +295,7 @@ static int part_get_info_extended(struct blk_desc *dev_desc,
- 
- 	if (dos_type == DOS_PBR) {
- 		info->start = 0;
--		info->size = dev_desc->lba;
-+		info->size = desc->lba;
- 		if (wdinfo.blksz > DOS_PART_DEFAULT_SECTOR)
- 			info->blksz = wdinfo.blksz;
- 		else
-@@ -312,16 +311,16 @@ static int part_get_info_extended(struct blk_desc *dev_desc,
- 	return -1;
+ 		/* update partition count */
+@@ -65,14 +64,14 @@ static int part_test_mac(struct blk_desc *dev_desc)
+ 	return (0);
  }
  
--static void __maybe_unused part_print_dos(struct blk_desc *dev_desc)
-+static void __maybe_unused part_print_dos(struct blk_desc *desc)
+-static void part_print_mac(struct blk_desc *dev_desc)
++static void part_print_mac(struct blk_desc *desc)
  {
- 	printf("Part\tStart Sector\tNum Sectors\tUUID\t\tType\n");
--	print_partition_extended(dev_desc, 0, 0, 1, 0);
-+	print_partition_extended(desc, 0, 0, 1, 0);
- }
+ 	ulong i, n;
+ 	ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+ 	ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+ 	ldiv_t mb, gb;
  
--static int __maybe_unused part_get_info_dos(struct blk_desc *dev_desc, int part,
--		      struct disk_partition *info)
-+static int __maybe_unused part_get_info_dos(struct blk_desc *desc, int part,
-+					    struct disk_partition *info)
+-	if (part_mac_read_ddb (dev_desc, ddesc)) {
++	if (part_mac_read_ddb(desc, ddesc)) {
+ 		/*
+ 		 * error reading Driver Descriptor Block,
+ 		 * or no valid Signature
+@@ -110,15 +109,15 @@ static void part_print_mac(struct blk_desc *dev_desc)
+ 		char c;
+ 
+ 		printf ("%4ld: ", i);
+-		if (blk_dread(dev_desc, i, 1, (ulong *)mpart) != 1) {
++		if (blk_dread(desc, i, 1, (ulong *)mpart) != 1) {
+ 			printf ("** Can't read Partition Map on %d:%ld **\n",
+-				dev_desc->devnum, i);
++				desc->devnum, i);
+ 			return;
+ 		}
+ 
+ 		if (mpart->signature != MAC_PARTITION_MAGIC) {
+ 			printf("** Bad Signature on %d:%ld - expected 0x%04x, got 0x%04x\n",
+-			       dev_desc->devnum, i, MAC_PARTITION_MAGIC,
++			       desc->devnum, i, MAC_PARTITION_MAGIC,
+ 			       mpart->signature);
+ 			return;
+ 		}
+@@ -154,10 +153,9 @@ static void part_print_mac(struct blk_desc *dev_desc)
+ /*
+  * Read Device Descriptor Block
+  */
+-static int part_mac_read_ddb(struct blk_desc *dev_desc,
+-			     mac_driver_desc_t *ddb_p)
++static int part_mac_read_ddb(struct blk_desc *desc, mac_driver_desc_t *ddb_p)
  {
--	return part_get_info_extended(dev_desc, 0, 0, 1, part, info, 0);
-+	return part_get_info_extended(desc, 0, 0, 1, part, info, 0);
- }
- 
- int is_valid_dos_buf(void *buf)
-@@ -501,20 +500,20 @@ int layout_mbr_partitions(struct disk_partition *p, int count,
- }
- #endif
- 
--int write_mbr_sector(struct blk_desc *dev_desc, void *buf)
-+int write_mbr_sector(struct blk_desc *desc, void *buf)
- {
- 	if (is_valid_dos_buf(buf))
- 		return -1;
- 
- 	/* write MBR */
--	if (blk_dwrite(dev_desc, 0, 1, buf) != 1) {
-+	if (blk_dwrite(desc, 0, 1, buf) != 1) {
- 		printf("%s: failed writing '%s' (1 blks at 0x0)\n",
- 		       __func__, "MBR");
- 		return 1;
+-	if (blk_dread(dev_desc, 0, 1, (ulong *)ddb_p) != 1) {
++	if (blk_dread(desc, 0, 1, (ulong *)ddb_p) != 1) {
+ 		debug("** Can't read Driver Descriptor Block **\n");
+ 		return (-1);
  	}
+@@ -171,7 +169,7 @@ static int part_mac_read_ddb(struct blk_desc *dev_desc,
+ /*
+  * Read Partition Descriptor Block
+  */
+-static int part_mac_read_pdb(struct blk_desc *dev_desc, int part,
++static int part_mac_read_pdb(struct blk_desc *desc, int part,
+ 			     mac_partition_t *pdb_p)
+ {
+ 	int n = 1;
+@@ -182,15 +180,15 @@ static int part_mac_read_pdb(struct blk_desc *dev_desc, int part,
+ 		 * partition 1 first since this is the only way to
+ 		 * know how many partitions we have.
+ 		 */
+-		if (blk_dread(dev_desc, n, 1, (ulong *)pdb_p) != 1) {
+-			printf ("** Can't read Partition Map on %d:%d **\n",
+-				dev_desc->devnum, n);
++		if (blk_dread(desc, n, 1, (ulong *)pdb_p) != 1) {
++			printf("** Can't read Partition Map on %d:%d **\n",
++			       desc->devnum, n);
+ 			return (-1);
+ 		}
  
- 	/* Update the partition table entries*/
--	part_init(dev_desc);
-+	part_init(desc);
+ 		if (pdb_p->signature != MAC_PARTITION_MAGIC) {
+ 			printf("** Bad Signature on %d:%d: expected 0x%04x, got 0x%04x\n",
+-			       dev_desc->devnum, n, MAC_PARTITION_MAGIC,
++			       desc->devnum, n, MAC_PARTITION_MAGIC,
+ 			       pdb_p->signature);
+ 			return (-1);
+ 		}
+@@ -199,10 +197,9 @@ static int part_mac_read_pdb(struct blk_desc *dev_desc, int part,
+ 			return (0);
  
- 	return 0;
+ 		if ((part < 1) || (part > pdb_p->map_count)) {
+-			printf ("** Invalid partition %d:%d [%d:1...%d:%d only]\n",
+-				dev_desc->devnum, part,
+-				dev_desc->devnum,
+-				dev_desc->devnum, pdb_p->map_count);
++			printf("** Invalid partition %d:%d [%d:1...%d:%d only]\n",
++			       desc->devnum, part, desc->devnum, desc->devnum,
++			       pdb_p->map_count);
+ 			return (-1);
+ 		}
+ 
+@@ -213,21 +210,19 @@ static int part_mac_read_pdb(struct blk_desc *dev_desc, int part,
+ 	/* NOTREACHED */
  }
+ 
+-static int part_get_info_mac(struct blk_desc *dev_desc, int part,
+-				  struct disk_partition *info)
++static int part_get_info_mac(struct blk_desc *desc, int part,
++			     struct disk_partition *info)
+ {
+ 	ALLOC_CACHE_ALIGN_BUFFER(mac_driver_desc_t, ddesc, 1);
+ 	ALLOC_CACHE_ALIGN_BUFFER(mac_partition_t, mpart, 1);
+ 
+-	if (part_mac_read_ddb (dev_desc, ddesc)) {
+-		return (-1);
+-	}
++	if (part_mac_read_ddb(desc, ddesc))
++		return -1;
+ 
+ 	info->blksz = ddesc->blk_size;
+ 
+-	if (part_mac_read_pdb (dev_desc, part, mpart)) {
+-		return (-1);
+-	}
++	if (part_mac_read_pdb(desc, part, mpart))
++		return -1;
+ 
+ 	info->start = mpart->start_block;
+ 	info->size  = mpart->block_count;
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
