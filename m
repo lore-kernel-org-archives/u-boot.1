@@ -4,111 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A18D0EE49B6
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 12:51:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69369C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 12:51:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44106864F6;
+	by phobos.denx.de (Postfix) with ESMTP id B42898651B;
 	Thu, 24 Aug 2023 14:51:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="MmuOjqXy";
+	dkim=pass (1024-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="iXPBMZja";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55A2980842; Thu, 24 Aug 2023 10:09:01 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id BCEF786587; Thu, 24 Aug 2023 12:17:54 +0200 (CEST)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on0613.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0d::613])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 557EA86554
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:08:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A8218657A
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:17:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 92644120006;
- Thu, 24 Aug 2023 11:08:57 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 92644120006
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1692864537;
- bh=UKKrxkbBmLToqTkSx3zrLp+HBJB7rIATIPYHrdNsNMs=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=MmuOjqXym5g5M3fusc+aWOXRyccaeZzLaQ6/2UIrItDSG5TjyQCIRf6G62cE8pE3W
- vKwRKv4v9zJdh7y+nbJXZNCSLqvGgKtthWuCzD5xjVPjw8gHlGbQFwpawP0wGpeQ1P
- VyVtvn3pLvtNWGOaMYfSGPzHWYau6ROXQw00Ikd/R8q2IME+DhkkIJVwgZVz8YWyiH
- 9AStMkmhW41x/U53zQlXzcMQioAXRyimJEyhHzJ4rhCCLSlzGA30ruZsZkWoRzxV/6
- Pc8WpdOliv6qFexHDWcaqlUD/FUdIbv0/TKCuz2TwJ/H01Z3sqfFPJ+KsW2i8o+aYM
- 2KnnQDrLDaZ3A==
-Received: from p-i-exch-sc-m02.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 24 Aug 2023 11:08:55 +0300 (MSK)
-Received: from p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Thu, 24 Aug 2023 11:08:48 +0300
-Received: from p-i-exch-sc-m01.sberdevices.ru ([::1]) by
- p-i-exch-sc-m01.sberdevices.ru ([fe80::80e5:bab:4999:4480%7]) with mapi id
- 15.02.1118.030; Thu, 24 Aug 2023 11:08:48 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: Simon Glass <sjg@google.com>
-CC: Alexey Romanov <avromanov@salutedevices.com>, "neil.armstrong@linaro.org"
- <neil.armstrong@linaro.org>, AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- "narmstrong@baylibre.com" <narmstrong@baylibre.com>,
- "u-boot-amlogic@groups.io" <u-boot-amlogic@groups.io>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, kernel <kernel@sberdevices.ru>
-Subject: Re: [PATCH v1 1/2] drivers: firmware: introduce Meson Secure Monitor
- driver
-Thread-Topic: [PATCH v1 1/2] drivers: firmware: introduce Meson Secure Monitor
- driver
-Thread-Index: AQHZr/veBzbM8+x1pke90tnJ07p0Z6+sswYAgAEY2YCAAJTMgIAEH9KAgAC7hoCAAPWegIAAk6mAgAPQ/QCAAsMMgIA5NKwAgACmdACAAN1mgIAATOEAgABjvgCAAm+zAA==
-Date: Thu, 24 Aug 2023 08:08:48 +0000
-Message-ID: <20230824080850.wm6dbiipr3iu5s4n@cab-wsm-0029881.sigma.sbrf.ru>
-References: <CAPnjgZ1aZsFBaX2eBh35CXVExaE90YJHQ98S+2XOWJrJ9pz37w@mail.gmail.com>
- <20230711102459.phpyem2ehlya7osz@cab-wsm-0029881.sigma.sbrf.ru>
- <CAPnjgZ2t2xf05PSgCbQr7MUvJrpQPcRs_Zoux804h4UmTrZRKw@mail.gmail.com>
- <ZLDdaIyXjp9yN5aW@laputa>
- <CAPnjgZ3oQ1qZtWFpezNfV-dZhbCrnqbi1+B=JKb1sfJP6xk-cA@mail.gmail.com>
- <6303961e-3edc-4356-905b-89820a52b227@linaro.org>
- <CAPnjgZ2GA7ktNi9HVJ1Mw=4nuqcQJALVBqHQr1_JtVmkzEVgdw@mail.gmail.com>
- <7a9f5cf0-d7b2-4477-8a56-a3aa7f764e2a@linaro.org>
- <20230822125932.jvem4lsr7crnybmi@cab-wsm-0029881.sigma.sbrf.ru>
- <CAPnjgZ0Zp8Ww9seOkPasaMFVP2PvpKM1mD5oFycDmFjO=eFj3Q@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0Zp8Ww9seOkPasaMFVP2PvpKM1mD5oFycDmFjO=eFj3Q@mail.gmail.com>
-Accept-Language: ru-RU, en-US
+ spf=pass smtp.mailfrom=roman.azarenko@iopsys.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eYcV3wdxSltoUB/5fSbzNarBD3yrb/AkVvBonzW9OpNriM7Q2sm6L7iT7GkrlVFPfGo9Ah/xJ3OspZtOwAzFQ8o2y73eOM0HzC1hBvOcHkhR4OX9E0nXGzbLFFh9FgoXynGtAFpBX5rMOamRb2yfzNG7/LiUYxXVPadI2p7mj09IxrC2FFbFbfevoheUcZ2d47qjvRoZliPVEcv5QRRWVXXvZDSB0v2mj9bZ1/0Tb/Zo91sK85WCvhk3JtBi1u64QoNvnRSxBAXOcS2q/8OfryFErxWT9j3+V5smdRROOUvYf/tgoNAc09E+ewO7p/Wwsvg130sbmONXi8efDvFe8w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0X1JRK2Iubw8Xei1eB1jcADU3RGerqXGnR2uzzHztgU=;
+ b=oIE3FYHeva9sXI4GW/DVs20h9oxCtOwyHpWFhKNYwV9Av0ezNMIdeylpXs6QMoiKECTMw+V6Pwdm9eJinZ6t6Jpxtz9pNmnMooicOaSWii593dIA+eTIzwFuFGI0t1ju2kZgxaQdzTAgAZtsgpTpWN/WE/YPon+VSby2Hi113uBikpNVozdDHVRMWTw17P9sJi69sqe+OcidpScBs2Xkswk1LPurBCQrVQfqxvoR3zNS8B917VE0P0QB5vbIl+fVTo4G3MQrD+912yKJ6WBusiw2W2cwXItpTU6d/czdsGg5+PlvZmaQSPcX7qo8D8SaVWVI1N05koKat3zOvTfKsQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=iopsys.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0X1JRK2Iubw8Xei1eB1jcADU3RGerqXGnR2uzzHztgU=;
+ b=iXPBMZjakt3J/OaOW8lOrmdcz0Rlsr7vJNr598aXB601sMGyv+vB3snN0K8ZUpd92KZpcGZb8WGAT9BqzU+RyboXDQfG5huYJ7BjPj4ExZmKsrCpYcIGEiKQEqB8/n8UHsMZ1w50/58zUT/3RPxNcnxEfMZVMk1x3jl4lnf0fd0=
+Received: from PAVPR08MB9819.eurprd08.prod.outlook.com (2603:10a6:102:31f::20)
+ by PA4PR08MB6176.eurprd08.prod.outlook.com (2603:10a6:102:ea::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.27; Thu, 24 Aug
+ 2023 10:17:50 +0000
+Received: from PAVPR08MB9819.eurprd08.prod.outlook.com
+ ([fe80::5586:29c1:1bd3:dadd]) by PAVPR08MB9819.eurprd08.prod.outlook.com
+ ([fe80::5586:29c1:1bd3:dadd%7]) with mapi id 15.20.6699.026; Thu, 24 Aug 2023
+ 10:17:50 +0000
+From: Roman Azarenko <roman.azarenko@iopsys.eu>
+To: "marex@denx.de" <marex@denx.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: "sjg@chromium.org" <sjg@chromium.org>, "massimo.pegorer@vimar.com"
+ <massimo.pegorer@vimar.com>, "trini@konsulko.com" <trini@konsulko.com>
+Subject: Re: [PATCH] tools: ensure zeroed padding in external FIT images
+Thread-Topic: [PATCH] tools: ensure zeroed padding in external FIT images
+Thread-Index: AQHZ1btubtE4qXbfPkCaw0ot2FXY+q/4LbyAgAEPRIA=
+Date: Thu, 24 Aug 2023 10:17:49 +0000
+Message-ID: <603b051b057bb632fc9213cb0abc7d2887bf2b67.camel@iopsys.eu>
+References: <20230823121417.270511-1-roman.azarenko@iopsys.eu>
+ <40263db2-e42a-4997-ddcc-7a1ea7d44d31@denx.de>
+In-Reply-To: <40263db2-e42a-4997-ddcc-7a1ea7d44d31@denx.de>
+Accept-Language: en-SE, en-GB, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.92]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <659A39FA8552A949B0CBF94E076F661C@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR08MB9819:EE_|PA4PR08MB6176:EE_
+x-ms-office365-filtering-correlation-id: 84424205-c33e-4d80-1d4e-08dba48b5ec4
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: JfrxlhyPTaNRPYVZQ5QnYsrIpAnPuqeyZKJVP8CGPRJxENGjFU8NRwg+ce2YeBVYkfsqkeErolR0QpNGV2pH6Z9Goj617O9zIQxw24a6E1om2X7+nnXCUpyNvu/T/v5Vh+HDHjAwxb+yuN4+5P6Pku0DDlJypeRHaP5DU5Bk+jd6cVZSt13cvowtW9TNZ7dYqOyT1IqLNW5H1HKc/GiY7crycfQyY3PedfbmiE886SUcfyBt33OaYduDTU5BzVPGbr43ymV+NB9EeIQ8y1fOvdFjOxoy49yUYgmyv9GVKy5CjNglylH4QilsjlOuU46c3GglxtC7IatgmuUjxmdzeGhumecpCk54l/JsvVwGZzAWKYOsGRW0O3BTkrALCJN57bIHZAASaJLdgEfljV37VGLiGjSje0phQsALe4rzbxx4+OPJyaqSaY3UnDAtbHkXF0B0pKFxKONnFxiehzUlp9PZ6VvK5axSa/dBJ+YZJuJGtk8EQjQ2vVNAgNA/fcYms8kTy3zBFbWOHsyfiVhbEFP9I+EZLjo//VuPtpYXxpMr+RbBN4axWN80jnprATw1XCVL3FNQd5dHldgo2NIpZFNd9XjUtRcheaX5e/qK4ztUXXMnS3ERvR6pB78BxuRx
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAVPR08MB9819.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(396003)(39850400004)(376002)(136003)(366004)(346002)(1800799009)(186009)(451199024)(2616005)(4326008)(8676002)(8936002)(5660300002)(4744005)(36756003)(44832011)(26005)(71200400001)(38070700005)(38100700002)(122000001)(66946007)(66556008)(76116006)(64756008)(66446008)(66476007)(54906003)(316002)(110136005)(91956017)(478600001)(41300700001)(6512007)(2906002)(6486002)(86362001)(6506007);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RGtEUzRoM2hxeFZiVnZHZ2g2bjFlNElqYTlUSi8wNGQ0aEg3UjIrbmgyVGVT?=
+ =?utf-8?B?SmJOQURKaTJ4a2grZnZIN21VV3Qzd2diOFJIb0RsM0xrQU56NjhaaHo5ZTd1?=
+ =?utf-8?B?aWlMWnJFZERvV2NWQmJXT1ordy82ZGlZdmJaTG1OZUlmZUZ1emZkMWJLSmdS?=
+ =?utf-8?B?RkxkU0hwRnVGNUFhV2xqVDE5Z0ttd2RveEpOdmtmUjJYcWlPdlVub3A2T0ov?=
+ =?utf-8?B?U0c2SnovM095cEwvNmxtdmZ0WHE5TWVtTXhqMzc5bExrbVlHbmFYU2pXNngr?=
+ =?utf-8?B?Rnl0c0daLzAyZExtbWs3aGl6ZHYwYkVIelVXTkd0N3RueG9aUEpRRXc4UlM5?=
+ =?utf-8?B?a3llbDVaVGFJQko3MmlrN1NWcFR2WU9KMlZJQnd0aDU3SHNOd0FoSmdBakt0?=
+ =?utf-8?B?M3RVUmNWSzc2cGtOSkV1NFJoYzU1VnNaS1B3QVRSY1dLcWNzWElGMkgxaGlN?=
+ =?utf-8?B?Mlphem5TSHh0TFI0bnRJQTJZUVlYbUtuVm12WC9HOVF5WFc5K1A5YU1XUUoy?=
+ =?utf-8?B?UFJpWVpDcXRuaG9ScUlPdjJvdzFJb0Nlam02ODUrL21UbUVZTkcvVmRNRVF2?=
+ =?utf-8?B?VnY4T0JtYjdPOVRVVHZlZDk1T0kyZWZYRkwxNnJ3bDVOWWdBTWNxdTViUWVV?=
+ =?utf-8?B?ZjRUalpOMUZSWm9ZdlJDU0ZpZG93UUFnVGpZemxVK0JLWG50MkdGS1AxdTFB?=
+ =?utf-8?B?RzlsVEZtbFI1UUZNUDRSVmpSVHF1eTJMcTdsZjI4ZTV1Z1lMSFdDdWRUUjY4?=
+ =?utf-8?B?NTFrU1JpU3ExRUs2bGxsb1U4UitOMVY1WVZ1aWM4RlRtUWRHOWcxQ2ZLSU51?=
+ =?utf-8?B?TlFUUUpMa1FydWNwejJxRE9BYzZaY0dGNHlJU1RFQ0NheWF0UDFZOE50ckxn?=
+ =?utf-8?B?NEZkdGFDRGhzNHNqVE9DYk81a3IyN2VUMHE5NGR5V2pSYmkyWXc0dTJycm9o?=
+ =?utf-8?B?TmlmYnFac1BPMC90YnRxT0dnL3BQZ2dma3hNLzV3RjVNd3F6WklxeUE5U1JL?=
+ =?utf-8?B?aE1HVnN1WHl1L3lQYlhtNFZlYW8za0QvdWJDdXcveml4dGhBOGJrb0krM3da?=
+ =?utf-8?B?Uis5NkZNKyt2WllWS1dlRTlRSDZDaktzVVFkaHJCbVd4VTIraEdOL3ExUnh5?=
+ =?utf-8?B?T1Y1c3VZV2ZKZXpPdDlyTGpYNC9LZWJJVEMrOFRTWHF5dUxkc2FuaVRoNXFN?=
+ =?utf-8?B?MmhtQlhrMmE0K2grKzBFMnJwTVJHSzNXdjd6REpJL2tSTUhyQ3JtN2pqWTd0?=
+ =?utf-8?B?b0t1ZnJyM0ZLTElWSlRERzk2WUljTkprSWFjbWhYbVRESlJJVlNHU1ZOcTZC?=
+ =?utf-8?B?ZUZDN3RuWnlCRTRhT0hXTTVpRzgreHZXRnAwVU1rY0Y4K0JBcDh1bWVtbnV4?=
+ =?utf-8?B?ZEtKakFKZjY1dm82TGJvdXdLaHhhUFVyem5TWUdTTmVWRFNVanl6TUYxS2NC?=
+ =?utf-8?B?Q0xOUVF3TGxVSThiWXYrcFhQb3NBTm9ZZCtJNGVoanNvdEROWnpyVk55eGVI?=
+ =?utf-8?B?Qnh5eG41Nm5od29aekJGK1hNM0lwSmlDSWNHS0NPb3owcFVxUFhvM1JaMlZT?=
+ =?utf-8?B?Mi8xU1RCWHFsanpYMEtiVXRocURYUVduMmZYbEhLVFRNcGRBcTM1VHZzdVZN?=
+ =?utf-8?B?QkJ4RUdkc1JKcVlOZnFBV2N0bXNoSWFPQmc4cElRb0g2NWpCdWRsc1pFdm5n?=
+ =?utf-8?B?bXl4MGpoTzYvSE51a1dFUVM3NjNHSDFNWW5tWFZHRFM5aTJjUzFEN0ZNdDJv?=
+ =?utf-8?B?Y2pYNEdLQm5nOW41U0Y2RndGaWNmQUZPWUZLcHNVZ0VocXB0TGNuamp0L245?=
+ =?utf-8?B?b1lmRjY0ZTdlN1AyWmtwbWVhMnE3K1oxa01oYS93UStVTDR0a0luNERZaE9x?=
+ =?utf-8?B?ZDJUL3JvRkU5T3BkTUFRaHIrQlhoK3MzenhIajc5M21BQ3JtZlRyMTRlU0dh?=
+ =?utf-8?B?R0ZVQmpnZnBja3Fmck5zQi9HSVhYUHpZOC9EMXFaajQvN3ptclNqQ2hhZ1Zu?=
+ =?utf-8?B?ZGNhNEdiMXNEUzk4OW1wR3JabXI5MlNiVnVHZDJ4N0ZGbWFCWGx2ODkzZDBQ?=
+ =?utf-8?B?aE9pTy9pTk4rSXdFQlpnWmVOYjMvOURSZGRnMFBoUTVKc0Z4bmQvQnQ1Z29u?=
+ =?utf-8?B?MnZwZHRKNnZpcEVka3ZLb3EzQU80cWJCVU02cElNcmFudEluZXhFMGVOZVNP?=
+ =?utf-8?B?SUE9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6EA86BAD578DAA4C91762CCA0E669ECD@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 179418 [Aug 24 2023]
-X-KSMG-AntiSpam-Version: 5.9.59.0
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 527 527
- 5bb611be2ca2baa31d984ccbf4ef4415504fc308, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to},
- p-i-exch-sc-m02.sberdevices.ru:5.0.1,7.1.1;
- cab-wsm-0029881.sigma.sbrf.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/08/24 05:32:00 #21694618
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR08MB9819.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84424205-c33e-4d80-1d4e-08dba48b5ec4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Aug 2023 10:17:49.9786 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 7ff78d65-2de4-40f5-8675-0569e5c7a65d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: O8Elc7XBpOaPXT6lmhZAHOPLDmhZuh5Ii31q7hUDqhf57qmS8eZTSf2TPpk0D5R2a2dtkra1wq/nVtCEjScvSW6PWSPAK/VTYp4HTdABrjY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6176
 X-Mailman-Approved-At: Thu, 24 Aug 2023 14:51:11 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,130 +149,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Tue, Aug 22, 2023 at 12:56:32PM -0600, Simon Glass wrote:
-> Hi Alexey,
->=20
-> On Tue, 22 Aug 2023 at 06:59, Alexey Romanov
-> <avromanov@salutedevices.com> wrote:
-> >
-> > Hi,
-> >
-> > On Tue, Aug 22, 2023 at 10:24:23AM +0200, neil.armstrong@linaro.org wro=
-te:
-> > > On 21/08/2023 21:11, Simon Glass wrote:
-> > > > Hi Neil,
-> > > >
-> > > > On Mon, 21 Aug 2023 at 03:16, neil.armstrong@linaro.org
-> > > > <neil.armstrong@linaro.org> wrote:
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > On 16/07/2023 01:40, Simon Glass wrote:
-> > > > > > Hi,
-> > > > > >
-> > > > > > On Thu, 13 Jul 2023 at 23:30, AKASHI Takahiro
-> > > > > > <takahiro.akashi@linaro.org> wrote:
-> > > > > > >
-> > > > > > > On Tue, Jul 11, 2023 at 01:13:29PM -0600, Simon Glass wrote:
-> > > > > > > > +AKASHI Takahiro
-> > > > > > >
-> > > > > > > Me?
-> > > > > >
-> > > > > > Yes, I'm asking for your help to try to clean this stuff up.
-> > > > >
-> > > > > The thread is long and hard to answer directly, but as AKASHI
-> > > > > said there's no point to add a SMC class since it's only the mess=
-age
-> > > > > passing instruction, and there's no point using remoteproc since =
-the
-> > > > > firmware runs on a separate secure state of the same CPU.
-> > > > >
-> > > > > And I don't see how we can actually define a finite set of ops be=
-cause
-> > > > > none of the secure firmware interfaces has even similar functions=
-.
-> > > > >
-> > > > > So a new UCLASS for each firmware interface should be added, not =
-sure
-> > > > > this is scalable or required since those firmwares are mainly SoC=
- or
-> > > > > vendor specific, except the PSCI or other ARM specific interfaces=
- of course.
-> > > > >
-> > > > > So I think UCLASS_FIRMWARE is good enough since it avoids using U=
-CLASS_MISC,
-> > > > > but it should be probably documented somewhere that the ops are i=
-mplementation
-> > > > > defined.
-> > > >
-> > > > Yes it needs docs...but what exactly is the 'firmware' uclass? I
-> > > > assumed it was for loading firmware into a device, but it seems tha=
-t
-> > > > it is something else?
-> > >
-> > > Nop, it's based on the same "firmware" naming as Linux, which is an i=
-nterface
-> > > with a system control firmware like PSCI, SCPI... not to interact wit=
-h loadable
-> > > co-processors.
-> > >
-> > > Systems do have multiple interfaces implemented like PSCI, SCPI, OPTE=
-E and other
-> > > vendor specific ones like Alexey is changing, all via the same instru=
-ction call.
-> > >
-> > > >
-> > > > Perhaps we should have a UCLASS_SVC (supervisor call) or something
-> > > > like that, rather than continuing with firmware?
-> >
-> > You propose to create UCLASS with an interface consisting of functions
-> > of something like: ->smc_call(), ->hvc_call()? In this case, it seems
-> > ARM specific.
->=20
-> Yes, but we have a lot of arch-specific interfaces.
->=20
-> >
-> > Or UCLASS with only one callback, different for different archs, which
-> > will call the hypervisor or something like that. In my understanding,
-> > this add-on are redundant.
->=20
-> OK.
->=20
-> >
-> > I still think UCLASS firmware is the best fit for my Secure Monitor
-> > implementation at the moment.
->=20
-> How about you create a UCLASS_MESON_SM then?
->=20
-> I don't really like the idea of a uclass with no standard API. One
-> goal is to help people understand things and can't see that helping.
-
-OK. Will do it in v2.
-
->=20
-> >
-> > >
-> > > I have no opinion on that, I don't think the call type is significant=
- here.
-> > >
-> > > Neil
-> > >
-> > > >
-> > > > [..]
-> > > >
-> > > > Regards,
-> > > > Simon
-> > >
-> >
-> > --
-> > Thank you,
-> > Alexey
->=20
-> Regards,
-> Simon
-
---=20
-Thank you,
-Alexey=
+SGVsbG8gTWFyZWssDQoNCk9uIFdlZCwgMjAyMy0wOC0yMyBhdCAyMDowNiArMDIwMCwgTWFyZWsg
+VmFzdXQgd3JvdGU6DQo+IENhbiB3ZSB1c2UgbWVtc2V0IGFuZCB6ZXJvIG91dCB0aGUgdHJhaWxp
+bmcgcGFydCBvZiB0aGUgYnVmZmVyIGluc3RlYWQNCj4gPw0KDQpUaGF0IGlzIHdoYXQgSSBzdGFy
+dGVkIHdpdGgsIGJ1dCBhdCB0aGUgdGltZSB0aGUgZnRydW5jYXRlKCkgYXBwcm9hY2gNCnNlZW1l
+ZCBzaW1wbGVyLg0KDQpOb3cgdGhhdCB5b3Ugc3VnZ2VzdGVkIG1lbXNldCB5b3Vyc2VsZiwgSSB0
+b29rIGEgc3RhYiBhdCBpdCBhZ2Fpbi4gSQ0KdGhpbmsgSSBnb3QgdG8gdGhlIHBvaW50IHdoZXJl
+IEknbSBoYXBweSB3aXRoIHRoZSBsb2dpYywgYW5kIHdpbGwgc3VibWl0DQp2MiB0b21vcnJvdyB0
+byBnaXZlIHNvbWUgbW9yZSB0aW1lIGlmIGFueW9uZSBlbHNlIGhhcyBtb3JlIGNvbW1lbnRzIG9u
+DQp2MS4NCg0KVGhhbmsgeW91IQ0K
