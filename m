@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42509C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 12:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE309C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 12:10:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A979847C3;
-	Thu, 24 Aug 2023 14:08:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B8308077D;
+	Thu, 24 Aug 2023 14:10:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WIablz2K";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="J71bewTA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8CE885DD2; Thu, 24 Aug 2023 14:08:10 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5654F807C4; Thu, 24 Aug 2023 14:10:55 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9462B846EE
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 14:08:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A114B8056B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 14:10:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37OC7wex012527;
- Thu, 24 Aug 2023 07:07:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692878878;
- bh=PamHFnIAgzFdVjmJPuCzm50fd6Isp/YsmbYJKGEYog4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=WIablz2KQuc8qzn7ZSSKBI+6qkmc1YSnESHdgbb1XzAP5mFn7z743bxtH4zUWtueo
- R6+Qz0X0FPUVELOuWdFBolqvA33WNcbcC+9kf5VcL0qmnGojsBy6uZqFDyuZEXYyAG
- z6zoJsNwr2/nW1DgxTeU1NN6wU87XKZkWLga0Bks=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37OC7wfj039329
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 24 Aug 2023 07:07:58 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
- Aug 2023 07:07:58 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 24 Aug 2023 07:07:58 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37OC7wCT092505;
- Thu, 24 Aug 2023 07:07:58 -0500
-Date: Thu, 24 Aug 2023 07:07:58 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-CC: Simon Glass <sjg@google.com>, Tom Rini <trini@konsulko.com>, Neha Francis
- <n-francis@ti.com>, Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew
- <afd@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh
- <vigneshr@ti.com>, <u-boot@lists.denx.de>, Jan Kiszka
- <jan.kiszka@siemens.com>, Heinrich Schuchardt
- <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-Message-ID: <20230824120758.gwmqphu4s36ytxu5@crushable>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-9-nm@ti.com>
- <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
- <20230823171502.GQ3953269@bill-the-cat>
- <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
- <20230824001848.vgzl7rcphic3gu2n@carnival>
- <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
- <20230824032709.phneggflsw2ps2dv@reanalyze>
- <87fs48rgto.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1692879051; x=1693483851; i=xypron.glpk@gmx.de;
+ bh=Kp2w9dt267t9OcdKQBLdXx+hcflIumWX/Kl6rgDG4ps=;
+ h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:In-Reply-To;
+ b=J71bewTA5XaY2POmgZ2TgTDor1xK/HqYcX9ufusme98r2Rld3R073GOjiB3bZNiXg73ameB
+ g2ZJ0sS7Teh3xXUEzkrfW+FKihV2glKFO10BxZKQtMrp7GhcdfmP9IcWj5W9Tg/2HEocVnviA
+ tF3IfBvawc+UwmlVFpevoD41g7AW4tj9SZX7rIxckzng9uT/rosc+q9sQm0uH24804ZT9QFk0
+ YmYZimb+zHIyk9uJ6mBHSp7rc0VXvtN6Gw19FcCUWNHDqvvphIeU1Ggx/ORFy+7lqCxozJ/fZ
+ DaGW35IfEC3/6mukHhFJNxb7CHz3MBoxq6sbLvdLtEpoO/KJ8XdA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([62.143.244.162]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4hzj-1pXjh636KF-011iNw; Thu, 24
+ Aug 2023 14:10:51 +0200
+Message-ID: <b84b35df-c146-5255-f9b6-427688cd7eeb@gmx.de>
+Date: Thu, 24 Aug 2023 14:10:46 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <87fs48rgto.fsf@baylibre.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] efi_loader: delete handle from events when a protocol is
+ uninstalled
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20230824115500.2388636-1-ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230824115500.2388636-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:8gwJ0CNVO4480SQLJtM+SOP+k6QglmxLGuo0sS3W4TY08ZPQfae
+ xYKLJFROm39c2+rf38LWIxrZ4+nT63mMB3zKAwRaiVRrrgsolSPNADxxs7wy6urr7++tU7/
+ O/fzhlFDa33MhWMDgxgnokYrEHg4K3C0bl6e+EJsLN8I/bkaUzBAy6bnE+Y0YmdQI4jGwFp
+ M2FipODlgYMS8D6x8DL4g==
+UI-OutboundReport: notjunk:1;M01:P0:lrMjz/rEvXc=;zcy/WNaxkb0W0yozfj0u/Y+596m
+ T4IVBJNEpKAVegSWKK/NgC644znQPrqyV32rTXE2omfNDFq9sbP8W5wiIWXnLemqMdME5gnlE
+ 1GIbrAE5yUcuBBeS2sr9BtRf/hsjhQCEqcQn68/d0w0F5tLsM6fHZUD53LVqjOf9884Ec6Rqm
+ LzXrdLJLRs87EHirnU7Od8cmhIPDMki4C05U3lyJ7c8sa3Nm4+NjIUjyb6V3/BiIOLGy+7Hsa
+ QZUlTW67FVr/ykqV8mQIWUEbEgjcSFhtj7M1FNTLziMICAYeHwX2ZXpDeIpBcNUGPz3sZOqcN
+ OtHjVnQ8JoLWtb+gtTFUHI5An/l3weVl1v8iMZDIHwdQQahcnCTKweJzUK4xsBzw9q7blrqog
+ oj/mdBF/s3W1dej1S1RQPkEJ9/qP0XC7YW8ieSFQpmb1uBjwPmIDBu7N54LaYIoB3dkwsaHL3
+ 6dpKwUPyvMa9+5YYZTEJe9Jp0nBQf6NED/06sgFbhkS2ENBvyZjjahXo9Ex/KPIP6EsoZQt9F
+ 3UvhBzNFcZzeafxCXGZeHLsXspfZXYfLxiBvof5ZYhtXbRSVyeEI6uFYkJOnedaQx5eYSqwgq
+ 5Sk80mVofvXaTkJcsIuFfPxqHvNUfrfHEOaLqKAGku8eyT2N2EN/Qcir3nAqUfHjx92EXYdOX
+ YqBQw2JIuZeSNrwtTYqQ9W9ksvzZKFQjFEve0jnt3OmbnnojzlNiCFoNTlPRILlWdjmkI5x/X
+ PxEI9l9UtfZ3/xEs1Sm56VjRvjhCylClhVmu7iZ+krIDsUOSU3EFsMUyFdE0zAK6IcsK7Rxvh
+ lQ2off1wx003FUZU+17Cp2QDf/QCZ7knDnwbjcCUmn1hkaRG1fQhDKT6KISNKi5F0jxpmr2Zr
+ DbSVbF57XdV1UVYDE6UATRBifbNjRcfISSgVyU/kW/pcVzGwfn4LrCGO3KlIbdei+V9rXDUfS
+ gw9N7sHCt+8oQskqC76CCtHsrV0=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,36 +88,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:21-20230824, Mattijs Korpershoek wrote:
-[...]
+On 24.08.23 13:55, Ilias Apalodimas wrote:
+> When a notification event is registered for a protocol the handle of the
+> protocol is added in our event notification list.  When all the protocol=
+s
+> of the handle are uninstalled we delete the handle but we do not remove
+> it from the event notification list.
+>
+> Clean up the protocol removal functions and add a wrapper which
+> - Removes the to-be deleted handle from any lists it participates
+> - Remove the handle if no more protocols are present
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   lib/efi_loader/efi_boottime.c | 80 ++++++++++++++++++++++++-----------
+>   1 file changed, 56 insertions(+), 24 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index 0e89c8505b11..96950790ba2a 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -61,7 +61,7 @@ static volatile gd_t *efi_gd, *app_gd;
+>
+>   static efi_status_t efi_uninstall_protocol
+>   			(efi_handle_t handle, const efi_guid_t *protocol,
+> -			 void *protocol_interface);
+> +			 void *protocol_interface, bool preserve);
+>
+>   /* 1 if inside U-Boot code, 0 if inside EFI payload code */
+>   static int entry_count =3D 1;
+> @@ -207,6 +207,36 @@ static bool efi_event_is_queued(struct efi_event *e=
+vent)
+>   	return !!event->queue_link.next;
+>   }
+>
+> +/**
+> + * efi_purge_handle() - Clean the deleted handle from the various lists
+> + * @handle: handle to remove
+> + *
+> + * Return: status code
+> + */
+> +static efi_status_t efi_purge_handle(efi_handle_t handle)
+> +{
+> +	struct efi_register_notify_event *item, *next;
+> +
+> +	if (!list_empty(&handle->protocols))
+> +		return EFI_ACCESS_DENIED;
+> +	/* The handle is about to be freed. Remove it from events */
+> +	list_for_each_entry_safe(item, next, &efi_register_notify_events, link=
+) {
 
-> >> Some other minor feedback:
-> >> 
-> >> - The 'make' lines should really have -j $(nproc) added
-> >
-> > Different styles of shells..
-> >
-> >> - The $ signs at the start of each command in the docs are a pain
-> >> since it stops me copying the commands into the terminal - can you
-> >> remove them?
-> >
-> > hehe.. "dont" let people blindly copy paste without understanding what is
-> > going on argument?
-> >
-> > If folks are OK, I sure can send a different patch series for that.. (or
-> > maybe motivate someone to do that instead of me ;))
-> 
-> Have we considered using the .. prompt:: extension ?
-> 
-> https://pypi.org/project/sphinx-prompt/
-> 
-> The prompt extension automatically adds a prompt (like $) in front of
-> each line and disallows copying it when copying from the html generated page.
+You are not deleting from efi_register_notify_events. Why do you use the
+safe version of the iterator?
 
-That does look like a very interesting option. This could very well be a
-different series of it's own, if Heinrich is OK with it..
+> +		struct efi_protocol_notification *hitem, *hnext;
+> +
+> +		list_for_each_entry_safe(hitem, hnext, &item->handles, link) {
+> +			if (handle =3D=3D hitem->handle) {
+> +				list_del(&hitem->link);
+> +				free(hitem);
+> +			}
+> +		}
+> +	}
+> +	/* The last protocol has been removed, delete the handle. */
+> +	list_del(&handle->link);
+> +	free(handle);
+> +
+> +	return EFI_SUCCESS;
+> +}
+> +
+>   /**
+>    * efi_process_event_queue() - process event queue
+>    */
+> @@ -615,7 +645,7 @@ static efi_status_t efi_remove_all_protocols(const e=
+fi_handle_t handle)
+>   		efi_status_t ret;
+>
+>   		ret =3D efi_uninstall_protocol(handle, &protocol->guid,
+> -					     protocol->protocol_interface);
+> +					     protocol->protocol_interface, true);
+>   		if (ret !=3D EFI_SUCCESS)
+>   			return ret;
+>   	}
+> @@ -639,10 +669,7 @@ efi_status_t efi_delete_handle(efi_handle_t handle)
+>   		return ret;
+>   	}
+>
+> -	list_del(&handle->link);
+> -	free(handle);
+> -
+> -	return ret;
+> +	return efi_purge_handle(handle);
+>   }
+>
+>   /**
+> @@ -1356,6 +1383,8 @@ reconnect:
+>    * @handle:             handle from which the protocol shall be remove=
+d
+>    * @protocol:           GUID of the protocol to be removed
+>    * @protocol_interface: interface to be removed
+> + * @preserve:		preserve or delete the handle and remove it from any
+> + *			list it participates if no protocols remain
+>    *
+>    * This function DOES NOT delete a handle without installed protocol.
+>    *
+> @@ -1363,7 +1392,7 @@ reconnect:
+>    */
+>   static efi_status_t efi_uninstall_protocol
+>   			(efi_handle_t handle, const efi_guid_t *protocol,
+> -			 void *protocol_interface)
+> +			 void *protocol_interface, bool preserve)
+>   {
+>   	struct efi_handler *handler;
+>   	struct efi_open_protocol_info_item *item;
+> @@ -1397,6 +1426,14 @@ static efi_status_t efi_uninstall_protocol
+>   		goto out;
+>   	}
+>   	r =3D efi_remove_protocol(handle, protocol, protocol_interface);
+> +	if (r !=3D EFI_SUCCESS)
+> +		return r;
+> +	/*
+> +	 * We don't care about the return value here since the
+> +	 * handle might have more protocols installed
+> +	 */
+> +	if (!preserve)
+> +		efi_purge_handle(handle);
+>   out:
+>   	return r;
+>   }
+> @@ -1422,15 +1459,10 @@ static efi_status_t EFIAPI efi_uninstall_protoco=
+l_interface
+>
+>   	EFI_ENTRY("%p, %pUs, %p", handle, protocol, protocol_interface);
+>
+> -	ret =3D efi_uninstall_protocol(handle, protocol, protocol_interface);
+> +	ret =3D efi_uninstall_protocol(handle, protocol, protocol_interface, f=
+alse);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		goto out;
+>
+> -	/* If the last protocol has been removed, delete the handle. */
+> -	if (list_empty(&handle->protocols)) {
+> -		list_del(&handle->link);
+> -		free(handle);
+> -	}
+>   out:
+>   	return EFI_EXIT(ret);
+>   }
+> @@ -2785,7 +2817,7 @@ static efi_status_t EFIAPI
+>   efi_uninstall_multiple_protocol_interfaces_int(efi_handle_t handle,
+>   					       efi_va_list argptr)
+>   {
+> -	const efi_guid_t *protocol;
+> +	const efi_guid_t *protocol, *next_protocol;
+>   	void *protocol_interface;
+>   	efi_status_t ret =3D EFI_SUCCESS;
+>   	size_t i =3D 0;
+> @@ -2795,25 +2827,25 @@ efi_uninstall_multiple_protocol_interfaces_int(e=
+fi_handle_t handle,
+>   		return EFI_INVALID_PARAMETER;
+>
+>   	efi_va_copy(argptr_copy, argptr);
+> +	protocol =3D efi_va_arg(argptr, efi_guid_t*);
+>   	for (;;) {
+> -		protocol =3D efi_va_arg(argptr, efi_guid_t*);
+> +		bool preserve =3D true;
+> +
+>   		if (!protocol)
+>   			break;
+>   		protocol_interface =3D efi_va_arg(argptr, void*);
+> +		next_protocol =3D efi_va_arg(argptr, efi_guid_t*);
+> +		if (!next_protocol)
+> +			preserve =3D false;
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Is your idea that if 5 protocols are to be removed but only the first 3
+are installed your want to reinstall the first 3?
+
+Can we have some code comment describing what the function should do? In
+5 years nobody will remember why the code was implemented this way.
+
+Best regards
+
+Heinrich
+
+
+>   		ret =3D efi_uninstall_protocol(handle, protocol,
+> -					     protocol_interface);
+> +					     protocol_interface, preserve);
+>   		if (ret !=3D EFI_SUCCESS)
+>   			break;
+>   		i++;
+> +		protocol =3D next_protocol;
+>   	}
+> -	if (ret =3D=3D EFI_SUCCESS) {
+> -		/* If the last protocol has been removed, delete the handle. */
+> -		if (list_empty(&handle->protocols)) {
+> -			list_del(&handle->link);
+> -			free(handle);
+> -		}
+> +	if (ret =3D=3D EFI_SUCCESS)
+>   		goto out;
+> -	}
+>
+>   	/* If an error occurred undo all changes. */
+>   	for (; i; --i) {
+> @@ -3712,7 +3744,7 @@ static efi_status_t EFIAPI efi_reinstall_protocol_=
+interface(
+>   		  new_interface);
+>
+>   	/* Uninstall protocol but do not delete handle */
+> -	ret =3D efi_uninstall_protocol(handle, protocol, old_interface);
+> +	ret =3D efi_uninstall_protocol(handle, protocol, old_interface, true);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		goto out;
+>
+
