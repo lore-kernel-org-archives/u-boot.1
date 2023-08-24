@@ -4,56 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2206DC27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 11:30:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCADC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 11:51:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E74E8658A;
-	Thu, 24 Aug 2023 13:30:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4B9BC8658C;
+	Thu, 24 Aug 2023 13:51:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1692876616;
-	bh=piCQgMwuV2hfK7yxd5NUO6Ef1l18rOOkqyi0A/gmgmY=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PkHaKdJINbdKkn+GGJxUApPv+qkXmmDZ8a+4bjj5TUBftsvk/i661fo2Rom7B8ApV
-	 Vt25UBuhde50iF7qKtLQgxRRNO7sk4Hc8D8Oh4y+r9ccxPJsrBKWeqiq2tHYA2IysP
-	 Tpriz0Q5w9e4HJlcC1BWsulu5o/PsG1HjbUSd/SYFetTRJ7H3eX7LoyNVi1FbYlNbs
-	 97QGoG7b1EizrqEqLwJXqrxD+M/o4fDWwg/t1NgcvLC7b7zZWU7D6OoVtv5iOGyZOV
-	 SodeLd2Dm1ezitp2PQxkrXXRaCHVUQoGW/F3XiIfFiXb2WCgqBDM9sC2/FlUgbyFUT
-	 62KrLFShWv5vg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CE11A8657A; Thu, 24 Aug 2023 13:30:14 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58A758658C
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 13:30:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4RWgqP5tQVz9sTM;
- Thu, 24 Aug 2023 13:30:09 +0200 (CEST)
-Message-ID: <86f392b4-b549-9891-f272-73706543c5c0@denx.de>
-Date: Thu, 24 Aug 2023 13:30:09 +0200
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kcrSP1Fj";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6683B8657C; Thu, 24 Aug 2023 13:51:54 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D9208658C
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 13:51:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-26f381afc15so595877a91.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:51:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692877910; x=1693482710;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TrJtopPy/e62K7LG5JtZcjS2lte78NT4Riz4TOeQFYk=;
+ b=kcrSP1FjIH2HRlhzLJ7zMcdt3ktrTDymAoRZCGIbv982D0+OnHpr3nJdPKQyy/muXs
+ Qb81jZ9M8lNsdDKwykcnOQte8YW/mcHRWzfPZ0w57RD2MOt1cutLlKLYVaRWXX9ZZ5nu
+ RrefqgIwTtVR5INCrlYeYlWcjeV+hnBUBMHzYLF0f7FrJihDx7ppmCbhGdiKEbfhdeoZ
+ IFNNvT8LN4zW4XwaSz8sTnLZIpf/IQ9XdVqdEdzg/+4jp4gbHy5FnGjd3cqiNrh3HolR
+ 4Ll3CjBvRG1AYQ4llwvyxg6/0c+MWQyCFg014ntX7NVOwuIbu85nHLjzaiNsnVnzNoiE
+ 2tkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692877910; x=1693482710;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TrJtopPy/e62K7LG5JtZcjS2lte78NT4Riz4TOeQFYk=;
+ b=ZtcQUnDbAqz0Q0SzLRWFOXiaJ/1dijyPdn2Fy8EMRrvg9uG7pZxHsvojPITjVimrD4
+ cDvn9ulmAU3TG6La9ttT2Erz4K8EakOK8B/6JbBe0ZpP/z5eyNNmFMPN4jmk/JeBoMyu
+ 38m+koCtPuh1o/Pw3kB+FIt+LRkmp3cLaFU+mtqoCcvT33nZfw4YygO8Os1XSJzU7BZx
+ 0PFeKVxQ5bDOHfRL9n0LO4bc+30QTDAQLeXiwQOuo2mxIo2WD/RL+0xrxg25ERlcEqiZ
+ xxCmEtsfTS3PM5Nfdo5fs9lrEfxQkAI4it0DzNhS6vZsCNp5TMtvisU10vlXwdkcMkxX
+ GvyQ==
+X-Gm-Message-State: AOJu0Yx3t256LCyMUVSTdH9fhYx2WeSzioa6OhgRwskMUULg7h0g2B04
+ z8lBnd4wGLVeQIDGmGORIrauxFQZ01PF5X6+Cb4=
+X-Google-Smtp-Source: AGHT+IEog/abqVIfoWI9hXofw9EPoCvqzMQTKyW47YFsJzNc8DHhzSoDyxbtVEKJt0vLsc8cid2QN1K1AYrC9TWp0xo=
+X-Received: by 2002:a17:90a:2d8b:b0:26d:414d:a98a with SMTP id
+ p11-20020a17090a2d8b00b0026d414da98amr13960272pjd.1.1692877909851; Thu, 24
+ Aug 2023 04:51:49 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] ARM64: dts: marvell: cn9310-crb: Remove duplicate
- pinctrl
-Content-Language: en-US
-To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20230820233113.575818-1-judge.packham@gmail.com>
- <20230820233113.575818-2-judge.packham@gmail.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20230820233113.575818-2-judge.packham@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20230822221726.8355-1-marcel@ziswiler.com>
+In-Reply-To: <20230822221726.8355-1-marcel@ziswiler.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 24 Aug 2023 08:51:37 -0300
+Message-ID: <CAOMZO5CTwWXyspD+FksURKmJLD7H3YbWcrC7zb=MB2RJGJhcOw@mail.gmail.com>
+Subject: Re: [PATCH v1] board: toradex: verdin-imx8mm: enable usb sdp spl
+ recovery support
+To: Marcel Ziswiler <marcel@ziswiler.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,53 +89,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/21/23 01:31, Chris Packham wrote:
-> The cn9130.dtsi defines a pinctrl node for SPI1 (until recently it was
-> mislabeled as spi0). Use this instead of having a duplicate definition
-> with a different label.
-> 
-> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+Hi Marcel,
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+On Tue, Aug 22, 2023 at 7:17=E2=80=AFPM Marcel Ziswiler <marcel@ziswiler.co=
+m> wrote:
+>
+> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>
+> Enable USB SDP SPL aka serial downloader recovery mode support.
+>
+> While at it also enable fastboot support which may be used to
+> subsequently load further stages like a Toradex Easy Installer FIT
+> image.
+>
+> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-Thanks,
-Stefan
+Yes, this is helpful:
 
-> ---
-> 
->   arch/arm/dts/cn9130-crb.dtsi | 7 +------
->   1 file changed, 1 insertion(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/dts/cn9130-crb.dtsi b/arch/arm/dts/cn9130-crb.dtsi
-> index b229725184a9..7dd36cae282b 100644
-> --- a/arch/arm/dts/cn9130-crb.dtsi
-> +++ b/arch/arm/dts/cn9130-crb.dtsi
-> @@ -125,11 +125,6 @@
->   		marvell,function = <0>;
->   	};
->   
-> -	cp0_spi1_pins_crb: cp0-spi-pins-crb {
-> -		marvell,pins = < 13 14 15 16 >;
-> -		marvell,function = <3>;
-> -	};
-> -
->   	cp0_smi_pins_crb: cp0-smi-pins-crb {
->   		marvell,pins = < 40 41 >;
->   		marvell,function = <8>;
-> @@ -170,7 +165,7 @@
->   
->   &cp0_spi1 {
->   	pinctrl-names = "default";
-> -	pinctrl-0 = <&cp0_spi1_pins_crb>;
-> +	pinctrl-0 = <&cp0_spi1_pins>;
->   	reg = <0x700680 0x50>,		/* control */
->   	      <0x2000000 0x1000000>,	/* CS0 */
->   	      <0 0xffffffff>,		/* CS1 */
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+Reviewed-by: Fabio Estevam <festevam@denx.de>
