@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A348EC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709DFC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BDA88657A;
-	Thu, 24 Aug 2023 15:29:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E330A86430;
+	Thu, 24 Aug 2023 15:30:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H0/ZM08Z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nm0Ll/X4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A0288653D; Thu, 24 Aug 2023 15:29:27 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id F3E3286433; Thu, 24 Aug 2023 15:30:23 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E29558653B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:29:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55B028642B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-52683b68c2fso8496058a12.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:29:24 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-3fee87dd251so46762375e9.2
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:30:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692883764; x=1693488564;
+ d=gmail.com; s=20221208; t=1692883821; x=1693488621;
  h=user-agent:in-reply-to:content-disposition:mime-version:references
  :message-id:subject:cc:to:from:date:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D2r+BOb7255P8mHHzvJVb3XU8ybvvWYg5LAjNUTvPSw=;
- b=H0/ZM08ZbCC5v6Nhv3WGUyp48X90rRBhuHmMRXKZEiZnQDDNSOIsCSA8Z7IPeBdI56
- hhiPIGAoIi90/TmnZQDK3XWemM0F5I+oXQaMQ4/sgpcQo47NCtDBGx3PmLbI2kM3qW+a
- GJNEwmGmzEyg6j2dApwg4bP2w6a7zVgZeTQT20sWRQFovswQtKf3CrH05W4vCosVmH5Y
- 4X7CwPKzzpgfXJnbFMjiK3EbqPNmA2ZK52CCeqvq5pOcxcginSdMeO+/0/pwH3BToNQK
- 2LmmydxFyMZoeu9ZZ2VYcb/d9Swkbe7X5atLUrc8hc4ruDjB7+PAVGYjeNBt16ugNHp8
- 3ajQ==
+ bh=mfzEakQ4TiP6pmwnxnXX1Ia1ZDZBBNZB18PcZfkvudA=;
+ b=nm0Ll/X4Q0NJz4VgoBz8GW9NXTtJuj+CUEC70TQBFPDl+HFEBUNUBdUge/+mp0Cb5c
+ N0epAH07eS+eJ7a0OyHrtYYLraPyb9jZsTnsdl4sc5pP817w8bI24lHwNOZLfdq5gQrN
+ Ut/ck8j03Gc7VskJsM3L2NhE3Aqu7pDU38INO9Tv/NvoOTxX59gOdyWN630xUrm6lXlA
+ /IqpDCd5+HN2rZb1uz0lY+JCqT2ssEOr15Dmg0bnPQvtkZsu89nbknv/OHte2aFVm29w
+ EmSG653OUvvtnkgvb7PF9ESb1D7U1r5ueiKbllVT5rmFyzwHIMRXYEBP79JfCzq7ENT8
+ bJEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692883764; x=1693488564;
+ d=1e100.net; s=20221208; t=1692883821; x=1693488621;
  h=user-agent:in-reply-to:content-disposition:mime-version:references
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=D2r+BOb7255P8mHHzvJVb3XU8ybvvWYg5LAjNUTvPSw=;
- b=H8WK5rhKnSK/92NygCs3o19/7F8yxZ+MRU/6cZ236hjb8Yfh9c7sKeUm6K6RaW9juN
- AaDzroKAYXa9xU+NSN28N4ZSbBLmGbEPaiRJEDRbJV0jzJX4iaflbdqyDcRbLwgmcGNM
- awtcEpJoHZf/8aWJb4wvriZf2mJmLqyCsO4llphqwTXvuIhIBRt3ChQ5lmPSsnpY6iD8
- ewcqD6hsddJZbME/ei6LeQEpk/L8pYDJSzOWwUkyw4505y9bR4v/8YvNBwnRlp5i9Tro
- /yk/E3pSxx4/1ga3Cl18CuPOxYHpbyZxyND/nMKu0yB1BfUtVYOPqJ/vvK2qVq9/SOea
- PZxA==
-X-Gm-Message-State: AOJu0YwOG9sv8umBw1JC7rT8sPVFRikYClg4kepLp20aAkuEtLFluwPr
- ML9JM1HKtCWPKgcodNtXd/LcHGIiEFg=
-X-Google-Smtp-Source: AGHT+IG1TqduTZS0Zm772W3zT6Aj+fZv08wJqUB7WvB5ndpS1ZaACLEJnNQe4kKYispC60iQfMV6RQ==
-X-Received: by 2002:a17:906:9d1:b0:99c:dc3e:f8e3 with SMTP id
- r17-20020a17090609d100b0099cdc3ef8e3mr11899846eje.28.1692883764229; 
- Thu, 24 Aug 2023 06:29:24 -0700 (PDT)
+ bh=mfzEakQ4TiP6pmwnxnXX1Ia1ZDZBBNZB18PcZfkvudA=;
+ b=Tz5QPFOHBNe3pb7yAKB8BXjoUmQMvJ9XVKEZ06rVHTVa98lNrHj4FrkmvpZJ7gNm8i
+ OjpMey7hmehz+euLV94tDo1T2ERjU61VFa+jen9gysWek39VL2zTgyOz0Io1R82KUFcr
+ i2Op8atyy+coBbHFYEKPlf4wQxseMGCwkjIpwqn2tXD+95VtBSJ5eZoRIdIudt9UclIu
+ cAqW+rnfrDYI+R89rnnuSxGsvZmcYq6Q2Kg7y/V2d6HgapLHZgVr4TnLZ8jVUksdct5i
+ +dKINoFxqc0yFHVpi3jzqlQLz/UjTQfzyoYNS34G0gTm8gxmj8AlVFkl/7Og1yAXXKDG
+ 8Ezg==
+X-Gm-Message-State: AOJu0YxTAHprbufyVh/kIimnTGel/bXagMpZMePDtvwmM8k+0Zev/iCh
+ q6p8rlOYQFuCbVTTTg0flkw=
+X-Google-Smtp-Source: AGHT+IFl1q+x425czgU+2CV9SWkpHHi/CwOTq+IOmFdd0jgY6BUI83I6pf6ZEADZGUEnzBiNviHV9g==
+X-Received: by 2002:a7b:cc87:0:b0:3fe:2140:f504 with SMTP id
+ p7-20020a7bcc87000000b003fe2140f504mr12390426wma.20.1692883820621; 
+ Thu, 24 Aug 2023 06:30:20 -0700 (PDT)
 Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
  [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a170906240e00b00982d0563b11sm11048449eja.197.2023.08.24.06.29.23
+ o5-20020a1c7505000000b003fee8502999sm2650514wmc.18.2023.08.24.06.30.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 06:29:23 -0700 (PDT)
-Date: Thu, 24 Aug 2023 15:29:22 +0200
+ Thu, 24 Aug 2023 06:30:20 -0700 (PDT)
+Date: Thu, 24 Aug 2023 15:30:18 +0200
 From: Thierry Reding <thierry.reding@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
 Subject: Re: [PATCH v1 1/1] mmc: tegra: get default-tap and default-trim from
  device tree
-Message-ID: <ZOdbMq68QtVbrGVM@orome>
+Message-ID: <ZOdbaul2TQ4CwndZ@orome>
 References: <20230819153501.77245-1-clamor95@gmail.com>
  <20230819153501.77245-2-clamor95@gmail.com>
  <ZOXnfY5hKrhSpOlY@orome>
- <B2FF6549-4F01-4010-968E-D790E72AE2EE@gmail.com>
+ <E8D9B66C-E23C-4359-928F-D510C8D4AF22@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="HLWpqPx4XZYkemr3"
+ protocol="application/pgp-signature"; boundary="6trSTmE4GvfO0tqA"
 Content-Disposition: inline
-In-Reply-To: <B2FF6549-4F01-4010-968E-D790E72AE2EE@gmail.com>
+In-Reply-To: <E8D9B66C-E23C-4359-928F-D510C8D4AF22@gmail.com>
 User-Agent: Mutt/2.2.10 (2023-03-25)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,12 +100,12 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---HLWpqPx4XZYkemr3
+--6trSTmE4GvfO0tqA
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 02:38:48PM +0300, Svyatoslav Ryhel wrote:
+On Wed, Aug 23, 2023 at 03:02:42PM +0300, Svyatoslav Ryhel wrote:
 >=20
 >=20
 > 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 14:03:25 GMT+03:00, =
@@ -219,41 +219,37 @@ riv *priv)
 > >to write that. I suggest getting rid of the conditional and always
 > >writing these values and rely on defaults to make sure that a good value
 > >is always programmed.
->=20
-> Tegra 3 uses 0x0F on all my devices which is not 0.
->=20
+> >
 > >Alternatively if you really only want to program these when they've been
 > >specified, use an extra variable (or something like -1 as a default
 > >value) to discriminate.
 >=20
-> Why 0 value cannot be used as "flag" to skip tap and trim setup if values=
- are not set? Using any value but 0 will cause additional comparation in co=
-ndition and will definitely not improve readability.
+> I may propose a compromise. Do not set default value at all and when time=
+ comes just check if tap or trim is not error.
 
-If you use 0 as a flag it implies that you can never set 0 as a value
-explicitly. So if some SoC or board ever needs to set that exact value
-it can't.
+Yes, that's essentially a variant of the second option and it should
+work.
 
 Thierry
 
---HLWpqPx4XZYkemr3
+--6trSTmE4GvfO0tqA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTnWzIACgkQ3SOs138+
-s6HxlxAAlr3Efg2yVMKNaVlfCwr8Hy4GmLEWVome8st6dJWaA8nO4TAMIMY4qdMq
-T5QxhKu8Nxr5Tpyd3w0TMKIuBB+goih2c7Dy5rv9b6LlBwBhxwo//MyXtvwi/LHp
-1nI/gLuBlYYwizFf6t44rKfP1ln+x1Z2vUv4hPfCkwd3nTShMwCg7jvFOBQtx4rJ
-yqOb3uYAkvIhK1Dj1lw1n5cXqg1WCLTRVR8k/wr1MUJPfPJjtyzbH1drfww7NPzl
-0yXmcY7NT9MIo/rpSLGNKxtXVyOcgFlq/lSD5lxvrxAZ5lySs0p5V/I0I1+RRrmF
-0jLJK10UeZHLLjtY+TEfYzYcGxq5CJezW3AyZrlg+mtTBfek2gZbM6jIyLPdwBdn
-cQcnGYQtuu1+muV5MADxXTxZ6klR55ASnHzClYE9IrOGw27gxbj9A1tlDuPJl7BX
-Hz7Y81s00BXvrBX8HYDZyzBFm5o+lXsA3uj4UvSbDYXLewsA78gZfldGDboguG87
-JIFL2jA4g2sVOqpiYMSLdiQHYAE5VViZGTCulq+Exof60wF1F8XdQr+e1RVj99XE
-mjKWWmeGZVnkS0a9iziTUZyLFGrA+4st7oM6dj+hTULPMeqFB4FUZ2wya8JHFnpe
-+TXftPOS0NerPqp3jXiwLwJ7/daNPvAQdPBfQKI/3ICgUiLHnjs=
-=JKTQ
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTnW2oACgkQ3SOs138+
+s6GTfQ//bZZ9vq8iGkj/uKTFe6r3XQhgNwmN6RY5jkbdWFVJ2vRfBm0Hxpgne9KR
+9J3kOVVa3ef3xvenKy9eRdBkUleRZ+N6Gg1zXluRmCHh+MHluh1NZyshQKeJ0IU2
+ByeFAq/h2fGI9xK1FNrmOyWQjdFW1L7s7hEfjRD3YINOsPbxRNEtomI7494G4QrX
+R+PAEattCyRYbHocbwVbgTwmZdBB4SAobkXEF3n583k8hkcr8aj1Ix1PwNUUOfRK
+8fNqddXanj31lflbkHS4KVEUFQnZh8yoc7ggGXOmd9KBbBYBwV2KXO7mM8ByAHJF
+07rJYyAtsmGN2TXTdlwoHqrvpDOf3gXnW2bEsizHwKICmLpllUlKoNZs7mKg1LWH
+/Kcx83ZMJz7rwVRGTYwE0KEoTBC0J4nn9XcmK2iBsYAMsFk2irE1DV5esGz0rm0v
+2lFvuAgE7rS+DlB5sM5zA3hb1u4dtktfcfIXkEdr/yiJx7sB3FSKFa+RruDI6Lmk
+pFvw5DBeuRDKhgcBVL/1P7xr+qeMTO4QHlCPz1+jyE/fFo0rBfGaYJCnY23Qif3V
+9CTzXc+H5BSwbIjt7V6JBFqIT4uo0hiV9/gR5Gbr+vL9Dz3cJoRTnZcXcfdhXPEF
+UoQJF6pdXwF/TJnvel5TbnQfcxy5+cwp6dDWecDCGAQJAVwODr0=
+=jQnN
 -----END PGP SIGNATURE-----
 
---HLWpqPx4XZYkemr3--
+--6trSTmE4GvfO0tqA--
