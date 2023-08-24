@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F16C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 15:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C54EC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 15:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3C3786776;
-	Thu, 24 Aug 2023 17:14:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2957386751;
+	Thu, 24 Aug 2023 17:14:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S3Igrsa6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oXSjSTx1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3100A86776; Thu, 24 Aug 2023 17:14:41 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 3B62E86751; Thu, 24 Aug 2023 17:14:46 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7495586751
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 17:14:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F88C867A8
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 17:14:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d77f869dccfso842424276.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 08:14:38 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-58ca499456dso41477b3.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 08:14:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692890077; x=1693494877;
+ d=konsulko.com; s=google; t=1692890082; x=1693494882;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=puBGZAYIh4IElRXV2wBQGpKXC4zvg16Mh5aV3dMBTCU=;
- b=S3Igrsa6hDINmKKu6+hyPI84qrx27dBTh1o8wTWp2txlhZcGGpOR9GvECzy36+fvfl
- ePRE6acGWBEAsCqEkerkmMD5sicuBpcFcqylJRlYYN46eNMB4w+zOSzDJgVBl6jHHq5k
- 0x9Xk9Rjuco4gxDT+VRzFYmmmzBDvyujPzFXY=
+ bh=T9fo36XkZSsH70LsFdPPgpzXlMT6rEQf97b8qYxKuYA=;
+ b=oXSjSTx1HqHFmAYsPCxQbBVlaA9o6+NvVSIVUPDIE/b/BP/gjvGB1d9eJxCVbhGj+O
+ 30hoCreu2tuQiBjEkpmkgCpPSqP4DdYIgMmAj7GM8FK9kT9msoAzITSFIiXq6iO3ox89
+ xDFSs1G7uv6kKzHLccdzSyrV2PTap164uvu6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692890077; x=1693494877;
+ d=1e100.net; s=20221208; t=1692890082; x=1693494882;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=puBGZAYIh4IElRXV2wBQGpKXC4zvg16Mh5aV3dMBTCU=;
- b=RMGwQEdhXgpL/ZvoDe9ETfYopPwU5GDLpIS6SReucEIhFODpWPekcAlv450nsN5FrL
- lu9z3Qt1HCZZzoZG/LZiQJAloN0zk4lZB+0s+EXgEwkuvxcfnJZEMYLimOmpDpq7DYIm
- ut4Ycv0UTvZ0jFlYAH5Pe9YpV0u4x+sPMFU8zFzkzsTFREj714VP0xAlZepFAEF8A4OR
- J1icravjKwRKTvpdJ0ye9vzGKvRb2GmNV5xrV7sokP8hyMqDTtL4x75i3Cvx3HjZJ9uZ
- meWmUJM1JV06Fpr4f1PfF6CizkrCTqglrmBlN9aQV2iSEZL9xsPnK2WSVn8BAfxZLoRe
- pbAw==
-X-Gm-Message-State: AOJu0YzrI172MS/8hSSz9SXCWKOtaaB4mJD3AYX91nNnOQwlKKI2yn3E
- aAQ00S9TtqXuyawvjJUnfEwjvA==
-X-Google-Smtp-Source: AGHT+IGarZhgeUe98K5yeL0BOwJ4KpGuobOBLrm8j5hZZ5RvnZ7rJPRcyNzicuFejjYZm4HaLoPkLQ==
-X-Received: by 2002:a25:aad3:0:b0:d71:ed11:d9f5 with SMTP id
- t77-20020a25aad3000000b00d71ed11d9f5mr16883200ybi.57.1692890077238; 
- Thu, 24 Aug 2023 08:14:37 -0700 (PDT)
+ bh=T9fo36XkZSsH70LsFdPPgpzXlMT6rEQf97b8qYxKuYA=;
+ b=l3TNk2chz1+eOimPPEUq0IcUUA0p8yNxkTl4SV1m1xKkVUJmfGoScFx+P0v+g91U0s
+ goTkcMYRAc+J3X+2c1Mtdd1DWuKYXfNEWJ/y0ZpsW2360yGvi3K1So07cB7Z+zgYLFwB
+ k/NTN5TGA7jZy+5r4yK5Pv33wfbhxXRkM73Whdb0tOwvQsaLHz5hLOqRZaFeLAzTXeQh
+ Mjr6yUZ6CzN1z4NvpwvrUnPyS3qCOPXscB0Kt4KcT86tnjAwBXdC16LHD4wPk3Gx+J4u
+ QxcfbRThuH3/Qw2foxwvweIDTUude9gjsIIm5fMx2+fOKqr67eHw/1omeM8BPzZKZX9n
+ 70+g==
+X-Gm-Message-State: AOJu0YwmcFdjQnM9zGrXzzS6QUqYQ8BIYqmbEEB3ZFzwHJdloTQekpIj
+ 9ywSD1T3OUjzgKv+Hjai5vYPnw==
+X-Google-Smtp-Source: AGHT+IGu/XF3HL7KWKBXM0bJa7zHIhWvWHkppIyrnGrMFh+G96jPxeuSc2AcNNd24r9krVHEXC1uEg==
+X-Received: by 2002:a81:9915:0:b0:592:9236:9460 with SMTP id
+ q21-20020a819915000000b0059292369460mr692129ywg.31.1692890082201; 
+ Thu, 24 Aug 2023 08:14:42 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
  [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
  by smtp.gmail.com with ESMTPSA id
- a3-20020a25f503000000b00d77bd2fe760sm866475ybe.27.2023.08.24.08.14.36
+ c10-20020a81df0a000000b00577044eb00esm3888251ywn.21.2023.08.24.08.14.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 08:14:36 -0700 (PDT)
-Date: Thu, 24 Aug 2023 11:14:34 -0400
+ Thu, 24 Aug 2023 08:14:41 -0700 (PDT)
+Date: Thu, 24 Aug 2023 11:14:39 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Nishanth Menon <nm@ti.com>
 Cc: Neha Francis <n-francis@ti.com>, Simon Glass <sjg@google.com>,
@@ -70,16 +70,16 @@ Cc: Neha Francis <n-francis@ti.com>, Simon Glass <sjg@google.com>,
  Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH V5 11/17] arm: mach-k3: am625_init: Convert
- rtc_erratumi2327_init to static
-Message-ID: <20230824151434.GX3953269@bill-the-cat>
+Subject: Re: [PATCH V5 08/17] include: env: ti: ti_common: Add a generic
+ findfdt
+Message-ID: <20230824151439.GY3953269@bill-the-cat>
 References: <20230824031101.3460411-1-nm@ti.com>
- <20230824031101.3460411-12-nm@ti.com>
+ <20230824031101.3460411-9-nm@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uApkwhh3SsXqEO68"
+ protocol="application/pgp-signature"; boundary="XbVJrw2r8dId7pX0"
 Content-Disposition: inline
-In-Reply-To: <20230824031101.3460411-12-nm@ti.com>
+In-Reply-To: <20230824031101.3460411-9-nm@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,42 +98,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uApkwhh3SsXqEO68
+--XbVJrw2r8dId7pX0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 10:10:55PM -0500, Nishanth Menon wrote:
-
-> The erratum is called locally, make it static, drop the #ifdeffery since
-> it will only be called in R5 build and mark it potentially unused to
-> stop compiler screaming at us.
+On Wed, Aug 23, 2023 at 10:10:52PM -0500, Nishanth Menon wrote:
+> ti_mmc bootmethod uses a findfdt routine that is expected to be
+> implemented by all platforms.
 >=20
-> While at this, drop the redundant return for a void function.
+> Define a default findfdt based on configured DEFAULT_DEVICE_TREE option
+> for u-boot. This saves duplication across multiple boards and handles
+> architecture folder location changes centrally.
+>=20
+> TI ARMV7 platforms will need to override default_device_tree_subarch
+> in the env file to point to the appropriate platform. Note: default
+> "omap" is used to cater to "most common" default.
 >=20
 > Signed-off-by: Nishanth Menon <nm@ti.com>
+> ---
+> New patch (part of bootstd transition)
+>=20
+>  include/env/ti/ti_common.env | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>=20
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index e87a41a6590b..322f849a5560 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -32,3 +32,15 @@ bootcmd_ti_mmc=3D
+>  	else;
+>  		run get_kern_${boot}; run get_fdt_${boot}; run get_overlay_${boot}; ru=
+n run_kern;
+>  	fi;
+> +default_device_tree=3DCONFIG_DEFAULT_DEVICE_TREE
+> +default_device_tree_arch=3Dti
+> +#ifdef CONFIG_ARM64
+> +findfdt=3D
+> +	setenv name_fdt ${default_device_tree_arch}/${default_device_tree}.dtb;
+> +	setenv fdtfile ${name_fdt}
+> +#else
+> +default_device_tree_subarch=3Domap
+> +findfdt=3D
+> +	setenv name_fdt ${default_device_tree_arch}/${default_device_tree_subar=
+ch}/${default_device_tree}.dtb;
+> +	setenv fdtfile ${name_fdt}
+> +#endif
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+How does this override work in practice?  I fear that it's relying on
+the (not exactly documented) mechanic of "last one set generally work".
+So perhaps we don't want this in ti_common.env but instead
+include/env/ti/default_findfdt.env and then #include that, and then
+platforms that need different just don't #include this.
 
 --=20
 Tom
 
---uApkwhh3SsXqEO68
+--XbVJrw2r8dId7pX0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnc9oACgkQFHw5/5Y0
-tyw59Qv/Qgsxg2MTWfaxMRuFLWY1C1LGdxb3Bex0wPuKrwsZ6LF7VOCyqWw3ESt1
-Oa2qjVgQTGY0InyKKB9+WUoloWCYL2xYcl+3MqYHUruBnoRAZTsO6tlnG2DyAthE
-cor2iaQusRLDODSr4AgsO/qFgL0UJQE9mXFYQ4yESuOZ4RhwfYhQI6JWtUfalZQH
-Bx8xmJpqn24Qt6gOVaj0zWFvQW1LN0c12PSHAwpoXn8eQTTPZ/3hwTkvduMvOlir
-2hT8Cca/mR24TtPaLndD9msRrsc8KlE0hCQwir8oPI3q2xLxoQKnIo6ugTzCHU4v
-xFzxd84Q5tI2xpb6ncp2N4kc2O8m6KT0Cpne9ZPoynF8HAE40vNZtFMojZn5ajUA
-ZNGVM/sdiSx6NlJJxkULEMUG9yjqw5Uhgd21aPgM59/xzouR2AFwjyrFX1m/iYp8
-8g86tOGYalP7Oh5d9wM8FZPoBs+jICyU93YyxFQYhkHrdJ0xyAtZtEh2u9fkXtyx
-+ZxAf5B6
-=8UNq
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnc98ACgkQFHw5/5Y0
+tyzCHwv9FHVj8lhzN5cZui88DyGDwo/Od3SXO5a4aWeiIveDSH1gxs78x3+3U/dK
+WE7LiD5VBjFHqwq0dPg3MqSQJ7NyKI2gZz/C5BeUyI+xEC16/SknZqH3J3nJSIAG
+Q7Fqhy83uHKrHqyAxzJYoAxJZSO/tj31r6IhV8lQlUYWouCHGfTzF9Dx/rPr/Hdb
+HsvmsZ1Xpv0+1RA1vFQTHfqshvPigJMmk+McpclR2synED9tLA6CvAhSRQFEFcDB
+a5K0lsBRVYQRlqcLmFpiuh5Lqy8GQfXxvAn4EBCvoZ9NQujR9Ui5WHfVvm1bd25R
+GkubrNz96mSKnlNVHodvFQh/zqktF2Zxy/tlRtOWO2pJDnKtsHht/T6A5pfJVMdy
+HeMsmoLz5gtqR0/c1ZDGMojnB2oRcU1Kl/jGBapM2oIi2GmSwpG0SP/yx/qR2fJl
+P2wuas+LWRuC/xnLboc0Jqya7bTfbO7q4XNG8JK/Gi9jOlUy0AyWgNosYt02yhSE
+cU9hMVEy
+=ZAXM
 -----END PGP SIGNATURE-----
 
---uApkwhh3SsXqEO68--
+--XbVJrw2r8dId7pX0--
