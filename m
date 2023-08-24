@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 349DBC27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:33:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E85C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:33:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2D948658A;
-	Thu, 24 Aug 2023 15:33:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 010D986435;
+	Thu, 24 Aug 2023 15:33:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P0Qkr3nV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GY8sRjfm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A6D8658C; Thu, 24 Aug 2023 15:33:24 +0200 (CEST)
+ id B835A8077D; Thu, 24 Aug 2023 15:33:53 +0200 (CEST)
 Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
  [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3D928653B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:33:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3872F8653B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:33:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
+ spf=pass smtp.mailfrom=thierry.reding@gmail.com
 Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-99d937b83efso878811566b.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:33:21 -0700 (PDT)
+ a640c23a62f3a-99c3d3c3db9so903644966b.3
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:33:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692884001; x=1693488801;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=zBs0UUkMPcCJFRdy62HZCQzRPlIZUqbTmyw7dK4t2pg=;
- b=P0Qkr3nVxbHp0LMF7dxi5MRPP4QoaWDnmo8ex8ca7rFKCeoPTTt5ggP/Yz4PRrCeLG
- dHYBTA+LNAdS0mkLxOZveDGHQeLa4nKljrLaAm7XvPh58tEx8R/t5kmDKSecjLAiPe/Q
- c/mSQ9iKiefDy8tCjmxgGIhv1VujmRDiT7TMVXtQZLU+ynTLCTgyzPhYjWOVSU8Xz3Xf
- tR6QUWdP2Dqcn2K3zxTLFtYwl3jMq7690nHld4JeKtEchydfU5KMHYtLR4l12Ff05TfQ
- TRd0ahIz3TUA3nsvVfweLTosabZIBnlGGepHNn1vBEOz9jbLw+l088b89ugDR/p6F5y9
- +V2w==
+ d=gmail.com; s=20221208; t=1692884031; x=1693488831;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9HIhNdQaSvM/W2SsXqgAd0khgKXHhixqYUsjBN6+kgY=;
+ b=GY8sRjfmGyXcEQaQctKMqoYrFLc8CaIAdtaEaQbyw/R5XR/QgFnR4Y6u2XbzE7WGt7
+ 8r6fztVTJlDHFyKdZ04Px0ULoPHQmYG9Ay+lksKEb5Ca8q0cvw71cuKP+Gpxj/+qlydW
+ iz/RZ95ZsW0+iwvsz0LUWtJPhL+bIAhobIi6+uFGNxyO5Li2Ts3WrEIX1+D9P9MCXWxB
+ TXdmxIzwxbWBJ8EmxbYmis6rHxg+A7aYVCaGyFQsQS8tXBWJfDEQvYaliPrqUFdDzQeo
+ AkKjcocJM2BHJbk2ZIM9O2w+WM+L4cXiZm6smtiuIb+Hr837wz6HStTdwK3aKb9Jbk3t
+ vX7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692884001; x=1693488801;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zBs0UUkMPcCJFRdy62HZCQzRPlIZUqbTmyw7dK4t2pg=;
- b=WBr2N8DREeHOnsSosKsQX3nNmd8+wR9MdYQG3aa6LbBBqYWnpOPt9Bh0X0rCcD1B+x
- fa4svm4QKN3ZtDaZFnsZw+3M6C2BuQDtwoAKUpEiKVqrhz5HnH2o0mhB/Mn4phl53Dm/
- ExZwgnZMHftQVrMaAR/mKidwBdM1ph138IW6Wxwv5mcv8KufhFexY+BfoENlPnefQ6IM
- rLVUQkH6AhOwyrpeEV0v8bejiqFln7VyYO0zMOPRD1YIHxJ5WK8P2NJhl165nvnuaI2+
- eIbq1uLOwzmNjd2LF/uUPCEBLbW5EOeAJ71kvikUCkR5XUkGpYzQihdvPoLmXfRR/Axp
- MBTw==
-X-Gm-Message-State: AOJu0YwUUPPN/9oL0+ef7JAoNc9GRhyvaezuhKLHllbDocEJvjkXiLTX
- MtD8fX2YvBQruc5kZai2mfvBmbTXUGvOug==
-X-Google-Smtp-Source: AGHT+IEKGLHG0E0ymcemQyKsh3n6Zk+rCTpxn/iyPw1qUVY076YNreNDzq8eNRwC9nz3nIu2Uez0dA==
-X-Received: by 2002:a17:907:2c62:b0:99c:c6b7:65e4 with SMTP id
- ib2-20020a1709072c6200b0099cc6b765e4mr10671748ejc.77.1692884001314; 
- Thu, 24 Aug 2023 06:33:21 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.238.14]) by smtp.gmail.com with ESMTPSA id
- xa5-20020a170907b9c500b009a219ecbaf1sm663878ejc.85.2023.08.24.06.33.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Aug 2023 06:33:20 -0700 (PDT)
-Date: Thu, 24 Aug 2023 16:33:20 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>
-CC: Thierry Reding <treding@nvidia.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v1_1/1=5D_mmc=3A_tegra=3A_get_defau?=
- =?US-ASCII?Q?lt-tap_and_default-trim_from_device_tree?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <ZOdbMq68QtVbrGVM@orome>
-References: <20230819153501.77245-1-clamor95@gmail.com>
- <20230819153501.77245-2-clamor95@gmail.com> <ZOXnfY5hKrhSpOlY@orome>
- <B2FF6549-4F01-4010-968E-D790E72AE2EE@gmail.com> <ZOdbMq68QtVbrGVM@orome>
-Message-ID: <D8556B98-DE33-4A79-B409-2269A5F1CF5D@gmail.com>
+ d=1e100.net; s=20221208; t=1692884031; x=1693488831;
+ h=user-agent:in-reply-to:content-disposition:mime-version:references
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9HIhNdQaSvM/W2SsXqgAd0khgKXHhixqYUsjBN6+kgY=;
+ b=a5LDr+4uuRCL36RpKd1ij1o6dEBbDBQ7BNKokt/w4gRvG3osXa0bVM3eqQStreSJlI
+ xpF38XWx1e3msd+evRFJczmyOcMx4t4k4gKMVQP0mxRoVQYIgAhxo93cwR5Bo1pTiVXM
+ 1gYkL6RKqSYtK1gpFtQ8iLC3oyUSjXgHwDJpuHY0c27GoM1pcDbw+ee/J3o7pLVfzify
+ IFCHYLHMDAXlefQo9eKBViI8jZfoXxXhStNw+D0HHH+wM3v6e2iL6/FE1Yu3c/IFj25B
+ Mq7D0EOZczZRhv3hIxV7LIANbYpBd/OltYWjDi3+cQU+r2i/xY9Urz2KHOxcg6t9wuOq
+ iDng==
+X-Gm-Message-State: AOJu0YwOhaQQA43eLj/AxJ8ETy1X7coNDG9D+MS43OxPnVCsiNjmHiKA
+ 7X7k9dXb2uvMMpmdO468qDM=
+X-Google-Smtp-Source: AGHT+IHWo6+jrwPhPSw/Kvxk8CMeKSMys0DKPKLtggRhYlRFA4FRwMpiEgnggHc5DDNmaZj65OgvQA==
+X-Received: by 2002:a17:906:20c7:b0:9a1:ecb5:732e with SMTP id
+ c7-20020a17090620c700b009a1ecb5732emr3672325ejc.71.1692884030498; 
+ Thu, 24 Aug 2023 06:33:50 -0700 (PDT)
+Received: from orome (p200300e41f1bd600f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f1b:d600:f22f:74ff:fe1f:3a53])
+ by smtp.gmail.com with ESMTPSA id
+ qn11-20020a170907210b00b0099b76c3041csm10954882ejb.7.2023.08.24.06.33.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 06:33:50 -0700 (PDT)
+Date: Thu, 24 Aug 2023 15:33:48 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 17/19] ARM: tegra: dt-setup: convert TrustZone remove
+ into config
+Message-ID: <ZOdcPHTsyKxN9OzS@orome>
+References: <20230822112217.4646-1-clamor95@gmail.com>
+ <20230822112217.4646-18-clamor95@gmail.com>
+ <ZOXq0SrF9h0Z9uHw@orome>
+ <86A72122-840F-46B1-9C25-0B6F5AFB82A1@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="KFlTdV246go+DvPy"
+Content-Disposition: inline
+In-Reply-To: <86A72122-840F-46B1-9C25-0B6F5AFB82A1@gmail.com>
+User-Agent: Mutt/2.2.10 (2023-03-25)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,144 +99,66 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--KFlTdV246go+DvPy
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-24 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 16:29:22 GMT+03:00,=
- Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Wed, Aug 23, 2023 at 02:38:48PM +0300, Svyatoslav Ryhel wrote:
->>=20
->>=20
->> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 14:03:25 GMT+03:=
-00, Thierry Reding <thierry=2Ereding@gmail=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->> >On Sat, Aug 19, 2023 at 06:35:01PM +0300, Svyatoslav Ryhel wrote:
->> >> Default-tap and default-trim values are used for eMMC setup
->> >> mostly on T114+ devices=2E As for now, those values are hardcoded
->> >> for T210 and ignored for all other Tegra generations=2E Fix this
->> >> by passing tap and trim values from dts=2E
->> >>=20
->> >> Tested-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom> # ASUS TF701T
->> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> >> ---
->> >>  arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh | 17 ++++----
->> >>  drivers/mmc/tegra_mmc=2Ec                     | 46 ++++++++++------=
------
->> >>  2 files changed, 30 insertions(+), 33 deletions(-)
->> >>=20
->> >> diff --git a/arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh b/arch/ar=
-m/include/asm/arch-tegra/tegra_mmc=2Eh
->> >> index d6a55764ba=2E=2E750c7d809e 100644
->> >> --- a/arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh
->> >> +++ b/arch/arm/include/asm/arch-tegra/tegra_mmc=2Eh
->> >> @@ -128,21 +128,22 @@ struct tegra_mmc {
->> >> =20
->> >>  /* SDMMC1/3 settings from SDMMCx Initialization Sequence of TRM */
->> >>  #define MEMCOMP_PADCTRL_VREF	7
->> >> -#define AUTO_CAL_ENABLE		(1 << 29)
->> >> -#define AUTO_CAL_ACTIVE		(1 << 31)
->> >> -#define AUTO_CAL_START		(1 << 31)
->> >> +#define AUTO_CAL_ENABLE		BIT(29)
->> >> +#define AUTO_CAL_ACTIVE		BIT(31)
->> >> +#define AUTO_CAL_START		BIT(31)
->> >> +
->> >>  #if defined(CONFIG_TEGRA210)
->> >>  #define AUTO_CAL_PD_OFFSET	(0x7D << 8)
->> >>  #define AUTO_CAL_PU_OFFSET	(0 << 0)
->> >> -#define IO_TRIM_BYPASS_MASK	(1 << 2)
->> >> -#define TRIM_VAL_SHIFT		24
->> >> -#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
->> >> -#define TAP_VAL_SHIFT		16
->> >> -#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
->> >>  #else
->> >>  #define AUTO_CAL_PD_OFFSET	(0x70 << 8)
->> >>  #define AUTO_CAL_PU_OFFSET	(0x62 << 0)
->> >>  #endif
->> >> =20
->> >> +#define TRIM_VAL_SHIFT		24
->> >> +#define TRIM_VAL_MASK		(0x1F << TRIM_VAL_SHIFT)
->> >> +#define TAP_VAL_SHIFT		16
->> >> +#define TAP_VAL_MASK		(0xFF << TAP_VAL_SHIFT)
->> >> +
->> >>  #endif	/* __ASSEMBLY__ */
->> >>  #endif	/* __TEGRA_MMC_H_ */
->> >> diff --git a/drivers/mmc/tegra_mmc=2Ec b/drivers/mmc/tegra_mmc=2Ec
->> >> index f76fee3ea0=2E=2E7627800261 100644
->> >> --- a/drivers/mmc/tegra_mmc=2Ec
->> >> +++ b/drivers/mmc/tegra_mmc=2Ec
->> >> @@ -37,6 +37,9 @@ struct tegra_mmc_priv {
->> >>  	unsigned int version;	/* SDHCI spec=2E version */
->> >>  	unsigned int clock;	/* Current clock (MHz) */
->> >>  	int mmc_id;		/* peripheral id */
->> >> +
->> >> +	u32 tap_value;
->> >> +	u32 trim_value;
->> >>  };
->> >> =20
->> >>  static void tegra_mmc_set_power(struct tegra_mmc_priv *priv,
->> >> @@ -526,31 +529,6 @@ static void tegra_mmc_pad_init(struct tegra_mmc=
-_priv *priv)
->> >>  		printf("%s: Warning: Autocal timed out!\n", __func__);
->> >>  		/* TBD: Set CFG2TMC_SDMMC1_PAD_CAL_DRV* regs here */
->> >>  	}
->> >> -
->> >> -#if defined(CONFIG_TEGRA210)
->> >> -	u32 tap_value, trim_value;
->> >> -
->> >> -	/* Set tap/trim values for SDMMC1/3 @ <48MHz here */
->> >> -	val =3D readl(&priv->reg->venspictl);	/* aka VENDOR_SYS_SW_CNTL */
->> >> -	val &=3D IO_TRIM_BYPASS_MASK;
->> >> -	if (id =3D=3D PERIPH_ID_SDMMC1) {
->> >> -		tap_value =3D 4;			/* default */
->> >> -		if (val)
->> >> -			tap_value =3D 3;
->> >> -		trim_value =3D 2;
->> >> -	} else {				/* SDMMC3 */
->> >> -		tap_value =3D 3;
->> >> -		trim_value =3D 3;
->> >> -	}
->> >> -
->> >> -	val =3D readl(&priv->reg->venclkctl);
->> >> -	val &=3D ~TRIM_VAL_MASK;
->> >> -	val |=3D (trim_value << TRIM_VAL_SHIFT);
->> >> -	val &=3D ~TAP_VAL_MASK;
->> >> -	val |=3D (tap_value << TAP_VAL_SHIFT);
->> >> -	writel(val, &priv->reg->venclkctl);
->> >> -	debug("%s: VENDOR_CLOCK_CNTRL =3D 0x%08X\n", __func__, val);
->> >> -#endif	/* T210 */
->> >>  #endif	/* T30/T210 */
->> >>  }
->> >> =20
->> >> @@ -588,6 +566,21 @@ static void tegra_mmc_reset(struct tegra_mmc_pr=
-iv *priv, struct mmc *mmc)
->> >> =20
->> >>  	/* Make sure SDIO pads are set up */
->> >>  	tegra_mmc_pad_init(priv);
->> >> +
->> >> +	if (priv->tap_value || priv->trim_value) {
->> >
->> >I think 0 is a valid value for both tap and trim, so you want to be ab=
-le
->> >to write that=2E I suggest getting rid of the conditional and always
->> >writing these values and rely on defaults to make sure that a good val=
-ue
->> >is always programmed=2E
->>=20
->> Tegra 3 uses 0x0F on all my devices which is not 0=2E
->>=20
->> >Alternatively if you really only want to program these when they've be=
-en
->> >specified, use an extra variable (or something like -1 as a default
->> >value) to discriminate=2E
->>=20
->> Why 0 value cannot be used as "flag" to skip tap and trim setup if valu=
-es are not set? Using any value but 0 will cause additional comparation in =
-condition and will definitely not improve readability=2E
->
->If you use 0 as a flag it implies that you can never set 0 as a value
->explicitly=2E So if some SoC or board ever needs to set that exact value
->it can't=2E
+On Wed, Aug 23, 2023 at 02:47:11PM +0300, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 14:17:37 GMT+03:00, =
+Thierry Reding <thierry.reding@gmail.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
+=B0=D0=B2(-=D0=BB=D0=B0):
+> >On Tue, Aug 22, 2023 at 02:22:15PM +0300, Svyatoslav Ryhel wrote:
+> >> Remove of TrustZone nodes is required by many product devices
+> >> which require repetable calls of same function from device board.
+> >> To simplify this, TZ remove is converted into Kconfig option.
+> >>=20
+> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> >> ---
+> >>  arch/arm/mach-tegra/Kconfig    | 14 ++++++++++++++
+> >>  arch/arm/mach-tegra/dt-setup.c |  7 +++++++
+> >>  2 files changed, 21 insertions(+)
+> >
+> >I kind of preferred the original because it's very explicit. There's
+> >also no big advantage in consolidating this because the code is unlikely
+> >to ever require changing (the libfdt API is quite stable and these nodes
+> >are all hard-coded anyway). This new variant put non-generic code (it
+> >requires a Kconfig option after all) into a generic place, so it seems a
+> >bit backwards.
+>=20
+> So you say that I have to add same function to boards over and over
+> for all devices I plan to mainline? Unneeded code duplication in
+> action.
 
-I got this same thought after I sent this answer=2E It is valid point and =
-use of extra variable seems valid=2E Thanks=2E
+There's a balance to be struck between duplication and readability. If
+you insert this board-specific code into a generic code path, that
+generic code path becomes difficult to read given the extra #ifdef
+guards etc. If you're really worried about duplicating code you can move
+the two libfdt calls into a separate function and call that function
+=66rom each of the boards that need it.
 
->Thierry
+Thierry
+
+--KFlTdV246go+DvPy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmTnXDwACgkQ3SOs138+
+s6EXig//c+sUShJ1JHJK6NeG+eGd7Pek/drMwDaosMUitdV2yWjgmeygPfBfgRcX
++6NNF9DCImGmjIBdWgcsJkgDWokGdkdwyEEI4gg8VeBGDnAdyNnY4+0S/Zp+YTZE
+xHBWpPfsS+vlUScz7G7/Zi6YH4hL6rKUyTOKjetXNRQ5ZFoDZS8dSwhT9ghZHNRL
+BUrBuNfyJ48oZTvB+eBpjchZpIy1wP10btDceMm6AKxUrdimpdKO5Y5oJJOPxKX9
+stmdP26F10jc3NqGPQUz3d3rDQnFRzl9jA6QFgU8tN08YDn7HIQktBPtLbK4TFe3
+KSywJczGDIykFnVhkcvRiBMCZtG6sTPHhKTUbWrgVS5AruujTJzsKQJl7slT2mFL
+2G5FghQAXINeeCZ5ba1rA08KcwO2jrerrmXyImWZ0YgfDBvsc68C75fLycHsJR9K
+dT3sXCFwMXrGXr+Z2l4GCIfVyfDI91E9fb8I9gZCKc08P9ByUPrZHEby4hwucaFj
+08J+g76yg3fqwCudPIY7trhXXDtbq1lNkalJbbCJaowe8LxJb6SAMqInaw0KK1Bk
+eyX853eKCZ8lC6qB2A1poYuKkb3rXt9HZBVh7hPbwvgCMXKlOFiGp/Gyf4uucJQ6
+azZRHzWH4o48qUzX93NSVcPo2oxkFUCnxbaY4ImaqcJaM9X33Wk=
+=7ebW
+-----END PGP SIGNATURE-----
+
+--KFlTdV246go+DvPy--
