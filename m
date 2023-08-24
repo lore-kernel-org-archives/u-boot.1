@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A37C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:28:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21758C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61CC6869E1;
+	by phobos.denx.de (Postfix) with ESMTP id 9E47C869EB;
 	Thu, 24 Aug 2023 21:27:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UT4YoaPb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QB0LVFIw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91614869D2; Thu, 24 Aug 2023 21:27:01 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id E652D86995; Thu, 24 Aug 2023 21:27:01 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B60186900
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52E198690B
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:26:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5007c8308c3so254563e87.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:58 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-52a39a1c4d5so318532a12.3
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:26:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692905218; x=1693510018;
+ d=gmail.com; s=20221208; t=1692905219; x=1693510019;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mSSqpiiTKFMhLmIKSJQ2JBruJbcK3t9XTWfTF9IzDzk=;
- b=UT4YoaPbstXs9G8r4NmbLaVQPZ0G7T3za2eAGgBIP34uwLwM/8Dh4s5EpiNCLqTvv1
- r3oOLXK1bdJFtJEkSCCZeCCDYTAhrLP5V1A5hzH2taGrQMUPmwhtvg6Hn+hT1/nEIb1s
- 1KkxFFfYlBNmRaM22+IWp9ukcqOlzt0792WXjbz2IcR3Z8zGjV8fxq8sO0I//tj92+kY
- vdMxxD0QDNVVt6TfbkDNoXauQNulOPVPVFChZIZ4d/mLSmG4fhhbSav/B7QHbcDF86oJ
- o3Kbhwe+bc0YQxRVYdjdFD3udnpQTnK92VhMn3D2ii6Elu0md/FvPfKOuxDGY6Dhr3tl
- Qg5w==
+ bh=VtuZa1yDI4jU6hOW/P1KFr1PEN+hHWyFrCubcZCbl1E=;
+ b=QB0LVFIwUEnPKNNmESUTQsfXnYSpvyYFskmkeMNP4fuov/PyPFs/KruAtCLNiqzNoq
+ KkacNw3lhhrGs76yYBsxhreGjzhMa6gN9FaxIMkGgyk256MCtG88Y/SO6lXFFN1qAdS/
+ 8Ecl1C2YsI3fn5bAg1C5z2u9cpXr21Rjjc4HOZ7D3mrFGgEJzs8smsZztHSKXJI8//L+
+ jzoV8Ktc0bEiX8FFRhSPsPFgeWWIO/HpAMBxI8PQrtqNzmZuxsFLyCYi+UeX4qV+7vLY
+ UpVnHoif6bFgAR3nCeNrS2VWPj5kWGIhiQiTJO4yvPknUbRVYhu4GhAEjhFI4+bf28j7
+ SZ4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692905218; x=1693510018;
+ d=1e100.net; s=20221208; t=1692905219; x=1693510019;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mSSqpiiTKFMhLmIKSJQ2JBruJbcK3t9XTWfTF9IzDzk=;
- b=NNnwIrXF0QEbDd2kAuCe47/R8+SMLx6J+5zx+aDRXhhRWLLjnRhvLVw8VoS9WnyyfP
- ULtn1J0//GmcERdr325P/fSTmNIoEbIyZ7PhvnnTJqT0kQ7DfTVBrtWwo/ejXWPmh5GT
- hPQCGQb/JDmewxoE+ip12OkXFdrms4eR3YBc7Kax9qqO/FvlwN6Oy1Gak8uNLV0RVOUJ
- iSoE+x4fViFrv82PsbVfej17VlwrWMWtb34zHkZUfe69b2x/EFKZu5OqjX/1QZoAue2r
- lcyU7qal+9kYPM0Ej3pXJBE7AfahWMWUlwsH62wKDeINCsbOsvrhF/zOrqIxm4GWVqgM
- Og3g==
-X-Gm-Message-State: AOJu0YxCa3ak0idCoZB1PUv9zGVqt4Z3b/VPtcMHbP+Xf+u84KcRDYdf
- xHPtGQNqhCScFefABWp0Klo=
-X-Google-Smtp-Source: AGHT+IGROHhHaBVhiEcFKXvdcesLj95gCvuarj4NqdPLHeUk4Gb0m0cXdqEUnLlK2zWm0sJRvw+4kw==
-X-Received: by 2002:a05:6512:615:b0:4fd:d9dd:7a1a with SMTP id
- b21-20020a056512061500b004fdd9dd7a1amr11584321lfe.31.1692905217739; 
- Thu, 24 Aug 2023 12:26:57 -0700 (PDT)
+ bh=VtuZa1yDI4jU6hOW/P1KFr1PEN+hHWyFrCubcZCbl1E=;
+ b=I2bZLUe+04MmOR5ThnnLbONE0g7Jw9ekcOTIvCQjPpNolUdoKY9w4MEDXxJxoLof+w
+ JMNen6xsgiHpXcmcPA/fr06URYCpcbsLF55wsNUXnVr/9YDGBFColInNFI0yOeAMIHep
+ XxRdmSpY/1J39XO7QD9VKLiEfzZQph711lf85bZZnGEGwDqF8OrRRp2jAo+vqJOhJ+YJ
+ hYhRVWATpIeyKWd8364ri+uovhYx9j72ymSUgB2bLYc0QvO1ZWMDekwxnnLbok2UzRW+
+ 0ZYMD1BllxTZnHD6Ud5a9BKplhqRz1dnfZiKWcRz+Wt58F1eL4GNx2j0LCRqE82POB3D
+ IZ9Q==
+X-Gm-Message-State: AOJu0YyFauck5w0ButsuNp1exCAFJPHWGZbfRRg+hcje0eATWAR89+PO
+ SiP57bIQxafETs3xsrOKcWY=
+X-Google-Smtp-Source: AGHT+IGZ6NUkkx2+RKXCH5HdYfpNb2jWcZFjN9XrInR9kGUxwfK+v2xIVXtf5TbIeF9rU1ydf/arTA==
+X-Received: by 2002:aa7:d058:0:b0:522:4c7a:d5a9 with SMTP id
+ n24-20020aa7d058000000b005224c7ad5a9mr13581172edo.3.1692905218854; 
+ Thu, 24 Aug 2023 12:26:58 -0700 (PDT)
 Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
- be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.56
+ be20-20020a0564021a3400b0052a1d98618bsm96033edb.54.2023.08.24.12.26.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:26:57 -0700 (PDT)
+ Thu, 24 Aug 2023 12:26:58 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 10/16] ARM: dts: grouper: complete missing bindings
-Date: Thu, 24 Aug 2023 22:25:57 +0300
-Message-Id: <20230824192603.240104-11-clamor95@gmail.com>
+Subject: [PATCH v2 11/16] configs: transformer_t30: grouper: lg-x3: endeavoru:
+ sync defconfigs
+Date: Thu, 24 Aug 2023 22:25:58 +0300
+Message-Id: <20230824192603.240104-12-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230824192603.240104-1-clamor95@gmail.com>
 References: <20230824192603.240104-1-clamor95@gmail.com>
@@ -90,118 +91,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clean up the tree and prepare for DM PMIC migration.
-
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-asus-grouper-common.dtsi      |  5 +++--
- arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts |  5 ++---
- arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts | 11 +++++++++--
- arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts |  5 ++---
- 4 files changed, 16 insertions(+), 10 deletions(-)
+ configs/endeavoru_defconfig       | 2 --
+ configs/grouper_common_defconfig  | 4 ----
+ configs/tf600t.config             | 1 +
+ configs/transformer_t30_defconfig | 2 --
+ configs/x3_t30_defconfig          | 2 --
+ 5 files changed, 1 insertion(+), 10 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-asus-grouper-common.dtsi b/arch/arm/dts/tegra30-asus-grouper-common.dtsi
-index 4fa980f24f..fcf31e2dd0 100644
---- a/arch/arm/dts/tegra30-asus-grouper-common.dtsi
-+++ b/arch/arm/dts/tegra30-asus-grouper-common.dtsi
-@@ -1,7 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
- 
- #include <dt-bindings/input/input.h>
--
- #include "tegra30.dtsi"
- 
- / {
-@@ -62,6 +61,9 @@
- 		status = "okay";
- 		bus-width = <8>;
- 		non-removable;
-+
-+		vmmc-supply = <&vcore_emmc>;
-+		vqmmc-supply = <&vdd_1v8_vio>;
- 	};
- 
- 	usb1: usb@7d000000 {
-@@ -150,7 +152,6 @@
- 		regulator-name = "vdd_5v0_bl";
- 		regulator-min-microvolt = <5000000>;
- 		regulator-max-microvolt = <5000000>;
--		regulator-boot-on;
- 		gpio = <&gpio TEGRA_GPIO(H, 3) GPIO_ACTIVE_HIGH>;
- 		enable-active-high;
- 	};
-diff --git a/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts b/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
-index a98d3e2145..945ae404ac 100644
---- a/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
-+++ b/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
-@@ -22,7 +22,7 @@
- 			gpio-controller;
- 
- 			regulators {
--				vdd_1v8: sd2 {
-+				vdd_1v8_vio: sd2 {
- 					regulator-name = "vdd_1v8_gen";
- 					regulator-min-microvolt = <1800000>;
- 					regulator-max-microvolt = <1800000>;
-@@ -34,8 +34,7 @@
- 				vcore_emmc: ldo3 {
- 					regulator-name = "vcore_emmc";
- 					regulator-min-microvolt = <2850000>;
--					regulator-max-microvolt = <3100000>;
--					regulator-always-on;
-+					regulator-max-microvolt = <2850000>;
- 				};
- 			};
- 		};
-diff --git a/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts b/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
-index 44ea218a47..4363bfc87d 100644
---- a/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
-+++ b/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
-@@ -23,12 +23,19 @@
- 			gpio-controller;
- 
- 			regulators {
-+				vdd_1v8_vio: vddio {
-+					regulator-name = "vdd_1v8_gen";
-+					regulator-min-microvolt = <1800000>;
-+					regulator-max-microvolt = <1800000>;
-+					regulator-always-on;
-+					regulator-boot-on;
-+				};
-+
- 				/* eMMC VDD */
- 				vcore_emmc: ldo1 {
- 					regulator-name = "vdd_emmc_core";
--					regulator-min-microvolt = <1000000>;
-+					regulator-min-microvolt = <3300000>;
- 					regulator-max-microvolt = <3300000>;
--					regulator-always-on;
- 				};
- 			};
- 		};
-diff --git a/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts b/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
-index 812d5a1ba7..89348fde13 100644
---- a/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
-+++ b/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
-@@ -22,7 +22,7 @@
- 			gpio-controller;
- 
- 			regulators {
--				vdd_1v8: sd2 {
-+				vdd_1v8_vio: sd2 {
- 					regulator-name = "vdd_1v8_gen";
- 					regulator-min-microvolt = <1800000>;
- 					regulator-max-microvolt = <1800000>;
-@@ -34,8 +34,7 @@
- 				vcore_emmc: ldo3 {
- 					regulator-name = "vcore_emmc";
- 					regulator-min-microvolt = <2850000>;
--					regulator-max-microvolt = <3100000>;
--					regulator-always-on;
-+					regulator-max-microvolt = <2850000>;
- 				};
- 			};
- 		};
+diff --git a/configs/endeavoru_defconfig b/configs/endeavoru_defconfig
+index 38f26f2dcc..feb481170a 100644
+--- a/configs/endeavoru_defconfig
++++ b/configs/endeavoru_defconfig
+@@ -21,7 +21,6 @@ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_KEYED_CTRLC=y
+-CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="if run check_button; then bootmenu; fi; run bootcmd_mmc0; poweroff;"
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+@@ -44,7 +43,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_UMS_ABORT_KEYED=y
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_CMD_NFS is not set
+ CONFIG_CMD_PAUSE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+diff --git a/configs/grouper_common_defconfig b/configs/grouper_common_defconfig
+index 8dc88851f5..36ad0980e7 100644
+--- a/configs/grouper_common_defconfig
++++ b/configs/grouper_common_defconfig
+@@ -21,7 +21,6 @@ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_KEYED_CTRLC=y
+-CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="if run check_button; then bootmenu; fi; run bootcmd_mmc0; poweroff;"
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+@@ -43,7 +42,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_UMS_ABORT_KEYED=y
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_CMD_NFS is not set
+ CONFIG_CMD_PAUSE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+@@ -61,8 +59,6 @@ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_SYS_I2C_TEGRA=y
+-CONFIG_I2C_MUX=y
+-CONFIG_I2C_MUX_GPIO=y
+ CONFIG_BUTTON_KEYBOARD=y
+ CONFIG_DM_PMIC=y
+ CONFIG_DM_REGULATOR=y
+diff --git a/configs/tf600t.config b/configs/tf600t.config
+index 18ab4fbd87..ee1b827bea 100644
+--- a/configs/tf600t.config
++++ b/configs/tf600t.config
+@@ -2,3 +2,4 @@ CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-tf600t"
+ CONFIG_TRANSFORMER_SPI_BOOT=y
+ CONFIG_BOOTCOMMAND="setenv gpio_button 222; if run check_button; then poweroff; fi; setenv gpio_button 132; if run check_button; then echo Starting SPI flash update ...; run update_spi; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4d00
++CONFIG_VIDEO_DSI_TEGRA30=y
+diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
+index 802dcb1786..eaff0697bb 100644
+--- a/configs/transformer_t30_defconfig
++++ b/configs/transformer_t30_defconfig
+@@ -21,7 +21,6 @@ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_KEYED_CTRLC=y
+-CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="setenv skip_boot 0; setenv gpio_button 150; if run check_button; then poweroff; fi; setenv gpio_button 131; if run check_button; then bootmenu; fi; if test ${skip_boot} -eq 1; then; else run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff; fi"
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+@@ -45,7 +44,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_UMS_ABORT_KEYED=y
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_CMD_NFS is not set
+ CONFIG_CMD_PAUSE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+diff --git a/configs/x3_t30_defconfig b/configs/x3_t30_defconfig
+index 540c43096d..98744ec89d 100644
+--- a/configs/x3_t30_defconfig
++++ b/configs/x3_t30_defconfig
+@@ -22,7 +22,6 @@ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTDELAY=0
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_KEYED_CTRLC=y
+-CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="if run check_button; then bootmenu; fi; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x8000
+@@ -45,7 +44,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_UMS_ABORT_KEYED=y
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_CMD_NFS is not set
+ CONFIG_CMD_PAUSE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_SPL_DOS_PARTITION is not set
 -- 
 2.39.2
 
