@@ -4,41 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A842C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 13:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35009C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:02:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99EDA86433;
-	Thu, 24 Aug 2023 15:57:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3797E86504;
+	Thu, 24 Aug 2023 16:02:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KoCYa38f";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D07D86504; Thu, 24 Aug 2023 15:57:27 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 58D86863F6
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:57:24 +0200 (CEST)
+ id 3641386433; Thu, 24 Aug 2023 16:02:56 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B93C8650F
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:02:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B8211007;
- Thu, 24 Aug 2023 06:58:04 -0700 (PDT)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 35A6B3F762;
- Thu, 24 Aug 2023 06:57:23 -0700 (PDT)
-Date: Thu, 24 Aug 2023 14:56:21 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Iota Hydrae <writeforever@foxmail.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] pinctrl: sunxi: add SPI1 pinmuxes for f1c100s
-Message-ID: <20230824145621.33370e53@slackpad.lan>
-In-Reply-To: <tencent_807B704C8CF66453A9723C0E19D28E962607@qq.com>
-References: <tencent_807B704C8CF66453A9723C0E19D28E962607@qq.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1692885772; x=1693490572; i=xypron.glpk@gmx.de;
+ bh=YRChIWlXyYqfbAOC8hgVZY2vbIcg/HpL9ecpI5LwjWY=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=KoCYa38fXPuAKSRqh6jwdab/LcIbe2oe5OJf2Um0BzIsPm6bLRDenGgrGD28PlKRsWayUpc
+ M1rfsYeuhMMo/VOXvuKR7JEZtbKHap+0kZ1E08Tfc4m7iK8N0zsmFi++eQWiirEdPKJGgOePT
+ xpMs12b7I1hf+cyZUd0gNKaGJeId9uLg/1IAlOVTOu2hqn6VlyuA/B/oBzeYCUPvksHKZqkmZ
+ Ya4vKYzJZ8wiD3eFh7PbCDstj7QD/SKXuz9R2mCwkbMBaFLK/gyMWoWPGjY7lC4etbgRqTAj1
+ bebnhsCnI/EfPBSwc06ay2L2yTFTq11ifsxMcWOTweiPtw+QRWIA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([62.143.244.162]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MRmfi-1qAKYA1dFq-00TCxs; Thu, 24
+ Aug 2023 16:02:52 +0200
+Message-ID: <4b0ee7eb-0d8f-3a83-791a-e4bef539fd8a@gmx.de>
+Date: Thu, 24 Aug 2023 16:02:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] efi_loader: delete handle from events when a protocol is
+ uninstalled
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20230824115500.2388636-1-ilias.apalodimas@linaro.org>
+ <b84b35df-c146-5255-f9b6-427688cd7eeb@gmx.de>
+ <CAC_iWjLUFe=tBAZTndrzusDLpuFExSFRjjRxgzeZ1iL=_y57Kg@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjLUFe=tBAZTndrzusDLpuFExSFRjjRxgzeZ1iL=_y57Kg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:8LgjJxjjQMsbj7rqcb2C1Nj3q+MjIq4LJzyvkcThQQScOkAdbpG
+ tS3PlgNND3OrMrKki2G9h7MlBh6yaJ35+OBHJ5K9bQYb+foHZ9CtiKVA981bsNjwSfWf2+P
+ oKazyu/zAnjXZzgY9HB1ezrhA11bD3WvEeQsRZBWuWbFYEXB13+WBU4Q9kYrOifDR8SznSO
+ pRghji1gY6Q1dL5Rgr63A==
+UI-OutboundReport: notjunk:1;M01:P0:BceyV4p6Uyo=;GAWhZf0UkRBtwLEOHz37LHt21i+
+ eJyTUszvpmRuMFg6estjFlZF8GXQ2/3oCID+HAMunIsRGXxXUqZSAH1lShlbTMjPOgOUpjWOt
+ jFtqfSKk4VIy4VFOLqM+Xd82GnPVn8Vyp/2Lq4e838Ucl/YFKMR1zlv3stT6keRPy8WhdXz+z
+ PkG3w/AG5ZTOZtjR+y8pThAJhhEMYItMA9EyU9/aIFlUZ3tAw24uTSjIK9CNSVX8MfsvWhYSZ
+ zsMwP8Vrx1EXozMOXMP+xcGHJNZSGAtlAnXUipUcpmfD8SMqPptZyNGehmauYh1nfm+VHwiN/
+ 6WI2hK9pW0x3gRj5OWOpumr7tkUtEuzaGvK52jYbq3pWPRBxAkUVajvS7c0wZoXtX+Pi1UkFC
+ rd4zHGhjo09fh8sV3L23/ApUfc0yzcB4BJUUa2WsB54YZ+9WrQcdiJuWqRXD2KFz8FZP0Yx3F
+ edaByxrmJi39kF15vBfKWc8F55BimLDUKKacHMdSLAoCB9NV+ykbyCGzqQXBDTX4tjHOB28sU
+ +ydsrm/Jm1oWrYz0GAQh67ZkT3QAir+UY5AKaXVM6gG8tZYLt9EvdKdtR4bLKBPhUIoWkOGrl
+ Txa6Gt+cPyjsWRYF1185SjXqyKHxgkymh5+WqDiG2If6ddrcyJxEZCH1ulEHV1PeXAACXYMQO
+ 3yln1J7HDlCxc5mLHlfIQnKIxX+EfSmDu0Wh4I5da8HLwJmT3vEdCm7u6baALg+4iGOwLlp/p
+ q8+LFye5S109yOR2IqW4tqMm5YxYZq5tSJh5FVFp7EROV3YfpT6UQQ9HbIJTmgnNY17wa5XSd
+ 92cC5uJz2/pFbO7dWyNMKJMOpQS3UzgOU1NQ4ztfFa/6GQ7ppUwt6T2QSMJA7hjbxTTLQBMoZ
+ YnUaycYam8p+TPjNGmrSE5e+ge8SFr7JbOuXlrS5lz9EaDrMTtddWSDnGtE7Dks5Q0Q+x4YC0
+ V876VSaXXbpKDjCzl2S83plr3g8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,45 +90,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Aug 2023 14:47:16 +0800
-Iota Hydrae <writeforever@foxmail.com> wrote:
+On 24.08.23 15:06, Ilias Apalodimas wrote:
+> Hi Henrich
+>
+>
+>>>
+>>> +/**
+>>> + * efi_purge_handle() - Clean the deleted handle from the various lis=
+ts
+>>> + * @handle: handle to remove
+>>> + *
+>>> + * Return: status code
+>>> + */
+>>> +static efi_status_t efi_purge_handle(efi_handle_t handle)
+>>> +{
+>>> +     struct efi_register_notify_event *item, *next;
+>>> +
+>>> +     if (!list_empty(&handle->protocols))
+>>> +             return EFI_ACCESS_DENIED;
+>>> +     /* The handle is about to be freed. Remove it from events */
+>>> +     list_for_each_entry_safe(item, next, &efi_register_notify_events=
+, link) {
+>>
+>> You are not deleting from efi_register_notify_events.
+>
+> I am not sure I understand this.  I am not trying to delete the event
+> here, but the handle on which the notified protocol was installed.
+>
+>>   Why do you use the safe version of the iterator?
+>
+> No particular reason, I just tend to prefer it over the unsafe one.
+> The latter is perfectly fine here.
 
-Hi,
+The save version is only needed if you delete the current item or insert
+in the current position.
 
-> SPI1 is also usable on port A.
-> 
-> But there's nothing about SPI1 pinmux there for now.
-> 
-> This should be set when you are using SPI1.
-> 
-> According to the manual, the mux value would be 6.
+>
+> [...]
+>
+>>>
+>>> -     /* If the last protocol has been removed, delete the handle. */
+>>> -     if (list_empty(&handle->protocols)) {
+>>
+>>>        size_t i =3D 0;
+>>> @@ -2795,25 +2827,25 @@ efi_uninstall_multiple_protocol_interfaces_int=
+(efi_handle_t handle,
+>>>                return EFI_INVALID_PARAMETER;
+>>>
+>>>        efi_va_copy(argptr_copy, argptr);
+>>> +     protocol =3D efi_va_arg(argptr, efi_guid_t*);
+>>>        for (;;) {
+>>> -             protocol =3D efi_va_arg(argptr, efi_guid_t*);
+>>> +             bool preserve =3D true;
+>>> +
+>>>                if (!protocol)
+>>>                        break;
+>>>                protocol_interface =3D efi_va_arg(argptr, void*);
+>>> +             next_protocol =3D efi_va_arg(argptr, efi_guid_t*);
+>>> +             if (!next_protocol)
+>>> +                     preserve =3D false;
+>>
+>> Is your idea that if 5 protocols are to be removed but only the first 3
+>> are installed your want to reinstall the first 3?
+>
+> Not only that. Image you install 2 protocols and then someone tries to
+> uninstall 3. If the invalid guid/protocol is at the beginning or the
+> middle of the list you'll be fine.  The current code will reinstall
+> the previously removed protocols.
+> However, if the invalid protocol is last, you will have removed 2
+> valid protocols and the handle will be empty.  In that case, we will
+> delete the handle before trying to reinstall the uninstalled
+> protocols.
 
-So technically that looks alright, but what do you need that for? We
-try to not add pinmux values to that table unless they are used
-somewhere, especially if there are potential conflicting values: SPI1
-on PE is on pinmux 4.
-So do you have a board that needs that? Any chance you could upstream
-the DT (to the kernel list!) and defconfig for that board? That would
-it make it a no-brainer to merge this patch.
+This is just what I meant.
 
-Cheers,
-Andre
+Best regards
 
-> Signed-off-by: Iota Hydrae <writeforever@foxmail.com>
-> ---
->  drivers/pinctrl/sunxi/pinctrl-sunxi.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> index e5102180902..c448e40ab07 100644
-> --- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> +++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> @@ -240,6 +240,7 @@ static const struct sunxi_pinctrl_function suniv_f1c100s_pinctrl_functions[] = {
->  	{ "mmc0",	2 },	/* PF0-PF5 */
->  	{ "mmc1",	3 },	/* PC0-PC2 */
->  	{ "spi0",	2 },	/* PC0-PC3 */
-> +	{ "spi1",	6 },	/* PA0-PA3 */
->  #if IS_ENABLED(CONFIG_UART0_PORT_F)
->  	{ "uart0",	3 },	/* PF2-PF4 */
->  #else
+Heirnich
+
+>
+>>
+>> Can we have some code comment describing what the function should do? I=
+n
+>> 5 years nobody will remember why the code was implemented this way.
+>>
+>
+> Of course
+>
+> [...]
+>
+> Cheers
+> /Ilias
 
