@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8EB0C71145
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 05:37:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95ADC3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 05:41:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7351586542;
-	Thu, 24 Aug 2023 07:37:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0148886555;
+	Thu, 24 Aug 2023 07:41:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RAHcJBUp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VDseCMuP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF7DD8653D; Thu, 24 Aug 2023 07:37:22 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 889CF86554; Thu, 24 Aug 2023 07:41:51 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60DAD86547
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:37:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E66E8653D
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:41:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1692855439; x=1693460239; i=xypron.glpk@gmx.de;
- bh=ODeL03f7Cpnnr4T5vC6co3QpMFMMNTfmBaH2bS+dqos=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=RAHcJBUpVeYbWGGadnqJoB+/jjUj4i4f/7lxaQA3lxknAbadGY/KGXMTfJGMN13QbT0N1Ro
- FFDbBoQw629Vr89QPhgvAoGCvds80oJdKJIPn07QRd/djJHAmVZWz4/w0biZdDMxG8V7L8rdK
- 4ONFZB9dtW5B9fxLEP/WN/KSSlemvnP61KWk3G9rG2Q1dyJzad+OguAlXvm8asSkkdUfyXoam
- EVSrJshUZQNbw4P+SKWivML1lbuVMMD/IvzVgnRkLaONTqll7zl1DJLsoIOzkl5uNlmdVpu6T
- GCP/1HZSsowLN/DIYezARAaZB5yl11Bbj4Ud10TyBvohZR+5+e9g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N95e9-1pcFgm14rP-0166wT; Thu, 24
- Aug 2023 07:37:19 +0200
-Message-ID: <ff697396-ce30-e6c3-b7fa-5aac053dec4c@gmx.de>
-Date: Thu, 24 Aug 2023 07:38:06 +0200
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-9a21b6d105cso15827066b.3
+ for <u-boot@lists.denx.de>; Wed, 23 Aug 2023 22:41:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692855708; x=1693460508;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=nFRyQBshjYgr4yeIxHCDfPvDN9UX6wF6KsnUKkVIbxM=;
+ b=VDseCMuPGncHoJ+J//PGxjjNpNFZZCddBL6f9CUF3CiQM2l/X8cgkrNQBIVjfrAV09
+ oxY0X4KNcKtBQ2tZQoVkWyZqKwl8gGhy0on6Ix7S1zLVBI23LODmEMeJCUwewkX69i5h
+ rP8w6xCk4IMsSRFMGCequjCsX/uCNYFZCg0fIAyysget0Ti6FQObLWpRpzOdlZFnFO94
+ uUpQUctyUfRylSTboMsUtmWZsk9Ax8JMMBvjx8w76PsES/rkZynbl/wlTw+NBXqQFJka
+ 0AmYTGp7B4doW7diV+uiJFqNqg+bVgkti/yS61j5v78xsUwDzfAtHtB5FYyPWCzwvUA3
+ gijA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692855708; x=1693460508;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=nFRyQBshjYgr4yeIxHCDfPvDN9UX6wF6KsnUKkVIbxM=;
+ b=dAGkpwJnrC2Mn+E+edoCBBb0+tBL+d7bSGsb23+oFT7STVzbYPm4ctoo/p7GVnW93D
+ sVGqiry19nsmA3EikpLrJdTUIJ8T1X/qXHRLA3gSYSURdV8Sr1hNvtWJCXCXsGbWT7Rz
+ yrzNAM5y9QiXsdXcH+pD0QFxea87oRB79kP13TboIkdaZKZXxSOHL4z8UmVO5D2VmphD
+ Pshm884wJlpwgaKEsFGrqM4KlfBm9uW0M/ncucqLAvWXZX1Q3l8NhazSoPftlhx+w2F9
+ BSCA3t4k7GLsmvPrtMnpNxDyjhxTezKoz4vIPgFeEZqHebF/N5H//JeHYRSZUN9zPMLy
+ saUQ==
+X-Gm-Message-State: AOJu0YwPAyKS+C4ImesjnxVlgA14DaQZhXws6JVe9QE0faTG16ehcpPX
+ AQ11Lefh2UPpVw4dig1FPxI=
+X-Google-Smtp-Source: AGHT+IH9JVGgaIK5DiwAtog+w0rmaI/T+cSHHNFU33noRGaUPtOM1BPh/V3W6Is71BW4wEOhZ5w+sg==
+X-Received: by 2002:a17:906:186:b0:9a1:fdfe:a6bf with SMTP id
+ 6-20020a170906018600b009a1fdfea6bfmr1169157ejb.38.1692855707770; 
+ Wed, 23 Aug 2023 22:41:47 -0700 (PDT)
+Received: from [127.0.0.1] ([46.211.11.129]) by smtp.gmail.com with ESMTPSA id
+ y12-20020a1709064b0c00b009a1bf608ff3sm3008042eju.132.2023.08.23.22.41.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 23 Aug 2023 22:41:47 -0700 (PDT)
+Date: Thu, 24 Aug 2023 08:41:46 +0300
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Simon Glass <sjg@google.com>
+CC: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 15/19] ARM: tegra: board2: add generic late init
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAPnjgZ3zyLjoX5-2zvC9X3Bz+h2KzODpq6X8kNAqR038qtaFVA@mail.gmail.com>
+References: <20230822112217.4646-1-clamor95@gmail.com>
+ <20230822112217.4646-16-clamor95@gmail.com>
+ <CAPnjgZ3zyLjoX5-2zvC9X3Bz+h2KzODpq6X8kNAqR038qtaFVA@mail.gmail.com>
+Message-ID: <7AAC0372-D966-4D35-AA33-5EF03FD0DF2B@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 1/2] cmd: efidebug: add uri device path
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
- <20230823083721.1318097-2-masahisa.kojima@linaro.org>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230823083721.1318097-2-masahisa.kojima@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:gFwTVcPWtQipUhys194vNX0bKDDvOZRdoEhEMa594NKvAcAQ3JG
- q396anhnuh0qVvpt6dqIFC4GI3IKL6pnLTxB5IHqKfGg5VjOkZyGaCk4H9YIN1LM8y8LkTi
- o6QswKlLLnug7W+VTp4UK/o3nTuf8/W0OKlAYuP+VpELTXkyjhRhdPP+2Y9muhp3dnnHewi
- 2EknoOzrhnU00k9CTPhIA==
-UI-OutboundReport: notjunk:1;M01:P0:pD2EzD+RQo8=;9u2/GqFhGyQ9hw46ShVFPeIzqIl
- 4Pkd0LmiO1Bf6RBpfM5Q6bddnAo3+SsS2GCNDXuvVTcXZSTeZ6dk0a3QOEHaw1yBMc+Ibx6Z/
- mzWHgKLI30BtENnd2UDhxcMn1Sw/l+bCDpwXxeXAoi7WFLr2nrLiQV5I3Pu5yh0TUqVZRkPPX
- Efk3Ze6+K3ZWo8Cl3OyClsrCsDSfe/9/4P+LNsyWPWJ/DydnNB0UYj8auBIaaCW+2BDgb+O6I
- EeUgwZmaQyd46ZvTSGLvSnLASIPatGe97AW5lCwgc2jJSHFRlVMNNbeHjXsZ8JW5Xks663h0b
- oYF3C1CQjvjoQKy+8i+0Cpt8q9b7VOW4pjycTDl/9U0FmDtlgfYaWwa9fbN9LLASR890KrC7r
- XaBt2P9T0kJKIGF8hQ85mGAFqKANWbn9ld23iZXTRfJViP5oSxZpeARaxKULjadVMlwO1c1kD
- SBNOodOvHuejcSbrVobZ0xVauU8smVFcIG9O7cYgbQ7gy+cWMj0f+/I0khR/6V5sdPHCQ4Otl
- lkwqTh4Lgabhae9qJtWkZg6EFoicbaDla//e8KwhHYax2HL6AwrbDi4E58E+5Pl+3m+cmO8NH
- XP6iDKm0oBjnDcq1oTtj8I1FmHhuO99tgq6DyFmTL2bGBE6XbG4fMea13IUMGbkbi4J/su1E7
- avLd9kI4HhjFNy615aQSuTXpSWruHaN8J4uOPZoGTwqOCZhTZCH6vkUG2LYyN0xtWpO+zG4yb
- zYWo1bCeOx8YDEFHwfkKjkDTX8GIjiu+mJJ8Vw4R+O85X1ZrC8QS5IGL83JoA9TzMoNfYBuqo
- 2+a8uOBBvuvBc5KkASlnSBumW2nzFNKA2KU3mToka30eKH8LMO2bKXbeavfCSI8JlvyHlzyY7
- 2r4Rn5rZ2va3W//0XoJb33U8tM+ObrfoiGkIvnvZyihFR1liqfisdPuE2VvicnJl+Vvs70xEs
- aJ/OhEg6CVGL1vM1hWdtcHNzvkI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,87 +94,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/23/23 10:37, Masahisa Kojima wrote:
-> This adds the URI device path option for 'boot add' subcommand.
-> User can add the URI load option for downloading ISO image file
-> or EFI application through network(e.g. HTTP).
+
+
+24 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 02:57:34 GMT+03:00,=
+ Simon Glass <sjg@google=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(=
+-=D0=BB=D0=B0):
+>Hi Svyatoslav,
 >
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
->   cmd/efidebug.c | 39 +++++++++++++++++++++++++++++++++++++++
->   1 file changed, 39 insertions(+)
+>On Tue, 22 Aug 2023 at 05:25, Svyatoslav Ryhel <clamor95@gmail=2Ecom> wro=
+te:
+>>
+>> Board specific late init allows vendors to set up different device
+>> or board specific env variables (like serial number, platform name)=2E
+>> In case this information is missing, u-boot will lack info regards
+>> serial or platform=2E
+>>
+>> To avoid this prior nvidia_board_late_init internal generic function
+>> is called which fills required data=2E In this case platform name is
+>> obtained from get_chip and serialno is filled with SoC id=2E
+>>
+>> Though SoC id is not dedicated to be devices serial but it fits well
+>> in case of restriction of data about device and since SoC is basically
+>> a main chip of the device=2E
+>>
+>> Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo=2Ecom> # ASUS Transfor=
+mers
+>> Tested-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom> # Nvidia Tegratab
+>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
+>> ---
+>>  arch/arm/mach-tegra/board2=2Ec | 43 ++++++++++++++++++++++++++++++++++=
+++
+>>  1 file changed, 43 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-tegra/board2=2Ec b/arch/arm/mach-tegra/board=
+2=2Ec
+>> index 981768bb0e=2E=2Eee69cb657a 100644
+>> --- a/arch/arm/mach-tegra/board2=2Ec
+>> +++ b/arch/arm/mach-tegra/board2=2Ec
+>> @@ -26,6 +26,10 @@
+>>  #include <asm/arch-tegra/gpu=2Eh>
+>>  #include <asm/arch-tegra/usb=2Eh>
+>>  #include <asm/arch-tegra/xusb-padctl=2Eh>
+>> +#ifndef CONFIG_TEGRA186
+>> +#include <asm/arch-tegra/fuse=2Eh>
+>> +#include <asm/arch/gp_padctrl=2Eh>
+>> +#endif
+>>  #if IS_ENABLED(CONFIG_TEGRA_CLKRST)
+>>  #include <asm/arch/clock=2Eh>
+>>  #endif
+>> @@ -256,6 +260,37 @@ int board_early_init_f(void)
+>>  }
+>>  #endif /* EARLY_INIT */
+>>
+>> +#ifndef CONFIG_TEGRA186
+>> +static void nvidia_board_late_init_generic(void)
+>> +{
+>> +       char serialno_str[17];
+>> +
+>> +       /* Set chip id as serialno */
+>> +       sprintf(serialno_str, "%016llx", tegra_chip_uid());
+>> +       env_set("serial#", serialno_str);
+>> +
+>> +       switch (tegra_get_chip()) {
+>> +       case CHIPID_TEGRA20:
+>> +               env_set("platform", "Tegra 2 T20");
+>> +               break;
+>> +       case CHIPID_TEGRA30:
+>> +               env_set("platform", "Tegra 3 T30");
+>> +               break;
+>> +       case CHIPID_TEGRA114:
+>> +               env_set("platform", "Tegra 4 T114");
+>> +               break;
+>> +       case CHIPID_TEGRA124:
+>> +               env_set("platform", "Tegra K1 T124");
+>> +               break;
+>> +       case CHIPID_TEGRA210:
+>> +               env_set("platform", "Tegra X1 T210");
+>> +               break;
+>> +       default:
+>> +               return;
+>> +       }
+>> +}
+>> +#endif
+>> +
+>>  int board_late_init(void)
+>>  {
+>>  #if defined(CONFIG_TEGRA_SUPPORT_NON_SECURE)
+>> @@ -268,6 +303,14 @@ int board_late_init(void)
+>>  #endif
+>>         start_cpu_fan();
+>>         cboot_late_init();
+>> +
+>> +       /*
+>> +        * Perform generic env setup in case
+>> +        * vendor does not provide it=2E
+>> +        */
+>> +#ifndef CONFIG_TEGRA186
+>> +       nvidia_board_late_init_generic();
+>> +#endif
+>>         nvidia_board_late_init();
+>>
+>>         return 0;
+>> --
+>> 2=2E39=2E2
+>>
 >
-> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-> index 0be3af3e76..62f867df2a 100644
-> --- a/cmd/efidebug.c
-> +++ b/cmd/efidebug.c
-> @@ -829,6 +829,44 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, i=
-nt flag,
->   			argc -=3D 1;
->   			argv +=3D 1;
->   			break;
-> +		case 'u':
-> +		{
-> +			char *pos;
-> +			int uridp_len;
-> +			struct efi_device_path_uri *uridp;
-> +
-> +			if (argc <  3 || lo.label) {
-> +				r =3D CMD_RET_USAGE;
-> +				goto out;
-> +			}
-> +			id =3D (int)hextoul(argv[1], &endp);
-> +			if (*endp !=3D '\0' || id > 0xffff)
-> +				return CMD_RET_USAGE;
-> +
-> +			efi_create_indexed_name(var_name16, sizeof(var_name16),
-> +						"Boot", id);
-> +
-> +			label =3D efi_convert_string(argv[2]);
-> +			if (!label)
-> +				return CMD_RET_FAILURE;
-> +			lo.label =3D label;
-> +
-> +			uridp_len =3D sizeof(struct efi_device_path) + strlen(argv[3]) + 1; =
-> +			fp_free =3D efi_alloc(uridp_len + sizeof(END));
-> +			uridp =3D (struct efi_device_path_uri *)fp_free;
-> +			uridp->dp.type =3D DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-> +			uridp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MSG_URI;
-> +			uridp->dp.length =3D uridp_len;
-> +			strcpy(uridp->uri, argv[3]);
+>This would be better done with events=2E I just sent a series that
+>converts board_late_init() to use events [1] and with that you can add
+>as many 'spy' functions as you like [2]=2E
 
-This assumes that argv[3] is a valid URI.
+This is definitely a nice suggestion, but I would rather dedicate this con=
+vertion a separate patchset since it will affect multiple files and functio=
+ns across all mach-terga=2E
 
-Would it be preferable to validate that the string is percent encoded,
-conforms to RFC 3986, and contains a supported scheme, an authority, and
-a path?
+Best regards,
+Svyatoslav R=2E
 
-As a user I would like related errors to be caught at entry and not at
-runtime.
-
-Best regards
-
-Heinrich
-
-> +			pos =3D (char *)uridp + uridp_len;
-> +			memcpy(pos, &END, sizeof(END));
-> +			fp_size +=3D uridp_len + sizeof(END);
-> +			file_path =3D (struct efi_device_path *)uridp;
-> +			argc -=3D 3;
-> +			argv +=3D 3;
-> +			break;
-> +		}
-> +
->   		default:
->   			r =3D CMD_RET_USAGE;
->   			goto out;
-> @@ -1492,6 +1530,7 @@ static char efidebug_help_text[] =3D
->   	"  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n=
-"
->   	"  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
->   	"  (-b, -i for short form device path)\n"
-> +	"  -u <bootid> <label> <uri>\n"
->   	"  -s '<optional data>'\n"
->   	"efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]\n"
->   	"  - delete UEFI BootXXXX variables\n"
-
+>Regards,
+>Simon
+>
+>[1] https://patchwork=2Eozlabs=2Eorg/project/uboot/list/?series=3D369742
+>[2] https://u-boot=2Ereadthedocs=2Eio/en/latest/develop/event=2Ehtml
