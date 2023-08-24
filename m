@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E17CC27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 21:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F4BEC83003
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 21:53:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2443868D0;
-	Thu, 24 Aug 2023 23:44:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AEA8886977;
+	Thu, 24 Aug 2023 23:53:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ULPtR/JB";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=jan.kiszka@web.de header.b="mxSk8Aty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7669886429; Thu, 24 Aug 2023 23:44:42 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5F42086986; Thu, 24 Aug 2023 23:53:28 +0200 (CEST)
+Received: from mout.web.de (mout.web.de [212.227.15.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9176868D0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 23:44:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDE0586532
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 23:53:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d73c595b558so313641276.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 14:44:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692913477; x=1693518277;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ri8yHb1i2DefegJtunAMs9X9mMDgAVcvUd0y+3Ze080=;
- b=ULPtR/JBoWYzYYAk7eMRjhd9+6e1skBRbRXwTUzMlX/Qey8boXR9wGINvY4uisYSTC
- vzlyQHsPNWS59W//az3bF55cIzGKQl7xr/e7vc8Aww3QO5CGUFvbm3wjIKuFTPYFwjVp
- yl1elv5EC07AioVSYM7hj3GxhGr8nVlZNd7Ho=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692913477; x=1693518277;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ri8yHb1i2DefegJtunAMs9X9mMDgAVcvUd0y+3Ze080=;
- b=dr/R+JHcT6v4hkA8HCtQXobTncM2l8jaj59H+zaPFAQdSKfhMgBYTIoEkeDvl+LmQE
- Y0m+H4VRf0gcKAgVT0M7UJpSvQv7sSYnoz1PJJI3/BNkpkaSVl3cAfssugSUzXefMjXv
- sJisTnoa2JiC359LwaMwLBM1zUJ2qNbjgQVaQOtM43NscVO4WNwYhJCyaSq55y8bmhRh
- m9tcf/6J9H8vwRDBXUVmwcqg3YxEoBUOnFs2O/Hsl5EZY6mneaudheLGY20Qo459Xm9P
- MrNka5FBspnGm0GDSIjTpVPIllz8yzIhRGNN1bG1YPbLMZ+WsZRTrAYhTiPkZCFzfsEv
- YM+A==
-X-Gm-Message-State: AOJu0YyQEU59qzdcMPrsi+PQguxQr/7FpKdNNhpR5CvVydNWyiWb5kmb
- 0e3fFQobNjqu6LT0a2nasDpcDQ==
-X-Google-Smtp-Source: AGHT+IH0YEXh51/odXWbN+qLoX6kM2WK2e6AYRGuIGRjbC1Ic94UWc7S7cRm5uuXxsmY9//fKjYldw==
-X-Received: by 2002:a25:b110:0:b0:d78:179a:eb33 with SMTP id
- g16-20020a25b110000000b00d78179aeb33mr2162019ybj.17.1692913477327; 
- Thu, 24 Aug 2023 14:44:37 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
- [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
- by smtp.gmail.com with ESMTPSA id
- j191-20020a2523c8000000b00d4fc4132653sm77454ybj.11.2023.08.24.14.44.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 14:44:35 -0700 (PDT)
-Date: Thu, 24 Aug 2023 17:44:33 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>, Bin Meng <bmeng@tinylab.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Bharat Gooty <bharat.gooty@broadcom.com>, Stefan Roese <sr@denx.de>,
- Qu Wenruo <wqu@suse.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 0/4] arm: qemu: Enable Bochs, console buffering, USB
- keyboard
-Message-ID: <20230824214433.GA2754624@bill-the-cat>
-References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
+ spf=pass smtp.mailfrom=jan.kiszka@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
+ s=s29768273; t=1692913999; x=1693518799; i=jan.kiszka@web.de;
+ bh=2R/h4/Rp4fsCqk//Ay5tqXNQsRcKXnJVoe4DqQcjYhc=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=mxSk8Aty1fkzvJlAJBjaGh2LeoYTK5afs44k+0H+QdhVueWnGq6/7K7c3mV6lw8Z8TzW6Pz
+ fKHVrjWAxOksusbb/rT4/sG2AX+zxbKcjaNpBg7R6i4aCQqF79xRvFe1cqCicvubKliRIg1Th
+ TBEbFXhOzGkWqnr2P7FpMwt94kCgLEDGacuYncbtEAqXIEv7J9JPyFTIUIHoW2BqtohdDfTBx
+ QX1ksPcTvpidGvEO56wIF3fOcM055a2xYHxDLxYBLS4oxRbnROpuJ9EX/PJxk/IBZzo4YWtfD
+ sBWOvluBZ+ltc7oD3rQg954Jf9VHTc0BzLGtpwUyz5h1sSHINI5A==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.178.20] ([88.71.58.97]) by smtp.web.de (mrweb006
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MCoku-1qQWq71Rui-009CK1; Thu, 24
+ Aug 2023 23:53:19 +0200
+Message-ID: <c93b19ed-43fe-44a2-9726-371fb9d2f825@web.de>
+Date: Thu, 24 Aug 2023 23:53:17 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Xetbl9CR0Hqz+dwA"
-Content-Disposition: inline
-In-Reply-To: <20230814173944.288356-1-alpernebiyasak@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: [PATCH] board: ti: am62x: beagleplay: Disable semi-functional PSCI
+ reset support
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@google.com>
+Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+References: <20230824031101.3460411-1-nm@ti.com>
+ <20230824031101.3460411-17-nm@ti.com>
+From: Jan Kiszka <jan.kiszka@web.de>
+In-Reply-To: <20230824031101.3460411-17-nm@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:WBWfnX6vZ4I1COz048IEnPWqpehiyA7R6yobb9GKh3IH4kQCx1P
+ IHQhhTvqzTSbetPQWOAudQj6Wk6oQJ+WDk3u0hYHUpMNiPa/q6c30O5mgtlpsHgWb3jLVuS
+ tQzw7IAJmmlPCh69bvE8bhttHt6izwoJO/ywLKc9g829rJyH5kvbWefP9v4qfn2fxDS5qw/
+ +vMY72jpn8NW3WVmy6dmw==
+UI-OutboundReport: notjunk:1;M01:P0:PIvZNFEL7Ck=;XaD+GDk8/FIoq0J5M/cW4mMr7ua
+ V6p0vdeYiwNiNENDbuu/K02A1DBDlA65fhO0tLbXhDxedDjNGy1xDrzd1n3aNSgcOr0ZJTIIJ
+ JptCRntTkZSUKkiosZyLw1nCyUsOnEeO9Vpo/ula+Leb+gWPToauBuLc6l5xIYFb3Jxdl2IU9
+ PibedFQ9C9q86ooujtX92CM27fmMmDBypd5jLx0r3df7m5cfxGok2smo7DinpZWjrOMs71acS
+ JVL5S/6Nubmwf56l+q+6igDqvoyG0wmXtRBtEBd+s9x+qeBIfCXDfiZK0FQ6HxnOAAcoUVPpl
+ gP2wWeqei8E6qfu+SYhGb+BoDsWhnjwa6sF3ixfNsi3C16LiXv/7lcf/RrZCY1CDIucjRv+pM
+ OdBsc5f47UYWUuLaZ2zlI7S2adlEnjYdhzTV+rUwX/TzY7NHyxN7i2brTowq1HS3EtHQ9qpTN
+ VpmpZYAePPn6DnJkYTznhCk2s2OyCc+bW94Oq4idUzUlVS17ZCMdh16MMDSieQOZCrZcyWfdL
+ RFRXPYsAKgKCEvyv0a7lrCs7HAqJcGtzbWBR78EaK7mo+HUWV2io+GL4cJhJXMfyjzwPWVT3f
+ SSLAgDExRd4a83b6iJgjyRZ4bVjf8Iu7ORrlZiBxOvG177AsrLoKkp049AW+7W6x/CZxjqgo6
+ B4ayFazg0NOhEK8xkFekOXhfzR3xZLqN3kZYB9PXSI/G0RKCpIq5vV9lC4g9Mdm493dwrRF3a
+ nWNrPFXEbSdBXe0eioG0qsYX3Cq9zzE5kAgeysm1oCUWDKz7o6pskhFJafypC0od/bLUsm5oc
+ O2ftwryrKxI7mYtySvZs437vwtECW5JkCWrkQj7BE4gfRxFhxvdrKev28ABjjJGAreuf9+Url
+ lzWWZii3GoidfCHqh5lS1JgpTxe37NmpL+uxJG5lSoiF9iYkNK41sAfnbJ8JJijeCmAIcQFT7
+ VLAbzg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,75 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
---Xetbl9CR0Hqz+dwA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+At this point, system shutdown is not supported by the DM firmware that
+TF-A calls. As we can't de-select only this feature, declare complete
+PSCI reset support as non-functional so that we don't signal incomplete
+support to the OS via EFI runtime services. This makes power-off under
+Linux work again when booting via EFI.
 
-On Mon, Aug 14, 2023 at 08:39:40PM +0300, Alper Nebi Yasak wrote:
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+=2D--
+ board/ti/am62x/beagleplay_a53.config | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> Now that the driver for the Bochs VGA card emulated by QEMU is no longer
-> limited to x86 architectures [1], this series enables it on arm and
-> arm64 virtual machines to provide a graphical interface. In line with
-> that series this also enables console buffering and USB keyboard.
->=20
-> Tested with the Debian 12 installer using GRUB EFI:
->=20
->   $ tools/buildman/buildman -o build/qemu_arm64 --boards=3Dqemu_arm64 -w
->   $ cd build/qemu_arm64
->   $ curl -L -o debian.img \
->       https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/debian-12=
-=2E0.0-arm64-netinst.iso
->   $ qemu-system-aarch64 \
->       -machine virt -cpu cortex-a53 -m 4G -smp 4 \
->       -bios u-boot.bin \
->       -serial stdio -device VGA \
->       -nic user,model=3Dvirtio-net-pci \
->       -device virtio-rng-pci \
->       -device qemu-xhci,id=3Dxhci -device usb-kbd -device usb-tablet \
->       -drive if=3Dvirtio,file=3Ddebian.img,format=3Draw,readonly=3Don,med=
-ia=3Dcdrom
->=20
-> And with one using extlinux.conf:
->=20
->     $ [...]
->     $ curl -L -o head.img.gz \
->         https://deb.debian.org/debian/dists/bookworm/main/installer-arm64=
-/current/images/netboot/SD-card-images/gtk/firmware.none.img.gz
->     $ curl -L -o partition.img.gz \
->         https://deb.debian.org/debian/dists/bookworm/main/installer-arm64=
-/current/images/netboot/SD-card-images/gtk/partition.img.gz
->     $ zcat head.img.gz partition.img.gz >debian.img
->     $ [...]
->=20
-> Both can get to a graphical installer just fine, in addition to U-Boot
-> video console showing up in a GTK window.
->=20
-> [1] video: bochs: Remove the x86 limitation
-> https://lore.kernel.org/u-boot/20230723044041.1089804-1-bmeng@tinylab.org/
-
-For the series, applied to u-boot/next, thanks!
-
---=20
-Tom
-
---Xetbl9CR0Hqz+dwA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnzz4ACgkQFHw5/5Y0
-tyy2rgv8DtoqKZ+l/OPykC7J3YZVVFt8H0gqSAdg1nSnkFklu141BcFZOvJHM3YI
-ptjwWZ3VjyEnffHVvpf6XEMGFAhfMa3rurmAHVsfODSp05O8nqh+iyGXOpX5AEPw
-z9FBebrUTvAle6CoTqFXHOzZy7bur/EZ9tZ5U2oH1kosOKPAeN33UJXcifO4kJsN
-NkId/aVQc5MaHaxvOeKPj5qhFxFn1HEC96Gk3EbjOO6MY2GFjUS2bIT85I8vVEdc
-XDU30B3bDZjMVjb7JeFHwXFCxhPvVO+lUf9qgVK7MER0U/AEWzE8goCcGiFsl1YP
-i6NSjk8xERSkdcLgkvXX+k/EUHADsX7zfOzMDJPgAv9sTuDiJPzJctIFaZ3l33d+
-wj9FI9BmeYjXssrBlZvLFLP2sY7kFIW70tXgX2YHvJLg0RnjZ3qO6kXaGkk4qNbM
-8yK76OFy/8KhpEDhDaz1zCxT3o3cZH2aRahEd67yKt4S2KoYDpl3tV7uhlwierCR
-qGTVpziy
-=TjFY
------END PGP SIGNATURE-----
-
---Xetbl9CR0Hqz+dwA--
+diff --git a/board/ti/am62x/beagleplay_a53.config b/board/ti/am62x/beaglep=
+lay_a53.config
+index 967f794446d..8b0f671bc9e 100644
+=2D-- a/board/ti/am62x/beagleplay_a53.config
++++ b/board/ti/am62x/beagleplay_a53.config
+@@ -53,3 +53,5 @@ CONFIG_SPI=3Dn
+ CONFIG_SPI_FLASH=3Dn
+ CONFIG_SPL_DM_SPI_FLASH=3Dn
+ CONFIG_SPL_SPI_FLASH_SUPPORT=3Dn
++# DM firmware lacks support for shutdown
++# CONFIG_PSCI_RESET is not set
+=2D-
+2.35.3
