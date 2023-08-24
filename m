@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A09C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:57:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB7EC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:57:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35170869D1;
+	by phobos.denx.de (Postfix) with ESMTP id 7B076869EA;
 	Thu, 24 Aug 2023 21:56:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kzhG6LTA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CWI0PRbC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB445868D0; Thu, 24 Aug 2023 21:56:09 +0200 (CEST)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id B6EC1869C2; Thu, 24 Aug 2023 21:56:11 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F1858683C
+ by phobos.denx.de (Postfix) with ESMTPS id EC4CC869B7
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7923d27b9f3so7190939f.3
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7909307ecd1so6797139f.1
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692906965; x=1693511765;
+ d=chromium.org; s=google; t=1692906966; x=1693511766;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=et6VpVaGKxM5prPOmsAMwwYGD30KXmFYX7TMtGQ9GLk=;
- b=kzhG6LTAIuhh7W3CSSyotqnH2kQkoDChsPuSnlVjvG9sameeMwiVRZRy6wCNBiABJi
- QxCCyJzBdCk5CqNk9OJe6YX6ZPfGstUm/VI+62wdbrvsLrLYtl7LrS5pSlU3aGfvaVmI
- OIVjE/aL0QIh3GXnK/PLNqJMkU7lZbwlsV2xQ=
+ bh=oe0qaReqkmedDJ2yYf6XkbQoItq8L36xltNLcEGO/Ys=;
+ b=CWI0PRbCBp4MVAmHl9i8DhcE9smWdeGC5TWpCwDUr4MW66JmRMukQNJS9H/zImWAbr
+ vv+nfdK6vJz5k2kaH5v1Mcj9yLS7IfbDSpoUXuV+s26CBMyerubM2QBfpUryw/amXlKj
+ wqbvHZYPxZJwu3DZCbBbZcJUsD2E5K9gEWtGc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692906965; x=1693511765;
+ d=1e100.net; s=20221208; t=1692906966; x=1693511766;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=et6VpVaGKxM5prPOmsAMwwYGD30KXmFYX7TMtGQ9GLk=;
- b=ZJrSii3ee96u+pLrcBXGhtMvGRQEyHh9wqEq+fBf33Sy9CmvDsQ5AheBzup7zLeUjy
- S331eQJuZYjWK89rxY6jUWQfcdIAR/TIZVUSA9NmT7/fsxVSLn6JqgLqe5HIp/eSQrSB
- f0OS08MAhR2q5/zDMaUcg9wZxdNKkDiB93jJBmOhRgRMuQl1Wcux4t+BS4yRcPSYujOh
- CUCP6aQMpvWwaxffkq0jPtb/vtMdbnQ/NUfCUxFTPG6ppSVnRq5JnBjrkyDnXO8+ehAs
- FCl5ehS0fab/+0tCAsh2Z7TYuaDV4xZj+gKq78bJJNyXaIh/jY7O7cNHGvlj+J1MlxLO
- MPTw==
-X-Gm-Message-State: AOJu0Yxl9tMThVJGDqwE5BIfCIF2xah7ZBWxQx6bVymBNZKa5DIqgKaw
- +4XOBqe+C0uQ+VNzub8iJ8TulnSHOWPeJ5qbnqY=
-X-Google-Smtp-Source: AGHT+IF9Qyo3b+VN8a+LxbJYM+YsmgP1OWgqwNbiLJWvDyy/Jx+Eqdz3otmeXrwyIqNzoAEIxVDqGg==
-X-Received: by 2002:a6b:d003:0:b0:787:1d0a:ce81 with SMTP id
- x3-20020a6bd003000000b007871d0ace81mr6982815ioa.13.1692906965727; 
- Thu, 24 Aug 2023 12:56:05 -0700 (PDT)
+ bh=oe0qaReqkmedDJ2yYf6XkbQoItq8L36xltNLcEGO/Ys=;
+ b=ODRq/AH85PrieB1PKibfnFZIiTVop10BMLbF913krNzCHfZFr398NNig/jDch25Q3I
+ WkFfpRlBx94LkV/pnVkhCyiVq+q6APIq0j+CqQ0ZIQIfmH+UI4IvIP7HAUru/5FmmCSj
+ RaAXwc+Q1jMV4v2CyAdwg/4UfXFehnTGPG6OXwf9TFluGh1RtgZIkqFDBOhkOPjCFfzr
+ LWkWYhBw3fz0I96cu1WuUyjyrYI2EiJcp08VdwGFQSBIDUVcq9Szv+BTRD3gETm5rQlX
+ E5BPJWQAbDUbATNcectx9F51ZHVOLesVAhzJ+gYW765T/l2vNbJKy90YfM81vpQcKP3C
+ eKNg==
+X-Gm-Message-State: AOJu0Yz4TF+v4KwgoyQ0EaNoPejkaXeLnM+3CLrsttIYcfCjxqer0ao8
+ eKcXaW0K7AQ1+pJa79ohZNO/0eJgaEsmlFR12Po=
+X-Google-Smtp-Source: AGHT+IHSKbJi6QdUgY04GkTQ+ANUj9sNdFZuCIDdDESQRegni+pmJqS7rY1Crd0gGf1G6zQmOF581g==
+X-Received: by 2002:a6b:f107:0:b0:791:1e87:b47a with SMTP id
+ e7-20020a6bf107000000b007911e87b47amr7779020iog.14.1692906966510; 
+ Thu, 24 Aug 2023 12:56:06 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.05
+ b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:56:05 -0700 (PDT)
+ Thu, 24 Aug 2023 12:56:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 07/23] part: Add comments for static functions
-Date: Thu, 24 Aug 2023 13:55:30 -0600
-Message-ID: <20230824195553.1685996-8-sjg@chromium.org>
+Subject: [PATCH v2 08/23] part: Add accessors for struct disk_partition uuid
+Date: Thu, 24 Aug 2023 13:55:31 -0600
+Message-ID: <20230824195553.1685996-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
 References: <20230824195553.1685996-1-sjg@chromium.org>
@@ -87,74 +87,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some internal functions could do with a few comments, to explain what they
-do. Add these, to make the code easier to follow.
+This field is only present when a CONFIG is set. To avoid annoying #ifdefs
+in the source code, add accessors. Update all code to use it.
+
+Note that the accessor is optional. It can be omitted if it is known that
+the option is enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- disk/part.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ cmd/gpt.c       | 10 ++++------
+ disk/part.c     |  8 ++------
+ disk/part_dos.c | 17 ++++++++---------
+ disk/part_efi.c | 31 ++++++++++++++++---------------
+ fs/fat/fat.c    |  4 +---
+ include/part.h  | 27 +++++++++++++++++++++++++++
+ 6 files changed, 58 insertions(+), 39 deletions(-)
 
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index 007a68eaa72a..8969efba8c80 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -211,12 +211,10 @@ static struct disk_part *allocate_disk_part(struct disk_partition *info,
+ 		PART_TYPE_LEN);
+ 	newpart->gpt_part_info.type[PART_TYPE_LEN - 1] = '\0';
+ 	newpart->gpt_part_info.bootable = info->bootable;
+-#ifdef CONFIG_PARTITION_UUIDS
+-	strncpy(newpart->gpt_part_info.uuid, (const char *)info->uuid,
+-		UUID_STR_LEN);
+-	/* UUID_STR_LEN is correct, as uuid[]'s length is UUID_STR_LEN+1 chars */
+-	newpart->gpt_part_info.uuid[UUID_STR_LEN] = '\0';
+-#endif
++	if (IS_ENABLED(CONFIG_PARTITION_UUIDS)) {
++		strlcpy(newpart->gpt_part_info.uuid, disk_partition_uuid(info),
++			UUID_STR_LEN + 1);
++	}
+ 	newpart->partnum = partnum;
+ 
+ 	return newpart;
 diff --git a/disk/part.c b/disk/part.c
-index 8035dcb8a429..9190e8806187 100644
+index 9190e8806187..91c6ac42cc83 100644
 --- a/disk/part.c
 +++ b/disk/part.c
-@@ -26,6 +26,12 @@
- /* Check all partition types */
- #define PART_TYPE_ALL		-1
+@@ -368,10 +368,8 @@ int part_get_info_by_type(struct blk_desc *desc, int part, int part_type,
+ 	struct part_driver *drv;
  
-+/**
-+ * part_driver_get_type() - Get a driver given its type
-+ *
-+ * @part_type: Partition type to find the driver for
-+ * Return: Driver for that type, or NULL if none
-+ */
- static struct part_driver *part_driver_get_type(int part_type)
- {
- 	struct part_driver *drv =
-@@ -42,6 +48,22 @@ static struct part_driver *part_driver_get_type(int part_type)
- 	return NULL;
- }
+ 	if (blk_enabled()) {
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+ 		/* The common case is no UUID support */
+-		info->uuid[0] = 0;
+-#endif
++		disk_partition_clr_uuid(info);
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 		info->type_guid[0] = 0;
+ #endif
+@@ -416,9 +414,7 @@ int part_get_info_whole_disk(struct blk_desc *desc,
+ 	info->bootable = 0;
+ 	strcpy((char *)info->type, BOOT_PART_TYPE);
+ 	strcpy((char *)info->name, "Whole Disk");
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-	info->uuid[0] = 0;
+-#endif
++	disk_partition_clr_uuid(info);
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 	info->type_guid[0] = 0;
+ #endif
+diff --git a/disk/part_dos.c b/disk/part_dos.c
+index cc050ca8c49f..33374384373a 100644
+--- a/disk/part_dos.c
++++ b/disk/part_dos.c
+@@ -231,10 +231,8 @@ static int part_get_info_extended(struct blk_desc *desc,
+ 		return -1;
+ 	}
  
-+/**
-+ * part_driver_lookup_type() - Look up the partition driver for a blk device
-+ *
-+ * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each parition driver
-+ * against the blk device to see if there is a valid partition table acceptable
-+ * to that driver.
-+ *
-+ * If @desc->part_type is already set, it just returns the driver for that
-+ * type, without testing if the driver can find a valid partition on the
-+ * descriptor.
-+ *
-+ * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
-+ *
-+ * @dev_desc: Device descriptor
-+ * Return: Driver found, or NULL if none
-+ */
- static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
- {
- 	struct part_driver *drv =
-@@ -83,6 +105,16 @@ int part_get_type_by_name(const char *name)
- 	return PART_TYPE_UNKNOWN;
- }
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-	if (!ext_part_sector)
++	if (CONFIG_IS_ENABLED(PARTITION_UUIDS) && !ext_part_sector)
+ 		disksig = get_unaligned_le32(&buffer[DOS_PART_DISKSIG_OFFSET]);
+-#endif
  
-+/**
-+ * get_dev_hwpart() - Get the descriptor for a device with hardware partitions
-+ *
-+ * @ifname:	Interface name (e.g. "ide", "scsi")
-+ * @dev:	Device number (0 for first device on that interface, 1 for
-+ *		second, etc.
-+ * @hwpart: Hardware partition, or 0 if none (used for MMC)
-+ * Return: pointer to the block device, or NULL if not available, or an
-+ *	   error occurred.
-+ */
- static struct blk_desc *get_dev_hwpart(const char *ifname, int dev, int hwpart)
- {
- 	struct blk_desc *desc;
+ 	ret = part_get_info_whole_disk(desc, &wdinfo);
+ 	if (ret)
+@@ -263,9 +261,12 @@ static int part_get_info_extended(struct blk_desc *desc,
+ 			/* sprintf(info->type, "%d, pt->sys_ind); */
+ 			strcpy((char *)info->type, "U-Boot");
+ 			info->bootable = get_bootable(pt);
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-			sprintf(info->uuid, "%08x-%02x", disksig, part_num);
+-#endif
++			if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
++				char str[12];
++
++				sprintf(str, "%08x-%02x", disksig, part_num);
++				disk_partition_set_uuid(info, str);
++			}
+ 			info->sys_ind = pt->sys_ind;
+ 			return 0;
+ 		}
+@@ -302,9 +303,7 @@ static int part_get_info_extended(struct blk_desc *desc,
+ 			info->blksz = DOS_PART_DEFAULT_SECTOR;
+ 		info->bootable = 0;
+ 		strcpy((char *)info->type, "U-Boot");
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-		info->uuid[0] = 0;
+-#endif
++		disk_partition_clr_uuid(info);
+ 		return 0;
+ 	}
+ 
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 4ac21868d088..a6f7375cd38a 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -289,10 +289,11 @@ int part_get_info_efi(struct blk_desc *desc, int part,
+ 		 print_efiname(&gpt_pte[part - 1]));
+ 	strcpy((char *)info->type, "U-Boot");
+ 	info->bootable = get_bootable(&gpt_pte[part - 1]);
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-	uuid_bin_to_str(gpt_pte[part - 1].unique_partition_guid.b, info->uuid,
+-			UUID_STR_FORMAT_GUID);
+-#endif
++	if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
++		uuid_bin_to_str(gpt_pte[part - 1].unique_partition_guid.b,
++				(char *)disk_partition_uuid(info),
++				UUID_STR_FORMAT_GUID);
++	}
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 	uuid_bin_to_str(gpt_pte[part - 1].partition_type_guid.b,
+ 			info->type_guid, UUID_STR_FORMAT_GUID);
+@@ -415,10 +416,7 @@ int gpt_fill_pte(struct blk_desc *desc,
+ 			le64_to_cpu(gpt_h->last_usable_lba);
+ 	int i, k;
+ 	size_t efiname_len, dosname_len;
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-	char *str_uuid;
+ 	unsigned char *bin_uuid;
+-#endif
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 	char *str_type_guid;
+ 	unsigned char *bin_type_guid;
+@@ -487,16 +485,19 @@ int gpt_fill_pte(struct blk_desc *desc,
+ 			&partition_basic_data_guid, 16);
+ #endif
+ 
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-		str_uuid = partitions[i].uuid;
+-		bin_uuid = gpt_e[i].unique_partition_guid.b;
++		if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
++			const char *str_uuid;
++
++			str_uuid = disk_partition_uuid(&partitions[i]);
++			bin_uuid = gpt_e[i].unique_partition_guid.b;
+ 
+-		if (uuid_str_to_bin(str_uuid, bin_uuid, UUID_STR_FORMAT_GUID)) {
+-			log_debug("Partition no. %d: invalid guid: %s\n",
+-				  i, str_uuid);
+-			return -EINVAL;
++			if (uuid_str_to_bin(str_uuid, bin_uuid,
++					    UUID_STR_FORMAT_GUID)) {
++				log_debug("Partition no. %d: invalid guid: %s\n",
++					  i, str_uuid);
++				return -EINVAL;
++			}
+ 		}
+-#endif
+ 
+ 		/* partition attributes */
+ 		memset(&gpt_e[i].attributes, 0,
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index d1476aa433d6..8ff1fd0ec835 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -110,9 +110,7 @@ int fat_register_device(struct blk_desc *dev_desc, int part_no)
+ 		info.name[0] = 0;
+ 		info.type[0] = 0;
+ 		info.bootable = 0;
+-#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
+-		info.uuid[0] = 0;
+-#endif
++		disk_partition_clr_uuid(&info);
+ 	}
+ 
+ 	return fat_set_blk_dev(dev_desc, &info);
+diff --git a/include/part.h b/include/part.h
+index 3a6be75421dd..8e5e543c56ec 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -80,6 +80,33 @@ struct disk_partition {
+ #endif
+ };
+ 
++/* Accessors for struct disk_partition field ->uuid */
++extern char *__invalid_use_of_disk_partition_uuid;
++
++static inline const char *disk_partition_uuid(const struct disk_partition *info)
++{
++#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
++	return info->uuid;
++#else
++	return __invalid_use_of_disk_partition_uuid;
++#endif
++}
++
++static inline void disk_partition_set_uuid(struct disk_partition *info,
++					   const char *val)
++{
++#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
++	strlcpy(info->uuid, val, UUID_STR_LEN + 1);
++#endif
++}
++
++static inline void disk_partition_clr_uuid(struct disk_partition *info)
++{
++#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
++	*info->uuid = '\0';
++#endif
++}
++
+ struct disk_part {
+ 	int partnum;
+ 	struct disk_partition gpt_part_info;
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
