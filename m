@@ -4,45 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441D2C71153
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91FEC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FC5E8522C;
-	Thu, 24 Aug 2023 16:38:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id D74C88653D;
+	Thu, 24 Aug 2023 16:41:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YDjDtIHm";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FF36865AF; Thu, 24 Aug 2023 16:38:03 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 621208664A; Thu, 24 Aug 2023 16:41:36 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83C878475C
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:38:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AD5F86414
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:41:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb.int.toradex.com (31-10-206-125.static.upc.ch
- [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id A03922072A;
- Thu, 24 Aug 2023 16:37:59 +0200 (CEST)
-Date: Thu, 24 Aug 2023 16:37:55 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Nishanth Menon <nm@ti.com>
-Cc: Emanuele Ghidoli <ghidoliemanuele@gmail.com>, u-boot@lists.denx.de,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: Re: [PATCH v1 2/2] board: verdin-am62: fix check for minimum memory
- size
-Message-ID: <ZOdrQzhxGVYyYobd@francesco-nb.int.toradex.com>
-References: <20230824080850.1755724-1-ghidoliemanuele@gmail.com>
- <20230824080850.1755724-3-ghidoliemanuele@gmail.com>
- <20230824121412.vxgvwo5g2ozk62xt@evergreen>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-99c93638322so205587166b.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:41:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1692888093; x=1693492893;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bAArZxilMdafYN0YYrcuIx+9R9cfa4JM+gLl2a5oPxI=;
+ b=YDjDtIHmi4IGsrIFuYwwGfY8DweNuh9UPeUrn8gp8UyiODJiTnlUIkXj/E4N9Mjqgo
+ /iPqtHceyICMJ2SxTif7u1x8Hkilfq3GaLwMIVbRin+j1/ShNFdbZ2xYsRKhtlbWvw3E
+ 5NSLvElCO0h7XqwAoA9WxEfvH0qfYx2FQyfVc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692888093; x=1693492893;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bAArZxilMdafYN0YYrcuIx+9R9cfa4JM+gLl2a5oPxI=;
+ b=Ew4oe/hggRb3k0gzH5faYjVtAOJ7FJjOeYSCtVFbJJXRPrsm0fPBJSD8XrgYcUg8Xh
+ A+JSUFZMeetdeGoFnWMJR2yj8BaMOApLuDbeCYUt0xgNLxFFI+WaHHTSh88FBoaGwxkJ
+ Cy9jyCXDkwB/yLJoLzHYAQCPy+O80h5+2Lj4+oWFpn7wUz/VoQnBCblwhL2HrH4sVpay
+ PWXO5OU60OeP+zzSZ7y9T7Xn65DPfY8aG5hO5Ela2Yj4pRiuum69UcgEAPVS5TlGy+t/
+ 3yFpNf0dC7H5dBvzcy7CNUx99RcNI9ylEiC2x7/wuZOmWEuY2RZWiOAk98AXGy64lDYc
+ A2zg==
+X-Gm-Message-State: AOJu0YzU4jfu3nchjn+iOJDQtYYhj1QHMt8+WRnuQJwsvGCRjzZFASvu
+ 43dY7AJFgbK2ZB6/6O9KafgVMCEC0gW7pOV1p61YFQ==
+X-Google-Smtp-Source: AGHT+IGuUVu8B6RMBQO5SAHlZSO+rI3Prp0pji/F3INchAoUk+f8v7CkO3gSwAnfLQgjQIcdm0T3/N0dTswy0036m6E=
+X-Received: by 2002:a17:907:da1:b0:9a2:248f:aac with SMTP id
+ go33-20020a1709070da100b009a2248f0aacmr1059631ejc.16.1692888092555; Thu, 24
+ Aug 2023 07:41:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230824121412.vxgvwo5g2ozk62xt@evergreen>
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <66f15744-0b0b-743f-8ad3-8448d78812f6@ti.com>
+In-Reply-To: <66f15744-0b0b-743f-8ad3-8448d78812f6@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 24 Aug 2023 08:41:19 -0600
+Message-ID: <CAPnjgZ3MFkrR6qNTqgF1AMHun0DrMK2RfZ_6X824eczBXyEyNA@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
+ output
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Dillon Min <dillon.minfei@gmail.com>, 
+ Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michael Walle <michael@walle.cc>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com, 
+ uboot-stm32@st-md-mailman.stormreply.com, Nishanth Menon <nm@ti.com>, 
+ "Raghavendra, Vignesh" <vigneshr@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,45 +94,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Nishanth,
+Hi Neha,
 
-On Thu, Aug 24, 2023 at 07:14:12AM -0500, Nishanth Menon wrote:
-> On 10:08-20230824, Emanuele Ghidoli wrote:
-> > From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> > 
-> > verdin am62 SKUs comes in multiple memory configuration, check that
-> > the detected memory is at least 512MB since we have some
-> > reserved memory just before this threshold and therefore
-> > the module cannot work with less memory.
-> > 
-> > Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
-> > Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> > ---
-> >  board/toradex/verdin-am62/verdin-am62.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
-> > index a3d1d07a0cbf..d09dda5bccc9 100644
-> > --- a/board/toradex/verdin-am62/verdin-am62.c
-> > +++ b/board/toradex/verdin-am62/verdin-am62.c
-> > @@ -28,8 +28,8 @@ int dram_init(void)
-> >  {
-> >  	gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, CFG_SYS_SDRAM_SIZE);
-> >  
-> > -	if (gd->ram_size < SZ_64M)
-> > -		puts("## WARNING: Less than 64MB RAM detected\n");
-> > +	if (gd->ram_size < SZ_512M)
-> > +		puts("## WARNING: Less than 512MB RAM detected\n");
-> 
-> Have you considered fdtdec_setup_mem_size_base
-> fdtdec_setup_memory_banksize  - in which case the reserved memory
-> regions can be changed in dt (will need corresponding custom binaries
-> ofcourse)..
+On Thu, 24 Aug 2023 at 06:26, Neha Malcom Francis <n-francis@ti.com> wrote:
+>
+> Hi Simon
+>
+> + Vignesh, Nishanth to comment on this as well
+>
+> On 24/08/23 08:32, Simon Glass wrote:
+> > In this early stage of using binman to produce output files, we are mostly
+> > seeing people using common extensions such as '.bin' and '.rom'
+>
+> [...]
+>
+> > The fact that the .pem files are at the top level means that they are
+> > output images, which surely is not intended. They should be buried in the
+> > image description, at a lower level, as part of something else.
+> >
+> > So please take a loke at the above and see if the binman descriptions can
+> > be reworked slightly to follow these new rules.
+> >
+>
+> I think this can work... but few concerns.
+>
+> 1. Our output binaries also include <image>.bin_unsigned, would extensions that
+> aren't "standard" be added to the list if they are truly output binaries? If
+> not, changing names for them may be a long stretch (pinging Vignesh and Nishanth
+> to comment here).
 
-I would say that custom binaries is not something we want. Our goal is
-to rely on whatever TI is providing and to not deviate from it unless
-required. Luckily enough for the moment it works since our
-minimum memory size is 512MB.
+How about changing them to image-unsigned.bin ? That is a convention I
+am trying to follow...so we have the file type last.
 
-Francesco
+>
+> 2. Can it be an option to not enforce this, to support users that may make use
+> of the intermediate binaries?
 
+This does not apply to sections within an image, which can still
+produce files. But those files won't be preserved by buildman unless
+they have a supported extension.
+
+>
+> Also if we do move forward with this, we will need to sync to make sure that the
+> changes to the affected boards come through as well.
+
+Yes.
+
+Regards,
+Simon
