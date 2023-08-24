@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45CCDC27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 18:15:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD629C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 18:23:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73A08865FB;
-	Thu, 24 Aug 2023 20:15:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EC5D8056D;
+	Thu, 24 Aug 2023 20:23:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R9nd2+mD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TXgN0FkD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A164865FB; Thu, 24 Aug 2023 20:15:21 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 10F64808E6; Thu, 24 Aug 2023 20:23:57 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D21988641D
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 20:15:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8796380181
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 20:23:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-4ff9abf18f9so113852e87.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 11:15:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-7927182dfe3so4541439f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 11:23:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692900918; x=1693505718;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZwT/bmITR9sfMusGEUwBSaJhDiYsEhgkymIUelYN05w=;
- b=R9nd2+mDK8OXAbVg39h7JQ9qBkojINiZjHiFjMrsHEwdmPOJR3VV0J4TwCFo47/bj3
- VSp+UDqPxSQXDmz3ix1Mb8KnjqgK2AwpI1lJpMg+Exs2wBJ6G11tard9dnjRr/+0eTY8
- dqYifSvqVZ20eJCyKF79ieQXC/xyPODtJpT0vXF71Do6CxvKMh1SOXXJkbVJ+9c/I06q
- TqZtXwB0SGEO3l1lHJpNRmbbEaIpn7CDv569GeWdEV5MY7RyHaz1iVSOwYvjuyfnDwji
- 9rsXXfyUFC+La34v1jQN2DOP7Ll5ocZDrNbakyhLIJ0fuBPe/bcvJ+mhQ9NNzo4+rYhn
- 5iGQ==
+ d=chromium.org; s=google; t=1692901432; x=1693506232;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BSRdn8wMfOIw6jbQk1AhjT8SPg/JrzRv6/wbMdzJyG8=;
+ b=TXgN0FkDUV3+h6gd6mUvEBSOVNLnoDUkRF9/dmGXOhMR5DO20d/uTeON1MkcOPk3At
+ 5vmIg0AyzfUV7e1O3Ulheiduee1I8Brb2xFj4K5lY++73q0Ol64Xl+O1TzdBeB1W71YK
+ pJul5JosAi6FiUvctYVYDOaxEYL1hsC7RaWH0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692900918; x=1693505718;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZwT/bmITR9sfMusGEUwBSaJhDiYsEhgkymIUelYN05w=;
- b=Rv4y/6/+ZsC2Wvh6YxrXljmMpgZIe/p3GssPrYJGzVBA413Em3/Z1IH2NQ4TfiBIha
- fhkcvM/gI1CqAAbHTZ302NQt342vakqQV3o5OX6fubTjLvk15B2fqVLLZq6ffPWvoaeM
- XHG6nTCib1FOBYiQxnKMjTvVZoTQ8+fopM1Wv5DZ7WviX3TD7GBbHtfuyPNxs6x3V4+O
- 9t7PK3nCOeiVOHUTWHLEmvsCfKiyC3hCW79AuujMjh0Xu504+uZs2dS0T2cGZeyar+Pc
- 6NoBZ6XMjztcmlyKLgNl1BXfBZF9qdllbW8Vxagw78PkCUz8RBIkU0S6XlDA9/Brx+Hi
- kNlg==
-X-Gm-Message-State: AOJu0YxKJmwC8O8eAgrTRErytt85vmsE/jxAd0e9kixrZpAj7DzzcgZN
- Qyhj1nVPzoUg6tVQC5xg1rhoA2NbaNE0xEJjEdU=
-X-Google-Smtp-Source: AGHT+IGFYkxnoXKqi8yAswFznW3wtt4hupmXVASLbCZcvbarPJsazBSItA728zJBU2KPTjZ0biUfNbadE50tXCiHDL0=
-X-Received: by 2002:a05:6512:2007:b0:500:75f1:c22e with SMTP id
- a7-20020a056512200700b0050075f1c22emr9107805lfb.40.1692900917722; Thu, 24 Aug
- 2023 11:15:17 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692901432; x=1693506232;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BSRdn8wMfOIw6jbQk1AhjT8SPg/JrzRv6/wbMdzJyG8=;
+ b=SSfmfHLaBU50wlQw+I6leVNbcwl37rUZc2K2wzpQFXm4XjH7gVKz/hWvOGidXo7IDe
+ dVI4g74tTx7Vj5Sxz+3Ys397KQYEJG8KBYMIkjWFekqBtBowsCQMFgCNqhIt9lFZtg6w
+ /7TrIbuVhK0peZK/A8hXGOwHyh5jn4GSRsnnpg/0qzYNcAH938nhcmkzJZG7XM2MqKWN
+ VeAEpqEhmQYJDXIxnqRxKyyzaZZa9OcMlLZREIKaCyAIHmkn1xSDczaeof+ofYg7RpE0
+ AyW5AL1O0TwvbgiZDqHZ5S82jBbiul7lSp8cgoRCy3YtOY8AcZ+sfzZ7873CqYdfS4/h
+ O0dA==
+X-Gm-Message-State: AOJu0YzYxU+nu9B3fj+ReBmUlFEP/hCHLPK0L3Fb58LU/4pQheDgXQbD
+ f680f5Htfo2tD21Glrn37+Zn5JQGcvhlImHgrjg=
+X-Google-Smtp-Source: AGHT+IHZU7LemWE31T4XNOSgfgNU0gksg2adeOo0Qqs7RUhi8ccDSy5lOo1gMnYX5VJdDdegqKSynA==
+X-Received: by 2002:a05:6e02:b2c:b0:345:c72d:33a5 with SMTP id
+ e12-20020a056e020b2c00b00345c72d33a5mr7984329ilu.19.1692901431757; 
+ Thu, 24 Aug 2023 11:23:51 -0700 (PDT)
+Received: from localhost.localdomain (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ a12-20020a029f8c000000b0042b0f3f9367sm4714jam.129.2023.08.24.11.23.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 11:23:51 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/2] Reland "x86: Move FACP table into separate functions""
+Date: Thu, 24 Aug 2023 12:23:32 -0600
+Message-ID: <20230824182337.1666435-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 MIME-Version: 1.0
-References: <20230731212734.7256-1-sean.anderson@seco.com>
-In-Reply-To: <20230731212734.7256-1-sean.anderson@seco.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Thu, 24 Aug 2023 11:15:05 -0700
-Message-ID: <CAJaLiFwb0Zbo8VrE3eByFrHwCEHZNQUJ0AMLOuSWCJ=iJYfcwQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: Use builtins for ffs/fls
-To: Sean Anderson <sean.anderson@seco.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Eugen Hristev <eugen.hristev@microchip.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,262 +85,308 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Each board has its own way of creating this table. Rather than calling the
+acpi_create_fadt() function for each one from a common acpi_write_fadt()
+function, just move the writer into the board-specific code.
 
-On Mon, Jul 31, 2023 at 2:28=E2=80=AFPM Sean Anderson <sean.anderson@seco.c=
-om> wrote:
->
-> Since ARMv5, the clz instruction allows for efficient implementation of
-> ffs/fls with builtins. Until ARMv7 (with Thumb-2), this instruction is
-> only available in ARM mode. LTO makes it difficult to force specific
-> functions to be in ARM mode, as it is effectively a form of very
-> aggressive inlining. To work around this, fls/ffs are implemented in
-> assembly for ARMv5 and ARMv6 when compiling U-Boot in Thumb mode.
-> Overall, this saves around 75 bytes per call.
->
-> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
-> ---
-> I only tested this on ARMv8. If someone has an ARMv5 or ARMv6 board,
-> please test this.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+Make another attempt to land this. It apparently breaks Edison but I
+cannot test that board, nor can I work out what is wrong with the code.
 
-Thanks for the patch! I've tested it with the Pogo V4 board (Kirkwood
-88F6192, ARMv5) with LTO and SYS_THUMB_BUILD.
+Previous test report is here:
 
-Also nice size reduction:
-Before: 502K
-After: 499K
+   https://lore.kernel.org/all/Yga9Z7sBFAeV64FV@smile.fi.intel.com/
 
-So for ARMv5,
-Tested-by: Tony Dinh <mibodhi@gmail.com>
+Looking at the image, the method is definitely present:
 
-All the best,
-Tony
+   $ nm /tmp/b/edison/u-boot |grep acpi_writer
+   0115fde0 D _u_boot_list_2_acpi_writer_2_0base
+   0115fdf0 D _u_boot_list_2_acpi_writer_2_1facs
+   0115fe00 D _u_boot_list_2_acpi_writer_2_3dsdt
+   0115fe10 D _u_boot_list_2_acpi_writer_2_4gnvs
+   0115fe20 D _u_boot_list_2_acpi_writer_2_5csrt
+   0115fe30 D _u_boot_list_2_acpi_writer_2_5fadt
+   0115fe40 D _u_boot_list_2_acpi_writer_2_5mcfg
+   0115fe50 D _u_boot_list_2_acpi_writer_2_5spcr
+   0115fe60 D _u_boot_list_2_acpi_writer_2_5tcpa
+   0115fe70 D _u_boot_list_2_acpi_writer_2_5tpm2
+   0115fe80 D _u_boot_list_2_acpi_writer_2_5x86
+   0115fe90 D _u_boot_list_2_acpi_writer_2_6ssdt
+   0115fea0 D _u_boot_list_2_acpi_writer_2_8dev
 
->
->  arch/arm/include/asm/bitops.h              | 27 ++++++++++++-
->  arch/arm/lib/Makefile                      |  5 +++
->  arch/arm/lib/bitops.S                      | 45 ++++++++++++++++++++++
->  include/asm-generic/bitops/builtin-__ffs.h | 16 ++++++++
->  include/asm-generic/bitops/builtin-__fls.h | 16 ++++++++
->  include/asm-generic/bitops/builtin-ffs.h   | 15 ++++++++
->  include/asm-generic/bitops/builtin-fls.h   | 17 ++++++++
->  7 files changed, 140 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm/lib/bitops.S
->  create mode 100644 include/asm-generic/bitops/builtin-__ffs.h
->  create mode 100644 include/asm-generic/bitops/builtin-__fls.h
->  create mode 100644 include/asm-generic/bitops/builtin-ffs.h
->  create mode 100644 include/asm-generic/bitops/builtin-fls.h
->
-> diff --git a/arch/arm/include/asm/bitops.h b/arch/arm/include/asm/bitops.=
-h
-> index fa8548624a..8e897833bb 100644
-> --- a/arch/arm/include/asm/bitops.h
-> +++ b/arch/arm/include/asm/bitops.h
-> @@ -15,9 +15,34 @@
->  #ifndef __ASM_ARM_BITOPS_H
->  #define __ASM_ARM_BITOPS_H
->
-> +#if __LINUX_ARM_ARCH__ < 5
-> +
->  #include <asm-generic/bitops/__ffs.h>
->  #include <asm-generic/bitops/__fls.h>
->  #include <asm-generic/bitops/fls.h>
-> +
-> +#else
-> +
-> +#define PLATFORM_FFS
-> +#define PLATFORM_FLS
-> +
-> +#if !IS_ENABLED(CONFIG_HAS_THUMB2) && CONFIG_IS_ENABLED(SYS_THUMB_BUILD)
-> +
-> +unsigned long __fls(unsigned long word);
-> +unsigned long __ffs(unsigned long word);
-> +int fls(unsigned int x);
-> +int ffs(int x);
-> +
-> +#else
-> +
-> +#include <asm-generic/bitops/builtin-__fls.h>
-> +#include <asm-generic/bitops/builtin-__ffs.h>
-> +#include <asm-generic/bitops/builtin-fls.h>
-> +#include <asm-generic/bitops/builtin-ffs.h>
-> +
-> +#endif
-> +#endif
-> +
->  #include <asm-generic/bitops/fls64.h>
->
->  #ifdef __KERNEL__
-> @@ -113,7 +138,7 @@ static inline int test_bit(int nr, const void * addr)
->
->  static inline int __ilog2(unsigned int x)
->  {
-> -       return generic_fls(x) - 1;
-> +       return fls(x) - 1;
->  }
->
->  #define ffz(x)  __ffs(~(x))
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index 62cf80f373..b1bcd37466 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -113,6 +113,11 @@ AFLAGS_REMOVE_memset.o :=3D -mthumb -mthumb-interwor=
-k
->  AFLAGS_REMOVE_memcpy.o :=3D -mthumb -mthumb-interwork
->  AFLAGS_memset.o :=3D -DMEMSET_NO_THUMB_BUILD
->  AFLAGS_memcpy.o :=3D -DMEMCPY_NO_THUMB_BUILD
-> +
-> +# This is only necessary to force ARM mode on THUMB1 targets.
-> +ifneq ($(CONFIG_SYS_ARM_ARCH),4)
-> +obj-y   +=3D bitops.o
-> +endif
->  endif
->  endif
->
-> diff --git a/arch/arm/lib/bitops.S b/arch/arm/lib/bitops.S
-> new file mode 100644
-> index 0000000000..29d1524634
-> --- /dev/null
-> +++ b/arch/arm/lib/bitops.S
-> @@ -0,0 +1,45 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (C) 2023 Sean Anderson <sean.anderson@seco.com>
-> + *
-> + * ARM bitops to call when using THUMB1, which doesn't have these instru=
-ctions.
-> + */
-> +#include <linux/linkage.h>
-> +#include <asm/assembler.h>
-> +
-> +.pushsection .text.__fls
-> +ENTRY(__fls)
-> +       clz     r0, r0
-> +       rsb     r0, r0, #31
-> +       ret     lr
-> +ENDPROC(__fls)
-> +.popsection
-> +
-> +.pushsection .text.__ffs
-> +ENTRY(__ffs)
-> +       rsb     r3, r0, #0
-> +       and     r0, r0, r3
-> +       clz     r0, r0
-> +       rsb     r0, r0, #31
-> +       ret     lr
-> +ENDPROC(__ffs)
-> +.popsection
-> +
-> +.pushsection .text.fls
-> +ENTRY(fls)
-> +       cmp     r0, #0
-> +       clzne   r0, r0
-> +       rsbne   r0, r0, #32
-> +       ret     lr
-> +ENDPROC(fls)
-> +.popsection
-> +
-> +.pushsection .text.ffs
-> +ENTRY(ffs)
-> +       rsb     r3, r0, #0
-> +       and     r0, r0, r3
-> +       clz     r0, r0
-> +       rsb     r0, r0, #32
-> +       ret     lr
-> +ENDPROC(ffs)
-> +.popsection
-> diff --git a/include/asm-generic/bitops/builtin-__ffs.h b/include/asm-gen=
-eric/bitops/builtin-__ffs.h
-> new file mode 100644
-> index 0000000000..87024da44d
-> --- /dev/null
-> +++ b/include/asm-generic/bitops/builtin-__ffs.h
-> @@ -0,0 +1,16 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef _ASM_GENERIC_BITOPS_BUILTIN___FFS_H_
-> +#define _ASM_GENERIC_BITOPS_BUILTIN___FFS_H_
-> +
-> +/**
-> + * __ffs - find first bit in word.
-> + * @word: The word to search
-> + *
-> + * Undefined if no bit exists, so code should check against 0 first.
-> + */
-> +static __always_inline unsigned long __ffs(unsigned long word)
-> +{
-> +       return __builtin_ctzl(word);
-> +}
-> +
-> +#endif
-> diff --git a/include/asm-generic/bitops/builtin-__fls.h b/include/asm-gen=
-eric/bitops/builtin-__fls.h
-> new file mode 100644
-> index 0000000000..43a5aa9afb
-> --- /dev/null
-> +++ b/include/asm-generic/bitops/builtin-__fls.h
-> @@ -0,0 +1,16 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef _ASM_GENERIC_BITOPS_BUILTIN___FLS_H_
-> +#define _ASM_GENERIC_BITOPS_BUILTIN___FLS_H_
-> +
-> +/**
-> + * __fls - find last (most-significant) set bit in a long word
-> + * @word: the word to search
-> + *
-> + * Undefined if no set bit exists, so code should check against 0 first.
-> + */
-> +static __always_inline unsigned long __fls(unsigned long word)
-> +{
-> +       return (sizeof(word) * 8) - 1 - __builtin_clzl(word);
-> +}
-> +
-> +#endif
-> diff --git a/include/asm-generic/bitops/builtin-ffs.h b/include/asm-gener=
-ic/bitops/builtin-ffs.h
-> new file mode 100644
-> index 0000000000..7b12932904
-> --- /dev/null
-> +++ b/include/asm-generic/bitops/builtin-ffs.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef _ASM_GENERIC_BITOPS_BUILTIN_FFS_H_
-> +#define _ASM_GENERIC_BITOPS_BUILTIN_FFS_H_
-> +
-> +/**
-> + * ffs - find first bit set
-> + * @x: the word to search
-> + *
-> + * This is defined the same way as
-> + * the libc and compiler builtin ffs routines, therefore
-> + * differs in spirit from ffz (man ffs).
-> + */
-> +#define ffs(x) __builtin_ffs(x)
-> +
-> +#endif
-> diff --git a/include/asm-generic/bitops/builtin-fls.h b/include/asm-gener=
-ic/bitops/builtin-fls.h
-> new file mode 100644
-> index 0000000000..c8455cc288
-> --- /dev/null
-> +++ b/include/asm-generic/bitops/builtin-fls.h
-> @@ -0,0 +1,17 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef _ASM_GENERIC_BITOPS_BUILTIN_FLS_H_
-> +#define _ASM_GENERIC_BITOPS_BUILTIN_FLS_H_
-> +
-> +/**
-> + * fls - find last (most-significant) bit set
-> + * @x: the word to search
-> + *
-> + * This is defined the same way as ffs.
-> + * Note fls(0) =3D 0, fls(1) =3D 1, fls(0x80000000) =3D 32.
-> + */
-> +static __always_inline int fls(unsigned int x)
-> +{
-> +       return x ? sizeof(x) * 8 - __builtin_clz(x) : 0;
-> +}
-> +
-> +#endif
-> --
-> 2.40.1
->
+I wonder if the code in quark_write_fadt() is not being called?
+
+'acpi list' shows what tables are installed. On minnowmax there is no
+difference with or without this patch. Perhaps someone with sharper eyes
+than me can figure this out?
+
+The mechanism is that the functions to be called are put in a linker list,
+each element being declared using ACPI_WRITER(function_name).
+
+Then acpi_write_all() is called to write each one. Debugging could be
+added to that function, perhaps?
+
+ arch/x86/cpu/apollolake/acpi.c    | 17 +++++++++++++----
+ arch/x86/cpu/baytrail/acpi.c      | 27 +++++++++++++++++++--------
+ arch/x86/cpu/quark/acpi.c         | 27 +++++++++++++++++++--------
+ arch/x86/cpu/tangier/acpi.c       | 25 +++++++++++++++++--------
+ arch/x86/include/asm/acpi_table.h |  2 --
+ arch/x86/lib/acpi_table.c         | 15 ---------------
+ 6 files changed, 68 insertions(+), 45 deletions(-)
+
+diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
+index fd21c0b49684..16aaed7238ab 100644
+--- a/arch/x86/cpu/apollolake/acpi.c
++++ b/arch/x86/cpu/apollolake/acpi.c
+@@ -146,16 +146,25 @@ void fill_fadt(struct acpi_fadt *fadt)
+ 	fadt->x_pm_tmr_blk.addrl = IOMAP_ACPI_BASE + PM1_TMR;
+ }
+ 
+-void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt)
++static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ {
+-	struct acpi_table_header *header = &fadt->header;
++	struct acpi_table_header *header;
++	struct acpi_fadt *fadt;
+ 
+-	acpi_fadt_common(fadt, facs, dsdt);
++	fadt = ctx->current;
++	acpi_fadt_common(fadt, ctx->facs, ctx->dsdt);
+ 	intel_acpi_fill_fadt(fadt);
+ 	fill_fadt(fadt);
++	header = &fadt->header;
+ 	header->checksum = table_compute_checksum(fadt, header->length);
++
++	acpi_add_table(ctx, fadt);
++
++	acpi_inc(ctx, sizeof(struct acpi_fadt));
++
++	return 0;
+ }
++ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
+ 
+ int apl_acpi_fill_dmar(struct acpi_ctx *ctx)
+ {
+diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
+index 07757b88a305..4c526ff27310 100644
+--- a/arch/x86/cpu/baytrail/acpi.c
++++ b/arch/x86/cpu/baytrail/acpi.c
+@@ -15,20 +15,24 @@
+ #include <asm/arch/iomap.h>
+ #include <dm/uclass-internal.h>
+ 
+-void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt)
++static int baytrail_write_fadt(struct acpi_ctx *ctx,
++			       const struct acpi_writer *entry)
+ {
+-	struct acpi_table_header *header = &(fadt->header);
++	struct acpi_table_header *header;
++	struct acpi_fadt *fadt;
++
++	fadt = ctx->current;
++	header = &fadt->header;
+ 	u16 pmbase = ACPI_BASE_ADDRESS;
+ 
+-	memset((void *)fadt, 0, sizeof(struct acpi_fadt));
++	memset(fadt, '\0', sizeof(struct acpi_fadt));
+ 
+ 	acpi_fill_header(header, "FACP");
+ 	header->length = sizeof(struct acpi_fadt);
+ 	header->revision = 4;
+ 
+-	fadt->firmware_ctrl = (u32)facs;
+-	fadt->dsdt = (u32)dsdt;
++	fadt->firmware_ctrl = (u32)ctx->facs;
++	fadt->dsdt = (u32)ctx->dsdt;
+ 	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
+ 	fadt->sci_int = 9;
+ 	fadt->smi_cmd = 0;
+@@ -75,9 +79,9 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 	fadt->reset_reg.addrh = 0;
+ 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
+ 
+-	fadt->x_firmware_ctl_l = (u32)facs;
++	fadt->x_firmware_ctl_l = (u32)ctx->facs;
+ 	fadt->x_firmware_ctl_h = 0;
+-	fadt->x_dsdt_l = (u32)dsdt;
++	fadt->x_dsdt_l = (u32)ctx->dsdt;
+ 	fadt->x_dsdt_h = 0;
+ 
+ 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
+@@ -137,7 +141,14 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 	fadt->x_gpe1_blk.addrh = 0x0;
+ 
+ 	header->checksum = table_compute_checksum(fadt, header->length);
++
++	acpi_add_table(ctx, fadt);
++
++	acpi_inc(ctx, sizeof(struct acpi_fadt));
++
++	return 0;
+ }
++ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
+ 
+ int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
+ {
+diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
+index 82b776ff65f6..92fa5bc30c36 100644
+--- a/arch/x86/cpu/quark/acpi.c
++++ b/arch/x86/cpu/quark/acpi.c
+@@ -10,20 +10,24 @@
+ #include <asm/arch/global_nvs.h>
+ #include <asm/arch/iomap.h>
+ 
+-void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt)
++static int quark_write_fadt(struct acpi_ctx *ctx,
++			    const struct acpi_writer *entry)
+ {
+-	struct acpi_table_header *header = &(fadt->header);
+ 	u16 pmbase = ACPI_PM1_BASE_ADDRESS;
++	struct acpi_table_header *header;
++	struct acpi_fadt *fadt;
+ 
+-	memset((void *)fadt, 0, sizeof(struct acpi_fadt));
++	fadt = ctx->current;
++	header = &fadt->header;
++
++	memset(fadt, '\0', sizeof(struct acpi_fadt));
+ 
+ 	acpi_fill_header(header, "FACP");
+ 	header->length = sizeof(struct acpi_fadt);
+ 	header->revision = 4;
+ 
+-	fadt->firmware_ctrl = (u32)facs;
+-	fadt->dsdt = (u32)dsdt;
++	fadt->firmware_ctrl = (u32)ctx->facs;
++	fadt->dsdt = (u32)ctx->dsdt;
+ 	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
+ 	fadt->sci_int = 9;
+ 	fadt->smi_cmd = 0;
+@@ -70,9 +74,9 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 	fadt->reset_reg.addrh = 0;
+ 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
+ 
+-	fadt->x_firmware_ctl_l = (u32)facs;
++	fadt->x_firmware_ctl_l = (u32)ctx->facs;
+ 	fadt->x_firmware_ctl_h = 0;
+-	fadt->x_dsdt_l = (u32)dsdt;
++	fadt->x_dsdt_l = (u32)ctx->dsdt;
+ 	fadt->x_dsdt_h = 0;
+ 
+ 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
+@@ -132,7 +136,14 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 	fadt->x_gpe1_blk.addrh = 0x0;
+ 
+ 	header->checksum = table_compute_checksum(fadt, header->length);
++
++	acpi_add_table(ctx, fadt);
++
++	acpi_inc(ctx, sizeof(struct acpi_fadt));
++
++	return 0;
+ }
++ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
+ 
+ int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
+ {
+diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
+index 3ffba3897aad..01b30553818c 100644
+--- a/arch/x86/cpu/tangier/acpi.c
++++ b/arch/x86/cpu/tangier/acpi.c
+@@ -16,19 +16,23 @@
+ #include <asm/arch/iomap.h>
+ #include <dm/uclass-internal.h>
+ 
+-void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt)
++static int tangier_write_fadt(struct acpi_ctx *ctx,
++			      const struct acpi_writer *entry)
+ {
+-	struct acpi_table_header *header = &(fadt->header);
++	struct acpi_table_header *header;
++	struct acpi_fadt *fadt;
+ 
+-	memset((void *)fadt, 0, sizeof(struct acpi_fadt));
++	fadt = ctx->current;
++	header = &fadt->header;
++
++	memset(fadt, '\0', sizeof(struct acpi_fadt));
+ 
+ 	acpi_fill_header(header, "FACP");
+ 	header->length = sizeof(struct acpi_fadt);
+ 	header->revision = 6;
+ 
+-	fadt->firmware_ctrl = (u32)facs;
+-	fadt->dsdt = (u32)dsdt;
++	fadt->firmware_ctrl = (u32)ctx->facs;
++	fadt->dsdt = (u32)ctx->dsdt;
+ 	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
+ 
+ 	fadt->iapc_boot_arch = ACPI_FADT_VGA_NOT_PRESENT |
+@@ -41,13 +45,18 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 
+ 	fadt->minor_revision = 2;
+ 
+-	fadt->x_firmware_ctl_l = (u32)facs;
++	fadt->x_firmware_ctl_l = (u32)ctx->facs;
+ 	fadt->x_firmware_ctl_h = 0;
+-	fadt->x_dsdt_l = (u32)dsdt;
++	fadt->x_dsdt_l = (u32)ctx->dsdt;
+ 	fadt->x_dsdt_h = 0;
+ 
+ 	header->checksum = table_compute_checksum(fadt, header->length);
++
++	acpi_inc(ctx, sizeof(struct acpi_fadt));
++
++	return 0;
+ }
++ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
+ 
+ u32 acpi_fill_madt(u32 current)
+ {
+diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
+index 72e1873d15dc..226753b65d6a 100644
+--- a/arch/x86/include/asm/acpi_table.h
++++ b/arch/x86/include/asm/acpi_table.h
+@@ -24,8 +24,6 @@ struct acpi_table_header;
+ 
+ /* These can be used by the target port */
+ 
+-void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
+-		      void *dsdt);
+ int acpi_create_madt_lapics(u32 current);
+ int acpi_create_madt_ioapic(struct acpi_madt_ioapic *ioapic, u8 id,
+ 			    u32 addr, u32 gsi_base);
+diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
+index e3b7e9a4bbe8..c5b33dc65de4 100644
+--- a/arch/x86/lib/acpi_table.c
++++ b/arch/x86/lib/acpi_table.c
+@@ -458,21 +458,6 @@ int acpi_write_gnvs(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ }
+ ACPI_WRITER(4gnvs, "GNVS", acpi_write_gnvs, 0);
+ 
+-static int acpi_write_fadt(struct acpi_ctx *ctx,
+-			   const struct acpi_writer *entry)
+-{
+-	struct acpi_fadt *fadt;
+-
+-	fadt = ctx->current;
+-	acpi_create_fadt(fadt, ctx->facs, ctx->dsdt);
+-	acpi_add_table(ctx, fadt);
+-
+-	acpi_inc(ctx, sizeof(struct acpi_fadt));
+-
+-	return 0;
+-}
+-ACPI_WRITER(5fact, "FADT", acpi_write_fadt, 0);
+-
+ /**
+  * acpi_write_hpet() - Write out a HPET table
+  *
+-- 
+2.42.0.rc1.204.g551eb34607-goog
+
