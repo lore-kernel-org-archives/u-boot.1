@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCADC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 11:51:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88DA8C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 11:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B9BC8658C;
-	Thu, 24 Aug 2023 13:51:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E33E865A4;
+	Thu, 24 Aug 2023 13:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kcrSP1Fj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GB28sl4F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6683B8657C; Thu, 24 Aug 2023 13:51:54 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 1F17C865A8; Thu, 24 Aug 2023 13:53:03 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D9208658C
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 13:51:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CCE28657C
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 13:53:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-26f381afc15so595877a91.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:51:51 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-1c134602a55so1196946fac.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 04:53:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692877910; x=1693482710;
+ d=gmail.com; s=20221208; t=1692877979; x=1693482779;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TrJtopPy/e62K7LG5JtZcjS2lte78NT4Riz4TOeQFYk=;
- b=kcrSP1FjIH2HRlhzLJ7zMcdt3ktrTDymAoRZCGIbv982D0+OnHpr3nJdPKQyy/muXs
- Qb81jZ9M8lNsdDKwykcnOQte8YW/mcHRWzfPZ0w57RD2MOt1cutLlKLYVaRWXX9ZZ5nu
- RrefqgIwTtVR5INCrlYeYlWcjeV+hnBUBMHzYLF0f7FrJihDx7ppmCbhGdiKEbfhdeoZ
- IFNNvT8LN4zW4XwaSz8sTnLZIpf/IQ9XdVqdEdzg/+4jp4gbHy5FnGjd3cqiNrh3HolR
- 4Ll3CjBvRG1AYQ4llwvyxg6/0c+MWQyCFg014ntX7NVOwuIbu85nHLjzaiNsnVnzNoiE
- 2tkg==
+ bh=9Wc4ZbRSRsSB1iIMj2kXIFebA5KnBuPCC9HLkgUsOyw=;
+ b=GB28sl4FzcCSJ000o3qEEsrbOdx9U5VI5G0nxDeNsSYC3snTw2ylBIzz9cJHMLogLH
+ Ym+PAIJFJhDWDX1ia6aYI6WwA8qKeE9/RAH0hDmCq7B2Yx7y2PaQzMNHmCE+rFGyCIOa
+ 6u8g5X5OIpv2yY83BoRiZTvJkoeuezH0+pd8aB++rpoSCpPbn4OSV2fRXb/1W6MHc4Xy
+ fGj1bkuDx1fxGlEm4Hv6+W8JcUGkSCOTo4tbG9IHlbmqKbesOsdCOHDIW1zI0yQcWhSa
+ QmS7PFlIhIUHhbTJAArUIqJfNEzb4r/laLaJ9zBSrhdzzphHTj1aKkTCZIA0KNcuWFIc
+ dAZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692877910; x=1693482710;
+ d=1e100.net; s=20221208; t=1692877979; x=1693482779;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TrJtopPy/e62K7LG5JtZcjS2lte78NT4Riz4TOeQFYk=;
- b=ZtcQUnDbAqz0Q0SzLRWFOXiaJ/1dijyPdn2Fy8EMRrvg9uG7pZxHsvojPITjVimrD4
- cDvn9ulmAU3TG6La9ttT2Erz4K8EakOK8B/6JbBe0ZpP/z5eyNNmFMPN4jmk/JeBoMyu
- 38m+koCtPuh1o/Pw3kB+FIt+LRkmp3cLaFU+mtqoCcvT33nZfw4YygO8Os1XSJzU7BZx
- 0PFeKVxQ5bDOHfRL9n0LO4bc+30QTDAQLeXiwQOuo2mxIo2WD/RL+0xrxg25ERlcEqiZ
- xxCmEtsfTS3PM5Nfdo5fs9lrEfxQkAI4it0DzNhS6vZsCNp5TMtvisU10vlXwdkcMkxX
- GvyQ==
-X-Gm-Message-State: AOJu0Yx3t256LCyMUVSTdH9fhYx2WeSzioa6OhgRwskMUULg7h0g2B04
- z8lBnd4wGLVeQIDGmGORIrauxFQZ01PF5X6+Cb4=
-X-Google-Smtp-Source: AGHT+IEog/abqVIfoWI9hXofw9EPoCvqzMQTKyW47YFsJzNc8DHhzSoDyxbtVEKJt0vLsc8cid2QN1K1AYrC9TWp0xo=
-X-Received: by 2002:a17:90a:2d8b:b0:26d:414d:a98a with SMTP id
- p11-20020a17090a2d8b00b0026d414da98amr13960272pjd.1.1692877909851; Thu, 24
- Aug 2023 04:51:49 -0700 (PDT)
+ bh=9Wc4ZbRSRsSB1iIMj2kXIFebA5KnBuPCC9HLkgUsOyw=;
+ b=Pc3T2g7eZW0EkPm1Kvm/2wLZKfJ4y8kLHUwHZflTp6TIuegfQileinh1WB3Zrh4mT+
+ GIH9NcsdZ0EykzxLGkUWptkfY/ygPnK6bFcdBEr/0dDrQZbh60iQzeXXZXF1DMJnrofo
+ HBis6hwFVa8mN5b59a82s6s2de9cgLr/0SJe3DsljGqSM4FbYUhErK1ZaPyBSyzfksjW
+ BW406SmrcXYrWCP4V2BzuHLfpqa8DmnfsG8eue53q8d7+PUzNY/BYbwjwOqb7GLCW2wO
+ Ab2N3eDc2ve6JUjtGgDGDDbKUl0pkKz9Y1/BfymTMHwmFVncX5ZTnVufO53op4s523Ce
+ 8tkw==
+X-Gm-Message-State: AOJu0YyhiUjuaUcYkicSym6281UHlR/eGFAeUdGQzT+J+VuTshJjEGYP
+ VHEOzVEceMexavC+upehbUQHKOCDF6CjiS6dET3ZCtSE
+X-Google-Smtp-Source: AGHT+IFc0/iQGkGaNMLGM3G7vnBji5m2nmMnaHL7kpr0s8uoupw8wYR7sod8KTNVsR1V/Aw23F6IkgXjIwn/OfZ6Uzg=
+X-Received: by 2002:a05:6870:8a25:b0:1ba:2e90:cc52 with SMTP id
+ p37-20020a0568708a2500b001ba2e90cc52mr18259660oaq.5.1692877978984; Thu, 24
+ Aug 2023 04:52:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822221726.8355-1-marcel@ziswiler.com>
-In-Reply-To: <20230822221726.8355-1-marcel@ziswiler.com>
+References: <20230817085711.45339-1-t.remmet@phytec.de>
+In-Reply-To: <20230817085711.45339-1-t.remmet@phytec.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 24 Aug 2023 08:51:37 -0300
-Message-ID: <CAOMZO5CTwWXyspD+FksURKmJLD7H3YbWcrC7zb=MB2RJGJhcOw@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: verdin-imx8mm: enable usb sdp spl
- recovery support
-To: Marcel Ziswiler <marcel@ziswiler.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Date: Thu, 24 Aug 2023 08:52:47 -0300
+Message-ID: <CAOMZO5AQUPKM7GdLVRM1UZNLw4W2PXQ72L2vtQY7vYr_wmSCMQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/6] PHYTEC SoM detection for phyCORE-i.MX8MP
+To: Teresa Remmet <t.remmet@phytec.de>, Yannic Moog <y.moog@phytec.de>
+Cc: Stefano Babic <sbabic@denx.de>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
+ upstream@lists.phytec.de, Daniel Schultz <d.schultz@phytec.de>, 
+ Wadim Egorov <w.egorov@phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,21 +89,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marcel,
+Hi Yannic,
 
-On Tue, Aug 22, 2023 at 7:17=E2=80=AFPM Marcel Ziswiler <marcel@ziswiler.co=
-m> wrote:
+On Thu, Aug 17, 2023 at 5:57=E2=80=AFAM Teresa Remmet <t.remmet@phytec.de> =
+wrote:
 >
-> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> second version of the series to add support for EEPROM SoM detection used
+> by different PHYTEC SoMs. The EEPROM data consist of 32 bytes containing
+> information like PCB revision, RAM size and other SoM specific
+> configuration.
 >
-> Enable USB SDP SPL aka serial downloader recovery mode support.
+> For SoMs of the i.MX8M family the data is written to two areas of the
+> used i2c EEPROM.
 >
-> While at it also enable fastboot support which may be used to
-> subsequently load further stages like a Toradex Easy Installer FIT
-> image.
+> We initally add the detection support for phyCORE-i.MX8MP. Due to layout
+> constraints phyCORE-i.MX8MP SoMs with PCB revision 2 and older can only
+> make use of a lower RAM frequency. This changes with the use of newer PCB
+> revisions. We make use of the factory flashed EEPROM data to detect the
+> PCB revision and select the fitting RAM settings.
 >
-> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> Changes in v2:
+> - fix wrong RAM Timing values as pointed out by Yannic
+> - removed superfluous goto
+> - removed blank line at EOF
+> - fix string conversion to integer
+> - fix typo s/revsions/revisions
 
-Yes, this is helpful:
+Could you please help review v2?
 
-Reviewed-by: Fabio Estevam <festevam@denx.de>
+Thanks
