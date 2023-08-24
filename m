@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012B1C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 16:31:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C9DC3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 16:55:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 169A083F7B;
-	Thu, 24 Aug 2023 18:31:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF097864E7;
+	Thu, 24 Aug 2023 18:55:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sksGtAaa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E0XcKUqC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D49386596; Thu, 24 Aug 2023 18:31:30 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 2A69B852DB; Thu, 24 Aug 2023 18:55:03 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 754158082A
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 18:31:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6321086401
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 18:55:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5925e580f12so810617b3.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 09:31:27 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6bca3588edbso60004a34.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 09:55:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692894686; x=1693499486;
+ d=konsulko.com; s=google; t=1692896099; x=1693500899;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aTvuTuOzfaRdiRtsomc429OitGS90q8fL3aZrxJxces=;
- b=sksGtAaa93mcCPamAMTYUwUnuWMkwrhtW/sXqcr1OmpSWJP+IKgGA+pc7F+R7V4TZT
- s8qT7CVz8so++ALxdWxR/6X8iXI0Z4V4/j0rdI5JVCPq9udXvQlQuN6d6W9LNAuEVMYm
- Xnv/35+VHHj9Mz37N3lq54Bf0u4gqFZBQr8SI=
+ bh=FVxjxJ/uMyzK8cdZcVYXQN52aV+Ke+p4kT5rSNURoJ4=;
+ b=E0XcKUqCipzls5+imfDTTM84pmS70FE0wHxcHM0zMEP9mYYDnRolZRvgjh9DloVyYy
+ WkQlNQFQCnH+pb9siTKYFSgueTLmnwrpf0aSKIp5/ZPDuK4PTxmMuh/ryM3DdEdl1Sy8
+ j4RtnVZTYrS8tIjT1+DqHUHhLOtdKmzYRFmZI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692894686; x=1693499486;
+ d=1e100.net; s=20221208; t=1692896099; x=1693500899;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aTvuTuOzfaRdiRtsomc429OitGS90q8fL3aZrxJxces=;
- b=MmtknKELxPHOPNFFYzWOb1w/0xb33iUeNlyDoVbCybcIPYtSiIuG7QQ2hG+8YgfCTe
- PSZ9Ni9ih1RjMEs7Cjppo09yTUdbQMRU5i5toQ55GMgX6nDadYZbp8T25YJPWxo6GL6K
- 8VaJopq7TRFTNJfjuN+sVdvKmJSzsR2dOgv0Cd6nQKhbRaTd0N7oexXOVBei7dTHr1ST
- LQzU9aagf+K8vg3x5oQlAxi40KMQ0eRNeLYnKqVukv/wyS5Id8amyDjeYv4hLxCh8BgN
- EmEnM2vMCqd4d32HKJ91j4fIcuK+uO51ADscQnerKGMJRXEgKjWdxy+EP+cMhnGA3cZd
- HUeg==
-X-Gm-Message-State: AOJu0Ywq2kCmT5U/0yNEe+v9Z3RaBxa1niFBg+Uz51/IYbOeAzFbu0+n
- AVfGQsUAToIQm2qSstbl6/iglQ==
-X-Google-Smtp-Source: AGHT+IGfMcxNypdpV+TyMpN+HUseIjfn/I3eHhGWdAzXnikQ8n9OHPSECawGFUzUAKh5wx1dKc/klA==
-X-Received: by 2002:a0d:c4c4:0:b0:57a:f72:ebf8 with SMTP id
- g187-20020a0dc4c4000000b0057a0f72ebf8mr16649602ywd.28.1692894686117; 
- Thu, 24 Aug 2023 09:31:26 -0700 (PDT)
+ bh=FVxjxJ/uMyzK8cdZcVYXQN52aV+Ke+p4kT5rSNURoJ4=;
+ b=fX7DWJna6vyKc1uyoVEl4UBpwf47k8grlJFO3CVpRYAcOdnONPDswtchEzPYbRcK9/
+ JCxxKH8MJFU2MPjMQy9c56A8MpdW2tErTrWebEdLQKyc9/tdDeAmFPrzh+WR1RatUeyT
+ ukBEVZyPgUwgJr3KnsK03pj0Svfks7gBANQino0P4VlexNfT8SF/x6WDLUTHIp3UPy/W
+ ZUZBPFtzVFiVZkEnvuWSq1AEJ5RwNJ5/KDjQ47zeKPa0/tLdqnBRTSEgHlaEkcgAn7qw
+ Xbjc7c4/ca1heuZ9YtZUehHYWGTpWzeTn51tS3rhShxxZXCEGWcxxhrcX66Mz/UrmEzh
+ RGAw==
+X-Gm-Message-State: AOJu0YxDlPByBCL0S8fsKU5LuckqTKwigGrNmQjplJWbMTJQOM4jUpmT
+ +A3naEHlgs297aR6ORdWEsEY5g==
+X-Google-Smtp-Source: AGHT+IHwcIOxCsnrMGckusLdqCHGoeJ0KrOCqdYftSBf5IC23QM3t8pj0nrpYjbXGmv+7YrmhEjvxg==
+X-Received: by 2002:a05:6358:52d2:b0:139:8a11:8a00 with SMTP id
+ z18-20020a05635852d200b001398a118a00mr10950836rwz.32.1692896098875; 
+ Thu, 24 Aug 2023 09:54:58 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
  [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
  by smtp.gmail.com with ESMTPSA id
- p188-20020a815bc5000000b0057a6e41aad1sm3970072ywb.67.2023.08.24.09.31.25
+ j80-20020a819253000000b005845e6f9b50sm4021520ywg.113.2023.08.24.09.54.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 09:31:25 -0700 (PDT)
-Date: Thu, 24 Aug 2023 12:31:23 -0400
+ Thu, 24 Aug 2023 09:54:58 -0700 (PDT)
+Date: Thu, 24 Aug 2023 12:54:56 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Shengyu Qu <wiagn233@outlook.com>
-Cc: rick@andestech.com, ycliang@andestech.com,
- yanhong.wang@starfivetech.com, sjg@chromium.org,
- andre.przywara@arm.com, xypron.glpk@gmx.de, michal.simek@amd.com,
- marek.vasut+renesas@mailbox.org, jbx6244@gmail.com,
- bmeng@tinylab.org, ganboing@gmail.com, minda.chen@starfivetech.com,
- seanga2@gmail.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v6 1/4] Kconfig: Add SPL_SYS_MALLOC_CLEAR_ON_INIT
-Message-ID: <20230824163123.GC3953269@bill-the-cat>
-References: <20230824162521.22240-1-wiagn233@outlook.com>
- <TY3P286MB26116769A6FC3BB12FB91A77981DA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+To: Jesse Taube <mr.bossman075@gmail.com>
+Cc: u-boot@lists.denx.de, "Andrew F . Davis" <afd@ti.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefan Roese <sr@denx.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Mingming lee <mingming.lee@mediatek.com>,
+ Mauro Condarelli <mc5686@mclink.it>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marex@denx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Roger Quadros <rogerq@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>
+Subject: Re: [PATCH] Convert CFG_SYS_UBOOT_START to Kconfig
+Message-ID: <20230824165456.GD3953269@bill-the-cat>
+References: <20230824023052.655362-1-Mr.Bossman075@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zLUF4vZuTOtmtWlW"
+ protocol="application/pgp-signature"; boundary="qA/ToAYUk1csxsv1"
 Content-Disposition: inline
-In-Reply-To: <TY3P286MB26116769A6FC3BB12FB91A77981DA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <20230824023052.655362-1-Mr.Bossman075@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,40 +110,91 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zLUF4vZuTOtmtWlW
+--qA/ToAYUk1csxsv1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 25, 2023 at 12:25:18AM +0800, Shengyu Qu wrote:
+On Wed, Aug 23, 2023 at 10:30:52PM -0400, Jesse Taube wrote:
 
-> Add SPL version of SYS_MALLOC_CLEAR_ON_INIT, this would help devices
-> that need to clear ram before use to work correctly.
+> Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*")
+> renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
+> this meant that the value was no longer available to the Makefile. This
+> caused imxrt to fail to boot. All the other boards that used this
+> variable were unaffected because they were using the default value
+> which is CONFIG_TEXT_BASE.
 >=20
-> Signed-off-by: Bo Gan <ganboing@gmail.com>
-> Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
+> This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the default
+> value to CONFIG_TEXT_BASE.
+>=20
+> Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+[snip]
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 5e2d4286ae..f2f7821cc1 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -737,6 +737,22 @@ config TEXT_BASE
+>  	default 0x4a000000 if SUNXI_MINIMUM_DRAM_MB >=3D 256
+>  	default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >=3D 64
+>  	hex "Text Base"
+> +	help
+> +	  The address in memory that U-Boot will be copied from, initially.
+> +
+> +config HAVE_SYS_UBOOT_START
+> +	bool
+> +	depends on HAVE_TEXT_BASE
+> +	prompt "Use custom U-Boot Start"
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+We should use:
+	bool "Use custom U-Boot start address"
+
+instead of separate bool/prompt.
+
+> +	help
+> +	  By default, the address in memory that U-Boot will be copied from(TEX=
+T_BASE) and the
+> +	  entry point are the same. Select this to set a different U-Boot start=
+ address.
+> +
+> +config SYS_UBOOT_START
+> +	hex
+> +	depends on HAVE_TEXT_BASE
+> +	default TEXT_BASE
+> +	prompt "U-Boot entry" if HAVE_SYS_UBOOT_START
+
+This is clever, and can be kept.  I didn't catch at first that this will
+do what I was hoping of setting a default, but then allowing for it to
+be changed.
+
+>  	help
+>  	  The address in memory that U-Boot will be running from, initially.
+
+This should be slightly different and expand on what's in the help text
+for HAVE_SYS_UBOOT_START.
+
+Thanks!
 
 --=20
 Tom
 
---zLUF4vZuTOtmtWlW
+--qA/ToAYUk1csxsv1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnhdsACgkQFHw5/5Y0
-tyyBzAv+LaDk8sMbVcvsJEwcIqHHZVGwppyVwVclUVv1g+svKJs+EGuViyo/0sZH
-kxhwZzE5tRbj/XdxS2J26kz/uJ/xqZPIAIhFgPht9AV4vIWddhopOcsOZvxn/Vfp
-hs1XwI+XTUvJ29DzLv1ajhNKWhV8/SxiB30QF5qeTPjLoDDVgKBv59eZbb7WwhDf
-kHvAmVDld85tSw3yZ3wtUZfd2MgH92tvQGQ/yxSni2y9wUCqCYL2numjuhchu8dd
-MZN45ade2NrTIgOhULop0ousqxLE3j1pOX9bSsPIQGYOPE7WWVRmHQmWyjHdGpK1
-cWVfm0+s7Viz+gRBgGiaBeHjJfwaym7XeBvfXX37X5TPsHj9Y+GXgZlMMKmD1mcy
-L+JFqPBanKmS2P+c30uhVCExyI0WmtVrCgW90Ddo5VpNu98KC1HNVnaLI3v7ccA7
-EopaMgCDY4ObzvGFlMAt107JGDLdvr6iRKIpMqjR+ZxUv8/JQX5EXwX6a+BFOHhn
-UL0vDYPy
-=kq06
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTni1wACgkQFHw5/5Y0
+tyx4oQv6ArHeJJyygKFlXY2hMQBQHrthcNiVjxOf3jj/XT9Ho0QWB2LhVGSsSzOT
+OcAKrmppTLUR+MQJKIAPX+2OaYK5fLOEJRs7st1g7ImnV+uP3gs9dGGi9mUR2TqU
++ZmM7qJtKkJWA2po0aXBMh+95NfzMZOyAkUwMtQxWhjZ1WYd2gY3YP3nJdYHql2/
+oyBXXszwNo7rmYr3EAqgAE5Wxaf9Mm4s8HLSAvIm3ZKwjXU2O1rq2ZX8CPKvNhBU
+stoMiVP9NG+qIeMR6QGNzUNOVfQbAqZzedArrwcu/k8+9MGw998BkJ/c8XbHoSTH
+rd6hwglrGECDK2fZzl3HXwauFFRWUW0pgagehp6FP+v6RyukDNZ8YhWntc3HiTXY
+/85yfWBTbyMVkYCoGukYzTmIVAL3fgF3UVqgnCSbS9glSwN+K6SBuQC03NhG9DQH
+uNVinRxEKT2tNdrOijuD3WMeri9ce3Jexc42Lbs+m5FV7LBCSLmNy2wBJ5n2qxTV
+U7E3Lorv
+=qAvM
 -----END PGP SIGNATURE-----
 
---zLUF4vZuTOtmtWlW--
+--qA/ToAYUk1csxsv1--
