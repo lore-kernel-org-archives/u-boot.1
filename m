@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D909DC7113B
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 20:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FEDC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 20:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B0EE86A1F;
+	by phobos.denx.de (Postfix) with ESMTP id 7E69E86A6D;
 	Thu, 24 Aug 2023 21:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hdMcXkVN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MlFJSec/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD2B586900; Thu, 24 Aug 2023 21:59:37 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 1CD9986A24; Thu, 24 Aug 2023 21:59:38 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3191E86A63
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:59:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09B8186989
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:59:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-79264ca4b34so7778039f.0
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-792388ea4b3so7394939f.2
  for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:59:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692907171; x=1693511971;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vdf3f8FsHlaQGqWcWD6KNCT/LH2dfqnAxntmSOaYWcM=;
- b=hdMcXkVNuWpGpJAUFMVZJu737ib2aGfhRxu/lb3/WfN5OD7evQDZsHq+h8VdOwXSkm
- 2LFth8ep1azZEZgtHHfig9FHiWLZ6iaBeaJMVSXV+/Lt1R+z2lLVnrKjyFwbpiEDFf4G
- mHBS6AvLVJ1nQruhhzLT1UXPrD9ngyDWKIxD8=
+ bh=gn7X5Z6j/PtuWnkweo7DGJ7AK7rtR4esR16Akl9Bg38=;
+ b=MlFJSec/loRYenPo6GDcy2rL4cwN3moA8P0W08qMyKgbtr0kJnLtNbfIcMcd00IWJg
+ rALxVDNHsIYlXLnhqKF10bJ3q0D3BvNvUAk0D6xl9rPtFkeWYt/381VDbMnasctTcMF6
+ z9Ymy1S/3lekDLC65/35WLn3LW81hxzTC89sM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692907171; x=1693511971;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vdf3f8FsHlaQGqWcWD6KNCT/LH2dfqnAxntmSOaYWcM=;
- b=ISJGdtSuimYGrdiQiqok3DiqaHOMlIb0QWDGNBu5FQkBwmKy7eq131jjTKhsvV/now
- voZpmxt2Wu9g5QHPNCruMPcJQcV3QtbmxHt/wSJXs42CQl7rFsAj00c0UmqlrqPNGqhk
- 9bQcUV60Sa2Wz3xZYK1Gz9uhLLWf1SFtCh0EQHY9oOYGDRAKNi0O7drg9gRIOPioZe67
- BDc1HFVhqOIcotg2huCXWHcfUOginJEv/O6Y49J6NPL/FHuT4t+ZdeIDI7y+Z8Uh/FWj
- 5zVcAiAb0A9EcB/jBBWCOgZtzEU7p9fCvP7dUDDQ4o2ZwgcCXkNECgU2NjU9hg//MfsX
- MLOg==
-X-Gm-Message-State: AOJu0YzfsUpj6LivP9Jaxg+XEQ5aLrHiriRJYTVSuCfmCAMPZfcrZmxg
- HTzeY29p+yLOexsRYNwYhFj57xG3pxl0Rm4rjbo=
-X-Google-Smtp-Source: AGHT+IEyHRhoFOmin5gQ2RCPE7t7YhwV8pnpWyrgQBU0FXaca3/eUMKJKwjqZM4ZFkBWLUOvIW0qEQ==
-X-Received: by 2002:a05:6602:25d3:b0:787:1a8f:1d08 with SMTP id
- d19-20020a05660225d300b007871a8f1d08mr6445075iop.15.1692907170864; 
- Thu, 24 Aug 2023 12:59:30 -0700 (PDT)
+ bh=gn7X5Z6j/PtuWnkweo7DGJ7AK7rtR4esR16Akl9Bg38=;
+ b=PDjayTkPejE3osBN8mtizOwD0P4Z/yGjk6Gyx6co1xFHi5ijcrFh//CmRjNx8BUbkf
+ Jdkqx8uRraEcebuf23TA05rbkuY5smEts5c7tRbbKXajHtWCmihaehM69QJxz3imXY44
+ znHCf6ADCDI4oemM/JdPrlwiwLOwKxVqevhkI+nhV9AHfUSJxKolPM2h1THlnpgvw86x
+ FBOyHnBrCM08d7zpKUhe7EIQFSuIkUCCXTRnCUBgeCdmdknxEO7aXl+/2TGsbmySoS4l
+ 5m/nMFghlSsZVE+GCrCcJJw9ThAGww3kRf0CP0bbWnn4KekESC2sgv75G8x/RJlwjigZ
+ OgsQ==
+X-Gm-Message-State: AOJu0Yzuv3L1hrOb4dEUK1sIZ3kTNb+HK/ni/ATzbNwOO7pCr4D8v0zW
+ UCPNerJ3ed40aRa1QlYM3tj1Lc1PnHD9pjosqwo=
+X-Google-Smtp-Source: AGHT+IHE0aj3+2rfzhs4KMa2++wbQosILGYH1qOV0iKRimf9peE/+uxOKFsJRaIH3RwUoni5QARnNQ==
+X-Received: by 2002:a5e:d801:0:b0:787:1568:5df7 with SMTP id
+ l1-20020a5ed801000000b0078715685df7mr6858924iok.9.1692907171691; 
+ Thu, 24 Aug 2023 12:59:31 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- c11-20020a5e8f0b000000b00786fe5039b8sm9744iok.46.2023.08.24.12.59.30
+ c11-20020a5e8f0b000000b00786fe5039b8sm9744iok.46.2023.08.24.12.59.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:59:30 -0700 (PDT)
+ Thu, 24 Aug 2023 12:59:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>,
- Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Marek Vasut <marex@denx.de>,
- Nikhil M Jain <n-jain1@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
-Subject: [PATCH 04/19] video: Move BMP options and code to video directory
-Date: Thu, 24 Aug 2023 13:58:55 -0600
-Message-ID: <20230824195917.1687886-5-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH 05/19] net: Move SYS_RX_ETH_BUFFER into the network menu
+Date: Thu, 24 Aug 2023 13:58:56 -0600
+Message-ID: <20230824195917.1687886-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195917.1687886-1-sjg@chromium.org>
 References: <20230824195917.1687886-1-sjg@chromium.org>
@@ -93,97 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Put the options and the common BMP code with the other related Kconfig
-options in the drivers/video directory.
+Move this Kconfig option into the correct place, so it doesn't show up
+in the top-level menu.
+
+Unfortunately this makes the CONFIG undefined on some boards which don't
+enable CONFIG_NET but do include the net.h header file. In fact that
+header is included from a lot of common places. So use a fallback in the
+header file.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/Kconfig                  | 11 -----------
- common/Makefile                 |  1 -
- drivers/video/Kconfig           | 11 +++++++++++
- drivers/video/Makefile          |  2 ++
- {common => drivers/video}/bmp.c |  0
- 5 files changed, 13 insertions(+), 12 deletions(-)
- rename {common => drivers/video}/bmp.c (100%)
+ include/net.h | 9 ++++++---
+ net/Kconfig   | 4 ++--
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 844531a59eda..2f46fdb3f62c 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1167,14 +1167,3 @@ config FDT_SIMPLEFB
+diff --git a/include/net.h b/include/net.h
+index e254df7d7f43..f70396c74ba5 100644
+--- a/include/net.h
++++ b/include/net.h
+@@ -31,11 +31,14 @@ struct udevice;
+ #define DEBUG_INT_STATE 0	/* Internal network state changes */
  
- config IO_TRACE
- 	bool
+ /*
+- *	The number of receive packet buffers, and the required packet buffer
+- *	alignment in memory.
+- *
++ * The number of receive packet buffers, and the required packet buffer
++ * alignment in memory.
+  */
++#ifdef CONFIG_SYS_RX_ETH_BUFFER
+ #define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
++#else
++#define PKTBUFSRX	4
++#endif
+ #define PKTALIGN	ARCH_DMA_MINALIGN
+ 
+ /* Number of packets processed together */
+diff --git a/net/Kconfig b/net/Kconfig
+index 4215889127c9..a13ab1d80a0d 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -252,8 +252,6 @@ config IPV6
+ 	  ip6addr, serverip6. If a u-boot command is capable to parse an IPv6
+ 	  address and find it, it will force using IPv6 in the network stack.
+ 
+-endif   # if NET
 -
--config BMP
--	bool # Enable bmp image display
--	help
--	  Enable bmp functions to display bmp image and get bmp info.
--
--config SPL_BMP
--	bool # Enable bmp image display at SPL
--	depends on SPL_VIDEO
--	help
--	  Enable bmp functions to display bmp image and get bmp info at SPL.
-diff --git a/common/Makefile b/common/Makefile
-index f5c3d90f0675..0a3f75f2f1c8 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -45,7 +45,6 @@ endif # !CONFIG_SPL_BUILD
- 
- obj-$(CONFIG_$(SPL_TPL_)BOOTSTAGE) += bootstage.o
- obj-$(CONFIG_$(SPL_TPL_)BLOBLIST) += bloblist.o
--obj-$(CONFIG_$(SPL_)BMP) += bmp.o
- 
- ifdef CONFIG_SPL_BUILD
- ifdef CONFIG_SPL_DFU
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 09f2cb1a7321..a4befd6b655c 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -682,6 +682,11 @@ config BACKLIGHT_LM3533
- 	  LM3533 Lighting Power chip. Only Bank A is supported as for now.
- 	  Supported backlight level range is from 2 to 255 with step of 1.
- 
-+config BMP
-+	bool # Enable bmp image display
-+	help
-+	  Enable bmp functions to display bmp image and get bmp info.
+ config SYS_RX_ETH_BUFFER
+ 	int "Number of receive packet buffers"
+ 	default 4
+@@ -262,3 +260,5 @@ config SYS_RX_ETH_BUFFER
+ 	  controllers it is recommended to set this value to 8 or even higher,
+ 	  since all buffers can be full shortly after enabling the interface on
+ 	  high Ethernet traffic.
 +
- source "drivers/video/ti/Kconfig"
- 
- source "drivers/video/exynos/Kconfig"
-@@ -1117,6 +1122,12 @@ config SPL_VIDEO_REMOVE
- 	  if this  option is enabled video driver will be removed at the end of
- 	  SPL stage, before loading the next stage.
- 
-+config SPL_BMP
-+	bool # Enable bmp image display at SPL
-+	depends on SPL_VIDEO
-+	help
-+	  Enable bmp functions to display bmp image and get bmp info at SPL.
-+
- if SPL_SPLASH_SCREEN
- 
- config SPL_SPLASH_SCREEN_ALIGN
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index d13af9f3b19b..a3182dca734b 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -3,6 +3,8 @@
- # (C) Copyright 2000-2007
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- 
-+obj-$(CONFIG_$(SPL_)BMP) += bmp.o
-+
- ifdef CONFIG_DM
- obj-$(CONFIG_$(SPL_TPL_)BACKLIGHT) += backlight-uclass.o
- obj-$(CONFIG_BACKLIGHT_GPIO) += backlight_gpio.o
-diff --git a/common/bmp.c b/drivers/video/bmp.c
-similarity index 100%
-rename from common/bmp.c
-rename to drivers/video/bmp.c
++endif   # if NET
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
