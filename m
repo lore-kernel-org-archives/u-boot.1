@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 209E4C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 08:09:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B47C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 08:13:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0235586554;
-	Thu, 24 Aug 2023 10:09:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 828EB86582;
+	Thu, 24 Aug 2023 10:13:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IqnE61sP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="DodQTf3M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B21DC80842; Thu, 24 Aug 2023 10:09:20 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 80A7A8658A; Thu, 24 Aug 2023 10:13:47 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CECA86554
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:09:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D70EC8654F
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:13:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2b703a0453fso106747091fa.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:09:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2ba1e9b1fa9so99803661fa.3
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:13:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692864557; x=1693469357;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fLv6PFLqhYHQGiV7OMy9/3bOnrA2SVWojuTz/X9S6tU=;
- b=IqnE61sPW4zvvtzt/KkRcY8Bkm6+yKQpyqrBsqnkfQCzLlwm+Ox0xFgb1JrEML3r/u
- uf5pEaC96WUoBy4ZOYJtkhyHcYRwcpZjMP7UysONZADvffN2VZNRAreKceGidxjVmZXx
- VuxEpkqE17GpMzzf63/tqSAlvEyrW+o7K2/cM5ZdvSbMSD0OxamsmApELaP62o+GKTGi
- 70wUR/P+BHTTHaQCuQAIyfs/jHZRoqfFTclTRaouoo5DOk76TiKy2YXD9/SHrzoRzkNO
- jvBvRKpTjlA3RHxRNTvfn0piSjI2dmwHHtozdxiFhqzYhHlwM6n5cSs34stbbAgNtCAj
- v6Ng==
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692864824; x=1693469624; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=6OdOfENUfQCu4gBAFlryYbszTTPhU5bT6wJamelfgL8=;
+ b=DodQTf3MJATNrixww3NXc0V4y3kF4XK5x45e5pvnuetr8s9PS/wWio1bn5vZZX3as+
+ uxws7ChMleKa9OGCfTfAWAiDv03gfjg1Y98/qu2BejvQNW/G8WdSxnjoyU22EFnnwYNz
+ W9RGxUAvxt2vVBYDxWcTUP9X3dcxScuH3mWmGTtbkbIi9J5PsoJkGkdlL9iSUBiP5zrJ
+ bJKW/hze1X5XP6V4HujDLTciNGcvjEsSZ2b3uBNrIUbr3KqFRHq9jssfH2Xs/yRHdue2
+ /uNRjlFD7qbFToLoqt+kG2BH+ikuG0L4htVCRO4lpbh8bxfi4FwmFOCD+MKAceT+Eevk
+ wCVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692864557; x=1693469357;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1692864824; x=1693469624;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fLv6PFLqhYHQGiV7OMy9/3bOnrA2SVWojuTz/X9S6tU=;
- b=GKw7MyKIYQ9WF7Kck9XBPfZcvAe7d6JXGKjm5QHT+zpeDV5u8rZQgRg/pKMQQeRtes
- Xen7NrIXEXrXVKRKwA3dNQN54pmPFeLnjm2grDW+RYsooDil4JkAIyAHYM/VdBlznDhJ
- vOBnFMGxkMbiFeVKLnuxa8UmSX6FDBUP07XAhx3TzoEgGXNRohVp3qMWJSZI7d5NvWJV
- jqIj0gtdiYzUchd8QkALkF6BiAD0fRL5kradcWlaDXouTz/9V0yxydkoNMgLN99wlh1u
- fCi+3wOFFzTLhD2e/4HpoBXOlDR6H/EbD4MMpTmQwVu7UGVOwIhhJwi/K7A5h6oLdC2g
- edjw==
-X-Gm-Message-State: AOJu0YxEfn20dkTjLZ5Ui0Ge5ERxhcF6UnFu5Zu0Wt5pLtkNocdRDKzo
- 0GKW0g687V/Kslg4fE8Vk06jkxMWI9Z2sg==
-X-Google-Smtp-Source: AGHT+IGGb7PVP9kG/j9lQjwhzdf8rL3NQEUv71APb/YpHGFWvUeHP0whF7JtjVgaEuHo7Ke1VAQR3w==
-X-Received: by 2002:a05:6512:3b9c:b0:500:a002:292a with SMTP id
- g28-20020a0565123b9c00b00500a002292amr892152lfv.29.1692864556589; 
- Thu, 24 Aug 2023 01:09:16 -0700 (PDT)
-Received: from emanuele-nb.int.toradex.com
- ([2001:b07:aac:705d:8b32:37a2:413:27e3])
- by smtp.gmail.com with ESMTPSA id
- n16-20020adfe790000000b0030ae53550f5sm21282602wrm.51.2023.08.24.01.09.15
+ bh=6OdOfENUfQCu4gBAFlryYbszTTPhU5bT6wJamelfgL8=;
+ b=LYzXul91fv0K8wnuyrP5ojsgA75tH+/NWPMNfm2UQzqM1iK42aaOtXOAZ5GrjWKh/N
+ XuioNOSYkLBr/7aY4V0vpb5TtPft8YGRZFGza+XQk2EZIVAeyc8kn/JlABaOIlQLEl15
+ tEDyEc3ffGfjUZpcjZlfqLkzQFa59UCWRnD0/HudRt+JTAaZ8skeHlI4KR4mHy3TbHMQ
+ M+JtzYtNRL+BBkS1J4J/t8UQmcAj+604UBvCVGeYRNnqNKetnDf97uiYt1prTToBbcPY
+ sJ2/vpeYlNpJrk9rd0rzMdU+k0Bg0GDqskof73VyuMZEMtRH1oC3z7AKXmjS++IgepKE
+ QVpw==
+X-Gm-Message-State: AOJu0YyiIxFUl71hyYlsPBP9K18hy4rGhQ3sABO52nLKr0h51nYXWVkN
+ Zlu4m3ddlC2J6lwXBiLyiO+Xpw==
+X-Google-Smtp-Source: AGHT+IHX6MyuxgBpd4A9xPFUO+ofO9+BWbTERVvlLyJ4bjgmu3rDAgw0A1rm3mB7Y9pn0r0zRo8SPQ==
+X-Received: by 2002:a05:6512:1296:b0:4fe:993:2218 with SMTP id
+ u22-20020a056512129600b004fe09932218mr13563177lfs.31.1692864823984; 
+ Thu, 24 Aug 2023 01:13:43 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ s5-20020adff805000000b003143cb109d5sm21460549wrp.14.2023.08.24.01.13.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 01:09:15 -0700 (PDT)
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
- Bryan Brattlof <bb@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: [PATCH v1 2/2] board: verdin-am62: fix check for minimum memory size
-Date: Thu, 24 Aug 2023 10:08:50 +0200
-Message-Id: <20230824080850.1755724-3-ghidoliemanuele@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230824080850.1755724-1-ghidoliemanuele@gmail.com>
-References: <20230824080850.1755724-1-ghidoliemanuele@gmail.com>
+ Thu, 24 Aug 2023 01:13:43 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@google.com>
+Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ u-boot@lists.denx.de, Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon
+ <nm@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Subject: Re: [PATCH V5 02/17] include: configs: am62x_evm: Drop unused SDRAM
+ address
+In-Reply-To: <20230824031101.3460411-3-nm@ti.com>
+References: <20230824031101.3460411-1-nm@ti.com>
+ <20230824031101.3460411-3-nm@ti.com>
+Date: Thu, 24 Aug 2023 10:13:42 +0200
+Message-ID: <87il94rh6x.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,34 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Hi Nishanth,
 
-verdin am62 SKUs comes in multiple memory configuration, check that
-the detected memory is at least 512MB since we have some
-reserved memory just before this threshold and therefore
-the module cannot work with less memory.
+On mer., ao=C3=BBt 23, 2023 at 22:10, Nishanth Menon <nm@ti.com> wrote:
 
-Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
-Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
----
- board/toradex/verdin-am62/verdin-am62.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> Drop unused macro. This was meant for a second region of DDR which we
+> do not need for AM62x evm configurations.
+>
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> ---
+> New patch (part of bootstd transition)
+>
+>  include/configs/am62x_evm.h | 3 ---
+>  1 file changed, 3 deletions(-)
 
-diff --git a/board/toradex/verdin-am62/verdin-am62.c b/board/toradex/verdin-am62/verdin-am62.c
-index a3d1d07a0cbf..d09dda5bccc9 100644
---- a/board/toradex/verdin-am62/verdin-am62.c
-+++ b/board/toradex/verdin-am62/verdin-am62.c
-@@ -28,8 +28,8 @@ int dram_init(void)
- {
- 	gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, CFG_SYS_SDRAM_SIZE);
- 
--	if (gd->ram_size < SZ_64M)
--		puts("## WARNING: Less than 64MB RAM detected\n");
-+	if (gd->ram_size < SZ_512M)
-+		puts("## WARNING: Less than 512MB RAM detected\n");
- 
- 	return 0;
- }
--- 
-2.34.1
+What about include/configs/verdin-am62.h ?
 
+It seems that that board, which is am62x based, also has the un-needed
+include.
+
+Since i'm not 100% sure, I have added Marcel (who posted the verdin am62
+support) here.
+
+>
+> diff --git a/include/configs/am62x_evm.h b/include/configs/am62x_evm.h
+> index 44180dc7687b..379e0c13a395 100644
+> --- a/include/configs/am62x_evm.h
+> +++ b/include/configs/am62x_evm.h
+> @@ -12,9 +12,6 @@
+>  #include <config_distro_bootcmd.h>
+>  #include <env/ti/mmc.h>
+>=20=20
+> -/* DDR Configuration */
+> -#define CFG_SYS_SDRAM_BASE1		0x880000000
+> -
+>  /* Now for the remaining common defines */
+>  #include <configs/ti_armv7_common.h>
+>=20=20
+> --=20
+> 2.40.0
