@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA46C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 08:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89474C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 08:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4521086430;
-	Thu, 24 Aug 2023 10:21:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1DFD86565;
+	Thu, 24 Aug 2023 10:29:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="jrdp0KM9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="DDeQMkIq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE07986410; Thu, 24 Aug 2023 10:21:45 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 9B5DB8656B; Thu, 24 Aug 2023 10:29:43 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40DB88657C
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:21:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7ADC28655D
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:29:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2bccda76fb1so44904531fa.2
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:21:42 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2ba1e9b1fa9so99991701fa.3
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692865301; x=1693470101; 
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692865780; x=1693470580; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DOG/y9BmvrRgXxf0GQQfxdSbF/7OWSSCveyHluKSwQo=;
- b=jrdp0KM9GNwOeNDwpk/HYwm8ovhzNt+NnaX9U1jK6r4GFYCmqisMLEGdhR5gXfIcrc
- I5TQhjAooMPJDM3WerCkHIZ9QEUsFdrwPbPJBw4yCU3GFehiQ+8vEP1kOVPiyY1BDWib
- bpBhAIkacOIOfEL/7zs9Y06jtiV+YOwWWSqORw5r35ok39W3vkRHj+82JeNJdAUReDot
- xget7cSYzFV/YCN0w7pJSzPeEStoj/s7+DrYMEeTJGwnabdY3QLKwE7D6a2sQGVrAd8f
- p4vjNuF7yTLh93Z3PQNsevOM3GmefPHeEZRi2p28yILxHLHlx6IfyNowORoXsPlkoZ6A
- 5DbA==
+ :reply-to; bh=+8NGLfL/EvmOHG1VB53KAlBY7RKyMRZSSNElLhNpxlQ=;
+ b=DDeQMkIqajClHCoZp6Vf8z7nKW9K/aM3kbv6Xn0wabU+qVpPcoSNUh7eQ+roPIshRZ
+ C7WNWvwB149Fsksi/PZngyurGtOFyQRvwOy7A6D6AIE+AX0K/clRWkWwIQ5UkRTFaXA0
+ V0AhaRW0WBV9DfHUtgC2PbV7ijBtsnq3nCLkSzAggrikT0765RU1lAE/aZ5rqrp+3Kd0
+ if1ZlqySt83EscqheGK+956pumylkmoUYOK2Lm6LcxwfwQxy9NCQVhMtL5g2UltLCG4b
+ U/ZjWfwdKMAkb1BrMTI05u4LtqEHBYu88v0QRLc2pAWpiOpUhHUHlIUv/lyK317Y1xo0
+ 4vJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692865301; x=1693470101;
+ d=1e100.net; s=20221208; t=1692865780; x=1693470580;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DOG/y9BmvrRgXxf0GQQfxdSbF/7OWSSCveyHluKSwQo=;
- b=M7TmcIpwB5j2KPRSBhWeTm67iPCDDlhSN4+65W0ChFMaWEnidslHxdhnnfVGIyn4bU
- ArWlapKwPwNiH+zMLrYdsEqxALop5nFLqNErshR205Ycpng/rlOs6jVuVkThvjKmhbGI
- Uxsw3VlM7gObXbzAjEi8AQvrDcBUPNl/QT78viGbzMgTOOsSK6KrfBW0CqIVsEKfd9TW
- bfxkippsYXqk8jG4nECJg0JYym/l5krbm+b4l2JEJqu0bamX+lktElCXmVYgoMVWERkv
- X3i+tE9Bya/ouPp7LmcPfYAo0GwZOOcy787Ibgi+Ujc/zupjUga9X1VkKSleCvCx05Nf
- hmQQ==
-X-Gm-Message-State: AOJu0Yx4OfvdXoQoDHmvGyvyxCEmx6XC0hRTXjs/MrcmfnqwdQu4p/DK
- kdyMfzqE1oVbdxDJBzWEaviz/w==
-X-Google-Smtp-Source: AGHT+IFCJAefbjcN7Jalsm5a4yFI8GV1jyYbBJvDD1Q4yiR/ew01YCTlnFvi8V1wYcWZzr1Uxs5+Cw==
-X-Received: by 2002:a2e:914c:0:b0:2bc:c4ae:c565 with SMTP id
- q12-20020a2e914c000000b002bcc4aec565mr7468883ljg.28.1692865301397; 
- Thu, 24 Aug 2023 01:21:41 -0700 (PDT)
+ bh=+8NGLfL/EvmOHG1VB53KAlBY7RKyMRZSSNElLhNpxlQ=;
+ b=EyJmOCd1CRVLtH3hnNKYF7ibRc+8s3I2qDyPThXacoShiR3ikU6Pn3ybN2+bKRXtHg
+ +GzzwsOoPWQFCn06xDd8UM1SUbmYYc+rpkR43ZEfBm4eNyTusFMIDeQ1TAlxn7TL7Mbi
+ SzfhoVq2YcCWmoE+/r6w3sLIjtVOncvaVAR/kXPT4rif9Y8AhBD8WiVcTTewzZxuhodH
+ EUaOLjRnoA95w6WwB4KseqhqAD6uA8xGz/yhG0k42ajwB3v9GN4QtnZLh3Y8O+jKXeU4
+ /zkH7UI9fdpSkmPx/huBSSfjsLRSJcw6lwqSdO73x4nwyxip16gDf0lOmyzHGfDsEOaS
+ mvPQ==
+X-Gm-Message-State: AOJu0YxNzXwfnHC+25XLopGhMEzQ3djFyHtoXcZU7S2yoIrh9NoPI7pT
+ wnUqNGZY3lICKIvfiMKTs9bBhg==
+X-Google-Smtp-Source: AGHT+IF/0AN3RMf8SGMhRKKCvI6WK8wCj2LwYbRVnNGrPid3VgLGJH+ie5sj3Qc134jsjnZGq5dxOQ==
+X-Received: by 2002:a2e:984b:0:b0:2b9:e0bf:fc58 with SMTP id
+ e11-20020a2e984b000000b002b9e0bffc58mr11743681ljj.13.1692865779638; 
+ Thu, 24 Aug 2023 01:29:39 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- y23-20020a1c4b17000000b003fc01189b0dsm1831620wma.42.2023.08.24.01.21.40
+ 2-20020a05600c248200b003fee567235bsm1606794wms.1.2023.08.24.01.29.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 01:21:41 -0700 (PDT)
+ Thu, 24 Aug 2023 01:29:39 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Nishanth Menon <nm@ti.com>, Simon Glass <sjg@google.com>
-Cc: Tom Rini <trini@konsulko.com>, Neha Francis <n-francis@ti.com>, Bryan
- <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
+To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@google.com>
+Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Jan Kiszka <jan.kiszka@siemens.com>, Heinrich
- Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-In-Reply-To: <20230824032709.phneggflsw2ps2dv@reanalyze>
-References: <20230822184135.2328409-1-nm@ti.com>
- <20230822184135.2328409-9-nm@ti.com>
- <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
- <20230823171502.GQ3953269@bill-the-cat>
- <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
- <20230824001848.vgzl7rcphic3gu2n@carnival>
- <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
- <20230824032709.phneggflsw2ps2dv@reanalyze>
-Date: Thu, 24 Aug 2023 10:21:39 +0200
-Message-ID: <87fs48rgto.fsf@baylibre.com>
+ u-boot@lists.denx.de, Jan
+ Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH V5 07/17] include: env: ti: ti_armv7_common.env: Rename
+ to ti_common.env
+In-Reply-To: <20230824031101.3460411-8-nm@ti.com>
+References: <20230824031101.3460411-1-nm@ti.com>
+ <20230824031101.3460411-8-nm@ti.com>
+Date: Thu, 24 Aug 2023 10:29:37 +0200
+Message-ID: <87cyzcrgge.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -100,112 +95,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mer., ao=C3=BBt 23, 2023 at 22:27, Nishanth Menon <nm@ti.com> wrote:
+On mer., ao=C3=BBt 23, 2023 at 22:10, Nishanth Menon <nm@ti.com> wrote:
 
-> On 21:01-20230823, Simon Glass wrote:
->> Hi Nishanth,
->>=20
->> On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
->> >
->> > On 17:57-20230823, Simon Glass wrote:
->> > [...]
->> > > > This is how we have a common bit of rST for how to build N boards,
->> > > > without having to do a literal copy and paste N times.
->> > >
->> > > How about using this?
->> > >
->> > > https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#s=
-ubstitution-definitions
->> >
->> > I was not able to succeed with complex includes such as:
->> > https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rst=
-?plain=3D1#L89
->> >
->> > am62x complete build procedure defined once and reused in other am62x
->> > platforms.. But the am62x build procedure itself is reused from common
->> > k3 build steps.
->>=20
->> I followed through these instructions. I find the env vars quite
->> confusing, since I don't really know what it is doing. It feels like a
->> script:
->>=20
->> do $a $b $c
->> do $f $e
->>=20
->> it is pretty hard to follow. I think it would be better to write
->> everything out in full for each board, like rockchip does.
+> ti_armv7_common does not make any more sense as it is used by armv7
+> and armv8 TI based platforms.
 >
-> Unfortunately, this is a few major steps that is repeated for
-> (currently):
-> 	AM62x SK
-> 	Toradex Verdin
-> 	(pending: beagleplay - )
-> 	(once all the dust clears up, hopefully phytec)
-> 	SK-LP
-> 	....
->
-> I have no reasonable way to offer to keep them all in sync.
-> 	https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
-> is kind of why I went down this path.S
->
->>=20
->> Some other minor feedback:
->>=20
->> - The 'make' lines should really have -j $(nproc) added
->
-> Different styles of shells..
->
->> - The $ signs at the start of each command in the docs are a pain
->> since it stops me copying the commands into the terminal - can you
->> remove them?
->
-> hehe.. "dont" let people blindly copy paste without understanding what is
-> going on argument?
->
-> If folks are OK, I sure can send a different patch series for that.. (or
-> maybe motivate someone to do that instead of me ;))
+> Reported-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-Have we considered using the .. prompt:: extension ?
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-https://pypi.org/project/sphinx-prompt/
-
-The prompt extension automatically adds a prompt (like $) in front of
-each line and disallows copying it when copying from the html generated pag=
-e.
-
+> ---
+> New patch review comment from:
+> https://lore.kernel.org/all/20230823144257.GG3953269@bill-the-cat/
 >
+> ti_common.h does'nt need any header file support if we switch to
+> bootstd.
 >
->> - It doesn't build for me:
->>=20
->>   BINMAN  .binman_stamp
->> Image 'ti-dm' is missing external blobs and is non-functional: blob-ext
->>=20
->> /binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip=
-.xer5f):
->>    Missing blob
->>=20
->> Some images are invalid
->> make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefi=
-le:1115:
->> .binman_stamp] Error 103
->> make[1]: Leaving directory '/tmp/b/play'
->> make: *** [Makefile:177: sub-make] Error 2
+>  board/siemens/iot2050/iot2050.env                     | 2 +-
+>  board/ti/am62ax/am62ax.env                            | 2 +-
+>  board/ti/am62x/am62x.env                              | 2 +-
+>  board/ti/am64x/am64x.env                              | 2 +-
+>  board/ti/am65x/am65x.env                              | 2 +-
+>  board/ti/j721e/j721e.env                              | 2 +-
+>  board/ti/j721s2/j721s2.env                            | 2 +-
+>  board/ti/ks2_evm/k2e_evm.env                          | 2 +-
+>  board/ti/ks2_evm/k2g_evm.env                          | 2 +-
+>  board/ti/ks2_evm/k2hk_evm.env                         | 2 +-
+>  board/ti/ks2_evm/k2l_evm.env                          | 2 +-
+>  include/env/ti/{ti_armv7_common.env =3D> ti_common.env} | 0
+>  12 files changed, 11 insertions(+), 11 deletions(-)
+>  rename include/env/ti/{ti_armv7_common.env =3D> ti_common.env} (100%)
 >
->
-> ^^ Neha: This is what I was complaining about.
->
-> https://u-boot.readthedocs.io/en/latest/board/ti/am62x_sk.html?highlight=
-=3Dam62#sources
->
-> source: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
-> is missing, we never used to break build previously binman converted now =
-does.
->
-> I am wondering if I need to explicitly call out git clone instructions
-> out..
->
+> diff --git a/board/siemens/iot2050/iot2050.env b/board/siemens/iot2050/io=
+t2050.env
+> index caa9f80e3fca..8bbd7abe98f0 100644
+> --- a/board/siemens/iot2050/iot2050.env
+> +++ b/board/siemens/iot2050/iot2050.env
+> @@ -6,7 +6,7 @@
+>   *   Jan Kiszka <jan.kiszka@siemens.com>
+>   */
+>=20=20
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>=20=20
+>  usb_pgood_delay=3D900
+>=20=20
+> diff --git a/board/ti/am62ax/am62ax.env b/board/ti/am62ax/am62ax.env
+> index 3f7c333fa404..bfed7f360844 100644
+> --- a/board/ti/am62ax/am62ax.env
+> +++ b/board/ti/am62ax/am62ax.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+>=20=20
+>  default_device_tree=3Dti/k3-am62a7-sk.dtb
+> diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
+> index 1cf56dbd8128..1ef948df83d7 100644
+> --- a/board/ti/am62x/am62x.env
+> +++ b/board/ti/am62x/am62x.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+>=20=20
+>  default_device_tree=3Dti/k3-am625-sk.dtb
+> diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+> index 1567907fcbdc..68e42222b7f1 100644
+> --- a/board/ti/am64x/am64x.env
+> +++ b/board/ti/am64x/am64x.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+>  #include <env/ti/k3_dfu.env>
+>=20=20
+> diff --git a/board/ti/am65x/am65x.env b/board/ti/am65x/am65x.env
+> index 755bff2707c8..286b9c300c05 100644
+> --- a/board/ti/am65x/am65x.env
+> +++ b/board/ti/am65x/am65x.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+>  #include <env/ti/k3_dfu.env>
+>  #if CONFIG_CMD_REMOTEPROC
+> diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
+> index 2f2fb0591279..8cc8232fc131 100644
+> --- a/board/ti/j721e/j721e.env
+> +++ b/board/ti/j721e/j721e.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+>  #include <env/ti/ufs.env>
+>  #include <env/ti/k3_dfu.env>
+> diff --git a/board/ti/j721s2/j721s2.env b/board/ti/j721s2/j721s2.env
+> index 6825b1469854..64e3d9da85f0 100644
+> --- a/board/ti/j721s2/j721s2.env
+> +++ b/board/ti/j721s2/j721s2.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+>  #include <env/ti/ufs.env>
+>  #include <env/ti/k3_dfu.env>
+> diff --git a/board/ti/ks2_evm/k2e_evm.env b/board/ti/ks2_evm/k2e_evm.env
+> index a145db53e5fa..3dbb7934c59a 100644
+> --- a/board/ti/ks2_evm/k2e_evm.env
+> +++ b/board/ti/ks2_evm/k2e_evm.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/ti_armv7_keystone2.env>
+>=20=20
+>  findfdt=3Dsetenv fdtfile ${name_fdt}
+> diff --git a/board/ti/ks2_evm/k2g_evm.env b/board/ti/ks2_evm/k2g_evm.env
+> index 4f4941dd0907..2b500fc6edf6 100644
+> --- a/board/ti/ks2_evm/k2g_evm.env
+> +++ b/board/ti/ks2_evm/k2g_evm.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/ti_armv7_keystone2.env>
+>  #include <env/ti/mmc.env>
+>=20=20
+> diff --git a/board/ti/ks2_evm/k2hk_evm.env b/board/ti/ks2_evm/k2hk_evm.env
+> index 0714a51090ef..9991b76f8fcc 100644
+> --- a/board/ti/ks2_evm/k2hk_evm.env
+> +++ b/board/ti/ks2_evm/k2hk_evm.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/ti_armv7_keystone2.env>
+>=20=20
+>  findfdt=3Dsetenv fdtfile ${name_fdt}
+> diff --git a/board/ti/ks2_evm/k2l_evm.env b/board/ti/ks2_evm/k2l_evm.env
+> index e8a803a4ed76..4e2debca4bde 100644
+> --- a/board/ti/ks2_evm/k2l_evm.env
+> +++ b/board/ti/ks2_evm/k2l_evm.env
+> @@ -1,4 +1,4 @@
+> -#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/ti_common.env>
+>  #include <env/ti/ti_armv7_keystone2.env>
+>=20=20
+>  findfdt=3Dsetenv fdtfile ${name_fdt}
+> diff --git a/include/env/ti/ti_armv7_common.env b/include/env/ti/ti_commo=
+n.env
+> similarity index 100%
+> rename from include/env/ti/ti_armv7_common.env
+> rename to include/env/ti/ti_common.env
 > --=20
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DD=
-B5 849D 1736 249D
+> 2.40.0
