@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E74C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 08:36:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12029C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 08:39:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4C5D86584;
-	Thu, 24 Aug 2023 10:36:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 68247860CA;
+	Thu, 24 Aug 2023 10:39:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="uMAeIeeE";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="WaIDDlC7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D6B286586; Thu, 24 Aug 2023 10:36:23 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id CCB0D8620C; Thu, 24 Aug 2023 10:39:12 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5917186582
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:36:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAC83807C4
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 10:39:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4018af103bcso1614185e9.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:36:20 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-400e8ca7e38so7229665e9.3
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 01:39:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692866180; x=1693470980; 
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1692866349; x=1693471149; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4fNIcuIA25JxRRR8p+/+TZVHSV+6oGauXSu3DdTdH0Y=;
- b=uMAeIeeEOtb0hjnBkSnNb7QMc83GH6gLfN8ZhD9X4Dpjimm5Hus+fOAv5YzdoW8uf2
- bTAxLjwkgNvoeHnoml263JodHWDutUc/5WgcQuSWouq87UWu2Q9cnUhqw/aqUlSCL28W
- JLb4P2qrcMxRnSC/WcJbusEboIlaVVyeKfg+TDdn6qwxyVNQehLA6WNq7qAXYJOWaZOA
- cpJ9hHdqW5gffpOh7kXI0umzLTP10Tbxa9C4W7dXWgq2kjNFR2F7aFvw3q1nKMUJ5jhv
- r4sX77tJCBvdZs19svOGBpIDLn+LZxnVsH96E3PoHXHoo9SzHxGKdI3gl/9yTrEs4KHZ
- BP7g==
+ :reply-to; bh=SZquD8pH4+QpbwMpra+8hSzjkXC8Vm/+miBOh/y+Tyw=;
+ b=WaIDDlC73puE6OH17MP0uBZ2jjAP+dkFxqzJ8DhKrVKvYJwXHp35snNReev685csAo
+ rH3GGtca0yqRPMzJzBGNv5+aF0xr7LN/AUdxEqOIQFcCjtIgzLpqKpIVdIBNgt9bo7U/
+ t1EJrE7pVgv1iqfT40KHglimh69oJM3gwq3HFm8dosDEBIk6xmQ4BOcMr7yCKtGfTEPk
+ eMgoB5/yYkR2ov+wEoOq2rmDv1QMDkYnbi645oL20AEP5I97RxxOT/sDtuWPoAbGgwzO
+ jJ2HFSmZG5WM5nXjHf/2iIUu3ybRb+izV1NQC/lxTFCLtwzSZRMI0DoC3yCtX3OKn/Ld
+ 3vlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692866180; x=1693470980;
+ d=1e100.net; s=20221208; t=1692866349; x=1693471149;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4fNIcuIA25JxRRR8p+/+TZVHSV+6oGauXSu3DdTdH0Y=;
- b=ALF/3qxZvYdS/ocLjK/YlPm6uO7nUDvkynsax82VOLbEnGlxudzEJzjuV89+5dTkUu
- f/8KIuOIefbCyZNPr2uoPzn2UvPS9HCv+1uEP+hFa29U4ptaYYtF+1NuIvH4N/hF9Ifm
- ZS18MVqVHQCkVIRIzFe77e3dgvFS2/2qFV37G5i07/+uq+0NhBTzjZTSAizHG/z4l9EW
- Au5h9QlxEyGPWtliDk+trZ0qid6TRtW6fZg9rRbyS69xLUw9Y0CXvt2nxLqhxm0M55+p
- Ts1r1DgvqdMKYJ1WOR5P0Ds+MjFFiarrZhpk5sfL8NJGWdtoMwehvJWvhQ1ddMP5FsG6
- D8lQ==
-X-Gm-Message-State: AOJu0YzBRCCDpTkIcUkHkyWbnAGbgsJjf53ppz4OWuTSxxd6htiGzEOq
- rOddOHmThmX3MIUQ2n6DvCcJxQ==
-X-Google-Smtp-Source: AGHT+IE5r5cN9fuQckJfSn3xdfYJCTIFp9XAeE/NThSqs8njsd0upqCzfFICEpN7hrbRNmfcUl0ykQ==
-X-Received: by 2002:a05:600c:c5:b0:3fe:fe71:14da with SMTP id
- u5-20020a05600c00c500b003fefe7114damr4827159wmm.10.1692866179705; 
- Thu, 24 Aug 2023 01:36:19 -0700 (PDT)
+ bh=SZquD8pH4+QpbwMpra+8hSzjkXC8Vm/+miBOh/y+Tyw=;
+ b=jyjnQfguYpuW2lzivDFB+rkO7AC5EGDNPcxAnfiIMP/SZlLjdQKWMOecLVP4gLdXaH
+ 3HHK5KCKJuJUazsrAQKOOs/gsmr8DY4WM8Ov3LDJjGsNB99zjhdBfo/Jn2ZZsByzJURw
+ G6gqLEOhDuFPgXX7HyC+J3Izff7FYaDEdoLLILQ56OdkAaRUHpaBrjBca0SB9cEcNp7g
+ t70jZ9nCzR8x5IlFXij1GpO17QYb9kTBdnTi9mwmpFd/TDb8YMQ7bi5zk11FSVu+WvqZ
+ pbb1deNrSKnu2IJrGOmGX15/QtHqsUq92tpWvHfdDJjS0h8+OU3gF3XLjkC2dR5qWTk9
+ Vrcw==
+X-Gm-Message-State: AOJu0YwcEPCuRtw1VG6KwQXGitXfEjOj8QzN1WDgE60iGNcPvBUiL39X
+ VezTl7Ed6b/Nl4e2FV14ZaV1Ow==
+X-Google-Smtp-Source: AGHT+IGuSCxj4cFdpRMi43SdOWoDgT3T7jNIAC8YRZULUUCHZ4YVGyXPp8P0lJStIlRFK1NOFWy2BQ==
+X-Received: by 2002:a7b:cd14:0:b0:3fc:1a6:7764 with SMTP id
+ f20-20020a7bcd14000000b003fc01a67764mr11249351wmj.16.1692866349286; 
+ Thu, 24 Aug 2023 01:39:09 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- z9-20020adfe549000000b0031762e89f94sm21546893wrm.117.2023.08.24.01.36.19
+ hn1-20020a05600ca38100b003fbe4cecc3bsm1934956wmb.16.2023.08.24.01.39.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 01:36:19 -0700 (PDT)
+ Thu, 24 Aug 2023 01:39:08 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
  <trini@konsulko.com>, Simon Glass <sjg@google.com>
@@ -69,13 +69,12 @@ Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  u-boot@lists.denx.de, Jan
  Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH V5 11/17] arm: mach-k3: am625_init: Convert
- rtc_erratumi2327_init to static
-In-Reply-To: <20230824031101.3460411-12-nm@ti.com>
+Subject: Re: [PATCH V5 13/17] arm: mach-k3: am625: Add support for UDA FS
+In-Reply-To: <20230824031101.3460411-14-nm@ti.com>
 References: <20230824031101.3460411-1-nm@ti.com>
- <20230824031101.3460411-12-nm@ti.com>
-Date: Thu, 24 Aug 2023 10:36:18 +0200
-Message-ID: <877cpkrg59.fsf@baylibre.com>
+ <20230824031101.3460411-14-nm@ti.com>
+Date: Thu, 24 Aug 2023 10:39:07 +0200
+Message-ID: <874jkorg0k.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -97,53 +96,57 @@ X-Virus-Status: Clean
 
 On mer., ao=C3=BBt 23, 2023 at 22:10, Nishanth Menon <nm@ti.com> wrote:
 
-> The erratum is called locally, make it static, drop the #ifdeffery since
-> it will only be called in R5 build and mark it potentially unused to
-> stop compiler screaming at us.
+> While boot partition support with EMMC boot is useful, it is
+> constrained by the size of boot hardware partition itself.
 >
-> While at this, drop the redundant return for a void function.
+> In the case of K3 devices, tispl images can contain OP-TEE images that
+> can substantially vary in size and the u-boot image itself can vary over
+> time as we enable various features.
+>
+> So use the CSD information in the case of EMMC_BOOT configuration being
+> enabled to pick boot partition or UDA FS mode operation to pick.
+>
+> If EMMC_BOOT is disabled, then depend on filesystem configuration to
+> pick data from UDA.
+>
+> While at this, drop the extraneous whitespace.
 >
 > Signed-off-by: Nishanth Menon <nm@ti.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
-> new patch (cleanup before modifying for adding UDA-FS)
+> Changes since V4:
+> - Did'nt pickup Mattijs' reviewed-by - no more iffdeffery - so might be
+> good to relook.
 >
->  arch/arm/mach-k3/am625_init.c | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
+> V4: https://lore.kernel.org/r/20230822184135.2328409-4-nm@ti.com
+>
+>  arch/arm/mach-k3/am625_init.c | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
 >
 > diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-> index 165bca6885ef..499cb57267b9 100644
+> index 499cb57267b9..8fa36f7b913e 100644
 > --- a/arch/arm/mach-k3/am625_init.c
 > +++ b/arch/arm/mach-k3/am625_init.c
-> @@ -80,8 +80,6 @@ static __maybe_unused void enable_mcu_esm_reset(void)
->  	writel(stat, CTRLMMR_MCU_RST_CTRL);
->  }
+> @@ -220,9 +220,15 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boo=
+t_device)
+>  	u32 bootmode_cfg =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK)=
+ >>
+>  			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
 >=20=20
-> -#if defined(CONFIG_CPU_V7R)
 > -
->  /*
->   * RTC Erratum i2327 Workaround for Silicon Revision 1
->   *
-> @@ -94,7 +92,7 @@ static __maybe_unused void enable_mcu_esm_reset(void)
->   *
->   * https://www.ti.com/lit/er/sprz487c/sprz487c.pdf
->   */
-> -void rtc_erratumi2327_init(void)
-> +static __maybe_unused void rtc_erratumi2327_init(void)
->  {
->  	u32 counter;
->=20=20
-> @@ -112,9 +110,7 @@ void rtc_erratumi2327_init(void)
->  	 */
->  	writel(K3RTC_KICK0_UNLOCK_VALUE, REG_K3RTC_KICK0);
->  	writel(K3RTC_KICK1_UNLOCK_VALUE, REG_K3RTC_KICK1);
-> -	return;
->  }
-> -#endif
->=20=20
->  void board_init_f(ulong dummy)
->  {
+>  	switch (bootmode) {
+>  	case BOOT_DEVICE_EMMC:
+> +		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT)) {
+> +			if (spl_mmc_emmc_boot_partition(mmc))
+> +				return MMCSD_MODE_EMMCBOOT;
+> +			return MMCSD_MODE_FS;
+> +		}
+> +		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+> +			return MMCSD_MODE_FS;
+>  		return MMCSD_MODE_EMMCBOOT;
+>  	case BOOT_DEVICE_MMC:
+>  		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
 > --=20
 > 2.40.0
