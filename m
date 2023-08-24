@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF55C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC07C3DA6F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AFCB8657C;
-	Thu, 24 Aug 2023 16:16:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AC2586519;
+	Thu, 24 Aug 2023 16:20:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o+QpvIsy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tTQU+0me";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A15586481; Thu, 24 Aug 2023 16:16:10 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id CA37386529; Thu, 24 Aug 2023 16:20:57 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C20686433
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:16:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8570E864B4
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:20:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-59234aaca15so39978257b3.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:16:07 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-58dfe2d5b9aso13496217b3.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:20:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692886565; x=1693491365;
+ d=konsulko.com; s=google; t=1692886853; x=1693491653;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fxXUHnP771FSOBpt+Tgnu0RUkv6GzAmgl8I4xJ9PNWE=;
- b=o+QpvIsyyATdqhn2wZ9RJPe5TvZKcGWjBncTgiylNJOaBScX/W18PKmFdjV4K0BjHv
- sKSuJmNyo4Ba2MUfCUs/4j26dJylheodBdu6Tk1YbiVyhWn6oZtY9Cx2aAvXOwaExrDw
- xfAWqOWcg1Kz3oLoaFObadN63e47egZhCaNkQ=
+ bh=ofN5TlA+Ll0pSdKxUa6Wr4Ahc+A/BjhCzNP+5vUN0PU=;
+ b=tTQU+0meiwHWyXDF0EOv6v9SwFZ7Q41/OOzXK7Ynf77NHLMRZMWYVnb9xnL2q/pKMV
+ Frypbvx399nBxMtt7e7AZPKjzaS7ZDvTBsmepDk6ApkUG3uXA/jjptnxtHbOMGcUYB5G
+ eyRida3Y2phkgQDyyQ00Vuu6ECf41mIQ5+7sI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692886565; x=1693491365;
+ d=1e100.net; s=20221208; t=1692886853; x=1693491653;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fxXUHnP771FSOBpt+Tgnu0RUkv6GzAmgl8I4xJ9PNWE=;
- b=dVq/xmjX73YMv5x2sOygWUnF8K6bpaQhwx0oMWh9SuR51Vv5hqRkoEQh6byHwZIeri
- 5BjH9QUEMYT916qiIHX7zX7o1hVxHAYLA9avuW0agn93Z9jtGV2dLzmzy34a3CZvoari
- IS3aUvf7BGUMKFen8seInXhEd5ESzQdI9L2jdCqVNHn8zNeXW7JvdfA7IWKEmNWC3FzX
- WyCKGT0pd3xxxwkdyNKwZcnu9CWREEZHpyoAHSu7aFsMhn03cWZSl1Rmm5S0PRHZ5k28
- Q9hjDcsEOefzyIZ1zrkhi2QGsoZFuk8WAnOlfgkjxg4kBgv2lL+zyTba3adabaQTXdIO
- 3fjQ==
-X-Gm-Message-State: AOJu0YyvnOaUD0U4j6z3dl15kYGXfhc+IkebIC5tJx7ZTpYAb8EzuEpo
- HOVLP/qwfFPUjWXlc6bmn/IIFQ==
-X-Google-Smtp-Source: AGHT+IHXI2Kke2bQaJOD7pxLxg4anVNyP7Crr/W58bzxZRZQmhaRnnlB87DXPlLjviaDoib8th09KQ==
-X-Received: by 2002:a0d:c182:0:b0:589:ad30:5f5 with SMTP id
- c124-20020a0dc182000000b00589ad3005f5mr12824061ywd.52.1692886565689; 
- Thu, 24 Aug 2023 07:16:05 -0700 (PDT)
+ bh=ofN5TlA+Ll0pSdKxUa6Wr4Ahc+A/BjhCzNP+5vUN0PU=;
+ b=Ayk7lLAxtVcQY2jnHwa7gTi0PzWGqSI9QzJifch9YGBvr1ykaFp/Q0fHu65oiM2Ix2
+ FWbnBAB433pUJxeNsKmgjbnz6WP1NSyRFYFyFZhjj/wfaUUbE6leILHPtxK0Ot59knjH
+ EJXLE2j3RxO2STYcHA+PPTBJCihchQLSkwQwkW7Vk8bkEoIHs4uJvlcg7AyL+PhDkxJZ
+ mfU+9pPDVtaQYKTnRKgG3UfUVKi5F6AKPP2JciRvYZ95Vl6yyYVgsC09O9ygRhwqmLBF
+ CWkLObQbd4gh3lVGnUWhi+PdOHhGKpA2m56pvel1/Y3s/lyk9LAaMPLeysEeRTOG4l0H
+ QwdA==
+X-Gm-Message-State: AOJu0Yx+k1iZ3iXMNw0CZW1jKvSg+itVoulWjxYRIdkO8lwMwaKwmo/y
+ nTpan4PDzRAlQ5lttp0vbCTbrw==
+X-Google-Smtp-Source: AGHT+IFfC6tTmFHHdbG2DYUJT+j+AqlNU43jmW7sVNn5C65zdso5JnX1hcldp7IWf4L57avUH7JsDg==
+X-Received: by 2002:a0d:d415:0:b0:586:d468:f57e with SMTP id
+ w21-20020a0dd415000000b00586d468f57emr15051220ywd.0.1692886853276; 
+ Thu, 24 Aug 2023 07:20:53 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
  [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
  by smtp.gmail.com with ESMTPSA id
- r123-20020a0dcf81000000b0057087e7691bsm3941795ywd.56.2023.08.24.07.16.04
+ n138-20020a0dcb90000000b0057a560a9832sm3940600ywd.1.2023.08.24.07.20.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 07:16:04 -0700 (PDT)
-Date: Thu, 24 Aug 2023 10:16:02 -0400
+ Thu, 24 Aug 2023 07:20:52 -0700 (PDT)
+Date: Thu, 24 Aug 2023 10:20:50 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Simon Glass <sjg@google.com>, Neha Francis <n-francis@ti.com>,
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: Nishanth Menon <nm@ti.com>, Simon Glass <sjg@google.com>,
  Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jan Kiszka <jan.kiszka@siemens.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-Message-ID: <20230824141602.GK3953269@bill-the-cat>
+Message-ID: <20230824142050.GL3953269@bill-the-cat>
 References: <20230822184135.2328409-1-nm@ti.com>
  <20230822184135.2328409-9-nm@ti.com>
  <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
@@ -81,11 +81,12 @@ References: <20230822184135.2328409-1-nm@ti.com>
  <20230824001848.vgzl7rcphic3gu2n@carnival>
  <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
  <20230824032709.phneggflsw2ps2dv@reanalyze>
+ <a3af68c4-490d-f3e2-a9ed-acd650ac0452@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YWaNAGoAjlNWwjq2"
+ protocol="application/pgp-signature"; boundary="lQAReNAjW4yq9cB4"
 Content-Disposition: inline
-In-Reply-To: <20230824032709.phneggflsw2ps2dv@reanalyze>
+In-Reply-To: <a3af68c4-490d-f3e2-a9ed-acd650ac0452@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,84 +105,150 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YWaNAGoAjlNWwjq2
+--lQAReNAjW4yq9cB4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 23, 2023 at 10:27:09PM -0500, Nishanth Menon wrote:
-> On 21:01-20230823, Simon Glass wrote:
-> > Hi Nishanth,
-> >=20
-> > On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
-> > >
-> > > On 17:57-20230823, Simon Glass wrote:
-> > > [...]
-> > > > > This is how we have a common bit of rST for how to build N boards,
-> > > > > without having to do a literal copy and paste N times.
-> > > >
-> > > > How about using this?
-> > > >
-> > > > https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#=
-substitution-definitions
-> > >
-> > > I was not able to succeed with complex includes such as:
-> > > https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rs=
-t?plain=3D1#L89
-> > >
-> > > am62x complete build procedure defined once and reused in other am62x
-> > > platforms.. But the am62x build procedure itself is reused from common
-> > > k3 build steps.
-> >=20
-> > I followed through these instructions. I find the env vars quite
-> > confusing, since I don't really know what it is doing. It feels like a
-> > script:
-> >=20
-> > do $a $b $c
-> > do $f $e
-> >=20
-> > it is pretty hard to follow. I think it would be better to write
-> > everything out in full for each board, like rockchip does.
+On Thu, Aug 24, 2023 at 06:46:57PM +0530, Neha Malcom Francis wrote:
+> Hi Simon, Nishanth
 >=20
-> Unfortunately, this is a few major steps that is repeated for
-> (currently):
-> 	AM62x SK
-> 	Toradex Verdin
-> 	(pending: beagleplay - )
-> 	(once all the dust clears up, hopefully phytec)
-> 	SK-LP
-> 	....
+> On 24/08/23 08:57, Nishanth Menon wrote:
+> > On 21:01-20230823, Simon Glass wrote:
+> > > Hi Nishanth,
+> > >=20
+> > > On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
+> > > >=20
+> > > > On 17:57-20230823, Simon Glass wrote:
+> > > > [...]
+> > > > > > This is how we have a common bit of rST for how to build N boar=
+ds,
+> > > > > > without having to do a literal copy and paste N times.
+> > > > >=20
+> > > > > How about using this?
+> > > > >=20
+> > > > > https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.htm=
+l#substitution-definitions
+> > > >=20
+> > > > I was not able to succeed with complex includes such as:
+> > > > https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.=
+rst?plain=3D1#L89
+> > > >=20
+> > > > am62x complete build procedure defined once and reused in other am6=
+2x
+> > > > platforms.. But the am62x build procedure itself is reused from com=
+mon
+> > > > k3 build steps.
+> > >=20
+> > > I followed through these instructions. I find the env vars quite
+> > > confusing, since I don't really know what it is doing. It feels like a
+> > > script:
+> > >=20
+> > > do $a $b $c
+> > > do $f $e
+> > >=20
+> > > it is pretty hard to follow. I think it would be better to write
+> > > everything out in full for each board, like rockchip does.
+> >=20
+> > Unfortunately, this is a few major steps that is repeated for
+> > (currently):
+> > 	AM62x SK
+> > 	Toradex Verdin
+> > 	(pending: beagleplay - )
+> > 	(once all the dust clears up, hopefully phytec)
+> > 	SK-LP
+> > 	....
+> >=20
+> > I have no reasonable way to offer to keep them all in sync.
+> > 	https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
+> > is kind of why I went down this path.S
+> >=20
+> > >=20
+> > > Some other minor feedback:
+> > >=20
+> > > - The 'make' lines should really have -j $(nproc) added
+> >=20
+> > Different styles of shells..
+> >=20
+> > > - The $ signs at the start of each command in the docs are a pain
+> > > since it stops me copying the commands into the terminal - can you
+> > > remove them?
+> >=20
+> > hehe.. "dont" let people blindly copy paste without understanding what =
+is
+> > going on argument?
+> >=20
+> > If folks are OK, I sure can send a different patch series for that.. (or
+> > maybe motivate someone to do that instead of me ;))
+> >=20
+> >=20
+> > > - It doesn't build for me:
+> > >=20
+> > >    BINMAN  .binman_stamp
+> > > Image 'ti-dm' is missing external blobs and is non-functional: blob-e=
+xt
+> > >=20
+> > > /binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_st=
+rip.xer5f):
+> > >     Missing blob
+> > >=20
+> > > Some images are invalid
+> > > make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Mak=
+efile:1115:
+> > > .binman_stamp] Error 103
+> > > make[1]: Leaving directory '/tmp/b/play'
+> > > make: *** [Makefile:177: sub-make] Error 2
+> >=20
+> >=20
+> > ^^ Neha: This is what I was complaining about.
+> >=20
+> > https://u-boot.readthedocs.io/en/latest/board/ti/am62x_sk.html?highligh=
+t=3Dam62#sources
+> >=20
+> > source: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
+> > is missing, we never used to break build previously binman converted no=
+w does.
+> >=20
+> > I am wondering if I need to explicitly call out git clone instructions
+> > out..
+> >=20
 >=20
-> I have no reasonable way to offer to keep them all in sync.
-> 	https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
-> is kind of why I went down this path.S
+> Right... this does seem to be a complaint that keeps coming up.
+>=20
+> Simon, my intention at the time of sending out the patch was that anyone
+> building the board should "not NOT" have the DM binary. The way we
+> structured the filename was that it looks at BINMAN_INDIRS to find
+> ti-dm/ipc_echo_testb_mcu1_0_release_strip.xer5f but I guess this is a
+> confusing way to put it across. Maybe we should rework that. Or not throw=
+ an
+> error at all when DM isn't found.
 
-And please note that I do not like the way we're doing this in other
-platforms.  That we have almost verbatim instructions for building TF-A
-and OPTEE for nearly every aarch64 platform is not good.  I was hoping
-for something more truly template-based and that we could expand out
-=66rom the K3 case to cover other platforms as well, but we're not there
-yet.
+Well, is DM required or not? If it's optional, we have flags to mark it
+optional.  If it's required, we have flags for make and buildman to tell
+binman "fake it".  I am wondering if we still have the ability to have a
+more verbose "need it, can't find it" error message, and so that's where
+it should say that you forgot to set BINMAN_INDIRS or clone the firmware
+repository.
 
 --=20
 Tom
 
---YWaNAGoAjlNWwjq2
+--lQAReNAjW4yq9cB4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnZhwACgkQFHw5/5Y0
-tyyPkwv/aeWRgy+1njnjIG2wWjWZk4QgiZXm7P2fp/Z/V+WUFNIjkVTYDZTZqVk3
-z/aMznpKv5rX/wzC7bm7pOX4HDHXuwrH+Uv/03k+lGuwvhzmKt7g6OuuXt38or22
-73qDh39KnWncKSin7xKV1OS3JYqGAUTIrjV+NihTeH7mNImqQxHeqFwn0yBW7HL2
-FG4jkRjD57nFdXqQMo74dnH43eVLfGoDPRCIDD2VhffW8XYrMTS3K17SvhfJ53x7
-7oY6K7LbrLZBTEMFHI2kK/n8zovKAltkWSBS4UFG9VP9jh6emXt70tdpZaFfX1n1
-MacGmo75DFj8rFDhUOtMpq3kQDHfSy/UhQrmmPD6DHDncwZ7O1QzmChRl2grvo7c
-UFojbWYXoDNZ8xJLV5jvE7K0roiWN49/fEx48LUPl1PxcZM/S6kyy9ny5QCKpv9v
-FACxj8CyoeY1rAcRffrTzTTLnuRpq+vfumqH0hb9Ac3AjImDZ3ujMeypQAjlYhzH
-lO91ft2C
-=zhX2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnZ0IACgkQFHw5/5Y0
+tyxSVAv9HRmAY0E1J/PvbBE64pVWlQEVSDYCH5yTpFB0vDR1l9p6T2/oo2EjpUKz
+a33qY/3Zy2kSsa//ukvpQ9pKBvfMC2BLmP4SxWn8z0jpwmfEwdbajAYw29bSg/2u
+wSTsyoc7veaoEOEUnMK/19x0EtQ9NDXGi7OdK20wC9q57xfGdgOl18Kb2nMsvnjZ
+HX2ymUs8emMESdaAqhA2F2GB73dJyyxCH4zezb3khvO+4ItlVogX4NOxwiRKnQco
+5nX9mL1NcSjyNGJD0FqEcJFgWFYcz8IFMNNhzvbX+s4Zzzabv6Ad+9efMWWNERpw
+Hg68J0/zLrr1eLQQuZ+Sj3qgxJiIDPyWhhM6DnUQM12j2b1kBtmb0D9iZoOyj4jW
+eLgSjSDKYKGrZrPtXrSXJNABeJXEPeAzmTyuaRVEd5jb2qtBMn1EL9mRkPsg1//o
+erO2bq5XTOjMxb8ehYNtzzz6Fu9ULIpnhvmWWXHpjDEChes1pn6nPFFbqoj2j/DJ
+7a1Qr86y
+=OMTd
 -----END PGP SIGNATURE-----
 
---YWaNAGoAjlNWwjq2--
+--lQAReNAjW4yq9cB4--
