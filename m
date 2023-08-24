@@ -4,103 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 902A1C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 12:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DBFC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 12:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED39B864AA;
-	Thu, 24 Aug 2023 14:51:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id A91F3864E7;
+	Thu, 24 Aug 2023 14:51:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="velq2A6p";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="m8h6nhH6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C6B5864B4; Thu, 24 Aug 2023 05:27:35 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::61d])
+ id C7F1C86542; Thu, 24 Aug 2023 08:10:45 +0200 (CEST)
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com
+ [210.118.77.12])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61BC286569
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 05:27:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3278D864B4
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 08:10:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UjM0e2YMs1bLp+QttzoyyASC8hyx+yfTkVSVlk4Hc7+wOxn3FJQsXbTwechgcQakMOL3YVRQfKIPe5HLRhYtSRlakkGhqSVZyBCj54fCi9msClMMcDNJcNUAz7D5K3kdE5G8WHR3eXo8vE3LyKVGmpdS2Eh9nALOTqYWCayzuAvTLDXqP5YmNRC78SVIdttV57SaI/xPMwDV52SRi4mIbxYDsUUizW98SKLzC3QbPwrLrJkHCkCUeKh+MWUMbLzixdtb73Uz9zmS+fwqgss9PFPcSeZuhARpJKtyzp3cXVzgw8L5xpdWAUREYcoyYKnqh116MB6kgE9D4NCMHklgcg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vIc2fihWRbKSIIawaJrsTFS8U4eHsraAcC1VptABXsA=;
- b=iEkQ+FMl6+8LooFpjnNvIy6jUZOskhJxabAR0K0ZC3envAlphH2YTE/BDQevcvo0zCatgcjKfwbqvrgwzR+PjhpcT4LZIK+LyB7ClfdI8efIm+9lJRE0QBFWf7VET3qCe6zus1uHCfYy+QS4Jh/tUO4n5nnl3JfmmZpDxvSVGl8ZePwr6+3yHzPz1NFCTP4nyOIHA0Ww/kRFB9yOXR4JxB0G7YbOt5ywDrXzJgc1tlqKjhjQVH4LNFB6j6xhHV53oN0O6rnCWs2it+z6MQaWwepaYvBvid3NNBvZsqcAGT5DT3Js/q2kumfpcvlLIFrbOMgNKptaxsF76BQi8yI1VQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vIc2fihWRbKSIIawaJrsTFS8U4eHsraAcC1VptABXsA=;
- b=velq2A6ptEOt20wjjmvLkq52TKX77B2Vp84+mCN/PY0PhYsz/B80Ig/gbDWkbrEl5vxkvwudIUu3g0SB1hpFLcUAMtQqQvnWFGS9xlpQ3unDks6XXqRrRWCA3Cq0IRIQyXwKA2UKFLfDxqNglmbFteu0U9H30B0JukEDNfpT3MY=
-Received: from CY5PR22CA0012.namprd22.prod.outlook.com (2603:10b6:930:16::32)
- by CYYPR12MB9015.namprd12.prod.outlook.com (2603:10b6:930:c8::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.24; Thu, 24 Aug
- 2023 03:27:26 +0000
-Received: from CY4PEPF0000EDD3.namprd03.prod.outlook.com
- (2603:10b6:930:16:cafe::78) by CY5PR22CA0012.outlook.office365.com
- (2603:10b6:930:16::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.27 via Frontend
- Transport; Thu, 24 Aug 2023 03:27:26 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EDD3.mail.protection.outlook.com (10.167.241.207) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6699.15 via Frontend Transport; Thu, 24 Aug 2023 03:27:26 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 23 Aug
- 2023 22:27:25 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Wed, 23 Aug 2023 22:27:24 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [UBOOT PATCH] arm64: zynqmp: Enable the config CMD_KASLRSEED
-Date: Thu, 24 Aug 2023 08:57:12 +0530
-Message-ID: <20230824032712.13399-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=l.stelmach@samsung.com
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+ by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
+ 20230824061041euoutp02bda981acc82cbccb1d6512e3d63c7093~_PN_iRMZH1545715457euoutp02l
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 06:10:41 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
+ 20230824061041euoutp02bda981acc82cbccb1d6512e3d63c7093~_PN_iRMZH1545715457euoutp02l
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1692857441;
+ bh=QVzSrOCga2/2r8wuiUo1FSG1qpVGnwxzQY8SnMlxRV4=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=m8h6nhH60kQ83nuT4t0+3YP3EgVhMam5jxfDBH1bCqFH5MW4i27LegjokC7te9BgT
+ rn9WuUAi30Tfun4Fk3819+tbmv8PB9AeVJuPYn6aMX2d/6ra8IXbtGnSGc1MJh7scj
+ IjN7ieah9MsJI2ZKK+ppoME6slvXafN3Bz5bzaXA=
+Received: from eusmges3new.samsung.com (unknown [203.254.199.245]) by
+ eucas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20230824061040eucas1p1e9d5ce1888c02ebcd620a2099342dc71~_PN_U24p_2275622756eucas1p1Y;
+ Thu, 24 Aug 2023 06:10:40 +0000 (GMT)
+Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
+ eusmges3new.samsung.com (EUCPMTA) with SMTP id 5F.FA.37758.064F6E46; Thu, 24
+ Aug 2023 07:10:40 +0100 (BST)
+Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
+ eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20230824061040eucas1p1a8c8b4bb5cd362d73806ac8d40613a9d~_PN96F4to0050900509eucas1p1I;
+ Thu, 24 Aug 2023 06:10:40 +0000 (GMT)
+Received: from eusmgms2.samsung.com (unknown [182.198.249.180]) by
+ eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20230824061040eusmtrp2039e0c93c664d78c77f11905e2aaa30f~_PN95p8f-2185121851eusmtrp21;
+ Thu, 24 Aug 2023 06:10:40 +0000 (GMT)
+X-AuditID: cbfec7f5-7ffff7000002937e-6f-64e6f4603f4f
+Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
+ eusmgms2.samsung.com (EUCPMTA) with SMTP id 54.22.14344.064F6E46; Thu, 24
+ Aug 2023 07:10:40 +0100 (BST)
+Received: from localhost (unknown [106.120.51.111]) by eusmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20230824061040eusmtip2b99ffe3959350588de3dc63d34c44837~_PN9xSXuy0479204792eusmtip2i;
+ Thu, 24 Aug 2023 06:10:40 +0000 (GMT)
+From: =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
+To: u-boot@lists.denx.de
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>,
+ =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
+Subject: [PATCH] setexpr: Silence some diagnostic messages
+Date: Thu, 24 Aug 2023 08:10:25 +0200
+Message-Id: <20230824061025.664682-1-l.stelmach@samsung.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD3:EE_|CYYPR12MB9015:EE_
-X-MS-Office365-Filtering-Correlation-Id: d67f38f8-6a7b-439c-a5c6-08dba45209fc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ufFKo9shjeGwVdokzEw4Q3XkRSjbJH7Mhl06vyS1HffpIKBtPGCgAP1Wo70KUJfI2D9uyB349bGB9br6I64YTh2Ua7T8ZoxIHLyG1E2cDAe65vCWqStK1w1PJFhZKcZK3EPbTsMtdnv655z1PpNey5OGIS2foPtU66iSQrijERH04S/5aujfLb9yIiFZZY/bEr5bzk/vDLSgaU5K/DHmdQsxUezWlVD01g/I2xBYgIhmCkDnPAFCDZkqFKBs85P7yw4qUN6kHqPDN6GKn4+J+jgaspBDpQAf7FBez95DxjR7avQq4xf0MAodJTA14XhTKIyQcWl1yVm7Gme1vJlIF16hKVyCqa9Iid18Kl553WxCpXr51GNi8LqRo+G9V8AhhLzsMsgHj9CrmqooXIdgSP3kcFmRG7ulh5USYkrsSDbe5q1t3VjC2WWstXeRlcMfhrOUVO2uPlZBvQU8Xo9A77TGkggcNFBcU+no0DZFUoqtmA9ZegRl/OLemr6OwAAAwel+HWgV+bU4Xvr1zYSa42Ex8TZfXCa7qn078CLXfkHZstS8i+FomlpEd5hGH5NFkchn/QFOYDLSyhbEnMf23PO4L9XY7GPZpGq2fkNjKi3fUv3fD3JcvevweI0FNZFDOcu4teWqpwHilIhZ9x+Rs3rfQgipdpdaEQCJSwaawH6ouu+Qiv6tmXzDKCOlLG9aixh/fPRbHDJ030W+0Y3NOQMYAQYCkGjSxMvnQJ0qggEc2+KbDPvbppKeBZj31jfdSCjd5FJUMebrGZl5VEyMFA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(136003)(376002)(39860400002)(396003)(82310400011)(1800799009)(451199024)(186009)(36840700001)(46966006)(40470700004)(5660300002)(107886003)(316002)(1076003)(8936002)(8676002)(41300700001)(70206006)(6916009)(70586007)(2616005)(54906003)(40480700001)(4326008)(26005)(426003)(336012)(478600001)(6666004)(83380400001)(47076005)(36860700001)(40460700003)(2906002)(86362001)(36756003)(82740400003)(81166007)(356005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2023 03:27:26.3789 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d67f38f8-6a7b-439c-a5c6-08dba45209fc
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD3.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYYPR12MB9015
+Organization: Samsung R&D Institute Poland
+Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrLIsWRmVeSWpSXmKPExsWy7djP87oJX56lGLzZamBx89AKRou1R+6y
+ W7zd28nuwOxx9s4ORo++LasYA5iiuGxSUnMyy1KL9O0SuDLuvuhjK+hkr7i04ThTA+MR1i5G
+ Dg4JAROJBy+Luxi5OIQEVjBKvLp7kBHC+cIoMefcH3YI5zOjxJkz/1m6GDnBOu5u38EEYgsJ
+ LGeUuP0wGMJ+wShx80MdiM0m4CjRv/QEK4gtIiAh8av/KiOIzSyQJ7Fn7nmwXmEBK4lHjzrB
+ algEVCW2H/jBDGLzCthINE14wA5xnbzE4gcSEGFBiZMzn4CdwC+gJbGm6ToLxEh5ieats5lB
+ 7pQQ6OSQuLL/KNSdLhK3/v1gh7CFJV4d3wJly0j83zmfCaKhnVGi6cpCVghnAqPE544mJogq
+ a4k7536xgVzBLKApsX6XPkTYUeLK8qPQoOOTuPFWEOIIPolJ26YzQ4R5JTrahCCqVSTW9e+B
+ OkdKovfVCkYI20NiQd8+xgmMirOQvDYLyTuzEPYuYGRexSieWlqcm55abJyXWq5XnJhbXJqX
+ rpecn7uJEZgiTv87/nUH44pXH/UOMTJxMB5ilOBgVhLh/eLzLEWINyWxsiq1KD++qDQntfgQ
+ ozQHi5I4r7btyWQhgfTEktTs1NSC1CKYLBMHp1QDU8D/5QfvSm0uizo0LSL038dLm++sPx4T
+ tc2nhu9dUMzp//knDd/aBmdKpT5//3dC5umrTpyr6r5W/11+qOjSsz1ZvMtyTvNGSCh3ioU/
+ /7Ujc2tyXOJBeee1LxV8j/mZbvx8+7FSr0L6i41zxAXViopU3b6xncpMePgp64tLBXOf0L4T
+ ixc2L7krV+jwam/jnsbsDplPtfZv14Z4JPpuFI+YOin4Z4p3/c/p9U869r4IOpSdKdm+vmm6
+ 94acM7kLY09OUC/58Htq4P6rC4Q7PF4kh547NO/47MOLT3I4p69wfP1X9veLzteNXY+TBFeb
+ /rHYrBujeWVVU9yH9NCG16zrzQ+8PvJfhmf3hRVfk7OVWIozEg21mIuKEwFBaz+IgAMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGLMWRmVeSWpSXmKPExsVy+t/xe7oJX56lGCw5I2lx89AKRou1R+6y
+ W7zd28nuwOxx9s4ORo++LasYA5ii9GyK8ktLUhUy8otLbJWiDS2M9AwtLfSMTCz1DI3NY62M
+ TJX07WxSUnMyy1KL9O0S9DLuvuhjK+hkr7i04ThTA+MR1i5GTg4JAROJu9t3MHUxcnEICSxl
+ lPjwp525i5EDKCElsXJuOkSNsMSfa11sEDXPGCUebu1hBEmwCThK9C89ATZIREBC4lf/VbA4
+ s0CexJ6555lAbGEBK4lHjzrBalgEVCW2H/jBDGLzCthINE14wA6xS15i8QMJiLCgxMmZT1hA
+ wswC6hLr5wmBhPkFtCTWNF1ngZguL9G8dTbzBEaBWUg6ZiF0zEJStYCReRWjSGppcW56brGR
+ XnFibnFpXrpecn7uJkZggG879nPLDsaVrz7qHWJk4mA8xCjBwawkwvvF51mKEG9KYmVValF+
+ fFFpTmrxIUZToAcmMkuJJucDYyyvJN7QzMDU0MTM0sDU0sxYSZzXs6AjUUggPbEkNTs1tSC1
+ CKaPiYNTqoGpK0f3bW9+4fp2v6TJ3b9zC9s/5Cxx9J61L7b2/QdXA4u1ex/X/jq9TijpllxX
+ YmGf5fQupuXcHV+39x012BZ37Ogju6jH0Ye/aDOvsDmvGOxrnsFfynip8Lxp/iJv3S3GElLf
+ pnFN3swj9zdyyvsHsjMe3JDpqXswrUpD2yj4l4pQyTnGkG1tzXP42qbYveHiZuzgClZKiBU8
+ cPiljXSyHC8Xv9K+6BXty+WrV8owMPyvNpcUcDcSuuh5eMLX0rDJL9/1ZRzIaz6w87Xr80NL
+ jT6qqM+2e6L380kG05KlDnx/ooyXaeur3ROZ/YJvivDBtbFrv+cd87GsMO7/nySqzSY58e/n
+ H6XPKvKM05VYijMSDbWYi4oTAV5tN3T5AgAA
+X-CMS-MailID: 20230824061040eucas1p1a8c8b4bb5cd362d73806ac8d40613a9d
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20230824061040eucas1p1a8c8b4bb5cd362d73806ac8d40613a9d
+X-EPHeader: CA
+CMS-TYPE: 201P
+X-CMS-RootMailID: 20230824061040eucas1p1a8c8b4bb5cd362d73806ac8d40613a9d
+References: <CGME20230824061040eucas1p1a8c8b4bb5cd362d73806ac8d40613a9d@eucas1p1.samsung.com>
 X-Mailman-Approved-At: Thu, 24 Aug 2023 14:51:11 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,33 +127,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Kernel Address Space Layout Randomization (KASLR) is a hardening
-feature that aims to make it more difficult to take advantage
-of known exploits in the kernel, by placing kernel data structures
-at a random address at each boot.The bootloader supports randomizing
-the virtual address at which the kernel image is loaded.
-The bootloader must provide entropy by passing a random u64 value
-in the /chosen/kaslr-seed device tree node.
-When we run "kaslrseed" command from U-Boot, the bootloader will
-genarate the kaslr-seed and update the /chosen/kaslr-seed DT property.
+Neither successful match nor lack thereof should be considered an
+extraordinary situation. Thus, neither require printing a message.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: Łukasz Stelmach <l.stelmach@samsung.com>
 ---
- configs/xilinx_zynqmp_virt_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ cmd/setexpr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index acab38fefe..b67b637e52 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -91,6 +91,7 @@ CONFIG_CMD_RTC=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_GETTIME=y
- CONFIG_CMD_RNG=y
-+CONFIG_CMD_KASLRSEED=y
- CONFIG_CMD_TIMER=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_SMC=y
+diff --git a/cmd/setexpr.c b/cmd/setexpr.c
+index 4d671e7ef1..233471f6cb 100644
+--- a/cmd/setexpr.c
++++ b/cmd/setexpr.c
+@@ -215,7 +215,7 @@ int setexpr_regex_sub(char *data, uint data_size, char *nbuf, uint nbuf_size,
+ 
+ 		if (res == 0) {
+ 			if (loop == 0) {
+-				printf("%s: No match\n", data);
++				debug("%s: No match\n", data);
+ 				return 1;
+ 			} else {
+ 				break;
+@@ -359,7 +359,7 @@ static int regex_sub_var(const char *name, const char *r, const char *s,
+ 	if (ret)
+ 		return 1;
+ 
+-	printf("%s=%s\n", name, data);
++	debug("%s=%s\n", name, data);
+ 
+ 	return env_set(name, data);
+ }
 -- 
-2.17.1
+2.39.2
 
