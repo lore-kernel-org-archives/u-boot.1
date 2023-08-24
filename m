@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D695C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 15:40:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD73AC27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 15:40:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A88928082A;
+	by phobos.denx.de (Postfix) with ESMTP id EBD278667B;
 	Thu, 24 Aug 2023 17:40:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pfynpus4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BJT8BUnX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 285F3865B1; Thu, 24 Aug 2023 17:40:47 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 7BCBC8056A; Thu, 24 Aug 2023 17:40:47 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD5768056A
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 17:40:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6176686401
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 17:40:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37OFebE1072469;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37OFebNM066685;
  Thu, 24 Aug 2023 10:40:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692891637;
- bh=Cy4lMMXuNkMtbrNZL4zZERjI1NMdXOs6EsuQOA5/o5U=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pfynpus4bICGe2OwYwdnx0taLVDr+v02C5OkDnGTWR4bZE7/rmtqu8JqE4R7LmycF
- 4bAsvmfY7nGPJzSZAhwq5v89cFdk5qAlOCRlO12nRKOKdpfqT8HIewL9unRbOmbC6B
- n01wCvL6TC9TRiBi799j4ad/hhO00twj4rn3cfH8=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37OFebnc056619
+ bh=nSTD2K/yfxvjX1AYMHcT4DQA2J5bXvMOAsKOTLECWRs=;
+ h=From:To:CC:Subject:Date;
+ b=BJT8BUnXMSukPcRqsk3d92+YvxMLbNFVH3zN9lpPIE6W8Fvx/oEVYJs+6fMXNYsaX
+ zUHCF80yp4P+eKGDmGanlSAz68U2QZAtwX59RsbbN6LTfrBoT8pfaTXXz2z2xE0Dkb
+ rRN+rIYnZzIdxcleoZWbvP1jgxDOmzdaTE9dV4u8=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37OFebhl021251
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 24 Aug 2023 10:40:37 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
  Aug 2023 10:40:37 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 24 Aug 2023 10:40:37 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37OFebMH041319;
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37OFebQ3060700;
  Thu, 24 Aug 2023 10:40:37 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Neha Francis
  <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>
-Subject: [RFC PATCH 1/2] doc: sphinx: Add sphinx-prompt
-Date: Thu, 24 Aug 2023 10:40:35 -0500
-Message-ID: <20230824154036.3650607-2-nm@ti.com>
+Subject: [RFC PATCH 0/2] doc: sphinx: Add sphinx-prompt
+Date: Thu, 24 Aug 2023 10:40:34 -0500
+Message-ID: <20230824154036.3650607-1-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230824154036.3650607-1-nm@ti.com>
-References: <20230824154036.3650607-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,45 +78,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sphinx-prompt[1] helps bring-in '.. prompt::' option that allows a
-better rendered documentation, yet be able to copy paste without
-picking up the prompt from rendered documentation.
+Add Sphinx-prompt for more readable documentation and yet is
+userfriendly for people to copy paste.
 
-[1] https://lore.kernel.org/all/87fs48rgto.fsf@baylibre.com/
-Suggested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-Version picked is the best that works with Sphinx 3.4.3
+See https://lore.kernel.org/all/87fs48rgto.fsf@baylibre.com/
 
- doc/conf.py                 | 2 +-
- doc/sphinx/requirements.txt | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+If this approach looks correct, please ack and I can convert the
+doc/board/ti/*.rst segments off to prompt instead of code-block where
+applicable.
 
-diff --git a/doc/conf.py b/doc/conf.py
-index 00f241366477..5e2ff1c8f5e2 100644
---- a/doc/conf.py
-+++ b/doc/conf.py
-@@ -39,7 +39,7 @@ needs_sphinx = '2.4.4'
- extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
-               'kfigure', 'sphinx.ext.ifconfig', # 'automarkup',
-               'maintainers_include', 'sphinx.ext.autosectionlabel',
--              'kernel_abi', 'kernel_feat']
-+              'kernel_abi', 'kernel_feat', 'sphinx-prompt']
- 
- #
- # cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
-diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
-index 4f411f78d030..6ccbe527ee79 100644
---- a/doc/sphinx/requirements.txt
-+++ b/doc/sphinx/requirements.txt
-@@ -15,6 +15,7 @@ requests==2.31.0
- six==1.16.0
- snowballstemmer==2.2.0
- Sphinx==3.4.3
-+sphinx-prompt==1.5.0
- sphinx-rtd-theme==1.0.0
- sphinxcontrib-applehelp==1.0.2
- sphinxcontrib-devhelp==1.0.2
+Quick video to show the difference in experience: https://youtu.be/ylDrHXWGVgo
+
+Nishanth Menon (2):
+  doc: sphinx: Add sphinx-prompt
+  doc: board: ti: k3: Convert to sphinx-prompt
+
+ doc/board/ti/k3.rst         | 112 ++++++++++++++++++------------------
+ doc/conf.py                 |   2 +-
+ doc/sphinx/requirements.txt |   1 +
+ 3 files changed, 59 insertions(+), 56 deletions(-)
+
 -- 
 2.40.0
 
