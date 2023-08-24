@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE69C6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5BBC6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:59:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1C5686A3E;
+	by phobos.denx.de (Postfix) with ESMTP id E1A9A86A44;
 	Thu, 24 Aug 2023 21:56:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kB8w8XxB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YIk5wUD1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 227EA8683C; Thu, 24 Aug 2023 21:56:20 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 824E58683C; Thu, 24 Aug 2023 21:56:20 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A1608683C
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F07986A12
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-790cadee81bso7148239f.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:17 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-7926755c052so6665039f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692906976; x=1693511776;
+ d=chromium.org; s=google; t=1692906975; x=1693511775;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WXuuPIgeS6x80/5Wz/9qgAxRCTRzmvZPMLlcPrye/v4=;
- b=kB8w8XxB7pQY+yKJITxb+NdOdzqKNyKIUZpWZ5iX5sd26y3xhzQNNyngaKvss3rcr7
- vXceVEc1B69dWXdYm8VNghaEYnThS0VprTi10dDmMz5N006IUb7rMD/B++Uzd+0GmltE
- W9Xg+CcTMuGIy92S5U8bQdK/qri8z35IEuvDo=
+ bh=vIcsopYxpjrsNYoBSXByekSWxiDJtKrJwLaIjXhsxTc=;
+ b=YIk5wUD1VSOR+ljBTvtUe6BS8nHWRfZZxG5yjkUw3cW54i+SXvsBv8hkjV6BFAohTb
+ L1kpzLv6ksIwFfRFNQZroelaLV//9aR2Jvi4VHBEyjrtCS+OBwyI3m7wXHwm5S8A+LYa
+ nTwBVgJHqGlyCOyX718kye/hvsbV0M60ZNfes=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692906976; x=1693511776;
+ d=1e100.net; s=20221208; t=1692906975; x=1693511775;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WXuuPIgeS6x80/5Wz/9qgAxRCTRzmvZPMLlcPrye/v4=;
- b=Lgudxgiuco4/r9sRbgCDZknuXMTNi8PegbT+9tJfYZq95WTmgQI8I8sWY6tQFqJT+D
- f4WNUT31OTP6Gdy/9fNUE7nYcxnzsZZwcDIv8Yr6i/vf3ueh3NtC9CHte25jAoZD3vl3
- 6HuB0xxSiXiKMTo8KBSl+tnDju3xShB/iOo2AKvrm+OFSeKp7SLy/c5qFMfhUw0pD++6
- uqAzasVh/6jeJalaCk5+Tgy64eutXzeYEk/ypMvUhWcWlQ+B/pMgMLhaxHp2paWiHKiD
- zrNMGvLcgifjzIrT6kGGT3Puw1DVk5usObQJ8viTbiZy6pOyRHiyWk8w91fmZ6RsRFKn
- gDEA==
-X-Gm-Message-State: AOJu0YwfKGq6bSWs0DYeg23qDd+T6uEEZeQXlVF+mWBbnhKdIzyLSt+l
- 4cgRvY6quu2Y4TJH9wJqJGLg6MfFlyQbx174SwQ=
-X-Google-Smtp-Source: AGHT+IHyqj1E7CaFPA3nWC0aVGn3SsXv+pAx2PVeBdBaAuMW66vhsv9fa3e81daL+dWVYzrnUf7LJQ==
+ bh=vIcsopYxpjrsNYoBSXByekSWxiDJtKrJwLaIjXhsxTc=;
+ b=HNZ97r0dTGDuB53QNLnGe3vUOKPlYEfmAgmrHmmDaJPlF4wDZmftXWixbWLuLpgHXk
+ +y8wiEYcEPFuw45pI2gMw0a4sZrOm5cR+nzByjrRCoBJVXXhkNzBROxXE3ZFdC8j3Nec
+ ULQ2CBRlmIXKKg2RlLO4cTQ3ywqc+tocS3LU7+zbYpORP0f7s0m1Pll7d5Ec/yyZHpat
+ NiAmaYeukIqKKQVLborwYIkayAk2O1Xl2qMYFAC02pmPmArznoCAcWpeamEdO2YVn93p
+ ACnqaI+WM43y+v4bfJJebhAD7LtY8SitTy91H9Wr0eoy0WjFzrKS53hrW3QsAIq285y4
+ p9cQ==
+X-Gm-Message-State: AOJu0YzI3+27WhqiIIlHtxLzL82IAL2SIsIERUPByfIIkHfA8gSrPF8M
+ jDoBy3LWADNzWk6FUSBYM6ufPnN1EWssrPtv3Bw=
+X-Google-Smtp-Source: AGHT+IHSxxoo+90o+FRGYPtiPTt0RU3u0ulmutpAVdbaVVMqIPa7i+2MEI9bnNi0IR72uT9wrPouog==
 X-Received: by 2002:a5e:c102:0:b0:788:2eaf:46ce with SMTP id
- v2-20020a5ec102000000b007882eaf46cemr7624494iol.9.1692906975871; 
+ v2-20020a5ec102000000b007882eaf46cemr7624470iol.9.1692906975023; 
  Thu, 24 Aug 2023 12:56:15 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.15
+ b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:56:15 -0700 (PDT)
+ Thu, 24 Aug 2023 12:56:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 20/23] bootstd: Support bootmeths which can scan any
- partition
-Date: Thu, 24 Aug 2023 13:55:43 -0600
-Message-ID: <20230824195553.1685996-21-sjg@chromium.org>
+Subject: [PATCH v2 19/23] part: Add a fallback for part_get_bootable()
+Date: Thu, 24 Aug 2023 13:55:42 -0600
+Message-ID: <20230824195553.1685996-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
 References: <20230824195553.1685996-1-sjg@chromium.org>
@@ -88,126 +87,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some bootmeths support scanning a partition without a filesystem on it.
-Add a flag to support this.
-
-This will allow the ChromiumOS bootmeth to find kernel partition, which
-are stored in a special format, without a filesystem.
+This function can be called when partition support is disabled. Add a
+static inline to handle this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootdev-uclass.c   | 17 ++++++++++++++---
- doc/develop/bootstd.rst | 11 ++++++-----
- include/bootmeth.h      |  3 +++
- 3 files changed, 23 insertions(+), 8 deletions(-)
+ include/part.h | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index c4044d87dc3e..69506e3865fc 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -111,6 +111,8 @@ int bootdev_bind(struct udevice *parent, const char *drv_name, const char *name,
- int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
- 			struct bootflow_iter *iter, struct bootflow *bflow)
- {
-+	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(bflow->method);
-+	bool allow_any_part = plat->flags & BOOTMETHF_ANY_PART;
- 	struct blk_desc *desc = dev_get_uclass_plat(blk);
- 	struct disk_partition info;
- 	char partstr[20];
-@@ -142,6 +144,7 @@ int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
- 	 * us whether there is valid media there
- 	 */
- 	ret = part_get_info(desc, iter->part, &info);
-+	log_debug("part_get_info() returned %d\n", ret);
- 	if (!iter->part && ret == -ENOENT)
- 		ret = 0;
+diff --git a/include/part.h b/include/part.h
+index 16ba8c102535..f321479a5e91 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -372,14 +372,6 @@ part_get_info_by_dev_and_name_or_num(const char *dev_iface,
+ }
+ #endif
  
-@@ -154,7 +157,7 @@ int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
- 		ret = -ESHUTDOWN;
- 	else
- 		bflow->state = BOOTFLOWST_MEDIA;
--	if (ret) {
-+	if (ret && !allow_any_part) {
- 		/* allow partition 1 to be missing */
- 		if (iter->part == 1) {
- 			iter->max_part = 3;
-@@ -174,9 +177,15 @@ int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
- 	if (!iter->part) {
- 		iter->first_bootable = part_get_bootable(desc);
- 		log_debug("checking bootable=%d\n", iter->first_bootable);
-+	} else if (allow_any_part) {
-+		/*
-+		 * allow any partition to be scanned, by skipping any checks
-+		 * for filesystems or partition contents on this disk
-+		 */
- 
- 	/* if there are bootable partitions, scan only those */
--	} else if (iter->first_bootable ? !info.bootable : iter->part != 1) {
-+	} else if (iter->first_bootable >= 0 &&
-+		   (iter->first_bootable ? !info.bootable : iter->part != 1)) {
- 		return log_msg_ret("boot", -EINVAL);
- 	} else {
- 		ret = fs_set_blk_dev_with_part(desc, bflow->part);
-@@ -193,6 +202,7 @@ int bootdev_find_in_blk(struct udevice *dev, struct udevice *blk,
- 		bflow->state = BOOTFLOWST_FS;
- 	}
- 
-+	log_debug("method %s\n", bflow->method->name);
- 	ret = bootmeth_read_bootflow(bflow->method, bflow);
- 	if (ret)
- 		return log_msg_ret("method", ret);
-@@ -559,7 +569,8 @@ int bootdev_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
- {
- 	const struct bootdev_ops *ops = bootdev_get_ops(dev);
- 
--	log_debug("->get_bootflow %s=%p\n", dev->name, ops->get_bootflow);
-+	log_debug("->get_bootflow %s,%x=%p\n", dev->name, iter->part,
-+		  ops->get_bootflow);
- 	bootflow_init(bflow, dev, iter->method);
- 	if (!ops->get_bootflow)
- 		return default_get_bootflow(dev, iter, bflow);
-diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd.rst
-index ec3136535783..c01e0971dc84 100644
---- a/doc/develop/bootstd.rst
-+++ b/doc/develop/bootstd.rst
-@@ -677,11 +677,12 @@ Assuming the bootmeth is happy, or at least indicates that it is willing to try
- partition. If that works it tries to detect a file system. If that works then it
- calls the bootmeth device once more, this time to read the bootflow.
- 
--Note: At present a filesystem is needed for the bootmeth to be called on block
--devices, simply because we don't have any examples where this is not the case.
--This feature can be added as needed. Note that sandbox is a special case, since
--in that case the host filesystem can be accessed even though the block device
--is NULL.
-+Note: Normally a filesystem is needed for the bootmeth to be called on block
-+devices, but bootmeths which don't need that can set the BOOTMETHF_ANY_PART
-+flag to indicate that they can scan any partition. An example is the ChromiumOS
-+bootmeth which can store a kernel in a raw partition. Note also that sandbox is
-+a special case, since in that case the host filesystem can be accessed even
-+though the block device is NULL.
- 
- If we take the example of the `bootmeth_extlinux` driver, this call ends up at
- `extlinux_read_bootflow()`. It has the filesystem ready, so tries various
-diff --git a/include/bootmeth.h b/include/bootmeth.h
-index d3d8d608cd78..0fc36104ece0 100644
---- a/include/bootmeth.h
-+++ b/include/bootmeth.h
-@@ -16,9 +16,12 @@ struct udevice;
-  * enum bootmeth_flags - Flags for bootmeths
-  *
-  * @BOOTMETHF_GLOBAL: bootmeth handles bootdev selection automatically
-+ * @BOOTMETHF_ANY_PART: bootmeth is willing to check any partition, even if it
-+ * has no filesystem
-  */
- enum bootmeth_flags {
- 	BOOTMETHF_GLOBAL	= BIT(0),
-+	BOOTMETHF_ANY_PART	= BIT(1),
- };
- 
+-/**
+- * part_get_bootable() - Find the first bootable partition
+- *
+- * @desc: Block-device descriptor
+- * @return first bootable partition, or 0 if there is none
+- */
+-int part_get_bootable(struct blk_desc *desc);
+-
+ struct udevice;
  /**
+  * disk_blk_read() - read blocks from a disk partition
+@@ -670,12 +662,24 @@ static inline struct part_driver *part_driver_get_first(void)
+  */
+ int part_get_type_by_name(const char *name);
+ 
++/**
++ * part_get_bootable() - Find the first bootable partition
++ *
++ * @desc: Block-device descriptor
++ * @return first bootable partition, or 0 if there is none
++ */
++int part_get_bootable(struct blk_desc *desc);
++
+ #else
+ static inline int part_driver_get_count(void)
+ { return 0; }
+ 
+ static inline struct part_driver *part_driver_get_first(void)
+ { return NULL; }
++
++static inline bool part_get_bootable(struct blk_desc *desc)
++{ return false; }
++
+ #endif /* CONFIG_PARTITIONS */
+ 
+ #endif /* _PART_H */
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
