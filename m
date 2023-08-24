@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A5BBC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CB7DC27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:59:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1A9A86A44;
-	Thu, 24 Aug 2023 21:56:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 28CD586A49;
+	Thu, 24 Aug 2023 21:56:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YIk5wUD1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mUbLFXRX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 824E58683C; Thu, 24 Aug 2023 21:56:20 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 0133A8683C; Thu, 24 Aug 2023 21:56:21 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F07986A12
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2212B869B8
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:56:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7926755c052so6665039f.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:16 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-792707f78b5so8195739f.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:56:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692906975; x=1693511775;
+ d=chromium.org; s=google; t=1692906976; x=1693511776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vIcsopYxpjrsNYoBSXByekSWxiDJtKrJwLaIjXhsxTc=;
- b=YIk5wUD1VSOR+ljBTvtUe6BS8nHWRfZZxG5yjkUw3cW54i+SXvsBv8hkjV6BFAohTb
- L1kpzLv6ksIwFfRFNQZroelaLV//9aR2Jvi4VHBEyjrtCS+OBwyI3m7wXHwm5S8A+LYa
- nTwBVgJHqGlyCOyX718kye/hvsbV0M60ZNfes=
+ bh=pwyIhU8PDI/9PoJgGR0ubVgCSfGmv1uKYAyf+SNQi2U=;
+ b=mUbLFXRX8/NvePdec2D/BW5DPJWncossmZE8rKj8vdlDHC+0OoLSumIv+C2YSRxSl1
+ P/LdiHNI1QgbSmO/tqRXUVBlpw0uJZqpNIkyV/Kwc/7maXPb6otacefjbPn8te6BOaYI
+ 82kNEwenlqBa/tZ+fBzQpY4qMFQhwSfyHE2OI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692906975; x=1693511775;
+ d=1e100.net; s=20221208; t=1692906976; x=1693511776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vIcsopYxpjrsNYoBSXByekSWxiDJtKrJwLaIjXhsxTc=;
- b=HNZ97r0dTGDuB53QNLnGe3vUOKPlYEfmAgmrHmmDaJPlF4wDZmftXWixbWLuLpgHXk
- +y8wiEYcEPFuw45pI2gMw0a4sZrOm5cR+nzByjrRCoBJVXXhkNzBROxXE3ZFdC8j3Nec
- ULQ2CBRlmIXKKg2RlLO4cTQ3ywqc+tocS3LU7+zbYpORP0f7s0m1Pll7d5Ec/yyZHpat
- NiAmaYeukIqKKQVLborwYIkayAk2O1Xl2qMYFAC02pmPmArznoCAcWpeamEdO2YVn93p
- ACnqaI+WM43y+v4bfJJebhAD7LtY8SitTy91H9Wr0eoy0WjFzrKS53hrW3QsAIq285y4
- p9cQ==
-X-Gm-Message-State: AOJu0YzI3+27WhqiIIlHtxLzL82IAL2SIsIERUPByfIIkHfA8gSrPF8M
- jDoBy3LWADNzWk6FUSBYM6ufPnN1EWssrPtv3Bw=
-X-Google-Smtp-Source: AGHT+IHSxxoo+90o+FRGYPtiPTt0RU3u0ulmutpAVdbaVVMqIPa7i+2MEI9bnNi0IR72uT9wrPouog==
-X-Received: by 2002:a5e:c102:0:b0:788:2eaf:46ce with SMTP id
- v2-20020a5ec102000000b007882eaf46cemr7624470iol.9.1692906975023; 
- Thu, 24 Aug 2023 12:56:15 -0700 (PDT)
+ bh=pwyIhU8PDI/9PoJgGR0ubVgCSfGmv1uKYAyf+SNQi2U=;
+ b=ec1W0fMoGx1bbBUci9sS24jYSRI+9irGHDtZZ0IS9nP3QORmoCWdBiMG82REukcLa7
+ iPnG9p1BC57SeoCl01nJpQ9xPiw5mnjEErHtTngWeiUncpPFJGZuOusY1ow46WgRT8hR
+ aLFXJfx+UhVYRYUePrtqGNr6kXsenbCvzJAIwX5SbiluKrOIk5OUY7twjWRGKf1F4tyi
+ DSexHlf3Ovu+5EvfYOVEDI/4gfI40IH6EdAr/oMY4cl1bDib6hqUkr59lmq9FgoXgAuR
+ MAyOLLFUTt3K8Cf12fSTLF9lqOEJCzADid8kvfZ8mqDlkSAQzvjo3a9tx9ZtusjXClB8
+ SwNg==
+X-Gm-Message-State: AOJu0Yw/bjumeS/dVZFc5xVyeu2vmdem3/obhjBSSZ+vK8Y9tdGknX0f
+ saPcEYOV95ZiQy4YJK/3hzy2ZwrimNkHcAgQ8JA=
+X-Google-Smtp-Source: AGHT+IGPeh3ueiipPT6ppitQ66oliz0/orFLJS2B3I4837hPAdWpSCiYsW0KaVdkvAALctYlvJ0QwQ==
+X-Received: by 2002:a5d:930c:0:b0:783:550e:33c0 with SMTP id
+ l12-20020a5d930c000000b00783550e33c0mr7659730ion.7.1692906976773; 
+ Thu, 24 Aug 2023 12:56:16 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.14
+ b22-20020a6be716000000b007925328d6ddsm12734ioh.20.2023.08.24.12.56.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 12:56:14 -0700 (PDT)
+ Thu, 24 Aug 2023 12:56:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 19/23] part: Add a fallback for part_get_bootable()
-Date: Thu, 24 Aug 2023 13:55:42 -0600
-Message-ID: <20230824195553.1685996-20-sjg@chromium.org>
+Subject: [PATCH v2 21/23] uuid: Add ChromiumOS partition types
+Date: Thu, 24 Aug 2023 13:55:44 -0600
+Message-ID: <20230824195553.1685996-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
 In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
 References: <20230824195553.1685996-1-sjg@chromium.org>
@@ -87,61 +87,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function can be called when partition support is disabled. Add a
-static inline to handle this.
+Add some GUIDs for ChromiumOS so we can detect the partitions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/part.h | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
+ include/part_efi.h | 14 ++++++++++++++
+ lib/uuid.c         |  7 +++++++
+ 2 files changed, 21 insertions(+)
 
-diff --git a/include/part.h b/include/part.h
-index 16ba8c102535..f321479a5e91 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -372,14 +372,6 @@ part_get_info_by_dev_and_name_or_num(const char *dev_iface,
- }
- #endif
+diff --git a/include/part_efi.h b/include/part_efi.h
+index c68529b4dafe..59b7895b8a23 100644
+--- a/include/part_efi.h
++++ b/include/part_efi.h
+@@ -60,6 +60,20 @@
+ 	EFI_GUID( 0x3de21764, 0x95bd, 0x54bd, \
+ 		0xa5, 0xc3, 0x4a, 0xbe, 0x78, 0x6f, 0x38, 0xa8)
  
--/**
-- * part_get_bootable() - Find the first bootable partition
-- *
-- * @desc: Block-device descriptor
-- * @return first bootable partition, or 0 if there is none
-- */
--int part_get_bootable(struct blk_desc *desc);
--
- struct udevice;
- /**
-  * disk_blk_read() - read blocks from a disk partition
-@@ -670,12 +662,24 @@ static inline struct part_driver *part_driver_get_first(void)
++/* Special ChromiumOS things */
++#define PARTITION_CROS_KERNEL \
++	EFI_GUID(0xfe3a2a5d, 0x4f32, 0x41a7, \
++		 0xb7, 0x25, 0xac, 0xcc, 0x32, 0x85, 0xa3, 0x09)
++#define PARTITION_CROS_ROOT \
++	EFI_GUID(0x3cb8e202, 0x3b7e, 0x47dd, \
++		 0x8a, 0x3c, 0x7f, 0xf2, 0xa1, 0x3c, 0xfc, 0xec)
++#define PARTITION_CROS_FIRMWARE \
++	EFI_GUID(0xcab6e88e, 0xabf3, 0x4102, \
++		 0xa0, 0x7a, 0xd4, 0xbb, 0x9b, 0xe3, 0xc1, 0xd3)
++#define PARTITION_CROS_RESERVED \
++	EFI_GUID(0x2e0a753d, 0x9e48, 0x43b0, \
++		 0x83, 0x37, 0xb1, 0x51, 0x92, 0xcb, 0x1b, 0x5e)
++
+ /* linux/include/efi.h */
+ typedef u16 efi_char16_t;
+ 
+diff --git a/lib/uuid.c b/lib/uuid.c
+index 3bdb20b0e5b6..afb40bff507a 100644
+--- a/lib/uuid.c
++++ b/lib/uuid.c
+@@ -7,6 +7,8 @@
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
   */
- int part_get_type_by_name(const char *name);
  
-+/**
-+ * part_get_bootable() - Find the first bootable partition
-+ *
-+ * @desc: Block-device descriptor
-+ * @return first bootable partition, or 0 if there is none
-+ */
-+int part_get_bootable(struct blk_desc *desc);
++#define LOG_CATEGOT LOGC_CORE
 +
- #else
- static inline int part_driver_get_count(void)
- { return 0; }
+ #include <common.h>
+ #include <command.h>
+ #include <efi_api.h>
+@@ -61,6 +63,10 @@ static const struct {
+ 	{"swap",	PARTITION_LINUX_SWAP_GUID},
+ 	{"lvm",		PARTITION_LINUX_LVM_GUID},
+ 	{"u-boot-env",	PARTITION_U_BOOT_ENVIRONMENT},
++	{"cros-kern",	PARTITION_CROS_KERNEL},
++	{"cros-root",	PARTITION_CROS_ROOT},
++	{"cros-fw",	PARTITION_CROS_FIRMWARE},
++	{"cros-rsrv",	PARTITION_CROS_RESERVED},
+ #endif
+ #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
+ 	{
+@@ -258,6 +264,7 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
+ 	uint64_t tmp64;
  
- static inline struct part_driver *part_driver_get_first(void)
- { return NULL; }
-+
-+static inline bool part_get_bootable(struct blk_desc *desc)
-+{ return false; }
-+
- #endif /* CONFIG_PARTITIONS */
- 
- #endif /* _PART_H */
+ 	if (!uuid_str_valid(uuid_str)) {
++		log_debug("not valid\n");
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
+ 			return 0;
 -- 
 2.42.0.rc1.204.g551eb34607-goog
 
