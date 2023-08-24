@@ -4,43 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AC30C27C40
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:05:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55A4C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 19:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC38886532;
-	Thu, 24 Aug 2023 21:05:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 21B80868D7;
+	Thu, 24 Aug 2023 21:07:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="osbN1Arv";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92FD786901; Thu, 24 Aug 2023 21:05:24 +0200 (CEST)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4AFF83F7B; Thu, 24 Aug 2023 21:07:53 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE1F383F7B
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:05:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E303868D7
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 21:07:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from 068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.93)
- (envelope-from <tharvey@gateworks.com>)
- id 1qZFdu-008JVo-Nl; Thu, 24 Aug 2023 19:05:18 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@denx.de>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Ying-Chun Liu <paul.liu@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Adam Ford <aford173@gmail.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2] arm: imx: imx8m: add optee configuration to ft_system_setup
-Date: Thu, 24 Aug 2023 12:05:17 -0700
-Message-Id: <20230824190517.981411-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-592972da9a6so1362557b3.2
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 12:07:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1692904069; x=1693508869;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DsHZJUYhixBFUW9IVU8Utf2oe57oSpdzKBh4XXPMXwY=;
+ b=osbN1Arv4Y7VUpwEVu94NPmLIu1/J4KOF+rnC6QhKBrajSGuBMKCpCATPK/sEHUXDE
+ KBAw6u7VHLNTCkX0pbkvogPY/6/MZHw4xxcpiVrzDd7zZ1ZaL+tcj56DZA3pZKEjR5sl
+ 1wx8LqeMp3OG/ve+wrI85V+e9N7AeyuQTTVG9L8fBJgh6oHRMkT2C8TgZQ6sLgOiV3SV
+ Y/j3fmUHK0jDVeO7pEJou63p64H9EHDwN5OcT9DbXt88o7V5uwMXA4Cv8FGnxAUYjdsh
+ /ZaQ9ofMqNfshnMzkpq4GGFdQ9zVwB3iEe7LqrUSK+gAjQks52W7zeC3awJrW5oDQQ/u
+ YK2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692904069; x=1693508869;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DsHZJUYhixBFUW9IVU8Utf2oe57oSpdzKBh4XXPMXwY=;
+ b=A6o/YMGgy5BcuOGsbC9ISIpsJJ0BPMR40jfoFNdpdRP7aOhZOttd0MFaA4XSSKLTb9
+ oKoSYV348uFzvD6Smp0YZJC+YBs311EQVa+Z2CrmqX1VTB4SFjmqvv8RMoiZ7C//r2ma
+ LaWNdm1Kj44Vbofg3UUGPBQyEaXJurtr6oWUWC9m/fe9gS03bwNtaG9vM1KCeYjjcLR+
+ VoxkpqhCRnrgFeLBBLhHYXnquZJOvQA/zaXGwFVHbrR/CdAc6/Vw3QkvclN64q5qWl+q
+ ZtRi4wHQBxFCdevMNGk0yPlq1IEmLSOB95RXaTPGT86aBpoy+9e6lT2FrnrQoutlIE6/
+ jqjw==
+X-Gm-Message-State: AOJu0YwmWfaUoj87v3/AHyZe+rD/4+SewOTt71b/dc+csvv5hpT54vrx
+ Jbvv+Hh/Bu2WiCFR2fbpN47jfLMWdUs=
+X-Google-Smtp-Source: AGHT+IFpKn3z66ok7pwG3t7X2nCCPlKy+QZDthVW8K7ZOETubQq9sXQTHs+v3K3aAV8/OXbdVOWK0w==
+X-Received: by 2002:a0d:f804:0:b0:577:3eaa:8d97 with SMTP id
+ i4-20020a0df804000000b005773eaa8d97mr17855440ywf.17.1692904069420; 
+ Thu, 24 Aug 2023 12:07:49 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ i129-20020a819187000000b0058c4e33b2d6sm49869ywg.90.2023.08.24.12.07.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 24 Aug 2023 12:07:49 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+	Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH] arm: kirkwood: Pogo v4: Enable LTO
+Date: Thu, 24 Aug 2023 12:07:12 -0700
+Message-Id: <20230824190713.30866-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -59,114 +91,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If optee is detected configure it in the Linux device-tree:
- - add /firmware/optee node
- - add /reserved-memory nodes for optee_core and optee_shm
+Enable building Pogo V4 u-boot image with LTO, which results in about 30K
+reduction in size.
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 ---
-v2: add rb tag for Peng
----
- arch/arm/mach-imx/imx8m/soc.c | 78 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 77 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-index d5254886bed9..5d92d9c982a4 100644
---- a/arch/arm/mach-imx/imx8m/soc.c
-+++ b/arch/arm/mach-imx/imx8m/soc.c
-@@ -1245,6 +1245,82 @@ static int fixup_thermal_trips(void *blob, const char *name)
- 	return 0;
- }
- 
-+#define OPTEE_SHM_SIZE 0x00400000
-+static int ft_add_optee_node(void *fdt, struct bd_info *bd)
-+{
-+	struct fdt_memory carveout;
-+	const char *path, *subpath;
-+	phys_addr_t optee_start;
-+	size_t optee_size;
-+	int offs;
-+	int ret;
-+
-+	/*
-+	 * No TEE space allocated indicating no TEE running, so no
-+	 * need to add optee node in dts
-+	 */
-+	if (!rom_pointer[1])
-+		return 0;
-+
-+	optee_start = (phys_addr_t)rom_pointer[0];
-+	optee_size = rom_pointer[1] - OPTEE_SHM_SIZE;
-+
-+	offs = fdt_increase_size(fdt, 512);
-+	if (offs) {
-+		printf("No Space for dtb\n");
-+		return 1;
-+	}
-+
-+	path = "/firmware";
-+	offs = fdt_path_offset(fdt, path);
-+	if (offs < 0) {
-+		path = "/";
-+		offs = fdt_path_offset(fdt, path);
-+
-+		if (offs < 0) {
-+			printf("Could not find root node.\n");
-+			return offs;
-+		}
-+
-+		subpath = "firmware";
-+		offs = fdt_add_subnode(fdt, offs, subpath);
-+		if (offs < 0) {
-+			printf("Could not create %s node.\n", subpath);
-+			return offs;
-+		}
-+	}
-+
-+	subpath = "optee";
-+	offs = fdt_add_subnode(fdt, offs, subpath);
-+	if (offs < 0) {
-+		printf("Could not create %s node.\n", subpath);
-+		return offs;
-+	}
-+
-+	fdt_setprop_string(fdt, offs, "compatible", "linaro,optee-tz");
-+	fdt_setprop_string(fdt, offs, "method", "smc");
-+
-+	carveout.start = optee_start,
-+	carveout.end = optee_start + optee_size - 1,
-+	ret = fdtdec_add_reserved_memory(fdt, "optee_core", &carveout, NULL, 0,
-+					 NULL, FDTDEC_RESERVED_MEMORY_NO_MAP);
-+	if (ret < 0) {
-+		printf("Could not create optee_core node.\n");
-+		return ret;
-+	}
-+
-+	carveout.start = optee_start + optee_size;
-+	carveout.end = optee_start + optee_size + OPTEE_SHM_SIZE - 1;
-+	ret = fdtdec_add_reserved_memory(fdt, "optee_shm", &carveout, NULL, 0,
-+					 NULL, FDTDEC_RESERVED_MEMORY_NO_MAP);
-+	if (ret < 0) {
-+		printf("Could not create optee_shm node.\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- int ft_system_setup(void *blob, struct bd_info *bd)
- {
- #ifdef CONFIG_IMX8MQ
-@@ -1394,7 +1470,7 @@ usb_modify_speed:
- 	    fixup_thermal_trips(blob, "soc-thermal"))
- 		printf("Failed to update soc-thermal trip(s)");
- 
--	return 0;
-+	return ft_add_optee_node(blob, bd);
- }
- #endif
- 
+ configs/pogo_v4_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
+index 3e3e811543..ad36da712b 100644
+--- a/configs/pogo_v4_defconfig
++++ b/configs/pogo_v4_defconfig
+@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
+ CONFIG_SYS_PROMPT="Pogo_V4> "
+ CONFIG_IDENT_STRING="\nPogoplug V4"
+ CONFIG_SYS_LOAD_ADDR=0x800000
++CONFIG_LTO=y
+ CONFIG_PCI=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
 -- 
-2.25.1
+2.39.2
 
