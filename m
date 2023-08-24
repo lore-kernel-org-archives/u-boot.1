@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A91FEC6FA8F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:41:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 643A5C7EE43
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 14:41:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D74C88653D;
-	Thu, 24 Aug 2023 16:41:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A6EF865AF;
+	Thu, 24 Aug 2023 16:41:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YDjDtIHm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g+EFOOV+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 621208664A; Thu, 24 Aug 2023 16:41:36 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 133A68522C; Thu, 24 Aug 2023 16:41:39 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AD5F86414
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:41:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E240486604
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 16:41:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-99c93638322so205587166b.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:41:33 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-523b066d7ceso8592627a12.2
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 07:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692888093; x=1693492893;
+ d=chromium.org; s=google; t=1692888094; x=1693492894;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bAArZxilMdafYN0YYrcuIx+9R9cfa4JM+gLl2a5oPxI=;
- b=YDjDtIHmi4IGsrIFuYwwGfY8DweNuh9UPeUrn8gp8UyiODJiTnlUIkXj/E4N9Mjqgo
- /iPqtHceyICMJ2SxTif7u1x8Hkilfq3GaLwMIVbRin+j1/ShNFdbZ2xYsRKhtlbWvw3E
- 5NSLvElCO0h7XqwAoA9WxEfvH0qfYx2FQyfVc=
+ bh=QmASuGLsFXPZGYQTVN/ZvkeattiPcp0s5R3XOCfrqCw=;
+ b=g+EFOOV+7qlp6m3fXwRhIVnb9i9mxFBED7C7aZm+YF8q33ft1NnDsR3EGITlLw4Wu5
+ Ny04lgxY8V5lx2Y+yT8jFr610gAtgQWfa5c+uLmkMcIkoSd6WV5mLAVXdz8uZmM/KOWH
+ xBPweCzpVtCaNVuUHjS5UjSYbkR9qGso1ba9c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692888093; x=1693492893;
+ d=1e100.net; s=20221208; t=1692888094; x=1693492894;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bAArZxilMdafYN0YYrcuIx+9R9cfa4JM+gLl2a5oPxI=;
- b=Ew4oe/hggRb3k0gzH5faYjVtAOJ7FJjOeYSCtVFbJJXRPrsm0fPBJSD8XrgYcUg8Xh
- A+JSUFZMeetdeGoFnWMJR2yj8BaMOApLuDbeCYUt0xgNLxFFI+WaHHTSh88FBoaGwxkJ
- Cy9jyCXDkwB/yLJoLzHYAQCPy+O80h5+2Lj4+oWFpn7wUz/VoQnBCblwhL2HrH4sVpay
- PWXO5OU60OeP+zzSZ7y9T7Xn65DPfY8aG5hO5Ela2Yj4pRiuum69UcgEAPVS5TlGy+t/
- 3yFpNf0dC7H5dBvzcy7CNUx99RcNI9ylEiC2x7/wuZOmWEuY2RZWiOAk98AXGy64lDYc
- A2zg==
-X-Gm-Message-State: AOJu0YzU4jfu3nchjn+iOJDQtYYhj1QHMt8+WRnuQJwsvGCRjzZFASvu
- 43dY7AJFgbK2ZB6/6O9KafgVMCEC0gW7pOV1p61YFQ==
-X-Google-Smtp-Source: AGHT+IGuUVu8B6RMBQO5SAHlZSO+rI3Prp0pji/F3INchAoUk+f8v7CkO3gSwAnfLQgjQIcdm0T3/N0dTswy0036m6E=
-X-Received: by 2002:a17:907:da1:b0:9a2:248f:aac with SMTP id
- go33-20020a1709070da100b009a2248f0aacmr1059631ejc.16.1692888092555; Thu, 24
- Aug 2023 07:41:32 -0700 (PDT)
+ bh=QmASuGLsFXPZGYQTVN/ZvkeattiPcp0s5R3XOCfrqCw=;
+ b=b3Ou3Jcx1OJMSz8Ny7UKPY7rlFXb+q24CYRhJVFnDJXwgN329geUHGtS7gYbVejyU8
+ GxIGlTgj2ddFG3a4+g3sCWYmxi+jNLP8fSMvx/NGSU6MlqnbQDcJESefuSCimR4WIMcG
+ o78y4lwNW+iKkbCTqA9SUwnOaig4ry4NmJ4OU6Cr+8cJasITqO9GCTcsAf6ljkmek/JR
+ jVuxQZe+bZSBJTsQQhS8MT4yLo+tL4xE5yolkCoKfAMOx19m+YGdHYivOLqxQB4UhmgN
+ W0jUvCNQiFKi/K5/FyoV/S/XsL9mfwlngY2ZH9sbhj4OgE79E3pE9MZS/DfF2qeKIh43
+ Y9gA==
+X-Gm-Message-State: AOJu0YyCxi24CWIOfJa/VtamiC0I2htE78fKaKt5UCTsAV61dnIEQ2oU
+ ADZ0aAlUMcvSz56pDXdZ1/loWEOmcyWV7PrqBVAZcA==
+X-Google-Smtp-Source: AGHT+IGKO7oElkao32t6ejJDI9IY552stF77URpGFQm6fkzYN8+qdr3VKQZDOsZqFRPSsY8QRPd3zPAoFlGaEZdeiVE=
+X-Received: by 2002:aa7:c648:0:b0:525:7e46:940 with SMTP id
+ z8-20020aa7c648000000b005257e460940mr13477843edr.24.1692888094318; Thu, 24
+ Aug 2023 07:41:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230824030304.1555547-1-sjg@chromium.org>
- <66f15744-0b0b-743f-8ad3-8448d78812f6@ti.com>
-In-Reply-To: <66f15744-0b0b-743f-8ad3-8448d78812f6@ti.com>
+ <20230824133814.GH3953269@bill-the-cat>
+In-Reply-To: <20230824133814.GH3953269@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 24 Aug 2023 08:41:19 -0600
-Message-ID: <CAPnjgZ3MFkrR6qNTqgF1AMHun0DrMK2RfZ_6X824eczBXyEyNA@mail.gmail.com>
+Date: Thu, 24 Aug 2023 08:41:21 -0600
+Message-ID: <CAPnjgZ1oY9SRWNj9RUe2L8=1ndE2LfxkmqqEj-MNtxL_ff-QyQ@mail.gmail.com>
 Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
  output
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Dillon Min <dillon.minfei@gmail.com>, 
- Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
- Michael Walle <michael@walle.cc>, 
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Dillon Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kamil Lulko <kamil.lulko@gmail.com>,
+ Marek Vasut <marex@denx.de>, 
+ Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>, 
  Patrice Chotard <patrice.chotard@foss.st.com>, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
  Philippe Reynes <philippe.reynes@softathome.com>, 
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
  Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com, Nishanth Menon <nm@ti.com>, 
- "Raghavendra, Vignesh" <vigneshr@ti.com>
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,20 +93,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+Hi Tom,
 
-On Thu, 24 Aug 2023 at 06:26, Neha Malcom Francis <n-francis@ti.com> wrote:
+On Thu, 24 Aug 2023 at 07:38, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon
+> On Wed, Aug 23, 2023 at 09:02:53PM -0600, Simon Glass wrote:
 >
-> + Vignesh, Nishanth to comment on this as well
->
-> On 24/08/23 08:32, Simon Glass wrote:
 > > In this early stage of using binman to produce output files, we are mostly
 > > seeing people using common extensions such as '.bin' and '.rom'
->
-> [...]
->
+> >
+> > But unusual extensions appear in some places.
+> >
+> > We would like 'buildman -k' to keep the build outputs, but this is hard if
+> > there is no consistency as to the extension used.
+> >
+> > This series adjusts binman to enforce just 4 extensions for output images:
+> >
+> >    .bin
+> >    .rom
+> >    .itb
+> >    .img
+> >
+> > Other extensions will produce an error. With this rule observed, buildman
+> > can keep the required files.
+> >
+> > Some patches are included to fix up some easy problems. But the following
+> > boards generate 'custMpk.pem' and it is not clear how to fix this, so I am
+> > asking for help from the maintainers:
+> >
+> >    am62ax_evm_r5 am62x_evm_r5 am64x_evm_r5 am65x_evm_r5
+> >    am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc am65x_hs_evm_r5
+> >    j7200_evm_r5 j721e_evm_r5 j721s2_evm_r5 verdin-am62_r5
+> >    am62ax_evm_a53 am62x_evm_a53 am64x_evm_a53 am65x_evm_a53
+> >    am65x_hs_evm_a53 j7200_evm_a72 j721e_evm_a72 j721s2_evm_a72
+> >    verdin-am62_a53
+> >
+> > It looks like the .pem files are listed as top-level images, e.g.:
+> >
+> >    &custmpk_pem {
+> >       filename = "../../ti/keys/custMpk.pem";
+> >    };
+> >
+> > but if the only objective is to pick up an existing file, it is better to
+> > set BINMAN_INDIRS to include that directory. Also we should only have
+> > simple leafnames in the 'filename' property, so the '../../ti/keys' is not
+> > correct. It makes it harder for people to get the files from other places.
+> > Making this easier is one of binman's goals.
+> >
+> > Most likely the custmpk_pem node can be removed and the .pem file can be
+> > included directly in the place that needs it, e.g. by adjusting the
+> > ti-secure-rom etype (or ex509_cert) to use tools.get_input_filename() when
+> > reading the key file.
+> >
+> > For example, this:
+> >
+> >    custMpk {
+> >       filename = "custMpk.pem";
+> >       custmpk_pem: blob-ext {
+> >          filename = "../keys/custMpk.pem";
+> >       };
+> >    };
+> >
+> > is really just copying a file from '../keys/custMpk.pem' to 'custMpk.pem'
+> > so is equivalent to:
+> >
+> >    custMpk {
+> >       type = "blob";
+> >       filename = "custMpk.pem";
+> >    }
+> >
+> > (note that blob-ext implies that the blob may be missing, so blob is a
+> > better choice, since the key cannot be missing)
+> >
 > > The fact that the .pem files are at the top level means that they are
 > > output images, which surely is not intended. They should be buried in the
 > > image description, at a lower level, as part of something else.
@@ -115,30 +172,38 @@ On Thu, 24 Aug 2023 at 06:26, Neha Malcom Francis <n-francis@ti.com> wrote:
 > > So please take a loke at the above and see if the binman descriptions can
 > > be reworked slightly to follow these new rules.
 > >
+> >
+> > Simon Glass (6):
+> >   binman: Require image filenames to have certain extensions
+> >   buildman: Keep all permitted output files
+> >   buildman: Show progress when regenerating the board.cfg file
+> >   buildman: Start the clock when the build starts
+> >   kontron_sl28: Use u-boot-update.bin instead of u-boot.update
+> >   stm32mp15: Use u-boot-spl-stm32.bin instead of u-boot-spl.stm32
+> >
+> >  .../dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi   |  2 +-
+> >  arch/arm/dts/stm32mp15-u-boot.dtsi             |  2 +-
+> >  doc/board/kontron/sl28.rst                     |  4 ++--
+> >  doc/board/st/stm32mp1.rst                      | 18 +++++++++---------
+> >  include/configs/stm32mp15_dh_dhsom.h           |  2 +-
+> >  tools/binman/binman.rst                        |  5 +++++
+> >  tools/binman/etype/section.py                  |  3 +--
+> >  tools/binman/ftest.py                          | 12 ++++++++++--
+> >  tools/binman/image.py                          |  9 +++++++++
+> >  tools/binman/test/022_image_name.dts           |  4 ++--
+> >  tools/binman/test/311_bad_image_name.dts       | 17 +++++++++++++++++
+> >  tools/buildman/boards.py                       | 15 ++++++++++++---
+> >  tools/buildman/builder.py                      |  3 ++-
+> >  tools/buildman/builderthread.py                | 11 +++++++----
+> >  tools/buildman/control.py                      |  3 ++-
+> >  15 files changed, 81 insertions(+), 29 deletions(-)
+> >  create mode 100644 tools/binman/test/311_bad_image_name.dts
 >
-> I think this can work... but few concerns.
->
-> 1. Our output binaries also include <image>.bin_unsigned, would extensions that
-> aren't "standard" be added to the list if they are truly output binaries? If
-> not, changing names for them may be a long stretch (pinging Vignesh and Nishanth
-> to comment here).
+> This doesn't seem to address the ones I pointed out on IRC as being the
+> first order (to me anyhow) problem of needing the _unsigned files on the
+> platforms you list above for PEM files.
 
-How about changing them to image-unsigned.bin ? That is a convention I
-am trying to follow...so we have the file type last.
-
->
-> 2. Can it be an option to not enforce this, to support users that may make use
-> of the intermediate binaries?
-
-This does not apply to sections within an image, which can still
-produce files. But those files won't be preserved by buildman unless
-they have a supported extension.
-
->
-> Also if we do move forward with this, we will need to sync to make sure that the
-> changes to the affected boards come through as well.
-
-Yes.
+I think it should be xxx-unsigned.bin instead of xxx.bin_unsigned
 
 Regards,
 Simon
