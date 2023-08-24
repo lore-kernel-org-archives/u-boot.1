@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22207C3DA6F
-	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 21:58:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 424E1C6FA8F
+	for <u-boot@archiver.kernel.org>; Thu, 24 Aug 2023 22:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ED3686926;
-	Thu, 24 Aug 2023 23:58:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A12486986;
+	Fri, 25 Aug 2023 00:40:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CL8Ro5/n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GIF2Wimu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8DA386977; Thu, 24 Aug 2023 23:58:31 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 87C40869B7; Fri, 25 Aug 2023 00:40:49 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21B94865FB
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 23:58:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B0F686961
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 00:40:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-d77f869dccfso313251276.3
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 14:58:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1cc61f514baso222709fac.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 15:40:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692914308; x=1693519108;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DD7J6PEne+EPp0f410wSo8Ac9sd+io0a+hYK6tAFOVY=;
- b=CL8Ro5/nCtQrqHGc4nCIzxAAzgBtGHkoTftgdjQGUTvJW/gJaEBBBIam8OWTKj1suH
- 5AWuiu73p9x4eMnR2LuDY98H2jOBQ5excpKAC+ZzEhiJh63svH0q94OkNnu8cer2qLJV
- cRCoxT7u+9aw19TmLdzbzCdu7VkrpibPLklog=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692914308; x=1693519108;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20221208; t=1692916845; x=1693521645;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DD7J6PEne+EPp0f410wSo8Ac9sd+io0a+hYK6tAFOVY=;
- b=FuFu4quQ2lUeZiVbwx3h17KYviJE/TANCjnvLUMo08xY7d86fwus/qZQNHo1HgNDoV
- Oyxo0wVrki4WkIdMPmBSQTEfGZAGSJDEmku1nBVdTEY91r+4CDPvfZrJ+XpCL/iwFvNv
- TMTkdCyz0LK7K4G1nj/Ay0mqRIdy2tSJuAGPeyHhd/433D6fIq0Bd2k4vLzxUlIHOHzH
- zmcBBjO/XVoPLaEDZHrARvc6KG49lXXQPnuyuGIjktvNc+hJo+v7U75UKILEbPQfkYAV
- IBwN7SMcrr52B1q8mH0H//lMZj32mntCvUhlklRW5boTsSymw5YPbuTN2gHyp+/CL8qG
- l1rg==
-X-Gm-Message-State: AOJu0YzeU0LQltt2gXobzTse3ySnalVU0FakCYyuS2BDZEf/ywkyooEm
- Gb711JHMrNI8BXkn8UKwZLlsvw==
-X-Google-Smtp-Source: AGHT+IHiK90oaRw82ULlNyegE+Lwii5SEELGPBt2IkWTtn3Km/km2EaFIuugaao23FRU1VtJvxFpTQ==
-X-Received: by 2002:a25:bf90:0:b0:d78:23ee:8a4f with SMTP id
- l16-20020a25bf90000000b00d7823ee8a4fmr1500014ybk.34.1692914307823; 
- Thu, 24 Aug 2023 14:58:27 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
- [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
- by smtp.gmail.com with ESMTPSA id
- v3-20020a25fc03000000b00d728a2738f1sm77720ybd.61.2023.08.24.14.58.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 14:58:27 -0700 (PDT)
-Date: Thu, 24 Aug 2023 17:58:25 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Jan Kiszka <jan.kiszka@web.de>
-Cc: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>,
- Simon Glass <sjg@google.com>, Bryan <bb@ti.com>,
- Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH] board: ti: am62x: beagleplay: Disable semi-functional
- PSCI reset support
-Message-ID: <20230824215825.GF3953269@bill-the-cat>
-References: <20230824031101.3460411-1-nm@ti.com>
- <20230824031101.3460411-17-nm@ti.com>
- <c93b19ed-43fe-44a2-9726-371fb9d2f825@web.de>
+ bh=gvm7mUBrp7GT+qLLfySoMCAGtBP9KBmAuRC1rzUv7R0=;
+ b=GIF2WimuGp2+OKJEzdYQIFmwNms2edCKZZBkH0dyGREuQmv7+jEyupB/WkP/T94p6o
+ G4h/7/pyOjZxLgjLa+QPTCOHXEAEc9Nu7JI4k9edNWKRzBjqdWO6/Jdj5cARwAkJ5KdC
+ dTW1yPFXTX7299tO0Zj7Qx8gDsbYd499ePSJVQ8I+9l80sM3mNchcFxgB+wK6rUn6uXr
+ 5NTwZgUiXkKJZy0nKgtwrFYraTIXwk+x88rFT1KBjlfaOtuCKqbmB9XH913oQZrcqcd4
+ 17sPZEZK5wNPEapQ3D7AKyIe5LELaK2rUpP2rZgdE9iHtScUdqODblmaA3s5ObgnKsaW
+ xheA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692916845; x=1693521645;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gvm7mUBrp7GT+qLLfySoMCAGtBP9KBmAuRC1rzUv7R0=;
+ b=l7YDJfSysKFCEM6GWXyB6AsXloBGD17oOfqMzrvM2OL3ZLwlI8xU2fGyvwVoPLaSiP
+ jVsIyvTH/smW1ucDdoAeQkWkD49lzaWDJoimUrAe5v6FduddgYW1FAWJ81cHRzSyFL9Y
+ Jvqhw1zWV+KcKynrFzSupUI3aH+fElKPP/wCJPdeyCvF8OySi2680fmufT4Q0Akay5z3
+ 13+UTrjCDpVJO5lFqWvobYurRLbqvxbWSErE50pTpnFaGu0wbO+l1QDjinW1aYG+tl+7
+ nc3G4twa/yo2WnyYAahKBU/OyYxd4onQZpJw1uukc0Z3gcA61P6u7S1r0doK4s9bUrU8
+ ik6A==
+X-Gm-Message-State: AOJu0YyNhZp4dncJmLv0jeg7TyWk8z8m5Kw/6A3T7mr4eLPlXWrmQwzd
+ rigLNARobEXvxS049aHFf4+8Lrs793zPQPg7ZQc=
+X-Google-Smtp-Source: AGHT+IFzC5cl9a8kj+4SB9+ayELNuRzYCxgsS8P9kqiXsyMCBhRb06pVI9xfVBBDF6a2/KXzfzoNp5452IGd23VCeN0=
+X-Received: by 2002:a05:6870:f153:b0:1bb:eb37:1d69 with SMTP id
+ l19-20020a056870f15300b001bbeb371d69mr1262761oac.14.1692916845033; Thu, 24
+ Aug 2023 15:40:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="j5oxwbn85g/To6w5"
-Content-Disposition: inline
-In-Reply-To: <c93b19ed-43fe-44a2-9726-371fb9d2f825@web.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230824023052.655362-1-Mr.Bossman075@gmail.com>
+ <CAPnjgZ1NFEVDcu-qOhTrjNpTspJ5OcCUZrDJJkru0mY-McPhzw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1NFEVDcu-qOhTrjNpTspJ5OcCUZrDJJkru0mY-McPhzw@mail.gmail.com>
+From: Jesse T <mr.bossman075@gmail.com>
+Date: Thu, 24 Aug 2023 18:40:09 -0400
+Message-ID: <CAJFTR8S6Poz=CSK-Cb_k2ZVTH8bfQFFNeyH56d4CCeq80Shqtw@mail.gmail.com>
+Subject: Re: [PATCH] Convert CFG_SYS_UBOOT_START to Kconfig
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, "Andrew F . Davis" <afd@ti.com>, 
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefan Roese <sr@denx.de>, Weijie Gao <weijie.gao@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Mingming lee <mingming.lee@mediatek.com>, Mauro Condarelli <mc5686@mclink.it>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marex@denx.de>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Roger Quadros <rogerq@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,60 +103,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Aug 24, 2023 at 4:01=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Jesse,
+>
+> On Wed, 23 Aug 2023 at 20:30, Jesse Taube <mr.bossman075@gmail.com> wrote=
+:
+> >
+> > Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*"=
+)
+> > renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
+> > this meant that the value was no longer available to the Makefile. This
+> > caused imxrt to fail to boot. All the other boards that used this
+> > variable were unaffected because they were using the default value
+> > which is CONFIG_TEXT_BASE.
+> >
+> > This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the defaul=
+t
+> > value to CONFIG_TEXT_BASE.
+> >
+> > Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
+> > Suggested-by: Tom Rini <trini@konsulko.com>
+> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> > ---
+> >  Makefile                                       | 16 ++++------------
+> >  arch/arm/mach-k3/config_secure.mk              |  2 +-
+> >  arch/arm/mach-omap2/config_secure.mk           |  2 +-
+> >  boot/Kconfig                                   | 16 ++++++++++++++++
+> >  common/spl/spl.c                               |  6 +-----
+> >  common/spl/spl_fit.c                           |  2 +-
+> >  configs/imxrt1020-evk_defconfig                |  2 ++
+> >  configs/imxrt1050-evk_defconfig                |  2 ++
+> >  configs/imxrt1170-evk_defconfig                |  2 ++
+> >  include/configs/gardena-smart-gateway-mt7688.h |  4 ----
+> >  include/configs/imxrt1020-evk.h                |  6 ------
+> >  include/configs/imxrt1050-evk.h                |  6 ------
+> >  include/configs/imxrt1170-evk.h                |  3 ---
+> >  include/configs/linkit-smart-7688.h            |  4 ----
+> >  include/configs/mt7620.h                       |  3 ---
+> >  include/configs/mt7628.h                       |  3 ---
+> >  include/configs/mt8512.h                       |  2 --
+> >  include/configs/vocore2.h                      |  4 ----
+> >  include/spl.h                                  |  2 +-
+> >  19 files changed, 31 insertions(+), 56 deletions(-)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index 9b90204bfe..13d4c63439 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -1364,14 +1364,6 @@ OBJCOPYFLAGS_u-boot.ldr.srec :=3D -I binary -O s=
+rec
+> >  u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
+> >         $(call if_changed,objcopy)
+> >
+> > -#
+> > -# U-Boot entry point, needed for booting of full-blown U-Boot
+> > -# from the SPL U-Boot version.
+> > -#
+> > -ifndef CFG_SYS_UBOOT_START
+> > -CFG_SYS_UBOOT_START :=3D $(CONFIG_TEXT_BASE)
+> > -endif
+> > -
+> >  # Boards with more complex image requirements can provide an .its sour=
+ce file
+> >  # or a generator script
+> >  # NOTE: Please do not use this. We are migrating away from Makefile ru=
+les to use
+> > @@ -1391,7 +1383,7 @@ endif
+> >
+> >  ifdef CONFIG_SPL_LOAD_FIT
+> >  MKIMAGEFLAGS_u-boot.img =3D -f auto -A $(ARCH) -T firmware -C none -O =
+u-boot \
+> > -       -a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
+> > +       -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> >         -p $(CONFIG_FIT_EXTERNAL_OFFSET) \
+> >         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+> >         $(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(DEVICE_TREE=
+))) \
+> > @@ -1399,10 +1391,10 @@ MKIMAGEFLAGS_u-boot.img =3D -f auto -A $(ARCH) =
+-T firmware -C none -O u-boot \
+> >         $(patsubst %,-b arch/$(ARCH)/dts/%.dtbo,$(subst ",,$(CONFIG_OF_=
+OVERLAY_LIST)))
+> >  else
+> >  MKIMAGEFLAGS_u-boot.img =3D -A $(ARCH) -T firmware -C none -O u-boot \
+> > -       -a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
+> > +       -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> >         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+> >  MKIMAGEFLAGS_u-boot-ivt.img =3D -A $(ARCH) -T firmware_ivt -C none -O =
+u-boot \
+> > -       -a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
+> > +       -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> >         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+> >  u-boot-ivt.img: MKIMAGEOUTPUT =3D u-boot-ivt.img.log
+> >  endif
+> > @@ -1433,7 +1425,7 @@ MKIMAGEFLAGS_u-boot.pbl =3D -n $(srctree)/$(CONFI=
+G_SYS_FSL_PBL_RCW:"%"=3D%) \
+> >  UBOOT_BIN :=3D u-boot.bin
+> >
+> >  MKIMAGEFLAGS_u-boot-lzma.img =3D -A $(ARCH) -T standalone -C lzma -O u=
+-boot \
+> > -       -a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
+> > +       -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> >         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+> >
+> >  u-boot.bin.lzma: u-boot.bin FORCE
+> > diff --git a/arch/arm/mach-k3/config_secure.mk b/arch/arm/mach-k3/confi=
+g_secure.mk
+> > index 7bc8af813a..9cc1f9eb24 100644
+> > --- a/arch/arm/mach-k3/config_secure.mk
+> > +++ b/arch/arm/mach-k3/config_secure.mk
+> > @@ -30,7 +30,7 @@ tispl.bin_HS: $(obj)/u-boot-spl-nodtb.bin_HS $(patsub=
+st %,$(obj)/dts/%.dtb_HS,$(
+> >         $(call if_changed,mkfitimage)
+> >
+> >  MKIMAGEFLAGS_u-boot.img_HS =3D -f auto -A $(ARCH) -T firmware -C none =
+-O u-boot \
+> > -       -a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
+> > +       -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> >         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+> >         $(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_O=
+F_LIST)))
+> >
+> > diff --git a/arch/arm/mach-omap2/config_secure.mk b/arch/arm/mach-omap2=
+/config_secure.mk
+> > index 24ddcdb961..f76262bb0c 100644
+> > --- a/arch/arm/mach-omap2/config_secure.mk
+> > +++ b/arch/arm/mach-omap2/config_secure.mk
+> > @@ -102,7 +102,7 @@ u-boot_HS_XIP_X-LOADER: $(obj)/u-boot.bin FORCE
+> >  ifdef CONFIG_SPL_LOAD_FIT
+> >
+> >  MKIMAGEFLAGS_u-boot_HS.img =3D -f auto -A $(ARCH) -T firmware -C none =
+-O u-boot \
+> > -       -a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
+> > +       -a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> >         -n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+> >         $(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_O=
+F_LIST)))
+> >
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index 5e2d4286ae..f2f7821cc1 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -737,6 +737,22 @@ config TEXT_BASE
+> >         default 0x4a000000 if SUNXI_MINIMUM_DRAM_MB >=3D 256
+> >         default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >=3D 64
+> >         hex "Text Base"
+> > +       help
+> > +         The address in memory that U-Boot will be copied from, initia=
+lly.
+> > +
+> > +config HAVE_SYS_UBOOT_START
+> > +       bool
+> > +       depends on HAVE_TEXT_BASE
+> > +       prompt "Use custom U-Boot Start"
+> > +       help
+> > +         By default, the address in memory that U-Boot will be copied =
+from(TEXT_BASE) and the
+> > +         entry point are the same. Select this to set a different U-Bo=
+ot start address.
+>
+> space after 'from'
+>
+> Also this is a little unclear. START means the start address that
+> U-Boot will run from. If it is different from TEXT_BASE, then
+> something loads it here
+>
+> This could do with a bit more detail.
 
---j5oxwbn85g/To6w5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes, it is and why I edited the TEXT_BASE help prompt.
+I'm not sure how to word that this is where the SPL will start
+execution after the jump.
+TEXT_BASE is where the spl will copy the binary to.
 
-On Thu, Aug 24, 2023 at 11:53:17PM +0200, Jan Kiszka wrote:
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->=20
-> At this point, system shutdown is not supported by the DM firmware that
-> TF-A calls. As we can't de-select only this feature, declare complete
-> PSCI reset support as non-functional so that we don't signal incomplete
-> support to the OS via EFI runtime services. This makes power-off under
-> Linux work again when booting via EFI.
->=20
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
->  board/ti/am62x/beagleplay_a53.config | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/board/ti/am62x/beagleplay_a53.config b/board/ti/am62x/beagle=
-play_a53.config
-> index 967f794446d..8b0f671bc9e 100644
-> --- a/board/ti/am62x/beagleplay_a53.config
-> +++ b/board/ti/am62x/beagleplay_a53.config
-> @@ -53,3 +53,5 @@ CONFIG_SPI=3Dn
->  CONFIG_SPI_FLASH=3Dn
->  CONFIG_SPL_DM_SPI_FLASH=3Dn
->  CONFIG_SPL_SPI_FLASH_SUPPORT=3Dn
-> +# DM firmware lacks support for shutdown
-> +# CONFIG_PSCI_RESET is not set
+>
+> > +
+> > +config SYS_UBOOT_START
+> > +       hex
+> > +       depends on HAVE_TEXT_BASE
+> > +       default TEXT_BASE
+> > +       prompt "U-Boot entry" if HAVE_SYS_UBOOT_START
+> Tom:
+> This is clever, and can be kept.  I didn't catch at first that this will
+> do what I was hoping of setting a default, but then allowing for it to
+> be changed.
 
-Is this lack of feature for just the beagleplay part of the firmware
-stack or more generically to the TI am62x platforms?
+Was there another way of doing this? I looked at the docs for a while
+to figure this out.
 
---=20
-Tom
+Thanks,
+Jesse Taube
 
---j5oxwbn85g/To6w5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTn0n0ACgkQFHw5/5Y0
-tywHrAv+MAYg4drAAE3yAwK7UayarLVcO7bJPXHqQTxYLukZyOWYdmFL6Bu6RbeP
-jxZUtq8ttCN3HpwWTGOxQRyeMuPCoG0041vPBjWQlhZj4e9FwUM1ecwW5NW+FN4f
-5lLTg3ynbKl0fKelaMibIaaDU4biL5umjKhuKNygtQWuAnDjSa89sIhuDd1yGb9r
-0NrXVVCdv7FIi/EIo73ZiQ6Yk0LOs3G/SH5DklKuG6+iwyyHABMmnUkQWkL75NPF
-TRpugaLZOzv/TPQMZrFcxOU9kTaTVJ5tTPupIfbuUnAJSy+REGBE1abaUGDNS6+z
-Rh5NT4lXt+oBaGLOvYiqCSBmpDpSiAvynexmqqa/Af/NYZF6+DVhnj62H36htm+7
-RssvgNUfgHdIyGipgmvRzVnDld5pNzgoBX3CU5x9aU0xbu7WzJTQQZL9SRtfjDgW
-Wm29q/SmyozE1uoM9foNOE5o7yqUGKGcb/Q+AQy9FSukmVp5tmXJGYAycDTW03cd
-xpt3G0Gu
-=81qH
------END PGP SIGNATURE-----
-
---j5oxwbn85g/To6w5--
+> >         help
+> >           The address in memory that U-Boot will be running from, initi=
+ally.
+> >
+>
+> Regards,
+> Simon
