@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7708AC727A1
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 01:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C4FC3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 01:22:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A4FC86492;
-	Fri, 25 Aug 2023 03:16:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C7E686492;
+	Fri, 25 Aug 2023 03:22:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fOQcHt+l";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RV4mBqb9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3EB686492; Fri, 25 Aug 2023 03:16:34 +0200 (CEST)
+ id 00A4286993; Fri, 25 Aug 2023 03:22:37 +0200 (CEST)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B10886429
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 03:16:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B60D58643B
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 03:22:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37P1GNk8107277;
- Thu, 24 Aug 2023 20:16:23 -0500
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37P1MP8u108769;
+ Thu, 24 Aug 2023 20:22:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692926183;
- bh=fE5gpsp7t6sUn3QmPezntLbu/oLA8XK2iWcYQy4WAbU=;
+ s=ti-com-17Q1; t=1692926545;
+ bh=Kegq+fl2AjgJtmTRIAVRNZU7KFtAJ27etjWRTQgyE9E=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=fOQcHt+l1cDKd3ieTXOC0jNu/rMyGDXsnoEy/rHkZxLlvzet6TuaUm4EzhoH69xmZ
- I75WYtlmCBWTJCEU4+VGqSUoXcK+6VHRBqyQuYNxXY3DX9MM6AOQ9MsF2V6NCO4LqU
- 5PRo0pH5sBs07/3oTpOC/jqqL6U45kSSUWl+HeVo=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37P1GNxx018757
+ b=RV4mBqb9a+d6UYweG0QQnXBdSFYYlvGlMVWSq4sFG0IlnThemrRz5ldIMuejLe2UO
+ F+nFDjPDG1oTb5OHwUDcNsU+NAuSB8i3UAo008ExcxqlsbhT4bRTWtwW5lI32JX44S
+ 4aJ9Cl98gwrUIPZimOfklr+Lu47ZREoq4HuVGVfU=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37P1MPlm022139
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 24 Aug 2023 20:16:23 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 24 Aug 2023 20:22:25 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 24
- Aug 2023 20:16:23 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2023 20:22:25 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 24 Aug 2023 20:16:23 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37P1GNn2004654;
- Thu, 24 Aug 2023 20:16:23 -0500
-Date: Thu, 24 Aug 2023 20:16:23 -0500
+ Frontend Transport; Thu, 24 Aug 2023 20:22:24 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37P1MOTx045730;
+ Thu, 24 Aug 2023 20:22:24 -0500
+Date: Thu, 24 Aug 2023 20:22:24 -0500
 From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Jan Kiszka <jan.kiszka@web.de>, Neha Francis <n-francis@ti.com>, Simon
- Glass <sjg@google.com>, Bryan <bb@ti.com>,
- Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH] board: ti: am62x: beagleplay: Disable semi-functional
- PSCI reset support
-Message-ID: <20230825011623.c74qqidp6wgvc5kl@plaza>
-References: <20230824031101.3460411-1-nm@ti.com>
- <20230824031101.3460411-17-nm@ti.com>
- <c93b19ed-43fe-44a2-9726-371fb9d2f825@web.de>
- <20230824215825.GF3953269@bill-the-cat>
+To: Simon Glass <sjg@google.com>
+CC: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Bryan
+ <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Heinrich Schuchardt
+ <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
+Message-ID: <20230825012224.ydk4332yb4qodrdb@unfazed>
+References: <20230822184135.2328409-1-nm@ti.com>
+ <20230822184135.2328409-9-nm@ti.com>
+ <CAPnjgZ2vDyWcpsK8rXFkCZ1EpsFsDta6vN5_dkhrrmU_vfoVUQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230824215825.GF3953269@bill-the-cat>
+In-Reply-To: <CAPnjgZ2vDyWcpsK8rXFkCZ1EpsFsDta6vN5_dkhrrmU_vfoVUQ@mail.gmail.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,64 +84,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17:58-20230824, Tom Rini wrote:
-> On Thu, Aug 24, 2023 at 11:53:17PM +0200, Jan Kiszka wrote:
-> > From: Jan Kiszka <jan.kiszka@siemens.com>
-> > 
-> > At this point, system shutdown is not supported by the DM firmware that
-> > TF-A calls. As we can't de-select only this feature, declare complete
-> > PSCI reset support as non-functional so that we don't signal incomplete
-> > support to the OS via EFI runtime services. This makes power-off under
-> > Linux work again when booting via EFI.
-> > 
-> > Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> > ---
-> >  board/ti/am62x/beagleplay_a53.config | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/board/ti/am62x/beagleplay_a53.config b/board/ti/am62x/beagleplay_a53.config
-> > index 967f794446d..8b0f671bc9e 100644
-> > --- a/board/ti/am62x/beagleplay_a53.config
-> > +++ b/board/ti/am62x/beagleplay_a53.config
-> > @@ -53,3 +53,5 @@ CONFIG_SPI=n
-> >  CONFIG_SPI_FLASH=n
-> >  CONFIG_SPL_DM_SPI_FLASH=n
-> >  CONFIG_SPL_SPI_FLASH_SUPPORT=n
-> > +# DM firmware lacks support for shutdown
-> > +# CONFIG_PSCI_RESET is not set
+On 19:04-20230824, Simon Glass wrote:
+> Hi Nishanth,
 > 
-> Is this lack of feature for just the beagleplay part of the firmware
-> stack or more generically to the TI am62x platforms?
+> On Tue, 22 Aug 2023 at 12:43, Nishanth Menon <nm@ti.com> wrote:
+> >
+> > Add base documentation for BeaglePlay
+> >
+> > Signed-off-by: Nishanth Menon <nm@ti.com>
+> > ---
+> > Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >
+> > Changes Since V3:
+> > * Updated documentation to give a more clear overview of MMC partitions
+> >   and flashing information.
+> > * Added OpenOCD debug documentation
+> > * Added LED status information and indication of various boot stages
+> >
+> > V3: https://lore.kernel.org/all/20230815164440.2713726-5-nm@ti.com/
+> > V2: https://lore.kernel.org/u-boot/20230727234446.3651836-5-nm@ti.com/
+> > V1: https://lore.kernel.org/all/20230725185253.2123433-7-nm@ti.com/
+> >
+> >  doc/board/ti/am62x_beagleplay.rst    | 256 ++++++++++
+> >  doc/board/ti/img/beagleplay_emmc.svg | 697 +++++++++++++++++++++++++++
+> >  doc/board/ti/k3.rst                  |   1 +
+> >  3 files changed, 954 insertions(+)
+> >  create mode 100644 doc/board/ti/am62x_beagleplay.rst
+> >  create mode 100644 doc/board/ti/img/beagleplay_emmc.svg
+> >
+> > diff --git a/doc/board/ti/am62x_beagleplay.rst b/doc/board/ti/am62x_beagleplay.rst
+> > new file mode 100644
+> > index 000000000000..5adb7b4c9ace
+> > --- /dev/null
+> > +++ b/doc/board/ti/am62x_beagleplay.rst
+> > @@ -0,0 +1,256 @@
+> > +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+> > +.. sectionauthor:: Nishanth Menon <nm@ti.com>
+> > +
+> > +AM62x Beagleboard.org Beagleplay
+> > +================================
+> > +
+> > +Introduction:
+> > +-------------
+> > +
+> > +BeagleBoard.org BeaglePlay is an easy to use, affordable open source
+> > +hardware single board computer based on the Texas Instruments AM625
+> > +SoC that allows you to create connected devices that work even at long
+> > +distances using IEEE 802.15.4g LR-WPAN and IEEE 802.3cg 10Base-T1L.
+> > +Expansion is provided over open standards based mikroBUS, Grove and
+> > +QWIIC headers among other interfaces.
+> > +
+> > +Further information can be found at:
+> > +
+> > +* Product Page: https://beagleplay.org/
+> > +* Hardware documentation: https://git.beagleboard.org/beagleplay/beagleplay
+> > +
+> > +Boot Flow:
+> > +----------
+> > +Below is the pictorial representation of boot flow:
+> > +
+> > +.. image:: img/boot_diagram_k3_current.svg
+> > +  :alt: Boot flow diagram
+> > +
+> > +- On this platform, 'TI Foundational Security' (TIFS) functions as the
+> > +  security enclave master while 'Device Manager' (DM), also known as the
+> > +  'TISCI server' in "TI terminology", offers all the essential services.
+> > +  The A53/M4F (Aux core) sends requests to TIFS/DM to accomplish these
+> > +  services, as illustrated in the diagram above.
+> > +
+> > +Sources:
+> > +--------
+> > +.. include::  k3.rst
+> > +    :start-after: .. k3_rst_include_start_boot_sources
+> > +    :end-before: .. k3_rst_include_end_boot_sources
+> > +
+> > +Build procedure:
+> > +----------------
+> > +0. Setup the environment variables:
+> > +
+> > +.. include::  k3.rst
+> > +    :start-after: .. k3_rst_include_start_common_env_vars_desc
+> > +    :end-before: .. k3_rst_include_end_common_env_vars_desc
+> > +
+> > +.. include::  k3.rst
+> > +    :start-after: .. k3_rst_include_start_board_env_vars_desc
+> > +    :end-before: .. k3_rst_include_end_board_env_vars_desc
+> > +
+> > +Set the variables corresponding to this platform:
+> > +
+> > +.. include::  k3.rst
+> > +    :start-after: .. k3_rst_include_start_common_env_vars_defn
+> > +    :end-before: .. k3_rst_include_end_common_env_vars_defn
+> > +.. code-block:: bash
+> > +
+> > + $ export UBOOT_CFG_CORTEXR="am62x_evm_r5_defconfig beagleplay_r5.config"
+> > + $ export UBOOT_CFG_CORTEXA="am62x_evm_a53_defconfig beagleplay_a53.config"
+> > + $ export TFA_BOARD=lite
+> > + $ # we dont use any extra TFA parameters
+> > + $ unset TFA_EXTRA_ARGS
+> > + $ export OPTEE_PLATFORM=k3-am62x
+> > + $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+> > +
+> > +.. include::  am62x_sk.rst
+> > +    :start-after: .. am62x_evm_rst_include_start_build_steps
+> > +    :end-before: .. am62x_evm_rst_include_end_build_steps
+> > +
+> > +Target Images
+> > +--------------
+> > +Copy the below images to an SD card and boot:
+> > +
+> > +* tiboot3-am62x-gp-evm.bin from R5 build as tiboot3.bin
+> > +* tispl.bin_unsigned from Cortex-A build as tispl.bin
+> > +* u-boot.img_unsigned from Cortex-A build as uboot.img
+> 
+> I just noticed - I think this should be u-boot.img
 
-Thanks a ton Jan for digging deep into this and finding this. So much
-appreciated.
+Thank you for catching.
 
-This is all K3 platforms with the exception of j7200-evm.
+> 
+> Also I tried the mmc instructions and managed to brick the board. Is
+Hmm.. This is just documenting what Robert has in his scripts[1]
 
-PSCI SYSTEM_OFF function is routed by TFA to DM, there is no implementation
-on DM side since involved PMIC and team is trying to lock in a manner in
-which it is easier for people to describe things.
+> there a recovery procedure?
 
-PSCI SYSTEM_RESET on the other hand is handled correctly by DM.
+Oopsie.. Sorry you had to hit that..
 
-Even though CONFIG_POWEROFF is disabled, apparently enabling PSCI_RESET
-results in EFI runtime services gets to think that poweroff is also
-supported. Looking at drivers/firmware/psci.c[1] efi request for
-poweroff is via EFI_RESET_SHUTDOWN[2] - so the specification itself
-mandates that both reset AND poweroff should be implemented.
+> 
+> I suppose I should have tries it on an SD card first. I thought that
+> was what I was doing, but I didn't know about the internal mmc...
 
-Luckily for us we have a broken u-boot reset implementation, which last
-I looked was not following the h/w specifications and the intent was to
-move to PSCI -> DM for reset so that system can properly reset and not
-get randomly hung during reset under certain circumstances.
+Recovery currently involves booting off sd and flashing the emmc up :(
+unfortunately.. USB DFU etc are still work in progress.
 
-But, given the circumstances, I can pick this up and do it at am62_evm
-level rather than at just beagle level. I will pick this patch up and
-roll it up into v6 of the beagleplay series - but will modify am62x_evm
-config instead.
+A ready to go image such as [2] emmc flasher image might help speed
+things up.
 
-[1] https://github.com/u-boot/u-boot/blob/master/drivers/firmware/psci.c#L246
-[2] https://uefi.org/specs/UEFI/2.9_A/08_Services_Runtime_Services.html?highlight=efiresetshutdown#resetsystem
+[1] https://git.beagleboard.org/beagleboard/repos-arm64/-/blob/main/bb-u-boot-beagleplay-mainline/suite/bookworm/debian/install-emmc.sh
+[2] https://rcn-ee.net/rootfs/debian-arm64-12-bookworm-xfce-v5.10-ti/2023-08-24/
+emmc flasher image
+
 -- 
 Regards,
 Nishanth Menon
