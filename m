@@ -4,105 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FF7C3DA66
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 12:40:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435E1C3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 12:40:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8CBA86A3E;
-	Fri, 25 Aug 2023 14:39:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 66AC686A5A;
+	Fri, 25 Aug 2023 14:39:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pxSlv1Mq";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7316C869AF; Fri, 25 Aug 2023 06:57:03 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6C3EE86961; Fri, 25 Aug 2023 09:21:09 +0200 (CEST)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
+ [209.85.214.180])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAFA186A09
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 06:57:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F7428650F
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 09:21:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Jiy7GPdS2HTdFD3KBvy9kXfvMM7SmzoXI5SdBRbZ3ItfJCoD04gnETT41hpiImevB1EzHchKBIivk0uX9wsgz4pdprUzvPWIV8K0bTpnZCfHzBbxdHKwSBGzyN4IFEQJBMPI2RxIqJ6+x98m3uwEM/tZzlqSluX4KhR2pD+n8Bq3AKfA3EPMYpsPjcL2IRA1BkYvWh5Ywhp1eofBRXKO0TuUbcXCUIwmyQudAoCPrmdlLMhRhpiInIV8ICTc1WodikxRMYBZE9NFefkBuwYAQp5flCUHS0Gxb3jNAM63164fIpjEI+4uUUHB2dMy2XMtw1tVwaHuh1uGxXVOK9Rowg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Zct3eSemp/JdYrfUErnkYW9VBEoXrAyrudU0CY9clro=;
- b=gsKS3TRhiGXLh58FliXNvslC0zEluYCf88aom1Ev2/39GXeoAzsJaaNRaz1Fw1566hSCUO7Dv9I2HSSigHteYta2IpBvdRKR+UlUZhoEgvZl3WGilg98vEJQURa6vuyz4Bj526tSmMxjebVvt2dYXPTyKeVUBqOwn13anchVDXTfq9tVRUDmUy6KX4G7l6MR4lO7ZewV4rIiCnjY0hrObUcMH9BdJxRyhh1czwPN8b6hqvfkK5Sglva0/41kOrOhjjo5YWDJTVQQ637eg2E/P9qUsYfqNsdkyiAZIf8DPii3M32UY8fqn6PwR515JlDVFcy+Shu6WasBPfe2FfneMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zct3eSemp/JdYrfUErnkYW9VBEoXrAyrudU0CY9clro=;
- b=pxSlv1MqyDGZ0mwTfosbP6xd0n6p81Z1nOwd3guY3IPBFQgWT27GiKMrH8auErctHgWPhefkvCwRfTSJCqBzCedRVkUiscOtPg656PJsY9EEwiQ1iO79Tt9LLi1+YFseb2Hgafoniqf4+F0KCRoCtwc60SLo/pvqdtKN/bv8vL0=
-Received: from DM6PR02CA0061.namprd02.prod.outlook.com (2603:10b6:5:177::38)
- by MN2PR12MB4126.namprd12.prod.outlook.com (2603:10b6:208:199::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.27; Fri, 25 Aug
- 2023 04:56:56 +0000
-Received: from SN1PEPF0002636D.namprd02.prod.outlook.com
- (2603:10b6:5:177:cafe::a9) by DM6PR02CA0061.outlook.office365.com
- (2603:10b6:5:177::38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.27 via Frontend
- Transport; Fri, 25 Aug 2023 04:56:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF0002636D.mail.protection.outlook.com (10.167.241.138) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6699.15 via Frontend Transport; Fri, 25 Aug 2023 04:56:55 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 24 Aug
- 2023 23:56:54 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Thu, 24 Aug 2023 23:56:53 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH 3/3] arm64: versal: Enable the config CMD_KASLRSEED
-Date: Fri, 25 Aug 2023 10:26:41 +0530
-Message-ID: <20230825045641.32728-4-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230825045641.32728-1-venkatesh.abbarapu@amd.com>
-References: <20230825045641.32728-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=wens213@gmail.com
+Received: by mail-pl1-f180.google.com with SMTP id
+ d9443c01a7336-1bc0d39b52cso5091915ad.2
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 00:21:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692948063; x=1693552863;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :reply-to:in-reply-to:references:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zkrgdFyWhCPa0hX6ixyHueHhKsAL+l2RFA8/kdDjrrs=;
+ b=MLztkw4cxHNHU9IuPwVUAi7MnPTAm0J9yoXVS2FEbykDZISq+JZYEkXJCQAGAOb90h
+ cb02o0AdH32pQkhcJwTZa1AgSgizQpRvtZETPxKOEu4UZrb4WGaSttpQhZ6HXIFewzcE
+ LqTvuallcmBgZpTAMcUSEpylotX6q4ii4EGurNKpXNJTD9m8VfYS/+cqZ+9gEMdj3J47
+ a085mzJg2cXt//LV5I5GHqNtY6CDbO50jZKnPq1aEWbh/0y5o/kS3gMZF71OrQEpXwjP
+ 9b+hOZC79ptHkF8ks9Ok9D6NMCTWoE7rCZ7kp3poOSrgV8Vnu1A9n3P+EZJ9DqwhSdSH
+ QPrQ==
+X-Gm-Message-State: AOJu0YzOiSKI2RN7HrSnZQCCTillDHoMlVMJAWOCXxaVWQuoHim/Je5d
+ OT3RWdPxkWqPasUvghu4dm72CGAikOU=
+X-Google-Smtp-Source: AGHT+IHfT+q599eqmiZ+FibT4D2s1+YRtMvAgiYq5vobKhAz7nHrNQb50Rwfq4eNsJB3Cepbq3oegA==
+X-Received: by 2002:a17:903:1c4:b0:1b8:4ec2:5200 with SMTP id
+ e4-20020a17090301c400b001b84ec25200mr16598224plh.2.1692948063278; 
+ Fri, 25 Aug 2023 00:21:03 -0700 (PDT)
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com.
+ [209.85.216.47]) by smtp.gmail.com with ESMTPSA id
+ c13-20020a170902d48d00b001bd28b9c3ddsm899851plg.299.2023.08.25.00.21.02
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Aug 2023 00:21:02 -0700 (PDT)
+Received: by mail-pj1-f47.google.com with SMTP id
+ 98e67ed59e1d1-26d5970cd28so382560a91.2
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 00:21:02 -0700 (PDT)
+X-Received: by 2002:a17:90b:791:b0:267:f5d1:1dd3 with SMTP id
+ l17-20020a17090b079100b00267f5d11dd3mr14089582pjz.11.1692948062664; Fri, 25
+ Aug 2023 00:21:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636D:EE_|MN2PR12MB4126:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f351014-cd01-445a-382d-08dba527b45d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: dhBe8r1oGkaFiRl/cAMcsMHbgRBi4J5zJtldgpP70jBXYQBktZzLhWzgp90T2Zvor1Z7YrYSWLxkcbzP6R+t+PCNARiKmy97Z9DgoixsbQsZFBeqsgI1Ck7+KnH+xclMVaIQkihEt8o+MXgVYbB7lS8kdjvMBIF3HUHg5RA8ufli1eyfkZ20q+6ns7PEnFvHjofLtQhrfjbsjj/M+2nlG3O73P/3DtctmRx+5iNuTFe3irPWYyJBjbvhAQC/+wTIc2+nI4iZYH7a2foZ1GtsKh5z+yXKevpzlEPr4tfDJhZK0sj8m39VYJYs46DcvDapS8+yRwu4TINi2NTyHHGIkraR8QOaNpV6XVuNP6Cmp1K7hkseAb3iJCwywuFFGigM/gpnWO0kd0Itt65In5WaR6BBIPXEH7Khytk6T0CixG2a4Wz/sNaHiZ/5iRodBVLYq63N9E4YTMsBan1FS2yAlOawS2MkmHoNb3aXcV/YmqnGDXH6ZvR1ZUlgFA3xBQCqfT22ZwSPOz87TbSW4/p7/2aQMp6T9+zxilOokM+KI8Y0QeMeRfmDcaZVHYeVTsnLzFwVBQxB8zcPzxNtvsIqnfcIRA9ztb+m74haDwtJXiMStN53X9C5oIbT6+zE17QH73e1fRlCvRQAVFW2ufcl8PVyH9opwBXHoleR9WdPVJSwqo7Vb0irWX7UBRoJsnZlLtOuA2LfNw0Uwd47DWW0jZ88yplTl+a5aJX1W+9JRa1Bt8AvCopqnQoY1/Veulo1DLyeJjbgqD5b24Uiv029Vw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(376002)(396003)(39860400002)(346002)(451199024)(1800799009)(82310400011)(186009)(40470700004)(46966006)(36840700001)(356005)(86362001)(82740400003)(81166007)(36756003)(40460700003)(6666004)(478600001)(5660300002)(70586007)(54906003)(316002)(6916009)(2906002)(70206006)(4326008)(8676002)(8936002)(40480700001)(26005)(426003)(336012)(83380400001)(36860700001)(47076005)(41300700001)(2616005)(1076003)(107886003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Aug 2023 04:56:55.0747 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f351014-cd01-445a-382d-08dba527b45d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636D.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4126
+References: <20230531201520.15479-1-CFSworks@gmail.com>
+ <20230814213854.408962d5@slackpad.lan>
+In-Reply-To: <20230814213854.408962d5@slackpad.lan>
+From: Chen-Yu Tsai <wens@csie.org>
+Date: Fri, 25 Aug 2023 15:20:51 +0800
+X-Gmail-Original-Message-ID: <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
+Message-ID: <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
+Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
+ psci_arch_init
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de, 
+ Jagan Teki <jagan@amarulasolutions.com>, Marc Zyngier <maz@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Fri, 25 Aug 2023 14:39:25 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,38 +83,83 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Kernel Address Space Layout Randomization (KASLR) is a hardening
-feature that aims to make it more difficult to take advantage
-of known exploits in the kernel, by placing kernel data structures
-at a random address at each boot.The bootloader supports randomizing
-the virtual address at which the kernel image is loaded.
-The bootloader must provide entropy by passing a random u64 value
-in the /chosen/kaslr-seed device tree node.
-When we run "kaslrseed" command from U-Boot, the bootloader will
-genarate the kaslr-seed and update the /chosen/kaslr-seed DT property.
+On Tue, Aug 15, 2023 at 4:40=E2=80=AFAM Andre Przywara <andre.przywara@arm.=
+com> wrote:
+>
+> On Wed, 31 May 2023 14:15:20 -0600
+> Sam Edwards <cfsworks@gmail.com> wrote:
+>
+> Hi,
+>
+> (CC:ing Marc and Chen-Yu as the original authors)
+>
+> sorry for the delay, found that mouldering in my Drafts folder.
+>
+> > The nonsec code overrides/handles these:
+> > - Setting PMR to 0xFF happens earlier, in _nonsec_init, so this is
+> >   redundant.
+> > - The NS bit is not yet set: it gets set later in _secure_monitor.
+> >   Trying to clear it here is pointless and misleading.
+>
+> So superficially this looks alright, but I am still somewhat reluctant
+> to apply this, see below ...
+>
+> > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> > ---
+> >  arch/arm/cpu/armv7/sunxi/psci.c | 4 ----
+> >  1 file changed, 4 deletions(-)
+> >
+> > diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi=
+/psci.c
+> > index e1d3638b5c..f866025c37 100644
+> > --- a/arch/arm/cpu/armv7/sunxi/psci.c
+> > +++ b/arch/arm/cpu/armv7/sunxi/psci.c
+> > @@ -300,14 +300,10 @@ void __secure psci_arch_init(void)
+> >       /* Set SGI15 priority to 0 */
+> >       writeb(0, GICD_BASE + GICD_IPRIORITYRn + 15);
+> >
+> > -     /* Be cool with non-secure */
+> > -     writel(0xff, GICC_BASE + GICC_PMR);
+> > -
+> >       /* Switch FIQEn on */
+> >       setbits_le32(GICC_BASE + GICC_CTLR, BIT(3));
+> >
+> >       reg =3D cp15_read_scr();
+> >       reg |=3D BIT(2);  /* Enable FIQ in monitor mode */
+> > -     reg &=3D ~BIT(0); /* Secure mode */
+>
+> I am scratching my head on this one: I see it deliberately being done in
+> the original patch by Marc[1], and wonder why. If I read the code and
+> the architecture correctly, this routine is called only(?) from the SMC
+> handler, which means we are in monitor mode, that only exists in secure
+> state. So the NS bit is irrelevant until we switch to another mode. And
+> we indeed set the bit later, before dropping back to non-secure. So I
+> agree that clearing the bit is pointless. Was it put in to be more
+> robust, for other potential callers of this function, for instance in
+> the boot path?
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- configs/xilinx_versal_virt_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+IIRC the GIC manual says that the secure bit is set or cleared to select
+which bank of registers is accessed.
 
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index b4082c3dee..69af916c3b 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -50,6 +50,7 @@ CONFIG_CMD_CACHE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_RNG=y
-+CONFIG_CMD_KASLRSEED=y
- CONFIG_CMD_TIMER=y
- CONFIG_CMD_SMC=y
- CONFIG_CMD_TPM=y
--- 
-2.17.1
+And I suppose it is here to be more robust.
 
+ChenYu
+
+> Does anyone remember?
+>
+> Cheers,
+> Andre
+>
+> [1]
+> https://source.denx.de/u-boot/u-boot/-/commit/d5db7024aafc5ea603f3a34f83b=
+b29a1eaa3cbe7#f377950449a5dba076796d9e48fbd21f5d6ac545_0_65
+>
+> >       cp15_write_scr(reg);
+> >  }
+>
