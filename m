@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE34C71133
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 11:10:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A748C3DA66
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 11:17:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 114AD86532;
-	Fri, 25 Aug 2023 13:10:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id BA5738681D;
+	Fri, 25 Aug 2023 13:17:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="aNhnZSTh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EgI165P/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECD2C86699; Fri, 25 Aug 2023 13:10:23 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
+ id A64C6868CA; Fri, 25 Aug 2023 13:17:37 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4A2F8647A
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 13:10:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1692961820; x=1724497820;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=jOQvPaWXmfKDOLzgK9WYYYx1gVkTBS8+Rub6s4JDNcM=;
- b=aNhnZSThOS6tsln6UhhCYi/vQs5Pc78TslcBqS+ItNZrIDWVXRZ7O9O4
- xOUEMr++ZMdLTXeQ0DYy/vkKMiwoOqF8RKKabbzVI+wZONqIUjNV1eF2D
- VwWw+2Mw0SM4k3zyic59aIllHQgRDclhufWImW5N3GUFyZlcyDZj+4kT6
- bWsK/XbFvcTWyCWpOzsgkFZRbTDnWmiWdFBft7mXSIib/5Rzq0zNGxHyb
- zqxxarhVFZMzCnue8KWwwlB9Buaz2VYyE60Skr3FVuFZQ3ktcgsn4cuQw
- 2xHls1CJw+0Gqh9W9iwwlx1X05HobkwjKvongkJUSM+zSEjYqEM9XCXld w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10812"; a="372088728"
-X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; d="scan'208";a="372088728"
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Aug 2023 04:10:08 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10812"; a="740575727"
-X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; d="scan'208";a="740575727"
-Received: from smile.fi.intel.com ([10.237.72.54])
- by fmsmga007.fm.intel.com with ESMTP; 25 Aug 2023 04:10:07 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.96)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1qZUhZ-00ESxU-28; Fri, 25 Aug 2023 14:10:05 +0300
-Date: Fri, 25 Aug 2023 14:10:05 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH 1/2] Reland "x86: Move FACP table into separate functions""
-Message-ID: <ZOiMDRIailJwa2zY@smile.fi.intel.com>
-References: <20230824182337.1666435-1-sjg@chromium.org>
- <ZOiLOkGpI87jAZ7h@smile.fi.intel.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 6C4F38622D
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 13:17:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PBHWM8005053;
+ Fri, 25 Aug 2023 06:17:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692962252;
+ bh=5dL8FVCQL75Lnu3I5O0oBe298ZLIBCaVa+6gdiKSNIE=;
+ h=From:Subject:Date:To:CC;
+ b=EgI165P/qnwLAYqZjZphc7PoZwG03DzQcBMPdsvPzVc5uwUAEf6i0M/p/QfeeSg+3
+ buISICCC7OZ/v6KMLUpMQWI5R+jgReUFoGvWiqAYBxpJaUx1hmAUbL/yBqAKvfDmXT
+ xB66RsgZnfyn41XX6YPrNR/HmFSBDPx2SP/moOK4=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PBHWkc073117
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 25 Aug 2023 06:17:32 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
+ Aug 2023 06:17:30 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 25 Aug 2023 06:17:30 -0500
+Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PBHQC5023435;
+ Fri, 25 Aug 2023 06:17:27 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH v2 0/6] DTS Sync from v6.5-rc1 to u-boot
+Date: Fri, 25 Aug 2023 16:46:58 +0530
+Message-ID: <20230816-b4-upstream-j721s2-r5-pinmux-v2-0-a5f141be40bc@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ZOiLOkGpI87jAZ7h@smile.fi.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKqN6GQC/42OTQ6DIBCFr2JYdxqYgpqueo/GBeBYaSIaQGNjv
+ HvRRdddfu/l/WwsUnAU2b3YWKDFRTf6DHgpmO21fxG4NjNDjjdeixKMhHmKKZAe4F2hiAhBweT
+ 8MK+AykrblsKgqlmuMDoSmKC97Y+SX9DTmg5/CtS59Zx/Npl7F9MYPuebRRzqn8OLAA6dVLKWC
+ quS60dyVzsOrNn3/Qs28k695QAAAA==
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Nikhil M Jain <n-jain1@ti.com>
+X-Mailer: b4 0.12.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1692962247; l=3453;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=BvQYTbJX+3baTSDvSLfbVPfldp8mI2Q2zqDC5nlWr3c=;
+ b=4awuNhMv0LI53EMH3rMfo3ldkhUbqfsuyqjyRepWAIvYjkTxjrVXbDJgtT1uOYPKeokneJwtK
+ WQNMUnT3Bh3Aly0ORLKucWsZSHHAF2e8uAZP1jk/9zT/jS8EZL0AK50
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,73 +92,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 25, 2023 at 02:06:34PM +0300, Andy Shevchenko wrote:
-> On Thu, Aug 24, 2023 at 12:23:32PM -0600, Simon Glass wrote:
-> > Each board has its own way of creating this table. Rather than calling the
-> > acpi_create_fadt() function for each one from a common acpi_write_fadt()
-> > function, just move the writer into the board-specific code.
-> 
-> No luck, but I have a bit of time to debug more.
+The sync tries to ensure that U-boot remains functional with the updated
+Linux DTS and all the fixes from Linux move to U-boot during the sync.
 
-U-boot:
+The series tries to sync from Linux v6.5-rc1 along with addition of
+the documentation for J721S2 that had been previously missing.
 
-Writing tables to e4500:
-ACPI: Writing ACPI tables at e4500
-writing acpi tables
-0base: writing table '<NULL>' at 000e4500
-- return code 0
-1facs: writing table 'FACS' at 000e4740
-- return code 0
-3dsdt: writing table 'DSDT' at 000e4780
-- return code 0
-4gnvs: writing table 'GNVS' at 000e5390
-- return code 0
-5csrt: writing table 'CSRT' at 000e5490
-- return code 0
-5fadt: writing table 'FADT' at 000e54f0
-- return code 0
-5mcfg: writing table 'MCFG' at 000e5610
-- return code 0
-5spcr: writing table 'SPCR' at 000e5650
-- return code 0
-5tcpa: writing table 'TCPA' at 000e56a0
-5tcpa: Omitted due to being empty
-- return code 0
-5tpm2: writing table 'TPM2' at 000e56a0
-5tpm2: Omitted due to being empty
-- return code 0
-5x86: writing table '<NULL>' at 000e56a0
-- return code 0
-6ssdt: writing table 'SSDT' at 000e56f0
-6ssdt: Omitted due to being empty
-- return code 0
-8dev: writing table '<NULL>' at 000e56f0
-- return code 0
-writing acpi tables done ok
-ACPI current = e56f0
-- wrote 'acpi' to e4500, end e56f0
-- wrote 'smbios' to e56f0, end e584f
-- done writing tables
+MCU Ringacc [0] and DMA fixes [1] are currently being upstreamed to Linux. 
+They'll be fixed in U-boot post their merge in Linux hopefully during
+v6.6-rc1 timeframe.
 
+Test Logs are included in [2]
 
-Linux:
+[0]: https://lore.kernel.org/all/20230809175932.2553156-1-vigneshr@ti.com/
+[1]: https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
+[2]: https://gist.github.com/manorit2001/dbad09fd00e8b7c3872e85874c8e648c
 
-[    0.003034] ACPI: RSDP 0x00000000000E4500 000024 (v02 U-BOOT)
-[    0.003090] ACPI: XSDT 0x00000000000E45E0 000044 (v01 U-BOOT U-BOOTBL 20231001 INTL 00000000)
-[    0.003158] ACPI: CSRT 0x00000000000E5490 000058 (v00 U-BOOT U-BOOTBL 20231001 INTL 00000000)
-[    0.003219] ACPI: MCFG 0x00000000000E5610 00003C (v01 U-BOOT U-BOOTBL 20231001 INTL 00000000)
-[    0.003277] ACPI: SPCR 0x00000000000E5650 000050 (v02 U-BOOT U-BOOTBL 20231001 INTL 00000000)
-[    0.003332] ACPI: APIC 0x00000000000E56A0 000048 (v02 U-BOOT U-BOOTBL 20231001 INTL 00000000)
-[    0.003382] ACPI: Reserving CSRT table memory at [mem 0xe5490-0xe54e7]
-[    0.003403] ACPI: Reserving MCFG table memory at [mem 0xe5610-0xe564b]
-[    0.003421] ACPI: Reserving SPCR table memory at [mem 0xe5650-0xe569f]
-[    0.003437] ACPI: Reserving APIC table memory at [mem 0xe56a0-0xe56e7]
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v2:
+- Add an additional patch required for booting the board after rebasing
+  to uboot-next
+- Use v6.5-rc1 for the Sync and revert the changed done for -next
+  (Nishanth)
+- Change <> to "" in #include and fix the order of includes(Nishanth)
+- Remove duplicates among -u-boot.dtsi and -r5 dtsi files moving the 
+  nodes to appropriate files (Nishanth)
+- Remove fs_loader0 node (Nishanth)
+- Remove /delete-property/ and add the dev-data and clk-data (Nishanth)
+- Update documentation with better wordings (Nishanth)
+- Added openocd section (Nishanth)
+- Fix section numbering that was pointed out (Nishanth)
+- Change to use explicit-targets for cross-referencing in documentation
+  (Nishanth)
+- Propose myself as a Maintainer for J721S2 as a separate commit (Nishanth)
+- Link to v1: https://lore.kernel.org/r/20230816-b4-upstream-j721s2-r5-pinmux-v1-0-f4548452760a@ti.com
 
-As you can see a few tables are missing:
-FACS, DSDT, GNVS, FADT
+---
+Manorit Chawdhry (5):
+      arm: mach-k3: j721s2: Add mcu_timer0 id to the dev list
+      k3-j721s2: Sync from Linux tag v6.5-rc1
+      k3-am68: Sync from Linux tag v6.5-rc1
+      docs: ti: j721s2_evm: Create documentation from J7200 docs
+      board: ti: j721s2: MAINTAINERS: Update the MAINTAINERS File.
 
+Udit Kumar (1):
+      configs: j721s2_evm_r5_defconfig: Increase malloc pool size in DRAM
+
+ arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi     |  69 +--
+ arch/arm/dts/k3-am68-sk-base-board.dts             | 389 ++++++++------
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts          | 143 +----
+ arch/arm/dts/k3-am68-sk-som.dtsi                   | 112 +---
+ .../dts/k3-j721s2-common-proc-board-u-boot.dtsi    |  60 +--
+ arch/arm/dts/k3-j721s2-common-proc-board.dts       | 330 ++++++------
+ arch/arm/dts/k3-j721s2-main.dtsi                   | 585 ++++++++++++++++++++-
+ arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi             | 365 ++++++++++++-
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts    | 151 +-----
+ arch/arm/dts/k3-j721s2-som-p0.dtsi                 | 165 +++---
+ arch/arm/dts/k3-j721s2-thermal.dtsi                | 101 ++++
+ arch/arm/dts/k3-j721s2.dtsi                        |  12 +-
+ arch/arm/mach-k3/j721s2/dev-data.c                 |   1 +
+ board/ti/j721s2/MAINTAINERS                        |   5 +-
+ configs/j721s2_evm_r5_defconfig                    |   1 +
+ doc/board/ti/j721s2_evm.rst                        | 263 +++++++++
+ doc/board/ti/k3.rst                                |   1 +
+ 17 files changed, 1908 insertions(+), 845 deletions(-)
+---
+base-commit: 97841de680430e235f0954a188f245775cbbb962
+change-id: 20230816-b4-upstream-j721s2-r5-pinmux-25c4cd61b258
+
+Best regards,
 -- 
-With Best Regards,
-Andy Shevchenko
-
+Manorit Chawdhry <m-chawdhry@ti.com>
 
