@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0472AC3DA66
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 16:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F4DFC3DA66
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 17:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D63A18644B;
-	Fri, 25 Aug 2023 18:42:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
+	by phobos.denx.de (Postfix) with ESMTP id 7799486699;
+	Fri, 25 Aug 2023 19:21:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jGYZ/Yoh";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8199086AB7; Fri, 25 Aug 2023 18:42:17 +0200 (CEST)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 91EBF86AAF; Fri, 25 Aug 2023 19:21:33 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F07B8643B
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 18:42:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D02E986963
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 19:21:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ziswiler.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel@ziswiler.com
-Received: from [127.0.0.1] ([84.226.64.168]) by mrelay.perfora.net (mreueus004
- [74.208.5.2]) with ESMTPSA (Nemesis) id 1N0WTY-1po3pv1Mto-00wTQh;
- Fri, 25 Aug 2023 18:41:47 +0200
-Date: Fri, 25 Aug 2023 18:41:38 +0200
-From: Marcel Ziswiler <marcel@ziswiler.com>
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "marcel.ziswiler@toradex.com" <marcel.ziswiler@toradex.com>,
- "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
- "hai.pham.ud@renesas.com" <hai.pham.ud@renesas.com>,
- "philippe.reynes@softathome.com" <philippe.reynes@softathome.com>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>,
- "bb@ti.com" <bb@ti.com>, "marex@denx.de" <marex@denx.de>,
- "pali@kernel.org" <pali@kernel.org>,
- "william.zhang@broadcom.com" <william.zhang@broadcom.com>
-Subject: Re: [PATCH v2 3/3] board: toradex: add verdin am62 support
-User-Agent: K-9 Mail for Android
-In-Reply-To: <72cf350455ba063d79dd1971a97a39a48aa87191.camel@siemens.com>
-References: <20230612205444.363727-1-marcel@ziswiler.com>
- <20230612205444.363727-4-marcel@ziswiler.com>
- <aa6e7ddab0a43f94d8530d4781599d59612764a2.camel@siemens.com>
- <72cf350455ba063d79dd1971a97a39a48aa87191.camel@siemens.com>
-Message-ID: <7B2FFAA5-F011-4C0F-8ED1-C34B9985A5C0@ziswiler.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5922b96c5fcso14168627b3.0
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 10:21:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692984089; x=1693588889;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=6PNFmI/ffnIA3is8uB9PcRLFQTcMNjx7mKrA1/916Fg=;
+ b=jGYZ/YohyLRkkp1aRSTSlku91TjrMOmkhWUpNXuCYjoilJUNUyj9OB/4rhlvuSz8KG
+ HxQQFhmcuW3HiRpPIQYOeUAMkYt1v2xwViTc2bFzPzGreQFIuNXIix4CYnxZKayv2nsf
+ PaZKkDnOtguhsjh/oINJaAHnAz0NYA2NN2jPc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692984089; x=1693588889;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6PNFmI/ffnIA3is8uB9PcRLFQTcMNjx7mKrA1/916Fg=;
+ b=QJ+MBAIGjxtoEZl9Z7s5BMuYOiSikVzBKRM3WnadZxSSRZtJpRM8uNHTsWFfpeEgfb
+ /KGjr/0TNgTffP9+ki8XliS4vORqX0CXAiVpjG4ZKA4J/pnHEpqepFkwUf6lc0/3tzQ+
+ RRu0DRIUCMEQJQxvcZncHXne/1XUgIJzbuv/mgPWdpoiDvPKS2b0DMyCoPA9dIdVUVkc
+ SGOLcvzJObwkXYi4ubuu2E7qW3utrQJ1Mx5Lfb8JSn8cyqAEN0mx55oTgz1i8yvn2S1A
+ 3dO6UnBzTdMH66RCeL55YobYyfFVd7pUpZ/9eTmldnE/fdlOyUmMWuX/FxuY7/b+vuRs
+ pWxg==
+X-Gm-Message-State: AOJu0YzZEScgK9T2BZJes6AkdqRifEGP/bM83oKbHkQ9tiAhz2G8hrhv
+ 7hdb8J3FusFgQlJjPszSntHVVPDkfVhOw0Jsi++oYA==
+X-Google-Smtp-Source: AGHT+IHjLA991n/UducO/n9vm/N79hl6chQo9FWZAJLIO6hLxXgt4t5XIcXBq4xt2qIYtbsHfi4zmw==
+X-Received: by 2002:a0d:ea95:0:b0:579:f163:dc2f with SMTP id
+ t143-20020a0dea95000000b00579f163dc2fmr20187696ywe.3.1692984089321; 
+ Fri, 25 Aug 2023 10:21:29 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-fcb7-366a-fd11-1c19.res6.spectrum.com.
+ [2603:6081:7b00:6400:fcb7:366a:fd11:1c19])
+ by smtp.gmail.com with ESMTPSA id
+ f2-20020a0dc302000000b0057a0e5b18e0sm590469ywd.142.2023.08.25.10.21.28
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Aug 2023 10:21:29 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 2/2] CI: Move to latest Ubuntu "Jammy" tag
+Date: Fri, 25 Aug 2023 13:21:27 -0400
+Message-Id: <20230825172127.3406461-2-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230825172127.3406461-1-trini@konsulko.com>
+References: <20230825172127.3406461-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Kl49qvYKGl4UHEFTcIGpNgFNVVnGyPO+fKXA2gavbc8GRZbk8Dq
- w8W+XKak4HSV3pGYkbeebJV8QGOOVQnuk2iTHWElCdbLJmK79MHfL0w//b6ZHwF4MjmSjyq
- IL6geKQkRJqr20R1XFAcHoTvT/BxNN7RyYLntzF4LyI9D8WeKXUhHVXzTUgWuvR3XQu2z4Z
- +4eO8o1CgVikZ3ucPvMuQ==
-UI-OutboundReport: notjunk:1;M01:P0:7yhgoEcZhMM=;VbyWWA1aAOM+0ppgRM29+LGp/SL
- uVi8JAvtsumJq+3iIYTuogmiAeeoSTDw6Zmb1Rlgu7LD7Rs0i1jr1yS0ICmY8MZw6kag856v/
- fqVyFaU7wtwr4IeHzFY+PdWzM3fZ/ya4mfahT+R+TsEu5+omDXNX544iTriy8E1AnE8PALtTv
- H76H5KcFaqgt+L9cpkCemL2cjjlrgwG/yzIU74LPUIyiMAv+eSTpXf76rWnvzWMIsDmuw7OdH
- wS53XhczeUsynUdmpLXKcsS/u/BdNQ35sgmHEmA3p58fcsDTBADxp0+xjiR1Ayb7RjgkM9/4D
- n/eATRLaI1mEHYWDMEj7ey15oVx9A6ugOaIdSMWXeyxDutcVNXeqq1YRZhCXLzwwyipq/Odnc
- QbFTSTYL/VnnDrmJUakvdH3KlnDvVEJhYjEQynmlFVA9PITGQuZI9cJZkufscU7xaCmY+6413
- NP/0bWryOiZmxibGr7cqja7OKrOLInIIjyf2dnxXvnH54/jE9ymmdHESvbvE+77rPjmP+uQLB
- yD6khe2X9D38YFWmQ6z58XCi7MHpF1vli24YQ0CkTMA/4aIIR2/KvEWrJJcLu7OL5df9Q7ed+
- xgPJmo1WVxXKc6dYICQWBuO3Y1fyY47FToqZWUIKQBgcZQs6Z7Ix7MnyT8N5/bbKiSRj95Xs0
- 8eeugYJxu4mMFWxBQZUahP56sACPwX2+cNDQg9uI9LlfCcqdmS0sH7wBRgU9457CyF0DChqAc
- eDCBVDJtr09yEDUJZe+2Ztcizpx3dqbtf3yVc9W4/brt8yVgO+kO8cjqlJHxIRWzClpAazplH
- Xoj59ZYG7KqKohbc6+GEWmzB0H0zbd9c0i9L+KzJqfWTWaC2gZJXhqkLCrSvZlHax4xnSTyF8
- 6gGolxT+KdWI/QQ==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,44 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sali Alexander
+Move to the latest "Jammy" tag from Ubuntu.
 
-On August 25, 2023 6:24:01 PM GMT+02:00, "Sverdlin, Alexander" <alexander=
-=2Esverdlin@siemens=2Ecom> wrote:
->Hello Marcel,
->
->On Fri, 2023-08-25 at 15:20 +0200, Alexander Sverdlin wrote:
->> > +Build U-Boot for R5
->> > +-------------------
->> > +
->> > +=2E=2E code-block:: bash
->> > +
->> > +=C2=A0=C2=A0=C2=A0 $ export ARCH=3Darm
->> > +=C2=A0=C2=A0=C2=A0 $ export CROSS_COMPILE=3Darm-none-linux-gnueabihf=
--
->> > +=C2=A0=C2=A0=C2=A0 $ make verdin-am62_r5_defconfig O=3D/tmp/r5
->> > +=C2=A0=C2=A0=C2=A0 $ make O=3D/tmp/r5
->> > +=C2=A0=C2=A0=C2=A0 $ cd =2E=2E/k3-image-gen
->> > +=C2=A0=C2=A0=C2=A0 $ make SOC=3Dam62x SBL=3D/tmp/r5/spl/u-boot-spl=
-=2Ebin SYSFW_PATH=3D=2E=2E/ti-linux-firmware/ti-sysfw/ti-fs-firmware-am62x-=
-gp=2Ebin
->> > +=C2=A0=C2=A0=C2=A0 $ cp tiboot3-am62x-gp-evm=2Ebin =2E=2E/tiboot3=2E=
-bin
->> > +
->>=20
->> the existing K3 platforms have been converted to binman workflow:
->> https://patchwork=2Eozlabs=2Eorg/project/uboot/patch/20230721184446=2E5=
-821-21-n-francis@ti=2Ecom/
->>=20
->> Do you think it makes sense to convert the newly added Verdin board
->> to binman workflow as well?
->
->I'm sorry for the noise, I totally missed the fact this has been fixed an=
-d
->accepted already!
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml    | 2 +-
+ .gitlab-ci.yml          | 2 +-
+ tools/docker/Dockerfile | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-Don't worry and enjoy (;-p)=2E
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 711b067c1f31..b9dce3b1cadf 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -2,7 +2,7 @@ variables:
+   windows_vm: windows-2019
+   ubuntu_vm: ubuntu-22.04
+   macos_vm: macOS-12
+-  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20230624-20Jul2023
++  ci_runner_image: trini/u-boot-gitlab-ci-runner:jammy-20230804-24Aug2023
+   # Add '-u 0' options for Azure pipelines, otherwise we get "permission
+   # denied" error when it tries to "useradd -m -u 1001 vsts_azpcontainer",
+   # since our $(ci_runner_image) user is not root.
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index aff6a5c2dce1..09b95fce41af 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -10,7 +10,7 @@ default:
+ 
+ # Grab our configured image.  The source for this is found
+ # in the u-boot tree at tools/docker/Dockerfile
+-image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20230624-20Jul2023
++image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20230804-24Aug2023
+ 
+ # We run some tests in different order, to catch some failures quicker.
+ stages:
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 93fe8c613244..9670f04eb5ee 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -2,7 +2,7 @@
+ # This Dockerfile is used to build an image containing basic stuff to be used
+ # to build U-Boot and run our test suites.
+ 
+-FROM ubuntu:jammy-20230624
++FROM ubuntu:jammy-20230804
+ MAINTAINER Tom Rini <trini@konsulko.com>
+ LABEL Description=" This image is for building U-Boot inside a container"
+ 
+-- 
+2.34.1
 
-Cheers
-
-Marcel
