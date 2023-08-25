@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9AE2C3DA66
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 19:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A10EC3DA66
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 19:38:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0BFB86ADF;
-	Fri, 25 Aug 2023 21:29:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AF01D86AE9;
+	Fri, 25 Aug 2023 21:38:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kkn4oi8n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZC8btntD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 322B186AE0; Fri, 25 Aug 2023 21:29:19 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 67C8F86ADF; Fri, 25 Aug 2023 21:38:38 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1158686AB5
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 21:29:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E96386ADF
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 21:38:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-34bb72ffb1fso4346945ab.3
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 12:29:16 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jpewhacker@gmail.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6bcbb0c40b1so921091a34.3
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 12:38:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692991754; x=1693596554;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=L7UJFEKDE61sofQr3+8LszhbWc2sK6qzYWOjOjNabPI=;
- b=kkn4oi8nZJbZJNQuS4HDCHKAaLj3JxEJOqL0e7WKyztUG1KRCFNdihkF9hI11wq6+r
- lRcogN2lFnUl/mS+P8Dc+ijztFa5wJDYy4B8L3QxvBYFpwfZ4YQeUQ42pxe3kM2aKMl5
- SxO6BMF30XCod3035v5s4zFlYL3KxbBa/sa2U=
+ d=gmail.com; s=20221208; t=1692992313; x=1693597113;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ox3Li7VWGEy2hT0w5ftxBWnHrWYypjWI5PR8rK/AsNU=;
+ b=ZC8btntDj0OssrZHtKyUmyEvHOWNJcMNKFA9/P0ynjh4sjL9puibpM8W+KSVZDXw4I
+ fcfWX64f6klljak2u+x9dOMYNDyJ31o9Ayh5lBYj3TYHUkS97L7CWw+LPnLm3LM1pkEL
+ ePDqzLJq1bMnZVqlZiIoMDLTV3dpydgWn3lNI9cx1QzAAm8lGwNU7rhlFdbBislWv/Pr
+ 5FPaNk6wWxnVos1ZbiGR4TGQWLJVPEB9jiFqUCCcFVYLDsQAMe6Wr0zoD+MzUBJazLwm
+ aos87kkf/vjHXJ45vm7GZ++wAgu7lNwLe0OPnJlp0rO7IK/rRJnTKwzoCnTXMbJJtah1
+ Ix/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692991754; x=1693596554;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=L7UJFEKDE61sofQr3+8LszhbWc2sK6qzYWOjOjNabPI=;
- b=DsI0X50LkjFjGfMljJXzy2265MzKZiWAvM6rZYFMzmbNE7mcrSCqyLnsNzv3zwCHWC
- G8su/FD9ZQUkvUEGxUph8xdCEsbhtNcsJvbtgd5lo6Zz69WJ1MBTHq9cq5j/S0GnK9+c
- 6AofaRcoikCkc0SFSaXGL8TFiKS1pxE14EfRj2YLQDz6HNlF0mxoDM/dyciA0CDsAzJ3
- EuXBEUA6QWpohQEJq0gSx4Cje1yJ6QY03IbHY0HBg10s92Uvk+CISUY0p4tNbjJgjm1P
- zjobxb+UDys0ZbLSVnBP0HJB7yDmceUP8+iiFAopmdrVuAEjiLRfkBgeK9NKDSRvLYFx
- 2BVg==
-X-Gm-Message-State: AOJu0YwBjJ0jXbBGAejRbGpicGZTiQYWpeuDHrekhBydOJCIV98R5bYZ
- DP6HBggzXMFphkB9G07o6zaQ56wp9g9LEhFwd6Y=
-X-Google-Smtp-Source: AGHT+IEt1zYAbz38ZlYAvOMWaxze/RxCVUpYoDbM1JxR9zhG7vVLGqXd4ZX1osPtKaL2mSOvT4RtiA==
-X-Received: by 2002:a05:6e02:eee:b0:349:8dfa:ad64 with SMTP id
- j14-20020a056e020eee00b003498dfaad64mr9232208ilk.15.1692991754544; 
- Fri, 25 Aug 2023 12:29:14 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:c714:5300:ea2e:17d4])
+ d=1e100.net; s=20221208; t=1692992313; x=1693597113;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ox3Li7VWGEy2hT0w5ftxBWnHrWYypjWI5PR8rK/AsNU=;
+ b=O7yD1NvfgXg3WmhRDe48UhMb3QaWi8GRwbYtnATyCncQmh/J2NKJ9V2UIdr1JTa18E
+ trJ9Tf4kjGhEVqotSHOObMkeksk7On3gqaEKN7vaM0fxgDQEtP8B6B/0E4WB18enDhcx
+ IeeXGXFqHmZQ0Qfwheq0SM8bi3QI0LLv6tinBcl0UHXbwyyl8zUiMF6Ui8FSSOay7qwy
+ fDfRclpGK8aLS2j0V53iI3Om2MBl55mL6C+RXMcRRbLgI6d7KHvAJexE0D+tt76Lsc+8
+ O314Yji0ebepsZLBLyJY33IWd1cfIinpOZDbS0jJytBoB1z8xCEsymfp3YVKjVrzko44
+ ESmg==
+X-Gm-Message-State: AOJu0Yz13+2jLI4200HIHIv1eFv7isyYdTdfk57sIf3Kg5H07fmZKioD
+ MiMksd1jrv2WaAUR1r5kHXyndTT822Q=
+X-Google-Smtp-Source: AGHT+IEnXUw1qcWCb5Z8MNquZF246jNebBGpUui7DGoa/bWl3iE/NHs53CLsm8De5D7V4IyAuRgBfw==
+X-Received: by 2002:a05:6830:1e90:b0:6ab:27b5:d202 with SMTP id
+ n16-20020a0568301e9000b006ab27b5d202mr6012921otr.37.1692992313462; 
+ Fri, 25 Aug 2023 12:38:33 -0700 (PDT)
+Received: from localhost.localdomain ([2601:282:4300:19e0::c239])
  by smtp.gmail.com with ESMTPSA id
- t9-20020a92c0c9000000b0034cc253a78esm710154ilf.51.2023.08.25.12.29.13
+ m13-20020a9d7e8d000000b006b871010cb1sm1171022otp.46.2023.08.25.12.38.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Aug 2023 12:29:14 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH] efi: Correct handling of frame buffer
-Date: Fri, 25 Aug 2023 13:28:39 -0600
-Message-ID: <20230825192842.1957055-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.rc1.204.g551eb34607-goog
+ Fri, 25 Aug 2023 12:38:32 -0700 (PDT)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Joshua Watt <JPEWhacker@gmail.com>
+Subject: [PATCH v3 0/8] cmd: gpt: GPT manipulation improvements
+Date: Fri, 25 Aug 2023 13:38:16 -0600
+Message-Id: <20230825193830.2753640-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20230823164755.2874792-1-JPEWhacker@gmail.com>
+References: <20230823164755.2874792-1-JPEWhacker@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,67 +92,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The efi_gop driver uses private fields from the video uclass to obtain a
-pointer to the frame buffer. Use the platform data instead.
+Adds several improvements and additions to the gpt command processing,
+specifically (although not exclusively) for the purpose of supporting
+"ping-pong" booting when doing A/B boot partitions with u-boot itself.
 
-Check the VIDEO_COPY setting to determine which frame buffer to use. Once
-the next stage is running (and making use of U-Boot's EFI boot services)
-U-Boot does not handle copying from priv->fb to the hardware framebuffer,
-so we must allow EFI to write directly to the hardware framebuffer.
+In this mechanism, u-boot must boot up, and then check if the correct
+boot partition is active, and if not switch the GPT partition table to
+the other boot partition and reboot to activate the other u-boot.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+In order to facilitate this, the gpt command needs to be better at
+preserving entry attributes when manipulating the partition table. It
+also learns two new commands, one which can swap the order of partitions
+in the table, and another that lets it change which partitions have the
+bootable flag.
 
- lib/efi_loader/efi_gop.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+V2: Add documentation and tests
+V3: Review Feedback
 
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 778b693f983..a09db31eb46 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -10,6 +10,7 @@
- #include <efi_loader.h>
- #include <log.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <video.h>
- #include <asm/global_data.h>
- 
-@@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
- 	struct efi_gop_obj *gopobj;
- 	u32 bpix, format, col, row;
- 	u64 fb_base, fb_size;
--	void *fb;
- 	efi_status_t ret;
- 	struct udevice *vdev;
- 	struct video_priv *priv;
-+	struct video_uc_plat *plat;
- 
- 	/* We only support a single video output device for now */
- 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
-@@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
- 	format = priv->format;
- 	col = video_get_xsize(vdev);
- 	row = video_get_ysize(vdev);
--	fb_base = (uintptr_t)priv->fb;
--	fb_size = priv->fb_size;
--	fb = priv->fb;
-+
-+	plat = dev_get_uclass_plat(vdev);
-+	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
-+	fb_size = plat->size;
- 
- 	switch (bpix) {
- 	case VIDEO_BPP16:
-@@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
- 	}
- 	gopobj->info.pixels_per_scanline = col;
- 	gopobj->bpix = bpix;
--	gopobj->fb = fb;
-+	gopobj->fb = map_sysmem(fb_base, fb_size);
- 
- 	return EFI_SUCCESS;
- }
+Joshua Watt (8):
+  cmd: gpt: Remove confusing help text
+  doc: Add gpt command documentation
+  tests: gpt: Remove test order dependency
+  cmd: gpt: Add gpt_partition_bootable variable
+  cmd: gpt: Add command to set bootable flags
+  cmd: gpt: Preserve type GUID if enabled
+  cmd: gpt: Preserve bootable flag
+  cmd: gpt: Add command to swap partition order
+
+ cmd/gpt.c                 | 162 +++++++++++++++++++++++++++++++++--
+ doc/usage/cmd/gpt.rst     | 176 ++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst       |   1 +
+ test/py/tests/test_gpt.py | 160 +++++++++++++++++++++++++++++++---
+ 4 files changed, 480 insertions(+), 19 deletions(-)
+ create mode 100644 doc/usage/cmd/gpt.rst
+
 -- 
-2.42.0.rc1.204.g551eb34607-goog
+2.33.0
 
