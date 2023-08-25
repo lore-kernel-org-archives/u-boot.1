@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D76C3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 08:22:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 574E2C3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 08:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AF0086A67;
-	Fri, 25 Aug 2023 10:22:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C7878063E;
+	Fri, 25 Aug 2023 10:53:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="msjk1mxC";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Y9h0PPyo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DC3886A57; Fri, 25 Aug 2023 10:22:56 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 4C9C180726; Fri, 25 Aug 2023 10:53:16 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC6FC86A15
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 10:22:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9344803AB
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 10:53:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37P8MldD087717;
- Fri, 25 Aug 2023 03:22:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692951767;
- bh=Y/oNPunj9hgXQuFEFrfw3A7Mmg2DzzRWD9ohJ9lWENw=;
- h=Date:CC:Subject:To:References:From:In-Reply-To;
- b=msjk1mxCYXzq0DSFzjPif151wCpVRoOIkN6yURrdoIALwJ/addQrZTvkn0xLRn7H+
- FHvSVf7LyZaaCpdVFne76UQFDgNWQG+HVoqSW/tcxcUVmFhAw6WgRCQeLzixCe6C5Q
- i0kL/yUSik+gtB1XKgka3+WRxv+DMJ9mHc0ILiv0=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37P8MlIK017680
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Aug 2023 03:22:47 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Aug 2023 03:22:46 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Aug 2023 03:22:46 -0500
-Received: from [172.24.227.9] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37P8Mga2002529;
- Fri, 25 Aug 2023 03:22:43 -0500
-Message-ID: <7b5ef454-0fd6-7311-894d-280b45b40247@ti.com>
-Date: Fri, 25 Aug 2023 13:52:42 +0530
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6601d42974=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37P7lBra015438; Fri, 25 Aug 2023 10:53:11 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=1aChAqLPrxz9N4mi/JBb55WmPgy6tgz7ndQgdikZJ2I=; b=Y9
+ h0PPyoo+cfWV5kWkQEVKoL96+d+3f1vu2pZsistkOOjoZYQOb8EBhGVrg8nh2kE0
+ G0OmbuxLShENU3Vjg9HDsYPPYpEOAxCx6GngxBcx5ROyzPdjXPQ/zFqdm2rh/z9y
+ HFbe8SQxVZcmR1ND8SXrDZIiwrrhei0bgcpQ7fKGs5NnIzS8fHOAIx2IxjJx92ex
+ o5IsUSvkzQdVhmx/ox8jMd4BgZfqiGHF1ZUPWGZvGPs3fNVl9RUa0SPY3gIXqXw+
+ 9UKrlm/tgUN9HZeo23MNShbyneAA92vzHCUe2pMJF6oJPauBuTdgs9u5L0LxQey2
+ E+cLJNx1zQXhNJThhtZw==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3spmhs92x1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 25 Aug 2023 10:53:11 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F0A2010004F;
+ Fri, 25 Aug 2023 10:53:09 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C01582194E9;
+ Fri, 25 Aug 2023 10:53:09 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 25 Aug
+ 2023 10:53:09 +0200
+Message-ID: <14fb20a4-e394-5035-1a4f-dd3511db7471@foss.st.com>
+Date: Fri, 25 Aug 2023 10:53:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-CC: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
- <nm@ti.com>, <joe.hershberger@ni.com>, <robertcnelson@gmail.com>,
- <jkridner@beagleboard.org>, <r-gunasekaran@ti.com>, <srk@ti.com>,
- <u-boot@lists.denx.de>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH 1/2] net: ti: am65-cpsw-nuss: Workaround for buggy
- PHY/Board
+Subject: Re: [PATCH v2 1/2] arm: stm32mp: Really fix compilation issue when
+ SYS_DCACHE_OFF and/or SYS_DCACHE_SYS are enabled
 Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>
-References: <20230822121350.51324-1-rogerq@kernel.org>
- <20230822121350.51324-2-rogerq@kernel.org>
- <12738ca9-ac8c-b587-c0bf-c8abc8fd3f48@ti.com>
- <20230824182431.GE3953269@bill-the-cat>
- <203072fb-c847-b896-a249-eabe3c2631a0@kernel.org>
- <76153dc4-07e7-3c9b-8c2f-4e50d70b1679@ti.com>
- <834b6e9b-6bfd-db10-5158-3100569400d7@kernel.org>
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <834b6e9b-6bfd-db10-5158-3100569400d7@kernel.org>
+To: Bhupesh Sharma <bhupesh.sharma@linaro.org>, <u-boot@lists.denx.de>
+CC: <sjg@chromium.org>, <trini@konsulko.com>, <bhupesh.linux@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
+ <20230822075112.717992-2-bhupesh.sharma@linaro.org>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230822075112.717992-2-bhupesh.sharma@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-25_07,2023-08-24_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,38 +94,38 @@ X-Virus-Status: Clean
 
 
 
-On 25/08/23 13:22, Roger Quadros wrote:
-> Siddharth,
+On 8/22/23 09:51, Bhupesh Sharma wrote:
+> While 23e20b2fa6 ("arm: stm32mp: Fix compilation issue when
+> SYS_DCACHE_OFF and/or SYS_DCACHE_SYS are enabled") tried fixing
+> this issue, fix it really by adding #if checks for SYS_ICACHE_OFF
+> and SYS_DCACHE_OFF.
 > 
-> On 25/08/2023 08:42, Siddharth Vadapalli wrote:
->> Roger,
->>
->> On 25/08/23 00:39, Roger Quadros wrote:
->>>
->>>
->>> On 24/08/2023 21:24, Tom Rini wrote:
->>>> On Thu, Aug 24, 2023 at 11:34:29PM +0530, Siddharth Vadapalli wrote:
->>>>> Hello Roger,
->>>>>
->>>>> On 22-08-2023 17:43, Roger Quadros wrote:
-
-...
-
->>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> ---
+>  arch/arm/mach-stm32mp/cpu.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> This doesn't sound like a clean solution.
-> All hardware specific details (like reset ready-time) should come from the
-> device tree and not passed around in PHY APIs.
-> 
-> Why to do such an intrusive change instead of fixing the am65-cpsw-nuss driver
-> to properly use the PHY uclass driver model and encode the required delays
-> in the device tree?
+> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+> index e2f67fc423..8ed065b389 100644
+> --- a/arch/arm/mach-stm32mp/cpu.c
+> +++ b/arch/arm/mach-stm32mp/cpu.c
+> @@ -90,10 +90,10 @@ static void early_enable_caches(void)
+>  	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+>  		return;
+>  
+> -	if (!(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))) {
+> +#if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+>  		gd->arch.tlb_size = PGTABLE_SIZE;
+>  		gd->arch.tlb_addr = (unsigned long)&early_tlb;
+> -	}
+> +#endif
+>  
+>  	/* enable MMU (default configuration) */
+>  	dcache_enable();
 
-Encoding delays in device-tree and using them is better. Kindly ignore my
-suggestion.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-> 
-
--- 
-Regards,
-Siddharth.
+Thanks
+Patrice
