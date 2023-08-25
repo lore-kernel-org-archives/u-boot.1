@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17BEDC3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695D5C3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B26DD86B40;
-	Fri, 25 Aug 2023 20:06:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03EF586B59;
+	Fri, 25 Aug 2023 20:06:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DUSY1fzM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eeXkjUkD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6770286B5B; Fri, 25 Aug 2023 20:06:23 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id E31BB86B5B; Fri, 25 Aug 2023 20:06:23 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6507186ACC
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B29F86B2D
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-529fb2c6583so1747776a12.1
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:20 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5008faf4456so1832875e87.3
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692986780; x=1693591580;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vvxwbF3NImOeLgO34N6QbHfI7/8xNpjTFLgOYaPpHWo=;
- b=DUSY1fzMEcpG1TTIKelJ8FecG2TWoNcHNe8pHT4d1W9SYAsh96UsqHhJWY2qgnYhhX
- C5f2MKGN25JCLq0eEg0XcIY7J0uJHEzj06t7/p1i9duFv/Td7YoBH1EjQ8owu1CSMYW+
- X6uypOpXzBrKGQXxFevqB6ktAVBtol1b6KiN4=
+ bh=KLo1TS6yP1mh9byiGjBCIAn/owd7nzTqirIBz2edMGc=;
+ b=eeXkjUkDtC+QrIQRF38Mzha9v6Ou1MSs6Fo99wGr4jTuK0yo4UA6cUIwvC0GBSmI8/
+ KacNpEky7BVuoyspGxzk+8pvYvQzrElPYv84p5vtTIlaBgp8jQ8qvi1xbBKv1gn8y2Ra
+ SnCk14pQblod7UmKPQ8H1d1nKuv2ACl2OP+KU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692986780; x=1693591580;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vvxwbF3NImOeLgO34N6QbHfI7/8xNpjTFLgOYaPpHWo=;
- b=Uxk/zpQ3NFp6Ow+9PHL+Gmuad4VCCfZfA5RCPkmX3H3te7XqOzr5v0NSRCnV4k54CP
- QcJfb5OBVY6UWTaQrWYLOdcPt+3GZMz9ll3hp0ztz3V9HsYltYxKoiiTtRQAAT17IGZ7
- L/fh45+YbcYviYjYzg+ignmjMQJkOaoyCjDdU9fu9ZnTXFCmlrG9H3OkXj3OYXDl7ogh
- szyGWiabKBOuy/s+hCZ5UOR6vKrf8BI/QfQaNz6uoc2UMd2p+7AjtcezbsaqIuzsR2ti
- px2B7JpuV7VsZ6it9mNoEhYJeT89kJJO/TqBJGlDD+Rirt7w8rWMCUaxf60mVRoulgjn
- 429g==
-X-Gm-Message-State: AOJu0YwN2dxnd5HwWbqeytG1EhP8V5IOoygLijTj+mKAiOnSYqGGBVic
- ru0sXeCnRQMaQOrbisX6FjZII6JaTXKzM3LFQ3kdvw==
-X-Google-Smtp-Source: AGHT+IEUAdeMWqupa3nK4qO+kbeL6v9Qn6suH3Z2AA82uM+MNZLnInWyCsR8OU4AK82TCpl9ltKddcYeDdxMd8QiUps=
-X-Received: by 2002:a05:6402:b0e:b0:52a:40cf:4dff with SMTP id
- bm14-20020a0564020b0e00b0052a40cf4dffmr4635732edb.9.1692986779727; Fri, 25
- Aug 2023 11:06:19 -0700 (PDT)
+ bh=KLo1TS6yP1mh9byiGjBCIAn/owd7nzTqirIBz2edMGc=;
+ b=R6MYJRuhZpALCSZKcYB33xyrVfW+AZVPrX/1ssdNvYdtRR4ScqlEGH2fEprhIA8fFq
+ WC5juDe9i9qdx+Jqo49GSzMLHemGfuMNinTRx8ZTiOEmKCUKgOmebmJkSLCEEASvxdt3
+ Wsd8OGZ1qjCqv9/Olm0QPv45OzsMPkC78wUe8viW8kyiecJkAGxvEH/lJEh9Ac+77J6r
+ JXW7QOLsPmiIV1LQrBuWw0TOb0Jvmbq6MH4FGzkGiGPctnDn1Z15D2iAKXEmenqaYTe+
+ hx6lJ8VAJjLSUQF+iq/aBz5HdP51ZBzsH0zqZ+SxCLYDE+OP8on+Uw0yuOv9IgmLZnBb
+ pdyg==
+X-Gm-Message-State: AOJu0Yxot6KKQjmrzO+/ZOeq015GMx8J7waQHvL9JnUu/qwAYOD6djAA
+ RaCpjnnFbW4yyCYf/4bbvd7bvmzgjHJNzFc1MHS8dA==
+X-Google-Smtp-Source: AGHT+IHpWyQ4EeR7fOZjrbyohvThIvTKL0sb60EuNxjJHd4gBMdU2m0M/7hY9IPdx9oT0DsqZlYvnjMkGdteLPQpyx4=
+X-Received: by 2002:a05:6512:3b97:b0:500:9d4a:89fd with SMTP id
+ g23-20020a0565123b9700b005009d4a89fdmr5684114lfv.33.1692986780335; Fri, 25
+ Aug 2023 11:06:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <ZOisRZBQQJDW/Pco@smile.fi.intel.com>
- <20230825135141.3210006-1-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20230825135141.3210006-1-andriy.shevchenko@linux.intel.com>
+References: <20230824182337.1666435-1-sjg@chromium.org>
+ <ZOiLOkGpI87jAZ7h@smile.fi.intel.com>
+ <ZOiqBvuZ6Z1gWd4h@smile.fi.intel.com> <ZOiryc6qOuentDqF@smile.fi.intel.com>
+ <ZOisRZBQQJDW/Pco@smile.fi.intel.com>
+In-Reply-To: <ZOisRZBQQJDW/Pco@smile.fi.intel.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 25 Aug 2023 12:06:06 -0600
-Message-ID: <CAPnjgZ09Y+tCq8X+Hx1PpM7c2ya9KXqLy9EsrigqcdAqkgYPfg@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] TO BE FOLDED: x86: tangier: Add FADT to the chain
+Date: Fri, 25 Aug 2023 12:06:08 -0600
+Message-ID: <CAPnjgZ0ZwAQXrri0j1inAttmvNi2TcM9LA7hfULoMNLH8GRs-A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] Reland "x86: Move FACP table into separate functions""
 To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,38 +85,70 @@ X-Virus-Status: Clean
 
 Hi Andy,
 
-On Fri, 25 Aug 2023 at 07:52, Andy Shevchenko
+On Fri, 25 Aug 2023 at 07:27, Andy Shevchenko
 <andriy.shevchenko@linux.intel.com> wrote:
 >
-> The Simon's patch missed the FADT to be added to the chain, hence all
-> the issues on Intel Tangier.
+> On Fri, Aug 25, 2023 at 04:25:29PM +0300, Andy Shevchenko wrote:
+> > On Fri, Aug 25, 2023 at 04:17:58PM +0300, Andy Shevchenko wrote:
+> > > On Fri, Aug 25, 2023 at 02:06:34PM +0300, Andy Shevchenko wrote:
+> > > > On Thu, Aug 24, 2023 at 12:23:32PM -0600, Simon Glass wrote:
+> > > > > Each board has its own way of creating this table. Rather than calling the
+> > > > > acpi_create_fadt() function for each one from a common acpi_write_fadt()
+> > > > > function, just move the writer into the board-specific code.
+> > > >
+> > > > No luck, but I have a bit of time to debug more.
+> > >
+> > > Okay, after your patch even U-Boot can't see those tables
+> > >
+> > > => acpi list
+> > > Name      Base   Size  Detail
+> > > ----  --------  -----  ------
+> > > RSDP  000e4500     24  v02 U-BOOT
+> > > RSDT  000e4530     34  v01 U-BOOT U-BOOTBL 20231001 INTL 0
+> > > XSDT  000e45e0     44  v01 U-BOOT U-BOOTBL 20231001 INTL 0
+> > > CSRT  000e5490     58  v00 U-BOOT U-BOOTBL 20231001 INTL 0
+> > > MCFG  000e5610     3c  v01 U-BOOT U-BOOTBL 20231001 INTL 0
+> > > SPCR  000e5650     50  v02 U-BOOT U-BOOTBL 20231001 INTL 0
+> > > APIC  000e56a0     48  v02 U-BOOT U-BOOTBL 20231001 INTL 0
+> > >
+> > > Because the base is badly corrupted:
+> > >
+> > > -00000030: 52 53 44 54 38 00 00 00 01 95 55 2d 42 4f 4f 54  RSDT8.....U-BOOT
+> > > +00000030: 52 53 44 54 34 00 00 00 01 eb 55 2d 42 4f 4f 54  RSDT4.....U-BOOT
+> >
+> > Length -4 bytes, another checksum as a result.
+> >
+> > > -00000050: 00 00 00 00 90 54 0e 00 f0 54 0e 00 10 56 0e 00  .....T...T...V..
+> > > +00000050: 00 00 00 00 90 54 0e 00 10 56 0e 00 50 56 0e 00  .....T...V..PV..
+> >
+> > Missing pointer to 0x0e54f0 which is... FADT!
+> >
+> > > -00000060: 50 56 0e 00 a0 56 0e 00 00 00 00 00 00 00 00 00  PV...V..........
+> > > +00000060: a0 56 0e 00 00 00 00 00 00 00 00 00 00 00 00 00  .V..............
+> > >
+> > > -000000e0: 58 53 44 54 4c 00 00 00 01 7b 55 2d 42 4f 4f 54  XSDTL....{U-BOOT
+> > > +000000e0: 58 53 44 54 44 00 00 00 01 d5 55 2d 42 4f 4f 54  XSDTD.....U-BOOT
+> >
+> > Wrong length, another checksum.
+> >
+> > > -00000100: 00 00 00 00 90 54 0e 00 00 00 00 00 f0 54 0e 00  .....T.......T..
+> > > +00000100: 00 00 00 00 90 54 0e 00 00 00 00 00 10 56 0e 00  .....T.......V..
+> > >
+> > > -00000110: 00 00 00 00 10 56 0e 00 00 00 00 00 50 56 0e 00  .....V......PV..
+> > > +00000110: 00 00 00 00 50 56 0e 00 00 00 00 00 a0 56 0e 00  ....PV.......V..
+> > >
+> > > -00000120: 00 00 00 00 a0 56 0e 00 00 00 00 00 00 00 00 00  .....V..........
+> > > +00000120: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+> >
+> > Same reason. So, your code forgot to link FADT to the main tables.
 >
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> ---
->  arch/x86/cpu/tangier/acpi.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
-> index 01b30553818c..ffaa56ab6f87 100644
-> --- a/arch/x86/cpu/tangier/acpi.c
-> +++ b/arch/x86/cpu/tangier/acpi.c
-> @@ -52,6 +52,8 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
->
->         header->checksum = table_compute_checksum(fadt, header->length);
+> By code analysis you simply missed
 >
 > +       acpi_add_table(ctx, fadt);
-> +
->         acpi_inc(ctx, sizeof(struct acpi_fadt));
 >
->         return 0;
-> --
-> 2.40.0.1.gaa8946217a0b
->
+> I'm going to check this right now... Stay tuned!
 
-Thank you! I really don't know how I missed that, after starting at it
-all for an hour...
+Thanks for digging into this, I really appreciate it!
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
+- Simon
