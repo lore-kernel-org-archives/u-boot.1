@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2902AC71133
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 11:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ACC6C3DA66
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 11:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6896A86A2D;
-	Fri, 25 Aug 2023 13:17:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4A3F869DD;
+	Fri, 25 Aug 2023 13:17:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="up3ZcFV2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tERvYFps";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B95186A2D; Fri, 25 Aug 2023 13:17:53 +0200 (CEST)
+ id A258086898; Fri, 25 Aug 2023 13:17:55 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C988986993
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 13:17:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0D2F86A65
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 13:17:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PBHm3c005090;
- Fri, 25 Aug 2023 06:17:48 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PBHpjs005097;
+ Fri, 25 Aug 2023 06:17:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692962268;
- bh=lzRzQAQsTHSObClqc/5w/vYN4UK/C+a47ul0pJInOyo=;
+ s=ti-com-17Q1; t=1692962271;
+ bh=Rfs0Y1cU0pH5+Ut/L86F6ow8s4TTIa2b/momIneZLok=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=up3ZcFV2Vw+tbu1IvIxkqLNWD1HKVhpHd6upB9AKTRh+7drh3e5n7N9/iSmH/UCRk
- /LMA/Y46X7x8KJT6g246mD51LOV/pJYbD6QpRv4yce6w2F4BRjI2Fi9Mx8abMQ771J
- GS0xye5wX9sYkLtKC+r2iT6p0YzsW3S0xU6milGY=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PBHmR6073205
+ b=tERvYFpsb4wShpEC5JsgvxUBxSkJNqTDEceA7x6kxmwuwiPXqgcQaKKffWoHTRCv9
+ GR+YHgU60GmHmmHvQSCKECnbdg0Jd3d6vjXClS90VBaW5oSIW/7r4Wc6Vl11h6EoYB
+ 6spxB/2PadBBvV9REcDc1lzRRWhK999GOo6vn5HE=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PBHpsZ130348
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Aug 2023 06:17:48 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 25 Aug 2023 06:17:51 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Aug 2023 06:17:47 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2023 06:17:50 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Aug 2023 06:17:47 -0500
+ Frontend Transport; Fri, 25 Aug 2023 06:17:50 -0500
 Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PBHQCA023435;
- Fri, 25 Aug 2023 06:17:44 -0500
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PBHQCB023435;
+ Fri, 25 Aug 2023 06:17:47 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Fri, 25 Aug 2023 16:47:03 +0530
-Subject: [PATCH v2 5/6] docs: ti: j721s2_evm: Create documentation from
- J7200 docs
+Date: Fri, 25 Aug 2023 16:47:04 +0530
+Subject: [PATCH v2 6/6] board: ti: j721s2: MAINTAINERS: Update the
+ MAINTAINERS File.
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20230816-b4-upstream-j721s2-r5-pinmux-v2-5-a5f141be40bc@ti.com>
+Message-ID: <20230816-b4-upstream-j721s2-r5-pinmux-v2-6-a5f141be40bc@ti.com>
 References: <20230816-b4-upstream-j721s2-r5-pinmux-v2-0-a5f141be40bc@ti.com>
 In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v2-0-a5f141be40bc@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -67,11 +67,11 @@ CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
  <a-nandan@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
  <m-chawdhry@ti.com>
 X-Mailer: b4 0.12.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1692962247; l=7915;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1692962247; l=1182;
  i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
- bh=VDmq1dKe3T+se6q9PEz+n540IXHsDl1ltztfm2jN1os=;
- b=/7uYbLHt02PYKGd78PGEe40RH2njq2kd4DxxPir8XZRbZzZZXJjMCDjy1pR1+80tVFH32FcGr
- WWLxUQMt+W8AxSDILXCr4iL21PhYG+pICsaceAdrP4pby6GD9nxXWoM
+ bh=cfFtjxk/BVy4pBSko5Knrka+uGcV9tihSQbcM7d80+A=;
+ b=PM1inO5reDQoQKAj8deNpFalzPjklH3fyaKEUddY6gxLH9HcLHVSQnwXt0bANPn/wlEob/FKA
+ h0qu6Vpd9z2AlNoEuv2Ysr/7n7L2tNVqmEUTqDyBPDQa5pYPWMkbzw9
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -91,298 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The documentation is based off J7200 documentation tailored for J721S2.
-
-TRM for J721S2: https://www.ti.com/lit/pdf/spruj28
-Product Page: https://www.ti.com/product/TDA4AL-Q1
+Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
+to the previous MAINTAINER not being associated with TI.
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- doc/board/ti/j721s2_evm.rst | 263 ++++++++++++++++++++++++++++++++++++++++++++
- doc/board/ti/k3.rst         |   1 +
- 2 files changed, 264 insertions(+)
+ board/ti/j721s2/MAINTAINERS | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-new file mode 100644
-index 000000000000..1b560eb4a60e
---- /dev/null
-+++ b/doc/board/ti/j721s2_evm.rst
-@@ -0,0 +1,263 @@
-+.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+.. sectionauthor:: Manorit Chawdhry <m-chawdhry@ti.com>
-+
-+J721S2 Platforms
-+================
-+
-+Introduction:
-+-------------
-+The J721S2 family of SoCs are part of K3 Multicore SoC architecture platform
-+targeting automotive applications. They are designed as a low power, high
-+performance and highly integrated device architecture, adding significant
-+enhancement on processing power, graphics capability, video and imaging
-+processing, virtualization and coherent memory support.
-+
-+The device is partitioned into three functional domains, each containing
-+specific processing cores and peripherals:
-+
-+1. Wake-up (WKUP) domain:
-+        * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
-+
-+2. Microcontroller (MCU) domain:
-+        * Dual core ARM Cortex-R5F processor, runs device management
-+          and SoC early boot
-+
-+3. MAIN domain:
-+        * Dual core 64-bit ARM Cortex-A72, runs HLOS
-+
-+More info can be found in TRM: https://www.ti.com/lit/pdf/spruj28
-+
-+Platform information:
-+
-+* https://www.ti.com/tool/J721S2XSOMXEVM
-+
-+Boot Flow:
-+----------
-+Below is the pictorial representation of boot flow:
-+
-+.. image:: img/boot_diagram_k3_current.svg
-+
-+- On this platform, "TI Foundational Security" (TIFS) functions as the
-+  security enclave master while "Device Manager" (DM), also known as the
-+  "TISCI server" in TI terminology, offers all the essential services.
-+
-+- As illustrated in the diagram above, R5 SPL manages power and clock
-+  services independently before handing over control to "DM". The A72 or
-+  the C7x (Aux core) software components request TIFS/DM to handle
-+  security or device management services.
-+
-+Sources:
-+--------
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure:
-+----------------
-+0. Setup the environment variables:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
-+ $ export TFA_BOARD=generic
-+ $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-+ $ # This is not a typo, j784s4 is the
-+ $ # OP-TEE platform for j721s2
-+ $ export OPTEE_PLATFORM=k3-j784s4
-+ $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-+
-+.. j721s2_evm_rst_include_start_build_steps
-+
-+1. Trusted Firmware-A:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+
-+2. OP-TEE:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_optee
-+    :end-before: .. k3_rst_include_end_build_steps_optee
-+
-+3. U-Boot:
-+
-+.. _j721s2_evm_rst_u_boot_r5:
-+
-+* 3.1 R5:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+.. _j721s2_evm_rst_u_boot_a72:
-+
-+* 3.2 A72:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. j721s2_evm_rst_include_end_build_steps
-+
-+Target Images
-+--------------
-+In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
-+variant (GP, HS-FS, HS-SE) requires a different source for these files.
-+
-+ - GP
-+
-+        * tiboot3-j721s2-gp-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-+        * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-+
-+ - HS-FS
-+
-+        * tiboot3-j721s2-hs-fs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-+        * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-+
-+ - HS-SE
-+
-+        * tiboot3-j721s2-hs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-+        * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-+
-+Image formats:
-+--------------
-+
-+- tiboot3.bin
-+
-+.. image:: img/multi_cert_tiboot3.bin.svg
-+
-+- tispl.bin
-+
-+.. image:: img/dm_tispl.bin.svg
-+
-+R5 Memory Map:
-+--------------
-+
-+.. list-table::
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Region
-+     - Start Address
-+     - End Address
-+
-+   * - SPL
-+     - 0x41c00000
-+     - 0x41c40000
-+
-+   * - EMPTY
-+     - 0x41c40000
-+     - 0x41c61f20
-+
-+   * - STACK
-+     - 0x41c65f20
-+     - 0x41c61f20
-+
-+   * - Global data
-+     - 0x41c65f20
-+     - 0x41c66000
-+
-+   * - Heap
-+     - 0x41c66000
-+     - 0x41c76000
-+
-+   * - BSS
-+     - 0x41c76000
-+     - 0x41c80000
-+
-+   * - DM DATA
-+     - 0x41c80000
-+     - 0x41c84130
-+
-+   * - EMPTY
-+     - 0x41c84130
-+     - 0x41cff9fc
-+
-+   * - MCU Scratchpad
-+     - 0x41cff9fc
-+     - 0x41cffbfc
-+
-+   * - ROM DATA
-+     - 0x41cffbfc
-+     - 0x41cfffff
-+
-+Switch Setting for Boot Mode
-+----------------------------
-+
-+Boot Mode pins provide means to select the boot mode and options before the
-+device is powered up. After every POR, they are the main source to populate
-+the Boot Parameter Tables.
-+
-+The following table shows some common boot modes used on J721S2 platform.
-+More details can be found in the Technical Reference Manual:
-+https://www.ti.com/lit/pdf/spruj28 under the `Boot Mode Pins` section.
-+
-+.. list-table:: Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW9: 12345678
-+     - SW8: 12345678
-+
-+   * - SD
-+     - 00000000
-+     - 10000010
-+
-+   * - EMMC
-+     - 01000000
-+     - 10000000
-+
-+   * - OSPI
-+     - 01000000
-+     - 00000110
-+
-+   * - UART
-+     - 01110000
-+     - 00000000
-+
-+   * - USB DFU
-+     - 00100000
-+     - 10000000
-+
-+For SW8 and SW9, the switch state in the "ON" position = 1.
-+
-+Debugging U-Boot
-+----------------
-+
-+See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-+detailed setup information.
-+
-+.. warning::
-+
-+  **OpenOCD support since**: v0.12.0
-+
-+  If the default package version of OpenOCD in your development
-+  environment's distribution needs to be updated, it might be necessary to
-+  build OpenOCD from the source.
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-+    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-+
-+To start OpenOCD and connect to the board
-+
-+.. code-block:: bash
-+
-+  openocd -f board/ti_j721s2evm.cfg
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 5f9bd4dfcbe9..423d55526dc5 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -36,6 +36,7 @@ K3 Based SoCs
-    am65x_evm
-    j7200_evm
-    j721e_evm
-+   j721s2_evm
- 
- Boot Flow Overview
- ------------------
+diff --git a/board/ti/j721s2/MAINTAINERS b/board/ti/j721s2/MAINTAINERS
+index 323bd2353a7e..97a0581d0405 100644
+--- a/board/ti/j721s2/MAINTAINERS
++++ b/board/ti/j721s2/MAINTAINERS
+@@ -1,7 +1,8 @@
+ J721S2 BOARD
+-M:	Aswath Govindraju <a-govindraju@ti.com>
++M:	Manorit Chawdhry <m-chawdhry@ti.com>
+ S:	Maintained
+ F:	board/ti/j721s2
++F:	doc/board/ti/j721s2_evm.rst
+ F:	include/configs/j721s2_evm.h
+ F:	configs/j721s2_evm_r5_defconfig
+ F:	configs/j721s2_evm_a72_defconfig
+@@ -11,6 +12,6 @@ F:	arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
+ F:	arch/arm/dts/k3-j721s2-som-p0.dtsi
+ F:	arch/arm/dts/k3-j721s2-common-proc-board.dts
+ F:	arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
+-F:	arch/arm/dts//k3-j721s2-r5-common-proc-board.dts
++F:	arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
+ F:	arch/arm/dts/k3-j721s2-ddr.dtsi
+ F:	arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi
 
 -- 
 2.41.0
