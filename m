@@ -4,74 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435E1C3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 12:40:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957EBC71133
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 12:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66AC686A5A;
-	Fri, 25 Aug 2023 14:39:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
+	by phobos.denx.de (Postfix) with ESMTP id D148F86489;
+	Fri, 25 Aug 2023 14:59:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="LsqVDpXp";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C3EE86961; Fri, 25 Aug 2023 09:21:09 +0200 (CEST)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
- [209.85.214.180])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63A53866BB; Fri, 25 Aug 2023 14:59:50 +0200 (CEST)
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F7428650F
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 09:21:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=csie.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wens213@gmail.com
-Received: by mail-pl1-f180.google.com with SMTP id
- d9443c01a7336-1bc0d39b52cso5091915ad.2
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 00:21:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692948063; x=1693552863;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zkrgdFyWhCPa0hX6ixyHueHhKsAL+l2RFA8/kdDjrrs=;
- b=MLztkw4cxHNHU9IuPwVUAi7MnPTAm0J9yoXVS2FEbykDZISq+JZYEkXJCQAGAOb90h
- cb02o0AdH32pQkhcJwTZa1AgSgizQpRvtZETPxKOEu4UZrb4WGaSttpQhZ6HXIFewzcE
- LqTvuallcmBgZpTAMcUSEpylotX6q4ii4EGurNKpXNJTD9m8VfYS/+cqZ+9gEMdj3J47
- a085mzJg2cXt//LV5I5GHqNtY6CDbO50jZKnPq1aEWbh/0y5o/kS3gMZF71OrQEpXwjP
- 9b+hOZC79ptHkF8ks9Ok9D6NMCTWoE7rCZ7kp3poOSrgV8Vnu1A9n3P+EZJ9DqwhSdSH
- QPrQ==
-X-Gm-Message-State: AOJu0YzOiSKI2RN7HrSnZQCCTillDHoMlVMJAWOCXxaVWQuoHim/Je5d
- OT3RWdPxkWqPasUvghu4dm72CGAikOU=
-X-Google-Smtp-Source: AGHT+IHfT+q599eqmiZ+FibT4D2s1+YRtMvAgiYq5vobKhAz7nHrNQb50Rwfq4eNsJB3Cepbq3oegA==
-X-Received: by 2002:a17:903:1c4:b0:1b8:4ec2:5200 with SMTP id
- e4-20020a17090301c400b001b84ec25200mr16598224plh.2.1692948063278; 
- Fri, 25 Aug 2023 00:21:03 -0700 (PDT)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com.
- [209.85.216.47]) by smtp.gmail.com with ESMTPSA id
- c13-20020a170902d48d00b001bd28b9c3ddsm899851plg.299.2023.08.25.00.21.02
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Aug 2023 00:21:02 -0700 (PDT)
-Received: by mail-pj1-f47.google.com with SMTP id
- 98e67ed59e1d1-26d5970cd28so382560a91.2
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 00:21:02 -0700 (PDT)
-X-Received: by 2002:a17:90b:791:b0:267:f5d1:1dd3 with SMTP id
- l17-20020a17090b079100b00267f5d11dd3mr14089582pjz.11.1692948062664; Fri, 25
- Aug 2023 00:21:02 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 22D498643A
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 14:59:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.intel.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=andriy.shevchenko@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1692968387; x=1724504387;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=Vu097RAPNTBrVkYSmoOa+bdzsbhO8evE2i3y0CtI/aw=;
+ b=LsqVDpXp+si5r2xxcOdOtdGCrpeDN7AqRlfnAi+c5TeIa4BQNndzKMJd
+ KtMhtQVvkaHLlsEVuUh37nkiTbM9+X2oHnK+7z6RZhdNy4T9DRarfHJkc
+ xisqBwRpQR+jwYUsc0icRLKPETgU/nX/GCBDdzMO9PBZ7ez1nl0DbOxdr
+ mxg1UbEXKVsYwivYZZTThnbj2UKauUaKW2/iddGoi5lb6xab6OeoEzVly
+ UfCVSCGOW662SKueQixH2VMrugts0r93UYVshqFfqe25pDzFOPmZDFFOD
+ HQGiLdIJi/EJLzYJpvwFP4rOgr0R+CyAxGKbcDJAwrdN1/WxP6L/2pYdS w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10813"; a="372104172"
+X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; d="scan'208";a="372104172"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Aug 2023 05:59:39 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10813"; a="984111040"
+X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; d="scan'208";a="984111040"
+Received: from smile.fi.intel.com ([10.237.72.54])
+ by fmsmga006.fm.intel.com with ESMTP; 25 Aug 2023 05:59:38 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.96)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1qZWPY-000djb-2P; Fri, 25 Aug 2023 15:59:36 +0300
+Date: Fri, 25 Aug 2023 15:59:36 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH 1/2] Reland "x86: Move FACP table into separate functions""
+Message-ID: <ZOiluCmG0uZnVg1j@smile.fi.intel.com>
+References: <20230824182337.1666435-1-sjg@chromium.org>
+ <ZOiLOkGpI87jAZ7h@smile.fi.intel.com>
+ <ZOiMDRIailJwa2zY@smile.fi.intel.com>
 MIME-Version: 1.0
-References: <20230531201520.15479-1-CFSworks@gmail.com>
- <20230814213854.408962d5@slackpad.lan>
-In-Reply-To: <20230814213854.408962d5@slackpad.lan>
-From: Chen-Yu Tsai <wens@csie.org>
-Date: Fri, 25 Aug 2023 15:20:51 +0800
-X-Gmail-Original-Message-ID: <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
-Message-ID: <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
-Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
- psci_arch_init
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de, 
- Jagan Teki <jagan@amarulasolutions.com>, Marc Zyngier <maz@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 25 Aug 2023 14:39:25 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZOiMDRIailJwa2zY@smile.fi.intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,83 +75,216 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Aug 15, 2023 at 4:40=E2=80=AFAM Andre Przywara <andre.przywara@arm.=
-com> wrote:
->
-> On Wed, 31 May 2023 14:15:20 -0600
-> Sam Edwards <cfsworks@gmail.com> wrote:
->
-> Hi,
->
-> (CC:ing Marc and Chen-Yu as the original authors)
->
-> sorry for the delay, found that mouldering in my Drafts folder.
->
-> > The nonsec code overrides/handles these:
-> > - Setting PMR to 0xFF happens earlier, in _nonsec_init, so this is
-> >   redundant.
-> > - The NS bit is not yet set: it gets set later in _secure_monitor.
-> >   Trying to clear it here is pointless and misleading.
->
-> So superficially this looks alright, but I am still somewhat reluctant
-> to apply this, see below ...
->
-> > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> > ---
-> >  arch/arm/cpu/armv7/sunxi/psci.c | 4 ----
-> >  1 file changed, 4 deletions(-)
-> >
-> > diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi=
-/psci.c
-> > index e1d3638b5c..f866025c37 100644
-> > --- a/arch/arm/cpu/armv7/sunxi/psci.c
-> > +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> > @@ -300,14 +300,10 @@ void __secure psci_arch_init(void)
-> >       /* Set SGI15 priority to 0 */
-> >       writeb(0, GICD_BASE + GICD_IPRIORITYRn + 15);
-> >
-> > -     /* Be cool with non-secure */
-> > -     writel(0xff, GICC_BASE + GICC_PMR);
-> > -
-> >       /* Switch FIQEn on */
-> >       setbits_le32(GICC_BASE + GICC_CTLR, BIT(3));
-> >
-> >       reg =3D cp15_read_scr();
-> >       reg |=3D BIT(2);  /* Enable FIQ in monitor mode */
-> > -     reg &=3D ~BIT(0); /* Secure mode */
->
-> I am scratching my head on this one: I see it deliberately being done in
-> the original patch by Marc[1], and wonder why. If I read the code and
-> the architecture correctly, this routine is called only(?) from the SMC
-> handler, which means we are in monitor mode, that only exists in secure
-> state. So the NS bit is irrelevant until we switch to another mode. And
-> we indeed set the bit later, before dropping back to non-secure. So I
-> agree that clearing the bit is pointless. Was it put in to be more
-> robust, for other potential callers of this function, for instance in
-> the boot path?
+On Fri, Aug 25, 2023 at 02:10:05PM +0300, Andy Shevchenko wrote:
+> On Fri, Aug 25, 2023 at 02:06:34PM +0300, Andy Shevchenko wrote:
+> > On Thu, Aug 24, 2023 at 12:23:32PM -0600, Simon Glass wrote:
+> > > Each board has its own way of creating this table. Rather than calling the
+> > > acpi_create_fadt() function for each one from a common acpi_write_fadt()
+> > > function, just move the writer into the board-specific code.
+> > 
+> > No luck, but I have a bit of time to debug more.
+> 
+> U-boot:
+> 
+> Writing tables to e4500:
+> ACPI: Writing ACPI tables at e4500
+> writing acpi tables
+> 0base: writing table '<NULL>' at 000e4500
+> - return code 0
+> 1facs: writing table 'FACS' at 000e4740
+> - return code 0
+> 3dsdt: writing table 'DSDT' at 000e4780
+> - return code 0
+> 4gnvs: writing table 'GNVS' at 000e5390
+> - return code 0
+> 5csrt: writing table 'CSRT' at 000e5490
+> - return code 0
+> 5fadt: writing table 'FADT' at 000e54f0
+> - return code 0
+> 5mcfg: writing table 'MCFG' at 000e5610
+> - return code 0
+> 5spcr: writing table 'SPCR' at 000e5650
+> - return code 0
+> 5tcpa: writing table 'TCPA' at 000e56a0
+> 5tcpa: Omitted due to being empty
+> - return code 0
+> 5tpm2: writing table 'TPM2' at 000e56a0
+> 5tpm2: Omitted due to being empty
+> - return code 0
+> 5x86: writing table '<NULL>' at 000e56a0
+> - return code 0
+> 6ssdt: writing table 'SSDT' at 000e56f0
+> 6ssdt: Omitted due to being empty
+> - return code 0
+> 8dev: writing table '<NULL>' at 000e56f0
+> - return code 0
+> writing acpi tables done ok
+> ACPI current = e56f0
+> - wrote 'acpi' to e4500, end e56f0
+> - wrote 'smbios' to e56f0, end e584f
+> - done writing tables
 
-IIRC the GIC manual says that the secure bit is set or cleared to select
-which bank of registers is accessed.
+> Linux:
+> 
+> [    0.003034] ACPI: RSDP 0x00000000000E4500 000024 (v02 U-BOOT)
+> [    0.003090] ACPI: XSDT 0x00000000000E45E0 000044 (v01 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+> [    0.003158] ACPI: CSRT 0x00000000000E5490 000058 (v00 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+> [    0.003219] ACPI: MCFG 0x00000000000E5610 00003C (v01 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+> [    0.003277] ACPI: SPCR 0x00000000000E5650 000050 (v02 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+> [    0.003332] ACPI: APIC 0x00000000000E56A0 000048 (v02 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+> [    0.003382] ACPI: Reserving CSRT table memory at [mem 0xe5490-0xe54e7]
+> [    0.003403] ACPI: Reserving MCFG table memory at [mem 0xe5610-0xe564b]
+> [    0.003421] ACPI: Reserving SPCR table memory at [mem 0xe5650-0xe569f]
+> [    0.003437] ACPI: Reserving APIC table memory at [mem 0xe56a0-0xe56e7]
+> 
+> As you can see a few tables are missing:
+> FACS, DSDT, GNVS, FADT
 
-And I suppose it is here to be more robust.
+I added a debug to the ACPI writer, so with your patch
 
-ChenYu
+Writing tables to e4500:
+ACPI: Writing ACPI tables at e4500
+writing acpi tables
+0base: writing table '<NULL>' at 000e4500
+* other: Added type 3, 000e4500, size 240
+- return code 0
+1facs: writing table 'FACS' at 000e4740
+* other: Added type 3, 000e4740, size 40
+- return code 0
+3dsdt: writing table 'DSDT' at 000e4780
+Writing DSDT tables
+Writing DSDT finished, err=0
+Failed to find ordering, leaving as is
+* other: Added type 3, 000e4780, size c10
+- return code 0
+4gnvs: writing table 'GNVS' at 000e5390
+* other: Added type 3, 000e5390, size 100
+- return code 0
+5csrt: writing table 'CSRT' at 000e5490
+* other: Added type 3, 000e5490, size 60
+- return code 0
+5fadt: writing table 'FADT' at 000e54f0
+* other: Added type 3, 000e54f0, size 120
+- return code 0
+5mcfg: writing table 'MCFG' at 000e5610
+* other: Added type 3, 000e5610, size 40
+- return code 0
+5spcr: writing table 'SPCR' at 000e5650
+* other: Added type 3, 000e5650, size 50
+- return code 0
+5tcpa: writing table 'TCPA' at 000e56a0
+5tcpa: Omitted due to being empty
+- return code 0
+5tpm2: writing table 'TPM2' at 000e56a0
+5tpm2: Omitted due to being empty
+- return code 0
+5x86: writing table '<NULL>' at 000e56a0
+* other: Added type 3, 000e56a0, size 50
+- return code 0
+6ssdt: writing table 'SSDT' at 000e56f0
+Writing SSDT tables
+Writing SSDT finished, err=0
+Failed to find ordering, leaving as is
+6ssdt: Omitted due to being empty
+- return code 0
+8dev: writing table '<NULL>' at 000e56f0
+Writing device tables
+Writing finished, err=0
+- return code 0
+writing acpi tables done ok
+ACPI current = e56f0
+- wrote 'acpi' to e4500, end e56f0
+- wrote 'smbios' to e56f0, end e584f
+- done writing tables
 
-> Does anyone remember?
->
-> Cheers,
-> Andre
->
-> [1]
-> https://source.denx.de/u-boot/u-boot/-/commit/d5db7024aafc5ea603f3a34f83b=
-b29a1eaa3cbe7#f377950449a5dba076796d9e48fbd21f5d6ac545_0_65
->
-> >       cp15_write_scr(reg);
-> >  }
->
+Without your patch (to save your time:
+there is no single character difference 100% copy):
+
+Writing tables to e4500:
+ACPI: Writing ACPI tables at e4500
+writing acpi tables
+0base: writing table '<NULL>' at 000e4500
+* other: Added type 3, 000e4500, size 240
+- return code 0
+1facs: writing table 'FACS' at 000e4740
+* other: Added type 3, 000e4740, size 40
+- return code 0
+3dsdt: writing table 'DSDT' at 000e4780
+Writing DSDT tables
+Writing DSDT finished, err=0
+Failed to find ordering, leaving as is
+* other: Added type 3, 000e4780, size c10
+- return code 0
+4gnvs: writing table 'GNVS' at 000e5390
+* other: Added type 3, 000e5390, size 100
+- return code 0
+5csrt: writing table 'CSRT' at 000e5490
+* other: Added type 3, 000e5490, size 60
+- return code 0
+5fact: writing table 'FADT' at 000e54f0
+* other: Added type 3, 000e54f0, size 120
+- return code 0
+5mcfg: writing table 'MCFG' at 000e5610
+* other: Added type 3, 000e5610, size 40
+- return code 0
+5spcr: writing table 'SPCR' at 000e5650
+* other: Added type 3, 000e5650, size 50
+- return code 0
+5tcpa: writing table 'TCPA' at 000e56a0
+5tcpa: Omitted due to being empty
+- return code 0
+5tpm2: writing table 'TPM2' at 000e56a0
+5tpm2: Omitted due to being empty
+- return code 0
+5x86: writing table '<NULL>' at 000e56a0
+* other: Added type 3, 000e56a0, size 50
+- return code 0
+6ssdt: writing table 'SSDT' at 000e56f0
+Writing SSDT tables
+Writing SSDT finished, err=0
+Failed to find ordering, leaving as is
+6ssdt: Omitted due to being empty
+- return code 0
+8dev: writing table '<NULL>' at 000e56f0
+Writing device tables
+Writing finished, err=0
+- return code 0
+writing acpi tables done ok
+ACPI current = e56f0
+- wrote 'acpi' to e4500, end e56f0
+- wrote 'smbios' to e56f0, end e584f
+- done writing tables
+
+But here you see the difference. So, your patch damages something there.
+Since we lost a few tables, it might be that list of the table pointers
+is corrupted with your new approach. And current debug is poor enough to
+not catch that...
+
+Linux:
+
+[    0.002557] ACPI: Early table checksum verification disabled
+[    0.002582] ACPI: RSDP 0x00000000000E4500 000024 (v02 U-BOOT)
+[    0.002637] ACPI: XSDT 0x00000000000E45E0 00004C (v01 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+[    0.002704] ACPI: CSRT 0x00000000000E5490 000058 (v00 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+[    0.002765] ACPI: FACP 0x00000000000E54F0 000114 (v06 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+[    0.002830] ACPI: DSDT 0x00000000000E4780 000C06 (v02 U-BOOT U-BOOTBL 00010000 INTL 20200925)
+[    0.002889] ACPI: MCFG 0x00000000000E5610 00003C (v01 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+[    0.002945] ACPI: SPCR 0x00000000000E5650 000050 (v02 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+[    0.003000] ACPI: APIC 0x00000000000E56A0 000048 (v02 U-BOOT U-BOOTBL 20231001 INTL 00000000)
+[    0.003049] ACPI: Reserving CSRT table memory at [mem 0xe5490-0xe54e7]
+[    0.003070] ACPI: Reserving FACP table memory at [mem 0xe54f0-0xe5603]
+[    0.003087] ACPI: Reserving DSDT table memory at [mem 0xe4780-0xe5385]
+[    0.003103] ACPI: Reserving MCFG table memory at [mem 0xe5610-0xe564b]
+[    0.003119] ACPI: Reserving SPCR table memory at [mem 0xe5650-0xe569f]
+[    0.003135] ACPI: Reserving APIC table memory at [mem 0xe56a0-0xe56e7]
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
