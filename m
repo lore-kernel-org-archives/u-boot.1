@@ -4,68 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B39EC6787B
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A4BFC3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0D5486B5B;
-	Fri, 25 Aug 2023 20:06:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 286A986B39;
+	Fri, 25 Aug 2023 20:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g7wclGGe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QrftrrBy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2410C86B3F; Fri, 25 Aug 2023 20:06:28 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id D22A586B6B; Fri, 25 Aug 2023 20:06:28 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C4AC86B2D
+ by phobos.denx.de (Postfix) with ESMTPS id CF60386B5B
  for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so4624765a12.1
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-50098cc8967so1921429e87.1
  for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1692986785; x=1693591585;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/N4uFH1b1Qy3iulbFwRcgBFfIDFlm2U+TfqgaRW2eoM=;
- b=g7wclGGe6yclqHZjPaeQrANmyW5wyLIL5gPN/6kPYX+2pwOphkOdDldl9d2hrnHe2a
- cGjFFFTmNVKZA9Zv1KrPo5fuOPWAE3/f5HCMObmkSGgVNYYxl0dsc+JUFZTefnLprwTS
- wt8jZCAgd3CmnFQNBZ3KSRhW5IfU167A91RGA=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=g9QQbdXBjgJnKmPAQFOxw/06aqHM2lfJ+AoB+w68ksY=;
+ b=QrftrrByO1qD0FFLxl1CdTaDEcN+oZaoCSdKoEnr0SL0q8/yio6qocK2w1272aZ1BR
+ lwhoFoK5PBxm5Et45Zr1Tc8OpyHU0yPmpPYZPeFHn/VlcdDO5Njmgd/DSIuCT5zO2RlH
+ 1mt0vw+QcQ8pTKCtEeI45o0rvVKCJ5RY9kUFk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1692986785; x=1693591585;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/N4uFH1b1Qy3iulbFwRcgBFfIDFlm2U+TfqgaRW2eoM=;
- b=i4J0wpLyYwMS9W752RlIl2cLPThqB6hO01fyqU5vXQIP8CPwkFFtqCEL2c9QFMf8IH
- uyEvzvDPw9Y8yPPTlL8hiA6JQGrpKKeFW3k9UH3Odg0VSLnjFaYGQ8lIbj4pgI0ZXM/q
- NhJlqDL52qT+/5FXqfR7Luanis9gHT8Y+W63yWxizeyf1wzUwbkpnSoNRSlgWDAMzJcy
- 07Q0e/shL3rABEtjrapGFGpiBC1Sa/hLCCsiz8jE29EUvBBFFJmRnFjKoUvA9HSCHuE9
- 1SVwKIE5N1tfItG7H9Fx1OVdaEGLcvgNAFP9k3yaKpUtejgX6VdT+1towRrHAtrApPCo
- DUIg==
-X-Gm-Message-State: AOJu0YzDPUVzAkmZ9OA12EKXkvZNaGu6T1yGcl421etHgZogCGXI+Ui5
- IMZRHEGDohj0aHCp6z6eaGr5bqYSynHXBStjDQvTxw==
-X-Google-Smtp-Source: AGHT+IHZ+Py4NH645aJ02V2qg0LuOBbe0gBJ4zD8EOAN3tqZMDx/uGB6UZTPTdSN977wHqXCLNiEkAYGChVrvq3p5Os=
-X-Received: by 2002:a05:6402:40c8:b0:529:d147:e9f3 with SMTP id
- z8-20020a05640240c800b00529d147e9f3mr22467282edb.5.1692986785004; Fri, 25 Aug
- 2023 11:06:25 -0700 (PDT)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g9QQbdXBjgJnKmPAQFOxw/06aqHM2lfJ+AoB+w68ksY=;
+ b=bAMp54FUsZB23wU1/Sk7ijUueW9HZsp64krgFffgKtoMOVWYtABblBXxxFM0BNzUmj
+ z1YZ/pfZsnc5xUiGHmqPJA/Qsm+tlq8l9ih0MLbjIneAhjwwZg0CCbktyfuWJiUyogiK
+ pJL1vBhtxh1Fw78hawUGwVmzzC5TTL7gdgm4VZd1vUvs0728e1jiKdjxhqCqe7PQEjVI
+ yDo7QPoqC4fP0D/HnTG1H9b4/HrlmJaj4ib0JNrRbN2Xpe0gHYWExhXpuk+enU6Ctztq
+ e1xjFjF79HbPn2IjboFjzN8G/3HBQBtTAcp0G4s6rPEyLkCRDDINyaYQrOj4qjvcCY8o
+ spQw==
+X-Gm-Message-State: AOJu0YyS/Kidi4TpOjrAChw4x9lCYNBxykNaxrXekMeXr6TgRoliAkqD
+ Lb6cBEv+Th7DdxRhFRWplj6HtVZqi2e/bZYQ6teQh2riSC5eIIWIXyE=
+X-Google-Smtp-Source: AGHT+IGy/3YVq/fOs6x57dejuUVFu+2gaFO8mqrUJSz+dMm1h3n2cuMdjldnxut/GG/j3CTr/RENJDgXgeGmjosgQdk=
+X-Received: by 2002:a05:6512:1594:b0:500:9b26:9760 with SMTP id
+ bp20-20020a056512159400b005009b269760mr6827908lfb.13.1692986784884; Fri, 25
+ Aug 2023 11:06:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230825081940.5866-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230825081940.5866-1-marek.vasut+renesas@mailbox.org>
+References: <20230825015948.780662-1-Mr.Bossman075@gmail.com>
+ <20230825144859.GI3953269@bill-the-cat>
+In-Reply-To: <20230825144859.GI3953269@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 25 Aug 2023 12:06:11 -0600
-Message-ID: <CAPnjgZ18OOTQDuTUsr4uOnsOe5uiak15sO4VAwOxx=F9aqcMXg@mail.gmail.com>
-Subject: Re: [PATCH v2] test: print: Fix hexdump test on 64bit systems
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Mario Six <mario.six@gdsys.cc>
+Date: Fri, 25 Aug 2023 12:06:10 -0600
+Message-ID: <CAPnjgZ08F=mezS-cQD=6SjQO1OW9b9aZK9iA_NG0LN3WFRXH-g@mail.gmail.com>
+Subject: Re: [PATCH v2] Convert CFG_SYS_UBOOT_START to Kconfig
+To: Tom Rini <trini@konsulko.com>
+Cc: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
+ "Andrew F . Davis" <afd@ti.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>, 
+ Stefan Roese <sr@denx.de>, Weijie Gao <weijie.gao@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Mauro Condarelli <mc5686@mclink.it>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marex@denx.de>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Roger Quadros <rogerq@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,172 +98,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Aug 2023 at 02:20, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
+On Fri, 25 Aug 2023 at 08:49, Tom Rini <trini@konsulko.com> wrote:
 >
-> Use the following regex to make this test compatible with
-> both 32bit and 64bit systems. The trick is to use %0*lx
-> format string for the address prefix in the test.
+> On Thu, Aug 24, 2023 at 09:59:48PM -0400, Jesse Taube wrote:
 >
-> "
-> s@\(ut_assert_nextline("\)0\+\([^:]\+\)\(:.*"\)\();\)@\1%0*lx\3, IS_ENABL=
-ED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x\2UL\4
-> "
+> > Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*")
+> > renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
+> > this meant that the value was no longer available to the Makefile. This
+> > caused imxrt to fail to boot. All the other boards that used this
+> > variable were unaffected because they were using the default value
+> > which is CONFIG_TEXT_BASE.
+> >
+> > This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the default
+> > value to CONFIG_TEXT_BASE.
+> >
+> > Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
+> > Suggested-by: Tom Rini <trini@konsulko.com>
+> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> [snip]
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index 5e2d4286ae..3883cae2ba 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -738,7 +738,24 @@ config TEXT_BASE
+> >       default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >= 64
+> >       hex "Text Base"
+> >       help
+> > -       The address in memory that U-Boot will be running from, initially.
+> > +       The address in memory that U-Boot will be copied and executed from initially.
+> > +
+> > +config HAVE_SYS_UBOOT_START
+> > +     bool "Use custom U-Boot Start"
+
+start ?
+
+> > +     depends on HAVE_TEXT_BASE
+> > +     help
+> > +       By default, the address in memory that U-Boot will be copied from (TEXT_BASE) and the
+> > +       entry point are the same. Select this to start the execution of U-Boot from a different address.
+> > +       This may be required if a header or vector table needs to be copied but not executed.
+
+Nice help!
+
+> > +
+> > +config SYS_UBOOT_START
+> > +     hex
+> > +     depends on HAVE_TEXT_BASE
+> > +     default TEXT_BASE
+> > +     prompt "U-Boot entry" if HAVE_SYS_UBOOT_START
+> > +     help
+> > +       If TEXT_BASE differs from the start of execution, this sets the address in memory that
+> > +       U-Boot will start execution from initially.
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Mario Six <mario.six@gdsys.cc>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
-> V2: Break line before IS_ENABLED
-> ---
->  test/print_ut.c | 42 ++++++++++++++++++++++++++++--------------
->  1 file changed, 28 insertions(+), 14 deletions(-)
+> A small point, these help texts should wrap at 80 columns.  If there's
+> no other feedback I'll just fix that up when applying unless you want
+> to.
 >
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-
-> diff --git a/test/print_ut.c b/test/print_ut.c
-> index 47a6ce57840..b26f6281b01 100644
-> --- a/test/print_ut.c
-> +++ b/test/print_ut.c
-> @@ -283,16 +283,21 @@ static int print_do_hex_dump(struct unit_test_state=
- *uts)
->         /* bytes */
->         console_record_reset();
->         print_hex_dump_bytes("", DUMP_PREFIX_ADDRESS, buf, 0x12);
-> -       ut_assert_nextline("00000000: 00 11 22 33 44 55 66 77 88 99 aa bb=
- cc dd ee ff  ..\"3DUfw........");
-> -       ut_assert_nextline("00000010: 10 00                              =
-              ..");
-> +       ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc=
- dd ee ff  ..\"3DUfw........",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
-> +       ut_assert_nextline("%0*lx: 10 00                                 =
-           ..",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
-);
->         ut_assert_console_end();
->
->         /* line length */
->         console_record_reset();
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 8, 1, buf, 0x12, true);
-> -       ut_assert_nextline("00000000: 00 11 22 33 44 55 66 77  ..\"3DUfw"=
-);
-> -       ut_assert_nextline("00000008: 88 99 aa bb cc dd ee ff  ........")=
-;
-> -       ut_assert_nextline("00000010: 10 00                    ..");
-> +       ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77  ..\"3DUfw",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
-> +       ut_assert_nextline("%0*lx: 88 99 aa bb cc dd ee ff  ........",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x8UL)=
-;
-> +       ut_assert_nextline("%0*lx: 10 00                    ..",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
-);
->         ut_assert_console_end();
->         unmap_sysmem(buf);
->
-> @@ -300,31 +305,39 @@ static int print_do_hex_dump(struct unit_test_state=
- *uts)
->         console_record_reset();
->         buf[0x41] =3D 0x41;
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0x40, 1, buf, 0x42, true)=
-;
-> -       ut_assert_nextline("00000000: 00 11 22 33 44 55 66 77 88 99 aa bb=
- cc dd ee ff 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
- 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
- 00 00  ..\"3DUfw........................................................")=
-;
-> -       ut_assert_nextline("00000040: 00 41                              =
-                                                                           =
-                                                                           =
-        .A");
-> +       ut_assert_nextline("%0*lx: 00 11 22 33 44 55 66 77 88 99 aa bb cc=
- dd ee ff 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
- 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00=
- 00  ..\"3DUfw........................................................",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
-> +       ut_assert_nextline("%0*lx: 00 41                                 =
-                                                                           =
-                                                                           =
-     .A",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x40UL=
-);
->         ut_assert_console_end();
->
->         /* 16-bit */
->         console_record_reset();
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 2, buf, 0x12, true);
-> -       ut_assert_nextline("00000000: 1100 3322 5544 7766 9988 bbaa ddcc =
-ffee  ..\"3DUfw........");
-> -       ut_assert_nextline("00000010: 0010                               =
-      ..");
-> +       ut_assert_nextline("%0*lx: 1100 3322 5544 7766 9988 bbaa ddcc ffe=
-e  ..\"3DUfw........",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
-> +       ut_assert_nextline("%0*lx: 0010                                  =
-   ..",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
-);
->         ut_assert_console_end();
->         unmap_sysmem(buf);
->
->         /* 32-bit */
->         console_record_reset();
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 4, buf, 0x14, true);
-> -       ut_assert_nextline("00000000: 33221100 77665544 bbaa9988 ffeeddcc=
-  ..\"3DUfw........");
-> -       ut_assert_nextline("00000010: 00000010                           =
-  ....");
-> +       ut_assert_nextline("%0*lx: 33221100 77665544 bbaa9988 ffeeddcc  .=
-.\"3DUfw........",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
-> +       ut_assert_nextline("%0*lx: 00000010                             .=
-...",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
-);
->         ut_assert_console_end();
->         unmap_sysmem(buf);
->
->         /* 64-bit */
->         console_record_reset();
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 16, 8, buf, 0x18, true);
-> -       ut_assert_nextline("00000000: 7766554433221100 ffeeddccbbaa9988  =
-..\"3DUfw........");
-> -       ut_assert_nextline("00000010: 0000000000000010                   =
-........");
-> +       ut_assert_nextline("%0*lx: 7766554433221100 ffeeddccbbaa9988  ..\=
-"3DUfw........",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
-> +       ut_assert_nextline("%0*lx: 0000000000000010                   ...=
-.....",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x10UL=
-);
->         ut_assert_console_end();
->         unmap_sysmem(buf);
->
-> @@ -337,7 +350,8 @@ static int print_do_hex_dump(struct unit_test_state *=
-uts)
->                 buf[4 + i] =3D 126 + i;
->         buf[8] =3D 255;
->         print_hex_dump("", DUMP_PREFIX_ADDRESS, 0, 1, buf, 10, true);
-> -       ut_assert_nextline("00000000: 00 1f 20 21 7e 7f 80 81 ff 99      =
-              .. !~.....");
-> +       ut_assert_nextline("%0*lx: 00 1f 20 21 7e 7f 80 81 ff 99         =
-           .. !~.....",
-> +                          IS_ENABLED(CONFIG_PHYS_64BIT) ? 16 : 8, 0x0UL)=
-;
->         ut_assert_console_end();
->         unmap_sysmem(buf);
->
-> --
-> 2.40.1
->
+Yes please
