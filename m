@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEC4EC3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 16:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08229C001DB
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 16:00:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 112AD86A93;
-	Fri, 25 Aug 2023 18:00:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 671D186AA6;
+	Fri, 25 Aug 2023 18:00:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bYaywv66";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jfLbOciy";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QO7/QO+u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E81086A9C; Fri, 25 Aug 2023 18:00:11 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9CD7486AA7; Fri, 25 Aug 2023 18:00:55 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6ECA86A92
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 18:00:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11B2586A93
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 18:00:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RXPmS4M35z9t5l;
- Fri, 25 Aug 2023 18:00:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692979208;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cmshXNXZVGj45k+q3cHPFpwVn8Q/QSuHNy0I5ZjJ8aU=;
- b=bYaywv66fSll6xU049GsNYbfCm6HnkOP2Ya2+pe9SQCJxWiSz7oBlExqDf0GOV/+Mn//3m
- nYd550CYF1UklKEsTcAIhL9Zgm7JyEns9E36I6qQhKTcNqqEa1GgQRmYXPR27PTQ1JAQ/d
- GduroAVHb7xAQ02qZ0LRqyrWKxskOLnVU39tXT3DimKSEIvlKssKFH0huF+umFhYYpFmVW
- pmwdFHnutOUYlmBV2PSoKvjA92qgjynH/qMkfoIFRkPbW2fGzaqLmkIVa99cNryQStK/c9
- MiN5hOAdZK9Vo/ZF111FI2bvzNixvW6spw6JPMSvq3WB4Tpr++/E/1lJPFQMHA==
-Message-ID: <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1692979206;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cmshXNXZVGj45k+q3cHPFpwVn8Q/QSuHNy0I5ZjJ8aU=;
- b=jfLbOciyI29TQSMDIycKbab8CFKBUIGH/NRtZ5K8XppfWl8MA6bTeYwHcAIGiK4eFnh8Uq
- D75wJCzZQ4nOuPwiIaDJwJllNMGoJsKFCfWTtAx4ws8hDDyqMajEnvGtKTp04thYSWzO6L
- Izhj8RIPIGUHHcYEdv2eH1j9KZb7VYvDur+AURtOW+j3IP8pgUQZ7hqc5IKgWpcHag1shy
- +TRA7rb0Hf3aSPlRrN45TwRmbDWrq1B7WgJDawKtdEcZjp5Ih0dhjQm31uHAeRM4xW5/3q
- pw21RuVEghDB4vhKmmUKvLmfCtFE+0TdQtEis0QB8GcfIB7nDDkfyqzwwW24Vg==
-Date: Fri, 25 Aug 2023 18:00:03 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=6601d42974=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37PEKOBM013884; Fri, 25 Aug 2023 18:00:52 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=gyfKoZqt1D1a7cSRWO1pRLU/YrGzxq9yM9fFyRW4DuI=; b=QO
+ 7/QO+uTLN3RROXt4r+4opzkFPcEBhpCJRGo0qajU1ZR076Dm+D60/ALHkY+gvQyd
+ C4WaH1md50XCQ5ZClqM/AT7dYnpM7QJvmhSm4DgSY9S+zMJFQm96d0LvkC7kZZ65
+ 3sOGo7rKQ5lFhT+ySqG8oAZBiRd8abgSHUO9q5852Le3YVe3JQoaXmcLlH6XD1sS
+ lRNp+F/ySEMFtj5xqB8oZ8tYkfjPu5KLh1JVsoK7nsFbBkfW+k8PVq7WuZz5jkB0
+ Jq1UgDhMaJZosuoArek+BYZT2zthvK/7Ndq3tcb25k/BQBPsWmSiXPqKHGPXSbvA
+ F2Pf8lUHGhocBFG/bQwA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3spmjvjmbg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 25 Aug 2023 18:00:52 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 42AAD10004F;
+ Fri, 25 Aug 2023 18:00:51 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 35ADA23C6A0;
+ Fri, 25 Aug 2023 18:00:51 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 25 Aug
+ 2023 18:00:50 +0200
+Message-ID: <fe3a14ce-0221-faef-dd8c-d8adc19a22c0@foss.st.com>
+Date: Fri, 25 Aug 2023 18:00:50 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] fwu: Initialize global fwu library state during CI test
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 1/3] configs: stm32f746-disco: limit resolution to 480x272
 Content-Language: en-US
-To: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>
-References: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
- <CADg8p95Dtvm++wY=74HVBvHL0cNRxKdSEv5ZtaLAbpp6m+hU9Q@mail.gmail.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CADg8p95Dtvm++wY=74HVBvHL0cNRxKdSEv5ZtaLAbpp6m+hU9Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, yannick fertre
+ <yannick.fertre@st.com>, Vikas Manocha <vikas.manocha@st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230820162446.616442-1-dario.binacchi@amarulasolutions.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230820162446.616442-1-dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: cfizf8ee695agpop6n18g1ox549ox44n
-X-MBO-RS-ID: afdf3a3bb87e8889cac
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-25_13,2023-08-25_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,89 +92,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/25/23 12:52, Sughosh Ganu wrote:
-> On Wed, 23 Aug 2023 at 05:47, Marek Vasut
-> <marek.vasut+renesas@mailbox.org> wrote:
->>
->> The current CI test worked by sheer luck, the g_dev global pointer
->> in the fwu library was never initialized and the test equally well
->> failed on sandbox64. Trigger the main loop in sandbox tests too to
->> initialize that global state, and move the sandbox specific exit
->> from fwu_boottime_checks after g_dev is initialized.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Etienne Carriere <etienne.carriere@linaro.org>
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Jassi Brar <jaswinder.singh@linaro.org>
->> Cc: Masahisa Kojima <masahisa.kojima@linaro.org>
->> Cc: Michal Simek <michal.simek@amd.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
->> ---
->>   lib/fwu_updates/fwu.c | 12 ++++++------
->>   test/dm/fwu_mdata.c   | 12 ++++++++++++
->>   2 files changed, 18 insertions(+), 6 deletions(-)
-> 
-> Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> 
-> But I have a question below.
-> 
->>
->> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
->> index 4d0c8b84b9d..22bdc78df59 100644
->> --- a/lib/fwu_updates/fwu.c
->> +++ b/lib/fwu_updates/fwu.c
->> @@ -623,18 +623,18 @@ static int fwu_boottime_checks(void *ctx, struct event *event)
->>          int ret;
->>          u32 boot_idx, active_idx;
->>
->> -       /* Don't have boot time checks on sandbox */
->> -       if (IS_ENABLED(CONFIG_SANDBOX)) {
->> -               boottime_check = 1;
->> -               return 0;
->> -       }
->> -
->>          ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
->>          if (ret) {
->>                  log_debug("Cannot find fwu device\n");
->>                  return ret;
->>          }
->>
->> +       /* Don't have boot time checks on sandbox */
->> +       if (IS_ENABLED(CONFIG_SANDBOX)) {
->> +               boottime_check = 1;
->> +               return 0;
->> +       }
->> +
->>          ret = fwu_get_mdata(NULL);
->>          if (ret) {
->>                  log_debug("Unable to read meta-data\n");
->> diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
->> index 8b5c83ef4e2..52018f610fe 100644
->> --- a/test/dm/fwu_mdata.c
->> +++ b/test/dm/fwu_mdata.c
->> @@ -93,6 +93,12 @@ static int dm_test_fwu_mdata_read(struct unit_test_state *uts)
->>          struct udevice *dev;
->>          struct fwu_mdata mdata = { 0 };
->>
->> +       /*
->> +        * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
->> +        * to populate g_dev global pointer in that library.
->> +        */
->> +       event_notify_null(EVT_MAIN_LOOP);
->> +
-> 
-> Are these explicit invocations required? Should fwu_boottime_checks
-> not get called through run_main_loop() during boot?
 
-board_r.c event_notify_null(EVT_MAIN_LOOP); is not reached in sandbox:
 
-571 static int run_main_loop(void)
-572 {
-573 #ifdef CONFIG_SANDBOX <----------- because of this
-574         sandbox_main_loop_init();
-575 #endif
-576
-577         event_notify_null(EVT_MAIN_LOOP);
+On 8/20/23 18:24, Dario Binacchi wrote:
+> The patch fixes the y-resolution, which was causing the creation of a
+> framebuffer larger than actually needed, resulting in memory waste.
+> 
+> Fixes: cc1b0e7b8e55b ("board: Add display to STM32F746 SoC discovery board")
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
+> 
+>  configs/stm32f746-disco_defconfig     | 2 +-
+>  configs/stm32f746-disco_spl_defconfig | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/configs/stm32f746-disco_defconfig b/configs/stm32f746-disco_defconfig
+> index bb98ee307a6e..8403679d7fa6 100644
+> --- a/configs/stm32f746-disco_defconfig
+> +++ b/configs/stm32f746-disco_defconfig
+> @@ -59,7 +59,7 @@ CONFIG_VIDEO=y
+>  CONFIG_BACKLIGHT_GPIO=y
+>  CONFIG_VIDEO_STM32=y
+>  CONFIG_VIDEO_STM32_MAX_XRES=480
+> -CONFIG_VIDEO_STM32_MAX_YRES=640
+> +CONFIG_VIDEO_STM32_MAX_YRES=272
+>  CONFIG_SPLASH_SCREEN=y
+>  CONFIG_SPLASH_SCREEN_ALIGN=y
+>  CONFIG_VIDEO_BMP_RLE8=y
+> diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
+> index 84aaec1e3390..50c2a36784af 100644
+> --- a/configs/stm32f746-disco_spl_defconfig
+> +++ b/configs/stm32f746-disco_spl_defconfig
+> @@ -85,7 +85,7 @@ CONFIG_VIDEO=y
+>  CONFIG_BACKLIGHT_GPIO=y
+>  CONFIG_VIDEO_STM32=y
+>  CONFIG_VIDEO_STM32_MAX_XRES=480
+> -CONFIG_VIDEO_STM32_MAX_YRES=640
+> +CONFIG_VIDEO_STM32_MAX_YRES=272
+>  CONFIG_SPLASH_SCREEN=y
+>  CONFIG_SPLASH_SCREEN_ALIGN=y
+>  CONFIG_VIDEO_BMP_RLE8=y
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
