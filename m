@@ -4,94 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BA6EC88CB9
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 01:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE468C3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 03:46:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B234F869FB;
-	Fri, 25 Aug 2023 03:59:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B754D869DD;
+	Fri, 25 Aug 2023 05:46:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BjW3bGXT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="n/BlAqIP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035EF869F9; Fri, 25 Aug 2023 03:59:55 +0200 (CEST)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id DA71286993; Fri, 25 Aug 2023 03:20:07 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87F8B86A1C
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 03:59:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2EB18643B
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 03:20:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-410af8f75d9so2672571cf.0
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 18:59:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=peteryin.openbmc@gmail.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3a81154c570so294599b6e.1
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 18:20:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692928790; x=1693533590;
+ d=gmail.com; s=20221208; t=1692926403; x=1693531203;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jydz6zMIGYGNeQbvrqXP7t1SEu4XrrYKy6CtAAoBDZw=;
- b=BjW3bGXTHiicyftwV6ZsQCVY3MclCSCdnilbZPfJ0SztC0qN2uuQW1ZfEZebz4NHOn
- RiigyVANMYB69dkmKHgYjA1ivK0bDfadj6Pd+IXP7d9vsJn+jzmUJYvdxymPDpCpU7DV
- xUyA51VbD/e7xmC5Y2zFy6dS9PnGCtYmc2RyQGo3U4v4lwdfN/a7u+bJNNdpB17jov0D
- DZpKlGMzn7uFrX3NYkmE5Pk5/TeQG6lRC0M/PQeKNzHUyQuYaX4mhItoEvtBylILVlCg
- JzIBwg50MmBJOiff4Xew1sr8Y8r1tA/XkRLsRabGwuevm4gkHx5VxvS8KIV4PxK9o9Hn
- dHcA==
+ bh=15Ba6h+3Fw6qezfZjMQdaHpppt+66vGriaPloE1OtT0=;
+ b=n/BlAqIP/u+3E4KBHpUueR3LoHkCa+Dhf4L5fTIQpSsV+idQ/jpvUoYE2WEpFl7WZD
+ yE9lUx/P3b16J2lUWRg321Isd3vYKRclm2S7FDfh2FhgGexZgNyQ2zqzwR4DRaYNTRWw
+ rO5ptDfk9Kzk48AdKyQj/WDGxiDzurD6hrZGDerJodaCqFtgO5iHoc/MAVXvzbz2neKo
+ F7yaRgn2NIHtJfSZ7ZaKadijcKmb7JKi8X5Wbb6G2yKy/y1i5PA9MslgIiWksCLzwe7g
+ ncT1QtrapjN4G2pvcloGBmV1ibvje1URqrvXgkOltb/RX70F1ktcgrAkxuoRJfBK0uat
+ tNEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692928790; x=1693533590;
+ d=1e100.net; s=20221208; t=1692926403; x=1693531203;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jydz6zMIGYGNeQbvrqXP7t1SEu4XrrYKy6CtAAoBDZw=;
- b=FNEMH9CU0bCLTdO16NBdkgt2ueVpwSF4L3ZLQp3HL/wXlm9uitiWk6SFD6P9Od3sZY
- FOosakCv8ggz+1QdaA9N2Ol/gor618RrBvnJUAvr6J6hEIb4j/raNe8Bay5pTw5NJPbi
- K6RnjwROmwagnma1QZ3A1RuVHKRQx3DzuQzd8gM/SaasWm4DobQG+e9XzFXTrn7CWcM5
- /MeKjo8jtnfaM4D5wvk7jHlumU0bv13JaHYPVQmR/ge+/+Hk0v4Obn67xYZD7uVmPcY+
- 3sBZGxY0FuT3ZC2g2PXyig04XevkWo3mUkNkX7dDrBbRPAcHdmdKE2MLE/uWipNkHgPk
- HEnA==
-X-Gm-Message-State: AOJu0Yxi3GB6dl6E5hiFzshYNWFd506PqLVZAv+vbO8uGHw/ZdrD3LQk
- 4Tpa16RsrT76ZxSpjDTYSLVNCMFxvzM=
-X-Google-Smtp-Source: AGHT+IGR2wIX16+InEMLxcPv9SesUY1Ig/KC7K2jSdPODziJaiFxknuRJSodyozEMKG+5l3k3369vA==
-X-Received: by 2002:ac8:5c42:0:b0:410:8b14:a324 with SMTP id
- j2-20020ac85c42000000b004108b14a324mr21412599qtj.10.1692928789800; 
- Thu, 24 Aug 2023 18:59:49 -0700 (PDT)
-Received: from jesse-desktop.jtp-bos.lab
- ([2600:4040:57a3:100:25bf:14a7:5c8a:970])
+ bh=15Ba6h+3Fw6qezfZjMQdaHpppt+66vGriaPloE1OtT0=;
+ b=EtxOrNMAx8UiCNzyvcHaC8pEPMMyjoS2epsgKoxQcpmH+yPwbPqNpLl/GKUJ0Ce3Uy
+ WYUTKd9rkcsZFNHIBfpGwbiin36hllSnC9wtbF6NzBlokH5tLKXWiLpUZCCysddf/UXc
+ RaJEVp6JrS22/12CQ7GUPUP6i9CHlzjQGf4QnIfqruMdoiqxm9oABSHao+AAo9E3l8BI
+ aHtpMD+il/FVxv+nWQ3rPRvJfCMjdBpAqG5OXmxdMFiG3zy+q/UngxmYvHKtBQx+5fIn
+ rx3fZaGl2lt1WJ0vrRM7NVcE+x9hMe2nUWFMzN98zuRo+G3nM3Pzl5P2sq3hybVbEN84
+ LI1g==
+X-Gm-Message-State: AOJu0Yx+Sc9Xf42V6PRAphnL4QNxrB6P+tu0l3dsAtryDwxR5FkF/8Pe
+ x6iGHDUM946wGOf/vsXcqNg=
+X-Google-Smtp-Source: AGHT+IG7xcFG61rprTiOL5opjWE5FdMnW5QDOWIz2oyawLQwwKBr2n3twwoXm4owpTn+UCVbnLT2pw==
+X-Received: by 2002:a05:6808:1785:b0:3a9:6400:62cb with SMTP id
+ bg5-20020a056808178500b003a9640062cbmr1665803oib.57.1692926403479; 
+ Thu, 24 Aug 2023 18:20:03 -0700 (PDT)
+Received: from peter-bmc.dhcpserver.bu9bmc.local
+ (1-34-21-66.hinet-ip.hinet.net. [1.34.21.66])
  by smtp.gmail.com with ESMTPSA id
- g12-20020ac8468c000000b0040ff387de83sm234812qto.45.2023.08.24.18.59.48
+ i2-20020aa78b42000000b0068bc461b68fsm355995pfd.204.2023.08.24.18.20.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 18:59:49 -0700 (PDT)
-From: Jesse Taube <mr.bossman075@gmail.com>
-X-Google-Original-From: Jesse Taube <Mr.Bossman075@gmail.com>
-To: u-boot@lists.denx.de
-Cc: "Andrew F . Davis" <afd@ti.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Jesse Taube <Mr.Bossman075@gmail.com>, Stefan Roese <sr@denx.de>,
- Weijie Gao <weijie.gao@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Mauro Condarelli <mc5686@mclink.it>, Simon Glass <sjg@chromium.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Roger Quadros <rogerq@kernel.org>,
- Marek Vasut <marek.vasut+renesas@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] Convert CFG_SYS_UBOOT_START to Kconfig
-Date: Thu, 24 Aug 2023 21:59:48 -0400
-Message-Id: <20230825015948.780662-1-Mr.Bossman075@gmail.com>
-X-Mailer: git-send-email 2.40.0
+ Thu, 24 Aug 2023 18:20:02 -0700 (PDT)
+From: peteryin <peteryin.openbmc@gmail.com>
+To: albert.u.boot@aribaud.net,
+	u-boot@lists.denx.de
+Cc: peteryin <peter.yin@quantatw.com>
+Subject: [PATCH 1/2] Title:Add board for Meta openbmc Minerva.
+Date: Fri, 25 Aug 2023 09:17:31 +0800
+Message-Id: <20230825011732.1606958-1-peteryin.openbmc@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 25 Aug 2023 05:46:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,371 +91,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*")
-renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
-this meant that the value was no longer available to the Makefile. This
-caused imxrt to fail to boot. All the other boards that used this
-variable were unaffected because they were using the default value
-which is CONFIG_TEXT_BASE.
+From: peteryin <peter.yin@quantatw.com>
 
-This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the default
-value to CONFIG_TEXT_BASE.
+Create minerva initial file.
 
-Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
-Suggested-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+Signed-off-by: peteryin <peter.yin@quantatw.com>
 ---
-V1->V2:
- - Add "and executed" to TEXT_BASE
- - Reword SYS_UBOOT_START
- - Reword HAVE_SYS_UBOOT_START
- - Use bool as prompt
----
- Makefile                                      | 16 ++++------------
- arch/arm/mach-k3/config_secure.mk             |  2 +-
- arch/arm/mach-omap2/config_secure.mk          |  2 +-
- boot/Kconfig                                  | 19 ++++++++++++++++++-
- common/spl/spl.c                              |  6 +-----
- common/spl/spl_fit.c                          |  2 +-
- configs/imxrt1020-evk_defconfig               |  2 ++
- configs/imxrt1050-evk_defconfig               |  2 ++
- configs/imxrt1170-evk_defconfig               |  2 ++
- .../configs/gardena-smart-gateway-mt7688.h    |  4 ----
- include/configs/imxrt1020-evk.h               |  6 ------
- include/configs/imxrt1050-evk.h               |  6 ------
- include/configs/imxrt1170-evk.h               |  3 ---
- include/configs/linkit-smart-7688.h           |  4 ----
- include/configs/mt7620.h                      |  3 ---
- include/configs/mt7628.h                      |  3 ---
- include/configs/mt8512.h                      |  2 --
- include/configs/vocore2.h                     |  4 ----
- include/spl.h                                 |  2 +-
- 19 files changed, 33 insertions(+), 57 deletions(-)
+ arch/arm/mach-aspeed/ast2600/Kconfig          |   8 ++
+ board/aspeed/meta_ast2600/Kconfig             |  13 ++
+ board/aspeed/meta_ast2600/Makefile            |   1 +
+ .../meta_ast2600/meta_minerva_ast2600.c       | 130 ++++++++++++++++++
+ 4 files changed, 152 insertions(+)
+ create mode 100644 board/aspeed/meta_ast2600/Kconfig
+ create mode 100644 board/aspeed/meta_ast2600/Makefile
+ create mode 100644 board/aspeed/meta_ast2600/meta_minerva_ast2600.c
 
-diff --git a/Makefile b/Makefile
-index 9b90204bfe..13d4c63439 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1364,14 +1364,6 @@ OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
- u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
- 	$(call if_changed,objcopy)
+diff --git a/arch/arm/mach-aspeed/ast2600/Kconfig b/arch/arm/mach-aspeed/ast2600/Kconfig
+index f5852afa77..444990e2e3 100644
+--- a/arch/arm/mach-aspeed/ast2600/Kconfig
++++ b/arch/arm/mach-aspeed/ast2600/Kconfig
+@@ -51,6 +51,13 @@ config TARGET_QUALCOMM_DC_SCM_V1
+ 	  QUALCOMM-DC-SCM-V1 is a Qualcomm DC-SCM V1 board which is
+ 	  equipped with AST2600.
  
--#
--# U-Boot entry point, needed for booting of full-blown U-Boot
--# from the SPL U-Boot version.
--#
--ifndef CFG_SYS_UBOOT_START
--CFG_SYS_UBOOT_START := $(CONFIG_TEXT_BASE)
--endif
--
- # Boards with more complex image requirements can provide an .its source file
- # or a generator script
- # NOTE: Please do not use this. We are migrating away from Makefile rules to use
-@@ -1391,7 +1383,7 @@ endif
++config TARGET_META_MINERVA_AST2600
++	bool "META-MINERVA-AST2600"
++	depends on ASPEED_AST2600
++	help
++	  META-MINERVA-AST2600 is META openbmc minerva board for AST2600A3 chip.
++
++
+ endchoice
  
- ifdef CONFIG_SPL_LOAD_FIT
- MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
--	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
-+	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
- 	-p $(CONFIG_FIT_EXTERNAL_OFFSET) \
- 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
- 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb,$(subst ",,$(DEVICE_TREE))) \
-@@ -1399,10 +1391,10 @@ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
- 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtbo,$(subst ",,$(CONFIG_OF_OVERLAY_LIST)))
- else
- MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
--	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
-+	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
- 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
- MKIMAGEFLAGS_u-boot-ivt.img = -A $(ARCH) -T firmware_ivt -C none -O u-boot \
--	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
-+	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
- 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
- u-boot-ivt.img: MKIMAGEOUTPUT = u-boot-ivt.img.log
+ source "board/aspeed/evb_ast2600/Kconfig"
+@@ -59,5 +66,6 @@ source "board/aspeed/slt_ast2600/Kconfig"
+ source "board/aspeed/ast2600_ibm/Kconfig"
+ source "board/aspeed/ast2600_intel/Kconfig"
+ source "board/qualcomm/dc-scm-v1/Kconfig"
++source "board/aspeed/meta_ast2600/Kconfig"
+ 
  endif
-@@ -1433,7 +1425,7 @@ MKIMAGEFLAGS_u-boot.pbl = -n $(srctree)/$(CONFIG_SYS_FSL_PBL_RCW:"%"=%) \
- UBOOT_BIN := u-boot.bin
- 
- MKIMAGEFLAGS_u-boot-lzma.img = -A $(ARCH) -T standalone -C lzma -O u-boot \
--	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
-+	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
- 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
- 
- u-boot.bin.lzma: u-boot.bin FORCE
-diff --git a/arch/arm/mach-k3/config_secure.mk b/arch/arm/mach-k3/config_secure.mk
-index 7bc8af813a..9cc1f9eb24 100644
---- a/arch/arm/mach-k3/config_secure.mk
-+++ b/arch/arm/mach-k3/config_secure.mk
-@@ -30,7 +30,7 @@ tispl.bin_HS: $(obj)/u-boot-spl-nodtb.bin_HS $(patsubst %,$(obj)/dts/%.dtb_HS,$(
- 	$(call if_changed,mkfitimage)
- 
- MKIMAGEFLAGS_u-boot.img_HS = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
--	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
-+	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
- 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
- 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_OF_LIST)))
- 
-diff --git a/arch/arm/mach-omap2/config_secure.mk b/arch/arm/mach-omap2/config_secure.mk
-index 24ddcdb961..f76262bb0c 100644
---- a/arch/arm/mach-omap2/config_secure.mk
-+++ b/arch/arm/mach-omap2/config_secure.mk
-@@ -102,7 +102,7 @@ u-boot_HS_XIP_X-LOADER: $(obj)/u-boot.bin FORCE
- ifdef CONFIG_SPL_LOAD_FIT
- 
- MKIMAGEFLAGS_u-boot_HS.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
--	-a $(CONFIG_TEXT_BASE) -e $(CFG_SYS_UBOOT_START) \
-+	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
- 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
- 	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_OF_LIST)))
- 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 5e2d4286ae..3883cae2ba 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -738,7 +738,24 @@ config TEXT_BASE
- 	default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >= 64
- 	hex "Text Base"
- 	help
--	  The address in memory that U-Boot will be running from, initially.
-+	  The address in memory that U-Boot will be copied and executed from initially.
+diff --git a/board/aspeed/meta_ast2600/Kconfig b/board/aspeed/meta_ast2600/Kconfig
+new file mode 100644
+index 0000000000..adc5b58733
+--- /dev/null
++++ b/board/aspeed/meta_ast2600/Kconfig
+@@ -0,0 +1,13 @@
++if TARGET_META_MINERVA_AST2600
 +
-+config HAVE_SYS_UBOOT_START
-+	bool "Use custom U-Boot Start"
-+	depends on HAVE_TEXT_BASE
-+	help
-+	  By default, the address in memory that U-Boot will be copied from (TEXT_BASE) and the
-+	  entry point are the same. Select this to start the execution of U-Boot from a different address.
-+	  This may be required if a header or vector table needs to be copied but not executed.
++config SYS_BOARD
++	default "meta_ast2600"
 +
-+config SYS_UBOOT_START
-+	hex
-+	depends on HAVE_TEXT_BASE
-+	default TEXT_BASE
-+	prompt "U-Boot entry" if HAVE_SYS_UBOOT_START
-+	help
-+	  If TEXT_BASE differs from the start of execution, this sets the address in memory that
-+	  U-Boot will start execution from initially.
- 
- config HAVE_SYS_MONITOR_BASE
- 	bool
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 0062f3f45d..f4b30b3cf3 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -45,10 +45,6 @@
- DECLARE_GLOBAL_DATA_PTR;
- DECLARE_BINMAN_MAGIC_SYM;
- 
--#ifndef CFG_SYS_UBOOT_START
--#define CFG_SYS_UBOOT_START	CONFIG_TEXT_BASE
--#endif
--
- u32 *boot_params_ptr = NULL;
- 
- #if CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS)
-@@ -252,7 +248,7 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
- 		spl_image->entry_point = u_boot_pos;
- 		spl_image->load_addr = u_boot_pos;
- 	} else {
--		spl_image->entry_point = CFG_SYS_UBOOT_START;
-+		spl_image->entry_point = CONFIG_SYS_UBOOT_START;
- 		spl_image->load_addr = CONFIG_TEXT_BASE;
- 	}
- 	spl_image->os = IH_OS_U_BOOT;
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 730639f756..3d39e70e65 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -816,7 +816,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 	}
- 
- 	/*
--	 * If a platform does not provide CFG_SYS_UBOOT_START, U-Boot's
-+	 * If a platform does not provide CONFIG_SYS_UBOOT_START, U-Boot's
- 	 * Makefile will set it to 0 and it will end up as the entry point
- 	 * here. What it actually means is: use the load address.
- 	 */
-diff --git a/configs/imxrt1020-evk_defconfig b/configs/imxrt1020-evk_defconfig
-index 40210a5f0b..6b63b80895 100644
---- a/configs/imxrt1020-evk_defconfig
-+++ b/configs/imxrt1020-evk_defconfig
-@@ -19,6 +19,8 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_SIZE_LIMIT=0x20000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x20209000
-+CONFIG_HAVE_SYS_UBOOT_START=y
-+CONFIG_SYS_UBOOT_START=0x800023FD
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_SD_BOOT=y
- # CONFIG_USE_BOOTCOMMAND is not set
-diff --git a/configs/imxrt1050-evk_defconfig b/configs/imxrt1050-evk_defconfig
-index 8f7a36fea7..cbf9469b24 100644
---- a/configs/imxrt1050-evk_defconfig
-+++ b/configs/imxrt1050-evk_defconfig
-@@ -21,6 +21,8 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_SIZE_LIMIT=0x20000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x20209000
-+CONFIG_HAVE_SYS_UBOOT_START=y
-+CONFIG_SYS_UBOOT_START=0x800023FD
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_SD_BOOT=y
- # CONFIG_USE_BOOTCOMMAND is not set
-diff --git a/configs/imxrt1170-evk_defconfig b/configs/imxrt1170-evk_defconfig
-index 8320c091d2..83825da6de 100644
---- a/configs/imxrt1170-evk_defconfig
-+++ b/configs/imxrt1170-evk_defconfig
-@@ -21,6 +21,8 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_SIZE_LIMIT=0x20000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x202C0000
-+CONFIG_HAVE_SYS_UBOOT_START=y
-+CONFIG_SYS_UBOOT_START=0x202403FD
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_SD_BOOT=y
- # CONFIG_USE_BOOTCOMMAND is not set
-diff --git a/include/configs/gardena-smart-gateway-mt7688.h b/include/configs/gardena-smart-gateway-mt7688.h
-index 0ba4efe67a..1b97ae22fc 100644
---- a/include/configs/gardena-smart-gateway-mt7688.h
-+++ b/include/configs/gardena-smart-gateway-mt7688.h
-@@ -11,10 +11,6 @@
- 
- #define CFG_SYS_INIT_SP_OFFSET	0x400000
- 
--/* SPL */
--
--#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
--
- /* Dummy value */
- #define CFG_SYS_UBOOT_BASE		0
- 
-diff --git a/include/configs/imxrt1020-evk.h b/include/configs/imxrt1020-evk.h
-index e180387c68..cd6af93454 100644
---- a/include/configs/imxrt1020-evk.h
-+++ b/include/configs/imxrt1020-evk.h
-@@ -18,10 +18,4 @@
- #define DMAMEM_BASE			(PHYS_SDRAM + PHYS_SDRAM_SIZE - \
- 					 DMAMEM_SZ_ALL)
- 
--/*
-- * Configuration of the external SDRAM memory
-- */
--
--#define CFG_SYS_UBOOT_START		0x800023FD
--
- #endif /* __IMXRT1020_EVK_H */
-diff --git a/include/configs/imxrt1050-evk.h b/include/configs/imxrt1050-evk.h
-index 7688464841..2af2dde2ae 100644
---- a/include/configs/imxrt1050-evk.h
-+++ b/include/configs/imxrt1050-evk.h
-@@ -25,10 +25,4 @@
- 		"stderr=serial,vidconsole\0"
- #endif
- 
--/*
-- * Configuration of the external SDRAM memory
-- */
--
--#define CFG_SYS_UBOOT_START		0x800023FD
--
- #endif /* __IMXRT1050_EVK_H */
-diff --git a/include/configs/imxrt1170-evk.h b/include/configs/imxrt1170-evk.h
-index f83429082a..1ccaa15bc1 100644
---- a/include/configs/imxrt1170-evk.h
-+++ b/include/configs/imxrt1170-evk.h
-@@ -22,8 +22,5 @@
- #define DMAMEM_SZ_ALL			(1 * 1024 * 1024)
- #define DMAMEM_BASE			(PHYS_SDRAM + PHYS_SDRAM_SIZE - \
- 					 DMAMEM_SZ_ALL)
--/* For SPL */
--#define CFG_SYS_UBOOT_START		0x202403FD
--/* For SPL ends */
- 
- #endif /* __IMXRT1170_EVK_H */
-diff --git a/include/configs/linkit-smart-7688.h b/include/configs/linkit-smart-7688.h
-index f16c7e9122..e8f7a59c40 100644
---- a/include/configs/linkit-smart-7688.h
-+++ b/include/configs/linkit-smart-7688.h
-@@ -11,10 +11,6 @@
- 
- #define CFG_SYS_INIT_SP_OFFSET	0x400000
- 
--/* SPL */
--
--#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
--
- /* Dummy value */
- #define CFG_SYS_UBOOT_BASE		0
- 
-diff --git a/include/configs/mt7620.h b/include/configs/mt7620.h
-index d69d35fa96..3bc0c18a1e 100644
---- a/include/configs/mt7620.h
-+++ b/include/configs/mt7620.h
-@@ -12,9 +12,6 @@
- 
- #define CFG_SYS_INIT_SP_OFFSET		0x400000
- 
--/* SPL */
--#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
--
- /* Dummy value */
- #define CFG_SYS_UBOOT_BASE		0
- 
-diff --git a/include/configs/mt7628.h b/include/configs/mt7628.h
-index 0ac376d33c..1df06811d6 100644
---- a/include/configs/mt7628.h
-+++ b/include/configs/mt7628.h
-@@ -22,9 +22,6 @@
- #define CFG_SYS_BAUDRATE_TABLE		{ 9600, 19200, 38400, 57600, 115200, \
- 					  230400, 460800, 921600 }
- 
--/* SPL */
--#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
--
- /* Dummy value */
- #define CFG_SYS_UBOOT_BASE		0
- 
-diff --git a/include/configs/mt8512.h b/include/configs/mt8512.h
-index c0fc8688ca..4e70291e94 100644
---- a/include/configs/mt8512.h
-+++ b/include/configs/mt8512.h
-@@ -10,8 +10,6 @@
- #define __MT8512_H
- 
- /* Uboot definition */
--#define CFG_SYS_UBOOT_START			CONFIG_TEXT_BASE
--
- #define ENV_BOOT_READ_IMAGE \
- 	"boot_rd_img=mmc dev 0" \
- 	";mmc read ${loadaddr} 0x27000 0x8000" \
-diff --git a/include/configs/vocore2.h b/include/configs/vocore2.h
-index 43050d61c3..eb87633661 100644
---- a/include/configs/vocore2.h
-+++ b/include/configs/vocore2.h
-@@ -11,10 +11,6 @@
- 
- #define CFG_SYS_INIT_SP_OFFSET	0x400000
- 
--/* SPL */
--
--#define CFG_SYS_UBOOT_START		CONFIG_TEXT_BASE
--
- /* Dummy value */
- #define CFG_SYS_UBOOT_BASE		0
- 
-diff --git a/include/spl.h b/include/spl.h
-index 92bcaa90a4..57da1484f0 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -484,7 +484,7 @@ unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-  * spl_set_header_raw_uboot() - Set up a standard SPL image structure
-  *
-  * This sets up the given spl_image which the standard values obtained from
-- * config options: CONFIG_SYS_MONITOR_LEN, CFG_SYS_UBOOT_START,
-+ * config options: CONFIG_SYS_MONITOR_LEN, CONFIG_SYS_UBOOT_START,
-  * CONFIG_TEXT_BASE.
-  *
-  * @spl_image: Image description to set up
++config SYS_VENDOR
++	default "aspeed"
++
++config SYS_CONFIG_NAME
++	string "board configuration name"
++	default "meta_minerva_ast2600"
++
++endif
+diff --git a/board/aspeed/meta_ast2600/Makefile b/board/aspeed/meta_ast2600/Makefile
+new file mode 100644
+index 0000000000..b5a526efa5
+--- /dev/null
++++ b/board/aspeed/meta_ast2600/Makefile
+@@ -0,0 +1 @@
++obj-y += meta_minerva_ast2600.o
+diff --git a/board/aspeed/meta_ast2600/meta_minerva_ast2600.c b/board/aspeed/meta_ast2600/meta_minerva_ast2600.c
+new file mode 100644
+index 0000000000..d0b3720da3
+--- /dev/null
++++ b/board/aspeed/meta_ast2600/meta_minerva_ast2600.c
+@@ -0,0 +1,130 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) ASPEED Technology Inc.
++ */
++#include <common.h>
++#include <asm/io.h>
++
++#define SCU_BASE                   (0x1e6e2000)
++#define ESPI_BASE                  (0x1e6ee000)
++#define LPC_BASE                   (0x1e789000)
++#define LPC_HICR5                  (LPC_BASE + 0x80)
++#define LPC_HICR6                  (LPC_BASE + 0x84)
++#define LPC_SNPWADR                (LPC_BASE + 0x90)
++#define LPC_HICRB                  (LPC_BASE + 0x100)
++#define LPC_PCCR0                  (LPC_BASE | 0x130)
++
++#define SCU_MUTI_FN_PIN_CTRL5      (SCU_BASE | 0x414)
++#define SCU_MUTI_FN_PIN_CTRL7      (SCU_BASE | 0x41C)
++#define SCU_MUTI_FN_PIN_CTRL9      (SCU_BASE | 0x434)
++#define SCU_MUTI_FN_PIN_CTRL15     (SCU_BASE | 0x454)
++#define SCU_PIN_CONTROL8_REG       (SCU_BASE | 0x430)
++#define SCU_HW_STRAP2_SET_REG      (SCU_BASE | 0x510)
++#define SCU_HW_STRAP2_CLR_REG      (SCU_BASE | 0x514)
++#define SCU_HW_STRAP3_REG          (SCU_BASE | 0x51C)
++
++#define ENABLE_GPIO_PASSTHROUGH    BIT(9)
++#define GPIO_BASE                  (0x1e780000)
++#define GPIO_ABCD_BASE_REG         (GPIO_BASE | 0x000)
++#define GPIO_ABCD_DATA_REG         (GPIO_ABCD_BASE_REG)
++#define GPIO_ABCD_DIR_REG          (GPIO_BASE | 0x004)
++
++#define GPIO_EFGH_BASE_REG         (GPIO_BASE | 0x020)
++#define GPIO_EFGH_DATA_REG         (GPIO_EFGH_BASE_REG)
++#define GPIO_EFGH_DIR_REG          (GPIO_BASE | 0x024)
++
++#define GPIO_IJKL_BASE_REG         (GPIO_BASE | 0x070)
++#define GPIO_IJKL_DATA_REG         (GPIO_IJKL_BASE_REG)
++#define GPIO_IJKL_DIR_REG          (GPIO_BASE | 0x074)
++
++#define GPIO_MNOP_BASE_REG         (GPIO_BASE | 0x078)
++#define GPIO_MNOP_DATA_REG         (GPIO_MNOP_BASE_REG)
++#define GPIO_MNOP_DIR_REG          (GPIO_BASE | 0x07C)
++#define GPIO_MNOP_CMD_SOURCE0      (GPIO_BASE | 0x0E0)
++#define GPIO_MNOP_CMD_SOURCE1      (GPIO_BASE | 0x0E4)
++
++#define GPIO_QRST_BASE_REG         (GPIO_BASE | 0x080)
++#define GPIO_QRST_DATA_REG         (GPIO_QRST_BASE_REG)
++#define GPIO_QRST_DIR_REG          (GPIO_BASE | 0x084)
++
++#define GPIO_UVWX_BASE_REG         (GPIO_BASE | 0x088)
++#define GPIO_UVWX_DATA_REG         (GPIO_UVWX_BASE_REG)
++#define GPIO_UVWX_DIR_REG          (GPIO_BASE | 0x08C)
++
++#define GPIO_NAME(base, pin)       (1 << (pin + (base - 'A') % 4 * 8))
++#define GPIO_GROUP(base, val)      (val << ((base - 'A') % 4 * 8))
++#define SIO_ADDR_4E                (0x4E)
++#define SIO_ADDR_2E                (0x2E)
++
++static void __maybe_unused el_espi_init(void)
++{
++	u32 value = 0;
++
++	//SCU514: SCU514: Hardware Strap2 Clear Register (default)
++	//SCU510 [6]:0 eSPI mode
++	setbits_le32(SCU_HW_STRAP2_CLR_REG, BIT(6));
++
++	//SCU434: Multi-function Pin Control #9 (default)
++	setbits_le32(SCU_MUTI_FN_PIN_CTRL9, 0xFF << 16);
++
++	//SCU454: Multi-function Pin Control #15
++	value  = readl(SCU_MUTI_FN_PIN_CTRL15);
++	value &= 0x00FFFFFF;  //Clear BIT[31:24]
++	value |= 0xAA000000;  //BIT[31:24] = LAD3ESPID3~0 Driving Strength
++	writel(value, SCU_MUTI_FN_PIN_CTRL15);
++
++	//ESPI000: Engine Control
++	setbits_le32(ESPI_BASE, 1 << 4);
++}
++
++// SNOOP SET
++void el_port80_init(u32 reg_dir, u32 reg_val,
++		    u32 cmd_source0, u32 cmd_source1)
++{
++	u32 value = 0;
++
++	//GPIO Output Settings
++	setbits_le32(reg_dir, reg_val);
++
++	//Command Source0 = 1
++	//Command Source1 = 0
++	setbits_le32(cmd_source0, BIT(8));
++	clrbits_le32(cmd_source1, BIT(8));
++
++	//SNPWADR(0x90): LPC Snoop Address Register
++	value  = readl(LPC_SNPWADR);
++	value &= 0xFFFF0000;  //BIT[15:0] - clear;
++	value |= 0x00000080;  //BIT[15:0] - set;
++	writel(value, LPC_SNPWADR);
++	//HICR5(0x80): Host Interface Control Register 5
++	value  = readl(LPC_HICR5);
++	value |= 1;       //Enable snooping address #0
++	value &= ~0xA;
++	writel(value, LPC_HICR5);
++
++	//HICRB(0x100): Host Interface Control Register B
++	//EnSNP0D: Enable ACCEPT response code for snoop #0 commands,
++	//defined in HICR5[0], in eSPI mode.
++	setbits_le32(LPC_HICRB, BIT(14));
++
++	writel(0, LPC_PCCR0);
++}
++
++//Super IO Settings
++void el_superio_decoder(uint8_t addr)
++{
++	//Enable LPC to decode SuperIO 0x2E/0x4E address
++	setbits_le32(SCU_HW_STRAP2_CLR_REG, BIT(2));
++
++	//SuperIO configuration address selection (0 = 0x2E(Default) / 1 = 0x4E)
++	if (addr == 0x4E)
++		setbits_le32(SCU_HW_STRAP2_SET_REG, BIT(2));
++}
++
++int board_early_init_f(void)
++{
++	clrbits_le32(SCU_HW_STRAP3_REG, ENABLE_GPIO_PASSTHROUGH);
++	el_espi_init();
++	el_superio_decoder(SIO_ADDR_2E);
++	return 0;
++}
 -- 
-2.40.0
+2.25.1
 
