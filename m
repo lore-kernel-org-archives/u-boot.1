@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C8FC3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:06:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE46DC3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:06:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8931386B28;
+	by phobos.denx.de (Postfix) with ESMTP id CF13E86B2E;
 	Fri, 25 Aug 2023 20:03:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="c5v0AHmx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DxD2qeMv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7B0F86ACE; Fri, 25 Aug 2023 20:03:25 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id E5E1986AB5; Fri, 25 Aug 2023 20:03:25 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 962A086AE1
+ by phobos.denx.de (Postfix) with ESMTPS id A358586AE6
  for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:03:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PI37C0111948;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PI37Vl114056;
  Fri, 25 Aug 2023 13:03:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1692986587;
- bh=ZQlyQn6RpwiNwQn0C2wpuftw8WvssV/EGVl6AsTmQ/g=;
+ bh=euyNuXK2GiLUNT7DN95B3/f+mrkqAeIKuqixWkX2GWs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=c5v0AHmxs6nHdIm5B+x07byf0w0g8m3N9pow2W3xVdtNE6wUIC6lvi0oI44txjjw/
- c446tq4kmlaFpVnb27EODfSbLNYxDmuwOtkDqeunc8clAIL7SeP3kPigsOFId2vepd
- uAs/2Mr+9s5gZj2FrotpMeU+MrSj1nl8DJVCuqMU=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PI37Ij123997
+ b=DxD2qeMvgU4/EPS48vPvQwtXKgzRXk7ieNUDTO9NSL++/3Pwkg7o3DRfZ0WnWn9nu
+ KHz5a4f9lrVpxQx9PCYyyhzi56QwYy01xPtd6I3/QRcXQWoDzXff0YiyAF58vCTsGV
+ PTqVYE6LoIjIzAN4l1zrEvbZ1BNLrvLeXjtpEnMg=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PI37be066178
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Fri, 25 Aug 2023 13:03:07 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
  Aug 2023 13:03:06 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Aug 2023 13:03:06 -0500
+ Frontend Transport; Fri, 25 Aug 2023 13:03:07 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PI360s038419;
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PI363l125094;
  Fri, 25 Aug 2023 13:03:06 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Simon
@@ -56,10 +56,10 @@ CC: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH V6 13/20] arm: mach-k3: am625_init: Convert
- rtc_erratumi2327_init to static
-Date: Fri, 25 Aug 2023 13:02:58 -0500
-Message-ID: <20230825180305.69515-14-nm@ti.com>
+Subject: [PATCH V6 16/20] configs: am62x_evm_a53_defconfig: Disable
+ semi-functional PSCI reset support
+Date: Fri, 25 Aug 2023 13:03:01 -0500
+Message-ID: <20230825180305.69515-17-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230825180305.69515-1-nm@ti.com>
 References: <20230825180305.69515-1-nm@ti.com>
@@ -83,54 +83,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The erratum is called locally, make it static, drop the #ifdeffery since
-it will only be called in R5 build and mark it potentially unused to
-stop compiler screaming at us.
+From: Jan Kiszka <jan.kiszka@siemens.com>
 
-While at this, drop the redundant return for a void function.
+At this point, system shutdown is not supported by the DM firmware
+that TF-A calls. As we can't de-select only this feature[1], declare
+complete PSCI reset support as non-functional so that we don't signal
+incomplete support to the OS via EFI runtime services. This makes
+power-off under Linux work again when booting via EFI.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+[1] https://uefi.org/specs/UEFI/2.9_A/08_Services_Runtime_Services.html?highlight=efiresetshutdown#resetsystem
+Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
-No change other than picking up reviews, tested tags along the way.
-V5: https://lore.kernel.org/r/20230824031101.3460411-12-nm@ti.com
- arch/arm/mach-k3/am625_init.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+New patch picked from Jan
+https://lore.kernel.org/all/c93b19ed-43fe-44a2-9726-371fb9d2f825@web.de/
+Changes:
+- modify am62x_evm as common change.
+- slight update to $subject and commit message
 
-diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-index 165bca6885ef..499cb57267b9 100644
---- a/arch/arm/mach-k3/am625_init.c
-+++ b/arch/arm/mach-k3/am625_init.c
-@@ -80,8 +80,6 @@ static __maybe_unused void enable_mcu_esm_reset(void)
- 	writel(stat, CTRLMMR_MCU_RST_CTRL);
- }
- 
--#if defined(CONFIG_CPU_V7R)
--
- /*
-  * RTC Erratum i2327 Workaround for Silicon Revision 1
-  *
-@@ -94,7 +92,7 @@ static __maybe_unused void enable_mcu_esm_reset(void)
-  *
-  * https://www.ti.com/lit/er/sprz487c/sprz487c.pdf
-  */
--void rtc_erratumi2327_init(void)
-+static __maybe_unused void rtc_erratumi2327_init(void)
- {
- 	u32 counter;
- 
-@@ -112,9 +110,7 @@ void rtc_erratumi2327_init(void)
- 	 */
- 	writel(K3RTC_KICK0_UNLOCK_VALUE, REG_K3RTC_KICK0);
- 	writel(K3RTC_KICK1_UNLOCK_VALUE, REG_K3RTC_KICK1);
--	return;
- }
--#endif
- 
- void board_init_f(ulong dummy)
- {
+ configs/am62x_evm_a53_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index 112125673699..a2729c1d0e36 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -25,6 +25,7 @@ CONFIG_SPL_FS_FAT=y
+ CONFIG_SPL_LIBDISK_SUPPORT=y
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
++# CONFIG_PSCI_RESET is not set
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
 -- 
 2.40.0
 
