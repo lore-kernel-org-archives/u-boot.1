@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AAFBC3DA66
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 19:39:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB5E7C3DA66
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 19:39:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22C5086AF5;
-	Fri, 25 Aug 2023 21:38:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 68D2386B26;
+	Fri, 25 Aug 2023 21:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jJyNzm1l";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JOQvMYTV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2618086AE7; Fri, 25 Aug 2023 21:38:57 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 253C986B19; Fri, 25 Aug 2023 21:39:01 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A5686B20
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 21:38:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4336886B14
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 21:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jpewhacker@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6bd0c953fd9so905290a34.3
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 12:38:54 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6bcac140aaaso922549a34.2
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 12:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692992332; x=1693597132;
+ d=gmail.com; s=20221208; t=1692992336; x=1693597136;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q624xlnT8RHF/wwDApZVE4Q0U0sCYMenBoxiKOnu7bo=;
- b=jJyNzm1lHMch6PEMGj1+lp9bucerZXmEv6U9RVlxqD9JASvkMAsO7JeRza3pXCVm/d
- QMJ+DQJVa5bx/nogydak4OiIi3FBjgFju4blN/fnDl1odkxWvWB5f8zJY+THZLUSw4jv
- vGAAn6Vi7HIk3ndySAZyUzUbZ4VZ6X/seP+S9cK54KYh3DYie8gbyR/vrshMtXln/2PJ
- 9wzo6hQY4VBR9Gm3ZdTGe8upaSKdIzBBrnspAtIhCTcVWfLy6GnkGYWvtZkHxeN2f/KU
- qpw10Z4poTkVOXfGSA6f8iUoJ/oCecUlDXbnrYaXG9Y9uWOwFPvTw5VeCR4TsfaT53xe
- D1XQ==
+ bh=/aVJwGVn/hP66Jgby2c26iHgGbXQOcqiAKS9db4KNLI=;
+ b=JOQvMYTVI3T6AhtQvz0egCSGFcI+iFIhs4jMtl/HSBai4oz7etu67ULM86vEaa+Z6i
+ sy1WliJTJKh7jbWM4qm8aAimlZj7ZsXjx6HiLls6J2RSlZ/KbNj+UZSaJEb/i/qeJPf5
+ QBM9kvZy/GyT5rIMHtIFFCFzeDezT/wzbrcsCevOUdGCQ3UotvDvsiIq0iItaT3f5/q1
+ ipMl8QUTxzBIFsaqZXZSmNwsOKjjSx9DbigmsF5o/Dcb/P9yQnQ6eu3Cpr2LEwW+JIZ+
+ 74ONSRG2Bch9RhQjtsp2bERhy1J1BY0SZGCYGYoZM3NVNpxX5l6mFXDmMWnyJj5chOnn
+ uC9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692992332; x=1693597132;
+ d=1e100.net; s=20221208; t=1692992336; x=1693597136;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q624xlnT8RHF/wwDApZVE4Q0U0sCYMenBoxiKOnu7bo=;
- b=lS/kWKHYkLF6gpQw2jIN/0SkUXIXso+mF7mIgU47qj94NQMu6wydKrCydwliZEm0cz
- la/HOcDXstciq29/0jQA5YNsBossJZpm6MTD6WbQkbpozSQPI2SJKCB3C1Qz1U3hnJHU
- FrgcsgO50o2+iA18wOmgnCVpqOEUqeGQXyoWCV0h/sw4y375QR1DeH5uSkoaIJndHreK
- owFzxKQVQERHORVP4P+5M6YdU7BIHMGLPEURyF9iDCeucBqwWPPd2NeC2dL/P3rz1TV0
- 2Vge6s4tXJi9Hc7nQHQ82dfkAYVFUxvN75YflYsmUbYHmmw6TuRHbCa5aalVfWTuOKnq
- ODyw==
-X-Gm-Message-State: AOJu0YwXThjCOf123I+mlRT3dri5+y4r4Qed57vGRh/8nquzXGNvjlP1
- RdvDGYHNqd4mnNmb6QH6GrbWWTL4KaE=
-X-Google-Smtp-Source: AGHT+IG9pKyGjOtB3x16B4xl2U2lS+YbJ6iPQPT0h4rfsj3H0rSnP//oih8f06BTR7xgvhGafe4JSA==
-X-Received: by 2002:a9d:738e:0:b0:6b8:dc53:9efd with SMTP id
- j14-20020a9d738e000000b006b8dc539efdmr6766997otk.3.1692992332170; 
- Fri, 25 Aug 2023 12:38:52 -0700 (PDT)
+ bh=/aVJwGVn/hP66Jgby2c26iHgGbXQOcqiAKS9db4KNLI=;
+ b=OH/qFGPScEz4SHATucSHnBD5mMRH+B0QtHUlMFuG3BGaWT/1mKpyuV26DuFFijNcwB
+ mYoCnO/N3c7SULFx0ASFIE5eakgqP0joXdptczATn/qAAl7syHZ3/fvO0Aa5XY6sckGA
+ THPT4Fud9sQ+oSKqHxT+asQ6/lUKWXRprPHmQI8DZr7eume7bnjyjm5Gt5KAfHysEwsv
+ y84FVaTUL/vaE/8N7Afdem42AOStLUg2JtcoPoaiiUhDOu0uhHfCh2T8n/4DDzbjIULg
+ OOx1CvE/oj/Bj59d/ncYG3GqAcWhvduZTvJObxrZhc7H5Qv/pb0tjbfT0ZvNmC8+57/6
+ 6STQ==
+X-Gm-Message-State: AOJu0YxyhGbGR4iohv8FIV7RovHDuf8PpzQPZ/ENyl9HjACkOumFFK/y
+ mB1ceieUDOvlfe/YSTE4U5zJmYQD7e4=
+X-Google-Smtp-Source: AGHT+IGURpEnD3bfR2+Zqnqeia+vzJ3lWkKEhG+hHM9G2ar9pYHDf/3IctPMFpRB2kr55b/mwV9Wvw==
+X-Received: by 2002:a9d:6a0c:0:b0:6bc:d976:c5d5 with SMTP id
+ g12-20020a9d6a0c000000b006bcd976c5d5mr5777855otn.36.1692992336128; 
+ Fri, 25 Aug 2023 12:38:56 -0700 (PDT)
 Received: from localhost.localdomain ([2601:282:4300:19e0::c239])
  by smtp.gmail.com with ESMTPSA id
- m13-20020a9d7e8d000000b006b871010cb1sm1171022otp.46.2023.08.25.12.38.51
+ m13-20020a9d7e8d000000b006b871010cb1sm1171022otp.46.2023.08.25.12.38.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Aug 2023 12:38:51 -0700 (PDT)
+ Fri, 25 Aug 2023 12:38:55 -0700 (PDT)
 From: Joshua Watt <jpewhacker@gmail.com>
 X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Joshua Watt <JPEWhacker@gmail.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 5/8] cmd: gpt: Add command to set bootable flags
-Date: Fri, 25 Aug 2023 13:38:21 -0600
-Message-Id: <20230825193830.2753640-6-JPEWhacker@gmail.com>
+Cc: Joshua Watt <JPEWhacker@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Enric Balletbo i Serra <eballetb@redhat.com>
+Subject: [PATCH v3 6/8] cmd: gpt: Preserve type GUID if enabled
+Date: Fri, 25 Aug 2023 13:38:22 -0600
+Message-Id: <20230825193830.2753640-7-JPEWhacker@gmail.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20230825193830.2753640-1-JPEWhacker@gmail.com>
 References: <20230823164755.2874792-1-JPEWhacker@gmail.com>
@@ -95,183 +94,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds a command that can be used to modify the GPT partition table to
-indicate which partitions should have the bootable flag set
+If CONFIG_PARTITION_TYPE_GUID is enabled, the type GUID will be
+preserved when writing out the partition string. It was already
+respected when writing out partitions; this ensures that if you capture
+the current partition layout and write it back (such as when renaming),
+the type GUIDs are preserved.
 
 Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- cmd/gpt.c                 | 80 +++++++++++++++++++++++++++++++++++++++
- doc/usage/cmd/gpt.rst     |  9 +++++
- test/py/tests/test_gpt.py | 22 +++++++++++
- 3 files changed, 111 insertions(+)
+ cmd/gpt.c                 | 16 ++++++++++
+ test/py/tests/test_gpt.py | 66 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 82 insertions(+)
 
 diff --git a/cmd/gpt.c b/cmd/gpt.c
-index 7a8990e400..1fe7f1a7db 100644
+index 1fe7f1a7db..b7d861aa1e 100644
 --- a/cmd/gpt.c
 +++ b/cmd/gpt.c
-@@ -972,6 +972,81 @@ static int do_rename_gpt_parts(struct blk_desc *dev_desc, char *subcomm,
- 	free(partitions_list);
- 	return ret;
- }
-+
-+/**
-+ * gpt_set_bootable() - Set bootable flags for partitions
-+ *
-+ * Sets the bootable flag for any partition names in the comma separated list of
-+ * partition names. Any partitions not in the list have their bootable flag
-+ * cleared
-+ *
-+ * @desc: block device descriptor
-+ * @name: Comma separated list of partition names
-+ *
-+ * @Return: '0' on success and -ve error on failure
-+ */
-+static int gpt_set_bootable(struct blk_desc *blk_dev_desc, char *const part_list)
-+{
-+	char *name;
-+	char disk_guid[UUID_STR_LEN + 1];
-+	struct list_head *pos;
-+	struct disk_part *curr;
-+	struct disk_partition *partitions = NULL;
-+	int part_count = 0;
-+	int ret = get_disk_guid(blk_dev_desc, disk_guid);
-+
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = get_gpt_info(blk_dev_desc);
-+	if (ret <= 0)
-+		goto out;
-+
-+	part_count = ret;
-+	partitions = malloc(sizeof(*partitions) * part_count);
-+	if (!partitions) {
-+		ret = -ENOMEM;
-+		goto out;
-+	}
-+
-+	/* Copy partitions and clear bootable flag */
-+	part_count = 0;
-+	list_for_each(pos, &disk_partitions) {
-+		curr = list_entry(pos, struct disk_part, list);
-+		partitions[part_count] = curr->gpt_part_info;
-+		partitions[part_count].bootable &= ~PART_BOOTABLE;
-+		part_count++;
-+	}
-+
-+	name = strtok(part_list, ",");
-+	while (name) {
-+		bool found = false;
-+
-+		for (int i = 0; i < part_count; i++) {
-+			if (strcmp((char *)partitions[i].name, name) == 0) {
-+				partitions[i].bootable |= PART_BOOTABLE;
-+				found = true;
-+			}
-+		}
-+
-+		if (!found) {
-+			printf("Warning: No partition matching '%s' found\n",
-+			       name);
-+		}
-+
-+		name = strtok(NULL, ",");
-+	}
-+
-+	ret = gpt_restore(blk_dev_desc, disk_guid, partitions, part_count);
-+
-+out:
-+	del_gpt_info();
-+
-+	if (partitions)
-+		free(partitions);
-+
-+	return ret;
-+}
+@@ -173,6 +173,9 @@ static int calc_parts_list_len(int numparts)
+ 	/* see part.h for definition of struct disk_partition */
+ 	partlistlen += numparts * (strlen("start=MiB,") + sizeof(lbaint_t) + 1);
+ 	partlistlen += numparts * (strlen("size=MiB,") + sizeof(lbaint_t) + 1);
++#ifdef CONFIG_PARTITION_TYPE_GUID
++	partlistlen += numparts * (strlen("type=,") + UUID_STR_LEN + 1);
++#endif
+ 	partlistlen += numparts * (strlen("uuid=;") + UUID_STR_LEN + 1);
+ 	/* for the terminating null */
+ 	partlistlen++;
+@@ -211,6 +214,11 @@ static struct disk_part *allocate_disk_part(struct disk_partition *info,
+ 		PART_TYPE_LEN);
+ 	newpart->gpt_part_info.type[PART_TYPE_LEN - 1] = '\0';
+ 	newpart->gpt_part_info.bootable = info->bootable;
++#ifdef CONFIG_PARTITION_TYPE_GUID
++	strncpy(newpart->gpt_part_info.type_guid, (const char *)info->type_guid,
++		UUID_STR_LEN);
++	newpart->gpt_part_info.type_guid[UUID_STR_LEN] = '\0';
++#endif
+ #ifdef CONFIG_PARTITION_UUIDS
+ 	strncpy(newpart->gpt_part_info.uuid, (const char *)info->uuid,
+ 		UUID_STR_LEN);
+@@ -252,6 +260,9 @@ static void print_gpt_info(void)
+ 		       curr->gpt_part_info.name);
+ 		printf("Type %s, bootable %d\n", curr->gpt_part_info.type,
+ 		       curr->gpt_part_info.bootable & PART_BOOTABLE);
++#ifdef CONFIG_PARTITION_TYPE_GUID
++		printf("Type GUID %s\n", curr->gpt_part_info.type_guid);
++#endif
+ #ifdef CONFIG_PARTITION_UUIDS
+ 		printf("UUID %s\n", curr->gpt_part_info.uuid);
  #endif
+@@ -299,6 +310,11 @@ static int create_gpt_partitions_list(int numparts, const char *guid,
+ 					    curr->gpt_part_info.blksz);
+ 		strncat(partitions_list, partstr, PART_NAME_LEN + 1);
  
- /**
-@@ -1031,6 +1106,8 @@ static int do_gpt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	} else if ((strcmp(argv[1], "swap") == 0) ||
- 		   (strcmp(argv[1], "rename") == 0)) {
- 		ret = do_rename_gpt_parts(blk_dev_desc, argv[1], argv[4], argv[5]);
-+	} else if ((strcmp(argv[1], "set-bootable") == 0)) {
-+		ret = gpt_set_bootable(blk_dev_desc, argv[4]);
- #endif
- 	} else {
- 		return CMD_RET_USAGE;
-@@ -1082,8 +1159,11 @@ U_BOOT_CMD(gpt, CONFIG_SYS_MAXARGS, 1, do_gpt,
- 	"      and vice-versa\n"
- 	" gpt rename <interface> <dev> <part> <name>\n"
- 	"    - rename the specified partition\n"
-+	" gpt set-bootable <interface> <dev> <list>\n"
-+	"    - make partition names in list bootable\n"
- 	" Example usage:\n"
- 	" gpt swap mmc 0 foo bar\n"
- 	" gpt rename mmc 0 3 foo\n"
-+	" gpt set-bootable mmc 0 boot_a,boot_b\n"
- #endif
- );
-diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
-index 88839b8e1b..353dfb05cf 100644
---- a/doc/usage/cmd/gpt.rst
-+++ b/doc/usage/cmd/gpt.rst
-@@ -17,6 +17,7 @@ Synopsis
-     gpt read <interface> <device no> [<varname>]
-     gpt swap <interface> <dev> <name1> <name2>
-     gpt rename <interface> <dev> <part> <name>
-+    gpt set-bootable <interface> <dev> <partition list>
- 
- Description
- -----------
-@@ -137,6 +138,14 @@ CONFIG_CMD_GPT_RENAME=y is required.
- The 'gpt rename' command renames all partitions named 'part' to be 'name1'.
- CONFIG_CMD_GPT_RENAME=y is required.
- 
-+The 'gpt set-bootable' command sets the bootable flag for all partitions in the
-+table. If the partition name is in 'partition list' (separated by ','), the
-+bootable flag is set, otherwise it is cleared. CONFIG_CMD_GPT_RENAME=y is
-+required.  For example, to mark only the 'boot' partition as bootable:
-+
-+::
-+    => gpt set-bootable mmc 0 boot
-+
- Configuration
- -------------
- 
++#ifdef CONFIG_PARTITION_TYPE_GUID
++		strcat(partitions_list, ",type=");
++		strncat(partitions_list, curr->gpt_part_info.type_guid,
++			UUID_STR_LEN + 1);
++#endif
+ 		strcat(partitions_list, ",uuid=");
+ 		strncat(partitions_list, curr->gpt_part_info.uuid,
+ 			UUID_STR_LEN + 1);
 diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-index 946858800d..5d23f9b292 100644
+index 5d23f9b292..09a90f026f 100644
 --- a/test/py/tests/test_gpt.py
 +++ b/test/py/tests/test_gpt.py
-@@ -222,6 +222,28 @@ def test_gpt_swap_partitions(state_disk_image, u_boot_console):
-     assert '0x00000800	0x00000fff	"part2"' in output
-     assert '0x00001000	0x00001bff	"part1"' in output
+@@ -16,6 +16,35 @@ the test.
+ # Mark all tests here as slow
+ pytestmark = pytest.mark.slow
  
++def parse_gpt_parts(disk_str):
++    """Parser a partition string into a list of partitions.
++
++    Args:
++        disk_str: The disk description string, as returned by `gpt read`
++
++    Returns:
++        A list of parsed partitions. Each partition is a dictionary with the
++        string value from each specified key in the partition description, or a
++        key with with the value True for a boolean flag
++    """
++    parts = []
++    for part_str in disk_str.split(';'):
++        part = {}
++        for option in part_str.split(","):
++            if not option:
++                continue
++
++            if "=" in option:
++                k, v = option.split("=")
++                part[k] = v
++            else:
++                part[option] = True
++
++        if part:
++            parts.append(part)
++
++    return parts
++
+ class GptTestDiskImage(object):
+     """Disk Image used by the GPT tests."""
+ 
+@@ -49,11 +78,13 @@ class GptTestDiskImage(object):
+                 u_boot_utils.run_and_log(u_boot_console, cmd)
+                 # part1 offset 1MB size 1MB
+                 cmd = ('sgdisk', '--new=1:2048:4095', '--change-name=1:part1',
++                    '--partition-guid=1:33194895-67f6-4561-8457-6fdeed4f50a3',
+                     '-A 1:set:2',
+                     persistent)
+                 # part2 offset 2MB size 1.5MB
+                 u_boot_utils.run_and_log(u_boot_console, cmd)
+                 cmd = ('sgdisk', '--new=2:4096:7167', '--change-name=2:part2',
++                    '--partition-guid=2:cc9c6e4a-6551-4cb5-87be-3210f96c86fb',
+                     persistent)
+                 u_boot_utils.run_and_log(u_boot_console, cmd)
+                 cmd = ('sgdisk', '--load-backup=' + persistent)
+@@ -88,6 +119,40 @@ def test_gpt_read(state_disk_image, u_boot_console):
+     assert '0x00000800	0x00000fff	"part1"' in output
+     assert '0x00001000	0x00001bff	"part2"' in output
+ 
++@pytest.mark.boardspec('sandbox')
 +@pytest.mark.buildconfigspec('cmd_gpt')
-+@pytest.mark.buildconfigspec('cmd_gpt_rename')
-+@pytest.mark.buildconfigspec('cmd_part')
++@pytest.mark.buildconfigspec('partition_type_guid')
 +@pytest.mark.requiredtool('sgdisk')
-+def test_gpt_set_bootable(state_disk_image, u_boot_console):
-+    """Test the gpt set-bootable command."""
++def test_gpt_read_var(state_disk_image, u_boot_console):
++    """Test the gpt read command."""
 +
 +    u_boot_console.run_command('host bind 0 ' + state_disk_image.path)
-+    parts = ('part2', 'part1')
-+    for bootable in parts:
-+        output = u_boot_console.run_command(f'gpt set-bootable host 0 {bootable}')
-+        assert 'success!' in output
++    output = u_boot_console.run_command('gpt read host 0 gpt_parts')
++    assert 'success!' in output
 +
-+        for p in parts:
-+            output = u_boot_console.run_command(f'gpt setenv host 0 {p}')
-+            assert 'success!' in output
-+            output = u_boot_console.run_command('echo ${gpt_partition_bootable}')
-+            if p == bootable:
-+                assert output.rstrip() == '1'
-+            else:
-+                assert output.rstrip() == '0'
++    output = u_boot_console.run_command('echo ${gpt_parts}')
++    parts = parse_gpt_parts(output.rstrip())
++
++    assert parts == [
++        {
++            "uuid_disk": "375a56f7-d6c9-4e81-b5f0-09d41ca89efe",
++        },
++        {
++            "name": "part1",
++            "start": "0x100000",
++            "size": "0x100000",
++            "type": "0fc63daf-8483-4772-8e79-3d69d8477de4",
++            "uuid": "33194895-67f6-4561-8457-6fdeed4f50a3",
++        },
++        {
++            "name": "part2",
++            "start": "0x200000",
++            "size": "0x180000",
++            "type": "0fc63daf-8483-4772-8e79-3d69d8477de4",
++            "uuid": "cc9c6e4a-6551-4cb5-87be-3210f96c86fb",
++        },
++    ]
 +
  @pytest.mark.boardspec('sandbox')
  @pytest.mark.buildconfigspec('cmd_gpt')
- @pytest.mark.buildconfigspec('cmd_part')
+ @pytest.mark.requiredtool('sgdisk')
+@@ -263,3 +328,4 @@ def test_gpt_write(state_disk_image, u_boot_console):
+     assert '0x00001000	0x00001bff	"second"' in output
+     output = u_boot_console.run_command('gpt guid host 0')
+     assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
++
 -- 
 2.33.0
 
