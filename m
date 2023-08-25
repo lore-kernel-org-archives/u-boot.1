@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2551C3DA66
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 03:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E01C3DA66
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 05:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 062D886A1A;
-	Fri, 25 Aug 2023 05:46:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 65B1F869DF;
+	Fri, 25 Aug 2023 07:42:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LTX4OjWp";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="loNIknRJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 695CE865D9; Fri, 25 Aug 2023 03:24:48 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C4FE7869E1; Fri, 25 Aug 2023 07:42:35 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D0908653D
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 03:24:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9D998681D
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 07:42:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peteryin.openbmc@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-68bed286169so420397b3a.1
- for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 18:24:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692926684; x=1693531484;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=02Z/Cv2tfMuANlTI1w+OEAtuzLTlgxs0SBDXlQ1/UFI=;
- b=LTX4OjWpiEVSGXoF9uQ2Uhy1Ze7K1j5aAwDfCoEeImpvDKzat5Jm4OleZX8dCnqXjX
- asGDWvTnNqP7afXD5FUtn+bYWClCuisWLeEjbAT9RElqx1th+H3Vza2Itge/enixCXwk
- o3jIgbyuLwPKsqEfXCM3qlhAltYo/KNKZeqPDmAZhWArfN1mnpYsj5vGc2HE67w3n3iF
- thwkjcXwPGWStAjnJl8oVuOFW1+L6691B1R2L8nSC/+VjovOGe9RR9ytNonAjGv70lUK
- PHpTMD/x0+fY0906M1HXFiV/FONvvjfN/aq+k0R1XIbUti2CI2PiMtZ1ilpPrm8fsZ63
- LWiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692926684; x=1693531484;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=02Z/Cv2tfMuANlTI1w+OEAtuzLTlgxs0SBDXlQ1/UFI=;
- b=RieT1IDcMScLlT58yalDSl6NsFH0xJGlEgARls975eu/vb4cRLjh16Iwr+8aKMOGMl
- 37pexyVS4itQ/LBd7Lm4CMtuCGb5Rnp+IR8+TaBcsmKeCIyYn5B3/Cz2Od7aoit3hwvG
- 09PojWZgtMU5D54mH3YpkPMMo2rMt625ntt5B/WBar4E9H0DWJzsLnQSmW74cIMbeBad
- aMfKY3jJ/hDRkD9VNLVn/KaleEi+m6EcIpjYjZSsjkRm9Ma63gmIXVyweCONmhcFqkGU
- +WhA8RUNLTzlBq5g0b/j2xAW/FM8dYoKAcyP1f2nV/Kd7TQv3kun4jOWD+SW1k0l/aUy
- GCBA==
-X-Gm-Message-State: AOJu0Yy2bfTLZ/+1hJ8RZywgvQEYgyXgl4WMy+7JRjbyizHx12H/pVAq
- nZPg7a2zeUKkwg605jsnGpM=
-X-Google-Smtp-Source: AGHT+IEsxllGkJdib6J9pm5oeRARlSgOY+kBS1KPZtaMSYMDZlKP6rwQ0qDGEEJVe6VfOSoFSWhF1g==
-X-Received: by 2002:a05:6a00:39a3:b0:68c:479:b4f with SMTP id
- fi35-20020a056a0039a300b0068c04790b4fmr1182122pfb.33.1692926683717; 
- Thu, 24 Aug 2023 18:24:43 -0700 (PDT)
-Received: from peter-bmc.dhcpserver.bu9bmc.local
- (1-34-21-66.hinet-ip.hinet.net. [1.34.21.66])
- by smtp.gmail.com with ESMTPSA id
- i2-20020aa78b42000000b0068bc461b68fsm355995pfd.204.2023.08.24.18.24.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 18:24:43 -0700 (PDT)
-From: peteryin <peteryin.openbmc@gmail.com>
-To: albert.u.boot@aribaud.net,
-	u-boot@lists.denx.de
-Cc: peteryin <peteryin.openbmc@gmail.com>
-Subject: [PATCH 2/2] Title: Add Meta OpenBMC Minerva dts in uboot.
-Date: Fri, 25 Aug 2023 09:17:32 +0800
-Message-Id: <20230825011732.1606958-2-peteryin.openbmc@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230825011732.1606958-1-peteryin.openbmc@gmail.com>
-References: <20230825011732.1606958-1-peteryin.openbmc@gmail.com>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37P5gP6K047305;
+ Fri, 25 Aug 2023 00:42:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1692942145;
+ bh=UsAfhqVrAI+/qiypTPbkLX5FCk0uHGEprBauuIJAEJQ=;
+ h=Date:CC:Subject:To:References:From:In-Reply-To;
+ b=loNIknRJw+qp3Id/kp5aRJW4lGTAQx3VGVU0ow/AKF6v0B+SnZjJ7wftQUD4O2j3d
+ y5CNlB4F6/0kko62EbEmu7zuI+DXh3sakVgk37pMpESujX2dcsEnEcEw1mrBeamt6M
+ OdtZn+KjiuLERZe8LNBMSh7IAIXvHP2d544rbWhc=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37P5gP7d014597
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 25 Aug 2023 00:42:25 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
+ Aug 2023 00:42:25 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 25 Aug 2023 00:42:25 -0500
+Received: from [172.24.227.9] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37P5gLQJ009561;
+ Fri, 25 Aug 2023 00:42:22 -0500
+Message-ID: <76153dc4-07e7-3c9b-8c2f-4e50d70b1679@ti.com>
+Date: Fri, 25 Aug 2023 11:12:21 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 25 Aug 2023 05:46:38 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+CC: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
+ <nm@ti.com>, <joe.hershberger@ni.com>, <robertcnelson@gmail.com>,
+ <jkridner@beagleboard.org>, <r-gunasekaran@ti.com>, <srk@ti.com>,
+ <u-boot@lists.denx.de>, <s-vadapalli@ti.com>
+Subject: Re: [PATCH 1/2] net: ti: am65-cpsw-nuss: Workaround for buggy
+ PHY/Board
+To: Roger Quadros <rogerq@kernel.org>
+References: <20230822121350.51324-1-rogerq@kernel.org>
+ <20230822121350.51324-2-rogerq@kernel.org>
+ <12738ca9-ac8c-b587-c0bf-c8abc8fd3f48@ti.com>
+ <20230824182431.GE3953269@bill-the-cat>
+ <203072fb-c847-b896-a249-eabe3c2631a0@kernel.org>
+Content-Language: en-US
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <203072fb-c847-b896-a249-eabe3c2631a0@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,126 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add dts file for Meta OpenBMC Minerva.
+Roger,
 
-Signed-off-by: peteryin <peteryin.openbmc@gmail.com>
----
- arch/arm/dts/Makefile            |  1 +
- arch/arm/dts/ast2600-minerva.dts | 93 ++++++++++++++++++++++++++++++++
- 2 files changed, 94 insertions(+)
- create mode 100644 arch/arm/dts/ast2600-minerva.dts
+On 25/08/23 00:39, Roger Quadros wrote:
+> 
+> 
+> On 24/08/2023 21:24, Tom Rini wrote:
+>> On Thu, Aug 24, 2023 at 11:34:29PM +0530, Siddharth Vadapalli wrote:
+>>> Hello Roger,
+>>>
+>>> On 22-08-2023 17:43, Roger Quadros wrote:
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 0a893baf64..d3faab78b1 100755
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -684,6 +684,7 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
- 	ast2600a0-evb.dtb \
- 	ast2600a1-evb.dtb \
- 	ast2600-bletchley.dtb \
-+	ast2600-minerva.dtb \
- 	ast2600-evb.dtb \
- 	ast2600-dcscm.dtb \
- 	ast2600-fpga.dtb \
-diff --git a/arch/arm/dts/ast2600-minerva.dts b/arch/arm/dts/ast2600-minerva.dts
-new file mode 100644
-index 0000000000..2399525b24
---- /dev/null
-+++ b/arch/arm/dts/ast2600-minerva.dts
-@@ -0,0 +1,93 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+// Copyright (c) 2022 Meta Platforms Inc.
-+/dts-v1/;
-+
-+#include "ast2600-u-boot.dtsi"
-+
-+/ {
-+	model = "Facebook Minerva BMC";
-+	compatible = "facebook,minerva-bmc", "aspeed,ast2600";
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0x80000000 0x40000000>;
-+	};
-+
-+	chosen {
-+		stdout-path = &uart5;
-+	};
-+
-+	aliases {
-+		spi0 = &fmc;
-+		ethernet3 = &mac3;
-+	};
-+
-+	cpus {
-+		cpu@0 {
-+			clock-frequency = <800000000>;
-+		};
-+		cpu@1 {
-+			clock-frequency = <800000000>;
-+		};
-+	};
-+};
-+
-+&uart5 {
-+	u-boot,dm-pre-reloc;
-+	status = "okay";
-+};
-+
-+&sdrammc {
-+	clock-frequency = <400000000>;
-+};
-+
-+&wdt1 {
-+	status = "okay";
-+};
-+
-+&wdt2 {
-+	status = "okay";
-+};
-+
-+&wdt3 {
-+	status = "okay";
-+};
-+
-+&mac3 {
-+	status = "okay";
-+	phy-mode = "rgmii";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_rgmii4_default>;
-+};
-+
-+&fmc {
-+	status = "okay";
-+
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_fmcquad_default>;
-+
-+	flash@0 {
-+		status = "okay";
-+		spi-max-frequency = <50000000>;
-+		spi-tx-bus-width = <2>;
-+		spi-rx-bus-width = <2>;
-+	};
-+
-+	flash@1 {
-+		status = "okay";
-+		spi-max-frequency = <50000000>;
-+		spi-tx-bus-width = <2>;
-+		spi-rx-bus-width = <2>;
-+	};
-+
-+	flash@2 {
-+		status = "okay";
-+		spi-max-frequency = <50000000>;
-+		spi-tx-bus-width = <2>;
-+		spi-rx-bus-width = <2>;
-+	};
-+};
-+
-+&hace {
-+	status = "okay";
-+};
+...
+
+> 
+> Even a single "PHY not found" print is not OK. It looks like an
+> error while it should not.
+> 
+> The correct solution is to use the MDIO uclass framework and add
+> some generic handling in the class driver. drivers/net/eth-phy-uclass.c
+> 
+> We could provide the delay time in the 'reset-deassert-us' property.
+> Although I'm not sure if this is the correct property for this case
+> as there is no RESET GPIO on the board. What we really want is delay
+> from power-on-reset. Which means we might have to introduce a new property
+> and use time from boot to determine if PHY is ready or not?
+> 
+> NOTE: PHY ready time is different for hardware reset and power-on-reset.
+> 50ms vs 150ms
+
+Another alternative could be that of implementing the for-loop within
+phy_connect() along with the delay, by updating the function with a new
+parameter "tries" which indicates the number of retries before finally printing
+"PHY not found" in case of an error. Optionally, another parameter "delay" can
+be added, which indicates the delay within the for-loop.
+
+This implementation will require updating all drivers in drivers/net which use
+phy_connect(), with the "tries" parameter set to 1 for them. The am65-cpsw-nuss
+driver can set "tries" to 5 as done in the current patch.
+
+The idea behind moving the for-loop within phy_connect() is that it will help
+solve the issue for other drivers as well, if they potentially encounter such
+buggy PHYs in future boards.
+
+> 
+
 -- 
-2.25.1
-
+Regards,
+Siddharth.
