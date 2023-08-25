@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5475EC3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:07:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7F4AC6787B
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D00EB85F9F;
-	Fri, 25 Aug 2023 20:05:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 28E1A86B4B;
+	Fri, 25 Aug 2023 20:06:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E23PYrQW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dXkbGHzG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B3D7864BC; Fri, 25 Aug 2023 20:05:40 +0200 (CEST)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
+ id E0F4986B3F; Fri, 25 Aug 2023 20:06:20 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A3F8468A
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:05:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19E0386B2D
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-68a4bcf8a97so951466b3a.1
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:05:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-51a52a7d859so4656389a12.0
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692986736; x=1693591536;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zZdJ0DcpYRfRw2x8S5rleoUYFCdURgeRij3t0DUWaG4=;
- b=E23PYrQWc/JuE4/0UyvZiw9JYtJ5/1gUCDSMKEtPosT5uwidO2KpIl7JHrLXLUILbJ
- fwRT8NgWkx6IcS915XhSQxY7CcVBS8VWrfpOVdLvC7bSjHNRfaX9Z+7MkU9RK/7nMQnU
- W4fNZs9w0p0bmtBt/hAjysKp58O1PIWpScQTq0QgG6zf2tP9CELm6g0RR3VMrZXY4qE7
- CP3/BWqxVL1cKnC9F5CUZxr3YudtcohorBWTx2p42GPOhk1QYV/exWYBeKV/BpAOZeKC
- TY3BZbFb60mvSt9L8OhcY6kUBaQE5SgKpZL/6KwLCp5s+NzTPn3sx0Rv9AncL6a1cBnC
- PmdQ==
+ d=chromium.org; s=google; t=1692986777; x=1693591577;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cfHBzEFCMnmKpY0F8y4USTQiLX4wo3N33fUQXkh3Yb4=;
+ b=dXkbGHzGyZ27WhJQ9G9ITauG4L+1ZCpLwVdgfFnYZrpH4mjcb65UB/GR/7r2PRLqv5
+ 48/4TrGadBvmqL0KA+GLK4B+qyWfJiSoOsNe3+W/b4Hq4Fl4F60WXWyaHm9DmaNl/CZw
+ FBolxb4IKiQUKkoXrjMEYVWR6MBLW/BvVQNTk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692986736; x=1693591536;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zZdJ0DcpYRfRw2x8S5rleoUYFCdURgeRij3t0DUWaG4=;
- b=lHJTsheoq9clK3OwG3AjNQEQVX/opougxo+Mj9fiGD778UUjFvS26ag8xkOtBQoMUH
- Vt+uWxbsb+yADlwJkpwRoDlPtNhVzXJeEgDtyASAECs5DyibXZMZfKx1i0icZtGvhFF9
- nsv9snKXADAJWO1XPNAcpVqsPffZXb4kCQdwx0QZf8mP52qmUDa7AFksmKxT7G0Lh3Si
- qNEVtGg1hJ8ABmDb2eFOPe3C8KLJcFQEmS3MrSjYGbXlF+Q+QK9sGD+kmdRf1bMf0OFK
- XVcp2uUj7ooHcv5iLZk2enRUCPbZmevRNzvT2V5yqQ6o9HBdPmOsxNlAP1Pzd9Ixmsd5
- 8Eug==
-X-Gm-Message-State: AOJu0YyHsbelGgevTBoSGfSopG3Wwtm6djRqwtmyPsSbc+eRcrOG5Les
- Nzr6ZYDbsh/hEE9XN0mIOGA=
-X-Google-Smtp-Source: AGHT+IG17sWNu6TXv7sGT9vZ8N2JQ7kcazdNXHwpkGWbe8DfYCRJbUz++tE45j9jrqhC2TZGGDo32w==
-X-Received: by 2002:a05:6a20:7485:b0:123:828f:68c with SMTP id
- p5-20020a056a20748500b00123828f068cmr20074667pzd.50.1692986735603; 
- Fri, 25 Aug 2023 11:05:35 -0700 (PDT)
-Received: from [10.64.107.252] (static-198-54-134-172.cust.tzulo.com.
- [198.54.134.172]) by smtp.gmail.com with ESMTPSA id
- k5-20020a170902e90500b001b8052d58a0sm2024060pld.305.2023.08.25.11.05.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Aug 2023 11:05:35 -0700 (PDT)
-Message-ID: <69909b61-f57e-fc91-43a5-0f4bd23609c9@gmail.com>
-Date: Fri, 25 Aug 2023 11:05:32 -0700
+ d=1e100.net; s=20221208; t=1692986777; x=1693591577;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cfHBzEFCMnmKpY0F8y4USTQiLX4wo3N33fUQXkh3Yb4=;
+ b=l0pP9JH3477PeVK2xpZ/tlLxCYOllvRPsgoE3+4gOPYEjNj9AGqz/q0zTGEDhLS+9Y
+ J67WMyZwSsQgkvwpEaiQY9ez6y0h1j0C17QfgWf4zuU80ZP5zTo0lN/tqopJ+bRCqiuV
+ 5lnlnjSTbj0MrL104n25H5EyJ6TPSMt5Z7HJYLdOaxoA3roBnPFpVO5ZQHjBhffxapKH
+ UXB39daeN97wK20HUDUEdBuN0BZrsW1VEmhG+ZjByCDltCO2OscZjK0SYRXnR9m2Q1co
+ P5n44xTev4GYwkBpjSdd20bVexta8C1c1hDh4TaGHF9xm4cdoI9zuCbLpsRadW5FSlOQ
+ o4Iw==
+X-Gm-Message-State: AOJu0YyKyNvExrkV9/Ex7w4SBK7xZv3FbIgpjj4b+9q2u4/ewjCEwm/j
+ BPsxERnusJ6lVTJvTOxGPOTSD1xjslbnq50AmbklAw==
+X-Google-Smtp-Source: AGHT+IGA6NetNuNaeVm+3LKBWiDcV8CC8GtOj5gK3unK4tLqGJF/+MsPXO7d4faLo74pPk7e6q0IMDPe+5Bkn6ygO98=
+X-Received: by 2002:a05:6402:b37:b0:522:b876:9ef5 with SMTP id
+ bo23-20020a0564020b3700b00522b8769ef5mr21683853edb.8.1692986777423; Fri, 25
+ Aug 2023 11:06:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
- psci_arch_init
-Content-Language: en-US
-To: wens@csie.org, Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Marc Zyngier <maz@kernel.org>
-References: <20230531201520.15479-1-CFSworks@gmail.com>
- <20230814213854.408962d5@slackpad.lan>
- <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
+ <CADg8p95Dtvm++wY=74HVBvHL0cNRxKdSEv5ZtaLAbpp6m+hU9Q@mail.gmail.com>
+ <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
+In-Reply-To: <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 25 Aug 2023 12:06:05 -0600
+Message-ID: <CAPnjgZ1Mg583oQk_K9kzaZho-8tuNQpdWKSbLVH==MiM+NWA1A@mail.gmail.com>
+Subject: Re: [PATCH] fwu: Initialize global fwu library state during CI test
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jassi Brar <jaswinder.singh@linaro.org>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,33 +89,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/25/23 00:20, Chen-Yu Tsai wrote:
+On Fri, 25 Aug 2023 at 10:00, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 8/25/23 12:52, Sughosh Ganu wrote:
+> > On Wed, 23 Aug 2023 at 05:47, Marek Vasut
+> > <marek.vasut+renesas@mailbox.org> wrote:
+> >>
+> >> The current CI test worked by sheer luck, the g_dev global pointer
+> >> in the fwu library was never initialized and the test equally well
+> >> failed on sandbox64. Trigger the main loop in sandbox tests too to
+> >> initialize that global state, and move the sandbox specific exit
+> >> from fwu_boottime_checks after g_dev is initialized.
+> >>
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> ---
+> >> Cc: Etienne Carriere <etienne.carriere@linaro.org>
+> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> Cc: Jassi Brar <jaswinder.singh@linaro.org>
+> >> Cc: Masahisa Kojima <masahisa.kojima@linaro.org>
+> >> Cc: Michal Simek <michal.simek@amd.com>
+> >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> >> Cc: Simon Glass <sjg@chromium.org>
+> >> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >> ---
+> >>   lib/fwu_updates/fwu.c | 12 ++++++------
+> >>   test/dm/fwu_mdata.c   | 12 ++++++++++++
+> >>   2 files changed, 18 insertions(+), 6 deletions(-)
 
-Hi Chen-Yu,
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> IIRC the GIC manual says that the secure bit is set or cleared to select
-> which bank of registers is accessed.
+BTW, Sughosh this state should really be attached to the uclass, not
+sitting out on its own. As it is, it won't reinit properly in tests.
 
-Which secure bit are we talking about here? Do we mean the *configured* 
-secure bit (SCR.NS, what the code is attempting to clear) or the 
-*effective* secure bit (AWPROT[1], et al)? The distinction is important 
-in monitor mode (where this function runs) since there (and only there) 
-the CPU core ignores the configured setting and runs in the secure world 
-unconditionally.
 
-I'm guessing it's most likely the latter since the former isn't exposed 
-outside of the CPU core, unless the GIC has some special signal going to 
-it...
-
-> And I suppose it is here to be more robust.
-
-...but if it is the former (i.e. SCR.NS is significant in this function) 
-the code should be retained, but moved *before* the GIC register 
-accesses, and the old value of SCR.NS should be restored *after*.
-
-Either way: I don't think this line should be kept in its current form, 
-because it's written in a way that strongly suggests that we want to run 
-in secure mode after exiting monitor mode, which is flatly not the case.
-
-Happy Friday all,
-Sam
+> >
+> > Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >
+> > But I have a question below.
+> >
+> >>
+> >> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> >> index 4d0c8b84b9d..22bdc78df59 100644
+> >> --- a/lib/fwu_updates/fwu.c
+> >> +++ b/lib/fwu_updates/fwu.c
+> >> @@ -623,18 +623,18 @@ static int fwu_boottime_checks(void *ctx, struct event *event)
+> >>          int ret;
+> >>          u32 boot_idx, active_idx;
+> >>
+> >> -       /* Don't have boot time checks on sandbox */
+> >> -       if (IS_ENABLED(CONFIG_SANDBOX)) {
+> >> -               boottime_check = 1;
+> >> -               return 0;
+> >> -       }
+> >> -
+> >>          ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
+> >>          if (ret) {
+> >>                  log_debug("Cannot find fwu device\n");
+> >>                  return ret;
+> >>          }
+> >>
+> >> +       /* Don't have boot time checks on sandbox */
+> >> +       if (IS_ENABLED(CONFIG_SANDBOX)) {
+> >> +               boottime_check = 1;
+> >> +               return 0;
+> >> +       }
+> >> +
+> >>          ret = fwu_get_mdata(NULL);
+> >>          if (ret) {
+> >>                  log_debug("Unable to read meta-data\n");
+> >> diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
+> >> index 8b5c83ef4e2..52018f610fe 100644
+> >> --- a/test/dm/fwu_mdata.c
+> >> +++ b/test/dm/fwu_mdata.c
+> >> @@ -93,6 +93,12 @@ static int dm_test_fwu_mdata_read(struct unit_test_state *uts)
+> >>          struct udevice *dev;
+> >>          struct fwu_mdata mdata = { 0 };
+> >>
+> >> +       /*
+> >> +        * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
+> >> +        * to populate g_dev global pointer in that library.
+> >> +        */
+> >> +       event_notify_null(EVT_MAIN_LOOP);
+> >> +
+> >
+> > Are these explicit invocations required? Should fwu_boottime_checks
+> > not get called through run_main_loop() during boot?
+>
+> board_r.c event_notify_null(EVT_MAIN_LOOP); is not reached in sandbox:
+>
+> 571 static int run_main_loop(void)
+> 572 {
+> 573 #ifdef CONFIG_SANDBOX <----------- because of this
+> 574         sandbox_main_loop_init();
+> 575 #endif
+> 576
+> 577         event_notify_null(EVT_MAIN_LOOP);
