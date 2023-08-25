@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B154DC3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 14:18:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CA7C71133
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 14:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 007B986A5A;
-	Fri, 25 Aug 2023 16:18:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 879A78640E;
+	Fri, 25 Aug 2023 16:40:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RNMTBzeU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YI9QGgiE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C02686A7D; Fri, 25 Aug 2023 16:18:14 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6C51C86A74; Fri, 25 Aug 2023 16:40:07 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F7D086923
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 16:18:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3BC86366
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 16:40:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37PEI1p2053708;
- Fri, 25 Aug 2023 09:18:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692973081;
- bh=QsfPgi4DTjvtdlkO2vOOKFXRqgBl27akW8DyCUqw7c8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=RNMTBzeUGbCUkXvHd8PyT+c8ku4tb9yg7Ens8svBP8RCCxkjWNKvVeGmcNBb84GOk
- +6AuDTuw3JdqMQWzIP+pM7CDwVUUfynA5tcX+xtYAqjvO+wjAWp6yZ6Y1E0S5nqtnG
- Lzl3zOz06Nk354oCDoLx4rlc++tmQnmY148zMPBo=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37PEI1Pe027799
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Aug 2023 09:18:01 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Aug 2023 09:18:00 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Aug 2023 09:18:00 -0500
-Received: from [10.249.128.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37PEHu7F091308;
- Fri, 25 Aug 2023 09:17:57 -0500
-Message-ID: <227d74cf-9e95-4f5f-af96-49d054cde7aa@ti.com>
-Date: Fri, 25 Aug 2023 19:47:55 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-592972da9a6so10864367b3.2
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 07:40:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1692974403; x=1693579203;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BA3FJOheRW8moyz9KO8Xt7XySOOWQte7Aah4K5wyoDY=;
+ b=YI9QGgiEK4YLd9ce1AxiuunhVtsf9nYn/o7LmfGC1c5k6gpbBktGbxla1OIP2ZPG2C
+ Drf1LdPGEDOVh4wQRA0LnKHB3P7LZniCUvVkrF3CrZ5VoPOjH/zdHYCj8BDDmlgNjQD9
+ s1IyaaW79H6xPexX53ztMaSUdJ7tDDk+du5Vk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692974403; x=1693579203;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BA3FJOheRW8moyz9KO8Xt7XySOOWQte7Aah4K5wyoDY=;
+ b=F/Tpvn2+E98g8NYgq+xIxdSxMHaZQbDxXkuMTstTN9hvAVVIi7SIG4/+b43TM46/M+
+ kJIqWbzNMxRTPQEXTx3+0Xkn5XiJyKdJrRoBbNebek1Zg6uft/w++v2xwtGpOBEkAnjp
+ 2eGKdw01G20tFDgZUrA77nteUgdOofLDcxviMbgrsXdw+7LxfWfYms7HxmwTf0sTjqqm
+ +gq9sZD156dpO6oE6fjkPtssJR00ZSygkDZjQyxAfcjCQL03fQ4ASN5pC8T7Ug4X6+S+
+ Zm7mSJSqr1yAgufVsCg34VDwVLetkLLsb0SiWW/fGPQcNAgEnGgETq7kCEeOaT9XiBAa
+ XWNA==
+X-Gm-Message-State: AOJu0YwX9ybopxLTWS/joWG6ELP8IW70EIvoEKAr5OP+ljfPRZdgG0GJ
+ dtm/TgQRZ1csptbuifO87kU6VQ==
+X-Google-Smtp-Source: AGHT+IE4ruhIvyfR4e48rYet6OWUsTkUNSW7XLRiHSAF5o5oWT/2Cv423xapE5ep36XN6Y8Vly1JDQ==
+X-Received: by 2002:a0d:ca4c:0:b0:570:63d3:9685 with SMTP id
+ m73-20020a0dca4c000000b0057063d39685mr17581574ywd.25.1692974403363; 
+ Fri, 25 Aug 2023 07:40:03 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-fcb7-366a-fd11-1c19.res6.spectrum.com.
+ [2603:6081:7b00:6400:fcb7:366a:fd11:1c19])
+ by smtp.gmail.com with ESMTPSA id
+ v190-20020a0dd3c7000000b00579e5c4982fsm529139ywd.36.2023.08.25.07.40.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Aug 2023 07:40:01 -0700 (PDT)
+Date: Fri, 25 Aug 2023 10:39:59 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, u-boot@lists.denx.de,
+ lukma@denx.de, seanga2@gmail.com, git@amd.com
+Subject: Re: [PATCH] clk: Dont return error when assigned-clocks is empty or
+ missing
+Message-ID: <20230825143959.GH3953269@bill-the-cat>
+References: <20230711095128.19086-1-ashok.reddy.soma@amd.com>
+ <32e261a0-f4eb-04f4-f31a-33414a292146@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 8/8] doc: board: ti: Add BeaglePlay documentation
-To: Simon Glass <sjg@google.com>, Tom Rini <trini@konsulko.com>
-CC: Nishanth Menon <nm@ti.com>, Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, 
- Andrew <afd@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh
- <vigneshr@ti.com>, <u-boot@lists.denx.de>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Jan Kiszka <jan.kiszka@siemens.com>, Heinrich
- Schuchardt <heinrich.schuchardt@canonical.com>
-References: <20230822184135.2328409-9-nm@ti.com>
- <CAPnjgZ1wGkq66ZEXHUVzLpc47fYgV0+Kk9WNwqDWcO0R7jEYVA@mail.gmail.com>
- <20230823171502.GQ3953269@bill-the-cat>
- <CAPnjgZ2t2aUnreA8Hzg11moQ2Z5hqW1r-16WTF0PRMjK3iXe_A@mail.gmail.com>
- <20230824001848.vgzl7rcphic3gu2n@carnival>
- <CAPnjgZ2qxm0KGFp5dM2Jzzcuib5npXodhYQ6u+dbO3oSBHA55A@mail.gmail.com>
- <20230824032709.phneggflsw2ps2dv@reanalyze>
- <a3af68c4-490d-f3e2-a9ed-acd650ac0452@ti.com>
- <20230824142050.GL3953269@bill-the-cat>
- <CAPnjgZ23_aCG6XqJBwnVkrm3kcuwkz=-geQTX5BbX9rP+w49fA@mail.gmail.com>
- <20230824144358.GO3953269@bill-the-cat>
- <CAPnjgZ3Z=7Mfs+QC-YSU9NNKq4UnY0C-b891TdtDMJRgLdYUpQ@mail.gmail.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <CAPnjgZ3Z=7Mfs+QC-YSU9NNKq4UnY0C-b891TdtDMJRgLdYUpQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="U7tE7TSxhym083y0"
+Content-Disposition: inline
+In-Reply-To: <32e261a0-f4eb-04f4-f31a-33414a292146@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,139 +94,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, Tom
 
-On 24-Aug-23 8:16 PM, Simon Glass wrote:
+--U7tE7TSxhym083y0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Aug 25, 2023 at 09:15:09AM +0200, Michal Simek wrote:
 > Hi Tom,
-> 
-> On Thu, 24 Aug 2023 at 08:44, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Thu, Aug 24, 2023 at 08:41:23AM -0600, Simon Glass wrote:
->>> Hi,
->>>
->>> On Thu, 24 Aug 2023 at 08:20, Tom Rini <trini@konsulko.com> wrote:
->>>>
->>>> On Thu, Aug 24, 2023 at 06:46:57PM +0530, Neha Malcom Francis wrote:
->>>>> Hi Simon, Nishanth
->>>>>
->>>>> On 24/08/23 08:57, Nishanth Menon wrote:
->>>>>> On 21:01-20230823, Simon Glass wrote:
->>>>>>> Hi Nishanth,
->>>>>>>
->>>>>>> On Wed, 23 Aug 2023 at 18:18, Nishanth Menon <nm@ti.com> wrote:
->>>>>>>>
->>>>>>>> On 17:57-20230823, Simon Glass wrote:
->>>>>>>> [...]
->>>>>>>>>> This is how we have a common bit of rST for how to build N boards,
->>>>>>>>>> without having to do a literal copy and paste N times.
->>>>>>>>>
->>>>>>>>> How about using this?
->>>>>>>>>
->>>>>>>>> https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
->>>>>>>>
->>>>>>>> I was not able to succeed with complex includes such as:
->>>>>>>> https://github.com/u-boot/u-boot/blob/master/doc/board/ti/am62x_sk.rst?plain=1#L89
->>>>>>>>
->>>>>>>> am62x complete build procedure defined once and reused in other am62x
->>>>>>>> platforms.. But the am62x build procedure itself is reused from common
->>>>>>>> k3 build steps.
->>>>>>>
->>>>>>> I followed through these instructions. I find the env vars quite
->>>>>>> confusing, since I don't really know what it is doing. It feels like a
->>>>>>> script:
->>>>>>>
->>>>>>> do $a $b $c
->>>>>>> do $f $e
->>>>>>>
->>>>>>> it is pretty hard to follow. I think it would be better to write
->>>>>>> everything out in full for each board, like rockchip does.
->>>>>>
->>>>>> Unfortunately, this is a few major steps that is repeated for
->>>>>> (currently):
->>>>>>      AM62x SK
->>>>>>      Toradex Verdin
->>>>>>      (pending: beagleplay - )
->>>>>>      (once all the dust clears up, hopefully phytec)
->>>>>>      SK-LP
->>>>>>      ....
->>>>>>
->>>>>> I have no reasonable way to offer to keep them all in sync.
->>>>>>      https://libera.irclog.whitequark.org/u-boot/2023-07-26#34662854;
->>>>>> is kind of why I went down this path.S
->>>>>>
->>>>>>>
->>>>>>> Some other minor feedback:
->>>>>>>
->>>>>>> - The 'make' lines should really have -j $(nproc) added
->>>>>>
->>>>>> Different styles of shells..
->>>>>>
->>>>>>> - The $ signs at the start of each command in the docs are a pain
->>>>>>> since it stops me copying the commands into the terminal - can you
->>>>>>> remove them?
->>>>>>
->>>>>> hehe.. "dont" let people blindly copy paste without understanding what is
->>>>>> going on argument?
->>>>>>
->>>>>> If folks are OK, I sure can send a different patch series for that.. (or
->>>>>> maybe motivate someone to do that instead of me ;))
->>>>>>
->>>>>>
->>>>>>> - It doesn't build for me:
->>>>>>>
->>>>>>>     BINMAN  .binman_stamp
->>>>>>> Image 'ti-dm' is missing external blobs and is non-functional: blob-ext
->>>>>>>
->>>>>>> /binman/ti-dm/blob-ext (ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f):
->>>>>>>      Missing blob
->>>>>>>
->>>>>>> Some images are invalid
->>>>>>> make[1]: *** [/scratch/sglass/cosarm/src/third_party/u-boot/files/Makefile:1115:
->>>>>>> .binman_stamp] Error 103
->>>>>>> make[1]: Leaving directory '/tmp/b/play'
->>>>>>> make: *** [Makefile:177: sub-make] Error 2
->>>>>>
->>>>>>
->>>>>> ^^ Neha: This is what I was complaining about.
->>>>>>
->>>>>> https://u-boot.readthedocs.io/en/latest/board/ti/am62x_sk.html?highlight=am62#sources
->>>>>>
->>>>>> source: https://git.ti.com/git/processor-firmware/ti-linux-firmware.git
->>>>>> is missing, we never used to break build previously binman converted now does.
->>>>>>
->>>>>> I am wondering if I need to explicitly call out git clone instructions
->>>>>> out..
->>>>>>
->>>>>
->>>>> Right... this does seem to be a complaint that keeps coming up.
->>>>>
->>>>> Simon, my intention at the time of sending out the patch was that anyone
->>>>> building the board should "not NOT" have the DM binary. The way we
->>>>> structured the filename was that it looks at BINMAN_INDIRS to find
->>>>> ti-dm/ipc_echo_testb_mcu1_0_release_strip.xer5f but I guess this is a
->>>>> confusing way to put it across. Maybe we should rework that. Or not throw an
->>>>> error at all when DM isn't found.
->>>>
->>>> Well, is DM required or not? If it's optional, we have flags to mark it
->>>> optional.  If it's required, we have flags for make and buildman to tell
->>>> binman "fake it".  I am wondering if we still have the ability to have a
->>>> more verbose "need it, can't find it" error message, and so that's where
->>>> it should say that you forgot to set BINMAN_INDIRS or clone the firmware
->>>> repository.
->>>
->>> If it is optional, use the 'optional' tag on the entry You will get a
->>> warning but not an error. At the moment it is saying that the image is
->>> non-functional, which is not good.
->>
->> Yes, and I believe these are non-optional firmwares, so do we still have
->> the ability to produce a more specific and verbose error message?
-> 
-> Yes, see the 'missing-msg' tag and the 'missing-blob-help' file. This
-> should work for any external block, whether missing or faked, optional
-> or required,
-> 
+>=20
+> On 7/11/23 11:51, Ashok Reddy Soma wrote:
+> > There is a chance that assigned-clock-rates is given and assigned-clocks
+> > could be empty. Dont return error in that case, because the probe of the
+> > corresponding driver will not be called at all if this fails.
+> > Better to continue to look for it and return 0.
+> >=20
+> > Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> > ---
+> >=20
+> >   drivers/clk/clk-uclass.c | 8 +++++++-
+> >   1 file changed, 7 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> > index dc3e9d6a26..f186fcbcdb 100644
+> > --- a/drivers/clk/clk-uclass.c
+> > +++ b/drivers/clk/clk-uclass.c
+> > @@ -329,7 +329,13 @@ static int clk_set_default_rates(struct udevice *d=
+ev,
+> >   			dev_dbg(dev,
+> >   				"could not get assigned clock %d (err =3D %d)\n",
+> >   				index, ret);
+> > -			continue;
+> > +			/* Skip if it is empty */
+> > +			if (ret =3D=3D -ENOENT) {
+> > +				ret =3D 0;
+> > +				continue;
+> > +			}
+> > +
+> > +			return ret;
+> >   		}
+> >   		/* This is clk provider device trying to program itself
+>=20
+> What's your take on this one?  I didn't get reply from Sean.
 
-I'll take a future action to clean that up.
+I guess, what's the validated upstream dts where this is the case?
 
-> Regards,
-> Simon
+--=20
+Tom
+
+--U7tE7TSxhym083y0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTovTUACgkQFHw5/5Y0
+tywlXAv5AXoURUYamndb0ypSiYbBUdzj4CFvi3m8vnxNkb1vvpRJUOners8J8e9N
+spWD97Jsx4gsV7cLMnNf6fLMQBngG0D0FjlIcyS9nu0yo79HZPkCdRl2/tD23pIO
+QSkQajXCRBdTopajGPcLtz9gLr5opikpnQYHxUzAGtssRdt/p2F6/sfj57U+zzh9
+a0iK01Ziah6C6lXMVmJt8JLdu6U0krAcPHN3RvCydbeBBC5ordNjqrHO1gHCBRCa
+rqJrqZxSzaKYz5cekvf84R7++JuhnRZ6c0GSouPgrMYAEyjd4Z7plLQ6T11BGCpe
+AXpfzjS+7WcMKx76nDEFU8X61zGsvo3V9FLo2skRcSTUm0FsYuwT9QoAaSxYlkWx
+MejqIeh9ZSWh08f6vGWP22V5ZfN65+SJgaka+jQgxcjmCEFCujheeMBzVsy5lezv
+dtEDI5uU68G4K/smOzw9FeWV8VRHPASToSVCYivQHo/lChi9bZsp7WLbjWg8TWAR
+3nubyZU3
+=w3m3
+-----END PGP SIGNATURE-----
+
+--U7tE7TSxhym083y0--
