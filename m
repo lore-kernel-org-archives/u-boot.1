@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E01C3DA66
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 05:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B3CFC3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 05:57:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65B1F869DF;
-	Fri, 25 Aug 2023 07:42:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 84B9E8681D;
+	Fri, 25 Aug 2023 07:57:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="loNIknRJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cd2gVRFh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4FE7869E1; Fri, 25 Aug 2023 07:42:35 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 147A086824; Fri, 25 Aug 2023 07:57:47 +0200 (CEST)
+Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
+ [IPv6:2607:f8b0:4864:20::e36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9D998681D
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 07:42:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE18C852DB
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 07:57:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37P5gP6K047305;
- Fri, 25 Aug 2023 00:42:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1692942145;
- bh=UsAfhqVrAI+/qiypTPbkLX5FCk0uHGEprBauuIJAEJQ=;
- h=Date:CC:Subject:To:References:From:In-Reply-To;
- b=loNIknRJw+qp3Id/kp5aRJW4lGTAQx3VGVU0ow/AKF6v0B+SnZjJ7wftQUD4O2j3d
- y5CNlB4F6/0kko62EbEmu7zuI+DXh3sakVgk37pMpESujX2dcsEnEcEw1mrBeamt6M
- OdtZn+KjiuLERZe8LNBMSh7IAIXvHP2d544rbWhc=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37P5gP7d014597
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 25 Aug 2023 00:42:25 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 25
- Aug 2023 00:42:25 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 25 Aug 2023 00:42:25 -0500
-Received: from [172.24.227.9] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37P5gLQJ009561;
- Fri, 25 Aug 2023 00:42:22 -0500
-Message-ID: <76153dc4-07e7-3c9b-8c2f-4e50d70b1679@ti.com>
-Date: Fri, 25 Aug 2023 11:12:21 +0530
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-44d3e4ad403so285795137.0
+ for <u-boot@lists.denx.de>; Thu, 24 Aug 2023 22:57:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692943062; x=1693547862;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ogwFZCBXvH7DM6BNIQrt10KA5sfy+2UyL7kE9A1XCd8=;
+ b=Cd2gVRFhOXqEC+LLVx5OBVDehlSNYUixBK4b8Ue4VbENjwcKMdee+kemq6Eq/nSWZt
+ njNttKDBh2U+nPSWhlO28+JzEoqcYnEQYtlt6MVANm6eFjuBGgYEQKITovstPovdPVY0
+ nGcMoR7bvCU1/38f1dku9RirSBpxI+rKp2QxRa52HteqAcGU1csgGyWpYvufEMtMQwWh
+ 7S9jmyhEoixuApELhV8mDeDQPXM77EbLdpr/SP1Llqqhhm47FKpaLlbyBG9ntZ33zlI+
+ +YmFR9kxMNwCfSUw0rVB291390RumQ6rOT8srdGBzgsvvHjTtD02110NFJMe8Tq6SWOi
+ 6I8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692943062; x=1693547862;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ogwFZCBXvH7DM6BNIQrt10KA5sfy+2UyL7kE9A1XCd8=;
+ b=ch4QcKPcO2mnESOq1bkTDRpX34mRoxAeScfuMrPqhwSDzSCMeoiLRIyGh7yLvWpcYw
+ WUeLyKGmbzOyWlqpPU/Oqp1mpFkrm9zAgyyBSFEx3dv7yHifvULDHP8EOFdH49XyQd8A
+ EPN4xLt6+RgNdjvyl8CEHVb+WO9MmKSWH6/VLziMrb7kT9qwk9NhVUxHVvcv62F+IcJJ
+ wZgX675MVUi8oi8BgegJNmmwIz8UAcj99bkSBDP8QcisWvtrKW+LTNHVnHFcSxQOA7oA
+ rdEAyQM84E6QPgg2WLySpnrXkbRHm60ysO6wPIFPwId4sL/A3HSrCWuhkBndA7LdiqcQ
+ 3ZrA==
+X-Gm-Message-State: AOJu0YxmJDcZBCh1CBr5JSzHpelX0MNZ54of6En9Oigelericg29Ai6M
+ 8Mn9FDqx7qidgHzPR+MjMaP1ZBBb0inv85yG+it+wg==
+X-Google-Smtp-Source: AGHT+IET1U8exCFR9imYvxq9lmzMEQNBXPVZP/GPwqN4XVtTKhvU4TxxSZdH5vSFaZzSD1JXddmq5r2HjcSZzdBdB7k=
+X-Received: by 2002:a05:6102:52a:b0:44a:ae24:ee50 with SMTP id
+ m10-20020a056102052a00b0044aae24ee50mr16062260vsa.10.1692943062514; Thu, 24
+ Aug 2023 22:57:42 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-CC: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>,
- <nm@ti.com>, <joe.hershberger@ni.com>, <robertcnelson@gmail.com>,
- <jkridner@beagleboard.org>, <r-gunasekaran@ti.com>, <srk@ti.com>,
- <u-boot@lists.denx.de>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH 1/2] net: ti: am65-cpsw-nuss: Workaround for buggy
- PHY/Board
-To: Roger Quadros <rogerq@kernel.org>
-References: <20230822121350.51324-1-rogerq@kernel.org>
- <20230822121350.51324-2-rogerq@kernel.org>
- <12738ca9-ac8c-b587-c0bf-c8abc8fd3f48@ti.com>
- <20230824182431.GE3953269@bill-the-cat>
- <203072fb-c847-b896-a249-eabe3c2631a0@kernel.org>
-Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <203072fb-c847-b896-a249-eabe3c2631a0@kernel.org>
+References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
+ <20230823083721.1318097-2-masahisa.kojima@linaro.org>
+ <ZOagOlRLw8cOsFM7@octopus>
+In-Reply-To: <ZOagOlRLw8cOsFM7@octopus>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Fri, 25 Aug 2023 14:57:31 +0900
+Message-ID: <CADQ0-X_3KeWE72jO2ymiCgE-_uU8URBsQVHGryi_41O7oqXYUg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] cmd: efidebug: add uri device path
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,51 +87,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Roger,
+On Thu, 24 Aug 2023 at 09:11, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
+>
+> Hi Kojima-san,
+>
+> On Wed, Aug 23, 2023 at 05:37:19PM +0900, Masahisa Kojima wrote:
+> > This adds the URI device path option for 'boot add' subcommand.
+> > User can add the URI load option for downloading ISO image file
+> > or EFI application through network(e.g. HTTP).
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >  cmd/efidebug.c | 39 +++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 39 insertions(+)
+> >
+> > diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> > index 0be3af3e76..62f867df2a 100644
+> > --- a/cmd/efidebug.c
+> > +++ b/cmd/efidebug.c
+> > @@ -829,6 +829,44 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+> >                       argc -= 1;
+> >                       argv += 1;
+> >                       break;
+> > +             case 'u':
+> > +             {
+> > +                     char *pos;
+> > +                     int uridp_len;
+> > +                     struct efi_device_path_uri *uridp;
+> > +
+> > +                     if (argc <  3 || lo.label) {
+> > +                             r = CMD_RET_USAGE;
+> > +                             goto out;
+> > +                     }
+> > +                     id = (int)hextoul(argv[1], &endp);
+> > +                     if (*endp != '\0' || id > 0xffff)
+> > +                             return CMD_RET_USAGE;
+> > +
+> > +                     efi_create_indexed_name(var_name16, sizeof(var_name16),
+> > +                                             "Boot", id);
+> > +
+> > +                     label = efi_convert_string(argv[2]);
+> > +                     if (!label)
+> > +                             return CMD_RET_FAILURE;
+> > +                     lo.label = label;
+> > +
+> > +                     uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
+> > +                     fp_free = efi_alloc(uridp_len + sizeof(END));
+> > +                     uridp = (struct efi_device_path_uri *)fp_free;
+> > +                     uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> > +                     uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
+> > +                     uridp->dp.length = uridp_len;
+> > +                     strcpy(uridp->uri, argv[3]);
+> > +                     pos = (char *)uridp + uridp_len;
+> > +                     memcpy(pos, &END, sizeof(END));
+> > +                     fp_size += uridp_len + sizeof(END);
+> > +                     file_path = (struct efi_device_path *)uridp;
+> > +                     argc -= 3;
+> > +                     argv += 3;
+> > +                     break;
+> > +             }
+> > +
+> >               default:
+> >                       r = CMD_RET_USAGE;
+> >                       goto out;
+> > @@ -1492,6 +1530,7 @@ static char efidebug_help_text[] =
+> >       "  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n"
+> >       "  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
+> >       "  (-b, -i for short form device path)\n"
+> > +     "  -u <bootid> <label> <uri>\n"
+>
+> It might be a matter of personal preference, but
+> since the current syntax of efidebug is already much complex,
+> I don't want to add more options unless it's necessary.
+> How about re-using "-B" option, say
+>    => efidebug -B 3 debian-netinst uri - https://foo.com/baa
 
-On 25/08/23 00:39, Roger Quadros wrote:
-> 
-> 
-> On 24/08/2023 21:24, Tom Rini wrote:
->> On Thu, Aug 24, 2023 at 11:34:29PM +0530, Siddharth Vadapalli wrote:
->>> Hello Roger,
->>>
->>> On 22-08-2023 17:43, Roger Quadros wrote:
+I understand your concern. OK, I will add uri in -b|B and also update
+documentation.
 
-...
+Thanks,
+Masahisa Kojima
 
-> 
-> Even a single "PHY not found" print is not OK. It looks like an
-> error while it should not.
-> 
-> The correct solution is to use the MDIO uclass framework and add
-> some generic handling in the class driver. drivers/net/eth-phy-uclass.c
-> 
-> We could provide the delay time in the 'reset-deassert-us' property.
-> Although I'm not sure if this is the correct property for this case
-> as there is no RESET GPIO on the board. What we really want is delay
-> from power-on-reset. Which means we might have to introduce a new property
-> and use time from boot to determine if PHY is ready or not?
-> 
-> NOTE: PHY ready time is different for hardware reset and power-on-reset.
-> 50ms vs 150ms
-
-Another alternative could be that of implementing the for-loop within
-phy_connect() along with the delay, by updating the function with a new
-parameter "tries" which indicates the number of retries before finally printing
-"PHY not found" in case of an error. Optionally, another parameter "delay" can
-be added, which indicates the delay within the for-loop.
-
-This implementation will require updating all drivers in drivers/net which use
-phy_connect(), with the "tries" parameter set to 1 for them. The am65-cpsw-nuss
-driver can set "tries" to 5 as done in the current patch.
-
-The idea behind moving the for-loop within phy_connect() is that it will help
-solve the issue for other drivers as well, if they potentially encounter such
-buggy PHYs in future boards.
-
-> 
-
--- 
-Regards,
-Siddharth.
+>
+> BTW, I think that <bootid> and <label> should have been moved out of "-b|B"
+> when Ilias introduced this new syntax.
+>
+> -Takahiro Akashi
+>
+>
+> >       "  -s '<optional data>'\n"
+> >       "efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]\n"
+> >       "  - delete UEFI BootXXXX variables\n"
+> > --
+> > 2.34.1
+> >
