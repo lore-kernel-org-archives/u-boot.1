@@ -4,83 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A4BFC3DA6F
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:08:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA423C3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:08:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 286A986B39;
-	Fri, 25 Aug 2023 20:06:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6DDE286B33;
+	Fri, 25 Aug 2023 20:06:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QrftrrBy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bZ0jehmY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D22A586B6B; Fri, 25 Aug 2023 20:06:28 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id D8C6786B5C; Fri, 25 Aug 2023 20:06:30 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF60386B5B
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D06C986ACC
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50098cc8967so1921429e87.1
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:25 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-4ff8cf11b90so1861595e87.1
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692986785; x=1693591585;
+ d=chromium.org; s=google; t=1692986787; x=1693591587;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g9QQbdXBjgJnKmPAQFOxw/06aqHM2lfJ+AoB+w68ksY=;
- b=QrftrrByO1qD0FFLxl1CdTaDEcN+oZaoCSdKoEnr0SL0q8/yio6qocK2w1272aZ1BR
- lwhoFoK5PBxm5Et45Zr1Tc8OpyHU0yPmpPYZPeFHn/VlcdDO5Njmgd/DSIuCT5zO2RlH
- 1mt0vw+QcQ8pTKCtEeI45o0rvVKCJ5RY9kUFk=
+ bh=r7IEZYJt/+WQ++/Z7kQZFxiSLcV7Sx0IPtQN/cgz9MA=;
+ b=bZ0jehmY/CKkBaxcZ0ti5PBk7SZkoHoE1q0O6TbAEZMLXf+2fu5ExTe4NWttwcmWKx
+ ZyXmWHZsKFVQ34fPr2w3S7udL6oSYUxlU3wsiOVXYpjuXUZ/3+ArshRmN0U5BtwJKSrY
+ aNKCAq0D+VDF3ygFhZzmMcvXTEUTjvdUyMl9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692986785; x=1693591585;
+ d=1e100.net; s=20221208; t=1692986787; x=1693591587;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g9QQbdXBjgJnKmPAQFOxw/06aqHM2lfJ+AoB+w68ksY=;
- b=bAMp54FUsZB23wU1/Sk7ijUueW9HZsp64krgFffgKtoMOVWYtABblBXxxFM0BNzUmj
- z1YZ/pfZsnc5xUiGHmqPJA/Qsm+tlq8l9ih0MLbjIneAhjwwZg0CCbktyfuWJiUyogiK
- pJL1vBhtxh1Fw78hawUGwVmzzC5TTL7gdgm4VZd1vUvs0728e1jiKdjxhqCqe7PQEjVI
- yDo7QPoqC4fP0D/HnTG1H9b4/HrlmJaj4ib0JNrRbN2Xpe0gHYWExhXpuk+enU6Ctztq
- e1xjFjF79HbPn2IjboFjzN8G/3HBQBtTAcp0G4s6rPEyLkCRDDINyaYQrOj4qjvcCY8o
- spQw==
-X-Gm-Message-State: AOJu0YyS/Kidi4TpOjrAChw4x9lCYNBxykNaxrXekMeXr6TgRoliAkqD
- Lb6cBEv+Th7DdxRhFRWplj6HtVZqi2e/bZYQ6teQh2riSC5eIIWIXyE=
-X-Google-Smtp-Source: AGHT+IGy/3YVq/fOs6x57dejuUVFu+2gaFO8mqrUJSz+dMm1h3n2cuMdjldnxut/GG/j3CTr/RENJDgXgeGmjosgQdk=
-X-Received: by 2002:a05:6512:1594:b0:500:9b26:9760 with SMTP id
- bp20-20020a056512159400b005009b269760mr6827908lfb.13.1692986784884; Fri, 25
- Aug 2023 11:06:24 -0700 (PDT)
+ bh=r7IEZYJt/+WQ++/Z7kQZFxiSLcV7Sx0IPtQN/cgz9MA=;
+ b=S4RPkkclTM1Tnzj1qiWGxfAehg4qrRS/UMET5Cf3524cquFqvdM/ljtYAD9WCD2k8E
+ Qi9vTjKgKuFmVaGm8RCeqWOHOx2b6WqZ/ZiMQoQ1/zvhs5muxJEC3Qz4nL/77XB9X5k0
+ pjsYl7lRp/50Y+EBQ4A7sL0lqE5DmclYbdd+oc/lphqzWToOby6YAqCQ7WcmV9Dpi1Av
+ PClEj5erlCZ/K5Gn/CppGNdwlxvQcDAdiH0E81bSuHfEfnqachdJs81mF7xaj59G0Zrq
+ QowMVgHtgvfuodBz6fzCOXDMKwPY5gWWwoSb7d0XeOGV9BW2ji1DpqX7PffibuH4iYBi
+ aodg==
+X-Gm-Message-State: AOJu0YyYnUMXs1uyj21HTqZlufzBP+EZz2TItRyhOHD1hJpeX+jzIAh2
+ RixuFLOhO3jaleOmjl5fDJGaTl4Snsmu6yuEiL9J/Q==
+X-Google-Smtp-Source: AGHT+IGUyepU1ELPSc4WBO9uAKyWKuLNGmJwQmR+FDHYnLX6PNl8PRII3KQitjcuHx0/N7mdAx+LgJsKiDClBbGNo/E=
+X-Received: by 2002:a19:381b:0:b0:4fb:9050:1d92 with SMTP id
+ f27-20020a19381b000000b004fb90501d92mr12224412lfa.51.1692986786960; Fri, 25
+ Aug 2023 11:06:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230825015948.780662-1-Mr.Bossman075@gmail.com>
- <20230825144859.GI3953269@bill-the-cat>
-In-Reply-To: <20230825144859.GI3953269@bill-the-cat>
+References: <20230825081014.341987-1-roman.azarenko@iopsys.eu>
+In-Reply-To: <20230825081014.341987-1-roman.azarenko@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 25 Aug 2023 12:06:10 -0600
-Message-ID: <CAPnjgZ08F=mezS-cQD=6SjQO1OW9b9aZK9iA_NG0LN3WFRXH-g@mail.gmail.com>
-Subject: Re: [PATCH v2] Convert CFG_SYS_UBOOT_START to Kconfig
-To: Tom Rini <trini@konsulko.com>
-Cc: Jesse Taube <mr.bossman075@gmail.com>, u-boot@lists.denx.de, 
- "Andrew F . Davis" <afd@ti.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>, 
- Stefan Roese <sr@denx.de>, Weijie Gao <weijie.gao@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Mauro Condarelli <mc5686@mclink.it>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Marek Vasut <marex@denx.de>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>, Roger Quadros <rogerq@kernel.org>,
- Marek Vasut <marek.vasut+renesas@gmail.com>
+Date: Fri, 25 Aug 2023 12:06:13 -0600
+Message-ID: <CAPnjgZ0z2fi1b=+hVDVnz_DfA+ku=+1wP1n6ehxGNmtkO7CCHg@mail.gmail.com>
+Subject: Re: [PATCH v2] tools: ensure zeroed padding in external FIT images
+To: Roman Azarenko <roman.azarenko@iopsys.eu>
+Cc: u-boot@lists.denx.de, Massimo Pegorer <massimo.pegorer@vimar.com>, 
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,64 +81,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Aug 2023 at 08:49, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 25 Aug 2023 at 02:10, Roman Azarenko <roman.azarenko@iopsys.eu> wrote:
 >
-> On Thu, Aug 24, 2023 at 09:59:48PM -0400, Jesse Taube wrote:
+> Padding the header of an external FIT image is achieved by truncating
+> the existing temporary FIT file to match the required alignment before
+> appending image data. Reusing an existing file this way means that the
+> padding will likely contain a portion of the original data not
+> overwritten by the new header.
 >
-> > Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*")
-> > renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
-> > this meant that the value was no longer available to the Makefile. This
-> > caused imxrt to fail to boot. All the other boards that used this
-> > variable were unaffected because they were using the default value
-> > which is CONFIG_TEXT_BASE.
-> >
-> > This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the default
-> > value to CONFIG_TEXT_BASE.
-> >
-> > Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
-> > Suggested-by: Tom Rini <trini@konsulko.com>
-> > Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
-> [snip]
-> > diff --git a/boot/Kconfig b/boot/Kconfig
-> > index 5e2d4286ae..3883cae2ba 100644
-> > --- a/boot/Kconfig
-> > +++ b/boot/Kconfig
-> > @@ -738,7 +738,24 @@ config TEXT_BASE
-> >       default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >= 64
-> >       hex "Text Base"
-> >       help
-> > -       The address in memory that U-Boot will be running from, initially.
-> > +       The address in memory that U-Boot will be copied and executed from initially.
-> > +
-> > +config HAVE_SYS_UBOOT_START
-> > +     bool "Use custom U-Boot Start"
-
-start ?
-
-> > +     depends on HAVE_TEXT_BASE
-> > +     help
-> > +       By default, the address in memory that U-Boot will be copied from (TEXT_BASE) and the
-> > +       entry point are the same. Select this to start the execution of U-Boot from a different address.
-> > +       This may be required if a header or vector table needs to be copied but not executed.
-
-Nice help!
-
-> > +
-> > +config SYS_UBOOT_START
-> > +     hex
-> > +     depends on HAVE_TEXT_BASE
-> > +     default TEXT_BASE
-> > +     prompt "U-Boot entry" if HAVE_SYS_UBOOT_START
-> > +     help
-> > +       If TEXT_BASE differs from the start of execution, this sets the address in memory that
-> > +       U-Boot will start execution from initially.
+> Zero out any data past the end of the new header, and stop at either
+> the end of the desired padding, or the end of the old FIT file,
+> whichever comes first.
 >
-> A small point, these help texts should wrap at 80 columns.  If there's
-> no other feedback I'll just fix that up when applying unless you want
-> to.
+> Fixes: 7946a814a319 ("Revert "mkimage: fit: Do not tail-pad fitImage with external data"")
+> Signed-off-by: Roman Azarenko <roman.azarenko@iopsys.eu>
+> ---
+> v2:
+>   - Use memset() on `fdt` instead of ftruncate() on `fd`, zero only
+>     the part that will become padding in the new FIT file.
+> v1: https://lists.denx.de/pipermail/u-boot/2023-August/528213.html
 >
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> I'm trying to be a bit smart here and only zero out the amount of
+> padding that we actually need, but no more than the total length of the
+> old FIT file (not to cross the boundary of the mmaped region).
+>
+> See v1 for info on how to reproduce the original issue.
+> ---
+>  tools/fit_image.c | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
+>
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> index 9fe69ea0d9f8..d9da0ce8388f 100644
+> --- a/tools/fit_image.c
+> +++ b/tools/fit_image.c
+> @@ -497,7 +497,7 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
+>  {
+>         void *buf = NULL;
+>         int buf_ptr;
+> -       int fit_size, new_size;
+> +       int fit_size, unpadded_size, new_size, pad_boundary;
+>         int fd;
+>         struct stat sbuf;
+>         void *fdt;
+> @@ -564,9 +564,13 @@ static int fit_extract_data(struct image_tool_params *params, const char *fname)
+>         /* Pack the FDT and place the data after it */
+>         fdt_pack(fdt);
+>
+> -       new_size = fdt_totalsize(fdt);
+> -       new_size = ALIGN(new_size, align_size);
+> +       unpadded_size = fdt_totalsize(fdt);
+> +       new_size = ALIGN(unpadded_size, align_size);
+>         fdt_set_totalsize(fdt, new_size);
+
+I didn't know that was allowed...I thought it needed fdt_open_into() ?
+
+> +       if (unpadded_size < fit_size) {
+> +               pad_boundary = new_size < fit_size ? new_size : fit_size;
+> +               memset(fdt + unpadded_size, 0, pad_boundary - unpadded_size);
+> +       }
+>         debug("Size reduced from %x to %x\n", fit_size, fdt_totalsize(fdt));
+>         debug("External data size %x\n", buf_ptr);
+>         munmap(fdt, sbuf.st_size);
+> --
+> 2.42.0
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Yes please
