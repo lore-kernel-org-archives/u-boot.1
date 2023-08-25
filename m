@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36759C79F61
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 14:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE0BC71133
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 14:10:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85ECD86A57;
-	Fri, 25 Aug 2023 16:02:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EB7186923;
+	Fri, 25 Aug 2023 16:10:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="X8uuTrlu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ydz3TiAj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFF4B86A7D; Fri, 25 Aug 2023 16:02:39 +0200 (CEST)
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.136])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 789AE86A74; Fri, 25 Aug 2023 16:10:26 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C89F8680E
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 16:02:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.intel.com
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=andriy.shevchenko@linux.intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1692972157; x=1724508157;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=yi/nrPJpaSMeQI77vpxHaj064stV7fON/JmDJwfUpfY=;
- b=X8uuTrluqPRF+k3pamElHfmP95ORVbvJhP+VHzVubfTLNQS9O4xZpH2n
- WQYNRV86z3wEdkHrv440jz4oPzDc7hksiuj4uWOQRzlP2hWX4zWlmBX7t
- FQl3hLa3yaiZ7be4lxLr/TsU+bK5JHPpkiK9tXBA531jx2L27ly+LwV61
- h14ToSuWfLgJDhGxfoKFoXbkMwBkx22JjHAoP/71xvlAnefbgiDKwevQS
- jcDIA7jF/1j31FRLvppfBvAbqwGdjERhDiUcGN0xzfbev5Fm4ShAaoI9I
- MX6m2Hg7MncN2TpD/nVVPLuRTTk9pGEaoZ6FuF9ioEmu113lCHrf7JBiI g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10813"; a="354247306"
-X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; d="scan'208";a="354247306"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Aug 2023 07:02:03 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10813"; a="911288535"
-X-IronPort-AV: E=Sophos;i="6.02,195,1688454000"; d="scan'208";a="911288535"
-Received: from smile.fi.intel.com ([10.237.72.54])
- by orsmga005.jf.intel.com with ESMTP; 25 Aug 2023 07:02:02 -0700
-Received: from andy by smile.fi.intel.com with local (Exim 4.96)
- (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1qZXNw-002lbV-1u; Fri, 25 Aug 2023 17:02:00 +0300
-Date: Fri, 25 Aug 2023 17:02:00 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH v1 2/2] x86: Prevent from missing the FADT chaining
-Message-ID: <ZOi0WOZZTnJC/mMR@smile.fi.intel.com>
-References: <ZOisRZBQQJDW/Pco@smile.fi.intel.com>
- <20230825135141.3210006-1-andriy.shevchenko@linux.intel.com>
- <20230825135141.3210006-2-andriy.shevchenko@linux.intel.com>
+ by phobos.denx.de (Postfix) with ESMTPS id C04598680E
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 16:10:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jaswinder.singh@linaro.org
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-64ccdf8820dso4749526d6.1
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 07:10:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1692972622; x=1693577422;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=j0MnzOlglQaC+2ERJprScSRQDnwuKP4mYnuSMXx1EhA=;
+ b=Ydz3TiAjQHdup1ZWHq2KgVCjsqCRA1ZdZFu/On3e9dpUAgLQmvhC5Tbx5ahtkZ5Ndf
+ y9ibq/gPpmevds40IRXoAb48ZgRARA4po3iVOKZrSHztciE9/EMD4i8DaYM1Gptk6HW5
+ TqGGNEOiJ9ED843OG9RkrXgILV9p2nzRMq2U7rxXKc6jkdN9DB75Y3ZeM5WEZMNRBwJl
+ s5xdTaIojpL+t3FKtjKgNBtRMWs8N1sWLd5EmlmmwDnEA4lqzoWhPBz5rMFdIvvhuxJz
+ j560dZYSWVOPlG7oRAc0yj9W7wdyR/qYm+s9M8cMCRn6TP5ZGjEJ9tWduD3Fwi5HJR2g
+ ZVCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692972622; x=1693577422;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=j0MnzOlglQaC+2ERJprScSRQDnwuKP4mYnuSMXx1EhA=;
+ b=la5p20vW9wyk6pgdge6iE1v4irkYJLx91Nl7Z7DhXJRzxXyaI+O95hBbQWMUrBRDbV
+ hNNg2V3SuAdlVUS86pqof7GSk+4mFxTiIHHdtABUnywQQG5e+LlkfEtMWqxFXxE+F/+A
+ /nD3o53IUBNQ7siFwvQ14ZUCm+wRVkf/JD8s5mOGTzJn2gXqxUC0EjFqyEOIzAx4RGWQ
+ JGSRSoiDEUzVsYl112Qh87SBwoU3Hdx2TYeKlgfG/7H3YTNZck30wZuCg4zJvH+mQI2x
+ +a/MW03a2jg8o9YNQG2EhBXd8aX2a80FjvvH/3Q/+aC7BcogcIggIff3BMFcK8ty0h8S
+ FWBQ==
+X-Gm-Message-State: AOJu0YxjONe6fKokKR2OyNEeYxmQCmiFwOamc3GIlnWygBREM5A6Tgf9
+ 9+LeaGXwr5WQXI1KJMJJ8AYukjWtZRaSdBvBv5PNxw==
+X-Google-Smtp-Source: AGHT+IFEssdviTWP1RrPRRTK07Zcw+MNw4Q9IhQtic5BxrzO6isFH4hzxegLb/BdB6fsv/22JTVgOn3fodDS0jHpjXg=
+X-Received: by 2002:a05:6214:1c48:b0:635:da80:e53a with SMTP id
+ if8-20020a0562141c4800b00635da80e53amr24686747qvb.12.1692972622554; Fri, 25
+ Aug 2023 07:10:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230825135141.3210006-2-andriy.shevchenko@linux.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
+From: Jassi Brar <jaswinder.singh@linaro.org>
+Date: Fri, 25 Aug 2023 09:10:11 -0500
+Message-ID: <CAJe_ZhfJ4Gsm7GSop89C-dbzHMXREpBakAWVAQ7GxifBEOJ-1w@mail.gmail.com>
+Subject: Re: [PATCH] fwu: Initialize global fwu library state during CI test
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,31 +89,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 25, 2023 at 04:51:41PM +0300, Andy Shevchenko wrote:
+On Tue, 22 Aug 2023 at 19:17, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> The current CI test worked by sheer luck, the g_dev global pointer
+> in the fwu library was never initialized and the test equally well
+> failed on sandbox64. Trigger the main loop in sandbox tests too to
+> initialize that global state, and move the sandbox specific exit
+> from fwu_boottime_checks after g_dev is initialized.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-...
-
-> +static inline int acpi_add_fadt(struct acpi_ctx *ctx, struct acpi_fadt *fadt)
-> +{
-> +	acpi_add_table(ctx, fadt);
-> +	acpi_inc(ctx, sizeof(struct acpi_fadt));
-> +	return 0;
-> +}
-
-Ideally it should be like
-
-	int ret;
-
-	ret = acpi_add_table(ctx, fadt);
-	if (ret)
-		return ret;
-
-	acpi_inc(ctx, sizeof(struct acpi_fadt));
-
-	return 0;
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+Acked=by: Jassi Brar <jaswinder.singh@linaro.org>
