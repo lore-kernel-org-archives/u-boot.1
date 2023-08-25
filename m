@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CCBAC6787B
-	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17BEDC3DA6F
+	for <u-boot@archiver.kernel.org>; Fri, 25 Aug 2023 18:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C3DB86B53;
-	Fri, 25 Aug 2023 20:06:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id B26DD86B40;
+	Fri, 25 Aug 2023 20:06:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="rJLEgbTV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DUSY1fzM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 577CA86B32; Fri, 25 Aug 2023 20:06:21 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 6770286B5B; Fri, 25 Aug 2023 20:06:23 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C81EF86B33
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6507186ACC
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 20:06:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-51bece5d935so1695336a12.1
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:18 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-529fb2c6583so1747776a12.1
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 11:06:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1692986778; x=1693591578;
+ d=chromium.org; s=google; t=1692986780; x=1693591580;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QQdhzq7ULnsXsxzWVGPTlOKy+QtI40YBOQEDyru8gWE=;
- b=rJLEgbTVvz0F5zngpcolpK8Zb/aRYu2fwRtsXpaCJ+5SmOSyG0gNkrMxZ3yRfO7Zr5
- HmNVPaHg3ohdbuQxP0hpnmtrAfxIE75LSm+WvuFnIggUZRU9+92Xodqe7ei23eJ+YxIj
- hhg97dgktXWx/z3LPJR+05sqPFW5lSRFnu392a1udOb0g4DG9GGEiNA9aYXXvHj4AaDs
- d8xpUWC8mRrMWU+Cel4i+pj88BXjdRcntuubTZCh3oAEJ5a0dAE6imPbdriDPWWx1e/I
- iT7MXGzVuRRpBNKJu+4VhXzSpiG0NBiKOnCzxpKL4JYuYyFoCic8Tty0ySy6qTpbFMIK
- IIpg==
+ bh=vvxwbF3NImOeLgO34N6QbHfI7/8xNpjTFLgOYaPpHWo=;
+ b=DUSY1fzMEcpG1TTIKelJ8FecG2TWoNcHNe8pHT4d1W9SYAsh96UsqHhJWY2qgnYhhX
+ C5f2MKGN25JCLq0eEg0XcIY7J0uJHEzj06t7/p1i9duFv/Td7YoBH1EjQ8owu1CSMYW+
+ X6uypOpXzBrKGQXxFevqB6ktAVBtol1b6KiN4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692986778; x=1693591578;
+ d=1e100.net; s=20221208; t=1692986780; x=1693591580;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QQdhzq7ULnsXsxzWVGPTlOKy+QtI40YBOQEDyru8gWE=;
- b=ABjBeSoXq8WfoJjnXpBbMLYnmZWJhRruQBsqNUsD3OaPoOeRjZr97H7TP8WMhbTjhw
- t5pPNUx2v0s3zhZh7MobuYk8EMog/9ZbOAo3bPPfBkgDInjNBpGCKTn6T4BX+mOIoU7f
- D/ZK32uiO2cysjNMapKnSCrczR60j97C2VjPzCWDCz2Otn4LWm5KsjK/Z7IwO6r1Swxs
- +9tedUHRhEb93cjoYorw9xhZQn32pmmBP7jTxk8mIV/dsjAEQ+tx6+jFR7xgGC8T/Lix
- zCtj7K3DNhgtYzkQd8OTy7vAtyrNiYQWnkk/ZtyoC4RM0yqGqUxqfBusPLhHCjZh1MGa
- XL6g==
-X-Gm-Message-State: AOJu0YziM/4St8sB9voaNeHVA3coy0eNY3OXnNdpWlroYFlJ00VVSxKT
- LUmbPhHGnO8OBrVItaFOM2l3nN9XTx68uzb9vCJ70w==
-X-Google-Smtp-Source: AGHT+IGViMkUqklcKerA2P9YiCAysgLgVxjG2Kx27J/m1C9hIEkf8/HPnTLZ58m0vm1nly5NviFAGeO2gT+PuMwqSSE=
-X-Received: by 2002:aa7:d058:0:b0:523:d1ab:b2ed with SMTP id
- n24-20020aa7d058000000b00523d1abb2edmr15520380edo.29.1692986778056; Fri, 25
- Aug 2023 11:06:18 -0700 (PDT)
+ bh=vvxwbF3NImOeLgO34N6QbHfI7/8xNpjTFLgOYaPpHWo=;
+ b=Uxk/zpQ3NFp6Ow+9PHL+Gmuad4VCCfZfA5RCPkmX3H3te7XqOzr5v0NSRCnV4k54CP
+ QcJfb5OBVY6UWTaQrWYLOdcPt+3GZMz9ll3hp0ztz3V9HsYltYxKoiiTtRQAAT17IGZ7
+ L/fh45+YbcYviYjYzg+ignmjMQJkOaoyCjDdU9fu9ZnTXFCmlrG9H3OkXj3OYXDl7ogh
+ szyGWiabKBOuy/s+hCZ5UOR6vKrf8BI/QfQaNz6uoc2UMd2p+7AjtcezbsaqIuzsR2ti
+ px2B7JpuV7VsZ6it9mNoEhYJeT89kJJO/TqBJGlDD+Rirt7w8rWMCUaxf60mVRoulgjn
+ 429g==
+X-Gm-Message-State: AOJu0YwN2dxnd5HwWbqeytG1EhP8V5IOoygLijTj+mKAiOnSYqGGBVic
+ ru0sXeCnRQMaQOrbisX6FjZII6JaTXKzM3LFQ3kdvw==
+X-Google-Smtp-Source: AGHT+IEUAdeMWqupa3nK4qO+kbeL6v9Qn6suH3Z2AA82uM+MNZLnInWyCsR8OU4AK82TCpl9ltKddcYeDdxMd8QiUps=
+X-Received: by 2002:a05:6402:b0e:b0:52a:40cf:4dff with SMTP id
+ bm14-20020a0564020b0e00b0052a40cf4dffmr4635732edb.9.1692986779727; Fri, 25
+ Aug 2023 11:06:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230825172127.3406461-1-trini@konsulko.com>
-In-Reply-To: <20230825172127.3406461-1-trini@konsulko.com>
-From: Simon Glass <sjg@google.com>
+References: <ZOisRZBQQJDW/Pco@smile.fi.intel.com>
+ <20230825135141.3210006-1-andriy.shevchenko@linux.intel.com>
+In-Reply-To: <20230825135141.3210006-1-andriy.shevchenko@linux.intel.com>
+From: Simon Glass <sjg@chromium.org>
 Date: Fri, 25 Aug 2023 12:06:06 -0600
-Message-ID: <CAPnjgZ3XvRXx9+vgR81JNse0A4pZ8KmcnU7piuPU7e5QHoyftQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] CI: Update to gcc-13.2.0
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Message-ID: <CAPnjgZ09Y+tCq8X+Hx1PpM7c2ya9KXqLy9EsrigqcdAqkgYPfg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] TO BE FOLDED: x86: tangier: Add FADT to the chain
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,17 +81,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Aug 2023 at 11:21, Tom Rini <trini@konsulko.com> wrote:
+Hi Andy,
+
+On Fri, 25 Aug 2023 at 07:52, Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
 >
-> The latest kernel.org toolchains for gcc are now 13.2.0, so upgrade to
-> that.
+> The Simon's patch missed the FADT to be added to the chain, hence all
+> the issues on Intel Tangier.
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 > ---
->  .azure-pipelines.yml        |  2 +-
->  .gitlab-ci.yml              |  2 +-
->  tools/buildman/toolchain.py |  2 +-
->  tools/docker/Dockerfile     | 58 ++++++++++++++++++-------------------
->  4 files changed, 32 insertions(+), 32 deletions(-)
+>  arch/x86/cpu/tangier/acpi.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
+> index 01b30553818c..ffaa56ab6f87 100644
+> --- a/arch/x86/cpu/tangier/acpi.c
+> +++ b/arch/x86/cpu/tangier/acpi.c
+> @@ -52,6 +52,8 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
+>
+>         header->checksum = table_compute_checksum(fadt, header->length);
+>
+> +       acpi_add_table(ctx, fadt);
+> +
+>         acpi_inc(ctx, sizeof(struct acpi_fadt));
+>
+>         return 0;
+> --
+> 2.40.0.1.gaa8946217a0b
+>
+
+Thank you! I really don't know how I missed that, after starting at it
+all for an hour...
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
