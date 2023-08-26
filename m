@@ -4,77 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740BDC83F13
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 15:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B973C83F11
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 15:33:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155178622D;
-	Sat, 26 Aug 2023 17:17:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 481C68634D;
+	Sat, 26 Aug 2023 17:33:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="H0L5CIHt";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FEisuSCr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D677D8620C; Sat, 26 Aug 2023 17:16:58 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D244B86366; Sat, 26 Aug 2023 17:33:07 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E568622D
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 17:16:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E1088620C
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 17:33:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foundries.io
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1bbc87ded50so12677595ad.1
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 08:16:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1693063012; x=1693667812;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kr2XLVdoNi3Ms+y/fdDEfE95vFiaFC7On+38TLZNbog=;
- b=H0L5CIHt0WTYFkI/ykfbAbjAgt7sRb6TBZ4MCnBKgxoy12SNLu0Koye3+I/Exyn+uj
- cS7sim/VKfwWfoeaF/juFH8VA9Odxlwun8hMGKoqaiuMlk7/8TH1EqKTe4tQzOuyEh+V
- ranZBZzpvqlAZEHE+ZdXvI3/DUUY1iEB/XRnKGj7dl9agI4yCpu/0nTwNcDIe6ZyrsNY
- kW0hxJ8NFwpQx8xpC1zyBiCxFFyzaQpNXO64QBR84yQ90leQ1ZGaIgZbRj7w72fZJOfq
- BpukcsCT9DzBgSQBUc47QMdVEXeXCmvpyB1eMZPtTtZswydpdgHhulBeM4Ftt+bia4HD
- kIiA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id BDBDB3F65D
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 15:33:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1693063984;
+ bh=5zH9tEmwrr0wQ63kq4yc92xPPvMqMDtnfkFOU/g3fXg=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=FEisuSCrQnh4NctMiUSpTqZsu6+oAYam3PDMFlC130RUgOXO3WySzkelogDeMi6Ek
+ /QnynpzZVi14di54B5lpdIPEVxX+DjOYAV9Jjj9E8gqK+gcJiApZkB7i7MFkJpXmXS
+ ANcVmtk/0nhgvBM39JqzMznv7NBHbUCUAvRrCBDw5sHqdrtHMiCvJMZl2sFToQR2Pl
+ mOsZJpx+ydy5Xu+HnjMEmV/9pAjavoRJIMWvEDVfQuqpfAIK6+AhcgBhZpWV6DHuww
+ L/dmBDcc4zKGRIkET0ysoogGur8T1cwfcFEa6lkQtRb2+wA3LSk2pENwC04JJ6oDSL
+ pLSmDfcQths+g==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-3fe1cdf2024so13386225e9.3
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 08:33:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693063012; x=1693667812;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kr2XLVdoNi3Ms+y/fdDEfE95vFiaFC7On+38TLZNbog=;
- b=Qz2RKGxNiF3/1rPO62vInpz+qa8KGh6jmYlkuf8o/vzZK4xm+RtVtaU/eqjQBQ2F99
- xzpSvI9DJn3hCnTOM7v4mZcBPDoJk/MlRuaTpayRYLz4cbj+AmEH0JS/+dsE+AzDKm4p
- Ii60KpLBjbRspFKnZ7YkbnFwH/Hj7mgCosiscHYzYSclxPxkLOKYHGYX0q2mF1P7zy7V
- MRMF3rlD3OfNnm8J8ga17pJdqu5zWn5De3wNL7azvJcBADsbNbjinhN/uUfAZ66LQUG5
- g+LUPxyHWnp1J5CsYPG/hn7IZjGGaiCydyvFDp9uBV9ocGQ97dBjlqvPsj4rhWyMSVPy
- J47w==
-X-Gm-Message-State: AOJu0YwSFfooUqe9VkdWQ3ns3hW7bI0sN6qOSeNoF07/Bqmb3gB0Oub1
- UIP4YjyzwW4SC+1dL6senIaTfNyblGNN8F1STjwPnA==
-X-Google-Smtp-Source: AGHT+IH7buXepg+t94YgZtCZs382YtGjHWHB6xFaZXuAGfSn/7qEccdFbXQCaSkGK/XdoXtQVnJxNNtVBPvkN0hLS/A=
-X-Received: by 2002:a17:902:bd87:b0:1c0:cb31:d66 with SMTP id
- q7-20020a170902bd8700b001c0cb310d66mr5833132pls.7.1693063012100; Sat, 26 Aug
- 2023 08:16:52 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693063984; x=1693668784;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5zH9tEmwrr0wQ63kq4yc92xPPvMqMDtnfkFOU/g3fXg=;
+ b=U3RzUL4Uw8LCfn4NJUZFEpuJznx0LgDfN6DNdK/9AtdK2mHtg/UciglI5u30QkszpE
+ xHFvTehHkfbM6TR3uy3SUMrMxmsCOUxkJc4jS6aXwgH2GXCpriO1kcI71C9NKZ4Qprds
+ fmPVs57EcTN+GqeF+9NYpD1iwNsJ1VgkRkJI/QDwRXwhcMizVNiZhpXbUWi/WlPSHqOJ
+ aQyC/QkYMrUKA8E5hKJFow9y8IKFnffIIjsf13J1lvDcThbc7huJPVbIt9DrvwI5/pzZ
+ lElmPuxIO6WKrPozsw3hW58xwlkgfsRUVvh8y2C07/8wkHdIrjtG47/xgH3IdrDR/Zil
+ zN1Q==
+X-Gm-Message-State: AOJu0Yzf5uo59LUlxbLcmF/7fnAZA2g4OyZEWabMzbjk2iaVseogoYtd
+ U5qyETGDxdlWmxkecU1I93LW+iqPr+qZKx/sUu4hhH8j0nsWFWEHlYlW6bPMm5Zl0+BBW/091xG
+ DRLmGllmzibqn/j9AbSMMvOdI2dheQbs=
+X-Received: by 2002:a5d:44d1:0:b0:313:f94f:3b15 with SMTP id
+ z17-20020a5d44d1000000b00313f94f3b15mr16841532wrr.2.1693063984274; 
+ Sat, 26 Aug 2023 08:33:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH214O507wF1A1ADPGHZma5RBId/QplVpugGW1sQ1faSJ7Yt3GdZOCcvmz6LXgWi9Q824rTeg==
+X-Received: by 2002:a5d:44d1:0:b0:313:f94f:3b15 with SMTP id
+ z17-20020a5d44d1000000b00313f94f3b15mr16841514wrr.2.1693063983579; 
+ Sat, 26 Aug 2023 08:33:03 -0700 (PDT)
+Received: from [192.168.123.94] (ip-062-143-244-162.um16.pools.vodafone-ip.de.
+ [62.143.244.162]) by smtp.gmail.com with ESMTPSA id
+ a9-20020a05600c224900b003fef5402d2dsm8581222wmm.8.2023.08.26.08.33.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 26 Aug 2023 08:33:03 -0700 (PDT)
+Message-ID: <bbdf2631-f46c-f0cd-e26d-035079337152@canonical.com>
+Date: Sat, 26 Aug 2023 17:33:54 +0200
 MIME-Version: 1.0
-References: <20230826132410.378846-1-oleksandr.suvorov@foundries.io>
- <aa9044e9-62a6-4bf2-a390-eb6d3d5d9bf0@gmx.de>
-In-Reply-To: <aa9044e9-62a6-4bf2-a390-eb6d3d5d9bf0@gmx.de>
-From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Date: Sat, 26 Aug 2023 18:16:36 +0300
-Message-ID: <CAOF=9Asr33iVjGANQTPLYurxJn+QjDXuNE09dN66bBuKc6SHFQ@mail.gmail.com>
-Subject: Re: [PATCH] mach-imx: bootaux: fix building with disabled bootelf
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Oleksandr Suvorov <oleksandr.suvorov@toradex.com>, 
- Stefan Agner <stefan.agner@toradex.com>, Stefano Babic <sbabic@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 2/3] cmd: fix gpt enumerate
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Joshua Watt <jpewhacker@gmail.com>, Corneliu Doban <cdoban@broadcom.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+References: <20230826015343.167612-1-heinrich.schuchardt@canonical.com>
+ <20230826015343.167612-3-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ1h5Mz=f8mjZk806bfa3RKyTetp+YGiNS-mH-fKSGNLYA@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ1h5Mz=f8mjZk806bfa3RKyTetp+YGiNS-mH-fKSGNLYA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,71 +108,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Sat, Aug 26, 2023 at 4:46=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
->
-> On 8/26/23 15:24, Oleksandr Suvorov wrote:
-> > If CMD_ELF disabled and IMX_BOOTAUX enabled, the u-boot building ends
-> > up with a linking error [1]. Select LIB_ELF for all cases when
-> > valid_elf_image() is used in the imx_bootaux module.
-> >
-> > [1]
-> > ld: /tmp/ccaF1rpv.ltrans0.ltrans.o: in function `do_bootaux':
-> > arch/arm/mach-imx/imx_bootaux.c:108: undefined reference to `valid_elf_=
-image'
-> >
-> > Fixes: c0f037f6a2a ("mach-imx: bootaux: elf firmware support")
-> > Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-> > ---
-> >
-> >   arch/arm/mach-imx/Kconfig | 1 +
-> >   1 file changed, 1 insertion(+)
-> >
-> > diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-> > index d94b5828d0d..cbe62d6b8f9 100644
-> > --- a/arch/arm/mach-imx/Kconfig
-> > +++ b/arch/arm/mach-imx/Kconfig
-> > @@ -32,6 +32,7 @@ config IMX_RDC
-> >   config IMX_BOOTAUX
-> >       bool "Support boot auxiliary core"
-> >       depends on ARCH_MX7 || ARCH_MX6 || ARCH_VF610 || ARCH_IMX8 || ARC=
-H_IMX8M
-> > +     select LIB_ELF if !ARCH_IMX8 || IMX8QXP
->
-> For CONFIG_IMX8QXP=3Dy arch/arm/mach-imx/imx8/cpu.c uses valid_elf_image(=
-).
->
-> Shouldn't the IMX8QXP case be handled in arch/arm/mach-imx/imx8/Kconfig?
->
-> config IMX8QXP
->         select LIB_ELF
-
-We need to select LIB_ELF for this SoC only if IMX_BOOTAUX is enabled:
-the arch/arm/mach-imx/imx8/cpu.c guards with #ifdef CONFIG_IMX_BOOTAUX
-functions that
-call lib/elf.o members.
-
-Cheers,
-
-Oleksandr
-
-> Best regards
->
-> Heinrich
->
-> >       help
-> >         bootaux [addr] to boot auxiliary core.
-> >
->
 
 
---=20
-Best regards,
+On 8/26/23 04:04, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Fri, 25 Aug 2023 at 19:53, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Do not assume that partitions are numbered continuously starting at 1.
+>>
+>> Only a single partition table type can exist on a block device. If we found
+>> a GPT partition table, we must not re-enumerate with the MBR partition
+>> driver which would find the protective partition.
+> 
+> Does it really? My understand is that it sets desc->part_type and it
+> stays like that from then on?
 
-Oleksandr Suvorov
-Software Engineer
-T: +380 63 8489656
-E: oleksandr.suvorov@foundries.io
-W: www.foundries.io
+Prior to my patch with printf statements added:
+
+=> gpt enumerate host 0
+enumeration by driver EFI
+   partition 'EFI system partition'
+enumeration by driver AMIGA
+enumeration by driver DOS
+   partition 'xxa1'
+enumeration by driver ISO
+enumeration by driver MAC
+setenv gpt_partition_list EFI system partition xxa1
+success!
+
+Of course the value of $gpt_partition_list is useless because you do not 
+even know how many partitions were discovered 'EFI', 'system', 
+'partition' could be the names of three different partitions or there 
+could be one partition 'EFI system partition'.
+
+I wonder how Broadcom can use this in their update scripts. See 
+12fc1f3bb223 ("cmd: gpt: add eMMC and GPT support").
+
+For something usable we would have to add quotations marks, escape 
+quotation marks in the string, and the do-for command would need to 
+support a string with quotation marks like
+
+"'Heinrich\'s partition one' 'EFI system partition'"
+
+The "xxa1" string is generated in part_set_generic_name() because MBR 
+partitions don't have a name.
+
+xx = other block device type
+a = device number 0
+1 = partition number 0
+
+Best regards
+
+Heinrich
+
+> 
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   cmd/gpt.c | 14 ++++++++------
+>>   1 file changed, 8 insertions(+), 6 deletions(-)
+>>
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> 
+>> diff --git a/cmd/gpt.c b/cmd/gpt.c
+>> index d0e165d539..99ca0a6163 100644
+>> --- a/cmd/gpt.c
+>> +++ b/cmd/gpt.c
+>> @@ -691,12 +691,13 @@ static int gpt_enumerate(struct blk_desc *desc)
+>>                  int ret;
+>>                  int i;
+>>
+>> +               if (part_drv->test(desc))
+>> +                       continue;
+>> +
+>>                  for (i = 1; i < part_drv->max_entries; i++) {
+>>                          ret = part_drv->get_info(desc, i, &pinfo);
+>> -                       if (ret) {
+>> -                               /* no more entries in table */
+>> -                               break;
+>> -                       }
+>> +                       if (ret)
+>> +                               continue;
+>>
+>>                          ptr = &part_list[str_len];
+>>                          tmp_len = strlen((const char *)pinfo.name);
+>> @@ -711,9 +712,10 @@ static int gpt_enumerate(struct blk_desc *desc)
+>>                          /* One byte for space(" ") delimiter */
+>>                          ptr[tmp_len] = ' ';
+>>                  }
+>> +               if (*part_list)
+>> +                       part_list[strlen(part_list) - 1] = 0;
+>> +               break;
+>>          }
+>> -       if (*part_list)
+>> -               part_list[strlen(part_list) - 1] = 0;
+>>          debug("setenv gpt_partition_list %s\n", part_list);
+>>
+>>          return env_set("gpt_partition_list", part_list);
+>> --
+>> 2.40.1
+>>
