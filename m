@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2488BC83F13
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 10:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D37ADC83F13
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 10:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32A1386B20;
-	Sat, 26 Aug 2023 12:00:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6FBA86AF8;
+	Sat, 26 Aug 2023 12:07:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="B8zE3aI7";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HZEmri+R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 174B986ACF; Sat, 26 Aug 2023 12:00:25 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id C860D86AF8; Sat, 26 Aug 2023 12:07:01 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED49786B20
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 12:00:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3006D86ACC
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 12:06:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693044020; x=1693648820; i=xypron.glpk@gmx.de;
- bh=W1+fVk/O5xZdeejH9+KG/qC0JavCSanStVwPejgLsLQ=;
+ s=s31663417; t=1693044413; x=1693649213; i=xypron.glpk@gmx.de;
+ bh=BwUQIzNs7PeubQW0+/XC/aMKSl38HqjvtrDAQ6QWtyw=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=B8zE3aI7c8eVx7oaSYx1aFHNF15W57A6ek+KBJisb8nJGwlx1Yz4coY/5y1LjvHcZY+QprE
- gmYf3tqUo7Ek2yv0WcQg+bBoIyVz8yiT5w1v2QbDmkvzMkm7eb45rhnMaIIvEpRywOp3lgWSQ
- NiRaZbVkZ7srP9Xg8cpXpSiW9Pf+H6uUZo8Oo/sYLXdg3OcCDhCM4zF8lVdo8BMKAjT7cVxUP
- i+21czxQWPl6LRgbojelMFxaivlQYOqkI/v/xvxoIKrElCOYycg7mbDiZWVe7KgI9GTD2D7Fa
- nYbnMgiXCQ2gcYTGEY1Hpb79BfhUGVLqY8BiNdbnqxk0Br8mCPMA==
+ b=HZEmri+RNzSPQQF3aD7A42+5bPc6ffMjnVFEVuHT5ytyzzTpSH0+69RGKVjthj68mdjuiyf
+ FuDDtQJlnu5svUWl3abxHyzvfaLvpExhzwP80/6RRxJgY4K/1bbuHZanPkQbeMAm+rUOxjMqn
+ VdfGNFUrZ2LW9aM2LB4XlEq2oVa8z2bZfYTf3ayerHx1cwnRm4mmwOfyRy8HsA76BRaCl4b49
+ qFsJHay+gACIVR2gV9TabK0LvdyCsvBnL+Q+wW81778GRhQsGOZIFSfK5lCyH+jErw/nhQQxp
+ uLlD6OEOL36DCNaF433FOd5KsSXbwnfdXpa9Bmgn5rUbMh6xQZJw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N79u8-1pdNN93jci-017TXc; Sat, 26
- Aug 2023 12:00:19 +0200
-Message-ID: <2000e1e6-539a-2aa6-a6c6-1fcc9db5d13d@gmx.de>
-Date: Sat, 26 Aug 2023 12:01:08 +0200
+Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MHGCu-1qVUar3CL2-00DHPb; Sat, 26
+ Aug 2023 12:06:53 +0200
+Message-ID: <aca7e6fa-2dec-a7c5-e47e-84c5ffa6f9b7@gmx.de>
+Date: Sat, 26 Aug 2023 12:07:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
- node/property removal
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+Content-Language: en-US, de-DE
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <20230826090633.239342-6-sughosh.ganu@linaro.org>
-Content-Language: en-US, de-DE
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230826090633.239342-6-sughosh.ganu@linaro.org>
+In-Reply-To: <20230826090633.239342-1-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SKmi5z2npo+sgI8JOxpo5F2yjNLVkw8ktSI3FjU8OAfmNsKvYO4
- SXVUK6kI0E6zEpjhXzDAqlG6PDJmf0TrxJP8dX4M9YUZemVBArUMiXa7DIGW8LIjVUyxt77
- 5gb1P1MsLO5xqa3T+GV+KVX+MMLK5Skf/FhAkAstovBNcuQZSHOkv8f0dYAwnuZj0o4OgsE
- +WoFX8O+8dVjfuTUCatTA==
-UI-OutboundReport: notjunk:1;M01:P0:tOLAaNGpcq8=;Cp4d7+R2vcdF7L+qRl1iaRXAQXf
- BHGkH1n5XEMLaKxHy/Ed2D3rmAXve4XDjLIneYwx/152+enBuAkyb7ygATQ0OzHU8iaH3gc07
- uLcVrxBy//hUc3sjVWd+A1KU/z2iyiVVIfSHuBOagP/5kfBwd8ROWoEmxWQ7xRDLhC4oEp2l8
- /dvuOW8vf50juNJsTCg2SlieuwHBplio7ggoYT7X+hD/JtZxCc9SEZY2ShqnYlouDh6z2VCK/
- H9ZsCl4D7L0zxwDG+rx2sctkip457Vbq7gL6K497KkiXHgqMQ0zz3RUzm3fvIu72uN4HqjoX1
- NB8+0c7BvDpZRMv2xn4lw2GQeatUO6nXG0a3AgTFu3Sj56mAOH2rgXhJOdw3T2Dkht28hEfTb
- GOYjLyFbQr3C40Q/IlIKjSA1o6Rbt5czZaEMeH8FTdpcN5U9z2JMk0gYW9GoMoV7PvKoSax+D
- pg02QZGxGHyFPnhRyvVQ5iGA5BHsbsU2CsFITNeq1/+YOVG6Sa2fVhBR98XS8MlzfbsCyD7cl
- 5QkYWq/XjtKI27XS5+pGAxpjcTObXaDSQLCLG42W2iJwTN4QV++iq1HrQZfwzWD3yLW6xDaPv
- qcjckEI3voGX1bXvnKRXRS9XzrAXbQIw+sQpwa8pqjld2+vW6WPVT48bXi6D6UjEqTgmEZY/O
- 6DFfN/B9YVm9dT+d4A72iaLpFiLSOCrzaV9nXc8lgocKCFz6DvxdGydeMgrvrhktk4NxyJ+YJ
- 3Om4D6fwEcAFwkcjazXDf0c6t/iXASeeU3hISs0M91Px9fv1fDxmiyMd/pW3d5z6nVO2Plw+Y
- Aoz6EiEeygBeCbh4FLuROVp2c7G+4nTwe2ugTc0ANMYX193/t5W590WXqXjlXYWuagmdjQ0+x
- kuV7iOFFdypQYYNMP1pYs9wKnYlxkq8kUiW61Uh3pgnVLsew4CVS5/bS8c8W+mnaijDnLJwyv
- 723lMu+FxXZHVeDNNRjU8JYOj4o=
+X-Provags-ID: V03:K1:x/onwNuVFLUYc9RmSST+9KrVP23C4LzZU44e9NJEKxmk8i0aiEA
+ SjYm41/PGVyDR+/VeVQWIEsOa6kfifFtJ3EvT1hBQV+PPXQPftfxa33pViqzPqdIqo2wftg
+ YmR3o5hbNch7w9YcqMULVzlQG/rL+9USY2F/q7PsiquI+Zzn0Zcef2L/PUm7aJLwFSGpQ+V
+ ANf0n6KQhHcKtnmqB6R+g==
+UI-OutboundReport: notjunk:1;M01:P0:9QYlZ5eyezk=;h5NMDJgfeYnajMFPGfUl9Mz0xYe
+ EjBqItn2J0uAs2RhXMX8vGyYYnVQ+WDNSmXwX4OL9GZP/N+E9YBngjXbOBVwtz2fF27K4racz
+ uus9BaovCI3o7+GbTUKkN41Xm1Bjmcd1RKZ/1qfGuPAzCZHBfWjB5D3S5vT7iiK9Dymt/K3XG
+ ptWzp+Bm3MWD3RBHCZfWRxflbshsgYwe9/D/Qm8Cym7GtjgTiCM5dNv1pqw7AwH3cF64lfxtN
+ tyEpgi3/hk/T8Y3vZbcCt9rIDhqviPT082UW2OA9AzGMnOE7Qrn0r9h9BtxaImIGnqIePzYn4
+ 5+UT65QUzSIirBzmfPg1scnyvgvuikKT+hH33Y2JjvLq7tkmifglPx2mteMJnpAYSvdT0KczC
+ BBuNqL4XLdRHx0zmQgTon+xhXIWiADBEo8/CfGvMa+CuTXHSWNbpx+gRQpz47QmwLMeI/+3Kr
+ 69cKM5JVjb9qNuImfXHJMhHe8/VjzEGOgqkcyq9ypw6jukKRYG0HzYaC78QZ16bgxcyL2gqIR
+ CFdYlijdG31HJcsdkubkm4WIHOxo/mDZ/2LU2DlFMuLPYzj6xBxpYnVMSSMdM7XtB1lQIo3BJ
+ j6N21fSKleTFx28CvEAltG2u6A7RU+XofXmiP1nMg50WVbUQvXUQgQRijg8UejxjtVne7ySJO
+ uKdcjIjLUcg9FcxIOu9qCcqOpTP6TcJPRc4B/Yi05V6SA1ddsSH3E0ouyuwc+mF+gktWfBt3/
+ qSJWvuVM690tT9shWJHQ1MFSXO2kkoc9Wap0MDhkyjqhz8fjFkTzUO1DPld2IwMe5/aivQwwX
+ a7VROHhq1jA6vp+9Roza5eIDdh6XyvXegMqXqjaAIAovmJAgOx8s730Ov9wLF7iLTo9TK9i9H
+ IrO9a6D21thznjgjRxIoKFAqdeEzDwNTFK0VKtsnWKwJ0Q5+5AqaqL7u2PF4ojwY0FpRGYjHu
+ fmOMkkKBCHE/szK5Jiv/83NKPMM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,156 +90,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 8/26/23 11:06, Sughosh Ganu wrote:
-> Add a document explaining the need for removal of non-compliant
-> devicetree nodes and properties. Also describe in brief, the macros
-> that can be used for this removal.
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
-Thanks for properly documenting the change.
-
-Warning, treated as error:
-doc/develop/devicetree/dt_non_compliant_purge.rst:
-document isn't included in any toctree
-
-Please, add the document to doc/develop/devicetree/index.rst
-
-Please, run make htmldocs before resubmitting.
-
-> ---
->   .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++++++++++++
->   1 file changed, 64 insertions(+)
->   create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+> Provide a way for removing certain devicetree nodes and/or properties
+> from the devicetree. This is needed to purge certain nodes and
+> properties which may be relevant only in U-Boot. Such nodes and
+> properties are then removed from the devicetree before it is passed to
+> the kernel. This ensures that the devicetree passed to the OS does not
+> contain any non-compliant nodes and properties.
 >
-> diff --git a/doc/develop/devicetree/dt_non_compliant_purge.rst b/doc/dev=
-elop/devicetree/dt_non_compliant_purge.rst
-> new file mode 100644
-> index 0000000000..c3a8feab5b
-> --- /dev/null
-> +++ b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> @@ -0,0 +1,64 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Removal of non-compliant nodes and properties
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +The devicetree used in U-Boot might contain nodes and properties which
-> +are specific only to U-Boot, and are not necessarily being used to
-> +describe hardware but to pass information to U-Boot. An example of
-> +such a property would be the public key being passed to U-Boot for
-> +verification.
-> +
-> +This devicetree can then be passed to the OS. Since certain nodes and
-> +properties are not really describing hardware, and more importantly,
-> +these are only relevant to U-Boot, bindings for these cannot be
-> +upstreamed into the devicetree repository. There have been instances
-> +of attempts being made to upstream such bindings, and these deemed not
+> The removal of the nodes and properties is being done through an
+> EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
+> behind any Kconfig symbol.
+>
+> I have only build tested this on sandbox, and tested on qemu arm64
+> virt platform. This being a RFC, I have not put this through a CI run.
 
-but these were not deemed fit
-
-> +fit for upstreaming. Not having a binding for these nodes and
-> +properties means that the devicetree fails the schema compliance tests
-> +[1]. This also means that the platform cannot get certifications like
-> +SystemReady [2] which, among other things require a devicetree which
-
-%s/require/requires/
-
-> +passes the schema compliance tests.
-> +
-> +For such nodes and properties, it has been suggested by the devicetree
-> +maintainers that the right thing to do is to remove them from the
-
-%s/that the right thing to do is//
-
-> +devicetree before it gets passed on to the OS [3].
-
-%s/on to/to/
-
-> +
-> +Removing nodes/properties
-> +-------------------------
-> +
-> +In U-Boot, this is been done through adding information on such nodes
-
-%s/is been done through/is done by/
-
-> +and properties in a list. The entire node can be deleted, or a
-> +specific property under a node can be deleted. The list of such nodes
-> +and properties is generated at compile time, and the function to purge
-> +these can be invoked through a EVT_FT_FIXUP event notify call.
-> +
-> +For deleting a node, this can be done by declaring a macro::
-> +
-> +	DT_NON_COMPLIANT_PURGE(fwu_mdata) =3D {
-> +		.node_path      =3D "/fwu-mdata",
-> +	};
-
-Where should such a macro be placed?
-
-> +
-> +Similarly, for deleting a property under a node, that can be done by
-> +specifying the property name::
-> +
-> +	DT_NON_COMPLIANT_PURGE(capsule_key) =3D {
-> +		.node_path      =3D "/signature",
-> +		.prop           =3D "capsule-key",
-> +	};
-
-Why is capsule_key needed twice here? What would be the effect of:
-
-DT_NON_COMPLIANT_PURGE(voodoo) =3D {
-	.node_path      =3D "/signature",
-	.prop           =3D "capsule-key",
-};
-
-> +
-> +In the first example, the entire node with path /fwu-mdata will be
-> +removed. In the second example, the property capsule-key
-> +under /signature node will be removed.
-> +
-> +Similarly, a list of nodes and properties can be specified using the
-> +following macro::
-> +
-> +	DT_NON_COMPLIANT_PURGE_LIST(foo) =3D {
-
-What does foo refer to here? Can this parameter be eliminated from the
-syntax?
-
-Will the application of the removals be sorted alphabetically by this
-argument?
-
-What will happen if a property or node does not exist at time of
-removal? Hopefully that does not stop the boot process but is silently
-ignored.
-
-> +		{ .node_path =3D "/some_node", .prop =3D "some_bar" },
-> +		{ .node_path =3D "/some_node" },
-> +	};
-
-Why do you need the first element in your example?
-Wouldn't deleting /some/node imply that all its children are deleted?
-
-Why do we need separate properties .node_path and .prop. It would be
-less effort to write:
-
-DT_NON_COMPLIANT_PURGE_LIST() =3D
-{
-	"/some_node_1/some_property_1",
-	"/some_node_1/some_property_2",
-	"/some_node_2",
-}
-
-I assume the macro does its job irrespective of non-compliance.
-Why not call it DT_PURGE()?
+We should have a test for the new functionality. E.g. add some
+superfluous properties and nodes to arch/sandbox/dts/test.dts, delete
+them via the DT_PURGE macro, and check that the device-tree passed to an
+EFI binary does not contain these properties and nodes.
 
 Best regards
 
 Heinrich
 
-> +
-> +[1] - https://github.com/devicetree-org/dt-schema
-> +[2] - https://www.arm.com/architecture/system-architectures/systemready=
--certification-program
-> +[3] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7z=
-f26L_GV2oS6cg-5qg@mail.gmail.com/
+>
+> Sughosh Ganu (5):
+>    dt: Provide a way to remove non-compliant nodes and properties
+>    fwu: Add the fwu-mdata node for removal from devicetree
+>    capsule: Add the capsule-key property for removal from devicetree
+>    bootefi: Call the EVT_FT_FIXUP event handler
+>    doc: Add a document for non-compliant DT node/property removal
+>
+>   cmd/bootefi.c                                 | 18 +++++
+>   .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
+>   drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
+>   include/dt-structs.h                          | 11 +++
+>   lib/Makefile                                  |  1 +
+>   lib/dt_purge.c                                | 73 +++++++++++++++++++
+>   lib/efi_loader/efi_capsule.c                  |  7 ++
+>   7 files changed, 179 insertions(+)
+>   create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+>   create mode 100644 lib/dt_purge.c
+>
