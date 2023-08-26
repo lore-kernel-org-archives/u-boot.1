@@ -4,49 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56B51C83F11
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 10:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A3BEC83F13
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 12:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A538386B2C;
-	Sat, 26 Aug 2023 12:42:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CD70080374;
+	Sat, 26 Aug 2023 14:03:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AF3286B31; Sat, 26 Aug 2023 12:42:21 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 49A1B86ACC
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 12:42:16 +0200 (CEST)
+ id 1962980295; Sat, 26 Aug 2023 14:03:54 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 5C427869CD
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 14:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.02,203,1688396400"; 
- d="asc'?scan'208";a="177740529"
+ d="asc'?scan'208";a="174036335"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 26 Aug 2023 19:42:13 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 26 Aug 2023 21:03:43 +0900
 Received: from [10.226.92.28] (unknown [10.226.92.28])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id F31C8400264B;
- Sat, 26 Aug 2023 19:42:09 +0900 (JST)
-Message-ID: <636aa801-4f32-c2f3-db6f-cd6072a128ae@bp.renesas.com>
-Date: Sat, 26 Aug 2023 11:42:08 +0100
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id AFF0B4008C74;
+ Sat, 26 Aug 2023 21:03:41 +0900 (JST)
+Message-ID: <66e5acee-fc2e-c169-ce26-8792d47d5626@bp.renesas.com>
+Date: Sat, 26 Aug 2023 13:03:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
- =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-References: <20230826091335.26459-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/2] serial: sh: Fix compile error when lacking HSCIF
+ support
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Simon Glass <sjg@chromium.org>
+References: <20230822181025.339748-1-paul.barker.ct@bp.renesas.com>
+ <20230822181025.339748-2-paul.barker.ct@bp.renesas.com>
+ <e6fc0067-b5bf-bbd0-57de-0f71d20d2e63@mailbox.org>
+ <3aef873f-4ae7-edcc-c4a7-8a795a77802b@bp.renesas.com>
+ <0e1bbf84-eb5f-c462-7372-d813c3b1f813@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: Re: [PATCH v3 1/1] doc: describe TPL/VPL/SPL boot
-In-Reply-To: <20230826091335.26459-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <0e1bbf84-eb5f-c462-7372-d813c3b1f813@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------lP8S0t2bnpenm7SYhQcDxLyo"
+ boundary="------------UKQWuqjbZYfeXt1uBYEGUEMr"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,458 +66,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------lP8S0t2bnpenm7SYhQcDxLyo
-Content-Type: multipart/mixed; boundary="------------VgNJGZ2Idup8fryS17aviExD";
+--------------UKQWuqjbZYfeXt1uBYEGUEMr
+Content-Type: multipart/mixed; boundary="------------HLZsvDpMZDkEyLAN2BmtS1Qn";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
- =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-Message-ID: <636aa801-4f32-c2f3-db6f-cd6072a128ae@bp.renesas.com>
-Subject: Re: [PATCH v3 1/1] doc: describe TPL/VPL/SPL boot
-References: <20230826091335.26459-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20230826091335.26459-1-heinrich.schuchardt@canonical.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Simon Glass <sjg@chromium.org>
+Message-ID: <66e5acee-fc2e-c169-ce26-8792d47d5626@bp.renesas.com>
+Subject: Re: [PATCH 1/2] serial: sh: Fix compile error when lacking HSCIF
+ support
+References: <20230822181025.339748-1-paul.barker.ct@bp.renesas.com>
+ <20230822181025.339748-2-paul.barker.ct@bp.renesas.com>
+ <e6fc0067-b5bf-bbd0-57de-0f71d20d2e63@mailbox.org>
+ <3aef873f-4ae7-edcc-c4a7-8a795a77802b@bp.renesas.com>
+ <0e1bbf84-eb5f-c462-7372-d813c3b1f813@mailbox.org>
+In-Reply-To: <0e1bbf84-eb5f-c462-7372-d813c3b1f813@mailbox.org>
 
---------------VgNJGZ2Idup8fryS17aviExD
-Content-Type: multipart/mixed; boundary="------------EdACpg5XB0YZX0Ydz85tRYzv"
+--------------HLZsvDpMZDkEyLAN2BmtS1Qn
+Content-Type: multipart/mixed; boundary="------------0XuMyJFeYx5qkC1R6Nr4q6u0"
 
---------------EdACpg5XB0YZX0Ydz85tRYzv
+--------------0XuMyJFeYx5qkC1R6Nr4q6u0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 26/08/2023 10:13, Heinrich Schuchardt wrote:
-> This is a stub describing how TPL, VPL, and SPL load the next boot stag=
-es
-> on a detail level for users.
+On 23/08/2023 12:22, Marek Vasut wrote:
+> On 8/23/23 08:25, Paul Barker wrote:
+>> On 22/08/2023 22:38, Marek Vasut wrote:
+>>> On 8/22/23 20:10, Paul Barker wrote:
+>>>> If we attempt to compile serial_sh.c for a system which lacks HSCIF
+>>>> support (e.g. R8A7740), we see the following compilation error:
+>>>>
+>>>>       In file included from drivers/serial/serial_sh.c:20:
+>>>>       drivers/serial/serial_sh.c: In function =E2=80=98sh_serial_ini=
+t_generic=E2=80=99:
+>>>>       drivers/serial/serial_sh.h:429:35: warning: implicit declarati=
+on of function =E2=80=98sci_HSSRR_out=E2=80=99; did you mean =E2=80=98sci=
+_SCSCR_out=E2=80=99? [-Wimplicit-function-declaration]
+>>>>         429 | #define sci_out(port, reg, value) sci_##reg##_out(port=
+, value)
+>>>>             |                                   ^~~~
+>>>>       drivers/serial/serial_sh.c:62:17: note: in expansion of macro =
+=E2=80=98sci_out=E2=80=99
+>>>>          62 |                 sci_out(port, HSSRR, HSSRR_SRE | HSSRR=
+_SRCYC8);
+>>>>             |                 ^~~~~~~
+>>>>
+>>>> To fix this, only try to support access to the HSSRR register for So=
+Cs
+>>>> where it actually exists.
+>>>>
+>>>> Fixes: bbe36e29ca2c ('serial: sh: Add HSCIF support for R-Car SoC')
+>>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>>> Cc: Hai Pham <hai.pham.ud@renesas.com>
+>>>> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>> Cc: Simon Glass <sjg@chromium.org>
+>>>> ---
+>>>>    drivers/serial/serial_sh.c | 2 ++
+>>>>    1 file changed, 2 insertions(+)
+>>>>
+>>>> diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c=
+
+>>>> index 20cda5dbe272..cd9bcf4f0a25 100644
+>>>> --- a/drivers/serial/serial_sh.c
+>>>> +++ b/drivers/serial/serial_sh.c
+>>>> @@ -58,8 +58,10 @@ static void sh_serial_init_generic(struct uart_po=
+rt *port)
+>>>>    	sci_out(port, SCSPTR, 0x0003);
+>>>>    #endif
+>>>>   =20
+>>>> +#if defined(CONFIG_RCAR_GEN2) || defined(CONFIG_RCAR_GEN3) || defin=
+ed(CONFIG_RCAR_GEN4)
+>>>
+>>> You can use CONFIG_RCAR_64 instead of GEN3+GEN4 test.
+>>
+>> I'm going to be sending patches for the RZ/G2L shortly which enables
+>> CONFIG_RCAR_64 but lacks HSCIF support. Testing for RCAR gen3/gen4 now=
+
+>> will avoid the need to make another change here.
 >=20
-> For sure we will need a few patches on top to catch the whole complexit=
-y.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v3:
-> 	Call TPL Tertiary Program Loader, VPL Verifying Program Loader
-> 	Put Power PC flow into an info box to stick out
-> 	Add link to Falcon Mode
-> 	Fix typos
-> v2:
-> 	Mention that PowerPC uses a different naming convention.
-> 	Group boot devices by type
-> 	Correct reference to UBI
-> 	Fix typos
-> ---
->  doc/usage/index.rst    |   1 +
->  doc/usage/spl_boot.rst | 323 +++++++++++++++++++++++++++++++++++++++++=
+> The G2L has no HSCIF ?
 
->  2 files changed, 324 insertions(+)
->  create mode 100644 doc/usage/spl_boot.rst
->=20
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 3326ec82ff..f45a7f5502 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -4,6 +4,7 @@ Use U-Boot
->  .. toctree::
->     :maxdepth: 1
-> =20
-> +   spl_boot
->     blkmap
->     dfu
->     environment
-> diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
-> new file mode 100644
-> index 0000000000..ad6bf0ab69
-> --- /dev/null
-> +++ b/doc/usage/spl_boot.rst
-> @@ -0,0 +1,323 @@
-> +.. SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +Booting from TPL/SPL
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +The main U-Boot binary may be too large to be loaded directly by the B=
-oot ROM.
-> +This was the original driver for splitting up U-Boot into multiple boo=
-t stages.
-> +
-> +U-Boot typically goes through the following boot phases where TPL, VPL=
-, and SPL
-> +are optional. While many boards use SPL only few use TPL.
-> +
-> +TPL
-> +   Tertiary Program Loader. Very early init, as tiny as possible. This=
- loads SPL
-> +   (or VPL if enabled).
-> +
-> +VPL
-> +   Verifying Program Loader. Optional verification step, which can sel=
-ect one of
-> +   several SPL binaries, if A/B verified boot is enabled. Implementati=
-on of the
-> +   VPL logic is work-in-progress. For now it just boots into SPL.
-> +
-> +SPL
-> +   Secondary Program Loader. Sets up SDRAM and loads U-Boot proper. It=
- may also
-> +   load other firmware components.
-
-I'd fold the bullet points below (BL31, EDK II, Falcon mode & OpenSBI
-loading) into this description to improve the flow of the document.
-
-> +
-> +U-Boot
-> +   U-Boot proper, containing the command line and the logic to load an=
-
-> +   operating system, e.g. via UEFI.
-
-Change after the first comma to "this is the only stage containing the
-command line...", then the extra line below the following note saying
-this can be dropped.
-
-> +
-> +.. note::
-> +
-> +   The naming convention on the PowerPC architecture deviates from the=
- other
-> +   archtitectures. Here the boot sequence is SPL->TPL->U-Boot.
-> +
-> +Only main U-Boot has a command line interface.
-> +
-> +Further usages for U-Boot SPL comprise:
-> +
-> +* launching BL31 of ARM Trusted Firmware which invokes U-Boot as BL33
-> +* launching EDK II
-> +* launching Linux, e.g. :doc:`Falcon Mode' <../develop/falcon>`
-> +* launching RISC-V OpenSBI which invokes main U-Boot> +
-> +Target binaries
-> +---------------
-> +
-> +Binaries loaded by SPL/TPL can be:
-> +
-> +* raw binaries where the entry address equals the start address. This =
-is the
-> +  only binary format supported by TPL.
-> +* :doc:`FIT <fit/index>` images
-> +* legacy U-Boot images
-> +
-> +Configuration
-> +~~~~~~~~~~~~~
-> +
-> +Raw images are only supported in SPL if CONFIG_SPL_RAW_IMAGE_SUPPORT=3D=
-y.
-> +
-> +CONFIG_SPL_FIT=3Dy and CONFIG_SPL_LOAD_FIT=3Dy are needed to load FIT =
-images.
-> +
-> +CONFIG_SPL_LEGACY_IMAGE_FORMAT=3Dy is needed to load legacy U-Boot ima=
-ges.
-> +CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=3Dy enables checking the CRC32 of le=
-gacy U-Boot
-> +images.
-> +
-> +Image load methods
-> +------------------
-> +
-> +The image boot methods available for a board must be defined in two pl=
-aces:
-> +
-> +The board code implements a function board_boot_order() enumerating up=
- to
-> +five boot methods and the sequence in which they are tried. (The maxim=
-um
-> +number of boot methods is currently hard coded as variable spl_boot_li=
-st[]).
-> +If there is only one boot method function, spl_boot_device() may be im=
-plemented
-> +instead.
-> +
-> +The configuration controls which of these boot methods are actually av=
-ailable.
-> +
-> +Loading from block devices
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +MMC1, MMC2, MMC2_2
-> +    These methods read an image from SD card or eMMC. The first digit =
-after
-> +    'MMC' indicates the device number. Required configuration settings=
- include:
-> +
-> +    * CONFIG_SPL_MMC=3Dy or CONFIG_TPL_MMC=3Dy
-> +
-> +    To use a PCI connected MMC controller you need to additionally spe=
-cify:
-> +
-> +    * CONFIG_SPL_PCI=3Dy
-> +
-> +    * CONFIG_SPL_PCI_PNP=3Dy
-> +
-> +    * CONFIG_MMC=3Dy
-> +
-> +    * CONFIG_MMC_PCI=3Dy
-> +
-> +    * CONFIG_MMC_SDHCI=3Dy
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=3Dy or CONFIG_SPL_FS_EXT=3Dy
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D"<filepath>"
-> +
-> +NVMe
-> +    This methods load the image from an NVMe drive.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_PCI=3Dy
-> +
-> +    * CONFIG_SPL_PCI_PNP=3Dy
-> +
-> +    * CONFIG_SPL_NVME=3Dy
-> +
-> +    * CONFIG_SPL_NVME_PCI=3Dy
-> +
-> +    * CONFIG_SPL_NVME_BOOT_DEVICE (number of the NVMe device)
-> +
-> +    * CONFIG_SYS_NVME_BOOT_PARTITION (partition to read from)
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=3Dy or CONFIG_SPL_FS_EXT=3Dy
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D"<filepath>"
-> +
-> +SATA
-> +    This method reads an image from a SATA drive.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SATA=3Dy or CONFIG_TPL_SATA=3Dy
-> +
-> +    To use a PCIe connecte SATA controller you additionally need:
-> +
-> +    * CONFIG_SPL_PCI=3Dy
-> +
-> +    * CONFIG_SPL_SATA=3Dy
-> +
-> +    * CONFIG_SPL_AHCI_PCI=3Dy
-> +
-> +    * CONFIG_SPL_PCI_PNP=3Dy
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=3Dy
-> +
-> +    * CONFIG_SYS_SATA_FAT_BOOT_PARTITION=3D<partition number>
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D"<filepath>"
-> +
-> +USB
-> +    The USB method loads an image from a USB block device.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_USB_HOST=3Dy
-> +
-> +    * CONFIG_SPL_USB_STORAGE=3Dy
-> +
-> +    To use a PCI connected USB 3.0 controller you additionally need:
-> +
-> +    * CONFIG_SPL_FS_FAT=3Dy
-> +
-> +    * CONFIG_SPL_PCI=3Dy
-> +
-> +    * CONFIG_SPL_PCI_PNP=3Dy
-> +
-> +    * CONFIG_USB=3Dy
-> +
-> +    * CONFIG_USB_XHCI_HCD=3Dy
-> +
-> +    * CONFIG_USB_XHCI_PCI=3Dy
-> +
-> +    To load from a file system use:
-> +
-> +    * CONFIG_SPL_FS_FAT=3Dy or CONFIG_SPL_FS_EXT=3Dy
-> +
-> +    * CONFIG_SYS_USB_FAT_BOOT_PARTITION=3D<partition number>
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D"<filepath>"
-> +
-> +Loading from flash devices
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-I'd say "raw flash devices" to make the distinction from flash block
-devices (e.g. SSD/NVMe) clear.
-
-> +
-> +NAND
-> +    This method loads the image from NAND flash. To read from raw NAND=
- the
-> +    following configuration settings are required:
-> +
-> +    * CONFIG_SPL_NAND_SUPPORT=3Dy or CONFIG_TPL_NAND_SUPPORT=3Dy
-> +
-> +    If CONFIG_SPL_NAND_RAW_ONLY=3Dy only raw images can be loaded.
-> +
-> +    For using UBI (Unsorted Block Images) volumes to read from NAND th=
-e
-> +    following configuration settings are required:
-> +
-> +    * CONFIG_SPL_UBI=3Dy or CONFIG_TPL_UBI=3Dy
-> +
-> +    The UBI volume to read can either be specified
-> +
-> +    * by name using CONFIG_SPL_UBI_LOAD_BY_VOLNAME or
-> +
-> +    * by number using CONFIG_SPL_UBI_LOAD_MONITOR_ID.
-> +
-> +NOR
-> +    This method loads the image from NOR flash.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_NOR_SUPPORT=3Dy or CONFIG_TPL_NOR_SUPPORT=3Dy
-> +
-> +OneNAND
-> +    This methods loads the image from a OneNAND device. To read from r=
-aw OneNAND
-> +    the following configuration settings are required:
-> +
-> +    * CONFIG_SPL_ONENAND_SUPPORT=3Dy or CONFIG_TPL_ONENAND_SUPPORT=3Dy=
-
-> +
-> +    For using the Ubi file system to read from NAND the following conf=
-iguration
-> +    settings are required:
-> +
-> +    * CONFIG_SPL_UBI=3Dy or CONFIG_TPL_UBI=3Dy
-> +
-> +SPI
-> +    This method loads an image form SPI NOR flash.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_DM_SPI=3Dy
-> +
-> +    * CONFIG_SPL_SPI_FLASH=3Dy
-> +
-> +    * CONFIG_SPI_LOAD=3Dy or CONFIG_TPL_SPI_LOAD=3Dy
-> +
-> +
-> +Sunxi SPI
-> +    This method which is specific to Allwinner SoCs loads an image for=
-m SPI NOR
-> +    flash. Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SPI_SUNXI=3Dy
-> +
-> +Loading from other devices
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +BOOTROM
-> +    The binary is loaded by the boot ROM.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_BOOTROM_SUPPORT=3Dy or CONFIG_TPL_BOOTROM_SUPPORT=3Dy=
-
-> +
-> +DFU
-> +    :doc:`Device Firmware Upgrade <dfu>` is used to load the binary in=
-to RAM.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_DFU=3Dy
-> +
-> +    * CONFIG_SPL_RAM_SUPPORT=3Dy or CONFIG TPL_RAM_SUPPORT=3Dy
-> +
-> +Ethernet
-> +    This method loads an image over Ethernet. The BOOTP protocol is us=
-ed to find
-> +    a TFTP server and binary name. The binary is downloaded via the TF=
-TP
-> +    protocol. Required configuration settings include:
-> +
-> +    * CONFIG_SPL_NET=3Dy or CONFIG_TPL_NET=3Dy
-> +
-> +    * CONFIG_SPL_ETH_DEVICE=3Dy or CONFIG_DM_USB_GADGET=3Dy
-> +
-> +FEL
-> +    This method does not actually load an image for U-Boot.
-> +    FEL is a routine contained in the boot ROM of Allwinner SoCs which=
- serves
-> +    for the initial programming or recovery via USB
-> +
-> +RAM
-> +    This method uses an image preloaded into RAM.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_RAM_SUPPORT=3Dy or CONFIG_TPL_RAM_SUPPORT=3Dy
-> +
-> +    * CONFIG_RAM_DEVICE=3Dy
-> +
-> +Sandbox file
-> +    On the sandbox this method loads an image from the host file syste=
-m.
-> +
-> +Sandbox image
-> +    On the sandbox this method loads an image from the host file syste=
-m.
-> +
-> +Semihosting
-> +    When running in an ARM or RISC-V virtual machine the semihosting m=
-ethod can
-> +    be used to load an image from the host file system.
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SEMIHOSTING=3Dy
-> +
-> +    * CONFIG_SPL_SEMIHOSTING_FALLBACK=3Dy
-> +
-> +    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=3D<path to file>
-> +
-> +UART
-> +    This method loads an image via the Y-Modem protocol from the UART.=
-
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_YMODEM_SUPPORT=3Dy or CONFIG_TPL_YMODEM_SUPPORT=3Dy
-> +
-> +USB SDP
-> +    This method loads the image using the Serial Download Protocol as
-> +    implemented by the boot ROM of the i.MX family of SoCs.
-> +
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_SERIAL=3Dy
-> +
-> +    * CONFIG_SPL_USB_SDP_SUPPORT=3Dy or CONFIG_TPL_USB_SDP_SUPPORT
-> +
-> +VBE Simple
-> +    This method is used by the VPL stage to extract the next stage ima=
-ge from
-> +    the loaded image.
-> +
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_VPL=3Dy
-> +
-> +    * CONFIG_SPL_BOOTMETH_VBE_SIMPLE_FW=3Dy or CONFIG_TPL_BOOTMETH_VBE=
-_SIMPLE_FW=3Dy
-> +
-> +XIP
-> +    This method executes an image in place.
-> +
-> +    Required configuration settings include:
-> +
-> +    * CONFIG_SPL_XIP_SUPPORT
-
-My comments above are minor style suggestions so whether or not they're
-changed:
-
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+No, it has SCIF and SCI interfaces but no HSCIF.
 
 Thanks,
 Paul
---------------EdACpg5XB0YZX0Ydz85tRYzv
+--------------0XuMyJFeYx5qkC1R6Nr4q6u0
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -579,21 +216,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------EdACpg5XB0YZX0Ydz85tRYzv--
+--------------0XuMyJFeYx5qkC1R6Nr4q6u0--
 
---------------VgNJGZ2Idup8fryS17aviExD--
+--------------HLZsvDpMZDkEyLAN2BmtS1Qn--
 
---------------lP8S0t2bnpenm7SYhQcDxLyo
+--------------UKQWuqjbZYfeXt1uBYEGUEMr
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZOnXAAUDAAAAAAAKCRDbaV4Vf/JGvdWy
-AP9eefQ6pmzMCsUIak+pTfzIZS9DeXb1efP2iQt/WHeKKgD+IQdrznNWQjqWdRkUsGy+divGONhD
-sAXtz2mMhRkZugM=
-=2fbj
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZOnqHAUDAAAAAAAKCRDbaV4Vf/JGvY3H
+AQDR3HR3T9JWQ3BgueGdn4/1u1JCnjy/A2mCkZgtt4yqvQD+LWkaW58gkQNlIa2csnw+krj5Jfjn
+pgOi+AqKo4TDNQU=
+=RoRA
 -----END PGP SIGNATURE-----
 
---------------lP8S0t2bnpenm7SYhQcDxLyo--
+--------------UKQWuqjbZYfeXt1uBYEGUEMr--
