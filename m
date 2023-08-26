@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A4CDC83F11
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 01:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45CC9C83F10
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 01:53:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0DE486B10;
-	Sat, 26 Aug 2023 03:53:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23BBF86B18;
+	Sat, 26 Aug 2023 03:53:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nTSulrRS";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="n1nMt5KP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E476786B10; Sat, 26 Aug 2023 03:53:03 +0200 (CEST)
+ id E945386AB1; Sat, 26 Aug 2023 03:53:03 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 579D786AB1
+ by phobos.denx.de (Postfix) with ESMTPS id AF8B986AE8
  for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 03:52:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,27 +31,27 @@ Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id D4A833F6CD; 
- Sat, 26 Aug 2023 01:52:58 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2D98D3F6CE; 
+ Sat, 26 Aug 2023 01:52:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1693014779;
- bh=t+Br7bbrVgOyZkHwNxC4HVRcQCUbwQh5hDavZWWfvxg=;
+ bh=r9xIeWBk8f2BkEhZZmYEbFZoSMq0eTN/1HqYSUkMTxE=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=nTSulrRSr5FZmXOXKWrTAtcw+mMcJ1N3zaJQF4YtfkRxgDmw382FVEIYluhaAnJ4t
- AgTf/co9Q4AJ4L2w/oAP1ZqW2KQ1STnyP2xJMJAwnCraZ8J5tCFo36u4L6VyQvG/s5
- tzrBzu0YKEeHY9J0NEDpOkkhdFlg5RX7vr2+oiM6UFtAffwjw/XNTwCh0Oft1qH2eZ
- 7uVTd6eN3PJ3U1F1qB8h7gn13q3Il40xbcsnD0Bi12ZDzsIeblQq3HJhxIQ6F1pcM4
- UKKi+k9BUJRey9fISrYusFJd69eBSwYzig32sYGuqYBfy37rcryvSGb/KL08Ff94QX
- y7KX0klfrMDSw==
+ b=n1nMt5KPYVMX5R+UuNFuG/ZzwZOt5uwNhPZdZWf+VgCEPhZ5Bx22m+83JBxx3Z37R
+ BLDLFUsK5uQFaF3lsu132bvGOnszE+IxEKCmmW/XtJ5txzyRbuLYClfAamsQ5pJA7l
+ 5QN9bXa2s3Ln/WgOuvtvMufZuVuRB0OBSBVA4WqLZDgfjBcfyCFfZp+xAJpR4pOS6M
+ y3A4mButGoq0TQ1b+/EbTV0hRw2oJMIMfyPQtWmaVy+K1+zrStJ/SCsgPu6WY9P7Z3
+ yWm7/EVYhBVWfocjREnANx96azJC241pT666UVCqHEzt2hVjB9rX5j3o+tDjE42pYW
+ Pv6SBYzYCfTkg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Joshua Watt <jpewhacker@gmail.com>,
  Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/3] cmd: fix gpt enumerate
-Date: Sat, 26 Aug 2023 03:53:42 +0200
-Message-Id: <20230826015343.167612-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 3/3] cmd: let gpt_partition_entry be hexadecimal
+Date: Sat, 26 Aug 2023 03:53:43 +0200
+Message-Id: <20230826015343.167612-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230826015343.167612-1-heinrich.schuchardt@canonical.com>
 References: <20230826015343.167612-1-heinrich.schuchardt@canonical.com>
@@ -73,52 +73,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do not assume that partitions are numbered continuously starting at 1.
+In commands like 'ls mmc 0:f' the partition number is hexadecimal.
 
-Only a single partition table type can exist on a block device. If we found
-a GPT partition table, we must not re-enumerate with the MBR partition
-driver which would find the protective partition.
+In command 'gpt setenv' variable gpt_partition_entry needs to be set
+to a hexadecimal value to allow its use as a parameter in a
+subsequent command.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- cmd/gpt.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ cmd/gpt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/cmd/gpt.c b/cmd/gpt.c
-index d0e165d539..99ca0a6163 100644
+index 99ca0a6163..964056bd28 100644
 --- a/cmd/gpt.c
 +++ b/cmd/gpt.c
-@@ -691,12 +691,13 @@ static int gpt_enumerate(struct blk_desc *desc)
- 		int ret;
- 		int i;
+@@ -744,7 +744,7 @@ static int gpt_setenv_part_variables(struct disk_partition *pinfo, int i)
+ 	if (ret)
+ 		goto fail;
  
-+		if (part_drv->test(desc))
-+			continue;
-+
- 		for (i = 1; i < part_drv->max_entries; i++) {
- 			ret = part_drv->get_info(desc, i, &pinfo);
--			if (ret) {
--				/* no more entries in table */
--				break;
--			}
-+			if (ret)
-+				continue;
+-	ret = env_set_ulong("gpt_partition_entry", i);
++	ret = env_set_hex("gpt_partition_entry", i);
+ 	if (ret)
+ 		goto fail;
  
- 			ptr = &part_list[str_len];
- 			tmp_len = strlen((const char *)pinfo.name);
-@@ -711,9 +712,10 @@ static int gpt_enumerate(struct blk_desc *desc)
- 			/* One byte for space(" ") delimiter */
- 			ptr[tmp_len] = ' ';
- 		}
-+		if (*part_list)
-+			part_list[strlen(part_list) - 1] = 0;
-+		break;
- 	}
--	if (*part_list)
--		part_list[strlen(part_list) - 1] = 0;
- 	debug("setenv gpt_partition_list %s\n", part_list);
- 
- 	return env_set("gpt_partition_list", part_list);
 -- 
 2.40.1
 
