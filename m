@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B168C83F01
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 22:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90DBC83F01
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 22:26:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ABB78144A;
-	Sun, 27 Aug 2023 00:26:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E08F9831BE;
+	Sun, 27 Aug 2023 00:26:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oLyIvMVm";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="W2FRnUPf";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UuBzz2ux";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YeNQ1r7b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD979833CF; Sun, 27 Aug 2023 00:26:11 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id E2E3784003; Sun, 27 Aug 2023 00:26:13 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38E6781420
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 00:26:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0556A82BBF
+ for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 00:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RYBHN6nklz9sqk;
- Sun, 27 Aug 2023 00:26:08 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RYBHQ4nBKz9t0S;
+ Sun, 27 Aug 2023 00:26:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693088770;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SyQASTRb76EavkNdW4yWNyjdPZnxdE6HNa/HniRinCY=;
+ b=UuBzz2uxB+cs92vp7p3v2CO25aPrg6lWxjcJwKIjQiPh72EG38OUX53amhwPGrrNO1j4v1
+ btznwLQ/6x/Hd3AOSKTYCDeXI7x8hSAdxPZB7tDB/LU2GCBZQsJPfqU924n1yI2YZZ1Phx
+ 0cZSDcXHt/yKRWHgWUIXnm/k8NXqdXYBGzrpXMqtdTStVXN0zaKmlITHqsLTTyzSQy/QxR
+ UWRv1yI12zZjVNBdGWitUT+EiDJxwhVL5RfuHQg+vwZZsLLriczBQ3ngCK32xCPqYfbWV3
+ /kzenjSOTml6l1Ua//ZdIUhGa7Yoy2tJ0yLvUpXe3ivWr+zGl2nK11qXFWfk/A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1693088768;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=St3W86F10i0TUzK5XhKpToN8yca65KWPHA0eJ8WXxM4=;
- b=oLyIvMVmnkNIaMunnlFUBCyFwRG94QvxnzpclcZPXqgDltQLSUD+F+RGpafxqb++o2MJqN
- 0+Y5NRT+LrXPRBx1JMys3hl/xruY2oOCNU9vvi02Oz+I6F2HEjSN3w4N4ZEiqyD5BSzfo0
- UBhK8tAXO2ZSNaPMYXEsk17i82BX59yYbHUk0n3v0SvzAgjw+3ER78lNgaR4jLqJqN+yb0
- l1Bb8wFytLw6+lkbNA4AJbh4hv7LJLDZ4Cff8bqyuLGUKpny4T2J0CRSMgegPCCJW3yLmv
- usR810Rw7r+EYThuW6EwdNtS40eYDqtehaRgRyZnvrBA0rkwq1p1JY0wyaKxMw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693088766;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=St3W86F10i0TUzK5XhKpToN8yca65KWPHA0eJ8WXxM4=;
- b=W2FRnUPfiBMTXiUb0JuMIBpv8+HzvRK42v5bngWBYgIgjN1xojYQtV0x0qjVJfDTwZAMGS
- AAFuTi0/A8f5G7etnevELKC96x1geDDpxUTVcpO8uWBTguQuqRntxJM02Wn/QI9pytnCIr
- Esj9sYEJiuz9I6LEw3ZQNi/XuEQOAjs5J69MqR5YoyQ5h8bET8dC/2JK0dVxXeQFO/Ocg5
- RMBgVxQvDALiyB532LC7T+O2SSJiwb4o/yNLsvAet+RDKHHLlb3phFbjzKhxoojU4oJRCC
- nxQHefPW4PKHHyTlKEsHV3bKJat1sVp0xKTJEEMbJ1r0X260vjjdvXgcJPFACA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SyQASTRb76EavkNdW4yWNyjdPZnxdE6HNa/HniRinCY=;
+ b=YeNQ1r7bb7bTmdTMrzwOFRKwV7f4SawG/QkD6STIHkJuOAe++UCr6G2QHcB7bqjU6W8iCj
+ Wd4mlPmcYjGFifZeN1UgQyFKv8muw84pwIZLDAfw4JQ/fVLae+cV6zp42zGyd+CQziNCCC
+ Y5Q2aSSKLLoZtyPdP7tIwR/7ni/QuyigIX4A3dldpUMS9sVMxNVZI7jD+M1H/dsepi/knY
+ gyU9IzzmGNycKQn9xs2LskYqgoNL8VX2MOTznERIkj0bnbs7nh1QyeaIdpV7IogWwi2wfW
+ jc9JPgALrS2JW7WllcXQn13JmS91+ad/TZTxB6mHhS9xRB/tcJhK2qu09Dv53Q==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Angelo Durgehello <angelo.dureghello@timesys.com>,
  Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Huan Wang <alison.wang@nxp.com>, Ovidiu Panait <ovpanait@gmail.com>,
- Simon Glass <sjg@chromium.org>, Zong Li <zong.li@sifive.com>
-Subject: [PATCH v2 1/2] tools: relocate-rela: Add M68K support
-Date: Sun, 27 Aug 2023 00:25:35 +0200
-Message-Id: <20230826222536.26689-1-marek.vasut+renesas@mailbox.org>
+ Huan Wang <alison.wang@nxp.com>, Michal Simek <michal.simek@amd.com>,
+ Ovidiu Panait <ovpanait@gmail.com>, Zong Li <zong.li@sifive.com>
+Subject: [PATCH v2 2/2] arch: m68k: Implement relocation
+Date: Sun, 27 Aug 2023 00:25:36 +0200
+Message-Id: <20230826222536.26689-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230826222536.26689-1-marek.vasut+renesas@mailbox.org>
+References: <20230826222536.26689-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2c285272cc9eebfd78f
-X-MBO-RS-META: hoknx9e3jt7kfa49w1477wcem7eg77w8
+X-MBO-RS-META: t58pfayynqz5caspzzf7qgdaysqnr63i
+X-MBO-RS-ID: d7742bbead9f284b19e
+X-Rspamd-Queue-Id: 4RYBHQ4nBKz9t0S
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,12 +92,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add M68K ELF32 support into this tool, so it can patch static rela
-into M68K u-boot-nodtb.bin . This is the first step toward M68K
-relocation support, and in turn, removal of NEEDS_MANUAL_RELOC
-from the codebase altogether.
+Implement relocation for M68K. Perform all the updates in start.S
+relocate_code in assemby, since it is a simple matter of traversing
+the dynsym table and adding relocation offset - MONITOR_BASE to all
+the items in that table. The necessity to deal with MONITOR_BASE is
+a specific of M68K, where the ELF entry point is at offset 0x400,
+which is the MONITOR_BASE, while TEXT_BASE is at offset 0 .
 
-Tested-by: Michal Simek <michal.simek@amd.com> # microblaze, arm64
+This also removes the one last user of NEEDS_MANUAL_RELOC, so that
+could be finally cleaned up .
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Angelo Dureghello <angelo@kernel-space.org>
@@ -105,202 +116,509 @@ Cc: Ovidiu Panait <ovpanait@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Zong Li <zong.li@sifive.com>
 ---
-V2: - Add handling for R_68K_JMP_SLOT
-    - Add MB/ARM64 TB
+V2: Add RB from Simon
 ---
- tools/relocate-rela.c | 116 +++++++++++++++++++++++++++++++-----------
- 1 file changed, 85 insertions(+), 31 deletions(-)
+ arch/Kconfig                   |  1 -
+ arch/m68k/Kconfig              |  4 +--
+ arch/m68k/config.mk            |  6 ++--
+ arch/m68k/cpu/mcf523x/start.S  | 57 ++++++++++++++++++++------------
+ arch/m68k/cpu/mcf52x2/start.S  | 57 ++++++++++++++++++++------------
+ arch/m68k/cpu/mcf530x/start.S  | 59 +++++++++++++++++++++-------------
+ arch/m68k/cpu/mcf532x/start.S  | 57 ++++++++++++++++++++------------
+ arch/m68k/cpu/mcf5445x/start.S | 57 ++++++++++++++++++++------------
+ arch/m68k/cpu/u-boot.lds       | 14 ++++++++
+ 9 files changed, 204 insertions(+), 108 deletions(-)
 
-diff --git a/tools/relocate-rela.c b/tools/relocate-rela.c
-index e28e7fcc6f5..613abd25ef4 100644
---- a/tools/relocate-rela.c
-+++ b/tools/relocate-rela.c
-@@ -24,6 +24,30 @@
- #define R_AARCH64_RELATIVE	1027
- #endif
+diff --git a/arch/Kconfig b/arch/Kconfig
+index c9a33592252..2e2cbdf37aa 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -68,7 +68,6 @@ config M68K
+ 	bool "M68000 architecture"
+ 	select HAVE_PRIVATE_LIBGCC
+ 	select USE_PRIVATE_LIBGCC
+-	select NEEDS_MANUAL_RELOC
+ 	select SYS_BOOT_GET_CMDLINE
+ 	select SYS_BOOT_GET_KBD
+ 	select SYS_CACHE_SHIFT_4
+diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
+index 1911563e540..587edd50d7e 100644
+--- a/arch/m68k/Kconfig
++++ b/arch/m68k/Kconfig
+@@ -4,8 +4,8 @@ menu "M68000 architecture"
+ config SYS_ARCH
+ 	default "m68k"
  
-+#ifndef EM_M68K
-+#define EM_M68K			4
-+#endif
+-config NEEDS_MANUAL_RELOC
+-	def_bool y
++config STATIC_RELA
++	default y
+ 
+ # processor family
+ config MCF520x
+diff --git a/arch/m68k/config.mk b/arch/m68k/config.mk
+index 3ccbe492202..643b7d1d35d 100644
+--- a/arch/m68k/config.mk
++++ b/arch/m68k/config.mk
+@@ -3,8 +3,8 @@
+ # (C) Copyright 2000-2002
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-PLATFORM_CPPFLAGS += -D__M68K__
+-KBUILD_LDFLAGS  += -n
++PLATFORM_CPPFLAGS += -D__M68K__ -fPIC
++KBUILD_LDFLAGS    += -n -pie
+ PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
+ PLATFORM_RELFLAGS += -ffixed-d7 -msep-data
+-LDFLAGS_FINAL                  += --gc-sections
++LDFLAGS_FINAL     += --gc-sections -pie
+diff --git a/arch/m68k/cpu/mcf523x/start.S b/arch/m68k/cpu/mcf523x/start.S
+index d2a21c3279b..c609e82163c 100644
+--- a/arch/m68k/cpu/mcf523x/start.S
++++ b/arch/m68k/cpu/mcf523x/start.S
+@@ -177,6 +177,39 @@ relocate_code:
+ 	cmp.l	%a1,%a2
+ 	bgt.s	1b
+ 
++#define R_68K_32	1
++#define R_68K_RELATIVE	22
 +
-+#ifndef R_68K_NONE
-+#define R_68K_NONE		0
-+#endif
++	move.l #(__rel_dyn_start), %a1
++	move.l #(__rel_dyn_end), %a2
 +
-+#ifndef R_68K_32
-+#define R_68K_32		1
-+#endif
++fixloop:
++	move.l	(%a1)+, %d1	/* Elf32_Rela r_offset */
++	move.l	(%a1)+, %d2	/* Elf32_Rela r_info */
++	move.l	(%a1)+, %d3	/* Elf32_Rela r_addend */
 +
-+#ifndef R_68K_GLOB_DAT
-+#define R_68K_GLOB_DAT		20
-+#endif
++	andi.l	#0xff, %d2
++	cmp.l	#R_68K_32, %d2
++	beq.s	fixup
++	cmp.l	#R_68K_RELATIVE, %d2
++	beq.s	fixup
 +
-+#ifndef R_68K_JMP_SLOT
-+#define R_68K_JMP_SLOT		21
-+#endif
++	bra	fixnext
 +
-+#ifndef R_68K_RELATIVE
-+#define R_68K_RELATIVE		22
-+#endif
++fixup:
++	/* relative fix: store addend plus offset at dest location */
++	move.l	%a0, %a3
++	add.l	%d1, %a3
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %a3
++	move.l	(%a3), %d4
++	add.l	%a0, %d4
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %d4
++	move.l	%d4, (%a3)
 +
- #ifndef EM_MICROBLAZE
- #define EM_MICROBLAZE		189
- #endif
-@@ -46,6 +70,7 @@
- 
- static int ei_class;
- static int ei_data;
-+static int machine;
- 
- static uint64_t rela_start, rela_end, text_base, dyn_start;
- 
-@@ -111,7 +136,7 @@ static int decode_elf64(FILE *felf, char **argv)
- 	uint64_t sh_addr, sh_offset, sh_size;
- 	Elf64_Half sh_index, sh_num;
- 	Elf64_Shdr *sh_table; /* Elf symbol table */
--	int ret, i, machine;
-+	int ret, i;
- 	char *sh_str;
- 
- 	debug("64bit version\n");
-@@ -245,7 +270,7 @@ static int decode_elf32(FILE *felf, char **argv)
- 	uint32_t sh_addr, sh_offset, sh_size;
- 	Elf32_Half sh_index, sh_num;
- 	Elf32_Shdr *sh_table; /* Elf symbol table */
--	int ret, i, machine;
-+	int ret, i;
- 	char *sh_str;
- 
- 	debug("32bit version\n");
-@@ -262,12 +287,20 @@ static int decode_elf32(FILE *felf, char **argv)
- 	machine = elf16_to_cpu(header.e_machine);
- 	debug("Machine %d\n", machine);
- 
--	if (machine != EM_MICROBLAZE) {
-+	if (machine != EM_MICROBLAZE && machine != EM_M68K) {
- 		fprintf(stderr, "%s: Not supported machine type\n", argv[0]);
- 		return 30;
- 	}
- 
- 	text_base = elf32_to_cpu(header.e_entry);
-+	/*
-+	 * M68K ELF entry point is MONITOR_BASE, not TEXT_BASE.
-+	 * TEXT_BASE is always MONITOR_BASE &~ 0x7ff, so clear
-+	 * those bits here.
-+	 */
-+	if (machine == EM_M68K)
-+		text_base &= ~0x7ff;
++fixnext:
++	cmp.l	%a1, %a2
++	bge.s	fixloop
 +
- 	section_header_base = elf32_to_cpu(header.e_shoff);
- 	section_header_size = elf16_to_cpu(header.e_shentsize) *
- 			      elf16_to_cpu(header.e_shnum);
-@@ -488,25 +521,44 @@ static bool supported_rela32(Elf32_Rela *rela, uint32_t *type)
- 
- 	debug("Type:\t");
- 
--	switch (*type) {
--	case R_MICROBLAZE_32:
--		debug("R_MICROBLAZE_32\n");
--		return true;
--	case R_MICROBLAZE_GLOB_DAT:
--		debug("R_MICROBLAZE_GLOB_DAT\n");
--		return true;
--	case R_MICROBLAZE_NONE:
--		debug("R_MICROBLAZE_NONE - ignoring - do nothing\n");
--		return false;
--	case R_MICROBLAZE_REL:
--		debug("R_MICROBLAZE_REL\n");
--		return true;
--	default:
--		fprintf(stderr, "warning: unsupported relocation type %"
--			PRIu32 " at %" PRIx32 "\n", *type, rela->r_offset);
+ /*
+  * We are done. Do not return, instead branch to second part of board
+  * initialization, now running from RAM.
+@@ -191,10 +224,8 @@ clear_bss:
+ 	/*
+ 	 * Now clear BSS segment
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(_sbss - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a0, %d1
+-	add.l	#(_ebss - CONFIG_SYS_MONITOR_BASE),%d1
++	move.l	#(_sbss), %a1
++	move.l	#(_ebss), %d1
+ 6:
+ 	clr.l	(%a1)+
+ 	cmp.l	%a1,%d1
+@@ -203,24 +234,10 @@ clear_bss:
+ 	/*
+ 	 * fix got table in RAM
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(__got_start - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a1,%a5		/* * fix got pointer register a5 */
 -
--		return false;
-+	if (machine == EM_M68K) {
-+		switch (*type) {
-+		case R_68K_32:
-+			debug("R_68K_32\n");
-+			return true;
-+		case R_68K_GLOB_DAT:
-+			debug("R_68K_GLOB_DAT\n");
-+			return true;
-+		case R_68K_JMP_SLOT:
-+			debug("R_68K_JMP_SLOT\n");
-+			return true;
-+		case R_68K_NONE:
-+			debug("R_68K_NONE - ignoring - do nothing\n");
-+			return false;
-+		case R_68K_RELATIVE:
-+			debug("R_68K_RELATIVE\n");
-+			return true;
-+		}
-+	} else {
-+		switch (*type) {
-+		case R_MICROBLAZE_32:
-+			debug("R_MICROBLAZE_32\n");
-+			return true;
-+		case R_MICROBLAZE_GLOB_DAT:
-+			debug("R_MICROBLAZE_GLOB_DAT\n");
-+			return true;
-+		case R_MICROBLAZE_NONE:
-+			debug("R_MICROBLAZE_NONE - ignoring - do nothing\n");
-+			return false;
-+		case R_MICROBLAZE_REL:
-+			debug("R_MICROBLAZE_REL\n");
-+			return true;
-+		}
- 	}
-+	fprintf(stderr, "warning: unsupported relocation type %"
-+		PRIu32 " at %" PRIx32 "\n", *type, rela->r_offset);
-+
-+	return false;
- }
- 
- static int rela_elf32(char **argv, FILE *f)
-@@ -569,8 +621,8 @@ static int rela_elf32(char **argv, FILE *f)
- 
- 		debug("Addr:\t0x%" PRIx32 "\n", addr);
- 
--		switch (type) {
--		case R_MICROBLAZE_REL:
-+		if ((machine == EM_M68K && type == R_68K_RELATIVE) ||
-+		    (machine == EM_MICROBLAZE && type == R_MICROBLAZE_REL)) {
- 			if (fseek(f, addr, SEEK_SET) < 0) {
- 				fprintf(stderr, "%s: %s: seek to %"
- 					PRIx32 " failed: %s\n",
-@@ -585,9 +637,12 @@ static int rela_elf32(char **argv, FILE *f)
- 					argv[0], argv[1], addr);
- 				return 4;
- 			}
--			break;
--		case R_MICROBLAZE_32:
--		case R_MICROBLAZE_GLOB_DAT:
-+		} else if ((machine == EM_M68K &&
-+		            (type == R_68K_32 || type == R_68K_GLOB_DAT ||
-+			     type == R_68K_JMP_SLOT)) ||
-+			   (machine == EM_MICROBLAZE &&
-+			    (type == R_MICROBLAZE_32 ||
-+			     type == R_MICROBLAZE_GLOB_DAT))) {
- 			/* global symbols read it and add reloc offset */
- 			index = swrela.r_info >> 8;
- 			pos_dyn = dyn_start + sizeof(Elf32_Sym) * index;
-@@ -632,12 +687,11 @@ static int rela_elf32(char **argv, FILE *f)
- 					argv[0], argv[1], addr);
- 				return 4;
- 			}
+-	move.l	%a0, %a2
+-	add.l	#(__got_end - CONFIG_SYS_MONITOR_BASE),%a2
 -
--			break;
--		case R_MICROBLAZE_NONE:
-+		} else if (machine == EM_M68K && type == R_68K_NONE) {
-+			debug("R_68K_NONE - skip\n");
-+		} else if (machine == EM_MICROBLAZE && type == R_MICROBLAZE_NONE) {
- 			debug("R_MICROBLAZE_NONE - skip\n");
--			break;
--		default:
-+		} else {
- 			fprintf(stderr, "warning: unsupported relocation type %"
- 				PRIu32 " at %" PRIx32 "\n",
- 				type, rela.r_offset);
+-7:
+-	move.l	(%a1),%d1
+-	sub.l	#_start,%d1
+-	add.l	%a0,%d1
+-	move.l	%d1,(%a1)+
+-	cmp.l	%a2, %a1
+-	bne	7b
++	move.l	#(__got_start), %a5	/* fix got pointer register a5 */
+ 
+ 	/* calculate relative jump to board_init_r in ram */
+-	move.l	%a0, %a1
+-	add.l	#(board_init_r - CONFIG_SYS_MONITOR_BASE), %a1
++	move.l	#(board_init_r), %a1
+ 
+ 	/* set parameters for board_init_r */
+ 	move.l	%a0,-(%sp)		/* dest_addr */
+diff --git a/arch/m68k/cpu/mcf52x2/start.S b/arch/m68k/cpu/mcf52x2/start.S
+index 51d2e23df10..3a2760236ce 100644
+--- a/arch/m68k/cpu/mcf52x2/start.S
++++ b/arch/m68k/cpu/mcf52x2/start.S
+@@ -255,6 +255,39 @@ relocate_code:
+ 	cmp.l	%a1,%a2
+ 	bgt.s	1b
+ 
++#define R_68K_32	1
++#define R_68K_RELATIVE	22
++
++	move.l #(__rel_dyn_start), %a1
++	move.l #(__rel_dyn_end), %a2
++
++fixloop:
++	move.l	(%a1)+, %d1	/* Elf32_Rela r_offset */
++	move.l	(%a1)+, %d2	/* Elf32_Rela r_info */
++	move.l	(%a1)+, %d3	/* Elf32_Rela r_addend */
++
++	andi.l	#0xff, %d2
++	cmp.l	#R_68K_32, %d2
++	beq.s	fixup
++	cmp.l	#R_68K_RELATIVE, %d2
++	beq.s	fixup
++
++	bra	fixnext
++
++fixup:
++	/* relative fix: store addend plus offset at dest location */
++	move.l	%a0, %a3
++	add.l	%d1, %a3
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %a3
++	move.l	(%a3), %d4
++	add.l	%a0, %d4
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %d4
++	move.l	%d4, (%a3)
++
++fixnext:
++	cmp.l	%a1, %a2
++	bge.s	fixloop
++
+ /*
+  * We are done. Do not return, instead branch to second part of board
+  * initialization, now running from RAM.
+@@ -269,10 +302,8 @@ clear_bss:
+ 	/*
+ 	 * Now clear BSS segment
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(_sbss - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a0, %d1
+-	add.l	#(_ebss - CONFIG_SYS_MONITOR_BASE),%d1
++	move.l	#(_sbss), %a1
++	move.l	#(_ebss), %d1
+ 6:
+ 	clr.l	(%a1)+
+ 	cmp.l	%a1,%d1
+@@ -281,24 +312,10 @@ clear_bss:
+ 	/*
+ 	 * fix got table in RAM
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(__got_start - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a1,%a5			/* fix got pointer register a5 */
+-
+-	move.l	%a0, %a2
+-	add.l	#(__got_end - CONFIG_SYS_MONITOR_BASE),%a2
+-
+-7:
+-	move.l	(%a1),%d1
+-	sub.l	#_start,%d1
+-	add.l	%a0,%d1
+-	move.l	%d1,(%a1)+
+-	cmp.l	%a2, %a1
+-	bne	7b
++	move.l	#(__got_start), %a5	/* fix got pointer register a5 */
+ 
+ 	/* calculate relative jump to board_init_r in ram */
+-	move.l	%a0, %a1
+-	add.l	#(board_init_r - CONFIG_SYS_MONITOR_BASE), %a1
++	move.l	#(board_init_r), %a1
+ 
+ 	/* set parameters for board_init_r */
+ 	move.l	%a0,-(%sp)		/* dest_addr */
+diff --git a/arch/m68k/cpu/mcf530x/start.S b/arch/m68k/cpu/mcf530x/start.S
+index cef8d79aad1..552e0204b77 100644
+--- a/arch/m68k/cpu/mcf530x/start.S
++++ b/arch/m68k/cpu/mcf530x/start.S
+@@ -180,6 +180,39 @@ relocate_code:
+ 	cmp.l	%a1,%a2
+ 	bgt.s	1b
+ 
++#define R_68K_32	1
++#define R_68K_RELATIVE	22
++
++	move.l #(__rel_dyn_start), %a1
++	move.l #(__rel_dyn_end), %a2
++
++fixloop:
++	move.l	(%a1)+, %d1	/* Elf32_Rela r_offset */
++	move.l	(%a1)+, %d2	/* Elf32_Rela r_info */
++	move.l	(%a1)+, %d3	/* Elf32_Rela r_addend */
++
++	andi.l	#0xff, %d2
++	cmp.l	#R_68K_32, %d2
++	beq.s	fixup
++	cmp.l	#R_68K_RELATIVE, %d2
++	beq.s	fixup
++
++	bra	fixnext
++
++fixup:
++	/* relative fix: store addend plus offset at dest location */
++	move.l	%a0, %a3
++	add.l	%d1, %a3
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %a3
++	move.l	(%a3), %d4
++	add.l	%a0, %d4
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %d4
++	move.l	%d4, (%a3)
++
++fixnext:
++	cmp.l	%a1, %a2
++	bge.s	fixloop
++
+ /*
+  * We are done. Do not return, instead branch to second part of board
+  * initialization, now running from RAM.
+@@ -194,10 +227,8 @@ clear_bss:
+ 	/*
+ 	 * Now clear BSS segment
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(_sbss - CONFIG_SYS_MONITOR_BASE), %a1
+-	move.l	%a0, %d1
+-	add.l	#(_ebss - CONFIG_SYS_MONITOR_BASE), %d1
++	move.l	#(_sbss), %a1
++	move.l	#(_ebss), %d1
+ 6:
+ 	clr.l	(%a1)+
+ 	cmp.l	%a1,%d1
+@@ -206,26 +237,10 @@ clear_bss:
+ 	/*
+ 	 * fix got table in RAM
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(__got_start - CONFIG_SYS_MONITOR_BASE), %a1
+-
+-	/* fix got pointer register a5 */
+-	move.l	%a1,%a5
+-
+-	move.l	%a0, %a2
+-	add.l	#(__got_end - CONFIG_SYS_MONITOR_BASE), %a2
+-
+-7:
+-	move.l	(%a1),%d1
+-	sub.l	#_start, %d1
+-	add.l	%a0,%d1
+-	move.l	%d1,(%a1)+
+-	cmp.l	%a2, %a1
+-	bne	7b
++	move.l	#(__got_start), %a5	/* fix got pointer register a5 */
+ 
+ 	/* calculate relative jump to board_init_r in ram */
+-	move.l	%a0, %a1
+-	add.l	#(board_init_r - CONFIG_SYS_MONITOR_BASE), %a1
++	move.l	#(board_init_r), %a1
+ 
+ 	/* set parameters for board_init_r */
+ 	move.l	%a0,-(%sp)	/* dest_addr */
+diff --git a/arch/m68k/cpu/mcf532x/start.S b/arch/m68k/cpu/mcf532x/start.S
+index 72a2f99b7dd..c3eae73a9c0 100644
+--- a/arch/m68k/cpu/mcf532x/start.S
++++ b/arch/m68k/cpu/mcf532x/start.S
+@@ -192,6 +192,39 @@ relocate_code:
+ 	cmp.l	%a1,%a2
+ 	bgt.s	1b
+ 
++#define R_68K_32	1
++#define R_68K_RELATIVE	22
++
++	move.l #(__rel_dyn_start), %a1
++	move.l #(__rel_dyn_end), %a2
++
++fixloop:
++	move.l	(%a1)+, %d1	/* Elf32_Rela r_offset */
++	move.l	(%a1)+, %d2	/* Elf32_Rela r_info */
++	move.l	(%a1)+, %d3	/* Elf32_Rela r_addend */
++
++	andi.l	#0xff, %d2
++	cmp.l	#R_68K_32, %d2
++	beq.s	fixup
++	cmp.l	#R_68K_RELATIVE, %d2
++	beq.s	fixup
++
++	bra	fixnext
++
++fixup:
++	/* relative fix: store addend plus offset at dest location */
++	move.l	%a0, %a3
++	add.l	%d1, %a3
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %a3
++	move.l	(%a3), %d4
++	add.l	%a0, %d4
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %d4
++	move.l	%d4, (%a3)
++
++fixnext:
++	cmp.l	%a1, %a2
++	bge.s	fixloop
++
+ /*
+  * We are done. Do not return, instead branch to second part of board
+  * initialization, now running from RAM.
+@@ -206,10 +239,8 @@ clear_bss:
+ 	/*
+ 	 * Now clear BSS segment
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(_sbss - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a0, %d1
+-	add.l	#(_ebss - CONFIG_SYS_MONITOR_BASE),%d1
++	move.l	#(_sbss), %a1
++	move.l	#(_ebss), %d1
+ 6:
+ 	clr.l	(%a1)+
+ 	cmp.l	%a1,%d1
+@@ -218,24 +249,10 @@ clear_bss:
+ 	/*
+ 	 * fix got table in RAM
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(__got_start - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a1,%a5			/* fix got pointer register a5 */
+-
+-	move.l	%a0, %a2
+-	add.l	#(__got_end - CONFIG_SYS_MONITOR_BASE),%a2
+-
+-7:
+-	move.l	(%a1),%d1
+-	sub.l	#_start,%d1
+-	add.l	%a0,%d1
+-	move.l	%d1,(%a1)+
+-	cmp.l	%a2, %a1
+-	bne	7b
++	move.l	#(__got_start), %a5	/* fix got pointer register a5 */
+ 
+ 	/* calculate relative jump to board_init_r in ram */
+-	move.l	%a0, %a1
+-	add.l	#(board_init_r - CONFIG_SYS_MONITOR_BASE), %a1
++	move.l	#(board_init_r), %a1
+ 
+ 	/* set parameters for board_init_r */
+ 	move.l	%a0,-(%sp)		/* dest_addr */
+diff --git a/arch/m68k/cpu/mcf5445x/start.S b/arch/m68k/cpu/mcf5445x/start.S
+index a083c3d45d2..5c3bfff7918 100644
+--- a/arch/m68k/cpu/mcf5445x/start.S
++++ b/arch/m68k/cpu/mcf5445x/start.S
+@@ -533,6 +533,39 @@ relocate_code:
+ 	cmp.l	%a1,%a2
+ 	bgt.s	1b
+ 
++#define R_68K_32	1
++#define R_68K_RELATIVE	22
++
++	move.l #(__rel_dyn_start), %a1
++	move.l #(__rel_dyn_end), %a2
++
++fixloop:
++	move.l	(%a1)+, %d1	/* Elf32_Rela r_offset */
++	move.l	(%a1)+, %d2	/* Elf32_Rela r_info */
++	move.l	(%a1)+, %d3	/* Elf32_Rela r_addend */
++
++	andi.l	#0xff, %d2
++	cmp.l	#R_68K_32, %d2
++	beq.s	fixup
++	cmp.l	#R_68K_RELATIVE, %d2
++	beq.s	fixup
++
++	bra	fixnext
++
++fixup:
++	/* relative fix: store addend plus offset at dest location */
++	move.l	%a0, %a3
++	add.l	%d1, %a3
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %a3
++	move.l	(%a3), %d4
++	add.l	%a0, %d4
++	sub.l   #CONFIG_SYS_MONITOR_BASE, %d4
++	move.l	%d4, (%a3)
++
++fixnext:
++	cmp.l	%a1, %a2
++	bge.s	fixloop
++
+ /*
+  * We are done. Do not return, instead branch to second part of board
+  * initialization, now running from RAM.
+@@ -547,10 +580,8 @@ clear_bss:
+ 	/*
+ 	 * Now clear BSS segment
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(_sbss - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a0, %d1
+-	add.l	#(_ebss - CONFIG_SYS_MONITOR_BASE),%d1
++	move.l	#(_sbss), %a1
++	move.l	#(_ebss), %d1
+ 6:
+ 	clr.l	(%a1)+
+ 	cmp.l	%a1,%d1
+@@ -559,24 +590,10 @@ clear_bss:
+ 	/*
+ 	 * fix got table in RAM
+ 	 */
+-	move.l	%a0, %a1
+-	add.l	#(__got_start - CONFIG_SYS_MONITOR_BASE),%a1
+-	move.l	%a1,%a5			/* fix got pointer register a5 */
+-
+-	move.l	%a0, %a2
+-	add.l	#(__got_end - CONFIG_SYS_MONITOR_BASE),%a2
+-
+-7:
+-	move.l	(%a1),%d1
+-	sub.l	#_start,%d1
+-	add.l	%a0,%d1
+-	move.l	%d1,(%a1)+
+-	cmp.l	%a2, %a1
+-	bne	7b
++	move.l	#(__got_start), %a5	/* fix got pointer register a5 */
+ 
+ 	/* calculate relative jump to board_init_r in ram */
+-	move.l	%a0, %a1
+-	add.l	#(board_init_r - CONFIG_SYS_MONITOR_BASE), %a1
++	move.l	#(board_init_r), %a1
+ 
+ 	/* set parameters for board_init_r */
+ 	move.l	%a0,-(%sp)		/* dest_addr */
+diff --git a/arch/m68k/cpu/u-boot.lds b/arch/m68k/cpu/u-boot.lds
+index 133f79150ba..03d427cd36c 100644
+--- a/arch/m68k/cpu/u-boot.lds
++++ b/arch/m68k/cpu/u-boot.lds
+@@ -76,6 +76,20 @@ SECTIONS
+ 	. = ALIGN(4);
+ 	__init_end = .;
+ 
++	. = ALIGN(4);
++	__rel_dyn_start = .;
++	.rela.dyn : {
++		*(.rela.dyn)
++	}
++	__rel_dyn_end = .;
++
++	. = ALIGN(4);
++	__dyn_sym_start = .;
++	.dynsym : {
++		*(.dynsym)
++	}
++	__dyn_sym_end = .;
++
+ 	_end = .;
+ 
+ 	__bss_start = .;
 -- 
 2.40.1
 
