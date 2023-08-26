@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19356C83F11
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 22:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D4BDC83F11
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 23:49:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 645578144A;
-	Sun, 27 Aug 2023 00:29:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 30BDD8073D;
+	Sun, 27 Aug 2023 01:49:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="O6oUmX22";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Rx2T7u/k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OtcK7rs9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9797482BBF; Sun, 27 Aug 2023 00:29:15 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 500E580B98; Sun, 27 Aug 2023 01:49:51 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B8D381420
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 00:29:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96E9880726
+ for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 01:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RYBLw5tBfz9t6W;
- Sun, 27 Aug 2023 00:29:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693088952;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EbAl92T++5LtEvWFLmPPgKRNZkOrHPgjI3sHqq++TWU=;
- b=O6oUmX22fIaPAvlZyV+UsmstdRoYn+ptrr5ERzroxlbVLd/R5YImAjLpXOZxhLAIqHsv8k
- dds0ejA6SdkUPcJlbD+qwdi+WOsuD0ccens/kjz2dZWGD7R1KflreUUn4/LUC2NXzzskuk
- pcwp7hLczlRSwkkFOYM1d7XjlOHowFHFYG2iiH+hxVwX+yV60G2AmMi47Em4KsFVJE05/A
- ydESWuju65iPUAcqqn4nSA3u5sgeeW8xsCXPAxzC1BO4rr5V93eV1Np0+6iQR3sUxnISFq
- ui/ftV0G4jvSC8UKe6An1BqgzF1tncstO8YZm3xt0MOzMyl98CFLZyY0Jkx00w==
-Message-ID: <8eb81e26-acfa-db20-2a23-ca95b9f3d4c3@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693088950;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=EbAl92T++5LtEvWFLmPPgKRNZkOrHPgjI3sHqq++TWU=;
- b=Rx2T7u/ktC9RlLUOotUlqVCazJNjZnQRg8/PYMOKUKVyRfZGBKmg4KfSjlyk1i5YnLWG8C
- B0Nwtblvhb8++ZKqugK5g8UJpCp+s0QUzPXdhw0Da/u4KAmrlSCPqrkvPbU343xKiCcUA3
- +UmktMt3m/5uByOUi9nIexQwzmLgKrxSOECXIVsw3sw73WWiGtb5Ngwoxc6K1K80cbfrqN
- IUC/0/jnNQhdZW3ZxElkIv+UJR5C5jU6+avnwDOZNzPMuUcrshm9IIExEW2Zg62R3CyZ9V
- TNsE1pyNprGBlpnEaloZ2SAbeIthy4MfpCrXr6nsqKHAN/DSfGJM91nr6c8eaw==
-Date: Sun, 27 Aug 2023 00:29:08 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-58dce1f42d6so43316397b3.0
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 16:49:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1693093787; x=1693698587;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0v7i7Ys/wTBlptiHZxYPGmIE2xoYFhE2T+lY92KrOto=;
+ b=OtcK7rs9RrWltDbm3t1JI3p2GIwQM7HYsVGVKhDsUHwd31rEJs0D6ArGzMdbD5kVNa
+ pSly00hNTrcHnpdp2kYqY23p+6eozm5ixtL4hvy3Y1fVE2Pzay/1Ar3yJsauapTSnGU+
+ AfcaCoz8GHZjadt3kajxBWOa1TDn8GJWYMOyI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693093787; x=1693698587;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0v7i7Ys/wTBlptiHZxYPGmIE2xoYFhE2T+lY92KrOto=;
+ b=PM131kKhdEdZ6lUVtDJ4OahaetCb8Q7UZNOcORJxo/K7MvhC0BQX+RfuFUfgs7nf0U
+ h/uNLeEbQhpqWQCm1aTuO33DxpzgH2q/HlBX4bgPjr8vQRS+AkW92F0Q9LCnyII77aLa
+ w/QEdXiaMNNwebvCbv+U0nOpguehqTT3h4U9RKPYFlAAFwUTi/uaf0lI2L8jIYL9gsQp
+ jBdwyct9/NtQSudit+d4IylIniOuemPEx+zDyfb1/R7g699mljTlNxDclEQIHhR0qA6C
+ kGpqFUjrhZju4+mman/CnuyIwJl17hWFWCqRqYupXwdr1/EmU8lUCJH7oHGdGb9R1gAy
+ doig==
+X-Gm-Message-State: AOJu0YyDpbm1yss4zxjTZYnM2MWgjiIoh/c3W34ati1EXigaFGYrbxLC
+ GIJF38PJg9cBG063BeDIOHlAQQ==
+X-Google-Smtp-Source: AGHT+IEM271c31qlZIm6oovAho6teVVZ8XwvswdK1tkUXPFZOi9oSFaEhVzGHnEgiZpBgzmNCbE0xg==
+X-Received: by 2002:a81:6dd3:0:b0:56f:fd0a:588d with SMTP id
+ i202-20020a816dd3000000b0056ffd0a588dmr21898294ywc.8.1693093787331; 
+ Sat, 26 Aug 2023 16:49:47 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-cf2b-5e4e-16cb-5c6a.res6.spectrum.com.
+ [2603:6081:7b00:6400:cf2b:5e4e:16cb:5c6a])
+ by smtp.gmail.com with ESMTPSA id
+ v17-20020a81a551000000b00586b5b6347csm1292022ywg.109.2023.08.26.16.49.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 26 Aug 2023 16:49:46 -0700 (PDT)
+Date: Sat, 26 Aug 2023 19:49:44 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>
+Subject: Re: [PATCH v2 00/23] bootstd: Support ChromiumOS better
+Message-ID: <20230826234944.GU3953269@bill-the-cat>
+References: <20230824195553.1685996-1-sjg@chromium.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/2] tools: relocate-rela: Add M68K support
-Content-Language: en-US
-To: Angelo Dureghello <angelo@kernel-space.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Angelo Durgehello <angelo.dureghello@timesys.com>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Huan Wang <alison.wang@nxp.com>, Michal Simek <michal.simek@amd.com>,
- Ovidiu Panait <ovpanait@gmail.com>, Simon Glass <sjg@chromium.org>,
- Zong Li <zong.li@sifive.com>
-References: <20230730222051.227660-1-marek.vasut+renesas@mailbox.org>
- <7413294c-068f-f0ea-8247-8b8ea414a6c5@kernel-space.org>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <7413294c-068f-f0ea-8247-8b8ea414a6c5@kernel-space.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 11ff38a9ca2d5a68f6b
-X-MBO-RS-META: its51rzo913ap8of68sdxa3sixxhy7re
-X-Rspamd-Queue-Id: 4RYBLw5tBfz9t6W
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zStYde1B0Dd6FcMm"
+Content-Disposition: inline
+In-Reply-To: <20230824195553.1685996-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,58 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/26/23 09:44, Angelo Dureghello wrote:
-> Hi Marek,
-> 
-> thanks a lot for the job i should have done.
-> 
-> Tested on real hw:
-> 
-> m5282evb   worked out of the box
-> mcf54415   not working,
-> had a lot of unsupported relocation type for R_68K_JMP_SLOT
-> mcf5307    need to fix the hw, will do in short
-> 
-> i had to add this fix:
-> 
-> diff --git a/tools/relocate-rela.c b/tools/relocate-rela.c
-> index 2d008c7f60..9722a6291a 100644
-> --- a/tools/relocate-rela.c
-> +++ b/tools/relocate-rela.c
-> @@ -40,6 +40,10 @@
->   #define R_68K_GLOB_DAT         20
->   #endif
-> 
-> +#ifndef R_68K_JMP_SLOT
-> +#define R_68K_JMP_SLOT          21
-> +#endif
-> +
->   #ifndef R_68K_RELATIVE
->   #define R_68K_RELATIVE         22
->   #endif
-> @@ -531,6 +535,9 @@ static bool supported_rela32(Elf32_Rela *rela, 
-> uint32_t *type)
->                  case R_68K_RELATIVE:
->                          debug("R_68K_RELATIVE\n");
->                          return true;
-> +               case R_68K_JMP_SLOT:
-> +                        debug("R_68K_JMP_SLOT\n");
-> +                        return true;
->                  }
->          } else {
->                  switch (*type) {
-> @@ -631,8 +638,9 @@ static int rela_elf32(char **argv, FILE *f)
->                                  return 4;
->                          }
->                  } else if ((machine == EM_M68K &&
-> -                           (type == R_68K_32 || type == 
-> R_68K_GLOB_DAT)) ||
-> -                          (machine == EM_MICROBLAZE &&
-> +                           (type == R_68K_32 || type == R_68K_GLOB_DAT ||
-> +                            type == R_68K_JMP_SLOT)) ||
-> +                           (machine == EM_MICROBLAZE &&
->                              (type == R_MICROBLAZE_32 ||
->                               type == R_MICROBLAZE_GLOB_DAT))) {
->                          /* global symbols read it and add reloc offset */
 
-Wrapped into V2, thanks
+--zStYde1B0Dd6FcMm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Aug 24, 2023 at 01:55:23PM -0600, Simon Glass wrote:
+
+> This updates the ChromiumOS bootmeth to detect multiple kernel partitions
+> on a disk.
+>=20
+> It also includes minor code improvements to the partition drivers,
+> including accessors for the optional fields.
+>=20
+> This series also includes some other related tweaks in testing.
+
+For the series, applied to u-boot/next, thanks.
+
+--=20
+Tom
+
+--zStYde1B0Dd6FcMm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTqj48ACgkQFHw5/5Y0
+tyyFQAwAm3wbtL++Af90DwrXH7f2NEcDakvyfkjCGYrqvkXSIJ1w8KKPF8nOnRTe
+/8sAZiZFo/8cfozCM1e0DgaVQGahiVCaeXn93ddv3QyExcCS8MlMnGhDIzp5YBu/
+UOK459tG7t4JyXjOvScbuAYJoHkJj5gyXEtJLbzP+GKLvszy0Y8p09YJmGRdQssP
+qxkrgNQfox1OsG9H2Wx0qeu300eRGmiWqN01zLnMdTJpESsa1OC9X8TBtc855JIE
+jHOyQBuPmpQ/bS7vQ9+2seos/nMCZuY+nmw7EeXdxE9iWIOz77mwtZbS6EzPj5/A
+tPIoidfeEWzUw21gnHkRVyAn5aNzPjVUhvOOgRt3FKlrBS+3N92/jQFNsXHeVKyM
+g6yQhf9Y7bQnSrrxQD8HcebVNgfZKXSxwxyqgepB787aO9LOEq5tQ6e2RehmeFnz
+gJYCUSG3NjRJWzZOd8oIH7KVD8sfPCT2D2uWZRExq0qJs29aWrHGjpP+yAc7KZbs
+AbW4lWGX
+=DRIF
+-----END PGP SIGNATURE-----
+
+--zStYde1B0Dd6FcMm--
