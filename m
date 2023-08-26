@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 205CBC83F01
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 07:44:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEACC83F16
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 08:58:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C73286963;
-	Sat, 26 Aug 2023 09:44:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id CBD6C86B12;
+	Sat, 26 Aug 2023 10:58:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="oW239jVk";
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="RIRF/UVG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZhhAtnI3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41F7786968; Sat, 26 Aug 2023 09:44:49 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown [IPv6:2a01:4f8:c2c:5a84::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 31BAE86B19; Sat, 26 Aug 2023 10:58:07 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83D1D8642C
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 09:44:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8C4FA86AFE
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 10:58:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-Received: from ziongate (localhost [127.0.0.1])
- by ziongate (OpenSMTPD) with ESMTP id 97f2848e;
- Sat, 26 Aug 2023 07:44:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha1; c=simple; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=default;
- bh=hQ+tLhys0N+bSmyjQdr3HS4X2ZA=; b=oW239jVkU3LV/l5PCMw5/adSx4nU
- uwNiZp3drsM2XobORJnnlvjKSLYgnoKMhX2t47lJXRKzuba/tWI79RezX2BppVEF
- PETZz4FkXY32JuuIAPaoD78uFRKD6nHis+20n4ssSramlHKD3sWeGVi732gcgUUh
- omPXPhMyrf7XqxI=
-DomainKey-Signature: a=rsa-sha1; c=simple; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; q=dns; s=
- default; b=g+4bmwOkTxRVREYy67dpkC0g0kbbR6/IpAqCCVxcc5PJetKIEeXZO
- vZipUolziuKudTl9kW9BgXd+VY9A7ASsOTVSI61NUUT2Eg/1n4LeVkh4TmtHzn0j
- YchwGAih5L7jSTO572lCkYfc0OtTLRLZmJ7KXwL1yFJOG1T5JXYWMg=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=20190913; t=1693035885;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=oRihDlJvFXdFvQvF6G7igLiTV2aSO8ejm9Rzs3RNzU4=;
- b=RIRF/UVGb+PICDnyWN6fSiSWh/TJGQP6HytZdCk2Lko1g5x0cQvNOUXAOV0mwETfNZ7prM
- eN86WuxveLkyca27xdgyQU+oYyHmVqUfu4ULVamYKauv/CcR91GQQw4QNTOvfegM/6mXO0
- w0hjrbN97f6gLu+BP96utlF7r6wZfU0=
-Received: from [192.168.0.2] (host-87-4-233-120.retail.telecomitalia.it
- [87.4.233.120]) by ziongate (OpenSMTPD) with ESMTPSA id 8016c498
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Sat, 26 Aug 2023 07:44:45 +0000 (UTC)
-Message-ID: <7413294c-068f-f0ea-8247-8b8ea414a6c5@kernel-space.org>
-Date: Sat, 26 Aug 2023 09:44:17 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-51cff235226so3583430a12.0
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 01:58:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693040284; x=1693645084;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JdY4eeNkX5zrLStF9GnrtJLkE7ZTWrWN3Cx+qpaLacA=;
+ b=ZhhAtnI3Q1kMyQp03CC7buMCQNm0drHuG+AEb9VKyydeOIG1P8GeBLRwH/z7JUlDZ9
+ +0IEAf7mb/scpnz1OgDwrjlQjhU1YpWNxUOOa0FbG+eCwqMC+PcWYfyrKBhRbWUVFGxW
+ Q+BYq6qUfZTWv3Q4tuby9SWafP/0aMk04AD4svdkOCpSROoi6volzpUROoD5cPRVY6u5
+ J5H1E5ufT2Tm22VB2hRySeJCt4h39kWBiuP1mWv9BDljJB+4qA7/8Unc3Tf8zr72UpLR
+ I7xJ+BWDjGGBpq7iQPCmVBCkUlLXTWO0WKfkV0EzB7fN2NlyZTwSrXU2DBEJq437uGdm
+ JCvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693040284; x=1693645084;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JdY4eeNkX5zrLStF9GnrtJLkE7ZTWrWN3Cx+qpaLacA=;
+ b=A6iUFInalRPClMdHk5hbldhn2k5qKq/j7SdjcC8Yl7uZuKhRcDFltWP6gdEB9TKvQ6
+ Bg8b5pabL8g60NeHXCuF+yp75Fnfv5pIHK6yj0qzSG9ZuFaRqq9cEc/HdhyDAI5jQwT/
+ iFdA7C+5V5Wk53QVykkUnxyIMEZN/8No26s3dZP9/fhSejN7OJHB4XH9iwaK0b3D64ld
+ LsJ6kaIfNUItTjrNizE/mo/dR4wyBeHhbtVIgDdG18J8BeVg8JyyRm7JgMjADIJFajrV
+ rr3i/kQu0PFoWfB7EwsFQ069PPyKY4YGOZuPOeXCeIbw9nk8WKEULG6NrDUThqwReIfv
+ UBeg==
+X-Gm-Message-State: AOJu0Yy6B+kEI9ae8NNPH2nP8SffNInGUJJ5H7XJqGfQ/vTT5I+PVhOa
+ vkx61VpfeqtRDuxOc1xd0Ox6UVcbX14mA5KVk4gbuQ==
+X-Google-Smtp-Source: AGHT+IEVI8vMbbpmmC10eU1c7d0kMAY/MaUMGn36xvAES2JeMD5+Zyuop+V+/LBXOvdyOHWskky+pKvpbQHuLM9IrzI=
+X-Received: by 2002:a05:6402:50c9:b0:522:405f:a7 with SMTP id
+ h9-20020a05640250c900b00522405f00a7mr21416917edb.16.1693040283265; Sat, 26
+ Aug 2023 01:58:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Betterbird/102.11.0
-Subject: Re: [PATCH 1/2] tools: relocate-rela: Add M68K support
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Angelo Durgehello <angelo.dureghello@timesys.com>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Huan Wang <alison.wang@nxp.com>, Michal Simek <michal.simek@amd.com>,
- Ovidiu Panait <ovpanait@gmail.com>, Simon Glass <sjg@chromium.org>,
- Zong Li <zong.li@sifive.com>
-References: <20230730222051.227660-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20230730222051.227660-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
+ <CADg8p95Dtvm++wY=74HVBvHL0cNRxKdSEv5ZtaLAbpp6m+hU9Q@mail.gmail.com>
+ <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
+In-Reply-To: <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Sat, 26 Aug 2023 14:27:52 +0530
+Message-ID: <CADg8p96k46Uuz28nJq18S5jRKcOePX_1+jqbomm=vsZD6bSqQg@mail.gmail.com>
+Subject: Re: [PATCH] fwu: Initialize global fwu library state during CI test
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
+ Etienne Carriere <etienne.carriere@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jassi Brar <jaswinder.singh@linaro.org>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,264 +92,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On Fri, 25 Aug 2023 at 21:30, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 8/25/23 12:52, Sughosh Ganu wrote:
+> > On Wed, 23 Aug 2023 at 05:47, Marek Vasut
+> > <marek.vasut+renesas@mailbox.org> wrote:
+> >>
+> >> The current CI test worked by sheer luck, the g_dev global pointer
+> >> in the fwu library was never initialized and the test equally well
+> >> failed on sandbox64. Trigger the main loop in sandbox tests too to
+> >> initialize that global state, and move the sandbox specific exit
+> >> from fwu_boottime_checks after g_dev is initialized.
+> >>
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> ---
+> >> Cc: Etienne Carriere <etienne.carriere@linaro.org>
+> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> Cc: Jassi Brar <jaswinder.singh@linaro.org>
+> >> Cc: Masahisa Kojima <masahisa.kojima@linaro.org>
+> >> Cc: Michal Simek <michal.simek@amd.com>
+> >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> >> Cc: Simon Glass <sjg@chromium.org>
+> >> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >> ---
+> >>   lib/fwu_updates/fwu.c | 12 ++++++------
+> >>   test/dm/fwu_mdata.c   | 12 ++++++++++++
+> >>   2 files changed, 18 insertions(+), 6 deletions(-)
+> >
+> > Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >
+> > But I have a question below.
+> >
+> >>
+> >> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> >> index 4d0c8b84b9d..22bdc78df59 100644
+> >> --- a/lib/fwu_updates/fwu.c
+> >> +++ b/lib/fwu_updates/fwu.c
+> >> @@ -623,18 +623,18 @@ static int fwu_boottime_checks(void *ctx, struct event *event)
+> >>          int ret;
+> >>          u32 boot_idx, active_idx;
+> >>
+> >> -       /* Don't have boot time checks on sandbox */
+> >> -       if (IS_ENABLED(CONFIG_SANDBOX)) {
+> >> -               boottime_check = 1;
+> >> -               return 0;
+> >> -       }
+> >> -
+> >>          ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
+> >>          if (ret) {
+> >>                  log_debug("Cannot find fwu device\n");
+> >>                  return ret;
+> >>          }
+> >>
+> >> +       /* Don't have boot time checks on sandbox */
+> >> +       if (IS_ENABLED(CONFIG_SANDBOX)) {
+> >> +               boottime_check = 1;
+> >> +               return 0;
+> >> +       }
+> >> +
+> >>          ret = fwu_get_mdata(NULL);
+> >>          if (ret) {
+> >>                  log_debug("Unable to read meta-data\n");
+> >> diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
+> >> index 8b5c83ef4e2..52018f610fe 100644
+> >> --- a/test/dm/fwu_mdata.c
+> >> +++ b/test/dm/fwu_mdata.c
+> >> @@ -93,6 +93,12 @@ static int dm_test_fwu_mdata_read(struct unit_test_state *uts)
+> >>          struct udevice *dev;
+> >>          struct fwu_mdata mdata = { 0 };
+> >>
+> >> +       /*
+> >> +        * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
+> >> +        * to populate g_dev global pointer in that library.
+> >> +        */
+> >> +       event_notify_null(EVT_MAIN_LOOP);
+> >> +
+> >
+> > Are these explicit invocations required? Should fwu_boottime_checks
+> > not get called through run_main_loop() during boot?
+>
+> board_r.c event_notify_null(EVT_MAIN_LOOP); is not reached in sandbox:
+>
+> 571 static int run_main_loop(void)
+> 572 {
+> 573 #ifdef CONFIG_SANDBOX <----------- because of this
+> 574         sandbox_main_loop_init();
+> 575 #endif
+> 576
+> 577         event_notify_null(EVT_MAIN_LOOP);
 
-thanks a lot for the job i should have done.
+Okay. I see that the line on 577 does not get called before the test
+when invoked through the command line. Thanks.
 
-Tested on real hw:
-
-m5282evb   worked out of the box
-mcf54415   not working,
-had a lot of unsupported relocation type for R_68K_JMP_SLOT
-mcf5307    need to fix the hw, will do in short
-
-i had to add this fix:
-
-diff --git a/tools/relocate-rela.c b/tools/relocate-rela.c
-index 2d008c7f60..9722a6291a 100644
---- a/tools/relocate-rela.c
-+++ b/tools/relocate-rela.c
-@@ -40,6 +40,10 @@
-  #define R_68K_GLOB_DAT         20
-  #endif
-
-+#ifndef R_68K_JMP_SLOT
-+#define R_68K_JMP_SLOT          21
-+#endif
-+
-  #ifndef R_68K_RELATIVE
-  #define R_68K_RELATIVE         22
-  #endif
-@@ -531,6 +535,9 @@ static bool supported_rela32(Elf32_Rela *rela, 
-uint32_t *type)
-                 case R_68K_RELATIVE:
-                         debug("R_68K_RELATIVE\n");
-                         return true;
-+               case R_68K_JMP_SLOT:
-+                        debug("R_68K_JMP_SLOT\n");
-+                        return true;
-                 }
-         } else {
-                 switch (*type) {
-@@ -631,8 +638,9 @@ static int rela_elf32(char **argv, FILE *f)
-                                 return 4;
-                         }
-                 } else if ((machine == EM_M68K &&
--                           (type == R_68K_32 || type == R_68K_GLOB_DAT)) ||
--                          (machine == EM_MICROBLAZE &&
-+                           (type == R_68K_32 || type == R_68K_GLOB_DAT ||
-+                            type == R_68K_JMP_SLOT)) ||
-+                           (machine == EM_MICROBLAZE &&
-                             (type == R_MICROBLAZE_32 ||
-                              type == R_MICROBLAZE_GLOB_DAT))) {
-                         /* global symbols read it and add reloc offset */
-
-
-
-On 31/07/23 12:20 AM, Marek Vasut wrote:
-> Add M68K ELF32 support into this tool, so it can patch static rela
-> into M68K u-boot-nodtb.bin . This is the first step toward M68K
-> relocation support, and in turn, removal of NEEDS_MANUAL_RELOC
-> from the codebase altogether.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Angelo Dureghello <angelo@kernel-space.org>
-> Cc: Angelo Durgehello <angelo.dureghello@timesys.com>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Huan Wang <alison.wang@nxp.com>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Ovidiu Panait <ovpanait@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Zong Li <zong.li@sifive.com>
-> ---
->   tools/relocate-rela.c | 108 ++++++++++++++++++++++++++++++------------
->   1 file changed, 77 insertions(+), 31 deletions(-)
-> 
-> diff --git a/tools/relocate-rela.c b/tools/relocate-rela.c
-> index e28e7fcc6f5..2d008c7f602 100644
-> --- a/tools/relocate-rela.c
-> +++ b/tools/relocate-rela.c
-> @@ -24,6 +24,26 @@
->   #define R_AARCH64_RELATIVE	1027
->   #endif
->   
-> +#ifndef EM_M68K
-> +#define EM_M68K			4
-> +#endif
-> +
-> +#ifndef R_68K_NONE
-> +#define R_68K_NONE		0
-> +#endif
-> +
-> +#ifndef R_68K_32
-> +#define R_68K_32		1
-> +#endif
-> +
-> +#ifndef R_68K_GLOB_DAT
-> +#define R_68K_GLOB_DAT		20
-> +#endif
-> +
-> +#ifndef R_68K_RELATIVE
-> +#define R_68K_RELATIVE		22
-> +#endif
-> +
->   #ifndef EM_MICROBLAZE
->   #define EM_MICROBLAZE		189
->   #endif
-> @@ -46,6 +66,7 @@
->   
->   static int ei_class;
->   static int ei_data;
-> +static int machine;
->   
->   static uint64_t rela_start, rela_end, text_base, dyn_start;
->   
-> @@ -111,7 +132,7 @@ static int decode_elf64(FILE *felf, char **argv)
->   	uint64_t sh_addr, sh_offset, sh_size;
->   	Elf64_Half sh_index, sh_num;
->   	Elf64_Shdr *sh_table; /* Elf symbol table */
-> -	int ret, i, machine;
-> +	int ret, i;
->   	char *sh_str;
->   
->   	debug("64bit version\n");
-> @@ -245,7 +266,7 @@ static int decode_elf32(FILE *felf, char **argv)
->   	uint32_t sh_addr, sh_offset, sh_size;
->   	Elf32_Half sh_index, sh_num;
->   	Elf32_Shdr *sh_table; /* Elf symbol table */
-> -	int ret, i, machine;
-> +	int ret, i;
->   	char *sh_str;
->   
->   	debug("32bit version\n");
-> @@ -262,12 +283,20 @@ static int decode_elf32(FILE *felf, char **argv)
->   	machine = elf16_to_cpu(header.e_machine);
->   	debug("Machine %d\n", machine);
->   
-> -	if (machine != EM_MICROBLAZE) {
-> +	if (machine != EM_MICROBLAZE && machine != EM_M68K) {
->   		fprintf(stderr, "%s: Not supported machine type\n", argv[0]);
->   		return 30;
->   	}
->   
->   	text_base = elf32_to_cpu(header.e_entry);
-> +	/*
-> +	 * M68K ELF entry point is MONITOR_BASE, not TEXT_BASE.
-> +	 * TEXT_BASE is always MONITOR_BASE &~ 0x7ff, so clear
-> +	 * those bits here.
-> +	 */
-> +	if (machine == EM_M68K)
-> +		text_base &= ~0x7ff;
-> +
->   	section_header_base = elf32_to_cpu(header.e_shoff);
->   	section_header_size = elf16_to_cpu(header.e_shentsize) *
->   			      elf16_to_cpu(header.e_shnum);
-> @@ -488,25 +517,41 @@ static bool supported_rela32(Elf32_Rela *rela, uint32_t *type)
->   
->   	debug("Type:\t");
->   
-> -	switch (*type) {
-> -	case R_MICROBLAZE_32:
-> -		debug("R_MICROBLAZE_32\n");
-> -		return true;
-> -	case R_MICROBLAZE_GLOB_DAT:
-> -		debug("R_MICROBLAZE_GLOB_DAT\n");
-> -		return true;
-> -	case R_MICROBLAZE_NONE:
-> -		debug("R_MICROBLAZE_NONE - ignoring - do nothing\n");
-> -		return false;
-> -	case R_MICROBLAZE_REL:
-> -		debug("R_MICROBLAZE_REL\n");
-> -		return true;
-> -	default:
-> -		fprintf(stderr, "warning: unsupported relocation type %"
-> -			PRIu32 " at %" PRIx32 "\n", *type, rela->r_offset);
-> -
-> -		return false;
-> +	if (machine == EM_M68K) {
-> +		switch (*type) {
-> +		case R_68K_32:
-> +			debug("R_68K_32\n");
-> +			return true;
-> +		case R_68K_GLOB_DAT:
-> +			debug("R_68K_GLOB_DAT\n");
-> +			return true;
-> +		case R_68K_NONE:
-> +			debug("R_68K_NONE - ignoring - do nothing\n");
-> +			return false;
-> +		case R_68K_RELATIVE:
-> +			debug("R_68K_RELATIVE\n");
-> +			return true;
-> +		}
-> +	} else {
-> +		switch (*type) {
-> +		case R_MICROBLAZE_32:
-> +			debug("R_MICROBLAZE_32\n");
-> +			return true;
-> +		case R_MICROBLAZE_GLOB_DAT:
-> +			debug("R_MICROBLAZE_GLOB_DAT\n");
-> +			return true;
-> +		case R_MICROBLAZE_NONE:
-> +			debug("R_MICROBLAZE_NONE - ignoring - do nothing\n");
-> +			return false;
-> +		case R_MICROBLAZE_REL:
-> +			debug("R_MICROBLAZE_REL\n");
-> +			return true;
-> +		}
->   	}
-> +	fprintf(stderr, "warning: unsupported relocation type %"
-> +		PRIu32 " at %" PRIx32 "\n", *type, rela->r_offset);
-> +
-> +	return false;
->   }
->   
->   static int rela_elf32(char **argv, FILE *f)
-> @@ -569,8 +614,8 @@ static int rela_elf32(char **argv, FILE *f)
->   
->   		debug("Addr:\t0x%" PRIx32 "\n", addr);
->   
-> -		switch (type) {
-> -		case R_MICROBLAZE_REL:
-> +		if ((machine == EM_M68K && type == R_68K_RELATIVE) ||
-> +		    (machine == EM_MICROBLAZE && type == R_MICROBLAZE_REL)) {
->   			if (fseek(f, addr, SEEK_SET) < 0) {
->   				fprintf(stderr, "%s: %s: seek to %"
->   					PRIx32 " failed: %s\n",
-> @@ -585,9 +630,11 @@ static int rela_elf32(char **argv, FILE *f)
->   					argv[0], argv[1], addr);
->   				return 4;
->   			}
-> -			break;
-> -		case R_MICROBLAZE_32:
-> -		case R_MICROBLAZE_GLOB_DAT:
-> +		} else if ((machine == EM_M68K &&
-> +		            (type == R_68K_32 || type == R_68K_GLOB_DAT)) ||
-> +			   (machine == EM_MICROBLAZE &&
-> +			    (type == R_MICROBLAZE_32 ||
-> +			     type == R_MICROBLAZE_GLOB_DAT))) {
->   			/* global symbols read it and add reloc offset */
->   			index = swrela.r_info >> 8;
->   			pos_dyn = dyn_start + sizeof(Elf32_Sym) * index;
-> @@ -632,12 +679,11 @@ static int rela_elf32(char **argv, FILE *f)
->   					argv[0], argv[1], addr);
->   				return 4;
->   			}
-> -
-> -			break;
-> -		case R_MICROBLAZE_NONE:
-> +		} else if (machine == EM_M68K && type == R_68K_NONE) {
-> +			debug("R_68K_NONE - skip\n");
-> +		} else if (machine == EM_MICROBLAZE && type == R_MICROBLAZE_NONE) {
->   			debug("R_MICROBLAZE_NONE - skip\n");
-> -			break;
-> -		default:
-> +		} else {
->   			fprintf(stderr, "warning: unsupported relocation type %"
->   				PRIu32 " at %" PRIx32 "\n",
->   				type, rela.r_offset);
-
-Regards,
-angelo
+-sughosh
