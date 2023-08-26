@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8BE7C83F11
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 09:07:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 158C7C83F16
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 09:07:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F29086B40;
-	Sat, 26 Aug 2023 11:07:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C096286B4B;
+	Sat, 26 Aug 2023 11:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9093A86B37; Sat, 26 Aug 2023 11:07:10 +0200 (CEST)
+ id D91A786B4B; Sat, 26 Aug 2023 11:07:12 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E882286B34
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 11:07:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 431BB86B12
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 11:07:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7BBB11FB;
- Sat, 26 Aug 2023 02:07:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EBC841FB;
+ Sat, 26 Aug 2023 02:07:49 -0700 (PDT)
 Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3C7293F740;
- Sat, 26 Aug 2023 02:07:05 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id ABB1B3F844;
+ Sat, 26 Aug 2023 02:07:07 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [RFC PATCH 3/5] capsule: Add the capsule-key property for removal
- from devicetree
-Date: Sat, 26 Aug 2023 14:36:31 +0530
-Message-Id: <20230826090633.239342-4-sughosh.ganu@linaro.org>
+Subject: [RFC PATCH 4/5] bootefi: Call the EVT_FT_FIXUP event handler
+Date: Sat, 26 Aug 2023 14:36:32 +0530
+Message-Id: <20230826090633.239342-5-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230826090633.239342-1-sughosh.ganu@linaro.org>
 References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
@@ -56,41 +55,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The capsule-key property contains the public key in the form of an EFI
-Signature List(ESL) structure. This property is relevant only in
-U-Boot, and is not to be passed to the OS. Register for purging this
-property from the devicetree, before passing it to the OS.
+The bootefi command passes the devicetree to the kernel through the
+EFI config table. Call the event handlers for fixing the devicetree
+before jumping into the kernel. This removes any devicetree nodes
+and/or properties that are specific only to U-Boot, and are not to be
+passed to the OS.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- lib/efi_loader/efi_capsule.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ cmd/bootefi.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index af8a2ee940..5c6c87458f 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -9,6 +9,7 @@
- #define LOG_CATEGORY LOGC_EFI
- 
- #include <common.h>
-+#include <dt-structs.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <env.h>
-@@ -403,6 +404,12 @@ out:
- 
- 	return status;
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index f73d6eb0e2..c359a46ec4 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -237,6 +237,23 @@ static void *get_config_table(const efi_guid_t *guid)
+ 	return NULL;
  }
-+
-+DT_NON_COMPLIANT_PURGE(capsule_key) = {
-+	.node_path	= "/signature",
-+	.prop		= "capsule-key",
-+};
-+
- #endif /* CONFIG_EFI_CAPSULE_AUTHENTICATE */
  
- static __maybe_unused bool fwu_empty_capsule(struct efi_capsule_header *capsule)
++/**
++ * event_notify_dt_fixup() - call ft_fixup event
++ *
++ * @fdt:	address of the device tree to be passed to the kernel
++ *		through the configuration table
++ * Return:	None
++ */
++static void event_notify_dt_fixup(void *fdt)
++{
++	int ret;
++	struct event_ft_fixup fixup = {0};
++
++	fixup.tree.fdt = fdt;
++	ret = event_notify(EVT_FT_FIXUP, &fixup, sizeof(fixup));
++	if (ret)
++		printf("Error: %d: FDT Fixup event failed\n", ret);
++}
+ #endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
+ 
+ /**
+@@ -318,6 +335,7 @@ efi_status_t efi_install_fdt(void *fdt)
+ 	efi_carve_out_dt_rsv(fdt);
+ 
+ 	efi_try_purge_kaslr_seed(fdt);
++	event_notify_dt_fixup(fdt);
+ 
+ 	if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
+ 		ret = efi_tcg2_measure_dtb(fdt);
 -- 
 2.34.1
 
