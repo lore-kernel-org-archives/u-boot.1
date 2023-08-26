@@ -4,93 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 261DCC83F08
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 00:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080E5C83F10
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 00:51:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCCF986A91;
-	Sat, 26 Aug 2023 02:37:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 03057869A6;
+	Sat, 26 Aug 2023 02:51:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="iShkS8po";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GKu1EZhp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7886F86AC1; Sat, 26 Aug 2023 02:37:07 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DCC6186A7D; Sat, 26 Aug 2023 02:51:54 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B422F86A7D
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 02:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57CA486430
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 02:51:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 483803F65C
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 00:37:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1693010224;
- bh=S27FOU39Vo5+NiTg6defSuyj1AvY7YAXobgrMLLb3QM=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=iShkS8pogccTnBvQYj1RjXEIUxp90xyqGmyuzx+9ybTG6/q4+JPgqq1576oMpCdZj
- hJCO+SFeXLcmF5vMrhJP4DdYPqhFYKWd4SI1QKyrKgF8DdhN7KYEvkVrHKqernAirX
- g3d0JWRBw7EKEknxZThp9KuQLAgYQEVa9nwISAb7qaKkrPUCH1Ldokv+NH4M5BYOpS
- 25kDP2HojgpZOrJ/JIqAs4u95ECRZDVoopcgcTz1m72jzCYzdql06De9VVFnJoRKN1
- ugtRx+/zGbLdqdqhdGioCbkA7kVKrbxY/6fk5QLcQP6p8tBXURY4DUJlv9vce+1gqS
- mV2AQOEGoyDyw==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-3fe4cca36b7so10442745e9.3
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 17:37:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5236b2b4cdbso2092918a12.3
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 17:51:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693011112; x=1693615912;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=d65lPZPpK+iEz4AtuFlkH3Y4uqCJdQBuQ93V2nuWWxs=;
+ b=GKu1EZhpTy6rhNwj65fuyX+AZzBrTnx0S5tzn6qskeXtaKjy6xIzBaOvex60kUHxhv
+ BkDY3G8/UatvawOVuOm2EbEmnBycAFv5h0N9n3rOtHrl82+RLjHoKbODvHu213X9JytV
+ OTotyrlmhxlL343AMxFoabwzM6wsVUwCjOXqsIYg9Udbj1nWdCnmRyPWYx1L+S9AWOEy
+ NjMbRXskF3vdLQjqNSXOzTKuNOX4SIRGVlTexTaw7/gWPksBFPB2awEbMEgk/9TreJ9U
+ zPUVP+dRFd6Ok1eRY1Cdcznhzz67L0FGUMVFZGF4ZPj/bOg7FeHgxclMopb+1srshsnc
+ Ds7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693010224; x=1693615024;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=S27FOU39Vo5+NiTg6defSuyj1AvY7YAXobgrMLLb3QM=;
- b=DDj4jpLonVfw1zX5Rt70KAV8CwaW8SwdnT3m1MRwvapY8Wud7Cu1QAJ3msqxTwTIY9
- WEa4vZfmYnJBD7UjZNc6S+6PBF1R+J0Bb5jbPgQO4qijrl+BZYdrSWITdNC7zN+A0GMY
- GEQut4RGfySCvs5iMGNpVY/j7oqIGmjI+kzYxEuUL6AsffFE4D1BKIcRuU5zW+/q9VVu
- LURrRolpgr1iLM4Rzj/81POe8cPpOmHEljIoobcUNvQvr3+Ai+NvGqxdWBoTRsiIlEMf
- Hu8jNUtBGplliF/QRP3SKb56GRqjWJkfhd9D/bA4loiTgDI7gnbbQHBwva4n36fR7gxJ
- hh/Q==
-X-Gm-Message-State: AOJu0Yz3OvtVajEJOACjovmP7ougtuS6oT/ZGyUJukxisRh75eglxI99
- 7N15YsBzCMbmnXh3RK43QH84qsyesXGYCEEekVLYGlGIUX5uemrzcBf0R1lI9icgUP/KBNVjYm4
- 5PXRSRMsyJI8r/0HZf976narwrpizDJU=
-X-Received: by 2002:a5d:494c:0:b0:317:1b08:b317 with SMTP id
- r12-20020a5d494c000000b003171b08b317mr14363497wrs.6.1693010223835; 
- Fri, 25 Aug 2023 17:37:03 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEojmhzOKgs2AMoB4RLl/eW/2lRiUXivAsi7LhZ5JIoN//+hTiZiaAltppRVe11AxShtWDaDw==
-X-Received: by 2002:a5d:494c:0:b0:317:1b08:b317 with SMTP id
- r12-20020a5d494c000000b003171b08b317mr14363487wrs.6.1693010223386; 
- Fri, 25 Aug 2023 17:37:03 -0700 (PDT)
-Received: from [192.168.123.94] (ip-062-143-244-162.um16.pools.vodafone-ip.de.
- [62.143.244.162]) by smtp.gmail.com with ESMTPSA id
- g5-20020a056000118500b00317b063590fsm3463189wrx.55.2023.08.25.17.37.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Aug 2023 17:37:02 -0700 (PDT)
-Message-ID: <01a5437a-9018-d962-8568-e1abdc96c8ad@canonical.com>
-Date: Sat, 26 Aug 2023 02:37:55 +0200
+ d=1e100.net; s=20221208; t=1693011112; x=1693615912;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d65lPZPpK+iEz4AtuFlkH3Y4uqCJdQBuQ93V2nuWWxs=;
+ b=PZUZ/tNUt2NuTGo6OZz3/JXoF4bIjbyANwZ/70rHMBrwnDY3S5uPlSSZf83jZEQcp4
+ gCjYnlvnw3SJVophCnpWnnVQSobVKtwZHfZRW5qFTx19ICE0xTtGQUGAoKaVrNm7hSeY
+ 3fP0BpP0erTa9ll5danE1rBCTvqjfIOLmYYFxkFhfyay3s0fhBaoHF1upuguvWLVn4XN
+ uRIfnE9R+9/KqCGMblz/ORMMqSN/KgG/ov4qgRFlLSb/vxlH5Car90/fv/obQtTUVQIq
+ 1gV4LZCAga20yo077Np6j6HAhqn3v3TOMj0mRAN/WJe1HZPM/kcpUKYaeU3xKHuCzksL
+ BOjw==
+X-Gm-Message-State: AOJu0YyMA/71eNXxVLJrEviM6i+EBk2+kWGpz5L84GZyN8lLqyAaMRGH
+ v3WHAlnSsdMvLWEqLSk3UbYC8MxatB/if79SJyPJ3Jo+nW4=
+X-Google-Smtp-Source: AGHT+IEyJ+XAdo+pVnw7jRdfXPHNoZcTWfPwfnNQihjWZ15h54kgDrsDbKynMg9Vkr1VLeaEckpM+HwrM2UfGOnMYxA=
+X-Received: by 2002:aa7:d952:0:b0:523:ae0a:a447 with SMTP id
+ l18-20020aa7d952000000b00523ae0aa447mr16257579eds.13.1693011111661; Fri, 25
+ Aug 2023 17:51:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v3 6/8] cmd: gpt: Preserve type GUID if enabled
-Content-Language: en-US, de-DE
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Enric Balletbo i Serra <eballetb@redhat.com>, u-boot@lists.denx.de
-References: <20230823164755.2874792-1-JPEWhacker@gmail.com>
- <20230825193830.2753640-1-JPEWhacker@gmail.com>
- <20230825193830.2753640-7-JPEWhacker@gmail.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20230825193830.2753640-7-JPEWhacker@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230825013930.1753078-1-sjg@chromium.org>
+ <CAJaLiFzS+oHkRuGCNDGj=xA4ooNvYrV38qYED+ipA2M_O_uJuA@mail.gmail.com>
+ <CAPnjgZ0kpMBatC475FmMF2sai_waMFK_Sf3mWxeSoLB_qYdXNA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0kpMBatC475FmMF2sai_waMFK_Sf3mWxeSoLB_qYdXNA@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Fri, 25 Aug 2023 17:51:38 -0700
+Message-ID: <CAJaLiFy1aMgOKyPM=aK-heVow91baY9U20Jo0cG0KaCCMJ4mCQ@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Drop some TODOs
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,179 +88,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/25/23 21:38, Joshua Watt wrote:
-> If CONFIG_PARTITION_TYPE_GUID is enabled, the type GUID will be
-> preserved when writing out the partition string. It was already
-> respected when writing out partitions; this ensures that if you capture
-> the current partition layout and write it back (such as when renaming),
-> the type GUIDs are preserved.
-> 
-> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->   cmd/gpt.c                 | 16 ++++++++++
->   test/py/tests/test_gpt.py | 66 +++++++++++++++++++++++++++++++++++++++
->   2 files changed, 82 insertions(+)
-> 
-> diff --git a/cmd/gpt.c b/cmd/gpt.c
-> index 1fe7f1a7db..b7d861aa1e 100644
-> --- a/cmd/gpt.c
-> +++ b/cmd/gpt.c
-> @@ -173,6 +173,9 @@ static int calc_parts_list_len(int numparts)
->   	/* see part.h for definition of struct disk_partition */
->   	partlistlen += numparts * (strlen("start=MiB,") + sizeof(lbaint_t) + 1);
->   	partlistlen += numparts * (strlen("size=MiB,") + sizeof(lbaint_t) + 1);
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +	partlistlen += numparts * (strlen("type=,") + UUID_STR_LEN + 1);
-> +#endif
->   	partlistlen += numparts * (strlen("uuid=;") + UUID_STR_LEN + 1);
->   	/* for the terminating null */
->   	partlistlen++;
-> @@ -211,6 +214,11 @@ static struct disk_part *allocate_disk_part(struct disk_partition *info,
->   		PART_TYPE_LEN);
->   	newpart->gpt_part_info.type[PART_TYPE_LEN - 1] = '\0';
->   	newpart->gpt_part_info.bootable = info->bootable;
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +	strncpy(newpart->gpt_part_info.type_guid, (const char *)info->type_guid,
-> +		UUID_STR_LEN);
-> +	newpart->gpt_part_info.type_guid[UUID_STR_LEN] = '\0';
-> +#endif
->   #ifdef CONFIG_PARTITION_UUIDS
->   	strncpy(newpart->gpt_part_info.uuid, (const char *)info->uuid,
->   		UUID_STR_LEN);
-> @@ -252,6 +260,9 @@ static void print_gpt_info(void)
->   		       curr->gpt_part_info.name);
->   		printf("Type %s, bootable %d\n", curr->gpt_part_info.type,
->   		       curr->gpt_part_info.bootable & PART_BOOTABLE);
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +		printf("Type GUID %s\n", curr->gpt_part_info.type_guid);
-> +#endif
->   #ifdef CONFIG_PARTITION_UUIDS
->   		printf("UUID %s\n", curr->gpt_part_info.uuid);
->   #endif
-> @@ -299,6 +310,11 @@ static int create_gpt_partitions_list(int numparts, const char *guid,
->   					    curr->gpt_part_info.blksz);
->   		strncat(partitions_list, partstr, PART_NAME_LEN + 1);
->   
-> +#ifdef CONFIG_PARTITION_TYPE_GUID
-> +		strcat(partitions_list, ",type=");
-> +		strncat(partitions_list, curr->gpt_part_info.type_guid,
-> +			UUID_STR_LEN + 1);
-> +#endif
->   		strcat(partitions_list, ",uuid=");
->   		strncat(partitions_list, curr->gpt_part_info.uuid,
->   			UUID_STR_LEN + 1);
-> diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-> index 5d23f9b292..09a90f026f 100644
-> --- a/test/py/tests/test_gpt.py
-> +++ b/test/py/tests/test_gpt.py
-> @@ -16,6 +16,35 @@ the test.
->   # Mark all tests here as slow
->   pytestmark = pytest.mark.slow
->   
-> +def parse_gpt_parts(disk_str):
-> +    """Parser a partition string into a list of partitions.
-> +
-> +    Args:
-> +        disk_str: The disk description string, as returned by `gpt read`
-> +
-> +    Returns:
-> +        A list of parsed partitions. Each partition is a dictionary with the
-> +        string value from each specified key in the partition description, or a
-> +        key with with the value True for a boolean flag
-> +    """
-> +    parts = []
-> +    for part_str in disk_str.split(';'):
-> +        part = {}
-> +        for option in part_str.split(","):
-> +            if not option:
-> +                continue
-> +
-> +            if "=" in option:
-> +                k, v = option.split("=")
+Hi Simon,
 
-This results in a pylint warning:
+On Fri, Aug 25, 2023 at 4:53=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Tony,
+>
+> On Fri, 25 Aug 2023 at 14:17, Tony Dinh <mibodhi@gmail.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, Aug 24, 2023 at 6:48=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > The existing TODOs are done, so remove them. Add another that came up
+> > > today.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >  doc/develop/bootstd.rst | 4 +---
+> > >  1 file changed, 1 insertion(+), 3 deletions(-)
+> > >
+> > > diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd.rst
+> > > index ec3136535783..3e566e994d6c 100644
+> > > --- a/doc/develop/bootstd.rst
+> > > +++ b/doc/develop/bootstd.rst
+> > > @@ -752,9 +752,7 @@ To do
+> > >
+> > >  Some things that need to be done to completely replace the distro-bo=
+ot scripts:
+> > >
+> > > -- add bootdev drivers for dhcp, sata, scsi, ide, virtio
+> >
+> > Good to see SATA finally in bootdev driver! I'm testing bootstd on a
+> > couple boards, and have been waiting for SATA bootdev. Any idea, if I
+> > should wait for it to be merged to the next branch, or is there an
+> > easy way to do it with one of your patches (I can test it on the
+> > latest master branch or next branch).
+>
+> I believe it went in in the last release - see drivers/scsi/scsi_bootdev.=
+c
+>
+> If you need something else for SATA, PLMK.
 
-C0103: Variable name "v" doesn't conform to snake_case naming style 
-(invalid-name)
+I see. That's scsi_bootdev for the scsi driver. I think we also need
+sata_bootdev for drivers/ata/. For example, the Marvell Kirkwood SoC
+boards use sata_mv.
 
-How about key, value?
+Thanks,
+Tony
 
-> +                part[k] = v
-> +            else:
-> +                part[option] = True
-> +
-> +        if part:
-> +            parts.append(part)
-> +
-> +    return parts
-> +
->   class GptTestDiskImage(object):
->       """Disk Image used by the GPT tests."""
->   
-> @@ -49,11 +78,13 @@ class GptTestDiskImage(object):
->                   u_boot_utils.run_and_log(u_boot_console, cmd)
->                   # part1 offset 1MB size 1MB
->                   cmd = ('sgdisk', '--new=1:2048:4095', '--change-name=1:part1',
-> +                    '--partition-guid=1:33194895-67f6-4561-8457-6fdeed4f50a3',
->                       '-A 1:set:2',
->                       persistent)
->                   # part2 offset 2MB size 1.5MB
->                   u_boot_utils.run_and_log(u_boot_console, cmd)
->                   cmd = ('sgdisk', '--new=2:4096:7167', '--change-name=2:part2',
-> +                    '--partition-guid=2:cc9c6e4a-6551-4cb5-87be-3210f96c86fb',
->                       persistent)
->                   u_boot_utils.run_and_log(u_boot_console, cmd)
->                   cmd = ('sgdisk', '--load-backup=' + persistent)
-> @@ -88,6 +119,40 @@ def test_gpt_read(state_disk_image, u_boot_console):
->       assert '0x00000800	0x00000fff	"part1"' in output
->       assert '0x00001000	0x00001bff	"part2"' in output
->   
-> +@pytest.mark.boardspec('sandbox')
-> +@pytest.mark.buildconfigspec('cmd_gpt')
-> +@pytest.mark.buildconfigspec('partition_type_guid')
-> +@pytest.mark.requiredtool('sgdisk')
-> +def test_gpt_read_var(state_disk_image, u_boot_console):
-> +    """Test the gpt read command."""
-> +
-> +    u_boot_console.run_command('host bind 0 ' + state_disk_image.path)
-> +    output = u_boot_console.run_command('gpt read host 0 gpt_parts')
-> +    assert 'success!' in output
-> +
-> +    output = u_boot_console.run_command('echo ${gpt_parts}')
-> +    parts = parse_gpt_parts(output.rstrip())
-> +
-> +    assert parts == [
-> +        {
-> +            "uuid_disk": "375a56f7-d6c9-4e81-b5f0-09d41ca89efe",
-> +        },
-> +        {
-> +            "name": "part1",
-> +            "start": "0x100000",
-> +            "size": "0x100000",
-> +            "type": "0fc63daf-8483-4772-8e79-3d69d8477de4",
-> +            "uuid": "33194895-67f6-4561-8457-6fdeed4f50a3",
-> +        },
-> +        {
-> +            "name": "part2",
-> +            "start": "0x200000",
-> +            "size": "0x180000",
-> +            "type": "0fc63daf-8483-4772-8e79-3d69d8477de4",
-> +            "uuid": "cc9c6e4a-6551-4cb5-87be-3210f96c86fb",
-> +        },
-> +    ]
-> +
->   @pytest.mark.boardspec('sandbox')
->   @pytest.mark.buildconfigspec('cmd_gpt')
->   @pytest.mark.requiredtool('sgdisk')
-> @@ -263,3 +328,4 @@ def test_gpt_write(state_disk_image, u_boot_console):
->       assert '0x00001000	0x00001bff	"second"' in output
->       output = u_boot_console.run_command('gpt guid host 0')
->       assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
-> +
-
-Please, remove this white space line.
-
-Best regards
-
-Heinrich
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > Thanks,
+> > Tony
+> >
+> > > -- PXE boot for EFI
+> > > -- support for loading U-Boot scripts
+> > > +- implement extensions (devicetree overlays with add-on boards)
+> > >
+> > >  Other ideas:
+> > >
+> > > --
+> > > 2.42.0.rc1.204.g551eb34607-goog
+> > >
