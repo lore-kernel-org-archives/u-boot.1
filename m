@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F40DC83F11
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 02:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB8DC83F0C
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 02:05:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 003A186B22;
-	Sat, 26 Aug 2023 04:04:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B1DA86B34;
+	Sat, 26 Aug 2023 04:04:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="awXqiQGk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KtCQmDFw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E293386AE8; Sat, 26 Aug 2023 04:04:47 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 0BD0E86B24; Sat, 26 Aug 2023 04:04:49 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4D6886A7D
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 04:04:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78BA586AB1
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 04:04:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-52713d2c606so2059413a12.2
- for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 19:04:44 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-31c5c06e8bbso1175872f8f.1
+ for <u-boot@lists.denx.de>; Fri, 25 Aug 2023 19:04:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693015484; x=1693620284;
+ d=chromium.org; s=google; t=1693015486; x=1693620286;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a98KiWpMXPLUv/bZBD89tTet3wjkpMFmi/NJ6JP+R8Y=;
- b=awXqiQGkwojIuC6hro1R1eTQxGn6cinGayC7AJhTxkT00b9e5g4AxFemJ2349njUlC
- BG3dMm+QanvZODfJTxR4TrmhmjRpKa2fbXZ0z/fG3oNMF2CvW1IimAIOdz8G1putcaSF
- bJ4n7TSDxTnZQoZpjNPyyMtPZ09i4F2xD7kZA=
+ bh=rGyEZVAHVwd3kck5MN/EcXDDg6059qQKdHPsWUCj4i8=;
+ b=KtCQmDFwrI7yMAq5wNnccGyWcAlyO4xR5p2RYY4Zsx5lx9zgMuHtyWEM7VmH9Ohftt
+ r5+FqrmL/ZuLFrZciMK+UpoiDEOFqThyz1E52MG3ttpIoV5bKqix+PoeJE9hfha/vAv+
+ CWJL3LQFwcifazuHePRgtz3DqukcQGECz9GS0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693015484; x=1693620284;
+ d=1e100.net; s=20221208; t=1693015486; x=1693620286;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=a98KiWpMXPLUv/bZBD89tTet3wjkpMFmi/NJ6JP+R8Y=;
- b=RZ+M9rOCf2x1QtgdWfxYkp3Kg5qSqK+jwMEfuOHYSKconOnVRmOz3T1mHcIMuYIdxQ
- I4V0eQ3SdGTkTroxpxeFpflmWaXA7v4ut4XCnrGVJE5KhbRP4ZwFSwizJ2DwDT3Vn1q5
- 0kxlTvQ6C7YeNF08ixF2apeEjIBIi4DZewvu8uC9lB645lPIaPPUw0VtMkcvoF6W5zMS
- Q5OcQLdHAiH9YMtGod8TgwXZRKWWppE2I7wCAQ55cV4bVFhlyTFq8ebbInzRfXHlmmMf
- T3i1miK8+JVSgXycgD+2ntReNi7992mB0Rv7NQWGicYEwbx7P2DPIxuDQoErOhyvjfRv
- F20w==
-X-Gm-Message-State: AOJu0YxVfHtMQtOcrdLUN/b5sOdFwpkYQkU5rG0VeoX20k3iMr7qRKmk
- SE/JUlRgxBc/LXuB0jVYS1sIND8yhKru4yOcdFw6uQ==
-X-Google-Smtp-Source: AGHT+IFNnaedUbFg3lMIuWud6SHpKQi9LSXOlLGXVHZSzbsTXZoSCMnx29IcKyG2yMESIj3/P7tibuuuedp6iElmvmU=
-X-Received: by 2002:aa7:d996:0:b0:522:d6f4:c0eb with SMTP id
- u22-20020aa7d996000000b00522d6f4c0ebmr13230226eds.40.1693015484262; Fri, 25
- Aug 2023 19:04:44 -0700 (PDT)
+ bh=rGyEZVAHVwd3kck5MN/EcXDDg6059qQKdHPsWUCj4i8=;
+ b=l5reYKDVUmlVXp4Cn6wmMi2cnEZzCxarADscHlbzWqHdnTTJDy5vNcC5m2Mc0jH4tB
+ Xf3YFVab5n5oOIwSGeBKg9Wpj9v6Yb3YbGi0vZAI6XEDzFGXrn1f2GR/gCJWgqloGRRm
+ 5sgVuIwr+r0rknAQ6XEuD0S5jF53pDum4AmzUshEmlqEWys5FlvoHupLHv60vluzkS63
+ Our9t2pJnebLK+fhu/p+PLSVgYM9ylonjWoBJe2yvjCj/0BhhjG1eI1ynaAlEWBC2jc+
+ /Vy9HThGHKc8Yae+6QV3iA9w8fe3GJ55t8+lvjEVJEhocqojZd0MBK//6M/+Y8+DT40w
+ QSdQ==
+X-Gm-Message-State: AOJu0Yy/9ECCweYGuq9i9xJe3zF5Ev0Zg48jZPM3AePmL3RF+vLrbLcx
+ 3WjAuQatRe6p73wqMMYZC/t+owExG35igFxjPuAvYg==
+X-Google-Smtp-Source: AGHT+IEWXEfSDaVdkJRb8VaHKqMzJ7GFN9vVajF0ACHKBozSZqgYCxLL6LUkwsf9YzqCShgXXTkSlLTewoL9TqwRIXI=
+X-Received: by 2002:a5d:63d2:0:b0:317:5b1b:1a40 with SMTP id
+ c18-20020a5d63d2000000b003175b1b1a40mr14251175wrw.49.1693015485811; Fri, 25
+ Aug 2023 19:04:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230826015343.167612-1-heinrich.schuchardt@canonical.com>
- <20230826015343.167612-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20230826015343.167612-3-heinrich.schuchardt@canonical.com>
+ <20230826015343.167612-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230826015343.167612-4-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 25 Aug 2023 20:04:31 -0600
-Message-ID: <CAPnjgZ1h5Mz=f8mjZk806bfa3RKyTetp+YGiNS-mH-fKSGNLYA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] cmd: fix gpt enumerate
+Date: Fri, 25 Aug 2023 20:04:33 -0600
+Message-ID: <CAPnjgZ2kYCtNRXK6t88pK+G5w-+sBbGO4epxp4Ww1mjJVQT8dw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] cmd: let gpt_partition_entry be hexadecimal
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  Joshua Watt <jpewhacker@gmail.com>
@@ -82,65 +82,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
 On Fri, 25 Aug 2023 at 19:53, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Do not assume that partitions are numbered continuously starting at 1.
+> In commands like 'ls mmc 0:f' the partition number is hexadecimal.
 >
-> Only a single partition table type can exist on a block device. If we found
-> a GPT partition table, we must not re-enumerate with the MBR partition
-> driver which would find the protective partition.
-
-Does it really? My understand is that it sets desc->part_type and it
-stays like that from then on?
-
+> In command 'gpt setenv' variable gpt_partition_entry needs to be set
+> to a hexadecimal value to allow its use as a parameter in a
+> subsequent command.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  cmd/gpt.c | 14 ++++++++------
->  1 file changed, 8 insertions(+), 6 deletions(-)
->
+>  cmd/gpt.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
+eek that is an unfortunate bug
 
+
+>
 > diff --git a/cmd/gpt.c b/cmd/gpt.c
-> index d0e165d539..99ca0a6163 100644
+> index 99ca0a6163..964056bd28 100644
 > --- a/cmd/gpt.c
 > +++ b/cmd/gpt.c
-> @@ -691,12 +691,13 @@ static int gpt_enumerate(struct blk_desc *desc)
->                 int ret;
->                 int i;
+> @@ -744,7 +744,7 @@ static int gpt_setenv_part_variables(struct disk_partition *pinfo, int i)
+>         if (ret)
+>                 goto fail;
 >
-> +               if (part_drv->test(desc))
-> +                       continue;
-> +
->                 for (i = 1; i < part_drv->max_entries; i++) {
->                         ret = part_drv->get_info(desc, i, &pinfo);
-> -                       if (ret) {
-> -                               /* no more entries in table */
-> -                               break;
-> -                       }
-> +                       if (ret)
-> +                               continue;
+> -       ret = env_set_ulong("gpt_partition_entry", i);
+> +       ret = env_set_hex("gpt_partition_entry", i);
+>         if (ret)
+>                 goto fail;
 >
->                         ptr = &part_list[str_len];
->                         tmp_len = strlen((const char *)pinfo.name);
-> @@ -711,9 +712,10 @@ static int gpt_enumerate(struct blk_desc *desc)
->                         /* One byte for space(" ") delimiter */
->                         ptr[tmp_len] = ' ';
->                 }
-> +               if (*part_list)
-> +                       part_list[strlen(part_list) - 1] = 0;
-> +               break;
->         }
-> -       if (*part_list)
-> -               part_list[strlen(part_list) - 1] = 0;
->         debug("setenv gpt_partition_list %s\n", part_list);
->
->         return env_set("gpt_partition_list", part_list);
 > --
 > 2.40.1
 >
