@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ECA0C83F11
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 09:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2488BC83F13
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 10:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2DBC86A69;
-	Sat, 26 Aug 2023 11:12:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 32A1386B20;
+	Sat, 26 Aug 2023 12:00:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="byskxAA1";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="B8zE3aI7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DB8D86B35; Sat, 26 Aug 2023 11:12:53 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 174B986ACF; Sat, 26 Aug 2023 12:00:25 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3598286A69
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 11:12:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED49786B20
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 12:00:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
- [62.143.244.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 6D4673F6C1; 
- Sat, 26 Aug 2023 09:12:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1693041169;
- bh=ahfpdEIjlIsEn7s2PUWlrGGF4S0rjIVg2AkG4oPBkY0=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=byskxAA1EZ15d/vZaZBEs6m6g9rl2taOxkafQWoOFYpKYxWtWAxq9MfAK/9JsUEgR
- 3GRkrvS/3qZe/wSn8pJg+TMiLDjlkSfawfcxwDIkdy8hbFGADM1VKUOE7Q9s/qVQmG
- kFEeCmvzp8AgdM9/aGTCD4zJhIZH3H0o0Xzuo2QIbpJdG/Bvm0bncuX+cxGSjhgnP1
- o+cx9JRsdXj3aXZN5heye2zxCFrH7Gz5jsG51/0tu3L5kcipOensYZEbONQvh4eUwg
- 0HSG/8QNZOZoNdE7FWZzX/pJqwRvqAr9hah+snlqSQ9vKPbvU2dYyAvR+THNjlkWDT
- WX2Jfi6U47jjw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, Stefan Roese <sr@denx.de>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Sean Anderson <sean.anderson@seco.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 1/1] doc: describe TPL/VPL/SPL boot
-Date: Sat, 26 Aug 2023 11:13:35 +0200
-Message-Id: <20230826091335.26459-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1693044020; x=1693648820; i=xypron.glpk@gmx.de;
+ bh=W1+fVk/O5xZdeejH9+KG/qC0JavCSanStVwPejgLsLQ=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=B8zE3aI7c8eVx7oaSYx1aFHNF15W57A6ek+KBJisb8nJGwlx1Yz4coY/5y1LjvHcZY+QprE
+ gmYf3tqUo7Ek2yv0WcQg+bBoIyVz8yiT5w1v2QbDmkvzMkm7eb45rhnMaIIvEpRywOp3lgWSQ
+ NiRaZbVkZ7srP9Xg8cpXpSiW9Pf+H6uUZo8Oo/sYLXdg3OcCDhCM4zF8lVdo8BMKAjT7cVxUP
+ i+21czxQWPl6LRgbojelMFxaivlQYOqkI/v/xvxoIKrElCOYycg7mbDiZWVe7KgI9GTD2D7Fa
+ nYbnMgiXCQ2gcYTGEY1Hpb79BfhUGVLqY8BiNdbnqxk0Br8mCPMA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N79u8-1pdNN93jci-017TXc; Sat, 26
+ Aug 2023 12:00:19 +0200
+Message-ID: <2000e1e6-539a-2aa6-a6c6-1fcc9db5d13d@gmx.de>
+Date: Sat, 26 Aug 2023 12:01:08 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
+ node/property removal
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <20230826090633.239342-6-sughosh.ganu@linaro.org>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230826090633.239342-6-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:SKmi5z2npo+sgI8JOxpo5F2yjNLVkw8ktSI3FjU8OAfmNsKvYO4
+ SXVUK6kI0E6zEpjhXzDAqlG6PDJmf0TrxJP8dX4M9YUZemVBArUMiXa7DIGW8LIjVUyxt77
+ 5gb1P1MsLO5xqa3T+GV+KVX+MMLK5Skf/FhAkAstovBNcuQZSHOkv8f0dYAwnuZj0o4OgsE
+ +WoFX8O+8dVjfuTUCatTA==
+UI-OutboundReport: notjunk:1;M01:P0:tOLAaNGpcq8=;Cp4d7+R2vcdF7L+qRl1iaRXAQXf
+ BHGkH1n5XEMLaKxHy/Ed2D3rmAXve4XDjLIneYwx/152+enBuAkyb7ygATQ0OzHU8iaH3gc07
+ uLcVrxBy//hUc3sjVWd+A1KU/z2iyiVVIfSHuBOagP/5kfBwd8ROWoEmxWQ7xRDLhC4oEp2l8
+ /dvuOW8vf50juNJsTCg2SlieuwHBplio7ggoYT7X+hD/JtZxCc9SEZY2ShqnYlouDh6z2VCK/
+ H9ZsCl4D7L0zxwDG+rx2sctkip457Vbq7gL6K497KkiXHgqMQ0zz3RUzm3fvIu72uN4HqjoX1
+ NB8+0c7BvDpZRMv2xn4lw2GQeatUO6nXG0a3AgTFu3Sj56mAOH2rgXhJOdw3T2Dkht28hEfTb
+ GOYjLyFbQr3C40Q/IlIKjSA1o6Rbt5czZaEMeH8FTdpcN5U9z2JMk0gYW9GoMoV7PvKoSax+D
+ pg02QZGxGHyFPnhRyvVQ5iGA5BHsbsU2CsFITNeq1/+YOVG6Sa2fVhBR98XS8MlzfbsCyD7cl
+ 5QkYWq/XjtKI27XS5+pGAxpjcTObXaDSQLCLG42W2iJwTN4QV++iq1HrQZfwzWD3yLW6xDaPv
+ qcjckEI3voGX1bXvnKRXRS9XzrAXbQIw+sQpwa8pqjld2+vW6WPVT48bXi6D6UjEqTgmEZY/O
+ 6DFfN/B9YVm9dT+d4A72iaLpFiLSOCrzaV9nXc8lgocKCFz6DvxdGydeMgrvrhktk4NxyJ+YJ
+ 3Om4D6fwEcAFwkcjazXDf0c6t/iXASeeU3hISs0M91Px9fv1fDxmiyMd/pW3d5z6nVO2Plw+Y
+ Aoz6EiEeygBeCbh4FLuROVp2c7G+4nTwe2ugTc0ANMYX193/t5W590WXqXjlXYWuagmdjQ0+x
+ kuV7iOFFdypQYYNMP1pYs9wKnYlxkq8kUiW61Uh3pgnVLsew4CVS5/bS8c8W+mnaijDnLJwyv
+ 723lMu+FxXZHVeDNNRjU8JYOj4o=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,370 +91,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a stub describing how TPL, VPL, and SPL load the next boot stages
-on a detail level for users.
+On 8/26/23 11:06, Sughosh Ganu wrote:
+> Add a document explaining the need for removal of non-compliant
+> devicetree nodes and properties. Also describe in brief, the macros
+> that can be used for this removal.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
-For sure we will need a few patches on top to catch the whole complexity.
+Thanks for properly documenting the change.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v3:
-	Call TPL Tertiary Program Loader, VPL Verifying Program Loader
-	Put Power PC flow into an info box to stick out
-	Add link to Falcon Mode
-	Fix typos
-v2:
-	Mention that PowerPC uses a different naming convention.
-	Group boot devices by type
-	Correct reference to UBI
-	Fix typos
----
- doc/usage/index.rst    |   1 +
- doc/usage/spl_boot.rst | 323 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 324 insertions(+)
- create mode 100644 doc/usage/spl_boot.rst
+Warning, treated as error:
+doc/develop/devicetree/dt_non_compliant_purge.rst:
+document isn't included in any toctree
 
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 3326ec82ff..f45a7f5502 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -4,6 +4,7 @@ Use U-Boot
- .. toctree::
-    :maxdepth: 1
- 
-+   spl_boot
-    blkmap
-    dfu
-    environment
-diff --git a/doc/usage/spl_boot.rst b/doc/usage/spl_boot.rst
-new file mode 100644
-index 0000000000..ad6bf0ab69
---- /dev/null
-+++ b/doc/usage/spl_boot.rst
-@@ -0,0 +1,323 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Booting from TPL/SPL
-+====================
-+
-+The main U-Boot binary may be too large to be loaded directly by the Boot ROM.
-+This was the original driver for splitting up U-Boot into multiple boot stages.
-+
-+U-Boot typically goes through the following boot phases where TPL, VPL, and SPL
-+are optional. While many boards use SPL only few use TPL.
-+
-+TPL
-+   Tertiary Program Loader. Very early init, as tiny as possible. This loads SPL
-+   (or VPL if enabled).
-+
-+VPL
-+   Verifying Program Loader. Optional verification step, which can select one of
-+   several SPL binaries, if A/B verified boot is enabled. Implementation of the
-+   VPL logic is work-in-progress. For now it just boots into SPL.
-+
-+SPL
-+   Secondary Program Loader. Sets up SDRAM and loads U-Boot proper. It may also
-+   load other firmware components.
-+
-+U-Boot
-+   U-Boot proper, containing the command line and the logic to load an
-+   operating system, e.g. via UEFI.
-+
-+.. note::
-+
-+   The naming convention on the PowerPC architecture deviates from the other
-+   archtitectures. Here the boot sequence is SPL->TPL->U-Boot.
-+
-+Only main U-Boot has a command line interface.
-+
-+Further usages for U-Boot SPL comprise:
-+
-+* launching BL31 of ARM Trusted Firmware which invokes U-Boot as BL33
-+* launching EDK II
-+* launching Linux, e.g. :doc:`Falcon Mode' <../develop/falcon>`
-+* launching RISC-V OpenSBI which invokes main U-Boot
-+
-+Target binaries
-+---------------
-+
-+Binaries loaded by SPL/TPL can be:
-+
-+* raw binaries where the entry address equals the start address. This is the
-+  only binary format supported by TPL.
-+* :doc:`FIT <fit/index>` images
-+* legacy U-Boot images
-+
-+Configuration
-+~~~~~~~~~~~~~
-+
-+Raw images are only supported in SPL if CONFIG_SPL_RAW_IMAGE_SUPPORT=y.
-+
-+CONFIG_SPL_FIT=y and CONFIG_SPL_LOAD_FIT=y are needed to load FIT images.
-+
-+CONFIG_SPL_LEGACY_IMAGE_FORMAT=y is needed to load legacy U-Boot images.
-+CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y enables checking the CRC32 of legacy U-Boot
-+images.
-+
-+Image load methods
-+------------------
-+
-+The image boot methods available for a board must be defined in two places:
-+
-+The board code implements a function board_boot_order() enumerating up to
-+five boot methods and the sequence in which they are tried. (The maximum
-+number of boot methods is currently hard coded as variable spl_boot_list[]).
-+If there is only one boot method function, spl_boot_device() may be implemented
-+instead.
-+
-+The configuration controls which of these boot methods are actually available.
-+
-+Loading from block devices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+MMC1, MMC2, MMC2_2
-+    These methods read an image from SD card or eMMC. The first digit after
-+    'MMC' indicates the device number. Required configuration settings include:
-+
-+    * CONFIG_SPL_MMC=y or CONFIG_TPL_MMC=y
-+
-+    To use a PCI connected MMC controller you need to additionally specify:
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    * CONFIG_MMC=y
-+
-+    * CONFIG_MMC_PCI=y
-+
-+    * CONFIG_MMC_SDHCI=y
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+NVMe
-+    This methods load the image from an NVMe drive.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    * CONFIG_SPL_NVME=y
-+
-+    * CONFIG_SPL_NVME_PCI=y
-+
-+    * CONFIG_SPL_NVME_BOOT_DEVICE (number of the NVMe device)
-+
-+    * CONFIG_SYS_NVME_BOOT_PARTITION (partition to read from)
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+SATA
-+    This method reads an image from a SATA drive.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_SATA=y or CONFIG_TPL_SATA=y
-+
-+    To use a PCIe connecte SATA controller you additionally need:
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_SATA=y
-+
-+    * CONFIG_SPL_AHCI_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y
-+
-+    * CONFIG_SYS_SATA_FAT_BOOT_PARTITION=<partition number>
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+USB
-+    The USB method loads an image from a USB block device.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_USB_HOST=y
-+
-+    * CONFIG_SPL_USB_STORAGE=y
-+
-+    To use a PCI connected USB 3.0 controller you additionally need:
-+
-+    * CONFIG_SPL_FS_FAT=y
-+
-+    * CONFIG_SPL_PCI=y
-+
-+    * CONFIG_SPL_PCI_PNP=y
-+
-+    * CONFIG_USB=y
-+
-+    * CONFIG_USB_XHCI_HCD=y
-+
-+    * CONFIG_USB_XHCI_PCI=y
-+
-+    To load from a file system use:
-+
-+    * CONFIG_SPL_FS_FAT=y or CONFIG_SPL_FS_EXT=y
-+
-+    * CONFIG_SYS_USB_FAT_BOOT_PARTITION=<partition number>
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="<filepath>"
-+
-+Loading from flash devices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+NAND
-+    This method loads the image from NAND flash. To read from raw NAND the
-+    following configuration settings are required:
-+
-+    * CONFIG_SPL_NAND_SUPPORT=y or CONFIG_TPL_NAND_SUPPORT=y
-+
-+    If CONFIG_SPL_NAND_RAW_ONLY=y only raw images can be loaded.
-+
-+    For using UBI (Unsorted Block Images) volumes to read from NAND the
-+    following configuration settings are required:
-+
-+    * CONFIG_SPL_UBI=y or CONFIG_TPL_UBI=y
-+
-+    The UBI volume to read can either be specified
-+
-+    * by name using CONFIG_SPL_UBI_LOAD_BY_VOLNAME or
-+
-+    * by number using CONFIG_SPL_UBI_LOAD_MONITOR_ID.
-+
-+NOR
-+    This method loads the image from NOR flash.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_NOR_SUPPORT=y or CONFIG_TPL_NOR_SUPPORT=y
-+
-+OneNAND
-+    This methods loads the image from a OneNAND device. To read from raw OneNAND
-+    the following configuration settings are required:
-+
-+    * CONFIG_SPL_ONENAND_SUPPORT=y or CONFIG_TPL_ONENAND_SUPPORT=y
-+
-+    For using the Ubi file system to read from NAND the following configuration
-+    settings are required:
-+
-+    * CONFIG_SPL_UBI=y or CONFIG_TPL_UBI=y
-+
-+SPI
-+    This method loads an image form SPI NOR flash.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_DM_SPI=y
-+
-+    * CONFIG_SPL_SPI_FLASH=y
-+
-+    * CONFIG_SPI_LOAD=y or CONFIG_TPL_SPI_LOAD=y
-+
-+
-+Sunxi SPI
-+    This method which is specific to Allwinner SoCs loads an image form SPI NOR
-+    flash. Required configuration settings include:
-+
-+    * CONFIG_SPL_SPI_SUNXI=y
-+
-+Loading from other devices
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+BOOTROM
-+    The binary is loaded by the boot ROM.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_BOOTROM_SUPPORT=y or CONFIG_TPL_BOOTROM_SUPPORT=y
-+
-+DFU
-+    :doc:`Device Firmware Upgrade <dfu>` is used to load the binary into RAM.
-+    Required configuration settings include:
-+
-+    * CONFIG_DFU=y
-+
-+    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG TPL_RAM_SUPPORT=y
-+
-+Ethernet
-+    This method loads an image over Ethernet. The BOOTP protocol is used to find
-+    a TFTP server and binary name. The binary is downloaded via the TFTP
-+    protocol. Required configuration settings include:
-+
-+    * CONFIG_SPL_NET=y or CONFIG_TPL_NET=y
-+
-+    * CONFIG_SPL_ETH_DEVICE=y or CONFIG_DM_USB_GADGET=y
-+
-+FEL
-+    This method does not actually load an image for U-Boot.
-+    FEL is a routine contained in the boot ROM of Allwinner SoCs which serves
-+    for the initial programming or recovery via USB
-+
-+RAM
-+    This method uses an image preloaded into RAM.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_RAM_SUPPORT=y or CONFIG_TPL_RAM_SUPPORT=y
-+
-+    * CONFIG_RAM_DEVICE=y
-+
-+Sandbox file
-+    On the sandbox this method loads an image from the host file system.
-+
-+Sandbox image
-+    On the sandbox this method loads an image from the host file system.
-+
-+Semihosting
-+    When running in an ARM or RISC-V virtual machine the semihosting method can
-+    be used to load an image from the host file system.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_SEMIHOSTING=y
-+
-+    * CONFIG_SPL_SEMIHOSTING_FALLBACK=y
-+
-+    * CONFIG_SPL_FS_LOAD_PAYLOAD_NAME=<path to file>
-+
-+UART
-+    This method loads an image via the Y-Modem protocol from the UART.
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_YMODEM_SUPPORT=y or CONFIG_TPL_YMODEM_SUPPORT=y
-+
-+USB SDP
-+    This method loads the image using the Serial Download Protocol as
-+    implemented by the boot ROM of the i.MX family of SoCs.
-+
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_SERIAL=y
-+
-+    * CONFIG_SPL_USB_SDP_SUPPORT=y or CONFIG_TPL_USB_SDP_SUPPORT
-+
-+VBE Simple
-+    This method is used by the VPL stage to extract the next stage image from
-+    the loaded image.
-+
-+    Required configuration settings include:
-+
-+    * CONFIG_VPL=y
-+
-+    * CONFIG_SPL_BOOTMETH_VBE_SIMPLE_FW=y or CONFIG_TPL_BOOTMETH_VBE_SIMPLE_FW=y
-+
-+XIP
-+    This method executes an image in place.
-+
-+    Required configuration settings include:
-+
-+    * CONFIG_SPL_XIP_SUPPORT
--- 
-2.40.1
+Please, add the document to doc/develop/devicetree/index.rst
 
+Please, run make htmldocs before resubmitting.
+
+> ---
+>   .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++++++++++++
+>   1 file changed, 64 insertions(+)
+>   create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+>
+> diff --git a/doc/develop/devicetree/dt_non_compliant_purge.rst b/doc/dev=
+elop/devicetree/dt_non_compliant_purge.rst
+> new file mode 100644
+> index 0000000000..c3a8feab5b
+> --- /dev/null
+> +++ b/doc/develop/devicetree/dt_non_compliant_purge.rst
+> @@ -0,0 +1,64 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +Removal of non-compliant nodes and properties
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +The devicetree used in U-Boot might contain nodes and properties which
+> +are specific only to U-Boot, and are not necessarily being used to
+> +describe hardware but to pass information to U-Boot. An example of
+> +such a property would be the public key being passed to U-Boot for
+> +verification.
+> +
+> +This devicetree can then be passed to the OS. Since certain nodes and
+> +properties are not really describing hardware, and more importantly,
+> +these are only relevant to U-Boot, bindings for these cannot be
+> +upstreamed into the devicetree repository. There have been instances
+> +of attempts being made to upstream such bindings, and these deemed not
+
+but these were not deemed fit
+
+> +fit for upstreaming. Not having a binding for these nodes and
+> +properties means that the devicetree fails the schema compliance tests
+> +[1]. This also means that the platform cannot get certifications like
+> +SystemReady [2] which, among other things require a devicetree which
+
+%s/require/requires/
+
+> +passes the schema compliance tests.
+> +
+> +For such nodes and properties, it has been suggested by the devicetree
+> +maintainers that the right thing to do is to remove them from the
+
+%s/that the right thing to do is//
+
+> +devicetree before it gets passed on to the OS [3].
+
+%s/on to/to/
+
+> +
+> +Removing nodes/properties
+> +-------------------------
+> +
+> +In U-Boot, this is been done through adding information on such nodes
+
+%s/is been done through/is done by/
+
+> +and properties in a list. The entire node can be deleted, or a
+> +specific property under a node can be deleted. The list of such nodes
+> +and properties is generated at compile time, and the function to purge
+> +these can be invoked through a EVT_FT_FIXUP event notify call.
+> +
+> +For deleting a node, this can be done by declaring a macro::
+> +
+> +	DT_NON_COMPLIANT_PURGE(fwu_mdata) =3D {
+> +		.node_path      =3D "/fwu-mdata",
+> +	};
+
+Where should such a macro be placed?
+
+> +
+> +Similarly, for deleting a property under a node, that can be done by
+> +specifying the property name::
+> +
+> +	DT_NON_COMPLIANT_PURGE(capsule_key) =3D {
+> +		.node_path      =3D "/signature",
+> +		.prop           =3D "capsule-key",
+> +	};
+
+Why is capsule_key needed twice here? What would be the effect of:
+
+DT_NON_COMPLIANT_PURGE(voodoo) =3D {
+	.node_path      =3D "/signature",
+	.prop           =3D "capsule-key",
+};
+
+> +
+> +In the first example, the entire node with path /fwu-mdata will be
+> +removed. In the second example, the property capsule-key
+> +under /signature node will be removed.
+> +
+> +Similarly, a list of nodes and properties can be specified using the
+> +following macro::
+> +
+> +	DT_NON_COMPLIANT_PURGE_LIST(foo) =3D {
+
+What does foo refer to here? Can this parameter be eliminated from the
+syntax?
+
+Will the application of the removals be sorted alphabetically by this
+argument?
+
+What will happen if a property or node does not exist at time of
+removal? Hopefully that does not stop the boot process but is silently
+ignored.
+
+> +		{ .node_path =3D "/some_node", .prop =3D "some_bar" },
+> +		{ .node_path =3D "/some_node" },
+> +	};
+
+Why do you need the first element in your example?
+Wouldn't deleting /some/node imply that all its children are deleted?
+
+Why do we need separate properties .node_path and .prop. It would be
+less effort to write:
+
+DT_NON_COMPLIANT_PURGE_LIST() =3D
+{
+	"/some_node_1/some_property_1",
+	"/some_node_1/some_property_2",
+	"/some_node_2",
+}
+
+I assume the macro does its job irrespective of non-compliance.
+Why not call it DT_PURGE()?
+
+Best regards
+
+Heinrich
+
+> +
+> +[1] - https://github.com/devicetree-org/dt-schema
+> +[2] - https://www.arm.com/architecture/system-architectures/systemready=
+-certification-program
+> +[3] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7z=
+f26L_GV2oS6cg-5qg@mail.gmail.com/
