@@ -4,78 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEACC83F16
-	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 08:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 737B6C83F16
+	for <u-boot@archiver.kernel.org>; Sat, 26 Aug 2023 09:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBD6C86B12;
-	Sat, 26 Aug 2023 10:58:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A71A186B2C;
+	Sat, 26 Aug 2023 11:07:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZhhAtnI3";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31BAE86B19; Sat, 26 Aug 2023 10:58:07 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C4FA86AFE
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 10:58:04 +0200 (CEST)
+ id 4D4E186B2C; Sat, 26 Aug 2023 11:07:03 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 96B2086AFE
+ for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 11:07:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-51cff235226so3583430a12.0
- for <u-boot@lists.denx.de>; Sat, 26 Aug 2023 01:58:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693040284; x=1693645084;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JdY4eeNkX5zrLStF9GnrtJLkE7ZTWrWN3Cx+qpaLacA=;
- b=ZhhAtnI3Q1kMyQp03CC7buMCQNm0drHuG+AEb9VKyydeOIG1P8GeBLRwH/z7JUlDZ9
- +0IEAf7mb/scpnz1OgDwrjlQjhU1YpWNxUOOa0FbG+eCwqMC+PcWYfyrKBhRbWUVFGxW
- Q+BYq6qUfZTWv3Q4tuby9SWafP/0aMk04AD4svdkOCpSROoi6volzpUROoD5cPRVY6u5
- J5H1E5ufT2Tm22VB2hRySeJCt4h39kWBiuP1mWv9BDljJB+4qA7/8Unc3Tf8zr72UpLR
- I7xJ+BWDjGGBpq7iQPCmVBCkUlLXTWO0WKfkV0EzB7fN2NlyZTwSrXU2DBEJq437uGdm
- JCvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693040284; x=1693645084;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JdY4eeNkX5zrLStF9GnrtJLkE7ZTWrWN3Cx+qpaLacA=;
- b=A6iUFInalRPClMdHk5hbldhn2k5qKq/j7SdjcC8Yl7uZuKhRcDFltWP6gdEB9TKvQ6
- Bg8b5pabL8g60NeHXCuF+yp75Fnfv5pIHK6yj0qzSG9ZuFaRqq9cEc/HdhyDAI5jQwT/
- iFdA7C+5V5Wk53QVykkUnxyIMEZN/8No26s3dZP9/fhSejN7OJHB4XH9iwaK0b3D64ld
- LsJ6kaIfNUItTjrNizE/mo/dR4wyBeHhbtVIgDdG18J8BeVg8JyyRm7JgMjADIJFajrV
- rr3i/kQu0PFoWfB7EwsFQ069PPyKY4YGOZuPOeXCeIbw9nk8WKEULG6NrDUThqwReIfv
- UBeg==
-X-Gm-Message-State: AOJu0Yy6B+kEI9ae8NNPH2nP8SffNInGUJJ5H7XJqGfQ/vTT5I+PVhOa
- vkx61VpfeqtRDuxOc1xd0Ox6UVcbX14mA5KVk4gbuQ==
-X-Google-Smtp-Source: AGHT+IEVI8vMbbpmmC10eU1c7d0kMAY/MaUMGn36xvAES2JeMD5+Zyuop+V+/LBXOvdyOHWskky+pKvpbQHuLM9IrzI=
-X-Received: by 2002:a05:6402:50c9:b0:522:405f:a7 with SMTP id
- h9-20020a05640250c900b00522405f00a7mr21416917edb.16.1693040283265; Sat, 26
- Aug 2023 01:58:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230823001652.266215-1-marek.vasut+renesas@mailbox.org>
- <CADg8p95Dtvm++wY=74HVBvHL0cNRxKdSEv5ZtaLAbpp6m+hU9Q@mail.gmail.com>
- <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
-In-Reply-To: <eb785092-baf1-1ad1-4422-1c9710e12a9d@mailbox.org>
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1DDBB1FB;
+ Sat, 26 Aug 2023 02:07:40 -0700 (PDT)
+Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 179653F740;
+ Sat, 26 Aug 2023 02:06:57 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Sat, 26 Aug 2023 14:27:52 +0530
-Message-ID: <CADg8p96k46Uuz28nJq18S5jRKcOePX_1+jqbomm=vsZD6bSqQg@mail.gmail.com>
-Subject: Re: [PATCH] fwu: Initialize global fwu library state during CI test
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Etienne Carriere <etienne.carriere@linaro.org>, 
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>, 
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Michal Simek <michal.simek@amd.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+ Simon Glass <sjg@chromium.org>
+Subject: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+Date: Sat, 26 Aug 2023 14:36:28 +0530
+Message-Id: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,96 +53,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 25 Aug 2023 at 21:30, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 8/25/23 12:52, Sughosh Ganu wrote:
-> > On Wed, 23 Aug 2023 at 05:47, Marek Vasut
-> > <marek.vasut+renesas@mailbox.org> wrote:
-> >>
-> >> The current CI test worked by sheer luck, the g_dev global pointer
-> >> in the fwu library was never initialized and the test equally well
-> >> failed on sandbox64. Trigger the main loop in sandbox tests too to
-> >> initialize that global state, and move the sandbox specific exit
-> >> from fwu_boottime_checks after g_dev is initialized.
-> >>
-> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >> ---
-> >> Cc: Etienne Carriere <etienne.carriere@linaro.org>
-> >> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> Cc: Jassi Brar <jaswinder.singh@linaro.org>
-> >> Cc: Masahisa Kojima <masahisa.kojima@linaro.org>
-> >> Cc: Michal Simek <michal.simek@amd.com>
-> >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> >> ---
-> >>   lib/fwu_updates/fwu.c | 12 ++++++------
-> >>   test/dm/fwu_mdata.c   | 12 ++++++++++++
-> >>   2 files changed, 18 insertions(+), 6 deletions(-)
-> >
-> > Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> >
-> > But I have a question below.
-> >
-> >>
-> >> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-> >> index 4d0c8b84b9d..22bdc78df59 100644
-> >> --- a/lib/fwu_updates/fwu.c
-> >> +++ b/lib/fwu_updates/fwu.c
-> >> @@ -623,18 +623,18 @@ static int fwu_boottime_checks(void *ctx, struct event *event)
-> >>          int ret;
-> >>          u32 boot_idx, active_idx;
-> >>
-> >> -       /* Don't have boot time checks on sandbox */
-> >> -       if (IS_ENABLED(CONFIG_SANDBOX)) {
-> >> -               boottime_check = 1;
-> >> -               return 0;
-> >> -       }
-> >> -
-> >>          ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
-> >>          if (ret) {
-> >>                  log_debug("Cannot find fwu device\n");
-> >>                  return ret;
-> >>          }
-> >>
-> >> +       /* Don't have boot time checks on sandbox */
-> >> +       if (IS_ENABLED(CONFIG_SANDBOX)) {
-> >> +               boottime_check = 1;
-> >> +               return 0;
-> >> +       }
-> >> +
-> >>          ret = fwu_get_mdata(NULL);
-> >>          if (ret) {
-> >>                  log_debug("Unable to read meta-data\n");
-> >> diff --git a/test/dm/fwu_mdata.c b/test/dm/fwu_mdata.c
-> >> index 8b5c83ef4e2..52018f610fe 100644
-> >> --- a/test/dm/fwu_mdata.c
-> >> +++ b/test/dm/fwu_mdata.c
-> >> @@ -93,6 +93,12 @@ static int dm_test_fwu_mdata_read(struct unit_test_state *uts)
-> >>          struct udevice *dev;
-> >>          struct fwu_mdata mdata = { 0 };
-> >>
-> >> +       /*
-> >> +        * Trigger lib/fwu_updates/fwu.c fwu_boottime_checks()
-> >> +        * to populate g_dev global pointer in that library.
-> >> +        */
-> >> +       event_notify_null(EVT_MAIN_LOOP);
-> >> +
-> >
-> > Are these explicit invocations required? Should fwu_boottime_checks
-> > not get called through run_main_loop() during boot?
->
-> board_r.c event_notify_null(EVT_MAIN_LOOP); is not reached in sandbox:
->
-> 571 static int run_main_loop(void)
-> 572 {
-> 573 #ifdef CONFIG_SANDBOX <----------- because of this
-> 574         sandbox_main_loop_init();
-> 575 #endif
-> 576
-> 577         event_notify_null(EVT_MAIN_LOOP);
 
-Okay. I see that the line on 577 does not get called before the test
-when invoked through the command line. Thanks.
+Provide a way for removing certain devicetree nodes and/or properties
+from the devicetree. This is needed to purge certain nodes and
+properties which may be relevant only in U-Boot. Such nodes and
+properties are then removed from the devicetree before it is passed to
+the kernel. This ensures that the devicetree passed to the OS does not
+contain any non-compliant nodes and properties.
 
--sughosh
+The removal of the nodes and properties is being done through an
+EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
+behind any Kconfig symbol.
+
+I have only build tested this on sandbox, and tested on qemu arm64
+virt platform. This being a RFC, I have not put this through a CI run.
+
+Sughosh Ganu (5):
+  dt: Provide a way to remove non-compliant nodes and properties
+  fwu: Add the fwu-mdata node for removal from devicetree
+  capsule: Add the capsule-key property for removal from devicetree
+  bootefi: Call the EVT_FT_FIXUP event handler
+  doc: Add a document for non-compliant DT node/property removal
+
+ cmd/bootefi.c                                 | 18 +++++
+ .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
+ drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
+ include/dt-structs.h                          | 11 +++
+ lib/Makefile                                  |  1 +
+ lib/dt_purge.c                                | 73 +++++++++++++++++++
+ lib/efi_loader/efi_capsule.c                  |  7 ++
+ 7 files changed, 179 insertions(+)
+ create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+ create mode 100644 lib/dt_purge.c
+
+-- 
+2.34.1
+
+
