@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA2AEC83F10
-	for <u-boot@archiver.kernel.org>; Sun, 27 Aug 2023 19:17:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F96C83F10
+	for <u-boot@archiver.kernel.org>; Sun, 27 Aug 2023 23:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABCF583F80;
-	Sun, 27 Aug 2023 21:17:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C24C8620C;
+	Mon, 28 Aug 2023 01:13:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HYLdo78g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gWihPqU6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CCBD83F80; Sun, 27 Aug 2023 21:17:50 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 3EEAD846D2; Mon, 28 Aug 2023 01:13:27 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E5F186199
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 21:17:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E7FF863B2
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 01:13:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-3ff5ddb4329so21481565e9.0
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 12:17:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-58fc4d319d2so30885157b3.1
+ for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 16:13:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693163866; x=1693768666;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=yKqOrErGq5Vduvi+6POZnt7MsebRO3ojKhurbDdcm/0=;
- b=HYLdo78ge3awQTIyig0xztaP5yeDXRCf8CcPKI6yvXElSFSeX1dgJ61E2dZn8mNdLd
- wvcPHLhR+RBWI1BPLnJpzle0ku02WBW5ldWPpLt/osEbB/eWuroQ0T01ufeXYBWjbyTV
- OZO8kOf4Y+8IenEA3AsRH1IKDfXAorbPqyTbR1N96OSDNtwk8FiZae4yXPWFPlGDNyqf
- 6tY0TdyY4mwuH9gYmZW0EOZgfoFJop37bM2JiH0iLYSrmRKd7wL7YqjS1irdB0+K2b8Y
- GTRFJD7xQuO7kiGoJqe4frZIK6bXxpJeIgIlxeF/x0nJU1cIMAFbTESKYy2bC9m6kN6U
- LgiA==
+ d=konsulko.com; s=google; t=1693178003; x=1693782803;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iQ+KnN10gDdh/vsllDvm1QCZduPjELW3m0vowFBM4K8=;
+ b=gWihPqU6aXkz+veri9Z8pDQn5LF+JoE8xrEnYQkwO9v3b4G/fjSsre7WnNQ/uUJYj0
+ MzxaBifEPsVdcVTetHx4ok4IVhKZ8bqrlDF+OcKDeiRnHZdEhd8VNyMWWzvIiN98NOsL
+ FuHjTAwwJbuqXiWEju9CdOuKf/DGrme7BNwes=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693163867; x=1693768667;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yKqOrErGq5Vduvi+6POZnt7MsebRO3ojKhurbDdcm/0=;
- b=G6OZLPL0peoKv0Z80uJc75XxBunyoBKjkW+QtiTG643a7eS44G7a7JyxH0RpIM0OZs
- CaG3/HW/xdNzCS5Bzgb5YwuRjBZxPj9zrvTX3kfkMGSor3GdResOiVVJO87JZFPUdlWw
- HawEVZCyLSSRCpcSMbP5HXwpmGgEQf+OSQsY+KwrCaA94+JG0khw1CxB5WPdkLmFSetG
- ACw2Ry0KPMeJE49W2EaGq2OuUaj7CHia4C7+RagArw+sSE8mIUIWoenvmBlOpTPqysaj
- nhjbQDzO2sp6PnP0s4bXFc3D7y7v1RjYu7eWdirCLdzMyp6nbL27JpjEiXQjWz+JYOPH
- cKXQ==
-X-Gm-Message-State: AOJu0YwoG219WfYql4UnMPedg2Ffne8od/2vLiBivXRMGG6eLPW4IsAV
- sILBrsT4CqSicykNh6lYbdU=
-X-Google-Smtp-Source: AGHT+IHrhehfPDhPcaSaZSk42BBjuHLj7Ceqgb74PIGCoU3COVJN9VszyfnmxODvboA3wQxK2wQieg==
-X-Received: by 2002:adf:e584:0:b0:319:7908:cf26 with SMTP id
- l4-20020adfe584000000b003197908cf26mr21490274wrm.26.1693163866608; 
- Sun, 27 Aug 2023 12:17:46 -0700 (PDT)
-Received: from [192.168.0.84] ([178.233.24.1])
+ d=1e100.net; s=20221208; t=1693178003; x=1693782803;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iQ+KnN10gDdh/vsllDvm1QCZduPjELW3m0vowFBM4K8=;
+ b=D3SK1W/TkHXx2pxwNpkYti+2/NRkYVi/5/yXh2YKc8A/YJFjb2r8bAOVw9Q6FPE3Bg
+ tPMjyOMNnpnHxij62XkdGNczi/hoMh1rUhcdwCpydrnROYHruiJebFh0kHbL1Qih+2P1
+ 2lmSAiHwG7AuoY/rQnxu4d/V3O1O7GpYDAAl/yddyUxC5KBHjtYpm4gnrx532vRmD4kz
+ 16aKFa4KbHu2C/D7hZgAfwf1l5jhBNobjaWzujsL/J8wlvnzPRUAsYNhGpM+no9Syp3H
+ W3Kfrlqa6gQJnNYh/Wd9ZXTXb5234m85Dm5F3WccfpXzj2MpalY/KUJeFeiGlyg111IY
+ F6hQ==
+X-Gm-Message-State: AOJu0YzGvsCs+JrvrMQr87cO2tL1TPqswt27+YJn2j8/x3oOLRsfV4a+
+ 0apKpKU172cCQHd/5G1JxUUMnw==
+X-Google-Smtp-Source: AGHT+IEd5yOiXBYM83CzOMKoQxsegW6LJagLtGQ6iJDTDT6E+byjvkhMsLdrjVElmxbJMgNN8/wRvA==
+X-Received: by 2002:a81:a1d5:0:b0:592:1bab:52bd with SMTP id
+ y204-20020a81a1d5000000b005921bab52bdmr21902708ywg.39.1693178002697; 
+ Sun, 27 Aug 2023 16:13:22 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
+ [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
  by smtp.gmail.com with ESMTPSA id
- f17-20020adfdb51000000b0031912c0ffebsm8291758wrj.23.2023.08.27.12.17.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 27 Aug 2023 12:17:46 -0700 (PDT)
-Message-ID: <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
-Date: Sun, 27 Aug 2023 22:17:43 +0300
+ u22-20020a81b616000000b00594e355aa78sm1296531ywh.143.2023.08.27.16.13.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 27 Aug 2023 16:13:20 -0700 (PDT)
+Date: Sun, 27 Aug 2023 19:13:18 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: Pull request efi-2023-10-rc4
+Message-ID: <20230827231318.GY3953269@bill-the-cat>
+References: <808615a4-ae31-d15d-4d90-b58c5bf86c3c@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
- output
-Content-Language: en-US, tr, en-GB
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Dillon Min <dillon.minfei@gmail.com>,
- Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
- Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20230824030304.1555547-1-sjg@chromium.org>
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <20230824030304.1555547-1-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5fIVW5sDQOLMSkJb"
+Content-Disposition: inline
+In-Reply-To: <808615a4-ae31-d15d-4d90-b58c5bf86c3c@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,30 +93,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-24 06:02 +03:00, Simon Glass wrote:
-> In this early stage of using binman to produce output files, we are mostly
-> seeing people using common extensions such as '.bin' and '.rom'
-> 
-> But unusual extensions appear in some places.
-> 
-> We would like 'buildman -k' to keep the build outputs, but this is hard if
-> there is no consistency as to the extension used.
-> 
-> This series adjusts binman to enforce just 4 extensions for output images:
-> 
->    .bin
->    .rom
->    .itb
->    .img
-> 
-> Other extensions will produce an error. With this rule observed, buildman
-> can keep the required files.
 
-I dislike this limitation. We know what files we will generate, they are
-listed in binman dtb, so we can add something like `binman build --ls`
-to print their names/paths for buildman to preserve them.
+--5fIVW5sDQOLMSkJb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regarding the output directory suggestion, I think the binman outputs
-(not temporary/intermediate files) should be in the same directory as
-make outputs, and the Makefile should default to O=build to achieve the
-"output dir". I'm not sure if that's going to happen.
+On Sun, Aug 27, 2023 at 09:55:17AM +0200, Heinrich Schuchardt wrote:
+
+> Dear Tom,
+>=20
+> The following changes since commit e508b930021168c788f14977fc101ccc1151b3=
+c8:
+>=20
+>   Merge https://source.denx.de/u-boot/custodians/u-boot-usb (2023-08-25
+> 10:52:39 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2023-10-rc4
+>=20
+> for you to fetch changes up to cc889bd0754e50a3cd50e8ed3094388480fbec86:
+>=20
+>   efi_loader: delete handle from events when a protocol is uninstalled
+> (2023-08-27 08:21:08 +0200)
+>=20
+> Gitlab CI showed no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/17537
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--5fIVW5sDQOLMSkJb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTr2IsACgkQFHw5/5Y0
+tyyQcQwAtDiDeUVbwIE2L9BFc/k5Ozd7VcR1FRUwgzZB/KwzkTW0TQxxJQzpOdPi
+mAfebGLdH1YiraknatPwCeRNF/k9toWxnSbVQZjdH14J5KvzdASveXDw9DlJdQT+
+IqocuIkE0iPRHQcfvs4Bd0zD9ZsS7/ZS8SG0qAdVLCYYjiGMaZd8+FOp11G07zyi
+ysLpaIUxDgKWfhYDdtml6PxY0hbsQRQEclsXiko3SJ0K/Gr/nD6err8hWYGjxr+x
+918uD5mEC86uaX7F2cj0T+KdBz73/pEzPHLjS8G1jpzeb8NBOBLber835/DTK8Fs
+tsnMi3UMFCTkdNJFsVaEw3kwk1F7Pq/OhZgCucNDdzSgS2q5ku2dEDAvgVSeVfPk
+4CN06+6skeEcdgnbQSwKkkY+gGHp2KZOrmsBFIAJ4jyPzy1P2UlxXSwIdvkzCg46
+UbiGq5FiMFTdwXFNjJ2XggDuqg75HdTGR0P1GqPxLQaF0Tz7SPrxYH/FSeabfyWQ
+8GYy4Jpi
+=PLKQ
+-----END PGP SIGNATURE-----
+
+--5fIVW5sDQOLMSkJb--
