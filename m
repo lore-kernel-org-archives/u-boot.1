@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8087C83F11
-	for <u-boot@archiver.kernel.org>; Sun, 27 Aug 2023 18:41:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA2AEC83F10
+	for <u-boot@archiver.kernel.org>; Sun, 27 Aug 2023 19:17:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 550F68056B;
-	Sun, 27 Aug 2023 20:41:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABCF583F80;
+	Sun, 27 Aug 2023 21:17:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E+vK7GKW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HYLdo78g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA09680568; Sun, 27 Aug 2023 20:41:29 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 6CCBD83F80; Sun, 27 Aug 2023 21:17:50 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2617D8056B
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 20:41:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E5F186199
+ for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 21:17:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-3fef34c33d6so24251665e9.3
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 11:41:27 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-3ff5ddb4329so21481565e9.0
+ for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 12:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693161686; x=1693766486;
+ d=gmail.com; s=20221208; t=1693163866; x=1693768666;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=wZ+oxXh9m/GzM+ZlsfQykNYyIsQnmImNs7VBfR0ZNoM=;
- b=E+vK7GKWpwGV7O60j5BGc8/5x1S12ecE0cKLZqZ7El8Ob/6XfAjbImD1vb1mRFK934
- 3YwBXIeKOT9pTJEz2jSDcxVpitYtFYoanm/xnb5EN/yXjTjtbR3SMtbMtKW4MbjpTa1K
- qQEdv+ifrcUDxTO9pwGZTUIQhvoQHrgkYeirnf/Q70+W0fXfqi2PqYZygQS+HP/sVKFz
- 8dS/PHtybbDF+abryVZcio9pQvEOplHU4iu3pjlFBwe0slGBAQ6Eg6o+NR4+hyWD2B7y
- hhXgtZCT3p9LncC90hObjnjbZ+8v8Oaqjk+AEcx4qS8+vDwfN8opmPimT2W0AQtkt2xM
- Df2g==
+ bh=yKqOrErGq5Vduvi+6POZnt7MsebRO3ojKhurbDdcm/0=;
+ b=HYLdo78ge3awQTIyig0xztaP5yeDXRCf8CcPKI6yvXElSFSeX1dgJ61E2dZn8mNdLd
+ wvcPHLhR+RBWI1BPLnJpzle0ku02WBW5ldWPpLt/osEbB/eWuroQ0T01ufeXYBWjbyTV
+ OZO8kOf4Y+8IenEA3AsRH1IKDfXAorbPqyTbR1N96OSDNtwk8FiZae4yXPWFPlGDNyqf
+ 6tY0TdyY4mwuH9gYmZW0EOZgfoFJop37bM2JiH0iLYSrmRKd7wL7YqjS1irdB0+K2b8Y
+ GTRFJD7xQuO7kiGoJqe4frZIK6bXxpJeIgIlxeF/x0nJU1cIMAFbTESKYy2bC9m6kN6U
+ LgiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693161686; x=1693766486;
+ d=1e100.net; s=20221208; t=1693163867; x=1693768667;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wZ+oxXh9m/GzM+ZlsfQykNYyIsQnmImNs7VBfR0ZNoM=;
- b=At54xjiBbIdlyH0uyQemsSE4FA9LxBgo/aOBsFsfzkdCMXey6iK114mxxTJL2nGyyX
- mOagoWdaxuMBfGmmTRfXnfD6oyL3nophB2W28YlYP852nhCjTAer0YZFGSfbtQBsGhQ2
- L5LQAT09h/HYNZ3CN6DwA0lvAfOUn4SbSJ5X+A7UIqerWNeOxJcI0tEUbG8lG2MF8BhV
- PIizuE7q8A7nGMOZ0V7S455Wt99UCF41R85GXDgJfVNi9OJDcjGDVoQDmrfMX4fTACRt
- qQtuFb0JqFjNblTLenZTlEIQHnI4fNQfheRkN+Vepr9hdG1fX9uobyvJ16g5ND7RLv+5
- K2Wg==
-X-Gm-Message-State: AOJu0YwcWYlPJNG+1AJwZc1/7bjR+7K9JCHKbdae0P5wMmoZHpNcdc60
- mXAqwCzGDeWZ8eUlErr2w1o=
-X-Google-Smtp-Source: AGHT+IH1s6WgeF31ELAbVKsxds+i5Ufkp1d2raFpXlJtC7Te6TX3ddfHLWB3m4KTdH3MhfwL/J9zYQ==
-X-Received: by 2002:a05:600c:2217:b0:401:b53e:6c40 with SMTP id
- z23-20020a05600c221700b00401b53e6c40mr5809021wml.10.1693161686362; 
- Sun, 27 Aug 2023 11:41:26 -0700 (PDT)
+ bh=yKqOrErGq5Vduvi+6POZnt7MsebRO3ojKhurbDdcm/0=;
+ b=G6OZLPL0peoKv0Z80uJc75XxBunyoBKjkW+QtiTG643a7eS44G7a7JyxH0RpIM0OZs
+ CaG3/HW/xdNzCS5Bzgb5YwuRjBZxPj9zrvTX3kfkMGSor3GdResOiVVJO87JZFPUdlWw
+ HawEVZCyLSSRCpcSMbP5HXwpmGgEQf+OSQsY+KwrCaA94+JG0khw1CxB5WPdkLmFSetG
+ ACw2Ry0KPMeJE49W2EaGq2OuUaj7CHia4C7+RagArw+sSE8mIUIWoenvmBlOpTPqysaj
+ nhjbQDzO2sp6PnP0s4bXFc3D7y7v1RjYu7eWdirCLdzMyp6nbL27JpjEiXQjWz+JYOPH
+ cKXQ==
+X-Gm-Message-State: AOJu0YwoG219WfYql4UnMPedg2Ffne8od/2vLiBivXRMGG6eLPW4IsAV
+ sILBrsT4CqSicykNh6lYbdU=
+X-Google-Smtp-Source: AGHT+IHrhehfPDhPcaSaZSk42BBjuHLj7Ceqgb74PIGCoU3COVJN9VszyfnmxODvboA3wQxK2wQieg==
+X-Received: by 2002:adf:e584:0:b0:319:7908:cf26 with SMTP id
+ l4-20020adfe584000000b003197908cf26mr21490274wrm.26.1693163866608; 
+ Sun, 27 Aug 2023 12:17:46 -0700 (PDT)
 Received: from [192.168.0.84] ([178.233.24.1])
  by smtp.gmail.com with ESMTPSA id
- w21-20020a05600c015500b003fee7b67f67sm8418672wmm.31.2023.08.27.11.41.25
+ f17-20020adfdb51000000b0031912c0ffebsm8291758wrj.23.2023.08.27.12.17.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 27 Aug 2023 11:41:25 -0700 (PDT)
-Message-ID: <86ca51bd-8277-45e3-a458-6e4dde3a4d90@gmail.com>
-Date: Sun, 27 Aug 2023 21:41:24 +0300
+ Sun, 27 Aug 2023 12:17:46 -0700 (PDT)
+Message-ID: <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
+Date: Sun, 27 Aug 2023 22:17:43 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi: Correct handling of frame buffer
+Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
+ output
 Content-Language: en-US, tr, en-GB
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20230825192842.1957055-1-sjg@chromium.org>
- <af866d03-d097-48b9-994a-450ac4702d34@gmail.com>
- <274DFE38-4A70-4181-9725-EE7BC5A0483B@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Dillon Min <dillon.minfei@gmail.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20230824030304.1555547-1-sjg@chromium.org>
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <274DFE38-4A70-4181-9725-EE7BC5A0483B@gmx.de>
+In-Reply-To: <20230824030304.1555547-1-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,29 +104,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-27 19:32 +03:00, Heinrich Schuchardt wrote:
-> Am 27. August 2023 16:56:51 MESZ schrieb Alper Nebi Yasak <alpernebiyasak@gmail.com>:
->> On 2023-08-25 22:28 +03:00, Simon Glass wrote:
->>> so we must allow EFI to write directly to the hardware framebuffer.
->>
->> If you want a fix independent of that series, I think the proper
->> approach here is having EFI draw to fb as it already does, then copying
->> from that to copy_fb at the end of gop_blt_int().
+On 2023-08-24 06:02 +03:00, Simon Glass wrote:
+> In this early stage of using binman to produce output files, we are mostly
+> seeing people using common extensions such as '.bin' and '.rom'
 > 
-> An EFI app can write directly to the framebuffer and mix that with API calls.
+> But unusual extensions appear in some places.
+> 
+> We would like 'buildman -k' to keep the build outputs, but this is hard if
+> there is no consistency as to the extension used.
+> 
+> This series adjusts binman to enforce just 4 extensions for output images:
+> 
+>    .bin
+>    .rom
+>    .itb
+>    .img
+> 
+> Other extensions will produce an error. With this rule observed, buildman
+> can keep the required files.
 
-Ack. Can EFI apps write to framebuffer without informing U-Boot at all?
-What I meant is, copying whenever EFI asks us to modify something or
-tells us it modified something.
+I dislike this limitation. We know what files we will generate, they are
+listed in binman dtb, so we can add something like `binman build --ls`
+to print their names/paths for buildman to preserve them.
 
-If it can write without telling us, how are cache flushes and hardware
-syncs handled? Asking these because I'm doing some weird experiments
-with video damage and cyclic video_sync() calls and VIDEO_COPY...
-
-> blt functions causing a full copy would be much slower than what you get when eliminating the copy fb.
-
-When we expose copy_fb to EFI, don't we need to keep fb up to date,
-incurring the same cost? The VIDEO_COPY description mentions "reading
-from the frame buffer is slow", so whatever code is "reading" would use
-fb and would get bad data otherwise. But I can't exactly point to any
-examples other than the video damage series copying fb onto copy_fb.
+Regarding the output directory suggestion, I think the binman outputs
+(not temporary/intermediate files) should be in the same directory as
+make outputs, and the Makefile should default to O=build to achieve the
+"output dir". I'm not sure if that's going to happen.
