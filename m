@@ -4,93 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B43C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 19:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE796C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 19:56:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48DC1864A0;
-	Mon, 28 Aug 2023 21:49:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 3753486452;
+	Mon, 28 Aug 2023 21:56:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ITYUisn3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yovx5JZP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A47C4805C8; Mon, 28 Aug 2023 15:38:00 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DC3A586456; Mon, 28 Aug 2023 21:56:38 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B86186523
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 15:37:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7AE9986430
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 21:56:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 95AEB100005;
- Mon, 28 Aug 2023 16:37:55 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 95AEB100005
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1693229875;
- bh=kSOlgG/16+1+VY/4iOTvVux7Pp8IXgKYDPN43PQm5TQ=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ITYUisn3Pcs6HRuZYvt3OBZksZGjTFGr2KKTjStMI3gi/6WbG6qL0qQSyHklr6vD1
- hdSRUvS49X6g0H0H1woH9jPjKOFL+cjJX9mbfnqI9j54e9Zm24pVv+jZv41fe8sCnI
- NlHVbRWRSaOTMHhiBow5NrQrZntYZ3NoW5EVoYCUrWXuEuooiW8Yi3Zd+HXST/OXct
- Zn/3iyNefuCp3oOa+tPN39vvPaI/5oUsH1GFz9D6BMjGHnTT+hBjH6MWDBvdLck0zg
- osKDTcCJHWkrqSluIwqzS5WMfweuU3zWu/cOqIxoVxWPV5Io1bZr66eOK8RLW36Phi
- 7WFdfcV0sWh8w==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 28 Aug 2023 16:37:55 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 28 Aug 2023 16:37:48 +0300
-From: Igor Prusov <ivprusov@salutedevices.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
- <ivprusov@salutedevices.com>, <u-boot-amlogic@groups.io>,
- <u-boot@lists.denx.de>
-Subject: [PATCH v1 2/2] clk: Add clock driver for Amlogic A1
-Date: Mon, 28 Aug 2023 16:37:24 +0300
-Message-ID: <20230828133724.2637-3-ivprusov@salutedevices.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230828133724.2637-1-ivprusov@salutedevices.com>
-References: <20230828133724.2637-1-ivprusov@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6bc9811558cso2665247a34.0
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 12:56:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1693252594; x=1693857394;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0JtnZ4bZ+HyMIO/Jjc+cdMWeMKjI1cd9Dy0qQiJL+dw=;
+ b=Yovx5JZPe+V7gtlvZhHesKFOkTJfvYoEKcUCNygoTj4jJ2Ln0956k9baHkb0E/lzOz
+ WM5J7HbuZh3BsSjtcJtwC0i/fYIhr/Rrno1RuqmGjqLROfmszOxxAVFkhL+nI0joozjL
+ GcM4/m9WQL94Iai5Re/rw6VKAXcBcUeJz2x9U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693252594; x=1693857394;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0JtnZ4bZ+HyMIO/Jjc+cdMWeMKjI1cd9Dy0qQiJL+dw=;
+ b=kGnYohELAELByITF3az7064wZTE2UXV6qOjEQuwmVYlrDQZIEpyZLYMkQGCCUVYB95
+ PPGp7cHewAStmp6/Bo3lCdyPpSQFCNZ5y2VHBV7vmanow2ooOfFnEP1ptyZFPTAUBNM4
+ tQEZ+NbFe321iRjQE1FKrivqfcpHJwOUou083rg1b0voP4X8EGxqhZg1LY2cwTKuahkH
+ mDa1kthCFzmQmNOLATcUlsQ4y9iqBdLzqDDCGjSQMHrl+w0epsbvVCrO6BZFQ8SLYGQ+
+ +Qc8U5cWDTe+dDkTbdDq7eDgcrZUYxBgCSrSzqNDjwukvb01ApBNcHM0hq+8oxu1q4sv
+ afdg==
+X-Gm-Message-State: AOJu0Yx7Hgkvj9Rr/MKmATv2KRNwO1+dJsCqXHoZBroXN0+KKSqgbklp
+ DzVqQRu58F4Kid7bFeaSedjw6Q==
+X-Google-Smtp-Source: AGHT+IEVAZ2lbWN9BWKY8oOK51IvdtFK5cC0YCkMuWPLxLCLrVaStwIOAp8tkm53wUSz1LiwfyyMDA==
+X-Received: by 2002:a05:6359:6784:b0:139:c75f:63eb with SMTP id
+ sq4-20020a056359678400b00139c75f63ebmr20997134rwb.21.1693252593770; 
+ Mon, 28 Aug 2023 12:56:33 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
+ [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
+ by smtp.gmail.com with ESMTPSA id
+ v184-20020a8185c1000000b005837fe8dbe8sm2338815ywf.8.2023.08.28.12.56.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Aug 2023 12:56:33 -0700 (PDT)
+Date: Mon, 28 Aug 2023 15:56:31 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Andrew Scull <ascull@google.com>, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de, jonbottarini@google.com, seanga2@gmail.com
+Subject: Re: [PATCH v3 00/13] Fuzzing and ASAN for sandbox
+Message-ID: <20230828195631.GQ3953269@bill-the-cat>
+References: <20220530100013.3753780-1-ascull@google.com>
+ <CAPnjgZ3KJS2PDorQVQYw47Pymq6VM0iMe-HEZ=dSGYeE9w6r+Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 179481 [Aug 28 2023]
-X-KSMG-AntiSpam-Version: 5.9.59.0
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 528 528
- 4b912e27f7408903f04ab5d0a88bd271cc7c0a60,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
- 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/08/28 11:35:00 #21756980
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Mon, 28 Aug 2023 21:49:14 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="udO9yiqSFyopvPIG"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3KJS2PDorQVQYw47Pymq6VM0iMe-HEZ=dSGYeE9w6r+Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,761 +93,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds basic clock driver for Amlogic A1 Family which supports
-enabling/disabling some gates, getting frequencies and setting rate
-with limited reparenting.
 
-Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
----
- arch/arm/include/asm/arch-meson/clock-a1.h |  23 +
- drivers/clk/meson/Kconfig                  |   8 +
- drivers/clk/meson/Makefile                 |   1 +
- drivers/clk/meson/a1.c                     | 681 +++++++++++++++++++++
- 4 files changed, 713 insertions(+)
- create mode 100644 arch/arm/include/asm/arch-meson/clock-a1.h
- create mode 100644 drivers/clk/meson/a1.c
+--udO9yiqSFyopvPIG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/include/asm/arch-meson/clock-a1.h b/arch/arm/include/asm/arch-meson/clock-a1.h
-new file mode 100644
-index 0000000000..f6795f5e0c
---- /dev/null
-+++ b/arch/arm/include/asm/arch-meson/clock-a1.h
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright 2018 - AmLogic, Inc.
-+ * Copyright 2023 (C) SberDevices, Inc.
-+ */
-+
-+#ifndef _ARCH_MESON_CLOCK_A1_H_
-+#define _ARCH_MESON_CLOCK_A1_H_
-+
-+/*
-+ * Clock controller register offsets
-+ */
-+#define A1_SYS_OSCIN_CTRL		0x0
-+#define A1_SYS_CLK_CTRL0		0x10
-+#define A1_SYS_CLK_EN0			0x1c
-+#define A1_SAR_ADC_CLK_CTR		0xc0
-+#define A1_SPIFC_CLK_CTRL		0xd8
-+#define A1_USB_BUSCLK_CTRL		0xdc
-+#define A1_SD_EMMC_CLK_CTRL		0xe0
-+
-+#define A1_ANACTRL_FIXPLL_CTRL0		0x0
-+
-+#endif /* _ARCH_MESON_CLOCK_A1_H_ */
-diff --git a/drivers/clk/meson/Kconfig b/drivers/clk/meson/Kconfig
-index 994b44ad7a..cdc9d6f76c 100644
---- a/drivers/clk/meson/Kconfig
-+++ b/drivers/clk/meson/Kconfig
-@@ -21,3 +21,11 @@ config CLK_MESON_G12A
- 	help
- 	  Enable clock support for the Amlogic G12A SoC family, such as
- 	  the S905X/D2
-+
-+config CLK_MESON_A1
-+	bool "Enable clock support for Amlogic A1"
-+	depends on CLK && ARCH_MESON
-+	default MESON_A1
-+	help
-+	  Enable clock support for the Amlogic A1 SoC family, such as
-+	  the A113L
-diff --git a/drivers/clk/meson/Makefile b/drivers/clk/meson/Makefile
-index a486b13e9c..d975f07aab 100644
---- a/drivers/clk/meson/Makefile
-+++ b/drivers/clk/meson/Makefile
-@@ -8,3 +8,4 @@ obj-$(CONFIG_CLK_MESON_AXG) += axg.o
- obj-$(CONFIG_CLK_MESON_AXG) += axg-ao.o
- obj-$(CONFIG_CLK_MESON_G12A) += g12a.o
- obj-$(CONFIG_CLK_MESON_G12A) += g12a-ao.o
-+obj-$(CONFIG_CLK_MESON_A1) += a1.o
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-new file mode 100644
-index 0000000000..6b2b9e6925
---- /dev/null
-+++ b/drivers/clk/meson/a1.c
-@@ -0,0 +1,681 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2023 SberDevices, Inc.
-+ * Author: Igor Prusov <ivprusov@salutedevices.com>
-+ */
-+
-+#include <common.h>
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <regmap.h>
-+#include <asm/arch/clock-a1.h>
-+#include <dt-bindings/clock/amlogic,a1-pll-clkc.h>
-+#include <dt-bindings/clock/amlogic,a1-peripherals-clkc.h>
-+#include "clk_meson.h"
-+
-+/*
-+ * This driver supports both PLL and peripherals clock sources.
-+ * Following operations are supported:
-+ * - calculating clock frequency on a limited tree
-+ * - reading muxes and dividers
-+ * - enabling/disabling gates without propagation
-+ * - reparenting without rate propagation, only on muxes
-+ * - setting rates with limited reparenting, only on dividers with mux parent
-+ */
-+
-+#define NR_CLKS				154
-+#define NR_PLL_CLKS			11
-+
-+#define EXTERNAL_XTAL			(NR_CLKS + 0)
-+#define EXTERNAL_FCLK_DIV2		(NR_CLKS + 1)
-+#define EXTERNAL_FCLK_DIV3		(NR_CLKS + 2)
-+#define EXTERNAL_FCLK_DIV5		(NR_CLKS + 3)
-+#define EXTERNAL_FCLK_DIV7		(NR_CLKS + 4)
-+
-+#define EXTERNAL_FIXPLL_IN		(NR_PLL_CLKS + 1)
-+
-+#define SET_PARM_VALUE(_priv, _parm, _val)				\
-+	regmap_update_bits((_priv)->map, (_parm)->reg_off,		\
-+			   SETPMASK((_parm)->width, (_parm)->shift),	\
-+			   (_val) << (_parm)->shift)
-+
-+#define GET_PARM_VALUE(_priv, _parm)					\
-+({									\
-+	uint _reg;							\
-+	regmap_read((_priv)->map, (_parm)->reg_off, &_reg);		\
-+	PARM_GET((_parm)->width, (_parm)->shift, _reg);			\
-+})
-+
-+struct meson_clk {
-+	struct regmap *map;
-+};
-+
-+enum meson_clk_type {
-+	MESON_CLK_ANY = 0,
-+	MESON_CLK_GATE,
-+	MESON_CLK_MUX,
-+	MESON_CLK_DIV,
-+	MESON_CLK_FIXED_DIV,
-+	MESON_CLK_EXTERNAL,
-+	MESON_CLK_PLL,
-+};
-+
-+struct meson_clk_info {
-+	const char *name;
-+	union {
-+		const struct parm *parm;
-+		u8 div;
-+	};
-+	const unsigned int *parents;
-+	const enum meson_clk_type type;
-+};
-+
-+struct meson_clk_data {
-+	const u8 num_clocks;
-+	const struct meson_clk_info **clocks;
-+};
-+
-+#define CLK_MUX(_name, _reg, _shift, _width, ...)			\
-+	(&(struct meson_clk_info){					\
-+		.parents = (const unsigned int[])__VA_ARGS__,		\
-+		.parm = &(struct parm) {				\
-+			.reg_off = (_reg),				\
-+			.shift = (_shift),				\
-+			.width = (_width),				\
-+		},							\
-+		.name = (_name),					\
-+		.type = MESON_CLK_MUX,					\
-+	})
-+
-+#define CLK_DIV(_name, _reg, _shift, _width, _parent)			\
-+	(&(struct meson_clk_info){					\
-+		.parents = (const unsigned int[]) { (_parent) },	\
-+		.parm = &(struct parm) {				\
-+			.reg_off = (_reg),				\
-+			.shift = (_shift),				\
-+			.width = (_width),				\
-+		},							\
-+		.name = (_name),					\
-+		.type = MESON_CLK_DIV,					\
-+	})
-+
-+#define CLK_DIV_FIXED(_name, _div, _parent)				\
-+	(&(struct meson_clk_info){					\
-+		.parents = (const unsigned int[]) { (_parent) },	\
-+		.div = (_div),						\
-+		.name = (_name),					\
-+		.type = MESON_CLK_FIXED_DIV,				\
-+	})
-+
-+#define CLK_EXTERNAL(_name)						\
-+	(&(struct meson_clk_info){					\
-+		.name = (_name),					\
-+		.parents = (const unsigned int[]) { -ENOENT },		\
-+		.type = MESON_CLK_EXTERNAL,				\
-+	})
-+
-+#define CLK_GATE(_name, _reg, _shift, _parent)				\
-+	(&(struct meson_clk_info){					\
-+		.parents = (const unsigned int[]) { (_parent) },	\
-+		.parm = &(struct parm) {				\
-+			.reg_off = (_reg),				\
-+			.shift = (_shift),				\
-+			.width = 1,					\
-+		},							\
-+		.name = (_name),					\
-+		.type = MESON_CLK_GATE,					\
-+	})
-+
-+#define CLK_PLL(_name, _parent, ...)					\
-+	(&(struct meson_clk_info){					\
-+		.name = (_name),					\
-+		.parents = (const unsigned int[]) { (_parent) },	\
-+		.parm = (const struct parm[])__VA_ARGS__,		\
-+		.type = MESON_CLK_PLL,					\
-+	})
-+
-+static const struct meson_clk_info *meson_clocks[] = {
-+	[CLKID_SPIFC_SEL] = CLK_MUX("spifc_sel", A1_SPIFC_CLK_CTRL, 9, 2, {
-+		EXTERNAL_FCLK_DIV2,
-+		EXTERNAL_FCLK_DIV3,
-+		EXTERNAL_FCLK_DIV5,
-+		-ENOENT,
-+	}),
-+	[CLKID_SPIFC_SEL2] = CLK_MUX("spifc_sel2", A1_SPIFC_CLK_CTRL, 15, 1, {
-+		CLKID_SPIFC_DIV,
-+		EXTERNAL_XTAL,
-+	}),
-+	[CLKID_USB_BUS_SEL] = CLK_MUX("usb_bus_sel", A1_USB_BUSCLK_CTRL, 9, 2, {
-+		-ENOENT,
-+		CLKID_SYS,
-+		EXTERNAL_FCLK_DIV3,
-+		EXTERNAL_FCLK_DIV5,
-+	}),
-+	[CLKID_SYS] = CLK_MUX("sys", A1_SYS_CLK_CTRL0, 31, 1, {
-+		CLKID_SYS_A,
-+		CLKID_SYS_B,
-+	}),
-+	[CLKID_SYS_A_SEL] = CLK_MUX("sys_a_sel", A1_SYS_CLK_CTRL0, 10, 3, {
-+		-ENOENT,
-+		EXTERNAL_FCLK_DIV2,
-+		EXTERNAL_FCLK_DIV3,
-+		EXTERNAL_FCLK_DIV5,
-+		-ENOENT,
-+		-ENOENT,
-+		-ENOENT,
-+		-ENOENT,
-+	}),
-+	[CLKID_SYS_B_SEL] = CLK_MUX("sys_b_sel", A1_SYS_CLK_CTRL0, 26, 3, {
-+		-ENOENT,
-+		EXTERNAL_FCLK_DIV2,
-+		EXTERNAL_FCLK_DIV3,
-+		EXTERNAL_FCLK_DIV5,
-+		-ENOENT,
-+		-ENOENT,
-+		-ENOENT,
-+		-ENOENT,
-+	}),
-+
-+	[CLKID_SPIFC_DIV] = CLK_DIV("spifc_div", A1_SPIFC_CLK_CTRL, 0, 8,
-+		CLKID_SPIFC_SEL
-+	),
-+	[CLKID_USB_BUS_DIV] = CLK_DIV("usb_bus_div", A1_USB_BUSCLK_CTRL, 0, 8,
-+		CLKID_USB_BUS_SEL
-+	),
-+	[CLKID_SYS_A_DIV] = CLK_DIV("sys_a_div", A1_SYS_CLK_CTRL0, 0, 10,
-+		CLKID_SYS_A_SEL
-+	),
-+	[CLKID_SYS_B_DIV] = CLK_DIV("sys_b_div", A1_SYS_CLK_CTRL0, 16, 10,
-+		CLKID_SYS_B_SEL
-+	),
-+
-+	[CLKID_SPIFC] = CLK_GATE("spifc", A1_SPIFC_CLK_CTRL, 8,
-+		CLKID_SPIFC_SEL2
-+	),
-+	[CLKID_USB_BUS] = CLK_GATE("usb_bus", A1_USB_BUSCLK_CTRL, 8,
-+		CLKID_USB_BUS_DIV
-+	),
-+	[CLKID_SYS_A] = CLK_GATE("sys_a", A1_SYS_CLK_CTRL0, 13,
-+		CLKID_SYS_A_DIV
-+	),
-+	[CLKID_SYS_B] = CLK_GATE("sys_b", A1_SYS_CLK_CTRL0, 29,
-+		CLKID_SYS_B_DIV
-+	),
-+	[CLKID_FIXPLL_IN] = CLK_GATE("fixpll_in", A1_SYS_OSCIN_CTRL, 1,
-+		EXTERNAL_XTAL
-+	),
-+	[CLKID_SARADC] = CLK_GATE("saradc", A1_SAR_ADC_CLK_CTR, 8,
-+		-ENOENT
-+	),
-+	[CLKID_SARADC_EN] = CLK_GATE("saradc_en", A1_SYS_CLK_EN0, 13,
-+		CLKID_SYS
-+	),
-+
-+	[EXTERNAL_XTAL] = CLK_EXTERNAL("xtal"),
-+	[EXTERNAL_FCLK_DIV2] = CLK_EXTERNAL("fclk_div2"),
-+	[EXTERNAL_FCLK_DIV3] = CLK_EXTERNAL("fclk_div3"),
-+	[EXTERNAL_FCLK_DIV5] = CLK_EXTERNAL("fclk_div5"),
-+	[EXTERNAL_FCLK_DIV7] = CLK_EXTERNAL("fclk_div7"),
-+};
-+
-+static const struct meson_clk_info *meson_pll_clocks[] = {
-+	[EXTERNAL_FIXPLL_IN] = CLK_EXTERNAL("fixpll_in"),
-+
-+	[CLKID_FIXED_PLL_DCO] = CLK_PLL("fixed_pll_dco", EXTERNAL_FIXPLL_IN, {
-+			{A1_ANACTRL_FIXPLL_CTRL0, 0, 8},
-+			{A1_ANACTRL_FIXPLL_CTRL0, 10, 5},
-+	}),
-+
-+	[CLKID_FCLK_DIV2_DIV] = CLK_DIV_FIXED("fclk_div2_div", 2,
-+		CLKID_FIXED_PLL
-+	),
-+	[CLKID_FCLK_DIV3_DIV] = CLK_DIV_FIXED("fclk_div3_div", 3,
-+		CLKID_FIXED_PLL
-+	),
-+	[CLKID_FCLK_DIV5_DIV] = CLK_DIV_FIXED("fclk_div5_div", 5,
-+		CLKID_FIXED_PLL
-+	),
-+	[CLKID_FCLK_DIV7_DIV] = CLK_DIV_FIXED("fclk_div7_div", 7,
-+		CLKID_FIXED_PLL
-+	),
-+
-+	[CLKID_FIXED_PLL] = CLK_GATE("fixed_pll", A1_ANACTRL_FIXPLL_CTRL0, 20,
-+		CLKID_FIXED_PLL_DCO
-+	),
-+	[CLKID_FCLK_DIV2] = CLK_GATE("fclk_div2", A1_ANACTRL_FIXPLL_CTRL0, 21,
-+		CLKID_FCLK_DIV2_DIV
-+	),
-+	[CLKID_FCLK_DIV3] = CLK_GATE("fclk_div3", A1_ANACTRL_FIXPLL_CTRL0, 22,
-+		CLKID_FCLK_DIV3_DIV
-+	),
-+	[CLKID_FCLK_DIV5] = CLK_GATE("fclk_div5", A1_ANACTRL_FIXPLL_CTRL0, 23,
-+		CLKID_FCLK_DIV5_DIV
-+	),
-+	[CLKID_FCLK_DIV7] = CLK_GATE("fclk_div7", A1_ANACTRL_FIXPLL_CTRL0, 24,
-+		CLKID_FCLK_DIV7_DIV
-+	),
-+};
-+
-+static const struct meson_clk_info *meson_clk_get_info(struct clk *clk, ulong id,
-+						       enum meson_clk_type type)
-+{
-+	struct meson_clk_data *data;
-+	const struct meson_clk_info *info;
-+
-+	data = (struct meson_clk_data *)dev_get_driver_data(clk->dev);
-+	if (id >= data->num_clocks)
-+		return ERR_PTR(-EINVAL);
-+
-+	info = data->clocks[id];
-+	if (!info)
-+		return ERR_PTR(-ENOENT);
-+
-+	if (type != MESON_CLK_ANY && type != info->type)
-+		return ERR_PTR(-EINVAL);
-+
-+	return info;
-+}
-+
-+static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id);
-+
-+static int meson_set_gate(struct clk *clk, bool on)
-+{
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+	const struct meson_clk_info *info;
-+
-+	debug("%s: %sabling %lu\n", __func__, on ? "en" : "dis", clk->id);
-+
-+	info = meson_clk_get_info(clk, clk->id, MESON_CLK_ANY);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	SET_PARM_VALUE(priv, info->parm, on);
-+
-+	return 0;
-+}
-+
-+static int meson_clk_enable(struct clk *clk)
-+{
-+	return meson_set_gate(clk, true);
-+}
-+
-+static int meson_clk_disable(struct clk *clk)
-+{
-+	return meson_set_gate(clk, false);
-+}
-+
-+static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
-+{
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+	u16 n;
-+	ulong rate;
-+	const struct meson_clk_info *info;
-+
-+	info = meson_clk_get_info(clk, id, MESON_CLK_DIV);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	n = GET_PARM_VALUE(priv, info->parm) + 1;
-+
-+	rate = meson_clk_get_rate_by_id(clk, info->parents[0]);
-+
-+	return rate / n;
-+}
-+
-+static int meson_clk_get_parent(struct clk *clk, unsigned long id)
-+{
-+	uint reg = 0;
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+	const struct meson_clk_info *info;
-+
-+	info = meson_clk_get_info(clk, id, MESON_CLK_ANY);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	if (info->type == MESON_CLK_MUX) {
-+		reg = GET_PARM_VALUE(priv, info->parm);
-+		if (IS_ERR_VALUE(reg))
-+			return reg;
-+	}
-+
-+	return info->parents[reg];
-+}
-+
-+static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
-+{
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+	const struct meson_clk_info *info;
-+	const struct parm *pm, *pn;
-+	ulong parent_rate_mhz;
-+	unsigned int parent;
-+	u16 n, m;
-+
-+	info = meson_clk_get_info(clk, id, MESON_CLK_ANY);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	pm = &info->parm[0];
-+	pn = &info->parm[1];
-+
-+	n = GET_PARM_VALUE(priv, pn);
-+	m = GET_PARM_VALUE(priv, pm);
-+
-+	if (n == 0)
-+		return -EINVAL;
-+
-+	parent = info->parents[0];
-+	parent_rate_mhz = meson_clk_get_rate_by_id(clk, parent) / 1000000;
-+
-+	return parent_rate_mhz * m / n * 1000000;
-+}
-+
-+static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
-+{
-+	ulong rate, parent;
-+	const struct meson_clk_info *info;
-+
-+	if (IS_ERR_VALUE(id))
-+		return id;
-+
-+	info = meson_clk_get_info(clk, id, MESON_CLK_ANY);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	switch (info->type) {
-+	case MESON_CLK_PLL:
-+		rate = meson_pll_get_rate(clk, id);
-+		break;
-+	case MESON_CLK_GATE:
-+	case MESON_CLK_MUX:
-+		parent = meson_clk_get_parent(clk, id);
-+		rate = meson_clk_get_rate_by_id(clk, parent);
-+		break;
-+	case MESON_CLK_DIV:
-+		rate = meson_div_get_rate(clk, id);
-+		break;
-+	case MESON_CLK_FIXED_DIV:
-+		parent = meson_clk_get_parent(clk, id);
-+		rate = meson_clk_get_rate_by_id(clk, parent) / info->div;
-+		break;
-+	case MESON_CLK_EXTERNAL: {
-+		int ret;
-+		struct clk external_clk;
-+
-+		ret = clk_get_by_name(clk->dev, info->name, &external_clk);
-+		if (ret)
-+			return ret;
-+
-+		rate = clk_get_rate(&external_clk);
-+		break;
-+	}
-+	default:
-+		rate = -EINVAL;
-+		break;
-+	}
-+
-+	return rate;
-+}
-+
-+static ulong meson_clk_get_rate(struct clk *clk)
-+{
-+	return meson_clk_get_rate_by_id(clk, clk->id);
-+}
-+
-+/* This implements rate propagation for dividers placed after multiplexer:
-+ *  ---------|\
-+ *     ..... | |---DIV--
-+ *  ---------|/
-+ */
-+static ulong meson_composite_set_rate(struct clk *clk, ulong id, ulong rate)
-+{
-+	unsigned int i, best_div_val;
-+	unsigned long best_delta, best_parent;
-+	const struct meson_clk_info *div;
-+	const struct meson_clk_info *mux;
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+
-+	div = meson_clk_get_info(clk, id, MESON_CLK_DIV);
-+	if (IS_ERR(div))
-+		return PTR_ERR(div);
-+
-+	mux = meson_clk_get_info(clk, div->parents[0], MESON_CLK_MUX);
-+	if (IS_ERR(mux))
-+		return PTR_ERR(mux);
-+
-+	best_parent = -EINVAL;
-+	best_delta = ULONG_MAX;
-+	for (i = 0; i < (1 << mux->parm->width); i++) {
-+		unsigned long parent_rate, delta;
-+		unsigned int div_val;
-+
-+		parent_rate = meson_clk_get_rate_by_id(clk, mux->parents[i]);
-+		if (IS_ERR_VALUE(parent_rate))
-+			continue;
-+
-+		/* If overflow, try to use max divider value */
-+		div_val = min(DIV_ROUND_CLOSEST(parent_rate, rate),
-+			      (1UL << div->parm->width));
-+
-+		delta = abs(rate - (parent_rate / div_val));
-+		if (delta < best_delta) {
-+			best_delta = delta;
-+			best_div_val = div_val;
-+			best_parent = i;
-+		}
-+	}
-+
-+	if (IS_ERR_VALUE(best_parent))
-+		return best_parent;
-+
-+	SET_PARM_VALUE(priv, mux->parm, best_parent);
-+	/* Divider is set to (field value + 1), hence the decrement */
-+	SET_PARM_VALUE(priv, div->parm, best_div_val - 1);
-+
-+	return 0;
-+}
-+
-+static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned int id, ulong rate);
-+
-+static ulong meson_mux_set_rate(struct clk *clk, unsigned long id, ulong rate)
-+{
-+	int i;
-+	ulong ret = -EINVAL;
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+	const struct meson_clk_info *info;
-+
-+	info = meson_clk_get_info(clk, id, MESON_CLK_MUX);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	for (i = 0; i < (1 << info->parm->width); i++) {
-+		ret = meson_clk_set_rate_by_id(clk, info->parents[i], rate);
-+		if (!ret) {
-+			SET_PARM_VALUE(priv, info->parm, i);
-+			break;
-+		}
-+	}
-+
-+	return ret;
-+}
-+
-+static ulong meson_clk_set_rate_by_id(struct clk *clk, unsigned int id, ulong rate)
-+{
-+	switch (id) {
-+	case CLKID_SPIFC_DIV:
-+	case CLKID_USB_BUS_DIV:
-+		return meson_composite_set_rate(clk, id, rate);
-+	case CLKID_SPIFC:
-+	case CLKID_USB_BUS: {
-+		unsigned long parent = meson_clk_get_parent(clk, id);
-+
-+		return meson_clk_set_rate_by_id(clk, parent, rate);
-+	}
-+	case CLKID_SPIFC_SEL2:
-+		return meson_mux_set_rate(clk, id, rate);
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static ulong meson_clk_set_rate(struct clk *clk, ulong rate)
-+{
-+	return meson_clk_set_rate_by_id(clk, clk->id, rate);
-+}
-+
-+static int meson_mux_set_parent_by_id(struct clk *clk, unsigned int parent_id)
-+{
-+	unsigned int i, parent_index;
-+	struct meson_clk *priv = dev_get_priv(clk->dev);
-+	const struct meson_clk_info *info;
-+
-+	info = meson_clk_get_info(clk, clk->id, MESON_CLK_MUX);
-+	if (IS_ERR(info))
-+		return PTR_ERR(info);
-+
-+	parent_index = -EINVAL;
-+	for (i = 0; i < (1 << info->parm->width); i++) {
-+		if (parent_id == info->parents[i]) {
-+			parent_index = i;
-+			break;
-+		}
-+	}
-+
-+	if (IS_ERR_VALUE(parent_index))
-+		return parent_index;
-+
-+	SET_PARM_VALUE(priv, info->parm, parent_index);
-+
-+	return 0;
-+}
-+
-+static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
-+{
-+	return meson_mux_set_parent_by_id(clk, parent_clk->id);
-+}
-+
-+static struct clk_ops meson_clk_ops = {
-+	.disable	= meson_clk_disable,
-+	.enable		= meson_clk_enable,
-+	.get_rate	= meson_clk_get_rate,
-+	.set_rate	= meson_clk_set_rate,
-+	.set_parent	= meson_clk_set_parent,
-+};
-+
-+static int meson_clk_probe(struct udevice *dev)
-+{
-+	struct meson_clk *priv = dev_get_priv(dev);
-+
-+	return regmap_init_mem(dev_ofnode(dev), &priv->map);
-+}
-+
-+struct meson_clk_data meson_a1_peripherals_info = {
-+	.clocks = meson_clocks,
-+	.num_clocks = ARRAY_SIZE(meson_clocks),
-+};
-+
-+struct meson_clk_data meson_a1_pll_info = {
-+	.clocks = meson_pll_clocks,
-+	.num_clocks = ARRAY_SIZE(meson_pll_clocks),
-+};
-+
-+static const struct udevice_id meson_clk_ids[] = {
-+	{
-+		.compatible = "amlogic,a1-peripherals-clkc",
-+		.data = (ulong)&meson_a1_peripherals_info,
-+	},
-+	{
-+		.compatible = "amlogic,a1-pll-clkc",
-+		.data = (ulong)&meson_a1_pll_info,
-+	},
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(meson_clk) = {
-+	.name		= "meson-clk-a1",
-+	.id		= UCLASS_CLK,
-+	.of_match	= meson_clk_ids,
-+	.priv_auto	= sizeof(struct meson_clk),
-+	.ops		= &meson_clk_ops,
-+	.probe		= meson_clk_probe,
-+};
-+
-+static const char *meson_clk_get_name(struct clk *clk, int id)
-+{
-+	const struct meson_clk_info *info;
-+
-+	info = meson_clk_get_info(clk, id, MESON_CLK_ANY);
-+
-+	return IS_ERR(info) ? "unknown" : info->name;
-+}
-+
-+static int meson_clk_dump(struct clk *clk)
-+{
-+	const struct meson_clk_info *info;
-+	struct meson_clk *priv;
-+	unsigned long rate;
-+	char *state, frequency[80];
-+	int parent;
-+
-+	priv = dev_get_priv(clk->dev);
-+
-+	info = meson_clk_get_info(clk, clk->id, MESON_CLK_ANY);
-+	if (IS_ERR(info) || !info->name)
-+		return -EINVAL;
-+
-+	rate = clk_get_rate(clk);
-+	if (IS_ERR_VALUE(rate))
-+		sprintf(frequency, "unknown");
-+	else
-+		sprintf(frequency, "%lu", rate);
-+
-+	if (info->type == MESON_CLK_GATE)
-+		state = GET_PARM_VALUE(priv, info->parm) ? "enabled" : "disabled";
-+	else
-+		state = "N/A";
-+
-+	parent = meson_clk_get_parent(clk, clk->id);
-+	printf("%15s%20s%20s%15s\n",
-+	       info->name,
-+	       frequency,
-+	       meson_clk_get_name(clk, parent),
-+	       state);
-+
-+	return 0;
-+}
-+
-+static int meson_clk_dump_dev(struct udevice *dev)
-+{
-+	int i;
-+	struct meson_clk_data *data;
-+	const char *sep = "--------------------";
-+
-+	printf("%s:\n", dev->name);
-+	printf("%.15s%s%s%.15s\n", sep, sep, sep, sep);
-+	printf("%15s%20s%20s%15s\n", "clk", "frequency", "parent", "state");
-+	printf("%.15s%s%s%.15s\n", sep, sep, sep, sep);
-+
-+	data = (struct meson_clk_data *)dev_get_driver_data(dev);
-+	for (i = 0; i < data->num_clocks; i++) {
-+		meson_clk_dump(&(struct clk){
-+			.dev = dev,
-+			.id = i
-+		});
-+	}
-+
-+	return 0;
-+}
-+
-+int soc_clk_dump(void)
-+{
-+	struct udevice *dev;
-+	int i = 0;
-+
-+	while (!uclass_get_device(UCLASS_CLK, i++, &dev)) {
-+		if (dev->driver == DM_DRIVER_GET(meson_clk)) {
-+			meson_clk_dump_dev(dev);
-+			printf("\n");
-+		}
-+	}
-+
-+	return 0;
-+}
--- 
-2.34.1
+On Mon, Aug 28, 2023 at 10:20:02AM -0600, Simon Glass wrote:
+> Hi Andrew,
+>=20
+> On Mon, 30 May 2022 at 04:00, Andrew Scull <ascull@google.com> wrote:
+> >
+> > This series introduces ASAN and a basic fuzzing infrastructure that
+> > works with sandbox. The example fuzz test towards the end of the series
+> > will find something pretty quickly. That something is fixed by the
+> > series "virtio: Harden and test vring" that needs to be applied for the
+> > final patch in this series.
+> >
+> > There is some refactoring to stop using '.' prefixed sections. ELF
+> > defines sections with names that contain anything that isn't
+> > alphanumeric or an underscore as being for system use which means
+> > clang's ASAN instrumentation happily add redzones between the contained
+> > objects. That's not what we want for things like linker lists where the
+> > linker script has carefully placed the sections contiguously. By
+> > renaming the sections, clang sees them as user sections and doesn't add
+> > instrumentation.
+> >
+> > ASAN is left disabled by default as there are still some tests that it
+> > triggers on and will need some more investigation to fix. It can be
+> > enabled with CONFIG_ASAN or passing `-a ASAN` to buildman.
+> >
+> > I abandonded the previous attempts to refactor sandbox EFI and getopt
+> > declaration as the changes resulted in problems out of the scope of this
+> > CL. I haven't tried to understand what EFI on sandbox should look like,
+> > but I have found that the linker list implementation is very brittle
+> > when up against compiler optimisation since ef123c5253 started to use
+> > static, zero-length arrays to mark the beginning and end of lists but
+> > the compiler see this as something it can get rid of.
+> >
+> > From v1:
+> >  - corrected handling of EFI symbols by sandbox linker script
+> >  - per comments, some renaming and explaining
+> >  - dropped RFC for dlmalloc ASAN instrumentation (work required to impr=
+ove it)
+> >  - added patch to reduce logging noise in fuzzer
+> >
+> > From v2:
+> >  - remove sandbox EFI and getopt refactoring, they obstruct the series
+> >  - resolve a couple more ASAN errors
+> >  - fix LTO, xtensa and MIPS builds
+> >  - add ASAN build targets for CI
+> >
+> > Andrew Scull (13):
+> >   serial: sandbox: Fix buffer underflow in puts
+> >   sandbox: Rename EFI runtime sections
+> >   sandbox: Rename getopt sections
+> >   linker_lists: Rename sections to remove . prefix
+> >   sandbox: Add support for Address Sanitizer
+> >   test/py: test_stackprotector: Disable for ASAN
+> >   CI: Azure: Build with ASAN enabled
+> >   fuzzing_engine: Add fuzzing engine uclass
+> >   test: fuzz: Add framework for fuzzing
+> >   sandbox: Decouple program entry from sandbox init
+> >   sandbox: Add libfuzzer integration
+> >   sandbox: Implement fuzzing engine driver
+> >   fuzz: virtio: Add fuzzer for vring
+> >
+> >  .azure-pipelines.yml                          |  6 ++
+> >  Kconfig                                       | 16 ++++
+> >  arch/Kconfig                                  |  2 +
+> >  arch/arc/cpu/u-boot.lds                       |  4 +-
+> >  arch/arm/config.mk                            |  4 +-
+> >  arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds   |  4 +-
+> >  arch/arm/cpu/armv7/sunxi/u-boot-spl.lds       |  4 +-
+> >  arch/arm/cpu/armv8/u-boot-spl.lds             |  4 +-
+> >  arch/arm/cpu/armv8/u-boot.lds                 |  4 +-
+> >  arch/arm/cpu/u-boot-spl.lds                   |  4 +-
+> >  arch/arm/cpu/u-boot.lds                       |  6 +-
+> >  arch/arm/mach-at91/arm926ejs/u-boot-spl.lds   |  2 +-
+> >  arch/arm/mach-at91/armv7/u-boot-spl.lds       |  2 +-
+> >  arch/arm/mach-omap2/u-boot-spl.lds            |  4 +-
+> >  arch/arm/mach-orion5x/u-boot-spl.lds          |  4 +-
+> >  arch/arm/mach-rockchip/u-boot-tpl-v8.lds      |  4 +-
+> >  arch/arm/mach-zynq/u-boot-spl.lds             |  4 +-
+> >  arch/arm/mach-zynq/u-boot.lds                 |  4 +-
+> >  arch/m68k/cpu/u-boot.lds                      |  4 +-
+> >  arch/microblaze/cpu/u-boot-spl.lds            |  4 +-
+> >  arch/microblaze/cpu/u-boot.lds                |  4 +-
+> >  arch/mips/config.mk                           |  2 +-
+> >  arch/mips/cpu/u-boot-spl.lds                  |  4 +-
+> >  arch/mips/cpu/u-boot.lds                      |  4 +-
+> >  arch/nios2/cpu/u-boot.lds                     |  4 +-
+> >  arch/powerpc/cpu/mpc83xx/u-boot.lds           |  4 +-
+> >  arch/powerpc/cpu/mpc85xx/u-boot-spl.lds       |  4 +-
+> >  arch/powerpc/cpu/mpc85xx/u-boot.lds           |  4 +-
+> >  arch/riscv/cpu/u-boot-spl.lds                 |  4 +-
+> >  arch/riscv/cpu/u-boot.lds                     |  4 +-
+> >  arch/sandbox/config.mk                        | 21 ++++-
+> >  arch/sandbox/cpu/os.c                         | 76 +++++++++++++++++
+> >  arch/sandbox/cpu/start.c                      |  2 +-
+> >  arch/sandbox/cpu/u-boot-spl.lds               | 10 +--
+> >  arch/sandbox/cpu/u-boot.lds                   | 32 ++++----
+> >  arch/sandbox/dts/test.dts                     |  4 +
+> >  arch/sandbox/include/asm/fuzzing_engine.h     | 25 ++++++
+> >  arch/sandbox/include/asm/getopt.h             |  2 +-
+> >  arch/sandbox/include/asm/main.h               | 18 ++++
+> >  arch/sandbox/include/asm/sections.h           |  4 +-
+> >  arch/sandbox/lib/sections.c                   |  8 +-
+> >  arch/sh/cpu/u-boot.lds                        |  4 +-
+> >  arch/x86/cpu/u-boot-64.lds                    |  6 +-
+> >  arch/x86/cpu/u-boot-spl.lds                   |  6 +-
+> >  arch/x86/cpu/u-boot.lds                       |  6 +-
+> >  arch/x86/lib/elf_ia32_efi.lds                 |  4 +-
+> >  arch/x86/lib/elf_x86_64_efi.lds               |  4 +-
+> >  arch/xtensa/cpu/u-boot.lds                    |  4 +-
+> >  arch/xtensa/include/asm/ldscript.h            | 13 ++-
+> >  board/compulab/cm_t335/u-boot.lds             |  4 +-
+> >  board/cssi/MCR3000/u-boot.lds                 |  4 +-
+> >  .../davinci/da8xxevm/u-boot-spl-da850evm.lds  |  2 +-
+> >  board/qualcomm/dragonboard820c/u-boot.lds     |  4 +-
+> >  board/samsung/common/exynos-uboot-spl.lds     |  4 +-
+> >  board/synopsys/iot_devkit/u-boot.lds          |  4 +-
+> >  board/ti/am335x/u-boot.lds                    |  4 +-
+> >  board/vscom/baltos/u-boot.lds                 |  4 +-
+> >  doc/api/linker_lists.rst                      | 22 ++---
+> >  doc/develop/commands.rst                      |  4 +-
+> >  doc/develop/driver-model/of-plat.rst          |  4 +-
+> >  drivers/Kconfig                               |  2 +
+> >  drivers/Makefile                              |  1 +
+> >  drivers/fuzz/Kconfig                          | 17 ++++
+> >  drivers/fuzz/Makefile                         |  8 ++
+> >  drivers/fuzz/fuzzing_engine-uclass.c          | 28 +++++++
+> >  drivers/fuzz/sandbox_fuzzing_engine.c         | 35 ++++++++
+> >  drivers/serial/sandbox.c                      |  2 +-
+> >  include/dm/uclass-id.h                        |  1 +
+> >  include/fuzzing_engine.h                      | 51 ++++++++++++
+> >  include/linker_lists.h                        | 18 ++--
+> >  include/test/fuzz.h                           | 51 ++++++++++++
+> >  test/Makefile                                 |  1 +
+> >  test/fuzz/Makefile                            |  8 ++
+> >  test/fuzz/cmd_fuzz.c                          | 82 +++++++++++++++++++
+> >  test/fuzz/virtio.c                            | 72 ++++++++++++++++
+> >  test/py/tests/test_stackprotector.py          |  1 +
+> >  tools/mips-relocs.c                           |  9 +-
+> >  77 files changed, 673 insertions(+), 151 deletions(-)
+> >  create mode 100644 arch/sandbox/include/asm/fuzzing_engine.h
+> >  create mode 100644 arch/sandbox/include/asm/main.h
+> >  create mode 100644 drivers/fuzz/Kconfig
+> >  create mode 100644 drivers/fuzz/Makefile
+> >  create mode 100644 drivers/fuzz/fuzzing_engine-uclass.c
+> >  create mode 100644 drivers/fuzz/sandbox_fuzzing_engine.c
+> >  create mode 100644 include/fuzzing_engine.h
+> >  create mode 100644 include/test/fuzz.h
+> >  create mode 100644 test/fuzz/Makefile
+> >  create mode 100644 test/fuzz/cmd_fuzz.c
+> >  create mode 100644 test/fuzz/virtio.c
+>=20
+> Could you please add some documentation about this in doc/ ? I also
+> wonder if we can make the fuzz test run in CI? Finally, can the azure
+> stuff work in gitlab too?
+>=20
+> I am interested in using fuzzing to test a new 'Universal Payload'
+> feature which basically converts data from a C struct to a devicetree
+> and back.
 
+Fuzzing fails on a number of tests, which is why I've moved it to just
+run the version test here:
+https://patchwork.ozlabs.org/project/uboot/patch/20230820173129.781985-2-tr=
+ini@konsulko.com/
+
+There's not much point in running it in GitLab too until we get the
+errors fixed.
+
+--=20
+Tom
+
+--udO9yiqSFyopvPIG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTs++cACgkQFHw5/5Y0
+tywmrwv7BaW/FE52Xb5YUGeAhEVOIFgEHDo7V7JjziSh8wtyEHzqKuUUQeu9JMMw
+XFc0zgabtCJP8iR1/5HisIa/Lsk5Z2qboAKwGBA+BitcfJXFNM6mxPoP39gvb6Jy
+iNOVXhesPQo4rVd+wg1dGEEqZTg60Vs3+yqaooK3t8sAiXIt0lAapU0XILvM+7Th
+Es4vdnRkgGFGSfywB80OTe+zUrE9+HrGu3/TlSxa42t6vgSdPLEdB48WmBSGNA1/
+nakvhysqms4Qo1Q5sI+C6UtkJhnoOgiommeLHP+BUf5iptt02Otm1AU6EWVsY1Tw
+XI1IPRgPqazxkK2dpCQLvG1WNdK/qeOJa9zSndNrzHcTlGvVqrkMUXLlMXa3VZ7p
+MN6K+oSVriqMDucvjEByIVISkDnLbPlhhXFXuAHyBAXzRWlpOTYbUO+VBXj3fQry
+YpGg50uLEVj88sqHx3SzWQ5hGHH1pkuz0210oTOZ/yPsh2SRdjAtQqWFIFOwJhGa
+UjLrxsX9
+=ZteO
+-----END PGP SIGNATURE-----
+
+--udO9yiqSFyopvPIG--
