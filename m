@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BF8C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:57:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D90C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 18:08:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FCCE8654E;
-	Mon, 28 Aug 2023 19:56:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 86A2786487;
+	Mon, 28 Aug 2023 20:08:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kec0ShwA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nrQZox0t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE7DA86552; Mon, 28 Aug 2023 19:56:22 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 0DF7C86487; Mon, 28 Aug 2023 20:08:10 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E77186522
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:56:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 482128648F
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 20:08:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5920efd91c7so40690567b3.2
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:56:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5921a962adfso42063087b3.1
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 11:08:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693245377; x=1693850177;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mYaEHmERvHq14VdKDotQkz/ye/JDmXVAkgt/7kSqbCs=;
- b=Kec0ShwALVPHNn6XHFXnUeBo3vqQyFPAKnQLIAH/OEMF4gEiRg8p0s5rbRAXffgFPr
- NsmJJ9dmCrPuthZxBOHJMwlwbuUJI8jFEgEFLGPhTeZOmqLQO0wVpIz/T3AR9FcPyJNP
- eVecUz1/PekSTdY1t9o6NL9IPH8cezKIByh10=
+ d=konsulko.com; s=google; t=1693246086; x=1693850886;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b4lyLgkhzSG8lMy6CF5deumMtW6bne2O84u07z2w268=;
+ b=nrQZox0tsw8e+sypuM+B+P/eaMtqwwjmSNkeZF0kSDunluo5Cafr9Hhs3f5JNspHB/
+ ne6/EW8tUQnEb4EDOY4TlJOTBCd0IjJSDyjVb5EQv3kAx7ihIt0lPZl46wF1cVnzLU6W
+ TfmojBklrfyEQGPQbEDx0wKl0VeLCr9q+ECxU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693245377; x=1693850177;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mYaEHmERvHq14VdKDotQkz/ye/JDmXVAkgt/7kSqbCs=;
- b=bJ08rE2EwNjwrTjjQp0EhNbz/elwbRt9sE7czJSqAAIMNUHz7yfTLZ9uQjNXMR78jQ
- mGCRc/JtpVIHkMuA48rVIu5Xf0KK1ulmYeJJ3O5BQ+Q4DWWSy9HGyU+xOP0tMT3Zg+9l
- mgklG8HJaYZpMVAYIETFoiqWXWug1U6+mEN8JzRp+t4YSAjOgGNSZJTxK4ym98Y0pT1D
- tD9gXTgKr9DBW0/o/zUDwV2Qv1LklZsVyDBlGGfVQhFcUHHnTIb8DN/mhg3tKG6V1zg6
- 4ZAhtSE6+kt688GK3C198QRWrbSWY/0kxvQRL30G6SLQxO9eOis3G2T8h+T5Wx9PzXjn
- IS2Q==
-X-Gm-Message-State: AOJu0Yzae0A/6q6shdh8xrolIQ9Nop/otEI8pWPGgvSJmxw0cjjd7aCw
- RfcLTBG/hj9c48080k300NQisZ1Gz8M4N/DumC9Cpw==
-X-Google-Smtp-Source: AGHT+IFZhHyXxU4mK58kJVS2rSppbZSRzsXWuOOwSXUfcbssaZio/mE650D3BTGWIt0GNkE5ukEPwoCBrjg+UTN5SMw=
-X-Received: by 2002:a25:685:0:b0:d7b:37de:2f6e with SMTP id
- 127-20020a250685000000b00d7b37de2f6emr1846047ybg.39.1693245376665; Mon, 28
- Aug 2023 10:56:16 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693246086; x=1693850886;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b4lyLgkhzSG8lMy6CF5deumMtW6bne2O84u07z2w268=;
+ b=UXW7J0O5huXMJLp4yPLKBuC6PtaA+5cFcu6BsFYuU1Hht+zvrkHek+1DUy+kbsH/Ht
+ Jw9db1AP7vDFD2MQm5sTnrIebQcov9tomDI8B0zlgpmPFssFSWA4NY4HEvhAjpqXt3zx
+ t6msnChExKXsUIR2j3N4B5FEGc4VzXqbPRdBZcDKi7IHJdLBew6ZdTB2nIbJFcSb6kb/
+ YXuuM6ZFsXt3tFmt320+WXHLpwfTND7KPou2FnSeMq8FkOkiSKxzAsBSBYYGd+o2LqUJ
+ 3EAmo7BKeoaPdXlXi8t+0Hg8v9a6ev7JXm4pT7Su/dpHDygNVIS57wkizQl22OdIc/qT
+ cG8g==
+X-Gm-Message-State: AOJu0YxFtN5h2gT1Nu0XYMjmhL9Ethy0sedEST4G7YdYy85SM+v+Hb/x
+ 2Uaa94QDCqX3JWj/oXaKI+Y+xEak8tyjqclokOAVeQ==
+X-Google-Smtp-Source: AGHT+IEcSPLA1GetRdMsucOnO9KHLGoZ3z0D7YAci0pj5Pnu6LfFYdRQ9oPdYtYBIoKMLIMtGYMKog==
+X-Received: by 2002:a0d:cd45:0:b0:561:206a:ee52 with SMTP id
+ p66-20020a0dcd45000000b00561206aee52mr30731750ywd.24.1693246086037; 
+ Mon, 28 Aug 2023 11:08:06 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
+ [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
+ by smtp.gmail.com with ESMTPSA id
+ o1-20020a0de501000000b005832fe29034sm2275490ywe.89.2023.08.28.11.08.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Aug 2023 11:08:05 -0700 (PDT)
+Date: Mon, 28 Aug 2023 14:08:03 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [RFC PATCH 1/5] dt: Provide a way to remove non-compliant nodes
+ and properties
+Message-ID: <20230828180803.GK3953269@bill-the-cat>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <20230826090633.239342-2-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-References: <20230824030304.1555547-1-sjg@chromium.org>
- <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
-In-Reply-To: <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Aug 2023 11:54:55 -0600
-Message-ID: <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
- output
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Dillon Min <dillon.minfei@gmail.com>, 
- Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
- Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com, 
- uboot-stm32@st-md-mailman.stormreply.com, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="i61b4jgpx4JxEBfD"
+Content-Disposition: inline
+In-Reply-To: <20230826090633.239342-2-sughosh.ganu@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,52 +95,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
 
-On Sun, 27 Aug 2023 at 13:17, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->
-> On 2023-08-24 06:02 +03:00, Simon Glass wrote:
-> > In this early stage of using binman to produce output files, we are mostly
-> > seeing people using common extensions such as '.bin' and '.rom'
-> >
-> > But unusual extensions appear in some places.
-> >
-> > We would like 'buildman -k' to keep the build outputs, but this is hard if
-> > there is no consistency as to the extension used.
-> >
-> > This series adjusts binman to enforce just 4 extensions for output images:
-> >
-> >    .bin
-> >    .rom
-> >    .itb
-> >    .img
-> >
-> > Other extensions will produce an error. With this rule observed, buildman
-> > can keep the required files.
->
-> I dislike this limitation. We know what files we will generate, they are
-> listed in binman dtb, so we can add something like `binman build --ls`
-> to print their names/paths for buildman to preserve them.
+--i61b4jgpx4JxEBfD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes, it would be good to have that...
+On Sat, Aug 26, 2023 at 02:36:29PM +0530, Sughosh Ganu wrote:
 
-But why do you dislike the limitation? Do you think extensions provide
-useful information? I suppose one problem is that *.bin might pick up
-private blobs that happen to be in the source directory?
+> Add a function which is registered to spy for a EVT_FT_FIXUP event,
+> and removes the non upstreamed nodes and properties from the
+> devicetree before it gets passed to the OS.
+>=20
+> This allows removing entire nodes, or specific properties under nodes
+> from the devicetree. The required nodes and properties can be
+> registered for removal through the DT_NON_COMPLIANT_PURGE and
+> DT_NON_COMPLIANT_PURGE_LIST macros.
+>=20
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
->
-> Regarding the output directory suggestion, I think the binman outputs
-> (not temporary/intermediate files) should be in the same directory as
-> make outputs
+So, the conceptual problem here is that while we do need to have a way
+to purge nodes and properties that have been rejected by upstream, we
+also need to ensure an upstream attempt was made. To that end, how I
+envision things is:
+- When we build the docs, something under doc/develop/ has a page /
+  section for each binding we're purging, which links to and summarizes
+  why it's not appropriate for upstream.
+- It's non-default to purge said nodes.
+- We at least make checkpatch / et al complain about new purges being
+  added, and CI failing on the number of purges increasing without also
+  increasing the number of allowed purges.
 
-Agreed
+--=20
+Tom
 
->, and the Makefile should default to O=build to achieve the
-> "output dir". I'm not sure if that's going to happen.
+--i61b4jgpx4JxEBfD
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I would quite like the 'non-output' file (i.e. things that are not a
-binman image) to appear in a 'binman-work' subdir of the output dir.
-What do you think?
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Simon
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTs4oAACgkQFHw5/5Y0
+tywLpgwAjY5HA0QxGPY1ZnRc4c9uK8AWlfB3NcU+a0mejSA5YSCIYnJMmofsVnY7
+FCJCwVSUgm7ZGkbn8a9uzHwoUyo6llcX0S2725/0BtTTK5G5ShXrO9q1jdUAMIMJ
+Wji+gVRGxvJ5eESv0UCRjrD3f+A2V/+AQjRaM/lrb4A2RvuCTUJ+QftXpw/pYBXe
+PQQ0zpgonEE2Kfg68aZy9UPddShjvmPAjumTs0IviVM3xvVZsbOhHQHv4NcFScJ0
+ZFzMzells/nQp+m0huDkLBJ83g/0+gAyJviVlhiSnvU1uYg+OxWfP0M44JUFKKhO
+bOmtEGy3PKRYXZKFyfFU17JscR3ieHB5dbxaitcaDVyu47LKpchDWQwhKekLMrtL
+9/dlTEQpenGE3CLbz6iS6FtfM812JDj+ivIzNc5Hud5uXhroRbGXAx1MZeSDbO9z
+qwzoHxgnyHhjlx1/ncAzTXPASjWpcQzT1lGkepA9tjdHP0HCxve4kAiPJTki+zor
+VLHFdjWe
+=IaJN
+-----END PGP SIGNATURE-----
+
+--i61b4jgpx4JxEBfD--
