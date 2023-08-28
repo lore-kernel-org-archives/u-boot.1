@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 845BFC83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 15:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B53C83F15
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 15:22:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B2E48647D;
-	Mon, 28 Aug 2023 17:18:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 16687864D8;
+	Mon, 28 Aug 2023 17:22:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="UzIUZcx0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X/OSQbQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 458C5864C4; Mon, 28 Aug 2023 17:18:55 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id C5494864D8; Mon, 28 Aug 2023 17:22:37 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACBB4846B8
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 17:18:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30AF9864BA
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 17:22:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-3fee8af9cb9so31276905e9.1
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 08:18:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-3fea0640d7aso31774235e9.0
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 08:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1693235932; x=1693840732; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pHargzU823OnEbh4qq9+35GYPA+cYRDFtF9kXf4ofJ8=;
- b=UzIUZcx079sS7MqiKG12atQVH2LnXXAs8Jm3uJr+NSkchzbZnKj9xChyZQOhKFJLlg
- 7HxediJ0aJdtVf3wT0FoGyobBxXReAQ5fQDALu7L8OaquoTQtPW8lkafrCbERnACmHnu
- 0wzjP1vGG0e6gQDEPXg71PeHiLEk1JBrNbjXO+htj8zFb5PfUEFQvvoqPrgoLvHPcAvR
- QOn2MYBT9e8TlsjKErWNOCspqtsqaCI1S7UtHIpaHfkELlZYhnNtUqB8EY5+pOy9oQYi
- UZuKbhQpCAj5JfJUK3A+jWIpEDBzHrtjyio/3mxRNemf2GE5j/CXHiLRNEwT8I50Ffl7
- cfHg==
+ d=gmail.com; s=20221208; t=1693236154; x=1693840954;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LtD2sD6JpNsZhFkULZhUQo3DIrlonVPAq5puOjerfa8=;
+ b=X/OSQbQcC58gx2NL4FxuUZV2e/WWgeVNAz1pvFfWdQnI0IkKx5gfGiWlPNSqgc8cDT
+ hNOOJNH2r0M+Y2P0hhzYgsm6PVUeJrjbz42+jgfC6Hk4/XVHxzpo2f/39i050aTw2PBp
+ OqWBOwQ+HqYPzdMaWpoNhUGsNbTri8mhygqr/kz2zqEfo32LgZWyNlSiG/b9hG0XVbiV
+ bfdLBF+uKS/RWUzgY/3nhs4hIBYsz8Q4umyBD5RKqRmIhP9qveNsWxBxHU+3cRbu2FGB
+ 7QsM5+ThpQ0x6aq89Gx6FJlB3eWSwYVhCRhkzU/hL5xfQRkLUF5FfN5CLSoOVZmE6VDx
+ mccA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693235932; x=1693840732;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pHargzU823OnEbh4qq9+35GYPA+cYRDFtF9kXf4ofJ8=;
- b=i0BCp6XcIDaAZNITT2a7SxpyNQaQkfYXsh/p2nUSv6ZRYdGMMwTOPjLlpmdfQov9yC
- 6JAt10G30i68vcD3+oNFA/xlA613rkpoo0aR0yxbAZ34+/10hx1rvrOOIpG99jS99Acl
- JwhoZbxGNCf1AaA4Q44W0v0zpGHR2aHCZAOOoKFDj05ZzRG88trY8Be00dIFyCWNuDuW
- dnzsyC6DY/b2YE3luiqknA5PYurFFp4evPF4dNlQddv1QtAJXKwlRBVRfgAjgpeDqZ27
- sLT7j0APYQvCynG1mXjztZDvEwmyZlgjngSgn55mJ31CiaSY8YjtkksW0SC1TOryB79L
- McXw==
-X-Gm-Message-State: AOJu0YwgjoroPkK5Psxz56ccUuv7RkGrJGErfJwxJqvePbJt0pzSWapN
- woiYcyK7GBa05sKwHopg1WYb8g==
-X-Google-Smtp-Source: AGHT+IGpm84W3supY0xl5dnZXnqyvvAbgZjRDZJC6ncNWpsnkPj5B7W7Qt2IAhkzkg6zigrxNCy0zQ==
-X-Received: by 2002:a05:600c:3486:b0:3fb:c9f4:1506 with SMTP id
- a6-20020a05600c348600b003fbc9f41506mr20060675wmq.1.1693235932277; 
- Mon, 28 Aug 2023 08:18:52 -0700 (PDT)
-Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
+ d=1e100.net; s=20221208; t=1693236154; x=1693840954;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LtD2sD6JpNsZhFkULZhUQo3DIrlonVPAq5puOjerfa8=;
+ b=gZGmxisw4HvEVnf2Xz6XchH5MeyslFgjBHgKlYE3FXCVQOcVbYSeMKhSi4AIiKcW1m
+ b2DWWZT1M6gwcROmElVmbrO3u+0nq/RW4lJh6sHIcHdpSvoMllOQuhIKjdGKnf3LvYbm
+ esWSWDCTAiAGA0u4YlyLKIZLVrFhRHQKJwkVcd+XkmikMGwLxhy8LM2ZbI1G89MTGcZD
+ IrNx/cuko3gzJBlaEDzdALTahdnx+nJ010OgQ5puNntG5mE1PYvkvDaIBcEK9V1Akpzd
+ lCZIjY3+FOrzDttOthe5TFH8KmSPMp2YdD0CVAV9sMYW1GElZdN64Ori6uS4fWMFxd30
+ Pcnw==
+X-Gm-Message-State: AOJu0YxyFRmJH+t/E5cpygnEgNqDZGhPuu21L/EKcvs/TCiPKy1zlfhT
+ rg/7MsZinKKGkkQsyl4p8WA=
+X-Google-Smtp-Source: AGHT+IH6cJh7Z06Oxm7/EUD4UWX0jQSIfyvMqNtAcVXW8q37YbmNBRNcLUA5dWEAv5xGInsyrwhY4w==
+X-Received: by 2002:a05:600c:2181:b0:3fe:228a:e782 with SMTP id
+ e1-20020a05600c218100b003fe228ae782mr20112900wme.37.1693236154381; 
+ Mon, 28 Aug 2023 08:22:34 -0700 (PDT)
+Received: from [192.168.0.84] ([178.233.24.1])
  by smtp.gmail.com with ESMTPSA id
- u11-20020a05600c210b00b003fe2b081661sm14256705wml.30.2023.08.28.08.18.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Aug 2023 08:18:51 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@google.com>
-Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
- Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Jan
- Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH V6 01/20] include: env: ti: mmc: envboot/mmcboot: Check
- result of mmc dev before proceeding
-In-Reply-To: <20230825180305.69515-2-nm@ti.com>
-References: <20230825180305.69515-1-nm@ti.com>
- <20230825180305.69515-2-nm@ti.com>
-Date: Mon, 28 Aug 2023 17:18:51 +0200
-Message-ID: <87msybw5yc.fsf@baylibre.com>
+ f10-20020a1c6a0a000000b003fe407ca05bsm14164356wmc.37.2023.08.28.08.22.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Aug 2023 08:22:33 -0700 (PDT)
+Message-ID: <347da6dc-7adb-48cc-afb7-a47ca621bb06@gmail.com>
+Date: Mon, 28 Aug 2023 18:22:31 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/7] qfw: Add flag to allow probing before relocation
+Content-Language: en-US, tr, en-GB
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
+ Alexander Graf <agraf@csgraf.de>, Mark Kettenis <mark.kettenis@xs4all.nl>
+References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
+ <20230822121026.1007105-5-alpernebiyasak@gmail.com>
+ <CAPnjgZ0uez=Wj+_G7nrz8iknuc_Tn56TdHjSS2R_73h5-FrJvA@mail.gmail.com>
+From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+In-Reply-To: <CAPnjgZ0uez=Wj+_G7nrz8iknuc_Tn56TdHjSS2R_73h5-FrJvA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,65 +100,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On ven., ao=C3=BBt 25, 2023 at 13:02, Nishanth Menon <nm@ti.com> wrote:
+On 2023-08-22 21:56 +03:00, Simon Glass wrote:
+> Hi Alper,
+> 
+> On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>
+>> QEMU firmware config drivers need to be probed to bind the ramfb device.
+>> The ramfb driver needs to be bound before relocation to properly reserve
+>> video memory for it, otherwise it cannot be probed after relocation. Add
+>> the flag to probe QEMU firmware config drivers before relocation so that
+>> ramfb can work as an initial vidconsole.
+>>
+>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> ---
+>> Alternatively, I guess I could default VIDEO_PCI_DEFAULT_FB_SIZE to a
+>> higher size with "if VIDEO_RAMFB". But it exists because "PCI drivers
+>> cannot be bound before relocation unless they are mentioned in the
+>> devicetree" and qfw is in the QEMU-generated devicetree unlike those, so
+>> I assumed this would be the preferred way.
+>>
+>> Changes in v2:
+>> - Add patch "qfw: Add flag to allow probing before relocation"
+>>
+>>  drivers/misc/qfw.c         | 1 +
+>>  drivers/misc/qfw_mmio.c    | 1 +
+>>  drivers/misc/qfw_pio.c     | 1 +
+>>  drivers/misc/qfw_sandbox.c | 1 +
+>>  4 files changed, 4 insertions(+)
+>>
+>> diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
+>> index 4e4260982cce..265f45290011 100644
+>> --- a/drivers/misc/qfw.c
+>> +++ b/drivers/misc/qfw.c
+>> @@ -414,6 +414,7 @@ UCLASS_DRIVER(qfw) = {
+>>         .name           = "qfw",
+>>         .post_bind      = qfw_post_bind,
+>>         .per_device_auto        = sizeof(struct qfw_dev),
+>> +       .flags = DM_FLAG_PRE_RELOC,
+>>  };
+> 
+> Should we add this to the DT instead?
 
-> If mmc dev reports that the device is not present, there is no point in
-> proceeding further to attempt to load the files.
->
-> Signed-off-by: Nishanth Menon <nm@ti.com>
+I've experimented a bit, and got something that works nice on x86
+because we have the device-trees in-tree. So I can add something to
+arch/x86/dts/qemu-*.dts like:
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+    / {
+        fw-cfg {
+            compatible = "qemu,fw-cfg-pio";
+            bootph-some-ram;
 
-> ---
-> new patch -  noticed a series of 'MMC: no card present' in boot log
-> and was wondering why, now I know - shaves off 2 seconds or so into boot
-> process.
->
->  include/env/ti/mmc.env | 8 +++++---
->  1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/include/env/ti/mmc.env b/include/env/ti/mmc.env
-> index 6fb47fb26673..b8eb51ca1744 100644
-> --- a/include/env/ti/mmc.env
-> +++ b/include/env/ti/mmc.env
-> @@ -15,7 +15,7 @@ loadbootenv=3Dfatload mmc ${mmcdev} ${loadaddr} ${boote=
-nvfile}
->  loadimage=3Dload ${devtype} ${bootpart} ${loadaddr} ${bootdir}/${bootfil=
-e}
->  loadfdt=3Dload ${devtype} ${bootpart} ${fdtaddr} ${bootdir}/dtb/${fdtfil=
-e}
->  get_fdt_mmc=3Dload mmc ${bootpart} ${fdtaddr} ${bootdir}/dtb/${name_fdt}
-> -envboot=3Dmmc dev ${mmcdev};
-> +envboot=3Dif mmc dev ${mmcdev}; then
->  	if mmc rescan; then
->  		echo SD/MMC found on device ${mmcdev};
->  		if run loadbootscript; then
-> @@ -31,6 +31,7 @@ envboot=3Dmmc dev ${mmcdev};
->  			fi;
->  		fi;
->  	fi;
-> +  fi;
->  mmcloados=3D
->  	if test ${boot_fdt} =3D yes || test ${boot_fdt} =3D try; then
->  		if run get_fdt_mmc; then
-> @@ -45,7 +46,7 @@ mmcloados=3D
->  	else
->  		bootz;
->  	fi;
-> -mmcboot=3Dmmc dev ${mmcdev};
-> +mmcboot=3Dif mmc dev ${mmcdev}; then
->  	devnum=3D${mmcdev};
->  	devtype=3Dmmc;
->  	if mmc rescan; then
-> @@ -58,7 +59,8 @@ mmcboot=3Dmmc dev ${mmcdev};
->  				run mmcloados;
->  			fi;
->  		fi;
-> -fi;
-> +	fi;
-> +  fi;
->=20=20
->  init_mmc=3Drun args_all args_mmc
->  get_overlay_mmc=3D
-> --=20
-> 2.40.0
+            qfw-ramfb {
+                compatible = "qemu,qfw-ramfb";
+                bootph-some-ram;
+            };
+        };
+    };
+
+Then add the compatibles as .of_match to qfw_pio and ramfb drivers, call
+dm_scan_fdt_dev(dev) in qfw_post_bind(), merge qfw_bind_ramfb() into the
+ramfb driver probe, and it will work without the board_early_init_[fr]
+hooks or these flags. That all seems to be fine.
+
+The problem is other arches where QEMU generates a device-tree at
+runtime and passes it to U-Boot with OF_BOARD. It has, on arm64 (and
+with @10100000 instead on riscv64):
+
+    fw-cfg@9020000 {
+        dma-coherent;
+        reg = <0x00 0x9020000 0x00 0x18>;
+        compatible = "qemu,fw-cfg-mmio";
+    };
+
+As a proof of concept, I used `qemu-system-* -M dumpdtb=file.dtb` and
+`dtc -I dtb -O dts` to replace the empty qemu dts files, then set
+OF_BOARD=n and OF_OMIT_DTB=n, and added similar modifications to
+qemu-*-u-boot.dtsi. And everything seems fine like that as well.
+
+I think it can be automated in Makefile, but I don't think disabling
+OF_BOARD is right here. I see there's OF_BOARD_FIXUP, so I guess I'll
+try finding the fw-cfg node there and adding the bootph props and ramfb
+nodes... Is this going the right way?
+
+(And the pio/ramfb compatibles don't exist, do we have to use u-boot,*?)
+
+> In the case where it isn't present it can return -EPERM.
+> 
+> Regards,
+> Simon
