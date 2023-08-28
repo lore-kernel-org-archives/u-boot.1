@@ -4,76 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B14AC83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 10:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B1C1C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 11:30:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8004380569;
-	Mon, 28 Aug 2023 12:57:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D8C4986422;
+	Mon, 28 Aug 2023 13:30:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tXJIc3CJ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ldpNPamr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0339A86420; Mon, 28 Aug 2023 12:57:28 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C352486423; Mon, 28 Aug 2023 13:30:55 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::620])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62FB5803AC
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 12:57:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B987286421
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 13:30:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693220244; x=1693825044; i=xypron.glpk@gmx.de;
- bh=JSfT5YmM0ldejQlnZf3sKCwbSUeEEnYwC33xg4eNsFg=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=tXJIc3CJZDAuXdSZwLk4rLMxhmd70HOcyZojfpEM3VAsmjVyWi7OSao5Q0/LZRIHdvQf79N
- YHA8qhBvhBrw1WJaZPdVLmWPUIN1bMshIwIhXGbo7dF+ppoGA1nj2KAVeGi8lRvn/vUoST3fy
- raVup/R2C7Lf6fOyPmQlx4lVzpMEgNZur5athpLQwTJFkYBt1FFYCqHpK3OA9EaIqq4P3t8bR
- 2GCT4XIuCyOXVdSND01T/BYnOPHysAGrH2g5/XneyTZeF16r31fL8Zc3orEVk+gRZe6DWT2Er
- 1qzK8TRN004x+xDAcKzO+AX+chU/SV1dXm/dK6Xs291qBlRy1G/w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([62.143.244.162]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M3DJv-1qXXX43qt3-003eUQ; Mon, 28
- Aug 2023 12:57:23 +0200
-Message-ID: <c149c664-7aff-43a9-8d41-f098622e1809@gmx.de>
-Date: Mon, 28 Aug 2023 12:57:19 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Cotuyb/YlfPgGx+EbjM06Efq5vplyY4wBY/NmjCXvIjWMkVGJbK5BNXo8ag8emqxYIWEsAc3HnxEPqjy4+rdyCH6I/NwfsJvnc7/e/mM/D1+4s8MD0ITVs3oNt9RVm2xNGjbLgyMK/JSW+uAF6KOv+MQmDKTMv8Lldph8q3g/B6gr2kEJAESxIfG7aA5TMQ9SE8yt2pp9epmy7SQCOh16TVjVybMGSNR/lEKb/bfoWqB41V38cI+Jc9h8x8G6eL/GvdL+J2E4lqlCCBd9SFPd00wGSx1hwhuxM4ywYz34MR82Iyfuc8BZQVIXA/dRKNxUOm97ug3DiHmsPKEHylfDg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=whNfuHZUU6fKOMJr/TAbWSQZd+s2tDwC/l6HiiUnTTs=;
+ b=E/n4DZFQSQOj8Nw6TBZVpjwlK6Smg7DVbGOtRwErtNTOLF1shO8HJtO1DIA4Lyh7FCTm4kqpPfH+yYllFF09Pj5iCf5Y+wqJ40yHFpKmjD3ucDP2kn5prCGcooF6zuksfEL1vwnaz7ExYnO3KJTbQJtQF5gdADpT8SmGJ/9+BSM6ZivXicmZXPm1AQQuYZmFVOrlQ27oGUcFCFmO0v8CwY7bhIF+NBD9KnbXm02OqsrDZJCkCxKXPsTM4YZ7ceX/D/h8wG5dBPI1BgrZTtBYGMY7zlvW7VIZYlcMaC2nmu0hGLKION6mDVe6Ex03VM68HzTNC26dzJIW+7kfYUAxow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=whNfuHZUU6fKOMJr/TAbWSQZd+s2tDwC/l6HiiUnTTs=;
+ b=ldpNPamrevqL0g9NrLzItZQ2yqBLNpI6s3853E2txezRtZ3hniN6Ay6HeHFvOgyLVSOrB/RQsMr9OsWDOWVHwjX6TWCbnGgq/kI1vcIubOPsw+fuxIXCERqzKYV0LBnPeijAS3SsZ129AXMdN+GpPzKj9WhU1vdtYS4qn6OhoTw=
+Received: from MW4PR04CA0268.namprd04.prod.outlook.com (2603:10b6:303:88::33)
+ by BL1PR12MB5287.namprd12.prod.outlook.com (2603:10b6:208:317::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Mon, 28 Aug
+ 2023 11:30:48 +0000
+Received: from CO1PEPF000042A8.namprd03.prod.outlook.com
+ (2603:10b6:303:88:cafe::7d) by MW4PR04CA0268.outlook.office365.com
+ (2603:10b6:303:88::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34 via Frontend
+ Transport; Mon, 28 Aug 2023 11:30:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042A8.mail.protection.outlook.com (10.167.243.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.16 via Frontend Transport; Mon, 28 Aug 2023 11:30:46 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 28 Aug
+ 2023 06:30:44 -0500
+Message-ID: <41558631-37bb-f6c7-c9ac-5ee8ad3a3dd2@amd.com>
+Date: Mon, 28 Aug 2023 13:30:42 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 4/5] bootefi: Call the EVT_FT_FIXUP event handler
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH 0/7] spi-nor: Add parallel and stacked memories support
 Content-Language: en-US
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <20230826090633.239342-5-sughosh.ganu@linaro.org>
- <5c05f436-8c92-4b01-fcdf-ed9e0ec31d44@gmx.de>
- <CADg8p97io5JX85MJj0U0U0sNCiC5D8bDjioe-fGwvEpPy7AUcg@mail.gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CADg8p97io5JX85MJj0U0U0sNCiC5D8bDjioe-fGwvEpPy7AUcg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:AggY5v5qpQz7uT2byEDqcdUKoAGoFIeakr7xafVM33fYLWhBG80
- xsMWESPpEIZB9/gGMCGtbk+bIjDT56R2GKQMLnX01dGwMTzAnqHNfQiyb92nuXWDO4wl7N+
- o5yiJ8NepLOJEg/MIvk46F+rdGZ4lB2DPk65zlq8GARlACVXjGCJQyFYnQfpBVWbdbeq+as
- BA/9n0jzXJaBf5Ye+bd9w==
-UI-OutboundReport: notjunk:1;M01:P0:AJ+Rmo8VKqU=;qN91LQER1jknktW8SS06eDKaXwQ
- aQYUboKU3gsCTMHAPnkg4oyrOjzlVJWDjsBk1Fq8Oljz5F93rNQB4ccJmOo69aQlx+Op2BPJB
- +i4+uCIv34D1VS5yrSFPU7XbgxoJezjZHRxbVLzqJl+49R0lg/VHliZ6ZmE4WE4ie9bS8ZUZt
- FvW2mGCSs2wbsCQAnUXySyFFGY+m5eWkH+BI6vAQZRoF5iffiXhP7gX+hF8kbHBHD5sG4Kd59
- /UXf9uQ5vm1dywNp3hwRFuqV302NaDtCW3991d7ggpU8qlbVJjW02VQ2RVEF/2DYF5KecF/T3
- 2KdOSKFNMjUUJteGkEDVbk4SUKsOp781lnTvIcTt6QviYDDym4hegx8paV7gVJYtzPlCo+6NJ
- LIMF5Ki3KG8WcU/k5oXBEGU1PscP0HK26/cHvKdqXczUpZsfRFNElffy3PQcNgKE1dOlhRrj+
- ktRWBnmwRzO6RWiKKhJ5BAiOWwot/caQjOKto0DjqEuyN5g2v37FyYMeVlr99JRw843rPMxxl
- cDEUVgmlLHu4suuIxdw0Q+mrwECtsAo3d9hTQkinmJK/S2wCIMKzKp9d1+XBi64LcaHH46Dg1
- efkItYWE2Tg3k78cVg62YUt11gW7DiDdh9eD4vHQg8XN7WVoBUZKFjHFlBFT8YG3PZnt1BAXC
- E9hNV5sivXlfkcQLE77nlOjWLo1OTPaB7X5289i3Lh2F4piYFN6jgMYGoI7vjpKGZVURqkMFd
- YkQx5DOhOTUpMeZ/OHIzFhf3u1/6CyMdtGIUOabs+eTMTBQcl1lZ7nNH/GtSomWFlyeuHf0V7
- mWRtCYCyySzxQId27x5Zz/9o6yRTxzZZl14YRIAd2Cc8PrKjJC0ZKWC3km6RQHwIwb59hOGIi
- +ScwLxGFwL9xEB8fnBVHrc7Ah2YaaQKGXjNM/lfDgK1noyDJN2DNsPrXxE9nAMsTc+4Gay5mZ
- yI3iog==
+To: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, <u-boot@lists.denx.de>
+CC: <jagan@amarulasolutions.com>, <vigneshr@ti.com>, <sjg@chromium.org>,
+ <git@amd.com>
+References: <20230818042119.25722-1-ashok.reddy.soma@amd.com>
+From: Michal Simek <michal.simek@amd.com>
+In-Reply-To: <20230818042119.25722-1-ashok.reddy.soma@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042A8:EE_|BL1PR12MB5287:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2acfa0ea-a590-4515-aab4-08dba7ba3925
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: P/2nCbaaEPI0VY0IjwfeycLkP/3zv4VPtrWvQXLX/L6HCWvG5TNECeVt8pFy6GJ4zREskYnN6YavBks92MMOyxYWzZh9hgR8AAkG4kWM4y+gKh2D7JYiTI644B32HDCqPhWqF0WO/wunZSstIoo0SeuY6dVZZb7VdH5G30soq+wWofBQoXh5BCLeN8DRQZovvtT2FnDvezfECPGSAWkCg2a/j4tVOB0IXE6vMidSFPt7tAe4JY9V9K1JyZqtYQZKFtebowU+nkMpK8APKeCnpLA5QzLFdu7StnuxPf4hJB/7vsL8mf39Lv1Wd8N4knvmJRhOTVKEZ75soS0RSikOamnmj8vCngeDHiPoUVvqJdRS3zUysNDE09XvBi4fNUexVsSqYGM5d2wwyJM1HL6f6LH6u6YBP2geWYIUzwyAyIJCflZTv63mgIbwn6Z68cueurAzFEi6SeiOhUNhUgcOL25d8RDhmJteezb+jLf6WYGLeyfaXvhwIYdgs8PfGBwX4+BfJSuxOg867Tjx3SKVnw4lENQYTmngXKo4bFxGSjKTvIPI4ipaLElS/lqCX5v9VKl8pfGjty2Hc+z75FLsgHCfxzE2F5VenZpIRWKKY8AWwVRSOCIE0F2m1MU/TXUpG3PTrRzwSXDxJiDVh+9i0NkEAKlVFicMM/loBuTqNntUGHvFEmEOoXEVDvGX/Bkj8IsqhUu9Y1IGYZt7OPHCVE3tZ69jBxjA3p5Ags20aeC5abeJ04P7JthHjaF3Cx6ojBll41JZvvit1hdE0wRhqitRbAaXpiHc+sksGJDZPL4QkNkzT/Aamk7cwyNwwyjj
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(376002)(346002)(39860400002)(396003)(451199024)(1800799009)(186009)(82310400011)(36840700001)(40470700004)(46966006)(82740400003)(31686004)(36756003)(40460700003)(86362001)(31696002)(81166007)(356005)(40480700001)(36860700001)(47076005)(2616005)(336012)(2906002)(426003)(26005)(16526019)(53546011)(83380400001)(478600001)(110136005)(70586007)(70206006)(4326008)(8676002)(8936002)(5660300002)(44832011)(41300700001)(54906003)(16576012)(316002)(43740500002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2023 11:30:46.6020 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2acfa0ea-a590-4515-aab4-08dba7ba3925
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042A8.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5287
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,112 +122,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.08.23 11:32, Sughosh Ganu wrote:
-> On Sat, 26 Aug 2023 at 15:57, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
->>
->> On 8/26/23 11:06, Sughosh Ganu wrote:
->>> The bootefi command passes the devicetree to the kernel through the
->>> EFI config table. Call the event handlers for fixing the devicetree
->>> before jumping into the kernel. This removes any devicetree nodes
->>> and/or properties that are specific only to U-Boot, and are not to be
->>> passed to the OS.
->>>
->>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->>> ---
->>>    cmd/bootefi.c | 18 ++++++++++++++++++
->>>    1 file changed, 18 insertions(+)
->>>
->>> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
->>> index f73d6eb0e2..c359a46ec4 100644
->>> --- a/cmd/bootefi.c
->>> +++ b/cmd/bootefi.c
->>> @@ -237,6 +237,23 @@ static void *get_config_table(const efi_guid_t *g=
-uid)
->>>        return NULL;
->>>    }
->>>
->>> +/**
->>> + * event_notify_dt_fixup() - call ft_fixup event
->>> + *
->>> + * @fdt:     address of the device tree to be passed to the kernel
->>> + *           through the configuration table
->>> + * Return:   None
->>> + */
->>> +static void event_notify_dt_fixup(void *fdt)
->>> +{
->>> +     int ret;
->>> +     struct event_ft_fixup fixup =3D {0};
->>> +
->>> +     fixup.tree.fdt =3D fdt;
->>> +     ret =3D event_notify(EVT_FT_FIXUP, &fixup, sizeof(fixup));
->>> +     if (ret)
->>> +             printf("Error: %d: FDT Fixup event failed\n", ret);
->>> +}
->>>    #endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
->>>
->>>    /**
->>> @@ -318,6 +335,7 @@ efi_status_t efi_install_fdt(void *fdt)
->>>        efi_carve_out_dt_rsv(fdt);
->>>
->>>        efi_try_purge_kaslr_seed(fdt);
->>> +     event_notify_dt_fixup(fdt);
->>
->> The event is already triggered in image_setup_libfdt(). Don't trigger i=
-t
->> twice.
->
-> The reason I put an explicit event_notify call is because the
-> image_setup_libfdt() call only calls the ft_fixup handlers if the
-> livetree is not active. So the fixup handlers would not be called on
-> platforms that enable livetree. Although I'm not sure if livetree
-> should be disabled before the ft fixup has to happen, or platforms
-> that need ft fixup should not enable OF_LIVE. Disabling the livetree
-> is not happening now, so I am not sure how the fixup event should work
-> on platforms which have OF_LIVE enabled.
 
-We still must not call the same event twice. We further must ensure that
-our fix-up is called last (e.g. by calling it zzz_something) and not
-before adding VBE nodes.
 
-Is there any need to use the event mechanism here?
+On 8/18/23 06:21, Ashok Reddy Soma wrote:
+> This series adds support for Xilinx qspi parallel and stacked memeories.
+> 
+> In parallel mode, the current implementation assumes that a maximum of
+> two flashes are connected. The QSPI controller splits the data evenly
+> between both the flashes so, both the flashes that are connected in
+> parallel mode should be identical.
+> During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
+> nor->flags.
+> 
+> In stacked mode the current implementation assumes that a maximum of two
+> flashes are connected and both the flashes are of same make but can
+> differ in sizes. So, except the sizes all other flash parameters of both
+> the flashes are identical
+> 
+> Spi-nor will pass on the appropriate flash select flag to low level
+> driver, and it will select pass all the data to that particular flash.
+> 
+> Write operation in parallel mode are performed in page size * 2 chunks as
+> each write operation results in writing both the flashes. For doubling
+> the address space each operation is performed at addr/2 flash offset,
+> where addr is the address specified by the user.
+> 
+> Similarly for read and erase operations it will read from both flashes,
+> so size and offset are divided by 2 and send to flash.
+> 
+> 
+> 
+> Ashok Reddy Soma (7):
+>    dm: core: support reading a single indexed u64 value
+>    mtd: spi-nor: Add parallel and stacked memories support
+>    mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
+>    mtd: spi-nor: Add parallel and stacked memories support in read_bar
+>      and write_bar
+>    spi: spi-uclass: Read chipselect and restrict capabilities
+>    spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
+>    spi: zynq_qspi: Add parallel memories support in QSPI driver
+> 
+>   drivers/core/of_access.c       |  22 ++
+>   drivers/core/ofnode.c          |  30 +++
+>   drivers/mtd/spi/spi-nor-core.c | 385 ++++++++++++++++++++++++++++-----
+>   drivers/spi/spi-uclass.c       |  21 +-
+>   drivers/spi/xilinx_spi.c       |   4 +-
+>   drivers/spi/zynq_qspi.c        | 145 +++++++++++--
+>   drivers/spi/zynq_spi.c         |   6 +-
+>   drivers/spi/zynqmp_gqspi.c     | 146 +++++++++++--
+>   include/dm/of_access.h         |  19 ++
+>   include/dm/ofnode.h            |  12 +
+>   include/linux/mtd/spi-nor.h    |  13 ++
+>   include/spi.h                  |  29 ++-
+>   12 files changed, 737 insertions(+), 95 deletions(-)
+> 
 
-@Simon:
-None of the other function calls in image_setup_libfdt() depend on
-of_live_active(). I think it would be preferable to move that check into
-the listeners. If instead of of_live_active() you could use a
-configuration setting for the decision, gcc could eliminate a lot of code.
+I put this to CI and I see a lot of issue that's why v2 is definitely required 
+but would be good if someone can review it from high level point of view.
 
-We definitely need better descriptions in include/event.h and a man-page
-generated from that include:
-
-EVT_NONE
-     undescribed
-EVT_TEST
-     undescribed
-EVT_DM_POST_INIT_F
-     undescribed
-EVT_DM_POST_INIT_R
-     undescribed
-EVT_DM_PRE_PROBE
-     Device is about to be probed
-EVT_DM_POST_PROBE
-     undescribed
-EVT_DM_PRE_REMOVE
-     undescribed
-EVT_DM_POST_REMOVE
-     undescribed
-EVT_MISC_INIT_F
-     undescribed
-EVT_FPGA_LOAD
-     undescribed
-EVT_FT_FIXUP
-     undescribed
-EVT_MAIN_LOOP
-     undescribed
-EVT_COUNT
-     undescribed
-
-Best regards
-
-Heinrich
+Thanks,
+Michal
