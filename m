@@ -4,97 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4C5C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 21:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7DBC83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 21:56:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99B148647F;
-	Mon, 28 Aug 2023 23:53:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 12D1386456;
+	Mon, 28 Aug 2023 23:56:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="dnkF8XqF";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="EDQlK2Dq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A26D586456; Mon, 28 Aug 2023 23:53:49 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id EB1938647F; Mon, 28 Aug 2023 23:56:13 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BDAE864B0
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 23:53:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED75180569
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 23:56:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693259613; x=1693864413; i=xypron.glpk@gmx.de;
- bh=zbfkKPrXbOZamF3jpQvJJPDHzfUqLIsvPTI9NueEU+w=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=dnkF8XqFEq+m9Ge+OTRvqRqBoC9OlR5pM+j8EfPcr7EpTA76ilGAPFAGBX3otNfYNbwShF1
- 3mY8bVv5zje1K5OufnGPwovgiaND6e/6vKOU63Cy6ccogwU6v5EEg2hH6HDxsx9xgvwJsCdef
- sFIiHNxrPxu0ew6ZXMqUfKW1FFUJf1bMp38b24CSgk7nxeY8Bx7XHyDYqWwIUyhTeHeRMsfK3
- i/eKsUofbPa+0Sz5xMe4vOVv9QYgyOhWwh+Pgdha5Twm1j35RonCsMqMfVY22KOSa0YZIOAsG
- yMPGqBjItefYABgGw4QrxhOVdThZP3m0y3bkDKg0ydTAzwWBX0kw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Msq24-1phxjB0uWe-00tAHm; Mon, 28
- Aug 2023 23:53:33 +0200
-Message-ID: <7eeab958-f231-4639-acca-9f91e4f1ab00@gmx.de>
-Date: Mon, 28 Aug 2023 23:54:24 +0200
+ spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1693259770;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tRM294XFxnF/Mfm2NGiIDG/5E4CGHF16/dc/WhEwBts=;
+ b=EDQlK2DqtY5qGjXqDbGj4Pt/mfEITqS2cUEnzQ9DT15uHMG2ySukgeHX7xk+SJxwu1Yb9R
+ 6gj+f7KaCEIuogVBvSu/Obh28B2VXukx8GGAgsayNyC5/VmAjiV6JJngHDBtld8DNdACSZ
+ fJ+ohoeEtPkKOUhr92Ul+GjO0n9A8C4=
+Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
+ (mail-zr0che01lp2110.outbound.protection.outlook.com [104.47.22.110]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-52-MjcJqD0POu-QIOaNmpMYQQ-2; Mon, 28 Aug 2023 23:56:08 +0200
+X-MC-Unique: MjcJqD0POu-QIOaNmpMYQQ-2
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
+ ZR1P278MB1000.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:5b::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.35; Mon, 28 Aug 2023 21:56:00 +0000
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::d5a7:e7ce:ac78:4984]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::d5a7:e7ce:ac78:4984%6]) with mapi id 15.20.6699.035; Mon, 28 Aug 2023
+ 21:56:00 +0000
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+To: "francesco@dolcini.it" <francesco@dolcini.it>
+CC: "vigneshr@ti.com" <vigneshr@ti.com>, "n-francis@ti.com"
+ <n-francis@ti.com>, "trini@konsulko.com" <trini@konsulko.com>, Emanuele
+ Ghidoli <emanuele.ghidoli@toradex.com>, "mkorpershoek@baylibre.com"
+ <mkorpershoek@baylibre.com>, "afd@ti.com" <afd@ti.com>, "bb@ti.com"
+ <bb@ti.com>, "nm@ti.com" <nm@ti.com>, "robertcnelson@gmail.com"
+ <robertcnelson@gmail.com>, "jan.kiszka@siemens.com" <jan.kiszka@siemens.com>, 
+ "praneeth@ti.com" <praneeth@ti.com>, "sjg@google.com" <sjg@google.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH V5 02/17] include: configs: am62x_evm: Drop unused SDRAM
+ address
+Thread-Topic: [PATCH V5 02/17] include: configs: am62x_evm: Drop unused SDRAM
+ address
+Thread-Index: AQHZ1mLpXistP2UR+Eu+7OM5/JUJEK/5Wa6AgAAP+4CAADRnAIAAAaeAgAaoXoA=
+Date: Mon, 28 Aug 2023 21:56:00 +0000
+Message-ID: <1f7bae66ef9a183acbe8044b75e510325c12ad05.camel@toradex.com>
+References: <20230824031101.3460411-1-nm@ti.com>
+ <20230824031101.3460411-3-nm@ti.com> <87il94rh6x.fsf@baylibre.com>
+ <20230824120509.72xvy5n2hpl5uh4q@landside>
+ <715c5ae929964f51a3c3fec91cb8c9cb4f65eaa0.camel@toradex.com>
+ <ZOeA0vxJs4iQXLFL@francesco-nb.int.toradex.com>
+ <ZOeCNQJ6zi3jqrQc@francesco-nb.int.toradex.com>
+In-Reply-To: <ZOeCNQJ6zi3jqrQc@francesco-nb.int.toradex.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR1P278MB1000:EE_
+x-ms-office365-filtering-correlation-id: f9ff54bd-b1f2-4575-d15a-08dba8119128
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0
+x-microsoft-antispam-message-info: Rq/7qg1hCxm6CpGyH4k7w73jyaCLHdnXGscm+3utrkTUs6GrwAj7RTuG7RRKJK23IXDi9MgsE+PeYfW9620zSKSFzWOnAYskp+euNTAfU5L2OE59vv56IckCeC8UjXFdXqAbYeAwgnY0/SHGNA1Tdfp/+hrsFSxfPnYlIc8Xul/eM6xsGHd3Uy5ZiGr8dOiXFBqHySxB634EHjt8m5XQFrl5PLbYyYZRyvwE3q7118GRw3VRjX4a8tQPy9TL78wl6f+S0FFFRsVBUFp/5u6JV2npiW8OPVw7yVO0YnLFRuXy6I2iwELio7Uu/2/cS4dOH8tf8lEgPYSK5RmDTs9KzEE39NSuCjnvrClW7Tr+uCXB3xjmuo8hk8mwbqw2kkheQMWfpdAirYo4n/dIczUmImptFDyutF7HUflF8WTvgEPwqzWWjzy4ICblsLFjCcBNIJUXK6mPWi9J/TBxV7yWE0Ymo4KHwepdmTJrA4DCEURnOHQ6YXqio/6gKjcxCPLqKNXAIKSzdjFbDSTNR1hHQNvJP3sc1cy1wdn9UTJbbqhtcXvgicZPk8DelJfU7d+Eh7Sjf7Q7cyV1AJXD7LhPYHdTi5FwftcQsZojrVV8au8=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(136003)(396003)(39850400004)(376002)(346002)(1800799009)(451199024)(186009)(4744005)(7416002)(4326008)(5660300002)(86362001)(44832011)(122000001)(38100700002)(2906002)(38070700005)(71200400001)(6486002)(478600001)(966005)(36756003)(2616005)(6506007)(6512007)(316002)(66446008)(54906003)(64756008)(66556008)(76116006)(66946007)(66476007)(6916009)(8676002)(8936002)(41300700001);
+ DIR:OUT; SFP:1102
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ckZJejM2VVg3Y3dZeWdCQ1g4YzFMbWZIbXBKRkN6aDI3VytnbXA1Nmhod2t3?=
+ =?utf-8?B?TitYNHBkL0E5bEZUWmlQdmtLUGUrd21ES3NqaTI2R1JoMXdjeU9YQmlGdFdo?=
+ =?utf-8?B?VFcwamNGeW8ydUovd3BrV0h2ZStWS1FkZjhrdzhmZTZ1TWlPS2F4SlNDaHI4?=
+ =?utf-8?B?emYxVXpzeE9mMWh5OFdRRkxUaXh5SVptNGdYRmNNYStKTlp5SkhBdUxCNDZU?=
+ =?utf-8?B?U2dnT08wKzJHTG01ZEhXTTNXV3U4S20ycWI0VlpiMnBwdFdUejJSOHVpY1hh?=
+ =?utf-8?B?b1dJTjRsc0M0RXp6SUoycVhKNjcwUVhXOG50QnpvWVFzTHVtSk5OMGJJTCtY?=
+ =?utf-8?B?YXowdzRicWZGRTU2b0JOZHVmSE9tZlgxT3NsV2EwU0tHS2g1WnZhTFRKNE95?=
+ =?utf-8?B?WjlSNFVNVkNqUFl4eldYRUVNcUlNYzdKTTN2c2dsVk55bFZBR2I3QktvcFo5?=
+ =?utf-8?B?dkpwMzZaQ3lqOFpHQTk2emdjYjFpa0Nqcm5WQ1ZpanFVa2ZtdzArb3VFcGxE?=
+ =?utf-8?B?d0dGTW1NVHh3eFRFNmlhUFpZbmZIKzJTMFZUYnhRcFR6bTJ4elR5OEU1Rldq?=
+ =?utf-8?B?d3FSWmxoZmxJaWJ1MFI2WjJiZmJTUmtWd1pyT0pEbldxZVBtYjQyK0ZBeEhS?=
+ =?utf-8?B?eVBTOVBmcVRuUUE1K0VXNkdxbE4zWWF0VEcycVM4ZDFqUHFvbDdIQXVsZCtM?=
+ =?utf-8?B?UWhsWGJkOVlsR2crN2tFOXlqbVBmNVhtanZJQWc2OW84a0YrZGpSeENUSGpw?=
+ =?utf-8?B?REo3Mmdxc2V6ZXhoV090K3Y2eWtocHB6a2ltQVRBUjJmOUFLaDdRT0VHaVFE?=
+ =?utf-8?B?eVdPWUo4cW1rM2tDVCthb1I4SERSTmxjS0UycWZSS1NpbE1HcWpNK2VvT2Va?=
+ =?utf-8?B?c1VTMTRONDFEbWtRS0lYU2VNdk9Pckg3ME9LZ3RPcGl0ajVQU3Rmc2tYeG9W?=
+ =?utf-8?B?ZjlMZURwdkJlRzdoV0tlNk83b1A1UHM0Wkd1d1ZScE9WNVZPMUNVemVpcFdT?=
+ =?utf-8?B?YW4zZjRkb05oR01mb0h6b2MxODVZRG9nbkVMUHBwd0M5QmNUYVVud0o1aWZP?=
+ =?utf-8?B?WFJOUG0xcktLbkN3Z08vWW1ncDI3aEcyZ2MrVG9EMjFrd1FRZTJWNVY2ZHo0?=
+ =?utf-8?B?QUlQVW1sc2NXQm02dHZiaWo1UkQwUFBBZWtUOE10eHBOeVpsclUyL2dNd0M2?=
+ =?utf-8?B?aHg2UDJSc1F2SWZWOUx4SE5ibjNFaHVCWFRrenQ3TWVWTTNlWkN0N0EzMmZ6?=
+ =?utf-8?B?TkxyU3BQclM1V0p1Y3NCRzhxSlE3dUd1NmhNMndxRmxPYnpKL0NtVzdMV1FO?=
+ =?utf-8?B?SW03TUZIeWF4SjB1b2k3TzAwVktFejhJQmlJODdTamVVa0NtZ1EyR0JGbG9q?=
+ =?utf-8?B?Wm1tSFNoazAxSnovaEJBVVZtaFRoUk1hemYwYlBiakZwK1N1M25rU2dtbnNx?=
+ =?utf-8?B?KytNYUI4ZThRb0s2L0haMUp5Q1ZjdHBVQlBjNnBJaEdhalBGQVZnN0x4K1pK?=
+ =?utf-8?B?ZU5vazdCcGcxbGJKR0paSE4ydGZkOXBHZkV2N01ZekFVZFhSOU8vVFoycEFp?=
+ =?utf-8?B?aU5XanVBQXl5Zi9lVkdkRXRwazhLQ0FRekM0c0l2NytNSGtEVmNQTWZFUkQ5?=
+ =?utf-8?B?RUpSL2FRMm01VnVFTTBubzFlbituNHNYVHNIQmlqQnJsRkIvTFN0ZmlDL1lY?=
+ =?utf-8?B?dTJ4QURxSEw5ZWVydWt5bGNRWVZMZWtFdkZwVFRWYnlJdDA3cXp1VHpxYUFW?=
+ =?utf-8?B?b1NHRGRLTlVDWGpZSzFsWDBqYWd1NXY1Q24xdkJoYVNpZDMxM1k0T0NUZTN4?=
+ =?utf-8?B?dTFnVFk5TmRld21ORmpQTjB1eUVoYzMyRFlFKzVFdWN1SGRtekIzTDhpZE5P?=
+ =?utf-8?B?VEVISUEwNytjVWFTNmt3ejZ3aGkxV0FWYTVrOU5ISFg0S0xRTWplQkd2bTJY?=
+ =?utf-8?B?bFU1ZDZvZDZ3eEVxY0FZNFVReTd5TitKUXRWVHlYdkRhQTk0UEhTRWt3VGpx?=
+ =?utf-8?B?RkJETHdPWW1iKzFTeFNta3JFMDVyc01iWGM1YXV1cVkrK0dWcldPUXZ5STR5?=
+ =?utf-8?B?eVNJSzFXQTlwNGJaRXBLZC9KVFNUd1MvZ1h1d3VTSGl6SXZ3Q2FiL2tQbmJ3?=
+ =?utf-8?B?UlpNcldmQWI3Z1lzWkY0OFVKTFdjbmtPdUNEYWhiRTZDYUNLa0wyUXZBTWZz?=
+ =?utf-8?Q?1o3Frlh+yZsFNEtAVJWB3ko=3D?=
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/13] Add video damage tracking
-Content-Language: en-US, de-DE
-To: Alexander Graf <agraf@csgraf.de>, Simon Glass <sjg@chromium.org>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
- Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
- <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
- <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
- <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
- <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
- <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
- <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
- <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
- <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
- <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
- <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
- <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
- <11296797-3d37-413b-9517-2890ae26a9bd@csgraf.de>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <11296797-3d37-413b-9517-2890ae26a9bd@csgraf.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:vFMe6PI00OJOdBnbARWTUvh1SspaIrQ2K8vAt0dvHXmVp088V5K
- zAGTknpjqQhT5ECcDTjhdTPsVZ0ht9Dfo5cZZlU2Qs0RRZ8RS6eqS/hKI4i9weXaSmrlepC
- 2JXDIQq4mUPLeuupqhDDmCK3eiVFdWRnJ8E64hoKVolTo675yl26U2d6qrLvHkPW10WcudY
- 65uBNxSOut3Miue3OfsBQ==
-UI-OutboundReport: notjunk:1;M01:P0:f8tJ3u+neI0=;aaWbNWn8nyh0igEiQ3kXwFRMxeY
- T9sPTdKsGyFOmyoBI7C5bmWOr0lwfwg5v7EQmEsenkyhSbgCJQVz8yhfSL/FZrCvhb/0651u6
- DjDK15YBVILFvn0XiYttA/Naqrl9ap05ZgxZlS5yPlKgHNkmsYYg8I/wWxkyl53TlmuytFjCw
- eY9r3/xhaANlmsUOqVvMj3o+YNLW1nLntBC3Q6R3sqg4641KaZULP0urg9BGEZNeT7C1Z4U4m
- XOLlEcweUY4C+UzJxnLlBzTJ2DJlHa7Erz30sj8U6Enm5XktPEauLvsQXX/ytxE3b1mqrjgBk
- EVIC+enxuiVpr3JlcpsehV1Nq1nmoMu8SL40Cg8W43LcuH95F7Da7WxcGX/gJOKg12emwZsEh
- j99kd4m8zfAMQRfmjvThZJwItU64F/TFsL0qgDSEv4v2XqBNpJCY1fzPYE6wq8Q4IR0pQDQx3
- qNDLBz9sBs9fid92lJ/AY39gEM5E5K+k1r9IUv2G0CAoQ2fVYmtl2o24czNv8VsVwdlzO3E3f
- DPtwj0Vi0FMidHeiDvljreX+bfdjBWzKpRGWlnwVbxVxIpWrBGVkv2RvTN7qo7fPM0aOECoZz
- II7dhokY3Xby6BbbRoiecE6QmckPDICQEj7TE/CMxFwK6l1opCqoFR/nVHheKPyeoWlmdMHWN
- H+vGQv3oGdNwJEHO44K4BTvkozY3aARMkVqzxHxsEt2cG8MUg8RKQMvIf9ccqC5i3cHKRunHp
- 6Rwxy0M+fjsW6BAit8op6gsW/bYQZkDgv4FSdTnhv1QOAa/uZwicFZzsri3aKhv0srpLNBzAJ
- 9o9HnND5jyiWUgNjNNn/62+zqcHVewR6PblPJhRT6WhoH29hAxHc7C7mw5w2fC29S3Pu2VCWL
- sted+yqgn1Gv9eqV0ED5D/P9Ud3AK99kCn9Plm/+qQm0DuR7vwFRzxi8h8GXqQg0tlADVtsWS
- k7Suy0AxPllNc1bxyPFVfZ/ZByU=
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: f9ff54bd-b1f2-4575-d15a-08dba8119128
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Aug 2023 21:56:00.5991 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: /4Nk/2lXWROmWNk8Sj/PgzSkNzqE2AZANoUlxVwBhQtzVRczR1xZa60b2s2Nug1bT3Xqo3IZ9fCjmbw5KOf3j7XHd9hPnSHhkPZFFlTRS8U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR1P278MB1000
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-ID: <8E12B9B97022834D9E3631167E5F7792@CHEP278.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,482 +160,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/28/23 22:24, Alexander Graf wrote:
->
-> On 28.08.23 19:54, Simon Glass wrote:
->> Hi Alex,
->>
->> On Wed, 23 Aug 2023 at 02:56, Alexander Graf <agraf@csgraf.de> wrote:
->>> Hey Simon,
->>>
->>> On 22.08.23 20:56, Simon Glass wrote:
->>>> Hi Alex,
->>>>
->>>> On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
->>>>> On 22.08.23 01:03, Simon Glass wrote:
->>>>>> Hi Alex,
->>>>>>
->>>>>> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrot=
-e:
->>>>>>> On 22.08.23 00:10, Simon Glass wrote:
->>>>>>>> Hi Alex,
->>>>>>>>
->>>>>>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de>
->>>>>>>> wrote:
->>>>>>>>> On 21.08.23 21:57, Simon Glass wrote:
->>>>>>>>>> Hi Alex,
->>>>>>>>>>
->>>>>>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de>
->>>>>>>>>> wrote:
->>>>>>>>>>> On 21.08.23 21:11, Simon Glass wrote:
->>>>>>>>>>>> Hi Alper,
->>>>>>>>>>>>
->>>>>>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak
->>>>>>>>>>>> <alpernebiyasak@gmail.com> wrote:
->>>>>>>>>>>>> This is a rebase of Alexander Graf's video damage tracking
->>>>>>>>>>>>> series, with
->>>>>>>>>>>>> some tests and other changes. The original cover letter is
->>>>>>>>>>>>> as follows:
->>>>>>>>>>>>>
->>>>>>>>>>>>>> This patch set speeds up graphics output on ARM by a
->>>>>>>>>>>>>> factor of 60x.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map
->>>>>>>>>>>>>> it as cached,
->>>>>>>>>>>>>> but need it accessible by the display controller which
->>>>>>>>>>>>>> reads directly
->>>>>>>>>>>>>> from a later point of consistency. Hence, we flush the
->>>>>>>>>>>>>> frame buffer to
->>>>>>>>>>>>>> DRAM on every change. The full frame buffer.
->>>>>>>>>>>> It should not, see below.
->>>>>>>>>>>>
->>>>>>>>>>>>>> Unfortunately, with the advent of 4k displays, we are
->>>>>>>>>>>>>> seeing frame buffers
->>>>>>>>>>>>>> that can take a while to flush out. This was reported by
->>>>>>>>>>>>>> Da Xue with grub,
->>>>>>>>>>>>>> which happily print 1000s of spaces on the screen to draw
->>>>>>>>>>>>>> a menu. Every
->>>>>>>>>>>>>> printed space triggers a cache flush.
->>>>>>>>>>>> That is a bug somewhere in EFI.
->>>>>>>>>>> Unfortunately not :). You may call it a bug in grub: It
->>>>>>>>>>> literally prints
->>>>>>>>>>> over space characters for every character in its menu that it
->>>>>>>>>>> wants
->>>>>>>>>>> cleared. On every text screen draw.
->>>>>>>>>>>
->>>>>>>>>>> This wouldn't be a big issue if we only flush the reactangle
->>>>>>>>>>> that gets
->>>>>>>>>>> modified. But without this patch set, we're flushing the full
->>>>>>>>>>> DRAM
->>>>>>>>>>> buffer on every u-boot text console character write, which
->>>>>>>>>>> means for
->>>>>>>>>>> every character (as that's the only API UEFI has).
->>>>>>>>>>>
->>>>>>>>>>> As a nice side effect, we speed up the normal U-Boot text
->>>>>>>>>>> console as
->>>>>>>>>>> well with this patch set, because even "normal" text prints
->>>>>>>>>>> that write
->>>>>>>>>>> for example a single line of text on the screen today flush
->>>>>>>>>>> the full
->>>>>>>>>>> frame buffer to DRAM.
->>>>>>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes
->>>>>>>>>> the cache
->>>>>>>>>> after every character. It doesn't do that for normal character
->>>>>>>>>> output
->>>>>>>>>> and I don't think it makes sense to do it for EFI either.
->>>>>>>>> I see. Let's trace the calls:
->>>>>>>>>
->>>>>>>>> efi_cout_output_string()
->>>>>>>>> -> fputs()
->>>>>>>>> -> vidconsole_puts()
->>>>>>>>> -> video_sync()
->>>>>>>>> -> flush_dcache_range()
->>>>>>>>>
->>>>>>>>> Unfortunately grub abstracts character backends down to the "pri=
-nt
->>>>>>>>> character" level, so it calls UEFI's sopisticated "output_string=
-"
->>>>>>>>> callback with single characters at a time, which means we do a
->>>>>>>>> full
->>>>>>>>> dcache flush for every character that we print:
->>>>>>>>>
->>>>>>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/e=
-fi/console.c#n165
->>>>>>>>>
->>>>>>>>>
->>>>>>>>>>>>>> This patch set implements the easiest mitigation against
->>>>>>>>>>>>>> this problem:
->>>>>>>>>>>>>> Damage tracking. We remember the lowest common denominator
->>>>>>>>>>>>>> region that was
->>>>>>>>>>>>>> touched since the last video_sync() call and only flush
->>>>>>>>>>>>>> that. The most
->>>>>>>>>>>>>> typical writer to the frame buffer is the video console,
->>>>>>>>>>>>>> which always
->>>>>>>>>>>>>> writes rectangles of characters on the screen and syncs
->>>>>>>>>>>>>> afterwards.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> With this patch set applied, we reduce drawing a large
->>>>>>>>>>>>>> grub menu (with
->>>>>>>>>>>>>> serial console attached for size information) on an
->>>>>>>>>>>>>> RK3399-ROC system
->>>>>>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism,
->>>>>>>>>>>>>> reducing its
->>>>>>>>>>>>>> overhead compared to before as well. So even x86 systems
->>>>>>>>>>>>>> should be faster
->>>>>>>>>>>>>> with this now :).
->>>>>>>>>>>>>>
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> Alternatives considered:
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 1) Lazy sync - S=
-andbox does this. It only calls
->>>>>>>>>>>>>> video_sync(true) ever
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 so often. We are missing timers to do this
->>>>>>>>>>>>>> generically.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2) Double buffer=
-ing - We could try to identify
->>>>>>>>>>>>>> whether anything changed
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 at all and only draw to the FB if it did. That
->>>>>>>>>>>>>> would require
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 maintaining a second buffer that we need to scan.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 3) Text buffer -=
- Maintain a buffer of all text
->>>>>>>>>>>>>> printed on the screen with
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 respective location. Don't write if the old and
->>>>>>>>>>>>>> new character are
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 identical. This would limit applicability to
->>>>>>>>>>>>>> text only and is an
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 optimization on top of this patch set.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 4) Hash screen l=
-ines - Create a hash (sha256?)
->>>>>>>>>>>>>> over every line when it
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 changes. Only flush when it does. I'm not sure
->>>>>>>>>>>>>> if this would waste
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 more time, memory and cache than the current
->>>>>>>>>>>>>> approach. It would make
->>>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 full screen updates much more expensive.
->>>>>>>>>>>> 5) Fix the bug mentioned above?
->>>>>>>>>>>>
->>>>>>>>>>>>> Changes in v5:
->>>>>>>>>>>>> - Add patch "video: test: Split copy frame buffer check
->>>>>>>>>>>>> into a function"
->>>>>>>>>>>>> - Add patch "video: test: Support checking copy frame
->>>>>>>>>>>>> buffer contents"
->>>>>>>>>>>>> - Add patch "video: test: Test partial updates of hardware
->>>>>>>>>>>>> frame buffer"
->>>>>>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
->>>>>>>>>>>>> - Document damage struct and fields in struct video_priv
->>>>>>>>>>>>> comment
->>>>>>>>>>>>> - Return void from video_damage()
->>>>>>>>>>>>> - Fix undeclared priv error in video_sync()
->>>>>>>>>>>>> - Drop unused headers from video-uclass.c
->>>>>>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>>>>>>>>>>>> - Call video_damage() also in video_fill_part()
->>>>>>>>>>>>> - Use met->baseline instead of priv->baseline
->>>>>>>>>>>>> - Use fontdata->height/width instead of
->>>>>>>>>>>>> VIDEO_FONT_HEIGHT/WIDTH
->>>>>>>>>>>>> - Update console_rotate.c video_damage() calls to pass
->>>>>>>>>>>>> video tests
->>>>>>>>>>>>> - Remove mention about not having minimal damage for
->>>>>>>>>>>>> console_rotate.c
->>>>>>>>>>>>> - Add patch "video: test: Test video damage tracking via
->>>>>>>>>>>>> vidconsole"
->>>>>>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
->>>>>>>>>>>>> - Remove video_sync_copy() also from video_fill(),
->>>>>>>>>>>>> video_fill_part()
->>>>>>>>>>>>> - Fix memmove() calls by removing the extra dev argument
->>>>>>>>>>>>> - Call video_sync() before checking copy_fb in video tests
->>>>>>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting =
-it
->>>>>>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
->>>>>>>>>>>>>
->>>>>>>>>>>>> v4:
->>>>>>>>>>>>> https://lore.kernel.org/all/20230103215004.22646-1-agraf@csg=
-raf.de/
->>>>>>>>>>>>>
->>>>>>>>>>>>> Changes in v4:
->>>>>>>>>>>>> - Move damage clear to patch "dm: video: Add damage
->>>>>>>>>>>>> tracking API"
->>>>>>>>>>>>> - Simplify first damage logic
->>>>>>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
->>>>>>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
->>>>>>>>>>>>> - Add patch "video: Always compile cache flushing code"
->>>>>>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that
->>>>>>>>>>>>> need it"
->>>>>>>>>>>>>
->>>>>>>>>>>>> v3:
->>>>>>>>>>>>> https://lore.kernel.org/all/20221230195828.88134-1-agraf@csg=
-raf.de/
->>>>>>>>>>>>>
->>>>>>>>>>>>> Changes in v3:
->>>>>>>>>>>>> - Adapt to always assume DM is used
->>>>>>>>>>>>> - Adapt to always assume DM is used
->>>>>>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
->>>>>>>>>>>>>
->>>>>>>>>>>>> v2:
->>>>>>>>>>>>> https://lore.kernel.org/all/20220609225921.62462-1-agraf@csg=
-raf.de/
->>>>>>>>>>>>>
->>>>>>>>>>>>> Changes in v2:
->>>>>>>>>>>>> - Remove ifdefs
->>>>>>>>>>>>> - Fix ranges in truetype target
->>>>>>>>>>>>> - Limit rotate to necessary damage
->>>>>>>>>>>>> - Remove ifdefs from gop
->>>>>>>>>>>>> - Fix dcache range; we were flushing too much before
->>>>>>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
->>>>>>>>>>>>>
->>>>>>>>>>>>> v1:
->>>>>>>>>>>>> https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgr=
-af.de/
->>>>>>>>>>>>>
->>>>>>>>>>>>> Alexander Graf (9):
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dm: video: Add da=
-mage tracking API
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dm: video: Add da=
-mage notification on display fills
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 vidconsole: Add d=
-amage notifications to all
->>>>>>>>>>>>> vidconsole drivers
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: Add damage=
- notification on bmp display
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_loader: GOP: =
-Add damage notification on BLT
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: Only dcach=
-e flush damaged lines
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: Use VIDEO_=
-DAMAGE for VIDEO_COPY
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: Always com=
-pile cache flushing code
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: Enable VID=
-EO_DAMAGE for drivers that need it
->>>>>>>>>>>>>
->>>>>>>>>>>>> Alper Nebi Yasak (4):
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: test: Spli=
-t copy frame buffer check into a
->>>>>>>>>>>>> function
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: test: Supp=
-ort checking copy frame buffer
->>>>>>>>>>>>> contents
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: test: Test=
- partial updates of hardware frame
->>>>>>>>>>>>> buffer
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 video: test: Test=
- video damage tracking via vidconsole
->>>>>>>>>>>>>
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 arch/arm/mach-omap2/oma=
-p3/Kconfig |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 arch/arm/mach-sunxi/Kco=
-nfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/Kconfig=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
-=C2=A0 26 +++
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/console_n=
-ormal.c=C2=A0=C2=A0=C2=A0 |=C2=A0 27 ++--
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/console_r=
-otate.c=C2=A0=C2=A0=C2=A0 |=C2=A0 94 +++++++----
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/console_t=
-ruetype.c=C2=A0 |=C2=A0 37 +++--
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/exynos/Kc=
-onfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/imx/Kconf=
-ig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/meson/Kco=
-nfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/rockchip/=
-Kconfig=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/stm32/Kco=
-nfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/tegra20/K=
-config=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/tidss/Kco=
-nfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/vidconsol=
-e-uclass.c |=C2=A0 16 --
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/video-ucl=
-ass.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 190
->>>>>>>>>>>>> ++++++++++++----------
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/video/video_bmp=
-.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 7 +-
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 include/video.h=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 59 +++----
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 include/video_console.h=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 52 --=
-----
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lib/efi_loader/efi_gop.=
-c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 7 +
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 test/dm/video.c=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 256
->>>>>>>>>>>>> ++++++++++++++++++++++++------
->>>>>>>>>>>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 20 files changed, 483 i=
-nsertions(+), 297 deletions(-)
->>>>>>>>>>>> It is good to see this tidied up into something that can be
->>>>>>>>>>>> applied!
->>>>>>>>>>>>
->>>>>>>>>>>> I am unsure what is going on with the EFI performance,
->>>>>>>>>>>> though. It
->>>>>>>>>>>> should not flush the cache after every character, only after
->>>>>>>>>>>> a new
->>>>>>>>>>>> line. Is there something wrong in here? If so, we should fix
->>>>>>>>>>>> that bug
->>>>>>>>>>>> first and it should be patch 1 of this series.
->>>>>>>>>>> Before I came up with this series, I was trying to identify
->>>>>>>>>>> the UEFI bug
->>>>>>>>>>> in question as well, because intuition told me surely this is
->>>>>>>>>>> a bug in
->>>>>>>>>>> UEFI :). Turns out it really isn't this time around.
->>>>>>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
->>>>>>>>>> implementation. Where did you look for the bug?
->>>>>>>>> The "real" bug is in grub. But given that it's reasonably
->>>>>>>>> simple to work
->>>>>>>>> around in U-Boot and even with it "fixed" in grub we would
->>>>>>>>> still see
->>>>>>>>> performance benefits from flushing only parts of the screen, I
->>>>>>>>> think
->>>>>>>>> it's worth living with the grub deficiency.
->>>>>>>> OK thanks for digging into it. I suggest we add a param to
->>>>>>>> vidconsole_puts() to tell it whether to sync or not, then the
->>>>>>>> EFI code
->>>>>>>> can indicate this and try to be a bit smarter about it.
->>>>>>> It doesn't know when to sync either. From its point of view, any
->>>>>>> "console output" could be the last one. There is no API in UEFI th=
-at
->>>>>>> says "please flush console output now".
->>>>>> Yes, I understand. I was not suggesting we were missing an API. But
->>>>>> some sort of heuristic would do, e.g. only flush on a newline, flus=
-h
->>>>>> every 50 chars, etc.
->>>>> I can't think of any heuristic that would reliably work. Relevant fo=
-r
->>>>> this conversation, UEFI provides 2 calls:
->>>>>
->>>>> =C2=A0=C2=A0=C2=A0=C2=A0 * Write string to screen (efi_cout_output_s=
-tring)
->>>>> =C2=A0=C2=A0=C2=A0=C2=A0 * Set text cursor position to X, Y (efi_cou=
-t_set_cursor_position)
->>>>>
->>>>> It's perfectly legal for a UEFI application to do something like
->>>>>
->>>>> efi_cout_set_cursor_position(10, 10);
->>>>> efi_cout_output_string("f");
->>>>> efi_cout_output_string("o");
->>>>> efi_cout_output_string("o") ;
->>>>>
->>>>> to update contents of a virtual text box on the screen. Where in thi=
-s
->>>>> chain of events would we call video_sync(), but on every call to
->>>>> efi_cout_output_string()?
->>>> Actually U-Boot has the same problem, but we have managed to work
->>>> out something.
->>>
->>> U-Boot as a code base has a much easier stance: It can add APIs when i=
-t
->>> needs them in places that require them. With UEFI (as well as the U-Bo=
-ot
->>> native API), we're stuck with what's there.
->>>
->>> I also don't understand what you mean by "we have managed to work out
->>> something". This patch set is not a UEFI fix - it fixes generic U-Boot
->>> behavior and speeds up non-UEFI boots as well. The improvement there i=
-s
->>> just not as impressive as with grub :).
->> We are still not quite on the same page...
->>
->> U-Boot does have video_sync() but it doesn't know when to call it. If
->> it does not call it, then any amount of single-threaded code can run
->> after that, which may update the framebuffer. In other words, U-Boot
->> is in exactly the same boat as UEFI. It has to decide whether to call
->> video_sync() based on some sort of heuristic.
->>
->> That is the only point I am trying to make here. Does that make sense?
->
->
-> Oh, I thought you mentioned above that U-Boot is in a better spot or
-> "has it solved already". I agree - it's in the same boat and the only
-> safe thing it can really do today that is fully cross-platform
-> compatible is to call video_sync() after every character.
->
-> I don't understand what you mean by "any amount of single-threaded code
-> can run after that, which may update the framebuffer". Any framebuffer
-> modification is U-Boot internal code which then again can apply
-> video_sync() to tell the system "I want what I wrote to screen actually
-> be on screen now". I don't think that's necessarily bad design. A bit
-> clunky, but we're in a pre-boot environment after all.
->
-> Since we're aligned now: What exactly did you refer to with "but we have
-> managed to work out something"?
-
-Should we set PixelBltOnly to indicate to UEFI applications that they
-are not allowed to directly write to the framebuffer but always have to
-use BitBlt? GRUB seems to be using a shadow buffer by default which it
-copies via BitBlt.
-
-Best regards
-
-Heinrich
-
->
->
->>
->>>
->>>> I do think it is still to flush the cache on every char. I suspect yo=
-u
->>>> will find that even a simple heuristic like I mentioned would be good
->>>> enough.
->>>>
->>>> Also I notice that EFI calls notify? all the time, so U-Boot probably
->>>> does have the ability to sync the video every 10ms if we wanted to.
->>>
->>> I fail to see how invalidating the frame buffer for the screen every
->>> 10ms is any better than doing flush+invalidate operations only on scre=
-en
->>> areas that changed? It's more fragile, more difficult to understand an=
-d
->>> also significantly more expensive given that most of the time very
->>> little on the screen actually changes.
->> I am not suggesting it is better, at all. I am just trying to explain
->> that the U-Boot EFI implementation should not be calling video_sync()
->> after every character, before or after this series.
->
->
-> Ah, it doesn't :). It just calls the normal U-Boot "write character on
-> screen" function. What that does is up to U-Boot internals - and those
-> basically today dictate that something needs to call video_sync() to
-> make FB modifications actually pop up on screen.
->
->
->>
->>>
->>>> It seems from this discussion that we have made great the enemy of
->>>> the good.
->>>
->>> I agree. Damage tracking in this patch set is elegant, simple,
->>> predictable, low overhead and basically just abstracts the video copy
->>> code path to a generic solution. All while it pretty much solves the
->>> issue for good. I don't understand what's not to like about it :)
->> I think it is a really nice feature and I hope it can be applied soon.
->
->
-> Thanks a lot especially to Alper for picking it up. I had almost
-> forgotten about the patch set :)
->
->
-> Alex
->
->
+T24gVGh1LCAyMDIzLTA4LTI0IGF0IDE4OjE1ICswMjAwLCBGcmFuY2VzY28gRG9sY2luaSB3cm90
+ZToNCg0KW3NuaXBdDQoNCj4gPiA+ID4gPiBXaGF0IGFib3V0IGluY2x1ZGUvY29uZmlncy92ZXJk
+aW4tYW02Mi5oID8NCj4gPiA+ID4gPiANCj4gPiA+ID4gPiBJdCBzZWVtcyB0aGF0IHRoYXQgYm9h
+cmQsIHdoaWNoIGlzIGFtNjJ4IGJhc2VkLCBhbHNvIGhhcyB0aGUgdW4tbmVlZGVkDQo+ID4gPiA+
+ID4gaW5jbHVkZS4NCj4gPiA+ID4gPiANCj4gPiA+ID4gPiBTaW5jZSBpJ20gbm90IDEwMCUgc3Vy
+ZSwgSSBoYXZlIGFkZGVkIE1hcmNlbCAod2hvIHBvc3RlZCB0aGUgdmVyZGluIGFtNjINCj4gPiA+
+ID4gPiBzdXBwb3J0KSBoZXJlLg0KPiA+ID4gPiANCj4gPiA+ID4gVG9yYWRleCB0ZWFtLCBDYW4g
+eW91IGhhbmRsZSB0aGF0IGNsZWFudXA/IEkgc3RheWVkIGZvY3Vzc2VkIG9uIGFtNjJ4X2V2bSBz
+aWRlDQo+ID4gPiA+IG9mIHRoaW5ncy4NCj4gPiA+IA0KPiA+ID4gWWVzLCBvZiBjb3Vyc2UuDQo+
+ID4gDQo+ID4gSSBiZWxpZXZlIHRoYXQgdGhpcyBpcyB1c2VkIG9uIHZlcmRpbi1hbTYyLCBwbGVh
+c2UgZG91YmxlIGNoZWNrIG1hcmNlbC4NCj4gDQo+IE5vLCBsaWtlbHkgSSBuZWVkIHRvIGdvIGhv
+bWUgYW5kIG5vdCBzcHJlYWQgaW5jb21wbGV0ZSBpbmZvcm1hdGlvbiBoZXJlIC4uLg0KDQooOy1w
+KQ0KDQpXZSB0b29rIGNhcmUgb2YgaXQuDQoNCmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8y
+MDIzMDgyODIxNTAzNy40ODIyNzgtMS1tYXJjZWxAemlzd2lsZXIuY29tDQoNClRoYW5rcyENCg0K
+Q2hlZXJzDQoNCk1hcmNlbA0K
 
