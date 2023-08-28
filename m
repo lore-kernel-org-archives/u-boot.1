@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE4BC83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 15:28:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2C1C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 15:30:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6C9E846B8;
-	Mon, 28 Aug 2023 17:28:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BC31864C4;
+	Mon, 28 Aug 2023 17:30:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="Uy46CLn6";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="f+FBCyed";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71B6086505; Mon, 28 Aug 2023 17:28:54 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id C4D6F864CD; Mon, 28 Aug 2023 17:30:16 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86F9A864D8
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 17:28:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC92E846B8
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 17:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-31c4d5bd69cso2866928f8f.3
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 08:28:51 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-3fef56f7223so30164085e9.3
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 08:30:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1693236531; x=1693841331; 
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1693236613; x=1693841413; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vtjxu0Iu7odUraYc55qdTmS0v2UgCqrPCGRg8hyQUuI=;
- b=Uy46CLn6G5NLHgpZdyMeXBVIDakJDxRoa//AvjEWdixyenPDUDE0heZrLhb4Y360dS
- vwBvyLVwnzmNvsgXg8mlT84IKp5PrLqKCdO8qEhRb07U8v3pQQWURbHwwc16Az/AH9K7
- JG9xbYmQRv/Nf8gtkH0Ytga7TtJQjK2izYYe6h6HKav+lAKKWhVoGxvmykHwlGuz5OSv
- Ihn9V2zD2H7z4JcaH8Xj7QMvt46XVcEhVq/b1FBpsJHOHdw8HNgxpwZd+jBvg4iRJkjp
- VQNiLmcpwE7bJxqKTLmOItqOenVoCAyLU1V6jilFJcqgfvqiBMISBO7JMWweAdc7S+2g
- +sDw==
+ :reply-to; bh=c46g52C8nLECdy87YNxNZ/n4dXq4ANEZNANvWG58/bk=;
+ b=f+FBCyedZYG08RFYhXZQENoSMroOmzoE4/i14MMdCFyWOIOrLG+ISPybBG65qnKxQx
+ Sfg+kWeHFz4wmeP1aPP63fSrHXkPZtxzYVaeZ9ggDE/UGs4UkcP+0UsdBbP4xtEjLzSl
+ MLbHwapMn0WaVKJKHexVRNsaYvtMmyUEBb2Q4DUQR8DqvFDMgBh58zc33FexUnIBJ8rX
+ FjuHb3TIZ5+3HDkB0DdIuKoNrk/d50xrV4e0Dc7Z7Zy3VSJUTFxE3BVbTDUN75ZIyfO8
+ YHCndaAzoSfrmH89ORGshoFJLM636BDfrksfMYR+57+J5cEffcIgUGsJJrgl5Cn31xA/
+ lssg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693236531; x=1693841331;
+ d=1e100.net; s=20221208; t=1693236613; x=1693841413;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vtjxu0Iu7odUraYc55qdTmS0v2UgCqrPCGRg8hyQUuI=;
- b=MD5N540Sv3/RsW7il5VchDcZN41t/W8va3ALlO0BYCGdAytiOlWEUGvdX7IayypMey
- k7We3maaoN+WBbr3Y5ixTxXbcDcmrML2oPYt5KoeGFDx9/ex8l8n9Cg3Vn+QlFuNZGMn
- OmFnyFXTaS1O4fN0Vmv2aJIUCmspqe1xPLGt2n+lAkDmPaOoo2KktvI3K54NTQhko2F+
- Gt/j815J6i7A+j+QtNFToYOV+izptcaAlYt7A6zd2H7RHwxFzGvhFM2d1zVl+taI5h/Z
- MSd7ydYOTjwV0y4/b2+SOz/qRi46xcFc9ZpTt8PqkWH0B774R4teanC9XGPMeLC/nkD3
- 1M7w==
-X-Gm-Message-State: AOJu0YypQtwVU9LqCti3hQluXOAFpC29OzzjrN1/AHqiE95HmFCp+xpH
- AvVRCi56g5DCevR+1GTlOMr0Pg==
-X-Google-Smtp-Source: AGHT+IG8yY9rSa4RZTOloBYob1lae73mnZ5kr9deRvy8OGUoEOW5xnhu3BzvWOOE39vz7kMXMr5vrQ==
-X-Received: by 2002:adf:e990:0:b0:319:6d8a:75f8 with SMTP id
- h16-20020adfe990000000b003196d8a75f8mr21548017wrm.44.1693236531098; 
- Mon, 28 Aug 2023 08:28:51 -0700 (PDT)
+ bh=c46g52C8nLECdy87YNxNZ/n4dXq4ANEZNANvWG58/bk=;
+ b=CrZVG72r2Ap7v+7EdYLVbLbVJpJYl4119dhGsXlYkzZIX3BACIVK6JmjjBwxTBkCSc
+ A1Seryu10TM2GV4hS6IIkjRS4Xjw99wVHRpfPliqHvVO68q977kn1yIPZ0KvDbF9eo/F
+ 5JC4MMzbFWLQQtQwwtvTBjpCTnV28d1mLWFUAi3NpzWYT+UZMFo+Yt3m4LR8CGlr4j4L
+ IxUwIbYd7f78MPYyWNvY8uOHaiCJMGMHGCChnF1qF/THmtmxMBMsehItLIdKSHHINdwB
+ LTICYZ0NoDGOERk05M137/gFE2sqP3eKpG83bzZ4gQHUQcD7uysVnYdDp8N9HN4wyNpM
+ TESw==
+X-Gm-Message-State: AOJu0Yz45CQDw3tEa43dL3w4V+MJwHlHksxXO/58du3O4VWZK1EgfTCG
+ Qj737hw88mgCGoF0eaWqlRiGaw==
+X-Google-Smtp-Source: AGHT+IFTG0UXIbxMx34ZV/WaHCk9u3CmT5EF4gj3+RW1HIAqiNfeIut7h+6Uo1HAgpWvG7+IcCvQ8Q==
+X-Received: by 2002:a05:600c:2296:b0:401:73b2:f03f with SMTP id
+ 22-20020a05600c229600b0040173b2f03fmr9046768wmf.0.1693236613249; 
+ Mon, 28 Aug 2023 08:30:13 -0700 (PDT)
 Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
  by smtp.gmail.com with ESMTPSA id
- x8-20020a5d60c8000000b0031c52e81490sm10841465wrt.72.2023.08.28.08.28.50
+ m24-20020a7bca58000000b00401b242e2e6sm12158695wml.47.2023.08.28.08.30.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Aug 2023 08:28:50 -0700 (PDT)
+ Mon, 28 Aug 2023 08:30:12 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
  <trini@konsulko.com>, Simon Glass <sjg@google.com>
 Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
  Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
  u-boot@lists.denx.de, Jan
- Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>, Simon Glass
- <sjg@chromium.org>
-Subject: Re: [PATCH V6 07/20] configs: am62x_evm_a53_defconfig: Switch to
- bootstd
-In-Reply-To: <20230825180305.69515-8-nm@ti.com>
+ Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH V6 08/20] include: configs: am62x_evm: Drop
+ distro_bootcmd usage
+In-Reply-To: <20230825180305.69515-9-nm@ti.com>
 References: <20230825180305.69515-1-nm@ti.com>
- <20230825180305.69515-8-nm@ti.com>
-Date: Mon, 28 Aug 2023 17:28:50 +0200
-Message-ID: <878r9vw5hp.fsf@baylibre.com>
+ <20230825180305.69515-9-nm@ti.com>
+Date: Mon, 28 Aug 2023 17:30:12 +0200
+Message-ID: <875y4zw5ff.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -99,12 +98,9 @@ X-Virus-Status: Clean
 
 On ven., ao=C3=BBt 25, 2023 at 13:02, Nishanth Menon <nm@ti.com> wrote:
 
-> Switch to using bootstd. Note with this change, we will stop using
-> distro_bootcmd and instead depend entirely on bootflow method of
-> starting the system up.
+> Now that BOOTSTD is used by default, drop un-used header file
+> inclusion.
 >
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> Suggested-by: Simon Glass <sjg@chromium.org>
 > Reviewed-by: Tom Rini <trini@konsulko.com>
 > Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Signed-off-by: Nishanth Menon <nm@ti.com>
@@ -113,26 +109,25 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
 > No change other than picking up reviews, tested tags along the way.
-> V5: https://lore.kernel.org/r/20230824031101.3460411-6-nm@ti.com
->  configs/am62x_evm_a53_defconfig | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+> V5: https://lore.kernel.org/r/20230824031101.3460411-7-nm@ti.com
+>  include/configs/am62x_evm.h | 5 -----
+>  1 file changed, 5 deletions(-)
 >
-> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defc=
-onfig
-> index d55caabe22c9..1807df8bbee9 100644
-> --- a/configs/am62x_evm_a53_defconfig
-> +++ b/configs/am62x_evm_a53_defconfig
-> @@ -28,8 +28,9 @@ CONFIG_SPL_SPI=3Dy
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_SPL_LOAD_FIT=3Dy
->  CONFIG_SPL_LOAD_FIT_ADDRESS=3D0x81000000
-> -CONFIG_DISTRO_DEFAULTS=3Dy
-> -CONFIG_BOOTCOMMAND=3D"run envboot; run distro_bootcmd;"
-> +CONFIG_BOOTSTD_FULL=3Dy
-> +CONFIG_BOOTSTD_DEFAULTS=3Dy
-> +CONFIG_BOOTCOMMAND=3D"run envboot; bootflow scan -lb"
->  CONFIG_SPL_MAX_SIZE=3D0x58000
->  CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
->  CONFIG_SPL_BSS_START_ADDR=3D0x80c80000
+> diff --git a/include/configs/am62x_evm.h b/include/configs/am62x_evm.h
+> index 81d7658cdb0d..c8fe59b75313 100644
+> --- a/include/configs/am62x_evm.h
+> +++ b/include/configs/am62x_evm.h
+> @@ -9,11 +9,6 @@
+>  #ifndef __CONFIG_AM625_EVM_H
+>  #define __CONFIG_AM625_EVM_H
+>=20=20
+> -#ifdef CONFIG_DISTRO_DEFAULTS
+> -#include <config_distro_bootcmd.h>
+> -#include <env/ti/mmc.h>
+> -#endif
+> -
+>  /* Now for the remaining common defines */
+>  #include <configs/ti_armv7_common.h>
+>=20=20
 > --=20
 > 2.40.0
