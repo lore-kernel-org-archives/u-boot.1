@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773A3C83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:40:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6F62C83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:41:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C66805C9;
-	Mon, 28 Aug 2023 18:39:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47A46864BA;
+	Mon, 28 Aug 2023 18:41:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LWq7AlCO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WdViYON9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E899864BA; Mon, 28 Aug 2023 18:39:57 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id D2802805C9; Mon, 28 Aug 2023 18:41:05 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF19580295
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:39:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BBFF8864F2
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:41:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37SGdqRu075176;
- Mon, 28 Aug 2023 11:39:52 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37SGf0NZ068771;
+ Mon, 28 Aug 2023 11:41:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693240792;
- bh=J+S07FgQusWFDMsgc0bANNAOJHzuaYDR5wlyz0NRs14=;
+ s=ti-com-17Q1; t=1693240860;
+ bh=WEXrBsCucLPgDz2Cw42+oqZABUFSHwbdLvcoQACFacE=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=LWq7AlCO++fyT4hBvP91pgyECDm/Uunetx3axcFKL3pTFyBP60/48GIK8/3+85WnB
- I7/K1SgBPljxmJIQkhhz7sZc4HiwOfIGMyE5QegPCMuECARuLSHXoXhFKzJlZJOR58
- i535fPK16YQk0KZsjOx9HLVQGFsIVcsRha1dEKG8=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37SGdqbC012619
+ b=WdViYON90ajJWtBR2WBITeibpqTsHOtPmbyjgzEaHerRocpmVZ2ARo0ZQdQihWUaz
+ bn79+eIyFJNJoMyoNZdymWJIlNz0H1yHx+6gJTrTX58i0loX48NPJtMMmBXCifMSEJ
+ xbu9sIPkMM6GDaSnaV5Nyikdxy6NsI/0e9DBJ4fU=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37SGf0QM051161
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 28 Aug 2023 11:39:52 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 28 Aug 2023 11:41:00 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
- Aug 2023 11:39:52 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
+ Aug 2023 11:41:00 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
  (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 28 Aug 2023 11:39:52 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37SGdqcU026365;
- Mon, 28 Aug 2023 11:39:52 -0500
-Date: Mon, 28 Aug 2023 11:39:52 -0500
+ Frontend Transport; Mon, 28 Aug 2023 11:41:00 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37SGf0E6009896;
+ Mon, 28 Aug 2023 11:41:00 -0500
+Date: Mon, 28 Aug 2023 11:41:00 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>
 CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
  <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
  <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
- <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-Subject: Re: [PATCH v2 6/6] board: ti: j721s2: MAINTAINERS: Update the
- MAINTAINERS File.
-Message-ID: <20230828163952.6rahky2zplbh2yqj@proclaim>
+ <a-nandan@ti.com>,
+ Andrew Davis <afd@ti.com>, Nikhil M Jain <n-jain1@ti.com>
+Subject: Re: [PATCH v2 1/6] configs: j721s2_evm_r5_defconfig: Increase malloc
+ pool size in DRAM
+Message-ID: <20230828164100.4ikllm2oqbc7ebae@estate>
 References: <20230816-b4-upstream-j721s2-r5-pinmux-v2-0-a5f141be40bc@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v2-6-a5f141be40bc@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v2-1-a5f141be40bc@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v2-6-a5f141be40bc@ti.com>
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v2-1-a5f141be40bc@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,43 +83,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:47-20230825, Manorit Chawdhry wrote:
-> Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
-> to the previous MAINTAINER not being associated with TI.
+On 16:46-20230825, Manorit Chawdhry wrote:
+> From: Udit Kumar <u-kumar1@ti.com>
 > 
+> The malloc capacity in DRAM at R5 SPL is set to 1MB which isn't
+> sufficient to load the new tispl.bin to
+> enable loading of tispl.bin the size is increased by 256KB to 1.25MB.
+> 
+> Cc: Nikhil M Jain <n-jain1@ti.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
->  board/ti/j721s2/MAINTAINERS | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+>  configs/j721s2_evm_r5_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/board/ti/j721s2/MAINTAINERS b/board/ti/j721s2/MAINTAINERS
-> index 323bd2353a7e..97a0581d0405 100644
-> --- a/board/ti/j721s2/MAINTAINERS
-> +++ b/board/ti/j721s2/MAINTAINERS
-> @@ -1,7 +1,8 @@
->  J721S2 BOARD
-> -M:	Aswath Govindraju <a-govindraju@ti.com>
-> +M:	Manorit Chawdhry <m-chawdhry@ti.com>
+> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> index 1e66ac23d05b..e2b83b337809 100644
+> --- a/configs/j721s2_evm_r5_defconfig
+> +++ b/configs/j721s2_evm_r5_defconfig
+> @@ -42,6 +42,7 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
+>  CONFIG_SPL_BOARD_INIT=y
+>  CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+>  CONFIG_SPL_STACK_R=y
+> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x140000
+>  CONFIG_SPL_SEPARATE_BSS=y
+>  CONFIG_SYS_SPL_MALLOC=y
+>  CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
 
-Thank you for stepping up.
-
->  S:	Maintained
->  F:	board/ti/j721s2
-> +F:	doc/board/ti/j721s2_evm.rst
->  F:	include/configs/j721s2_evm.h
->  F:	configs/j721s2_evm_r5_defconfig
->  F:	configs/j721s2_evm_a72_defconfig
-> @@ -11,6 +12,6 @@ F:	arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
->  F:	arch/arm/dts/k3-j721s2-som-p0.dtsi
->  F:	arch/arm/dts/k3-j721s2-common-proc-board.dts
->  F:	arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
-> -F:	arch/arm/dts//k3-j721s2-r5-common-proc-board.dts
-> +F:	arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
->  F:	arch/arm/dts/k3-j721s2-ddr.dtsi
->  F:	arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi
+Though this makes me curious who AM62x did'nt need this.. but anyways..
 
 
-I suggest adding additional patch to include AM68 as well.
+Reviewed-by: Nishanth Menon <nm@ti.com>
 
 -- 
 Regards,
