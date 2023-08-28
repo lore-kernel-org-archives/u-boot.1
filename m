@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E5F6C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:20:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52895C83F15
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:20:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C862C86430;
-	Mon, 28 Aug 2023 18:20:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 239018650B;
+	Mon, 28 Aug 2023 18:20:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kfSiXTo7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C929utj8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A3FB846D2; Mon, 28 Aug 2023 18:20:12 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 22A26846D2; Mon, 28 Aug 2023 18:20:17 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40ACB86456
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:20:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6759C864A7
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5009969be25so5404531e87.3
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 09:20:09 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-52bca2e8563so480698a12.2
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 09:20:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693239608; x=1693844408;
+ d=chromium.org; s=google; t=1693239614; x=1693844414;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ymoVp+A7tQRp2jnCknEWvlE5rwxwiA0wTPaSFjEAKaI=;
- b=kfSiXTo7bQ3Ywz5a/5Gk6Knen4f6zyCogm9PyH0Z7GqO57D2lZOaAbE7lSpaQ1smr5
- TW53/HWCIaBS3dgstgJbc0VlIDgSI82l5HY0artX50f6QtVdS/yuLI1oQzRomUY4007I
- LJ7ggVc5PYMgNHzf/ySt98EYvH86AOK9jf9r8=
+ bh=ys0aCGSYSWNpZXc91sHH/lBDtdAuY+XC0w4WVZwuujU=;
+ b=C929utj8SoJvbc3hO0xfUcU9Tir2e1jVQtH+uHWBTyHU8TKxFLz95eiNeHw2MhiQ0O
+ /7QMjCBtKwXcNvrcVpzEQ/Gu2ixyAahvWBW083Y1imjb5cQJZ1+VcZrapI2H9KGx5Shu
+ w5dYMXCafRGMZO4r49ZX3jRQ8nEUZV46DuEEc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693239608; x=1693844408;
+ d=1e100.net; s=20221208; t=1693239614; x=1693844414;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ymoVp+A7tQRp2jnCknEWvlE5rwxwiA0wTPaSFjEAKaI=;
- b=bkzjJ1UTSloVHwD3N1XcjKZEuUcjlG+gKFHpZJK005Fn6Qc54Xe2NEh2aXWVh6ndWN
- h+YDUy5gBQCkD0nC5ayf6Bd+SjWZZ/S2ItTCie+8ihUEs+a07hicPTOaga9NpJtTwpaU
- wHFPZ2WnjhT1JvM+8mcfG2r1n4i5kYmAeTyulDb/2j3E3jdGOefHzz9EO52i2hGSXlft
- l7JMEKg72w+zdNaWr8b8XNZn9+Alu1aULzDtAmfDEjXRq+VTEYGTW43wO8hqkMOUp9UV
- Wqr5acrUGSo2vNZ/JIZqA2syL4MtUxCfBAJ234gCtLsCe4wFYBUKLcZKfqKs3SUBU5Td
- 93mQ==
-X-Gm-Message-State: AOJu0YwZjGDV+/609W/I+d3U0vQbUfhHeaeBCGe/vNjlYj94FKIwFHOo
- hF+GubIeOi09Fo4nRgf2mwn7fUz7TDrwDBeRlw/4wA==
-X-Google-Smtp-Source: AGHT+IFgnJQm7DrY/KlPgRGFdMRHmYBafsr5u2ipuuukEr2zh2ruNjbJWlHRTiHIETSCXKRjy9guSWt8nUD6Xkv7080=
-X-Received: by 2002:a05:6512:2252:b0:500:8ffe:7486 with SMTP id
- i18-20020a056512225200b005008ffe7486mr13488236lfu.4.1693239607523; Mon, 28
- Aug 2023 09:20:07 -0700 (PDT)
+ bh=ys0aCGSYSWNpZXc91sHH/lBDtdAuY+XC0w4WVZwuujU=;
+ b=ePyim1tXj1g2XGx7tuqxUnIEhj7nQDGmfuotWaAxjh5WI42+DG3LD8R9UdvTgPIlNu
+ kE2YAJeWFaFVBffjJXM2Rfmq50sipxi2CUvUfkVo9T2oB64mAt2fqIOX5B0uBDLwWOmM
+ RxbJm5OBgnuQ4rFYDMH5y2wSTJFB6m12RAAkSrytNV3iy7OuJOLGhAqqmljfRwTd7+Yt
+ OYizROSzsfkpsIz/KJ2TwxkBGW5iAutWEi0hceqb/ST84YuJ93bO/TqyFVlWnnPO9pI8
+ VkM7luZIh4+1fH+Ss/AmvC/nE2gP7byZOMwlPGvKdllulNCvQyD1M+duj4DNFdRj0n5I
+ wKQw==
+X-Gm-Message-State: AOJu0YwUSKGlpUyTkCw6fxQbBExu6LPdJozeRZOL2kjAdHq5nPi+Uuxy
+ mp1zlamhqiPOTsubPH2hmikM+L7nqgoqCjyakE0gkg==
+X-Google-Smtp-Source: AGHT+IHjLkiMOigZbWNa53jbsatAZxg9PTz2QqHwikAluFU4lAxthZQKxNipQU0syQ7hNZyxfLQyBIPoeD5boWcYoTM=
+X-Received: by 2002:aa7:c648:0:b0:525:7e46:940 with SMTP id
+ z8-20020aa7c648000000b005257e460940mr21786490edr.24.1693239613766; Mon, 28
+ Aug 2023 09:20:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
-In-Reply-To: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+References: <20220530100013.3753780-1-ascull@google.com>
+In-Reply-To: <20220530100013.3753780-1-ascull@google.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Aug 2023 10:19:55 -0600
-Message-ID: <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 28 Aug 2023 10:20:02 -0600
+Message-ID: <CAPnjgZ3KJS2PDorQVQYw47Pymq6VM0iMe-HEZ=dSGYeE9w6r+Q@mail.gmail.com>
+Subject: Re: [PATCH v3 00/13] Fuzzing and ASAN for sandbox
+To: Andrew Scull <ascull@google.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de, 
+ jonbottarini@google.com, seanga2@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,53 +81,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Andrew,
 
-On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 30 May 2022 at 04:00, Andrew Scull <ascull@google.com> wrote:
 >
+> This series introduces ASAN and a basic fuzzing infrastructure that
+> works with sandbox. The example fuzz test towards the end of the series
+> will find something pretty quickly. That something is fixed by the
+> series "virtio: Harden and test vring" that needs to be applied for the
+> final patch in this series.
 >
-> Provide a way for removing certain devicetree nodes and/or properties
-> from the devicetree. This is needed to purge certain nodes and
-> properties which may be relevant only in U-Boot. Such nodes and
-> properties are then removed from the devicetree before it is passed to
-> the kernel. This ensures that the devicetree passed to the OS does not
-> contain any non-compliant nodes and properties.
+> There is some refactoring to stop using '.' prefixed sections. ELF
+> defines sections with names that contain anything that isn't
+> alphanumeric or an underscore as being for system use which means
+> clang's ASAN instrumentation happily add redzones between the contained
+> objects. That's not what we want for things like linker lists where the
+> linker script has carefully placed the sections contiguously. By
+> renaming the sections, clang sees them as user sections and doesn't add
+> instrumentation.
 >
-> The removal of the nodes and properties is being done through an
-> EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
-> behind any Kconfig symbol.
+> ASAN is left disabled by default as there are still some tests that it
+> triggers on and will need some more investigation to fix. It can be
+> enabled with CONFIG_ASAN or passing `-a ASAN` to buildman.
 >
-> I have only build tested this on sandbox, and tested on qemu arm64
-> virt platform. This being a RFC, I have not put this through a CI run.
+> I abandonded the previous attempts to refactor sandbox EFI and getopt
+> declaration as the changes resulted in problems out of the scope of this
+> CL. I haven't tried to understand what EFI on sandbox should look like,
+> but I have found that the linker list implementation is very brittle
+> when up against compiler optimisation since ef123c5253 started to use
+> static, zero-length arrays to mark the beginning and end of lists but
+> the compiler see this as something it can get rid of.
 >
-> Sughosh Ganu (5):
->   dt: Provide a way to remove non-compliant nodes and properties
->   fwu: Add the fwu-mdata node for removal from devicetree
->   capsule: Add the capsule-key property for removal from devicetree
->   bootefi: Call the EVT_FT_FIXUP event handler
->   doc: Add a document for non-compliant DT node/property removal
+> From v1:
+>  - corrected handling of EFI symbols by sandbox linker script
+>  - per comments, some renaming and explaining
+>  - dropped RFC for dlmalloc ASAN instrumentation (work required to improve it)
+>  - added patch to reduce logging noise in fuzzer
 >
->  cmd/bootefi.c                                 | 18 +++++
->  .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
->  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
->  include/dt-structs.h                          | 11 +++
->  lib/Makefile                                  |  1 +
->  lib/dt_purge.c                                | 73 +++++++++++++++++++
->  lib/efi_loader/efi_capsule.c                  |  7 ++
->  7 files changed, 179 insertions(+)
->  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
->  create mode 100644 lib/dt_purge.c
+> From v2:
+>  - remove sandbox EFI and getopt refactoring, they obstruct the series
+>  - resolve a couple more ASAN errors
+>  - fix LTO, xtensa and MIPS builds
+>  - add ASAN build targets for CI
+>
+> Andrew Scull (13):
+>   serial: sandbox: Fix buffer underflow in puts
+>   sandbox: Rename EFI runtime sections
+>   sandbox: Rename getopt sections
+>   linker_lists: Rename sections to remove . prefix
+>   sandbox: Add support for Address Sanitizer
+>   test/py: test_stackprotector: Disable for ASAN
+>   CI: Azure: Build with ASAN enabled
+>   fuzzing_engine: Add fuzzing engine uclass
+>   test: fuzz: Add framework for fuzzing
+>   sandbox: Decouple program entry from sandbox init
+>   sandbox: Add libfuzzer integration
+>   sandbox: Implement fuzzing engine driver
+>   fuzz: virtio: Add fuzzer for vring
+>
+>  .azure-pipelines.yml                          |  6 ++
+>  Kconfig                                       | 16 ++++
+>  arch/Kconfig                                  |  2 +
+>  arch/arc/cpu/u-boot.lds                       |  4 +-
+>  arch/arm/config.mk                            |  4 +-
+>  arch/arm/cpu/arm926ejs/sunxi/u-boot-spl.lds   |  4 +-
+>  arch/arm/cpu/armv7/sunxi/u-boot-spl.lds       |  4 +-
+>  arch/arm/cpu/armv8/u-boot-spl.lds             |  4 +-
+>  arch/arm/cpu/armv8/u-boot.lds                 |  4 +-
+>  arch/arm/cpu/u-boot-spl.lds                   |  4 +-
+>  arch/arm/cpu/u-boot.lds                       |  6 +-
+>  arch/arm/mach-at91/arm926ejs/u-boot-spl.lds   |  2 +-
+>  arch/arm/mach-at91/armv7/u-boot-spl.lds       |  2 +-
+>  arch/arm/mach-omap2/u-boot-spl.lds            |  4 +-
+>  arch/arm/mach-orion5x/u-boot-spl.lds          |  4 +-
+>  arch/arm/mach-rockchip/u-boot-tpl-v8.lds      |  4 +-
+>  arch/arm/mach-zynq/u-boot-spl.lds             |  4 +-
+>  arch/arm/mach-zynq/u-boot.lds                 |  4 +-
+>  arch/m68k/cpu/u-boot.lds                      |  4 +-
+>  arch/microblaze/cpu/u-boot-spl.lds            |  4 +-
+>  arch/microblaze/cpu/u-boot.lds                |  4 +-
+>  arch/mips/config.mk                           |  2 +-
+>  arch/mips/cpu/u-boot-spl.lds                  |  4 +-
+>  arch/mips/cpu/u-boot.lds                      |  4 +-
+>  arch/nios2/cpu/u-boot.lds                     |  4 +-
+>  arch/powerpc/cpu/mpc83xx/u-boot.lds           |  4 +-
+>  arch/powerpc/cpu/mpc85xx/u-boot-spl.lds       |  4 +-
+>  arch/powerpc/cpu/mpc85xx/u-boot.lds           |  4 +-
+>  arch/riscv/cpu/u-boot-spl.lds                 |  4 +-
+>  arch/riscv/cpu/u-boot.lds                     |  4 +-
+>  arch/sandbox/config.mk                        | 21 ++++-
+>  arch/sandbox/cpu/os.c                         | 76 +++++++++++++++++
+>  arch/sandbox/cpu/start.c                      |  2 +-
+>  arch/sandbox/cpu/u-boot-spl.lds               | 10 +--
+>  arch/sandbox/cpu/u-boot.lds                   | 32 ++++----
+>  arch/sandbox/dts/test.dts                     |  4 +
+>  arch/sandbox/include/asm/fuzzing_engine.h     | 25 ++++++
+>  arch/sandbox/include/asm/getopt.h             |  2 +-
+>  arch/sandbox/include/asm/main.h               | 18 ++++
+>  arch/sandbox/include/asm/sections.h           |  4 +-
+>  arch/sandbox/lib/sections.c                   |  8 +-
+>  arch/sh/cpu/u-boot.lds                        |  4 +-
+>  arch/x86/cpu/u-boot-64.lds                    |  6 +-
+>  arch/x86/cpu/u-boot-spl.lds                   |  6 +-
+>  arch/x86/cpu/u-boot.lds                       |  6 +-
+>  arch/x86/lib/elf_ia32_efi.lds                 |  4 +-
+>  arch/x86/lib/elf_x86_64_efi.lds               |  4 +-
+>  arch/xtensa/cpu/u-boot.lds                    |  4 +-
+>  arch/xtensa/include/asm/ldscript.h            | 13 ++-
+>  board/compulab/cm_t335/u-boot.lds             |  4 +-
+>  board/cssi/MCR3000/u-boot.lds                 |  4 +-
+>  .../davinci/da8xxevm/u-boot-spl-da850evm.lds  |  2 +-
+>  board/qualcomm/dragonboard820c/u-boot.lds     |  4 +-
+>  board/samsung/common/exynos-uboot-spl.lds     |  4 +-
+>  board/synopsys/iot_devkit/u-boot.lds          |  4 +-
+>  board/ti/am335x/u-boot.lds                    |  4 +-
+>  board/vscom/baltos/u-boot.lds                 |  4 +-
+>  doc/api/linker_lists.rst                      | 22 ++---
+>  doc/develop/commands.rst                      |  4 +-
+>  doc/develop/driver-model/of-plat.rst          |  4 +-
+>  drivers/Kconfig                               |  2 +
+>  drivers/Makefile                              |  1 +
+>  drivers/fuzz/Kconfig                          | 17 ++++
+>  drivers/fuzz/Makefile                         |  8 ++
+>  drivers/fuzz/fuzzing_engine-uclass.c          | 28 +++++++
+>  drivers/fuzz/sandbox_fuzzing_engine.c         | 35 ++++++++
+>  drivers/serial/sandbox.c                      |  2 +-
+>  include/dm/uclass-id.h                        |  1 +
+>  include/fuzzing_engine.h                      | 51 ++++++++++++
+>  include/linker_lists.h                        | 18 ++--
+>  include/test/fuzz.h                           | 51 ++++++++++++
+>  test/Makefile                                 |  1 +
+>  test/fuzz/Makefile                            |  8 ++
+>  test/fuzz/cmd_fuzz.c                          | 82 +++++++++++++++++++
+>  test/fuzz/virtio.c                            | 72 ++++++++++++++++
+>  test/py/tests/test_stackprotector.py          |  1 +
+>  tools/mips-relocs.c                           |  9 +-
+>  77 files changed, 673 insertions(+), 151 deletions(-)
+>  create mode 100644 arch/sandbox/include/asm/fuzzing_engine.h
+>  create mode 100644 arch/sandbox/include/asm/main.h
+>  create mode 100644 drivers/fuzz/Kconfig
+>  create mode 100644 drivers/fuzz/Makefile
+>  create mode 100644 drivers/fuzz/fuzzing_engine-uclass.c
+>  create mode 100644 drivers/fuzz/sandbox_fuzzing_engine.c
+>  create mode 100644 include/fuzzing_engine.h
+>  create mode 100644 include/test/fuzz.h
+>  create mode 100644 test/fuzz/Makefile
+>  create mode 100644 test/fuzz/cmd_fuzz.c
+>  create mode 100644 test/fuzz/virtio.c
 
-What is the point of removing them? Instead, we should make sure that
-we upstream the bindings and encourage SoC vendors to sync them. If we
-remove them, no one will bother and U-Boot just becomes a dumping
-ground.
+Could you please add some documentation about this in doc/ ? I also
+wonder if we can make the fuzz test run in CI? Finally, can the azure
+stuff work in gitlab too?
 
-Instead of this, how about working on bringing the DT validation into
-U-Boot so we can see what state things are in?
-
-Please send the bindings for Linaro's recent series (which I suspect
-are motivating this series) so we can start the process.
+I am interested in using fuzzing to test a new 'Universal Payload'
+feature which basically converts data from a C struct to a devicetree
+and back.
 
 Regards,
 Simon
