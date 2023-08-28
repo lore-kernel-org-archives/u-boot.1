@@ -4,75 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DEFC83F16
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 10:19:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B336BC83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 10:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F15E864C5;
-	Mon, 28 Aug 2023 12:19:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 18BA086496;
+	Mon, 28 Aug 2023 12:25:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EuEO7Pkr";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="049qcdH1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A16F6864C8; Mon, 28 Aug 2023 12:19:02 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AE42786456; Mon, 28 Aug 2023 12:25:43 +0200 (CEST)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on2062c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eb2::62c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEF85864C4
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 12:18:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05F3586498
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 12:25:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-52713d2c606so4029323a12.2
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 03:18:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693217935; x=1693822735;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WDxvt0RXcBW4Z2eXO3dKJCYg3dd4jxhKSK0mVJ289MA=;
- b=EuEO7PkrqkffUhwS/kfTq2jR0l8lverb/OGCa4Xev1XBpekAa8On/Mjo9I0pVLu24V
- wvj5KUzgVBoqfVlCkrxeG5Ha5Oor3zrBZS8pwurcPuYUt4w4/yUnZ8mvNtKGuNySH6wc
- BAU0+f7viv6jUo1skJG63bBle+/2tSh6AlHHqPGjLbZpL3ZCdMNKHVJnQMtvHwXyCuoj
- CT2UvhnZgi7kc9p8uUdZJgj3t6dGJFCJa4gwUB8axjkow7VkfWEvtETDaus7MkYiz75g
- 3k37OY+5yw9paJCFHib5w4mK+wrlaURpCSHwrIzFuTYIFGkoaZUEsCS9dSJxXCQMW201
- 0Mnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693217935; x=1693822735;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WDxvt0RXcBW4Z2eXO3dKJCYg3dd4jxhKSK0mVJ289MA=;
- b=RGwtnbeKtix0cFc4yDBVWRo9nMLI1w23qdMUoAi+pomNeIKk7p+zdCaxMnPRkECxLn
- G5MjTUn5iFYmYVlWcJupEwoQH2hsJnTXqxsDuVGg/W7Eui0wHr8tfKEFT613eNSLyndB
- 2Dxn16SiLhjKLJOePvduJGSiARQMOvssIMJRXUnssy4RqqwXe2j2lxvCV2tzwr/0R5rI
- fxNgrKqPLKxVFf5MxqBG2HBHVLFzUMy6WNB3AkpGQxS4PUAjOfDYCO2ZL7YPNxGzQ8XK
- ooH4yJ0qTuRccoVhjg+otF3r69MDU+IZYqnefOAhUUcmTlXQxQS6ehUao38FeN2TdwDk
- 6A6g==
-X-Gm-Message-State: AOJu0YyoJbQVd0a44bV/DvCindfzjlSzO/yAzwbUrsiHgzrW/8pSikLq
- oH5OHkELQ5LkXFb7GwgrJ8zbrbvZshROGI1kPAfy5g==
-X-Google-Smtp-Source: AGHT+IFJ+eBZG1mCpie33qzFOD9IBShQGH/V0khJmH88m2ZLLW1zjWgJHY/LPMl3HPGvtgwLzlMWn9N7SbIyjNsalB8=
-X-Received: by 2002:aa7:d651:0:b0:522:3a0d:38c2 with SMTP id
- v17-20020aa7d651000000b005223a0d38c2mr20514305edr.9.1693217935376; Mon, 28
- Aug 2023 03:18:55 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lO7oZ4Hy8eU4b337Imvx8RiZUcZnCM/oyXwnsHqpHdWj4a4Ri5Mjm3wim/T3cNm69y5bD/Sqxk/HVdSQ7BTbwiY99pgfhRkL00/kb8QgG6S/mS1r/wuqLkGKG0/+7eXLoUMIE5NoCBU2/D/AsR4ULnvnWeH+/oYqDnvKP5RTenIuxk/3joHpGVIP/BznLiVMTkRc1r+EBrFTsshMwVCEVC3E9yEbyUYIBdmWPQawznHzXITTuoB3JC+urIV83IYrx95MkI5B5yARnoxGDc0XBsaFEmrGqxRyVv+2wygH6V6lO5mV2jh33tjaRxf7DsyWEW17EyILgIpU763jrpEcFQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=buyxdODgvz/hBrSoA6yrIuP8soUJb1flIoe8aqi/WEA=;
+ b=ewEAa5C8TvhhyBsebnnfccZnwciSH9OdIdCsBCx9SO8V4ymzrjEfJRix1hdCr1UUg4X0WnRNZptzmL85nbUMnlvErlDiU/WWuH5CCS1MzsWhad4bzetPpqkvSSlXep82iipIoLMvIPB/jdQyVmlhfLEHCbs4ftEFeTP1Oe41up+nA0IRFTPMww/kjyorGsUl0rgh2qYxDAGYuQlrKfjuzTOKUkWmoxrAOGnx3cpscK8uLpI9S38i7Ak06G0xkCRKHzRj8YAFWmqAB3SstcwgUAqcqAcKn+nCtqJ2M8FUBKzDEih2jTcHOd3NZRBYIy6aGA+yShQ99utK7hv+5KkS1A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=buyxdODgvz/hBrSoA6yrIuP8soUJb1flIoe8aqi/WEA=;
+ b=049qcdH11gs0fO7b+KW3W34L+G/evFswyezXfYbkm+B1+PACAOH8GwMFNRiUTIzSRM7WgJFLagVKTp5SO4sI2GVrP0jxQkNQUD2GJpYcaHWdeIrKM0cUeK6Mm09QZWIiWxeqSEqQQ587OkpLsUKKioRIW1b0ZuAlx1TQuR572Zk=
+Received: from PH8PR05CA0014.namprd05.prod.outlook.com (2603:10b6:510:2cc::7)
+ by SA0PR12MB4367.namprd12.prod.outlook.com (2603:10b6:806:94::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34; Mon, 28 Aug
+ 2023 10:25:37 +0000
+Received: from SA2PEPF000015CA.namprd03.prod.outlook.com
+ (2603:10b6:510:2cc:cafe::a3) by PH8PR05CA0014.outlook.office365.com
+ (2603:10b6:510:2cc::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.17 via Frontend
+ Transport; Mon, 28 Aug 2023 10:25:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SA2PEPF000015CA.mail.protection.outlook.com (10.167.241.200) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.17 via Frontend Transport; Mon, 28 Aug 2023 10:25:37 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 28 Aug
+ 2023 05:25:34 -0500
+Message-ID: <3d815d7d-a091-6f58-9d3d-c65e9eac8f41@amd.com>
+Date: Mon, 28 Aug 2023 12:25:30 +0200
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <20230826090633.239342-6-sughosh.ganu@linaro.org>
- <2000e1e6-539a-2aa6-a6c6-1fcc9db5d13d@gmx.de>
-In-Reply-To: <2000e1e6-539a-2aa6-a6c6-1fcc9db5d13d@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 28 Aug 2023 15:48:44 +0530
-Message-ID: <CADg8p941eO+UbHAP2eX-GqO2vzfggoHZxLP7eX0ASvaSZ92KVA@mail.gmail.com>
-Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
- node/property removal
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+CC: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, <u-boot@lists.denx.de>,
+ <lukma@denx.de>, <seanga2@gmail.com>, <git@amd.com>
+References: <20230711095128.19086-1-ashok.reddy.soma@amd.com>
+ <32e261a0-f4eb-04f4-f31a-33414a292146@amd.com>
+ <20230825143959.GH3953269@bill-the-cat>
+From: Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH] clk: Dont return error when assigned-clocks is empty or
+ missing
+In-Reply-To: <20230825143959.GH3953269@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015CA:EE_|SA0PR12MB4367:EE_
+X-MS-Office365-Filtering-Correlation-Id: 124daf40-4512-48db-ad2a-08dba7b11edf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: iyLD5ctROAmx9ny/XGzrdwFaZBILsMraQG691mgejq+dPDH4qY9w9cEOxYeqTCcbnPeSr5NcWR5i7f/eGL+28/3akeel7cPMOb1VCQ5OVb/7PiA0Kj6zY0eEfc1YZdQKn4lY4IY4S4leHLgmR9g1C8kjmcVSQcWP5uF+94OMAiMd5T69MaOM2QM+7agiYgeQJerSn5lePAbjoyKn5TtIwLZHh1kbTxRqmEnqaEravrkT9OBUMs/4aIMbhZnIFMq1cinR7GZ2ZYMs99VdrTMSksW+hTYgXPganG7pVjp/3i3arSuwQtxSObzF6uw123L8PURfaVOmB7lAcBAlkwEmlqyIofb5ro9zi++ZVgAhzXsMyT77vRz1l9Jsfe/XzsRUQ/S5D5cWTK9g0ThPuC2c+ZNT3Zh/ibElLO1dOFntrvHuEp/V9wQ7zUZA6y7q3jZRr9icMf0qShm0AQ0orXGJ4WHBSSZgePnFxS3v68kp+jd+qLfHLtYZy4h5roZTeP8QMewI/34xWiHwRF+1OaL4yaJ3en1k3t5wkaklZYo48FEPeRAGK38SDW+L1NyoPiEU5IgDHNwMWzIIttrpqDH1+NJ8ed/dRyEXzvmYAqDsGFBF+K5ilB6tD/cm+ScgjhXdsYQi6GQXU7kyIzkT+6+qxsX9w74QXbNYUX+kJdAQy8dsImDhfnVA7Y5XsEDzmzIvabbH+iLO3kBepF3MFCK5nLG2fW99CLahfwdmGhXH+0UMWmqoQULg9OBXEDB6apsIRcWk283IEIYXrxdsEMX0K1GDTo6dErvf7zT8NQ7AJUKyUF25F+fKHeJFuV9qE81kYDrgsSG4F2qyfIMUrpzqEw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(39860400002)(346002)(376002)(396003)(1800799009)(186009)(451199024)(82310400011)(40470700004)(46966006)(36840700001)(31696002)(6666004)(53546011)(2616005)(40480700001)(40460700003)(2906002)(36756003)(5660300002)(86362001)(44832011)(54906003)(316002)(70586007)(4326008)(8676002)(8936002)(41300700001)(70206006)(6916009)(16576012)(82740400003)(81166007)(356005)(478600001)(83380400001)(36860700001)(47076005)(31686004)(26005)(16526019)(336012)(426003)(192303002)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2023 10:25:37.1457 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 124daf40-4512-48db-ad2a-08dba7b11edf
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CA.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4367
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,187 +125,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 26 Aug 2023 at 15:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 8/26/23 11:06, Sughosh Ganu wrote:
-> > Add a document explaining the need for removal of non-compliant
-> > devicetree nodes and properties. Also describe in brief, the macros
-> > that can be used for this removal.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
->
-> Thanks for properly documenting the change.
->
-> Warning, treated as error:
-> doc/develop/devicetree/dt_non_compliant_purge.rst:
-> document isn't included in any toctree
->
-> Please, add the document to doc/develop/devicetree/index.rst
->
-> Please, run make htmldocs before resubmitting.
->
-> > ---
-> >   .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++++++++++++
-> >   1 file changed, 64 insertions(+)
-> >   create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
-> >
-> > diff --git a/doc/develop/devicetree/dt_non_compliant_purge.rst b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> > new file mode 100644
-> > index 0000000000..c3a8feab5b
-> > --- /dev/null
-> > +++ b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> > @@ -0,0 +1,64 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +Removal of non-compliant nodes and properties
-> > +=============================================
-> > +
-> > +The devicetree used in U-Boot might contain nodes and properties which
-> > +are specific only to U-Boot, and are not necessarily being used to
-> > +describe hardware but to pass information to U-Boot. An example of
-> > +such a property would be the public key being passed to U-Boot for
-> > +verification.
-> > +
-> > +This devicetree can then be passed to the OS. Since certain nodes and
-> > +properties are not really describing hardware, and more importantly,
-> > +these are only relevant to U-Boot, bindings for these cannot be
-> > +upstreamed into the devicetree repository. There have been instances
-> > +of attempts being made to upstream such bindings, and these deemed not
->
-> but these were not deemed fit
->
-> > +fit for upstreaming. Not having a binding for these nodes and
-> > +properties means that the devicetree fails the schema compliance tests
-> > +[1]. This also means that the platform cannot get certifications like
-> > +SystemReady [2] which, among other things require a devicetree which
->
-> %s/require/requires/
->
-> > +passes the schema compliance tests.
-> > +
-> > +For such nodes and properties, it has been suggested by the devicetree
-> > +maintainers that the right thing to do is to remove them from the
->
-> %s/that the right thing to do is//
->
-> > +devicetree before it gets passed on to the OS [3].
->
-> %s/on to/to/
->
-> > +
-> > +Removing nodes/properties
-> > +-------------------------
-> > +
-> > +In U-Boot, this is been done through adding information on such nodes
->
-> %s/is been done through/is done by/
->
-> > +and properties in a list. The entire node can be deleted, or a
-> > +specific property under a node can be deleted. The list of such nodes
-> > +and properties is generated at compile time, and the function to purge
-> > +these can be invoked through a EVT_FT_FIXUP event notify call.
-> > +
-> > +For deleting a node, this can be done by declaring a macro::
-> > +
-> > +     DT_NON_COMPLIANT_PURGE(fwu_mdata) = {
-> > +             .node_path      = "/fwu-mdata",
-> > +     };
->
-> Where should such a macro be placed?
 
-It should be placed in any file that will get compiled.
 
->
-> > +
-> > +Similarly, for deleting a property under a node, that can be done by
-> > +specifying the property name::
-> > +
-> > +     DT_NON_COMPLIANT_PURGE(capsule_key) = {
-> > +             .node_path      = "/signature",
-> > +             .prop           = "capsule-key",
-> > +     };
->
-> Why is capsule_key needed twice here? What would be the effect of:
->
-> DT_NON_COMPLIANT_PURGE(voodoo) = {
->         .node_path      = "/signature",
->         .prop           = "capsule-key",
-> };
+On 8/25/23 16:39, Tom Rini wrote:
+> On Fri, Aug 25, 2023 at 09:15:09AM +0200, Michal Simek wrote:
+>> Hi Tom,
+>>
+>> On 7/11/23 11:51, Ashok Reddy Soma wrote:
+>>> There is a chance that assigned-clock-rates is given and assigned-clocks
+>>> could be empty. Dont return error in that case, because the probe of the
+>>> corresponding driver will not be called at all if this fails.
+>>> Better to continue to look for it and return 0.
+>>>
+>>> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+>>> ---
+>>>
+>>>    drivers/clk/clk-uclass.c | 8 +++++++-
+>>>    1 file changed, 7 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+>>> index dc3e9d6a26..f186fcbcdb 100644
+>>> --- a/drivers/clk/clk-uclass.c
+>>> +++ b/drivers/clk/clk-uclass.c
+>>> @@ -329,7 +329,13 @@ static int clk_set_default_rates(struct udevice *dev,
+>>>    			dev_dbg(dev,
+>>>    				"could not get assigned clock %d (err = %d)\n",
+>>>    				index, ret);
+>>> -			continue;
+>>> +			/* Skip if it is empty */
+>>> +			if (ret == -ENOENT) {
+>>> +				ret = 0;
+>>> +				continue;
+>>> +			}
+>>> +
+>>> +			return ret;
+>>>    		}
+>>>    		/* This is clk provider device trying to program itself
+>>
+>> What's your take on this one?  I didn't get reply from Sean.
+> 
+> I guess, what's the validated upstream dts where this is the case?
+> 
 
-In your above example, voodoo just happens to be the name of the entry
-that will be created. But the property that will be searched in the
-devicetree for removal is "capsule-key".
+It was found by incorrect DT. It means I don't think there is any DT which 
+contains this issue.
+But that being said we can extend current clock tests to cover this case.
+Please look below.
 
->
-> > +
-> > +In the first example, the entire node with path /fwu-mdata will be
-> > +removed. In the second example, the property capsule-key
-> > +under /signature node will be removed.
-> > +
-> > +Similarly, a list of nodes and properties can be specified using the
-> > +following macro::
-> > +
-> > +     DT_NON_COMPLIANT_PURGE_LIST(foo) = {
->
-> What does foo refer to here? Can this parameter be eliminated from the
-> syntax?
+Thanks,
+Michal
 
-foo is the name of the entry being generated through the
-ll_entry_declare macro. We do need this parameter for ll_entry_declare
-to generate a unique entry. Using a common name results in a linker
-error.
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index ff9f9222e6f9..0f9bedc0065c 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -589,6 +589,16 @@
+                 clock-names = "fixed", "i2c", "spi", "uart2", "uart1";
+         };
 
->
-> Will the application of the removals be sorted alphabetically by this
-> argument?
++       clk-test2 {
++               compatible = "sandbox,clk-test";
++               assigned-clock-rates = <321>;
++       };
++
++       clk-test3 {
++               compatible = "sandbox,clk-test";
++               assigned-clocks = <&clk_sandbox 1>;
++       };
++
+         ccf: clk-ccf {
+                 compatible = "sandbox,clk-ccf";
+         };
+diff --git a/test/dm/clk.c b/test/dm/clk.c
+index f48de05436bf..71ae32eaff50 100644
+--- a/test/dm/clk.c
++++ b/test/dm/clk.c
+@@ -36,6 +36,12 @@ static int dm_test_clk_base(struct unit_test_state *uts)
+         ut_asserteq(clk_is_match(&clk_method1, &clk_method2), true);
+         ut_asserteq(clk_method1.id, clk_method2.id);
 
-I am not sure how the linker arranges the entries in the list. Why
-does it matter?
++       ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test2", &dev));
++       ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
++
++       ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test3", &dev));
++       ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
++
+         return 0;
+  }
 
->
-> What will happen if a property or node does not exist at time of
-> removal? Hopefully that does not stop the boot process but is silently
-> ignored.
-
-Yes, it will not cause the boot to fail.
-
->
-> > +             { .node_path = "/some_node", .prop = "some_bar" },
-> > +             { .node_path = "/some_node" },
-> > +     };
->
-> Why do you need the first element in your example?
-> Wouldn't deleting /some/node imply that all its children are deleted?
-
-Ah, this is a bad example. I should be using a different name for the
-second entry here. Will fix.
-
->
-> Why do we need separate properties .node_path and .prop. It would be
-> less effort to write:
->
-> DT_NON_COMPLIANT_PURGE_LIST() =
-> {
->         "/some_node_1/some_property_1",
->         "/some_node_1/some_property_2",
->         "/some_node_2",
-> }
->
-> I assume the macro does its job irrespective of non-compliance.
-> Why not call it DT_PURGE()?
-
-Yes, it can be called DT_PURGE. I was using the term non_compliant
-simply to highlight the fact that we would need to use this for
-removal of non-compliant nodes or properties.
-
--sughosh
-
->
-> Best regards
->
-> Heinrich
->
-> > +
-> > +[1] - https://github.com/devicetree-org/dt-schema
-> > +[2] - https://www.arm.com/architecture/system-architectures/systemready-certification-program
-> > +[3] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/
