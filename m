@@ -4,71 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF4FC83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EF7C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30E5486530;
+	by phobos.denx.de (Postfix) with ESMTP id 6DA4E86541;
 	Mon, 28 Aug 2023 19:56:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uu6bYiWh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ja7pFHSA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AD0C86507; Mon, 28 Aug 2023 19:56:03 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 499828653E; Mon, 28 Aug 2023 19:56:05 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 938B686518
+ by phobos.denx.de (Postfix) with ESMTPS id 981F186522
  for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:55:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d71dd633f33so3460157276.2
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-d77c5414433so3448309276.0
  for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:55:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693245356; x=1693850156;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WX65vnyBgJaGKpyO0Pxvtj+a0LrNY6pJ0HST+O8C2qs=;
- b=Uu6bYiWhWKJ3rLXXrGUFKj99A61QJq4IGbfEdgxhaIa+pPkkXb0tcDjjf4NdwPKNwK
- VKmFIsKjobseycDt74dmfIOgFz87AreakTDziCJmclWLuMNf5i1m79XQbha4Hw19YGUX
- FyEwjS+Scs89kZq8F7ZasZKglQ5TeSEBzs6XQ=
+ bh=k65GKdOUWnHm1qwafUMtkx7bRQfSH7S8e1jZYL5V+vU=;
+ b=Ja7pFHSAHOedn+KoQlCsSvMsk/T5V/2KPPvNnlSHoN2c/03lKKuCMUfCIOHssqYRBs
+ rpHWnw6hi5TAuCm7thaZPAlYPG1SboLILv8pt8dL9l/vtzuo0E7RQQdh7agRJ75LnPee
+ 3c5z/mup9/ZzFABUJjPgcSU0RFV4F991yvk3A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693245356; x=1693850156;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WX65vnyBgJaGKpyO0Pxvtj+a0LrNY6pJ0HST+O8C2qs=;
- b=F8RrfmgX9aRo5UnzDQpluPRCbcWyNNx1S11S6OzLl80BtI6NJVqI6E6BLDw23lMK41
- 3hKlU7bbwiXTv/jRGD4jotK6sAVyFj5WLfoP3nnFo+h0Obtc3f4aEL5vXRBCjh2ozFdA
- bxn4XE37Y2jvbpkNJHqohXtNCQJvKDtI17l+qMW9csjAdymARJRh8GioxFdIU9rZBigW
- R/FhngvdSwNDO+5/3Q/CYKs8wsL9zqGqpBXLCNee58gM13s23LaPnZ6I012ioPRknH3i
- kZtfSLHB3OqAS12O+owrDXXVbiHKj2EUR9uflOcb0eBqjfG4rU3ib6uCfode9B6d5UkS
- Wikg==
-X-Gm-Message-State: AOJu0YwfD2IF1CWjZll7vQZMxJq7hLRHUtvUiihI6vwZ6lF41ij9/P7A
- j+sXWCqD81o2NLPMvQJEFMv7XyAg2agfnqUVOSHApA==
-X-Google-Smtp-Source: AGHT+IHOk371qsV1/h5UzuFkXT1tT3KwxhjGszitmw+ZabR1gaCjcpoLHa154oSTxsb+Uo5FKlufjygRW7Yg0k1NaT8=
-X-Received: by 2002:a25:858a:0:b0:d5c:1b9b:6f5a with SMTP id
- x10-20020a25858a000000b00d5c1b9b6f5amr22746860ybk.44.1693245356091; Mon, 28
+ bh=k65GKdOUWnHm1qwafUMtkx7bRQfSH7S8e1jZYL5V+vU=;
+ b=mClbK1qVYzqv9vCBAF6iC1UGne4yAFew7zhdXx/lo/kShUGETPfp0hkR7vOloKqKOO
+ HRxnQOwT/QjPxO5qMZVTE9GfQWytG5Ez6zB2P+9COdaqps1aL3RCWmW2bGpIhbxYOe/V
+ fKERlzQLx7tB0qqRaI+zZI0G02SfCPqPanGY8zbv7C7vFhDl8mvSfRRCdK2D8o//24Ez
+ KzfJBKUFxctB/B6F6JW/oCBjIgSiXL+Qsk7IgS6JtOtS1eTKzuagKk5s+669ukJ0sMAk
+ IJVUQluYgjgqLHilaAlDOMXzratiB2uchEl02slTrjXHRKaTeqS67V5y1mebutMAXAYY
+ 1/ug==
+X-Gm-Message-State: AOJu0Yy58hB69o80HPuewcHrrMUQU4CbwvvK53FRjZh9bGFRMZadKo13
+ svax5N+ZUJDAr3tay0U1PoT0KDLCHm2neYQ0lvkkf9VsX53kiBo6c2Q=
+X-Google-Smtp-Source: AGHT+IEvVeF06BPxPCqR+V5nwOp5UCW4I43Leqhupd1OmE6f9iFPbR5/xf2HQzA/dmB5wkB6dKBUX0rQkuYnvj2sfMA=
+X-Received: by 2002:a25:ce01:0:b0:d78:1b61:8149 with SMTP id
+ x1-20020a25ce01000000b00d781b618149mr11955354ybe.61.1693245356084; Mon, 28
  Aug 2023 10:55:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220712071212.2188390-1-sumit.garg@linaro.org>
- <20220712071212.2188390-6-sumit.garg@linaro.org>
- <CAPnjgZ2jR_fpjKo6XyG6eOY1ZX9ktXsaON6Ey6STY1ZjcnUzAw@mail.gmail.com>
- <CAFA6WYMQRFuga9h=PA4UCYofOt7x2Gohh9oDQAQTaL4ZFKr-Vw@mail.gmail.com>
-In-Reply-To: <CAFA6WYMQRFuga9h=PA4UCYofOt7x2Gohh9oDQAQTaL4ZFKr-Vw@mail.gmail.com>
+References: <20230828152226.73466-1-heinrich.schuchardt@canonical.com>
+ <20230828152226.73466-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230828152226.73466-2-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Aug 2023 11:54:57 -0600
-Message-ID: <CAPnjgZ1jPVk=NX2aJVfEXwA-XmvoXO4v31c_nepjEMgeu5+rSw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/9] board: qualcomm: Add support for dragonboard845c
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, rfried.dev@gmail.com, peng.fan@nxp.com, 
- jh80.chung@samsung.com, trini@konsulko.com, dsankouski@gmail.com, 
- stephan@gerhold.net, vinod.koul@linaro.org, nicolas.dechesne@linaro.org, 
- mworsfold@impinj.com, daniel.thompson@linaro.org, pbrobinson@gmail.com
+Date: Mon, 28 Aug 2023 11:54:51 -0600
+Message-ID: <CAPnjgZ07g7gmEw6XPs+-tHvFhXvyBQUwKGw9PGi-qcfrsDk6Bg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] dm: event: document all events
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,154 +81,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi Heinrich,
 
-On Thu, 24 Aug 2023 at 04:44, Sumit Garg <sumit.garg@linaro.org> wrote:
+On Mon, 28 Aug 2023 at 09:22, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hi Simon,
+> Provide Sphinx documentation for all events.
 >
-> On Thu, 24 Aug 2023 at 05:29, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sumit,
-> >
-> > On Tue, 12 Jul 2022 at 01:12, Sumit Garg <sumit.garg@linaro.org> wrote:
-> > >
-> > > Add support for 96Boards Dragonboard 845C aka Robotics RB3 development
-> > > platform. This board complies with 96Boards Open Platform Specifications.
-> > >
-> > > Features:
-> > > - Qualcomm Snapdragon SDA845 SoC
-> > > - 4GiB RAM
-> > > - 64GiB UFS drive
-> > >
-> > > U-boot is chain loaded by ABL in 64-bit mode as part of boot.img.
-> > > For detailed build and boot instructions, refer to
-> > > doc/board/qualcomm/sdm845.rst, board: dragonboard845c.
-> > >
-> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
-> > > ---
-> > >  arch/arm/dts/dragonboard845c-uboot.dtsi       |  37 +++++++
-> > >  arch/arm/dts/dragonboard845c.dts              |  44 ++++++++
-> > >  arch/arm/mach-snapdragon/Kconfig              |  14 +++
-> > >  board/qualcomm/dragonboard845c/Kconfig        |  12 +++
-> > >  board/qualcomm/dragonboard845c/MAINTAINERS    |   6 ++
-> > >  board/qualcomm/dragonboard845c/Makefile       |   9 ++
-> > >  board/qualcomm/dragonboard845c/db845c.its     |  63 +++++++++++
-> > >  .../dragonboard845c/dragonboard845c.c         |   9 ++
-> > >  configs/dragonboard845c_defconfig             |  28 +++++
-> > >  doc/board/qualcomm/sdm845.rst                 | 100 +++++++++++++++---
-> > >  include/configs/dragonboard845c.h             |  28 +++++
-> > >  11 files changed, 337 insertions(+), 13 deletions(-)
-> > >  create mode 100644 arch/arm/dts/dragonboard845c-uboot.dtsi
-> > >  create mode 100644 arch/arm/dts/dragonboard845c.dts
-> > >  create mode 100644 board/qualcomm/dragonboard845c/Kconfig
-> > >  create mode 100644 board/qualcomm/dragonboard845c/MAINTAINERS
-> > >  create mode 100644 board/qualcomm/dragonboard845c/Makefile
-> > >  create mode 100644 board/qualcomm/dragonboard845c/db845c.its
-> > >  create mode 100644 board/qualcomm/dragonboard845c/dragonboard845c.c
-> > >  create mode 100644 configs/dragonboard845c_defconfig
-> > >  create mode 100644 include/configs/dragonboard845c.h
-> > >
-> > [..]
-> >
-> > > diff --git a/doc/board/qualcomm/sdm845.rst b/doc/board/qualcomm/sdm845.rst
-> > > index b6642c9579..8ef4749287 100644
-> > > --- a/doc/board/qualcomm/sdm845.rst
-> > > +++ b/doc/board/qualcomm/sdm845.rst
-> > > @@ -35,9 +35,25 @@ Pack android boot image
-> > >  ^^^^^^^^^^^^^^^^^^^^^^^
-> > >  We'll assemble android boot image with ``u-boot.bin`` instead of linux kernel,
-> > >  and FIT image instead of ``initramfs``. Android bootloader expect gzipped kernel
-> > > -with appended dtb, so let's mimic linux to satisfy stock bootloader:
-> > > +with appended dtb, so let's mimic linux to satisfy stock bootloader.
-> > >
-> >
-> > [..]
-> >
-> > > +The dragonboard845c is a Qualcomm Robotics RB3 Development Platform, based on
-> > > +the Qualcomm SDM845 SoC.
-> > > +
-> > > +Steps:
-> > > +
-> > > +- Build u-boot::
-> > > +
-> > > +       $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> > > +       $ make dragonboard845c_defconfig
-> > > +       $ make
-> > > +
-> > > +- Create dummy dtb::
-> > > +
-> > > +       workdir=/tmp/prepare_payload
-> > > +       mkdir -p "$workdir"
-> > > +       mock_dtb="$workdir"/payload_mock.dtb
-> > > +
-> > > +       dtc -I dts -O dtb -o "$mock_dtb" << EOF
-> > > +       /dts-v1/;
-> > > +       / {
-> > > +               #address-cells = <2>;
-> > > +               #size-cells = <2>;
-> > > +
-> > > +               memory@80000000 {
-> > > +                       device_type = "memory";
-> > > +                       /* We expect the bootloader to fill in the size */
-> > > +                       reg = <0 0x80000000 0 0>;
-> > > +               };
-> > > +
-> > > +               chosen { };
-> > > +       };
-> > > +       EOF
-> > > +
-> > > +- gzip u-boot::
-> > > +
-> > > +       gzip u-boot.bin
-> > > +
-> > > +- Append dtb to gzipped u-boot::
-> > > +
-> > > +        cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
-> > > +
-> > > +- A ``db845c.its`` file can be found in ``board/qualcomm/dragonboard845c/``
-> > > +  directory. It expects a folder as ``db845c_imgs/`` in the main directory
-> > > +  containing pre-built kernel, dts and ramdisk images. See ``db845c.its``
-> > > +  for full path to images::
-> > > +
-> > > +       mkimage -f db845c.its db845c.itb
-> > > +
-> > > +- Now we've got everything to build android boot image::
-> > > +
-> > > +       mkbootimg --kernel u-boot.bin.gz-dtb --ramdisk db845c.itb \
-> > > +       --output boot.img --pagesize 4096 --base 0x80000000
-> > > +
-> > > +- Flash boot.img using db845c fastboot method.
-> >
-> > What command should be used here? I can run 'fastboot devices' but am
-> > not sure what command to use to flash U-Boot.
-> >
->
-> At the time of writing this doc, I thought it was understood how to
-> flash boot.img on db845c. But I will make that more explicit. Since
-> u-boot has to be chain loaded by ABL, the command to flash boot.img
-> (containing u-boot) is as follows:
->
-> sudo fastboot flash boot boot.img
->
-> > Also, is it possible to flash U-Boot as a first-stage bootloader?
-> >
->
-> That's not possible currently due to Qcom proprietary bootloader being
-> used. But there were plans to replace atleast ABL with u-boot (See
-> slide 9 from this Linaro connect Qcom keynote [1]). I hope that will
-> materialize soon.
->
-> [1] https://resources.linaro.org/en/resource/necH5bQcfrhCCkjSGHXJyA
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/event.h | 84 +++++++++++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 82 insertions(+), 2 deletions(-)
 >
 
-Thank you for the link. I am pleased to hear it and hope it plays out
-as that slide seems to indicate.
+Great to see this, thank you
 
-I would like to suggest that 96 boards should use open-source firmware
-when they launch. Once they launch there is little incentive to clean
-things up.
+> diff --git a/include/event.h b/include/event.h
+> index bb38ba98e7..6dee4adef2 100644
+> --- a/include/event.h
+> +++ b/include/event.h
+> @@ -19,29 +19,109 @@
+>   * @EVT_DM_PRE_PROBE: Device is about to be probed
+>   */
+>  enum event_t {
+> -       EVT_NONE,
+> +       /**
+> +        * @EVT_NONE: This zero value is not used for events.
+> +        */
+> +       EVT_NONE = 0,
+> +
+> +       /**
+> +        * @EVT_TEST: This event is used in unit tests.
+> +        */
+>         EVT_TEST,
+>
+>         /* Events related to driver model */
+> +       /**
+> +        * @EVT_DM_POST_INIT_F:
+> +        * This event is triggered after initialization of the driver model
+> +        * before relocation. Its parameter is NULL.
+
+Perhaps better is 'triggered after pre-relocation init of driver
+model'. It seems a bit odd to have before and after in the same
+sentence.
+
+> +        * A non-zero return code from the event handler let's the boot process
+> +        * fail.
+> +        */
+>         EVT_DM_POST_INIT_F,
+> +       /**
+> +        * @EVT_DM_POST_INIT_R:
+> +        * This event is triggered after initialization of the driver model
+> +        * after relocation. Its parameter is NULL.
+
+same here
+
+> +        * A non-zero return code from the event handler let's the boot process
+> +        * fail.
+> +        */
+>         EVT_DM_POST_INIT_R,
+> +       /**
+> +        * @EVT_DM_PRE_PROBE:
+> +        * This event is triggered before probing a device. Its parameter is the
+> +        * udevice to be probed.
+
+device
+
+> +        * A non-zero return code lets the device not being probed.
+> +        */
+>         EVT_DM_PRE_PROBE,
+> +       /**
+> +        * @EVT_DM_POST_PROBE:
+> +        * This event is triggered after probing a device. Its parameter is the
+> +        * udevice to be probed.
+
+device that was probed
+
+> +        * A non-zero return code leaves the device in the unprobed state and
+> +        * therefore not usable.
+> +        */
+>         EVT_DM_POST_PROBE,
+> +       /**
+> +        * @EVT_DM_PRE_REMOVE:
+> +        * This event is triggered before removing a device. Its parameter is
+> +        * the udevice to be removed.
+> +        * A non-zero return code stops the removal of the device before any
+> +        * changes.
+> +        */
+>         EVT_DM_PRE_REMOVE,
+> +       /**
+> +        * @EVT_DM_POST_REMOVE:
+> +        * This event is triggered before removing a device. Its parameter is
+
+after
+
+> +        * the udevice to be removed.
+
+that was removed
+
+> +        * A non-zero return code stops the removal of the device after all
+> +        * removal changes. The previous state is not restored. All children
+> +        * will be gone and the device may not be functional.
+
+Great!
+
+> +        */
+>         EVT_DM_POST_REMOVE,
+>
+>         /* Init hooks */
+> +       /**
+> +        * @EVT_MISC_INIT_F:
+> +        * This event is triggered during the initialization sequence bofore
+
+before
+
+> +        * relocation. Its parameter is NULL.
+> +        * A non-zero return code from the event handler let's the boot process
+> +        * fail.
+> +        */
+>         EVT_MISC_INIT_F,
+>
+> -       /* Fpga load hook */
+> +       /**
+> +        * @EVT_FPGA_LOAD:
+> +        * The FPGA load hook is called after loading an FPGA with a new binary.
+> +        * Its parameter is of type struct event_fpga_load and contains
+> +        * information about the loaded image.
+> +        */
+>         EVT_FPGA_LOAD,
+>
+>         /* Device tree fixups before booting */
+> +       /**
+> +        * @EVT_FT_FIXUP:
+> +        * This event is triggered during device-tree fix up after all
+> +        * other device-tree fixups have been executed.
+> +        * Its parameter is of type struct event_ft_fixup which contains
+> +        * the address of the device-tree to fix up and the list of images to be
+> +        * booted.
+
+A non-zero return causes the boot to fail
+
+> +        */
+>         EVT_FT_FIXUP,
+>
+>         /* To be called once, before calling main_loop() */
+> +       /**
+> +        * @EVT_MAIN_LOOP:
+> +        * This event is triggered immediately before calling main_loop() which
+> +        * is the entry point of the command line.
+> +        * Its parameter is NULL.
+> +        */
+>         EVT_MAIN_LOOP,
+>
+> +       /**
+> +        * @EVT_COUNT:
+> +        * This constants holds the maximum event number + 1 and is used when
+> +        * looping over all event classes.
+> +        */
+>         EVT_COUNT
+>  };
+>
+> --
+> 2.40.1
+>
 
 Regards,
 Simon
