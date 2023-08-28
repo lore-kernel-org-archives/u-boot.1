@@ -4,57 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E92C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 21:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BC5C83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 21:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD0588647F;
-	Mon, 28 Aug 2023 23:50:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B5F18647F;
+	Mon, 28 Aug 2023 23:52:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="coJGTX76";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1921286482; Mon, 28 Aug 2023 23:50:52 +0200 (CEST)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5C21786482; Mon, 28 Aug 2023 23:52:46 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C75386456
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 23:50:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C717086456
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 23:52:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ziswiler.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel@ziswiler.com
-Received: from toolbox.int.toradex.com ([84.226.64.168]) by mrelay.perfora.net
- (mreueus003 [74.208.5.2]) with ESMTPSA (Nemesis) id
- 0MWlJt-1qCufy0xhb-00XuQy; Mon, 28 Aug 2023 23:50:41 +0200
-From: Marcel Ziswiler <marcel@ziswiler.com>
-To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Nishanth Menon <nm@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: [PATCH v1] include: configs: verdin-am62: drop unused sdram address
-Date: Mon, 28 Aug 2023 23:50:37 +0200
-Message-Id: <20230828215037.482278-1-marcel@ziswiler.com>
-X-Mailer: git-send-email 2.36.1
+ spf=pass smtp.mailfrom=jpewhacker@gmail.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2bcbfb3705dso56542691fa.1
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 14:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693259563; x=1693864363;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=THWex494xl73pru4OAcFD+SewB1I/CAZsz8epWI6tag=;
+ b=coJGTX76u1k1qpeKvl/OpPrji8QYNtXsmRGhQOC7CP4nLCY7M1OdXIJBoggoVBfw0I
+ BYDYh3KHBaVgoaBGnmANBRt880SuMjB89mib3M3RWVBK93DcEAnnLaYoZUul8O/jYkrN
+ q8BhjYvq3jQ4dx6eEdvHjRiApc4mYuqHBqtkidJCU0ijukWbI4IDMlcihca6Rve/Qn+b
+ Tmf7McZPoLp2u14SyhvbVYT2xVe8jTcraAPq5cuGzZ6ZFouAF5KAXbCvvjNPpJd5rqwZ
+ 9u2s3I09NmbkK0+I92U7QCNjk9Qg1/8EZW1W35bbFhX14Uk0YwntJP6grTpNVNH07MEh
+ Mgew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693259563; x=1693864363;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=THWex494xl73pru4OAcFD+SewB1I/CAZsz8epWI6tag=;
+ b=SH5j2Q8hV7oX04BDJD9hkmTtab67JqJ08Gye8R1tduThOVanSmOES5wUgNIsJZMH6p
+ FfYtdXjo/Ze/Q4XkDkUZqwiDy+utK7AOdAuyjpdibxm6RiiaZgWnWCJehtXqOU7bjc2q
+ HDM8RMcmIoH+CiRgAyXcQY6sz2JEo6D1RyYNlrldyMlVPftUHnllipO6IDcn33SbwNxM
+ jRXTT9EfK1KqPwiTOntwXYeAGZa/psOmnvdcv+ysSY5DlI4jYPmrwDacwmq58J/DE15U
+ 2gDOzu5O11Is2JDD3n/sG+Q/vU++5NqY2fHnpe64zmYLCi57FDAkc7TS5YpeiXmAP6JP
+ aUzA==
+X-Gm-Message-State: AOJu0Yxy2n2QW8RccJK+Ebs6iRvHe3GULwx/5nOZ6tD6fWnug+Qd9Yi/
+ bPSpNwCpTdHYCvdEME/xVOcs4Mx46MHENig3XYw=
+X-Google-Smtp-Source: AGHT+IERymDDTO9SpceTVq22XfjXJsuXuGuT912sN6dKMMtV15REFE70AMks2A4i6HSJXNsO7t8rUAS3DYlxCRoIqHo=
+X-Received: by 2002:a2e:9818:0:b0:2bc:db70:b563 with SMTP id
+ a24-20020a2e9818000000b002bcdb70b563mr11888508ljj.32.1693259562826; Mon, 28
+ Aug 2023 14:52:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:kAYLCklHqI/iRfeU9JTSRvdILdiYrPSB9CCliMFMrFe5G8nyE1Z
- FAjGmAwFEMnURaYvJPv/oesiN5NximIOjxQZE8wcGTYCT8nrFcYYrXmTv09PLVlnFbR1GVw
- LInCHfA8pMBIniXk8CT1h9iDH9yDL99o5vdf5iA7ngtNZbQn0gjDyAsCP8IIDIEwdG2rkF4
- OSxCRU1Fj/xkXlzY9oloA==
-UI-OutboundReport: notjunk:1;M01:P0:vVkgsbVIw10=;gBMqXNyAnXzWe/xoYY61lqpEPdI
- aECF3SpivobAzippQUK3R3p2MBQK8b4wTrHN7bYIsDUPpsVWFOWrq/nXEGQI+P33Lzs+GiAqx
- zI4GdQH31DnouFWXXcAzET0zIgmyw9k2lFWD6K8EQQyn8N9ZW4bxQfLO+eSYTC/a/DGPHdLoY
- Wiop/IAY4xh7Gcwzh60CF2NuaYYtfHEW5TWrdvWa5GIYtL53zsw3no9eZCaMcIYrkR5vaBX9x
- lMbzRFQCtXPkUw+284CWF/4+pAvgpj4FlFW0NF5fbhS/Eq3oFKs9m33po0A3paNMOfpeGMi3v
- vala64t9iSNCwuOWxQCgGfj92eQrvWW2UBhIj8B8ChIVxycw1dXhn/Cv5aFSQSZ1XfrmnztDN
- cSZQ3ng7mYYTS3sRACHqMBOt637iIMesrgtmrjtW1hkDxhOANv1oZlrj5/aJlpL8SCmFR9bJo
- G6VT7n/WmrQrEpzibXo3yGqEPS6SX6oVIniUGWqOXHZRlblPVPEpo0WkPYirRnwNSnE6nKF0v
- xxbQQrSEJ55dE9/OgmuvN2seZJrR8VVstDmaWPPkJYy5jVIDYqJv5d+3hk6/DKe33dpdDjXJQ
- OHsQQbDq82KYtp46Ib+6ccm69+0GXQlEtcrUlUZjVI/B4UpWG8acmWKXso5VZ5XFUCnxyEbuo
- O+WHBDSAH429ywFEsQRCwr2SuooM2+WqaE5aPNSyJLwbrK6gYxXGG8EQKPXFJte9PU/obp5Gb
- 3r+TWk6Zrv4xQP3XSxrAYPGzwKT4y/hExOpg25R3F9ca3tAqT1l0rxRBuv20lCgY+ECxuYBP7
- L0lSvqpOnXwV/1Yj+tXud619aj84nIRAS+SlzaSD7PuVqYS/NB1U4WrJfRBDVco/6y0VqqtNH
- ddRe2dwzNE1TLBg==
+References: <20230823164755.2874792-1-JPEWhacker@gmail.com>
+ <20230825193830.2753640-1-JPEWhacker@gmail.com>
+ <20230825193830.2753640-3-JPEWhacker@gmail.com>
+ <CAPnjgZ2Ko-eEJbwdK70G8HNzTahmJdkiHsT0Cws+ZWUP-scWCg@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2Ko-eEJbwdK70G8HNzTahmJdkiHsT0Cws+ZWUP-scWCg@mail.gmail.com>
+From: Joshua Watt <jpewhacker@gmail.com>
+Date: Mon, 28 Aug 2023 15:52:30 -0600
+Message-ID: <CAJdd5GZ+AenQL_GtNMWPb3S3jKzLbn3AcvYF5y5ZoCJ28CL8yg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/8] doc: Add gpt command documentation
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,38 +89,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+On Fri, Aug 25, 2023 at 5:53=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Joshua,
+>
+> On Fri, 25 Aug 2023 at 13:38, Joshua Watt <jpewhacker@gmail.com> wrote:
+> >
+> > Adds initial documentation for the gpt command
+> >
+> > Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+> > ---
+> >  doc/usage/cmd/gpt.rst | 141 ++++++++++++++++++++++++++++++++++++++++++
+> >  doc/usage/index.rst   |   1 +
+> >  2 files changed, 142 insertions(+)
+> >  create mode 100644 doc/usage/cmd/gpt.rst
+>
+> I don't see a change log?
 
-Drop unused macro. This was copied straight from the AM62x EVM but while
-meant for a second region of DDR this is not even needed for the AM62x
-EVM configurations and has meanwhile also been dropped there.
+Sorry, I didn't realize patman was a thing until I just looked now;
+I've just been using git send-email, and I'm not really sure how to
+switch over to patman now; I'll start with it next time though.
 
-Note that on the Verdin AM62, we do auto-detect the amount of SDRAM.
-
-While at it also update the comment noting that CFG_SYS_SDRAM_SIZE is
-the maximum which is only used for such auto-detection.
-
-Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-
----
-
- include/configs/verdin-am62.h | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/include/configs/verdin-am62.h b/include/configs/verdin-am62.h
-index 7990ea83102..e1a5f5ad44b 100644
---- a/include/configs/verdin-am62.h
-+++ b/include/configs/verdin-am62.h
-@@ -13,8 +13,7 @@
- 
- /* DDR Configuration */
- #define CFG_SYS_SDRAM_BASE	0x80000000
--#define CFG_SYS_SDRAM_BASE1	0x880000000
--#define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size */
-+#define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size, auto-detection is used */
- 
- #define MEM_LAYOUT_ENV_SETTINGS \
- 	"fdt_addr_r=0x90200000\0" \
--- 
-2.36.1
-
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
