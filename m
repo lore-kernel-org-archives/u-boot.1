@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DA5C83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F886C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:55:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82299864DB;
-	Mon, 28 Aug 2023 19:55:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE587864BA;
+	Mon, 28 Aug 2023 19:55:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZOMf8ouN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GtrgilGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFDD9864DB; Mon, 28 Aug 2023 19:54:59 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id A52A5864F2; Mon, 28 Aug 2023 19:55:02 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76F02864D2
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:54:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53329864B7
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:54:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5230a22cfd1so4450033a12.1
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:54:55 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-52a250aa012so4702780a12.3
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:54:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693245295; x=1693850095;
+ d=chromium.org; s=google; t=1693245297; x=1693850097;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S7eqn1gYk2bbw+evQTqKfAaKoCj04944uwkcsUgU2O8=;
- b=ZOMf8ouNUCMdxpZ9BVwyQAb8hoEmt1z9YI3RLnuiAmMoKhNy85hZke6056FmCAQXjw
- k0CzWZmUjn4fiOc+LUjwED6yvSPxbVP5z0JDbnR3N/yxS9+4pZVFD/tKWQ1CFdB1qcVA
- 0I1HS2922Qn1bdrxCrGgnVDaNWT2z3orUxkbE=
+ bh=O+Ib9M+yz4YDtLYP17A4sk4Ae7rkYZHgGtd2UfmTkTY=;
+ b=GtrgilGiQZhDJEHRIBby71+UQoPQObTnylnSjYhY0PVGTLZap1ccrhREh+MA0qCDfg
+ IniA1oBJkGwjuKBABwDKdB+KAYAplyoAWD0mq/fsdN1LVkCM+203Vf8w1gvXcsOFqd38
+ /Ng9tI9qEsa5o7LPY/3nEHUt5K142bMQa1cuc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693245295; x=1693850095;
+ d=1e100.net; s=20221208; t=1693245297; x=1693850097;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=S7eqn1gYk2bbw+evQTqKfAaKoCj04944uwkcsUgU2O8=;
- b=a/iaSQTjGXQ5ch4RRH0gNemje9jXP4BhUxwryv+1HPQT7YAv2CpYS6bUcPTNZoUuAd
- V72ufMP3zVTHdfAOnP6pLWEVnEU3WadGTYfFJeTNNYJ71Pows7TTGEnMP7+YOXhMSKJ0
- JlcxERUscNQukdWpK9mWrwQ4sI3ekWuVKn0YRznuOqWKC44o9nSmlY0C4sfMuovrLYbD
- ZE4dEC9ynq2yoZOew6fF6bC37LWuQR2DnUwBDzFiEiUhefRX/yhAkKPeKDWQbdeGiaG6
- 1gYu1Ox5Mdil3tlOYhrT4niVtxOslOL2GRPwy2Awd8ZvL9TQeyT6LrNazeAnXyr1RvWx
- 8uag==
-X-Gm-Message-State: AOJu0YwhCBmIGn9WjcQtW+srviUo5ST8zrdptIG1iRR8mtSs/SjRE/Jt
- 9AOcnrz3d2GRkSDMXiWtOxxS1v9Gduiw5BngWY9TFw==
-X-Google-Smtp-Source: AGHT+IFvNcDh3CrXlyyOPXaMWns2TF2DVwKjmq5ZOumHxz/Go7yMHjVX9bePqSHJZP6ySgx/eHcnBeQeh+hcYC0ly/E=
-X-Received: by 2002:aa7:d741:0:b0:522:ab06:7213 with SMTP id
- a1-20020aa7d741000000b00522ab067213mr18722901eds.27.1693245294830; Mon, 28
- Aug 2023 10:54:54 -0700 (PDT)
+ bh=O+Ib9M+yz4YDtLYP17A4sk4Ae7rkYZHgGtd2UfmTkTY=;
+ b=mBk7Rjog1svKVthopZgLZfw2iyofszfiw/zWMoKrW+ie7c2SLeYk4tBv/0F46IPcyu
+ xw5qt0pQQy0mNlcLZpoOb57pAQ9uqtqQrm3YfcRiEKCg1vJDh7piAJDB1/BIYpQQ3TD9
+ cn+5fIoLM46EOAMJnKJr7S+MXUGGyZFi0r4HPY+ye1MxKjh64CoYXfuZMlkGK++iZEKU
+ uOJX2LGW8n+/4H0MHKI0cVwJUhqqgGi56jDYd2s6bQXyG7rtWkmhsvCigxoK0fYlqyvJ
+ 9YJoGISwd3ITakRILlsT457zraU0JzTcX21A7y6fKoeQyzooUaAmAJN/eHZdutFU+b3R
+ ZhYg==
+X-Gm-Message-State: AOJu0YwkU48IkvFE5FLicSd7YGRuHOEr3jBcaL8fGfPbgOeqSA+2K4xa
+ VVVCX4V1bVWpoarOjqCVeSZo1SxBfURjiKUR7tS0KQ==
+X-Google-Smtp-Source: AGHT+IGnp8XoXXZBUSIOqOBUyAjnCCjIwOpWs3lQDPXFuuCCXZUZ05BD3d1KRd+7BPhoN76cd83Re8PXSbmeZRRwZk4=
+X-Received: by 2002:aa7:d9d8:0:b0:522:3a89:a7bc with SMTP id
+ v24-20020aa7d9d8000000b005223a89a7bcmr17429383eds.42.1693245296785; Mon, 28
+ Aug 2023 10:54:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
- <20230822121026.1007105-6-alpernebiyasak@gmail.com>
- <CAPnjgZ0hj+0kFYtTUTQAQpDN9rgt-F8jHm_boeve6SLMeOV1Ww@mail.gmail.com>
- <b32aa9eb-d355-4ff5-8f6d-0b1701da8a0c@gmail.com>
-In-Reply-To: <b32aa9eb-d355-4ff5-8f6d-0b1701da8a0c@gmail.com>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <20230826090633.239342-5-sughosh.ganu@linaro.org>
+ <5c05f436-8c92-4b01-fcdf-ed9e0ec31d44@gmx.de>
+ <CADg8p97io5JX85MJj0U0U0sNCiC5D8bDjioe-fGwvEpPy7AUcg@mail.gmail.com>
+ <c149c664-7aff-43a9-8d41-f098622e1809@gmx.de>
+In-Reply-To: <c149c664-7aff-43a9-8d41-f098622e1809@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Aug 2023 11:54:42 -0600
-Message-ID: <CAPnjgZ33DwdxrW7ys9n8DRMnbpKdzqunEozOFf-5LKpnhh3bZA@mail.gmail.com>
-Subject: Re: [PATCH v2 5/7] arm: qemu: Enable ramfb by default
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Asherah Connor <ashe@kivikakk.ee>, Alexander Graf <agraf@csgraf.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>
+Date: Mon, 28 Aug 2023 11:54:45 -0600
+Message-ID: <CAPnjgZ1f=iJrN0-o8ct5nmT53Vs+gACDmXArpwQc1e7x-J1z9w@mail.gmail.com>
+Subject: Re: [RFC PATCH 4/5] bootefi: Call the EVT_FT_FIXUP event handler
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,133 +85,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
-On Mon, 28 Aug 2023 at 09:46, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+Hi Heinrich,
+
+On Mon, 28 Aug 2023 at 05:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On 2023-08-22 21:56 +03:00, Simon Glass wrote:
-> > Hi Alper,
+> On 28.08.23 11:32, Sughosh Ganu wrote:
+> > On Sat, 26 Aug 2023 at 15:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>
+> >> On 8/26/23 11:06, Sughosh Ganu wrote:
+> >>> The bootefi command passes the devicetree to the kernel through the
+> >>> EFI config table. Call the event handlers for fixing the devicetree
+> >>> before jumping into the kernel. This removes any devicetree nodes
+> >>> and/or properties that are specific only to U-Boot, and are not to be
+> >>> passed to the OS.
+> >>>
+> >>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >>> ---
+> >>>    cmd/bootefi.c | 18 ++++++++++++++++++
+> >>>    1 file changed, 18 insertions(+)
+> >>>
+> >>> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> >>> index f73d6eb0e2..c359a46ec4 100644
+> >>> --- a/cmd/bootefi.c
+> >>> +++ b/cmd/bootefi.c
+> >>> @@ -237,6 +237,23 @@ static void *get_config_table(const efi_guid_t *guid)
+> >>>        return NULL;
+> >>>    }
+> >>>
+> >>> +/**
+> >>> + * event_notify_dt_fixup() - call ft_fixup event
+> >>> + *
+> >>> + * @fdt:     address of the device tree to be passed to the kernel
+> >>> + *           through the configuration table
+> >>> + * Return:   None
+> >>> + */
+> >>> +static void event_notify_dt_fixup(void *fdt)
+> >>> +{
+> >>> +     int ret;
+> >>> +     struct event_ft_fixup fixup = {0};
+> >>> +
+> >>> +     fixup.tree.fdt = fdt;
+> >>> +     ret = event_notify(EVT_FT_FIXUP, &fixup, sizeof(fixup));
+> >>> +     if (ret)
+> >>> +             printf("Error: %d: FDT Fixup event failed\n", ret);
+> >>> +}
+> >>>    #endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
+> >>>
+> >>>    /**
+> >>> @@ -318,6 +335,7 @@ efi_status_t efi_install_fdt(void *fdt)
+> >>>        efi_carve_out_dt_rsv(fdt);
+> >>>
+> >>>        efi_try_purge_kaslr_seed(fdt);
+> >>> +     event_notify_dt_fixup(fdt);
+> >>
+> >> The event is already triggered in image_setup_libfdt(). Don't trigger it
+> >> twice.
 > >
-> > On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >>
-> >> From: Alexander Graf <agraf@csgraf.de>
-> >>
-> >> Now that we have everything in place to support ramfb, let's wire it up
-> >> by default in the ARM QEMU targets. That way, you can easily use a
-> >> graphical console by just passing -device ramfb to the QEMU command line.
-> >>
-> >> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> >> [Alper: Rebase on bochs changes, add pre-reloc init, error handling]
-> >> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> >> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> >> ---
-> >>
-> >> Changes in v2:
-> >> - Rebase on "qemu: arm: Enable Bochs, console buffering, USB keyboard"
-> >> - Drop env changes from ARM (necessary but in prerequisite series)
-> >> - Drop imply VIDEO, SYS_CONSOLE_IN_ENV changes from ARM (in prereq.)
-> >> - Probe QFW in ARM QEMU board_early_init_f to bind ramfb pre-reloc
-> >> - Add IS_ENABLED(CONFIG_QFW) check and error handling to ARM QEMU
-> >>
-> >>  arch/arm/Kconfig                    |  3 +++
-> >>  board/emulation/qemu-arm/qemu-arm.c | 41 +++++++++++++++++++++++++++++
-> >>  2 files changed, 44 insertions(+)
-> >>
-> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> >> index 1fd3ccd1607f..7afe26ac804f 100644
-> >> --- a/arch/arm/Kconfig
-> >> +++ b/arch/arm/Kconfig
-> >> @@ -1046,6 +1046,9 @@ config ARCH_QEMU
-> >>         imply USB_XHCI_PCI
-> >>         imply USB_KEYBOARD
-> >>         imply CMD_USB
-> >> +       imply VIDEO_RAMFB
-> >> +       imply BOARD_EARLY_INIT_F
-> >> +       imply BOARD_EARLY_INIT_R
-> >>
-> >>  config ARCH_RMOBILE
-> >>         bool "Renesas ARM SoCs"
-> >> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> >> index 942f1fff5717..23ef31cb7feb 100644
-> >> --- a/board/emulation/qemu-arm/qemu-arm.c
-> >> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> >> @@ -11,6 +11,7 @@
-> >>  #include <fdtdec.h>
-> >>  #include <init.h>
-> >>  #include <log.h>
-> >> +#include <qfw.h>
-> >>  #include <usb.h>
-> >>  #include <virtio_types.h>
-> >>  #include <virtio.h>
-> >> @@ -102,6 +103,46 @@ static struct mm_region qemu_arm64_mem_map[] = {
-> >>  struct mm_region *mem_map = qemu_arm64_mem_map;
-> >>  #endif
-> >>
-> >> +int board_early_init_f(void)
-> >> +{
-> >> +       struct udevice *dev;
-> >> +       int ret;
-> >> +
-> >> +       /*
-> >> +        * Make sure we enumerate the QEMU Firmware device to bind ramfb
-> >> +        * so video_reserve() can reserve memory for it.
-> >> +        */
-> >> +       if (IS_ENABLED(CONFIG_QFW)) {
-> >> +               ret = qfw_get_dev(&dev);
-> >> +               if (ret) {
-> >> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
-> >
-> > We should only present an error if the device is present but
-> > failed...so if the user doesn't provide the flag, all should be well.
+> > The reason I put an explicit event_notify call is because the
+> > image_setup_libfdt() call only calls the ft_fixup handlers if the
+> > livetree is not active. So the fixup handlers would not be called on
+> > platforms that enable livetree. Although I'm not sure if livetree
+> > should be disabled before the ft fixup has to happen, or platforms
+> > that need ft fixup should not enable OF_LIVE. Disabling the livetree
+> > is not happening now, so I am not sure how the fixup event should work
+> > on platforms which have OF_LIVE enabled.
 >
-> I don't understand what you mean by "user doesn't provide the flag". But
-> I assume this should ignore the error (unless what?) so that we can
-> continue to boot. Would that apply for board_early_init_r below as well?
+> We still must not call the same event twice. We further must ensure that
+> our fix-up is called last (e.g. by calling it zzz_something) and not
+> before adding VBE nodes.
+>
+> Is there any need to use the event mechanism here?
+>
+> @Simon:
+> None of the other function calls in image_setup_libfdt() depend on
+> of_live_active(). I think it would be preferable to move that check into
+> the listeners. If instead of of_live_active() you could use a
+> configuration setting for the decision, gcc could eliminate a lot of code.
 
-I thought you said there was a qemu flag to enable ramfb? So add it to
-the DT and then the device can (in its bind routine) decide not to be
-bound by returning -ENODEV
+Firstly, of_live_active() should check CONFIG_IS_ENABLED(OF_LIVE)
+first. I noticed this over the weekend when looking at something else.
+
+The original code was due to a limitation with U-Boot's ofnode
+implementation, in that it did not support multiple devicetrees
+without OF_LIVE. We need to support at least two, since we have the
+'control' DTB and the one being set up to boot the OS.
+
+Anyway, that limitation can be removed, so long as
+CONFIG_MULTI_DTB_FIT is set. In other words, we should enable
+MULTI_DTB_FIT if !OF_LIVE and all will be well.
 
 >
-> >> +                       return ret;
-> >> +               }
-> >> +       }
-> >> +
-> >> +       return 0;
-> >> +}
-> >> +
-> >> +int board_early_init_r(void)
-> >> +{
-> >> +       struct udevice *dev;
-> >> +       int ret;
-> >> +
-> >> +       /*
-> >> +        * Make sure we enumerate the QEMU Firmware device to find ramfb
-> >> +        * before console_init.
-> >> +        */
-> >> +       if (IS_ENABLED(CONFIG_QFW)) {
-> >> +               ret = qfw_get_dev(&dev);
-> >> +               if (ret) {
-> >> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
-> >> +                       return ret;
-> >> +               }
-> >> +       }
-> >> +
-> >> +       return 0;
-> >> +}
-> >> +
-> >>  int board_init(void)
-> >>  {
-> >>         return 0;
-> >> --
-> >> 2.40.1
-> >>
-> >
-> > The glue here feels like a bit of a hack...we should rely on normal DT
-> > mechanisms here.
-> >
-> > Regards,
-> > Simon
+> We definitely need better descriptions in include/event.h and a man-page
+> generated from that include:
+>
+> EVT_NONE
+>      undescribed
+> EVT_TEST
+>      undescribed
+> EVT_DM_POST_INIT_F
+>      undescribed
+> EVT_DM_POST_INIT_R
+>      undescribed
+> EVT_DM_PRE_PROBE
+>      Device is about to be probed
+> EVT_DM_POST_PROBE
+>      undescribed
+> EVT_DM_PRE_REMOVE
+>      undescribed
+> EVT_DM_POST_REMOVE
+>      undescribed
+> EVT_MISC_INIT_F
+>      undescribed
+> EVT_FPGA_LOAD
+>      undescribed
+> EVT_FT_FIXUP
+>      undescribed
+> EVT_MAIN_LOOP
+>      undescribed
+> EVT_COUNT
+>      undescribed
 
-Regards.
+Yes indeed. I added some for the latest patch in this area.
 
+https://patchwork.ozlabs.org/project/uboot/patch/20230822031705.1340941-15-sjg@chromium.org/
+
+Regards,
 Simon
