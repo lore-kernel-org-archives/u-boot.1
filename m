@@ -4,55 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED8B3C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 20:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E66C83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 20:56:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B93C805C9;
-	Mon, 28 Aug 2023 22:40:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AF7A863FD;
+	Mon, 28 Aug 2023 22:56:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pG6h16h2";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DBFB86496; Mon, 28 Aug 2023 22:40:04 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3F2B805C9
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 22:40:01 +0200 (CEST)
+ id 5FBC286430; Mon, 28 Aug 2023 22:56:38 +0200 (CEST)
+Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
+ by phobos.denx.de (Postfix) with ESMTP id 6DA1486403
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 22:56:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
- [62.143.244.162])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E1BC53F1FC; 
- Mon, 28 Aug 2023 20:40:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1693255201;
- bh=K+dkcEaPWbwCYjsvkGoEay+VmmPDKiH9PWdN6m3zedo=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=pG6h16h2zk/jMOWONtIkzVa2Bk+Gc3P4jhouVLaVwmYqOo5nU11ZAfzddSkosjmqD
- DxrgzYeWtNKXDQe1zhW2SgYuzzy3HwRpZrz2haw3dwNwA6jDAbYQL0VRFx4k6tvVXD
- oW7YtGt9FQIdXa6x6SL9QpTerkqqhdkXhOr+vcwdQHc9+dLlCYg6OK6o/bp3iwNJoa
- wOK8tw37aGzlIE1x1b+Fg0e96265cOLqxAQj66RhQa/HOTf1wFSWbSjw0nD+VmmcRu
- 81pRk04xnpqKK3jyGLZNJtwLPG/GhZ+tbhdGyEmKLUJ6YdFLH5xDU+lJGSRO4wlzrD
- TEDV5PtIFE9/Q==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] video: fix typo in video_sync_all documentation
-Date: Mon, 28 Aug 2023 22:40:47 +0200
-Message-Id: <20230828204047.91300-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=none (p=none dis=none) header.from=csgraf.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
+Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id F3E9060801EC;
+ Mon, 28 Aug 2023 22:56:33 +0200 (CEST)
+Message-ID: <002f240d-7f3d-4b33-82f9-13e1deb690cc@csgraf.de>
+Date: Mon, 28 Aug 2023 22:56:33 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/7] arm: qemu: Enable ramfb by default
+Content-Language: en-GB
+To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>
+References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
+ <20230822121026.1007105-6-alpernebiyasak@gmail.com>
+ <CAPnjgZ0hj+0kFYtTUTQAQpDN9rgt-F8jHm_boeve6SLMeOV1Ww@mail.gmail.com>
+ <b32aa9eb-d355-4ff5-8f6d-0b1701da8a0c@gmail.com>
+ <CAPnjgZ33DwdxrW7ys9n8DRMnbpKdzqunEozOFf-5LKpnhh3bZA@mail.gmail.com>
+ <3ff5dcb5-27f6-4529-a186-b16130d4249e@gmail.com>
+ <CAPnjgZ17BQebfo0hZ9iN-X7kz2Nu_pKQKTOMkPbK5y6Ft0q3KA@mail.gmail.com>
+From: Alexander Graf <agraf@csgraf.de>
+In-Reply-To: <CAPnjgZ17BQebfo0hZ9iN-X7kz2Nu_pKQKTOMkPbK5y6Ft0q3KA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,26 +62,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/there/their/
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/video.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 28.08.23 22:38, Simon Glass wrote:
+> Hi Alper,
+>
+> On Mon, 28 Aug 2023 at 12:29, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>> On 2023-08-28 20:54 +03:00, Simon Glass wrote:
+>>> Hi Alper,
+>>> On Mon, 28 Aug 2023 at 09:46, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>> On 2023-08-22 21:56 +03:00, Simon Glass wrote:
+>>>>> Hi Alper,
+>>>>>
+>>>>> On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>>>> From: Alexander Graf <agraf@csgraf.de>
+>>>>>>
+>>>>>> Now that we have everything in place to support ramfb, let's wire it up
+>>>>>> by default in the ARM QEMU targets. That way, you can easily use a
+>>>>>> graphical console by just passing -device ramfb to the QEMU command line.
+>>>>>>
+>>>>>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+>>>>>> [Alper: Rebase on bochs changes, add pre-reloc init, error handling]
+>>>>>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>>>>>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>>>>>> ---
+>>>>>>
+>>>>>> Changes in v2:
+>>>>>> - Rebase on "qemu: arm: Enable Bochs, console buffering, USB keyboard"
+>>>>>> - Drop env changes from ARM (necessary but in prerequisite series)
+>>>>>> - Drop imply VIDEO, SYS_CONSOLE_IN_ENV changes from ARM (in prereq.)
+>>>>>> - Probe QFW in ARM QEMU board_early_init_f to bind ramfb pre-reloc
+>>>>>> - Add IS_ENABLED(CONFIG_QFW) check and error handling to ARM QEMU
+>>>>>>
+>>>>>>   arch/arm/Kconfig                    |  3 +++
+>>>>>>   board/emulation/qemu-arm/qemu-arm.c | 41 +++++++++++++++++++++++++++++
+>>>>>>   2 files changed, 44 insertions(+)
+>>>>>>
+>>>>>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>>>>>> index 1fd3ccd1607f..7afe26ac804f 100644
+>>>>>> --- a/arch/arm/Kconfig
+>>>>>> +++ b/arch/arm/Kconfig
+>>>>>> @@ -1046,6 +1046,9 @@ config ARCH_QEMU
+>>>>>>          imply USB_XHCI_PCI
+>>>>>>          imply USB_KEYBOARD
+>>>>>>          imply CMD_USB
+>>>>>> +       imply VIDEO_RAMFB
+>>>>>> +       imply BOARD_EARLY_INIT_F
+>>>>>> +       imply BOARD_EARLY_INIT_R
+>>>>>>
+>>>>>>   config ARCH_RMOBILE
+>>>>>>          bool "Renesas ARM SoCs"
+>>>>>> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+>>>>>> index 942f1fff5717..23ef31cb7feb 100644
+>>>>>> --- a/board/emulation/qemu-arm/qemu-arm.c
+>>>>>> +++ b/board/emulation/qemu-arm/qemu-arm.c
+>>>>>> @@ -11,6 +11,7 @@
+>>>>>>   #include <fdtdec.h>
+>>>>>>   #include <init.h>
+>>>>>>   #include <log.h>
+>>>>>> +#include <qfw.h>
+>>>>>>   #include <usb.h>
+>>>>>>   #include <virtio_types.h>
+>>>>>>   #include <virtio.h>
+>>>>>> @@ -102,6 +103,46 @@ static struct mm_region qemu_arm64_mem_map[] = {
+>>>>>>   struct mm_region *mem_map = qemu_arm64_mem_map;
+>>>>>>   #endif
+>>>>>>
+>>>>>> +int board_early_init_f(void)
+>>>>>> +{
+>>>>>> +       struct udevice *dev;
+>>>>>> +       int ret;
+>>>>>> +
+>>>>>> +       /*
+>>>>>> +        * Make sure we enumerate the QEMU Firmware device to bind ramfb
+>>>>>> +        * so video_reserve() can reserve memory for it.
+>>>>>> +        */
+>>>>>> +       if (IS_ENABLED(CONFIG_QFW)) {
+>>>>>> +               ret = qfw_get_dev(&dev);
+>>>>>> +               if (ret) {
+>>>>>> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
+>>>>> We should only present an error if the device is present but
+>>>>> failed...so if the user doesn't provide the flag, all should be well.
+>>>> I don't understand what you mean by "user doesn't provide the flag". But
+>>>> I assume this should ignore the error (unless what?) so that we can
+>>>> continue to boot. Would that apply for board_early_init_r below as well?
+>>> I thought you said there was a qemu flag to enable ramfb? So add it to
+>>> the DT and then the device can (in its bind routine) decide not to be
+>>> bound by returning -ENODEV
+>> Ah. I'm not used to calling them flags, especially those that have
+>> values as in "-device ramfb". My mind jumped to DM_FLAG_PRE_RELOC /
+>> bootph-some-ram.
+>>
+>> But note that what this code tries to probe here is not the ramfb
+>> device, it's the bus/parent of that. If this fails, we can't know if the
+>> user specified "-device ramfb" or not.
+>>
+>> Is the parent node's device probed by the time .bind() is called? Or,
+>> can I have it probed by calling qfw_get_dev() (which is just
+>> uclass_first_device_err(UCLASS_QFW, ...))?
+> I suppose your problem might be that there are up to three possible
+> video devices (vesa, bochs, ramfb) and one of them needs to return 0
+> from bind() and the others need to return -ENODEV?
 
-diff --git a/include/video.h b/include/video.h
-index 269915160b..16f7a83f8d 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -260,7 +260,7 @@ int video_fill_part(struct udevice *dev, int xstart, int ystart, int xend,
- int video_sync(struct udevice *vid, bool force);
- 
- /**
-- * video_sync_all() - Sync all devices' frame buffers with there hardware
-+ * video_sync_all() - Sync all devices' frame buffers with their hardware
-  *
-  * This calls video_sync() on all active video devices.
-  */
--- 
-2.40.1
+
+How do multiple Legacy VGA devices work in parallel in the first place? 
+Do we access the legacy VGA PIO ports or memory ranges? If so, which of 
+the VGA devices owns it at which point in time?
+
+IIRC the only way you can actually multiplex real VGA is by putting a 
+VGA arbiter[1] in between that literally maps the BARs in and out or 
+enables/disables device mapping dynamically, no?
+
+It probably makes most sense to make multiple video outputs work 
+smoothly with at most 1 VGA device at a time for now to resolve any 
+U-Boot internal infrastructure problems, then maybe later try multiple VGAs.
+
+
+Alex
+
+[1] https://docs.kernel.org/gpu/vgaarbiter.html
 
