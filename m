@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E04C83F10
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 04:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4004CC83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 06:02:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0E1686412;
-	Mon, 28 Aug 2023 06:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C9D3786420;
+	Mon, 28 Aug 2023 08:02:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="m9gwAN33";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I1DZOxuy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C6486414; Mon, 28 Aug 2023 06:45:06 +0200 (CEST)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id 7D808863E8; Mon, 28 Aug 2023 08:02:34 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC0F586409
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 06:45:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=abbaraju.manojsai@amarulasolutions.com
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-791b8525b59so1006178241.1
- for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 21:45:02 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 2175A807C4
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 08:02:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-68a56401b9aso1979662b3a.1
+ for <u-boot@lists.denx.de>; Sun, 27 Aug 2023 23:02:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693197901; x=1693802701;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mpjuyeVeshzXeB3rHSnWL6KGPqvSUSRSeaI6SzKvzMI=;
- b=m9gwAN3313Hd9ah1I1T4a+KaEjuExQG1YkBi8B8A3/g8nToUxEqQcQq+ufuteO5/dU
- rBCXwQCZHCYXvGDKkhkyg973r/8fHfd9bgAWcu9fU6iMnPp47t8bxnoZi2wcVYBfPwXW
- htEbQ+EWTKXC3FtT2HXOsRBqHn8vG4r2mkrtU=
+ d=linaro.org; s=google; t=1693202549; x=1693807349;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dWqEvBY3wQxKoSEewFVPOp6DqqwEx8H4sQ3TEYrrLok=;
+ b=I1DZOxuymxEsBY2jPs9sT4WbLIZ59eOCMC55rmQ6gbdb49BXcLRr3cjp5dKBEjVNw0
+ 9j98gUofj0LoCiHYHULQf3jIe6HhBOMgpcwL2KgPynAISmXFBk6n2R0p4fPyUCJhkzxo
+ q52UZQGvcuIK0cFrbdTuF3YN04emMZ6zYszMkN7yluAZi51UduzQe6kWyML8XFp1MOjW
+ Enz3LU0bGQCOq2z1ZfuS40wx/hBaMwq87SP/lq8/Axk4Nl4XOycijLFwK/GXv1a7BBGR
+ 1kmyxuYq/lQwcRBjNQB3AwG2qEZVbHr/+1NI/pAyx/vV+ag+cor9FRtBfhBKZvBWTpbu
+ 2peg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693197901; x=1693802701;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mpjuyeVeshzXeB3rHSnWL6KGPqvSUSRSeaI6SzKvzMI=;
- b=UndcJX8pmoshLCuY21cxxy3XwKWMkgEiBMLzD8iDjGxDNCQxTdQ5yhwVQdrtqdhp1D
- l8miXBrfXunV1l4HanTJ9Zzh+pn7KOFvI+NI1NJqXmRiKJ81GiV6wmTmh9TZntVb5f1X
- bB0revBafXM0mibT1IFZN0XCz4OTmfMS/IRTMIDG5NGnB0Pq2DGu4CXoBeRwvaRLdOJ1
- AnylpZNHFvfqZXmPswbVa90ekdv9J8Q7y/EMXVHKfYMYjw9eB6i3a87u2WvzQMDX0e2C
- QjWgoKmi0xgxoo2Zxuzeoou36VKRID445Xno6uZT6rJZ4+Q8+cNvroh4HnfMXm86icjX
- rETA==
-X-Gm-Message-State: AOJu0YxOgF3a81X7LMYpRAgAj1pE5BXdDtQPklOD5TfeLCqYVRfbPIHM
- ++jUR1EraHOlsGFVt3ck1C/qt9/wwhzkz7KGSmFSRw==
-X-Google-Smtp-Source: AGHT+IF3nRn+dl1X7Lm1EsIMmvjQBfF0xoYHM2a6W8igcD2H5ROONV+Y1fSdN08DoEHhXZQtidf9o25qrntrP71Z4CY=
-X-Received: by 2002:a67:fdc8:0:b0:44d:5937:56f9 with SMTP id
- l8-20020a67fdc8000000b0044d593756f9mr16398136vsq.9.1693197901334; Sun, 27 Aug
- 2023 21:45:01 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693202549; x=1693807349;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dWqEvBY3wQxKoSEewFVPOp6DqqwEx8H4sQ3TEYrrLok=;
+ b=RkNuQipKTwYvImapUZm/k3MYQ/4ysf+/UIu/3BSc/C9bmNVqki+tBYNgH5iy83h/Nf
+ IV7p4XoKZK04x+UKLYv4xE4crX3vzrmuLCAg1szjyuFZzdO1LQQICrJwtQOyYxslj+qa
+ b71iTK1MMacH5wEsJx0J56FhvJl4iGRpw9hnzpb6vpMm7A9Y+bcHplQr3Ee8PZxqcEf4
+ rlf/gBX8051Py+PaIoegqIa6pnwhUA+s6CNNIt+HpeuaZXC4nudOUCt/jD6Xw/Ak0h+V
+ OcRJlEGjKq3Jq90dfsd4Bn78m9pWuHOSLRNK95FWOla/AOALgN41jpe+DJ8bYSCN5qa5
+ 8FvQ==
+X-Gm-Message-State: AOJu0YybQTOdGXt5uqBf8SUlcwFxoF9hK+HYLNil3RgToFvQ2LmuBEDI
+ tybD9DzE7dA/OvJ2kchjNMLyL830ZLxoFdr1Uhn8vA==
+X-Google-Smtp-Source: AGHT+IEWqA4+Y672SDgdBCJGp0TrU5J1XH1v+VUw9wTkkGrQOO3w0MioTeNr0JAVxU60TQje9/Se6fbwJPqRhNngk5M=
+X-Received: by 2002:a17:90a:db08:b0:26b:3f10:820f with SMTP id
+ g8-20020a17090adb0800b0026b3f10820fmr18154009pjv.36.1693202549287; Sun, 27
+ Aug 2023 23:02:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230630121146.513345-1-abbaraju.manojsai@amarulasolutions.com>
- <20230725035101.281325-1-abbaraju.manojsai@amarulasolutions.com>
- <2722b668-8114-1477-a6aa-4945c0f055ec@kwiboo.se>
-In-Reply-To: <2722b668-8114-1477-a6aa-4945c0f055ec@kwiboo.se>
-From: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
-Date: Mon, 28 Aug 2023 10:14:50 +0530
-Message-ID: <CADXsG5Y6PqPmfLkQFP_YAoUP9h5y=aUHRcWnv=Y18MCOZEi_jw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] support for booting the compressed U-boot binary
- on Rockchip based ARM64 SOC's
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Da Xue <da.xue@libretech.co>, 
- dsx724 <da@lessconfused.com>, linux-amarula@amarulasolutions.com, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Suniel Mahesh <sunil@amarulasolutions.com>, u-boot@lists.denx.de
+References: <20230823083721.1318097-1-masahisa.kojima@linaro.org>
+ <20230823083721.1318097-2-masahisa.kojima@linaro.org>
+ <ZOagOlRLw8cOsFM7@octopus>
+ <CADQ0-X_3KeWE72jO2ymiCgE-_uU8URBsQVHGryi_41O7oqXYUg@mail.gmail.com>
+ <d03a441a-a7a9-f6f8-5eb1-36ed5924d70b@gmx.de>
+In-Reply-To: <d03a441a-a7a9-f6f8-5eb1-36ed5924d70b@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Mon, 28 Aug 2023 15:02:18 +0900
+Message-ID: <CADQ0-X9nTg3CxXLK347dr1Gw4kJ-vBqoJRNdtxv-JeJscTWcJg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] cmd: efidebug: add uri device path
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,177 +89,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 27, 2023 at 4:51=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> wro=
-te:
->
-> On 2023-07-25 05:50, Manoj Sai wrote:
-> > This patchset adds the support on Rockchip based ARM64 SOC's that  comp=
-ress the U-BOOT proper along with dtb
-> > and ATF in FIT image format.Second stage bootloader(SPL) loads the comp=
-ressed binaries, uncompress
-> > them and  handover control to the next stage.
-> >
-> > Changes for V2 :-
-> >
-> > - Removed the need to create gzip and lzma compressed U-boot-nodtb file=
-s using Makefile  and added a changeset
-> > that "compress" field to u-boot-nodtb node and "compression" field to  =
-u-boot Node in the FIT image, with the help
-> > of this change binman will create the compressed Binaries.
-> >
-> > Size Comparision between compressed and uncompressed binaries :-
-> >
-> >       size of uncompressed binary :- 9.4 MB (94,26,432 bytes)
-> >          manoj:u-boot$ ls -lb u-boot-rockchip.bin
-> >         -rw-rw-r-- 1 manoj manoj 9426432 Jul 25 07:42 u-boot-rockchip.b=
-in
-> >
-> >        size of GZIP compressed binary :- 9.0 MB (89,85,088 bytes)
-> >          manoj:u-boot$ ls -lb u-boot-rockchip.bin
-> >          -rw-rw-r-- 1 manoj manoj 8985088 Jul 25 07:42 u-boot-rockchip.=
-bin
-> >
-> >        size of LZMA compressed binary :- 9.0 MB (90,06,080 bytes)
-> >          manoj:u-boot$ ls -lb u-boot-rockchip.bin
-> >          -rw-rw-r-- 1 manoj manoj 9006080 Jul 25 07:47 u-boot-rockchip.=
-bin
-> >
-> > - modified to use the CONFIG_SYS_LOAD_ADDR as the source RAM address to=
- store the  compressed U-Boot binary which
-> > will be defined in the machine defconfig file in place of creating a ne=
-w RAM address for a specific board using Kconfig.
-> > so patchset related to adding a new RAM address to store compressed bin=
-ary has been removed in V2 patchset.
-> >
-> > - Removed the patchset related to adding  the u-boot-nodtb.bin.gz and u=
--boot-nodtb.bin.lzma as input binary to binman.
-> >
-> >
-> > -- Test results of  Booting time using bootstage command in Uboot comma=
-nd prompt on roc-rk3399-pc board :-
-> >
-> > 1) Uncompressed U-BOOT : Total boot time =E2=89=88 12.3 seconds
-> > =3D> bootstage  report
-> > Timer summary in microseconds (10 records):
-> >        Mark    Elapsed  Stage
-> >           0          0  reset
-> >   1,824,330  1,824,330  board_init_f
-> >   2,921,678  1,097,348  board_init_r
-> >   5,179,369  2,257,691  eth_common_init
-> >   5,478,307    298,938  eth_initialize
-> >   5,478,484        177  main_loop
-> >   5,478,641        157  usb_start
-> >  12,017,936  6,539,295  cli_loop
-> >
-> > Accumulated time:
-> >                 15,899  dm_r
-> >                694,371  dm_f
-> >
-> > 2) GZIP Compressed U-BOOT : Total boot time =E2=89=88 13.5 seconds
-> > =3D>  bootstage  report
-> > Timer summary in microseconds (10 records):
-> >        Mark    Elapsed  Stage
-> >           0          0  reset
-> >   2,591,355  2,591,355  board_init_f
-> >   3,689,407  1,098,052  board_init_r
-> >   5,947,314  2,257,907  eth_common_init
-> >   6,246,250    298,936  eth_initialize
-> >   6,246,427        177  main_loop
-> >   6,246,585        158  usb_start
-> >  12,785,936  6,539,351  cli_loop
-> >
-> > Accumulated time:
-> >                 15,902  dm_r
-> >                694,779  dm_f
-> >
-> > 2) LZMA Compressed U-BOOT : Total boot time =E2=89=88 23.5 seconds
-> > =3D> bootstage report
-> > Timer summary in microseconds (10 records):
-> >        Mark    Elapsed  Stage
-> >           0          0  reset
-> >   6,376,405  6,376,405  board_init_f
-> >   7,471,967  1,095,562  board_init_r
-> >   9,726,257  2,254,290  eth_common_init
-> >  10,024,873    298,616  eth_initialize
-> >  10,025,049        176  main_loop
-> >  10,025,208        159  usb_start
-> >  16,564,906  6,539,698  cli_loop
-> >
-> > Accumulated time:
-> >                 15,851  dm_r
-> >                693,323  dm_f
-> >
-> >
-> > Patch 1/4  generate a GZIP-compressed U-boot binary using binman if CON=
-FIG_SPL_GZIP selected
-> > Patch 2/4  generate a LZMA-compressed U-boot binary using binman if CON=
-FIG_SPL_LZMA selected
-> > Patch 3/4  uncompress the gzip U-BOOT binary and load the binaries if g=
-zip compression supoort is enabled
-> > Patch 4/4  uncompress the lzma U-BOOT binary and load the binaries if l=
-zma compression supoort is enabled
->
-> Boot times seem very slow with compression enabled, please try with
-> caches enabled, see RFC patch at [1]. Enable caches have a huge impact
-> for FIT checksum validation using CONFIG_SPL_FIT_SIGNATURE=3Dy.
->
-> Possible to also include ZSTD support?
->
+Hi Heinrich,
 
-Hi Jonas ,
-Enabled zstd support , facing build issues related to zstd . Had you
-faced this build error , pasted below :
-
-aarch64-linux-gnu-ld.bfd: lib/zstd/decompress/zstd_decompress.o: in
-function `ZSTD_DDictHashSet_getIndex':
-/media/manoj/7d4c36e9-ddbb-4e7a-bd1e-cb96766bde37/ssd-Workspace/libreCompTa=
-sk/tasks/compression-Task/mainline-apply-Uboot-cmp-2023/testfldr/u-boot/lib=
-/zstd/decompress/zstd_decompress.c:88:
-undefined reference to `xxh64'
-aarch64-linux-gnu-ld.bfd: lib/zstd/decompress/zstd_decompress.o: in
-function `ZSTD_decodeFrameHeader':
-/media/manoj/7d4c36e9-ddbb-4e7a-bd1e-cb96766bde37/ssd-Workspace/libreCompTa=
-sk/tasks/compression-Task/mainline-apply-Uboot-cmp-2023/testfldr/u-boot/lib=
-/zstd/decompress/zstd_decompress.c:666:
-undefined reference to `xxh64_reset'
-aarch64-linux-gnu-ld.bfd: lib/zstd/decompress/zstd_decompress.o: in
-function `ZSTD_decompressFrame':
-/media/manoj/7d4c36e9-ddbb-4e7a-bd1e-cb96766bde37/ssd-Workspace/libreCompTa=
-sk/tasks/compression-Task/mainline-apply-Uboot-cmp-2023/testfldr/u-boot/lib=
-/zstd/decompress/zstd_decompress.c:888:
-undefined reference to `xxh64_update'
-aarch64-linux-gnu-ld.bfd:
-/media/manoj/7d4c36e9-ddbb-4e7a-bd1e-cb96766bde37/ssd-Workspace/libreCompTa=
-sk/tasks/compression-Task/mainline-apply-Uboot-cmp-2023/testfldr/u-boot/lib=
-/zstd/decompress/zstd_decompress.c:904:
-undefined reference to `xxh64_digest'
-make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
-make: *** [Makefile:2059: spl/u-boot-spl] Error 2
-
-I'm missing anything to enable in configs ? any suggestions to these build =
-error
-
-Thanks and Regards ,
-A.manojsai
-
-> nit: patch 1 and 2 should come after patch 3 and 4.
+On Sat, 26 Aug 2023 at 11:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230702110055.36864=
-57-1-jonas@kwiboo.se/
+> On 8/25/23 07:57, Masahisa Kojima wrote:
+> > On Thu, 24 Aug 2023 at 09:11, AKASHI Takahiro
+> > <takahiro.akashi@linaro.org> wrote:
+> >>
+> >> Hi Kojima-san,
+> >>
+> >> On Wed, Aug 23, 2023 at 05:37:19PM +0900, Masahisa Kojima wrote:
+> >>> This adds the URI device path option for 'boot add' subcommand.
+> >>> User can add the URI load option for downloading ISO image file
+> >>> or EFI application through network(e.g. HTTP).
+> >>>
+> >>> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> >>> ---
+> >>>   cmd/efidebug.c | 39 +++++++++++++++++++++++++++++++++++++++
+> >>>   1 file changed, 39 insertions(+)
+> >>>
+> >>> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> >>> index 0be3af3e76..62f867df2a 100644
+> >>> --- a/cmd/efidebug.c
+> >>> +++ b/cmd/efidebug.c
+> >>> @@ -829,6 +829,44 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+> >>>                        argc -= 1;
+> >>>                        argv += 1;
+> >>>                        break;
+> >>> +             case 'u':
+> >>> +             {
+> >>> +                     char *pos;
+> >>> +                     int uridp_len;
+> >>> +                     struct efi_device_path_uri *uridp;
+> >>> +
+> >>> +                     if (argc <  3 || lo.label) {
+> >>> +                             r = CMD_RET_USAGE;
+> >>> +                             goto out;
+> >>> +                     }
+> >>> +                     id = (int)hextoul(argv[1], &endp);
+> >>> +                     if (*endp != '\0' || id > 0xffff)
+> >>> +                             return CMD_RET_USAGE;
+> >>> +
+> >>> +                     efi_create_indexed_name(var_name16, sizeof(var_name16),
+> >>> +                                             "Boot", id);
+> >>> +
+> >>> +                     label = efi_convert_string(argv[2]);
+> >>> +                     if (!label)
+> >>> +                             return CMD_RET_FAILURE;
+> >>> +                     lo.label = label;
+> >>> +
+> >>> +                     uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
+> >>> +                     fp_free = efi_alloc(uridp_len + sizeof(END));
+> >>> +                     uridp = (struct efi_device_path_uri *)fp_free;
+> >>> +                     uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> >>> +                     uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
+> >>> +                     uridp->dp.length = uridp_len;
+> >>> +                     strcpy(uridp->uri, argv[3]);
+> >>> +                     pos = (char *)uridp + uridp_len;
+> >>> +                     memcpy(pos, &END, sizeof(END));
+> >>> +                     fp_size += uridp_len + sizeof(END);
+> >>> +                     file_path = (struct efi_device_path *)uridp;
+> >>> +                     argc -= 3;
+> >>> +                     argv += 3;
+> >>> +                     break;
+> >>> +             }
+> >>> +
+> >>>                default:
+> >>>                        r = CMD_RET_USAGE;
+> >>>                        goto out;
+> >>> @@ -1492,6 +1530,7 @@ static char efidebug_help_text[] =
+> >>>        "  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n"
+> >>>        "  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
+> >>>        "  (-b, -i for short form device path)\n"
+> >>> +     "  -u <bootid> <label> <uri>\n"
+> >>
+> >> It might be a matter of personal preference, but
+> >> since the current syntax of efidebug is already much complex,
+> >> I don't want to add more options unless it's necessary.
+> >> How about re-using "-B" option, say
+> >>     => efidebug -B 3 debian-netinst uri - https://foo.com/baa
 >
-> Regards,
-> Jonas
+> You just replace one set of alternatives (-B -b -u) against another
+> (mmc, nvme, uri, ...). I cannot see that this reduces complexity.
 >
 > >
-> > Manoj Sai (4):
-> >   rockchip: Add support to generate GZIP compressed U-boot binary
-> >   rockchip: Add support to generate LZMA compressed U-boot binary
-> >   spl: fit: support for booting a GZIP-compressed U-boot binary
-> >   spl: fit: support for booting a LZMA-compressed U-boot binary
+> > I understand your concern. OK, I will add uri in -b|B and also update
+> > documentation.
+>
+> It is unclear to me what the difference between -b and -B shall be for
+> URIs. Would -B be with the device path of the network device
+> (/VenHw()/MAC()/URI()) and -b without (/URI())?
+
+Differentiating -b and -B for URI is not mandatory, I think.
+To keep implementation simple, I would like to add '-u' option as the
+original patch does.
+
+Thanks,
+Masahisa Kojima
+
+>
+> Best regards
+>
+> Heinrich
+>
 > >
-> >  arch/arm/dts/rockchip-u-boot.dtsi | 11 +++++++++++
-> >  common/spl/spl_fit.c              | 21 +++++++++++++++++----
-> >  include/spl.h                     | 10 ++++++++++
-> >  3 files changed, 38 insertions(+), 4 deletions(-)
+> > Thanks,
+> > Masahisa Kojima
 > >
+> >>
+> >> BTW, I think that <bootid> and <label> should have been moved out of "-b|B"
+> >> when Ilias introduced this new syntax.
+> >>
+> >> -Takahiro Akashi
+> >>
+> >>
+> >>>        "  -s '<optional data>'\n"
+> >>>        "efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]\n"
+> >>>        "  - delete UEFI BootXXXX variables\n"
+> >>> --
+> >>> 2.34.1
+> >>>
 >
