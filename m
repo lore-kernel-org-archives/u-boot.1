@@ -4,120 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C29EBC83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 09:50:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67484C83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 09:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EFD3864D3;
-	Mon, 28 Aug 2023 11:50:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id CAFD1864C0;
+	Mon, 28 Aug 2023 11:56:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="uNR28o2y";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="gHDTjfQt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17438864C5; Mon, 28 Aug 2023 11:50:02 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id CDF04864E7; Mon, 28 Aug 2023 11:56:33 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC872864CA
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 11:49:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10062864B7
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 11:56:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20230828094954epoutp01de3cd985f934592666c09cd8f33fd334~-gyh7QlDT0667506675epoutp01b
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 09:49:54 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20230828094954epoutp01de3cd985f934592666c09cd8f33fd334~-gyh7QlDT0667506675epoutp01b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1693216194;
- bh=dKsU3gUeG1PxX5iWv+j/nM2bHalXy+Iks1TNrtmLJao=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=uNR28o2ymsS7vtVJswEtbZoUuyvPp5vnYxB66Xs+Yj5b48FtcQR+5NiwDSYnsf0lU
- 7TmyT42m6FdK8wxKbpcNsu+JmNfEU+/R+j8vDk1nlSsnlvFetUcuNcOHvdPLbFZwwS
- y2WSL8PNYJPryZtQH7DKrZ3szM688xBmir9Jop5k=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTP id
- 20230828094954epcas2p4c891239db833ff31b7f38c9151d2beb7~-gyhqp5573028630286epcas2p4o;
- Mon, 28 Aug 2023 09:49:54 +0000 (GMT)
-Received: from epsmgec2p1-new.samsung.com (unknown [182.195.36.100]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4RZ5Ps6vLXz4x9Q9; Mon, 28 Aug
- 2023 09:49:53 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmgec2p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 44.B8.19471.1CD6CE46; Mon, 28 Aug 2023 18:49:53 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5~-gygVRnjC2634726347epcas2p3K;
- Mon, 28 Aug 2023 09:49:53 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20230828094953epsmtrp289b1298d676d040442b2b5d931110420~-gygUsidL1352013520epsmtrp2z;
- Mon, 28 Aug 2023 09:49:53 +0000 (GMT)
-X-AuditID: b6c32a4d-dc5ff70000004c0f-62-64ec6dc1d14a
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- B3.84.08788.0CD6CE46; Mon, 28 Aug 2023 18:49:52 +0900 (KST)
-Received: from cometzero-ubuntu..
- (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20230828094952epsmtip2c67c1b3f550693138227619e8e379bd7~-gygF62972737827378epsmtip2E;
- Mon, 28 Aug 2023 09:49:52 +0000 (GMT)
-From: Chanho Park <chanho61.park@samsung.com>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Simon Glass
- <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Chanho Park <chanho61.park@samsung.com>
-Subject: [PATCH v2 3/3] timer: riscv_aclint_timer: add timer_get_boot_us for
- BOOTSTAGE
-Date: Mon, 28 Aug 2023 18:49:38 +0900
-Message-Id: <20230828094938.2061606-4-chanho61.park@samsung.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230828094938.2061606-1-chanho61.park@samsung.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7604ad421f=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37S8jt6G026193; Mon, 28 Aug 2023 11:56:15 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=2++ft29PyyNh7r517GKd9f17K8CxyW3PgQuHtwBHWjI=; b=gH
+ DTjfQtiyHylPgsPuSmRRvvzwOoIyrv7v4RLV6gv66/6M6JgiBx3bPzaxLnViXOkb
+ f/sD3UmxpjoJnKbJwCUpggpuEYg2YQtJgMA5uWGcMqwdBqh4fXP9XVLXH0xNiN2z
+ ySIt5aKGwbDgAe4dVJIxhhkG9R35JVTzQEgzCedJ4Fhz/FP3c5t6kNBaCvGofmOS
+ GNV4RwGArdvNWI3Tm1XrMMNMpqRaiuvPn1/2DWl/6TPb+yCmXwjZ5wLnJkNbv6Bk
+ GmZCzCHjrXCUhZ0M/2rEZccTOKvjaftKWwwcDxilumbHum7Ac/c2oyTyuI0DLLyo
+ IR5VpH/eqjTdDl1KL/0A==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sqtxymn8c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Aug 2023 11:56:15 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 90240100056;
+ Mon, 28 Aug 2023 11:56:10 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7B53121A905;
+ Mon, 28 Aug 2023 11:56:10 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Mon, 28 Aug
+ 2023 11:56:09 +0200
+Message-ID: <30bd3a4e-f45b-2de7-b3a0-5474524a0e46@foss.st.com>
+Date: Mon, 28 Aug 2023 11:56:09 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrHKsWRmVeSWpSXmKPExsWy7bCmqe7B3DcpBvO3iFtc3q9t8fbFWUaL
- b1u2MVq83dvJbvH40GsmB1aPPadnMXvMbrjI4nH2zg5Gj74tqxgDWKKybTJSE1NSixRS85Lz
- UzLz0m2VvIPjneNNzQwMdQ0tLcyVFPISc1NtlVx8AnTdMnOA9ioplCXmlAKFAhKLi5X07WyK
- 8ktLUhUy8otLbJVSC1JyCswL9IoTc4tL89L18lJLrAwNDIxMgQoTsjOW9P1gKZjIVTHr/gzm
- BsYtHF2MnBwSAiYS2552s3QxcnEICexhlFj+so8ZwvnEKHGl9wo7hPONUeLS5tlAGQ6wlhNz
- YiHiexklfrX+gmqfxiRx7PkGJpC5bAK6Eluev2IEaRARKJc4do8fJMwsoC3R+XkKO4gtLBAh
- cartMQuIzSKgKjF3/Q1GEJtXwEGiZdp8Vohd8hKLH0iAhDkFHCXO/v3LDFEiKHFy5hMWiJHy
- Es1bZ4MdLSFwiV3i1JY5bBCvuUicfvOFGcIWlnh1fAs7hC0l8fndXjaI+eUSO5YlQfS2MEo0
- t+2BqreX+HFzCtgNzAKaEut36UOUK0scuQW1lk+i4/Bfdogwr0RHmxBEo7rEge3TWSBsWYnu
- OZ9ZIWwPiW8fF7BBAmoKo8TEfx9YJzAqzELyzSwk38xCWLyAkXkVo1RqQXFuemqyUYGhbl5q
- OTyKk/NzNzGCE6KW7w7G1+v/6h1iZOJgPMQowcGsJMJ7yfFVihBvSmJlVWpRfnxRaU5q8SFG
- U2BwT2SWEk3OB6bkvJJ4QxNLAxMzM0NzI1MDcyVx3nutc1OEBNITS1KzU1MLUotg+pg4OKUa
- mKY+kz/r69gaX2wmtGzekxpTb9UnjKXrrno5vXzu1rigy+allvieHh9LnfWrJ/5hvWaVY2R8
- fga3OFPwMt/wX5s/dz47YH1iLUPmv6vT6+e3bndgeHdhU6O9nKAc0ympX879d0JPrjvnVGhX
- pv+Q6YCPcuwmxbMyqa7bLNz8rP5ImB1KawnXXpoqlGLtIyS/0Cc0z6WqYsZj18yI9XGNCVsO
- SE80cFL1lb6w8dfJ52fq4xnTHjAUXpuQp7nxodPFSPafpbGHbh/yOvtyi5VlRezLqUnGLb17
- 7ZMv2r8pDv/9232vWc28C2eWrYx/r8PgweceHOWVuvDJN4mOqCXO02aYn785eftimxaulmk2
- SizFGYmGWsxFxYkAwfRwlxEEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWy7bCSvO6B3DcpBqfXWVpc3q9t8fbFWUaL
- b1u2MVq83dvJbvH40GsmB1aPPadnMXvMbrjI4nH2zg5Gj74tqxgDWKK4bFJSczLLUov07RK4
- Mpb0/WApmMhVMev+DOYGxi0cXYwcHBICJhIn5sR2MXJxCAnsZpR4unwHYxcjJ1BcVuLZux3s
- ELawxP2WI6wQRZOYJC7s/gFWxCagK7Hl+SswW0SgWuL5ox1sIDazgLZE5+cpYM3CAmESb9a3
- gMVZBFQl5q6/AVbPK+Ag0TJtPivEEfISix9IgIQ5BRwlzv79ywxiCwGVbFr6gg2iXFDi5Mwn
- LBDj5SWat85mnsAoMAtJahaS1AJGplWMkqkFxbnpucWGBUZ5qeV6xYm5xaV56XrJ+bmbGMFB
- q6W1g3HPqg96hxiZOBgPMUpwMCuJ8F5yfJUixJuSWFmVWpQfX1Sak1p8iFGag0VJnPfb694U
- IYH0xJLU7NTUgtQimCwTB6dUA5Og0gH/jHNPD+/5N233+m8VzTm96wo1V+Rz3Jx+o/09/7bH
- vSL5gc281UsSa7/5bRAO7/xven975yVLw3VhZ7fLbb+3s8SCT/fPE8fQ05J6KxWk1x6cfEYx
- Pb3kC0+W+v4+7n7Lfexrp5lZKbxwMJjxZq7WogNfXi69UXqwmGexeQ1PxtLeh3m9GlryDceP
- 351nKsT0rtbCsNDPL3Hi83mmfUIPyg6aTt6mmBZdfG7NtVmLn3Yy/k6f/ET8/nXVmitvBbg3
- Xnn5tCG8pUVH+HtN/L4ZrWXHb+RVnrrVGVB+tKZsyfbjZ78nmpgU9OjcTtrwl2WFGp+QkWH9
- g7igc3zP2hcqvVv2uO78egOdF9eVWIozEg21mIuKEwF9AL3/yQIAAA==
-X-CMS-MailID: 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5
-References: <20230828094938.2061606-1-chanho61.park@samsung.com>
- <CGME20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5@epcas2p3.samsung.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v3 6/7] clk: treewide: switch to clock dump from clk_ops
+Content-Language: en-US
+To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek <michal.simek@amd.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Joel Stanley <joel@jms.id.au>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, <u-boot@lists.denx.de>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230714152444.24395-1-ivprusov@sberdevices.ru>
+ <20230714152444.24395-7-ivprusov@sberdevices.ru>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230714152444.24395-7-ivprusov@sberdevices.ru>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-28_07,2023-08-25_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,54 +98,453 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-timer_get_boot_us function is required to record the boot stages as
-us-based timestamp.
 
-Signed-off-by: Chanho Park <chanho61.park@samsung.com>
----
- drivers/timer/riscv_aclint_timer.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
 
-diff --git a/drivers/timer/riscv_aclint_timer.c b/drivers/timer/riscv_aclint_timer.c
-index e29d527c8d77..8b67745bb4a2 100644
---- a/drivers/timer/riscv_aclint_timer.c
-+++ b/drivers/timer/riscv_aclint_timer.c
-@@ -6,6 +6,7 @@
- 
- #include <common.h>
- #include <clk.h>
-+#include <div64.h>
- #include <dm.h>
- #include <timer.h>
- #include <asm/io.h>
-@@ -44,6 +45,27 @@ u64 notrace timer_early_get_count(void)
- }
- #endif
- 
-+#if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
-+ulong timer_get_boot_us(void)
-+{
-+	int ret;
-+	u64 ticks = 0;
-+	u32 rate;
-+
-+	ret = dm_timer_init();
-+	if (!ret) {
-+		rate = timer_get_rate(gd->timer);
-+		timer_get_count(gd->timer, &ticks);
-+	} else {
-+		rate = RISCV_MMODE_TIMER_FREQ;
-+		ticks = readq((void __iomem *)MTIME_REG(RISCV_MMODE_TIMERBASE,
-+							RISCV_MMODE_TIMEROFF));
-+	}
-+
-+	return lldiv(ticks * 1001, (rate / 1000));
-+}
-+#endif
-+
- static const struct timer_ops riscv_aclint_timer_ops = {
- 	.get_count = riscv_aclint_timer_get_count,
- };
--- 
-2.39.2
+On 7/14/23 17:24, Igor Prusov wrote:
+> Switch to using new dump operation in clock provider drivers instead of
+> overriding soc_clk_dump.
+> 
+> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+> ---
+>  arch/mips/mach-pic32/cpu.c             | 23 ---------------
+>  drivers/clk/aspeed/clk_ast2600.c       | 13 ++++-----
+>  drivers/clk/clk_k210.c                 | 11 +++-----
+>  drivers/clk/clk_pic32.c                | 39 ++++++++++++++++++++++++++
+>  drivers/clk/clk_versal.c               |  7 ++++-
+>  drivers/clk/clk_zynq.c                 | 19 ++++---------
+>  drivers/clk/clk_zynqmp.c               | 13 ++++-----
+>  drivers/clk/imx/clk-imx8.c             | 11 +++-----
+>  drivers/clk/mvebu/armada-37xx-periph.c |  5 +++-
+>  drivers/clk/stm32/clk-stm32mp1.c       | 29 ++++++-------------
+>  10 files changed, 83 insertions(+), 87 deletions(-)
+> 
+> diff --git a/arch/mips/mach-pic32/cpu.c b/arch/mips/mach-pic32/cpu.c
+> index ec3c250531..99401745da 100644
+> --- a/arch/mips/mach-pic32/cpu.c
+> +++ b/arch/mips/mach-pic32/cpu.c
+> @@ -148,26 +148,3 @@ const char *get_core_name(void)
+>  	return str;
+>  }
+>  #endif
+> -#ifdef CONFIG_CMD_CLK
+> -
+> -int soc_clk_dump(void)
+> -{
+> -	int i;
+> -
+> -	printf("PLL Speed: %lu MHz\n",
+> -	       CLK_MHZ(rate(PLLCLK)));
+> -
+> -	printf("CPU Speed: %lu MHz\n", CLK_MHZ(rate(PB7CLK)));
+> -
+> -	printf("MPLL Speed: %lu MHz\n", CLK_MHZ(rate(MPLL)));
+> -
+> -	for (i = PB1CLK; i <= PB7CLK; i++)
+> -		printf("PB%d Clock Speed: %lu MHz\n", i - PB1CLK + 1,
+> -		       CLK_MHZ(rate(i)));
+> -
+> -	for (i = REF1CLK; i <= REF5CLK; i++)
+> -		printf("REFO%d Clock Speed: %lu MHz\n", i - REF1CLK + 1,
+> -		       CLK_MHZ(rate(i)));
+> -	return 0;
+> -}
+> -#endif
+> diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
+> index b3cc8392fa..e1365d3f81 100644
+> --- a/drivers/clk/aspeed/clk_ast2600.c
+> +++ b/drivers/clk/aspeed/clk_ast2600.c
+> @@ -1109,6 +1109,7 @@ struct aspeed_clks {
+>  	const char *name;
+>  };
+>  
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+>  static struct aspeed_clks aspeed_clk_names[] = {
+>  	{ ASPEED_CLK_HPLL, "hpll" },
+>  	{ ASPEED_CLK_MPLL, "mpll" },
+> @@ -1123,18 +1124,12 @@ static struct aspeed_clks aspeed_clk_names[] = {
+>  	{ ASPEED_CLK_HUARTX, "huxclk" },
+>  };
+>  
+> -int soc_clk_dump(void)
+> +static int ast2600_clk_dump(struct udevice *dev)
+>  {
+> -	struct udevice *dev;
+>  	struct clk clk;
+>  	unsigned long rate;
+>  	int i, ret;
+>  
+> -	ret = uclass_get_device_by_driver(UCLASS_CLK, DM_DRIVER_GET(aspeed_scu),
+> -					  &dev);
+> -	if (ret)
+> -		return ret;
+> -
+>  	printf("Clk\t\tHz\n");
+>  
+>  	for (i = 0; i < ARRAY_SIZE(aspeed_clk_names); i++) {
+> @@ -1167,11 +1162,15 @@ int soc_clk_dump(void)
+>  
+>  	return 0;
+>  }
+> +#endif
+>  
+>  struct clk_ops ast2600_clk_ops = {
+>  	.get_rate = ast2600_clk_get_rate,
+>  	.set_rate = ast2600_clk_set_rate,
+>  	.enable = ast2600_clk_enable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = ast2600_clk_dump,
+> +#endif
+>  };
+>  
+>  static int ast2600_clk_probe(struct udevice *dev)
+> diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
+> index 2f17152021..058940b828 100644
+> --- a/drivers/clk/clk_k210.c
+> +++ b/drivers/clk/clk_k210.c
+> @@ -1276,16 +1276,10 @@ static void show_clks(struct k210_clk_priv *priv, int id, int depth)
+>  	}
+>  }
+>  
+> -int soc_clk_dump(void)
+> +static int k210_clk_dump(struct udevice *dev)
+>  {
+> -	int ret;
+> -	struct udevice *dev;
+>  	struct k210_clk_priv *priv;
+>  
+> -	ret = uclass_get_device_by_driver(UCLASS_CLK, DM_DRIVER_GET(k210_clk),
+> -					  &dev);
+> -	if (ret)
+> -		return ret;
+>  	priv = dev_get_priv(dev);
+>  
+>  	puts(" Rate      Enabled Name\n");
+> @@ -1304,6 +1298,9 @@ static const struct clk_ops k210_clk_ops = {
+>  	.set_parent = k210_clk_set_parent,
+>  	.enable = k210_clk_enable,
+>  	.disable = k210_clk_disable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = k210_clk_dump,
+> +#endif
+>  };
+>  
+>  static int k210_clk_probe(struct udevice *dev)
+> diff --git a/drivers/clk/clk_pic32.c b/drivers/clk/clk_pic32.c
+> index ef06a7fb9f..f756fc88f0 100644
+> --- a/drivers/clk/clk_pic32.c
+> +++ b/drivers/clk/clk_pic32.c
+> @@ -20,6 +20,8 @@
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+> +#define CLK_MHZ(x)	((x) / 1000000)
+> +
+>  /* Primary oscillator */
+>  #define SYS_POSC_CLK_HZ	24000000
+>  
+> @@ -385,9 +387,46 @@ static ulong pic32_set_rate(struct clk *clk, ulong rate)
+>  	return rate;
+>  }
+>  
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +static int pic32_dump(struct udevice *dev)
+> +{
+> +	int i;
+> +	struct clk clk;
+> +
+> +	clk.dev = dev;
+> +
+> +	clk.id = PLLCLK;
+> +	printf("PLL Speed: %lu MHz\n",
+> +	       CLK_MHZ(pic32_get_rate(&clk)));
+> +
+> +	clk.id = PB7CLK;
+> +	printf("CPU Speed: %lu MHz\n", CLK_MHZ(pic32_get_rate(&clk)));
+> +
+> +	clk.id = MPLL;
+> +	printf("MPLL Speed: %lu MHz\n", CLK_MHZ(pic32_get_rate(&clk)));
+> +
+> +	for (i = PB1CLK; i <= PB7CLK; i++) {
+> +		clk.id = i;
+> +		printf("PB%d Clock Speed: %lu MHz\n", i - PB1CLK + 1,
+> +		       CLK_MHZ(pic32_get_rate(&clk)));
+> +	}
+> +
+> +	for (i = REF1CLK; i <= REF5CLK; i++) {
+> +		clk.id = i;
+> +		printf("REFO%d Clock Speed: %lu MHz\n", i - REF1CLK + 1,
+> +		       CLK_MHZ(pic32_get_rate(&clk)));
+> +	}
+> +
+> +	return 0;
+> +}
+> +#endif
+> +
+>  static struct clk_ops pic32_pic32_clk_ops = {
+>  	.set_rate = pic32_set_rate,
+>  	.get_rate = pic32_get_rate,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = pic32_dump,
+> +#endif
+>  };
+>  
+>  static int pic32_clk_probe(struct udevice *dev)
+> diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
+> index faebbab1c6..1b739a9c8d 100644
+> --- a/drivers/clk/clk_versal.c
+> +++ b/drivers/clk/clk_versal.c
+> @@ -523,7 +523,8 @@ static int versal_clock_get_rate(u32 clk_id, u64 *clk_rate)
+>  	return 0;
+>  }
+>  
+> -int soc_clk_dump(void)
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +static int versal_clk_dump(struct udevice __always_unused *dev)
+>  {
+>  	u64 clk_rate = 0;
+>  	u32 type, ret, i = 0;
+> @@ -546,6 +547,7 @@ int soc_clk_dump(void)
+>  
+>  	return 0;
+>  }
+> +#endif
+>  
+>  static void versal_get_clock_info(void)
+>  {
+> @@ -737,6 +739,9 @@ static struct clk_ops versal_clk_ops = {
+>  	.set_rate = versal_clk_set_rate,
+>  	.get_rate = versal_clk_get_rate,
+>  	.enable = versal_clk_enable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = versal_clk_dump,
+> +#endif
+>  };
+>  
+>  static const struct udevice_id versal_clk_ids[] = {
+> diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
+> index be5226175f..d492eea3b0 100644
+> --- a/drivers/clk/clk_zynq.c
+> +++ b/drivers/clk/clk_zynq.c
+> @@ -454,6 +454,7 @@ static int dummy_enable(struct clk *clk)
+>  	return 0;
+>  }
+>  
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+>  static const char * const clk_names[clk_max] = {
+>  	"armpll", "ddrpll", "iopll",
+>  	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
+> @@ -468,22 +469,10 @@ static const char * const clk_names[clk_max] = {
+>  	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
+>  };
+>  
+> -/**
+> - * soc_clk_dump() - Print clock frequencies
+> - * Returns zero on success
+> - *
+> - * Implementation for the clk dump command.
+> - */
+> -int soc_clk_dump(void)
+> +static int zynq_clk_dump(struct udevice *dev)
+>  {
+> -	struct udevice *dev;
+>  	int i, ret;
+>  
+> -	ret = uclass_get_device_by_driver(UCLASS_CLK,
+> -					  DM_DRIVER_GET(zynq_clk), &dev);
+> -	if (ret)
+> -		return ret;
+> -
+>  	printf("clk\t\tfrequency\n");
+>  	for (i = 0; i < clk_max; i++) {
+>  		const char *name = clk_names[i];
+> @@ -511,6 +500,7 @@ int soc_clk_dump(void)
+>  
+>  	return 0;
+>  }
+> +#endif
+>  
+>  static struct clk_ops zynq_clk_ops = {
+>  	.get_rate = zynq_clk_get_rate,
+> @@ -518,6 +508,9 @@ static struct clk_ops zynq_clk_ops = {
+>  	.set_rate = zynq_clk_set_rate,
+>  #endif
+>  	.enable = dummy_enable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = zynq_clk_dump,
+> +#endif
+>  };
+>  
+>  static int zynq_clk_probe(struct udevice *dev)
+> diff --git a/drivers/clk/clk_zynqmp.c b/drivers/clk/clk_zynqmp.c
+> index be0ee50e0e..c97a0ed963 100644
+> --- a/drivers/clk/clk_zynqmp.c
+> +++ b/drivers/clk/clk_zynqmp.c
+> @@ -727,16 +727,11 @@ static ulong zynqmp_clk_set_rate(struct clk *clk, ulong rate)
+>  	}
+>  }
+>  
+> -int soc_clk_dump(void)
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +static int zynqmp_clk_dump(struct udevice *dev)
+>  {
+> -	struct udevice *dev;
+>  	int i, ret;
+>  
+> -	ret = uclass_get_device_by_driver(UCLASS_CLK,
+> -		DM_DRIVER_GET(zynqmp_clk), &dev);
+> -	if (ret)
+> -		return ret;
+> -
+>  	printf("clk\t\tfrequency\n");
+>  	for (i = 0; i < clk_max; i++) {
+>  		const char *name = clk_names[i];
+> @@ -764,6 +759,7 @@ int soc_clk_dump(void)
+>  
+>  	return 0;
+>  }
+> +#endif
+>  
+>  static int zynqmp_get_freq_by_name(char *name, struct udevice *dev, ulong *freq)
+>  {
+> @@ -863,6 +859,9 @@ static struct clk_ops zynqmp_clk_ops = {
+>  	.set_rate = zynqmp_clk_set_rate,
+>  	.get_rate = zynqmp_clk_get_rate,
+>  	.enable = zynqmp_clk_enable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = zynqmp_clk_dump,
+> +#endif
+>  };
+>  
+>  static const struct udevice_id zynqmp_clk_ids[] = {
+> diff --git a/drivers/clk/imx/clk-imx8.c b/drivers/clk/imx/clk-imx8.c
+> index ceeead3434..6cd55f4369 100644
+> --- a/drivers/clk/imx/clk-imx8.c
+> +++ b/drivers/clk/imx/clk-imx8.c
+> @@ -43,18 +43,12 @@ static int imx8_clk_enable(struct clk *clk)
+>  }
+>  
+>  #if IS_ENABLED(CONFIG_CMD_CLK)
+> -int soc_clk_dump(void)
+> +static int imx8_clk_dump(struct udevice *dev)
+>  {
+> -	struct udevice *dev;
+>  	struct clk clk;
+>  	unsigned long rate;
+>  	int i, ret;
+>  
+> -	ret = uclass_get_device_by_driver(UCLASS_CLK,
+> -					  DM_DRIVER_GET(imx8_clk), &dev);
+> -	if (ret)
+> -		return ret;
+> -
+>  	printf("Clk\t\tHz\n");
+>  
+>  	for (i = 0; i < num_clks; i++) {
+> @@ -94,6 +88,9 @@ static struct clk_ops imx8_clk_ops = {
+>  	.get_rate = imx8_clk_get_rate,
+>  	.enable = imx8_clk_enable,
+>  	.disable = imx8_clk_disable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = imx8_clk_dump,
+> +#endif
+>  };
+>  
+>  static int imx8_clk_probe(struct udevice *dev)
+> diff --git a/drivers/clk/mvebu/armada-37xx-periph.c b/drivers/clk/mvebu/armada-37xx-periph.c
+> index e75052f383..faf75c8792 100644
+> --- a/drivers/clk/mvebu/armada-37xx-periph.c
+> +++ b/drivers/clk/mvebu/armada-37xx-periph.c
+> @@ -499,7 +499,7 @@ static int clk_dump(const char *name, int (*func)(struct udevice *))
+>  
+>  int armada_37xx_tbg_clk_dump(struct udevice *);
+>  
+> -int soc_clk_dump(void)
+> +static int armada37xx_clk_dump(struct udevice __always_unused *dev)
+>  {
+>  	printf("  xtal at %u000000 Hz\n\n", get_ref_clk());
+>  
+> @@ -605,6 +605,9 @@ static const struct clk_ops armada_37xx_periph_clk_ops = {
+>  	.set_parent = armada_37xx_periph_clk_set_parent,
+>  	.enable = armada_37xx_periph_clk_enable,
+>  	.disable = armada_37xx_periph_clk_disable,
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	.dump = armada37xx_clk_dump,
+> +#endif
+>  };
+>  
+>  static const struct udevice_id armada_37xx_periph_clk_ids[] = {
+> diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
+> index 4f4524fcb2..d5b66d48f0 100644
+> --- a/drivers/clk/stm32/clk-stm32mp1.c
+> +++ b/drivers/clk/stm32/clk-stm32mp1.c
+> @@ -2217,10 +2217,13 @@ static void stm32mp1_osc_init(struct udevice *dev)
+>  	}
+>  }
+>  
+> -static void  __maybe_unused stm32mp1_clk_dump(struct stm32mp1_clk_priv *priv)
+> +static int __maybe_unused stm32mp1_clk_dump(struct udevice *dev)
+>  {
+>  	char buf[32];
+>  	int i, s, p;
+> +	struct stm32mp1_clk_priv *priv;
+> +
+> +	priv = dev_get_priv(dev);
+>  
+>  	printf("Clocks:\n");
+>  	for (i = 0; i < _PARENT_NB; i++) {
+> @@ -2242,28 +2245,9 @@ static void  __maybe_unused stm32mp1_clk_dump(struct stm32mp1_clk_priv *priv)
+>  			       stm32mp1_clk_parent_sel_name[i], i, p);
+>  		}
+>  	}
+> -}
+> -
+> -#ifdef CONFIG_CMD_CLK
+> -int soc_clk_dump(void)
+> -{
+> -	struct udevice *dev;
+> -	struct stm32mp1_clk_priv *priv;
+> -	int ret;
+> -
+> -	ret = uclass_get_device_by_driver(UCLASS_CLK,
+> -					  DM_DRIVER_GET(stm32mp1_clock),
+> -					  &dev);
+> -	if (ret)
+> -		return ret;
+> -
+> -	priv = dev_get_priv(dev);
+> -
+> -	stm32mp1_clk_dump(priv);
+>  
+>  	return 0;
+>  }
+> -#endif
+>  
+>  static int stm32mp1_clk_probe(struct udevice *dev)
+>  {
+> @@ -2294,7 +2278,7 @@ static int stm32mp1_clk_probe(struct udevice *dev)
+>  #if defined(VERBOSE_DEBUG)
+>  	/* display debug information for probe after relocation */
+>  	if (gd->flags & GD_FLG_RELOC)
+> -		stm32mp1_clk_dump(priv);
+> +		stm32mp1_clk_dump(dev);
+>  #endif
+>  
+>  	gd->cpu_clk = stm32mp1_clk_get(priv, _CK_MPU);
+> @@ -2325,6 +2309,9 @@ static const struct clk_ops stm32mp1_clk_ops = {
+>  	.disable = stm32mp1_clk_disable,
+>  	.get_rate = stm32mp1_clk_get_rate,
+>  	.set_rate = stm32mp1_clk_set_rate,
+> +#if IS_ENABLED(CONFIG_CMD_CLK) && !IS_ENABLED(CONFIG_SPL_BUILD)
+> +	.dump = stm32mp1_clk_dump,
+> +#endif
+>  };
+>  
+>  U_BOOT_DRIVER(stm32mp1_clock) = {
 
+
+For stm32mp1, tested on stm32mp157c-dk2 board
+
+Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
