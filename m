@@ -4,61 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EC5C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 08:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBAE2C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 09:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 530E08648E;
-	Mon, 28 Aug 2023 10:46:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id D88F1864B9;
+	Mon, 28 Aug 2023 11:33:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="JeswxcNI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u0P/caM/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE1DA864A7; Mon, 28 Aug 2023 10:46:57 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4023A86496; Mon, 28 Aug 2023 11:33:12 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB29086458
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:46:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5170C864B7
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 11:33:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-Received: from [192.168.0.115] (unknown [176.236.51.75])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id B56AE660719F;
- Mon, 28 Aug 2023 09:46:53 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1693212414;
- bh=K64TD2jBRmgZmm2SXlMwTZ4LFw/8tmJnelzKd2gHMYE=;
- h=Date:Subject:To:References:Cc:From:In-Reply-To:From;
- b=JeswxcNIoLJmE3EBiSgatJ8PwYXM2+1vS/xI536tlF5n4wek0VKFzAF1LcwPZ+1eL
- vk3aU1WM9cuIGY2QgXPfYWWQ2cJR1Rsk2Lq6MwIvlDu4R6dJLNo92hF1JfnRjewQIS
- PcSMvYFLHfkgFBAd7nEdSlXMGAy0vZj6fpsON+QP/s6ux8uWBtzrBfoaIGIggchVNf
- UagBT20wpTYfrC9SpptikQVMy73+HCYM53oXhd5u7yixuz4VAihqoOme9hfQbwJ2rw
- yrYQNruSTuZYFrh5zkCmyg8FdTtP5ij2c7lNUlgCXL6VkIg8S+KDSsw4D+CBIZtjUl
- hoPw8xvbPFdqA==
-Message-ID: <7d288a5d-2d8e-39fa-2b18-327452a4cdbd@collabora.com>
-Date: Mon, 28 Aug 2023 11:46:40 +0300
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-52a1132b685so4260860a12.1
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 02:33:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693215189; x=1693819989;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vm4XvBsChWX8mGE2iW+BpAPwQrqgWsYao+m3GJM/L1I=;
+ b=u0P/caM/jKHpfTUH9ovh1+GnUE5tlfOifY/e6z65ZlbOWNmeeLYWgKi3p9CAkdkEo5
+ DAQUlS/Q6L9KOMld/q0iBT1TWQmk0Sr64g47yVr7jjtZgz0eHRmmkXtJAPqAFHD1xOwf
+ 5v5TgGB4kXulvzEEg2NP6YtLGolfFB/XlWGAD7a5w0kBBPTo2pL/IyV2W/lkkDjfng5X
+ 6n41xI1rDk7LOpT9oqbgBPeGnedU0YTpxaE6JeD+vHAKY2IKlyQI+oR5PV/mkRYyF5Tg
+ 3lZBNNWsd5imwlxOKOudFRd1sSxd5M/BjlpQfWuZU8tZ58uNzwS1G4rovt3pIsXZKIaJ
+ Vf3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693215189; x=1693819989;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Vm4XvBsChWX8mGE2iW+BpAPwQrqgWsYao+m3GJM/L1I=;
+ b=biCVnZ5bhvH9WWOSrQW2yyWRn5dgBdfEfTRQrSAYBjRaX6MvDogKoioiM87OOW2X7d
+ M5MaWeaCVAP2rpnwt3e8dOcrrl851xIBXp49Id75m5dBR1JVi0E72oDvpdQwxzSA4wFN
+ uHIJfKd9KzCaFArehrWi6D+Ke1vQO8N/JtviOBXdgWTDxXxdMJSAt/DbISPl5NM5whFj
+ km2S14LfG/5PBYeiQXq4wK6ZSY76BLXiagoC92MyGNyCG2il/xIe2haoDkA+cVZ3davu
+ aJ2LrwuJ27ijL20xSQ6Ngll+BM8CqGNRN5wWC6lMz80FX4FrOHbvXMbqUhYI7iFCHCbj
+ Qghw==
+X-Gm-Message-State: AOJu0YyRgGDP7qd3kBxq+Eto/iWOBr63c//fF9BJ4DKcncXUZQDijowu
+ I+GxHxW+4RE0mnKwbuPlr8qxqvn2Bwu2ECcP1F0ytg==
+X-Google-Smtp-Source: AGHT+IFTFEfg+ZTVYBafh2Z8JagNIAin22L2D/rlBsX/UD4OWUQTD1c/2cuBO1y/U/WkuM/BKVwvWRywUvHL4dpkggI=
+X-Received: by 2002:aa7:d9cb:0:b0:51e:309:2e11 with SMTP id
+ v11-20020aa7d9cb000000b0051e03092e11mr19871406eds.36.1693215188706; Mon, 28
+ Aug 2023 02:33:08 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] fpga: define dummy fpga_load function for debug build
-To: Chanho Park <chanho61.park@samsung.com>,
- 'Michal Simek' <michal.simek@amd.com>, u-boot@lists.denx.de
-References: <CGME20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec@epcas2p3.samsung.com>
- <20230816065437.836392-1-chanho61.park@samsung.com>
- <c0e49c05-a5f8-2759-33b5-946bf2283b34@amd.com>
- <000001d9d945$95ebf520$c1c3df60$@samsung.com>
-Content-Language: en-US
-Cc: Simon Glass <sjg@chromium.org>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <000001d9d945$95ebf520$c1c3df60$@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <20230826090633.239342-5-sughosh.ganu@linaro.org>
+ <5c05f436-8c92-4b01-fcdf-ed9e0ec31d44@gmx.de>
+In-Reply-To: <5c05f436-8c92-4b01-fcdf-ed9e0ec31d44@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 28 Aug 2023 15:02:57 +0530
+Message-ID: <CADg8p97io5JX85MJj0U0U0sNCiC5D8bDjioe-fGwvEpPy7AUcg@mail.gmail.com>
+Subject: Re: [RFC PATCH 4/5] bootefi: Call the EVT_FT_FIXUP event handler
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,77 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/28/23 03:21, Chanho Park wrote:
-> Hi,
-> 
->> -----Original Message-----
->> From: Michal Simek <michal.simek@amd.com>
->> Sent: Friday, August 25, 2023 4:23 PM
->> To: Chanho Park <chanho61.park@samsung.com>; u-boot@lists.denx.de
->> Subject: Re: [PATCH] fpga: define dummy fpga_load function for debug build
->>
->> Hi,
->>
->> On 8/16/23 08:54, Chanho Park wrote:
->>> This fixes below build error when CC_OPTIMIZE_FOR_DEBUG is enabled and
->>> CONFIG_SPL_FPGA is not enabled.
->>>
->>> ../common/spl/spl_fit.c:591: undefined reference to `fpga_load'
->>> collect2: error: ld returned 1 exit status
->>>
->>> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
->>> ---
->>>    include/fpga.h | 8 ++++++++
->>>    1 file changed, 8 insertions(+)
->>>
->>> diff --git a/include/fpga.h b/include/fpga.h index
->>> ed688cc0fa3b..44f2755a3f10 100644
->>> --- a/include/fpga.h
->>> +++ b/include/fpga.h
->>> @@ -60,8 +60,16 @@ int fpga_add(fpga_type devtype, void *desc);
->>>    int fpga_count(void);
->>>    const fpga_desc *const fpga_get_desc(int devnum);
->>>    int fpga_is_partial_data(int devnum, size_t img_len);
->>> +#if CONFIG_IS_ENABLED(FPGA)
->>>    int fpga_load(int devnum, const void *buf, size_t bsize,
->>>    	      bitstream_type bstype, int flags);
->>> +#else
->>> +static inline int fpga_load(int devnum, const void *buf, size_t bsize,
->>> +	      bitstream_type bstype, int flags) {
->>> +	return FPGA_FAIL;
->>> +}
->>> +#endif
->>>    int fpga_fsload(int devnum, const void *buf, size_t size,
->>>    		fpga_fs_info *fpga_fsinfo);
->>>    int fpga_loads(int devnum, const void *buf, size_t size,
->>
->> There is another patch targeting the same code.
->> Please take a look at
->> https://lore.kernel.org/r/20230808102227.34233-1-
->> eugen.hristev@collabora.com
-> 
-> I wasn't aware that there was an attempt to fix the issue. If I knew it, I would reply the patch...
-> 
->>
->> and work together to come up with the patch which covers both cases.
-> 
-> Yes. I also tried to make the patch with CONFIG_CC_OPTIMIZE_FOR_DEBUG guard but I couldn't find any codes that uses the guard.
-> And I was also worried about the CC_OPTIMIZE_FOR_DEBUG's behavior. It could be related with the optimization level of the compiler.
-> That's why I put the guard with #if CONFIG_IS_ENABLED(FPGA).
-> 
-> Best Regards,
-> Chanho Park
-> 
+On Sat, 26 Aug 2023 at 15:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 8/26/23 11:06, Sughosh Ganu wrote:
+> > The bootefi command passes the devicetree to the kernel through the
+> > EFI config table. Call the event handlers for fixing the devicetree
+> > before jumping into the kernel. This removes any devicetree nodes
+> > and/or properties that are specific only to U-Boot, and are not to be
+> > passed to the OS.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >   cmd/bootefi.c | 18 ++++++++++++++++++
+> >   1 file changed, 18 insertions(+)
+> >
+> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> > index f73d6eb0e2..c359a46ec4 100644
+> > --- a/cmd/bootefi.c
+> > +++ b/cmd/bootefi.c
+> > @@ -237,6 +237,23 @@ static void *get_config_table(const efi_guid_t *guid)
+> >       return NULL;
+> >   }
+> >
+> > +/**
+> > + * event_notify_dt_fixup() - call ft_fixup event
+> > + *
+> > + * @fdt:     address of the device tree to be passed to the kernel
+> > + *           through the configuration table
+> > + * Return:   None
+> > + */
+> > +static void event_notify_dt_fixup(void *fdt)
+> > +{
+> > +     int ret;
+> > +     struct event_ft_fixup fixup = {0};
+> > +
+> > +     fixup.tree.fdt = fdt;
+> > +     ret = event_notify(EVT_FT_FIXUP, &fixup, sizeof(fixup));
+> > +     if (ret)
+> > +             printf("Error: %d: FDT Fixup event failed\n", ret);
+> > +}
+> >   #endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
+> >
+> >   /**
+> > @@ -318,6 +335,7 @@ efi_status_t efi_install_fdt(void *fdt)
+> >       efi_carve_out_dt_rsv(fdt);
+> >
+> >       efi_try_purge_kaslr_seed(fdt);
+> > +     event_notify_dt_fixup(fdt);
+>
+> The event is already triggered in image_setup_libfdt(). Don't trigger it
+> twice.
 
+The reason I put an explicit event_notify call is because the
+image_setup_libfdt() call only calls the ft_fixup handlers if the
+livetree is not active. So the fixup handlers would not be called on
+platforms that enable livetree. Although I'm not sure if livetree
+should be disabled before the ft fixup has to happen, or platforms
+that need ft fixup should not enable OF_LIVE. Disabling the livetree
+is not happening now, so I am not sure how the fixup event should work
+on platforms which have OF_LIVE enabled.
 
-Hi Chanho,
+-sughosh
 
-Simon suggested to use CONFIG_CC_OPTIMIZE_FOR_DEBUG in this case here:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20230619102839.277902-1-eugen.hristev@collabora.com/
-
-As I told Michal, basically your patch and my patch do the same thing.
-I suggested him to pick the one that he thinks it's best. (or even 
-suggest another way)
-
-Eugen
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >       if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
+> >               ret = efi_tcg2_measure_dtb(fdt);
+>
