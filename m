@@ -4,61 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A20C83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 14:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9602C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 14:57:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EAFC86430;
-	Mon, 28 Aug 2023 16:41:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 9E42A86496;
+	Mon, 28 Aug 2023 16:57:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="pfPhyD1T";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QEHDi/0P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34B75864ED; Mon, 28 Aug 2023 16:41:13 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFDF88648C; Mon, 28 Aug 2023 16:57:38 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19643863E8
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 16:41:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2997086498
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 16:57:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: e893fc53-45b0-11ee-ac31-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id e893fc53-45b0-11ee-ac31-005056994fde;
- Mon, 28 Aug 2023 16:41:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=MyYQaGhhV+zzYIz4aVhLaz04PDklFl18C6+SLxn2HJg=;
- b=pfPhyD1Tj2r5imrJHC5jFZVm1TOjbgyrzRNZKfhaTbv99Wy35TgLV4YTA9S5k7pV5x7BZKG2mpZTQ
- FO2VugH6ek8eY2dvblZ247A6o/19w1qa8PJwsP9dWiS9olbudyQgNpk1zMKsloOXnUd2WaArRu9hxc
- CVLigRgzR/u1HSoFOOhude+GusMaLwd6Yb+JXY0vYFcW8o2fYEB6O1CsZLH4EyP5VTQwkN5KG3ffC5
- /7c3ku0HW0JweJ9FxAfvWsfbjjABQF/zien9MB79lMWWO4cvDbXxaB82xOdbod63dHipCjtPGpV4IJ
- zF6S8tRciGZMUBmN25cy9+1SqYr7Urg==
-X-KPN-MID: 33|N2zB2VsLQHKPngDIm8+gtvNEDIknwDl3nmZBleqecp5qc16c8L1g26rVytMa1Xr
- M3jHJy/0VDN4zjDnvBeMzuiTx+ERwqGWbH1bUYQlcHOc=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|HDu+taoSCC82fGWeesPhHwcx4ACp7h/pAjiQdu2x2BJ0KNQ3wR4ii7MPRu3ocTN
- 8yJqqyF4sFUMNA24ouog6ig==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id ece0365d-45b0-11ee-b743-00505699772e;
- Mon, 28 Aug 2023 16:41:09 +0200 (CEST)
-Date: Mon, 28 Aug 2023 16:41:08 +0200
-Message-Id: <87pm37qlff.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de,
- sjg@chromium.org
-In-Reply-To: <20230824195917.1687886-18-sjg@chromium.org> (message from Simon
- Glass on Thu, 24 Aug 2023 13:59:08 -0600)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59209b12c50so41551787b3.0
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 07:57:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1693234655; x=1693839455;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gBW+KWYqvGb9Ke5naNiJc/Y6rBiHWi+DYOzAW3EkNCU=;
+ b=QEHDi/0PbkEvx8oOiMVOHF/VYujCN+dCn8I/AuS1SWPH337rSrgIt69f/NYzqAa4pd
+ qNKyGxuZy5pfcbZUcpu5lNn14rXhETiOc2x8yV177LbB9xmKRQKGHfW5kEnykfqSYlOl
+ Gzr5iYwa/x3AqcE2J6OgZ5yb9RWP6jDRYwpWE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693234655; x=1693839455;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gBW+KWYqvGb9Ke5naNiJc/Y6rBiHWi+DYOzAW3EkNCU=;
+ b=iGvc8ysNEgnXnnHqKsmtEyHU+mTNLwGkTvru644n7Jq9B3cFvnMCawpZVYDYnDDzQX
+ 88Fia8jFRYRGcepUZNl4CYJfGdiCWY9AjYQS9Rzg8nNj/x8pbFPtpfjYXW6EAzlu8ZXt
+ HJicyOk7CtFWJbrpOEbu3/uSkaRIPMOWyHR0LmlKEa1CnM1+SKkbgxietjwAhDQbJ2ih
+ +FACtFKdLueSbvgFYFoud2omGVVYdZlVQa7ckwjO8UN42uMUwkXOVo9ZXa334Cvgguaw
+ 6LOE7h8SX8FcVhLVuY4D4Sb22UE6E6LYLwCboMZaD7CWdTMqifcD3CUHjzp3qUVlVhe6
+ ltGQ==
+X-Gm-Message-State: AOJu0Yw6FrjoGM28IdOIaL8ZMdhqKbVFVVqPx+JUx/Emkp/FHZFb4xgo
+ +TnF3VKKnxXMAv2HrJqx1b7nrw==
+X-Google-Smtp-Source: AGHT+IFTQAb/ra2jgetKt+ivlRkA2L5yg1X0UTPFGeB23xSuwJ+T+HCQwthIbwtOAeKTItHiaY7TDw==
+X-Received: by 2002:a05:690c:887:b0:595:352f:2284 with SMTP id
+ cd7-20020a05690c088700b00595352f2284mr3258943ywb.20.1693234654805; 
+ Mon, 28 Aug 2023 07:57:34 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
+ [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
+ by smtp.gmail.com with ESMTPSA id
+ i70-20020a816d49000000b0058038e6609csm2184614ywc.74.2023.08.28.07.57.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Aug 2023 07:57:34 -0700 (PDT)
+Date: Mon, 28 Aug 2023 10:57:32 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+	xypron.glpk@gmx.de
 Subject: Re: [PATCH 17/19] Make DISTRO_DEFAULTS as deprecated
+Message-ID: <20230828145732.GZ3953269@bill-the-cat>
 References: <20230824195917.1687886-1-sjg@chromium.org>
  <20230824195917.1687886-18-sjg@chromium.org>
+ <87pm37qlff.fsf@bloch.sibelius.xs4all.nl>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CjQoq8F9px+nyPgm"
+Content-Disposition: inline
+In-Reply-To: <87pm37qlff.fsf@bloch.sibelius.xs4all.nl>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,84 +94,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Thu, 24 Aug 2023 13:59:08 -0600
-> 
-> Encourage people to move to distro boot. Add a short migration guide.
 
-Doesn't this commit message say the exact opposite of what the patch does?
+--CjQoq8F9px+nyPgm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  boot/Kconfig            |  7 ++++++-
->  doc/develop/bootstd.rst | 23 +++++++++++++++++++++++
->  2 files changed, 29 insertions(+), 1 deletion(-)
-> 
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 02b33323d726..4742ee2027bd 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -781,7 +781,7 @@ config SYS_BOOT_RAMDISK_HIGH
->  endmenu		# Boot images
->  
->  config DISTRO_DEFAULTS
-> -	bool "Select defaults suitable for booting general purpose Linux distributions"
-> +	bool "(deprecated) 'Defaults suitable for booting general purpose Linux distributions"
->  	select BOOT_DEFAULTS
->  	select AUTO_COMPLETE
->  	select CMDLINE_EDITING
-> @@ -789,6 +789,11 @@ config DISTRO_DEFAULTS
->  	select HUSH_PARSER
->  	select SYS_LONGHELP
->  	help
-> +	  Note: These scripts have been replaced by Standard Boot. Do not use
-> +	  them on new boards. See 'Migrating from distro_boot' at
-> +	  doc/develop/bootstd.rst
-> +
-> +
->  	  Select this to enable various options and commands which are suitable
->  	  for building u-boot for booting general purpose Linux distributions.
->  
-> diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd.rst
-> index ec3136535783..8b2f0849a1c0 100644
-> --- a/doc/develop/bootstd.rst
-> +++ b/doc/develop/bootstd.rst
-> @@ -458,6 +458,28 @@ ready    File was loaded and is ready for use. In this state the bootflow is
->  =======  =======================================================================
->  
->  
-> +Migrating from distro_boot
-> +--------------------------
-> +
-> +To migrate from distro_boot:
-> +
-> +#. Update your board header files to remove the BOOTENV and BOOT_TARGET_xxx
-> +   defines. Standard boot finds available boot devices automatically.
-> +
-> +#. Remove the "boot_targets" variable unless you need it. Standard boot uses a
-> +   default order from fastest to slowest, which generally matches the order used
-> +   by boards.
-> +
-> +#. Make sure that CONFIG_BOOTSTD_DEFAULTS is enabled by your board, so it can
-> +   boot common Linux distributions.
-> +
-> +An example patch is at migrate_patch_.
-> +
-> +If you are using custom boot scripts for your board, consider creating your
-> +own bootmeth to hold the logic. There are various examples at
-> +`boot/bootmeth_...`.
-> +
-> +
->  Theory of operation
->  -------------------
->  
-> @@ -768,3 +790,4 @@ Other ideas:
->  .. _BootLoaderSpec: http://www.freedesktop.org/wiki/Specifications/BootLoaderSpec/
->  .. _distro_boot: https://github.com/u-boot/u-boot/blob/master/boot/distro.c
->  .. _bootflow_h: https://github.com/u-boot/u-boot/blob/master/include/bootflow.h
-> +.. _migrate_patch: https://patchwork.ozlabs.org/project/uboot/patch/20230727215433.578830-2-sjg@chromium.org/
-> -- 
-> 2.42.0.rc1.204.g551eb34607-goog
-> 
-> 
+On Mon, Aug 28, 2023 at 04:41:08PM +0200, Mark Kettenis wrote:
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Thu, 24 Aug 2023 13:59:08 -0600
+> >=20
+> > Encourage people to move to distro boot. Add a short migration guide.
+>=20
+> Doesn't this commit message say the exact opposite of what the patch does?
+
+Given the unintentionally vague wording everything has, yes and no.
+The prompted question needs to be reworded, not just prepended with
+"deprecated". And yes, the commit message expanded upon too. As the rest
+of the patch explains and documents, platforms should use Standard Boot
+in order to boot arbitrary off the shelf stock distributions easily.
+
+--=20
+Tom
+
+--CjQoq8F9px+nyPgm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTstdEACgkQFHw5/5Y0
+tyzfnQv/Uf++sn3wiAmFy0XCXDh3mxfQzZrAZwxcHoDUvMVFGz406XmJx9MGlNg9
+7v67DJKFubqPFxXRR/In3RlijluSWU9w8E/1ZJ3XGQLVdrIUFrye6f0Mtn++ZLv/
+O+z+IBo83/9AKTBlYB/gO3GKVMPa3H55WAYyBDYnccByD5dPr2c1VX4jbrSu8955
+vHOacZj/I3wFpRnqJAHmg9PrS5CpaGZJ5Yp9ImZMKHSGJR4hifhtdYkmrHbEpxV6
+UY30L7mIzFhQ2r8m3kceBQ8hwl0+3IHDeX3kORSxnSNjgdrRGMXYv/+Hq4e1o8Pu
+UOhRNny4qkXrEjVKRJJTB/Am8FAWLLkUVgrVbFpPO4j5Ttr8HCjCDjqCnqh6g9j3
+ueDRx6PrCzzUurcX8b6qxG1dWXmLqhksp+BQQouuTkxOGnPIJCQ+OUtjZuv6bmB8
+qsccwSwj5UME6deRHN6tze9xdobTdJNWUUoU42xQkk3wcNpGx1tlR5evgxvhs7Yn
+zLlKu5cz
+=0JX8
+-----END PGP SIGNATURE-----
+
+--CjQoq8F9px+nyPgm--
