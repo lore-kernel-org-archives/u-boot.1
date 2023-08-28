@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F182C83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:55:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61DA5C83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:55:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C4EF864CB;
-	Mon, 28 Aug 2023 19:54:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 82299864DB;
+	Mon, 28 Aug 2023 19:55:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="de+g9C83";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZOMf8ouN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81B8E864CD; Mon, 28 Aug 2023 19:54:57 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id BFDD9864DB; Mon, 28 Aug 2023 19:54:59 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A3D864CB
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:54:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76F02864D2
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:54:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-58d70c441d5so43998637b3.2
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:54:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5230a22cfd1so4450033a12.1
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:54:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693245293; x=1693850093;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KQLseBlTUGU4DDdLZtZcvHi5/NX/uEAsFXD1GhiiSGo=;
- b=de+g9C83UKTEvKKZ7Qa+/Z2h69iB4XjzjlrngAIU7vNnZd3/njCs7dop2O0YjkGmyz
- L1BD3OhY/lcjGHD5xN0YXOohFMS3u0CWi3PQPjV7bf2NCelNIgygHnuSWITTRMGQo0sa
- DRZSXdVEVaVQyl/ATbjrUqbQSQt5wZBquL9Pg=
+ d=chromium.org; s=google; t=1693245295; x=1693850095;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=S7eqn1gYk2bbw+evQTqKfAaKoCj04944uwkcsUgU2O8=;
+ b=ZOMf8ouNUCMdxpZ9BVwyQAb8hoEmt1z9YI3RLnuiAmMoKhNy85hZke6056FmCAQXjw
+ k0CzWZmUjn4fiOc+LUjwED6yvSPxbVP5z0JDbnR3N/yxS9+4pZVFD/tKWQ1CFdB1qcVA
+ 0I1HS2922Qn1bdrxCrGgnVDaNWT2z3orUxkbE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693245293; x=1693850093;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KQLseBlTUGU4DDdLZtZcvHi5/NX/uEAsFXD1GhiiSGo=;
- b=U65PjhWYMAGNxTa2VSR5VkVMVCoenDtU2y4Ka94PTnjL1m0XdvVjw7WY/HiyZQkrud
- PGJLbjUopYMiF2RGi7L0b1CpmPivFrCpv/dvL8+6lNSexbLw3rf5UxrkwkxvPGLsphOA
- eE2FrnM/iQTcDOTR484O/LMureRGC9IhgvNK8TCnsrZAynyz7nQXivt3dJ996PKMfntq
- j5V3bDcoERyDUS874dcUVWB9O1p/pZd2U3rvYF6YGDstBfLj7VnpWwwcyc39kRJUqFMa
- 20ebKvssIaZNCmEDJFfgXIejToPtVBUKS+7DQhWt4ztH9fLkpsU+R+xFAfuCXBdBy/+b
- E4wQ==
-X-Gm-Message-State: AOJu0Yx5dS3AErvLLPfttxboDUh3yVuHhO25pTVlF5aj3V6E73K5fkPS
- a95ydnITcqnZi/v8XYIW7jK4eQ==
-X-Google-Smtp-Source: AGHT+IFPO4KSr5TJQXFTwi3ZQa8a/TFwTZXLhxArXMygQio3Mi0ndGUnOiobDbAuvDMNr2hHNN5vNQ==
-X-Received: by 2002:a81:7cc4:0:b0:592:3d93:647a with SMTP id
- x187-20020a817cc4000000b005923d93647amr20786355ywc.29.1693245292415; 
- Mon, 28 Aug 2023 10:54:52 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
- [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
- by smtp.gmail.com with ESMTPSA id
- o3-20020a817303000000b00583f8f41cb8sm2240066ywc.63.2023.08.28.10.54.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Aug 2023 10:54:52 -0700 (PDT)
-Date: Mon, 28 Aug 2023 13:54:50 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <20230828175450.GJ3953269@bill-the-cat>
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
+ d=1e100.net; s=20221208; t=1693245295; x=1693850095;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=S7eqn1gYk2bbw+evQTqKfAaKoCj04944uwkcsUgU2O8=;
+ b=a/iaSQTjGXQ5ch4RRH0gNemje9jXP4BhUxwryv+1HPQT7YAv2CpYS6bUcPTNZoUuAd
+ V72ufMP3zVTHdfAOnP6pLWEVnEU3WadGTYfFJeTNNYJ71Pows7TTGEnMP7+YOXhMSKJ0
+ JlcxERUscNQukdWpK9mWrwQ4sI3ekWuVKn0YRznuOqWKC44o9nSmlY0C4sfMuovrLYbD
+ ZE4dEC9ynq2yoZOew6fF6bC37LWuQR2DnUwBDzFiEiUhefRX/yhAkKPeKDWQbdeGiaG6
+ 1gYu1Ox5Mdil3tlOYhrT4niVtxOslOL2GRPwy2Awd8ZvL9TQeyT6LrNazeAnXyr1RvWx
+ 8uag==
+X-Gm-Message-State: AOJu0YwhCBmIGn9WjcQtW+srviUo5ST8zrdptIG1iRR8mtSs/SjRE/Jt
+ 9AOcnrz3d2GRkSDMXiWtOxxS1v9Gduiw5BngWY9TFw==
+X-Google-Smtp-Source: AGHT+IFvNcDh3CrXlyyOPXaMWns2TF2DVwKjmq5ZOumHxz/Go7yMHjVX9bePqSHJZP6ySgx/eHcnBeQeh+hcYC0ly/E=
+X-Received: by 2002:aa7:d741:0:b0:522:ab06:7213 with SMTP id
+ a1-20020aa7d741000000b00522ab067213mr18722901eds.27.1693245294830; Mon, 28
+ Aug 2023 10:54:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ewDm33lSo9mljmpT"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
+ <20230822121026.1007105-6-alpernebiyasak@gmail.com>
+ <CAPnjgZ0hj+0kFYtTUTQAQpDN9rgt-F8jHm_boeve6SLMeOV1Ww@mail.gmail.com>
+ <b32aa9eb-d355-4ff5-8f6d-0b1701da8a0c@gmail.com>
+In-Reply-To: <b32aa9eb-d355-4ff5-8f6d-0b1701da8a0c@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 28 Aug 2023 11:54:42 -0600
+Message-ID: <CAPnjgZ33DwdxrW7ys9n8DRMnbpKdzqunEozOFf-5LKpnhh3bZA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/7] arm: qemu: Enable ramfb by default
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Asherah Connor <ashe@kivikakk.ee>, Alexander Graf <agraf@csgraf.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,81 +89,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---ewDm33lSo9mljmpT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Aug 28, 2023 at 10:19:55AM -0600, Simon Glass wrote:
-> Hi,
->=20
-> On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
-e:
+Hi Alper,
+On Mon, 28 Aug 2023 at 09:46, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>
+> On 2023-08-22 21:56 +03:00, Simon Glass wrote:
+> > Hi Alper,
 > >
+> > On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>
+> >> From: Alexander Graf <agraf@csgraf.de>
+> >>
+> >> Now that we have everything in place to support ramfb, let's wire it up
+> >> by default in the ARM QEMU targets. That way, you can easily use a
+> >> graphical console by just passing -device ramfb to the QEMU command line.
+> >>
+> >> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+> >> [Alper: Rebase on bochs changes, add pre-reloc init, error handling]
+> >> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >> ---
+> >>
+> >> Changes in v2:
+> >> - Rebase on "qemu: arm: Enable Bochs, console buffering, USB keyboard"
+> >> - Drop env changes from ARM (necessary but in prerequisite series)
+> >> - Drop imply VIDEO, SYS_CONSOLE_IN_ENV changes from ARM (in prereq.)
+> >> - Probe QFW in ARM QEMU board_early_init_f to bind ramfb pre-reloc
+> >> - Add IS_ENABLED(CONFIG_QFW) check and error handling to ARM QEMU
+> >>
+> >>  arch/arm/Kconfig                    |  3 +++
+> >>  board/emulation/qemu-arm/qemu-arm.c | 41 +++++++++++++++++++++++++++++
+> >>  2 files changed, 44 insertions(+)
+> >>
+> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> >> index 1fd3ccd1607f..7afe26ac804f 100644
+> >> --- a/arch/arm/Kconfig
+> >> +++ b/arch/arm/Kconfig
+> >> @@ -1046,6 +1046,9 @@ config ARCH_QEMU
+> >>         imply USB_XHCI_PCI
+> >>         imply USB_KEYBOARD
+> >>         imply CMD_USB
+> >> +       imply VIDEO_RAMFB
+> >> +       imply BOARD_EARLY_INIT_F
+> >> +       imply BOARD_EARLY_INIT_R
+> >>
+> >>  config ARCH_RMOBILE
+> >>         bool "Renesas ARM SoCs"
+> >> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+> >> index 942f1fff5717..23ef31cb7feb 100644
+> >> --- a/board/emulation/qemu-arm/qemu-arm.c
+> >> +++ b/board/emulation/qemu-arm/qemu-arm.c
+> >> @@ -11,6 +11,7 @@
+> >>  #include <fdtdec.h>
+> >>  #include <init.h>
+> >>  #include <log.h>
+> >> +#include <qfw.h>
+> >>  #include <usb.h>
+> >>  #include <virtio_types.h>
+> >>  #include <virtio.h>
+> >> @@ -102,6 +103,46 @@ static struct mm_region qemu_arm64_mem_map[] = {
+> >>  struct mm_region *mem_map = qemu_arm64_mem_map;
+> >>  #endif
+> >>
+> >> +int board_early_init_f(void)
+> >> +{
+> >> +       struct udevice *dev;
+> >> +       int ret;
+> >> +
+> >> +       /*
+> >> +        * Make sure we enumerate the QEMU Firmware device to bind ramfb
+> >> +        * so video_reserve() can reserve memory for it.
+> >> +        */
+> >> +       if (IS_ENABLED(CONFIG_QFW)) {
+> >> +               ret = qfw_get_dev(&dev);
+> >> +               if (ret) {
+> >> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
 > >
-> > Provide a way for removing certain devicetree nodes and/or properties
-> > from the devicetree. This is needed to purge certain nodes and
-> > properties which may be relevant only in U-Boot. Such nodes and
-> > properties are then removed from the devicetree before it is passed to
-> > the kernel. This ensures that the devicetree passed to the OS does not
-> > contain any non-compliant nodes and properties.
+> > We should only present an error if the device is present but
+> > failed...so if the user doesn't provide the flag, all should be well.
+>
+> I don't understand what you mean by "user doesn't provide the flag". But
+> I assume this should ignore the error (unless what?) so that we can
+> continue to boot. Would that apply for board_early_init_r below as well?
+
+I thought you said there was a qemu flag to enable ramfb? So add it to
+the DT and then the device can (in its bind routine) decide not to be
+bound by returning -ENODEV
+
+>
+> >> +                       return ret;
+> >> +               }
+> >> +       }
+> >> +
+> >> +       return 0;
+> >> +}
+> >> +
+> >> +int board_early_init_r(void)
+> >> +{
+> >> +       struct udevice *dev;
+> >> +       int ret;
+> >> +
+> >> +       /*
+> >> +        * Make sure we enumerate the QEMU Firmware device to find ramfb
+> >> +        * before console_init.
+> >> +        */
+> >> +       if (IS_ENABLED(CONFIG_QFW)) {
+> >> +               ret = qfw_get_dev(&dev);
+> >> +               if (ret) {
+> >> +                       log_err("Failed to get QEMU FW device: %d\n", ret);
+> >> +                       return ret;
+> >> +               }
+> >> +       }
+> >> +
+> >> +       return 0;
+> >> +}
+> >> +
+> >>  int board_init(void)
+> >>  {
+> >>         return 0;
+> >> --
+> >> 2.40.1
+> >>
 > >
-> > The removal of the nodes and properties is being done through an
-> > EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
-> > behind any Kconfig symbol.
+> > The glue here feels like a bit of a hack...we should rely on normal DT
+> > mechanisms here.
 > >
-> > I have only build tested this on sandbox, and tested on qemu arm64
-> > virt platform. This being a RFC, I have not put this through a CI run.
-> >
-> > Sughosh Ganu (5):
-> >   dt: Provide a way to remove non-compliant nodes and properties
-> >   fwu: Add the fwu-mdata node for removal from devicetree
-> >   capsule: Add the capsule-key property for removal from devicetree
-> >   bootefi: Call the EVT_FT_FIXUP event handler
-> >   doc: Add a document for non-compliant DT node/property removal
-> >
-> >  cmd/bootefi.c                                 | 18 +++++
-> >  .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
-> >  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
-> >  include/dt-structs.h                          | 11 +++
-> >  lib/Makefile                                  |  1 +
-> >  lib/dt_purge.c                                | 73 +++++++++++++++++++
-> >  lib/efi_loader/efi_capsule.c                  |  7 ++
-> >  7 files changed, 179 insertions(+)
-> >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
-> >  create mode 100644 lib/dt_purge.c
->=20
-> What is the point of removing them? Instead, we should make sure that
-> we upstream the bindings and encourage SoC vendors to sync them. If we
-> remove them, no one will bother and U-Boot just becomes a dumping
-> ground.
+> > Regards,
+> > Simon
 
-It's about having a defined process to remove them, rather than an
-ad-hoc process like one can do today to remove them. And it's about
-having control over the situation rather than dismissing it, as vendor
-can already say they used $this version of the software for validation,
-so patches-on-top aren't out of the question.
+Regards.
 
---=20
-Tom
-
---ewDm33lSo9mljmpT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTs32oACgkQFHw5/5Y0
-tyyqJwwAoNr5qkXVmJo7OMkFVa4VcXX0mQueBPjqOiSIIgGZ/5u7o3bTZbrL3NA9
-eJY6AMKBAxGytWJozA+gW+mGbzY5zKdjs8qmiG/AoPv6oEcwdAStMHbFhLLUHHQE
-pEI5cGHW2JrXz0QIjYdj2rKM7DdMxzdIrM72TjJBnMqvNyfw6zBWoUpxPYk4wcbT
-pvNtmCOXoOUV18LxoLjTkhmrpAb4x29k7HCBZREUrVkhsYiX247hfzVlmH6XS8ua
-oUDk1RzoXfUyQ5cPWBXYt7kYyPJ7G8/QXOiA9T7MOt0ba72n+NS4AtJqST/o6ZyV
-3FjxGQLA79RueyT8//DBtcVe4ld7Z5T8oNsbLG4wkLf4gKS5Wd4vlvbqX1oFVW4U
-jI25I3JhBz0CU6lBtRACZFpfCp4A88I7i85fMp5kwlIEl6Zw71c9lwgtbR0H+2zK
-bDRLhKIUlaLTBvTfvwgQ9oCsQLjgFAa96NJMrZiJfq6SSqyzqQawcwPIYDv501ej
-vW3WJ3Q6
-=ywcJ
------END PGP SIGNATURE-----
-
---ewDm33lSo9mljmpT--
+Simon
