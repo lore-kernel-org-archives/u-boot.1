@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CB6C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 08:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13991C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 08:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2872386423;
-	Mon, 28 Aug 2023 10:27:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 77F83864AF;
+	Mon, 28 Aug 2023 10:28:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kfTaWQPW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qesHmGtn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA1FD864A7; Mon, 28 Aug 2023 10:27:15 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 061B5864B9; Mon, 28 Aug 2023 10:28:10 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FC4686421
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:27:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4263886421
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:28:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5280ef23593so3881340a12.3
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 01:27:13 -0700 (PDT)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50091b91a83so4393318e87.3
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 01:28:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693211233; x=1693816033;
+ d=linaro.org; s=google; t=1693211286; x=1693816086;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ip1FXMeD/0Py3wEgBvpfy///8WKMOwxIiZ/aKarH2Es=;
- b=kfTaWQPWD3ZC4pPcyUpjXcHa72dcYe6XN2JVE7Ul9cSAWUqJIrsLn+beQw7zifV/hk
- RLpGUiGdLqsDxy8ukFINjod0q4P837oWCNH9OsF2omeogosqK0a4tuEBml6yOnPllA48
- Pt9kGr++Thk/QYa3pneRClrW6b0Mj5D8Y5DL6QNroK3YKBGSx6qj3cjYHbBdONBcHlyc
- Tmg1Z1Z5xH3oUaN5zGHQu6o5L4G+gzxHvblvARDK2lketG/qiQBeINp/f6E8nxKomiyk
- jzsYoXb3PKxcd9+1WZLg+V07thheQy7AqEjBm0wJRqIjkPSLI6zmabZKQCT4VFJEJbMN
- mAIA==
+ bh=tRk1PYzvdFhVKNU3wDlXxrdMcxPwCgondw1ErsBHBbs=;
+ b=qesHmGtnYEPu4G6VJLRLODrJNgjbgaLOQ/Y+8LY9Y7DQt4SfkyeTm7G9l0poPyIkZW
+ i+Zwvh67fjVGldMhzUkRHgshV+y0WFKznuYG/VRp/F/DwAWcTyWxmYW/abZrc5Mr+384
+ QBdjfnGaFSi5MkH6gTq3A04qEs60Drig0Z/mh5f5byEv6QNcK6HqwF/Ub605om8wthGv
+ iqb5VuSYptlysAYo7maSeNAUrOG2FBTZ1VcGPAiqgJD193TC+Qwe1xcaePOqPzTfMUG9
+ MGSdTJQLztsN/li4dTo1kEpWFI7ApzT72rK2xpuSiMeIBfdnr1RIV5AD5/VRw+RXahSQ
+ YA5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693211233; x=1693816033;
+ d=1e100.net; s=20221208; t=1693211286; x=1693816086;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ip1FXMeD/0Py3wEgBvpfy///8WKMOwxIiZ/aKarH2Es=;
- b=GcnZqGW5xI6K/y8pci5+stF0guT49WLTsUdKXmoLmV4/6XB5+n0TcGha/wEc5cwMVG
- YdhFvZaWXUvdTqT0HdbigtM84Pyn1Ljjnif9P3Ppe1+nDkj5OTPTbFXiQCdWHrFy/y1z
- arNITZ78zy9PqSlHuKJw8+13VfC1KJUH3VbZS7KNL+H6RminUPB0tY+o9gkRVArXw/kb
- 6ebKE+NETGkiHopfUkXspMG39uqWi+K9Ot5Bm5kDLsfNF6aNJpWcZf2ytkelXneo/FjF
- DX9HXN0i5IaCAlHvuctGhB7MJadtD/3VkpyWBX1E+miHQRITfep3krvbhWapU3SimWlZ
- Eq/g==
-X-Gm-Message-State: AOJu0YxizAChBiLm0HzSTnklr3CxrX1pV5Zid4bhLw6+QujxS6af49ED
- zeNvQlViDuLzq0h9nvBh7ft9hq03/NA5cukzPH6cgQ==
-X-Google-Smtp-Source: AGHT+IFappqfjkx2Q13GNy7Fd/edTtx4q0gqv7TcwYjmPD5yl2VF140fbb7Kw86SElY3CuUCcHf7WTrvRJL4A6zmNoM=
-X-Received: by 2002:aa7:c508:0:b0:523:1004:1c9a with SMTP id
- o8-20020aa7c508000000b0052310041c9amr16302337edq.35.1693211232597; Mon, 28
- Aug 2023 01:27:12 -0700 (PDT)
+ bh=tRk1PYzvdFhVKNU3wDlXxrdMcxPwCgondw1ErsBHBbs=;
+ b=eMZ6Uu6iRQOZqf6iRNp2gQWxIn9IaMhufddH8G1JJQSfgqFk4tP8Tx2sl2U9gfAyKs
+ 0g++fYi2p/vMSCLnNjKUdzMgxdwTAo0vwPcMma60W4Bjg+Redngloh7LWwUrsvFDol7j
+ kDKBfWeu5TVGiWnkWr2qgp4fKA5IuIg+ZuA/Zu0xqDEqqf10s7aYvzruu2+3fMVTUDVV
+ hDFEEvBlBkzzY/f/BklWdtOkkNAEX1p70rf/hzYDRPlE1Soqt0mBAxKCSAiEyQ+iUR8q
+ OgmAekHquaGlXO5Vxdr2iFL1Ubz3OEyzlWwL7k5qQLpgMSmBOItwvlPpVZRvM1UG8H7o
+ tmaQ==
+X-Gm-Message-State: AOJu0YzhXuCC3JkkvWqYWrcXT0IKjE6pXCyoO8TZdce6khiJ+5oHSwQR
+ p+tCFPiOfLVVqUAs2miVlLjxtLITgE0zs6VMbCBjhA==
+X-Google-Smtp-Source: AGHT+IHl+2C6sWtZqTXieXZouuhUpw77PS/8O4k7J2qC5GNw5p9aTY2zpHqYllssnPrvzB7eE2eGwEI2S8CASD1CwjQ=
+X-Received: by 2002:a05:6512:3586:b0:4fe:8c1d:9e81 with SMTP id
+ m6-20020a056512358600b004fe8c1d9e81mr15863052lfr.36.1693211286413; Mon, 28
+ Aug 2023 01:28:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
  <20230826090633.239342-2-sughosh.ganu@linaro.org>
- <0a168e1e-546e-c149-d715-ccacfeb4208f@gmx.de>
-In-Reply-To: <0a168e1e-546e-c149-d715-ccacfeb4208f@gmx.de>
+ <a1b4dfb2-bbf7-5487-098f-c4c46ecf631c@gmx.de>
+In-Reply-To: <a1b4dfb2-bbf7-5487-098f-c4c46ecf631c@gmx.de>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 28 Aug 2023 13:57:01 +0530
-Message-ID: <CADg8p96mk3YzVNLJBMY6oQ_zWvP94W3T5iiPy7FX9B9g+-qnuQ@mail.gmail.com>
+Date: Mon, 28 Aug 2023 13:57:55 +0530
+Message-ID: <CADg8p96vc7_hFa668h5A8QPDuoVEPc+ggNnx9-iFaTsjcVns7Q@mail.gmail.com>
 Subject: Re: [RFC PATCH 1/5] dt: Provide a way to remove non-compliant nodes
  and properties
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -89,9 +89,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 26 Aug 2023 at 15:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
+On Sat, 26 Aug 2023 at 16:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 8/26/23 11:06, Sughosh Ganu wrote:
 > > Add a function which is registered to spy for a EVT_FT_FIXUP event,
@@ -139,6 +137,22 @@ On Sat, 26 Aug 2023 at 15:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > >   obj-y += crc16.o
 > >   obj-y += crc16-ccitt.o
 > > +obj-y += dt_purge.o
+>
+> SPL can be the last boot stage (e.g. for Falcon Mode). So placing this
+> under 'ifndef CONFIG_SPL_BUILD' is not correct.
+>
+> You need some logic that identifies into which boot stage this code
+> belongs, e.g. use obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT).
+
+Okay. Will check and add this under the suggested config symbol.
+
+-sughosh
+
+>
+> Best regards
+>
+> Heinrich
+>
 > >   obj-$(CONFIG_ERRNO_STR) += errno_str.o
 > >   obj-$(CONFIG_FIT) += fdtdec_common.o
 > >   obj-$(CONFIG_TEST_FDTDEC) += fdtdec_test.o
@@ -222,23 +236,3 @@ On Sat, 26 Aug 2023 at 15:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 > > +}
 > > +EVENT_SPY(EVT_FT_FIXUP, dt_non_compliant_purge);
 >
-> This may interfere with other fixup code requiring U-Boot specific
-> properties like bootmeth_vbe_ft_fixup().
-
-Okay, I was thinking if we can have a flag to indicate which event
-handler is to be run. I will check this, and add a separate event if
-this solution turns to be overly complex.
-
->
-> We should ensure that call dt_non_compliant_purge() is the last fixup
-> action. Please, consider a separate event.
-
-Will check.
-
->
-> This code does not check if the property or node complies to the device
-> tree scheme or not. So why not call the function dt_purge()?
-
-Okay
-
--sughosh
