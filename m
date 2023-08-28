@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E80C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 15:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6430EC83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F18FD864D3;
-	Mon, 28 Aug 2023 17:50:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 861C186430;
+	Mon, 28 Aug 2023 18:09:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HhFaqKsA";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="qPQR95i+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAE3F864F4; Mon, 28 Aug 2023 17:50:15 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 11E3B86423; Mon, 28 Aug 2023 18:09:31 +0200 (CEST)
+Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
+ [IPv6:2607:f8b0:4864:20::e32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D0A7864C4
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 17:50:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E5F586496
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:09:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-59205f26e47so38708107b3.2
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 08:50:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=alvarofernandogarcia@gmail.com
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-44d4d997dcfso1323552137.0
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 09:09:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693237812; x=1693842612;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R9cYFTKpPN4u9rogYlWaKkJnQbolGkl/coCRuBa0su0=;
- b=HhFaqKsAmzVKhp5wMgL5JLU/YQ3I4jLhLloC31/5LZnXHv/T4eMB7udoQmvpWQSIcX
- fvZLMfulGS7VJ+hUMChQkQIvzLfhlk5StHMAkrsNYovqcW4rnoURyA7HZuqZ0cckCS+/
- 6Q1emlNRjechjOiFacwIpwZwsSMERztRK7RvQ=
+ d=gmail.com; s=20221208; t=1693238967; x=1693843767;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=W5MbcTQTbDhmpmmsFNkUGeRIOgMWGnZCUTe0cY4BnSU=;
+ b=qPQR95i+R7N+8WS+KPIFRiL/A6NePLWN7zlMTtS6NiWO0pUhS931Fs96wzGn/IqbMj
+ rOTRRwANaCc8DU8yBEDXo/xWo1DnaqgdvxqJAplKmRQuxfxMorbn+RWvaEsof1uIJk20
+ PYNy+ktAcS9GauM3SGOD5O+ZjsG7zKllQPT7ufaqdl/d03rAatwF/s5ri8wNI4Lu5q3B
+ osaJNgG070Lw2H4YqyoFiDF8ARZkTAb/9rxpUOdL/TgDZPZXcEa1d4R3H6oUvqu0mNU3
+ W2r/axAUefLCTR+YDbjWRC2FopcElehW9RV/OXPaSKu7slWCVPjhD4vep7Qcee9sUVRu
+ a7nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693237812; x=1693842612;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R9cYFTKpPN4u9rogYlWaKkJnQbolGkl/coCRuBa0su0=;
- b=OE1gN70nmrUZTmoyc6qj4q18aUmqkQSU68peCLHwQcfUv22988oR3AEt003udcNYwc
- CqkqsuoE05CDt05Sm1szVlIrXNN0OGE6j2HkKeWpFMc0UthN0KthTJm45WxGrSn4CVN8
- npnp13P9vqrIOf0cVxVpDV+HnXt8mt5aiGN955GWoEfp3z+pTAveYyLTT95OyRZZH/wr
- vLR0buUovDoYo8ptoPPos3xkrTGu4AHf2lBeQFtFw0iB6B5iKMFAp4ebt9BKYaAZdDQ3
- /dCeGKdeiiXuRkugR3Je1RO9exACDYobdfYH/xoT+v52M1nj1JP8pAy0EF4ujX1uzx1o
- dZrw==
-X-Gm-Message-State: AOJu0YxJcsMWyZ56opeTLhObGnXk9NL84HJ4b/DdgbnJVxZwswIhVxjc
- sZNI4ssDLsL+pvnShHZuMzfe/A==
-X-Google-Smtp-Source: AGHT+IFHk5lYuN2sjJfHU+wxe0iqk3xjgHRJmmnhz5s9ugD7imsjdYJQqhqvIZvrFvddUQOSjGS9ig==
-X-Received: by 2002:a25:d2c4:0:b0:d07:5b87:ec56 with SMTP id
- j187-20020a25d2c4000000b00d075b87ec56mr25436016ybg.14.1693237811889; 
- Mon, 28 Aug 2023 08:50:11 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
- [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
- by smtp.gmail.com with ESMTPSA id
- k2-20020a5b0a02000000b00d43697c429esm1631430ybq.50.2023.08.28.08.50.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Aug 2023 08:50:11 -0700 (PDT)
-Date: Mon, 28 Aug 2023 11:50:09 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, u-boot@lists.denx.de,
- lukma@denx.de, seanga2@gmail.com, git@amd.com
-Subject: Re: [PATCH] clk: Dont return error when assigned-clocks is empty or
- missing
-Message-ID: <20230828155009.GG3953269@bill-the-cat>
-References: <20230711095128.19086-1-ashok.reddy.soma@amd.com>
- <32e261a0-f4eb-04f4-f31a-33414a292146@amd.com>
- <20230825143959.GH3953269@bill-the-cat>
- <3d815d7d-a091-6f58-9d3d-c65e9eac8f41@amd.com>
+ d=1e100.net; s=20221208; t=1693238967; x=1693843767;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W5MbcTQTbDhmpmmsFNkUGeRIOgMWGnZCUTe0cY4BnSU=;
+ b=Sgp49FSY/Iz+Kdlzu37caM7fG52V6p6dAI3FhyVzawUHUNsPmKIqkwBtdVunMs5OZI
+ vI4Y4dQjFt+pykTS/TtFqAtdWMZQg69reX1ICfb8xdjwuTIpdExvKYob0y8ulvm/7C1G
+ R/NFu39OkRkZfssv8bSqgl2ZZmghOlkakq6mmO8CQeYSLhYwIhoz5jDX2frF/J+XTM2g
+ gNrzqbVYTAgv45Q7hFUYCAGJ/W0+Y4/egTvWMRwmmUgjVsK/joVavDwgD8srBx3p47PD
+ e/JeyqpBSq9Di7ET3GxX2nXbfZU01Io9KRu6hJUTAYjpKCnp01/zfReOxGvB0VjBJrY3
+ 4CNA==
+X-Gm-Message-State: AOJu0YwHXMa3frWcCjoOau2os0UFAnhD2YwuOmGzZkBYg0y8TCFTOUpR
+ 75Oxgh9hgb32DLrzhRxC6vU5lyEIXpN/4GfDveU=
+X-Google-Smtp-Source: AGHT+IEsgmEVr4iLnjJiqE0AeRdFnvObtArM9/hLZmyo1YEux8UaZg42sIEIQj5Mb0Gm6yjVffq8LourNGgFw27m4SE=
+X-Received: by 2002:a05:6102:150:b0:44e:a9b6:5290 with SMTP id
+ a16-20020a056102015000b0044ea9b65290mr6726420vsr.19.1693238966912; Mon, 28
+ Aug 2023 09:09:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GBfgtF4/a1CJteAv"
-Content-Disposition: inline
-In-Reply-To: <3d815d7d-a091-6f58-9d3d-c65e9eac8f41@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230821210927.GL3953269@bill-the-cat>
+ <20230824092731.GA56529@e130802.arm.com>
+In-Reply-To: <20230824092731.GA56529@e130802.arm.com>
+From: =?UTF-8?Q?Alvaro_Fernando_Garc=C3=ADa?= <alvarofernandogarcia@gmail.com>
+Date: Mon, 28 Aug 2023 13:09:17 -0300
+Message-ID: <CAJei4s+35_NVRHrVFq2y3vPXmPucaTpiwqAJzzkKAHiC=6P0qw@mail.gmail.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ nd@arm.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,87 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---GBfgtF4/a1CJteAv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+El jue, 24 ago. 2023 06:27, Abdellatif El Khlifi <
+abdellatif.elkhlifi@arm.com> escribi=C3=B3:
 
-On Mon, Aug 28, 2023 at 12:25:30PM +0200, Michal Simek wrote:
->=20
->=20
-> On 8/25/23 16:39, Tom Rini wrote:
-> > On Fri, Aug 25, 2023 at 09:15:09AM +0200, Michal Simek wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 7/11/23 11:51, Ashok Reddy Soma wrote:
-> > > > There is a chance that assigned-clock-rates is given and assigned-c=
-locks
-> > > > could be empty. Dont return error in that case, because the probe o=
-f the
-> > > > corresponding driver will not be called at all if this fails.
-> > > > Better to continue to look for it and return 0.
-> > > >=20
-> > > > Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> > > > ---
-> > > >=20
-> > > >    drivers/clk/clk-uclass.c | 8 +++++++-
-> > > >    1 file changed, 7 insertions(+), 1 deletion(-)
-> > > >=20
-> > > > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> > > > index dc3e9d6a26..f186fcbcdb 100644
-> > > > --- a/drivers/clk/clk-uclass.c
-> > > > +++ b/drivers/clk/clk-uclass.c
-> > > > @@ -329,7 +329,13 @@ static int clk_set_default_rates(struct udevic=
-e *dev,
-> > > >    			dev_dbg(dev,
-> > > >    				"could not get assigned clock %d (err =3D %d)\n",
-> > > >    				index, ret);
-> > > > -			continue;
-> > > > +			/* Skip if it is empty */
-> > > > +			if (ret =3D=3D -ENOENT) {
-> > > > +				ret =3D 0;
-> > > > +				continue;
-> > > > +			}
-> > > > +
-> > > > +			return ret;
-> > > >    		}
-> > > >    		/* This is clk provider device trying to program itself
-> > >=20
-> > > What's your take on this one?  I didn't get reply from Sean.
-> >=20
-> > I guess, what's the validated upstream dts where this is the case?
-> >=20
->=20
-> It was found by incorrect DT. It means I don't think there is any DT which
-> contains this issue.
-> But that being said we can extend current clock tests to cover this case.
-> Please look below.
+> Hi Tom,
+>
+> > Here's the latest report
+> >
+> > ---------- Forwarded message ---------
+> > From: <scan-admin@coverity.com>
+> > Date: Mon, Aug 21, 2023 at 4:30=E2=80=AFPM
+> > Subject: New Defects reported by Coverity Scan for Das U-Boot
+> > To: <tom.rini@gmail.com>
+> >
+> >
+> > Hi,
+> >
+> > Please find the latest report on new defect(s) introduced to Das
+> > U-Boot found with Coverity Scan.
+> >
+> > 4 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+> >
+> >
+> > New defect(s) Reported-by: Coverity Scan
+> > Showing 4 of 4 defect(s)
+> >
+> >
+> > ** CID 464361:  Control flow issues  (DEADCODE)
+> > /drivers/firmware/arm-ffa/arm-ffa-uclass.c: 148 in ffa_print_error_log(=
+)
+>
+> Well received, I started working on that.
+> I'll provide a fix  after coming back fom holidays (mid September)
+>
+> Cheers,
+> Abdellatif
+>
 
-Well, if the DT is invalid (and yes, we can't easily run the validation
-suite in U-Boot today), I'd rather go with a debug we can optimize out
-so that the next person with an invalid DT can more quickly find their
-problem and we don't work-around it instead.  Or am I missing something?
-
---=20
-Tom
-
---GBfgtF4/a1CJteAv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTswjEACgkQFHw5/5Y0
-tyxr7gv/e8S23jcVwTTlF8rfp8P9JMQ5dk4PyF6npE2fqFHFzegNaWGVQjb6L9B5
-E1pkw3EUbc3A/ryArZLnRZQMU0dk9+Fff3WhyGKvDvn3id/SdA/Gz8AiTT9qQRWj
-bMwQXyNrr7ZYygh/cs3G2z5nZZByUpkRxOD/rsAuFesTWclHqI5J0KkVDzlgtXd2
-LSe83jhsWPVM/cpDKVI3H4cWJvRgG/djxxrCtxZWcYnmkQfXEL9Z7bdXseOnahcC
-sG+479gTiek0KLcnRzdy3qdPnvtQv+dzzItNQftqADOHfv9GFkGpzoMb0aVSe2W2
-z0hiA61zFzz3kvFztsMgBxmfNDgkP6XTa1kA6V/2UCfrYVkSFnzQtMtLpE6TDr43
-rrdFToSoU5KnTg4YA4GjkAWbeDlV7aIt14qUcrARAko+ecCNIzEFXY38uf5F6sKl
-klSwfdilOlOcLr7xQ8LGjb+vbUZ3LCZuBzCd1IuT02llO7/5STpqvXoMHu58baEN
-oxmxSzbH
-=gyTC
------END PGP SIGNATURE-----
-
---GBfgtF4/a1CJteAv--
+Is there something I could do to help with this?
