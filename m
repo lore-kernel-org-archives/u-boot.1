@@ -4,75 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E831C83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:38:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773A3C83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 16:40:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D72F86430;
-	Mon, 28 Aug 2023 18:38:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E3C66805C9;
+	Mon, 28 Aug 2023 18:39:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JoEixGGy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LWq7AlCO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10B858645D; Mon, 28 Aug 2023 18:38:00 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E899864BA; Mon, 28 Aug 2023 18:39:57 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6319C805C9
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:37:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF19580295
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 18:39:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2b9d07a8d84so49981281fa.3
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 09:37:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693240677; x=1693845477;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=knIQ+iuaZeD3yJnVTp8WdzAEgv323RLDx6PsWU5kfP0=;
- b=JoEixGGy9J1fiAkNDiL/PnIgZoiREmiMqXMYdDCgcFhr+dFnFlboXRXlXDEp3j/4pg
- oZtF39ZKIQ3v5swU1UQ0MBWK4KP7UTtyrDS/E4yi1JB4GtVaSTPo4k56M7HWesurNOhA
- N1mUNIfdXsIumJ0GYlBA2E+01egGqmAWC/WYqp3U/7fbLuexetpO2tH/RkQI9a316Phn
- gb2BlwYWozhv46mZa9PDRRDUVxh4ldrnKO/kDLwAlx107e3ZXMOebLaOMtAthE3OJlpu
- xaiqiI/4J5ZGyJxpQxDdwVYCQLkBAIlQKZ5r2VNKsxn3t27wZYXEdMYFHXwTGzzx6eqH
- cqPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693240677; x=1693845477;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=knIQ+iuaZeD3yJnVTp8WdzAEgv323RLDx6PsWU5kfP0=;
- b=S2rOuF7gdDYudg9M+7VNzfGf3dIufSP6DxwNfZ2TgDdzBu4EqUuYrhQVMurSxyyrvS
- lEMjJS7YOeC3wCSH8+YrSiGtgN4kg6Suc9vka2bL+FR3GH4DSbtdlVigKGdy3WsKeM/3
- cMePNPQcKFc4vXx0dqTIJlnkoUCHMuRLoZQ3LjFdBeBSjnw61zAgYfTLO2ITRgYzefAL
- wy8eenUQBDSd5VLrBusv/thVn99MM3fh5y0D05V/RnRe1Y3Ndy8mKDbcqfRgsABNF4Ub
- 5VEQwN6THBNi9uGGnuQvJ4Q20AtF4Mf7OuaIvd2zZ8tTF+Vka86qXHTXKtw01gCripls
- ybRw==
-X-Gm-Message-State: AOJu0Yy7sOKlOYmJieT9J9sleZIBJbRBU/I/7ummbYKS7MOJjQ6JoJPP
- wuNIobJzXoToCn72KqgU4k77dkzMUB0VMIiu4bQvYCUL
-X-Google-Smtp-Source: AGHT+IFfVJ1offimJo7GQCOQrq1mtXjGxWj/UWpGRDV0mePbfFZ9UROsdJZMRll3A7NhmVhpre3tj0007oPL8CMLl/o=
-X-Received: by 2002:a2e:7202:0:b0:2bc:e961:a383 with SMTP id
- n2-20020a2e7202000000b002bce961a383mr8003859ljc.52.1693240676391; Mon, 28 Aug
- 2023 09:37:56 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37SGdqRu075176;
+ Mon, 28 Aug 2023 11:39:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693240792;
+ bh=J+S07FgQusWFDMsgc0bANNAOJHzuaYDR5wlyz0NRs14=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=LWq7AlCO++fyT4hBvP91pgyECDm/Uunetx3axcFKL3pTFyBP60/48GIK8/3+85WnB
+ I7/K1SgBPljxmJIQkhhz7sZc4HiwOfIGMyE5QegPCMuECARuLSHXoXhFKzJlZJOR58
+ i535fPK16YQk0KZsjOx9HLVQGFsIVcsRha1dEKG8=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37SGdqbC012619
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 28 Aug 2023 11:39:52 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
+ Aug 2023 11:39:52 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 28 Aug 2023 11:39:52 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37SGdqcU026365;
+ Mon, 28 Aug 2023 11:39:52 -0500
+Date: Mon, 28 Aug 2023 11:39:52 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
+Subject: Re: [PATCH v2 6/6] board: ti: j721s2: MAINTAINERS: Update the
+ MAINTAINERS File.
+Message-ID: <20230828163952.6rahky2zplbh2yqj@proclaim>
+References: <20230816-b4-upstream-j721s2-r5-pinmux-v2-0-a5f141be40bc@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v2-6-a5f141be40bc@ti.com>
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 28 Aug 2023 17:37:45 +0100
-Message-ID: <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v2-6-a5f141be40bc@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,62 +82,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 28, 2023 at 5:20=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi,
->
-> On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
-e:
-> >
-> >
-> > Provide a way for removing certain devicetree nodes and/or properties
-> > from the devicetree. This is needed to purge certain nodes and
-> > properties which may be relevant only in U-Boot. Such nodes and
-> > properties are then removed from the devicetree before it is passed to
-> > the kernel. This ensures that the devicetree passed to the OS does not
-> > contain any non-compliant nodes and properties.
-> >
-> > The removal of the nodes and properties is being done through an
-> > EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
-> > behind any Kconfig symbol.
-> >
-> > I have only build tested this on sandbox, and tested on qemu arm64
-> > virt platform. This being a RFC, I have not put this through a CI run.
-> >
-> > Sughosh Ganu (5):
-> >   dt: Provide a way to remove non-compliant nodes and properties
-> >   fwu: Add the fwu-mdata node for removal from devicetree
-> >   capsule: Add the capsule-key property for removal from devicetree
-> >   bootefi: Call the EVT_FT_FIXUP event handler
-> >   doc: Add a document for non-compliant DT node/property removal
-> >
-> >  cmd/bootefi.c                                 | 18 +++++
-> >  .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
-> >  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
-> >  include/dt-structs.h                          | 11 +++
-> >  lib/Makefile                                  |  1 +
-> >  lib/dt_purge.c                                | 73 +++++++++++++++++++
-> >  lib/efi_loader/efi_capsule.c                  |  7 ++
-> >  7 files changed, 179 insertions(+)
-> >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
-> >  create mode 100644 lib/dt_purge.c
->
-> What is the point of removing them? Instead, we should make sure that
-> we upstream the bindings and encourage SoC vendors to sync them. If we
-> remove them, no one will bother and U-Boot just becomes a dumping
-> ground.
+On 16:47-20230825, Manorit Chawdhry wrote:
+> Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
+> to the previous MAINTAINER not being associated with TI.
+> 
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>  board/ti/j721s2/MAINTAINERS | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/board/ti/j721s2/MAINTAINERS b/board/ti/j721s2/MAINTAINERS
+> index 323bd2353a7e..97a0581d0405 100644
+> --- a/board/ti/j721s2/MAINTAINERS
+> +++ b/board/ti/j721s2/MAINTAINERS
+> @@ -1,7 +1,8 @@
+>  J721S2 BOARD
+> -M:	Aswath Govindraju <a-govindraju@ti.com>
+> +M:	Manorit Chawdhry <m-chawdhry@ti.com>
 
-Well things like the binman entries in DT are U-Boot specific and not
-useful for HW related descriptions or for Linux or another OS being
-able to deal with HW so arguably we're already a dumping ground to
-some degree for not defining hardware.
+Thank you for stepping up.
 
-> Instead of this, how about working on bringing the DT validation into
-> U-Boot so we can see what state things are in?
->
-> Please send the bindings for Linaro's recent series (which I suspect
-> are motivating this series) so we can start the process.
->
-> Regards,
-> Simon
+>  S:	Maintained
+>  F:	board/ti/j721s2
+> +F:	doc/board/ti/j721s2_evm.rst
+>  F:	include/configs/j721s2_evm.h
+>  F:	configs/j721s2_evm_r5_defconfig
+>  F:	configs/j721s2_evm_a72_defconfig
+> @@ -11,6 +12,6 @@ F:	arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
+>  F:	arch/arm/dts/k3-j721s2-som-p0.dtsi
+>  F:	arch/arm/dts/k3-j721s2-common-proc-board.dts
+>  F:	arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
+> -F:	arch/arm/dts//k3-j721s2-r5-common-proc-board.dts
+> +F:	arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
+>  F:	arch/arm/dts/k3-j721s2-ddr.dtsi
+>  F:	arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi
+
+
+I suggest adding additional patch to include AM68 as well.
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
