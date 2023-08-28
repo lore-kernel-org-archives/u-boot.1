@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A50C83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8192DC83F12
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:53:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E48B7864CF;
-	Mon, 28 Aug 2023 19:33:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C69D86456;
+	Mon, 28 Aug 2023 19:53:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20221208.gappssmtp.com header.i=@gateworks-com.20221208.gappssmtp.com header.b="zVbXG7jo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eF8nIFu8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5423D864D2; Mon, 28 Aug 2023 19:33:42 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 43E8186430; Mon, 28 Aug 2023 19:53:25 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 518F5864CD
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:33:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 001838648B
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:53:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-52bcd4db4bdso55755a12.3
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:33:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-58e6c05f529so43962307b3.3
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:53:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks-com.20221208.gappssmtp.com; s=20221208; t=1693244019; x=1693848819;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jrDf2dXA/qh/0OgfgEaVVYHDXtCWamtlov9GkBBksM4=;
- b=zVbXG7joc+gO80hrFihsgJDsxXHirs/0sQb5TWHDE8BCxHjPexR5qOmUq9wTEqaxbn
- gcZDxadhEy5MUxN6JYt22x414a4IrEnrLrqQhg6LgeRIwewFDqOFLYswe13BS4wB/1Kb
- 8SXjCHhBLO3oWMks1XgV+esr8Qo0ZQ9th7xEgfTsho8u7da+EA9YoVhldCk6Kq1jX+24
- uz977C2FR/apfW/tyiZeYqgUL3serdpZNYZEddEkeCcZECmNsdkn5y21rgrsW+39pfAl
- ssG8cAntgYJXIYXne3VjhkR4N0Vk+YLa3D3PPsR9gbhMJQ34OajROy4gnZIASOnCdSme
- +3mQ==
+ d=konsulko.com; s=google; t=1693245198; x=1693849998;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ExcmtfcQahwphXsVmtMz4dlA+x25EHG74pAjmQDSrfQ=;
+ b=eF8nIFu8rk3pauv2WSGMjDfa/2hExC7i3OYKccMk7Wyquo9BAW845w/37fxu45nLZa
+ VIQ9q/iD6wLXrMuhuaBgSQbXo82t9JbYRKpDZnRvelz3Jk99xK6JDmf1R6PxacF2Z1/3
+ eks232AIIcWhkcDmXG9gfAmYZltPJCd2Qkt80=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693244019; x=1693848819;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jrDf2dXA/qh/0OgfgEaVVYHDXtCWamtlov9GkBBksM4=;
- b=DXtMVSwebPFFEXo7ompJQ9x56aHXaAOFc/8620S/4nrOyQN62PHFpj3BJA7SSFSjQB
- tcGF4pFaxsoekbmvu7ZQGmR3eJtqnJJ+V54LcrqHLzq2r2ePFNHUtAPs3SnJ4rEvNLti
- Nlytw2f0cGeNZIPoMZrY5aWYWD4BOWuAHqujTJrJFAGLzzPw+cyWc+07wUB71n+ahWgr
- r1Zim7GxCflGLphKLsKkn33qWk5lfNlz5KDq4BqZ9Od8ccB8FOdvdETaVyYl8s1l700D
- qr3rNFPZe3LiUcoyFXNw7IuahRa8prMOobyIG45V+XL90ox6PgbnRCR/DgQ0uIS2hoYs
- lfUg==
-X-Gm-Message-State: AOJu0Yy76Q5X1LnlHyS5td6X8onHAR/oU634krQYjrq3o09WcW79gZ/f
- oEklHJsGO8xilG/YR9NEOeFqdwR2kpTV74bx0W8fTA==
-X-Google-Smtp-Source: AGHT+IEtHzs75/54l1AFRA/r6k9HnedlQWScLWpYKz2egYe8MiaQRWhX6F3SBsGowMTEV1+OFyUZGmi9B4n+T3l2MX8=
-X-Received: by 2002:a17:907:78d2:b0:992:d013:1132 with SMTP id
- kv18-20020a17090778d200b00992d0131132mr18750842ejc.1.1693244016974; Mon, 28
- Aug 2023 10:33:36 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693245198; x=1693849998;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ExcmtfcQahwphXsVmtMz4dlA+x25EHG74pAjmQDSrfQ=;
+ b=e4+NTIoipWZFqo9JMxTFNT6WfyVJFA9R0PUlcPpSWplPKL3YYvsTshAjNhRQgjNEbq
+ rMhIxYqmBZHGIsYBmqLLFupE5I49ge9Cm2BmjMYlA+pdK1ERCg92LHxpFBy4UhpEtyB5
+ ZHEJ8CF3/DgzEHTI2afcA5mjJBuXDubS91ipaHnH+Zon1aUv4kBM0eKCj4F2lTnlCIys
+ nktzATIcuC2Mp7JF2qZzXiOi7FMT3pCbKO0E68/IQYTVDRoP1OcCNhsoxLvH9plvlyp8
+ wFG0RIJjzXaT+grQlsNZhVSyLUQBTbNOZXCM5xp1ZHsNb5KPgSGHPJe80llZkY3Ko+ft
+ KzJQ==
+X-Gm-Message-State: AOJu0YyfHX6QREz/tzr3msQN/R8TkM041rAyyei4SjsopYZzgvWwu0Ml
+ J7DTHj7y276kkLwzWvrcONEUsg==
+X-Google-Smtp-Source: AGHT+IHyA2Cpd8ko0ajyW1uRnGGivcDwsNT6mR4d0FpS/2fzeQa9NXfrezeD5zWjFLAb1r0GZb6Zwg==
+X-Received: by 2002:a05:690c:4505:b0:583:b72c:883b with SMTP id
+ gt5-20020a05690c450500b00583b72c883bmr23897002ywb.11.1693245198729; 
+ Mon, 28 Aug 2023 10:53:18 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
+ [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
+ by smtp.gmail.com with ESMTPSA id
+ m10-20020a81710a000000b0058bcea54fc2sm2267466ywc.57.2023.08.28.10.53.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Aug 2023 10:53:18 -0700 (PDT)
+Date: Mon, 28 Aug 2023 13:53:16 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+Message-ID: <20230828175316.GI3953269@bill-the-cat>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
+ <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20230824011804.1501058-1-sjg@chromium.org>
-In-Reply-To: <20230824011804.1501058-1-sjg@chromium.org>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 28 Aug 2023 10:33:25 -0700
-Message-ID: <CAJ+vNU0PJ3FuHXZqp7xgx0QRK6oE7KSGDOCRafGk-GyNWyduzA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] imx: Drop unneeded phandle in FIT template
-To: Simon Glass <sjg@chromium.org>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Fabio Estevam <festevam@gmail.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neha Malcom Francis <n-francis@ti.com>, Stefano Babic <sbabic@denx.de>, 
- Su Baocheng <baocheng.su@siemens.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Fo3unteMhmHmZ6Yd"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,200 +95,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 23, 2023 at 6:18=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Adding a phandle to a template node is not allowed, since when the node i=
-s
-> instantiated multiple times, we end up with duplicate phandles.
->
-> Drop this invalid constructs.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->  arch/arm/dts/imx8mm-cl-iot-gate-optee-u-boot.dtsi | 2 ++
->  arch/arm/dts/imx8mm-u-boot.dtsi                   | 2 +-
->  arch/arm/dts/imx8mn-u-boot.dtsi                   | 2 +-
->  arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi        | 2 ++
->  arch/arm/dts/imx8mp-u-boot.dtsi                   | 4 ++--
->  arch/arm/dts/imx8qm-u-boot.dtsi                   | 2 +-
->  arch/arm/dts/k3-am65-iot2050-boot-image.dtsi      | 8 ++++----
->  7 files changed, 13 insertions(+), 9 deletions(-)
->
-> diff --git a/arch/arm/dts/imx8mm-cl-iot-gate-optee-u-boot.dtsi b/arch/arm=
-/dts/imx8mm-cl-iot-gate-optee-u-boot.dtsi
-> index 484e31824b85..d93e1cbd8a71 100644
-> --- a/arch/arm/dts/imx8mm-cl-iot-gate-optee-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mm-cl-iot-gate-optee-u-boot.dtsi
-> @@ -41,9 +41,11 @@
->         };
->  };
->
-> +/* This cannot work since it refers to a template node
->  &binman_configuration {
->         loadables =3D "atf", "fip";
->  };
-> +*/
->
->  &fec1 {
->         phy-reset-gpios =3D <&gpio4 22 GPIO_ACTIVE_LOW>;
-> diff --git a/arch/arm/dts/imx8mm-u-boot.dtsi b/arch/arm/dts/imx8mm-u-boot=
-.dtsi
-> index 035282bf0b00..6085128e24ec 100644
-> --- a/arch/arm/dts/imx8mm-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mm-u-boot.dtsi
-> @@ -140,7 +140,7 @@
->                         configurations {
->                                 default =3D "@config-DEFAULT-SEQ";
->
-> -                               binman_configuration: @config-SEQ {
-> +                               @config-SEQ {
->                                         description =3D "NAME";
->                                         fdt =3D "fdt-SEQ";
->                                         firmware =3D "uboot";
-> diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot=
-.dtsi
-> index 5046b38e4e29..bc57566a108f 100644
-> --- a/arch/arm/dts/imx8mn-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mn-u-boot.dtsi
-> @@ -204,7 +204,7 @@
->                         configurations {
->                                 default =3D "@config-DEFAULT-SEQ";
->
-> -                               binman_configuration: @config-SEQ {
-> +                               @config-SEQ {
->                                         description =3D "NAME";
->                                         fdt =3D "fdt-SEQ";
->                                         firmware =3D "uboot";
-> diff --git a/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi b/arch/arm/dts/im=
-x8mp-rsb3720-a1-u-boot.dtsi
-> index f3fb44046d5c..c4ea536b29bb 100644
-> --- a/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mp-rsb3720-a1-u-boot.dtsi
-> @@ -162,6 +162,8 @@
->         };
->  };
->
-> +/* This cannot work since it refers to a template node
->  &binman_configuration {
->         loadables =3D "atf", "fip";
->  };
-> +*/
-> diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot=
-.dtsi
-> index 36e7444a627b..200938a98072 100644
-> --- a/arch/arm/dts/imx8mp-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-> @@ -146,7 +146,7 @@
->                                         type =3D "flat_dt";
->                                         compression =3D "none";
->
-> -                                       uboot_fdt_blob: blob-ext {
-> +                                       blob-ext {
->                                                 filename =3D "u-boot.dtb"=
-;
->                                         };
->                                 };
-> @@ -155,7 +155,7 @@
->                         configurations {
->                                 default =3D "@config-DEFAULT-SEQ";
->
-> -                               binman_configuration: @config-SEQ {
-> +                               @config-SEQ {
->                                         description =3D "NAME";
->                                         fdt =3D "fdt-SEQ";
->                                         firmware =3D "uboot";
-> diff --git a/arch/arm/dts/imx8qm-u-boot.dtsi b/arch/arm/dts/imx8qm-u-boot=
-.dtsi
-> index a3e0af48109b..d316e869516f 100644
-> --- a/arch/arm/dts/imx8qm-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8qm-u-boot.dtsi
-> @@ -112,7 +112,7 @@
->                         configurations {
->                                 default =3D "@config-DEFAULT-SEQ";
->
-> -                               binman_configuration: @config-SEQ {
-> +                               @config-SEQ {
->                                         description =3D "NAME";
->                                         fdt =3D "fdt-SEQ";
->                                         firmware =3D "uboot";
-> diff --git a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi b/arch/arm/dts/=
-k3-am65-iot2050-boot-image.dtsi
-> index 3ecb461b0110..64318d09cf0a 100644
-> --- a/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
-> +++ b/arch/arm/dts/k3-am65-iot2050-boot-image.dtsi
-> @@ -41,7 +41,7 @@
->                                         os =3D "arm-trusted-firmware";
->                                         load =3D <CONFIG_K3_ATF_LOAD_ADDR=
->;
->                                         entry =3D <CONFIG_K3_ATF_LOAD_ADD=
-R>;
-> -                                       atf: atf-bl31 {
-> +                                       atf-bl31 {
->                                         };
->                                 };
->
-> @@ -53,7 +53,7 @@
->                                         os =3D "tee";
->                                         load =3D <0x9e800000>;
->                                         entry =3D <0x9e800000>;
-> -                                       tee: tee-os {
-> +                                       tee-os {
->                                         };
->                                 };
->
-> @@ -78,7 +78,7 @@
->                                         compression =3D "none";
->                                         load =3D <CONFIG_SPL_TEXT_BASE>;
->                                         entry =3D <CONFIG_SPL_TEXT_BASE>;
-> -                                       u_boot_spl_nodtb: blob-ext {
-> +                                       blob-ext {
->                                                 filename =3D "spl/u-boot-=
-spl-nodtb.bin";
->                                         };
->                                 };
-> @@ -88,7 +88,7 @@
->                                         type =3D "flat_dt";
->                                         arch =3D "arm";
->                                         compression =3D "none";
-> -                                       spl_am65x_evm_dtb: blob-ext {
-> +                                       blob-ext {
->                                                 filename =3D "spl/dts/k3-=
-am65-iot2050-spl.dtb";
->                                         };
->                                 };
-> --
-> 2.42.0.rc1.204.g551eb34607-goog
->
 
-Simon,
+--Fo3unteMhmHmZ6Yd
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Adding Ying-Chun Liu (PaulLiu) here as he is the maintainer for both
-boards being affected here.
+On Mon, Aug 28, 2023 at 05:37:45PM +0100, Peter Robinson wrote:
+> On Mon, Aug 28, 2023 at 5:20=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi,
+> >
+> > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wr=
+ote:
+> > >
+> > >
+> > > Provide a way for removing certain devicetree nodes and/or properties
+> > > from the devicetree. This is needed to purge certain nodes and
+> > > properties which may be relevant only in U-Boot. Such nodes and
+> > > properties are then removed from the devicetree before it is passed to
+> > > the kernel. This ensures that the devicetree passed to the OS does not
+> > > contain any non-compliant nodes and properties.
+> > >
+> > > The removal of the nodes and properties is being done through an
+> > > EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
+> > > behind any Kconfig symbol.
+> > >
+> > > I have only build tested this on sandbox, and tested on qemu arm64
+> > > virt platform. This being a RFC, I have not put this through a CI run.
+> > >
+> > > Sughosh Ganu (5):
+> > >   dt: Provide a way to remove non-compliant nodes and properties
+> > >   fwu: Add the fwu-mdata node for removal from devicetree
+> > >   capsule: Add the capsule-key property for removal from devicetree
+> > >   bootefi: Call the EVT_FT_FIXUP event handler
+> > >   doc: Add a document for non-compliant DT node/property removal
+> > >
+> > >  cmd/bootefi.c                                 | 18 +++++
+> > >  .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
+> > >  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
+> > >  include/dt-structs.h                          | 11 +++
+> > >  lib/Makefile                                  |  1 +
+> > >  lib/dt_purge.c                                | 73 +++++++++++++++++=
+++
+> > >  lib/efi_loader/efi_capsule.c                  |  7 ++
+> > >  7 files changed, 179 insertions(+)
+> > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+> > >  create mode 100644 lib/dt_purge.c
+> >
+> > What is the point of removing them? Instead, we should make sure that
+> > we upstream the bindings and encourage SoC vendors to sync them. If we
+> > remove them, no one will bother and U-Boot just becomes a dumping
+> > ground.
+>=20
+> Well things like the binman entries in DT are U-Boot specific and not
+> useful for HW related descriptions or for Linux or another OS being
+> able to deal with HW so arguably we're already a dumping ground to
+> some degree for not defining hardware.
 
-I'm not clear if the two affected boards here do have duplicate
-phandles due to only having a single dtb in their defconfigs. However
-I could not get imx8mm-cl-iot-gate-optee_defconfig,
-imx8mp_rsb3720a1_4G_defconfig, or imx8mp_rsb3720a1_6G_defconfig which
-use those two files to build with latest master to even check:
-  BINMAN  .binman_stamp
-Image 'itb' is missing external blobs and is non-functional: blob-ext
+It's about validation and Simon is literally in the process of having
+the binman bindings upstreamed.
 
-/binman/itb/fit/images/fip/blob-ext (fip.bin):
-   Missing blob
+--=20
+Tom
 
-Some images are invalid
-make: *** [Makefile:1115: .binman_stamp] Error 103
+--Fo3unteMhmHmZ6Yd
+Content-Type: application/pgp-signature; name="signature.asc"
 
-So it seems these boards are broken anyway and need some attention so
-for both patches:
+-----BEGIN PGP SIGNATURE-----
 
-Acked-by: Tim Harvey <tharvey@gateworks.com>
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTs3wkACgkQFHw5/5Y0
+tyyQ0wv/d/BEDHigNdG8F1qbw9KvJEyEvdEIcV8izd0IAQPcN7es2AVz04OCpUAK
+tYejURaU8gm6OJ+0/Gm2fYYkS5zV87JYkXSM1BJnZcwQ0RzDd9x+HmbXKuv71LvZ
+MC72MfnEkcnw4Z7y+YaxVq0Gzh8BoMwXpCeTGOKtzLvN02aDw6vqtyzfg3Q+oifd
+J5Fubq52iD7Ij5iwWgLCuRi+a9rlTkcy0oj07svSiDv2ygd/8Z4yBYWuiSkhHYX+
+sU/nLl2JWQwH1/y5qzseMpaBipgydALYj9p7/qNEW7zcuaTMln6TjcMnshvYgRlk
+w/7csX7th9upNoej7GhFDDxSItvjnqWT8LTqw2GFuwSiyY+QR1hNzwpW6fcx+xC+
+xj0mWValgFiPc16PCZax1L3stSQAbOVBj0q7Q9y5NxEhw+tciWH3OBkVlqrspoOP
+S64U0WXyNFVNClmF+g1zvE4T/x+JtfYrpIqg346BC1kjuVGPi5yw98c9OLHnuDjy
+4NjHMcOH
+=Qxcn
+-----END PGP SIGNATURE-----
 
-Is there a test that binman can make to catch any future occurrences
-of phandles being added to templates?
-
-Best regards,
-
-Tim
+--Fo3unteMhmHmZ6Yd--
