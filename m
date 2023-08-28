@@ -4,108 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B1C1C83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 11:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DECDAC71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 11:31:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8C4986422;
-	Mon, 28 Aug 2023 13:30:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F9FF86458;
+	Mon, 28 Aug 2023 13:31:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ldpNPamr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qmSmgWqf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C352486423; Mon, 28 Aug 2023 13:30:55 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20620.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::620])
+ id E8D6B8645D; Mon, 28 Aug 2023 13:31:21 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B987286421
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 13:30:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6A4386421
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 13:31:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Cotuyb/YlfPgGx+EbjM06Efq5vplyY4wBY/NmjCXvIjWMkVGJbK5BNXo8ag8emqxYIWEsAc3HnxEPqjy4+rdyCH6I/NwfsJvnc7/e/mM/D1+4s8MD0ITVs3oNt9RVm2xNGjbLgyMK/JSW+uAF6KOv+MQmDKTMv8Lldph8q3g/B6gr2kEJAESxIfG7aA5TMQ9SE8yt2pp9epmy7SQCOh16TVjVybMGSNR/lEKb/bfoWqB41V38cI+Jc9h8x8G6eL/GvdL+J2E4lqlCCBd9SFPd00wGSx1hwhuxM4ywYz34MR82Iyfuc8BZQVIXA/dRKNxUOm97ug3DiHmsPKEHylfDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=whNfuHZUU6fKOMJr/TAbWSQZd+s2tDwC/l6HiiUnTTs=;
- b=E/n4DZFQSQOj8Nw6TBZVpjwlK6Smg7DVbGOtRwErtNTOLF1shO8HJtO1DIA4Lyh7FCTm4kqpPfH+yYllFF09Pj5iCf5Y+wqJ40yHFpKmjD3ucDP2kn5prCGcooF6zuksfEL1vwnaz7ExYnO3KJTbQJtQF5gdADpT8SmGJ/9+BSM6ZivXicmZXPm1AQQuYZmFVOrlQ27oGUcFCFmO0v8CwY7bhIF+NBD9KnbXm02OqsrDZJCkCxKXPsTM4YZ7ceX/D/h8wG5dBPI1BgrZTtBYGMY7zlvW7VIZYlcMaC2nmu0hGLKION6mDVe6Ex03VM68HzTNC26dzJIW+7kfYUAxow==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=whNfuHZUU6fKOMJr/TAbWSQZd+s2tDwC/l6HiiUnTTs=;
- b=ldpNPamrevqL0g9NrLzItZQ2yqBLNpI6s3853E2txezRtZ3hniN6Ay6HeHFvOgyLVSOrB/RQsMr9OsWDOWVHwjX6TWCbnGgq/kI1vcIubOPsw+fuxIXCERqzKYV0LBnPeijAS3SsZ129AXMdN+GpPzKj9WhU1vdtYS4qn6OhoTw=
-Received: from MW4PR04CA0268.namprd04.prod.outlook.com (2603:10b6:303:88::33)
- by BL1PR12MB5287.namprd12.prod.outlook.com (2603:10b6:208:317::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Mon, 28 Aug
- 2023 11:30:48 +0000
-Received: from CO1PEPF000042A8.namprd03.prod.outlook.com
- (2603:10b6:303:88:cafe::7d) by MW4PR04CA0268.outlook.office365.com
- (2603:10b6:303:88::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34 via Frontend
- Transport; Mon, 28 Aug 2023 11:30:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000042A8.mail.protection.outlook.com (10.167.243.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.16 via Frontend Transport; Mon, 28 Aug 2023 11:30:46 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 28 Aug
- 2023 06:30:44 -0500
-Message-ID: <41558631-37bb-f6c7-c9ac-5ee8ad3a3dd2@amd.com>
-Date: Mon, 28 Aug 2023 13:30:42 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37SBVFw5121829;
+ Mon, 28 Aug 2023 06:31:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693222275;
+ bh=m3yidt8AZcST1xOD5h0DjMFQDfYPOWAvzlop3azlN8A=;
+ h=From:To:CC:Subject:Date;
+ b=qmSmgWqfq+j+/iLSBcM57+YFOYUQ52nhDvL4B5rAwJ6JgegtY/SI+Oee3xc2wvXde
+ WXqSF2qfbvJhWCUJTui4SNUOez0zcxTSWih60z6tlCJCu7HjIX3ZTLVi0sP2eLE1Jx
+ mATWF9olI5rfIaZLpZNZYRg4MD+hN0CvtDKE9h9k=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37SBVFoA026452
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 28 Aug 2023 06:31:15 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
+ Aug 2023 06:31:14 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 28 Aug 2023 06:31:14 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37SBVAlG090695;
+ Mon, 28 Aug 2023 06:31:11 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
+ <sinthu.raja@ti.com>, <gadiyar@ti.com>, <a-nandan@ti.com>,
+ <vaishnav.a@ti.com>, <n-francis@ti.com>
+Subject: [PATCH v1 0/4] J721E DTS Sync with Kernel v6.5-rc1
+Date: Mon, 28 Aug 2023 17:01:05 +0530
+Message-ID: <20230828113109.2533045-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH 0/7] spi-nor: Add parallel and stacked memories support
-Content-Language: en-US
-To: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, <u-boot@lists.denx.de>
-CC: <jagan@amarulasolutions.com>, <vigneshr@ti.com>, <sjg@chromium.org>,
- <git@amd.com>
-References: <20230818042119.25722-1-ashok.reddy.soma@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-In-Reply-To: <20230818042119.25722-1-ashok.reddy.soma@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000042A8:EE_|BL1PR12MB5287:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2acfa0ea-a590-4515-aab4-08dba7ba3925
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: P/2nCbaaEPI0VY0IjwfeycLkP/3zv4VPtrWvQXLX/L6HCWvG5TNECeVt8pFy6GJ4zREskYnN6YavBks92MMOyxYWzZh9hgR8AAkG4kWM4y+gKh2D7JYiTI644B32HDCqPhWqF0WO/wunZSstIoo0SeuY6dVZZb7VdH5G30soq+wWofBQoXh5BCLeN8DRQZovvtT2FnDvezfECPGSAWkCg2a/j4tVOB0IXE6vMidSFPt7tAe4JY9V9K1JyZqtYQZKFtebowU+nkMpK8APKeCnpLA5QzLFdu7StnuxPf4hJB/7vsL8mf39Lv1Wd8N4knvmJRhOTVKEZ75soS0RSikOamnmj8vCngeDHiPoUVvqJdRS3zUysNDE09XvBi4fNUexVsSqYGM5d2wwyJM1HL6f6LH6u6YBP2geWYIUzwyAyIJCflZTv63mgIbwn6Z68cueurAzFEi6SeiOhUNhUgcOL25d8RDhmJteezb+jLf6WYGLeyfaXvhwIYdgs8PfGBwX4+BfJSuxOg867Tjx3SKVnw4lENQYTmngXKo4bFxGSjKTvIPI4ipaLElS/lqCX5v9VKl8pfGjty2Hc+z75FLsgHCfxzE2F5VenZpIRWKKY8AWwVRSOCIE0F2m1MU/TXUpG3PTrRzwSXDxJiDVh+9i0NkEAKlVFicMM/loBuTqNntUGHvFEmEOoXEVDvGX/Bkj8IsqhUu9Y1IGYZt7OPHCVE3tZ69jBxjA3p5Ags20aeC5abeJ04P7JthHjaF3Cx6ojBll41JZvvit1hdE0wRhqitRbAaXpiHc+sksGJDZPL4QkNkzT/Aamk7cwyNwwyjj
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(376002)(346002)(39860400002)(396003)(451199024)(1800799009)(186009)(82310400011)(36840700001)(40470700004)(46966006)(82740400003)(31686004)(36756003)(40460700003)(86362001)(31696002)(81166007)(356005)(40480700001)(36860700001)(47076005)(2616005)(336012)(2906002)(426003)(26005)(16526019)(53546011)(83380400001)(478600001)(110136005)(70586007)(70206006)(4326008)(8676002)(8936002)(5660300002)(44832011)(41300700001)(54906003)(16576012)(316002)(43740500002)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2023 11:30:46.6020 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2acfa0ea-a590-4515-aab4-08dba7ba3925
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042A8.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5287
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,63 +80,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series aims to sync kernel.org v6.5-rc1 DTS with that of U-Boot. It
+also includes cleanups where necessary along with certain changes to
+ensure boot is unaffected.
 
+While it's mainly synced to the tag v6.5-rc1, one extra commit has been
+added that cleans up duplicating wkup_i2c0 nodes [1] in Kernel.
 
-On 8/18/23 06:21, Ashok Reddy Soma wrote:
-> This series adds support for Xilinx qspi parallel and stacked memeories.
-> 
-> In parallel mode, the current implementation assumes that a maximum of
-> two flashes are connected. The QSPI controller splits the data evenly
-> between both the flashes so, both the flashes that are connected in
-> parallel mode should be identical.
-> During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
-> nor->flags.
-> 
-> In stacked mode the current implementation assumes that a maximum of two
-> flashes are connected and both the flashes are of same make but can
-> differ in sizes. So, except the sizes all other flash parameters of both
-> the flashes are identical
-> 
-> Spi-nor will pass on the appropriate flash select flag to low level
-> driver, and it will select pass all the data to that particular flash.
-> 
-> Write operation in parallel mode are performed in page size * 2 chunks as
-> each write operation results in writing both the flashes. For doubling
-> the address space each operation is performed at addr/2 flash offset,
-> where addr is the address specified by the user.
-> 
-> Similarly for read and erase operations it will read from both flashes,
-> so size and offset are divided by 2 and send to flash.
-> 
-> 
-> 
-> Ashok Reddy Soma (7):
->    dm: core: support reading a single indexed u64 value
->    mtd: spi-nor: Add parallel and stacked memories support
->    mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
->    mtd: spi-nor: Add parallel and stacked memories support in read_bar
->      and write_bar
->    spi: spi-uclass: Read chipselect and restrict capabilities
->    spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
->    spi: zynq_qspi: Add parallel memories support in QSPI driver
-> 
->   drivers/core/of_access.c       |  22 ++
->   drivers/core/ofnode.c          |  30 +++
->   drivers/mtd/spi/spi-nor-core.c | 385 ++++++++++++++++++++++++++++-----
->   drivers/spi/spi-uclass.c       |  21 +-
->   drivers/spi/xilinx_spi.c       |   4 +-
->   drivers/spi/zynq_qspi.c        | 145 +++++++++++--
->   drivers/spi/zynq_spi.c         |   6 +-
->   drivers/spi/zynqmp_gqspi.c     | 146 +++++++++++--
->   include/dm/of_access.h         |  19 ++
->   include/dm/ofnode.h            |  12 +
->   include/linux/mtd/spi-nor.h    |  13 ++
->   include/spi.h                  |  29 ++-
->   12 files changed, 737 insertions(+), 95 deletions(-)
-> 
+Same as with other board series that have taken up this effort, cleanup
+of mcu_ringacc and mcu_udmap are dependent on MCU Ringacc [2] and DMA
+[3] fixes. This will be taken up after their merge to Linux.
 
-I put this to CI and I see a lot of issue that's why v2 is definitely required 
-but would be good if someone can review it from high level point of view.
+[1] https://lore.kernel.org/all/20230721082344.1534094-1-u-kumar1@ti.com/
+[2] https://lore.kernel.org/all/20230809175932.2553156-1-vigneshr@ti.com/
+[3] https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
 
-Thanks,
-Michal
+Boot logs:
+https://gist.github.com/nehamalcom/231426b784e0ba96ef3a0da84346e038
+
+Neha Malcom Francis (4):
+  arm: dts: k3-j721e-r5: Clean up inclusion hierarchy
+  arm: dts: k3-j721e: Sync with v6.5-rc1
+  drivers: misc: k3_avs: Add linux compatible to maintain sync
+  configs: j721e: Remove HBMC_AM654 config
+
+ .../k3-j721e-common-proc-board-u-boot.dtsi    | 139 ++-
+ arch/arm/dts/k3-j721e-common-proc-board.dts   | 483 ++++++---
+ arch/arm/dts/k3-j721e-main.dtsi               | 974 ++++++++++++++++--
+ arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         | 280 ++++-
+ .../k3-j721e-r5-common-proc-board-u-boot.dtsi |  29 -
+ .../arm/dts/k3-j721e-r5-common-proc-board.dts | 308 +-----
+ arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi       |  31 -
+ arch/arm/dts/k3-j721e-r5-sk.dts               | 536 +---------
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi          | 158 +--
+ arch/arm/dts/k3-j721e-sk.dts                  | 663 +++++++++---
+ arch/arm/dts/k3-j721e-som-p0.dtsi             | 213 ++--
+ arch/arm/dts/k3-j721e-thermal.dtsi            |  75 ++
+ arch/arm/dts/k3-j721e.dtsi                    |  32 +-
+ configs/j721e_evm_a72_defconfig               |   1 -
+ configs/j721e_evm_r5_defconfig                |   1 -
+ drivers/misc/k3_avs.c                         |   1 +
+ 16 files changed, 2428 insertions(+), 1496 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-j721e-r5-common-proc-board-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
+
+-- 
+2.34.1
+
