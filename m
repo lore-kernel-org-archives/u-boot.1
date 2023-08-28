@@ -4,86 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D544BC83F21
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 10:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C694C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 10:44:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E3D28645F;
-	Mon, 28 Aug 2023 12:33:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EA472805C8;
+	Mon, 28 Aug 2023 12:44:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P+toC9sd";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bVfngE5a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A784807C4; Mon, 28 Aug 2023 12:33:54 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0D18186454; Mon, 28 Aug 2023 12:44:34 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2062f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::62f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6439A864B7
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 12:33:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C164680282
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 12:44:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2bcde83ce9fso45476191fa.1
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 03:33:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693218829; x=1693823629;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=O3z95XzOe3ZF2SDLCQhR6hHjsyrGhI+kOR7x7SCS34Y=;
- b=P+toC9sdrcgTA1vvQG/M//KJm29A5X9zosNy/zVpiP4Iu7BUe4+64DuJIH/CO3UiB6
- 3dVE/8O7QSHslliQEzNDERv0z4KgQfyvEh8GdR2Dp8udkhRkWOoQ2QyGoRlTwNpSF0fS
- yZIaYkYrz7jCYwbL2eUcxcJNJONZEdCQUyAIPfesGu8auMkTrdEpSGXDP5VW25SVG6n3
- TrouxXp6vLZR6cTasHEFDq32Aje63PqoAcQyt++4nyn0R5+s3gdgv/eU/5Fs+/ob+ydy
- ++INIX/df7Lt21fyDexlN3mEbrxqIe4O5wuAre7A/0BEWSPzdPC99RJuwOIKYvmM1YDr
- O1Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693218829; x=1693823629;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=O3z95XzOe3ZF2SDLCQhR6hHjsyrGhI+kOR7x7SCS34Y=;
- b=eA/Q9HKKJX9TZNd5x7/Rn8AvWWA3hGuXwAnAvcmnwRRZ2aDqfxuGp2J+9jb9jIX0bI
- Pe5vjTwtq7RbXaT0ycv+TmjPKpQWrwz3xe6EpfPcxR5YMZHZ0EMbulu5PkSgikdLY5WV
- BAnRIjAgJdLlqBVkjQfuquiDcVfNZ4fkvvhsHqF1WcPLByobGdrYBCR1FWyIldrd9sRl
- nZgKVtUaqswoOAuukxX3hqnOmNS9jwJJNjF6zNfprwMI98OUEjMqjWb5A2YpaUL8o7RW
- FQXLjI0miCoufH67SleE5QLn2fU11Fi8U74/W6O4QCC8euBK7DXGN9FkcwlM0xwWQ2KY
- ZCKA==
-X-Gm-Message-State: AOJu0YwcUiSyPHZPF1v6zmmXxlhsA9rMJjU4VfXEC4ePvaIcffhBykvz
- 99la4fJB80QciY+kyB3qKvo=
-X-Google-Smtp-Source: AGHT+IFiOVZolVbp8nC2L/4rh0eJCxNczzE/4GDpcgTEXyqrCAc214gyORG+4GNADU8KXvwJdhMoKA==
-X-Received: by 2002:a2e:9bcc:0:b0:2bc:bc70:263f with SMTP id
- w12-20020a2e9bcc000000b002bcbc70263fmr15563667ljj.0.1693218829188; 
- Mon, 28 Aug 2023 03:33:49 -0700 (PDT)
-Received: from [192.168.0.84] ([178.233.24.1])
- by smtp.gmail.com with ESMTPSA id
- z19-20020a7bc7d3000000b003fe2b6d64c8sm7880996wmk.21.2023.08.28.03.33.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Aug 2023 03:33:48 -0700 (PDT)
-Message-ID: <c87335a8-735f-4b19-8761-002dddc3da5b@gmail.com>
-Date: Mon, 28 Aug 2023 13:33:46 +0300
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LNHbTqgY2za/7xS0PQY1z1puW/r1S6bj6hrbvxIypaDPT0F77Ldppl5iszeVNf5yMfgfyj++4eyJrCbwor4jvaY73ZhrS/Vo4qcFMzxtR3MyFWwgsYMvraoA8HRuaFsi7UcQK2fZrcyPJsGAmB1BT2TGxxIu2Dc8QJ6o0DjLA0mdsCNcS2NZ/rwa6ejRciSNON101mYZAGv+e7Puha4JxQ023g3NzKPJ6ubykn0T1B+aGnGgwjbIQ/iuwDGoUFfhKJVKq0ni1gQc7Ii5ksQH/oCvWUsk6IO23Q+IMatHX1INFEJqytpkA419E244IUFlxbpkOrZXTe1Ox0HKQoXKFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uRa3LdZQh3qxN14BkBUUr04r3Cr+NK4pkZxaIUGPpR8=;
+ b=X3EU07Emrhc8Q2EL4/VndqipqY9ZrzsRGVPbi5xaFDERFMj07NDwTDB7rIdXRkW5oaPv9cWbLWURbwXka/lw9yjAKQYTECsFiaZvzlrbot112zGmfe8fc4um+3qJqfIZ1LM3p/tF7jEQug8WEX28pdVt51/dfYGw2zZuvZEQI8Bq/tiTjlV0HbbyRIk48InJdzdoLjuC5buYRG8mC4K4Vpu3YzBKQGnQDe4D8hMuNAQVvh/1NMq1s91oExo6Ko19sbbHeQKLtWMWKCKa/FwUIJ1Pye0nTSIugIwWxtsxMj8p3xxiEFC1SE1l0WIH3tVeVhupuLML+zbJ9wBjYmQhrg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=samsung.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uRa3LdZQh3qxN14BkBUUr04r3Cr+NK4pkZxaIUGPpR8=;
+ b=bVfngE5aL6XwaU7TSOxaMHrnDXsl7lYFUsPwaLGGcPw1ZiGQ0co0eeHjdvLPhpJDDn0VzGlZsFNOmJr00e8804UM73G/pQZAqxVnwJnc6AUyYXxcytbNPn2pXukskW2lplUpqVvt4GRk5SghbAVgNOXt2ede3b/0kB94XwOdZAI=
+Received: from MW4P220CA0030.NAMP220.PROD.OUTLOOK.COM (2603:10b6:303:115::35)
+ by DS0PR12MB7726.namprd12.prod.outlook.com (2603:10b6:8:130::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34; Mon, 28 Aug
+ 2023 10:44:26 +0000
+Received: from MWH0EPF000971E4.namprd02.prod.outlook.com
+ (2603:10b6:303:115:cafe::d2) by MW4P220CA0030.outlook.office365.com
+ (2603:10b6:303:115::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35 via Frontend
+ Transport; Mon, 28 Aug 2023 10:44:26 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MWH0EPF000971E4.mail.protection.outlook.com (10.167.243.72) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.17 via Frontend Transport; Mon, 28 Aug 2023 10:44:25 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 28 Aug
+ 2023 05:44:24 -0500
+Message-ID: <cddca0ca-ced8-78bf-0d87-15d896e88b5f@amd.com>
+Date: Mon, 28 Aug 2023 12:44:24 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/7] qfw: Spawn ramfb device if its file is present
-Content-Language: en-US, tr, en-GB
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
- Alexander Graf <agraf@csgraf.de>, Mark Kettenis <mark.kettenis@xs4all.nl>
-References: <20230822121026.1007105-1-alpernebiyasak@gmail.com>
- <20230822121026.1007105-4-alpernebiyasak@gmail.com>
- <CAPnjgZ1f14MJFz0vy8SNnzud4VFEkHunu8_+Md1C1UOW2pKTwA@mail.gmail.com>
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <CAPnjgZ1f14MJFz0vy8SNnzud4VFEkHunu8_+Md1C1UOW2pKTwA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] fpga: define dummy fpga_load function for debug build
+Content-Language: en-US
+To: Chanho Park <chanho61.park@samsung.com>, 'Eugen Hristev'
+ <eugen.hristev@collabora.com>, <u-boot@lists.denx.de>
+CC: 'Simon Glass' <sjg@chromium.org>
+References: <CGME20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec@epcas2p3.samsung.com>
+ <20230816065437.836392-1-chanho61.park@samsung.com>
+ <c0e49c05-a5f8-2759-33b5-946bf2283b34@amd.com>
+ <000001d9d945$95ebf520$c1c3df60$@samsung.com>
+ <7d288a5d-2d8e-39fa-2b18-327452a4cdbd@collabora.com>
+ <000001d9d996$73b90f50$5b2b2df0$@samsung.com>
+From: Michal Simek <michal.simek@amd.com>
+In-Reply-To: <000001d9d996$73b90f50$5b2b2df0$@samsung.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E4:EE_|DS0PR12MB7726:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c8610a8-ae9f-4551-c887-08dba7b3bfc0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 32wRrH9Mvikw/SYFpNKEi59J1cVIRjXUzo3I6PC+KXbBRkVcbuyTJIGj0aOQGBxYMHWdCCpx/Q9F7fD0bXpYvGuvgQSYvu7EQ3G3pXQ9MtSkyuyYKZeQUv/pjmsfPfS4Ee3Un464/WSGhCmskA2r25vRHEjjpHl+GwyeiYThQyIi5bt9gNYUJnKvejODhOWI1DEbVm722mu3IP2zuIGG8RMkCNPNh0gX4FOPKUHfhy4Bslxt/RyFJjknGqnuqRDdOx5vzmzEfYSgzk3Eerw95GmsEeZivCWVIglgciXkSjfy+n1wcEKVXJTDs3ZPCwHYTlf7Kq6hBHpbq2WipllpcsqaLkXQZl6qTnXb/uvoVE162j4lYni2lyfeSU2fxNPKWPIcljh3VKfkxSE66BXh9OZcvoE3zDFuJ54XyI6QpRqR6klT90dD3MbpwSuK3EcAwv8six7ZQLSfS7K9oKpsW2wRbVGgrBsrTDGhKyp7m2hYvF+b/RAzbN5MjL0rAhRbbI5fEv+91+H5zBZc4DfbbHjet53trKAVqnqbXCIlhNW9GYQub8597+OWjUf4o93wzTuhLiiLuyiafELZ2WlPU+LhJdOuUPALgqeXpm0kDUMisjIYlYAzpnvQ+NJQ0WEakLEgQoFAx5nMbDsmIOP+HoIfjnrsifvOW8XHepnZm7RG6ai98Y0RQ1DJsBfCe0/7vEQnOyo8pJB/WoX83vNcDlpqL4mB/vjAzYnv3YMgHyt/kjjDVKpRRrozIx92eJ4EWPAIcVgtmRdUWObFvDhbct6D+1njA3TaSz4docj6at4=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(136003)(346002)(39860400002)(396003)(1800799009)(82310400011)(451199024)(186009)(46966006)(36840700001)(40470700004)(31686004)(5660300002)(70586007)(40480700001)(40460700003)(31696002)(36756003)(47076005)(81166007)(86362001)(356005)(82740400003)(36860700001)(110136005)(426003)(41300700001)(53546011)(336012)(16526019)(26005)(83380400001)(478600001)(2906002)(966005)(2616005)(8936002)(44832011)(4326008)(8676002)(16576012)(70206006)(316002)(43740500002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2023 10:44:25.9717 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c8610a8-ae9f-4551-c887-08dba7b3bfc0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E4.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7726
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,77 +127,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-22 21:56 +03:00, Simon Glass wrote:
-> Hi Alper,
+Hi,
+
+On 8/28/23 12:00, Chanho Park wrote:
+> Hi,
 > 
-> On Tue, 22 Aug 2023 at 06:10, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>> -----Original Message-----
+>> From: Eugen Hristev <eugen.hristev@collabora.com>
+>> Sent: Monday, August 28, 2023 5:47 PM
+>> To: Chanho Park <chanho61.park@samsung.com>; 'Michal Simek'
+>> <michal.simek@amd.com>; u-boot@lists.denx.de
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Subject: Re: [PATCH] fpga: define dummy fpga_load function for debug build
 >>
->> From: Alexander Graf <agraf@csgraf.de>
+>> On 8/28/23 03:21, Chanho Park wrote:
+>>> Hi,
+>>>
+>>>> -----Original Message-----
+>>>> From: Michal Simek <michal.simek@amd.com>
+>>>> Sent: Friday, August 25, 2023 4:23 PM
+>>>> To: Chanho Park <chanho61.park@samsung.com>; u-boot@lists.denx.de
+>>>> Subject: Re: [PATCH] fpga: define dummy fpga_load function for debug
+>>>> build
+>>>>
+>>>> Hi,
+>>>>
+>>>> On 8/16/23 08:54, Chanho Park wrote:
+>>>>> This fixes below build error when CC_OPTIMIZE_FOR_DEBUG is enabled
+>>>>> and CONFIG_SPL_FPGA is not enabled.
+>>>>>
+>>>>> ../common/spl/spl_fit.c:591: undefined reference to `fpga_load'
+>>>>> collect2: error: ld returned 1 exit status
+>>>>>
+>>>>> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+>>>>> ---
+>>>>>     include/fpga.h | 8 ++++++++
+>>>>>     1 file changed, 8 insertions(+)
+>>>>>
+>>>>> diff --git a/include/fpga.h b/include/fpga.h index
+>>>>> ed688cc0fa3b..44f2755a3f10 100644
+>>>>> --- a/include/fpga.h
+>>>>> +++ b/include/fpga.h
+>>>>> @@ -60,8 +60,16 @@ int fpga_add(fpga_type devtype, void *desc);
+>>>>>     int fpga_count(void);
+>>>>>     const fpga_desc *const fpga_get_desc(int devnum);
+>>>>>     int fpga_is_partial_data(int devnum, size_t img_len);
+>>>>> +#if CONFIG_IS_ENABLED(FPGA)
+>>>>>     int fpga_load(int devnum, const void *buf, size_t bsize,
+>>>>>     	      bitstream_type bstype, int flags);
+>>>>> +#else
+>>>>> +static inline int fpga_load(int devnum, const void *buf, size_t bsize,
+>>>>> +	      bitstream_type bstype, int flags) {
+>>>>> +	return FPGA_FAIL;
+>>>>> +}
+>>>>> +#endif
+>>>>>     int fpga_fsload(int devnum, const void *buf, size_t size,
+>>>>>     		fpga_fs_info *fpga_fsinfo);
+>>>>>     int fpga_loads(int devnum, const void *buf, size_t size,
+>>>>
+>>>> There is another patch targeting the same code.
+>>>> Please take a look at
+>>>> https://lore.kernel.org/r/20230808102227.34233-1-
+>>>> eugen.hristev@collabora.com
+>>>
+>>> I wasn't aware that there was an attempt to fix the issue. If I knew it,
+>> I would reply the patch...
+>>>
+>>>>
+>>>> and work together to come up with the patch which covers both cases.
+>>>
+>>> Yes. I also tried to make the patch with CONFIG_CC_OPTIMIZE_FOR_DEBUG
+>> guard but I couldn't find any codes that uses the guard.
+>>> And I was also worried about the CC_OPTIMIZE_FOR_DEBUG's behavior. It
+>> could be related with the optimization level of the compiler.
+>>> That's why I put the guard with #if CONFIG_IS_ENABLED(FPGA).
+>>>
+>>> Best Regards,
+>>> Chanho Park
+>>>
 >>
->> Now that we have a ramfb device driver, let's add the necessary glueing
->> magic to also spawn it when we find its qfw file node.
+>>
+>> Hi Chanho,
+>>
+>> Simon suggested to use CONFIG_CC_OPTIMIZE_FOR_DEBUG in this case here:
+>>
+>> https://protect2.fireeye.com/v1/url?k=a911b2cb-c86a1843-a9103984-
+>> 74fe4860018a-146c33e2b586dc8a&q=1&e=e288ab48-75e8-400b-91c9-
+>> e8bd95520918&u=https%3A%2F%2Fpatchwork.ozlabs.org%2Fproject%2Fuboot%2Fpatc
+>> h%2F20230619102839.277902-1-eugen.hristev%40collabora.com%2F
+>>
+>> As I told Michal, basically your patch and my patch do the same thing.
+>> I suggested him to pick the one that he thinks it's best. (or even suggest
+>> another way)
 > 
-> So then how do we select which video driver is used? I think we should
-> have this in the DT so there is some control.
+> I agree. Either way, I'm fine with it.
 
-I think you mean choosing between multiple potential video devices for a
-video console, but just in case: AFAIK only the ramfb driver can be used
-with -device ramfb, unlike how either vesa or bochs can be used for
--device VGA.
+ok. I prefer Eugen patch and Chanho please send your tag against that patch.
+And let me comment Eugen one.
 
-This series is less about being able to use multiple video devices, but
-more about supporting by default different configurations in which QEMU
-can be launched: with "-device VGA" or "-vga none -device ramfb".
+Thanks,
+Michal
 
-That being said, I had some success with multiple video console
-attempts. For "-device VGA -device ramfb", we need to make `*addrp -=
-CONFIG_VAL(VIDEO_PCI_DEFAULT_FB_SIZE);` unconditional in video_reserve()
- to correctly allocate for both vesa and ramfb. Then we can run `env set
-serial,vidconsole,vidconsole1` which sets up both video/vidconsole
-devices with same text content.
-
-Regardless of this series, with VIDEO_PCI_DEFAULT_FB_SIZE=0x3000000 and
-"-device VGA -device VGA -device VGA" we get two broken and one empty
-display, and `env set serial,vidconsole,vidconsole1,vidconsole2` puts a
-console to the third display. I think it's a bug the first two are
-broken, and it's initially using the first broken display as vidconsole.
-
-Anyway, my opinion is: if stdout/stderr has "vidconsole", we should
-enable a vidconsole on all consoles, but if it has "vidconsole#" we
-should only enable the one on that video# device. Then device-tree could
-have /aliases { video0 = "..."; video1 = &...; } or something to have a
-stable order?
-
-Or, you might mean adding a ramfb node to the device-tree, in which case
-that's going to reopen a can of OF_BOARD worms... (Same as what applies
-to putting bootph,* into qfw device-tree node, so I'll reply there.)
-
->> [...]
->> 
->> +static void qfw_bind_ramfb(struct udevice *dev)
->> +{
->> +       struct fw_file *file;
->> +       int ret;
->> +
->> +       if (!IS_ENABLED(CONFIG_VIDEO_RAMFB))
->> +               return;
-> 
-> Needs an error-code return
-> 
->> +
->> +       ret = qfw_read_firmware_list(dev);
->> +       if (ret)
->> +               return;
->> +
->> +       file = qfw_find_file(dev, "etc/ramfb");
->> +       if (!file) {
->> +               /* No ramfb available. */
->> +               return;
->> +       }
->> +
->> +       device_bind_driver(dev, "ramfb", "qfw-ramfb", NULL);
-> 
-> check error
-> 
-
-Will try to fix both, thanks.
