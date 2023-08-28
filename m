@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8CCC83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE194C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 060A38652B;
-	Mon, 28 Aug 2023 19:56:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49CC1864BA;
+	Mon, 28 Aug 2023 19:56:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I5tSEkO9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eV47Jmag";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 756F286522; Mon, 28 Aug 2023 19:56:06 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 1591B864CB; Mon, 28 Aug 2023 19:56:16 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F5E786526
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:55:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1B6286518
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:56:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5922b96c5fcso41832157b3.0
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:55:57 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-58e6c05f529so43996997b3.3
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:56:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693245356; x=1693850156;
+ d=chromium.org; s=google; t=1693245371; x=1693850171;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eu/daQx2olfCb8+gAoAp3TukfGLg92J1lFKhEnbk9RU=;
- b=I5tSEkO9g3axx3T/UBZCpMKoJMaOV/CLkvlg+EXAvmhCRkZx3aoZv2swLLJ6jbVLy0
- YRLopAhhf1stdJCP0ll119rvCb1epURBNCzUW5AeEx/zKZlzwrYNnbyBGAx3uZgdj+Ae
- rgBknM4O9/oLGpM8pBUWA120SEV7B2huN6vXI=
+ bh=aNlkP/JYdxpuHICj3p32hkyfwtTEddLrXvcABtbgF5s=;
+ b=eV47JmagulhuvTgEWWtVdscmoM+KyHIvDkrtkjhcly9RxND4zFV8rWr/wB/l2WD+GY
+ mvvDKLhYzj8ZJEhN9k5bskV64MFeFq+spymdDuFgCqHugwsMtttly7e9r6lm4VrQ7mdV
+ 704mJXNremnISpcgYELNrt0EmCNSLVpln8oqM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693245356; x=1693850156;
+ d=1e100.net; s=20221208; t=1693245371; x=1693850171;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eu/daQx2olfCb8+gAoAp3TukfGLg92J1lFKhEnbk9RU=;
- b=ZBv16YOSfMrbi35P0vnhCw4vtBx+k72ydH8uYs3KlXjOuL6D+05L/c6uhm/7qm6D2m
- znOlDc3js88Q0Uoypygh0PJdEQfX96aBGZKNUosH4KJL2IMJ4Ff5l7l5wEZlnkyhukx+
- vV5UaNe340fw4UXQjFU6Hke+otmV+MCP11x7ewC0Bw+gxUuZzBDjNkxtpcnxWChvIeJt
- pWlbeezXxR0RJIgk1a+vj+OlpFI+t/262+ZkyHdoBDFKYRE+2ne8yGguklct7soni3+8
- 7+JldD1jhQAvYN+FXf+ingMFfZESlVqJi76bYvi3XGidfaHoT+VAzw+Dic7t58789l9v
- Kx9Q==
-X-Gm-Message-State: AOJu0YxseLn/DHOiYtILM/sDguvnUGX2bhtkNsrNLXTwl+vD+fkjT/96
- irSl7gtl18/cn7iXQes6umjtY7gtSueS/unclFrEFQ==
-X-Google-Smtp-Source: AGHT+IHpHSchcXf1vWL4H3f0Yi9pb1OAQ47p5mvEwMieAe/52jgsIrUqeH5cQgVNLIDxV2lE5i9Zvcq9Br11uUzHrwY=
-X-Received: by 2002:a05:6902:2:b0:d47:d267:26fe with SMTP id
- l2-20020a056902000200b00d47d26726femr25615328ybh.21.1693245356102; Mon, 28
- Aug 2023 10:55:56 -0700 (PDT)
+ bh=aNlkP/JYdxpuHICj3p32hkyfwtTEddLrXvcABtbgF5s=;
+ b=iQTj4O2lDqL7UFcrNJpGB5v/BjOVc14OeikjiALQxYNsF6jOIhvhjK7LKsOxFLZA3j
+ CiKq9wCQ+FLQAEmdk2QK/x+qgYVGiinbo69zHiAZAL0+PnpJMn/v4IiuxlUWQUKr2jv4
+ 3Fxpt2sIHasUXPpGbue2KJBe1qg1wSQFQ9GPF+ten9b8JWnjsX20E7GFQZqJGNQaDFOZ
+ YvPQSJq+eAevaPOYtlhX1vrQke5RxForXau7+o/X89ApJ+LBw2ZAB7W05Iky9VzS4u4f
+ XnQj2Lc2m/Kv8XnLV5+DyqwLUoK9kaplgQuXblg2Aw+0uytBa2fjfOaRnHErVBty5xzS
+ naJA==
+X-Gm-Message-State: AOJu0YyGkpWR7PZkjL/UL9bBKWZdA2ixxjeegZ9wSkCX7bBSJ1JzamoC
+ v55y4neUANEemD1ZQP2UQuhd3GnF9fhhVgVbduL5EA==
+X-Google-Smtp-Source: AGHT+IE35yvKz4M6pytCHlG8151za7nyy+fUiFgc5wB7AynoJlTla1W1fPazv07VjNep6b3hjVffwQLNfLPKm6AAP6s=
+X-Received: by 2002:a25:9288:0:b0:d0e:b924:8e20 with SMTP id
+ y8-20020a259288000000b00d0eb9248e20mr23106408ybl.22.1693245370561; Mon, 28
+ Aug 2023 10:56:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
- <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
- <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
- <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
- <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
- <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
- <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
- <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
- <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
- <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
-In-Reply-To: <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
+References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
+ <20230814173944.288356-5-alpernebiyasak@gmail.com>
+ <CAPnjgZ2d1mJp28UP2+zKC6+2pED_=YdovA_jaNJz2r+C=-jufg@mail.gmail.com>
+ <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
+In-Reply-To: <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 28 Aug 2023 11:54:58 -0600
-Message-ID: <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
-Subject: Re: [PATCH v5 00/13] Add video damage tracking
-To: Alexander Graf <agraf@csgraf.de>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de, 
- Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
+Date: Mon, 28 Aug 2023 11:54:49 -0600
+Message-ID: <CAPnjgZ2=tgDhXhm70RXcdXdJctJVqhO1vmH_==1N5YyzNH5cDg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux
+ distros
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng@tinylab.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Bharat Gooty <bharat.gooty@broadcom.com>, 
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
@@ -101,300 +92,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alex,
+Hi Alper,
 
-On Wed, 23 Aug 2023 at 02:56, Alexander Graf <agraf@csgraf.de> wrote:
+On Sun, 27 Aug 2023 at 09:49, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> Hey Simon,
->
-> On 22.08.23 20:56, Simon Glass wrote:
-> > Hi Alex,
+> On 2023-08-15 01:43 +03:00, Simon Glass wrote:
+> > Hi Alper,
 > >
-> > On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
-> >>
-> >> On 22.08.23 01:03, Simon Glass wrote:
-> >>> Hi Alex,
-> >>>
-> >>> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrote:
-> >>>> On 22.08.23 00:10, Simon Glass wrote:
-> >>>>> Hi Alex,
-> >>>>>
-> >>>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
-> >>>>>> On 21.08.23 21:57, Simon Glass wrote:
-> >>>>>>> Hi Alex,
-> >>>>>>>
-> >>>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
-> >>>>>>>> On 21.08.23 21:11, Simon Glass wrote:
-> >>>>>>>>> Hi Alper,
-> >>>>>>>>>
-> >>>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >>>>>>>>>> This is a rebase of Alexander Graf's video damage tracking series, with
-> >>>>>>>>>> some tests and other changes. The original cover letter is as follows:
-> >>>>>>>>>>
-> >>>>>>>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
-> >>>>>>>>>>>
-> >>>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
-> >>>>>>>>>>> but need it accessible by the display controller which reads directly
-> >>>>>>>>>>> from a later point of consistency. Hence, we flush the frame buffer to
-> >>>>>>>>>>> DRAM on every change. The full frame buffer.
-> >>>>>>>>> It should not, see below.
-> >>>>>>>>>
-> >>>>>>>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
-> >>>>>>>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
-> >>>>>>>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
-> >>>>>>>>>>> printed space triggers a cache flush.
-> >>>>>>>>> That is a bug somewhere in EFI.
-> >>>>>>>> Unfortunately not :). You may call it a bug in grub: It literally prints
-> >>>>>>>> over space characters for every character in its menu that it wants
-> >>>>>>>> cleared. On every text screen draw.
-> >>>>>>>>
-> >>>>>>>> This wouldn't be a big issue if we only flush the reactangle that gets
-> >>>>>>>> modified. But without this patch set, we're flushing the full DRAM
-> >>>>>>>> buffer on every u-boot text console character write, which means for
-> >>>>>>>> every character (as that's the only API UEFI has).
-> >>>>>>>>
-> >>>>>>>> As a nice side effect, we speed up the normal U-Boot text console as
-> >>>>>>>> well with this patch set, because even "normal" text prints that write
-> >>>>>>>> for example a single line of text on the screen today flush the full
-> >>>>>>>> frame buffer to DRAM.
-> >>>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
-> >>>>>>> after every character. It doesn't do that for normal character output
-> >>>>>>> and I don't think it makes sense to do it for EFI either.
-> >>>>>> I see. Let's trace the calls:
-> >>>>>>
-> >>>>>> efi_cout_output_string()
-> >>>>>> -> fputs()
-> >>>>>> -> vidconsole_puts()
-> >>>>>> -> video_sync()
-> >>>>>> -> flush_dcache_range()
-> >>>>>>
-> >>>>>> Unfortunately grub abstracts character backends down to the "print
-> >>>>>> character" level, so it calls UEFI's sopisticated "output_string"
-> >>>>>> callback with single characters at a time, which means we do a full
-> >>>>>> dcache flush for every character that we print:
-> >>>>>>
-> >>>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
-> >>>>>>
-> >>>>>>
-> >>>>>>>>>>> This patch set implements the easiest mitigation against this problem:
-> >>>>>>>>>>> Damage tracking. We remember the lowest common denominator region that was
-> >>>>>>>>>>> touched since the last video_sync() call and only flush that. The most
-> >>>>>>>>>>> typical writer to the frame buffer is the video console, which always
-> >>>>>>>>>>> writes rectangles of characters on the screen and syncs afterwards.
-> >>>>>>>>>>>
-> >>>>>>>>>>> With this patch set applied, we reduce drawing a large grub menu (with
-> >>>>>>>>>>> serial console attached for size information) on an RK3399-ROC system
-> >>>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
-> >>>>>>>>>>>
-> >>>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
-> >>>>>>>>>>> overhead compared to before as well. So even x86 systems should be faster
-> >>>>>>>>>>> with this now :).
-> >>>>>>>>>>>
-> >>>>>>>>>>>
-> >>>>>>>>>>> Alternatives considered:
-> >>>>>>>>>>>
-> >>>>>>>>>>>        1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
-> >>>>>>>>>>>           so often. We are missing timers to do this generically.
-> >>>>>>>>>>>
-> >>>>>>>>>>>        2) Double buffering - We could try to identify whether anything changed
-> >>>>>>>>>>>           at all and only draw to the FB if it did. That would require
-> >>>>>>>>>>>           maintaining a second buffer that we need to scan.
-> >>>>>>>>>>>
-> >>>>>>>>>>>        3) Text buffer - Maintain a buffer of all text printed on the screen with
-> >>>>>>>>>>>           respective location. Don't write if the old and new character are
-> >>>>>>>>>>>           identical. This would limit applicability to text only and is an
-> >>>>>>>>>>>           optimization on top of this patch set.
-> >>>>>>>>>>>
-> >>>>>>>>>>>        4) Hash screen lines - Create a hash (sha256?) over every line when it
-> >>>>>>>>>>>           changes. Only flush when it does. I'm not sure if this would waste
-> >>>>>>>>>>>           more time, memory and cache than the current approach. It would make
-> >>>>>>>>>>>           full screen updates much more expensive.
-> >>>>>>>>> 5) Fix the bug mentioned above?
-> >>>>>>>>>
-> >>>>>>>>>> Changes in v5:
-> >>>>>>>>>> - Add patch "video: test: Split copy frame buffer check into a function"
-> >>>>>>>>>> - Add patch "video: test: Support checking copy frame buffer contents"
-> >>>>>>>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
-> >>>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
-> >>>>>>>>>> - Document damage struct and fields in struct video_priv comment
-> >>>>>>>>>> - Return void from video_damage()
-> >>>>>>>>>> - Fix undeclared priv error in video_sync()
-> >>>>>>>>>> - Drop unused headers from video-uclass.c
-> >>>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
-> >>>>>>>>>> - Call video_damage() also in video_fill_part()
-> >>>>>>>>>> - Use met->baseline instead of priv->baseline
-> >>>>>>>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-> >>>>>>>>>> - Update console_rotate.c video_damage() calls to pass video tests
-> >>>>>>>>>> - Remove mention about not having minimal damage for console_rotate.c
-> >>>>>>>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
-> >>>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
-> >>>>>>>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
-> >>>>>>>>>> - Fix memmove() calls by removing the extra dev argument
-> >>>>>>>>>> - Call video_sync() before checking copy_fb in video tests
-> >>>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
-> >>>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
-> >>>>>>>>>>
-> >>>>>>>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
-> >>>>>>>>>>
-> >>>>>>>>>> Changes in v4:
-> >>>>>>>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
-> >>>>>>>>>> - Simplify first damage logic
-> >>>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
-> >>>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
-> >>>>>>>>>> - Add patch "video: Always compile cache flushing code"
-> >>>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
-> >>>>>>>>>>
-> >>>>>>>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
-> >>>>>>>>>>
-> >>>>>>>>>> Changes in v3:
-> >>>>>>>>>> - Adapt to always assume DM is used
-> >>>>>>>>>> - Adapt to always assume DM is used
-> >>>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
-> >>>>>>>>>>
-> >>>>>>>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
-> >>>>>>>>>>
-> >>>>>>>>>> Changes in v2:
-> >>>>>>>>>> - Remove ifdefs
-> >>>>>>>>>> - Fix ranges in truetype target
-> >>>>>>>>>> - Limit rotate to necessary damage
-> >>>>>>>>>> - Remove ifdefs from gop
-> >>>>>>>>>> - Fix dcache range; we were flushing too much before
-> >>>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
-> >>>>>>>>>>
-> >>>>>>>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
-> >>>>>>>>>>
-> >>>>>>>>>> Alexander Graf (9):
-> >>>>>>>>>>        dm: video: Add damage tracking API
-> >>>>>>>>>>        dm: video: Add damage notification on display fills
-> >>>>>>>>>>        vidconsole: Add damage notifications to all vidconsole drivers
-> >>>>>>>>>>        video: Add damage notification on bmp display
-> >>>>>>>>>>        efi_loader: GOP: Add damage notification on BLT
-> >>>>>>>>>>        video: Only dcache flush damaged lines
-> >>>>>>>>>>        video: Use VIDEO_DAMAGE for VIDEO_COPY
-> >>>>>>>>>>        video: Always compile cache flushing code
-> >>>>>>>>>>        video: Enable VIDEO_DAMAGE for drivers that need it
-> >>>>>>>>>>
-> >>>>>>>>>> Alper Nebi Yasak (4):
-> >>>>>>>>>>        video: test: Split copy frame buffer check into a function
-> >>>>>>>>>>        video: test: Support checking copy frame buffer contents
-> >>>>>>>>>>        video: test: Test partial updates of hardware frame buffer
-> >>>>>>>>>>        video: test: Test video damage tracking via vidconsole
-> >>>>>>>>>>
-> >>>>>>>>>>       arch/arm/mach-omap2/omap3/Kconfig |   1 +
-> >>>>>>>>>>       arch/arm/mach-sunxi/Kconfig       |   1 +
-> >>>>>>>>>>       drivers/video/Kconfig             |  26 +++
-> >>>>>>>>>>       drivers/video/console_normal.c    |  27 ++--
-> >>>>>>>>>>       drivers/video/console_rotate.c    |  94 +++++++----
-> >>>>>>>>>>       drivers/video/console_truetype.c  |  37 +++--
-> >>>>>>>>>>       drivers/video/exynos/Kconfig      |   1 +
-> >>>>>>>>>>       drivers/video/imx/Kconfig         |   1 +
-> >>>>>>>>>>       drivers/video/meson/Kconfig       |   1 +
-> >>>>>>>>>>       drivers/video/rockchip/Kconfig    |   1 +
-> >>>>>>>>>>       drivers/video/stm32/Kconfig       |   1 +
-> >>>>>>>>>>       drivers/video/tegra20/Kconfig     |   1 +
-> >>>>>>>>>>       drivers/video/tidss/Kconfig       |   1 +
-> >>>>>>>>>>       drivers/video/vidconsole-uclass.c |  16 --
-> >>>>>>>>>>       drivers/video/video-uclass.c      | 190 ++++++++++++----------
-> >>>>>>>>>>       drivers/video/video_bmp.c         |   7 +-
-> >>>>>>>>>>       include/video.h                   |  59 +++----
-> >>>>>>>>>>       include/video_console.h           |  52 ------
-> >>>>>>>>>>       lib/efi_loader/efi_gop.c          |   7 +
-> >>>>>>>>>>       test/dm/video.c                   | 256 ++++++++++++++++++++++++------
-> >>>>>>>>>>       20 files changed, 483 insertions(+), 297 deletions(-)
-> >>>>>>>>> It is good to see this tidied up into something that can be applied!
-> >>>>>>>>>
-> >>>>>>>>> I am unsure what is going on with the EFI performance, though. It
-> >>>>>>>>> should not flush the cache after every character, only after a new
-> >>>>>>>>> line. Is there something wrong in here? If so, we should fix that bug
-> >>>>>>>>> first and it should be patch 1 of this series.
-> >>>>>>>> Before I came up with this series, I was trying to identify the UEFI bug
-> >>>>>>>> in question as well, because intuition told me surely this is a bug in
-> >>>>>>>> UEFI :). Turns out it really isn't this time around.
-> >>>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
-> >>>>>>> implementation. Where did you look for the bug?
-> >>>>>> The "real" bug is in grub. But given that it's reasonably simple to work
-> >>>>>> around in U-Boot and even with it "fixed" in grub we would still see
-> >>>>>> performance benefits from flushing only parts of the screen, I think
-> >>>>>> it's worth living with the grub deficiency.
-> >>>>> OK thanks for digging into it. I suggest we add a param to
-> >>>>> vidconsole_puts() to tell it whether to sync or not, then the EFI code
-> >>>>> can indicate this and try to be a bit smarter about it.
-> >>>> It doesn't know when to sync either. From its point of view, any
-> >>>> "console output" could be the last one. There is no API in UEFI that
-> >>>> says "please flush console output now".
-> >>> Yes, I understand. I was not suggesting we were missing an API. But
-> >>> some sort of heuristic would do, e.g. only flush on a newline, flush
-> >>> every 50 chars, etc.
-> >> I can't think of any heuristic that would reliably work. Relevant for
-> >> this conversation, UEFI provides 2 calls:
-> >>
-> >>     * Write string to screen (efi_cout_output_string)
-> >>     * Set text cursor position to X, Y (efi_cout_set_cursor_position)
-> >>
-> >> It's perfectly legal for a UEFI application to do something like
-> >>
-> >> efi_cout_set_cursor_position(10, 10);
-> >> efi_cout_output_string("f");
-> >> efi_cout_output_string("o");
-> >> efi_cout_output_string("o") ;
-> >>
-> >> to update contents of a virtual text box on the screen. Where in this
-> >> chain of events would we call video_sync(), but on every call to
-> >> efi_cout_output_string()?
-> > Actually U-Boot has the same problem, but we have managed to work out something.
->
->
-> U-Boot as a code base has a much easier stance: It can add APIs when it
-> needs them in places that require them. With UEFI (as well as the U-Boot
-> native API), we're stuck with what's there.
->
-> I also don't understand what you mean by "we have managed to work out
-> something". This patch set is not a UEFI fix - it fixes generic U-Boot
-> behavior and speeds up non-UEFI boots as well. The improvement there is
-> just not as impressive as with grub :).
-
-We are still not quite on the same page...
-
-U-Boot does have video_sync() but it doesn't know when to call it. If
-it does not call it, then any amount of single-threaded code can run
-after that, which may update the framebuffer. In other words, U-Boot
-is in exactly the same boat as UEFI. It has to decide whether to call
-video_sync() based on some sort of heuristic.
-
-That is the only point I am trying to make here. Does that make sense?
-
->
->
-> > I do think it is still to flush the cache on every char. I suspect you
-> > will find that even a simple heuristic like I mentioned would be good
-> > enough.
+> > On Mon, 14 Aug 2023 at 11:40, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >> I actually want to put the root.img device first so that the VM can boot
+> >> into the installed system when it reboots, but U-Boot can't find the
+> >> bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
+> >> scan -lab`, but it seems to only ever search the first virtio-blk.
+> >> However, `eficonfig; bootefi bootmgr` makes it boot somehow.
 > >
-> > Also I notice that EFI calls notify? all the time, so U-Boot probably
-> > does have the ability to sync the video every 10ms if we wanted to.
->
->
-> I fail to see how invalidating the frame buffer for the screen every
-> 10ms is any better than doing flush+invalidate operations only on screen
-> areas that changed? It's more fragile, more difficult to understand and
-> also significantly more expensive given that most of the time very
-> little on the screen actually changes.
-
-I am not suggesting it is better, at all. I am just trying to explain
-that the U-Boot EFI implementation should not be calling video_sync()
-after every character, before or after this series.
-
->
->
+> > Yes, this is annoying.
 > >
-> > It seems from this discussion that we have made great the enemy of the good.
+> > The problem is that the scanning is getting so complicated. The
+> > boot_targets var lists things which can either be a uclass, or a
+> > uclass with a device number. The currently implementation sees
+> > "virtio" and moves on to the next thing in boot_targets once it has
+> > processed one virtio device. That is obviously not correct, but...
+> >
+> > Would it be possible to just drop the 'boot_targets' var? That is what
+> > is stuffing it up, but we don't actually need it now. The defaults end
+> > up doing the same thing, apart (perhaps) from the strangeness of
+> > virtio which can be both a network and a blk device.
+> >
+> > I believe it is possible to do the right thing, but I'll need to
+> > create a better test mechanism to handle all the cases.
 >
->
-> I agree. Damage tracking in this patch set is elegant, simple,
-> predictable, low overhead and basically just abstracts the video copy
-> code path to a generic solution. All while it pretty much solves the
-> issue for good. I don't understand what's not to like about it :)
+> I think some kind of a "priority score" could help -- iterate over
+> boot_targets first just to generate bootdev priorities, then carry them
+> over as bootflows are discovered (adjusted for bootmeth order), then use
+> those scores as the order to boot / to show a sorted menu / to test?
 
-I think it is a really nice feature and I hope it can be applied soon.
+We sort-of have that, in that bootdevs have a priority. We could add
+something to struct bootflow which takes that but adds more
+fine-grained information, e.g. based on some sort of filter function
+that can decide?
+
+Bear in mind that we normally want to boot the first thing we find,
+and we also want to use lazy init (so no USB unless we need it). But
+yes for the case where we display a menu I think we could make more of
+the priority feature. What are you thinking of?
+
+BTW, even for the menu, my original vision was that the menu would
+display immediately, with new bootflows appearing as they are
+discovered.
 
 Regards,
 Simon
