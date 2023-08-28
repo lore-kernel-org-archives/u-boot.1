@@ -4,80 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41C66C83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 20:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40407C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 20:24:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55A7480569;
-	Mon, 28 Aug 2023 22:24:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A3D3086482;
+	Mon, 28 Aug 2023 22:24:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gc8rhCYE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22D9480569; Mon, 28 Aug 2023 22:24:02 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11D4A80275
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 22:23:59 +0200 (CEST)
+ id 116558645F; Mon, 28 Aug 2023 22:24:53 +0200 (CEST)
+Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
+ by phobos.denx.de (Postfix) with ESMTP id CA51C86482
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 22:24:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2b962535808so55967781fa.0
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 13:23:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693254238; x=1693859038;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sjLPbjx4qOoSDSKEbluduSjaWMQ2QofjdI3XRoqQGQY=;
- b=gc8rhCYEbJ9DPpeRIIrNJofMDP218TcnZpLeJbJyu5FNv9NxnxPP7P/5bO/TIP/Lxc
- u5wNfbbyvZ804WcDp6GcBC7RXYgUXOTj4d/gX7L7jMU1h0LHR0HbYIxkqZukxyDdBZTW
- UGFZZSDVliw9ue5K00jctBc3I+fGBmT4y1xgohSOfm/RBesl6TGLldDyLd7EcPn0zFlQ
- Cw48lQFesiqfI4Cz/4lS8Czrrn9YZNteNqDFMtnVYelstalV9lfOp4okVJe+9pxM4SEr
- pmq5KjZD4ctOMAmXXqdoMBFDWvK4YCGQxjQczfB2fa2Fr8pjoXwsQHdkmCi7XhuX3fKN
- reFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693254238; x=1693859038;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sjLPbjx4qOoSDSKEbluduSjaWMQ2QofjdI3XRoqQGQY=;
- b=hi8S83tgRLtRfY3Z9uy3SHL7p7m4BszkuH4swaUdP1XKTmsdp6WJssVutdOBHBJ9nW
- 7j8P1HuIBZ2Ald9g9sfJ3hdxIETeA3ClfCkW7JVW9Sp9IB622jiVOjtg5roxhJBXt606
- 7F8UVT+t3ijzRZnycvIEr8cD0LMQPwKV0kHAXkFMhDo5fiJfifHfhILonoqqGHSigUb/
- 9/vp3+Zw1FFEa8ZMlCjv+J6Q/Ypu+jc/mW9mahIV2vlxrfU0fKpPrG+S4ujOpIz30dKF
- QSpud/ARTa0vSOOhmCXHhV6pBruQ4+rWFv7I2YHjQ/uY/PsmVvLvzwrUI7HyU/bStY8L
- Y48Q==
-X-Gm-Message-State: AOJu0Yxk0VG+5GsRNu4BeIbYtb6Ei7RxFizPwvtqb9x0HnOK1xYFqLUx
- sovlXu/MQYTScg230iHGUfZl02959qZigUVsv4A=
-X-Google-Smtp-Source: AGHT+IF4lHR8o2xvdPstHE7/sbdG/uXWf2tnRZKILu55o4FtR/OLMB9j4kQaA1M9bnuF3Vc3k8elbMs9h/Y2yq6D+/A=
-X-Received: by 2002:a2e:a0c7:0:b0:2b1:a89a:5f2b with SMTP id
- f7-20020a2ea0c7000000b002b1a89a5f2bmr19780082ljm.2.1693254237830; Mon, 28 Aug
- 2023 13:23:57 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=csgraf.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
+Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 803C760801EC;
+ Mon, 28 Aug 2023 22:24:47 +0200 (CEST)
+Message-ID: <11296797-3d37-413b-9517-2890ae26a9bd@csgraf.de>
+Date: Mon, 28 Aug 2023 22:24:46 +0200
 MIME-Version: 1.0
-References: <20220712071212.2188390-1-sumit.garg@linaro.org>
- <20220712071212.2188390-6-sumit.garg@linaro.org>
- <CAPnjgZ2jR_fpjKo6XyG6eOY1ZX9ktXsaON6Ey6STY1ZjcnUzAw@mail.gmail.com>
- <CAFA6WYMQRFuga9h=PA4UCYofOt7x2Gohh9oDQAQTaL4ZFKr-Vw@mail.gmail.com>
- <CAPnjgZ1jPVk=NX2aJVfEXwA-XmvoXO4v31c_nepjEMgeu5+rSw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1jPVk=NX2aJVfEXwA-XmvoXO4v31c_nepjEMgeu5+rSw@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 28 Aug 2023 21:23:46 +0100
-Message-ID: <CALeDE9OafhEwznXY5K4YZeMezuZRo5D1Gb57DDxFzPEufcHEfw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/9] board: qualcomm: Add support for dragonboard845c
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+Content-Language: en-GB
 To: Simon Glass <sjg@chromium.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- rfried.dev@gmail.com, 
- peng.fan@nxp.com, jh80.chung@samsung.com, trini@konsulko.com, 
- dsankouski@gmail.com, stephan@gerhold.net, vinod.koul@linaro.org, 
- nicolas.dechesne@linaro.org, mworsfold@impinj.com, daniel.thompson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
+ <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+ <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+ <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
+ <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+ <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+ <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
+ <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
+ <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
+From: Alexander Graf <agraf@csgraf.de>
+In-Reply-To: <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,172 +75,323 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 28, 2023 at 6:55=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Sumit,
->
-> On Thu, 24 Aug 2023 at 04:44, Sumit Garg <sumit.garg@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Thu, 24 Aug 2023 at 05:29, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sumit,
-> > >
-> > > On Tue, 12 Jul 2022 at 01:12, Sumit Garg <sumit.garg@linaro.org> wrot=
-e:
-> > > >
-> > > > Add support for 96Boards Dragonboard 845C aka Robotics RB3 developm=
-ent
-> > > > platform. This board complies with 96Boards Open Platform Specifica=
-tions.
-> > > >
-> > > > Features:
-> > > > - Qualcomm Snapdragon SDA845 SoC
-> > > > - 4GiB RAM
-> > > > - 64GiB UFS drive
-> > > >
-> > > > U-boot is chain loaded by ABL in 64-bit mode as part of boot.img.
-> > > > For detailed build and boot instructions, refer to
-> > > > doc/board/qualcomm/sdm845.rst, board: dragonboard845c.
-> > > >
-> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
-> > > > ---
-> > > >  arch/arm/dts/dragonboard845c-uboot.dtsi       |  37 +++++++
-> > > >  arch/arm/dts/dragonboard845c.dts              |  44 ++++++++
-> > > >  arch/arm/mach-snapdragon/Kconfig              |  14 +++
-> > > >  board/qualcomm/dragonboard845c/Kconfig        |  12 +++
-> > > >  board/qualcomm/dragonboard845c/MAINTAINERS    |   6 ++
-> > > >  board/qualcomm/dragonboard845c/Makefile       |   9 ++
-> > > >  board/qualcomm/dragonboard845c/db845c.its     |  63 +++++++++++
-> > > >  .../dragonboard845c/dragonboard845c.c         |   9 ++
-> > > >  configs/dragonboard845c_defconfig             |  28 +++++
-> > > >  doc/board/qualcomm/sdm845.rst                 | 100 ++++++++++++++=
-+---
-> > > >  include/configs/dragonboard845c.h             |  28 +++++
-> > > >  11 files changed, 337 insertions(+), 13 deletions(-)
-> > > >  create mode 100644 arch/arm/dts/dragonboard845c-uboot.dtsi
-> > > >  create mode 100644 arch/arm/dts/dragonboard845c.dts
-> > > >  create mode 100644 board/qualcomm/dragonboard845c/Kconfig
-> > > >  create mode 100644 board/qualcomm/dragonboard845c/MAINTAINERS
-> > > >  create mode 100644 board/qualcomm/dragonboard845c/Makefile
-> > > >  create mode 100644 board/qualcomm/dragonboard845c/db845c.its
-> > > >  create mode 100644 board/qualcomm/dragonboard845c/dragonboard845c.=
-c
-> > > >  create mode 100644 configs/dragonboard845c_defconfig
-> > > >  create mode 100644 include/configs/dragonboard845c.h
-> > > >
-> > > [..]
-> > >
-> > > > diff --git a/doc/board/qualcomm/sdm845.rst b/doc/board/qualcomm/sdm=
-845.rst
-> > > > index b6642c9579..8ef4749287 100644
-> > > > --- a/doc/board/qualcomm/sdm845.rst
-> > > > +++ b/doc/board/qualcomm/sdm845.rst
-> > > > @@ -35,9 +35,25 @@ Pack android boot image
-> > > >  ^^^^^^^^^^^^^^^^^^^^^^^
-> > > >  We'll assemble android boot image with ``u-boot.bin`` instead of l=
-inux kernel,
-> > > >  and FIT image instead of ``initramfs``. Android bootloader expect =
-gzipped kernel
-> > > > -with appended dtb, so let's mimic linux to satisfy stock bootloade=
-r:
-> > > > +with appended dtb, so let's mimic linux to satisfy stock bootloade=
-r.
-> > > >
-> > >
-> > > [..]
-> > >
-> > > > +The dragonboard845c is a Qualcomm Robotics RB3 Development Platfor=
-m, based on
-> > > > +the Qualcomm SDM845 SoC.
-> > > > +
-> > > > +Steps:
-> > > > +
-> > > > +- Build u-boot::
-> > > > +
-> > > > +       $ export CROSS_COMPILE=3D<aarch64 toolchain prefix>
-> > > > +       $ make dragonboard845c_defconfig
-> > > > +       $ make
-> > > > +
-> > > > +- Create dummy dtb::
-> > > > +
-> > > > +       workdir=3D/tmp/prepare_payload
-> > > > +       mkdir -p "$workdir"
-> > > > +       mock_dtb=3D"$workdir"/payload_mock.dtb
-> > > > +
-> > > > +       dtc -I dts -O dtb -o "$mock_dtb" << EOF
-> > > > +       /dts-v1/;
-> > > > +       / {
-> > > > +               #address-cells =3D <2>;
-> > > > +               #size-cells =3D <2>;
-> > > > +
-> > > > +               memory@80000000 {
-> > > > +                       device_type =3D "memory";
-> > > > +                       /* We expect the bootloader to fill in the =
-size */
-> > > > +                       reg =3D <0 0x80000000 0 0>;
-> > > > +               };
-> > > > +
-> > > > +               chosen { };
-> > > > +       };
-> > > > +       EOF
-> > > > +
-> > > > +- gzip u-boot::
-> > > > +
-> > > > +       gzip u-boot.bin
-> > > > +
-> > > > +- Append dtb to gzipped u-boot::
-> > > > +
-> > > > +        cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
-> > > > +
-> > > > +- A ``db845c.its`` file can be found in ``board/qualcomm/dragonboa=
-rd845c/``
-> > > > +  directory. It expects a folder as ``db845c_imgs/`` in the main d=
-irectory
-> > > > +  containing pre-built kernel, dts and ramdisk images. See ``db845=
-c.its``
-> > > > +  for full path to images::
-> > > > +
-> > > > +       mkimage -f db845c.its db845c.itb
-> > > > +
-> > > > +- Now we've got everything to build android boot image::
-> > > > +
-> > > > +       mkbootimg --kernel u-boot.bin.gz-dtb --ramdisk db845c.itb \
-> > > > +       --output boot.img --pagesize 4096 --base 0x80000000
-> > > > +
-> > > > +- Flash boot.img using db845c fastboot method.
-> > >
-> > > What command should be used here? I can run 'fastboot devices' but am
-> > > not sure what command to use to flash U-Boot.
-> > >
-> >
-> > At the time of writing this doc, I thought it was understood how to
-> > flash boot.img on db845c. But I will make that more explicit. Since
-> > u-boot has to be chain loaded by ABL, the command to flash boot.img
-> > (containing u-boot) is as follows:
-> >
-> > sudo fastboot flash boot boot.img
-> >
-> > > Also, is it possible to flash U-Boot as a first-stage bootloader?
-> > >
-> >
-> > That's not possible currently due to Qcom proprietary bootloader being
-> > used. But there were plans to replace atleast ABL with u-boot (See
-> > slide 9 from this Linaro connect Qcom keynote [1]). I hope that will
-> > materialize soon.
-> >
-> > [1] https://resources.linaro.org/en/resource/necH5bQcfrhCCkjSGHXJyA
-> >
->
-> Thank you for the link. I am pleased to hear it and hope it plays out
-> as that slide seems to indicate.
->
-> I would like to suggest that 96 boards should use open-source firmware
-> when they launch. Once they launch there is little incentive to clean
-> things up.
 
-It's something that has been suggested from the outset but the fact is
-there is no way to enforce it.
+On 28.08.23 19:54, Simon Glass wrote:
+> Hi Alex,
+>
+> On Wed, 23 Aug 2023 at 02:56, Alexander Graf <agraf@csgraf.de> wrote:
+>> Hey Simon,
+>>
+>> On 22.08.23 20:56, Simon Glass wrote:
+>>> Hi Alex,
+>>>
+>>> On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
+>>>> On 22.08.23 01:03, Simon Glass wrote:
+>>>>> Hi Alex,
+>>>>>
+>>>>> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>> On 22.08.23 00:10, Simon Glass wrote:
+>>>>>>> Hi Alex,
+>>>>>>>
+>>>>>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>>>> On 21.08.23 21:57, Simon Glass wrote:
+>>>>>>>>> Hi Alex,
+>>>>>>>>>
+>>>>>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>>>>>> On 21.08.23 21:11, Simon Glass wrote:
+>>>>>>>>>>> Hi Alper,
+>>>>>>>>>>>
+>>>>>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>>>>>>>>>> This is a rebase of Alexander Graf's video damage tracking series, with
+>>>>>>>>>>>> some tests and other changes. The original cover letter is as follows:
+>>>>>>>>>>>>
+>>>>>>>>>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+>>>>>>>>>>>>> but need it accessible by the display controller which reads directly
+>>>>>>>>>>>>> from a later point of consistency. Hence, we flush the frame buffer to
+>>>>>>>>>>>>> DRAM on every change. The full frame buffer.
+>>>>>>>>>>> It should not, see below.
+>>>>>>>>>>>
+>>>>>>>>>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+>>>>>>>>>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+>>>>>>>>>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+>>>>>>>>>>>>> printed space triggers a cache flush.
+>>>>>>>>>>> That is a bug somewhere in EFI.
+>>>>>>>>>> Unfortunately not :). You may call it a bug in grub: It literally prints
+>>>>>>>>>> over space characters for every character in its menu that it wants
+>>>>>>>>>> cleared. On every text screen draw.
+>>>>>>>>>>
+>>>>>>>>>> This wouldn't be a big issue if we only flush the reactangle that gets
+>>>>>>>>>> modified. But without this patch set, we're flushing the full DRAM
+>>>>>>>>>> buffer on every u-boot text console character write, which means for
+>>>>>>>>>> every character (as that's the only API UEFI has).
+>>>>>>>>>>
+>>>>>>>>>> As a nice side effect, we speed up the normal U-Boot text console as
+>>>>>>>>>> well with this patch set, because even "normal" text prints that write
+>>>>>>>>>> for example a single line of text on the screen today flush the full
+>>>>>>>>>> frame buffer to DRAM.
+>>>>>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+>>>>>>>>> after every character. It doesn't do that for normal character output
+>>>>>>>>> and I don't think it makes sense to do it for EFI either.
+>>>>>>>> I see. Let's trace the calls:
+>>>>>>>>
+>>>>>>>> efi_cout_output_string()
+>>>>>>>> -> fputs()
+>>>>>>>> -> vidconsole_puts()
+>>>>>>>> -> video_sync()
+>>>>>>>> -> flush_dcache_range()
+>>>>>>>>
+>>>>>>>> Unfortunately grub abstracts character backends down to the "print
+>>>>>>>> character" level, so it calls UEFI's sopisticated "output_string"
+>>>>>>>> callback with single characters at a time, which means we do a full
+>>>>>>>> dcache flush for every character that we print:
+>>>>>>>>
+>>>>>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>>>>>> This patch set implements the easiest mitigation against this problem:
+>>>>>>>>>>>>> Damage tracking. We remember the lowest common denominator region that was
+>>>>>>>>>>>>> touched since the last video_sync() call and only flush that. The most
+>>>>>>>>>>>>> typical writer to the frame buffer is the video console, which always
+>>>>>>>>>>>>> writes rectangles of characters on the screen and syncs afterwards.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> With this patch set applied, we reduce drawing a large grub menu (with
+>>>>>>>>>>>>> serial console attached for size information) on an RK3399-ROC system
+>>>>>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+>>>>>>>>>>>>> overhead compared to before as well. So even x86 systems should be faster
+>>>>>>>>>>>>> with this now :).
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Alternatives considered:
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>         1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+>>>>>>>>>>>>>            so often. We are missing timers to do this generically.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>         2) Double buffering - We could try to identify whether anything changed
+>>>>>>>>>>>>>            at all and only draw to the FB if it did. That would require
+>>>>>>>>>>>>>            maintaining a second buffer that we need to scan.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>         3) Text buffer - Maintain a buffer of all text printed on the screen with
+>>>>>>>>>>>>>            respective location. Don't write if the old and new character are
+>>>>>>>>>>>>>            identical. This would limit applicability to text only and is an
+>>>>>>>>>>>>>            optimization on top of this patch set.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>         4) Hash screen lines - Create a hash (sha256?) over every line when it
+>>>>>>>>>>>>>            changes. Only flush when it does. I'm not sure if this would waste
+>>>>>>>>>>>>>            more time, memory and cache than the current approach. It would make
+>>>>>>>>>>>>>            full screen updates much more expensive.
+>>>>>>>>>>> 5) Fix the bug mentioned above?
+>>>>>>>>>>>
+>>>>>>>>>>>> Changes in v5:
+>>>>>>>>>>>> - Add patch "video: test: Split copy frame buffer check into a function"
+>>>>>>>>>>>> - Add patch "video: test: Support checking copy frame buffer contents"
+>>>>>>>>>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+>>>>>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>>>>>>>>>> - Document damage struct and fields in struct video_priv comment
+>>>>>>>>>>>> - Return void from video_damage()
+>>>>>>>>>>>> - Fix undeclared priv error in video_sync()
+>>>>>>>>>>>> - Drop unused headers from video-uclass.c
+>>>>>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>>>>>>>>>> - Call video_damage() also in video_fill_part()
+>>>>>>>>>>>> - Use met->baseline instead of priv->baseline
+>>>>>>>>>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+>>>>>>>>>>>> - Update console_rotate.c video_damage() calls to pass video tests
+>>>>>>>>>>>> - Remove mention about not having minimal damage for console_rotate.c
+>>>>>>>>>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+>>>>>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
+>>>>>>>>>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>>>>>>>>>>>> - Fix memmove() calls by removing the extra dev argument
+>>>>>>>>>>>> - Call video_sync() before checking copy_fb in video tests
+>>>>>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+>>>>>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>>>>>>>>>>>>
+>>>>>>>>>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>>>>>>>>>>>>
+>>>>>>>>>>>> Changes in v4:
+>>>>>>>>>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+>>>>>>>>>>>> - Simplify first damage logic
+>>>>>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
+>>>>>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
+>>>>>>>>>>>> - Add patch "video: Always compile cache flushing code"
+>>>>>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+>>>>>>>>>>>>
+>>>>>>>>>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>>>>>>>>>>>>
+>>>>>>>>>>>> Changes in v3:
+>>>>>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>>>>>>>>>>>
+>>>>>>>>>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>>>>>>>>>>>>
+>>>>>>>>>>>> Changes in v2:
+>>>>>>>>>>>> - Remove ifdefs
+>>>>>>>>>>>> - Fix ranges in truetype target
+>>>>>>>>>>>> - Limit rotate to necessary damage
+>>>>>>>>>>>> - Remove ifdefs from gop
+>>>>>>>>>>>> - Fix dcache range; we were flushing too much before
+>>>>>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>>>>>>>>>>>
+>>>>>>>>>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>>>>>>>>>>>>
+>>>>>>>>>>>> Alexander Graf (9):
+>>>>>>>>>>>>         dm: video: Add damage tracking API
+>>>>>>>>>>>>         dm: video: Add damage notification on display fills
+>>>>>>>>>>>>         vidconsole: Add damage notifications to all vidconsole drivers
+>>>>>>>>>>>>         video: Add damage notification on bmp display
+>>>>>>>>>>>>         efi_loader: GOP: Add damage notification on BLT
+>>>>>>>>>>>>         video: Only dcache flush damaged lines
+>>>>>>>>>>>>         video: Use VIDEO_DAMAGE for VIDEO_COPY
+>>>>>>>>>>>>         video: Always compile cache flushing code
+>>>>>>>>>>>>         video: Enable VIDEO_DAMAGE for drivers that need it
+>>>>>>>>>>>>
+>>>>>>>>>>>> Alper Nebi Yasak (4):
+>>>>>>>>>>>>         video: test: Split copy frame buffer check into a function
+>>>>>>>>>>>>         video: test: Support checking copy frame buffer contents
+>>>>>>>>>>>>         video: test: Test partial updates of hardware frame buffer
+>>>>>>>>>>>>         video: test: Test video damage tracking via vidconsole
+>>>>>>>>>>>>
+>>>>>>>>>>>>        arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>>>>>>>>>>>>        arch/arm/mach-sunxi/Kconfig       |   1 +
+>>>>>>>>>>>>        drivers/video/Kconfig             |  26 +++
+>>>>>>>>>>>>        drivers/video/console_normal.c    |  27 ++--
+>>>>>>>>>>>>        drivers/video/console_rotate.c    |  94 +++++++----
+>>>>>>>>>>>>        drivers/video/console_truetype.c  |  37 +++--
+>>>>>>>>>>>>        drivers/video/exynos/Kconfig      |   1 +
+>>>>>>>>>>>>        drivers/video/imx/Kconfig         |   1 +
+>>>>>>>>>>>>        drivers/video/meson/Kconfig       |   1 +
+>>>>>>>>>>>>        drivers/video/rockchip/Kconfig    |   1 +
+>>>>>>>>>>>>        drivers/video/stm32/Kconfig       |   1 +
+>>>>>>>>>>>>        drivers/video/tegra20/Kconfig     |   1 +
+>>>>>>>>>>>>        drivers/video/tidss/Kconfig       |   1 +
+>>>>>>>>>>>>        drivers/video/vidconsole-uclass.c |  16 --
+>>>>>>>>>>>>        drivers/video/video-uclass.c      | 190 ++++++++++++----------
+>>>>>>>>>>>>        drivers/video/video_bmp.c         |   7 +-
+>>>>>>>>>>>>        include/video.h                   |  59 +++----
+>>>>>>>>>>>>        include/video_console.h           |  52 ------
+>>>>>>>>>>>>        lib/efi_loader/efi_gop.c          |   7 +
+>>>>>>>>>>>>        test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+>>>>>>>>>>>>        20 files changed, 483 insertions(+), 297 deletions(-)
+>>>>>>>>>>> It is good to see this tidied up into something that can be applied!
+>>>>>>>>>>>
+>>>>>>>>>>> I am unsure what is going on with the EFI performance, though. It
+>>>>>>>>>>> should not flush the cache after every character, only after a new
+>>>>>>>>>>> line. Is there something wrong in here? If so, we should fix that bug
+>>>>>>>>>>> first and it should be patch 1 of this series.
+>>>>>>>>>> Before I came up with this series, I was trying to identify the UEFI bug
+>>>>>>>>>> in question as well, because intuition told me surely this is a bug in
+>>>>>>>>>> UEFI :). Turns out it really isn't this time around.
+>>>>>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+>>>>>>>>> implementation. Where did you look for the bug?
+>>>>>>>> The "real" bug is in grub. But given that it's reasonably simple to work
+>>>>>>>> around in U-Boot and even with it "fixed" in grub we would still see
+>>>>>>>> performance benefits from flushing only parts of the screen, I think
+>>>>>>>> it's worth living with the grub deficiency.
+>>>>>>> OK thanks for digging into it. I suggest we add a param to
+>>>>>>> vidconsole_puts() to tell it whether to sync or not, then the EFI code
+>>>>>>> can indicate this and try to be a bit smarter about it.
+>>>>>> It doesn't know when to sync either. From its point of view, any
+>>>>>> "console output" could be the last one. There is no API in UEFI that
+>>>>>> says "please flush console output now".
+>>>>> Yes, I understand. I was not suggesting we were missing an API. But
+>>>>> some sort of heuristic would do, e.g. only flush on a newline, flush
+>>>>> every 50 chars, etc.
+>>>> I can't think of any heuristic that would reliably work. Relevant for
+>>>> this conversation, UEFI provides 2 calls:
+>>>>
+>>>>      * Write string to screen (efi_cout_output_string)
+>>>>      * Set text cursor position to X, Y (efi_cout_set_cursor_position)
+>>>>
+>>>> It's perfectly legal for a UEFI application to do something like
+>>>>
+>>>> efi_cout_set_cursor_position(10, 10);
+>>>> efi_cout_output_string("f");
+>>>> efi_cout_output_string("o");
+>>>> efi_cout_output_string("o") ;
+>>>>
+>>>> to update contents of a virtual text box on the screen. Where in this
+>>>> chain of events would we call video_sync(), but on every call to
+>>>> efi_cout_output_string()?
+>>> Actually U-Boot has the same problem, but we have managed to work out something.
+>>
+>> U-Boot as a code base has a much easier stance: It can add APIs when it
+>> needs them in places that require them. With UEFI (as well as the U-Boot
+>> native API), we're stuck with what's there.
+>>
+>> I also don't understand what you mean by "we have managed to work out
+>> something". This patch set is not a UEFI fix - it fixes generic U-Boot
+>> behavior and speeds up non-UEFI boots as well. The improvement there is
+>> just not as impressive as with grub :).
+> We are still not quite on the same page...
+>
+> U-Boot does have video_sync() but it doesn't know when to call it. If
+> it does not call it, then any amount of single-threaded code can run
+> after that, which may update the framebuffer. In other words, U-Boot
+> is in exactly the same boat as UEFI. It has to decide whether to call
+> video_sync() based on some sort of heuristic.
+>
+> That is the only point I am trying to make here. Does that make sense?
+
+
+Oh, I thought you mentioned above that U-Boot is in a better spot or 
+"has it solved already". I agree - it's in the same boat and the only 
+safe thing it can really do today that is fully cross-platform 
+compatible is to call video_sync() after every character.
+
+I don't understand what you mean by "any amount of single-threaded code 
+can run after that, which may update the framebuffer". Any framebuffer 
+modification is U-Boot internal code which then again can apply 
+video_sync() to tell the system "I want what I wrote to screen actually 
+be on screen now". I don't think that's necessarily bad design. A bit 
+clunky, but we're in a pre-boot environment after all.
+
+Since we're aligned now: What exactly did you refer to with "but we have 
+managed to work out something"?
+
+
+>
+>>
+>>> I do think it is still to flush the cache on every char. I suspect you
+>>> will find that even a simple heuristic like I mentioned would be good
+>>> enough.
+>>>
+>>> Also I notice that EFI calls notify? all the time, so U-Boot probably
+>>> does have the ability to sync the video every 10ms if we wanted to.
+>>
+>> I fail to see how invalidating the frame buffer for the screen every
+>> 10ms is any better than doing flush+invalidate operations only on screen
+>> areas that changed? It's more fragile, more difficult to understand and
+>> also significantly more expensive given that most of the time very
+>> little on the screen actually changes.
+> I am not suggesting it is better, at all. I am just trying to explain
+> that the U-Boot EFI implementation should not be calling video_sync()
+> after every character, before or after this series.
+
+
+Ah, it doesn't :). It just calls the normal U-Boot "write character on 
+screen" function. What that does is up to U-Boot internals - and those 
+basically today dictate that something needs to call video_sync() to 
+make FB modifications actually pop up on screen.
+
+
+>
+>>
+>>> It seems from this discussion that we have made great the enemy of the good.
+>>
+>> I agree. Damage tracking in this patch set is elegant, simple,
+>> predictable, low overhead and basically just abstracts the video copy
+>> code path to a generic solution. All while it pretty much solves the
+>> issue for good. I don't understand what's not to like about it :)
+> I think it is a really nice feature and I hope it can be applied soon.
+
+
+Thanks a lot especially to Alper for picking it up. I had almost 
+forgotten about the patch set :)
+
+
+Alex
+
+
