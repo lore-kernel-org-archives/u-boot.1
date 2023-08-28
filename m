@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8192DC83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:53:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD796C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 17:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C69D86456;
-	Mon, 28 Aug 2023 19:53:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E4CB586456;
+	Mon, 28 Aug 2023 19:54:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eF8nIFu8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="crBpRQvf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43E8186430; Mon, 28 Aug 2023 19:53:25 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 7FE0F8648B; Mon, 28 Aug 2023 19:54:51 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 001838648B
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:53:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C2DF86430
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 19:54:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-58e6c05f529so43962307b3.3
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:53:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-52713d2c606so4622536a12.2
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 10:54:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693245198; x=1693849998;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ExcmtfcQahwphXsVmtMz4dlA+x25EHG74pAjmQDSrfQ=;
- b=eF8nIFu8rk3pauv2WSGMjDfa/2hExC7i3OYKccMk7Wyquo9BAW845w/37fxu45nLZa
- VIQ9q/iD6wLXrMuhuaBgSQbXo82t9JbYRKpDZnRvelz3Jk99xK6JDmf1R6PxacF2Z1/3
- eks232AIIcWhkcDmXG9gfAmYZltPJCd2Qkt80=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693245198; x=1693849998;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1693245288; x=1693850088;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ExcmtfcQahwphXsVmtMz4dlA+x25EHG74pAjmQDSrfQ=;
- b=e4+NTIoipWZFqo9JMxTFNT6WfyVJFA9R0PUlcPpSWplPKL3YYvsTshAjNhRQgjNEbq
- rMhIxYqmBZHGIsYBmqLLFupE5I49ge9Cm2BmjMYlA+pdK1ERCg92LHxpFBy4UhpEtyB5
- ZHEJ8CF3/DgzEHTI2afcA5mjJBuXDubS91ipaHnH+Zon1aUv4kBM0eKCj4F2lTnlCIys
- nktzATIcuC2Mp7JF2qZzXiOi7FMT3pCbKO0E68/IQYTVDRoP1OcCNhsoxLvH9plvlyp8
- wFG0RIJjzXaT+grQlsNZhVSyLUQBTbNOZXCM5xp1ZHsNb5KPgSGHPJe80llZkY3Ko+ft
- KzJQ==
-X-Gm-Message-State: AOJu0YyfHX6QREz/tzr3msQN/R8TkM041rAyyei4SjsopYZzgvWwu0Ml
- J7DTHj7y276kkLwzWvrcONEUsg==
-X-Google-Smtp-Source: AGHT+IHyA2Cpd8ko0ajyW1uRnGGivcDwsNT6mR4d0FpS/2fzeQa9NXfrezeD5zWjFLAb1r0GZb6Zwg==
-X-Received: by 2002:a05:690c:4505:b0:583:b72c:883b with SMTP id
- gt5-20020a05690c450500b00583b72c883bmr23897002ywb.11.1693245198729; 
- Mon, 28 Aug 2023 10:53:18 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-c01a-9a8d-1e42-2ea4.res6.spectrum.com.
- [2603:6081:7b00:6400:c01a:9a8d:1e42:2ea4])
- by smtp.gmail.com with ESMTPSA id
- m10-20020a81710a000000b0058bcea54fc2sm2267466ywc.57.2023.08.28.10.53.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Aug 2023 10:53:18 -0700 (PDT)
-Date: Mon, 28 Aug 2023 13:53:16 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <20230828175316.GI3953269@bill-the-cat>
+ bh=d6zbYKwInL6DZyuMLJnYMmG22rNEbvDadKSxIuLW3KY=;
+ b=crBpRQvftbJjdWVbWHmaLrTvKI/MmxgermRiK74wPUmosV9IPgBixInUtIJhFzEz1/
+ W8o7Tz8tJftGn/kQA4VyPAl1xu7L6YHws8cpaGmml8kCySuL4OCVNIuaAV9x/7Y3gKmH
+ a0WuyNFHdx+oh1UuktNtb+uU/kGR8WXU8Y26s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693245288; x=1693850088;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d6zbYKwInL6DZyuMLJnYMmG22rNEbvDadKSxIuLW3KY=;
+ b=HGICGGXubAEi7WoT+ByXZH5nvXE9DBXOcs0H7opDoDss0C6pYy9a8z/zJql0O35qj1
+ aoHuWf4H0ZemjPzujMvWIJwXw7Xn0eOFoNBsxgJx2L9VJGabfh6vcc6Y7wwUTUd2LtA/
+ tzAsC1PjRmVKZIS1/K2Emgk3PMitmQ+7biADMspV7QZ8xi85+nQPKYnYDK0WRgieyEJe
+ NBPHoi8lViyhrvzNdHwLYQxEWBAI3/x7IHoC2/973BwAjqQMUBjef6KV9jloSu1gx8vQ
+ hAnYT+bOZ+00jOykJX64XiuuUJuenFyvBBk2XoPUDEK2F0E/sytPmcGS2wN1GnYobfzH
+ fvfA==
+X-Gm-Message-State: AOJu0YwYErfcISPlArocwLg7nXEtWgA99LYnrYdZgK8SYthFdahcH0j0
+ kj8Wbm6k2625x1/nf1mq9vQ7YGzn52xWPXg3N+dZWw==
+X-Google-Smtp-Source: AGHT+IEZ6q62pcBsNHbybDvHf69J6jN35EzQlDZGtSeN2CT1Lq/HpeS/UgsDVms5pp4iUJyRnHK1+4SeWChwEUGqbG4=
+X-Received: by 2002:a50:ed09:0:b0:525:6d9e:67c0 with SMTP id
+ j9-20020a50ed09000000b005256d9e67c0mr20142345eds.23.1693245287799; Mon, 28
+ Aug 2023 10:54:47 -0700 (PDT)
+MIME-Version: 1.0
 References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
  <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
  <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Fo3unteMhmHmZ6Yd"
-Content-Disposition: inline
 In-Reply-To: <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 28 Aug 2023 11:54:36 -0600
+Message-ID: <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,13 +86,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peter,
 
---Fo3unteMhmHmZ6Yd
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Aug 28, 2023 at 05:37:45PM +0100, Peter Robinson wrote:
+On Mon, 28 Aug 2023 at 10:37, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
 > On Mon, Aug 28, 2023 at 5:20=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
 ote:
 > >
@@ -114,8 +102,10 @@ ote:
 > > > Provide a way for removing certain devicetree nodes and/or properties
 > > > from the devicetree. This is needed to purge certain nodes and
 > > > properties which may be relevant only in U-Boot. Such nodes and
-> > > properties are then removed from the devicetree before it is passed to
-> > > the kernel. This ensures that the devicetree passed to the OS does not
+> > > properties are then removed from the devicetree before it is passed t=
+o
+> > > the kernel. This ensures that the devicetree passed to the OS does no=
+t
 > > > contain any non-compliant nodes and properties.
 > > >
 > > > The removal of the nodes and properties is being done through an
@@ -123,7 +113,8 @@ ote:
 > > > behind any Kconfig symbol.
 > > >
 > > > I have only build tested this on sandbox, and tested on qemu arm64
-> > > virt platform. This being a RFC, I have not put this through a CI run.
+> > > virt platform. This being a RFC, I have not put this through a CI run=
+.
 > > >
 > > > Sughosh Ganu (5):
 > > >   dt: Provide a way to remove non-compliant nodes and properties
@@ -148,34 +139,25 @@ ote:
 > > we upstream the bindings and encourage SoC vendors to sync them. If we
 > > remove them, no one will bother and U-Boot just becomes a dumping
 > > ground.
->=20
+>
 > Well things like the binman entries in DT are U-Boot specific and not
 > useful for HW related descriptions or for Linux or another OS being
 > able to deal with HW so arguably we're already a dumping ground to
 > some degree for not defining hardware.
 
-It's about validation and Simon is literally in the process of having
-the binman bindings upstreamed.
+I have started the process to upstream the binman bindings.
 
---=20
-Tom
+Perhaps we should use the issue tracker[1] to follow progress on all
+of this. We need to clean it up.
 
---Fo3unteMhmHmZ6Yd
-Content-Type: application/pgp-signature; name="signature.asc"
+>
+> > Instead of this, how about working on bringing the DT validation into
+> > U-Boot so we can see what state things are in?
+> >
+> > Please send the bindings for Linaro's recent series (which I suspect
+> > are motivating this series) so we can start the process.
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Simon
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTs3wkACgkQFHw5/5Y0
-tyyQ0wv/d/BEDHigNdG8F1qbw9KvJEyEvdEIcV8izd0IAQPcN7es2AVz04OCpUAK
-tYejURaU8gm6OJ+0/Gm2fYYkS5zV87JYkXSM1BJnZcwQ0RzDd9x+HmbXKuv71LvZ
-MC72MfnEkcnw4Z7y+YaxVq0Gzh8BoMwXpCeTGOKtzLvN02aDw6vqtyzfg3Q+oifd
-J5Fubq52iD7Ij5iwWgLCuRi+a9rlTkcy0oj07svSiDv2ygd/8Z4yBYWuiSkhHYX+
-sU/nLl2JWQwH1/y5qzseMpaBipgydALYj9p7/qNEW7zcuaTMln6TjcMnshvYgRlk
-w/7csX7th9upNoej7GhFDDxSItvjnqWT8LTqw2GFuwSiyY+QR1hNzwpW6fcx+xC+
-xj0mWValgFiPc16PCZax1L3stSQAbOVBj0q7Q9y5NxEhw+tciWH3OBkVlqrspoOP
-S64U0WXyNFVNClmF+g1zvE4T/x+JtfYrpIqg346BC1kjuVGPi5yw98c9OLHnuDjy
-4NjHMcOH
-=Qxcn
------END PGP SIGNATURE-----
-
---Fo3unteMhmHmZ6Yd--
+[1] https://source.denx.de/u-boot/u-boot/-/issues
