@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EA82C83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 20:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41C66C83F11
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 20:24:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6E7C86452;
-	Mon, 28 Aug 2023 22:00:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 55A7480569;
+	Mon, 28 Aug 2023 22:24:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="lfikDy2p";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gc8rhCYE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5C6A8647D; Mon, 28 Aug 2023 22:00:16 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 22D9480569; Mon, 28 Aug 2023 22:24:02 +0200 (CEST)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9162486430
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 22:00:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11D4A80275
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 22:23:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693252812; x=1693857612; i=xypron.glpk@gmx.de;
- bh=DIcRfxY7mR6CpcjYLn/JrSMrKumxbPL9siPV0BLCXxU=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=lfikDy2pGQwC0Ay2WDf0iSGjoNSdTVZ/JO/10SpSX0yRGPJmiEQUX0FnIZOUgoCybaLYzL3
- I9xIIle2tSnOEF5NpRI2F9RB0dNlTB33rp3hb0fS1Z5W6CmnKKac9R1h/s1qjIsp+weHr3Ep6
- RhyJ1pvlEilr2r73KmgCGzIoix7ix9HxI3dbDqMuCiGytu2IaYXHN1Ikdm8pJIZVIP3LYN8s6
- 2RNwpYvpP4kDZohc7orYZkE6twmpPF4WLDIj/4uJCqqEyG6vSfr0mIiUzgR7FGrH7lLAuVqx9
- U3teXu1LA5vgnthirXqLzoAktivgjDKU6/rnZNfWMvf3fcobBugg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEm6F-1qUsrI3jyN-00GKvR; Mon, 28
- Aug 2023 22:00:11 +0200
-Message-ID: <55c0a798-77d2-4172-b30e-1ab04aa25e1a@gmx.de>
-Date: Mon, 28 Aug 2023 22:01:02 +0200
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2b962535808so55967781fa.0
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 13:23:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693254238; x=1693859038;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sjLPbjx4qOoSDSKEbluduSjaWMQ2QofjdI3XRoqQGQY=;
+ b=gc8rhCYEbJ9DPpeRIIrNJofMDP218TcnZpLeJbJyu5FNv9NxnxPP7P/5bO/TIP/Lxc
+ u5wNfbbyvZ804WcDp6GcBC7RXYgUXOTj4d/gX7L7jMU1h0LHR0HbYIxkqZukxyDdBZTW
+ UGFZZSDVliw9ue5K00jctBc3I+fGBmT4y1xgohSOfm/RBesl6TGLldDyLd7EcPn0zFlQ
+ Cw48lQFesiqfI4Cz/4lS8Czrrn9YZNteNqDFMtnVYelstalV9lfOp4okVJe+9pxM4SEr
+ pmq5KjZD4ctOMAmXXqdoMBFDWvK4YCGQxjQczfB2fa2Fr8pjoXwsQHdkmCi7XhuX3fKN
+ reFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693254238; x=1693859038;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sjLPbjx4qOoSDSKEbluduSjaWMQ2QofjdI3XRoqQGQY=;
+ b=hi8S83tgRLtRfY3Z9uy3SHL7p7m4BszkuH4swaUdP1XKTmsdp6WJssVutdOBHBJ9nW
+ 7j8P1HuIBZ2Ald9g9sfJ3hdxIETeA3ClfCkW7JVW9Sp9IB622jiVOjtg5roxhJBXt606
+ 7F8UVT+t3ijzRZnycvIEr8cD0LMQPwKV0kHAXkFMhDo5fiJfifHfhILonoqqGHSigUb/
+ 9/vp3+Zw1FFEa8ZMlCjv+J6Q/Ypu+jc/mW9mahIV2vlxrfU0fKpPrG+S4ujOpIz30dKF
+ QSpud/ARTa0vSOOhmCXHhV6pBruQ4+rWFv7I2YHjQ/uY/PsmVvLvzwrUI7HyU/bStY8L
+ Y48Q==
+X-Gm-Message-State: AOJu0Yxk0VG+5GsRNu4BeIbYtb6Ei7RxFizPwvtqb9x0HnOK1xYFqLUx
+ sovlXu/MQYTScg230iHGUfZl02959qZigUVsv4A=
+X-Google-Smtp-Source: AGHT+IF4lHR8o2xvdPstHE7/sbdG/uXWf2tnRZKILu55o4FtR/OLMB9j4kQaA1M9bnuF3Vc3k8elbMs9h/Y2yq6D+/A=
+X-Received: by 2002:a2e:a0c7:0:b0:2b1:a89a:5f2b with SMTP id
+ f7-20020a2ea0c7000000b002b1a89a5f2bmr19780082ljm.2.1693254237830; Mon, 28 Aug
+ 2023 13:23:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/8] doc: Add gpt command documentation
-Content-Language: en-US, de-DE
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20230823164755.2874792-1-JPEWhacker@gmail.com>
- <20230825193830.2753640-1-JPEWhacker@gmail.com>
- <20230825193830.2753640-3-JPEWhacker@gmail.com>
- <c8def079-428f-86fe-68a6-f296d1df776f@gmx.de>
- <CAJdd5GaiDQ6erN4T16HzV3q8Kr+vMs9rWWCTaCr6axWfhxvqUg@mail.gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAJdd5GaiDQ6erN4T16HzV3q8Kr+vMs9rWWCTaCr6axWfhxvqUg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20220712071212.2188390-1-sumit.garg@linaro.org>
+ <20220712071212.2188390-6-sumit.garg@linaro.org>
+ <CAPnjgZ2jR_fpjKo6XyG6eOY1ZX9ktXsaON6Ey6STY1ZjcnUzAw@mail.gmail.com>
+ <CAFA6WYMQRFuga9h=PA4UCYofOt7x2Gohh9oDQAQTaL4ZFKr-Vw@mail.gmail.com>
+ <CAPnjgZ1jPVk=NX2aJVfEXwA-XmvoXO4v31c_nepjEMgeu5+rSw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1jPVk=NX2aJVfEXwA-XmvoXO4v31c_nepjEMgeu5+rSw@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 28 Aug 2023 21:23:46 +0100
+Message-ID: <CALeDE9OafhEwznXY5K4YZeMezuZRo5D1Gb57DDxFzPEufcHEfw@mail.gmail.com>
+Subject: Re: [PATCH v3 5/9] board: qualcomm: Add support for dragonboard845c
+To: Simon Glass <sjg@chromium.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ rfried.dev@gmail.com, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, trini@konsulko.com, 
+ dsankouski@gmail.com, stephan@gerhold.net, vinod.koul@linaro.org, 
+ nicolas.dechesne@linaro.org, mworsfold@impinj.com, daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1w1KqgIDaubBBMeoXOQWSWqGpLLe3KJGlmNE/oVXE0DSfFTSPy/
- 1i7vB79XMIzjAfnmEUoaDvA6j1ZJmTlDDR9JCiE3V8UAw7XHSEtMDnZje2RlXcChR5V9ugB
- d/T85VBGbxZSBMcrfGpgiZjaCy1+2h01DM09p80Tj3v/hzTAYZi1aWNm4uSMSAUGUOzuEcW
- xW2OU8r57864LBPDHWeoA==
-UI-OutboundReport: notjunk:1;M01:P0:X5rE7b40c18=;4MFd0T/ulIWHjMG9BO07sKBNZIf
- aMhi9H/nPOFfHsj72zC4QtXFZu8ZXUvR/7wJw3j/Aq58M8UvA/aa+M5/kXBrOyMwZkzDnkDOu
- q826RWNM91ZJo3hMcB0dRd3NXk+flTgkOc2yKhssBRB5tCZ6XYRdoeMQ8HvGWhTRtPfOalzXN
- Kqiiy5QRtqA6mjLGXadsSSQFoatuQHW0miq3DLnNTQ/9Dkj6Fl9PrONwMc8ZS0XQS1CxrTjwq
- PFQM6mIpWcDqnw7DYS4GdK3o9XR6c18yhYhODsK9tqLi95CV4CyE4dpOvrXAc+OqYRWzW2fRE
- c3F8yL+xyfrpAl59GfeVxPxeKrdpVJS7jgsbBYSlNH0DZEgKvN3Y4LlC9FfaE1VIlMgCN4Q+e
- E0TbqxoTJvE/j9U9t/GUdF4Q4dPMF6IAOUBzjNc3VLAEstVzlB2Wq36ox4RXu8EJyQG1jq8eT
- ZrpH98Hv53ZeorYS1Qld/2cAc+xf6BqpScR8u6RMjVvk1aSTJFHhcmSk04XL5ObDcFaSQe/sr
- 02Dx3yeeM8N2XpfksQqL9Wgo/L5cDAkxaAlWwnGYeHzbTImMQdLC5v7c5Uxl6DI3ClYcR8Ui3
- ANgAC3l5+UycRkxF9kbVfH3OkVm0vISrP3aYwcq7z8Rlc8t3I318V+KpYKFF+tSIKEYpL2GOA
- r1eTzZNpWvnDcIjuDM5kRn8p1vejl6M5Pc0aMtTy26+h/vL9/C8s38jiwFNWehJXZGGT3Kcwz
- VrJBOnxbBbB11F290eHvux+XtZVfxLN/UwRv7vV3YAM42AwxA8wz5fwfFqPOrsINTjo6weNSD
- Fa+PVKDjQDfgEnt3UI13X1UmWVN04eHIv/AlJsNX4+AX5TLHZEV11LsNF72lfsCZFF3uJbHWf
- SeibjWXuPS3LRnGml2NwfeyiBY6bL3qFL7bvE51DMqY+KR6VIUnXvYSWciSeDkNRRl48gBCHL
- oZ52+GN5pHc2r1jfkh5jPQxbEgo=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,345 +94,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/28/23 21:29, Joshua Watt wrote:
-> On Fri, Aug 25, 2023 at 7:57=E2=80=AFPM Heinrich Schuchardt <xypron.glpk=
-@gmx.de> wrote:
->>
->> On 8/25/23 21:38, Joshua Watt wrote:
->>> Adds initial documentation for the gpt command
->>
->> Thanks a lot for filling the gap.
->>
->>>
->>> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
->>> ---
->>>    doc/usage/cmd/gpt.rst | 141 +++++++++++++++++++++++++++++++++++++++=
-+++
->>>    doc/usage/index.rst   |   1 +
->>>    2 files changed, 142 insertions(+)
->>>    create mode 100644 doc/usage/cmd/gpt.rst
->>>
->>> diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
->>> new file mode 100644
->>> index 0000000000..f6e082fb94
->>> --- /dev/null
->>> +++ b/doc/usage/cmd/gpt.rst
->>> @@ -0,0 +1,141 @@
->>> +.. SPDX-License-Identifier: GPL-2.0+
->>> +
->>> +gpt command
->>> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->>> +
->>> +Synopsis
->>> +--------
->>> +
->>> +::
->>> +
->>> +    gpt repair <interface> <device no>
->>> +    gpt write <interface> <device no> <partition string>
->>> +    gpt verify <interface> <device no> <partition string>
->>
->> <partition string> is not required. Please, add brackets [].
+On Mon, Aug 28, 2023 at 6:55=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> It's not optional; there is no standardized string for the list of GPT
-> partitions like there is for MBR
-
-You can use the command without partition string. It will tell you if
-the device is partitioned or not.
-
+> Hi Sumit,
 >
->>
->>> +    gpt setenv <interface> <device no> <partition name>
->>
->> gpt setenv can be called without partition name which leads to a crash.
->>
->> If that parameter is meant to be optional, this should be indicated
->> here. Otherwise an argc check is missing.
+> On Thu, 24 Aug 2023 at 04:44, Sumit Garg <sumit.garg@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, 24 Aug 2023 at 05:29, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sumit,
+> > >
+> > > On Tue, 12 Jul 2022 at 01:12, Sumit Garg <sumit.garg@linaro.org> wrot=
+e:
+> > > >
+> > > > Add support for 96Boards Dragonboard 845C aka Robotics RB3 developm=
+ent
+> > > > platform. This board complies with 96Boards Open Platform Specifica=
+tions.
+> > > >
+> > > > Features:
+> > > > - Qualcomm Snapdragon SDA845 SoC
+> > > > - 4GiB RAM
+> > > > - 64GiB UFS drive
+> > > >
+> > > > U-boot is chain loaded by ABL in 64-bit mode as part of boot.img.
+> > > > For detailed build and boot instructions, refer to
+> > > > doc/board/qualcomm/sdm845.rst, board: dragonboard845c.
+> > > >
+> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > > > Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+> > > > ---
+> > > >  arch/arm/dts/dragonboard845c-uboot.dtsi       |  37 +++++++
+> > > >  arch/arm/dts/dragonboard845c.dts              |  44 ++++++++
+> > > >  arch/arm/mach-snapdragon/Kconfig              |  14 +++
+> > > >  board/qualcomm/dragonboard845c/Kconfig        |  12 +++
+> > > >  board/qualcomm/dragonboard845c/MAINTAINERS    |   6 ++
+> > > >  board/qualcomm/dragonboard845c/Makefile       |   9 ++
+> > > >  board/qualcomm/dragonboard845c/db845c.its     |  63 +++++++++++
+> > > >  .../dragonboard845c/dragonboard845c.c         |   9 ++
+> > > >  configs/dragonboard845c_defconfig             |  28 +++++
+> > > >  doc/board/qualcomm/sdm845.rst                 | 100 ++++++++++++++=
++---
+> > > >  include/configs/dragonboard845c.h             |  28 +++++
+> > > >  11 files changed, 337 insertions(+), 13 deletions(-)
+> > > >  create mode 100644 arch/arm/dts/dragonboard845c-uboot.dtsi
+> > > >  create mode 100644 arch/arm/dts/dragonboard845c.dts
+> > > >  create mode 100644 board/qualcomm/dragonboard845c/Kconfig
+> > > >  create mode 100644 board/qualcomm/dragonboard845c/MAINTAINERS
+> > > >  create mode 100644 board/qualcomm/dragonboard845c/Makefile
+> > > >  create mode 100644 board/qualcomm/dragonboard845c/db845c.its
+> > > >  create mode 100644 board/qualcomm/dragonboard845c/dragonboard845c.=
+c
+> > > >  create mode 100644 configs/dragonboard845c_defconfig
+> > > >  create mode 100644 include/configs/dragonboard845c.h
+> > > >
+> > > [..]
+> > >
+> > > > diff --git a/doc/board/qualcomm/sdm845.rst b/doc/board/qualcomm/sdm=
+845.rst
+> > > > index b6642c9579..8ef4749287 100644
+> > > > --- a/doc/board/qualcomm/sdm845.rst
+> > > > +++ b/doc/board/qualcomm/sdm845.rst
+> > > > @@ -35,9 +35,25 @@ Pack android boot image
+> > > >  ^^^^^^^^^^^^^^^^^^^^^^^
+> > > >  We'll assemble android boot image with ``u-boot.bin`` instead of l=
+inux kernel,
+> > > >  and FIT image instead of ``initramfs``. Android bootloader expect =
+gzipped kernel
+> > > > -with appended dtb, so let's mimic linux to satisfy stock bootloade=
+r:
+> > > > +with appended dtb, so let's mimic linux to satisfy stock bootloade=
+r.
+> > > >
+> > >
+> > > [..]
+> > >
+> > > > +The dragonboard845c is a Qualcomm Robotics RB3 Development Platfor=
+m, based on
+> > > > +the Qualcomm SDM845 SoC.
+> > > > +
+> > > > +Steps:
+> > > > +
+> > > > +- Build u-boot::
+> > > > +
+> > > > +       $ export CROSS_COMPILE=3D<aarch64 toolchain prefix>
+> > > > +       $ make dragonboard845c_defconfig
+> > > > +       $ make
+> > > > +
+> > > > +- Create dummy dtb::
+> > > > +
+> > > > +       workdir=3D/tmp/prepare_payload
+> > > > +       mkdir -p "$workdir"
+> > > > +       mock_dtb=3D"$workdir"/payload_mock.dtb
+> > > > +
+> > > > +       dtc -I dts -O dtb -o "$mock_dtb" << EOF
+> > > > +       /dts-v1/;
+> > > > +       / {
+> > > > +               #address-cells =3D <2>;
+> > > > +               #size-cells =3D <2>;
+> > > > +
+> > > > +               memory@80000000 {
+> > > > +                       device_type =3D "memory";
+> > > > +                       /* We expect the bootloader to fill in the =
+size */
+> > > > +                       reg =3D <0 0x80000000 0 0>;
+> > > > +               };
+> > > > +
+> > > > +               chosen { };
+> > > > +       };
+> > > > +       EOF
+> > > > +
+> > > > +- gzip u-boot::
+> > > > +
+> > > > +       gzip u-boot.bin
+> > > > +
+> > > > +- Append dtb to gzipped u-boot::
+> > > > +
+> > > > +        cat u-boot.bin.gz "$mock_dtb" > u-boot.bin.gz-dtb
+> > > > +
+> > > > +- A ``db845c.its`` file can be found in ``board/qualcomm/dragonboa=
+rd845c/``
+> > > > +  directory. It expects a folder as ``db845c_imgs/`` in the main d=
+irectory
+> > > > +  containing pre-built kernel, dts and ramdisk images. See ``db845=
+c.its``
+> > > > +  for full path to images::
+> > > > +
+> > > > +       mkimage -f db845c.its db845c.itb
+> > > > +
+> > > > +- Now we've got everything to build android boot image::
+> > > > +
+> > > > +       mkbootimg --kernel u-boot.bin.gz-dtb --ramdisk db845c.itb \
+> > > > +       --output boot.img --pagesize 4096 --base 0x80000000
+> > > > +
+> > > > +- Flash boot.img using db845c fastboot method.
+> > >
+> > > What command should be used here? I can run 'fastboot devices' but am
+> > > not sure what command to use to flash U-Boot.
+> > >
+> >
+> > At the time of writing this doc, I thought it was understood how to
+> > flash boot.img on db845c. But I will make that more explicit. Since
+> > u-boot has to be chain loaded by ABL, the command to flash boot.img
+> > (containing u-boot) is as follows:
+> >
+> > sudo fastboot flash boot boot.img
+> >
+> > > Also, is it possible to flash U-Boot as a first-stage bootloader?
+> > >
+> >
+> > That's not possible currently due to Qcom proprietary bootloader being
+> > used. But there were plans to replace atleast ABL with u-boot (See
+> > slide 9 from this Linaro connect Qcom keynote [1]). I hope that will
+> > materialize soon.
+> >
+> > [1] https://resources.linaro.org/en/resource/necH5bQcfrhCCkjSGHXJyA
+> >
 >
-> I don't believe the argument is optional, but either way it can be
-> fixed in a subsequent patch series. I'd rather not hold up the
-> documentation to fix bugs
+> Thank you for the link. I am pleased to hear it and hope it plays out
+> as that slide seems to indicate.
 >
->>
->>> +    gpt enumerate <interface> <device no>
->>> +    gpt guid <interface> <device no> [<varname>]
->>> +    gpt read <interface> <device no> [<varname>]
->>> +    gpt swap <interface> <dev> <name1> <name2>
->>> +    gpt rename <interface> <dev> <part> <name>
->>
->> Thanks a lot for providing a man-page for this command.
->>
->> If <device no> and <dev> both relate to the same object type, we should
->> use the same text. <dev> would be fine.
->>
->> The sequence looks random. Please, sort the sub-commands either
->> logically or alphabetically.
->
-> They are sorted to match the gpt command help text. Reordering of both
-> can be done later if desired.
+> I would like to suggest that 96 boards should use open-source firmware
+> when they launch. Once they launch there is little incentive to clean
+> things up.
 
-There is no requirement to follow the gpt help =3Dsequence here.
-
-We should not reproduce what is not helpful.
-
-Best regards
-
-Heinrich
-
->
->>
->>> +
->>> +Description
->>> +-----------
->>> +
->>> +The gpt command lets users read, create, modify, or verify the GPT (G=
-UID
->>> +Partition Table) partition layout.
->>> +
->>> +The syntax of the text description of the partition list is similar t=
-o
->>> +the one used by the 'mbr' command. The string contains one or more pa=
-rtition
->>
->> Please, link the mbr page:
->>
->> by the :doc:`mbr command <mbr>`.
->>
->>> +descriptors, each separated by a ";". Each descriptor contains one or=
- more
->>> +fields, with each field separated by a ",". Fields are either of the =
-form
->>> +"key=3Dvalue" to set a specific value, or simple "flag" to set a bool=
-ean flag
->>
->> At this point it remains unclear to the reader what this ;-separated
->> string format relates to.
->> Is it an output format?
->> Is it a format used in variables?
->> Is it used for the parameter 'partition string'?
->>
->> Maybe describe it after the parameters and relate it to the 'partition
->> string' parameter.
->>
->> Please, describe all parameters (in this indented format):
->>
->> interface
->>       interface for accessing the block device (mmc, sata, scsi, usb, .=
-...)
->>
->> device no
->>       device number
->>
->> ...
->>
->>> +
->>> +The first descriptor can optionally be used to describe parameters fo=
-r the
->>> +whole disk with the following fields:
->>> +
->>> +* uuid_disk=3DUUID - Set the UUID for the disk
->>> +
->>> +Partition descriptors can have the following fields:
->>> +* name=3DNAME - The partition name, required
->>
->> Maybe better
->>
->> name=3D<NAME>
->>
->> This is not rendered as an unordered list but everything is in one line=
-.
->> Please, add the missing blank lines.
->>
->> Please, generate the HTML documentation as described in
->> https://u-boot.readthedocs.io/en/latest/build/documentation.html
->> and check the output before resubmitting.
->>
->>> +* start=3DBYTES - The partition start offset in bytes, required
->>> +* size=3DBYTES - The partition size, in bytes or "-" to expand it to =
-the whole free area
->>> +* bootable - Set the legacy bootable flag
->>> +* uuid=3DUUID - Set the partition UUID, optional if CONFIG_RANDOM_UUI=
-D=3Dy is enabled
->>> +* type=3DUUID - Set the partition type GUID, requires CONFIG_PARTITIO=
-N_TYPE_GUID=3Dy
->>> +
->>
->> The following should be in a separate 'Examples' section to match the
->> other man-pages.
->>
->>> +Here is an example how to create a 6 partitions, some of the predefin=
-ed sizes:
->>> +
->>> +::
->>> +
->>> +    =3D> setenv gpt_parts 'uuid_disk=3Dbec9fc2a-86c1-483d-8a0e-010973=
-2277d7;
->>> +        name=3Dboot,start=3D4M,size=3D128M,bootable,type=3Debd0a0a2-b=
-9e5-4433-87c0-68b6b72699c7,
->>> +        name=3Drootfs,size=3D3072M,type=3D0fc63daf-8483-4772-8e79-3d6=
-9d8477de4;
->>> +        name=3Dsystem-data,size=3D512M,type=3D0fc63daf-8483-4772-8e79=
--3d69d8477de4;
->>> +        name=3D[ext],size=3D-,type=3D0fc63daf-8483-4772-8e79-3d69d847=
-7de4;
->>> +        name=3Duser,size=3D-,type=3D0fc63daf-8483-4772-8e79-3d69d8477=
-de4;
->>> +        name=3Dmodules,size=3D100M,type=3D0fc63daf-8483-4772-8e79-3d6=
-9d8477de4;
->>> +        name=3Dramdisk,size=3D8M,type=3D0fc63daf-8483-4772-8e79-3d69d=
-8477de4
->>> +    =3D> gpt write mmc 0 $gpt_parts
->>> +
->>> +
->>> +If 'uuid' is not specified, but CONFIG_RANDOM_UUID is enabled, a rand=
-om UUID
->>> +will be generated for the partition
->>> +
->>> +The 'gpt verify' command returns 0 if the layout matches the one on t=
-he storage
->>> +device or 1 if not. To check if the layout on the MMC #0 storage devi=
-ce
->>> +matches the provided text description one has to issue following comm=
-and:
->>
->> The command can be used with and without partition parameter. This
->> should be described here.
->>
->> I would prefer:
->>
->> sets the return value $? to 0 (true) if the layout
->> or 1 (false) if not
->>
->>> +
->>> +::
->>> +
->>> +    =3D> gpt verify mmc 0 $gpt_parts
->>> +
->>> +The verify sub-command is especially useful in the system update scri=
-pts:
->>> +
->>> +::
->>> +
->>> +    =3D> if gpt verify mmc 0 $gpt_parts; then
->>> +         echo GPT layout needs to be updated
->>> +         ...
->>> +       fi
->>> +
->>> +The 'gpt write' command returns 0 on success write or 1 on failure.
->>> +
->>> +The 'gpt setenv' command will set a series of environment variables w=
-ith
->>> +information about a particular partition. The variables are:
->>> +
->>> +* gpt_partition_addr (the starting offset of the partition, in hexade=
-cimal blocks)
->>> +* gpt_partition_size (the size of the partition, in hexadecimal block=
-s)
->>
->> The blocks that are not hexadecimal, the numbers are.
->>
->> gpt_partition_addr (first block of the partition as hexadecimal number)
->> gpt_partition_size (number of blocks as hexadecimal number)
->>
->>> +* gpt_partition_name (the name of the partition)
->>> +* gpt_partition_entry (the partition number in the table, e.g. 1, 2, =
-3, etc.)
->>
->> This value is currently decimal but this seems to be a bug. We need a
->> hexadecimal number to use this variable in a command like
->>
->>       load host 0:$gpt_partition_entry $loadaddr filename
->>
->> Another bug is that this command assumes that partitions are
->> continuously numbered.
->>
->>> +
->>> +To get the information about the partition named 'rootfs', issue the =
-following
->>> +command:
->>> +
->>> +::
->>> +    =3D> gpt setenv mmc 0 rootfs
->>> +    =3D> echo ${gpt_partition_addr}
->>> +    2000
->>> +    =3D> echo ${gpt_partition_size}
->>> +    14a000
->>> +    =3D> echo ${gpt_partition_name}
->>> +    rootfs
->>> +    =3D> echo ${gpt_partition_entry}
->>> +    2
->>> +
->>> +The 'gpt enumerate' command will set the variable 'gpt_partition_list=
-' with the
->>> +list of partition names on the device. For example:
->>> +
->>> +::
->>> +    =3D> gpt enumerate
->>> +    =3D> echo gpt_partition_list
->>> +    boot rootfs system-data [ext] user modules ramdisk
->>
->> As we cannot see from the output if there is a partition 'user' and a
->> partition 'modules' or only a single partition 'user modules' this
->> sub-command seems to need some rework.
->
-> Can be fixed later.
->
->>
->> Best regards
->>
->> Heinrich
->>
->>> +
->>> +The 'gpt guid' command will report the GUID of a disk. If 'varname' i=
-s
->>> +specified, the command will set the variable to the GUID, otherwise i=
-t will be
->>> +printed out. For example:
->>> +
->>> +::
->>> +    =3D> gpt guid mmc 0
->>> +    bec9fc2a-86c1-483d-8a0e-0109732277d7
->>> +    =3D> gpt guid mmc gpt_disk_uuid
->>> +    =3D> echo ${gpt_disk_uuid}
->>> +    bec9fc2a-86c1-483d-8a0e-0109732277d7
->>> +
->>> +The 'gpt read' command will print out the current state of the GPT pa=
-rtition
->>> +table. If 'varname' is specified, the variable will be filled with a =
-partition
->>> +string as described above that is suitable for passing to other 'gpt'=
- commands.
->>> +If omitted, a human readable description is printed out.
->>> +CONFIG_CMD_GPT_RENAME=3Dy is required.
->>> +
->>> +The 'gpt swap' command changes the names of all partitions that are n=
-amed
->>> +'name1' to be 'name2', and all partitions named 'name2' to be 'name1'=
-.
->>> +CONFIG_CMD_GPT_RENAME=3Dy is required.
->>> +
->>> +The 'gpt rename' command renames all partitions named 'part' to be 'n=
-ame1'.
->>> +CONFIG_CMD_GPT_RENAME=3Dy is required.
->>> +
->>> +Configuration
->>> +-------------
->>> +
->>> +To use the 'gpt' command you must specify CONFIG_CMD_GPT=3Dy. To enab=
-le 'gpt
->>> +read', 'gpt swap' and 'gpt rename', you must specify CONFIG_CMD_GPT_R=
-ENAME=3Dy.
->>> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
->>> index 3326ec82ff..4bfaabbd16 100644
->>> --- a/doc/usage/index.rst
->>> +++ b/doc/usage/index.rst
->>> @@ -65,6 +65,7 @@ Shell commands
->>>       cmd/for
->>>       cmd/fwu_mdata
->>>       cmd/gpio
->>> +   cmd/gpt
->>>       cmd/host
->>>       cmd/imxtract
->>>       cmd/load
->>
-
+It's something that has been suggested from the outset but the fact is
+there is no way to enforce it.
