@@ -4,87 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC4CC83F12
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 21:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E92C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 21:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BDD986482;
-	Mon, 28 Aug 2023 23:49:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CD0588647F;
+	Mon, 28 Aug 2023 23:50:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sS+CGRn0";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A03C8864A2; Mon, 28 Aug 2023 23:49:53 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1921286482; Mon, 28 Aug 2023 23:50:52 +0200 (CEST)
+Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC57586481
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 23:49:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C75386456
+ for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 23:50:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=ziswiler.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-1c4c6717e61so2753316fac.1
- for <u-boot@lists.denx.de>; Mon, 28 Aug 2023 14:49:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693259389; x=1693864189;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gj5V4WV97Q/HYBNljK+Ns946MAuYtgJhq5i8Q0fvJyY=;
- b=sS+CGRn0Rd+3RO2KX9BmBcI2AadqPyfSqa1VDned5lULV0Xsc5uG7+GMO8zOuIkWbZ
- 1f1LbFbTP2ryj0HedN7bvJnkfaNlmMgn7x0OUmuIjQOP3Yp9RaE87DAK9jETcGXOCgvV
- 4w6KxZy4Yl/S60QRgSRR3/HXA8DdZIYgSuXOttf5mHbhpOX0gxZ1TtpZreJi6HyonZka
- G4XmttSFCzDfp8sbIZSwaE+cQqfTYtwSwPVozTeLeGIjNEtdY+42G9qntI7xMgLrUTLN
- qJssELnmgrG2erkUmjCh6GNHNr9nOjTlDWqY2ZXTZV8VUyZ9dKgZxnN1nNLfRfZ8kpEr
- yd4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693259389; x=1693864189;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gj5V4WV97Q/HYBNljK+Ns946MAuYtgJhq5i8Q0fvJyY=;
- b=M1DBDDdEs3s1X0GIDvosbtVzlCPnahpOGs2mdCHVg8yO6z9N9bGdcsmQblU8Qy1XT4
- 0vXDVVdwO7jsKsem9DUD/9O/cY+utvZcwzWmpXFCqVsEftnZo9IdcMgVps69Zkhchb4x
- bPXMXw5eSfgyE3nMDWJK4ByBuQsCwCj3nf3nRgJIqi5w1WSGGPUZpN+zDf2q2vclb4zB
- 3kV2lEl7jv8kJDE8SI0rKYWVtLzNDDHXDCuHWnwTNZdoiuPrSXISeIF8rjbAwiXZgO9O
- QgtWR0Pn+6UTM098DZGn+ou4X9uRcvnTrxYn87tHhV74CEsFBRhKC0cWz8anT9kK3luV
- Tk1A==
-X-Gm-Message-State: AOJu0YyWAOTnDAcI1OSFOtYm18uYQH1c7J7s5/eLCKTB00BXgC50I6nD
- MRmBfJliZc1YcJlZUfCHLI0=
-X-Google-Smtp-Source: AGHT+IGjq9BNyYZKEaUSvWEUEykKUQzb/CES4wNtzvl99EqAKp1ESvEF9wA6iASuQp+I66mhFaqNbQ==
-X-Received: by 2002:a05:6870:a44b:b0:1c0:d0e8:8ff9 with SMTP id
- n11-20020a056870a44b00b001c0d0e88ff9mr13992619oal.16.1693259389291; 
- Mon, 28 Aug 2023 14:49:49 -0700 (PDT)
-Received: from ?IPV6:2001:470:42c4:101:e1d9:bca8:255c:b1c6?
- ([2001:470:42c4:101:e1d9:bca8:255c:b1c6])
- by smtp.gmail.com with ESMTPSA id
- o21-20020a056870e81500b001c03d1a519fsm4787227oan.39.2023.08.28.14.49.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Aug 2023 14:49:48 -0700 (PDT)
-Message-ID: <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
-Date: Mon, 28 Aug 2023 15:49:43 -0600
+ spf=pass smtp.mailfrom=marcel@ziswiler.com
+Received: from toolbox.int.toradex.com ([84.226.64.168]) by mrelay.perfora.net
+ (mreueus003 [74.208.5.2]) with ESMTPSA (Nemesis) id
+ 0MWlJt-1qCufy0xhb-00XuQy; Mon, 28 Aug 2023 23:50:41 +0200
+From: Marcel Ziswiler <marcel@ziswiler.com>
+To: u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Nishanth Menon <nm@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Subject: [PATCH v1] include: configs: verdin-am62: drop unused sdram address
+Date: Mon, 28 Aug 2023 23:50:37 +0200
+Message-Id: <20230828215037.482278-1-marcel@ziswiler.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
- psci_arch_init
-Content-Language: en-US
-To: Marc Zyngier <maz@kernel.org>
-Cc: wens@csie.org, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
-References: <20230531201520.15479-1-CFSworks@gmail.com>
- <20230814213854.408962d5@slackpad.lan>
- <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
- <69909b61-f57e-fc91-43a5-0f4bd23609c9@gmail.com>
- <86cyzaf6ie.wl-maz@kernel.org>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <86cyzaf6ie.wl-maz@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:kAYLCklHqI/iRfeU9JTSRvdILdiYrPSB9CCliMFMrFe5G8nyE1Z
+ FAjGmAwFEMnURaYvJPv/oesiN5NximIOjxQZE8wcGTYCT8nrFcYYrXmTv09PLVlnFbR1GVw
+ LInCHfA8pMBIniXk8CT1h9iDH9yDL99o5vdf5iA7ngtNZbQn0gjDyAsCP8IIDIEwdG2rkF4
+ OSxCRU1Fj/xkXlzY9oloA==
+UI-OutboundReport: notjunk:1;M01:P0:vVkgsbVIw10=;gBMqXNyAnXzWe/xoYY61lqpEPdI
+ aECF3SpivobAzippQUK3R3p2MBQK8b4wTrHN7bYIsDUPpsVWFOWrq/nXEGQI+P33Lzs+GiAqx
+ zI4GdQH31DnouFWXXcAzET0zIgmyw9k2lFWD6K8EQQyn8N9ZW4bxQfLO+eSYTC/a/DGPHdLoY
+ Wiop/IAY4xh7Gcwzh60CF2NuaYYtfHEW5TWrdvWa5GIYtL53zsw3no9eZCaMcIYrkR5vaBX9x
+ lMbzRFQCtXPkUw+284CWF/4+pAvgpj4FlFW0NF5fbhS/Eq3oFKs9m33po0A3paNMOfpeGMi3v
+ vala64t9iSNCwuOWxQCgGfj92eQrvWW2UBhIj8B8ChIVxycw1dXhn/Cv5aFSQSZ1XfrmnztDN
+ cSZQ3ng7mYYTS3sRACHqMBOt637iIMesrgtmrjtW1hkDxhOANv1oZlrj5/aJlpL8SCmFR9bJo
+ G6VT7n/WmrQrEpzibXo3yGqEPS6SX6oVIniUGWqOXHZRlblPVPEpo0WkPYirRnwNSnE6nKF0v
+ xxbQQrSEJ55dE9/OgmuvN2seZJrR8VVstDmaWPPkJYy5jVIDYqJv5d+3hk6/DKe33dpdDjXJQ
+ OHsQQbDq82KYtp46Ib+6ccm69+0GXQlEtcrUlUZjVI/B4UpWG8acmWKXso5VZ5XFUCnxyEbuo
+ O+WHBDSAH429ywFEsQRCwr2SuooM2+WqaE5aPNSyJLwbrK6gYxXGG8EQKPXFJte9PU/obp5Gb
+ 3r+TWk6Zrv4xQP3XSxrAYPGzwKT4y/hExOpg25R3F9ca3tAqT1l0rxRBuv20lCgY+ECxuYBP7
+ L0lSvqpOnXwV/1Yj+tXud619aj84nIRAS+SlzaSD7PuVqYS/NB1U4WrJfRBDVco/6y0VqqtNH
+ ddRe2dwzNE1TLBg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,58 +71,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/26/23 04:22, Marc Zyngier wrote:
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-Hi Marc!
+Drop unused macro. This was copied straight from the AM62x EVM but while
+meant for a second region of DDR this is not even needed for the AM62x
+EVM configurations and has meanwhile also been dropped there.
 
-> The GIC definitely has the NS bit routed to it. Otherwise, the secure
-> configuration would just be an utter joke. Just try it.
+Note that on the Verdin AM62, we do auto-detect the amount of SDRAM.
 
-Thank you for your response. I'd like to revisit my prior point about 
-the distinction between the NS bit and AxPROT[1] bits in the context of 
-monitor mode: in monitor mode, the NS bit does not determine the 
-security state of the CPU core (monitor mode is always secure). But even 
-then, the NS bit is still significant for other purposes, such as to 
-bank accesses to certain CP15 registers -- and if I understand Chen-Yu 
-correctly, some GIC registers also. That would require a special NS bit 
-signal routed to the GIC so that it can distinguish between "secure, 
-NS=0" and "secure, NS=1" accesses, which is why I asked if such a thing 
-exists.
+While at it also update the comment noting that CFG_SYS_SDRAM_SIZE is
+the maximum which is only used for such auto-detection.
 
-I understand that the GIC is designed to be aware of the security state 
-(using the existing AxPROT[1] signals) so that it can protect the 
-sensitive registers. And unless I misunderstand, this seems to be the 
-point that you made here (my interpretation -- correct me if I'm wrong 
--- is that you are using "NS bit" as a metonym for "security state"). 
-However I must clarify that my question was to seek further information 
-from Chen-Yu about the possibility that NS is significant when accessing 
-the GIC, even in monitor mode. Alternatively, his point might be merely 
-highlighting that the GIC permits different types of access depending on 
-the CPU's security state, which aligns with the viewpoint you've reiterated.
+Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-I apologize if my previous message didn't convey this context clearly 
-enough. My goal was to unravel this nuanced aspect of the NS bit when in 
-monitor mode, and to determine if NS needs to be getting set/cleared 
-during GIC setup to maneuver around the banking, or if the value of the 
-NS bit when in psci_arch_init() is truly of no consequence due to 
-monitor mode.
+---
 
-> Well, history is unfortunately against you on that front. Running on
-> the secure side definitely was a requirement when this code was
-> initially written, as the AW BSP *required* to run on the secure side.
-> 
-> If that requirement is no more, great. But I don't think you can
-> decide that unilaterally.
+ include/configs/verdin-am62.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-I have no idea when/if this requirement was changed. It might have never 
-happened "formally": perhaps at some point, the SCR.NS=1 code got added 
-after the call to psci_arch_init(), breaking (that version of) the AW 
-BSP, and nobody ever complained or changed it back... so it stayed.
+diff --git a/include/configs/verdin-am62.h b/include/configs/verdin-am62.h
+index 7990ea83102..e1a5f5ad44b 100644
+--- a/include/configs/verdin-am62.h
++++ b/include/configs/verdin-am62.h
+@@ -13,8 +13,7 @@
+ 
+ /* DDR Configuration */
+ #define CFG_SYS_SDRAM_BASE	0x80000000
+-#define CFG_SYS_SDRAM_BASE1	0x880000000
+-#define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size */
++#define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size, auto-detection is used */
+ 
+ #define MEM_LAYOUT_ENV_SETTINGS \
+ 	"fdt_addr_r=0x90200000\0" \
+-- 
+2.36.1
 
-But we're starting to digress from what _this_ patch does. The intent 
-here is only to remove two lines of code that (we're discussing to 
-confirm) have no effect. I'm not touching the code that *actually* 
-determines the world into which monitor mode exits.
-
-Cheers,
-Sam
