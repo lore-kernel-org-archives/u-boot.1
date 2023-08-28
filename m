@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC96C71153
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 22:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19D51C71153
+	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 22:53:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CCF6864A0;
-	Tue, 29 Aug 2023 00:44:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2533C8647F;
+	Tue, 29 Aug 2023 00:53:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hAyZNu1W";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VoO7FmLl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7721C8644E; Tue, 29 Aug 2023 00:44:20 +0200 (CEST)
+ id 76F7E86482; Tue, 29 Aug 2023 00:53:37 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B47168648B
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 00:44:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8AA28644E
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 00:53:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693262656; x=1693867456; i=xypron.glpk@gmx.de;
- bh=AGbkuAsV3P57AD5PdVdwQW5mmXrTBurpthP3Htk0mts=;
+ s=s31663417; t=1693263212; x=1693868012; i=xypron.glpk@gmx.de;
+ bh=u4h93QsxM4wWx52R/VGz6VTP1smK0EKjxfzgiyM2bNQ=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=hAyZNu1W19UDXQ7iaxn83zBV0z3JmdZxg/GU1B/pZzScekt4iBeoWJKZVJNkMfNpn5VY467
- wWAjVmPKQwtpbyHHibAfhO7Kv4727h3ZnbUn5mFD3VrGsOPfNq2JueBbHtpS3hvuD6XrlolWo
- ZbwWCY0tNLQx1ke9OHCSKHZSGfwcq01me6d+oqitA7+EVVpzB/n1kK2IJGv/BY+PoPtuG2GvP
- GRS6Gqt9ZVbtuAS39J6IbNxkgC3BBn9coKCcXTQm6qqiD3oszE6N052TmiQ4Z6NyzmKtg0EOK
- B6pK5XpsWXvkvws2J0rZ+8F/IX91SPvbNELyuSHo+Rzf6sNH07bQ==
+ b=VoO7FmLlGFTOX8CDmQMqS7UEQLCVC6HNNNS7+FFspc4Rp2zkcG1XDZObFZgvnu2tWxrBOQE
+ DBiw4cDjnXtXa2dhyQyg0UTPPUWg+LydPjqrITFd1Oxgt0ndZoMnY7M9Ju/JONiKeNNLrhoxG
+ nfh0FWYpVq4YeUosPE3i9uE/HLVquWAlrdjR1WdAuw8hu4TCiniPZqYdwkWAluaqhpYHStoxn
+ 4GlF1tJvV063Aq0gtSjBXvJOroH8lQqqkGNjWBWkp6MoWGHyijfudDVDy1/qmaCfEfeQj3EEH
+ zgwOXaRb7/iNn2McqDxDC3ma3niJBon7sihnlvBvJXRlENeVn/sQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1McpJq-1q2FEI0u2c-00ZyWV; Tue, 29
- Aug 2023 00:44:16 +0200
-Message-ID: <42cf6878-2bb3-4a58-82cc-96f920cf9e4f@gmx.de>
-Date: Tue, 29 Aug 2023 00:45:09 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MS3mt-1q8TmC3LD9-00TU2O; Tue, 29
+ Aug 2023 00:53:31 +0200
+Message-ID: <9299df67-7e0f-44cc-b4c5-29b337116e4c@gmx.de>
+Date: Tue, 29 Aug 2023 00:54:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/8] doc: Add gpt command documentation
+Subject: Re: [PATCH v4 5/8] cmd: gpt: Add command to set bootable flags
 Content-Language: en-US, de-DE
 To: Joshua Watt <jpewhacker@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Enric Balletbo i Serra <eballetb@redhat.com>, u-boot@lists.denx.de
 References: <20230825193830.2753640-1-JPEWhacker@gmail.com>
  <20230828215623.3727536-1-JPEWhacker@gmail.com>
- <20230828215623.3727536-3-JPEWhacker@gmail.com>
+ <20230828215623.3727536-6-JPEWhacker@gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230828215623.3727536-3-JPEWhacker@gmail.com>
+In-Reply-To: <20230828215623.3727536-6-JPEWhacker@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SOmcXVWpuXHtMS7SpKDh036K9pVQbiR0AJsoDwvHlBTWg3tTsQr
- xl4atySjKhPj5UWpbJee4WYoy4mpHM5Pfq7ZGHClD5gGZOccvUL0fVaZQ816/W5ISwocK1m
- 0mt7Ci0dgfxvnBCnO6vFM2nE/wTk68LusAScBjSuQ9HDGSIbnPxR0C7d1vctrXGVU1n7I6f
- NZzoj0AR2uTSYkLlzm/Gw==
-UI-OutboundReport: notjunk:1;M01:P0:i5WJsQ3SNds=;ot4WrItfLvGLcE5o/7EUgim9XM6
- 6XAkMnqrtNENq6/zp0zqaZFztlfR8DlnBUw0NLlV3SjRqYIT3EJmc5BO8auKXGFXoO0S67Xpl
- pZ8es4Vrw/GNEX2AYxbf1Kwur2x5nnB0qnqPn0arBhoUGN2l7fS1QNrPPYLeqkxeLQrVj+hjF
- 74RcLx2P3m+6SmCUBxU9qXLj8Jn0ZZkbqX6WIs9sMp79Vm/vD7UKokT8dPHoRBO8D91WfFv6B
- XG5VWUZrMwI64bEtQamwA8UklBPC8PjsDGcJz7GaKj2MM1XKGHiCFjJHHh+7yW0KmwwJ35Lez
- 0Hj6tQZFhaxifocFxX/ET2bg6cghtKE5Ysiz8xQRCtF7ur3YDTYXmEDlpo1DLevGk5qxgRJ3E
- y47gYT4iFbehIjlGxQHybWbNslF1z2zwG4/zCnUJVjoGL7id4YZymw/1toAchlokSHf2jkbV/
- /3vFNFCmiyAk5twji/buhPZAGKNb4KKXjuna5vz4EBay9LyTujAearYLlp1T5B/TegnrUp140
- 2iEQcGzw7yjwrSnsYvsncuqTuOibtyi9u2W68egrpk5SIcju9I173YiKOIEun1TMyDBwmEsH/
- dCSnEiYNDzb5UcfPQ8+9rFYBVaw6ojozExHrlGI62ioeTREdJhVE2+B9myNsx1MpSl4CHNmMY
- E4Xjq/fGFARQnaLCIneNmoL1ImVqTN7YDImBRa7nP69OBWXwFVbXXD+ewZsXN/Qtr3UKwn0qv
- ctgM9NlLxLB0WX08aU24JIIRy7WvDz7glP/ahHxmrC4jWwPpIci0iN6fkXzfovp5ST+jJDkx7
- G007QT+bPnwmARVaBUiicuxEi1Fn/sJ7RcUkuw8WAHwZpxL0+/FLQlL7u/ggs29S3UOgFV+wT
- RwQ15YdsC1mFjLo5LuiI/Og5GPPjj1y+PxiIeRO+WeJ2W3yTAaUSzo1hYRc0zkdEDd254BPmF
- sMbHQUmXQxAdjJ3wtN4p3oPG+x0=
+X-Provags-ID: V03:K1:0shl0z0vhKkx130hr620DB/xOtKsm2Ier5Mu4L8gjf7Ce9yhtxw
+ zuOvxdry9AoGtu2mGzbHEPhGJjXB2dl0G5eIc1s5KDwMy62i3mNc/chiDIat95olMka95s2
+ ONKwGnfXAvQ9907AVhlvUHNDwuVDq7UvIA9hBhsoEIxbs51L3LJJ2tjbJhAMBeE7bKjKWYY
+ ilzdOMSvFVJH/d9VGIyoQ==
+UI-OutboundReport: notjunk:1;M01:P0:FLd68UahSRQ=;8/Cx09AxcVDAy4vt33dv2ahXSKj
+ k8yb+nO1mzL12eZH1ueUtWQa/N5QUQuQTp6tcRuI+bYKhZBaMeGRSkDVO+RbkIFj2oPwD/UHE
+ wjN/+pHh6bWJ049zm0ByEnkWcppgHRWHAuwIL0nSGOy9xOhnj7ijpBM2FUKo5qcDBBp69cKH9
+ aCD+2WzRXYGs2dKUkXaowmFea2sqQXSjo2jutqXxef8m0W0dq5a6b5QwY31j0I3imsjbAMr2+
+ cVXfHwoB/WIBkA3FSjwc/LIVdBrDi1Dcahmi5mxRN4VL5IJCTvsLn+JiqsHdQgaoGQoVzPYYZ
+ Ubcx8ShVppK4B8NOXsPa69QGkCzULben5lEUiKJgdd3lxQ5hXaMNo2HVz3cJP0x6ZYcIIXq1X
+ 9AjBBN5lzCkGl2/s/HFyDiU8/oRO4T6W/A3bu6XtD3k83wY2/85lI2e/s+SWmZNR/kgJaOHTr
+ D34la2N0VyA53yGfDSKqAIRY1D+Ok0QclvVpmGYxSQSggfunngA3Mi2qSQdqL0aoS2Masa46I
+ p1/IPpPUAibrUluB6+UMpM+PYucHB2nhhoonW2cRMo+5+LgTwVlWYDx63EDKSMUNrbm5Q8Slk
+ OSVYQBizt4DE30bS+FCIjIDkfRzNKrqjupFZEVGC84+mSPKWIRxYcWHGOc1U7/H5tZ5Ru2wvu
+ mzbKCUmhco3xuazDk3cv1ReYxXKq77qes8DeTldqN71dEVyHa54JQuiBCS9qdN2KOVYuqwytA
+ Rpionqn/DRb9Ef+5fn/kzexaBQnapuDFw7+7YGcffm+YKQwa+HeMefazNlYcv+Cc+yBYfKJGI
+ TrVyWT1yDIT9xshlT9aYPlCHdn96UzkE8/xdlcfeP1zTasNxiWOEdJ5BGdvXw2dqnZ3sCoWkg
+ YdkvpvJGQAY+590rEx1ICUczvucajeC93zBZxZVsTjtSiUVHRizR0GGBMQ6f10hGxIVQG/pVs
+ 0sD0gwuJoa+Rt/RzjroTzIG4gz4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,327 +89,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-/On 8/28/23 23:56, Joshua Watt wrote:
-> Adds initial documentation for the gpt command
+On 8/28/23 23:56, Joshua Watt wrote:
+> Adds a command that can be used to modify the GPT partition table to
+> indicate which partitions should have the bootable flag set
 >
 > Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 > ---
->   doc/usage/cmd/gpt.rst | 184 ++++++++++++++++++++++++++++++++++++++++++
->   doc/usage/index.rst   |   1 +
->   2 files changed, 185 insertions(+)
->   create mode 100644 doc/usage/cmd/gpt.rst
+>   cmd/gpt.c                 | 80 +++++++++++++++++++++++++++++++++++++++
+>   doc/usage/cmd/gpt.rst     | 12 ++++++
+>   test/py/tests/test_gpt.py | 22 +++++++++++
+>   3 files changed, 114 insertions(+)
 >
+> diff --git a/cmd/gpt.c b/cmd/gpt.c
+> index c6c8282ac9..45fbe07404 100644
+> --- a/cmd/gpt.c
+> +++ b/cmd/gpt.c
+> @@ -972,6 +972,81 @@ static int do_rename_gpt_parts(struct blk_desc *dev=
+_desc, char *subcomm,
+>   	free(partitions_list);
+>   	return ret;
+>   }
+> +
+> +/**
+> + * gpt_set_bootable() - Set bootable flags for partitions
+> + *
+> + * Sets the bootable flag for any partition names in the comma separate=
+d list of
+> + * partition names. Any partitions not in the list have their bootable =
+flag
+> + * cleared
+> + *
+> + * @desc: block device descriptor
+> + * @name: Comma separated list of partition names
+> + *
+> + * @Return: '0' on success and -ve error on failure
+> + */
+> +static int gpt_set_bootable(struct blk_desc *blk_dev_desc, char *const =
+part_list)
+> +{
+> +	char *name;
+> +	char disk_guid[UUID_STR_LEN + 1];
+> +	struct list_head *pos;
+> +	struct disk_part *curr;
+> +	struct disk_partition *partitions =3D NULL;
+> +	int part_count =3D 0;
+> +	int ret =3D get_disk_guid(blk_dev_desc, disk_guid);
+> +
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret =3D get_gpt_info(blk_dev_desc);
+> +	if (ret <=3D 0)
+> +		goto out;
+> +
+> +	part_count =3D ret;
+> +	partitions =3D malloc(sizeof(*partitions) * part_count);
+> +	if (!partitions) {
+> +		ret =3D -ENOMEM;
+> +		goto out;
+> +	}
+> +
+> +	/* Copy partitions and clear bootable flag */
+> +	part_count =3D 0;
+> +	list_for_each(pos, &disk_partitions) {
+> +		curr =3D list_entry(pos, struct disk_part, list);
+> +		partitions[part_count] =3D curr->gpt_part_info;
+> +		partitions[part_count].bootable &=3D ~PART_BOOTABLE;
+> +		part_count++;
+> +	}
+> +
+> +	name =3D strtok(part_list, ",");
+> +	while (name) {
+> +		bool found =3D false;
+> +
+> +		for (int i =3D 0; i < part_count; i++) {
+> +			if (strcmp((char *)partitions[i].name, name) =3D=3D 0) {
+> +				partitions[i].bootable |=3D PART_BOOTABLE;
+> +				found =3D true;
+> +			}
+> +		}
+> +
+> +		if (!found) {
+> +			printf("Warning: No partition matching '%s' found\n",
+> +			       name);
+> +		}
+> +
+> +		name =3D strtok(NULL, ",");
+> +	}
+> +
+> +	ret =3D gpt_restore(blk_dev_desc, disk_guid, partitions, part_count);
+> +
+> +out:
+> +	del_gpt_info();
+> +
+> +	if (partitions)
+> +		free(partitions);
+> +
+> +	return ret;
+> +}
+>   #endif
+>
+>   /**
+> @@ -1031,6 +1106,8 @@ static int do_gpt(struct cmd_tbl *cmdtp, int flag,=
+ int argc, char *const argv[])
+>   	} else if ((strcmp(argv[1], "swap") =3D=3D 0) ||
+>   		   (strcmp(argv[1], "rename") =3D=3D 0)) {
+>   		ret =3D do_rename_gpt_parts(blk_dev_desc, argv[1], argv[4], argv[5])=
+;
+> +	} else if ((strcmp(argv[1], "set-bootable") =3D=3D 0)) {
+> +		ret =3D gpt_set_bootable(blk_dev_desc, argv[4]);
+>   #endif
+>   	} else {
+>   		return CMD_RET_USAGE;
+> @@ -1082,8 +1159,11 @@ U_BOOT_CMD(gpt, CONFIG_SYS_MAXARGS, 1, do_gpt,
+>   	"      and vice-versa\n"
+>   	" gpt rename <interface> <dev> <part> <name>\n"
+>   	"    - rename the specified partition\n"
+> +	" gpt set-bootable <interface> <dev> <list>\n"
+> +	"    - make partition names in list bootable\n"
+>   	" Example usage:\n"
+>   	" gpt swap mmc 0 foo bar\n"
+>   	" gpt rename mmc 0 3 foo\n"
+> +	" gpt set-bootable mmc 0 boot_a,boot_b\n"
+>   #endif
+>   );
 > diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
-> new file mode 100644
-> index 0000000000..6387c8116f
-> --- /dev/null
+> index b505b159d0..288dd365c0 100644
+> --- a/doc/usage/cmd/gpt.rst
 > +++ b/doc/usage/cmd/gpt.rst
-> @@ -0,0 +1,184 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
+> @@ -13,6 +13,7 @@ Synopsis
+>       gpt read <interface> <dev> [<varname>]
+>       gpt rename <interface> <dev> <part> <name>
+>       gpt repair <interface> <dev>
+> +    gpt set-bootable <interface> <dev> <partition list>
+>       gpt setenv <interface> <dev> <partition name>
+>       gpt swap <interface> <dev> <name1> <name2>
+>       gpt verify <interface> <dev> [<partition string>]
+> @@ -90,6 +91,13 @@ gpt repair
+>
+>   Repairs the GPT partition tables if it they become corrupted.
+>
+> +gpt set-bootable
+> +~~~~~~~~~~~~~~~~
 > +
-> +gpt command
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    gpt enumerate <interface> <dev>
-> +    gpt guid <interface> <dev> [<varname>]
-> +    gpt read <interface> <dev> [<varname>]
-> +    gpt rename <interface> <dev> <part> <name>
-> +    gpt repair <interface> <dev>
-> +    gpt setenv <interface> <dev> <partition name>
-> +    gpt swap <interface> <dev> <name1> <name2>
-> +    gpt verify <interface> <dev> [<partition string>]
-> +    gpt write <interface> <dev> <partition string>
-> +
-> +Description
-> +-----------
-> +
-> +The gpt command lets users read, create, modify, or verify the GPT (GUI=
-D
-> +Partition Table) partition layout.
-> +
-> +Common arguments:
-> +
-> +interface
-> +    interface for accessing the block device (mmc, sata, scsi, usb, ...=
-.)
-> +
-> +dev
-> +    device number
-> +
-> +partition string
-> +    Describes the GPT partition layout for a disk.  The syntax is simil=
-ar to
-> +    the one used by the :doc:`mbr command <mbr>` command. The string co=
-ntains
-> +    one or more partition descriptors, each separated by a ";". Each de=
-scriptor
-> +    contains one or more fields, with each field separated by a ",". Fi=
-elds are
-> +    either of the form "key=3Dvalue" to set a specific value, or simple=
- "flag" to
-> +    set a boolean flag
-> +
-> +    The first descriptor can optionally be used to describe parameters =
-for the
-> +    whole disk with the following fields:
-> +
-> +    * uuid_disk=3DUUID - Set the UUID for the disk
-> +
-> +    Partition descriptors can have the following fields:
-> +
-> +    * name=3D<NAME> - The partition name, required
-> +    * start=3D<BYTES> - The partition start offset in bytes, required
+> +Sets the bootable flag for all partitions in the table. If the partitio=
+n name
+> +is in 'partition list' (separated by ','), the bootable flag is set, ot=
+herwise
+> +it is cleared. CONFIG_CMD_GPT_RENAME=3Dy is required.
 
-The code has this comment: "start address is optional".
+Why should this feature be related to CONFIG_CMD_GPT_RENAME?
 
-> +    * size=3D<BYTES> - The partition size in bytes or "-" to expand it =
-to the whole free area
-
-This filed is mandatory.
-
-> +    * bootable - Set the legacy bootable flag
-
-This field is optional
-
-> +    * uuid=3D<UUID> - The partition UUID, optional if CONFIG_RANDOM_UUI=
-D=3Dy is enabled
-> +    * type=3D<UUID> - The partition type GUID, requires CONFIG_PARTITIO=
-N_TYPE_GUID=3Dy
-
-This field is optional
-
-Thanks for all the updates. Looks much neater now.
-
-The sequence expected in set_gpt_info() is:
-
-uuid (optional if CONFIG_RANDOM_UUID=3Dy),
-type (optional, only usable for CONFIG_PARTITION_TYPE_GUID=3Dy),
-name (mandatory),
-size (mandatory),
-start (optional),
-bootable (optional).
-
- From the description above it is not clear that:
-
-* semicolons are used to separate partitions
-* the exact sequence of fields must be kept
-* commas are used to separate fields
-* no extra white-space is allowed.
-
-> +
-> +
-> +    If 'uuid' is not specified, but CONFIG_RANDOM_UUID is enabled, a ra=
-ndom UUID
-> +    will be generated for the partition
-> +
-> +gpt enumerate
-> +~~~~~~~~~~~~~
-> +
-> +Sets the variable 'gpt_partition_list' to be a list of all the partitio=
-n names
-> +on the device.
-> +
-> +gpt guid
-> +~~~~~~~~
-> +
-> +Report the GUID of a disk. If 'varname' is specified, the command will =
-set the
-> +variable to the GUID, otherwise it will be printed out.
-> +
-> +gpt read
-> +~~~~~~~~
-> +
-> +Prints the current state of the GPT partition table. If 'varname' is sp=
-ecified,
-> +the variable will be filled with a partition string in the same format =
-as a
-> +'<partition string>', suitable for passing to other 'gpt' commands.  If=
- the
-> +argument is omitted, a human readable description is printed out.
-> +CONFIG_CMD_GPT_RENAME=3Dy is required.
-> +
-> +gpt rename
-> +~~~~~~~~~~
-> +
-> +Renames all partitions named 'part' to be 'name'. CONFIG_CMD_GPT_RENAME=
-=3Dy is
-> +required.
-> +
-> +gpt repair
-> +~~~~~~~~~~
-> +
-> +Repairs the GPT partition tables if it they become corrupted.
-> +
-> +gpt setenv
-> +~~~~~~~~~~
-> +
-> +The 'gpt setenv' command will set a series of environment variables wit=
-h
-> +information about the partition named '<partition name>'. The variables=
- are:
-> +
-> +gpt_partition_addr
-> +    the starting offset of the partition in blocks as a hexadecimal num=
-ber
-> +
-> +gpt_partition_size
-> +    the size of the partition in blocks as a hexadecimal number
-> +
-> +gpt_partition_name
-> +    the name of the partition
-> +
-> +gpt_partition_entry
-> +    the partition number in the table, e.g. 1, 2, 3, etc.
-
-Since eeef58401520 ("cmd: let gpt_partition_entry be hexadecimal") this
-is a hexadecimal number. As partitions are not required to be numbered
-start at 1:
-
-%s/, e.g. 1, 2, 3, etc./as a hexadecimal number/
-
-> +
-> +gpt swap
-> +~~~~~~~~
-> +
-> +Changes the names of all partitions that are named 'name1' to be 'name2=
-', and
-> +all partitions named 'name2' to be 'name1'. CONFIG_CMD_GPT_RENAME=3Dy i=
-s
-> +required.
-> +
-> +gpt verify
-> +~~~~~~~~~~
-> +
-> +Sets return value $? to 0 (true) if the partition layout on the
-> +specified disk matches the one in the provided partition string, and 1 =
-(false)
-> +if it does not match. If no partition string is specified, the command =
-will
-> +check if the disk is partitioned or not.
-> +
-> +gpt write
-> +~~~~~~~~~
-> +
-> +(Re)writes the partition table on the disk to match the provided
-> +partition string. It returns 0 on success or 1 on failure.
-> +
-> +Configuration
-> +-------------
-
-All other man-pages have Configuration after Examples.
-
-> +
-> +To use the 'gpt' command you must specify CONFIG_CMD_GPT=3Dy. To enable=
- 'gpt
-> +read', 'gpt swap' and 'gpt rename', you must specify CONFIG_CMD_GPT_REN=
-AME=3Dy.
-> +
-> +Examples
-> +~~~~~~~~
-
-An example for gpt read would be nice.
-
-> +Create 6 partitions on a disk:: > +
-> +    =3D> setenv gpt_parts 'uuid_disk=3Dbec9fc2a-86c1-483d-8a0e-01097322=
-77d7;
-> +        name=3Dboot,start=3D4M,size=3D128M,bootable,type=3Debd0a0a2-b9e=
-5-4433-87c0-68b6b72699c7,
-> +        name=3Drootfs,size=3D3072M,type=3D0fc63daf-8483-4772-8e79-3d69d=
-8477de4;
-> +        name=3Dsystem-data,size=3D512M,type=3D0fc63daf-8483-4772-8e79-3=
-d69d8477de4;
-> +        name=3D[ext],size=3D-,type=3D0fc63daf-8483-4772-8e79-3d69d8477d=
-e4;
-> +        name=3Duser,size=3D-,type=3D0fc63daf-8483-4772-8e79-3d69d8477de=
-4;
-> +        name=3Dmodules,size=3D100M,type=3D0fc63daf-8483-4772-8e79-3d69d=
-8477de4;
-> +        name=3Dramdisk,size=3D8M,type=3D0fc63daf-8483-4772-8e79-3d69d84=
-77de4
-> +    =3D> gpt write mmc 0 $gpt_parts
-
-There is a starting single quotation mark, but I don't see an ending
-single quotation mark.
-
-White-space is not allowed before 'name=3D'. As ugly as it is, please, put
-the whole setenv command into a single line.
-
-You cannot use a comma before name=3D. It must be a semicolon.
-
-Looking at the code the sequence in the partition descriptors seems to
-be wrong. It should be
-
-uuid (optional if CONFIG_RANDOM_UUID=3Dy),
-type (optional, only usable for CONFIG_PARTITION_TYPE_GUID=3Dy),
-name (mandatory),
-size (mandatory),
-start (optional),
-bootable (optional).
-.
-Please, use a command that you have actually tested and copy it
-verbatim. sandbox_defconfig has a host bind command to attach a file as
-drive. That makes testing easy.
-
-> +
-> +
-> +Verify that the device matches the partition layout described in the va=
-riable
-> +$gpt_parts::
-> +
-> +    =3D> gpt verify mmc 0 $gpt_parts
-
-How about adding output here:
-
-=3D> gpt verify mmc 0 $gpt_parts; echo $?
-0
+Why do we need this sub-command? You can use gpt read and gpt write for
+this rarely needed manipulation.
 
 Best regards
 
 Heinrich
 
 > +
+>   gpt setenv
+>   ~~~~~~~~~~
+>
+> @@ -187,3 +195,7 @@ Get the GUID for a disk::
+>       =3D> gpt guid mmc gpt_disk_uuid
+>       =3D> echo ${gpt_disk_uuid}
+>       bec9fc2a-86c1-483d-8a0e-0109732277d7
 > +
-> +Get the information about the partition named 'rootfs'::
+> +Set the bootable flag for the 'boot' partition and clear it for all oth=
+ers::
 > +
-> +    =3D> gpt setenv mmc 0 rootfs
-> +    =3D> echo ${gpt_partition_addr}
-> +    2000
-> +    =3D> echo ${gpt_partition_size}
-> +    14a000
-> +    =3D> echo ${gpt_partition_name}
-> +    rootfs
-> +    =3D> echo ${gpt_partition_entry}
-> +    2
+> +    =3D> gpt set-bootable mmc 0 boot
+> diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
+> index 946858800d..5d23f9b292 100644
+> --- a/test/py/tests/test_gpt.py
+> +++ b/test/py/tests/test_gpt.py
+> @@ -222,6 +222,28 @@ def test_gpt_swap_partitions(state_disk_image, u_bo=
+ot_console):
+>       assert '0x00000800	0x00000fff	"part2"' in output
+>       assert '0x00001000	0x00001bff	"part1"' in output
+>
+> +@pytest.mark.buildconfigspec('cmd_gpt')
+> +@pytest.mark.buildconfigspec('cmd_gpt_rename')
+> +@pytest.mark.buildconfigspec('cmd_part')
+> +@pytest.mark.requiredtool('sgdisk')
+> +def test_gpt_set_bootable(state_disk_image, u_boot_console):
+> +    """Test the gpt set-bootable command."""
 > +
-> +Get the list of partition names on the disk::
+> +    u_boot_console.run_command('host bind 0 ' + state_disk_image.path)
+> +    parts =3D ('part2', 'part1')
+> +    for bootable in parts:
+> +        output =3D u_boot_console.run_command(f'gpt set-bootable host 0=
+ {bootable}')
+> +        assert 'success!' in output
 > +
-> +    =3D> gpt enumerate
-> +    =3D> echo gpt_partition_list
-> +    boot rootfs system-data [ext] user modules ramdisk
+> +        for p in parts:
+> +            output =3D u_boot_console.run_command(f'gpt setenv host 0 {=
+p}')
+> +            assert 'success!' in output
+> +            output =3D u_boot_console.run_command('echo ${gpt_partition=
+_bootable}')
+> +            if p =3D=3D bootable:
+> +                assert output.rstrip() =3D=3D '1'
+> +            else:
+> +                assert output.rstrip() =3D=3D '0'
 > +
-> +
-> +Get the GUID for a disk::
-> +
-> +    =3D> gpt guid mmc 0
-> +    bec9fc2a-86c1-483d-8a0e-0109732277d7
-> +    =3D> gpt guid mmc gpt_disk_uuid
-> +    =3D> echo ${gpt_disk_uuid}
-> +    bec9fc2a-86c1-483d-8a0e-0109732277d7
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index f45a7f5502..fa702920fa 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -66,6 +66,7 @@ Shell commands
->      cmd/for
->      cmd/fwu_mdata
->      cmd/gpio
-> +   cmd/gpt
->      cmd/host
->      cmd/imxtract
->      cmd/load
+>   @pytest.mark.boardspec('sandbox')
+>   @pytest.mark.buildconfigspec('cmd_gpt')
+>   @pytest.mark.buildconfigspec('cmd_part')
 
