@@ -4,111 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3701EE4993
-	for <u-boot@archiver.kernel.org>; Tue, 22 Aug 2023 12:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A6FC83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 21:32:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53A7786486;
-	Tue, 22 Aug 2023 14:59:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=de.bosch.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B05E86440;
+	Tue, 29 Aug 2023 23:32:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=de.bosch.com header.i=@de.bosch.com header.b="LxEpIGXM";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LftEq++9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86EB98646A; Tue, 22 Aug 2023 14:59:18 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2062f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::62f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F3F49864E7; Tue, 29 Aug 2023 23:32:45 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02A7F86386
- for <u-boot@lists.denx.de>; Tue, 22 Aug 2023 14:59:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=de.bosch.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Thomas.Mittelstaedt@de.bosch.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HuGGbeSfKoCXXMAD7YB728fodiZsTrdAWG2AwuBmgkgbDeG0a2OTVwGbKDOE4BDjn4OuhssHvVLC1ukAEQ9XMd0Knud+CbT9m56MI3hyb3BZwFh+W9TkMIp2xf/kHKR2KZQ5xgecpmO0tNmSWcmsf74Do8y4Mhh4xIBTU+yg6wE1BaueCe7G4O8lR5pIvglv+uQ/wq9UCgka/yqKGF6M/Krs1AhkNkQoT9MEdzfrj829E0r8UP+iJriQI9pTrcEQ7/0NO040KFIKe0TL39shURkKE25jjCHeBauQQx9Rf2Wq0jiWunKkwdVrFo7gro2yXFl5n3fKd1pFy2P/z7zfLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OhP6bQT/3BouziSZMJairp2wn/OBff9cpvs5EiQWRNI=;
- b=jfqnXDNMxloafYBNu3VqKVr7ttz6B+FHBntT0ZMW02VthDjoX98fp9dvvzxbUUHOE8JOClpf+cYNZH+E/pE387XrEhzcTVb1WvWDjJ3Y//UQ04OVN4V3/XUngo/um7iw3sQqZX+D8foUuzJ0s1BeHecea4/yASnAhQ53rA+PgzfbAyQtT09mbDSJqDmMgK4XZTbjO80BMUPR9lkJ/rOP8bK0hyg5qk+XZH2lYQ3uKYbLmA6ARxx6xBePl2SsGkXGQrloir07iaDG3ESvMJtVasVEy9cK3ES9jWtqfX8GTfqV7GBwufAG+odDpkOaGYeaCxhq5hxn5uu8d6R9WvJ89Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.199) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=de.bosch.com;
- dmarc=pass (p=reject sp=none pct=100) action=none header.from=de.bosch.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OhP6bQT/3BouziSZMJairp2wn/OBff9cpvs5EiQWRNI=;
- b=LxEpIGXMmtQbBtpDDwkJ0p9q6QodX6yd6MsZrgWF4PaRZu1Uuq7hMOIFd59KDhE58gI2Ce8/gD2X4iTT8H0Mtn/rs5LOsIR3Pu1qlMAQSEo7AWkN86gPBEEDSW/RBcKoSRCHNCro/yZe3/t2V56eKYdy8zXzhagv5FF1EpewHIeu22E6um7rUobz33aoI90k5OlpBBjkPacWgjIBjPGI9FOHxV2fXB/Ni4YNE06HB4w6HuGIVb4OpEcBpYrsDdCwIO57bJNLQh7Lh2arLixojDDghElBkSZDsg8s3Fo4LcxIxEuN7XRJnQ2TagUgEIaPPZ//k6smsI4WiH6awsptFg==
-Received: from DU2PR04CA0256.eurprd04.prod.outlook.com (2603:10a6:10:28e::21)
- by AS8PR10MB6921.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:57c::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.20; Tue, 22 Aug
- 2023 12:59:14 +0000
-Received: from DBAEUR03FT058.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:28e:cafe::a4) by DU2PR04CA0256.outlook.office365.com
- (2603:10a6:10:28e::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.20 via Frontend
- Transport; Tue, 22 Aug 2023 12:59:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.199)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.199 as permitted sender)
- receiver=protection.outlook.com; 
- client-ip=139.15.153.199; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.199) by
- DBAEUR03FT058.mail.protection.outlook.com (100.127.142.120) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6723.15 via Frontend Transport; Tue, 22 Aug 2023 12:59:14 +0000
-Received: from FE-EXCAS2001.de.bosch.com (10.139.217.200) by eop.bosch-org.com
- (139.15.153.199) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.31; Tue, 22 Aug
- 2023 14:59:12 +0200
-Received: from FE-HUB2000.de.bosch.com (10.4.103.109) by
- FE-EXCAS2001.de.bosch.com (10.139.217.200) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.31; Tue, 22 Aug 2023 14:59:12 +0200
-Received: from localhost.localdomain (10.34.189.209) by
- FE-HUB2000.de.bosch.com (10.4.103.109) with Microsoft SMTP Server id
- 15.1.2507.31; Tue, 22 Aug 2023 14:59:11 +0200
-From: <thomas.mittelstaedt@de.bosch.com>
-To: <u-boot@lists.denx.de>
-CC: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: 
-Date: Tue, 22 Aug 2023 12:58:56 +0000
-Message-ID: <20230822125858.8018-1-thomas.mittelstaedt@de.bosch.com>
-X-Mailer: git-send-email 2.30.2
+ by phobos.denx.de (Postfix) with ESMTPS id 0E85B846B8
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 23:32:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 6670E61A98
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:32:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C16CBC433CD
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:32:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693344760;
+ bh=5o6ki4h0Ml9jAcSugGPORbFfTrt12s7REMjvXI4xR4Y=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=LftEq++9TdpzBCHZL3FrVb5yUmSkFZylY8fpzdVOFPgfdE5Xtn5AMoKk9xgdCv/9N
+ z1w202zDQmICAiMxZroK+nGFu+m+IrZs6RnnKSuUMAv513pVzJIu3aZaMbjZf9UpWG
+ 2GKGHABaseufLESGYQhz3VLnJaNHqRB0cRm6SBXdxxuXnVxAECwKxbrH2xF9yguKQT
+ XBtVXkih+i6NgsvXtDmIxTU3JtlyIXwR2+6yFgrCCKrGWGUXqWPHkquHoM3cS84J8u
+ J4lfgn/kfQtV/tH8/qu88KUCx4PqRnEDRkrVcQ/AgiKI1uy8viaFXRugesCVFiffDt
+ oJOv0/0dD2EeA==
+Received: by mail-lf1-f47.google.com with SMTP id
+ 2adb3069b0e04-50091b91a83so7592718e87.3
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 14:32:40 -0700 (PDT)
+X-Gm-Message-State: AOJu0YzyNlKBUbgfPHDnIEBY7AnzWG7cYRSlNPqJJN3Lu7gmGQmsOEvf
+ ib+oGvYStNgdiLQF46ZKF2Vnvmtjab/3dqtbb2E=
+X-Google-Smtp-Source: AGHT+IFG7drW7XtSYzjCVaUWymqykiMN8j8kcQp1tRPjGjuXbW1d4XcdEzil0B8OeqZsoEILEVQdFDqyTELIfS7Pr5w=
+X-Received: by 2002:ac2:5446:0:b0:500:9d6c:913e with SMTP id
+ d6-20020ac25446000000b005009d6c913emr98357lfn.52.1693344758741; Tue, 29 Aug
+ 2023 14:32:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.34.189.209]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DBAEUR03FT058:EE_|AS8PR10MB6921:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8f1c6400-50c9-4335-1f8d-08dba30f9666
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: BIMjc5ojVFA7Np8M4yBL9+mSFoxajR3XHZpRKNQNYFz4AAGULC7XERxD41wPkNaH8GoqqKKDlOj9LO8T597Vp3mFfyF/fzpc6ZKfy73e2mp2oeljhRZgn5ZiqV1JR+Y9l6TqrZGzDF8ILQojG5obByA7i6Lrzaq6AWvSV14ChNlnmZ5LWJH+8k96QctViqXoTEEEFKbhUCkjxa85CaqyAfCoyjQB4LpMqzW5bXuzvK0/IY11TCy5+J0eDOCHoCTVQScOIwpbq8Kh7vUOPyPeio3aQrkUN1st01xdWgCkwRwQJdZ1QJrQHjLvDU1MAj4euw1EvAy3tXGK8MUc3/7vCPtHVPDj4ZCzzXiZE5SXse2Yx4lhquyR6tMqKW7vWLxIRfSn4dXWH1rRdZYq9oYSQOLf87dNGjc71SgsBLlD6EZ/a/R5IbG2Mufn5+oJlytPvqfUyTdXQAMyx6ndeQ2oU4OjJxP43dfx65R7J6LCOKb8D6cpxo03sgJ/OM6UyRcYWgx+qpSXKWClAyXxfX8UDvymr5KXt5UQJVInejBFKB7s7OBQnDr8bQwsZOcm/itKEOarGZlESQBEGJObLsWkQ6T0+cVrywMnrGDcE28yLD65L09kVs/TcqlhSAepkMkkwgimPAWBdJuLps1Gw76j62Gakj5yBI/tlBeoy96KvhELXJa0E9SXuBzwpQD84v1o4bgiipo7hRvxB2BhoKfpr+hGapOR3R1sceFlJWtx2Hj5oboxAmomRs27OitP+brzuXloFJNpjOgtOvaTfAKHtpar2ifSIkxhEyO6waOg1/53deF4s2yA8E/FLHNGyBBK
-X-Forefront-Antispam-Report: CIP:139.15.153.199; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:eop.bosch-org.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(376002)(396003)(39860400002)(346002)(1800799009)(186009)(451199024)(82310400011)(36840700001)(40470700004)(46966006)(54906003)(6916009)(316002)(70586007)(70206006)(82960400001)(8936002)(2616005)(4326008)(40460700003)(41300700001)(1076003)(82740400003)(356005)(81166007)(478600001)(6666004)(40480700001)(5406001)(558084003)(2906002)(86362001)(47076005)(2876002)(36860700001)(336012)(426003)(5660300002)(26005)(16526019)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Aug 2023 12:59:14.4450 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f1c6400-50c9-4335-1f8d-08dba30f9666
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4; Ip=[139.15.153.199];
- Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: DBAEUR03FT058.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6921
+References: <20230822203446.4111742-1-sjg@chromium.org>
+ <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
+ <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
+ <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
+ <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
+ <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Tue, 29 Aug 2023 23:32:27 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
+Message-ID: <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
+To: Simon Glass <sjg@chromium.org>
+Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
+ linux-acpi@vger.kernel.org, 
+ lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
+ ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,8 +90,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 29 Aug 2023 at 21:18, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ard,
+>
+> On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
+> >
+> > On Wed, 23 Aug 2023 at 22:04, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi,
+> > >
+> > > On Wed, 23 Aug 2023 at 08:24, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > >
+> > > > On Wed, 23 Aug 2023 at 10:59, Mark Rutland <mark.rutland@arm.com> wrote:
+> > > > >
+> > > > > On Tue, Aug 22, 2023 at 02:34:42PM -0600, Simon Glass wrote:
+> > > > > > The Devicetree specification skips over handling of a logical view of
+> > > > > > the memory map, pointing users to the UEFI specification.
+> > > > > >
+> > > > > > It is common to split firmware into 'Platform Init', which does the
+> > > > > > initial hardware setup and a "Payload" which selects the OS to be booted.
+> > > > > > Thus an handover interface is required between these two pieces.
+> > > > > >
+> > > > > > Where UEFI boot-time services are not available, but UEFI firmware is
+> > > > > > present on either side of this interface, information about memory usage
+> > > > > > and attributes must be presented to the "Payload" in some form.
+> > > >
+> > > > Not quite.
+> > > >
+> > > > This seems to be intended for consumption by Linux booting in ACPI
+> > > > mode, but not via UEFI, right?
+> > >
+> > > Actually, this is for consumption by firmware. The goal is to allow
+> > > edk2 to boot into U-Boot and vice versa, i.e. provide some
+> > > interoperability between firmware projects. I will use the "Platform
+> > > Init" and "Payload" terminology here too.
+> > >
+> >
+> > OK. It was the cc to linux-acpi@ and the authors of the
+> > ACPI/SMBIOS-without-UEFI patches that threw me off here.
+> >
+> > If we are talking about an internal interface for firmware components,
+> > I'd be inclined to treat this as an implementation detail, as long as
+> > the OS is not expected to consume these DT nodes.
+> >
+> > However, I struggle to see the point of framing this information as a
+> > 'UEFI memory map'. Neither EDK2 nor u-boot consume this information
+> > natively, and there is already prior art in both projects to consume
+> > nodes following the existing bindings for device_type=memory and the
+> > /reserved-memory node. UEFI runtime memory is generally useless
+> > without UEFI runtime services, and UEFI boot services memory is just
+> > free memory.
+> >
+> > There is also an overlap with the handover between secure and
+> > non-secure firmware on arm64, which is also DT based, and communicates
+> > available memory as well as RAM regions that are reserved for firmware
+> > use.
+> >
+> > In summary, I don't see why a non-UEFI payload would care about UEFI
+> > semantics for pre-existing memory reservations, or vice versa. Note
+> > that EDK2 will manage its own memory map, and expose it via UEFI boot
+> > services and not via DT.
+>
+> Bear in mind that one or both sides of this interface may be UEFI.
+> There is no boot-services link between the two parts that I have
+> outlined.
+>
 
-Changes compared to V1:
-- Some reworks from findings of H.Schuchardt
-- Partition setup reduced to 2 partitions
+I don't understand what this means.
 
+UEFI specifies how one component invokes another, and it is not based
+on a DT binding. If the second component calls UEFI boot or runtime
+services, it should be invoked in this manner. If it doesn't, then it
+doesn't care about these memory reservations (and the OS will not be
+booted via UEFI either)
+
+So I feel I am missing something here. Perhaps a practical example
+would be helpful?
+
+
+> >
+> > ...
+> > >
+> > > There is no intent to implement the UEFI spec, here. It is simply that
+> > > some payloads (EDK2) are used to having this information.
+> > >
+> > > Imagine splitting EDK2 into two parts, one of which does platform init
+> > > and the other which (the payload) boots the OS. The payload wants
+> > > information from Platform Init and it needs to be in a devicetree,
+> > > since that is what we have chosen for this interface. So to some
+> > > extent this is unrelated to whether you have EFI boot services. We
+> > > just need to be able to pass the information across the interface.
+> > > Note that the user can (without recompilation, etc.) replace the
+> > > second part with U-Boot (for example) and it must still work.
+> > >
+> >
+> > OK, so device tree makes sense for this. This is how I implemented the
+> > EDK2 port that targets QEMU/mach-virt - it consumes the DT to discover
+> > the UART, RTC,, memory, PCI host bridge, etc.
+> >
+> > But I don't see a use case for a UEFI memory map here.
+> >
+> >
+...
+> > >
+> > > Here I believe you are talking about booting the kernel in EFI mode,
+> > > but that is not the intent of this patch. This is all about things
+> > > happening in firmware. Now, if the payload (second) part of the
+> > > firmware decides it wants to offer EFI boot services and boot the
+> > > kernel via the EFI stub, then it may very well pack this information
+> > > (with a few changes) into a system table and make it available to the
+> > > kernel stub. But by then this FDT binding is irrelevant, since it has
+> > > served its purpose (which, to reiterate, is to facilitate information
+> > > passage from platform init to 'payload').
+> > >
+> >
+> > Indeed. As long as this binding is never consumed by the OS, I don't
+> > have any objections to it - I just fail to see the point.
+>
+> OK thanks.
+>
+> The point is that Platform Init and the payload need to agree about
+> where certain things are in memory. It is true that this is coming
+> from an EFI context, but that is just an example. Platform Init
+> doesn't necessarily know whether its payload is EFI, but may set this
+> up for use by the payload, just in case.
+>
+
+Platform init can communicate memory reservations to a UEFI payload if
+needed, and there is prior art for this.
+
+Platform init *cannot* communicate UEFI specific boot or runtime
+reservations in this manner, as this doesn't make sense: either
+Platform Init is UEFI and invokes a UEFI payload, in which case the
+UEFI spec applies. In other cases, the UEFI memory regions either
+don't exist or are irrelevant. The only EFI-agnostic aspect here is
+RAM reservation for use by firmware in general, and this does not have
+these UEFI semantics and does not need to be framed as such.
