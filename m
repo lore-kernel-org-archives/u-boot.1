@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 806A6C83F19
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 15:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A318C83F14
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 16:01:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF001864FA;
-	Tue, 29 Aug 2023 17:24:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 62A6886440;
+	Tue, 29 Aug 2023 18:01:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ybrr5lJp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C75zormY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E375864FF; Tue, 29 Aug 2023 17:24:06 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E328A8647B; Tue, 29 Aug 2023 18:01:22 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D48E4864E9
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 17:24:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E37FD863FD
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 18:01:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7605ce3122=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37TC82ig021636; Tue, 29 Aug 2023 17:24:03 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=4R52npwgVWaW2hyNyCjRrvyGKfHXYfNEJhwSgGLgE4U=; b=yb
- rr5lJpfRpk2ydr4Np0pEU/IGIEeAAJCApcz113SKc9yrRP+LBlugrQEfr7WlXn2E
- au7LV9WpRBPp2dc5RfGDfPzq6rkALc+7kVLYKAig9Jx7m1DW2NRSOOBV2M4RN5pO
- YFOfhE4wI0Jr8NIGl1I6L5nmJ2QZbindzeEdcAEyqyXRgiDJ8gDRS3EflHhwQTIj
- icCeH3rnxnIpd7je8fYhlz78mfWYeJvgxi1wjMrBDUG/63CorPK0dtBmT2YRKMwU
- m/V5K2gR1pNI8OuJg5O2JHwz5gboFnxRa3wHFNPUMS6OEyGfmn/tnO5IxT9WoK8v
- W1d9jiOAJ0xIPFIk3qyg==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq6h453wx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Aug 2023 17:24:03 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1A5F4100057;
- Tue, 29 Aug 2023 17:24:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 121B223301C;
- Tue, 29 Aug 2023 17:24:03 +0200 (CEST)
-Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 29 Aug
- 2023 17:24:02 +0200
-Message-ID: <f596b4b2-407a-c36d-97fa-105957499733@foss.st.com>
-Date: Tue, 29 Aug 2023 17:24:01 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-4ff8f2630e3so7146296e87.1
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 09:01:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693324879; x=1693929679;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0tc7Oq+vVun/0F0TYkBBZcQLVrPo7QJsVygXG4Fbb5A=;
+ b=C75zormY29ZXEnMS0HuILcr+i3vv2IYTT61Gg+FzedECiPJ47OqKP0XncRxpBSyPJh
+ kyg18zl15b6H+Hbk1qSXudMfOYAJ/AXHDLvkpwkucR9ZQokJ6sLW9HUmcuTMsr0Jlqu+
+ vXstnR2fntcJfSznfJVwvnjJDqqPjXF97eeoE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693324879; x=1693929679;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0tc7Oq+vVun/0F0TYkBBZcQLVrPo7QJsVygXG4Fbb5A=;
+ b=RXLHrK4P8BUE1hu5LJMo0oKYQz1uGfzgd9QD0AAGdAAhonLUYgUADUcm3xl2jilnTI
+ JrxMBJsAjkkithim+8ItFIU3DeUgK2NGcR645vzfSj0H3mjDEHtWFfRSreXu22CabtHv
+ piZcz9a2irS8Dxj0cP8iji2O3EXN9WJJZ9+M1WmUtpmlZR6BEOEh05DNZCNj+xoJgtKq
+ ELc17e2rUa5VuovEpxpy8NZ1gkpVPur/mxzOpwtbdexUc8LNE9DbUn21dlkPZ+zh1p13
+ ++/i8HIR2R2ut2lHv60+ltkTtUekJS6e1FrGNlHtf/IOGzeMu4k4qv0UwNrRnept1TZb
+ u0lA==
+X-Gm-Message-State: AOJu0YzLdVIU52axFYAuHMEPHLo7/eS2Wu/9TqDUtE27FSbHuK3o8jkb
+ 5jjmK6pvbYB0v65Zih2lqiJ8AXP78gaHmX3kw7XkQA==
+X-Google-Smtp-Source: AGHT+IE/RX9iizoSgqT2x/ebB3X+QfUbrpdl+J3+w25nxLY20nEDHwjRri4n6/cHqS87tJVCVdhQHRPnPZQMtqcKUuM=
+X-Received: by 2002:a05:6512:250e:b0:4f9:54f0:b6db with SMTP id
+ be14-20020a056512250e00b004f954f0b6dbmr22767776lfb.13.1693324878784; Tue, 29
+ Aug 2023 09:01:18 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] configs: stm32f769-disco: Enable VIDEO_LOGO flag
-Content-Language: en-US
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Vikas Manocha
- <vikas.manocha@st.com>
-References: <20230825162439.776710-1-patrice.chotard@foss.st.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20230825162439.776710-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.22.165]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-29_13,2023-08-29_01,2023-05-22_02
+References: <20230822203446.4111742-1-sjg@chromium.org>
+ <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
+ <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
+ <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
+ <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
+In-Reply-To: <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 29 Aug 2023 10:01:06 -0600
+Message-ID: <CAPnjgZ3aczy3sTJvppVBoM5_aB9zdML6muwwvuvwCn8n3Mpzyg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
+ linux-acpi@vger.kernel.org, 
+ lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
+ ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, "Dong, Guo" <guo.dong@intel.com>, 
+ "dhaval@rivosinc.com" <dhaval@rivosinc.com>, maximilian.brune@9elements.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,67 +91,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+(Adding a few more, will respond soon)
 
-On 8/25/23 18:24, Patrice Chotard wrote:
-> The patch removes the legacy mode of displaying the ST logo and adopts
-> the approach introduced by the commit 284b08fb51b6 ("board: stm32mp1: add
-> splash screen with stmicroelectronics logo").
+- Simon
+
+On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
+> On Wed, 23 Aug 2023 at 22:04, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi,
+> >
+> > On Wed, 23 Aug 2023 at 08:24, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > >
+> > > On Wed, 23 Aug 2023 at 10:59, Mark Rutland <mark.rutland@arm.com> wrote:
+> > > >
+> > > > On Tue, Aug 22, 2023 at 02:34:42PM -0600, Simon Glass wrote:
+> > > > > The Devicetree specification skips over handling of a logical view of
+> > > > > the memory map, pointing users to the UEFI specification.
+> > > > >
+> > > > > It is common to split firmware into 'Platform Init', which does the
+> > > > > initial hardware setup and a "Payload" which selects the OS to be booted.
+> > > > > Thus an handover interface is required between these two pieces.
+> > > > >
+> > > > > Where UEFI boot-time services are not available, but UEFI firmware is
+> > > > > present on either side of this interface, information about memory usage
+> > > > > and attributes must be presented to the "Payload" in some form.
+> > >
+> > > Not quite.
+> > >
+> > > This seems to be intended for consumption by Linux booting in ACPI
+> > > mode, but not via UEFI, right?
+> >
+> > Actually, this is for consumption by firmware. The goal is to allow
+> > edk2 to boot into U-Boot and vice versa, i.e. provide some
+> > interoperability between firmware projects. I will use the "Platform
+> > Init" and "Payload" terminology here too.
+> >
 >
->   configs/stm32f769-disco_defconfig     | 2 +-
->   configs/stm32f769-disco_spl_defconfig | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+> OK. It was the cc to linux-acpi@ and the authors of the
+> ACPI/SMBIOS-without-UEFI patches that threw me off here.
 >
-> diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
-> index 72ef133fe4a..20dbb1af630 100644
-> --- a/configs/stm32f769-disco_defconfig
-> +++ b/configs/stm32f769-disco_defconfig
-> @@ -56,6 +56,7 @@ CONFIG_SPI=y
->   CONFIG_DM_SPI=y
->   CONFIG_STM32_QSPI=y
->   CONFIG_VIDEO=y
-> +CONFIG_VIDEO_LOGO=y
->   CONFIG_BACKLIGHT_GPIO=y
->   CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
->   CONFIG_VIDEO_STM32=y
-> @@ -64,7 +65,6 @@ CONFIG_VIDEO_STM32_MAX_XRES=480
->   CONFIG_VIDEO_STM32_MAX_YRES=800
->   CONFIG_SPLASH_SCREEN=y
->   CONFIG_SPLASH_SCREEN_ALIGN=y
-> -CONFIG_VIDEO_BMP_RLE8=y
->   CONFIG_BMP_16BPP=y
->   CONFIG_BMP_24BPP=y
->   CONFIG_BMP_32BPP=y
-> diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
-> index dd17cad7362..a5298e7cdc1 100644
-> --- a/configs/stm32f769-disco_spl_defconfig
-> +++ b/configs/stm32f769-disco_spl_defconfig
-> @@ -82,6 +82,7 @@ CONFIG_DM_SPI=y
->   CONFIG_STM32_QSPI=y
->   CONFIG_SPL_TIMER=y
->   CONFIG_VIDEO=y
-> +CONFIG_VIDEO_LOGO=y
->   CONFIG_BACKLIGHT_GPIO=y
->   CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
->   CONFIG_VIDEO_STM32=y
-> @@ -90,7 +91,6 @@ CONFIG_VIDEO_STM32_MAX_XRES=480
->   CONFIG_VIDEO_STM32_MAX_YRES=800
->   CONFIG_SPLASH_SCREEN=y
->   CONFIG_SPLASH_SCREEN_ALIGN=y
-> -CONFIG_VIDEO_BMP_RLE8=y
->   CONFIG_BMP_16BPP=y
->   CONFIG_BMP_24BPP=y
->   CONFIG_BMP_32BPP=y
-
-
-
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Thanks
-Patrick
-
-
+> If we are talking about an internal interface for firmware components,
+> I'd be inclined to treat this as an implementation detail, as long as
+> the OS is not expected to consume these DT nodes.
+>
+> However, I struggle to see the point of framing this information as a
+> 'UEFI memory map'. Neither EDK2 nor u-boot consume this information
+> natively, and there is already prior art in both projects to consume
+> nodes following the existing bindings for device_type=memory and the
+> /reserved-memory node. UEFI runtime memory is generally useless
+> without UEFI runtime services, and UEFI boot services memory is just
+> free memory.
+>
+> There is also an overlap with the handover between secure and
+> non-secure firmware on arm64, which is also DT based, and communicates
+> available memory as well as RAM regions that are reserved for firmware
+> use.
+>
+> In summary, I don't see why a non-UEFI payload would care about UEFI
+> semantics for pre-existing memory reservations, or vice versa. Note
+> that EDK2 will manage its own memory map, and expose it via UEFI boot
+> services and not via DT.
+>
+> ...
+> >
+> > There is no intent to implement the UEFI spec, here. It is simply that
+> > some payloads (EDK2) are used to having this information.
+> >
+> > Imagine splitting EDK2 into two parts, one of which does platform init
+> > and the other which (the payload) boots the OS. The payload wants
+> > information from Platform Init and it needs to be in a devicetree,
+> > since that is what we have chosen for this interface. So to some
+> > extent this is unrelated to whether you have EFI boot services. We
+> > just need to be able to pass the information across the interface.
+> > Note that the user can (without recompilation, etc.) replace the
+> > second part with U-Boot (for example) and it must still work.
+> >
+>
+> OK, so device tree makes sense for this. This is how I implemented the
+> EDK2 port that targets QEMU/mach-virt - it consumes the DT to discover
+> the UART, RTC,, memory, PCI host bridge, etc.
+>
+> But I don't see a use case for a UEFI memory map here.
+>
+>
+> > >
+> > > >
+> > > > Today Linux does that by passing:
+> > > >
+> > > >   /chosen/linux,uefi-mmap-start
+> > > >   /chosen/linux,uefi-mmap-size
+> > > >   /chosen/linux,uefi-mmap-desc-size
+> > > >   /chosen/linux,uefi-mmap-desc-ver
+> > > >
+> > > > ... or /chosen/xen,* variants of those.
+> > > >
+> > > > Can't we document / genericise that?
+> >
+> > That seems to me to be the fields from the EFI memory-map call, but
+> > where is the actual content? I looked in the kernel but it seems to be
+> > an internal interface (between the stub and the kernel)?
+> >
+> > > >
+> > >
+> > > Given the ACPI angle, promoting this to external ABI would introduce a
+> > > DT dependency to ACPI boot. So we'll at least have to be very clear
+> > > about which takes precedence, or maybe disregard everything except the
+> > > /chosen node when doing ACPI boot?
+> > >
+> > > This also argues for not creating an ordinary binding for this (i.e.,
+> > > describing it as part of the platform topology), but putting it under
+> > > /chosen as a Linux-only boot tweak.
+> > >
+> > > > Pointing to that rather than re-encoding it in DT means that it stays in-sync
+> > > > with the EFI spec and we won't back ourselves into a corner where we cannot
+> > > > encode something due to a structural difference. I don't think it's a good idea
+> > > > to try to re-encode it, or we're just setting ourselves up for futher pain.
+> > > >
+> > >
+> > > What I would prefer is to formalize pseudo-EFI boot and define the
+> > > bare required minimum (system table + memory map + config tables) in
+> > > an arch-agnostic manner. That way, the only thing that needs to be
+> > > passed via DT/boot_params/etc is the (pseudo-)EFI system table
+> > > address, and everything else (SMBIOS, ACPI as well as the EFI memory
+> > > map and even the initrd) can be passed via config tables as usual, all
+> > > of which is already supported in (mostly) generic kernel code.
+> > >
+>
+> <snip some lines>
+>
+> >
+> > Here I believe you are talking about booting the kernel in EFI mode,
+> > but that is not the intent of this patch. This is all about things
+> > happening in firmware. Now, if the payload (second) part of the
+> > firmware decides it wants to offer EFI boot services and boot the
+> > kernel via the EFI stub, then it may very well pack this information
+> > (with a few changes) into a system table and make it available to the
+> > kernel stub. But by then this FDT binding is irrelevant, since it has
+> > served its purpose (which, to reiterate, is to facilitate information
+> > passage from platform init to 'payload').
+> >
+>
+> Indeed. As long as this binding is never consumed by the OS, I don't
+> have any objections to it - I just fail to see the point.
