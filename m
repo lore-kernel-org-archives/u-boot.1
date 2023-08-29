@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BEA1C71153
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 20:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306FCC71153
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 20:33:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C68E18652E;
-	Tue, 29 Aug 2023 22:32:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11F1586532;
+	Tue, 29 Aug 2023 22:32:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="gS1qq07H";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="KRRWgK0H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06C1186508; Tue, 29 Aug 2023 22:32:18 +0200 (CEST)
+ id 1D999864F5; Tue, 29 Aug 2023 22:32:18 +0200 (CEST)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 02727864F5
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 22:32:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 02A9286511
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 22:32:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id BC38E2129BE5;
- Tue, 29 Aug 2023 13:32:11 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com BC38E2129BE5
+ by linux.microsoft.com (Postfix) with ESMTPSA id 894CB2129BF7;
+ Tue, 29 Aug 2023 13:32:12 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 894CB2129BF7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1693341131;
- bh=p96aupymbwIcZ15B6g7kBrnwTQpv+zzmONQrlCn2MUA=;
+ s=default; t=1693341132;
+ bh=edg4vBdNF6GgHSHKlJsbhB7EYSRRgl0qNDcj6+6Rm8w=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gS1qq07Ho/RM6bObbeIbfznNBe+fEbcXOT5TM4r9Cnp6zo+L3+N/+ARzk3zcVpeeV
- BOW1+IZimsHaYkNGo78rSiLI6nTMvfQKmF3HPF07VZa+yzF0WNsSV++6aFjvtdVHk/
- 2UyYQdwDAye9RCvwKtUswQu7TJYc03IMcAbbh2s0=
+ b=KRRWgK0HHNrcurao5LOTTn2znpjUrvO5AWRSE69w35rwtZkGcvmvFJrfF/TmOayk+
+ +JUI6Ye7SNfAU45gkGUcY70Gc2tmrYLDCJMVpvWdKoiLvjo0f6gbbdwH8yTJ3nperq
+ qtn9cY4vWUI9NYiUz3M+Jj3U4g4Bg/vfuB0S/JPQ=
 From: seanedmond@linux.microsoft.com
 To: u-boot@lists.denx.de
 Cc: dphadke@linux.microsoft.com,
 	macromorgan@hotmail.com,
 	sjg@chromium.org
-Subject: [PATCH 2/4] fdt: kaslr seed from tpm entropy
-Date: Tue, 29 Aug 2023 13:32:03 -0700
-Message-Id: <20230829203210.83914-2-seanedmond@linux.microsoft.com>
+Subject: [PATCH v2 3/4] cmd: kaslrseed: Use common API to fixup FDT
+Date: Tue, 29 Aug 2023 13:32:09 -0700
+Message-Id: <20230829203210.83914-8-seanedmond@linux.microsoft.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230829203210.83914-1-seanedmond@linux.microsoft.com>
 References: <20230829203210.83914-1-seanedmond@linux.microsoft.com>
@@ -63,134 +63,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+From: Sean Edmond <seanedmond@microsoft.com>
 
-Add support for KASLR seed from TPM device. Invokes tpm_get_random()
-API to read 8-bytes of random bytes for KASLR.
+Use the newly introduced common API fdt_fixup_kaslr_seed() in the
+kaslrseed command.
 
-Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
-Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
 Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 ---
- boot/image-fdt.c      | 15 +++++++++++++++
- common/fdt_support.c  | 30 ++++++++++++++++++++++++++++++
- include/fdt_support.h |  8 ++++++++
- lib/Kconfig           |  9 +++++++++
- 4 files changed, 62 insertions(+)
+ cmd/kaslrseed.c | 22 ++++++++--------------
+ 1 file changed, 8 insertions(+), 14 deletions(-)
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index f10200f647..ed38ed77b9 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -624,6 +624,21 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
- 		goto err;
+diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
+index 8a1d8120cd..c65607619b 100644
+--- a/cmd/kaslrseed.c
++++ b/cmd/kaslrseed.c
+@@ -19,7 +19,7 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+ 	size_t n = 0x8;
+ 	struct udevice *dev;
+ 	u64 *buf;
+-	int nodeoffset;
++	ofnode root;
+ 	int ret = CMD_RET_SUCCESS;
+ 
+ 	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+@@ -45,21 +45,15 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+ 		return CMD_RET_FAILURE;
  	}
  
-+	if (IS_ENABLED(CONFIG_KASLR_TPM_SEED)) {
-+		ofnode root;
-+
-+		ret = root_ofnode_from_fdt(blob, &root);
-+		if (ret) {
-+			printf("ERROR: Unable to get root ofnode\n");
-+			goto err;
-+		}
-+		ret = fdt_tpm_kaslr_seed(root);
-+		if (ret) {
-+			printf("ERROR: fdt fixup KASLR failed: %d\n", ret);
-+			goto err;
-+		}
-+	}
-+
- 	fdt_ret = optee_copy_fdt_nodes(blob);
- 	if (fdt_ret) {
- 		printf("ERROR: transfer of optee nodes to new fdt failed: %s\n",
-diff --git a/common/fdt_support.c b/common/fdt_support.c
-index 52be4375b4..d338fcde54 100644
---- a/common/fdt_support.c
-+++ b/common/fdt_support.c
-@@ -13,6 +13,9 @@
- #include <mapmem.h>
- #include <net.h>
- #include <stdio_dev.h>
-+#include <tpm_api.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
- #include <dm/ofnode.h>
- #include <linux/ctype.h>
- #include <linux/types.h>
-@@ -650,6 +653,33 @@ int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
- 	return 0;
- }
+-	ret = fdt_check_header(working_fdt);
+-	if (ret < 0) {
+-		printf("fdt_chosen: %s\n", fdt_strerror(ret));
+-		return CMD_RET_FAILURE;
+-	}
+-
+-	nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
+-	if (nodeoffset < 0) {
+-		printf("Reading chosen node failed\n");
+-		return CMD_RET_FAILURE;
++	ret = root_ofnode_from_fdt(working_fdt, &root);
++	if (ret) {
++		printf("ERROR: Unable to get root ofnode\n");
++		goto CMD_RET_FAILURE;
+ 	}
  
-+int fdt_tpm_kaslr_seed(ofnode node)
-+{
-+	u8 rand[8] = {0};
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_first_device_err(UCLASS_TPM, &dev);
-+	if (ret) {
-+		printf("ERROR: Failed to find TPM device\n");
-+		return ret;
-+	}
-+
-+	ret = tpm_get_random(dev, rand, sizeof(rand));
-+	if (ret) {
-+		printf("ERROR: TPM GetRandom failed, ret=%d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = fdt_fixup_kaslr_seed(node, rand, sizeof(rand));
+-	ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
+-	if (ret < 0) {
+-		printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
++	ret = fdt_fixup_kaslr_seed(root, buf, sizeof(buf));
 +	if (ret) {
 +		printf("ERROR: failed to add kaslr-seed to fdt\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- int fdt_record_loadable(void *blob, u32 index, const char *name,
- 			uintptr_t load_addr, u32 size, uintptr_t entry_point,
- 			const char *type, const char *os, const char *arch)
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index d967118bed..117ca14ca5 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -130,6 +130,14 @@ void fdt_fixup_ethernet(void *fdt);
-  */
- int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
+ 		return CMD_RET_FAILURE;
+ 	}
  
-+/*
-+ * fdt_add_tpm_kaslr_seed - Add kalsr-seed node in Device tree with random
-+ *			    bytes from TPM device
-+ * @node:		ofnode
-+ * @eret:		0 for success
-+ */
-+int fdt_tpm_kaslr_seed(ofnode node);
-+
- int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
- 			 const void *val, int len, int create);
- void fdt_fixup_qe_firmware(void *fdt);
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 3926652db6..1530ef7c86 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -465,6 +465,15 @@ config VPL_TPM
- 	  for the low-level TPM interface, but only one TPM is supported at
- 	  a time by the TPM library.
- 
-+config KASLR_TPM_SEED
-+	bool "Use TPM for KASLR random seed"
-+	depends on TPM_V1 || TPM_V2
-+	help
-+	  This enables support for using TPMs as entropy source for KASLR seed
-+	  populated in kernel's device tree. Both TPMv1 and TPMv2 are supported
-+	  for the low-level TPM interface, but only one TPM is supported at
-+	  a time by the library.
-+
- endmenu
- 
- menu "Android Verified Boot"
 -- 
 2.40.0
 
