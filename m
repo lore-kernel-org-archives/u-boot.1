@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30768C6FA8F
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 17:25:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FEE7C6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 17:34:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 437EC864C3;
-	Tue, 29 Aug 2023 19:25:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 90855864C3;
+	Tue, 29 Aug 2023 19:34:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RDemqKef";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0654A8647B; Tue, 29 Aug 2023 19:25:26 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 5F5B286519; Tue, 29 Aug 2023 16:30:23 +0200 (CEST)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+ [209.85.214.179])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 907D3864CF
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 19:25:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B57CB86517
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:30:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5009d4a4897so7233143e87.0
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 10:25:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693329922; x=1693934722;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XsD5H0SeljbZWyXJn3Mtd91J9/Sxnrx8HQFfjOL4XTo=;
- b=RDemqKefy+F4831+/5cVBCUIIrutojCiukpCV/eyOv1CM7j/DfIUhbcvDGkY0DtqSl
- KbAvnVboHuf5aP7/lMBaM4dkZIYNnV7hhbhTyOYRZR0my4GsvGEhqZ1RaPPntiTdVm3E
- xu/Bb/NL8/VLJ0miSQHrpkmHtvbOWVKloMWJI=
+ dmarc=none (p=none dis=none) header.from=csie.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=wens213@gmail.com
+Received: by mail-pl1-f179.google.com with SMTP id
+ d9443c01a7336-1bc83a96067so27138675ad.0
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:30:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693329922; x=1693934722;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XsD5H0SeljbZWyXJn3Mtd91J9/Sxnrx8HQFfjOL4XTo=;
- b=jdmOEaLXKgLgI2o2OB5wkKzfJawKkBSZHVh+LLhmSGcfYv3B/V42cNRwbvP/QlC12a
- Cao6VU37fMefqeqkXDNkSUvDDJZzHgVpD5wUzL5WHw0SGAt18VqNrSTsVmpmhMq1wznN
- 0TfNzmyGZeI+xlNHNvWfUuKv4wRRCDxnvCZSL/rgJFLKXtGMRwqCPJ/r+AT0d7z45xgC
- yUFl9bzi6vlDFk5I7CxYWhLdpXdjpKvI4PhtYVebka0NPggmO6eZP63mEiIXcX/CM7gk
- EixhP7I9hv7lWqZjFLJgy028q/d8oQ4ChLKLsqAyXXqad9tZ9Dd3nXsO1LclZMOtUKE1
- eW5Q==
-X-Gm-Message-State: AOJu0Yyi1OBTcGebvvQT0tT0jT3u9ChNeRveUWhwy84Q2OlyRRw/7DBQ
- /mE4X1GFgCyuqZ3svnb+1SSpFVaSZibzARU/hW5/Yw==
-X-Google-Smtp-Source: AGHT+IEoOaCdpwM/vE+fzqITKfJDrmXA7N5bhcQZxQGTJj8buEudgAqF9ZgJH9R6lHpSFIQTZh2ObtkeeFs4tou9PpM=
-X-Received: by 2002:a05:6512:12c4:b0:4fd:d538:b97b with SMTP id
- p4-20020a05651212c400b004fdd538b97bmr24192337lfg.29.1693329921403; Tue, 29
- Aug 2023 10:25:21 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693319417; x=1693924217;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :reply-to:in-reply-to:references:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VUmC48c945AIpIrPGbtqPGrM+3nobIui92FEVylddOc=;
+ b=MviwfCagj5DymYdCUN2XTrtJMkjRwHKuiNd6YpXSkFEEqvVKVTZR8jhB359N2DUidu
+ uTfK+Su+U/nSl5A+8DiLs3bVM0bQBTgT+sAX/i9ncwquZgi+DajCHIrp5yuAfOrbXIk9
+ YbyfRfXi2UbK6LiZpp2hQF5Vk6tY3DL+rpQkVGHzeCy84LAvEA6f1V87euV3QWc98cZ/
+ r8IDdln2UCybMtc/X9l75+uPHgpuXmy9F+8ijuZdKRIb50ds7EqGOm+oWnWYwIpZMxGz
+ 0FCax7MJh0IOkTXpMqi/0rTTFyb4JU8rejzGpmyl8280AITyDeSFleAVrzrQfFSCmN66
+ 9u8Q==
+X-Gm-Message-State: AOJu0YxuugSK04zucSF9XHRHfyRqjJZRgVE03AKir/Mn6LIlewAEJduH
+ IDLkjwEGTVyKf0sjhyLopbP7i+3+PpOFJA==
+X-Google-Smtp-Source: AGHT+IHMS/K6iQbKD4oD43vwUyuEhMcZP7nvGx/tDNzsj8qTZ8h59PdecNqDNTeENYeLRhCeA5qZdQ==
+X-Received: by 2002:a17:903:234e:b0:1b5:64a4:bea0 with SMTP id
+ c14-20020a170903234e00b001b564a4bea0mr24958037plh.10.1693319416620; 
+ Tue, 29 Aug 2023 07:30:16 -0700 (PDT)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com.
+ [209.85.210.169]) by smtp.gmail.com with ESMTPSA id
+ i10-20020a17090332ca00b001bc6e6069a6sm9511885plr.122.2023.08.29.07.30.16
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Aug 2023 07:30:16 -0700 (PDT)
+Received: by mail-pf1-f169.google.com with SMTP id
+ d2e1a72fcca58-68a3e271491so2845145b3a.0
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:30:16 -0700 (PDT)
+X-Received: by 2002:a17:90a:d903:b0:268:314f:8f35 with SMTP id
+ c3-20020a17090ad90300b00268314f8f35mr20869745pjv.6.1693319415738; Tue, 29 Aug
+ 2023 07:30:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <20230826090633.239342-6-sughosh.ganu@linaro.org>
- <CAPnjgZ3AexW4vfO-A8WYGE0OD5EZnOUA7tA1QP71Bcw51QArBQ@mail.gmail.com>
- <CADg8p96zOXDaVV9CFcbeKgdZwG7pwfCp66GEY_eoYC6FCHeKZA@mail.gmail.com>
-In-Reply-To: <CADg8p96zOXDaVV9CFcbeKgdZwG7pwfCp66GEY_eoYC6FCHeKZA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Aug 2023 11:25:09 -0600
-Message-ID: <CAPnjgZ3W-jRRAbaS3gckcd8CrjRUpcBTvNS+uPnJ70CXNeCWAQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
- node/property removal
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20230531201520.15479-1-CFSworks@gmail.com>
+ <20230814213854.408962d5@slackpad.lan>
+ <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
+ <69909b61-f57e-fc91-43a5-0f4bd23609c9@gmail.com>
+ <86cyzaf6ie.wl-maz@kernel.org>
+ <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
+In-Reply-To: <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
+From: Chen-Yu Tsai <wens@csie.org>
+Date: Tue, 29 Aug 2023 22:30:04 +0800
+X-Gmail-Original-Message-ID: <CAGb2v658mwSdCYkPFrtJ8yvfNnkHLspxWsGpMVa_6ReEzqabpA@mail.gmail.com>
+Message-ID: <CAGb2v658mwSdCYkPFrtJ8yvfNnkHLspxWsGpMVa_6ReEzqabpA@mail.gmail.com>
+Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
+ psci_arch_init
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Marc Zyngier <maz@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
+ u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 29 Aug 2023 19:34:49 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,163 +87,90 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
-On Mon, 28 Aug 2023 at 12:35, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Tue, Aug 29, 2023 at 5:49=E2=80=AFAM Sam Edwards <cfsworks@gmail.com> wr=
+ote:
 >
-> hi Simon,
+> On 8/26/23 04:22, Marc Zyngier wrote:
 >
-> On Mon, 28 Aug 2023 at 23:25, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sughosh,
-> >
-> > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > Add a document explaining the need for removal of non-compliant
-> > > devicetree nodes and properties. Also describe in brief, the macros
-> > > that can be used for this removal.
-> > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > >  .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++++++++++++
-> > >  1 file changed, 64 insertions(+)
-> > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
-> > >
-> > > diff --git a/doc/develop/devicetree/dt_non_compliant_purge.rst b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> > > new file mode 100644
-> > > index 0000000000..c3a8feab5b
-> > > --- /dev/null
-> > > +++ b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> > > @@ -0,0 +1,64 @@
-> > > +.. SPDX-License-Identifier: GPL-2.0+
-> > > +
-> > > +Removal of non-compliant nodes and properties
-> > > +=============================================
-> > > +
-> > > +The devicetree used in U-Boot might contain nodes and properties which
-> > > +are specific only to U-Boot, and are not necessarily being used to
-> > > +describe hardware but to pass information to U-Boot. An example of
-> > > +such a property would be the public key being passed to U-Boot for
-> > > +verification.
-> >
-> > It has nothing to do with describing hardware. The DT can describe
-> > other things too. See the /options node, for example.
-> >
-> > Please don't bring this highly misleading language into U-Boot.
+> Hi Marc!
 >
-> Please point out what is misleading in the above paragraph. What is
-> being emphasised in the above paragraph is that certain nodes and
-> properties in the devicetree are relevant only in u-boot, and not the
-> kernel. And this is precisely what the devicetree maintainers are
-> saying [1].
-
-That is not relevant though...we need to make sure all the nodes are
-in the dt schema.
-
-It is misleading because you imply that DT should only describe
-hardware. That is not true.
-
+> > The GIC definitely has the NS bit routed to it. Otherwise, the secure
+> > configuration would just be an utter joke. Just try it.
 >
-> >
-> > > +
-> > > +This devicetree can then be passed to the OS. Since certain nodes and
-> > > +properties are not really describing hardware, and more importantly,
-> > > +these are only relevant to U-Boot, bindings for these cannot be
-> > > +upstreamed into the devicetree repository. There have been instances
-> > > +of attempts being made to upstream such bindings, and these deemed not
-> > > +fit for upstreaming.
-> >
-> > Then either they should not be in U-Boot, or there is a problem with
-> > the process.
-> >
-> > > Not having a binding for these nodes and
-> > > +properties means that the devicetree fails the schema compliance tests
-> > > +[1]. This also means that the platform cannot get certifications like
-> > > +SystemReady [2] which, among other things require a devicetree which
-> > > +passes the schema compliance tests.
-> > > +
-> > > +For such nodes and properties, it has been suggested by the devicetree
-> > > +maintainers that the right thing to do is to remove them from the
-> > > +devicetree before it gets passed on to the OS [3].
-> >
-> > Hard NAK. If we go this way, then no one will ever have an incentive
-> > to do the right thing.
-> >
-> > Please send bindings for Linaro's work, instead. If something is
-> > entirely U-Boot-specific, then it can go in /options/u-boot but it
-> > still must be in the dt-schema.
+> Thank you for your response. I'd like to revisit my prior point about
+> the distinction between the NS bit and AxPROT[1] bits in the context of
+> monitor mode: in monitor mode, the NS bit does not determine the
+> security state of the CPU core (monitor mode is always secure). But even
+> then, the NS bit is still significant for other purposes, such as to
+> bank accesses to certain CP15 registers -- and if I understand Chen-Yu
+> correctly, some GIC registers also. That would require a special NS bit
+> signal routed to the GIC so that it can distinguish between "secure,
+> NS=3D0" and "secure, NS=3D1" accesses, which is why I asked if such a thi=
+ng
+> exists.
 >
-> Please re-read the document including the last link [1]. If you go
-> through that entire thread, you will notice that this is precisely
-> what Linaro was trying to do here -- upstream the binding for the
-> fwu-mdata node. It is only based on the feedback of the devicetree
-> maintainers that this patchset was required.
-
-It looks like it should go in /options/u-boot ? Can you resubmit it there?
-
-The stripping is a no-go for me, sorry. It is absolutely going to
-destroy any chance of tidying up DT in U-Boot.
-
-Please also figure out how to add DT validation to U-Boot, so we can
-see what the gap is. Once we have that in, I will be happier to do
-workarounds.
-
-Regards,
-Simon
-
+> I understand that the GIC is designed to be aware of the security state
+> (using the existing AxPROT[1] signals) so that it can protect the
+> sensitive registers. And unless I misunderstand, this seems to be the
+> point that you made here (my interpretation -- correct me if I'm wrong
+> -- is that you are using "NS bit" as a metonym for "security state").
+> However I must clarify that my question was to seek further information
+> from Chen-Yu about the possibility that NS is significant when accessing
+> the GIC, even in monitor mode. Alternatively, his point might be merely
+> highlighting that the GIC permits different types of access depending on
+> the CPU's security state, which aligns with the viewpoint you've reiterat=
+ed.
 >
-> -sughosh
->
-> [1] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/#t
->
+> I apologize if my previous message didn't convey this context clearly
+> enough. My goal was to unravel this nuanced aspect of the NS bit when in
+> monitor mode, and to determine if NS needs to be getting set/cleared
+> during GIC setup to maneuver around the banking, or if the value of the
+> NS bit when in psci_arch_init() is truly of no consequence due to
+> monitor mode.
+
+Sorry for my previous misleading comment. The banked registers refer to
+the CP15 registers. From ARM's documentation [1]:
+
+When the processor is in Monitor mode, the processor is in Secure state
+regardless of the value of the SCR.NS bit. In Monitor mode, the SCR.NS
+bit determines whether the Secure Banked CP15 registers or Non-secure
+Banked CP15 registers are read or written using MRC or MCR instructions.
+
+[1] https://developer.arm.com/documentation/ddi0406/b/System-Level-Architec=
+ture/Virtual-Memory-System-Architecture--VMSA-/CP15-registers-for-a-VMSA-im=
+plementation/Effect-of-the-Security-Extensions-on-the-CP15-registers?lang=
+=3Den#Cbbdffad
+
+> > Well, history is unfortunately against you on that front. Running on
+> > the secure side definitely was a requirement when this code was
+> > initially written, as the AW BSP *required* to run on the secure side.
 > >
-> > > +
-> > > +Removing nodes/properties
-> > > +-------------------------
-> > > +
-> > > +In U-Boot, this is been done through adding information on such nodes
-> > > +and properties in a list. The entire node can be deleted, or a
-> > > +specific property under a node can be deleted. The list of such nodes
-> > > +and properties is generated at compile time, and the function to purge
-> > > +these can be invoked through a EVT_FT_FIXUP event notify call.
-> > > +
-> > > +For deleting a node, this can be done by declaring a macro::
-> > > +
-> > > +       DT_NON_COMPLIANT_PURGE(fwu_mdata) = {
-> > > +               .node_path      = "/fwu-mdata",
-> > > +       };
-> > > +
-> > > +Similarly, for deleting a property under a node, that can be done by
-> > > +specifying the property name::
-> > > +
-> > > +       DT_NON_COMPLIANT_PURGE(capsule_key) = {
-> > > +               .node_path      = "/signature",
-> > > +               .prop           = "capsule-key",
-> > > +       };
-> > > +
-> > > +In the first example, the entire node with path /fwu-mdata will be
-> > > +removed. In the second example, the property capsule-key
-> > > +under /signature node will be removed.
-> > > +
-> > > +Similarly, a list of nodes and properties can be specified using the
-> > > +following macro::
-> > > +
-> > > +       DT_NON_COMPLIANT_PURGE_LIST(foo) = {
-> > > +               { .node_path = "/some_node", .prop = "some_bar" },
-> > > +               { .node_path = "/some_node" },
-> > > +       };
-> > > +
-> > > +[1] - https://github.com/devicetree-org/dt-schema
-> > > +[2] - https://www.arm.com/architecture/system-architectures/systemready-certification-program
-> > > +[3] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/
-> > > --
-> > > 2.34.1
-> > >
-> >
-> > Regards,
-> > Simon
+> > If that requirement is no more, great. But I don't think you can
+> > decide that unilaterally.
+>
+> I have no idea when/if this requirement was changed. It might have never
+> happened "formally": perhaps at some point, the SCR.NS=3D1 code got added
+> after the call to psci_arch_init(), breaking (that version of) the AW
+> BSP, and nobody ever complained or changed it back... so it stayed.
+
+There was never any BSP code for PSCI before this. This code was written
+by Marc in ARM assembly. I merely translated most of it to C code.
+The snippet to clear SCR.NS is there in the first commit,
+
+    d5db7024aafc sunxi: HYP/non-sec: add sun7i PSCI backend
+
+ChenYu
+
+> But we're starting to digress from what _this_ patch does. The intent
+> here is only to remove two lines of code that (we're discussing to
+> confirm) have no effect. I'm not touching the code that *actually*
+> determines the world into which monitor mode exits.
+>
+> Cheers,
+> Sam
