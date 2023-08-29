@@ -4,76 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FEE7C6FA8F
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 17:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DED68C6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 17:35:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90855864C3;
+	by phobos.denx.de (Postfix) with ESMTP id DEF668650B;
 	Tue, 29 Aug 2023 19:34:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="KYTBK7WB";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F5B286519; Tue, 29 Aug 2023 16:30:23 +0200 (CEST)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
- [209.85.214.179])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E6208863E8; Tue, 29 Aug 2023 17:37:42 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.109.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B57CB86517
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:30:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BD5A80702
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 17:37:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=csie.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wens213@gmail.com
-Received: by mail-pl1-f179.google.com with SMTP id
- d9443c01a7336-1bc83a96067so27138675ad.0
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:30:18 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693319417; x=1693924217;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VUmC48c945AIpIrPGbtqPGrM+3nobIui92FEVylddOc=;
- b=MviwfCagj5DymYdCUN2XTrtJMkjRwHKuiNd6YpXSkFEEqvVKVTZR8jhB359N2DUidu
- uTfK+Su+U/nSl5A+8DiLs3bVM0bQBTgT+sAX/i9ncwquZgi+DajCHIrp5yuAfOrbXIk9
- YbyfRfXi2UbK6LiZpp2hQF5Vk6tY3DL+rpQkVGHzeCy84LAvEA6f1V87euV3QWc98cZ/
- r8IDdln2UCybMtc/X9l75+uPHgpuXmy9F+8ijuZdKRIb50ds7EqGOm+oWnWYwIpZMxGz
- 0FCax7MJh0IOkTXpMqi/0rTTFyb4JU8rejzGpmyl8280AITyDeSFleAVrzrQfFSCmN66
- 9u8Q==
-X-Gm-Message-State: AOJu0YxuugSK04zucSF9XHRHfyRqjJZRgVE03AKir/Mn6LIlewAEJduH
- IDLkjwEGTVyKf0sjhyLopbP7i+3+PpOFJA==
-X-Google-Smtp-Source: AGHT+IHMS/K6iQbKD4oD43vwUyuEhMcZP7nvGx/tDNzsj8qTZ8h59PdecNqDNTeENYeLRhCeA5qZdQ==
-X-Received: by 2002:a17:903:234e:b0:1b5:64a4:bea0 with SMTP id
- c14-20020a170903234e00b001b564a4bea0mr24958037plh.10.1693319416620; 
- Tue, 29 Aug 2023 07:30:16 -0700 (PDT)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com.
- [209.85.210.169]) by smtp.gmail.com with ESMTPSA id
- i10-20020a17090332ca00b001bc6e6069a6sm9511885plr.122.2023.08.29.07.30.16
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Aug 2023 07:30:16 -0700 (PDT)
-Received: by mail-pf1-f169.google.com with SMTP id
- d2e1a72fcca58-68a3e271491so2845145b3a.0
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:30:16 -0700 (PDT)
-X-Received: by 2002:a17:90a:d903:b0:268:314f:8f35 with SMTP id
- c3-20020a17090ad90300b00268314f8f35mr20869745pjv.6.1693319415738; Tue, 29 Aug
- 2023 07:30:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrejs.cainikovs@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1693323459;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=WVE46BeWGlphEmZfhaOoAl5bQgjm//ikprc+vh9mBUY=;
+ b=KYTBK7WBPgvGoGXts32YxUG246VGq/7hs1vTYlCo4i+sdWrRgpUMTOnIJVaaqlAdTBLvnx
+ 7t8dfyed3tiGzd/7pq73Lr2DaERx+QquABxj7b3OkBpkeQq0WRldMAmdks0y5ecK8gB8S6
+ PeJX3wAh/2zTY3BRnlIFV1zUR1qK9VE=
+Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
+ (mail-zr0che01lp2105.outbound.protection.outlook.com [104.47.22.105]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-63-CYdMjmBuMYeNb77In3_ZAw-1; Tue, 29 Aug 2023 17:37:38 +0200
+X-MC-Unique: CYdMjmBuMYeNb77In3_ZAw-1
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1e::13)
+ by ZR0P278MB0027.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1a::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Tue, 29 Aug
+ 2023 15:37:37 +0000
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::590b:1510:7512:c135]) by ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::590b:1510:7512:c135%6]) with mapi id 15.20.6699.035; Tue, 29 Aug 2023
+ 15:37:37 +0000
+Message-ID: <5219f4a0-b91b-16d0-33cb-4b7fea37625c@toradex.com>
+Date: Tue, 29 Aug 2023 17:37:35 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v1] CI: Add jsonschema python module
+To: Tom Rini <trini@konsulko.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <20230829143710.204875-1-andrejs.cainikovs@toradex.com>
+ <20230829150422.GD3953269@bill-the-cat>
+From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+In-Reply-To: <20230829150422.GD3953269@bill-the-cat>
+X-ClientProxiedBy: ZR0P278CA0016.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:16::26) To ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1e::13)
 MIME-Version: 1.0
-References: <20230531201520.15479-1-CFSworks@gmail.com>
- <20230814213854.408962d5@slackpad.lan>
- <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
- <69909b61-f57e-fc91-43a5-0f4bd23609c9@gmail.com>
- <86cyzaf6ie.wl-maz@kernel.org>
- <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
-In-Reply-To: <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
-From: Chen-Yu Tsai <wens@csie.org>
-Date: Tue, 29 Aug 2023 22:30:04 +0800
-X-Gmail-Original-Message-ID: <CAGb2v658mwSdCYkPFrtJ8yvfNnkHLspxWsGpMVa_6ReEzqabpA@mail.gmail.com>
-Message-ID: <CAGb2v658mwSdCYkPFrtJ8yvfNnkHLspxWsGpMVa_6ReEzqabpA@mail.gmail.com>
-Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
- psci_arch_init
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: Marc Zyngier <maz@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0254:EE_|ZR0P278MB0027:EE_
+X-MS-Office365-Filtering-Correlation-Id: 964925d8-ff9f-415d-5804-08dba8a5def5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0
+X-Microsoft-Antispam-Message-Info: /ZeLThtG22FyfJAEtIV+cLHfVnUICmL7eXCEUBF6MkhT/XdUGGMX+F1BGHFfjV1tEAGthsR05F8kU5VxxZoL50WM7TebqreJe3PVVf0LGdKeIVV2aqfJh1YCNKMqarw7FAsoM1aPKCD5YXyQici2fv3h5U42OMbcf+AahyEtYt27yfTkdUGu/IQdq/PuGTLY37mogIUKO0go0ur7MUo7V+P5zjx2Eiis0iOl+DhiCNsssnP14d/END11lM9F6xlLgu3FKDBOZJqvrVmC4w26qSKmOiPrRkfAx5+pPw7sZvgLphvmmXJlmNNhDmHt+UnDiRVY9/GAMS4wanTiOX79gKhrUYJd7ejMbSlxmmspyZ/QpW4hmxX3aod0sKsDFMHedyQdDzyEFvAUczIAv1lAZJnv4Sj80TY3kgcQ9BFWcemTNDWoEtf+IqNty2h9ZyofEOSqbrCxWuSG1HrWRT5PAFwnSiLsAZ/bQJmyR5lsoNjilAMt6QH/BJuaOwTOK01dsG3j3Y01syMCFN25AXNhaSYnkwEwMlUrtDLKJ/m9WZbc72+KAL75ewlm+nUK9kFJuLtr05qO4cg9Bie6zdUpnUP30Az+T7trKqTzB9Edov96Fs2WWqjXVcYAMiWaVr49IxNgo7qHqnQg8SVDaH/EIQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(346002)(136003)(396003)(39840400004)(376002)(186009)(451199024)(1800799009)(2616005)(6512007)(44832011)(86362001)(26005)(31686004)(41300700001)(5660300002)(2906002)(36756003)(84970400001)(38100700002)(8676002)(31696002)(8936002)(478600001)(6486002)(316002)(66476007)(66556008)(6506007)(53546011)(66946007)(4326008)(110136005)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WHJIakl3S25qR1NMNHIydWJTTUlRcngvck5yeFB2UC95UjYvd1RDdysvK3Zn?=
+ =?utf-8?B?Y2ZKRjRUSUVwWWwyRjdhemlmYytqVEF0RmJ6NzNNU0NxOHduRU0xZC9NbDd3?=
+ =?utf-8?B?VUJqcU5leVhqbHlTS1VKSmdVQW85eDMxV3N0TlFCS0ZvY0pPZS9rYm8rRUxk?=
+ =?utf-8?B?WXRuMUlabU9yeTJoMUs1c0F3Wmd4UFlvRk03U2ExamxqUTdXTlFiZzFuV1cz?=
+ =?utf-8?B?VEplQnBCVUY4SFUzSkVsOEV3VFhwT1pQVndqWkduS1B1c3p6L3hPcWlrcmNk?=
+ =?utf-8?B?bW5JdWdZVHFlblhZSDFvd29qb1M2OWppcTg3ZTdOQjNuZ3Vob3d3NmcrN1BC?=
+ =?utf-8?B?MmRuaVo0b0tUNWoyTUxzU0hLdWlFVUVHWVhGNnFWSy85MTNRMlJtOFV0OE9G?=
+ =?utf-8?B?VWgwWW5DT0NFSmNHTE1wazA2Y0JjL29rTmxFSzluL0lyVmRYRjhFdktqNks1?=
+ =?utf-8?B?eVJBZGV3WUhKdzFZVzhYRnF1QjdrVU5uMURPWFRnY0ROeTVNN2liYXV5WjZL?=
+ =?utf-8?B?WG9ubHFGRy8zRHhaTWFBNSsxVW1MR21aMVRmeTJEOGY4bHNqQjZpVFViUEsz?=
+ =?utf-8?B?bXlKYjRoZTUwUzl5TDExSTRvVGpwU2RseVliaCtKbnFqOFl2YlNmS25yWmxs?=
+ =?utf-8?B?cXk2dmRhSlQ1eHlVa1FRUUJ0MXRyaldSdjl2eG5KMXFabk5mUExWSkYycXpV?=
+ =?utf-8?B?M1FGRXhXNnlvZ2NabFYvWnhCYWQ2b0pHOWRFTmoxZE9TNWNUMS8raXFRU1lS?=
+ =?utf-8?B?K1lGZXlZYml0eVU3VWtwQ21IUTE5VUlML3VqNnhIRDJWWUNrUVkweENDZTBT?=
+ =?utf-8?B?STNEUUVKOStqV2VQZWx6T1NQM0MvMnpuZnhSbWNFYXhhcEdMY2pIWmtERmwz?=
+ =?utf-8?B?Sm1mWndtaDBGdHNycTlzcFg4M3JSTmNmOVNBMnNBUkRHSkJnMXFLNXpVc1FK?=
+ =?utf-8?B?b2swTUhRRXZwaUJMclgvK1F0ejZyV0l0NE95SXF6ZVgyYXJ2NzJ5aTdpdDR1?=
+ =?utf-8?B?MmVDZ3dlemprcW9zbUZzOTlDeGlyMlhsY0tsaGpMQzBsMVM5RWUxYTVTMzMw?=
+ =?utf-8?B?K3N5NnJBSzIxWlIxU3BjZlQzdjdIQWovYk5LYlZyeXNQNzhjc2pqSms0ZGpp?=
+ =?utf-8?B?dnI2blN0a0pjRy9pczBnbUlRUFdGVUtyY1VYRzgyQVJNTm4zMFNrTG9vSy9B?=
+ =?utf-8?B?cTI3ZXhqOHV2cSttaFoybGY3OFVSN2JkUUJPYzZEUkxvZW56RVdJeEF1MDN1?=
+ =?utf-8?B?eHgyT0N2ZUlINmdzLytkTHh3cVBMU3B1UjRKYjlBeTBwTFYxQk5pd1BFU2FX?=
+ =?utf-8?B?L3FoY3BQUEZTRjBRaHJMaVh0YkxBa2tsWC9NajhnMk5tcEc5RnNkcVNRV0xz?=
+ =?utf-8?B?SU5Ud3pSWnhOemFERVUxbTN4eEV5N2tXdVpqeTZrWEdaNFFMaVVFWU9PV1pL?=
+ =?utf-8?B?T05pVU05SlpUSzNyRlNUQUVESWxKMzByVENDcmhnWlBUSW5vQTFaSk5vcm1J?=
+ =?utf-8?B?NmlhRE15KzZmYkVwT05VaG1LZm9DM2wzS2RVbmFyS1F6ZDVFRTQxWjM4SXR3?=
+ =?utf-8?B?ZGEyLzJuN0g5azgxd0U5ZnBEWmpBVHhFNjlQajJiYmdUR0xWYXhacW9mdU9H?=
+ =?utf-8?B?UE5wSXRTY0Izcng4YlN4cWtVcERmSnZacVFnMmsxeG9GcWxKMkpCWDdXV3Nr?=
+ =?utf-8?B?ZFlRZE5UaXVJb0wvR1pUNHc3L0N6Z0hDLzVDbW5lUnc1R0I1eWRuKzNTelpq?=
+ =?utf-8?B?b1k3ekhOV2I2QjM3bVNqUVdBZE9qajVnSjRPSTdRVStINTRYUVMvTEY0R1Np?=
+ =?utf-8?B?bmlyOCtpQTdqaUpXa250SHp2SFkzcnZNS2dUOE1ITkpRTzlQT2s2aFAra3dK?=
+ =?utf-8?B?bGtkNWhSZUdHMURlMkQ3N2VRNGRCaWRnQlRKR29rdWhVTmdHMjJadTQraTIx?=
+ =?utf-8?B?WEM2WG9sUW9HOEZuNXFXMUdpdnFKdnB6cENvTlpFSW1taTJ0MVkwY0VYYWxW?=
+ =?utf-8?B?Y2FVSWZFZHFoa3dLWmtBZVhRK21EdUQ4Z0tUV3BCMi9wT0dzaVNSQXd0T0sv?=
+ =?utf-8?B?Z0UxdFNpTnBvNVpUWXFza05sQ2hyY0Qxcm1ld1M1cy9kR21NV2Uzd2N3dUls?=
+ =?utf-8?B?TGwvRitydmVMM3lvc1N6dXp1TG9RUmVsaERVUzAyNE5zWExFSis4aEg1eVVv?=
+ =?utf-8?B?Tmc9PQ==?=
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 964925d8-ff9f-415d-5804-08dba8a5def5
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2023 15:37:37.1076 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: M2EysviBwqxJKpoULjOGqxwPou4yZa2cKu8sbnq1hc87fokUaBdcO7NAh+ZULW1Af3xumoyRy3rfzvMm5MRe+ZLrBep6e6dNh+1T9/a4EWA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0027
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 29 Aug 2023 19:34:49 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -87,90 +143,45 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Aug 29, 2023 at 5:49=E2=80=AFAM Sam Edwards <cfsworks@gmail.com> wr=
-ote:
->
-> On 8/26/23 04:22, Marc Zyngier wrote:
->
-> Hi Marc!
->
-> > The GIC definitely has the NS bit routed to it. Otherwise, the secure
-> > configuration would just be an utter joke. Just try it.
->
-> Thank you for your response. I'd like to revisit my prior point about
-> the distinction between the NS bit and AxPROT[1] bits in the context of
-> monitor mode: in monitor mode, the NS bit does not determine the
-> security state of the CPU core (monitor mode is always secure). But even
-> then, the NS bit is still significant for other purposes, such as to
-> bank accesses to certain CP15 registers -- and if I understand Chen-Yu
-> correctly, some GIC registers also. That would require a special NS bit
-> signal routed to the GIC so that it can distinguish between "secure,
-> NS=3D0" and "secure, NS=3D1" accesses, which is why I asked if such a thi=
-ng
-> exists.
->
-> I understand that the GIC is designed to be aware of the security state
-> (using the existing AxPROT[1] signals) so that it can protect the
-> sensitive registers. And unless I misunderstand, this seems to be the
-> point that you made here (my interpretation -- correct me if I'm wrong
-> -- is that you are using "NS bit" as a metonym for "security state").
-> However I must clarify that my question was to seek further information
-> from Chen-Yu about the possibility that NS is significant when accessing
-> the GIC, even in monitor mode. Alternatively, his point might be merely
-> highlighting that the GIC permits different types of access depending on
-> the CPU's security state, which aligns with the viewpoint you've reiterat=
-ed.
->
-> I apologize if my previous message didn't convey this context clearly
-> enough. My goal was to unravel this nuanced aspect of the NS bit when in
-> monitor mode, and to determine if NS needs to be getting set/cleared
-> during GIC setup to maneuver around the banking, or if the value of the
-> NS bit when in psci_arch_init() is truly of no consequence due to
-> monitor mode.
+On 29/08/2023 17:04, Tom Rini wrote:
+> Interesting.  How exactly are you using these CI images? We have
+> tools/buildman/requirements.txt now to cover the newly-added modules in
+> CI, as we call pip on that.  But, it's not being used in the prepopulate
+> the pip cache stage in the Dockerfile.  And, I'm not immune to the idea
+> that we should instead be installing the distro package here.
 
-Sorry for my previous misleading comment. The banked registers refer to
-the CP15 registers. From ARM's documentation [1]:
+I see in Dockerfile test/py/requirements.txt and
+doc/sphinx/requirements.txt, but not tools/buildman/requirements.txt, so
+whatever is mentioned there is not part of the image on CI runners.
 
-When the processor is in Monitor mode, the processor is in Secure state
-regardless of the value of the SCR.NS bit. In Monitor mode, the SCR.NS
-bit determines whether the Secure Banked CP15 registers or Non-secure
-Banked CP15 registers are read or written using MRC or MCR instructions.
+Following is the part of *our own* .gitlab.yml file,
+which uses a public Docker image
+(docker.io/trini/u-boot-gitlab-ci-runner:jammy-20230624-20Jul2023, as of
+now):
 
-[1] https://developer.arm.com/documentation/ddi0406/b/System-Level-Architec=
-ture/Virtual-Memory-System-Architecture--VMSA-/CP15-registers-for-a-VMSA-im=
-plementation/Effect-of-the-Security-Extensions-on-the-CP15-registers?lang=
-=3Den#Cbbdffad
+verdin-am62:
+  stage: build
+  script: |
+    ...
+    tools/buildman/buildman -o /tmp -P -E "verdin-am62" -M
+    ...
 
-> > Well, history is unfortunately against you on that front. Running on
-> > the secure side definitely was a requirement when this code was
-> > initially written, as the AW BSP *required* to run on the secure side.
-> >
-> > If that requirement is no more, great. But I don't think you can
-> > decide that unilaterally.
->
-> I have no idea when/if this requirement was changed. It might have never
-> happened "formally": perhaps at some point, the SCR.NS=3D1 code got added
-> after the call to psci_arch_init(), breaking (that version of) the AW
-> BSP, and nobody ever complained or changed it back... so it stayed.
+And this is how it fails in our CI without this change:
 
-There was never any BSP code for PSCI before this. This code was written
-by Marc in ARM assembly. I merely translated most of it to C code.
-The snippet to clear SCR.NS is there in the first commit,
+Building current source for 3 boards (3 threads, 14 jobs per thread)
+       arm:  +   verdin-am62_r5
++binman: Unknown entry type 'ti-board-config' in node
+'/binman/board-cfg/ti-board-config' (expected etype/ti_board_config.py,
+error 'No module named 'jsonschema''
++make[1]: *** [Makefile:1108: .binman_stamp] Error 1
++make: *** [Makefile:177: sub-make] Error 2
 
-    d5db7024aafc sunxi: HYP/non-sec: add sun7i PSCI backend
+--=20
+Best regards,
+Andrejs Cainikovs
 
-ChenYu
-
-> But we're starting to digress from what _this_ patch does. The intent
-> here is only to remove two lines of code that (we're discussing to
-> confirm) have no effect. I'm not touching the code that *actually*
-> determines the world into which monitor mode exits.
->
-> Cheers,
-> Sam
