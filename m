@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D5D7C83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 14:09:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48153C83F14
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 14:09:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93EFD8650E;
-	Tue, 29 Aug 2023 16:09:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCC1B86504;
+	Tue, 29 Aug 2023 16:09:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CLLIJVCg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ILhKhPJo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00197864E8; Tue, 29 Aug 2023 16:09:20 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 0683F86500; Tue, 29 Aug 2023 16:09:24 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AD078650E
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:09:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BD4B864E8
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:09:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-58cd9d9dbf5so60587947b3.0
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:09:17 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-58fc4eaa04fso51044697b3.0
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:09:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693318156; x=1693922956;
+ d=konsulko.com; s=google; t=1693318160; x=1693922960;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yVlnuz4SJExDlxpjidb7Sr5SCBzKBitbPDz1bAHgUtE=;
- b=CLLIJVCgYrKGamKUfs05EACoAxfx1SMuiGeU4Lz7pAvNCLdHwX2ji4ClCIjbqvaGyc
- kN5LXKyCMNSck7ZQdUrbQ9LBDOq9svUYnS6KgG74Q5S218wFk3EHFaPuz66KozP3HsPy
- p4GAmWHbM2s/RQ17JC+WuRy2T4JjrXgJQK/c8=
+ bh=DB9E5HmFHLeDQiKUiPAd4CuAJ9uCYRt8gGZzT45vw50=;
+ b=ILhKhPJodrPRLHd4FnNutYbIOiA/n2cue8Zsr6P/EdOl0Leto2lVYwAalGtaO4x5Af
+ NhXur+FO5eUb5PIHYYNhKCIGX5Fa8FGA9dqLHEFjDk/Z7j+RKUdV8gFfyv3rulvOl/HA
+ ler6DmwipWFokmUctXFs/tWKpoDqjDVbDuH+g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693318156; x=1693922956;
+ d=1e100.net; s=20221208; t=1693318160; x=1693922960;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yVlnuz4SJExDlxpjidb7Sr5SCBzKBitbPDz1bAHgUtE=;
- b=BoT3XsavK3GR3D2wOGNpp/B9zPpTGBZRXT7Zjz8M/59J+3unamHS0VKBXDtvaII1tr
- 3+NOgZtohPxU/FgU3OBQos6o+QbeWBg18D32gMfc27yOgvotCIua124xvzGRi7av4vqp
- FMxjm/iwAIzXZw5ME8wxzK2TFkwbzSuR0tweS+nFHQvgvfhMSMkXWDE9rQVpRKVC4HjC
- 0HLBKo1SjE6p9kfmA/DtmhSD/HOlgd/R58xUG6EV7YABRcPBjdxAarOqo4shaDzplrHZ
- FCRNik2DAq6q3xlZWVYwbkHKyBw6/rKCqbSVJ0EmDPS/AbBz9p7A8+ipWVHON3O/KxZP
- iswQ==
-X-Gm-Message-State: AOJu0YyECPsFgwLtBmnfIVhvhLHJgFmA0MIeGZWiLAEy0AGhfXIrByxs
- Eq4uiMFmZbFR3vdbJwGyFHltD0fBY8P0vanixnRwFQ==
-X-Google-Smtp-Source: AGHT+IEQo+8yAL4vt90yYyKG9a+O3x8ycVNB+xG9Z7ZFxztTP/nb04HJ7TkwbyWNXVuvmGxvGDlLtA==
-X-Received: by 2002:a81:49c4:0:b0:592:4c2:1514 with SMTP id
- w187-20020a8149c4000000b0059204c21514mr3004667ywa.25.1693318155988; 
- Tue, 29 Aug 2023 07:09:15 -0700 (PDT)
+ bh=DB9E5HmFHLeDQiKUiPAd4CuAJ9uCYRt8gGZzT45vw50=;
+ b=j0tCJ/MNYvt/sWhFuOkgcs4fEGRgBGIBmTSo7GTn0C6+Nln2h36adrALFSsgZMEtWW
+ mk00ygHp9F0Uz/qZPTb7RrW5Pn6yGb4EdAto1lB9fwUYOC+ZSI2/6IA1Eouy0mbNQA+/
+ e9CKoUobX/qoSjxRXBPOmPPFXF9jtJSu/8GQH5yFyQESIJonYtbVb1NcmTMqAeYoa0uN
+ 8nfhboEv8q8/RbUMQuYwl32RRgwPOahSRCMOTQn2y000JSFvLU5AlyhW0Vl2ojYAdV8K
+ qrXC4JpTnVVu1uHt+CueK2oNi5czLtOceyFg4Ouux6FuyAvv3WW5kMB2RLC40QC71w9x
+ vy9w==
+X-Gm-Message-State: AOJu0Yy7WZI/NtQI+5sQWWTX+SVv15PFGGZQIXb3UndZx3kQNEhFrq1g
+ VbPam9qFDmq12ltulrODrda7VQ==
+X-Google-Smtp-Source: AGHT+IHM9Y5yjDU63euqFMxpMh7cNuJ7ubvENaupmderwDkUpFkTYEVkI/HlyCmITRd/X/5AVeO+iQ==
+X-Received: by 2002:a81:6241:0:b0:583:d722:9ae9 with SMTP id
+ w62-20020a816241000000b00583d7229ae9mr32838881ywb.41.1693318159931; 
+ Tue, 29 Aug 2023 07:09:19 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-4165-1a0d-2d73-76fa.res6.spectrum.com.
  [2603:6081:7b00:6400:4165:1a0d:2d73:76fa])
  by smtp.gmail.com with ESMTPSA id
- n18-20020a0dcb12000000b0058c8b1ddcc1sm2774048ywd.15.2023.08.29.07.09.15
+ x67-20020a81a046000000b005922c29c025sm2731408ywg.108.2023.08.29.07.09.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Aug 2023 07:09:15 -0700 (PDT)
-Date: Tue, 29 Aug 2023 10:09:13 -0400
+ Tue, 29 Aug 2023 07:09:19 -0700 (PDT)
+Date: Tue, 29 Aug 2023 10:09:17 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: Sam Shih <sam.shih@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Lorenzo Bianconi <lorenzo@kernel.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: set CONFIG_LMB_MAX_REGIONS=64 for MT7988 boards
-Message-ID: <20230829140913.GT3953269@bill-the-cat>
-References: <568a8030acf9056266b5c96055cea54f810496c9.1692646620.git.daniel@makrotopia.org>
+To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Cc: u-boot@lists.denx.de, Ricardo Salveti <ricardo@foundries.io>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>
+Subject: Re: [PATCH] Revert "arm: imx: mx7: Move CONFIG_OPTEE_TZDRAM_SIZE
+ from lib/optee"
+Message-ID: <20230829140917.GU3953269@bill-the-cat>
+References: <20230825134734.21041-1-oleksandr.suvorov@foundries.io>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KA+8kFBpsZz+NuYd"
+ protocol="application/pgp-signature"; boundary="uYCqnDpCejap1Rxy"
 Content-Disposition: inline
-In-Reply-To: <568a8030acf9056266b5c96055cea54f810496c9.1692646620.git.daniel@makrotopia.org>
+In-Reply-To: <20230825134734.21041-1-oleksandr.suvorov@foundries.io>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,56 +97,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---KA+8kFBpsZz+NuYd
+--uYCqnDpCejap1Rxy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 21, 2023 at 08:38:23PM +0100, Daniel Golle wrote:
+On Fri, Aug 25, 2023 at 04:47:11PM +0300, Oleksandr Suvorov wrote:
 
-> Similar to MT7981 and MT7986 also MT7988 can have a high number of
-> reserved-memory regions used by the various hardware offloading
-> subsystems.
+> From: Ricardo Salveti <ricardo@foundries.io>
 >=20
-> Raise CONFIG_LMB_MAX_REGIONS to 64 to avoid errors when trying to boot
-> Linux with more then 6 reserved regions:
+> This reverts commit c5b68ef8af3c2f515c1f5b8d63a69359a85d753b.
 >=20
-> ERROR: reserving fdt memory region failed (addr=3D4f700000 size=3D240000 =
-flags=3D4)
-> ERROR: reserving fdt memory region failed (addr=3D15194000 size=3D1000 fl=
-ags=3D4)
-> ERROR: reserving fdt memory region failed (addr=3D15294000 size=3D1000 fl=
-ags=3D4)
-> ERROR: reserving fdt memory region failed (addr=3D15394000 size=3D1000 fl=
-ags=3D4)
-> ERROR: Failed to allocate 0xb161 bytes below 0x80000000.
-> device tree - allocation error
+> CONFIG_OPTEE_TZDRAM_SIZE is used by imx6-based SoCs as well. Move the
+> option back.
 >=20
-> Fixes: bc4adc97cfb ("board: mediatek: add MT7988 reference boards")
-> Reported-by: Lorenzo Bianconi <lorenzo@kernel.org>
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---KA+8kFBpsZz+NuYd
+--uYCqnDpCejap1Rxy
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTt/AkACgkQFHw5/5Y0
-tyw57Av/c8v2PaLVl4u07U7Wjp3o7RzpMjedjMU6HmHdA5kC1z0Dzx1ZBRfqpbTo
-gdbonfNKAF/VPbVGuhQ15sTaZ4905pRW1PSgUPYW/T9k1iXxY3EPSmR9CoxPzqz0
-Sn/MeHegqRrAK2BdUNkjQ8WDD+bNjIUB3sy+q1VhNHkaH/yjQml/BOBCofyKr90y
-x8uOd9PZSS1yu70CrHuxUInB/PM4K7Bb7Fo6gidJOPxUW818JjrU+MPJTNROZ6A2
-EjAULIpnwWR4s+g4i7IgAD908NJ7uysHBLlBjsSLyP4wlnQVjGESAeT7MvDqYurJ
-jXo5NmCllqX0vdWdMfYjhK4Z6QQXdQRXiQZwUfeJyPyP1kqMrb47/bFjlq2tZxA2
-uLCnhjoyJlOLvdE+SYxjeCLDwufeqnp4WegjnCsEYqod6gY12OxiUnToQfJgMfKo
-XLNdP6UABpBqsvyDR0zHk3s5BrAGTGZSdiIxj6bhKDWGxeQsJ9DVCWxnBafgb2IR
-WWpva4CD
-=DccZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTt/A0ACgkQFHw5/5Y0
+tywfDQwAjIdtt9vTaqb/XG2fSKeWji5R70KXGHZdcuz1s4D85l0b9baeaWUh9j8e
+qDevMT3M6oqT7CAsBgvfGzI88qs4yypic44MfGMOEaAPH+HgZtnU04vQmbKh7EqL
+8489kSFhcvIjEWf1gPwT0cS9hnzFahEkKg0yX9ceKBUG80bOSH5kx6vQgnzVBtCI
+XgiEzvAPUKbcd+Q4JBGd8XbPkdarPfekWs7A8jAjbBg01hCgcP1dwg58EhykE87f
+G0d79GRkvN7n39c0HWzTwY07ULGu+2cd4h4uHTn3pMqUmnKNOodoFXmW/NCY5W+t
+ARRhTZnt8gsTMIgAUriI3r4dMsQ9vXE7hvwOT7mZwoOWHrUpRN20AwfOtkClEWcV
+0Cuido5WQzWAt84imzoyEnu6f9o+7CFLBOOMDaKz+EXNGnSIZNA00spY07pCqbto
+fg9dZf9HzlkJAycRhFu03qc2SB1v0GoKAuORspFUq6gMRt4epmkpCUjrWw+UWcvV
+oVLM1hWp
+=ET0u
 -----END PGP SIGNATURE-----
 
---KA+8kFBpsZz+NuYd--
+--uYCqnDpCejap1Rxy--
