@@ -4,75 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF58AC83F11
-	for <u-boot@archiver.kernel.org>; Mon, 28 Aug 2023 22:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B4CC71153
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 00:17:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA3FF86479;
-	Tue, 29 Aug 2023 00:59:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 916B8864C7;
+	Tue, 29 Aug 2023 02:17:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="P0GGQCyD";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="S68vLfcw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 755098647F; Tue, 29 Aug 2023 00:59:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4EE1C864BA; Tue, 29 Aug 2023 02:17:07 +0200 (CEST)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC416863E8
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 00:58:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD814864AD
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 02:17:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693263538; x=1693868338; i=xypron.glpk@gmx.de;
- bh=sEQOaf1nAvBimReTmzDn+7NxahCHqha8Ju1crgrtjiU=;
- h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:In-Reply-To;
- b=P0GGQCyDA3Nbzrmc88JPoXnpWklCpt4Czx3Gb2yMd8M1abPXGxKHkTY7Jt6oU8/M0n6LnlC
- 4hv6o0vTv4ZKJfZfHROUp/0+xL+R2JCU2YIWVTyc92+4Y+VflPlwePxiykpV1+prdUuTRzWtx
- r9OgmiFEB5otUiTaZTmrOjJcicGI7P/cbpzI4t/v5jfpp7+/5iHgyMHffUDTZzpuciIZ4sJ+1
- QW0mMKSbHksxh+KRLH2Ekrb5glObt3cXXAcpjB4xBhILr2T21hxsDgO+acH9Q92h/DtvtgBEm
- F35We1ROH1WU0ua8D808r+uJo43o6wp2mCm6XBEZE+h/sv9eCrUw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MsHru-1piWgS0zBi-00tk6V; Tue, 29
- Aug 2023 00:58:58 +0200
-Message-ID: <e26582f6-09ba-4c2a-ba84-2e75fec5ee08@gmx.de>
-Date: Tue, 29 Aug 2023 00:59:51 +0200
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20230829001657epoutp035c27a1d0c791c0947cc16acbbd48e7b4~-snjgI7A70491504915epoutp03u
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 00:16:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20230829001657epoutp035c27a1d0c791c0947cc16acbbd48e7b4~-snjgI7A70491504915epoutp03u
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1693268217;
+ bh=LlAonKhUeFJRjO0LGsY5M8Zc/IBd3/pN9jclw3a4RDU=;
+ h=From:To:In-Reply-To:Subject:Date:References:From;
+ b=S68vLfcwtesjrGBBG8kyEiZi0oZIpZexQPmNgZr1bGva/w5B6gR9Kj6VXddWoDdZt
+ r5bbl48XQt5nmvvsWdx5XjRFeWwNuZfEMSg85wvm841nlznNtdDd4VOm3fDWDIP0HQ
+ ha06wWpiuMyVFPLBs4il2pbmLvJp6vNIPIuo1Zq0=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTP id
+ 20230829001656epcas2p320b16cd30ed069323a3a162f7706ba02~-snjT9vlt2155321553epcas2p36;
+ Tue, 29 Aug 2023 00:16:56 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.68]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4RZSfJ34z5z4x9Q2; Tue, 29 Aug
+ 2023 00:16:56 +0000 (GMT)
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ AC.45.09660.8F83DE46; Tue, 29 Aug 2023 09:16:56 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20230829001656epcas2p17bb1a7c8069fdbca1cf5a0d1e546cfc4~-sniiYWqi0509905099epcas2p1R;
+ Tue, 29 Aug 2023 00:16:56 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20230829001656epsmtrp19685cc6666c87b447bd23775b3563887~-snihsZ2w2342823428epsmtrp1T;
+ Tue, 29 Aug 2023 00:16:56 +0000 (GMT)
+X-AuditID: b6c32a47-d5dfa700000025bc-95-64ed38f88010
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ C4.3E.08742.7F83DE46; Tue, 29 Aug 2023 09:16:55 +0900 (KST)
+Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20230829001655epsmtip17bdab9e531066ade3bac9d213334b115~-sniSzQIg0568705687epsmtip11;
+ Tue, 29 Aug 2023 00:16:55 +0000 (GMT)
+From: "Chanho Park" <chanho61.park@samsung.com>
+To: "'Eugen Hristev'" <eugen.hristev@collabora.com>, "'Michal Simek'"
+ <michal.simek@amd.com>, <u-boot@lists.denx.de>, <sjg@chromium.org>
+In-Reply-To: <d9986db9-0b75-3532-6eca-25c0a21aaab2@collabora.com>
+Subject: RE: [PATCH RESEND v3] fpga: add inline stub for fpga_load
+Date: Tue, 29 Aug 2023 09:16:55 +0900
+Message-ID: <000001d9da0e$1e6b5c10$5b421430$@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/8] doc: Add gpt command documentation
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Joshua Watt <jpewhacker@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-References: <20230825193830.2753640-1-JPEWhacker@gmail.com>
- <20230828215623.3727536-1-JPEWhacker@gmail.com>
- <20230828215623.3727536-3-JPEWhacker@gmail.com>
- <42cf6878-2bb3-4a58-82cc-96f920cf9e4f@gmx.de>
-In-Reply-To: <42cf6878-2bb3-4a58-82cc-96f920cf9e4f@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ej2HZGjnr0gmCPWoeCom+UYq8XqJ6rWTl4aJTUJ1rmQM8whF2lW
- 0wMIKWQ8K0w5viePZHTtl2QRsb4RW9CGNWA5WZ/H744rNZyEhMZXveEj+vqSJHGr+u0QJ9/
- UJoxfp4YaAbZgwpGLG3xbjr4SayB22ku+V0GTTfAhgtnMB7U3UyVTV/jU5bGWhEl44buRCN
- TOaSeryfxTW7EZHyC3+OA==
-UI-OutboundReport: notjunk:1;M01:P0:9HSIokRfryc=;TRN7etuqM0Qxj4e98a603c15Ea/
- K0uLkDuVSQ3ftDU5juL43bezDMbLSf8L3b2UO0/0DYy0LW1i7+Sui/TdJ+QU/N6TRZGuggCx/
- vcx++B1MSSrAiNCxoJdKmbONk7HYba5PLmCg56bMbkIF8/6H/xn6mLuEJKAY5qnIhr0ACPUsv
- 5bz2M8fod7KTIwJw7HoBjKmphpcBzmIHfvLf8zM5uX3aIvYSLxeTkye0mYqIs9dVbtb9dVJS0
- VeQAh+Lou3L7XgEn/xvuvNnWzNt6kKdX6Vgq4E5BpuGxszbLN62jH8LjymK1PxNner4YAfkAz
- PFEazHqZ7mmGdxsRJQKuZS9GyzhO5wtbNaBy7MJJZq8pxEtvC5LEO/wVDytEKEdBlF0Bsk4OU
- L1p46Gt9Cz7UuQzK1GlcITBaXE4eAsLaY/QXRVH6uId7sKy7IM1rePsv/Higk5dxVdlv5U5Ex
- y9Yw0eMsgxUe6gnDYO5htDA5sPrP9IVSEawqvoYUhrJmUEeyk/rHL9Kos6DXHG10fn+x+RtHI
- JrjVgU0zwwCKfSIhzA9opTiIXv1zUChF7r2ww1vBXjVume8ksPfE60E7Ks/TbekG2V3L/Dsy7
- 6kk9tEui+22QzD4dmDYbx8guaAQzhSH9NFQwd4R9ngLD5a8UMv4QBQCP+kpCqNWtRRw2bQus1
- qWWCIs2GoDAzeAzFjPn89cW4jnTcdJbpNj2LX2vA90tJcWo1csav+bAGiVVLnyXEUNUqC+mFW
- 3MGLAqRcYQFtL4RYy42VjuQBNbnOTBUgbRSMN4Y+ySViRamL5MDR78N8U/t+JU2Eg+ac080FO
- ebSfH6y2ynzeRIo8FyxxkSYz18jWfuR8qozOzejJ7p/Xf9AHbf47BhABkm/U8qH64FI5BZClZ
- xtpCEotL89+uPCPMbE9r+B2aP7JKnnbgLYh9H0JRon/r7g2wDe2iek8xXZStT1igFgZxkRMqN
- QiicOQ7gTzOO+8go8gPKThIwt0c=
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQKXOROXO09LfKR47CUf53buhDxNgQI5yl5xAonZheoCTxB/Cq5NE5EQ
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmphk+LIzCtJLcpLzFFi42LZdljTQveHxdsUg1UvRC1aF91mtNh7/CKr
+ xbct2xgt3u7tZHdg8Wi99JfNY3bDRRaPHXeXMHqcvbODMYAlKtsmIzUxJbVIITUvOT8lMy/d
+ Vsk7ON453tTMwFDX0NLCXEkhLzE31VbJxSdA1y0zB2inkkJZYk4pUCggsbhYSd/Opii/tCRV
+ ISO/uMRWKbUgJafAvECvODG3uDQvXS8vtcTK0MDAyBSoMCE7o2tJH2PBJamKVz+fMTcwrhLt
+ YuTkkBAwkfi76iR7FyMXh5DADkaJu9v/s0E4nxglvt/6yQLhfGOU+Nz4hAmm5c7C21CJvYwS
+ 5w5thOp/wSjxdNpkdpAqNgF9iZcd21hBEiICXYwSbc9WsYIkOAUcJTbMm8UIYgsLOEm8ejgZ
+ aCEHB4uAqsSMc3ogYV4BS4kZU4+wQdiCEidnPmEBsZkF5CW2v53DDHGFgsTPp8vARooIuEnc
+ 73vIBlEjIjG7s40ZZK+EQCOHROunj1ANLhJPbxyCsoUlXh3fwg5hS0m87G9jB7lBQqBcYsey
+ JIjeFkaJ5rY9UPX2Ej9uTmEFqWEW0JRYv0sfolxZ4sgtqNP4JDoO/4WawivR0SYE0agucWD7
+ dBYIW1aie85nVgjbQ2LL9geMExgVZyF5chaSJ2cheWYWwt4FjCyrGMVSC4pz01OLjQqM4ZGd
+ nJ+7iRGcHLXcdzDOePtB7xAjEwfjIUYJDmYlEd5Ljq9ShHhTEiurUovy44tKc1KLDzGaAkN9
+ IrOUaHI+MD3nlcQbmlgamJiZGZobmRqYK4nz3mudmyIkkJ5YkpqdmlqQWgTTx8TBKdXAZHHz
+ yM53hd1JFw3PRf1Q/7ngZr/auf/57DK8b+63eHu3af0PU+CJfWLx820ir+5B5SlSxyc9fq86
+ IZjX9daKD6fZfjQJpd3dwHK8Ij/u+pYPD5pe8bL1dNtODfRzil6d7cWR6B7SvKdh17mNIqnd
+ 17kKE4qvqYhuffv+Y4agnWHu71cv3kS9P5z7742Eh+2uKd/7RKaeurOdoczk5btFp6c/YV9x
+ +3F1l/uPqLuuz+37VvFkHTPY72kgmPziumxuVdDiO842UyT5JF11E1f9Xf44qyNx24Gwyz6r
+ Xpj250ZcYIw+Oqf9XZKWuubS/YaXHgWFWhzTdhQXSGZfzbSk3eE53+5LqkoXbcs/KzizKrEU
+ ZyQaajEXFScCAM+b0jQXBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLLMWRmVeSWpSXmKPExsWy7bCSnO53i7cpBtv+WVq0LrrNaLH3+EVW
+ i29btjFavN3bye7A4tF66S+bx+yGiyweO+4uYfQ4e2cHYwBLFJdNSmpOZllqkb5dAldG15I+
+ xoJLUhWvfj5jbmBcJdrFyMkhIWAicWfhbZYuRi4OIYHdjBKzrq9hhUjISjx7t4MdwhaWuN9y
+ hBWi6BmjRO/CNWAJNgF9iZcd28ASIgJ9jBJdrXsYIaq+MUpc77nKCFLFKeAosWHeLDBbWMBJ
+ 4tXDyWxdjBwcLAKqEjPO6YGEeQUsJWZMPcIGYQtKnJz5hAXEZhbQlnh68ymULS+x/e0cZoiL
+ FCR+Pl0GdqmIgJvE/b6HbBA1IhKzO9uYYT7o3tnDBvPB3Qcv2ScwisxCsmIWkhWzkKyYhWTU
+ AkaWVYySqQXFuem5xYYFhnmp5XrFibnFpXnpesn5uZsYwTGkpbmDcfuqD3qHGJk4GA8xSnAw
+ K4nwXnJ8lSLEm5JYWZValB9fVJqTWnyIUZqDRUmcV/xFb4qQQHpiSWp2ampBahFMlomDU6qB
+ afJEwSz+xP2fHX8f+iNaeD3Z2+83Q9lBmwlN+q6XVXluVl3o95y7nO2jZvh09QWBvyu+XJi4
+ +MnDFY3mp2YePnX57r8XGduOx5fLah1+e7NQpb26w3qv3Gn5Q7bMRdKfr52588B48UbJTfEa
+ mT+ljhWWBxb8chKap3kymftz4rIYGWmLXI3cFJtPzrNadjBb3VjIZZ7HWNT86nhM0QfzRc+3
+ zBMUik5WK/n8XdYqp6c6+dMSu4UPX0yc3t3bPHGn+IvTu+qC+WR/rlrUsvavyXrWs6UlvaHv
+ 75/kWhh31+e3iefCnDVLtvz+opzCVt6yf1alwJ/r4nZT3pm/jC4+WLhWXqblz5G1AmwNbXr1
+ S5VYijMSDbWYi4oTAdXEpogQAwAA
+X-CMS-MailID: 20230829001656epcas2p17bb1a7c8069fdbca1cf5a0d1e546cfc4
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230828114704epcas2p1c63e365fecd58d601535f1041ffc0563
+References: <20230808102227.34233-1-eugen.hristev@collabora.com>
+ <f7c04c73-c2f9-5ce4-5953-270e907d89f8@amd.com>
+ <CGME20230828114704epcas2p1c63e365fecd58d601535f1041ffc0563@epcas2p1.samsung.com>
+ <d9986db9-0b75-3532-6eca-25c0a21aaab2@collabora.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,359 +136,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/29/23 00:45, Heinrich Schuchardt wrote:
-> /On 8/28/23 23:56, Joshua Watt wrote:
->> Adds initial documentation for the gpt command
->>
->> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
->> ---
->> =C2=A0 doc/usage/cmd/gpt.rst | 184 ++++++++++++++++++++++++++++++++++++=
-++++++
->> =C2=A0 doc/usage/index.rst=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
->> =C2=A0 2 files changed, 185 insertions(+)
->> =C2=A0 create mode 100644 doc/usage/cmd/gpt.rst
->>
->> diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
->> new file mode 100644
->> index 0000000000..6387c8116f
->> --- /dev/null
->> +++ b/doc/usage/cmd/gpt.rst
->> @@ -0,0 +1,184 @@
->> +.. SPDX-License-Identifier: GPL-2.0+
->> +
->> +gpt command
->> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> +
->> +Synopsis
->> +--------
->> +
->> +::
->> +
->> +=C2=A0=C2=A0=C2=A0 gpt enumerate <interface> <dev>
->> +=C2=A0=C2=A0=C2=A0 gpt guid <interface> <dev> [<varname>]
->> +=C2=A0=C2=A0=C2=A0 gpt read <interface> <dev> [<varname>]
->> +=C2=A0=C2=A0=C2=A0 gpt rename <interface> <dev> <part> <name>
->> +=C2=A0=C2=A0=C2=A0 gpt repair <interface> <dev>
->> +=C2=A0=C2=A0=C2=A0 gpt setenv <interface> <dev> <partition name>
->> +=C2=A0=C2=A0=C2=A0 gpt swap <interface> <dev> <name1> <name2>
->> +=C2=A0=C2=A0=C2=A0 gpt verify <interface> <dev> [<partition string>]
->> +=C2=A0=C2=A0=C2=A0 gpt write <interface> <dev> <partition string>
->> +
->> +Description
->> +-----------
->> +
->> +The gpt command lets users read, create, modify, or verify the GPT (GU=
-ID
->> +Partition Table) partition layout.
->> +
->> +Common arguments:
->> +
->> +interface
->> +=C2=A0=C2=A0=C2=A0 interface for accessing the block device (mmc, sata=
-, scsi, usb,
->> ....)
->> +
->> +dev
->> +=C2=A0=C2=A0=C2=A0 device number
->> +
->> +partition string
->> +=C2=A0=C2=A0=C2=A0 Describes the GPT partition layout for a disk.=C2=
-=A0 The syntax is
->> similar to
->> +=C2=A0=C2=A0=C2=A0 the one used by the :doc:`mbr command <mbr>` comman=
-d. The string
->> contains
->> +=C2=A0=C2=A0=C2=A0 one or more partition descriptors, each separated b=
-y a ";". Each
->> descriptor
->> +=C2=A0=C2=A0=C2=A0 contains one or more fields, with each field separa=
-ted by a ",".
->> Fields are
->> +=C2=A0=C2=A0=C2=A0 either of the form "key=3Dvalue" to set a specific =
-value, or simple
->> "flag" to
->> +=C2=A0=C2=A0=C2=A0 set a boolean flag
->> +
->> +=C2=A0=C2=A0=C2=A0 The first descriptor can optionally be used to desc=
-ribe
->> parameters for the
->> +=C2=A0=C2=A0=C2=A0 whole disk with the following fields:
->> +
->> +=C2=A0=C2=A0=C2=A0 * uuid_disk=3DUUID - Set the UUID for the disk
->> +
->> +=C2=A0=C2=A0=C2=A0 Partition descriptors can have the following fields=
-:
->> +
->> +=C2=A0=C2=A0=C2=A0 * name=3D<NAME> - The partition name, required
->> +=C2=A0=C2=A0=C2=A0 * start=3D<BYTES> - The partition start offset in b=
-ytes, required
->
-> The code has this comment: "start address is optional".
->
->> +=C2=A0=C2=A0=C2=A0 * size=3D<BYTES> - The partition size in bytes or "=
--" to expand it
->> to the whole free area
->
-> This filed is mandatory.
->
->> +=C2=A0=C2=A0=C2=A0 * bootable - Set the legacy bootable flag
->
-> This field is optional
->
->> +=C2=A0=C2=A0=C2=A0 * uuid=3D<UUID> - The partition UUID, optional if
->> CONFIG_RANDOM_UUID=3Dy is enabled
->> +=C2=A0=C2=A0=C2=A0 * type=3D<UUID> - The partition type GUID, requires
->> CONFIG_PARTITION_TYPE_GUID=3Dy
->
-> This field is optional
->
-> Thanks for all the updates. Looks much neater now.
->
-> The sequence expected in set_gpt_info() is:
->
-> uuid (optional if CONFIG_RANDOM_UUID=3Dy),
-> type (optional, only usable for CONFIG_PARTITION_TYPE_GUID=3Dy),
-> name (mandatory),
-> size (mandatory),
-> start (optional),
-> bootable (optional).
+Hi Eugen,
 
-A gross bug in the gpt command is that 'gpt read' creates a different
-sequence than 'gpt write' needs.
+> -----Original Message-----
+> From: Eugen Hristev <eugen.hristev@collabora.com>
+> Sent: Monday, August 28, 2023 8:47 PM
+> To: Michal Simek <michal.simek@amd.com>; u-boot@lists.denx.de;
+> sjg@chromium.org; Chanho Park <chanho61.park@samsung.com>
+> Subject: Re: [PATCH RESEND v3] fpga: add inline stub for fpga_load
+> 
+> On 8/28/23 13:53, Michal Simek wrote:
+> > Hi Eugen, + Chanho,
+> >
+> > On 8/8/23 12:22, Eugen Hristev wrote:
+> >> In case CC_OPTIMIZE_FOR_DEBUG is set, unused code will not be
+> >> optimized out, hence the reference to fpga_load will be compiled.
+> >> if DM_FPGA and SPL_FPGA are not set, the build will fail with :
+> >
+> > this is not correct. It is not DM_FPGA but only FPGA.
+> >
+> >
+> >>
+> >> aarch64-none-linux-gnu-ld.bfd: common/spl/spl_fit.o: in function
+> >> `spl_fit_upload_fpga':
+> >> u-boot/common/spl/spl_fit.c:595: undefined reference to `fpga_load'
+> >>
+> >> To solve this, added an inline empty stub in the header if
+> >> CC_OPTIMIZE_FOR_DEBUG is set such that the build will succeed.
+> >>
+> >> Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
+> >> ---
+> >> Changes in v3:
+> >> - return -ENOSYS
+> >> Changes in v2:
+> >> - this is a rework as suggested by Simon of this previous patch :
+> >> https://protect2.fireeye.com/v1/url?k=eed360f4-8f5875c2-eed2ebbb-74fe
+> >> 485cbff1-6ddceb7720c8265c&q=1&e=f4039d69-e052-4de7-b3b0-f25e8f4581a3&
+> >> u=https%3A%2F%2Fpatchwork.ozlabs.org%2Fproject%2Fuboot%2Fpatch%2F2023
+> >> 0619102839.277902-1-eugen.hristev%40collabora.com%2F
+> >>
+> >>   include/fpga.h | 9 +++++++++
+> >>   1 file changed, 9 insertions(+)
+> >>
+> >> diff --git a/include/fpga.h b/include/fpga.h index
+> >> ed688cc0fa3b..33d0dbbe2ba4 100644
+> >> --- a/include/fpga.h
+> >> +++ b/include/fpga.h
+> >> @@ -60,8 +60,17 @@ int fpga_add(fpga_type devtype, void *desc);
+> >>   int fpga_count(void);
+> >>   const fpga_desc *const fpga_get_desc(int devnum);
+> >>   int fpga_is_partial_data(int devnum, size_t img_len);
+> >> +#if defined(CONFIG_CC_OPTIMIZE_FOR_DEBUG)
+> >
+> > And when you enable CONFIG_CC_OPTIMIZE_FOR_DEBUG and FPGA you get
+> > compilation warnings.
+> >
+> > drivers/fpga/fpga.c:265:5: error: redefinition of 'fpga_load'
+> >    265 | int fpga_load(int devnum, const void *buf, size_t bsize,
+> > bitstream_type bstype,
+> >        |     ^~~~~~~~~
+> > In file included from include/xilinx.h:7,
+> >                   from drivers/fpga/fpga.c:11:
+> > include/fpga.h:64:19: note: previous definition of 'fpga_load' with
+> > type 'int(int,  const void *, size_t,  bitstream_type,  int)' {aka
+> > 'int(int, const void *, long unsigned int,  bitstream_type,  int)'}
+> >     64 | static inline int fpga_load(int devnum, const void *buf,
+> > size_t bsize,
+> >        |                   ^~~~~~~~~
+> > make[2]: *** [scripts/Makefile.build:257: drivers/fpga/fpga.o] Error 1
+> >
+> > I means please tune that condition properly not to create additional
+> > compilation warnings for other combinations.
+> >
+> > Thanks,
+> > Michal
+> >
+> 
+> Hello Michal,
+> 
+> Thanks for reviewing .
+> 
+> Chanho, I cannot try this at the moment, if you are in a hurry you can
+> send a v4 or v2 to your patch addressing this (or maybe your patch does
+> not have this problem)
 
-Furthermore 'gpt read' does not write all fields needed by 'gpt write'
-to recreate the partition table: bootable and type are missing.
+Sure. Actually, my patch does not have the problem.
+Michal, could review my patch?
 
-Best regards
-
-Heinrich
-
->
->  From the description above it is not clear that:
->
-> * semicolons are used to separate partitions
-> * the exact sequence of fields must be kept
-> * commas are used to separate fields
-> * no extra white-space is allowed.
->
->> +
->> +
->> +=C2=A0=C2=A0=C2=A0 If 'uuid' is not specified, but CONFIG_RANDOM_UUID =
-is enabled, a
->> random UUID
->> +=C2=A0=C2=A0=C2=A0 will be generated for the partition
->> +
->> +gpt enumerate
->> +~~~~~~~~~~~~~
->> +
->> +Sets the variable 'gpt_partition_list' to be a list of all the
->> partition names
->> +on the device.
->> +
->> +gpt guid
->> +~~~~~~~~
->> +
->> +Report the GUID of a disk. If 'varname' is specified, the command
->> will set the
->> +variable to the GUID, otherwise it will be printed out.
->> +
->> +gpt read
->> +~~~~~~~~
->> +
->> +Prints the current state of the GPT partition table. If 'varname' is
->> specified,
->> +the variable will be filled with a partition string in the same
->> format as a
->> +'<partition string>', suitable for passing to other 'gpt' commands.
->> If the
->> +argument is omitted, a human readable description is printed out.
->> +CONFIG_CMD_GPT_RENAME=3Dy is required.
->> +
->> +gpt rename
->> +~~~~~~~~~~
->> +
->> +Renames all partitions named 'part' to be 'name'.
->> CONFIG_CMD_GPT_RENAME=3Dy is
->> +required.
->> +
->> +gpt repair
->> +~~~~~~~~~~
->> +
->> +Repairs the GPT partition tables if it they become corrupted.
->> +
->> +gpt setenv
->> +~~~~~~~~~~
->> +
->> +The 'gpt setenv' command will set a series of environment variables wi=
-th
->> +information about the partition named '<partition name>'. The
->> variables are:
->> +
->> +gpt_partition_addr
->> +=C2=A0=C2=A0=C2=A0 the starting offset of the partition in blocks as a=
- hexadecimal
->> number
->> +
->> +gpt_partition_size
->> +=C2=A0=C2=A0=C2=A0 the size of the partition in blocks as a hexadecima=
-l number
->> +
->> +gpt_partition_name
->> +=C2=A0=C2=A0=C2=A0 the name of the partition
->> +
->> +gpt_partition_entry
->> +=C2=A0=C2=A0=C2=A0 the partition number in the table, e.g. 1, 2, 3, et=
-c.
->
-> Since eeef58401520 ("cmd: let gpt_partition_entry be hexadecimal") this
-> is a hexadecimal number. As partitions are not required to be numbered
-> start at 1:
->
-> %s/, e.g. 1, 2, 3, etc./as a hexadecimal number/
->
->> +
->> +gpt swap
->> +~~~~~~~~
->> +
->> +Changes the names of all partitions that are named 'name1' to be
->> 'name2', and
->> +all partitions named 'name2' to be 'name1'. CONFIG_CMD_GPT_RENAME=3Dy =
-is
->> +required.
->> +
->> +gpt verify
->> +~~~~~~~~~~
->> +
->> +Sets return value $? to 0 (true) if the partition layout on the
->> +specified disk matches the one in the provided partition string, and
->> 1 (false)
->> +if it does not match. If no partition string is specified, the
->> command will
->> +check if the disk is partitioned or not.
->> +
->> +gpt write
->> +~~~~~~~~~
->> +
->> +(Re)writes the partition table on the disk to match the provided
->> +partition string. It returns 0 on success or 1 on failure.
->> +
->> +Configuration
->> +-------------
->
-> All other man-pages have Configuration after Examples.
->
->> +
->> +To use the 'gpt' command you must specify CONFIG_CMD_GPT=3Dy. To enabl=
-e
->> 'gpt
->> +read', 'gpt swap' and 'gpt rename', you must specify
->> CONFIG_CMD_GPT_RENAME=3Dy.
->> +
->> +Examples
->> +~~~~~~~~
->
-> An example for gpt read would be nice.
->
->> +Create 6 partitions on a disk:: > +
->> +=C2=A0=C2=A0=C2=A0 =3D> setenv gpt_parts 'uuid_disk=3Dbec9fc2a-86c1-48=
-3d-8a0e-0109732277d7;
->> +
->> name=3Dboot,start=3D4M,size=3D128M,bootable,type=3Debd0a0a2-b9e5-4433-8=
-7c0-68b6b72699c7,
->> +
->> name=3Drootfs,size=3D3072M,type=3D0fc63daf-8483-4772-8e79-3d69d8477de4;
->> +
->> name=3Dsystem-data,size=3D512M,type=3D0fc63daf-8483-4772-8e79-3d69d8477=
-de4;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name=3D[ext],size=3D-,type=
-=3D0fc63daf-8483-4772-8e79-3d69d8477de4;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name=3Duser,size=3D-,type=
-=3D0fc63daf-8483-4772-8e79-3d69d8477de4;
->> +
->> name=3Dmodules,size=3D100M,type=3D0fc63daf-8483-4772-8e79-3d69d8477de4;
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 name=3Dramdisk,size=3D8M,ty=
-pe=3D0fc63daf-8483-4772-8e79-3d69d8477de4
->> +=C2=A0=C2=A0=C2=A0 =3D> gpt write mmc 0 $gpt_parts
->
-> There is a starting single quotation mark, but I don't see an ending
-> single quotation mark.
->
-> White-space is not allowed before 'name=3D'. As ugly as it is, please, p=
-ut
-> the whole setenv command into a single line.
->
-> You cannot use a comma before name=3D. It must be a semicolon.
->
-> Looking at the code the sequence in the partition descriptors seems to
-> be wrong. It should be
->
-> uuid (optional if CONFIG_RANDOM_UUID=3Dy),
-> type (optional, only usable for CONFIG_PARTITION_TYPE_GUID=3Dy),
-> name (mandatory),
-> size (mandatory),
-> start (optional),
-> bootable (optional).
-> .
-> Please, use a command that you have actually tested and copy it
-> verbatim. sandbox_defconfig has a host bind command to attach a file as
-> drive. That makes testing easy.
->
->> +
->> +
->> +Verify that the device matches the partition layout described in the
->> variable
->> +$gpt_parts::
->> +
->> +=C2=A0=C2=A0=C2=A0 =3D> gpt verify mmc 0 $gpt_parts
->
-> How about adding output here:
->
-> =3D> gpt verify mmc 0 $gpt_parts; echo $?
-> 0
->
-> Best regards
->
-> Heinrich
->
->> +
->> +
->> +Get the information about the partition named 'rootfs'::
->> +
->> +=C2=A0=C2=A0=C2=A0 =3D> gpt setenv mmc 0 rootfs
->> +=C2=A0=C2=A0=C2=A0 =3D> echo ${gpt_partition_addr}
->> +=C2=A0=C2=A0=C2=A0 2000
->> +=C2=A0=C2=A0=C2=A0 =3D> echo ${gpt_partition_size}
->> +=C2=A0=C2=A0=C2=A0 14a000
->> +=C2=A0=C2=A0=C2=A0 =3D> echo ${gpt_partition_name}
->> +=C2=A0=C2=A0=C2=A0 rootfs
->> +=C2=A0=C2=A0=C2=A0 =3D> echo ${gpt_partition_entry}
->> +=C2=A0=C2=A0=C2=A0 2
->> +
->> +Get the list of partition names on the disk::
->> +
->> +=C2=A0=C2=A0=C2=A0 =3D> gpt enumerate
->> +=C2=A0=C2=A0=C2=A0 =3D> echo gpt_partition_list
->> +=C2=A0=C2=A0=C2=A0 boot rootfs system-data [ext] user modules ramdisk
->> +
->> +
->> +Get the GUID for a disk::
->> +
->> +=C2=A0=C2=A0=C2=A0 =3D> gpt guid mmc 0
->> +=C2=A0=C2=A0=C2=A0 bec9fc2a-86c1-483d-8a0e-0109732277d7
->> +=C2=A0=C2=A0=C2=A0 =3D> gpt guid mmc gpt_disk_uuid
->> +=C2=A0=C2=A0=C2=A0 =3D> echo ${gpt_disk_uuid}
->> +=C2=A0=C2=A0=C2=A0 bec9fc2a-86c1-483d-8a0e-0109732277d7
->> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
->> index f45a7f5502..fa702920fa 100644
->> --- a/doc/usage/index.rst
->> +++ b/doc/usage/index.rst
->> @@ -66,6 +66,7 @@ Shell commands
->> =C2=A0=C2=A0=C2=A0=C2=A0 cmd/for
->> =C2=A0=C2=A0=C2=A0=C2=A0 cmd/fwu_mdata
->> =C2=A0=C2=A0=C2=A0=C2=A0 cmd/gpio
->> +=C2=A0=C2=A0 cmd/gpt
->> =C2=A0=C2=A0=C2=A0=C2=A0 cmd/host
->> =C2=A0=C2=A0=C2=A0=C2=A0 cmd/imxtract
->> =C2=A0=C2=A0=C2=A0=C2=A0 cmd/load
->
+Best Regards,
+Chanho Park
 
