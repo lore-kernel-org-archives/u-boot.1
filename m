@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB7AC6FA8F
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 19:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C96C6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 19:18:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45F2F8056D;
-	Tue, 29 Aug 2023 21:14:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=null.net
+	by phobos.denx.de (Postfix) with ESMTP id C603C86520;
+	Tue, 29 Aug 2023 21:18:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=null.net header.i=ivo.ivanov@null.net header.b="bHufmHgw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RVAfg5sq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F12388056D; Tue, 29 Aug 2023 21:14:00 +0200 (CEST)
-Received: from mout.gmx.com (mout.gmx.com [74.208.4.201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 105668651F; Tue, 29 Aug 2023 21:18:21 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7FCA803AB
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:13:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C6B48056D
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:18:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=null.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivo.ivanov@null.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=null.net;
- s=s1089575; t=1693336436; x=1693941236; i=ivo.ivanov@null.net;
- bh=KTlbeSWdKmgNNpQN2xqjJLDvnfqpUEgN+rQmK34PaF4=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=bHufmHgwwk6OEWF3D2Ae5lqDCz/6rkQMKOIDvkyM/dHOdEsr3qj8C85/yL574jHdSqkBG1n
- +rsytsDXrWlXgBVVzHcsibZVUh9Pj88xCs8KB/hX+kX1edPpQrJE1ltA0aNMCRdOhvKabL5ig
- av/F4nkpAzfeL7MH8Y8ItuPQrTkGf6Cbpjw3mpQODpPFqDTXRSimdR/tA3vs4Wa7Uk3y+m2Ry
- uH7ct3hCuInyTsl4S5BKzO5kraJkXe/K1smgEg4VMlar96/2dWufdItlOB7HzlKuN5wBgwQvX
- hehY/371heUC+fyCSGCkK+VuavyO1wcSAQ8bV28ZtY++7k1y2hNw==
-X-UI-Sender-Class: f2cb72be-343f-493d-8ec3-b1efb8d6185a
-Received: from [192.168.1.106] ([91.139.201.119]) by smtp.mail.com (mrgmxus003
- [74.208.5.15]) with ESMTPSA (Nemesis) id 0MKow2-1qb49z3H3Q-0008AH;
- Tue, 29 Aug 2023 21:13:56 +0200
-Message-ID: <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net>
-Date: Tue, 29 Aug 2023 22:13:53 +0300
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-34cafafa50eso16686395ab.3
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 12:18:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693336696; x=1693941496; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gSArBmMsswRYjnTU8zyo9/Uft3vc1W7OWIExh4GBVPE=;
+ b=RVAfg5sqWujwfrBOiIWZfDNVIr7F4mU9dny9C8JZHrGDO9h4vjDrcpTdZTUbr1/UIp
+ qUNB+hfp03zCrYe5m6iMQ3UhbT9Mis2xzbQ7tbWhpRVOKaq2Wd3d0EU/c3cdhtgQPqh4
+ pXsYGJPQAVJ8+rWTr0Fvl7cHcy7W5O7LSlsDk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693336696; x=1693941496;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gSArBmMsswRYjnTU8zyo9/Uft3vc1W7OWIExh4GBVPE=;
+ b=Txci7qHGa/utXv0t8PkbKAwbUSfshqcSIR43S435mR7jMIgfxDvBahUgnitUPPV7ef
+ B4vsqeQntZ+pKO7rw8mw3ig/+8u+Ntvh0gkfZ8bHh/guHVgDxN0aD5FASej88IKnCCHt
+ vPyoO10y0Tm7YTJi1qX7vGRHT7Pl9tyTQz/XrZskp0BkEbfNvpsY2stf5IZXkmZ8xT6G
+ 9pHaDGj94rknTbPmhHjZaET5xjiD4odQ9SAQDoZstNTsAbTJP5jX1d2WdYdNpKScKhIx
+ wxAM0NFdPTr5IH79oaxSqyGTOYfzG6SDSPtcc3GLTjsekoxtMMMJhK3Mtn0L71MHprCT
+ Q8cg==
+X-Gm-Message-State: AOJu0YwSgg3iuGMzaM1oOMlYeGda07SKJI36c5DcBkRx1eyWBlac2w3d
+ T48z3ELmAIBRHZNXOytqBWDXaw==
+X-Google-Smtp-Source: AGHT+IG9piH/z3sYhq1WiiMmi+BovOBIGET+WWTVzIQinivR6hkTahyvuUF3tCHVeiUGB1T13g23MQ==
+X-Received: by 2002:a05:6e02:dca:b0:348:7396:184b with SMTP id
+ l10-20020a056e020dca00b003487396184bmr169828ilj.24.1693336696115; 
+ Tue, 29 Aug 2023 12:18:16 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:16d9:c947:1a18:4c10])
+ by smtp.gmail.com with ESMTPSA id
+ fq8-20020a056638650800b004332f6537e2sm3359798jab.83.2023.08.29.12.18.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Aug 2023 12:18:15 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: Dhaval Sharma <dhaval@rivosinc.com>, Mark Rutland <mark.rutland@arm.com>,
+ Gua Guo <gua.guo@intel.com>, Tom Rini <trini@konsulko.com>,
+ Rob Herring <robh@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ ron minnich <rminnich@gmail.com>, Ard Biesheuvel <ardb@kernel.org>,
+ Lean Sheng Tan <sheng.tan@9elements.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Chiu Chasel <chasel.chiu@intel.com>, lkml <linux-kernel@vger.kernel.org>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org,
+ Guo Dong <guo.dong@intel.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 1/4] Add reserved-memory
+Date: Tue, 29 Aug 2023 13:18:06 -0600
+Message-ID: <20230829191812.135759-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] arm: mach-apple: Move M1/M2 specifics into a separate
- folder
-Content-Language: en-US
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: u-boot@lists.denx.de, kettenis@openbsd.org
-References: <20230829172519.72803-1-ivo.ivanov@null.net>
- <878r9trbfn.fsf@bloch.sibelius.xs4all.nl>
-From: Ivaylo Ivanov <ivo.ivanov@null.net>
-In-Reply-To: <878r9trbfn.fsf@bloch.sibelius.xs4all.nl>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9oqqAY+5cCAICF+FDd9WyktcPkfh9Qpsv/5uhDpesrjT5/Pkl3E
- itKjayhtxIA3YohL7ne9dRdHm1Gdibk8rMSYqZtcmmSYO/Lx5NpwLG2HA3GQRTr09UXKTwf
- ggnSPqN/TIF86O482dcWvJI9A4asN6O0RtrF4tuHM6gTcrpRg/37vlApctWXdhsbas8D8NH
- riS3p6VrxqdedPK0ep0ZA==
-UI-OutboundReport: notjunk:1;M01:P0:WzzYN20wWGI=;v1UKkZcPhssO9Uai7nX5hRgch1I
- JJVv9YCyUDj4vkWlOLYHElRHkPJnfGZ/j/mZiRPkyudKeJ17NwGnRdN9bWO+js54lYJuAdBDi
- NX0QqhrkidiVusfoCUbxIjGaYYyLugIq1DuvJ3OFivsBF4mDqcKznnHQjDiMPDGYqo8OuQqwn
- z/tvBL6Yd96ijG7iwSvZhNOiREK2+ZWEUIVz8er4x+xlOzQ4uLV6NNitrakR1SZbfTsi1+tkt
- 9J+hRglLrqvfuUqJFnevktEjqco6ABu7Xnfy4LetPppEe/juvg2KvYoDU7bXJU/nGu8W2c9zn
- 3Qbb7vZkVMRhSyToDUL8VazttuQLY1dfz1Q4yEgRayizInvcAhltEJ0Q3HhmbVf5wZPQNtoaY
- jZRPtSwso+oWRUXTqvra8SvzTLMcsuzKi51RZ9zrB4PL/R6mricgR4Q67Dj5kmN8A7pgMD5Fr
- KsUyvqkVsGgFn4mvk18DGhzsx7SKQ7CM4ypk9fS5SC38KrR5pQeS+BL0fhHu2ibrQvncsRdWm
- 7/KBX51vZ04ulo1lG+0pBM2arhQz9L6ePK8IBmaOLXpF9hmN7G6pwl2jAm1nSuMEv9skUPImR
- Pq3GckYq9iqnV4mySOrNumJohOIM7AIvI3Tf/s1k5QJ22jqlRC07yfMzfwL0IHskDtC6PsWC9
- AtFUDwLhGO/XbPgyZoGAs9IVywlkUlLadGb/sf1bkwQ5IoOiCv8kIWl6zRQjQRpkkMTmHILy/
- HFxhdvHv4C4K4gfIgU/ZgynGiXs0juSwRSKGHbDreB/D9B+wZvqa7blMozjRzu/m9DCZPj2Te
- IOOklfDB6ihXpDleCYDssu4Ss8ivMCH1733h27Dh6w3Ql/7+MAw98byE59YTv3OEAua+lRoUW
- gPKObwnPwCrb1bFJp7m5wP1/GSCZaP7wfQq/XJetWBNrb7oo/3nwaVHSDC71B+/nFQC766ASJ
- 8N7MxX5+qrGFW13JWnYqGxOVNvY=
-X-Mailman-Approved-At: Tue, 29 Aug 2023 21:14:19 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,200 +92,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'm currently working on S5L8950X. I also have some T7000 and T8010
-devices that I'll work on in the future.
+Bring in this file from Linux v6.5
 
-There's a project called freemyipod that has a fork of U-Boot working on
-iPod Nano's (specifically the S5L8730 in the iPod Nano 5). I've read
-that they're planning on upstreaming it in the near future.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-On 8/29/23 20:43, Mark Kettenis wrote:
->> From: ivo.ivanov@null.net
->> Date: Tue, 29 Aug 2023 20:25:19 +0300
->>
->> From: Ivaylo Ivanov <ivo.ivanov@null.net>
->>
->> Currently, mach-apple assumes we're working with M1/M2. Make room for
->> adding support for other Apple SoCs by moving everything from the M1/M2
->> SoC family in "mach-apple/" into "mach-apple/m1/".
->
-> Which other Apple SoCs?
->
->> Signed-off-by: Ivaylo Ivanov <ivo.ivanov@null.net>
->> ---
->>  arch/arm/Kconfig                             | 29 --------------
->>  arch/arm/mach-apple/Kconfig                  | 42 ++++++++++++++++++++
->>  arch/arm/mach-apple/Makefile                 |  5 +--
->>  arch/arm/mach-apple/m1/Makefile              |  6 +++
->>  arch/arm/mach-apple/{ =3D> m1}/board.c         |  0
->>  arch/arm/mach-apple/{ =3D> m1}/lowlevel_init.S |  0
->>  arch/arm/mach-apple/{ =3D> m1}/rtkit.c         |  0
->>  arch/arm/mach-apple/{ =3D> m1}/sart.c          |  0
->>  configs/apple_m1_defconfig                   |  1 +
->>  9 files changed, 50 insertions(+), 33 deletions(-)
->>  create mode 100644 arch/arm/mach-apple/m1/Makefile
->>  rename arch/arm/mach-apple/{ =3D> m1}/board.c (100%)
->>  rename arch/arm/mach-apple/{ =3D> m1}/lowlevel_init.S (100%)
->>  rename arch/arm/mach-apple/{ =3D> m1}/rtkit.c (100%)
->>  rename arch/arm/mach-apple/{ =3D> m1}/sart.c (100%)
->>
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> index 97c25b4f14..5339da370c 100644
->> --- a/arch/arm/Kconfig
->> +++ b/arch/arm/Kconfig
->> @@ -980,38 +980,9 @@ config ARCH_NPCM
->>
->>  config ARCH_APPLE
->>  	bool "Apple SoCs"
->> -	select ARM64
->> -	select CLK
->> -	select CMD_PCI
->> -	select CMD_USB
->>  	select DM
->> -	select DM_GPIO
->> -	select DM_KEYBOARD
->> -	select DM_MAILBOX
->>  	select DM_RESET
->>  	select DM_SERIAL
->> -	select DM_SPI
->> -	select DM_USB
->> -	select VIDEO
->> -	select IOMMU
->> -	select LINUX_KERNEL_IMAGE_HEADER
->> -	select OF_BOARD_SETUP
->> -	select OF_CONTROL
->> -	select PCI
->> -	select PINCTRL
->> -	select POSITION_INDEPENDENT
->> -	select POWER_DOMAIN
->> -	select REGMAP
->> -	select SPI
->> -	select SYSCON
->> -	select SYSRESET
->> -	select SYSRESET_WATCHDOG
->> -	select SYSRESET_WATCHDOG_AUTO
->> -	select USB
->> -	imply CMD_DM
->> -	imply CMD_GPT
->> -	imply DISTRO_DEFAULTS
->> -	imply OF_HAS_PRIOR_STAGE
->>
->>  config ARCH_OWL
->>  	bool "Actions Semi OWL SoCs"
->> diff --git a/arch/arm/mach-apple/Kconfig b/arch/arm/mach-apple/Kconfig
->> index 294690ec0e..a38779b387 100644
->> --- a/arch/arm/mach-apple/Kconfig
->> +++ b/arch/arm/mach-apple/Kconfig
->> @@ -3,6 +3,46 @@ if ARCH_APPLE
->>  config TEXT_BASE
->>  	default 0x00000000
->>
->> +choice
->> +	prompt "Apple Silicon architecture type select"
->> +	optional
->> +
->> +config ARCH_APPLE_M1
->> +	bool "Apple M1/M2 SoC family"
->> +	select ARM64
->> +	select CLK
->> +	select CMD_PCI
->> +	select CMD_USB
->> +	select DM_GPIO
->> +	select DM_KEYBOARD
->> +	select DM_MAILBOX
->> +	select DM_SPI
->> +	select DM_USB
->> +	select VIDEO
->> +	select IOMMU
->> +	select LINUX_KERNEL_IMAGE_HEADER
->> +	select OF_BOARD_SETUP
->> +	select OF_CONTROL
->> +	select PCI
->> +	select PINCTRL
->> +	select POSITION_INDEPENDENT
->> +	select POWER_DOMAIN
->> +	select REGMAP
->> +	select SPI
->> +	select SYSCON
->> +	select SYSRESET
->> +	select SYSRESET_WATCHDOG
->> +	select SYSRESET_WATCHDOG_AUTO
->> +	select USB
->> +	imply CMD_DM
->> +	imply CMD_GPT
->> +	imply DISTRO_DEFAULTS
->> +	imply OF_HAS_PRIOR_STAGE
->> +
->> +endchoice
->> +
->> +if ARCH_APPLE_M1
->> +
->>  config SYS_CONFIG_NAME
->>  	default "apple"
->>
->> @@ -19,3 +59,5 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
->>  	default TEXT_BASE
->>
->>  endif
->> +
->> +endif
->> diff --git a/arch/arm/mach-apple/Makefile b/arch/arm/mach-apple/Makefil=
-e
->> index 50b465b947..d147ccdde2 100644
->> --- a/arch/arm/mach-apple/Makefile
->> +++ b/arch/arm/mach-apple/Makefile
->> @@ -1,6 +1,3 @@
->>  # SPDX-License-Identifier: GPL-2.0+
->>
->> -obj-y +=3D board.o
->> -obj-y +=3D lowlevel_init.o
->> -obj-y +=3D rtkit.o
->> -obj-$(CONFIG_NVME_APPLE) +=3D sart.o
->> +obj-$(CONFIG_ARCH_APPLE_M1) +=3D m1/
->> diff --git a/arch/arm/mach-apple/m1/Makefile b/arch/arm/mach-apple/m1/M=
-akefile
->> new file mode 100644
->> index 0000000000..50b465b947
->> --- /dev/null
->> +++ b/arch/arm/mach-apple/m1/Makefile
->> @@ -0,0 +1,6 @@
->> +# SPDX-License-Identifier: GPL-2.0+
->> +
->> +obj-y +=3D board.o
->> +obj-y +=3D lowlevel_init.o
->> +obj-y +=3D rtkit.o
->> +obj-$(CONFIG_NVME_APPLE) +=3D sart.o
->> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/m1/board=
-.c
->> similarity index 100%
->> rename from arch/arm/mach-apple/board.c
->> rename to arch/arm/mach-apple/m1/board.c
->> diff --git a/arch/arm/mach-apple/lowlevel_init.S b/arch/arm/mach-apple/=
-m1/lowlevel_init.S
->> similarity index 100%
->> rename from arch/arm/mach-apple/lowlevel_init.S
->> rename to arch/arm/mach-apple/m1/lowlevel_init.S
->> diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/m1/rtkit=
-.c
->> similarity index 100%
->> rename from arch/arm/mach-apple/rtkit.c
->> rename to arch/arm/mach-apple/m1/rtkit.c
->> diff --git a/arch/arm/mach-apple/sart.c b/arch/arm/mach-apple/m1/sart.c
->> similarity index 100%
->> rename from arch/arm/mach-apple/sart.c
->> rename to arch/arm/mach-apple/m1/sart.c
->> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
->> index 755560971e..bd723881da 100644
->> --- a/configs/apple_m1_defconfig
->> +++ b/configs/apple_m1_defconfig
->> @@ -1,5 +1,6 @@
->>  CONFIG_ARM=3Dy
->>  CONFIG_ARCH_APPLE=3Dy
->> +CONFIG_ARCH_APPLE_M1=3Dy
->>  CONFIG_DEFAULT_DEVICE_TREE=3D"t8103-j274"
->>  CONFIG_SYS_LOAD_ADDR=3D0x0
->>  CONFIG_USE_PREBOOT=3Dy
->> --
->> 2.34.1
->>
->>
+Changes in v4:
+- New patch
+
+ .../reserved-memory/reserved-memory.yaml      | 181 ++++++++++++++++++
+ 1 file changed, 181 insertions(+)
+ create mode 100644 dtschema/schemas/reserved-memory/reserved-memory.yaml
+
+diff --git a/dtschema/schemas/reserved-memory/reserved-memory.yaml b/dtschema/schemas/reserved-memory/reserved-memory.yaml
+new file mode 100644
+index 0000000..c680e39
+--- /dev/null
++++ b/dtschema/schemas/reserved-memory/reserved-memory.yaml
+@@ -0,0 +1,181 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/reserved-memory/reserved-memory.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: /reserved-memory Child Node Common
++
++maintainers:
++  - devicetree-spec@vger.kernel.org
++
++description: >
++  Reserved memory is specified as a node under the /reserved-memory node. The
++  operating system shall exclude reserved memory from normal usage one can
++  create child nodes describing particular reserved (excluded from normal use)
++  memory regions. Such memory regions are usually designed for the special
++  usage by various device drivers.
++
++  Each child of the reserved-memory node specifies one or more regions
++  of reserved memory. Each child node may either use a 'reg' property to
++  specify a specific range of reserved memory, or a 'size' property with
++  optional constraints to request a dynamically allocated block of
++  memory.
++
++  Following the generic-names recommended practice, node names should
++  reflect the purpose of the node (ie. "framebuffer" or "dma-pool").
++  Unit address (@<address>) should be appended to the name if the node
++  is a static allocation.
++
++properties:
++  reg: true
++
++  size:
++    oneOf:
++      - $ref: /schemas/types.yaml#/definitions/uint32
++      - $ref: /schemas/types.yaml#/definitions/uint64
++    description: >
++      Length based on parent's \#size-cells. Size in bytes of memory to
++      reserve.
++
++  alignment:
++    oneOf:
++      - $ref: /schemas/types.yaml#/definitions/uint32
++      - $ref: /schemas/types.yaml#/definitions/uint64
++    description: >
++      Length based on parent's \#size-cells. Address boundary for
++      alignment of allocation.
++
++  alloc-ranges:
++    $ref: /schemas/types.yaml#/definitions/uint32-array
++    description: >
++      Address and Length pairs. Specifies regions of memory that are
++      acceptable to allocate from.
++
++  iommu-addresses:
++    $ref: /schemas/types.yaml#/definitions/phandle-array
++    description: >
++      A list of phandle and specifier pairs that describe static IO virtual
++      address space mappings and carveouts associated with a given reserved
++      memory region. The phandle in the first cell refers to the device for
++      which the mapping or carveout is to be created.
++
++      The specifier consists of an address/size pair and denotes the IO
++      virtual address range of the region for the given device. The exact
++      format depends on the values of the "#address-cells" and "#size-cells"
++      properties of the device referenced via the phandle.
++
++      When used in combination with a "reg" property, an IOVA mapping is to
++      be established for this memory region. One example where this can be
++      useful is to create an identity mapping for physical memory that the
++      firmware has configured some hardware to access (such as a bootsplash
++      framebuffer).
++
++      If no "reg" property is specified, the "iommu-addresses" property
++      defines carveout regions in the IOVA space for the given device. This
++      can be useful if a certain memory region should not be mapped through
++      the IOMMU.
++
++  no-map:
++    type: boolean
++    description: >
++      Indicates the operating system must not create a virtual mapping
++      of the region as part of its standard mapping of system memory,
++      nor permit speculative access to it under any circumstances other
++      than under the control of the device driver using the region.
++
++  reusable:
++    type: boolean
++    description: >
++      The operating system can use the memory in this region with the
++      limitation that the device driver(s) owning the region need to be
++      able to reclaim it back. Typically that means that the operating
++      system can use that region to store volatile or cached data that
++      can be otherwise regenerated or migrated elsewhere.
++
++allOf:
++  - if:
++      required:
++        - no-map
++
++    then:
++      not:
++        required:
++          - reusable
++
++  - if:
++      required:
++        - reusable
++
++    then:
++      not:
++        required:
++          - no-map
++
++oneOf:
++  - oneOf:
++      - required:
++          - reg
++
++      - required:
++          - size
++
++  - oneOf:
++      # IOMMU reservations
++      - required:
++          - iommu-addresses
++
++      # IOMMU mappings
++      - required:
++          - reg
++          - iommu-addresses
++
++additionalProperties: true
++
++examples:
++  - |
++    / {
++      compatible = "foo";
++      model = "foo";
++
++      #address-cells = <2>;
++      #size-cells = <2>;
++
++      reserved-memory {
++        #address-cells = <2>;
++        #size-cells = <2>;
++        ranges;
++
++        adsp_resv: reservation-adsp {
++          /*
++           * Restrict IOVA mappings for ADSP buffers to the 512 MiB region
++           * from 0x40000000 - 0x5fffffff. Anything outside is reserved by
++           * the ADSP for I/O memory and private memory allocations.
++           */
++          iommu-addresses = <&adsp 0x0 0x00000000 0x00 0x40000000>,
++                            <&adsp 0x0 0x60000000 0xff 0xa0000000>;
++        };
++
++        fb: framebuffer@90000000 {
++          reg = <0x0 0x90000000 0x0 0x00800000>;
++          iommu-addresses = <&dc0 0x0 0x90000000 0x0 0x00800000>;
++        };
++      };
++
++      bus@0 {
++        #address-cells = <1>;
++        #size-cells = <1>;
++        ranges = <0x0 0x0 0x0 0x40000000>;
++
++        adsp: adsp@2990000 {
++          reg = <0x2990000 0x2000>;
++          memory-region = <&adsp_resv>;
++        };
++
++        dc0: display@15200000 {
++          reg = <0x15200000 0x10000>;
++          memory-region = <&fb>;
++        };
++      };
++    };
++...
+-- 
+2.42.0.rc2.253.gd59a3bf2b4-goog
+
