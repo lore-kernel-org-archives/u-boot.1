@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E503C71153
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 14:56:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D2DC83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 15:01:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74AE9864E8;
-	Tue, 29 Aug 2023 16:56:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1189D86511;
+	Tue, 29 Aug 2023 17:01:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dVczdwuq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JcDVa0Ug";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 486F88650A; Tue, 29 Aug 2023 16:56:46 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 1ECD88650E; Tue, 29 Aug 2023 17:01:42 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D3F8863FD
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:56:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BFC6864E9
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 17:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7605ce3122=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 37TC0rmG012215; Tue, 29 Aug 2023 16:56:38 +0200
+ 37TBwNxV016583; Tue, 29 Aug 2023 17:01:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=fJQJa2wfQj0luA4Qqu3ZVzibVkk/Vl8dx+HqrGRnRcc=; b=dV
- czdwuqPLnvYmkeIO/kb72ThjpVQn8Tw65eRGhGwuuZZf1BwCf8MXCektPspNlz/B
- cswa2Wl93croDWOuuNykz3uRO2YKeYjUtBRsBjAZbW1YXTh3I3ibZ/4zq2gcSdGk
- gUQP+1AEGFbOBwJcg53Ry+OKvbXEq5bLW5rmG7GMMjthiA3CfOdG9vlmnY+YLJYd
- kaGJsnDdRwwnAPJG/2kp39B4qQnbB4EPwt2QiTzdxHESkVncTwdDPFn1vY0dOsE9
- qvjbAQcpXY/lNNP4cjWjHQN1GXXVL0pzflN1zZiV118GCOxWEjCyn+xRqUTTcoYN
- oZVTD0pkZM09DyqtrRDA==
+ selector1; bh=KU++klrBHxWISpePFqs6L57GwPHy6AXo0KEPyBB2BD0=; b=Jc
+ DVa0UgwW9Nj0LLK+LrfXVqt131I3xf8XKquCvj11MyAEw+eCdFziMRnmX9sQqo9K
+ pkwthNiq7K2EoyJkGX3uIKF/znXDOR2fAb/R8MBis+i3Jr2hNFJ5Q1mQ004hezKA
+ NdLQ/23xjp1X3L5CZt55VBiZsk2/Kz1RSNC2Bnqskwnh9bxqNKpcX0QQyj7hwm2Z
+ wob1WtFZva/zfWEVqJjhPNYQCRDNcnXdhGsanqtPVMVdxO2HLroV7ykE7xDLdBht
+ c4CPEKxe8a4WIFDVE35Hicqnl/iI8FqI7+Z005yWuy2U/VY6ssHFM41UJYXRXfnn
+ Ze88O2Ax0MHDFQM1WI+g==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sqvbhad41-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sqtxyt9gn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Aug 2023 16:56:38 +0200 (MEST)
+ Tue, 29 Aug 2023 17:01:38 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ED174100057;
- Tue, 29 Aug 2023 16:56:36 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8E9DD100057;
+ Tue, 29 Aug 2023 17:01:37 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E0368231511;
- Tue, 29 Aug 2023 16:56:36 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7904623152A;
+ Tue, 29 Aug 2023 17:01:37 +0200 (CEST)
 Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 29 Aug
- 2023 16:56:36 +0200
-Message-ID: <7079aee8-6e6a-9d42-9f88-170fe326662a@foss.st.com>
-Date: Tue, 29 Aug 2023 16:56:35 +0200
+ 2023 17:01:36 +0200
+Message-ID: <28f98bee-0a41-d31e-6f39-4950f9ad19d6@foss.st.com>
+Date: Tue, 29 Aug 2023 17:01:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH v2 1/2] arm: stm32mp: Really fix compilation issue when
- SYS_DCACHE_OFF and/or SYS_DCACHE_SYS are enabled
-To: Bhupesh Sharma <bhupesh.sharma@linaro.org>, <u-boot@lists.denx.de>
-CC: <sjg@chromium.org>, <trini@konsulko.com>, <bhupesh.linux@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
- <20230822075112.717992-2-bhupesh.sharma@linaro.org>
+Subject: Re: [PATCH 1/3] configs: stm32f746-disco: limit resolution to 480x272
 Content-Language: en-US
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, yannick fertre
+ <yannick.fertre@st.com>, Vikas Manocha <vikas.manocha@st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230820162446.616442-1-dario.binacchi@amarulasolutions.com>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20230822075112.717992-2-bhupesh.sharma@linaro.org>
+In-Reply-To: <20230820162446.616442-1-dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.201.22.165]
@@ -94,36 +94,44 @@ X-Virus-Status: Clean
 
 Hi,
 
-On 8/22/23 09:51, Bhupesh Sharma wrote:
-> While 23e20b2fa6 ("arm: stm32mp: Fix compilation issue when
-> SYS_DCACHE_OFF and/or SYS_DCACHE_SYS are enabled") tried fixing
-> this issue, fix it really by adding #if checks for SYS_ICACHE_OFF
-> and SYS_DCACHE_OFF.
+On 8/20/23 18:24, Dario Binacchi wrote:
+> The patch fixes the y-resolution, which was causing the creation of a
+> framebuffer larger than actually needed, resulting in memory waste.
 >
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> Fixes: cc1b0e7b8e55b ("board: Add display to STM32F746 SoC discovery board")
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 > ---
->   arch/arm/mach-stm32mp/cpu.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-> index e2f67fc423..8ed065b389 100644
-> --- a/arch/arm/mach-stm32mp/cpu.c
-> +++ b/arch/arm/mach-stm32mp/cpu.c
-> @@ -90,10 +90,10 @@ static void early_enable_caches(void)
->   	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
->   		return;
->   
-> -	if (!(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))) {
-> +#if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
->   		gd->arch.tlb_size = PGTABLE_SIZE;
->   		gd->arch.tlb_addr = (unsigned long)&early_tlb;
-> -	}
-> +#endif
->   
->   	/* enable MMU (default configuration) */
->   	dcache_enable();
+>   configs/stm32f746-disco_defconfig     | 2 +-
+>   configs/stm32f746-disco_spl_defconfig | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/configs/stm32f746-disco_defconfig b/configs/stm32f746-disco_defconfig
+> index bb98ee307a6e..8403679d7fa6 100644
+> --- a/configs/stm32f746-disco_defconfig
+> +++ b/configs/stm32f746-disco_defconfig
+> @@ -59,7 +59,7 @@ CONFIG_VIDEO=y
+>   CONFIG_BACKLIGHT_GPIO=y
+>   CONFIG_VIDEO_STM32=y
+>   CONFIG_VIDEO_STM32_MAX_XRES=480
+> -CONFIG_VIDEO_STM32_MAX_YRES=640
+> +CONFIG_VIDEO_STM32_MAX_YRES=272
+>   CONFIG_SPLASH_SCREEN=y
+>   CONFIG_SPLASH_SCREEN_ALIGN=y
+>   CONFIG_VIDEO_BMP_RLE8=y
+> diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
+> index 84aaec1e3390..50c2a36784af 100644
+> --- a/configs/stm32f746-disco_spl_defconfig
+> +++ b/configs/stm32f746-disco_spl_defconfig
+> @@ -85,7 +85,7 @@ CONFIG_VIDEO=y
+>   CONFIG_BACKLIGHT_GPIO=y
+>   CONFIG_VIDEO_STM32=y
+>   CONFIG_VIDEO_STM32_MAX_XRES=480
+> -CONFIG_VIDEO_STM32_MAX_YRES=640
+> +CONFIG_VIDEO_STM32_MAX_YRES=272
+>   CONFIG_SPLASH_SCREEN=y
+>   CONFIG_SPLASH_SCREEN_ALIGN=y
+>   CONFIG_VIDEO_BMP_RLE8=y
 
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
