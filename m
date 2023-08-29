@@ -4,76 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3394BC83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 14:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59FCEC6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 14:34:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 789F8864FF;
-	Tue, 29 Aug 2023 16:14:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B5DB864F0;
+	Tue, 29 Aug 2023 16:34:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PRTY3R/t";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SI3nRyI8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F9108647D; Tue, 29 Aug 2023 16:14:17 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A0AF486517; Tue, 29 Aug 2023 16:34:08 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6AA78651A
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:14:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37330803AB
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 16:34:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d749f57cb22so4177133276.3
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 07:14:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693318453; x=1693923253;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=C8qXoU2NXpm1q8YSU301UzP9sTT7J1IxaS8b2QCJyLI=;
- b=PRTY3R/t9bibHsUiZ8Ef7O2X8xrVXrKkxslV0OSsD65kJV/nyZa1Az9e7klnqQHz6r
- H7baWRcM1sHXWAbTvd4UUu2UkTT/IuG30OGvxJAoJBb1BW12x/u0bSKQm7sCiMyATUnS
- xn2xYFs2lOcNZPSWY1h9SwWpTRFCGS3REtEig=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693318453; x=1693923253;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=C8qXoU2NXpm1q8YSU301UzP9sTT7J1IxaS8b2QCJyLI=;
- b=gguNZp+KNHUx9K6Y0Hs9ibvQm3CsGCAYtZ9NioV+se5HBE6HrxOYz6qyogxVnKCm5N
- jfDrsjWr2RXJ3M1fXQzW+7YAisB7TIniP+KVx8kQNb/RMV9qPaLHmE6O/yrx42AOfnUj
- RKj31n2AA2FCw0PRlTz9K3CjIi14y6Aa1oSHYkWG9O7pIZfonkSPidwVJYzEzLhRXjBe
- 8UkS9gou/UjckMPTJgupRLt87kfnxMI97VpVsRwVXM7uS8SEVBe9Awxd5yPKG5tetPoS
- meSzT5a7DD4ANpihVoFgdEH0eeGLsmZCc6s9iWJ56YpoIoS4jJRMrnCmOe9GmxvKPUXP
- daeA==
-X-Gm-Message-State: AOJu0YwOPFjAUt4J529f1NPsv0VzLfRCU7Mg1684rqXtZT8kPfZ3PhxL
- O5cXShJbyNLLExL2Ik5uVQCS8VylXo0LgPd6pI/VJQ==
-X-Google-Smtp-Source: AGHT+IFy4uhyF1TiZSEoQVHgBoCjdPsJ/qWA2LDNt8mUIyh0/sbMVCO79gqn22HEt0bPAUUG94I+ww==
-X-Received: by 2002:a25:5504:0:b0:d77:e0d4:5ef8 with SMTP id
- j4-20020a255504000000b00d77e0d45ef8mr14697895ybb.54.1693318453341; 
- Tue, 29 Aug 2023 07:14:13 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-4165-1a0d-2d73-76fa.res6.spectrum.com.
- [2603:6081:7b00:6400:4165:1a0d:2d73:76fa])
- by smtp.gmail.com with ESMTPSA id
- g18-20020a25b112000000b00d77bd2fe760sm2204990ybj.27.2023.08.29.07.14.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Aug 2023 07:14:12 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
-Subject: Re: [U-BOOT TEST HOOKS PATCH] travis-ci: Do not run TPM tests on
- Versal QEMU target
-Date: Tue, 29 Aug 2023 10:14:12 -0400
-Message-Id: <169331842918.3627164.9948982994480056113.b4-ty@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <add78a532efd5b822fe272f6440d923042b600f5.1693232991.git.michal.simek@amd.com>
-References: <add78a532efd5b822fe272f6440d923042b600f5.1693232991.git.michal.simek@amd.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wens@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id BB98665341;
+ Tue, 29 Aug 2023 14:34:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08A22C433C8;
+ Tue, 29 Aug 2023 14:34:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693319643;
+ bh=7Ov9Vkt+r9b703KHfq44Y2nAKp8xyWbWXPThX61E/uM=;
+ h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+ b=SI3nRyI8HEaaQSTXLX3PBizl7LvYFGn9znLgybPaY2l4p37uOdZeH/m8sg0mwigDT
+ 0njMT4VZN4qYtjedpmOdQaLRE8qHnBgSioqRdKoRBAxy5Hu9rZgCgnqDPvWMNVlxfW
+ jRVhWTdjV5Vt0UqghKD1USoNkU0fZyzjIk/1q+PPH9zGzSfoGfWFzIgrJ1Xv32NBKW
+ voA+jOiO2wCM3ccWXNqgDM6Q0fMHLvDJBxknZMKuRIVbZUkmvmX+3UC5BfftlZ+cCx
+ TquAk9HJkCKdasVPfC+OtPQNvrqgEbvCm9qx+DRValifO5YEEN6nLxa8uw5FgMDyh1
+ ogr5vt99kIYdQ==
+Received: by wens.tw (Postfix, from userid 1000)
+ id 7C56F5FA0F; Tue, 29 Aug 2023 22:34:00 +0800 (CST)
+Date: Tue, 29 Aug 2023 22:34:00 +0800
+From: Chen-Yu Tsai <wens@kernel.org>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Marc Zyngier <maz@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
+ u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
+Subject: Re: [PATCH] sunxi: psci: remove redundant initialization from
+ psci_arch_init
+Message-ID: <ZO4B2G8zzsLm+YZL@wens.tw>
+References: <20230531201520.15479-1-CFSworks@gmail.com>
+ <20230814213854.408962d5@slackpad.lan>
+ <CAGb2v645V85s49DRrKw8-TcR5e697D4nVp3QnPGDET46H49dZQ@mail.gmail.com>
+ <69909b61-f57e-fc91-43a5-0f4bd23609c9@gmail.com>
+ <86cyzaf6ie.wl-maz@kernel.org>
+ <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <297192f6-3635-e75c-98c6-43a04631ce2d@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,24 +75,86 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+(resent from kernel.org address)
 
-On Mon, 28 Aug 2023 16:29:53 +0200, Michal Simek wrote:
-> TPM is going to be enabled by default but QEMU doesn't model it over SPI
-> that's why disable it for xilinx_versal_virt_qemu target.
-> 
-> 
+On Tue, Aug 29, 2023 at 5:49 AM Sam Edwards <cfsworks@gmail.com> wrote:
+>
+> On 8/26/23 04:22, Marc Zyngier wrote:
+>
+> Hi Marc!
+>
+> > The GIC definitely has the NS bit routed to it. Otherwise, the secure
+> > configuration would just be an utter joke. Just try it.
+>
+> Thank you for your response. I'd like to revisit my prior point about
+> the distinction between the NS bit and AxPROT[1] bits in the context of
+> monitor mode: in monitor mode, the NS bit does not determine the
+> security state of the CPU core (monitor mode is always secure). But even
+> then, the NS bit is still significant for other purposes, such as to
+> bank accesses to certain CP15 registers -- and if I understand Chen-Yu
+> correctly, some GIC registers also. That would require a special NS bit
+> signal routed to the GIC so that it can distinguish between "secure,
+> NS=0" and "secure, NS=1" accesses, which is why I asked if such a thing
+> exists.
+>
+> I understand that the GIC is designed to be aware of the security state
+> (using the existing AxPROT[1] signals) so that it can protect the
+> sensitive registers. And unless I misunderstand, this seems to be the
+> point that you made here (my interpretation -- correct me if I'm wrong
+> -- is that you are using "NS bit" as a metonym for "security state").
+> However I must clarify that my question was to seek further information
+> from Chen-Yu about the possibility that NS is significant when accessing
+> the GIC, even in monitor mode. Alternatively, his point might be merely
+> highlighting that the GIC permits different types of access depending on
+> the CPU's security state, which aligns with the viewpoint you've reiterated.
+>
+> I apologize if my previous message didn't convey this context clearly
+> enough. My goal was to unravel this nuanced aspect of the NS bit when in
+> monitor mode, and to determine if NS needs to be getting set/cleared
+> during GIC setup to maneuver around the banking, or if the value of the
+> NS bit when in psci_arch_init() is truly of no consequence due to
+> monitor mode.
 
-Applied, thanks!
+Sorry for my previous misleading comment. The banked registers refer to
+the CP15 registers. From ARM's documentation [1]:
 
-[1/1] travis-ci: Do not run TPM tests on Versal QEMU target
-      commit: 3c736fb3a2c81d3ffc2ae22d3ee264651ad6a7f9
+When the processor is in Monitor mode, the processor is in Secure state
+regardless of the value of the SCR.NS bit. In Monitor mode, the SCR.NS
+bit determines whether the Secure Banked CP15 registers or Non-secure
+Banked CP15 registers are read or written using MRC or MCR instructions.
 
-Best regards,
--- 
-Tom
+[1] https://developer.arm.com/documentation/ddi0406/b/System-Level-Architecture/Virtual-Memory-System-Architecture--VMSA-/CP15-registers-for-a-VMSA-implementation/Effect-of-the-Security-Extensions-on-the-CP15-registers?lang=en#Cbbdffad
 
+> > Well, history is unfortunately against you on that front. Running on
+> > the secure side definitely was a requirement when this code was
+> > initially written, as the AW BSP *required* to run on the secure side.
+> >
+> > If that requirement is no more, great. But I don't think you can
+> > decide that unilaterally.
+>
+> I have no idea when/if this requirement was changed. It might have never
+> happened "formally": perhaps at some point, the SCR.NS=1 code got added
+> after the call to psci_arch_init(), breaking (that version of) the AW
+> BSP, and nobody ever complained or changed it back... so it stayed.
+
+There was never any BSP code for PSCI before this. This code was written
+by Marc in ARM assembly. I merely translated most of it to C code.
+The snippet to clear SCR.NS is there in the first commit,
+
+    d5db7024aafc sunxi: HYP/non-sec: add sun7i PSCI backend
+
+ChenYu
+
+> But we're starting to digress from what _this_ patch does. The intent
+> here is only to remove two lines of code that (we're discussing to
+> confirm) have no effect. I'm not touching the code that *actually*
+> determines the world into which monitor mode exits.
+>
+> Cheers,
+> Sam
