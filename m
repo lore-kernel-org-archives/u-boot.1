@@ -4,77 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D7BC83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 16:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88380C6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 16:29:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98BB086405;
-	Tue, 29 Aug 2023 18:17:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 990BF86415;
+	Tue, 29 Aug 2023 18:29:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ohwVJFch";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dl+aa2CC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D19FD863FD; Tue, 29 Aug 2023 18:17:27 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 40E8786415; Tue, 29 Aug 2023 18:29:15 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71264864ED
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 18:17:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E630D864F1
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 18:29:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-579de633419so52272987b3.3
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 09:17:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693325843; x=1693930643;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/qh6oJXkhlu4x0NCFrHIjmIdhlvlY38cz/l5+LeKX+A=;
- b=ohwVJFchLelSQuAJJb1E2f19VVEtmyJKN/RWeMdf8Obg62gA0ukK8t3BsFkM47sJcR
- a9jiCQVCilo3i+a9NkFgJqKemoxFwtKKCVPAPqZj+HCmxpSolyfB25LJx9MhbWco9W5J
- W7SWA8ariJs5RYWosI4wfEjiv0mAylueGiDA0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693325843; x=1693930643;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/qh6oJXkhlu4x0NCFrHIjmIdhlvlY38cz/l5+LeKX+A=;
- b=lLKSRWfyQQpMfd42e0FDwDWKndcHrICWRyKhdrYInJoPPL/Yf1B1MtsYdvQpgBmCLq
- FY8CKpudZZ3kBGZfcbzvLiRzgSQguC+sqpxSSklD8LSv+uSFAbdTQug6DZRVcxUOxecQ
- +NGjp+vvF6TUJ7PNpc92BN0BeSFfEJoV/oVJdWkHZtn8nV1XFnD0TjBMGdn6SE0/Vmk0
- JYtxRo+4FMXTCg/gukKZ86FutHJFFfyg9FZuVy5pe31jpdroUhHFUxZyAvvXV+HbVIeM
- vxMDYJmnoAE6PGe9wjLhCoYvJXIBPgpJUtjgIkdCjFKU37GRBz+zQ7t7wRKp+agGfwfR
- QnMQ==
-X-Gm-Message-State: AOJu0YzksfThe/k1lCZHPCEX4Cgrmnf3fRgOGyCUAh/L4UplXZHgTMVy
- sb/lPRGIOFImSZtdvjKqeJuCMQ==
-X-Google-Smtp-Source: AGHT+IH3PvlLrDUR/rAFS1iJdgoruT43pcv5hcKOJWxtzS6r1acnSy+OSiQL20cM38CPDxvn1V5Kug==
-X-Received: by 2002:a81:4917:0:b0:586:9cbb:eef4 with SMTP id
- w23-20020a814917000000b005869cbbeef4mr31521989ywa.2.1693325843089; 
- Tue, 29 Aug 2023 09:17:23 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-4165-1a0d-2d73-76fa.res6.spectrum.com.
- [2603:6081:7b00:6400:4165:1a0d:2d73:76fa])
- by smtp.gmail.com with ESMTPSA id
- d2-20020a0ddb02000000b0058cd7816bcbsm2827665ywe.17.2023.08.29.09.17.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Aug 2023 09:17:22 -0700 (PDT)
-Date: Tue, 29 Aug 2023 12:17:20 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] doc: describe Kconfig fragments
-Message-ID: <20230829161720.GF3953269@bill-the-cat>
-References: <20230829065427.16727-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7605ce3122=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37TC1pbn002739; Tue, 29 Aug 2023 18:28:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=VVzjf21Dso9Z3rBfL/k6z0SPmOknPqiL6aHhwu0orSQ=; b=dl
+ +aa2CCKNspb08zywDM8wowkLo0ZU9m4gC7hJpK875vJ2nh+qS+fwKIp1dgBvcdjX
+ CvMTsHw8Fhng6tPqb+X7Q2njkH0hov6pZ7pnFJ/q1l49EajScgyTVbmXqPIc0eqj
+ 0IGDXKri+zLEQ+8hE3wwOvcaR7wry4vIhq44LGgcvWN61Vq2psxDvUqi1XH+delc
+ 4negsJJgvkNo2sSRRy2Z1+e/P3MiEaLZ5GEvE1+/O9jZLSLvEbiOUUk/ADKqABpj
+ ovwWihquWdi9Jtxu1DyXWPxDmBRIxcDG6HFDgzAyqVHp6NQXHvGhrJd1iklPcXGt
+ vIUehl5CeXQvH0VDtTiw==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq89bw3pn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 29 Aug 2023 18:28:54 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A679A100057;
+ Tue, 29 Aug 2023 18:28:52 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9E8D820F578;
+ Tue, 29 Aug 2023 18:28:52 +0200 (CEST)
+Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 29 Aug
+ 2023 18:28:51 +0200
+Message-ID: <8091c4f9-a0ce-aa69-098f-2effdb68ffdb@foss.st.com>
+Date: Tue, 29 Aug 2023 18:28:50 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ozPWgasOB8Lg5hE5"
-Content-Disposition: inline
-In-Reply-To: <20230829065427.16727-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 6/6] stm32mp15: Use u-boot-spl-stm32.bin instead of
+ u-boot-spl.stm32
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, Simon Glass
+ <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Dillon Min
+ <dillon.minfei@gmail.com>, Kamil Lulko <kamil.lulko@gmail.com>, Patrice
+ Chotard <patrice.chotard@foss.st.com>,
+ Vikas Manocha <vikas.manocha@st.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <20230824030304.1555547-7-sjg@chromium.org>
+ <3ab486b0-be22-48b9-7417-742ed8360f0f@denx.de>
+ <20230824142505.GM3953269@bill-the-cat>
+ <4cbffed6-6a07-1a56-bf10-7303e2aff78b@denx.de>
+ <20230824151419.GU3953269@bill-the-cat>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230824151419.GU3953269@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-29_13,2023-08-29_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,48 +100,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---ozPWgasOB8Lg5hE5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 8/24/23 17:14, Tom Rini wrote:
+> On Thu, Aug 24, 2023 at 05:09:07PM +0200, Marek Vasut wrote:
+>> On 8/24/23 16:25, Tom Rini wrote:
+>>> On Thu, Aug 24, 2023 at 05:12:45AM +0200, Marek Vasut wrote:
+>>>> On 8/24/23 05:02, Simon Glass wrote:
+>>>>> A '.stm32' extension is not allowed anymore, so change it.
+>>>> Why?
+>>>>
+>>>> This will likely break a huge amount of scripts, I'm tempted to NAK it
+>>>> unless there is a very good reason.
+>>> This is in the cover letter.  Today, buildman --keep-outputs doesn't
+>>> actually keep the needed for booting outputs from a build for a number
+>>> of platforms.  Simon's response is to stop having a free-form list of
+>>> outputs. With I guess the caveat being ROM-defined names (for example,
+>>> we still keep "MLO" because that is the literal filename TI ROM looks
+>>> for on FAT partitions, on mos of their 32bit platforms).
+>> Why not just place the free-form files into some output/ directory and be
+>> done with it ? Then they can have whatever extension they want, as long as
+>> the output/ directory name is stable.
+> Yes, an alternative here is to just extend the list that's removed in
+> patch 2/6.
+>
 
-On Tue, Aug 29, 2023 at 08:54:27AM +0200, Heinrich Schuchardt wrote:
+The ".stm32" was choosen on output on mkimage to be aligned with:
 
-> In the 'Build with GCC' chapter mention Kconfig fragments and show how th=
-ey
-> are applied.
->=20
-> Adjust the formatting in the configuration section to consistently use
-> italics for file names.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  doc/build/gcc.rst | 35 ++++++++++++++++++++++++++++++-----
->  1 file changed, 30 insertions(+), 5 deletions(-)
+- all STMicroelectonics documentation  (for example 
+https://wiki.st.com/stm32mpu/wiki/STM32_header_for_binary_files)
 
-We should really restructure this file as there's very few gcc-specific
-parts and the rest is also true for clang.
+- the proposed scripts or files, in particular in the YOCTO generated 
+flashlayout files.
 
---=20
-Tom
+- this extension list expected by our tools: STM CubeProgrammer 
+(https://wiki.st.com/stm32mpu/wiki/STM32CubeProgrammer)
 
---ozPWgasOB8Lg5hE5
-Content-Type: application/pgp-signature; name="signature.asc"
+and Signing tools (https://wiki.st.com/stm32mpu/wiki/Signing_tool)
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTuGg0ACgkQFHw5/5Y0
-tyzltgv/b6Yi8USP2jl8x8gVUmXL6nxp7y8Q3RTA8wvAPPAnm86UcNsKEqrYq/vJ
-Fjvi/RZf8gW2bQJWqj5YwpDP3qugwNysSRxJYkrHucTdWIO3mXvaa6kFljEJLYI+
-8BUNgf3OPzxuQdUzkpMPoo3WNUaytKYDt471DMguXyPfH5UGmfG3jtYhg0baxieP
-DB3PGkSO2eJGPhSmzK5pvrGq9PXyopM7w+dMOq/9h/iB1rtohaW3e4G7ynalT34x
-EbRu5XGSp/k/wvRupVcdjBxvKWpbyQpL8l1yoir04Mr7ANVeOqmhI5ULAu1rEt5I
-hSr/Mck8dSveq1YN/6sXjloshKZfjURQ+21uj5tFW9JyQXc2Ay3rKt3DVDmpK0hh
-aitp5weRtrom6pMIZqmG4+8a0Z2ojFFoG0E8YEaCAuOyhOBQurog5e9gbVg5cAmX
-PQGKFi0JthH++ZvtAmN33FKKpEwAbssImXNYzUzCZjI9aMs3Zb4X1IO7FbLsSZKX
-DMS0dd/w
-=zj6A
------END PGP SIGNATURE-----
+So I prefer to kept the ".stm32" extension here:
 
---ozPWgasOB8Lg5hE5--
+	filename = "u-boot-spl.stm32"
+
+
+NB: the justification for buildman '-k' option seens not fully relevant here
+
+        because in patch 2/6 you kept not only the ALLOWED extension but 
+also some particular files
+
++                to_copy = ['u-boot*', '*.map', 'MLO', 'SPL',
++                           'include/autoconf.mk', 'spl/u-boot-spl*']
++                to_copy += [f'*{ext}' for ext in ALLOWED_EXTS]
+
+
+so all the files "u-boot*" are kept with buildman -k even if it is not a 
+allowed extension.
+
+
+I propose to change the patch 1/6 if you are agree
+
+and allow binman to generate the file with same rules than buildman -k 
+option in patch 2/6
+
+
+The filename is valid if
+
+- the file is named with the allowed prefix 'u-boot' => 'u-boot*' so 
+"u-boot-spl.stm32" is allowed
+
+- the file is with allowed extension =>.bin, .rom, .itb, .img
+
+
+Regards
+
+
+Patrick
+
+
