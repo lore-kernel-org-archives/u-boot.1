@@ -4,64 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D584C71153
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 04:21:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868F7C83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 04:28:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 134C4864CE;
-	Tue, 29 Aug 2023 06:21:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BFFD9864C8;
+	Tue, 29 Aug 2023 06:28:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pXK/CMOY";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="tCoHI0/5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71DED864D7; Tue, 29 Aug 2023 06:21:18 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 5527880282; Tue, 29 Aug 2023 06:28:41 +0200 (CEST)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3904864D2
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 06:21:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A85B864DA
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 06:28:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37T4LBFo093401;
- Mon, 28 Aug 2023 23:21:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693282871;
- bh=v+xbFYfCcfHSSpUAWcYxPVWcvet0mBWN4QAPN/k7iSw=;
- h=From:To:CC:Subject:Date;
- b=pXK/CMOY8sPXDP38aEXqsbjUuuIiMa99Ii3IfIIMh0xLi9fKkHofdRe/Vx/gvllAl
- EwBl5uvqW9u/IO6XkNzHdBxY6Aao60d1bGwZvYwfVsUTXRGaeYo1YjLPmxcsUy99PI
- BLyLnnYeNaNrSoP3ODuxtXpiYHhJlFZKVFHsnJ8k=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37T4LBKA099517
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 28 Aug 2023 23:21:11 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 28
- Aug 2023 23:21:11 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 28 Aug 2023 23:21:10 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37T4L8hq086570;
- Mon, 28 Aug 2023 23:21:09 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <jagan@amarulasolutions.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>, Apurva
- Nandan <a-nandan@ti.com>
-Subject: [PATCH] spi: cadence_qspi: Select flash subnode at runtime
-Date: Tue, 29 Aug 2023 09:51:06 +0530
-Message-ID: <20230829042106.1371621-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20230829042833epoutp02dbf970751404bcb5ec36c44d177f3d5a~-wDO2L4fd3171831718epoutp023
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 04:28:33 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20230829042833epoutp02dbf970751404bcb5ec36c44d177f3d5a~-wDO2L4fd3171831718epoutp023
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1693283313;
+ bh=vVCzGpuGcztegABdNGE9jQA/roD3yvAucjjwgQPx0oA=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=tCoHI0/5mSvqe0dpLgrq8Ckqy/jt8w62gYpafAX1Re1YbKeKwAqzAXXBAQA9Yex/D
+ oRXeRlhOQaXrnIAc4dR+pYltyUgBDHjCno0iUIaeE2YnQE+zTlMT5UbSu3n7lpPEls
+ QsUyVhCQoR9neHRV/TRpaS3nNjz0x3n/XFQYbmWc=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTP id
+ 20230829042832epcas2p2ca69f3c7f922be06b1a0de6b73c9d740~-wDN_DgF-1643816438epcas2p24;
+ Tue, 29 Aug 2023 04:28:32 +0000 (GMT)
+Received: from epsmges2p1.samsung.com (unknown [182.195.36.89]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4RZZDb3Cjrz4x9Q7; Tue, 29 Aug
+ 2023 04:28:31 +0000 (GMT)
+Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
+ epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ E6.ED.09693.FE37DE46; Tue, 29 Aug 2023 13:28:31 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20230829042831epcas2p4a8a4cd85cdfe73e8dac914b274d5c351~-wDMzg1tF0766007660epcas2p4P;
+ Tue, 29 Aug 2023 04:28:31 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20230829042831epsmtrp2198a99cf7ac20db356802df6a25c9f08~-wDMy6z-t3146431464epsmtrp2W;
+ Tue, 29 Aug 2023 04:28:31 +0000 (GMT)
+X-AuditID: b6c32a45-84fff700000025dd-70-64ed73ef90d3
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ BE.52.18916.EE37DE46; Tue, 29 Aug 2023 13:28:30 +0900 (KST)
+Received: from cometzero-ubuntu..
+ (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20230829042830epsmtip2ceed185d2ddc3347dc98e632a990409a~-wDMmsgyk2146521465epsmtip2E;
+ Tue, 29 Aug 2023 04:28:30 +0000 (GMT)
+From: Chanho Park <chanho61.park@samsung.com>
+To: Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, Marek
+ Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Chanho Park <chanho61.park@samsung.com>
+Subject: [PATCH v2] spl: bootstage: move bootstage_stash before jumping to
+ image
+Date: Tue, 29 Aug 2023 13:28:03 +0900
+Message-Id: <20230829042803.2606011-1-chanho61.park@samsung.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrMKsWRmVeSWpSXmKPExsWy7bCmme774rcpBj/uilpc3q9t8aatkdGi
+ //9zJotvW7YxWrzd28nuwOoxu+Eii8e8WSdYPM7e2cHo0bdlFaPH8RvbmQJYo7JtMlITU1KL
+ FFLzkvNTMvPSbZW8g+Od403NDAx1DS0tzJUU8hJzU22VXHwCdN0yc4CWKymUJeaUAoUCEouL
+ lfTtbIryS0tSFTLyi0tslVILUnIKzAv0ihNzi0vz0vXyUkusDA0MjEyBChOyM9Zd6GIteCJc
+ 0XziNVsD4yaBLkZODgkBE4m7N46zdDFycQgJ7GCUWPd1BiuE84lR4uWHg4xwzpaD15hgWr7v
+ WM8EkdjJKPH3UgdU1TQmieeXv4JVsQnoSmx5/goowcEhIlAusXiXDUiYWUBbovPzFHYQW1gg
+ SGL9pp+MIDaLgKrEpgnbmEFsXgEHiTvTT7KBtEoIyEssfiABERaUODnzCQvEGHmJ5q2zmUHW
+ SgjsYpfY+2A/G8RxLhJ7Xr5ih7CFJV4d3wJlS0l8frcXama5xI5lSRC9LYwSzW17mCFq7CV+
+ 3JzCClLDLKApsX6XPkS5ssSRW1Br+SQ6Dv9lhwjzSnS0CUE0qksc2D6dBcKWleie85kVwvaQ
+ 2NpwAOxBIYFYiRlbLrNNYJSfheSZWUiemYWwdwEj8ypGsdSC4tz01GKjAkN4lCbn525iBKc+
+ LdcdjJPfftA7xMjEwXiIUYKDWUmE95LjqxQh3pTEyqrUovz4otKc1OJDjKbA0J3ILCWanA9M
+ vnkl8YYmlgYmZmaG5kamBuZK4rz3WuemCAmkJ5akZqemFqQWwfQxcXBKNTBZ3F3q3nTR+Gbv
+ 9TCzbcIuN/2Ybx55ss0mNEylcFGZzQaWtgBh7usL9D7Oybfr/ZuvZD4t0Efy84uCbo6TDiGX
+ rFfbPmB3/V5V7LB+S/KP9IvOG3l0NpZHpU1rfrF/wp57jzxevTygL++j5bi4/5WX98bAxPtN
+ hjtjVe9beaZsf6/b5nr3Rd7hdw72aQtXmJaFH+oW70jrqfKp2Mi3s2kP39nIg/vWLrF3Mfyq
+ eiNYj/fhlHX/2LZZz3MO5WvLtL8zVfj39QUPJ20T7Don3rw5YuVzhYbzf5Zs6D+/T+f19ZKl
+ ZlLihvtz/696qrpHa0r/Wq/WVQnrj3Qwc/XLztn8ViFdOFM56ub3Evmd8Z+UWIozEg21mIuK
+ EwGZV/YaBgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprPLMWRmVeSWpSXmKPExsWy7bCSvO674rcpBm+7rCwu79e2eNPWyGjR
+ //85k8W3LdsYLd7u7WR3YPWY3XCRxWPerBMsHmfv7GD06NuyitHj+I3tTAGsUVw2Kak5mWWp
+ Rfp2CVwZ6y50sRY8Ea5oPvGarYFxk0AXIyeHhICJxPcd65m6GLk4hAS2M0o0dc5gg0jISjx7
+ t4MdwhaWuN9yhBWiaBKTROf5t2AJNgFdiS3PXzF2MXJwiAhUS5zZow4SZhbQluj8PAWsRFgg
+ QOL1hxksIDaLgKrEpgnbmEFsXgEHiTvTT7KBtEoIyEssfiABERaUODnzCQvEGHmJ5q2zmScw
+ 8s1CkpqFJLWAkWkVo2hqQXFuem5ygaFecWJucWleul5yfu4mRnAYagXtYFy2/q/eIUYmDsZD
+ jBIczEoivJccX6UI8aYkVlalFuXHF5XmpBYfYpTmYFES51XO6UwREkhPLEnNTk0tSC2CyTJx
+ cEo1MGX4KN+6973pc6a3b/bZo/vC1V5uOS8wv9IrzuiKUR6XYrnccXHWI5ebb4Z9f6x+3qvy
+ YI7BrH9F5uKMEQfzAj+raK37o8Aluqtqi06TcVL39YXfsyeVJ2x/Gq7yfMkN77ijMXMto79r
+ aCUfiP/1f64Ra7adYrtNXeXnV30/b4rz9QR8YOy80ygy7cxsIZnO9Aq+pbGiZ7fwnErUkplb
+ uOyUy7lvJRmtNdOPZQZJ31MM3npiidS3TvMjtfNdHlQcF+k4fuDSeo4Lfuw7nOO/um/Q5N29
+ P1Bgnv6h94vdPFaeqfIzFzG0CvY+pi0xQe7iz/f5F0Vf6001k1OaeLj/xIxMzklVn+Z3v1fm
+ a/P6rMRSnJFoqMVcVJwIAMX5pFKyAgAA
+X-CMS-MailID: 20230829042831epcas2p4a8a4cd85cdfe73e8dac914b274d5c351
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230829042831epcas2p4a8a4cd85cdfe73e8dac914b274d5c351
+References: <CGME20230829042831epcas2p4a8a4cd85cdfe73e8dac914b274d5c351@epcas2p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,68 +132,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently spi driver gets flash parameter from first subnode.
+Regarding IH_OS_OPENSBI, IH_OS_LINUX and IH_OS_TEE, there is no chance
+to stash bootstage record because they do not return to SPL after
+jumping to the image.
+Hence, this patch separates the final stage bootstage code into
+spl_bootstage_finish and call the function before jumping to the image.
 
-Few boards have more than one flash with different parameters
-and selection of flash is done by on board switch settings.
-In such case, uboot needs to be recompiled with updated
-device tree to align with board switch settings.
-
-This patch allows to select flash node at runtime.
-
-Boards those are supporting multiple flashes
-needs to implement cadence_qspi_get_subnode function and return correct
-flash node.
-
-Cc: Apurva Nandan <a-nandan@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 ---
-One of such platform is J721S2 EVM
-link https://www.ti.com/lit/pdf/spruj67
-Fig 3.1, Page 18 has details of two flashes connected with
-one controller.
+Changes from v1
+- Separate the final stage bootstage code into spl_bootstage_finish.
+- As Simon suggests, call the function before jumping to the image.
 
- drivers/spi/cadence_qspi.c | 7 ++++++-
- drivers/spi/cadence_qspi.h | 1 +
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ common/spl/spl.c | 24 +++++++++++++++++-------
+ 1 file changed, 17 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-index cc3a54f295..7a02ceed10 100644
---- a/drivers/spi/cadence_qspi.c
-+++ b/drivers/spi/cadence_qspi.c
-@@ -40,6 +40,11 @@ __weak int cadence_qspi_versal_flash_reset(struct udevice *dev)
- 	return 0;
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 0062f3f45d9a..eaf2f076ddd1 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -738,6 +738,19 @@ void board_init_f(ulong dummy)
  }
+ #endif
  
-+__weak ofnode  cadence_qspi_get_subnode(struct udevice *dev)
++static void spl_bootstage_finish(void)
 +{
-+	return dev_read_first_subnode(dev);
++	int ret;
++
++	bootstage_mark_name(get_bootstage_id(false), "end phase");
++#ifdef CONFIG_BOOTSTAGE_STASH
++	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
++			      CONFIG_BOOTSTAGE_STASH_SIZE);
++	if (ret)
++		debug("Failed to stash bootstage: err=%d\n", ret);
++#endif
 +}
 +
- static int cadence_spi_write_speed(struct udevice *bus, uint hz)
+ void board_init_r(gd_t *dummy1, ulong dummy2)
  {
- 	struct cadence_spi_priv *priv = dev_get_priv(bus);
-@@ -401,7 +406,7 @@ static int cadence_spi_of_to_plat(struct udevice *bus)
- 	plat->is_dma = dev_read_bool(bus, "cdns,is-dma");
+ 	u32 spl_boot_list[] = {
+@@ -865,12 +878,14 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	case IH_OS_TEE:
+ 		debug("Jumping to U-Boot via OP-TEE\n");
+ 		spl_board_prepare_for_optee(spl_image.fdt_addr);
++		spl_bootstage_finish();
+ 		jump_to_image_optee(&spl_image);
+ 		break;
+ #endif
+ #if CONFIG_IS_ENABLED(OPENSBI)
+ 	case IH_OS_OPENSBI:
+ 		debug("Jumping to U-Boot via RISC-V OpenSBI\n");
++		spl_bootstage_finish();
+ 		spl_invoke_opensbi(&spl_image);
+ 		break;
+ #endif
+@@ -881,6 +896,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		spl_fixup_fdt((void *)CONFIG_SYS_SPL_ARGS_ADDR);
+ #endif
+ 		spl_board_prepare_for_linux();
++		spl_bootstage_finish();
+ 		jump_to_image_linux(&spl_image);
+ #endif
+ 	default:
+@@ -890,13 +906,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
+ 	      gd->malloc_ptr / 1024);
+ #endif
+-	bootstage_mark_name(get_bootstage_id(false), "end phase");
+-#ifdef CONFIG_BOOTSTAGE_STASH
+-	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+-			      CONFIG_BOOTSTAGE_STASH_SIZE);
+-	if (ret)
+-		debug("Failed to stash bootstage: err=%d\n", ret);
+-#endif
++	spl_bootstage_finish();
  
- 	/* All other parameters are embedded in the child node */
--	subnode = dev_read_first_subnode(bus);
-+	subnode = cadence_qspi_get_subnode(bus);
- 	if (!ofnode_valid(subnode)) {
- 		printf("Error: subnode with SPI flash config missing!\n");
- 		return -ENODEV;
-diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
-index 1c59d1a9d9..12825f8911 100644
---- a/drivers/spi/cadence_qspi.h
-+++ b/drivers/spi/cadence_qspi.h
-@@ -304,6 +304,7 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv *priv,
- int cadence_qspi_apb_wait_for_dma_cmplt(struct cadence_spi_priv *priv);
- int cadence_qspi_apb_exec_flash_cmd(void *reg_base, unsigned int reg);
- int cadence_qspi_versal_flash_reset(struct udevice *dev);
-+ofnode cadence_qspi_get_subnode(struct udevice *dev);
- void cadence_qspi_apb_enable_linear_mode(bool enable);
- 
- #endif /* __CADENCE_QSPI_H__ */
+ 	if (IS_ENABLED(CONFIG_SPL_VIDEO_REMOVE)) {
+ 		struct udevice *dev;
 -- 
-2.34.1
+2.39.2
 
