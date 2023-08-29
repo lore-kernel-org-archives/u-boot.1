@@ -4,50 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84867C83F14
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 07:32:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90313C83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 07:44:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA60E864F5;
-	Tue, 29 Aug 2023 09:32:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id A1DC1864C8;
+	Tue, 29 Aug 2023 09:44:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=huaqian.li@siemens.com header.b="c8sTCtD2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20221208.gappssmtp.com header.i=@baylibre-com.20221208.gappssmtp.com header.b="M6uoM0Jj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3028786420; Tue, 29 Aug 2023 05:46:53 +0200 (CEST)
-Received: from mta-65-228.siemens.flowmailer.net
- (mta-65-228.siemens.flowmailer.net [185.136.65.228])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5EAD3864D2; Tue, 29 Aug 2023 09:44:00 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45BA0864D2
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 05:46:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFD28864C7
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 09:43:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=huaqian.li@siemens.com
-Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id
- 20230829034649d1babc939b87fbb100 for <u-boot@lists.denx.de>;
- Tue, 29 Aug 2023 05:46:49 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=huaqian.li@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=ltJuHlzU22xPhXZ5o2wA6aNzvoirXph4y6LKnsiY6cE=;
- b=c8sTCtD2v2kNMPZpI0dSLT/fshoRL8E0HmUCxeit3e4hnqhKB0hIMVSEBXvN9MWaqg4Mn+
- Pu+626UkONV41VoogeKbt0PdTTEfvYCLW0QgLob6RAJLNtOUCVBClsszUtIzE8RBew+s4Vfs
- 6Ho97rAkKzY2oBvm0ubZb4YhHSo30=;
-From: huaqian.li@siemens.com
-To: u-boot@lists.denx.de
-Cc: huaqianlee@gmail.com, jan.kiszka@siemens.com, baocheng.su@siemens.com,
- lokeshvutla@ti.com, Li Hua Qian <huaqian.li@siemens.com>
-Subject: [PATCH 1/1] Watchdog: Support WDIOF_CARDRESET on TI AM65x platform
-Date: Tue, 29 Aug 2023 11:46:21 +0800
-Message-Id: <20230829034620.119207-1-huaqian.li@siemens.com>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-401b393ddd2so38325405e9.0
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 00:43:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20221208.gappssmtp.com; s=20221208; t=1693295037; x=1693899837; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=PIeNMto0FBhskR/5HpxPZklpML7aTeauwTQYgSK9txw=;
+ b=M6uoM0JjOxvr5IrdvXDJKH82SX6Za5H6hlafBjBWbS3si602z/EOIcZx00FF2TW8c9
+ AyJDfIgVjcsp0XQSdVL+OPgBwtIi4ueuRX+hR7Zx5ZWfr4YY7AnB6/nDnHE2C8g/szZ+
+ LHFuiicccmTxDfMHzRbeCCkmjUxQbWPpAIkuGlskL74bQnp5smyJO6Voe0H/Rz80SSfk
+ qgLrwR3MDO0nJs8Dm4Qvo4CFz0zAkOV4i1cQtvFWesmefIQO7oAK4b8/d+/olJ0j1VFj
+ NTSUxWCWf5MWKqnexu2JKnHbQKewxh2sm4F7GDpxgoGyoPFQSKlJhLtJhdoq97nOSXut
+ fajA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693295037; x=1693899837;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PIeNMto0FBhskR/5HpxPZklpML7aTeauwTQYgSK9txw=;
+ b=KmFqkkV4lcxbTfxWEzdppZQSylYoUmEmGBfrUiq6ywIut33Cjkb1SU9svWVRUiYvbW
+ b/w9MX4wY75ctmIlOZstozLaM/05TpC5KDT4fwN0wyM1TZ3zmTaCRD2nKsvyEh8dNfNm
+ n75etBCv/NGiMCIyLGQcIj0FYyA5EpRC+5r+PRYBpWzsxot0bdx91g3bdSEq4cPfFVDK
+ 0spele7jarYt+kmhKtxXH0TtanVmclSpCIOHsGOniViYwxc3A+U8hzHTRDYyc3YfIarb
+ 4QRKGEhSbpWBmAaAUcNDGOv0O6KoIqPrvbazDE68jO9nzdLY+o4t8xar3cjUS5JD5Ivf
+ KyOg==
+X-Gm-Message-State: AOJu0YyVUfRJpRXCvTF5T8JtgM8uxD5SiKMlAPD47WgCSN3GnRhOO1hC
+ OmNkmwxSYvry6lsZy+wgdOwIyQ==
+X-Google-Smtp-Source: AGHT+IEuNECSWpbgRncz/NyAhaByW5LynTaH3vEKoLy/WmEcMgS7MCllzaQYPKIlpeZZYY6livpRbg==
+X-Received: by 2002:a05:600c:21d5:b0:401:b6f6:d90c with SMTP id
+ x21-20020a05600c21d500b00401b6f6d90cmr8516247wmj.35.1693295036931; 
+ Tue, 29 Aug 2023 00:43:56 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ h14-20020a05600c260e00b003fefb94ccc9sm12971189wma.11.2023.08.29.00.43.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Aug 2023 00:43:56 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marcel Ziswiler <marcel@ziswiler.com>, u-boot@lists.denx.de
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, Emanuele Ghidoli
+ <emanuele.ghidoli@toradex.com>, Nishanth Menon <nm@ti.com>, Marcel
+ Ziswiler <marcel.ziswiler@toradex.com>
+Subject: Re: [PATCH v1] include: configs: verdin-am62: drop unused sdram
+ address
+In-Reply-To: <20230828215037.482278-1-marcel@ziswiler.com>
+References: <20230828215037.482278-1-marcel@ziswiler.com>
+Date: Tue, 29 Aug 2023 09:43:55 +0200
+Message-ID: <877cpeb8ec.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-959203:519-21489:flowmailer
-X-Mailman-Approved-At: Tue, 29 Aug 2023 09:32:30 +0200
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,50 +92,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Li Hua Qian <huaqian.li@siemens.com>
+Hi Marcel,
 
-To have the WDIOF_CARDRESET support for the TI AM65x platform watchdog,
-this patch reserves some memories, which indicate if the current boot due
-to a watchdog reset.
+Thank you for following up this quickly on this.
 
-Signed-off-by: Li Hua Qian <huaqian.li@siemens.com>
+On lun., ao=C3=BBt 28, 2023 at 23:50, Marcel Ziswiler <marcel@ziswiler.com>=
+ wrote:
 
----
-Here is the Kernel Reviewed-by Submission:
-  https://lore.kernel.org/all/20230718021007.1338761-1-huaqian.li@siemens.com/
+> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>
+> Drop unused macro. This was copied straight from the AM62x EVM but while
+> meant for a second region of DDR this is not even needed for the AM62x
+> EVM configurations and has meanwhile also been dropped there.
+>
+> Note that on the Verdin AM62, we do auto-detect the amount of SDRAM.
+>
+> While at it also update the comment noting that CFG_SYS_SDRAM_SIZE is
+> the maximum which is only used for such auto-detection.
+>
+> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
- arch/arm/dts/k3-am65-iot2050-common.dtsi | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-diff --git a/arch/arm/dts/k3-am65-iot2050-common.dtsi b/arch/arm/dts/k3-am65-iot2050-common.dtsi
-index 65da226847..b6135b849f 100644
---- a/arch/arm/dts/k3-am65-iot2050-common.dtsi
-+++ b/arch/arm/dts/k3-am65-iot2050-common.dtsi
-@@ -64,6 +64,12 @@
- 			alignment = <0x1000>;
- 			no-map;
- 		};
-+
-+		/* To reserve the power-on(PON) reason for watchdog reset */
-+		wdt_reset_memory_region: wdt-memory@a2200000 {
-+			reg = <0x00 0xa2200000 0x00 0x00001000>;
-+			no-map;
-+		};
- 	};
- 
- 	leds {
-@@ -720,6 +726,11 @@
- 	mboxes = <&mailbox0_cluster1 &mbox_mcu_r5fss0_core1>;
- };
- 
-+&mcu_rti1 {
-+	memory-region = <&wdt_reset_memory_region>;
-+
-+};
-+
- &icssg0_mdio {
- 	status = "disabled";
- };
--- 
-2.34.1
-
+>
+> ---
+>
+>  include/configs/verdin-am62.h | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/include/configs/verdin-am62.h b/include/configs/verdin-am62.h
+> index 7990ea83102..e1a5f5ad44b 100644
+> --- a/include/configs/verdin-am62.h
+> +++ b/include/configs/verdin-am62.h
+> @@ -13,8 +13,7 @@
+>=20=20
+>  /* DDR Configuration */
+>  #define CFG_SYS_SDRAM_BASE	0x80000000
+> -#define CFG_SYS_SDRAM_BASE1	0x880000000
+> -#define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size */
+> +#define CFG_SYS_SDRAM_SIZE	SZ_2G /* Maximum supported size, auto-detecti=
+on is used */
+>=20=20
+>  #define MEM_LAYOUT_ENV_SETTINGS \
+>  	"fdt_addr_r=3D0x90200000\0" \
+> --=20
+> 2.36.1
