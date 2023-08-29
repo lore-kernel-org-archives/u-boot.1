@@ -4,47 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7B6C83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 20:33:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE22C83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 20:37:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D52B986518;
-	Tue, 29 Aug 2023 22:32:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6D6BE86511;
+	Tue, 29 Aug 2023 22:37:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="I9BfN5FF";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="NtFfoYHN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9201F863FD; Tue, 29 Aug 2023 22:32:20 +0200 (CEST)
+ id 9E56686525; Tue, 29 Aug 2023 22:37:14 +0200 (CEST)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 0A46386513
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 22:32:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 08D7E863FD
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 22:37:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 4A6BE2129BF5;
- Tue, 29 Aug 2023 13:32:12 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 4A6BE2129BF5
+ by linux.microsoft.com (Postfix) with ESMTPSA id 460942129BE3;
+ Tue, 29 Aug 2023 13:37:11 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 460942129BE3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1693341132;
- bh=GgdvRrBRuzt6akyBcwaxmqyRdiCcmj5Ugv/p6YS6WA8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=I9BfN5FFqOWpFDPsJTwLyBmh/2QnAsmkPXMCxWaUscbLAqXxGIUidiuUjPXc+yNuP
- Rn+C+2ODTl4XUHhjHoFluKIfBqtZJnPCOLYagGSJQeTjaWozoO9aSh+Ut6AZRn3Hy5
- QAapf+5AQEdt2hTyucV2CYkML9/patzFcfLA+fSE=
+ s=default; t=1693341431;
+ bh=yx8+WTRPtUUMfnaCHOkSuVJeFCuT7J/zya/QyT1shUI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=NtFfoYHNG+WTtawBQS9zu8KLMZQvvisXI3knuro/EEa1xNXPU+F/w2vYlCajGgpkW
+ v6CqgF4bBUtbASWJIToVyPmb7srt1toj6iS6/R+kpY//lGU5THuSVNItf6Y7OO1zB1
+ OGo/5KPbsMDfF4xBddB2feidpVX4K6rkO7VzXtUI=
 From: seanedmond@linux.microsoft.com
 To: u-boot@lists.denx.de
 Cc: dphadke@linux.microsoft.com,
 	macromorgan@hotmail.com,
 	sjg@chromium.org
-Subject: [PATCH v2 1/4] fdt: common API to populate kaslr seed
-Date: Tue, 29 Aug 2023 13:32:07 -0700
-Message-Id: <20230829203210.83914-6-seanedmond@linux.microsoft.com>
+Subject: [PATCH v2 0/4] Populate kaslr seed with TPM
+Date: Tue, 29 Aug 2023 13:37:06 -0700
+Message-Id: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230829203210.83914-1-seanedmond@linux.microsoft.com>
-References: <20230829203210.83914-1-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -63,195 +61,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+From: Sean Edmond <seanedmond@microsoft.com>
 
-fdt_fixup_kaslr_seed() will update given ofnode with random seed value.
-Source for random seed can be TPM or RNG driver in u-boot or sec
-firmware (ARM).
+This patch series creates a common API (fdt_fixup_kaslr_seed()) for 
+populating the kaslr seed in the DTB.  Existing users (kaslrseed,
+and ARMv8 sec firmware) have been updated to use this common API.
 
-Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
-Signed-off-by: Sean Edmond <senaedmond@microsoft.com>
----
- arch/arm/cpu/armv8/sec_firmware.c | 39 +++++++++++--------------------
- common/fdt_support.c              | 19 +++++++++++++++
- drivers/core/ofnode.c             | 17 ++++++++++++++
- include/dm/ofnode.h               | 12 ++++++++++
- include/fdt_support.h             |  9 +++++++
- 5 files changed, 71 insertions(+), 25 deletions(-)
+New functionality has been introduced to populate the kaslr using
+the TPM interface.  This can be enabled with CONFIG_KASLR_TPM_SEED.  
 
-diff --git a/arch/arm/cpu/armv8/sec_firmware.c b/arch/arm/cpu/armv8/sec_firmware.c
-index c0e8726346..5f04cd8aec 100644
---- a/arch/arm/cpu/armv8/sec_firmware.c
-+++ b/arch/arm/cpu/armv8/sec_firmware.c
-@@ -411,46 +411,35 @@ int sec_firmware_init(const void *sec_firmware_img,
- /*
-  * fdt_fix_kaslr - Add kalsr-seed node in Device tree
-  * @fdt:		Device tree
-- * @eret:		0 in case of error, 1 for success
-+ * @eret:		0 for success
-  */
- int fdt_fixup_kaslr(void *fdt)
- {
--	int nodeoffset;
--	int err, ret = 0;
--	u8 rand[8];
-+	int ret = 0;
- 
- #if defined(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT)
-+	u8 rand[8];
-+	ofnode root;
-+
- 	/* Check if random seed generation is  supported */
- 	if (sec_firmware_support_hwrng() == false) {
- 		printf("WARNING: SEC firmware not running, no kaslr-seed\n");
--		return 0;
-+		return -EOPNOTSUPP;
- 	}
- 
--	err = sec_firmware_get_random(rand, 8);
--	if (err < 0) {
-+	ret = sec_firmware_get_random(rand, 8);
-+	if (ret < 0) {
- 		printf("WARNING: No random number to set kaslr-seed\n");
--		return 0;
-+		return ret;
- 	}
- 
--	err = fdt_check_header(fdt);
--	if (err < 0) {
--		printf("fdt_chosen: %s\n", fdt_strerror(err));
--		return 0;
-+	ret = root_ofnode_from_fdt(fdt, &root);
-+	if (ret < 0) {
-+		printf("WARNING: Unable to get root ofnode\n");
-+		return ret;
- 	}
- 
--	/* find or create "/chosen" node. */
--	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
--	if (nodeoffset < 0)
--		return 0;
--
--	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", rand,
--				  sizeof(rand));
--	if (err < 0) {
--		printf("WARNING: can't set kaslr-seed %s.\n",
--		       fdt_strerror(err));
--		return 0;
--	}
--	ret = 1;
-+	ret = fdt_fixup_kaslr_seed(root, rand, sizeof(rand));
- #endif
- 
- 	return ret;
-diff --git a/common/fdt_support.c b/common/fdt_support.c
-index 5e49078f8c..52be4375b4 100644
---- a/common/fdt_support.c
-+++ b/common/fdt_support.c
-@@ -631,6 +631,25 @@ void fdt_fixup_ethernet(void *fdt)
- 	}
- }
- 
-+int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
-+{
-+	ofnode chosen;
-+	int ret;
-+
-+	/* find or create "/chosen" node. */
-+	ret = ofnode_add_subnode(node, "chosen", &chosen);
-+	if (ret && ret != -EEXIST)
-+		return -ENOENT;
-+
-+	ret = ofnode_write_prop(chosen, "kaslr-seed", seed, len, true);
-+	if (ret) {
-+		printf("WARNING: can't set kaslr-seed\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- int fdt_record_loadable(void *blob, u32 index, const char *name,
- 			uintptr_t load_addr, u32 size, uintptr_t entry_point,
- 			const char *type, const char *os, const char *arch)
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 8df16e56af..4be21133b8 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -870,6 +870,23 @@ ofnode oftree_path(oftree tree, const char *path)
- 	}
- }
- 
-+int root_ofnode_from_fdt(void *fdt, ofnode *root_node)
-+{
-+	oftree tree;
-+	/* If OFNODE_MULTI_TREE is not set, and if fdt is not the control FDT,
-+	 *  oftree_from_fdt() will return NULL
-+	 */
-+	tree = oftree_from_fdt(fdt);
-+
-+	if (!oftree_valid(tree)) {
-+		printf("Cannot create oftree\n");
-+		return -EINVAL;
-+	}
-+	*root_node = oftree_root(tree);
-+
-+	return 0;
-+}
-+
- const void *ofnode_read_chosen_prop(const char *propname, int *sizep)
- {
- 	ofnode chosen_node;
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 0f38b3e736..e79bb62be8 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -901,6 +901,18 @@ ofnode oftree_path(oftree tree, const char *path);
-  */
- ofnode oftree_root(oftree tree);
- 
-+/**
-+ * root_ofnode_from_fdt() - Gets the root ofnode given an FDT blob.
-+ *                          Note, this will fail if OFNODE_MULTI_TREE
-+ *                          is not set.
-+ *
-+ * @fdt: Device tree to use
-+ * @root_node : Root ofnode
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int root_ofnode_from_fdt(void *fdt, ofnode *root_node);
-+
- /**
-  * ofnode_read_chosen_prop() - get the value of a chosen property
-  *
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index 2cd8366898..d967118bed 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -11,6 +11,7 @@
- 	!defined(USE_HOSTCC)
- 
- #include <asm/u-boot.h>
-+#include <dm/ofnode.h>
- #include <linux/libfdt.h>
- #include <abuf.h>
- 
-@@ -121,6 +122,14 @@ static inline int fdt_fixup_memory_banks(void *blob, u64 start[], u64 size[],
- #endif
- 
- void fdt_fixup_ethernet(void *fdt);
-+
-+/*
-+ * fdt_fixup_kaslr_seed - Add kaslr-seed node in Device tree
-+ * @node:		ofnode
-+ * @eret:		0 for success
-+ */
-+int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
-+
- int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
- 			 const void *val, int len, int create);
- void fdt_fixup_qe_firmware(void *fdt);
+changes in v2:
+- fdt_fixup_kaslr_seed() uses the ofnode API
+- Add root_ofnode_from_fdt() to get the root node from an FDT and
+  perform error checking on the oftree
+- add comments to exported functions
+- Add error checking in image_setup_libfdt() for return from
+  fdt_tpm_kaslr_seed()
+- uclass_get_device() -> uclass_first_device_err()
+- Change default config for OFNODE_MULTI_TREE (y if !OF_LIVE)
+
+Dhananjay Phadke (2):
+  fdt: common API to populate kaslr seed
+  fdt: kaslr seed from tpm entropy
+
+Sean Edmond (2):
+  cmd: kaslrseed: Use common API to fixup FDT
+  dm: core: Modify default for OFNODE_MULTI_TREE
+
+ arch/arm/cpu/armv8/sec_firmware.c | 39 +++++++++---------------
+ boot/image-fdt.c                  | 15 ++++++++++
+ cmd/kaslrseed.c                   | 22 +++++---------
+ common/fdt_support.c              | 49 +++++++++++++++++++++++++++++++
+ drivers/core/Kconfig              |  2 +-
+ drivers/core/ofnode.c             | 17 +++++++++++
+ include/dm/ofnode.h               | 12 ++++++++
+ include/fdt_support.h             | 17 +++++++++++
+ lib/Kconfig                       |  9 ++++++
+ 9 files changed, 142 insertions(+), 40 deletions(-)
+
 -- 
 2.40.0
 
