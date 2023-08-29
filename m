@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A318C83F14
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 16:01:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D7BC83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 16:17:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62A6886440;
-	Tue, 29 Aug 2023 18:01:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 98BB086405;
+	Tue, 29 Aug 2023 18:17:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C75zormY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ohwVJFch";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E328A8647B; Tue, 29 Aug 2023 18:01:22 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id D19FD863FD; Tue, 29 Aug 2023 18:17:27 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E37FD863FD
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 18:01:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71264864ED
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 18:17:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-4ff8f2630e3so7146296e87.1
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 09:01:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-579de633419so52272987b3.3
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 09:17:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693324879; x=1693929679;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0tc7Oq+vVun/0F0TYkBBZcQLVrPo7QJsVygXG4Fbb5A=;
- b=C75zormY29ZXEnMS0HuILcr+i3vv2IYTT61Gg+FzedECiPJ47OqKP0XncRxpBSyPJh
- kyg18zl15b6H+Hbk1qSXudMfOYAJ/AXHDLvkpwkucR9ZQokJ6sLW9HUmcuTMsr0Jlqu+
- vXstnR2fntcJfSznfJVwvnjJDqqPjXF97eeoE=
+ d=konsulko.com; s=google; t=1693325843; x=1693930643;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/qh6oJXkhlu4x0NCFrHIjmIdhlvlY38cz/l5+LeKX+A=;
+ b=ohwVJFchLelSQuAJJb1E2f19VVEtmyJKN/RWeMdf8Obg62gA0ukK8t3BsFkM47sJcR
+ a9jiCQVCilo3i+a9NkFgJqKemoxFwtKKCVPAPqZj+HCmxpSolyfB25LJx9MhbWco9W5J
+ W7SWA8ariJs5RYWosI4wfEjiv0mAylueGiDA0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693324879; x=1693929679;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0tc7Oq+vVun/0F0TYkBBZcQLVrPo7QJsVygXG4Fbb5A=;
- b=RXLHrK4P8BUE1hu5LJMo0oKYQz1uGfzgd9QD0AAGdAAhonLUYgUADUcm3xl2jilnTI
- JrxMBJsAjkkithim+8ItFIU3DeUgK2NGcR645vzfSj0H3mjDEHtWFfRSreXu22CabtHv
- piZcz9a2irS8Dxj0cP8iji2O3EXN9WJJZ9+M1WmUtpmlZR6BEOEh05DNZCNj+xoJgtKq
- ELc17e2rUa5VuovEpxpy8NZ1gkpVPur/mxzOpwtbdexUc8LNE9DbUn21dlkPZ+zh1p13
- ++/i8HIR2R2ut2lHv60+ltkTtUekJS6e1FrGNlHtf/IOGzeMu4k4qv0UwNrRnept1TZb
- u0lA==
-X-Gm-Message-State: AOJu0YzLdVIU52axFYAuHMEPHLo7/eS2Wu/9TqDUtE27FSbHuK3o8jkb
- 5jjmK6pvbYB0v65Zih2lqiJ8AXP78gaHmX3kw7XkQA==
-X-Google-Smtp-Source: AGHT+IE/RX9iizoSgqT2x/ebB3X+QfUbrpdl+J3+w25nxLY20nEDHwjRri4n6/cHqS87tJVCVdhQHRPnPZQMtqcKUuM=
-X-Received: by 2002:a05:6512:250e:b0:4f9:54f0:b6db with SMTP id
- be14-20020a056512250e00b004f954f0b6dbmr22767776lfb.13.1693324878784; Tue, 29
- Aug 2023 09:01:18 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693325843; x=1693930643;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/qh6oJXkhlu4x0NCFrHIjmIdhlvlY38cz/l5+LeKX+A=;
+ b=lLKSRWfyQQpMfd42e0FDwDWKndcHrICWRyKhdrYInJoPPL/Yf1B1MtsYdvQpgBmCLq
+ FY8CKpudZZ3kBGZfcbzvLiRzgSQguC+sqpxSSklD8LSv+uSFAbdTQug6DZRVcxUOxecQ
+ +NGjp+vvF6TUJ7PNpc92BN0BeSFfEJoV/oVJdWkHZtn8nV1XFnD0TjBMGdn6SE0/Vmk0
+ JYtxRo+4FMXTCg/gukKZ86FutHJFFfyg9FZuVy5pe31jpdroUhHFUxZyAvvXV+HbVIeM
+ vxMDYJmnoAE6PGe9wjLhCoYvJXIBPgpJUtjgIkdCjFKU37GRBz+zQ7t7wRKp+agGfwfR
+ QnMQ==
+X-Gm-Message-State: AOJu0YzksfThe/k1lCZHPCEX4Cgrmnf3fRgOGyCUAh/L4UplXZHgTMVy
+ sb/lPRGIOFImSZtdvjKqeJuCMQ==
+X-Google-Smtp-Source: AGHT+IH3PvlLrDUR/rAFS1iJdgoruT43pcv5hcKOJWxtzS6r1acnSy+OSiQL20cM38CPDxvn1V5Kug==
+X-Received: by 2002:a81:4917:0:b0:586:9cbb:eef4 with SMTP id
+ w23-20020a814917000000b005869cbbeef4mr31521989ywa.2.1693325843089; 
+ Tue, 29 Aug 2023 09:17:23 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-4165-1a0d-2d73-76fa.res6.spectrum.com.
+ [2603:6081:7b00:6400:4165:1a0d:2d73:76fa])
+ by smtp.gmail.com with ESMTPSA id
+ d2-20020a0ddb02000000b0058cd7816bcbsm2827665ywe.17.2023.08.29.09.17.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Aug 2023 09:17:22 -0700 (PDT)
+Date: Tue, 29 Aug 2023 12:17:20 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] doc: describe Kconfig fragments
+Message-ID: <20230829161720.GF3953269@bill-the-cat>
+References: <20230829065427.16727-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-References: <20230822203446.4111742-1-sjg@chromium.org>
- <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
- <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
- <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
- <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
-In-Reply-To: <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Aug 2023 10:01:06 -0600
-Message-ID: <CAPnjgZ3aczy3sTJvppVBoM5_aB9zdML6muwwvuvwCn8n3Mpzyg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
- Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
- linux-acpi@vger.kernel.org, 
- lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
- ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, "Dong, Guo" <guo.dong@intel.com>, 
- "dhaval@rivosinc.com" <dhaval@rivosinc.com>, maximilian.brune@9elements.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ozPWgasOB8Lg5hE5"
+Content-Disposition: inline
+In-Reply-To: <20230829065427.16727-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,146 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-(Adding a few more, will respond soon)
 
-- Simon
+--ozPWgasOB8Lg5hE5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
->
-> On Wed, 23 Aug 2023 at 22:04, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi,
-> >
-> > On Wed, 23 Aug 2023 at 08:24, Ard Biesheuvel <ardb@kernel.org> wrote:
-> > >
-> > > On Wed, 23 Aug 2023 at 10:59, Mark Rutland <mark.rutland@arm.com> wrote:
-> > > >
-> > > > On Tue, Aug 22, 2023 at 02:34:42PM -0600, Simon Glass wrote:
-> > > > > The Devicetree specification skips over handling of a logical view of
-> > > > > the memory map, pointing users to the UEFI specification.
-> > > > >
-> > > > > It is common to split firmware into 'Platform Init', which does the
-> > > > > initial hardware setup and a "Payload" which selects the OS to be booted.
-> > > > > Thus an handover interface is required between these two pieces.
-> > > > >
-> > > > > Where UEFI boot-time services are not available, but UEFI firmware is
-> > > > > present on either side of this interface, information about memory usage
-> > > > > and attributes must be presented to the "Payload" in some form.
-> > >
-> > > Not quite.
-> > >
-> > > This seems to be intended for consumption by Linux booting in ACPI
-> > > mode, but not via UEFI, right?
-> >
-> > Actually, this is for consumption by firmware. The goal is to allow
-> > edk2 to boot into U-Boot and vice versa, i.e. provide some
-> > interoperability between firmware projects. I will use the "Platform
-> > Init" and "Payload" terminology here too.
-> >
->
-> OK. It was the cc to linux-acpi@ and the authors of the
-> ACPI/SMBIOS-without-UEFI patches that threw me off here.
->
-> If we are talking about an internal interface for firmware components,
-> I'd be inclined to treat this as an implementation detail, as long as
-> the OS is not expected to consume these DT nodes.
->
-> However, I struggle to see the point of framing this information as a
-> 'UEFI memory map'. Neither EDK2 nor u-boot consume this information
-> natively, and there is already prior art in both projects to consume
-> nodes following the existing bindings for device_type=memory and the
-> /reserved-memory node. UEFI runtime memory is generally useless
-> without UEFI runtime services, and UEFI boot services memory is just
-> free memory.
->
-> There is also an overlap with the handover between secure and
-> non-secure firmware on arm64, which is also DT based, and communicates
-> available memory as well as RAM regions that are reserved for firmware
-> use.
->
-> In summary, I don't see why a non-UEFI payload would care about UEFI
-> semantics for pre-existing memory reservations, or vice versa. Note
-> that EDK2 will manage its own memory map, and expose it via UEFI boot
-> services and not via DT.
->
-> ...
-> >
-> > There is no intent to implement the UEFI spec, here. It is simply that
-> > some payloads (EDK2) are used to having this information.
-> >
-> > Imagine splitting EDK2 into two parts, one of which does platform init
-> > and the other which (the payload) boots the OS. The payload wants
-> > information from Platform Init and it needs to be in a devicetree,
-> > since that is what we have chosen for this interface. So to some
-> > extent this is unrelated to whether you have EFI boot services. We
-> > just need to be able to pass the information across the interface.
-> > Note that the user can (without recompilation, etc.) replace the
-> > second part with U-Boot (for example) and it must still work.
-> >
->
-> OK, so device tree makes sense for this. This is how I implemented the
-> EDK2 port that targets QEMU/mach-virt - it consumes the DT to discover
-> the UART, RTC,, memory, PCI host bridge, etc.
->
-> But I don't see a use case for a UEFI memory map here.
->
->
-> > >
-> > > >
-> > > > Today Linux does that by passing:
-> > > >
-> > > >   /chosen/linux,uefi-mmap-start
-> > > >   /chosen/linux,uefi-mmap-size
-> > > >   /chosen/linux,uefi-mmap-desc-size
-> > > >   /chosen/linux,uefi-mmap-desc-ver
-> > > >
-> > > > ... or /chosen/xen,* variants of those.
-> > > >
-> > > > Can't we document / genericise that?
-> >
-> > That seems to me to be the fields from the EFI memory-map call, but
-> > where is the actual content? I looked in the kernel but it seems to be
-> > an internal interface (between the stub and the kernel)?
-> >
-> > > >
-> > >
-> > > Given the ACPI angle, promoting this to external ABI would introduce a
-> > > DT dependency to ACPI boot. So we'll at least have to be very clear
-> > > about which takes precedence, or maybe disregard everything except the
-> > > /chosen node when doing ACPI boot?
-> > >
-> > > This also argues for not creating an ordinary binding for this (i.e.,
-> > > describing it as part of the platform topology), but putting it under
-> > > /chosen as a Linux-only boot tweak.
-> > >
-> > > > Pointing to that rather than re-encoding it in DT means that it stays in-sync
-> > > > with the EFI spec and we won't back ourselves into a corner where we cannot
-> > > > encode something due to a structural difference. I don't think it's a good idea
-> > > > to try to re-encode it, or we're just setting ourselves up for futher pain.
-> > > >
-> > >
-> > > What I would prefer is to formalize pseudo-EFI boot and define the
-> > > bare required minimum (system table + memory map + config tables) in
-> > > an arch-agnostic manner. That way, the only thing that needs to be
-> > > passed via DT/boot_params/etc is the (pseudo-)EFI system table
-> > > address, and everything else (SMBIOS, ACPI as well as the EFI memory
-> > > map and even the initrd) can be passed via config tables as usual, all
-> > > of which is already supported in (mostly) generic kernel code.
-> > >
->
-> <snip some lines>
->
-> >
-> > Here I believe you are talking about booting the kernel in EFI mode,
-> > but that is not the intent of this patch. This is all about things
-> > happening in firmware. Now, if the payload (second) part of the
-> > firmware decides it wants to offer EFI boot services and boot the
-> > kernel via the EFI stub, then it may very well pack this information
-> > (with a few changes) into a system table and make it available to the
-> > kernel stub. But by then this FDT binding is irrelevant, since it has
-> > served its purpose (which, to reiterate, is to facilitate information
-> > passage from platform init to 'payload').
-> >
->
-> Indeed. As long as this binding is never consumed by the OS, I don't
-> have any objections to it - I just fail to see the point.
+On Tue, Aug 29, 2023 at 08:54:27AM +0200, Heinrich Schuchardt wrote:
+
+> In the 'Build with GCC' chapter mention Kconfig fragments and show how th=
+ey
+> are applied.
+>=20
+> Adjust the formatting in the configuration section to consistently use
+> italics for file names.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  doc/build/gcc.rst | 35 ++++++++++++++++++++++++++++++-----
+>  1 file changed, 30 insertions(+), 5 deletions(-)
+
+We should really restructure this file as there's very few gcc-specific
+parts and the rest is also true for clang.
+
+--=20
+Tom
+
+--ozPWgasOB8Lg5hE5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTuGg0ACgkQFHw5/5Y0
+tyzltgv/b6Yi8USP2jl8x8gVUmXL6nxp7y8Q3RTA8wvAPPAnm86UcNsKEqrYq/vJ
+Fjvi/RZf8gW2bQJWqj5YwpDP3qugwNysSRxJYkrHucTdWIO3mXvaa6kFljEJLYI+
+8BUNgf3OPzxuQdUzkpMPoo3WNUaytKYDt471DMguXyPfH5UGmfG3jtYhg0baxieP
+DB3PGkSO2eJGPhSmzK5pvrGq9PXyopM7w+dMOq/9h/iB1rtohaW3e4G7ynalT34x
+EbRu5XGSp/k/wvRupVcdjBxvKWpbyQpL8l1yoir04Mr7ANVeOqmhI5ULAu1rEt5I
+hSr/Mck8dSveq1YN/6sXjloshKZfjURQ+21uj5tFW9JyQXc2Ay3rKt3DVDmpK0hh
+aitp5weRtrom6pMIZqmG4+8a0Z2ojFFoG0E8YEaCAuOyhOBQurog5e9gbVg5cAmX
+PQGKFi0JthH++ZvtAmN33FKKpEwAbssImXNYzUzCZjI9aMs3Zb4X1IO7FbLsSZKX
+DMS0dd/w
+=zj6A
+-----END PGP SIGNATURE-----
+
+--ozPWgasOB8Lg5hE5--
