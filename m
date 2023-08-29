@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A6FC83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 21:32:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0CB5C83F18
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 21:38:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B05E86440;
-	Tue, 29 Aug 2023 23:32:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E3395864D8;
+	Tue, 29 Aug 2023 23:38:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LftEq++9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uunGSJNm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3F49864E7; Tue, 29 Aug 2023 23:32:45 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id AEC8184788; Tue, 29 Aug 2023 23:38:10 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E85B846B8
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 23:32:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6BF1864D8
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 23:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 6670E61A98
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:32:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C16CBC433CD
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:32:40 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id A30CF62A57
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:38:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F28BC43395
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:38:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1693344760;
- bh=5o6ki4h0Ml9jAcSugGPORbFfTrt12s7REMjvXI4xR4Y=;
+ s=k20201202; t=1693345085;
+ bh=bZfz2phEmCJxQGXRumw4s2nqkXSdSl33NAnzl+eZ1ZM=;
  h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=LftEq++9TdpzBCHZL3FrVb5yUmSkFZylY8fpzdVOFPgfdE5Xtn5AMoKk9xgdCv/9N
- z1w202zDQmICAiMxZroK+nGFu+m+IrZs6RnnKSuUMAv513pVzJIu3aZaMbjZf9UpWG
- 2GKGHABaseufLESGYQhz3VLnJaNHqRB0cRm6SBXdxxuXnVxAECwKxbrH2xF9yguKQT
- XBtVXkih+i6NgsvXtDmIxTU3JtlyIXwR2+6yFgrCCKrGWGUXqWPHkquHoM3cS84J8u
- J4lfgn/kfQtV/tH8/qu88KUCx4PqRnEDRkrVcQ/AgiKI1uy8viaFXRugesCVFiffDt
- oJOv0/0dD2EeA==
-Received: by mail-lf1-f47.google.com with SMTP id
- 2adb3069b0e04-50091b91a83so7592718e87.3
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 14:32:40 -0700 (PDT)
-X-Gm-Message-State: AOJu0YzyNlKBUbgfPHDnIEBY7AnzWG7cYRSlNPqJJN3Lu7gmGQmsOEvf
- ib+oGvYStNgdiLQF46ZKF2Vnvmtjab/3dqtbb2E=
-X-Google-Smtp-Source: AGHT+IFG7drW7XtSYzjCVaUWymqykiMN8j8kcQp1tRPjGjuXbW1d4XcdEzil0B8OeqZsoEILEVQdFDqyTELIfS7Pr5w=
-X-Received: by 2002:ac2:5446:0:b0:500:9d6c:913e with SMTP id
- d6-20020ac25446000000b005009d6c913emr98357lfn.52.1693344758741; Tue, 29 Aug
- 2023 14:32:38 -0700 (PDT)
+ b=uunGSJNm89QwVxNPQ6Nh11wphe9DhPiyeyiv2cR8dMNLwcXpkLNxtkC8QvEDuhwxZ
+ mj7XpDRKCmv6dGxSaA5X3N/oNWrOoX/WnaBGPHb9MSg5a8828ET/BsRp0xVn3AXjkD
+ cfAlPpUjJbsIbYpsKPQT2SB/V2LaX4Aj0m2499a73pBT4fNCx1eYNn//gzBSqM2lA8
+ nrpspBmqvywVC4yQYFHlRVI7nNnpMSRF5GZ9OQfYjbkfzqirxo03PX1ZBOJOCwWMsn
+ Ko8r6qggJOXfnivZ8BY9aIpIh/rNblv2Qtpet/Cjk1t5Od47D7JHO9ywEmFLEHX919
+ NOapeEiLrFf7Q==
+Received: by mail-lj1-f172.google.com with SMTP id
+ 38308e7fff4ca-2bcc14ea414so75053571fa.0
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 14:38:05 -0700 (PDT)
+X-Gm-Message-State: AOJu0YzC0MZ82IAShP7quhYLUs2MFMN6DxpKibj+uJr2DAk0zRZEUrd9
+ n+tvEvlf46JZpErWl0awIPljdRPMjdBJNv1f5g==
+X-Google-Smtp-Source: AGHT+IHB0NW0jBHCyCbqErE9944KT8lOUEIQ7JDot6AAVoaFIgShclAt6U2wVpOQkDXO6T6Sc6veW9YeqGOgOMUtRdw=
+X-Received: by 2002:a2e:6e10:0:b0:2bc:fc2e:766f with SMTP id
+ j16-20020a2e6e10000000b002bcfc2e766fmr323885ljc.37.1693345083531; Tue, 29 Aug
+ 2023 14:38:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822203446.4111742-1-sjg@chromium.org>
- <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
- <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
- <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
- <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
- <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Tue, 29 Aug 2023 23:32:27 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
-Message-ID: <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
+References: <20230829191812.135759-1-sjg@chromium.org>
+ <20230829191812.135759-4-sjg@chromium.org>
+In-Reply-To: <20230829191812.135759-4-sjg@chromium.org>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 29 Aug 2023 16:37:51 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqLFX9PpMcJBv2yZXRpQyQ-h1DrGyApE0+AAYN2LCCj7Kg@mail.gmail.com>
+Message-ID: <CAL_JsqLFX9PpMcJBv2yZXRpQyQ-h1DrGyApE0+AAYN2LCCj7Kg@mail.gmail.com>
+Subject: Re: [PATCH v4 4/4] memory: Add ECC property
 To: Simon Glass <sjg@chromium.org>
-Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
- Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
- linux-acpi@vger.kernel.org, 
+Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Mark Rutland <mark.rutland@arm.com>, Gua Guo <gua.guo@intel.com>,
+ Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, ron minnich <rminnich@gmail.com>, 
+ Ard Biesheuvel <ardb@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Chiu Chasel <chasel.chiu@intel.com>, 
  lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
- ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>
+ linux-acpi@vger.kernel.org, Guo Dong <guo.dong@intel.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,140 +88,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Aug 2023 at 21:18, Simon Glass <sjg@chromium.org> wrote:
+On Tue, Aug 29, 2023 at 2:18=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Hi Ard,
+> Some memories provides ECC correction. For software which wants to check
+> memory, it is helpful to see which regions provide this feature.
 >
-> On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
-> >
-> > On Wed, 23 Aug 2023 at 22:04, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi,
-> > >
-> > > On Wed, 23 Aug 2023 at 08:24, Ard Biesheuvel <ardb@kernel.org> wrote:
-> > > >
-> > > > On Wed, 23 Aug 2023 at 10:59, Mark Rutland <mark.rutland@arm.com> wrote:
-> > > > >
-> > > > > On Tue, Aug 22, 2023 at 02:34:42PM -0600, Simon Glass wrote:
-> > > > > > The Devicetree specification skips over handling of a logical view of
-> > > > > > the memory map, pointing users to the UEFI specification.
-> > > > > >
-> > > > > > It is common to split firmware into 'Platform Init', which does the
-> > > > > > initial hardware setup and a "Payload" which selects the OS to be booted.
-> > > > > > Thus an handover interface is required between these two pieces.
-> > > > > >
-> > > > > > Where UEFI boot-time services are not available, but UEFI firmware is
-> > > > > > present on either side of this interface, information about memory usage
-> > > > > > and attributes must be presented to the "Payload" in some form.
-> > > >
-> > > > Not quite.
-> > > >
-> > > > This seems to be intended for consumption by Linux booting in ACPI
-> > > > mode, but not via UEFI, right?
-> > >
-> > > Actually, this is for consumption by firmware. The goal is to allow
-> > > edk2 to boot into U-Boot and vice versa, i.e. provide some
-> > > interoperability between firmware projects. I will use the "Platform
-> > > Init" and "Payload" terminology here too.
-> > >
-> >
-> > OK. It was the cc to linux-acpi@ and the authors of the
-> > ACPI/SMBIOS-without-UEFI patches that threw me off here.
-> >
-> > If we are talking about an internal interface for firmware components,
-> > I'd be inclined to treat this as an implementation detail, as long as
-> > the OS is not expected to consume these DT nodes.
-> >
-> > However, I struggle to see the point of framing this information as a
-> > 'UEFI memory map'. Neither EDK2 nor u-boot consume this information
-> > natively, and there is already prior art in both projects to consume
-> > nodes following the existing bindings for device_type=memory and the
-> > /reserved-memory node. UEFI runtime memory is generally useless
-> > without UEFI runtime services, and UEFI boot services memory is just
-> > free memory.
-> >
-> > There is also an overlap with the handover between secure and
-> > non-secure firmware on arm64, which is also DT based, and communicates
-> > available memory as well as RAM regions that are reserved for firmware
-> > use.
-> >
-> > In summary, I don't see why a non-UEFI payload would care about UEFI
-> > semantics for pre-existing memory reservations, or vice versa. Note
-> > that EDK2 will manage its own memory map, and expose it via UEFI boot
-> > services and not via DT.
+> Add this as a property of the /memory nodes, since it presumably follows
+> the hardware-level memory system.
 >
-> Bear in mind that one or both sides of this interface may be UEFI.
-> There is no boot-services link between the two parts that I have
-> outlined.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-
-I don't understand what this means.
-
-UEFI specifies how one component invokes another, and it is not based
-on a DT binding. If the second component calls UEFI boot or runtime
-services, it should be invoked in this manner. If it doesn't, then it
-doesn't care about these memory reservations (and the OS will not be
-booted via UEFI either)
-
-So I feel I am missing something here. Perhaps a practical example
-would be helpful?
-
-
-> >
-> > ...
-> > >
-> > > There is no intent to implement the UEFI spec, here. It is simply that
-> > > some payloads (EDK2) are used to having this information.
-> > >
-> > > Imagine splitting EDK2 into two parts, one of which does platform init
-> > > and the other which (the payload) boots the OS. The payload wants
-> > > information from Platform Init and it needs to be in a devicetree,
-> > > since that is what we have chosen for this interface. So to some
-> > > extent this is unrelated to whether you have EFI boot services. We
-> > > just need to be able to pass the information across the interface.
-> > > Note that the user can (without recompilation, etc.) replace the
-> > > second part with U-Boot (for example) and it must still work.
-> > >
-> >
-> > OK, so device tree makes sense for this. This is how I implemented the
-> > EDK2 port that targets QEMU/mach-virt - it consumes the DT to discover
-> > the UART, RTC,, memory, PCI host bridge, etc.
-> >
-> > But I don't see a use case for a UEFI memory map here.
-> >
-> >
-...
-> > >
-> > > Here I believe you are talking about booting the kernel in EFI mode,
-> > > but that is not the intent of this patch. This is all about things
-> > > happening in firmware. Now, if the payload (second) part of the
-> > > firmware decides it wants to offer EFI boot services and boot the
-> > > kernel via the EFI stub, then it may very well pack this information
-> > > (with a few changes) into a system table and make it available to the
-> > > kernel stub. But by then this FDT binding is irrelevant, since it has
-> > > served its purpose (which, to reiterate, is to facilitate information
-> > > passage from platform init to 'payload').
-> > >
-> >
-> > Indeed. As long as this binding is never consumed by the OS, I don't
-> > have any objections to it - I just fail to see the point.
+> (no changes since v3)
 >
-> OK thanks.
+> Changes in v3:
+> - Add new patch to update the /memory nodes
 >
-> The point is that Platform Init and the payload need to agree about
-> where certain things are in memory. It is true that this is coming
-> from an EFI context, but that is just an example. Platform Init
-> doesn't necessarily know whether its payload is EFI, but may set this
-> up for use by the payload, just in case.
+>  dtschema/schemas/memory.yaml | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
 >
+> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
+> index 1d74410..981af04 100644
+> --- a/dtschema/schemas/memory.yaml
+> +++ b/dtschema/schemas/memory.yaml
+> @@ -34,7 +34,14 @@ patternProperties:
+>          description:
+>            For the purpose of identification, each NUMA node is associate=
+d with
+>            a unique token known as a node id.
+> -
+> +      attr:
 
-Platform init can communicate memory reservations to a UEFI payload if
-needed, and there is prior art for this.
+Kind of vague.
 
-Platform init *cannot* communicate UEFI specific boot or runtime
-reservations in this manner, as this doesn't make sense: either
-Platform Init is UEFI and invokes a UEFI payload, in which case the
-UEFI spec applies. In other cases, the UEFI memory regions either
-don't exist or are irrelevant. The only EFI-agnostic aspect here is
-RAM reservation for use by firmware in general, and this does not have
-these UEFI semantics and does not need to be framed as such.
+> +        $ref: /schemas/types.yaml#/definitions/string-array
+> +        description: |
+> +          Attributes possessed by this memory region:
+> +
+> +            "single-bit-ecc" - supports single-bit ECC
+> +            "multi-bit-ecc" - supports multiple-bit ECC
+
+"supports" means corrects or reports? Most h/w supports both, but only
+reports multi-bit errors.
+
+> +            "no-ecc" - non-ECC memory
+
+Don't define values in free form text.
+
+This form is difficult to validate especially when non-ECC related
+attr's are added to the mix as we can't really define which
+combinations are valid. For example how do we prevent:
+
+attr =3D "single-bit-ecc", "multi-bit-ecc";
+
+Or maybe that's valid? If so, how would we express that?
+
+Why do we need "no-ecc"? Is that the same as no "attr" property?
+
+I think it's better if we have 'ecc-type' or something? Or generally,
+a property per class/type of attribute.
+
+Rob
