@@ -4,70 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 932F4C83F14
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 10:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 705FFC6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 11:10:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA960864EC;
-	Tue, 29 Aug 2023 12:38:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C4A286496;
+	Tue, 29 Aug 2023 13:10:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jXtM/hjX";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="qmws641o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A37A7864EF; Tue, 29 Aug 2023 12:38:13 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 56E4E864D7; Tue, 29 Aug 2023 13:10:14 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20617.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8a::617])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53495864C7
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 12:38:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13E8684788
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 13:10:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37TAc66E123108;
- Tue, 29 Aug 2023 05:38:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693305486;
- bh=rNXvCQ+y/oXgFNhjMVKzb7OJkgLhjMC9PrZ9yVnERnY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=jXtM/hjXh4gjIMsf0Y3Q+i2FP9H05CrtG0ks/o1T5r1JEdCMkd7BpYrXE9fBoW4QQ
- SrXwSUa+IhArO7wh5Qy3y+ffi337O7otNo8jzckxXhvDbOEEzHItT0CZDqjDs/mgH+
- jHlsC+1rZMMkGT/l4WjwSjgBZzbt4od3DCPOquvk=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37TAc6ZJ082612
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 29 Aug 2023 05:38:06 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 29
- Aug 2023 05:38:06 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 29 Aug 2023 05:38:06 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37TAc5xk004390;
- Tue, 29 Aug 2023 05:38:06 -0500
-Date: Tue, 29 Aug 2023 16:08:05 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: <g@lunchbox>, Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>,
- Vignesh Raghavendra <vigneshr@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>, Reid Tonking
- <reidt@ti.com>, Apurva Nandan <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-Subject: Re: [PATCH v2 5/6] docs: ti: j721s2_evm: Create documentation from
- J7200 docs
-Message-ID: <20230829103805.nwoeflacn4wekvgm@ula0497581>
-References: <20230816-b4-upstream-j721s2-r5-pinmux-v2-0-a5f141be40bc@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v2-5-a5f141be40bc@ti.com>
- <20230828133052.2b352w34oe2o7emg@backward>
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ncfKP02bQnYqhi3DYd/29RshIkhM1RY9+2cEDer0UsZ6MaH9kVDBcvzqMc7MBYapns256Ns3d9GJO9G3uU5kxnrhxUwQQ+odojiL2GDwVadwuwXAE7P0ZxeZdbVbsEMm85LWyjWr36ntrmjqlCG5yeWRjARt3c/Nk1W4E/+DXDr6qgUyVG7ASjzw7vAaWfa2qZ252CbWC5yZsY5M3EP+RTLXGezZA3jJLJnub4hA3Nkcyd7Ir+RXlXb865WbR9Sm5l7HThmRA4O2qFaMYKbSXI11RANJsP3Z/BpJMPRBatgNUQiFfig3AmCEiBUcMYC0j8orAhUtwSMB1TP6jEKp7g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AHzqH381td4D4Jzm9mNPu4gOC0wTA58RKYJc1RGia3E=;
+ b=nFMRa4qKjbtYd5Gu51Uw6g70+XISWfb+e+eBa1/fyvZ6Qy/v3kc8UFzenyfRR9peqC/7XYH876v3lgmozFWQ7876W93Pbqg3oLqqLARaDZp06D/2bC9hqc9L6iGmNzJ9K23+8G7yRA0GSJR5mIhluFjhnJ8kI5G5KK8gq8mk5hBWZRClBqeshhvhFadI1bE0dA3DCy5my9GAIG7o/TLV36mGTf9u4NH88JQugKXRwpXZv162yPcOVIPtw5H5bFxgS8L1vzSoJchRxl4DJnVHZfgBAzIWpysrJwADGYmFwbREVhIbvRkPIjAKvtis8nAHvti9SkrFsF/+QczPaG07Ow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=samsung.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AHzqH381td4D4Jzm9mNPu4gOC0wTA58RKYJc1RGia3E=;
+ b=qmws641oDZI0B5mv/wvkXSgSieyvPw1BzYuVfrUhjOoBtZZrnuWpYiG1ZwpiWKsJAXkCfwmEDwcrXJ+WsZJ1xE8tZLs4URiyKgTjrQnBPWHR+q7hIt5MGI03kuqaKxYNO/HvlJF3tMpL1oz88LbDctpNhQk9ZlSZNzFrtOpVG1c=
+Received: from SA9P223CA0022.NAMP223.PROD.OUTLOOK.COM (2603:10b6:806:26::27)
+ by SJ1PR12MB6290.namprd12.prod.outlook.com (2603:10b6:a03:457::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34; Tue, 29 Aug
+ 2023 11:10:08 +0000
+Received: from SN1PEPF0002636E.namprd02.prod.outlook.com
+ (2603:10b6:806:26:cafe::de) by SA9P223CA0022.outlook.office365.com
+ (2603:10b6:806:26::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35 via Frontend
+ Transport; Tue, 29 Aug 2023 11:10:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF0002636E.mail.protection.outlook.com (10.167.241.139) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.17 via Frontend Transport; Tue, 29 Aug 2023 11:10:07 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 29 Aug
+ 2023 06:10:06 -0500
+Message-ID: <84b747fb-f026-be06-aa0f-c3bab07c3ac4@amd.com>
+Date: Tue, 29 Aug 2023 13:10:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230828133052.2b352w34oe2o7emg@backward>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Content-Language: en-US
+To: Chanho Park <chanho61.park@samsung.com>, <u-boot@lists.denx.de>
+References: <CGME20230816065448epcas2p3bf66892f15a6dc8e082a5f296b307bec@epcas2p3.samsung.com>
+ <20230816065437.836392-1-chanho61.park@samsung.com>
+From: Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH] fpga: define dummy fpga_load function for debug build
+In-Reply-To: <20230816065437.836392-1-chanho61.park@samsung.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636E:EE_|SJ1PR12MB6290:EE_
+X-MS-Office365-Filtering-Correlation-Id: 63fb3b10-c632-48ec-0f86-08dba880810e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 5vo7uTj4Qabn3Tv2IG7HpC0A0wCNtU7CaQ5P1uC63HBwXrRyHVTqCDUZmfzWU3vVkxmBmHsfTxVEJ+0snZjWiI75CVe83dkR5rPD8k1gaUphC76nGedvv8DhUnUmZ4T6ZgHqJKw26W5ty7Oc9CRFESOasgYvo6ckVrHR3Bxo3QH4UbHMT4u4NrwYu4aYhJZTlruoeQKSC4up8V5Xe02dP05L5wxY+Y3eC2X3JZhw2gw7SeuYSVHPoQJuJkpR+PIcmSShVBkwVwo+SKz5FAoYht17sm3O1KSYKo0rERqDW0KrIP3DjZvIavMxeE+LBUOR/eu8PiOnpU9JiOuooCbvDyqDr/Rub2i0kfZ4I+0GCdzrAckLu95W3JT0BU6BgWRCyJr9qpI7y5yzLQrQTL37395E49JSX2yoWe7RegZBPf85qKLXip0e4g7sIBHsUhY0zpa6YLt6fRUHFTpAuIvw+tQdT48A15LVrruWzGr7EvnPIW3Sw6VLwJ0fGsoKsiTH2hkUZ8QSgPpUCuMICbO31IljfmMXR+6dqvQGtHnz0l5H127sXOlweJCtJ8SFjlGCEdV8QJVNJOP0rGn1UStXIGg8DVHZEiXUCT/UiClZE9zXxV3MiRHGXj91S21iSm3pSRrk13BIr3rc03TawwFuNa/unrmL9VH98Gn5bKvCf6UZ8lxXzfwTUpEsbvd/kfEDk54M9m2vfSsDYA1h3vc/KVGDCZnZyRI3YIY2zpCgilzTODynkXSZ9skwwDx7DAmPpisn9tBQoAkI03ERBGczR8ELXYz60jz+uEfRlDeqTEJ3sP04BHRWtbxTrCx3cPLA
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(376002)(346002)(396003)(136003)(82310400011)(186009)(1800799009)(451199024)(40470700004)(46966006)(36840700001)(53546011)(478600001)(2906002)(336012)(426003)(26005)(16526019)(70586007)(2616005)(316002)(16576012)(41300700001)(70206006)(8676002)(5660300002)(44832011)(110136005)(8936002)(40480700001)(36756003)(86362001)(40460700003)(356005)(81166007)(36860700001)(47076005)(31696002)(31686004)(82740400003)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2023 11:10:07.6894 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63fb3b10-c632-48ec-0f86-08dba880810e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636E.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6290
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,345 +121,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth,
 
-On 08:30-20230828, Nishanth Menon wrote:
-> i$subject: doc: board: ti: Add j721s2-evm documentation
 
-Will be updating it, thanks.
+On 8/16/23 08:54, Chanho Park wrote:
+> This fixes below build error when CC_OPTIMIZE_FOR_DEBUG is enabled and
+> CONFIG_SPL_FPGA is not enabled.
 
-> 
-> On 16:47-20230825, Manorit Chawdhry wrote:
-> > The documentation is based off J7200 documentation tailored for J721S2.
-> > 
-> > TRM for J721S2: https://www.ti.com/lit/pdf/spruj28
-> > Product Page: https://www.ti.com/product/TDA4AL-Q1
-> > 
-> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > ---
-> >  doc/board/ti/j721s2_evm.rst | 263 ++++++++++++++++++++++++++++++++++++++++++++
-> >  doc/board/ti/k3.rst         |   1 +
-> >  2 files changed, 264 insertions(+)
-> > 
-> > diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-> > new file mode 100644
-> > index 000000000000..1b560eb4a60e
-> > --- /dev/null
-> > +++ b/doc/board/ti/j721s2_evm.rst
-> > @@ -0,0 +1,263 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> > +.. sectionauthor:: Manorit Chawdhry <m-chawdhry@ti.com>
-> > +
-> > +J721S2 Platforms
-> > +================
-> > +
-> > +Introduction:
-> > +-------------
-> > +The J721S2 family of SoCs are part of K3 Multicore SoC architecture platform
-> > +targeting automotive applications. They are designed as a low power, high
-> > +performance and highly integrated device architecture, adding significant
-> > +enhancement on processing power, graphics capability, video and imaging
-> > +processing, virtualization and coherent memory support.
-> > +
-> > +The device is partitioned into three functional domains, each containing
-> > +specific processing cores and peripherals:
-> > +
-> > +1. Wake-up (WKUP) domain:
-> > +        * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
-> > +
-> > +2. Microcontroller (MCU) domain:
-> > +        * Dual core ARM Cortex-R5F processor, runs device management
-> > +          and SoC early boot
-> > +
-> > +3. MAIN domain:
-> > +        * Dual core 64-bit ARM Cortex-A72, runs HLOS
-> > +
-> > +More info can be found in TRM: https://www.ti.com/lit/pdf/spruj28
-> > +
-> > +Platform information:
-> > +
-> > +* https://www.ti.com/tool/J721S2XSOMXEVM
-> 
-> How about am68-sk documentation?
+I would rewrite this because the connection to SPL_FPGA is just one part of it.
+It is also taken when CONFIG_FPGA is not enabled.
 
-Thanks for catching this! Missed it. Will be updating it.
 
 > 
-> > +
-> > +Boot Flow:
-> > +----------
-> > +Below is the pictorial representation of boot flow:
-> > +
-> > +.. image:: img/boot_diagram_k3_current.svg
-> > +
-> > +- On this platform, "TI Foundational Security" (TIFS) functions as the
-> > +  security enclave master while "Device Manager" (DM), also known as the
-> > +  "TISCI server" in TI terminology, offers all the essential services.
-> > +
-> > +- As illustrated in the diagram above, R5 SPL manages power and clock
-> > +  services independently before handing over control to "DM". The A72 or
-> > +  the C7x (Aux core) software components request TIFS/DM to handle
-> > +  security or device management services.
-> > +
-> > +Sources:
-> > +--------
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_boot_sources
-> > +    :end-before: .. k3_rst_include_end_boot_sources
-> > +
-> > +Build procedure:
-> > +----------------
-> > +0. Setup the environment variables:
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_common_env_vars_desc
-> > +    :end-before: .. k3_rst_include_end_common_env_vars_desc
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_board_env_vars_desc
-> > +    :end-before: .. k3_rst_include_end_board_env_vars_desc
-> > +
-> > +Set the variables corresponding to this platform:
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_common_env_vars_defn
-> > +    :end-before: .. k3_rst_include_end_common_env_vars_defn
-> > +.. code-block:: bash
-> > +
-> > + $ export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
-> > + $ export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
-> > + $ export TFA_BOARD=generic
-> > + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-> > + $ # This is not a typo, j784s4 is the
+> ../common/spl/spl_fit.c:591: undefined reference to `fpga_load'
+> collect2: error: ld returned 1 exit status
 > 
-> is the .... ?
+> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+> ---
+>   include/fpga.h | 8 ++++++++
+>   1 file changed, 8 insertions(+)
 > 
-> > + $ # OP-TEE platform for j721s2
+> diff --git a/include/fpga.h b/include/fpga.h
+> index ed688cc0fa3b..44f2755a3f10 100644
+> --- a/include/fpga.h
+> +++ b/include/fpga.h
+> @@ -60,8 +60,16 @@ int fpga_add(fpga_type devtype, void *desc);
+>   int fpga_count(void);
+>   const fpga_desc *const fpga_get_desc(int devnum);
+>   int fpga_is_partial_data(int devnum, size_t img_len);
+> +#if CONFIG_IS_ENABLED(FPGA)
+>   int fpga_load(int devnum, const void *buf, size_t bsize,
+>   	      bitstream_type bstype, int flags);
+> +#else
+> +static inline int fpga_load(int devnum, const void *buf, size_t bsize,
+> +	      bitstream_type bstype, int flags)
+> +{
+> +	return FPGA_FAIL;
+> +}
+> +#endif
+>   int fpga_fsload(int devnum, const void *buf, size_t size,
+>   		fpga_fs_info *fpga_fsinfo);
+>   int fpga_loads(int devnum, const void *buf, size_t size,
 
-The next line completes it, had split the line in the comments though I
-don't think it would be required given the line length. Would fix it.
-Thanks.
-
-Also, just realised that "This" is misleading. Would rework it to use
-"The following".
-
-> > + $ export OPTEE_PLATFORM=k3-j784s4
-> > + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-> > +
-> > +.. j721s2_evm_rst_include_start_build_steps
-> > +
-> > +1. Trusted Firmware-A:
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_build_steps_tfa
-> > +    :end-before: .. k3_rst_include_end_build_steps_tfa
-> > +
-> > +
-> > +2. OP-TEE:
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_build_steps_optee
-> > +    :end-before: .. k3_rst_include_end_build_steps_optee
-> > +
-> > +3. U-Boot:
-> > +
-> > +.. _j721s2_evm_rst_u_boot_r5:
-> > +
-> > +* 3.1 R5:
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-> > +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-> > +
-> > +.. _j721s2_evm_rst_u_boot_a72:
-> > +
-> > +* 3.2 A72:
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_build_steps_uboot
-> > +    :end-before: .. k3_rst_include_end_build_steps_uboot
-> > +.. j721s2_evm_rst_include_end_build_steps
-> > +
-> > +Target Images
-> > +--------------
-> > +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
-> > +variant (GP, HS-FS, HS-SE) requires a different source for these files.
-> > +
-> > + - GP
-> > +
-> > +        * tiboot3-j721s2-gp-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-> > +        * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-> > +
-> > + - HS-FS
-> > +
-> > +        * tiboot3-j721s2-hs-fs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-> > +        * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-> > +
-> > + - HS-SE
-> > +
-> > +        * tiboot3-j721s2-hs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-> > +        * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-> > +
-> > +Image formats:
-> > +--------------
-> > +
-> > +- tiboot3.bin
-> > +
-> > +.. image:: img/multi_cert_tiboot3.bin.svg
-> > +
-> > +- tispl.bin
-> > +
-> > +.. image:: img/dm_tispl.bin.svg
-> > +
-> > +R5 Memory Map:
-> > +--------------
-> > +
-> > +.. list-table::
-> > +   :widths: 16 16 16
-> > +   :header-rows: 1
-> > +
-> > +   * - Region
-> > +     - Start Address
-> > +     - End Address
-> > +
-> > +   * - SPL
-> > +     - 0x41c00000
-> > +     - 0x41c40000
-> > +
-> > +   * - EMPTY
-> > +     - 0x41c40000
-> > +     - 0x41c61f20
-> > +
-> > +   * - STACK
-> > +     - 0x41c65f20
-> > +     - 0x41c61f20
-> > +
-> > +   * - Global data
-> > +     - 0x41c65f20
-> > +     - 0x41c66000
-> > +
-> > +   * - Heap
-> > +     - 0x41c66000
-> > +     - 0x41c76000
-> > +
-> > +   * - BSS
-> > +     - 0x41c76000
-> > +     - 0x41c80000
-> > +
-> > +   * - DM DATA
-> > +     - 0x41c80000
-> > +     - 0x41c84130
-> > +
-> > +   * - EMPTY
-> > +     - 0x41c84130
-> > +     - 0x41cff9fc
-> > +
-> > +   * - MCU Scratchpad
-> > +     - 0x41cff9fc
-> > +     - 0x41cffbfc
-> > +
-> > +   * - ROM DATA
-> > +     - 0x41cffbfc
-> > +     - 0x41cfffff
-> 
-> Anything similar for A72 memory map?
-> 
-
-Am not sure if I have that information. R5 ones I had figured out
-manually during some other HS debug [0]. 
-
-[0]: https://lore.kernel.org/u-boot/20230505134508.xwlplwlnb7ryvrtf@passably/
-
-Regards,
-Manorit
-
-> > +
-> > +Switch Setting for Boot Mode
-> > +----------------------------
-> > +
-> > +Boot Mode pins provide means to select the boot mode and options before the
-> > +device is powered up. After every POR, they are the main source to populate
-> > +the Boot Parameter Tables.
-> > +
-> > +The following table shows some common boot modes used on J721S2 platform.
-> > +More details can be found in the Technical Reference Manual:
-> > +https://www.ti.com/lit/pdf/spruj28 under the `Boot Mode Pins` section.
-> > +
-> > +.. list-table:: Boot Modes
-> > +   :widths: 16 16 16
-> > +   :header-rows: 1
-> > +
-> > +   * - Switch Label
-> > +     - SW9: 12345678
-> > +     - SW8: 12345678
-> > +
-> > +   * - SD
-> > +     - 00000000
-> > +     - 10000010
-> > +
-> > +   * - EMMC
-> > +     - 01000000
-> > +     - 10000000
-> > +
-> > +   * - OSPI
-> > +     - 01000000
-> > +     - 00000110
-> > +
-> > +   * - UART
-> > +     - 01110000
-> > +     - 00000000
-> > +
-> > +   * - USB DFU
-> > +     - 00100000
-> > +     - 10000000
-> > +
-> > +For SW8 and SW9, the switch state in the "ON" position = 1.
-> 
-> What about AM68-SK ?
-> 
-> > +
-> > +Debugging U-Boot
-> > +----------------
-> > +
-> > +See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-> > +detailed setup information.
-> > +
-> > +.. warning::
-> > +
-> > +  **OpenOCD support since**: v0.12.0
-> > +
-> > +  If the default package version of OpenOCD in your development
-> > +  environment's distribution needs to be updated, it might be necessary to
-> > +  build OpenOCD from the source.
-> > +
-> > +.. include::  k3.rst
-> > +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-> > +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-> > +
-> > +To start OpenOCD and connect to the board
-> > +
-> > +.. code-block:: bash
-> > +
-> > +  openocd -f board/ti_j721s2evm.cfg
-> > diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> > index 5f9bd4dfcbe9..423d55526dc5 100644
-> > --- a/doc/board/ti/k3.rst
-> > +++ b/doc/board/ti/k3.rst
-> > @@ -36,6 +36,7 @@ K3 Based SoCs
-> >     am65x_evm
-> >     j7200_evm
-> >     j721e_evm
-> > +   j721s2_evm
-> >  
-> >  Boot Flow Overview
-> >  ------------------
-> > 
-> > -- 
-> > 2.41.0
-> > 
-> 
-> -- 
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Thanks,
+Michal
