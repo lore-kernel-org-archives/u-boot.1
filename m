@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D61FC83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 15:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 230A2C83F12
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 15:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8412186508;
-	Tue, 29 Aug 2023 17:04:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A29F86508;
+	Tue, 29 Aug 2023 17:15:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UgWNhsDQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HqrNu9cF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 808408650A; Tue, 29 Aug 2023 17:04:30 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 0A28A86508; Tue, 29 Aug 2023 17:15:19 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96CAE86504
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 17:04:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC44B86517
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 17:15:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-58d31f142eeso52117847b3.0
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 08:04:27 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5921a962adfso52019167b3.1
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 08:15:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693321466; x=1693926266;
+ d=konsulko.com; s=google; t=1693322114; x=1693926914;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZTnEwEZso/TyISalRGjD+Vbh6ZdhGzYhf+LBjclFzqg=;
- b=UgWNhsDQg2jnA1RBFEe/7zL3NHrvPGBcCHPbwYI9FVKimiH8CC+14QEvh9iNv9GTh/
- 7U7CawnIEX0kp4wWF3dqlgxoCsrTEChRcbQy6RkGcRcEIuXdGlXtfss4phafxsOObcN8
- nLKVwIoEx2bki0YOEdNZZq7Tmnc3YA8Vx0xKg=
+ bh=kpkMXQ433iGB70oVIvaM+xAKbbn90q6W1wkWJ3MpJVs=;
+ b=HqrNu9cFtC2rdTi59SCHGpBlE9yIzUgW98pJy8ABuo5pojbK3w1JXtQUTQf2Eq0Fcw
+ H56WvsHeGm8SCt3I+4dluEgZHRqNo8m0uO6zBiDTpMvjZPKAaaPlunJjj/ZeJu9or11A
+ IIcvucKI32f6InNjDEsvXZ0gbyoEq36ebjQ9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693321466; x=1693926266;
+ d=1e100.net; s=20221208; t=1693322114; x=1693926914;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZTnEwEZso/TyISalRGjD+Vbh6ZdhGzYhf+LBjclFzqg=;
- b=d6XsgkZyrORksTmF2PZpAA09rQQbDNLx+xAyTBIXD/Pp0txA+Kt8Ab68qm7W1+UIwE
- /utsK0dPzQ3Z9GWi4Ye1AMKC5jojLQVR8SPxtPmXpDzUQLTn872ZedYLf/7/1uQlTefa
- /yzokSlQX0ncqNnVwQ2cSj5NPhDdViMbLCvHVVtiEo/u7R5d4XSIhJ/xlFGVAkKuyesE
- ey0PtRORrZ7F3cNF+Kex88tXUIUKp6AWUCo1cAD8Ccpw0sslpY9C/Tom4XKLEVYIDK1n
- JzsmveYnUlN++k95M88uwxEZA9smXbVepTIuZI2jXWs4a74IjXUTGlKYN2i0R9cKBYOs
- o9hA==
-X-Gm-Message-State: AOJu0YxrnPHhRMUVa5qq+AgHXwRN3Vw8SqLdJS8tA7Hdq6oIjqF4GjmP
- 5/AA4SxNA8cgxF1GexJPriGXEA==
-X-Google-Smtp-Source: AGHT+IE03ApYC4MkPyc+kFC+rZlJkJXsmfTV3pTCesk/XpU3vyUuCjL5dbQztJezqjngv15kAk8xSQ==
-X-Received: by 2002:a81:528d:0:b0:56d:5060:f91a with SMTP id
- g135-20020a81528d000000b0056d5060f91amr29057240ywb.11.1693321466228; 
- Tue, 29 Aug 2023 08:04:26 -0700 (PDT)
+ bh=kpkMXQ433iGB70oVIvaM+xAKbbn90q6W1wkWJ3MpJVs=;
+ b=YgNfJB1j/oeJMcT59DnQ1KM2meCFu0JA7pyyydg0zIt/5l6ixUKYn51rbBHXPnBVuA
+ fxI80/bUcm9GLMBARIBD7pUkA1knXaO6VcDpbIvZdaCdLurl0oE3DSYP4DAFeHLEH4nf
+ kOOA2rAOUlntymLWw1hLeB9Sl9DZIk8lBv5tdBPM5lo5wnsK/pVuj/03BlaBgrc/SMRt
+ iLn6D29KYeYrQYoD3smTB3PqyYhZcNtPXiQIkmtnzWC+Ib5yDyAV2r4NBcxT6die0GaE
+ LqI811CsbmBOnvZSAy7iviiEKCJjHPfUNnHHcOE6LiMaxcEb5arB8r47DwsR4lvgH5pF
+ SOAQ==
+X-Gm-Message-State: AOJu0YzWUP5KmxrNu9vPf+yEFE8dkK7YeO4xFk1s9xkntA6bDIvW1Y0E
+ /Di/ngN+zIqnpTozwR535PaBiA==
+X-Google-Smtp-Source: AGHT+IHiTQa6E687u8jBcD775gosmfKX1PY7YvXgHX70t+wlxI8sP8446A/kL34iVsJLJpr2+Xo4Qg==
+X-Received: by 2002:a0d:c947:0:b0:589:fcb2:d57f with SMTP id
+ l68-20020a0dc947000000b00589fcb2d57fmr30814430ywd.37.1693322114375; 
+ Tue, 29 Aug 2023 08:15:14 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-4165-1a0d-2d73-76fa.res6.spectrum.com.
  [2603:6081:7b00:6400:4165:1a0d:2d73:76fa])
  by smtp.gmail.com with ESMTPSA id
- d2-20020a0ddb02000000b0058cd7816bcbsm2794169ywe.17.2023.08.29.08.04.24
+ g22-20020a815216000000b005837b48d16csm2786938ywb.84.2023.08.29.08.15.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Aug 2023 08:04:24 -0700 (PDT)
-Date: Tue, 29 Aug 2023 11:04:22 -0400
+ Tue, 29 Aug 2023 08:15:14 -0700 (PDT)
+Date: Tue, 29 Aug 2023 11:15:11 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
-Cc: u-boot@lists.denx.de, Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: Re: [PATCH v1] CI: Add jsonschema python module
-Message-ID: <20230829150422.GD3953269@bill-the-cat>
-References: <20230829143710.204875-1-andrejs.cainikovs@toradex.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, u-boot@lists.denx.de,
+ lukma@denx.de, seanga2@gmail.com, git@amd.com
+Subject: Re: [PATCH] clk: Dont return error when assigned-clocks is empty or
+ missing
+Message-ID: <20230829151511.GE3953269@bill-the-cat>
+References: <20230711095128.19086-1-ashok.reddy.soma@amd.com>
+ <32e261a0-f4eb-04f4-f31a-33414a292146@amd.com>
+ <20230825143959.GH3953269@bill-the-cat>
+ <3d815d7d-a091-6f58-9d3d-c65e9eac8f41@amd.com>
+ <20230828155009.GG3953269@bill-the-cat>
+ <572b8fb7-32c2-3364-a3dd-baee48b9330a@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8zqoezEXP5kMivUz"
+ protocol="application/pgp-signature"; boundary="VirkEIAIT9jyNaqz"
 Content-Disposition: inline
-In-Reply-To: <20230829143710.204875-1-andrejs.cainikovs@toradex.com>
+In-Reply-To: <572b8fb7-32c2-3364-a3dd-baee48b9330a@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,63 +99,114 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8zqoezEXP5kMivUz
+--VirkEIAIT9jyNaqz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 29, 2023 at 04:37:10PM +0200, Andrejs Cainikovs wrote:
+On Tue, Aug 29, 2023 at 09:18:53AM +0200, Michal Simek wrote:
+>=20
+>=20
+> On 8/28/23 17:50, Tom Rini wrote:
+> > On Mon, Aug 28, 2023 at 12:25:30PM +0200, Michal Simek wrote:
+> > >=20
+> > >=20
+> > > On 8/25/23 16:39, Tom Rini wrote:
+> > > > On Fri, Aug 25, 2023 at 09:15:09AM +0200, Michal Simek wrote:
+> > > > > Hi Tom,
+> > > > >=20
+> > > > > On 7/11/23 11:51, Ashok Reddy Soma wrote:
+> > > > > > There is a chance that assigned-clock-rates is given and assign=
+ed-clocks
+> > > > > > could be empty. Dont return error in that case, because the pro=
+be of the
+> > > > > > corresponding driver will not be called at all if this fails.
+> > > > > > Better to continue to look for it and return 0.
+> > > > > >=20
+> > > > > > Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> > > > > > ---
+> > > > > >=20
+> > > > > >     drivers/clk/clk-uclass.c | 8 +++++++-
+> > > > > >     1 file changed, 7 insertions(+), 1 deletion(-)
+> > > > > >=20
+> > > > > > diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> > > > > > index dc3e9d6a26..f186fcbcdb 100644
+> > > > > > --- a/drivers/clk/clk-uclass.c
+> > > > > > +++ b/drivers/clk/clk-uclass.c
+> > > > > > @@ -329,7 +329,13 @@ static int clk_set_default_rates(struct ud=
+evice *dev,
+> > > > > >     			dev_dbg(dev,
+> > > > > >     				"could not get assigned clock %d (err =3D %d)\n",
+> > > > > >     				index, ret);
+> > > > > > -			continue;
+> > > > > > +			/* Skip if it is empty */
+> > > > > > +			if (ret =3D=3D -ENOENT) {
+> > > > > > +				ret =3D 0;
+> > > > > > +				continue;
+> > > > > > +			}
+> > > > > > +
+> > > > > > +			return ret;
+> > > > > >     		}
+> > > > > >     		/* This is clk provider device trying to program itself
+> > > > >=20
+> > > > > What's your take on this one?  I didn't get reply from Sean.
+> > > >=20
+> > > > I guess, what's the validated upstream dts where this is the case?
+> > > >=20
+> > >=20
+> > > It was found by incorrect DT. It means I don't think there is any DT =
+which
+> > > contains this issue.
+> > > But that being said we can extend current clock tests to cover this c=
+ase.
+> > > Please look below.
+> >=20
+> > Well, if the DT is invalid (and yes, we can't easily run the validation
+> > suite in U-Boot today), I'd rather go with a debug we can optimize out
+> > so that the next person with an invalid DT can more quickly find their
+> > problem and we don't work-around it instead.  Or am I missing something?
+>=20
+> There is already dev_dbg print above. It means when user enable DEBUG it
+> gets information about it.
+>=20
+> The thing is that it just sync behavior with the linux kernel.
+> You can look at
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/d=
+rivers/clk/clk-conf.c?h=3Dv6.5#n90
+>=20
+> There is also one more example like this.
+> 	clk-test4 {
+> 		compatible =3D "sandbox,clk-test";
+> 		assigned-clock-rates =3D <654>, <321>;
+> 		assigned-clocks =3D <&clk_sandbox 1>;
+> 	};
+>=20
+> But if you prefer to fail in all these cases I am also fine with it.
 
-> Some TI boards utilizes `ti-board-config` via binman device
-> tree node, which when built via binman, triggers schema validation
-> for board specific yaml configuration files.
->=20
-> This change adds jsonschema python module to CI Docker image, which
-> allows these targets to be built by CI without errors.
->=20
-> Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-> ---
->  tools/docker/Dockerfile | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index 3d2b64a355f..2f3121ffcf6 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -98,6 +98,7 @@ RUN apt-get update && apt-get install -y \
->  	python2.7 \
->  	python3 \
->  	python3-dev \
-> +	python3-jsonschema \
->  	python3-pip \
->  	python3-pyelftools \
->  	python3-sphinx \
+Ah, OK.  Yes, I guess matching the kernel here is a good idea then.  And
+yes, updating the tests next.
 
-Interesting.  How exactly are you using these CI images? We have
-tools/buildman/requirements.txt now to cover the newly-added modules in
-CI, as we call pip on that.  But, it's not being used in the prepopulate
-the pip cache stage in the Dockerfile.  And, I'm not immune to the idea
-that we should instead be installing the distro package here.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---8zqoezEXP5kMivUz
+--VirkEIAIT9jyNaqz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTuCOUACgkQFHw5/5Y0
-tyzVMwv8CCWBgWcW2DN3Q8XWUzXGscDE1qR+SuR3Yv/+pY1s1/+hiNOCRHVNdnAo
-0ww3Lf6WbyMokHevbygeFfEceyc73shTHun4DaYfj1UD4G7p9hxNZzIGbcyB0sYR
-9oElaDE6p3NIjBLg7ijNElKQk/Drok5xWErBXTe+sCmuD7on8Rr3hJ6TcxL5/age
-qkZLk1yOcqGW+lhEjrTnTF1625CggNvAGbwrRuyr534q/EpG72YYX2hPN3qllfI9
-Fdj79qMZF4qmi+Pm4Wn7EST6NZcELKhrPUe77dY+L+5MI3vmkaIprro9v6sSlQuW
-Flxi951Q8rQt60M2+B2Rh8JTUNy2yl/h47fkNkCEkTrRAcBHHnp6vjMUzbWrv3t/
-MNNU2euFPz0nhsUXAyZmbfXfXTwlzuo+B/uSyKkVNnLergZQSsOEgREIzmZCMh2S
-g1501ZTNdE7IDoAu7dH8QDmkhn8hH7jEFCfMr80TjUtOWQW8QrYtU27q4AvPOG27
-T0uEg8J8
-=exvZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTuC3wACgkQFHw5/5Y0
+tyxrnwwAp6Ek4kaKMoFBsdMsLttkooyhVNb30yk3eVkfeAlhltcNfabR8G0xucfu
+LNSnhTHqKLLiB9Ob889eurSb9W8m8o4/vbjNI7DHKt5wspkrWy2MH+Ufu9o2O191
+5vugENaait8QAuJN9n4Em3X7nVVBp5qooB0qoaFC85cQDfgaEQAWpQQP4vslrnyd
+hKRCIYMsuyE4+KyUGvYY6azD6XU0ix/zolpP0kv9Xa6DO2qFTnZHlxmfryh7Epwe
+qfTHWHlH8pmPmcY1CY267jEeUUUQRH+oXToBtrTjRSjBQhgrW4N/9XEMfohnyVPi
+1E4vEhhcEbuDlngKEdeqMRbmfj+oYS9a2z252qFSPXjMz9xBIh4i5r7vxfnvtM0q
+nIBmSxvJAd37CA9a2uiFFZ1VzeWs4csRP3vDUjORuWV6HCput0IGuAeTtpf66Z66
+8g9sxg050Y1n8KL+QoWKKxMy+YdfKvFBcPRVwS6yWZtDvKiRqKOchoon1jpmY8l/
+3yFIF1Rx
+=M1Dv
 -----END PGP SIGNATURE-----
 
---8zqoezEXP5kMivUz--
+--VirkEIAIT9jyNaqz--
