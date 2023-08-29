@@ -4,49 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 091F6C83F12
-	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 20:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CA1BC6FA8F
+	for <u-boot@archiver.kernel.org>; Tue, 29 Aug 2023 21:05:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EBF48654E;
-	Tue, 29 Aug 2023 22:37:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E6F883F7F;
+	Tue, 29 Aug 2023 23:05:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="DbslzxCt";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iiB+mNUp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 380CF86510; Tue, 29 Aug 2023 22:37:17 +0200 (CEST)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 4659A864EC
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 22:37:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
+ id 554F686405; Tue, 29 Aug 2023 23:05:25 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EACE80770
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 23:05:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 884F52129BE6;
- Tue, 29 Aug 2023 13:37:11 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 884F52129BE6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1693341431;
- bh=p96aupymbwIcZ15B6g7kBrnwTQpv+zzmONQrlCn2MUA=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DbslzxCtR2RDbaAm4dEdF3pea3krm//gRf5+H7tDdFrtCR5Qhu/OfhxJxylMJvSRG
- Hkl+aYzfgTktMI/KAexY2l3t8ayupD8SdrTNOORILkuRlzx4oWzpm257OsgmFRLr7y
- lpgmySMurKKhAjA48qzmqybFtbHunkXGYIlmGYCw=
-From: seanedmond@linux.microsoft.com
-To: u-boot@lists.denx.de
-Cc: dphadke@linux.microsoft.com,
-	macromorgan@hotmail.com,
-	sjg@chromium.org
-Subject: [PATCH v2 2/4] fdt: kaslr seed from tpm entropy
-Date: Tue, 29 Aug 2023 13:37:08 -0700
-Message-Id: <20230829203710.84201-3-seanedmond@linux.microsoft.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
-References: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8E9D061031
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:05:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83ABCC43391
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 21:05:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693343119;
+ bh=JFvftynlWSpx2Z07NIHz5LNL4Jx2zBCJhehgL9bvydA=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=iiB+mNUpSoyWK4nP+SYz4igNO0RzsjxQPmyX06RAeDRf/ArYKrX5rGrH5mrzm6sq2
+ LmOAuiLVRFvZ55jbFT+rmpPlJar3fLlKlcG5yvby52X7+P0KEDv3KvhpJHJ43xnXSc
+ X/+qkaOv45GbJReT2EG9/f+bCcL9avcrtBwMrtgnnkyp6z5Kl5b0seo67HKtr1jyxt
+ paqrWQzvQOjSWmxczmguuAWqlPAm0sV5SM9FUeQTLzBba5kuKJ/sGs8qU+9PNkgdH5
+ 4vSPqYGsmOB7zc32FcQ4T+oiPFV0/UEPzfKOUDZ2eFlY6BZ8Iwr+divQEgSHZL7gl2
+ yeSfFqh7lZ5xw==
+Received: by mail-lj1-f180.google.com with SMTP id
+ 38308e7fff4ca-2b9f0b7af65so72225541fa.1
+ for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 14:05:19 -0700 (PDT)
+X-Gm-Message-State: AOJu0YxWzzU4Lkt0gQCVzE3+UGjZlMPa9uBtlvBar4lrV0uQbl2cJuMA
+ eLyUMsyia3JZUE6YIaGIT4xinQAfyJKKqFpWRA==
+X-Google-Smtp-Source: AGHT+IH/2nk4OWk7vLoTXXAxI4zCPN6UHpyrVHeHQbqFQEb5An/vtxt64lCxLTzYyqgWoFhn7ZDJ4hVE8qGkaKVkpe0=
+X-Received: by 2002:a2e:a16b:0:b0:2bc:c490:10cf with SMTP id
+ u11-20020a2ea16b000000b002bcc49010cfmr395430ljl.18.1693343117338; Tue, 29 Aug
+ 2023 14:05:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230829191812.135759-1-sjg@chromium.org>
+ <20230829191812.135759-2-sjg@chromium.org>
+In-Reply-To: <20230829191812.135759-2-sjg@chromium.org>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 29 Aug 2023 16:05:04 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqKVRoB4W31yuSQxc5hVt2pV6zY9y-scqdoxKLpFpe349Q@mail.gmail.com>
+Message-ID: <CAL_JsqKVRoB4W31yuSQxc5hVt2pV6zY9y-scqdoxKLpFpe349Q@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] Bring in other reserved-memory files
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Mark Rutland <mark.rutland@arm.com>, Gua Guo <gua.guo@intel.com>,
+ Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, ron minnich <rminnich@gmail.com>, 
+ Ard Biesheuvel <ardb@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Chiu Chasel <chasel.chiu@intel.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
+ linux-acpi@vger.kernel.org, Guo Dong <guo.dong@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,134 +88,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+On Tue, Aug 29, 2023 at 2:18=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Add those files from v6.5 which are already converted to yaml.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v4:
+> - New patch
+>
+>  .../schemas/reserved-memory/framebuffer.yaml  |  52 +++++++
+>  .../reserved-memory/google,open-dice.yaml     |  46 ++++++
+>  .../reserved-memory/memory-region.yaml        |  40 +++++
+>  .../nvidia,tegra210-emc-table.yaml            |  31 ++++
+>  .../nvidia,tegra264-bpmp-shmem.yaml           |  47 ++++++
+>  dtschema/schemas/reserved-memory/phram.yaml   |  47 ++++++
+>  .../schemas/reserved-memory/qcom,cmd-db.yaml  |  46 ++++++
+>  .../reserved-memory/qcom,rmtfs-mem.yaml       |  55 +++++++
+>  dtschema/schemas/reserved-memory/ramoops.yaml | 144 ++++++++++++++++++
+>  .../reserved-memory/shared-dma-pool.yaml      |  97 ++++++++++++
+>  10 files changed, 605 insertions(+)
 
-Add support for KASLR seed from TPM device. Invokes tpm_get_random()
-API to read 8-bytes of random bytes for KASLR.
+I don't think I want all of these in dtschema. Certainly not vendor
+specific ones. Generally, if it's not something we'd put in the spec,
+then I don't want it in dtschema. The u-boot stuff so far has been an
+exception.
 
-Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
-Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
-Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
----
- boot/image-fdt.c      | 15 +++++++++++++++
- common/fdt_support.c  | 30 ++++++++++++++++++++++++++++++
- include/fdt_support.h |  8 ++++++++
- lib/Kconfig           |  9 +++++++++
- 4 files changed, 62 insertions(+)
+Probably a good rule is if it has a compatible, then it doesn't go
+into dtschema. Though there's some exceptions already.
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index f10200f647..ed38ed77b9 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -624,6 +624,21 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
- 		goto err;
- 	}
- 
-+	if (IS_ENABLED(CONFIG_KASLR_TPM_SEED)) {
-+		ofnode root;
-+
-+		ret = root_ofnode_from_fdt(blob, &root);
-+		if (ret) {
-+			printf("ERROR: Unable to get root ofnode\n");
-+			goto err;
-+		}
-+		ret = fdt_tpm_kaslr_seed(root);
-+		if (ret) {
-+			printf("ERROR: fdt fixup KASLR failed: %d\n", ret);
-+			goto err;
-+		}
-+	}
-+
- 	fdt_ret = optee_copy_fdt_nodes(blob);
- 	if (fdt_ret) {
- 		printf("ERROR: transfer of optee nodes to new fdt failed: %s\n",
-diff --git a/common/fdt_support.c b/common/fdt_support.c
-index 52be4375b4..d338fcde54 100644
---- a/common/fdt_support.c
-+++ b/common/fdt_support.c
-@@ -13,6 +13,9 @@
- #include <mapmem.h>
- #include <net.h>
- #include <stdio_dev.h>
-+#include <tpm_api.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
- #include <dm/ofnode.h>
- #include <linux/ctype.h>
- #include <linux/types.h>
-@@ -650,6 +653,33 @@ int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
- 	return 0;
- }
- 
-+int fdt_tpm_kaslr_seed(ofnode node)
-+{
-+	u8 rand[8] = {0};
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_first_device_err(UCLASS_TPM, &dev);
-+	if (ret) {
-+		printf("ERROR: Failed to find TPM device\n");
-+		return ret;
-+	}
-+
-+	ret = tpm_get_random(dev, rand, sizeof(rand));
-+	if (ret) {
-+		printf("ERROR: TPM GetRandom failed, ret=%d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = fdt_fixup_kaslr_seed(node, rand, sizeof(rand));
-+	if (ret) {
-+		printf("ERROR: failed to add kaslr-seed to fdt\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- int fdt_record_loadable(void *blob, u32 index, const char *name,
- 			uintptr_t load_addr, u32 size, uintptr_t entry_point,
- 			const char *type, const char *os, const char *arch)
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index d967118bed..117ca14ca5 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -130,6 +130,14 @@ void fdt_fixup_ethernet(void *fdt);
-  */
- int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
- 
-+/*
-+ * fdt_add_tpm_kaslr_seed - Add kalsr-seed node in Device tree with random
-+ *			    bytes from TPM device
-+ * @node:		ofnode
-+ * @eret:		0 for success
-+ */
-+int fdt_tpm_kaslr_seed(ofnode node);
-+
- int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
- 			 const void *val, int len, int create);
- void fdt_fixup_qe_firmware(void *fdt);
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 3926652db6..1530ef7c86 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -465,6 +465,15 @@ config VPL_TPM
- 	  for the low-level TPM interface, but only one TPM is supported at
- 	  a time by the TPM library.
- 
-+config KASLR_TPM_SEED
-+	bool "Use TPM for KASLR random seed"
-+	depends on TPM_V1 || TPM_V2
-+	help
-+	  This enables support for using TPMs as entropy source for KASLR seed
-+	  populated in kernel's device tree. Both TPMv1 and TPMv2 are supported
-+	  for the low-level TPM interface, but only one TPM is supported at
-+	  a time by the library.
-+
- endmenu
- 
- menu "Android Verified Boot"
--- 
-2.40.0
+>  create mode 100644 dtschema/schemas/reserved-memory/framebuffer.yaml
 
+Maybe
+
+>  create mode 100644 dtschema/schemas/reserved-memory/google,open-dice.yam=
+l
+
+No
+
+>  create mode 100644 dtschema/schemas/reserved-memory/memory-region.yaml
+
+Yes
+
+>  create mode 100644 dtschema/schemas/reserved-memory/nvidia,tegra210-emc-=
+table.yaml
+>  create mode 100644 dtschema/schemas/reserved-memory/nvidia,tegra264-bpmp=
+-shmem.yaml
+
+No
+
+>  create mode 100644 dtschema/schemas/reserved-memory/phram.yaml
+
+Depends on mtd.yaml in the kernel, so no.
+
+>  create mode 100644 dtschema/schemas/reserved-memory/qcom,cmd-db.yaml
+>  create mode 100644 dtschema/schemas/reserved-memory/qcom,rmtfs-mem.yaml
+
+No.
+
+>  create mode 100644 dtschema/schemas/reserved-memory/ramoops.yaml
+
+Probably not.
+
+>  create mode 100644 dtschema/schemas/reserved-memory/shared-dma-pool.yaml
+
+Maybe.
+
+Rob
