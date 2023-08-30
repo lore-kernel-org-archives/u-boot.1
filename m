@@ -4,79 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4431C83F01
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 08:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBBCC6FA8F
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 08:31:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DAD28643D;
-	Wed, 30 Aug 2023 10:19:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 17E1086514;
+	Wed, 30 Aug 2023 10:31:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oH8KTozA";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Vaa0bzn6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DB1C8643D; Wed, 30 Aug 2023 10:19:37 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BA3678643D; Wed, 30 Aug 2023 10:31:53 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2061f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::61f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A2E4862F1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 10:19:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4D548643D
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 10:31:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2b72161c6e9so7504591fa.0
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 01:19:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693383574; x=1693988374; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=knSWMdpxTHP5t4p7W0Lft/Nm58wXAoYis8FqirBCYJw=;
- b=oH8KTozA4zenbZ3/8wMYss/2bgA/IBzCK9NOCp2DpBtvlZ2V8A2LcrFbMmaAALNlU2
- rVaJYvHwCFVRZc6l3ij4kHW06hDZZ1hx6ak+hd3UF4lW1mrBsqHE9CYg0hjoiRnug+OL
- eqeIIcbtYA0niCjiyrvZG7Np4fqPYpFkUierq5uA0S2EHicY70hd0fsxpZ4E5Wrku2r5
- BnHtqwy3ET3gjzYaERzHwr0DD0TR353KwdndIzJCBdJMdR/5lUQl2TWCAOZuIJdbg5Xr
- 4HZWXw6sLurKgpGuFAJ4+tAZNdjWVFO0ngKKo4lmAXuPGQK8/1N9z6eXrfK+aNqfWXkW
- S61w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693383574; x=1693988374;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=knSWMdpxTHP5t4p7W0Lft/Nm58wXAoYis8FqirBCYJw=;
- b=UidSVuzxCj46wDJ/gzcyNqVuG4mm43H3l0eF4svTpGh279oqhGB+vf8++NhC2DU3k2
- RvPnCwvckPa6XPI6UG78u5yBn1F5Qc9nJTliGFQAptYKCJ4g70O7nvLWxBC4b6Ucp1ye
- SENx0zVBQutNB0EtlRKavQVDFphDQFKyoi/UucK5F+HI6NCvBG8kbrrL7aZwrDHwp08Y
- RC8eIf+P4pDKPmVR1h9ttUpT8X/jL87A8cdBpnq8mRsb3RUYWgJzb+1zVYVLx5XqmxPf
- EkecwDsPLMg65v2UYD54zbsdq20Q0QF06yYvMEUvNEatridBhKYNTE6zJxLghEzE6AHF
- Jx+Q==
-X-Gm-Message-State: AOJu0YxOB3RPgOsdtLtlERWpXcSwnmFNdvcuIXItFeuTcSq4NOoi80xg
- smCzQeDNfJc8hBhhKG6QcHFhDYFsTlbKjOOpgoQ=
-X-Google-Smtp-Source: AGHT+IHU6f7Tc+cS2VoXFpwv3ICQuVWMJDB3Z22wYOkoePkKMTBr0cBj2L88oZ4Mw1hB2YEP+7tQV1lQAr1E14um0es=
-X-Received: by 2002:a2e:95ca:0:b0:2bb:94e4:6b07 with SMTP id
- y10-20020a2e95ca000000b002bb94e46b07mr633000ljh.12.1693383573482; Wed, 30 Aug
- 2023 01:19:33 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mnxxLbOrp3Rb7CLXp9a4E0ypAMGDR+UiGcSZt3YA7G4hCmApSRI38tEciulEghF2yyt6BmPA8UBPhDVJKpYpiEQ6CahNaChbTa3VO8lbvPj+wKUSXHsGAyWcVS7+pHznTcCImVHBo2b3UBBfLDuC8wHzfRPyT1opzttLEw653ol0C//TPuaSdfZLze8zeNaEjBR+gFz+C/3f/0hOgly25z+Wj06q5W4s/BaAF9u91JwCNyXPgTQA2YAY5f6qCZqqlTmelot5RHjSJGRUHpSDV9qIDxiuhknYaIhjd50tyaEP6BkNZV4oi1R/Lkb3yOWC1e7sEdHXEDw6npFTpiBeaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=m/SPYF+vlxmOo9o8/7p9ntS4tMSRDrESKqayGsIVAIo=;
+ b=YGzkIlu6wD0lwEg8II87m8eNQwRTsnM67c9rmwwlOYb937gXUaCR13eLKghoFcOrL/kRCuMSVaGBVDOgXs6lNyZFW1NTzfApRH0ub61TWiEZUPRNJu05f1Sw5iBem14Ir3KY0CPDqLhSY1XULLJ/hIJckc1PMh1PX0KJZDQgLksXrJzSeJ+XMoviQZ730ji89CmHuc6UNi2DLMoQpAEGBAsPpYScgUlWk6w1ep5FNkXebp6rAliGGqFuKHwV4VpZJ17mHfJSrNjDNKNcbVEiZJL8eN7g1uIAnz0xhrNsiZD2GxQ6vdsWIonomNGc+npfmmVAjlv1ts/mcqhFanxdFQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=m/SPYF+vlxmOo9o8/7p9ntS4tMSRDrESKqayGsIVAIo=;
+ b=Vaa0bzn6cgYCwzr5P+Ff/wdR7tKV2TT0Mt1vvu3Az0mVvmnmUOuN41nk0iOG5wEDURWylaAZmz4KXQ9pHFRNX/H4JTTHNRbkxoQWyiNgCNiTlSFBAIqLizvRYdjAfkHyj7zrz/+S9T3OdgrEzCQvzo/YKafjE2TsHIDo0EXvu9A=
+Received: from CYZPR12CA0009.namprd12.prod.outlook.com (2603:10b6:930:8b::24)
+ by DM4PR12MB5914.namprd12.prod.outlook.com (2603:10b6:8:67::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34; Wed, 30 Aug
+ 2023 08:31:47 +0000
+Received: from CY4PEPF0000E9CE.namprd03.prod.outlook.com
+ (2603:10b6:930:8b:cafe::cd) by CYZPR12CA0009.outlook.office365.com
+ (2603:10b6:930:8b::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20 via Frontend
+ Transport; Wed, 30 Aug 2023 08:31:46 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000E9CE.mail.protection.outlook.com (10.167.241.141) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.17 via Frontend Transport; Wed, 30 Aug 2023 08:31:46 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 30 Aug
+ 2023 03:31:44 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Tom Rini
+ <trini@konsulko.com>, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Lukasz Majewski <lukma@denx.de>, Nikhil M Jain
+ <n-jain1@ti.com>, Sean Anderson <seanga2@gmail.com>, Simon Glass
+ <sjg@chromium.org>
+Subject: [PATCH v2] clk: Dont return error when assigned-clocks is empty or
+ missing
+Date: Wed, 30 Aug 2023 10:31:42 +0200
+Message-ID: <a9a9d853e0ac396cd9b3577cce26279a75765711.1693384296.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
- <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
- <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
- <CALeDE9NUZ5vUzMrZgTcYtNR9dXyWEsZ+6zXNTFuFSvfL4XoM8Q@mail.gmail.com>
- <CAPnjgZ2zVcwfm1=+ce_J89sMEFQR6HsTwe-X31ZqjbWrNkxcYQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2zVcwfm1=+ce_J89sMEFQR6HsTwe-X31ZqjbWrNkxcYQ@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 30 Aug 2023 09:19:22 +0100
-Message-ID: <CALeDE9PbgPVWDCH0VMN8ftJ55VvkgksHUxNwoOK1ksCOJpNN=w@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2648; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=6SYDwOnyt5AFMslOo/KFK/DXcsN7sLYvLxI8AcjE+XY=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhpR3/zJvpz5TzROo/VWfuF3izFVB35ULBPrZdn7fZbV+a
+ 0U3i3BsRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZiIaD/D/ICM1f3+SxkyWXZ3
+ xGzN17XYLeAnzTC/wLhk6jnliRU2L08H5QQm7pv0NcgGAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CE:EE_|DM4PR12MB5914:EE_
+X-MS-Office365-Filtering-Correlation-Id: d6a79fbf-91f8-4d4e-94e4-08dba9338c83
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: hgC3JJ6WcgwdOfbI0TpdDtO70ASdFUMkV3COyBzo/03DqWIhe0gPvef2ceuDud6KhiXDKgFwi/h4MzyshpacMlCTkImgbbuzAphyZkdcJPZXRG3N+E2sLGRm8lzfIJhoE/4rKT18z65geSX4MJgTw6drd4j7dB/13ZxtgwVOh4BrTD5tjmJlLY1YeT52iOI8/E7vmes/SQ/WOdXz6pek+LHX/CjOVMEmxwE4Ifk4WWQP1UAc4MfczDClY8ycI/L6VtXqheRgrQ3Pk1vMDgNybfyNfBMuqd+24G4JiqUwfZnKEsn9JqYhY8aR+H+PxMB5k9b7GdZVhe2h03heoDE2V/XcS241qw/5fHz5Cku4fG6oA8okgi3tgnzPgeBzzRFmwTCYFmHUIJXJOFMMbgx+TYQD0nXlZ3hGsRR4PAjISHI1LnUeFk45+8TgKBIJV7EL2K/YzelSF/+0anmGEcGWlUbBQAPBV4jWMkY9xpO7rEjd1CUjsMdgRzXLgxhLQpPFrYqidxlbx4i9BKtzMv9YCMn0QRrU5Ba1RlmajsXtWYzeMNvr3yTU9w/dwZGnIU0xkwh/il+SF18YoVqBBP1LIBas4h3tSMMkZoquqHpAEMDtEEZhC0epQK4vEDG0NthVNgrXRneixUW0boByLdlEUIabY/ox53OSJo1ubP3cG378K2uEK8bZnB+wXQgI6v4DJMRWEWqv2eoi6o8RthOKBUqPLZRa+PShlhqm2AQGGZhOioviRHKIoH/kxWbwsX2wq2MMHRLAl7vk8BqXe+gDtJDAlyLvXPVS3Qc3iHzZFfs=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(39860400002)(346002)(136003)(396003)(82310400011)(186009)(1800799009)(451199024)(40470700004)(46966006)(36840700001)(83380400001)(2906002)(70206006)(426003)(478600001)(26005)(16526019)(336012)(2616005)(316002)(54906003)(8936002)(4326008)(41300700001)(8676002)(44832011)(5660300002)(110136005)(70586007)(36756003)(40460700003)(40480700001)(86362001)(356005)(36860700001)(81166007)(47076005)(82740400003)(192303002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2023 08:31:46.7979 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6a79fbf-91f8-4d4e-94e4-08dba9338c83
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5914
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,69 +130,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > > > > I have started the process to upstream the binman bindings.
-> > > >
-> > > > I don't think they should be in DT at all, they don't describe
-> > > > anything to do with hardware, or generally even the runtime of a
-> > > > device, they don't even describe the boot/runtime state of the
-> > > > firmware, they describe build time, so I don't see what that has to do
-> > > > with device tree? Can you explain that? To me those sorts of things
-> > > > should live in a build time style config file.
-> > >
-> > > I beg to differ. Devicetree is more than just hardware and always has
-> > > been. See, for example the /chosen and /options nodes.
-> >
-> > Can you give me an example of "options" as grep doesn't give me a
-> > single one in the kernel tree? I think we can just agree to disagree
-> > here.
->
-> See here: https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/options/u-boot.yaml
+From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
 
-All of those options look to me like they would work just fine in a
-.env file like you've added board/raspberrypi/rpi/rpi.env
+There is a chance that assigned-clock-rates is given and assigned-clocks
+could be empty. Dont return error in that case, because the probe of the
+corresponding driver will not be called at all if this fails.
+Better to continue to look for it and return 0.
 
-> I don't mind disagreeing, so long as it doesn't result in any
-> restrictions on using devicetree in firmware. But it is very important
-> to the success of firmware that we can make full use of the
-> devicetree.
+Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
 
-That statement doesn't make sense, of course the firmware makes full
-use of the DT because it needs it to instantiate the HW. You don't
-actually answer my question though.
+Changes in v2:
+- Add also test to cover it
+- Add Tom's reviewed-by line
 
-> > > We need run-time configuration here, since we cannot know at build
-> > > time what we will be asked to do by a previous firmware phase.
-> >
-> > Can you provide an example as to how that is used during runtime? Do
-> > you mean runtime during the build process or runtime on the device?
->
-> I mean runtime on the device. An example is that we might want to
-> control whether the serial UART is enabled, without having to rebuild
-> each program in the firmware stack.
+ arch/sandbox/dts/test.dts | 16 ++++++++++++++++
+ drivers/clk/clk-uclass.c  |  8 +++++++-
+ test/dm/clk.c             |  9 +++++++++
+ 3 files changed, 32 insertions(+), 1 deletion(-)
 
-That is describing the HW though, such as whether a serial port is
-enabled or not, it's not how the binman pieces you're adding to DT are
-used during runtime which is the question I was asking.
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index ff9f9222e6f9..90f876ac9c78 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -589,6 +589,22 @@
+ 		clock-names = "fixed", "i2c", "spi", "uart2", "uart1";
+ 	};
+ 
++	clk-test2 {
++		compatible = "sandbox,clk-test";
++		assigned-clock-rates = <321>;
++	};
++
++	clk-test3 {
++		compatible = "sandbox,clk-test";
++		assigned-clocks = <&clk_sandbox 1>;
++	};
++
++	clk-test4 {
++		compatible = "sandbox,clk-test";
++		assigned-clock-rates = <654>, <321>;
++		assigned-clocks = <&clk_sandbox 1>;
++	};
++
+ 	ccf: clk-ccf {
+ 		compatible = "sandbox,clk-ccf";
+ 	};
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index dc3e9d6a2615..f186fcbcdb86 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -329,7 +329,13 @@ static int clk_set_default_rates(struct udevice *dev,
+ 			dev_dbg(dev,
+ 				"could not get assigned clock %d (err = %d)\n",
+ 				index, ret);
+-			continue;
++			/* Skip if it is empty */
++			if (ret == -ENOENT) {
++				ret = 0;
++				continue;
++			}
++
++			return ret;
+ 		}
+ 
+ 		/* This is clk provider device trying to program itself
+diff --git a/test/dm/clk.c b/test/dm/clk.c
+index f48de05436bf..01417fbd8257 100644
+--- a/test/dm/clk.c
++++ b/test/dm/clk.c
+@@ -36,6 +36,15 @@ static int dm_test_clk_base(struct unit_test_state *uts)
+ 	ut_asserteq(clk_is_match(&clk_method1, &clk_method2), true);
+ 	ut_asserteq(clk_method1.id, clk_method2.id);
+ 
++	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test2", &dev));
++	ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test3", &dev));
++	ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
++
++	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test4", &dev));
++	ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
++
+ 	return 0;
+ }
+ 
+-- 
+2.36.1
 
-> >
-> > > >
-> > > > > Perhaps we should use the issue tracker[1] to follow progress on all
-> > > > > of this. We need to clean it up.
-> > > > >
-> > > > > >
-> > > > > > > Instead of this, how about working on bringing the DT validation into
-> > > > > > > U-Boot so we can see what state things are in?
-> > > > > > >
-> > > > > > > Please send the bindings for Linaro's recent series (which I suspect
-> > > > > > > are motivating this series) so we can start the process.
-> > > > >
-> > > > > Regards,
-> > > > > Simon
-> > > > >
-> > > > > [1] https://source.denx.de/u-boot/u-boot/-/issues
-> > >
-> > > Regards,
-> > > Simon
->
-> Regards,
-> Simon
