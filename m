@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC445C6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EB5FC83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4066865FB;
-	Wed, 30 Aug 2023 20:06:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 331C086625;
+	Wed, 30 Aug 2023 20:06:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WU7LLkYS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jMj4/L0H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04260865AB; Wed, 30 Aug 2023 20:06:01 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 8B3B7865AD; Wed, 30 Aug 2023 20:06:01 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9E3386563
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:05:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA9E486567
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:05:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-794e0e8b588so2109339f.1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:05:48 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7927f24140eso2085339f.2
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:05:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693418747; x=1694023547; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693418748; x=1694023548; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FmworSfNtol1OAAwjhg9Ul6/XqpFHGDgN4uuYkuvt6A=;
- b=WU7LLkYSm1sGd/Gr2oc45p87rZOrKBS+Qk3MZBu9kWod4OsEQ0IePg8g5zieDBBTea
- iaf90dfiFJXo+mcz7WGlCRVbm3viPXKRK0tgwWE9uVP8lpsO0tn0trQLEYlVavBqgc66
- OXPGODy7BMwZU/3Jhp1T6qEH421PUfy1rXlvY=
+ bh=FhBUL2dpULDBIDpjL4HABwkGZBeNCrXsyVb3Ie/4uPA=;
+ b=jMj4/L0HTSu9fxurOZU0WHQvRxcq3KLiQZB/Dw0pY+/TBmskEdpaw2g6RS4asY3TSr
+ 0hMYAxDwkbY9HVnDxtmwEnRxyUOlmX+A4bObFm5wHQ+KD6pnHuuKJOM41EWpgBbgu5dg
+ x0EzwbMACFdve7v4j+60UxhlJf5ABHBfxH81g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693418747; x=1694023547;
+ d=1e100.net; s=20221208; t=1693418748; x=1694023548;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FmworSfNtol1OAAwjhg9Ul6/XqpFHGDgN4uuYkuvt6A=;
- b=eecbqke+yrrIr3DdiBzIw/RWmCAjpTqRFXG3vDOi9IMAAVHEsiA7iKiEQsLi5eVkOF
- jr7FmwPZKkD5X9mOhNbOo8YJywhtz6d3p9rOOvb6tOtgul5C8BjdzfL0u/S6mX8hu90D
- g0n8Mpj4OJ53aZtJFXzBrtnr2g2ITVkOqnZjPz2rNXv6R/dMhRAobivDwHgXKROspSyB
- Bp73/HwVr9/zQqS3q+eC3n+QOKXd7gn+9uQgq2sGgZfnMJqTH6uPUpS0N3SvyjoOPRU7
- JQhIOCU9rho+hy0P9r36Sc8kd++MFqZZACNGaefD1kENrOThRPJ1ZKOY4xZfWNJ5Wr1C
- 2iLw==
-X-Gm-Message-State: AOJu0YyiWr6emrgJHfRYr4DceK6N3c5Uy1ffbexjKopCbX7axpnNNSLI
- JahLVyWKiJstjSnX4FuuCQlFt1OC1pL94Ytr1BQ=
-X-Google-Smtp-Source: AGHT+IEFtdTl5la1SWQ7TB6Jc9uewAK4IBPmyxiX/loY060yOwtWlH9HmW76IhPFku1qxM2QOygYTQ==
-X-Received: by 2002:a6b:e317:0:b0:790:9f0c:3069 with SMTP id
- u23-20020a6be317000000b007909f0c3069mr3310307ioc.9.1693418747341; 
- Wed, 30 Aug 2023 11:05:47 -0700 (PDT)
+ bh=FhBUL2dpULDBIDpjL4HABwkGZBeNCrXsyVb3Ie/4uPA=;
+ b=fe2IO7XhkkrPLQrtHwsH3E4+2DI+UhRsPn9dBIAD1uA0B6NI+5AkO6vZP2h10RpZ9T
+ s0atUd8Rs2qkAfzoMSZSxQ9ksitI+ja5tO43U5vhESN3BgZjHBzEJqc9kFs8p7hAiaid
+ VSOwbiG+ZNx4TI6GkgUdyWWBppPJcLzJXjtn0UFSRLcQqI3jKQPMwe0PUtjF0axp4xK/
+ OmhnD0ScAnFy+L+ZI3PtdNOcaGQ87DRnpwkmqSWH/GpLuVVQ/IHrvDAMW+rIxLSfAh/b
+ g+7A5gpVkHgqp7CghlsMF9kCrMFzZ372FFr7fYdwpEPd/baCA6ASiRJHLsEKO/9rWawP
+ 8s7Q==
+X-Gm-Message-State: AOJu0Yya7DYEHURVhLmBlIfQ+Tq+bwGCz9b/nWKuY/c8Y+FpPxlmcGt5
+ Q8F4zQcwNMDU8BZqp9NpcW9LDu4p84zjheEbbDo=
+X-Google-Smtp-Source: AGHT+IEILddkdg3168Qb06UB9OyjJANYrHKOJyjMIFFe5+89lxVabM1UhpeaoPDSeFP6JdGk7b7ZVA==
+X-Received: by 2002:a05:6602:474a:b0:795:2274:1f3f with SMTP id
+ dy10-20020a056602474a00b0079522741f3fmr2848426iob.3.1693418748335; 
+ Wed, 30 Aug 2023 11:05:48 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.05.46
+ dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.05.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 11:05:47 -0700 (PDT)
+ Wed, 30 Aug 2023 11:05:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Roger Quadros <rogerq@kernel.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH 11/32] spl: Rename spl_load_fit_image() to load_simple_fit()
-Date: Wed, 30 Aug 2023 12:04:42 -0600
-Message-ID: <20230830180524.315916-12-sjg@chromium.org>
+Subject: [PATCH 12/32] spl: Move the full FIT code to spl_fit.c
+Date: Wed, 30 Aug 2023 12:04:43 -0600
+Message-ID: <20230830180524.315916-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230830180524.315916-1-sjg@chromium.org>
 References: <20230830180524.315916-1-sjg@chromium.org>
@@ -90,92 +96,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have two functions called spl_load_fit_image(), one in spl.c and one in
-spl_fit.c
-
-Rename the second one, to indicate that it relates to simple FIT parsing,
-rather than the full version.
+For some reason this code was put in the main spl.c file. Move it out
+to the FIT implementation where it belongs.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/spl/spl_fit.c | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ common/spl/spl.c     | 108 +++----------------------------------------
+ common/spl/spl_fit.c |  93 +++++++++++++++++++++++++++++++++++++
+ include/spl.h        |  11 +++++
+ 3 files changed, 111 insertions(+), 101 deletions(-)
 
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 3e3e13057f1..8f87a27e61f 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -260,102 +260,6 @@ void spl_set_header_raw_uboot(struct spl_image_info *spl_image)
+ }
+ #endif
+ 
+-#if CONFIG_IS_ENABLED(LOAD_FIT_FULL)
+-/* Parse and load full fitImage in SPL */
+-static int spl_load_fit_image(struct spl_image_info *spl_image,
+-			      const struct legacy_img_hdr *header)
+-{
+-	struct bootm_headers images;
+-	const char *fit_uname_config = NULL;
+-	uintptr_t fdt_hack;
+-	const char *uname;
+-	ulong fw_data = 0, dt_data = 0, img_data = 0;
+-	ulong fw_len = 0, dt_len = 0, img_len = 0;
+-	int idx, conf_noffset;
+-	int ret;
+-
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
+-	images.verify = 1;
+-#endif
+-	ret = fit_image_load(&images, (ulong)header,
+-			     NULL, &fit_uname_config,
+-			     IH_ARCH_DEFAULT, IH_TYPE_STANDALONE, -1,
+-			     FIT_LOAD_OPTIONAL, &fw_data, &fw_len);
+-	if (ret >= 0) {
+-		printf("DEPRECATED: 'standalone = ' property.");
+-		printf("Please use either 'firmware =' or 'kernel ='\n");
+-	} else {
+-		ret = fit_image_load(&images, (ulong)header, NULL,
+-				     &fit_uname_config, IH_ARCH_DEFAULT,
+-				     IH_TYPE_FIRMWARE, -1, FIT_LOAD_OPTIONAL,
+-				     &fw_data, &fw_len);
+-	}
+-
+-	if (ret < 0) {
+-		ret = fit_image_load(&images, (ulong)header, NULL,
+-				     &fit_uname_config, IH_ARCH_DEFAULT,
+-				     IH_TYPE_KERNEL, -1, FIT_LOAD_OPTIONAL,
+-				     &fw_data, &fw_len);
+-	}
+-
+-	if (ret < 0)
+-		return ret;
+-
+-	spl_image->size = fw_len;
+-	spl_image->entry_point = fw_data;
+-	spl_image->load_addr = fw_data;
+-	if (fit_image_get_os(header, ret, &spl_image->os))
+-		spl_image->os = IH_OS_INVALID;
+-	spl_image->name = genimg_get_os_name(spl_image->os);
+-
+-	debug(SPL_TPL_PROMPT "payload image: %32s load addr: 0x%lx size: %d\n",
+-	      spl_image->name, spl_image->load_addr, spl_image->size);
+-
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
+-	images.verify = 1;
+-#endif
+-	ret = fit_image_load(&images, (ulong)header, NULL, &fit_uname_config,
+-		       IH_ARCH_DEFAULT, IH_TYPE_FLATDT, -1,
+-		       FIT_LOAD_OPTIONAL, &dt_data, &dt_len);
+-	if (ret >= 0) {
+-		spl_image->fdt_addr = (void *)dt_data;
+-
+-		if (spl_image->os == IH_OS_U_BOOT) {
+-			/* HACK: U-Boot expects FDT at a specific address */
+-			fdt_hack = spl_image->load_addr + spl_image->size;
+-			fdt_hack = (fdt_hack + 3) & ~3;
+-			debug("Relocating FDT to %p\n", spl_image->fdt_addr);
+-			memcpy((void *)fdt_hack, spl_image->fdt_addr, dt_len);
+-		}
+-	}
+-
+-	conf_noffset = fit_conf_get_node((const void *)header,
+-					 fit_uname_config);
+-	if (conf_noffset < 0)
+-		return 0;
+-
+-	for (idx = 0;
+-	     uname = fdt_stringlist_get((const void *)header, conf_noffset,
+-					FIT_LOADABLE_PROP, idx,
+-				NULL), uname;
+-	     idx++)
+-	{
+-#ifdef CONFIG_SPL_FIT_SIGNATURE
+-		images.verify = 1;
+-#endif
+-		ret = fit_image_load(&images, (ulong)header,
+-				     &uname, &fit_uname_config,
+-				     IH_ARCH_DEFAULT, IH_TYPE_LOADABLE, -1,
+-				     FIT_LOAD_OPTIONAL_NON_ZERO,
+-				     &img_data, &img_len);
+-		if (ret < 0)
+-			return ret;
+-	}
+-
+-	return 0;
+-}
+-#endif
+-
+ __weak int spl_parse_board_header(struct spl_image_info *spl_image,
+ 				  const struct spl_boot_device *bootdev,
+ 				  const void *image_header, size_t size)
+@@ -375,12 +279,14 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 			   const struct spl_boot_device *bootdev,
+ 			   const struct legacy_img_hdr *header)
+ {
+-#if CONFIG_IS_ENABLED(LOAD_FIT_FULL)
+-	int ret = spl_load_fit_image(spl_image, header);
++	int ret;
+ 
+-	if (!ret)
+-		return ret;
+-#endif
++	if (CONFIG_IS_ENABLED(LOAD_FIT_FULL)) {
++		ret = spl_load_fit_image(spl_image, header);
++
++		if (!ret)
++			return ret;
++	}
+ 	if (image_get_magic(header) == IH_MAGIC) {
+ 		int ret;
+ 
 diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 1bfdc0af496..8e7d033dd1a 100644
+index 8e7d033dd1a..5b5f6c62045 100644
 --- a/common/spl/spl_fit.c
 +++ b/common/spl/spl_fit.c
-@@ -207,7 +207,7 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
+@@ -826,3 +826,96 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 
+ 	return 0;
  }
++
++/* Parse and load full fitImage in SPL */
++int spl_load_fit_image(struct spl_image_info *spl_image,
++		       const struct legacy_img_hdr *header)
++{
++	struct bootm_headers images;
++	const char *fit_uname_config = NULL;
++	uintptr_t fdt_hack;
++	const char *uname;
++	ulong fw_data = 0, dt_data = 0, img_data = 0;
++	ulong fw_len = 0, dt_len = 0, img_len = 0;
++	int idx, conf_noffset;
++	int ret;
++
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++	images.verify = 1;
++#endif
++	ret = fit_image_load(&images, (ulong)header,
++			     NULL, &fit_uname_config,
++			     IH_ARCH_DEFAULT, IH_TYPE_STANDALONE, -1,
++			     FIT_LOAD_OPTIONAL, &fw_data, &fw_len);
++	if (ret >= 0) {
++		printf("DEPRECATED: 'standalone = ' property.");
++		printf("Please use either 'firmware =' or 'kernel ='\n");
++	} else {
++		ret = fit_image_load(&images, (ulong)header, NULL,
++				     &fit_uname_config, IH_ARCH_DEFAULT,
++				     IH_TYPE_FIRMWARE, -1, FIT_LOAD_OPTIONAL,
++				     &fw_data, &fw_len);
++	}
++
++	if (ret < 0) {
++		ret = fit_image_load(&images, (ulong)header, NULL,
++				     &fit_uname_config, IH_ARCH_DEFAULT,
++				     IH_TYPE_KERNEL, -1, FIT_LOAD_OPTIONAL,
++				     &fw_data, &fw_len);
++	}
++
++	if (ret < 0)
++		return ret;
++
++	spl_image->size = fw_len;
++	spl_image->entry_point = fw_data;
++	spl_image->load_addr = fw_data;
++	if (fit_image_get_os(header, ret, &spl_image->os))
++		spl_image->os = IH_OS_INVALID;
++	spl_image->name = genimg_get_os_name(spl_image->os);
++
++	debug(SPL_TPL_PROMPT "payload image: %32s load addr: 0x%lx size: %d\n",
++	      spl_image->name, spl_image->load_addr, spl_image->size);
++
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++	images.verify = 1;
++#endif
++	ret = fit_image_load(&images, (ulong)header, NULL, &fit_uname_config,
++			     IH_ARCH_DEFAULT, IH_TYPE_FLATDT, -1,
++			     FIT_LOAD_OPTIONAL, &dt_data, &dt_len);
++	if (ret >= 0) {
++		spl_image->fdt_addr = (void *)dt_data;
++
++		if (spl_image->os == IH_OS_U_BOOT) {
++			/* HACK: U-Boot expects FDT at a specific address */
++			fdt_hack = spl_image->load_addr + spl_image->size;
++			fdt_hack = (fdt_hack + 3) & ~3;
++			debug("Relocating FDT to %p\n", spl_image->fdt_addr);
++			memcpy((void *)fdt_hack, spl_image->fdt_addr, dt_len);
++		}
++	}
++
++	conf_noffset = fit_conf_get_node((const void *)header,
++					 fit_uname_config);
++	if (conf_noffset < 0)
++		return 0;
++
++	for (idx = 0;
++	     uname = fdt_stringlist_get((const void *)header, conf_noffset,
++					FIT_LOADABLE_PROP, idx,
++				NULL), uname;
++	     idx++) {
++#ifdef CONFIG_SPL_FIT_SIGNATURE
++		images.verify = 1;
++#endif
++		ret = fit_image_load(&images, (ulong)header,
++				     &uname, &fit_uname_config,
++				     IH_ARCH_DEFAULT, IH_TYPE_LOADABLE, -1,
++				     FIT_LOAD_OPTIONAL_NON_ZERO,
++				     &img_data, &img_len);
++		if (ret < 0)
++			return ret;
++	}
++
++	return 0;
++}
+diff --git a/include/spl.h b/include/spl.h
+index 60b55b75195..e958ace2cc6 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -910,4 +910,15 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size);
  
- /**
-- * spl_load_fit_image(): load the image described in a certain FIT node
-+ * load_simple_fit(): load the image described in a certain FIT node
-  * @info:	points to information about the device to load data from
-  * @sector:	the start sector of the FIT image on the device
-  * @ctx:	points to the FIT context structure
-@@ -220,9 +220,9 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
-  *
-  * Return:	0 on success or a negative error number.
-  */
--static int spl_load_fit_image(struct spl_load_info *info, ulong sector,
--			      const struct spl_fit_info *ctx, int node,
--			      struct spl_image_info *image_info)
-+static int load_simple_fit(struct spl_load_info *info, ulong sector,
-+			   const struct spl_fit_info *ctx, int node,
-+			   struct spl_image_info *image_info)
- {
- 	int offset;
- 	size_t length;
-@@ -385,8 +385,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
- 		else
- 			return node;
- 	} else {
--		ret = spl_load_fit_image(info, sector, ctx, node,
--					 &image_info);
-+		ret = load_simple_fit(info, sector, ctx, node, &image_info);
- 		if (ret < 0)
- 			return ret;
- 	}
-@@ -425,8 +424,8 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
- 					      __func__);
- 			}
- 			image_info.load_addr = (ulong)tmpbuffer;
--			ret = spl_load_fit_image(info, sector, ctx,
--						 node, &image_info);
-+			ret = load_simple_fit(info, sector, ctx, node,
-+					      &image_info);
- 			if (ret < 0)
- 				break;
- 
-@@ -616,7 +615,7 @@ static int spl_fit_load_fpga(struct spl_fit_info *ctx,
- 	warn_deprecated("'fpga' property in config node. Use 'loadables'");
- 
- 	/* Load the image and set up the fpga_image structure */
--	ret = spl_load_fit_image(info, sector, ctx, node, &fpga_image);
-+	ret = load_simple_fit(info, sector, ctx, node, &fpga_image);
- 	if (ret) {
- 		printf("%s: Cannot load the FPGA: %i\n", __func__, ret);
- 		return ret;
-@@ -741,7 +740,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 	}
- 
- 	/* Load the image and set up the spl_image structure */
--	ret = spl_load_fit_image(info, sector, &ctx, node, spl_image);
-+	ret = load_simple_fit(info, sector, &ctx, node, spl_image);
- 	if (ret)
- 		return ret;
- 
-@@ -782,7 +781,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
- 			continue;
- 
- 		image_info.load_addr = 0;
--		ret = spl_load_fit_image(info, sector, &ctx, node, &image_info);
-+		ret = load_simple_fit(info, sector, &ctx, node, &image_info);
- 		if (ret < 0) {
- 			printf("%s: can't load image loadables index %d (ret = %d)\n",
- 			       __func__, index, ret);
+ void board_boot_order(u32 *spl_boot_list);
+ void spl_save_restore_data(void);
++
++/**
++ * spl_load_fit_image() - Fully parse and a FIT image in SPL
++ *
++ * @spl_image: SPL Image data to fill in
++ * @header: Pointer to FIT image
++ * Return 0 if OK, -ve on error
++ */
++int spl_load_fit_image(struct spl_image_info *spl_image,
++		       const struct legacy_img_hdr *header);
++
+ #endif
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
