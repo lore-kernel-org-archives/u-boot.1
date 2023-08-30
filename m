@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93DDBC83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C87C83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A6A386526;
-	Wed, 30 Aug 2023 21:43:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A9F886541;
+	Wed, 30 Aug 2023 21:44:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="XC3UUk28";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LjZmkgSA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34D068652D; Wed, 30 Aug 2023 21:43:56 +0200 (CEST)
-Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
- [217.70.183.195])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 505E386549; Wed, 30 Aug 2023 21:44:20 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3F70863E7
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:43:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4BEC863E7
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexandre.belloni@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id EB9CF60005;
- Wed, 30 Aug 2023 19:43:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1693424632;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=L6hGeul3rdw1Ux5hLlduwK8cNHywzYtpdmdjpWMH7Cw=;
- b=XC3UUk28DksQAYnwr4vsdGcIo1HL5hQzUMMNxBjXrmodBFjeTuBJMogazlhU0waIzU1Z2A
- OARKUHTeKPh+YixGTASjSEWDtwMY+Xd7R0B5FIHB103SzUhqZgceVPgAtBLZqFr1qYYHsn
- QD+y1xD4774311f2YwT0geQKViAldumQLvX6VEa+Brps38ZfJvxcnH3LRcrS75OA3IyXj8
- +Jes69kDLNZWvOy4gqW8gm/AuvGoB+jeGzX5hbImnp6BAFL3C3XxcLFow7oFLJKNoY2SEr
- 9rylsXswCBVYpKRkcNZyKxXRshPQ58MiXyAy8i7oF/B46pwA/emhd5uVF6YbZA==
-Date: Wed, 30 Aug 2023 21:43:51 +0200
-From: Alexandre Belloni <alexandre.belloni@bootlin.com>
-To: Steffen Dirkwinkel <lists@steffen.cc>
-Cc: u-boot@lists.denx.de, Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>,
- Chris Packham <judge.packham@gmail.com>,
- Sergei Antonov <saproj@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/5] drivers: rtc: add rv3032 driver
-Message-ID: <2023083019435131e3524a@mail.local>
-References: <20230830140349.10801-1-lists@steffen.cc>
- <20230830140349.10801-2-lists@steffen.cc>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pali@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id EE2DB61881;
+ Wed, 30 Aug 2023 19:44:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07E97C433C8;
+ Wed, 30 Aug 2023 19:44:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693424653;
+ bh=DQ7qFR5sfh38NnNQoBxG55/UBT3xMnBZtkHzgsEK9BA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=LjZmkgSAWXGTamdF33B+tCNVuCC1yU6/6HazMhDrtI1SXp9q3AL8zGM39cpX+fkS4
+ EVHEbDZclNKdryUeCKy+Ekw8XiEcqJpVfpjjtbd/X1LmtPf07DilYt3qdgpDc01/i1
+ WlLmpZAf/yKbCBTt3pGhqbLqUnj1n5gXRNyQqmffUfeSM1+oGgIlE2aYa/8f+g+hNQ
+ BHjbMgzVW1q67E0FpbtjszUz8OC7N0aF+kykeDyDNl+sLQ7duYT2IGna7DOGO2DvKA
+ iv5ID9CJ+NvMJ+Xj0xDsE3vrbf5K/i0LR7MY3YDAtMu7IUEERKrz0EBGguA8y1AQGz
+ kaP/lNiBWBvUg==
+Received: by pali.im (Postfix)
+ id 06B0185A; Wed, 30 Aug 2023 21:44:09 +0200 (CEST)
+Date: Wed, 30 Aug 2023 21:44:09 +0200
+From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: Re: [PATCH 32/32] pci: serial: Support reading PCI-register size
+ with base
+Message-ID: <20230830194409.a7acogmn54gajmk6@pali>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-33-sjg@chromium.org>
+ <20230830181459.wtbt3w3qc4ysxwty@pali>
+ <20230830181750.GD3101304@bill-the-cat>
+ <20230830183913.mpj6achf3prjoanb@pali>
+ <20230830190422.GE3101304@bill-the-cat>
+ <20230830191036.hecw3vyabdsczxrb@pali>
+ <20230830194157.GF3101304@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20230830140349.10801-2-lists@steffen.cc>
-X-GND-Sasl: alexandre.belloni@bootlin.com
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230830194157.GF3101304@bill-the-cat>
+User-Agent: NeoMutt/20180716
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,421 +93,488 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+And you too. That was at the time when you and your people were
+interested in reviews from others.
 
-On 30/08/2023 16:03:30+0200, Steffen Dirkwinkel wrote:
-> From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+On Wednesday 30 August 2023 15:41:57 Tom Rini wrote:
+> Then you should probably remove yourself from the places you've listed
+> yourself as an interested maintainer, thanks.
 > 
-> Based on linux driver, with these differences:
-> - no support for trickle charger
-> - no support for hwmon
-> - no support for battery backed memory
-> - dm_i2c instead of regmap
-> - different tm_year and tm_mon
+> On Wed, Aug 30, 2023 at 09:10:36PM +0200, Pali Rohár wrote:
+> > You have already decided, what is the point? You are not taking any my
+> > objections into account, so stop writing to me and to others these your
+> > stupids bullshits. I'm not an idiot who is interesting for them.
+> > 
+> > On Wednesday 30 August 2023 15:04:22 Tom Rini wrote:
+> > > You're a listed maintainer for a file being changed. If you objected to
+> > > the changes, your objection would matter.  If you don't object, you can
+> > > just ignore it, or review it, whatever you like.  You need to decide
+> > > what you want to do about code you're volunteering to maintain.
+> > > 
+> > > On Wed, Aug 30, 2023 at 08:39:13PM +0200, Pali Rohár wrote:
+> > > > And what? How it is related to the statements that my reviews would also
+> > > > ignored? And what you want from me now?
+> > > > 
+> > > > On Wednesday 30 August 2023 14:17:50 Tom Rini wrote:
+> > > > > Pali,
+> > > > > 
+> > > > > You are specifically listed as a maintainer for drivers/pci/pci_mvebu.c
+> > > > > and that is changed by this patch.
+> > > > > 
+> > > > > On Wed, Aug 30, 2023 at 08:14:59PM +0200, Pali Rohár wrote:
+> > > > > > Simon, why you are contacting me? You have wrote to me that you would
+> > > > > > ignore my reviews here, so what you want now? Could you please explain
+> > > > > > what you are trying to achieve? I'm not going to review this or any
+> > > > > > other your changes.
+> > > > > > 
+> > > > > > On Wednesday 30 August 2023 12:05:03 Simon Glass wrote:
+> > > > > > > The PCI helpers read only the base address for a PCI region. In some cases
+> > > > > > > the size is needed as well, e.g. to pass along to a driver which needs to
+> > > > > > > know the size of its register area.
+> > > > > > > 
+> > > > > > > Update the functions to allow the size to be returned. For serial, record
+> > > > > > > the information and provided it with the serial_info() call.
+> > > > > > > 
+> > > > > > > A limitation still exists in that the size is not available when OF_LIVE
+> > > > > > > is enabled, so take account of that in the tests.
+> > > > > > > 
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > > 
+> > > > > > >  arch/sandbox/dts/test.dts   |  6 +++---
+> > > > > > >  drivers/core/fdtaddr.c      |  6 +++---
+> > > > > > >  drivers/core/ofnode.c       | 11 ++++++++---
+> > > > > > >  drivers/core/read.c         |  6 ++++--
+> > > > > > >  drivers/core/util.c         |  2 +-
+> > > > > > >  drivers/pci/pci-uclass.c    |  2 +-
+> > > > > > >  drivers/pci/pci_mvebu.c     |  3 ++-
+> > > > > > >  drivers/pci/pci_tegra.c     |  2 +-
+> > > > > > >  drivers/pci/pcie_mediatek.c |  4 ++--
+> > > > > > >  drivers/serial/ns16550.c    | 15 ++++++++++-----
+> > > > > > >  include/dm/fdtaddr.h        |  3 ++-
+> > > > > > >  include/dm/ofnode.h         |  4 +++-
+> > > > > > >  include/dm/read.h           |  8 +++++---
+> > > > > > >  include/ns16550.h           |  4 +++-
+> > > > > > >  include/serial.h            |  2 ++
+> > > > > > >  test/dm/pci.c               | 14 ++++++++++----
+> > > > > > >  16 files changed, 60 insertions(+), 32 deletions(-)
+> > > > > > > 
+> > > > > > > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> > > > > > > index a413cbe4989..961e8895a49 100644
+> > > > > > > --- a/arch/sandbox/dts/test.dts
+> > > > > > > +++ b/arch/sandbox/dts/test.dts
+> > > > > > > @@ -1087,8 +1087,8 @@
+> > > > > > >  		pci@1,0 {
+> > > > > > >  			compatible = "pci-generic";
+> > > > > > >  			/* reg 0 is at 0x14, using FDT_PCI_SPACE_MEM32 */
+> > > > > > > -			reg = <0x02000814 0 0 0 0
+> > > > > > > -			       0x01000810 0 0 0 0>;
+> > > > > > > +			reg = <0x02000814 0 0 0x80 0
+> > > > > > > +			       0x01000810 0 0 0xc0 0>;
+> > > > > > >  			sandbox,emul = <&swap_case_emul0_1>;
+> > > > > > >  		};
+> > > > > > >  		p2sb-pci@2,0 {
+> > > > > > > @@ -1115,7 +1115,7 @@
+> > > > > > >  		pci@1f,0 {
+> > > > > > >  			compatible = "pci-generic";
+> > > > > > >  			/* reg 0 is at 0x10, using FDT_PCI_SPACE_IO */
+> > > > > > > -			reg = <0x0100f810 0 0 0 0>;
+> > > > > > > +			reg = <0x0100f810 0 0 0x100 0>;
+> > > > > > >  			sandbox,emul = <&swap_case_emul0_1f>;
+> > > > > > >  		};
+> > > > > > >  	};
+> > > > > > > diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
+> > > > > > > index 546db675aaf..b79d138c419 100644
+> > > > > > > --- a/drivers/core/fdtaddr.c
+> > > > > > > +++ b/drivers/core/fdtaddr.c
+> > > > > > > @@ -215,7 +215,7 @@ void *devfdt_map_physmem(const struct udevice *dev, unsigned long size)
+> > > > > > >  	return map_physmem(addr, size, MAP_NOCACHE);
+> > > > > > >  }
+> > > > > > >  
+> > > > > > > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
+> > > > > > > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *sizep)
+> > > > > > >  {
+> > > > > > >  	ulong addr;
+> > > > > > >  
+> > > > > > > @@ -226,12 +226,12 @@ fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
+> > > > > > >  		int ret;
+> > > > > > >  
+> > > > > > >  		ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_MEM32,
+> > > > > > > -					   "reg", &pci_addr);
+> > > > > > > +					   "reg", &pci_addr, sizep);
+> > > > > > >  		if (ret) {
+> > > > > > >  			/* try if there is any i/o-mapped register */
+> > > > > > >  			ret = ofnode_read_pci_addr(dev_ofnode(dev),
+> > > > > > >  						   FDT_PCI_SPACE_IO, "reg",
+> > > > > > > -						   &pci_addr);
+> > > > > > > +						   &pci_addr, sizep);
+> > > > > > >  			if (ret)
+> > > > > > >  				return FDT_ADDR_T_NONE;
+> > > > > > >  		}
+> > > > > > > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> > > > > > > index 2ef4114cb6f..c9cec456f43 100644
+> > > > > > > --- a/drivers/core/ofnode.c
+> > > > > > > +++ b/drivers/core/ofnode.c
+> > > > > > > @@ -1270,7 +1270,8 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode node, const char *propname,
+> > > > > > >  }
+> > > > > > >  
+> > > > > > >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > > > -			 const char *propname, struct fdt_pci_addr *addr)
+> > > > > > > +			 const char *propname, struct fdt_pci_addr *addr,
+> > > > > > > +			 fdt_size_t *size)
+> > > > > > >  {
+> > > > > > >  	const fdt32_t *cell;
+> > > > > > >  	int len;
+> > > > > > > @@ -1298,14 +1299,18 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > > >  			      (ulong)fdt32_to_cpu(cell[1]),
+> > > > > > >  			      (ulong)fdt32_to_cpu(cell[2]));
+> > > > > > >  			if ((fdt32_to_cpu(*cell) & type) == type) {
+> > > > > > > +				const unaligned_fdt64_t *ptr;
+> > > > > > > +
+> > > > > > >  				addr->phys_hi = fdt32_to_cpu(cell[0]);
+> > > > > > >  				addr->phys_mid = fdt32_to_cpu(cell[1]);
+> > > > > > >  				addr->phys_lo = fdt32_to_cpu(cell[2]);
+> > > > > > > +				ptr = (const unaligned_fdt64_t *)(cell + 3);
+> > > > > > > +				if (size)
+> > > > > > > +					*size = fdt64_to_cpu(*ptr);
+> > > > > > >  				break;
+> > > > > > >  			}
+> > > > > > >  
+> > > > > > > -			cell += (FDT_PCI_ADDR_CELLS +
+> > > > > > > -				 FDT_PCI_SIZE_CELLS);
+> > > > > > > +			cell += FDT_PCI_ADDR_CELLS + FDT_PCI_SIZE_CELLS;
+> > > > > > >  		}
+> > > > > > >  
+> > > > > > >  		if (i == num) {
+> > > > > > > diff --git a/drivers/core/read.c b/drivers/core/read.c
+> > > > > > > index 49066b59cda..419013451f0 100644
+> > > > > > > --- a/drivers/core/read.c
+> > > > > > > +++ b/drivers/core/read.c
+> > > > > > > @@ -405,13 +405,15 @@ int dev_read_alias_highest_id(const char *stem)
+> > > > > > >  	return fdtdec_get_alias_highest_id(gd->fdt_blob, stem);
+> > > > > > >  }
+> > > > > > >  
+> > > > > > > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
+> > > > > > > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *sizep)
+> > > > > > >  {
+> > > > > > >  	ulong addr;
+> > > > > > >  
+> > > > > > >  	addr = dev_read_addr(dev);
+> > > > > > > +	if (sizep)
+> > > > > > > +		*sizep = 0;
+> > > > > > >  	if (addr == FDT_ADDR_T_NONE && !of_live_active())
+> > > > > > > -		addr = devfdt_get_addr_pci(dev);
+> > > > > > > +		addr = devfdt_get_addr_pci(dev, sizep);
+> > > > > > >  
+> > > > > > >  	return addr;
+> > > > > > >  }
+> > > > > > > diff --git a/drivers/core/util.c b/drivers/core/util.c
+> > > > > > > index aa60fdd15bc..81497df85ff 100644
+> > > > > > > --- a/drivers/core/util.c
+> > > > > > > +++ b/drivers/core/util.c
+> > > > > > > @@ -30,7 +30,7 @@ int pci_get_devfn(struct udevice *dev)
+> > > > > > >  
+> > > > > > >  	/* Extract the devfn from fdt_pci_addr */
+> > > > > > >  	ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_CONFIG,
+> > > > > > > -				   "reg", &addr);
+> > > > > > > +				   "reg", &addr, NULL);
+> > > > > > >  	if (ret) {
+> > > > > > >  		if (ret != -ENOENT)
+> > > > > > >  			return -EINVAL;
+> > > > > > > diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+> > > > > > > index 0adcdceb1d3..c670f8754e8 100644
+> > > > > > > --- a/drivers/pci/pci-uclass.c
+> > > > > > > +++ b/drivers/pci/pci-uclass.c
+> > > > > > > @@ -122,7 +122,7 @@ static void pci_dev_find_ofnode(struct udevice *bus, phys_addr_t bdf,
+> > > > > > >  
+> > > > > > >  	dev_for_each_subnode(node, bus) {
+> > > > > > >  		ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg",
+> > > > > > > -					   &addr);
+> > > > > > > +					   &addr, NULL);
+> > > > > > >  		if (ret)
+> > > > > > >  			continue;
+> > > > > > >  
+> > > > > > > diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
+> > > > > > > index 93a7508d8a2..25878bde534 100644
+> > > > > > > --- a/drivers/pci/pci_mvebu.c
+> > > > > > > +++ b/drivers/pci/pci_mvebu.c
+> > > > > > > @@ -640,7 +640,8 @@ static int mvebu_pcie_port_parse_dt(ofnode node, ofnode parent, struct mvebu_pci
+> > > > > > >  		pcie->is_x4 = true;
+> > > > > > >  
+> > > > > > >  	/* devfn is in bits [15:8], see PCI_DEV usage */
+> > > > > > > -	ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_addr);
+> > > > > > > +	ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_addr,
+> > > > > > > +				   NULL);
+> > > > > > >  	if (ret < 0) {
+> > > > > > >  		printf("%s: property \"reg\" is invalid\n", pcie->name);
+> > > > > > >  		goto err;
+> > > > > > > diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
+> > > > > > > index 29d54117e93..ae90bd2fbf1 100644
+> > > > > > > --- a/drivers/pci/pci_tegra.c
+> > > > > > > +++ b/drivers/pci/pci_tegra.c
+> > > > > > > @@ -461,7 +461,7 @@ static int tegra_pcie_parse_port_info(ofnode node, uint *index, uint *lanes)
+> > > > > > >  
+> > > > > > >  	*lanes = err;
+> > > > > > >  
+> > > > > > > -	err = ofnode_read_pci_addr(node, 0, "reg", &addr);
+> > > > > > > +	err = ofnode_read_pci_addr(node, 0, "reg", &addr, NULL);
+> > > > > > >  	if (err < 0) {
+> > > > > > >  		pr_err("failed to parse \"reg\" property\n");
+> > > > > > >  		return err;
+> > > > > > > diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_mediatek.c
+> > > > > > > index c6e30e24622..e59ebd13ad0 100644
+> > > > > > > --- a/drivers/pci/pcie_mediatek.c
+> > > > > > > +++ b/drivers/pci/pcie_mediatek.c
+> > > > > > > @@ -660,7 +660,7 @@ static int mtk_pcie_probe(struct udevice *dev)
+> > > > > > >  		if (!ofnode_is_enabled(subnode))
+> > > > > > >  			continue;
+> > > > > > >  
+> > > > > > > -		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr);
+> > > > > > > +		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+> > > > > > >  		if (err)
+> > > > > > >  			return err;
+> > > > > > >  
+> > > > > > > @@ -699,7 +699,7 @@ static int mtk_pcie_probe_v2(struct udevice *dev)
+> > > > > > >  		if (!ofnode_is_enabled(subnode))
+> > > > > > >  			continue;
+> > > > > > >  
+> > > > > > > -		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr);
+> > > > > > > +		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+> > > > > > >  		if (err)
+> > > > > > >  			return err;
+> > > > > > >  
+> > > > > > > diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+> > > > > > > index eab9537fbae..a349e5e132a 100644
+> > > > > > > --- a/drivers/serial/ns16550.c
+> > > > > > > +++ b/drivers/serial/ns16550.c
+> > > > > > > @@ -479,6 +479,7 @@ static int ns16550_serial_getinfo(struct udevice *dev,
+> > > > > > >  	info->addr_space = SERIAL_ADDRESS_SPACE_MEMORY;
+> > > > > > >  #endif
+> > > > > > >  	info->addr = plat->base;
+> > > > > > > +	info->size = plat->size;
+> > > > > > >  	info->reg_width = plat->reg_width;
+> > > > > > >  	info->reg_shift = plat->reg_shift;
+> > > > > > >  	info->reg_offset = plat->reg_offset;
+> > > > > > > @@ -487,7 +488,8 @@ static int ns16550_serial_getinfo(struct udevice *dev,
+> > > > > > >  	return 0;
+> > > > > > >  }
+> > > > > > >  
+> > > > > > > -static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_addr_t base)
+> > > > > > > +static int ns16550_serial_assign_base(struct ns16550_plat *plat,
+> > > > > > > +				      fdt_addr_t base, fdt_size_t size)
+> > > > > > >  {
+> > > > > > >  	if (base == FDT_ADDR_T_NONE)
+> > > > > > >  		return -EINVAL;
+> > > > > > > @@ -497,6 +499,7 @@ static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_addr_t base
+> > > > > > >  #else
+> > > > > > >  	plat->base = (unsigned long)map_physmem(base, 0, MAP_NOCACHE);
+> > > > > > >  #endif
+> > > > > > > +	plat->size = size;
+> > > > > > >  
+> > > > > > >  	return 0;
+> > > > > > >  }
+> > > > > > > @@ -507,6 +510,7 @@ int ns16550_serial_probe(struct udevice *dev)
+> > > > > > >  	struct ns16550 *const com_port = dev_get_priv(dev);
+> > > > > > >  	struct reset_ctl_bulk reset_bulk;
+> > > > > > >  	fdt_addr_t addr;
+> > > > > > > +	fdt_addr_t size;
+> > > > > > >  	int ret;
+> > > > > > >  
+> > > > > > >  	/*
+> > > > > > > @@ -514,8 +518,8 @@ int ns16550_serial_probe(struct udevice *dev)
+> > > > > > >  	 * or via a PCI bridge, assign plat->base before probing hardware.
+> > > > > > >  	 */
+> > > > > > >  	if (device_is_on_pci_bus(dev)) {
+> > > > > > > -		addr = devfdt_get_addr_pci(dev);
+> > > > > > > -		ret = ns16550_serial_assign_base(plat, addr);
+> > > > > > > +		addr = devfdt_get_addr_pci(dev, &size);
+> > > > > > > +		ret = ns16550_serial_assign_base(plat, addr, size);
+> > > > > > >  		if (ret)
+> > > > > > >  			return ret;
+> > > > > > >  	}
+> > > > > > > @@ -543,11 +547,12 @@ int ns16550_serial_of_to_plat(struct udevice *dev)
+> > > > > > >  	struct ns16550_plat *plat = dev_get_plat(dev);
+> > > > > > >  	const u32 port_type = dev_get_driver_data(dev);
+> > > > > > >  	fdt_addr_t addr;
+> > > > > > > +	fdt_size_t size;
+> > > > > > >  	struct clk clk;
+> > > > > > >  	int err;
+> > > > > > >  
+> > > > > > > -	addr = dev_read_addr(dev);
+> > > > > > > -	err = ns16550_serial_assign_base(plat, addr);
+> > > > > > > +	addr = dev_read_addr_size(dev, &size);
+> > > > > > > +	err = ns16550_serial_assign_base(plat, addr, size);
+> > > > > > >  	if (err && !device_is_on_pci_bus(dev))
+> > > > > > >  		return err;
+> > > > > > >  
+> > > > > > > diff --git a/include/dm/fdtaddr.h b/include/dm/fdtaddr.h
+> > > > > > > index dcdc19137cc..6d2fa8f1044 100644
+> > > > > > > --- a/include/dm/fdtaddr.h
+> > > > > > > +++ b/include/dm/fdtaddr.h
+> > > > > > > @@ -168,8 +168,9 @@ fdt_addr_t devfdt_get_addr_size_name(const struct udevice *dev,
+> > > > > > >   * devfdt_get_addr_pci() - Read an address and handle PCI address translation
+> > > > > > >   *
+> > > > > > >   * @dev: Device to read from
+> > > > > > > + * @sizep: If non-NULL, returns size of address space
+> > > > > > >   * Return: address or FDT_ADDR_T_NONE if not found
+> > > > > > >   */
+> > > > > > > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev);
+> > > > > > > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *sizep);
+> > > > > > >  
+> > > > > > >  #endif
+> > > > > > > diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> > > > > > > index 726d8f82ddf..97cad971611 100644
+> > > > > > > --- a/include/dm/ofnode.h
+> > > > > > > +++ b/include/dm/ofnode.h
+> > > > > > > @@ -1152,13 +1152,15 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode node, const char *propname,
+> > > > > > >   * @type:	pci address type (FDT_PCI_SPACE_xxx)
+> > > > > > >   * @propname:	name of property to find
+> > > > > > >   * @addr:	returns pci address in the form of fdt_pci_addr
+> > > > > > > + * @size:	if non-null, returns register-space size
+> > > > > > >   * Return:
+> > > > > > >   * 0 if ok, -ENOENT if the property did not exist, -EINVAL if the
+> > > > > > >   * format of the property was invalid, -ENXIO if the requested
+> > > > > > >   * address type was not found
+> > > > > > >   */
+> > > > > > >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > > > -			 const char *propname, struct fdt_pci_addr *addr);
+> > > > > > > +			 const char *propname, struct fdt_pci_addr *addr,
+> > > > > > > +			 fdt_size_t *size);
+> > > > > > >  
+> > > > > > >  /**
+> > > > > > >   * ofnode_read_pci_vendev() - look up PCI vendor and device id
+> > > > > > > diff --git a/include/dm/read.h b/include/dm/read.h
+> > > > > > > index c2615f72f40..3c2eea6f0c4 100644
+> > > > > > > --- a/include/dm/read.h
+> > > > > > > +++ b/include/dm/read.h
+> > > > > > > @@ -346,9 +346,10 @@ void *dev_read_addr_ptr(const struct udevice *dev);
+> > > > > > >   *    fdtdec_get_addr() and friends.
+> > > > > > >   *
+> > > > > > >   * @dev: Device to read from
+> > > > > > > + * @sizep: If non-NULL, returns size of address space found
+> > > > > > >   * Return: address or FDT_ADDR_T_NONE if not found
+> > > > > > >   */
+> > > > > > > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev);
+> > > > > > > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *sizep);
+> > > > > > >  
+> > > > > > >  /**
+> > > > > > >   * dev_remap_addr() - Get the reg property of a device as a
+> > > > > > > @@ -996,9 +997,10 @@ static inline void *dev_read_addr_ptr(const struct udevice *dev)
+> > > > > > >  	return devfdt_get_addr_ptr(dev);
+> > > > > > >  }
+> > > > > > >  
+> > > > > > > -static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
+> > > > > > > +static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev,
+> > > > > > > +					   fdt_size_t *sizep)
+> > > > > > >  {
+> > > > > > > -	return devfdt_get_addr_pci(dev);
+> > > > > > > +	return devfdt_get_addr_pci(dev, sizep);
+> > > > > > >  }
+> > > > > > >  
+> > > > > > >  static inline void *dev_remap_addr(const struct udevice *dev)
+> > > > > > > diff --git a/include/ns16550.h b/include/ns16550.h
+> > > > > > > index e7e68663d03..7f481300083 100644
+> > > > > > > --- a/include/ns16550.h
+> > > > > > > +++ b/include/ns16550.h
+> > > > > > > @@ -58,6 +58,7 @@ enum ns16550_flags {
+> > > > > > >   * struct ns16550_plat - information about a NS16550 port
+> > > > > > >   *
+> > > > > > >   * @base:		Base register address
+> > > > > > > + * @size:		Size of register area in bytes
+> > > > > > >   * @reg_width:		IO accesses size of registers (in bytes, 1 or 4)
+> > > > > > >   * @reg_shift:		Shift size of registers (0=byte, 1=16bit, 2=32bit...)
+> > > > > > >   * @reg_offset:		Offset to start of registers (normally 0)
+> > > > > > > @@ -67,7 +68,8 @@ enum ns16550_flags {
+> > > > > > >   * @bdf:		PCI slot/function (pci_dev_t)
+> > > > > > >   */
+> > > > > > >  struct ns16550_plat {
+> > > > > > > -	unsigned long base;
+> > > > > > > +	ulong base;
+> > > > > > > +	ulong size;
+> > > > > > >  	int reg_width;
+> > > > > > >  	int reg_shift;
+> > > > > > >  	int reg_offset;
+> > > > > > > diff --git a/include/serial.h b/include/serial.h
+> > > > > > > index 42bdf3759c0..205889d28be 100644
+> > > > > > > --- a/include/serial.h
+> > > > > > > +++ b/include/serial.h
+> > > > > > > @@ -137,6 +137,7 @@ enum adr_space_type {
+> > > > > > >   * @type:	type of the UART chip
+> > > > > > >   * @addr_space:	address space to access the registers
+> > > > > > >   * @addr:	physical address of the registers
+> > > > > > > + * @size:	size of the register area in bytes
+> > > > > > >   * @reg_width:	size (in bytes) of the IO accesses to the registers
+> > > > > > >   * @reg_offset:	offset to apply to the @addr from the start of the registers
+> > > > > > >   * @reg_shift:	quantity to shift the register offsets by
+> > > > > > > @@ -147,6 +148,7 @@ struct serial_device_info {
+> > > > > > >  	enum serial_chip_type type;
+> > > > > > >  	enum adr_space_type addr_space;
+> > > > > > >  	ulong addr;
+> > > > > > > +	ulong size;
+> > > > > > >  	u8 reg_width;
+> > > > > > >  	u8 reg_offset;
+> > > > > > >  	u8 reg_shift;
+> > > > > > > diff --git a/test/dm/pci.c b/test/dm/pci.c
+> > > > > > > index 70a736cfdb8..8c5e7da9e62 100644
+> > > > > > > --- a/test/dm/pci.c
+> > > > > > > +++ b/test/dm/pci.c
+> > > > > > > @@ -301,10 +301,12 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
+> > > > > > >  {
+> > > > > > >  	struct udevice *swap1f, *swap1;
+> > > > > > >  	ulong io_addr, mem_addr;
+> > > > > > > +	fdt_addr_t size;
+> > > > > > >  
+> > > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
+> > > > > > >  	io_addr = dm_pci_read_bar32(swap1f, 0);
+> > > > > > > -	ut_asserteq(io_addr, dev_read_addr_pci(swap1f));
+> > > > > > > +	ut_asserteq(io_addr, dev_read_addr_pci(swap1f, &size));
+> > > > > > > +	ut_asserteq(0, size);
+> > > > > > >  
+> > > > > > >  	/*
+> > > > > > >  	 * This device has both I/O and MEM spaces but the MEM space appears
+> > > > > > > @@ -312,7 +314,8 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
+> > > > > > >  	 */
+> > > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
+> > > > > > >  	mem_addr = dm_pci_read_bar32(swap1, 1);
+> > > > > > > -	ut_asserteq(mem_addr, dev_read_addr_pci(swap1));
+> > > > > > > +	ut_asserteq(mem_addr, dev_read_addr_pci(swap1, &size));
+> > > > > > > +	ut_asserteq(0, size);
+> > > > > > >  
+> > > > > > >  	return 0;
+> > > > > > >  }
+> > > > > > > @@ -329,12 +332,15 @@ DM_TEST(dm_test_pci_addr_flat, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT |
+> > > > > > >  static int dm_test_pci_addr_live(struct unit_test_state *uts)
+> > > > > > >  {
+> > > > > > >  	struct udevice *swap1f, *swap1;
+> > > > > > > +	fdt_size_t size;
+> > > > > > >  
+> > > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
+> > > > > > > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
+> > > > > > > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f, &size));
+> > > > > > > +	ut_asserteq(0, size);
+> > > > > > >  
+> > > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
+> > > > > > > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
+> > > > > > > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1, &size));
+> > > > > > > +	ut_asserteq(0, size);
+> > > > > > >  
+> > > > > > >  	return 0;
+> > > > > > >  }
+> > > > > > > -- 
+> > > > > > > 2.42.0.rc2.253.gd59a3bf2b4-goog
+> > > > > > > 
+> > > > > 
+> > > > > -- 
+> > > > > Tom
+> > > > 
+> > > > 
+> > > 
+> > > -- 
+> > > Tom
+> > 
+> > 
 > 
-> read/write access the user eeprom. The read and write functions access
-> the user eeprom so it can be used for nvmem-cells. (like in
-> arch/sandbox/dts/test.dts). This is currently different from linux as
-> you'd get nvram using nvmem-cells. I'm hoping to switch the order there
-
-I'm not sure I get this as both nvram and eeprom are exposed through
-nvmem. The solution is not to reorder but instead to fix the nvmem core
-so you can expose both using nvmem-cells as there are users that access
-the nvram to handle A/B updates (bootcount, rescue mode,...)
-
-> too (there are currently no users) or to make a more specific binding.
-> Currently this would also just work as is if used for mac addresses, as
-> u-boot will put these into fdt before booting linux and linux will then
-> prefer the u-boot provided mac.
-> 
-> Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> 
-> ---
-> 
->  drivers/rtc/Kconfig  |  10 ++
->  drivers/rtc/Makefile |   1 +
->  drivers/rtc/rv3032.c | 334 +++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 345 insertions(+)
->  create mode 100644 drivers/rtc/rv3032.c
-> 
-> diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-> index 23173139e0..a41ec9b6cc 100644
-> --- a/drivers/rtc/Kconfig
-> +++ b/drivers/rtc/Kconfig
-> @@ -172,6 +172,16 @@ config RTC_RV3029
->  	  This driver supports reading and writing the RTC/calendar and the
->  	  battery-baced SRAM section.
->  
-> +config RTC_RV3032
-> +	bool "Enable RV3032 driver"
-> +	depends on DM_RTC
-> +	help
-> +	  The MicroCrystal RV3032 is a I2C Real Time Clock (RTC) with a 16-byte
-> +	  battery-backed SRAM and a 32-byte user eeprom.
-> +
-> +	  This driver supports reading and writing the RTC/calendar and the
-> +	  user eeprom.
-> +
->  config RTC_RV8803
->  	bool "Enable RV8803 driver"
->  	depends on DM_RTC
-> diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
-> index 308fab8da9..9c2d8c7aa9 100644
-> --- a/drivers/rtc/Makefile
-> +++ b/drivers/rtc/Makefile
-> @@ -31,6 +31,7 @@ obj-$(CONFIG_RTC_PL031) += pl031.o
->  obj-$(CONFIG_RTC_PT7C4338) += pt7c4338.o
->  obj-$(CONFIG_RTC_RV3028) += rv3028.o
->  obj-$(CONFIG_RTC_RV3029) += rv3029.o
-> +obj-$(CONFIG_RTC_RV3032) += rv3032.o
->  obj-$(CONFIG_RTC_RV8803) += rv8803.o
->  obj-$(CONFIG_RTC_RX8025) += rx8025.o
->  obj-$(CONFIG_RTC_RX8010SJ) += rx8010sj.o
-> diff --git a/drivers/rtc/rv3032.c b/drivers/rtc/rv3032.c
-> new file mode 100644
-> index 0000000000..8d5d860c0a
-> --- /dev/null
-> +++ b/drivers/rtc/rv3032.c
-> @@ -0,0 +1,334 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * RTC driver for the Micro Crystal RV3032
-> + *
-> + * based on linux driver from
-> + * Copyright (C) 2020 Micro Crystal SA
-> + *
-> + * Alexandre Belloni <alexandre.belloni@bootlin.com>
-> + *
-> + */
-> +
-> +#include <dm.h>
-> +#include <i2c.h>
-> +#include <linux/delay.h>
-> +#include <regmap.h>
-> +#include <rtc.h>
-> +#include <time.h>
-> +
-> +#define RV3032_SEC			0x01
-> +#define RV3032_MIN			0x02
-> +#define RV3032_HOUR			0x03
-> +#define RV3032_WDAY			0x04
-> +#define RV3032_DAY			0x05
-> +#define RV3032_MONTH			0x06
-> +#define RV3032_YEAR			0x07
-> +#define RV3032_ALARM_MIN		0x08
-> +#define RV3032_ALARM_HOUR		0x09
-> +#define RV3032_ALARM_DAY		0x0A
-> +#define RV3032_STATUS			0x0D
-> +#define RV3032_TLSB			0x0E
-> +#define RV3032_TMSB			0x0F
-> +#define RV3032_CTRL1			0x10
-> +#define RV3032_CTRL2			0x11
-> +#define RV3032_CTRL3			0x12
-> +#define RV3032_TS_CTRL			0x13
-> +#define RV3032_CLK_IRQ			0x14
-> +#define RV3032_EEPROM_ADDR		0x3D
-> +#define RV3032_EEPROM_DATA		0x3E
-> +#define RV3032_EEPROM_CMD		0x3F
-> +#define RV3032_RAM1			0x40
-> +#define RV3032_PMU			0xC0
-> +#define RV3032_OFFSET			0xC1
-> +#define RV3032_CLKOUT1			0xC2
-> +#define RV3032_CLKOUT2			0xC3
-> +#define RV3032_TREF0			0xC4
-> +#define RV3032_TREF1			0xC5
-> +
-> +#define RV3032_STATUS_VLF		BIT(0)
-> +#define RV3032_STATUS_PORF		BIT(1)
-> +#define RV3032_STATUS_EVF		BIT(2)
-> +#define RV3032_STATUS_AF		BIT(3)
-> +#define RV3032_STATUS_TF		BIT(4)
-> +#define RV3032_STATUS_UF		BIT(5)
-> +#define RV3032_STATUS_TLF		BIT(6)
-> +#define RV3032_STATUS_THF		BIT(7)
-> +
-> +#define RV3032_TLSB_CLKF		BIT(1)
-> +#define RV3032_TLSB_EEBUSY		BIT(2)
-> +#define RV3032_TLSB_TEMP		GENMASK(7, 4)
-> +
-> +#define RV3032_CLKOUT2_HFD_MSK		GENMASK(4, 0)
-> +#define RV3032_CLKOUT2_FD_MSK		GENMASK(6, 5)
-> +#define RV3032_CLKOUT2_OS		BIT(7)
-> +
-> +#define RV3032_CTRL1_EERD		BIT(3)
-> +#define RV3032_CTRL1_WADA		BIT(5)
-> +
-> +#define RV3032_CTRL2_STOP		BIT(0)
-> +#define RV3032_CTRL2_EIE		BIT(2)
-> +#define RV3032_CTRL2_AIE		BIT(3)
-> +#define RV3032_CTRL2_TIE		BIT(4)
-> +#define RV3032_CTRL2_UIE		BIT(5)
-> +#define RV3032_CTRL2_CLKIE		BIT(6)
-> +#define RV3032_CTRL2_TSE		BIT(7)
-> +
-> +#define RV3032_PMU_TCM			GENMASK(1, 0)
-> +#define RV3032_PMU_TCR			GENMASK(3, 2)
-> +#define RV3032_PMU_BSM			GENMASK(5, 4)
-> +#define RV3032_PMU_NCLKE		BIT(6)
-> +
-> +#define RV3032_PMU_BSM_DSM		1
-> +#define RV3032_PMU_BSM_LSM		2
-> +
-> +#define RV3032_OFFSET_MSK		GENMASK(5, 0)
-> +
-> +#define RV3032_EVT_CTRL_TSR		BIT(2)
-> +
-> +#define RV3032_EEPROM_CMD_UPDATE	0x11
-> +#define RV3032_EEPROM_CMD_WRITE		0x21
-> +#define RV3032_EEPROM_CMD_READ		0x22
-> +
-> +#define RV3032_EEPROM_USER		0xCB
-> +
-> +#define RV3032_EEBUSY_POLL		10000
-> +#define RV3032_EEBUSY_TIMEOUT		100000
-> +
-> +#define OFFSET_STEP_PPT			238419
-> +
-> +static int rv3032_update_bits(struct udevice *dev, u8 reg, u8 mask, u8 set)
-> +{
-> +	u8 buf;
-> +	int ret;
-> +
-> +	ret = dm_i2c_read(dev, reg, &buf, 1);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	if ((buf & mask) == (set && mask))
-> +		return 0;
-> +
-> +	buf = (buf & ~mask) | (set & mask);
-> +	ret = dm_i2c_read(dev, reg, &buf, 1);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +
-> +static int rv3032_exit_eerd(struct udevice *dev, u32 eerd)
-> +{
-> +	if (eerd)
-> +		return 0;
-> +
-> +	return rv3032_update_bits(dev, RV3032_CTRL1, RV3032_CTRL1_EERD, 0);
-> +}
-> +
-> +static int rv3032_eeprom_busywait(struct udevice *dev)
-> +{
-> +	int ret;
-> +	u8 status;
-> +	unsigned long start = get_timer(0);
-> +
-> +	for (;;) {
-> +		ret = dm_i2c_read(dev, RV3032_TLSB, &status, 1);
-> +		if (ret < 0)
-> +			break;
-> +		if (!(status & RV3032_TLSB_EEBUSY))
-> +			break;
-> +		if (get_timer(start) > RV3032_EEBUSY_TIMEOUT)
-> +			return -ETIMEDOUT;
-> +		udelay(RV3032_EEBUSY_POLL);
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static int rv3032_enter_eerd(struct udevice *dev, u32 *eerd)
-> +{
-> +	u8 ctrl1;
-> +	int ret;
-> +
-> +	ret = dm_i2c_read(dev, RV3032_CTRL1, &ctrl1, sizeof(ctrl1));
-> +	if (ret)
-> +		return ret;
-> +
-> +	*eerd = ctrl1 & RV3032_CTRL1_EERD;
-> +	if (*eerd)
-> +		return 0;
-> +
-> +	ret = rv3032_update_bits(dev, RV3032_CTRL1,
-> +				 RV3032_CTRL1_EERD, RV3032_CTRL1_EERD);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = rv3032_eeprom_busywait(dev);
-> +	if (ret) {
-> +		rv3032_exit_eerd(dev, *eerd);
-> +
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int rv3032_get_time(struct udevice *dev, struct rtc_time *tm)
-> +{
-> +	u8 date[7];
-> +	int ret;
-> +	u8 status;
-> +
-> +	ret = dm_i2c_read(dev, RV3032_STATUS, &status, 1);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	if (status & (RV3032_STATUS_PORF | RV3032_STATUS_VLF))
-> +		return -EINVAL;
-> +
-> +	ret = dm_i2c_read(dev, RV3032_SEC, date, sizeof(date));
-> +	if (ret)
-> +		return ret;
-> +
-> +	tm->tm_sec  = bcd2bin(date[0] & 0x7f);
-> +	tm->tm_min  = bcd2bin(date[1] & 0x7f);
-> +	tm->tm_hour = bcd2bin(date[2] & 0x3f);
-> +	tm->tm_wday = date[3] & 0x7;
-> +	tm->tm_mday = bcd2bin(date[4] & 0x3f);
-> +	tm->tm_mon  = bcd2bin(date[5] & 0x1f);
-> +	tm->tm_year = bcd2bin(date[6]) + 2000;
-> +
-> +	return 0;
-> +}
-> +
-> +static int rv3032_set_time(struct udevice *dev, const struct rtc_time *tm)
-> +{
-> +	u8 date[7];
-> +	int ret;
-> +
-> +	date[0] = bin2bcd(tm->tm_sec);
-> +	date[1] = bin2bcd(tm->tm_min);
-> +	date[2] = bin2bcd(tm->tm_hour);
-> +	date[3] = tm->tm_wday;
-> +	date[4] = bin2bcd(tm->tm_mday);
-> +	date[5] = bin2bcd(tm->tm_mon);
-> +	date[6] = bin2bcd(tm->tm_year - 2000);
-> +
-> +	ret = dm_i2c_write(dev, RV3032_SEC, date,
-> +			   sizeof(date));
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = rv3032_update_bits(dev, RV3032_STATUS,
-> +				 RV3032_STATUS_PORF | RV3032_STATUS_VLF, 0);
-> +
-> +	return ret;
-> +}
-> +
-> +static int rv3032_eeprom_write(struct udevice *dev, unsigned int reg,
-> +			       const u8 *buf, unsigned int len)
-> +{
-> +	u32 eerd;
-> +	int i, ret;
-> +	u8 cmd;
-> +
-> +	ret = rv3032_enter_eerd(dev, &eerd);
-> +	if (ret)
-> +		return ret;
-> +
-> +	for (i = 0; i < len; i++) {
-> +		cmd	= RV3032_EEPROM_USER + reg + i;
-> +		ret = dm_i2c_write(dev, RV3032_EEPROM_ADDR,
-> +				   &cmd, 1);
-> +		if (ret)
-> +			goto exit_eerd;
-> +
-> +		ret = dm_i2c_write(dev, RV3032_EEPROM_DATA, &buf[i], 1);
-> +		if (ret)
-> +			goto exit_eerd;
-> +
-> +		cmd = RV3032_EEPROM_CMD_WRITE;
-> +		ret = dm_i2c_write(dev, RV3032_EEPROM_CMD,
-> +				   &cmd, 1);
-> +		if (ret)
-> +			goto exit_eerd;
-> +
-> +		udelay(RV3032_EEBUSY_POLL);
-> +
-> +		ret = rv3032_eeprom_busywait(dev);
-> +		if (ret)
-> +			goto exit_eerd;
-> +	}
-> +
-> +exit_eerd:
-> +	rv3032_exit_eerd(dev, eerd);
-> +
-> +	return ret;
-> +}
-> +
-> +static int rv3032_eeprom_read(struct udevice *dev, unsigned int reg,
-> +			      u8 *buf, unsigned int len)
-> +{
-> +	u32 eerd;
-> +	int i, ret;
-> +	u8 cmd, data;
-> +
-> +	ret = rv3032_enter_eerd(dev, &eerd);
-> +	if (ret)
-> +		return ret;
-> +
-> +	for (i = 0; i < len; i++) {
-> +		cmd = RV3032_EEPROM_USER + reg + i;
-> +		ret = dm_i2c_write(dev, RV3032_EEPROM_ADDR,
-> +				   &cmd, 1);
-> +		if (ret)
-> +			goto exit_eerd;
-> +
-> +		cmd = RV3032_EEPROM_CMD_READ;
-> +		ret = dm_i2c_write(dev, RV3032_EEPROM_CMD,
-> +				   &cmd, 1);
-> +		if (ret)
-> +			goto exit_eerd;
-> +
-> +		ret = rv3032_eeprom_busywait(dev);
-> +		if (ret)
-> +			goto exit_eerd;
-> +
-> +		ret = dm_i2c_read(dev, RV3032_EEPROM_DATA, &data, sizeof(data));
-> +		if (ret)
-> +			goto exit_eerd;
-> +		buf[i] = data;
-> +	}
-> +
-> +exit_eerd:
-> +	rv3032_exit_eerd(dev, eerd);
-> +
-> +	return ret;
-> +}
-> +
-> +static int rv3032_probe(struct udevice *dev)
-> +{
-> +	i2c_set_chip_flags(dev, DM_I2C_CHIP_RD_ADDRESS |
-> +			DM_I2C_CHIP_WR_ADDRESS);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct rtc_ops rv3032_rtc_ops = {
-> +	.get = rv3032_get_time,
-> +	.set = rv3032_set_time,
-> +	.read = rv3032_eeprom_read,
-> +	.write = rv3032_eeprom_write,
-> +};
-> +
-> +static const struct udevice_id rv3032_rtc_ids[] = {
-> +	{ .compatible = "microcrystal,rv3032", },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(rtc_rv3032) = {
-> +	.name	= "rtc-rv3028",
-> +	.id	= UCLASS_RTC,
-> +	.probe	= rv3032_probe,
-> +	.of_match = rv3032_rtc_ids,
-> +	.ops	= &rv3032_rtc_ops,
-> +};
 > -- 
-> 2.42.0
-> 
+> Tom
 
--- 
-Alexandre Belloni, co-owner and COO, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+
