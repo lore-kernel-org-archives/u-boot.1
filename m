@@ -4,92 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF7DC83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:18:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF3BC83F01
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:28:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E57A86529;
-	Wed, 30 Aug 2023 20:18:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DC1B8652B;
+	Wed, 30 Aug 2023 20:28:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b6yLBFL9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MIsAE8a7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14CE386525; Wed, 30 Aug 2023 20:18:00 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 392CA86529; Wed, 30 Aug 2023 20:28:09 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90ECE86554
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:17:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDAE98652B
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:28:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5925e580f12so824487b3.3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:17:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-31c615eb6feso4976208f8f.3
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:28:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693419473; x=1694024273; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qbgr5KsSI15LTE6h1UmWlenUzjzkiuhBhcB9qxuWUOg=;
- b=b6yLBFL9uVCQAx91lm67oM7R9OkLpUTihExp5y1JQQuHRWzdDMJalwsVmyHXJ4uD2b
- F19JRXJi2kutVayA0qC/MIOPxa/7J2thnEvO++rcjSi4HdEKbCpGEYrsaq8Le+NvAPje
- oVJl2tzZqiIsTb65kSF/92kgIRWdeeUvfqskE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693419473; x=1694024273;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20221208; t=1693420084; x=1694024884; darn=lists.denx.de;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qbgr5KsSI15LTE6h1UmWlenUzjzkiuhBhcB9qxuWUOg=;
- b=k3GoKzAhBeJgtsLrv+q/Nrb40PbI+CNVDUflPtjVsBCC5/Oqzmt11jeA5pL4Ff3NuC
- nMr3mIprqrI+SyKUThtluB2o2PrcOVTc3XbV1L+qBe6KBfb8LfQFjrbGs388bXMLDiFt
- tSIS+vUCv1rEyAru2Qtzra4iHCnQaEzZfpeNN2PNUKsGWLjhBsyqg+axLDBq8wqwRDDY
- BcREfu1HBjXlDyYJtGxl5NnsjKYBt9LNAgjr//EDPbDh3ChfvXGU7iR4kZvVs5z0Eqfz
- tjuPNSoyEpBCeyViNIsiIWi/53YMLqabVK8//SEYEg0OridYPDBzezm3Gyg4uPBwSgjJ
- pbIw==
-X-Gm-Message-State: AOJu0YweHExTlUAZVF8VEPtciFP7yFDa0OrxX8eZX2mywhg83Oh1/xSo
- 4uKMvhVIe4zAaA+N3TqPE9lrjw==
-X-Google-Smtp-Source: AGHT+IH+VTUywnAQJtM462g8lK0b9FqQM/hyX2Zq2wmIvXWketAEBy2t6WfkUJ4SyEOzNbA9yjewiA==
-X-Received: by 2002:a0d:d694:0:b0:58c:676c:b3ef with SMTP id
- y142-20020a0dd694000000b0058c676cb3efmr3146379ywd.6.1693419473100; 
- Wed, 30 Aug 2023 11:17:53 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-39b1-0d8a-4eb9-f110.res6.spectrum.com.
- [2603:6081:7b00:6400:39b1:d8a:4eb9:f110])
+ bh=KZTcsI22h31MU4Be6ZisQvBazBVrmiKPyOMVuqk8rm4=;
+ b=MIsAE8a7pRvBP3RewKerJ7AxS1KyrGul343pVyeific3NXKeZftjy9IdpSHsp+NPfu
+ Glrgqefo8DhA4En0+x1iy+IsXVVYcQo6JPDsbXvRDBoCZBtt1WkudiZvFx+tR/n2gwfK
+ zZOEh01/JChy3hNc1gFLKj+6UV0vkn/r5/W3+enEIgjqv44YUHJXMeVwLOwnDafmF5aD
+ mtcD8/hwyNzQEq3HNmXsd0/4zi7ggYuUEXActnHjHhQSCNJ9SswjCcins9JZjxhqvLAe
+ w2bmRugxdsj5stiS6TioPrxUKqk56RXW5efT3qTru2vIDDBp2C9BiZeT6S9I4p94OwEb
+ ou/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693420084; x=1694024884;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=KZTcsI22h31MU4Be6ZisQvBazBVrmiKPyOMVuqk8rm4=;
+ b=HUgd2x/SIV+UJRl6CxiAugswlQwv/I6wplcFO46qon3mAfkPMiWXikTnr8ictzlH2g
+ T0dcQKHX/FcYx2PZmPrbNRcB7Ofwbc2j4/gssH/oK+qop885hzw3auaztW+MJWJv1NqN
+ LjvUgR9YSIHx7eBp3UQzzWiGUWgFEpdc8kIlCixNIi4jARmwNYtcyx0WfXBXATN+tbGl
+ 7uv3B+oK1AeUjsgE30WVchw7td77kIxerOwzPplrWx0CYRtsiJsqpjAt9VQr3+VOTBkT
+ 6KeUqsRQKXoTSgPXt+ukWBRPZuY3CgHDyjjMo3cHAOya24j0MUw26C2vwJDOorUM5ya4
+ rFrw==
+X-Gm-Message-State: AOJu0YxgF1RfMeRp9rt9bIJgLmYwgxyH3DZdY6I6joTnIdZtfqD1eNXk
+ Uml5KDnOPMdNJ3a+aNlsRmk=
+X-Google-Smtp-Source: AGHT+IFSuYOST5iUJbUs81rvYByANomKsaA6gAV/J9BlsESmcbx+nBgc+BVjt1eLZ8ZJVWsibB2uZg==
+X-Received: by 2002:adf:f691:0:b0:311:3fdc:109d with SMTP id
+ v17-20020adff691000000b003113fdc109dmr2079082wrp.1.1693420083839; 
+ Wed, 30 Aug 2023 11:28:03 -0700 (PDT)
+Received: from [192.168.0.84] ([178.233.24.1])
  by smtp.gmail.com with ESMTPSA id
- v17-20020a81a551000000b00586b5b6347csm3364162ywg.109.2023.08.30.11.17.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 11:17:52 -0700 (PDT)
-Date: Wed, 30 Aug 2023 14:17:50 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marex@denx.de>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng.cn@gmail.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: Re: [PATCH 32/32] pci: serial: Support reading PCI-register size
- with base
-Message-ID: <20230830181750.GD3101304@bill-the-cat>
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-33-sjg@chromium.org>
- <20230830181459.wtbt3w3qc4ysxwty@pali>
+ c4-20020a056000104400b00317a29af4b2sm17360907wrx.68.2023.08.30.11.28.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Aug 2023 11:28:02 -0700 (PDT)
+Content-Type: multipart/mixed; boundary="------------epCYzJM0WBvQc5wEX2Y6I00a"
+Message-ID: <1703083d-b229-4f41-8e61-1fe0d4618202@gmail.com>
+Date: Wed, 30 Aug 2023 21:27:59 +0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wWSPGOes74Cc2iqp"
-Content-Disposition: inline
-In-Reply-To: <20230830181459.wtbt3w3qc4ysxwty@pali>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+Content-Language: en-US, tr, en-GB
+To: Alexander Graf <agraf@csgraf.de>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
+ <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+ <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+ <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
+ <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+ <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+ <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
+ <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
+ <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
+ <11296797-3d37-413b-9517-2890ae26a9bd@csgraf.de>
+ <CAPnjgZ1a=+5bcX-ku+_wEMWpAESHnzCFT9SWbdwoVxYcZ04VZg@mail.gmail.com>
+ <1470fab1-3bc9-4dba-9345-1498d3387202@csgraf.de>
+From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+In-Reply-To: <1470fab1-3bc9-4dba-9345-1498d3387202@csgraf.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,508 +118,322 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This is a multi-part message in MIME format.
+--------------epCYzJM0WBvQc5wEX2Y6I00a
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---wWSPGOes74Cc2iqp
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi all,
 
-Pali,
+On 2023-08-29 09:27 +03:00, Alexander Graf wrote:
+> On 29.08.23 00:08, Simon Glass wrote:
+>> On Mon, 28 Aug 2023 at 14:24, Alexander Graf <agraf@csgraf.de> wrote:
+>>> On 28.08.23 19:54, Simon Glass wrote:
+>>>> U-Boot does have video_sync() but it doesn't know when to call it. If
+>>>> it does not call it, then any amount of single-threaded code can run
+>>>> after that, which may update the framebuffer. In other words, U-Boot
+>>>> is in exactly the same boat as UEFI. It has to decide whether to call
+>>>> video_sync() based on some sort of heuristic.
+>>>>
+>>>> That is the only point I am trying to make here. Does that make sense?
+>>>
+>>> Oh, I thought you mentioned above that U-Boot is in a better spot or
+>>> "has it solved already". I agree - it's in the same boat and the only
+>>> safe thing it can really do today that is fully cross-platform
+>>> compatible is to call video_sync() after every character.
+>>>
+>>> I don't understand what you mean by "any amount of single-threaded code
+>>> can run after that, which may update the framebuffer". Any framebuffer
+>>> modification is U-Boot internal code which then again can apply
+>>> video_sync() to tell the system "I want what I wrote to screen actually
+>>> be on screen now". I don't think that's necessarily bad design. A bit
+>>> clunky, but we're in a pre-boot environment after all.
+>>>
+>>> Since we're aligned now: What exactly did you refer to with "but we have
+>>> managed to work out something"?
+>>>> So now we are on the same page about that point. The next step is my
+>> heuristic point:
+>>
+>> vidconsole_putc_xy() - does not call video_sync()
+>> vidconsole_newline() - does
+>>
+>> I am simply suggesting that UEFI should do the same thing.
+> 
+> 
+> I think the better analogy is with
+> 
+> vidconsole_puts() - does
+> 
+> and that's exactly the function that the UEFI code calls. The UEFI 
+> interface is "write this long string to screen". All the UEFI code does 
+> is call vidconsole_puts() to do that which then (rightfully) calls 
+> video_sync().
+> 
+> The reason we flush after every character with grub is grub: Grub abuses 
+> the "write long string to screen" function and instead only writes a 
+> single character on each call, which then means we flush on every 
+> character write.
 
-You are specifically listed as a maintainer for drivers/pci/pci_mvebu.c
-and that is changed by this patch.
+There's another reason I discovered empirically as I tried to implement
+cyclic video_sync()s instead of calling it whenever. The writes will go
+through eventually (as the cache is filled by other work?) even if *we*
+don't explicitly flush it. That means partial data gets pushed to the
+display in an uncontrolled way, resulting in bad graphical artifacts.
 
-On Wed, Aug 30, 2023 at 08:14:59PM +0200, Pali Roh=E1r wrote:
-> Simon, why you are contacting me? You have wrote to me that you would
-> ignore my reviews here, so what you want now? Could you please explain
-> what you are trying to achieve? I'm not going to review this or any
-> other your changes.
->=20
-> On Wednesday 30 August 2023 12:05:03 Simon Glass wrote:
-> > The PCI helpers read only the base address for a PCI region. In some ca=
-ses
-> > the size is needed as well, e.g. to pass along to a driver which needs =
-to
-> > know the size of its register area.
-> >=20
-> > Update the functions to allow the size to be returned. For serial, reco=
-rd
-> > the information and provided it with the serial_info() call.
-> >=20
-> > A limitation still exists in that the size is not available when OF_LIVE
-> > is enabled, so take account of that in the tests.
-> >=20
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >=20
-> >  arch/sandbox/dts/test.dts   |  6 +++---
-> >  drivers/core/fdtaddr.c      |  6 +++---
-> >  drivers/core/ofnode.c       | 11 ++++++++---
-> >  drivers/core/read.c         |  6 ++++--
-> >  drivers/core/util.c         |  2 +-
-> >  drivers/pci/pci-uclass.c    |  2 +-
-> >  drivers/pci/pci_mvebu.c     |  3 ++-
-> >  drivers/pci/pci_tegra.c     |  2 +-
-> >  drivers/pci/pcie_mediatek.c |  4 ++--
-> >  drivers/serial/ns16550.c    | 15 ++++++++++-----
-> >  include/dm/fdtaddr.h        |  3 ++-
-> >  include/dm/ofnode.h         |  4 +++-
-> >  include/dm/read.h           |  8 +++++---
-> >  include/ns16550.h           |  4 +++-
-> >  include/serial.h            |  2 ++
-> >  test/dm/pci.c               | 14 ++++++++++----
-> >  16 files changed, 60 insertions(+), 32 deletions(-)
-> >=20
-> > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-> > index a413cbe4989..961e8895a49 100644
-> > --- a/arch/sandbox/dts/test.dts
-> > +++ b/arch/sandbox/dts/test.dts
-> > @@ -1087,8 +1087,8 @@
-> >  		pci@1,0 {
-> >  			compatible =3D "pci-generic";
-> >  			/* reg 0 is at 0x14, using FDT_PCI_SPACE_MEM32 */
-> > -			reg =3D <0x02000814 0 0 0 0
-> > -			       0x01000810 0 0 0 0>;
-> > +			reg =3D <0x02000814 0 0 0x80 0
-> > +			       0x01000810 0 0 0xc0 0>;
-> >  			sandbox,emul =3D <&swap_case_emul0_1>;
-> >  		};
-> >  		p2sb-pci@2,0 {
-> > @@ -1115,7 +1115,7 @@
-> >  		pci@1f,0 {
-> >  			compatible =3D "pci-generic";
-> >  			/* reg 0 is at 0x10, using FDT_PCI_SPACE_IO */
-> > -			reg =3D <0x0100f810 0 0 0 0>;
-> > +			reg =3D <0x0100f810 0 0 0x100 0>;
-> >  			sandbox,emul =3D <&swap_case_emul0_1f>;
-> >  		};
-> >  	};
-> > diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
-> > index 546db675aaf..b79d138c419 100644
-> > --- a/drivers/core/fdtaddr.c
-> > +++ b/drivers/core/fdtaddr.c
-> > @@ -215,7 +215,7 @@ void *devfdt_map_physmem(const struct udevice *dev,=
- unsigned long size)
-> >  	return map_physmem(addr, size, MAP_NOCACHE);
-> >  }
-> > =20
-> > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
-> > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *=
-sizep)
-> >  {
-> >  	ulong addr;
-> > =20
-> > @@ -226,12 +226,12 @@ fdt_addr_t devfdt_get_addr_pci(const struct udevi=
-ce *dev)
-> >  		int ret;
-> > =20
-> >  		ret =3D ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_MEM32,
-> > -					   "reg", &pci_addr);
-> > +					   "reg", &pci_addr, sizep);
-> >  		if (ret) {
-> >  			/* try if there is any i/o-mapped register */
-> >  			ret =3D ofnode_read_pci_addr(dev_ofnode(dev),
-> >  						   FDT_PCI_SPACE_IO, "reg",
-> > -						   &pci_addr);
-> > +						   &pci_addr, sizep);
-> >  			if (ret)
-> >  				return FDT_ADDR_T_NONE;
-> >  		}
-> > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> > index 2ef4114cb6f..c9cec456f43 100644
-> > --- a/drivers/core/ofnode.c
-> > +++ b/drivers/core/ofnode.c
-> > @@ -1270,7 +1270,8 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode no=
-de, const char *propname,
-> >  }
-> > =20
-> >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
-> > -			 const char *propname, struct fdt_pci_addr *addr)
-> > +			 const char *propname, struct fdt_pci_addr *addr,
-> > +			 fdt_size_t *size)
-> >  {
-> >  	const fdt32_t *cell;
-> >  	int len;
-> > @@ -1298,14 +1299,18 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_=
-pci_space type,
-> >  			      (ulong)fdt32_to_cpu(cell[1]),
-> >  			      (ulong)fdt32_to_cpu(cell[2]));
-> >  			if ((fdt32_to_cpu(*cell) & type) =3D=3D type) {
-> > +				const unaligned_fdt64_t *ptr;
-> > +
-> >  				addr->phys_hi =3D fdt32_to_cpu(cell[0]);
-> >  				addr->phys_mid =3D fdt32_to_cpu(cell[1]);
-> >  				addr->phys_lo =3D fdt32_to_cpu(cell[2]);
-> > +				ptr =3D (const unaligned_fdt64_t *)(cell + 3);
-> > +				if (size)
-> > +					*size =3D fdt64_to_cpu(*ptr);
-> >  				break;
-> >  			}
-> > =20
-> > -			cell +=3D (FDT_PCI_ADDR_CELLS +
-> > -				 FDT_PCI_SIZE_CELLS);
-> > +			cell +=3D FDT_PCI_ADDR_CELLS + FDT_PCI_SIZE_CELLS;
-> >  		}
-> > =20
-> >  		if (i =3D=3D num) {
-> > diff --git a/drivers/core/read.c b/drivers/core/read.c
-> > index 49066b59cda..419013451f0 100644
-> > --- a/drivers/core/read.c
-> > +++ b/drivers/core/read.c
-> > @@ -405,13 +405,15 @@ int dev_read_alias_highest_id(const char *stem)
-> >  	return fdtdec_get_alias_highest_id(gd->fdt_blob, stem);
-> >  }
-> > =20
-> > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
-> > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *si=
-zep)
-> >  {
-> >  	ulong addr;
-> > =20
-> >  	addr =3D dev_read_addr(dev);
-> > +	if (sizep)
-> > +		*sizep =3D 0;
-> >  	if (addr =3D=3D FDT_ADDR_T_NONE && !of_live_active())
-> > -		addr =3D devfdt_get_addr_pci(dev);
-> > +		addr =3D devfdt_get_addr_pci(dev, sizep);
-> > =20
-> >  	return addr;
-> >  }
-> > diff --git a/drivers/core/util.c b/drivers/core/util.c
-> > index aa60fdd15bc..81497df85ff 100644
-> > --- a/drivers/core/util.c
-> > +++ b/drivers/core/util.c
-> > @@ -30,7 +30,7 @@ int pci_get_devfn(struct udevice *dev)
-> > =20
-> >  	/* Extract the devfn from fdt_pci_addr */
-> >  	ret =3D ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_CONFIG,
-> > -				   "reg", &addr);
-> > +				   "reg", &addr, NULL);
-> >  	if (ret) {
-> >  		if (ret !=3D -ENOENT)
-> >  			return -EINVAL;
-> > diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-> > index 0adcdceb1d3..c670f8754e8 100644
-> > --- a/drivers/pci/pci-uclass.c
-> > +++ b/drivers/pci/pci-uclass.c
-> > @@ -122,7 +122,7 @@ static void pci_dev_find_ofnode(struct udevice *bus=
-, phys_addr_t bdf,
-> > =20
-> >  	dev_for_each_subnode(node, bus) {
-> >  		ret =3D ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg",
-> > -					   &addr);
-> > +					   &addr, NULL);
-> >  		if (ret)
-> >  			continue;
-> > =20
-> > diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
-> > index 93a7508d8a2..25878bde534 100644
-> > --- a/drivers/pci/pci_mvebu.c
-> > +++ b/drivers/pci/pci_mvebu.c
-> > @@ -640,7 +640,8 @@ static int mvebu_pcie_port_parse_dt(ofnode node, of=
-node parent, struct mvebu_pci
-> >  		pcie->is_x4 =3D true;
-> > =20
-> >  	/* devfn is in bits [15:8], see PCI_DEV usage */
-> > -	ret =3D ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_=
-addr);
-> > +	ret =3D ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_=
-addr,
-> > +				   NULL);
-> >  	if (ret < 0) {
-> >  		printf("%s: property \"reg\" is invalid\n", pcie->name);
-> >  		goto err;
-> > diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
-> > index 29d54117e93..ae90bd2fbf1 100644
-> > --- a/drivers/pci/pci_tegra.c
-> > +++ b/drivers/pci/pci_tegra.c
-> > @@ -461,7 +461,7 @@ static int tegra_pcie_parse_port_info(ofnode node, =
-uint *index, uint *lanes)
-> > =20
-> >  	*lanes =3D err;
-> > =20
-> > -	err =3D ofnode_read_pci_addr(node, 0, "reg", &addr);
-> > +	err =3D ofnode_read_pci_addr(node, 0, "reg", &addr, NULL);
-> >  	if (err < 0) {
-> >  		pr_err("failed to parse \"reg\" property\n");
-> >  		return err;
-> > diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_mediatek.c
-> > index c6e30e24622..e59ebd13ad0 100644
-> > --- a/drivers/pci/pcie_mediatek.c
-> > +++ b/drivers/pci/pcie_mediatek.c
-> > @@ -660,7 +660,7 @@ static int mtk_pcie_probe(struct udevice *dev)
-> >  		if (!ofnode_is_enabled(subnode))
-> >  			continue;
-> > =20
-> > -		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr);
-> > +		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
-> >  		if (err)
-> >  			return err;
-> > =20
-> > @@ -699,7 +699,7 @@ static int mtk_pcie_probe_v2(struct udevice *dev)
-> >  		if (!ofnode_is_enabled(subnode))
-> >  			continue;
-> > =20
-> > -		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr);
-> > +		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
-> >  		if (err)
-> >  			return err;
-> > =20
-> > diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
-> > index eab9537fbae..a349e5e132a 100644
-> > --- a/drivers/serial/ns16550.c
-> > +++ b/drivers/serial/ns16550.c
-> > @@ -479,6 +479,7 @@ static int ns16550_serial_getinfo(struct udevice *d=
-ev,
-> >  	info->addr_space =3D SERIAL_ADDRESS_SPACE_MEMORY;
-> >  #endif
-> >  	info->addr =3D plat->base;
-> > +	info->size =3D plat->size;
-> >  	info->reg_width =3D plat->reg_width;
-> >  	info->reg_shift =3D plat->reg_shift;
-> >  	info->reg_offset =3D plat->reg_offset;
-> > @@ -487,7 +488,8 @@ static int ns16550_serial_getinfo(struct udevice *d=
-ev,
-> >  	return 0;
-> >  }
-> > =20
-> > -static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_a=
-ddr_t base)
-> > +static int ns16550_serial_assign_base(struct ns16550_plat *plat,
-> > +				      fdt_addr_t base, fdt_size_t size)
-> >  {
-> >  	if (base =3D=3D FDT_ADDR_T_NONE)
-> >  		return -EINVAL;
-> > @@ -497,6 +499,7 @@ static int ns16550_serial_assign_base(struct ns1655=
-0_plat *plat, fdt_addr_t base
-> >  #else
-> >  	plat->base =3D (unsigned long)map_physmem(base, 0, MAP_NOCACHE);
-> >  #endif
-> > +	plat->size =3D size;
-> > =20
-> >  	return 0;
-> >  }
-> > @@ -507,6 +510,7 @@ int ns16550_serial_probe(struct udevice *dev)
-> >  	struct ns16550 *const com_port =3D dev_get_priv(dev);
-> >  	struct reset_ctl_bulk reset_bulk;
-> >  	fdt_addr_t addr;
-> > +	fdt_addr_t size;
-> >  	int ret;
-> > =20
-> >  	/*
-> > @@ -514,8 +518,8 @@ int ns16550_serial_probe(struct udevice *dev)
-> >  	 * or via a PCI bridge, assign plat->base before probing hardware.
-> >  	 */
-> >  	if (device_is_on_pci_bus(dev)) {
-> > -		addr =3D devfdt_get_addr_pci(dev);
-> > -		ret =3D ns16550_serial_assign_base(plat, addr);
-> > +		addr =3D devfdt_get_addr_pci(dev, &size);
-> > +		ret =3D ns16550_serial_assign_base(plat, addr, size);
-> >  		if (ret)
-> >  			return ret;
-> >  	}
-> > @@ -543,11 +547,12 @@ int ns16550_serial_of_to_plat(struct udevice *dev)
-> >  	struct ns16550_plat *plat =3D dev_get_plat(dev);
-> >  	const u32 port_type =3D dev_get_driver_data(dev);
-> >  	fdt_addr_t addr;
-> > +	fdt_size_t size;
-> >  	struct clk clk;
-> >  	int err;
-> > =20
-> > -	addr =3D dev_read_addr(dev);
-> > -	err =3D ns16550_serial_assign_base(plat, addr);
-> > +	addr =3D dev_read_addr_size(dev, &size);
-> > +	err =3D ns16550_serial_assign_base(plat, addr, size);
-> >  	if (err && !device_is_on_pci_bus(dev))
-> >  		return err;
-> > =20
-> > diff --git a/include/dm/fdtaddr.h b/include/dm/fdtaddr.h
-> > index dcdc19137cc..6d2fa8f1044 100644
-> > --- a/include/dm/fdtaddr.h
-> > +++ b/include/dm/fdtaddr.h
-> > @@ -168,8 +168,9 @@ fdt_addr_t devfdt_get_addr_size_name(const struct u=
-device *dev,
-> >   * devfdt_get_addr_pci() - Read an address and handle PCI address tran=
-slation
-> >   *
-> >   * @dev: Device to read from
-> > + * @sizep: If non-NULL, returns size of address space
-> >   * Return: address or FDT_ADDR_T_NONE if not found
-> >   */
-> > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev);
-> > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *=
-sizep);
-> > =20
-> >  #endif
-> > diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-> > index 726d8f82ddf..97cad971611 100644
-> > --- a/include/dm/ofnode.h
-> > +++ b/include/dm/ofnode.h
-> > @@ -1152,13 +1152,15 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode =
-node, const char *propname,
-> >   * @type:	pci address type (FDT_PCI_SPACE_xxx)
-> >   * @propname:	name of property to find
-> >   * @addr:	returns pci address in the form of fdt_pci_addr
-> > + * @size:	if non-null, returns register-space size
-> >   * Return:
-> >   * 0 if ok, -ENOENT if the property did not exist, -EINVAL if the
-> >   * format of the property was invalid, -ENXIO if the requested
-> >   * address type was not found
-> >   */
-> >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
-> > -			 const char *propname, struct fdt_pci_addr *addr);
-> > +			 const char *propname, struct fdt_pci_addr *addr,
-> > +			 fdt_size_t *size);
-> > =20
-> >  /**
-> >   * ofnode_read_pci_vendev() - look up PCI vendor and device id
-> > diff --git a/include/dm/read.h b/include/dm/read.h
-> > index c2615f72f40..3c2eea6f0c4 100644
-> > --- a/include/dm/read.h
-> > +++ b/include/dm/read.h
-> > @@ -346,9 +346,10 @@ void *dev_read_addr_ptr(const struct udevice *dev);
-> >   *    fdtdec_get_addr() and friends.
-> >   *
-> >   * @dev: Device to read from
-> > + * @sizep: If non-NULL, returns size of address space found
-> >   * Return: address or FDT_ADDR_T_NONE if not found
-> >   */
-> > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev);
-> > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *si=
-zep);
-> > =20
-> >  /**
-> >   * dev_remap_addr() - Get the reg property of a device as a
-> > @@ -996,9 +997,10 @@ static inline void *dev_read_addr_ptr(const struct=
- udevice *dev)
-> >  	return devfdt_get_addr_ptr(dev);
-> >  }
-> > =20
-> > -static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
-> > +static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev,
-> > +					   fdt_size_t *sizep)
-> >  {
-> > -	return devfdt_get_addr_pci(dev);
-> > +	return devfdt_get_addr_pci(dev, sizep);
-> >  }
-> > =20
-> >  static inline void *dev_remap_addr(const struct udevice *dev)
-> > diff --git a/include/ns16550.h b/include/ns16550.h
-> > index e7e68663d03..7f481300083 100644
-> > --- a/include/ns16550.h
-> > +++ b/include/ns16550.h
-> > @@ -58,6 +58,7 @@ enum ns16550_flags {
-> >   * struct ns16550_plat - information about a NS16550 port
-> >   *
-> >   * @base:		Base register address
-> > + * @size:		Size of register area in bytes
-> >   * @reg_width:		IO accesses size of registers (in bytes, 1 or 4)
-> >   * @reg_shift:		Shift size of registers (0=3Dbyte, 1=3D16bit, 2=3D32bi=
-t...)
-> >   * @reg_offset:		Offset to start of registers (normally 0)
-> > @@ -67,7 +68,8 @@ enum ns16550_flags {
-> >   * @bdf:		PCI slot/function (pci_dev_t)
-> >   */
-> >  struct ns16550_plat {
-> > -	unsigned long base;
-> > +	ulong base;
-> > +	ulong size;
-> >  	int reg_width;
-> >  	int reg_shift;
-> >  	int reg_offset;
-> > diff --git a/include/serial.h b/include/serial.h
-> > index 42bdf3759c0..205889d28be 100644
-> > --- a/include/serial.h
-> > +++ b/include/serial.h
-> > @@ -137,6 +137,7 @@ enum adr_space_type {
-> >   * @type:	type of the UART chip
-> >   * @addr_space:	address space to access the registers
-> >   * @addr:	physical address of the registers
-> > + * @size:	size of the register area in bytes
-> >   * @reg_width:	size (in bytes) of the IO accesses to the registers
-> >   * @reg_offset:	offset to apply to the @addr from the start of the reg=
-isters
-> >   * @reg_shift:	quantity to shift the register offsets by
-> > @@ -147,6 +148,7 @@ struct serial_device_info {
-> >  	enum serial_chip_type type;
-> >  	enum adr_space_type addr_space;
-> >  	ulong addr;
-> > +	ulong size;
-> >  	u8 reg_width;
-> >  	u8 reg_offset;
-> >  	u8 reg_shift;
-> > diff --git a/test/dm/pci.c b/test/dm/pci.c
-> > index 70a736cfdb8..8c5e7da9e62 100644
-> > --- a/test/dm/pci.c
-> > +++ b/test/dm/pci.c
-> > @@ -301,10 +301,12 @@ static int dm_test_pci_addr_flat(struct unit_test=
-_state *uts)
-> >  {
-> >  	struct udevice *swap1f, *swap1;
-> >  	ulong io_addr, mem_addr;
-> > +	fdt_addr_t size;
-> > =20
-> >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
-> >  	io_addr =3D dm_pci_read_bar32(swap1f, 0);
-> > -	ut_asserteq(io_addr, dev_read_addr_pci(swap1f));
-> > +	ut_asserteq(io_addr, dev_read_addr_pci(swap1f, &size));
-> > +	ut_asserteq(0, size);
-> > =20
-> >  	/*
-> >  	 * This device has both I/O and MEM spaces but the MEM space appears
-> > @@ -312,7 +314,8 @@ static int dm_test_pci_addr_flat(struct unit_test_s=
-tate *uts)
-> >  	 */
-> >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
-> >  	mem_addr =3D dm_pci_read_bar32(swap1, 1);
-> > -	ut_asserteq(mem_addr, dev_read_addr_pci(swap1));
-> > +	ut_asserteq(mem_addr, dev_read_addr_pci(swap1, &size));
-> > +	ut_asserteq(0, size);
-> > =20
-> >  	return 0;
-> >  }
-> > @@ -329,12 +332,15 @@ DM_TEST(dm_test_pci_addr_flat, UT_TESTF_SCAN_PDAT=
-A | UT_TESTF_SCAN_FDT |
-> >  static int dm_test_pci_addr_live(struct unit_test_state *uts)
-> >  {
-> >  	struct udevice *swap1f, *swap1;
-> > +	fdt_size_t size;
-> > =20
-> >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
-> > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
-> > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f, &size));
-> > +	ut_asserteq(0, size);
-> > =20
-> >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
-> > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
-> > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1, &size));
-> > +	ut_asserteq(0, size);
-> > =20
-> >  	return 0;
-> >  }
-> > --=20
-> > 2.42.0.rc2.253.gd59a3bf2b4-goog
-> >=20
+And I mean very noticeable things like a blocky waterfall effect when
+filling a blue rectangle background in GRUB menu, or half-rendered
+letters in U-Boot console (very obvious if I get it to panic-and-hang).
 
---=20
-Tom
+I think that locks it down, and there's two reasonable things we can do:
 
---wWSPGOes74Cc2iqp
-Content-Type: application/pgp-signature; name="signature.asc"
+- Write and immediately flush to fb (hardware) every time
+- Batch writes in fb, periodically write-and-flush to copy_fb (hardware)
 
------BEGIN PGP SIGNATURE-----
+Both can utilize a damage tracking feature to minimize the amount of
+copy/flush done. And maybe we can implement the two simultaneously if we
+skip flushing when damaged region is zero-sized already-flushed.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTvh8oACgkQFHw5/5Y0
-tyxtNQwAk9hM51vXkQKtKgWQyC4yuSYnmCRrqcpXSrJcPBQdQtVZn3ig8KAJpGna
-L5P7gp7CaAkuIdv7Gklv4llD5RW+ujgnkf/+5US7a48UmpwQRgS9MqgUJWpdPBok
-N8Y3DE/rKJIhE3oXPjTFq3149a6qeVWsO4+YdzxW/Bgn+0CttQixRe756aZ0vELk
-a85d2PyX45iT2861JiMlF8mUwi2pfYKaYAptFIr2/JkMpmW9jI+buHUExY6Dakzv
-dcixtHCbY8rOjC8w97GH0jJCPPm8WoqDUdbISGzZYbwpN23YwYgM0QBonjSCVgzj
-2wpJRJyuylBBHStD7voDCN9f1Zk72BWGvJNLMqZyBOGVQ/14mDwDYjA6ifGDDlMb
-ZeWx84jomrzWTKjFD2MZq8q4kkn0F1IkKOLHeG3iw6FaRJjAC3ivcaEhmuzXLf4X
-YqgkSFuIu0yh9ANGCRfTxp4VxmVwcKxywI5P+Zip2RAUuuhnRaEcxbiCs5Xs3lPK
-DLQDUNwQ
-=q3Lv
------END PGP SIGNATURE-----
+There's a flaw with the second approach though, EFI can have direct
+access to the hardware copy_fb. When it has directly written to the
+framebuffer, we would need to at least stop overwriting that, and
+ideally copy backwards to the non-hardware fb. Is there some kind of a
+locking API that EFI apps use to get/release the framebuffer? We could
+hook that into something like that.
 
---wWSPGOes74Cc2iqp--
+Note that I've been using "flush" and not "sync" to avoid talking about
+when a driver ops->video_sync() should be called. Is that fundamentally
+incompatible with EFI, can we even call that after e.g. ExitBootServices
+where the OS wants to use it as efifb? Maybe we should always call that
+periodically at 60Hz (16666us) or so?
+
+(I'm testing on rk3399-gru-kevin with a 2400x1600 eDP screen by the way,
+and attaching some WIP patches if you want to test. Debian arm64 netinst
+iso uses text-mode GRUB by default, in case you need a payload to test.)
+
+>>>>>> Also I notice that EFI calls notify? all the time, so U-Boot probably
+>>>>>> does have the ability to sync the video every 10ms if we wanted to.
+
+BTW, with attached cyclic patch on chromebook_kevin, I immediately get a
+warning that it takes too long, at 2-8ms without/with VIDEO_COPY. It's
+about 11ms for both on sandbox on my PC.
+
+>>>>> I fail to see how invalidating the frame buffer for the screen every
+>>>>> 10ms is any better than doing flush+invalidate operations only on screen
+>>>>> areas that changed? It's more fragile, more difficult to understand and
+>>>>> also significantly more expensive given that most of the time very
+>>>>> little on the screen actually changes.
+>>>>>>>> I am not suggesting it is better, at all. I am just trying to explain
+>>>> that the U-Boot EFI implementation should not be calling video_sync()
+>>>> after every character, before or after this series.
+>>>
+>>> Ah, it doesn't :). It just calls the normal U-Boot "write character on
+>>> screen" function. What that does is up to U-Boot internals - and those
+>>> basically today dictate that something needs to call video_sync() to
+>>> make FB modifications actually pop up on screen.
+>>>
+>> Hmmm, so what function is it calling, then?  I think we are getting
+>> closer to the 'fix' I am trying to tease out.
+> 
+> It literally calls vidconsole_puts():
+> 
+> https://github.com/u-boot/u-boot/blob/master/lib/efi_loader/efi_console.c#L185
+
+I'd think "sync after a whole string is printed" is an OK heuristic, and
+GRUB is abusing it... But maybe GRUB is doing these things as an ad-hoc
+double buffering implementation with forced syncs at the expense of
+performance to avoid buggy firmware causing graphical artifacts.
+
+In any case, apologies but I'll be unable to work on U-Boot things until
+late September, may also be unable to respond. (Going to DebConf soon)
+--------------epCYzJM0WBvQc5wEX2Y6I00a
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-video-Replace-all-video_sync-calls-with-a-cyclic.patch"
+Content-Disposition: attachment;
+ filename*0="0001-video-Replace-all-video_sync-calls-with-a-cyclic.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSA1MTQ0ZTk0NzljNmIzMWNhYzMzZTk4YjVhZTAwYTZkMTAzZjE5NDYyIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBBbHBlciBOZWJpIFlhc2FrIDxhbHBlcm5lYml5YXNh
+a0BnbWFpbC5jb20+CkRhdGU6IFR1ZSwgMjIgQXVnIDIwMjMgMTg6MDU6MjkgKzAzMDAKU3Vi
+amVjdDogW1BBVENIXSBXSVA6IHZpZGVvOiBSZXBsYWNlIGFsbCB2aWRlb19zeW5jIGNhbGxz
+IHdpdGggYSBjeWNsaWMKIGZ1bmN0aW9uCgotLS0KIGJvb3QvZXhwby5jICAgICAgICAgICAg
+ICAgICAgICAgICB8ICAyIC0tCiBjbWQvdmlkZW8uYyAgICAgICAgICAgICAgICAgICAgICAg
+fCAgMiAtLQogZHJpdmVycy9zZXJpYWwvc2FuZGJveC5jICAgICAgICAgIHwgIDIgLS0KIGRy
+aXZlcnMvdmlkZW8vS2NvbmZpZyAgICAgICAgICAgICB8ICAxICsKIGRyaXZlcnMvdmlkZW8v
+dmlkY29uc29sZS11Y2xhc3MuYyB8IDM1ICsrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0KIGRyaXZlcnMvdmlkZW8vdmlkZW8tdWNsYXNzLmMgICAgICB8IDI4ICsrKysrKysrKysr
+KysrKysrKysrKysrKy0KIGRyaXZlcnMvdmlkZW8vdmlkZW9fYm1wLmMgICAgICAgICB8ICAy
+ICstCiBpbmNsdWRlL3ZpZGVvLmggICAgICAgICAgICAgICAgICAgfCAgMiArKwogbGliL2Vm
+aV9sb2FkZXIvZWZpX2dvcC5jICAgICAgICAgIHwgIDIgLS0KIDkgZmlsZXMgY2hhbmdlZCwg
+MzQgaW5zZXJ0aW9ucygrKSwgNDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvYm9vdC9l
+eHBvLmMgYi9ib290L2V4cG8uYwppbmRleCAxMzlkNjg0ZjhlNmUuLjAzZTg1OGMwM2M4MCAx
+MDA2NDQKLS0tIGEvYm9vdC9leHBvLmMKKysrIGIvYm9vdC9leHBvLmMKQEAgLTIwOCw4ICsy
+MDgsNiBAQCBpbnQgZXhwb19yZW5kZXIoc3RydWN0IGV4cG8gKmV4cCkKIAkJCXJldHVybiBs
+b2dfbXNnX3JldCgicmVuIiwgcmV0KTsKIAl9CiAKLQl2aWRlb19zeW5jKGRldiwgdHJ1ZSk7
+Ci0KIAlyZXR1cm4gc2NuID8gMCA6IC1FQ0hJTEQ7CiB9CiAKZGlmZiAtLWdpdCBhL2NtZC92
+aWRlby5jIGIvY21kL3ZpZGVvLmMKaW5kZXggOTQyZjgxYzE2MzM2Li45OGRlMmM5ZjFiOGQg
+MTAwNjQ0Ci0tLSBhL2NtZC92aWRlby5jCisrKyBiL2NtZC92aWRlby5jCkBAIC00Miw4ICs0
+Miw2IEBAIHN0YXRpYyBpbnQgZG9fdmlkZW9fcHV0cyhzdHJ1Y3QgY21kX3RibCAqY21kdHAs
+IGludCBmbGFnLCBpbnQgYXJnYywKIAlpZiAodWNsYXNzX2ZpcnN0X2RldmljZV9lcnIoVUNM
+QVNTX1ZJREVPX0NPTlNPTEUsICZkZXYpKQogCQlyZXR1cm4gQ01EX1JFVF9GQUlMVVJFOwog
+CXJldCA9IHZpZGNvbnNvbGVfcHV0X3N0cmluZyhkZXYsIGFyZ3ZbMV0pOwotCWlmICghcmV0
+KQotCQlyZXQgPSB2aWRlb19zeW5jKGRldi0+cGFyZW50LCBmYWxzZSk7CiAKIAlyZXR1cm4g
+cmV0ID8gQ01EX1JFVF9GQUlMVVJFIDogMDsKIH0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvc2Vy
+aWFsL3NhbmRib3guYyBiL2RyaXZlcnMvc2VyaWFsL3NhbmRib3guYwppbmRleCBmNDAwMzgx
+MWVlNzUuLjU4NmUxMTU0YTMyNyAxMDA2NDQKLS0tIGEvZHJpdmVycy9zZXJpYWwvc2FuZGJv
+eC5jCisrKyBiL2RyaXZlcnMvc2VyaWFsL3NhbmRib3guYwpAQCAtMTM5LDggKzEzOSw2IEBA
+IHN0YXRpYyBpbnQgc2FuZGJveF9zZXJpYWxfcGVuZGluZyhzdHJ1Y3QgdWRldmljZSAqZGV2
+LCBib29sIGlucHV0KQogCQlyZXR1cm4gMDsKIAogCW9zX3VzbGVlcCgxMDApOwotCWlmIChJ
+U19FTkFCTEVEKENPTkZJR19WSURFTykgJiYgIUlTX0VOQUJMRUQoQ09ORklHX1NQTF9CVUlM
+RCkpCi0JCXZpZGVvX3N5bmNfYWxsKCk7CiAJYXZhaWwgPSBtZW1idWZmX3B1dHJhdygmcHJp
+di0+YnVmLCAxMDAsIGZhbHNlLCAmZGF0YSk7CiAJaWYgKCFhdmFpbCkKIAkJcmV0dXJuIDE7
+CS8qIGJ1ZmZlciBmdWxsICovCmRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpZGVvL0tjb25maWcg
+Yi9kcml2ZXJzL3ZpZGVvL0tjb25maWcKaW5kZXggMDlmMmNiMWE3MzIxLi41MzA0ODUxMDJj
+NzggMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvdmlkZW8vS2NvbmZpZworKysgYi9kcml2ZXJzL3Zp
+ZGVvL0tjb25maWcKQEAgLTcsNiArNyw3IEBAIG1lbnUgIkdyYXBoaWNzIHN1cHBvcnQiCiBj
+b25maWcgVklERU8KIAlib29sICJFbmFibGUgZHJpdmVyIG1vZGVsIHN1cHBvcnQgZm9yIExD
+RC92aWRlbyIKIAlkZXBlbmRzIG9uIERNCisJc2VsZWN0IENZQ0xJQwogCWhlbHAKIAkgIFRo
+aXMgZW5hYmxlcyBkcml2ZXIgbW9kZWwgZm9yIExDRCBhbmQgdmlkZW8gZGV2aWNlcy4gVGhl
+c2Ugc3VwcG9ydAogCSAgYSBiaXRtYXAgZGlzcGxheSBvZiB2YXJpb3VzIHNpemVzIGFuZCBk
+ZXB0aHMgd2hpY2ggY2FuIGJlIGRyYXduIG9uCmRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpZGVv
+L3ZpZGNvbnNvbGUtdWNsYXNzLmMgYi9kcml2ZXJzL3ZpZGVvL3ZpZGNvbnNvbGUtdWNsYXNz
+LmMKaW5kZXggYjViM2I2NjI1OTAyLi44NzZlODBmOWViZTUgMTAwNjQ0Ci0tLSBhL2RyaXZl
+cnMvdmlkZW8vdmlkY29uc29sZS11Y2xhc3MuYworKysgYi9kcml2ZXJzL3ZpZGVvL3ZpZGNv
+bnNvbGUtdWNsYXNzLmMKQEAgLTc3LDcgKzc3LDcgQEAgc3RhdGljIGludCB2aWRjb25zb2xl
+X2JhY2soc3RydWN0IHVkZXZpY2UgKmRldikKIAkJaWYgKHByaXYtPnljdXIgPCAwKQogCQkJ
+cHJpdi0+eWN1ciA9IDA7CiAJfQotCXJldHVybiB2aWRlb19zeW5jKGRldi0+cGFyZW50LCBm
+YWxzZSk7CisJcmV0dXJuIDA7CiB9CiAKIC8qIE1vdmUgdG8gYSBuZXdsaW5lLCBzY3JvbGxp
+bmcgdGhlIGRpc3BsYXkgaWYgbmVjZXNzYXJ5ICovCkBAIC04Nyw3ICs4Nyw3IEBAIHN0YXRp
+YyB2b2lkIHZpZGNvbnNvbGVfbmV3bGluZShzdHJ1Y3QgdWRldmljZSAqZGV2KQogCXN0cnVj
+dCB1ZGV2aWNlICp2aWRfZGV2ID0gZGV2LT5wYXJlbnQ7CiAJc3RydWN0IHZpZGVvX3ByaXYg
+KnZpZF9wcml2ID0gZGV2X2dldF91Y2xhc3NfcHJpdih2aWRfZGV2KTsKIAljb25zdCBpbnQg
+cm93cyA9IENPTkZJR19WQUwoQ09OU09MRV9TQ1JPTExfTElORVMpOwotCWludCBpLCByZXQ7
+CisJaW50IGk7CiAKIAlwcml2LT54Y3VyX2ZyYWMgPSBwcml2LT54c3RhcnRfZnJhYzsKIAlw
+cml2LT55Y3VyICs9IHByaXYtPnlfY2hhcnNpemU7CkBAIC0xMDEsMTMgKzEwMSw2IEBAIHN0
+YXRpYyB2b2lkIHZpZGNvbnNvbGVfbmV3bGluZShzdHJ1Y3QgdWRldmljZSAqZGV2KQogCQlw
+cml2LT55Y3VyIC09IHJvd3MgKiBwcml2LT55X2NoYXJzaXplOwogCX0KIAlwcml2LT5sYXN0
+X2NoID0gMDsKLQotCXJldCA9IHZpZGVvX3N5bmMoZGV2LT5wYXJlbnQsIGZhbHNlKTsKLQlp
+ZiAocmV0KSB7Ci0jaWZkZWYgREVCVUcKLQkJY29uc29sZV9wdXRzX3NlbGVjdF9zdGRlcnIo
+dHJ1ZSwgIlt2YyBlcnI6IHZpZGVvX3N5bmNdIik7Ci0jZW5kaWYKLQl9CiB9CiAKIHN0YXRp
+YyBjaGFyICpwYXJzZW51bShjaGFyICpzLCBpbnQgKm51bSkKQEAgLTI5OCwxNSArMjkxLDcg
+QEAgc3RhdGljIHZvaWQgdmlkY29uc29sZV9lc2NhcGVfY2hhcihzdHJ1Y3QgdWRldmljZSAq
+ZGV2LCBjaGFyIGNoKQogCQlwYXJzZW51bShwcml2LT5lc2NhcGVfYnVmICsgMSwgJm1vZGUp
+OwogCiAJCWlmIChtb2RlID09IDIpIHsKLQkJCWludCByZXQ7Ci0KIAkJCXZpZGVvX2NsZWFy
+KGRldi0+cGFyZW50KTsKLQkJCXJldCA9IHZpZGVvX3N5bmMoZGV2LT5wYXJlbnQsIGZhbHNl
+KTsKLQkJCWlmIChyZXQpIHsKLSNpZmRlZiBERUJVRwotCQkJCWNvbnNvbGVfcHV0c19zZWxl
+Y3Rfc3RkZXJyKHRydWUsICJbdmMgZXJyOiB2aWRlb19zeW5jXSIpOwotI2VuZGlmCi0JCQl9
+CiAJCQlwcml2LT55Y3VyID0gMDsKIAkJCXByaXYtPnhjdXJfZnJhYyA9IHByaXYtPnhzdGFy
+dF9mcmFjOwogCQl9IGVsc2UgewpAQCAtNTIwLDEyICs1MDUsNiBAQCBzdGF0aWMgdm9pZCB2
+aWRjb25zb2xlX3B1dGMoc3RydWN0IHN0ZGlvX2RldiAqc2RldiwgY29uc3QgY2hhciBjaCkK
+IAlpZiAocmV0KSB7CiAjaWZkZWYgREVCVUcKIAkJY29uc29sZV9wdXRzX3NlbGVjdF9zdGRl
+cnIodHJ1ZSwgIlt2YyBlcnI6IHB1dGNdIik7Ci0jZW5kaWYKLQl9Ci0JcmV0ID0gdmlkZW9f
+c3luYyhkZXYtPnBhcmVudCwgZmFsc2UpOwotCWlmIChyZXQpIHsKLSNpZmRlZiBERUJVRwot
+CQljb25zb2xlX3B1dHNfc2VsZWN0X3N0ZGVycih0cnVlLCAiW3ZjIGVycjogdmlkZW9fc3lu
+Y10iKTsKICNlbmRpZgogCX0KIH0KQEAgLTU0MiwxMiArNTIxLDYgQEAgc3RhdGljIHZvaWQg
+dmlkY29uc29sZV9wdXRzKHN0cnVjdCBzdGRpb19kZXYgKnNkZXYsIGNvbnN0IGNoYXIgKnMp
+CiAKIAkJc25wcmludGYoc3RyLCBzaXplb2Yoc3RyKSwgIlt2YyBlcnI6IHB1dHMgJWRdIiwg
+cmV0KTsKIAkJY29uc29sZV9wdXRzX3NlbGVjdF9zdGRlcnIodHJ1ZSwgc3RyKTsKLSNlbmRp
+ZgotCX0KLQlyZXQgPSB2aWRlb19zeW5jKGRldi0+cGFyZW50LCBmYWxzZSk7Ci0JaWYgKHJl
+dCkgewotI2lmZGVmIERFQlVHCi0JCWNvbnNvbGVfcHV0c19zZWxlY3Rfc3RkZXJyKHRydWUs
+ICJbdmMgZXJyOiB2aWRlb19zeW5jXSIpOwogI2VuZGlmCiAJfQogfQpAQCAtNjg1LDkgKzY1
+OCw3IEBAIFVDTEFTU19EUklWRVIodmlkY29uc29sZSkgPSB7CiAjaWZkZWYgQ09ORklHX1ZJ
+REVPX0NPUFkKIGludCB2aWRjb25zb2xlX3N5bmNfY29weShzdHJ1Y3QgdWRldmljZSAqZGV2
+LCB2b2lkICpmcm9tLCB2b2lkICp0bykKIHsKLQlzdHJ1Y3QgdWRldmljZSAqdmlkID0gZGV2
+X2dldF9wYXJlbnQoZGV2KTsKLQotCXJldHVybiB2aWRlb19zeW5jX2NvcHkodmlkLCBmcm9t
+LCB0byk7CisJcmV0dXJuIDA7CiB9CiAKIGludCB2aWRjb25zb2xlX21lbW1vdmUoc3RydWN0
+IHVkZXZpY2UgKmRldiwgdm9pZCAqZHN0LCBjb25zdCB2b2lkICpzcmMsCmRpZmYgLS1naXQg
+YS9kcml2ZXJzL3ZpZGVvL3ZpZGVvLXVjbGFzcy5jIGIvZHJpdmVycy92aWRlby92aWRlby11
+Y2xhc3MuYwppbmRleCBmNzQzZWQ3NGM4MTguLjA5OWJhNWFjYWE5YiAxMDA2NDQKLS0tIGEv
+ZHJpdmVycy92aWRlby92aWRlby11Y2xhc3MuYworKysgYi9kcml2ZXJzL3ZpZGVvL3ZpZGVv
+LXVjbGFzcy5jCkBAIC02LDYgKzYsNyBAQAogI2RlZmluZSBMT0dfQ0FURUdPUlkgVUNMQVNT
+X1ZJREVPCiAKICNpbmNsdWRlIDxjb21tb24uaD4KKyNpbmNsdWRlIDxjeWNsaWMuaD4KICNp
+bmNsdWRlIDxibG9ibGlzdC5oPgogI2luY2x1ZGUgPGNvbnNvbGUuaD4KICNpbmNsdWRlIDxj
+cHVfZnVuYy5oPgpAQCAtMjQ5LDcgKzI1MCw3IEBAIGludCB2aWRlb19maWxsKHN0cnVjdCB1
+ZGV2aWNlICpkZXYsIHUzMiBjb2xvdXIpCiAJaWYgKHJldCkKIAkJcmV0dXJuIHJldDsKIAot
+CXJldHVybiB2aWRlb19zeW5jKGRldiwgZmFsc2UpOworCXJldHVybiAwOwogfQogCiBpbnQg
+dmlkZW9fY2xlYXIoc3RydWN0IHVkZXZpY2UgKmRldikKQEAgLTM1MSw2ICszNTIsMjQgQEAg
+dm9pZCB2aWRlb19zZXRfZGVmYXVsdF9jb2xvcnMoc3RydWN0IHVkZXZpY2UgKmRldiwgYm9v
+bCBpbnZlcnQpCiAJcHJpdi0+Y29sb3VyX2JnID0gdmlkZW9faW5kZXhfdG9fY29sb3VyKHBy
+aXYsIGJhY2spOwogfQogCitzdGF0aWMgdm9pZCB2aWRlb19jeWNsaWModm9pZCAqY3R4KQor
+eworCXN0cnVjdCB1ZGV2aWNlICpkZXYgPSBjdHg7CisJaW50IHJldDsKKworCWlmICghZGV2
+aWNlX2FjdGl2ZShkZXYpKQorCQlyZXR1cm47CisKKwl2aWRlb19zeW5jX2NvcHlfYWxsKGRl
+dik7CisKKwlyZXQgPSB2aWRlb19zeW5jKGRldiwgdHJ1ZSk7CisJaWYgKHJldCkgeworI2lm
+ZGVmIERFQlVHCisJCWNvbnNvbGVfcHV0c19zZWxlY3Rfc3RkZXJyKHRydWUsICJbdmMgZXJy
+OiB2aWRlb19zeW5jXSIpOworI2VuZGlmCisJfQorfQorCiAvKiBGbHVzaCB2aWRlbyBhY3Rp
+dml0eSB0byB0aGUgY2FjaGVzICovCiBpbnQgdmlkZW9fc3luYyhzdHJ1Y3QgdWRldmljZSAq
+dmlkLCBib29sIGZvcmNlKQogewpAQCAtNjAzLDYgKzYyMiwxMyBAQCBzdGF0aWMgaW50IHZp
+ZGVvX3Bvc3RfcHJvYmUoc3RydWN0IHVkZXZpY2UgKmRldikKIAkJfQogCX0KIAorCS8qIFJl
+Z2lzdGVyIHZpZGVvIHN5bmMgYXMgYSBjeWNsaWMgZnVuY3Rpb24gYXQgNjBIeiAqLworCXBy
+aXYtPmN5Y2xpYyA9IGN5Y2xpY19yZWdpc3Rlcih2aWRlb19jeWNsaWMsIDE2NjY2LCBkZXYt
+Pm5hbWUsIGRldik7CisJaWYgKCFwcml2LT5jeWNsaWMpIHsKKwkJbG9nX2VycigiY3ljbGlj
+X3JlZ2lzdGVyIGZvciAlcyB2aWRlbyBzeW5jIGZhaWxlZFxuIiwgZGV2LT5uYW1lKTsKKwkJ
+cmV0dXJuIC1FTk9ERVY7CisJfQorCiAJcmV0dXJuIDA7CiB9OwogCmRpZmYgLS1naXQgYS9k
+cml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jIGIvZHJpdmVycy92aWRlby92aWRlb19ibXAuYwpp
+bmRleCA0NWYwMDNjODI1MWEuLjkwYTBlNGU5OGIxMSAxMDA2NDQKLS0tIGEvZHJpdmVycy92
+aWRlby92aWRlb19ibXAuYworKysgYi9kcml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jCkBAIC00
+NjYsNSArNDY2LDUgQEAgaW50IHZpZGVvX2JtcF9kaXNwbGF5KHN0cnVjdCB1ZGV2aWNlICpk
+ZXYsIHVsb25nIGJtcF9pbWFnZSwgaW50IHgsIGludCB5LAogCWlmIChyZXQpCiAJCXJldHVy
+biBsb2dfcmV0KHJldCk7CiAKLQlyZXR1cm4gdmlkZW9fc3luYyhkZXYsIGZhbHNlKTsKKwly
+ZXR1cm4gMDsKIH0KZGlmZiAtLWdpdCBhL2luY2x1ZGUvdmlkZW8uaCBiL2luY2x1ZGUvdmlk
+ZW8uaAppbmRleCA2NmQxMDljYTVkYTYuLjMxYWE4ZGYxNzFmYSAxMDA2NDQKLS0tIGEvaW5j
+bHVkZS92aWRlby5oCisrKyBiL2luY2x1ZGUvdmlkZW8uaApAQCAtOCw2ICs4LDcgQEAKICNk
+ZWZpbmUgX1ZJREVPX0hfCiAKICNpbmNsdWRlIDxzdGRpb19kZXYuaD4KKyNpbmNsdWRlIDxj
+eWNsaWMuaD4KIAogc3RydWN0IHVkZXZpY2U7CiAKQEAgLTExOCw2ICsxMTksNyBAQCBzdHJ1
+Y3QgdmlkZW9fcHJpdiB7CiAJYm9vbCBmbHVzaF9kY2FjaGU7CiAJdTggZmdfY29sX2lkeDsK
+IAl1OCBiZ19jb2xfaWR4OworCXN0cnVjdCBjeWNsaWNfaW5mbyAqY3ljbGljOwogfTsKIAog
+LyoqCmRpZmYgLS1naXQgYS9saWIvZWZpX2xvYWRlci9lZmlfZ29wLmMgYi9saWIvZWZpX2xv
+YWRlci9lZmlfZ29wLmMKaW5kZXggNzc4YjY5M2Y5ODNhLi41NmNhMDQ4MmQ4NzEgMTAwNjQ0
+Ci0tLSBhL2xpYi9lZmlfbG9hZGVyL2VmaV9nb3AuYworKysgYi9saWIvZWZpX2xvYWRlci9l
+ZmlfZ29wLmMKQEAgLTQ1MSw4ICs0NTEsNiBAQCBzdGF0aWMgZWZpX3N0YXR1c190IEVGSUFQ
+SSBnb3BfYmx0KHN0cnVjdCBlZmlfZ29wICp0aGlzLAogCWlmIChyZXQgIT0gRUZJX1NVQ0NF
+U1MpCiAJCXJldHVybiBFRklfRVhJVChyZXQpOwogCi0JdmlkZW9fc3luY19hbGwoKTsKLQog
+CXJldHVybiBFRklfRVhJVChFRklfU1VDQ0VTUyk7CiB9CiAKLS0gCjIuNDAuMQoK
+--------------epCYzJM0WBvQc5wEX2Y6I00a
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0002-video-rockchip-Implement-copy-framebuffer-suppor.patch"
+Content-Disposition: attachment;
+ filename*0="0002-video-rockchip-Implement-copy-framebuffer-suppor.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSA4Nzc3MWNmNzY1ZTZjYjEwOTZkNjQ4N2U0ZGNjM2M2OTcyZGYwYzhlIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBBbHBlciBOZWJpIFlhc2FrIDxhbHBlcm5lYml5YXNh
+a0BnbWFpbC5jb20+CkRhdGU6IEZyaSwgMjUgQXVnIDIwMjMgMjE6Mjk6NTIgKzAzMDAKU3Vi
+amVjdDogW1BBVENIXSBXSVA6IHZpZGVvOiByb2NrY2hpcDogSW1wbGVtZW50IGNvcHkgZnJh
+bWVidWZmZXIgc3VwcG9ydAoKLS0tCiBjb25maWdzL2Nocm9tZWJvb2tfa2V2aW5fZGVmY29u
+ZmlnIHwgIDMgKy0tCiBkcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL3JrX3ZvcC5jICAgIHwgMTEg
+KysrKysrKysrKy0KIDIgZmlsZXMgY2hhbmdlZCwgMTEgaW5zZXJ0aW9ucygrKSwgMyBkZWxl
+dGlvbnMoLSkKCmRpZmYgLS1naXQgYS9jb25maWdzL2Nocm9tZWJvb2tfa2V2aW5fZGVmY29u
+ZmlnIGIvY29uZmlncy9jaHJvbWVib29rX2tldmluX2RlZmNvbmZpZwppbmRleCA2Y2U2OWY0
+MTllMTcuLjBiYWE3M2NjNjJkYiAxMDA2NDQKLS0tIGEvY29uZmlncy9jaHJvbWVib29rX2tl
+dmluX2RlZmNvbmZpZworKysgYi9jb25maWdzL2Nocm9tZWJvb2tfa2V2aW5fZGVmY29uZmln
+CkBAIC01LDggKzUsNiBAQCBDT05GSUdfQVJDSF9ST0NLQ0hJUD15CiBDT05GSUdfVEVYVF9C
+QVNFPTB4MDAyMDAwMDAKIENPTkZJR19TUExfR1BJTz15CiBDT05GSUdfTlJfRFJBTV9CQU5L
+Uz0xCi1DT05GSUdfSEFTX0NVU1RPTV9TWVNfSU5JVF9TUF9BRERSPXkKLUNPTkZJR19DVVNU
+T01fU1lTX0lOSVRfU1BfQUREUj0weDMwMDAwMAogQ09ORklHX1NGX0RFRkFVTFRfU1BFRUQ9
+MjAwMDAwMDAKIENPTkZJR19FTlZfU0laRT0weDgwMDAKIENPTkZJR19ERUZBVUxUX0RFVklD
+RV9UUkVFPSJyazMzOTktZ3J1LWtldmluIgpAQCAtMTI5LDYgKzEyNyw3IEBAIENPTkZJR19V
+U0JfRVRIRVJfU01TQzk1WFg9eQogQ09ORklHX1ZJREVPPXkKICMgQ09ORklHX1ZJREVPX0ZP
+TlRfOFgxNiBpcyBub3Qgc2V0CiBDT05GSUdfVklERU9fRk9OVF8xNlgzMj15CitDT05GSUdf
+VklERU9fQ09QWT15CiBDT05GSUdfRElTUExBWT15CiBDT05GSUdfVklERU9fUk9DS0NISVA9
+eQogQ09ORklHX1ZJREVPX1JPQ0tDSElQX01BWF9YUkVTPTI0MDAKZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvdmlkZW8vcm9ja2NoaXAvcmtfdm9wLmMgYi9kcml2ZXJzL3ZpZGVvL3JvY2tjaGlw
+L3JrX3ZvcC5jCmluZGV4IGM1MTRlMmEwZTQ0OS4uZTcwNjg5ODUxYTYxIDEwMDY0NAotLS0g
+YS9kcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL3JrX3ZvcC5jCisrKyBiL2RyaXZlcnMvdmlkZW8v
+cm9ja2NoaXAvcmtfdm9wLmMKQEAgLTQ2NCwxMCArNDY0LDE2IEBAIGludCBya192b3BfcHJv
+YmUoc3RydWN0IHVkZXZpY2UgKmRldikKIAkJcmV0dXJuIC1FSU5WQUw7CiAJfQogCisJaWYg
+KElTX0VOQUJMRUQoQ09ORklHX1ZJREVPX0NPUFkpKQorCQlwbGF0LT5jb3B5X2Jhc2UgPSBw
+bGF0LT5iYXNlICsgcGxhdC0+c2l6ZSAvIDI7CisKIAlmb3IgKG5vZGUgPSBvZm5vZGVfZmly
+c3Rfc3Vibm9kZShwb3J0KTsKIAkgICAgIG9mbm9kZV92YWxpZChub2RlKTsKIAkgICAgIG5v
+ZGUgPSBkZXZfcmVhZF9uZXh0X3N1Ym5vZGUobm9kZSkpIHsKLQkJcmV0ID0gcmtfZGlzcGxh
+eV9pbml0KGRldiwgcGxhdC0+YmFzZSwgbm9kZSk7CisJCWlmIChJU19FTkFCTEVEKENPTkZJ
+R19WSURFT19DT1BZKSkKKwkJCXJldCA9IHJrX2Rpc3BsYXlfaW5pdChkZXYsIHBsYXQtPmNv
+cHlfYmFzZSwgbm9kZSk7CisJCWVsc2UKKwkJCXJldCA9IHJrX2Rpc3BsYXlfaW5pdChkZXYs
+IHBsYXQtPmJhc2UsIG5vZGUpOwogCQlpZiAocmV0KQogCQkJZGVidWcoIkRldmljZSBmYWls
+ZWQ6IHJldD0lZFxuIiwgcmV0KTsKIAkJaWYgKCFyZXQpCkBAIC00ODUsNSArNDkxLDggQEAg
+aW50IHJrX3ZvcF9iaW5kKHN0cnVjdCB1ZGV2aWNlICpkZXYpCiAJcGxhdC0+c2l6ZSA9IDQg
+KiAoQ09ORklHX1ZJREVPX1JPQ0tDSElQX01BWF9YUkVTICoKIAkJCSAgQ09ORklHX1ZJREVP
+X1JPQ0tDSElQX01BWF9ZUkVTKTsKIAorCWlmIChJU19FTkFCTEVEKENPTkZJR19WSURFT19D
+T1BZKSkKKwkJcGxhdC0+c2l6ZSAqPSAyOworCiAJcmV0dXJuIDA7CiB9Ci0tIAoyLjQwLjEK
+Cg==
+
+--------------epCYzJM0WBvQc5wEX2Y6I00a--
