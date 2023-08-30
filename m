@@ -4,71 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F82CC83F01
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E040C83F01
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9993986553;
-	Wed, 30 Aug 2023 21:53:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=beckhoff.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B8998653F;
+	Wed, 30 Aug 2023 21:55:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=permerror (0-bit key) header.d=beckhoff.com header.i=@beckhoff.com header.b="F40W0sdc";
-	dkim=pass (2048-bit key; unprotected) header.d=beckhoff.com header.i=@beckhoff.com header.b="aB0bm91d";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5FB28653D; Wed, 30 Aug 2023 21:52:07 +0200 (CEST)
-Received: from netsrv01.beckhoff.com (netsrv01.beckhoff.com [62.159.14.10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C14FC86526
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:52:03 +0200 (CEST)
+ id 5D06D86535; Wed, 30 Aug 2023 21:55:08 +0200 (CEST)
+Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
+ by phobos.denx.de (Postfix) with ESMTP id 38BC486545
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:55:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=beckhoff.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=S.Dirkwinkel@beckhoff.com
-DKIM-Signature: v=1; c=relaxed/relaxed; d=beckhoff.com; s=mail2022e; 
- t=1693425123; bh=pUDKlZjBPh/4OppRuUHxDVaqetIxNg4jdkWjHnqVEOM=; h=
- Subject:Subject:From:From:Date:Date:ReplyTo:ReplyTo:Cc:Cc:Message-Id:Message-Id;
- a=ed25519-sha256; b=
- F40W0sdca1da0ZLhI80fCNJ3Yt8TecMh9xrhP/EPYixLBdSBBm9EEh5yLIqoM94lJmlW0q8QwhbwwnwIGa8hBQ==
-DKIM-Signature: v=1; c=relaxed/relaxed; d=beckhoff.com; s=mail2022r; 
- t=1693425123; bh=pUDKlZjBPh/4OppRuUHxDVaqetIxNg4jdkWjHnqVEOM=; h=
- Subject:Subject:From:From:Date:Date:ReplyTo:ReplyTo:Cc:Cc:Message-Id:Message-Id;
- a=rsa-sha256; b=
- aB0bm91dWUq6G/YQH2a0c4T2qfPskA8HqZXAuMr4oWhGa9RJfl+DYF0ptGfkuYZXnGquOA7BdT//etu/wS29BZowD+Yd0LpEpAUU2LS2FyX7fd1/jyF9R0/9QVzhzFV1K3qlaIJq7wYxGDJhEUB5idSXdhZI3T4Iu8rLjTwro64vJDdSLbTLrvhmH3pT/SdFpmUSVBF1ztgi9f0sVRNieffz/OusI2brMUxY/6k/cs0BY6qmSjl+SvZ/+TJm5N+5y2j2H5QCQQ2sRk3MTpjMD0PVxP93r+mN6jr7P3zUgRiBeNMwNipzPvM4K2Cm7FkDIPsbIrTQakZ7ybTDn5i24Q==
-Received: from 172.17.5.173 by netsrv01.beckhoff.com (Tls12, Aes256, Sha384,
- DiffieHellmanEllipticKey384); Wed, 30 Aug 2023 19:52:02 GMT
-Received: from ex03.beckhoff.com (172.17.2.169) by ex08.beckhoff.com
- (172.17.5.173) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.32; Wed, 30 Aug
- 2023 21:52:01 +0200
-Received: from ex03.beckhoff.com ([fe80::f966:311d:b0dc:8f78]) by
- ex03.beckhoff.com ([fe80::f966:311d:b0dc:8f78%5]) with mapi id
- 15.01.2507.032; Wed, 30 Aug 2023 21:52:01 +0200
-From: Steffen Dirkwinkel <S.Dirkwinkel@beckhoff.com>
-To: Alexandre Belloni <alexandre.belloni@bootlin.com>
-CC: Steffen Dirkwinkel <lists@steffen.cc>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Chris Packham <judge.packham@gmail.com>, "Sergei
- Antonov" <saproj@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/5] drivers: rtc: add rv3032 driver
-Thread-Topic: [PATCH 1/5] drivers: rtc: add rv3032 driver
-Thread-Index: AQHZ20rfLGtew79PW0iU66CySN9RnbADHH2AgAACPIA=
-Date: Wed, 30 Aug 2023 19:52:01 +0000
-Message-ID: <73192453-4749-4416-84EE-B3A5391CED1B@beckhoff.com>
-References: <20230830140349.10801-1-lists@steffen.cc>
- <20230830140349.10801-2-lists@steffen.cc> <2023083019435131e3524a@mail.local>
-In-Reply-To: <2023083019435131e3524a@mail.local>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [188.136.112.42]
-x-olx-disclaimer: EX08.BECKHOFF.COM
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A0A85B774558CA41BF304177D62DE9AD@beckhoff.com>
-Content-Transfer-Encoding: base64
+ dmarc=none (p=none dis=none) header.from=csgraf.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
+Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id CC4A66080255;
+ Wed, 30 Aug 2023 21:55:00 +0200 (CEST)
+Message-ID: <33eb49da-e563-4ffd-986f-0c7ef852be61@csgraf.de>
+Date: Wed, 30 Aug 2023 21:55:00 +0200
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 30 Aug 2023 21:53:24 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/13] Add video damage tracking
+Content-Language: en-GB
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: xypron.glpk@gmx.de, sjg@chromium.org, alpernebiyasak@gmail.com,
+ u-boot@lists.denx.de, kever.yang@rock-chips.com, jagan@amarulasolutions.com,
+ andre.przywara@arm.com, clamor95@gmail.com, philipp.tomsich@vrull.eu,
+ afd@ti.com, da@libre.computer, patrice.chotard@foss.st.com,
+ patrick.delaunay@foss.st.com, woods.technical@gmail.com, agust@denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com, mbrugger@suse.com,
+ u-boot-amlogic@groups.io, ilias.apalodimas@linaro.org,
+ neil.armstrong@linaro.org
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+ <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+ <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
+ <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+ <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+ <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
+ <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
+ <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
+ <11296797-3d37-413b-9517-2890ae26a9bd@csgraf.de>
+ <7eeab958-f231-4639-acca-9f91e4f1ab00@gmx.de>
+ <a2dc9f21-8e8e-4ed1-bd1c-8825c11b6fc8@csgraf.de>
+ <87leduqk88.fsf@bloch.sibelius.xs4all.nl>
+From: Alexander Graf <agraf@csgraf.de>
+In-Reply-To: <87leduqk88.fsf@bloch.sibelius.xs4all.nl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,233 +73,410 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGksDQoNCj4gT24gMzAuIEF1ZyAyMDIzLCBhdCAyMTo0MywgQWxleGFuZHJlIEJlbGxvbmkgPGFs
-ZXhhbmRyZS5iZWxsb25pQGJvb3RsaW4uY29tPiB3cm90ZToNCj4NCj4gSGVsbG8sDQo+DQo+IE9u
-IDMwLzA4LzIwMjMgMTY6MDM6MzArMDIwMCwgU3RlZmZlbiBEaXJrd2lua2VsIHdyb3RlOg0KPj4g
-RnJvbTogU3RlZmZlbiBEaXJrd2lua2VsIDxzLmRpcmt3aW5rZWxAYmVja2hvZmYuY29tPg0KPj4N
-Cj4+IEJhc2VkIG9uIGxpbnV4IGRyaXZlciwgd2l0aCB0aGVzZSBkaWZmZXJlbmNlczoNCj4+IC0g
-bm8gc3VwcG9ydCBmb3IgdHJpY2tsZSBjaGFyZ2VyDQo+PiAtIG5vIHN1cHBvcnQgZm9yIGh3bW9u
-DQo+PiAtIG5vIHN1cHBvcnQgZm9yIGJhdHRlcnkgYmFja2VkIG1lbW9yeQ0KPj4gLSBkbV9pMmMg
-aW5zdGVhZCBvZiByZWdtYXANCj4+IC0gZGlmZmVyZW50IHRtX3llYXIgYW5kIHRtX21vbg0KPj4N
-Cj4+IHJlYWQvd3JpdGUgYWNjZXNzIHRoZSB1c2VyIGVlcHJvbS4gVGhlIHJlYWQgYW5kIHdyaXRl
-IGZ1bmN0aW9ucyBhY2Nlc3MNCj4+IHRoZSB1c2VyIGVlcHJvbSBzbyBpdCBjYW4gYmUgdXNlZCBm
-b3IgbnZtZW0tY2VsbHMuIChsaWtlIGluDQo+PiBhcmNoL3NhbmRib3gvZHRzL3Rlc3QuZHRzKS4g
-VGhpcyBpcyBjdXJyZW50bHkgZGlmZmVyZW50IGZyb20gbGludXggYXMNCj4+IHlvdSdkIGdldCBu
-dnJhbSB1c2luZyBudm1lbS1jZWxscy4gSSdtIGhvcGluZyB0byBzd2l0Y2ggdGhlIG9yZGVyIHRo
-ZXJlDQo+DQo+IEknbSBub3Qgc3VyZSBJIGdldCB0aGlzIGFzIGJvdGggbnZyYW0gYW5kIGVlcHJv
-bSBhcmUgZXhwb3NlZCB0aHJvdWdoDQo+IG52bWVtLiBUaGUgc29sdXRpb24gaXMgbm90IHRvIHJl
-b3JkZXIgYnV0IGluc3RlYWQgdG8gZml4IHRoZSBudm1lbSBjb3JlDQo+IHNvIHlvdSBjYW4gZXhw
-b3NlIGJvdGggdXNpbmcgbnZtZW0tY2VsbHMgYXMgdGhlcmUgYXJlIHVzZXJzIHRoYXQgYWNjZXNz
-DQo+IHRoZSBudnJhbSB0byBoYW5kbGUgQS9CIHVwZGF0ZXMgKGJvb3Rjb3VudCwgcmVzY3VlIG1v
-ZGUsLi4uKQ0KDQpIb3cgZG9lcyBvbmUgc2V0IHRoZSBudm1lbSBsb2NhdGlvbiB0byBiZSBpbiBl
-ZXByb20gb24gdGhlIGxpbnV4IGRyaXZlcj8NCk1heWJlIEkganVzdCBkb27igJl0IHVuZGVyc3Rh
-bmQgdGhlIGJpbmRpbmcgY29ycmVjdGx5Pw0KDQpDdXJyZW50bHkgSSBoYXZlIHRoaXM6DQpydjMw
-MzI6IHJ0Y0A1MSB7DQojYWRkcmVzcy1jZWxscyA9IDwxPjsNCiNzaXplLWNlbGxzID0gPDE+Ow0K
-Y29tcGF0aWJsZSA9ICJtaWNyb2NyeXN0YWwscnYzMDMy4oCdOw0KcmVnID0gPDB4NTE+Ow0KaW50
-ZXJydXB0LXBhcmVudCA9IDwmZ3Bpbz47DQppbnRlcnJ1cHRzID0gPDExIElSUV9UWVBFX0xFVkVM
-X0xPVz47DQpnZW0yX21hY19hZGRyZXNzOiBtYWMtYWRkcmVzc0AwIHsNCnJlZyA9IDwweDAgNj47
-DQp9Ow0KfTsNCg0KT24gTGludXggdGhhdCB3b3VsZCByZWFkIGZyb20gYmF0dGVyeSBiYWNrZWQg
-cmFtLg0KSXMgdGhlcmUgc29tZSB3YXkgdG8gc3BlY2lmeSBpdCBpcyBpbiBlZXByb20/DQoNCj4N
-Cj4+IHRvbyAodGhlcmUgYXJlIGN1cnJlbnRseSBubyB1c2Vycykgb3IgdG8gbWFrZSBhIG1vcmUg
-c3BlY2lmaWMgYmluZGluZy4NCj4+IEN1cnJlbnRseSB0aGlzIHdvdWxkIGFsc28ganVzdCB3b3Jr
-IGFzIGlzIGlmIHVzZWQgZm9yIG1hYyBhZGRyZXNzZXMsIGFzDQo+PiB1LWJvb3Qgd2lsbCBwdXQg
-dGhlc2UgaW50byBmZHQgYmVmb3JlIGJvb3RpbmcgbGludXggYW5kIGxpbnV4IHdpbGwgdGhlbg0K
-Pj4gcHJlZmVyIHRoZSB1LWJvb3QgcHJvdmlkZWQgbWFjLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6
-IFN0ZWZmZW4gRGlya3dpbmtlbCA8cy5kaXJrd2lua2VsQGJlY2tob2ZmLmNvbT4NCj4+DQo+PiAt
-LS0NCj4+DQo+PiBkcml2ZXJzL3J0Yy9LY29uZmlnICB8ICAxMCArKw0KPj4gZHJpdmVycy9ydGMv
-TWFrZWZpbGUgfCAgIDEgKw0KPj4gZHJpdmVycy9ydGMvcnYzMDMyLmMgfCAzMzQgKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPj4gMyBmaWxlcyBjaGFuZ2VkLCAz
-NDUgaW5zZXJ0aW9ucygrKQ0KPj4gY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvcnRjL3J2MzAz
-Mi5jDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvcnRjL0tjb25maWcgYi9kcml2ZXJzL3J0
-Yy9LY29uZmlnDQo+PiBpbmRleCAyMzE3MzEzOWUwLi5hNDFlYzliNmNjIDEwMDY0NA0KPj4gLS0t
-IGEvZHJpdmVycy9ydGMvS2NvbmZpZw0KPj4gKysrIGIvZHJpdmVycy9ydGMvS2NvbmZpZw0KPj4g
-QEAgLTE3Miw2ICsxNzIsMTYgQEAgY29uZmlnIFJUQ19SVjMwMjkNCj4+ICAgVGhpcyBkcml2ZXIg
-c3VwcG9ydHMgcmVhZGluZyBhbmQgd3JpdGluZyB0aGUgUlRDL2NhbGVuZGFyIGFuZCB0aGUNCj4+
-ICAgYmF0dGVyeS1iYWNlZCBTUkFNIHNlY3Rpb24uDQo+Pg0KPj4gK2NvbmZpZyBSVENfUlYzMDMy
-DQo+PiArIGJvb2wgIkVuYWJsZSBSVjMwMzIgZHJpdmVyIg0KPj4gKyBkZXBlbmRzIG9uIERNX1JU
-Qw0KPj4gKyBoZWxwDQo+PiArICAgVGhlIE1pY3JvQ3J5c3RhbCBSVjMwMzIgaXMgYSBJMkMgUmVh
-bCBUaW1lIENsb2NrIChSVEMpIHdpdGggYSAxNi1ieXRlDQo+PiArICAgYmF0dGVyeS1iYWNrZWQg
-U1JBTSBhbmQgYSAzMi1ieXRlIHVzZXIgZWVwcm9tLg0KPj4gKw0KPj4gKyAgIFRoaXMgZHJpdmVy
-IHN1cHBvcnRzIHJlYWRpbmcgYW5kIHdyaXRpbmcgdGhlIFJUQy9jYWxlbmRhciBhbmQgdGhlDQo+
-PiArICAgdXNlciBlZXByb20uDQo+PiArDQo+PiBjb25maWcgUlRDX1JWODgwMw0KPj4gYm9vbCAi
-RW5hYmxlIFJWODgwMyBkcml2ZXIiDQo+PiBkZXBlbmRzIG9uIERNX1JUQw0KPj4gZGlmZiAtLWdp
-dCBhL2RyaXZlcnMvcnRjL01ha2VmaWxlIGIvZHJpdmVycy9ydGMvTWFrZWZpbGUNCj4+IGluZGV4
-IDMwOGZhYjhkYTkuLjljMmQ4YzdhYTkgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL3J0Yy9NYWtl
-ZmlsZQ0KPj4gKysrIGIvZHJpdmVycy9ydGMvTWFrZWZpbGUNCj4+IEBAIC0zMSw2ICszMSw3IEBA
-IG9iai0kKENPTkZJR19SVENfUEwwMzEpICs9IHBsMDMxLm8NCj4+IG9iai0kKENPTkZJR19SVENf
-UFQ3QzQzMzgpICs9IHB0N2M0MzM4Lm8NCj4+IG9iai0kKENPTkZJR19SVENfUlYzMDI4KSArPSBy
-djMwMjgubw0KPj4gb2JqLSQoQ09ORklHX1JUQ19SVjMwMjkpICs9IHJ2MzAyOS5vDQo+PiArb2Jq
-LSQoQ09ORklHX1JUQ19SVjMwMzIpICs9IHJ2MzAzMi5vDQo+PiBvYmotJChDT05GSUdfUlRDX1JW
-ODgwMykgKz0gcnY4ODAzLm8NCj4+IG9iai0kKENPTkZJR19SVENfUlg4MDI1KSArPSByeDgwMjUu
-bw0KPj4gb2JqLSQoQ09ORklHX1JUQ19SWDgwMTBTSikgKz0gcng4MDEwc2oubw0KPj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvcnRjL3J2MzAzMi5jIGIvZHJpdmVycy9ydGMvcnYzMDMyLmMNCj4+IG5l
-dyBmaWxlIG1vZGUgMTAwNjQ0DQo+PiBpbmRleCAwMDAwMDAwMDAwLi44ZDVkODYwYzBhDQo+PiAt
-LS0gL2Rldi9udWxsDQo+PiArKysgYi9kcml2ZXJzL3J0Yy9ydjMwMzIuYw0KPj4gQEAgLTAsMCAr
-MSwzMzQgQEANCj4+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMA0KPj4gKy8q
-DQo+PiArICogUlRDIGRyaXZlciBmb3IgdGhlIE1pY3JvIENyeXN0YWwgUlYzMDMyDQo+PiArICoN
-Cj4+ICsgKiBiYXNlZCBvbiBsaW51eCBkcml2ZXIgZnJvbQ0KPj4gKyAqIENvcHlyaWdodCAoQykg
-MjAyMCBNaWNybyBDcnlzdGFsIFNBDQo+PiArICoNCj4+ICsgKiBBbGV4YW5kcmUgQmVsbG9uaSA8
-YWxleGFuZHJlLmJlbGxvbmlAYm9vdGxpbi5jb20+DQo+PiArICoNCj4+ICsgKi8NCj4+ICsNCj4+
-ICsjaW5jbHVkZSA8ZG0uaD4NCj4+ICsjaW5jbHVkZSA8aTJjLmg+DQo+PiArI2luY2x1ZGUgPGxp
-bnV4L2RlbGF5Lmg+DQo+PiArI2luY2x1ZGUgPHJlZ21hcC5oPg0KPj4gKyNpbmNsdWRlIDxydGMu
-aD4NCj4+ICsjaW5jbHVkZSA8dGltZS5oPg0KPj4gKw0KPj4gKyNkZWZpbmUgUlYzMDMyX1NFQyAw
-eDAxDQo+PiArI2RlZmluZSBSVjMwMzJfTUlOIDB4MDINCj4+ICsjZGVmaW5lIFJWMzAzMl9IT1VS
-IDB4MDMNCj4+ICsjZGVmaW5lIFJWMzAzMl9XREFZIDB4MDQNCj4+ICsjZGVmaW5lIFJWMzAzMl9E
-QVkgMHgwNQ0KPj4gKyNkZWZpbmUgUlYzMDMyX01PTlRIIDB4MDYNCj4+ICsjZGVmaW5lIFJWMzAz
-Ml9ZRUFSIDB4MDcNCj4+ICsjZGVmaW5lIFJWMzAzMl9BTEFSTV9NSU4gMHgwOA0KPj4gKyNkZWZp
-bmUgUlYzMDMyX0FMQVJNX0hPVVIgMHgwOQ0KPj4gKyNkZWZpbmUgUlYzMDMyX0FMQVJNX0RBWSAw
-eDBBDQo+PiArI2RlZmluZSBSVjMwMzJfU1RBVFVTIDB4MEQNCj4+ICsjZGVmaW5lIFJWMzAzMl9U
-TFNCIDB4MEUNCj4+ICsjZGVmaW5lIFJWMzAzMl9UTVNCIDB4MEYNCj4+ICsjZGVmaW5lIFJWMzAz
-Ml9DVFJMMSAweDEwDQo+PiArI2RlZmluZSBSVjMwMzJfQ1RSTDIgMHgxMQ0KPj4gKyNkZWZpbmUg
-UlYzMDMyX0NUUkwzIDB4MTINCj4+ICsjZGVmaW5lIFJWMzAzMl9UU19DVFJMIDB4MTMNCj4+ICsj
-ZGVmaW5lIFJWMzAzMl9DTEtfSVJRIDB4MTQNCj4+ICsjZGVmaW5lIFJWMzAzMl9FRVBST01fQURE
-UiAweDNEDQo+PiArI2RlZmluZSBSVjMwMzJfRUVQUk9NX0RBVEEgMHgzRQ0KPj4gKyNkZWZpbmUg
-UlYzMDMyX0VFUFJPTV9DTUQgMHgzRg0KPj4gKyNkZWZpbmUgUlYzMDMyX1JBTTEgMHg0MA0KPj4g
-KyNkZWZpbmUgUlYzMDMyX1BNVSAweEMwDQo+PiArI2RlZmluZSBSVjMwMzJfT0ZGU0VUIDB4QzEN
-Cj4+ICsjZGVmaW5lIFJWMzAzMl9DTEtPVVQxIDB4QzINCj4+ICsjZGVmaW5lIFJWMzAzMl9DTEtP
-VVQyIDB4QzMNCj4+ICsjZGVmaW5lIFJWMzAzMl9UUkVGMCAweEM0DQo+PiArI2RlZmluZSBSVjMw
-MzJfVFJFRjEgMHhDNQ0KPj4gKw0KPj4gKyNkZWZpbmUgUlYzMDMyX1NUQVRVU19WTEYgQklUKDAp
-DQo+PiArI2RlZmluZSBSVjMwMzJfU1RBVFVTX1BPUkYgQklUKDEpDQo+PiArI2RlZmluZSBSVjMw
-MzJfU1RBVFVTX0VWRiBCSVQoMikNCj4+ICsjZGVmaW5lIFJWMzAzMl9TVEFUVVNfQUYgQklUKDMp
-DQo+PiArI2RlZmluZSBSVjMwMzJfU1RBVFVTX1RGIEJJVCg0KQ0KPj4gKyNkZWZpbmUgUlYzMDMy
-X1NUQVRVU19VRiBCSVQoNSkNCj4+ICsjZGVmaW5lIFJWMzAzMl9TVEFUVVNfVExGIEJJVCg2KQ0K
-Pj4gKyNkZWZpbmUgUlYzMDMyX1NUQVRVU19USEYgQklUKDcpDQo+PiArDQo+PiArI2RlZmluZSBS
-VjMwMzJfVExTQl9DTEtGIEJJVCgxKQ0KPj4gKyNkZWZpbmUgUlYzMDMyX1RMU0JfRUVCVVNZIEJJ
-VCgyKQ0KPj4gKyNkZWZpbmUgUlYzMDMyX1RMU0JfVEVNUCBHRU5NQVNLKDcsIDQpDQo+PiArDQo+
-PiArI2RlZmluZSBSVjMwMzJfQ0xLT1VUMl9IRkRfTVNLIEdFTk1BU0soNCwgMCkNCj4+ICsjZGVm
-aW5lIFJWMzAzMl9DTEtPVVQyX0ZEX01TSyBHRU5NQVNLKDYsIDUpDQo+PiArI2RlZmluZSBSVjMw
-MzJfQ0xLT1VUMl9PUyBCSVQoNykNCj4+ICsNCj4+ICsjZGVmaW5lIFJWMzAzMl9DVFJMMV9FRVJE
-IEJJVCgzKQ0KPj4gKyNkZWZpbmUgUlYzMDMyX0NUUkwxX1dBREEgQklUKDUpDQo+PiArDQo+PiAr
-I2RlZmluZSBSVjMwMzJfQ1RSTDJfU1RPUCBCSVQoMCkNCj4+ICsjZGVmaW5lIFJWMzAzMl9DVFJM
-Ml9FSUUgQklUKDIpDQo+PiArI2RlZmluZSBSVjMwMzJfQ1RSTDJfQUlFIEJJVCgzKQ0KPj4gKyNk
-ZWZpbmUgUlYzMDMyX0NUUkwyX1RJRSBCSVQoNCkNCj4+ICsjZGVmaW5lIFJWMzAzMl9DVFJMMl9V
-SUUgQklUKDUpDQo+PiArI2RlZmluZSBSVjMwMzJfQ1RSTDJfQ0xLSUUgQklUKDYpDQo+PiArI2Rl
-ZmluZSBSVjMwMzJfQ1RSTDJfVFNFIEJJVCg3KQ0KPj4gKw0KPj4gKyNkZWZpbmUgUlYzMDMyX1BN
-VV9UQ00gR0VOTUFTSygxLCAwKQ0KPj4gKyNkZWZpbmUgUlYzMDMyX1BNVV9UQ1IgR0VOTUFTSygz
-LCAyKQ0KPj4gKyNkZWZpbmUgUlYzMDMyX1BNVV9CU00gR0VOTUFTSyg1LCA0KQ0KPj4gKyNkZWZp
-bmUgUlYzMDMyX1BNVV9OQ0xLRSBCSVQoNikNCj4+ICsNCj4+ICsjZGVmaW5lIFJWMzAzMl9QTVVf
-QlNNX0RTTSAxDQo+PiArI2RlZmluZSBSVjMwMzJfUE1VX0JTTV9MU00gMg0KPj4gKw0KPj4gKyNk
-ZWZpbmUgUlYzMDMyX09GRlNFVF9NU0sgR0VOTUFTSyg1LCAwKQ0KPj4gKw0KPj4gKyNkZWZpbmUg
-UlYzMDMyX0VWVF9DVFJMX1RTUiBCSVQoMikNCj4+ICsNCj4+ICsjZGVmaW5lIFJWMzAzMl9FRVBS
-T01fQ01EX1VQREFURSAweDExDQo+PiArI2RlZmluZSBSVjMwMzJfRUVQUk9NX0NNRF9XUklURSAw
-eDIxDQo+PiArI2RlZmluZSBSVjMwMzJfRUVQUk9NX0NNRF9SRUFEIDB4MjINCj4+ICsNCj4+ICsj
-ZGVmaW5lIFJWMzAzMl9FRVBST01fVVNFUiAweENCDQo+PiArDQo+PiArI2RlZmluZSBSVjMwMzJf
-RUVCVVNZX1BPTEwgMTAwMDANCj4+ICsjZGVmaW5lIFJWMzAzMl9FRUJVU1lfVElNRU9VVCAxMDAw
-MDANCj4+ICsNCj4+ICsjZGVmaW5lIE9GRlNFVF9TVEVQX1BQVCAyMzg0MTkNCj4+ICsNCj4+ICtz
-dGF0aWMgaW50IHJ2MzAzMl91cGRhdGVfYml0cyhzdHJ1Y3QgdWRldmljZSAqZGV2LCB1OCByZWcs
-IHU4IG1hc2ssIHU4IHNldCkNCj4+ICt7DQo+PiArIHU4IGJ1ZjsNCj4+ICsgaW50IHJldDsNCj4+
-ICsNCj4+ICsgcmV0ID0gZG1faTJjX3JlYWQoZGV2LCByZWcsICZidWYsIDEpOw0KPj4gKyBpZiAo
-cmV0IDwgMCkNCj4+ICsgcmV0dXJuIHJldDsNCj4+ICsNCj4+ICsgaWYgKChidWYgJiBtYXNrKSA9
-PSAoc2V0ICYmIG1hc2spKQ0KPj4gKyByZXR1cm4gMDsNCj4+ICsNCj4+ICsgYnVmID0gKGJ1ZiAm
-IH5tYXNrKSB8IChzZXQgJiBtYXNrKTsNCj4+ICsgcmV0ID0gZG1faTJjX3JlYWQoZGV2LCByZWcs
-ICZidWYsIDEpOw0KPj4gKyBpZiAocmV0IDwgMCkNCj4+ICsgcmV0dXJuIHJldDsNCj4+ICsNCj4+
-ICsgcmV0dXJuIDA7DQo+PiArfQ0KPj4gKw0KPj4gK3N0YXRpYyBpbnQgcnYzMDMyX2V4aXRfZWVy
-ZChzdHJ1Y3QgdWRldmljZSAqZGV2LCB1MzIgZWVyZCkNCj4+ICt7DQo+PiArIGlmIChlZXJkKQ0K
-Pj4gKyByZXR1cm4gMDsNCj4+ICsNCj4+ICsgcmV0dXJuIHJ2MzAzMl91cGRhdGVfYml0cyhkZXYs
-IFJWMzAzMl9DVFJMMSwgUlYzMDMyX0NUUkwxX0VFUkQsIDApOw0KPj4gK30NCj4+ICsNCj4+ICtz
-dGF0aWMgaW50IHJ2MzAzMl9lZXByb21fYnVzeXdhaXQoc3RydWN0IHVkZXZpY2UgKmRldikNCj4+
-ICt7DQo+PiArIGludCByZXQ7DQo+PiArIHU4IHN0YXR1czsNCj4+ICsgdW5zaWduZWQgbG9uZyBz
-dGFydCA9IGdldF90aW1lcigwKTsNCj4+ICsNCj4+ICsgZm9yICg7Oykgew0KPj4gKyByZXQgPSBk
-bV9pMmNfcmVhZChkZXYsIFJWMzAzMl9UTFNCLCAmc3RhdHVzLCAxKTsNCj4+ICsgaWYgKHJldCA8
-IDApDQo+PiArIGJyZWFrOw0KPj4gKyBpZiAoIShzdGF0dXMgJiBSVjMwMzJfVExTQl9FRUJVU1kp
-KQ0KPj4gKyBicmVhazsNCj4+ICsgaWYgKGdldF90aW1lcihzdGFydCkgPiBSVjMwMzJfRUVCVVNZ
-X1RJTUVPVVQpDQo+PiArIHJldHVybiAtRVRJTUVET1VUOw0KPj4gKyB1ZGVsYXkoUlYzMDMyX0VF
-QlVTWV9QT0xMKTsNCj4+ICsgfQ0KPj4gKw0KPj4gKyByZXR1cm4gcmV0Ow0KPj4gK30NCj4+ICsN
-Cj4+ICtzdGF0aWMgaW50IHJ2MzAzMl9lbnRlcl9lZXJkKHN0cnVjdCB1ZGV2aWNlICpkZXYsIHUz
-MiAqZWVyZCkNCj4+ICt7DQo+PiArIHU4IGN0cmwxOw0KPj4gKyBpbnQgcmV0Ow0KPj4gKw0KPj4g
-KyByZXQgPSBkbV9pMmNfcmVhZChkZXYsIFJWMzAzMl9DVFJMMSwgJmN0cmwxLCBzaXplb2YoY3Ry
-bDEpKTsNCj4+ICsgaWYgKHJldCkNCj4+ICsgcmV0dXJuIHJldDsNCj4+ICsNCj4+ICsgKmVlcmQg
-PSBjdHJsMSAmIFJWMzAzMl9DVFJMMV9FRVJEOw0KPj4gKyBpZiAoKmVlcmQpDQo+PiArIHJldHVy
-biAwOw0KPj4gKw0KPj4gKyByZXQgPSBydjMwMzJfdXBkYXRlX2JpdHMoZGV2LCBSVjMwMzJfQ1RS
-TDEsDQo+PiArICBSVjMwMzJfQ1RSTDFfRUVSRCwgUlYzMDMyX0NUUkwxX0VFUkQpOw0KPj4gKyBp
-ZiAocmV0KQ0KPj4gKyByZXR1cm4gcmV0Ow0KPj4gKw0KPj4gKyByZXQgPSBydjMwMzJfZWVwcm9t
-X2J1c3l3YWl0KGRldik7DQo+PiArIGlmIChyZXQpIHsNCj4+ICsgcnYzMDMyX2V4aXRfZWVyZChk
-ZXYsICplZXJkKTsNCj4+ICsNCj4+ICsgcmV0dXJuIHJldDsNCj4+ICsgfQ0KPj4gKw0KPj4gKyBy
-ZXR1cm4gMDsNCj4+ICt9DQo+PiArDQo+PiArc3RhdGljIGludCBydjMwMzJfZ2V0X3RpbWUoc3Ry
-dWN0IHVkZXZpY2UgKmRldiwgc3RydWN0IHJ0Y190aW1lICp0bSkNCj4+ICt7DQo+PiArIHU4IGRh
-dGVbN107DQo+PiArIGludCByZXQ7DQo+PiArIHU4IHN0YXR1czsNCj4+ICsNCj4+ICsgcmV0ID0g
-ZG1faTJjX3JlYWQoZGV2LCBSVjMwMzJfU1RBVFVTLCAmc3RhdHVzLCAxKTsNCj4+ICsgaWYgKHJl
-dCA8IDApDQo+PiArIHJldHVybiByZXQ7DQo+PiArDQo+PiArIGlmIChzdGF0dXMgJiAoUlYzMDMy
-X1NUQVRVU19QT1JGIHwgUlYzMDMyX1NUQVRVU19WTEYpKQ0KPj4gKyByZXR1cm4gLUVJTlZBTDsN
-Cj4+ICsNCj4+ICsgcmV0ID0gZG1faTJjX3JlYWQoZGV2LCBSVjMwMzJfU0VDLCBkYXRlLCBzaXpl
-b2YoZGF0ZSkpOw0KPj4gKyBpZiAocmV0KQ0KPj4gKyByZXR1cm4gcmV0Ow0KPj4gKw0KPj4gKyB0
-bS0+dG1fc2VjICA9IGJjZDJiaW4oZGF0ZVswXSAmIDB4N2YpOw0KPj4gKyB0bS0+dG1fbWluICA9
-IGJjZDJiaW4oZGF0ZVsxXSAmIDB4N2YpOw0KPj4gKyB0bS0+dG1faG91ciA9IGJjZDJiaW4oZGF0
-ZVsyXSAmIDB4M2YpOw0KPj4gKyB0bS0+dG1fd2RheSA9IGRhdGVbM10gJiAweDc7DQo+PiArIHRt
-LT50bV9tZGF5ID0gYmNkMmJpbihkYXRlWzRdICYgMHgzZik7DQo+PiArIHRtLT50bV9tb24gID0g
-YmNkMmJpbihkYXRlWzVdICYgMHgxZik7DQo+PiArIHRtLT50bV95ZWFyID0gYmNkMmJpbihkYXRl
-WzZdKSArIDIwMDA7DQo+PiArDQo+PiArIHJldHVybiAwOw0KPj4gK30NCj4+ICsNCj4+ICtzdGF0
-aWMgaW50IHJ2MzAzMl9zZXRfdGltZShzdHJ1Y3QgdWRldmljZSAqZGV2LCBjb25zdCBzdHJ1Y3Qg
-cnRjX3RpbWUgKnRtKQ0KPj4gK3sNCj4+ICsgdTggZGF0ZVs3XTsNCj4+ICsgaW50IHJldDsNCj4+
-ICsNCj4+ICsgZGF0ZVswXSA9IGJpbjJiY2QodG0tPnRtX3NlYyk7DQo+PiArIGRhdGVbMV0gPSBi
-aW4yYmNkKHRtLT50bV9taW4pOw0KPj4gKyBkYXRlWzJdID0gYmluMmJjZCh0bS0+dG1faG91cik7
-DQo+PiArIGRhdGVbM10gPSB0bS0+dG1fd2RheTsNCj4+ICsgZGF0ZVs0XSA9IGJpbjJiY2QodG0t
-PnRtX21kYXkpOw0KPj4gKyBkYXRlWzVdID0gYmluMmJjZCh0bS0+dG1fbW9uKTsNCj4+ICsgZGF0
-ZVs2XSA9IGJpbjJiY2QodG0tPnRtX3llYXIgLSAyMDAwKTsNCj4+ICsNCj4+ICsgcmV0ID0gZG1f
-aTJjX3dyaXRlKGRldiwgUlYzMDMyX1NFQywgZGF0ZSwNCj4+ICsgICAgc2l6ZW9mKGRhdGUpKTsN
-Cj4+ICsgaWYgKHJldCkNCj4+ICsgcmV0dXJuIHJldDsNCj4+ICsNCj4+ICsgcmV0ID0gcnYzMDMy
-X3VwZGF0ZV9iaXRzKGRldiwgUlYzMDMyX1NUQVRVUywNCj4+ICsgIFJWMzAzMl9TVEFUVVNfUE9S
-RiB8IFJWMzAzMl9TVEFUVVNfVkxGLCAwKTsNCj4+ICsNCj4+ICsgcmV0dXJuIHJldDsNCj4+ICt9
-DQo+PiArDQo+PiArc3RhdGljIGludCBydjMwMzJfZWVwcm9tX3dyaXRlKHN0cnVjdCB1ZGV2aWNl
-ICpkZXYsIHVuc2lnbmVkIGludCByZWcsDQo+PiArICAgICAgICBjb25zdCB1OCAqYnVmLCB1bnNp
-Z25lZCBpbnQgbGVuKQ0KPj4gK3sNCj4+ICsgdTMyIGVlcmQ7DQo+PiArIGludCBpLCByZXQ7DQo+
-PiArIHU4IGNtZDsNCj4+ICsNCj4+ICsgcmV0ID0gcnYzMDMyX2VudGVyX2VlcmQoZGV2LCAmZWVy
-ZCk7DQo+PiArIGlmIChyZXQpDQo+PiArIHJldHVybiByZXQ7DQo+PiArDQo+PiArIGZvciAoaSA9
-IDA7IGkgPCBsZW47IGkrKykgew0KPj4gKyBjbWQgPSBSVjMwMzJfRUVQUk9NX1VTRVIgKyByZWcg
-KyBpOw0KPj4gKyByZXQgPSBkbV9pMmNfd3JpdGUoZGV2LCBSVjMwMzJfRUVQUk9NX0FERFIsDQo+
-PiArICAgICZjbWQsIDEpOw0KPj4gKyBpZiAocmV0KQ0KPj4gKyBnb3RvIGV4aXRfZWVyZDsNCj4+
-ICsNCj4+ICsgcmV0ID0gZG1faTJjX3dyaXRlKGRldiwgUlYzMDMyX0VFUFJPTV9EQVRBLCAmYnVm
-W2ldLCAxKTsNCj4+ICsgaWYgKHJldCkNCj4+ICsgZ290byBleGl0X2VlcmQ7DQo+PiArDQo+PiAr
-IGNtZCA9IFJWMzAzMl9FRVBST01fQ01EX1dSSVRFOw0KPj4gKyByZXQgPSBkbV9pMmNfd3JpdGUo
-ZGV2LCBSVjMwMzJfRUVQUk9NX0NNRCwNCj4+ICsgICAgJmNtZCwgMSk7DQo+PiArIGlmIChyZXQp
-DQo+PiArIGdvdG8gZXhpdF9lZXJkOw0KPj4gKw0KPj4gKyB1ZGVsYXkoUlYzMDMyX0VFQlVTWV9Q
-T0xMKTsNCj4+ICsNCj4+ICsgcmV0ID0gcnYzMDMyX2VlcHJvbV9idXN5d2FpdChkZXYpOw0KPj4g
-KyBpZiAocmV0KQ0KPj4gKyBnb3RvIGV4aXRfZWVyZDsNCj4+ICsgfQ0KPj4gKw0KPj4gK2V4aXRf
-ZWVyZDoNCj4+ICsgcnYzMDMyX2V4aXRfZWVyZChkZXYsIGVlcmQpOw0KPj4gKw0KPj4gKyByZXR1
-cm4gcmV0Ow0KPj4gK30NCj4+ICsNCj4+ICtzdGF0aWMgaW50IHJ2MzAzMl9lZXByb21fcmVhZChz
-dHJ1Y3QgdWRldmljZSAqZGV2LCB1bnNpZ25lZCBpbnQgcmVnLA0KPj4gKyAgICAgICB1OCAqYnVm
-LCB1bnNpZ25lZCBpbnQgbGVuKQ0KPj4gK3sNCj4+ICsgdTMyIGVlcmQ7DQo+PiArIGludCBpLCBy
-ZXQ7DQo+PiArIHU4IGNtZCwgZGF0YTsNCj4+ICsNCj4+ICsgcmV0ID0gcnYzMDMyX2VudGVyX2Vl
-cmQoZGV2LCAmZWVyZCk7DQo+PiArIGlmIChyZXQpDQo+PiArIHJldHVybiByZXQ7DQo+PiArDQo+
-PiArIGZvciAoaSA9IDA7IGkgPCBsZW47IGkrKykgew0KPj4gKyBjbWQgPSBSVjMwMzJfRUVQUk9N
-X1VTRVIgKyByZWcgKyBpOw0KPj4gKyByZXQgPSBkbV9pMmNfd3JpdGUoZGV2LCBSVjMwMzJfRUVQ
-Uk9NX0FERFIsDQo+PiArICAgICZjbWQsIDEpOw0KPj4gKyBpZiAocmV0KQ0KPj4gKyBnb3RvIGV4
-aXRfZWVyZDsNCj4+ICsNCj4+ICsgY21kID0gUlYzMDMyX0VFUFJPTV9DTURfUkVBRDsNCj4+ICsg
-cmV0ID0gZG1faTJjX3dyaXRlKGRldiwgUlYzMDMyX0VFUFJPTV9DTUQsDQo+PiArICAgICZjbWQs
-IDEpOw0KPj4gKyBpZiAocmV0KQ0KPj4gKyBnb3RvIGV4aXRfZWVyZDsNCj4+ICsNCj4+ICsgcmV0
-ID0gcnYzMDMyX2VlcHJvbV9idXN5d2FpdChkZXYpOw0KPj4gKyBpZiAocmV0KQ0KPj4gKyBnb3Rv
-IGV4aXRfZWVyZDsNCj4+ICsNCj4+ICsgcmV0ID0gZG1faTJjX3JlYWQoZGV2LCBSVjMwMzJfRUVQ
-Uk9NX0RBVEEsICZkYXRhLCBzaXplb2YoZGF0YSkpOw0KPj4gKyBpZiAocmV0KQ0KPj4gKyBnb3Rv
-IGV4aXRfZWVyZDsNCj4+ICsgYnVmW2ldID0gZGF0YTsNCj4+ICsgfQ0KPj4gKw0KPj4gK2V4aXRf
-ZWVyZDoNCj4+ICsgcnYzMDMyX2V4aXRfZWVyZChkZXYsIGVlcmQpOw0KPj4gKw0KPj4gKyByZXR1
-cm4gcmV0Ow0KPj4gK30NCj4+ICsNCj4+ICtzdGF0aWMgaW50IHJ2MzAzMl9wcm9iZShzdHJ1Y3Qg
-dWRldmljZSAqZGV2KQ0KPj4gK3sNCj4+ICsgaTJjX3NldF9jaGlwX2ZsYWdzKGRldiwgRE1fSTJD
-X0NISVBfUkRfQUREUkVTUyB8DQo+PiArIERNX0kyQ19DSElQX1dSX0FERFJFU1MpOw0KPj4gKw0K
-Pj4gKyByZXR1cm4gMDsNCj4+ICt9DQo+PiArDQo+PiArc3RhdGljIGNvbnN0IHN0cnVjdCBydGNf
-b3BzIHJ2MzAzMl9ydGNfb3BzID0gew0KPj4gKyAuZ2V0ID0gcnYzMDMyX2dldF90aW1lLA0KPj4g
-KyAuc2V0ID0gcnYzMDMyX3NldF90aW1lLA0KPj4gKyAucmVhZCA9IHJ2MzAzMl9lZXByb21fcmVh
-ZCwNCj4+ICsgLndyaXRlID0gcnYzMDMyX2VlcHJvbV93cml0ZSwNCj4+ICt9Ow0KPj4gKw0KPj4g
-K3N0YXRpYyBjb25zdCBzdHJ1Y3QgdWRldmljZV9pZCBydjMwMzJfcnRjX2lkc1tdID0gew0KPj4g
-KyB7IC5jb21wYXRpYmxlID0gIm1pY3JvY3J5c3RhbCxydjMwMzIiLCB9LA0KPj4gKyB7IH0NCj4+
-ICt9Ow0KPj4gKw0KPj4gK1VfQk9PVF9EUklWRVIocnRjX3J2MzAzMikgPSB7DQo+PiArIC5uYW1l
-ID0gInJ0Yy1ydjMwMjgiLA0KPj4gKyAuaWQgPSBVQ0xBU1NfUlRDLA0KPj4gKyAucHJvYmUgPSBy
-djMwMzJfcHJvYmUsDQo+PiArIC5vZl9tYXRjaCA9IHJ2MzAzMl9ydGNfaWRzLA0KPj4gKyAub3Bz
-ID0gJnJ2MzAzMl9ydGNfb3BzLA0KPj4gK307DQo+PiAtLQ0KPj4gMi40Mi4wDQo+Pg0KPg0KPiAt
-LQ0KPiBBbGV4YW5kcmUgQmVsbG9uaSwgY28tb3duZXIgYW5kIENPTywgQm9vdGxpbg0KPiBFbWJl
-ZGRlZCBMaW51eCBhbmQgS2VybmVsIGVuZ2luZWVyaW5nDQo+IGh0dHBzOi8vYm9vdGxpbi5jb20N
-Cg0KDQpUaGlzIGVtYWlsIGNvbnRhaW5zIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4gSWYgeW91
-IGhhdmUgcmVjZWl2ZWQgaXQgaW4gZXJyb3IsIHlvdSBtdXN0IG5vdCByZWFkLCB1c2UsIGNvcHkg
-b3IgcGFzcyBvbiB0aGlzIGUtbWFpbCBvciBpdHMgYXR0YWNobWVudHMuIElmIHlvdSBoYXZlIHJl
-Y2VpdmVkIHRoZSBlLW1haWwgaW4gZXJyb3IsIHBsZWFzZSBpbmZvcm0gbWUgaW1tZWRpYXRlbHkg
-YnkgcmVwbHkgZS1tYWlsIGFuZCB0aGVuIGRlbGV0ZSB0aGlzIGUtbWFpbCBmcm9tIHlvdXIgc3lz
-dGVtLiBUaGFuayB5b3UNCg0KRGllc2UgRS1NYWlsIGVudGjDpGx0IHZlcnRyYXVsaWNoZSBJbmZv
-cm1hdGlvbmVuLiBTb2xsdGVuIFNpZSBzaWUgaXJydMO8bWxpY2ggZXJoYWx0ZW4gaGFiZW4sIGTD
-vHJmZW4gU2llIGRpZXNlIEUtTWFpbCBvZGVyIGlocmUgQW5ow6RuZ2UgbmljaHQgbGVzZW4sIHZl
-cndlbmRlbiwga29waWVyZW4gb2RlciB3ZWl0ZXJnZWJlbi4gU29sbHRlbiBTaWUgZGllIE1haWwg
-dmVyc2VoZW50bGljaCBlcmhhbHRlbiBoYWJlbiwgdGVpbGVuIFNpZSBtaXIgZGllcyBiaXR0ZSB1
-bWdlaGVuZCBwZXIgQW50d29ydC1FLU1haWwgbWl0IHVuZCBsw7ZzY2hlbiBTaWUgZGllc2UgRS1N
-YWlsIGRhbm4gYXVzIElocmVtIFN5c3RlbS4gVmllbGVuIERhbmsNCg0KQmVja2hvZmYgQXV0b21h
-dGlvbiBHbWJIICYgQ28uIEtHIHwgTWFuYWdpbmcgRGlyZWN0b3I6IERpcGwuIFBoeXMuIEhhbnMg
-QmVja2hvZmYNClJlZ2lzdGVyZWQgb2ZmaWNlOiBWZXJsLCBHZXJtYW55IHwgUmVnaXN0ZXIgY291
-cnQ6IEd1ZXRlcnNsb2ggSFJBIDcwNzUNCg0KDQo=
+
+On 29.08.23 11:19, Mark Kettenis wrote:
+>> Date: Tue, 29 Aug 2023 08:20:49 +0200
+>> From: Alexander Graf <agraf@csgraf.de>
+>>
+>> On 28.08.23 23:54, Heinrich Schuchardt wrote:
+>>> On 8/28/23 22:24, Alexander Graf wrote:
+>>>> On 28.08.23 19:54, Simon Glass wrote:
+>>>>> Hi Alex,
+>>>>>
+>>>>> On Wed, 23 Aug 2023 at 02:56, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>> Hey Simon,
+>>>>>>
+>>>>>> On 22.08.23 20:56, Simon Glass wrote:
+>>>>>>> Hi Alex,
+>>>>>>>
+>>>>>>> On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>>>>> On 22.08.23 01:03, Simon Glass wrote:
+>>>>>>>>> Hi Alex,
+>>>>>>>>>
+>>>>>>>>> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de>
+>>>>>>>>> wrote:
+>>>>>>>>>> On 22.08.23 00:10, Simon Glass wrote:
+>>>>>>>>>>> Hi Alex,
+>>>>>>>>>>>
+>>>>>>>>>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de>
+>>>>>>>>>>> wrote:
+>>>>>>>>>>>> On 21.08.23 21:57, Simon Glass wrote:
+>>>>>>>>>>>>> Hi Alex,
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de>
+>>>>>>>>>>>>> wrote:
+>>>>>>>>>>>>>> On 21.08.23 21:11, Simon Glass wrote:
+>>>>>>>>>>>>>>> Hi Alper,
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak
+>>>>>>>>>>>>>>> <alpernebiyasak@gmail.com> wrote:
+>>>>>>>>>>>>>>>> This is a rebase of Alexander Graf's video damage tracking
+>>>>>>>>>>>>>>>> series, with
+>>>>>>>>>>>>>>>> some tests and other changes. The original cover letter is
+>>>>>>>>>>>>>>>> as follows:
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> This patch set speeds up graphics output on ARM by a
+>>>>>>>>>>>>>>>>> factor of 60x.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map
+>>>>>>>>>>>>>>>>> it as cached,
+>>>>>>>>>>>>>>>>> but need it accessible by the display controller which
+>>>>>>>>>>>>>>>>> reads directly
+>>>>>>>>>>>>>>>>> from a later point of consistency. Hence, we flush the
+>>>>>>>>>>>>>>>>> frame buffer to
+>>>>>>>>>>>>>>>>> DRAM on every change. The full frame buffer.
+>>>>>>>>>>>>>>> It should not, see below.
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> Unfortunately, with the advent of 4k displays, we are
+>>>>>>>>>>>>>>>>> seeing frame buffers
+>>>>>>>>>>>>>>>>> that can take a while to flush out. This was reported by
+>>>>>>>>>>>>>>>>> Da Xue with grub,
+>>>>>>>>>>>>>>>>> which happily print 1000s of spaces on the screen to draw
+>>>>>>>>>>>>>>>>> a menu. Every
+>>>>>>>>>>>>>>>>> printed space triggers a cache flush.
+>>>>>>>>>>>>>>> That is a bug somewhere in EFI.
+>>>>>>>>>>>>>> Unfortunately not :). You may call it a bug in grub: It
+>>>>>>>>>>>>>> literally prints
+>>>>>>>>>>>>>> over space characters for every character in its menu that it
+>>>>>>>>>>>>>> wants
+>>>>>>>>>>>>>> cleared. On every text screen draw.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> This wouldn't be a big issue if we only flush the reactangle
+>>>>>>>>>>>>>> that gets
+>>>>>>>>>>>>>> modified. But without this patch set, we're flushing the full
+>>>>>>>>>>>>>> DRAM
+>>>>>>>>>>>>>> buffer on every u-boot text console character write, which
+>>>>>>>>>>>>>> means for
+>>>>>>>>>>>>>> every character (as that's the only API UEFI has).
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> As a nice side effect, we speed up the normal U-Boot text
+>>>>>>>>>>>>>> console as
+>>>>>>>>>>>>>> well with this patch set, because even "normal" text prints
+>>>>>>>>>>>>>> that write
+>>>>>>>>>>>>>> for example a single line of text on the screen today flush
+>>>>>>>>>>>>>> the full
+>>>>>>>>>>>>>> frame buffer to DRAM.
+>>>>>>>>>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes
+>>>>>>>>>>>>> the cache
+>>>>>>>>>>>>> after every character. It doesn't do that for normal character
+>>>>>>>>>>>>> output
+>>>>>>>>>>>>> and I don't think it makes sense to do it for EFI either.
+>>>>>>>>>>>> I see. Let's trace the calls:
+>>>>>>>>>>>>
+>>>>>>>>>>>> efi_cout_output_string()
+>>>>>>>>>>>> -> fputs()
+>>>>>>>>>>>> -> vidconsole_puts()
+>>>>>>>>>>>> -> video_sync()
+>>>>>>>>>>>> -> flush_dcache_range()
+>>>>>>>>>>>>
+>>>>>>>>>>>> Unfortunately grub abstracts character backends down to the
+>>>>>>>>>>>> "print
+>>>>>>>>>>>> character" level, so it calls UEFI's sopisticated
+>>>>>>>>>>>> "output_string"
+>>>>>>>>>>>> callback with single characters at a time, which means we do a
+>>>>>>>>>>>> full
+>>>>>>>>>>>> dcache flush for every character that we print:
+>>>>>>>>>>>>
+>>>>>>>>>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
+>>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> This patch set implements the easiest mitigation against
+>>>>>>>>>>>>>>>>> this problem:
+>>>>>>>>>>>>>>>>> Damage tracking. We remember the lowest common denominator
+>>>>>>>>>>>>>>>>> region that was
+>>>>>>>>>>>>>>>>> touched since the last video_sync() call and only flush
+>>>>>>>>>>>>>>>>> that. The most
+>>>>>>>>>>>>>>>>> typical writer to the frame buffer is the video console,
+>>>>>>>>>>>>>>>>> which always
+>>>>>>>>>>>>>>>>> writes rectangles of characters on the screen and syncs
+>>>>>>>>>>>>>>>>> afterwards.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> With this patch set applied, we reduce drawing a large
+>>>>>>>>>>>>>>>>> grub menu (with
+>>>>>>>>>>>>>>>>> serial console attached for size information) on an
+>>>>>>>>>>>>>>>>> RK3399-ROC system
+>>>>>>>>>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism,
+>>>>>>>>>>>>>>>>> reducing its
+>>>>>>>>>>>>>>>>> overhead compared to before as well. So even x86 systems
+>>>>>>>>>>>>>>>>> should be faster
+>>>>>>>>>>>>>>>>> with this now :).
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> Alternatives considered:
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>          1) Lazy sync - Sandbox does this. It only calls
+>>>>>>>>>>>>>>>>> video_sync(true) ever
+>>>>>>>>>>>>>>>>>             so often. We are missing timers to do this
+>>>>>>>>>>>>>>>>> generically.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>          2) Double buffering - We could try to identify
+>>>>>>>>>>>>>>>>> whether anything changed
+>>>>>>>>>>>>>>>>>             at all and only draw to the FB if it did. That
+>>>>>>>>>>>>>>>>> would require
+>>>>>>>>>>>>>>>>>             maintaining a second buffer that we need to
+>>>>>>>>>>>>>>>>> scan.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>          3) Text buffer - Maintain a buffer of all text
+>>>>>>>>>>>>>>>>> printed on the screen with
+>>>>>>>>>>>>>>>>>             respective location. Don't write if the old and
+>>>>>>>>>>>>>>>>> new character are
+>>>>>>>>>>>>>>>>>             identical. This would limit applicability to
+>>>>>>>>>>>>>>>>> text only and is an
+>>>>>>>>>>>>>>>>>             optimization on top of this patch set.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>          4) Hash screen lines - Create a hash (sha256?)
+>>>>>>>>>>>>>>>>> over every line when it
+>>>>>>>>>>>>>>>>>             changes. Only flush when it does. I'm not sure
+>>>>>>>>>>>>>>>>> if this would waste
+>>>>>>>>>>>>>>>>>             more time, memory and cache than the current
+>>>>>>>>>>>>>>>>> approach. It would make
+>>>>>>>>>>>>>>>>>             full screen updates much more expensive.
+>>>>>>>>>>>>>>> 5) Fix the bug mentioned above?
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Changes in v5:
+>>>>>>>>>>>>>>>> - Add patch "video: test: Split copy frame buffer check
+>>>>>>>>>>>>>>>> into a function"
+>>>>>>>>>>>>>>>> - Add patch "video: test: Support checking copy frame
+>>>>>>>>>>>>>>>> buffer contents"
+>>>>>>>>>>>>>>>> - Add patch "video: test: Test partial updates of hardware
+>>>>>>>>>>>>>>>> frame buffer"
+>>>>>>>>>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>>>>>>>>>>>>>> - Document damage struct and fields in struct video_priv
+>>>>>>>>>>>>>>>> comment
+>>>>>>>>>>>>>>>> - Return void from video_damage()
+>>>>>>>>>>>>>>>> - Fix undeclared priv error in video_sync()
+>>>>>>>>>>>>>>>> - Drop unused headers from video-uclass.c
+>>>>>>>>>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>>>>>>>>>>>>>> - Call video_damage() also in video_fill_part()
+>>>>>>>>>>>>>>>> - Use met->baseline instead of priv->baseline
+>>>>>>>>>>>>>>>> - Use fontdata->height/width instead of
+>>>>>>>>>>>>>>>> VIDEO_FONT_HEIGHT/WIDTH
+>>>>>>>>>>>>>>>> - Update console_rotate.c video_damage() calls to pass
+>>>>>>>>>>>>>>>> video tests
+>>>>>>>>>>>>>>>> - Remove mention about not having minimal damage for
+>>>>>>>>>>>>>>>> console_rotate.c
+>>>>>>>>>>>>>>>> - Add patch "video: test: Test video damage tracking via
+>>>>>>>>>>>>>>>> vidconsole"
+>>>>>>>>>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
+>>>>>>>>>>>>>>>> - Remove video_sync_copy() also from video_fill(),
+>>>>>>>>>>>>>>>> video_fill_part()
+>>>>>>>>>>>>>>>> - Fix memmove() calls by removing the extra dev argument
+>>>>>>>>>>>>>>>> - Call video_sync() before checking copy_fb in video tests
+>>>>>>>>>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of
+>>>>>>>>>>>>>>>> selecting it
+>>>>>>>>>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> v4:
+>>>>>>>>>>>>>>>> https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Changes in v4:
+>>>>>>>>>>>>>>>> - Move damage clear to patch "dm: video: Add damage
+>>>>>>>>>>>>>>>> tracking API"
+>>>>>>>>>>>>>>>> - Simplify first damage logic
+>>>>>>>>>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
+>>>>>>>>>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
+>>>>>>>>>>>>>>>> - Add patch "video: Always compile cache flushing code"
+>>>>>>>>>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that
+>>>>>>>>>>>>>>>> need it"
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> v3:
+>>>>>>>>>>>>>>>> https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Changes in v3:
+>>>>>>>>>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>>>>>>>>>> - Adapt to always assume DM is used
+>>>>>>>>>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> v2:
+>>>>>>>>>>>>>>>> https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Changes in v2:
+>>>>>>>>>>>>>>>> - Remove ifdefs
+>>>>>>>>>>>>>>>> - Fix ranges in truetype target
+>>>>>>>>>>>>>>>> - Limit rotate to necessary damage
+>>>>>>>>>>>>>>>> - Remove ifdefs from gop
+>>>>>>>>>>>>>>>> - Fix dcache range; we were flushing too much before
+>>>>>>>>>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> v1:
+>>>>>>>>>>>>>>>> https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Alexander Graf (9):
+>>>>>>>>>>>>>>>>          dm: video: Add damage tracking API
+>>>>>>>>>>>>>>>>          dm: video: Add damage notification on display fills
+>>>>>>>>>>>>>>>>          vidconsole: Add damage notifications to all
+>>>>>>>>>>>>>>>> vidconsole drivers
+>>>>>>>>>>>>>>>>          video: Add damage notification on bmp display
+>>>>>>>>>>>>>>>>          efi_loader: GOP: Add damage notification on BLT
+>>>>>>>>>>>>>>>>          video: Only dcache flush damaged lines
+>>>>>>>>>>>>>>>>          video: Use VIDEO_DAMAGE for VIDEO_COPY
+>>>>>>>>>>>>>>>>          video: Always compile cache flushing code
+>>>>>>>>>>>>>>>>          video: Enable VIDEO_DAMAGE for drivers that need it
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> Alper Nebi Yasak (4):
+>>>>>>>>>>>>>>>>          video: test: Split copy frame buffer check into a
+>>>>>>>>>>>>>>>> function
+>>>>>>>>>>>>>>>>          video: test: Support checking copy frame buffer
+>>>>>>>>>>>>>>>> contents
+>>>>>>>>>>>>>>>>          video: test: Test partial updates of hardware frame
+>>>>>>>>>>>>>>>> buffer
+>>>>>>>>>>>>>>>>          video: test: Test video damage tracking via
+>>>>>>>>>>>>>>>> vidconsole
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>         arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         arch/arm/mach-sunxi/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/Kconfig |  26 +++
+>>>>>>>>>>>>>>>>         drivers/video/console_normal.c |  27 ++--
+>>>>>>>>>>>>>>>>         drivers/video/console_rotate.c |  94 +++++++----
+>>>>>>>>>>>>>>>>         drivers/video/console_truetype.c |  37 +++--
+>>>>>>>>>>>>>>>>         drivers/video/exynos/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/imx/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/meson/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/rockchip/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/stm32/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/tegra20/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/tidss/Kconfig |   1 +
+>>>>>>>>>>>>>>>>         drivers/video/vidconsole-uclass.c |  16 --
+>>>>>>>>>>>>>>>>         drivers/video/video-uclass.c | 190
+>>>>>>>>>>>>>>>> ++++++++++++----------
+>>>>>>>>>>>>>>>>         drivers/video/video_bmp.c |   7 +-
+>>>>>>>>>>>>>>>>         include/video.h |  59 +++----
+>>>>>>>>>>>>>>>>         include/video_console.h |  52 ------
+>>>>>>>>>>>>>>>>         lib/efi_loader/efi_gop.c |   7 +
+>>>>>>>>>>>>>>>>         test/dm/video.c | 256
+>>>>>>>>>>>>>>>> ++++++++++++++++++++++++------
+>>>>>>>>>>>>>>>>         20 files changed, 483 insertions(+), 297 deletions(-)
+>>>>>>>>>>>>>>> It is good to see this tidied up into something that can be
+>>>>>>>>>>>>>>> applied!
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> I am unsure what is going on with the EFI performance,
+>>>>>>>>>>>>>>> though. It
+>>>>>>>>>>>>>>> should not flush the cache after every character, only after
+>>>>>>>>>>>>>>> a new
+>>>>>>>>>>>>>>> line. Is there something wrong in here? If so, we should fix
+>>>>>>>>>>>>>>> that bug
+>>>>>>>>>>>>>>> first and it should be patch 1 of this series.
+>>>>>>>>>>>>>> Before I came up with this series, I was trying to identify
+>>>>>>>>>>>>>> the UEFI bug
+>>>>>>>>>>>>>> in question as well, because intuition told me surely this is
+>>>>>>>>>>>>>> a bug in
+>>>>>>>>>>>>>> UEFI :). Turns out it really isn't this time around.
+>>>>>>>>>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+>>>>>>>>>>>>> implementation. Where did you look for the bug?
+>>>>>>>>>>>> The "real" bug is in grub. But given that it's reasonably
+>>>>>>>>>>>> simple to work
+>>>>>>>>>>>> around in U-Boot and even with it "fixed" in grub we would
+>>>>>>>>>>>> still see
+>>>>>>>>>>>> performance benefits from flushing only parts of the screen, I
+>>>>>>>>>>>> think
+>>>>>>>>>>>> it's worth living with the grub deficiency.
+>>>>>>>>>>> OK thanks for digging into it. I suggest we add a param to
+>>>>>>>>>>> vidconsole_puts() to tell it whether to sync or not, then the
+>>>>>>>>>>> EFI code
+>>>>>>>>>>> can indicate this and try to be a bit smarter about it.
+>>>>>>>>>> It doesn't know when to sync either. From its point of view, any
+>>>>>>>>>> "console output" could be the last one. There is no API in UEFI
+>>>>>>>>>> that
+>>>>>>>>>> says "please flush console output now".
+>>>>>>>>> Yes, I understand. I was not suggesting we were missing an API. But
+>>>>>>>>> some sort of heuristic would do, e.g. only flush on a newline,
+>>>>>>>>> flush
+>>>>>>>>> every 50 chars, etc.
+>>>>>>>> I can't think of any heuristic that would reliably work. Relevant
+>>>>>>>> for
+>>>>>>>> this conversation, UEFI provides 2 calls:
+>>>>>>>>
+>>>>>>>>       * Write string to screen (efi_cout_output_string)
+>>>>>>>>       * Set text cursor position to X, Y
+>>>>>>>> (efi_cout_set_cursor_position)
+>>>>>>>>
+>>>>>>>> It's perfectly legal for a UEFI application to do something like
+>>>>>>>>
+>>>>>>>> efi_cout_set_cursor_position(10, 10);
+>>>>>>>> efi_cout_output_string("f");
+>>>>>>>> efi_cout_output_string("o");
+>>>>>>>> efi_cout_output_string("o") ;
+>>>>>>>>
+>>>>>>>> to update contents of a virtual text box on the screen. Where in
+>>>>>>>> this
+>>>>>>>> chain of events would we call video_sync(), but on every call to
+>>>>>>>> efi_cout_output_string()?
+>>>>>>> Actually U-Boot has the same problem, but we have managed to work
+>>>>>>> out something.
+>>>>>> U-Boot as a code base has a much easier stance: It can add APIs
+>>>>>> when it
+>>>>>> needs them in places that require them. With UEFI (as well as the
+>>>>>> U-Boot
+>>>>>> native API), we're stuck with what's there.
+>>>>>>
+>>>>>> I also don't understand what you mean by "we have managed to work out
+>>>>>> something". This patch set is not a UEFI fix - it fixes generic U-Boot
+>>>>>> behavior and speeds up non-UEFI boots as well. The improvement
+>>>>>> there is
+>>>>>> just not as impressive as with grub :).
+>>>>> We are still not quite on the same page...
+>>>>>
+>>>>> U-Boot does have video_sync() but it doesn't know when to call it. If
+>>>>> it does not call it, then any amount of single-threaded code can run
+>>>>> after that, which may update the framebuffer. In other words, U-Boot
+>>>>> is in exactly the same boat as UEFI. It has to decide whether to call
+>>>>> video_sync() based on some sort of heuristic.
+>>>>>
+>>>>> That is the only point I am trying to make here. Does that make sense?
+>>>>
+>>>> Oh, I thought you mentioned above that U-Boot is in a better spot or
+>>>> "has it solved already". I agree - it's in the same boat and the only
+>>>> safe thing it can really do today that is fully cross-platform
+>>>> compatible is to call video_sync() after every character.
+>>>>
+>>>> I don't understand what you mean by "any amount of single-threaded code
+>>>> can run after that, which may update the framebuffer". Any framebuffer
+>>>> modification is U-Boot internal code which then again can apply
+>>>> video_sync() to tell the system "I want what I wrote to screen actually
+>>>> be on screen now". I don't think that's necessarily bad design. A bit
+>>>> clunky, but we're in a pre-boot environment after all.
+>>>>
+>>>> Since we're aligned now: What exactly did you refer to with "but we have
+>>>> managed to work out something"?
+>>> Should we set PixelBltOnly to indicate to UEFI applications that they
+>>> are not allowed to directly write to the framebuffer but always have to
+>>> use BitBlt? GRUB seems to be using a shadow buffer by default which it
+>>> copies via BitBlt.
+>>
+>> If we do that, OSs will no longer be able to carry the frame buffer
+>> address over and continue to use it with to draw on the screen natively
+>> (like Linux's efifb).
+>>
+>> So no, I don't think we should indicate PixelBltOnly. The frame buffer
+>> is usually available to applications, you just need to adhere to the
+>> architecture's caching constraints.
+> Right.  That would probably kill any reasonable way we can have an
+> early framebuffer console in most OSes after ExitBootServices() has
+> been called.
+>
+> I'm late to the game but isn't the real solution to have U-Boot map
+> the framebuffer in a cache-coherent way?  This is what typically
+> happens on x86 where VRAM is mapped as "write-combining".  That is,
+> uncached but going through the store buffer to speed up writes.
+> Reading from the framebuffer will be slow in that case (which probably
+> is the real reason why grub uses a shadow framebuffer).  So U-Boot
+> still needs to some cleverness to make sure it only ever writes to the
+> framebuffer.
+
+
+Yeah, those are the 2 options: WB plus flush or WC plus shadow buffer 
+for reads. I don't really see much benefit in doing the latter over the 
+former: It occupies more valuable RAM and adds additional complexity on 
+FB reads. I believe the main reason x86 went that route was that it had 
+no choice: It didn't have a cache line flush instruction for a long time.
+
+
+Alex
 
