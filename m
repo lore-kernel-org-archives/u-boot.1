@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D79C83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4BB1C83F01
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:10:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DAE986529;
-	Wed, 30 Aug 2023 21:07:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DE8CC8653F;
+	Wed, 30 Aug 2023 21:10:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JGoLOr9S";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sDM+ab7f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A5F38653D; Wed, 30 Aug 2023 21:07:45 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5748086543; Wed, 30 Aug 2023 21:10:45 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67C0F864F3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:07:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E9E18652D
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:10:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-401da71b85eso17896455e9.1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 12:07:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693422462; x=1694027262; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gLGrY5biqcp6T6dTNEIWQBzPL3heig8F9eKIC9yTalw=;
- b=JGoLOr9SBZmb7omkVwaq/86dvDoU9t1MSHpxdREGL5Yfd12N7GziH4DToDjk8Mf4Uh
- lygmmeF0D+JU7uKyBmyeUmIQj4EJqT2jcOxIWoosLgRTlwhX8UsLz3z06GB69Q1GqgVL
- EzCMzCQOjfyfCB8lN6J1rB+puRPlhxVOBk7ceolrGqvV/jG/1kLliU8bdoCUi2wmWfJ5
- p6NIuHNVdWxvi46iJ/Jp/CL6rUVxFmML2sVFgEf6MjLFqjxykGFBGMvyaobegmhxeQ7M
- +tlubHtPkLxUbE1SKfcfNXFcNxDl73VRNSgb49Dv3ejFct+OtEAke0JjqTee6GZnbS21
- 5A2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693422462; x=1694027262;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gLGrY5biqcp6T6dTNEIWQBzPL3heig8F9eKIC9yTalw=;
- b=L+Z7aSfUfjXSpUib3cMwBS3kYvssH1KnoyVnDCQ4fl5i5/AlzBLwZQhR5Az7/64xR0
- 6/6J4xfS5D0qQMjcRvTQLzUhlwBoi1yjkFL/VvqOh0wXJcFBGac+CrOdqUj9HoB0hZ/p
- YHrEb3/OgitVkugYX7yfUORkYatUQ5H2a1Gr4ZGbVKe7thmnVn57d3f1yGLuOvLaacDY
- wOyz1szYXbOLfDJD9/dVx1LHwHoJ9wTGbwlfRklWPNeacSu3I+QIa8Ic/in5aoYsHT0K
- jNCfxw0wxzbUXylBayu+3Nrs+8FZHFWxAhO9OhzCcmGAI7nfCybyJO7EO9tfTpQ2TbAk
- crlg==
-X-Gm-Message-State: AOJu0YzDIa0tnjFdg07DzUYc/MMcxVele9l53Fcq80hhLtTBhPffEZyq
- FUFReTDqFvUw02jrH+TPDIQ=
-X-Google-Smtp-Source: AGHT+IHNnOTh34WBWk9Y0vv46TcL/xd7zI7WLG5Hmpso8j8zzrTK3Q4+l35880lUxPZzwxHZV4yLUw==
-X-Received: by 2002:a05:600c:3655:b0:400:cc2d:5e00 with SMTP id
- y21-20020a05600c365500b00400cc2d5e00mr2498803wmq.7.1693422461642; 
- Wed, 30 Aug 2023 12:07:41 -0700 (PDT)
-Received: from [192.168.0.84] ([178.233.24.1])
- by smtp.gmail.com with ESMTPSA id
- y11-20020a1c4b0b000000b003fe2b081661sm3017694wma.30.2023.08.30.12.07.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Aug 2023 12:07:40 -0700 (PDT)
-Message-ID: <ee7997af-e004-414c-857c-b0ca2dad1b4d@gmail.com>
-Date: Wed, 30 Aug 2023 22:07:38 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 11/13] video: Use VIDEO_DAMAGE for VIDEO_COPY
-Content-Language: en-US, tr, en-GB
-To: Alexander Graf <agraf@csgraf.de>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
- <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pali@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id CBAE0B81ECE;
+ Wed, 30 Aug 2023 19:10:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38578C433C8;
+ Wed, 30 Aug 2023 19:10:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693422640;
+ bh=E23hrUEU/X2wSZqutkWlBnySHTnwPwLdiK932FF9VSc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=sDM+ab7fAlpAYBXI9pC0glK5JBINDRcuqeLzujywn9O2lMSg9t7bt60thP0kIl3Z1
+ j6IgweFRsunJ18/G9bidmFE9ejQzIGSYT5d2Rvafern7fTs1MtAKtQK1p36vY7JfOP
+ kQNEFJZJqmI07W7HXIjhIK9KpUo8WoA7WE/RL33KH84aXRfYAtTJMWawGqLsWbJtU3
+ Vxt7vqc/k+d3v7vexF2kmAV9vWcCzQ0mRi1gNnm0KrHIpuGzWRRNQ5xa9r4nBXCnDF
+ 7VIcql4ZMM+2lwejd0SkW/HGNUlrsXE4RKt1zLJ5eRT7+b7GRTmP2QeHkanUVrtvNO
+ 8d5AK5o4zwwkw==
+Received: by pali.im (Postfix)
+ id CBEDF85A; Wed, 30 Aug 2023 21:10:36 +0200 (CEST)
+Date: Wed, 30 Aug 2023 21:10:36 +0200
+From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-12-alpernebiyasak@gmail.com>
- <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
- <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ Michal Simek <michal.simek@amd.com>,
+ Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: Re: [PATCH 32/32] pci: serial: Support reading PCI-register size
+ with base
+Message-ID: <20230830191036.hecw3vyabdsczxrb@pali>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-33-sjg@chromium.org>
+ <20230830181459.wtbt3w3qc4ysxwty@pali>
+ <20230830181750.GD3101304@bill-the-cat>
+ <20230830183913.mpj6achf3prjoanb@pali>
+ <20230830190422.GE3101304@bill-the-cat>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230830190422.GE3101304@bill-the-cat>
+User-Agent: NeoMutt/20180716
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,188 +92,475 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-21 23:06 +03:00, Alexander Graf wrote:
-> 
-> On 21.08.23 21:11, Simon Glass wrote:
->> Hi Alper,
->>
->> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->>> From: Alexander Graf <agraf@csgraf.de>
->>>
->>> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
->>> print a single character, it will always copy the full range of bytes
->>> from the top left corner of the character to the lower right onto the
->>> uncached frame buffer. This includes pretty much the full line contents
->>> of the printed character.
->>>
->>> Since we now have proper damage tracking, let's make use of that to reduce
->>> the amount of data we need to copy. With this patch applied, we will only
->>> copy the tiny rectangle surrounding characters when we print them,
->>> speeding up the video console.
->> I suppose for rotated consoles it copies whole lines, but otherwise it
->> does a lot of small copies?
-> 
-> 
-> I tried to keep the code as simple as possible and only track an "upper 
-> left" and "lower right" corner of modifications. So sync will always 
-> copy/flush a single rectangle.
+You have already decided, what is the point? You are not taking any my
+objections into account, so stop writing to me and to others these your
+stupids bullshits. I'm not an idiot who is interesting for them.
 
-Yep, see patch 06/13 for size of the regions. E.g. for putc_xy()s it's
-fontdata->height * fontdata->width, for rows it's like fontdata->height
-* vid_priv->xsize * count...
-
->>
->>> After this, changes to the main frame buffer are not immediately copied
->>> to the copy frame buffer, but postponed until the next video device
->>> sync. So issue an explicit sync before inspecting the copy frame buffer
->>> contents for the video tests.
->> So how does the sync get done in this case?
+On Wednesday 30 August 2023 15:04:22 Tom Rini wrote:
+> You're a listed maintainer for a file being changed. If you objected to
+> the changes, your objection would matter.  If you don't object, you can
+> just ignore it, or review it, whatever you like.  You need to decide
+> what you want to do about code you're volunteering to maintain.
 > 
-> It gets called as part of video_sync():
+> On Wed, Aug 30, 2023 at 08:39:13PM +0200, Pali Rohár wrote:
+> > And what? How it is related to the statements that my reviews would also
+> > ignored? And what you want from me now?
+> > 
+> > On Wednesday 30 August 2023 14:17:50 Tom Rini wrote:
+> > > Pali,
+> > > 
+> > > You are specifically listed as a maintainer for drivers/pci/pci_mvebu.c
+> > > and that is changed by this patch.
+> > > 
+> > > On Wed, Aug 30, 2023 at 08:14:59PM +0200, Pali Rohár wrote:
+> > > > Simon, why you are contacting me? You have wrote to me that you would
+> > > > ignore my reviews here, so what you want now? Could you please explain
+> > > > what you are trying to achieve? I'm not going to review this or any
+> > > > other your changes.
+> > > > 
+> > > > On Wednesday 30 August 2023 12:05:03 Simon Glass wrote:
+> > > > > The PCI helpers read only the base address for a PCI region. In some cases
+> > > > > the size is needed as well, e.g. to pass along to a driver which needs to
+> > > > > know the size of its register area.
+> > > > > 
+> > > > > Update the functions to allow the size to be returned. For serial, record
+> > > > > the information and provided it with the serial_info() call.
+> > > > > 
+> > > > > A limitation still exists in that the size is not available when OF_LIVE
+> > > > > is enabled, so take account of that in the tests.
+> > > > > 
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > > 
+> > > > >  arch/sandbox/dts/test.dts   |  6 +++---
+> > > > >  drivers/core/fdtaddr.c      |  6 +++---
+> > > > >  drivers/core/ofnode.c       | 11 ++++++++---
+> > > > >  drivers/core/read.c         |  6 ++++--
+> > > > >  drivers/core/util.c         |  2 +-
+> > > > >  drivers/pci/pci-uclass.c    |  2 +-
+> > > > >  drivers/pci/pci_mvebu.c     |  3 ++-
+> > > > >  drivers/pci/pci_tegra.c     |  2 +-
+> > > > >  drivers/pci/pcie_mediatek.c |  4 ++--
+> > > > >  drivers/serial/ns16550.c    | 15 ++++++++++-----
+> > > > >  include/dm/fdtaddr.h        |  3 ++-
+> > > > >  include/dm/ofnode.h         |  4 +++-
+> > > > >  include/dm/read.h           |  8 +++++---
+> > > > >  include/ns16550.h           |  4 +++-
+> > > > >  include/serial.h            |  2 ++
+> > > > >  test/dm/pci.c               | 14 ++++++++++----
+> > > > >  16 files changed, 60 insertions(+), 32 deletions(-)
+> > > > > 
+> > > > > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> > > > > index a413cbe4989..961e8895a49 100644
+> > > > > --- a/arch/sandbox/dts/test.dts
+> > > > > +++ b/arch/sandbox/dts/test.dts
+> > > > > @@ -1087,8 +1087,8 @@
+> > > > >  		pci@1,0 {
+> > > > >  			compatible = "pci-generic";
+> > > > >  			/* reg 0 is at 0x14, using FDT_PCI_SPACE_MEM32 */
+> > > > > -			reg = <0x02000814 0 0 0 0
+> > > > > -			       0x01000810 0 0 0 0>;
+> > > > > +			reg = <0x02000814 0 0 0x80 0
+> > > > > +			       0x01000810 0 0 0xc0 0>;
+> > > > >  			sandbox,emul = <&swap_case_emul0_1>;
+> > > > >  		};
+> > > > >  		p2sb-pci@2,0 {
+> > > > > @@ -1115,7 +1115,7 @@
+> > > > >  		pci@1f,0 {
+> > > > >  			compatible = "pci-generic";
+> > > > >  			/* reg 0 is at 0x10, using FDT_PCI_SPACE_IO */
+> > > > > -			reg = <0x0100f810 0 0 0 0>;
+> > > > > +			reg = <0x0100f810 0 0 0x100 0>;
+> > > > >  			sandbox,emul = <&swap_case_emul0_1f>;
+> > > > >  		};
+> > > > >  	};
+> > > > > diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
+> > > > > index 546db675aaf..b79d138c419 100644
+> > > > > --- a/drivers/core/fdtaddr.c
+> > > > > +++ b/drivers/core/fdtaddr.c
+> > > > > @@ -215,7 +215,7 @@ void *devfdt_map_physmem(const struct udevice *dev, unsigned long size)
+> > > > >  	return map_physmem(addr, size, MAP_NOCACHE);
+> > > > >  }
+> > > > >  
+> > > > > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
+> > > > > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *sizep)
+> > > > >  {
+> > > > >  	ulong addr;
+> > > > >  
+> > > > > @@ -226,12 +226,12 @@ fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
+> > > > >  		int ret;
+> > > > >  
+> > > > >  		ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_MEM32,
+> > > > > -					   "reg", &pci_addr);
+> > > > > +					   "reg", &pci_addr, sizep);
+> > > > >  		if (ret) {
+> > > > >  			/* try if there is any i/o-mapped register */
+> > > > >  			ret = ofnode_read_pci_addr(dev_ofnode(dev),
+> > > > >  						   FDT_PCI_SPACE_IO, "reg",
+> > > > > -						   &pci_addr);
+> > > > > +						   &pci_addr, sizep);
+> > > > >  			if (ret)
+> > > > >  				return FDT_ADDR_T_NONE;
+> > > > >  		}
+> > > > > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> > > > > index 2ef4114cb6f..c9cec456f43 100644
+> > > > > --- a/drivers/core/ofnode.c
+> > > > > +++ b/drivers/core/ofnode.c
+> > > > > @@ -1270,7 +1270,8 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode node, const char *propname,
+> > > > >  }
+> > > > >  
+> > > > >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > -			 const char *propname, struct fdt_pci_addr *addr)
+> > > > > +			 const char *propname, struct fdt_pci_addr *addr,
+> > > > > +			 fdt_size_t *size)
+> > > > >  {
+> > > > >  	const fdt32_t *cell;
+> > > > >  	int len;
+> > > > > @@ -1298,14 +1299,18 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > >  			      (ulong)fdt32_to_cpu(cell[1]),
+> > > > >  			      (ulong)fdt32_to_cpu(cell[2]));
+> > > > >  			if ((fdt32_to_cpu(*cell) & type) == type) {
+> > > > > +				const unaligned_fdt64_t *ptr;
+> > > > > +
+> > > > >  				addr->phys_hi = fdt32_to_cpu(cell[0]);
+> > > > >  				addr->phys_mid = fdt32_to_cpu(cell[1]);
+> > > > >  				addr->phys_lo = fdt32_to_cpu(cell[2]);
+> > > > > +				ptr = (const unaligned_fdt64_t *)(cell + 3);
+> > > > > +				if (size)
+> > > > > +					*size = fdt64_to_cpu(*ptr);
+> > > > >  				break;
+> > > > >  			}
+> > > > >  
+> > > > > -			cell += (FDT_PCI_ADDR_CELLS +
+> > > > > -				 FDT_PCI_SIZE_CELLS);
+> > > > > +			cell += FDT_PCI_ADDR_CELLS + FDT_PCI_SIZE_CELLS;
+> > > > >  		}
+> > > > >  
+> > > > >  		if (i == num) {
+> > > > > diff --git a/drivers/core/read.c b/drivers/core/read.c
+> > > > > index 49066b59cda..419013451f0 100644
+> > > > > --- a/drivers/core/read.c
+> > > > > +++ b/drivers/core/read.c
+> > > > > @@ -405,13 +405,15 @@ int dev_read_alias_highest_id(const char *stem)
+> > > > >  	return fdtdec_get_alias_highest_id(gd->fdt_blob, stem);
+> > > > >  }
+> > > > >  
+> > > > > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
+> > > > > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *sizep)
+> > > > >  {
+> > > > >  	ulong addr;
+> > > > >  
+> > > > >  	addr = dev_read_addr(dev);
+> > > > > +	if (sizep)
+> > > > > +		*sizep = 0;
+> > > > >  	if (addr == FDT_ADDR_T_NONE && !of_live_active())
+> > > > > -		addr = devfdt_get_addr_pci(dev);
+> > > > > +		addr = devfdt_get_addr_pci(dev, sizep);
+> > > > >  
+> > > > >  	return addr;
+> > > > >  }
+> > > > > diff --git a/drivers/core/util.c b/drivers/core/util.c
+> > > > > index aa60fdd15bc..81497df85ff 100644
+> > > > > --- a/drivers/core/util.c
+> > > > > +++ b/drivers/core/util.c
+> > > > > @@ -30,7 +30,7 @@ int pci_get_devfn(struct udevice *dev)
+> > > > >  
+> > > > >  	/* Extract the devfn from fdt_pci_addr */
+> > > > >  	ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_CONFIG,
+> > > > > -				   "reg", &addr);
+> > > > > +				   "reg", &addr, NULL);
+> > > > >  	if (ret) {
+> > > > >  		if (ret != -ENOENT)
+> > > > >  			return -EINVAL;
+> > > > > diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+> > > > > index 0adcdceb1d3..c670f8754e8 100644
+> > > > > --- a/drivers/pci/pci-uclass.c
+> > > > > +++ b/drivers/pci/pci-uclass.c
+> > > > > @@ -122,7 +122,7 @@ static void pci_dev_find_ofnode(struct udevice *bus, phys_addr_t bdf,
+> > > > >  
+> > > > >  	dev_for_each_subnode(node, bus) {
+> > > > >  		ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg",
+> > > > > -					   &addr);
+> > > > > +					   &addr, NULL);
+> > > > >  		if (ret)
+> > > > >  			continue;
+> > > > >  
+> > > > > diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
+> > > > > index 93a7508d8a2..25878bde534 100644
+> > > > > --- a/drivers/pci/pci_mvebu.c
+> > > > > +++ b/drivers/pci/pci_mvebu.c
+> > > > > @@ -640,7 +640,8 @@ static int mvebu_pcie_port_parse_dt(ofnode node, ofnode parent, struct mvebu_pci
+> > > > >  		pcie->is_x4 = true;
+> > > > >  
+> > > > >  	/* devfn is in bits [15:8], see PCI_DEV usage */
+> > > > > -	ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_addr);
+> > > > > +	ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_addr,
+> > > > > +				   NULL);
+> > > > >  	if (ret < 0) {
+> > > > >  		printf("%s: property \"reg\" is invalid\n", pcie->name);
+> > > > >  		goto err;
+> > > > > diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
+> > > > > index 29d54117e93..ae90bd2fbf1 100644
+> > > > > --- a/drivers/pci/pci_tegra.c
+> > > > > +++ b/drivers/pci/pci_tegra.c
+> > > > > @@ -461,7 +461,7 @@ static int tegra_pcie_parse_port_info(ofnode node, uint *index, uint *lanes)
+> > > > >  
+> > > > >  	*lanes = err;
+> > > > >  
+> > > > > -	err = ofnode_read_pci_addr(node, 0, "reg", &addr);
+> > > > > +	err = ofnode_read_pci_addr(node, 0, "reg", &addr, NULL);
+> > > > >  	if (err < 0) {
+> > > > >  		pr_err("failed to parse \"reg\" property\n");
+> > > > >  		return err;
+> > > > > diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_mediatek.c
+> > > > > index c6e30e24622..e59ebd13ad0 100644
+> > > > > --- a/drivers/pci/pcie_mediatek.c
+> > > > > +++ b/drivers/pci/pcie_mediatek.c
+> > > > > @@ -660,7 +660,7 @@ static int mtk_pcie_probe(struct udevice *dev)
+> > > > >  		if (!ofnode_is_enabled(subnode))
+> > > > >  			continue;
+> > > > >  
+> > > > > -		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr);
+> > > > > +		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+> > > > >  		if (err)
+> > > > >  			return err;
+> > > > >  
+> > > > > @@ -699,7 +699,7 @@ static int mtk_pcie_probe_v2(struct udevice *dev)
+> > > > >  		if (!ofnode_is_enabled(subnode))
+> > > > >  			continue;
+> > > > >  
+> > > > > -		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr);
+> > > > > +		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+> > > > >  		if (err)
+> > > > >  			return err;
+> > > > >  
+> > > > > diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+> > > > > index eab9537fbae..a349e5e132a 100644
+> > > > > --- a/drivers/serial/ns16550.c
+> > > > > +++ b/drivers/serial/ns16550.c
+> > > > > @@ -479,6 +479,7 @@ static int ns16550_serial_getinfo(struct udevice *dev,
+> > > > >  	info->addr_space = SERIAL_ADDRESS_SPACE_MEMORY;
+> > > > >  #endif
+> > > > >  	info->addr = plat->base;
+> > > > > +	info->size = plat->size;
+> > > > >  	info->reg_width = plat->reg_width;
+> > > > >  	info->reg_shift = plat->reg_shift;
+> > > > >  	info->reg_offset = plat->reg_offset;
+> > > > > @@ -487,7 +488,8 @@ static int ns16550_serial_getinfo(struct udevice *dev,
+> > > > >  	return 0;
+> > > > >  }
+> > > > >  
+> > > > > -static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_addr_t base)
+> > > > > +static int ns16550_serial_assign_base(struct ns16550_plat *plat,
+> > > > > +				      fdt_addr_t base, fdt_size_t size)
+> > > > >  {
+> > > > >  	if (base == FDT_ADDR_T_NONE)
+> > > > >  		return -EINVAL;
+> > > > > @@ -497,6 +499,7 @@ static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_addr_t base
+> > > > >  #else
+> > > > >  	plat->base = (unsigned long)map_physmem(base, 0, MAP_NOCACHE);
+> > > > >  #endif
+> > > > > +	plat->size = size;
+> > > > >  
+> > > > >  	return 0;
+> > > > >  }
+> > > > > @@ -507,6 +510,7 @@ int ns16550_serial_probe(struct udevice *dev)
+> > > > >  	struct ns16550 *const com_port = dev_get_priv(dev);
+> > > > >  	struct reset_ctl_bulk reset_bulk;
+> > > > >  	fdt_addr_t addr;
+> > > > > +	fdt_addr_t size;
+> > > > >  	int ret;
+> > > > >  
+> > > > >  	/*
+> > > > > @@ -514,8 +518,8 @@ int ns16550_serial_probe(struct udevice *dev)
+> > > > >  	 * or via a PCI bridge, assign plat->base before probing hardware.
+> > > > >  	 */
+> > > > >  	if (device_is_on_pci_bus(dev)) {
+> > > > > -		addr = devfdt_get_addr_pci(dev);
+> > > > > -		ret = ns16550_serial_assign_base(plat, addr);
+> > > > > +		addr = devfdt_get_addr_pci(dev, &size);
+> > > > > +		ret = ns16550_serial_assign_base(plat, addr, size);
+> > > > >  		if (ret)
+> > > > >  			return ret;
+> > > > >  	}
+> > > > > @@ -543,11 +547,12 @@ int ns16550_serial_of_to_plat(struct udevice *dev)
+> > > > >  	struct ns16550_plat *plat = dev_get_plat(dev);
+> > > > >  	const u32 port_type = dev_get_driver_data(dev);
+> > > > >  	fdt_addr_t addr;
+> > > > > +	fdt_size_t size;
+> > > > >  	struct clk clk;
+> > > > >  	int err;
+> > > > >  
+> > > > > -	addr = dev_read_addr(dev);
+> > > > > -	err = ns16550_serial_assign_base(plat, addr);
+> > > > > +	addr = dev_read_addr_size(dev, &size);
+> > > > > +	err = ns16550_serial_assign_base(plat, addr, size);
+> > > > >  	if (err && !device_is_on_pci_bus(dev))
+> > > > >  		return err;
+> > > > >  
+> > > > > diff --git a/include/dm/fdtaddr.h b/include/dm/fdtaddr.h
+> > > > > index dcdc19137cc..6d2fa8f1044 100644
+> > > > > --- a/include/dm/fdtaddr.h
+> > > > > +++ b/include/dm/fdtaddr.h
+> > > > > @@ -168,8 +168,9 @@ fdt_addr_t devfdt_get_addr_size_name(const struct udevice *dev,
+> > > > >   * devfdt_get_addr_pci() - Read an address and handle PCI address translation
+> > > > >   *
+> > > > >   * @dev: Device to read from
+> > > > > + * @sizep: If non-NULL, returns size of address space
+> > > > >   * Return: address or FDT_ADDR_T_NONE if not found
+> > > > >   */
+> > > > > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev);
+> > > > > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *sizep);
+> > > > >  
+> > > > >  #endif
+> > > > > diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> > > > > index 726d8f82ddf..97cad971611 100644
+> > > > > --- a/include/dm/ofnode.h
+> > > > > +++ b/include/dm/ofnode.h
+> > > > > @@ -1152,13 +1152,15 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode node, const char *propname,
+> > > > >   * @type:	pci address type (FDT_PCI_SPACE_xxx)
+> > > > >   * @propname:	name of property to find
+> > > > >   * @addr:	returns pci address in the form of fdt_pci_addr
+> > > > > + * @size:	if non-null, returns register-space size
+> > > > >   * Return:
+> > > > >   * 0 if ok, -ENOENT if the property did not exist, -EINVAL if the
+> > > > >   * format of the property was invalid, -ENXIO if the requested
+> > > > >   * address type was not found
+> > > > >   */
+> > > > >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > -			 const char *propname, struct fdt_pci_addr *addr);
+> > > > > +			 const char *propname, struct fdt_pci_addr *addr,
+> > > > > +			 fdt_size_t *size);
+> > > > >  
+> > > > >  /**
+> > > > >   * ofnode_read_pci_vendev() - look up PCI vendor and device id
+> > > > > diff --git a/include/dm/read.h b/include/dm/read.h
+> > > > > index c2615f72f40..3c2eea6f0c4 100644
+> > > > > --- a/include/dm/read.h
+> > > > > +++ b/include/dm/read.h
+> > > > > @@ -346,9 +346,10 @@ void *dev_read_addr_ptr(const struct udevice *dev);
+> > > > >   *    fdtdec_get_addr() and friends.
+> > > > >   *
+> > > > >   * @dev: Device to read from
+> > > > > + * @sizep: If non-NULL, returns size of address space found
+> > > > >   * Return: address or FDT_ADDR_T_NONE if not found
+> > > > >   */
+> > > > > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev);
+> > > > > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *sizep);
+> > > > >  
+> > > > >  /**
+> > > > >   * dev_remap_addr() - Get the reg property of a device as a
+> > > > > @@ -996,9 +997,10 @@ static inline void *dev_read_addr_ptr(const struct udevice *dev)
+> > > > >  	return devfdt_get_addr_ptr(dev);
+> > > > >  }
+> > > > >  
+> > > > > -static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
+> > > > > +static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev,
+> > > > > +					   fdt_size_t *sizep)
+> > > > >  {
+> > > > > -	return devfdt_get_addr_pci(dev);
+> > > > > +	return devfdt_get_addr_pci(dev, sizep);
+> > > > >  }
+> > > > >  
+> > > > >  static inline void *dev_remap_addr(const struct udevice *dev)
+> > > > > diff --git a/include/ns16550.h b/include/ns16550.h
+> > > > > index e7e68663d03..7f481300083 100644
+> > > > > --- a/include/ns16550.h
+> > > > > +++ b/include/ns16550.h
+> > > > > @@ -58,6 +58,7 @@ enum ns16550_flags {
+> > > > >   * struct ns16550_plat - information about a NS16550 port
+> > > > >   *
+> > > > >   * @base:		Base register address
+> > > > > + * @size:		Size of register area in bytes
+> > > > >   * @reg_width:		IO accesses size of registers (in bytes, 1 or 4)
+> > > > >   * @reg_shift:		Shift size of registers (0=byte, 1=16bit, 2=32bit...)
+> > > > >   * @reg_offset:		Offset to start of registers (normally 0)
+> > > > > @@ -67,7 +68,8 @@ enum ns16550_flags {
+> > > > >   * @bdf:		PCI slot/function (pci_dev_t)
+> > > > >   */
+> > > > >  struct ns16550_plat {
+> > > > > -	unsigned long base;
+> > > > > +	ulong base;
+> > > > > +	ulong size;
+> > > > >  	int reg_width;
+> > > > >  	int reg_shift;
+> > > > >  	int reg_offset;
+> > > > > diff --git a/include/serial.h b/include/serial.h
+> > > > > index 42bdf3759c0..205889d28be 100644
+> > > > > --- a/include/serial.h
+> > > > > +++ b/include/serial.h
+> > > > > @@ -137,6 +137,7 @@ enum adr_space_type {
+> > > > >   * @type:	type of the UART chip
+> > > > >   * @addr_space:	address space to access the registers
+> > > > >   * @addr:	physical address of the registers
+> > > > > + * @size:	size of the register area in bytes
+> > > > >   * @reg_width:	size (in bytes) of the IO accesses to the registers
+> > > > >   * @reg_offset:	offset to apply to the @addr from the start of the registers
+> > > > >   * @reg_shift:	quantity to shift the register offsets by
+> > > > > @@ -147,6 +148,7 @@ struct serial_device_info {
+> > > > >  	enum serial_chip_type type;
+> > > > >  	enum adr_space_type addr_space;
+> > > > >  	ulong addr;
+> > > > > +	ulong size;
+> > > > >  	u8 reg_width;
+> > > > >  	u8 reg_offset;
+> > > > >  	u8 reg_shift;
+> > > > > diff --git a/test/dm/pci.c b/test/dm/pci.c
+> > > > > index 70a736cfdb8..8c5e7da9e62 100644
+> > > > > --- a/test/dm/pci.c
+> > > > > +++ b/test/dm/pci.c
+> > > > > @@ -301,10 +301,12 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
+> > > > >  {
+> > > > >  	struct udevice *swap1f, *swap1;
+> > > > >  	ulong io_addr, mem_addr;
+> > > > > +	fdt_addr_t size;
+> > > > >  
+> > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
+> > > > >  	io_addr = dm_pci_read_bar32(swap1f, 0);
+> > > > > -	ut_asserteq(io_addr, dev_read_addr_pci(swap1f));
+> > > > > +	ut_asserteq(io_addr, dev_read_addr_pci(swap1f, &size));
+> > > > > +	ut_asserteq(0, size);
+> > > > >  
+> > > > >  	/*
+> > > > >  	 * This device has both I/O and MEM spaces but the MEM space appears
+> > > > > @@ -312,7 +314,8 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
+> > > > >  	 */
+> > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
+> > > > >  	mem_addr = dm_pci_read_bar32(swap1, 1);
+> > > > > -	ut_asserteq(mem_addr, dev_read_addr_pci(swap1));
+> > > > > +	ut_asserteq(mem_addr, dev_read_addr_pci(swap1, &size));
+> > > > > +	ut_asserteq(0, size);
+> > > > >  
+> > > > >  	return 0;
+> > > > >  }
+> > > > > @@ -329,12 +332,15 @@ DM_TEST(dm_test_pci_addr_flat, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT |
+> > > > >  static int dm_test_pci_addr_live(struct unit_test_state *uts)
+> > > > >  {
+> > > > >  	struct udevice *swap1f, *swap1;
+> > > > > +	fdt_size_t size;
+> > > > >  
+> > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
+> > > > > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
+> > > > > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f, &size));
+> > > > > +	ut_asserteq(0, size);
+> > > > >  
+> > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
+> > > > > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
+> > > > > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1, &size));
+> > > > > +	ut_asserteq(0, size);
+> > > > >  
+> > > > >  	return 0;
+> > > > >  }
+> > > > > -- 
+> > > > > 2.42.0.rc2.253.gd59a3bf2b4-goog
+> > > > > 
+> > > 
+> > > -- 
+> > > Tom
+> > 
+> > 
 > 
-> +static void video_flush_copy(struct udevice *vid)
-> +{
-> +	struct video_priv *priv = dev_get_uclass_priv(vid);
-> +
-> +	if (!priv->copy_fb)
-> +		return;
-> +
-> +	if (priv->damage.xend && priv->damage.yend) {
-> +		int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
-> +		int lend = priv->damage.xend * VNBYTES(priv->bpix);
-> +		int y;
-> +
-> +		for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
-> +			ulong offset = (y * priv->line_length) + lstart;
-> +			ulong len = lend - lstart;
-> +
-> +			memcpy(priv->copy_fb + offset, priv->fb + offset, len);
-> +		}
-> +	}
-> +}
+> -- 
+> Tom
 
-I think Simon was asking how and when video_sync() is called outside the
-tests. The tests use lower-level functions that are ops->putc_xy() in
-each console, and normally vidconsole calls higher on the call-chain
-also maybe do a video_sync() when they think it's worth updating the
-display.
 
->>
->>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->>> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
->>>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
->>>          call video_sync() before copy_fb check, update video_copy test]
->>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>> ---
->>>
->>> Changes in v5:
->>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
->>> - Fix memmove() calls by removing the extra dev argument
->>> - Call video_sync() before checking copy_fb in video tests
->>> - Use xstart, ystart, xend, yend as names for damage region
->>> - Use met->baseline instead of priv->baseline
->>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
->>> - Use xstart, ystart, xend, yend as names for damage region
->>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
->>> - Update dm_test_video_copy test added in a new patch
->>>
->>> Changes in v3:
->>> - Make VIDEO_COPY always select VIDEO_DAMAGE
->>>
->>> Changes in v2:
->>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
->>>
->>>   configs/sandbox_defconfig         |  1 -
->>>   drivers/video/Kconfig             |  5 ++
->>>   drivers/video/console_normal.c    | 13 +----
->>>   drivers/video/console_rotate.c    | 44 +++-----------
->>>   drivers/video/console_truetype.c  | 16 +----
->>>   drivers/video/vidconsole-uclass.c | 16 -----
->>>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
->>>   drivers/video/video_bmp.c         |  7 ---
->>>   include/video.h                   | 37 ------------
->>>   include/video_console.h           | 52 -----------------
->>>   test/dm/video.c                   |  3 +-
->>>   11 files changed, 43 insertions(+), 248 deletions(-)
->>>
->>> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
->>> index 51b820f13121..259f31f26cee 100644
->>> --- a/configs/sandbox_defconfig
->>> +++ b/configs/sandbox_defconfig
->>> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
->>>   CONFIG_VIDEO=y
->>>   CONFIG_VIDEO_FONT_SUN12X22=y
->>>   CONFIG_VIDEO_COPY=y
->>> -CONFIG_VIDEO_DAMAGE=y
->>>   CONFIG_CONSOLE_ROTATION=y
->>>   CONFIG_CONSOLE_TRUETYPE=y
->>>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
->>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
->>> index 97f494a1340b..b3fbd9d7d9ca 100644
->>> --- a/drivers/video/Kconfig
->>> +++ b/drivers/video/Kconfig
->>> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
->>>
->>>   config VIDEO_COPY
->>>          bool "Enable copying the frame buffer to a hardware copy"
->>> +       select VIDEO_DAMAGE
->>>          help
->>>            On some machines (e.g. x86), reading from the frame buffer is very
->>>            slow because it is uncached. To improve performance, this feature
->>>            allows the frame buffer to be kept in cached memory (allocated by
->>>            U-Boot) and then copied to the hardware frame-buffer as needed.
->>> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
->>> +         and will only copy actually touched regions.
->>>
->>>            To use this, your video driver must set @copy_base in
->>>            struct video_uc_plat.
->>> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
->>>            regions of the frame buffer that were modified before, speeding up
->>>            screen refreshes significantly.
->>>
->>> +         It is also used by VIDEO_COPY to identify which regions changed.
->>> +
->>>   config BACKLIGHT_PWM
->>>          bool "Generic PWM based Backlight Driver"
->>>          depends on BACKLIGHT && DM_PWM
->>> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
->>> index a19ce6a2bc11..c44aa09473a3 100644
->>> --- a/drivers/video/console_normal.c
->>> +++ b/drivers/video/console_normal.c
->>> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
->>>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
->>>          end = dst;
->>>
->>> -       ret = vidconsole_sync_copy(dev, line, end);
->>> -       if (ret)
->>> -               return ret;
->>> -
->>>          video_damage(dev->parent,
->>>                       0,
->>>                       fontdata->height * row,
->>> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
->>>          void *dst;
->>>          void *src;
->>>          int size;
->>> -       int ret;
->>>
->>>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
->>>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
->>>          size = fontdata->height * vid_priv->line_length * count;
->>> -       ret = vidconsole_memmove(dev, dst, src, size);
->>> -       if (ret)
->>> -               return ret;
->>> +       memmove(dst, src, size);
->> Why are you making that change?
-> 
-> There is no point in keeping a special vidconsole_memmove() around 
-> anymore, since we don't actually need to call vidconsole_sync_copy() 
-> after the move. The damage call that we introduced to all call sites in 
-> combination with a video_sync() call takes over the job of the sync copy.
-
-More specifically, this batches the copying work video_sync_copy() does
-per console-op into video_flush_copy() called once per video_sync().
-Then, since vidconsole_memmove() is only used to memmove() and invoke
-that copy mechanism, we can also reduce it to just memmove().
