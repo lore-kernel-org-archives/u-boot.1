@@ -4,58 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5091C6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 15:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB21EC83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 15:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C5328652F;
-	Wed, 30 Aug 2023 17:18:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0DE0F8643D;
+	Wed, 30 Aug 2023 17:26:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693408711;
-	bh=bfhiaHdMu59TbFvbRiQ6frHt46FeRhSnbc2XVscnafQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KPyERPp1imJqTP/GbIkvmX5BSebVQzqbCvfaJpEUE/J+zGR0jwDzg4QTgZ7WL1rZu
-	 IwqYDU+q1n+A9DpE0ZaKRmmTsXM4UzMOUQp9qUVaRX9RiHjiJAJgVkFX6uyMHFJm0r
-	 cwGtrpmtlY7WvL7LbnVxTt0JOV6vZrd9zSu5s3qURDmI06bjS6P/uMo0U08McjpdjL
-	 L45pqDw8olJcdGtrptDfyFez3SF/tzvujxsVOgRud1gtB1nFsVRQvrX15QRd4fMSSK
-	 0Avh1srDwtm68wV9Hvrrh5alda/6Y91cvGBVAlaJ3pFQGHdhMI07fVxZVN4to3df0U
-	 o0jwKXRBmaHuQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HDvRjJdb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AF2AE86516; Wed, 30 Aug 2023 17:26:24 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4AF8F863DD;
- Wed, 30 Aug 2023 17:18:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693408710;
- bh=bfhiaHdMu59TbFvbRiQ6frHt46FeRhSnbc2XVscnafQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kaYU3qObJ3MsAuK2twVfH20G1IMT7EHTrAMwenI9rxbJ5MhumTuCSaaJjtqU2Opi3
- T+0nbLHP3T5Ae8tdzCBV86VK25Ik8mK++982/FnmlKIbW8Prh7h1hpnyBlrwuyMujU
- mSx8AT6DCNdkYBKw/FSJBquVqWr5B55QYFWqA0MWv2wQ9IzUzYoelnIMP1qaWOdl9f
- UnosRB7DXh3ftqg4Ye/XB5tOKVNJYGlYv3ScOc/Hj/6S08mkelH3hab05HfvlerFUI
- SyQMhaU/Xgx+6dHh2rffq3kMxHnjm7EP12FHz1UXVcFN57oIQZIU62f4PkdT3omOAR
- oldmzrqyYDbuA==
-Message-ID: <84041468-abf2-9b68-6701-6605f4948bf5@denx.de>
-Date: Wed, 30 Aug 2023 17:18:29 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 070C0863DD
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 17:26:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=twoerner@gmail.com
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-41205469f4eso4818011cf.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 08:26:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693409180; x=1694013980; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ciVLhFOApJ5WosxSUNQWC2nzXQTWtF0n6fVuP1zkdl4=;
+ b=HDvRjJdbC7UNnp2hZ4OdLl27cj9BMiTsc7811OJOYu8IbMYiXk7XEpwpxoc4IIcE+N
+ CvOi6lu87Lqb8Ocwla1JGs043aThwpPBHwhn6D4iLneEpi46BgygqxaZutH117pZ0eTM
+ Q35/OxAxabLKBjPHYs+CX5JVcWH6kW6m2c7WZCxe19yz3fQMl+4p86o2nnMSR3CpkrKm
+ uS9dd0WSqRrrjDQao94fXwjyQ4B3CXDQjNKjA2/WQ1wYLHFoMx1k/4afpV7EdZK/nIAu
+ VXEzknSFjbaBiSZqHAecPQlJRy2wKFCoDsms1JgN8Ig/AghCh1c1rz+7dHXJ/1DIzLZg
+ G3sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693409180; x=1694013980;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ciVLhFOApJ5WosxSUNQWC2nzXQTWtF0n6fVuP1zkdl4=;
+ b=UVHpZZ8C3q0bw/OFqvd9YLuGqGLQRo336TspiOeXXU0QHVb2Y+xODNYnxBx1qIuWZZ
+ 8p9zwbyeezjlFIffHAXLjA7GRo6dBrWiKtir4pb2eUY+V9B//amQTFaNxyw7Xgpk2THx
+ ISJcGa16XOUAvtLV6KR+JG6hlqqIbZHIODoDBdbMFUUssip7YS7g8fh4ySN6K9mcDkTR
+ okhPWxrpIL1Chn0un8c3+Qvn9E4UCPmzKmwDuMjoHyG8qz/L+X7l6Ddk2lx9UfqFhtjs
+ PNnWRSO9XHT+DGk5X/lDoL9wn3DzsFNAMxQe/Op7e9oC+xU1rCrxkk8DV1H3DYJS7uOz
+ N52A==
+X-Gm-Message-State: AOJu0YxebMr1/GuQuZ6ayuCaWUFHp6Cyu1c7oBhyrptrwIRnMR7H0lKv
+ i23wZazIG/9CEuh2BlHQXFn97a0x/c8=
+X-Google-Smtp-Source: AGHT+IEGkMbAxsRUxN9izia7xkQGYXv8+RKdliaUQ8rcYHXrT6fTiYrpSMBVIF2Y7ElYYJwd52S5/w==
+X-Received: by 2002:ac8:5912:0:b0:40f:de47:9b6c with SMTP id
+ 18-20020ac85912000000b0040fde479b6cmr40955qty.30.1693409179818; 
+ Wed, 30 Aug 2023 08:26:19 -0700 (PDT)
+Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca.
+ [209.91.167.254]) by smtp.gmail.com with ESMTPSA id
+ a11-20020a05620a102b00b0076cf49bcb50sm3799372qkk.37.2023.08.30.08.26.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Aug 2023 08:26:19 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Pierre Lebleu <pierre.lebleu@pile-engineering.com>,
+ Andrew Davis <afd@ti.com>
+Subject: [PATCH] ARM: dts: am335x-pocketbeagle: choose tick-timer
+Date: Wed, 30 Aug 2023 11:25:52 -0400
+Message-ID: <20230830152553.15465-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.41.0.327.gaa9166bcc0ba
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset bulk()
- API
-Content-Language: en-US
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-References: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,131 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/30/23 10:01, Fabrice Gasnier wrote:
-> Make usage of clock and reset bulk API in order to simplify the code
-> 
-> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> ---
-> 
->   drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
->   1 file changed, 29 insertions(+), 63 deletions(-)
-> 
-> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
-> index 2d8d38ce9a40..95aa608d8c19 100644
-> --- a/drivers/usb/host/ohci-generic.c
-> +++ b/drivers/usb/host/ohci-generic.c
-> @@ -16,75 +16,41 @@
->   
->   struct generic_ohci {
->   	ohci_t ohci;
-> -	struct clk *clocks;	/* clock list */
-> -	struct reset_ctl *resets; /* reset list */
-> +	struct clk_bulk clocks;	/* clock list */
-> +	struct reset_ctl_bulk resets; /* reset list */
->   	struct phy phy;
-> -	int clock_count;	/* number of clock in clock list */
-> -	int reset_count;	/* number of reset in reset list */
->   };
->   
->   static int ohci_usb_probe(struct udevice *dev)
->   {
->   	struct ohci_regs *regs = dev_read_addr_ptr(dev);
->   	struct generic_ohci *priv = dev_get_priv(dev);
-> -	int i, err, ret, clock_nb, reset_nb;
-> -
-> -	err = 0;
-> -	priv->clock_count = 0;
-> -	clock_nb = dev_count_phandle_with_args(dev, "clocks", "#clock-cells",
-> -					       0);
-> -	if (clock_nb > 0) {
-> -		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
-> -					    GFP_KERNEL);
-> -		if (!priv->clocks)
-> -			return -ENOMEM;
-> -
-> -		for (i = 0; i < clock_nb; i++) {
-> -			err = clk_get_by_index(dev, i, &priv->clocks[i]);
-> -			if (err < 0)
-> -				break;
-> -
-> -			err = clk_enable(&priv->clocks[i]);
-> -			if (err && err != -ENOSYS) {
-> -				dev_err(dev, "failed to enable clock %d\n", i);
-> -				clk_free(&priv->clocks[i]);
-> -				goto clk_err;
-> -			}
-> -			priv->clock_count++;
-> -		}
-> -	} else if (clock_nb != -ENOENT) {
-> -		dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
-> -		return clock_nb;
-> +	int err, ret;
-> +
-> +	ret = clk_get_bulk(dev, &priv->clocks);
-> +	if (ret && ret != -ENOENT) {
-> +		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+Commit 4b2be78ab66c ("time: Fix get_ticks being non-monotonic")
+requires '/chosen/tick-timer' in device-tree. Otherwise we get:
 
-Plural of 'clock' is still 'clock' , please fix just the text, keep the 
-variable name .
+	U-Boot 2023.07.02 (Jul 11 2023 - 15:20:44 +0000)
 
-> +		return ret;
-> +	}
-> +
-> +	err = clk_enable_bulk(&priv->clocks);
-> +	if (err) {
-> +		dev_err(dev, "Failed to enable clocks (err=%d)\n", err);
+	CPU  : AM335X-GP rev 2.1
+	Model: TI AM335x PocketBeagle
+	DRAM:  512 MiB
+	Core:  154 devices, 16 uclasses, devicetree: separate
+	Could not initialize timer (err -19)
 
-DTTO here
+	resetting ...
 
-> +		goto clk_err;
->   	}
->   
-> -	priv->reset_count = 0;
-> -	reset_nb = dev_count_phandle_with_args(dev, "resets", "#reset-cells",
-> -					       0);
-> -	if (reset_nb > 0) {
-> -		priv->resets = devm_kcalloc(dev, reset_nb,
-> -					    sizeof(struct reset_ctl),
-> -					    GFP_KERNEL);
-> -		if (!priv->resets)
-> -			return -ENOMEM;
-> -
-> -		for (i = 0; i < reset_nb; i++) {
-> -			err = reset_get_by_index(dev, i, &priv->resets[i]);
-> -			if (err < 0)
-> -				break;
-> -
-> -			err = reset_deassert(&priv->resets[i]);
-> -			if (err) {
-> -				dev_err(dev, "failed to deassert reset %d\n", i);
-> -				reset_free(&priv->resets[i]);
-> -				goto reset_err;
-> -			}
-> -			priv->reset_count++;
-> -		}
-> -	} else if (reset_nb != -ENOENT) {
-> -		dev_err(dev, "failed to get reset phandle(%d)\n", reset_nb);
-> +	err = reset_get_bulk(dev, &priv->resets);
-> +	if (err && err != -ENOENT) {
-> +		dev_err(dev, "failed to get resets (err=%d)\n", err);
->   		goto clk_err;
->   	}
->   
-> +	err = reset_deassert_bulk(&priv->resets);
-> +	if (err) {
-> +		dev_err(dev, "failed to get deassert resets (err=%d)\n", err);
+Suggested-by: Pierre Lebleu <pierre.lebleu@pile-engineering.com>
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ arch/arm/dts/am335x-pocketbeagle.dts | 1 +
+ 1 file changed, 1 insertion(+)
 
-Drop the 'get' from the text here, I think it's copy-paste error.
+diff --git a/arch/arm/dts/am335x-pocketbeagle.dts b/arch/arm/dts/am335x-pocketbeagle.dts
+index b379e3a5570d..02e3aac56064 100644
+--- a/arch/arm/dts/am335x-pocketbeagle.dts
++++ b/arch/arm/dts/am335x-pocketbeagle.dts
+@@ -15,6 +15,7 @@
+ 
+ 	chosen {
+ 		stdout-path = &uart0;
++		tick-timer = &timer2;
+ 	};
+ 
+ 	leds {
+-- 
+2.41.0.327.gaa9166bcc0ba
 
-> +		goto reset_err;
-> +	}
-> +
->   	err = generic_setup_phy(dev, &priv->phy, 0);
->   	if (err)
->   		goto reset_err;
-
-With that fixed:
-
-Reviewed-by: Marek Vasut <marex@denx.de>
-
-Nice cleanup, thanks !
