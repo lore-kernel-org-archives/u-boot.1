@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F63C6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 23:29:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED989C6FA8F
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 23:29:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 070C68652B;
-	Thu, 31 Aug 2023 01:29:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A2B08651C;
+	Thu, 31 Aug 2023 01:29:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NScKHJsc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gq8h42zU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB9D7864D4; Thu, 31 Aug 2023 01:29:08 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 76746864D4; Thu, 31 Aug 2023 01:29:38 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9397E8652C
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 01:29:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A2208654E
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 01:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-34df9c800adso1122045ab.1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 16:29:03 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7926b7f8636so5362439f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 16:29:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693438142; x=1694042942; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693438172; x=1694042972; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=ZP1rVZA70Cnf3UMGcCPrIoXLTA+pV2S0FwYeFViSqfA=;
- b=NScKHJscBE1PiCGt+X7vL57AGdAvKZx2yx4l7Iv3wrGumRXBf3ixEdUyuqMn11TC2O
- Ry4gjfMtMgpzv9qxhD6UejeI1tP4VX+pepoWdlp4OBSaYtfQIpBae9fNtkc7ez2mREDP
- rAKsOUHglgpCpYV2uTq8JTglUK6HpOsKatMmM=
+ b=gq8h42zUokzfjYHTXb6qplGhox7Akpjqkuwzf0QRlbla1WDjnn0Wlru3HXzceh9t+9
+ nJ/vsivYKkpBkyyQ1Zxr77DFI7mx2I6zY7BKMYtKhvn4Jqpw3h/wwHDi+CB2EVBphLti
+ W+QH4zLzolJ4QEqH82Kgg0IlNWikY2KW+owak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693438142; x=1694042942;
+ d=1e100.net; s=20221208; t=1693438172; x=1694042972;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=ZP1rVZA70Cnf3UMGcCPrIoXLTA+pV2S0FwYeFViSqfA=;
- b=IukjMEacVR/htAfeq/RC4cMKG/S+/U51zbqvFVd6DqMLRndUnoHWfncILxGw+poQhk
- C1v2lp7vKsN+67WxhJWG2R8Tjd5N8CnamzZpO3u3HMsTgx3R4JfeUuegn9NH5WBQseeq
- 0jlrB5T3KDnR24LLLWAMOXVjFkBex4UVI2DEwo0+pg5nHp9BFBKs6h5t+v6Vne2HCZv4
- Wb1FDjKW8H2LajkrMSXQm54+sr/wmA54hYyYEl+JSrZygCwP+CrooLG57jlxQD0X5erL
- ioaPjrifWGjvSAoJoysIZJrSanQuCtAj0ZSoV/BeXdlCQLTA6Sw/uaTw33PcePPnrYWW
- TMhQ==
-X-Gm-Message-State: AOJu0YyalqhXtZr+QQ5O6kT0fR2VDHynK7+NWJ+2EDoEVlZTUCwELbrC
- t8Do+DRgI34cB/1QfCp2dAHv4kb1gNYok7IeSm4=
-X-Google-Smtp-Source: AGHT+IE1C/zjjjEBB6a4XskCR0qWY5JXAaYqxGMbu/IGG3HEWZrG/S0LwLttMOwUYJMcr7KimUn1iQ==
-X-Received: by 2002:a05:6e02:f13:b0:34c:e4c6:c51c with SMTP id
- x19-20020a056e020f1300b0034ce4c6c51cmr3639568ilj.9.1693438142193; 
- Wed, 30 Aug 2023 16:29:02 -0700 (PDT)
+ b=PObyMz9H9UnXSCtRHe5Nzo8Ke4TvjwDmQMyz2DHP+OoUkKsOqZVSzg2m1SKE7oJnnW
+ 3OJxgwJ2bqcM0oJW5J91S2YmfDNOTo27oVFwrf7yZjQuYbutqDogGbWjnmZjRffevVMy
+ 9L9cLWyWWgavJCEQPN/DVBbswnyt9efJhSnk9xH9OF/1aNba+JQNn8MLn+1tK7ooHHgH
+ afwLkhC+fKQNO4YZNGM8JtECOVG/AdCoJpIIhDyH5mjPKiLSTp3t22xzbrJF4q6Ad4sa
+ zlIMAa9MigV5AGJWECyVvvpdg2LwYgqPqjoe+Oc5V4XlPDUYsWHWZi1f2tMYDmVITfNN
+ hbKA==
+X-Gm-Message-State: AOJu0YxdgbNwU2yc0PJLRuoiL89tCP4NcdAw7daqXwj2mc65iaw2Zt/4
+ Q7LxaccdS9Mkm3CfJ2oLgFNdFBf5gikx7feod00=
+X-Google-Smtp-Source: AGHT+IHfkVXsNEuDsgx5GFl/tng4gZOZU6jjupNo4x6qPUOpY9rUmo+8N27vw8eakuF5y+8Tba9dDA==
+X-Received: by 2002:a05:6602:168f:b0:792:7c46:3dec with SMTP id
+ s15-20020a056602168f00b007927c463decmr1039772iow.4.1693438171921; 
+ Wed, 30 Aug 2023 16:29:31 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- fy6-20020a0566381e8600b0042b2d9fbbecsm53630jab.119.2023.08.30.16.29.00
+ dj14-20020a056602256e00b0077e35ffac2fsm78512iob.32.2023.08.30.16.29.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 16:29:01 -0700 (PDT)
+ Wed, 30 Aug 2023 16:29:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Alexey Romanov <avromanov@sberdevices.ru>,
  Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
  Masahisa Kojima <masahisa.kojima@linaro.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Suchanek <msuchanek@suse.de>,
+ Michal Simek <michal.simek@amd.com>, Michal Suchanek <msuchanek@suse.de>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
@@ -86,9 +85,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [RFX PATCH 0/9] Universal Payload initial series
-Date: Wed, 30 Aug 2023 17:28:37 -0600
-Message-ID: <20230830232856.2589218-1-sjg@chromium.org>
+Subject: [RFC PATCH 0/9] Universal Payload initial series
+Date: Wed, 30 Aug 2023 17:29:14 -0600
+Message-ID: <20230830232928.2590178-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
