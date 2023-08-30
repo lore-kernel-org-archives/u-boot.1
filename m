@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 892A7C6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 23:30:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C31C83F01
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 23:30:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B57A486583;
-	Thu, 31 Aug 2023 01:30:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AD4586553;
+	Thu, 31 Aug 2023 01:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Omj3e58Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nwC9s4cE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A8A886555; Thu, 31 Aug 2023 01:30:09 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id C7A9286586; Thu, 31 Aug 2023 01:30:11 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6070086552
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 01:30:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 167F78652B
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 01:30:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-7923ae72111so11916939f.0
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 16:30:04 -0700 (PDT)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-79277cfc73bso11389339f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 16:30:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693438203; x=1694043003; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693438205; x=1694043005; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pwDPnIft9FCd0FDkCx3y3zQnyQz2pSi3PdZGtB26HLU=;
- b=Omj3e58Z1Atdr3yOGjVqD8vUop3WRh23sYJxEn8q55vkWj/vtVdWvYGr8lkh3mIaFb
- dS/pPETFl7DAbg6G839X2Z/g4MNe2kAkFJ6fEK0/hjH2JF5kAAlTDVGBmEU5DhuCBu6F
- 74fSAZ2m/n0334AsMg9081enkgpGFicLBbrrk=
+ bh=96FF+qgeVQJLOVNFsGL4Cg3ta7KpGyCbfLWFoLLdV6M=;
+ b=nwC9s4cE35+zxucJYWfGVSSgeHpiDvMp2mmwvtHQ/09Un/X0Km7rrFjjltFiAZnTEN
+ nFjsL+E4wCt7daXEtExHGZMrmX5BmkkJAOaquEk1VamSkesTAPCIlMPQl+OJ4J6dOs+6
+ wUATo2X8JrWPeB80eT4QMXk2HJHdK9QLNx0Rw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693438203; x=1694043003;
+ d=1e100.net; s=20221208; t=1693438205; x=1694043005;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pwDPnIft9FCd0FDkCx3y3zQnyQz2pSi3PdZGtB26HLU=;
- b=Ttwr2qw6vrABraURB83YkG0e/TQAnMijZ95eJfTwQbGHZ7dDM6ay50InPIl4MvsHsH
- gwBk2kE8X3xI9RsZRoz50fBVms+Fg2+VvVNH+RUeGNTv4SFxYNXN09TCcTzYcggE/nqp
- f1Upou1P/kabpygKEdAd1xsv2/yQXDVq5V/bVzYOT2UtVlRUVtAc4PzoR5fntRN9fDf5
- 7QvEX+h6LwmqAJLJ9Wo+EcuItE6RNry7zI7c3C4TBm83QN5QQPkQnZUCs0+2PtDwaYWj
- zb9CGHhPoa2o6Kfx0QVJcfhFtI+YErHHH71Fuaf1Hh4x7eUad06potRCsbzQFJ8TMfXH
- OV1A==
-X-Gm-Message-State: AOJu0YyyIqaH9ikcTFyYg8HnzD2hHKevKS5CDzW2JqmsAeOtS2+1SHzO
- rxwlqNkWI6BrZWGgnA9qxvvYvMToPrFX1g+Hm0E=
-X-Google-Smtp-Source: AGHT+IHZsQ+4T1QBGxHUI8VoABNUI6UvKo1qVAFF9dmd2NPLdSU+wxb3oOHgoSHdIT6ga0OLYfDCdw==
-X-Received: by 2002:a6b:e008:0:b0:786:25a3:ef30 with SMTP id
- z8-20020a6be008000000b0078625a3ef30mr3907896iog.7.1693438202821; 
- Wed, 30 Aug 2023 16:30:02 -0700 (PDT)
+ bh=96FF+qgeVQJLOVNFsGL4Cg3ta7KpGyCbfLWFoLLdV6M=;
+ b=HSIyP24329laJ4boEP1vWdF1DeoDDffw6pMNKMeMCwbS7ydKvE1qYiZewl6vGPGhDa
+ Tjcrwz5te+iq3OG1+NELH8STu2PrOnezxTaYcesCQA4Kq+7uEdYijxr5En0rNAnGvh/f
+ OOrH2jHUEcPMvR3tg4T4Rn/wX1bnrDRz5bMB46bkarwa4coz7kcU4Xnx389gPOjCIJVh
+ XD9i2Gc6IaCkP8MAf4a+SSCSPgV5qAzyoz2eJc3spq3Mg+drEWpEJIlLkX/Fz9ECxAO7
+ Yzl6wsYhw7rHNC/UMP91dTuDJ6FS69aj8m6ZmurRMqWQ9w39zsiJwKpqU/U5rjqApiKn
+ Npfw==
+X-Gm-Message-State: AOJu0YyzjkXV7Kp39ogaE0zX67DuRrtaiUE3aZyYy4YBfuhk5Mg2+sjJ
+ P+em7PRgXDKb++nJte1UcyNxyPmeL5GMpbu/z5M=
+X-Google-Smtp-Source: AGHT+IFHvMUw1Cr3FwTkL2zxP/swz44x/VVEELC0AHbjuWN2LX2bwNkFBX8XUpSxgP6QeXg/3l+ZGA==
+X-Received: by 2002:a6b:dc03:0:b0:794:eaef:f43e with SMTP id
+ s3-20020a6bdc03000000b00794eaeff43emr4126186ioc.1.1693438205689; 
+ Wed, 30 Aug 2023 16:30:05 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- dj14-20020a056602256e00b0077e35ffac2fsm78512iob.32.2023.08.30.16.30.02
+ dj14-20020a056602256e00b0077e35ffac2fsm78512iob.32.2023.08.30.16.30.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 16:30:02 -0700 (PDT)
+ Wed, 30 Aug 2023 16:30:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [RFC PATCH 3/9] upl: Add basic tests
-Date: Wed, 30 Aug 2023 17:29:17 -0600
-Message-ID: <20230830232928.2590178-4-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Marek Vasut <marex@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Ovidiu Panait <ovpanait@gmail.com>, Roger Quadros <rogerq@kernel.org>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: [RFC PATCH 6/9] spl: Plumb in the Universal Payload handoff
+Date: Wed, 30 Aug 2023 17:29:20 -0600
+Message-ID: <20230830232928.2590178-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230830232928.2590178-1-sjg@chromium.org>
 References: <20230830232928.2590178-1-sjg@chromium.org>
@@ -87,453 +94,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some unit tests to check that we can write a UPL handoff and read it
-back.
+Specify the FIT and include information about each loaded image, as
+required by the UPL handoff.
+
+Write the UPL handoff into the bloblist before jumping to the next phase.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/boot/Makefile |   2 +
- test/boot/upl.c    | 420 +++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 422 insertions(+)
- create mode 100644 test/boot/upl.c
+ common/spl/spl.c     |  6 ++++++
+ common/spl/spl_fit.c | 22 ++++++++++++++++++++++
+ include/spl.h        | 11 +++++++++++
+ 3 files changed, 39 insertions(+)
 
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 52947580ae6..9f97223eed3 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -12,3 +12,5 @@ ifdef CONFIG_OF_LIVE
- obj-$(CONFIG_BOOTMETH_VBE_SIMPLE) += vbe_simple.o
- endif
- obj-$(CONFIG_BOOTMETH_VBE) += vbe_fixup.o
-+
-+obj-$(CONFIG_UPL) += upl.o
-diff --git a/test/boot/upl.c b/test/boot/upl.c
-new file mode 100644
-index 00000000000..8319a93e057
---- /dev/null
-+++ b/test/boot/upl.c
-@@ -0,0 +1,420 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * UPL handoff testing
-+ *
-+ * Copyright 2023 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#include <common.h>
-+#include <abuf.h>
-+#include <mapmem.h>
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 0a9fea4f22d..1bfefaafd93 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -792,6 +792,12 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 			printf(SPL_TPL_PROMPT
+ 			       "SPL hand-off write failed (err=%d)\n", ret);
+ 	}
++	if (CONFIG_IS_ENABLED(UPL_OUT)) {
++		ret = spl_write_upl_handoff(&spl_image);
++		if (ret)
++			printf(SPL_TPL_PROMPT
++			       "UPL hand-off write failed (err=%d)\n", ret);
++	}
+ 	if (CONFIG_IS_ENABLED(BLOBLIST)) {
+ 		ret = bloblist_finish();
+ 		if (ret)
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 03ff9a5db9a..89b5f624340 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -13,6 +13,7 @@
+ #include <memalign.h>
+ #include <mapmem.h>
+ #include <spl.h>
 +#include <upl.h>
-+#include <dm/ofnode.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include "bootstd_common.h"
+ #include <sysinfo.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+@@ -621,6 +622,8 @@ static int spl_fit_load_fpga(struct spl_fit_info *ctx,
+ 		printf("%s: Cannot load the FPGA: %i\n", __func__, ret);
+ 		return ret;
+ 	}
++	upl_add_image(node, fpga_image.load_addr, fpga_image.size,
++		      fdt_getprop(ctx->fit, node, FIT_DESC_PROP, NULL));
+ 
+ 	return spl_fit_upload_fpga(ctx, node, &fpga_image);
+ }
+@@ -745,6 +748,9 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 	if (ret)
+ 		return ret;
+ 
++	upl_add_image(node, spl_image->load_addr, spl_image->size,
++		      fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
 +
-+void upl_get_test_data(struct upl *upl)
-+{
-+	memset(upl, '\0', sizeof(struct upl));
-+	upl->addr_cells = 1;
-+	upl->size_cells = 1;
-+	upl->smbios = 0x123;
-+	upl->acpi = 0x456;
-+	upl->bootmode = BIT(UPLBM_DEFAULT) | BIT(UPLBM_S3);
-+	upl->fit = 0x789;
-+	upl->conf_offset = 0x234;
-+	upl->addr_width = 46;
-+	upl->acpi_nvs_size = 0x100;
+ 	/*
+ 	 * For backward compatibility, we treat the first node that is
+ 	 * as a U-Boot image, if no OS-type has been declared.
+@@ -788,6 +794,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 			       __func__, index, ret);
+ 			return ret;
+ 		}
++		upl_add_image(node, image_info.load_addr, image_info.size,
++			      fdt_getprop(ctx.fit, node, FIT_DESC_PROP, NULL));
+ 
+ 		if (spl_fit_image_is_fpga(ctx.fit, node))
+ 			spl_fit_upload_fpga(&ctx, node, &image_info);
+@@ -824,6 +832,8 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 		spl_image->entry_point = spl_image->load_addr;
+ 
+ 	spl_image->flags |= SPL_FIT_FOUND;
++	upl_set_fit_info(map_to_sysmem(ctx.fit), ctx.conf_node,
++			 spl_image->entry_point);
+ 
+ 	return 0;
+ }
+@@ -868,6 +878,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+ 	if (ret < 0)
+ 		return ret;
+ 
++	upl_add_image(ret, fw_data, fw_len,
++		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
 +
-+	upl->num_images = 2;
-+	upl->image[0].load = 0x1;
-+	upl->image[0].size = 0x2;
-+	upl->image[0].offset = 0x3;
-+	upl->image[0].description = "U-Boot";
-+	upl->image[1].load = 0x4;
-+	upl->image[1].size = 0x5;
-+	upl->image[1].offset = 0x6;
-+	upl->image[1].description = "ATF";
+ 	spl_image->size = fw_len;
+ 	spl_image->entry_point = fw_data;
+ 	spl_image->load_addr = fw_data;
+@@ -887,6 +900,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+ 	if (ret >= 0) {
+ 		spl_image->fdt_addr = (void *)dt_data;
+ 
++		upl_add_image(ret, dt_data, dt_len,
++		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
 +
-+	upl->num_mems = 2;
-+	upl->mem[0].num_regions = 3;
-+	upl->mem[0].region[0].base = 0x10;
-+	upl->mem[0].region[0].size = 0x20;
-+	upl->mem[0].region[1].base = 0x30;
-+	upl->mem[0].region[1].size = 0x40;
-+	upl->mem[0].region[2].base = 0x50;
-+	upl->mem[0].region[2].size = 0x60;
-+	upl->mem[1].num_regions = 1;
-+	upl->mem[1].region[0].base = 0x70;
-+	upl->mem[1].region[0].size = 0x80;
-+	upl->mem[1].hotpluggable = true;
+ 		if (spl_image->os == IH_OS_U_BOOT) {
+ 			/* HACK: U-Boot expects FDT at a specific address */
+ 			fdt_hack = spl_image->load_addr + spl_image->size;
+@@ -916,7 +932,13 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
+ 				     &img_data, &img_len);
+ 		if (ret < 0)
+ 			return ret;
++		upl_add_image(ret, img_data, img_len,
++		      fdt_getprop((void *)header, ret, FIT_DESC_PROP, NULL));
+ 	}
+ 
++	spl_image->flags |= SPL_FIT_FOUND;
++	upl_set_fit_info(map_to_sysmem(header), conf_noffset,
++			 spl_image->entry_point);
 +
-+	upl->num_memmaps = 5;
-+	upl->memmap[0].num_regions = 5;
-+	upl->memmap[0].name = "acpi";
-+	upl->memmap[0].usage = BIT(UPLUS_ACPI_RECLAIM);
-+	upl->memmap[0].region[0].base = 0x11;
-+	upl->memmap[0].region[0].size = 0x12;
-+	upl->memmap[0].region[1].base = 0x13;
-+	upl->memmap[0].region[1].size = 0x14;
-+	upl->memmap[0].region[2].base = 0x15;
-+	upl->memmap[0].region[2].size = 0x16;
-+	upl->memmap[0].region[3].base = 0x17;
-+	upl->memmap[0].region[3].size = 0x18;
-+	upl->memmap[0].region[4].base = 0x19;
-+	upl->memmap[0].region[4].size = 0x1a;
-+	upl->memmap[1].name = "u-boot";
-+	upl->memmap[1].num_regions = 1;
-+	upl->memmap[1].usage = BIT(UPLUS_BOOT_DATA);
-+	upl->memmap[1].region[0].base = 0x21;
-+	upl->memmap[1].region[0].size = 0x22;
-+	upl->memmap[2].name = "efi";
-+	upl->memmap[2].num_regions = 1;
-+	upl->memmap[2].usage = BIT(UPLUS_RUNTIME_CODE);
-+	upl->memmap[2].region[0].base = 0x23;
-+	upl->memmap[2].region[0].size = 0x24;
-+	upl->memmap[3].num_regions = 2;
-+	upl->memmap[3].name = "empty";
-+	upl->memmap[3].usage = 0;
-+	upl->memmap[3].region[0].base = 0x25;
-+	upl->memmap[3].region[0].size = 0x26;
-+	upl->memmap[3].region[1].base = 0x27;
-+	upl->memmap[3].region[1].size = 0x28;
-+	upl->memmap[4].name = "acpi-things";
-+	upl->memmap[4].num_regions = 1;
-+	upl->memmap[4].usage = BIT(UPLUS_RUNTIME_CODE) | BIT(UPLUS_ACPI_NVS);
-+	upl->memmap[4].region[0].base = 0x29;
-+	upl->memmap[4].region[0].base = 0x2a;
-+
-+	upl->num_memres = 2;
-+	upl->memres[0].num_regions = 1;
-+	upl->memres[0].name = "mmio";
-+	upl->memres[0].region[0].base = 0x2b;
-+	upl->memres[0].region[0].size = 0x2c;
-+	upl->memres[1].num_regions = 2;
-+	upl->memres[1].name = "memory";
-+	upl->memres[1].region[0].base = 0x2d;
-+	upl->memres[1].region[0].size = 0x2e;
-+	upl->memres[1].region[1].base = 0x2f;
-+	upl->memres[1].region[1].size = 0x30;
-+	upl->memres[1].no_map = true;
-+
-+	upl->serial.compatible = "ns16550a";
-+	upl->serial.clock_frequency = 1843200;
-+	upl->serial.current_speed = 115200;
-+	upl->serial.reg.base = 0xf1de0000;
-+	upl->serial.reg.size = 0x100;
-+	upl->serial.reg_io_shift = 2;
-+	upl->serial.reg_offset = 0x40;
-+	upl->serial.reg_io_width = 1;
-+	upl->serial.virtual_reg = 0x20000000;
-+	upl->serial.access_type = UPLSAT_MMIO;
-+
-+	upl->graphics.reg.base = 0xd0000000;
-+	upl->graphics.reg.size = 0x10000000;
-+	upl->graphics.width = 1280;
-+	upl->graphics.height = 1280;
-+	upl->graphics.stride = upl->graphics.width * 4;
-+	upl->graphics.format = UPLGF_ARGB32;
-+}
-+
-+static int compare_upl_image(struct unit_test_state *uts,
-+			     struct upl_image *base, struct upl_image *cmp)
-+{
-+	ut_asserteq(base->load, cmp->load);
-+	ut_asserteq(base->size, cmp->size);
-+	ut_asserteq(base->offset, cmp->offset);
-+	ut_asserteq_str(base->description, cmp->description);
-+
-+	return 0;
-+}
-+
-+static int compare_upl_memregion(struct unit_test_state *uts,
-+			      struct memregion *base, struct memregion *cmp)
-+{
-+	ut_asserteq(base->base, cmp->base);
-+	ut_asserteq(base->size, cmp->size);
-+
-+	return 0;
-+}
-+
-+static int compare_upl_mem(struct unit_test_state *uts, struct upl_mem *base,
-+			   struct upl_mem *cmp)
-+{
-+	int i;
-+
-+	ut_asserteq(base->num_regions, cmp->num_regions);
-+	ut_asserteq(base->hotpluggable, cmp->hotpluggable);
-+	for (i = 0; i < base->num_regions; i++)
-+		ut_assertok(compare_upl_memregion(uts, &base->region[i],
-+						  &cmp->region[i]));
-+
-+	return 0;
-+}
-+
-+static int check_device_name(struct unit_test_state *uts, const char *base,
-+			     const char *cmp)
-+{
-+	const char *p;
-+
-+	p = strchr(cmp, '@');
-+	if (p) {
-+		ut_assertnonnull(p);
-+		ut_asserteq_strn(base, cmp);
-+		ut_asserteq(p - cmp, strlen(base));
-+	} else {
-+		ut_asserteq_str(base, cmp);
-+	}
-+
-+	return 0;
-+}
-+
-+static int compare_upl_memmap(struct unit_test_state *uts,
-+			      struct upl_memmap *base, struct upl_memmap *cmp)
-+{
-+	int i;
-+
-+	ut_assertok(check_device_name(uts, base->name, cmp->name));
-+	ut_asserteq(base->num_regions, cmp->num_regions);
-+	ut_asserteq(base->usage, cmp->usage);
-+	for (i = 0; i < base->num_regions; i++)
-+		ut_assertok(compare_upl_memregion(uts, &base->region[i],
-+						  &cmp->region[i]));
-+
-+	return 0;
-+}
-+
-+static int compare_upl_memres(struct unit_test_state *uts,
-+			      struct upl_memres *base, struct upl_memres *cmp)
-+{
-+	int i;
-+
-+	ut_assertok(check_device_name(uts, base->name, cmp->name));
-+	ut_asserteq(base->num_regions, cmp->num_regions);
-+	ut_asserteq(base->no_map, cmp->no_map);
-+	for (i = 0; i < base->num_regions; i++)
-+		ut_assertok(compare_upl_memregion(uts, &base->region[i],
-+						  &cmp->region[i]));
-+
-+	return 0;
-+}
-+
-+static int compare_upl_serial(struct unit_test_state *uts,
-+			      struct upl_serial *base, struct upl_serial *cmp)
-+{
-+	ut_asserteq_str(base->compatible, cmp->compatible);
-+	ut_asserteq(base->clock_frequency, cmp->clock_frequency);
-+	ut_asserteq(base->current_speed, cmp->current_speed);
-+	ut_assertok(compare_upl_memregion(uts, &base->reg, &cmp->reg));
-+	ut_asserteq(base->reg_io_shift, cmp->reg_io_shift);
-+	ut_asserteq(base->reg_offset, cmp->reg_offset);
-+	ut_asserteq(base->reg_io_width, cmp->reg_io_width);
-+	ut_asserteq(base->virtual_reg, cmp->virtual_reg);
-+	ut_asserteq(base->access_type, cmp->access_type);
-+
-+	return 0;
-+}
-+
-+static int compare_upl_graphics(struct unit_test_state *uts,
-+				struct upl_graphics *base,
-+				struct upl_graphics *cmp)
-+{
-+	ut_assertok(compare_upl_memregion(uts, &base->reg, &cmp->reg));
-+	ut_asserteq(base->width, cmp->width);
-+	ut_asserteq(base->height, cmp->height);
-+	ut_asserteq(base->stride, cmp->stride);
-+	ut_asserteq(base->format, cmp->format);
-+
-+	return 0;
-+}
-+
-+static int compare_upl(struct unit_test_state *uts, struct upl *base,
-+		       struct upl *cmp)
-+{
-+	int i;
-+
-+	ut_asserteq(base->addr_cells, cmp->addr_cells);
-+	ut_asserteq(base->size_cells, cmp->size_cells);
-+
-+	ut_asserteq(base->smbios, cmp->smbios);
-+	ut_asserteq(base->acpi, cmp->acpi);
-+	ut_asserteq(base->bootmode, cmp->bootmode);
-+	ut_asserteq(base->fit, cmp->fit);
-+	ut_asserteq(base->conf_offset, cmp->conf_offset);
-+	ut_asserteq(base->addr_width, cmp->addr_width);
-+	ut_asserteq(base->acpi_nvs_size, cmp->acpi_nvs_size);
-+
-+	ut_asserteq(base->num_images, cmp->num_images);
-+	for (i = 0; i < base->num_images; i++)
-+		ut_assertok(compare_upl_image(uts, &base->image[i],
-+					      &cmp->image[i]));
-+
-+	ut_asserteq(base->num_mems, cmp->num_mems);
-+	for (i = 0; i < base->num_mems; i++)
-+		ut_assertok(compare_upl_mem(uts, &base->mem[i], &cmp->mem[i]));
-+
-+	ut_asserteq(base->num_memmaps, cmp->num_memmaps);
-+	for (i = 0; i < base->num_memmaps; i++)
-+		ut_assertok(compare_upl_memmap(uts, &base->memmap[i],
-+					       &cmp->memmap[i]));
-+
-+	ut_asserteq(base->num_memres, cmp->num_memres);
-+	for (i = 0; i < base->num_memres; i++)
-+		ut_assertok(compare_upl_memres(uts, &base->memres[i],
-+					       &cmp->memres[i]));
-+
-+	ut_assertok(compare_upl_serial(uts, &base->serial, &cmp->serial));
-+	ut_assertok(compare_upl_graphics(uts, &base->graphics, &cmp->graphics));
-+
-+	return 0;
-+}
-+
-+/* Basic test of writing and reading UPL handoff */
-+static int upl_test_base(struct unit_test_state *uts)
-+{
-+	oftree tree, check_tree;
-+	struct upl upl, check;
-+	struct abuf buf;
-+
-+	upl_get_test_data(&upl);
-+
-+	ut_assertok(upl_create_handoff_tree(&upl, &tree));
-+	ut_assertok(oftree_to_fdt(tree, &buf));
-+
-+	/*
-+	 * strings in check_tree and therefore check are only valid so long as
-+	 * buf stays around. As soon as we call abuf_uninit they go away
-+	 */
-+	check_tree = oftree_from_fdt(abuf_data(&buf));
-+	ut_assert(ofnode_valid(oftree_path(check_tree, "/")));
-+
-+	ut_assertok(upl_read_handoff(&check, check_tree));
-+	ut_assertok(compare_upl(uts, &upl, &check));
-+	abuf_uninit(&buf);
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(upl_test_base, 0);
-+
-+/* Write an invalid structure */
-+static int upl_test_write_failure(struct unit_test_state *uts)
-+{
-+	struct upl upl;
-+	oftree tree;
-+
-+	upl_get_test_data(&upl);
-+	upl.num_images = UPL_MAX_IMAGES;
-+	ut_asserteq(-E2BIG, upl_create_handoff_tree(&upl, &tree));
-+
-+	upl_get_test_data(&upl);
-+	upl.num_mems = UPL_MAX_MEMS;
-+	ut_asserteq(-E2BIG, upl_create_handoff_tree(&upl, &tree));
-+
-+	upl_get_test_data(&upl);
-+	upl.num_memmaps = UPL_MAX_MEMMAPS;
-+	ut_asserteq(-E2BIG, upl_create_handoff_tree(&upl, &tree));
-+
-+	upl_get_test_data(&upl);
-+	upl.num_memres = UPL_MAX_MEMRESERVED;
-+	ut_asserteq(-E2BIG, upl_create_handoff_tree(&upl, &tree));
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(upl_test_write_failure, 0);
-+
+ 	return 0;
+ }
+diff --git a/include/spl.h b/include/spl.h
+index e958ace2cc6..ed51e6c862d 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -250,6 +250,9 @@ struct spl_image_info {
+ 	uintptr_t entry_point;
+ #if CONFIG_IS_ENABLED(LOAD_FIT) || CONFIG_IS_ENABLED(LOAD_FIT_FULL)
+ 	void *fdt_addr;
++#endif
++#if CONFIG_IS_ENABLED(UPL)
++	int conf_node;		/* FDT offset to selected configuration node */
+ #endif
+ 	u32 boot_device;
+ 	u32 offset;
+@@ -921,4 +924,12 @@ void spl_save_restore_data(void);
+ int spl_load_fit_image(struct spl_image_info *spl_image,
+ 		       const struct legacy_img_hdr *header);
+ 
 +/**
-+ * add_more_nodes() - Add enough extra nodes of a given type to check failures
++ * spl_write_upl_handoff() - Write a Universal Payload hand-off structure
 + *
-+ * Adding too many nodes of node like memory@ and memory-map subnode eventually
-+ * hits the limit, e,g. UPL_MAX_MEMS for /memory@ nodes. This makes more and
-+ * more copies of an existing node until it reaches the limit, at which point it
-+ * checks that upl_read_handoff() returns -E2BIG
-+ *
-+ * @uts: Unit-test state
-+ * @tree: Devicetree to test with
-+ * @dst: Parent path (e.g. "/memory-map"), or, for root nodes, a node template
-+ * (e.g. "memory@"). This is used to figure out what nodes to copy. In the
-+ * former case it copies one of the subnodes (e.g. "/memory-map/acpi@123") and
-+ * in the latter case it copies one of the root subnodes (e.g. /memory@123)
-+ * @total_nodes: Total number of nodes which upl_read_handoff() can handle
-+ * before failing
-+ * Returns 0 if OK, 1 on failure
++ * @spl_image: Information about the image being booted
++ * Return: 0 if OK, -ve on error
 + */
-+static int add_more_nodes(struct unit_test_state *uts, oftree tree,
-+			  const char *dst, int total_nodes)
-+{
-+	ofnode parent, to_copy, node;
-+	bool top_level;
-+	struct upl check;
-+	int count;
++int spl_write_upl_handoff(struct spl_image_info *spl_image);
 +
-+	/* Check we should create subnodes in the root node (at top level)  */
-+	top_level = *dst != '/';
-+
-+	parent = top_level ? oftree_root(tree) : oftree_path(tree, dst);
-+	ut_assert(ofnode_valid(parent));
-+
-+	/* count the number of nodes in the parent and find a node to copy */
-+	count = 0;
-+	ofnode_for_each_subnode(node, parent) {
-+		if (top_level &&
-+		    strncmp(dst, ofnode_get_name(node), strlen(dst)))
-+			continue;
-+		to_copy = node;
-+		count++;
-+	}
-+
-+	/* add one node at a time until it fails */
-+	for (; count < total_nodes;) {
-+		char str[30];
-+
-+		if (top_level)
-+			sprintf(str, "%s%d", dst, count + 1);
-+		else
-+			sprintf(str, "any-%d", count + 1);
-+		ut_assertok(ofnode_copy_node(parent, str, to_copy, &node));
-+		if (++count < total_nodes)
-+			ut_assertok(upl_read_handoff(&check, tree));
-+		else
-+			ut_asserteq(-E2BIG, upl_read_handoff(&check, tree));
-+	}
-+
-+	/* delete the last node and see that it works */
-+	ut_assertok(ofnode_delete(&node));
-+	ut_assertok(upl_read_handoff(&check, tree));
-+
-+	return 0;
-+}
-+
-+/* Read a structure we cannot parse */
-+static int upl_test_read_failure(struct unit_test_state *uts)
-+{
-+	oftree base_tree, tree;
-+	struct abuf buf;
-+	struct upl upl;
-+
-+	upl_get_test_data(&upl);
-+	ut_assertok(upl_create_handoff_tree(&upl, &base_tree));
-+	ut_assertok(oftree_to_fdt(base_tree, &buf));
-+	tree = oftree_from_fdt(abuf_data(&buf));
-+
-+	/* Add more and more nodes to /options/upl-image until it fails */
-+	ut_assertok(add_more_nodes(uts, tree, UPLPATH_UPL_IMAGE,
-+				   UPL_MAX_IMAGES + 1));
-+
-+	/*
-+	 * Do the same with the other node which have implementation-defined
-+	 * limits
-+	 */
-+	ut_assertok(add_more_nodes(uts, tree, UPLN_MEMORY "@",
-+				   UPL_MAX_MEMS + 1));
-+	ut_assertok(add_more_nodes(uts, tree, UPLPATH_MEMORY_MAP,
-+				   UPL_MAX_MEMMAPS + 1));
-+	ut_assertok(add_more_nodes(uts, tree, UPLPATH_MEMORY_RESERVED,
-+				   UPL_MAX_MEMRESERVED + 1));
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(upl_test_read_failure, 0);
+ #endif
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
