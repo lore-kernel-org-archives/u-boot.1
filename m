@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6120EC83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68030C83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:09:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DBA9865A0;
-	Wed, 30 Aug 2023 20:06:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E004E865AA;
+	Wed, 30 Aug 2023 20:06:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TzwPFgvg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bz4KhDwW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 232178652F; Wed, 30 Aug 2023 20:06:19 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id CDA3886547; Wed, 30 Aug 2023 20:06:19 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43A02865A2
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:06:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1904D8654D
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:06:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34deab8010dso91085ab.3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:06:00 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7927611c54bso1910339f.2
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:06:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693418759; x=1694023559; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K67sAl5Odn/HaNL2GTyk2qXS8EFoiuRALgPI6jzn0Hw=;
- b=TzwPFgvgNwbKILasNh6Jspwgm4vDKKMXHMqNBzWXidmCFfZxoXbPDbedL4gCq7psD1
- K/9/eCRfDHEC0oXVrxsF2s04E04K5KutgMxgqlEXgdWZpqsS4iZE3nJjnwz8NJNGePAd
- rXRkHubO8496Q8GADPTZhrhkrPTPXhOdpciXo=
+ bh=uOA5pixR/dcYMieiAbzYbNxHyKmRIXkW5w4F4GRKQa8=;
+ b=Bz4KhDwW0wb8V63Wqpvo3KEq/6nQS8uMb+UPztXkZ4YKVvMPa0pcbWvtxOdPw51FgP
+ KdSaGDvzjm6zflIJ9kYsmfVxoIQgwmipFUZ0qIo9POtigaUTnxXYjOTbE+D/px5kiHf5
+ VOKCKrjvtq9nrBKpJ00fcPgZNzFciobUCkXw8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693418759; x=1694023559;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K67sAl5Odn/HaNL2GTyk2qXS8EFoiuRALgPI6jzn0Hw=;
- b=XpHyRycsLXg2Nup422rD7x8LklLN2+/Fm5sxcX3pr0bFuqu/gSIwplTeDgfX7ebC7t
- YbX0xg1VHQ1NCTK1iJcRBKXhPxbZe2xofwa2nI9SE5jshopicnOU9yK/efPLXbOqvEtT
- osHaTawEC8LIH5Pb5gOJT/eNLQqJbk0mwYVXJA0I3VTQjAWUlolHkiS5tA7WX7XjTJs8
- OYEN7/uOFfR4f0SafafdHB/tHobTRqkCa7/So0RiTsMAzDxc21GDOWPxfKfohaXhe7fi
- FUWu6+KM39xS1nF/5qAVCI6Dhi/mxhRjnMZTGfRJozfHhlWJSNubIIuo4hX/XbaCCMZD
- q18w==
-X-Gm-Message-State: AOJu0YwSscN8uiaqRB8/K7mWaUc58h2iZHHHvA5PtCawCiyvzrqEbgB0
- 4jPekTwMlTYEvQhPKaRtLsr4HH/FQeK1Ft2KfYQ=
-X-Google-Smtp-Source: AGHT+IE1/eQVH32PIdLk8xxspBEUpJ4j/nESHkVN3XPeBInlkyIE19dVXYAqb1BB7gaqVkcaYOapbA==
-X-Received: by 2002:a92:cc0d:0:b0:34a:c4ae:1937 with SMTP id
- s13-20020a92cc0d000000b0034ac4ae1937mr3166169ilp.13.1693418758915; 
- Wed, 30 Aug 2023 11:05:58 -0700 (PDT)
+ bh=uOA5pixR/dcYMieiAbzYbNxHyKmRIXkW5w4F4GRKQa8=;
+ b=XXfOBZBXFnd8h/qlFZsRT4xwbOBf+Bbj/xpwx0vEmxKSRVbNJHHaS8RP2FLq84dJQN
+ ooOpxGH3zw+NNgC6oe4YnwF1nHEElWN7heuhNgfv6ZHIxgP49RPE4Ju/hRiNlc/S2v70
+ iB9Vw43cCBtYjqkVlCQT0FKskwtoXCiUMyj5I9bVTn6XGgzzAZegHqr8JJCpfJCYShGY
+ 7AtR7+0c2TZKD/2DREeLrMy70WLs+9oP0Uz96A2OOysLBb+mVETA7l8Wzx0i56oqbiKW
+ m1DBXZSdujG0zzR4ZMzIjCtahg+yvKLeN2AkPSlGz12530gFxpd1QZc+NTjbpY0qB1AG
+ IslQ==
+X-Gm-Message-State: AOJu0YzuJGny+aIYTwne6QTjnUTQCogW4FkmE0E53vemfyQHwRSfOm+z
+ JWJgf8i4AzPJwZwXhOzT0Y3Ry2XSOxIFzpFoMaQ=
+X-Google-Smtp-Source: AGHT+IGS4VqJIXxGv+IJFqi3UfvQB6anPALF/4bOc3mJLCKXhXbeuOBRGu8lAfuEcUaIFczZQd2Y5g==
+X-Received: by 2002:a5e:8406:0:b0:792:881d:c6ab with SMTP id
+ h6-20020a5e8406000000b00792881dc6abmr3270087ioj.18.1693418759781; 
+ Wed, 30 Aug 2023 11:05:59 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.05.58
+ dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.05.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 11:05:58 -0700 (PDT)
+ Wed, 30 Aug 2023 11:05:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH 24/32] dm: core: Add tests for oftree_path()
-Date: Wed, 30 Aug 2023 12:04:55 -0600
-Message-ID: <20230830180524.315916-25-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Pavel Skripkin <paskripkin@gmail.com>
+Subject: [PATCH 25/32] sandbox: Move reading the RAM buffer into a better place
+Date: Wed, 30 Aug 2023 12:04:56 -0600
+Message-ID: <20230830180524.315916-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230830180524.315916-1-sjg@chromium.org>
 References: <20230830180524.315916-1-sjg@chromium.org>
@@ -88,39 +89,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a few simple tests for getting the root node, since this is handled
-as a special case in the implementation.
+This should not happen in the argument-parsing function. Move it to the
+main program.
+
+Add some debugging for reading/writing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/dm/ofnode.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/sandbox/cpu/start.c | 19 +++++++++++--------
+ arch/sandbox/cpu/state.c |  1 +
+ 2 files changed, 12 insertions(+), 8 deletions(-)
 
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 5e63efdfa89..af3aa1e2ec5 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -228,6 +228,9 @@ static int dm_test_ofnode_read(struct unit_test_state *uts)
- 	ofnode node;
- 	int size;
+diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
+index 234652872ec..d4c4d071aef 100644
+--- a/arch/sandbox/cpu/start.c
++++ b/arch/sandbox/cpu/start.c
+@@ -277,17 +277,9 @@ SANDBOX_CMDLINE_OPT_SHORT(program, 'p', 1, "U-Boot program name");
+ static int sandbox_cmdline_cb_memory(struct sandbox_state *state,
+ 				     const char *arg)
+ {
+-	int err;
+-
+ 	/* For now assume we always want to write it */
+ 	state->write_ram_buf = true;
+ 	state->ram_buf_fname = arg;
+-
+-	err = os_read_ram_buf(arg);
+-	if (err) {
+-		printf("Failed to read RAM buffer '%s': %d\n", arg, err);
+-		return err;
+-	}
+ 	state->ram_buf_read = true;
  
-+	node = oftree_path(oftree_default(), "/");
-+	ut_assert(ofnode_valid(node));
+ 	return 0;
+@@ -517,6 +509,17 @@ int sandbox_main(int argc, char *argv[])
+ 	if (os_parse_args(state, argc, argv))
+ 		return 1;
+ 
++	if (state->ram_buf_fname) {
++		ret = os_read_ram_buf(state->ram_buf_fname);
++		if (ret) {
++			printf("Failed to read RAM buffer '%s': %d\n",
++			       state->ram_buf_fname, ret);
++		} else {
++			state->ram_buf_read = true;
++			log_debug("Read RAM buffer from '%s'\n", state->ram_buf_fname);
++		}
++	}
 +
- 	node = ofnode_path("/a-test");
- 	ut_assert(ofnode_valid(node));
+ 	/* Remove old memory file if required */
+ 	if (state->ram_buf_rm && state->ram_buf_fname) {
+ 		os_unlink(state->ram_buf_fname);
+diff --git a/arch/sandbox/cpu/state.c b/arch/sandbox/cpu/state.c
+index d67834988fd..fcc0028ff4a 100644
+--- a/arch/sandbox/cpu/state.c
++++ b/arch/sandbox/cpu/state.c
+@@ -513,6 +513,7 @@ int state_uninit(void)
+ 			printf("Failed to write RAM buffer\n");
+ 			return err;
+ 		}
++		log_debug("Wrote RAM to file '%s'\n", state->ram_buf_fname);
+ 	}
  
-@@ -256,6 +259,9 @@ static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
- 	ofnode node;
- 	int size;
- 
-+	node = oftree_path(otree, "/");
-+	ut_assert(ofnode_valid(node));
-+
- 	node = oftree_path(otree, "/node/subnode");
- 	ut_assert(ofnode_valid(node));
- 
+ 	if (state->write_state) {
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
