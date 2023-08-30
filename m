@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6BBC83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FCD0C83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38FDA86741;
-	Wed, 30 Aug 2023 20:06:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 80BA38653E;
+	Wed, 30 Aug 2023 20:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JM+JaaaF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jrVKI9zQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29F868652F; Wed, 30 Aug 2023 20:06:12 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 8DC7086541; Wed, 30 Aug 2023 20:06:14 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B97A8652F
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:05:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 990B386540
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:05:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-7928ba24936so2625739f.0
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:05:55 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-792409bc1cdso30083039f.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:05:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693418754; x=1694023554; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693418755; x=1694023555; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=upO0ViSSnhWApJOk+dmYfAdcaH13tm0pGPcNXwfwrjk=;
- b=JM+JaaaFyphe4YplEtCPmUU6BEF3uSLqPaCYrUazPwi4qf60Rr3SmEYbqlCYHdn6zq
- U5PkNx+AxkziIvNkTOp0nrv4fraOF5taY0zWG5qOi0eJfcRqbeqcRXJ+3hVM+J6aqPY9
- LU+j4p7u5xDja5dnYc3aQt+igvX1m9vhVNAuk=
+ bh=8FpTVlwbKaUDs18R/+3lDUs9Avhp+XQz6uZXEju8SoQ=;
+ b=jrVKI9zQp0/2DYfq4+TZXb+qYzsxPy+TxpVPi2pc5JESKPNDaxUPBXG28kdfKDBIoy
+ XvUuQRyaqc8rO7H/ifeN8ML/Rn7aw3DvvArDUjW8VylvYMFd57dDnKh4AS2ZQnDg2DOj
+ F77IXNrh0PHj4ReaS/Z8BDZp/FBgoJiBVWyhM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693418754; x=1694023554;
+ d=1e100.net; s=20221208; t=1693418755; x=1694023555;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=upO0ViSSnhWApJOk+dmYfAdcaH13tm0pGPcNXwfwrjk=;
- b=Av5tOE1n8K81O0XSxsOLR8wzxV9pPhnoIluixUgfPSDh/WPFOeiyy3iaACBP56tVuF
- eE6AM+WEeuhGF4BZQq5KCpTf37PzHdS6UO+xbQdlQcqk7v75pDTfPDOI0kdtpopviS7l
- pD5TiJxnazDZshVL2BQ8PlQY3azQaFn+zbjyIuyqFOKIv/XdemfhUQmeiQBwP3Yn6y4X
- 8S1+iCbr7QHdND60+XkRXxFc+OYk81mil5gPo77PbKOG1c7CjzE/iX6fv3NBZAIhrflh
- rAGMdLB92ZZnQuQ1u9GE7QMKoTWMt4QBeSxwWKkx2ihy7qZqn6yPSXq3lfOyM0ybv1lH
- c+Dg==
-X-Gm-Message-State: AOJu0Yx40JXCO8H31OOev1GCrvAlpmhXtkwsvAhIz3LXsIiQnfqqmLiN
- FGTYekORuv+jgDktLdp37lOJpLNbDogyEF76OOs=
-X-Google-Smtp-Source: AGHT+IFoZFc0ufVJ987aNJ3CDltSrcV2LoPtzJuKL1bPWWuGCJxTLXRGWyj7Xo1BdeqyAaHFIMGhzA==
-X-Received: by 2002:a6b:680e:0:b0:794:eb37:b0c4 with SMTP id
- d14-20020a6b680e000000b00794eb37b0c4mr3022024ioc.21.1693418754274; 
- Wed, 30 Aug 2023 11:05:54 -0700 (PDT)
+ bh=8FpTVlwbKaUDs18R/+3lDUs9Avhp+XQz6uZXEju8SoQ=;
+ b=JtvOjz/XYJhnIIGfY/eaGKqVk0e99koNttK0jjc+2URfPiVF7rupsbtT2A5+DwoJl2
+ TbGocdPz6q2S1qkk+WIxtMrNTtMEjhKf4k4pgVF1ZjONrl+uOjjs4R0NWikOE9ES9Cfr
+ Ix8/uXvy3L7HjgOkKTVOJgqhTIDTZ86xV2xEtz32VBJOZcZaQot5CnJtbfsfLNDjWM77
+ BPWtBOvml2ZNTWxJBBWetzrPnIoW6JUlf7Mgv0WTbMunIizBOVJld6lC5Jvb/O1mHIN6
+ XUDmTc1Gcox365vfjcHZkEmhbDpKbnG3CNIdXP1Fsy5zGLE9F0XTynho5torgMkXS1IR
+ rJLQ==
+X-Gm-Message-State: AOJu0YxHcG9FIj0kC3sNgPb3FY47SmwcoHJOAs/5lh319kI2/kfhWErp
+ 8TeHT9S3I5BMdvoAr5YovuIlrZz+XgY8n0rwtOY=
+X-Google-Smtp-Source: AGHT+IGlIEV/bvq7iz1dcH3CHXlFDgfchL8SNxU1UGWx2DuEwrEwAVvh5Hh8fntlde36gewXnHaoZw==
+X-Received: by 2002:a05:6602:4815:b0:792:6aaa:b54 with SMTP id
+ ed21-20020a056602481500b007926aaa0b54mr319590iob.7.1693418755115; 
+ Wed, 30 Aug 2023 11:05:55 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.05.53
+ dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.05.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 30 Aug 2023 11:05:54 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH 19/32] dm: core: Add a way to copy a node
-Date: Wed, 30 Aug 2023 12:04:50 -0600
-Message-ID: <20230830180524.315916-20-sjg@chromium.org>
+Subject: [PATCH 20/32] dm: core: Add a way to delete a node
+Date: Wed, 30 Aug 2023 12:04:51 -0600
+Message-ID: <20230830180524.315916-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230830180524.315916-1-sjg@chromium.org>
 References: <20230830180524.315916-1-sjg@chromium.org>
@@ -88,141 +88,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a function to copy a node to another place under a new name. This is
-useful at least for testing, since copying a test node with existing
-properties is easier than writing the code to generate it all afresh.
+Add a function to delete a node in an existing tree.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/core/ofnode.c | 20 ++++++++++++++
- include/dm/ofnode.h   | 15 +++++++++++
- test/dm/ofnode.c      | 63 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 98 insertions(+)
+ drivers/core/of_access.c | 65 ++++++++++++++++++++++++++++++++++++++++
+ drivers/core/ofnode.c    | 23 ++++++++++++++
+ include/dm/of_access.h   | 18 +++++++++++
+ include/dm/ofnode.h      | 13 ++++++++
+ test/dm/ofnode.c         | 31 +++++++++++++++++++
+ 5 files changed, 150 insertions(+)
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 7100fc63035..ba8385af7b4 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -1743,3 +1743,23 @@ int ofnode_copy_props(ofnode dst, ofnode src)
+diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
+index 1bb4d8eab70..0df5c867c8b 100644
+--- a/drivers/core/of_access.c
++++ b/drivers/core/of_access.c
+@@ -1040,3 +1040,68 @@ int of_add_subnode(struct device_node *parent, const char *name, int len,
  
  	return 0;
  }
 +
-+int ofnode_copy_node(ofnode dst_parent, const char *name, ofnode src,
-+		     ofnode *nodep)
++int __of_remove_property(struct device_node *np, struct property *prop)
 +{
-+	ofnode node;
-+	int ret;
++	struct property **next;
 +
-+	ret = ofnode_add_subnode(dst_parent, name, &node);
-+	if (ret) {
-+		if (ret == -EEXIST)
-+			*nodep = node;
-+		return log_msg_ret("add", ret);
++	for (next = &np->properties; *next; next = &(*next)->next) {
++		if (*next == prop)
++			break;
 +	}
-+	ret = ofnode_copy_props(node, src);
-+	if (ret)
-+		return log_msg_ret("cpy", ret);
-+	*nodep = node;
++	if (*next == NULL)
++		return -ENODEV;
++
++	/* found the node */
++	*next = prop->next;
 +
 +	return 0;
 +}
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index fa6a8318899..80708a3644c 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -1567,4 +1567,19 @@ int ofnode_add_subnode(ofnode parent, const char *name, ofnode *nodep);
-  */
- int ofnode_copy_props(ofnode dst, ofnode src);
++
++int of_remove_property(struct device_node *np, struct property *prop)
++{
++	int rc;
++
++	mutex_lock(&of_mutex);
++
++	rc = __of_remove_property(np, prop);
++
++	mutex_unlock(&of_mutex);
++
++	return rc;
++}
++
++int of_remove_node(struct device_node *to_remove)
++{
++	struct device_node *parent = to_remove->parent;
++	struct device_node *np, *prev;
++
++	if (!parent)
++		return -EPERM;
++	prev = NULL;
++	__for_each_child_of_node(parent, np) {
++		if (np == to_remove)
++			break;
++		prev = np;
++	}
++	if (!np)
++		return -EFAULT;
++
++	/* if there is a previous node, link it to this one's sibling */
++	if (prev)
++		prev->sibling = np->sibling;
++	else
++		parent->child = np->sibling;
++
++	/*
++	 * don't free it, since if this is an unflattened tree, all the memory
++	 * was alloced in one block; this pointer will be somewhere in the
++	 * middle of that
++	 *
++	 * TODO(sjg@chromium.org): Consider marking nodes as 'allocated'?
++	 *
++	 * free(np);
++	 */
++
++	return 0;
++}
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index ba8385af7b4..fe143f99091 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -1720,6 +1720,29 @@ int ofnode_add_subnode(ofnode node, const char *name, ofnode *subnodep)
+ 	return ret;	/* 0 or -EEXIST */
+ }
+ 
++int ofnode_delete(ofnode *nodep)
++{
++	ofnode node = *nodep;
++	int ret;
++
++	assert(ofnode_valid(node));
++	if (ofnode_is_np(node)) {
++		ret = of_remove_node(ofnode_to_np(node));
++	} else {
++		void *fdt = ofnode_to_fdt(node);
++		int offset = ofnode_to_offset(node);
++
++		ret = fdt_del_node(fdt, offset);
++		if (ret)
++			ret = -EFAULT;
++	}
++	if (ret)
++		return ret;
++	*nodep = ofnode_null();
++
++	return 0;
++}
++
+ int ofnode_copy_props(ofnode dst, ofnode src)
+ {
+ 	struct ofprop prop;
+diff --git a/include/dm/of_access.h b/include/dm/of_access.h
+index 9361d0a87bf..de740d44674 100644
+--- a/include/dm/of_access.h
++++ b/include/dm/of_access.h
+@@ -597,4 +597,22 @@ int of_write_prop(struct device_node *np, const char *propname, int len,
+ int of_add_subnode(struct device_node *node, const char *name, int len,
+ 		   struct device_node **subnodep);
  
 +/**
-+ * ofnode_copy_node() - Copy a node to another place
++ * of_remove_property() - Remove a property from a node
 + *
-+ * If a node with this name already exists in dst_parent, this returns an
-+ * .error
-+ *
-+ * @dst_parent: Parent of the newly copied node
-+ * @name: Name to give the new node
-+ * @src: Source node to copy
-+ * @nodep: Returns the new node, or the existing node if there is one
-+ * Return: 0 if OK, -EEXIST if dst_parent already has a node with this parent
++ * @np: Node to remove from
++ * @prop: Pointer to property to remove
++ * Return 0 if OK, -ENODEV if the property could not be found in the node
 + */
-+int ofnode_copy_node(ofnode dst_parent, const char *name, ofnode src,
-+		     ofnode *nodep);
++int of_remove_property(struct device_node *np, struct property *prop);
++
++/**
++ * of_remove_node() - Remove a node from the tree
++ *
++ * @to_remove: Node to remove
++ * Return: 0 if OK, -EPERM if it is the root node (wWhich cannot be removed),
++ * -ENOENT if the tree is broken (to_remove is not a child of its parent)
++ */
++int of_remove_node(struct device_node *to_remove);
++
+ #endif
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 80708a3644c..8be617b2104 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -1582,4 +1582,17 @@ int ofnode_copy_props(ofnode dst, ofnode src);
+ int ofnode_copy_node(ofnode dst_parent, const char *name, ofnode src,
+ 		     ofnode *nodep);
+ 
++/**
++ * ofnode_delete() - Delete a node
++ *
++ * Delete a node from the tree
++ *
++ * @nodep: Pointer to node to delete (set to ofnode_null() on success)
++ * Return: 0 if OK, -ENOENT if the node does not exist, -EPERM if it is the root
++ * node (wWhich cannot be removed), -EFAULT if the tree is broken (to_remove is
++ * not a child of its parent),
++ *
++ */
++int ofnode_delete(ofnode *nodep);
 +
  #endif
 diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 63b651df84e..fe7916c2722 100644
+index fe7916c2722..cb7fc907c82 100644
 --- a/test/dm/ofnode.c
 +++ b/test/dm/ofnode.c
-@@ -1343,3 +1343,66 @@ static int dm_test_oftree_new(struct unit_test_state *uts)
+@@ -1406,3 +1406,34 @@ static int dm_test_ofnode_copy_node_ot(struct unit_test_state *uts)
  	return 0;
  }
- DM_TEST(dm_test_oftree_new, UT_TESTF_SCAN_FDT);
+ DM_TEST(dm_test_ofnode_copy_node_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
 +
-+static int check_copy_node(struct unit_test_state *uts, ofnode dst, ofnode src,
-+			   ofnode *nodep)
++static int dm_test_ofnode_delete(struct unit_test_state *uts)
 +{
-+	u32 reg[2], val;
 +	ofnode node;
 +
-+	ut_assertok(ofnode_copy_node(dst, "copy-test", src, &node));
-+
-+	ut_assertok(ofnode_read_u32(node, "ping-expect", &val));
-+	ut_asserteq(3, val);
-+
-+	ut_asserteq_str("denx,u-boot-fdt-test",
-+			ofnode_read_string(node, "compatible"));
-+
-+	/* check that a property with the same name is overwritten */
-+	ut_assertok(ofnode_read_u32_array(node, "reg", reg, ARRAY_SIZE(reg)));
-+	ut_asserteq(3, reg[0]);
-+	ut_asserteq(1, reg[1]);
-+
-+	/* reset the compatible so the live tree does not change */
-+	ut_assertok(ofnode_write_string(node, "compatible", "nothing"));
-+	*nodep = node;
-+
-+	return 0;
-+}
-+
-+static int dm_test_ofnode_copy_node(struct unit_test_state *uts)
-+{
-+	ofnode src, dst, node, try;
-+
 +	/*
-+	 * These nodes are chosen so that the src node is before the destination
-+	 * node in the tree. This doesn't matter with livetree, but with
-+	 * flattree any attempt to insert a property earlier in the tree will
-+	 * mess up the offsets after it.
++	 * At present the livetree is not restored after changes made in tests.
++	 * See test_pre_run() for how this is done with the other FDT and
++	 * dm_test_pre_run() where it sets up the root-tree pointer. So use
++	 * nodes which don't matter to other tests.
++	 *
++	 * We could fix this by detecting livetree changes and regenerating it
++	 * before the next test if needed.
 +	 */
-+	src = ofnode_path("/b-test");
-+	dst = ofnode_path("/some-bus");
++	node = ofnode_path("/leds/iracibble");
++	ut_assert(ofnode_valid(node));
++	ut_assertok(ofnode_delete(&node));
++	ut_assert(!ofnode_valid(node));
++	ut_assert(!ofnode_valid(ofnode_path("/leds/iracibble")));
 +
-+	ut_assertok(check_copy_node(uts, dst, src, &node));
++	node = ofnode_path("/leds/default_on");
++	ut_assert(ofnode_valid(node));
++	ut_assertok(ofnode_delete(&node));
++	ut_assert(!ofnode_valid(node));
++	ut_assert(!ofnode_valid(ofnode_path("/leds/default_on")));
 +
-+	/* check trying to copy over an existing node */
-+	ut_asserteq(-EEXIST, ofnode_copy_node(dst, "copy-test", src, &try));
-+	ut_asserteq(try.of_offset, node.of_offset);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_ofnode_copy_node, UT_TESTF_SCAN_FDT);
-+
-+/* test ofnode_copy_node() with the 'other' tree */
-+static int dm_test_ofnode_copy_node_ot(struct unit_test_state *uts)
-+{
-+	oftree otree = get_other_oftree(uts);
-+	ofnode src, dst, node;
-+
-+	src = ofnode_path("/b-test");
-+	dst = oftree_path(otree, "/node/subnode2");
-+	ut_assertok(check_copy_node(uts, dst, src, &node));
++	ut_asserteq(2, ofnode_get_child_count(ofnode_path("/leds")));
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_ofnode_copy_node_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_delete, UT_TESTF_SCAN_FDT);
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
