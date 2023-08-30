@@ -4,77 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F414C83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 06:38:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A2B8C83F01
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 06:57:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC9C9864D7;
-	Wed, 30 Aug 2023 08:38:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6EFA48651C;
+	Wed, 30 Aug 2023 08:57:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sUCCmwpP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lSrTQ6sx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 761FE86518; Wed, 30 Aug 2023 08:38:01 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4DB598651A; Wed, 30 Aug 2023 08:57:49 +0200 (CEST)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8d::610])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E1E9863FD
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 08:37:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59DAB86475
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 08:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-529fb2c6583so6702826a12.1
- for <u-boot@lists.denx.de>; Tue, 29 Aug 2023 23:37:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693377478; x=1693982278; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bj3BC4sOja/kBtvpn2XbSWUIckQE23XwSubZ20sdqYs=;
- b=sUCCmwpPLVX/QbqZtXRBEdlkwZnJIrQPD4cGDqSrwVkX3XXpCVmnf8yVAKYvbIMxEF
- GQhyqNjT49KKWsqyk9wrhft9W7mqQtBNtMgRPP8gPi+93cjOVNmCyr/ZTwD96XsHo52q
- txGhE43pVxPeUqEGZt9o07jIc85VYKp54ly14FqfkJR5nIuTr9iE9IQEBb/LniJ21Bml
- nTWNQlbws+geLjrOHLy9YqV+Re5Vd1080F80BWCLR5jiuvBGaf2gFPgHPSVpIgrs+XD1
- gp/u+6yssF2R8ZC3j+pFqdU/cNeun6Crz9gCLxJvwPbcG3mx1j2OeLLpyt8+2mDLp0XX
- SKkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693377478; x=1693982278;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bj3BC4sOja/kBtvpn2XbSWUIckQE23XwSubZ20sdqYs=;
- b=fPesy7M01Hw3IVOGeI2bB3b7KM+wvQGFfOtcTxX/Hk+7u5RhpwuPZrkSpWMqIbGsNt
- J3rbd2dmxGBkBQG99/niwf6Rkx0fCNwSYCgaX8yvYBvGtlNJ9PWbfgvIpxpYk8zyZHGW
- U3RCEvZYudcbkwa7Ao+bv3JAKO75rMcmNGqfoyULLE16gp8s6IW7muS8J/5VWD3jdywF
- LSJP4NmVWKFP+MOk9t255lBx06h5xwVDUS1Ks1fwpl1q/yQ2vkr/uHCthcEqjGY9L34Y
- 09E2qfyzRINhmKxuDqE3E1kLaY4rP/Ylzs5ApCDxM958JCbb0nNqWfya43ggwHCI3+Nk
- o/Bw==
-X-Gm-Message-State: AOJu0YxPw0JVeu7zEYiJMTBt3ILcn0Mm76x8QQ8Cj3ZEGMh5OtKvRZYL
- XDUuEElvfEP0CyVQrpJo+TidpeXG/w2fGt70NlCh7A==
-X-Google-Smtp-Source: AGHT+IEI2w1v9tyOJZmyTgeEbw2m4XfYojSej8HIFlx8X25F7NP2eY/qPyqbnqhSiHUVMmnggFbRrgiY1E+TvnqM8Ss=
-X-Received: by 2002:a05:6402:1a33:b0:522:3a89:a79d with SMTP id
- be19-20020a0564021a3300b005223a89a79dmr1025973edb.2.1693377477829; Tue, 29
- Aug 2023 23:37:57 -0700 (PDT)
+ spf=fail smtp.mailfrom=neal.frager@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bXnjWWw4diGuAz/f6YGT3S/uvbll/qkLXfbkx2Bv5wcEHZ9E3QnsyaXjOIWOsEETSO/ZElshbUKTUFztXvUT69I9JtJyLMIpyBR6MbwN33zhXQrncQ/TX/LLWOk8S8vNth4cER2IMeGwC/yGet3SDU37qIVVMTJ0igBhkDsPbk6UDEoeli2BBlDBV33I2D/nBUXWMMNpG1Zz6Bw10a9WQAv1wzldnOLUDE07J28SoBNpzru3p7R34O5yO1NCE+Q6uSLC5MqBqC141XemFHt3Aha6fW8zRsnIXyVh3tGlHXL58EqiFSKDye98VaKvwaG8payWTyJg+K1o/i+99afqwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gpKgToRi+li55mFoqwWZj6XmtMU1mUkE999tH6ODFZ4=;
+ b=n+8dwcjI3JnGi63ANBkeZxqgpBTDcR/ay6pPEBtkUzA7NDV+2XNKz5+qY/h1anX1xmaGZTKz1eYBTCElZgQf8Ln1yymyiF4/Rr2fgNeT+I8gBWgNgwJIC9hMCgGgXvnaRqA4DPpTUdm00vP7yUfFCIr9kBkIAFprN+truWLugffl6Hm61i8sRS/TzyKKpuLaAVnKHwzHcWaCZs82aqgEsvryRv+HA8E/0yaJ/mWGotMBbGsX0L74hyLyah/dRWC1gb+PElpXuwxeRX7YtdOnA2HEF1G6bBbJ8u5cx5Vle1Jg3k5HG8MImG5/3i3PXr52QcgkmoVdP3TRvX1CBPlZ7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gpKgToRi+li55mFoqwWZj6XmtMU1mUkE999tH6ODFZ4=;
+ b=lSrTQ6sxRvG9jXpznhvDH9UMq/K1bwwgqR43YL7SmO7lH52ezcRl6m7ay4BX6KZRbmCvlTkXeBv6LQoXrcxnNav8dLxPlifDDB834YJ8nm/ngR5Vt4TkfZ47CUDc+5irwjRJiZ4+uMl45Dd7I+Yeo1yArEZorvGnarYztKHt3/8=
+Received: from CY5PR13CA0025.namprd13.prod.outlook.com (2603:10b6:930::8) by
+ MW4PR12MB7191.namprd12.prod.outlook.com (2603:10b6:303:22d::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.34; Wed, 30 Aug 2023 06:57:43 +0000
+Received: from CY4PEPF0000E9D4.namprd03.prod.outlook.com
+ (2603:10b6:930:0:cafe::da) by CY5PR13CA0025.outlook.office365.com
+ (2603:10b6:930::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20 via Frontend
+ Transport; Wed, 30 Aug 2023 06:57:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D4.mail.protection.outlook.com (10.167.241.147) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.17 via Frontend Transport; Wed, 30 Aug 2023 06:57:41 +0000
+Received: from SATLEXMB07.amd.com (10.181.41.45) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 30 Aug
+ 2023 01:57:41 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB07.amd.com
+ (10.181.41.45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 29 Aug
+ 2023 23:57:40 -0700
+Received: from xirengwts09.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
+ Transport; Wed, 30 Aug 2023 01:57:40 -0500
+From: Neal Frager <neal.frager@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, Neal Frager <neal.frager@amd.com>
+Subject: [PATCH v1 1/1] arch/arm/dts/zynqmp-sck-kr-g-revB.dts: add
+ output-enable pins
+Date: Wed, 30 Aug 2023 07:57:37 +0100
+Message-ID: <20230830065737.4083577-1-neal.frager@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <20230826090633.239342-6-sughosh.ganu@linaro.org>
- <CAPnjgZ3AexW4vfO-A8WYGE0OD5EZnOUA7tA1QP71Bcw51QArBQ@mail.gmail.com>
- <CADg8p96zOXDaVV9CFcbeKgdZwG7pwfCp66GEY_eoYC6FCHeKZA@mail.gmail.com>
- <CAPnjgZ3W-jRRAbaS3gckcd8CrjRUpcBTvNS+uPnJ70CXNeCWAQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3W-jRRAbaS3gckcd8CrjRUpcBTvNS+uPnJ70CXNeCWAQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 30 Aug 2023 12:07:46 +0530
-Message-ID: <CADg8p96xtLBt7EL+d+TyaqDQuC49zWD-DhcyF6vkuXNK0i27QQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
- node/property removal
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D4:EE_|MW4PR12MB7191:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7ae0a8c1-ddc8-4247-7831-08dba92667e1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 9mEdJtpU9i8UwONbmPIDEDDc3wY4ZAq88VtnHLZLkWg60ekkOCSPkUEP0sS3LkrYmRe1gmYsE2wL6mweejZAWeJVQK4u2G4hxrm0EUForUiCiaH4WUaE9LeNUJsRtmDN1KBN0mGeLEATpQr8qws5PZNT3lO7qSZQ1VyAmxFVlSdb1r8o9+MU1/pmBn9Yb4EUaQXgXwu2ogTeoXv0Txm57TE1S0zw2N/tatFfCB4ANJhbibtlyMyzCBttiN7LWLKsKwdCeefud/hkAi3Z14i05AtyihGOxqIXpDQ/XtrEsoWgePr69BRogUSg6zLEQIRCj7jgcQFP+jk/bseLZsNdTuVpVR1WYomjQAFez5f2gD1cD4TzTtkugsno6OzCpA63CzVkxNxI0Tj4f31myO8ujgn7IUWLBwxEi0GJZZeiAp/JmlEC5UNu/HW7+0j70fLRMfKba9OJ0hh6+SqvdsNkpSIdC9X+bfa2apsHtatrNT1Q1mQiLWdyNA9x2lxeMol3zCeqm3WKwvChO40sddVffneun8cIBrBG4R9YTUzO9bHkp+q3vBUNd/96wZ9KN7A6mxSvpeUy4cYSW2TN6+FUachiSBM+zQ6OZslj07OhcLCLvOtvqX6WxL2/NBZgknewTfYNGzmbfEVRkesFcnvGLhj7i76Md7f18DBByxIL9RHVjlR/lcU346N644MCxSqCco1kTG3OzX4sXjmSlrfgTJsgGyWjWb91WqZtVKeubPubkSBCDdSqwmfYtUD08GYU7OOf3sOe++W5H0qEJyu/rA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(396003)(376002)(136003)(39860400002)(346002)(1800799009)(82310400011)(451199024)(186009)(40470700004)(36840700001)(46966006)(83380400001)(356005)(478600001)(82740400003)(26005)(336012)(426003)(81166007)(36860700001)(47076005)(2616005)(40480700001)(70586007)(6666004)(5660300002)(2906002)(44832011)(1076003)(316002)(54906003)(6916009)(8936002)(8676002)(70206006)(41300700001)(36756003)(4326008)(86362001)(40460700003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2023 06:57:41.8644 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7ae0a8c1-ddc8-4247-7831-08dba92667e1
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D4.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7191
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,169 +121,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Simon,
+Now that the zynqmp pinctrl driver supports the tri-state registers, this patch
+makes sure that the pins requiring output-enable are configured appropriately
+for the KR260 Starter Kit.
 
-On Tue, 29 Aug 2023 at 22:55, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Mon, 28 Aug 2023 at 12:35, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > hi Simon,
-> >
-> > On Mon, 28 Aug 2023 at 23:25, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sughosh,
-> > >
-> > > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > >
-> > > > Add a document explaining the need for removal of non-compliant
-> > > > devicetree nodes and properties. Also describe in brief, the macros
-> > > > that can be used for this removal.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > >  .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++++++++++++
-> > > >  1 file changed, 64 insertions(+)
-> > > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
-> > > >
-> > > > diff --git a/doc/develop/devicetree/dt_non_compliant_purge.rst b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> > > > new file mode 100644
-> > > > index 0000000000..c3a8feab5b
-> > > > --- /dev/null
-> > > > +++ b/doc/develop/devicetree/dt_non_compliant_purge.rst
-> > > > @@ -0,0 +1,64 @@
-> > > > +.. SPDX-License-Identifier: GPL-2.0+
-> > > > +
-> > > > +Removal of non-compliant nodes and properties
-> > > > +=============================================
-> > > > +
-> > > > +The devicetree used in U-Boot might contain nodes and properties which
-> > > > +are specific only to U-Boot, and are not necessarily being used to
-> > > > +describe hardware but to pass information to U-Boot. An example of
-> > > > +such a property would be the public key being passed to U-Boot for
-> > > > +verification.
-> > >
-> > > It has nothing to do with describing hardware. The DT can describe
-> > > other things too. See the /options node, for example.
-> > >
-> > > Please don't bring this highly misleading language into U-Boot.
-> >
-> > Please point out what is misleading in the above paragraph. What is
-> > being emphasised in the above paragraph is that certain nodes and
-> > properties in the devicetree are relevant only in u-boot, and not the
-> > kernel. And this is precisely what the devicetree maintainers are
-> > saying [1].
->
-> That is not relevant though...we need to make sure all the nodes are
-> in the dt schema.
->
-> It is misleading because you imply that DT should only describe
-> hardware. That is not true.
->
-> >
-> > >
-> > > > +
-> > > > +This devicetree can then be passed to the OS. Since certain nodes and
-> > > > +properties are not really describing hardware, and more importantly,
-> > > > +these are only relevant to U-Boot, bindings for these cannot be
-> > > > +upstreamed into the devicetree repository. There have been instances
-> > > > +of attempts being made to upstream such bindings, and these deemed not
-> > > > +fit for upstreaming.
-> > >
-> > > Then either they should not be in U-Boot, or there is a problem with
-> > > the process.
-> > >
-> > > > Not having a binding for these nodes and
-> > > > +properties means that the devicetree fails the schema compliance tests
-> > > > +[1]. This also means that the platform cannot get certifications like
-> > > > +SystemReady [2] which, among other things require a devicetree which
-> > > > +passes the schema compliance tests.
-> > > > +
-> > > > +For such nodes and properties, it has been suggested by the devicetree
-> > > > +maintainers that the right thing to do is to remove them from the
-> > > > +devicetree before it gets passed on to the OS [3].
-> > >
-> > > Hard NAK. If we go this way, then no one will ever have an incentive
-> > > to do the right thing.
-> > >
-> > > Please send bindings for Linaro's work, instead. If something is
-> > > entirely U-Boot-specific, then it can go in /options/u-boot but it
-> > > still must be in the dt-schema.
-> >
-> > Please re-read the document including the last link [1]. If you go
-> > through that entire thread, you will notice that this is precisely
-> > what Linaro was trying to do here -- upstream the binding for the
-> > fwu-mdata node. It is only based on the feedback of the devicetree
-> > maintainers that this patchset was required.
->
-> It looks like it should go in /options/u-boot ? Can you resubmit it there?
+Without this patch, the USB to SD card bridge on the KR260 starter kit is not
+enabled correctly when booting via SPL.  This causes u-boot to fail to detect
+the SD card interface.
 
-Okay. I will try this approach. If I face any hurdles, or the
-devicetree maintainers have a different take on this, I will let you
-know.
+Signed-off-by: Neal Frager <neal.frager@amd.com>
+---
+ arch/arm/dts/zynqmp-sck-kr-g-revB.dts | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
--sughosh
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts b/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
+index 1ebbe683f3..104e67ddf8 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
+@@ -248,6 +248,7 @@
+ 		conf-tx {
+ 			pins = "MIO36";
+ 			bias-disable;
++			output-enable;
+ 		};
+ 
+ 		mux {
+@@ -299,6 +300,7 @@
+ 		conf-bootstrap {
+ 			pins = "MIO45", "MIO47", "MIO49";
+ 			bias-disable;
++			output-enable;
+ 			low-power-disable;
+ 		};
+ 
+@@ -306,6 +308,7 @@
+ 			pins = "MIO38", "MIO39", "MIO40",
+ 				"MIO41", "MIO42", "MIO43";
+ 			bias-disable;
++			output-enable;
+ 			low-power-enable;
+ 		};
+ 
+@@ -314,6 +317,7 @@
+ 			slew-rate = <SLEW_RATE_SLOW>;
+ 			power-source = <IO_STANDARD_LVCMOS18>;
+ 			bias-disable;
++			output-enable;
+ 		};
+ 
+ 		mux-mdio {
+@@ -344,6 +348,7 @@
+ 			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
+ 			"MIO60", "MIO61", "MIO62", "MIO63";
+ 			bias-disable;
++			output-enable;
+ 			drive-strength = <4>;
+ 			slew-rate = <SLEW_RATE_SLOW>;
+ 		};
+@@ -371,6 +376,7 @@
+ 			pins = "MIO66", "MIO68", "MIO69", "MIO70", "MIO71",
+ 			"MIO72", "MIO73", "MIO74", "MIO75";
+ 			bias-disable;
++			output-enable;
+ 			drive-strength = <4>;
+ 			slew-rate = <SLEW_RATE_SLOW>;
+ 		};
+-- 
+2.25.1
 
->
-> The stripping is a no-go for me, sorry. It is absolutely going to
-> destroy any chance of tidying up DT in U-Boot.
->
-> Please also figure out how to add DT validation to U-Boot, so we can
-> see what the gap is. Once we have that in, I will be happier to do
-> workarounds.
->
-> Regards,
-> Simon
->
-> >
-> > -sughosh
-> >
-> > [1] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/#t
-> >
-> > >
-> > > > +
-> > > > +Removing nodes/properties
-> > > > +-------------------------
-> > > > +
-> > > > +In U-Boot, this is been done through adding information on such nodes
-> > > > +and properties in a list. The entire node can be deleted, or a
-> > > > +specific property under a node can be deleted. The list of such nodes
-> > > > +and properties is generated at compile time, and the function to purge
-> > > > +these can be invoked through a EVT_FT_FIXUP event notify call.
-> > > > +
-> > > > +For deleting a node, this can be done by declaring a macro::
-> > > > +
-> > > > +       DT_NON_COMPLIANT_PURGE(fwu_mdata) = {
-> > > > +               .node_path      = "/fwu-mdata",
-> > > > +       };
-> > > > +
-> > > > +Similarly, for deleting a property under a node, that can be done by
-> > > > +specifying the property name::
-> > > > +
-> > > > +       DT_NON_COMPLIANT_PURGE(capsule_key) = {
-> > > > +               .node_path      = "/signature",
-> > > > +               .prop           = "capsule-key",
-> > > > +       };
-> > > > +
-> > > > +In the first example, the entire node with path /fwu-mdata will be
-> > > > +removed. In the second example, the property capsule-key
-> > > > +under /signature node will be removed.
-> > > > +
-> > > > +Similarly, a list of nodes and properties can be specified using the
-> > > > +following macro::
-> > > > +
-> > > > +       DT_NON_COMPLIANT_PURGE_LIST(foo) = {
-> > > > +               { .node_path = "/some_node", .prop = "some_bar" },
-> > > > +               { .node_path = "/some_node" },
-> > > > +       };
-> > > > +
-> > > > +[1] - https://github.com/devicetree-org/dt-schema
-> > > > +[2] - https://www.arm.com/architecture/system-architectures/systemready-certification-program
-> > > > +[3] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/
-> > > > --
-> > > > 2.34.1
-> > > >
-> > >
-> > > Regards,
-> > > Simon
