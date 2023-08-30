@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0606AC83F01
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 07:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D215C6FA8F
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 08:01:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40CF080711;
-	Wed, 30 Aug 2023 09:34:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 40C3C80770;
+	Wed, 30 Aug 2023 10:01:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QurdXWKO";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qLEfnqHr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4CCD8611E; Wed, 30 Aug 2023 09:34:05 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D0F678075F; Wed, 30 Aug 2023 10:01:00 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB31780422
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 09:34:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A61180771
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 10:00:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-4ff9b389677so8165628e87.3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 00:34:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693380842; x=1693985642; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7ROUSeryZnYZSMyInuOD6m1Q8SOSRIuKC3aBgDYckaE=;
- b=QurdXWKO0a5Y5O10fJ1t5r79o88hFTvNT9GM/nsXzXWUiqiCu8hOR4Vrb+7RrJvN9V
- SC9FyASKVVBRCR5OVqdnaBNMvsl4WmlqMGNQx6BqiVuwhvgmkc1fk/tkxugK/ip14Chx
- XAzfVocxVQeKuepb0mDsZ92/y/HxrBKKwqDlJgBuKPLTyuqJl6PZ7YTJ9f+fiGtHckVE
- JBWId2cfMx+Xl6uplGmtrsQJbEj9zAkl/c1geHYn+p44dW9Xd4TT3OdoFiGvNzJ0wvI2
- cAh1ibFe5BzI1h54q6zNdzJ8QQ76dQN7NMCOhatzUsIht9Z9puAk7LCI4xqmdG94GG0W
- HKrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693380842; x=1693985642;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7ROUSeryZnYZSMyInuOD6m1Q8SOSRIuKC3aBgDYckaE=;
- b=gB0tUzvL6EqnygAHutnJygSGV/Ga8R8lOTeNoWYWWYyAehlyNuMVv7kyEJDnvTPm5B
- 5/RDXN8cdcFhFESUte/HkP9kZ7sMSznUBTc6kC18rb9Teq2qaLoEIXwc9xr+TnEqAgpv
- puvvds7z7G9I5+uyC8NG6fKq3giDTB7lXgwG3jQTy5jgi5w49OwDtJgFoZEIuJdkoiLF
- JfwGlb+LKAgGxKvQ8L9LtNBGNQbwDuJjcV01UJw2rm85/xx8rsI02XUKtwFjqO3QJ7Hh
- GQdn1lakkbnVCdvL/qrpb/w3OsYF3NaLVcv2z0m8H2/bQAjS4S1Vt7/6UReqKTlalhxs
- k6Zw==
-X-Gm-Message-State: AOJu0YxMsY9+YzFfHEySOrvfThK/eY8IE8zQ2A0HYqeI0sssesN378QP
- PzDfR76FHbQlJxeHqupowpM656PUNYQNsPcsUkjT/w==
-X-Google-Smtp-Source: AGHT+IHtAJ3ZnTi2dm4WyAkjMssWCDQ0E4N7yC7P9B8n2QYBYLHAmGF7NwDWLkOQv3F1wole2tmXIJXcDsW+NP7SmfA=
-X-Received: by 2002:a05:6512:3d16:b0:500:91ac:c0b5 with SMTP id
- d22-20020a0565123d1600b0050091acc0b5mr1199364lfv.30.1693380842228; Wed, 30
- Aug 2023 00:34:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=760698cc1d=fabrice.gasnier@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 37U5udwi011513; Wed, 30 Aug 2023 10:00:57 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=nNJIeiM
+ lAJhf8DrBAZQsl9HuEiC4z+Qi9B/wh5HdCg8=; b=qLEfnqHrbdRpg3JMFIboIyy
+ BSRk73zrRNHbtr8ws4AOtgfWwy4A/eNCGkYBJ/12o6RKltXjgM3xuFVXnkms2uUC
+ XveloKTHlaH+L4rwzMJJEFxSqPBr1ZsserrkBHRdeQtyQCmhK2OV0fQ5XGjonZBO
+ p9XcxPVP9Ttyfxk+mZbTZBY8hsK/1QG4OOAQ9KmO22qAsAi3z2ot6PqEXef8D1GJ
+ 61Z/uA+NTUXVI7EiTqTzyBx9kcpgeXaiBLT0v0o+FApBSVMorzmWsSBFiViYNCx4
+ FMNYiWIkf9/YMbs52Ma3eIchw1TPzKbE5TNQqnMrRvfnxT3yFJxwLKwotXsoLBA=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq6h47w9r-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 30 Aug 2023 10:00:56 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 48C4910005D;
+ Wed, 30 Aug 2023 10:00:56 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 38A5F21BF4F;
+ Wed, 30 Aug 2023 10:00:56 +0200 (CEST)
+Received: from localhost (10.201.22.39) by SHFDAG1NODE2.st.com (10.75.129.70)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 30 Aug
+ 2023 10:00:55 +0200
+From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice CHOTARD
+ <patrice.chotard@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Marek Vasut <marex@denx.de>
+Subject: [PATCH] usb: host: ehci-generic: check for companion controller
+Date: Wed, 30 Aug 2023 10:00:08 +0200
+Message-ID: <20230830080008.455157-1-fabrice.gasnier@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
- <20230814173944.288356-5-alpernebiyasak@gmail.com>
- <CAPnjgZ2d1mJp28UP2+zKC6+2pED_=YdovA_jaNJz2r+C=-jufg@mail.gmail.com>
- <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
-In-Reply-To: <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 30 Aug 2023 10:33:26 +0300
-Message-ID: <CAC_iWjKADqX3HaJON6CELbGeAD5VDvdyGfgHPxCjA8G+YRd7gg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux
- distros
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng@tinylab.org>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Bharat Gooty <bharat.gooty@broadcom.com>, 
- Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Bin Meng <bmeng.cn@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.22.39]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-08-29_16,2023-08-29_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,54 +88,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
+EHCI is usually used with companion controller (like OHCI) as companion
+controller. This information on the companion is missing currently in
+companion drivers.
+So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
+first, then EHCI.
+This is seen on STM32MP1 where DT probing makes the probe order to occur
+by increasing address (OHCI address < EHCI address).
 
-On Sun, 27 Aug 2023 at 18:49, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->
-> On 2023-08-15 01:43 +03:00, Simon Glass wrote:
-> > Hi Alper,
-> >
-> > On Mon, 14 Aug 2023 at 11:40, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >> I actually want to put the root.img device first so that the VM can boot
-> >> into the installed system when it reboots, but U-Boot can't find the
-> >> bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
-> >> scan -lab`, but it seems to only ever search the first virtio-blk.
-> >> However, `eficonfig; bootefi bootmgr` makes it boot somehow.
+When a low speed or full-speed device is plugged in, it's not detected as
+EHCI should first detect it, and give ownership (handover) to OHCI.
 
-eficonfig, apart from displaying the boot options on a menu scans all
-media that have a simple filesystem protocol installed and configures
-the efi boot options.  That's why bootefi bootmgr boots properly
-afterwards.  You can probably boot even without eficonfig, but only
-bootXXX.efi files will be accounted for and no boot options will be
-added.
+Current situation on STM32MP1 (with a low speed device plugged-in)
+STM32MP> usb start
+starting USB...
+Bus usb@5800c000: USB OHCI 1.0
+Bus usb@5800d000: USB EHCI 1.00
+scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
 
-The EFI spec describes the bootmgr functionality in detail.  Back when
-the bootmeth patches were added, I suggested we shouldn't deal with
-EFI at all simply because it all already works and is backed by a
-spec.  Instead, we should just have a boot option in the methods that
-spells "EFI" and let the bootmanager deal with the details. But
-honestly, I've lost track of those patches.
+The "companion" property in the device tree allow to retrieve companion
+controller information, from the EHCI node. This allow marking the
+companion driver as such.
 
-Thanks
-/Ilias
-> >
-> > Yes, this is annoying.
-> >
-> > The problem is that the scanning is getting so complicated. The
-> > boot_targets var lists things which can either be a uclass, or a
-> > uclass with a device number. The currently implementation sees
-> > "virtio" and moves on to the next thing in boot_targets once it has
-> > processed one virtio device. That is obviously not correct, but...
-> >
-> > Would it be possible to just drop the 'boot_targets' var? That is what
-> > is stuffing it up, but we don't actually need it now. The defaults end
-> > up doing the same thing, apart (perhaps) from the strangeness of
-> > virtio which can be both a network and a blk device.
-> >
-> > I believe it is possible to do the right thing, but I'll need to
-> > create a better test mechanism to handle all the cases.
->
-> I think some kind of a "priority score" could help -- iterate over
-> boot_targets first just to generate bootdev priorities, then carry them
-> over as bootflows are discovered (adjusted for bootmeth order), then use
-> those scores as the order to boot / to show a sorted menu / to test?
+With this patch (same low speed device plugged in):
+STM32MP> usb start
+starting USB...
+Bus usb@5800c000: USB OHCI 1.0
+Bus usb@5800d000: USB EHCI 1.00
+scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+  1  Hub (12 Mb/s, 0mA)
+  |   U-Boot Root Hub
+  |
+  +-2  Human Interface (1.5 Mb/s, 100mA)
+       HP HP USB 1000dpi Laser Mouse
+
+  1  Hub (480 Mb/s, 0mA)
+     u-boot EHCI Host Controller
+
+This also optimize bus scan when a High speed device is plugged in, as
+the usb-uclass skips OHCI in this case:
+
+STM32MP> usb reset
+resetting USB...
+Bus usb@5800c000: USB OHCI 1.0
+Bus usb@5800d000: USB EHCI 1.00
+scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |  u-boot EHCI Host Controller
+  |
+  +-2  Mass Storage (480 Mb/s, 200mA)
+       SanDisk Cruzer Blade 03003432021922011407
+
+Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+---
+
+ drivers/usb/host/ehci-generic.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
+index a765a307a323..539c0d0e61bc 100644
+--- a/drivers/usb/host/ehci-generic.c
++++ b/drivers/usb/host/ehci-generic.c
+@@ -66,6 +66,7 @@ static int ehci_usb_probe(struct udevice *dev)
+ 	struct ehci_hccr *hccr;
+ 	struct ehci_hcor *hcor;
+ 	int err, ret;
++	struct udevice *companion_dev;
+ 
+ 	err = 0;
+ 	ret = clk_get_bulk(dev, &priv->clocks);
+@@ -104,6 +105,29 @@ static int ehci_usb_probe(struct udevice *dev)
+ 	hcor = (struct ehci_hcor *)((uintptr_t)hccr +
+ 				    HC_LENGTH(ehci_readl(&hccr->cr_capbase)));
+ 
++	/*
++	 * Enforce optional companion controller is marked as such. This allows
++	 * the bus scan in usb-uclass to 1st scan the primary controller,
++	 * before the companion controller (ownership is given to companion
++	 * when low or full speed devices have been detected).
++	 */
++	err = uclass_get_device_by_phandle(UCLASS_USB, dev, "companion", &companion_dev);
++	if (!err) {
++		struct usb_bus_priv *companion_bus_priv;
++
++		dev_dbg(companion_dev, "companion of %s\n", dev->name);
++		companion_bus_priv = dev_get_uclass_priv(companion_dev);
++		companion_bus_priv->companion = true;
++	} else if (err && err != -ENOENT && err != -ENODEV) {
++		/*
++		 * Treat everything else than no companion or disabled
++		 * companion as an error. (It may not be enabled on boards
++		 * that have a High-Speed HUB to handle FS and LS traffic).
++		 */
++		dev_err(dev, "Failed to get companion (err=%d)\n", err);
++		goto phy_err;
++	}
++
+ 	err = ehci_register(dev, hccr, hcor, NULL, 0, USB_INIT_HOST);
+ 	if (err)
+ 		goto phy_err;
+-- 
+2.25.1
+
