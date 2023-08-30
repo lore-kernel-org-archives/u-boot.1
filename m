@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13002C6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE6EC6FA8F
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 18:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45D6A865DE;
+	by phobos.denx.de (Postfix) with ESMTP id 82FEB866D4;
 	Wed, 30 Aug 2023 20:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NnxrWi5w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nymf/7A/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76FB98655E; Wed, 30 Aug 2023 20:06:27 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id 401FF8656A; Wed, 30 Aug 2023 20:06:30 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C1B086614
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:06:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 524B486591
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:06:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-34df4799a62so111865ab.1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:06:06 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-794e0e8b588so2120539f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:06:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693418765; x=1694023565; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693418766; x=1694023566; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3YfEvhiey1kU8ewQbequzadjMGWDROlW8ztzYfniEYE=;
- b=NnxrWi5w8Nk+FtrufHZ9rSAvbdwjOQacfD6rRbomV8jmt4MBPrZ3C+zxUTWQJALm7R
- b4BIGBJNjHpKj4YUpDkTLlAoJ14GZS8842NREh4bWeAJjVTg+j0yaM1chsYS2HWBNrNN
- /3IVONuKcbFAODvZwWsj8p3l4xoWjZKEUoMEI=
+ bh=5ngf4CkmH0T/Lh1OQx9nMv+Pwszcpl+bpkgS+itPcD0=;
+ b=nymf/7A/c/5jQEpq3hil4lgJATKauXPjxfDtEKdmmcPdWsa7mofBCpPP9K+3Zuo7Da
+ jrBhIrAw5EB6NjtH42IZhd6JWQ9RZxGJPJb2uSDeWxonKfmFSXSUabYRUEr6MXkSTqxo
+ 53Y3pbcv2KzUCRDtmT96LeGfHLqx2t3sHVE0k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693418765; x=1694023565;
+ d=1e100.net; s=20221208; t=1693418766; x=1694023566;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3YfEvhiey1kU8ewQbequzadjMGWDROlW8ztzYfniEYE=;
- b=h8sOD+R3+gSB8Do+EwueKgLN1Hgm4+HKPXG3mXb7R7f+QPL335ygZHxVSHYFKQxZvr
- yFuKq3Gn7oMaE1Fi/bR4tIUTpghIpgzQiPmimGxhKiYOaaqcBgIhbmOLNpewqViCPA+c
- hPHaFGXQUEvojp1NuSjj3L8jx7wDBzN0Ri1ccuuuUJ0wIWCNt+p+itgKDljoLXlRdbQn
- yav5mVELBOn5j3ZIu7ZJz+ptDcu+d+6eArSu0dn3Gnr38Mp3184A0ERdD5icEn24cUHN
- ORs50Dop6AdowxMGXprMOLYbgS35lIK76tcRTV5kTALZ591cFIL7sHVEOMNHnppU44iQ
- bi5g==
-X-Gm-Message-State: AOJu0Yx/5SS9J/wmbj53YC458n57Fokao7GskpXC81WwuhDH5K/swM4N
- 0eK6Q0NF7ON35JccOsv/aUetFOkJBivMTVrVdd4=
-X-Google-Smtp-Source: AGHT+IFfCSkkwMlaO2RPcxTMj3nW7C2apYISa4DJoz3O5RG6ELhMmbK3FrXnoqo7WYdaFfWISUWOSg==
-X-Received: by 2002:a92:dc12:0:b0:349:3808:e387 with SMTP id
- t18-20020a92dc12000000b003493808e387mr2986001iln.11.1693418765041; 
+ bh=5ngf4CkmH0T/Lh1OQx9nMv+Pwszcpl+bpkgS+itPcD0=;
+ b=LFvlKu3A0J63y5uuCTP5LdKkvrWwh8STvtlFVkrpnCCAg2hzyh34jt2wVzQ+aeBvbl
+ RD+6xwlLMuR19ny3JE9AFOwkT2dhCFO/cvHjJN50cZ3aXRNXMm2+ZvaAls9ng/osX1Z7
+ eG/om4yA5EhOiwZ6yCSgWSIEhDs+atHcpm3gBxq5xZ92WXFS3SaM0LTgfLEVm9WIbkxh
+ go6z75lsMlYTheMzG4Q5K8Vlid8HtmJwf+yhWGbOHJEg6ew3FOya0gAlztERSMiOn/Wf
+ Ygz2aWfDE1npjnHZZt77nD4b7htC2fwbAnLY/7sZ9qxrzemBWUZfBhgM3CV+9kAgmkrw
+ LfCg==
+X-Gm-Message-State: AOJu0YwtDMiVef3lh53K65GxyQEY4qbvVo9J2KgaxCOCTUggrLyZMUJD
+ MD2QNTKpT3WC+5/n8J4HntpFKlEx7l4WrXAyJlE=
+X-Google-Smtp-Source: AGHT+IHI4GvsVlvmXMvFlqMeqIsWAWxfKJpMkC7KgBZjUoZGQnzMgGvs9aTUHBEjzvrMR5rUcTx5EQ==
+X-Received: by 2002:a5e:c011:0:b0:791:60c:4b4f with SMTP id
+ u17-20020a5ec011000000b00791060c4b4fmr3529959iol.17.1693418765966; 
  Wed, 30 Aug 2023 11:06:05 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.06.03
+ dk54-20020a0566384bf600b0042bbd3e49b9sm4002224jab.24.2023.08.30.11.06.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 11:06:04 -0700 (PDT)
+ Wed, 30 Aug 2023 11:06:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Baruch Siach <baruch@tkos.co.il>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>,
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
- Stefan Roese <sr@denx.de>
-Subject: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
-Date: Wed, 30 Aug 2023 12:05:01 -0600
-Message-ID: <20230830180524.315916-31-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Evgeny Bachinin <EABachinin@sberdevices.ru>
+Subject: [PATCH 31/32] command: Include a required header in command.h
+Date: Wed, 30 Aug 2023 12:05:02 -0600
+Message-ID: <20230830180524.315916-32-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230830180524.315916-1-sjg@chromium.org>
 References: <20230830180524.315916-1-sjg@chromium.org>
@@ -93,181 +88,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Standard passage provides for a bloblist to be passed from one firmware
-phase to the next. That can be used to pass the devicetree along as well.
-Add an option to support this.
-
-Tests for this will be added as part of the Universal Payload work.
+This uses ARRAY_SIZE() but does not include the header file which declares
+it. Fix this, so that command.h can be included without common.h
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/bloblist.c                  |  2 ++
- doc/develop/devicetree/control.rst |  3 ++
- dts/Kconfig                        |  8 ++++++
- include/bloblist.h                 |  5 ++++
- include/fdtdec.h                   |  3 +-
- lib/fdtdec.c                       | 44 ++++++++++++++++++++++--------
- 6 files changed, 52 insertions(+), 13 deletions(-)
+ include/command.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 6f2a4577708..b07ede11cfe 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -48,9 +48,11 @@ static struct tag_name {
- 	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
- 	{ BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
- 	{ BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
-+	{ BLOBLISTT_CONTROL_FDT, "Control FDT" },
+diff --git a/include/command.h b/include/command.h
+index c4e3170967d..7a0ab8c90b1 100644
+--- a/include/command.h
++++ b/include/command.h
+@@ -15,6 +15,9 @@
  
- 	/* BLOBLISTT_PROJECT_AREA */
- 	{ BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
-+	{ BLOBLISTT_VBE, "VBE" },
- 	{ BLOBLISTT_U_BOOT_VIDEO, "SPL video handoff" },
+ #include <linux/compiler_attributes.h>
  
- 	/* BLOBLISTT_VENDOR_AREA */
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index cbb65c9b177..56e00090166 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
- devicetree at runtime, for example if an earlier bootloader stage creates
- it and passes it to U-Boot.
- 
-+If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
-+from a previous stage.
++/* For ARRAY_SIZE() */
++#include <linux/kernel.h>
 +
- If CONFIG_SANDBOX is defined, then it will be read from a file on
- startup. Use the -d flag to U-Boot to specify the file to read, -D for the
- default and -T for the test devicetree, used to run sandbox unit tests.
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 9152f5885e9..6c1edbddb57 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -105,6 +105,14 @@ config OF_EMBED
- 
- endchoice
- 
-+config OF_BLOBLIST
-+	bool "DTB is provided by a bloblist"
-+	help
-+	  Select this to read the devicetree from the bloblist. This allows
-+	  using a bloblist to transfer the devicetree between  U-Boot phases.
-+	  The devicetree is stored in the bloblist by an early phase so that
-+	  U-Boot can read it.
-+
- config OF_BOARD
- 	bool "Provided by the board (e.g a previous loader) at runtime"
- 	default y if SANDBOX || OF_HAS_PRIOR_STAGE
-diff --git a/include/bloblist.h b/include/bloblist.h
-index 080cc46a126..e16d122f4fb 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -103,6 +103,11 @@ enum bloblist_tag_t {
- 	BLOBLISTT_ACPI_TABLES = 0x104,	/* ACPI tables for x86 */
- 	BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
- 	BLOBLISTT_VBOOT_CTX = 0x106,	/* Chromium OS verified boot context */
-+	/*
-+	 * Devicetree for use by firmware. On some platforms this is passed to
-+	 * the OS also
-+	 */
-+	BLOBLISTT_CONTROL_FDT = 0x107,
- 
- 	/*
- 	 * Project-specific tags are permitted here. Projects can be open source
-diff --git a/include/fdtdec.h b/include/fdtdec.h
-index bd1149f46d0..1888c464561 100644
---- a/include/fdtdec.h
-+++ b/include/fdtdec.h
-@@ -72,7 +72,7 @@ struct bd_info;
-  *	U-Boot is packaged as an ELF file, e.g. for debugging purposes
-  * @FDTSRC_ENV: Provided by the fdtcontroladdr environment variable. This should
-  *	be used for debugging/development only
-- * @FDTSRC_NONE: No devicetree at all
-+ * @FDTSRC_BLOBLIST: Provided by a bloblist from an earlier phase
-  */
- enum fdt_source_t {
- 	FDTSRC_SEPARATE,
-@@ -80,6 +80,7 @@ enum fdt_source_t {
- 	FDTSRC_BOARD,
- 	FDTSRC_EMBED,
- 	FDTSRC_ENV,
-+	FDTSRC_BLOBLIST,
- };
- 
- /*
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 7a691676483..bd88e6a418e 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -7,7 +7,11 @@
-  */
- 
- #ifndef USE_HOSTCC
-+
-+#define LOG_CATEGORY	LOGC_DT
-+
- #include <common.h>
-+#include <bloblist.h>
- #include <boot_fit.h>
- #include <display_options.h>
- #include <dm.h>
-@@ -87,6 +91,7 @@ static const char *const fdt_src_name[] = {
- 	[FDTSRC_BOARD] = "board",
- 	[FDTSRC_EMBED] = "embed",
- 	[FDTSRC_ENV] = "env",
-+	[FDTSRC_BLOBLIST] = "bloblist",
- };
- 
- const char *fdtdec_get_srcname(void)
-@@ -1666,20 +1671,35 @@ int fdtdec_setup(void)
- 	int ret;
- 
- 	/* The devicetree is typically appended to U-Boot */
--	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
--		gd->fdt_blob = fdt_find_separate();
--		gd->fdt_src = FDTSRC_SEPARATE;
--	} else { /* embed dtb in ELF file for testing / development */
--		gd->fdt_blob = dtb_dt_embedded();
--		gd->fdt_src = FDTSRC_EMBED;
--	}
--
--	/* Allow the board to override the fdt address. */
--	if (IS_ENABLED(CONFIG_OF_BOARD)) {
--		gd->fdt_blob = board_fdt_blob_setup(&ret);
-+	if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
-+		ret = bloblist_maybe_init();
- 		if (ret)
- 			return ret;
--		gd->fdt_src = FDTSRC_BOARD;
-+		gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-+		if (!gd->fdt_blob) {
-+			printf("Not FDT found in bloblist\n");
-+			bloblist_show_list();
-+			return -ENOENT;
-+		}
-+		gd->fdt_src = FDTSRC_BLOBLIST;
-+		bloblist_show_list();
-+		log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
-+	} else {
-+		if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-+			gd->fdt_blob = fdt_find_separate();
-+			gd->fdt_src = FDTSRC_SEPARATE;
-+		} else { /* embed dtb in ELF file for testing / development */
-+			gd->fdt_blob = dtb_dt_embedded();
-+			gd->fdt_src = FDTSRC_EMBED;
-+		}
-+
-+		/* Allow the board to override the fdt address. */
-+		if (IS_ENABLED(CONFIG_OF_BOARD)) {
-+			gd->fdt_blob = board_fdt_blob_setup(&ret);
-+			if (ret)
-+				return ret;
-+			gd->fdt_src = FDTSRC_BOARD;
-+		}
- 	}
- 
- 	/* Allow the early environment to override the fdt address */
+ #ifndef NULL
+ #define NULL	0
+ #endif
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
