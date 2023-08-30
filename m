@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD6CC6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:12:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C77BC83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F3738653F;
-	Wed, 30 Aug 2023 21:12:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C142D86537;
+	Wed, 30 Aug 2023 21:15:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ACVcOwr/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pyQmvhXX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FED38653F; Wed, 30 Aug 2023 21:12:52 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 571FD86548; Wed, 30 Aug 2023 21:15:40 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37B598653E
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:12:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B73FB8652F
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-31768ce2e81so5015785f8f.1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 12:12:48 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4013454fa93so180935e9.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 12:15:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693422767; x=1694027567; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693422937; x=1694027737; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=M4qvSKBd+8qAzEGVd4+uEtjvUKHRFljUJI0HM1DprPg=;
- b=ACVcOwr/K3cRYKUuesFFpv6z3XiFcfSMECiBDzLaZ64Apf3MPnE24mJMzP4Z4oky4T
- hTiexhBpXUXiwjpBy4FVxpuXFGVsNC8OqAqioJ0l7xxqTh1Uiu8qLWPVpxGK5VPyv5b9
- pvzZrdzj6jyNCp4+BI8F1Sg+5C8griNtWgBMEwC26Q+V+O2VYjOyaToacl9QFVDcG46z
- Y6Kq4d6G9XOL+qTluvirOCZBR1AjAYxFYkzB91HVJ1g9cX6Av8Tuyw+VXo7eEdZxAtPF
- CbWpopWwrwnD/qBWui80wVGu5zqC1KQUVrQWNF0vwIHNHq7VnGxn2OhNYPIDmwwiCbUw
- ZvZg==
+ bh=QSrRxP5i12OOCf8bZO6fm7DHUydpNk/O7ILcGjdyQfE=;
+ b=pyQmvhXXfjS7BcefinKiyA/vNAJJrB2f7yEKfbK3UAleWCu8b/c0sWZcqeshWuMtxp
+ NPtwKb1/YNnZ3lrTEwtJ6GfilnHIn1gBHbKOQCCrezC09zrjMFLw0Nfz1BS+FaoKG81V
+ USV3WvsUy88KaINFGJkkbGXI2l3mqJdUCcSlOmtdUMgFqcOYwAhTWpUGdVt2IGuvZ634
+ Ag7bdQx1u/yONv+mir/fFowON6P6ZzLWV7PV7aDDEENscBOGiy7xDHSuSQIplBw+C8+3
+ 7vhgqs5JbGOXM+/Ygp7Y3nXz26+Rq3OUztbMuaVt34mD50jA4V4SabyHcPjjhSNm1LqY
+ 8z2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693422767; x=1694027567;
+ d=1e100.net; s=20221208; t=1693422937; x=1694027737;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=M4qvSKBd+8qAzEGVd4+uEtjvUKHRFljUJI0HM1DprPg=;
- b=A9rweeOQwujiLXpIqBDsjbhS/L305vIoBM/qrHiz1HfuXcMCvmS/xl37vXogQKldeg
- dKil/yeYOHJpehaUDE+Mecp7u37fLirnECMKlgswb6F0u4tlVwPc/1KYQ11alBpVpzVF
- lOJDaqEbgQJmDExfSEP9XrvwO+gRIaO8fI176vGF1mBSi2DBt+Va1PjaAQf8rWO8wSKe
- SvbSBG5Gv5SwooWw33yWVhNhlSuitv+ofN9G8Tx6+dSFGGIC4ZZeaK3cPbGQdS2xEAdF
- fcIMK+ctDKJvk7oknN291R3vtkht8aej2AhwErG3ixRs7kDDVYn+ZdQ91RnSiN2Fmsnj
- CBJg==
-X-Gm-Message-State: AOJu0YzjnjOWu2Tthfed/HWItAdyqAhjHq3crA2JGMIBpJ0/v2aRsGd6
- ZQR2DsBSCqxuG5BboTAZszU=
-X-Google-Smtp-Source: AGHT+IElYKdUGnTaMoOgulCKXhwLtLm6+/pitlvsJlgrGPI77h24RKYtTmWQNVqu5l3+XjCoqGN/gg==
-X-Received: by 2002:adf:fd85:0:b0:313:dee2:e052 with SMTP id
- d5-20020adffd85000000b00313dee2e052mr2228062wrr.26.1693422767339; 
- Wed, 30 Aug 2023 12:12:47 -0700 (PDT)
+ bh=QSrRxP5i12OOCf8bZO6fm7DHUydpNk/O7ILcGjdyQfE=;
+ b=CDQoCvQT3kItNBqNdB2i9CqsJyKXQKgnLmpYV00rU+mc9Zswo+vHSXq0d9e/l14Zk8
+ GDnpHpwSEsVOGK9bncywVzS1yVs2qqdmvVM3y7AW4tnvrR31cEUJJJ5etmeatXCAovQ+
+ ZcwDfHsx2OwvDOozpLbdXREuyE27PNXv3ia681qWyqZaudbTyZyFvdwxo/bKA6OqJdNb
+ YauHYa6uIBK95iUWcQCl4ccNOUauGS0jsLCVc2xfG1ss6kwg+oTs9/UjMgul0GHrp3r5
+ 6A0kvCIlAmMYiRQ5OP2wWeEshJLhZLLyzCRO8EXuFovtuhitRR9r196ROd9HiDagyXCT
+ lRkg==
+X-Gm-Message-State: AOJu0YyTUhy15fsLlf1vk02Dfaz+ahANggqbXMiF4/hEOcmmB6S5ggat
+ SdO2S13kX0l/5G/fYPa0VDk=
+X-Google-Smtp-Source: AGHT+IF8f+KkXGTY9P2CIDKCaXBNmHiiL/A8AE4+KO0xT0Jis9cwP3Usxdq8vKw+vtCz6T1XWL/3Pg==
+X-Received: by 2002:a7b:c849:0:b0:3fb:739d:27b2 with SMTP id
+ c9-20020a7bc849000000b003fb739d27b2mr2747517wml.8.1693422936880; 
+ Wed, 30 Aug 2023 12:15:36 -0700 (PDT)
 Received: from [192.168.0.84] ([178.233.24.1])
  by smtp.gmail.com with ESMTPSA id
- x3-20020a5d6503000000b00317c742ca9asm17305581wru.43.2023.08.30.12.12.45
+ z17-20020a7bc7d1000000b003fc0505be19sm3071178wmk.37.2023.08.30.12.15.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Aug 2023 12:12:46 -0700 (PDT)
-Message-ID: <2f283c6b-bf2c-4893-b286-25a44ff37dd1@gmail.com>
-Date: Wed, 30 Aug 2023 22:12:44 +0300
+ Wed, 30 Aug 2023 12:15:36 -0700 (PDT)
+Message-ID: <3bae5070-e99a-4179-a59c-833c9a2971f5@gmail.com>
+Date: Wed, 30 Aug 2023 22:15:33 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 10/13] video: Only dcache flush damaged lines
+Subject: Re: [PATCH v5 04/13] dm: video: Add damage tracking API
 Content-Language: en-US, tr, en-GB
-To: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>
+To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
  Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
@@ -85,14 +85,10 @@ Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-11-alpernebiyasak@gmail.com>
- <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
- <e24d94b4-d519-4491-a38b-488510059a2a@csgraf.de>
- <CAPnjgZ2HqmyOPixmec8v9g2V9mvCQ2mnG4+jUL4-4=qXPOvsOw@mail.gmail.com>
- <1b8f64c7-deab-ae3a-3d22-a69fd74bdae9@csgraf.de>
- <CAPnjgZ2wivMkM407VxYfgOsgrZnLY7UXVMgZt1OfzJzjiKgKjg@mail.gmail.com>
+ <20230821135111.3558478-5-alpernebiyasak@gmail.com>
+ <CAPnjgZ20VRYsP=5S5HJWjR2sNvmOudseHiXUcjnZmDCA=0jfnw@mail.gmail.com>
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <CAPnjgZ2wivMkM407VxYfgOsgrZnLY7UXVMgZt1OfzJzjiKgKjg@mail.gmail.com>
+In-Reply-To: <CAPnjgZ20VRYsP=5S5HJWjR2sNvmOudseHiXUcjnZmDCA=0jfnw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,122 +107,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-22 02:03 +03:00, Simon Glass wrote:
-> Hi Alex,
-> 
-> On Mon, 21 Aug 2023 at 16:44, Alexander Graf <agraf@csgraf.de> wrote:
->>
->>
->> On 22.08.23 00:10, Simon Glass wrote:
->>> Hi Alex,
->>>
->>> On Mon, 21 Aug 2023 at 13:59, Alexander Graf <agraf@csgraf.de> wrote:
->>>>
->>>> On 21.08.23 21:11, Simon Glass wrote:
->>>>> Hi Alper,
->>>>>
->>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->>>>>> From: Alexander Graf <agraf@csgraf.de>
->>>>>>
->>>>>> Now that we have a damage area tells us which parts of the frame buffer
->>>>>> actually need updating, let's only dcache flush those on video_sync()
->>>>>> calls. With this optimization in place, frame buffer updates - especially
->>>>>> on large screen such as 4k displays - speed up significantly.
->>>>>>
->>>>>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->>>>>> Reported-by: Da Xue <da@libre.computer>
->>>>>> [Alper: Use damage.xstart/yend, IS_ENABLED()]
->>>>>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>>>>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>>>>> ---
->>>>>>
->>>>>> Changes in v5:
->>>>>> - Use xstart, ystart, xend, yend as names for damage region
->>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>>>>>
->>>>>> Changes in v2:
->>>>>> - Fix dcache range; we were flushing too much before
->>>>>> - Remove ifdefs
->>>>>>
->>>>>>    drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
->>>>>>    1 file changed, 36 insertions(+), 5 deletions(-)
->>>>> This is a little strange, since flushing the whole cache will only
->>>>> actually write out data that was actually written (to the display). Is
->>>>> there a benefit to this patch, in terms of performance?
->>>>
->>>> I'm happy to see you go through the same thought process I went through
->>>> when writing these: "This surely can't be the problem, can it?". The
->>>> answer is "simple" in hindsight:
->>>>
->>>> Have a look at the ARMv8 cache flush function. It does the only "safe"
->>>> thing you can expect it to do: Clean+Invalidate to POC because we use it
->>>> for multiple things, clearing modified code among others:
->>>>
->>>> ENTRY(__asm_flush_dcache_range)
->>>>           mrs     x3, ctr_el0
->>>>           ubfx    x3, x3, #16, #4
->>>>           mov     x2, #4
->>>>           lsl     x2, x2, x3              /* cache line size */
->>>>
->>>>           /* x2 <- minimal cache line size in cache system */
->>>>           sub     x3, x2, #1
->>>>           bic     x0, x0, x3
->>>> 1:      dc      civac, x0       /* clean & invalidate data or unified
->>>> cache */
->>>>           add     x0, x0, x2
->>>>           cmp     x0, x1
->>>>           b.lo    1b
->>>>           dsb     sy
->>>>           ret
->>>> ENDPROC(__asm_flush_dcache_range)
->>>>
->>>>
->>>> Looking at the "dc civac" call, we find this documentation page from
->>>> ARM:
->>>> https://developer.arm.com/documentation/ddi0601/2022-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC
->>>>
->>>> This says we're writing any dirtyness of this cache line up to the POC
->>>> and then invalidate (remove the cache line) also up to POC. That means
->>>> when you look at a typical SBC, this will either be L2 or system level
->>>> cache. Every read afterwards needs to go and pull it all the way back to
->>>> L1 to modify it (or not) on the next character write and then flush it
->>>> again.
->>>>
->>>> Even worse: Because of the invalidate, we may even evict it from caches
->>>> that the display controller uses to read the frame buffer. So depending
->>>> on the SoC's cache topology and implementation, we may force the display
->>>> controller to refetch the full FB content on its next screen refresh cycle.
->>>>
->>>> I faintly remember that I tried to experiment with CVAC instead to only
->>>> flush without invalidating. I don't fully remember the results anymore
->>>> though. I believe CVAC just behaved identical to CIVAC on the A53
->>>> platform I was working on. And then I looked at Cortex-A53 errata like
->>>> [1] and just accepted that doing anything but restricting the flushing
->>>> range is a waste of time :)
->>> Yuck I didn't know it was invalidating too. That is horrible. Is there
->>> no way to fix it?
->>
->>
->> Before building all of this damage logic, I tried, but failed. I'd
->> welcome anyone else to try again :). I'm not even convinced yet that it
->> is actually fixable: Depending on the SoC's internal cache logic, it may
->> opt to always invalidate I think.
-> 
-> Wow, that is crazy! How is anyone supposed to make the system run well
-> with logic like that??!
-> 
->>
->> That said, this patch set really also makes sense outside of the
->> particular invalidate problem. It creates a generic abstraction between
->> the copy and non-copy code path and allows us to reduce the amount of
->> work spent for both, generically for any video sync operation.
-> 
-> Sure...my question was really why it helps so much, given what I
-> understood the caches to be doing. If they are invalidating, then it
-> is amazing anything gets done...
 
-I don't really know cache mechanisms and terminology, but AFAIU there's
-nothing actionable for this patch regarding this discussion, right?
 
-Meanwhile I noticed this patch only flushes priv->fb, and think it also
-needs to flush priv->copy_fb if VIDEO_COPY.
+On 2023-08-21 22:11 +03:00, Simon Glass wrote:
+> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>
+>> From: Alexander Graf <agraf@csgraf.de>
+>>
+>> We are going to introduce image damage tracking to fasten up screen
+>> refresh on large displays. This patch adds damage tracking for up to
+>> one rectangle of the screen which is typically enough to hold blt or
+>> text print updates. Callers into this API and a reduced dcache flush
+>> code path will follow in later patches.
+>>
+>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+>> Reported-by: Da Xue <da@libre.computer>
+>> [Alper: Use xstart/yend, document new fields, return void from
+>>         video_damage(), declare priv, drop headers, use IS_ENABLED()]
+>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> ---
+>>
+>> Changes in v5:
+>> - Use xstart, ystart, xend, yend as names for damage region
+>> - Document damage struct and fields in struct video_priv comment
+>> - Return void from video_damage()
+>> - Fix undeclared priv error in video_sync()
+>> - Drop unused headers from video-uclass.c
+>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>
+>> Changes in v4:
+>> - Move damage clear to patch "dm: video: Add damage tracking API"
+>> - Simplify first damage logic
+>> - Remove VIDEO_DAMAGE default for ARM
+>>
+>> Changes in v3:
+>> - Adapt to always assume DM is used
+>>
+>> Changes in v2:
+>> - Remove ifdefs
+>>
+>>  drivers/video/Kconfig        | 13 ++++++++++++
+>>  drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++++---
+>>  include/video.h              | 32 ++++++++++++++++++++++++++--
+>>  3 files changed, 81 insertions(+), 5 deletions(-)
+>>
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> But I suggest an empty static inline in the case where the feature is disabled?
+
+You mean with something like #ifdef CONFIG_VIDEO_DAMAGE, right?
