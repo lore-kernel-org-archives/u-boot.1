@@ -4,93 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C77BC83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:15:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AAE9C83F15
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:42:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C142D86537;
-	Wed, 30 Aug 2023 21:15:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9990E8652D;
+	Wed, 30 Aug 2023 21:42:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="pyQmvhXX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B/aD0+oM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 571FD86548; Wed, 30 Aug 2023 21:15:40 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id DA3A786540; Wed, 30 Aug 2023 21:42:06 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B73FB8652F
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:15:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 743A78652F
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:42:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4013454fa93so180935e9.0
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 12:15:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d72cf9156easo5421133276.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 12:42:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693422937; x=1694027737; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QSrRxP5i12OOCf8bZO6fm7DHUydpNk/O7ILcGjdyQfE=;
- b=pyQmvhXXfjS7BcefinKiyA/vNAJJrB2f7yEKfbK3UAleWCu8b/c0sWZcqeshWuMtxp
- NPtwKb1/YNnZ3lrTEwtJ6GfilnHIn1gBHbKOQCCrezC09zrjMFLw0Nfz1BS+FaoKG81V
- USV3WvsUy88KaINFGJkkbGXI2l3mqJdUCcSlOmtdUMgFqcOYwAhTWpUGdVt2IGuvZ634
- Ag7bdQx1u/yONv+mir/fFowON6P6ZzLWV7PV7aDDEENscBOGiy7xDHSuSQIplBw+C8+3
- 7vhgqs5JbGOXM+/Ygp7Y3nXz26+Rq3OUztbMuaVt34mD50jA4V4SabyHcPjjhSNm1LqY
- 8z2g==
+ d=konsulko.com; s=google; t=1693424521; x=1694029321; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ws0j3RIAW15S+VzUnPnPHomLPsfFfuO9lbDoYRkYXq4=;
+ b=B/aD0+oMc+oZAUSxCoo3lEnmhAFDDk3TYC8/zHqe8TFaZ0zF6GEXXAi2TD638bDieZ
+ IfpvUWrM+w2PockvMlIkf5TVTSxc5SI23pWSPFr41exWEulAlqzCd55oSaN2YX8eHoY/
+ Nf4faIUCVLAYoEi1YrtZ6Fg3/lBRrwP5VBz14=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693422937; x=1694027737;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QSrRxP5i12OOCf8bZO6fm7DHUydpNk/O7ILcGjdyQfE=;
- b=CDQoCvQT3kItNBqNdB2i9CqsJyKXQKgnLmpYV00rU+mc9Zswo+vHSXq0d9e/l14Zk8
- GDnpHpwSEsVOGK9bncywVzS1yVs2qqdmvVM3y7AW4tnvrR31cEUJJJ5etmeatXCAovQ+
- ZcwDfHsx2OwvDOozpLbdXREuyE27PNXv3ia681qWyqZaudbTyZyFvdwxo/bKA6OqJdNb
- YauHYa6uIBK95iUWcQCl4ccNOUauGS0jsLCVc2xfG1ss6kwg+oTs9/UjMgul0GHrp3r5
- 6A0kvCIlAmMYiRQ5OP2wWeEshJLhZLLyzCRO8EXuFovtuhitRR9r196ROd9HiDagyXCT
- lRkg==
-X-Gm-Message-State: AOJu0YyTUhy15fsLlf1vk02Dfaz+ahANggqbXMiF4/hEOcmmB6S5ggat
- SdO2S13kX0l/5G/fYPa0VDk=
-X-Google-Smtp-Source: AGHT+IF8f+KkXGTY9P2CIDKCaXBNmHiiL/A8AE4+KO0xT0Jis9cwP3Usxdq8vKw+vtCz6T1XWL/3Pg==
-X-Received: by 2002:a7b:c849:0:b0:3fb:739d:27b2 with SMTP id
- c9-20020a7bc849000000b003fb739d27b2mr2747517wml.8.1693422936880; 
- Wed, 30 Aug 2023 12:15:36 -0700 (PDT)
-Received: from [192.168.0.84] ([178.233.24.1])
+ d=1e100.net; s=20221208; t=1693424521; x=1694029321;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ws0j3RIAW15S+VzUnPnPHomLPsfFfuO9lbDoYRkYXq4=;
+ b=NT+QiN0+sfjzEtonBFotAp8i8psaRAbWnoghcbFysSaW/P9UO4kfaaqiD9Z9vuf165
+ a7JT1CQZRqIAhYtjnnOHB1k5suc+3fHGo509onOhJSe3DhkHiE6a5yuP8LEO/ZkpjLpr
+ o0NISeo+TiCTDeQxDPTUPpWh+7oDt30xyxJu9xaIUO8L/TTeURmtK3cc9joPiFIGyIjo
+ KxmdIprEDU8YUWoE1FwWdivat4vTHmmwJRzlqGaJywpYMt7Fsd0YuIIeXSp8OUmCkFIv
+ eUPKCODIeMCP0W6YxXVt/mW1l9ZIQKgK3GIIpgjPzFf6FM9mMrsrwbENijdgmW934kFD
+ P8nA==
+X-Gm-Message-State: AOJu0YzQ+uCQLi9JR2PZouwLy8d/4+nMyJ1hulYlT7A5hzHb5Bnnvntz
+ tKjd6o1u2yAg61ADOzjzJOXyuQ==
+X-Google-Smtp-Source: AGHT+IHWK/ckKkGPYS/YygvkT8rvlwVqISy9BL/NuI9Fs/9K+pd6y4BGUkMTCkIY09Pj4d5eY8U85A==
+X-Received: by 2002:a25:418b:0:b0:d78:ef4:76ae with SMTP id
+ o133-20020a25418b000000b00d780ef476aemr3239939yba.33.1693424521001; 
+ Wed, 30 Aug 2023 12:42:01 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-39b1-0d8a-4eb9-f110.res6.spectrum.com.
+ [2603:6081:7b00:6400:39b1:d8a:4eb9:f110])
  by smtp.gmail.com with ESMTPSA id
- z17-20020a7bc7d1000000b003fc0505be19sm3071178wmk.37.2023.08.30.12.15.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Aug 2023 12:15:36 -0700 (PDT)
-Message-ID: <3bae5070-e99a-4179-a59c-833c9a2971f5@gmail.com>
-Date: Wed, 30 Aug 2023 22:15:33 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 04/13] dm: video: Add damage tracking API
-Content-Language: en-US, tr, en-GB
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
- <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ p5-20020a257405000000b00d74b5e166acsm2894098ybc.10.2023.08.30.12.41.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Aug 2023 12:41:59 -0700 (PDT)
+Date: Wed, 30 Aug 2023 15:41:57 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-5-alpernebiyasak@gmail.com>
- <CAPnjgZ20VRYsP=5S5HJWjR2sNvmOudseHiXUcjnZmDCA=0jfnw@mail.gmail.com>
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <CAPnjgZ20VRYsP=5S5HJWjR2sNvmOudseHiXUcjnZmDCA=0jfnw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ Michal Simek <michal.simek@amd.com>,
+ Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: Re: [PATCH 32/32] pci: serial: Support reading PCI-register size
+ with base
+Message-ID: <20230830194157.GF3101304@bill-the-cat>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-33-sjg@chromium.org>
+ <20230830181459.wtbt3w3qc4ysxwty@pali>
+ <20230830181750.GD3101304@bill-the-cat>
+ <20230830183913.mpj6achf3prjoanb@pali>
+ <20230830190422.GE3101304@bill-the-cat>
+ <20230830191036.hecw3vyabdsczxrb@pali>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OKx7cynOpkpex7MV"
+Content-Disposition: inline
+In-Reply-To: <20230830191036.hecw3vyabdsczxrb@pali>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,53 +111,567 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--OKx7cynOpkpex7MV
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2023-08-21 22:11 +03:00, Simon Glass wrote:
-> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->>
->> From: Alexander Graf <agraf@csgraf.de>
->>
->> We are going to introduce image damage tracking to fasten up screen
->> refresh on large displays. This patch adds damage tracking for up to
->> one rectangle of the screen which is typically enough to hold blt or
->> text print updates. Callers into this API and a reduced dcache flush
->> code path will follow in later patches.
->>
->> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->> Reported-by: Da Xue <da@libre.computer>
->> [Alper: Use xstart/yend, document new fields, return void from
->>         video_damage(), declare priv, drop headers, use IS_ENABLED()]
->> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> ---
->>
->> Changes in v5:
->> - Use xstart, ystart, xend, yend as names for damage region
->> - Document damage struct and fields in struct video_priv comment
->> - Return void from video_damage()
->> - Fix undeclared priv error in video_sync()
->> - Drop unused headers from video-uclass.c
->> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>
->> Changes in v4:
->> - Move damage clear to patch "dm: video: Add damage tracking API"
->> - Simplify first damage logic
->> - Remove VIDEO_DAMAGE default for ARM
->>
->> Changes in v3:
->> - Adapt to always assume DM is used
->>
->> Changes in v2:
->> - Remove ifdefs
->>
->>  drivers/video/Kconfig        | 13 ++++++++++++
->>  drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++++---
->>  include/video.h              | 32 ++++++++++++++++++++++++++--
->>  3 files changed, 81 insertions(+), 5 deletions(-)
->>
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> But I suggest an empty static inline in the case where the feature is disabled?
+Then you should probably remove yourself from the places you've listed
+yourself as an interested maintainer, thanks.
 
-You mean with something like #ifdef CONFIG_VIDEO_DAMAGE, right?
+On Wed, Aug 30, 2023 at 09:10:36PM +0200, Pali Roh=E1r wrote:
+> You have already decided, what is the point? You are not taking any my
+> objections into account, so stop writing to me and to others these your
+> stupids bullshits. I'm not an idiot who is interesting for them.
+>=20
+> On Wednesday 30 August 2023 15:04:22 Tom Rini wrote:
+> > You're a listed maintainer for a file being changed. If you objected to
+> > the changes, your objection would matter.  If you don't object, you can
+> > just ignore it, or review it, whatever you like.  You need to decide
+> > what you want to do about code you're volunteering to maintain.
+> >=20
+> > On Wed, Aug 30, 2023 at 08:39:13PM +0200, Pali Roh=E1r wrote:
+> > > And what? How it is related to the statements that my reviews would a=
+lso
+> > > ignored? And what you want from me now?
+> > >=20
+> > > On Wednesday 30 August 2023 14:17:50 Tom Rini wrote:
+> > > > Pali,
+> > > >=20
+> > > > You are specifically listed as a maintainer for drivers/pci/pci_mve=
+bu.c
+> > > > and that is changed by this patch.
+> > > >=20
+> > > > On Wed, Aug 30, 2023 at 08:14:59PM +0200, Pali Roh=E1r wrote:
+> > > > > Simon, why you are contacting me? You have wrote to me that you w=
+ould
+> > > > > ignore my reviews here, so what you want now? Could you please ex=
+plain
+> > > > > what you are trying to achieve? I'm not going to review this or a=
+ny
+> > > > > other your changes.
+> > > > >=20
+> > > > > On Wednesday 30 August 2023 12:05:03 Simon Glass wrote:
+> > > > > > The PCI helpers read only the base address for a PCI region. In=
+ some cases
+> > > > > > the size is needed as well, e.g. to pass along to a driver whic=
+h needs to
+> > > > > > know the size of its register area.
+> > > > > >=20
+> > > > > > Update the functions to allow the size to be returned. For seri=
+al, record
+> > > > > > the information and provided it with the serial_info() call.
+> > > > > >=20
+> > > > > > A limitation still exists in that the size is not available whe=
+n OF_LIVE
+> > > > > > is enabled, so take account of that in the tests.
+> > > > > >=20
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >=20
+> > > > > >  arch/sandbox/dts/test.dts   |  6 +++---
+> > > > > >  drivers/core/fdtaddr.c      |  6 +++---
+> > > > > >  drivers/core/ofnode.c       | 11 ++++++++---
+> > > > > >  drivers/core/read.c         |  6 ++++--
+> > > > > >  drivers/core/util.c         |  2 +-
+> > > > > >  drivers/pci/pci-uclass.c    |  2 +-
+> > > > > >  drivers/pci/pci_mvebu.c     |  3 ++-
+> > > > > >  drivers/pci/pci_tegra.c     |  2 +-
+> > > > > >  drivers/pci/pcie_mediatek.c |  4 ++--
+> > > > > >  drivers/serial/ns16550.c    | 15 ++++++++++-----
+> > > > > >  include/dm/fdtaddr.h        |  3 ++-
+> > > > > >  include/dm/ofnode.h         |  4 +++-
+> > > > > >  include/dm/read.h           |  8 +++++---
+> > > > > >  include/ns16550.h           |  4 +++-
+> > > > > >  include/serial.h            |  2 ++
+> > > > > >  test/dm/pci.c               | 14 ++++++++++----
+> > > > > >  16 files changed, 60 insertions(+), 32 deletions(-)
+> > > > > >=20
+> > > > > > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.=
+dts
+> > > > > > index a413cbe4989..961e8895a49 100644
+> > > > > > --- a/arch/sandbox/dts/test.dts
+> > > > > > +++ b/arch/sandbox/dts/test.dts
+> > > > > > @@ -1087,8 +1087,8 @@
+> > > > > >  		pci@1,0 {
+> > > > > >  			compatible =3D "pci-generic";
+> > > > > >  			/* reg 0 is at 0x14, using FDT_PCI_SPACE_MEM32 */
+> > > > > > -			reg =3D <0x02000814 0 0 0 0
+> > > > > > -			       0x01000810 0 0 0 0>;
+> > > > > > +			reg =3D <0x02000814 0 0 0x80 0
+> > > > > > +			       0x01000810 0 0 0xc0 0>;
+> > > > > >  			sandbox,emul =3D <&swap_case_emul0_1>;
+> > > > > >  		};
+> > > > > >  		p2sb-pci@2,0 {
+> > > > > > @@ -1115,7 +1115,7 @@
+> > > > > >  		pci@1f,0 {
+> > > > > >  			compatible =3D "pci-generic";
+> > > > > >  			/* reg 0 is at 0x10, using FDT_PCI_SPACE_IO */
+> > > > > > -			reg =3D <0x0100f810 0 0 0 0>;
+> > > > > > +			reg =3D <0x0100f810 0 0 0x100 0>;
+> > > > > >  			sandbox,emul =3D <&swap_case_emul0_1f>;
+> > > > > >  		};
+> > > > > >  	};
+> > > > > > diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
+> > > > > > index 546db675aaf..b79d138c419 100644
+> > > > > > --- a/drivers/core/fdtaddr.c
+> > > > > > +++ b/drivers/core/fdtaddr.c
+> > > > > > @@ -215,7 +215,7 @@ void *devfdt_map_physmem(const struct udevi=
+ce *dev, unsigned long size)
+> > > > > >  	return map_physmem(addr, size, MAP_NOCACHE);
+> > > > > >  }
+> > > > > > =20
+> > > > > > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
+> > > > > > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_=
+size_t *sizep)
+> > > > > >  {
+> > > > > >  	ulong addr;
+> > > > > > =20
+> > > > > > @@ -226,12 +226,12 @@ fdt_addr_t devfdt_get_addr_pci(const stru=
+ct udevice *dev)
+> > > > > >  		int ret;
+> > > > > > =20
+> > > > > >  		ret =3D ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_=
+MEM32,
+> > > > > > -					   "reg", &pci_addr);
+> > > > > > +					   "reg", &pci_addr, sizep);
+> > > > > >  		if (ret) {
+> > > > > >  			/* try if there is any i/o-mapped register */
+> > > > > >  			ret =3D ofnode_read_pci_addr(dev_ofnode(dev),
+> > > > > >  						   FDT_PCI_SPACE_IO, "reg",
+> > > > > > -						   &pci_addr);
+> > > > > > +						   &pci_addr, sizep);
+> > > > > >  			if (ret)
+> > > > > >  				return FDT_ADDR_T_NONE;
+> > > > > >  		}
+> > > > > > diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> > > > > > index 2ef4114cb6f..c9cec456f43 100644
+> > > > > > --- a/drivers/core/ofnode.c
+> > > > > > +++ b/drivers/core/ofnode.c
+> > > > > > @@ -1270,7 +1270,8 @@ const uint8_t *ofnode_read_u8_array_ptr(o=
+fnode node, const char *propname,
+> > > > > >  }
+> > > > > > =20
+> > > > > >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > > -			 const char *propname, struct fdt_pci_addr *addr)
+> > > > > > +			 const char *propname, struct fdt_pci_addr *addr,
+> > > > > > +			 fdt_size_t *size)
+> > > > > >  {
+> > > > > >  	const fdt32_t *cell;
+> > > > > >  	int len;
+> > > > > > @@ -1298,14 +1299,18 @@ int ofnode_read_pci_addr(ofnode node, e=
+num fdt_pci_space type,
+> > > > > >  			      (ulong)fdt32_to_cpu(cell[1]),
+> > > > > >  			      (ulong)fdt32_to_cpu(cell[2]));
+> > > > > >  			if ((fdt32_to_cpu(*cell) & type) =3D=3D type) {
+> > > > > > +				const unaligned_fdt64_t *ptr;
+> > > > > > +
+> > > > > >  				addr->phys_hi =3D fdt32_to_cpu(cell[0]);
+> > > > > >  				addr->phys_mid =3D fdt32_to_cpu(cell[1]);
+> > > > > >  				addr->phys_lo =3D fdt32_to_cpu(cell[2]);
+> > > > > > +				ptr =3D (const unaligned_fdt64_t *)(cell + 3);
+> > > > > > +				if (size)
+> > > > > > +					*size =3D fdt64_to_cpu(*ptr);
+> > > > > >  				break;
+> > > > > >  			}
+> > > > > > =20
+> > > > > > -			cell +=3D (FDT_PCI_ADDR_CELLS +
+> > > > > > -				 FDT_PCI_SIZE_CELLS);
+> > > > > > +			cell +=3D FDT_PCI_ADDR_CELLS + FDT_PCI_SIZE_CELLS;
+> > > > > >  		}
+> > > > > > =20
+> > > > > >  		if (i =3D=3D num) {
+> > > > > > diff --git a/drivers/core/read.c b/drivers/core/read.c
+> > > > > > index 49066b59cda..419013451f0 100644
+> > > > > > --- a/drivers/core/read.c
+> > > > > > +++ b/drivers/core/read.c
+> > > > > > @@ -405,13 +405,15 @@ int dev_read_alias_highest_id(const char =
+*stem)
+> > > > > >  	return fdtdec_get_alias_highest_id(gd->fdt_blob, stem);
+> > > > > >  }
+> > > > > > =20
+> > > > > > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
+> > > > > > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_si=
+ze_t *sizep)
+> > > > > >  {
+> > > > > >  	ulong addr;
+> > > > > > =20
+> > > > > >  	addr =3D dev_read_addr(dev);
+> > > > > > +	if (sizep)
+> > > > > > +		*sizep =3D 0;
+> > > > > >  	if (addr =3D=3D FDT_ADDR_T_NONE && !of_live_active())
+> > > > > > -		addr =3D devfdt_get_addr_pci(dev);
+> > > > > > +		addr =3D devfdt_get_addr_pci(dev, sizep);
+> > > > > > =20
+> > > > > >  	return addr;
+> > > > > >  }
+> > > > > > diff --git a/drivers/core/util.c b/drivers/core/util.c
+> > > > > > index aa60fdd15bc..81497df85ff 100644
+> > > > > > --- a/drivers/core/util.c
+> > > > > > +++ b/drivers/core/util.c
+> > > > > > @@ -30,7 +30,7 @@ int pci_get_devfn(struct udevice *dev)
+> > > > > > =20
+> > > > > >  	/* Extract the devfn from fdt_pci_addr */
+> > > > > >  	ret =3D ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_C=
+ONFIG,
+> > > > > > -				   "reg", &addr);
+> > > > > > +				   "reg", &addr, NULL);
+> > > > > >  	if (ret) {
+> > > > > >  		if (ret !=3D -ENOENT)
+> > > > > >  			return -EINVAL;
+> > > > > > diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+> > > > > > index 0adcdceb1d3..c670f8754e8 100644
+> > > > > > --- a/drivers/pci/pci-uclass.c
+> > > > > > +++ b/drivers/pci/pci-uclass.c
+> > > > > > @@ -122,7 +122,7 @@ static void pci_dev_find_ofnode(struct udev=
+ice *bus, phys_addr_t bdf,
+> > > > > > =20
+> > > > > >  	dev_for_each_subnode(node, bus) {
+> > > > > >  		ret =3D ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "re=
+g",
+> > > > > > -					   &addr);
+> > > > > > +					   &addr, NULL);
+> > > > > >  		if (ret)
+> > > > > >  			continue;
+> > > > > > =20
+> > > > > > diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
+> > > > > > index 93a7508d8a2..25878bde534 100644
+> > > > > > --- a/drivers/pci/pci_mvebu.c
+> > > > > > +++ b/drivers/pci/pci_mvebu.c
+> > > > > > @@ -640,7 +640,8 @@ static int mvebu_pcie_port_parse_dt(ofnode =
+node, ofnode parent, struct mvebu_pci
+> > > > > >  		pcie->is_x4 =3D true;
+> > > > > > =20
+> > > > > >  	/* devfn is in bits [15:8], see PCI_DEV usage */
+> > > > > > -	ret =3D ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg=
+", &pci_addr);
+> > > > > > +	ret =3D ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg=
+", &pci_addr,
+> > > > > > +				   NULL);
+> > > > > >  	if (ret < 0) {
+> > > > > >  		printf("%s: property \"reg\" is invalid\n", pcie->name);
+> > > > > >  		goto err;
+> > > > > > diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
+> > > > > > index 29d54117e93..ae90bd2fbf1 100644
+> > > > > > --- a/drivers/pci/pci_tegra.c
+> > > > > > +++ b/drivers/pci/pci_tegra.c
+> > > > > > @@ -461,7 +461,7 @@ static int tegra_pcie_parse_port_info(ofnod=
+e node, uint *index, uint *lanes)
+> > > > > > =20
+> > > > > >  	*lanes =3D err;
+> > > > > > =20
+> > > > > > -	err =3D ofnode_read_pci_addr(node, 0, "reg", &addr);
+> > > > > > +	err =3D ofnode_read_pci_addr(node, 0, "reg", &addr, NULL);
+> > > > > >  	if (err < 0) {
+> > > > > >  		pr_err("failed to parse \"reg\" property\n");
+> > > > > >  		return err;
+> > > > > > diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_med=
+iatek.c
+> > > > > > index c6e30e24622..e59ebd13ad0 100644
+> > > > > > --- a/drivers/pci/pcie_mediatek.c
+> > > > > > +++ b/drivers/pci/pcie_mediatek.c
+> > > > > > @@ -660,7 +660,7 @@ static int mtk_pcie_probe(struct udevice *d=
+ev)
+> > > > > >  		if (!ofnode_is_enabled(subnode))
+> > > > > >  			continue;
+> > > > > > =20
+> > > > > > -		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr);
+> > > > > > +		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+> > > > > >  		if (err)
+> > > > > >  			return err;
+> > > > > > =20
+> > > > > > @@ -699,7 +699,7 @@ static int mtk_pcie_probe_v2(struct udevice=
+ *dev)
+> > > > > >  		if (!ofnode_is_enabled(subnode))
+> > > > > >  			continue;
+> > > > > > =20
+> > > > > > -		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr);
+> > > > > > +		err =3D ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+> > > > > >  		if (err)
+> > > > > >  			return err;
+> > > > > > =20
+> > > > > > diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+> > > > > > index eab9537fbae..a349e5e132a 100644
+> > > > > > --- a/drivers/serial/ns16550.c
+> > > > > > +++ b/drivers/serial/ns16550.c
+> > > > > > @@ -479,6 +479,7 @@ static int ns16550_serial_getinfo(struct ud=
+evice *dev,
+> > > > > >  	info->addr_space =3D SERIAL_ADDRESS_SPACE_MEMORY;
+> > > > > >  #endif
+> > > > > >  	info->addr =3D plat->base;
+> > > > > > +	info->size =3D plat->size;
+> > > > > >  	info->reg_width =3D plat->reg_width;
+> > > > > >  	info->reg_shift =3D plat->reg_shift;
+> > > > > >  	info->reg_offset =3D plat->reg_offset;
+> > > > > > @@ -487,7 +488,8 @@ static int ns16550_serial_getinfo(struct ud=
+evice *dev,
+> > > > > >  	return 0;
+> > > > > >  }
+> > > > > > =20
+> > > > > > -static int ns16550_serial_assign_base(struct ns16550_plat *pla=
+t, fdt_addr_t base)
+> > > > > > +static int ns16550_serial_assign_base(struct ns16550_plat *pla=
+t,
+> > > > > > +				      fdt_addr_t base, fdt_size_t size)
+> > > > > >  {
+> > > > > >  	if (base =3D=3D FDT_ADDR_T_NONE)
+> > > > > >  		return -EINVAL;
+> > > > > > @@ -497,6 +499,7 @@ static int ns16550_serial_assign_base(struc=
+t ns16550_plat *plat, fdt_addr_t base
+> > > > > >  #else
+> > > > > >  	plat->base =3D (unsigned long)map_physmem(base, 0, MAP_NOCACH=
+E);
+> > > > > >  #endif
+> > > > > > +	plat->size =3D size;
+> > > > > > =20
+> > > > > >  	return 0;
+> > > > > >  }
+> > > > > > @@ -507,6 +510,7 @@ int ns16550_serial_probe(struct udevice *de=
+v)
+> > > > > >  	struct ns16550 *const com_port =3D dev_get_priv(dev);
+> > > > > >  	struct reset_ctl_bulk reset_bulk;
+> > > > > >  	fdt_addr_t addr;
+> > > > > > +	fdt_addr_t size;
+> > > > > >  	int ret;
+> > > > > > =20
+> > > > > >  	/*
+> > > > > > @@ -514,8 +518,8 @@ int ns16550_serial_probe(struct udevice *de=
+v)
+> > > > > >  	 * or via a PCI bridge, assign plat->base before probing hard=
+ware.
+> > > > > >  	 */
+> > > > > >  	if (device_is_on_pci_bus(dev)) {
+> > > > > > -		addr =3D devfdt_get_addr_pci(dev);
+> > > > > > -		ret =3D ns16550_serial_assign_base(plat, addr);
+> > > > > > +		addr =3D devfdt_get_addr_pci(dev, &size);
+> > > > > > +		ret =3D ns16550_serial_assign_base(plat, addr, size);
+> > > > > >  		if (ret)
+> > > > > >  			return ret;
+> > > > > >  	}
+> > > > > > @@ -543,11 +547,12 @@ int ns16550_serial_of_to_plat(struct udev=
+ice *dev)
+> > > > > >  	struct ns16550_plat *plat =3D dev_get_plat(dev);
+> > > > > >  	const u32 port_type =3D dev_get_driver_data(dev);
+> > > > > >  	fdt_addr_t addr;
+> > > > > > +	fdt_size_t size;
+> > > > > >  	struct clk clk;
+> > > > > >  	int err;
+> > > > > > =20
+> > > > > > -	addr =3D dev_read_addr(dev);
+> > > > > > -	err =3D ns16550_serial_assign_base(plat, addr);
+> > > > > > +	addr =3D dev_read_addr_size(dev, &size);
+> > > > > > +	err =3D ns16550_serial_assign_base(plat, addr, size);
+> > > > > >  	if (err && !device_is_on_pci_bus(dev))
+> > > > > >  		return err;
+> > > > > > =20
+> > > > > > diff --git a/include/dm/fdtaddr.h b/include/dm/fdtaddr.h
+> > > > > > index dcdc19137cc..6d2fa8f1044 100644
+> > > > > > --- a/include/dm/fdtaddr.h
+> > > > > > +++ b/include/dm/fdtaddr.h
+> > > > > > @@ -168,8 +168,9 @@ fdt_addr_t devfdt_get_addr_size_name(const =
+struct udevice *dev,
+> > > > > >   * devfdt_get_addr_pci() - Read an address and handle PCI addr=
+ess translation
+> > > > > >   *
+> > > > > >   * @dev: Device to read from
+> > > > > > + * @sizep: If non-NULL, returns size of address space
+> > > > > >   * Return: address or FDT_ADDR_T_NONE if not found
+> > > > > >   */
+> > > > > > -fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev);
+> > > > > > +fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_=
+size_t *sizep);
+> > > > > > =20
+> > > > > >  #endif
+> > > > > > diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> > > > > > index 726d8f82ddf..97cad971611 100644
+> > > > > > --- a/include/dm/ofnode.h
+> > > > > > +++ b/include/dm/ofnode.h
+> > > > > > @@ -1152,13 +1152,15 @@ const uint8_t *ofnode_read_u8_array_ptr=
+(ofnode node, const char *propname,
+> > > > > >   * @type:	pci address type (FDT_PCI_SPACE_xxx)
+> > > > > >   * @propname:	name of property to find
+> > > > > >   * @addr:	returns pci address in the form of fdt_pci_addr
+> > > > > > + * @size:	if non-null, returns register-space size
+> > > > > >   * Return:
+> > > > > >   * 0 if ok, -ENOENT if the property did not exist, -EINVAL if =
+the
+> > > > > >   * format of the property was invalid, -ENXIO if the requested
+> > > > > >   * address type was not found
+> > > > > >   */
+> > > > > >  int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
+> > > > > > -			 const char *propname, struct fdt_pci_addr *addr);
+> > > > > > +			 const char *propname, struct fdt_pci_addr *addr,
+> > > > > > +			 fdt_size_t *size);
+> > > > > > =20
+> > > > > >  /**
+> > > > > >   * ofnode_read_pci_vendev() - look up PCI vendor and device id
+> > > > > > diff --git a/include/dm/read.h b/include/dm/read.h
+> > > > > > index c2615f72f40..3c2eea6f0c4 100644
+> > > > > > --- a/include/dm/read.h
+> > > > > > +++ b/include/dm/read.h
+> > > > > > @@ -346,9 +346,10 @@ void *dev_read_addr_ptr(const struct udevi=
+ce *dev);
+> > > > > >   *    fdtdec_get_addr() and friends.
+> > > > > >   *
+> > > > > >   * @dev: Device to read from
+> > > > > > + * @sizep: If non-NULL, returns size of address space found
+> > > > > >   * Return: address or FDT_ADDR_T_NONE if not found
+> > > > > >   */
+> > > > > > -fdt_addr_t dev_read_addr_pci(const struct udevice *dev);
+> > > > > > +fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_si=
+ze_t *sizep);
+> > > > > > =20
+> > > > > >  /**
+> > > > > >   * dev_remap_addr() - Get the reg property of a device as a
+> > > > > > @@ -996,9 +997,10 @@ static inline void *dev_read_addr_ptr(cons=
+t struct udevice *dev)
+> > > > > >  	return devfdt_get_addr_ptr(dev);
+> > > > > >  }
+> > > > > > =20
+> > > > > > -static inline fdt_addr_t dev_read_addr_pci(const struct udevic=
+e *dev)
+> > > > > > +static inline fdt_addr_t dev_read_addr_pci(const struct udevic=
+e *dev,
+> > > > > > +					   fdt_size_t *sizep)
+> > > > > >  {
+> > > > > > -	return devfdt_get_addr_pci(dev);
+> > > > > > +	return devfdt_get_addr_pci(dev, sizep);
+> > > > > >  }
+> > > > > > =20
+> > > > > >  static inline void *dev_remap_addr(const struct udevice *dev)
+> > > > > > diff --git a/include/ns16550.h b/include/ns16550.h
+> > > > > > index e7e68663d03..7f481300083 100644
+> > > > > > --- a/include/ns16550.h
+> > > > > > +++ b/include/ns16550.h
+> > > > > > @@ -58,6 +58,7 @@ enum ns16550_flags {
+> > > > > >   * struct ns16550_plat - information about a NS16550 port
+> > > > > >   *
+> > > > > >   * @base:		Base register address
+> > > > > > + * @size:		Size of register area in bytes
+> > > > > >   * @reg_width:		IO accesses size of registers (in bytes, 1 or =
+4)
+> > > > > >   * @reg_shift:		Shift size of registers (0=3Dbyte, 1=3D16bit, =
+2=3D32bit...)
+> > > > > >   * @reg_offset:		Offset to start of registers (normally 0)
+> > > > > > @@ -67,7 +68,8 @@ enum ns16550_flags {
+> > > > > >   * @bdf:		PCI slot/function (pci_dev_t)
+> > > > > >   */
+> > > > > >  struct ns16550_plat {
+> > > > > > -	unsigned long base;
+> > > > > > +	ulong base;
+> > > > > > +	ulong size;
+> > > > > >  	int reg_width;
+> > > > > >  	int reg_shift;
+> > > > > >  	int reg_offset;
+> > > > > > diff --git a/include/serial.h b/include/serial.h
+> > > > > > index 42bdf3759c0..205889d28be 100644
+> > > > > > --- a/include/serial.h
+> > > > > > +++ b/include/serial.h
+> > > > > > @@ -137,6 +137,7 @@ enum adr_space_type {
+> > > > > >   * @type:	type of the UART chip
+> > > > > >   * @addr_space:	address space to access the registers
+> > > > > >   * @addr:	physical address of the registers
+> > > > > > + * @size:	size of the register area in bytes
+> > > > > >   * @reg_width:	size (in bytes) of the IO accesses to the regis=
+ters
+> > > > > >   * @reg_offset:	offset to apply to the @addr from the start of=
+ the registers
+> > > > > >   * @reg_shift:	quantity to shift the register offsets by
+> > > > > > @@ -147,6 +148,7 @@ struct serial_device_info {
+> > > > > >  	enum serial_chip_type type;
+> > > > > >  	enum adr_space_type addr_space;
+> > > > > >  	ulong addr;
+> > > > > > +	ulong size;
+> > > > > >  	u8 reg_width;
+> > > > > >  	u8 reg_offset;
+> > > > > >  	u8 reg_shift;
+> > > > > > diff --git a/test/dm/pci.c b/test/dm/pci.c
+> > > > > > index 70a736cfdb8..8c5e7da9e62 100644
+> > > > > > --- a/test/dm/pci.c
+> > > > > > +++ b/test/dm/pci.c
+> > > > > > @@ -301,10 +301,12 @@ static int dm_test_pci_addr_flat(struct u=
+nit_test_state *uts)
+> > > > > >  {
+> > > > > >  	struct udevice *swap1f, *swap1;
+> > > > > >  	ulong io_addr, mem_addr;
+> > > > > > +	fdt_addr_t size;
+> > > > > > =20
+> > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f)=
+);
+> > > > > >  	io_addr =3D dm_pci_read_bar32(swap1f, 0);
+> > > > > > -	ut_asserteq(io_addr, dev_read_addr_pci(swap1f));
+> > > > > > +	ut_asserteq(io_addr, dev_read_addr_pci(swap1f, &size));
+> > > > > > +	ut_asserteq(0, size);
+> > > > > > =20
+> > > > > >  	/*
+> > > > > >  	 * This device has both I/O and MEM spaces but the MEM space =
+appears
+> > > > > > @@ -312,7 +314,8 @@ static int dm_test_pci_addr_flat(struct uni=
+t_test_state *uts)
+> > > > > >  	 */
+> > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
+> > > > > >  	mem_addr =3D dm_pci_read_bar32(swap1, 1);
+> > > > > > -	ut_asserteq(mem_addr, dev_read_addr_pci(swap1));
+> > > > > > +	ut_asserteq(mem_addr, dev_read_addr_pci(swap1, &size));
+> > > > > > +	ut_asserteq(0, size);
+> > > > > > =20
+> > > > > >  	return 0;
+> > > > > >  }
+> > > > > > @@ -329,12 +332,15 @@ DM_TEST(dm_test_pci_addr_flat, UT_TESTF_S=
+CAN_PDATA | UT_TESTF_SCAN_FDT |
+> > > > > >  static int dm_test_pci_addr_live(struct unit_test_state *uts)
+> > > > > >  {
+> > > > > >  	struct udevice *swap1f, *swap1;
+> > > > > > +	fdt_size_t size;
+> > > > > > =20
+> > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f)=
+);
+> > > > > > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
+> > > > > > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f, &si=
+ze));
+> > > > > > +	ut_asserteq(0, size);
+> > > > > > =20
+> > > > > >  	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
+> > > > > > -	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
+> > > > > > +	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1, &siz=
+e));
+> > > > > > +	ut_asserteq(0, size);
+> > > > > > =20
+> > > > > >  	return 0;
+> > > > > >  }
+> > > > > > --=20
+> > > > > > 2.42.0.rc2.253.gd59a3bf2b4-goog
+> > > > > >=20
+> > > >=20
+> > > > --=20
+> > > > Tom
+> > >=20
+> > >=20
+> >=20
+> > --=20
+> > Tom
+>=20
+>=20
+
+--=20
+Tom
+
+--OKx7cynOpkpex7MV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTvm3oACgkQFHw5/5Y0
+tyxflwv/fEcQhC+3nqPWojwD2HF8eH8/1elqtKfOkqsgsSibnJGWY6hstygrgztd
+KboNjfZdXoARAzdaJyTgVzeGIsZupXXQcZofOnTGVdYkSl5UBHMVsgNlwzRgCLnZ
+j6bZkVeIeie2Om1XBdqkbfNGaYqQuJ+E66UvZ1NaCcxX0YJAqSoGTdGU5uBI2hdU
+pn+NobD8OpJAwdM4djWWsizy1KNnv8iEjApEBqApGuMPEYcD/ggDbAeGl+Y8JpST
+fJ37kj0WvV49d86EKzujKDH3MaNjvgGpi3TTJ1Wa87NvcQA6v+eQseX6eXTaMYcq
+gTtMXx5AxrkvNKyo3VGkCsX0TlGs/yzO0jfsvCh27OHyuP7CLtUdTVHzyjSzgiHt
+hjXCW7JPAly3b6VkPJAIQ9xTuabX3e1RzV1LJ1YUf1ouLxIXF84oF4wZxYXzfXTC
+kkwifWnRR66d7t1ytDkzhpz45/89fIGfQKT9xNh18j5cbIsFgH1tsdEoETLAzMwz
+xDDyGrAA
+=TPP7
+-----END PGP SIGNATURE-----
+
+--OKx7cynOpkpex7MV--
