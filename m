@@ -4,55 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAC5C83F15
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 09:55:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351F3C83F14
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 11:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C60E48650F;
-	Wed, 30 Aug 2023 11:55:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 0EAC886521;
+	Wed, 30 Aug 2023 13:32:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Abpp4btS";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13BD886514; Wed, 30 Aug 2023 11:55:57 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B896864EF
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 11:55:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ id CF89B86522; Wed, 30 Aug 2023 13:32:39 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 47B198469B
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 13:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-Received: from [192.168.0.115] (unknown [176.236.51.75])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 1C1F1660319E;
- Wed, 30 Aug 2023 10:55:53 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1693389353;
- bh=oxfGZlTQPkwv/ObImCzzcwZgSkMssLpTKwKiS8Uxx1c=;
- h=Date:To:Cc:From:Subject:From;
- b=Abpp4btS0GKzm+X74dbR+K82S7hWcc2VNeJZGBxQU5G062ZmgJF2fw7Cb7kr7NSt+
- WCAbNH7rA2jEI+5ql6W7RRLF/38nCmNCZ27R3hPX5C0xtRlmbQuRyoBbuLtfGEZFUK
- 1rovxahSJ9Hwc/7Bs1AR9MkoE814T6Xa6EnAv0IZIT0kAPSZpsRREpRkmjeyLJIzey
- 6tbvLWCuwgAxCowP7NXP0QmsLAyagTBUIDOZcgi+KeRkuuJOvIZyhsGjbFN3JqRaaZ
- KMP0N29SivEWnusBxGX+U+PC1aGrEjw3MBmyXRKOxH0hR4oKMUhCaK7GkR0Km5Ao13
- 9GNJGnI17FCAg==
-Message-ID: <0b6d43cf-3afc-a2c6-a29f-efefbbf1d5d8@collabora.com>
-Date: Wed, 30 Aug 2023 12:55:49 +0300
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C43022F4;
+ Wed, 30 Aug 2023 04:33:14 -0700 (PDT)
+Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.58])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 75A833F64C;
+ Wed, 30 Aug 2023 04:32:34 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Cc: Peter Hoyes <peter.hoyes@arm.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH] driver: rng: Add DM_RNG interface for ARMv8.5 RNDR registers
+Date: Wed, 30 Aug 2023 12:32:30 +0100
+Message-Id: <20230830113230.3925868-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-Subject: [PULL next] u-boot-at91-2023.10-a
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,89 +53,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+The ARMv8.5 architecture extension defines architectural RNDR/RNDRRS
+system registers, that provide 64 bits worth of randomness on every
+read. Since it's an extension, and implementing it is optional, there is
+a field in the ID_AA64ISAR0_EL1 ID register to query the availability
+of those registers.
 
+Add a UCLASS_RNG driver that returns entropy via repeated reads from
+those system registers, if the extension is implemented.
+The driver always binds, but checks the availability in the probe()
+routine.
 
-Please pull tag u-boot-at91-2023.10-a , the first set of at91
-features for the next cycle 2023.10 .
+This helps systems which suffer from low boot entropy, since U-Boot can
+provide entropy via the generic UEFI entropy gathering protocol to the OS,
+at an early stage.
 
-This feature set includes a new board sama5d29 Curiosity, and various 
-fixes and alignments for sam9x60 and sam9x60 curiosity board.
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
+Hi Simon,
+
+not sure if this is the expected way to model a driver which autodetects
+its device at runtime. It somewhat works, but always lists the bound
+device, even if the registers are not supported. If I do the check in bind
+instead, it fails booting when this returns -ENODEV, since it expects
+the fixed device to always bind successfully, I guess?
+Is there any other way of modeling this? And before you say your
+favourite two letters: this is not a DT job, since it can be safely
+auto-detected in an architectural way.
 
 Thanks,
-Eugen
+Andre
 
+ arch/arm/include/asm/system.h |  1 +
+ drivers/rng/Kconfig           |  6 +++
+ drivers/rng/Makefile          |  1 +
+ drivers/rng/arm_rndr.c        | 82 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 90 insertions(+)
+ create mode 100644 drivers/rng/arm_rndr.c
 
-The following changes since commit 7755b2200777f72dca87dd169138e95f011bbcb9:
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index 87d1c77e8b1..0eae857e73a 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -84,6 +84,7 @@
+ #define HCR_EL2_HCD_DIS		(1 << 29) /* Hypervisor Call disabled         */
+ #define HCR_EL2_AMO_EL2		(1 <<  5) /* Route SErrors to EL2             */
+ 
++#define ID_AA64ISAR0_EL1_RNDR	(0xFUL << 60) /* RNDR random registers */
+ /*
+  * ID_AA64ISAR1_EL1 bits definitions
+  */
+diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+index 5deb5db5b71..72788d479cc 100644
+--- a/drivers/rng/Kconfig
++++ b/drivers/rng/Kconfig
+@@ -76,6 +76,12 @@ config RNG_SMCCC_TRNG
+ 	  Enable random number generator for platforms that support Arm
+ 	  SMCCC TRNG interface.
+ 
++config RNG_ARM_RNDR
++	bool "Generic ARMv8.5 RNDR register"
++	depends on DM_RNG && ARM64
++	help
++	  Use the ARMv8.5 RNDR register to provide random numbers.
++
+ config TPM_RNG
+ 	bool "Enable random number generator on TPM device"
+ 	depends on TPM
+diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+index 78f61051acf..572fa7a0c66 100644
+--- a/drivers/rng/Makefile
++++ b/drivers/rng/Makefile
+@@ -13,4 +13,5 @@ obj-$(CONFIG_RNG_STM32MP1) += stm32mp1_rng.o
+ obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
+ obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
+ obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
++obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
+ obj-$(CONFIG_TPM_RNG) += tpm_rng.o
+diff --git a/drivers/rng/arm_rndr.c b/drivers/rng/arm_rndr.c
+new file mode 100644
+index 00000000000..55989743eae
+--- /dev/null
++++ b/drivers/rng/arm_rndr.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2023, Arm Ltd.
++ *
++ * Use the (optional) ARMv8.5 RNDR register to provide random numbers to
++ * U-Boot's UCLASS_RNG users.
++ * Detection is done at runtime using the CPU ID registers.
++ */
++
++#define LOG_CATEGORY UCLASS_RNG
++
++#include <common.h>
++#include <dm.h>
++#include <linux/kernel.h>
++#include <rng.h>
++#include <asm/system.h>
++
++#define DRIVER_NAME	"arm-rndr"
++
++static bool cpu_has_rndr(void)
++{
++	uint64_t reg;
++
++	__asm__ volatile("mrs %0, ID_AA64ISAR0_EL1\n" : "=r" (reg));
++	return !!(reg & ID_AA64ISAR0_EL1_RNDR);
++}
++
++/*
++ * The system register name is RNDR, but this isn't widely known among older
++ * toolchains, and also triggers errors because of it being an architecture
++ * extension. Since we check the availability of the register before, it's
++ * fine to use here, though.
++ */
++#define RNDR	"S3_3_C2_C4_0"
++
++static uint64_t read_rndr(void)
++{
++	uint64_t reg;
++
++	__asm__ volatile("mrs %0, " RNDR "\n" : "=r" (reg));
++
++	return reg;
++}
++
++static int arm_rndr_read(struct udevice *dev, void *data, size_t len)
++{
++	uint64_t random;
++
++	while (len) {
++		int tocopy = min(sizeof(uint64_t), len);
++
++		random = read_rndr();
++		memcpy(data, &random, tocopy);
++		len -= tocopy;
++		data += tocopy;
++	}
++
++	return 0;
++}
++
++static const struct dm_rng_ops arm_rndr_ops = {
++	.read = arm_rndr_read,
++};
++
++static int arm_rndr_probe(struct udevice *dev)
++{
++	if (!cpu_has_rndr())
++		return -ENODEV;
++
++	return 0;
++}
++
++U_BOOT_DRIVER(arm_rndr) = {
++	.name = DRIVER_NAME,
++	.id = UCLASS_RNG,
++	.ops = &arm_rndr_ops,
++	.probe = arm_rndr_probe,
++};
++
++U_BOOT_DRVINFO(cpu_arm_rndr) = {
++	.name = DRIVER_NAME,
++};
+-- 
+2.25.1
 
-   Merge tag 'x86-pull-20230801' of 
-https://source.denx.de/u-boot/custodians/u-boot-x86 (2023-08-01 11:57:55 
--0400)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-at91.git 
-tags/u-boot-at91-2023.10-a
-
-for you to fetch changes up to 6e8c9d29e3a72f93e4d5125079eaaa1b5a52a951:
-
-   ARM: dts: at91: sam9x60-curiosity: Sync gpio button from Linux 
-(2023-08-29 17:39:01 +0300)
-
-----------------------------------------------------------------
-First set of u-boot-at91 features for the 2023.10 cycle
-
-----------------------------------------------------------------
-Alexander Dahl (11):
-       ARM: dts: at91: sam9x60: Better align with upstream dtsi
-       ARM: dts: at91: sam9x60-curiosity: Fix EEPROM type
-       ARM: dts: at91: sam9x60: Change i2c compatible
-       ARM: dts: at91: sam9x60-curiosity: Improve alignment with upstream
-       ARM: dts: at91: sam9x60-curiosity: Add raw NAND flash
-       mtd: nand: raw: atmel: Remove duplicate line
-       configs: at91: sam9x60_curiosity: Sync both defconfig variants
-       configs: at91: sam9x60: Switch to new reset driver
-       ARM: dts: at91: sam9x60-curiosity: Sync LED nodes from Linux
-       board: sam9x60-curiosity: Let LED subsystem init leds if enabled
-       ARM: dts: at91: sam9x60-curiosity: Sync gpio button from Linux
-
-Mihai Sain (1):
-       board: at91: sama5d29_curiosity: add initial support for 
-sama5d29_curiosity
-
-  arch/arm/dts/Makefile                              |   3 +
-  arch/arm/dts/at91-sam9x60_curiosity-u-boot.dtsi    |  26 ++-
-  arch/arm/dts/at91-sam9x60_curiosity.dts            | 249 
-+++++++++++++++++----
-  arch/arm/dts/at91-sama5d29_curiosity-u-boot.dtsi   |  55 +++++
-  arch/arm/dts/at91-sama5d29_curiosity.dts           | 219 
-++++++++++++++++++
-  arch/arm/dts/sam9x60.dtsi                          |  66 +++---
-  arch/arm/dts/sam9x60ek.dts                         |   2 +-
-  arch/arm/mach-at91/Kconfig                         |  12 +
-  board/atmel/sam9x60_curiosity/sam9x60_curiosity.c  |  18 ++
-  board/atmel/sama5d29_curiosity/Kconfig             |  15 ++
-  board/atmel/sama5d29_curiosity/MAINTAINERS         |   9 +
-  board/atmel/sama5d29_curiosity/Makefile            |   7 +
-  .../atmel/sama5d29_curiosity/sama5d29_curiosity.c  |  86 +++++++
-  configs/sam9x60_curiosity_mmc1_defconfig           |   2 +
-  configs/sam9x60_curiosity_mmc_defconfig            |  17 +-
-  configs/sam9x60ek_mmc_defconfig                    |   2 +
-  configs/sam9x60ek_nandflash_defconfig              |   2 +
-  configs/sam9x60ek_qspiflash_defconfig              |   2 +
-  configs/sama5d29_curiosity_mmc1_defconfig          | 120 ++++++++++
-  configs/sama5d29_curiosity_mmc_defconfig           | 119 ++++++++++
-  configs/sama5d29_curiosity_qspiflash_defconfig     | 119 ++++++++++
-  drivers/mtd/nand/raw/atmel/nand-controller.c       |   1 -
-  include/configs/sama5d29_curiosity.h               |  17 ++
-  23 files changed, 1079 insertions(+), 89 deletions(-)
-  create mode 100644 arch/arm/dts/at91-sama5d29_curiosity-u-boot.dtsi
-  create mode 100644 arch/arm/dts/at91-sama5d29_curiosity.dts
-  create mode 100644 board/atmel/sama5d29_curiosity/Kconfig
-  create mode 100644 board/atmel/sama5d29_curiosity/MAINTAINERS
-  create mode 100644 board/atmel/sama5d29_curiosity/Makefile
-  create mode 100644 board/atmel/sama5d29_curiosity/sama5d29_curiosity.c
-  create mode 100644 configs/sama5d29_curiosity_mmc1_defconfig
-  create mode 100644 configs/sama5d29_curiosity_mmc_defconfig
-  create mode 100644 configs/sama5d29_curiosity_qspiflash_defconfig
-  create mode 100644 include/configs/sama5d29_curiosity.h
