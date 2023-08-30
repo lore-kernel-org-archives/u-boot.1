@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E040C83F01
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05575C83F14
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 19:57:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B8998653F;
-	Wed, 30 Aug 2023 21:55:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 73DB286549;
+	Wed, 30 Aug 2023 21:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D06D86535; Wed, 30 Aug 2023 21:55:08 +0200 (CEST)
+ id 8166786535; Wed, 30 Aug 2023 21:57:14 +0200 (CEST)
 Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by phobos.denx.de (Postfix) with ESMTP id 38BC486545
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:55:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7C92086542
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:57:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=csgraf.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=agraf@csgraf.de
 Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
- [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id CC4A66080255;
- Wed, 30 Aug 2023 21:55:00 +0200 (CEST)
-Message-ID: <33eb49da-e563-4ffd-986f-0c7ef852be61@csgraf.de>
-Date: Wed, 30 Aug 2023 21:55:00 +0200
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 2CDFC6080255;
+ Wed, 30 Aug 2023 21:57:09 +0200 (CEST)
+Message-ID: <17f7ca24-f961-41fd-a2e4-9f3dca7d75e4@csgraf.de>
+Date: Wed, 30 Aug 2023 21:57:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/13] Add video damage tracking
+Subject: Re: [PATCH v5 10/13] video: Only dcache flush damaged lines
 Content-Language: en-GB
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: xypron.glpk@gmx.de, sjg@chromium.org, alpernebiyasak@gmail.com,
- u-boot@lists.denx.de, kever.yang@rock-chips.com, jagan@amarulasolutions.com,
- andre.przywara@arm.com, clamor95@gmail.com, philipp.tomsich@vrull.eu,
- afd@ti.com, da@libre.computer, patrice.chotard@foss.st.com,
- patrick.delaunay@foss.st.com, woods.technical@gmail.com, agust@denx.de,
- uboot-stm32@st-md-mailman.stormreply.com, mbrugger@suse.com,
- u-boot-amlogic@groups.io, ilias.apalodimas@linaro.org,
- neil.armstrong@linaro.org
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, Anatolij Gustschin
+ <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
- <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
- <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
- <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
- <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
- <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
- <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
- <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
- <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
- <b470fd4e-dab9-4edc-bfe4-1a6591a900f9@csgraf.de>
- <CAPnjgZ2+-ka9hbNnLFVvY6Gv=0TLuxT2fiDE0=WHF=E5Wci0wg@mail.gmail.com>
- <11296797-3d37-413b-9517-2890ae26a9bd@csgraf.de>
- <7eeab958-f231-4639-acca-9f91e4f1ab00@gmx.de>
- <a2dc9f21-8e8e-4ed1-bd1c-8825c11b6fc8@csgraf.de>
- <87leduqk88.fsf@bloch.sibelius.xs4all.nl>
+ <20230821135111.3558478-11-alpernebiyasak@gmail.com>
+ <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
+ <e24d94b4-d519-4491-a38b-488510059a2a@csgraf.de>
+ <CAPnjgZ2HqmyOPixmec8v9g2V9mvCQ2mnG4+jUL4-4=qXPOvsOw@mail.gmail.com>
+ <1b8f64c7-deab-ae3a-3d22-a69fd74bdae9@csgraf.de>
+ <CAPnjgZ2wivMkM407VxYfgOsgrZnLY7UXVMgZt1OfzJzjiKgKjg@mail.gmail.com>
+ <2f283c6b-bf2c-4893-b286-25a44ff37dd1@gmail.com>
 From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <87leduqk88.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <2f283c6b-bf2c-4893-b286-25a44ff37dd1@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,408 +71,123 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 29.08.23 11:19, Mark Kettenis wrote:
->> Date: Tue, 29 Aug 2023 08:20:49 +0200
->> From: Alexander Graf <agraf@csgraf.de>
+On 30.08.23 21:12, Alper Nebi Yasak wrote:
+> On 2023-08-22 02:03 +03:00, Simon Glass wrote:
+>> Hi Alex,
 >>
->> On 28.08.23 23:54, Heinrich Schuchardt wrote:
->>> On 8/28/23 22:24, Alexander Graf wrote:
->>>> On 28.08.23 19:54, Simon Glass wrote:
->>>>> Hi Alex,
->>>>>
->>>>> On Wed, 23 Aug 2023 at 02:56, Alexander Graf <agraf@csgraf.de> wrote:
->>>>>> Hey Simon,
+>> On Mon, 21 Aug 2023 at 16:44, Alexander Graf <agraf@csgraf.de> wrote:
+>>>
+>>> On 22.08.23 00:10, Simon Glass wrote:
+>>>> Hi Alex,
+>>>>
+>>>> On Mon, 21 Aug 2023 at 13:59, Alexander Graf <agraf@csgraf.de> wrote:
+>>>>> On 21.08.23 21:11, Simon Glass wrote:
+>>>>>> Hi Alper,
 >>>>>>
->>>>>> On 22.08.23 20:56, Simon Glass wrote:
->>>>>>> Hi Alex,
+>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>>>>> From: Alexander Graf <agraf@csgraf.de>
 >>>>>>>
->>>>>>> On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
->>>>>>>> On 22.08.23 01:03, Simon Glass wrote:
->>>>>>>>> Hi Alex,
->>>>>>>>>
->>>>>>>>> On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de>
->>>>>>>>> wrote:
->>>>>>>>>> On 22.08.23 00:10, Simon Glass wrote:
->>>>>>>>>>> Hi Alex,
->>>>>>>>>>>
->>>>>>>>>>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de>
->>>>>>>>>>> wrote:
->>>>>>>>>>>> On 21.08.23 21:57, Simon Glass wrote:
->>>>>>>>>>>>> Hi Alex,
->>>>>>>>>>>>>
->>>>>>>>>>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de>
->>>>>>>>>>>>> wrote:
->>>>>>>>>>>>>> On 21.08.23 21:11, Simon Glass wrote:
->>>>>>>>>>>>>>> Hi Alper,
->>>>>>>>>>>>>>>
->>>>>>>>>>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak
->>>>>>>>>>>>>>> <alpernebiyasak@gmail.com> wrote:
->>>>>>>>>>>>>>>> This is a rebase of Alexander Graf's video damage tracking
->>>>>>>>>>>>>>>> series, with
->>>>>>>>>>>>>>>> some tests and other changes. The original cover letter is
->>>>>>>>>>>>>>>> as follows:
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>> This patch set speeds up graphics output on ARM by a
->>>>>>>>>>>>>>>>> factor of 60x.
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map
->>>>>>>>>>>>>>>>> it as cached,
->>>>>>>>>>>>>>>>> but need it accessible by the display controller which
->>>>>>>>>>>>>>>>> reads directly
->>>>>>>>>>>>>>>>> from a later point of consistency. Hence, we flush the
->>>>>>>>>>>>>>>>> frame buffer to
->>>>>>>>>>>>>>>>> DRAM on every change. The full frame buffer.
->>>>>>>>>>>>>>> It should not, see below.
->>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>> Unfortunately, with the advent of 4k displays, we are
->>>>>>>>>>>>>>>>> seeing frame buffers
->>>>>>>>>>>>>>>>> that can take a while to flush out. This was reported by
->>>>>>>>>>>>>>>>> Da Xue with grub,
->>>>>>>>>>>>>>>>> which happily print 1000s of spaces on the screen to draw
->>>>>>>>>>>>>>>>> a menu. Every
->>>>>>>>>>>>>>>>> printed space triggers a cache flush.
->>>>>>>>>>>>>>> That is a bug somewhere in EFI.
->>>>>>>>>>>>>> Unfortunately not :). You may call it a bug in grub: It
->>>>>>>>>>>>>> literally prints
->>>>>>>>>>>>>> over space characters for every character in its menu that it
->>>>>>>>>>>>>> wants
->>>>>>>>>>>>>> cleared. On every text screen draw.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> This wouldn't be a big issue if we only flush the reactangle
->>>>>>>>>>>>>> that gets
->>>>>>>>>>>>>> modified. But without this patch set, we're flushing the full
->>>>>>>>>>>>>> DRAM
->>>>>>>>>>>>>> buffer on every u-boot text console character write, which
->>>>>>>>>>>>>> means for
->>>>>>>>>>>>>> every character (as that's the only API UEFI has).
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> As a nice side effect, we speed up the normal U-Boot text
->>>>>>>>>>>>>> console as
->>>>>>>>>>>>>> well with this patch set, because even "normal" text prints
->>>>>>>>>>>>>> that write
->>>>>>>>>>>>>> for example a single line of text on the screen today flush
->>>>>>>>>>>>>> the full
->>>>>>>>>>>>>> frame buffer to DRAM.
->>>>>>>>>>>>> No, I mean that it is a bug that U-Boot (apparently) flushes
->>>>>>>>>>>>> the cache
->>>>>>>>>>>>> after every character. It doesn't do that for normal character
->>>>>>>>>>>>> output
->>>>>>>>>>>>> and I don't think it makes sense to do it for EFI either.
->>>>>>>>>>>> I see. Let's trace the calls:
->>>>>>>>>>>>
->>>>>>>>>>>> efi_cout_output_string()
->>>>>>>>>>>> -> fputs()
->>>>>>>>>>>> -> vidconsole_puts()
->>>>>>>>>>>> -> video_sync()
->>>>>>>>>>>> -> flush_dcache_range()
->>>>>>>>>>>>
->>>>>>>>>>>> Unfortunately grub abstracts character backends down to the
->>>>>>>>>>>> "print
->>>>>>>>>>>> character" level, so it calls UEFI's sopisticated
->>>>>>>>>>>> "output_string"
->>>>>>>>>>>> callback with single characters at a time, which means we do a
->>>>>>>>>>>> full
->>>>>>>>>>>> dcache flush for every character that we print:
->>>>>>>>>>>>
->>>>>>>>>>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
->>>>>>>>>>>>
->>>>>>>>>>>>
->>>>>>>>>>>>
->>>>>>>>>>>>>>>>> This patch set implements the easiest mitigation against
->>>>>>>>>>>>>>>>> this problem:
->>>>>>>>>>>>>>>>> Damage tracking. We remember the lowest common denominator
->>>>>>>>>>>>>>>>> region that was
->>>>>>>>>>>>>>>>> touched since the last video_sync() call and only flush
->>>>>>>>>>>>>>>>> that. The most
->>>>>>>>>>>>>>>>> typical writer to the frame buffer is the video console,
->>>>>>>>>>>>>>>>> which always
->>>>>>>>>>>>>>>>> writes rectangles of characters on the screen and syncs
->>>>>>>>>>>>>>>>> afterwards.
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>> With this patch set applied, we reduce drawing a large
->>>>>>>>>>>>>>>>> grub menu (with
->>>>>>>>>>>>>>>>> serial console attached for size information) on an
->>>>>>>>>>>>>>>>> RK3399-ROC system
->>>>>>>>>>>>>>>>> at 1440p from 55 seconds to less than 1 second.
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism,
->>>>>>>>>>>>>>>>> reducing its
->>>>>>>>>>>>>>>>> overhead compared to before as well. So even x86 systems
->>>>>>>>>>>>>>>>> should be faster
->>>>>>>>>>>>>>>>> with this now :).
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>> Alternatives considered:
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>>          1) Lazy sync - Sandbox does this. It only calls
->>>>>>>>>>>>>>>>> video_sync(true) ever
->>>>>>>>>>>>>>>>>             so often. We are missing timers to do this
->>>>>>>>>>>>>>>>> generically.
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>>          2) Double buffering - We could try to identify
->>>>>>>>>>>>>>>>> whether anything changed
->>>>>>>>>>>>>>>>>             at all and only draw to the FB if it did. That
->>>>>>>>>>>>>>>>> would require
->>>>>>>>>>>>>>>>>             maintaining a second buffer that we need to
->>>>>>>>>>>>>>>>> scan.
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>>          3) Text buffer - Maintain a buffer of all text
->>>>>>>>>>>>>>>>> printed on the screen with
->>>>>>>>>>>>>>>>>             respective location. Don't write if the old and
->>>>>>>>>>>>>>>>> new character are
->>>>>>>>>>>>>>>>>             identical. This would limit applicability to
->>>>>>>>>>>>>>>>> text only and is an
->>>>>>>>>>>>>>>>>             optimization on top of this patch set.
->>>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>>          4) Hash screen lines - Create a hash (sha256?)
->>>>>>>>>>>>>>>>> over every line when it
->>>>>>>>>>>>>>>>>             changes. Only flush when it does. I'm not sure
->>>>>>>>>>>>>>>>> if this would waste
->>>>>>>>>>>>>>>>>             more time, memory and cache than the current
->>>>>>>>>>>>>>>>> approach. It would make
->>>>>>>>>>>>>>>>>             full screen updates much more expensive.
->>>>>>>>>>>>>>> 5) Fix the bug mentioned above?
->>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> Changes in v5:
->>>>>>>>>>>>>>>> - Add patch "video: test: Split copy frame buffer check
->>>>>>>>>>>>>>>> into a function"
->>>>>>>>>>>>>>>> - Add patch "video: test: Support checking copy frame
->>>>>>>>>>>>>>>> buffer contents"
->>>>>>>>>>>>>>>> - Add patch "video: test: Test partial updates of hardware
->>>>>>>>>>>>>>>> frame buffer"
->>>>>>>>>>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
->>>>>>>>>>>>>>>> - Document damage struct and fields in struct video_priv
->>>>>>>>>>>>>>>> comment
->>>>>>>>>>>>>>>> - Return void from video_damage()
->>>>>>>>>>>>>>>> - Fix undeclared priv error in video_sync()
->>>>>>>>>>>>>>>> - Drop unused headers from video-uclass.c
->>>>>>>>>>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>>>>>>>>>>>>>>> - Call video_damage() also in video_fill_part()
->>>>>>>>>>>>>>>> - Use met->baseline instead of priv->baseline
->>>>>>>>>>>>>>>> - Use fontdata->height/width instead of
->>>>>>>>>>>>>>>> VIDEO_FONT_HEIGHT/WIDTH
->>>>>>>>>>>>>>>> - Update console_rotate.c video_damage() calls to pass
->>>>>>>>>>>>>>>> video tests
->>>>>>>>>>>>>>>> - Remove mention about not having minimal damage for
->>>>>>>>>>>>>>>> console_rotate.c
->>>>>>>>>>>>>>>> - Add patch "video: test: Test video damage tracking via
->>>>>>>>>>>>>>>> vidconsole"
->>>>>>>>>>>>>>>> - Document new vdev field in struct efi_gop_obj comment
->>>>>>>>>>>>>>>> - Remove video_sync_copy() also from video_fill(),
->>>>>>>>>>>>>>>> video_fill_part()
->>>>>>>>>>>>>>>> - Fix memmove() calls by removing the extra dev argument
->>>>>>>>>>>>>>>> - Call video_sync() before checking copy_fb in video tests
->>>>>>>>>>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of
->>>>>>>>>>>>>>>> selecting it
->>>>>>>>>>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> v4:
->>>>>>>>>>>>>>>> https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> Changes in v4:
->>>>>>>>>>>>>>>> - Move damage clear to patch "dm: video: Add damage
->>>>>>>>>>>>>>>> tracking API"
->>>>>>>>>>>>>>>> - Simplify first damage logic
->>>>>>>>>>>>>>>> - Remove VIDEO_DAMAGE default for ARM
->>>>>>>>>>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
->>>>>>>>>>>>>>>> - Add patch "video: Always compile cache flushing code"
->>>>>>>>>>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that
->>>>>>>>>>>>>>>> need it"
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> v3:
->>>>>>>>>>>>>>>> https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> Changes in v3:
->>>>>>>>>>>>>>>> - Adapt to always assume DM is used
->>>>>>>>>>>>>>>> - Adapt to always assume DM is used
->>>>>>>>>>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> v2:
->>>>>>>>>>>>>>>> https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> Changes in v2:
->>>>>>>>>>>>>>>> - Remove ifdefs
->>>>>>>>>>>>>>>> - Fix ranges in truetype target
->>>>>>>>>>>>>>>> - Limit rotate to necessary damage
->>>>>>>>>>>>>>>> - Remove ifdefs from gop
->>>>>>>>>>>>>>>> - Fix dcache range; we were flushing too much before
->>>>>>>>>>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> v1:
->>>>>>>>>>>>>>>> https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> Alexander Graf (9):
->>>>>>>>>>>>>>>>          dm: video: Add damage tracking API
->>>>>>>>>>>>>>>>          dm: video: Add damage notification on display fills
->>>>>>>>>>>>>>>>          vidconsole: Add damage notifications to all
->>>>>>>>>>>>>>>> vidconsole drivers
->>>>>>>>>>>>>>>>          video: Add damage notification on bmp display
->>>>>>>>>>>>>>>>          efi_loader: GOP: Add damage notification on BLT
->>>>>>>>>>>>>>>>          video: Only dcache flush damaged lines
->>>>>>>>>>>>>>>>          video: Use VIDEO_DAMAGE for VIDEO_COPY
->>>>>>>>>>>>>>>>          video: Always compile cache flushing code
->>>>>>>>>>>>>>>>          video: Enable VIDEO_DAMAGE for drivers that need it
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>> Alper Nebi Yasak (4):
->>>>>>>>>>>>>>>>          video: test: Split copy frame buffer check into a
->>>>>>>>>>>>>>>> function
->>>>>>>>>>>>>>>>          video: test: Support checking copy frame buffer
->>>>>>>>>>>>>>>> contents
->>>>>>>>>>>>>>>>          video: test: Test partial updates of hardware frame
->>>>>>>>>>>>>>>> buffer
->>>>>>>>>>>>>>>>          video: test: Test video damage tracking via
->>>>>>>>>>>>>>>> vidconsole
->>>>>>>>>>>>>>>>
->>>>>>>>>>>>>>>>         arch/arm/mach-omap2/omap3/Kconfig |   1 +
->>>>>>>>>>>>>>>>         arch/arm/mach-sunxi/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/Kconfig |  26 +++
->>>>>>>>>>>>>>>>         drivers/video/console_normal.c |  27 ++--
->>>>>>>>>>>>>>>>         drivers/video/console_rotate.c |  94 +++++++----
->>>>>>>>>>>>>>>>         drivers/video/console_truetype.c |  37 +++--
->>>>>>>>>>>>>>>>         drivers/video/exynos/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/imx/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/meson/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/rockchip/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/stm32/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/tegra20/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/tidss/Kconfig |   1 +
->>>>>>>>>>>>>>>>         drivers/video/vidconsole-uclass.c |  16 --
->>>>>>>>>>>>>>>>         drivers/video/video-uclass.c | 190
->>>>>>>>>>>>>>>> ++++++++++++----------
->>>>>>>>>>>>>>>>         drivers/video/video_bmp.c |   7 +-
->>>>>>>>>>>>>>>>         include/video.h |  59 +++----
->>>>>>>>>>>>>>>>         include/video_console.h |  52 ------
->>>>>>>>>>>>>>>>         lib/efi_loader/efi_gop.c |   7 +
->>>>>>>>>>>>>>>>         test/dm/video.c | 256
->>>>>>>>>>>>>>>> ++++++++++++++++++++++++------
->>>>>>>>>>>>>>>>         20 files changed, 483 insertions(+), 297 deletions(-)
->>>>>>>>>>>>>>> It is good to see this tidied up into something that can be
->>>>>>>>>>>>>>> applied!
->>>>>>>>>>>>>>>
->>>>>>>>>>>>>>> I am unsure what is going on with the EFI performance,
->>>>>>>>>>>>>>> though. It
->>>>>>>>>>>>>>> should not flush the cache after every character, only after
->>>>>>>>>>>>>>> a new
->>>>>>>>>>>>>>> line. Is there something wrong in here? If so, we should fix
->>>>>>>>>>>>>>> that bug
->>>>>>>>>>>>>>> first and it should be patch 1 of this series.
->>>>>>>>>>>>>> Before I came up with this series, I was trying to identify
->>>>>>>>>>>>>> the UEFI bug
->>>>>>>>>>>>>> in question as well, because intuition told me surely this is
->>>>>>>>>>>>>> a bug in
->>>>>>>>>>>>>> UEFI :). Turns out it really isn't this time around.
->>>>>>>>>>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
->>>>>>>>>>>>> implementation. Where did you look for the bug?
->>>>>>>>>>>> The "real" bug is in grub. But given that it's reasonably
->>>>>>>>>>>> simple to work
->>>>>>>>>>>> around in U-Boot and even with it "fixed" in grub we would
->>>>>>>>>>>> still see
->>>>>>>>>>>> performance benefits from flushing only parts of the screen, I
->>>>>>>>>>>> think
->>>>>>>>>>>> it's worth living with the grub deficiency.
->>>>>>>>>>> OK thanks for digging into it. I suggest we add a param to
->>>>>>>>>>> vidconsole_puts() to tell it whether to sync or not, then the
->>>>>>>>>>> EFI code
->>>>>>>>>>> can indicate this and try to be a bit smarter about it.
->>>>>>>>>> It doesn't know when to sync either. From its point of view, any
->>>>>>>>>> "console output" could be the last one. There is no API in UEFI
->>>>>>>>>> that
->>>>>>>>>> says "please flush console output now".
->>>>>>>>> Yes, I understand. I was not suggesting we were missing an API. But
->>>>>>>>> some sort of heuristic would do, e.g. only flush on a newline,
->>>>>>>>> flush
->>>>>>>>> every 50 chars, etc.
->>>>>>>> I can't think of any heuristic that would reliably work. Relevant
->>>>>>>> for
->>>>>>>> this conversation, UEFI provides 2 calls:
->>>>>>>>
->>>>>>>>       * Write string to screen (efi_cout_output_string)
->>>>>>>>       * Set text cursor position to X, Y
->>>>>>>> (efi_cout_set_cursor_position)
->>>>>>>>
->>>>>>>> It's perfectly legal for a UEFI application to do something like
->>>>>>>>
->>>>>>>> efi_cout_set_cursor_position(10, 10);
->>>>>>>> efi_cout_output_string("f");
->>>>>>>> efi_cout_output_string("o");
->>>>>>>> efi_cout_output_string("o") ;
->>>>>>>>
->>>>>>>> to update contents of a virtual text box on the screen. Where in
->>>>>>>> this
->>>>>>>> chain of events would we call video_sync(), but on every call to
->>>>>>>> efi_cout_output_string()?
->>>>>>> Actually U-Boot has the same problem, but we have managed to work
->>>>>>> out something.
->>>>>> U-Boot as a code base has a much easier stance: It can add APIs
->>>>>> when it
->>>>>> needs them in places that require them. With UEFI (as well as the
->>>>>> U-Boot
->>>>>> native API), we're stuck with what's there.
->>>>>>
->>>>>> I also don't understand what you mean by "we have managed to work out
->>>>>> something". This patch set is not a UEFI fix - it fixes generic U-Boot
->>>>>> behavior and speeds up non-UEFI boots as well. The improvement
->>>>>> there is
->>>>>> just not as impressive as with grub :).
->>>>> We are still not quite on the same page...
+>>>>>>> Now that we have a damage area tells us which parts of the frame buffer
+>>>>>>> actually need updating, let's only dcache flush those on video_sync()
+>>>>>>> calls. With this optimization in place, frame buffer updates - especially
+>>>>>>> on large screen such as 4k displays - speed up significantly.
+>>>>>>>
+>>>>>>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+>>>>>>> Reported-by: Da Xue <da@libre.computer>
+>>>>>>> [Alper: Use damage.xstart/yend, IS_ENABLED()]
+>>>>>>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>>>>>>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>>>>>>> ---
+>>>>>>>
+>>>>>>> Changes in v5:
+>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>>>>>
+>>>>>>> Changes in v2:
+>>>>>>> - Fix dcache range; we were flushing too much before
+>>>>>>> - Remove ifdefs
+>>>>>>>
+>>>>>>>     drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
+>>>>>>>     1 file changed, 36 insertions(+), 5 deletions(-)
+>>>>>> This is a little strange, since flushing the whole cache will only
+>>>>>> actually write out data that was actually written (to the display). Is
+>>>>>> there a benefit to this patch, in terms of performance?
+>>>>> I'm happy to see you go through the same thought process I went through
+>>>>> when writing these: "This surely can't be the problem, can it?". The
+>>>>> answer is "simple" in hindsight:
 >>>>>
->>>>> U-Boot does have video_sync() but it doesn't know when to call it. If
->>>>> it does not call it, then any amount of single-threaded code can run
->>>>> after that, which may update the framebuffer. In other words, U-Boot
->>>>> is in exactly the same boat as UEFI. It has to decide whether to call
->>>>> video_sync() based on some sort of heuristic.
+>>>>> Have a look at the ARMv8 cache flush function. It does the only "safe"
+>>>>> thing you can expect it to do: Clean+Invalidate to POC because we use it
+>>>>> for multiple things, clearing modified code among others:
 >>>>>
->>>>> That is the only point I am trying to make here. Does that make sense?
->>>>
->>>> Oh, I thought you mentioned above that U-Boot is in a better spot or
->>>> "has it solved already". I agree - it's in the same boat and the only
->>>> safe thing it can really do today that is fully cross-platform
->>>> compatible is to call video_sync() after every character.
->>>>
->>>> I don't understand what you mean by "any amount of single-threaded code
->>>> can run after that, which may update the framebuffer". Any framebuffer
->>>> modification is U-Boot internal code which then again can apply
->>>> video_sync() to tell the system "I want what I wrote to screen actually
->>>> be on screen now". I don't think that's necessarily bad design. A bit
->>>> clunky, but we're in a pre-boot environment after all.
->>>>
->>>> Since we're aligned now: What exactly did you refer to with "but we have
->>>> managed to work out something"?
->>> Should we set PixelBltOnly to indicate to UEFI applications that they
->>> are not allowed to directly write to the framebuffer but always have to
->>> use BitBlt? GRUB seems to be using a shadow buffer by default which it
->>> copies via BitBlt.
+>>>>> ENTRY(__asm_flush_dcache_range)
+>>>>>            mrs     x3, ctr_el0
+>>>>>            ubfx    x3, x3, #16, #4
+>>>>>            mov     x2, #4
+>>>>>            lsl     x2, x2, x3              /* cache line size */
+>>>>>
+>>>>>            /* x2 <- minimal cache line size in cache system */
+>>>>>            sub     x3, x2, #1
+>>>>>            bic     x0, x0, x3
+>>>>> 1:      dc      civac, x0       /* clean & invalidate data or unified
+>>>>> cache */
+>>>>>            add     x0, x0, x2
+>>>>>            cmp     x0, x1
+>>>>>            b.lo    1b
+>>>>>            dsb     sy
+>>>>>            ret
+>>>>> ENDPROC(__asm_flush_dcache_range)
+>>>>>
+>>>>>
+>>>>> Looking at the "dc civac" call, we find this documentation page from
+>>>>> ARM:
+>>>>> https://developer.arm.com/documentation/ddi0601/2022-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC
+>>>>>
+>>>>> This says we're writing any dirtyness of this cache line up to the POC
+>>>>> and then invalidate (remove the cache line) also up to POC. That means
+>>>>> when you look at a typical SBC, this will either be L2 or system level
+>>>>> cache. Every read afterwards needs to go and pull it all the way back to
+>>>>> L1 to modify it (or not) on the next character write and then flush it
+>>>>> again.
+>>>>>
+>>>>> Even worse: Because of the invalidate, we may even evict it from caches
+>>>>> that the display controller uses to read the frame buffer. So depending
+>>>>> on the SoC's cache topology and implementation, we may force the display
+>>>>> controller to refetch the full FB content on its next screen refresh cycle.
+>>>>>
+>>>>> I faintly remember that I tried to experiment with CVAC instead to only
+>>>>> flush without invalidating. I don't fully remember the results anymore
+>>>>> though. I believe CVAC just behaved identical to CIVAC on the A53
+>>>>> platform I was working on. And then I looked at Cortex-A53 errata like
+>>>>> [1] and just accepted that doing anything but restricting the flushing
+>>>>> range is a waste of time :)
+>>>> Yuck I didn't know it was invalidating too. That is horrible. Is there
+>>>> no way to fix it?
+>>>
+>>> Before building all of this damage logic, I tried, but failed. I'd
+>>> welcome anyone else to try again :). I'm not even convinced yet that it
+>>> is actually fixable: Depending on the SoC's internal cache logic, it may
+>>> opt to always invalidate I think.
+>> Wow, that is crazy! How is anyone supposed to make the system run well
+>> with logic like that??!
 >>
->> If we do that, OSs will no longer be able to carry the frame buffer
->> address over and continue to use it with to draw on the screen natively
->> (like Linux's efifb).
->>
->> So no, I don't think we should indicate PixelBltOnly. The frame buffer
->> is usually available to applications, you just need to adhere to the
->> architecture's caching constraints.
-> Right.  That would probably kill any reasonable way we can have an
-> early framebuffer console in most OSes after ExitBootServices() has
-> been called.
+>>> That said, this patch set really also makes sense outside of the
+>>> particular invalidate problem. It creates a generic abstraction between
+>>> the copy and non-copy code path and allows us to reduce the amount of
+>>> work spent for both, generically for any video sync operation.
+>> Sure...my question was really why it helps so much, given what I
+>> understood the caches to be doing. If they are invalidating, then it
+>> is amazing anything gets done...
+> I don't really know cache mechanisms and terminology, but AFAIU there's
+> nothing actionable for this patch regarding this discussion, right?
 >
-> I'm late to the game but isn't the real solution to have U-Boot map
-> the framebuffer in a cache-coherent way?  This is what typically
-> happens on x86 where VRAM is mapped as "write-combining".  That is,
-> uncached but going through the store buffer to speed up writes.
-> Reading from the framebuffer will be slow in that case (which probably
-> is the real reason why grub uses a shadow framebuffer).  So U-Boot
-> still needs to some cleverness to make sure it only ever writes to the
-> framebuffer.
+> Meanwhile I noticed this patch only flushes priv->fb, and think it also
+> needs to flush priv->copy_fb if VIDEO_COPY.
 
 
-Yeah, those are the 2 options: WB plus flush or WC plus shadow buffer 
-for reads. I don't really see much benefit in doing the latter over the 
-former: It occupies more valuable RAM and adds additional complexity on 
-FB reads. I believe the main reason x86 went that route was that it had 
-no choice: It didn't have a cache line flush instruction for a long time.
+The reason was mostly that copy_fb is really only used on x86 where we 
+don't have the cache flush problem/code :). So nobody bothered to add 
+flushing to that code path.
 
 
 Alex
