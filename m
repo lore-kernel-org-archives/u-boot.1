@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B0EC6FA8F
-	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 21:42:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C3D4C83F14
+	for <u-boot@archiver.kernel.org>; Wed, 30 Aug 2023 23:18:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68B6186521;
-	Wed, 30 Aug 2023 23:42:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 26F9886549;
+	Thu, 31 Aug 2023 01:18:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l37FeOQ7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MQMDgqDx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DE0B86529; Wed, 30 Aug 2023 23:42:07 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 3CFE086546; Thu, 31 Aug 2023 01:18:14 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88241803AB
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 23:42:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCEA5864AA
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 01:18:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5924093a9b2so2944057b3.2
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 14:42:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-79536bc6697so11583039f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 16:18:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693431723; x=1694036523; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l1VhVp7ctWGfGjnfkUHYZ0psFUMCYXhG+t1pabQwUGk=;
- b=l37FeOQ7/VDkm1eJMc8+Pu3Vt69RmxZcsCDDIkrr7fHzEfaAu9xb6+sIgTPr6qS5Bw
- +mZyoaNkGuDjJENtkz27/uXtXRLaZIea5QVM4QMofaPViW8IlgBgNyragzzUOMpnpsur
- bR7QNj1y4Bl3ngiLhGPPFYWarAreuzIDDLI7E=
+ d=chromium.org; s=google; t=1693437489; x=1694042289; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IomW+Mec9sthmR9cu2/c2HOTyUZrOLUcRUv85KAO91E=;
+ b=MQMDgqDxbSlKkE2l0zD4clmcnnGLqj8qJdQ0v6gJq7PalF4ZAjUqIvZTQfuGzH1Bxw
+ aD+6YmnIvTDkXeeil4rSGQKom2d1bcxKjmac1/st8+1bvY2ldg2qrupy4Y2Tt8Ok0bpH
+ GzXvoCfZomCUdiNWMgoJuiId0k6n5ayFxfl9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693431723; x=1694036523;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l1VhVp7ctWGfGjnfkUHYZ0psFUMCYXhG+t1pabQwUGk=;
- b=GqHlhfnbNlyCyH3j/ZL/v0yX6HBcw3g+lWmhvBQP8TI9vrr46+AdLDvFN/rVYZPS1f
- a//nRENnELB5z0mgV3VFsOA+j0Z+/c+Zgx4JOJ3RYZib0ekSdapWzvhPf7AhrhtN38RL
- pP10cQXx3iyA+IGJ+jRWvYCqJDlJoTwkxP38Nz1DyqeG6RIPFqPZ34KAWAXchmyNgtDj
- UUHh9WzcR1qphjyYdex9HIVCjc0Yg9yuCeEW5J6zaJ29gkIaHMpR9+N/79DIEkNdYz+a
- 3Se3CsBwJDSX/bLbZCbbIWDpUjtajwYuGLcpu/kovO2cpNxLFLYC4Ca0htxNLZxQCBFv
- U3cQ==
-X-Gm-Message-State: AOJu0Yx0PvRACLt50bEejMKXuWxJKjSWZakHQZ3+PX/nc90epdIRNtC4
- LL7MjfKEL+8h3D7G3mBx5EfDGPDy3V33+8JR3KcIBw==
-X-Google-Smtp-Source: AGHT+IHE5DLWCM8IBAI7k/cgSXQ0YrY3XuWzvV+AxZ9pbpm8BN99oOGab1aGQm1QrB1AvIADucq/kw==
-X-Received: by 2002:a81:7309:0:b0:594:ea4f:f5a7 with SMTP id
- o9-20020a817309000000b00594ea4ff5a7mr3368842ywc.31.1693431723298; 
- Wed, 30 Aug 2023 14:42:03 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-39b1-0d8a-4eb9-f110.res6.spectrum.com.
- [2603:6081:7b00:6400:39b1:d8a:4eb9:f110])
+ d=1e100.net; s=20221208; t=1693437489; x=1694042289;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IomW+Mec9sthmR9cu2/c2HOTyUZrOLUcRUv85KAO91E=;
+ b=eamIXjt7+lAk+EPuu8LjRAWNygv6XXejV27fjgDMqiqgyaNQyk+erNrsHYn/EL9A+F
+ bTDQtTuGmyoTYwC3LTi5vva8+URl83ZGX1KTHOesxQPeS/AxUTX1zhwrS5l8D3qaxbK5
+ b00a4a4MNfMPTalC+cp7QRMO0v6/22F+nunmuSydDrSkV1rHAldLXmI7tT2fLVayEPAt
+ mNrFjdiajlmChnh7OFPlf54v1GKUvOfcedv7gmAVP1/e2i5w6lTPqcuployE2//E6RCU
+ Qv1IFGaJFA3kLqM7Li6ZTEvsuqN/0B0FsPHcXJnx6jJzdiiLIe4fQR7xIGdqG3BdqfZ/
+ eIxQ==
+X-Gm-Message-State: AOJu0YxknZYgo9sXilcdJGN1bZLv/ACr3/Qi9KPkaQQ3xihJpELtLOHD
+ Nz/JujI/ZOTssntZI7jmNWTjlw==
+X-Google-Smtp-Source: AGHT+IEYGJNH1CGCeQsbWkow001Dg/4CtvKV/pF2SGqYbrCiviXf5gzS1igFQo1OGrX4mpY8x0Tnlg==
+X-Received: by 2002:a5e:a706:0:b0:78b:d0a9:34fb with SMTP id
+ b6-20020a5ea706000000b0078bd0a934fbmr3795029iod.20.1693437489546; 
+ Wed, 30 Aug 2023 16:18:09 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- e9-20020a81dd09000000b0058d4eaa6fe0sm32692ywn.52.2023.08.30.14.42.02
+ z25-20020a5ec919000000b007951e14b951sm73360iol.25.2023.08.30.16.18.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 14:42:02 -0700 (PDT)
-Date: Wed, 30 Aug 2023 17:42:01 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 32/32] pci: serial: Support reading PCI-register size
- with base
-Message-ID: <20230830214201.GM3101304@bill-the-cat>
-References: <20230830183913.mpj6achf3prjoanb@pali>
- <20230830190422.GE3101304@bill-the-cat>
- <20230830191036.hecw3vyabdsczxrb@pali>
- <20230830194157.GF3101304@bill-the-cat>
- <20230830194409.a7acogmn54gajmk6@pali>
- <20230830205145.t75fkjhnc7kjux3z@pali>
- <20230830210842.GG3101304@bill-the-cat>
- <20230830211316.5ywrzq6gmxzvdl4o@pali>
- <20230830212620.GH3101304@bill-the-cat>
- <20230830212934.tl2bnmmls2ajdj46@pali>
+ Wed, 30 Aug 2023 16:18:09 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: Maximilian Brune <maximilian.brune@9elements.com>,
+ ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Dhaval Sharma <dhaval@rivosinc.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mark Rutland <mark.rutland@arm.com>, Yunhui Cui <cuiyunhui@bytedance.com>,
+ linux-acpi@vger.kernel.org, Ard Biesheuvel <ardb@kernel.org>,
+ Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>,
+ Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>,
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v5 1/4] Add reserved-memory
+Date: Wed, 30 Aug 2023 17:17:49 -0600
+Message-ID: <20230830231758.2561402-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/F9ESSxYizyjF7Wa"
-Content-Disposition: inline
-In-Reply-To: <20230830212934.tl2bnmmls2ajdj46@pali>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,80 +93,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Bring in this file from Linux v6.5
 
---/F9ESSxYizyjF7Wa
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-On Wed, Aug 30, 2023 at 11:29:34PM +0200, Pali Roh=E1r wrote:
+(no changes since v4)
 
-> There were no answers.
->=20
-> On Wednesday 30 August 2023 17:26:20 Tom Rini wrote:
-> > I'm trimming the CC list. All of those points you list were addressed
-> > and answered in your last long running argument. You need to decide what
-> > is best for you moving forward and I would ask that it not involve
-> > complaining that you're being asked to review code that you're a listed
-> > maintainer of.
-> >=20
-> > On Wed, Aug 30, 2023 at 11:13:16PM +0200, Pali Roh=E1r wrote:
-> > > Seems that you completely miss the point of the argument, then the on=
-ly
-> > > option for such people is to repeat them. Or have I repeat you again
-> > > that you have not answered the first question, why you are asking for
-> > > review from somebody who you are ignoring and not taking into account?
-> > > You do not want to answer this question, right? So you rather change a
-> > > topic and talking about something totally different.
-> > >=20
-> > > On Wednesday 30 August 2023 17:08:42 Tom Rini wrote:
-> > > > I don't think it's worth re-hashing the same arguments over and ove=
-r.
-> > > > There is no "my persons", there is the public community.  If you no
-> > > > longer wish to participate, I can remove you from the maintainers
-> > > > entries you're listed in.  But please stop with the long arguments
-> > > > unrelated to the patches at hand when there's a dozen people and ot=
-her
-> > > > lists on CC.
-> > > >=20
-> > > > On Wed, Aug 30, 2023 at 10:51:45PM +0200, Pali Roh=E1r wrote:
-> > > > > So lets recap what you and your persons have done in last 6 month=
-s:
-> > > > >=20
-> > > > > * Ignored my changes
-> > > > > * Ignored my reviews
-> > > > > * Ignored my reminders
+Changes in v4:
+- New patch
 
-Not ignored, changes requested and refused.  Compromises refused.
-Apologies from others who had said they would pick up the platform and
-push it, but did not have time ignored.
+ .../reserved-memory/reserved-memory.yaml      | 181 ++++++++++++++++++
+ 1 file changed, 181 insertions(+)
+ create mode 100644 dtschema/schemas/reserved-memory/reserved-memory.yaml
 
-> > > > > * Ignored my regression reports
+diff --git a/dtschema/schemas/reserved-memory/reserved-memory.yaml b/dtschema/schemas/reserved-memory/reserved-memory.yaml
+new file mode 100644
+index 0000000..c680e39
+--- /dev/null
++++ b/dtschema/schemas/reserved-memory/reserved-memory.yaml
+@@ -0,0 +1,181 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/reserved-memory/reserved-memory.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: /reserved-memory Child Node Common
++
++maintainers:
++  - devicetree-spec@vger.kernel.org
++
++description: >
++  Reserved memory is specified as a node under the /reserved-memory node. The
++  operating system shall exclude reserved memory from normal usage one can
++  create child nodes describing particular reserved (excluded from normal use)
++  memory regions. Such memory regions are usually designed for the special
++  usage by various device drivers.
++
++  Each child of the reserved-memory node specifies one or more regions
++  of reserved memory. Each child node may either use a 'reg' property to
++  specify a specific range of reserved memory, or a 'size' property with
++  optional constraints to request a dynamically allocated block of
++  memory.
++
++  Following the generic-names recommended practice, node names should
++  reflect the purpose of the node (ie. "framebuffer" or "dma-pool").
++  Unit address (@<address>) should be appended to the name if the node
++  is a static allocation.
++
++properties:
++  reg: true
++
++  size:
++    oneOf:
++      - $ref: /schemas/types.yaml#/definitions/uint32
++      - $ref: /schemas/types.yaml#/definitions/uint64
++    description: >
++      Length based on parent's \#size-cells. Size in bytes of memory to
++      reserve.
++
++  alignment:
++    oneOf:
++      - $ref: /schemas/types.yaml#/definitions/uint32
++      - $ref: /schemas/types.yaml#/definitions/uint64
++    description: >
++      Length based on parent's \#size-cells. Address boundary for
++      alignment of allocation.
++
++  alloc-ranges:
++    $ref: /schemas/types.yaml#/definitions/uint32-array
++    description: >
++      Address and Length pairs. Specifies regions of memory that are
++      acceptable to allocate from.
++
++  iommu-addresses:
++    $ref: /schemas/types.yaml#/definitions/phandle-array
++    description: >
++      A list of phandle and specifier pairs that describe static IO virtual
++      address space mappings and carveouts associated with a given reserved
++      memory region. The phandle in the first cell refers to the device for
++      which the mapping or carveout is to be created.
++
++      The specifier consists of an address/size pair and denotes the IO
++      virtual address range of the region for the given device. The exact
++      format depends on the values of the "#address-cells" and "#size-cells"
++      properties of the device referenced via the phandle.
++
++      When used in combination with a "reg" property, an IOVA mapping is to
++      be established for this memory region. One example where this can be
++      useful is to create an identity mapping for physical memory that the
++      firmware has configured some hardware to access (such as a bootsplash
++      framebuffer).
++
++      If no "reg" property is specified, the "iommu-addresses" property
++      defines carveout regions in the IOVA space for the given device. This
++      can be useful if a certain memory region should not be mapped through
++      the IOMMU.
++
++  no-map:
++    type: boolean
++    description: >
++      Indicates the operating system must not create a virtual mapping
++      of the region as part of its standard mapping of system memory,
++      nor permit speculative access to it under any circumstances other
++      than under the control of the device driver using the region.
++
++  reusable:
++    type: boolean
++    description: >
++      The operating system can use the memory in this region with the
++      limitation that the device driver(s) owning the region need to be
++      able to reclaim it back. Typically that means that the operating
++      system can use that region to store volatile or cached data that
++      can be otherwise regenerated or migrated elsewhere.
++
++allOf:
++  - if:
++      required:
++        - no-map
++
++    then:
++      not:
++        required:
++          - reusable
++
++  - if:
++      required:
++        - reusable
++
++    then:
++      not:
++        required:
++          - no-map
++
++oneOf:
++  - oneOf:
++      - required:
++          - reg
++
++      - required:
++          - size
++
++  - oneOf:
++      # IOMMU reservations
++      - required:
++          - iommu-addresses
++
++      # IOMMU mappings
++      - required:
++          - reg
++          - iommu-addresses
++
++additionalProperties: true
++
++examples:
++  - |
++    / {
++      compatible = "foo";
++      model = "foo";
++
++      #address-cells = <2>;
++      #size-cells = <2>;
++
++      reserved-memory {
++        #address-cells = <2>;
++        #size-cells = <2>;
++        ranges;
++
++        adsp_resv: reservation-adsp {
++          /*
++           * Restrict IOVA mappings for ADSP buffers to the 512 MiB region
++           * from 0x40000000 - 0x5fffffff. Anything outside is reserved by
++           * the ADSP for I/O memory and private memory allocations.
++           */
++          iommu-addresses = <&adsp 0x0 0x00000000 0x00 0x40000000>,
++                            <&adsp 0x0 0x60000000 0xff 0xa0000000>;
++        };
++
++        fb: framebuffer@90000000 {
++          reg = <0x0 0x90000000 0x0 0x00800000>;
++          iommu-addresses = <&dc0 0x0 0x90000000 0x0 0x00800000>;
++        };
++      };
++
++      bus@0 {
++        #address-cells = <1>;
++        #size-cells = <1>;
++        ranges = <0x0 0x0 0x0 0x40000000>;
++
++        adsp: adsp@2990000 {
++          reg = <0x2990000 0x2000>;
++          memory-region = <&adsp_resv>;
++        };
++
++        dc0: display@15200000 {
++          reg = <0x15200000 0x10000>;
++          memory-region = <&fb>;
++        };
++      };
++    };
++...
+-- 
+2.42.0.rc2.253.gd59a3bf2b4-goog
 
-Not ignored, debugged, problems with your platform implementation
-reported and questions asked, patches provided to help you debug the
-problem on the single place that seems to show a problem which no one
-else can reproduce ignored.
-
---=20
-Tom
-
---/F9ESSxYizyjF7Wa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTvt6gACgkQFHw5/5Y0
-tyyeiwwAsHEWykItqnSnHAUM/u2qqSSNjymCFsA/3a/vYKntHnvUhyZnjp4MQ+Pv
-CVX9QOVsBR1rDLN8MgGiHOe+JEBaLVwkVK0st6UyQxaim+uy3asAcCPcrmIcS+1D
-1UHIC6nrO3otlVNWChJaiPNCzd5x1Nh7nCgazI8tI0Xc/uDw6wcnmYgGk+Z0ugif
-xJ2kI844w/lasenXRXH5qiMGYD+SjffV6hr92TaM+kEtYMrUa89XBtgftaJhMKtM
-PTEH5oqU/0u+7/ST2hCdKREx5xXKT2qWcPN6qibUPj4AMgCaKi5BdsS9pcaf1nnN
-wsFrbL/xqCPM/XdnWcDKdZYEjMMnys00IeoKizkim4ypUZ+kfHm3SiRY3zuZasV/
-6TXE5T8DIlNCYqJXt1ZRt98jxjkjoot6D/6H7H4aIWpaYEyp1di3O0UT0+lxFcz5
-E3LI6CkNa8g3Nd5vQyCzC4Pa5wkQ16D6fds5p5wVJn/D3BwQw4s/GRXKCkNsfXwX
-Y/NH7cLT
-=mOGJ
------END PGP SIGNATURE-----
-
---/F9ESSxYizyjF7Wa--
