@@ -4,72 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969FEC83F3C
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:05:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C63C83F2F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 454CD8682C;
-	Thu, 31 Aug 2023 21:03:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8C5358682B;
+	Thu, 31 Aug 2023 21:03:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cZgN5XKr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EC8qVzFL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A60C886784; Thu, 31 Aug 2023 21:03:29 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id DF1A78681D; Thu, 31 Aug 2023 21:03:34 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B2FD86844
+ by phobos.denx.de (Postfix) with ESMTPS id 087758683C
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-d7766072ba4so3156287276.1
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-594ebdf7bceso13396347b3.2
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693508604; x=1694113404; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5ayvHmZd3l0NOG6yuOtnYO6iVpbSld9fB7x5qkOofbo=;
- b=cZgN5XKrZc/N+HT2sQ8MMovbr/+00A7xrO0QT8T5MByxAFfI3feQdVrL9SUiLDk4BK
- HKyw7x5SKBylNZt/3fw89XwNendXTZ3/zSU/P9QdkX8Aer2iUdo7yCfUw2rGzGM4vbZY
- 7M4ccNjIu53++b+Ve9p28yOq7yeW8nKBQCTDU=
+ bh=0mQPB8XxUb5OP/KXE1oeSlmWSBTEOE9Ge4MhauaXzcU=;
+ b=EC8qVzFLUl4snN5+KKgWC0QPK9sS84Ih7AqJ4V6ww7zKPqp1IQ8ssiO8T3ZnXDHvHf
+ 6TTR1PS0LIbVjMiWK734HQrRBUmphUvWs3aIMYn5wGcI4DEf3Ejf2jE558hIhppnPbTf
+ t8KqVe0DAoBTxwzKp6XiE+6lzP2H3IJbsER7w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693508604; x=1694113404;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5ayvHmZd3l0NOG6yuOtnYO6iVpbSld9fB7x5qkOofbo=;
- b=Hl70jGbd1HYpRmgRl2uXvR6mKy6SL0VE5wquAsnCDLb5T5USRFj8be/Dp8BoHbTbD8
- LFrjir9Nl6snFBL4+LGQpIWfVvCcUJljms+XYY29TuUuvcafjz6BJ0x1kTOffKoeP3pR
- lL1x9+yjrN6zuodHqlX6aUZEDiZb4aVsQqqdr5K7WmGER+DE0uuW5UQ+ciyposJP3tSL
- 4MNCSVEHU/1wtFEwStU9gUsdVv6N3O1VsnpbL5RSHUapZ7ydNvQXWUb7v+R4YBAaSDph
- VHcTogMda+B3mRweJaMU+a+wAJxhrxvAhrM9Gdrj+omTwcX6yDuU0oefz61HgY9Qpn7u
- Kvaw==
-X-Gm-Message-State: AOJu0Yx4oz1doTg23dvkFDx15Gv7iX6842EeUVuYKHEctyirWTpio+vl
- QG8kauyX8xis3xAbzmo0C0RvRFjwierhpb+Tbahumw==
-X-Google-Smtp-Source: AGHT+IGkbT4a1tIt2MXpvu8kSbrDTkZtI7RoyxReRSDVBFXBoD8vn87RAmq3TmrGkAYQEgd6SL2oprB9LgArHcUMGkM=
-X-Received: by 2002:a25:aca6:0:b0:d4a:499d:a881 with SMTP id
- x38-20020a25aca6000000b00d4a499da881mr811415ybi.9.1693508603489; Thu, 31 Aug
+ bh=0mQPB8XxUb5OP/KXE1oeSlmWSBTEOE9Ge4MhauaXzcU=;
+ b=hGEsbVl6PRagdWMygPsyJBsHsij+Tz3pWKD248bHcdhBFeu6DXxDs0cRclKEUW7t9S
+ Nwzh7Fht2s2HPzsUlQBbLcQDrXw7dXQqr8zGRXFfZqc7x+jATljW+Td4ounhl9jnoYRx
+ AUIrVu4vyA4FGR34jMp/zJ5rCDvo0DcSi+Gh64RccKCtOycuQ7i6lxMjY7EGltl+ibb1
+ WlcMs45Otrln+zeLSi9jB+6kiHwEqB8AFQ6eezoHSFqjrfKKdz7nJDAFce7agNHdhiaP
+ 3+rHQSEwhlCTLwWAj0GJgZEa5FgUqAhHpwFiuREkwRQZ3CjLEX83qmVAvK+0CWmvd9El
+ j90A==
+X-Gm-Message-State: AOJu0YxflrAd+6QL5ZKWeH+zEFdxaNeRbBvXd31OxiNRsfKwra2rwAjg
+ 79a6KiuWanVzwP2bFmFYNlQbJO1X39msboWgm1OKEA==
+X-Google-Smtp-Source: AGHT+IFgK3CYg/SLq61wmdqsP6GkeNlwlUUqSxXvTpLJ9zbWqnbqaeeme9BcbxPZX+EdxGR7aKxWcikWGBuh/0Fvn1M=
+X-Received: by 2002:a25:cf12:0:b0:d7e:3db3:da2c with SMTP id
+ f18-20020a25cf12000000b00d7e3db3da2cmr611334ybg.43.1693508603480; Thu, 31 Aug
  2023 12:03:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-31-sjg@chromium.org>
- <ZPA8AtGOel8pko6y@hades>
-In-Reply-To: <ZPA8AtGOel8pko6y@hades>
+References: <20230822203446.4111742-1-sjg@chromium.org>
+ <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
+ <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
+ <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
+ <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
+ <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
+ <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
+ <CAPnjgZ3L-jGxoXNHnsXY0MXU=jTAN66KNAxSLHPVeHinHMjzkQ@mail.gmail.com>
+ <CAMj1kXGw6DGK=gVF3bMH5dp=LL89V9n1V1LMGKDn0CZWGHh8qg@mail.gmail.com>
+In-Reply-To: <CAMj1kXGw6DGK=gVF3bMH5dp=LL89V9n1V1LMGKDn0CZWGHh8qg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Aug 2023 13:02:04 -0600
-Message-ID: <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
-Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
- Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
- Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
+Date: Thu, 31 Aug 2023 13:02:05 -0600
+Message-ID: <CAPnjgZ1fjee3rf91onPbuLpgqTHe3dZgz0WBSzoiKAabO+ETkQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
+ linux-acpi@vger.kernel.org, 
+ lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
+ ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,108 +94,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Ard,
 
-On Thu, 31 Aug 2023 at 01:06, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 31 Aug 2023 at 06:28, Ard Biesheuvel <ardb@kernel.org> wrote:
 >
-> Hi Simon,
+> On Wed, 30 Aug 2023 at 23:11, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ard,
+> >
+> > On Tue, 29 Aug 2023 at 15:32, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > >
+> > > On Tue, 29 Aug 2023 at 21:18, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ard,
+> > > >
+> > > > On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
+> ...
+> > > > > In summary, I don't see why a non-UEFI payload would care about UEFI
+> > > > > semantics for pre-existing memory reservations, or vice versa. Note
+> > > > > that EDK2 will manage its own memory map, and expose it via UEFI boot
+> > > > > services and not via DT.
+> > > >
+> > > > Bear in mind that one or both sides of this interface may be UEFI.
+> > > > There is no boot-services link between the two parts that I have
+> > > > outlined.
+> > > >
+> > >
+> > > I don't understand what this means.
+> > >
+> > > UEFI specifies how one component invokes another, and it is not based
+> > > on a DT binding. If the second component calls UEFI boot or runtime
+> > > services, it should be invoked in this manner. If it doesn't, then it
+> > > doesn't care about these memory reservations (and the OS will not be
+> > > booted via UEFI either)
+> > >
+> > > So I feel I am missing something here. Perhaps a practical example
+> > > would be helpful?
+> >
+> > Let's say we want to support these combinations:
+> >
+> > Platform Init -> Payload
+> > --------------------------------
+> > U-Boot -> Tianocore
+> > coreboot -> U-Boot
+> > Tianocore -> U-Boot
+> > Tianocore -> Tianocore
+> > U-Boot -> U-Boot
+> >
+> > Some of the above things have UEFI interfaces, some don't. But in the
+> > case of Tianocore -> Tianocore we want things to work as if it were
+> > Tianocore -> (its own handoff mechanism) Tiancore.
+> >
 >
-> On Wed, Aug 30, 2023 at 12:05:01PM -0600, Simon Glass wrote:
-> > Standard passage provides for a bloblist to be passed from one firmware
-> > phase to the next. That can be used to pass the devicetree along as well.
-> > Add an option to support this.
-> >
-> > Tests for this will be added as part of the Universal Payload work.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  common/bloblist.c                  |  2 ++
-> >  doc/develop/devicetree/control.rst |  3 ++
-> >  dts/Kconfig                        |  8 ++++++
-> >  include/bloblist.h                 |  5 ++++
-> >  include/fdtdec.h                   |  3 +-
-> >  lib/fdtdec.c                       | 44 ++++++++++++++++++++++--------
-> >  6 files changed, 52 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/common/bloblist.c b/common/bloblist.c
-> > index 6f2a4577708..b07ede11cfe 100644
-> > --- a/common/bloblist.c
-> > +++ b/common/bloblist.c
-> > @@ -48,9 +48,11 @@ static struct tag_name {
-> >       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
-> >       { BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
-> >       { BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
-> > +     { BLOBLISTT_CONTROL_FDT, "Control FDT" },
-> >
-> >       /* BLOBLISTT_PROJECT_AREA */
-> >       { BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
-> > +     { BLOBLISTT_VBE, "VBE" },
-> >       { BLOBLISTT_U_BOOT_VIDEO, "SPL video handoff" },
-> >
-> >       /* BLOBLISTT_VENDOR_AREA */
-> > diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-> > index cbb65c9b177..56e00090166 100644
-> > --- a/doc/develop/devicetree/control.rst
-> > +++ b/doc/develop/devicetree/control.rst
-> > @@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
-> >  devicetree at runtime, for example if an earlier bootloader stage creates
-> >  it and passes it to U-Boot.
-> >
-> > +If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
-> > +from a previous stage.
-> > +
+> If Tianocore is the payload, it is either implemented as a EFI app, in
+> which case it has access to EFI services, or it is not, in which case
+> it doesn't care about UEFI semantics of the existing reserved regions,
+> and it only needs to know which regions exist and which of those are
+> reserved.
 >
-> Is this bloblist in the format described in the firmware handoff [0] ?
+> And I think the same applies to all other rows in your table: either
+> the existence of UEFI needs to be carried forward, which needs to be
+> done via EFI services, or it doesn't, in which case the UEFI specific
+> reservations can be dropped, and only reserved and available memory is
+> relevant.
+>
+> > Some Platform Init may create runtime code which needs to accessible later.
+> >
+>
+> But not UEFI runtime code, right? If the payload is not UEFI based,
+> the OS would never be able to call that runtime code unless it is
+> described in a different, non-UEFI way. This is fine, but it is not
+> UEFI so we shouldn't call it UEFI runtime memory.
+>
+> > The way I think of it is that we need to generalise the memory map a
+> > bit. Saying that you must use UEFI boot services to discover it is too
+> > UEFI-specific.
+> >
+>
+> What I am questioning is why a memory map with UEFI semantics is even
+> relevant when those boot services do not exist.
+>
+> Could you be more specific about why a payload would have to be aware
+> of the existence of UEFI boot/runtime service regions if it does not
+> consume the UEFI interfaces of the platform init? And if the payload
+> exposes UEFI services to the OS, why would it consume a memory map
+> with UEFI semantics rather than a simple list of memblocks and memory
+> reservations?
 
-Yes
+It seems like you are thinking of the Payload as grub, or something
+like that? This is not about grub. If there are EFI boot services to
+be provided, they are provided by the Payload, not Platform Init. I am
+not that familiar with Tianocore, but if you are, perhaps think of it
+as splitting Tianocore into two pieces, one of which inits the silicon
+and the other which provides the EFI boot services.
+
+Again, if you are familiar with Tianocore, it can be built either as a
+monolithic whole, or as a coreboot Payload. The Payload part of the
+code is (roughly) the same in each case. But the Platform Init is
+different[1]
 
 >
-> > +config OF_BLOBLIST
-> > +     bool "DTB is provided by a bloblist"
-> > +     help
-> > +       Select this to read the devicetree from the bloblist. This allows
-> > +       using a bloblist to transfer the devicetree between  U-Boot phases.
-> > +       The devicetree is stored in the bloblist by an early phase so that
-> > +       U-Boot can read it.
-> > +
->
-> I dont think this is a good idea.  We used to have 4-5 different options
-> here, which we tried to clean up and ended up with two very discrete
-> options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
-> have a header of some sort?  The bloblist literally comes from a previous
-> stage bootloader which is what OF_BOARD is here for. So why can't we just
-> read the header and figure out if the magic of the bloblist matches?
+> Again, I am inclined to treat this as a firmware implementation
+> detail, and the OS must never consume this binding. But I am still
+> puzzled about what exact purpose it is expected to serve.
 
-No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
-
-This patch is a standard mechanism to pass the DT from one firmware
-phase to the next. We have spent quite a bit of time creating a spec
-for it, and we should use it.
-
-The patches to align bloblist with the spec have been sent, but there
-is a late-breaking change that we are trying to resolve. Once that is
-sorted out, I will send v2 of those patches.
-
->
-> >  config OF_BOARD
-> >       bool "Provided by the board (e.g a previous loader) at runtime"
-> >       default y if SANDBOX || OF_HAS_PRIOR_STAGE
-> > diff --git a/include/bloblist.h b/include/bloblist.h
-> > index 080cc46a126..e16d122f4fb 100644
-> > --- a/include/bloblist.h
-> > +++ b/include/bloblist.h
-> > @@ -103,6 +103,11 @@ enum bloblist_tag_t {
-> >       BLOBLISTT_ACPI_TABLES = 0x104,  /* ACPI tables for x86 */
-> >       BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
-> >       BLOBLISTT_VBOOT_CTX = 0x106,    /* Chromium OS verified boot context */
-> > +     /*
->
-> [...]
->
-> >
-> [0] https://github.com/FirmwareHandoff/firmware_handoff
+It really is purely so we can mix and match Platform Init (perhaps
+silicon init is a more familiar term?) and the Payload.
 
 Regards,
 Simon
+
+[1] Of course, coreboot uses blobs which are chunks of UEFI, but that
+is a separate issue
