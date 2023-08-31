@@ -4,92 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34E0C83F32
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 10:20:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EEB1C83F12
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 10:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C94FA8655C;
-	Thu, 31 Aug 2023 12:20:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A1158655C;
+	Thu, 31 Aug 2023 12:26:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VQsHFwww";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="YPjwsahd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4DAB8656E; Thu, 31 Aug 2023 12:20:35 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 93B658656A; Thu, 31 Aug 2023 12:26:03 +0200 (CEST)
+Received: from mail-40137.protonmail.ch (mail-40137.protonmail.ch
+ [185.70.40.137])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22D9F8655C
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:20:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8336F86558
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:26:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-401d67434daso6068595e9.2
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 03:20:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693477232; x=1694082032; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=m4sWkQHAa4Z6ofeDETgOnBbcCGfVfxpvaCqZY7+4P5o=;
- b=VQsHFwww2ejKqnPIHfp5nirGwkZiWNjqgMZ9Oq6KUT2EPKlrCyp4oU2k1fwCnTK4db
- l6Yu6UJn9aiH63dBnr94+kCIOYZefkpVbhr5btZvqbeHnszh+d2dopNzE5mueA7vZLEP
- j845PwwoBnhjb6utDUk+nwS9cYNyP30Wy2+1GU1pPpgtnr7ouMwBFddCwyf+qnde6vJ2
- LE0Hw12rkktajbN4T+N1NqNecQ4LK4UgKKNPae+dHnDgbYiPKPEnqY4Z17f3l0zaqhQi
- nIf08ZxG6KSTjPB97Qalom6huhBOHS5Bs3PthEDu7d34Lks1ZXgagIjSNAyX0JE1IHHP
- m8nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693477232; x=1694082032;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=m4sWkQHAa4Z6ofeDETgOnBbcCGfVfxpvaCqZY7+4P5o=;
- b=hTdaskhkr4BgmwdD2/J9wXit8EA4iu4RCfIoQlHVzjTk3q8rfLXRMomXFlzDejZHBX
- gHQ2KF3LKayeHEa2vWYUn1i5DHmkxt2inUzhtj19znixNgf1GOjZyXxAzS1i/JcqGoD/
- v/f1XQ+JnJEpDvs7S0kEFI/mIhMcbOvN0+rrfDkZ/dAr52+XOCN3d4rrW2Bv1M9NJDP6
- emSbeNOEmleqzLkBmShTtf43BafyLuo25ooShgJrhduhYWApHWgtTiVY+wKkFusUWvJl
- WLFP5rabRc6XOq37CqE7SI0MVMJIyUHd+pCeqn3x3dhfY/WYDPCcCsh9FmqxPp68QiIS
- gLYA==
-X-Gm-Message-State: AOJu0YzQSCrqN4nY52TPRYcoXF2xbLJFbotBtaQzVOYwqWQ7yQShsFf0
- +Q3Zkv5a+InoqSddPUSUKxI=
-X-Google-Smtp-Source: AGHT+IG6M7KRkvoKt6wjo1NoqAgOf/4/uGrtldDHYF5l8gBOaL+7w9mtPaCYAjKQVxpZdQT5eQqBvQ==
-X-Received: by 2002:a05:600c:295:b0:3fb:c9f4:150e with SMTP id
- 21-20020a05600c029500b003fbc9f4150emr3872530wmk.14.1693477232261; 
- Thu, 31 Aug 2023 03:20:32 -0700 (PDT)
-Received: from [192.168.0.84] ([178.233.24.1])
- by smtp.gmail.com with ESMTPSA id
- u2-20020a05600c00c200b003fe3674bb39sm1497771wmm.2.2023.08.31.03.20.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Aug 2023 03:20:31 -0700 (PDT)
-Message-ID: <d4ce17ae-8b84-4c8a-acaa-287549ec23a3@gmail.com>
-Date: Thu, 31 Aug 2023 13:20:29 +0300
+ spf=pass smtp.mailfrom=vitali64pmemail@protonmail.com
+Date: Thu, 31 Aug 2023 10:25:40 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1693477559; x=1693736759;
+ bh=v1SgijnNSc5kit2PCJSIPerjrDrm3hZq06k3CBpj9oc=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=YPjwsahdUGLjaI9QY+70aOxtevPome452d/8ae2NWDX8haCQtGw3riDFLUPNaMdvO
+ Oc/I6un5gtj2y/qgiAsLB0vCOIb5RRLrwlVIJq07THFtesnLIKGCn84synvYhIuSZ7
+ fnY+YyzxJURwlKEmQC3Aj11qTTJj5RzdZ3vDy1ZY2tsONcRoKByozM5gBdvb1rvwgi
+ YRSDcQgnNbFeyEORJaE3utj+12LUgFhCEA54aYHHguU4EgLwhJx3xIssb+Sz41gSK4
+ 4iFF+uFS18GrPiGRU+OtJpkCEUs2Wcr6G3vkP9W5tJL+Q/Q2YyybSUDb9RessZK+XW
+ kpAudQq1LoMFQ==
+To: neil.armstrong@linaro.org, Simon Glass <sjg@chromium.org>
+From: Ferass El Hafidi <vitali64pmemail@protonmail.com>
+Cc: christianshewitt@gmail.com, mark.kettenis@xs4all.nl, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, linux-amlogic@lists.infradead.org,
+ alpernebiyasak@gmail.com, da@lessconfused.com
+Subject: Re: [PATCH v2 0/1] meson: Demonstration of using binman to produce
+ the image
+Message-ID: <CV6NO816M3FH.30VZXHR4KDM49@flaptop>
+In-Reply-To: <d94b0cae-99cc-4f8b-9d0d-52a5858f6e33@linaro.org>
+References: <CV61D7ULLVZ0.3OCFZ743L1KSE@flaptop>
+ <CAPnjgZ2iff6F3CFjnjEMUVoX3bO=kv3za4Q45YOcVeZqc96=rw@mail.gmail.com>
+ <d94b0cae-99cc-4f8b-9d0d-52a5858f6e33@linaro.org>
+Feedback-ID: 37421466:user:proton
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
- output
-Content-Language: en-US, tr, en-GB
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Dillon Min <dillon.minfei@gmail.com>,
- Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
- Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
- <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20230824030304.1555547-1-sjg@chromium.org>
- <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
- <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,63 +71,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-28 20:54 +03:00, Simon Glass wrote:
-> Hi Alper,
-> 
-> On Sun, 27 Aug 2023 at 13:17, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->>
->> On 2023-08-24 06:02 +03:00, Simon Glass wrote:
->>> In this early stage of using binman to produce output files, we are mostly
->>> seeing people using common extensions such as '.bin' and '.rom'
->>>
->>> But unusual extensions appear in some places.
->>>
->>> We would like 'buildman -k' to keep the build outputs, but this is hard if
->>> there is no consistency as to the extension used.
->>>
->>> This series adjusts binman to enforce just 4 extensions for output images:
->>>
->>>    .bin
->>>    .rom
->>>    .itb
->>>    .img
->>>
->>> Other extensions will produce an error. With this rule observed, buildman
->>> can keep the required files.
->>
->> I dislike this limitation. We know what files we will generate, they are
->> listed in binman dtb, so we can add something like `binman build --ls`
->> to print their names/paths for buildman to preserve them.
-> 
-> Yes, it would be good to have that...
-> 
-> But why do you dislike the limitation? Do you think extensions provide
-> useful information? I suppose one problem is that *.bin might pick up
-> private blobs that happen to be in the source directory?
+Hi Simon,
 
-I guess my strongest argument is that people already/will have workflows
-that depend on certain filenames or extensions, and shouldn't have to
-modify binman code (consider that people may be using the PyPI wheels)
-to accommodate those when we are already putting the name in the dtb.
+On Thu Aug 31, 2023 at 9:54 AM CEST, neil.armstrong wrote:
+> > Thanks for your efforts on this. I look forward to seeing where it ends=
+ up.
 
-I do want some standardization to the U-Boot build outputs though, but
-more like a global binman.dts with like u-boot.rom, u-boot-sdmmc.img
-images with well-defined TPL, SPL, U-Boot sections that arch-dtsi files
-can fill in.
+I hope we can get it to at least boot!
 
->> Regarding the output directory suggestion, I think the binman outputs
->> (not temporary/intermediate files) should be in the same directory as
->> make outputs
-> 
-> Agreed
-> 
->> , and the Makefile should default to O=build to achieve the
->> "output dir". I'm not sure if that's going to happen.
-> 
-> I would quite like the 'non-output' file (i.e. things that are not a
-> binman image) to appear in a 'binman-work' subdir of the output dir.
-> What do you think?
+> >> Honestly, in my opinion, including proprietary and poorly-written
+> >> Amlogic utilities lacking a proper license, into U-Boot looks like a b=
+ad idea.
+> >
+> > With Binman, we don't really include them in U-Boot; we allow them to
+> > be fetched easily so that a complete build can be produced.
 
-I'd prefer them to go in a tempfile.TemporaryDirectory() and discarded
-at the end of a binman run, and a "--tmpdir <path>" option to use a
-given directory instead and preserve things for debugging.
+Acknowledged.
+
+> > I don't like it either, but for users it is better than doing the
+> > build manually.
+>
+> I'll rather spend time and effort to have a fully-upstream TF-A boot chai=
+n
+> for Amlogic SoC (when possible) that maintaining support for bulky closed=
+-source
+> x86-64 binary only tools. The tools aren't even officially distributed.
+
+I agree with Neil here. I think having U-Boot SPL for Amlogic SoCs, along w=
+ith=20
+a unified way to sign it across all SoCs, is more worth the effort than
+trying to get poorly-written Amlogic utilities to work, along with a
+fully proprietary "Trusted Firmware" (it's not that secure) boot chain.
+I also forgot to point out that these tools are x86_64-only, so if you
+wanted to compile U-Boot on any other architecture it wouldn't work at
+all.
+
+But this RFC patch does show how binman can be used for making all that
+complex signing automatically. I appreciate the effort.
+
+>
+> Neil
+>
+> >
+> >>
+> >> [1]: https://git.vitali64.duckdns.org/misc/u-boot-kii-pro.git/log/?h=
+=3Dwip/spl
+> >> [2]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/=
+plat/amlogic
+> >>
+> >> Cheers.
+> >>
+> >
+> > Regards,
+> > Simon
+
+Cheers.
+
