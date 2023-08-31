@@ -4,68 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 518E9C83F21
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAAEDC83F22
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31EA586567;
+	by phobos.denx.de (Postfix) with ESMTP id 71FE98657B;
 	Thu, 31 Aug 2023 04:50:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OAmI1XHG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kxzkvqxB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83EBE86550; Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id D5B1D86570; Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98CE68656C
+ by phobos.denx.de (Postfix) with ESMTPS id 7B02986567
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 04:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-52bca2e8563so331752a12.2
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5298e43bb67so612232a12.1
  for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 19:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693450199; x=1694054999; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dtTYUs9itjqCyqqwdvstXYgFRI/tvlJDlKREbFnw14c=;
- b=OAmI1XHGlb8QqXaOuUZ84CuIATnBSXK6osLyjoCdq/vij1toMyI0PUCLWR3jw0OvwD
- PPNdhhGrGaf/Q3MXgWgDMlWrZpwC7WUbmETbai6CA+0oxwieS/tGILixaCuY7gabu1JQ
- 3Ba7jwTXAcQfMSfNrXg2x9+/gcdn10+DBBz2Q=
+ bh=cDfy/XxzEZKiU8yuFaKcYfPqqPfQ2YTrAIQclTblcOs=;
+ b=kxzkvqxBgmzeUUi2w6TIctWwoXfdB+gb3Kei997TWk7CBI09CvaDl8jZZguvknUvuO
+ 0LA3e4qn4wxpvSxAxEDUpx59z8ExAQc2sZkJxhHibORFNpIA76etUiKChDhZCQ3KQcai
+ hkBrKFrwlOVV7i4iWzEQnUIPKpxfO6qJjbEKY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693450199; x=1694054999;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dtTYUs9itjqCyqqwdvstXYgFRI/tvlJDlKREbFnw14c=;
- b=exWjJcrYGDNwVjGZN7fEJQIwV62SwW3gmKyJDTxZ0zc3zDlcE6XyZed0sCGsOJM+kN
- 3VUl18VwuTDjPs+nNqHl1idX0uSO9uD+y1ssnVKyU0dUT5eL7Ft8Sj9HX4Q8kMDg2R7J
- OfL0i7qqsHs5+a3scSgwd1F4Jk6OBiyvGOpQ1sYjZOD9RA5hrDiDAgi/oov+hiPzr+33
- LTqRJetJnLGaXO9hQ8tqsV0svXBdJRM5rmkV59CQZ0P0LyRuuKa4w2icZHtvIxbju37m
- Jh01HJGX5L7eeYWuvJKGTlCEBWBatzt62sNCKdqqxR0c56tOq8x6AyVj5B6SeucPu5b4
- Hv0A==
-X-Gm-Message-State: AOJu0YxRemmlpA7U6Q1jqjPcGmGQmVxbgf7GcldtbkBFkVaLVomz2LGG
- PSq5xIfB5Dy24Q6Y4mCPxB7aZdPzLx2qaG4NktNjtw==
-X-Google-Smtp-Source: AGHT+IFoPVqiD6XrsEoeBiHvRpATBiJ+4pYg+gzJ7lROLOn261zyzrjaG88xxFg3ZNhy1A1zgW9tDUwgKxEaemZvVug=
-X-Received: by 2002:a05:6402:5156:b0:523:bfec:490f with SMTP id
- n22-20020a056402515600b00523bfec490fmr3287281edd.0.1693450198966; Wed, 30 Aug
- 2023 19:49:58 -0700 (PDT)
+ bh=cDfy/XxzEZKiU8yuFaKcYfPqqPfQ2YTrAIQclTblcOs=;
+ b=jW5mrBxQceLQO/OF3gcp2Bt320QSZz9fZdnhy6TR9P8MC4Xuz6YFsKn3iRiB7ZGHbV
+ xTbpmQYbSGe3Y772UyXa3oEfMXjQcJfnJo3wzVhvngNmb/hhZE2qREe+hGtG4pNZs6a+
+ uzdjEheEn6K46DetMIZXcW/4hW36CMniWRQzd/uzGfRAEOWNqF6YRylZlXQcJPvX1Rfd
+ 77gPJxwBpWbs7DhnIDmcolQgpfd5oZKBpGs4CxugkAHJuo3GCRysfKo9sP2XFKSNWsmB
+ yBmdEC8cksFnEbg7dSfccDSpNmH4gi1inlCYj8s1qdTY4f0FJCh4Dntu2UUfw40NqutS
+ 0mQg==
+X-Gm-Message-State: AOJu0YyI67jwuxf5HZ2pVsXm55lU7r2a/ScC11V+cgZjQRhfQQJM8mGh
+ lB9X6znhnmeqmSIuifjghUHlig6N6RqPWYIyjCmXBMgtFbMMmsayP90=
+X-Google-Smtp-Source: AGHT+IHmGxQlFQAMFBgcAdgITfneuYVsaZpG6cwaj3VxTiEwHTCJS9UG71pgt/rPfT+FdrVvORh5szH3TRfTuheIKLU=
+X-Received: by 2002:a05:6402:34d0:b0:51d:b184:efd with SMTP id
+ w16-20020a05640234d000b0051db1840efdmr1422285edc.20.1693450198930; Wed, 30
+ Aug 2023 19:49:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230830113230.3925868-1-andre.przywara@arm.com>
-In-Reply-To: <20230830113230.3925868-1-andre.przywara@arm.com>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <20230826090633.239342-6-sughosh.ganu@linaro.org>
+ <CAPnjgZ3AexW4vfO-A8WYGE0OD5EZnOUA7tA1QP71Bcw51QArBQ@mail.gmail.com>
+ <CADg8p96zOXDaVV9CFcbeKgdZwG7pwfCp66GEY_eoYC6FCHeKZA@mail.gmail.com>
+ <20230828183936.GN3953269@bill-the-cat>
+ <CAC_iWj+d_xLKJS_KHYEExSQb2MuU0K9BYeLDbnHSdp8wF7W+Pw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+d_xLKJS_KHYEExSQb2MuU0K9BYeLDbnHSdp8wF7W+Pw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Aug 2023 20:49:18 -0600
-Message-ID: <CAPnjgZ0Q7LUe1Qf6S16RLwPPdVjhs+Z760g8CK2Zq4=vev0hFA@mail.gmail.com>
-Subject: Re: [PATCH] driver: rng: Add DM_RNG interface for ARMv8.5 RNDR
- registers
-To: andre.przywara@arm.com
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Peter Hoyes <peter.hoyes@arm.com>, u-boot@lists.denx.de
+Date: Wed, 30 Aug 2023 20:49:16 -0600
+Message-ID: <CAPnjgZ3mobofYNB7B4nmJg8GH12FQSJ7vcEXaVydtWwSLhvfLQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
+ node/property removal
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,186 +87,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Hi Ilias,
 
-On Wed, 30 Aug 2023 at 05:32, Andre Przywara <andre.przywara@arm.com> wrote:
+On Wed, 30 Aug 2023 at 01:25, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> The ARMv8.5 architecture extension defines architectural RNDR/RNDRRS
-> system registers, that provide 64 bits worth of randomness on every
-> read. Since it's an extension, and implementing it is optional, there is
-> a field in the ID_AA64ISAR0_EL1 ID register to query the availability
-> of those registers.
+> Hi Tom
 >
-> Add a UCLASS_RNG driver that returns entropy via repeated reads from
-> those system registers, if the extension is implemented.
-> The driver always binds, but checks the availability in the probe()
-> routine.
+> On Mon, 28 Aug 2023 at 21:39, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Aug 29, 2023 at 12:04:53AM +0530, Sughosh Ganu wrote:
+> > > hi Simon,
+> > >
+> > > On Mon, 28 Aug 2023 at 23:25, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Sughosh,
+> > > >
+> > > > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > Add a document explaining the need for removal of non-compliant
+> > > > > devicetree nodes and properties. Also describe in brief, the macros
+> > > > > that can be used for this removal.
+> > > > >
+> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > ---
+> > > > >  .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++++++++++++
+> > > > >  1 file changed, 64 insertions(+)
+> > > > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+> > > > >
+> > > > > diff --git a/doc/develop/devicetree/dt_non_compliant_purge.rst b/doc/develop/devicetree/dt_non_compliant_purge.rst
+> > > > > new file mode 100644
+> > > > > index 0000000000..c3a8feab5b
+> > > > > --- /dev/null
+> > > > > +++ b/doc/develop/devicetree/dt_non_compliant_purge.rst
+> > > > > @@ -0,0 +1,64 @@
+> > > > > +.. SPDX-License-Identifier: GPL-2.0+
+> > > > > +
+> > > > > +Removal of non-compliant nodes and properties
+> > > > > +=============================================
+> > > > > +
+> > > > > +The devicetree used in U-Boot might contain nodes and properties which
+> > > > > +are specific only to U-Boot, and are not necessarily being used to
+> > > > > +describe hardware but to pass information to U-Boot. An example of
+> > > > > +such a property would be the public key being passed to U-Boot for
+> > > > > +verification.
+> > > >
+> > > > It has nothing to do with describing hardware. The DT can describe
+> > > > other things too. See the /options node, for example.
+> > > >
+> > > > Please don't bring this highly misleading language into U-Boot.
+> > >
+> > > Please point out what is misleading in the above paragraph. What is
+> > > being emphasised in the above paragraph is that certain nodes and
+> > > properties in the devicetree are relevant only in u-boot, and not the
+> > > kernel. And this is precisely what the devicetree maintainers are
+> > > saying [1].
+> > >
+> > > >
+> > > > > +
+> > > > > +This devicetree can then be passed to the OS. Since certain nodes and
+> > > > > +properties are not really describing hardware, and more importantly,
+> > > > > +these are only relevant to U-Boot, bindings for these cannot be
+> > > > > +upstreamed into the devicetree repository. There have been instances
+> > > > > +of attempts being made to upstream such bindings, and these deemed not
+> > > > > +fit for upstreaming.
+> > > >
+> > > > Then either they should not be in U-Boot, or there is a problem with
+> > > > the process.
+> > > >
+> > > > > Not having a binding for these nodes and
+> > > > > +properties means that the devicetree fails the schema compliance tests
+> > > > > +[1]. This also means that the platform cannot get certifications like
+> > > > > +SystemReady [2] which, among other things require a devicetree which
+> > > > > +passes the schema compliance tests.
+> > > > > +
+> > > > > +For such nodes and properties, it has been suggested by the devicetree
+> > > > > +maintainers that the right thing to do is to remove them from the
+> > > > > +devicetree before it gets passed on to the OS [3].
+> > > >
+> > > > Hard NAK. If we go this way, then no one will ever have an incentive
+> > > > to do the right thing.
+> > > >
+> > > > Please send bindings for Linaro's work, instead. If something is
+> > > > entirely U-Boot-specific, then it can go in /options/u-boot but it
+> > > > still must be in the dt-schema.
+> > >
+> > > Please re-read the document including the last link [1]. If you go
+> > > through that entire thread, you will notice that this is precisely
+> > > what Linaro was trying to do here -- upstream the binding for the
+> > > fwu-mdata node. It is only based on the feedback of the devicetree
+> > > maintainers that this patchset was required.
+> > >
+> > > -sughosh
+> > >
+> > > [1] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/#t
+> >
+> > Please note that this right here, that the explanation of why we need to
+> > delete this node, not being a bright shiny visible object is one of the
+> > big problems with this patchset and implementation. It cannot be
+> > footnotes in email threads as to why such-and-such node/property isn't
+> > upstream, it needs to be documented and visible in the code base /
+> > documentation and an obvious you must do this for future cases.
 >
-> This helps systems which suffer from low boot entropy, since U-Boot can
-> provide entropy via the generic UEFI entropy gathering protocol to the OS,
-> at an early stage.
->
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> ---
-> Hi Simon,
->
-> not sure if this is the expected way to model a driver which autodetects
-> its device at runtime. It somewhat works, but always lists the bound
-> device, even if the registers are not supported. If I do the check in bind
-> instead, it fails booting when this returns -ENODEV, since it expects
-> the fixed device to always bind successfully, I guess?
-> Is there any other way of modeling this? And before you say your
-> favourite two letters: this is not a DT job, since it can be safely
-> auto-detected in an architectural way.
->
-> Thanks,
-> Andre
->
->  arch/arm/include/asm/system.h |  1 +
->  drivers/rng/Kconfig           |  6 +++
->  drivers/rng/Makefile          |  1 +
->  drivers/rng/arm_rndr.c        | 82 +++++++++++++++++++++++++++++++++++
->  4 files changed, 90 insertions(+)
->  create mode 100644 drivers/rng/arm_rndr.c
+> I thought we agreed that deleting nodes that won't be accepted
+> upstream is the right approach since that would break the systemready
+> 2.0 compatibility.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-nit below
+Isn't that controlled by ARM/Linaros, as are the devicetree bindings?
+What am I missing? Let's just fix the bindings so they can be
+accepted. What we decide here will have enormous repercussions in the
+future. SoC vendors are watching to see whether they should bother to
+upstream bindings or not.
 
 >
-> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-> index 87d1c77e8b1..0eae857e73a 100644
-> --- a/arch/arm/include/asm/system.h
-> +++ b/arch/arm/include/asm/system.h
-> @@ -84,6 +84,7 @@
->  #define HCR_EL2_HCD_DIS                (1 << 29) /* Hypervisor Call disabled         */
->  #define HCR_EL2_AMO_EL2                (1 <<  5) /* Route SErrors to EL2             */
->
-> +#define ID_AA64ISAR0_EL1_RNDR  (0xFUL << 60) /* RNDR random registers */
->  /*
->   * ID_AA64ISAR1_EL1 bits definitions
->   */
-> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> index 5deb5db5b71..72788d479cc 100644
-> --- a/drivers/rng/Kconfig
-> +++ b/drivers/rng/Kconfig
-> @@ -76,6 +76,12 @@ config RNG_SMCCC_TRNG
->           Enable random number generator for platforms that support Arm
->           SMCCC TRNG interface.
->
-> +config RNG_ARM_RNDR
-> +       bool "Generic ARMv8.5 RNDR register"
-> +       depends on DM_RNG && ARM64
-> +       help
-> +         Use the ARMv8.5 RNDR register to provide random numbers.
-> +
->  config TPM_RNG
->         bool "Enable random number generator on TPM device"
->         depends on TPM
-> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> index 78f61051acf..572fa7a0c66 100644
-> --- a/drivers/rng/Makefile
-> +++ b/drivers/rng/Makefile
-> @@ -13,4 +13,5 @@ obj-$(CONFIG_RNG_STM32MP1) += stm32mp1_rng.o
->  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
->  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
->  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
-> +obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
->  obj-$(CONFIG_TPM_RNG) += tpm_rng.o
-> diff --git a/drivers/rng/arm_rndr.c b/drivers/rng/arm_rndr.c
-> new file mode 100644
-> index 00000000000..55989743eae
-> --- /dev/null
-> +++ b/drivers/rng/arm_rndr.c
-> @@ -0,0 +1,82 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2023, Arm Ltd.
-> + *
-> + * Use the (optional) ARMv8.5 RNDR register to provide random numbers to
-> + * U-Boot's UCLASS_RNG users.
-> + * Detection is done at runtime using the CPU ID registers.
-> + */
-> +
-> +#define LOG_CATEGORY UCLASS_RNG
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <linux/kernel.h>
-> +#include <rng.h>
-> +#include <asm/system.h>
-> +
-> +#define DRIVER_NAME    "arm-rndr"
-> +
-> +static bool cpu_has_rndr(void)
-> +{
-> +       uint64_t reg;
-> +
-> +       __asm__ volatile("mrs %0, ID_AA64ISAR0_EL1\n" : "=r" (reg));
-> +       return !!(reg & ID_AA64ISAR0_EL1_RNDR);
-> +}
-> +
-> +/*
-> + * The system register name is RNDR, but this isn't widely known among older
-> + * toolchains, and also triggers errors because of it being an architecture
-> + * extension. Since we check the availability of the register before, it's
-> + * fine to use here, though.
-> + */
-> +#define RNDR   "S3_3_C2_C4_0"
-> +
-> +static uint64_t read_rndr(void)
-> +{
-> +       uint64_t reg;
-> +
-> +       __asm__ volatile("mrs %0, " RNDR "\n" : "=r" (reg));
-> +
-> +       return reg;
-> +}
-> +
-> +static int arm_rndr_read(struct udevice *dev, void *data, size_t len)
-> +{
-> +       uint64_t random;
-> +
-> +       while (len) {
-> +               int tocopy = min(sizeof(uint64_t), len);
-> +
-> +               random = read_rndr();
-> +               memcpy(data, &random, tocopy);
-> +               len -= tocopy;
-> +               data += tocopy;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct dm_rng_ops arm_rndr_ops = {
-> +       .read = arm_rndr_read,
-> +};
-> +
-> +static int arm_rndr_probe(struct udevice *dev)
-> +{
-> +       if (!cpu_has_rndr())
-> +               return -ENODEV;
-
-Can you put this in a bind() function instead, if not too expensive?
-
-> +
-> +       return 0;
-> +}
-> +
-> +U_BOOT_DRIVER(arm_rndr) = {
-> +       .name = DRIVER_NAME,
-> +       .id = UCLASS_RNG,
-> +       .ops = &arm_rndr_ops,
-> +       .probe = arm_rndr_probe,
-> +};
-> +
-> +U_BOOT_DRVINFO(cpu_arm_rndr) = {
-> +       .name = DRIVER_NAME,
-> +};
-> --
-> 2.25.1
->
+> Yes, it can't be footnotes or hidden links, but this is totally
+> different than what I am reading on this thread.
 
 Regards,
 Simon
