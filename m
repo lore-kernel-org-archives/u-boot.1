@@ -4,112 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B6E2C83F2B
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 07:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F79C83F29
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 07:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8347C8655A;
-	Thu, 31 Aug 2023 09:04:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id F147C8655A;
+	Thu, 31 Aug 2023 09:06:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="F5nxFw4B";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ck0XNuEc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3573B86574; Thu, 31 Aug 2023 09:04:42 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::609])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AF46C8657D; Thu, 31 Aug 2023 09:06:48 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AAD986558
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:04:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABCCF8655A
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:06:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jYnpeGLlP85F4Jedv41Wj5C6ovVnO9dJJYweSIkN6zhOeuIoCT83ly2wKR3idMMaEM0ERuZCnGD05VjgEjTUESFfN7HCfyX78BiqkQD79nKlLtzITwk6f8sVyVCOjx8d52IezMe2MC/7rdHEhFQyROgx4iQdWlWa0eHmieQjp8eosBPAexRChcSxOobvesT4oaF//5JZLlFXeWlEfUIuXnHuZYYF3VuCO+u+HB4gA33mUB6viWKBOXf+LSlXtB+dBcTonzF++Z1hC+yqcTVWxxj+gOvbB/PN6YIEm1aPez4+MizmPdetOv7idZpdxAIIDxTCIc5ghAfcV3heYCUcHQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dhtEfBp59LGrm63qmb1H8iRZt2GwRtUjxuehYBNnBag=;
- b=cRwaFZWE5pjuz0wd/gZd8+x0S/eKitV7z5Cs67t6scH0S9sDVvON7QQ7xjEUiSZFKrwfE/+OU8VLVrGyxrxAqZ/BRYBkFvKYHI7RHtCUNDXChv9OLSVMPVl0AwBsW1n6q4JoZMNmpXA05Ybs1/uin+UuRRjnyZ4WfjIQFdYACoIf9B6y/Jvq+IM0/sUy8kr4J7gC1w7CHeruZj6O6UV0eOF7LtxLo/DK0Hv0crioCqYV32XIaEHYkI5o734Ng6DnIOtY+HlwX5hAaCx4OCe1qrz9szjqcqImJGQ42+HqAVv4dEYn1Yh85By0NvBcrIR5iiE41XnD2NrKdC/P4DagkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dhtEfBp59LGrm63qmb1H8iRZt2GwRtUjxuehYBNnBag=;
- b=F5nxFw4BK3JhUUhA/YcpUVLhlUgaVDBAR7NKT+APrOZW/Ph/STe848IzbWHKWPwfDN9DhMYZv+UCAsg4UPwdR7OwsljeS167HnONWRBc3/cbgDpvnmYNapfk0Kx4yd8WMa73dHk+lhQKDu+f8imD/C0BA5HqWkPMo9KIDEz6BPU=
-Received: from PH8PR07CA0010.namprd07.prod.outlook.com (2603:10b6:510:2cd::22)
- by SJ1PR12MB6241.namprd12.prod.outlook.com (2603:10b6:a03:458::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20; Thu, 31 Aug
- 2023 07:04:34 +0000
-Received: from SA2PEPF000015CD.namprd03.prod.outlook.com
- (2603:10b6:510:2cd:cafe::c6) by PH8PR07CA0010.outlook.office365.com
- (2603:10b6:510:2cd::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
- Transport; Thu, 31 Aug 2023 07:04:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF000015CD.mail.protection.outlook.com (10.167.241.203) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.17 via Frontend Transport; Thu, 31 Aug 2023 07:04:33 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 31 Aug
- 2023 02:04:32 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH v2 2/2] xilinx: board: Add support to pick bootscr flash
- offset/size from DT
-Date: Thu, 31 Aug 2023 09:04:28 +0200
-Message-ID: <60a84405f3fefabb8b48a4e1ce84431483a729f3.1693465465.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <08a3e6c09cce13287c69ad370e409e7f1766b406.1693465465.git.michal.simek@amd.com>
-References: <08a3e6c09cce13287c69ad370e409e7f1766b406.1693465465.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-401d80f4ef8so4628685e9.1
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 00:06:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693465605; x=1694070405; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=06G2evSP27jaz3zJRbGbHKtTtwFOmZ8+0C8C00RzbL4=;
+ b=Ck0XNuEc8F5ffo2KslN16IyF54i36pQQNb4jP6oLhKC2omCroIzvztVo7ALm/UIHrg
+ bDIOtb6JYhVh/zRZ4Frmy1QyBs+pWqmwIadhQXzA3iyTVBF45T6rTkKdxpe1Auyqregw
+ WghBcQs76gNXJ5TDu/KQg2VKC8TcNrsMj3S9M/4v6t3IR3WnW7S4QUe0sreMKVy18Jln
+ SLtFpj/UktyiKZyX9Ho0wMEA7QpH5r81CnWxpRefw1Stb+4LFE6hIA0fI9zm+Y5AnSIC
+ pFN5HQV/PRo/cAS2DtavMklsxNRME8/ksPTJofjgngkA1BF/pkFtnYvbOfuLGhQCLjzG
+ DSjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693465605; x=1694070405;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=06G2evSP27jaz3zJRbGbHKtTtwFOmZ8+0C8C00RzbL4=;
+ b=MIL6DXpk0oFvS7SIbJvFSdKHV7yfoy0ELDtVRyi79RBVnuSy0DT2Ka4h8iOZoP0D6i
+ aA95CVJ7AyG/8ALuf4+iEFEoQ6tXxm1/WLfwSoa/ZucP+CSqdBlI8t2eTjQ7ewQrJCkr
+ MbgscaZAmYPimpqOWg7Rfbh5NNwvDkpOZ7WwEa8EG939/yw+PLmj/FbmUy17DRuYBYzM
+ N4NppG7nGO28EkLKMXflL6pY9Y3H8NngsoqFemIvTrSmXu7WZtPIX6U/uct2J0ELDfu5
+ zB8imqjPVcc+QMuOvpDEVvP14f7TTMLHj4ZfgidhEppJBlaj+p76GAZWbEzJtWfVWc6y
+ WnDg==
+X-Gm-Message-State: AOJu0YwrdD04XthsVNZSANdo20J3PG1ULs3TUG8T5BP3FVueEpWTHpmh
+ AvIu1srQtBDx0ZEUefRRa2yaAg==
+X-Google-Smtp-Source: AGHT+IHm6/5AOdZm/4jrJBQ+3WRXipAVVypM3NLIXrK9vuYAMOhsCkZrF+f1Hx1dyBDMh0wULwGSfA==
+X-Received: by 2002:a05:600c:210e:b0:3fe:e812:4709 with SMTP id
+ u14-20020a05600c210e00b003fee8124709mr4149990wml.12.1693465605072; 
+ Thu, 31 Aug 2023 00:06:45 -0700 (PDT)
+Received: from hades (ppp089210246083.access.hol.gr. [89.210.246.83])
+ by smtp.gmail.com with ESMTPSA id
+ n5-20020a05600c294500b003fa96fe2bd9sm4175151wmd.22.2023.08.31.00.06.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 00:06:44 -0700 (PDT)
+Date: Thu, 31 Aug 2023 10:06:42 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
+Message-ID: <ZPA8AtGOel8pko6y@hades>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-31-sjg@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2074; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=nSZ1gIUVq05w7pbrHUwXy6HfFURv4YY7LpE3sw/yB30=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhpQP1lWzTVs+77YKtzulfXDuhAVcD33jZ+prurzd/GfqE
- qPG9TOKOmJZGASZGGTFFFmkba6c2Vs5Y4rwxcNyMHNYmUCGMHBxCsBE1qUwzK9Qbi3yKmy5wXTg
- fvru283W635GizDMM2dM2xdYMu3YPdc1/HVG2UpTVnxKAQA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CD:EE_|SJ1PR12MB6241:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d7c99b4-a878-48d5-f068-08dba9f087b3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: JmWn6Du8H6tOcnZGwdCM2r+VhHk/SaOq2MUGgWp7URSTjrRiX4mKTmkU+cEDBWcFSvVpLKzQoHNrWLib37hT0gonTQGrO89DnxDhy+z3OivaGvfnMvmEx9MY6DxEKhIqaOEckZlNyk4+SKnEtqkimyGIfWNTssZcEuK/XCG+9TCzn6+9fS/6qI+NWYg8TKmIUkpWy7HIWog0rH4Dcd15W4EEARuorExD/NCOek3mr3UjJoOJJMVHdGTqxD+tLIGO1VubxyCM+sW5EbE6IuDIpsio3QgZF72TXIt3gMKIh23mPptzT2+Nt+b2Z5znWEvHusesDitpCai+tDPuejh9eqYkY8fvVunJ8fLUfy+6QqBH0AGXjkcFnGef4AodxAEp25Yg/8PsXArrefkRuI77lQDYSl6nCEnYmh5Y8j2sWFBBg4+mnIW60gGyLeyhzl00vQikLLc8dT5u05VC6h76IlUvpe6NHHWyBhsA7C1P7nl/Zp9qLsgcpYGBYxNVlwDmK5ruz9xDkWUWUpsr9Kgu5k2Z5h4JugJYM9975kUoRBSOHTMX9ivPH8zCuj5ANZWnbtW0nR5//vawwcgx7OukhN8C1/CIRVIGqnsx2jjFkyTJ5a63DPkx3WScOz9mi09CCZHxd8WiQsw6DHX3cKKziuXBWy7RiPLVf5JSYRnHPnJzDhtBio/WtO3OzW+Ah2kEqfAgpEgq6gmMLqmQx2tlXA/czXqc9qE6/S2QSsOWHbekMByDwumu1aYboHZMiGvwH5VAcJ0iZsesmS9w5C3Irw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(376002)(396003)(136003)(1800799009)(186009)(82310400011)(451199024)(46966006)(36840700001)(40470700004)(70206006)(41300700001)(8936002)(83380400001)(40480700001)(47076005)(36860700001)(336012)(8676002)(478600001)(6666004)(110136005)(70586007)(26005)(316002)(2616005)(16526019)(426003)(2906002)(356005)(82740400003)(81166007)(40460700003)(5660300002)(36756003)(44832011)(86362001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2023 07:04:33.6393 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d7c99b4-a878-48d5-f068-08dba9f087b3
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CD.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6241
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230830180524.315916-31-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,62 +97,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Location of bootscript in flash can be specified via /options/u-boot DT
-node by using bootscr-flash-offset and bootscr-flash-size properties.
-Values should be saved to script_offset_f and script_size_f variables.
-Variables are described in doc/develop/bootstd.rst as:
-script_offset_f
-    SPI flash offset from which to load the U-Boot script, e.g. 0xffe000
+Hi Simon,
 
-script_size_f
-    Size of the script to load, e.g. 0x2000
+On Wed, Aug 30, 2023 at 12:05:01PM -0600, Simon Glass wrote:
+> Standard passage provides for a bloblist to be passed from one firmware
+> phase to the next. That can be used to pass the devicetree along as well.
+> Add an option to support this.
+> 
+> Tests for this will be added as part of the Universal Payload work.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>  common/bloblist.c                  |  2 ++
+>  doc/develop/devicetree/control.rst |  3 ++
+>  dts/Kconfig                        |  8 ++++++
+>  include/bloblist.h                 |  5 ++++
+>  include/fdtdec.h                   |  3 +-
+>  lib/fdtdec.c                       | 44 ++++++++++++++++++++++--------
+>  6 files changed, 52 insertions(+), 13 deletions(-)
+> 
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 6f2a4577708..b07ede11cfe 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -48,9 +48,11 @@ static struct tag_name {
+>  	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+>  	{ BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
+>  	{ BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
+> +	{ BLOBLISTT_CONTROL_FDT, "Control FDT" },
+>  
+>  	/* BLOBLISTT_PROJECT_AREA */
+>  	{ BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
+> +	{ BLOBLISTT_VBE, "VBE" },
+>  	{ BLOBLISTT_U_BOOT_VIDEO, "SPL video handoff" },
+>  
+>  	/* BLOBLISTT_VENDOR_AREA */
+> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
+> index cbb65c9b177..56e00090166 100644
+> --- a/doc/develop/devicetree/control.rst
+> +++ b/doc/develop/devicetree/control.rst
+> @@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
+>  devicetree at runtime, for example if an earlier bootloader stage creates
+>  it and passes it to U-Boot.
+>  
+> +If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
+> +from a previous stage.
+> +
 
-Both of them are used by sf_get_bootflow() in drivers/mtd/spi/sf_bootdev.c
-to identify bootscript location inside flash.
+Is this bloblist in the format described in the firmware handoff [0] ?
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+> +config OF_BLOBLIST
+> +	bool "DTB is provided by a bloblist"
+> +	help
+> +	  Select this to read the devicetree from the bloblist. This allows
+> +	  using a bloblist to transfer the devicetree between  U-Boot phases.
+> +	  The devicetree is stored in the bloblist by an early phase so that
+> +	  U-Boot can read it.
+> +
 
-Changes in v2:
-- Change message from printf to debug not to disturb current users
+I dont think this is a good idea.  We used to have 4-5 different options
+here, which we tried to clean up and ended up with two very discrete
+options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
+have a header of some sort?  The bloblist literally comes from a previous
+stage bootloader which is what OF_BOARD is here for. So why can't we just
+read the header and figure out if the magic of the bloblist matches?
 
- board/xilinx/common/board.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+>  config OF_BOARD
+>  	bool "Provided by the board (e.g a previous loader) at runtime"
+>  	default y if SANDBOX || OF_HAS_PRIOR_STAGE
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 080cc46a126..e16d122f4fb 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -103,6 +103,11 @@ enum bloblist_tag_t {
+>  	BLOBLISTT_ACPI_TABLES = 0x104,	/* ACPI tables for x86 */
+>  	BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+>  	BLOBLISTT_VBOOT_CTX = 0x106,	/* Chromium OS verified boot context */
+> +	/*
 
-diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-index b3fb6acc25a3..126f0d81a9ed 100644
---- a/board/xilinx/common/board.c
-+++ b/board/xilinx/common/board.c
-@@ -411,6 +411,7 @@ int board_late_init_xilinx(void)
- 	int i, id, macid = 0;
- 	struct xilinx_board_description *desc;
- 	phys_size_t bootm_size = gd->ram_top - gd->ram_base;
-+	u64 bootscr_flash_offset, bootscr_flash_size;
- 
- 	if (!IS_ENABLED(CONFIG_MICROBLAZE)) {
- 		ulong scriptaddr;
-@@ -435,11 +436,19 @@ int board_late_init_xilinx(void)
- 		}
- 	}
- 
-+	if (!ofnode_read_bootscript_flash(&bootscr_flash_offset,
-+					  &bootscr_flash_size)) {
-+		ret |= env_set_hex("script_offset_f", bootscr_flash_offset);
-+		ret |= env_set_hex("script_size_f", bootscr_flash_size);
-+	} else {
-+		debug("!!! Please define bootscr-flash-offset via DT !!!\n");
-+		ret |= env_set_hex("script_offset_f",
-+				   CONFIG_BOOT_SCRIPT_OFFSET);
-+	}
-+
- 	if (IS_ENABLED(CONFIG_ARCH_ZYNQ) || IS_ENABLED(CONFIG_MICROBLAZE))
- 		bootm_size = min(bootm_size, (phys_size_t)(SZ_512M + SZ_256M));
- 
--	ret |= env_set_hex("script_offset_f", CONFIG_BOOT_SCRIPT_OFFSET);
--
- 	ret |= env_set_addr("bootm_low", (void *)gd->ram_base);
- 	ret |= env_set_addr("bootm_size", (void *)bootm_size);
- 
--- 
-2.36.1
+[...]
 
+> 
+[0] https://github.com/FirmwareHandoff/firmware_handoff
+
+Thanks
+/Ilias
