@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2057C83F22
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37294C83F22
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FEAB8655E;
-	Thu, 31 Aug 2023 04:50:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 99E7986569;
+	Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eAtlrAOp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OE3JCKCL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9BDD86575; Thu, 31 Aug 2023 04:50:01 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 5E76C86579; Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ED3386546
+ by phobos.denx.de (Postfix) with ESMTPS id 8A0B486569
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 04:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=twoerner@gmail.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-65166804282so7291096d6.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-31781e15a0cso189570f8f.3
  for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 19:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693450197; x=1694054997; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wNclMBUAGpOZcEtLDu+pgkLB1KmNKupAnfxCG5b9+bU=;
- b=eAtlrAOp3g8i7+MbGV+8FyUfL59EW6A3astmxiknhNE4XBje9XwYLV6TiujICymsNn
- mvfeCfqXSWqPDKj7eUwlGRdkAy1ODLywcX48dwNBXgsHS/fEIM/OnV7CS09tmTCLyUl1
- 7EAd3GSTTfrCAqNrLEdfqTqYdcUY/HC6pOIij17X8baE0LXDtsGFM8gCdKmaxrrQH1Pr
- 1KVvG1njVMXklt9J2W5+1tBAXToZQv+VAuVeiXjFGsgEITyVC6Kc9xjcu2RBQCR3o5Tv
- jFjud6yAXbN4I/Tmcn5HInppZGhaQvIJzyD1JWTdnu3C6QYohTgosyMYdBoOgiCrGme0
- Gu8A==
+ d=chromium.org; s=google; t=1693450199; x=1694054999; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=I2Rtnw+7G+TPeNMQvJ+TunX7eGrR/Eu/JPGF55Jq5bs=;
+ b=OE3JCKCL8j54T5jieDbS8V6mQoP42Bt9VYAIGQjhAMnciZ9u54/JoMnuhgWam4cEiI
+ 0OZ5jvqDWyiWZ6eceyqRiroMnusTPZyqUSlMRqGPQjmV358C1yZ5vG3y/FS5umbyJKBI
+ 8/GV2OWd/IsUqbiW+EjP0EdmqhfQbFIYihVAk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693450197; x=1694054997;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1693450199; x=1694054999;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wNclMBUAGpOZcEtLDu+pgkLB1KmNKupAnfxCG5b9+bU=;
- b=FXjOSGtiqw2ypFl8HDz12U5Si9ykwg3gpHmm1mCfDuYXj7sq4IGUPIdllHNBHN6qt+
- xR6O+1kgCarWpnxgAoCI3VA/ZEje/PTs7P4hwWsXXJjx25g3Lu2/8It63qB+V6EVo0VB
- iQuwsLy1001AytZoQ3iKt7yG6pmAQ1bL3t75n6YaLdCl4Y2DIWSFj5328dXrho8eyTUp
- /Hamfu1FuxdzQdDeuf+Y+hWmBmBzohFZydlj8DZ5lE2NA1aWM1DjAKy0BIkM+JK8dKI2
- HVgr0tIeU1nNbgJTFBzzAHHTh3a/AGJCEpPhRyJT2doi6+Upn5dFX0lDZvMMkk6gaqTg
- ZQYQ==
-X-Gm-Message-State: AOJu0Yyefn9/bLdOPcqUpiqHWKuwvJrJhQK1UtlvynhLnkhxNXBNZMo1
- nqMlUOjruL5oZadu7oDjFBnE3xd/P+4=
-X-Google-Smtp-Source: AGHT+IETvRR5h6OHb4KI/Kc1Msq8ZkpP+ivLiBvy3Btl3dK6pH1StRSe92k0dVwVgiqLyhcVvXbqHg==
-X-Received: by 2002:a0c:aa9b:0:b0:647:18f8:36eb with SMTP id
- f27-20020a0caa9b000000b0064718f836ebmr2021198qvb.27.1693450197192; 
- Wed, 30 Aug 2023 19:49:57 -0700 (PDT)
-Received: from localhost.localdomain (pppoe-209-91-167-254.vianet.ca.
- [209.91.167.254]) by smtp.gmail.com with ESMTPSA id
- m15-20020ae9e00f000000b0076f124abe4dsm213160qkk.77.2023.08.30.19.49.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 19:49:56 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Michal Suchanek <msuchanek@suse.de>
-Subject: [PATCH] am33xx: ignore return value from usb_ether_init()
-Date: Wed, 30 Aug 2023 22:49:50 -0400
-Message-ID: <20230831024951.22599-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.41.0.327.gaa9166bcc0ba
+ bh=I2Rtnw+7G+TPeNMQvJ+TunX7eGrR/Eu/JPGF55Jq5bs=;
+ b=a7DxG0ndrB6nZpf/3WSK5v/vDnfnHijee+R8RS7w6zuMZTd1aPp3aNvt62WxGdq5EG
+ dnRlT8oBq2ML7epbPVaegbEsDCvdN0aSbJAnv9dZK3c5jjaB/8XLfFexACBctmDeqe4o
+ Wbvq36VplVNeuy3t+tc9ESGl38N7bdn1fd0c6P9mhH7i/zAFc0TUQ5LehWjY+4iD2hyq
+ n0UDpcp54kEgaFmj5k6xxZ2jHrLnMYNUlhahEZLKQ1JfCg3afRLhcR8DslWyEulaEJk2
+ HtMkmjI2JpP5Q+hCDnWkgYJSmY2fsjGsbYKzISScgdUscQFxeXw0I6cQlzgMauVKCj60
+ 5bLg==
+X-Gm-Message-State: AOJu0YyxIZ8rSb+jKAxCoISBKxLElEEBOUk4gRlsQvGi1n3V+b3cgIf9
+ qfauMiGDk9DuxqQR/CkuNZh3kg1tXnb2U0aOp5MHpQ==
+X-Google-Smtp-Source: AGHT+IEBwom1uFeyGa6tYHdeKHkuIIF9guWzHpYeS6IN4u01TkZ8cZlS81s8vR9FCRrah+Zx4b4WjsQh1z2Nf6JXgUw=
+X-Received: by 2002:a5d:5011:0:b0:319:664a:aff5 with SMTP id
+ e17-20020a5d5011000000b00319664aaff5mr3037633wrt.37.1693450198929; Wed, 30
+ Aug 2023 19:49:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
+ <20230829203710.84201-5-seanedmond@linux.microsoft.com>
+In-Reply-To: <20230829203710.84201-5-seanedmond@linux.microsoft.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Aug 2023 20:49:23 -0600
+Message-ID: <CAPnjgZ1wnBmb4mVvmaW-10E157xUjw+ZFvZ=2x10JxyWLrBxoQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] dm: core: Modify default for OFNODE_MULTI_TREE
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, macromorgan@hotmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,37 +81,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In 2cb43ef1c223 ("usb: ether: Fix error handling in usb_ether_init") the error
-handling of usb_ether_init() was changed. Not a single other call site of this
-function checks its return value, therefore follow suit in the am33xx code.
+On Tue, 29 Aug 2023 at 14:37, <seanedmond@linux.microsoft.com> wrote:
+>
+> From: Sean Edmond <seanedmond@microsoft.com>
+>
+> There is a preference to use the "ofnode" API for FDT fixups
+> moving forward.  The FDT fixup will usually be for the kernel FDT.  To
+> fixup the kernel FDT with the ofnode API, it's required to set the
+> OFNODE_MULTI_TREE option.
+>
+> To ensure existing users of kaslr fdt fixup are not impacted, Let's modify
+> the default value for OFNODE_MULTI_TREE to ensure it's always set if
+> !OF_LIVE.  This will cause a 1007 byte increase in the code size.
 
-Do not cause the boot to halt if the usb gadget ethernet initialization fails:
+Interestingly, this option is not needed if we can pass the control
+DTB to Linux, But at least for now, we don't know that a priori.
 
-	initcall sequence 9ffdbd84 failed at call 808024b9 (err=-19)
-	### ERROR ### Please RESET the board ###
+>
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> ---
+>  drivers/core/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- arch/arm/mach-omap2/am33xx/board.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
-index ecc0a592e993..8f772310a1a7 100644
---- a/arch/arm/mach-omap2/am33xx/board.c
-+++ b/arch/arm/mach-omap2/am33xx/board.c
-@@ -270,11 +270,7 @@ int arch_misc_init(void)
- 		return ret;
- 
- #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
--	ret = usb_ether_init();
--	if (ret) {
--		pr_err("USB ether init failed\n");
--		return ret;
--	}
-+	usb_ether_init();
- #endif
- 
- 	return 0;
--- 
-2.41.0.327.gaa9166bcc0ba
+>
+> diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
+> index f0d848f45d..38e44ef6fc 100644
+> --- a/drivers/core/Kconfig
+> +++ b/drivers/core/Kconfig
+> @@ -424,7 +424,7 @@ config DM_DEV_READ_INLINE
+>
+>  config OFNODE_MULTI_TREE
+>         bool "Allow the ofnode interface to access any tree"
+> -       default y if EVENT && !DM_DEV_READ_INLINE && !DM_INLINE_OFNODE
+> +       default y if !OF_LIVE
+>         help
+>           Normally U-Boot makes use of its control FDT, the one used to bind
+>           devices and provide options. In some cases, U-Boot must also process
+> --
+> 2.40.0
+>
 
+Regards,
+Simon
