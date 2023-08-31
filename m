@@ -4,68 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EC9C83F2C
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:38:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCB0C83F2B
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C3268655E;
-	Thu, 31 Aug 2023 05:38:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DACC286554;
+	Thu, 31 Aug 2023 05:38:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NwL8r2Ws";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QwvdLHe7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED3368655E; Thu, 31 Aug 2023 05:38:19 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 7D30986567; Thu, 31 Aug 2023 05:38:21 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E25F9862F1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:38:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 754CB86550
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:38:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-52a39a1c4d5so346383a12.3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:38:16 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-500c37d479aso790169e87.2
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:38:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693453096; x=1694057896; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693453098; x=1694057898; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+TBDO8JqA8Pf9p0rgCblrIY62nYVu3+o0sUrr3BC2qQ=;
- b=NwL8r2WsLyHlxnBnwMZKPwmMK8TY7KjWtxCYLPwpC04U7DZrO1xWLavD7kgdqHNJEo
- LH9TrDuGFyklz6sII2y90ywCP/KdlXz6pCnIYBu3oB47glSVPDhGvHdSUyttSI/3+5Mg
- OR8GybL7xn6ZkHB/MebnmhyPBwMfmgLXizrlU=
+ bh=o7aH3etJoNj11J8MEJUkN8gGuf1qoU7XUzpttRWuiZQ=;
+ b=QwvdLHe7VELwPoqshmfaF5vleAa/gc2ZJuYT7SRzdXfgLmaTkrPXAJPHUrAcMOncUt
+ 9ZqYrt97SjqN6KdnSHq4MR2OOquXF+ktUIUGPb99WHYOSIQq/smFAYkAEhYLXixnf+WF
+ HQGMS/U8+MbgifgamVVrJr/MW89Hk6fOLfMt4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693453096; x=1694057896;
+ d=1e100.net; s=20221208; t=1693453098; x=1694057898;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+TBDO8JqA8Pf9p0rgCblrIY62nYVu3+o0sUrr3BC2qQ=;
- b=FXgllzRuiSmts8pvOs4PIQFXxXkCgDwHIjKBun/yoVmVZN/SBiePvohElooRHyA73d
- dk9LcLXdxOz98tmtPuNSZOCmAx3LW8QWRKPjQw1ugSndkUesCQ7QemkwpZC/JMiI+5MS
- u3oE0iRCBE14Jbpk4BbfZ9Lb/BCphYak/5El2iH7nF3pDAGxEocZfoDMBTDtl8kyWBVX
- 7J/DtvER1x5L/lH+cEad+xNmLDj0C1/cR7v90Rrg6NkAmO0tkZfTr2LHlbw+b2D8vzBb
- LVW/aAQ9v3KICfcND1YsSVHa1LHR9CoB0Dj9vUZAHc/agHpatojUpDRWtyMj3rDt5WBW
- ozdA==
-X-Gm-Message-State: AOJu0Yy3XzvkqkmNxB3UaoilqdozR1AIVqh34JLzRyR5O9SyCp8Zf3lP
- 1Y/tqk1XY5MarZnqMNZC1ycT7mgLuHpD3Gl1SyCbEQ==
-X-Google-Smtp-Source: AGHT+IEjFiu62u5N67UVTqm5UbxRyyA+VXGOA+J0tJ8IwfoU8mL918TT7EIDoE5gsrtUg2ftN13ejRtlXTj9gKcJOgY=
-X-Received: by 2002:aa7:c657:0:b0:525:6d9e:67c0 with SMTP id
- z23-20020aa7c657000000b005256d9e67c0mr3389762edr.23.1693453096168; Wed, 30
- Aug 2023 20:38:16 -0700 (PDT)
+ bh=o7aH3etJoNj11J8MEJUkN8gGuf1qoU7XUzpttRWuiZQ=;
+ b=U5CBfOOSXdYMtYISd1RWUiBX0tI6cIifIOpG7I0u7paaDfllRgZDEPic2xOLNFevdP
+ qeCt4qc/y7aa3apXlt8LdvXTW8W0PncAQ76csaTyvcIrk3AfJ9XSG9/BK74114m6GZ2g
+ RXsc/qXM77JYq50GzfmjiYCd9Ouwmqa5KsToqRVobBwm7nLbOwPa6WGCzsJAJPa4IsHO
+ SgGc68gT5avAecA0sj3tj+/AmpTDik9mz0717KeDK7JYhTMvIJzmrQem0oIJW2X1hFQI
+ VVtRS1ljFX7NAuGIk3iEKug/1e8XkQrobasTd5hVL+CbmmvcpSKpr9RkgAK9qmu6Qfta
+ /fjA==
+X-Gm-Message-State: AOJu0YzA4Z+Kx47ulo2moNU18jAlqHojT+tg+sfPXnUHkzany3OHdECh
+ vZY4kbeC4+s+tvuMcnCXuvi4avFcdDg+7QStVRr5JA==
+X-Google-Smtp-Source: AGHT+IGzcTRojVh+KwqUSk68tzb2Iu2y98X2LQFaMpv2xvrALli55z9EJO1g11UFqQy/uT4g3AAi1Ko9YyAmW83NBLw=
+X-Received: by 2002:a05:6512:398e:b0:4f8:62a6:8b2 with SMTP id
+ j14-20020a056512398e00b004f862a608b2mr2990330lfu.46.1693453097581; Wed, 30
+ Aug 2023 20:38:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <CV61D7ULLVZ0.3OCFZ743L1KSE@flaptop>
-In-Reply-To: <CV61D7ULLVZ0.3OCFZ743L1KSE@flaptop>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
+ <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
+ <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
+ <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
+ <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
+ <CALeDE9NUZ5vUzMrZgTcYtNR9dXyWEsZ+6zXNTFuFSvfL4XoM8Q@mail.gmail.com>
+ <CAPnjgZ2zVcwfm1=+ce_J89sMEFQR6HsTwe-X31ZqjbWrNkxcYQ@mail.gmail.com>
+ <CALeDE9PbgPVWDCH0VMN8ftJ55VvkgksHUxNwoOK1ksCOJpNN=w@mail.gmail.com>
+In-Reply-To: <CALeDE9PbgPVWDCH0VMN8ftJ55VvkgksHUxNwoOK1ksCOJpNN=w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Aug 2023 21:37:59 -0600
-Message-ID: <CAPnjgZ2iff6F3CFjnjEMUVoX3bO=kv3za4Q45YOcVeZqc96=rw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/1] meson: Demonstration of using binman to produce
- the image
-To: Ferass El Hafidi <vitali64pmemail@protonmail.com>
-Cc: christianshewitt@gmail.com, mark.kettenis@xs4all.nl, u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, linux-amlogic@lists.infradead.org, 
- alpernebiyasak@gmail.com, neil.armstrong@linaro.org, da@lessconfused.com
+Date: Wed, 30 Aug 2023 21:38:05 -0600
+Message-ID: <CAPnjgZ3x8OgnnPWYndRvRpYB+5JTfrSEsA_i3aXiri2eh-nonA@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,65 +90,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ferass,
+Hi Peter,
 
-On Wed, 30 Aug 2023 at 11:53, Ferass El Hafidi
-<vitali64pmemail@protonmail.com> wrote:
+On Wed, 30 Aug 2023 at 02:19, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> Hi Simon,
+> > > > > > I have started the process to upstream the binman bindings.
+> > > > >
+> > > > > I don't think they should be in DT at all, they don't describe
+> > > > > anything to do with hardware, or generally even the runtime of a
+> > > > > device, they don't even describe the boot/runtime state of the
+> > > > > firmware, they describe build time, so I don't see what that has to do
+> > > > > with device tree? Can you explain that? To me those sorts of things
+> > > > > should live in a build time style config file.
+> > > >
+> > > > I beg to differ. Devicetree is more than just hardware and always has
+> > > > been. See, for example the /chosen and /options nodes.
+> > >
+> > > Can you give me an example of "options" as grep doesn't give me a
+> > > single one in the kernel tree? I think we can just agree to disagree
+> > > here.
+> >
+> > See here: https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/options/u-boot.yaml
 >
-> > So I wonder how best to move this forward so that we can build things
-> > using binman and everything works?
->
-> It's still not ready yet, but I'm working on porting U-Boot SPL to some
-> Amlogic SoCs [1]. I'm currently working on Amlogic S905 boards, but
-> eventually I'll work on Amlogic S905X devices too. And speaking of
-> signing, Jonas Karlman wrote amlimage, and integrated it into mkimage,
-> and I applied his patch to my tree. There's a few things to be aware of
-> about Amlogic signing and binaries in general, however.
->
-> amlimage was intended for use with U-Boot SPL, which obviously has
-> no support for Amlogic's FIP format and as such amlimage will only do as
-> little as possible to get the bootROM to load U-Boot SPL. Most of the
-> packaging format is handled by BL2. The fact that the signing process is
-> completly different across SoC generations makes it difficult to
-> implement them all into one single tool (and by which I mean all of it,
-> not just signing BL2 for the bootROM to run it, that's mostly the same
-> across SoCs). amlimage has been confirmed to work on GXBB (ODROID-C2 and
-> the KII Pro set-top box), GXL (librecomputer lepotato), and SM1 (ODROID-C4).
->
-> My U-Boot SPL port is still rather incomplete. As of today, it still
-> can't boot anything from any storage device. The goal eventually is to
-> be able to load upstream TF-A BL31 and U-Boot+linux.
->
-> While Amlogic distributes proprietary BL31 binaries upstream Trusted
-> Firmware-A has a port for some Amlogic SoCs [2], but as far as I know
-> SM1 (which is the SoC generation your ODROID-C4 is using) is still
-> unsupported. GXBB, GXL, AXG, and G12A are all supported however, but the
-> overall port still lacks some features the proprietary implementation
-> has.
->
-> As for the SCP firmware (aka. BL30) I'm not aware of any
-> reverse-engineering efforts for that.
->
+> All of those options look to me like they would work just fine in a
+> .env file like you've added board/raspberrypi/rpi/rpi.env
 
-Thanks for your efforts on this. I look forward to seeing where it ends up.
-
-> Honestly, in my opinion, including proprietary and poorly-written
-> Amlogic utilities lacking a proper license, into U-Boot looks like a bad idea.
-
-With Binman, we don't really include them in U-Boot; we allow them to
-be fetched easily so that a complete build can be produced.
-
-I don't like it either, but for users it is better than doing the
-build manually.
+But that is built into U-Boot. How can it be controlled by another
+previous progress in the firmware stack?
 
 >
-> [1]: https://git.vitali64.duckdns.org/misc/u-boot-kii-pro.git/log/?h=wip/spl
-> [2]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/plat/amlogic
+> > I don't mind disagreeing, so long as it doesn't result in any
+> > restrictions on using devicetree in firmware. But it is very important
+> > to the success of firmware that we can make full use of the
+> > devicetree.
 >
-> Cheers.
+> That statement doesn't make sense, of course the firmware makes full
+> use of the DT because it needs it to instantiate the HW. You don't
+> actually answer my question though.
+
+I think I tried to answer your question but we are not on the same
+page. Please don't say that DT is just for hardware, since that is a
+sore point with me. It helf back U-Boot for many years, to no useful
+purpose.
+
+Perhaps you could restate the question?
+
+Also, why are you trying to keep things out of the DT?
+
 >
+> > > > We need run-time configuration here, since we cannot know at build
+> > > > time what we will be asked to do by a previous firmware phase.
+> > >
+> > > Can you provide an example as to how that is used during runtime? Do
+> > > you mean runtime during the build process or runtime on the device?
+> >
+> > I mean runtime on the device. An example is that we might want to
+> > control whether the serial UART is enabled, without having to rebuild
+> > each program in the firmware stack.
+>
+> That is describing the HW though, such as whether a serial port is
+> enabled or not, it's not how the binman pieces you're adding to DT are
+> used during runtime which is the question I was asking.
+
+There is:
+
+1. whether the serial device is enabled in the DT
+2. whether it emits character or not
+
+Often we always want 1, in case we need to emit something. But for 2
+we want to control it with a global setting that applies to all
+programs in the firmware flow.
+
+Another example would be a framebuffer address, where we want to
+provide it in the DT so that all programs can use the same one.
+
+
+>
+> > >
+> > > > >
+> > > > > > Perhaps we should use the issue tracker[1] to follow progress on all
+> > > > > > of this. We need to clean it up.
+> > > > > >
+> > > > > > >
+> > > > > > > > Instead of this, how about working on bringing the DT validation into
+> > > > > > > > U-Boot so we can see what state things are in?
+> > > > > > > >
+> > > > > > > > Please send the bindings for Linaro's recent series (which I suspect
+> > > > > > > > are motivating this series) so we can start the process.
+> > > > > >
+> > > > > > Regards,
+> > > > > > Simon
+> > > > > >
+> > > > > > [1] https://source.denx.de/u-boot/u-boot/-/issues
 
 Regards,
 Simon
