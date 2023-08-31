@@ -4,59 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD325C83F2E
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 16:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D951FC83F2E
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 16:26:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCD828666B;
-	Thu, 31 Aug 2023 18:15:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id DF3168667A;
+	Thu, 31 Aug 2023 18:26:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693498514;
-	bh=UOFulEocj09DrH8KVHIVWj6oXMTKg46E9WMvWD/yhpM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=GW1IuncvgZOa6ofI9nnz3MCortH5R06SafjrRBIgDNJ9tocT3LFyL/LCRyyKZN/7G
-	 FzjOPN5c2aL2WNJtbuZXUnJUcZGpOOxxEYI+xVS/HhS+qBYgquRucpvqb3HoSQgtss
-	 dpH4NFpSLDnIyCrzDFDo+28jaeT6VUQG9KXV48fMg6ewOntoDTfF4bj7VkuJ6YgZwz
-	 T2QBXxL7602VVUmKSxckyvIn0gs2piZYyZqkpnT/3V86fArigzotlVQyOdCQmzeSmV
-	 trhWzHZHAmAQEUJCIEYa2QCaxqN/C/eUaAu+lKvntY7+yqCR+P2aGsGGG3NIgTxMYl
-	 3wMvrPZF2WnbQ==
-Received: from mail.denx.de (unknown
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T5+SfJMx";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AE79E8666B; Thu, 31 Aug 2023 18:26:23 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: festevam@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D2F0186519;
- Thu, 31 Aug 2023 18:15:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693498513;
- bh=UOFulEocj09DrH8KVHIVWj6oXMTKg46E9WMvWD/yhpM=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=w2mUxxnGi/nxF6PmMppHEY1VVOznHGiWwOJr5QhPuTMMP0jRhRn8uvamw3G1farv0
- M2l/Dwgvhd+TMThkf1KCJfT3DydOwbaRNUjgd/w+FUcJdJiG60OtQAiOXnZatbxDdf
- lcQD97lDfIKJUBstijkXOtyN/IKyJJtrott+2fkQWaoadcQpd/89EmM/rO/G6pmaU0
- H/TggD3XPhoTUVAOvJBMbhLezgqI59gAUJp0DU7POFOtrh/VUttMZYDSeY98zEPOQ5
- XRUc5+dAXTdEdMRNEyDP1yS4zQAS01q0IhgGeY4FExwSfRGegPGTKyifWmczir8CV2
- m1FYlvI2PsCuA==
+ by phobos.denx.de (Postfix) with ESMTPS id F3FD88669B
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:26:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5920efd91c7so11815047b3.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:26:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1693499178; x=1694103978; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=arHrWF758uMO3KNraFFAfqX7nesLiwwwnZiT1F+G87g=;
+ b=T5+SfJMx2rr24mz89zDjJZEdXORlA568WkaDIF7ZPUI8Yd/VEYNvPyIbj6zqhoc7Jg
+ 65ffyfJ2lxB8bQHf3o+EDNmh4S9/96vn3UhfP47DSQecqT3IaTFZMqxbJ8GXlNTeV8/J
+ E17dpDGTF2Bn8W2uLqw4jA+x/oVotGoONtatk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693499178; x=1694103978;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=arHrWF758uMO3KNraFFAfqX7nesLiwwwnZiT1F+G87g=;
+ b=FxECZh0FAKMtgkJAheYty67J+kP6+GqrUt13vQhxd4o67l0Q8vNrOiZmAKNrbHaSN4
+ zuuAe8TG4yw+7/9+CbGpJDTi2+HLNXNvILxqzKT27eeIXyOkLm50tV6OaNU5nLyaFrAP
+ v3ymxdRb+yEh2E6PJfVnXxZq8EYAh6kUu+5tv6c+sfbrFPcmkl2LHVVUfTqx4WwOCtMx
+ 16rq9lCJpHFrLJRLwL/Fku6fjbPmCTFyjAug3FyWvSjyvnxcf1aiiBpI/9T4eCoFRV1B
+ X30eFtVvHM7hTBj0gCZP1+6v6QXCmUH+E4kVDN8hxnNtWzZnKQQ0Trek5i6dtTskUTbS
+ HVnQ==
+X-Gm-Message-State: AOJu0Yyi/36wbtE04hhcZXdmO2OXxTz2pZgXSmUV4qGVehy91ciO69q5
+ TE0KqQ8PBKlDsIeHKoXVTPhPYw==
+X-Google-Smtp-Source: AGHT+IFgkVRO1TtE5Dq2zt8l5D+EPeOB5RzpnbJVYeNT0d8iXT+nW0SjihtHUcdzgFeKQIK85a67ww==
+X-Received: by 2002:a81:91c3:0:b0:586:9c8b:ae7 with SMTP id
+ i186-20020a8191c3000000b005869c8b0ae7mr5592310ywg.46.1693499178686; 
+ Thu, 31 Aug 2023 09:26:18 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-1cd4-1a46-fd5d-6cab.res6.spectrum.com.
+ [2603:6081:7b00:6400:1cd4:1a46:fd5d:6cab])
+ by smtp.gmail.com with ESMTPSA id
+ u67-20020a0deb46000000b0057087e7691bsm510400ywe.56.2023.08.31.09.26.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 09:26:18 -0700 (PDT)
+Date: Thu, 31 Aug 2023 12:26:16 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Nicolas Saenz Julienne <nsaenz@kernel.org>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Subject: Re: [PATCH] pci: pcie-brcmstb: bring over some robustness
+ improvements from Linux
+Message-ID: <20230831162616.GB3101304@bill-the-cat>
+References: <20230814223413.169955-1-CFSworks@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Date: Thu, 31 Aug 2023 13:15:13 -0300
-From: Fabio Estevam <festevam@denx.de>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng
- Fan <peng.fan@nxp.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH] imx: hab: Use CONFIG_SPL_LOAD_FIT_ADDRESS in the CSF
- example
-In-Reply-To: <20230831145603.80139-1-marex@denx.de>
-References: <20230831145603.80139-1-marex@denx.de>
-Message-ID: <47ac05f428c60c6444293fe6f20fe7c3@denx.de>
-X-Sender: festevam@denx.de
-User-Agent: Roundcube Webmail/1.3.6
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZvPygrNpxFNFYAqp"
+Content-Disposition: inline
+In-Reply-To: <20230814223413.169955-1-CFSworks@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,34 +93,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 31/08/2023 11:56, Marek Vasut wrote:
-> The SPL authenticates image starting from CONFIG_SPL_LOAD_FIT_ADDRESS
-> address, update the csf_fit.txt to match.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Fabio Estevam <festevam@denx.de>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Cc: Stefano Babic <sbabic@denx.de>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> ---
->  doc/imx/habv4/csf_examples/mx8m/csf_fit.txt | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
-> b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
-> index 3d79edf2813..97f3eea573b 100644
-> --- a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
-> +++ b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
-> @@ -27,4 +27,4 @@
->    Verification index = 2
->    # FIXME:
->    # Line 1 -- fitImage
-> -  Blocks = 0x401fcdc0 0x57c00 0xffff "flash.bin"
-> +  Blocks = CONFIG_SPL_LOAD_FIT_ADDRESS 0x57c00 0xffff "flash.bin"
 
-Reviewed-by: Fabio Estevam <festevam@denx.de>
+--ZvPygrNpxFNFYAqp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
+On Mon, Aug 14, 2023 at 04:34:13PM -0600, Sam Edwards wrote:
+
+> Since the initial U-Boot driver was ported here from Linux, the latter
+> has had a few changes for robustness/stability. This patch brings over
+> two of them:
+> - Do not attempt to access the configuration space of a PCIe device if
+>   the link has gone down, as that will result in an asynchronous SError
+>   interrupt which will crash U-Boot.
+> - Wait for the recommended 100ms after PERST# is deasserted.
+>=20
+> I sent this patch while debugging a crash involving PCIe, but these
+> are unrelated improvements. I do not believe that this patch fixes any
+> real-world bug.
+>=20
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--ZvPygrNpxFNFYAqp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTwvyUACgkQFHw5/5Y0
+tywcAAwAlZiMncSsXa4YtiTflDePL+XRWFTEs3te9ivuM/IXEE/obJj9prNqEKal
+OlcRJR4Oxkjr1ZKE23wGhETaJGov4I76lvgLcQOKhFhU0hiTR6+Z7+99tR2sVimu
+vak2RNeHSRhz74illr7z3mGBa077y+seUk3S+TWMfDYDH8hSGD24xZxZ0IVjIKMa
+lKROUib6YjAMisn2Wh8/5c60Y99pDm7ITtdb3Kn885LLG+Pjc8S2HYA9AfRygEtz
+7DsljIlQh/YuiLOoSaKt33mOp6dl62v8PYtI2G3ZuWyMNfsjVH+K2aLY7yTKeTLY
+urwvDGcx0m/xuf8yRUgq9C2ngt6/cdpOUmrx+yLQ3oWepjod4OlgQgA+BZFwu3OZ
+4k9Y1j1ug0ZyId8lMzqW+7XO81wA7MsdFhtRCl67p2jF83ubYl/BBj8Ia5AEmt1o
+uZZlIyWIw4f1hlIrGTKN0jimPIC2xAG2v/g6gTknfDQr2tX9EziyNfKr4jbUAZta
+SUfM7gLB
+=IGae
+-----END PGP SIGNATURE-----
+
+--ZvPygrNpxFNFYAqp--
