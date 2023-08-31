@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA12C83F3A
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD411C83F3A
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:03:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0459F86751;
-	Thu, 31 Aug 2023 21:03:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B78386703;
+	Thu, 31 Aug 2023 21:03:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oQ7QEm+n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Frg9Xu6a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E9B786722; Thu, 31 Aug 2023 21:03:05 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 0725686758; Thu, 31 Aug 2023 21:03:07 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8CB386784
+ by phobos.denx.de (Postfix) with ESMTPS id D741386776
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d7cbcfdf137so894309276.2
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-d7bb34576b9so893060276.3
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693508581; x=1694113381; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hgiedffID2MyQT0GCvds6t+94Q+4FxSnljjBDZxOBBg=;
- b=oQ7QEm+nbOAxgzx7xBVXIqVn1Wyb3dBcaSW7q1f946Nb6v1m5oHVReOSqOS6on1CPk
- ylgmgs6mZ20WGuDdzFUDrgtyGJC/V9C7LRsachdE38nwxpUkftUquj49kTJ5GyBlJPpZ
- lzRqDXInIe6BTT7yi8fpcz4pnOR/RSEISDiCg=
+ bh=zd2+UgyqdGx0X5fvzolvOz/u1zDlr/G7N+mBSR1ttbk=;
+ b=Frg9Xu6a3i/kMADFO2EPYjcnnOGxP1gOREQZUUjmRMvwUNqjC+Rgzwxx8gD5uX9zD8
+ nHuOiJNgtv+5vxK/IdrqlHN2xUGM4KcoAWng1mhu+XMgiAEN9J0EQZ4knA5xwm2DwLJt
+ drd2Jo20Vg5D0MbklzVLx4/FtSQLRMA5ehtHg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693508581; x=1694113381;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hgiedffID2MyQT0GCvds6t+94Q+4FxSnljjBDZxOBBg=;
- b=PUIWUYPWbYR/HouT1ToBlg8Jc6o7rR+lwR3f2+QPk1rd1cWyW3wcrFWuoq4baNlzBn
- /PrTwV/yCA0ZhjkbBhcKLE5jdUBYhlq23j+TtvYcmuhATMGKK+XWhOrVzMv9N8Yv9k5M
- IQd44SQQ1rdPxcAsOw+kYmDTjcPdQ5q4XHIp0jRZlvvq2ymP/xnvbdstTo8Gcjw+8MvW
- SCcY6sdTC80+d+lR5nalPZeFaYQTmxMrW4zKIqn019pBX5iyy+EkPLKD04D4BsG6Fj/s
- pmj0SWCbolq+i7dOW1LtdIMqVeNCKSNiOmEa7Vtckg8sJlJ+g9oFkCFU3cgTuLZ+vJu0
- 5Yng==
-X-Gm-Message-State: AOJu0YwG+l5UkAkw0j2cLkPGiY9j1G5+PMsxH5vevaLt+pGTQULutn80
- Lnu5o2+8RphGgX+t9h6OOwhEt7V9URuknYB0OaWM2jZJj2OjTCcKN6g=
-X-Google-Smtp-Source: AGHT+IF53Nipoavbogf37kBHUyiRbhdgCHzTTlEvNc9JRpbD1ZLvhYYhwbSzFqvkne6u2PlqiPmGukyTdjpDLKiDztM=
-X-Received: by 2002:a25:d303:0:b0:d77:cd42:a125 with SMTP id
- e3-20020a25d303000000b00d77cd42a125mr654193ybf.0.1693508581403; Thu, 31 Aug
+ bh=zd2+UgyqdGx0X5fvzolvOz/u1zDlr/G7N+mBSR1ttbk=;
+ b=Hbg8gPMdTY90DmrgEKb1/vgY4mRAqXl+JCKYiZbqAgIvksm0G8ephVHvlRuAFRRBCs
+ AKqyuV4+l9Qp8a+prgdqY2rX/iur8ed+gCa7Ejyf1piVNwkRntRa+U7s2f2P075RDLhq
+ 99Nyoc6/uVett9/Fxh4xle9SYJq2J7ml7Q5gbghQNEf3aqZhtsMFUIi3MoQZcBLzji3P
+ GZmpF7EB/wieCBbsZc94q6itSuR50cN27Q8AyZtZmTJI/5UV5EJQbvgBbzd+yowEWfqX
+ UrSzLGP5WoXnbTnAoXE/jNfd79y0eTRrwjyk1eX45ioUuuXEniZ5KQbvFtM+5eLvh6A/
+ tUTw==
+X-Gm-Message-State: AOJu0YwnCUQsHc8CJCukki+mHLk41PWdkibBEQRmvlfLlrgIWjKYmsXT
+ CWBE1M0PPVAvjm00xbcXSv4f9zyE8tmBDdpM4A68RK6Fj1k2HXX2LpI=
+X-Google-Smtp-Source: AGHT+IHzQjwAiACTDWUo1ISZJ14oFdWA6HQqC39VSAHxR08lGLJy4F9aLukc6es+nzrPmCSURV1x88Oh09XO4nh9MEo=
+X-Received: by 2002:a25:ca43:0:b0:d0f:6f1d:89ec with SMTP id
+ a64-20020a25ca43000000b00d0f6f1d89ecmr575674ybg.35.1693508581413; Thu, 31 Aug
  2023 12:03:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230831112051.1.I3fe7ac62de70902fd1be093bcda7c53acd43daf8@changeid>
- <20230831174805.GM3101304@bill-the-cat>
-In-Reply-To: <20230831174805.GM3101304@bill-the-cat>
+References: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
+ <20230829203710.84201-3-seanedmond@linux.microsoft.com>
+In-Reply-To: <20230829203710.84201-3-seanedmond@linux.microsoft.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Aug 2023 13:02:06 -0600
-Message-ID: <CAPnjgZ2q=EjqnguGakVjtr-5d=tQEgrk8UXF+9kc-h6cLJbKiw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] Allow Python packages to be dropped
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Mike Frysinger <vapier@chromium.org>, Kever Yang <kever.yang@rock-chips.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Date: Thu, 31 Aug 2023 13:02:01 -0600
+Message-ID: <CAPnjgZ1isQxqve6snY58z=1mzjOgQ9+BfA+JnMCTcSvjwCZWPw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] fdt: kaslr seed from tpm entropy
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, macromorgan@hotmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,44 +81,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Sean,
 
-On Thu, 31 Aug 2023 at 11:48, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 29 Aug 2023 at 14:37, <seanedmond@linux.microsoft.com> wrote:
 >
-> On Thu, Aug 31, 2023 at 11:20:52AM -0600, Simon Glass wrote:
+> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
 >
-> > When building in a portage chroot, we do not have the environment needed
-> > to build pylibfdt. It is instead build as a separate package.
-> >
-> > Provide a build option to tell U-Boot to skip this part of the build. We
-> > still need it to use binman, etc. but don't need it to build its
-> > dependencies.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Reviewed-by: Mike Frysinger <vapier@chromium.org>
-> > ---
-> >
-> >  Makefile             | 8 ++++++++
+> Add support for KASLR seed from TPM device. Invokes tpm_get_random()
+> API to read 8-bytes of random bytes for KASLR.
 >
-> Can we do this via Kconfig instead? It looks like we don't need to do
-> this part of the build for coreboot, yes?  And so if we can drop it from
-> other builds as well that might help speed up CI.
+> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
+> Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> ---
+>  boot/image-fdt.c      | 15 +++++++++++++++
+>  common/fdt_support.c  | 30 ++++++++++++++++++++++++++++++
+>  include/fdt_support.h |  8 ++++++++
+>  lib/Kconfig           |  9 +++++++++
+>  4 files changed, 62 insertions(+)
+>
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index f10200f647..ed38ed77b9 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -624,6 +624,21 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
+>                 goto err;
+>         }
+>
+> +       if (IS_ENABLED(CONFIG_KASLR_TPM_SEED)) {
+> +               ofnode root;
+> +
+> +               ret = root_ofnode_from_fdt(blob, &root);
 
-Yes it could. But I really don't like changing the board config on the
-fly - we have things like 'select BINMAN' now and it just gets messy.
-In the normal course of events we want to build the python things and
-the build won't work without it (e.g. binman will fail). But where the
-build environment has installed binman separate, it knows better.
+But can't you drop all this code and use an event spy?
 
-So I don't think this is a board config thing,
+> +               if (ret) {
+> +                       printf("ERROR: Unable to get root ofnode\n");
+> +                       goto err;
+> +               }
+> +               ret = fdt_tpm_kaslr_seed(root);
 
+This function can have a test.
+
+> +               if (ret) {
+> +                       printf("ERROR: fdt fixup KASLR failed: %d\n", ret);
+> +                       goto err;
+> +               }
+> +       }
+> +
+>         fdt_ret = optee_copy_fdt_nodes(blob);
+>         if (fdt_ret) {
+>                 printf("ERROR: transfer of optee nodes to new fdt failed: %s\n",
+> diff --git a/common/fdt_support.c b/common/fdt_support.c
+> index 52be4375b4..d338fcde54 100644
+> --- a/common/fdt_support.c
+> +++ b/common/fdt_support.c
+> @@ -13,6 +13,9 @@
+>  #include <mapmem.h>
+>  #include <net.h>
+>  #include <stdio_dev.h>
+> +#include <tpm_api.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+>  #include <dm/ofnode.h>
+>  #include <linux/ctype.h>
+>  #include <linux/types.h>
+> @@ -650,6 +653,33 @@ int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
+>         return 0;
+>  }
 >
-> [snip]
-> > +The tools-only build bytes pylibfdt by default. To disable this, use the
+> +int fdt_tpm_kaslr_seed(ofnode node)
+> +{
+> +       u8 rand[8] = {0};
+> +       struct udevice *dev;
+> +       int ret;
+> +
+> +       ret = uclass_first_device_err(UCLASS_TPM, &dev);
+> +       if (ret) {
+> +               printf("ERROR: Failed to find TPM device\n");
+> +               return ret;
+> +       }
+> +
+> +       ret = tpm_get_random(dev, rand, sizeof(rand));
+> +       if (ret) {
+> +               printf("ERROR: TPM GetRandom failed, ret=%d\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       ret = fdt_fixup_kaslr_seed(node, rand, sizeof(rand));
+> +       if (ret) {
+> +               printf("ERROR: failed to add kaslr-seed to fdt\n");
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  int fdt_record_loadable(void *blob, u32 index, const char *name,
+>                         uintptr_t load_addr, u32 size, uintptr_t entry_point,
+>                         const char *type, const char *os, const char *arch)
+> diff --git a/include/fdt_support.h b/include/fdt_support.h
+> index d967118bed..117ca14ca5 100644
+> --- a/include/fdt_support.h
+> +++ b/include/fdt_support.h
+> @@ -130,6 +130,14 @@ void fdt_fixup_ethernet(void *fdt);
+>   */
+>  int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
 >
-> "build bytes" should probably be "builds" I suspect.
-
-Yes, thanks.
+> +/*
+> + * fdt_add_tpm_kaslr_seed - Add kalsr-seed node in Device tree with random
+> + *                         bytes from TPM device
+> + * @node:              ofnode
+> + * @eret:              0 for success
+> + */
+> +int fdt_tpm_kaslr_seed(ofnode node);
+> +
+>  int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
+>                          const void *val, int len, int create);
+>  void fdt_fixup_qe_firmware(void *fdt);
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index 3926652db6..1530ef7c86 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -465,6 +465,15 @@ config VPL_TPM
+>           for the low-level TPM interface, but only one TPM is supported at
+>           a time by the TPM library.
+>
+> +config KASLR_TPM_SEED
+> +       bool "Use TPM for KASLR random seed"
+> +       depends on TPM_V1 || TPM_V2
+> +       help
+> +         This enables support for using TPMs as entropy source for KASLR seed
+> +         populated in kernel's device tree. Both TPMv1 and TPMv2 are supported
+> +         for the low-level TPM interface, but only one TPM is supported at
+> +         a time by the library.
+> +
+>  endmenu
+>
+>  menu "Android Verified Boot"
+> --
+> 2.40.0
+>
 
 Regards,
 Simon
