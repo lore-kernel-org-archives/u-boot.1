@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0730C83F15
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EC9C83F2C
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37D5C80771;
-	Thu, 31 Aug 2023 05:13:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C3268655E;
+	Thu, 31 Aug 2023 05:38:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="koK6F6z1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NwL8r2Ws";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A933A86557; Thu, 31 Aug 2023 05:13:52 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id ED3368655E; Thu, 31 Aug 2023 05:38:19 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9F0486546
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:13:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E25F9862F1
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:38:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-34ca860051fso1479605ab.2
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:13:49 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-52a39a1c4d5so346383a12.3
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:38:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693451628; x=1694056428; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3/uY/PRnn4AnM28846Y0Skmr35u6OUgbiJ8mmfR3KKY=;
- b=koK6F6z1YpdWhsjBAHc8QV+BFvCLvcFGcZzAO0pcTLjRPAwxTfw+gMAkHJucNQp7L0
- z03gFrg7qMqH6J83CVEQlMR0Hiw2SvnMxyfOpaWjAyfnDdJbtTqWA+5shKLVp7w9xXTK
- 8A1qNuSvZis+CWI9mQGySO2iPa+fxX/ThSXx4=
+ d=chromium.org; s=google; t=1693453096; x=1694057896; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+TBDO8JqA8Pf9p0rgCblrIY62nYVu3+o0sUrr3BC2qQ=;
+ b=NwL8r2WsLyHlxnBnwMZKPwmMK8TY7KjWtxCYLPwpC04U7DZrO1xWLavD7kgdqHNJEo
+ LH9TrDuGFyklz6sII2y90ywCP/KdlXz6pCnIYBu3oB47glSVPDhGvHdSUyttSI/3+5Mg
+ OR8GybL7xn6ZkHB/MebnmhyPBwMfmgLXizrlU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693451628; x=1694056428;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3/uY/PRnn4AnM28846Y0Skmr35u6OUgbiJ8mmfR3KKY=;
- b=MdeML2Tm0OUQsv9EOSKRmTk6eir+mRslV4Vr3F36EOzPzVkawnAqrw1qhsBhflswL+
- RYOOWX2pUF9mpHtMj9zOPsXg/htV6vp2CQNqD0xD70IlmplsZaMN91FadJQQoH8RZ4eS
- A+vbWqf69EqZoAlj4Epzy5JJ8hSyhKiPXzxLcLLyYaE4SeH+OoJwnDTMmDa3t9Iqwtjz
- +jcpqxtkSVfIJrpD1070hyQRGTsy1eza+OYQqojhqRuopllzrd/yAd8I3ZD0ot2Kt9Rv
- UmM6Y44eVV5y4FZFJ0KYxsaXQ5yZky21Y7yAi8x+xQ6fESiIxa1DENTzqyp1cIGjkkSY
- h6uQ==
-X-Gm-Message-State: AOJu0Yw2aRKWUUy5zAo0WJ9xR6Ra1C+mJaBqEsL8kDNA7QfNN+um8Bd+
- tdg5mxZhJNjiO8keJAk50ORGOKTkArrWWgoNLeU=
-X-Google-Smtp-Source: AGHT+IHtYfLvOcLCB4tvywvN2DZHFWi5zRDwLfOsTOEg0/n1eJZm6Gr1kvG488Wlc3tpT9XIazQqvQ==
-X-Received: by 2002:a05:6e02:12a2:b0:33a:a6de:65be with SMTP id
- f2-20020a056e0212a200b0033aa6de65bemr4184437ilr.21.1693451628292; 
- Wed, 30 Aug 2023 20:13:48 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
- by smtp.gmail.com with ESMTPSA id
- x10-20020a02ac8a000000b0042bbfe3dc42sm142879jan.173.2023.08.30.20.13.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 20:13:48 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 2/2] x86: Prevent from missing the FADT chaining
-Date: Wed, 30 Aug 2023 21:13:35 -0600
-Message-ID: <20230831031341.2657786-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
-In-Reply-To: <20230831031341.2657786-1-sjg@chromium.org>
-References: <20230831031341.2657786-1-sjg@chromium.org>
+ d=1e100.net; s=20221208; t=1693453096; x=1694057896;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+TBDO8JqA8Pf9p0rgCblrIY62nYVu3+o0sUrr3BC2qQ=;
+ b=FXgllzRuiSmts8pvOs4PIQFXxXkCgDwHIjKBun/yoVmVZN/SBiePvohElooRHyA73d
+ dk9LcLXdxOz98tmtPuNSZOCmAx3LW8QWRKPjQw1ugSndkUesCQ7QemkwpZC/JMiI+5MS
+ u3oE0iRCBE14Jbpk4BbfZ9Lb/BCphYak/5El2iH7nF3pDAGxEocZfoDMBTDtl8kyWBVX
+ 7J/DtvER1x5L/lH+cEad+xNmLDj0C1/cR7v90Rrg6NkAmO0tkZfTr2LHlbw+b2D8vzBb
+ LVW/aAQ9v3KICfcND1YsSVHa1LHR9CoB0Dj9vUZAHc/agHpatojUpDRWtyMj3rDt5WBW
+ ozdA==
+X-Gm-Message-State: AOJu0Yy3XzvkqkmNxB3UaoilqdozR1AIVqh34JLzRyR5O9SyCp8Zf3lP
+ 1Y/tqk1XY5MarZnqMNZC1ycT7mgLuHpD3Gl1SyCbEQ==
+X-Google-Smtp-Source: AGHT+IEjFiu62u5N67UVTqm5UbxRyyA+VXGOA+J0tJ8IwfoU8mL918TT7EIDoE5gsrtUg2ftN13ejRtlXTj9gKcJOgY=
+X-Received: by 2002:aa7:c657:0:b0:525:6d9e:67c0 with SMTP id
+ z23-20020aa7c657000000b005256d9e67c0mr3389762edr.23.1693453096168; Wed, 30
+ Aug 2023 20:38:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CV61D7ULLVZ0.3OCFZ743L1KSE@flaptop>
+In-Reply-To: <CV61D7ULLVZ0.3OCFZ743L1KSE@flaptop>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 30 Aug 2023 21:37:59 -0600
+Message-ID: <CAPnjgZ2iff6F3CFjnjEMUVoX3bO=kv3za4Q45YOcVeZqc96=rw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/1] meson: Demonstration of using binman to produce
+ the image
+To: Ferass El Hafidi <vitali64pmemail@protonmail.com>
+Cc: christianshewitt@gmail.com, mark.kettenis@xs4all.nl, u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, linux-amlogic@lists.infradead.org, 
+ alpernebiyasak@gmail.com, neil.armstrong@linaro.org, da@lessconfused.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,111 +83,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Hi Ferass,
 
-Recent approach with FADT writer shows that there is
-a room for subtle errors. Prevent this from happening
-again by introducing acpi_add_fadt() helper.
+On Wed, 30 Aug 2023 at 11:53, Ferass El Hafidi
+<vitali64pmemail@protonmail.com> wrote:
+>
+> Hi Simon,
+>
+> > So I wonder how best to move this forward so that we can build things
+> > using binman and everything works?
+>
+> It's still not ready yet, but I'm working on porting U-Boot SPL to some
+> Amlogic SoCs [1]. I'm currently working on Amlogic S905 boards, but
+> eventually I'll work on Amlogic S905X devices too. And speaking of
+> signing, Jonas Karlman wrote amlimage, and integrated it into mkimage,
+> and I applied his patch to my tree. There's a few things to be aware of
+> about Amlogic signing and binaries in general, however.
+>
+> amlimage was intended for use with U-Boot SPL, which obviously has
+> no support for Amlogic's FIP format and as such amlimage will only do as
+> little as possible to get the bootROM to load U-Boot SPL. Most of the
+> packaging format is handled by BL2. The fact that the signing process is
+> completly different across SoC generations makes it difficult to
+> implement them all into one single tool (and by which I mean all of it,
+> not just signing BL2 for the bootROM to run it, that's mostly the same
+> across SoCs). amlimage has been confirmed to work on GXBB (ODROID-C2 and
+> the KII Pro set-top box), GXL (librecomputer lepotato), and SM1 (ODROID-C4).
+>
+> My U-Boot SPL port is still rather incomplete. As of today, it still
+> can't boot anything from any storage device. The goal eventually is to
+> be able to load upstream TF-A BL31 and U-Boot+linux.
+>
+> While Amlogic distributes proprietary BL31 binaries upstream Trusted
+> Firmware-A has a port for some Amlogic SoCs [2], but as far as I know
+> SM1 (which is the SoC generation your ODROID-C4 is using) is still
+> unsupported. GXBB, GXL, AXG, and G12A are all supported however, but the
+> overall port still lacks some features the proprietary implementation
+> has.
+>
+> As for the SCP firmware (aka. BL30) I'm not aware of any
+> reverse-engineering efforts for that.
+>
 
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Thanks for your efforts on this. I look forward to seeing where it ends up.
 
-(no changes since v1)
+> Honestly, in my opinion, including proprietary and poorly-written
+> Amlogic utilities lacking a proper license, into U-Boot looks like a bad idea.
 
- arch/x86/cpu/apollolake/acpi.c | 6 +-----
- arch/x86/cpu/baytrail/acpi.c   | 6 +-----
- arch/x86/cpu/quark/acpi.c      | 6 +-----
- arch/x86/cpu/tangier/acpi.c    | 6 +-----
- include/acpi/acpi_table.h      | 7 +++++++
- 5 files changed, 11 insertions(+), 20 deletions(-)
+With Binman, we don't really include them in U-Boot; we allow them to
+be fetched easily so that a complete build can be produced.
 
-diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
-index 16aaed7238a..c610a7f4477 100644
---- a/arch/x86/cpu/apollolake/acpi.c
-+++ b/arch/x86/cpu/apollolake/acpi.c
-@@ -158,11 +158,7 @@ static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	header = &fadt->header;
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
- 
-diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
-index 4c526ff2731..4378846f8b0 100644
---- a/arch/x86/cpu/baytrail/acpi.c
-+++ b/arch/x86/cpu/baytrail/acpi.c
-@@ -142,11 +142,7 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
- 
-diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
-index 92fa5bc30c3..9a2d682451b 100644
---- a/arch/x86/cpu/quark/acpi.c
-+++ b/arch/x86/cpu/quark/acpi.c
-@@ -137,11 +137,7 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
- 
-diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
-index ffaa56ab6f8..1c667c7d569 100644
---- a/arch/x86/cpu/tangier/acpi.c
-+++ b/arch/x86/cpu/tangier/acpi.c
-@@ -52,11 +52,7 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
- 
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 7ed0443c821..1f85de091d3 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -883,6 +883,13 @@ void acpi_inc_align(struct acpi_ctx *ctx, uint amount);
-  */
- int acpi_add_table(struct acpi_ctx *ctx, void *table);
- 
-+static inline int acpi_add_fadt(struct acpi_ctx *ctx, struct acpi_fadt *fadt)
-+{
-+	acpi_add_table(ctx, fadt);
-+	acpi_inc(ctx, sizeof(struct acpi_fadt));
-+	return 0;
-+}
-+
- /**
-  * acpi_write_rsdp() - Write out an RSDP indicating where the ACPI tables are
-  *
--- 
-2.42.0.rc2.253.gd59a3bf2b4-goog
+I don't like it either, but for users it is better than doing the
+build manually.
 
+>
+> [1]: https://git.vitali64.duckdns.org/misc/u-boot-kii-pro.git/log/?h=wip/spl
+> [2]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/plat/amlogic
+>
+> Cheers.
+>
+
+Regards,
+Simon
