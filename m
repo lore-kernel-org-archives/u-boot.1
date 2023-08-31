@@ -4,72 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5432DC83F01
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 13:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E943BC83F12
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 13:23:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 459958657C;
-	Thu, 31 Aug 2023 15:16:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 043968658E;
+	Thu, 31 Aug 2023 15:23:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RskHLWD5";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zLwtDYbb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA42586577; Thu, 31 Aug 2023 15:16:42 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id CFE2A86590; Thu, 31 Aug 2023 15:23:18 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2060f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe59::60f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B216C8657C
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 15:16:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB5A88657C
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 15:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37VDGZI2064743;
- Thu, 31 Aug 2023 08:16:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693487795;
- bh=tQHcYAVDWy36WwWhDY2bsE1+WkrN6g5I+lQ2dDUfeEM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=RskHLWD5B/eqJTUPTk06/0wQ9Goqbt4xqa6QlUrIlzZbtDqkro1W5Do3O4uGAGSLO
- aZjRd4zr0XcP+WHlMgjbtP06e8XtSng3sFqU+Lnz9mPDdVybQuf7lt5ilupcKpyHfg
- IP5Av86vxFNlgyV72/y59d6i+31hnkcz7+7qlGzg=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37VDGZnL079864
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 31 Aug 2023 08:16:35 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 31
- Aug 2023 08:16:35 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 31 Aug 2023 08:16:35 -0500
-Received: from [10.24.68.114] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37VDGVN3091452;
- Thu, 31 Aug 2023 08:16:32 -0500
-Message-ID: <71a3b4e6-214a-0fe0-46c8-852137f75708@ti.com>
-Date: Thu, 31 Aug 2023 18:46:30 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Nia5sBBN4Eh9egdj07wDA/IJ40hZRsHAGZePtGUj0RRc3eLVuqFdwc4AD4Gm6esBmF6zTS3dxmPa87Wd9FkSNl/Z1U8xoCEJ9BZg42Mg7S8Xk1Yyx5wglK8hdBd/e69K3Bq+amtJ0dNJjz7XcQf2iB/Aq09+hdXLwa4dAtAnVNmiVLDoAB4BZhw2BO6o40R0w7tnh1TAxem/kSYd5ve96O3I+wCsqghzYh6PsDMjeSm93JAh5q1wbnBZl0pujd2BbnNppmsf+Z/Pyo/pRWhL3JWUlZTq+UdRXfdYeHlpzUW+extlVQ7VGs/IHiSJO7+IGG/z33lr2t3LfmYdFVvrjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uX7J0IVQNQTZbixIuC9WjN2drqkmWOoxng1U4WQTTsc=;
+ b=aqUZKgtHNJRjo9ENhdjS+Q0b9qPuOXiwTtvlS+y9G3gCcM/OBFRakJi4f/AjcLQRQID3YbhdhLthVlMB5XLdnLvUvh3jWmc7RfDKhZWfXurY6b0SRP69ns7UwFt+DTZO1nGp9GXjQl6/eQbIc4VceypLpCxpjb3GVDBMnW+76aaSAWxPiIxngzkaJvPdGLgW0wYNWqWB1USFbZzF0E1KziBH8Wq5L0uyUSBZ48rzq4e7jJVppZ38VSJHpkO/fTdY8If9g5zr/M9ZTNbhYoU0k747dR/ngAv8k6eeTtP7lljC/15ssw7NWkDDh80WVz9JHCOQFqemR2B6X66c1QfCuQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uX7J0IVQNQTZbixIuC9WjN2drqkmWOoxng1U4WQTTsc=;
+ b=zLwtDYbbMNSsA2R+K95Q4cNd3S0k3FveW4PID7e3/vZf75PC9O85cOfKGRVPozHzBIj3euNAeWIA5tdY7OrV38KMbe0qjtHyBATZf5802ktwRrS6IRB8vcXZp+Pn8jd/2CItpGIS6rw8F4Gu3NhXFeby+OWB7bEzZrsPRdwhWLA=
+Received: from MW4PR03CA0029.namprd03.prod.outlook.com (2603:10b6:303:8f::34)
+ by SN7PR12MB7787.namprd12.prod.outlook.com (2603:10b6:806:347::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.21; Thu, 31 Aug
+ 2023 13:23:12 +0000
+Received: from CO1PEPF000042AA.namprd03.prod.outlook.com
+ (2603:10b6:303:8f:cafe::78) by MW4PR03CA0029.outlook.office365.com
+ (2603:10b6:303:8f::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
+ Transport; Thu, 31 Aug 2023 13:23:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042AA.mail.protection.outlook.com (10.167.243.39) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.16 via Frontend Transport; Thu, 31 Aug 2023 13:23:11 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 31 Aug
+ 2023 08:23:10 -0500
+Message-ID: <62d1dadf-6b3c-ed8a-4b50-b90f0d34a17f@amd.com>
+Date: Thu, 31 Aug 2023 15:23:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v1 0/4] J721E DTS Sync with Kernel v6.5-rc1
+ Thunderbird/102.14.0
 Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
- <vigneshr@ti.com>, <u-kumar1@ti.com>, <reidt@ti.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
- <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>
-References: <20230828113109.2533045-1-n-francis@ti.com>
- <20230828173316.tpzluxjvcnwmcyjj@circus>
- <36818daf-81f5-a41d-0f20-9f4cb81537d2@ti.com>
- <20230831113556.axqxldonwz6edjvu@repave>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230831113556.axqxldonwz6edjvu@repave>
+To: Neal Frager <neal.frager@amd.com>, <u-boot@lists.denx.de>
+References: <20230830065737.4083577-1-neal.frager@amd.com>
+From: Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v1 1/1] arch/arm/dts/zynqmp-sck-kr-g-revB.dts: add
+ output-enable pins
+In-Reply-To: <20230830065737.4083577-1-neal.frager@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AA:EE_|SN7PR12MB7787:EE_
+X-MS-Office365-Filtering-Correlation-Id: 96c9b347-0340-45df-7408-08dbaa256c91
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: S1pXhwruI4WICB/vUt8vN2vedybU7u1cBuCi63VlMzbnoh+MPuo9znVxRnLFcSBzMob3lo3aKEcm0Fx1MV3/BkzKQh3LwiU5jhhb9B1BPWraSGH8Tl0Dn6OPG3JI4RzQAyN6jzDDhNpOE9jfB/eNEzbGLcrqlrBSp42JKSbFj1GHzVFnUNpJqu0vOSRsakY4SiSpPtotBpO0TTPXhkNB6eDI9EJBuFwxXfyTFsZzPaja5gsIpU5xjDXBswzK1UnG2qsGhASMkfVbGk9Czg87evJ8lcacfBWBT05gj18EwIMd7ku5r1FA4yfA6MV0lX2A1RR7MNwsj0IimYeyj6P5O3AOu/tGuJM842YXI0dC9IIQggxA0tS3eOVukpe8zZnwQeDRjswgROOhTqE8CKERcpvvxUPaD2cogcAAMJBnvNeFZg3grqxqn2J0XWQAjEBbN5sVB1reIlDpxrfFOULackGn25n53kJb1h4NiatVcszRQk/mFrsi7iF/TdHK2JmUkdxStzhQuoiUPF9dCaVnjNWOo8BFJQztBbDuUvphGNeHs35JXpBnYMqw8KEDH61ULRs4FMHnWPGW+Bke75Fpcv4txPbZ+sMXE6MYlhHzTKRObCuvk1yx+YlCoQ3HWoK8OxdDn7rE1LHA8gGshN8qvYfcvmkIY0zbiJHll1O4eh5L2c2qRIuzbGsECQbcCEvE73aQJHSN0di8coJ2zWRUaUYkvqre19QGPBUASlfRUaNYtUrR0M7y8RVmS00tnXeUrQY6Ph7DizVB5hqSoZCbGS4GMVJRhCMiAnIoEdh38UyRCT1gGd/LnMO+LfO0rcmG
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(136003)(376002)(396003)(39860400002)(82310400011)(186009)(1800799009)(451199024)(46966006)(36840700001)(40470700004)(53546011)(478600001)(83380400001)(2616005)(336012)(426003)(26005)(16526019)(2906002)(16576012)(44832011)(41300700001)(70206006)(70586007)(5660300002)(8676002)(316002)(8936002)(110136005)(40460700003)(36756003)(47076005)(36860700001)(86362001)(40480700001)(31696002)(81166007)(356005)(31686004)(82740400003)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2023 13:23:11.3478 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96c9b347-0340-45df-7408-08dbaa256c91
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AA.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7787
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,72 +121,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
+Hi Neal,
 
-On 31/08/23 17:05, Nishanth Menon wrote:
-> On 13:56-20230831, Neha Malcom Francis wrote:
->> Hi Nishanth
->>
->> On 28/08/23 23:03, Nishanth Menon wrote:
->>> On 17:01-20230828, Neha Malcom Francis wrote:
->>>> This series aims to sync kernel.org v6.5-rc1 DTS with that of U-Boot. It
->>>> also includes cleanups where necessary along with certain changes to
->>>> ensure boot is unaffected.
->>>>
->>>> While it's mainly synced to the tag v6.5-rc1, one extra commit has been
->>>> added that cleans up duplicating wkup_i2c0 nodes [1] in Kernel.
->>>>
->>>> Same as with other board series that have taken up this effort, cleanup
->>>> of mcu_ringacc and mcu_udmap are dependent on MCU Ringacc [2] and DMA
->>>> [3] fixes. This will be taken up after their merge to Linux.
->>>>
->>>> [1] https://lore.kernel.org/all/20230721082344.1534094-1-u-kumar1@ti.com/
->>>> [2] https://lore.kernel.org/all/20230809175932.2553156-1-vigneshr@ti.com/
->>>> [3] https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
->>>>
->>>> Boot logs:
->>>> https://gist.github.com/nehamalcom/231426b784e0ba96ef3a0da84346e038
->>>>
->>>> Neha Malcom Francis (4):
->>>>     arm: dts: k3-j721e-r5: Clean up inclusion hierarchy
->>>>     arm: dts: k3-j721e: Sync with v6.5-rc1
->>>>     drivers: misc: k3_avs: Add linux compatible to maintain sync
->>>>     configs: j721e: Remove HBMC_AM654 config
->>> please change the order of patches:
->>> a) introduce the driver change for vtm
->>> b) cleanup config and drop the hbmc node stuff
->>> c) rest of dts sync
->>>
->>> NOTE:
->>> * J721e does'nt use SYSFW - it uses TIFS
->>> * for properties that dont use bootph or u-boot, properties, we
->>>     should'nt be including property changes in u-boot.dtsi or r5.dts
->>>     without explanation as to what.
->>> * There is a bunch of /delete-property/ plugged in for no clear reason.
->>>     I see that even for timer - but timer data could have been included in
->>>     arch/arm/mach-k3/j721e/dev-data.c and so could have been others too.
->>>     This needs clear explanation.
->>>
->>
->> All valid points, will factor these in. However regarding the timer, we have
->> already tried to do the same for J721E by adding in the data in dev-data.c
->> however this does not work since TIFS is in sysfw.itb which has not been
->> loaded yet. Will take action to debug and root cause that further as well as
->> try adding data for all the other existing /delete-property/ using nodes.
-> 
-> Thanks. What helped us on other platforms was to setup a breakpoints
-> with openocd ti_clk_probe and omap_timer_probe using the debug
-> technique[1] (board_init_f) and looking at the call stacks. in case of
-> am62, ti_clk_probe is hit first and call stack looks like [2] followed
-> by omap_timer_probe where the call stack looks like [3].
-> 
-> [1] https://u-boot.readthedocs.io/en/latest/board/ti/k3.html#code-modification
-> [2] https://gist.github.com/nmenon/495f85267ecd0c833218b5054b568b00
-> [3] https://gist.github.com/nmenon/c7a3a8c0de0a65b06334190ca9350ead
-> 
+regarding subject.
 
-Thanks for the detailed help on the debug! Will be useful!
+arm64: zynqmp: Add output-enable pins for kr260-revB
 
--- 
-Thanking You
-Neha Malcom Francis
+should be better option.
+
+On 8/30/23 08:57, Neal Frager wrote:
+> Now that the zynqmp pinctrl driver supports the tri-state registers, this patch
+
+remove "this patch"
+
+> makes sure that the pins requiring output-enable are configured appropriately
+> for the KR260 Starter Kit.
+> 
+> Without this patch, the USB to SD card bridge on the KR260 starter kit is not
+> enabled correctly when booting via SPL.  This causes u-boot to fail to detect
+> the SD card interface.
+
+SPL connection is misleading because pins are configured as the part of pinctrl 
+interface which SPL is not using or calling.
+SPL in this config is just using QSPI which is already configured properly.
+On KR260 SD card is connected via USB to SD convertor that's why pinctrl set usb 
+pins up. By correctly setting up usb pins you get also SD working.
+
+The patch itself is working fine.
+Actually the same issues are there for kv260 boards and also kr260-revA. I think 
+we should fix all of them at once.
+I did it for kv260 revB.
+Do you want to do it? Or is it fine if we look and test others and provide v2 
+version of your patch?
+
+Thanks,
+Michal
+
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dts 
+b/arch/arm/dts/zynqmp-sck-kv-g-revB.dts
+index f935f25c887f..1b1d9e772f55 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dts
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dts
+@@ -193,6 +193,7 @@
+                 conf-tx {
+                         pins = "MIO36";
+                         bias-disable;
++                       output-enable;
+                 };
+
+                 mux {
+@@ -244,6 +245,7 @@
+                 conf-bootstrap {
+                         pins = "MIO71", "MIO73", "MIO75";
+                         bias-disable;
++                       output-enable;
+                         low-power-disable;
+                 };
+
+@@ -251,6 +253,7 @@
+                         pins = "MIO64", "MIO65", "MIO66",
+                                 "MIO67", "MIO68", "MIO69";
+                         bias-disable;
++                       output-enable;
+                         low-power-enable;
+                 };
+
+@@ -259,6 +262,7 @@
+                         slew-rate = <SLEW_RATE_SLOW>;
+                         power-source = <IO_STANDARD_LVCMOS18>;
+                         bias-disable;
++                       output-enable;
+                 };
+
+                 mux-mdio {
+@@ -289,6 +293,7 @@
+                         pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
+                         "MIO60", "MIO61", "MIO62", "MIO63";
+                         bias-disable;
++                       output-enable;
+                         drive-strength = <4>;
+                         slew-rate = <SLEW_RATE_SLOW>;
+
+
+
+> 
+> Signed-off-by: Neal Frager <neal.frager@amd.com>
+> ---
+>   arch/arm/dts/zynqmp-sck-kr-g-revB.dts | 6 ++++++
+>   1 file changed, 6 insertions(+)
+> 
+> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts b/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
+> index 1ebbe683f3..104e67ddf8 100644
+> --- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
+> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
+> @@ -248,6 +248,7 @@
+>   		conf-tx {
+>   			pins = "MIO36";
+>   			bias-disable;
+> +			output-enable;
+>   		};
+>   
+>   		mux {
+> @@ -299,6 +300,7 @@
+>   		conf-bootstrap {
+>   			pins = "MIO45", "MIO47", "MIO49";
+>   			bias-disable;
+> +			output-enable;
+>   			low-power-disable;
+>   		};
+>   
+> @@ -306,6 +308,7 @@
+>   			pins = "MIO38", "MIO39", "MIO40",
+>   				"MIO41", "MIO42", "MIO43";
+>   			bias-disable;
+> +			output-enable;
+>   			low-power-enable;
+>   		};
+>   
+> @@ -314,6 +317,7 @@
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+>   			bias-disable;
+> +			output-enable;
+>   		};
+>   
+>   		mux-mdio {
+> @@ -344,6 +348,7 @@
+>   			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
+>   			"MIO60", "MIO61", "MIO62", "MIO63";
+>   			bias-disable;
+> +			output-enable;
+>   			drive-strength = <4>;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   		};
+> @@ -371,6 +376,7 @@
+>   			pins = "MIO66", "MIO68", "MIO69", "MIO70", "MIO71",
+>   			"MIO72", "MIO73", "MIO74", "MIO75";
+>   			bias-disable;
+> +			output-enable;
+>   			drive-strength = <4>;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   		};
