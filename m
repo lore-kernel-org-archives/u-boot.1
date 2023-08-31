@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE00C83F29
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 04:05:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 520CCC83F29
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 04:34:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E70BB8655C;
-	Thu, 31 Aug 2023 06:05:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4C0D386554;
+	Thu, 31 Aug 2023 06:34:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nBYuhAyH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SISulg/N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB98486561; Thu, 31 Aug 2023 06:05:27 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6F5028655A; Thu, 31 Aug 2023 06:34:54 +0200 (CEST)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2473586558
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 06:05:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18EBF8083C
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 06:34:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693454723; x=1694059523; i=xypron.glpk@gmx.de;
- bh=Zaabr2xSecYebXHmeyY3uCPMyBBttLkwR0BBHSIPYKY=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=nBYuhAyHAkUQpiTKSHy6whvW5kQtFWNS4KWu7wA20b5keGhDKi3p5CWPv9DJxpASDvd5qLD
- +xdwsBp+KFjFRIULXZGAxa1WW9l3esWiBQDS4cNK3jl2TcfJnQ0NlhZsmgrS1A+PZ8YhO6nvm
- 93KP5DyESCzKLFNFzYsjvcLl/c8KT3npUK/CsBj98u99WdRufmihbbHz3eKIeFn3fikcxLEVu
- 9MKOz70IZGHdGyAZUyETyNu6mvNFvKJS/ij3OJzn6tr3Lmw567BRDO2sM8tprakr1LlmwRNgv
- eFMzQRvE52tzLINZ7YwHXn8VU6YcVWQRT2yyNNMB2tCbSp9Qffng==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([62.143.244.162]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfpSl-1q0ZEA2RDN-00gKjl; Thu, 31
- Aug 2023 06:05:23 +0200
-Date: Thu, 31 Aug 2023 06:05:22 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
- Anatolij Gustschin <agust@denx.de>
-Subject: Re: [PATCH v2 03/19] video: Hide the BMP options
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230831035319.2316665-4-sjg@chromium.org>
-References: <20230831035319.2316665-1-sjg@chromium.org>
- <20230831035319.2316665-4-sjg@chromium.org>
-Message-ID: <96711E1B-FA6B-44D5-ACB8-421C85373432@gmx.de>
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1bf7b5e1f06so808805ad.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 21:34:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693456489; x=1694061289; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KV4eiQAmeEAczxibaJj9RQiwGpxIcl2aSEV33gYZ5bc=;
+ b=SISulg/NrW29IvKiAFyiztCstJC9VPXJJmm1uUNh3mRqiysjFi0nx5YQW0IT8Z5v85
+ bWvKqMp2Zm1EKrNZH+lDEVlrH0ZLDV0SWjIxd7hoKVNDq14VIZI6xhOXj7DesmoAtnJC
+ LXrx8GZFXgWMn8YT9qQwhEAJFuouY25flLjdk3XqgSKysOVQo+FHiYk+19NmZnzVxMOE
+ m/6zd9CL+7xNjNcMaqEtVvAB+aIZiYI4kgE+BKRZvMSxyvZ+i8u/kYcvda1jJAKGXNYo
+ J4rVLT2j+iNtp8Bgih0zGf2VwJYt0dY/E1BvjQHJXa3YtRUZIc6JN52dn2p+EcMpMu4T
+ IpQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693456489; x=1694061289;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KV4eiQAmeEAczxibaJj9RQiwGpxIcl2aSEV33gYZ5bc=;
+ b=XXdcSJGL4ZmIamzx6XTqI2cN755qVJP2tNaCJj1hPutD9shP98E3ucixSkcmvkhBTi
+ 31deVdg+XbqpuBDJZeyXjSkGTydJpqqWvLNY8aX2ZPr4DDC7e7XVfrWjwJy5z31zK/Op
+ dX1wDnKkrpgMrzjrFvrNzIN/RbkTL+B6JbzorZxVcQ4q0dIEJc3nGZubD/q0rW2L/OkJ
+ P6HHqf1CxftF2oDuK2LWsC0vXtsXSmQrBtthAooSZQPIVOIYrzVyGXZniZz6Dwb4Dn0T
+ Zml5BbYpxKL6B9udaeTBxcd/AnlnE+r3vb4Yvh4evPA0RYEO8R1Oknt8LHkIHBZq9Xrk
+ wl3g==
+X-Gm-Message-State: AOJu0YyzWhmLLUUUv8QL3Jo3ffH3f8PHKNeTOQH/nfLA0Vbmq0GjfkrZ
+ 33RaK9foSe3H/+nShXNVkQJlGw==
+X-Google-Smtp-Source: AGHT+IH3iUwyags6lxSDVIUMKqKp2xSsm/80xq4is3NW8aDLaaJstOQXPq1vf9cUjgpDRCKnPU/9tQ==
+X-Received: by 2002:a05:6a20:8f28:b0:14d:7b6:cf2d with SMTP id
+ b40-20020a056a208f2800b0014d07b6cf2dmr4890122pzk.0.1693456489159; 
+ Wed, 30 Aug 2023 21:34:49 -0700 (PDT)
+Received: from octopus ([2400:4050:c3e1:100:15e5:d5f9:7b14:839d])
+ by smtp.gmail.com with ESMTPSA id
+ o28-20020a63921c000000b0055386b1415dsm433393pgd.51.2023.08.30.21.34.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Aug 2023 21:34:48 -0700 (PDT)
+Date: Thu, 31 Aug 2023 13:34:46 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2] cmd: dm: allow for selecting uclass and device
+Message-ID: <ZPAYZnzF+KeIwMMr@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20230823014947.20876-1-takahiro.akashi@linaro.org>
+ <CAPnjgZ3XKONQXhcjU0sU=3GNx8D4VjVUhSQ5de0dsVFt1bb54w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:wr+gHEyjx2j7XegcGPwo9yPUR3jGYFEHLXFwWM99PnFCLi26aZ8
- V9Be+wXN/w9Von0MVS/lRws3+2Ap7npxsIXzD42d7bAEixBRtD2ucuu1OrCSncbAcRCNK9k
- j3Ba6cbK1d2CUhyiu0HdI+Hvq/211GRDVcAK8aU6ALGo8TQOl7INbiPo4uKSlz+anATC5XH
- JzO8kw2XtAa0mIQBHoc6g==
-UI-OutboundReport: notjunk:1;M01:P0:G+XyX1Zi76Q=;7v83kdFL3UTx5Ow6hR8UtNxE1Ps
- 0tPn4GZSlTLhJ/uxn38gpYnr4W/3Zh5BTu0sRMjlsmG5tXi6iVB+Sz+1XYBHQyyuSpO3MAdUs
- TgLSFOyJr234Sd+w8JpHGyXLrLKHTC498FG27YM35Pc8Vb71w0O1I+9v40i2bilKFOdGd/8eO
- o7IHt7R9eb3F39UATz/SfnneILB4RrF8v6M3jM3GpUz0JplnxGiSdkAd4DhRTAY2KwwH337NC
- KcVfb/6dLCUgkLjgLjY5uHqOWkxOTZv5ASsrjoOgN+wUIidVg3SYO2G/NLzL21/SNf4d6rctm
- mCuKhBj7enEdVdBl4WfZpEVOCIDIqd8yIGUsND/2gpcoFNitpoFqtagzQlRcpTUaIlMnuMUuV
- wZq2k9pRyAaNkDstkWGFe6AHbIJaqXjS8Tnq2FEtiIdJJ8CdYcDWn1n/6pSUiK6SISXVRNR2K
- PIGQt30QTT+w0ProJRvpBvdyUVpf+lRMK0unuIICVABVb13XcxFAfEk70D+Ad0ZMENwwJFqhC
- 89Nx9OFDldGc2/jrQR0tuC49A78XK5mrNzHoI9dQF77/jUEMMuUcTb7NeNJ+Fkc9vGyvwhrsL
- nfZHuIbuOuOlJkQstA0mb2HUkWkbIKuyHPfRMfavLOi34OkWxUAvCtHl9nUIEgnbXonxUHoBb
- Bt9VirKzTEgv8JWQYHGN4eTOviBKGecBpGr3PeS4D5B9B212mJQSZUgdyBUxh84lhxBAvCs9T
- YENvbg8xKpWEp/RrzVWEHZOGbNiWJwTwlWsy/Vul/E9G/hBvL8AWXLZJnOSj5PMr+sdCyoZ2j
- alTEogVYazmQ03d18IqUFlDo5xZREHimt0BKS/gSoIM/DfXLvm+3G0trEyzcNfgXodbTHnUIv
- 543rZ5A6EY6JbnifviYU4JttWWf17rrGYFl+dYotl2rOlFmDrNKaoRevIomry6im2Gao390ED
- UoHbNg==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3XKONQXhcjU0sU=3GNx8D4VjVUhSQ5de0dsVFt1bb54w@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,51 +94,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Aug 30, 2023 at 09:48:48PM -0600, Simon Glass wrote:
+> Hi AKASHI,
+> 
+> On Tue, 22 Aug 2023 at 19:50, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > The output from "dm tree" or "dm uclass" is a bit annoying
+> > if the number of devices available on the system is huge.
+> > (This is especially true on sandbox when I debug some DM code.)
+> >
+> > With this patch, we can specify the uclass name or the device
+> > name that we are interested in in order to limit the output.
+> >
+> > For instance,
+> >
+> > => dm uclass usb
+> > uclass 121: usb
+> > 0     usb@1 @ 0bcff8b0, seq 1
+> >
+> > uclass 124: usb
+> >
+> > => dm tree usb:usb@1
+> >  Class     Index  Probed  Driver                Name
+> > -----------------------------------------------------------
+> >  usb           0  [   ]   usb_sandbox           usb@1
+> >  usb_hub       0  [   ]   usb_hub               `-- hub
+> >  usb_emul      0  [   ]   usb_sandbox_hub           `-- hub-emul
+> >  usb_emul      1  [   ]   usb_sandbox_flash             |-- flash-stick@0
+> >  usb_emul      2  [   ]   usb_sandbox_flash             |-- flash-stick@1
+> >  usb_emul      3  [   ]   usb_sandbox_flash             |-- flash-stick@2
+> >  usb_emul      4  [   ]   usb_sandbox_keyb              `-- keyb@3
+> >
+> > If you want forward-matching against a uclass or udevice name,
+> > you can specify "-e" option.
+> 
+> I don't really know what 'forward matching' means.
 
+Really? I believed that forward-matching was a common word.
+I meant that it searches for any string starting with
+a specific sub-string. In other words, it would be
+"^<sub-string>" in a regular expression.
+So, for example, "usb" should match with "usbABC", "usb-DEF",
+"usb_GHI" and so on, but not match with "ABCusb".
 
-Am 31=2E August 2023 05:52:57 MESZ schrieb Simon Glass <sjg@chromium=2Eorg=
->:
->These appear prominently in the main menu at present=2E However they are
->selected when needed so do not need to be visible=2E
->
->Make them hidden=2E
->
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
->
->(no changes since v1)
->
-> common/Kconfig | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
->
->diff --git a/common/Kconfig b/common/Kconfig
->index 0b09bd68bd13=2E=2E844531a59eda 100644
->--- a/common/Kconfig
->+++ b/common/Kconfig
->@@ -1169,12 +1169,12 @@ config IO_TRACE
-> 	bool
->=20
-> config BMP
->-	bool "Enable bmp image display"
->+	bool # Enable bmp image display
+> Please use forward instead of forword in the code
+> 
+> >
+> > => dm uclass -e usb
+> > uclass 15: usb_emul
+> > 0     hub-emul @ 0bcffb00, seq 0
+> > 1     flash-stick@0 @ 0bcffc30, seq 1
+> > 2     flash-stick@1 @ 0bcffdc0, seq 2
+> > 3     flash-stick@2 @ 0bcfff50, seq 3
+> > 4     keyb@3 @ 0bd000e0, seq 4
+> >
+> > uclass 64: usb_mass_storage
+> >
+> > uclass 121: usb
+> > 0     usb@1 @ 0bcff8b0, seq 1
+> >
+> > uclass 122: usb_dev_generic
+> >
+> > uclass 123: usb_hub
+> > 0     hub @ 0bcff9b0, seq 0
+> >
+> > uclass 124: usb
+> >
+> > => dm tree -e usb
+> >  Class     Index  Probed  Driver                Name
+> > -----------------------------------------------------------
+> >  usb           0  [   ]   usb_sandbox           usb@1
+> >  usb_hub       0  [   ]   usb_hub               `-- hub
+> >  usb_emul      0  [   ]   usb_sandbox_hub           `-- hub-emul
+> >  usb_emul      1  [   ]   usb_sandbox_flash             |-- flash-stick@0
+> >  usb_emul      2  [   ]   usb_sandbox_flash             |-- flash-stick@1
+> >  usb_emul      3  [   ]   usb_sandbox_flash             |-- flash-stick@2
+> >  usb_emul      4  [   ]   usb_sandbox_keyb              `-- keyb@3
+> >
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > ---
+> > v2
+> > - allow for forward-matching against the name
+> > - update command doc
+> > ---
+> >  cmd/dm.c             |  48 ++++++++++++++----
+> >  doc/usage/cmd/dm.rst |  30 ++++++++++-
+> >  drivers/core/dump.c  | 116 ++++++++++++++++++++++++++++++++-----------
+> >  include/dm/util.h    |  15 ++++--
+> >  4 files changed, 165 insertions(+), 44 deletions(-)
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> Thanks for doing this. It will be a big time-saver. I also wonder if
+> it would be better if the default were to do a substring search and
 
-This must depend on video=2E
+Initially, I implemented so, but felt it is annoying to see
+(sometimes many) unexpected matched devices, especially
+when you know the exact name of device.
+See my example "dm uclass -e usb".
 
-> 	help
-> 	  Enable bmp functions to display bmp image and get bmp info=2E
->=20
-> config SPL_BMP
->-	bool "Enable bmp image display at SPL"
->+	bool # Enable bmp image display at SPL
+> you have to add a flag to search for a single device?
 
-Why should I not be able to deactivate the logo display?
+Does 'single' mean the first matched word or exactly-same one?
 
-Just move the entries to submenus related to video, please=2E
+Either way, I don't have a strong opinion here, though.
 
-Best regards
+Thanks,
+-Takahiro Akashi
 
-Heinrich
-
-> 	depends on SPL_VIDEO
-> 	help
-> 	  Enable bmp functions to display bmp image and get bmp info at SPL=2E
+> 
+> See below
+> 
+> >
+> > diff --git a/cmd/dm.c b/cmd/dm.c
+> > index 3263547cbec6..1aa86aab9c1c 100644
+> > --- a/cmd/dm.c
+> > +++ b/cmd/dm.c
+> > @@ -59,11 +59,26 @@ static int do_dm_dump_static_driver_info(struct cmd_tbl *cmdtp, int flag,
+> >  static int do_dm_dump_tree(struct cmd_tbl *cmdtp, int flag, int argc,
+> >                            char *const argv[])
+> >  {
+> > -       bool sort;
+> > -
+> > -       sort = argc > 1 && !strcmp(argv[1], "-s");
+> > -
+> > -       dm_dump_tree(sort);
+> > +       bool extended = false, sort = false;
+> > +       char *device = NULL;
+> > +
+> > +       for (; argc > 1; argc--, argv++) {
+> > +               if (argv[1][0] != '-')
+> > +                       break;
+> > +
+> > +               if (!strcmp(argv[1], "-e")) {
+> > +                       extended = true;
+> > +               } else if (!strcmp(argv[1], "-s")) {
+> > +                       sort = true;
+> > +               } else {
+> > +                       printf("Unknown parameter: %s\n", argv[1]);
+> > +                       return 0;
+> > +               }
+> > +       }
+> > +       if (argc > 1)
+> > +               device = argv[1];
+> > +
+> > +       dm_dump_tree(device, extended, sort);
+> >
+> >         return 0;
+> >  }
+> > @@ -71,7 +86,20 @@ static int do_dm_dump_tree(struct cmd_tbl *cmdtp, int flag, int argc,
+> >  static int do_dm_dump_uclass(struct cmd_tbl *cmdtp, int flag, int argc,
+> >                              char *const argv[])
+> >  {
+> > -       dm_dump_uclass();
+> > +       bool extended = false;
+> > +       char *uclass = NULL;
+> > +
+> > +       if (argc > 1) {
+> > +               if (!strcmp(argv[1], "-e")) {
+> > +                       extended = true;
+> > +                       argc--;
+> > +                       argv++;
+> > +               }
+> > +               if (argc > 1)
+> > +                       uclass = argv[1];
+> > +       }
+> > +
+> > +       dm_dump_uclass(uclass, extended);
+> >
+> >         return 0;
+> >  }
+> > @@ -91,8 +119,8 @@ static char dm_help_text[] =
+> >         "dm drivers       Dump list of drivers with uclass and instances\n"
+> >         DM_MEM_HELP
+> >         "dm static        Dump list of drivers with static platform data\n"
+> > -       "dm tree [-s]     Dump tree of driver model devices (-s=sort)\n"
+> > -       "dm uclass        Dump list of instances for each uclass"
+> > +       "dm tree [-s][-e][name]   Dump tree of driver model devices (-s=sort)\n"
+> > +       "dm uclass [-e][name]     Dump list of instances for each uclass"
+> >         ;
+> >  #endif
+> >
+> > @@ -102,5 +130,5 @@ U_BOOT_CMD_WITH_SUBCMDS(dm, "Driver model low level access", dm_help_text,
+> >         U_BOOT_SUBCMD_MKENT(drivers, 1, 1, do_dm_dump_drivers),
+> >         DM_MEM
+> >         U_BOOT_SUBCMD_MKENT(static, 1, 1, do_dm_dump_static_driver_info),
+> > -       U_BOOT_SUBCMD_MKENT(tree, 2, 1, do_dm_dump_tree),
+> > -       U_BOOT_SUBCMD_MKENT(uclass, 1, 1, do_dm_dump_uclass));
+> > +       U_BOOT_SUBCMD_MKENT(tree, 4, 1, do_dm_dump_tree),
+> > +       U_BOOT_SUBCMD_MKENT(uclass, 3, 1, do_dm_dump_uclass));
+> > diff --git a/doc/usage/cmd/dm.rst b/doc/usage/cmd/dm.rst
+> > index 74c6b01e3619..12b7edeed685 100644
+> > --- a/doc/usage/cmd/dm.rst
+> > +++ b/doc/usage/cmd/dm.rst
+> > @@ -12,8 +12,8 @@ Synopis
+> >      dm devres
+> >      dm drivers
+> >      dm static
+> > -    dm tree [-s]
+> > -    dm uclass
+> > +    dm tree [-s][-e] [uclass name]
+> > +    dm uclass [-e] [udevice name]
+> >
+> >  Description
+> >  -----------
+> > @@ -127,6 +127,12 @@ If -s is given, the top-level devices (those which are children of the root
+> >  device) are shown sorted in order of uclass ID, so it is easier to find a
+> >  particular device type.
+> >
+> > +If -e is given, forward-matching against existing devices is
+> > +made and only the matched devices are shown.
+> 
+> I don't understand this...can you expand it a bit so it is clear what
+> -e does and what forward-matching is?
+> 
+> > +
+> > +If a device name is given, forward-matching against existing devices is
+> > +made and only the matched devices are shown.
+> > +
+> >  dm uclass
+> >  ~~~~~~~~~
+> 
+> Regards,
+> Simon
