@@ -4,71 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE13CC83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 08:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60B8BC83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 08:24:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C038652C;
-	Thu, 31 Aug 2023 10:23:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AA69C8656B;
+	Thu, 31 Aug 2023 10:24:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M+dUnead";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tHiZKWNF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01D208655C; Thu, 31 Aug 2023 10:23:55 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 23AD08656D; Thu, 31 Aug 2023 10:24:17 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::618])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7A5581FA8
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 10:23:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18AC381FA8
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 10:24:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 37V8NmL2107836;
- Thu, 31 Aug 2023 03:23:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693470229;
- bh=r9ttHRplOqmYSa39kcyPCmqK/dPGwsQom9Zv0NwoZvU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=M+dUneadxHu/eOPu9fvTPQJ3UgAWBGIngICx4ySCdAnaKG/CtzRDXU3uN8OrrlCER
- IGPTKGdt2GZS77JCtSXKGyU0qSKrcrA5im8vqBu6K+exjVUMqSCtxf9jyWyorq4OPI
- zVj3aQpWzPzToI3N/eYzSViE2ZfRK0dofdBv642E=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 37V8NmoO111607
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 31 Aug 2023 03:23:48 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 31
- Aug 2023 03:23:47 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 31 Aug 2023 03:23:47 -0500
-Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 37V8Ngc0041981;
- Thu, 31 Aug 2023 03:23:43 -0500
-Message-ID: <92072541-26d3-d849-ce2c-f98381dba017@ti.com>
-Date: Thu, 31 Aug 2023 13:53:42 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gLgUglf+m9kwwSqL/C/jAV63pW9Q/ckl+xuDfSLGEXwjfNl67I6u5Ien+TBLJ5Pl/o8I45vHLq6Ba0nC/C/B2EYoD4DmAtBZQzoyid0SJRgPU6bpTQdAENxiiUXPNjVm4xdIA+b5zK28Tmk4oo/bgprnrEkBkVd/bXeyOUOAJqasExvP6Q/Ls4pkAOEjuj4+kfgDbZohPdx/BtSw75t0H9GlpDTD5gi/UyDDLXvxEAgfnH2GROksJylHP/Rr0WXPBpykLe74bN8QgzNGWqQ+1pi9QKaVcH2nXs1cp2/dzpOzpKTKG5bt25H5U06a57bKlZm+w9A88C1CDh0MlFH9dg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OhpebBUUWEuoF4Ny+hDD/MKhBv5GnK0DevNs7XXWt2c=;
+ b=UsZ30O7FcCxt4BdJdEMYBtSeLjc9BwiFgzpYbRMpIrtFCQPGuiTF8xLnIhosyuwrP1egqNukkdMPwiEnoAtO+IgxjZy0aBAZzxtgmxJmDtB/oINXdJPD1uqml5yVr4N5jwNWvWqjQXzLJSYHLnt8861C1t92GMDGnd4/kPMe528kQJ2FOyJtqYDDOyOKCxvDcVhDkcsrU59/B75BleXlhbiDtvqzsHiAMnibPab6G8mkqq//IQOw5FMqFyEH8bQrupKMOVr77UH+nIsc3eZLpQn9HKqtbBGF9+Mjr8ir/Luh9pyuxQpXTk7FZLAcBZp/o5WG7q45BQi96hCqB+Yi/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OhpebBUUWEuoF4Ny+hDD/MKhBv5GnK0DevNs7XXWt2c=;
+ b=tHiZKWNFbUEAIHSiDQ/WecuV93d/XmldqtPO9zGqDC+u8ZGyUiLfU9yYD9hYZumimg1G1iHC95sKLSxdq5Up5aWn6cvtPJZQ85CGRsnwyotEFGu8fJvVKloDXOilijKbRZl/x5ptapzHNc9dRZlEeCBgObXHytIW8KmyLqnNt4o=
+Received: from DM6PR07CA0063.namprd07.prod.outlook.com (2603:10b6:5:74::40) by
+ MW4PR12MB6780.namprd12.prod.outlook.com (2603:10b6:303:20e::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.35; Thu, 31 Aug
+ 2023 08:24:10 +0000
+Received: from CY4PEPF0000EDD1.namprd03.prod.outlook.com
+ (2603:10b6:5:74:cafe::a) by DM6PR07CA0063.outlook.office365.com
+ (2603:10b6:5:74::40) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
+ Transport; Thu, 31 Aug 2023 08:24:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EDD1.mail.protection.outlook.com (10.167.241.205) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.16 via Frontend Transport; Thu, 31 Aug 2023 08:24:09 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 31 Aug
+ 2023 03:24:07 -0500
+Message-ID: <0de1f4aa-a8be-805e-8260-6178b1368ab4@amd.com>
+Date: Thu, 31 Aug 2023 10:24:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v1 2/4] arm: dts: k3-j721e: Sync with v6.5-rc1
+ Thunderbird/102.14.0
 Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
- <vigneshr@ti.com>, <u-kumar1@ti.com>, <reidt@ti.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
- <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>
-References: <20230828113109.2533045-1-n-francis@ti.com>
- <20230828113109.2533045-3-n-francis@ti.com>
- <20230828172904.4pvo6w6lgsvnv4g7@deputy>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230828172904.4pvo6w6lgsvnv4g7@deputy>
+To: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.sharma@linaro.org>
+CC: <u-boot@lists.denx.de>, <sjg@chromium.org>, <bhupesh.linux@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
+ <20230822075112.717992-3-bhupesh.sharma@linaro.org>
+ <20230830185205.GA1149416@bill-the-cat>
+From: Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v2 2/2] armv8: Disable SYS_DCACHE_OFF & SYS_ICACHE_OFF for
+ ARM64
+In-Reply-To: <20230830185205.GA1149416@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD1:EE_|MW4PR12MB6780:EE_
+X-MS-Office365-Filtering-Correlation-Id: 792abb64-1444-4836-b646-08dba9fba67a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: HMFIo4zGciA6dz6YLe9urSmtyw4eaFaTP20RwpPE6ZTQzPR3zgWUTxKwT0xcv9WUo6/LOuefYS6xk1lC1B3bznzweymq7oAr5u21AWvKgjKp6fkcHtPJyijOzVfAtcds0s1Vae6SqNtSSYQNuQS2tP+J2wnVQqBlUrfB2dkmDUx5IPAEgxW8A5M9GrDvmOGKE2j3TroBh5xSUQJK5Uzo9IhucbIGfxaxO8sZcOLYoKENE97Xp8JmAomjOXkKnOrB2DDq1ubl00HtLqZfcLjFdAXv9Tqa6B4MVpa4lU2vbdBmP49LiiBRuDPNENBmDf9qOXgg9oiCnJr7a3F3oGKJ3WaHld3u1FFcQtj+mW5TmXBJm2uLSkKbgiPvzOJ4pGbg7U/gV3JgNeRpazgNY2K7FvUc+Gc9VpqSS6yBy6sn31TpZ9xpdLkLMHbAQBWJaXU+C5SOh9bldbErqtQ6wmg8Z4frt12w95DDz/I28nTc+C/05oQTKYNj9anfSuiPh1mpYayK4ax4fjxbGTrg7G9OlFn9pNZPR1oAANOcPaU39YB0wVelJ2hAIUkiuUWE7UjzI5PWPVnuTzcPkfuq/5EVen1SfufxWo353hlcpE5YzPLf0oq8KD2dGPkbZDWR5xEthS0C0y+6xfoJZsS4/XTSiYZLm0Ci1/c5SrHJxHodzR3UL/NeK5t9Jcvp3NPj3Z2kdlQ7mjo6n5qt9LaTNHwqBaVMUfYcGr17SpmgBRUI4s2bX8y/XAloyT3g9CTaPhKIZhB8VMBuYXdus93Rp+NW2rfeVAQnxa/AExLHwBrLARW3t8d117/h3oP8ul7G0fe1
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(136003)(346002)(396003)(376002)(82310400011)(451199024)(186009)(1800799009)(46966006)(40470700004)(36840700001)(26005)(40460700003)(16576012)(316002)(66899024)(41300700001)(44832011)(4326008)(336012)(426003)(47076005)(5660300002)(2906002)(31696002)(86362001)(2616005)(36756003)(16526019)(8676002)(83380400001)(36860700001)(40480700001)(8936002)(356005)(82740400003)(81166007)(70586007)(54906003)(70206006)(110136005)(478600001)(31686004)(53546011)(43740500002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2023 08:24:09.6908 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 792abb64-1444-4836-b646-08dba9fba67a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD1.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6780
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,248 +125,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
 
-On 28/08/23 22:59, Nishanth Menon wrote:
-> On 17:01-20230828, Neha Malcom Francis wrote:
->> Sync k3-j721e DTS with kernel.org v6.5-rc1.
->> 	* pcie_epx nodes have been deleted, they are not needed [1]
->> 	* use mcu_timer0 instead of the redundant timer1. Also delete
->> 	  clock and power domain properties since J721E follows legacy
->> 	  boot flow where system firmware is not yet available to modify
->> 	  clocks
->> 	* remove mcu_i2c0 as it is used for tps659413 PMIC in j721e-sk
->> 	  for which support is not yet added.
->> 	* remove main_i2c2 pinmux for j721e-sk as it is connected to the
->> 	  test automation header for which support is not there
->> 	* change mcu_secproxy to secure_proxy_mcu since linux has
->> 	  defined these nodes
->> 	* hbmc nodes have been disabled as their support in kernel
->> 	  itself is unfinished (dependent series not merged) [2]
->> 	* Drop mcu_cpsw node in U-Boot as it is no longer needed here
->> 	  thanks to [3]
-> 
-> Just use spaces.
-> 
-> You do not need to provide changelog to all the u-boot changes in the commit
-> message - use the diffstat for that. if you are referring to topics such
-> as those use commit id style.
-> 
-> [...]
-> 
->> diff --git a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
->> index 540c847eb3..6a95ed2a96 100644
->> --- a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
->> @@ -8,12 +8,10 @@
->>   
->>   / {
->>   	chosen {
->> -		stdout-path = "serial2:115200n8";
->> -		tick-timer = &timer1;
->> +		tick-timer = &mcu_timer0;
-> 
-> Looking at Manorit's series, I realized that tick-timer property is only
-> needed for R5 dts.
-> 
->>   	};
->>   
->>   	aliases {
->> -		ethernet0 = &cpsw_port1;
->>   		spi0 = &ospi0;
->>   		spi1 = &ospi1;
-> You don't need any of these. nor do you need i2c aliases etc. all those
-> come from the board.dts.
-> 
->>   		remoteproc0 = &mcu_r5fss0_core0;
-> 
-> remoteproc aliases is probably needed to remain sane - upstream kernel
-> maintainer hasn't agreed[1] to pick up aliases so far.
-> 
->> @@ -34,52 +32,44 @@
->>   
->>   &cbass_main{
-> 
-> watch for that space after nodename &cbass_main { instead of &cbass_main{
-> 
->>   	bootph-pre-ram;
-> [...]
-> 
->>   	assigned-clock-parents = <&k3_clks 295 0>, <&k3_clks 295 9>;
-> 
-> Why do we still have this for &wiz3_pll1_refclk and &wiz3_pll1_refclk
-> &serdes0_pcie_link ?
-> 
-> Also why  are we dropping assigned-clocks and assigned-clock-parents in
-> &serdes0? And these dont even have a bootph or u-boot, property - so
-> what is the point in invoking them if they are'nt getting set in early
-> stages of boot. if this is a valid clocking bug, fix should have gone to
-> kernel - and document it as such.
-> 
-> [...]
-> 
-> I will comment about dr_mode and usb
-> 
-> There is a bit of a debate ongoing on this.
-> https://lore.kernel.org/u-boot/20230706-handle-otg-as-periph-v3-0-27e24fa17345@baylibre.com/
-> 
-> But I don't see why we need to hold off for that resolution.
-> 
->>   &main_mmc1_pins_default {
->>   	bootph-pre-ram;
->>   };
->> @@ -169,8 +158,14 @@
->>   	bootph-pre-ram;
->>   };
->>   
->> +&wkup_uart0 {
->> +	bootph-pre-ram;
->> +	status = "okay";
->> +};
->> +
->>   &wkup_i2c0 {
->>   	bootph-pre-ram;
->> +	status = "okay";
->>   };
->>   
->>   &main_i2c0 {
->> @@ -181,6 +176,10 @@
->>   	bootph-pre-ram;
->>   };
->>   
->> +&main_esm{
-> 
-> 	Watch out for that space before {.
-> 
->> +	bootph-pre-ram;
->> +};
->> +
->>   &exp2 {
->>   	bootph-pre-ram;
->>   };
->> @@ -194,6 +193,7 @@
->>   };
->>   
->>   &hbmc {
->> +	status = "disabled";
->>   	bootph-pre-ram;
->>   
->>   	flash@0,0 {
-> 
-> Just drop the flash information etc in the node and mark the node as disabled.
-> 
->> @@ -268,7 +268,38 @@
->>   	assigned-clock-parents = <&wiz0_pll1_refclk>;
->>   };
->>   
->> -&serdes0_qsgmii_link {
->> -	assigned-clocks = <&serdes0 CDNS_SIERRA_PLL_CMNLC1>;
->> -	assigned-clock-parents = <&wiz0_pll1_refclk>;
->> +&main_crypto {
->> +	dma-coherent;
->> +};
-> 
-> Why?
-> 
->> +
->> +&rng {
->> +	clocks = <&k3_clks 264 1>;
->> +};
-> 
-> We don't even use rng in u-boot.
-> 
->> +
->> +&main_i2c2 {
->> +	status = "okay";
->> +};
->> +
->> +&main_i2c4 {
->> +	status = "okay";
->> +};
->> +
->> +&main_i2c5 {
->> +	status = "okay";
->> +};
-> 
-> You need all of these in u-boot? They dont even have bootph properties.
-> nothing without bootph OR u-boot, properties should even be present in
-> u-boot.dtsi
-> 
->> +
->> +&wkup_uart0 {
->> +	status = "okay";
->> +};
->> +
->> +&mcu_i2c0 {
->> +	status = "okay";
->> +};
->> +
->> +&mcu_i2c1 {
->> +	status = "okay";
->> +};
->> +
->> +&dss {
->> +	status = "disabled";
->>   };
-> 
-> Why not just leave things as is from kernel dts?
-> 
-> [...]
-> 
->> diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
->> index 7bb5ce775c..da8cf7f37b 100644
->> --- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
->> +++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-> 
-> [...]
->>   
->>   &mcu_uart0 {
->>   	/delete-property/ power-domains;
->>   	/delete-property/ clocks;
->>   	/delete-property/ clock-names;
-> 
-> NAK. no explanation why we have to delete these properties. and why not
-> we add data to handle it if it is mandatory.
-> 
->> -	pinctrl-names = "default";
->> -	pinctrl-0 = <&mcu_uart0_pins_default>;
->> -	status = "okay";
->>   	clock-frequency = <48000000>;
->>   };
->>   
->> -&main_uart0 {
->> -	pinctrl-names = "default";
->> -	pinctrl-0 = <&main_uart0_pins_default>;
->> -	status = "okay";
->> -	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
->> -};
->> -
->>   &main_sdhci0 {
->>   	/delete-property/ power-domains;
->>   	/delete-property/ assigned-clocks;
->>   	/delete-property/ assigned-clock-parents;
-> 
-> NAK. no explanation why we have to delete these properties. and why not
-> we add data to handle it if it is mandatory.
-> 
->>   	clock-names = "clk_xin";
->>   	clocks = <&clk_200mhz>;
-> 
-> NAK again. please explain why.
-> 
->> -	ti,driver-strength-ohm = <50>;
-> 
-> Will this even work?
-> 
->> -	non-removable;
->>   	bus-width = <8>;
->>   };
-> [.. skipping the rest.. since pattern of comments seem to be repeated..]
-> 
-> [1] https://lore.kernel.org/lkml/20230822215042.yjaqtwhuhls57pbu@glamour/T/
 
-Thanks for all the review comments, will address these and post v2.
+On 8/30/23 20:52, Tom Rini wrote:
+> On Tue, Aug 22, 2023 at 01:21:12PM +0530, Bhupesh Sharma wrote:
+> 
+>> Ideally SYS_ICACHE_OFF and SYS_DCACHE_OFF should never be set for
+>> ARM64 (ARMv8) platforms, as it makes booting u-boot slower on these
+>> platforms.
+>>
+>> However, if some platforms require ICACHE or DCACHE  to be disabled
+>> only for the smaller SPL stage, we should support such configurations
+>> in u-boot as well.
 
--- 
-Thanking You
-Neha Malcom Francis
+I am missing the reason why this change should be accepted.
+
+>>
+>> Compile-tested for:
+>> - qemu arm64
+
+qemu doesn't model caches that's why I don't think it is relevant here.
+
+>> - imx8
+>> - stm32
+>>
+>> and run-tested on:
+>> - Qualcomm RB3 platform
+>>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Peng Fan <peng.fan@nxp.com>
+>> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+>> Reviewed-by: Tom Rini <trini@konsulko.com>
+>> ---
+>>   arch/arm/Kconfig            | 2 ++
+>>   arch/arm/cpu/armv8/Makefile | 4 ++--
+>>   2 files changed, 4 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 36ee1e9a3c..92bff715e3 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -141,6 +141,7 @@ config THUMB2_KERNEL
+>>   
+>>   config SYS_ICACHE_OFF
+>>   	bool "Do not enable icache"
+>> +	depends on !ARM64
+>>   	help
+>>   	  Do not enable instruction cache in U-Boot.
+>>   
+>> @@ -153,6 +154,7 @@ config SPL_SYS_ICACHE_OFF
+>>   
+>>   config SYS_DCACHE_OFF
+>>   	bool "Do not enable dcache"
+>> +	depends on !ARM64
+>>   	help
+>>   	  Do not enable data cache in U-Boot.
+>>   
+>> diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+>> index bba4f570db..0d0c1728e4 100644
+>> --- a/arch/arm/cpu/armv8/Makefile
+>> +++ b/arch/arm/cpu/armv8/Makefile
+>> @@ -5,13 +5,13 @@
+>>   
+>>   extra-y	:= start.o
+>>   
+>> +obj-y	+= cache_v8.o
+>>   obj-y	+= cpu.o
+>>   ifndef CONFIG_$(SPL_TPL_)TIMER
+>>   obj-$(CONFIG_SYS_ARCH_TIMER) += generic_timer.o
+>>   endif
+>>   ifndef CONFIG_$(SPL_)SYS_DCACHE_OFF
+>> -obj-y	+= cache_v8.o
+>> -obj-y	+= cache.o
+>> +obj-y  += cache.o
+>>   endif
+>>   ifdef CONFIG_SPL_BUILD
+>>   obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) += exceptions.o
+> 
+> I'm adding Michal here because this changes the behavior on xilinx
+> platforms that had the icache off.  I was under the impression that at
+> the levels U-Boot runs at on aarch64, we just couldn't have
+> icache/dcache off, but I guess that's wrong?
+> 
+
+yes. We are using icache off for mini u-boot configurations for quite a long 
+time. I tried to find out any commit why we started to use it but didn't find 
+any record. But will ask team to retest that use cases to see if that is working 
+or not.
+In our case we are using small full U-Boot not any SPL variant.
+
+My biggest issue with the patch is that it is not clear what issue it is trying 
+to solve as I have mentioned above.
+It just says that ideally icache/dcache should be on. If you want to enforce it 
+on your platform you can select it when that platform is selected and don't need 
+enforce it for other platforms.
+
+Thanks,
+Michal
+
