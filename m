@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A4CBC83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB1ECC83F36
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:16:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 891BB865AA;
-	Thu, 31 Aug 2023 16:12:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2259386561;
+	Thu, 31 Aug 2023 16:16:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RwIOmnfz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uTnPmCWC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36997865AA; Thu, 31 Aug 2023 16:12:32 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 6F3DD865A3; Thu, 31 Aug 2023 16:16:46 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69456865A9
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 16:12:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8B0D855CE
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 16:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-58ca499456dso9858687b3.1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 07:12:29 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-58d40c2debeso10510347b3.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 07:16:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693491148; x=1694095948; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1693491402; x=1694096202; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=udecg9Q34uMJIUNjrB9CWuLD7lV7RdhYUE2IHXJ8AEQ=;
- b=RwIOmnfz4yUMmgo3DH3YJZxVFEO5r1GLu/xEX4t7zxpWpA3SoH4lJZ6xfUFxebUaL9
- LVEku7z60XQVy8U+0LfVjLmCSRI2/nlRjfglunNSMFlJyweTzQgu0ke51QvWp6IDSsWp
- rxV3OUm2q/A7IMKT55UEvHaEbAOUe1ypEN4cs=
+ bh=Z2l1VaQTc05cDDjKgpJnKDBILyUM8gOytGWIKme/6GQ=;
+ b=uTnPmCWCbhPX2e9cGHfHg4XGDlViwVxOJ6EJ3/H4mK1DiNBRr7fBnZo5h6RmxVpiJ1
+ nlobnkttQra313d25JhokPnRrrMJTlWagzCchTLWTHTHXqYw9d7JaxR0x9vdfoaMEy3o
+ azn2ucpmIhcYu8jgU1hh7REDIsQY7veZ7Bcgk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693491148; x=1694095948;
+ d=1e100.net; s=20221208; t=1693491402; x=1694096202;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=udecg9Q34uMJIUNjrB9CWuLD7lV7RdhYUE2IHXJ8AEQ=;
- b=Dwi2b947vYJB3zLBcepAEiz01dRZ/JUoaqEL/JebDqzSxrT1OJrpl5049Kt6i+lG/k
- QxNwmUp8aA0GuJCdGloTxV22q8Eu0t8idy6hY/DueZ/YKNOVmsmV7TEVhwF+ZCZZVzwz
- VJWdPAqEcY4Y+MHgGqEUOEJFtxbPkO9xzIpLMzney/YOh0IZY8/YIihp4DmC8/cVYdmN
- GfzgqHB+A0Bx6LbKIk7YpmIQ9pV5YfHwzu+w+UuHYI6r8ywpfetMhJKXaRBZGIJgYAad
- +gz3JWqgUqRw5G+xXq1O6ndS0cSB67rb/IGfIWuPL8+5497/rkSpLLLhO6N8wC1LiA6z
- aQXw==
-X-Gm-Message-State: AOJu0YxjC8IEg/osNruX5r4WM5m2uijaqt5C1ljyjRhS4agO2BMR5o/8
- kQher5FDBgCkAgDcRSvVY9KzsQ==
-X-Google-Smtp-Source: AGHT+IGV951x0S1kiyWt7BHkZJvOZfvQz0k8XyvItNCCKRFlK5Cbh+0xvap2PFgaMl8umXlS13ojuQ==
-X-Received: by 2002:a0d:d896:0:b0:56d:9e2:7d9e with SMTP id
- a144-20020a0dd896000000b0056d09e27d9emr4864221ywe.21.1693491148151; 
- Thu, 31 Aug 2023 07:12:28 -0700 (PDT)
+ bh=Z2l1VaQTc05cDDjKgpJnKDBILyUM8gOytGWIKme/6GQ=;
+ b=VnNE7HsLfmuVFXiXeuifK61x0QCqA6c0UJ6rTmtUwgslGfwCfpPfzkH7yWO0IwXgKe
+ PfMW8jny5cVyvKLUhrt/CkhtNNyZaarrRiS0iQVSrG2Na4eLLJvFwOhOdqPfCFkVoPSk
+ GosdxNmmCciv5Vn78p3joUql6Q359oHkldt3/WPZbl+8nE9LQZmCl4oItLQmb/O4QO/3
+ NWWkqd+5xKIp+S7jDh6r5FFAQ/rN3+QKHzBpzoEEdUAGZKRRTgUL2NPAG4Y+qGxzYQ3g
+ kG7qXVUID9GMKgc1D1mr8zOj/FGbEvlagFOcwVqU5FztWZnX384YoPCrEZraeaD93q5d
+ xgzA==
+X-Gm-Message-State: AOJu0Yz9vhnxoQKxmBN9rPVVKrA+fshfbX4y9pqrlcFDSpg7XC5sfxTT
+ OEk0DIfkCgu/l22nN8bcegfj8Q==
+X-Google-Smtp-Source: AGHT+IG+I7sgvtZ8B/M4pS7xKIABy9OpMXwdGXsnlvjWirVH4CPNX4Y1x4Yg9Cg08eSY1cElqblpBQ==
+X-Received: by 2002:a81:6502:0:b0:583:d363:8d1b with SMTP id
+ z2-20020a816502000000b00583d3638d1bmr5635848ywb.47.1693491402421; 
+ Thu, 31 Aug 2023 07:16:42 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-1cd4-1a46-fd5d-6cab.res6.spectrum.com.
  [2603:6081:7b00:6400:1cd4:1a46:fd5d:6cab])
  by smtp.gmail.com with ESMTPSA id
- d204-20020a0ddbd5000000b0056d51c39c1fsm429276ywe.23.2023.08.31.07.12.27
+ t188-20020a0dd1c5000000b0057a6e41aad1sm430212ywd.67.2023.08.31.07.16.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 07:12:27 -0700 (PDT)
-Date: Thu, 31 Aug 2023 10:12:25 -0400
+ Thu, 31 Aug 2023 07:16:41 -0700 (PDT)
+Date: Thu, 31 Aug 2023 10:16:40 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Mark Kettenis <mark.kettenis@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>
-Subject: Re: [PATCH v2 00/19] Kconfig: Tidy up some options
-Message-ID: <20230831141225.GV3101304@bill-the-cat>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2 14/19] spl: Tidy up load address in spl_ram
+Message-ID: <20230831141640.GW3101304@bill-the-cat>
 References: <20230831035319.2316665-1-sjg@chromium.org>
+ <20230831035319.2316665-15-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OC7oYSvjcp7rxD9I"
+ protocol="application/pgp-signature"; boundary="VSfUgqqAVAWHbCE3"
 Content-Disposition: inline
-In-Reply-To: <20230831035319.2316665-1-sjg@chromium.org>
+In-Reply-To: <20230831035319.2316665-15-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,95 +95,112 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---OC7oYSvjcp7rxD9I
+--VSfUgqqAVAWHbCE3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 30, 2023 at 09:52:54PM -0600, Simon Glass wrote:
+On Wed, Aug 30, 2023 at 09:53:08PM -0600, Simon Glass wrote:
 
-> The view from 'make menuconfig' is confusing in places. This series aims
-> to improve the top-level menu and also the boot menu.
+> This CONFIG is used but is not given a value by some boards. Use
+> a default value of 0 explicitly, rather than relying on the 0 value
+> provided by CONFIG_SPL_LOAD_FIT_ADDRESS
 >=20
-> It also groups FDT-fixup options tegether, at least the ones I could fine.
+> This will allow us to make SPL_LOAD_FIT_ADDRESS depend on SPL_LOAD_FIT
+> as it should.
 >=20
-> Finally this series marks the distro scripts as deprecated, so people have
-> a pointer to standard boot.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >=20
-> Changes in v2:
-> - Fix FMU typo in the subject
-> - Drop now-unnecessary depends on FWU_MULTI_BANK_UPDATE
-> - Mention in the DISTRO_DEFAULTS option that it is script-based
-> - Expand and rewrite the commit message
-> - Use the word 'Mark' instead of 'Make' to improve the English
+> (no changes since v1)
 >=20
-> Simon Glass (19):
->   lib: rational: Move the Kconfigs into the correct place
->   Kconfig: Move API into general setup
->   video: Hide the BMP options
->   video: Move BMP options and code to video directory
->   net: Move SYS_RX_ETH_BUFFER into the network menu
->   FWU: Avoid showing an unselectable menu option
->   test: Move POST under a renamed Testing section
->   boot: Move fdt_support to boot/
->   Move fdt_simplefb to boot/
->   boot: Move some other fdt-fixup options to the same menu
->   boot: Rename Android-boot text
->   Kconfig: Create a menu for FIT
->   Kconfig: Move SPL_FIT under FIT
->   spl: Tidy up load address in spl_ram
->   boot: Make standard boot a menu
->   Kconfig: Move TEXT_BASE et al under general setup
->   Mark DISTRO_DEFAULTS as deprecated
->   boot: Join FDT_FIXUP_PARTITIONS with related options
->   boot: Join ARCH_FIXUP_FDT_MEMORY with related options
+>  common/spl/spl_ram.c | 19 +++++++++++++------
+>  1 file changed, 13 insertions(+), 6 deletions(-)
 >=20
->  Kconfig                         |  67 ++++++++++-
->  boot/Kconfig                    | 202 +++++++++++++-------------------
->  boot/Makefile                   |   4 +
->  {common =3D> boot}/fdt_simplefb.c |   0
->  {common =3D> boot}/fdt_support.c  |   0
->  common/Kconfig                  |  20 ----
->  common/Makefile                 |   4 -
->  common/spl/spl_ram.c            |  19 ++-
->  doc/develop/bootstd.rst         |  23 ++++
->  drivers/video/Kconfig           |  11 ++
->  drivers/video/Makefile          |   2 +
->  {common =3D> drivers/video}/bmp.c |   0
->  include/net.h                   |   9 +-
->  lib/Kconfig                     |  17 +--
->  lib/fwu_updates/Kconfig         |   9 +-
->  net/Kconfig                     |   4 +-
->  test/Kconfig                    |  12 +-
->  17 files changed, 220 insertions(+), 183 deletions(-)
->  rename {common =3D> boot}/fdt_simplefb.c (100%)
->  rename {common =3D> boot}/fdt_support.c (100%)
->  rename {common =3D> drivers/video}/bmp.c (100%)
+> diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+> index 93cf420d810a..4158ed1c32d7 100644
+> --- a/common/spl/spl_ram.c
+> +++ b/common/spl/spl_ram.c
+> @@ -20,12 +20,16 @@
+>  static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+>  			       ulong count, void *buf)
+>  {
+> -	ulong addr;
+> +	ulong addr =3D 0;
+> =20
+>  	debug("%s: sector %lx, count %lx, buf %lx\n",
+>  	      __func__, sector, count, (ulong)buf);
+> =20
+> -	addr =3D (ulong)CONFIG_SPL_LOAD_FIT_ADDRESS + sector;
+> +	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+> +		addr =3D IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+> +				      CONFIG_SPL_LOAD_FIT_ADDRESS);
+> +	}
+> +	addr +=3D sector;
+>  	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
+>  		addr +=3D image_load_offset;
+> =20
+> @@ -38,20 +42,23 @@ static int spl_ram_load_image(struct spl_image_info *=
+spl_image,
+>  			      struct spl_boot_device *bootdev)
+>  {
+>  	struct legacy_img_hdr *header;
+> +	ulong addr =3D 0;
+>  	int ret;
+> =20
+> -	header =3D (struct legacy_img_hdr *)CONFIG_SPL_LOAD_FIT_ADDRESS;
+> +	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+> +		addr =3D IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+> +				      CONFIG_SPL_LOAD_FIT_ADDRESS);
+> +	}
+> =20
+>  	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
+> -		unsigned long addr =3D (unsigned long)header;
+>  		ret =3D image_pre_load(addr);
+> =20
+>  		if (ret)
+>  			return ret;
+> =20
+>  		addr +=3D image_load_offset;
+> -		header =3D (struct legacy_img_hdr *)addr;
+>  	}
+> +	header =3D map_sysmem(addr, 0);
+> =20
+>  #if CONFIG_IS_ENABLED(DFU)
+>  	if (bootdev->boot_device =3D=3D BOOT_DEVICE_DFU)
+> @@ -84,7 +91,7 @@ static int spl_ram_load_image(struct spl_image_info *sp=
+l_image,
+>  			u_boot_pos =3D (ulong)spl_get_load_buffer(-sizeof(*header),
+>  								sizeof(*header));
+>  		}
+> -		header =3D (struct legacy_img_hdr *)map_sysmem(u_boot_pos, 0);
+> +		header =3D map_sysmem(u_boot_pos, 0);
+> =20
+>  		ret =3D spl_parse_image_header(spl_image, bootdev, header);
+>  	}
 
-Please run a world build before/after and check for both size changes
-and Kconfig unmet dependency issues (which CI does not catch).  Based on
-at least the BMP patch I suspect there are problems and unintended
-behavior changes.
+This makes the code less readable.  Perhaps it needs to be refactored in
+to other files instead.
 
 --=20
 Tom
 
---OC7oYSvjcp7rxD9I
+--VSfUgqqAVAWHbCE3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTwn8kACgkQFHw5/5Y0
-tyz01gwAm4ICDgXL1jgLxYgPyeazKB7QN9T9YfkdKh1FRH/1w0k0q3bId1/3xzUu
-xbyjCwgpujISVfZNnbJKT9DPiE15upR8GNhSr0t3NOLoT85pPqxYVZ8x+27YgVBs
-HuReWzzsqNQceA16r9r1j9ilqldXMoCBkh8L/TtSBs4WHZ1H5nbdKDn8kp5+MVWa
-ac3IiGkEw7mQtfACaDbrZUwN1urCZwRrY8QjM/uBZ9oD3ezPzr9++C4S7510oajU
-cATuGFkxEU4NpYd6LLYd6mHOxMhHqKRAzarYzbytiqVYC9rwsf3EofNOH/VIsIy7
-xP1kqNRaBtctP93DSBaIGfuKka6xgw8g/Q7AH3vYnnIYGl1h/ZMlVymPhAV25PmG
-RIscioF0ACZ9Ic5qmSaMp4uFM0prdpcB1Ok0HAW5TpaD+d1KeWvyLO6TK+S42kVW
-+astgzOInkOBEZ+vn60ML+7piKH8WZOBl1927Q0qsY+4UDm/7AYADnaxjBhakKwm
-aB/MTD8f
-=q/ZU
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTwoMcACgkQFHw5/5Y0
+tyyInQwAmnrQLSsIzQgz0D6N/BatIkqaRU2VmfyZcjWnaa8AYV5NAiwurBgbqHdH
+DJuUm7Z9VTXNTb2AVOe0uHidlTcA63xtxnr7z/Pg/mKFiBwHatOmxFrZVIgvt95k
+/OtLkLBOMSY6EDCU2Mp/LOgfVZiVM20X9EtPLxLd8jatw6NdlYUjrDJbTWild2jM
+vebOi46m92GnNCIUzcAAeq/NStM8Vc7Nlgf7xqm8m8lR5Np6zbbqC2WhzvkjJKgd
+ds1PJHQbtKDyXwv7Tduh5/NDpJT9sSaEvDoJLiBSpXHfUaPPw55iiscYldxgV8WD
+JVHUNB62WqExXf839WaD9fjPDHWJcHSxbOq9UI3oVigQaiuVa5KZ6gakl37+1686
+3zVJrLyJzvvl6a0rXuvolpJtiJ+f+i2DwTkM00BKonyk/QQKnjo3jzZb8fswlRQw
+mwDrscNXssw3DtnQi5NmBA96ZWtOnLaMPCEOquh3iH8dMl6Gsv/idJG4+lA5/rZN
+SVOtlUsx
+=+NGN
 -----END PGP SIGNATURE-----
 
---OC7oYSvjcp7rxD9I--
+--VSfUgqqAVAWHbCE3--
