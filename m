@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E97C83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 648ECC83F2E
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F423B865FB;
-	Thu, 31 Aug 2023 05:53:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4650786660;
+	Thu, 31 Aug 2023 05:53:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U73+o+PO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GsJVTwfa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C421586584; Thu, 31 Aug 2023 05:53:44 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 79F1A86584; Thu, 31 Aug 2023 05:53:45 +0200 (CEST)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B0F68657C
+ by phobos.denx.de (Postfix) with ESMTPS id A32078658D
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:53:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34bae4fa2a8so1596105ab.0
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:41 -0700 (PDT)
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-44d58933a17so224731137.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693454020; x=1694058820; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693454021; x=1694058821; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UNHqUF5ec/aFkKxQs6zEletqA01Zj7gmtLSKwqnyoec=;
- b=U73+o+POCqd4D3zfPN29dbtmi17IFJMG86DvhEDySYeT2txVlNEnQFLJSXnZPpndzY
- P/Mk6IKdA5JFinaAyqNh+2fK3x1CRebJv89MVVGTPKvtNPmXz/g1RvWLG67GqFn/1DOq
- 7Vt/Vbjh30XWOd+Z7Pc4kq9DDcMgMfj/8iiCg=
+ bh=brfd6J1tt1YFoZBmdGG5qXRMIoy6uqi+wB95w0Jvp4s=;
+ b=GsJVTwfarE4ygCOZA2kqLpzfwAg39G0GDIv3GMXgaM/n+ZsqYdboLQphTIozHqHzut
+ m+Kh6vS8622iIWj9N8ktgwQ4xEN1L0l+9TUApyXP3UWHd1+I0bDQ4Ctdh1qc7621+xsF
+ Ql4Wbg67nZaBpdxTpJXOidLXw0ScUqx+4WViw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693454020; x=1694058820;
+ d=1e100.net; s=20221208; t=1693454021; x=1694058821;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UNHqUF5ec/aFkKxQs6zEletqA01Zj7gmtLSKwqnyoec=;
- b=TJZubk1laVnSwPK8lFUFS2ySPmfxfPMGKDJjew4c+L2DoJd17hyTaeI8uaBYBDm/vo
- v7AzBEXcSSRxWeFoRJGSebBUjLOBazCoivm79xosUPZ20eiPFjeWR0oMIIyfCe8hu5iE
- lOTGRIvgQs+NNVEv44iN6jc549pmsGEBGtLt83flw/w23Zob5UdoTMSfWjEmIHlvSHQF
- Q62Wc5cgc97bhugqLRNd8gSvYZsM/oHStxHnqv1wfPOZOlJIP0C7Rj5S/ihxwYbFi5P5
- ci0RDiBRlPNffxW/J9penhqu5jZhmOgM/q4JsoaBenX8yyr2mAVjB6HNXuAfB8Nh/gDc
- SwKQ==
-X-Gm-Message-State: AOJu0YyrDC2hyV8frQ31A7UjyEYGKsf4Ww9DRzvERMRV+uJs3tmd60dC
- WX8bRixGHiSO6GiM5Egm+TDtBxSNEB0ua61p3QU=
-X-Google-Smtp-Source: AGHT+IHw+f1yLbYCg6dcpKrpritWkRimmTj0gFbCs2ifqKPXqoe67Sniq24Fm+wEt/0OHfH+uU5VxA==
-X-Received: by 2002:a05:6e02:de1:b0:34d:f14d:aee1 with SMTP id
- m1-20020a056e020de100b0034df14daee1mr4425408ilj.11.1693454020640; 
- Wed, 30 Aug 2023 20:53:40 -0700 (PDT)
+ bh=brfd6J1tt1YFoZBmdGG5qXRMIoy6uqi+wB95w0Jvp4s=;
+ b=glfbUABjDcUQLrtNonhknZrJJN7imndmSqJdjNwx1OLnZaL7SvA/K7CutEAZPRS2m9
+ pOB2Z9fC6UrHp2OM9Kln9P2Kh7Ed7B2U+/VC3q36pEUVJN+Zb67irnRnDrD0IZq7ixHz
+ XggrfTjsJ0M44uRUIhQIGdafkkeAVvKr3tqbLPZIj0eEeSub5dbqBPCalhg3qkvBeFN/
+ spMZh139W8YpqHThgGUAyaie9uy2tLpasVBccPpgIr77WlJSBVTbmAe2BE5vL3COod+E
+ gzPPGtyXbDTU6JEJX/PiW8EedSEVCYtM3Dz06HKzV9WzIwycGFYD/sFEv/yvhopCcfX3
+ AF0g==
+X-Gm-Message-State: AOJu0YwJM3c4kT8+7+o3rkgOE57fuqmVtReq56QIGSy/S2mC6rVYffF+
+ i3S1bWeN9PPNuhmKzFkp23GMWCjD4qECjGpMEps=
+X-Google-Smtp-Source: AGHT+IFIf2YjdlqIUkcet+/Ek290Ef22W5Kl8Lh5eyPrkPsIh93O7OY3AqVa/SNtCue7fPPllOKtdw==
+X-Received: by 2002:a67:b30d:0:b0:44d:590d:28a6 with SMTP id
+ a13-20020a67b30d000000b0044d590d28a6mr4113220vsm.27.1693454021418; 
+ Wed, 30 Aug 2023 20:53:41 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  dy47-20020a0566381d6f00b0042036f06b24sm160002jab.163.2023.08.30.20.53.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 20:53:40 -0700 (PDT)
+ Wed, 30 Aug 2023 20:53:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Masahiro Yamada <yamada.masahiro@socionext.com>
-Subject: [PATCH v2 13/19] Kconfig: Move SPL_FIT under FIT
-Date: Wed, 30 Aug 2023 21:53:07 -0600
-Message-ID: <20230831035319.2316665-14-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 14/19] spl: Tidy up load address in spl_ram
+Date: Wed, 30 Aug 2023 21:53:08 -0600
+Message-ID: <20230831035319.2316665-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230831035319.2316665-1-sjg@chromium.org>
 References: <20230831035319.2316665-1-sjg@chromium.org>
@@ -89,60 +88,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This option already depends on FIT, so put it under the same umbrella, so
-that it appears in the FIT menu.
+This CONFIG is used but is not given a value by some boards. Use
+a default value of 0 explicitly, rather than relying on the 0 value
+provided by CONFIG_SPL_LOAD_FIT_ADDRESS
+
+This will allow us to make SPL_LOAD_FIT_ADDRESS depend on SPL_LOAD_FIT
+as it should.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/Kconfig | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
+ common/spl/spl_ram.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 467bca706782..c9b7d3f710b6 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -140,11 +140,9 @@ config FIT_PRINT
-         help
-           Support printing the content of the fitImage in a verbose manner.
+diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+index 93cf420d810a..4158ed1c32d7 100644
+--- a/common/spl/spl_ram.c
++++ b/common/spl/spl_ram.c
+@@ -20,12 +20,16 @@
+ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+ 			       ulong count, void *buf)
+ {
+-	ulong addr;
++	ulong addr = 0;
  
--endif # FIT
--
- config SPL_FIT
- 	bool "Support Flattened Image Tree within SPL"
--	depends on SPL && FIT
-+	depends on SPL
- 	select SPL_HASH
- 	select SPL_OF_LIBFDT
+ 	debug("%s: sector %lx, count %lx, buf %lx\n",
+ 	      __func__, sector, count, (ulong)buf);
  
-@@ -195,7 +193,7 @@ config SPL_FIT_RSASSA_PSS
+-	addr = (ulong)CONFIG_SPL_LOAD_FIT_ADDRESS + sector;
++	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
++		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
++				      CONFIG_SPL_LOAD_FIT_ADDRESS);
++	}
++	addr += sector;
+ 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
+ 		addr += image_load_offset;
  
- config SPL_LOAD_FIT
- 	bool "Enable SPL loading U-Boot as a FIT (basic fitImage features)"
--	depends on SPL && FIT
-+	depends on SPL
- 	select SPL_FIT
- 	help
- 	  Normally with the SPL framework a legacy image is generated as part
-@@ -243,7 +241,6 @@ config SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ
+@@ -38,20 +42,23 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+ 			      struct spl_boot_device *bootdev)
+ {
+ 	struct legacy_img_hdr *header;
++	ulong addr = 0;
+ 	int ret;
  
- config SPL_LOAD_FIT_FULL
- 	bool "Enable SPL loading U-Boot as a FIT (full fitImage features)"
--	depends on FIT
- 	select SPL_FIT
- 	help
- 	  Normally with the SPL framework a legacy image is generated as part
-@@ -341,6 +338,8 @@ config VPL_FIT_SIGNATURE_MAX_SIZE
+-	header = (struct legacy_img_hdr *)CONFIG_SPL_LOAD_FIT_ADDRESS;
++	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
++		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
++				      CONFIG_SPL_LOAD_FIT_ADDRESS);
++	}
  
- endif # VPL
+ 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
+-		unsigned long addr = (unsigned long)header;
+ 		ret = image_pre_load(addr);
  
-+endif # FIT
-+
- config PXE_UTILS
- 	bool
- 	select MENU
+ 		if (ret)
+ 			return ret;
+ 
+ 		addr += image_load_offset;
+-		header = (struct legacy_img_hdr *)addr;
+ 	}
++	header = map_sysmem(addr, 0);
+ 
+ #if CONFIG_IS_ENABLED(DFU)
+ 	if (bootdev->boot_device == BOOT_DEVICE_DFU)
+@@ -84,7 +91,7 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+ 			u_boot_pos = (ulong)spl_get_load_buffer(-sizeof(*header),
+ 								sizeof(*header));
+ 		}
+-		header = (struct legacy_img_hdr *)map_sysmem(u_boot_pos, 0);
++		header = map_sysmem(u_boot_pos, 0);
+ 
+ 		ret = spl_parse_image_header(spl_image, bootdev, header);
+ 	}
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
