@@ -4,52 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04940C83F01
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F7BC83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8169F8660B;
-	Thu, 31 Aug 2023 16:41:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF748865A4;
+	Thu, 31 Aug 2023 16:56:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693492913;
-	bh=shxruqiQViriTJuh7UsttAJuwf8lwX7KC5lKZYuk8lM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=BMOsA0BwIeYV1Z47wmZ2U3K/zPKHO0ViPUYW1Woi1WDuR8v0I4B5ElbNYORvVxR9n
-	 930QeKK3EdXoqsadxBbRip4NxuPqlgy6fsCabo9QDiFRU/DLMe1QlzLuwNz6sH4Z6T
-	 wmCL07HLnkEdquKryrC//fa4Fvza/Heqnst5CF7XZBl0jUcohZ7f4vpUPbQ14h9WNC
-	 rAWTkLkhr4OIYyqN8hsHGOiJT4jF9yF5s9vD1QSSGBcWd7C4I4kf6xEftb0Q2FW2M6
-	 BY9ilEUm/MGxV7w2bN1rAi3ETln0IYlq3Wo+d7FhlnyFro9j5nNe/QQMOax7zIZ6zL
-	 QurOu0ts0PGGw==
+	s=phobos-20191101; t=1693493781;
+	bh=zfByFcuqjKkNwBCtREtwT6Y2ZbnIhZwIDh6K8ApxkVo=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=OecrJk4YQct+Y4yioO/iKMncN1VcnEyVU/6RJPFXEphCbZlxbhv5npwerFMQMMK5q
+	 ZhrWPnvUumn4u/OszWPA3X5xXIpzrV4oleNxmK5/zO/tUna/+ICI5B2tRSb1Fo5IT/
+	 CD2qhbMG35KxOezbHT3fDloR2sirC5crPUXzh1mvS2BD5KnBkyO6LFO4dNcuFTG7RK
+	 sEQE615eQyo244uhoEFGuj5R1tOZ7Sn1GNrIHBvd2twmLUf0w406Gc/i6oiebNfHq1
+	 exdHbeVS2uhAhOyn5ISsDYlDQ+fvLB1/uelRDLhIk8HCcgmY4mqVk7ZaO05HNgkQXg
+	 7c6zo6RhM1MeQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4C42A865AD;
- Thu, 31 Aug 2023 16:41:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 464D0865A0;
+ Thu, 31 Aug 2023 16:56:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693492910;
- bh=shxruqiQViriTJuh7UsttAJuwf8lwX7KC5lKZYuk8lM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=jj/aMurMS91Em6ti3yAvHTJvg0TJL1Ij8iJQJskoPiuSsW8RgtsbszZvOhQSz03/b
- GVql3H4jiFtniwsVsVkJ0Ec0F2g7R9doKwVYC/vc5JTi11WYtn+peL8+fTEgJYOl0k
- HgmiD1BGH/8CaZntjDLVoq3jmpEp3US8HuSpCTx17n1GUFtxFM/TEMufAESp1DCkkU
- OOXv4Fu82aatXvm+skeetRtKqBEy/9X72qQHvCzyHp9H+U6+wgmsIpqwoBhSxLPg4v
- Q7LgdQWVdVNi5Zp+y8wgaMXZGeXioczG+W3uBPgL0mFIJXcrERXge/lJm6zQhpwccn
- Hm49iVSziWYgA==
+ s=phobos-20191101; t=1693493780;
+ bh=zfByFcuqjKkNwBCtREtwT6Y2ZbnIhZwIDh6K8ApxkVo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Gs/+6sk79BX9+HBS5Z+ZuOml6xYpnYL4rU2yp9MSN+6fJGsL5OT7eqRcJhvgZ/PIZ
+ b6D4BhaTq7HFTTWqGI6I36wSVes+sLSRjeb2Lhwy4skyRLxGNVnniln4xMUUb66nWE
+ 8sCqDL9z/loyJ+NSpf/UOiTmYwmqFJcJIC/CT63UNU776xiBfH0m/QBhmJc1jBFbsu
+ rz8am+JLnIi5/yfv1TPDi+hnmk/pT8lhaW2mc+jdfF2E8XWc+5JgkOtQelTlA+iMf3
+ cjWMlUz//4c0tWokLqnUawzL/yLdG59dZAsbwMolm9XiSrK3rxrtsr9FmQTqCWuD/v
+ sWR6RCAVc0VrQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@denx.de>
-Subject: [PATCH 2/2] ARM: imx: Use default SAVED_DRAM_TIMING_BASE on Data
- Modul i.MX8M Plus eDM SBC
-Date: Thu, 31 Aug 2023 16:41:46 +0200
-Message-Id: <20230831144146.78537-2-marex@denx.de>
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH] imx: hab: Use CONFIG_SPL_LOAD_FIT_ADDRESS in the CSF example
+Date: Thu, 31 Aug 2023 16:56:03 +0200
+Message-Id: <20230831145603.80139-1-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230831144146.78537-1-marex@denx.de>
-References: <20230831144146.78537-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,30 +66,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use default SAVED_DRAM_TIMING_BASE as that is what upstream TFA expects.
-Without this change, the board will fail to suspend/resume e.g. in Linux.
+The SPL authenticates image starting from CONFIG_SPL_LOAD_FIT_ADDRESS
+address, update the csf_fit.txt to match.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-Cc: Fabio Estevam <festevam@gmail.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@denx.de>
 Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tim Harvey <tharvey@gateworks.com>
 ---
- configs/imx8mp_data_modul_edm_sbc_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+ doc/imx/habv4/csf_examples/mx8m/csf_fit.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/imx8mp_data_modul_edm_sbc_defconfig b/configs/imx8mp_data_modul_edm_sbc_defconfig
-index 2ff577f2d8a..8b9d4b6c089 100644
---- a/configs/imx8mp_data_modul_edm_sbc_defconfig
-+++ b/configs/imx8mp_data_modul_edm_sbc_defconfig
-@@ -164,7 +164,6 @@ CONFIG_SPL_CLK_COMPOSITE_CCF=y
- CONFIG_CLK_COMPOSITE_CCF=y
- CONFIG_SPL_CLK_IMX8MP=y
- CONFIG_CLK_IMX8MP=y
--CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
- CONFIG_DFU_TFTP=y
- CONFIG_DFU_TIMEOUT=y
- CONFIG_DFU_MMC=y
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+index 3d79edf2813..97f3eea573b 100644
+--- a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
++++ b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+@@ -27,4 +27,4 @@
+   Verification index = 2
+   # FIXME:
+   # Line 1 -- fitImage
+-  Blocks = 0x401fcdc0 0x57c00 0xffff "flash.bin"
++  Blocks = CONFIG_SPL_LOAD_FIT_ADDRESS 0x57c00 0xffff "flash.bin"
 -- 
 2.40.1
 
