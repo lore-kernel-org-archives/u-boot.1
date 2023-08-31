@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FE7C83F2F
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3141C83F2F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:04:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D9898678A;
-	Thu, 31 Aug 2023 21:03:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B184F86886;
+	Thu, 31 Aug 2023 21:03:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lqBMp37o";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="UJ5tgK05";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06D4B867D0; Thu, 31 Aug 2023 21:03:10 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 59EAF86776; Thu, 31 Aug 2023 21:03:24 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC56F8678A
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8028786785
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d7bae413275so2711705276.0
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:02 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3a751d2e6ecso745697b6e.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693508581; x=1694113381; darn=lists.denx.de;
+ d=google.com; s=20221208; t=1693508600; x=1694113400; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W1JFcX9WHWkg00QfiUkIuJ5AP7pHbxureKfxn25blLQ=;
- b=lqBMp37oZHiHbUFKCS4o6m1gTGepftmr59myfKOkQHRtGXH8foQ31AwxxKCU2GOMJI
- I/6eYjjyYObupIy/v1arfa37h3GUC17hCulMeXY219hxlnrzOcouISGiBG0+bqyM7c36
- mCJWQ4p5JuP1sMmvB4PudVzajW3oQdWXRbqx8=
+ bh=bcUkjD9Yao9cXPE7+O5KLH/kZNZwJQLC1OKJdvs9cCs=;
+ b=UJ5tgK0538ysT4qSzIQTKlx2iE0h4A5wD3a0kKorhN/PvOvAEb7s5HA3DGqZLRzuqB
+ +5NsunNcPPvDxbArc+jhUtejhN/4vo2VQtl5N2mlOK02pV2P1cgKVKqdU9dR/bH4lS+B
+ nHtY4CUCQp75fN6s6rqTtkt0b4+dTb/XgrIx6kyYhm0p8VAvNvABEcHaJrKpJD07VIu6
+ WJ7oG6w2OihFiO9BKlm30d0snJyc+bhdHQB6Wz+xTW/ifPN/StBMEuyjtQbdIXyXxw8F
+ 4fCA2gtPKhsSlhHFOFv5SwN4M5otQk/8SkjOKyIyWtbYYW6HVGfI4kt3LIxVqVXthmaA
+ F/og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693508581; x=1694113381;
+ d=1e100.net; s=20221208; t=1693508600; x=1694113400;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=W1JFcX9WHWkg00QfiUkIuJ5AP7pHbxureKfxn25blLQ=;
- b=BUYe2Nm1QDjhtCxn2vvLHs2IDo/by7QJSUhc6VbQXbc8tVcwgxn0ig09EjFT1OBfs2
- kxN4s4xn5xBKqu0MHIGPQCl/SoBhnjJBFaMInt+5NX7HW7zHTsShlQWFnlz63uBjN8A3
- T8TBhnXAusIvpvZMinWbZC2wAeVumTlrnHjnrUmHZ0g7d54+kpK9QtyE0vZF1zUYRWOm
- UN441+wDHiAuH2N/Yoga+HwJzCJsMiv07cuKyxYYCcIy6EVwNtSn3gu5r5r+iz7Ryt5n
- V7nrZ4YxA/h4mx1pzlYewFiArtopWehweiUHbxXmi5NQzdaqR3XyVNh2zyDeW3UDwYnx
- wrBw==
-X-Gm-Message-State: AOJu0YzM8E7oDryab7s244Yxkb84kpqaPK8KkCqEi1PqJS223Zh9uyMT
- CdMxqjtxWaCuZRSku4NEcKF5O17BoGe0cqXMWSxtnBF9g6YeL2JVBXY=
-X-Google-Smtp-Source: AGHT+IGMLFEdbZGX9BHA++fQRCBTHqI5kHC9D9eUEcurq8dZ8sHKRu+fjsWvhoZSggkIBVywq+OtDXN1zZ5uDi5fXnc=
-X-Received: by 2002:a25:c78f:0:b0:d10:6b39:b602 with SMTP id
- w137-20020a25c78f000000b00d106b39b602mr542315ybe.16.1693508581420; Thu, 31
- Aug 2023 12:03:01 -0700 (PDT)
+ bh=bcUkjD9Yao9cXPE7+O5KLH/kZNZwJQLC1OKJdvs9cCs=;
+ b=IWT2pwqRTccqGnRXx/1SzO6q6OlEi2KyzJivSkCWxb7Gkud+2YU6goi2PjH/phr24a
+ k8j9AxKNKVp0cOaOHPQZtAKNeKViyjey9mvlzHR1INLEGxy3203kM9PqCAnU4EvjuWnk
+ xhCgASNxpII+TAAkfSMb+gWTmBjYARgoiCyWssxiBr+BQIYT3heV+6AXlOQb/XV/to4u
+ aXvmmhWl4vAYmNKmnsRbQ1Sz6/uUwV0jBzOM684jLtU79lLkep5X0Ebmictv3QxoXkDA
+ o+rxoCxOaHhVCBjuaoEIEjwqsR+nfd0q6/hDFt48NFQO+kUmFe48kVSBpdrtxZF39LUe
+ EYyg==
+X-Gm-Message-State: AOJu0Yx88Vx4CKnq0oGl/77rWH7IsKNAHnnYXQ//JalOqFDjwJHhpHkf
+ loyWwgw8C3Skh/sDS+5b9KW67w/uzSqI+TRJwi/+dA==
+X-Google-Smtp-Source: AGHT+IFfyYs3hOqXTmhM29rGL/ciC3K+m/jYUmy21g2FwQwepb1Vgr2d2K8K7M0yAzK2IbPDfy6K/i0VrYzulcXEZAs=
+X-Received: by 2002:a05:6808:1a06:b0:3a4:38fa:2e08 with SMTP id
+ bk6-20020a0568081a0600b003a438fa2e08mr604190oib.7.1693508599989; Thu, 31 Aug
+ 2023 12:03:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
- <20230814173944.288356-5-alpernebiyasak@gmail.com>
- <CAPnjgZ2d1mJp28UP2+zKC6+2pED_=YdovA_jaNJz2r+C=-jufg@mail.gmail.com>
- <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
- <CAPnjgZ2=tgDhXhm70RXcdXdJctJVqhO1vmH_==1N5YyzNH5cDg@mail.gmail.com>
- <7dc5a62f-28e1-4318-a14a-53702c26a5c2@gmail.com>
-In-Reply-To: <7dc5a62f-28e1-4318-a14a-53702c26a5c2@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Aug 2023 13:01:56 -0600
-Message-ID: <CAPnjgZ1dcCkKEqOhA4oeU-28NpP2=RYqGs6M-UZGXM5zBgYH1Q@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux
- distros
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, 
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng@tinylab.org>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Bharat Gooty <bharat.gooty@broadcom.com>, 
- Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
+References: <08a3e6c09cce13287c69ad370e409e7f1766b406.1693465465.git.michal.simek@amd.com>
+ <60a84405f3fefabb8b48a4e1ce84431483a729f3.1693465465.git.michal.simek@amd.com>
+In-Reply-To: <60a84405f3fefabb8b48a4e1ce84431483a729f3.1693465465.git.michal.simek@amd.com>
+From: Simon Glass <sjg@google.com>
+Date: Thu, 31 Aug 2023 13:02:03 -0600
+Message-ID: <CAPnjgZ0KnY3DmSOq2x6L+yYNAGb=VN03_tKnpXesjTQjE567BQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] xilinx: board: Add support to pick bootscr flash
+ offset/size from DT
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,109 +85,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
-
-On Thu, 31 Aug 2023 at 03:57, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+On Thu, 31 Aug 2023 at 01:04, Michal Simek <michal.simek@amd.com> wrote:
 >
-> On 2023-08-28 20:54 +03:00, Simon Glass wrote:
-> > Hi Alper,
-> >
-> > On Sun, 27 Aug 2023 at 09:49, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >>
-> >> On 2023-08-15 01:43 +03:00, Simon Glass wrote:
-> >>> Hi Alper,
-> >>>
-> >>> On Mon, 14 Aug 2023 at 11:40, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >>>> I actually want to put the root.img device first so that the VM can boot
-> >>>> into the installed system when it reboots, but U-Boot can't find the
-> >>>> bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
-> >>>> scan -lab`, but it seems to only ever search the first virtio-blk.
-> >>>> However, `eficonfig; bootefi bootmgr` makes it boot somehow.
-> >>>
-> >>> Yes, this is annoying.
-> >>>
-> >>> The problem is that the scanning is getting so complicated. The
-> >>> boot_targets var lists things which can either be a uclass, or a
-> >>> uclass with a device number. The currently implementation sees
-> >>> "virtio" and moves on to the next thing in boot_targets once it has
-> >>> processed one virtio device. That is obviously not correct, but...
-> >>>
-> >>> Would it be possible to just drop the 'boot_targets' var? That is what
-> >>> is stuffing it up, but we don't actually need it now. The defaults end
-> >>> up doing the same thing, apart (perhaps) from the strangeness of
-> >>> virtio which can be both a network and a blk device.
-> >>>
-> >>> I believe it is possible to do the right thing, but I'll need to
-> >>> create a better test mechanism to handle all the cases.
-> >>
-> >> I think some kind of a "priority score" could help -- iterate over
-> >> boot_targets first just to generate bootdev priorities, then carry them
-> >> over as bootflows are discovered (adjusted for bootmeth order), then use
-> >> those scores as the order to boot / to show a sorted menu / to test?
-> >
-> > We sort-of have that, in that bootdevs have a priority. We could add
-> > something to struct bootflow which takes that but adds more
-> > fine-grained information, e.g. based on some sort of filter function
-> > that can decide?
-> >
-> > Bear in mind that we normally want to boot the first thing we find,
-> > and we also want to use lazy init (so no USB unless we need it). But
-> > yes for the case where we display a menu I think we could make more of
-> > the priority feature. What are you thinking of?
+> Location of bootscript in flash can be specified via /options/u-boot DT
+> node by using bootscr-flash-offset and bootscr-flash-size properties.
+> Values should be saved to script_offset_f and script_size_f variables.
+> Variables are described in doc/develop/bootstd.rst as:
+> script_offset_f
+>     SPI flash offset from which to load the U-Boot script, e.g. 0xffe000
 >
-> For the priorities, I'm thinking of ChromiumOS boot flow where there is
-> an in-method order that's different from the order we encounter things
-> in. And I'm also thinking of customizing boot order for same-uclass
-> device (I guess boot_targets="usb1 usb0" works?). And a bit worried
+> script_size_f
+>     Size of the script to load, e.g. 0x2000
+>
+> Both of them are used by sf_get_bootflow() in drivers/mtd/spi/sf_bootdev.c
+> to identify bootscript location inside flash.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+> Changes in v2:
+> - Change message from printf to debug not to disturb current users
+>
+>  board/xilinx/common/board.c | 13 +++++++++++--
+>  1 file changed, 11 insertions(+), 2 deletions(-)
 
-Yes
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> about if we would want to mix and match orders. If we say methA > methB
-> and dev0 > dev1, do we say methA-on-dev1 > methB-on-dev0 or the other
-> way? Not sure if I make sense here at all, need to think more on it.
-
-I hope not, but at least we have the data structures now and can do
-these sorts of things.
 
 >
-> In general, what I want is a graphical boot menu like rEFInd [1], but
-> more specifically with a better theme more like [2]. Or, at least to
-> support rEFInd better. (More bugs here, upstream builds don't start at
-> all with U-Boot, Debian builds boot on arm64 but not x86).
-
-Could you implement that as a theme on the existing 'bootflow menu'?
-It looks like you might be able to.
-
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index b3fb6acc25a3..126f0d81a9ed 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -411,6 +411,7 @@ int board_late_init_xilinx(void)
+>         int i, id, macid = 0;
+>         struct xilinx_board_description *desc;
+>         phys_size_t bootm_size = gd->ram_top - gd->ram_base;
+> +       u64 bootscr_flash_offset, bootscr_flash_size;
 >
-> Regarding lazy init. If we don't init USB, rEFInd can't search USB
-> drives to boot things from it. Not sure if that's a fundamental problem
-> or there's some way for EFI apps to tell firmware to init USB etc.
-
-EFI sort-of has a fundamental problem here, I believe.
-
+>         if (!IS_ENABLED(CONFIG_MICROBLAZE)) {
+>                 ulong scriptaddr;
+> @@ -435,11 +436,19 @@ int board_late_init_xilinx(void)
+>                 }
+>         }
 >
-> [1] https://www.rodsbooks.com/refind/
-> [2] https://github.com/bobafetthotmail/refind-theme-regular
+> +       if (!ofnode_read_bootscript_flash(&bootscr_flash_offset,
+> +                                         &bootscr_flash_size)) {
+> +               ret |= env_set_hex("script_offset_f", bootscr_flash_offset);
+> +               ret |= env_set_hex("script_size_f", bootscr_flash_size);
+> +       } else {
+> +               debug("!!! Please define bootscr-flash-offset via DT !!!\n");
+> +               ret |= env_set_hex("script_offset_f",
+> +                                  CONFIG_BOOT_SCRIPT_OFFSET);
+> +       }
+> +
+>         if (IS_ENABLED(CONFIG_ARCH_ZYNQ) || IS_ENABLED(CONFIG_MICROBLAZE))
+>                 bootm_size = min(bootm_size, (phys_size_t)(SZ_512M + SZ_256M));
 >
-> > BTW, even for the menu, my original vision was that the menu would
-> > display immediately, with new bootflows appearing as they are
-> > discovered.
+> -       ret |= env_set_hex("script_offset_f", CONFIG_BOOT_SCRIPT_OFFSET);
+> -
+>         ret |= env_set_addr("bootm_low", (void *)gd->ram_base);
+>         ret |= env_set_addr("bootm_size", (void *)bootm_size);
 >
-> Shifting list elements around while people are choosing from the list is
-> definitely not good, only way that could be OK is if the list was
-> append-only and not centered-in-append-direction.
+> --
+> 2.36.1
 >
-> We should be displaying a priority-sorted list, I'm not sure we can
-> guarantee we will add things in priority order, and I would like things
-> centered as personal preference...
-
-Yes that is annoying, but all UIs do it these days. It is better to
-display something, even if you have to move an existing thing. Two
-other points:
-
-1. The good news is that you are almost always adding at the end
-2. This is often using the keyboard, so you can move the highlight
-when you insert an earlier item
-
-Regards,
-Simon
