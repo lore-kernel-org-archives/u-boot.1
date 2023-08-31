@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F904C83F22
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A86FC83F22
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 047ED86590;
-	Thu, 31 Aug 2023 04:50:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A81C86553;
+	Thu, 31 Aug 2023 04:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DFawZ2t+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E1Pp6Szx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12F0D86574; Thu, 31 Aug 2023 04:50:07 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 7C4C686561; Thu, 31 Aug 2023 04:50:09 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99C248656D
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 04:49:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C03E88657D
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 04:50:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-52713d2c606so315737a12.2
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 19:49:59 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-522dd6b6438so344656a12.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 19:50:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693450199; x=1694054999; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693450206; x=1694055006; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ook8ElrWmKLeBEfl/Ro8x+KywwVGBZOiZZFllxd9y+M=;
- b=DFawZ2t+XjtLs1Chf6vxd21sQOBlOnd2MLo5z0WCdpbB39bQpJ3CkeYi6p+xyTS8ZL
- mlTQyUCRcogxWgVzzcjpEdF4e+zOS7UveYGBqi/rn/AB8xvyQAG1lHoz/km7mR5P/BHS
- ABOuJrNDZ5NfXpp605ZsE3e7k7sAPobmQUyww=
+ bh=lRPHhF6y9Ke4rjXsTTkwutmxVELOLXJEnqu7yUpLpHk=;
+ b=E1Pp6SzxXh4+NX5r03GoWctxLFWYdv9UlTm8Ql7iVApPtIykRcOZyiIq7PIFCuZwMa
+ aqITOHHuT3CL/djx2MvXiDi7aFD8iYIEDmXsEx0mb2Ia7O9K6OpPbpMOJyP8UiJFv+51
+ UkfwKAP4aQp7qsux+dGKAdLjrdo7+UTXaci3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693450199; x=1694054999;
+ d=1e100.net; s=20221208; t=1693450206; x=1694055006;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ook8ElrWmKLeBEfl/Ro8x+KywwVGBZOiZZFllxd9y+M=;
- b=aK0byeq1W8DIWIA/wv015vJABvhXUpAwTy4p7UnAEe5uxxh2Ipzk82cdE2fmKm3nFa
- RYfassYY14L9PByZc26y3MnMB43r64No3SYz7Ui7Yt8jJ8Eq1m9gmzju5CJnBI6XQDGT
- 9x4CRKUYcuzaH0Y/8j+1wlYNPm6VZIsdVzqIFfQfLltL4SyZpYdAmcwy4tcljJ3lROkU
- bKKZ1cy2XdkdOSdpgygNADtKgmR4l36f0SoM9gKbADzOZN1UPBaiVHUZaUoGFTiJOcUh
- T4vwaa01GGLxaccybbOMiJ5wn66gIe6kAUwdrPu7aUYVCY62NDUMs0MC3/TCUdCWsW14
- vGOQ==
-X-Gm-Message-State: AOJu0Yw/rjfhI7RxYE5H7KdTlZ9O/uNjIwRpGJH6qcii2E31kmZu5yC6
- bzkmk0s8ZC8YJed/b0Tyzq3gR1DHHHZD7f3s7bS5/r4N+9R3nen6fo4=
-X-Google-Smtp-Source: AGHT+IErjEf7t3JV1gXUKk8P+Q5k+ZznO+0O4JnhLsAY1ZO2eCWhyaL7Ej3OOdlU0M4CRngkuPh8byjNi7c7lgnEQuA=
-X-Received: by 2002:aa7:c657:0:b0:525:6d9e:67c0 with SMTP id
- z23-20020aa7c657000000b005256d9e67c0mr3343262edr.23.1693450198943; Wed, 30
- Aug 2023 19:49:58 -0700 (PDT)
+ bh=lRPHhF6y9Ke4rjXsTTkwutmxVELOLXJEnqu7yUpLpHk=;
+ b=Aco6Djoj1N4u6T08K0jG++Nu7ypEZ5HP5pF0Umu5a//omWL5czjqLYT0jZqZuvzzQY
+ QfNM3YHsgsBub6Wi7wTtqWICns3j8ytSEuBWV/uZ95sF6oR/ZAxFMJFTcAuSPw3PuC8S
+ yI2QP8Y9wszO9f80R/mnCu/tF19BrRIKaB0RRHICHkOArN4SqBzAeS7T6VmzW/4Dva9p
+ 6zLqlsXMeI1J4XmOOB4SuyYscTa7Y70y4zSIIXTXoDHfd3gZDsPjnUfCLju5fqBoPF1G
+ BHUAAz8h24IV0StTLJ42IpO/Vif6rwYhUpNtfKygmvOWU5B2E/jV1tDflkahSrGYnZgx
+ moiQ==
+X-Gm-Message-State: AOJu0YwQSf4Gz+XalknkSLA6Zk+Vva7+y5Ut/MlFok5L9/RnBIV79HJz
+ S5XzU1hDZxFXzODzGsxfetlP52ctO+XSauX9ax8guw==
+X-Google-Smtp-Source: AGHT+IFdfVmiJGWfgtvP/F5d4lNKTgcE6rih+vjEwqR7n2Q1j6oK5Ip7y4BxYrlxr4ZYwuHiQv4B9mrYJ3T1pQAkAwQ=
+X-Received: by 2002:aa7:d802:0:b0:52a:4676:1bef with SMTP id
+ v2-20020aa7d802000000b0052a46761befmr3318190edq.29.1693450206200; Wed, 30 Aug
+ 2023 19:50:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-12-alpernebiyasak@gmail.com>
- <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
- <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
- <ee7997af-e004-414c-857c-b0ca2dad1b4d@gmail.com>
-In-Reply-To: <ee7997af-e004-414c-857c-b0ca2dad1b4d@gmail.com>
+References: <20230829221457.101469-1-afd@ti.com>
+ <20230829221457.101469-2-afd@ti.com>
+In-Reply-To: <20230829221457.101469-2-afd@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Aug 2023 20:49:15 -0600
-Message-ID: <CAPnjgZ2BcPKs5GwxTKvGtTTTUL0QBPgmy7UaiyWDLaKgbHx9XQ@mail.gmail.com>
-Subject: Re: [PATCH v5 11/13] video: Use VIDEO_DAMAGE for VIDEO_COPY
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Cc: Alexander Graf <agraf@csgraf.de>, u-boot@lists.denx.de, 
- Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 30 Aug 2023 20:49:20 -0600
+Message-ID: <CAPnjgZ1j2WFOup5wM817YeMz98te6zNGK1NB-tTz+Fv7QMMMtw@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/2] Makefile: Run defconfig files through the C
+ preprocessor
+To: Andrew Davis <afd@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Bryan Brattlof <bb@ti.com>, 
+ Praneeth Bajjuri <praneeth@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,197 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alper,
+Hi Andrew,
 
-On Wed, 30 Aug 2023 at 13:07, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+On Tue, 29 Aug 2023 at 16:15, Andrew Davis <afd@ti.com> wrote:
 >
-> On 2023-08-21 23:06 +03:00, Alexander Graf wrote:
-> >
-> > On 21.08.23 21:11, Simon Glass wrote:
-> >> Hi Alper,
-> >>
-> >> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
-> >>> From: Alexander Graf <agraf@csgraf.de>
-> >>>
-> >>> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
-> >>> print a single character, it will always copy the full range of bytes
-> >>> from the top left corner of the character to the lower right onto the
-> >>> uncached frame buffer. This includes pretty much the full line contents
-> >>> of the printed character.
-> >>>
-> >>> Since we now have proper damage tracking, let's make use of that to reduce
-> >>> the amount of data we need to copy. With this patch applied, we will only
-> >>> copy the tiny rectangle surrounding characters when we print them,
-> >>> speeding up the video console.
-> >> I suppose for rotated consoles it copies whole lines, but otherwise it
-> >> does a lot of small copies?
-> >
-> >
-> > I tried to keep the code as simple as possible and only track an "upper
-> > left" and "lower right" corner of modifications. So sync will always
-> > copy/flush a single rectangle.
+> This allows us to use some of the normal preprocessor directives inside
+> defconfig files. Such as #define and #include.
 >
-> Yep, see patch 06/13 for size of the regions. E.g. for putc_xy()s it's
-> fontdata->height * fontdata->width, for rows it's like fontdata->height
-> * vid_priv->xsize * count...
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  scripts/kconfig/Makefile | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> >>
-> >>> After this, changes to the main frame buffer are not immediately copied
-> >>> to the copy frame buffer, but postponed until the next video device
-> >>> sync. So issue an explicit sync before inspecting the copy frame buffer
-> >>> contents for the video tests.
-> >> So how does the sync get done in this case?
-> >
-> > It gets called as part of video_sync():
-> >
-> > +static void video_flush_copy(struct udevice *vid)
-> > +{
-> > +     struct video_priv *priv = dev_get_uclass_priv(vid);
-> > +
-> > +     if (!priv->copy_fb)
-> > +             return;
-> > +
-> > +     if (priv->damage.xend && priv->damage.yend) {
-> > +             int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
-> > +             int lend = priv->damage.xend * VNBYTES(priv->bpix);
-> > +             int y;
-> > +
-> > +             for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
-> > +                     ulong offset = (y * priv->line_length) + lstart;
-> > +                     ulong len = lend - lstart;
-> > +
-> > +                     memcpy(priv->copy_fb + offset, priv->fb + offset, len);
-> > +             }
-> > +     }
-> > +}
+> diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
+> index 12e525ee31f..16db9b7cf60 100644
+> --- a/scripts/kconfig/Makefile
+> +++ b/scripts/kconfig/Makefile
+> @@ -93,7 +93,8 @@ endif
+>  endif
 >
-> I think Simon was asking how and when video_sync() is called outside the
-> tests. The tests use lower-level functions that are ops->putc_xy() in
-> each console, and normally vidconsole calls higher on the call-chain
-> also maybe do a video_sync() when they think it's worth updating the
-> display.
+>  %_defconfig: $(obj)/conf
+> -       $(Q)$< $(silent) --defconfig=arch/$(SRCARCH)/configs/$@ $(Kconfig)
+> +       $(Q)$(CPP) -nostdinc -I $(srctree) -undef -x assembler-with-cpp $(srctree)/arch/$(SRCARCH)/configs/$@ -o generated_defconfig
+> +       $(Q)$< $(silent) --defconfig=generated_defconfig $(Kconfig)
 >
-> >>
-> >>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> >>> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
-> >>>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
-> >>>          call video_sync() before copy_fb check, update video_copy test]
-> >>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> >>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> >>> ---
-> >>>
-> >>> Changes in v5:
-> >>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
-> >>> - Fix memmove() calls by removing the extra dev argument
-> >>> - Call video_sync() before checking copy_fb in video tests
-> >>> - Use xstart, ystart, xend, yend as names for damage region
-> >>> - Use met->baseline instead of priv->baseline
-> >>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-> >>> - Use xstart, ystart, xend, yend as names for damage region
-> >>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
-> >>> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
-> >>> - Update dm_test_video_copy test added in a new patch
-> >>>
-> >>> Changes in v3:
-> >>> - Make VIDEO_COPY always select VIDEO_DAMAGE
-> >>>
-> >>> Changes in v2:
-> >>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
-> >>>
-> >>>   configs/sandbox_defconfig         |  1 -
-> >>>   drivers/video/Kconfig             |  5 ++
-> >>>   drivers/video/console_normal.c    | 13 +----
-> >>>   drivers/video/console_rotate.c    | 44 +++-----------
-> >>>   drivers/video/console_truetype.c  | 16 +----
-> >>>   drivers/video/vidconsole-uclass.c | 16 -----
-> >>>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
-> >>>   drivers/video/video_bmp.c         |  7 ---
-> >>>   include/video.h                   | 37 ------------
-> >>>   include/video_console.h           | 52 -----------------
-> >>>   test/dm/video.c                   |  3 +-
-> >>>   11 files changed, 43 insertions(+), 248 deletions(-)
-> >>>
-> >>> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> >>> index 51b820f13121..259f31f26cee 100644
-> >>> --- a/configs/sandbox_defconfig
-> >>> +++ b/configs/sandbox_defconfig
-> >>> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
-> >>>   CONFIG_VIDEO=y
-> >>>   CONFIG_VIDEO_FONT_SUN12X22=y
-> >>>   CONFIG_VIDEO_COPY=y
-> >>> -CONFIG_VIDEO_DAMAGE=y
-> >>>   CONFIG_CONSOLE_ROTATION=y
-> >>>   CONFIG_CONSOLE_TRUETYPE=y
-> >>>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
-> >>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-> >>> index 97f494a1340b..b3fbd9d7d9ca 100644
-> >>> --- a/drivers/video/Kconfig
-> >>> +++ b/drivers/video/Kconfig
-> >>> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
-> >>>
-> >>>   config VIDEO_COPY
-> >>>          bool "Enable copying the frame buffer to a hardware copy"
-> >>> +       select VIDEO_DAMAGE
-> >>>          help
-> >>>            On some machines (e.g. x86), reading from the frame buffer is very
-> >>>            slow because it is uncached. To improve performance, this feature
-> >>>            allows the frame buffer to be kept in cached memory (allocated by
-> >>>            U-Boot) and then copied to the hardware frame-buffer as needed.
-> >>> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
-> >>> +         and will only copy actually touched regions.
-> >>>
-> >>>            To use this, your video driver must set @copy_base in
-> >>>            struct video_uc_plat.
-> >>> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
-> >>>            regions of the frame buffer that were modified before, speeding up
-> >>>            screen refreshes significantly.
-> >>>
-> >>> +         It is also used by VIDEO_COPY to identify which regions changed.
-> >>> +
-> >>>   config BACKLIGHT_PWM
-> >>>          bool "Generic PWM based Backlight Driver"
-> >>>          depends on BACKLIGHT && DM_PWM
-> >>> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
-> >>> index a19ce6a2bc11..c44aa09473a3 100644
-> >>> --- a/drivers/video/console_normal.c
-> >>> +++ b/drivers/video/console_normal.c
-> >>> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
-> >>>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
-> >>>          end = dst;
-> >>>
-> >>> -       ret = vidconsole_sync_copy(dev, line, end);
-> >>> -       if (ret)
-> >>> -               return ret;
-> >>> -
-> >>>          video_damage(dev->parent,
-> >>>                       0,
-> >>>                       fontdata->height * row,
-> >>> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
-> >>>          void *dst;
-> >>>          void *src;
-> >>>          int size;
-> >>> -       int ret;
-> >>>
-> >>>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
-> >>>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
-> >>>          size = fontdata->height * vid_priv->line_length * count;
-> >>> -       ret = vidconsole_memmove(dev, dst, src, size);
-> >>> -       if (ret)
-> >>> -               return ret;
-> >>> +       memmove(dst, src, size);
-> >> Why are you making that change?
-> >
-> > There is no point in keeping a special vidconsole_memmove() around
-> > anymore, since we don't actually need to call vidconsole_sync_copy()
-> > after the move. The damage call that we introduced to all call sites in
-> > combination with a video_sync() call takes over the job of the sync copy.
+>  # Added for U-Boot (backward compatibility)
+>  %_config: %_defconfig
+> --
+> 2.39.2
 >
-> More specifically, this batches the copying work video_sync_copy() does
-> per console-op into video_flush_copy() called once per video_sync().
-> Then, since vidconsole_memmove() is only used to memmove() and invoke
-> that copy mechanism, we can also reduce it to just memmove().
 
-OK, thank you.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Can you please check what happens if the file has an error flagged by
+CPP? Is it obvious what is wrong?
 
 Regards,
 Simon
