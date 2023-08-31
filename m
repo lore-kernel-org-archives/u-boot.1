@@ -4,66 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5310C83F3C
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FE7C83F2F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:04:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 207ED867D0;
-	Thu, 31 Aug 2023 21:03:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6D9898678A;
+	Thu, 31 Aug 2023 21:03:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GTIRzQtZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lqBMp37o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EC6586523; Thu, 31 Aug 2023 21:03:08 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 06D4B867D0; Thu, 31 Aug 2023 21:03:10 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21E50866DC
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC56F8678A
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5711f6dff8cso664921eaf.3
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:03 -0700 (PDT)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d7bae413275so2711705276.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693508582; x=1694113382; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693508581; x=1694113381; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZXXIbfs79p+6oy7B4B9IIc4rZGQG7TNknvy4LICuYBk=;
- b=GTIRzQtZX9+aj2j7y20ajEuBrFp5dkoMqIQ6YrAmxGqDFvqi6ZB5/vwjKxX92W2qAO
- VPEZ8XBm9z7PY9992arR5/Sv4ySILg7aUqgf38sBX/IwOErxR7I0PfZqpzBYPsBbEacD
- XlIkSbr3MzJHV+KFddS4X24fxgv98UOhUGu4U=
+ bh=W1JFcX9WHWkg00QfiUkIuJ5AP7pHbxureKfxn25blLQ=;
+ b=lqBMp37oZHiHbUFKCS4o6m1gTGepftmr59myfKOkQHRtGXH8foQ31AwxxKCU2GOMJI
+ I/6eYjjyYObupIy/v1arfa37h3GUC17hCulMeXY219hxlnrzOcouISGiBG0+bqyM7c36
+ mCJWQ4p5JuP1sMmvB4PudVzajW3oQdWXRbqx8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693508582; x=1694113382;
+ d=1e100.net; s=20221208; t=1693508581; x=1694113381;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZXXIbfs79p+6oy7B4B9IIc4rZGQG7TNknvy4LICuYBk=;
- b=XX5s6VTm28On4YwhjINw9RjZwuAGr39o2nRmwNFhKXTz8Yva2KMKC990aZ2RduS56d
- TPoU3lpL3zLUhzZOfJsLJSXkj7GzniZEZCfaes9DduoYuvDK5Hcc75/zhK3iPrNSndqF
- C4SLSdnuER0ijetSUF6ls9zpMTbkvO5LUqkk8rcSYB2baX2IWfHZjKm9DOPD72pwO/Fk
- QHSwM9cPbsVM4xe6msRCE0z3s9UyDMEM0d2z3Ppl8UP+9DUL6xlDpyfRSpuCPk0ZouZa
- bdN/yOVizB5qFDPVhCXyzhbVap+faeOWRQujn/Mq5u1EQczYFOc4ITJI55WP5uQjE0Bk
- J+Dw==
-X-Gm-Message-State: AOJu0YzQx1+E0oWy0cSAAcTuHIOan634YRmleV+/DYUqRqkcViZ6j3pJ
- 4HUFwl+kurV7mVmiiv4lvnQNCdbN5/S2kj1nfDNVvQ==
-X-Google-Smtp-Source: AGHT+IHgBzS5eSRFzVZ5LFODz9h708t5n71Q/JndFyG9LHSGwQHKCZezj+zmziQwkQU3wY4G35uQCYNiN3Pgi5AR4qo=
-X-Received: by 2002:a05:6358:5283:b0:129:c9c0:ca64 with SMTP id
- g3-20020a056358528300b00129c9c0ca64mr217011rwa.15.1693508581420; Thu, 31 Aug
- 2023 12:03:01 -0700 (PDT)
+ bh=W1JFcX9WHWkg00QfiUkIuJ5AP7pHbxureKfxn25blLQ=;
+ b=BUYe2Nm1QDjhtCxn2vvLHs2IDo/by7QJSUhc6VbQXbc8tVcwgxn0ig09EjFT1OBfs2
+ kxN4s4xn5xBKqu0MHIGPQCl/SoBhnjJBFaMInt+5NX7HW7zHTsShlQWFnlz63uBjN8A3
+ T8TBhnXAusIvpvZMinWbZC2wAeVumTlrnHjnrUmHZ0g7d54+kpK9QtyE0vZF1zUYRWOm
+ UN441+wDHiAuH2N/Yoga+HwJzCJsMiv07cuKyxYYCcIy6EVwNtSn3gu5r5r+iz7Ryt5n
+ V7nrZ4YxA/h4mx1pzlYewFiArtopWehweiUHbxXmi5NQzdaqR3XyVNh2zyDeW3UDwYnx
+ wrBw==
+X-Gm-Message-State: AOJu0YzM8E7oDryab7s244Yxkb84kpqaPK8KkCqEi1PqJS223Zh9uyMT
+ CdMxqjtxWaCuZRSku4NEcKF5O17BoGe0cqXMWSxtnBF9g6YeL2JVBXY=
+X-Google-Smtp-Source: AGHT+IGMLFEdbZGX9BHA++fQRCBTHqI5kHC9D9eUEcurq8dZ8sHKRu+fjsWvhoZSggkIBVywq+OtDXN1zZ5uDi5fXnc=
+X-Received: by 2002:a25:c78f:0:b0:d10:6b39:b602 with SMTP id
+ w137-20020a25c78f000000b00d106b39b602mr542315ybe.16.1693508581420; Thu, 31
+ Aug 2023 12:03:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
- <20230829203710.84201-2-seanedmond@linux.microsoft.com>
-In-Reply-To: <20230829203710.84201-2-seanedmond@linux.microsoft.com>
+References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
+ <20230814173944.288356-5-alpernebiyasak@gmail.com>
+ <CAPnjgZ2d1mJp28UP2+zKC6+2pED_=YdovA_jaNJz2r+C=-jufg@mail.gmail.com>
+ <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
+ <CAPnjgZ2=tgDhXhm70RXcdXdJctJVqhO1vmH_==1N5YyzNH5cDg@mail.gmail.com>
+ <7dc5a62f-28e1-4318-a14a-53702c26a5c2@gmail.com>
+In-Reply-To: <7dc5a62f-28e1-4318-a14a-53702c26a5c2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Aug 2023 13:02:00 -0600
-Message-ID: <CAPnjgZ0aEmKe0codStO568LChErKkXMVLosN5YqqAH-tD4LBsA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] fdt: common API to populate kaslr seed
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, macromorgan@hotmail.com
+Date: Thu, 31 Aug 2023 13:01:56 -0600
+Message-ID: <CAPnjgZ1dcCkKEqOhA4oeU-28NpP2=RYqGs6M-UZGXM5zBgYH1Q@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux
+ distros
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, 
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng@tinylab.org>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Bharat Gooty <bharat.gooty@broadcom.com>, 
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,206 +94,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Alper,
 
-On Tue, 29 Aug 2023 at 14:37, <seanedmond@linux.microsoft.com> wrote:
+On Thu, 31 Aug 2023 at 03:57, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+> On 2023-08-28 20:54 +03:00, Simon Glass wrote:
+> > Hi Alper,
+> >
+> > On Sun, 27 Aug 2023 at 09:49, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>
+> >> On 2023-08-15 01:43 +03:00, Simon Glass wrote:
+> >>> Hi Alper,
+> >>>
+> >>> On Mon, 14 Aug 2023 at 11:40, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>>> I actually want to put the root.img device first so that the VM can boot
+> >>>> into the installed system when it reboots, but U-Boot can't find the
+> >>>> bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
+> >>>> scan -lab`, but it seems to only ever search the first virtio-blk.
+> >>>> However, `eficonfig; bootefi bootmgr` makes it boot somehow.
+> >>>
+> >>> Yes, this is annoying.
+> >>>
+> >>> The problem is that the scanning is getting so complicated. The
+> >>> boot_targets var lists things which can either be a uclass, or a
+> >>> uclass with a device number. The currently implementation sees
+> >>> "virtio" and moves on to the next thing in boot_targets once it has
+> >>> processed one virtio device. That is obviously not correct, but...
+> >>>
+> >>> Would it be possible to just drop the 'boot_targets' var? That is what
+> >>> is stuffing it up, but we don't actually need it now. The defaults end
+> >>> up doing the same thing, apart (perhaps) from the strangeness of
+> >>> virtio which can be both a network and a blk device.
+> >>>
+> >>> I believe it is possible to do the right thing, but I'll need to
+> >>> create a better test mechanism to handle all the cases.
+> >>
+> >> I think some kind of a "priority score" could help -- iterate over
+> >> boot_targets first just to generate bootdev priorities, then carry them
+> >> over as bootflows are discovered (adjusted for bootmeth order), then use
+> >> those scores as the order to boot / to show a sorted menu / to test?
+> >
+> > We sort-of have that, in that bootdevs have a priority. We could add
+> > something to struct bootflow which takes that but adds more
+> > fine-grained information, e.g. based on some sort of filter function
+> > that can decide?
+> >
+> > Bear in mind that we normally want to boot the first thing we find,
+> > and we also want to use lazy init (so no USB unless we need it). But
+> > yes for the case where we display a menu I think we could make more of
+> > the priority feature. What are you thinking of?
 >
-> fdt_fixup_kaslr_seed() will update given ofnode with random seed value.
-> Source for random seed can be TPM or RNG driver in u-boot or sec
-> firmware (ARM).
->
-> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
-> Signed-off-by: Sean Edmond <senaedmond@microsoft.com>
-> ---
->  arch/arm/cpu/armv8/sec_firmware.c | 39 +++++++++++--------------------
->  common/fdt_support.c              | 19 +++++++++++++++
->  drivers/core/ofnode.c             | 17 ++++++++++++++
->  include/dm/ofnode.h               | 12 ++++++++++
->  include/fdt_support.h             |  9 +++++++
->  5 files changed, 71 insertions(+), 25 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/sec_firmware.c b/arch/arm/cpu/armv8/sec_firmware.c
-> index c0e8726346..5f04cd8aec 100644
-> --- a/arch/arm/cpu/armv8/sec_firmware.c
-> +++ b/arch/arm/cpu/armv8/sec_firmware.c
-> @@ -411,46 +411,35 @@ int sec_firmware_init(const void *sec_firmware_img,
->  /*
->   * fdt_fix_kaslr - Add kalsr-seed node in Device tree
->   * @fdt:               Device tree
-> - * @eret:              0 in case of error, 1 for success
-> + * @eret:              0 for success
->   */
->  int fdt_fixup_kaslr(void *fdt)
+> For the priorities, I'm thinking of ChromiumOS boot flow where there is
+> an in-method order that's different from the order we encounter things
+> in. And I'm also thinking of customizing boot order for same-uclass
+> device (I guess boot_targets="usb1 usb0" works?). And a bit worried
 
-Is it possible to put this code in an EVT_FT_FIXUP spy? I was rather
-hoping not to add new fixup functions.
+Yes
 
->  {
-> -       int nodeoffset;
-> -       int err, ret = 0;
-> -       u8 rand[8];
-> +       int ret = 0;
+> about if we would want to mix and match orders. If we say methA > methB
+> and dev0 > dev1, do we say methA-on-dev1 > methB-on-dev0 or the other
+> way? Not sure if I make sense here at all, need to think more on it.
+
+I hope not, but at least we have the data structures now and can do
+these sorts of things.
+
 >
->  #if defined(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT)
-> +       u8 rand[8];
-> +       ofnode root;
-> +
->         /* Check if random seed generation is  supported */
->         if (sec_firmware_support_hwrng() == false) {
->                 printf("WARNING: SEC firmware not running, no kaslr-seed\n");
-> -               return 0;
-> +               return -EOPNOTSUPP;
->         }
+> In general, what I want is a graphical boot menu like rEFInd [1], but
+> more specifically with a better theme more like [2]. Or, at least to
+> support rEFInd better. (More bugs here, upstream builds don't start at
+> all with U-Boot, Debian builds boot on arm64 but not x86).
+
+Could you implement that as a theme on the existing 'bootflow menu'?
+It looks like you might be able to.
+
 >
-> -       err = sec_firmware_get_random(rand, 8);
-> -       if (err < 0) {
-> +       ret = sec_firmware_get_random(rand, 8);
-> +       if (ret < 0) {
->                 printf("WARNING: No random number to set kaslr-seed\n");
-> -               return 0;
-> +               return ret;
->         }
+> Regarding lazy init. If we don't init USB, rEFInd can't search USB
+> drives to boot things from it. Not sure if that's a fundamental problem
+> or there's some way for EFI apps to tell firmware to init USB etc.
+
+EFI sort-of has a fundamental problem here, I believe.
+
 >
-> -       err = fdt_check_header(fdt);
-> -       if (err < 0) {
-> -               printf("fdt_chosen: %s\n", fdt_strerror(err));
-> -               return 0;
-> +       ret = root_ofnode_from_fdt(fdt, &root);
-> +       if (ret < 0) {
-> +               printf("WARNING: Unable to get root ofnode\n");
-> +               return ret;
->         }
+> [1] https://www.rodsbooks.com/refind/
+> [2] https://github.com/bobafetthotmail/refind-theme-regular
 >
-> -       /* find or create "/chosen" node. */
-> -       nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
-> -       if (nodeoffset < 0)
-> -               return 0;
-> -
-> -       err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", rand,
-> -                                 sizeof(rand));
-> -       if (err < 0) {
-> -               printf("WARNING: can't set kaslr-seed %s.\n",
-> -                      fdt_strerror(err));
-> -               return 0;
-> -       }
-> -       ret = 1;
-> +       ret = fdt_fixup_kaslr_seed(root, rand, sizeof(rand));
->  #endif
+> > BTW, even for the menu, my original vision was that the menu would
+> > display immediately, with new bootflows appearing as they are
+> > discovered.
 >
->         return ret;
-> diff --git a/common/fdt_support.c b/common/fdt_support.c
-> index 5e49078f8c..52be4375b4 100644
-> --- a/common/fdt_support.c
-> +++ b/common/fdt_support.c
-> @@ -631,6 +631,25 @@ void fdt_fixup_ethernet(void *fdt)
->         }
->  }
+> Shifting list elements around while people are choosing from the list is
+> definitely not good, only way that could be OK is if the list was
+> append-only and not centered-in-append-direction.
 >
-> +int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
-> +{
-> +       ofnode chosen;
-> +       int ret;
-> +
-> +       /* find or create "/chosen" node. */
-> +       ret = ofnode_add_subnode(node, "chosen", &chosen);
-> +       if (ret && ret != -EEXIST)
-> +               return -ENOENT;
-> +
-> +       ret = ofnode_write_prop(chosen, "kaslr-seed", seed, len, true);
-> +       if (ret) {
-> +               printf("WARNING: can't set kaslr-seed\n");
-> +               return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  int fdt_record_loadable(void *blob, u32 index, const char *name,
->                         uintptr_t load_addr, u32 size, uintptr_t entry_point,
->                         const char *type, const char *os, const char *arch)
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index 8df16e56af..4be21133b8 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -870,6 +870,23 @@ ofnode oftree_path(oftree tree, const char *path)
->         }
->  }
->
-> +int root_ofnode_from_fdt(void *fdt, ofnode *root_node)
-> +{
-> +       oftree tree;
-> +       /* If OFNODE_MULTI_TREE is not set, and if fdt is not the control FDT,
-> +        *  oftree_from_fdt() will return NULL
-> +        */
-> +       tree = oftree_from_fdt(fdt);
-> +
-> +       if (!oftree_valid(tree)) {
-> +               printf("Cannot create oftree\n");
-> +               return -EINVAL;
-> +       }
-> +       *root_node = oftree_root(tree);
-> +
-> +       return 0;
-> +}
-> +
->  const void *ofnode_read_chosen_prop(const char *propname, int *sizep)
->  {
->         ofnode chosen_node;
-> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-> index 0f38b3e736..e79bb62be8 100644
-> --- a/include/dm/ofnode.h
-> +++ b/include/dm/ofnode.h
-> @@ -901,6 +901,18 @@ ofnode oftree_path(oftree tree, const char *path);
->   */
->  ofnode oftree_root(oftree tree);
->
-> +/**
-> + * root_ofnode_from_fdt() - Gets the root ofnode given an FDT blob.
-> + *                          Note, this will fail if OFNODE_MULTI_TREE
-> + *                          is not set.
-> + *
-> + * @fdt: Device tree to use
-> + * @root_node : Root ofnode
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int root_ofnode_from_fdt(void *fdt, ofnode *root_node);
-> +
->  /**
->   * ofnode_read_chosen_prop() - get the value of a chosen property
->   *
-> diff --git a/include/fdt_support.h b/include/fdt_support.h
-> index 2cd8366898..d967118bed 100644
-> --- a/include/fdt_support.h
-> +++ b/include/fdt_support.h
-> @@ -11,6 +11,7 @@
->         !defined(USE_HOSTCC)
->
->  #include <asm/u-boot.h>
-> +#include <dm/ofnode.h>
->  #include <linux/libfdt.h>
->  #include <abuf.h>
->
-> @@ -121,6 +122,14 @@ static inline int fdt_fixup_memory_banks(void *blob, u64 start[], u64 size[],
->  #endif
->
->  void fdt_fixup_ethernet(void *fdt);
-> +
-> +/*
-> + * fdt_fixup_kaslr_seed - Add kaslr-seed node in Device tree
-> + * @node:              ofnode
-> + * @eret:              0 for success
-> + */
-> +int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
-> +
->  int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
->                          const void *val, int len, int create);
->  void fdt_fixup_qe_firmware(void *fdt);
-> --
-> 2.40.0
->
+> We should be displaying a priority-sorted list, I'm not sure we can
+> guarantee we will add things in priority order, and I would like things
+> centered as personal preference...
+
+Yes that is annoying, but all UIs do it these days. It is better to
+display something, even if you have to move an existing thing. Two
+other points:
+
+1. The good news is that you are almost always adding at the end
+2. This is often using the keyboard, so you can move the highlight
+when you insert an earlier item
 
 Regards,
 Simon
