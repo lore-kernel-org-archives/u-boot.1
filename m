@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F79C83F29
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 07:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E855C83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 07:52:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F147C8655A;
-	Thu, 31 Aug 2023 09:06:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FA1B8655F;
+	Thu, 31 Aug 2023 09:52:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ck0XNuEc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ah2194b4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF46C8657D; Thu, 31 Aug 2023 09:06:48 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 7089C8655E; Thu, 31 Aug 2023 09:52:44 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABCCF8655A
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:06:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64CE686568
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:52:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-401d80f4ef8so4628685e9.1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 00:06:45 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2bcc846fed0so9960601fa.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 00:52:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693465605; x=1694070405; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=06G2evSP27jaz3zJRbGbHKtTtwFOmZ8+0C8C00RzbL4=;
- b=Ck0XNuEc8F5ffo2KslN16IyF54i36pQQNb4jP6oLhKC2omCroIzvztVo7ALm/UIHrg
- bDIOtb6JYhVh/zRZ4Frmy1QyBs+pWqmwIadhQXzA3iyTVBF45T6rTkKdxpe1Auyqregw
- WghBcQs76gNXJ5TDu/KQg2VKC8TcNrsMj3S9M/4v6t3IR3WnW7S4QUe0sreMKVy18Jln
- SLtFpj/UktyiKZyX9Ho0wMEA7QpH5r81CnWxpRefw1Stb+4LFE6hIA0fI9zm+Y5AnSIC
- pFN5HQV/PRo/cAS2DtavMklsxNRME8/ksPTJofjgngkA1BF/pkFtnYvbOfuLGhQCLjzG
- DSjQ==
+ d=linaro.org; s=google; t=1693468360; x=1694073160; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zq5O4lX+Vy366dnW50sDslGPIxZiv81R5mBsqKmyiE8=;
+ b=Ah2194b4SU4NcEHYAZ5o3pKj/wC6kN8pAwRalXU+9d9hsPCKSRR45Xb7/pSqjMCqNx
+ w9kVUcgqIRnJzlJB4XF5m7lt6tFhZ3811mwldSu6sotEUldYcAtu+1iwPi+RVhN3v227
+ 4yPWt0tRWLuKMz2OZFg/7yQFx+Q3kPAqDUFIslx9Lc9uKVnDxWZnN0yEcihBrt3fl/pi
+ jgYpzKfJVxG7G7T8e9ihptTLm0PjHRgj62JK5HI8ueK4QPvTM1gGJ/LZSXscOekyMFU4
+ uIVsAxEHsqXPnm/0F2FP/d9EhsZIrs5vXoZs31qUQCXFB06zCT0/bn5C18NRp8iDdsfq
+ fFBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693465605; x=1694070405;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=06G2evSP27jaz3zJRbGbHKtTtwFOmZ8+0C8C00RzbL4=;
- b=MIL6DXpk0oFvS7SIbJvFSdKHV7yfoy0ELDtVRyi79RBVnuSy0DT2Ka4h8iOZoP0D6i
- aA95CVJ7AyG/8ALuf4+iEFEoQ6tXxm1/WLfwSoa/ZucP+CSqdBlI8t2eTjQ7ewQrJCkr
- MbgscaZAmYPimpqOWg7Rfbh5NNwvDkpOZ7WwEa8EG939/yw+PLmj/FbmUy17DRuYBYzM
- N4NppG7nGO28EkLKMXflL6pY9Y3H8NngsoqFemIvTrSmXu7WZtPIX6U/uct2J0ELDfu5
- zB8imqjPVcc+QMuOvpDEVvP14f7TTMLHj4ZfgidhEppJBlaj+p76GAZWbEzJtWfVWc6y
- WnDg==
-X-Gm-Message-State: AOJu0YwrdD04XthsVNZSANdo20J3PG1ULs3TUG8T5BP3FVueEpWTHpmh
- AvIu1srQtBDx0ZEUefRRa2yaAg==
-X-Google-Smtp-Source: AGHT+IHm6/5AOdZm/4jrJBQ+3WRXipAVVypM3NLIXrK9vuYAMOhsCkZrF+f1Hx1dyBDMh0wULwGSfA==
-X-Received: by 2002:a05:600c:210e:b0:3fe:e812:4709 with SMTP id
- u14-20020a05600c210e00b003fee8124709mr4149990wml.12.1693465605072; 
- Thu, 31 Aug 2023 00:06:45 -0700 (PDT)
-Received: from hades (ppp089210246083.access.hol.gr. [89.210.246.83])
- by smtp.gmail.com with ESMTPSA id
- n5-20020a05600c294500b003fa96fe2bd9sm4175151wmd.22.2023.08.31.00.06.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 00:06:44 -0700 (PDT)
-Date: Thu, 31 Aug 2023 10:06:42 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
- Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <ZPA8AtGOel8pko6y@hades>
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-31-sjg@chromium.org>
+ d=1e100.net; s=20221208; t=1693468360; x=1694073160;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zq5O4lX+Vy366dnW50sDslGPIxZiv81R5mBsqKmyiE8=;
+ b=IdhiUL7GzonmkUShq+y4elvFgyfUdCsxodZlKH1RaVo1SmXQcX/0UaZprFa6yu7MzE
+ 4W6s8/CLWAy/xcUbnedxmqpXwajFSvmLEbi1GDxQ8Wuwn1Y176HmMZqcjTUu8qOWEIBx
+ GfLyLHv2R2nOU9Nhj23PWlmgaqq5mM/k1M0iBCo/Azngm7wmqfyerBhK5igBSHHpZMQI
+ lKn0YBJhtZYjwS1Zr/C5FRurLodoPIImRvXQtKvHJdwRETiUj0BZu+++VTkjMHjrVWBx
+ 6TD5Jb66XEwtBBlZMCOKVMBQ3M1Xui8jE1ilkU887PxVCnhr2I8UyTHYydI4rBogB/do
+ aRfA==
+X-Gm-Message-State: AOJu0Yw8A9yaA14dj8/XKS+b3TxZ42l0fir+pXBktVVi61G/1ymcVBO/
+ DeC2pcLIQjYMKm6OP2H8T1wkY7itk5a8hxPH8Zun3Q==
+X-Google-Smtp-Source: AGHT+IGgalloddkrTAW83ZMuxuO8ANq4DXxAmUwjVO3vS9LqX+JzG7cGsPgvF14tRkf8LdZGhOjz+ptKyhF1V9Oo2tU=
+X-Received: by 2002:a2e:9f50:0:b0:2bd:1d02:5026 with SMTP id
+ v16-20020a2e9f50000000b002bd1d025026mr3404119ljk.15.1693468360543; Thu, 31
+ Aug 2023 00:52:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230830180524.315916-31-sjg@chromium.org>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <20230826090633.239342-6-sughosh.ganu@linaro.org>
+ <CAPnjgZ3AexW4vfO-A8WYGE0OD5EZnOUA7tA1QP71Bcw51QArBQ@mail.gmail.com>
+ <CADg8p96zOXDaVV9CFcbeKgdZwG7pwfCp66GEY_eoYC6FCHeKZA@mail.gmail.com>
+ <20230828183936.GN3953269@bill-the-cat>
+ <CAC_iWj+d_xLKJS_KHYEExSQb2MuU0K9BYeLDbnHSdp8wF7W+Pw@mail.gmail.com>
+ <CAPnjgZ3mobofYNB7B4nmJg8GH12FQSJ7vcEXaVydtWwSLhvfLQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3mobofYNB7B4nmJg8GH12FQSJ7vcEXaVydtWwSLhvfLQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 31 Aug 2023 10:52:04 +0300
+Message-ID: <CAC_iWjKeD72f0giLUbeZZ0aP2h5kgNJw+va1o50bGx8fbqp3iQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 5/5] doc: Add a document for non-compliant DT
+ node/property removal
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,87 +94,77 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-On Wed, Aug 30, 2023 at 12:05:01PM -0600, Simon Glass wrote:
-> Standard passage provides for a bloblist to be passed from one firmware
-> phase to the next. That can be used to pass the devicetree along as well.
-> Add an option to support this.
-> 
-> Tests for this will be added as part of the Universal Payload work.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  common/bloblist.c                  |  2 ++
->  doc/develop/devicetree/control.rst |  3 ++
->  dts/Kconfig                        |  8 ++++++
->  include/bloblist.h                 |  5 ++++
->  include/fdtdec.h                   |  3 +-
->  lib/fdtdec.c                       | 44 ++++++++++++++++++++++--------
->  6 files changed, 52 insertions(+), 13 deletions(-)
-> 
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index 6f2a4577708..b07ede11cfe 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -48,9 +48,11 @@ static struct tag_name {
->  	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
->  	{ BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
->  	{ BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
-> +	{ BLOBLISTT_CONTROL_FDT, "Control FDT" },
->  
->  	/* BLOBLISTT_PROJECT_AREA */
->  	{ BLOBLISTT_U_BOOT_SPL_HANDOFF, "SPL hand-off" },
-> +	{ BLOBLISTT_VBE, "VBE" },
->  	{ BLOBLISTT_U_BOOT_VIDEO, "SPL video handoff" },
->  
->  	/* BLOBLISTT_VENDOR_AREA */
-> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-> index cbb65c9b177..56e00090166 100644
-> --- a/doc/develop/devicetree/control.rst
-> +++ b/doc/develop/devicetree/control.rst
-> @@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
->  devicetree at runtime, for example if an earlier bootloader stage creates
->  it and passes it to U-Boot.
->  
-> +If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
-> +from a previous stage.
-> +
-
-Is this bloblist in the format described in the firmware handoff [0] ?
-
-> +config OF_BLOBLIST
-> +	bool "DTB is provided by a bloblist"
-> +	help
-> +	  Select this to read the devicetree from the bloblist. This allows
-> +	  using a bloblist to transfer the devicetree between  U-Boot phases.
-> +	  The devicetree is stored in the bloblist by an early phase so that
-> +	  U-Boot can read it.
-> +
-
-I dont think this is a good idea.  We used to have 4-5 different options
-here, which we tried to clean up and ended up with two very discrete
-options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
-have a header of some sort?  The bloblist literally comes from a previous
-stage bootloader which is what OF_BOARD is here for. So why can't we just
-read the header and figure out if the magic of the bloblist matches?
-
->  config OF_BOARD
->  	bool "Provided by the board (e.g a previous loader) at runtime"
->  	default y if SANDBOX || OF_HAS_PRIOR_STAGE
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index 080cc46a126..e16d122f4fb 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -103,6 +103,11 @@ enum bloblist_tag_t {
->  	BLOBLISTT_ACPI_TABLES = 0x104,	/* ACPI tables for x86 */
->  	BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
->  	BLOBLISTT_VBOOT_CTX = 0x106,	/* Chromium OS verified boot context */
-> +	/*
+On Thu, 31 Aug 2023 at 05:50, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, 30 Aug 2023 at 01:25, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Tom
+> >
+> > On Mon, 28 Aug 2023 at 21:39, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Aug 29, 2023 at 12:04:53AM +0530, Sughosh Ganu wrote:
 
 [...]
 
-> 
-[0] https://github.com/FirmwareHandoff/firmware_handoff
+> > > >
+> > > > Please re-read the document including the last link [1]. If you go
+> > > > through that entire thread, you will notice that this is precisely
+> > > > what Linaro was trying to do here -- upstream the binding for the
+> > > > fwu-mdata node. It is only based on the feedback of the devicetree
+> > > > maintainers that this patchset was required.
+> > > >
+> > > > -sughosh
+> > > >
+> > > > [1] - https://lore.kernel.org/u-boot/CAL_JsqJN4FeHomL7z3yj0WJ9bpx1oSE7zf26L_GV2oS6cg-5qg@mail.gmail.com/#t
+> > >
+> > > Please note that this right here, that the explanation of why we need to
+> > > delete this node, not being a bright shiny visible object is one of the
+> > > big problems with this patchset and implementation. It cannot be
+> > > footnotes in email threads as to why such-and-such node/property isn't
+> > > upstream, it needs to be documented and visible in the code base /
+> > > documentation and an obvious you must do this for future cases.
+> >
+> > I thought we agreed that deleting nodes that won't be accepted
+> > upstream is the right approach since that would break the systemready
+> > 2.0 compatibility.
+>
+> Isn't that controlled by ARM/Linaros, as are the devicetree bindings?
+
+The device tree validation happens through the dt schema validation.
+You can read a bit more here [0]
+
+> What am I missing? Let's just fix the bindings so they can be
+> accepted.
+
+I can go through the mailing lists, but I am pretty sure you've been
+trying to do this for a number of years and got pushback for many of
+those bindings.  Has that changed?  Can you guarantee to all the
+vendors that all the bindings will get merged and they won't have a
+problem getting their boards certified?
+
+> What we decide here will have enormous repercussions in the
+> future. SoC vendors are watching to see whether they should bother to
+> upstream bindings or not.
+
+How is that remotely relevant to the discussion we have here?  If it's
+hardware that the OS has to use they *will* have to upstream it,
+otherwise their device won't work with upstream kernels (not that they
+care, I am just pointing it out).  If it's an internal thing they need
+to perform an X action in U-Boot and the OS has no interest in that
+property  (e.g. the driver model nodes), they can just get rid of it.
+
+>
+> >
+> > Yes, it can't be footnotes or hidden links, but this is totally
+> > different than what I am reading on this thread.
+>
+> Regards,
+> Simon
+
+[0] https://www.linaro.org/blog/tips-and-tricks-for-validating-devicetree-sources-with-the-devicetree-schema/
 
 Thanks
 /Ilias
