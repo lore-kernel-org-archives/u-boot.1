@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731D2C83F2B
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:55:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B64C83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:55:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69CD28658D;
+	by phobos.denx.de (Postfix) with ESMTP id AFE99865AB;
 	Thu, 31 Aug 2023 05:53:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gLGuxV24";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cv/B9Mp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE09A8659F; Thu, 31 Aug 2023 05:53:42 +0200 (CEST)
-Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
- [IPv6:2607:f8b0:4864:20::a2d])
+ id EB39886614; Thu, 31 Aug 2023 05:53:43 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4520486597
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:53:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A3E58657B
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:53:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-48d0ceedda1so160128e0c.3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:40 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-792409bc1cdso9213239f.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693454019; x=1694058819; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=97Ivjip78i6z+Z1ICdsur5dgttq/2kaArMPS8AYyVFs=;
- b=gLGuxV24/4SXB8ES3ROsf1Lw9P19qp73uEwFQdEsoA+um9YDAL8/WXqypadJFzuy6j
- RGmgLqCZSBoD5KynUuVRcpnGfxxmKB40TKcGrHwjDJASTVQc7ivwywgXgrqz+rFzrG/o
- O4VgMP/k+yQCDlbjk0dyFI2hbZaEO657wGq/g=
+ bh=qC3DoUISujW2GZWgoPyDi/nmWht3/MKHDdhYZT9SHb8=;
+ b=cv/B9Mp2nZyg7RmdQakIbXmDq7XtqGDJP1+OjntULAHc8fDuvOX8GPpsZipMRHtwk4
+ 5BZZ8uJrLLK+hFExY2o7uAIpW3rfA/KtFqadA4rVcPKubgXv8mc2carDls/LoAAbwjUs
+ L+jfgNg/kMWGsJq2uFhbWxGvsDU+Ni4ugHPbg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693454019; x=1694058819;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=97Ivjip78i6z+Z1ICdsur5dgttq/2kaArMPS8AYyVFs=;
- b=aC3nf79GLcWHeTFP+XzKl6IzS5tjGYPQFbj8QWmHinc5ou/G18u0oOLs0RNBPfYbZc
- NXtT3BNXwl1HOiX6THlIHhJJ0NX0Dy+D+8XmPtROkPRWJXZWIkprIUwC+A72MpGFJ3aL
- Hv0eQlgE0S+qcI60TzaqJAj2d5AsN2ob0PLE4NBrp4PGSa1rCi9iPRZ4n4AM7ArXcXFa
- wMfmDZMd5UyGIB2ORJZSWxbTZNauojwr07lSPDHClNZREfIgdBmkuUWym8qrZ1eq9V9P
- 9MhHlf7lknYp7WQeyMgbCuSBqF1cNYUVuQkBr8+FWWVeSDlYSxY9pmPa2dq0wdtD5GYY
- FxVg==
-X-Gm-Message-State: AOJu0YwtaL2YZ663u7Cahk4Fw/Et1y7sW6IGeXGq9/1RBZPkE+vkLqHX
- jNvm/CZf+vKcFxl/2JYSp8LxAIsI78T0syx8xLg=
-X-Google-Smtp-Source: AGHT+IEn98wjCk+Zb5TXIY363WdH/gEhoczdF7msORutCJRXxhlUyjj+lFL4ZKrGuGODCwFGl2ejnw==
-X-Received: by 2002:a1f:cb01:0:b0:48d:1071:efd5 with SMTP id
- b1-20020a1fcb01000000b0048d1071efd5mr3579516vkg.13.1693454018991; 
- Wed, 30 Aug 2023 20:53:38 -0700 (PDT)
+ bh=qC3DoUISujW2GZWgoPyDi/nmWht3/MKHDdhYZT9SHb8=;
+ b=VuQzGkU/nZAPoXDjfnjbw6ypR2MvdAJt8ICybpri8hGju8sMSHq/GHjqMajDpfs/1f
+ J+Rr5uOeBeP8tD1CsU+D0smjpzHkS7IxpFBtR1qhAmnnZE0v3UA9gWBQO9vu1u0GTcth
+ wwE2ifd4CJH+d25r420/CYroPpyuk/CTovFBtO52h7FmR2c7yHs+PPOhIyKf1W25SaDr
+ LZ82YztntzQummmXLy/wdelDW3DVw0EMMfYDnwEPR8OH+0nvoKQazvMdCA6V+kWrYA0E
+ x2TauEkUz+GJKlMcXTrjxUwkQsVwPxlMHFWK3XZu5Jo0kkWMqjWSWIUyWnj4GOnV+te+
+ FOTg==
+X-Gm-Message-State: AOJu0YyFKTD3ZkxmiklKHb26u55Z7AAQteuMtFCEd9BWuPtI76zdc7tW
+ JmqhwHflCq/ss0p8WNQukL7+NeMp6MPAY8qTYmI=
+X-Google-Smtp-Source: AGHT+IGN5ZnY7wFs81dQQuCR6lWcUGxjvZYayhKZ3ef2NM4xYMJZ7KP2aR8p8KlVNL4wOxfCioaHfQ==
+X-Received: by 2002:a5e:9910:0:b0:792:1b70:b344 with SMTP id
+ t16-20020a5e9910000000b007921b70b344mr1305169ioj.1.1693454019765; 
+ Wed, 30 Aug 2023 20:53:39 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- dy47-20020a0566381d6f00b0042036f06b24sm160002jab.163.2023.08.30.20.53.38
+ dy47-20020a0566381d6f00b0042036f06b24sm160002jab.163.2023.08.30.20.53.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 20:53:38 -0700 (PDT)
+ Wed, 30 Aug 2023 20:53:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 11/19] boot: Rename Android-boot text
-Date: Wed, 30 Aug 2023 21:53:05 -0600
-Message-ID: <20230831035319.2316665-12-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>
+Subject: [PATCH v2 12/19] Kconfig: Create a menu for FIT
+Date: Wed, 30 Aug 2023 21:53:06 -0600
+Message-ID: <20230831035319.2316665-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230831035319.2316665-1-sjg@chromium.org>
 References: <20230831035319.2316665-1-sjg@chromium.org>
@@ -88,30 +89,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Phrases like 'Enable support for' are pointless since this is an option
-which enables things. Drop that part so it is easier to follow.
+This is a major feature with a lot of options. Give it its own menu to
+tidy up the 'make menuconfig' display. Drop the 'depends on FIT' pieces
+which are now unnecessary, since they are now bracketed by an 'if FIT'.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ boot/Kconfig | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 70cbcc38fdd4..f603a64a23de 100644
+index f603a64a23de..467bca706782 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -3,7 +3,7 @@ menu "Boot options"
- menu "Boot images"
- 
- config ANDROID_BOOT_IMAGE
--	bool "Enable support for Android Boot Images"
-+	bool "Android Boot Images"
- 	default y if FASTBOOT
- 	help
+@@ -9,8 +9,8 @@ config ANDROID_BOOT_IMAGE
  	  This enables support for booting images which use the Android
+ 	  image format header.
+ 
+-config FIT
+-	bool "Support Flattened Image Tree"
++menuconfig FIT
++	bool "Flattened Image Tree (FIT)"
+ 	select HASH
+ 	select MD5
+ 	select SHA1
+@@ -25,6 +25,8 @@ config FIT
+ 	  multiple configurations, verification through hashing and also
+ 	  verified boot (secure boot using RSA).
+ 
++if FIT
++
+ config TIMESTAMP
+ 	bool "Show image date and time when displaying image information"
+ 	default y if CMD_DATE
+@@ -38,7 +40,6 @@ config TIMESTAMP
+ 
+ config FIT_EXTERNAL_OFFSET
+ 	hex "FIT external data offset"
+-	depends on FIT
+ 	default 0x0
+ 	help
+ 	  This specifies a data offset in fit image.
+@@ -49,7 +50,6 @@ config FIT_EXTERNAL_OFFSET
+ 
+ config FIT_FULL_CHECK
+ 	bool "Do a full check of the FIT before using it"
+-	depends on FIT
+ 	default y
+ 	help
+ 	  Enable this do a full check of the FIT to make sure it is valid. This
+@@ -59,7 +59,7 @@ config FIT_FULL_CHECK
+ 
+ config FIT_SIGNATURE
+ 	bool "Enable signature verification of FIT uImages"
+-	depends on DM && FIT
++	depends on DM
+ 	select HASH
+ 	imply RSA
+ 	imply RSA_VERIFY
+@@ -97,7 +97,7 @@ config FIT_RSASSA_PSS
+ 
+ config FIT_CIPHER
+ 	bool "Enable ciphering data in a FIT uImages"
+-	depends on DM && FIT
++	depends on DM
+ 	select AES
+ 	help
+ 	  Enable the feature of data ciphering/unciphering in the tool mkimage
+@@ -105,7 +105,6 @@ config FIT_CIPHER
+ 
+ config FIT_VERBOSE
+ 	bool "Show verbose messages when FIT images fail"
+-	depends on FIT
+ 	help
+ 	  Generally a system will have valid FIT images so debug messages
+ 	  are a waste of code space. If you are debugging your images then
+@@ -114,7 +113,6 @@ config FIT_VERBOSE
+ 
+ config FIT_BEST_MATCH
+ 	bool "Select the best match for the kernel device tree"
+-	depends on FIT
+ 	help
+ 	  When no configuration is explicitly selected, default to the
+ 	  one whose fdt's compatibility field best matches that of
+@@ -124,7 +122,6 @@ config FIT_BEST_MATCH
+ 
+ config FIT_IMAGE_POST_PROCESS
+ 	bool "Enable post-processing of FIT artifacts after loading by U-Boot"
+-	depends on FIT
+ 	depends on SOCFPGA_SECURE_VAB_AUTH
+ 	help
+ 	  Allows doing any sort of manipulation to blobs after they got extracted
+@@ -139,11 +136,12 @@ config FIT_IMAGE_POST_PROCESS
+ 
+ config FIT_PRINT
+         bool "Support FIT printing"
+-	depends on FIT
+         default y
+         help
+           Support printing the content of the fitImage in a verbose manner.
+ 
++endif # FIT
++
+ config SPL_FIT
+ 	bool "Support Flattened Image Tree within SPL"
+ 	depends on SPL && FIT
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
