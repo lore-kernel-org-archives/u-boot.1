@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70323C88CB2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 22:17:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E083EE49B2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 22:17:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 470AE86763;
-	Fri,  1 Sep 2023 00:16:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9135C86680;
+	Fri,  1 Sep 2023 00:16:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="dDBfZvDM";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="MZHMONRg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37E65865B0; Fri,  1 Sep 2023 00:16:39 +0200 (CEST)
+ id 7F2CF867B6; Fri,  1 Sep 2023 00:16:41 +0200 (CEST)
 Received: from s.wfbtzhsv.outbound-mail.sendgrid.net
  (s.wfbtzhsv.outbound-mail.sendgrid.net [159.183.224.104])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55DA68659F
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 00:16:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EA87866D4
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 00:16:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -29,35 +29,34 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=from:subject:in-reply-to:references:mime-version:to:cc:
  content-transfer-encoding:content-type:cc:content-type:from:subject:to;
- s=s1; bh=/y8jN5PN+FHjc9rjFKOb/YS3RfO/kOROs6xa/HHGpOo=;
- b=dDBfZvDMO6zN+lT3MOOyu9vNuVfGcCbRQA70XjcGE6xkUuhuLuIODNSryZR3GpgiSd9Z
- 6ucvwgJ/UYc2ED25pic4NNFYnWiVP1JZ+hehAk06mPoT+WV/V8u14f6zle5Vcm0kcoGhgf
- GKt/pfC7XT4yD9m3VCb8Sp5TQDmbq/GYy2mmnzS09VmG243ZjBMnsCXNiFFgiNvSC0SOOo
- sJP1ey/ZOmFa6wa8v+FvqhZ0WPljufSbC4XkBUFhZ8jrRGQhOcPiazTTSlc7qIkU0xNTAD
- RdEftLIb2+aV05qlfNKRh+1xIP0JH8sknvCx7E36TUVUbdEPKSF+UDpG1uVZznOw==
-Received: by filterdrecv-7765c6879f-sjjbz with SMTP id
- filterdrecv-7765c6879f-sjjbz-1-64F11142-28
- 2023-08-31 22:16:34.824854964 +0000 UTC m=+1839260.597120902
+ s=s1; bh=6BHmK/W9pUdXGeyJS/palVX5ectVQQz0hJaBSnRbj48=;
+ b=MZHMONRgnyfOr42aSeSJcjdnrfxjTPIDMVZyKrXLRWRGGQQW3kjGz6VJuz+tpVUfx6sZ
+ vDEkaZPxraidSsT/G3NwyW0v3fFwEFljryM06cc2i2+L45ujJGCvSfU8MSMbDa0ACJF4mR
+ ITrOhsOwjcWAxB0Y9YLBjuj2x3kvgKsyY9xlbvtF52m0L/9VMyk6m1RNRH4xRZYAg9ZwIK
+ auoOT26jlTgnIJrlq1qtbTcWz/Xps3G0n80dvzFP6gPn5+Xl12WS+BUuZFX/v5Us690pHK
+ iNH0MU1z8qYQpkCkiZdhP2dqHMeM5SzkGcPK2v6gV3ZBjVyyzi4C0iueVo8XayfA==
+Received: by filterdrecv-7765c6879f-kx8nr with SMTP id
+ filterdrecv-7765c6879f-kx8nr-1-64F11143-2C
+ 2023-08-31 22:16:36.011821799 +0000 UTC m=+1839260.555387837
 Received: from bionic.localdomain (unknown) by geopod-ismtpd-5 (SG) with ESMTP
- id 6TwLGVw0TJ-4AqfOSWbtnA Thu, 31 Aug 2023 22:16:34.592 +0000 (UTC)
+ id CwQmS9dNRKOgkCDQuYlFag Thu, 31 Aug 2023 22:16:35.781 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 2/6] phy: Set phy->dev to NULL when
- generic_phy_get_by_index_nodev() fails
-Date: Thu, 31 Aug 2023 22:16:35 +0000 (UTC)
-Message-ID: <20230831221629.1027552-3-jonas@kwiboo.se>
+Subject: [PATCH 3/6] usb: dwc3: Use generic_phy_valid() helper
+Date: Thu, 31 Aug 2023 22:16:36 +0000 (UTC)
+Message-ID: <20230831221629.1027552-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20230831221629.1027552-1-jonas@kwiboo.se>
 References: <20230831221629.1027552-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h50tdBjTBCRbgetR8?=
- =?us-ascii?Q?nBFMjVUCL1wzQWsRY2MTx2YEcUWEFJEEnKrjfNl?=
- =?us-ascii?Q?gKJllBf6QAxlMyIR95jBd32gwNbM=2FkUdNHWxTsG?=
- =?us-ascii?Q?JhbTVCI0mB7igYWsCqG+qvQnpOrF43R8XkuoIr9?=
- =?us-ascii?Q?KUgWl=2F2UXK645Kgpf6Z0+G+RuVRTnCN3xW0eGs?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h16m=2Fe1lcIXrFZuo1?=
+ =?us-ascii?Q?HlFbXffLtJbfcIrAr5VA5aD3rM4uEwr0oBOU+u5?=
+ =?us-ascii?Q?HpqcFO9e8EPNtozlfL47VoQmcIyGFITtSZBPIAx?=
+ =?us-ascii?Q?IMbmQPvk4RGwiBZ+RsAaPjnLGoVfqYzzg+I4FyL?=
+ =?us-ascii?Q?hwFx+pd6h2Jb6bef=2FhlMKK5qZTd+ODb8XPhbVS?=
 To: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Jean-Jacques Hiblot
- <jjhiblot@ti.com>
+ Patrice Chotard <patrice.chotard@foss.st.com>, Michal Simek
+ <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
 Content-Transfer-Encoding: 7bit
@@ -78,98 +77,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Generic phy helpers typically use generic_phy_valid() to determine if
-the helper should perform its function on a passed struct phy.
-generic_phy_valid() treat any struct phy having phy->dev set as valid.
+The documentation for struct phy state that "The content of the
+structure is managed solely by the PHY API and PHY drivers".
 
-With generic_phy_get_by_index_nodev() setting phy->dev to a valid struct
-udevice early, there can be situations where the struct phy is returned
-as valid when initialization in fact failed and returned an error.
+Change to use the generic_phy_valid() helper to check if phy is valid.
+Also remove setting phy->dev to NULL now that generic_phy_get_by_name()
+properly initialize phy->dev to NULL.
 
-Fix this by setting phy->dev back to NULL when any of the calls to
-of_xlate ops, device_get_supply_regulator or phy_alloc_counts fail. Also
-extend the dm_test_phy_base test with a test where of_xlate ops fail.
-
-Fixes: 72e5016f878d ("drivers: phy: add generic PHY framework")
-Fixes: b9688df3cbf4 ("drivers: phy: Set phy->dev to NULL when generic_phy_get_by_index() fails")
+Fixes: 142d50fbce7c ("usb: dwc3: Add support for usb3-phy PHY configuration")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/sandbox/dts/test.dts | 11 +++++++++++
- drivers/phy/phy-uclass.c  |  1 +
- test/dm/phy.c             | 12 +++++++++++-
- 3 files changed, 23 insertions(+), 1 deletion(-)
+ drivers/usb/dwc3/dwc3-generic.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index f351d5cb84b0..6be212403473 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -431,6 +431,11 @@
- 		#phy-cells = <0>;
- 	};
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index 7f0af05855ab..3997b9dbff43 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -541,8 +541,6 @@ int dwc3_glue_probe(struct udevice *dev)
+ 	} else if (ret != -ENOENT && ret != -ENODATA) {
+ 		debug("could not get phy (err %d)\n", ret);
+ 		return ret;
+-	} else {
+-		phy.dev = NULL;
+ 	}
  
-+	phy_provider3: gen_phy@3 {
-+		compatible = "sandbox,phy";
-+		#phy-cells = <2>;
-+	};
-+
- 	gen_phy_user: gen_phy_user {
- 		compatible = "simple-bus";
- 		phys = <&phy_provider0 0>, <&phy_provider0 1>, <&phy_provider1>;
-@@ -443,6 +448,12 @@
- 		phy-names = "phy1", "phy2";
- 	};
+ 	glue->regs = dev_read_addr_size_index(dev, 0, &glue->size);
+@@ -555,7 +553,7 @@ int dwc3_glue_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
  
-+	gen_phy_user2: gen_phy_user2 {
-+		compatible = "simple-bus";
-+		phys = <&phy_provider3 0 0>;
-+		phy-names = "phy1";
-+	};
-+
- 	some-bus {
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
-index 0baf314a3471..7d707c022934 100644
---- a/drivers/phy/phy-uclass.c
-+++ b/drivers/phy/phy-uclass.c
-@@ -195,6 +195,7 @@ int generic_phy_get_by_index_nodev(ofnode node, int index, struct phy *phy)
- 	return 0;
- 
- err:
-+	phy->dev = NULL;
- 	return ret;
- }
- 
-diff --git a/test/dm/phy.c b/test/dm/phy.c
-index 09329b9f71f6..2abd27b22d6d 100644
---- a/test/dm/phy.c
-+++ b/test/dm/phy.c
-@@ -49,7 +49,7 @@ static int dm_test_phy_base(struct unit_test_state *uts)
- 	ut_assert(phy2.dev != phy3.dev);
- 
- 	/* Try to get a non-existing phy */
--	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_PHY, 4, &dev));
-+	ut_asserteq(-ENODEV, uclass_get_device(UCLASS_PHY, 5, &dev));
- 	ut_asserteq(-ENODATA, generic_phy_get_by_name(parent,
- 					"phy_not_existing", &phy1_method1));
- 	ut_assert(!generic_phy_valid(&phy1_method1));
-@@ -57,6 +57,16 @@ static int dm_test_phy_base(struct unit_test_state *uts)
- 						      &phy1_method2));
- 	ut_assert(!generic_phy_valid(&phy1_method2));
- 
-+	/* Try to get a phy where of_xlate fail */
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SIMPLE_BUS,
-+					      "gen_phy_user2", &parent));
-+	ut_asserteq(-EINVAL, generic_phy_get_by_name(parent, "phy1",
-+						     &phy1_method1));
-+	ut_assert(!generic_phy_valid(&phy1_method1));
-+	ut_asserteq(-EINVAL, generic_phy_get_by_index(parent, 0,
-+						      &phy1_method2));
-+	ut_assert(!generic_phy_valid(&phy1_method2));
-+
- 	return 0;
- }
- DM_TEST(dm_test_phy_base, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+-	if (phy.dev) {
++	if (generic_phy_valid(&phy)) {
+ 		ret = generic_phy_power_on(&phy);
+ 		if (ret)
+ 			return ret;
 -- 
 2.42.0
 
