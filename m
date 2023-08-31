@@ -4,75 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCB0C83F2B
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF01DC83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DACC286554;
-	Thu, 31 Aug 2023 05:38:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC28486550;
+	Thu, 31 Aug 2023 05:49:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QwvdLHe7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LL0EmMLd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D30986567; Thu, 31 Aug 2023 05:38:21 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id ACE6D86550; Thu, 31 Aug 2023 05:49:03 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 754CB86550
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:38:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F29148654A
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:49:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-500c37d479aso790169e87.2
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:38:18 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-522bd411679so388973a12.0
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:49:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693453098; x=1694057898; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693453740; x=1694058540; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=o7aH3etJoNj11J8MEJUkN8gGuf1qoU7XUzpttRWuiZQ=;
- b=QwvdLHe7VELwPoqshmfaF5vleAa/gc2ZJuYT7SRzdXfgLmaTkrPXAJPHUrAcMOncUt
- 9ZqYrt97SjqN6KdnSHq4MR2OOquXF+ktUIUGPb99WHYOSIQq/smFAYkAEhYLXixnf+WF
- HQGMS/U8+MbgifgamVVrJr/MW89Hk6fOLfMt4=
+ bh=id0AfkcoSatLa3jYeNCeKn9xELm1T537pxRveibXe9k=;
+ b=LL0EmMLdPynJrtFST6PN9S0JDWNZwX8YKm0wIERJXV9n3NFrs/G1dSgEIG2pSajUNY
+ 62cp3uiNxHeFmryx0qiMSj+9Mw5RRMHV1DpCFuDK55IQpjYVPXDo1O6wWf/c/kg+0emj
+ zFUFk9NKexp2rMtCmwM6c+074+96yYmhFu/uI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693453098; x=1694057898;
+ d=1e100.net; s=20221208; t=1693453740; x=1694058540;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=o7aH3etJoNj11J8MEJUkN8gGuf1qoU7XUzpttRWuiZQ=;
- b=U5CBfOOSXdYMtYISd1RWUiBX0tI6cIifIOpG7I0u7paaDfllRgZDEPic2xOLNFevdP
- qeCt4qc/y7aa3apXlt8LdvXTW8W0PncAQ76csaTyvcIrk3AfJ9XSG9/BK74114m6GZ2g
- RXsc/qXM77JYq50GzfmjiYCd9Ouwmqa5KsToqRVobBwm7nLbOwPa6WGCzsJAJPa4IsHO
- SgGc68gT5avAecA0sj3tj+/AmpTDik9mz0717KeDK7JYhTMvIJzmrQem0oIJW2X1hFQI
- VVtRS1ljFX7NAuGIk3iEKug/1e8XkQrobasTd5hVL+CbmmvcpSKpr9RkgAK9qmu6Qfta
- /fjA==
-X-Gm-Message-State: AOJu0YzA4Z+Kx47ulo2moNU18jAlqHojT+tg+sfPXnUHkzany3OHdECh
- vZY4kbeC4+s+tvuMcnCXuvi4avFcdDg+7QStVRr5JA==
-X-Google-Smtp-Source: AGHT+IGzcTRojVh+KwqUSk68tzb2Iu2y98X2LQFaMpv2xvrALli55z9EJO1g11UFqQy/uT4g3AAi1Ko9YyAmW83NBLw=
-X-Received: by 2002:a05:6512:398e:b0:4f8:62a6:8b2 with SMTP id
- j14-20020a056512398e00b004f862a608b2mr2990330lfu.46.1693453097581; Wed, 30
- Aug 2023 20:38:17 -0700 (PDT)
+ bh=id0AfkcoSatLa3jYeNCeKn9xELm1T537pxRveibXe9k=;
+ b=NVB/2NObNHUm+RST06n3niLmRawF8ObylTmCKeGVCao4ex+qdlMD5Kk/a8vUIbx4SN
+ 1GnDeX0u8cRIDDn/LEgoO4evtRQVGrNNO5uWSeU1dMgqhOrWNSyhNwutfoOmFDNHu49t
+ ftJXMcWvHVUGQZRVROu5OpPt6VHRF4M0Q7JNdSp8/gyNQ/4cNrKXGlxOlaQrEF9bbA9c
+ AXqG2Z5rlzIJTM5QEyjdLOzKFhyo9aO3CciFQArk8fGO7SdbQmwfkVKe7s+mZW6tVpQP
+ 4CAqoGKYjJGfj6ER07K5WHjmX1KBXhMC7ztGdvlcIyRyc90TzCaot+pIJytlIWk2rYV5
+ DHGg==
+X-Gm-Message-State: AOJu0YzOJVnAAcltuOVMuzUrT/8mIh3ZAiDfVPqluBdsyEe5RUJUXwIb
+ 7KGKc6qzjcw8Y++WjvHZiu1qbngbDfdnVi0C1Heupj7kFNDFaV2WA+0jsA==
+X-Google-Smtp-Source: AGHT+IGPixkNZrnip2A5/jOir8S2LF0MMPOjkenPA+ZjaAEb7n7y5TniGv86ivhxfTmoNuaMt/BvYVoHeAMbTldFF4M=
+X-Received: by 2002:aa7:de0e:0:b0:52a:40cf:4dff with SMTP id
+ h14-20020aa7de0e000000b0052a40cf4dffmr3089785edv.9.1693453740208; Wed, 30 Aug
+ 2023 20:49:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
- <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
- <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
- <CALeDE9NUZ5vUzMrZgTcYtNR9dXyWEsZ+6zXNTFuFSvfL4XoM8Q@mail.gmail.com>
- <CAPnjgZ2zVcwfm1=+ce_J89sMEFQR6HsTwe-X31ZqjbWrNkxcYQ@mail.gmail.com>
- <CALeDE9PbgPVWDCH0VMN8ftJ55VvkgksHUxNwoOK1ksCOJpNN=w@mail.gmail.com>
-In-Reply-To: <CALeDE9PbgPVWDCH0VMN8ftJ55VvkgksHUxNwoOK1ksCOJpNN=w@mail.gmail.com>
+References: <20230823014947.20876-1-takahiro.akashi@linaro.org>
+In-Reply-To: <20230823014947.20876-1-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Aug 2023 21:38:05 -0600
-Message-ID: <CAPnjgZ3x8OgnnPWYndRvRpYB+5JTfrSEsA_i3aXiri2eh-nonA@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 30 Aug 2023 21:48:48 -0600
+Message-ID: <CAPnjgZ3XKONQXhcjU0sU=3GNx8D4VjVUhSQ5de0dsVFt1bb54w@mail.gmail.com>
+Subject: Re: [PATCH v2] cmd: dm: allow for selecting uclass and device
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,98 +80,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Hi AKASHI,
 
-On Wed, 30 Aug 2023 at 02:19, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Tue, 22 Aug 2023 at 19:50, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> > > > > > I have started the process to upstream the binman bindings.
-> > > > >
-> > > > > I don't think they should be in DT at all, they don't describe
-> > > > > anything to do with hardware, or generally even the runtime of a
-> > > > > device, they don't even describe the boot/runtime state of the
-> > > > > firmware, they describe build time, so I don't see what that has to do
-> > > > > with device tree? Can you explain that? To me those sorts of things
-> > > > > should live in a build time style config file.
-> > > >
-> > > > I beg to differ. Devicetree is more than just hardware and always has
-> > > > been. See, for example the /chosen and /options nodes.
-> > >
-> > > Can you give me an example of "options" as grep doesn't give me a
-> > > single one in the kernel tree? I think we can just agree to disagree
-> > > here.
-> >
-> > See here: https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/options/u-boot.yaml
+> The output from "dm tree" or "dm uclass" is a bit annoying
+> if the number of devices available on the system is huge.
+> (This is especially true on sandbox when I debug some DM code.)
 >
-> All of those options look to me like they would work just fine in a
-> .env file like you've added board/raspberrypi/rpi/rpi.env
-
-But that is built into U-Boot. How can it be controlled by another
-previous progress in the firmware stack?
-
+> With this patch, we can specify the uclass name or the device
+> name that we are interested in in order to limit the output.
 >
-> > I don't mind disagreeing, so long as it doesn't result in any
-> > restrictions on using devicetree in firmware. But it is very important
-> > to the success of firmware that we can make full use of the
-> > devicetree.
+> For instance,
 >
-> That statement doesn't make sense, of course the firmware makes full
-> use of the DT because it needs it to instantiate the HW. You don't
-> actually answer my question though.
+> => dm uclass usb
+> uclass 121: usb
+> 0     usb@1 @ 0bcff8b0, seq 1
+>
+> uclass 124: usb
+>
+> => dm tree usb:usb@1
+>  Class     Index  Probed  Driver                Name
+> -----------------------------------------------------------
+>  usb           0  [   ]   usb_sandbox           usb@1
+>  usb_hub       0  [   ]   usb_hub               `-- hub
+>  usb_emul      0  [   ]   usb_sandbox_hub           `-- hub-emul
+>  usb_emul      1  [   ]   usb_sandbox_flash             |-- flash-stick@0
+>  usb_emul      2  [   ]   usb_sandbox_flash             |-- flash-stick@1
+>  usb_emul      3  [   ]   usb_sandbox_flash             |-- flash-stick@2
+>  usb_emul      4  [   ]   usb_sandbox_keyb              `-- keyb@3
+>
+> If you want forward-matching against a uclass or udevice name,
+> you can specify "-e" option.
 
-I think I tried to answer your question but we are not on the same
-page. Please don't say that DT is just for hardware, since that is a
-sore point with me. It helf back U-Boot for many years, to no useful
-purpose.
+I don't really know what 'forward matching' means.
 
-Perhaps you could restate the question?
-
-Also, why are you trying to keep things out of the DT?
+Please use forward instead of forword in the code
 
 >
-> > > > We need run-time configuration here, since we cannot know at build
-> > > > time what we will be asked to do by a previous firmware phase.
-> > >
-> > > Can you provide an example as to how that is used during runtime? Do
-> > > you mean runtime during the build process or runtime on the device?
-> >
-> > I mean runtime on the device. An example is that we might want to
-> > control whether the serial UART is enabled, without having to rebuild
-> > each program in the firmware stack.
+> => dm uclass -e usb
+> uclass 15: usb_emul
+> 0     hub-emul @ 0bcffb00, seq 0
+> 1     flash-stick@0 @ 0bcffc30, seq 1
+> 2     flash-stick@1 @ 0bcffdc0, seq 2
+> 3     flash-stick@2 @ 0bcfff50, seq 3
+> 4     keyb@3 @ 0bd000e0, seq 4
 >
-> That is describing the HW though, such as whether a serial port is
-> enabled or not, it's not how the binman pieces you're adding to DT are
-> used during runtime which is the question I was asking.
+> uclass 64: usb_mass_storage
+>
+> uclass 121: usb
+> 0     usb@1 @ 0bcff8b0, seq 1
+>
+> uclass 122: usb_dev_generic
+>
+> uclass 123: usb_hub
+> 0     hub @ 0bcff9b0, seq 0
+>
+> uclass 124: usb
+>
+> => dm tree -e usb
+>  Class     Index  Probed  Driver                Name
+> -----------------------------------------------------------
+>  usb           0  [   ]   usb_sandbox           usb@1
+>  usb_hub       0  [   ]   usb_hub               `-- hub
+>  usb_emul      0  [   ]   usb_sandbox_hub           `-- hub-emul
+>  usb_emul      1  [   ]   usb_sandbox_flash             |-- flash-stick@0
+>  usb_emul      2  [   ]   usb_sandbox_flash             |-- flash-stick@1
+>  usb_emul      3  [   ]   usb_sandbox_flash             |-- flash-stick@2
+>  usb_emul      4  [   ]   usb_sandbox_keyb              `-- keyb@3
+>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+> v2
+> - allow for forward-matching against the name
+> - update command doc
+> ---
+>  cmd/dm.c             |  48 ++++++++++++++----
+>  doc/usage/cmd/dm.rst |  30 ++++++++++-
+>  drivers/core/dump.c  | 116 ++++++++++++++++++++++++++++++++-----------
+>  include/dm/util.h    |  15 ++++--
+>  4 files changed, 165 insertions(+), 44 deletions(-)
 
-There is:
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-1. whether the serial device is enabled in the DT
-2. whether it emits character or not
+Thanks for doing this. It will be a big time-saver. I also wonder if
+it would be better if the default were to do a substring search and
+you have to add a flag to search for a single device?
 
-Often we always want 1, in case we need to emit something. But for 2
-we want to control it with a global setting that applies to all
-programs in the firmware flow.
-
-Another example would be a framebuffer address, where we want to
-provide it in the DT so that all programs can use the same one.
-
+See below
 
 >
-> > >
-> > > > >
-> > > > > > Perhaps we should use the issue tracker[1] to follow progress on all
-> > > > > > of this. We need to clean it up.
-> > > > > >
-> > > > > > >
-> > > > > > > > Instead of this, how about working on bringing the DT validation into
-> > > > > > > > U-Boot so we can see what state things are in?
-> > > > > > > >
-> > > > > > > > Please send the bindings for Linaro's recent series (which I suspect
-> > > > > > > > are motivating this series) so we can start the process.
-> > > > > >
-> > > > > > Regards,
-> > > > > > Simon
-> > > > > >
-> > > > > > [1] https://source.denx.de/u-boot/u-boot/-/issues
+> diff --git a/cmd/dm.c b/cmd/dm.c
+> index 3263547cbec6..1aa86aab9c1c 100644
+> --- a/cmd/dm.c
+> +++ b/cmd/dm.c
+> @@ -59,11 +59,26 @@ static int do_dm_dump_static_driver_info(struct cmd_tbl *cmdtp, int flag,
+>  static int do_dm_dump_tree(struct cmd_tbl *cmdtp, int flag, int argc,
+>                            char *const argv[])
+>  {
+> -       bool sort;
+> -
+> -       sort = argc > 1 && !strcmp(argv[1], "-s");
+> -
+> -       dm_dump_tree(sort);
+> +       bool extended = false, sort = false;
+> +       char *device = NULL;
+> +
+> +       for (; argc > 1; argc--, argv++) {
+> +               if (argv[1][0] != '-')
+> +                       break;
+> +
+> +               if (!strcmp(argv[1], "-e")) {
+> +                       extended = true;
+> +               } else if (!strcmp(argv[1], "-s")) {
+> +                       sort = true;
+> +               } else {
+> +                       printf("Unknown parameter: %s\n", argv[1]);
+> +                       return 0;
+> +               }
+> +       }
+> +       if (argc > 1)
+> +               device = argv[1];
+> +
+> +       dm_dump_tree(device, extended, sort);
+>
+>         return 0;
+>  }
+> @@ -71,7 +86,20 @@ static int do_dm_dump_tree(struct cmd_tbl *cmdtp, int flag, int argc,
+>  static int do_dm_dump_uclass(struct cmd_tbl *cmdtp, int flag, int argc,
+>                              char *const argv[])
+>  {
+> -       dm_dump_uclass();
+> +       bool extended = false;
+> +       char *uclass = NULL;
+> +
+> +       if (argc > 1) {
+> +               if (!strcmp(argv[1], "-e")) {
+> +                       extended = true;
+> +                       argc--;
+> +                       argv++;
+> +               }
+> +               if (argc > 1)
+> +                       uclass = argv[1];
+> +       }
+> +
+> +       dm_dump_uclass(uclass, extended);
+>
+>         return 0;
+>  }
+> @@ -91,8 +119,8 @@ static char dm_help_text[] =
+>         "dm drivers       Dump list of drivers with uclass and instances\n"
+>         DM_MEM_HELP
+>         "dm static        Dump list of drivers with static platform data\n"
+> -       "dm tree [-s]     Dump tree of driver model devices (-s=sort)\n"
+> -       "dm uclass        Dump list of instances for each uclass"
+> +       "dm tree [-s][-e][name]   Dump tree of driver model devices (-s=sort)\n"
+> +       "dm uclass [-e][name]     Dump list of instances for each uclass"
+>         ;
+>  #endif
+>
+> @@ -102,5 +130,5 @@ U_BOOT_CMD_WITH_SUBCMDS(dm, "Driver model low level access", dm_help_text,
+>         U_BOOT_SUBCMD_MKENT(drivers, 1, 1, do_dm_dump_drivers),
+>         DM_MEM
+>         U_BOOT_SUBCMD_MKENT(static, 1, 1, do_dm_dump_static_driver_info),
+> -       U_BOOT_SUBCMD_MKENT(tree, 2, 1, do_dm_dump_tree),
+> -       U_BOOT_SUBCMD_MKENT(uclass, 1, 1, do_dm_dump_uclass));
+> +       U_BOOT_SUBCMD_MKENT(tree, 4, 1, do_dm_dump_tree),
+> +       U_BOOT_SUBCMD_MKENT(uclass, 3, 1, do_dm_dump_uclass));
+> diff --git a/doc/usage/cmd/dm.rst b/doc/usage/cmd/dm.rst
+> index 74c6b01e3619..12b7edeed685 100644
+> --- a/doc/usage/cmd/dm.rst
+> +++ b/doc/usage/cmd/dm.rst
+> @@ -12,8 +12,8 @@ Synopis
+>      dm devres
+>      dm drivers
+>      dm static
+> -    dm tree [-s]
+> -    dm uclass
+> +    dm tree [-s][-e] [uclass name]
+> +    dm uclass [-e] [udevice name]
+>
+>  Description
+>  -----------
+> @@ -127,6 +127,12 @@ If -s is given, the top-level devices (those which are children of the root
+>  device) are shown sorted in order of uclass ID, so it is easier to find a
+>  particular device type.
+>
+> +If -e is given, forward-matching against existing devices is
+> +made and only the matched devices are shown.
+
+I don't understand this...can you expand it a bit so it is clear what
+-e does and what forward-matching is?
+
+> +
+> +If a device name is given, forward-matching against existing devices is
+> +made and only the matched devices are shown.
+> +
+>  dm uclass
+>  ~~~~~~~~~
 
 Regards,
 Simon
