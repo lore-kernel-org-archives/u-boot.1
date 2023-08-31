@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F78C83F21
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F904C83F22
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4EDE86586;
-	Thu, 31 Aug 2023 04:50:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 047ED86590;
+	Thu, 31 Aug 2023 04:50:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AEqctE1U";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DFawZ2t+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2AE486582; Thu, 31 Aug 2023 04:50:06 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 12F0D86574; Thu, 31 Aug 2023 04:50:07 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E19AD86574
+ by phobos.denx.de (Postfix) with ESMTPS id 99C248656D
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 04:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-4fe15bfb1adso798131e87.0
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-52713d2c606so315737a12.2
  for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 19:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693450199; x=1694054999; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U5DBtCPLaO97kfjCvKTMOwQc3T925PoJC5ExntPTne4=;
- b=AEqctE1UWcvk2wBxvU+O8KF3hevBQi9ffqGOgsJdB30rPfDXAG1b6y8QdYyAKkt7X9
- fF680FBPf45MYjwwQnDrklHXQrZIo3YO+MXE2faKkB9ADhY4z3bc024loqu1x3Nd1PBd
- hOKdSy/Q2zoZPSRi4OLCEntaGYaSXDIej9AuI=
+ bh=ook8ElrWmKLeBEfl/Ro8x+KywwVGBZOiZZFllxd9y+M=;
+ b=DFawZ2t+XjtLs1Chf6vxd21sQOBlOnd2MLo5z0WCdpbB39bQpJ3CkeYi6p+xyTS8ZL
+ mlTQyUCRcogxWgVzzcjpEdF4e+zOS7UveYGBqi/rn/AB8xvyQAG1lHoz/km7mR5P/BHS
+ ABOuJrNDZ5NfXpp605ZsE3e7k7sAPobmQUyww=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693450199; x=1694054999;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=U5DBtCPLaO97kfjCvKTMOwQc3T925PoJC5ExntPTne4=;
- b=Nqp59ZWWYdAW70MFraJt49D2MkDGhgdcy9m5gCzJQN+6zH5ukKAx04CDEtpvgpg/Hi
- +EKFaeq5tKDYl2ncKMoquAFFWvuFTDPFS6PZV3UBtTaDgtKbWAOXTdLGK+9Jaeqb9HQA
- SUeCYT1tmaBFpgIxUczBjhzX/suWe/T70cjFgdPkqOdPwp8gGlh3GSmlLaj8CZC90v2D
- JvIfJWU/dqjbTy4lwPrLugGCd5kPQGF0oSo0lAaiDOnu5P653rXBQF5XApAzZciFja7M
- oS2ceyKvCUiI+qGZdb/ePQ1sWdHPs79nVISfVNAx0QXReeCpS8RnmDOSuOITs0ENbqGy
- SCGQ==
-X-Gm-Message-State: AOJu0Yx22Cwt7L5o5IzIid3JCK9GPH9Dvf+bmwU4UYBKgXZE2eEkTUK/
- dtNshoq52gJSG/MZw3jK382I6Dh1PhinIyDZZzDyUA==
-X-Google-Smtp-Source: AGHT+IFbxue/jZSPI01w2oR3Jz4LbZ6cPvB9uwxqt8UZsvoj2JkqwfCWN9FC+GxN9Y5YbQDO7v0C8HtqTGNH3X8+VWQ=
-X-Received: by 2002:a05:6512:3b9c:b0:4fe:5a4b:911d with SMTP id
- g28-20020a0565123b9c00b004fe5a4b911dmr3647975lfv.64.1693450198954; Wed, 30
+ bh=ook8ElrWmKLeBEfl/Ro8x+KywwVGBZOiZZFllxd9y+M=;
+ b=aK0byeq1W8DIWIA/wv015vJABvhXUpAwTy4p7UnAEe5uxxh2Ipzk82cdE2fmKm3nFa
+ RYfassYY14L9PByZc26y3MnMB43r64No3SYz7Ui7Yt8jJ8Eq1m9gmzju5CJnBI6XQDGT
+ 9x4CRKUYcuzaH0Y/8j+1wlYNPm6VZIsdVzqIFfQfLltL4SyZpYdAmcwy4tcljJ3lROkU
+ bKKZ1cy2XdkdOSdpgygNADtKgmR4l36f0SoM9gKbADzOZN1UPBaiVHUZaUoGFTiJOcUh
+ T4vwaa01GGLxaccybbOMiJ5wn66gIe6kAUwdrPu7aUYVCY62NDUMs0MC3/TCUdCWsW14
+ vGOQ==
+X-Gm-Message-State: AOJu0Yw/rjfhI7RxYE5H7KdTlZ9O/uNjIwRpGJH6qcii2E31kmZu5yC6
+ bzkmk0s8ZC8YJed/b0Tyzq3gR1DHHHZD7f3s7bS5/r4N+9R3nen6fo4=
+X-Google-Smtp-Source: AGHT+IErjEf7t3JV1gXUKk8P+Q5k+ZznO+0O4JnhLsAY1ZO2eCWhyaL7Ej3OOdlU0M4CRngkuPh8byjNi7c7lgnEQuA=
+X-Received: by 2002:aa7:c657:0:b0:525:6d9e:67c0 with SMTP id
+ z23-20020aa7c657000000b005256d9e67c0mr3343262edr.23.1693450198943; Wed, 30
  Aug 2023 19:49:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230829221457.101469-1-afd@ti.com>
- <20230829221457.101469-3-afd@ti.com>
- <20230830123151.rp7wkhi5m4leg6ny@ravishing>
- <0cbbf080-491f-a0fc-300c-d32cbd06ba70@ti.com>
- <20230830145936.iwl3ew4274adpr4z@litigate>
- <9fdaef14-2065-155e-6c4d-a505d49995f9@ti.com>
-In-Reply-To: <9fdaef14-2065-155e-6c4d-a505d49995f9@ti.com>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-12-alpernebiyasak@gmail.com>
+ <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
+ <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
+ <ee7997af-e004-414c-857c-b0ca2dad1b4d@gmail.com>
+In-Reply-To: <ee7997af-e004-414c-857c-b0ca2dad1b4d@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Aug 2023 20:49:22 -0600
-Message-ID: <CAPnjgZ0sTA5RB5qZJB9Pscv9TnSNdso93DPc6eZH9z07eX_aHA@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/2] configs: Add am62x_beagleplay_* defconfigs
-To: Andrew Davis <afd@ti.com>
-Cc: Nishanth Menon <nm@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Tom Rini <trini@konsulko.com>, 
- Bryan Brattlof <bb@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, u-boot@lists.denx.de
+Date: Wed, 30 Aug 2023 20:49:15 -0600
+Message-ID: <CAPnjgZ2BcPKs5GwxTKvGtTTTUL0QBPgmy7UaiyWDLaKgbHx9XQ@mail.gmail.com>
+Subject: Re: [PATCH v5 11/13] video: Use VIDEO_DAMAGE for VIDEO_COPY
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Alexander Graf <agraf@csgraf.de>, u-boot@lists.denx.de, 
+ Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, 
+ Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,100 +95,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Alper,
 
-On Wed, 30 Aug 2023 at 09:17, Andrew Davis <afd@ti.com> wrote:
+On Wed, 30 Aug 2023 at 13:07, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> On 8/30/23 9:59 AM, Nishanth Menon wrote:
-> > On 09:31-20230830, Andrew Davis wrote:
-> >> On 8/30/23 7:31 AM, Nishanth Menon wrote:
-> >>> On 17:14-20230829, Andrew Davis wrote:
-> >>>> Add am62x_beagleplay_r5_defconfig for R5 SPL and
-> >>>> am62x_beagleplay_a53_defconfig for A53 SPL and U-Boot support.
-> >>>>
-> >>>> These defconfigs are composite defconfigs built from the config fragment
-> >>>> board/ti/am62x/beagleplay_*.config applied onto the base
-> >>>> am62x_evm_*_defconfig.
-> >>>>
-> >>>> Signed-off-by: Andrew Davis <afd@ti.com>
-> >>>> ---
-> >>>>    configs/am62x_beagleplay_a53_defconfig | 3 +++
-> >>>>    configs/am62x_beagleplay_r5_defconfig  | 3 +++
-> >>>>    2 files changed, 6 insertions(+)
-> >>>>    create mode 100644 configs/am62x_beagleplay_a53_defconfig
-> >>>>    create mode 100644 configs/am62x_beagleplay_r5_defconfig
-> >>>>
-> >>>> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-> >>>> new file mode 100644
-> >>>> index 00000000000..ad708e15397
-> >>>> --- /dev/null
-> >>>> +++ b/configs/am62x_beagleplay_a53_defconfig
-> >>>> @@ -0,0 +1,3 @@
-> >>>> +// The BeaglePlay defconfig for A53 core
-> >>>> +#include "configs/am62x_evm_a53_defconfig"
-> >>>> +#include "board/ti/am62x/beagleplay_a53.config"
-> >>>> diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
-> >>>> new file mode 100644
-> >>>> index 00000000000..276b1f81a3e
-> >>>> --- /dev/null
-> >>>> +++ b/configs/am62x_beagleplay_r5_defconfig
-> >>>> @@ -0,0 +1,3 @@
-> >>>> +// The BeaglePlay defconfig for R5 core
-> >>>> +#include "configs/am62x_evm_r5_defconfig"
-> >>>> +#include "board/ti/am62x/beagleplay_r5.config"
-> >>>> --
-> >>>> 2.39.2
-> >>>>
-> >>>
-> >>> my only complaint is that if we add lets say
-> >>> board/ti/am62x/dfu.config, Then:
-> >>>
-> >>> R5:
-> >>> 1. am62x_evm_r5_defconfig = am62x_evm_r5_defconfig
-> >>> 2. am62x_beagleplay_r5_defconfig = am62x_evm_r5_defconfig + beagleplay_r5.config
-> >>> 3. am62x_evm_r5_dfu_defconfig = am62x_evm_r5_defconfig + dfu.config
-> >>> 4. am62x_beagleplay_r5_dfu_defconfig = am62x_evm_r5_defconfig + beagleplay_r5.config + dfu.config
-> >>>
-> >>> This information can be in a single txt file Rather than have a
-> >>> defconfig file for each combination.
-> >>>
+> On 2023-08-21 23:06 +03:00, Alexander Graf wrote:
+> >
+> > On 21.08.23 21:11, Simon Glass wrote:
+> >> Hi Alper,
 > >>
-> >> Having every combination in a text file vs in a directory of files doesn't
-> >> seem like much difference to me. `cat combinations.txt` vs `ls -l configs/`.
-> >> But using a file would mean extra tooling and non-standard usage.
+> >> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>> From: Alexander Graf <agraf@csgraf.de>
+> >>>
+> >>> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
+> >>> print a single character, it will always copy the full range of bytes
+> >>> from the top left corner of the character to the lower right onto the
+> >>> uncached frame buffer. This includes pretty much the full line contents
+> >>> of the printed character.
+> >>>
+> >>> Since we now have proper damage tracking, let's make use of that to reduce
+> >>> the amount of data we need to copy. With this patch applied, we will only
+> >>> copy the tiny rectangle surrounding characters when we print them,
+> >>> speeding up the video console.
+> >> I suppose for rotated consoles it copies whole lines, but otherwise it
+> >> does a lot of small copies?
 > >
-> > The .config usage is a standard already in kernel - nothing new there.
 > >
-> > What we are attempting to solve is CI build coverage and test aspect of
-> > things.
-> >
+> > I tried to keep the code as simple as possible and only track an "upper
+> > left" and "lower right" corner of modifications. So sync will always
+> > copy/flush a single rectangle.
 >
-> Exactly, when I say "standard" I mean CI standard, which is to take all
-> the configs/* and build them. No parsing these new combination files needed.
-> Just add a new configs/xx_defconfig for a combination you want to be
-> CI tested and you are done.
+> Yep, see patch 06/13 for size of the regions. E.g. for putc_xy()s it's
+> fontdata->height * fontdata->width, for rows it's like fontdata->height
+> * vid_priv->xsize * count...
 >
-> > Thinking aloud here:
-> > some sort of board/<vendor>/<board>/ci.conf yaml could probably be a better
-> > approach with description of build, automated test information,
-> > potentially board revisions etc.
+> >>
+> >>> After this, changes to the main frame buffer are not immediately copied
+> >>> to the copy frame buffer, but postponed until the next video device
+> >>> sync. So issue an explicit sync before inspecting the copy frame buffer
+> >>> contents for the video tests.
+> >> So how does the sync get done in this case?
 > >
-> >> Let's simply try to avoid these combinatorial problems by avoiding adding
-> >> too many fragments that apply broadly. That adds testing burden. When features
+> > It gets called as part of video_sync():
 > >
-> > The combinations will be valid since the intent is a supported
-> > configuration.
-> >
+> > +static void video_flush_copy(struct udevice *vid)
+> > +{
+> > +     struct video_priv *priv = dev_get_uclass_priv(vid);
+> > +
+> > +     if (!priv->copy_fb)
+> > +             return;
+> > +
+> > +     if (priv->damage.xend && priv->damage.yend) {
+> > +             int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
+> > +             int lend = priv->damage.xend * VNBYTES(priv->bpix);
+> > +             int y;
+> > +
+> > +             for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
+> > +                     ulong offset = (y * priv->line_length) + lstart;
+> > +                     ulong len = lend - lstart;
+> > +
+> > +                     memcpy(priv->copy_fb + offset, priv->fb + offset, len);
+> > +             }
+> > +     }
+> > +}
 >
-> In theory anything you do in menuconfig should result in a valid configuration
-> (if we have our kconfig symbol dependencies in order). And randomconfig testing
-> can handle that. The combinations we want always tested should be limited, and
-> making each have a dedicated configs/ file does that.
+> I think Simon was asking how and when video_sync() is called outside the
+> tests. The tests use lower-level functions that are ops->putc_xy() in
+> each console, and normally vidconsole calls higher on the call-chain
+> also maybe do a video_sync() when they think it's worth updating the
+> display.
+>
+> >>
+> >>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+> >>> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
+> >>>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
+> >>>          call video_sync() before copy_fb check, update video_copy test]
+> >>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+> >>> ---
+> >>>
+> >>> Changes in v5:
+> >>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+> >>> - Fix memmove() calls by removing the extra dev argument
+> >>> - Call video_sync() before checking copy_fb in video tests
+> >>> - Use xstart, ystart, xend, yend as names for damage region
+> >>> - Use met->baseline instead of priv->baseline
+> >>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+> >>> - Use xstart, ystart, xend, yend as names for damage region
+> >>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+> >>> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
+> >>> - Update dm_test_video_copy test added in a new patch
+> >>>
+> >>> Changes in v3:
+> >>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+> >>>
+> >>> Changes in v2:
+> >>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+> >>>
+> >>>   configs/sandbox_defconfig         |  1 -
+> >>>   drivers/video/Kconfig             |  5 ++
+> >>>   drivers/video/console_normal.c    | 13 +----
+> >>>   drivers/video/console_rotate.c    | 44 +++-----------
+> >>>   drivers/video/console_truetype.c  | 16 +----
+> >>>   drivers/video/vidconsole-uclass.c | 16 -----
+> >>>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
+> >>>   drivers/video/video_bmp.c         |  7 ---
+> >>>   include/video.h                   | 37 ------------
+> >>>   include/video_console.h           | 52 -----------------
+> >>>   test/dm/video.c                   |  3 +-
+> >>>   11 files changed, 43 insertions(+), 248 deletions(-)
+> >>>
+> >>> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> >>> index 51b820f13121..259f31f26cee 100644
+> >>> --- a/configs/sandbox_defconfig
+> >>> +++ b/configs/sandbox_defconfig
+> >>> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
+> >>>   CONFIG_VIDEO=y
+> >>>   CONFIG_VIDEO_FONT_SUN12X22=y
+> >>>   CONFIG_VIDEO_COPY=y
+> >>> -CONFIG_VIDEO_DAMAGE=y
+> >>>   CONFIG_CONSOLE_ROTATION=y
+> >>>   CONFIG_CONSOLE_TRUETYPE=y
+> >>>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
+> >>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> >>> index 97f494a1340b..b3fbd9d7d9ca 100644
+> >>> --- a/drivers/video/Kconfig
+> >>> +++ b/drivers/video/Kconfig
+> >>> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
+> >>>
+> >>>   config VIDEO_COPY
+> >>>          bool "Enable copying the frame buffer to a hardware copy"
+> >>> +       select VIDEO_DAMAGE
+> >>>          help
+> >>>            On some machines (e.g. x86), reading from the frame buffer is very
+> >>>            slow because it is uncached. To improve performance, this feature
+> >>>            allows the frame buffer to be kept in cached memory (allocated by
+> >>>            U-Boot) and then copied to the hardware frame-buffer as needed.
+> >>> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
+> >>> +         and will only copy actually touched regions.
+> >>>
+> >>>            To use this, your video driver must set @copy_base in
+> >>>            struct video_uc_plat.
+> >>> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
+> >>>            regions of the frame buffer that were modified before, speeding up
+> >>>            screen refreshes significantly.
+> >>>
+> >>> +         It is also used by VIDEO_COPY to identify which regions changed.
+> >>> +
+> >>>   config BACKLIGHT_PWM
+> >>>          bool "Generic PWM based Backlight Driver"
+> >>>          depends on BACKLIGHT && DM_PWM
+> >>> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
+> >>> index a19ce6a2bc11..c44aa09473a3 100644
+> >>> --- a/drivers/video/console_normal.c
+> >>> +++ b/drivers/video/console_normal.c
+> >>> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
+> >>>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
+> >>>          end = dst;
+> >>>
+> >>> -       ret = vidconsole_sync_copy(dev, line, end);
+> >>> -       if (ret)
+> >>> -               return ret;
+> >>> -
+> >>>          video_damage(dev->parent,
+> >>>                       0,
+> >>>                       fontdata->height * row,
+> >>> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
+> >>>          void *dst;
+> >>>          void *src;
+> >>>          int size;
+> >>> -       int ret;
+> >>>
+> >>>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
+> >>>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
+> >>>          size = fontdata->height * vid_priv->line_length * count;
+> >>> -       ret = vidconsole_memmove(dev, dst, src, size);
+> >>> -       if (ret)
+> >>> -               return ret;
+> >>> +       memmove(dst, src, size);
+> >> Why are you making that change?
+> >
+> > There is no point in keeping a special vidconsole_memmove() around
+> > anymore, since we don't actually need to call vidconsole_sync_copy()
+> > after the move. The damage call that we introduced to all call sites in
+> > combination with a video_sync() call takes over the job of the sync copy.
+>
+> More specifically, this batches the copying work video_sync_copy() does
+> per console-op into video_flush_copy() called once per video_sync().
+> Then, since vidconsole_memmove() is only used to memmove() and invoke
+> that copy mechanism, we can also reduce it to just memmove().
 
-I think this is a reasonable solution to what I see as the problem (we
-don't know what we can build) but I am very open to others.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+OK, thank you.
 
 Regards,
 Simon
