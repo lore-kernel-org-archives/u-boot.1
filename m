@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F3DC83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:55:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7227C83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1423865F4;
-	Thu, 31 Aug 2023 05:53:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2620E8657F;
+	Thu, 31 Aug 2023 05:53:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QD4EeeWo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ik76LP/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E46198658D; Thu, 31 Aug 2023 05:53:41 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 5F6298658D; Thu, 31 Aug 2023 05:53:42 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D861B8657F
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:53:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9275686585
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:53:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-7950fac19f2so17717939f.3
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:38 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-792707f78b5so17694139f.1
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693454017; x=1694058817; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693454018; x=1694058818; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=943ed1pUiSP1Zkzvsm8A1bvAC4BW8aeHAipc3ycPfgk=;
- b=QD4EeeWowsKQLwCZbwr6VPRebz60im85yW1zGIhtb34o84fS9Gz9VU8dZ/tqLWMShf
- RVLI0XsH1PiX0mp4N4WRw/0KIjg+E+Z4fYbTxIm+gupznetJ4/UsjsB/0XJGupEBRJwt
- C9WKHGezvLS7mxERc7aJE9kJDwt+WYZH+yFjk=
+ bh=qXWWsbvECqr/HyFu+PaOo+hHnkm6k3lExxyIcb/VOGE=;
+ b=ik76LP/xejRwfZUg/8+D/h9nJtX3i8ae/fCUYGVLjpDKzjvo1OpmgQM39iAJSWhaaB
+ RQgL3mvIap3w6I+t1MwZNl4kQTuRZPmICJNLM2Lldvc0s/OFk0vUxbeXMfNSKZCtDi+r
+ qMzowrrPmY5VDMP/DhsEhopS/aE4YnVKOZUj8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693454017; x=1694058817;
+ d=1e100.net; s=20221208; t=1693454018; x=1694058818;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=943ed1pUiSP1Zkzvsm8A1bvAC4BW8aeHAipc3ycPfgk=;
- b=jHmnkmpSs18+72ZE+BSSCGTdWjddaveBy0L0t+y6Vv78POf4jR4odiHGq3P7gnG4Ut
- KsCMH2nLZekqzBoAwrDLQzl1/pc1Bv2s1ESNNni1rT8nm/0gTKVLjetG0d1E9dAUSbDq
- 6e7IZjUU1qoEyQ/SnmaPTsXvXBMtJsnw0rXExIddQ+N3tWg7HUzUSrdh6l+r34DcyF9a
- LBc2+aYoP17IzeUAnNWeU4TsOs3+z0+aqJIOaqf2w1DYudVKovdZ2jPXtDWR/KBx4Svk
- aThQ8PcRW9WxpIbEJZvWzfnkKnTQKL0mZvoXHUZcMm3ozw9lZlKINxNYW15bU20XdZ9c
- WXcw==
-X-Gm-Message-State: AOJu0YwQrjipU4+qu50UT0ICCJ811jfJkN09xC4xa+rNyV1/UzAtplcz
- jV5wMaOM1SSlVOQulCQPQTQRSEg2AM96J2TJFZk=
-X-Google-Smtp-Source: AGHT+IG75z3I2MK8/SuhpMFOhZnNuDnacGDi0ZtUAENd5/gxuY7ZiV7hrGYNfmNflQ2HW6GG81ewlQ==
-X-Received: by 2002:a05:6e02:6c8:b0:34b:ba9b:c764 with SMTP id
- p8-20020a056e0206c800b0034bba9bc764mr4009243ils.18.1693454017473; 
- Wed, 30 Aug 2023 20:53:37 -0700 (PDT)
+ bh=qXWWsbvECqr/HyFu+PaOo+hHnkm6k3lExxyIcb/VOGE=;
+ b=fXYOsqZ1Vp5qlI6Fy4OHQLNnctXHDEBCgxFJ+axWKWdO6Bkmifkp8ytspB+gjfHhM6
+ LFXJi374v4nh4gourvL4UDFxjZ6vI8bayu+3mQIugo7pqNYMqzfvG4flHnpY9tGxbO+z
+ 6lsWVy/66kABhtFvVyjD3vsL8F7kPgKFrux1K1/41zQVxerduUVrcYt4Ij9THANIbfZD
+ RdnBwcNkq491RssXUzRhYiw4XML47E9QZE6Ex2oXXK/psb9XRigDeV1XjW9E1wAW6FaK
+ PvcDqtLqXPoVGaaNydxE0be825+2mkwRUsk+R+/bzv7Zd1FZscCfO+cIc/A6h/n02XOW
+ BrCA==
+X-Gm-Message-State: AOJu0YzQVBZcWxUMTuvkRz5k6lRBeK1n9VvmoOZdOssQunDwkeHfByQr
+ joxgTMnX/Bd541KTyJhav2tJ2G43+gt8IAu9TxI=
+X-Google-Smtp-Source: AGHT+IFh5apMJqGSd6bBYcl7Pedx2EMPdGa3FRfw/ItV+Ovz7Jv6ebBCVMBv8gtk21hsBD/MpmmNPA==
+X-Received: by 2002:a5e:8a48:0:b0:790:c259:4ee5 with SMTP id
+ o8-20020a5e8a48000000b00790c2594ee5mr4796136iom.8.1693454018229; 
+ Wed, 30 Aug 2023 20:53:38 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  dy47-20020a0566381d6f00b0042036f06b24sm160002jab.163.2023.08.30.20.53.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 20:53:37 -0700 (PDT)
+ Wed, 30 Aug 2023 20:53:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 09/19] Move fdt_simplefb to boot/
-Date: Wed, 30 Aug 2023 21:53:03 -0600
-Message-ID: <20230831035319.2316665-10-sjg@chromium.org>
+Subject: [PATCH v2 10/19] boot: Move some other fdt-fixup options to the same
+ menu
+Date: Wed, 30 Aug 2023 21:53:04 -0600
+Message-ID: <20230831035319.2316665-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 In-Reply-To: <20230831035319.2316665-1-sjg@chromium.org>
 References: <20230831035319.2316665-1-sjg@chromium.org>
@@ -88,96 +89,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This relates to booting, so move it there. Create a new Kconfig menu for
-things related to devicetree fixup.
+Move more options relating to fixing up a device tree into the new
+devicetree-fixup menu.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/Kconfig                    | 16 ++++++++++++++++
- boot/Makefile                   |  1 +
- {common => boot}/fdt_simplefb.c |  0
- common/Kconfig                  |  9 ---------
- common/Makefile                 |  1 -
- 5 files changed, 17 insertions(+), 10 deletions(-)
- rename {common => boot}/fdt_simplefb.c (100%)
+ boot/Kconfig | 55 +++++++++++++++++++++++++---------------------------
+ 1 file changed, 26 insertions(+), 29 deletions(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 86ccfd780312..025fa01d782c 100644
+index 025fa01d782c..70cbcc38fdd4 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -1538,6 +1538,22 @@ config SPL_IMAGE_PRE_LOAD_SIG
+@@ -696,35 +696,6 @@ config SUPPORT_RAW_INITRD
+ 	  address of the initrd must be augmented by it's size, in the following
+ 	  format: "<initrd address>:<initrd size>".
  
- endmenu
- 
-+if OF_LIBFDT
-+
-+menu "Devicetree fixup"
-+
-+config FDT_SIMPLEFB
-+	bool "FDT tools for simplefb support"
-+	help
-+	  Enable the fdt tools to manage the simple fb nodes in device tree.
-+	  These functions can be used by board to indicate to the OS
-+	  the presence of the simple frame buffer with associated reserved
-+	  memory
-+
-+endmenu
-+
-+endif # OF_LIBFDT
-+
- config USE_BOOTARGS
- 	bool "Enable boot arguments"
- 	help
-diff --git a/boot/Makefile b/boot/Makefile
-index f15a161614ff..6ce983b83fa4 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -39,6 +39,7 @@ obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
- endif
- 
- obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
-+obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) += fdt_simplefb.o
- 
- obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += image-fdt.o
- obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) += fdt_region.o
-diff --git a/common/fdt_simplefb.c b/boot/fdt_simplefb.c
-similarity index 100%
-rename from common/fdt_simplefb.c
-rename to boot/fdt_simplefb.c
-diff --git a/common/Kconfig b/common/Kconfig
-index 2f46fdb3f62c..9693c0ac426f 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1156,14 +1156,5 @@ config VPL_IMAGE_SIGN_INFO
- 
- endif
- 
--config FDT_SIMPLEFB
--	bool "FDT tools for simplefb support"
+-config OF_BOARD_SETUP
+-	bool "Set up board-specific details in device tree before boot"
 -	depends on OF_LIBFDT
 -	help
--	  Enable the fdt tools to manage the simple fb nodes in device tree.
--	  These functions can be used by board to indicate to the OS
--	  the presence of the simple frame buffer with associated reserved
--	  memory
+-	  This causes U-Boot to call ft_board_setup() before booting into
+-	  the Operating System. This function can set up various
+-	  board-specific information in the device tree for use by the OS.
+-	  The device tree is then passed to the OS.
 -
- config IO_TRACE
+-config OF_SYSTEM_SETUP
+-	bool "Set up system-specific details in device tree before boot"
+-	depends on OF_LIBFDT
+-	help
+-	  This causes U-Boot to call ft_system_setup() before booting into
+-	  the Operating System. This function can set up various
+-	  system-specific information in the device tree for use by the OS.
+-	  The device tree is then passed to the OS.
+-
+-config OF_STDOUT_VIA_ALIAS
+-	bool "Update the device-tree stdout alias from U-Boot"
+-	depends on OF_LIBFDT
+-	help
+-	  This uses U-Boot's serial alias from the aliases node to update
+-	  the device tree passed to the OS. The "linux,stdout-path" property
+-	  in the chosen node is set to point to the correct serial node.
+-	  This option currently references CONFIG_CONS_INDEX, which is
+-	  incorrect when used with device tree as this option does not
+-	  exist / should not be used.
+-
+ config HAVE_TEXT_BASE
  	bool
-diff --git a/common/Makefile b/common/Makefile
-index 0948721d0b47..5c1617206f07 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -17,7 +17,6 @@ obj-y += board_r.o
- obj-$(CONFIG_DISPLAY_BOARDINFO) += board_info.o
- obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) += board_info.o
+ 	depends on !NIOS2 && !XTENSA
+@@ -1542,6 +1513,32 @@ if OF_LIBFDT
  
--obj-$(CONFIG_FDT_SIMPLEFB) += fdt_simplefb.o
- obj-$(CONFIG_MII) += miiphyutil.o
- obj-$(CONFIG_CMD_MII) += miiphyutil.o
- obj-$(CONFIG_PHYLIB) += miiphyutil.o
+ menu "Devicetree fixup"
+ 
++config OF_BOARD_SETUP
++	bool "Set up board-specific details in device tree before boot"
++	help
++	  This causes U-Boot to call ft_board_setup() before booting into
++	  the Operating System. This function can set up various
++	  board-specific information in the device tree for use by the OS.
++	  The device tree is then passed to the OS.
++
++config OF_SYSTEM_SETUP
++	bool "Set up system-specific details in device tree before boot"
++	help
++	  This causes U-Boot to call ft_system_setup() before booting into
++	  the Operating System. This function can set up various
++	  system-specific information in the device tree for use by the OS.
++	  The device tree is then passed to the OS.
++
++config OF_STDOUT_VIA_ALIAS
++	bool "Update the device-tree stdout alias from U-Boot"
++	help
++	  This uses U-Boot's serial alias from the aliases node to update
++	  the device tree passed to the OS. The "linux,stdout-path" property
++	  in the chosen node is set to point to the correct serial node.
++	  This option currently references CONFIG_CONS_INDEX, which is
++	  incorrect when used with device tree as this option does not
++	  exist / should not be used.
++
+ config FDT_SIMPLEFB
+ 	bool "FDT tools for simplefb support"
+ 	help
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
 
