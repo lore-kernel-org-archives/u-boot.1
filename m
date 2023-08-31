@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3141C83F2F
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306ACC83F2F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:04:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B184F86886;
-	Thu, 31 Aug 2023 21:03:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 03426867F7;
+	Thu, 31 Aug 2023 21:03:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="UJ5tgK05";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JWXhtl32";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59EAF86776; Thu, 31 Aug 2023 21:03:24 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 832F186784; Thu, 31 Aug 2023 21:03:29 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8028786785
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F8DA8684C
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3a751d2e6ecso745697b6e.0
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:21 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-57359e85e9bso679744eaf.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1693508600; x=1694113400; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693508604; x=1694113404; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bcUkjD9Yao9cXPE7+O5KLH/kZNZwJQLC1OKJdvs9cCs=;
- b=UJ5tgK0538ysT4qSzIQTKlx2iE0h4A5wD3a0kKorhN/PvOvAEb7s5HA3DGqZLRzuqB
- +5NsunNcPPvDxbArc+jhUtejhN/4vo2VQtl5N2mlOK02pV2P1cgKVKqdU9dR/bH4lS+B
- nHtY4CUCQp75fN6s6rqTtkt0b4+dTb/XgrIx6kyYhm0p8VAvNvABEcHaJrKpJD07VIu6
- WJ7oG6w2OihFiO9BKlm30d0snJyc+bhdHQB6Wz+xTW/ifPN/StBMEuyjtQbdIXyXxw8F
- 4fCA2gtPKhsSlhHFOFv5SwN4M5otQk/8SkjOKyIyWtbYYW6HVGfI4kt3LIxVqVXthmaA
- F/og==
+ bh=5g+bE+gNK+QLeFC3naMVOJBDEZDvsK84DKLP2VgIlpg=;
+ b=JWXhtl32IUudG4jZMi9m4QXInyXoXf6hUulpcYja5Av0iQ2HMODgQMnSN/GLEERqK0
+ DH/KVkNrJhRjDtI5kb9+sny4n9kGG0uOJKAVl4c9iwTNP+IzUz8/smi7g+vKivYxV9p8
+ ceAPZ2olBkT/B3hPiLtHrG/sMk/Xmw+1/OP+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693508600; x=1694113400;
+ d=1e100.net; s=20221208; t=1693508604; x=1694113404;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bcUkjD9Yao9cXPE7+O5KLH/kZNZwJQLC1OKJdvs9cCs=;
- b=IWT2pwqRTccqGnRXx/1SzO6q6OlEi2KyzJivSkCWxb7Gkud+2YU6goi2PjH/phr24a
- k8j9AxKNKVp0cOaOHPQZtAKNeKViyjey9mvlzHR1INLEGxy3203kM9PqCAnU4EvjuWnk
- xhCgASNxpII+TAAkfSMb+gWTmBjYARgoiCyWssxiBr+BQIYT3heV+6AXlOQb/XV/to4u
- aXvmmhWl4vAYmNKmnsRbQ1Sz6/uUwV0jBzOM684jLtU79lLkep5X0Ebmictv3QxoXkDA
- o+rxoCxOaHhVCBjuaoEIEjwqsR+nfd0q6/hDFt48NFQO+kUmFe48kVSBpdrtxZF39LUe
- EYyg==
-X-Gm-Message-State: AOJu0Yx88Vx4CKnq0oGl/77rWH7IsKNAHnnYXQ//JalOqFDjwJHhpHkf
- loyWwgw8C3Skh/sDS+5b9KW67w/uzSqI+TRJwi/+dA==
-X-Google-Smtp-Source: AGHT+IFfyYs3hOqXTmhM29rGL/ciC3K+m/jYUmy21g2FwQwepb1Vgr2d2K8K7M0yAzK2IbPDfy6K/i0VrYzulcXEZAs=
-X-Received: by 2002:a05:6808:1a06:b0:3a4:38fa:2e08 with SMTP id
- bk6-20020a0568081a0600b003a438fa2e08mr604190oib.7.1693508599989; Thu, 31 Aug
- 2023 12:03:19 -0700 (PDT)
+ bh=5g+bE+gNK+QLeFC3naMVOJBDEZDvsK84DKLP2VgIlpg=;
+ b=KTGbjNZy4qww3iRNca46Q0t00b5F0N28MGnCDEh/C1dSZO5BwJT/rYDRrIDDPX+EJr
+ oYWZj/DXioQs/75FHpFzy3aaZ+YBNxEbKVNvVvcxalGy2atNsFTJtJck2bEwWZOkd49s
+ 2f0CMGNz/0oFzQljqyx57yu+9p8iLY9vQpbrBf1oQmzsd1kqlo3OwoW/YZSygHFqC5ng
+ kmMUDUS6NIxfQYCTSjYpnZlbE0pAVEiA5N3bT5GnOLZn8h4oO5xCV2BTWbYsl4gCqawV
+ Oz81/h9pbwhf1HWE8rXECwErVoxrfFZCu4YoPN6r4V+wbYjXADjsGe7kipFGmv3jz6V6
+ nKgg==
+X-Gm-Message-State: AOJu0YxdFKYhZ9FcOk9MlPlz7fXVKOBq06zmW8UUzEluEIklv/XYPqjW
+ tGf1EbrMWH0cJiGYQXDzqSetM7TQAScU3nRNvvu9SA==
+X-Google-Smtp-Source: AGHT+IHIJ2qqBwfGZHc1Xe2a5VkaK3XhoMPIUwC2TYuFiOFGQ98AbLc98BNq2C4j6/7TAAP4ohfixayFmVPBrTUZD74=
+X-Received: by 2002:a05:6358:88d:b0:133:ac7:c84b with SMTP id
+ m13-20020a056358088d00b001330ac7c84bmr200995rwj.12.1693508603494; Thu, 31 Aug
+ 2023 12:03:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <08a3e6c09cce13287c69ad370e409e7f1766b406.1693465465.git.michal.simek@amd.com>
- <60a84405f3fefabb8b48a4e1ce84431483a729f3.1693465465.git.michal.simek@amd.com>
-In-Reply-To: <60a84405f3fefabb8b48a4e1ce84431483a729f3.1693465465.git.michal.simek@amd.com>
-From: Simon Glass <sjg@google.com>
-Date: Thu, 31 Aug 2023 13:02:03 -0600
-Message-ID: <CAPnjgZ0KnY3DmSOq2x6L+yYNAGb=VN03_tKnpXesjTQjE567BQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] xilinx: board: Add support to pick bootscr flash
- offset/size from DT
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
+ <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
+ <d4ce17ae-8b84-4c8a-acaa-287549ec23a3@gmail.com>
+In-Reply-To: <d4ce17ae-8b84-4c8a-acaa-287549ec23a3@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 31 Aug 2023 13:01:59 -0600
+Message-ID: <CAPnjgZ0sTAoZi5TDAaTZUNPVNQ5dqoyVENDWJr=exa5z2R8srw@mail.gmail.com>
+Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
+ output
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Dillon Min <dillon.minfei@gmail.com>, 
+ Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com, 
+ uboot-stm32@st-md-mailman.stormreply.com, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,68 +94,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Aug 2023 at 01:04, Michal Simek <michal.simek@amd.com> wrote:
->
-> Location of bootscript in flash can be specified via /options/u-boot DT
-> node by using bootscr-flash-offset and bootscr-flash-size properties.
-> Values should be saved to script_offset_f and script_size_f variables.
-> Variables are described in doc/develop/bootstd.rst as:
-> script_offset_f
->     SPI flash offset from which to load the U-Boot script, e.g. 0xffe000
->
-> script_size_f
->     Size of the script to load, e.g. 0x2000
->
-> Both of them are used by sf_get_bootflow() in drivers/mtd/spi/sf_bootdev.c
-> to identify bootscript location inside flash.
->
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
->
-> Changes in v2:
-> - Change message from printf to debug not to disturb current users
->
->  board/xilinx/common/board.c | 13 +++++++++++--
->  1 file changed, 11 insertions(+), 2 deletions(-)
+Hi Alper,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 31 Aug 2023 at 04:20, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>
+> On 2023-08-28 20:54 +03:00, Simon Glass wrote:
+> > Hi Alper,
+> >
+> > On Sun, 27 Aug 2023 at 13:17, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>
+> >> On 2023-08-24 06:02 +03:00, Simon Glass wrote:
+> >>> In this early stage of using binman to produce output files, we are mostly
+> >>> seeing people using common extensions such as '.bin' and '.rom'
+> >>>
+> >>> But unusual extensions appear in some places.
+> >>>
+> >>> We would like 'buildman -k' to keep the build outputs, but this is hard if
+> >>> there is no consistency as to the extension used.
+> >>>
+> >>> This series adjusts binman to enforce just 4 extensions for output images:
+> >>>
+> >>>    .bin
+> >>>    .rom
+> >>>    .itb
+> >>>    .img
+> >>>
+> >>> Other extensions will produce an error. With this rule observed, buildman
+> >>> can keep the required files.
+> >>
+> >> I dislike this limitation. We know what files we will generate, they are
+> >> listed in binman dtb, so we can add something like `binman build --ls`
+> >> to print their names/paths for buildman to preserve them.
+> >
+> > Yes, it would be good to have that...
+> >
+> > But why do you dislike the limitation? Do you think extensions provide
+> > useful information? I suppose one problem is that *.bin might pick up
+> > private blobs that happen to be in the source directory?
+>
+> I guess my strongest argument is that people already/will have workflows
+> that depend on certain filenames or extensions, and shouldn't have to
+> modify binman code (consider that people may be using the PyPI wheels)
+> to accommodate those when we are already putting the name in the dtb.
+>
+> I do want some standardization to the U-Boot build outputs though, but
+> more like a global binman.dts with like u-boot.rom, u-boot-sdmmc.img
+> images with well-defined TPL, SPL, U-Boot sections that arch-dtsi files
+> can fill in.
+>
+> >> Regarding the output directory suggestion, I think the binman outputs
+> >> (not temporary/intermediate files) should be in the same directory as
+> >> make outputs
+> >
+> > Agreed
+> >
+> >> , and the Makefile should default to O=build to achieve the
+> >> "output dir". I'm not sure if that's going to happen.
+> >
+> > I would quite like the 'non-output' file (i.e. things that are not a
+> > binman image) to appear in a 'binman-work' subdir of the output dir.
+> > What do you think?
+>
+> I'd prefer them to go in a tempfile.TemporaryDirectory() and discarded
+> at the end of a binman run, and a "--tmpdir <path>" option to use a
+> given directory instead and preserve things for debugging.
 
+Actually, that was the original purpose of the output directory in the
+u_boot_pylib.tools module. But with all the files binman creates, that
+has been lost. I think we should restore that purpose (with an output
+dir as a temp dir) and then I think what you have written here will
+work.
 
->
-> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> index b3fb6acc25a3..126f0d81a9ed 100644
-> --- a/board/xilinx/common/board.c
-> +++ b/board/xilinx/common/board.c
-> @@ -411,6 +411,7 @@ int board_late_init_xilinx(void)
->         int i, id, macid = 0;
->         struct xilinx_board_description *desc;
->         phys_size_t bootm_size = gd->ram_top - gd->ram_base;
-> +       u64 bootscr_flash_offset, bootscr_flash_size;
->
->         if (!IS_ENABLED(CONFIG_MICROBLAZE)) {
->                 ulong scriptaddr;
-> @@ -435,11 +436,19 @@ int board_late_init_xilinx(void)
->                 }
->         }
->
-> +       if (!ofnode_read_bootscript_flash(&bootscr_flash_offset,
-> +                                         &bootscr_flash_size)) {
-> +               ret |= env_set_hex("script_offset_f", bootscr_flash_offset);
-> +               ret |= env_set_hex("script_size_f", bootscr_flash_size);
-> +       } else {
-> +               debug("!!! Please define bootscr-flash-offset via DT !!!\n");
-> +               ret |= env_set_hex("script_offset_f",
-> +                                  CONFIG_BOOT_SCRIPT_OFFSET);
-> +       }
-> +
->         if (IS_ENABLED(CONFIG_ARCH_ZYNQ) || IS_ENABLED(CONFIG_MICROBLAZE))
->                 bootm_size = min(bootm_size, (phys_size_t)(SZ_512M + SZ_256M));
->
-> -       ret |= env_set_hex("script_offset_f", CONFIG_BOOT_SCRIPT_OFFSET);
-> -
->         ret |= env_set_addr("bootm_low", (void *)gd->ram_base);
->         ret |= env_set_addr("bootm_size", (void *)bootm_size);
->
-> --
-> 2.36.1
->
+Regards,
+Simon
