@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFDE7C83F2F
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:03:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA12C83F3A
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE7A586546;
-	Thu, 31 Aug 2023 21:03:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0459F86751;
+	Thu, 31 Aug 2023 21:03:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mOF1Gb72";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oQ7QEm+n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5058986546; Thu, 31 Aug 2023 21:03:01 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 9E9B786722; Thu, 31 Aug 2023 21:03:05 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1438086523
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:02:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8CB386784
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-bcb6dbc477eso904776276.1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:02:58 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d7cbcfdf137so894309276.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693508577; x=1694113377; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693508581; x=1694113381; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DfcyhM/vja5jF3i+k2BWxgHepqq25C5y7q/blJecPXA=;
- b=mOF1Gb72CHKWJjaNBDGfXdkxLQIFlbQdF9RfMdGNyFyhRfieu/R3vVZPx898E7L3Hh
- ypMFC8xv8aNKkouCHiU/uwrYH5GjGCgjD2ltCN3oSVBVv0qBCynBAxHJc+dRa6jKMYE2
- MslyB5dbVd4gOze8IhC7UkikhqQ1umnoD1aOQ=
+ bh=hgiedffID2MyQT0GCvds6t+94Q+4FxSnljjBDZxOBBg=;
+ b=oQ7QEm+nbOAxgzx7xBVXIqVn1Wyb3dBcaSW7q1f946Nb6v1m5oHVReOSqOS6on1CPk
+ ylgmgs6mZ20WGuDdzFUDrgtyGJC/V9C7LRsachdE38nwxpUkftUquj49kTJ5GyBlJPpZ
+ lzRqDXInIe6BTT7yi8fpcz4pnOR/RSEISDiCg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693508577; x=1694113377;
+ d=1e100.net; s=20221208; t=1693508581; x=1694113381;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DfcyhM/vja5jF3i+k2BWxgHepqq25C5y7q/blJecPXA=;
- b=cTUelF2a4SfKwEW7YoZtinfylyIqi7xKreEbdyxVRCaFbi2k7WnTE46VIIugjZjLGW
- eSILIcC8qS41NfidiZ0ZKR5TBg3MogjZT6oAjiDaRqhsZi/z9CUsRgPw5gRJwb5bW9lG
- 9i6gvVof4U9qmI5foflgDN1w4g8wtYnORXtEmmcktwvBwTtd22R2XuBBcpjlPQcDe7yi
- VEgbcOAg8lpyAgfjUkZnuQ0cvHDc9E0y8OJxMop23hFCOF8Af9W7Jzrc6Xfkwa+Qzqrt
- sCBmuF75yUNq+55VcFIuYHODylewiEQIwhVRxAdr/QqtTmAagNzWvTi+noF9XFeDJhaG
- jY7Q==
-X-Gm-Message-State: AOJu0YxN/+RGOXS7OkbnSKTVh+Y1oG+yT3x+gklen9+kQIrXKrcBSyUn
- eK1y6Pj3hzUZApixbCwgfkBb3hXJhsJ81Yl3gZNPHKN8dM7/a7KqWxU=
-X-Google-Smtp-Source: AGHT+IEI7P57zk5xOOi+6qH/qY2R3yDsfyVuF4S8Mbo4dVPjDm/7o2rvC9GQcuwSuqCvv3vt3XcL+/XtmU7dq/NQqVY=
-X-Received: by 2002:a5b:c8:0:b0:d7e:6c65:1c1 with SMTP id
- d8-20020a5b00c8000000b00d7e6c6501c1mr439921ybp.42.1693508576630; 
- Thu, 31 Aug 2023 12:02:56 -0700 (PDT)
+ bh=hgiedffID2MyQT0GCvds6t+94Q+4FxSnljjBDZxOBBg=;
+ b=PUIWUYPWbYR/HouT1ToBlg8Jc6o7rR+lwR3f2+QPk1rd1cWyW3wcrFWuoq4baNlzBn
+ /PrTwV/yCA0ZhjkbBhcKLE5jdUBYhlq23j+TtvYcmuhATMGKK+XWhOrVzMv9N8Yv9k5M
+ IQd44SQQ1rdPxcAsOw+kYmDTjcPdQ5q4XHIp0jRZlvvq2ymP/xnvbdstTo8Gcjw+8MvW
+ SCcY6sdTC80+d+lR5nalPZeFaYQTmxMrW4zKIqn019pBX5iyy+EkPLKD04D4BsG6Fj/s
+ pmj0SWCbolq+i7dOW1LtdIMqVeNCKSNiOmEa7Vtckg8sJlJ+g9oFkCFU3cgTuLZ+vJu0
+ 5Yng==
+X-Gm-Message-State: AOJu0YwG+l5UkAkw0j2cLkPGiY9j1G5+PMsxH5vevaLt+pGTQULutn80
+ Lnu5o2+8RphGgX+t9h6OOwhEt7V9URuknYB0OaWM2jZJj2OjTCcKN6g=
+X-Google-Smtp-Source: AGHT+IF53Nipoavbogf37kBHUyiRbhdgCHzTTlEvNc9JRpbD1ZLvhYYhwbSzFqvkne6u2PlqiPmGukyTdjpDLKiDztM=
+X-Received: by 2002:a25:d303:0:b0:d77:cd42:a125 with SMTP id
+ e3-20020a25d303000000b00d77cd42a125mr654193ybf.0.1693508581403; Thu, 31 Aug
+ 2023 12:03:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230825192842.1957055-1-sjg@chromium.org>
- <8e64d594-8f05-4b0f-b83f-c7a99c6e781f@gmx.de>
-In-Reply-To: <8e64d594-8f05-4b0f-b83f-c7a99c6e781f@gmx.de>
+References: <20230831112051.1.I3fe7ac62de70902fd1be093bcda7c53acd43daf8@changeid>
+ <20230831174805.GM3101304@bill-the-cat>
+In-Reply-To: <20230831174805.GM3101304@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Aug 2023 13:02:10 -0600
-Message-ID: <CAPnjgZ3zrDBxVq+bT3-O5QUdeWunjnChozfrE_z4NfVmxTQVdQ@mail.gmail.com>
-Subject: Re: [PATCH] efi: Correct handling of frame buffer
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 31 Aug 2023 13:02:06 -0600
+Message-ID: <CAPnjgZ2q=EjqnguGakVjtr-5d=tQEgrk8UXF+9kc-h6cLJbKiw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] Allow Python packages to be dropped
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mike Frysinger <vapier@chromium.org>, Kever Yang <kever.yang@rock-chips.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,111 +85,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Fri, 25 Aug 2023 at 16:06, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 31 Aug 2023 at 11:48, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 8/25/23 21:28, Simon Glass wrote:
-> > The efi_gop driver uses private fields from the video uclass to obtain a
-> > pointer to the frame buffer. Use the platform data instead.
+> On Thu, Aug 31, 2023 at 11:20:52AM -0600, Simon Glass wrote:
+>
+> > When building in a portage chroot, we do not have the environment needed
+> > to build pylibfdt. It is instead build as a separate package.
 > >
-> > Check the VIDEO_COPY setting to determine which frame buffer to use. Once
-> > the next stage is running (and making use of U-Boot's EFI boot services)
-> > U-Boot does not handle copying from priv->fb to the hardware framebuffer,
-> > so we must allow EFI to write directly to the hardware framebuffer.
+> > Provide a build option to tell U-Boot to skip this part of the build. We
+> > still need it to use binman, etc. but don't need it to build its
+> > dependencies.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Mike Frysinger <vapier@chromium.org>
+> > ---
+> >
+> >  Makefile             | 8 ++++++++
 >
-> Let's think of a EFI application running:
->
-> With your patch GOP API calls will use the hardware buffer. But text
-> output by calling OutputString() and messages generated in the U-Boot
-> code would write to the copy buffer. This will lead to unexpected output.
+> Can we do this via Kconfig instead? It looks like we don't need to do
+> this part of the build for coreboot, yes?  And so if we can drop it from
+> other builds as well that might help speed up CI.
 
-I haven't seen an EFI app writing text output and graphics output at
-the same time. Probably with good reason!
+Yes it could. But I really don't like changing the board config on the
+fly - we have things like 'select BINMAN' now and it just gets messy.
+In the normal course of events we want to build the python things and
+the build won't work without it (e.g. binman will fail). But where the
+build environment has installed binman separate, it knows better.
+
+So I don't think this is a board config thing,
 
 >
-> What triggers copying from the copy buffer to the hardware buffer?
+> [snip]
+> > +The tools-only build bytes pylibfdt by default. To disable this, use the
 >
-> Where is the copy function implemented?
+> "build bytes" should probably be "builds" I suspect.
 
-It is in vidconsole_sync_copy() at present, but Alper's series is
-going to expand things a bit.
+Yes, thanks.
 
 Regards,
 Simon
-
-
->
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   lib/efi_loader/efi_gop.c | 12 +++++++-----
-> >   1 file changed, 7 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-> > index 778b693f983..a09db31eb46 100644
-> > --- a/lib/efi_loader/efi_gop.c
-> > +++ b/lib/efi_loader/efi_gop.c
-> > @@ -10,6 +10,7 @@
-> >   #include <efi_loader.h>
-> >   #include <log.h>
-> >   #include <malloc.h>
-> > +#include <mapmem.h>
-> >   #include <video.h>
-> >   #include <asm/global_data.h>
-> >
-> > @@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
-> >       struct efi_gop_obj *gopobj;
-> >       u32 bpix, format, col, row;
-> >       u64 fb_base, fb_size;
-> > -     void *fb;
-> >       efi_status_t ret;
-> >       struct udevice *vdev;
-> >       struct video_priv *priv;
-> > +     struct video_uc_plat *plat;
-> >
-> >       /* We only support a single video output device for now */
-> >       if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
-> > @@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
-> >       format = priv->format;
-> >       col = video_get_xsize(vdev);
-> >       row = video_get_ysize(vdev);
-> > -     fb_base = (uintptr_t)priv->fb;
-> > -     fb_size = priv->fb_size;
-> > -     fb = priv->fb;
-> > +
-> > +     plat = dev_get_uclass_plat(vdev);
-> > +     fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
-> > +     fb_size = plat->size;
->
-> This logic and the map_sysmem() conversion would better be placed in
-> video-uclass.c or video.h as a function video_get_hw_fb(void *fb_base,
-> size_t *fb_size).
-> >
-> >       switch (bpix) {
-> >       case VIDEO_BPP16:
-> > @@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
-> >       }
-> >       gopobj->info.pixels_per_scanline = col;
-> >       gopobj->bpix = bpix;
-> > -     gopobj->fb = fb;
-> > +     gopobj->fb = map_sysmem(fb_base, fb_size);
->
-> Could you, please, add a description of the side effects of the 'len'
-> parameter of map_sysmem() in doc/arch/sandbox/sandbox.rst. It seems to
-> be ignored, see
->
-> include/mapmem.h:16
-> arch/sandbox/include/asm/io.h:40
->
-> So maybe just remove it?
->
-> Best regards
->
-> Heinrich
->
-> >
-> >       return EFI_SUCCESS;
-> >   }
->
