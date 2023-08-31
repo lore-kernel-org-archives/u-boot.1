@@ -4,46 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35ABAC83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 12:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3732FC83F01
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 12:47:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A91686590;
-	Thu, 31 Aug 2023 14:43:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 25D5186576;
+	Thu, 31 Aug 2023 14:47:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="fJeGO3Ow";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE16486580; Thu, 31 Aug 2023 14:43:32 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 41F9086575
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 14:43:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 102ECC15;
- Thu, 31 Aug 2023 05:44:08 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C8B673F738;
- Thu, 31 Aug 2023 05:43:27 -0700 (PDT)
-Date: Thu, 31 Aug 2023 13:43:24 +0100
-From: Andre Przywara <andre.przywara@arm.com>
+ id 4FDBB86580; Thu, 31 Aug 2023 14:47:18 +0200 (CEST)
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.43])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 26B4F863E7
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 14:47:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.intel.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=andriy.shevchenko@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1693486035; x=1725022035;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=+yNXu6wWWmNqSLXb4hi6slnYBYDW6WBG4O9RISSOQtU=;
+ b=fJeGO3OwOueUxIZQLJlBMD2t43tGP0L+KTlGDSXYmGdOaF3O9LBAd1vP
+ 7aw+JfbHNCMu+51wOdwD6eWSgL/jfFunP98zO+5xHV+Aeu21di3ngOwFL
+ sJdFHgceihhyi0imnmL4O3MZ1TxcX7HfP5vxm9VQA1voZ5eGjBrpxaTX6
+ Ub/ug9uQ5Gy2KHlA2Ep9EZaHmlRD1/bTcHHOSsEGy9bhmo83nk2nh/OXy
+ PQURFXIZ6lXP2sPcfFA1AJ2RBK9dGcOlEskNFHdFs3L1naOdPCM1/7fY1
+ TaQK4oiPy401v7HqEksiuGY7rnuE0/hCHeReA6cYtqouwbvwErZGdmFbt Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10818"; a="462299193"
+X-IronPort-AV: E=Sophos;i="6.02,216,1688454000"; d="scan'208";a="462299193"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 31 Aug 2023 05:47:13 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10818"; a="716332152"
+X-IronPort-AV: E=Sophos;i="6.02,216,1688454000"; d="scan'208";a="716332152"
+Received: from smile.fi.intel.com ([10.237.72.54])
+ by orsmga006.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 31 Aug 2023 05:47:11 -0700
+Received: from andy by smile.fi.intel.com with local (Exim 4.96)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1qbh4n-005O6o-0b; Thu, 31 Aug 2023 15:47:09 +0300
+Date: Thu, 31 Aug 2023 15:47:08 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Peter Hoyes <peter.hoyes@arm.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] driver: rng: Add DM_RNG interface for ARMv8.5 RNDR
- registers
-Message-ID: <20230831134324.2ae66c5d@donnerap.manchester.arm.com>
-In-Reply-To: <CAPnjgZ0Q7LUe1Qf6S16RLwPPdVjhs+Z760g8CK2Zq4=vev0hFA@mail.gmail.com>
-References: <20230830113230.3925868-1-andre.przywara@arm.com>
- <CAPnjgZ0Q7LUe1Qf6S16RLwPPdVjhs+Z760g8CK2Zq4=vev0hFA@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH v2 1/2] Reland "x86: Move FACP table into separate
+ functions""
+Message-ID: <ZPCLzFAJyj7H1hg/@smile.fi.intel.com>
+References: <20230831031341.2657786-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230831031341.2657786-1-sjg@chromium.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,210 +80,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 30 Aug 2023 20:49:18 -0600
-Simon Glass <sjg@chromium.org> wrote:
-
-Hi Simon,
-
-> On Wed, 30 Aug 2023 at 05:32, Andre Przywara <andre.przywara@arm.com> wrote:
-> >
-> > The ARMv8.5 architecture extension defines architectural RNDR/RNDRRS
-> > system registers, that provide 64 bits worth of randomness on every
-> > read. Since it's an extension, and implementing it is optional, there is
-> > a field in the ID_AA64ISAR0_EL1 ID register to query the availability
-> > of those registers.
-> >
-> > Add a UCLASS_RNG driver that returns entropy via repeated reads from
-> > those system registers, if the extension is implemented.
-> > The driver always binds, but checks the availability in the probe()
-> > routine.
-> >
-> > This helps systems which suffer from low boot entropy, since U-Boot can
-> > provide entropy via the generic UEFI entropy gathering protocol to the OS,
-> > at an early stage.
-> >
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> > Hi Simon,
-> >
-> > not sure if this is the expected way to model a driver which autodetects
-> > its device at runtime. It somewhat works, but always lists the bound
-> > device, even if the registers are not supported. If I do the check in bind
-> > instead, it fails booting when this returns -ENODEV, since it expects
-> > the fixed device to always bind successfully, I guess?
-> > Is there any other way of modeling this? And before you say your
-> > favourite two letters: this is not a DT job, since it can be safely
-> > auto-detected in an architectural way.
-> >
-> > Thanks,
-> > Andre
-> >
-> >  arch/arm/include/asm/system.h |  1 +
-> >  drivers/rng/Kconfig           |  6 +++
-> >  drivers/rng/Makefile          |  1 +
-> >  drivers/rng/arm_rndr.c        | 82 +++++++++++++++++++++++++++++++++++
-> >  4 files changed, 90 insertions(+)
-> >  create mode 100644 drivers/rng/arm_rndr.c  
+On Wed, Aug 30, 2023 at 09:13:34PM -0600, Simon Glass wrote:
+> Each board has its own way of creating this table. Rather than calling the
+> acpi_create_fadt() function for each one from a common acpi_write_fadt()
+> function, just move the writer into the board-specific code.
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
-thanks!
+Not sure this is correct SoB chain. In kernel project we would do
 
-> nit below
-> 
-> >
-> > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-> > index 87d1c77e8b1..0eae857e73a 100644
-> > --- a/arch/arm/include/asm/system.h
-> > +++ b/arch/arm/include/asm/system.h
-> > @@ -84,6 +84,7 @@
-> >  #define HCR_EL2_HCD_DIS                (1 << 29) /* Hypervisor Call disabled         */
-> >  #define HCR_EL2_AMO_EL2                (1 <<  5) /* Route SErrors to EL2             */
-> >
-> > +#define ID_AA64ISAR0_EL1_RNDR  (0xFUL << 60) /* RNDR random registers */
-> >  /*
-> >   * ID_AA64ISAR1_EL1 bits definitions
-> >   */
-> > diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> > index 5deb5db5b71..72788d479cc 100644
-> > --- a/drivers/rng/Kconfig
-> > +++ b/drivers/rng/Kconfig
-> > @@ -76,6 +76,12 @@ config RNG_SMCCC_TRNG
-> >           Enable random number generator for platforms that support Arm
-> >           SMCCC TRNG interface.
-> >
-> > +config RNG_ARM_RNDR
-> > +       bool "Generic ARMv8.5 RNDR register"
-> > +       depends on DM_RNG && ARM64
-> > +       help
-> > +         Use the ARMv8.5 RNDR register to provide random numbers.
-> > +
-> >  config TPM_RNG
-> >         bool "Enable random number generator on TPM device"
-> >         depends on TPM
-> > diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> > index 78f61051acf..572fa7a0c66 100644
-> > --- a/drivers/rng/Makefile
-> > +++ b/drivers/rng/Makefile
-> > @@ -13,4 +13,5 @@ obj-$(CONFIG_RNG_STM32MP1) += stm32mp1_rng.o
-> >  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
-> >  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
-> >  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
-> > +obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
-> >  obj-$(CONFIG_TPM_RNG) += tpm_rng.o
-> > diff --git a/drivers/rng/arm_rndr.c b/drivers/rng/arm_rndr.c
-> > new file mode 100644
-> > index 00000000000..55989743eae
-> > --- /dev/null
-> > +++ b/drivers/rng/arm_rndr.c
-> > @@ -0,0 +1,82 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * Copyright (c) 2023, Arm Ltd.
-> > + *
-> > + * Use the (optional) ARMv8.5 RNDR register to provide random numbers to
-> > + * U-Boot's UCLASS_RNG users.
-> > + * Detection is done at runtime using the CPU ID registers.
-> > + */
-> > +
-> > +#define LOG_CATEGORY UCLASS_RNG
-> > +
-> > +#include <common.h>
-> > +#include <dm.h>
-> > +#include <linux/kernel.h>
-> > +#include <rng.h>
-> > +#include <asm/system.h>
-> > +
-> > +#define DRIVER_NAME    "arm-rndr"
-> > +
-> > +static bool cpu_has_rndr(void)
-> > +{
-> > +       uint64_t reg;
-> > +
-> > +       __asm__ volatile("mrs %0, ID_AA64ISAR0_EL1\n" : "=r" (reg));
-> > +       return !!(reg & ID_AA64ISAR0_EL1_RNDR);
-> > +}
-> > +
-> > +/*
-> > + * The system register name is RNDR, but this isn't widely known among older
-> > + * toolchains, and also triggers errors because of it being an architecture
-> > + * extension. Since we check the availability of the register before, it's
-> > + * fine to use here, though.
-> > + */
-> > +#define RNDR   "S3_3_C2_C4_0"
-> > +
-> > +static uint64_t read_rndr(void)
-> > +{
-> > +       uint64_t reg;
-> > +
-> > +       __asm__ volatile("mrs %0, " RNDR "\n" : "=r" (reg));
-> > +
-> > +       return reg;
-> > +}
-> > +
-> > +static int arm_rndr_read(struct udevice *dev, void *data, size_t len)
-> > +{
-> > +       uint64_t random;
-> > +
-> > +       while (len) {
-> > +               int tocopy = min(sizeof(uint64_t), len);
-> > +
-> > +               random = read_rndr();
-> > +               memcpy(data, &random, tocopy);
-> > +               len -= tocopy;
-> > +               data += tocopy;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static const struct dm_rng_ops arm_rndr_ops = {
-> > +       .read = arm_rndr_read,
-> > +};
-> > +
-> > +static int arm_rndr_probe(struct udevice *dev)
-> > +{
-> > +       if (!cpu_has_rndr())
-> > +               return -ENODEV;  
-> 
-> Can you put this in a bind() function instead, if not too expensive?
+Co-developed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 
-That's the point I was wondering about (see my message to you above, after
-the S-o-B): it seems more natural there, but stops the boot.
-Apparently DM expects those fixed devices (U_BOOT_DRVINFO) to always
-succeed their bind() calls? Because if I put it in bind, I get:
-================
-No match for driver 'arm-rndr'
-initcall sequence 00000000fefc4528 failed at call 000000008801d104 (err=-19)
-### ERROR ### Please RESET the board ###
-================
-if the feature is not available.
-Any suggestions how to use bind and avoid that crash are highly welcome.
+> ---
+> (Now fixed - thank you Andy!)
 
-And regarding "expensive": This is reading a fixed, read-only system
-register. There is probably nothing cheaper than that on a modern chip.
+Right,
+Tested-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
-Cheers,
-Andre
+-- 
+With Best Regards,
+Andy Shevchenko
 
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +U_BOOT_DRIVER(arm_rndr) = {
-> > +       .name = DRIVER_NAME,
-> > +       .id = UCLASS_RNG,
-> > +       .ops = &arm_rndr_ops,
-> > +       .probe = arm_rndr_probe,
-> > +};
-> > +
-> > +U_BOOT_DRVINFO(cpu_arm_rndr) = {
-> > +       .name = DRIVER_NAME,
-> > +};
-> > --
-> > 2.25.1
-> >  
-> 
-> Regards,
-> Simon
 
