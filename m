@@ -4,65 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3889CEE49B2
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 22:17:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AABEE49B2
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 22:17:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 705778678A;
-	Fri,  1 Sep 2023 00:16:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id BD5F5867DE;
+	Fri,  1 Sep 2023 00:17:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="IAFBy3Y0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GLzNN3Ye";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BF128675B; Fri,  1 Sep 2023 00:16:45 +0200 (CEST)
-Received: from s.wfbtzhsv.outbound-mail.sendgrid.net
- (s.wfbtzhsv.outbound-mail.sendgrid.net [159.183.224.104])
+ id BBCB8866D4; Fri,  1 Sep 2023 00:17:25 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 638148679F
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 00:16:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3DCB865A0
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 00:17:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=from:subject:in-reply-to:references:mime-version:to:cc:
- content-transfer-encoding:content-type:cc:content-type:from:subject:to;
- s=s1; bh=PomkGehBG5LFH9ffwETRMlm0emNiF++0IEZik0tu4lc=;
- b=IAFBy3Y08CnCgolMfFUxGbYK9Uim+4ba71HKK3neCwXZCCCDdf/6WZZZN6nw5Vv2TTlW
- akVDYiMNkVsQ+PlSQxKYPiRrSXfj+QR1SBwB4UITAATy6r/VKm5+wN50IABLJvN+d7/0GC
- 6V0yt9M9SfcN3E3BONg9lbRHDjQSVujizw95Q06ZAnyG5KaNhQeorFWWAxN9rXWUGDdsGq
- VmUw4rs8nt7vzqfnz19QsAaxQH4Ey9n9gfe582sSaBs/nK2g3K9YL+wwUoTyYnFOoCJq/M
- bKbNd3LduWRuFk6nP5CYyfmAD4atGbVFk17WeEwgWqdLYtoo+JXkvWFXt3c/rUIA==
-Received: by filterdrecv-66949dbc98-rr4mv with SMTP id
- filterdrecv-66949dbc98-rr4mv-1-64F11147-30
- 2023-08-31 22:16:39.972610236 +0000 UTC m=+5859655.737372949
-Received: from bionic.localdomain (unknown) by geopod-ismtpd-5 (SG) with ESMTP
- id IADmaorORHiY7AGtLHe-IQ Thu, 31 Aug 2023 22:16:39.779 +0000 (UTC)
-From: Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 6/6] video: rockchip: dw_mipi_dsi: Use generic_phy_valid()
- helper
-Date: Thu, 31 Aug 2023 22:16:40 +0000 (UTC)
-Message-ID: <20230831221629.1027552-7-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20230831221629.1027552-1-jonas@kwiboo.se>
-References: <20230831221629.1027552-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40037db2fe7so13750875e9.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 15:17:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693520242; x=1694125042; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FFR7IXFH5vdXwTI+w0PeN8v80S5zu8pFt4YOGxCAYgs=;
+ b=GLzNN3YeTHY1KsNsBSKZV3k72mrUf1yTJo4WzO4es+Tyx1la8GLXV3eKIjRSa8h7/d
+ MHptbKJ6kO9btpNqUyx92T9GJiMikJc+I2XM1zk3iqfto9XPlwUCvvfrC1LIFSssMMA+
+ 0i2sDGUTfJVYuG2vdq/4VtfVgzhG0Vqdpr5aA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693520242; x=1694125042;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FFR7IXFH5vdXwTI+w0PeN8v80S5zu8pFt4YOGxCAYgs=;
+ b=gBDjlH2I5rWYYXoUT58Gsyjx1VY9Q5N3yftkeDd3YBezKy5kGhcGnoaXj3EaHr+Pj+
+ OLefKaPi+1C4hEn2pz5gyO3SljmAVG/qkvZjXZpOpIZLMoim43bAAuCN37h5x2NIzUZO
+ +s3TsHDZnJSLaDu8d9h6yC+JWb41JLiqMREtwA1e/uuIIJsH/ogjnpLtIn5oHBOyp0ky
+ fb2gp3MruP+8Va2h52qkL90gcOaaWG1eNQ4sjBizaQMeGawDPaQzvdSYRmO4XR6s7DZG
+ EQZtwI8dYyWewkHnH6KyTK/5Wl6Uvnyx7f2m4DNa88HuRKfBtsA+xGOeZlHM4SnjRNrp
+ zcIA==
+X-Gm-Message-State: AOJu0Yz71SD8c3pCqx++Q6GYUWzXd9KYqLAhMHazxKDXgZTVXe2OGtNY
+ w3OC4vMGqEV9N4iajZtYnxECIzhKVMCHp/RcTmKBXg==
+X-Google-Smtp-Source: AGHT+IFrt9EHDJFs0kDfujnPEwNUsOU4CWXcywu2cSrN7omiMwRyg1PxyHqh/a2NR/oqZId8O3IqpLzlz61Pl0wpgls=
+X-Received: by 2002:a5d:4b87:0:b0:317:3d6c:5b27 with SMTP id
+ b7-20020a5d4b87000000b003173d6c5b27mr571527wrt.46.1693520241666; Thu, 31 Aug
+ 2023 15:17:21 -0700 (PDT)
 MIME-Version: 1.0
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0hxlTWx0iFLJM6wgho?=
- =?us-ascii?Q?CM4D9qIihyM+88l2hWDN85acQa6I1g1eH=2FZbWmr?=
- =?us-ascii?Q?dBg1YYy=2FRSf1PL4asM8RaDiu1RJk2GQHz5TQqhE?=
- =?us-ascii?Q?u9TmEMulTNW=2F7bMmpwcqbPzzIFU1p0MsKp2kSzb?=
- =?us-ascii?Q?WXvdRocCBEqxDBxKEGREQ=2F75+eusz+ewXSwOOU?=
-To: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Anatolij Gustschin
- <agust@denx.de>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
- <kever.yang@rock-chips.com>, Ondrej Jirman <megi@xff.cz>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset=us-ascii
+References: <20230822203446.4111742-1-sjg@chromium.org>
+ <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
+ <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
+ <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
+ <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
+ <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
+ <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
+ <CAPnjgZ3L-jGxoXNHnsXY0MXU=jTAN66KNAxSLHPVeHinHMjzkQ@mail.gmail.com>
+ <CAMj1kXGw6DGK=gVF3bMH5dp=LL89V9n1V1LMGKDn0CZWGHh8qg@mail.gmail.com>
+ <CAPnjgZ1fjee3rf91onPbuLpgqTHe3dZgz0WBSzoiKAabO+ETkQ@mail.gmail.com>
+ <CAMj1kXFvLGeXXmyK1wSXLk5yq42f2G3GvBGoN40JF=y4bvCo=Q@mail.gmail.com>
+In-Reply-To: <CAMj1kXFvLGeXXmyK1wSXLk5yq42f2G3GvBGoN40JF=y4bvCo=Q@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 31 Aug 2023 16:17:03 -0600
+Message-ID: <CAPnjgZ25VqPCBSZ69fyb+G93=hzS-gX6zVa0J3vYyY49p0CZmw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
+ linux-acpi@vger.kernel.org, 
+ lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
+ ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,48 +96,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The documentation for struct phy state that "The content of the
-structure is managed solely by the PHY API and PHY drivers".
+Hi Ard,
 
-Change to use the generic_phy_valid() helper to check if phy is valid.
+On Thu, 31 Aug 2023 at 15:48, Ard Biesheuvel <ardb@kernel.org> wrote:
+>
+> On Thu, 31 Aug 2023 at 21:03, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ard,
+> >
+> > On Thu, 31 Aug 2023 at 06:28, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > >
+> > > On Wed, 30 Aug 2023 at 23:11, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ard,
+> > > >
+> > > > On Tue, 29 Aug 2023 at 15:32, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > > >
+> > > > > On Tue, 29 Aug 2023 at 21:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Ard,
+> > > > > >
+> > > > > > On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > ...
+> > > > > > > In summary, I don't see why a non-UEFI payload would care about UEFI
+> > > > > > > semantics for pre-existing memory reservations, or vice versa. Note
+> > > > > > > that EDK2 will manage its own memory map, and expose it via UEFI boot
+> > > > > > > services and not via DT.
+> > > > > >
+> > > > > > Bear in mind that one or both sides of this interface may be UEFI.
+> > > > > > There is no boot-services link between the two parts that I have
+> > > > > > outlined.
+> > > > > >
+> > > > >
+> > > > > I don't understand what this means.
+> > > > >
+> > > > > UEFI specifies how one component invokes another, and it is not based
+> > > > > on a DT binding. If the second component calls UEFI boot or runtime
+> > > > > services, it should be invoked in this manner. If it doesn't, then it
+> > > > > doesn't care about these memory reservations (and the OS will not be
+> > > > > booted via UEFI either)
+> > > > >
+> > > > > So I feel I am missing something here. Perhaps a practical example
+> > > > > would be helpful?
+> > > >
+> > > > Let's say we want to support these combinations:
+> > > >
+> > > > Platform Init -> Payload
+> > > > --------------------------------
+> > > > U-Boot -> Tianocore
+> > > > coreboot -> U-Boot
+> > > > Tianocore -> U-Boot
+> > > > Tianocore -> Tianocore
+> > > > U-Boot -> U-Boot
+> > > >
+> > > > Some of the above things have UEFI interfaces, some don't. But in the
+> > > > case of Tianocore -> Tianocore we want things to work as if it were
+> > > > Tianocore -> (its own handoff mechanism) Tiancore.
+> > > >
+> > >
+> > > If Tianocore is the payload, it is either implemented as a EFI app, in
+> > > which case it has access to EFI services, or it is not, in which case
+> > > it doesn't care about UEFI semantics of the existing reserved regions,
+> > > and it only needs to know which regions exist and which of those are
+> > > reserved.
+> > >
+> > > And I think the same applies to all other rows in your table: either
+> > > the existence of UEFI needs to be carried forward, which needs to be
+> > > done via EFI services, or it doesn't, in which case the UEFI specific
+> > > reservations can be dropped, and only reserved and available memory is
+> > > relevant.
+> > >
+> > > > Some Platform Init may create runtime code which needs to accessible later.
+> > > >
+> > >
+> > > But not UEFI runtime code, right? If the payload is not UEFI based,
+> > > the OS would never be able to call that runtime code unless it is
+> > > described in a different, non-UEFI way. This is fine, but it is not
+> > > UEFI so we shouldn't call it UEFI runtime memory.
+> > >
+> > > > The way I think of it is that we need to generalise the memory map a
+> > > > bit. Saying that you must use UEFI boot services to discover it is too
+> > > > UEFI-specific.
+> > > >
+> > >
+> > > What I am questioning is why a memory map with UEFI semantics is even
+> > > relevant when those boot services do not exist.
+> > >
+> > > Could you be more specific about why a payload would have to be aware
+> > > of the existence of UEFI boot/runtime service regions if it does not
+> > > consume the UEFI interfaces of the platform init? And if the payload
+> > > exposes UEFI services to the OS, why would it consume a memory map
+> > > with UEFI semantics rather than a simple list of memblocks and memory
+> > > reservations?
+> >
+> > It seems like you are thinking of the Payload as grub, or something
+> > like that? This is not about grub. If there are EFI boot services to
+> > be provided, they are provided by the Payload, not Platform Init. I am
+> > not that familiar with Tianocore, but if you are, perhaps think of it
+> > as splitting Tianocore into two pieces, one of which inits the silicon
+> > and the other which provides the EFI boot services.
+> >
+> > Again, if you are familiar with Tianocore, it can be built either as a
+> > monolithic whole, or as a coreboot Payload. The Payload part of the
+> > code is (roughly) the same in each case. But the Platform Init is
+> > different[1]
+> >
+>
+> I co-maintain OVMF [including the ARM port that I created from
+> scratch] as well as the ARM architecture support in Tianocore, along
+> with a couple of platform ports for ARM boards, some of which could by
+> now be characterized as 'historical' (AMD Seattle, Socionext SynQuacer
+> and Raspberry Pi 3/4). So I think I have a pretty good handle on how
+> Tianocore based firmware is put together.
+>
+> Tianocore as a payload will expose boot services to the OS, and will
+> provide the OS with a memory map using the UEFI APIs. But you still
+> haven't explained why the memory description this Tianocore inherits
+> from the Platform Init would include any UEFI boot or runtime service
+> regions, or any of the other memory regions with UEFI semantics.
+> TIanocore just needs to know a) where memory lives b) which parts of
+> it are already in use (as far as the memory map is concerned), and the
+> existing bindings suffice for this purpose.
+>
+> In short, the memory regions with UEFI semantics are created by the
+> boot phase that actually exposes UEFI to the OS, in which case the
+> boot services can be used to obtain the memory map. If the consumer is
+> not UEFI based, there is no reason to bother it with descriptions of
+> memory regions that have no significance to it.
 
-Fixes: b7d8d40346f2 ("video: rockchip: dw_mipi_dsi: Fix external phy existence check")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+But aren't you assuming that the Payload knows how to handle the
+hardware and can implement the runtime services? What if (for example)
+powering off the device is hardware-specific and only Platform Init
+knows how?
 
-diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-index 0852b53ebed5..1a5ab781e3f1 100644
---- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-+++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-@@ -377,7 +377,7 @@ static int dsi_phy_init(void *priv_data)
- 	struct dw_rockchip_dsi_priv *dsi = dev_get_priv(dev);
- 	int ret, i, vco;
- 
--	if (dsi->phy.dev) {
-+	if (generic_phy_valid(&dsi->phy)) {
- 		ret = generic_phy_configure(&dsi->phy, &dsi->phy_opts);
- 		if (ret) {
- 			dev_err(dsi->dsi_host,
-@@ -559,7 +559,7 @@ dw_mipi_dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
- 	}
- 
- 	/* for external phy only the mipi_dphy_config is necessary */
--	if (dsi->phy.dev) {
-+	if (generic_phy_valid(&dsi->phy)) {
- 		phy_mipi_dphy_get_default_config(timings->pixelclock.typ  * 10 / 8,
- 						 bpp, lanes,
- 						 &dsi->phy_opts);
-@@ -859,7 +859,7 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
- 	}
- 
- 	/* Get a ref clock only if not using an external phy. */
--	if (priv->phy.dev) {
-+	if (generic_phy_valid(&priv->phy)) {
- 		dev_dbg(dev, "setting priv->ref to NULL\n");
- 		priv->ref = NULL;
- 
--- 
-2.42.0
+On another track, would it help if we just dropped all mention of
+UEFI? The binding does not mention it.
 
+On a third track, what if Platform Init wants to set aside some memory
+for runtime code, e.g. in SRAM?
+
+I'm just not sure that Platform Init and Payload are as completely
+independent as you seem to be suggesting. Once we get into the
+Payload, the only things we know are what Platform Init told us.
+
+>
+> > >
+> > > Again, I am inclined to treat this as a firmware implementation
+> > > detail, and the OS must never consume this binding. But I am still
+> > > puzzled about what exact purpose it is expected to serve.
+> >
+> > It really is purely so we can mix and match Platform Init (perhaps
+> > silicon init is a more familiar term?) and the Payload.
+> >
+>
+> That part is clear to me.
+>
+> > [1] Of course, coreboot uses blobs which are chunks of UEFI, but that
+> > is a separate issue
+>
+> I suppose you are referring to the proprietary FSP components? Those
+> are mostly made up of PEIMs (in Tianocore/EDK2 speak) for DDR training
+> and chipset initialization, and don't really take part in the
+> implementation of the UEFI APIs. Strictly, they are not 'chunks of
+> UEFI' but 'chunks of PI' (but even Tianocore itself, being the
+> reference implementation of both UEFI and PI, does a terrible job at
+> distinguishing between the two)
+
+OK I see. From my POV they seem like binary blobs that are built from
+UEFI, but I will try to remember about PI.
+
+Regards,
+Simon
