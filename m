@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC34EC83F29
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE00C83F29
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 04:05:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E318655E;
-	Thu, 31 Aug 2023 05:58:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E70BB8655C;
+	Thu, 31 Aug 2023 06:05:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="M6p1eOCX";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nBYuhAyH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA7B38655E; Thu, 31 Aug 2023 05:58:19 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id AB98486561; Thu, 31 Aug 2023 06:05:27 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C4698655C
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:58:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2473586558
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 06:05:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693454296; x=1694059096; i=xypron.glpk@gmx.de;
- bh=UX2QLbWtaOJ2CpQyqaPGIGYg8tohYdm//RViBB653cw=;
- h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References;
- b=M6p1eOCXhsO1K0iQ4dnQ1uG2HvROpdo08PNEB7Rw3qFMRM87e11nkro9+RwvTzX4CaA60Mt
- mPWpOfwxIjG+kGhivbPQcqn1IYwktl80FiNCufjENCxpNlPfr1pUgT6Y1azL4JAbxLXWEv4gK
- McYZ3Doh8B+1ZMwiV8QHLJ/IxhgW5J/jhAUHPqfwZ8moN55kKm/jiU1Dawxu6/TSpp1BBk61+
- 3Gd4xu1O5+yXg0batIjyzXVPQQ5vIAeFlvFpXFC1vX/x2UReLUXGiUZBOMJVRfOWPp2OYLLga
- wZKdE6ZDBWm9QWpGU28g9axQo0xEI+PyoYWe6ucftz4Eg95cvB+Q==
+ s=s31663417; t=1693454723; x=1694059523; i=xypron.glpk@gmx.de;
+ bh=Zaabr2xSecYebXHmeyY3uCPMyBBttLkwR0BBHSIPYKY=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
+ b=nBYuhAyHAkUQpiTKSHy6whvW5kQtFWNS4KWu7wA20b5keGhDKi3p5CWPv9DJxpASDvd5qLD
+ +xdwsBp+KFjFRIULXZGAxa1WW9l3esWiBQDS4cNK3jl2TcfJnQ0NlhZsmgrS1A+PZ8YhO6nvm
+ 93KP5DyESCzKLFNFzYsjvcLl/c8KT3npUK/CsBj98u99WdRufmihbbHz3eKIeFn3fikcxLEVu
+ 9MKOz70IZGHdGyAZUyETyNu6mvNFvKJS/ij3OJzn6tr3Lmw567BRDO2sM8tprakr1LlmwRNgv
+ eFMzQRvE52tzLINZ7YwHXn8VU6YcVWQRT2yyNNMB2tCbSp9Qffng==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [127.0.0.1] ([62.143.244.162]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mw9Q6-1pm4680s3o-00s512; Thu, 31
- Aug 2023 05:58:16 +0200
-Date: Thu, 31 Aug 2023 05:58:15 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfpSl-1q0ZEA2RDN-00gKjl; Thu, 31
+ Aug 2023 06:05:23 +0200
+Date: Thu, 31 Aug 2023 06:05:22 +0200
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [RFC PATCH 9/9] upl: Add initial documentation
+CC: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: Re: [PATCH v2 03/19] video: Hide the BMP options
 User-Agent: K-9 Mail for Android
-In-Reply-To: <20230830172917.RFC.9.I010f4a9bf3e17c8e8ea0c41a053c745d56ca9559@changeid>
-References: <20230830232928.2590178-1-sjg@chromium.org>
- <20230830172917.RFC.9.I010f4a9bf3e17c8e8ea0c41a053c745d56ca9559@changeid>
-Message-ID: <A6EEF68A-80C1-4888-AD27-3A78826559DC@gmx.de>
+In-Reply-To: <20230831035319.2316665-4-sjg@chromium.org>
+References: <20230831035319.2316665-1-sjg@chromium.org>
+ <20230831035319.2316665-4-sjg@chromium.org>
+Message-ID: <96711E1B-FA6B-44D5-ACB8-421C85373432@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:u7joWuBYdK5I/+hhdryz5IPGlQk8v3gefGR6B2YLiBjYbO8hNzA
- /Ink/IwIcFeO+Twkk2tLOf5wk3fsIK+4c7wEowSDQdrePr+WQbm1TgoQC80kUaABvRfmuhX
- GILJEycOTCZ9q6ocJJCNvG6pUQ48ziaZ6zfnu9eP7mqL7U2FMjD4OtMlZfBG3XkEElgNxI9
- q073hnzFIBgsjeMWbS80A==
-UI-OutboundReport: notjunk:1;M01:P0:wvyawo0pFaM=;YVFvw6vTbU8fD9I2Ym3YScqBeFZ
- LtBxqUNrMnCQUrorg1+xo3k4k+hqavdf0x6m9IaPcM0WUqt29+qGbijhdW8E9kChyN5QaYuUc
- G4UQIDboUAFnAbjCPo5I/7cglHl4/nEtj95GqcDOOYqhGkGwlXhYJZMLzvAVMfHKZISaPDU50
- vBje/wtP/uy4bstKCG7e6wTtVp8Xlg/G3uUGZO0Idmz2BMlPnoxqJQxjNhIeFcx4qBcVU6Vjz
- y2BsvJyYIjKLYVP3jj6VSb4RCbqYph5KSUYdgUri7XItP+TaHx/wyzTx+llFKZZw5bmoB2S8H
- C5PvIEiYU0VrcSV3tmpvvabONf+8MEu8hlk63zt6DPRjKfuosjgCLeNeom00YOKLoH4oaUDY+
- rBbBX24qMy+hoME80NRm69jZwJhWlVKuuRTTPcuMXmKrutWbeYmvZn4aHoMmP86FT+wVU2MTe
- ed9crU3WrVVNSfZxiKT6Z+jL2Wzkbs6L+/oSfdtPSNxZAEgvfrE8p7bbYc3arHixGDTA8m1Wi
- mkw/vaeXRemJaqExBH1ALghnQQX6vFJlzou4qajeBhhvhPNZYxEqA7rMqsoHQad4TeJeDXx/I
- 45RJeMMqYloH5JcLc3HE8gZCr33TCooCSzEsdTR3ft+mYwJwol95ub1oce8xRTRBHBTQ4NniD
- cgkjedDzfk0cO6XErozd86Kh/vDhV1rycAqmUcEzjIKcYqXL0/EywVaKmaPsch6qOwkiyXiqZ
- /gaBTYmE8DLOzsKANTVP9KfSMAgrlPXwvmxb9fIrV6wcxXw2VLHAGA+oh6RTJcHIMIN+v6kOl
- n0w4s36T9mDuD8mb5dA8uzQHVxiebjrbr0M3MTSyc6PFO9lh3CXiUzbmtK1y8HIGp++jQYNUe
- 4qKDvCuUzVXckcEDlP9XAe3gFhTwpF32qKC7aWw6rzxHs39COty8R3WQg8NRNookErtiHoh6q
- fxuLjIRMd83Jsi/0ZbvPgWSQ2GI=
+X-Provags-ID: V03:K1:wr+gHEyjx2j7XegcGPwo9yPUR3jGYFEHLXFwWM99PnFCLi26aZ8
+ V9Be+wXN/w9Von0MVS/lRws3+2Ap7npxsIXzD42d7bAEixBRtD2ucuu1OrCSncbAcRCNK9k
+ j3Ba6cbK1d2CUhyiu0HdI+Hvq/211GRDVcAK8aU6ALGo8TQOl7INbiPo4uKSlz+anATC5XH
+ JzO8kw2XtAa0mIQBHoc6g==
+UI-OutboundReport: notjunk:1;M01:P0:G+XyX1Zi76Q=;7v83kdFL3UTx5Ow6hR8UtNxE1Ps
+ 0tPn4GZSlTLhJ/uxn38gpYnr4W/3Zh5BTu0sRMjlsmG5tXi6iVB+Sz+1XYBHQyyuSpO3MAdUs
+ TgLSFOyJr234Sd+w8JpHGyXLrLKHTC498FG27YM35Pc8Vb71w0O1I+9v40i2bilKFOdGd/8eO
+ o7IHt7R9eb3F39UATz/SfnneILB4RrF8v6M3jM3GpUz0JplnxGiSdkAd4DhRTAY2KwwH337NC
+ KcVfb/6dLCUgkLjgLjY5uHqOWkxOTZv5ASsrjoOgN+wUIidVg3SYO2G/NLzL21/SNf4d6rctm
+ mCuKhBj7enEdVdBl4WfZpEVOCIDIqd8yIGUsND/2gpcoFNitpoFqtagzQlRcpTUaIlMnuMUuV
+ wZq2k9pRyAaNkDstkWGFe6AHbIJaqXjS8Tnq2FEtiIdJJ8CdYcDWn1n/6pSUiK6SISXVRNR2K
+ PIGQt30QTT+w0ProJRvpBvdyUVpf+lRMK0unuIICVABVb13XcxFAfEk70D+Ad0ZMENwwJFqhC
+ 89Nx9OFDldGc2/jrQR0tuC49A78XK5mrNzHoI9dQF77/jUEMMuUcTb7NeNJ+Fkc9vGyvwhrsL
+ nfZHuIbuOuOlJkQstA0mb2HUkWkbIKuyHPfRMfavLOi34OkWxUAvCtHl9nUIEgnbXonxUHoBb
+ Bt9VirKzTEgv8JWQYHGN4eTOviBKGecBpGr3PeS4D5B9B212mJQSZUgdyBUxh84lhxBAvCs9T
+ YENvbg8xKpWEp/RrzVWEHZOGbNiWJwTwlWsy/Vul/E9G/hBvL8AWXLZJnOSj5PMr+sdCyoZ2j
+ alTEogVYazmQ03d18IqUFlDo5xZREHimt0BKS/gSoIM/DfXLvm+3G0trEyzcNfgXodbTHnUIv
+ 543rZ5A6EY6JbnifviYU4JttWWf17rrGYFl+dYotl2rOlFmDrNKaoRevIomry6im2Gao390ED
+ UoHbNg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,86 +90,49 @@ X-Virus-Status: Clean
 
 
 
-Am 31=2E August 2023 01:29:23 MESZ schrieb Simon Glass <sjg@chromium=2Eorg=
+Am 31=2E August 2023 05:52:57 MESZ schrieb Simon Glass <sjg@chromium=2Eorg=
 >:
->Add some placeholder documentation to explain the basic concept=2E Once t=
-he
->spec is published, more can be added and this series applied=2E
+>These appear prominently in the main menu at present=2E However they are
+>selected when needed so do not need to be visible=2E
+>
+>Make them hidden=2E
 >
 >Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
 >---
 >
-> doc/usage/index=2Erst |  1 +
-> doc/usage/upl=2Erst   | 27 +++++++++++++++++++++++++++
-> 2 files changed, 28 insertions(+)
-> create mode 100644 doc/usage/upl=2Erst
+>(no changes since v1)
 >
->diff --git a/doc/usage/index=2Erst b/doc/usage/index=2Erst
->index ed896dfb3a0=2E=2E78665fd5759 100644
->--- a/doc/usage/index=2Erst
->+++ b/doc/usage/index=2Erst
->@@ -13,6 +13,7 @@ Use U-Boot
->    partitions
->    cmdline
->    semihosting
->+   upl
+> common/Kconfig | 4 ++--
+> 1 file changed, 2 insertions(+), 2 deletions(-)
+>
+>diff --git a/common/Kconfig b/common/Kconfig
+>index 0b09bd68bd13=2E=2E844531a59eda 100644
+>--- a/common/Kconfig
+>+++ b/common/Kconfig
+>@@ -1169,12 +1169,12 @@ config IO_TRACE
+> 	bool
 >=20
-> Shell commands
-> --------------
->diff --git a/doc/usage/upl=2Erst b/doc/usage/upl=2Erst
->new file mode 100644
->index 00000000000=2E=2E2ae4d4a1178
->--- /dev/null
->+++ b/doc/usage/upl=2Erst
->@@ -0,0 +1,27 @@
->+Universal Payload
->+~~~~~~~~~~~~~~~~~
->+
->+Universal Payload (UPL) is an upcoming Industry Standard for firmware
->+components=2E UPL is designed to improve interoperability within the fir=
-mware
->+industry, allowing mixing and matching of projects with less friction an=
-d fewer
->+project-specific implementations=2E UPL is cross-platform, supporting AR=
-M, x86 and
->+RISC-V initially=2E
+> config BMP
+>-	bool "Enable bmp image display"
+>+	bool # Enable bmp image display
 
-Please, provide a link to the specification=2E
+This must depend on video=2E
 
->+
->+UPL is defined in termns of two firmware components:
+> 	help
+> 	  Enable bmp functions to display bmp image and get bmp info=2E
+>=20
+> config SPL_BMP
+>-	bool "Enable bmp image display at SPL"
+>+	bool # Enable bmp image display at SPL
 
-terms
+Why should I not be able to deactivate the logo display?
 
-
->+
->+`Platform Init`
->+	Perhaps initial setup of the hardware and jumps to the payload=2E
-
-%s/Perhaps/Possible/
-
->+
->+`Payload`
->+	Selects the OS to boot
-
-IIRC the UPL payload typically is not the OS but other firmware or a boot =
-loader=2E
+Just move the entries to submenus related to video, please=2E
 
 Best regards
 
 Heinrich
 
->+
->+In practice UPL can be used to handle any number of handoffs through the
->+firmware startup process, with one program acting as platform init and a=
-nother
->+acting as the payload=2E
->+
->+UPL provides a standard for three main pieces:
->+
->+- file format for the payload, which may comprise multiple images to loa=
-d
->+- handoff format for the information the payload needs, such as serial p=
-ort,
->+  memory layout, etc=2E
->+- machine state and register settings at the point of handoff
+> 	depends on SPL_VIDEO
+> 	help
+> 	  Enable bmp functions to display bmp image and get bmp info at SPL=2E
