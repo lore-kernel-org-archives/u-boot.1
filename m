@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37294C83F22
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACC3C83F22
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 02:50:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99E7986569;
+	by phobos.denx.de (Postfix) with ESMTP id E1B5D8656A;
 	Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OE3JCKCL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MUf07dRD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E76C86579; Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 6477D86569; Thu, 31 Aug 2023 04:50:04 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A0B486569
+ by phobos.denx.de (Postfix) with ESMTPS id 5B9B486550
  for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 04:49:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-31781e15a0cso189570f8f.3
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-52683b68c2fso353860a12.0
  for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 19:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693450199; x=1694054999; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I2Rtnw+7G+TPeNMQvJ+TunX7eGrR/Eu/JPGF55Jq5bs=;
- b=OE3JCKCL8j54T5jieDbS8V6mQoP42Bt9VYAIGQjhAMnciZ9u54/JoMnuhgWam4cEiI
- 0OZ5jvqDWyiWZ6eceyqRiroMnusTPZyqUSlMRqGPQjmV358C1yZ5vG3y/FS5umbyJKBI
- 8/GV2OWd/IsUqbiW+EjP0EdmqhfQbFIYihVAk=
+ bh=XQEk+BAuHTXDL9WXFe64kd+V4WgpTYQEeDOe8PYQ84A=;
+ b=MUf07dRDWf5XKBhJaCuvPqJrS6jMlbR/D51T+JZEmjTaiAXbtuIQcm0Nec5CZGIuxo
+ n39lf1UfPtLUPTlWGH00j/Oz84zaNcWTob2YYFCfNj0lHmTivZZo1B8m4p3rlx04mEh8
+ odt2Oq0X8g6F5y3o9AyF97X1sIKFzob3ru5aQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693450199; x=1694054999;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I2Rtnw+7G+TPeNMQvJ+TunX7eGrR/Eu/JPGF55Jq5bs=;
- b=a7DxG0ndrB6nZpf/3WSK5v/vDnfnHijee+R8RS7w6zuMZTd1aPp3aNvt62WxGdq5EG
- dnRlT8oBq2ML7epbPVaegbEsDCvdN0aSbJAnv9dZK3c5jjaB/8XLfFexACBctmDeqe4o
- Wbvq36VplVNeuy3t+tc9ESGl38N7bdn1fd0c6P9mhH7i/zAFc0TUQ5LehWjY+4iD2hyq
- n0UDpcp54kEgaFmj5k6xxZ2jHrLnMYNUlhahEZLKQ1JfCg3afRLhcR8DslWyEulaEJk2
- HtMkmjI2JpP5Q+hCDnWkgYJSmY2fsjGsbYKzISScgdUscQFxeXw0I6cQlzgMauVKCj60
- 5bLg==
-X-Gm-Message-State: AOJu0YyxIZ8rSb+jKAxCoISBKxLElEEBOUk4gRlsQvGi1n3V+b3cgIf9
- qfauMiGDk9DuxqQR/CkuNZh3kg1tXnb2U0aOp5MHpQ==
-X-Google-Smtp-Source: AGHT+IEBwom1uFeyGa6tYHdeKHkuIIF9guWzHpYeS6IN4u01TkZ8cZlS81s8vR9FCRrah+Zx4b4WjsQh1z2Nf6JXgUw=
-X-Received: by 2002:a5d:5011:0:b0:319:664a:aff5 with SMTP id
- e17-20020a5d5011000000b00319664aaff5mr3037633wrt.37.1693450198929; Wed, 30
- Aug 2023 19:49:58 -0700 (PDT)
+ bh=XQEk+BAuHTXDL9WXFe64kd+V4WgpTYQEeDOe8PYQ84A=;
+ b=akJkspni+qMevefV+NWGKv31Sx8g08D8kbvfIf3Mex/3jm87DFifeXcPcDoOpIofj8
+ XSZroKTbsbJThnuoOaAVQdNV2siKaxOljMvVuu+jGBv9wHndTbYNyC02gSoirP8Al7tu
+ eonREYwJBodJxR654A3kqtWsU9ONmVhTTk74zZ5lct8Es7eL44ie/D+GMJJNmytVW37Z
+ WYywtllr+XIBKIR/GURM+Ub7GQzPY8FXapElVRLnDTMbkjVjjru0ggMg28vGkKIDUPrJ
+ m8FihK8kz/mfCPDzm+C9tiSTlZC4JpEe+kd0FdIveZpNa+Y+Yt9IPmvQA7yz17qX+2pi
+ eAEg==
+X-Gm-Message-State: AOJu0YymYjWRnI5KtD5PMMWYORP2d+PRix5osJT/PgD+Nnhv3BY7Wynz
+ 6wsqzzvgktYmE9DDYwf9ACGxhJxielXN6FCM/Pfdzg==
+X-Google-Smtp-Source: AGHT+IH6y/nIGKENiyoyRpRAp+frqPfd1vWPEH7qNEp/87/CnwrP1U3OdmvJDUoKWgbQtED+zEmmsKnmuyUuCsJvHus=
+X-Received: by 2002:a50:ef1a:0:b0:51b:c714:a2a1 with SMTP id
+ m26-20020a50ef1a000000b0051bc714a2a1mr3469258eds.7.1693450198736; Wed, 30 Aug
+ 2023 19:49:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230829203710.84201-1-seanedmond@linux.microsoft.com>
- <20230829203710.84201-5-seanedmond@linux.microsoft.com>
-In-Reply-To: <20230829203710.84201-5-seanedmond@linux.microsoft.com>
+References: <CGME20230829042831epcas2p4a8a4cd85cdfe73e8dac914b274d5c351@epcas2p4.samsung.com>
+ <20230829042803.2606011-1-chanho61.park@samsung.com>
+ <CAPnjgZ0XSpoCRp20aOUQ7mwaCnkQGS3ois7kfkkMV064=QWtOA@mail.gmail.com>
+ <000001d9db00$416373e0$c42a5ba0$@samsung.com>
+In-Reply-To: <000001d9db00$416373e0$c42a5ba0$@samsung.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 30 Aug 2023 20:49:23 -0600
-Message-ID: <CAPnjgZ1wnBmb4mVvmaW-10E157xUjw+ZFvZ=2x10JxyWLrBxoQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] dm: core: Modify default for OFNODE_MULTI_TREE
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, macromorgan@hotmail.com
+Date: Wed, 30 Aug 2023 20:49:19 -0600
+Message-ID: <CAPnjgZ3ctm3MW==Y_j1YGuxF4gD9-JWz4g6DwoN_wjDg358K7Q@mail.gmail.com>
+Subject: Re: [PATCH v2] spl: bootstage: move bootstage_stash before jumping to
+ image
+To: Chanho Park <chanho61.park@samsung.com>
+Cc: Nikhil M Jain <n-jain1@ti.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,47 +85,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 29 Aug 2023 at 14:37, <seanedmond@linux.microsoft.com> wrote:
->
-> From: Sean Edmond <seanedmond@microsoft.com>
->
-> There is a preference to use the "ofnode" API for FDT fixups
-> moving forward.  The FDT fixup will usually be for the kernel FDT.  To
-> fixup the kernel FDT with the ofnode API, it's required to set the
-> OFNODE_MULTI_TREE option.
->
-> To ensure existing users of kaslr fdt fixup are not impacted, Let's modify
-> the default value for OFNODE_MULTI_TREE to ensure it's always set if
-> !OF_LIVE.  This will cause a 1007 byte increase in the code size.
+Hi Chanho,
 
-Interestingly, this option is not needed if we can pass the control
-DTB to Linux, But at least for now, we don't know that a priori.
+On Tue, 29 Aug 2023 at 23:10, Chanho Park <chanho61.park@samsung.com> wrote:
+>
+> Hi Simon,
+>
+> > -----Original Message-----
+> > From: Simon Glass <sjg@chromium.org>
+> > Sent: Wednesday, August 30, 2023 1:38 AM
+> > To: Chanho Park <chanho61.park@samsung.com>
+> > Cc: Nikhil M Jain <n-jain1@ti.com>; Marek Vasut <marex@denx.de>; u-
+> > boot@lists.denx.de
+> > Subject: Re: [PATCH v2] spl: bootstage: move bootstage_stash before
+> > jumping to image
+> >
+> > Hi Chanho,
+> >
+> > On Mon, 28 Aug 2023 at 22:28, Chanho Park <chanho61.park@samsung.com>
+> > wrote:
+> > >
+> > > Regarding IH_OS_OPENSBI, IH_OS_LINUX and IH_OS_TEE, there is no chance
+> > > to stash bootstage record because they do not return to SPL after
+> > > jumping to the image.
+> > > Hence, this patch separates the final stage bootstage code into
+> > > spl_bootstage_finish and call the function before jumping to the image.
+> > >
+> > > Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+> > > ---
+> > > Changes from v1
+> > > - Separate the final stage bootstage code into spl_bootstage_finish.
+> > > - As Simon suggests, call the function before jumping to the image.
+> >
+> > I think you misunderstood me here. I mean, you cannot jump off somewhere
+> > in your board code. You must change it so it returns correctly, and the
+> > jump happens from spl.c's board_init_r() function.
+> > The way it works is you set up the spl_image structure, then it SPL jumps
+> > to it at the end of the functions.
+>
+> I feel like I'm still not clear on what you mean. Sorry.
+>
+> switch (spl_image.os) {
+>         case IH_OS_U_BOOT:
+>         case IH_OS_ARM_TRUSTED_FIRMWARE:
+>         case IH_OS_TEE:
+>         case IH_OS_OPENSBI:
+>         case IH_OS_LINUX:
+> }
+>
+> Regarding ATF/TEE/OPENSBI and Linux, they need different number of arguments and formats to jump to the image, respectively.
+> I think that's why they can't go to the final stage and can't use jump_to_image_no_args.
+
+OK, so let's move that code into spl.c and have it do the right thing...
 
 >
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> ---
->  drivers/core/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Do you want to move jump codes at the end of the board_init_r function?
+> The easiest way is that we just move the whole switch statements to the final stage of the function.
+> Otherwise, the arguments can be prepared from switch statement and make jump_to_image function to support variable length of arguments.
+> (Or we can put switch statement there to support various jump of the image)
+>
+> Can you elaborate a bit more?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Basically SPL should have one place where it jumps to the next phase.
+If you do it willy nilly, then generic features like bloblist and
+bootstage cannot work, as you have found.
 
->
-> diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-> index f0d848f45d..38e44ef6fc 100644
-> --- a/drivers/core/Kconfig
-> +++ b/drivers/core/Kconfig
-> @@ -424,7 +424,7 @@ config DM_DEV_READ_INLINE
->
->  config OFNODE_MULTI_TREE
->         bool "Allow the ofnode interface to access any tree"
-> -       default y if EVENT && !DM_DEV_READ_INLINE && !DM_INLINE_OFNODE
-> +       default y if !OF_LIVE
->         help
->           Normally U-Boot makes use of its control FDT, the one used to bind
->           devices and provide options. In some cases, U-Boot must also process
-> --
-> 2.40.0
->
+The way SPL board_init_r() is set up is something like this:
+
+- do some init
+- work through the boot devices until one is found that can boot
+- prepare to jump (thjis is where the bloblist and bootstage are finalised)
+- jump
+
+So we should keep this approach, even if it means putting a switch at
+the end like:
+
+switch (how_to_jump) {
+case way1: ...
+case way2: ...
+}
+
 
 Regards,
 Simon
