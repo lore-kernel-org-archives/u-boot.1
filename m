@@ -4,112 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B917C83F29
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 07:54:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D52CFC83F2E
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 08:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF57E80770;
-	Thu, 31 Aug 2023 09:54:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15A0086545;
+	Thu, 31 Aug 2023 10:11:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e+N8c2/8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EygbwH1T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 503858652C; Thu, 31 Aug 2023 09:54:16 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 53CBE86546; Thu, 31 Aug 2023 10:11:55 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48B2280374
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:54:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6742A80374
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 10:11:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-3fe4cdb72b9so5421125e9.0
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 00:54:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5009d4a4897so1159157e87.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 01:11:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693468453; x=1694073253; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=J9o4jIzgTDzCS8keb/VJxcr5uR2GxGl78aPztqyoXlc=;
- b=e+N8c2/8lJwlMfv4bGxKVZzFBQx5Jn3JDuz5UHBXR3qlPyR03QEAJj2ybJPTioVNns
- AO/M8KhvGGWfVEKZV0YEgfH18m7JJHSylWUvxD2fvlglTNDNgkh5cs6IQ03uZwvbJRMR
- jWq76/W/tRivnHpx/dwJy4AH/r9VRTJGf4NEofAXdDxbT7fVbVEwZsGSIhBdws/e8RSv
- ydT1HiEZ8dNFWIYrCWV7hblT2dA+iO0x/NXa2ixB2qvU/rwy6pn2dLca0s67e2py/Dyn
- nmrlMAG/Ypr7WOFeOn54ELOi0hsMezF7uX4L8CTNbSHRFtpPeVRcuotr5za29tJSe7QV
- WHmw==
+ d=linaro.org; s=google; t=1693469512; x=1694074312; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bfDWfia7P9lcXGP2dXPON4oFcbyIYkdWNURp7aAW1sk=;
+ b=EygbwH1T9r4S/rKgfDacDDUxu8KMH+DYtY80YfJHnPCb9Iq5eIAIvmsA+IZBPcSW17
+ iQtKxiExnnxHLJcUmGWo648Jt3gjtk6UYV68xFalsrVLZmw/rb0QUxQrBigcgFFK9XGf
+ QjDWV70mceaxTCwteCEZIyxSXc1RiZg3L9WRp8gMzi+wqbg1b561jRKYemDMeb/xvE/V
+ 4OWm27G3exD6WhvTHWts4bFwtMYwOibLuQm69SAPISD+C/e2dzl260LQJrUOlqQ5x7na
+ Mg50LulinezSi5ZZQC+gi5Vyf9G/v9zYj1NU/gwD1J+yeU7vAxQ2soYtyO3M95cmG4OM
+ LwkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693468453; x=1694073253;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=J9o4jIzgTDzCS8keb/VJxcr5uR2GxGl78aPztqyoXlc=;
- b=fWP7zBemAwRAK4yaC0JwnblZQEB7ltP+I+xM3BuGqwrIf0S4G6rw3ZgHRiwPLqfM5w
- SXj60yh+e1pqXGlbldg+rRKEf1ENETtemkLjfZhag5PO/F596VSY9LEPyXvvTZbkCdQf
- zO9dvSHlHS9xYIYuXE654kRWZB4wmY0nPyfc0M6frOMAJvS4+UduZuU6epGXh/BbNUex
- X5Kdt3kFPt6doO8GfaXOffZhhZZ2r0y1RAOnKZQqVB6/Br449oEOUmRwIt8dda0DYjId
- J4T3ujwwVoUXHWiAbF14TN4TqcJ91JwoATeecpmzjJ4VLzf8hTHClPWQLHC0s6jbXORY
- 7h2w==
-X-Gm-Message-State: AOJu0YwNOyxv+I4yXGeBy6NIUrP24Xs4ofQJcVC8OcrT+58x8urQ3wLb
- PjPZD5Gyw1bRd/dYZYAdCgSvHQ==
-X-Google-Smtp-Source: AGHT+IHWsrPm2UBXsGxKKIMiYf/l9u4U35sZyeGuJmoQGcwdG464dSpZW2Dd/j4SS5peAPhlRcchyQ==
-X-Received: by 2002:a05:6000:45:b0:318:fa5:d84e with SMTP id
- k5-20020a056000004500b003180fa5d84emr3060959wrx.70.1693468452627; 
- Thu, 31 Aug 2023 00:54:12 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:a33e:476b:58d7:9689?
- ([2a01:e0a:982:cbb0:a33e:476b:58d7:9689])
- by smtp.gmail.com with ESMTPSA id
- y15-20020adff6cf000000b0031934b035d2sm1299935wrp.52.2023.08.31.00.54.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 31 Aug 2023 00:54:11 -0700 (PDT)
-Message-ID: <d94b0cae-99cc-4f8b-9d0d-52a5858f6e33@linaro.org>
-Date: Thu, 31 Aug 2023 09:54:10 +0200
+ d=1e100.net; s=20221208; t=1693469512; x=1694074312;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bfDWfia7P9lcXGP2dXPON4oFcbyIYkdWNURp7aAW1sk=;
+ b=c4HcMOZstbsAHCQSg1sj+KlxOglldvvpByHzooPp8yM8RmMgUzmMuqIYWSSeCP/Fm+
+ ldgZ8Nhjdab0VNTniPW2/+c2G+1YEd+ooSClP0QPhmODgF/228Affxpx3ys9VesHtuE7
+ agkLeRb/znHc+x56k/LYD/5Ktm211N+d9sO6EG/lb835SO2IfRj9KnzdwFzoMX9VBbaa
+ ke/czW/I6WZbpF3gsJs+0H5LXu7fTB3G9GLPliUzyvAKzzGW0ua5CJH2lQlHVMyumMbo
+ tjj0psFlKzfGN4z5693gzQbGyAOooNgBTJyKevgZjDN3VJ4NtvknSYvwTXvyNMuGUp3+
+ V9JA==
+X-Gm-Message-State: AOJu0YwBsxRIP/ItEjQnLha7CITkl3kK8Cto2Klwq8Pwa8w8Y5YmHzys
+ lGDXqSeOHIce5+g0DNVXoIOCIzKOKfPKNsvo4upSAgJme0uHSaKvbQ4=
+X-Google-Smtp-Source: AGHT+IHwb/8Dpggti7el+xnecIk9Uuk1pZ+nZDj+ym4Co/Uf2zkfAjxcgGRiY8GcPoJQGJX3qnR4rO3SGZg+tco2xCU=
+X-Received: by 2002:a19:7b06:0:b0:4f8:5d0f:c779 with SMTP id
+ w6-20020a197b06000000b004f85d0fc779mr3112823lfc.40.1693469511490; Thu, 31 Aug
+ 2023 01:11:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 0/1] meson: Demonstration of using binman to produce
- the image
-To: Simon Glass <sjg@chromium.org>,
- Ferass El Hafidi <vitali64pmemail@protonmail.com>
-Cc: christianshewitt@gmail.com, mark.kettenis@xs4all.nl,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- linux-amlogic@lists.infradead.org, alpernebiyasak@gmail.com,
- da@lessconfused.com
-References: <CV61D7ULLVZ0.3OCFZ743L1KSE@flaptop>
- <CAPnjgZ2iff6F3CFjnjEMUVoX3bO=kv3za4Q45YOcVeZqc96=rw@mail.gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <CAPnjgZ2iff6F3CFjnjEMUVoX3bO=kv3za4Q45YOcVeZqc96=rw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <41f932e52bdd206b1b68d5ff313fc29b794a70e7.1693413381.git.michal.simek@amd.com>
+In-Reply-To: <41f932e52bdd206b1b68d5ff313fc29b794a70e7.1693413381.git.michal.simek@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 31 Aug 2023 11:11:15 +0300
+Message-ID: <CAC_iWjJ1Fmdpz1R3szgUkz7duwgJCFo=Ny2Wg0BjmeazOjoiqg@mail.gmail.com>
+Subject: Re: [PATCH] test/py: tpm2: skip tpm2_startup when
+ env__tpm_device_test_skip=True
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,80 +80,37 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 31/08/2023 05:37, Simon Glass wrote:
-> Hi Ferass,
-> 
-> On Wed, 30 Aug 2023 at 11:53, Ferass El Hafidi
-> <vitali64pmemail@protonmail.com> wrote:
->>
->> Hi Simon,
->>
->>> So I wonder how best to move this forward so that we can build things
->>> using binman and everything works?
->>
->> It's still not ready yet, but I'm working on porting U-Boot SPL to some
->> Amlogic SoCs [1]. I'm currently working on Amlogic S905 boards, but
->> eventually I'll work on Amlogic S905X devices too. And speaking of
->> signing, Jonas Karlman wrote amlimage, and integrated it into mkimage,
->> and I applied his patch to my tree. There's a few things to be aware of
->> about Amlogic signing and binaries in general, however.
->>
->> amlimage was intended for use with U-Boot SPL, which obviously has
->> no support for Amlogic's FIP format and as such amlimage will only do as
->> little as possible to get the bootROM to load U-Boot SPL. Most of the
->> packaging format is handled by BL2. The fact that the signing process is
->> completly different across SoC generations makes it difficult to
->> implement them all into one single tool (and by which I mean all of it,
->> not just signing BL2 for the bootROM to run it, that's mostly the same
->> across SoCs). amlimage has been confirmed to work on GXBB (ODROID-C2 and
->> the KII Pro set-top box), GXL (librecomputer lepotato), and SM1 (ODROID-C4).
->>
->> My U-Boot SPL port is still rather incomplete. As of today, it still
->> can't boot anything from any storage device. The goal eventually is to
->> be able to load upstream TF-A BL31 and U-Boot+linux.
->>
->> While Amlogic distributes proprietary BL31 binaries upstream Trusted
->> Firmware-A has a port for some Amlogic SoCs [2], but as far as I know
->> SM1 (which is the SoC generation your ODROID-C4 is using) is still
->> unsupported. GXBB, GXL, AXG, and G12A are all supported however, but the
->> overall port still lacks some features the proprietary implementation
->> has.
->>
->> As for the SCP firmware (aka. BL30) I'm not aware of any
->> reverse-engineering efforts for that.
->>
-> 
-> Thanks for your efforts on this. I look forward to seeing where it ends up.
-> 
->> Honestly, in my opinion, including proprietary and poorly-written
->> Amlogic utilities lacking a proper license, into U-Boot looks like a bad idea.
-> 
-> With Binman, we don't really include them in U-Boot; we allow them to
-> be fetched easily so that a complete build can be produced.
-> 
-> I don't like it either, but for users it is better than doing the
-> build manually.
-
-I'll rather spend time and effort to have a fully-upstream TF-A boot chain
-for Amlogic SoC (when possible) that maintaining support for bulky closed-source
-x86-64 binary only tools. The tools aren't even officially distributed.
-
-Neil
-
-> 
->>
->> [1]: https://git.vitali64.duckdns.org/misc/u-boot-kii-pro.git/log/?h=wip/spl
->> [2]: https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/plat/amlogic
->>
->> Cheers.
->>
-> 
-> Regards,
-> Simon
-
+On Wed, 30 Aug 2023 at 19:36, Michal Simek <michal.simek@amd.com> wrote:
+>
+> All tpm2 tests should be possible to skip when
+> env__tpm_device_test_skip=True but test_tpm2_startup is missing it.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+>  test/py/tests/test_tpm2.py | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+> index fce689cd992d..c2579fa02c58 100644
+> --- a/test/py/tests/test_tpm2.py
+> +++ b/test/py/tests/test_tpm2.py
+> @@ -71,6 +71,9 @@ def test_tpm2_startup(u_boot_console):
+>
+>      Initiate the TPM internal state machine.
+>      """
+> +    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+> +    if skip_test:
+> +        pytest.skip('skip TPM device test')
+>      u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
+>      output = u_boot_console.run_command('echo $?')
+>      assert output.endswith('0')
+> --
+> 2.36.1
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
