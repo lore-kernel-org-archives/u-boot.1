@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A52C83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:04:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5D1DC83F01
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9A7586583;
-	Thu, 31 Aug 2023 16:04:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foundries.io
+	by phobos.denx.de (Postfix) with ESMTP id 55CA786598;
+	Thu, 31 Aug 2023 16:07:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foundries.io header.i=@foundries.io header.b="OgHZ4Tz+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JaV7JANb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DD4786558; Thu, 31 Aug 2023 16:04:10 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 6508386583; Thu, 31 Aug 2023 16:07:07 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 898A28658E
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 16:04:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2822286598
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 16:07:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foundries.io
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=oleksandr.suvorov@foundries.io
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5007abb15e9so1691750e87.0
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 07:04:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-d7bae413275so2272412276.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 07:07:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1693490646; x=1694095446; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NDECu28DKhPP9ghdGAcwFPuOabMR5r6vd3j/Th24qRQ=;
- b=OgHZ4Tz+/feZGnOTQCJX1h0kiDtFMql+3r+mjhZj/407O1XjANXaAAOzZxx9nhg7xr
- muKAh8M7MHREnm3YZE0RrlB12zJg8l2k8hdT4G21k2C0NE898v9btMWWesnne2wpNdeT
- VNmdSqWQFHFFPHPyP38oz71tm7ob+NLM/N++PK2cYPPswo+apTwrcOnJjuNvRBdRDk0n
- iOh1u6lNTLvg3DfScEUF7YgQi/hhJzy8rc6rVLDQbC6vDyzUim8B/k3LkyfxbS2xB+Lh
- PXuUd4iOM0tD+dGkmMGV4JS4QRTuZXqLuGGEg7CJGAM4ta2iFnxBV2wUGD0Pyk4O5Ikr
- mvbw==
+ d=konsulko.com; s=google; t=1693490823; x=1694095623; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zky6RGO22HqTlea/mia/fpdFXpgoLeJ7iltsDTxZwJA=;
+ b=JaV7JANbaDswCx6xDa/R/J1a5+QhxGcrKOqYa0Tsoi6Mxb+p8WZ6t8c1wqaGqTEA5u
+ kHizstkG9bxP1/ODOmSCl+4tlG8JY+tML0Ev0ftp4rPuwdDmvAXwAIGMeyYlxcQ543Sf
+ +MMza7S6i5buWy5TCQrCI+UwVyIbmN++e2XEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693490646; x=1694095446;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NDECu28DKhPP9ghdGAcwFPuOabMR5r6vd3j/Th24qRQ=;
- b=V8Unv3fn2nMMdN/GHbE2BsmaAKEOjOaXXso3tQDiUb94K9tnqHMlkxmm5YsafLxWnu
- GFO7/NKspNY29kiaXEm5zel9GqBNfktOI10s+OFSNE9Zv0/qYmPIbGOVp/LX3kqAfZaC
- TzXB8i+bKUGfaHZiCBiuaPvCwbNQ5bwT2jrlQZx0NcGDu2Wef/piuKmEaOusMeZ/WAz8
- NOpeX8WKy9am1lNY7gGMhxFr/kX6RWa4YIdPPwWNbbXAqdzORcRQ2AkrhhTzX1OztY/Q
- oUCy04+oYbnbi+mYsBC0OlCFIl4ckzqM+oNfXteSNmlXjmG8YxloxJG8HQvhB82V8StL
- pWkA==
-X-Gm-Message-State: AOJu0Yya7OdnQ1wvtFyCwUwA7E2jlGB8Yfayq48LJSwayFxR/5mWyL2v
- Art6iWGU00X+Vgw/TRAio3jDdtqTYTF4axK6gog=
-X-Google-Smtp-Source: AGHT+IF3kasEL2PZYkjpTTnmvHF+blu4ObXm4mCs2ggOzD3/RLQ7f/0r58db24HN/0q/xFbSrON6Kg==
-X-Received: by 2002:ac2:5056:0:b0:4fe:2c6:1d76 with SMTP id
- a22-20020ac25056000000b004fe02c61d76mr3968399lfm.21.1693490646375; 
- Thu, 31 Aug 2023 07:04:06 -0700 (PDT)
-Received: from cryobook.. ([93.188.34.55]) by smtp.gmail.com with ESMTPSA id
- u30-20020a056512041e00b005008248b6b9sm271209lfk.197.2023.08.31.07.04.05
+ d=1e100.net; s=20221208; t=1693490823; x=1694095623;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zky6RGO22HqTlea/mia/fpdFXpgoLeJ7iltsDTxZwJA=;
+ b=mFyh0T2sVuNCVPpRzYP1zqZV+0qH+YNwwih2ceXSw2gxl/g6+5XPJbOWcztRGFJpDY
+ vtiZaViScf8ltdmvIDoqIefOeTBc9t3IAcNyE+iLRcpmd6y5DvxsCGrowyWOshkyexr5
+ SzYbLx0FzDhWeMmQHyXrWluw2ur3gfcIwg8l/DkGIV+5GsplHulnOMBDiJOgLMietoxn
+ SQAj3GT5l0lfz39tAvgAmw41JUBDVf5YzLYQ6hlJoSg5JbHGxaCmYbR1dv/1znjxbOY6
+ u9NfgnWjTF52BYHXY3GhASUXEmaIUdVTsTFFLYrrE/WVPCfpr3ORSwnvqJj/wtRu8QYU
+ aNhA==
+X-Gm-Message-State: AOJu0YxRjZ/FGZPWprN1nY2DWzT7+/v+HJaN1ZnSSmzObEQCmxFBHi0w
+ RKVq0RrXPer9jAxlFtDgBqmYeLKFNxLlhkqyi0PKnw==
+X-Google-Smtp-Source: AGHT+IGCgwmahzTi8NO59fOftSG1RpAFdO7CvXsg4AItLwkpiihfgqyvutJivtbEH/Fevl0zCdBZsg==
+X-Received: by 2002:a25:db84:0:b0:d74:6cb3:bb77 with SMTP id
+ g126-20020a25db84000000b00d746cb3bb77mr2791572ybf.28.1693490822697; 
+ Thu, 31 Aug 2023 07:07:02 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-1cd4-1a46-fd5d-6cab.res6.spectrum.com.
+ [2603:6081:7b00:6400:1cd4:1a46:fd5d:6cab])
+ by smtp.gmail.com with ESMTPSA id
+ j136-20020a25d28e000000b00d7e339ada01sm328038ybg.20.2023.08.31.07.07.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 07:04:05 -0700 (PDT)
-From: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-To: u-boot@lists.denx.de
-Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Fabio Estevam <festevam@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Oleksandr Suvorov <oleksandr.suvorov@toradex.com>,
- Stefan Agner <stefan.agner@toradex.com>, Stefano Babic <sbabic@denx.de>
-Subject: [PATCH v2] mach-imx: bootaux: fix building with disabled bootelf
-Date: Thu, 31 Aug 2023 17:03:52 +0300
-Message-ID: <20230831140402.322536-1-oleksandr.suvorov@foundries.io>
-X-Mailer: git-send-email 2.41.0
+ Thu, 31 Aug 2023 07:07:02 -0700 (PDT)
+Date: Thu, 31 Aug 2023 10:07:00 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Anatolij Gustschin <agust@denx.de>
+Subject: Re: [PATCH v2 03/19] video: Hide the BMP options
+Message-ID: <20230831140700.GS3101304@bill-the-cat>
+References: <20230831035319.2316665-1-sjg@chromium.org>
+ <20230831035319.2316665-4-sjg@chromium.org>
+ <96711E1B-FA6B-44D5-ACB8-421C85373432@gmx.de>
+ <20230831135846.GP3101304@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5f69i5OeNr/GFj5a"
+Content-Disposition: inline
+In-Reply-To: <20230831135846.GP3101304@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,36 +96,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CMD_ELF disabled and IMX_BOOTAUX enabled, the u-boot building ends
-up with a linking error [1]. Select LIB_ELF to fix the building
-issue.
 
-[1]
-ld: /tmp/ccaF1rpv.ltrans0.ltrans.o: in function `do_bootaux':
-arch/arm/mach-imx/imx_bootaux.c:108: undefined reference to `valid_elf_image'
+--5f69i5OeNr/GFj5a
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fixes: c0f037f6a2a ("mach-imx: bootaux: elf firmware support")
-Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
----
+On Thu, Aug 31, 2023 at 09:58:46AM -0400, Tom Rini wrote:
+> On Thu, Aug 31, 2023 at 06:05:22AM +0200, Heinrich Schuchardt wrote:
+> >=20
+> >=20
+> > Am 31. August 2023 05:52:57 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> > >These appear prominently in the main menu at present. However they are
+> > >selected when needed so do not need to be visible.
+> > >
+> > >Make them hidden.
+> > >
+> > >Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >---
+> > >
+> > >(no changes since v1)
+> > >
+> > > common/Kconfig | 4 ++--
+> > > 1 file changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > >diff --git a/common/Kconfig b/common/Kconfig
+> > >index 0b09bd68bd13..844531a59eda 100644
+> > >--- a/common/Kconfig
+> > >+++ b/common/Kconfig
+> > >@@ -1169,12 +1169,12 @@ config IO_TRACE
+> > > 	bool
+> > >=20
+> > > config BMP
+> > >-	bool "Enable bmp image display"
+> > >+	bool # Enable bmp image display
+>=20
+> Just change this to "bool" and don't add non-prompt text.  The help
+> should be made clearer if it's not already.
+>=20
+> > This must depend on video.
+>=20
+> Since it's only select'd, no, it should be selected with "if VIDEO" if
+> the options that actually use them don't already depend on video
+>=20
+> >=20
+> > > 	help
+> > > 	  Enable bmp functions to display bmp image and get bmp info.
+> > >=20
+> > > config SPL_BMP
+> > >-	bool "Enable bmp image display at SPL"
+> > >+	bool # Enable bmp image display at SPL
+> >=20
+> > Why should I not be able to deactivate the logo display?
+>=20
+> That's SPLASH_SCREEN not BMP.
 
-Changes in v2:
-- select LIB_ELF unconditionally
+Sorry, you're right Heinrich, the further options here depend on, not
+select SPL_BMP.
 
- arch/arm/mach-imx/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+--=20
+Tom
 
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index d94b5828d0d..fda762426ef 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -32,6 +32,7 @@ config IMX_RDC
- config IMX_BOOTAUX
- 	bool "Support boot auxiliary core"
- 	depends on ARCH_MX7 || ARCH_MX6 || ARCH_VF610 || ARCH_IMX8 || ARCH_IMX8M
-+	select LIB_ELF
- 	help
- 	  bootaux [addr] to boot auxiliary core.
- 
--- 
-2.41.0
+--5f69i5OeNr/GFj5a
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTwnoQACgkQFHw5/5Y0
+tyxXfQv8CPYS7X4wMbupbjqXH8rhXYmbuJjnXEmmsIvMGtJ1/h3mlEoAR4F007sC
+qbCXuFXGgbIAmIQuk6LDirt2QyFQREFnggd+w+66ZjbwdYkT6WumFvcNl329wudE
+/q4mQ3/r/mFHaGMLd/y5jukz4cE9sGI78DiW0RNvB3m7r+JxEaUi5KtPoClcNyo+
+MNHwV9BDS5a4JpZmxLGfWlozJNtvCMGlRtIr+w+pc+P0T3LjdiN2ufQbL/zTnkWE
+9R0aPeJNK8yEta4jQHV/XRfNVjoDyXitIL8rLDyeHvxaaBvOhXgwyR0VL4Orv54t
+G7ArA1J33W1GUJ0gdBOeJvS/5p9ZTZLpVSfhdzyYZ1x+BV1lcuhLJDodw9e816ss
+SgmPVCPaDO7Dpa1LixiVRv56OvWxKCx/iT+N9MXKxa3sHgxpLUCCHbDnCRiOpGS2
+zMs5Mc9LkVD5iWlQ3UXX7xx9xwA6So5u+wkq+6+8yxlevCI/SFvfbkFLnUU8iGvZ
+H/GIc+f8
+=7bvN
+-----END PGP SIGNATURE-----
+
+--5f69i5OeNr/GFj5a--
