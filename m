@@ -4,80 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C63C83F2F
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A26F3C83F2F
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 19:07:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C5358682B;
-	Thu, 31 Aug 2023 21:03:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1182C865DE;
+	Thu, 31 Aug 2023 21:07:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EC8qVzFL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B6tCm8aZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF1A78681D; Thu, 31 Aug 2023 21:03:34 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 1EF66865DE; Thu, 31 Aug 2023 21:07:17 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 087758683C
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:03:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ABE186553
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 21:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-594ebdf7bceso13396347b3.2
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:03:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5922b96c5fcso13732237b3.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:07:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693508604; x=1694113404; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0mQPB8XxUb5OP/KXE1oeSlmWSBTEOE9Ge4MhauaXzcU=;
- b=EC8qVzFLUl4snN5+KKgWC0QPK9sS84Ih7AqJ4V6ww7zKPqp1IQ8ssiO8T3ZnXDHvHf
- 6TTR1PS0LIbVjMiWK734HQrRBUmphUvWs3aIMYn5wGcI4DEf3Ejf2jE558hIhppnPbTf
- t8KqVe0DAoBTxwzKp6XiE+6lzP2H3IJbsER7w=
+ d=konsulko.com; s=google; t=1693508832; x=1694113632; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lihXGB6e6F7b/x07IILVWt8l3MlJEDWl7lW4k8eVK8o=;
+ b=B6tCm8aZocscxi5FPxj1OfWUkaQBe12DyOcyxtZavbzZdUt+o+2KI8mFAA+Pi95MeC
+ S85zSyph8jyNIgDuMDVtYLCnQmVHbbFW7XzgvmDl2X3fQF5qtz0W7PvNlgn5VHIynErS
+ 1ykgRv4AXZDu+6QwGOZAWhGGN1z9ksKK4RbzU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693508604; x=1694113404;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0mQPB8XxUb5OP/KXE1oeSlmWSBTEOE9Ge4MhauaXzcU=;
- b=hGEsbVl6PRagdWMygPsyJBsHsij+Tz3pWKD248bHcdhBFeu6DXxDs0cRclKEUW7t9S
- Nwzh7Fht2s2HPzsUlQBbLcQDrXw7dXQqr8zGRXFfZqc7x+jATljW+Td4ounhl9jnoYRx
- AUIrVu4vyA4FGR34jMp/zJ5rCDvo0DcSi+Gh64RccKCtOycuQ7i6lxMjY7EGltl+ibb1
- WlcMs45Otrln+zeLSi9jB+6kiHwEqB8AFQ6eezoHSFqjrfKKdz7nJDAFce7agNHdhiaP
- 3+rHQSEwhlCTLwWAj0GJgZEa5FgUqAhHpwFiuREkwRQZ3CjLEX83qmVAvK+0CWmvd9El
- j90A==
-X-Gm-Message-State: AOJu0YxflrAd+6QL5ZKWeH+zEFdxaNeRbBvXd31OxiNRsfKwra2rwAjg
- 79a6KiuWanVzwP2bFmFYNlQbJO1X39msboWgm1OKEA==
-X-Google-Smtp-Source: AGHT+IFgK3CYg/SLq61wmdqsP6GkeNlwlUUqSxXvTpLJ9zbWqnbqaeeme9BcbxPZX+EdxGR7aKxWcikWGBuh/0Fvn1M=
-X-Received: by 2002:a25:cf12:0:b0:d7e:3db3:da2c with SMTP id
- f18-20020a25cf12000000b00d7e3db3da2cmr611334ybg.43.1693508603480; Thu, 31 Aug
- 2023 12:03:23 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693508832; x=1694113632;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lihXGB6e6F7b/x07IILVWt8l3MlJEDWl7lW4k8eVK8o=;
+ b=ULlnzluR232hhNkOqbrWIM5febbTgSdKMg10pdtK6q5n11hiZxvviYmdjmsApN/BvH
+ 01zTH4TSFP1bBS1KFRm7havmDs3YUaSEiFL5Yc1jg4LBXDET/V4S9aR6d2VfJdvKmaij
+ PiOZkNETPmYZsSjT+gEmADTcOX1c+g6AJUQ3onpUvqjIf0Hbu+xOva1QOYACpO2AHi3n
+ vZPnSBxV6rcl3rxkUx6UMowlBNWFpA2GhJXRKcQ1OWhLcddLxFzpsa4UllKIzV9PHPCy
+ VXr5WXYugypkgmTzMi7HDfi+b3fC4V9bYj6jvs0wN1D8JKdty8T6epYZ/zpWKVl0eMCk
+ zw+A==
+X-Gm-Message-State: AOJu0YwgsBE90FRHPm/b1mCVzWRjV7D6aUouC8B+xi2lJ0amAfKr7FUY
+ //U3mxxSAq10/Au6cu+mR/O1Wg==
+X-Google-Smtp-Source: AGHT+IGy69Zd1otLmHkTljBaRN091UOrTdekzAwoL08wbg+a/6CY8obQK4y0ofGP94wiDW3ltfTHlA==
+X-Received: by 2002:a0d:d68c:0:b0:590:e116:cef6 with SMTP id
+ y134-20020a0dd68c000000b00590e116cef6mr372998ywd.26.1693508831745; 
+ Thu, 31 Aug 2023 12:07:11 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-1cd4-1a46-fd5d-6cab.res6.spectrum.com.
+ [2603:6081:7b00:6400:1cd4:1a46:fd5d:6cab])
+ by smtp.gmail.com with ESMTPSA id
+ l9-20020a81d549000000b00594fff48796sm601305ywj.75.2023.08.31.12.07.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 31 Aug 2023 12:07:11 -0700 (PDT)
+Date: Thu, 31 Aug 2023 15:07:09 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
+ output
+Message-ID: <20230831190709.GO3101304@bill-the-cat>
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
+ <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
+ <d4ce17ae-8b84-4c8a-acaa-287549ec23a3@gmail.com>
+ <CAPnjgZ0sTAoZi5TDAaTZUNPVNQ5dqoyVENDWJr=exa5z2R8srw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20230822203446.4111742-1-sjg@chromium.org>
- <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
- <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
- <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
- <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
- <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
- <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
- <CAPnjgZ3L-jGxoXNHnsXY0MXU=jTAN66KNAxSLHPVeHinHMjzkQ@mail.gmail.com>
- <CAMj1kXGw6DGK=gVF3bMH5dp=LL89V9n1V1LMGKDn0CZWGHh8qg@mail.gmail.com>
-In-Reply-To: <CAMj1kXGw6DGK=gVF3bMH5dp=LL89V9n1V1LMGKDn0CZWGHh8qg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 31 Aug 2023 13:02:05 -0600
-Message-ID: <CAPnjgZ1fjee3rf91onPbuLpgqTHe3dZgz0WBSzoiKAabO+ETkQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
- Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
- linux-acpi@vger.kernel.org, 
- lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
- ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="w3hewfFBUNrsNyoT"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0sTAoZi5TDAaTZUNPVNQ5dqoyVENDWJr=exa5z2R8srw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,115 +108,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ard,
 
-On Thu, 31 Aug 2023 at 06:28, Ard Biesheuvel <ardb@kernel.org> wrote:
->
-> On Wed, 30 Aug 2023 at 23:11, Simon Glass <sjg@chromium.org> wrote:
+--w3hewfFBUNrsNyoT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Aug 31, 2023 at 01:01:59PM -0600, Simon Glass wrote:
+> Hi Alper,
+>=20
+> On Thu, 31 Aug 2023 at 04:20, Alper Nebi Yasak <alpernebiyasak@gmail.com>=
+ wrote:
 > >
-> > Hi Ard,
-> >
-> > On Tue, 29 Aug 2023 at 15:32, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > On 2023-08-28 20:54 +03:00, Simon Glass wrote:
+> > > Hi Alper,
 > > >
-> > > On Tue, 29 Aug 2023 at 21:18, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ard,
-> > > >
-> > > > On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
-> ...
-> > > > > In summary, I don't see why a non-UEFI payload would care about UEFI
-> > > > > semantics for pre-existing memory reservations, or vice versa. Note
-> > > > > that EDK2 will manage its own memory map, and expose it via UEFI boot
-> > > > > services and not via DT.
-> > > >
-> > > > Bear in mind that one or both sides of this interface may be UEFI.
-> > > > There is no boot-services link between the two parts that I have
-> > > > outlined.
-> > > >
+> > > On Sun, 27 Aug 2023 at 13:17, Alper Nebi Yasak <alpernebiyasak@gmail.=
+com> wrote:
+> > >>
+> > >> On 2023-08-24 06:02 +03:00, Simon Glass wrote:
+> > >>> In this early stage of using binman to produce output files, we are=
+ mostly
+> > >>> seeing people using common extensions such as '.bin' and '.rom'
+> > >>>
+> > >>> But unusual extensions appear in some places.
+> > >>>
+> > >>> We would like 'buildman -k' to keep the build outputs, but this is =
+hard if
+> > >>> there is no consistency as to the extension used.
+> > >>>
+> > >>> This series adjusts binman to enforce just 4 extensions for output =
+images:
+> > >>>
+> > >>>    .bin
+> > >>>    .rom
+> > >>>    .itb
+> > >>>    .img
+> > >>>
+> > >>> Other extensions will produce an error. With this rule observed, bu=
+ildman
+> > >>> can keep the required files.
+> > >>
+> > >> I dislike this limitation. We know what files we will generate, they=
+ are
+> > >> listed in binman dtb, so we can add something like `binman build --l=
+s`
+> > >> to print their names/paths for buildman to preserve them.
 > > >
-> > > I don't understand what this means.
+> > > Yes, it would be good to have that...
 > > >
-> > > UEFI specifies how one component invokes another, and it is not based
-> > > on a DT binding. If the second component calls UEFI boot or runtime
-> > > services, it should be invoked in this manner. If it doesn't, then it
-> > > doesn't care about these memory reservations (and the OS will not be
-> > > booted via UEFI either)
+> > > But why do you dislike the limitation? Do you think extensions provide
+> > > useful information? I suppose one problem is that *.bin might pick up
+> > > private blobs that happen to be in the source directory?
+> >
+> > I guess my strongest argument is that people already/will have workflows
+> > that depend on certain filenames or extensions, and shouldn't have to
+> > modify binman code (consider that people may be using the PyPI wheels)
+> > to accommodate those when we are already putting the name in the dtb.
+> >
+> > I do want some standardization to the U-Boot build outputs though, but
+> > more like a global binman.dts with like u-boot.rom, u-boot-sdmmc.img
+> > images with well-defined TPL, SPL, U-Boot sections that arch-dtsi files
+> > can fill in.
+> >
+> > >> Regarding the output directory suggestion, I think the binman outputs
+> > >> (not temporary/intermediate files) should be in the same directory as
+> > >> make outputs
 > > >
-> > > So I feel I am missing something here. Perhaps a practical example
-> > > would be helpful?
+> > > Agreed
+> > >
+> > >> , and the Makefile should default to O=3Dbuild to achieve the
+> > >> "output dir". I'm not sure if that's going to happen.
+> > >
+> > > I would quite like the 'non-output' file (i.e. things that are not a
+> > > binman image) to appear in a 'binman-work' subdir of the output dir.
+> > > What do you think?
 > >
-> > Let's say we want to support these combinations:
-> >
-> > Platform Init -> Payload
-> > --------------------------------
-> > U-Boot -> Tianocore
-> > coreboot -> U-Boot
-> > Tianocore -> U-Boot
-> > Tianocore -> Tianocore
-> > U-Boot -> U-Boot
-> >
-> > Some of the above things have UEFI interfaces, some don't. But in the
-> > case of Tianocore -> Tianocore we want things to work as if it were
-> > Tianocore -> (its own handoff mechanism) Tiancore.
-> >
->
-> If Tianocore is the payload, it is either implemented as a EFI app, in
-> which case it has access to EFI services, or it is not, in which case
-> it doesn't care about UEFI semantics of the existing reserved regions,
-> and it only needs to know which regions exist and which of those are
-> reserved.
->
-> And I think the same applies to all other rows in your table: either
-> the existence of UEFI needs to be carried forward, which needs to be
-> done via EFI services, or it doesn't, in which case the UEFI specific
-> reservations can be dropped, and only reserved and available memory is
-> relevant.
->
-> > Some Platform Init may create runtime code which needs to accessible later.
-> >
->
-> But not UEFI runtime code, right? If the payload is not UEFI based,
-> the OS would never be able to call that runtime code unless it is
-> described in a different, non-UEFI way. This is fine, but it is not
-> UEFI so we shouldn't call it UEFI runtime memory.
->
-> > The way I think of it is that we need to generalise the memory map a
-> > bit. Saying that you must use UEFI boot services to discover it is too
-> > UEFI-specific.
-> >
->
-> What I am questioning is why a memory map with UEFI semantics is even
-> relevant when those boot services do not exist.
->
-> Could you be more specific about why a payload would have to be aware
-> of the existence of UEFI boot/runtime service regions if it does not
-> consume the UEFI interfaces of the platform init? And if the payload
-> exposes UEFI services to the OS, why would it consume a memory map
-> with UEFI semantics rather than a simple list of memblocks and memory
-> reservations?
+> > I'd prefer them to go in a tempfile.TemporaryDirectory() and discarded
+> > at the end of a binman run, and a "--tmpdir <path>" option to use a
+> > given directory instead and preserve things for debugging.
+>=20
+> Actually, that was the original purpose of the output directory in the
+> u_boot_pylib.tools module. But with all the files binman creates, that
+> has been lost. I think we should restore that purpose (with an output
+> dir as a temp dir) and then I think what you have written here will
+> work.
 
-It seems like you are thinking of the Payload as grub, or something
-like that? This is not about grub. If there are EFI boot services to
-be provided, they are provided by the Payload, not Platform Init. I am
-not that familiar with Tianocore, but if you are, perhaps think of it
-as splitting Tianocore into two pieces, one of which inits the silicon
-and the other which provides the EFI boot services.
+Just please note the rest of the feedback that's been given to this
+series too.
 
-Again, if you are familiar with Tianocore, it can be built either as a
-monolithic whole, or as a coreboot Payload. The Payload part of the
-code is (roughly) the same in each case. But the Platform Init is
-different[1]
+--=20
+Tom
 
->
-> Again, I am inclined to treat this as a firmware implementation
-> detail, and the OS must never consume this binding. But I am still
-> puzzled about what exact purpose it is expected to serve.
+--w3hewfFBUNrsNyoT
+Content-Type: application/pgp-signature; name="signature.asc"
 
-It really is purely so we can mix and match Platform Init (perhaps
-silicon init is a more familiar term?) and the Payload.
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Simon
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTw5NoACgkQFHw5/5Y0
+tyyz6Av/a5yUFtF9wrgC20sA473Ip6+PezKJwattoJQcY2RGtbgRMrpCRBZyKbue
+UC7qSEaxRN3tjXIDPuO7F35WU2q8qmnHhL9RyWHYyq1NeWpfe2Fo25Vn0SUd7LU2
+L7EhAf0cz0K8Wi1XPJJQ/NwBioZ6CdeuBRDB2hUhdbQxXkCvZ4LaAK2Af3gp6g94
+w5VIrrmm7dmdyiL3W+hKoSfVZlSwNY7wO1lQljiZ0WjA8BiwXR2CWQ7O+F5otm6c
+O2aK29gbPUzJ0LIW8hVgpQ6ViJgOmF9mUWgaPLhetp56ph2EsvvBPZ3hQ3tb56Mn
+jZOmD6d53emfQ/SYR3KwSAZanhjOFS891mmCaDgR0BUJ4ihqJnyWrG8Z4Xt0ZZCP
+EMZjlBE960dyDEBuvSrMBPD1hqELzIngNGq+ACNKmStkm79/413fABuNLipPx4a9
+/7CoOWAkgG6rw3ejtKdLLFBM66YqeMiTz7znlgED3ddVy/Ba3wVAuVIAped7Pudt
+XO2iyCoF
+=1s/U
+-----END PGP SIGNATURE-----
 
-[1] Of course, coreboot uses blobs which are chunks of UEFI, but that
-is a separate issue
+--w3hewfFBUNrsNyoT--
