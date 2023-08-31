@@ -4,68 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B53C83F10
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 10:15:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34E0C83F32
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 10:20:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3785F8655F;
-	Thu, 31 Aug 2023 12:15:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id C94FA8655C;
+	Thu, 31 Aug 2023 12:20:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="yawHPmkR";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="4fjF3Zhb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VQsHFwww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799158656A; Thu, 31 Aug 2023 12:15:15 +0200 (CEST)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B4DAB8656E; Thu, 31 Aug 2023 12:20:35 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5EF086558
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:15:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22D9F8655C
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 12:20:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=msuchanek@suse.de
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id AA08721860;
- Thu, 31 Aug 2023 10:15:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1693476912; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=U0mBq5NM/FtuQWtKBQJnQXsloKeJftIAHjp/S9PJfbc=;
- b=yawHPmkR+HD0yDH+NpoRkiA+99MXT7iZ14WJkrl/nR6621nahPZ14vbDh5eceYDhhcipKg
- ZdlElvZl+R5/9IpsS4VdH6zdLMjj1dnpx6yKIedebm2ZBZAfFjWfGigRHvccvhWhfPPgWv
- 5IyHEt46TmoNcjMhGJclC0HNCOv/0vw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1693476912;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=U0mBq5NM/FtuQWtKBQJnQXsloKeJftIAHjp/S9PJfbc=;
- b=4fjF3ZhbhhvYBq8yC0n719FTtoViCbveog3xPUTdb4fUGpDyzeI9uXLxIhZH3QOQ436YvW
- phIfvR88WcspttBg==
-Received: from kitsune.suse.cz (kitsune.suse.cz [10.100.12.127])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id 8E6FE2C142;
- Thu, 31 Aug 2023 10:15:12 +0000 (UTC)
-Date: Thu, 31 Aug 2023 12:15:11 +0200
-From: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH] am33xx: ignore return value from usb_ether_init()
-Message-ID: <20230831101511.GD8826@kitsune.suse.cz>
-References: <20230831024951.22599-1-twoerner@gmail.com>
+ spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-401d67434daso6068595e9.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 03:20:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693477232; x=1694082032; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=m4sWkQHAa4Z6ofeDETgOnBbcCGfVfxpvaCqZY7+4P5o=;
+ b=VQsHFwww2ejKqnPIHfp5nirGwkZiWNjqgMZ9Oq6KUT2EPKlrCyp4oU2k1fwCnTK4db
+ l6Yu6UJn9aiH63dBnr94+kCIOYZefkpVbhr5btZvqbeHnszh+d2dopNzE5mueA7vZLEP
+ j845PwwoBnhjb6utDUk+nwS9cYNyP30Wy2+1GU1pPpgtnr7ouMwBFddCwyf+qnde6vJ2
+ LE0Hw12rkktajbN4T+N1NqNecQ4LK4UgKKNPae+dHnDgbYiPKPEnqY4Z17f3l0zaqhQi
+ nIf08ZxG6KSTjPB97Qalom6huhBOHS5Bs3PthEDu7d34Lks1ZXgagIjSNAyX0JE1IHHP
+ m8nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693477232; x=1694082032;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=m4sWkQHAa4Z6ofeDETgOnBbcCGfVfxpvaCqZY7+4P5o=;
+ b=hTdaskhkr4BgmwdD2/J9wXit8EA4iu4RCfIoQlHVzjTk3q8rfLXRMomXFlzDejZHBX
+ gHQ2KF3LKayeHEa2vWYUn1i5DHmkxt2inUzhtj19znixNgf1GOjZyXxAzS1i/JcqGoD/
+ v/f1XQ+JnJEpDvs7S0kEFI/mIhMcbOvN0+rrfDkZ/dAr52+XOCN3d4rrW2Bv1M9NJDP6
+ emSbeNOEmleqzLkBmShTtf43BafyLuo25ooShgJrhduhYWApHWgtTiVY+wKkFusUWvJl
+ WLFP5rabRc6XOq37CqE7SI0MVMJIyUHd+pCeqn3x3dhfY/WYDPCcCsh9FmqxPp68QiIS
+ gLYA==
+X-Gm-Message-State: AOJu0YzQSCrqN4nY52TPRYcoXF2xbLJFbotBtaQzVOYwqWQ7yQShsFf0
+ +Q3Zkv5a+InoqSddPUSUKxI=
+X-Google-Smtp-Source: AGHT+IG6M7KRkvoKt6wjo1NoqAgOf/4/uGrtldDHYF5l8gBOaL+7w9mtPaCYAjKQVxpZdQT5eQqBvQ==
+X-Received: by 2002:a05:600c:295:b0:3fb:c9f4:150e with SMTP id
+ 21-20020a05600c029500b003fbc9f4150emr3872530wmk.14.1693477232261; 
+ Thu, 31 Aug 2023 03:20:32 -0700 (PDT)
+Received: from [192.168.0.84] ([178.233.24.1])
+ by smtp.gmail.com with ESMTPSA id
+ u2-20020a05600c00c200b003fe3674bb39sm1497771wmm.2.2023.08.31.03.20.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Aug 2023 03:20:31 -0700 (PDT)
+Message-ID: <d4ce17ae-8b84-4c8a-acaa-287549ec23a3@gmail.com>
+Date: Thu, 31 Aug 2023 13:20:29 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230831024951.22599-1-twoerner@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/6] Attempt to enforce standard extensions for build
+ output
+Content-Language: en-US, tr, en-GB
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Dillon Min <dillon.minfei@gmail.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Marek Vasut <marex@denx.de>,
+ Michael Walle <michael@walle.cc>, Neha Malcom Francis <n-francis@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan
+ <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Vikas Manocha <vikas.manocha@st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
+ <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
+From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+In-Reply-To: <CAPnjgZ3ejchoWij6C80nVMVr5iOag3Zazf7O_g_yYcw1U_f+cQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,49 +106,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
-
-On Wed, Aug 30, 2023 at 10:49:50PM -0400, Trevor Woerner wrote:
-> In 2cb43ef1c223 ("usb: ether: Fix error handling in usb_ether_init") the error
-> handling of usb_ether_init() was changed. Not a single other call site of this
-> function checks its return value, therefore follow suit in the am33xx code.
-
-then there is the question what point is there in having a return value
-in this function at all.
-
-Anyway, it's fine to not check the return value in the caller if there
-is no use for the error.
-
-Reviewed-by: Michal Suchánek <msuchanek@suse.de>
-
+On 2023-08-28 20:54 +03:00, Simon Glass wrote:
+> Hi Alper,
 > 
-> Do not cause the boot to halt if the usb gadget ethernet initialization fails:
+> On Sun, 27 Aug 2023 at 13:17, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>
+>> On 2023-08-24 06:02 +03:00, Simon Glass wrote:
+>>> In this early stage of using binman to produce output files, we are mostly
+>>> seeing people using common extensions such as '.bin' and '.rom'
+>>>
+>>> But unusual extensions appear in some places.
+>>>
+>>> We would like 'buildman -k' to keep the build outputs, but this is hard if
+>>> there is no consistency as to the extension used.
+>>>
+>>> This series adjusts binman to enforce just 4 extensions for output images:
+>>>
+>>>    .bin
+>>>    .rom
+>>>    .itb
+>>>    .img
+>>>
+>>> Other extensions will produce an error. With this rule observed, buildman
+>>> can keep the required files.
+>>
+>> I dislike this limitation. We know what files we will generate, they are
+>> listed in binman dtb, so we can add something like `binman build --ls`
+>> to print their names/paths for buildman to preserve them.
 > 
-> 	initcall sequence 9ffdbd84 failed at call 808024b9 (err=-19)
-> 	### ERROR ### Please RESET the board ###
+> Yes, it would be good to have that...
 > 
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
->  arch/arm/mach-omap2/am33xx/board.c | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
+> But why do you dislike the limitation? Do you think extensions provide
+> useful information? I suppose one problem is that *.bin might pick up
+> private blobs that happen to be in the source directory?
+
+I guess my strongest argument is that people already/will have workflows
+that depend on certain filenames or extensions, and shouldn't have to
+modify binman code (consider that people may be using the PyPI wheels)
+to accommodate those when we are already putting the name in the dtb.
+
+I do want some standardization to the U-Boot build outputs though, but
+more like a global binman.dts with like u-boot.rom, u-boot-sdmmc.img
+images with well-defined TPL, SPL, U-Boot sections that arch-dtsi files
+can fill in.
+
+>> Regarding the output directory suggestion, I think the binman outputs
+>> (not temporary/intermediate files) should be in the same directory as
+>> make outputs
 > 
-> diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
-> index ecc0a592e993..8f772310a1a7 100644
-> --- a/arch/arm/mach-omap2/am33xx/board.c
-> +++ b/arch/arm/mach-omap2/am33xx/board.c
-> @@ -270,11 +270,7 @@ int arch_misc_init(void)
->  		return ret;
->  
->  #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
-> -	ret = usb_ether_init();
-> -	if (ret) {
-> -		pr_err("USB ether init failed\n");
-> -		return ret;
-> -	}
-> +	usb_ether_init();
->  #endif
->  
->  	return 0;
-> -- 
-> 2.41.0.327.gaa9166bcc0ba
+> Agreed
 > 
+>> , and the Makefile should default to O=build to achieve the
+>> "output dir". I'm not sure if that's going to happen.
+> 
+> I would quite like the 'non-output' file (i.e. things that are not a
+> binman image) to appear in a 'binman-work' subdir of the output dir.
+> What do you think?
+
+I'd prefer them to go in a tempfile.TemporaryDirectory() and discarded
+at the end of a binman run, and a "--tmpdir <path>" option to use a
+given directory instead and preserve things for debugging.
