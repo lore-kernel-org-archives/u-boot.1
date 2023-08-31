@@ -4,76 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD4A1C83F12
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:35:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45B7C83F10
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 14:41:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30742865A0;
-	Thu, 31 Aug 2023 16:35:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E32B3865A5;
+	Thu, 31 Aug 2023 16:41:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="df8a8Gvf";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A70CF865A2; Thu, 31 Aug 2023 16:35:37 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1693492890;
+	bh=Au5xB902VCX9Y4ONesBGo820AKaNHBW5EVBJ+47nZ4Q=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=xT2loaHHhmKfjM57B0w4+enu1BCaGqbpqCeRrBYehQOxlKPVL/y2TSaRBNybY1XH9
+	 VV4E/mru2433q6WWa8igogn4SbB/IJBA4X8lxo2QwxxN21MLlr2mug+cLDrspwqpBd
+	 ZBcxLg+Y32dkTBmov+2LSj/hSzDM1+U+M9ItqbbaTiUAnqUSevGU1wXUKE8puSWxv7
+	 eHmo4gYuINCAOUyRyci0h3Mml36fGZ9AJy07HLaSeSGT/2K0Hv4WnxhyMW0Q+iudWz
+	 TB2G6/yPjMeIvlWvW0CqX0rwJRsgT9nLudnIDZljc6YZdqgbD2VjoaCaf9HnJowOha
+	 jVR6lpanCmwnw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E666C8659C
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 16:35:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4020b88bd03so8811915e9.3
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 07:35:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693492534; x=1694097334; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0MR6viG98veKGXMSit7+kQzC+Z6sABV5/uXFVJwYIYg=;
- b=df8a8Gvf8eDeVV8lcn+0ROk8DC1OHkfE3SES+hJCoGLJhVocM21q17FWNoLSZwar4i
- oB51Iw8nga4NpK+a5Ub9QGonWU0oEFFddBzRQPQKWx2PTlOwslrpEKpKG5GSXT0OSu5x
- KJBBqMpzhw4+dKFLhnMZej6KNHeUyWCXnxHKRZG4FgPAOQGnGhc47gEU1hApT2a4v2BP
- 7Zvfpc4y5LFeNJSiKXnHYKZg6JEdd/jRcsiIWUGKtULbSfhO3fWSJSzdL4SE7Sbo2/L/
- gREBwrexrxESdtAikCt3pdbcMnlqWpPlVgg/KtOn8iahqRl0ZMiXttfIkK1S0wyUFcOh
- 13jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693492534; x=1694097334;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0MR6viG98veKGXMSit7+kQzC+Z6sABV5/uXFVJwYIYg=;
- b=C5tb5zOoEcP+h3A3WRARPh/VUD9DPpCo3QgSzviMXd+YpY6i+Oe2mzr5fmN85HeZNJ
- Je/P752ZWBZj9JleAkplRnaUWUQekiBYyRzDbsaSe7ezyUFfTCkn8tQ85TQqfz/tLNO4
- zS2hcX4u1cD6WslLIALG2/ZVJY8NDo0pqrgp7B+hpFey+C3GBq5ubjn9oLMj4BDmzSKl
- joH4k0Dv9BSMYeErfqTId6ZM9Ym+0Z4dmePO/yWgaB0s0gjI+xImD3FUCnVQwt9ok2zI
- HGyScDSpLVI93qAEpmHbRzLfq2toPoxQUqre8DuL07vlyPzjL82XA1tjhdJXs4UVCgvb
- Vnog==
-X-Gm-Message-State: AOJu0YzG0r1XPknhyjef6kTA04nKvxaxJxTdapVTs9XQ/OPGMdMxMh8f
- l8QkH+REjL0OaqCBU1BQIAH6pL61RK+la0Gx2Tgnig==
-X-Google-Smtp-Source: AGHT+IHAmq+Mu1f6CSB8cx5zae/Zxt5Uq6//Yw1abhrIRjK83I+Donbcm2lRMLtli5MGTSRlwQxJ2Z8ppkc2lNusw/c=
-X-Received: by 2002:a05:600c:2256:b0:400:6bee:f4fe with SMTP id
- a22-20020a05600c225600b004006beef4femr4274869wmm.21.1693492534214; Thu, 31
- Aug 2023 07:35:34 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id A6EBA86523;
+ Thu, 31 Aug 2023 16:41:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1693492889;
+ bh=Au5xB902VCX9Y4ONesBGo820AKaNHBW5EVBJ+47nZ4Q=;
+ h=From:To:Cc:Subject:Date:From;
+ b=LOExdbcON5H/d+QDG5Mi2vM7zHBlZwEnmYguvhEofnXGBBtRrSYiUm3GXY35lMme5
+ 6IHEIAD1W5NhXKJG5KmGIQtLbsRNxq4fq2SjCpg9xQ0/Ijnth4W/FT3SFzoe2gxzOb
+ img+8heGQUb3TN69Mtdw14FoTKMe7fjXGdYqcQEORRbMORG1oRbaqX5ogztPwM650j
+ s3QPfR4krJkpyk3twoqt6MCk51U8SlOSGB/IW4IUYTY7z+TMCziTz+h0qRyAXpmppj
+ yBRw/4NaLWHoAjHpOe/3htvqEMxTXAwcW+fHjo988zbKgjpH7+lPNgjyENQNdpitMw
+ s0KqKRu8vCt7A==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] ARM: imx: Use default SAVED_DRAM_TIMING_BASE on DH i.MX8M
+ Plus DHCOM
+Date: Thu, 31 Aug 2023 16:41:15 +0200
+Message-Id: <20230831144115.78505-1-marex@denx.de>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20230822075112.717992-1-bhupesh.sharma@linaro.org>
- <20230822075112.717992-3-bhupesh.sharma@linaro.org>
- <20230830185205.GA1149416@bill-the-cat>
- <0de1f4aa-a8be-805e-8260-6178b1368ab4@amd.com>
- <20230831133102.GO3101304@bill-the-cat>
-In-Reply-To: <20230831133102.GO3101304@bill-the-cat>
-From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Date: Thu, 31 Aug 2023 20:05:22 +0530
-Message-ID: <CAH=2Ntxvw8sjeFWkKAqryxo01cFZ7ni0yNzB+SAHcZ_YDgUGtw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] armv8: Disable SYS_DCACHE_OFF & SYS_ICACHE_OFF for
- ARM64
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, sjg@chromium.org,
- bhupesh.linux@gmail.com, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,105 +65,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Aug 2023 at 19:01, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Aug 31, 2023 at 10:24:07AM +0200, Michal Simek wrote:
-> >
-> >
-> > On 8/30/23 20:52, Tom Rini wrote:
-> > > On Tue, Aug 22, 2023 at 01:21:12PM +0530, Bhupesh Sharma wrote:
-> > >
-> > > > Ideally SYS_ICACHE_OFF and SYS_DCACHE_OFF should never be set for
-> > > > ARM64 (ARMv8) platforms, as it makes booting u-boot slower on these
-> > > > platforms.
-> > > >
-> > > > However, if some platforms require ICACHE or DCACHE  to be disabled
-> > > > only for the smaller SPL stage, we should support such configurations
-> > > > in u-boot as well.
-> >
-> > I am missing the reason why this change should be accepted.
-> >
-> > > >
-> > > > Compile-tested for:
-> > > > - qemu arm64
-> >
-> > qemu doesn't model caches that's why I don't think it is relevant here.
-> >
-> > > > - imx8
-> > > > - stm32
-> > > >
-> > > > and run-tested on:
-> > > > - Qualcomm RB3 platform
-> > > >
-> > > > Cc: Tom Rini <trini@konsulko.com>
-> > > > Cc: Simon Glass <sjg@chromium.org>
-> > > > Cc: Peng Fan <peng.fan@nxp.com>
-> > > > Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > >   arch/arm/Kconfig            | 2 ++
-> > > >   arch/arm/cpu/armv8/Makefile | 4 ++--
-> > > >   2 files changed, 4 insertions(+), 2 deletions(-)
-> > > >
-> > > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > > index 36ee1e9a3c..92bff715e3 100644
-> > > > --- a/arch/arm/Kconfig
-> > > > +++ b/arch/arm/Kconfig
-> > > > @@ -141,6 +141,7 @@ config THUMB2_KERNEL
-> > > >   config SYS_ICACHE_OFF
-> > > >           bool "Do not enable icache"
-> > > > + depends on !ARM64
-> > > >           help
-> > > >             Do not enable instruction cache in U-Boot.
-> > > > @@ -153,6 +154,7 @@ config SPL_SYS_ICACHE_OFF
-> > > >   config SYS_DCACHE_OFF
-> > > >           bool "Do not enable dcache"
-> > > > + depends on !ARM64
-> > > >           help
-> > > >             Do not enable data cache in U-Boot.
-> > > > diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-> > > > index bba4f570db..0d0c1728e4 100644
-> > > > --- a/arch/arm/cpu/armv8/Makefile
-> > > > +++ b/arch/arm/cpu/armv8/Makefile
-> > > > @@ -5,13 +5,13 @@
-> > > >   extra-y := start.o
-> > > > +obj-y    += cache_v8.o
-> > > >   obj-y   += cpu.o
-> > > >   ifndef CONFIG_$(SPL_TPL_)TIMER
-> > > >   obj-$(CONFIG_SYS_ARCH_TIMER) += generic_timer.o
-> > > >   endif
-> > > >   ifndef CONFIG_$(SPL_)SYS_DCACHE_OFF
-> > > > -obj-y    += cache_v8.o
-> > > > -obj-y    += cache.o
-> > > > +obj-y  += cache.o
-> > > >   endif
-> > > >   ifdef CONFIG_SPL_BUILD
-> > > >   obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) += exceptions.o
-> > >
-> > > I'm adding Michal here because this changes the behavior on xilinx
-> > > platforms that had the icache off.  I was under the impression that at
-> > > the levels U-Boot runs at on aarch64, we just couldn't have
-> > > icache/dcache off, but I guess that's wrong?
-> > >
-> >
-> > yes. We are using icache off for mini u-boot configurations for quite a long
-> > time. I tried to find out any commit why we started to use it but didn't
-> > find any record. But will ask team to retest that use cases to see if that
-> > is working or not.
-> > In our case we are using small full U-Boot not any SPL variant.
-> >
-> > My biggest issue with the patch is that it is not clear what issue it is
-> > trying to solve as I have mentioned above.
-> > It just says that ideally icache/dcache should be on. If you want to enforce
-> > it on your platform you can select it when that platform is selected and
-> > don't need enforce it for other platforms.
->
-> Thanks Michal. Bhupesh, I was wrong in v1, having caches off is allowed,
-> so you just need to fix issues like part one does where code doesn't
-> compile when the options are disabled, and then are there further
-> changes needed for your usecase?
+Use default SAVED_DRAM_TIMING_BASE as that is what upstream TFA expects.
+Without this change, the board will fail to suspend/resume e.g. in Linux.
 
-Sure Tom. I will go back to sending v1 as v3 with some minor changes.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Stefano Babic <sbabic@denx.de>
+---
+ configs/imx8mp_dhcom_pdk2_defconfig | 1 -
+ configs/imx8mp_dhcom_pdk3_defconfig | 1 -
+ 2 files changed, 2 deletions(-)
 
-Thanks,
-Bhupesh
+diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
+index 14ac499e587..a920ffe09bf 100644
+--- a/configs/imx8mp_dhcom_pdk2_defconfig
++++ b/configs/imx8mp_dhcom_pdk2_defconfig
+@@ -160,7 +160,6 @@ CONFIG_SPL_CLK_COMPOSITE_CCF=y
+ CONFIG_CLK_COMPOSITE_CCF=y
+ CONFIG_SPL_CLK_IMX8MP=y
+ CONFIG_CLK_IMX8MP=y
+-CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+ CONFIG_DFU_TFTP=y
+ CONFIG_DFU_TIMEOUT=y
+ CONFIG_DFU_MMC=y
+diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
+index 3b26f315bba..9463456798e 100644
+--- a/configs/imx8mp_dhcom_pdk3_defconfig
++++ b/configs/imx8mp_dhcom_pdk3_defconfig
+@@ -161,7 +161,6 @@ CONFIG_SPL_CLK_COMPOSITE_CCF=y
+ CONFIG_CLK_COMPOSITE_CCF=y
+ CONFIG_SPL_CLK_IMX8MP=y
+ CONFIG_CLK_IMX8MP=y
+-CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+ CONFIG_DFU_TFTP=y
+ CONFIG_DFU_TIMEOUT=y
+ CONFIG_DFU_MMC=y
+-- 
+2.40.1
+
