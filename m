@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200F4C83F15
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0730C83F15
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:14:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E925586553;
-	Thu, 31 Aug 2023 05:13:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37D5C80771;
+	Thu, 31 Aug 2023 05:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xak6yCi/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="koK6F6z1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C9AE86551; Thu, 31 Aug 2023 05:13:51 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id A933A86557; Thu, 31 Aug 2023 05:13:52 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F9CC86553
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:13:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9F0486546
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:13:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-792623074edso37479539f.1
- for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:13:47 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-34ca860051fso1479605ab.2
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693451626; x=1694056426; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=IgN/mHDxjLI3n3oSWHkqvaJSGYK0DsNfpUBHvxLmfzU=;
- b=Xak6yCi/bxZx0rPwjDqbUZ9YVuQ6X1gcmkYju7+0C9g2OegJV883JGbpw0ys55Wksw
- Q/5C4rCSb3/WRkxZXj0AIGxTgKP0pfMFpndz1AoNDZe7rQjWfRR3FV24Oxhr6hSq886Q
- 5Y7nNDrTxB6SWheQR8WZ1zm7tI7L68QC2yKR0=
+ d=chromium.org; s=google; t=1693451628; x=1694056428; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3/uY/PRnn4AnM28846Y0Skmr35u6OUgbiJ8mmfR3KKY=;
+ b=koK6F6z1YpdWhsjBAHc8QV+BFvCLvcFGcZzAO0pcTLjRPAwxTfw+gMAkHJucNQp7L0
+ z03gFrg7qMqH6J83CVEQlMR0Hiw2SvnMxyfOpaWjAyfnDdJbtTqWA+5shKLVp7w9xXTK
+ 8A1qNuSvZis+CWI9mQGySO2iPa+fxX/ThSXx4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693451626; x=1694056426;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IgN/mHDxjLI3n3oSWHkqvaJSGYK0DsNfpUBHvxLmfzU=;
- b=Qti1hzE6RcNJK93JVxC7VyYTePuC6qgRirdcGY52FRQ7mAVJShZ34DyTkw/cu1XnXV
- 3rierS7Xz2lPDjJiuaYd1kOW/QSaz8A2rVZZgMLAdbmnmEbd18cPGyQWUtaifs+aUekR
- eVBBT+nTcZLYeMX1I/0V5IImfUg58hKID3fmirKIu/QW+1NypgEnvUs8h1Md+K+WGn/q
- j1BHBcJTNitZSGfY/Xdm2YsMBC1WOuVDA1F7ofboQNLDPs9k0LGONtPWnxfk3phOoUmR
- sD4LyNrJL4YWaf8Oub57Hl1xD3BlelusAaZVw6EHBQdQyDiXfcV2BAOUgsI+uRiuL867
- b+qw==
-X-Gm-Message-State: AOJu0YztfMcxAs3BLR3rW9MviOmhEGnsaK8OJARe9Y6oBqQ3pqls+VLl
- ZIM1C10WeYsiIvIc2dmFTClsXVemQvbvLDH0QTc=
-X-Google-Smtp-Source: AGHT+IH7Noc+0LVx3yvmM6EzqN2G9BWboRDksnSZmY5OFW8HLwd//rrYo8qsuonrDcCev8Qts46pyQ==
-X-Received: by 2002:a05:6e02:12c5:b0:34d:fac9:bf1b with SMTP id
- i5-20020a056e0212c500b0034dfac9bf1bmr1191406ilm.1.1693451625939; 
- Wed, 30 Aug 2023 20:13:45 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693451628; x=1694056428;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3/uY/PRnn4AnM28846Y0Skmr35u6OUgbiJ8mmfR3KKY=;
+ b=MdeML2Tm0OUQsv9EOSKRmTk6eir+mRslV4Vr3F36EOzPzVkawnAqrw1qhsBhflswL+
+ RYOOWX2pUF9mpHtMj9zOPsXg/htV6vp2CQNqD0xD70IlmplsZaMN91FadJQQoH8RZ4eS
+ A+vbWqf69EqZoAlj4Epzy5JJ8hSyhKiPXzxLcLLyYaE4SeH+OoJwnDTMmDa3t9Iqwtjz
+ +jcpqxtkSVfIJrpD1070hyQRGTsy1eza+OYQqojhqRuopllzrd/yAd8I3ZD0ot2Kt9Rv
+ UmM6Y44eVV5y4FZFJ0KYxsaXQ5yZky21Y7yAi8x+xQ6fESiIxa1DENTzqyp1cIGjkkSY
+ h6uQ==
+X-Gm-Message-State: AOJu0Yw2aRKWUUy5zAo0WJ9xR6Ra1C+mJaBqEsL8kDNA7QfNN+um8Bd+
+ tdg5mxZhJNjiO8keJAk50ORGOKTkArrWWgoNLeU=
+X-Google-Smtp-Source: AGHT+IHtYfLvOcLCB4tvywvN2DZHFWi5zRDwLfOsTOEg0/n1eJZm6Gr1kvG488Wlc3tpT9XIazQqvQ==
+X-Received: by 2002:a05:6e02:12a2:b0:33a:a6de:65be with SMTP id
+ f2-20020a056e0212a200b0033aa6de65bemr4184437ilr.21.1693451628292; 
+ Wed, 30 Aug 2023 20:13:48 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:b147:266a:7359:2232])
  by smtp.gmail.com with ESMTPSA id
- x10-20020a02ac8a000000b0042bbfe3dc42sm142879jan.173.2023.08.30.20.13.45
+ x10-20020a02ac8a000000b0042bbfe3dc42sm142879jan.173.2023.08.30.20.13.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Aug 2023 20:13:45 -0700 (PDT)
+ Wed, 30 Aug 2023 20:13:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 1/2] Reland "x86: Move FACP table into separate functions""
-Date: Wed, 30 Aug 2023 21:13:34 -0600
-Message-ID: <20230831031341.2657786-1-sjg@chromium.org>
+Subject: [PATCH v2 2/2] x86: Prevent from missing the FADT chaining
+Date: Wed, 30 Aug 2023 21:13:35 -0600
+Message-ID: <20230831031341.2657786-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
+In-Reply-To: <20230831031341.2657786-1-sjg@chromium.org>
+References: <20230831031341.2657786-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,315 +88,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each board has its own way of creating this table. Rather than calling the
-acpi_create_fadt() function for each one from a common acpi_write_fadt()
-function, just move the writer into the board-specific code.
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Recent approach with FADT writer shows that there is
+a room for subtle errors. Prevent this from happening
+again by introducing acpi_add_fadt() helper.
+
 Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-(Now fixed - thank you Andy!)
 
-Make another attempt to land this. It apparently breaks Edison but I
-cannot test that board, nor can I work out what is wrong with the code.
+(no changes since v1)
 
-Previous test report is here:
-
-   https://lore.kernel.org/all/Yga9Z7sBFAeV64FV@smile.fi.intel.com/
-
-Looking at the image, the method is definitely present:
-
-   $ nm /tmp/b/edison/u-boot |grep acpi_writer
-   0115fde0 D _u_boot_list_2_acpi_writer_2_0base
-   0115fdf0 D _u_boot_list_2_acpi_writer_2_1facs
-   0115fe00 D _u_boot_list_2_acpi_writer_2_3dsdt
-   0115fe10 D _u_boot_list_2_acpi_writer_2_4gnvs
-   0115fe20 D _u_boot_list_2_acpi_writer_2_5csrt
-   0115fe30 D _u_boot_list_2_acpi_writer_2_5fadt
-   0115fe40 D _u_boot_list_2_acpi_writer_2_5mcfg
-   0115fe50 D _u_boot_list_2_acpi_writer_2_5spcr
-   0115fe60 D _u_boot_list_2_acpi_writer_2_5tcpa
-   0115fe70 D _u_boot_list_2_acpi_writer_2_5tpm2
-   0115fe80 D _u_boot_list_2_acpi_writer_2_5x86
-   0115fe90 D _u_boot_list_2_acpi_writer_2_6ssdt
-   0115fea0 D _u_boot_list_2_acpi_writer_2_8dev
-
-I wonder if the code in quark_write_fadt() is not being called?
-
-'acpi list' shows what tables are installed. On minnowmax there is no
-difference with or without this patch. Perhaps someone with sharper eyes
-than me can figure this out?
-
-The mechanism is that the functions to be called are put in a linker list,
-each element being declared using ACPI_WRITER(function_name).
-
-Then acpi_write_all() is called to write each one. Debugging could be
-added to that function, perhaps?
-
-Changes in v2:
-- Squash in the fix from Andy Shevchenko
-
- arch/x86/cpu/apollolake/acpi.c    | 17 +++++++++++++----
- arch/x86/cpu/baytrail/acpi.c      | 27 +++++++++++++++++++--------
- arch/x86/cpu/quark/acpi.c         | 27 +++++++++++++++++++--------
- arch/x86/cpu/tangier/acpi.c       | 27 +++++++++++++++++++--------
- arch/x86/include/asm/acpi_table.h |  2 --
- arch/x86/lib/acpi_table.c         | 15 ---------------
- 6 files changed, 70 insertions(+), 45 deletions(-)
+ arch/x86/cpu/apollolake/acpi.c | 6 +-----
+ arch/x86/cpu/baytrail/acpi.c   | 6 +-----
+ arch/x86/cpu/quark/acpi.c      | 6 +-----
+ arch/x86/cpu/tangier/acpi.c    | 6 +-----
+ include/acpi/acpi_table.h      | 7 +++++++
+ 5 files changed, 11 insertions(+), 20 deletions(-)
 
 diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
-index fd21c0b4968..16aaed7238a 100644
+index 16aaed7238a..c610a7f4477 100644
 --- a/arch/x86/cpu/apollolake/acpi.c
 +++ b/arch/x86/cpu/apollolake/acpi.c
-@@ -146,16 +146,25 @@ void fill_fadt(struct acpi_fadt *fadt)
- 	fadt->x_pm_tmr_blk.addrl = IOMAP_ACPI_BASE + PM1_TMR;
- }
- 
--void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt)
-+static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- {
--	struct acpi_table_header *header = &fadt->header;
-+	struct acpi_table_header *header;
-+	struct acpi_fadt *fadt;
- 
--	acpi_fadt_common(fadt, facs, dsdt);
-+	fadt = ctx->current;
-+	acpi_fadt_common(fadt, ctx->facs, ctx->dsdt);
- 	intel_acpi_fill_fadt(fadt);
- 	fill_fadt(fadt);
-+	header = &fadt->header;
+@@ -158,11 +158,7 @@ static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	header = &fadt->header;
  	header->checksum = table_compute_checksum(fadt, header->length);
-+
-+	acpi_add_table(ctx, fadt);
-+
-+	acpi_inc(ctx, sizeof(struct acpi_fadt));
-+
-+	return 0;
- }
-+ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
  
- int apl_acpi_fill_dmar(struct acpi_ctx *ctx)
- {
-diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
-index 07757b88a30..4c526ff2731 100644
---- a/arch/x86/cpu/baytrail/acpi.c
-+++ b/arch/x86/cpu/baytrail/acpi.c
-@@ -15,20 +15,24 @@
- #include <asm/arch/iomap.h>
- #include <dm/uclass-internal.h>
- 
--void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt)
-+static int baytrail_write_fadt(struct acpi_ctx *ctx,
-+			       const struct acpi_writer *entry)
- {
--	struct acpi_table_header *header = &(fadt->header);
-+	struct acpi_table_header *header;
-+	struct acpi_fadt *fadt;
-+
-+	fadt = ctx->current;
-+	header = &fadt->header;
- 	u16 pmbase = ACPI_BASE_ADDRESS;
- 
--	memset((void *)fadt, 0, sizeof(struct acpi_fadt));
-+	memset(fadt, '\0', sizeof(struct acpi_fadt));
- 
- 	acpi_fill_header(header, "FACP");
- 	header->length = sizeof(struct acpi_fadt);
- 	header->revision = 4;
- 
--	fadt->firmware_ctrl = (u32)facs;
--	fadt->dsdt = (u32)dsdt;
-+	fadt->firmware_ctrl = (u32)ctx->facs;
-+	fadt->dsdt = (u32)ctx->dsdt;
- 	fadt->preferred_pm_profile = ACPI_PM_MOBILE;
- 	fadt->sci_int = 9;
- 	fadt->smi_cmd = 0;
-@@ -75,9 +79,9 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
- 	fadt->reset_reg.addrh = 0;
- 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
- 
--	fadt->x_firmware_ctl_l = (u32)facs;
-+	fadt->x_firmware_ctl_l = (u32)ctx->facs;
- 	fadt->x_firmware_ctl_h = 0;
--	fadt->x_dsdt_l = (u32)dsdt;
-+	fadt->x_dsdt_l = (u32)ctx->dsdt;
- 	fadt->x_dsdt_h = 0;
- 
- 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
-@@ -137,7 +141,14 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
- 	fadt->x_gpe1_blk.addrh = 0x0;
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
-+
-+	acpi_add_table(ctx, fadt);
-+
-+	acpi_inc(ctx, sizeof(struct acpi_fadt));
-+
-+	return 0;
- }
-+ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
- 
- int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
- {
-diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
-index 82b776ff65f..92fa5bc30c3 100644
---- a/arch/x86/cpu/quark/acpi.c
-+++ b/arch/x86/cpu/quark/acpi.c
-@@ -10,20 +10,24 @@
- #include <asm/arch/global_nvs.h>
- #include <asm/arch/iomap.h>
- 
--void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt)
-+static int quark_write_fadt(struct acpi_ctx *ctx,
-+			    const struct acpi_writer *entry)
- {
--	struct acpi_table_header *header = &(fadt->header);
- 	u16 pmbase = ACPI_PM1_BASE_ADDRESS;
-+	struct acpi_table_header *header;
-+	struct acpi_fadt *fadt;
- 
--	memset((void *)fadt, 0, sizeof(struct acpi_fadt));
-+	fadt = ctx->current;
-+	header = &fadt->header;
-+
-+	memset(fadt, '\0', sizeof(struct acpi_fadt));
- 
- 	acpi_fill_header(header, "FACP");
- 	header->length = sizeof(struct acpi_fadt);
- 	header->revision = 4;
- 
--	fadt->firmware_ctrl = (u32)facs;
--	fadt->dsdt = (u32)dsdt;
-+	fadt->firmware_ctrl = (u32)ctx->facs;
-+	fadt->dsdt = (u32)ctx->dsdt;
- 	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
- 	fadt->sci_int = 9;
- 	fadt->smi_cmd = 0;
-@@ -70,9 +74,9 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
- 	fadt->reset_reg.addrh = 0;
- 	fadt->reset_value = SYS_RST | RST_CPU | FULL_RST;
- 
--	fadt->x_firmware_ctl_l = (u32)facs;
-+	fadt->x_firmware_ctl_l = (u32)ctx->facs;
- 	fadt->x_firmware_ctl_h = 0;
--	fadt->x_dsdt_l = (u32)dsdt;
-+	fadt->x_dsdt_l = (u32)ctx->dsdt;
- 	fadt->x_dsdt_h = 0;
- 
- 	fadt->x_pm1a_evt_blk.space_id = ACPI_ADDRESS_SPACE_IO;
-@@ -132,7 +136,14 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
- 	fadt->x_gpe1_blk.addrh = 0x0;
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
-+
-+	acpi_add_table(ctx, fadt);
-+
-+	acpi_inc(ctx, sizeof(struct acpi_fadt));
-+
-+	return 0;
- }
-+ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
- 
- int acpi_create_gnvs(struct acpi_global_nvs *gnvs)
- {
-diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
-index 3ffba3897aa..ffaa56ab6f8 100644
---- a/arch/x86/cpu/tangier/acpi.c
-+++ b/arch/x86/cpu/tangier/acpi.c
-@@ -16,19 +16,23 @@
- #include <asm/arch/iomap.h>
- #include <dm/uclass-internal.h>
- 
--void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt)
-+static int tangier_write_fadt(struct acpi_ctx *ctx,
-+			      const struct acpi_writer *entry)
- {
--	struct acpi_table_header *header = &(fadt->header);
-+	struct acpi_table_header *header;
-+	struct acpi_fadt *fadt;
- 
--	memset((void *)fadt, 0, sizeof(struct acpi_fadt));
-+	fadt = ctx->current;
-+	header = &fadt->header;
-+
-+	memset(fadt, '\0', sizeof(struct acpi_fadt));
- 
- 	acpi_fill_header(header, "FACP");
- 	header->length = sizeof(struct acpi_fadt);
- 	header->revision = 6;
- 
--	fadt->firmware_ctrl = (u32)facs;
--	fadt->dsdt = (u32)dsdt;
-+	fadt->firmware_ctrl = (u32)ctx->facs;
-+	fadt->dsdt = (u32)ctx->dsdt;
- 	fadt->preferred_pm_profile = ACPI_PM_UNSPECIFIED;
- 
- 	fadt->iapc_boot_arch = ACPI_FADT_VGA_NOT_PRESENT |
-@@ -41,13 +45,20 @@ void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
- 
- 	fadt->minor_revision = 2;
- 
--	fadt->x_firmware_ctl_l = (u32)facs;
-+	fadt->x_firmware_ctl_l = (u32)ctx->facs;
- 	fadt->x_firmware_ctl_h = 0;
--	fadt->x_dsdt_l = (u32)dsdt;
-+	fadt->x_dsdt_l = (u32)ctx->dsdt;
- 	fadt->x_dsdt_h = 0;
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
-+
-+	acpi_add_table(ctx, fadt);
-+
-+	acpi_inc(ctx, sizeof(struct acpi_fadt));
-+
-+	return 0;
- }
-+ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
- 
- u32 acpi_fill_madt(u32 current)
- {
-diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
-index 72e1873d15d..226753b65d6 100644
---- a/arch/x86/include/asm/acpi_table.h
-+++ b/arch/x86/include/asm/acpi_table.h
-@@ -24,8 +24,6 @@ struct acpi_table_header;
- 
- /* These can be used by the target port */
- 
--void acpi_create_fadt(struct acpi_fadt *fadt, struct acpi_facs *facs,
--		      void *dsdt);
- int acpi_create_madt_lapics(u32 current);
- int acpi_create_madt_ioapic(struct acpi_madt_ioapic *ioapic, u8 id,
- 			    u32 addr, u32 gsi_base);
-diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
-index e3b7e9a4bbe..c5b33dc65de 100644
---- a/arch/x86/lib/acpi_table.c
-+++ b/arch/x86/lib/acpi_table.c
-@@ -458,21 +458,6 @@ int acpi_write_gnvs(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- }
- ACPI_WRITER(4gnvs, "GNVS", acpi_write_gnvs, 0);
- 
--static int acpi_write_fadt(struct acpi_ctx *ctx,
--			   const struct acpi_writer *entry)
--{
--	struct acpi_fadt *fadt;
--
--	fadt = ctx->current;
--	acpi_create_fadt(fadt, ctx->facs, ctx->dsdt);
 -	acpi_add_table(ctx, fadt);
 -
 -	acpi_inc(ctx, sizeof(struct acpi_fadt));
 -
 -	return 0;
--}
--ACPI_WRITER(5fact, "FADT", acpi_write_fadt, 0);
++	return acpi_add_fadt(ctx, fadt);
+ }
+ ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
+ 
+diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
+index 4c526ff2731..4378846f8b0 100644
+--- a/arch/x86/cpu/baytrail/acpi.c
++++ b/arch/x86/cpu/baytrail/acpi.c
+@@ -142,11 +142,7 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
+ 
+ 	header->checksum = table_compute_checksum(fadt, header->length);
+ 
+-	acpi_add_table(ctx, fadt);
 -
+-	acpi_inc(ctx, sizeof(struct acpi_fadt));
+-
+-	return 0;
++	return acpi_add_fadt(ctx, fadt);
+ }
+ ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
+ 
+diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
+index 92fa5bc30c3..9a2d682451b 100644
+--- a/arch/x86/cpu/quark/acpi.c
++++ b/arch/x86/cpu/quark/acpi.c
+@@ -137,11 +137,7 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
+ 
+ 	header->checksum = table_compute_checksum(fadt, header->length);
+ 
+-	acpi_add_table(ctx, fadt);
+-
+-	acpi_inc(ctx, sizeof(struct acpi_fadt));
+-
+-	return 0;
++	return acpi_add_fadt(ctx, fadt);
+ }
+ ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
+ 
+diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
+index ffaa56ab6f8..1c667c7d569 100644
+--- a/arch/x86/cpu/tangier/acpi.c
++++ b/arch/x86/cpu/tangier/acpi.c
+@@ -52,11 +52,7 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
+ 
+ 	header->checksum = table_compute_checksum(fadt, header->length);
+ 
+-	acpi_add_table(ctx, fadt);
+-
+-	acpi_inc(ctx, sizeof(struct acpi_fadt));
+-
+-	return 0;
++	return acpi_add_fadt(ctx, fadt);
+ }
+ ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
+ 
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 7ed0443c821..1f85de091d3 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -883,6 +883,13 @@ void acpi_inc_align(struct acpi_ctx *ctx, uint amount);
+  */
+ int acpi_add_table(struct acpi_ctx *ctx, void *table);
+ 
++static inline int acpi_add_fadt(struct acpi_ctx *ctx, struct acpi_fadt *fadt)
++{
++	acpi_add_table(ctx, fadt);
++	acpi_inc(ctx, sizeof(struct acpi_fadt));
++	return 0;
++}
++
  /**
-  * acpi_write_hpet() - Write out a HPET table
+  * acpi_write_rsdp() - Write out an RSDP indicating where the ACPI tables are
   *
 -- 
 2.42.0.rc2.253.gd59a3bf2b4-goog
