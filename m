@@ -4,93 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB781C83F2B
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E56FC83F2B
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 03:53:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 353B886550;
-	Thu, 31 Aug 2023 05:51:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A822C86550;
+	Thu, 31 Aug 2023 05:53:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Re1utLBn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SQ75duFs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAAE786561; Thu, 31 Aug 2023 05:51:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B51C08654A; Thu, 31 Aug 2023 05:53:26 +0200 (CEST)
+Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
+ [IPv6:2607:f8b0:4864:20::e35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5167B8654A
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:51:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B16686550
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 05:53:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693453841; x=1694058641; i=xypron.glpk@gmx.de;
- bh=R71TKdnLRsv9cNj148mGMBi0XDmKqW254JYYyYvmmDo=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=Re1utLBnq8GqOxOuWqyIWq1IVraAIeg0RG6BuiKfnb6vTb/cLcqEQxay5m8JVOf+3L6r/oG
- sgTkSutL/9sc8P9dXirDSbVzo6ud8P/OU9PK921zEPkqnkn3j7SZnJUhr1y0+Fld4+r0ZhB+0
- pYa3LE8tssKUJbRCMBXD5GNQ/sK7gzBEkcDGoylwFo+QeBc3d3Fjj4uzzhPkmuD8QRTeuH/Wo
- 8QUXBGahygN1UTuQQ0iEBkQbYNRwRUJ6rhJ5EAAfmhtdUfnACRzniWVoI7DbiSrDhLDrBIImO
- 7bAOpjS25MPhWGTd5NE6YrA4z/0ooUhAcpj8nbns81fN5CzPqkUQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([62.143.244.162]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MtfNl-1pp51K092l-00v5wc; Thu, 31
- Aug 2023 05:50:41 +0200
-Date: Thu, 31 Aug 2023 05:50:38 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexey Romanov <avromanov@sberdevices.ru>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Suchanek <msuchanek@suse.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Ovidiu Panait <ovpanait@gmail.com>,
- =?ISO-8859-1?Q?Pierre-Cl=E9ment_Tosi?= <ptosi@google.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Roger Knecht <rknecht@pm.me>,
- Roger Quadros <rogerq@kernel.org>, Sean Edmond <seanedmond@microsoft.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: Re: [RFX PATCH 0/9] Universal Payload initial series
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230830232856.2589218-1-sjg@chromium.org>
-References: <20230830232856.2589218-1-sjg@chromium.org>
-Message-ID: <47386957-AD73-4DC6-8668-2641FD90F365@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-44ede2dce3aso222436137.1
+ for <u-boot@lists.denx.de>; Wed, 30 Aug 2023 20:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693454001; x=1694058801; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=tu7oIfBMQjdR6eYVlim4wPjbQ838/qUkx6NM5h2/s0I=;
+ b=SQ75duFsJAxL1EOcZ2IJHp3MspvkOAgtH34ebrJRB7gJtmZhYOUjes9hY8OI23uUfz
+ D7Jevi2mpKzsHz+Lfm16+14sYopBrrt2ZkJJBAjEdkGABDFGmNU20SZn7ojA5UMD6fPF
+ s8uoE8cbLyc8nvXpG2zPCu1WbXr7Il6vkg7qw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693454001; x=1694058801;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tu7oIfBMQjdR6eYVlim4wPjbQ838/qUkx6NM5h2/s0I=;
+ b=PGiwpGa8i96qX1CG0wbGAYnu7vlKl902Oql2AAVxmn8eO/qIsdoeqRNUr/4LNKm466
+ pxH1s2cqthlMheCu/h74IKWdKcPyH/8CNosWo1QQITZL/0VjObPh4jTiuo0NDE1MZrMt
+ 8OQQNrcQ3l7nnYeGWy1tQ99rrlNjpMtaWc3LifzMAp5ZyZj/rpfeGDNzcySwXBVbIT8u
+ aEUDTiDsln6hInrIeltfYLjj77Cn+lBp1BmhJmpq4Zxf6JeO6UWMKJOaY7g6DxgxAYWI
+ 4lSroH2DqYGI/0nmGxw6/+8WvGt78VLtUB38CtqyVuLQpzTkH/9C6rDkWlVdF+irPmtK
+ gsgg==
+X-Gm-Message-State: AOJu0YzMH5VPZ1BRMnlJF8YmumSfEf0N5OXEtAxrpdvm6QEPl0Ny/RvX
+ hLxynghMfYn9g1rxtjWaZtD06LT+yKcQw0ZnPvI=
+X-Google-Smtp-Source: AGHT+IEN/aK4UvaS8TbWM5eckJjDinmYNNPy5YVnKbu0YkcGEABn0dAvHZpNypEuGldwD6yluPCdTw==
+X-Received: by 2002:a05:6102:143:b0:44e:96f8:cc9 with SMTP id
+ a3-20020a056102014300b0044e96f80cc9mr4168997vsr.18.1693454001144; 
+ Wed, 30 Aug 2023 20:53:21 -0700 (PDT)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ dy47-20020a0566381d6f00b0042036f06b24sm160002jab.163.2023.08.30.20.53.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Aug 2023 20:53:20 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Anatolij Gustschin <agust@denx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>
+Subject: [PATCH v2 00/19] Kconfig: Tidy up some options
+Date: Wed, 30 Aug 2023 21:52:54 -0600
+Message-ID: <20230831035319.2316665-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.rc2.253.gd59a3bf2b4-goog
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:rYSVVII2LnYj2bn8PXfplU27p6QpKJCEyJLvEI4Sj/vlBWwSaIA
- CxL7l4hz1d3ITkMErKt5JyPVF+I0rZtRcRANjQVCBS8UWC8wX9mSVxacVWDgCoizdvh16hI
- z+gQQ8/ZUK9rOK19/uAetWqZZ+LDmdLkWKP0LnGH64+uhjH97pOC3NFXh5a08VIoaeoHpyY
- KskvkA2qKpC2lyLRUrALg==
-UI-OutboundReport: notjunk:1;M01:P0:PKcyBxL+qIA=;jOIpi/TzQPmGfIcaQ8+PY80bSKa
- fL7/+hubE7QwZW1Vm7gE4/7yF0n9kXPf65dk/F2x2aoAFVXcH823TP2TFvkUOU3Y58FHBGLQq
- ARu2aalG8PfuQR4xJ59DzPrxY2H381rynGZi2bziaKEAw0Fh3eqz4sNdLbfRm6hmeqWmLOg1f
- +vN+oD/KKfl8T9I5bHYF5ec222O1Ftx2Md1knArsYC5IH98+5B1FYGoNZjBRC6RU4O3vGr6G3
- jgeHZZyeU3TUQzDvOqf9OyyP9WAUWGy+cuT06CWItgUwiXOfKSCPqmwkYU+612oyI4yTKB7xI
- 1mBq3Ze3EzEpFBs25edjWEEkeaRS/fRgIZPu2vulj1JrI4usv/t3c551xAHUThltjc886K0f7
- 4OlXJa37zc0s2O50OOF8+sw4h21x9axKc1VvdKg32LNlE7PRvYzm6MUB7gCtPrmLcMvZua5sI
- 4DqqLm3ndpgr66LfYCZ54nKjL+CLUzqU+0EcXz7PkHFgmP9CU3bIzGBlFM1B7q1VV3zfBSH/r
- QYQyQmo4fmp9FiBKv546rOgqPZLUAp81Gl3DhE147FddMKfVZQXYoB47E0HXH2Qw0hvhlipqp
- xTzXM8J/0luMism7YUX9fuF+IJovNsYSOlDiup5U0UlarNFmWStJ/OEWAMk+3yEUEMf/A2wNu
- r0mINGb4wvwU3+6Lv4TYJtEK93mjAKTU+UVZ+nL7+dh6WP+oVnG7muiVwrnX6hgz4uhnZiSNG
- +b+RRSacas5CYPVL4Haf1FjjTJUbb9lUAQgeOtIZ92msZ8A+v/Ks18gS0rreycip/8hVeE64n
- mqb7s8gYz99V4U8D1kJr+wD+MnnsrovNQSCWnaMqaryGu+D9IRU7bGgPVEjyq6cmEhVnlbini
- 6d4woq0zKVLgcfBXbYcWi9YkAKSAUCeZpM6xNGEl3mWv3OJnNeypLAjniF2UEHjJXIJX494MS
- 3Vp2UNo1HGatQK43j4kOGJb6B8s=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,74 +88,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The view from 'make menuconfig' is confusing in places. This series aims
+to improve the top-level menu and also the boot menu.
 
+It also groups FDT-fixup options tegether, at least the ones I could fine.
 
-Am 31=2E August 2023 01:28:37 MESZ schrieb Simon Glass <sjg@chromium=2Eorg=
->:
->Universal Payload (UPL) is an upcoming Industry Standard for firmware
->components=2E UPL is designed to improve interoperability within the
->firmware industry, allowing mixing and matching of projects with less
->friction and fewer project-specific implementations=2E UPL is
->cross-platform, supporting ARM, x86 and RISC-V initially=2E
->
->This series provides some initial support for this, for comment only=2E
->
->
->Simon Glass (9):
->  upl: Add support for reading a upl handoff
->  upl: Add support for writing a upl handoff
->  upl: Add basic tests
->  upl: Add a command
->  upl: Add support for Universal Payload in SPL
->  spl: Plumb in the Universal Payload handoff
->  Plumb in universal payload to the init process
->  sandbox_vpl: Enable Universal Payload
->  upl: Add initial documentation
->
-> boot/Kconfig                      |  72 +++-
-> boot/Makefile                     |   4 +
-> boot/upl_common=2Ec                 |  51 +++
-> boot/upl_common=2Eh                 |  24 ++
-> boot/upl_read=2Ec                   | 607 +++++++++++++++++++++++++++++
-> boot/upl_write=2Ec                  | 623 ++++++++++++++++++++++++++++++
-> cmd/Kconfig                       |   7 +
-> cmd/Makefile                      |   1 +
-> cmd/upl=2Ec                         |  99 +++++
-> common/board_f=2Ec                  |  22 ++
-> common/board_r=2Ec                  |   2 +
-> common/spl/Makefile               |   2 +
-> common/spl/spl=2Ec                  |   6 +
-> common/spl/spl_fit=2Ec              |  22 ++
-> common/spl/spl_upl=2Ec              | 153 ++++++++
-> configs/sandbox_defconfig         |   6 +-
-> configs/sandbox_vpl_defconfig     |   4 +
-> doc/usage/cmd/upl=2Erst             | 149 +++++++
-> doc/usage/index=2Erst               |   2 +
-> doc/usage/upl=2Erst                 |  27 ++
+Finally this series marks the distro scripts as deprecated, so people have
+a pointer to standard boot.
 
-/doc/usage/spl_boot=2Erst should be updated, too=2E
+Changes in v2:
+- Fix FMU typo in the subject
+- Drop now-unnecessary depends on FWU_MULTI_BANK_UPDATE
+- Mention in the DISTRO_DEFAULTS option that it is script-based
+- Expand and rewrite the commit message
+- Use the word 'Mark' instead of 'Make' to improve the English
 
-Best regards
+Simon Glass (19):
+  lib: rational: Move the Kconfigs into the correct place
+  Kconfig: Move API into general setup
+  video: Hide the BMP options
+  video: Move BMP options and code to video directory
+  net: Move SYS_RX_ETH_BUFFER into the network menu
+  FWU: Avoid showing an unselectable menu option
+  test: Move POST under a renamed Testing section
+  boot: Move fdt_support to boot/
+  Move fdt_simplefb to boot/
+  boot: Move some other fdt-fixup options to the same menu
+  boot: Rename Android-boot text
+  Kconfig: Create a menu for FIT
+  Kconfig: Move SPL_FIT under FIT
+  spl: Tidy up load address in spl_ram
+  boot: Make standard boot a menu
+  Kconfig: Move TEXT_BASE et al under general setup
+  Mark DISTRO_DEFAULTS as deprecated
+  boot: Join FDT_FIXUP_PARTITIONS with related options
+  boot: Join ARCH_FIXUP_FDT_MEMORY with related options
 
-Heinrich
+ Kconfig                         |  67 ++++++++++-
+ boot/Kconfig                    | 202 +++++++++++++-------------------
+ boot/Makefile                   |   4 +
+ {common => boot}/fdt_simplefb.c |   0
+ {common => boot}/fdt_support.c  |   0
+ common/Kconfig                  |  20 ----
+ common/Makefile                 |   4 -
+ common/spl/spl_ram.c            |  19 ++-
+ doc/develop/bootstd.rst         |  23 ++++
+ drivers/video/Kconfig           |  11 ++
+ drivers/video/Makefile          |   2 +
+ {common => drivers/video}/bmp.c |   0
+ include/net.h                   |   9 +-
+ lib/Kconfig                     |  17 +--
+ lib/fwu_updates/Kconfig         |   9 +-
+ net/Kconfig                     |   4 +-
+ test/Kconfig                    |  12 +-
+ 17 files changed, 220 insertions(+), 183 deletions(-)
+ rename {common => boot}/fdt_simplefb.c (100%)
+ rename {common => boot}/fdt_support.c (100%)
+ rename {common => drivers/video}/bmp.c (100%)
 
+-- 
+2.42.0.rc2.253.gd59a3bf2b4-goog
 
-> include/asm-generic/global_data=2Eh |  15 +
-> include/spl=2Eh                     |  11 +
-> include/upl=2Eh                     | 361 +++++++++++++++++
-> test/boot/Makefile                |   2 +
-> test/boot/upl=2Ec                   | 457 ++++++++++++++++++++++
-> test/py/tests/test_upl=2Epy         |  25 ++
-> 26 files changed, 2750 insertions(+), 4 deletions(-)
-> create mode 100644 boot/upl_common=2Ec
-> create mode 100644 boot/upl_common=2Eh
-> create mode 100644 boot/upl_read=2Ec
-> create mode 100644 boot/upl_write=2Ec
-> create mode 100644 cmd/upl=2Ec
-> create mode 100644 common/spl/spl_upl=2Ec
-> create mode 100644 doc/usage/cmd/upl=2Erst
-> create mode 100644 doc/usage/upl=2Erst
-> create mode 100644 include/upl=2Eh
-> create mode 100644 test/boot/upl=2Ec
-> create mode 100644 test/py/tests/test_upl=2Epy
->
