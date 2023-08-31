@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94817C83F2E
-	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 16:52:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3400C83F2E
+	for <u-boot@archiver.kernel.org>; Thu, 31 Aug 2023 16:52:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FC03867D2;
-	Thu, 31 Aug 2023 18:52:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C04888682C;
+	Thu, 31 Aug 2023 18:52:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jUgLv7ll";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oG6juusW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66D2F867D2; Thu, 31 Aug 2023 18:52:02 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 6A0BF86801; Thu, 31 Aug 2023 18:52:06 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91ADC866DC
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:51:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C24F866DC
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:52:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jpewhacker@gmail.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-6bd3317144fso856244a34.1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:51:59 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-1ccb6a69b13so603289fac.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 09:52:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693500717; x=1694105517; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693500721; x=1694105521; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DYvlpM4lgLaMucltk416uBiXuUTBiksd6hvEr/SXYn4=;
- b=jUgLv7ll7yZ2R5nl41O+4A7f9lwXXM4UkvWv4rTDMiV6TdjfOTaaiHr7/qIfC2qxUp
- K6Xb4CbrH0T+coGQYh+KYxzvJMCDtX1owfxz88S37Qk5ums0QDp78wh2YOb//sUXuRVx
- rb78BghrcGjcpHOq+AeBzYIDkPAHHHVHVKz6X2PWwP7nQpuTTpl+ArqEwnna1WTq2ILI
- Eas90jKKjX72TC9HqMP+6bDoYxkerB9OCJPs0JfPIxmqjDf9gS633XmKrJgy+Enc+BKC
- SAvPyZgwNd3Cd5fXYnaUat9+m+YHZNRr5BP/26d03F+bDYAfGYwqtG9fduCNj6eP+zV3
- vGRg==
+ bh=zVG1aQlIUvYuqAur5+eCgQ1nbsD5ihOdNpaS9umljfk=;
+ b=oG6juusW3uvkch3CtXd/Zl4BfNhWB2rHfN88abPnX9dqLft3nNUKM8PrX+cW1Z3DqD
+ qqUukm7EatGqM0N+gJwXOMNKjpZ7nEM90Prv+WO45XEekOJEcUYZmY0VDTErdu1cWVmq
+ /L0XBu1mybG3V1cmLKV5Np43n7ef5PF9zx3p9vmXQRCChHJslUxCOKf2sddDTaFqFY49
+ WueGaMMHZTL8sVOgPbpKS94Tq7QAmPmPAlL/6nyLTiIyiSEYByAfnkCyq/oQ7TKg8/jE
+ kYXCpue/EnSLtHUtWwm5ZEXrCc887MRJ/L/7gP4Zec7J+jF8rU9RXp/TFhxz0Y3lKCJu
+ NjzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693500717; x=1694105517;
+ d=1e100.net; s=20221208; t=1693500721; x=1694105521;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DYvlpM4lgLaMucltk416uBiXuUTBiksd6hvEr/SXYn4=;
- b=eGhcnK6+6c3gZndij8AwicTIexgA4tLpxIWAvw7DGj/HDTxnsTVVgcQvAbDmX3XoGu
- tED/KMrYmImZoY7izSGAGhucu6YjSTu0EEk8HDcpRDrDNP+KurZZ5/JMM9RMwyBTS9cm
- VR5ZJAMNeJyoLnOjGXSLl0+UweVe2VSiQKJSRqzezY+AEfgFJzvFQFSEW60qcO/8neJ/
- 6G+c6QFtmckotgcAJ3bUutCocPsP0YEazCmwLMGGqhjaPyI/BRlmrMI0h4hH9RNi1a0N
- M3S2vqnJuu6p0qQN0VzsDkAMdgU8SWWDbggdfcqsZlsqPZ4SYJ640fHBAnsYQzXDNGmt
- n22A==
-X-Gm-Message-State: AOJu0YxK/mdnXjEsWSmeeqmQnCK8cAQwMzSL3ISRHC1fTq5gD0DgVskU
- oOwQ05LTAh2K2/hG5DTHr/vJKJl3z9s=
-X-Google-Smtp-Source: AGHT+IF9jCQ0Mv0uWNfyla4XrgGRcYVhU01kxW8q6zZOyJfOyuhmiuumprz417bh8URB92FzuI1ZDQ==
-X-Received: by 2002:a9d:6f17:0:b0:6bc:bc3e:f40b with SMTP id
- n23-20020a9d6f17000000b006bcbc3ef40bmr6388372otq.19.1693500717693; 
- Thu, 31 Aug 2023 09:51:57 -0700 (PDT)
+ bh=zVG1aQlIUvYuqAur5+eCgQ1nbsD5ihOdNpaS9umljfk=;
+ b=Z16yfBMDCqqHsBB1Fw2j99vem6cDqAHp6LE+5MNzeMhY4rcpdDPND0w8NXW3gdJz+a
+ iSfG/EkhEr7ib9x/RLtZVJqR0fGA5OSPPZVIiKcR7UK+AoMcFb9AuaGW9/BwWiVpE/0P
+ 9V9OajMB9bnwobS4IjKFX3J67BquSo3IIytVEBTI2sY9ZyzDrjm6GBrvxZ/wvZF90BIU
+ JethwvDyKzxNCMY6IPfngrgFIOn7ID/ST4N5fqAVsbAO7I7hdX6NM4Bl/vfme/bHKZX4
+ oCImADJG2u5yubUcl3I5UZFXyfXcMj3CdgS5q6jrsVmLyJh0pbWoZ+WpNKw+tnQo8cWl
+ nZEA==
+X-Gm-Message-State: AOJu0YyyeqhYZwK3Hb/f1npfCRLJLyVfoaneoH196TxmPTUv8SCdnpEH
+ Ljh+fv48509bIaBvwhnauPHZUNd+zss=
+X-Google-Smtp-Source: AGHT+IHWqt8k9Tdj7uI2ljzgA2YAY6kWR32E9DbhceULL6dqfkc2c6ot8I/6ESpMJVHX/kjuCSy8Ug==
+X-Received: by 2002:a05:6870:339d:b0:1c8:c803:c28c with SMTP id
+ w29-20020a056870339d00b001c8c803c28cmr6235297oae.34.1693500721412; 
+ Thu, 31 Aug 2023 09:52:01 -0700 (PDT)
 Received: from localhost.localdomain ([2601:282:4300:19e0::b66b])
  by smtp.gmail.com with ESMTPSA id
- b15-20020a9d6b8f000000b006bb334880d8sm867020otq.81.2023.08.31.09.51.56
+ b15-20020a9d6b8f000000b006bb334880d8sm867020otq.81.2023.08.31.09.52.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 09:51:56 -0700 (PDT)
+ Thu, 31 Aug 2023 09:52:00 -0700 (PDT)
 From: Joshua Watt <jpewhacker@gmail.com>
 X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Joshua Watt <JPEWhacker@gmail.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 3/8] tests: gpt: Remove test order dependency
-Date: Thu, 31 Aug 2023 10:51:36 -0600
-Message-Id: <20230831165144.592820-4-JPEWhacker@gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Enric Balletbo i Serra <eballetb@redhat.com>
+Subject: [PATCH v5 4/8] cmd: gpt: Add gpt_partition_bootable variable
+Date: Thu, 31 Aug 2023 10:51:37 -0600
+Message-Id: <20230831165144.592820-5-JPEWhacker@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230831165144.592820-1-JPEWhacker@gmail.com>
 References: <20230828215623.3727536-1-JPEWhacker@gmail.com>
@@ -95,58 +95,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Re-create a clean disk image for each test to prevent modifications from
-one test affecting another
+Adds an additional variable called gpt_partition_bootable that indicates
+if the given partition is bootable or not.
 
 Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- test/py/tests/test_gpt.py | 20 ++++++++------------
- 1 file changed, 8 insertions(+), 12 deletions(-)
+ cmd/gpt.c                 |  9 +++++++--
+ doc/usage/cmd/gpt.rst     |  5 +++++
+ test/py/tests/test_gpt.py | 33 +++++++++++++++++++++++++++++++++
+ 3 files changed, 45 insertions(+), 2 deletions(-)
 
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index fe9e06681c..c6c8282ac9 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -725,7 +725,7 @@ static int gpt_enumerate(struct blk_desc *desc)
+  * gpt_setenv_part_variables() - setup partition environmental variables
+  *
+  * Setup the gpt_partition_name, gpt_partition_entry, gpt_partition_addr
+- * and gpt_partition_size environment variables.
++ * and gpt_partition_size, gpt_partition_bootable environment variables.
+  *
+  * @pinfo: pointer to disk partition
+  * @i: partition entry
+@@ -752,6 +752,10 @@ static int gpt_setenv_part_variables(struct disk_partition *pinfo, int i)
+ 	if (ret)
+ 		goto fail;
+ 
++	ret = env_set_ulong("gpt_partition_bootable", !!(pinfo->bootable & PART_BOOTABLE));
++	if (ret)
++		goto fail;
++
+ 	return 0;
+ 
+ fail:
+@@ -1057,7 +1061,8 @@ U_BOOT_CMD(gpt, CONFIG_SYS_MAXARGS, 1, do_gpt,
+ 	" gpt setenv mmc 0 $name\n"
+ 	"    - setup environment variables for partition $name:\n"
+ 	"      gpt_partition_addr, gpt_partition_size,\n"
+-	"      gpt_partition_name, gpt_partition_entry\n"
++	"      gpt_partition_name, gpt_partition_entry,\n"
++	"      gpt_partition_bootable\n"
+ 	" gpt enumerate mmc 0\n"
+ 	"    - store list of partitions to gpt_partition_list environment variable\n"
+ 	" gpt guid <interface> <dev>\n"
+diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
+index 6387c8116f..b505b159d0 100644
+--- a/doc/usage/cmd/gpt.rst
++++ b/doc/usage/cmd/gpt.rst
+@@ -108,6 +108,9 @@ gpt_partition_name
+ gpt_partition_entry
+     the partition number in the table, e.g. 1, 2, 3, etc.
+ 
++gpt_partition_bootable
++    1 if the partition is marked as bootable, 0 if not
++
+ gpt swap
+ ~~~~~~~~
+ 
+@@ -167,6 +170,8 @@ Get the information about the partition named 'rootfs'::
+     rootfs
+     => echo ${gpt_partition_entry}
+     2
++    => echo ${gpt_partition_bootable}
++    0
+ 
+ Get the list of partition names on the disk::
+ 
 diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
-index 73bfbf77a2..339468bc12 100644
+index 339468bc12..946858800d 100644
 --- a/test/py/tests/test_gpt.py
 +++ b/test/py/tests/test_gpt.py
-@@ -61,18 +61,14 @@ class GptTestDiskImage(object):
-         cmd = ('cp', persistent, self.path)
-         u_boot_utils.run_and_log(u_boot_console, cmd)
+@@ -49,6 +49,7 @@ class GptTestDiskImage(object):
+                 u_boot_utils.run_and_log(u_boot_console, cmd)
+                 # part1 offset 1MB size 1MB
+                 cmd = ('sgdisk', '--new=1:2048:4095', '--change-name=1:part1',
++                    '-A 1:set:2',
+                     persistent)
+                 # part2 offset 2MB size 1.5MB
+                 u_boot_utils.run_and_log(u_boot_console, cmd)
+@@ -117,6 +118,38 @@ def test_gpt_guid(state_disk_image, u_boot_console):
+     output = u_boot_console.run_command('gpt guid host 0')
+     assert '375a56f7-d6c9-4e81-b5f0-09d41ca89efe' in output
  
--gtdi = None
- @pytest.fixture(scope='function')
- def state_disk_image(u_boot_console):
-     """pytest fixture to provide a GptTestDiskImage object to tests.
-     This is function-scoped because it uses u_boot_console, which is also
--    function-scoped. However, we don't need to actually do any function-scope
--    work, so this simply returns the same object over and over each time."""
-+    function-scoped. A new disk is returned each time to prevent tests from
-+    interfering with each other."""
- 
--    global gtdi
--    if not gtdi:
--        gtdi = GptTestDiskImage(u_boot_console)
--    return gtdi
-+    return GptTestDiskImage(u_boot_console)
- 
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_gpt')
++@pytest.mark.requiredtool('sgdisk')
++def test_gpt_setenv(state_disk_image, u_boot_console):
++    """Test the gpt setenv command."""
++    u_boot_console.run_command('host bind 0 ' + state_disk_image.path)
++    output = u_boot_console.run_command('gpt setenv host 0 part1')
++    assert 'success!' in output
++    output = u_boot_console.run_command('echo ${gpt_partition_addr}')
++    assert output.rstrip() == '800'
++    output = u_boot_console.run_command('echo ${gpt_partition_size}')
++    assert output.rstrip() == '800'
++    output = u_boot_console.run_command('echo ${gpt_partition_name}')
++    assert output.rstrip() == 'part1'
++    output = u_boot_console.run_command('echo ${gpt_partition_entry}')
++    assert output.rstrip() == '1'
++    output = u_boot_console.run_command('echo ${gpt_partition_bootable}')
++    assert output.rstrip() == '1'
++
++    output = u_boot_console.run_command('gpt setenv host 0 part2')
++    assert 'success!' in output
++    output = u_boot_console.run_command('echo ${gpt_partition_addr}')
++    assert output.rstrip() == '1000'
++    output = u_boot_console.run_command('echo ${gpt_partition_size}')
++    assert output.rstrip() == 'c00'
++    output = u_boot_console.run_command('echo ${gpt_partition_name}')
++    assert output.rstrip() == 'part2'
++    output = u_boot_console.run_command('echo ${gpt_partition_entry}')
++    assert output.rstrip() == '2'
++    output = u_boot_console.run_command('echo ${gpt_partition_bootable}')
++    assert output.rstrip() == '0'
++
  @pytest.mark.boardspec('sandbox')
  @pytest.mark.buildconfigspec('cmd_gpt')
-@@ -186,12 +182,12 @@ def test_gpt_swap_partitions(state_disk_image, u_boot_console):
- 
-     u_boot_console.run_command('host bind 0 ' + state_disk_image.path)
-     output = u_boot_console.run_command('part list host 0')
--    assert '0x00000800	0x00000fff	"first"' in output
--    assert '0x00001000	0x00001bff	"second"' in output
--    u_boot_console.run_command('gpt swap host 0 first second')
-+    assert '0x00000800	0x00000fff	"part1"' in output
-+    assert '0x00001000	0x00001bff	"part2"' in output
-+    u_boot_console.run_command('gpt swap host 0 part1 part2')
-     output = u_boot_console.run_command('part list host 0')
--    assert '0x00000800	0x00000fff	"second"' in output
--    assert '0x00001000	0x00001bff	"first"' in output
-+    assert '0x00000800	0x00000fff	"part2"' in output
-+    assert '0x00001000	0x00001bff	"part1"' in output
- 
- @pytest.mark.boardspec('sandbox')
- @pytest.mark.buildconfigspec('cmd_gpt')
+ @pytest.mark.requiredtool('sgdisk')
 -- 
 2.34.1
 
