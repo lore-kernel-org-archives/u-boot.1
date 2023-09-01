@@ -4,63 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ACA6CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79046CA0FE6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:53:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CD8486901;
-	Fri,  1 Sep 2023 11:52:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 97AFD86776;
+	Fri,  1 Sep 2023 11:52:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693561953;
-	bh=NsClyzo/rELo1wEjX70SoHpbaYAYwa0o4di9+vTkmD0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NSxKCmA4FBz3aBu3urfvzMBm5uWIBfrVuF+JTZZ4M++XpG7tjd45ncwnjsCM9Usk2
-	 yBvEv8NqizSki6T20QB2dp6cHR8sTRCqrdtRNTolwEdcJC4RZSZnUGZ4mp6txQVjAg
-	 p29nUYwMUDce4v8OndYkFPQyM4Q/PzQN7FtvhKTDPZLTIPkNO8T1xiSBPYjxeQ0Ddv
-	 9xnQHTH+0pdzKL1oFgrqbaxY9+ofCqB8wll8OnnFP0oBdcR8wn6YRZE9xLfKgS7fK9
-	 LgoyeCcOomLzhURze2fp07nHaamIA8wFWn0oYkaIcLODet07oOowDWky7mK2Kzhhiu
-	 7KucUyUxb5ypw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="rzbkMJcV";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B1AA78676C; Fri,  1 Sep 2023 11:52:46 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 954598688B;
- Fri,  1 Sep 2023 11:52:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693561952;
- bh=NsClyzo/rELo1wEjX70SoHpbaYAYwa0o4di9+vTkmD0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=X9q+NGZeFhv0rILOQKVe++viWq1PmJI1vQGpzHnluB9wuXgb9ipRJ6sKkSVw3burS
- PTL20gszZ+icADhzM60PcPdIlGUaLn4Ywv6GE2xoj1B07Ls9Ilj+sD3tJrusCzV7Rj
- xJb5OyLJVnkYpKvKSXfO093dm1RXhlR+zYNprKg1RI8ue4CVnsuCw4uNmuVGVBT34Q
- zT0vVUW0Cpe64+19lpWD80/z7NgHzD8TcE7u0gJ1tbt02ZYcl9A1kOiqZAKvZYmZJ5
- zGwgDp3fRK1uwmfvGSw1fo2xCFdbuS6k7VCR+mBH9Mopxuft3eZ/SzTQVuppFLnwyQ
- pdo8YJbK4Uujw==
-Message-ID: <46485625-5146-eeb6-f6dd-050dc184c433@denx.de>
-Date: Fri, 1 Sep 2023 11:52:31 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 1E79E8689A
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 11:52:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=76082d487b=fabrice.gasnier@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3814ahtl019031; Fri, 1 Sep 2023 11:52:43 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=/rRD2I+
+ 2BZ5RcUlO2bUT6DdpIz5xFDk71l+jJYVb708=; b=rzbkMJcVPzKaRwgWoaSHcnr
+ R3RsUpsuzaWya77/ouC13MsON047EP1Zrvc7bx3wwK9p+L8YjnQ/hKkHDd6y9ogU
+ IcldpMQZd9c9VpEk3wFwrsJpjGq5gIbo12QlDVGm2Kl0XrXxBZQ54vTDPiH3Q8ej
+ WIGFxQECNn4r1qklHxN7gB6niSYl5kah+JnJY1cNQAdEzfMIG+j/iDud0nsZ9S3T
+ s2L4oQ+ePZK37yvv/XW2VY7yFSsohS6O3NqK0Ugq0FbeXeMQ0cPzk0z+16z+gn8g
+ Vj7IlCq9VM3wukDRvuo7ZA28c6ViZ2uUbAp2+KJQN+iivfoWXwDzPHuphtjOBtw=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq89ca4hq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 01 Sep 2023 11:52:43 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 86F68100058;
+ Fri,  1 Sep 2023 11:52:42 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 57B5B211F2F;
+ Fri,  1 Sep 2023 11:52:42 +0200 (CEST)
+Received: from localhost (10.201.22.39) by SHFDAG1NODE2.st.com (10.75.129.70)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 1 Sep
+ 2023 11:52:39 +0200
+From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice CHOTARD
+ <patrice.chotard@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2] usb: check for companion controller in uclass
+Date: Fri, 1 Sep 2023 11:52:01 +0200
+Message-ID: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH 11/17] spl: sdp: Detach the controller on error
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Cc: Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev <dimorinny@google.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>, Kever Yang
- <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Nishanth Menon <nm@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, kernel@puri.sm
-References: <20230819142407.49632-1-marex@denx.de>
- <20230819142407.49632-11-marex@denx.de> <87zg2jqb6w.fsf@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <87zg2jqb6w.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.22.39]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-01_07,2023-08-31_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,57 +89,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/22/23 18:44, Mattijs Korpershoek wrote:
-> On sam., août 19, 2023 at 16:24, Marek Vasut <marex@denx.de> wrote:
-> 
->> In case anything errors out during the SDP transfer, detach
->> the controller instead of bailing out right away. This way,
->> the controller can be reattached on next attempt.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Angus Ainslie <angus@akkea.ca>
->> Cc: Dmitrii Merkurev <dimorinny@google.com>
->> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
->> Cc: Kever Yang <kever.yang@rock-chips.com>
->> Cc: Lukasz Majewski <lukma@denx.de>
->> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
->> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> Cc: Nishanth Menon <nm@ti.com>
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Stefan Roese <sr@denx.de>
->> Cc: kernel@puri.sm
->> ---
-> 
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> 
-> Nitpick/question below
-> 
->>   common/spl/spl_sdp.c | 5 +++--
->>   1 file changed, 3 insertions(+), 2 deletions(-)
->>
->> diff --git a/common/spl/spl_sdp.c b/common/spl/spl_sdp.c
->> index cc4fb4f7cca..f6b99c1af5a 100644
->> --- a/common/spl/spl_sdp.c
->> +++ b/common/spl/spl_sdp.c
->> @@ -25,13 +25,13 @@ static int spl_sdp_load_image(struct spl_image_info *spl_image,
->>   	ret = g_dnl_register("usb_dnl_sdp");
->>   	if (ret) {
->>   		pr_err("SDP dnl register failed: %d\n", ret);
->> -		return ret;
->> +		goto err_detach;
->>   	}
->>   
->>   	ret = sdp_init(controller_index);
->>   	if (ret) {
->>   		pr_err("SDP init failed: %d\n", ret);
->> -		return -ENODEV;
->> +		goto err_detach;
-> 
-> Shouldn't we call g_dnl_unregister(); here since g_dnl_register() was
-> sucessfully called before?
+EHCI is usually used with companion controller (like OHCI) as companion
+controller. This information on the companion is missing currently in
+companion drivers.
+So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
+first, then EHCI.
+This is seen on STM32MP1 where DT probing makes the probe order to occur
+by increasing address (OHCI address < EHCI address).
 
-It should, fixed in V2, thanks for your help !
+When a low speed or full-speed device is plugged in, it's not detected as
+EHCI should first detect it, and give ownership (handover) to OHCI.
+
+Current situation on STM32MP1 (with a low speed device plugged-in)
+STM32MP> usb start
+starting USB...
+Bus usb@5800c000: USB OHCI 1.0
+Bus usb@5800d000: USB EHCI 1.00
+scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+   scanning usb for storage devices... 0 Storage Device(s) found
+
+The "companion" property in the device tree allow to retrieve companion
+controller information, from the EHCI node. This allow marking the
+companion driver as such.
+
+With this patch (same low speed device plugged in):
+STM32MP> usb start
+starting USB...
+Bus usb@5800c000: USB OHCI 1.0
+Bus usb@5800d000: USB EHCI 1.00
+scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+   scanning usb for storage devices... 0 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+1  Hub (12 Mb/s, 0mA)
+|   U-Boot Root Hub
+|
++-2  Human Interface (1.5 Mb/s, 100mA)
+   HP HP USB 1000dpi Laser Mouse
+
+1  Hub (480 Mb/s, 0mA)
+ u-boot EHCI Host Controller
+
+This also optimize bus scan when a High speed device is plugged in, as
+the usb-uclass skips OHCI in this case:
+
+STM32MP> usb reset
+resetting USB...
+Bus usb@5800c000: USB OHCI 1.0
+Bus usb@5800d000: USB EHCI 1.00
+scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+   scanning usb for storage devices... 1 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+1  Hub (480 Mb/s, 0mA)
+|  u-boot EHCI Host Controller
+|
++-2  Mass Storage (480 Mb/s, 200mA)
+   SanDisk Cruzer Blade 03003432021922011407
+
+Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+---
+
+Changes in v2:
+- move companion probing from generic ehci driver to usb-uclass, after
+  Marek's questions on design choice.
+- rename commit title to follow this change
+
+---
+ drivers/usb/host/usb-uclass.c | 36 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index 02c0138a2065..e238eee8c84d 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -249,6 +249,37 @@ static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
+ 	}
+ }
+ 
++static int usb_probe_companion(struct udevice *bus)
++{
++	struct udevice *companion_dev;
++	int ret;
++
++	/*
++	 * Enforce optional companion controller is marked as such in order to
++	 * 1st scan the primary controller, before the companion controller
++	 * (ownership is given to companion when low or full speed devices
++	 * have been detected).
++	 */
++	ret = uclass_get_device_by_phandle(UCLASS_USB, bus, "companion", &companion_dev);
++	if (!ret) {
++		struct usb_bus_priv *companion_bus_priv;
++
++		debug("%s is the companion of %s\n", companion_dev->name, bus->name);
++		companion_bus_priv = dev_get_uclass_priv(companion_dev);
++		companion_bus_priv->companion = true;
++	} else if (ret && ret != -ENOENT && ret != -ENODEV) {
++		/*
++		 * Treat everything else than no companion or disabled
++		 * companion as an error. (It may not be enabled on boards
++		 * that have a High-Speed HUB to handle FS and LS traffic).
++		 */
++		printf("Failed to get companion (ret=%d)\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
+ int usb_init(void)
+ {
+ 	int controllers_initialized = 0;
+@@ -299,6 +330,11 @@ int usb_init(void)
+ 			printf("probe failed, error %d\n", ret);
+ 			continue;
+ 		}
++
++		ret = usb_probe_companion(bus);
++		if (ret)
++			continue;
++
+ 		controllers_initialized++;
+ 		usb_started = true;
+ 	}
+-- 
+2.25.1
+
