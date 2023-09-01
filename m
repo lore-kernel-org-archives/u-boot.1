@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EA62CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 13:24:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91715CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 14:10:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EC1B86564;
-	Fri,  1 Sep 2023 15:24:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BBCC7868D1;
+	Fri,  1 Sep 2023 16:10:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TEVUDEAg";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="gzjrl8vi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A602686759; Fri,  1 Sep 2023 15:24:11 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id B9E39868D1; Fri,  1 Sep 2023 16:10:32 +0200 (CEST)
+Received: from s.wrqvwxzv.outbound-mail.sendgrid.net
+ (s.wrqvwxzv.outbound-mail.sendgrid.net [149.72.154.232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB7F98144A
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 15:24:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B80C286907
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 16:10:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-d71dd633f33so1575768276.2
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 06:24:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693574647; x=1694179447; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e8lhFAZKKF0xYup/AgYAwoGTW4iSQgOC3qtL1O1K/DQ=;
- b=TEVUDEAgxniaPHJ95L4GFrVpr58e/cAasexr7T5PXNkmSNvYWruP/wp9DXR1y64aC8
- 5VQwwv6xake37gZnGzLQOyuiqAhupbSOakK6+4pl8gIMI3Ki2nmjE2EgHNiYbEX+Nwl+
- 9JIz4JXcISTmxAIjUHB5Et1gtWTQ1CCXXcUGA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693574647; x=1694179447;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e8lhFAZKKF0xYup/AgYAwoGTW4iSQgOC3qtL1O1K/DQ=;
- b=H/XWoUzG3ZNnLm9FAt6k8Ku+f4cU74c+axm86LDqc82c/yKUQ1i1QGeW8PRK7YmiXg
- RiNgyB3LQZhJJ/8NVTMpXB5DiXWxvJcuu/f15hKhUXl0OFBgEXUhiXZNgNeW5FvXk/++
- S2enRefUrgrGTmkikqWQ9TUZDQmId+GbV7M+IgAzJPtvJnV7h5CB+SydmPxR5mZCoSPV
- eoZLtqdGBc/ilvSr17R2xwt2eRQa0KdYxUO8GahVm58BObOJcE8dUm6ol4vtXwEBfzpk
- 0Y+v9GJEJK8vc/EVLWZ7LV/ymOGENUhBq7/JXx0TvlTdLIp6y8NVd1/XV7USg9UI3ZxH
- nHNA==
-X-Gm-Message-State: AOJu0YyadwOwSwgmAuPStILSVmLIEvIfsVBxA0gFrpRXAJdamd30ys5q
- chrFPhL/Ct1QDZjECpAS2eQG1g==
-X-Google-Smtp-Source: AGHT+IFcGggAb11LT8uNaXXi2OeLu7gLmOQi+hfZ1HbT2P25DzsOiBtp319NsxH7vgi0jd1rmKqrPA==
-X-Received: by 2002:a25:42d1:0:b0:d22:c8b9:8c9b with SMTP id
- p200-20020a2542d1000000b00d22c8b98c9bmr2811632yba.13.1693574647617; 
- Fri, 01 Sep 2023 06:24:07 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-4587-e14d-65a2-5068.res6.spectrum.com.
- [2603:6081:7b00:6400:4587:e14d:65a2:5068])
- by smtp.gmail.com with ESMTPSA id
- 135-20020a25048d000000b00d677aec54ffsm884316ybe.60.2023.09.01.06.24.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 06:24:07 -0700 (PDT)
-Date: Fri, 1 Sep 2023 09:24:05 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] .gitlab-ci: Test sandbox64 board in addition to sandbox
-Message-ID: <20230901132405.GR3101304@bill-the-cat>
-References: <20230901084810.238594-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
+ content-transfer-encoding:cc:content-type:from:subject:to;
+ s=s1; bh=5FA1l1wD5EAzoZy3FKMVGgp0Fgb4EoBxvSuBsc2pAow=;
+ b=gzjrl8viAEOCUsymHWc0qlI+AOYQr40u6liuPjP0bFaEYi9ubjoGKe6B431Y9PnRdqZT
+ WrCqQerSvCy2qqGku4jH184t8Ip0tIdwk8h4NEfCaLpAvSXMsmIwOPr7aMA7+oNvcwXrV9
+ F9PzHVvW8Ty1G1jQ0SsvFXwTaWWgz7u/7wSEJBnlHmeDXYm3/a+ax42Updxhvf1KvbznB4
+ jiYjTeaQVaOn82vby4EHCO5GQWC6tqKfcsI3BXG/2G5iLHg5hHTcsK/C4lrUNH/0jVQ3rd
+ YfnfK0E+WigabVoNhxxC4bg7pVCj4EJN7jfpb+97vVJ7Bkoetp1RlQZehMbCpjmA==
+Received: by filterdrecv-d7bbbc8bf-nzpnk with SMTP id
+ filterdrecv-d7bbbc8bf-nzpnk-1-64F1F0D1-25
+ 2023-09-01 14:10:25.224095951 +0000 UTC m=+9815432.168287522
+Received: from [192.168.1.50] (unknown) by geopod-ismtpd-8 (SG) with ESMTP
+ id CSWwyR_lQcKmsk_IKurvmg Fri, 01 Sep 2023 14:10:24.846 +0000 (UTC)
+Message-ID: <2d42eeb3-91ae-078e-8da6-80963c1ae4ab@kwiboo.se>
+Date: Fri, 01 Sep 2023 14:10:25 +0000 (UTC)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ReXHJkW31KaxnhkQ"
-Content-Disposition: inline
-In-Reply-To: <20230901084810.238594-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH 6/6] video: rockchip: dw_mipi_dsi: Use generic_phy_valid()
+ helper
+Content-Language: en-US
+References: <20230831221629.1027552-1-jonas@kwiboo.se>
+ <20230831221629.1027552-7-jonas@kwiboo.se>
+ <7532dcdb-ed81-b424-a8ad-5f98a8acf81d@rock-chips.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <7532dcdb-ed81-b424-a8ad-5f98a8acf81d@rock-chips.com>
+X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h5i7M6DjbloljwpwY?=
+ =?us-ascii?Q?iJ2hKOqTBYr6kSQpyfwfESt7g0ZMOnaRv5u6zB2?=
+ =?us-ascii?Q?goiv9YHBXWESeayMabrmg10ttqHv5Jek7DxSz+z?=
+ =?us-ascii?Q?KebxvYCn4c9uUtN=2FzxcE0J2nQP9lPHDaNP=2Fz48=2F?=
+ =?us-ascii?Q?CE3JWrAQPhHeNNHul7=2FNkpK1wwVO1zdDc8hqYq?=
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Anatolij Gustschin <agust@denx.de>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Ondrej Jirman <megi@xff.cz>
+Cc: u-boot@lists.denx.de
+X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,84 +83,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Kever,
 
---ReXHJkW31KaxnhkQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2023-09-01 09:49, Kever Yang wrote:
+> Hi Jonas,
+> 
+>      Why is this patch 6/6 and didn't see other patches?
 
-On Fri, Sep 01, 2023 at 10:48:10AM +0200, Marek Vasut wrote:
+Patch 1-3 moves a workaround made in usb dwc3 driver into generic phy
+core so entire series was sent to usb maintainer and cc mailing list.
 
-> Test both 32bit and 64bit sandbox boards in CI.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
-> DEPENDS:
-> - [v2] test: print: Fix hexdump test on 64bit systems
-> - test: dm: test-fdt: Use fdtdec_get_int() in dm_check_devices()
-> - configs: sandbox64: Enable legacy image format support
+Patch 4-6 was trivial and had no real dependencies on prior patches but
+was related to the work made in patch 1-3, so sent these to the listed
+maintainers and cc mailing list.
 
-Nice work.
+Full series can also be found at:
+https://patchwork.ozlabs.org/project/uboot/list/?series=371248&state=*
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Regards,
+Jonas
 
-> ---
->  .gitlab-ci.yml | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->=20
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 6d7ffdd1bbc..a7282be3181 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -291,6 +291,23 @@ sandbox without LTO test.py:
->      BUILD_ENV: "NO_LTO=3D1"
->    <<: *buildman_and_testpy_dfn
-> =20
-> +sandbox64 test.py:
-> +  variables:
-> +    TEST_PY_BD: "sandbox64"
-> +  <<: *buildman_and_testpy_dfn
-> +
-> +sandbox64 with clang test.py:
-> +  variables:
-> +    TEST_PY_BD: "sandbox64"
-> +    OVERRIDE: "-O clang-16"
-> +  <<: *buildman_and_testpy_dfn
-> +
-> +sandbox64 without LTO test.py:
-> +  variables:
-> +    TEST_PY_BD: "sandbox64"
-> +    BUILD_ENV: "NO_LTO=3D1"
-> +  <<: *buildman_and_testpy_dfn
+> 
+> On 2023/9/1 06:16, Jonas Karlman wrote:
+>> The documentation for struct phy state that "The content of the
+>> structure is managed solely by the PHY API and PHY drivers".
+>>
+>> Change to use the generic_phy_valid() helper to check if phy is valid.
+>>
+>> Fixes: b7d8d40346f2 ("video: rockchip: dw_mipi_dsi: Fix external phy existence check")
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> 
+> Thanks,
+> - Kever
+>> ---
+>>   drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 6 +++---
+>>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+>> index 0852b53ebed5..1a5ab781e3f1 100644
+>> --- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+>> +++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+>> @@ -377,7 +377,7 @@ static int dsi_phy_init(void *priv_data)
+>>   	struct dw_rockchip_dsi_priv *dsi = dev_get_priv(dev);
+>>   	int ret, i, vco;
+>>   
+>> -	if (dsi->phy.dev) {
+>> +	if (generic_phy_valid(&dsi->phy)) {
+>>   		ret = generic_phy_configure(&dsi->phy, &dsi->phy_opts);
+>>   		if (ret) {
+>>   			dev_err(dsi->dsi_host,
+>> @@ -559,7 +559,7 @@ dw_mipi_dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
+>>   	}
+>>   
+>>   	/* for external phy only the mipi_dphy_config is necessary */
+>> -	if (dsi->phy.dev) {
+>> +	if (generic_phy_valid(&dsi->phy)) {
+>>   		phy_mipi_dphy_get_default_config(timings->pixelclock.typ  * 10 / 8,
+>>   						 bpp, lanes,
+>>   						 &dsi->phy_opts);
+>> @@ -859,7 +859,7 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
+>>   	}
+>>   
+>>   	/* Get a ref clock only if not using an external phy. */
+>> -	if (priv->phy.dev) {
+>> +	if (generic_phy_valid(&priv->phy)) {
+>>   		dev_dbg(dev, "setting priv->ref to NULL\n");
+>>   		priv->ref = NULL;
+>>   
 
-I think this means it'll be time to split sandbox out in to its own
-stage on Azure as we can get 10 meaningful-but-long runs there and so
-it's best for overall job time to make that a stage. I'll go give that a
-spin shortly unless you want to.
-
---=20
-Tom
-
---ReXHJkW31KaxnhkQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTx5e4ACgkQFHw5/5Y0
-tyxJTwv/THsUwC7/gdyUzWdMkORAvwewc4FLcpSja5HxalLZW20SqfSLAK5u6WeV
-Rs/Fz4ROqZDl0oQCOIvnHYP6k3rPoY9nZ4nGz7ku8ZBYXcJKgp+hJShTrZ85wOHl
-dU7d4FgegUN7QSczDuoJ+JU0+Vr+LDTTUEO2a2reNJ9l/8DgE/mb9TRA4cAt+RKq
-7uqWLQzsfxnnm8qrh4AFCirWf/flXspqn7dlACy2mOywuMJbCTPv7BYrUopWcrFu
-CZERB+KGg3GyCwcKKGfmLNJtP3qvCrXEO8gnmlRcVmYIp8zbgsefpvRpb0kPlO0i
-91vziz9/o60yqBw0r9rIc+5jI1pd9PeKtYYy5bPoXMarjL3TyVBoJb8bbvZK7vOK
-wLqLM17N0oz14aNtfwRjg9CWPLdZDlvLRpkHALkWN+uGdqdnCmGuUH0eigFWN7OA
-WNImXXVrh9cFjXCEPsmKVPpOiof2yMGLfzGP2yHa+xTjljYI9pxbsTA2m5xcpvqt
-zaK8EqqV
-=Gqz0
------END PGP SIGNATURE-----
-
---ReXHJkW31KaxnhkQ--
