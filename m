@@ -4,74 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A36BCA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 05:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F981CA0FE6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 06:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42BE786563;
-	Fri,  1 Sep 2023 07:05:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 126CD86205;
+	Fri,  1 Sep 2023 08:10:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lOEVzbrw";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="KpESSjeg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3944384003; Fri,  1 Sep 2023 07:05:48 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 2A54A863DD; Fri,  1 Sep 2023 08:10:49 +0200 (CEST)
+Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
+ (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2609886563
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 07:05:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE02B8619A
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 08:10:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.cournoyer@gmail.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-4122129390eso10009401cf.0
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 22:05:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693544743; x=1694149543; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RyR05oCqv8C5/4hGVw1jdIKvj4fiog6RzAip/WZRC3s=;
- b=lOEVzbrwj/I3Ap8iPizq2RVTOkmxKGaKzt7vpeD4lXg09nhPTlKquU3wvaMAldDxGy
- YzVowZTPtieSWBqhsE1YO3XsbZz1BRi9WA0kIl0vNqmCyEiTs79goDTqoIY2CJmLbxd9
- TcvWMPrSCbOl0jdfOZJqwtlH6HkUKqtekL4eUczDiyPrvJPSvd8pz/YYw+pO1u8B78lX
- eCMlIWT1RYjJW0kmrNQhP/4EhmSuakN1ul8EZ9riExl6KEEdpgGC1mt8P6J2YQCVJe6G
- TrUvmrtR0GPY32Bhx+uidQRqJFndv019y4Mml1wGGhp3nRNPZHe28mhY1ZeEddQGHlJH
- Zx+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693544743; x=1694149543;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RyR05oCqv8C5/4hGVw1jdIKvj4fiog6RzAip/WZRC3s=;
- b=UjwsfHVBmZyvXBxPR/qrXcdA+yAfrpUEzwY2dVIeqG4PILvEWSlpPnt9d1LELnWOhP
- K/XcC15roP5bjfyYPT/PBts+pM7/0lsgvgoXPRF75CmQJwKRGn6C6g3gnFGJmn0Oe7+s
- uGesLW5Fh6ImhgwZ9OfvubeUg1PdgZDp9JXlylLx2+RAl8oyqjAFoMvti3ReHgTUB1WV
- b8TUQcmFmDDkylbE/CYrYlqDjncB8I5Mg1PkGD0tmikof0BrmElZZGMDaD7BZ+8atusu
- FpXhK1R3KLjzii0hucCcJZEylQu+rIE9oXSPncs960HYhTYGB38mNsji7fVdu9jOsYzR
- CnKw==
-X-Gm-Message-State: AOJu0YzeZmCN9LFFnIcRviisySslJKNRDz02l6tXrC8C2SFm/0dAUcGc
- PZH7BaFx7hTyYg9IzAu+FA5XY5t6DMc=
-X-Google-Smtp-Source: AGHT+IG01iTb6joe2x2P9W/5f5Jr9KF62oMl0qrGPI0GDE0zSaZIlGU4z08Oy5H1z5rue6KIp6REhA==
-X-Received: by 2002:a05:622a:1a90:b0:410:90c7:518d with SMTP id
- s16-20020a05622a1a9000b0041090c7518dmr1779863qtc.11.1693544743545; 
- Thu, 31 Aug 2023 22:05:43 -0700 (PDT)
-Received: from localhost.localdomain (dsl-10-128-23.b2b2c.ca. [72.10.128.23])
- by smtp.gmail.com with ESMTPSA id
- jc8-20020a05622a714800b00403cc36f318sm1184533qtb.6.2023.08.31.22.05.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 22:05:42 -0700 (PDT)
-From: Maxim Cournoyer <maxim.cournoyer@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maxim Cournoyer <maxim.cournoyer@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH] tools: Fix patman launcher script.
-Date: Fri,  1 Sep 2023 01:05:12 -0400
-Message-ID: <20230901050532.725-1-maxim.cournoyer@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
+ content-transfer-encoding:cc:content-type:from:subject:to;
+ s=s1; bh=C2mO9Wrs2XjgTV+v/6ki8oQLpXZ5bhcyjNurIEOFy78=;
+ b=KpESSjegqXrThCFlqN2sSoe5dGdlL0vZ2XhGrJT8hDNLCtFGv1QHPAd4Bp1xb+fpB138
+ yDy3ECTPPwwEUy91Vt+XuyQ4quTP9gmwstmm2xuibtq3sKUoNWWczPHMtI6FI0vaPVHrVI
+ ff44+s8qkpHGGpPvuLKUa0zl6jB4PlUc5fcdLjvyKW+1eg1GqcF7BD8JRxWtmcrhVeHTnJ
+ L1pKbzFppuCTX49LhpoBCLTmOryWI4OmAxdJoIB7hdp/E4cGbF7u8v4foMy//LH1hGC7/Q
+ DuOdRYXJ5hn2x4Fqia1KdGbSQV7yFtP5k9gkCb8ZllczeYrdYAVTFsyWa7byc8Vw==
+Received: by filterdrecv-77869f68cc-gp8f7 with SMTP id
+ filterdrecv-77869f68cc-gp8f7-1-64F18064-4
+ 2023-09-01 06:10:44.202540202 +0000 UTC m=+9786874.975784142
+Received: from [192.168.1.50] (unknown) by geopod-ismtpd-7 (SG) with ESMTP
+ id z2j8Mg2xQ5OoyeSp6cnD7Q Fri, 01 Sep 2023 06:10:43.872 +0000 (UTC)
+Message-ID: <7d72dcde-e4af-1364-724a-dad7a1ceafb6@kwiboo.se>
+Date: Fri, 01 Sep 2023 06:10:44 +0000 (UTC)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH RESEND 1/2] arm: dts: rockchip: rk3588, rk3588s: sync with
+ Linux
+References: <20230901045846.50365-1-naoki@radxa.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20230901045846.50365-1-naoki@radxa.com>
+X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h5emdhB52epcuFJnn?=
+ =?us-ascii?Q?nYmdvP=2FBrfcOljJJs7JPa6qJ8SYv=2FvQ2+xIvGe3?=
+ =?us-ascii?Q?FKIF4YhJSTeAx+1klNqFTu9wOMyDebBlm7fLWbQ?=
+ =?us-ascii?Q?nRa8kw7w3zse1e67mroAE134SQyrobBRnornlhB?=
+ =?us-ascii?Q?IUOWTRq30Fn52YJbGkO9I30WRMDwT17XQVe5j6?=
+To: FUKAUMI Naoki <naoki@radxa.com>, Jagan Teki <jagan@edgeble.ai>
+Cc: eugen.hristev@collabora.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, u-boot@lists.denx.de
+X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,32 +79,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no "run_patman" procedure in patman's __main__.py file, which
-would cause the following error at execution:
+Hi Naoki,
 
-  "AttributeError: module 'patman.__main__' has no attribute 'run_patman'"
+On 2023-09-01 06:58, FUKAUMI Naoki wrote:
+> Sync the devicetree with linux-next tag: next-20230831
 
-Signed-off-by: Maxim Cournoyer <maxim.cournoyer@gmail.com>
----
+With the soc-dt-6.6 tag now merged into torvalds/linux tree [1] we can
+probably call this a sync from v6.6-rc1.
 
- tools/patman/pyproject.toml | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+However, this patch misses some things:
 
-diff --git a/tools/patman/pyproject.toml b/tools/patman/pyproject.toml
-index c5dc7c7e27..a54211f706 100644
---- a/tools/patman/pyproject.toml
-+++ b/tools/patman/pyproject.toml
-@@ -23,7 +23,7 @@ classifiers = [
- "Bug Tracker" = "https://source.denx.de/groups/u-boot/-/issues"
- 
- [project.scripts]
--patman = "patman.__main__:run_patman"
-+patman = "patman.__main__"
- 
- [tool.setuptools.package-data]
- patman = ["*.rst"]
+- It does not remove synced pcie and usb nodes from the related
+  u-boot.dtsi files.
 
-base-commit: 0fe0395922d859730eb7ddfcff6ed8d3ac4b2937
--- 
-2.41.0
+- It is only a partial sync from next-20230831, see following diff:
 
+ arch/arm/dts/rk3588-edgeble-neu6a.dtsi   |   1 -
+ arch/arm/dts/rk3588-edgeble-neu6b-io.dts |  66 +++
+ arch/arm/dts/rk3588-edgeble-neu6b.dtsi   | 359 ++++++++++++++-
+ arch/arm/dts/rk3588-evb1-v10.dts         | 720 ++++++++++++++++++++++++++++++-
+ arch/arm/dts/rk3588-rock-5b.dts          | 448 ++++++++++++++++++-
+ arch/arm/dts/rk3588s-rock-5a.dts         | 665 +++++++++++++++++++++++++++-
+ 6 files changed, 2244 insertions(+), 15 deletions(-)
+
+- There is a similar patch [2] from Jagan Teki where a rebase was requested.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=0e72db77672ff4758a31fb5259c754a7bb229751
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20230719081745.3546727-1-jagan@edgeble.ai/
+
+Regards,
+Jonas
+
+> 
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+>  arch/arm/dts/rk3588.dtsi       | 215 +++++++++++++++++++
+>  arch/arm/dts/rk3588s.dtsi      | 367 +++++++++++++++++++++++++++++++++
+>  include/dt-bindings/ata/ahci.h |  20 ++
+>  3 files changed, 602 insertions(+)
+>  create mode 100644 include/dt-bindings/ata/ahci.h
+
+[...]
