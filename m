@@ -4,57 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 006C9CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:48:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3341FCA0FE6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ACC786886;
-	Fri,  1 Sep 2023 12:48:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7ED37831BE;
+	Fri,  1 Sep 2023 12:48:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693565309;
-	bh=ozR27wZwYllD4wrrIzh+oIOYHqZPmL4RxK7TGYR0tVA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=dt1bJvRuWZZ7HUBFu195Yj6/EDTZ/xoGoL2uigXSM1yqioaOmXkwGM0XbKctMo3s6
-	 5AhuWJyFwgnLThlhLvnAEvN0uPEttKbWKRXtvaQ28Sk0/jpiZ2f+vbl7HtNeHEoTm7
-	 WkHXv8hBbLwD7OQD8NjfJSM028QexHDSPdWxOtGqtK9htd2FRSBMSOr57mA0k7A+8k
-	 DV249/2rT1JanC3Kpdw8DQnd7rGO4fbjDpBbdwCdqDw0Q8IwT7t1cV0t5Iic6LRDf8
-	 2k8DvRmV+oupRozcOBSq8U5bWXm+UztXS4JJwwFyrJ00ie6HPmlfR/0b8i2vtsTx5w
-	 V8NZr29Y+HAkw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WXAI5gc3";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 284FD84003; Fri,  1 Sep 2023 12:48:46 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7DFD18074B;
- Fri,  1 Sep 2023 12:48:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693565307;
- bh=ozR27wZwYllD4wrrIzh+oIOYHqZPmL4RxK7TGYR0tVA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hW7F0hjOLNp8/YUtasfObVDwZgsd/gY5UO9noDblfBxqBzRgUI08L8z/4qFanAv7F
- Bc3swx3x12k3Q05PFNtNo9jG5oQ0KHGERGIUDPqoDKNueG57UPDiPq9jenROcfmCpf
- kQZoDq2qwYj6F0Ld9BcQSCcRA/hWHnuOTKwCGijY8Zuk2f+d0HtILBkw5mQTXn8Dly
- MZ2IW7QGXUx+02qDSjcm9b46YAxi72AsEl5F4ffA+dXVff6nHYyt+giokhrS6PMy6W
- 6kkEOR+OEYxHMhtZfcC5Ba6fxEmoSmbIrhyFkqSuGKZbyWl+43unvl9q26CH8gJC9f
- PjSCYOnGjicRQ==
-Message-ID: <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
-Date: Fri, 1 Sep 2023 12:48:27 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id D5C588074B
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:48:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 55A7BB821F9
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 10:48:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20DE7C433C9
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 10:48:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693565321;
+ bh=aNKuBqzCPGhEHPydVh3QzcydeR2Zaxu8zUclUITlkPA=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=WXAI5gc33pyZwMVObbe1+ua7YYxHxo4ybg1culG+0Cgq2r4jJdQzx9MembEAfhMEi
+ 4UhIKYYNnJs9pskmR/xU75DjsVa+NLSP9IMeJZ/bVWNB03JD/qvRPpzahMqi11sUvY
+ 8mKqKlj0jyyalGnQMwRGaA8/GGcSLsv+lcUr0CRe0yZNQMRE6ldOQHfDM7XClzlTmX
+ 5qOKJw+HUhoaz5Zo/kqgwVdfaq7pgqRxiB62YZhc0ZDHdA5BGvzg43wEgZMXTvw6Pp
+ 5m6QL4bDqeEdC6IZJGu4npe2vufHqEg9BZtw44kBdzz608LunUS1QoGnqBtq7Fe77y
+ 0rpNdVc5Q48jg==
+Received: by mail-lj1-f170.google.com with SMTP id
+ 38308e7fff4ca-2b9f0b7af65so30257821fa.1
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 03:48:41 -0700 (PDT)
+X-Gm-Message-State: AOJu0YzSVYgz1D7lOYbejaG7RQd0Ad0jE+J4S5JSGJQiKofe3c0y6Xa8
+ e+3lz9yxIBECgzzJyFJ9D5guPcwIY+VAnFt1cXU=
+X-Google-Smtp-Source: AGHT+IErDs+4x3Xy0d+ehTAv3uXd2A7tWxqLdrSlgGsO/iVp4xmOcljKiiLmHIkraV0M1KgowvPV3eNmwBpqMdkhJ1w=
+X-Received: by 2002:a2e:8093:0:b0:2ba:8127:a2c3 with SMTP id
+ i19-20020a2e8093000000b002ba8127a2c3mr1418052ljg.34.1693565318998; Fri, 01
+ Sep 2023 03:48:38 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v2] usb: check for companion controller in uclass
-Content-Language: en-US
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>
-References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230822203446.4111742-1-sjg@chromium.org>
+ <ZOXKTrC_dzN_hUkY@FVFF77S0Q05N>
+ <CAMj1kXEHpRjk_YKOm4czCnnpjqgahj2jV8MMfGLx7b1RdnBnVw@mail.gmail.com>
+ <CAPnjgZ1S8G=7eCBF9PcDk4H5sk3AcxSSWXO575jK8SjA9dR8qw@mail.gmail.com>
+ <CAMj1kXH83_TB4S0PL3jswxjCP+907YpgS7FRuVTO3G62s7nn5w@mail.gmail.com>
+ <CAPnjgZ2kkUt1eOWX8K+EsbjcQZPefNvj5DSaFb9QrvRg0t2h7w@mail.gmail.com>
+ <CAMj1kXGe84uaJ9j9ic0V4HC43p7QBoKQ5ssTYd5DMBGtZ3++Jw@mail.gmail.com>
+ <CAPnjgZ3L-jGxoXNHnsXY0MXU=jTAN66KNAxSLHPVeHinHMjzkQ@mail.gmail.com>
+ <CAMj1kXGw6DGK=gVF3bMH5dp=LL89V9n1V1LMGKDn0CZWGHh8qg@mail.gmail.com>
+ <CAPnjgZ1fjee3rf91onPbuLpgqTHe3dZgz0WBSzoiKAabO+ETkQ@mail.gmail.com>
+ <CAMj1kXFvLGeXXmyK1wSXLk5yq42f2G3GvBGoN40JF=y4bvCo=Q@mail.gmail.com>
+ <CAPnjgZ25VqPCBSZ69fyb+G93=hzS-gX6zVa0J3vYyY49p0CZmw@mail.gmail.com>
+ <CAMj1kXGzPHFpjr4-Q5Vwe3TSZWdAumWVL7iYJR76VGQbZUSsEA@mail.gmail.com>
+ <CAPnjgZ29DP_fwwV2bJiSP3zgpL2Q=CYHG1qjOiHyL4FUi895BA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ29DP_fwwV2bJiSP3zgpL2Q=CYHG1qjOiHyL4FUi895BA@mail.gmail.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Fri, 1 Sep 2023 12:48:27 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXGk6cH_PeZz_1WbA4ztxF2QHXRvxbLQi4Eh0jW0atO5Ug@mail.gmail.com>
+Message-ID: <CAMj1kXGk6cH_PeZz_1WbA4ztxF2QHXRvxbLQi4Eh0jW0atO5Ug@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] schemas: Add a schema for memory map
+To: Simon Glass <sjg@chromium.org>
+Cc: Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org, 
+ Rob Herring <robh@kernel.org>, Chiu Chasel <chasel.chiu@intel.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Gua Guo <gua.guo@intel.com>,
+ linux-acpi@vger.kernel.org, 
+ lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
+ ron minnich <rminnich@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,137 +97,278 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/23 11:52, Fabrice Gasnier wrote:
-> EHCI is usually used with companion controller (like OHCI) as companion
-> controller. This information on the companion is missing currently in
-> companion drivers.
-> So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
-> first, then EHCI.
-> This is seen on STM32MP1 where DT probing makes the probe order to occur
-> by increasing address (OHCI address < EHCI address).
-> 
-> When a low speed or full-speed device is plugged in, it's not detected as
-> EHCI should first detect it, and give ownership (handover) to OHCI.
-> 
-> Current situation on STM32MP1 (with a low speed device plugged-in)
-> STM32MP> usb start
-> starting USB...
-> Bus usb@5800c000: USB OHCI 1.0
-> Bus usb@5800d000: USB EHCI 1.00
-> scanning bus usb@5800c000 for devices... 1 USB Device(s) found
-> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
->     scanning usb for storage devices... 0 Storage Device(s) found
-> 
-> The "companion" property in the device tree allow to retrieve companion
-> controller information, from the EHCI node. This allow marking the
-> companion driver as such.
-> 
-> With this patch (same low speed device plugged in):
-> STM32MP> usb start
-> starting USB...
-> Bus usb@5800c000: USB OHCI 1.0
-> Bus usb@5800d000: USB EHCI 1.00
-> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
-> scanning bus usb@5800c000 for devices... 2 USB Device(s) found
->     scanning usb for storage devices... 0 Storage Device(s) found
-> STM32MP> usb tree
-> USB device tree:
-> 1  Hub (12 Mb/s, 0mA)
-> |   U-Boot Root Hub
-> |
-> +-2  Human Interface (1.5 Mb/s, 100mA)
->     HP HP USB 1000dpi Laser Mouse
-> 
-> 1  Hub (480 Mb/s, 0mA)
->   u-boot EHCI Host Controller
-> 
-> This also optimize bus scan when a High speed device is plugged in, as
-> the usb-uclass skips OHCI in this case:
-> 
-> STM32MP> usb reset
-> resetting USB...
-> Bus usb@5800c000: USB OHCI 1.0
-> Bus usb@5800d000: USB EHCI 1.00
-> scanning bus usb@5800d000 for devices... 2 USB Device(s) found
->     scanning usb for storage devices... 1 Storage Device(s) found
-> STM32MP> usb tree
-> USB device tree:
-> 1  Hub (480 Mb/s, 0mA)
-> |  u-boot EHCI Host Controller
-> |
-> +-2  Mass Storage (480 Mb/s, 200mA)
->     SanDisk Cruzer Blade 03003432021922011407
-> 
-> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> ---
-> 
-> Changes in v2:
-> - move companion probing from generic ehci driver to usb-uclass, after
->    Marek's questions on design choice.
-> - rename commit title to follow this change
-> 
-> ---
->   drivers/usb/host/usb-uclass.c | 36 +++++++++++++++++++++++++++++++++++
->   1 file changed, 36 insertions(+)
-> 
-> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-> index 02c0138a2065..e238eee8c84d 100644
-> --- a/drivers/usb/host/usb-uclass.c
-> +++ b/drivers/usb/host/usb-uclass.c
-> @@ -249,6 +249,37 @@ static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
->   	}
->   }
->   
-> +static int usb_probe_companion(struct udevice *bus)
-> +{
-> +	struct udevice *companion_dev;
-> +	int ret;
-> +
-> +	/*
-> +	 * Enforce optional companion controller is marked as such in order to
-> +	 * 1st scan the primary controller, before the companion controller
-> +	 * (ownership is given to companion when low or full speed devices
-> +	 * have been detected).
-> +	 */
-> +	ret = uclass_get_device_by_phandle(UCLASS_USB, bus, "companion", &companion_dev);
-> +	if (!ret) {
-> +		struct usb_bus_priv *companion_bus_priv;
-> +
-> +		debug("%s is the companion of %s\n", companion_dev->name, bus->name);
-> +		companion_bus_priv = dev_get_uclass_priv(companion_dev);
-> +		companion_bus_priv->companion = true;
-> +	} else if (ret && ret != -ENOENT && ret != -ENODEV) {
-> +		/*
-> +		 * Treat everything else than no companion or disabled
-> +		 * companion as an error. (It may not be enabled on boards
-> +		 * that have a High-Speed HUB to handle FS and LS traffic).
-> +		 */
-> +		printf("Failed to get companion (ret=%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   int usb_init(void)
->   {
->   	int controllers_initialized = 0;
-> @@ -299,6 +330,11 @@ int usb_init(void)
->   			printf("probe failed, error %d\n", ret);
->   			continue;
->   		}
-> +
-> +		ret = usb_probe_companion(bus);
+On Fri, 1 Sept 2023 at 03:12, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ard,
+>
+> On Thu, 31 Aug 2023 at 16:39, Ard Biesheuvel <ardb@kernel.org> wrote:
+> >
+> > On Fri, 1 Sept 2023 at 00:17, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ard,
+> > >
+> > > On Thu, 31 Aug 2023 at 15:48, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > >
+> > > > On Thu, 31 Aug 2023 at 21:03, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Ard,
+> > > > >
+> > > > > On Thu, 31 Aug 2023 at 06:28, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > > > >
+> > > > > > On Wed, 30 Aug 2023 at 23:11, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > Hi Ard,
+> > > > > > >
+> > > > > > > On Tue, 29 Aug 2023 at 15:32, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > > > > > >
+> > > > > > > > On Tue, 29 Aug 2023 at 21:18, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi Ard,
+> > > > > > > > >
+> > > > > > > > > On Thu, 24 Aug 2023 at 03:10, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > > > > ...
+> > > > > > > > > > In summary, I don't see why a non-UEFI payload would care about UEFI
+> > > > > > > > > > semantics for pre-existing memory reservations, or vice versa. Note
+> > > > > > > > > > that EDK2 will manage its own memory map, and expose it via UEFI boot
+> > > > > > > > > > services and not via DT.
+> > > > > > > > >
+> > > > > > > > > Bear in mind that one or both sides of this interface may be UEFI.
+> > > > > > > > > There is no boot-services link between the two parts that I have
+> > > > > > > > > outlined.
+> > > > > > > > >
+> > > > > > > >
+> > > > > > > > I don't understand what this means.
+> > > > > > > >
+> > > > > > > > UEFI specifies how one component invokes another, and it is not based
+> > > > > > > > on a DT binding. If the second component calls UEFI boot or runtime
+> > > > > > > > services, it should be invoked in this manner. If it doesn't, then it
+> > > > > > > > doesn't care about these memory reservations (and the OS will not be
+> > > > > > > > booted via UEFI either)
+> > > > > > > >
+> > > > > > > > So I feel I am missing something here. Perhaps a practical example
+> > > > > > > > would be helpful?
+> > > > > > >
+> > > > > > > Let's say we want to support these combinations:
+> > > > > > >
+> > > > > > > Platform Init -> Payload
+> > > > > > > --------------------------------
+> > > > > > > U-Boot -> Tianocore
+> > > > > > > coreboot -> U-Boot
+> > > > > > > Tianocore -> U-Boot
+> > > > > > > Tianocore -> Tianocore
+> > > > > > > U-Boot -> U-Boot
+> > > > > > >
+> > > > > > > Some of the above things have UEFI interfaces, some don't. But in the
+> > > > > > > case of Tianocore -> Tianocore we want things to work as if it were
+> > > > > > > Tianocore -> (its own handoff mechanism) Tiancore.
+> > > > > > >
+> > > > > >
+> > > > > > If Tianocore is the payload, it is either implemented as a EFI app, in
+> > > > > > which case it has access to EFI services, or it is not, in which case
+> > > > > > it doesn't care about UEFI semantics of the existing reserved regions,
+> > > > > > and it only needs to know which regions exist and which of those are
+> > > > > > reserved.
+> > > > > >
+> > > > > > And I think the same applies to all other rows in your table: either
+> > > > > > the existence of UEFI needs to be carried forward, which needs to be
+> > > > > > done via EFI services, or it doesn't, in which case the UEFI specific
+> > > > > > reservations can be dropped, and only reserved and available memory is
+> > > > > > relevant.
+> > > > > >
+> > > > > > > Some Platform Init may create runtime code which needs to accessible later.
+> > > > > > >
+> > > > > >
+> > > > > > But not UEFI runtime code, right? If the payload is not UEFI based,
+> > > > > > the OS would never be able to call that runtime code unless it is
+> > > > > > described in a different, non-UEFI way. This is fine, but it is not
+> > > > > > UEFI so we shouldn't call it UEFI runtime memory.
+> > > > > >
+> > > > > > > The way I think of it is that we need to generalise the memory map a
+> > > > > > > bit. Saying that you must use UEFI boot services to discover it is too
+> > > > > > > UEFI-specific.
+> > > > > > >
+> > > > > >
+> > > > > > What I am questioning is why a memory map with UEFI semantics is even
+> > > > > > relevant when those boot services do not exist.
+> > > > > >
+> > > > > > Could you be more specific about why a payload would have to be aware
+> > > > > > of the existence of UEFI boot/runtime service regions if it does not
+> > > > > > consume the UEFI interfaces of the platform init? And if the payload
+> > > > > > exposes UEFI services to the OS, why would it consume a memory map
+> > > > > > with UEFI semantics rather than a simple list of memblocks and memory
+> > > > > > reservations?
+> > > > >
+> > > > > It seems like you are thinking of the Payload as grub, or something
+> > > > > like that? This is not about grub. If there are EFI boot services to
+> > > > > be provided, they are provided by the Payload, not Platform Init. I am
+> > > > > not that familiar with Tianocore, but if you are, perhaps think of it
+> > > > > as splitting Tianocore into two pieces, one of which inits the silicon
+> > > > > and the other which provides the EFI boot services.
+> > > > >
+> > > > > Again, if you are familiar with Tianocore, it can be built either as a
+> > > > > monolithic whole, or as a coreboot Payload. The Payload part of the
+> > > > > code is (roughly) the same in each case. But the Platform Init is
+> > > > > different[1]
+> > > > >
+> > > >
+> > > > I co-maintain OVMF [including the ARM port that I created from
+> > > > scratch] as well as the ARM architecture support in Tianocore, along
+> > > > with a couple of platform ports for ARM boards, some of which could by
+> > > > now be characterized as 'historical' (AMD Seattle, Socionext SynQuacer
+> > > > and Raspberry Pi 3/4). So I think I have a pretty good handle on how
+> > > > Tianocore based firmware is put together.
+> > > >
+> > > > Tianocore as a payload will expose boot services to the OS, and will
+> > > > provide the OS with a memory map using the UEFI APIs. But you still
+> > > > haven't explained why the memory description this Tianocore inherits
+> > > > from the Platform Init would include any UEFI boot or runtime service
+> > > > regions, or any of the other memory regions with UEFI semantics.
+> > > > TIanocore just needs to know a) where memory lives b) which parts of
+> > > > it are already in use (as far as the memory map is concerned), and the
+> > > > existing bindings suffice for this purpose.
+> > > >
+> > > > In short, the memory regions with UEFI semantics are created by the
+> > > > boot phase that actually exposes UEFI to the OS, in which case the
+> > > > boot services can be used to obtain the memory map. If the consumer is
+> > > > not UEFI based, there is no reason to bother it with descriptions of
+> > > > memory regions that have no significance to it.
+> > >
+> > > But aren't you assuming that the Payload knows how to handle the
+> > > hardware and can implement the runtime services? What if (for example)
+> > > powering off the device is hardware-specific and only Platform Init
+> > > knows how?
+> > >
+> >
+> > If the payload relies on the platform init for anything, it can use
+> > whichever interface those components manage to agree on.
+> >
+> > If this interface is UEFI, the payload can use UEFI to obtain the memory map.
+>
+> I think you are still getting mixed up with grub. Platform Init does
+> not necessarily provide EFI boot services, even for Tianocore. It is
+> the Payload which provides those services. In other words, the second
+> half of Tianocore does not use EFI boot services to talk to the first
+> half.
+>
 
-Shouldn't this ^ be in separate uclass_foreach_dev(bus, uc) {} loop 
-before this device_probe() loop , so that when the probe of the 
-controller is called, its ->companion is already set ?
+I might be misunderstanding your examples, as they are somewhat vague
+and hypothetical.
 
-> +		if (ret)
-> +			continue;
-> +
->   		controllers_initialized++;
->   		usb_started = true;
->   	}
+Drawing from my experience working on Tianocore, allow me to give a
+few examples myself:
+- ArmVirtQemu (ARM port of OVMF) receives information about system RAM
+via memory nodes in the device tree, using device_type=memory, from
+QEMU, which fulfills the role of platform init in this case.
+ArmVirtQemu currently doesn't consume the /reserved-memory node as
+QEMU does not populate it, but that would be the appropriate place to
+document RAM regions that Tianocore must treat as reserved;
+- DeveloperBox [0] (based on Socionext SynQuacer) receives a platform
+specific struct with memory regions and reservations in a patch of
+SRAM that the early Tianocore code uses for stack and heap. Note that
+system RAM is not available yet at this point (as it is being
+discovered via this mechanism) and SRAM is quite tight, so DT is not
+an option here;
+- The Tianocore port for Raspberry Pi 4 [1] receives RAM information
+from the VideoCore firmware by calling the mailbox interface. This
+covers both available memory and reserved memory (for the GPU). The
+statically allocated TF-A code and data regions that reside in
+non-secure DRAM on this platform are reserved implicitly due to the
+fact that they are part of the same firmware image, which knows not to
+step on itself.
 
-[...]
+In none of these cases, I see a need for the binding that you propose.
+Platfom Init -> Payload handover is highly platform specific, so
+adding another generic DT binding for an as yet unidentified use case
+seems seems premature at the very least.
+
+[0] https://github.com/tianocore/edk2-platforms/tree/master/Platform/Socionext/DeveloperBox
+[1] https://github.com/tianocore/edk2-platforms/tree/master/Platform/RaspberryPi/RPi4
+
+> >
+> > If this interface is not UEFI, the UEFI memory map is irrelevant, and
+> > existing DT bindings are available that can describe this information.
+>
+> Can you please point me to those?
+>
+
+The /memory node is documented in the DT specification. The
+/reserved-memory node is documented here:
+
+Documentation/devicetree/bindings/reserved-memory/reserved-memory.yaml
+
+> >
+> > > On another track, would it help if we just dropped all mention of
+> > > UEFI? The binding does not mention it.
+> > >
+> >
+> > Your binding has
+> >
+> > +      usage:
+> > +        $ref: /schemas/types.yaml#/definitions/string
+> > +        description: |
+> > +          Describes the usage of the memory region, e.g.:
+> > +
+> > +            "acpi-reclaim", "acpi-nvs", "bootcode", "bootdata", "bootdata",
+> > +            "runtime-code", "runtime-data".
+> > +
+> > +            See enum EFI_MEMORY_TYPE in "Unified Extensible Firmware Interface
+> > +            (UEFI) Specification" for all the types. For now there are not
+> > +            listed here.
+> >
+> > Every type listed is derived from a definition in the UEFI spec, which
+> > is specifically mentioned as the source.
+>
+> Yes, but please see the v4 or v5 patch version, where that has
+> changed. I sent v4 two days ago. I am worried that you are still
+> responding to something that I revised in response to your original
+> comments?
+>
+
+No, I haven't looked at those yet. Maybe the uboot community is
+different, but in the Linux community, we tend to finish discussing vN
+of a series before sendindg out vN+1. This prevents the kind of
+parallel track discussions that seem to be taking place here. Also, it
+is highly appreciated when an author takes all feedback into account
+(or at least acknowledges it) in a vN+1 submission, which is difficult
+to do before the discussion around vN has concluded.
+
+...
+> >
+> > But if the Platform Init wants to reserve some system RAM for runtime
+> > code (e.g., for its PSCI implementation on ARM), it can add it to the
+> > /reserved-memory node, where both the payload and the OS will be able
+> > to find it if needed.
+>
+> OK good. So with my binding that would be 'runtime-code@...'. I am
+> still not sure what the problem is here.
+>
+
+The problem is that you are not using /reserved-memory to describe a
+memory reservation but something new that all DT consumers need to be
+taught about, or they might step on memory that turns out to be
+reserved. The DT ecosystem is large and heterogeneous, and any tool or
+boot stage in existence is at the risk of stepping on this memory
+inadvertently, whereas /reserved-memory already provides the means to
+reserve it and document its nature.
+
+> >
+> > > I'm just not sure that Platform Init and Payload are as completely
+> > > independent as you seem to be suggesting. Once we get into the
+> > > Payload, the only things we know are what Platform Init told us.
+> > >
+> >
+> > They are not independent, and that is not at all what I am claiming.
+> >
+> > What I am objecting to is framing the platform init<->payload memory
+> > handover in terms of UEFI memory types, which may conflict with well
+> > established DT bindings that already serve the same purpose. The only
+> > difference between /reserved-memory and this binding seems to be the
+> > collection of UEFI memory types, which don't belong there in the first
+> > place.
+>
+> OK, so please help me get this resolved.
+>
+
+I have already indicated how this should be resolved in my opinion,
+which is by using the /reserved-memory node to describe memory
+reservations, and not this binding.
