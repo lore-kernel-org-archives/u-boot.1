@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2032FCA0FF6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 20:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090E7CA0FF6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 20:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D27DF867DE;
-	Fri,  1 Sep 2023 22:04:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2675686741;
+	Fri,  1 Sep 2023 22:04:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b7lZEhun";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lRq/IdNh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1DFB867B6; Fri,  1 Sep 2023 22:04:16 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 1663E867F7; Fri,  1 Sep 2023 22:04:18 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 149D586703
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 22:04:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A51186725
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 22:04:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jmcosta944@gmail.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-401b393ddd2so24509155e9.0
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 13:04:14 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-31de47996c8so2042634f8f.2
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 13:04:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693598653; x=1694203453; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693598654; x=1694203454; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e7hb2jrvivQxON1XeovwgMxiW+RYRxZdLPP3zp29do4=;
- b=b7lZEhunMAFsxLlqLLTDAPaRQYxCOQFC9BTrWX7WBbNhXXKMrBb+zkmqSIpLLpU67N
- qv6BAT61BOSoSkOlwGCfmjgZtlN8HESWpsDAZ/dZVbGMnpR9k4EdJGx8cugym0UtS0aM
- Y623MARbnGsjEgBWtDZ29jh83EV0awdDT+stmveA+VN1GFvqoq8pJo6skcAX3HOPtWP+
- 89Q2Qpwr6KP058JDcxp7kRr1a4bQzGNPS/QHkicGnXo+ULE966Ow+8YsIhAmtiwWAXUz
- 7QiGu4p5HRPD6WfmPSUx0uK6zv+Zp0eU0QrcdXHld3uEgCEId3HBQPrMb0IR7wpNtGw6
- ih0A==
+ bh=Msrb6/nmtExFC8B0sHWpf3s96bn/pi+WsRWwEFGprnc=;
+ b=lRq/IdNhSmuzz8CxzcWk5NQvB1jP5nhGEkMZiZ4THDs4D2cGWERuOG1LGe4XbiS24m
+ wEzty1xhSSmQu8bIhDmbqbHx5BhvlBZw2xcOj5CF9ZSBEOwWqNU15MCJ49nQ7F3iHWSw
+ MNhqvaHAqMOFsU13bSUNk8Q2RMhb+NEe7IaF4efe+73qMr2aUOvaPzdC+JXVyK/QaDWC
+ X/1ptJOHZoVEj8drXKTUM3a49ym0lzJL/Ie28XfGUHDldqeoc7fNYYVkEGQkQPq6Bl6c
+ EPJhmajJA6NOnaCq41QO1CeORw+w+Yjsc9A2SHHE1vdES8Xlb/1bnxtwrAwNlUveydm4
+ 4Hpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693598653; x=1694203453;
+ d=1e100.net; s=20221208; t=1693598654; x=1694203454;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e7hb2jrvivQxON1XeovwgMxiW+RYRxZdLPP3zp29do4=;
- b=kTMsfiv/pokSy5CfwY0CicL4SlHsP5CnQdRoY5Bq0N7KN+gMxTl2Ysifssfu6E7p/d
- ZrMppojgNls4kkA8mfQp8yfbeqvmeO4LN+dZzrB1ShSBO2ZLVgmEj7lnIzX3CBpETZaa
- xoYg2BnzS0DIURaqNb7JQVu6vvnu4Skq9iMdPqOeKjWyG5+J5ADKXjTvgfrT6pyq+3Cr
- ivNnyBst/26qbq7bjVNC2OHN3Y6DzK+wc9zDSIqwA7zfwLYfYLouLSgZ5LtKS4sFB22B
- w6SNcRGOful6z8pEsiMyuw8cvAqGbOpnFHEDPnpK0XyHFd2sTPbtAIB+CFKDnIEe4RIh
- j7Qg==
-X-Gm-Message-State: AOJu0YwET2sfZybQblR8Uj2GBv0Vx4BMDx56iQXEmniqpQ3gFblv2uQX
- joTfzd0Xc6uxaody7xENWXlAfQyRkDB1CVp/
-X-Google-Smtp-Source: AGHT+IHOlw7VPOOt6YxeLgZiLHhEQYkhOgM6Kqcl2nLqknKIngnBSW9iOzZvX9zqwD6bsf4pRNkmiQ==
-X-Received: by 2002:adf:e48c:0:b0:317:6314:96e2 with SMTP id
- i12-20020adfe48c000000b00317631496e2mr2604678wrm.14.1693598653013; 
- Fri, 01 Sep 2023 13:04:13 -0700 (PDT)
+ bh=Msrb6/nmtExFC8B0sHWpf3s96bn/pi+WsRWwEFGprnc=;
+ b=K8iYl50afjgUoOa2yZiiv6E2+WjhYZ89DjN2nLCl3GKfHsETJMsMMnfoaszqKeZRqm
+ iK2bE2fKZywaIoLPAJeHBTlp2IswWfXSHrFMWszYuzLMwoSamz1Y0Haavcs6dBF7Fkf4
+ uxGBbCwtpe6DgDReeeadudtLZ+pohcHs7k6o7zTc169VwcY4R6fdZwolf9DeuSDHgLuz
+ yCcdHfduOReRyyp95b2APMi/ZX/oULBTq+sg4nJtk013WWW+KEplLek1XaJLO/OKEpVI
+ CGM5DpruHIxp6yhftBSmmRk3d/YgDGVT/I+Gtp0Ja8l6xVdJwKAwCT6hbPnhUzgJauht
+ 5X1A==
+X-Gm-Message-State: AOJu0Yx1/IFzanFCM6mWHOcj34uQFpbTTao/z8D95wTjqCyBlFaIvcKJ
+ jnidQy1hHASdWCV9oHSqKrAKp3cCqmxbdGkc
+X-Google-Smtp-Source: AGHT+IFqqA86EGml0+nezosNEK4ssAlOkaClPKpr01nJg389fpqGLaXiUtKjxlDdXtTi3IT9ChhmSw==
+X-Received: by 2002:adf:de0f:0:b0:319:7788:5027 with SMTP id
+ b15-20020adfde0f000000b0031977885027mr2826896wrm.59.1693598654417; 
+ Fri, 01 Sep 2023 13:04:14 -0700 (PDT)
 Received: from fedora.. (cust-west-par-46-193-56-152.cust.wifirst.net.
  [46.193.56.152]) by smtp.gmail.com with ESMTPSA id
- l4-20020adffe84000000b003176eab8868sm6207849wrr.82.2023.09.01.13.04.12
+ l4-20020adffe84000000b003176eab8868sm6207849wrr.82.2023.09.01.13.04.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 13:04:12 -0700 (PDT)
+ Fri, 01 Sep 2023 13:04:14 -0700 (PDT)
 From: Joao Marcos Costa <jmcosta944@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, antoningodard@pm.me,
  Y.Moog@phytec.de, Joao Marcos Costa <jmcosta944@gmail.com>
-Subject: [PATCH v2 2/6] scripts/gen_compile_commands.py: adapt _LINE_PATTERN
-Date: Fri,  1 Sep 2023 22:03:49 +0200
-Message-ID: <20230901200353.90290-3-jmcosta944@gmail.com>
+Subject: [PATCH v2 3/6] scripts/gen_compile_commands.py: fix docstring
+Date: Fri,  1 Sep 2023 22:03:50 +0200
+Message-ID: <20230901200353.90290-4-jmcosta944@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230901200353.90290-1-jmcosta944@gmail.com>
 References: <20230901200353.90290-1-jmcosta944@gmail.com>
@@ -92,8 +92,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For U-Boot's context, the regular expression defined by _LINE_PATTERN
-should be adapted. Replace 'savedcmd' by 'cmd'.
+The referred tool is now in U-Boot. Replace "the Linux kernel" by
+"U-Boot" to make the docstring coherent.
 
 Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
 ---
@@ -101,18 +101,18 @@ Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/scripts/gen_compile_commands.py b/scripts/gen_compile_commands.py
-index 15ba56527a..0227522959 100755
+index 0227522959..63d036a773 100755
 --- a/scripts/gen_compile_commands.py
 +++ b/scripts/gen_compile_commands.py
-@@ -19,7 +19,7 @@ _DEFAULT_OUTPUT = 'compile_commands.json'
- _DEFAULT_LOG_LEVEL = 'WARNING'
+@@ -5,7 +5,7 @@
+ #
+ # Author: Tom Roeder <tmroeder@google.com>
+ #
+-"""A tool for generating compile_commands.json in the Linux kernel."""
++"""A tool for generating compile_commands.json in U-Boot."""
  
- _FILENAME_PATTERN = r'^\..*\.cmd$'
--_LINE_PATTERN = r'^savedcmd_[^ ]*\.o := (.* )([^ ]*\.c) *(;|$)'
-+_LINE_PATTERN = r'^cmd_[^ ]*\.o := (.* )([^ ]*\.c) *(;|$)'
- _VALID_LOG_LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
- # The tools/ directory adopts a different build system, and produces .cmd
- # files in a different format. Do not support it.
+ import argparse
+ import json
 -- 
 2.41.0
 
