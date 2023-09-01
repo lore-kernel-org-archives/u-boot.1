@@ -4,108 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A99A4CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 07:37:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B206CA0FE6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 07:50:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D44F86564;
-	Fri,  1 Sep 2023 09:37:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id AC1AF866AA;
+	Fri,  1 Sep 2023 09:50:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="f4yTeqEg";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="a5s+VHLA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9A6886564; Fri,  1 Sep 2023 09:37:07 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::61d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C9D3386725; Fri,  1 Sep 2023 09:50:13 +0200 (CEST)
+Received: from mail-m2839.qiye.163.com (mail-m2839.qiye.163.com [103.74.28.39])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0F3E86776
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 09:37:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DB0B8669D
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 09:50:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ekzoAhhdv9Z4ddKMWqioNqOXL2Bh9yPDBeMlCqk0I47cbI3TGeL6NDM6Pu1nr27F2S9HCk7zSRKi0ApPCIL2ydAe9mxngP5OKfJ5poNRu+y1ZeYub5P5QJo4Z4FKTktiK3XATer7hFeMJvmn2/14zxHe1mUDAlimJRVaxfh4tzs5AdzCN7+AtKznvNQqJFJDvKqqXmAxlKf/jduyNKV9PsQ7s5vj3c5e+7jRoi3ffzKNDDh2rSgqVhTGc8cU2c5qmmmMInpUyYDa7rRHYOr+gqPmEq9XGrTrjDG3ZCLxerw0uePGMjx+k7SYGk8WIeGjxu3HLg9FybsRpmb6RDJZLA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3BuhtPHIw2+HTk3wxUC37fnV68MPfJe/aSRxrIFOneM=;
- b=bQbaDQD5otOARTmV1k/lXXO2XwSgyRWjAZL7aS3quxKblFVC8KUl6lIeoR57NoMz/6DA3nWFLZryCTgoNCxXqYePyGf8EhaJ2JdSJU/2TNfOKSe69fqbXYadhRTfMgl0k4rx68MGI5DJMKocapm89gN2zLyElbHsBM6vwY0qaD79MRiWiCcGlZ6P6D1pjxQ9rlBl+o8Z8c0vA7d8YOdDx1dKUKMZiVBCCs3RcwqoU7FW+uim23sSDEbhP33ZqKymkGTwBvqGasR1Ro7f9MGw1kNQ4KzfLVim011wGpMMcMwyFz3f7p8p+JE964nBgngMgmjiNUGbDzC5N4BCGKH85Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=steffen.cc smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3BuhtPHIw2+HTk3wxUC37fnV68MPfJe/aSRxrIFOneM=;
- b=f4yTeqEgnluCtTFl98ML6GmEGbsLcTLnK74ikZW4oLrLH50wLWId4FFAr6VJVW6sZEpSSS/DBJMwvXQuZm5HXRVEj1f+0OO2iJTGaESETQthGNyS3JOZmmKHfXpnwcNRG0nXgcUXaMYX5AO5lyd7stJYccPlBLQdkPNuFh4TQhY=
-Received: from MW4PR03CA0061.namprd03.prod.outlook.com (2603:10b6:303:b6::6)
- by SJ1PR12MB6364.namprd12.prod.outlook.com (2603:10b6:a03:452::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.21; Fri, 1 Sep
- 2023 07:36:58 +0000
-Received: from CO1PEPF000044FA.namprd21.prod.outlook.com
- (2603:10b6:303:b6:cafe::fc) by MW4PR03CA0061.outlook.office365.com
- (2603:10b6:303:b6::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22 via Frontend
- Transport; Fri, 1 Sep 2023 07:36:58 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044FA.mail.protection.outlook.com (10.167.241.200) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.2 via Frontend Transport; Fri, 1 Sep 2023 07:36:57 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
- 2023 02:36:54 -0500
-Message-ID: <ec8f243c-0084-b512-fe72-551e959e9103@amd.com>
-Date: Fri, 1 Sep 2023 09:36:52 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=a5s+VHLAVp5o3NlYKYT65y8o3GbyKkpULKKtKpIOu80QN+x9uorEIDY4x/+4I3ZGVp48vAmTsA6iWFhiWd+6rHuA2Vwxi9vX+ktm9IGz6VoMgxnGZEZCkmLTodhJKYDigmdd2qs2jVNaVUH11WIV4botjkc1Z/rhLCz0uoz3Q/I=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=fP18NPWQaxRHAJMepYg3PFQhlJ26AliuxlI08dYL7tM=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m127102.qiye.163.com (Hmail) with ESMTPA id 0FAA06C01FC;
+ Fri,  1 Sep 2023 15:49:54 +0800 (CST)
+Message-ID: <7532dcdb-ed81-b424-a8ad-5f98a8acf81d@rock-chips.com>
+Date: Fri, 1 Sep 2023 15:49:53 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 6/6] video: rockchip: dw_mipi_dsi: Use generic_phy_valid()
+ helper
 Content-Language: en-US
-To: Steffen Dirkwinkel <lists@steffen.cc>, <u-boot@lists.denx.de>
-CC: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-References: <20230830140349.10801-1-lists@steffen.cc>
- <20230830140349.10801-5-lists@steffen.cc>
-From: Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH 4/5] xilinx: zynqmp: add Beckhoff CX8200
-In-Reply-To: <20230830140349.10801-5-lists@steffen.cc>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044FA:EE_|SJ1PR12MB6364:EE_
-X-MS-Office365-Filtering-Correlation-Id: fda4cd06-d0d5-428d-0d0d-08dbaabe38ee
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: QySTWIM+Fxky4GuPud05WHZ/hDoYYExmnHYReg7GxkFcMaoZAJJyFaRzC30SpyFfvXmmsmEua6AVtMVnbU0pI7JlLXQZV36gzv12jTYg/UxUhB59tRTCvqJ+ZsepE2hfOLBl0J4oURNZvx/hC//7TqGy5G8y+Dtpukeel2EqpDlh1rA+q5/Y84rM4/TcB6/14C7UtR4hTQBdy7VnT4w0VCEarg2hudu4n17c/1aW6JVeNhHrbmiqSYSULpsces6hQt2BOStczFfwEB+I5Kh2EBuX3Q3s0t9SdbhVFrZxt//VXkxlnD55yS9nGMFVxBkxoWcpTKT8KT9QHs/QffToIW9NA2OCwNOlIUkbtKx7KY+Ebdbyib+HPqnol2/vbu30SAt/qKIifdz8KofyidKmjnv+1EFdSGpIqql0uQ++RgFJKAyE0UuRidReDQXw5SS44vK7T/77nqIN5YhWebzKhTM6rPPavwuZyk7igMaswkgL6tYpZXGMqcIq6hL/jBtlBHIyUTnh1INTWvYhRGGvFU9XRGERP9WhaG4ZRSTL7hF5ykBxtI03em9YaN3cESeK5jdPG/oSNhmhCP5t0bhOZHB/ZOIsOKCld6/93Ycz3V3vsFNpV1bKiQfX8NYxu6EI7KaTcEwHWKmpMZ/Dbu01oMNAvxnGRZvo/kV18YWWZYBNcsNSKLKDXepLa3GNGG49JkEi0bIBiHH13dnWu0HcKjW55C0x9SgD2gIkU1BHfWqAcWeiMc6IZmI6rB+c3fWpyrLZx8O6Yq5J7yBJUQMiBHbPUT3vbXQfonOedrBTOC0=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(39860400002)(396003)(376002)(136003)(1800799009)(186009)(451199024)(82310400011)(36840700001)(40470700004)(46966006)(82740400003)(31686004)(356005)(40460700003)(36756003)(86362001)(81166007)(36860700001)(40480700001)(47076005)(31696002)(2616005)(2906002)(426003)(336012)(26005)(16526019)(966005)(53546011)(83380400001)(478600001)(110136005)(8936002)(70586007)(70206006)(8676002)(4326008)(44832011)(5660300002)(41300700001)(16576012)(316002)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 07:36:57.7127 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fda4cd06-d0d5-428d-0d0d-08dbaabe38ee
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044FA.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6364
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Ondrej Jirman <megi@xff.cz>
+Cc: u-boot@lists.denx.de
+References: <20230831221629.1027552-1-jonas@kwiboo.se>
+ <20230831221629.1027552-7-jonas@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20230831221629.1027552-7-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUkaSlZPHkxIQk5PSR5PQkpVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8a4fb851d0b280kuuu0faa06c01fc
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mwg6MRw6SD0DESgNNAlCLhw2
+ FRxPFElVSlVKTUJITk5PTkJPTElMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITkxMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,50 +77,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
+     Why is this patch 6/6 and didn't see other patches?
 
-On 8/30/23 16:03, Steffen Dirkwinkel wrote:
-> From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> 
-> This adds support for the Beckhoff CX8200 series of industrial embedded PCs.
-> There is some information about the device and features here:
-> https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx8200-arm-cortex-a53/
-> 
-> Currently supported/tested:
-> - Boot from microSD
-> - Ethernet
-> - USB
-> - rtc / rtc eeprom
-> - tpm access
-> - uart
-> 
-> Open points:
-> - adding the psgtr usb phy doesn't work in linux (failed to get pll
->    lock)
-> - fpga loading currently only as u-boot script or pre launch cmd (type
->    may be stored in eeprom of rtc so this could be made generic)
-> 
-> Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> ---
-> 
->   arch/arm/dts/Makefile                         |    1 +
->   arch/arm/dts/zynqmp-beckhoff-cx8200.dts       |  247 +++
->   .../zynqmp-beckhoff-cx8200/psu_init_gpl.c     | 1960 +++++++++++++++++
->   configs/xilinx_zynqmp_virt_defconfig          |    2 +-
->   4 files changed, 2209 insertions(+), 1 deletion(-)
->   create mode 100644 arch/arm/dts/zynqmp-beckhoff-cx8200.dts
->   create mode 100644 board/xilinx/zynqmp/zynqmp-beckhoff-cx8200/psu_init_gpl.c
-
-First of all xilinx folder is not the right location because Xilinx/AMD is not 
-manufacturer of this board.
-
-Second I am normally pushing back on adding these custom boards because it just 
-increase time for maintaining.
-Your last commit was in 2019 but at least you have some commits that I can trust 
-that you would maintain your board for some time.
-
-My biggest question is in what category is your board unique that it should be 
-added it to the tree?
+On 2023/9/1 06:16, Jonas Karlman wrote:
+> The documentation for struct phy state that "The content of the
+> structure is managed solely by the PHY API and PHY drivers".
+>
+> Change to use the generic_phy_valid() helper to check if phy is valid.
+>
+> Fixes: b7d8d40346f2 ("video: rockchip: dw_mipi_dsi: Fix external phy existence check")
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
-Michal
+- Kever
+> ---
+>   drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+> index 0852b53ebed5..1a5ab781e3f1 100644
+> --- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+> +++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
+> @@ -377,7 +377,7 @@ static int dsi_phy_init(void *priv_data)
+>   	struct dw_rockchip_dsi_priv *dsi = dev_get_priv(dev);
+>   	int ret, i, vco;
+>   
+> -	if (dsi->phy.dev) {
+> +	if (generic_phy_valid(&dsi->phy)) {
+>   		ret = generic_phy_configure(&dsi->phy, &dsi->phy_opts);
+>   		if (ret) {
+>   			dev_err(dsi->dsi_host,
+> @@ -559,7 +559,7 @@ dw_mipi_dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
+>   	}
+>   
+>   	/* for external phy only the mipi_dphy_config is necessary */
+> -	if (dsi->phy.dev) {
+> +	if (generic_phy_valid(&dsi->phy)) {
+>   		phy_mipi_dphy_get_default_config(timings->pixelclock.typ  * 10 / 8,
+>   						 bpp, lanes,
+>   						 &dsi->phy_opts);
+> @@ -859,7 +859,7 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
+>   	}
+>   
+>   	/* Get a ref clock only if not using an external phy. */
+> -	if (priv->phy.dev) {
+> +	if (generic_phy_valid(&priv->phy)) {
+>   		dev_dbg(dev, "setting priv->ref to NULL\n");
+>   		priv->ref = NULL;
+>   
