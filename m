@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE2CCA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:26:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA95CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:26:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 703F886776;
-	Fri,  1 Sep 2023 12:26:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B472F868CA;
+	Fri,  1 Sep 2023 12:26:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HuG81n/C";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i82uFwhF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7645986776; Fri,  1 Sep 2023 12:26:26 +0200 (CEST)
+ id E6B3386886; Fri,  1 Sep 2023 12:26:29 +0200 (CEST)
 Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
  [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB52A81970
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:26:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C9D286146
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:26:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
 Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1bf7423ef3eso13484215ad.3
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 03:26:19 -0700 (PDT)
+ d9443c01a7336-1bf5c314a57so13626075ad.1
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 03:26:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693563978; x=1694168778; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qwPFduRrwDV+8AbiYPYN4lz6o84q16nOE81vedhRgOY=;
- b=HuG81n/C3owik98pSK9W1FAOgnBeJCs7rKHgUwuiJDYEKA8rZB8TVv4970KAlXbpJ0
- CeqVU9NlJFoL9+cDFOKEYHqXhDoIsLBWV6tkclI9ZqPxaFW29bEzwhhjzjoknT73PCsc
- koy5b55oS5dEhSClh9qVyHxufYUxh2hWTlVQTzzJnk2o0Z34gVrzsKqk4BgmSsAGaGPX
- jmTTX8EaYVGXN7eTipFFFYDHaJEuEDj/7xKRtBRlJ/L7bEa0q/Fktbr79GmKYUa/jqVi
- OW8W9txuI6TmRlTQ46JvflOypctP9I2eHPy14mWB3xF2ROOTALwLLP8XoZ/T9PvPGG6f
- YTsg==
+ d=linaro.org; s=google; t=1693563984; x=1694168784; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K5o7rE4kZSShVKtRcA18G41Zui4Hcxs84NmAGyEAImE=;
+ b=i82uFwhFEr4qH/d7v6odlOrvFZpUXgG8WfdERi8NCZl7sb5f04e1QHtOe1cwTRYnj9
+ X0HFEKKJvMXksFsI/HskQAJe2DfDWx9iSrOuy5vNIOR7Waq1TWA+m5FE9UU5hKSImWD1
+ iprfOHti4y/01fTOplFvw7SYD/MLgxfE4ZX4dsPfvgnYG1TKZAbOgGsDWRcxvZaXWAJc
+ nFI0ZvTSqwMzRu2Xls1+Jwg80tYrUHAoG6NFD9mzVnoijpAP+/eboaB5W9k3f0tmU524
+ CSGQa1JbW0V9ROBQ6topx2BK6WqSheruSl0jF+Epio98w3SrkUys1QtrRVPxvfMwe/TP
+ bRGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693563978; x=1694168778;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qwPFduRrwDV+8AbiYPYN4lz6o84q16nOE81vedhRgOY=;
- b=M8fQjM7IQ6wL7ihU9SztpJ6rDux20Ajnx78TmOtVsrXurGccLPCnUxm1w7ys5nlzMH
- gwWtAcOKQAiKik5ein2TIIUQ3SHg+DI8nsB2qp42Eh5HYKpbaAmSvZiBvxUyo2mSEdsM
- +QSD4ycwudIW1mWqV5o0K/oBLMgo4Qju7AHvigJPA5qh3XwalHRc08UpksDPJ59u5h3S
- uYq1G2M9a076Tq8x3uL1X8Sv5bJxqB+hOwfIlKW2CI1sEBUK3wru06sRJy1heS9Ouizb
- acqqQSY9fy2ZgPwI8xqrXuTHG8fYkmHDvcFbZUpDEz/cHeQb2qjlFxTB857U1t61tiXv
- JIYA==
-X-Gm-Message-State: AOJu0YxeV9TZGlx5/4os5C1g1/LnsVqJiOObrvQ/4CZ4V0asNFDog/l6
- x+RoboFERsYtHFb4ElZtVgluy/8QyFDUC31XSeA=
-X-Google-Smtp-Source: AGHT+IEDNUvs39C8G3wjZ0qWTL2rnmNC/G5Oh4pk5pLbnyM2/tQblTlvhoglsIJkzlr8fqEFlgm22Q==
-X-Received: by 2002:a17:903:26ce:b0:1c0:cb4d:df7c with SMTP id
- jg14-20020a17090326ce00b001c0cb4ddf7cmr1936588plb.1.1693563977676; 
- Fri, 01 Sep 2023 03:26:17 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693563984; x=1694168784;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=K5o7rE4kZSShVKtRcA18G41Zui4Hcxs84NmAGyEAImE=;
+ b=guzmKn+ygpBGnsymMhi0VCOK/tOFIopXfoKi8p0vqlOcfrWj5g1aq9Uu5lFekMADti
+ 2tcXkThGp3xNTY7OANrWkxb9jSvYcDZf3P3H2CwtvE5Qrw6zhtIxE3KLectMlp1SuBsO
+ Tlr3XAYxnceUc/Xujfi9sQsffCmB/jO3Z3Js287zGDnmmMuXgXzbhKIydHB947cUJzxG
+ i+k43k/e/2ZyExTxD7hVZTL0bvVPZ1RJaXgM/foEIxmhL+z5qqrzRpDM4HPqPRLs3OoJ
+ zBnY14THCAc+4H1QXyzCPUY1aBXqkal1BwVpHPd/DuaobVakzQHVYh07oxTvNfI/GfeL
+ E/Gg==
+X-Gm-Message-State: AOJu0YzEE7zPeNYdGURQ8+Yk+JFQz8B1fnqrHfYsxNN8SxwySVbiG+tq
+ vYVd1XHZMP5YfEA6DyZWeNu07Rm1zQ8+7nnf2M8=
+X-Google-Smtp-Source: AGHT+IFMrWvZCEvpGKn8qcce6UTd6k1MpeHCZKGS3rkr0+mI8a3FEJ9AVVJZYDx7JuXAC4wp3TMO6g==
+X-Received: by 2002:a17:902:e808:b0:1bf:70be:ca8b with SMTP id
+ u8-20020a170902e80800b001bf70beca8bmr2745835plg.43.1693563984114; 
+ Fri, 01 Sep 2023 03:26:24 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- bd10-20020a170902830a00b001a80ad9c599sm2671120plb.294.2023.09.01.03.26.16
+ y4-20020a170902700400b001c0c86a5415sm2677052plk.154.2023.09.01.03.26.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 03:26:16 -0700 (PDT)
+ Fri, 01 Sep 2023 03:26:23 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v2 0/6] Add EFI HTTP boot support
-Date: Fri,  1 Sep 2023 19:25:36 +0900
-Message-Id: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH v2 1/6] net: wget: prevent overwriting reserved memory
+Date: Fri,  1 Sep 2023 19:25:37 +0900
+Message-Id: <20230901102542.609239-2-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,81 +96,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds the EFI HTTP boot support.
-User can add the URI device path with "efidebug boot add" command.
-efibootmgr handles the URI device path, download the
-specified file using wget, mount the downloaded image with
-blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+This introduces the valid range check to store the received
+blocks using lmb. The same logic is implemented in tftp.
 
-This version still does not include the test.
+Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+---
+ net/wget.c | 76 +++++++++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 69 insertions(+), 7 deletions(-)
 
-To enable EFI HTTP boot, we need to enable the following Kconfig options.
- CONFIG_CMD_DNS
- CONFIG_CMD_WGET
- CONFIG_BLKMAP
-
-On the Socionext Developerbox, enter the following commands then
-debian installer is downloaded into "loadaddr" and installer
-automatically starts.
- => dhcp
- => setenv serverip 192.168.1.1
- => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
- => efidebug boot order 3
- => bootefi bootmgr
-
-Note that this debian installer can not proceed the installation
-bacause RAM disk of installer image is not recogniged by the kernel.
-I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
-will be one of the solution to recognize RAM disk from kernel.
-(In EDK2, the equivalent solution is called ACPI NFIT.)
-
-On QEMU, I can not make DNS work from the QEMU guest.
-The following commands work on qemu_arm64(manually set the http server ip in URI).
-  => dhcp
-  => setenv gatewayip 10.0.2.2
-  => setenv httpserverip 134.160.38.1
-  => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
-  => efidebug boot order 3
-  => bootefi bootmgr
-
-[TODO]
-- add test
-- stricter wget uri check
-- omit the dns process if the given uri has ip address
-   -> this will be supported when the lwip migration completes
-
-[change log]
-v1 -> v2
-- carve out the network handling(wget and dns code) under net/wget.c
-- carve out ramdisk creation code under drivers/block/blkmap_helper.c
-- wget supports the valid range check to store the received blocks using lmb
-- support when the downloaded image have no partiton table but a file system
-- not start the .efi file in try_load_entry()
-- call efi_check_pe() for .efi file to check the file is PE-COFF image
-- add documentation for EFI HTTP Boot
-
-Masahisa Kojima (6):
-  net: wget: prevent overwriting reserved memory
-  net: wget: add wget with dns utility function
-  blk: blkmap: add ramdisk creation utility function
-  efi_loader: support boot from URI device path
-  cmd: efidebug: add uri device path
-  doc: uefi: add HTTP Boot support
-
- cmd/efidebug.c                |  50 +++++++++
- doc/develop/uefi/uefi.rst     |  21 ++++
- drivers/block/Makefile        |   1 +
- drivers/block/blkmap.c        |  15 ---
- drivers/block/blkmap_helper.c |  53 +++++++++
- include/blkmap.h              |  29 +++++
- include/net.h                 |   8 ++
- lib/efi_loader/efi_bootmgr.c  | 197 +++++++++++++++++++++++++++++++++
- net/wget.c                    | 202 ++++++++++++++++++++++++++++++++--
- 9 files changed, 554 insertions(+), 22 deletions(-)
- create mode 100644 drivers/block/blkmap_helper.c
-
-
-base-commit: cc889bd0754e50a3cd50e8ed3094388480fbec86
+diff --git a/net/wget.c b/net/wget.c
+index 2dbfeb1a1d..8bf4db4d04 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -4,16 +4,20 @@
+  * Copyright Duncan Hare <dh@synoia.com> 2017
+  */
+ 
++#include <asm/global_data.h>
+ #include <command.h>
+ #include <common.h>
+ #include <display_options.h>
+ #include <env.h>
+ #include <image.h>
++#include <lmb.h>
+ #include <mapmem.h>
+ #include <net.h>
+ #include <net/tcp.h>
+ #include <net/wget.h>
+ 
++DECLARE_GLOBAL_DATA_PTR;
++
+ static const char bootfile1[] = "GET ";
+ static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+ static const char http_eom[] = "\r\n\r\n";
+@@ -55,6 +59,32 @@ static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
+ static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
+ static int retry_len;			/* TCP retry length */
+ 
++#ifdef CONFIG_LMB
++static ulong wget_load_size;
++#endif
++
++/**
++ * wget_init_max_size() - initialize maximum load size
++ *
++ * Return:	0 if success, -1 if fails
++ */
++static int wget_init_load_size(void)
++{
++#ifdef CONFIG_LMB
++	struct lmb lmb;
++	phys_size_t max_size;
++
++	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
++
++	max_size = lmb_get_free_size(&lmb, image_load_addr);
++	if (!max_size)
++		return -1;
++
++	wget_load_size = max_size;
++#endif
++	return 0;
++}
++
+ /**
+  * store_block() - store block in memory
+  * @src: source of data
+@@ -63,10 +93,24 @@ static int retry_len;			/* TCP retry length */
+  */
+ static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+ {
++	ulong store_addr = image_load_addr + offset;
+ 	ulong newsize = offset + len;
+ 	uchar *ptr;
+ 
+-	ptr = map_sysmem(image_load_addr + offset, len);
++#ifdef CONFIG_LMB
++	ulong end_addr = image_load_addr + wget_load_size;
++
++	if (!end_addr)
++		end_addr = ULONG_MAX;
++
++	if (store_addr < image_load_addr ||
++		store_addr + len > end_addr) {
++		puts("\nwget error: ");
++		puts("trying to overwrite reserved memory...\n");
++		return -1;
++	}
++#endif
++	ptr = map_sysmem(store_addr, len);
+ 	memcpy(ptr, src, len);
+ 	unmap_sysmem(ptr);
+ 
+@@ -240,25 +284,37 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+ 
+ 			net_boot_file_size = 0;
+ 
+-			if (len > hlen)
+-				store_block(pkt + hlen, 0, len - hlen);
++			if (len > hlen) {
++				if (store_block(pkt + hlen, 0, len - hlen) != 0) {
++					wget_loop_state = NETLOOP_FAIL;
++					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
++					return;
++				}
++			}
+ 
+ 			debug_cond(DEBUG_WGET,
+ 				   "wget: Connected Pkt %p hlen %x\n",
+ 				   pkt, hlen);
+ 
+ 			for (i = 0; i < pkt_q_idx; i++) {
++				int err;
++
+ 				ptr1 = map_sysmem(
+ 					(phys_addr_t)(pkt_q[i].pkt),
+ 					pkt_q[i].len);
+-				store_block(ptr1,
+-					    pkt_q[i].tcp_seq_num -
+-					    initial_data_seq_num,
+-					    pkt_q[i].len);
++				err = store_block(ptr1,
++						  pkt_q[i].tcp_seq_num -
++						  initial_data_seq_num,
++						  pkt_q[i].len);
+ 				unmap_sysmem(ptr1);
+ 				debug_cond(DEBUG_WGET,
+ 					   "wget: Connctd pkt Q %p len %x\n",
+ 					   pkt_q[i].pkt, pkt_q[i].len);
++				if (err) {
++					wget_loop_state = NETLOOP_FAIL;
++					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
++					return;
++				}
+ 			}
+ 		}
+ 	}
+@@ -420,6 +476,12 @@ void wget_start(void)
+ 	debug_cond(DEBUG_WGET,
+ 		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+ 
++	if (wget_init_load_size()) {
++		puts("\nwget error: ");
++		puts("trying to overwrite reserved memory...\n");
++		return;
++	}
++
+ 	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+ 	tcp_set_tcp_handler(wget_handler);
+ 
 -- 
 2.34.1
 
