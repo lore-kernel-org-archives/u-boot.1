@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B73B4CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 08:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F04ECA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 08:48:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB28B866AA;
-	Fri,  1 Sep 2023 10:32:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E3E06867EF;
+	Fri,  1 Sep 2023 10:48:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lHYnOdiw";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hBCP//ld";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aPeF3bZ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05B4286759; Fri,  1 Sep 2023 10:32:07 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2D6A48680E; Fri,  1 Sep 2023 10:48:33 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0593846C0
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 10:32:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B8E08669D
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 10:48:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5007c8308c3so3190633e87.0
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 01:32:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693557123; x=1694161923; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ifJvuO6wKyCxqsuqfJ5pHJorfQEsD370Z46BxflIB+k=;
- b=lHYnOdiwNJnPcTMYHfzCKqGeZX5xWIxxo+qbrYMq7m2R7x1XV5KWF1lgq83z91JS9H
- H+kM7NBDku6bRkMn1Gs4rgBCmAUFX+7CRnD686AcFIosDCU7vv2yI0S/PxWC/yolEj+S
- STg+bma3KbTIcNH400lvPy7iKhiI8QWN9N918cVyX0L4BQ9WD2cdT8WR/EsVQLTYgnH+
- 8CkwFkziXWTG0yy0w4xVlcEEN7KYLmi+nUVrDTQ72plw/BYZU096h6I1eJA6cn7u+bAW
- vBRDAPzY2jVZznZu8bWR2lSX3GNc+CREbXUdgPG5IRzBp79tkycdnZ0mWk0YeM1t67T8
- fA1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693557123; x=1694161923;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ifJvuO6wKyCxqsuqfJ5pHJorfQEsD370Z46BxflIB+k=;
- b=BUO9M5JnD2LkBMD1oU9zKNDUJxkdTus47IGTS6vpFqdC3Veb+WPgzlk1fPMgEPuYcU
- viAoZd3XY74/k0hXlUwYIj7CSg+WW0ym41GeTDZMw9zbN6FljebLUYjYbmxVchu/SgeO
- HwUhl8eouJvFJBbpmvIGU/2Citf7gfxcHt7PYlGhNNqeLy6FFGMyF0neE+LUC2MEiqnx
- uSboE/kvvw3WRetDeZAppz0yNI2mRtAbiMK8IofjGaQKw5mZ20yrhk+bsel5Nhn5EMU1
- m9f6f98HZN9bSg3VBaAn5kPivA+WSuJE+SlDfQU+vQw036o8WaL1D76OTpdIWxdfQbrP
- 3CKw==
-X-Gm-Message-State: AOJu0Yz10/YzMleupmbCAw5hPWS7Wu57vCJuApa7JUFJmKSVTPjtkUKc
- Ck65lmzPr1C8WDLlvdopvSr/n/ZIjm3ak8YTmY8Bhg==
-X-Google-Smtp-Source: AGHT+IH6p0cb8DZdhW6TkWqU/D5daMkAJWXHUmyBWsIHEt82EHRxCX2iBbTTt7TRAV/gym9sMIkYIzGXdIsCeCBvkfc=
-X-Received: by 2002:a05:6512:6ca:b0:500:ac0b:8d51 with SMTP id
- u10-20020a05651206ca00b00500ac0b8d51mr1316519lff.37.1693557123018; Fri, 01
- Sep 2023 01:32:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RcWsB2QM1z9sqn;
+ Fri,  1 Sep 2023 10:48:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693558110;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=eKvkXJceJiCQWRmvP1MviTR0JiABsvxBDUh0ZQYm3Jw=;
+ b=hBCP//ldPZkW8Mp+DPgYkYVynjgh5hVGe3J3mC7BKn8BlG8TMxOSFfzHRCgu77g5Y1zquT
+ E0YHaukY3q0NGI65mfbFEdD2HqPDn2neWtQJyIzG2KvJBNDyMjeoeKvsDf9bkMunY+GcLL
+ ZyYWcoocDs/YBe2irN2kYV89txXFjhipr/l8vV9A/l9wOYYd+y+xkP1avQ/m17wDEkmJng
+ pzwVqwfKJKqUZct+UPNwMFASGAyt5ME1COth3eYAhBGik/rv6dAaLJQbuAlQMkN1Z13HFn
+ ZuVwKzSupq1Gj0Qb8xJPL+pR6Y0+60G/xgFPphGIg6JkzrNBSM0IUJeqJdZkkQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693558107;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=eKvkXJceJiCQWRmvP1MviTR0JiABsvxBDUh0ZQYm3Jw=;
+ b=aPeF3bZ0aBZnCv5xRl0P1jyoftQSOsrIwKpoTzoruJcun5sjh/FUn795VMfLz5tBedpzUR
+ T9q1etqxlfAgPE2uBE6Jr3ilyNJoQeXt5EQNrj3icfV0lBmxeo9cYmniTygmsMTRHby4CE
+ pVlQVxykwVdLm2RkpbvbOSyJotCMB4sqAXbJppLdDKWiyV4Z1FJrlHnQi1peg6+7lhTkxt
+ aVDKMgJPgXXzA1FReBVq3T6lJEKyZX3XBt88zPg0nZcxDjAeDP+Q8VKOZI2tSyfmykaQLy
+ J15v7dPJ74uvHVhRDzzy0ycmOMUsA/8RXpa/K8v7MEGiupP+GvI4v1yjzhfPZQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] .gitlab-ci: Test sandbox64 board in addition to sandbox
+Date: Fri,  1 Sep 2023 10:48:10 +0200
+Message-Id: <20230901084810.238594-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <41f932e52bdd206b1b68d5ff313fc29b794a70e7.1693413381.git.michal.simek@amd.com>
- <b48a067e-4143-8cab-3387-e276e900e8f0@amd.com>
- <CAC_iWj+GZCHZkDf8C0v7oeJLwLZZep0jhKYv2at7BJ0gmqCFDw@mail.gmail.com>
- <77d57e59-42f2-2da0-6cdd-139c049ea401@amd.com>
-In-Reply-To: <77d57e59-42f2-2da0-6cdd-139c049ea401@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 1 Sep 2023 11:31:24 +0300
-Message-ID: <CAC_iWj+6_HVOUomRGa09gyB6SqhBpVfx3nqf6EWNEUXrS=0Ygg@mail.gmail.com>
-Subject: Re: [PATCH] test/py: tpm2: skip tpm2_startup when
- env__tpm_device_test_skip=True
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: fbdcdddbe62017bac44
+X-MBO-RS-META: 6jrtoin7djmj4imfm6nxa1ke1xbpeoqe
+X-Rspamd-Queue-Id: 4RcWsB2QM1z9sqn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,54 +85,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 1 Sept 2023 at 11:14, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 9/1/23 09:59, Ilias Apalodimas wrote:
-> > On Fri, 1 Sept 2023 at 10:09, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >>
-> >>
-> >> On 8/30/23 18:36, Michal Simek wrote:
-> >>> All tpm2 tests should be possible to skip when
-> >>> env__tpm_device_test_skip=True but test_tpm2_startup is missing it.
-> >>>
-> >>> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >>> ---
-> >>>
-> >>>    test/py/tests/test_tpm2.py | 3 +++
-> >>>    1 file changed, 3 insertions(+)
-> >>>
-> >>> diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-> >>> index fce689cd992d..c2579fa02c58 100644
-> >>> --- a/test/py/tests/test_tpm2.py
-> >>> +++ b/test/py/tests/test_tpm2.py
-> >>> @@ -71,6 +71,9 @@ def test_tpm2_startup(u_boot_console):
-> >>>
-> >>>        Initiate the TPM internal state machine.
-> >>>        """
-> >>> +    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
-> >>> +    if skip_test:
-> >>> +        pytest.skip('skip TPM device test')
-> >>>        u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
-> >>>        output = u_boot_console.run_command('echo $?')
-> >>>        assert output.endswith('0')
-> >>
-> >> Applied.
-> >
-> > Uhm? Applied where? I had a few minor fixes I was planning to send to Tom
->
-> To my microblaze tree.
-> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/commits/20230901
->
-> I want to send pull request to Tom soon and need this patch to be able to pass
-> CI for enabling TPM for Versal.
+Test both 32bit and 64bit sandbox boards in CI.
 
-Ah ok, feel free to pick it up then
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+DEPENDS:
+- [v2] test: print: Fix hexdump test on 64bit systems
+- test: dm: test-fdt: Use fdtdec_get_int() in dm_check_devices()
+- configs: sandbox64: Enable legacy image format support
+---
+ .gitlab-ci.yml | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-Cheers
-/Ilias
->
-> Thanks,
-> Michal
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 6d7ffdd1bbc..a7282be3181 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -291,6 +291,23 @@ sandbox without LTO test.py:
+     BUILD_ENV: "NO_LTO=1"
+   <<: *buildman_and_testpy_dfn
+ 
++sandbox64 test.py:
++  variables:
++    TEST_PY_BD: "sandbox64"
++  <<: *buildman_and_testpy_dfn
++
++sandbox64 with clang test.py:
++  variables:
++    TEST_PY_BD: "sandbox64"
++    OVERRIDE: "-O clang-16"
++  <<: *buildman_and_testpy_dfn
++
++sandbox64 without LTO test.py:
++  variables:
++    TEST_PY_BD: "sandbox64"
++    BUILD_ENV: "NO_LTO=1"
++  <<: *buildman_and_testpy_dfn
++
+ sandbox_spl test.py:
+   variables:
+     TEST_PY_BD: "sandbox_spl"
+-- 
+2.40.1
+
