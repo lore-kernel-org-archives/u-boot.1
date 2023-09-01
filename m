@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F73CA0FE2
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 02:58:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69656CA0FE6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 04:59:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 347E786725;
-	Fri,  1 Sep 2023 04:58:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5925886571;
+	Fri,  1 Sep 2023 06:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6061886741; Fri,  1 Sep 2023 04:58:26 +0200 (CEST)
+ id DBACE86571; Fri,  1 Sep 2023 06:59:16 +0200 (CEST)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD260866AA
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 04:58:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0959286563
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 06:59:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 3812vtS2006383; Fri, 1 Sep 2023 11:58:09 +0900
+ 3814wthq006589; Fri, 1 Sep 2023 13:58:57 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
 Cc: eugen.hristev@collabora.com, jonas@kwiboo.se, sjg@chromium.org,
  philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH 2/2] arm: dts: rockchip: rock-5b: add support for PCIe3 and
- NVMe
-Date: Fri,  1 Sep 2023 11:57:19 +0900
-Message-Id: <20230901025719.34023-2-naoki@radxa.com>
+Subject: [PATCH RESEND 2/2] arm: dts: rockchip: rock-5b: add support for PCIe3
+ and NVMe
+Date: Fri,  1 Sep 2023 13:58:46 +0900
+Message-Id: <20230901045846.50365-2-naoki@radxa.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230901025719.34023-1-naoki@radxa.com>
-References: <20230901025719.34023-1-naoki@radxa.com>
+In-Reply-To: <20230901045846.50365-1-naoki@radxa.com>
+References: <20230901045846.50365-1-naoki@radxa.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -56,18 +56,18 @@ X-Virus-Status: Clean
 
 this patch adds support for PCIe3 (M.2 M key) and enables NVMe.
 
-=> pci
-BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
-_____________________________________________________________
-00.00.00   0x1d87     0x3588     Bridge device           0x04
-01.00.00   0x10ec     0x8125     Network controller      0x00
-02.00.00   0x1d87     0x3588     Bridge device           0x04
-03.00.00   0x1179     0x011a     Mass storage controller 0x08
-=> nvme scan
-=> nvme info
-Device 0: Vendor: 0x1179 Rev: AGHA4101 Prod: 79CA20WPKRYN
-            Type: Hard Disk
-            Capacity: 488386.3 MB = 476.9 GB (1000215216 x 512)
+ => pci
+ BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+ _____________________________________________________________
+ 00.00.00   0x1d87     0x3588     Bridge device           0x04
+ 01.00.00   0x10ec     0x8125     Network controller      0x00
+ 02.00.00   0x1d87     0x3588     Bridge device           0x04
+ 03.00.00   0x1179     0x011a     Mass storage controller 0x08
+ => nvme scan
+ => nvme info
+ Device 0: Vendor: 0x1179 Rev: AGHA4101 Prod: 79CA20WPKRYN
+             Type: Hard Disk
+             Capacity: 488386.3 MB = 476.9 GB (1000215216 x 512)
 
 Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 
