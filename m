@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1092ACA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B2BECA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:49:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A098863DD;
-	Fri,  1 Sep 2023 11:00:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=steffen.cc
+	by phobos.denx.de (Postfix) with ESMTP id 1F557863DD;
+	Fri,  1 Sep 2023 11:49:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=steffen.cc header.i=@steffen.cc header.b="rb5jsaLc";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="5kjBjaQN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 721C58669D; Fri,  1 Sep 2023 11:00:37 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5607080422; Fri,  1 Sep 2023 11:49:45 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 588F2863DD
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 11:00:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD15186453
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 11:49:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=steffen.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lists@steffen.cc
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RcX733N7pz9sr4;
- Fri,  1 Sep 2023 11:00:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=steffen.cc; s=MBO0001; 
- t=1693558831;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zBIFHbqA3Y77X4OATwXNMldQFrhpY/zF//yeHK8H7xo=;
- b=rb5jsaLczMigo0mZfzuPLwF8g4dCdPQM864f0Dn38JvdyAMuDiLz0BuGR3ObJ0iD0n3Pul
- xDY+Z3Vwmh033Lx1HCSf0tuY8d3wWxGPTWUfURdBqeb+7VOe2OJD9hVW26afRESSYtRPNi
- 3IlnYnI6wPt2RlhUi8t1dyzVjZBmbLbxqjgWQLdRRGavCw9B6yr0RZiKdEyHexGm7ugvNC
- mPeYgR6oK32bwEMcGJr328jUw/zHw1wP0d+InN3JXTteIwvDrY4JwxalyX/LLdghVhM28G
- 0u/+Xm+nHd567QADelW5MgpeMxfHDuuNv8PiZUybDnClarLoUf/OMH0cR6vIzQ==
-Message-ID: <4c458e6a-05e7-489c-ba3d-8d139024ddb1@steffen.cc>
-Date: Fri, 1 Sep 2023 11:00:29 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=76082d487b=fabrice.gasnier@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3814bXKW027990; Fri, 1 Sep 2023 11:49:41 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=pPARXyNUEmVd8ypw5jf3ifL9Pg6FlwooBwpASuQsFI8=; b=5k
+ jBjaQNOHFvHnbN4EmhDfkEO5QXYK4fW6nyrXnHAIUTIRmdpm3PD9lRLksQeQzctC
+ pq3QMsG6DhSIxtc2yle7ChxcvPEwLSkUHGOYgS5iGMu4aHlCoH7FFbF5GRm9HMNz
+ VPnoLXOUtMGVZLjjGXtxCxnHhw5GgGAtB3BVUGUE0Htm6jIOfigvP3D0m2N37XW4
+ zkMARsicIwajYRycr41yYWCDORpTvjnylHtuOkmhOu6k1SITi2B4lilly8zniyme
+ IGS/h/9Ks6CBCnApMjTOwd1N/mJeDR46hb2Jz0L16/vEG8Hnj2cjmrHR4D4hi5T7
+ YQDdh7Dv7XAyUJvqQ9wQ==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sqty06tar-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 01 Sep 2023 11:49:41 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 458D8100056;
+ Fri,  1 Sep 2023 11:49:41 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2556821A90A;
+ Fri,  1 Sep 2023 11:49:41 +0200 (CEST)
+Received: from [10.201.22.39] (10.201.22.39) by SHFDAG1NODE2.st.com
+ (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 1 Sep
+ 2023 11:49:40 +0200
+Message-ID: <8f54491e-47f8-5e58-5a44-f991dcf66616@foss.st.com>
+Date: Fri, 1 Sep 2023 11:49:39 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 4/5] xilinx: zynqmp: add Beckhoff CX8200
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Cc: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-References: <20230830140349.10801-1-lists@steffen.cc>
- <20230830140349.10801-5-lists@steffen.cc>
- <ec8f243c-0084-b512-fe72-551e959e9103@amd.com>
-Content-Language: , en-US
-From: Steffen Dirkwinkel <lists@steffen.cc>
-In-Reply-To: <ec8f243c-0084-b512-fe72-551e959e9103@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] usb: host: ehci-generic: check for companion controller
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+References: <20230830080008.455157-1-fabrice.gasnier@foss.st.com>
+ <4e4f480f-8f97-cf8a-fb55-8d1ebaffb993@denx.de>
+From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+In-Reply-To: <4e4f480f-8f97-cf8a-fb55-8d1ebaffb993@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4RcX733N7pz9sr4
+X-Originating-IP: [10.201.22.39]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-01_07,2023-08-31_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,89 +94,107 @@ X-Virus-Status: Clean
 
 
 
-Am 01.09.23 um 09:36 schrieb Michal Simek:
-> 
-> 
-> On 8/30/23 16:03, Steffen Dirkwinkel wrote:
->> From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+On 8/30/23 17:12, Marek Vasut wrote:
+> On 8/30/23 10:00, Fabrice Gasnier wrote:
+>> EHCI is usually used with companion controller (like OHCI) as companion
+>> controller. This information on the companion is missing currently in
+>> companion drivers.
+>> So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
+>> first, then EHCI.
+>> This is seen on STM32MP1 where DT probing makes the probe order to occur
+>> by increasing address (OHCI address < EHCI address).
 >>
->> This adds support for the Beckhoff CX8200 series of industrial 
->> embedded PCs.
->> There is some information about the device and features here:
->> https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx8200-arm-cortex-a53/
+>> When a low speed or full-speed device is plugged in, it's not detected as
+>> EHCI should first detect it, and give ownership (handover) to OHCI.
 >>
->> Currently supported/tested:
->> - Boot from microSD
->> - Ethernet
->> - USB
->> - rtc / rtc eeprom
->> - tpm access
->> - uart
+>> Current situation on STM32MP1 (with a low speed device plugged-in)
+>> STM32MP> usb start
+>> starting USB...
+>> Bus usb@5800c000: USB OHCI 1.0
+>> Bus usb@5800d000: USB EHCI 1.00
+>> scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>>         scanning usb for storage devices... 0 Storage Device(s) found
 >>
->> Open points:
->> - adding the psgtr usb phy doesn't work in linux (failed to get pll
->>    lock)
->> - fpga loading currently only as u-boot script or pre launch cmd (type
->>    may be stored in eeprom of rtc so this could be made generic)
+>> The "companion" property in the device tree allow to retrieve companion
+>> controller information, from the EHCI node. This allow marking the
+>> companion driver as such.
 >>
->> Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+>> With this patch (same low speed device plugged in):
+>> STM32MP> usb start
+>> starting USB...
+>> Bus usb@5800c000: USB OHCI 1.0
+>> Bus usb@5800d000: USB EHCI 1.00
+>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>> scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+>>         scanning usb for storage devices... 0 Storage Device(s) found
+>> STM32MP> usb tree
+>> USB device tree:
+>>    1  Hub (12 Mb/s, 0mA)
+>>    |   U-Boot Root Hub
+>>    |
+>>    +-2  Human Interface (1.5 Mb/s, 100mA)
+>>         HP HP USB 1000dpi Laser Mouse
+>>
+>>    1  Hub (480 Mb/s, 0mA)
+>>       u-boot EHCI Host Controller
+>>
+>> This also optimize bus scan when a High speed device is plugged in, as
+>> the usb-uclass skips OHCI in this case:
+>>
+>> STM32MP> usb reset
+>> resetting USB...
+>> Bus usb@5800c000: USB OHCI 1.0
+>> Bus usb@5800d000: USB EHCI 1.00
+>> scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+>>         scanning usb for storage devices... 1 Storage Device(s) found
+>> STM32MP> usb tree
+>> USB device tree:
+>>    1  Hub (480 Mb/s, 0mA)
+>>    |  u-boot EHCI Host Controller
+>>    |
+>>    +-2  Mass Storage (480 Mb/s, 200mA)
+>>         SanDisk Cruzer Blade 03003432021922011407
+>>
+>> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
 >> ---
 >>
->>   arch/arm/dts/Makefile                         |    1 +
->>   arch/arm/dts/zynqmp-beckhoff-cx8200.dts       |  247 +++
->>   .../zynqmp-beckhoff-cx8200/psu_init_gpl.c     | 1960 +++++++++++++++++
->>   configs/xilinx_zynqmp_virt_defconfig          |    2 +-
->>   4 files changed, 2209 insertions(+), 1 deletion(-)
->>   create mode 100644 arch/arm/dts/zynqmp-beckhoff-cx8200.dts
->>   create mode 100644 
->> board/xilinx/zynqmp/zynqmp-beckhoff-cx8200/psu_init_gpl.c
+>>   drivers/usb/host/ehci-generic.c | 24 ++++++++++++++++++++++++
 > 
-> First of all xilinx folder is not the right location because Xilinx/AMD 
-> is not manufacturer of this board.
+> More of a design question -- shouldn't the usb-uclass handle this
+> property ad manipulate with private data of "remote" devices instead ?
 
-Yeah, sorry. I saw the avnet board and copied that.
+Hi Marek,
 
-> 
-> Second I am normally pushing back on adding these custom boards because 
-> it just increase time for maintaining.
-> Your last commit was in 2019 but at least you have some commits that I 
-> can trust that you would maintain your board for some time.
+That's an option I haven't really explored earlier. I was a bit confused
+when I figured out the usb-uclass was able to manage the companion
+controller, by using the "companion" flag. But I couldn't find any
+driver that was actually using this flag :-O.
 
-Our last board [1] only had linux/u-boot support as an afterthought. 
-Customers had to buy a special option to set the right boot fuses, so 
-most devices don’t boot u-boot.
-With this board and a second similar zynqmp board (CX9240 [2]) we’ll 
-have u-boot as default (and probably only) bootloader, so we’ll be
-more active. We can also set two of us as maintainers and it would be 
-fine to drop the boards if nobody responds.
-We generally support these industrial boards for long time frames and 
-would like to stay close to mainline instead of maintaining forks.
+So I had a look at the git log, and I found out:
+- Companion has been introduced in:
+b6de4d1093d3 dm: usb: Add support for companion controllers
 
-The alternative would be to have a downstream u-boot repository on 
-github or somewhere. We’ll still likely have something there for build 
-scripts / firmware builds / integration, but don’t plan to really 
-diverge from upstream u-boot.
+- First user for this flag was introduced in same series:
+6a72e804a2b2 sunxi: ohci: Add ohci usb host controller support
+e.g. drivers/usb/host/ohci-sunxi.c
 
-The main advantage of being in upstream u-boot would be that we can 
-trigger internal CI on upstream changes. We can still do that and apply 
-patches, but even simple patches like adding files to a makefile may 
-fail to apply and will need fixing.
+So, in the original design, the flag was set in OHCI controller driver
+side. This is why I implemented this in controller driver, but in EHCI
+generic driver, because it has the companion property (not in OHCI node).
 
+- Later this driver has been dropped in, to use the generic OHCI driver
+instead: 543049ab5906 usb: host: Drop [e-o]hci-sunxi drivers
 
-> 
-> My biggest question is in what category is your board unique that it 
-> should be added it to the tree?
+It looks like that setting the companion flag has been missed when
+moving to OHCI generic driver. I admit the strange thing with current
+approach is: implementation is done in EHCI driver, to impact OHCI
+private struct.
 
-Currently the board isn’t really unique. I guess we’d be the only users 
-of the rtc with eeprom and there might be something needed for loading 
-the correct fpga file based on eeprom (this might be done in linux / 
-userspace or even u-boot script though)
+I'll send a v2, to handle this in usb-uclass as you suggest. This makes
+sense.
 
-[1] 
-https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx9020-arm-cortex-a8/cx9020.html#tab_productdetails_1
-[2] 
-https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx9240-arm-cortex-a53/cx9240.html
+Thanks for reviewing,
+Best Regards,
+Fabrice
 
-> 
-> Thanks,
-> Michal
