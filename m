@@ -4,48 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC84CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65EF6CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:04:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BBD9868D0;
-	Fri,  1 Sep 2023 12:00:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C1F128676C;
+	Fri,  1 Sep 2023 12:04:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jc6sPHMa";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29F60868BB; Fri,  1 Sep 2023 12:00:07 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0BA2B8676C
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:00:04 +0200 (CEST)
+ id DD27E86564; Fri,  1 Sep 2023 12:04:30 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E2A4C8676C
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:04:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 287EDFEC;
- Fri,  1 Sep 2023 03:00:42 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AEE3C3FBD2;
- Fri,  1 Sep 2023 03:00:02 -0700 (PDT)
-Date: Fri, 1 Sep 2023 10:59:58 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Peter Hoyes <peter.hoyes@arm.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] driver: rng: Add DM_RNG interface for ARMv8.5 RNDR
- registers
-Message-ID: <20230901105958.4c686dd0@donnerap.manchester.arm.com>
-In-Reply-To: <CAPnjgZ3Pa4iEhCiGnvwP+XxDsShxuKTjGq=fJ9JXh9LeUn1u8A@mail.gmail.com>
-References: <20230830113230.3925868-1-andre.przywara@arm.com>
- <CAPnjgZ0Q7LUe1Qf6S16RLwPPdVjhs+Z760g8CK2Zq4=vev0hFA@mail.gmail.com>
- <20230831134324.2ae66c5d@donnerap.manchester.arm.com>
- <CAPnjgZ3Pa4iEhCiGnvwP+XxDsShxuKTjGq=fJ9JXh9LeUn1u8A@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=loic.poulain@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-522dd6b6438so2351871a12.0
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 03:04:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693562664; x=1694167464; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bfgheOJel6ez4MLJuex3G21MlvhmSzbQ72m6inCLOcc=;
+ b=Jc6sPHMawJicdbKuWOGhz1Y/Nxx6+sOUtzw4plTXJUbLYktvGc/ZqyAzLPo/PW/ZrI
+ CEcVb1cohJOFNQvyQRUBQHQu2lWDxiouICwE0NKff7yyw58WnshZpEuM/Rddg08VN5W9
+ f8Eo2Mcqwq/TOdTm2N6TYXMSID5J+5mU1ImFIdREmFg8AptrdvHTf4o/6z87Rh4tYIR0
+ aMXB9X2iAYPImT6jcw1jzCHOds5Ryd26MwdXX+DzuY4Y5KcEQ5G3oFjGMouSJz9jd8tF
+ LKcw3sU4SugM9eCZ92B2kNYBF+HEp0iH13JLcJnSRy88wBnBc/A6nyKxU6M8H3C5jfyp
+ B2KQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693562664; x=1694167464;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bfgheOJel6ez4MLJuex3G21MlvhmSzbQ72m6inCLOcc=;
+ b=DG2W9bHvMilOTlR35LSFYB5F9p7oLAItRuhJcSrPzGPnHKGtGB1x453/vvmiB1cNYE
+ eehG+h+EipFsunXzcONUCpmDlgMvlSLOYx43ZZOzeo4gnVNE0dU2B4hK+MdCotZSTKfT
+ 9Ddq6xHnFO2J8OP+62uLhh03/wUDM4VlJt+rkZaTzBueNvQySc9Sb25KKpgwI4ASSncI
+ h/nyZFNwNXDHkrqOj92oLP6e/1pN7Hab0N+FPLIG817jAE/J6LJX2vkUitEb6NPylp1E
+ a7WXi8gkGXRvbQcBjjBreb1AmekiPX3rtbr1NwJX4/y/3/aSCx6qQKVstpxfsRIagqdC
+ EW+g==
+X-Gm-Message-State: AOJu0YzQzrNTDacytwM34Mz5J26i46DpDW4pYKVCochO/cRysRN387a/
+ 78eiYW+rXylQdR8thVll/4VkC/2TARrbpBAvaGedbz02D65BQJlJ
+X-Google-Smtp-Source: AGHT+IGo/GbPjH2OypGshTHpr3lUiZHMeMTkbH/l+jc5su2BeWgFl43xBNj7LcxloUQy5X9GL9YqGsDC6eVm2aFR0uY=
+X-Received: by 2002:aa7:c555:0:b0:523:c35:c209 with SMTP id
+ s21-20020aa7c555000000b005230c35c209mr1382625edr.12.1693562664427; Fri, 01
+ Sep 2023 03:04:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20230813083912.532982-1-loic.poulain@linaro.org>
+ <a00ee265-d65f-f15b-48a0-4112b7e762dc@denx.de>
+In-Reply-To: <a00ee265-d65f-f15b-48a0-4112b7e762dc@denx.de>
+From: Loic Poulain <loic.poulain@linaro.org>
+Date: Fri, 1 Sep 2023 12:03:47 +0200
+Message-ID: <CAMZdPi9fupGqHhEOH_kTREUUOzmrCCZPbVbK5u5JGwRHTuMeFA@mail.gmail.com>
+Subject: Re: [PATCH] usb: gadget: sdp: Option to enable SDP read register
+ command
+To: Marek Vasut <marex@denx.de>
+Cc: lukma@denx.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,221 +86,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Aug 2023 13:01:57 -0600
-Simon Glass <sjg@chromium.org> wrote:
+Hi Marek,
 
-Hi Simon,
-
-> On Thu, 31 Aug 2023 at 06:43, Andre Przywara <andre.przywara@arm.com> wrote:
+On Mon, 14 Aug 2023 at 01:53, Marek Vasut <marex@denx.de> wrote:
+>
+> On 8/13/23 10:39, Loic Poulain wrote:
+> > The SDP read register command can be used to read any memory
+> > mapped address of the device (ddr, registers...). It can then
+> > be exploited by an attacker to access sensitive data/values,
+> > especially when running SDP from SPL, as SPL runs with highest
+> > privileges in ARM secure mode.
 > >
-> > On Wed, 30 Aug 2023 20:49:18 -0600
-> > Simon Glass <sjg@chromium.org> wrote:
+> > Without read, SDP still useful to bootstrap and jump on (signed)
+> > blob such as u-boot with write and jump commands, but reading
+> > is optional in that case (debug purpose).
 > >
-> > Hi Simon,
-> >  
-> > > On Wed, 30 Aug 2023 at 05:32, Andre Przywara <andre.przywara@arm.com> wrote:  
-> > > >
-> > > > The ARMv8.5 architecture extension defines architectural RNDR/RNDRRS
-> > > > system registers, that provide 64 bits worth of randomness on every
-> > > > read. Since it's an extension, and implementing it is optional, there is
-> > > > a field in the ID_AA64ISAR0_EL1 ID register to query the availability
-> > > > of those registers.
-> > > >
-> > > > Add a UCLASS_RNG driver that returns entropy via repeated reads from
-> > > > those system registers, if the extension is implemented.
-> > > > The driver always binds, but checks the availability in the probe()
-> > > > routine.
-> > > >
-> > > > This helps systems which suffer from low boot entropy, since U-Boot can
-> > > > provide entropy via the generic UEFI entropy gathering protocol to the OS,
-> > > > at an early stage.
-> > > >
-> > > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > > > ---
-> > > > Hi Simon,
-> > > >
-> > > > not sure if this is the expected way to model a driver which autodetects
-> > > > its device at runtime. It somewhat works, but always lists the bound
-> > > > device, even if the registers are not supported. If I do the check in bind
-> > > > instead, it fails booting when this returns -ENODEV, since it expects
-> > > > the fixed device to always bind successfully, I guess?
-> > > > Is there any other way of modeling this? And before you say your
-> > > > favourite two letters: this is not a DT job, since it can be safely
-> > > > auto-detected in an architectural way.
-> > > >
-> > > > Thanks,
-> > > > Andre
-> > > >
-> > > >  arch/arm/include/asm/system.h |  1 +
-> > > >  drivers/rng/Kconfig           |  6 +++
-> > > >  drivers/rng/Makefile          |  1 +
-> > > >  drivers/rng/arm_rndr.c        | 82 +++++++++++++++++++++++++++++++++++
-> > > >  4 files changed, 90 insertions(+)
-> > > >  create mode 100644 drivers/rng/arm_rndr.c  
-> > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>  
-> >
-> > thanks!
-> >  
-> > > nit below
-> > >  
-> > > >
-> > > > diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-> > > > index 87d1c77e8b1..0eae857e73a 100644
-> > > > --- a/arch/arm/include/asm/system.h
-> > > > +++ b/arch/arm/include/asm/system.h
-> > > > @@ -84,6 +84,7 @@
-> > > >  #define HCR_EL2_HCD_DIS                (1 << 29) /* Hypervisor Call disabled         */
-> > > >  #define HCR_EL2_AMO_EL2                (1 <<  5) /* Route SErrors to EL2             */
-> > > >
-> > > > +#define ID_AA64ISAR0_EL1_RNDR  (0xFUL << 60) /* RNDR random registers */
-> > > >  /*
-> > > >   * ID_AA64ISAR1_EL1 bits definitions
-> > > >   */
-> > > > diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> > > > index 5deb5db5b71..72788d479cc 100644
-> > > > --- a/drivers/rng/Kconfig
-> > > > +++ b/drivers/rng/Kconfig
-> > > > @@ -76,6 +76,12 @@ config RNG_SMCCC_TRNG
-> > > >           Enable random number generator for platforms that support Arm
-> > > >           SMCCC TRNG interface.
-> > > >
-> > > > +config RNG_ARM_RNDR
-> > > > +       bool "Generic ARMv8.5 RNDR register"
-> > > > +       depends on DM_RNG && ARM64
-> > > > +       help
-> > > > +         Use the ARMv8.5 RNDR register to provide random numbers.
-> > > > +
-> > > >  config TPM_RNG
-> > > >         bool "Enable random number generator on TPM device"
-> > > >         depends on TPM
-> > > > diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> > > > index 78f61051acf..572fa7a0c66 100644
-> > > > --- a/drivers/rng/Makefile
-> > > > +++ b/drivers/rng/Makefile
-> > > > @@ -13,4 +13,5 @@ obj-$(CONFIG_RNG_STM32MP1) += stm32mp1_rng.o
-> > > >  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
-> > > >  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
-> > > >  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
-> > > > +obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
-> > > >  obj-$(CONFIG_TPM_RNG) += tpm_rng.o
-> > > > diff --git a/drivers/rng/arm_rndr.c b/drivers/rng/arm_rndr.c
-> > > > new file mode 100644
-> > > > index 00000000000..55989743eae
-> > > > --- /dev/null
-> > > > +++ b/drivers/rng/arm_rndr.c
-> > > > @@ -0,0 +1,82 @@
-> > > > +// SPDX-License-Identifier: GPL-2.0
-> > > > +/*
-> > > > + * Copyright (c) 2023, Arm Ltd.
-> > > > + *
-> > > > + * Use the (optional) ARMv8.5 RNDR register to provide random numbers to
-> > > > + * U-Boot's UCLASS_RNG users.
-> > > > + * Detection is done at runtime using the CPU ID registers.
-> > > > + */
-> > > > +
-> > > > +#define LOG_CATEGORY UCLASS_RNG
-> > > > +
-> > > > +#include <common.h>
-> > > > +#include <dm.h>
-> > > > +#include <linux/kernel.h>
-> > > > +#include <rng.h>
-> > > > +#include <asm/system.h>
-> > > > +
-> > > > +#define DRIVER_NAME    "arm-rndr"
-> > > > +
-> > > > +static bool cpu_has_rndr(void)
-> > > > +{
-> > > > +       uint64_t reg;
-> > > > +
-> > > > +       __asm__ volatile("mrs %0, ID_AA64ISAR0_EL1\n" : "=r" (reg));
-> > > > +       return !!(reg & ID_AA64ISAR0_EL1_RNDR);
-> > > > +}
-> > > > +
-> > > > +/*
-> > > > + * The system register name is RNDR, but this isn't widely known among older
-> > > > + * toolchains, and also triggers errors because of it being an architecture
-> > > > + * extension. Since we check the availability of the register before, it's
-> > > > + * fine to use here, though.
-> > > > + */
-> > > > +#define RNDR   "S3_3_C2_C4_0"
-> > > > +
-> > > > +static uint64_t read_rndr(void)
-> > > > +{
-> > > > +       uint64_t reg;
-> > > > +
-> > > > +       __asm__ volatile("mrs %0, " RNDR "\n" : "=r" (reg));
-> > > > +
-> > > > +       return reg;
-> > > > +}
-> > > > +
-> > > > +static int arm_rndr_read(struct udevice *dev, void *data, size_t len)
-> > > > +{
-> > > > +       uint64_t random;
-> > > > +
-> > > > +       while (len) {
-> > > > +               int tocopy = min(sizeof(uint64_t), len);
-> > > > +
-> > > > +               random = read_rndr();
-> > > > +               memcpy(data, &random, tocopy);
-> > > > +               len -= tocopy;
-> > > > +               data += tocopy;
-> > > > +       }
-> > > > +
-> > > > +       return 0;
-> > > > +}
-> > > > +
-> > > > +static const struct dm_rng_ops arm_rndr_ops = {
-> > > > +       .read = arm_rndr_read,
-> > > > +};
-> > > > +
-> > > > +static int arm_rndr_probe(struct udevice *dev)
-> > > > +{
-> > > > +       if (!cpu_has_rndr())
-> > > > +               return -ENODEV;  
-> > >
-> > > Can you put this in a bind() function instead, if not too expensive?  
-> >
-> > That's the point I was wondering about (see my message to you above, after
-> > the S-o-B): it seems more natural there, but stops the boot.
-> > Apparently DM expects those fixed devices (U_BOOT_DRVINFO) to always
-> > succeed their bind() calls? Because if I put it in bind, I get:
-> > ================
-> > No match for driver 'arm-rndr'
-> > initcall sequence 00000000fefc4528 failed at call 000000008801d104 (err=-19)
-> > ### ERROR ### Please RESET the board ###
-> > ================
-> > if the feature is not available.
-> > Any suggestions how to use bind and avoid that crash are highly welcome.  
-> 
-> An #ifdef is the only thing I can suggest.
-> 
-> Why not add the node to the DT?
+> > NXP SoCs usually have a dedicated SDP_READ_DISABLE fuse to disable
+> > SDP read command in their ROM SDP implementation, so it seems quite
+> > reasonable to make it optional from u-boot/spl as well.
+>
+> If there is a fuse, why not read the fuse and disable READ based on that
+> fuse instead ?
 
-Because the RNDR system registers are architected and perfectly
-discoverable, so out of scope for a devicetree.
-The registers are arguably not a device, but a CPU feature, though I found
-it useful to represent them as a UCLASS_RNG device, since this ties in
-neatly and automatically to the rest of U-Boot, specifically the UEFI
-loader, which makes use of it to provide early entropy to the OS.
+Well, fuse is more a way to tune a specific ROM code here, not the software.
+It would be more generic to make it a build config like other features, and one
+may purposely force SDP READ in SPL, even if disabled at ROM level. That
+said we could also introduce a weak board_sdp_read_allowed() function...
 
-So either I leave it as it is, living with the fact that it always shows
-as "bound" to the driver, even when the feature doesn't exist, or I add
-extra code to the efi_rng.c's getrng() function to discover the CPU
-feature there. But the latter sounds arbitrary, and would add arch
-specific bits to the generic EFI code, plus would also leave out the other
-UCLASS_RNG users like kaslrseed.
+Let me know what you prefer.
 
-> > And regarding "expensive": This is reading a fixed, read-only system
-> > register. There is probably nothing cheaper than that on a modern chip.  
-> 
-> No I meant expensive in terms of code size, but I don't think a bind()
-> function matters here.
-
-This driver mostly consists of boilerplate code, so I am not worried
-about code size at all, and we are not particularly constrained in size.
-The feature check itself is typically like three or four assembly
-instructions.
-
-Cheers,
-Andre
+Regards,
+Loic
