@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 163DBCA0FEC
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 17:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F3F3CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 17:40:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 674DE8522C;
-	Fri,  1 Sep 2023 19:39:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5BDB8657B;
+	Fri,  1 Sep 2023 19:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rZhWKX4m";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KakBsLb1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FE08619A; Fri,  1 Sep 2023 19:39:30 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 4FEF78669D; Fri,  1 Sep 2023 19:40:02 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F93F81FA8
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 19:39:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5113881FA8
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 19:39:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 381HdICw118885;
- Fri, 1 Sep 2023 12:39:18 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 381Hdojd125620;
+ Fri, 1 Sep 2023 12:39:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693589958;
- bh=b31iOOhlnfWpAGapHUIaHkytBxYpDn1DsbDZ9dBmtZg=;
+ s=ti-com-17Q1; t=1693589990;
+ bh=CPS1oISBg5KhCRh9yxcvmmi32yhP3hmYyLC840+D5fk=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=rZhWKX4mocoUSHXDg8oknE+A+iBnPc2VzEMThFUdKJQGyBkP9Kuu68G1/vLcZqugW
- +SAd46EJP82+sgn1eaT0kyFdtx2fKNsOSaYQfLDNmWPYkRFS4N7VXXi23qAJX57Kq7
- LyprNTQO1g7u+vpUVJRJVya0oZdbmPzGqJ8zEmdI=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 381HdIVr070688
+ b=KakBsLb1jwPKl0aEn6rmk1F5h8/5w5b8CnCDXvJVVHWNuKO2Kf0X+s72aCieI68oj
+ CI4GlCiJA8ggUrQgd3iWSrQZCyRWO1tbv/lnGBKLjnE/M8DpxUo5wky0voEc7dgKaN
+ /M+S6e+D2uP3wv+HYLAWlP1+wrXM86d8AfOcuBj4=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 381HdoLl097208
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 1 Sep 2023 12:39:18 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 1 Sep 2023 12:39:50 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 1
- Sep 2023 12:39:18 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 12:39:50 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 1 Sep 2023 12:39:18 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 381HdIN5109836;
- Fri, 1 Sep 2023 12:39:18 -0500
-Date: Fri, 1 Sep 2023 12:39:18 -0500
+ Frontend Transport; Fri, 1 Sep 2023 12:39:50 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 381Hdnq7118714;
+ Fri, 1 Sep 2023 12:39:50 -0500
+Date: Fri, 1 Sep 2023 12:39:49 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>
 CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
  <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
  <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
  <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-Subject: Re: [PATCH v3 3/6] k3-j721s2: Sync from Linux tag v6.5-rc1
-Message-ID: <20230901173918.l7vrojbxpyetfzdi@snare>
+Subject: Re: [PATCH v3 4/6] k3-am68: Sync from Linux tag v6.5-rc1
+Message-ID: <20230901173949.ize26nxhdwiubytl@conceal>
 References: <20230816-b4-upstream-j721s2-r5-pinmux-v3-0-fd6602912536@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v3-3-fd6602912536@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v3-4-fd6602912536@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v3-3-fd6602912536@ti.com>
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v3-4-fd6602912536@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,10 +86,10 @@ On 12:32-20230901, Manorit Chawdhry wrote:
 > v6.5-rc1 to U-boot and fixes the following to be compatible with
 > the future syncs -
 > 
-> - Include k3-j721s2-common-proc-board.dts file
+> - Include k3-am68-sk-base-board.dts file
 > 
 >     Remove the duplicated pinmuxes from r5 and -u-boot.dtsi files and
->     include k3-j721s2-common-proc-board.dts for Linux fixes to propagate
+>     include k3-am68-sk-base-board.dts for Linux fixes to propagate
 >     to U-boot.
 > 
 > - Fixing the mcu_timer0
@@ -127,9 +127,8 @@ On 12:32-20230901, Manorit Chawdhry wrote:
 > 
 > Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
 
-Thank you for cleaning this up.
+Thanks for cleaning this up.
 
 Reviewed-by: Nishanth Menon <nm@ti.com>
 
