@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB45ECA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D76AACA0FE2
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA72786759;
-	Fri,  1 Sep 2023 03:14:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29C1986852;
+	Fri,  1 Sep 2023 03:14:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BwwIFyy4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XjYGkGv5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77174867C3; Fri,  1 Sep 2023 03:14:22 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 2A21380750; Fri,  1 Sep 2023 03:14:23 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DBF486828
+ by phobos.denx.de (Postfix) with ESMTPS id CF2248682B
  for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-34dea77cbe6so4385905ab.2
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:17 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7928dc54896so52651439f.3
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693530856; x=1694135656; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693530857; x=1694135657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YelQpbFRlcfXmtzfBfCs7079y14zizLqjBoM2IqmMA0=;
- b=BwwIFyy4XkBSRZEr23u/dnIkEfLA3qdawY4TMi2Qf4PjY7kNR7eInbubBZBvSaMny9
- qSaIu1F6uvByn5qo4m0uSCG6h9WWC+Xk0IyfZRe9H9jB1CL70XPYvNTCYAiWrmBEuUPL
- RroizhNYBrDIvdCHGE22rMvuRX0FBczFK5C/c=
+ bh=Wp7FzBapgobWTEInbS9wj0Jre/twJhccNaxdqsOKzD8=;
+ b=XjYGkGv5mVmgGCGcTuFmAD7TQ0s2jzRABHi3Nh9AIKUwu9M0Q91RHfbaMJwcAYNx1L
+ f/oc+xnQbBYWJblpJdTyLKr5LVkz+FznOC1HlrC/tjaV2kAQTLYWIdOcHAxZ7XWpdJGR
+ QJQLP4Qf6SS9BUJstU+2PhZPNq50w7bFsmPyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693530856; x=1694135656;
+ d=1e100.net; s=20221208; t=1693530857; x=1694135657;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YelQpbFRlcfXmtzfBfCs7079y14zizLqjBoM2IqmMA0=;
- b=dQsIbYiGbtJZibBECuVKKwWk6K96Jd+7x5NkO45Zlm8mN5t7hCzCRChcad3c0RwUDp
- OCg+jZ5WGDVEvSQ7pcDXA58fi+WeszUBASa0YdoqItWR1Xw9TGRySUegeVOWhvxzLSI7
- 4uU62/n5Ex0FDeJ9Rk1veGUg3PX1NuNTPuAalOdyUH3I03qxcf4nckh3dp3KdX8sY/1M
- 9HG9r6R5f1uRbY3wM9v004goQzrpkn4TIcxqC+nqha8cQeBY7R7AmbkEvkZML5/HhSY6
- K1fEIeme+Wu+ZdbyxGsDPBZ5PcCJIPLVXKAjubQv4jS/V/U+LmZ5QzLP+lzernRdE4dq
- +sHg==
-X-Gm-Message-State: AOJu0YwriER/9kdKV2s23EjyK4PUUGKgTDcWpikSCL0pIgEWzDwmYBKr
- RRYaWel3+6h8dOCVCN2Ilgvhtlb6Ay1OcAYVtvI=
-X-Google-Smtp-Source: AGHT+IGEhgIte5Bt4QbEyVwVUjYdmWiJo9E1B/JXBZrRuohST3hHlkmN1ioiJs+fflpn1Jh1QUOY/Q==
-X-Received: by 2002:a05:6e02:d42:b0:349:8811:fc51 with SMTP id
- h2-20020a056e020d4200b003498811fc51mr1143612ilj.20.1693530856572; 
- Thu, 31 Aug 2023 18:14:16 -0700 (PDT)
+ bh=Wp7FzBapgobWTEInbS9wj0Jre/twJhccNaxdqsOKzD8=;
+ b=IszKyK7bbLZyJnnMZNGa7QuthqeMElbEAejbsRN9ND6hvtUTSdPhQn/SMcLL1+j8EI
+ W0t7pE/6xaCP9aigiALqCwgsq4OPEjFbcyOime+JkPzMpDyl+fpfeo0w0d5I329dMCKj
+ 4AyXG/HlS3gXNnYU98zWv2VZmgrlkuctkY1oLCNNnfQNeycRIRRgTI7gGvHfmt17kgEc
+ wzbNBMVnrPeyg9yp4uBCt2V02+p5u72RIZt0ll9F73a9CVqpHo8eWE1CIeOuTrYN93dG
+ 4qbeTFLsdhgkjWgQ2dMyiU/6g+lPe1QjzgG19tybld4N0yXsp31QTqZ9K/PXJscLKqjy
+ qxBA==
+X-Gm-Message-State: AOJu0Yxg2OwBwwhQAUMgVWTXI5xGbwehEqjkJznDaQUkFCk8GJQ+R8i5
+ h65mYe3k9gIrpaHEZxc20Xw+tk0Rp651akCOp3s=
+X-Google-Smtp-Source: AGHT+IHIvLtHnim+HsChBkysCNXogA9mdhmuqWCWgcT0fITMBdWMBONeseODlvQfN6kCggr5OS4RIg==
+X-Received: by 2002:a05:6e02:f45:b0:34d:f0b4:787a with SMTP id
+ y5-20020a056e020f4500b0034df0b4787amr1127995ilj.15.1693530857387; 
+ Thu, 31 Aug 2023 18:14:17 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 18:14:16 -0700 (PDT)
+ Thu, 31 Aug 2023 18:14:17 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -67,9 +67,9 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH v2 08/14] lmb: Update use of region in the C file
-Date: Thu, 31 Aug 2023 19:13:46 -0600
-Message-ID: <20230901011357.2482203-9-sjg@chromium.org>
+Subject: [PATCH v2 09/14] lmb: Tidy up structure access
+Date: Thu, 31 Aug 2023 19:13:47 -0600
+Message-ID: <20230901011357.2482203-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230901011357.2482203-1-sjg@chromium.org>
 References: <20230901011357.2482203-1-sjg@chromium.org>
@@ -91,312 +91,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change places that should say area to do so. Change the name of the 'rgn'
-variable to 'area' in places where it refers to an area number.
+In some cases it helps to define a local variable pointing to the
+structure being accessed. This avoids lots of repeated code.
 
-Fix the 'beginging' typo while here.
+There is no need to individually assign each struct member, so use a
+structure assignment instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add new patch to update use of region in the C file
+(no changes since v1)
 
- lib/lmb.c | 126 +++++++++++++++++++++++++++---------------------------
- 1 file changed, 62 insertions(+), 64 deletions(-)
+ lib/lmb.c | 58 ++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 27 insertions(+), 31 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 6061c6f361c6..0b03cc4d1c23 100644
+index 0b03cc4d1c23..862b1cd04953 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -74,22 +74,21 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
- 	return 0;
- }
+@@ -23,20 +23,19 @@ DECLARE_GLOBAL_DATA_PTR;
  
--static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
--				 unsigned long r2)
-+static long lmb_areas_adjacent(struct lmb_region *rgn, ulong a1, ulong a2)
+ static void lmb_dump_region(struct lmb_region *rgn, char *name)
  {
--	phys_addr_t base1 = rgn->area[r1].base;
--	phys_size_t size1 = rgn->area[r1].size;
--	phys_addr_t base2 = rgn->area[r2].base;
--	phys_size_t size2 = rgn->area[r2].size;
-+	phys_addr_t base1 = rgn->area[a1].base;
-+	phys_size_t size1 = rgn->area[a1].size;
-+	phys_addr_t base2 = rgn->area[a2].base;
-+	phys_size_t size2 = rgn->area[a2].size;
+-	unsigned long long base, size, end;
+-	enum lmb_flags flags;
+ 	int i;
  
- 	return lmb_addrs_adjacent(base1, size1, base2, size2);
+ 	printf(" %s.cnt = 0x%lx / max = 0x%lx\n", name, rgn->cnt, rgn->max);
+ 
+ 	for (i = 0; i < rgn->cnt; i++) {
+-		base = rgn->area[i].base;
+-		size = rgn->area[i].size;
+-		end = base + size - 1;
+-		flags = rgn->area[i].flags;
++		struct lmb_area *area = &rgn->area[i];
++		unsigned long long end;
++
++		end = area->base + area->size - 1;
+ 
+ 		printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x\n",
+-		       name, i, base, end, size, flags);
++		       name, i, (unsigned long long)area->base, end,
++		       (unsigned long long)area->size, area->flags);
+ 	}
  }
  
--static void lmb_remove_region(struct lmb_region *rgn, unsigned long r)
-+static void lmb_remove_area(struct lmb_region *rgn, unsigned long area)
+@@ -88,11 +87,8 @@ static void lmb_remove_area(struct lmb_region *rgn, unsigned long area)
  {
  	unsigned long i;
  
--	for (i = r; i < rgn->cnt - 1; i++) {
-+	for (i = area; i < rgn->cnt - 1; i++) {
- 		rgn->area[i].base = rgn->area[i + 1].base;
- 		rgn->area[i].size = rgn->area[i + 1].size;
- 		rgn->area[i].flags = rgn->area[i + 1].flags;
-@@ -97,12 +96,11 @@ static void lmb_remove_region(struct lmb_region *rgn, unsigned long r)
+-	for (i = area; i < rgn->cnt - 1; i++) {
+-		rgn->area[i].base = rgn->area[i + 1].base;
+-		rgn->area[i].size = rgn->area[i + 1].size;
+-		rgn->area[i].flags = rgn->area[i + 1].flags;
+-	}
++	for (i = area; i < rgn->cnt - 1; i++)
++		rgn->area[i] = rgn->area[i + 1];
  	rgn->cnt--;
  }
  
--/* Assumption: base addr of region 1 < base addr of region 2 */
--static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
--				 unsigned long r2)
-+/* Assumption: base addr of area 1 < base addr of area 2 */
-+static void lmb_coalesce_areas(struct lmb_region *rgn, uint a1, uint a2)
- {
--	rgn->area[r1].size += rgn->area[r2].size;
--	lmb_remove_region(rgn, r2);
-+	rgn->area[a1].size += rgn->area[a2].size;
-+	lmb_remove_area(rgn, a2);
- }
+@@ -120,6 +116,7 @@ void lmb_init(struct lmb *lmb)
  
- void lmb_init(struct lmb *lmb)
-@@ -228,8 +226,8 @@ void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
- }
- 
- /* This routine called with relocation disabled. */
--static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
--				 phys_size_t size, enum lmb_flags flags)
-+static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
-+			       phys_size_t size, enum lmb_flags flags)
+ void arch_lmb_reserve_generic(struct lmb *lmb, ulong sp, ulong end, ulong align)
  {
- 	unsigned long coalesced = 0;
- 	long adjacent, i;
-@@ -244,43 +242,43 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
++	struct bd_info *bd = gd->bd;
+ 	ulong bank_end;
+ 	int bank;
+ 
+@@ -133,12 +130,10 @@ void arch_lmb_reserve_generic(struct lmb *lmb, ulong sp, ulong end, ulong align)
+ 	/* adjust sp by 4K to be safe */
+ 	sp -= align;
+ 	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+-		if (!gd->bd->bi_dram[bank].size ||
+-		    sp < gd->bd->bi_dram[bank].start)
++		if (!bd->bi_dram[bank].size || sp < bd->bi_dram[bank].start)
+ 			continue;
+ 		/* Watch out for RAM at end of address space! */
+-		bank_end = gd->bd->bi_dram[bank].start +
+-			gd->bd->bi_dram[bank].size - 1;
++		bank_end = bd->bi_dram[bank].start + bd->bi_dram[bank].size - 1;
+ 		if (sp > bank_end)
+ 			continue;
+ 		if (bank_end > end)
+@@ -242,13 +237,15 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
  
  	/* First try and coalesce this LMB with another. */
  	for (i = 0; i < rgn->cnt; i++) {
--		phys_addr_t rgnbase = rgn->area[i].base;
--		phys_size_t rgnsize = rgn->area[i].size;
--		phys_size_t rgnflags = rgn->area[i].flags;
-+		phys_addr_t abase = rgn->area[i].base;
-+		phys_size_t asize = rgn->area[i].size;
-+		phys_size_t aflags = rgn->area[i].flags;
+-		phys_addr_t abase = rgn->area[i].base;
+-		phys_size_t asize = rgn->area[i].size;
+-		phys_size_t aflags = rgn->area[i].flags;
++		struct lmb_area *area = &rgn->area[i];
++
++		phys_addr_t abase = area->base;
++		phys_size_t asize = area->size;
++		phys_size_t aflags = area->flags;
  		phys_addr_t end = base + size - 1;
--		phys_addr_t rgnend = rgnbase + rgnsize - 1;
-+		phys_addr_t rgnend = abase + asize - 1;
+-		phys_addr_t rgnend = abase + asize - 1;
++		phys_addr_t aend = abase + asize - 1;
  
--		if (rgnbase <= base && end <= rgnend) {
--			if (flags == rgnflags)
--				/* Already have this region, so we're done */
-+		if (abase <= base && end <= rgnend) {
-+			if (flags == aflags)
-+				/* Already have this area, so we're done */
+-		if (abase <= base && end <= rgnend) {
++		if (abase <= base && end <= aend) {
+ 			if (flags == aflags)
+ 				/* Already have this area, so we're done */
  				return 0;
- 			else
--				return -1; /* regions with new flags */
-+				return -1; /* areas with new flags */
- 		}
- 
--		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-+		adjacent = lmb_addrs_adjacent(base, size, abase, asize);
+@@ -260,14 +257,14 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
  		if (adjacent > 0) {
--			if (flags != rgnflags)
-+			if (flags != aflags)
+ 			if (flags != aflags)
  				break;
- 			rgn->area[i].base -= size;
- 			rgn->area[i].size += size;
+-			rgn->area[i].base -= size;
+-			rgn->area[i].size += size;
++			area->base -= size;
++			area->size += size;
  			coalesced++;
  			break;
  		} else if (adjacent < 0) {
--			if (flags != rgnflags)
-+			if (flags != aflags)
+ 			if (flags != aflags)
  				break;
- 			rgn->area[i].size += size;
+-			rgn->area[i].size += size;
++			area->size += size;
  			coalesced++;
  			break;
--		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
--			/* regions overlap */
-+		} else if (lmb_addrs_overlap(base, size, abase, asize)) {
-+			/* areas overlap */
- 			return -1;
- 		}
- 	}
+ 		} else if (lmb_addrs_overlap(base, size, abase, asize)) {
+@@ -291,9 +288,7 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
+ 	/* Couldn't coalesce the LMB, so add it to the sorted table. */
+ 	for (i = rgn->cnt-1; i >= 0; i--) {
+ 		if (base < rgn->area[i].base) {
+-			rgn->area[i + 1].base = rgn->area[i].base;
+-			rgn->area[i + 1].size = rgn->area[i].size;
+-			rgn->area[i + 1].flags = rgn->area[i].flags;
++			rgn->area[i + 1] = rgn->area[i];
+ 		} else {
+ 			rgn->area[i + 1].base = base;
+ 			rgn->area[i + 1].size = size;
+@@ -533,10 +528,11 @@ int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
+ 	int i;
  
--	if (i < rgn->cnt - 1 && lmb_regions_adjacent(rgn, i, i + 1)) {
-+	if (i < rgn->cnt - 1 && lmb_areas_adjacent(rgn, i, i + 1)) {
- 		if (rgn->area[i].flags == rgn->area[i + 1].flags) {
--			lmb_coalesce_regions(rgn, i, i + 1);
-+			lmb_coalesce_areas(rgn, i, i + 1);
- 			coalesced++;
- 		}
- 	}
-@@ -315,10 +313,10 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 	return 0;
- }
- 
--static long lmb_add_region(struct lmb_region *rgn, phys_addr_t base,
--			   phys_size_t size)
-+static long lmb_add_area(struct lmb_region *rgn, phys_addr_t base,
-+			 phys_size_t size)
- {
--	return lmb_add_region_flags(rgn, base, size, LMB_NONE);
-+	return lmb_add_area_flags(rgn, base, size, LMB_NONE);
- }
- 
- /* This routine may be called with relocation disabled. */
-@@ -326,7 +324,7 @@ long lmb_add(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- {
- 	struct lmb_region *_rgn = &(lmb->memory);
- 
--	return lmb_add_region(_rgn, base, size);
-+	return lmb_add_area(_rgn, base, size);
- }
- 
- long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size)
-@@ -338,7 +336,7 @@ long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 
- 	rgnbegin = rgnend = 0; /* supress gcc warnings */
- 
--	/* Find the region where (base, size) belongs to */
-+	/* Find the area where (base, size) belongs to */
- 	for (i = 0; i < rgn->cnt; i++) {
- 		rgnbegin = rgn->area[i].base;
- 		rgnend = rgnbegin + rgn->area[i].size - 1;
-@@ -347,24 +345,24 @@ long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 			break;
- 	}
- 
--	/* Didn't find the region */
-+	/* Didn't find the area */
- 	if (i == rgn->cnt)
- 		return -1;
- 
--	/* Check to see if we are removing entire region */
-+	/* Check to see if we are removing entire area */
- 	if ((rgnbegin == base) && (rgnend == end)) {
--		lmb_remove_region(rgn, i);
-+		lmb_remove_area(rgn, i);
- 		return 0;
- 	}
- 
--	/* Check to see if region is matching at the front */
-+	/* Check to see if areaz is matching at the front */
- 	if (rgnbegin == base) {
- 		rgn->area[i].base = end + 1;
- 		rgn->area[i].size -= size;
- 		return 0;
- 	}
- 
--	/* Check to see if the region is matching at the end */
-+	/* Check to see if the area is matching at the end */
- 	if (rgnend == end) {
- 		rgn->area[i].size -= size;
- 		return 0;
-@@ -372,11 +370,11 @@ long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 
- 	/*
- 	 * We need to split the entry -  adjust the current one to the
--	 * beginging of the hole and add the region after hole.
-+	 * beginning of the hole and add the area after hole.
- 	 */
- 	rgn->area[i].size = base - rgn->area[i].base;
- 
--	return lmb_add_region_flags(rgn, end + 1, rgnend - end,
-+	return lmb_add_area_flags(rgn, end + 1, rgnend - end,
- 				    rgn->area[i].flags);
- }
- 
-@@ -385,7 +383,7 @@ long lmb_reserve_flags(struct lmb *lmb, phys_addr_t base, phys_size_t size,
- {
- 	struct lmb_region *_rgn = &(lmb->reserved);
- 
--	return lmb_add_region_flags(_rgn, base, size, flags);
-+	return lmb_add_area_flags(_rgn, base, size, flags);
- }
- 
- long lmb_reserve(struct lmb *lmb, phys_addr_t base, phys_size_t size)
-@@ -399,9 +397,10 @@ static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
- 	unsigned long i;
- 
- 	for (i = 0; i < rgn->cnt; i++) {
--		phys_addr_t rgnbase = rgn->area[i].base;
--		phys_size_t rgnsize = rgn->area[i].size;
--		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
-+		phys_addr_t abase = rgn->area[i].base;
-+		phys_size_t asize = rgn->area[i].size;
+ 	for (i = 0; i < lmb->reserved.cnt; i++) {
+-		phys_addr_t upper = lmb->reserved.area[i].base +
+-			lmb->reserved.area[i].size - 1;
+-		if (addr >= lmb->reserved.area[i].base && addr <= upper)
+-			return (lmb->reserved.area[i].flags & flags) == flags;
++		struct lmb_area *area = &lmb->reserved.area[i];
++		phys_addr_t upper = area->base + area->size - 1;
 +
-+		if (lmb_addrs_overlap(base, size, abase, asize))
- 			break;
++		if (addr >= area->base && addr <= upper)
++			return (area->flags & flags) == flags;
  	}
  
-@@ -435,7 +434,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
- phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
- 			     phys_addr_t max_addr)
- {
--	long i, rgn;
-+	long i, area;
- 	phys_addr_t base = 0;
- 	phys_addr_t res_base;
- 
-@@ -457,15 +456,15 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
- 			continue;
- 
- 		while (base && lmbbase <= base) {
--			rgn = lmb_overlaps_region(&lmb->reserved, base, size);
--			if (rgn < 0) {
-+			area = lmb_overlaps_region(&lmb->reserved, base, size);
-+			if (area < 0) {
- 				/* This area isn't reserved, take it */
--				if (lmb_add_region(&lmb->reserved, base,
--						   size) < 0)
-+				if (lmb_add_area(&lmb->reserved, base, size)
-+				    < 0)
- 					return 0;
- 				return base;
- 			}
--			res_base = lmb->reserved.area[rgn].base;
-+			res_base = lmb->reserved.area[area].base;
- 			if (res_base < size)
- 				break;
- 			base = lmb_align_down(res_base - size, align);
-@@ -481,17 +480,17 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
-  */
- phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- {
--	long rgn;
-+	int area;
- 
--	/* Check if the requested address is in one of the memory regions */
--	rgn = lmb_overlaps_region(&lmb->memory, base, size);
--	if (rgn >= 0) {
-+	/* Check if the requested address is in one of the memory areas */
-+	area = lmb_overlaps_region(&lmb->memory, base, size);
-+	if (area >= 0) {
- 		/*
- 		 * Check if the requested end address is in the same memory
--		 * region we found.
-+		 * area we found.
- 		 */
--		if (lmb_addrs_overlap(lmb->memory.area[rgn].base,
--				      lmb->memory.area[rgn].size,
-+		if (lmb_addrs_overlap(lmb->memory.area[area].base,
-+				      lmb->memory.area[area].size,
- 				      base + size - 1, 1)) {
- 			/* ok, reserve the memory */
- 			if (lmb_reserve(lmb, base, size) >= 0)
-@@ -505,12 +504,11 @@ phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- /* Return number of bytes from a given address that are free */
- phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr)
- {
--	int i;
--	long rgn;
-+	int i, area;
- 
--	/* check if the requested address is in the memory regions */
--	rgn = lmb_overlaps_region(&lmb->memory, addr, 1);
--	if (rgn >= 0) {
-+	/* check if the requested address is in the memory areas */
-+	area = lmb_overlaps_region(&lmb->memory, addr, 1);
-+	if (area >= 0) {
- 		for (i = 0; i < lmb->reserved.cnt; i++) {
- 			if (addr < lmb->reserved.area[i].base) {
- 				/* first reserved range > requested address */
+ 	return 0;
 -- 
 2.42.0.283.g2d96d420d3-goog
 
