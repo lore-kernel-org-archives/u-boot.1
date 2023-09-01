@@ -4,57 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D2F7CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:50:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E2DCA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:50:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F7618685B;
-	Fri,  1 Sep 2023 11:50:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B110B868B8;
+	Fri,  1 Sep 2023 11:50:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693561820;
-	bh=clyzaFTbQV+M5yU9jenWfeaAIdFMw+dSWkuzWf2jPj8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=JBHmFAs7zQtBl4jxXodjcKbSOWVDIWYBcklyhCwNLkxnsw1a2JLQrw4KW/8DJLu4M
-	 OTTrhMSnO33jEeHamoA1WxYM1UTve/FOZU1KPwx2LoSGMXVX1exQiKhRatZXcCnmxW
-	 8xhT/h505FcCvWH4let6fbowK3haakq2GcvoiJjVPq4oiUwDVAiiO+QYQH5pppIZOP
-	 0QVzN6oTsaABPFjleVV7N5TAknC/iJmTIM0FHrpq0W0s0kL7LqQD1KeobMyq9otsGk
-	 xMhWDdJ8aaOXuZK25gjqMiPCsNkzEiVc717iJGT2Zcz2MTe8oL4SQ8C7jxXTDIN40j
-	 yIZyIj3r0U5Mw==
+	s=phobos-20191101; t=1693561821;
+	bh=VkL0ab5jC6yf8hC311P+7a3oBCHZZxGZn+a/0lBh1Lw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=x4xPe3yCftXxdOTGfjZ9Dx1m71Byjxs62LGFovMdRylScOws5Vunr1JUuydx+gZEF
+	 zxOA1cLo/D/JXi2XeEYc6qlf/u4XAflRdv6PVI42AjxnnTBFAyrjERFjQCdZiqQZuH
+	 z4sVgFtVo9cDHdSzWOZCo+pERmW1zUJoiHceZ8cEk0osyXBdCbJIxI5mmMmmPKKDzW
+	 SRYqoqVk+MLnxZpcfn7g84zHm8ykFme3YsikkbwrRzSDOHSbVMSvD1aPmyNJWm4QV3
+	 gbuECDNLG+bXMWrvuwvbtmplwfzgYFCNjqfDkiC+4+DPcyxJpC1pNvWHmkER6Tu4FV
+	 X4+zd0gfdd/jQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A17CD8683C;
- Fri,  1 Sep 2023 11:50:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5187886852;
+ Fri,  1 Sep 2023 11:50:19 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1693561819;
- bh=clyzaFTbQV+M5yU9jenWfeaAIdFMw+dSWkuzWf2jPj8=;
- h=From:To:Cc:Subject:Date:From;
- b=jQJRPgEJWsF0wzXrHblqYtr3IxfJDBPNA26+8r74eEjnCDrstMd6NrgPtbeqWrNBe
- Dwl1NkDJys+nRnLmWlkYxEZowE6ALJMDv2OEiRkWSo1ReCvEV5RP4sYSN8ZSMhqHmT
- CNCQbLc7nBBGaUUNjoVovFxhYn7crPK6WcNpGacrNK+gA7Xgz1b38VaRQrpm9zG3Ug
- SNGi/vs3FhEBQbGWLUCnolwup9o7NPyl/ELCd8ivUqjhtfWY9SaPjHrmLTDFEsYPCP
- fnzuS2jkV/epU7WudA5hdrRhV/DdP5qfjZgQWYJ8ZpQlVfm/SY+xz8nBPDAvO4xZP7
- /ZAGwvKPI+HVg==
+ bh=VkL0ab5jC6yf8hC311P+7a3oBCHZZxGZn+a/0lBh1Lw=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=y5Ta73kYq78xmv5H0KFxxGghv2XFzRHViasgYw/CLiGueNQRaaj/fpiX5Wdd9Quz1
+ QJoRfWsUurLWwdtr0Ik+t+xP76OVLyn4XDfBjQSDBdNcFK8+encclMbBF9TC7xzLyU
+ 6P0gXXJzmLafF2Of42iJc2axBfHfmjjAiGHIdN0NtHQkLRlkZ7bmxqLm3XsWPmR/o/
+ UCBcKUk0DiDzpmZ1IbE0kaSxoOKkFm5sPnK8WAVfLvYGC2yaEs7YMtVeXN32KoDstJ
+ AQtYepqXYVokoUaSUxYeIA6AMOoyt2eWy+O+DYnA25CE30FwOSQFkNoBDc1KuB6cOV
+ pVO6LfSUvJMIQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev <dimorinny@google.com>,
+ Simon Glass <sjg@chromium.org>, Angus Ainslie <angus@akkea.ca>,
+ Dmitrii Merkurev <dimorinny@google.com>,
  Eddie Cai <eddie.cai.linux@gmail.com>,
  Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
  Miquel Raynal <miquel.raynal@bootlin.com>, Nishanth Menon <nm@ti.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, kernel@puri.sm
-Subject: [PATCH v2 01/17] dm: usb: udc: Factor out plain udevice handler
- functions
-Date: Fri,  1 Sep 2023 11:49:47 +0200
-Message-Id: <20230901095003.352930-1-marex@denx.de>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Stefan Roese <sr@denx.de>,
+ kernel@puri.sm
+Subject: [PATCH v2 02/17] usb: sandbox: Add DM_USB_GADGET support
+Date: Fri,  1 Sep 2023 11:49:48 +0200
+Message-Id: <20230901095003.352930-2-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230901095003.352930-1-marex@denx.de>
+References: <20230901095003.352930-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,12 +76,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pull the functionality of UDC uclass that operates on plain udevice
-and does not use this dev_array array into separate functions and
-expose those functions, so that as much code as possible can be
-switched over to these functions and the dev_array can be dropped.
+Remove local usb_gadget_register_driver()/usb_gadget_unregister_driver()
+implementation which is implemented in udc-core.c instead if DM_USB_GADGET
+is enabled. Add no-op dm_usb_gadget_handle_interrupts() implementation.
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: Angus Ainslie <angus@akkea.ca>
@@ -96,145 +99,36 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Stefan Roese <sr@denx.de>
 Cc: kernel@puri.sm
 ---
-V2: Add RB from Mattijs
+V2: Add RB from Mattijs, Simon
 ---
- drivers/usb/gadget/udc/Makefile     |  2 +-
- drivers/usb/gadget/udc/udc-uclass.c | 57 +++++++++++++++++++++++++----
- include/linux/usb/gadget.h          | 17 +++++++++
- 3 files changed, 68 insertions(+), 8 deletions(-)
+ drivers/usb/host/usb-sandbox.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/usb/gadget/udc/Makefile b/drivers/usb/gadget/udc/Makefile
-index 95dbf0c82ee..467c566f6d3 100644
---- a/drivers/usb/gadget/udc/Makefile
-+++ b/drivers/usb/gadget/udc/Makefile
-@@ -7,4 +7,4 @@ obj-$(CONFIG_USB_DWC3_GADGET)	+= udc-core.o
- endif
- 
- obj-$(CONFIG_$(SPL_)DM_USB_GADGET)	+= udc-core.o
--obj-$(CONFIG_$(SPL_)DM) += udc-uclass.o
-+obj-y += udc-uclass.o
-diff --git a/drivers/usb/gadget/udc/udc-uclass.c b/drivers/usb/gadget/udc/udc-uclass.c
-index de8861829c7..b4271b4be9f 100644
---- a/drivers/usb/gadget/udc/udc-uclass.c
-+++ b/drivers/usb/gadget/udc/udc-uclass.c
-@@ -14,6 +14,37 @@
- #if CONFIG_IS_ENABLED(DM_USB_GADGET)
- #define MAX_UDC_DEVICES 4
- static struct udevice *dev_array[MAX_UDC_DEVICES];
-+
-+int udc_device_get_by_index(int index, struct udevice **udev)
-+{
-+	struct udevice *dev = NULL;
-+	int ret;
-+
-+	ret = uclass_get_device_by_seq(UCLASS_USB_GADGET_GENERIC, index, &dev);
-+	if (!ret && dev) {
-+		*udev = dev;
-+		return 0;
-+	}
-+
-+	ret = uclass_get_device(UCLASS_USB_GADGET_GENERIC, index, &dev);
-+	if (!ret && dev) {
-+		*udev = dev;
-+		return 0;
-+	}
-+
-+	pr_err("No USB device found\n");
-+	return -ENODEV;
-+}
-+
-+int udc_device_put(struct udevice *udev)
-+{
-+#if CONFIG_IS_ENABLED(DM_DEVICE_REMOVE)
-+	return device_remove(udev, DM_REMOVE_NORMAL);
-+#else
-+	return -ENOSYS;
-+#endif
-+}
-+
- int usb_gadget_initialize(int index)
- {
- 	int ret;
-@@ -23,13 +54,10 @@ int usb_gadget_initialize(int index)
- 		return -EINVAL;
- 	if (dev_array[index])
- 		return 0;
--	ret = uclass_get_device_by_seq(UCLASS_USB_GADGET_GENERIC, index, &dev);
-+	ret = udc_device_get_by_index(index, &dev);
- 	if (!dev || ret) {
--		ret = uclass_get_device(UCLASS_USB_GADGET_GENERIC, index, &dev);
--		if (!dev || ret) {
--			pr_err("No USB device found\n");
--			return -ENODEV;
--		}
-+		pr_err("No USB device found\n");
-+		return -ENODEV;
- 	}
- 	dev_array[index] = dev;
- 	return 0;
-@@ -42,7 +70,7 @@ int usb_gadget_release(int index)
- 	if (index < 0 || index >= ARRAY_SIZE(dev_array))
- 		return -EINVAL;
- 
--	ret = device_remove(dev_array[index], DM_REMOVE_NORMAL);
-+	ret = device_remove(dev_array[index]);
- 	if (!ret)
- 		dev_array[index] = NULL;
+diff --git a/drivers/usb/host/usb-sandbox.c b/drivers/usb/host/usb-sandbox.c
+index d1103dcb2e9..582f72d00c1 100644
+--- a/drivers/usb/host/usb-sandbox.c
++++ b/drivers/usb/host/usb-sandbox.c
+@@ -124,6 +124,12 @@ static int sandbox_submit_int(struct udevice *bus, struct usb_device *udev,
  	return ret;
-@@ -57,10 +85,25 @@ int usb_gadget_handle_interrupts(int index)
- 		return -EINVAL;
- 	return dm_usb_gadget_handle_interrupts(dev_array[index]);
  }
+ 
++#if CONFIG_IS_ENABLED(DM_USB_GADGET)
++int dm_usb_gadget_handle_interrupts(struct udevice *dev)
++{
++	return 0;
++}
 +#else
-+/* Backwards hardware compatibility -- switch to DM_USB_GADGET */
-+static int legacy_index;
-+int udc_device_get_by_index(int index, struct udevice **udev)
-+{
-+	legacy_index = index;
-+	return board_usb_init(index, USB_INIT_DEVICE);
-+}
-+
-+int udc_device_put(struct udevice *udev)
-+{
-+	return board_usb_cleanup(legacy_index, USB_INIT_DEVICE);
-+}
- #endif
+ int usb_gadget_handle_interrupts(int index)
+ {
+ 	return 0;
+@@ -144,6 +150,7 @@ int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
  
-+#if CONFIG_IS_ENABLED(DM)
- UCLASS_DRIVER(usb_gadget_generic) = {
- 	.id		= UCLASS_USB_GADGET_GENERIC,
- 	.name		= "usb",
- 	.flags		= DM_UC_FLAG_SEQ_ALIAS,
- };
+ 	return 0;
+ }
 +#endif
-diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
-index 2f694fc25c1..5e9a6513d5b 100644
---- a/include/linux/usb/gadget.h
-+++ b/include/linux/usb/gadget.h
-@@ -1006,6 +1006,23 @@ extern void usb_ep_autoconfig_reset(struct usb_gadget *);
  
- extern int usb_gadget_handle_interrupts(int index);
- 
-+/**
-+ * udc_device_get_by_index() - Get UDC udevice by index
-+ * @index: UDC device index
-+ * @udev: UDC udevice matching the index (if found)
-+ *
-+ * Return: 0 if Ok, -ve on error
-+ */
-+int udc_device_get_by_index(int index, struct udevice **udev);
-+
-+/**
-+ * udc_device_put() - Put UDC udevice
-+ * @udev: UDC udevice
-+ *
-+ * Return: 0 if Ok, -ve on error
-+ */
-+int udc_device_put(struct udevice *udev);
-+
- #if CONFIG_IS_ENABLED(DM_USB_GADGET)
- int usb_gadget_initialize(int index);
- int usb_gadget_release(int index);
+ static int sandbox_alloc_device(struct udevice *dev, struct usb_device *udev)
+ {
 -- 
 2.40.1
 
