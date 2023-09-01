@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 877A2CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:52:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FF7CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 09:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ACED86995;
+	by phobos.denx.de (Postfix) with ESMTP id 5E4DB869D1;
 	Fri,  1 Sep 2023 11:50:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1693561829;
-	bh=acj+LXZuJtBpUYmYGQUTtQE9NkArW+eaalUeZ48AgCA=;
+	bh=W3W1rXXO4rg5Z2ojfkuLXsMeYDVklxaxEAYxcNNrs24=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Bs+0NCXMDkgFCButxSuDxsWqtwj/X+JMZZ8z/cj3ybW25nd9lyoMgwt2wNveKUT43
-	 1/hOZ7n7SkNYGiqtCinu376LFniEEmo996RyzbKwGMpF6In5dod8Rqw15ODUq4/5AQ
-	 n+cHyXJ2mSICYbjKklPvUWW8OHSgl6i5JATYvL1pnzqIBU6irpPEdOQpREZLcldDiD
-	 I5fLm503veXfFZo/ebC9Bbe3YwiGjA7VEDBCKgWbUxCpbbd4HBI/JyxbzXwRgIXz72
-	 P2TcHbvVXjOYXceo1JlHRHeHVtr1xVC288rsJ05iZDuDPM825N74ukPQFOrAzXevOB
-	 NueHImPFTCMAQ==
+	b=zn0TJ7evjzhFbrVWgSqlSuR8uzECz7GW5ELYX82AGqm7NKHoFgKxwnI5hNcpX8viv
+	 z/oHbHt251vuZ2gVpNT5uAyycTlrikIRSHM3j4c2mijV44Jy5C7T5j0yNbsD/PfP//
+	 ndVUqFAGD8FlXZRqYtHGw2NFqDhSPfGBTinbH5X90+k3bHne588wKTRUQMB+LZh/BQ
+	 m2bN88NxkcqAP/bl1/17r2iT8ssnhG7VoTktbKtSQyMpY1JJYyW1QYeucdK/WkfV4A
+	 2Rvw1cBln/zSRxa7G2k6gD66fIZGeG10AXmIzhmLDXg8k8obQANjqTk1fW58EAFLFH
+	 wNaaQJyFwgIJQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D60E786768;
- Fri,  1 Sep 2023 11:50:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7CB78869B1;
+ Fri,  1 Sep 2023 11:50:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693561827;
- bh=acj+LXZuJtBpUYmYGQUTtQE9NkArW+eaalUeZ48AgCA=;
+ s=phobos-20191101; t=1693561828;
+ bh=W3W1rXXO4rg5Z2ojfkuLXsMeYDVklxaxEAYxcNNrs24=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pxDqIp1XYZiLNUKwtf6L/giu/nK6mLJQV6fDUp/q/JmqOL7epn9Yf2pIh3Z5zOX7T
- 6wA89nrGhLVu8joH3gsFLKgbTzvjMPa9zhZtBmke+0t5FxAtZT58hTR2H9MfR3GKKa
- W1zX/4AH5RYz4dRnA+DGfwTL9XfRzooFMs6jI9+rX9oLvwQq9sbCPSMx4Pa/KRMiot
- Alg3G85sr/8Y6qK9VGS3/SdGEX96+W6P6DOALEonNLYkpKPydu4lzmUaK6ScziQl0X
- NOKritHpFadwIxgMNFWKGsIGnkk9mEhS7ybKUVrFprvmzGa2izq6d8qpFQ32dU3qhk
- ihBY24OT53KYQ==
+ b=fNsRDJqDz2yHBrGx09w4/1SuLhBTGcqSKLQ1hM7TQ/dCld3kr1LURFlvn+BaZGGRF
+ TY012R+bRZxbaWGQRrfC+GMBgejzzdLR8JioirnqsKslWgRGtqTeDtKEswpHdkTGIg
+ 7NrJGluDY3swjEsLAtck3Xu+EO2Mc99Gozf7txZaROOPJfQrMIIJxTZd1XOuTI65Sj
+ khoZGCNQp/okJm+bFkgolWkpWpagFMT+/dr0DnROaHKhYxoRk6Bp0jqtCv3JUtTa6o
+ AX0IJ/XmC4nSspwsJkgkmMsZSBpaOBsocGmLF87j7/0Tfl8QCltq2Hu81iMGv96UuG
+ 2TltAr6TGOSqw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
@@ -51,10 +51,10 @@ Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, kernel@puri.sm
-Subject: [PATCH v2 14/17] usb: gadget: acm: Use plain udevice for UDC
+Subject: [PATCH v2 15/17] usb: gadget: ether: Use plain udevice for UDC
  controller interaction
-Date: Fri,  1 Sep 2023 11:50:00 +0200
-Message-Id: <20230901095003.352930-14-marex@denx.de>
+Date: Fri,  1 Sep 2023 11:50:01 +0200
+Message-Id: <20230901095003.352930-15-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230901095003.352930-1-marex@denx.de>
 References: <20230901095003.352930-1-marex@denx.de>
@@ -96,62 +96,96 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Stefan Roese <sr@denx.de>
 Cc: kernel@puri.sm
 ---
-V2: No change
+V2: Use udev->parent for UDC access
 ---
- drivers/usb/gadget/f_acm.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ drivers/usb/gadget/ether.c | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
-index b2ddd1ada8b..de42e0189e8 100644
---- a/drivers/usb/gadget/f_acm.c
-+++ b/drivers/usb/gadget/f_acm.c
-@@ -51,7 +51,7 @@ struct f_acm {
- #define ACM_CTRL_RTS	BIT(1)	/* unused with full duplex */
- #define ACM_CTRL_DTR	BIT(0)	/* host is ready for data r/w */
- 
--	int controller_index;
-+	struct udevice *udc;
- };
- 
- static struct f_acm *default_acm_function;
-@@ -489,7 +489,7 @@ static void __acm_tx(struct f_acm *f_acm)
- 	int len, ret;
- 
- 	do {
--		usb_gadget_handle_interrupts(f_acm->controller_index);
-+		dm_usb_gadget_handle_interrupts(f_acm->udc);
- 
- 		if (!(f_acm->handshake_bits & ACM_CTRL_DTR))
- 			break;
-@@ -520,7 +520,7 @@ static bool acm_connected(struct stdio_dev *dev)
- 	struct f_acm *f_acm = stdio_to_acm(dev);
- 
- 	/* give a chance to process udc irq */
--	usb_gadget_handle_interrupts(f_acm->controller_index);
-+	dm_usb_gadget_handle_interrupts(f_acm->udc);
- 
- 	return f_acm->connected;
+diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+index 5ff06d3814b..11b1a6221b3 100644
+--- a/drivers/usb/gadget/ether.c
++++ b/drivers/usb/gadget/ether.c
+@@ -1880,8 +1880,10 @@ static void eth_start(struct eth_dev *dev, gfp_t gfp_flags)
+ 	}
  }
-@@ -543,7 +543,10 @@ static int acm_add(struct usb_configuration *c)
- 	f_acm->usb_function.descriptors = acm_fs_function;
- 	f_acm->usb_function.hs_descriptors = acm_hs_function;
- 	f_acm->usb_function.setup = acm_setup;
--	f_acm->controller_index = 0;
-+
-+	status = udc_device_get_by_index(0, &f_acm->udc);
-+	if (status)
-+		return status;
  
- 	status = usb_add_function(c, &f_acm->usb_function);
- 	if (status) {
-@@ -567,7 +570,7 @@ static int acm_stdio_tstc(struct stdio_dev *dev)
+-static int eth_stop(struct eth_dev *dev)
++static int eth_stop(struct udevice *udev)
  {
- 	struct f_acm *f_acm = stdio_to_acm(dev);
++	struct ether_priv *priv = dev_get_priv(udev);
++	struct eth_dev *dev = &priv->ethdev;
+ #ifdef RNDIS_COMPLETE_SIGNAL_DISCONNECT
+ 	unsigned long ts;
+ 	unsigned long timeout = CONFIG_SYS_HZ; /* 1 sec to stop RNDIS */
+@@ -1895,7 +1897,7 @@ static int eth_stop(struct eth_dev *dev)
+ 		/* Wait until host receives OID_GEN_MEDIA_CONNECT_STATUS */
+ 		ts = get_timer(0);
+ 		while (get_timer(ts) < timeout)
+-			usb_gadget_handle_interrupts(0);
++			dm_usb_gadget_handle_interrupts(udev->parent);
+ #endif
  
--	usb_gadget_handle_interrupts(f_acm->controller_index);
-+	dm_usb_gadget_handle_interrupts(f_acm->udc);
+ 		rndis_uninit(dev->rndis_config);
+@@ -2300,7 +2302,7 @@ static int usb_eth_start(struct udevice *udev)
+ 			pr_err("The remote end did not respond in time.");
+ 			goto fail;
+ 		}
+-		usb_gadget_handle_interrupts(0);
++		dm_usb_gadget_handle_interrupts(udev->parent);
+ 	}
  
- 	return (f_acm->rx_buf.size > 0);
+ 	packet_received = 0;
+@@ -2370,7 +2372,7 @@ static int usb_eth_send(struct udevice *udev, void *packet, int length)
+ 			printf("timeout sending packets to usb ethernet\n");
+ 			return -1;
+ 		}
+-		usb_gadget_handle_interrupts(0);
++		dm_usb_gadget_handle_interrupts(udev->parent);
+ 	}
+ 	free(rndis_pkt);
+ 
+@@ -2400,13 +2402,13 @@ static void usb_eth_stop(struct udevice *udev)
+ 	 * 2) 'pullup' callback in your UDC driver can be improved to perform
+ 	 * this deinitialization.
+ 	 */
+-	eth_stop(dev);
++	eth_stop(udev);
+ 
+ 	usb_gadget_disconnect(dev->gadget);
+ 
+ 	/* Clear pending interrupt */
+ 	if (dev->network_started) {
+-		usb_gadget_handle_interrupts(0);
++		dm_usb_gadget_handle_interrupts(udev->parent);
+ 		dev->network_started = 0;
+ 	}
+ }
+@@ -2416,7 +2418,7 @@ static int usb_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+ 	struct ether_priv *priv = dev_get_priv(dev);
+ 	struct eth_dev *ethdev = &priv->ethdev;
+ 
+-	usb_gadget_handle_interrupts(0);
++	dm_usb_gadget_handle_interrupts(dev->parent);
+ 
+ 	if (packet_received) {
+ 		if (ethdev->rx_req) {
+@@ -2467,7 +2469,7 @@ int usb_ether_init(void)
+ 		return ret;
+ 	}
+ 
+-	return usb_gadget_initialize(0);
++	return 0;
+ }
+ 
+ static int usb_eth_probe(struct udevice *dev)
+@@ -2528,7 +2530,7 @@ static int usb_eth_remove(struct udevice *dev)
+ 
+ static int usb_eth_unbind(struct udevice *dev)
+ {
+-	usb_gadget_release(0);
++	udc_device_put(dev->parent);
+ 
+ 	return 0;
  }
 -- 
 2.40.1
