@@ -4,77 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ECEDCA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 06:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DF75CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 06:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAED28669D;
-	Fri,  1 Sep 2023 08:22:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A3DED865A2;
+	Fri,  1 Sep 2023 08:31:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Bhr7fW3f";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Den3az+r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81B9B80750; Fri,  1 Sep 2023 08:22:47 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 522E88669D; Fri,  1 Sep 2023 08:31:27 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2060c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::60c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5ACE8669D
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 08:22:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B38786564
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 08:31:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693549359; x=1694154159; i=xypron.glpk@gmx.de;
- bh=j8iE1E669NvKxRP4bmtO4Rr0tGdfTci+h4ofZsCPYLo=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=Bhr7fW3fyIrHeuo/Bhd0td+4+u3yR/oML+0SZudK6jaLbmp0HUH6FKIwpyKDblGsfYnKVED
- XfIgxKMdYkZP+pA6M8bymeDg4mXu46mPTQvMlsy7bCfUuPxmR+pcvJkChelIB29Tx/P91zmnz
- mxFj4A5n0PWUU8QNvS+y98uUHgj6kG7r6JARbsC4NE9v07JuAj0zT8EoAIauRGudURcqRozp2
- xXpXITbU5Z51H7McubGnTN+8vW6dc+ow2x9LVoTWyk+TVMmtK2Ycu8nEWCClEB7DRJEFoVXgy
- ZGtOYmvsFTKEj6E41nU1r3JvcmN7khSWPfVUVNcywneELKq2Pszg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([62.143.244.162]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1pgBqz0yfG-013gX1; Fri, 01
- Sep 2023 08:22:39 +0200
-Message-ID: <6e6d9d77-dd54-4705-bd6d-b7be6d45757e@gmx.de>
-Date: Fri, 1 Sep 2023 08:23:36 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OWys28ncnSAvqlB3+zhwvzLtorO6waQeKRg/baQ/Rq40FgKBV/J+RwIJ46PZCyWoc+rxi05I02B2c3Ckw0Cuo4D32+QxGrDAYQkaV0spZmUX5xU7V65Q7prwhas6b0/oh21tEsQxaRCThTDoy98opImmdfkrRcA2/yozgJwkP6/U7NZSyPFEpujrNEdxL1JwSS5wlXqlcM9+aZd3Lk48iBIPJLTXQq5dU9oDnGhxNEyxnfZK/F/2kLSJOoODXGqVwRN78P47CIFWiLcQrB9J+DAfGmglZ5s5VvNU5c2SprpSTfCyzBADv+A7PbQIHgq9vWnbuVIeA4CLkKP6+CM21w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S2Pju2fKF8590MMcGWmEE5cO2nfvibDGTS8GNNrhC5w=;
+ b=XoAVAal4+mEBfkkqL4NzRDW0nAiCVUKVN2gzNak2cIo+5eHYk7wW7w7JZ93n1fr1s5EmbrH/yuug4M/HCo+TzzhQogVZW1n/3+z6O2L/hLyarMgFtIuBcvsJb3Ss9GCnEwV7uWtHeoUqIa6EIQDDBonnV9JA2Fsm64TNAlVqdGGdKfGz3PJe27oOYlY1nJlxjAOt73OuBw+CQ5o21T+QPuYByyuHROd0P+11mjLhfDHuUuznm/+aWggXfcHJowRPJFU5lWzWQHVOP2S85eL1ix+Lagy81ZeSM73ep+Gp6CMuXTGBPEnpirm3PKoxKnpQaXAyHZMnEBHXuSD99a6M+g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=samsung.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S2Pju2fKF8590MMcGWmEE5cO2nfvibDGTS8GNNrhC5w=;
+ b=Den3az+rXjauZ6XQlNk8HT/d2lEhtFDYt7AzGZr98E4orXQ4OzjZFFsl6puHlIVyFhI5Y3ZuCA2FLrfszUQa5jQEo1uZB0htwC7IyUbHHP8vm30vSSzZx+hmkUSA9FsjM2aCgoQoBPAIUdrHDz8ou0npmLFYVekhoQHYL+SEUxU=
+Received: from BYAPR03CA0026.namprd03.prod.outlook.com (2603:10b6:a02:a8::39)
+ by CH3PR12MB8972.namprd12.prod.outlook.com (2603:10b6:610:169::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.22; Fri, 1 Sep
+ 2023 06:31:16 +0000
+Received: from CO1PEPF000044F0.namprd05.prod.outlook.com
+ (2603:10b6:a02:a8:cafe::b6) by BYAPR03CA0026.outlook.office365.com
+ (2603:10b6:a02:a8::39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.25 via Frontend
+ Transport; Fri, 1 Sep 2023 06:31:15 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000044F0.mail.protection.outlook.com (10.167.241.70) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6745.16 via Frontend Transport; Fri, 1 Sep 2023 06:31:15 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
+ 2023 01:31:13 -0500
+Message-ID: <9a3442dc-049d-5c06-5803-d0f5381a1fed@amd.com>
+Date: Fri, 1 Sep 2023 08:31:12 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/14] fs: Fix a confusing error about overlapping
- regions
-Content-Language: en-US, de-DE
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sjoerd Simons <sjoerd@collabora.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20230901011357.2482203-1-sjg@chromium.org>
- <20230901011357.2482203-15-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230901011357.2482203-15-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:mYatLFnzvr985l7cLK8z3SKYXWSAyC4k7mOTAa7B6KtW8h8Lw+o
- QLjLboTznezF1OmeOpIFhnjk2VD06b1D3TRTqFnPfLUrjt/fQMM7wqdYOeS82L9+qNg7GeS
- ecJ7bBhdwXtbdWA5mhjlajIa2MdjkCO3jW8JuNWvZY2VO8QvBnr2auPctosZvlWaJcAa9EX
- QEbbLMVwaw4XZHVgqMleA==
-UI-OutboundReport: notjunk:1;M01:P0:JIRW5oNzpmg=;WD9L/ji7JyDaqz+gsjOO0IOxCn5
- vsafCyBhDS1+jZW3YdsSIZ02ETJPPJyZlEiQ++y/IdypFYRFxkgNE3xkqUCkyRjvqsHdLLS/T
- DrYGZp9fyO8MQCEC7m9zXfOJcjF9r9D/tzmJwZ3Uoj5M4JYnDqiHo5vi9yGsgL2L+zErDVgFj
- Ck2Dq54zpSd/5nw61GSRiTSdygCAW8tJCrjC/gz8Hjv/EPqTmyjewmw0lEy39ciA4tRTqIzo6
- LZoyhhYpYqorf941qE5MW0JagWBJB80yH6DUH6yLGxIVKC8J9LRb0kvGfMX0dGa6X6dmBE0jY
- fa3jiOa3uU34Ga0Iwt3qvAGfACrQeRNNRcthA/93fNNmAOtnvmfLtZcsLBXsJWLG5CbInifc/
- jG/t8OF1YgsrgGmVKWuPRvy+5l9Id+tuee3iXsbCLrPC12ilEuScMxkeJYK3S1t7wwEpJshpM
- dw2s09/BLqWZhEsmHhj6dT5aTDoAbtFdqbmNmZmJv4AzaHDsxdaDdgXEGdwovX+aSAsE2wxJ5
- 8+MacHX1d2a8goQb7ow+JeXrgPAx4pUwEphJSTxflcrIMPTiL3W353y+xch/+i1m0Jdx4C3Pc
- HWERej1YtQOmSUtJze1VyQbtO6vmyu4ulIHst/uTAWnS0gxX6F1/ceQkBkJTBg7wQi3vqobZo
- tGCpqV49ycwcO4lwU/QZTnC0W+hhbhgHQto7osyyZcHjx1sssZh7XYTvkx5tDghFHuc8UrT+a
- bZXZ2C/Cac0XdoTklT4QOgoPaiKFw1b78kiqUppB++77olXxBq48CeMrgl8WpPF2CU+YCYFIr
- 3nKRDKhiv+iVcsREB3i5m4mP6FP0a5jeZyJ2mEh3m6fE/7GFMekw+b6868hQ+BtTMRyiu//Ey
- pY8ln7L8fo3FxaPju+gRoyJYMlWmmA4GvvtdhbzliCACaBW4Hp+Yau7APZJ2fNd6fe42N53Zd
- bv/3C8Hn9Pb2r+cbfzhG/7hmr94=
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH v2] fpga: define dummy fpga_load function for debug build
+Content-Language: en-US
+To: Chanho Park <chanho61.park@samsung.com>, <u-boot@lists.denx.de>
+CC: Eugen Hristev <eugen.hristev@collabora.com>, Simon Glass <sjg@chromium.org>
+References: <CGME20230831075300epcas2p4dabae61e98d5f49fc1fffc5c62df9050@epcas2p4.samsung.com>
+ <20230831075247.137501-1-chanho61.park@samsung.com>
+From: Michal Simek <michal.simek@amd.com>
+In-Reply-To: <20230831075247.137501-1-chanho61.park@samsung.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F0:EE_|CH3PR12MB8972:EE_
+X-MS-Office365-Filtering-Correlation-Id: b09e8474-c057-42b0-41b9-08dbaab50af0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: KaOpMnlaMUOiumZVq2c5WkFAMj8S3PLT8+ibKYZHN1a8im0tt6tRWER0ff9nf4X0ZXFWAWZwY4DITfVGz9km5u89nRuXd1bD/BUS9mizo71DLVG8juMsoigqJo5/7PBU4LvYPTU4gC235tAIGFc87Km44N0WyJu8yCqHyJFc2o1RO59gmE3zzvnJGMlRM/ZYgJQsg3tXHqtu5S/YjlfgiRfUNpOMNa0QBqs++1viveDmyfOqtqPz3erjZGwUIMcTJE2BIdFlSOT/ZDSDapreKZd420VjPmGEjaLtitTTN0OJBA8Kh0NFhnZ2OgU1M4TcGa6uGkev7n4JLkmZpCBuXnfoitQUWSbBPqAZ8NgPVoYQvgLMVomAZcl/nEATy8ep805HE2Pxd0BWBTa4XjzpXLBdNJ23L/7n0hwwPjLOTSVhrgD6ZaxEu6GbQ17lbRAoXdwpDc+33DAoyvIzK4oT2Lql1mxkQpW6CtOUYnLqFZE+WAUwu8ze/phyMknLcvads0fw+RaoSL7LX+yH1Poo4c84arWMMm7JzPAri6mdSiA/03Wfgr9I5P8Mubl76vt/U06p9RU58sJjwBV0Wdv8mM7C8YNTmdohm+ZNmWV0mJ9/E7eKzIPXjUOXyWdkUUL17Q5rstDJcheo/tbfthZEFnznDCsUM6i/V5oIYDUJl8QOTpuyIKi6qei/sQde4VsC3jlmwkdkhwVI/vMEVNHGuKZ6tiEBUr1nR3NgJ5BT8M54qO/Xfdxc3uaE4LxmBz1bcQ0b8b5p3sbw8eKUmzBJ4uWtDnuCNOVp2dbL6hV6MJDU1928T727Q5PNez5s7lEO
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(396003)(39860400002)(136003)(376002)(346002)(1800799009)(451199024)(82310400011)(186009)(46966006)(40470700004)(36840700001)(2906002)(5660300002)(86362001)(53546011)(316002)(16576012)(478600001)(2616005)(4326008)(47076005)(36860700001)(8676002)(31686004)(31696002)(44832011)(8936002)(26005)(40460700003)(82740400003)(40480700001)(41300700001)(336012)(426003)(36756003)(356005)(81166007)(70206006)(70586007)(110136005)(83380400001)(54906003)(16526019)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 06:31:15.0971 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b09e8474-c057-42b0-41b9-08dbaab50af0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8972
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,292 +122,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/23 03:13, Simon Glass wrote:
-> When lmb runs out of space in its internal tables, it gives errors on
-> every fs load operation. This is horribly confusing, as the poor user
-> tries different memory regions one at a time.
->
-> Use the updated API to check the error code and print a helpful message.
-> Also, allow the operation to proceed.
->
-> Update the tests accordingly.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+
+On 8/31/23 09:52, Chanho Park wrote:
+> This fixes below build error when CC_OPTIMIZE_FOR_DEBUG is enabled and
+> CONFIG_FPGA or CONFIG_SPL_FPGA are not enabled.
+> When CC_OPTIMIZE_FOR_DEBUG is enabled, unused code will not be optimized
+> out. Hence, fpga_load function must have a dummy implementation to avoid
+> the build error.
+> 
+> ../common/spl/spl_fit.c:591: undefined reference to `fpga_load'
+> collect2: error: ld returned 1 exit status
+> 
+> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 > ---
->
-> (no changes since v1)
->
->   fs/fs.c        |  7 ++++++-
->   include/lmb.h  | 19 ++++++++++++++++++-
->   lib/lmb.c      | 20 +++++++++++---------
->   test/lib/lmb.c | 42 ++++++++++++++++++++----------------------
->   4 files changed, 55 insertions(+), 33 deletions(-)
->
-> diff --git a/fs/fs.c b/fs/fs.c
-> index 2b815b1db0fe..1a84cb410bf9 100644
-> --- a/fs/fs.c
-> +++ b/fs/fs.c
-> @@ -569,8 +569,13 @@ static int fs_read_lmb_check(const char *filename, =
-ulong addr, loff_t offset,
->   	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
->   	lmb_dump_all(&lmb);
->
-> -	if (lmb_alloc_addr(&lmb, addr, read_len) =3D=3D addr)
-> +	ret =3D lmb_alloc_addr(&lmb, addr, read_len, NULL);
-> +	if (!ret)
->   		return 0;
-> +	if (ret =3D=3D -E2BIG) {
-> +		log_warning("Reservation tables exhausted: see CONFIG_LMB_USE_MAX_REG=
-IONS\n");
-> +		return 0;
+> Change from v1:
+> - Rewrite the commit message to include a CONFIG_FPGA
+> 
+>   include/fpga.h | 8 ++++++++
+>   1 file changed, 8 insertions(+)
+> 
+> diff --git a/include/fpga.h b/include/fpga.h
+> index ed688cc0fa3b..44f2755a3f10 100644
+> --- a/include/fpga.h
+> +++ b/include/fpga.h
+> @@ -60,8 +60,16 @@ int fpga_add(fpga_type devtype, void *desc);
+>   int fpga_count(void);
+>   const fpga_desc *const fpga_get_desc(int devnum);
+>   int fpga_is_partial_data(int devnum, size_t img_len);
+> +#if CONFIG_IS_ENABLED(FPGA)
+>   int fpga_load(int devnum, const void *buf, size_t bsize,
+>   	      bitstream_type bstype, int flags);
+> +#else
+> +static inline int fpga_load(int devnum, const void *buf, size_t bsize,
+> +	      bitstream_type bstype, int flags)
+> +{
+> +	return FPGA_FAIL;
+> +}
+> +#endif
+>   int fpga_fsload(int devnum, const void *buf, size_t size,
+>   		fpga_fs_info *fpga_fsinfo);
+>   int fpga_loads(int devnum, const void *buf, size_t size,
 
-This is dangerous:
-
-You cannot check if a load operation will override protected memory but
-still continue.
-
-Please, return -E2BIG here.
-
-Best regards
-
-Heinrich
-
-> +	}
->
->   	log_err("** Reading file would overwrite reserved memory **\n");
->   	return -ENOSPC;
-> diff --git a/include/lmb.h b/include/lmb.h
-> index c81716b3f1d1..f28a872c78d0 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -114,7 +114,24 @@ phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_si=
-ze_t size, ulong align,
->   			   phys_addr_t max_addr);
->   phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong =
-align,
->   			     phys_addr_t max_addr);
-> -phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size=
-_t size);
-> +
-> +/**
-> + * lmb_alloc_addr() - Allocate memory within a region
-> + *
-> + * Try to allocate a specific address range: must be in defined memory =
-but not
-> + * reserved
-> + *
-> + * @lmb:	the logical memory block struct
-> + * @base:	base address of the memory region
-> + * @size:	size of the memory region
-> + * @addrp:	if non-NULL, returns the allocated address, on success
-> + * Return:	0 if OK, -EPERM if the memory is already allocated, -E2BIG i=
-f
-> + * there is not enough room in the reservation tables, so
-> + * CONFIG_LMB_USE_MAX_REGIONS should be increased
-> + */
-> +int lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size,
-> +		   phys_addr_t *addrp);
-> +
->   phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
->
->   /**
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index fd6326cbf7fe..c3d14db07e45 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -252,7 +252,7 @@ void lmb_init_and_reserve_range(struct lmb *lmb, phy=
-s_addr_t base,
->    * @size:	size of the memory region to add
->    * @flags:	flags for this new memory region
->    * Returns: 0 if OK, -EBUSY if an existing enveloping region has diffe=
-rent
-> - * flags, -EPERM if there is an existing non-adjacent region, -ENOSPC i=
-f there
-> + * flags, -EPERM if there is an existing non-adjacent region, -E2BIG if=
- there
->    * is no more room in the list of regions, ekse region number that was=
- coalesced
->    * with this one
->    **/
-> @@ -318,7 +318,7 @@ static int lmb_add_area_flags(struct lmb_region *rgn=
-, phys_addr_t base,
->   	if (coalesced)
->   		return coalesced;
->   	if (rgn->cnt >=3D rgn->max)
-> -		return -ENOSPC;
-> +		return -E2BIG;
->
->   	/* Couldn't coalesce the LMB, so add it to the sorted table. */
->   	for (i =3D rgn->cnt-1; i >=3D 0; i--) {
-> @@ -511,11 +511,8 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_=
-size_t size, ulong align,
->   	return 0;
->   }
->
-> -/*
-> - * Try to allocate a specific address range: must be in defined memory =
-but not
-> - * reserved
-> - */
-> -phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size=
-_t size)
-> +int lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size,
-> +		   phys_addr_t *addrp)
->   {
->   	int area;
->
-> @@ -529,9 +526,14 @@ phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_ad=
-dr_t base, phys_size_t size)
->   		if (lmb_addrs_overlap(lmb->memory.area[area].base,
->   				      lmb->memory.area[area].size,
->   				      base + size - 1, 1)) {
-> +			int ret;
-> +
->   			/* ok, reserve the memory */
-> -			if (lmb_reserve(lmb, base, size) >=3D 0)
-> -				return base;
-> +			ret =3D lmb_reserve(lmb, base, size);
-> +			if (ret < 0)
-> +				return ret;
-> +			if (addrp)
-> +				*addrp =3D base;
->   		}
->   	}
->
-> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> index b665d8dcdeb4..c8dbdb3b73eb 100644
-> --- a/test/lib/lmb.c
-> +++ b/test/lib/lmb.c
-> @@ -497,22 +497,22 @@ static int test_alloc_addr(struct unit_test_state =
-*uts, const phys_addr_t ram)
->   		   alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
->
->   	/* allocate blocks */
-> -	a =3D lmb_alloc_addr(&lmb, ram, alloc_addr_a - ram);
-> +	ut_assertok(lmb_alloc_addr(&lmb, ram, alloc_addr_a - ram, &a));
->   	ut_asserteq(a, ram);
->   	ASSERT_LMB(&lmb, ram, ram_size, 3, ram, 0x8010000,
->   		   alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
-> -	b =3D lmb_alloc_addr(&lmb, alloc_addr_a + 0x10000,
-> -			   alloc_addr_b - alloc_addr_a - 0x10000);
-> +	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_a + 0x10000,
-> +				   alloc_addr_b - alloc_addr_a - 0x10000, &b));
->   	ut_asserteq(b, alloc_addr_a + 0x10000);
->   	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x10010000,
->   		   alloc_addr_c, 0x10000, 0, 0);
-> -	c =3D lmb_alloc_addr(&lmb, alloc_addr_b + 0x10000,
-> -			   alloc_addr_c - alloc_addr_b - 0x10000);
-> +	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_b + 0x10000,
-> +				   alloc_addr_c - alloc_addr_b - 0x10000, &c));
->   	ut_asserteq(c, alloc_addr_b + 0x10000);
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
->   		   0, 0, 0, 0);
-> -	d =3D lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000,
-> -			   ram_end - alloc_addr_c - 0x10000);
-> +	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000,
-> +				   ram_end - alloc_addr_c - 0x10000, &d));
->   	ut_asserteq(d, alloc_addr_c + 0x10000);
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, ram_size,
->   		   0, 0, 0, 0);
-> @@ -528,7 +528,7 @@ static int test_alloc_addr(struct unit_test_state *u=
-ts, const phys_addr_t ram)
->
->   	/* allocate at 3 points in free range */
->
-> -	d =3D lmb_alloc_addr(&lmb, ram_end - 4, 4);
-> +	ut_assertok(lmb_alloc_addr(&lmb, ram_end - 4, 4, &d));
->   	ut_asserteq(d, ram_end - 4);
->   	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x18010000,
->   		   d, 4, 0, 0);
-> @@ -537,7 +537,7 @@ static int test_alloc_addr(struct unit_test_state *u=
-ts, const phys_addr_t ram)
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
->   		   0, 0, 0, 0);
->
-> -	d =3D lmb_alloc_addr(&lmb, ram_end - 128, 4);
-> +	ut_assertok(lmb_alloc_addr(&lmb, ram_end - 128, 4, &d));
->   	ut_asserteq(d, ram_end - 128);
->   	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x18010000,
->   		   d, 4, 0, 0);
-> @@ -546,7 +546,7 @@ static int test_alloc_addr(struct unit_test_state *u=
-ts, const phys_addr_t ram)
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
->   		   0, 0, 0, 0);
->
-> -	d =3D lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000, 4);
-> +	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000, 4, &d));
->   	ut_asserteq(d, alloc_addr_c + 0x10000);
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010004,
->   		   0, 0, 0, 0);
-> @@ -560,19 +560,19 @@ static int test_alloc_addr(struct unit_test_state =
-*uts, const phys_addr_t ram)
->   	ut_asserteq(ret, 0);
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, ram + 0x8000000, 0x10010000,
->   		   0, 0, 0, 0);
-> -	d =3D lmb_alloc_addr(&lmb, ram, 4);
-> +	ut_assertok(lmb_alloc_addr(&lmb, ram, 4, &d));
->   	ut_asserteq(d, ram);
->   	ASSERT_LMB(&lmb, ram, ram_size, 2, d, 4,
->   		   ram + 0x8000000, 0x10010000, 0, 0);
->
->   	/* check that allocating outside memory fails */
->   	if (ram_end !=3D 0) {
-> -		ret =3D lmb_alloc_addr(&lmb, ram_end, 1);
-> -		ut_asserteq(ret, 0);
-> +		ut_assertok(lmb_alloc_addr(&lmb, ram_end, 1, &a));
-> +		ut_asserteq(0x40000000, a);
->   	}
->   	if (ram !=3D 0) {
-> -		ret =3D lmb_alloc_addr(&lmb, ram - 1, 1);
-> -		ut_asserteq(ret, 0);
-> +		ut_assertok(lmb_alloc_addr(&lmb, ram - 1, 1, &a));
-> +		ut_asserteq(ram, a);
->   	}
->
->   	return 0;
-> @@ -588,7 +588,7 @@ static int lib_test_lmb_alloc_addr(struct unit_test_=
-state *uts)
->   		return ret;
->
->   	/* simulate 512 MiB RAM beginning at 1.5GiB */
-> -	return test_alloc_addr(uts, 0xE0000000);
-> +	return test_alloc_addr(uts, 0xe0000000);
->   }
->
->   DM_TEST(lib_test_lmb_alloc_addr, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_F=
-DT);
-> @@ -699,8 +699,7 @@ static int lib_test_LMB_MAX_AREAS(struct unit_test_s=
-tate *uts)
->
->   	/*  error for the (CONFIG_LMB_MAX_AREAS + 1) memory regions */
->   	offset =3D ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * ram_size;
-> -	ret =3D lmb_add(&lmb, offset, ram_size);
-> -	ut_asserteq(ret, -1);
-> +	ut_asserteq(-E2BIG, lmb_add(&lmb, offset, ram_size));
->
->   	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
->   	ut_asserteq(lmb.reserved.cnt, 0);
-> @@ -717,8 +716,7 @@ static int lib_test_LMB_MAX_AREAS(struct unit_test_s=
-tate *uts)
->
->   	/*  error for the 9th reserved blocks */
->   	offset =3D ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * blk_size;
-> -	ret =3D lmb_reserve(&lmb, offset, blk_size);
-> -	ut_asserteq(ret, -1);
-> +	ut_asserteq(-E2BIG, lmb_reserve(&lmb, offset, blk_size));
->
->   	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
->   	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_AREAS);
-> @@ -762,8 +760,8 @@ static int lib_test_lmb_flags(struct unit_test_state=
- *uts)
->   		   0, 0, 0, 0);
->
->   	/* reserve again, new flag */
-> -	ret =3D lmb_reserve_flags(&lmb, 0x40010000, 0x10000, LMB_NONE);
-> -	ut_asserteq(ret, -1);
-> +	ut_asserteq(-EBUSY,
-> +		    lmb_reserve_flags(&lmb, 0x40010000, 0x10000, LMB_NONE));
->   	ASSERT_LMB(&lmb, ram, ram_size, 1, 0x40010000, 0x10000,
->   		   0, 0, 0, 0);
->
-
+Applied.
+M
