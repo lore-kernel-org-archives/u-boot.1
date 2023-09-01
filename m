@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F891CA0FEC
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 20:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF898CA0FF6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 21:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62AF68675B;
-	Fri,  1 Sep 2023 22:41:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BC97B8669D;
+	Fri,  1 Sep 2023 23:01:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QycyobF7";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nGIMFFy1";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="R84bAzJd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4529A8675B; Fri,  1 Sep 2023 22:41:53 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A37628657B; Fri,  1 Sep 2023 23:01:11 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC9A866DC
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 22:41:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CB38866DC
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 23:01:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6bca5d6dcedso1879948a34.1
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 13:41:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693600907; x=1694205707; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=/gr/2RNFDGPDstqP+X91P4htJ2kCLipZXRTuQlWkNB0=;
- b=QycyobF7E+xTFL8Esqo3x97KYdFxwZM6V3WV5RSzyWUzbhti1pjZoQAPKYULemxdPD
- I2Dq2fEzPN10vqQOsdz8bBswF+ItgdK1s3ZINQOaMQRNKSItzqDxzRLz21mJ6X84vlio
- M+KXEmx/HJ181ENyutKbdFOTlWMbsK3KSjMlY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693600907; x=1694205707;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/gr/2RNFDGPDstqP+X91P4htJ2kCLipZXRTuQlWkNB0=;
- b=hkmxTCP41a/Gw0p+xKowxZiN02Z+6RlNiA/DbW8I2xTLIMFhF5YXY9w4Vx0yE6BSud
- 9XFmRDt9FUc56ZC7Hnx3vG3yE0GrVr25pADjvyuPlMH02ngVj/vt3tBu4YzaiBpog5Sd
- QYD4NQlWzsWJ4wfL/6EWQvYCKbeaptnDon+3JgF/YEXuGN7JBj7paNqxSeTMpHWzkpLH
- plk1gbE0+CdcrphF4qX0KZ4PNoF9VIwqvLMzCHlqUcBb99Y+DaRNJJtfYGCGr8qW1wlu
- ELR4cMeeWmKWk2z1rfVD1mtFqcnol63zsOEc+AWiMKdz5VvWkTzKU4DjjzlaFE4hSFzA
- 2G3w==
-X-Gm-Message-State: AOJu0YwiXuldxnhbq9YlY006HuPZhlj82lVojY31Db8lBfmPgeTV+wv6
- pPdCWtXnKeb8tQxS84EP2U6XO8S0S+AljnrbIaVcZQ==
-X-Google-Smtp-Source: AGHT+IEjoEv8/FlPHlca3ywLwYd5kAxSqeqHztkmbNgSWxDtVM119L+ltsR7+kQmTcOP4LSG3xO/hQ==
-X-Received: by 2002:a05:6358:60c6:b0:135:73b0:cc6c with SMTP id
- i6-20020a05635860c600b0013573b0cc6cmr3366735rwi.28.1693600906748; 
- Fri, 01 Sep 2023 13:41:46 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-4587-e14d-65a2-5068.res6.spectrum.com.
- [2603:6081:7b00:6400:4587:e14d:65a2:5068])
- by smtp.gmail.com with ESMTPSA id
- k66-20020a252445000000b00d071631665fsm1075707ybk.59.2023.09.01.13.41.46
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 13:41:46 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH 3/3] Azure: Add sandbox64 to CI
-Date: Fri,  1 Sep 2023 16:41:43 -0400
-Message-Id: <20230901204143.3617876-3-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230901204143.3617876-1-trini@konsulko.com>
-References: <20230901204143.3617876-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Rcr6X1qHmz9skw;
+ Fri,  1 Sep 2023 23:01:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693602068;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=3jhKvcPw5rI27KD6TUCWK1GLjRYduSvkD9lUCOJ36/w=;
+ b=nGIMFFy15XL77IYHt83pie4VSmRMtjtzkC5j6cgSDOxA3bSqfcxOM/0XU8SjngckXR2psf
+ 4XDFrLVUqtK/oCZ+0LV0nOru/UA2aBGud2VRXq5HJgyjs9fx/SUgIu3BkevSWleAQNZBRU
+ 8d7MKhakMym5JTviRl/pDuntm7Xm+kBVWQnlYVJgScn6J1D88CNChlygIsOKBywp0U/Cot
+ ylyOk1ME6UGGEUWvE4e8j+IvLNQOZXATaFMNyDENanXEP+VdT5SMnR6gKmG4wwQ1Nupdmt
+ WHwBUFbli+KPQYWJVD/zyoddlElR0zx/1886fwcsEcN2tn8RdNrW+ruksL4FMA==
+Message-ID: <9f03487a-ae6a-6e17-5051-a0a575c2d517@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693602065;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=3jhKvcPw5rI27KD6TUCWK1GLjRYduSvkD9lUCOJ36/w=;
+ b=R84bAzJdDJydf/SFMKnWvNAF3IKWTTGNOiD3aQZiXzEDA/ytPb93zKZ0Hmht9jYc1qzosy
+ BN22r9QURxbgqQbv8tzAcCN18iFNmWNwkIfDtTXFwVIgZ1e4SBzRUcY43fcWHHwpGsIJXl
+ v+Bc0w+y0xr0lHIA8lP2ikk4izmD/MBN01IG3A12s1HcQB3zjtPPJcv7veOTHyC11mCKAx
+ MrBbeWsRIDvzVvmY3zi2tZBCNm0uuEF1TKufSLrB1ryVXvVNdTZQ9rWeIY+GMCLIWNNTGY
+ nf5Ecztve6ASDqMfQ+wg7adnm0I8VmUqPmaS7UzKJK0uUi07N8gdM7hobGFYaw==
+Date: Fri, 1 Sep 2023 23:01:03 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] .gitlab-ci: Test sandbox64 board in addition to sandbox
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>
+References: <20230901084810.238594-1-marek.vasut+renesas@mailbox.org>
+ <20230901181123.GT3101304@bill-the-cat>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20230901181123.GT3101304@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 31dac9d77e0450f47f1
+X-MBO-RS-META: 8ar55yjj974g46h84jqfwy1kipjmc3nh
+X-Rspamd-Queue-Id: 4Rcr6X1qHmz9skw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,30 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that sandbox64 can run and pass the regular test.py suite, add it
-here as well.
+On 9/1/23 20:11, Tom Rini wrote:
+> On Fri, Sep 01, 2023 at 10:48:10AM +0200, Marek Vasut wrote:
+>> Test both 32bit and 64bit sandbox boards in CI.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> ---
+>> DEPENDS:
+>> - [v2] test: print: Fix hexdump test on 64bit systems
+>> - test: dm: test-fdt: Use fdtdec_get_int() in dm_check_devices()
+>> - configs: sandbox64: Enable legacy image format support
+>> ---
+>>   .gitlab-ci.yml | 17 +++++++++++++++++
+>>   1 file changed, 17 insertions(+)
+>>
+>> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+>> index 6d7ffdd1bbc..a7282be3181 100644
+>> --- a/.gitlab-ci.yml
+>> +++ b/.gitlab-ci.yml
+>> @@ -291,6 +291,23 @@ sandbox without LTO test.py:
+>>       BUILD_ENV: "NO_LTO=1"
+>>     <<: *buildman_and_testpy_dfn
+>>   
+>> +sandbox64 test.py:
+>> +  variables:
+>> +    TEST_PY_BD: "sandbox64"
+>> +  <<: *buildman_and_testpy_dfn
+>> +
+>> +sandbox64 with clang test.py:
+>> +  variables:
+>> +    TEST_PY_BD: "sandbox64"
+>> +    OVERRIDE: "-O clang-16"
+>> +  <<: *buildman_and_testpy_dfn
+>> +
+>> +sandbox64 without LTO test.py:
+>> +  variables:
+>> +    TEST_PY_BD: "sandbox64"
+>> +    BUILD_ENV: "NO_LTO=1"
+>> +  <<: *buildman_and_testpy_dfn
+> 
+> I'm not sure it's worth building and testing sandbox64 without LTO as
+> well. The primary reason we do this here is to ensure that the NO_LTO
+> flag keeps working, rather than specific outputs from the tests, and we
+> should _probably_ change the current one to be a case where we just test
+> that the version test runs and passes.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .azure-pipelines.yml | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 72a772ce9c65..d01fa117c3a3 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -334,6 +334,11 @@ stages:
-         sandbox_clang:
-           TEST_PY_BD: "sandbox"
-           OVERRIDE: "-O clang-16"
-+        sandbox64:
-+          TEST_PY_BD: "sandbox64"
-+        sandbox64_clang:
-+          TEST_PY_BD: "sandbox64"
-+          OVERRIDE: "-O clang-16"
-         sandbox_nolto:
-           TEST_PY_BD: "sandbox"
-           BUILD_ENV: "NO_LTO=1"
--- 
-2.34.1
-
+It is faster to finish building if nothing else.
