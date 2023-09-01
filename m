@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A88BCA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:14:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2721CA0FE2
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B42058680E;
-	Fri,  1 Sep 2023 03:14:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 066678683C;
+	Fri,  1 Sep 2023 03:14:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FBucMvXM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F3p//krz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF56786759; Fri,  1 Sep 2023 03:14:16 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id F0A428681D; Fri,  1 Sep 2023 03:14:17 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2198D86768
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ED148671C
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6bf298ef1f5so1195061a34.0
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:14 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-792965813e7so57158039f.2
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693530852; x=1694135652; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693530853; x=1694135653; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7jsYIhcDLlURsZx+urJQuIOgYRYh+kjVkgtk/hGjlz8=;
- b=FBucMvXMbcScojLP2suxNkxKIvC86eZ+kCS1y0TZF17q1OjVWT1DWDtJNP5pbQMIi5
- UYg080n+ONd+HJ6tare1lMptljd32GBqx8WSgDr1hJKztA0FT3iRjA2i8rI4sdX8/SY+
- vufuoyDOmTQYs68kcj2I+OdQkFv09a6T/eW3k=
+ bh=oDtqdLZf1ehGok3vy0L5t9U1SOZfKIlsL1OfFu4aJfQ=;
+ b=F3p//krzwvv/HKPM4HuaI46GsHdfSc7zdUjzlV/eWFU37A7VUmk6gYdpn/0In+HJTt
+ N9XW5Rjqmmy+91q8xhhF1SGk0Gjx1ZkvfUwOTPI3YUr0/MDnAmNLs5AxWTpYSwLcWtci
+ 6HY3SYbnGEnOr84+wewx+Aon37PSaB9OAOrh8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693530852; x=1694135652;
+ d=1e100.net; s=20221208; t=1693530853; x=1694135653;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7jsYIhcDLlURsZx+urJQuIOgYRYh+kjVkgtk/hGjlz8=;
- b=S458x5gXZaszO65QoNCy+LZnOprA3btoDY1VFsHa8f3rBKjZqxM/9WfM+nUdX1Q8R4
- iB1cX4HPGcqEBen2oXpPZmmAHFEoQ10uKKGhyZDTxxXBiair2b8lPAtS9UyganLbc6T0
- rKbIqETx+LVL7K2A7slox+QY34YFqY/GWhdkFdiPkrhkRY3T5C7Y1eNWjWm5lj3Dk1oq
- FYcg77LQIqqonxddSAMiH+je/1KIXMmS5zodRU2HTJY+/Peknlqc4pD7h+VCwlESo1mK
- cJ9NrT/h48KkFz8++usbkTd6kogTAne7+Wdvw8H1UapiLryY74mEGImKLQ6AsBx0ZANm
- LO+Q==
-X-Gm-Message-State: AOJu0YzSLmAv6a6vTlYSsW6jicNfWXmWDrck6+UHdKbwCbeW2qkETOZK
- 9PzgacAIcOE0vnlSJFyfytrH736SsjQsBGXOwnQ=
-X-Google-Smtp-Source: AGHT+IEalU0j0R6gOtR5dobRDgnY62uQkqtdiethwErCGOLDAObN318goS067G+uyixJuiPoo13UJg==
-X-Received: by 2002:a05:6870:171a:b0:1c8:d334:a6f5 with SMTP id
- h26-20020a056870171a00b001c8d334a6f5mr1274704oae.7.1693530852686; 
- Thu, 31 Aug 2023 18:14:12 -0700 (PDT)
+ bh=oDtqdLZf1ehGok3vy0L5t9U1SOZfKIlsL1OfFu4aJfQ=;
+ b=ecttFjHWAZZCej/yOobS7joTCPdkhtFstXYL5QHwtV0u5/TI9MQyyMKJMTNab3Tq9V
+ HphkKbzBKB8pbk9J5nOgSCK+1V/o/wzqNQo/x+7UMk7//pESawJ6otlDJbBHnIgS0CUR
+ RygsBVlUTAiOp6bAkKP9w4ARI8BOuXrs3+SzaOa9f52YEtYuu8q2GTvoB+uu9uh5zJWq
+ w6hKbpFljgk1C1ZCnfZc2nxmYZREdFxgvxRd5IAIlzJUOjtbJ8Q3GDlHU2qjXBeTrJc3
+ /cofnNX5u3svoomax5OW6ETNSiYhPo9u+ecFeWKOIZfRggx8VqPAMFXHYH5c+N1xyVjr
+ SfuQ==
+X-Gm-Message-State: AOJu0YzB/UYQkQwdb2xFllI1BR0M4Jbr8X0MZAfzTf5DNl1FtU4TYHME
+ Iuc+M1i7e/8YQfbygrQANIw8KoIVCzhy/Ny0kgk=
+X-Google-Smtp-Source: AGHT+IFIBc5POf9+LxinBE69EOReQ/Ese7wh41IPd91pW4xa6QHC4uZO8kp2uuUY5i0XZBL5KzQDgQ==
+X-Received: by 2002:a5e:aa03:0:b0:794:d9f6:e234 with SMTP id
+ s3-20020a5eaa03000000b00794d9f6e234mr971147ioe.13.1693530853677; 
+ Thu, 31 Aug 2023 18:14:13 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.12
+ dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 18:14:12 -0700 (PDT)
+ Thu, 31 Aug 2023 18:14:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Brandon Maier <brandon.maier@collins.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
  Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH v2 04/14] lmb: Rename memory/reserved_regions to area
-Date: Thu, 31 Aug 2023 19:13:42 -0600
-Message-ID: <20230901011357.2482203-5-sjg@chromium.org>
+ Sjoerd Simons <sjoerd@collabora.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2 05/14] lmb: Rename LMB_MAX_REGIONS and LMB_USE_MAX_REGIONS
+Date: Thu, 31 Aug 2023 19:13:43 -0600
+Message-ID: <20230901011357.2482203-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230901011357.2482203-1-sjg@chromium.org>
 References: <20230901011357.2482203-1-sjg@chromium.org>
@@ -91,57 +97,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename these two fields since they are areas, not regions.
+These are the number of areas within a region, so rename them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Add new patch to rename memory/reserved_regions to area
+- Add new patch to rename LMB_MAX_REGIONS and LMB_USE_MAX_REGIONS
 
- include/lmb.h | 8 ++++----
- lib/lmb.c     | 4 ++--
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ configs/stm32mp13_defconfig         |  4 ++--
+ configs/stm32mp15_basic_defconfig   |  4 ++--
+ configs/stm32mp15_defconfig         |  4 ++--
+ configs/stm32mp15_trusted_defconfig |  4 ++--
+ include/lmb.h                       | 10 +++++-----
+ lib/Kconfig                         |  6 +++---
+ lib/lmb.c                           |  4 ++--
+ 7 files changed, 18 insertions(+), 18 deletions(-)
 
+diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+index 82b62744f6db..98fcfeb5fa61 100644
+--- a/configs/stm32mp13_defconfig
++++ b/configs/stm32mp13_defconfig
+@@ -74,5 +74,5 @@ CONFIG_OPTEE=y
+ # CONFIG_OPTEE_TA_AVB is not set
+ CONFIG_ERRNO_STR=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
++CONFIG_LMB_MEMORY_AREAS=2
++CONFIG_LMB_RESERVED_AREAS=16
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index 9ea5aaa7145a..7b5655d957d9 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -189,5 +189,5 @@ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
++CONFIG_LMB_MEMORY_AREAS=2
++CONFIG_LMB_RESERVED_AREAS=16
+diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+index 4d0a81f8a871..643ec201c644 100644
+--- a/configs/stm32mp15_defconfig
++++ b/configs/stm32mp15_defconfig
+@@ -165,5 +165,5 @@ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
++CONFIG_LMB_MEMORY_AREAS=2
++CONFIG_LMB_RESERVED_AREAS=16
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index 0a7d8624858d..2a8162a870c5 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -165,5 +165,5 @@ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
++CONFIG_LMB_MEMORY_AREAS=2
++CONFIG_LMB_RESERVED_AREAS=16
 diff --git a/include/lmb.h b/include/lmb.h
-index 9d4a05670c23..92332eb63069 100644
+index 92332eb63069..d963ac28d9ac 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -80,15 +80,15 @@ struct lmb_region {
+@@ -46,11 +46,11 @@ struct lmb_area {
   *
-  * @memory: Description of memory regions.
-  * @reserved: Description of reserved regions.
-- * @memory_regions: Array of the memory regions (statically allocated)
-- * @reserved_regions: Array of the reserved regions (statically allocated)
-+ * @memory_areas: Array of the memory areas (statically allocated)
-+ * @reserved_areas: Array of the reserved areas (statically allocated)
+  * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
+  *         region is configurated *independently* with
+- *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
+- *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
++ *         => CONFIG_LMB_MEMORY_AREAS: struct lmb.memory_regions
++ *         => CONFIG_LMB_RESERVED_AREAS: struct lmb.reserved_regions
+  *         lmb_region.region is only a pointer to the correct buffer,
+  *         initialized in lmb_init(). This configuration is useful to manage
+- *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
++ *         more reserved memory regions with CONFIG_LMB_RESERVED_AREAS.
   */
- struct lmb {
+ 
+ /**
+@@ -87,8 +87,8 @@ struct lmb {
  	struct lmb_region memory;
  	struct lmb_region reserved;
  #if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
--	struct lmb_area memory_regions[CONFIG_LMB_MEMORY_REGIONS];
--	struct lmb_area reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
-+	struct lmb_area memory_areas[CONFIG_LMB_MEMORY_REGIONS];
-+	struct lmb_area reserved_areas[CONFIG_LMB_RESERVED_REGIONS];
+-	struct lmb_area memory_areas[CONFIG_LMB_MEMORY_REGIONS];
+-	struct lmb_area reserved_areas[CONFIG_LMB_RESERVED_REGIONS];
++	struct lmb_area memory_areas[CONFIG_LMB_MEMORY_AREAS];
++	struct lmb_area reserved_areas[CONFIG_LMB_RESERVED_AREAS];
  #endif
  };
  
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 42e559ad0b51..53f1332a8f83 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1082,7 +1082,7 @@ config LMB_USE_MAX_REGIONS
+ 	  Define the number of supported memory regions in the library logical
+ 	  memory blocks.
+ 	  This feature allow to reduce the lmb library size by using compiler
+-	  optimization when LMB_MEMORY_REGIONS == LMB_RESERVED_REGIONS.
++	  optimization when LMB_MEMORY_AREAS == LMB_RESERVED_AREAS.
+ 
+ config LMB_MAX_REGIONS
+ 	int "Number of memory and reserved regions in lmb lib"
+@@ -1092,7 +1092,7 @@ config LMB_MAX_REGIONS
+ 	  Define the number of supported regions, memory and reserved, in the
+ 	  library logical memory blocks.
+ 
+-config LMB_MEMORY_REGIONS
++config LMB_MEMORY_AREAS
+ 	int "Number of memory regions in lmb lib"
+ 	depends on !LMB_USE_MAX_REGIONS
+ 	default 8
+@@ -1101,7 +1101,7 @@ config LMB_MEMORY_REGIONS
+ 	  memory blocks.
+ 	  The minimal value is CONFIG_NR_DRAM_BANKS.
+ 
+-config LMB_RESERVED_REGIONS
++config LMB_RESERVED_AREAS
+ 	int "Number of reserved regions in lmb lib"
+ 	depends on !LMB_USE_MAX_REGIONS
+ 	default 8
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 9336792df8ba..2669868f0dda 100644
+index 2669868f0dda..f4321d10118b 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -113,8 +113,8 @@ void lmb_init(struct lmb *lmb)
+@@ -111,8 +111,8 @@ void lmb_init(struct lmb *lmb)
+ 	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
  #else
- 	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
- 	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
--	lmb->memory.region = lmb->memory_regions;
--	lmb->reserved.region = lmb->reserved_regions;
-+	lmb->memory.area = lmb->memory_areas;
-+	lmb->reserved.area = lmb->reserved_areas;
+-	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
+-	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
++	lmb->memory.max = CONFIG_LMB_MEMORY_AREAS;
++	lmb->reserved.max = CONFIG_LMB_RESERVED_AREAS;
+ 	lmb->memory.area = lmb->memory_areas;
+ 	lmb->reserved.area = lmb->reserved_areas;
  #endif
- 	lmb->memory.cnt = 0;
- 	lmb->reserved.cnt = 0;
 -- 
 2.42.0.283.g2d96d420d3-goog
 
