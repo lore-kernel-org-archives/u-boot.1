@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F76CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 08:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE35CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 08:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F15E8867B6;
-	Fri,  1 Sep 2023 10:00:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C908D8669D;
+	Fri,  1 Sep 2023 10:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RzEWByqz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mPBQ6tHd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC1B886725; Fri,  1 Sep 2023 10:00:14 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 0851D84003; Fri,  1 Sep 2023 10:09:25 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 270C88669D
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 10:00:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5948C866AA
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 10:09:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2bd0d19a304so30278211fa.1
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 01:00:12 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-4ff09632194so3064342e87.2
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 01:09:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693555211; x=1694160011; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1693555760; x=1694160560; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3XrDR1tlbkea808j55ycnJqF9jB0ZvhT8/Iixoq8MVE=;
- b=RzEWByqzgzRm3Dpw/dVWBQTsIHntGQpEU2VSS4W80/tfd4dieCkUcv2bGcTY+2+iMZ
- RjCYAZHQcbqpVIOyEu/Rzw60qkXcufcmwkQ83AlRPybdHAcZzZ9YcA1gt1cXjdKLcLpa
- 8UrJE6+rgu2SajQ4doulgF+fhARMgsreVrMoV5d/KStPB5V7mG6GcQvq/eSHRno1kiOK
- 5+pYQcncSUk0o6PLsTlQ7rdyY38s8ab0zMf8x66nd9eoA9AsODIDGWaTSxZC5hBCFm5B
- l3cI+gOs7771YOScJPC0GhAjuwYVjavnKkPYTTufbezyoG7+AzJ3DiT7eoX3EnAYJB0F
- Dx8w==
+ bh=dLFdsU99Myn4PEF1ZSHmzwqqjUtq6gmTeM9LCgH8CMM=;
+ b=mPBQ6tHdWSvygoQoIhcmHJSazqHNSZjNBdaNMTXx4MWzfJW4W1/XqNbdI+obPFpheO
+ 1MRGUqQzw3wPaEB1L0ij2Ypfnkk0jxj4bReS8jFm21SOO57Vy9ocyE9WqEHkUfZx0SzN
+ mzpN9Qy84zQHvMtRiyxI5F+gUiOBQaiD7Pc5Gnu/0iHy1BwaTBB2Jhdgrw4vIScyCFKm
+ 0h/9nQyrdJ94b9Jzzh0M3R09/zEEtnmgXxTa/+MZGQYrC5qOEhde2Irt6QflK3jkNgqo
+ BFDUwqSLXT/A8D+MqyPZAoFAqGvB7VRidTkCHR1oX3eIvAwWWg2fpUlXrYSdqdS7EGhp
+ w+XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693555211; x=1694160011;
+ d=1e100.net; s=20221208; t=1693555760; x=1694160560;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3XrDR1tlbkea808j55ycnJqF9jB0ZvhT8/Iixoq8MVE=;
- b=fAngCC2sfipb96q0fTtKciY7BySLY73OUIxV2I7lBajKLLNmMlU3VWVwalvZsM+wrH
- l0Rckq36mVWr6bLeURYKGsFpCB6ZC/ZWRtlQbR89JZyqdP8cuhlHhgqryzFB+dMvbdZf
- qYDC3Dr3oNNY4Mz7QGV66Czfyz81rEW+/IqZvAoZJXuajlM/OgPw+/VdDKCvizoELcOb
- TbTdyGg76EOpSfz0ySve74zfiBrOLTU8ZnoP3rdOIdejlL1K3aeUFGY3c7ceI8r5MMHZ
- B8ZuLI3lJajW+lHYaAmzU7f0uGoK6jHxroQcJASBMxLF9zRWKgrktI4xJNQwpoSVopx5
- xsHQ==
-X-Gm-Message-State: AOJu0Yw8D1zxp0abkKit3QGw31UbK4hC5jqLsDJcicKFdFGtbYl/WGSv
- oSm6PuyJ35UtgTzxMiuMHgEtZAfx7glOWfRde0azLtUuo1NwAb1E
-X-Google-Smtp-Source: AGHT+IEXfv2lDPLa3Jp5kXH9ZMoLtM9iDTK1FTgMdKvAD6eGKUlC+aKl+/emVNgiwp/fDD7wR4gMMrBpun5z3nU4mN0=
-X-Received: by 2002:a19:5010:0:b0:4fe:c98:789a with SMTP id
- e16-20020a195010000000b004fe0c98789amr953076lfb.37.1693555211201; Fri, 01 Sep
- 2023 01:00:11 -0700 (PDT)
+ bh=dLFdsU99Myn4PEF1ZSHmzwqqjUtq6gmTeM9LCgH8CMM=;
+ b=XApT+4bfDuVnrbk6EafYGAOuXC60YOJsd4t0UQSHAX7yu9Weicu9pCJ1e2ekk91kru
+ 5kAL0R+Ivj53Thg54yl+FOpLgdQDWE4ZfuKyA2Z2z5/8JV4bFbJIGl+rNN+sAeNxS6+r
+ ZtoagudBN4Ko90cd+vvWWbGibbN4p67v3ckFAHhy7Os4Fmn2rZZAArB1mTCfd5SGAeUz
+ 0a4AoIrYgdAhtIBK/5huG1lwSdrBzM0PDowNRUqh97w2FcMxghheFCTOeSh6QNQfUNVe
+ Y92jClTN4hGU5js9IW9fc7LMtD4jEfkoBP/PvEkP/fPXCI7gB0o3ItufXwMebuq7l2rj
+ uHHg==
+X-Gm-Message-State: AOJu0YyP43RcNAvQbPQehWh2PQy2sZQtKXEiGlAngVnZUyIDU3Y2s21e
+ TXNj1yIokLfOU+s31yP8Q8SVgFid0QzSl0M5QchxnQ==
+X-Google-Smtp-Source: AGHT+IHfqKJkR3g9JEYf6O3FoEtlFy1HHw7n+w3xzzpmxDbQTbdhWFGfhmJHX8jGqlh6dwlYAk+GfxuRA/QsZFL7hcs=
+X-Received: by 2002:a05:6512:e9d:b0:4fc:df79:3781 with SMTP id
+ bi29-20020a0565120e9d00b004fcdf793781mr1318001lfb.66.1693555760042; Fri, 01
+ Sep 2023 01:09:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <41f932e52bdd206b1b68d5ff313fc29b794a70e7.1693413381.git.michal.simek@amd.com>
- <b48a067e-4143-8cab-3387-e276e900e8f0@amd.com>
-In-Reply-To: <b48a067e-4143-8cab-3387-e276e900e8f0@amd.com>
+References: <20230814173944.288356-1-alpernebiyasak@gmail.com>
+ <20230814173944.288356-5-alpernebiyasak@gmail.com>
+ <CAPnjgZ2d1mJp28UP2+zKC6+2pED_=YdovA_jaNJz2r+C=-jufg@mail.gmail.com>
+ <8add4068-7b05-4f32-8eb7-31366fb396b9@gmail.com>
+ <CAC_iWjKADqX3HaJON6CELbGeAD5VDvdyGfgHPxCjA8G+YRd7gg@mail.gmail.com>
+ <4e21c034-102a-4aac-b630-43546e97de5e@gmail.com>
+In-Reply-To: <4e21c034-102a-4aac-b630-43546e97de5e@gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 1 Sep 2023 10:59:33 +0300
-Message-ID: <CAC_iWj+GZCHZkDf8C0v7oeJLwLZZep0jhKYv2at7BJ0gmqCFDw@mail.gmail.com>
-Subject: Re: [PATCH] test/py: tpm2: skip tpm2_startup when
- env__tpm_device_test_skip=True
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, Simon Glass <sjg@chromium.org>
+Date: Fri, 1 Sep 2023 11:08:41 +0300
+Message-ID: <CAC_iWjJiX9TCqPBzLDST7xW5pdqGh-E6DMHUKj_+sHqzbdfw9A@mail.gmail.com>
+Subject: Re: [PATCH v2 4/4] doc: qemu: arm: Add a section on booting Linux
+ distros
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng@tinylab.org>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Bharat Gooty <bharat.gooty@broadcom.com>, 
+ Stefan Roese <sr@denx.de>, Qu Wenruo <wqu@suse.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,39 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 1 Sept 2023 at 10:09, Michal Simek <michal.simek@amd.com> wrote:
+On Thu, 31 Aug 2023 at 12:25, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
 >
 >
-> On 8/30/23 18:36, Michal Simek wrote:
-> > All tpm2 tests should be possible to skip when
-> > env__tpm_device_test_skip=True but test_tpm2_startup is missing it.
+> On 2023-08-30 10:33 +03:00, Ilias Apalodimas wrote:
+> > Hi Alper,
 > >
-> > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> > ---
+> > On Sun, 27 Aug 2023 at 18:49, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>
+> >> On 2023-08-15 01:43 +03:00, Simon Glass wrote:
+> >>> Hi Alper,
+> >>>
+> >>> On Mon, 14 Aug 2023 at 11:40, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>>> I actually want to put the root.img device first so that the VM can boot
+> >>>> into the installed system when it reboots, but U-Boot can't find the
+> >>>> bootflow on the second drive. I tried e.g. `bootdev list -p; bootflow
+> >>>> scan -lab`, but it seems to only ever search the first virtio-blk.
+> >>>> However, `eficonfig; bootefi bootmgr` makes it boot somehow.
 > >
-> >   test/py/tests/test_tpm2.py | 3 +++
-> >   1 file changed, 3 insertions(+)
+> > eficonfig, apart from displaying the boot options on a menu scans all
+> > media that have a simple filesystem protocol installed and configures
+> > the efi boot options.  That's why bootefi bootmgr boots properly
+> > afterwards.  You can probably boot even without eficonfig, but only
+> > bootXXX.efi files will be accounted for and no boot options will be
+> > added.
 > >
-> > diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-> > index fce689cd992d..c2579fa02c58 100644
-> > --- a/test/py/tests/test_tpm2.py
-> > +++ b/test/py/tests/test_tpm2.py
-> > @@ -71,6 +71,9 @@ def test_tpm2_startup(u_boot_console):
-> >
-> >       Initiate the TPM internal state machine.
-> >       """
-> > +    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
-> > +    if skip_test:
-> > +        pytest.skip('skip TPM device test')
-> >       u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
-> >       output = u_boot_console.run_command('echo $?')
-> >       assert output.endswith('0')
+> > The EFI spec describes the bootmgr functionality in detail.  Back when
+> > the bootmeth patches were added, I suggested we shouldn't deal with
+> > EFI at all simply because it all already works and is backed by a
+> > spec.  Instead, we should just have a boot option in the methods that
+> > spells "EFI" and let the bootmanager deal with the details. But
+> > honestly, I've lost track of those patches.
 >
-> Applied.
+> I think bootflow and EFI should be different views on top of a single
+> "what can we do now that we are in U-Boot" model. IIUIC it's possible
+> for e.g. UEFI Shell to be built-in boot entries, so we could expose
+> bootflow entries (and more) similar to those?
 
-Uhm? Applied where? I had a few minor fixes I was planning to send to Tom
+I am not sure I am following you here.  The EfiShell is an
+application. You can use 'eficonfig' to add/delete boot entries for
+EFI, which will appear on a menu.
+
+> And EFI-based secondary
+> bootloaders like rEFInd could let us choose them in a graphical menu,
+> efibootmgr could change their order or reboot into a non-EFI flow...
+
+I'll have to check rEFInd, but I think it looks for PE/COFF binaries?
 
 Thanks
 /Ilias
-> M
