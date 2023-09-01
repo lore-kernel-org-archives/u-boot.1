@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B43E8CA0FE2
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:16:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D754CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BFCF868CB;
+	by phobos.denx.de (Postfix) with ESMTP id 8D0DC868D7;
 	Fri,  1 Sep 2023 03:14:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b+OAYtjN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g2ax4kzC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A5248671C; Fri,  1 Sep 2023 03:14:26 +0200 (CEST)
+ id 6FC1C80750; Fri,  1 Sep 2023 03:14:26 +0200 (CEST)
 Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
  [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4799D86898
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C58586776
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-77a62a84855so57306939f.1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:22 -0700 (PDT)
+ ca18e2360f4ac-794e0e8b588so54241139f.1
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693530861; x=1694135661; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+bRSEfgaUNHospgGeRPyIJjXFtfEpHFtez5+wIu/b8o=;
- b=b+OAYtjN3fmwzENXEp2EOhC0QdcuuWN2DK4Y1Tmt2G9fm+u/7fGO0dv40GzmGgw+Sg
- tdOC9BCEU8H6ogVbg5arZOHUdb9BM//4OQefMuKklOWFTBm93bHRqKjYBb0vO86JfeLZ
- In6p/cwthVBYWPrrLJJYRu34H7OU2fajsapoo=
+ bh=Bc4Uzn3BMOtxZspgYcOiJ0NswVdA95+gRnuKpkhbEgQ=;
+ b=g2ax4kzC+G2CZMdFh4poW9zN+X/3bHUJxkOvnuiqHGYGD/dAPMyLxoO4jA2iJ7GSQB
+ Um6OHbe0fqvx0e6Mm1isnU1B7pTzV7KJpqnonSDbUI3lnGBbXJBuDFoNJYjmkqNmjc8g
+ HdiMArkgEkIoh7v9S4CDrO6Vc9N12LPgi/SHc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693530861; x=1694135661;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+bRSEfgaUNHospgGeRPyIJjXFtfEpHFtez5+wIu/b8o=;
- b=BGAwpUOv0cnh4kn0ykzi0+Tf9IqK1e1d+56SpVNQyysvj6zkQWBTMH/N8uBtb0Kg7+
- 3XMkdUqmqsiiOiyLdNSyOSwFhbymYQL3nRtIzom4VuRCvb6VdM+2dwCfXUIpKMx3uWU0
- UDSAvAmAzsAoTKshEIgPW6rSqIeDu3LsidDSGb650v9CDZHgftMQFoI9n72tWD5uBHzd
- 1ONr3Wiy2jyLRncLExRlsfhl9EKzR44I22JDQQ4hokRvCz230PskUzE5+MoMEJQNw4qz
- qSScQEW0rx4dXhaAVdnOFKAQZp+AwJllMvk4pddlHn7ju4GQSGXJY1/3vLVCZ6RK1IPK
- RaOQ==
-X-Gm-Message-State: AOJu0YyGEVay99gadTj11BIqZiOLTtmXIA/ym6zY4DZ+lTSWIQ1kDjo1
- eUqY4smFGF2XvYIqTHl3tL8humz5Et5LK+ggkXs=
-X-Google-Smtp-Source: AGHT+IF7i5Ku8kuYa7uQzSkY1peu0ehcYBkbybu2tqGg2qM/zkHfaA4GDmcUMxc393dD8za2uXRPuw==
-X-Received: by 2002:a5d:9304:0:b0:780:d76c:b640 with SMTP id
- l4-20020a5d9304000000b00780d76cb640mr1048930ion.9.1693530860843; 
- Thu, 31 Aug 2023 18:14:20 -0700 (PDT)
+ bh=Bc4Uzn3BMOtxZspgYcOiJ0NswVdA95+gRnuKpkhbEgQ=;
+ b=LNMQTFQ8/vDie8c3OgQJGee/ysS+AAQdcH9XZPYju9cIFx0P/ybjZzeuVhT8424dc7
+ zlLWG/WG1t+x5CQ1uSqIYClBYjbOSl4I4FLKdYUjISBCmZFIXYP9aub/sFa8yB58pexL
+ ZG7tOpSzYQhhamJf/3cMVvxmwI0DTMYo9SqrxrbLdQZ/YcLh52emyG0rbZ3Pl7sdfwyV
+ aYB6XJLwLgoaEk0F99ZzlTMGZR0ictkq7gswPGqw3tqtS1jy0m3AFlMVBilRZ2Is+7rd
+ 2AYXihpaeifkDqQr47rMMVzE/RWzlr7KmR4wcU8bZK/+FTVhEQWEb4iLhxEDmg3QQ4kk
+ Ovzw==
+X-Gm-Message-State: AOJu0Yxw1XF60hj47OdZ4GG4U0QTyES1NKvxK9SQeNqo/BRfselwp/s0
+ 5vJxipP2f3B00aGvObkvAITvvQys8GMqUtyjV2c=
+X-Google-Smtp-Source: AGHT+IHwXZ/3bvspBcxpQPW9j9IcZcW8udouU+86UVIfW91hCcYzaLkYKexKFtOD4SpL7xnuL/OvXw==
+X-Received: by 2002:a5e:da03:0:b0:794:e96f:b87d with SMTP id
+ x3-20020a5eda03000000b00794e96fb87dmr1159379ioj.0.1693530861711; 
+ Thu, 31 Aug 2023 18:14:21 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.20
+ dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 18:14:20 -0700 (PDT)
+ Thu, 31 Aug 2023 18:14:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -67,9 +67,9 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH v2 13/14] lmb: Document and tidy lmb_add_region_flags()
-Date: Thu, 31 Aug 2023 19:13:51 -0600
-Message-ID: <20230901011357.2482203-14-sjg@chromium.org>
+Subject: [PATCH v2 14/14] fs: Fix a confusing error about overlapping regions
+Date: Thu, 31 Aug 2023 19:13:52 -0600
+Message-ID: <20230901011357.2482203-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230901011357.2482203-1-sjg@chromium.org>
 References: <20230901011357.2482203-1-sjg@chromium.org>
@@ -91,112 +91,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update this to return an error code so we can tell when it just ran out of
-space in its lmb list. Make lmb_addrs_overlap() return a bool.
+When lmb runs out of space in its internal tables, it gives errors on
+every fs load operation. This is horribly confusing, as the poor user
+tries different memory regions one at a time.
 
-Add a few function comments while we are here.
+Use the updated API to check the error code and print a helpful message.
+Also, allow the operation to proceed.
+
+Update the tests accordingly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/lmb.c | 47 +++++++++++++++++++++++++++++++++++++++++------
- 1 file changed, 41 insertions(+), 6 deletions(-)
+ fs/fs.c        |  7 ++++++-
+ include/lmb.h  | 19 ++++++++++++++++++-
+ lib/lmb.c      | 20 +++++++++++---------
+ test/lib/lmb.c | 42 ++++++++++++++++++++----------------------
+ 4 files changed, 55 insertions(+), 33 deletions(-)
 
+diff --git a/fs/fs.c b/fs/fs.c
+index 2b815b1db0fe..1a84cb410bf9 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -569,8 +569,13 @@ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
+ 	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
+ 	lmb_dump_all(&lmb);
+ 
+-	if (lmb_alloc_addr(&lmb, addr, read_len) == addr)
++	ret = lmb_alloc_addr(&lmb, addr, read_len, NULL);
++	if (!ret)
+ 		return 0;
++	if (ret == -E2BIG) {
++		log_warning("Reservation tables exhausted: see CONFIG_LMB_USE_MAX_REGIONS\n");
++		return 0;
++	}
+ 
+ 	log_err("** Reading file would overwrite reserved memory **\n");
+ 	return -ENOSPC;
+diff --git a/include/lmb.h b/include/lmb.h
+index c81716b3f1d1..f28a872c78d0 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -114,7 +114,24 @@ phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+ 			   phys_addr_t max_addr);
+ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+ 			     phys_addr_t max_addr);
+-phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size);
++
++/**
++ * lmb_alloc_addr() - Allocate memory within a region
++ *
++ * Try to allocate a specific address range: must be in defined memory but not
++ * reserved
++ *
++ * @lmb:	the logical memory block struct
++ * @base:	base address of the memory region
++ * @size:	size of the memory region
++ * @addrp:	if non-NULL, returns the allocated address, on success
++ * Return:	0 if OK, -EPERM if the memory is already allocated, -E2BIG if
++ * there is not enough room in the reservation tables, so
++ * CONFIG_LMB_USE_MAX_REGIONS should be increased
++ */
++int lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size,
++		   phys_addr_t *addrp);
++
+ phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
+ 
+ /**
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 8a299c97b3ad..fd6326cbf7fe 100644
+index fd6326cbf7fe..c3d14db07e45 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -53,8 +53,17 @@ void lmb_dump_all(struct lmb *lmb)
- #endif
- }
- 
--static int lmb_addrs_overlap(phys_addr_t base1, phys_size_t size1,
--			     phys_addr_t base2, phys_size_t size2)
-+/**
-+ * lmb_addrs_overlap() - Compare two address ranges for overlap
-+ *
-+ * @base1:	base address of region 1
-+ * @size1:	size of the region 1
-+ * @base2:	base address of region 2
-+ * @size2:	size of the region 2
-+ * Returns: true if the regions overlap, else false
-+ */
-+static bool lmb_addrs_overlap(phys_addr_t base1, phys_size_t size1,
-+			      phys_addr_t base2, phys_size_t size2)
- {
- 	const phys_addr_t base1_end = base1 + size1 - 1;
- 	const phys_addr_t base2_end = base2 + size2 - 1;
-@@ -62,6 +71,17 @@ static int lmb_addrs_overlap(phys_addr_t base1, phys_size_t size1,
- 	return base1 <= base2_end && base2 <= base1_end;
- }
- 
-+/**
-+ * lmb_addrs_adjacent() - Compare two address ranges for adjacency
-+ *
-+ * @base1:	base address of region 1
-+ * @size1:	size of the region 1
-+ * @base2:	base address of region 2
-+ * @size2:	size of the region 2
-+ * Returns: 1 if region 2 start at the end of region 1,
-+ *	-1 if region 1 starts at the end of region 2,
-+ *	else 0
-+ */
- static int lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
- 			      phys_addr_t base2, phys_size_t size2)
- {
-@@ -220,7 +240,22 @@ void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
- 	lmb_reserve_common(lmb, fdt_blob);
- }
- 
--/* This routine called with relocation disabled. */
-+/**
-+ * lmb_add_area_flags() - Add a region or coalesce with another similar one
-+ *
-+ * This will coalesce with an existing regions so long as @flags is the same.
-+ *
-+ * This routine is called with relocation disabled.
-+ *
-+ * @rgn:	Region to process
-+ * @base:	base address of the memory region to add
-+ * @size:	size of the memory region to add
-+ * @flags:	flags for this new memory region
-+ * Returns: 0 if OK, -EBUSY if an existing enveloping region has different
-+ * flags, -EPERM if there is an existing non-adjacent region, -ENOSPC if there
-+ * is no more room in the list of regions, ekse region number that was coalesced
-+ * with this one
-+ **/
- static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 			      phys_size_t size, enum lmb_flags flags)
- {
-@@ -250,7 +285,7 @@ static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 				/* Already have this area, so we're done */
- 				return 0;
- 			else
--				return -1; /* areas with new flags */
-+				return -EBUSY; /* areas with new flags */
- 		}
- 
- 		adjacent = lmb_addrs_adjacent(base, size, abase, asize);
-@@ -269,7 +304,7 @@ static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 			break;
- 		} else if (lmb_addrs_overlap(base, size, abase, asize)) {
- 			/* areas overlap */
--			return -1;
-+			return -EPERM;
- 		}
- 	}
- 
-@@ -283,7 +318,7 @@ static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
+@@ -252,7 +252,7 @@ void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
+  * @size:	size of the memory region to add
+  * @flags:	flags for this new memory region
+  * Returns: 0 if OK, -EBUSY if an existing enveloping region has different
+- * flags, -EPERM if there is an existing non-adjacent region, -ENOSPC if there
++ * flags, -EPERM if there is an existing non-adjacent region, -E2BIG if there
+  * is no more room in the list of regions, ekse region number that was coalesced
+  * with this one
+  **/
+@@ -318,7 +318,7 @@ static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
  	if (coalesced)
  		return coalesced;
  	if (rgn->cnt >= rgn->max)
--		return -1;
-+		return -ENOSPC;
+-		return -ENOSPC;
++		return -E2BIG;
  
  	/* Couldn't coalesce the LMB, so add it to the sorted table. */
  	for (i = rgn->cnt-1; i >= 0; i--) {
+@@ -511,11 +511,8 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+ 	return 0;
+ }
+ 
+-/*
+- * Try to allocate a specific address range: must be in defined memory but not
+- * reserved
+- */
+-phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
++int lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size,
++		   phys_addr_t *addrp)
+ {
+ 	int area;
+ 
+@@ -529,9 +526,14 @@ phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
+ 		if (lmb_addrs_overlap(lmb->memory.area[area].base,
+ 				      lmb->memory.area[area].size,
+ 				      base + size - 1, 1)) {
++			int ret;
++
+ 			/* ok, reserve the memory */
+-			if (lmb_reserve(lmb, base, size) >= 0)
+-				return base;
++			ret = lmb_reserve(lmb, base, size);
++			if (ret < 0)
++				return ret;
++			if (addrp)
++				*addrp = base;
+ 		}
+ 	}
+ 
+diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+index b665d8dcdeb4..c8dbdb3b73eb 100644
+--- a/test/lib/lmb.c
++++ b/test/lib/lmb.c
+@@ -497,22 +497,22 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+ 		   alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
+ 
+ 	/* allocate blocks */
+-	a = lmb_alloc_addr(&lmb, ram, alloc_addr_a - ram);
++	ut_assertok(lmb_alloc_addr(&lmb, ram, alloc_addr_a - ram, &a));
+ 	ut_asserteq(a, ram);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 3, ram, 0x8010000,
+ 		   alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
+-	b = lmb_alloc_addr(&lmb, alloc_addr_a + 0x10000,
+-			   alloc_addr_b - alloc_addr_a - 0x10000);
++	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_a + 0x10000,
++				   alloc_addr_b - alloc_addr_a - 0x10000, &b));
+ 	ut_asserteq(b, alloc_addr_a + 0x10000);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x10010000,
+ 		   alloc_addr_c, 0x10000, 0, 0);
+-	c = lmb_alloc_addr(&lmb, alloc_addr_b + 0x10000,
+-			   alloc_addr_c - alloc_addr_b - 0x10000);
++	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_b + 0x10000,
++				   alloc_addr_c - alloc_addr_b - 0x10000, &c));
+ 	ut_asserteq(c, alloc_addr_b + 0x10000);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
+ 		   0, 0, 0, 0);
+-	d = lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000,
+-			   ram_end - alloc_addr_c - 0x10000);
++	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000,
++				   ram_end - alloc_addr_c - 0x10000, &d));
+ 	ut_asserteq(d, alloc_addr_c + 0x10000);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, ram_size,
+ 		   0, 0, 0, 0);
+@@ -528,7 +528,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+ 
+ 	/* allocate at 3 points in free range */
+ 
+-	d = lmb_alloc_addr(&lmb, ram_end - 4, 4);
++	ut_assertok(lmb_alloc_addr(&lmb, ram_end - 4, 4, &d));
+ 	ut_asserteq(d, ram_end - 4);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x18010000,
+ 		   d, 4, 0, 0);
+@@ -537,7 +537,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
+ 		   0, 0, 0, 0);
+ 
+-	d = lmb_alloc_addr(&lmb, ram_end - 128, 4);
++	ut_assertok(lmb_alloc_addr(&lmb, ram_end - 128, 4, &d));
+ 	ut_asserteq(d, ram_end - 128);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x18010000,
+ 		   d, 4, 0, 0);
+@@ -546,7 +546,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
+ 		   0, 0, 0, 0);
+ 
+-	d = lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000, 4);
++	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000, 4, &d));
+ 	ut_asserteq(d, alloc_addr_c + 0x10000);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010004,
+ 		   0, 0, 0, 0);
+@@ -560,19 +560,19 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+ 	ut_asserteq(ret, 0);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram + 0x8000000, 0x10010000,
+ 		   0, 0, 0, 0);
+-	d = lmb_alloc_addr(&lmb, ram, 4);
++	ut_assertok(lmb_alloc_addr(&lmb, ram, 4, &d));
+ 	ut_asserteq(d, ram);
+ 	ASSERT_LMB(&lmb, ram, ram_size, 2, d, 4,
+ 		   ram + 0x8000000, 0x10010000, 0, 0);
+ 
+ 	/* check that allocating outside memory fails */
+ 	if (ram_end != 0) {
+-		ret = lmb_alloc_addr(&lmb, ram_end, 1);
+-		ut_asserteq(ret, 0);
++		ut_assertok(lmb_alloc_addr(&lmb, ram_end, 1, &a));
++		ut_asserteq(0x40000000, a);
+ 	}
+ 	if (ram != 0) {
+-		ret = lmb_alloc_addr(&lmb, ram - 1, 1);
+-		ut_asserteq(ret, 0);
++		ut_assertok(lmb_alloc_addr(&lmb, ram - 1, 1, &a));
++		ut_asserteq(ram, a);
+ 	}
+ 
+ 	return 0;
+@@ -588,7 +588,7 @@ static int lib_test_lmb_alloc_addr(struct unit_test_state *uts)
+ 		return ret;
+ 
+ 	/* simulate 512 MiB RAM beginning at 1.5GiB */
+-	return test_alloc_addr(uts, 0xE0000000);
++	return test_alloc_addr(uts, 0xe0000000);
+ }
+ 
+ DM_TEST(lib_test_lmb_alloc_addr, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+@@ -699,8 +699,7 @@ static int lib_test_LMB_MAX_AREAS(struct unit_test_state *uts)
+ 
+ 	/*  error for the (CONFIG_LMB_MAX_AREAS + 1) memory regions */
+ 	offset = ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * ram_size;
+-	ret = lmb_add(&lmb, offset, ram_size);
+-	ut_asserteq(ret, -1);
++	ut_asserteq(-E2BIG, lmb_add(&lmb, offset, ram_size));
+ 
+ 	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
+ 	ut_asserteq(lmb.reserved.cnt, 0);
+@@ -717,8 +716,7 @@ static int lib_test_LMB_MAX_AREAS(struct unit_test_state *uts)
+ 
+ 	/*  error for the 9th reserved blocks */
+ 	offset = ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * blk_size;
+-	ret = lmb_reserve(&lmb, offset, blk_size);
+-	ut_asserteq(ret, -1);
++	ut_asserteq(-E2BIG, lmb_reserve(&lmb, offset, blk_size));
+ 
+ 	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
+ 	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_AREAS);
+@@ -762,8 +760,8 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+ 		   0, 0, 0, 0);
+ 
+ 	/* reserve again, new flag */
+-	ret = lmb_reserve_flags(&lmb, 0x40010000, 0x10000, LMB_NONE);
+-	ut_asserteq(ret, -1);
++	ut_asserteq(-EBUSY,
++		    lmb_reserve_flags(&lmb, 0x40010000, 0x10000, LMB_NONE));
+ 	ASSERT_LMB(&lmb, ram, ram_size, 1, 0x40010000, 0x10000,
+ 		   0, 0, 0, 0);
+ 
 -- 
 2.42.0.283.g2d96d420d3-goog
 
