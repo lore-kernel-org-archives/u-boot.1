@@ -4,75 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D754CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0386ACA0FE3
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 02:58:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D0DC868D7;
-	Fri,  1 Sep 2023 03:14:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E2F89866DC;
+	Fri,  1 Sep 2023 04:58:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g2ax4kzC";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FC1C80750; Fri,  1 Sep 2023 03:14:26 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1F4E2866DC; Fri,  1 Sep 2023 04:58:25 +0200 (CEST)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C58586776
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1E5C86546
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 04:58:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-794e0e8b588so54241139f.1
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693530861; x=1694135661; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bc4Uzn3BMOtxZspgYcOiJ0NswVdA95+gRnuKpkhbEgQ=;
- b=g2ax4kzC+G2CZMdFh4poW9zN+X/3bHUJxkOvnuiqHGYGD/dAPMyLxoO4jA2iJ7GSQB
- Um6OHbe0fqvx0e6Mm1isnU1B7pTzV7KJpqnonSDbUI3lnGBbXJBuDFoNJYjmkqNmjc8g
- HdiMArkgEkIoh7v9S4CDrO6Vc9N12LPgi/SHc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693530861; x=1694135661;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Bc4Uzn3BMOtxZspgYcOiJ0NswVdA95+gRnuKpkhbEgQ=;
- b=LNMQTFQ8/vDie8c3OgQJGee/ysS+AAQdcH9XZPYju9cIFx0P/ybjZzeuVhT8424dc7
- zlLWG/WG1t+x5CQ1uSqIYClBYjbOSl4I4FLKdYUjISBCmZFIXYP9aub/sFa8yB58pexL
- ZG7tOpSzYQhhamJf/3cMVvxmwI0DTMYo9SqrxrbLdQZ/YcLh52emyG0rbZ3Pl7sdfwyV
- aYB6XJLwLgoaEk0F99ZzlTMGZR0ictkq7gswPGqw3tqtS1jy0m3AFlMVBilRZ2Is+7rd
- 2AYXihpaeifkDqQr47rMMVzE/RWzlr7KmR4wcU8bZK/+FTVhEQWEb4iLhxEDmg3QQ4kk
- Ovzw==
-X-Gm-Message-State: AOJu0Yxw1XF60hj47OdZ4GG4U0QTyES1NKvxK9SQeNqo/BRfselwp/s0
- 5vJxipP2f3B00aGvObkvAITvvQys8GMqUtyjV2c=
-X-Google-Smtp-Source: AGHT+IHwXZ/3bvspBcxpQPW9j9IcZcW8udouU+86UVIfW91hCcYzaLkYKexKFtOD4SpL7xnuL/OvXw==
-X-Received: by 2002:a5e:da03:0:b0:794:e96f:b87d with SMTP id
- x3-20020a5eda03000000b00794e96fb87dmr1159379ioj.0.1693530861711; 
- Thu, 31 Aug 2023 18:14:21 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 18:14:21 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH v2 14/14] fs: Fix a confusing error about overlapping regions
-Date: Thu, 31 Aug 2023 19:13:52 -0600
-Message-ID: <20230901011357.2482203-15-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
-In-Reply-To: <20230901011357.2482203-1-sjg@chromium.org>
-References: <20230901011357.2482203-1-sjg@chromium.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 3812vtS1006383; Fri, 1 Sep 2023 11:57:57 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: eugen.hristev@collabora.com, jonas@kwiboo.se, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH 1/2] arm: dts: rockchip: rk3588, rk3588s: sync with Linux
+Date: Fri,  1 Sep 2023 11:57:18 +0900
+Message-Id: <20230901025719.34023-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,254 +51,721 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When lmb runs out of space in its internal tables, it gives errors on
-every fs load operation. This is horribly confusing, as the poor user
-tries different memory regions one at a time.
+Sync the devicetree with linux-next tag: next-20230831
 
-Use the updated API to check the error code and print a helpful message.
-Also, allow the operation to proceed.
-
-Update the tests accordingly.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 ---
+ arch/arm/dts/rk3588.dtsi       | 215 +++++++++++++++++++
+ arch/arm/dts/rk3588s.dtsi      | 367 +++++++++++++++++++++++++++++++++
+ include/dt-bindings/ata/ahci.h |  20 ++
+ 3 files changed, 602 insertions(+)
+ create mode 100644 include/dt-bindings/ata/ahci.h
 
-(no changes since v1)
-
- fs/fs.c        |  7 ++++++-
- include/lmb.h  | 19 ++++++++++++++++++-
- lib/lmb.c      | 20 +++++++++++---------
- test/lib/lmb.c | 42 ++++++++++++++++++++----------------------
- 4 files changed, 55 insertions(+), 33 deletions(-)
-
-diff --git a/fs/fs.c b/fs/fs.c
-index 2b815b1db0fe..1a84cb410bf9 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -569,8 +569,13 @@ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
- 	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
- 	lmb_dump_all(&lmb);
+diff --git a/arch/arm/dts/rk3588.dtsi b/arch/arm/dts/rk3588.dtsi
+index 8be75556af..5519c1430c 100644
+--- a/arch/arm/dts/rk3588.dtsi
++++ b/arch/arm/dts/rk3588.dtsi
+@@ -7,6 +7,16 @@
+ #include "rk3588-pinctrl.dtsi"
  
--	if (lmb_alloc_addr(&lmb, addr, read_len) == addr)
-+	ret = lmb_alloc_addr(&lmb, addr, read_len, NULL);
-+	if (!ret)
- 		return 0;
-+	if (ret == -E2BIG) {
-+		log_warning("Reservation tables exhausted: see CONFIG_LMB_USE_MAX_REGIONS\n");
-+		return 0;
-+	}
- 
- 	log_err("** Reading file would overwrite reserved memory **\n");
- 	return -ENOSPC;
-diff --git a/include/lmb.h b/include/lmb.h
-index c81716b3f1d1..f28a872c78d0 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -114,7 +114,24 @@ phys_addr_t lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
- 			   phys_addr_t max_addr);
- phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
- 			     phys_addr_t max_addr);
--phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size);
+ / {
++	pcie30_phy_grf: syscon@fd5b8000 {
++		compatible = "rockchip,rk3588-pcie3-phy-grf", "syscon";
++		reg = <0x0 0xfd5b8000 0x0 0x10000>;
++	};
 +
-+/**
-+ * lmb_alloc_addr() - Allocate memory within a region
-+ *
-+ * Try to allocate a specific address range: must be in defined memory but not
-+ * reserved
-+ *
-+ * @lmb:	the logical memory block struct
-+ * @base:	base address of the memory region
-+ * @size:	size of the memory region
-+ * @addrp:	if non-NULL, returns the allocated address, on success
-+ * Return:	0 if OK, -EPERM if the memory is already allocated, -E2BIG if
-+ * there is not enough room in the reservation tables, so
-+ * CONFIG_LMB_USE_MAX_REGIONS should be increased
++	pipe_phy1_grf: syscon@fd5c0000 {
++		compatible = "rockchip,rk3588-pipe-phy-grf", "syscon";
++		reg = <0x0 0xfd5c0000 0x0 0x100>;
++	};
++
+ 	i2s8_8ch: i2s@fddc8000 {
+ 		compatible = "rockchip,rk3588-i2s-tdm";
+ 		reg = <0x0 0xfddc8000 0x0 0x1000>;
+@@ -75,6 +85,159 @@
+ 		status = "disabled";
+ 	};
+ 
++	pcie3x4: pcie@fe150000 {
++		compatible = "rockchip,rk3588-pcie", "rockchip,rk3568-pcie";
++		#address-cells = <3>;
++		#size-cells = <2>;
++		bus-range = <0x00 0x0f>;
++		clocks = <&cru ACLK_PCIE_4L_MSTR>, <&cru ACLK_PCIE_4L_SLV>,
++			 <&cru ACLK_PCIE_4L_DBI>, <&cru PCLK_PCIE_4L>,
++			 <&cru CLK_PCIE_AUX0>, <&cru CLK_PCIE4L_PIPE>;
++		clock-names = "aclk_mst", "aclk_slv",
++			      "aclk_dbi", "pclk",
++			      "aux", "pipe";
++		device_type = "pci";
++		interrupts = <GIC_SPI 263 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 262 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 261 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 260 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 259 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "sys", "pmc", "msg", "legacy", "err";
++		#interrupt-cells = <1>;
++		interrupt-map-mask = <0 0 0 7>;
++		interrupt-map = <0 0 0 1 &pcie3x4_intc 0>,
++				<0 0 0 2 &pcie3x4_intc 1>,
++				<0 0 0 3 &pcie3x4_intc 2>,
++				<0 0 0 4 &pcie3x4_intc 3>;
++		linux,pci-domain = <0>;
++		max-link-speed = <3>;
++		msi-map = <0x0000 &its1 0x0000 0x1000>;
++		num-lanes = <4>;
++		phys = <&pcie30phy>;
++		phy-names = "pcie-phy";
++		power-domains = <&power RK3588_PD_PCIE>;
++		ranges = <0x01000000 0x0 0xf0100000 0x0 0xf0100000 0x0 0x00100000>,
++			 <0x02000000 0x0 0xf0200000 0x0 0xf0200000 0x0 0x00e00000>,
++			 <0x03000000 0x0 0x40000000 0x9 0x00000000 0x0 0x40000000>;
++		reg = <0xa 0x40000000 0x0 0x00400000>,
++		      <0x0 0xfe150000 0x0 0x00010000>,
++		      <0x0 0xf0000000 0x0 0x00100000>;
++		reg-names = "dbi", "apb", "config";
++		resets = <&cru SRST_PCIE0_POWER_UP>, <&cru SRST_P_PCIE0>;
++		reset-names = "pwr", "pipe";
++		status = "disabled";
++
++		pcie3x4_intc: legacy-interrupt-controller {
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <1>;
++			interrupt-parent = <&gic>;
++			interrupts = <GIC_SPI 260 IRQ_TYPE_EDGE_RISING 0>;
++		};
++	};
++
++	pcie3x2: pcie@fe160000 {
++		compatible = "rockchip,rk3588-pcie", "rockchip,rk3568-pcie";
++		#address-cells = <3>;
++		#size-cells = <2>;
++		bus-range = <0x10 0x1f>;
++		clocks = <&cru ACLK_PCIE_2L_MSTR>, <&cru ACLK_PCIE_2L_SLV>,
++			 <&cru ACLK_PCIE_2L_DBI>, <&cru PCLK_PCIE_2L>,
++			 <&cru CLK_PCIE_AUX1>, <&cru CLK_PCIE2L_PIPE>;
++		clock-names = "aclk_mst", "aclk_slv",
++			      "aclk_dbi", "pclk",
++			      "aux", "pipe";
++		device_type = "pci";
++		interrupts = <GIC_SPI 258 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 257 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 256 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 255 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 254 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "sys", "pmc", "msg", "legacy", "err";
++		#interrupt-cells = <1>;
++		interrupt-map-mask = <0 0 0 7>;
++		interrupt-map = <0 0 0 1 &pcie3x2_intc 0>,
++				<0 0 0 2 &pcie3x2_intc 1>,
++				<0 0 0 3 &pcie3x2_intc 2>,
++				<0 0 0 4 &pcie3x2_intc 3>;
++		linux,pci-domain = <1>;
++		max-link-speed = <3>;
++		msi-map = <0x1000 &its1 0x1000 0x1000>;
++		num-lanes = <2>;
++		phys = <&pcie30phy>;
++		phy-names = "pcie-phy";
++		power-domains = <&power RK3588_PD_PCIE>;
++		ranges = <0x01000000 0x0 0xf1100000 0x0 0xf1100000 0x0 0x00100000>,
++			 <0x02000000 0x0 0xf1200000 0x0 0xf1200000 0x0 0x00e00000>,
++			 <0x03000000 0x0 0x40000000 0x9 0x40000000 0x0 0x40000000>;
++		reg = <0xa 0x40400000 0x0 0x00400000>,
++		      <0x0 0xfe160000 0x0 0x00010000>,
++		      <0x0 0xf1000000 0x0 0x00100000>;
++		reg-names = "dbi", "apb", "config";
++		resets = <&cru SRST_PCIE1_POWER_UP>, <&cru SRST_P_PCIE1>;
++		reset-names = "pwr", "pipe";
++		status = "disabled";
++
++		pcie3x2_intc: legacy-interrupt-controller {
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <1>;
++			interrupt-parent = <&gic>;
++			interrupts = <GIC_SPI 255 IRQ_TYPE_EDGE_RISING 0>;
++		};
++	};
++
++	pcie2x1l0: pcie@fe170000 {
++		compatible = "rockchip,rk3588-pcie", "rockchip,rk3568-pcie";
++		bus-range = <0x20 0x2f>;
++		clocks = <&cru ACLK_PCIE_1L0_MSTR>, <&cru ACLK_PCIE_1L0_SLV>,
++			 <&cru ACLK_PCIE_1L0_DBI>, <&cru PCLK_PCIE_1L0>,
++			 <&cru CLK_PCIE_AUX2>, <&cru CLK_PCIE1L0_PIPE>;
++		clock-names = "aclk_mst", "aclk_slv",
++			      "aclk_dbi", "pclk",
++			      "aux", "pipe";
++		device_type = "pci";
++		interrupts = <GIC_SPI 243 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 242 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 241 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 239 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "sys", "pmc", "msg", "legacy", "err";
++		#interrupt-cells = <1>;
++		interrupt-map-mask = <0 0 0 7>;
++		interrupt-map = <0 0 0 1 &pcie2x1l0_intc 0>,
++				<0 0 0 2 &pcie2x1l0_intc 1>,
++				<0 0 0 3 &pcie2x1l0_intc 2>,
++				<0 0 0 4 &pcie2x1l0_intc 3>;
++		linux,pci-domain = <2>;
++		max-link-speed = <2>;
++		msi-map = <0x2000 &its0 0x2000 0x1000>;
++		num-lanes = <1>;
++		phys = <&combphy1_ps PHY_TYPE_PCIE>;
++		phy-names = "pcie-phy";
++		power-domains = <&power RK3588_PD_PCIE>;
++		ranges = <0x01000000 0x0 0xf2100000 0x0 0xf2100000 0x0 0x00100000>,
++			 <0x02000000 0x0 0xf2200000 0x0 0xf2200000 0x0 0x00e00000>,
++			 <0x03000000 0x0 0x40000000 0x9 0x80000000 0x0 0x40000000>;
++		reg = <0xa 0x40800000 0x0 0x00400000>,
++		      <0x0 0xfe170000 0x0 0x00010000>,
++		      <0x0 0xf2000000 0x0 0x00100000>;
++		reg-names = "dbi", "apb", "config";
++		resets = <&cru SRST_PCIE2_POWER_UP>, <&cru SRST_P_PCIE2>;
++		reset-names = "pwr", "pipe";
++		#address-cells = <3>;
++		#size-cells = <2>;
++		status = "disabled";
++
++		pcie2x1l0_intc: legacy-interrupt-controller {
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <1>;
++			interrupt-parent = <&gic>;
++			interrupts = <GIC_SPI 240 IRQ_TYPE_EDGE_RISING 0>;
++		};
++	};
++
+ 	gmac0: ethernet@fe1b0000 {
+ 		compatible = "rockchip,rk3588-gmac", "snps,dwmac-4.20a";
+ 		reg = <0x0 0xfe1b0000 0x0 0x10000>;
+@@ -123,4 +286,56 @@
+ 			queue1 {};
+ 		};
+ 	};
++
++	sata1: sata@fe220000 {
++		compatible = "rockchip,rk3588-dwc-ahci", "snps,dwc-ahci";
++		reg = <0 0xfe220000 0 0x1000>;
++		interrupts = <GIC_SPI 274 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru ACLK_SATA1>, <&cru CLK_PMALIVE1>,
++			 <&cru CLK_RXOOB1>, <&cru CLK_PIPEPHY1_REF>,
++			 <&cru CLK_PIPEPHY1_PIPE_ASIC_G>;
++		clock-names = "sata", "pmalive", "rxoob", "ref", "asic";
++		ports-implemented = <0x1>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++		status = "disabled";
++
++		sata-port@0 {
++			reg = <0>;
++			hba-port-cap = <HBA_PORT_FBSCP>;
++			phys = <&combphy1_ps PHY_TYPE_SATA>;
++			phy-names = "sata-phy";
++			snps,rx-ts-max = <32>;
++			snps,tx-ts-max = <32>;
++		};
++	};
++
++	combphy1_ps: phy@fee10000 {
++		compatible = "rockchip,rk3588-naneng-combphy";
++		reg = <0x0 0xfee10000 0x0 0x100>;
++		clocks = <&cru CLK_REF_PIPE_PHY1>, <&cru PCLK_PCIE_COMBO_PIPE_PHY1>,
++			 <&cru PCLK_PHP_ROOT>;
++		clock-names = "ref", "apb", "pipe";
++		assigned-clocks = <&cru CLK_REF_PIPE_PHY1>;
++		assigned-clock-rates = <100000000>;
++		#phy-cells = <1>;
++		resets = <&cru SRST_REF_PIPE_PHY1>, <&cru SRST_P_PCIE2_PHY1>;
++		reset-names = "phy", "apb";
++		rockchip,pipe-grf = <&php_grf>;
++		rockchip,pipe-phy-grf = <&pipe_phy1_grf>;
++		status = "disabled";
++	};
++
++	pcie30phy: phy@fee80000 {
++		compatible = "rockchip,rk3588-pcie3-phy";
++		reg = <0x0 0xfee80000 0x0 0x20000>;
++		#phy-cells = <0>;
++		clocks = <&cru PCLK_PCIE_COMBO_PIPE_PHY>;
++		clock-names = "pclk";
++		resets = <&cru SRST_PCIE30_PHY>;
++		reset-names = "phy";
++		rockchip,pipe-grf = <&php_grf>;
++		rockchip,phy-grf = <&pcie30_phy_grf>;
++		status = "disabled";
++	};
+ };
+diff --git a/arch/arm/dts/rk3588s.dtsi b/arch/arm/dts/rk3588s.dtsi
+index 7dbac9ae2e..5544f66c6f 100644
+--- a/arch/arm/dts/rk3588s.dtsi
++++ b/arch/arm/dts/rk3588s.dtsi
+@@ -8,6 +8,8 @@
+ #include <dt-bindings/interrupt-controller/irq.h>
+ #include <dt-bindings/power/rk3588-power.h>
+ #include <dt-bindings/reset/rockchip,rk3588-cru.h>
++#include <dt-bindings/phy/phy.h>
++#include <dt-bindings/ata/ahci.h>
+ 
+ / {
+ 	compatible = "rockchip,rk3588";
+@@ -397,6 +399,50 @@
+ 		};
+ 	};
+ 
++	usb_host0_ehci: usb@fc800000 {
++		compatible = "rockchip,rk3588-ehci", "generic-ehci";
++		reg = <0x0 0xfc800000 0x0 0x40000>;
++		interrupts = <GIC_SPI 215 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru HCLK_HOST0>, <&cru HCLK_HOST_ARB0>, <&cru ACLK_USB>, <&u2phy2>;
++		phys = <&u2phy2_host>;
++		phy-names = "usb";
++		power-domains = <&power RK3588_PD_USB>;
++		status = "disabled";
++	};
++
++	usb_host0_ohci: usb@fc840000 {
++		compatible = "rockchip,rk3588-ohci", "generic-ohci";
++		reg = <0x0 0xfc840000 0x0 0x40000>;
++		interrupts = <GIC_SPI 216 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru HCLK_HOST0>, <&cru HCLK_HOST_ARB0>, <&cru ACLK_USB>, <&u2phy2>;
++		phys = <&u2phy2_host>;
++		phy-names = "usb";
++		power-domains = <&power RK3588_PD_USB>;
++		status = "disabled";
++	};
++
++	usb_host1_ehci: usb@fc880000 {
++		compatible = "rockchip,rk3588-ehci", "generic-ehci";
++		reg = <0x0 0xfc880000 0x0 0x40000>;
++		interrupts = <GIC_SPI 218 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru HCLK_HOST1>, <&cru HCLK_HOST_ARB1>, <&cru ACLK_USB>, <&u2phy3>;
++		phys = <&u2phy3_host>;
++		phy-names = "usb";
++		power-domains = <&power RK3588_PD_USB>;
++		status = "disabled";
++	};
++
++	usb_host1_ohci: usb@fc8c0000 {
++		compatible = "rockchip,rk3588-ohci", "generic-ohci";
++		reg = <0x0 0xfc8c0000 0x0 0x40000>;
++		interrupts = <GIC_SPI 219 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru HCLK_HOST1>, <&cru HCLK_HOST_ARB1>, <&cru ACLK_USB>, <&u2phy3>;
++		phys = <&u2phy3_host>;
++		phy-names = "usb";
++		power-domains = <&power RK3588_PD_USB>;
++		status = "disabled";
++	};
++
+ 	sys_grf: syscon@fd58c000 {
+ 		compatible = "rockchip,rk3588-sys-grf", "syscon";
+ 		reg = <0x0 0xfd58c000 0x0 0x1000>;
+@@ -407,6 +453,66 @@
+ 		reg = <0x0 0xfd5b0000 0x0 0x1000>;
+ 	};
+ 
++	pipe_phy0_grf: syscon@fd5bc000 {
++		compatible = "rockchip,rk3588-pipe-phy-grf", "syscon";
++		reg = <0x0 0xfd5bc000 0x0 0x100>;
++	};
++
++	pipe_phy2_grf: syscon@fd5c4000 {
++		compatible = "rockchip,rk3588-pipe-phy-grf", "syscon";
++		reg = <0x0 0xfd5c4000 0x0 0x100>;
++	};
++
++	usb2phy2_grf: syscon@fd5d8000 {
++		compatible = "rockchip,rk3588-usb2phy-grf", "syscon", "simple-mfd";
++		reg = <0x0 0xfd5d8000 0x0 0x4000>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++
++		u2phy2: usb2-phy@8000 {
++			compatible = "rockchip,rk3588-usb2phy";
++			reg = <0x8000 0x10>;
++			interrupts = <GIC_SPI 391 IRQ_TYPE_LEVEL_HIGH 0>;
++			resets = <&cru SRST_OTGPHY_U2_0>, <&cru SRST_P_USB2PHY_U2_0_GRF0>;
++			reset-names = "phy", "apb";
++			clocks = <&cru CLK_USB2PHY_HDPTXRXPHY_REF>;
++			clock-names = "phyclk";
++			clock-output-names = "usb480m_phy2";
++			#clock-cells = <0>;
++			status = "disabled";
++
++			u2phy2_host: host-port {
++				#phy-cells = <0>;
++				status = "disabled";
++			};
++		};
++	};
++
++	usb2phy3_grf: syscon@fd5dc000 {
++		compatible = "rockchip,rk3588-usb2phy-grf", "syscon", "simple-mfd";
++		reg = <0x0 0xfd5dc000 0x0 0x4000>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++
++		u2phy3: usb2-phy@c000 {
++			compatible = "rockchip,rk3588-usb2phy";
++			reg = <0xc000 0x10>;
++			interrupts = <GIC_SPI 392 IRQ_TYPE_LEVEL_HIGH 0>;
++			resets = <&cru SRST_OTGPHY_U2_1>, <&cru SRST_P_USB2PHY_U2_1_GRF0>;
++			reset-names = "phy", "apb";
++			clocks = <&cru CLK_USB2PHY_HDPTXRXPHY_REF>;
++			clock-names = "phyclk";
++			clock-output-names = "usb480m_phy3";
++			#clock-cells = <0>;
++			status = "disabled";
++
++			u2phy3_host: host-port {
++				#phy-cells = <0>;
++				status = "disabled";
++			};
++		};
++	};
++
+ 	ioc: syscon@fd5f0000 {
+ 		compatible = "rockchip,rk3588-ioc", "syscon";
+ 		reg = <0x0 0xfd5f0000 0x0 0x10000>;
+@@ -830,6 +936,57 @@
+ 		};
+ 	};
+ 
++	i2s4_8ch: i2s@fddc0000 {
++		compatible = "rockchip,rk3588-i2s-tdm";
++		reg = <0x0 0xfddc0000 0x0 0x1000>;
++		interrupts = <GIC_SPI 184 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru MCLK_I2S4_8CH_TX>, <&cru MCLK_I2S4_8CH_TX>, <&cru HCLK_I2S4_8CH>;
++		clock-names = "mclk_tx", "mclk_rx", "hclk";
++		assigned-clocks = <&cru CLK_I2S4_8CH_TX_SRC>;
++		assigned-clock-parents = <&cru PLL_AUPLL>;
++		dmas = <&dmac2 0>;
++		dma-names = "tx";
++		power-domains = <&power RK3588_PD_VO0>;
++		resets = <&cru SRST_M_I2S4_8CH_TX>;
++		reset-names = "tx-m";
++		#sound-dai-cells = <0>;
++		status = "disabled";
++	};
++
++	i2s5_8ch: i2s@fddf0000 {
++		compatible = "rockchip,rk3588-i2s-tdm";
++		reg = <0x0 0xfddf0000 0x0 0x1000>;
++		interrupts = <GIC_SPI 185 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru MCLK_I2S5_8CH_TX>, <&cru MCLK_I2S5_8CH_TX>, <&cru HCLK_I2S5_8CH>;
++		clock-names = "mclk_tx", "mclk_rx", "hclk";
++		assigned-clocks = <&cru CLK_I2S5_8CH_TX_SRC>;
++		assigned-clock-parents = <&cru PLL_AUPLL>;
++		dmas = <&dmac2 2>;
++		dma-names = "tx";
++		power-domains = <&power RK3588_PD_VO1>;
++		resets = <&cru SRST_M_I2S5_8CH_TX>;
++		reset-names = "tx-m";
++		#sound-dai-cells = <0>;
++		status = "disabled";
++	};
++
++	i2s9_8ch: i2s@fddfc000 {
++		compatible = "rockchip,rk3588-i2s-tdm";
++		reg = <0x0 0xfddfc000 0x0 0x1000>;
++		interrupts = <GIC_SPI 189 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru MCLK_I2S9_8CH_RX>, <&cru MCLK_I2S9_8CH_RX>, <&cru HCLK_I2S9_8CH>;
++		clock-names = "mclk_tx", "mclk_rx", "hclk";
++		assigned-clocks = <&cru CLK_I2S9_8CH_RX_SRC>;
++		assigned-clock-parents = <&cru PLL_AUPLL>;
++		dmas = <&dmac2 23>;
++		dma-names = "rx";
++		power-domains = <&power RK3588_PD_VO1>;
++		resets = <&cru SRST_M_I2S9_8CH_RX>;
++		reset-names = "rx-m";
++		#sound-dai-cells = <0>;
++		status = "disabled";
++	};
++
+ 	qos_gpu_m0: qos@fdf35000 {
+ 		compatible = "rockchip,rk3588-qos", "syscon";
+ 		reg = <0x0 0xfdf35000 0x0 0x20>;
+@@ -1070,6 +1227,108 @@
+ 		reg = <0x0 0xfdf82200 0x0 0x20>;
+ 	};
+ 
++	pcie2x1l1: pcie@fe180000 {
++		compatible = "rockchip,rk3588-pcie", "rockchip,rk3568-pcie";
++		bus-range = <0x30 0x3f>;
++		clocks = <&cru ACLK_PCIE_1L1_MSTR>, <&cru ACLK_PCIE_1L1_SLV>,
++			 <&cru ACLK_PCIE_1L1_DBI>, <&cru PCLK_PCIE_1L1>,
++			 <&cru CLK_PCIE_AUX3>, <&cru CLK_PCIE1L1_PIPE>;
++		clock-names = "aclk_mst", "aclk_slv",
++			      "aclk_dbi", "pclk",
++			      "aux", "pipe";
++		device_type = "pci";
++		interrupts = <GIC_SPI 248 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 247 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 246 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 245 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 244 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "sys", "pmc", "msg", "legacy", "err";
++		#interrupt-cells = <1>;
++		interrupt-map-mask = <0 0 0 7>;
++		interrupt-map = <0 0 0 1 &pcie2x1l1_intc 0>,
++				<0 0 0 2 &pcie2x1l1_intc 1>,
++				<0 0 0 3 &pcie2x1l1_intc 2>,
++				<0 0 0 4 &pcie2x1l1_intc 3>;
++		linux,pci-domain = <3>;
++		max-link-speed = <2>;
++		msi-map = <0x3000 &its0 0x3000 0x1000>;
++		num-lanes = <1>;
++		phys = <&combphy2_psu PHY_TYPE_PCIE>;
++		phy-names = "pcie-phy";
++		power-domains = <&power RK3588_PD_PCIE>;
++		ranges = <0x01000000 0x0 0xf3100000 0x0 0xf3100000 0x0 0x00100000>,
++			 <0x02000000 0x0 0xf3200000 0x0 0xf3200000 0x0 0x00e00000>,
++			 <0x03000000 0x0 0x40000000 0x9 0xc0000000 0x0 0x40000000>;
++		reg = <0xa 0x40c00000 0x0 0x00400000>,
++		      <0x0 0xfe180000 0x0 0x00010000>,
++		      <0x0 0xf3000000 0x0 0x00100000>;
++		reg-names = "dbi", "apb", "config";
++		resets = <&cru SRST_PCIE3_POWER_UP>, <&cru SRST_P_PCIE3>;
++		reset-names = "pwr", "pipe";
++		#address-cells = <3>;
++		#size-cells = <2>;
++		status = "disabled";
++
++		pcie2x1l1_intc: legacy-interrupt-controller {
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <1>;
++			interrupt-parent = <&gic>;
++			interrupts = <GIC_SPI 245 IRQ_TYPE_EDGE_RISING 0>;
++		};
++	};
++
++	pcie2x1l2: pcie@fe190000 {
++		compatible = "rockchip,rk3588-pcie", "rockchip,rk3568-pcie";
++		bus-range = <0x40 0x4f>;
++		clocks = <&cru ACLK_PCIE_1L2_MSTR>, <&cru ACLK_PCIE_1L2_SLV>,
++			 <&cru ACLK_PCIE_1L2_DBI>, <&cru PCLK_PCIE_1L2>,
++			 <&cru CLK_PCIE_AUX4>, <&cru CLK_PCIE1L2_PIPE>;
++		clock-names = "aclk_mst", "aclk_slv",
++			      "aclk_dbi", "pclk",
++			      "aux", "pipe";
++		device_type = "pci";
++		interrupts = <GIC_SPI 253 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 252 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 251 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 250 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 249 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "sys", "pmc", "msg", "legacy", "err";
++		#interrupt-cells = <1>;
++		interrupt-map-mask = <0 0 0 7>;
++		interrupt-map = <0 0 0 1 &pcie2x1l2_intc 0>,
++				<0 0 0 2 &pcie2x1l2_intc 1>,
++				<0 0 0 3 &pcie2x1l2_intc 2>,
++				<0 0 0 4 &pcie2x1l2_intc 3>;
++		linux,pci-domain = <4>;
++		max-link-speed = <2>;
++		msi-map = <0x4000 &its0 0x4000 0x1000>;
++		num-lanes = <1>;
++		phys = <&combphy0_ps PHY_TYPE_PCIE>;
++		phy-names = "pcie-phy";
++		power-domains = <&power RK3588_PD_PCIE>;
++		ranges = <0x01000000 0x0 0xf4100000 0x0 0xf4100000 0x0 0x00100000>,
++			 <0x02000000 0x0 0xf4200000 0x0 0xf4200000 0x0 0x00e00000>,
++			 <0x03000000 0x0 0x40000000 0xa 0x00000000 0x0 0x40000000>;
++		reg = <0xa 0x41000000 0x0 0x00400000>,
++		      <0x0 0xfe190000 0x0 0x00010000>,
++		      <0x0 0xf4000000 0x0 0x00100000>;
++		reg-names = "dbi", "apb", "config";
++		resets = <&cru SRST_PCIE4_POWER_UP>, <&cru SRST_P_PCIE4>;
++		reset-names = "pwr", "pipe";
++		#address-cells = <3>;
++		#size-cells = <2>;
++		status = "disabled";
++
++		pcie2x1l2_intc: legacy-interrupt-controller {
++			interrupt-controller;
++			#address-cells = <0>;
++			#interrupt-cells = <1>;
++			interrupt-parent = <&gic>;
++			interrupts = <GIC_SPI 250 IRQ_TYPE_EDGE_RISING 0>;
++		};
++	};
++
+ 	gmac1: ethernet@fe1c0000 {
+ 		compatible = "rockchip,rk3588-gmac", "snps,dwmac-4.20a";
+ 		reg = <0x0 0xfe1c0000 0x0 0x10000>;
+@@ -1119,6 +1378,52 @@
+ 		};
+ 	};
+ 
++	sata0: sata@fe210000 {
++		compatible = "rockchip,rk3588-dwc-ahci", "snps,dwc-ahci";
++		reg = <0 0xfe210000 0 0x1000>;
++		interrupts = <GIC_SPI 273 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru ACLK_SATA0>, <&cru CLK_PMALIVE0>,
++			 <&cru CLK_RXOOB0>, <&cru CLK_PIPEPHY0_REF>,
++			 <&cru CLK_PIPEPHY0_PIPE_ASIC_G>;
++		clock-names = "sata", "pmalive", "rxoob", "ref", "asic";
++		ports-implemented = <0x1>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++		status = "disabled";
++
++		sata-port@0 {
++			reg = <0>;
++			hba-port-cap = <HBA_PORT_FBSCP>;
++			phys = <&combphy0_ps PHY_TYPE_SATA>;
++			phy-names = "sata-phy";
++			snps,rx-ts-max = <32>;
++			snps,tx-ts-max = <32>;
++		};
++	};
++
++	sata2: sata@fe230000 {
++		compatible = "rockchip,rk3588-dwc-ahci", "snps,dwc-ahci";
++		reg = <0 0xfe230000 0 0x1000>;
++		interrupts = <GIC_SPI 275 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru ACLK_SATA2>, <&cru CLK_PMALIVE2>,
++			 <&cru CLK_RXOOB2>, <&cru CLK_PIPEPHY2_REF>,
++			 <&cru CLK_PIPEPHY2_PIPE_ASIC_G>;
++		clock-names = "sata", "pmalive", "rxoob", "ref", "asic";
++		ports-implemented = <0x1>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++		status = "disabled";
++
++		sata-port@0 {
++			reg = <0>;
++			hba-port-cap = <HBA_PORT_FBSCP>;
++			phys = <&combphy2_psu PHY_TYPE_SATA>;
++			phy-names = "sata-phy";
++			snps,rx-ts-max = <32>;
++			snps,tx-ts-max = <32>;
++		};
++	};
++
+ 	sdmmc: mmc@fe2c0000 {
+ 		compatible = "rockchip,rk3588-dw-mshc", "rockchip,rk3288-dw-mshc";
+ 		reg = <0x0 0xfe2c0000 0x0 0x4000>;
+@@ -1134,6 +1439,21 @@
+ 		status = "disabled";
+ 	};
+ 
++	sdio: mmc@fe2d0000 {
++		compatible = "rockchip,rk3588-dw-mshc", "rockchip,rk3288-dw-mshc";
++		reg = <0x00 0xfe2d0000 0x00 0x4000>;
++		interrupts = <GIC_SPI 204 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru HCLK_SDIO>, <&cru CCLK_SRC_SDIO>,
++			 <&cru SCLK_SDIO_DRV>, <&cru SCLK_SDIO_SAMPLE>;
++		clock-names = "biu", "ciu", "ciu-drive", "ciu-sample";
++		fifo-depth = <0x100>;
++		max-frequency = <200000000>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&sdiom1_pins>;
++		power-domains = <&power RK3588_PD_SDIO>;
++		status = "disabled";
++	};
++
+ 	sdhci: mmc@fe2e0000 {
+ 		compatible = "rockchip,rk3588-dwcmshc";
+ 		reg = <0x0 0xfe2e0000 0x0 0x10000>;
+@@ -1145,6 +1465,9 @@
+ 			 <&cru TMCLK_EMMC>;
+ 		clock-names = "core", "bus", "axi", "block", "timer";
+ 		max-frequency = <200000000>;
++		pinctrl-0 = <&emmc_rstnout>, <&emmc_bus8>, <&emmc_clk>,
++			    <&emmc_cmd>, <&emmc_data_strobe>;
++		pinctrl-names = "default";
+ 		resets = <&cru SRST_C_EMMC>, <&cru SRST_H_EMMC>,
+ 			 <&cru SRST_A_EMMC>, <&cru SRST_B_EMMC>,
+ 			 <&cru SRST_T_EMMC>;
+@@ -1742,6 +2065,18 @@
+ 		status = "disabled";
+ 	};
+ 
++	saradc: adc@fec10000 {
++		compatible = "rockchip,rk3588-saradc";
++		reg = <0x0 0xfec10000 0x0 0x10000>;
++		interrupts = <GIC_SPI 398 IRQ_TYPE_LEVEL_HIGH 0>;
++		#io-channel-cells = <1>;
++		clocks = <&cru CLK_SARADC>, <&cru PCLK_SARADC>;
++		clock-names = "saradc", "apb_pclk";
++		resets = <&cru SRST_P_SARADC>;
++		reset-names = "saradc-apb";
++		status = "disabled";
++	};
++
+ 	i2c6: i2c@fec80000 {
+ 		compatible = "rockchip,rk3588-i2c", "rockchip,rk3399-i2c";
+ 		reg = <0x0 0xfec80000 0x0 0x1000>;
+@@ -1862,6 +2197,38 @@
+ 		#dma-cells = <1>;
+ 	};
+ 
++	combphy0_ps: phy@fee00000 {
++		compatible = "rockchip,rk3588-naneng-combphy";
++		reg = <0x0 0xfee00000 0x0 0x100>;
++		clocks = <&cru CLK_REF_PIPE_PHY0>, <&cru PCLK_PCIE_COMBO_PIPE_PHY0>,
++			 <&cru PCLK_PHP_ROOT>;
++		clock-names = "ref", "apb", "pipe";
++		assigned-clocks = <&cru CLK_REF_PIPE_PHY0>;
++		assigned-clock-rates = <100000000>;
++		#phy-cells = <1>;
++		resets = <&cru SRST_REF_PIPE_PHY0>, <&cru SRST_P_PCIE2_PHY0>;
++		reset-names = "phy", "apb";
++		rockchip,pipe-grf = <&php_grf>;
++		rockchip,pipe-phy-grf = <&pipe_phy0_grf>;
++		status = "disabled";
++	};
++
++	combphy2_psu: phy@fee20000 {
++		compatible = "rockchip,rk3588-naneng-combphy";
++		reg = <0x0 0xfee20000 0x0 0x100>;
++		clocks = <&cru CLK_REF_PIPE_PHY2>, <&cru PCLK_PCIE_COMBO_PIPE_PHY2>,
++			 <&cru PCLK_PHP_ROOT>;
++		clock-names = "ref", "apb", "pipe";
++		assigned-clocks = <&cru CLK_REF_PIPE_PHY2>;
++		assigned-clock-rates = <100000000>;
++		#phy-cells = <1>;
++		resets = <&cru SRST_REF_PIPE_PHY2>, <&cru SRST_P_PCIE2_PHY2>;
++		reset-names = "phy", "apb";
++		rockchip,pipe-grf = <&php_grf>;
++		rockchip,pipe-phy-grf = <&pipe_phy2_grf>;
++		status = "disabled";
++	};
++
+ 	system_sram2: sram@ff001000 {
+ 		compatible = "mmio-sram";
+ 		reg = <0x0 0xff001000 0x0 0xef000>;
+diff --git a/include/dt-bindings/ata/ahci.h b/include/dt-bindings/ata/ahci.h
+new file mode 100644
+index 0000000000..b3f3b7cf9a
+--- /dev/null
++++ b/include/dt-bindings/ata/ahci.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
++/*
++ * This header provides constants for most AHCI bindings.
 + */
-+int lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size,
-+		   phys_addr_t *addrp);
 +
- phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
- 
- /**
-diff --git a/lib/lmb.c b/lib/lmb.c
-index fd6326cbf7fe..c3d14db07e45 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -252,7 +252,7 @@ void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
-  * @size:	size of the memory region to add
-  * @flags:	flags for this new memory region
-  * Returns: 0 if OK, -EBUSY if an existing enveloping region has different
-- * flags, -EPERM if there is an existing non-adjacent region, -ENOSPC if there
-+ * flags, -EPERM if there is an existing non-adjacent region, -E2BIG if there
-  * is no more room in the list of regions, ekse region number that was coalesced
-  * with this one
-  **/
-@@ -318,7 +318,7 @@ static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 	if (coalesced)
- 		return coalesced;
- 	if (rgn->cnt >= rgn->max)
--		return -ENOSPC;
-+		return -E2BIG;
- 
- 	/* Couldn't coalesce the LMB, so add it to the sorted table. */
- 	for (i = rgn->cnt-1; i >= 0; i--) {
-@@ -511,11 +511,8 @@ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
- 	return 0;
- }
- 
--/*
-- * Try to allocate a specific address range: must be in defined memory but not
-- * reserved
-- */
--phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
-+int lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size,
-+		   phys_addr_t *addrp)
- {
- 	int area;
- 
-@@ -529,9 +526,14 @@ phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 		if (lmb_addrs_overlap(lmb->memory.area[area].base,
- 				      lmb->memory.area[area].size,
- 				      base + size - 1, 1)) {
-+			int ret;
++#ifndef _DT_BINDINGS_ATA_AHCI_H
++#define _DT_BINDINGS_ATA_AHCI_H
 +
- 			/* ok, reserve the memory */
--			if (lmb_reserve(lmb, base, size) >= 0)
--				return base;
-+			ret = lmb_reserve(lmb, base, size);
-+			if (ret < 0)
-+				return ret;
-+			if (addrp)
-+				*addrp = base;
- 		}
- 	}
- 
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index b665d8dcdeb4..c8dbdb3b73eb 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -497,22 +497,22 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 		   alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
- 
- 	/* allocate blocks */
--	a = lmb_alloc_addr(&lmb, ram, alloc_addr_a - ram);
-+	ut_assertok(lmb_alloc_addr(&lmb, ram, alloc_addr_a - ram, &a));
- 	ut_asserteq(a, ram);
- 	ASSERT_LMB(&lmb, ram, ram_size, 3, ram, 0x8010000,
- 		   alloc_addr_b, 0x10000, alloc_addr_c, 0x10000);
--	b = lmb_alloc_addr(&lmb, alloc_addr_a + 0x10000,
--			   alloc_addr_b - alloc_addr_a - 0x10000);
-+	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_a + 0x10000,
-+				   alloc_addr_b - alloc_addr_a - 0x10000, &b));
- 	ut_asserteq(b, alloc_addr_a + 0x10000);
- 	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x10010000,
- 		   alloc_addr_c, 0x10000, 0, 0);
--	c = lmb_alloc_addr(&lmb, alloc_addr_b + 0x10000,
--			   alloc_addr_c - alloc_addr_b - 0x10000);
-+	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_b + 0x10000,
-+				   alloc_addr_c - alloc_addr_b - 0x10000, &c));
- 	ut_asserteq(c, alloc_addr_b + 0x10000);
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
- 		   0, 0, 0, 0);
--	d = lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000,
--			   ram_end - alloc_addr_c - 0x10000);
-+	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000,
-+				   ram_end - alloc_addr_c - 0x10000, &d));
- 	ut_asserteq(d, alloc_addr_c + 0x10000);
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, ram_size,
- 		   0, 0, 0, 0);
-@@ -528,7 +528,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 
- 	/* allocate at 3 points in free range */
- 
--	d = lmb_alloc_addr(&lmb, ram_end - 4, 4);
-+	ut_assertok(lmb_alloc_addr(&lmb, ram_end - 4, 4, &d));
- 	ut_asserteq(d, ram_end - 4);
- 	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x18010000,
- 		   d, 4, 0, 0);
-@@ -537,7 +537,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
- 		   0, 0, 0, 0);
- 
--	d = lmb_alloc_addr(&lmb, ram_end - 128, 4);
-+	ut_assertok(lmb_alloc_addr(&lmb, ram_end - 128, 4, &d));
- 	ut_asserteq(d, ram_end - 128);
- 	ASSERT_LMB(&lmb, ram, ram_size, 2, ram, 0x18010000,
- 		   d, 4, 0, 0);
-@@ -546,7 +546,7 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010000,
- 		   0, 0, 0, 0);
- 
--	d = lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000, 4);
-+	ut_assertok(lmb_alloc_addr(&lmb, alloc_addr_c + 0x10000, 4, &d));
- 	ut_asserteq(d, alloc_addr_c + 0x10000);
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram, 0x18010004,
- 		   0, 0, 0, 0);
-@@ -560,19 +560,19 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, ram + 0x8000000, 0x10010000,
- 		   0, 0, 0, 0);
--	d = lmb_alloc_addr(&lmb, ram, 4);
-+	ut_assertok(lmb_alloc_addr(&lmb, ram, 4, &d));
- 	ut_asserteq(d, ram);
- 	ASSERT_LMB(&lmb, ram, ram_size, 2, d, 4,
- 		   ram + 0x8000000, 0x10010000, 0, 0);
- 
- 	/* check that allocating outside memory fails */
- 	if (ram_end != 0) {
--		ret = lmb_alloc_addr(&lmb, ram_end, 1);
--		ut_asserteq(ret, 0);
-+		ut_assertok(lmb_alloc_addr(&lmb, ram_end, 1, &a));
-+		ut_asserteq(0x40000000, a);
- 	}
- 	if (ram != 0) {
--		ret = lmb_alloc_addr(&lmb, ram - 1, 1);
--		ut_asserteq(ret, 0);
-+		ut_assertok(lmb_alloc_addr(&lmb, ram - 1, 1, &a));
-+		ut_asserteq(ram, a);
- 	}
- 
- 	return 0;
-@@ -588,7 +588,7 @@ static int lib_test_lmb_alloc_addr(struct unit_test_state *uts)
- 		return ret;
- 
- 	/* simulate 512 MiB RAM beginning at 1.5GiB */
--	return test_alloc_addr(uts, 0xE0000000);
-+	return test_alloc_addr(uts, 0xe0000000);
- }
- 
- DM_TEST(lib_test_lmb_alloc_addr, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
-@@ -699,8 +699,7 @@ static int lib_test_LMB_MAX_AREAS(struct unit_test_state *uts)
- 
- 	/*  error for the (CONFIG_LMB_MAX_AREAS + 1) memory regions */
- 	offset = ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * ram_size;
--	ret = lmb_add(&lmb, offset, ram_size);
--	ut_asserteq(ret, -1);
-+	ut_asserteq(-E2BIG, lmb_add(&lmb, offset, ram_size));
- 
- 	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
- 	ut_asserteq(lmb.reserved.cnt, 0);
-@@ -717,8 +716,7 @@ static int lib_test_LMB_MAX_AREAS(struct unit_test_state *uts)
- 
- 	/*  error for the 9th reserved blocks */
- 	offset = ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * blk_size;
--	ret = lmb_reserve(&lmb, offset, blk_size);
--	ut_asserteq(ret, -1);
-+	ut_asserteq(-E2BIG, lmb_reserve(&lmb, offset, blk_size));
- 
- 	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
- 	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_AREAS);
-@@ -762,8 +760,8 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
- 		   0, 0, 0, 0);
- 
- 	/* reserve again, new flag */
--	ret = lmb_reserve_flags(&lmb, 0x40010000, 0x10000, LMB_NONE);
--	ut_asserteq(ret, -1);
-+	ut_asserteq(-EBUSY,
-+		    lmb_reserve_flags(&lmb, 0x40010000, 0x10000, LMB_NONE));
- 	ASSERT_LMB(&lmb, ram, ram_size, 1, 0x40010000, 0x10000,
- 		   0, 0, 0, 0);
- 
++/* Host Bus Adapter generic platform capabilities */
++#define HBA_SSS		(1 << 27)
++#define HBA_SMPS	(1 << 28)
++
++/* Host Bus Adapter port-specific platform capabilities */
++#define HBA_PORT_HPCP	(1 << 18)
++#define HBA_PORT_MPSP	(1 << 19)
++#define HBA_PORT_CPD	(1 << 20)
++#define HBA_PORT_ESP	(1 << 21)
++#define HBA_PORT_FBSCP	(1 << 22)
++
++#endif
 -- 
-2.42.0.283.g2d96d420d3-goog
+2.39.2
 
