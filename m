@@ -4,62 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409EACA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 006C9CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:48:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6514F868B1;
-	Fri,  1 Sep 2023 12:39:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ACC786886;
+	Fri,  1 Sep 2023 12:48:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gbr1YWd0";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C9AAA8688B; Fri,  1 Sep 2023 12:39:22 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1693565309;
+	bh=ozR27wZwYllD4wrrIzh+oIOYHqZPmL4RxK7TGYR0tVA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=dt1bJvRuWZZ7HUBFu195Yj6/EDTZ/xoGoL2uigXSM1yqioaOmXkwGM0XbKctMo3s6
+	 5AhuWJyFwgnLThlhLvnAEvN0uPEttKbWKRXtvaQ28Sk0/jpiZ2f+vbl7HtNeHEoTm7
+	 WkHXv8hBbLwD7OQD8NjfJSM028QexHDSPdWxOtGqtK9htd2FRSBMSOr57mA0k7A+8k
+	 DV249/2rT1JanC3Kpdw8DQnd7rGO4fbjDpBbdwCdqDw0Q8IwT7t1cV0t5Iic6LRDf8
+	 2k8DvRmV+oupRozcOBSq8U5bWXm+UztXS4JJwwFyrJ00ie6HPmlfR/0b8i2vtsTx5w
+	 V8NZr29Y+HAkw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5615A8669D
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:39:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-jain1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 381AdGTK009272;
- Fri, 1 Sep 2023 05:39:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693564756;
- bh=kovpGWgynjPJfJnQG853bMesC96RDuB6neFcZXOUYDA=;
- h=From:To:CC:Subject:Date;
- b=gbr1YWd0enKTblEjVqk+MkBHoJ8Rv3xQe1pPM806MYOKlDYOnVNy1vcNTvyFFlVbX
- wuoxLYZ4TdvLk5R6d52a88g4qZGgtu7oAFkYrNGzXoC7odysgr8ez6IDNFqldOjnDt
- ykli8JdcN8Md2VF5s5ZsYum4aDvZwr9s2CZ4iGDE=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 381AdGWI007998
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 1 Sep 2023 05:39:16 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 1
- Sep 2023 05:39:16 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 1 Sep 2023 05:39:16 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 381AdFRD119053;
- Fri, 1 Sep 2023 05:39:16 -0500
-From: Nikhil M Jain <n-jain1@ti.com>
-To: <u-boot@lists.denx.de>, <devarsht@ti.com>, <trini@konsulko.com>
-CC: <vigneshr@ti.com>, Nikhil M Jain <n-jain1@ti.com>
-Subject: [PATCH] tools: logos: Rename TI logo files
-Date: Fri, 1 Sep 2023 16:09:13 +0530
-Message-ID: <20230901103913.38407-1-n-jain1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7DFD18074B;
+ Fri,  1 Sep 2023 12:48:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1693565307;
+ bh=ozR27wZwYllD4wrrIzh+oIOYHqZPmL4RxK7TGYR0tVA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=hW7F0hjOLNp8/YUtasfObVDwZgsd/gY5UO9noDblfBxqBzRgUI08L8z/4qFanAv7F
+ Bc3swx3x12k3Q05PFNtNo9jG5oQ0KHGERGIUDPqoDKNueG57UPDiPq9jenROcfmCpf
+ kQZoDq2qwYj6F0Ld9BcQSCcRA/hWHnuOTKwCGijY8Zuk2f+d0HtILBkw5mQTXn8Dly
+ MZ2IW7QGXUx+02qDSjcm9b46YAxi72AsEl5F4ffA+dXVff6nHYyt+giokhrS6PMy6W
+ 6kkEOR+OEYxHMhtZfcC5Ba6fxEmoSmbIrhyFkqSuGKZbyWl+43unvl9q26CH8gJC9f
+ PjSCYOnGjicRQ==
+Message-ID: <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
+Date: Fri, 1 Sep 2023 12:48:27 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v2] usb: check for companion controller in uclass
+Content-Language: en-US
+To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>
+References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,41 +71,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change the file name from ti.gz and ti.bmp to ti_logos_414x97_32bpp to
-help user understand the resolution and identify the logo files when
-placed in the boot partition and update the splashfile name with the
-same in .env file.
+On 9/1/23 11:52, Fabrice Gasnier wrote:
+> EHCI is usually used with companion controller (like OHCI) as companion
+> controller. This information on the companion is missing currently in
+> companion drivers.
+> So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
+> first, then EHCI.
+> This is seen on STM32MP1 where DT probing makes the probe order to occur
+> by increasing address (OHCI address < EHCI address).
+> 
+> When a low speed or full-speed device is plugged in, it's not detected as
+> EHCI should first detect it, and give ownership (handover) to OHCI.
+> 
+> Current situation on STM32MP1 (with a low speed device plugged-in)
+> STM32MP> usb start
+> starting USB...
+> Bus usb@5800c000: USB OHCI 1.0
+> Bus usb@5800d000: USB EHCI 1.00
+> scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>     scanning usb for storage devices... 0 Storage Device(s) found
+> 
+> The "companion" property in the device tree allow to retrieve companion
+> controller information, from the EHCI node. This allow marking the
+> companion driver as such.
+> 
+> With this patch (same low speed device plugged in):
+> STM32MP> usb start
+> starting USB...
+> Bus usb@5800c000: USB OHCI 1.0
+> Bus usb@5800d000: USB EHCI 1.00
+> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+> scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+>     scanning usb for storage devices... 0 Storage Device(s) found
+> STM32MP> usb tree
+> USB device tree:
+> 1  Hub (12 Mb/s, 0mA)
+> |   U-Boot Root Hub
+> |
+> +-2  Human Interface (1.5 Mb/s, 100mA)
+>     HP HP USB 1000dpi Laser Mouse
+> 
+> 1  Hub (480 Mb/s, 0mA)
+>   u-boot EHCI Host Controller
+> 
+> This also optimize bus scan when a High speed device is plugged in, as
+> the usb-uclass skips OHCI in this case:
+> 
+> STM32MP> usb reset
+> resetting USB...
+> Bus usb@5800c000: USB OHCI 1.0
+> Bus usb@5800d000: USB EHCI 1.00
+> scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+>     scanning usb for storage devices... 1 Storage Device(s) found
+> STM32MP> usb tree
+> USB device tree:
+> 1  Hub (480 Mb/s, 0mA)
+> |  u-boot EHCI Host Controller
+> |
+> +-2  Mass Storage (480 Mb/s, 200mA)
+>     SanDisk Cruzer Blade 03003432021922011407
+> 
+> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> ---
+> 
+> Changes in v2:
+> - move companion probing from generic ehci driver to usb-uclass, after
+>    Marek's questions on design choice.
+> - rename commit title to follow this change
+> 
+> ---
+>   drivers/usb/host/usb-uclass.c | 36 +++++++++++++++++++++++++++++++++++
+>   1 file changed, 36 insertions(+)
+> 
+> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+> index 02c0138a2065..e238eee8c84d 100644
+> --- a/drivers/usb/host/usb-uclass.c
+> +++ b/drivers/usb/host/usb-uclass.c
+> @@ -249,6 +249,37 @@ static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
+>   	}
+>   }
+>   
+> +static int usb_probe_companion(struct udevice *bus)
+> +{
+> +	struct udevice *companion_dev;
+> +	int ret;
+> +
+> +	/*
+> +	 * Enforce optional companion controller is marked as such in order to
+> +	 * 1st scan the primary controller, before the companion controller
+> +	 * (ownership is given to companion when low or full speed devices
+> +	 * have been detected).
+> +	 */
+> +	ret = uclass_get_device_by_phandle(UCLASS_USB, bus, "companion", &companion_dev);
+> +	if (!ret) {
+> +		struct usb_bus_priv *companion_bus_priv;
+> +
+> +		debug("%s is the companion of %s\n", companion_dev->name, bus->name);
+> +		companion_bus_priv = dev_get_uclass_priv(companion_dev);
+> +		companion_bus_priv->companion = true;
+> +	} else if (ret && ret != -ENOENT && ret != -ENODEV) {
+> +		/*
+> +		 * Treat everything else than no companion or disabled
+> +		 * companion as an error. (It may not be enabled on boards
+> +		 * that have a High-Speed HUB to handle FS and LS traffic).
+> +		 */
+> +		printf("Failed to get companion (ret=%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   int usb_init(void)
+>   {
+>   	int controllers_initialized = 0;
+> @@ -299,6 +330,11 @@ int usb_init(void)
+>   			printf("probe failed, error %d\n", ret);
+>   			continue;
+>   		}
+> +
+> +		ret = usb_probe_companion(bus);
 
-Signed-off-by: Nikhil M Jain <n-jain1@ti.com>
----
- board/ti/am62x/am62x.env                           |   2 +-
- tools/logos/{ti.bmp => ti_logo_414x97_32bpp.bmp}   | Bin
- tools/logos/{ti.gz => ti_logo_414x97_32bpp.bmp.gz} | Bin
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename tools/logos/{ti.bmp => ti_logo_414x97_32bpp.bmp} (100%)
- rename tools/logos/{ti.gz => ti_logo_414x97_32bpp.bmp.gz} (100%)
+Shouldn't this ^ be in separate uclass_foreach_dev(bus, uc) {} loop 
+before this device_probe() loop , so that when the probe of the 
+controller is called, its ->companion is already set ?
 
-diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
-index f2dc87893a..ece9eacc08 100644
---- a/board/ti/am62x/am62x.env
-+++ b/board/ti/am62x/am62x.env
-@@ -17,7 +17,7 @@ bootpart=1:2
- bootdir=/boot
- rd_spec=-
- 
--splashfile=ti.gz
-+splashfile=ti_logo_414x97_32bpp.bmp.gz
- splashimage=0x80200000
- splashpos=m,m
- splashsource=sf
-diff --git a/tools/logos/ti.bmp b/tools/logos/ti_logo_414x97_32bpp.bmp
-similarity index 100%
-rename from tools/logos/ti.bmp
-rename to tools/logos/ti_logo_414x97_32bpp.bmp
-diff --git a/tools/logos/ti.gz b/tools/logos/ti_logo_414x97_32bpp.bmp.gz
-similarity index 100%
-rename from tools/logos/ti.gz
-rename to tools/logos/ti_logo_414x97_32bpp.bmp.gz
--- 
-2.34.1
+> +		if (ret)
+> +			continue;
+> +
+>   		controllers_initialized++;
+>   		usb_started = true;
+>   	}
 
+[...]
