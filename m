@@ -4,75 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A77A5CA0FEC
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 17:27:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A22CA0FEB
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 17:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C32ED86564;
-	Fri,  1 Sep 2023 19:27:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6A17A865DE;
+	Fri,  1 Sep 2023 19:33:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sob/cj6F";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yEnWsgpE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBE9C8071F; Fri,  1 Sep 2023 19:27:42 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3FBBE866AA; Fri,  1 Sep 2023 19:33:50 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B105860AA
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 19:27:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D2868074B
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 19:33:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7926b7f8636so5645539f.1
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 10:27:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693589258; x=1694194058; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QadWbuoxSzeOGSXWeC9JhwDmnXpSvx82SBVjFydM90w=;
- b=Sob/cj6FgwSDuS6CYKseit/lGmCXSyjOEybJPjvYe+qyYvAQs7oxduIX4biqmSmFFD
- rd3HIMh0MTaWJqAyvFe/+t3Tt/JuIGq/+akNgSrdfbDGgRbdkEjSGLfWzBFLGab9cltZ
- CWSbGRhz09BdZ8nlS4B7Hq9n4FHbGk8NPk2L0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693589258; x=1694194058;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QadWbuoxSzeOGSXWeC9JhwDmnXpSvx82SBVjFydM90w=;
- b=fBSS8IzpMLdIwdG4aESYCzMf7YIAZC2cPJvFRuVHcMTj2ZFFekog9JHXybFHnnnujU
- y29Q7c0DOoeSOVQgt1bZwieo6CkjwiEEljRBn+CtyAYwmvRakRgtkF4EIjjqG/1yyrSO
- mfJoFJBDHzcDOEk2Z0rggkaIy+z8gt4Hco4xi/9p0QZZKUl0hMILTIGMlFfnzsCGF6WV
- YHCSGlf29BJabvag30TbL/MV9v2GZETcvim3swRXD/iDcV4CBr2v2eTl7VDEBEA6LEX3
- WIoorZNjnaeNobwrXypBc5Yzr/HZk6Rqv1S+WWxCdqy1VXGo55vtuoz94bElMF+StxH5
- jvpw==
-X-Gm-Message-State: AOJu0YyJp0LcOo6TBRrvw7BigpHDAuAlNDYz0OZkDGTJwZQRMuI9/sv8
- 7eBDyMzC1vzqle81U/BfmHO37FZ09ihsvk4NPgU=
-X-Google-Smtp-Source: AGHT+IECLdhdM+UVFTsTwpOnvt1IH6Jpi+GviypLzzsVBYfWhHLAnhvASMbGGdIFO0ZViV16IPSOGA==
-X-Received: by 2002:a6b:3b41:0:b0:794:e98c:30c9 with SMTP id
- i62-20020a6b3b41000000b00794e98c30c9mr4329543ioa.1.1693589258587; 
- Fri, 01 Sep 2023 10:27:38 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:6e93:c368:57d1:5c46])
- by smtp.gmail.com with ESMTPSA id
- q7-20020a6bf207000000b00786f5990435sm1192610ioh.7.2023.09.01.10.27.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 10:27:38 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 2/2] x86: Prevent from missing the FADT chaining
-Date: Fri,  1 Sep 2023 11:27:10 -0600
-Message-ID: <20230901112707.v3.2.Id8d2f7a61003b53d62b89aab0523afe7184217cb@changeid>
-X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
-In-Reply-To: <20230901112707.v3.1.I61008e563b1209243a9a7f2b66073b4737ff82d1@changeid>
-References: <20230901112707.v3.1.I61008e563b1209243a9a7f2b66073b4737ff82d1@changeid>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 381HXjME117461;
+ Fri, 1 Sep 2023 12:33:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693589625;
+ bh=qq8jxV8G6k7hD55e1wOrwGfgj+89LJffCtZlBbUvVtA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=yEnWsgpEDxHhlAy6TCjsT93OqKKRtqZldlwtnWVQsqsQQ/frkriBtVFhDa+hhtY5d
+ U4WNXW4uzia42dItsAPCfcL7HCCu8DWuQWEuXICITq13+rPIYS47Rq/yGY+sYhu0ia
+ 8EeF3Cyvk/v7z9KDDEhW4RQ4aWotqxais54ED1Vs=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 381HXjfe002443
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 1 Sep 2023 12:33:45 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 1
+ Sep 2023 12:33:44 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 1 Sep 2023 12:33:44 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 381HXiUU112801;
+ Fri, 1 Sep 2023 12:33:44 -0500
+Date: Fri, 1 Sep 2023 12:33:44 -0500
+From: Nishanth Menon <nm@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+CC: <vigneshr@ti.com>, <bb@ti.com>, <sjg@chromium.org>, <peng.fan@nxp.com>,
+ <ye.li@nxp.com>, <robimarko@gmail.com>, <u-boot@lists.denx.de>,
+ <n-francis@ti.com>
+Subject: Re: [PATCH 1/2] thermal: k3-j72xx-bandgap: Add support for vtm
+Message-ID: <20230901173344.fw7glgqmed3fm7ua@comfort>
+References: <20230901061500.2342452-1-u-kumar1@ti.com>
+ <20230901061500.2342452-2-u-kumar1@ti.com>
+ <20230901150640.u7nyi3hawwkz3rbs@leverage>
+ <f3dfffb4-4a97-be0b-61d8-f0e4761b1714@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <f3dfffb4-4a97-be0b-61d8-f0e4761b1714@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,111 +82,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+On 22:54-20230901, Kumar, Udit wrote:
+> > > +static const struct  udevice_id of_k3_j72xx_bandgap_match[] = {
+> > > +	{
+> > > +		.compatible = "ti,j721e-vtm",
+> > > +		.data = (ulong)&k3_j72xx_bandgap_j721e_data,
+> > So what happens to drivers/misc/k3_avs.c ?
+> 
+> Could you help me to understand this comment.
+> 
+> Do you mean, why we can not add this support in AVS driver or
+> 
+> need of this porting ?
+> 
+> How I see, AVS driver to run at SPL/R5 time and this driver
+> 
+> to be probed in Main/A72 u-boot when needed.
+you are saying the drivers are mutually exclusive - how about detecting
+over-temp scenario at R5 boot? switching on A53 will be a mistake at
+that point, no?
 
-Recent approach with FADT writer shows that there is
-a room for subtle errors. Prevent this from happening
-again by introducing acpi_add_fadt() helper.
-
-Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
-(no changes since v1)
-
- arch/x86/cpu/apollolake/acpi.c | 6 +-----
- arch/x86/cpu/baytrail/acpi.c   | 6 +-----
- arch/x86/cpu/quark/acpi.c      | 6 +-----
- arch/x86/cpu/tangier/acpi.c    | 6 +-----
- include/acpi/acpi_table.h      | 7 +++++++
- 5 files changed, 11 insertions(+), 20 deletions(-)
-
-diff --git a/arch/x86/cpu/apollolake/acpi.c b/arch/x86/cpu/apollolake/acpi.c
-index 16aaed7238a..c610a7f4477 100644
---- a/arch/x86/cpu/apollolake/acpi.c
-+++ b/arch/x86/cpu/apollolake/acpi.c
-@@ -158,11 +158,7 @@ static int apl_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	header = &fadt->header;
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", apl_write_fadt, 0);
- 
-diff --git a/arch/x86/cpu/baytrail/acpi.c b/arch/x86/cpu/baytrail/acpi.c
-index 4c526ff2731..4378846f8b0 100644
---- a/arch/x86/cpu/baytrail/acpi.c
-+++ b/arch/x86/cpu/baytrail/acpi.c
-@@ -142,11 +142,7 @@ static int baytrail_write_fadt(struct acpi_ctx *ctx,
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", baytrail_write_fadt, 0);
- 
-diff --git a/arch/x86/cpu/quark/acpi.c b/arch/x86/cpu/quark/acpi.c
-index 92fa5bc30c3..9a2d682451b 100644
---- a/arch/x86/cpu/quark/acpi.c
-+++ b/arch/x86/cpu/quark/acpi.c
-@@ -137,11 +137,7 @@ static int quark_write_fadt(struct acpi_ctx *ctx,
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", quark_write_fadt, 0);
- 
-diff --git a/arch/x86/cpu/tangier/acpi.c b/arch/x86/cpu/tangier/acpi.c
-index ffaa56ab6f8..1c667c7d569 100644
---- a/arch/x86/cpu/tangier/acpi.c
-+++ b/arch/x86/cpu/tangier/acpi.c
-@@ -52,11 +52,7 @@ static int tangier_write_fadt(struct acpi_ctx *ctx,
- 
- 	header->checksum = table_compute_checksum(fadt, header->length);
- 
--	acpi_add_table(ctx, fadt);
--
--	acpi_inc(ctx, sizeof(struct acpi_fadt));
--
--	return 0;
-+	return acpi_add_fadt(ctx, fadt);
- }
- ACPI_WRITER(5fadt, "FADT", tangier_write_fadt, 0);
- 
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index 7ed0443c821..1f85de091d3 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -883,6 +883,13 @@ void acpi_inc_align(struct acpi_ctx *ctx, uint amount);
-  */
- int acpi_add_table(struct acpi_ctx *ctx, void *table);
- 
-+static inline int acpi_add_fadt(struct acpi_ctx *ctx, struct acpi_fadt *fadt)
-+{
-+	acpi_add_table(ctx, fadt);
-+	acpi_inc(ctx, sizeof(struct acpi_fadt));
-+	return 0;
-+}
-+
- /**
-  * acpi_write_rsdp() - Write out an RSDP indicating where the ACPI tables are
-  *
 -- 
-2.42.0.283.g2d96d420d3-goog
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
