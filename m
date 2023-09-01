@@ -4,106 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9223CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 06:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B22B9CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 06:37:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4793B8679F;
-	Fri,  1 Sep 2023 08:32:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id D93E286205;
+	Fri,  1 Sep 2023 08:37:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="2KKh7NnJ";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="V7fmGp5Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0B2C86564; Fri,  1 Sep 2023 08:32:12 +0200 (CEST)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2061b.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e83::61b])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0A2B486564; Fri,  1 Sep 2023 08:37:20 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3806D867A0
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 08:32:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 225918619A
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 08:37:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jNN8As75NReckhbtCxLiW0PTOZ9ZxyZNkCHsX4ohBCE+3Ku9fNdgNF32kxmQsofI3+nS9LTxFJvoJ/QiAa8//K3m8NqcxHRhrd0F4fTt5TgzUgAl+EAY8gT+MgWZP76ORl8dmOUA+sBph0ZB+0vm6D4B0cxz52XiiqufcRgMUXvMRXOcxOkfwmW/6XEhdrHbDiPqYPb8XTRwHwals3K44Tk+kqeN12qu1SqrIliNIyjDt+iqcZed15tJaEKnkqTRdgvdOHtwmu8vqCjUtQXC85zVeCSVWQZbeRKUUtDrStRp4Rw7n4ZzZvNpStUf2Qqag0ebWCC64oA20DI5AIDPGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qV9CgKnwx4BuKuqoY9VlsuQfY/6gq+mo04es38ApEGQ=;
- b=HZCv9GwiV/GAj9P8b97uAIV1r1gib/nhHfilmItmQrqCdwpS0bpC6mkaefleo0QEa0rDBAimjpNG/5kVC5zBMC1Np6vjrTbt+ERD4GoHF1TKm/YZ7dG+ODY8MBx/p6EcQu5WYl6k8JMi84grDjhpxdoc1SeQM5AGBt/iohPbaclLWbsq3IUyIMDlF7m3t4rc7qmE1b9pdratZiAwnEQqsXY+wohacX9aqomgKfAoFiDY9PCCAniUeFsXH5AggBAa9OW/uAZxZndDiGv32+sIskihWY4Q7rC4ROm/N/ASQ6EVH3h8Hltg3XCO8cyrBvDVrSbAtJ0QKCofN05VYyuM+w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qV9CgKnwx4BuKuqoY9VlsuQfY/6gq+mo04es38ApEGQ=;
- b=2KKh7NnJG2IW29Ugryv0rReflQp+4Y/M62p1Wo4wZEkn84TPJSnnTxTHMeHjPSor//7YDC/tWpYden09n1zAAnrJkY4H63o7PNWsjsa6Xx4yo3AnP6bW9gtabSAcLjlXwT3zAf3Q/Te+QpvD9oVxVi7pjByZn+XMiwWD0Do7+50=
-Received: from BYAPR03CA0014.namprd03.prod.outlook.com (2603:10b6:a02:a8::27)
- by PH0PR12MB5631.namprd12.prod.outlook.com (2603:10b6:510:144::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.34; Fri, 1 Sep
- 2023 06:32:06 +0000
-Received: from CO1PEPF000044F0.namprd05.prod.outlook.com
- (2603:10b6:a02:a8:cafe::6) by BYAPR03CA0014.outlook.office365.com
- (2603:10b6:a02:a8::27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.23 via Frontend
- Transport; Fri, 1 Sep 2023 06:32:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044F0.mail.protection.outlook.com (10.167.241.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6745.16 via Frontend Transport; Fri, 1 Sep 2023 06:32:06 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Sep
- 2023 01:32:04 -0500
-Message-ID: <f2827380-e79e-3ad6-7b2c-31514153331c@amd.com>
-Date: Fri, 1 Sep 2023 08:32:03 +0200
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-68bee12e842so1345038b3a.3
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 23:37:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1693550235; x=1694155035;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=av2NHjNEPqJ1kBItL0dZ44f4D0HJz8yMRzoLxsLph+8=;
+ b=V7fmGp5YtrdIUdvgW3mrz9/OvHmGta8UKbuY9BbVMK5EILTDQoG6hAu8QxKLsoYivh
+ ympUO2unAy+CWjGG/spDTedOk4QPGZPZfSCT5FWByPlc28isaCkEK3qsRMRJxa3jf4+D
+ SO/rsLUbsewfd6sN7fmd8qzJ44JzQt4JNmN3pm3pyihdrBInHfOj3LC7SoXDN8MdrbiK
+ VVT5CgD14kEB1tn+04SaEaaosSq3m43IGW2MHgxqDjJp8JTg9FyihCEn+HxFAzZ1uNpZ
+ cVQOp/iKP6Gn8CHwseyUrjzMxYazLO5GvqiOGfT+xdIv9m0X50kZor8oT2MioqByoPeZ
+ SVfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693550235; x=1694155035;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=av2NHjNEPqJ1kBItL0dZ44f4D0HJz8yMRzoLxsLph+8=;
+ b=TZgAbFQE+Xl/v0QCGD3WM+GOGQKS7paemrNzXNw/o9VP3e+lzRgEvqoySQmD6e1qy5
+ PzvLzjP62I1+GNwDUU0g23LiWMbdNaNfGXZjW/GmuV97q6u0IcGW8lex52vsz03WH9jA
+ mu0arhlwC/w3zknU5IK/20ZGUXDi50YLgyyoDXqy6w4HWIIUamYVlhzVXQDroTMYdM3o
+ E+3fLNxM1nI3Xmqt99IOQPpWNl9SodSvcD9uaLMO54sPQidPrdBQGPNHJCUjouRMe51y
+ qKqWPnA5MN9pcuJJWEgbqb9o95922NxlQ1YDb6asjjswCGWobBFcjZVBHP53+WJG2VUv
+ Lngg==
+X-Gm-Message-State: AOJu0Yx6WNVZV8+xVRp1z2Xjz02Blg98WfhTJjX8J2HNuFRB4TUYklv8
+ AVg6WRDyDAdcrqjifM3AVcwwSw==
+X-Google-Smtp-Source: AGHT+IGopeOHE3ODPU8bJJKe+nG0BH7MlbSXEztFJiJcg/paQzQJi+I6txjMlDavL6x43E06+9sNBw==
+X-Received: by 2002:a05:6a00:1ad2:b0:68a:6746:fecb with SMTP id
+ f18-20020a056a001ad200b0068a6746fecbmr2092097pfv.5.1693550235218; 
+ Thu, 31 Aug 2023 23:37:15 -0700 (PDT)
+Received: from [192.168.137.2] ([149.199.80.128])
+ by smtp.gmail.com with ESMTPSA id
+ c17-20020aa78811000000b006884549adc8sm2259787pfo.29.2023.08.31.23.37.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Aug 2023 23:37:14 -0700 (PDT)
+Message-ID: <efd3769c-2206-9152-bef9-81755c3c0158@monstr.eu>
+Date: Fri, 1 Sep 2023 08:37:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH] arm64: zynqmp: Setup default si570 frequency to 156.25MHz
+Subject: Re: [PATCH 0/3] arm64: versal-net: Enable CMD_KASLR and TPM
 Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-References: <c052ddf39e392e97f87f1c57ea06f3508733c672.1692947486.git.michal.simek@amd.com>
-In-Reply-To: <c052ddf39e392e97f87f1c57ea06f3508733c672.1692947486.git.michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, git@xilinx.com
+References: <20230831031658.2203-1-venkatesh.abbarapu@amd.com>
+From: Michal Simek <monstr@monstr.eu>
+In-Reply-To: <20230831031658.2203-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044F0:EE_|PH0PR12MB5631:EE_
-X-MS-Office365-Filtering-Correlation-Id: 78505fee-a6d8-4482-744e-08dbaab52970
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: MDEafM4H69uHr8N8p8tXBOPU3Ormr7uyYRhvhNiM2h2Ttk7Rp4eo2pDslB9DgGIisxJvVjoDE9tdo3NktbeIShrLrvrWAOaaMqEpQEjUFPrebBUWiBIBIMMwxirpVlEE7Q3QtAqzH9R0F4AlmqLHga9u80Sl3zDK4zbKdJNi4neLh1Hwyus8UadhUXm7tVzAqnIZPp6upiSKwofW4mh0b+4TNDpFpVVg4Aw0yD2TomZWFPeyU8/xUiMoO6gdUm/3PWLglMJHORP3ZEqfbM8jh93FYan92yCjXWioUsomNeIIUsF1Y+N2P1SxPxb28Bdd83A35jsJPr3NZQMD82WpOOPz2DrkBHIQRMlUwjWYyXETmnhwxgUaXlNMwblOkMscoVkq9DyRpt04qALQ+qr9TFn3td6JU0l/WKWHrfX8HdfvvIkRbSc2DDrSt30cxr4zy0mM+kLW/VU/g9ejsoDJ7NkGtliyPrdjqulrVYGgt+kKvXVb2UUO+o/VUkrwnTfCse8iQDO1FJFj0hhCJiwJcF6aHiHAxA1Ob6RBUL3frw9mit2lBHz+NKv/+vkcvdfev5BoXjZDJ9SsOsX4zcOtgIAQ9IRFT53U6Xnv85zddzu5bfzJInxLjxfaYIwBwNa0acOw0drRuuR9ukwd8iwaCtOTRJEhPlpCLwwDnvzUrH/IZZVaI9qZLrmStcWPRNxZRB+D453YK2YvEuTpOgL0S2EVTnrlARJyoaGonAzf6EDD5lXvcquAKLdMLtceSkObbJIRTnfA5RSklFdaO/PkrJhBb6l8WdNjYSF+FDzk1pfS0NHud46tJbgVgbJDrnPS
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(136003)(39860400002)(396003)(376002)(451199024)(1800799009)(186009)(82310400011)(40470700004)(46966006)(36840700001)(31696002)(53546011)(110136005)(2616005)(40480700001)(8936002)(5660300002)(70206006)(86362001)(41300700001)(70586007)(316002)(16576012)(36756003)(8676002)(44832011)(40460700003)(2906002)(356005)(83380400001)(82740400003)(478600001)(81166007)(36860700001)(47076005)(26005)(426003)(336012)(31686004)(16526019)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2023 06:32:06.2689 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 78505fee-a6d8-4482-744e-08dbaab52970
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F0.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5631
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,75 +96,25 @@ X-Virus-Status: Clean
 
 
 
-On 8/25/23 09:11, Michal Simek wrote:
-> All si570 mgt chips have factory default 156.25MHz but DT changed it to
-> 148.5MHz. After tracking it is pretty much c&p fault taken from Zynq
-> zc702/zc706 boards where 148.5MHz was setup as default because it was
-> requirement for AD7511 chip available on these boards.
-> ZynqMP board don't contain this chip that's why factory default frequency
-> can be used.
+On 8/31/23 05:16, Venkatesh Yadav Abbarapu wrote:
+> Enable the command kaslrseed and tpm.
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+> Venkatesh Yadav Abbarapu (3):
+>    arm64: versal-net: Enable TPM for xilinx platforms
+>    arm64: versal-net: Enable sha1sum command
+>    arm64: versal-net: Enable the config CMD_KASLRSEED
 > 
->   arch/arm/dts/zynqmp-zcu102-revA.dts | 2 +-
->   arch/arm/dts/zynqmp-zcu106-revA.dts | 2 +-
->   arch/arm/dts/zynqmp-zcu208-revA.dts | 2 +-
->   arch/arm/dts/zynqmp-zcu216-revA.dts | 2 +-
->   4 files changed, 4 insertions(+), 4 deletions(-)
+>   configs/xilinx_versal_net_virt_defconfig | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/zynqmp-zcu102-revA.dts b/arch/arm/dts/zynqmp-zcu102-revA.dts
-> index 79d67c495dee..0f7230b9526e 100644
-> --- a/arch/arm/dts/zynqmp-zcu102-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu102-revA.dts
-> @@ -602,7 +602,7 @@
->   				reg = <0x5d>;
->   				temperature-stability = <50>; /* copy from zc702 */
->   				factory-fout = <156250000>;
-> -				clock-frequency = <148500000>;
-> +				clock-frequency = <156250000>;
->   				clock-output-names = "si570_mgt";
->   			};
->   		};
-> diff --git a/arch/arm/dts/zynqmp-zcu106-revA.dts b/arch/arm/dts/zynqmp-zcu106-revA.dts
-> index 7a8094a16b79..f8019c592a7f 100644
-> --- a/arch/arm/dts/zynqmp-zcu106-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu106-revA.dts
-> @@ -592,7 +592,7 @@
->   				reg = <0x5d>;
->   				temperature-stability = <50>; /* copy from zc702 */
->   				factory-fout = <156250000>;
-> -				clock-frequency = <148500000>;
-> +				clock-frequency = <156250000>;
->   				clock-output-names = "si570_mgt";
->   			};
->   		};
-> diff --git a/arch/arm/dts/zynqmp-zcu208-revA.dts b/arch/arm/dts/zynqmp-zcu208-revA.dts
-> index 9b3ae67bff12..0c1f50943ac0 100644
-> --- a/arch/arm/dts/zynqmp-zcu208-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu208-revA.dts
-> @@ -489,7 +489,7 @@
->   				reg = <0x5d>;
->   				temperature-stability = <50>;
->   				factory-fout = <156250000>;
-> -				clock-frequency = <148500000>;
-> +				clock-frequency = <156250000>;
->   				clock-output-names = "si570_mgt";
->   			};
->   		};
-> diff --git a/arch/arm/dts/zynqmp-zcu216-revA.dts b/arch/arm/dts/zynqmp-zcu216-revA.dts
-> index 43eeaec5b15b..8ca01f01a3ab 100644
-> --- a/arch/arm/dts/zynqmp-zcu216-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu216-revA.dts
-> @@ -499,7 +499,7 @@
->   				reg = <0x5d>;
->   				temperature-stability = <50>;
->   				factory-fout = <156250000>;
-> -				clock-frequency = <148500000>;
-> +				clock-frequency = <156250000>;
->   				clock-output-names = "si570_mgt";
->   			};
->   		};
 
 Applied.
 M
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
