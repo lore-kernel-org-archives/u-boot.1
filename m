@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2721CA0FE2
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A31CA0FE2
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 066678683C;
-	Fri,  1 Sep 2023 03:14:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4B9A886802;
+	Fri,  1 Sep 2023 03:14:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F3p//krz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LEI/m+zn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0A428681D; Fri,  1 Sep 2023 03:14:17 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id B781B867D2; Fri,  1 Sep 2023 03:14:19 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ED148671C
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 808D6867A0
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-792965813e7so57158039f.2
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:15 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7924a3eb5afso54768639f.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693530853; x=1694135653; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693530855; x=1694135655; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oDtqdLZf1ehGok3vy0L5t9U1SOZfKIlsL1OfFu4aJfQ=;
- b=F3p//krzwvv/HKPM4HuaI46GsHdfSc7zdUjzlV/eWFU37A7VUmk6gYdpn/0In+HJTt
- N9XW5Rjqmmy+91q8xhhF1SGk0Gjx1ZkvfUwOTPI3YUr0/MDnAmNLs5AxWTpYSwLcWtci
- 6HY3SYbnGEnOr84+wewx+Aon37PSaB9OAOrh8=
+ bh=BsVQ2qB9dV5JRYsvQznVsAp8aRZKueYYfotzPQMuV3w=;
+ b=LEI/m+znikmY7inUdeFR8QyElERmtbSiDUMMmJJihuS2iTrGta5vWT2KXWboiTZbP2
+ U0wl1bfJDvRliTlU/YY4JAOHyrOZIENkWncv2LOOOL6lokrPQNVitLiY7wFyPkcE3I6M
+ zgPRzS5FiF6CpkxwVC5NpYNzwZIJJLb7hmPow=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693530853; x=1694135653;
+ d=1e100.net; s=20221208; t=1693530855; x=1694135655;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oDtqdLZf1ehGok3vy0L5t9U1SOZfKIlsL1OfFu4aJfQ=;
- b=ecttFjHWAZZCej/yOobS7joTCPdkhtFstXYL5QHwtV0u5/TI9MQyyMKJMTNab3Tq9V
- HphkKbzBKB8pbk9J5nOgSCK+1V/o/wzqNQo/x+7UMk7//pESawJ6otlDJbBHnIgS0CUR
- RygsBVlUTAiOp6bAkKP9w4ARI8BOuXrs3+SzaOa9f52YEtYuu8q2GTvoB+uu9uh5zJWq
- w6hKbpFljgk1C1ZCnfZc2nxmYZREdFxgvxRd5IAIlzJUOjtbJ8Q3GDlHU2qjXBeTrJc3
- /cofnNX5u3svoomax5OW6ETNSiYhPo9u+ecFeWKOIZfRggx8VqPAMFXHYH5c+N1xyVjr
- SfuQ==
-X-Gm-Message-State: AOJu0YzB/UYQkQwdb2xFllI1BR0M4Jbr8X0MZAfzTf5DNl1FtU4TYHME
- Iuc+M1i7e/8YQfbygrQANIw8KoIVCzhy/Ny0kgk=
-X-Google-Smtp-Source: AGHT+IFIBc5POf9+LxinBE69EOReQ/Ese7wh41IPd91pW4xa6QHC4uZO8kp2uuUY5i0XZBL5KzQDgQ==
-X-Received: by 2002:a5e:aa03:0:b0:794:d9f6:e234 with SMTP id
- s3-20020a5eaa03000000b00794d9f6e234mr971147ioe.13.1693530853677; 
- Thu, 31 Aug 2023 18:14:13 -0700 (PDT)
+ bh=BsVQ2qB9dV5JRYsvQznVsAp8aRZKueYYfotzPQMuV3w=;
+ b=TWayIuB2DydpMaaWC+NTrP3XebwoooBXkrCCDRUdtLqYtNYsX+cK7DxSbaChCvyBPW
+ opisrYGABLVhDuhtLUppjSDdt6pE64nek80zRp+OYlv8VPhgwKuShEy0ZM+XRwuXC2Qg
+ yvFMBd2QSKzBSQZ7JrcE2ud1AEIS8wJ8CusoEclzM0rp8cp8kOLkZN6qmWxgMFzPKsqY
+ eA5agcWqBDbz+juB9PNrij4mWwGRx9qEwt/NN4ooc65RWOXiXPISLCSBDGx6czbjO4ln
+ 5744QatdneKOc8qYRyhpvHX10ffcbOT54+Y59w+bu6+7NQEB8DIDc/fuGUB7n6lnrqJZ
+ ybjg==
+X-Gm-Message-State: AOJu0Ywvs9mxDIlvEmXsv5OIR5dO56udrp/F7XM3CJLd0sJQFnKO0JcE
+ 4AuB83iQl3z8EgAHgLb4tus1AOMPpa0QeEVi83I=
+X-Google-Smtp-Source: AGHT+IEvkV9j/fk1lsPRWskAKgEtB9V5j6uuAl8rygb08x9JHje+5gLP7Fl2qaqzknI+8Yd01Z0CmA==
+X-Received: by 2002:a5d:84ca:0:b0:790:ff32:eb3 with SMTP id
+ z10-20020a5d84ca000000b00790ff320eb3mr943433ior.17.1693530854932; 
+ Thu, 31 Aug 2023 18:14:14 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.13
+ dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 18:14:13 -0700 (PDT)
+ Thu, 31 Aug 2023 18:14:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Brandon Maier <brandon.maier@collins.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Kautuk Consul <kconsul@ventanamicro.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>,
- Michal Simek <michal.simek@amd.com>,
+ Mark Kettenis <kettenis@openbsd.org>, Michal Simek <michal.simek@amd.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sjoerd Simons <sjoerd@collabora.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 05/14] lmb: Rename LMB_MAX_REGIONS and LMB_USE_MAX_REGIONS
-Date: Thu, 31 Aug 2023 19:13:43 -0600
-Message-ID: <20230901011357.2482203-6-sjg@chromium.org>
+ Sam Shih <sam.shih@mediatek.com>, Sjoerd Simons <sjoerd@collabora.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Wei Fu <wefu@redhat.com>,
+ Yixun Lan <dlan@gentoo.org>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2 06/14] lmb: Rename LMB_MAX_REGIONS and LMB_USE_MAX_REGIONS
+Date: Thu, 31 Aug 2023 19:13:44 -0600
+Message-ID: <20230901011357.2482203-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230901011357.2482203-1-sjg@chromium.org>
 References: <20230901011357.2482203-1-sjg@chromium.org>
@@ -97,7 +99,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are the number of areas within a region, so rename them.
+These refer to the maximum number of areas, so rename them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -105,139 +107,435 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 Changes in v2:
 - Add new patch to rename LMB_MAX_REGIONS and LMB_USE_MAX_REGIONS
 
- configs/stm32mp13_defconfig         |  4 ++--
- configs/stm32mp15_basic_defconfig   |  4 ++--
- configs/stm32mp15_defconfig         |  4 ++--
- configs/stm32mp15_trusted_defconfig |  4 ++--
- include/lmb.h                       | 10 +++++-----
- lib/Kconfig                         |  6 +++---
- lib/lmb.c                           |  4 ++--
- 7 files changed, 18 insertions(+), 18 deletions(-)
+ configs/a3y17lte_defconfig           |  2 +-
+ configs/a5y17lte_defconfig           |  2 +-
+ configs/a7y17lte_defconfig           |  2 +-
+ configs/apple_m1_defconfig           |  2 +-
+ configs/dragonboard845c_defconfig    |  2 +-
+ configs/mt7981_emmc_rfb_defconfig    |  2 +-
+ configs/mt7981_rfb_defconfig         |  2 +-
+ configs/mt7981_sd_rfb_defconfig      |  2 +-
+ configs/mt7986_rfb_defconfig         |  2 +-
+ configs/mt7986a_bpir3_emmc_defconfig |  2 +-
+ configs/mt7986a_bpir3_sd_defconfig   |  2 +-
+ configs/qcs404evb_defconfig          |  2 +-
+ configs/starqltechn_defconfig        |  2 +-
+ configs/stm32mp13_defconfig          |  2 +-
+ configs/stm32mp15_basic_defconfig    |  2 +-
+ configs/stm32mp15_defconfig          |  2 +-
+ configs/stm32mp15_trusted_defconfig  |  2 +-
+ configs/th1520_lpi4a_defconfig       |  2 +-
+ include/lmb.h                        | 14 ++++-----
+ lib/Kconfig                          | 24 +++++++--------
+ lib/lmb.c                            |  6 ++--
+ test/lib/lmb.c                       | 44 ++++++++++++++--------------
+ 22 files changed, 62 insertions(+), 62 deletions(-)
 
+diff --git a/configs/a3y17lte_defconfig b/configs/a3y17lte_defconfig
+index 42fcd2a3d317..4db2274731ad 100644
+--- a/configs/a3y17lte_defconfig
++++ b/configs/a3y17lte_defconfig
+@@ -24,4 +24,4 @@ CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_DM_I2C_GPIO=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/a5y17lte_defconfig b/configs/a5y17lte_defconfig
+index 3b80536c12c8..4bcd8313630c 100644
+--- a/configs/a5y17lte_defconfig
++++ b/configs/a5y17lte_defconfig
+@@ -24,4 +24,4 @@ CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_DM_I2C_GPIO=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/a7y17lte_defconfig b/configs/a7y17lte_defconfig
+index 9390e35057eb..7236b70e4f88 100644
+--- a/configs/a7y17lte_defconfig
++++ b/configs/a7y17lte_defconfig
+@@ -24,4 +24,4 @@ CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_DM_I2C_GPIO=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+index d58a9030dbd0..618baee132fa 100644
+--- a/configs/apple_m1_defconfig
++++ b/configs/apple_m1_defconfig
+@@ -22,4 +22,4 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_NO_FB_CLEAR=y
+ CONFIG_VIDEO_SIMPLE=y
+ # CONFIG_GENERATE_SMBIOS_TABLE is not set
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/dragonboard845c_defconfig b/configs/dragonboard845c_defconfig
+index a69d82761a8d..17b1e4ffd7df 100644
+--- a/configs/dragonboard845c_defconfig
++++ b/configs/dragonboard845c_defconfig
+@@ -26,4 +26,4 @@ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_QCOM=y
+ CONFIG_MSM_GENI_SERIAL=y
+ CONFIG_SPMI_MSM=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/mt7981_emmc_rfb_defconfig b/configs/mt7981_emmc_rfb_defconfig
+index b3b37b6e5ed4..44dbfa86e9b1 100644
+--- a/configs/mt7981_emmc_rfb_defconfig
++++ b/configs/mt7981_emmc_rfb_defconfig
+@@ -62,4 +62,4 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/mt7981_rfb_defconfig b/configs/mt7981_rfb_defconfig
+index b7ffb4dfa74d..4fc9dd92fe43 100644
+--- a/configs/mt7981_rfb_defconfig
++++ b/configs/mt7981_rfb_defconfig
+@@ -64,4 +64,4 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_MTK_SPIM=y
+ CONFIG_HEXDUMP=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/mt7981_sd_rfb_defconfig b/configs/mt7981_sd_rfb_defconfig
+index 85be9bbc5030..2cbac6adde83 100644
+--- a/configs/mt7981_sd_rfb_defconfig
++++ b/configs/mt7981_sd_rfb_defconfig
+@@ -62,4 +62,4 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/mt7986_rfb_defconfig b/configs/mt7986_rfb_defconfig
+index ac91c93efb42..73b2cad4275e 100644
+--- a/configs/mt7986_rfb_defconfig
++++ b/configs/mt7986_rfb_defconfig
+@@ -64,4 +64,4 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_MTK_SPIM=y
+ CONFIG_HEXDUMP=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/mt7986a_bpir3_emmc_defconfig b/configs/mt7986a_bpir3_emmc_defconfig
+index 5b76512a46f6..ee8f58bdbe09 100644
+--- a/configs/mt7986a_bpir3_emmc_defconfig
++++ b/configs/mt7986a_bpir3_emmc_defconfig
+@@ -62,4 +62,4 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/mt7986a_bpir3_sd_defconfig b/configs/mt7986a_bpir3_sd_defconfig
+index 36547db91423..b301a626a946 100644
+--- a/configs/mt7986a_bpir3_sd_defconfig
++++ b/configs/mt7986a_bpir3_sd_defconfig
+@@ -62,4 +62,4 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/qcs404evb_defconfig b/configs/qcs404evb_defconfig
+index 9e72f64f7849..811d8b2bd4c8 100644
+--- a/configs/qcs404evb_defconfig
++++ b/configs/qcs404evb_defconfig
+@@ -52,4 +52,4 @@ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_STORAGE=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
+diff --git a/configs/starqltechn_defconfig b/configs/starqltechn_defconfig
+index 5b85ce5fe96f..4522928125f7 100644
+--- a/configs/starqltechn_defconfig
++++ b/configs/starqltechn_defconfig
+@@ -38,4 +38,4 @@ CONFIG_VIDEO_FONT_16X32=y
+ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_VIDEO_SIMPLE=y
+ CONFIG_VIDEO_DT_SIMPLEFB=y
+-CONFIG_LMB_MAX_REGIONS=64
++CONFIG_LMB_MAX_AREAS=64
 diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-index 82b62744f6db..98fcfeb5fa61 100644
+index 98fcfeb5fa61..0f6fa08c0002 100644
 --- a/configs/stm32mp13_defconfig
 +++ b/configs/stm32mp13_defconfig
-@@ -74,5 +74,5 @@ CONFIG_OPTEE=y
+@@ -73,6 +73,6 @@ CONFIG_TEE=y
+ CONFIG_OPTEE=y
  # CONFIG_OPTEE_TA_AVB is not set
  CONFIG_ERRNO_STR=y
- # CONFIG_LMB_USE_MAX_REGIONS is not set
--CONFIG_LMB_MEMORY_REGIONS=2
--CONFIG_LMB_RESERVED_REGIONS=16
-+CONFIG_LMB_MEMORY_AREAS=2
-+CONFIG_LMB_RESERVED_AREAS=16
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
++# CONFIG_LMB_USE_MAX_AREAS is not set
+ CONFIG_LMB_MEMORY_AREAS=2
+ CONFIG_LMB_RESERVED_AREAS=16
 diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 9ea5aaa7145a..7b5655d957d9 100644
+index 7b5655d957d9..1aeaabb22a4e 100644
 --- a/configs/stm32mp15_basic_defconfig
 +++ b/configs/stm32mp15_basic_defconfig
-@@ -189,5 +189,5 @@ CONFIG_WDT_STM32MP=y
+@@ -188,6 +188,6 @@ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
  # CONFIG_BINMAN_FDT is not set
  CONFIG_ERRNO_STR=y
- # CONFIG_LMB_USE_MAX_REGIONS is not set
--CONFIG_LMB_MEMORY_REGIONS=2
--CONFIG_LMB_RESERVED_REGIONS=16
-+CONFIG_LMB_MEMORY_AREAS=2
-+CONFIG_LMB_RESERVED_AREAS=16
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
++# CONFIG_LMB_USE_MAX_AREAS is not set
+ CONFIG_LMB_MEMORY_AREAS=2
+ CONFIG_LMB_RESERVED_AREAS=16
 diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-index 4d0a81f8a871..643ec201c644 100644
+index 643ec201c644..a17749411c62 100644
 --- a/configs/stm32mp15_defconfig
 +++ b/configs/stm32mp15_defconfig
-@@ -165,5 +165,5 @@ CONFIG_WDT_STM32MP=y
+@@ -164,6 +164,6 @@ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
  # CONFIG_BINMAN_FDT is not set
  CONFIG_ERRNO_STR=y
- # CONFIG_LMB_USE_MAX_REGIONS is not set
--CONFIG_LMB_MEMORY_REGIONS=2
--CONFIG_LMB_RESERVED_REGIONS=16
-+CONFIG_LMB_MEMORY_AREAS=2
-+CONFIG_LMB_RESERVED_AREAS=16
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
++# CONFIG_LMB_USE_MAX_AREAS is not set
+ CONFIG_LMB_MEMORY_AREAS=2
+ CONFIG_LMB_RESERVED_AREAS=16
 diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 0a7d8624858d..2a8162a870c5 100644
+index 2a8162a870c5..45ef9fe9aa12 100644
 --- a/configs/stm32mp15_trusted_defconfig
 +++ b/configs/stm32mp15_trusted_defconfig
-@@ -165,5 +165,5 @@ CONFIG_WDT_STM32MP=y
+@@ -164,6 +164,6 @@ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
  # CONFIG_BINMAN_FDT is not set
  CONFIG_ERRNO_STR=y
- # CONFIG_LMB_USE_MAX_REGIONS is not set
--CONFIG_LMB_MEMORY_REGIONS=2
--CONFIG_LMB_RESERVED_REGIONS=16
-+CONFIG_LMB_MEMORY_AREAS=2
-+CONFIG_LMB_RESERVED_AREAS=16
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
++# CONFIG_LMB_USE_MAX_AREAS is not set
+ CONFIG_LMB_MEMORY_AREAS=2
+ CONFIG_LMB_RESERVED_AREAS=16
+diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
+index 710ec6abf520..ff88729541ff 100644
+--- a/configs/th1520_lpi4a_defconfig
++++ b/configs/th1520_lpi4a_defconfig
+@@ -79,4 +79,4 @@ CONFIG_BZIP2=y
+ CONFIG_ZSTD=y
+ CONFIG_LIB_RATIONAL=y
+ # CONFIG_EFI_LOADER is not set
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
++# CONFIG_LMB_USE_MAX_AREAS is not set
 diff --git a/include/lmb.h b/include/lmb.h
-index 92332eb63069..d963ac28d9ac 100644
+index d963ac28d9ac..3cf23d2f2346 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -46,11 +46,11 @@ struct lmb_area {
-  *
-  * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
-  *         region is configurated *independently* with
-- *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
-- *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
-+ *         => CONFIG_LMB_MEMORY_AREAS: struct lmb.memory_regions
-+ *         => CONFIG_LMB_RESERVED_AREAS: struct lmb.reserved_regions
-  *         lmb_region.region is only a pointer to the correct buffer,
-  *         initialized in lmb_init(). This configuration is useful to manage
-- *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
-+ *         more reserved memory regions with CONFIG_LMB_RESERVED_AREAS.
-  */
+@@ -37,14 +37,14 @@ struct lmb_area {
  
- /**
-@@ -87,8 +87,8 @@ struct lmb {
+ /*
+  * For regions size management, see LMB configuration in KConfig
+- * all the #if test are done with CONFIG_LMB_USE_MAX_REGIONS (boolean)
++ * all the #if test are done with CONFIG_LMB_USE_MAX_AREAS (boolean)
+  *
+- * case 1. CONFIG_LMB_USE_MAX_REGIONS is defined (legacy mode)
+- *         => CONFIG_LMB_MAX_REGIONS is used to configure the region size,
++ * case 1. CONFIG_LMB_USE_MAX_AREAS is defined (legacy mode)
++ *         => CONFIG_LMB_MAX_AREAS is used to configure the region size,
+  *         directly in the array lmb_region.region[], with the same
+  *         configuration for memory and reserved regions.
+  *
+- * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
++ * case 2. CONFIG_LMB_USE_MAX_AREAS is not defined, the size of each
+  *         region is configurated *independently* with
+  *         => CONFIG_LMB_MEMORY_AREAS: struct lmb.memory_regions
+  *         => CONFIG_LMB_RESERVED_AREAS: struct lmb.reserved_regions
+@@ -63,8 +63,8 @@ struct lmb_area {
+ struct lmb_region {
+ 	unsigned long cnt;
+ 	unsigned long max;
+-#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+-	struct lmb_area area[CONFIG_LMB_MAX_REGIONS];
++#if IS_ENABLED(CONFIG_LMB_USE_MAX_AREAS)
++	struct lmb_area area[CONFIG_LMB_MAX_AREAS];
+ #else
+ 	struct lmb_area *area;
+ #endif
+@@ -86,7 +86,7 @@ struct lmb_region {
+ struct lmb {
  	struct lmb_region memory;
  	struct lmb_region reserved;
- #if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
--	struct lmb_area memory_areas[CONFIG_LMB_MEMORY_REGIONS];
--	struct lmb_area reserved_areas[CONFIG_LMB_RESERVED_REGIONS];
-+	struct lmb_area memory_areas[CONFIG_LMB_MEMORY_AREAS];
-+	struct lmb_area reserved_areas[CONFIG_LMB_RESERVED_AREAS];
+-#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
++#if !IS_ENABLED(CONFIG_LMB_USE_MAX_AREAS)
+ 	struct lmb_area memory_areas[CONFIG_LMB_MEMORY_AREAS];
+ 	struct lmb_area reserved_areas[CONFIG_LMB_RESERVED_AREAS];
  #endif
- };
- 
 diff --git a/lib/Kconfig b/lib/Kconfig
-index 42e559ad0b51..53f1332a8f83 100644
+index 53f1332a8f83..e8c88591ffa5 100644
 --- a/lib/Kconfig
 +++ b/lib/Kconfig
-@@ -1082,7 +1082,7 @@ config LMB_USE_MAX_REGIONS
- 	  Define the number of supported memory regions in the library logical
+@@ -1075,38 +1075,38 @@ config LMB
+ 	help
+ 	  Support the library logical memory blocks.
+ 
+-config LMB_USE_MAX_REGIONS
++config LMB_USE_MAX_AREAS
+ 	bool "Use a common number of memory and reserved regions in lmb lib"
+ 	default y
+ 	help
+-	  Define the number of supported memory regions in the library logical
++	  Define the number of supported memory areas in the library logical
  	  memory blocks.
  	  This feature allow to reduce the lmb library size by using compiler
--	  optimization when LMB_MEMORY_REGIONS == LMB_RESERVED_REGIONS.
-+	  optimization when LMB_MEMORY_AREAS == LMB_RESERVED_AREAS.
+ 	  optimization when LMB_MEMORY_AREAS == LMB_RESERVED_AREAS.
  
- config LMB_MAX_REGIONS
- 	int "Number of memory and reserved regions in lmb lib"
-@@ -1092,7 +1092,7 @@ config LMB_MAX_REGIONS
- 	  Define the number of supported regions, memory and reserved, in the
+-config LMB_MAX_REGIONS
+-	int "Number of memory and reserved regions in lmb lib"
+-	depends on LMB_USE_MAX_REGIONS
++config LMB_MAX_AREAS
++	int "Number of memory and reserved areas in lmb lib"
++	depends on LMB_USE_MAX_AREAS
+ 	default 16
+ 	help
+-	  Define the number of supported regions, memory and reserved, in the
++	  Define the number of supported areas, memory and reserved, in the
  	  library logical memory blocks.
  
--config LMB_MEMORY_REGIONS
-+config LMB_MEMORY_AREAS
- 	int "Number of memory regions in lmb lib"
- 	depends on !LMB_USE_MAX_REGIONS
+ config LMB_MEMORY_AREAS
+-	int "Number of memory regions in lmb lib"
+-	depends on !LMB_USE_MAX_REGIONS
++	int "Number of memory areas in lmb lib"
++	depends on !LMB_USE_MAX_AREAS
  	default 8
-@@ -1101,7 +1101,7 @@ config LMB_MEMORY_REGIONS
+ 	help
+-	  Define the number of supported memory regions in the library logical
++	  Define the number of supported memory areas in the library logical
  	  memory blocks.
  	  The minimal value is CONFIG_NR_DRAM_BANKS.
  
--config LMB_RESERVED_REGIONS
-+config LMB_RESERVED_AREAS
- 	int "Number of reserved regions in lmb lib"
- 	depends on !LMB_USE_MAX_REGIONS
+ config LMB_RESERVED_AREAS
+-	int "Number of reserved regions in lmb lib"
+-	depends on !LMB_USE_MAX_REGIONS
++	int "Number of reserved areas in lmb lib"
++	depends on !LMB_USE_MAX_AREAS
  	default 8
+ 	help
+-	  Define the number of supported reserved regions in the library logical
++	  Define the number of supported reserved areas in the library logical
+ 	  memory blocks.
+ 
+ config PHANDLE_CHECK_SEQ
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 2669868f0dda..f4321d10118b 100644
+index f4321d10118b..6061c6f361c6 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -111,8 +111,8 @@ void lmb_init(struct lmb *lmb)
- 	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
- 	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
+@@ -107,9 +107,9 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
+ 
+ void lmb_init(struct lmb *lmb)
+ {
+-#if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+-	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
+-	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
++#if IS_ENABLED(CONFIG_LMB_USE_MAX_AREAS)
++	lmb->memory.max = CONFIG_LMB_MAX_AREAS;
++	lmb->reserved.max = CONFIG_LMB_MAX_AREAS;
  #else
--	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
--	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
-+	lmb->memory.max = CONFIG_LMB_MEMORY_AREAS;
-+	lmb->reserved.max = CONFIG_LMB_RESERVED_AREAS;
- 	lmb->memory.area = lmb->memory_areas;
- 	lmb->reserved.area = lmb->reserved_areas;
+ 	lmb->memory.max = CONFIG_LMB_MEMORY_AREAS;
+ 	lmb->reserved.max = CONFIG_LMB_RESERVED_AREAS;
+diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+index a5c96993f7f9..b665d8dcdeb4 100644
+--- a/test/lib/lmb.c
++++ b/test/lib/lmb.c
+@@ -665,8 +665,8 @@ static int lib_test_lmb_get_free_size(struct unit_test_state *uts)
+ DM_TEST(lib_test_lmb_get_free_size,
+ 	UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+ 
+-#ifdef CONFIG_LMB_USE_MAX_REGIONS
+-static int lib_test_lmb_max_regions(struct unit_test_state *uts)
++#ifdef CONFIG_LMB_USE_MAX_AREAS
++static int lib_test_LMB_MAX_AREAS(struct unit_test_state *uts)
+ {
+ 	const phys_addr_t ram = 0x00000000;
+ 	/*
+@@ -674,8 +674,8 @@ static int lib_test_lmb_max_regions(struct unit_test_state *uts)
+ 	 * we need to scale ram_size (which in this case is the size of the lmb
+ 	 * region) to match.
+ 	 */
+-	const phys_size_t ram_size = ((0xFFFFFFFF >> CONFIG_LMB_MAX_REGIONS)
+-			+ 1) * CONFIG_LMB_MAX_REGIONS;
++	const phys_size_t ram_size = ((0xFFFFFFFF >> CONFIG_LMB_MAX_AREAS)
++			+ 1) * CONFIG_LMB_MAX_AREAS;
+ 	const phys_size_t blk_size = 0x10000;
+ 	phys_addr_t offset;
+ 	struct lmb lmb;
+@@ -684,57 +684,57 @@ static int lib_test_lmb_max_regions(struct unit_test_state *uts)
+ 	lmb_init(&lmb);
+ 
+ 	ut_asserteq(lmb.memory.cnt, 0);
+-	ut_asserteq(lmb.memory.max, CONFIG_LMB_MAX_REGIONS);
++	ut_asserteq(lmb.memory.max, CONFIG_LMB_MAX_AREAS);
+ 	ut_asserteq(lmb.reserved.cnt, 0);
+-	ut_asserteq(lmb.reserved.max, CONFIG_LMB_MAX_REGIONS);
++	ut_asserteq(lmb.reserved.max, CONFIG_LMB_MAX_AREAS);
+ 
+-	/*  Add CONFIG_LMB_MAX_REGIONS memory regions */
+-	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++) {
++	/*  Add CONFIG_LMB_MAX_AREAS memory regions */
++	for (i = 0; i < CONFIG_LMB_MAX_AREAS; i++) {
+ 		offset = ram + 2 * i * ram_size;
+ 		ret = lmb_add(&lmb, offset, ram_size);
+ 		ut_asserteq(ret, 0);
+ 	}
+-	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
++	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
+ 	ut_asserteq(lmb.reserved.cnt, 0);
+ 
+-	/*  error for the (CONFIG_LMB_MAX_REGIONS + 1) memory regions */
+-	offset = ram + 2 * (CONFIG_LMB_MAX_REGIONS + 1) * ram_size;
++	/*  error for the (CONFIG_LMB_MAX_AREAS + 1) memory regions */
++	offset = ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * ram_size;
+ 	ret = lmb_add(&lmb, offset, ram_size);
+ 	ut_asserteq(ret, -1);
+ 
+-	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
++	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
+ 	ut_asserteq(lmb.reserved.cnt, 0);
+ 
+-	/*  reserve CONFIG_LMB_MAX_REGIONS regions */
+-	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++) {
++	/*  reserve CONFIG_LMB_MAX_AREAS regions */
++	for (i = 0; i < CONFIG_LMB_MAX_AREAS; i++) {
+ 		offset = ram + 2 * i * blk_size;
+ 		ret = lmb_reserve(&lmb, offset, blk_size);
+ 		ut_asserteq(ret, 0);
+ 	}
+ 
+-	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
+-	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_REGIONS);
++	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
++	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_AREAS);
+ 
+ 	/*  error for the 9th reserved blocks */
+-	offset = ram + 2 * (CONFIG_LMB_MAX_REGIONS + 1) * blk_size;
++	offset = ram + 2 * (CONFIG_LMB_MAX_AREAS + 1) * blk_size;
+ 	ret = lmb_reserve(&lmb, offset, blk_size);
+ 	ut_asserteq(ret, -1);
+ 
+-	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
+-	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_REGIONS);
++	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_AREAS);
++	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_AREAS);
+ 
+ 	/*  check each regions */
+-	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++)
++	for (i = 0; i < CONFIG_LMB_MAX_AREAS; i++)
+ 		ut_asserteq(lmb.memory.area[i].base, ram + 2 * i * ram_size);
+ 
+-	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++)
++	for (i = 0; i < CONFIG_LMB_MAX_AREAS; i++)
+ 		ut_asserteq(lmb.reserved.area[i].base, ram + 2 * i * blk_size);
+ 
+ 	return 0;
+ }
  #endif
+ 
+-DM_TEST(lib_test_lmb_max_regions,
++DM_TEST(lib_test_LMB_MAX_AREAS,
+ 	UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+ 
+ static int lib_test_lmb_flags(struct unit_test_state *uts)
 -- 
 2.42.0.283.g2d96d420d3-goog
 
