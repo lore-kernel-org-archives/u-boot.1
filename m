@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D76AACA0FE2
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C288ACA0FE2
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 01:15:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29C1986852;
+	by phobos.denx.de (Postfix) with ESMTP id 71635868BB;
 	Fri,  1 Sep 2023 03:14:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XjYGkGv5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="es3LTcTD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A21380750; Fri,  1 Sep 2023 03:14:23 +0200 (CEST)
+ id 7347E80750; Fri,  1 Sep 2023 03:14:23 +0200 (CEST)
 Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
  [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF2248682B
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C0FE86759
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 03:14:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7928dc54896so52651439f.3
- for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:18 -0700 (PDT)
+ ca18e2360f4ac-7928ba24936so53281439f.0
+ for <u-boot@lists.denx.de>; Thu, 31 Aug 2023 18:14:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693530857; x=1694135657; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693530858; x=1694135658; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wp7FzBapgobWTEInbS9wj0Jre/twJhccNaxdqsOKzD8=;
- b=XjYGkGv5mVmgGCGcTuFmAD7TQ0s2jzRABHi3Nh9AIKUwu9M0Q91RHfbaMJwcAYNx1L
- f/oc+xnQbBYWJblpJdTyLKr5LVkz+FznOC1HlrC/tjaV2kAQTLYWIdOcHAxZ7XWpdJGR
- QJQLP4Qf6SS9BUJstU+2PhZPNq50w7bFsmPyI=
+ bh=eS0c7L5jBcf7Vye9Z45qj29wRdY+DMX/j7v7/jRT5z0=;
+ b=es3LTcTDvhK3Z4IgFQk+csq583d+FrnmC8LnE5dYr0GK4itTR6QluvhQPo3Kue2ZFX
+ rRyn2/n9qycDh28gI9LSULg/39aDEb25Ou9VCZAW9RWrOXhIBb6vVdmYAbVzyjfMQ7VE
+ hGYGc7CyaaQFlCRgQ/63VNWoYv5NtVnR38aCA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693530857; x=1694135657;
+ d=1e100.net; s=20221208; t=1693530858; x=1694135658;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wp7FzBapgobWTEInbS9wj0Jre/twJhccNaxdqsOKzD8=;
- b=IszKyK7bbLZyJnnMZNGa7QuthqeMElbEAejbsRN9ND6hvtUTSdPhQn/SMcLL1+j8EI
- W0t7pE/6xaCP9aigiALqCwgsq4OPEjFbcyOime+JkPzMpDyl+fpfeo0w0d5I329dMCKj
- 4AyXG/HlS3gXNnYU98zWv2VZmgrlkuctkY1oLCNNnfQNeycRIRRgTI7gGvHfmt17kgEc
- wzbNBMVnrPeyg9yp4uBCt2V02+p5u72RIZt0ll9F73a9CVqpHo8eWE1CIeOuTrYN93dG
- 4qbeTFLsdhgkjWgQ2dMyiU/6g+lPe1QjzgG19tybld4N0yXsp31QTqZ9K/PXJscLKqjy
- qxBA==
-X-Gm-Message-State: AOJu0Yxg2OwBwwhQAUMgVWTXI5xGbwehEqjkJznDaQUkFCk8GJQ+R8i5
- h65mYe3k9gIrpaHEZxc20Xw+tk0Rp651akCOp3s=
-X-Google-Smtp-Source: AGHT+IHIvLtHnim+HsChBkysCNXogA9mdhmuqWCWgcT0fITMBdWMBONeseODlvQfN6kCggr5OS4RIg==
-X-Received: by 2002:a05:6e02:f45:b0:34d:f0b4:787a with SMTP id
- y5-20020a056e020f4500b0034df0b4787amr1127995ilj.15.1693530857387; 
- Thu, 31 Aug 2023 18:14:17 -0700 (PDT)
+ bh=eS0c7L5jBcf7Vye9Z45qj29wRdY+DMX/j7v7/jRT5z0=;
+ b=Qk0HJZYaReEOPkmEE2ls1pF3eAFP8h+GUAJZU10qkdqEBkN0x6y9YdflB25w7zx6qp
+ hTKdWK7/lmxWohmyj6AI+AOXAIaBBJpSmzg7oSGfLNcjuyO80/Smnk+XqRCyqUTYk3yq
+ w0+txjSFWrQGLtdaKFCA32Don2dE0bDjmX+fntHYh4PjbwxrE/q9MjHSUD7kGpsOEsx0
+ fvRuKu1XyMoLtt6hIan5qikZ23y31s91wYzqYbZ1gL2K2VVBIIDkWo/YcJ1fEVaY3BHw
+ NFxVv3hzlOuiYgpbw0HzI6hyfvKIpK/31acXAv5aZNQwwqtGv2trmYqn4Og/98kDGbu6
+ YsUw==
+X-Gm-Message-State: AOJu0Yx7fkF4GMrIzWnWQA8sAPOKcsVDi5eZqBk+vtk5VcaoghhvJQBI
+ XVWZMELajO/HqUvfz1oFKRK1W06p34vdcdVgwyU=
+X-Google-Smtp-Source: AGHT+IGM+3C9e7pHA2f1DosX/PRXeMJzIG9VsF0gTbKM4c0zyBouqOuh/egYcl9hncCa1Nb39IRhOw==
+X-Received: by 2002:a5d:934c:0:b0:795:13ea:477a with SMTP id
+ i12-20020a5d934c000000b0079513ea477amr970457ioo.8.1693530858214; 
+ Thu, 31 Aug 2023 18:14:18 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.16
+ dk8-20020a0566384bc800b0042b279bb086sm712101jab.66.2023.08.31.18.14.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Aug 2023 18:14:17 -0700 (PDT)
+ Thu, 31 Aug 2023 18:14:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -67,9 +67,10 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH v2 09/14] lmb: Tidy up structure access
-Date: Thu, 31 Aug 2023 19:13:47 -0600
-Message-ID: <20230901011357.2482203-10-sjg@chromium.org>
+Subject: [PATCH v2 10/14] lmb: Avoid long for loop counters and function
+ returns
+Date: Thu, 31 Aug 2023 19:13:48 -0600
+Message-ID: <20230901011357.2482203-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230901011357.2482203-1-sjg@chromium.org>
 References: <20230901011357.2482203-1-sjg@chromium.org>
@@ -91,154 +92,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In some cases it helps to define a local variable pointing to the
-structure being accessed. This avoids lots of repeated code.
-
-There is no need to individually assign each struct member, so use a
-structure assignment instead.
+Use int for loop counters since it is more common. Do the same with the
+return value of some internal functions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/lmb.c | 58 ++++++++++++++++++++++++++-----------------------------
- 1 file changed, 27 insertions(+), 31 deletions(-)
+ lib/lmb.c | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 0b03cc4d1c23..862b1cd04953 100644
+index 862b1cd04953..579f98baef87 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -23,20 +23,19 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- static void lmb_dump_region(struct lmb_region *rgn, char *name)
- {
--	unsigned long long base, size, end;
--	enum lmb_flags flags;
- 	int i;
- 
- 	printf(" %s.cnt = 0x%lx / max = 0x%lx\n", name, rgn->cnt, rgn->max);
- 
- 	for (i = 0; i < rgn->cnt; i++) {
--		base = rgn->area[i].base;
--		size = rgn->area[i].size;
--		end = base + size - 1;
--		flags = rgn->area[i].flags;
-+		struct lmb_area *area = &rgn->area[i];
-+		unsigned long long end;
-+
-+		end = area->base + area->size - 1;
- 
- 		printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x\n",
--		       name, i, base, end, size, flags);
-+		       name, i, (unsigned long long)area->base, end,
-+		       (unsigned long long)area->size, area->flags);
- 	}
+@@ -53,8 +53,8 @@ void lmb_dump_all(struct lmb *lmb)
+ #endif
  }
  
-@@ -88,11 +87,8 @@ static void lmb_remove_area(struct lmb_region *rgn, unsigned long area)
+-static long lmb_addrs_overlap(phys_addr_t base1, phys_size_t size1,
+-			      phys_addr_t base2, phys_size_t size2)
++static int lmb_addrs_overlap(phys_addr_t base1, phys_size_t size1,
++			     phys_addr_t base2, phys_size_t size2)
  {
- 	unsigned long i;
- 
--	for (i = area; i < rgn->cnt - 1; i++) {
--		rgn->area[i].base = rgn->area[i + 1].base;
--		rgn->area[i].size = rgn->area[i + 1].size;
--		rgn->area[i].flags = rgn->area[i + 1].flags;
--	}
-+	for (i = area; i < rgn->cnt - 1; i++)
-+		rgn->area[i] = rgn->area[i + 1];
- 	rgn->cnt--;
+ 	const phys_addr_t base1_end = base1 + size1 - 1;
+ 	const phys_addr_t base2_end = base2 + size2 - 1;
+@@ -62,8 +62,8 @@ static long lmb_addrs_overlap(phys_addr_t base1, phys_size_t size1,
+ 	return base1 <= base2_end && base2 <= base1_end;
  }
  
-@@ -120,6 +116,7 @@ void lmb_init(struct lmb *lmb)
- 
- void arch_lmb_reserve_generic(struct lmb *lmb, ulong sp, ulong end, ulong align)
+-static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
+-			       phys_addr_t base2, phys_size_t size2)
++static int lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
++			      phys_addr_t base2, phys_size_t size2)
  {
-+	struct bd_info *bd = gd->bd;
- 	ulong bank_end;
- 	int bank;
- 
-@@ -133,12 +130,10 @@ void arch_lmb_reserve_generic(struct lmb *lmb, ulong sp, ulong end, ulong align)
- 	/* adjust sp by 4K to be safe */
- 	sp -= align;
- 	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
--		if (!gd->bd->bi_dram[bank].size ||
--		    sp < gd->bd->bi_dram[bank].start)
-+		if (!bd->bi_dram[bank].size || sp < bd->bi_dram[bank].start)
- 			continue;
- 		/* Watch out for RAM at end of address space! */
--		bank_end = gd->bd->bi_dram[bank].start +
--			gd->bd->bi_dram[bank].size - 1;
-+		bank_end = bd->bi_dram[bank].start + bd->bi_dram[bank].size - 1;
- 		if (sp > bank_end)
- 			continue;
- 		if (bank_end > end)
-@@ -242,13 +237,15 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 
- 	/* First try and coalesce this LMB with another. */
- 	for (i = 0; i < rgn->cnt; i++) {
--		phys_addr_t abase = rgn->area[i].base;
--		phys_size_t asize = rgn->area[i].size;
--		phys_size_t aflags = rgn->area[i].flags;
-+		struct lmb_area *area = &rgn->area[i];
-+
-+		phys_addr_t abase = area->base;
-+		phys_size_t asize = area->size;
-+		phys_size_t aflags = area->flags;
- 		phys_addr_t end = base + size - 1;
--		phys_addr_t rgnend = abase + asize - 1;
-+		phys_addr_t aend = abase + asize - 1;
- 
--		if (abase <= base && end <= rgnend) {
-+		if (abase <= base && end <= aend) {
- 			if (flags == aflags)
- 				/* Already have this area, so we're done */
- 				return 0;
-@@ -260,14 +257,14 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 		if (adjacent > 0) {
- 			if (flags != aflags)
- 				break;
--			rgn->area[i].base -= size;
--			rgn->area[i].size += size;
-+			area->base -= size;
-+			area->size += size;
- 			coalesced++;
- 			break;
- 		} else if (adjacent < 0) {
- 			if (flags != aflags)
- 				break;
--			rgn->area[i].size += size;
-+			area->size += size;
- 			coalesced++;
- 			break;
- 		} else if (lmb_addrs_overlap(base, size, abase, asize)) {
-@@ -291,9 +288,7 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
- 	/* Couldn't coalesce the LMB, so add it to the sorted table. */
- 	for (i = rgn->cnt-1; i >= 0; i--) {
- 		if (base < rgn->area[i].base) {
--			rgn->area[i + 1].base = rgn->area[i].base;
--			rgn->area[i + 1].size = rgn->area[i].size;
--			rgn->area[i + 1].flags = rgn->area[i].flags;
-+			rgn->area[i + 1] = rgn->area[i];
- 		} else {
- 			rgn->area[i + 1].base = base;
- 			rgn->area[i + 1].size = size;
-@@ -533,10 +528,11 @@ int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
- 	int i;
- 
- 	for (i = 0; i < lmb->reserved.cnt; i++) {
--		phys_addr_t upper = lmb->reserved.area[i].base +
--			lmb->reserved.area[i].size - 1;
--		if (addr >= lmb->reserved.area[i].base && addr <= upper)
--			return (lmb->reserved.area[i].flags & flags) == flags;
-+		struct lmb_area *area = &lmb->reserved.area[i];
-+		phys_addr_t upper = area->base + area->size - 1;
-+
-+		if (addr >= area->base && addr <= upper)
-+			return (area->flags & flags) == flags;
- 	}
- 
+ 	if (base2 == base1 + size1)
+ 		return 1;
+@@ -73,7 +73,7 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
  	return 0;
+ }
+ 
+-static long lmb_areas_adjacent(struct lmb_region *rgn, ulong a1, ulong a2)
++static int lmb_areas_adjacent(struct lmb_region *rgn, ulong a1, ulong a2)
+ {
+ 	phys_addr_t base1 = rgn->area[a1].base;
+ 	phys_size_t size1 = rgn->area[a1].size;
+@@ -85,7 +85,7 @@ static long lmb_areas_adjacent(struct lmb_region *rgn, ulong a1, ulong a2)
+ 
+ static void lmb_remove_area(struct lmb_region *rgn, unsigned long area)
+ {
+-	unsigned long i;
++	uint i;
+ 
+ 	for (i = area; i < rgn->cnt - 1; i++)
+ 		rgn->area[i] = rgn->area[i + 1];
+@@ -221,11 +221,11 @@ void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
+ }
+ 
+ /* This routine called with relocation disabled. */
+-static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
+-			       phys_size_t size, enum lmb_flags flags)
++static int lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
++			      phys_size_t size, enum lmb_flags flags)
+ {
+-	unsigned long coalesced = 0;
+-	long adjacent, i;
++	uint coalesced = 0;
++	int adjacent, i;
+ 
+ 	if (rgn->cnt == 0) {
+ 		rgn->area[0].base = base;
+@@ -308,8 +308,8 @@ static long lmb_add_area_flags(struct lmb_region *rgn, phys_addr_t base,
+ 	return 0;
+ }
+ 
+-static long lmb_add_area(struct lmb_region *rgn, phys_addr_t base,
+-			 phys_size_t size)
++static int lmb_add_area(struct lmb_region *rgn, phys_addr_t base,
++			phys_size_t size)
+ {
+ 	return lmb_add_area_flags(rgn, base, size, LMB_NONE);
+ }
+@@ -386,10 +386,10 @@ long lmb_reserve(struct lmb *lmb, phys_addr_t base, phys_size_t size)
+ 	return lmb_reserve_flags(lmb, base, size, LMB_NONE);
+ }
+ 
+-static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
+-				phys_size_t size)
++static int lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
++			       phys_size_t size)
+ {
+-	unsigned long i;
++	uint i;
+ 
+ 	for (i = 0; i < rgn->cnt; i++) {
+ 		phys_addr_t abase = rgn->area[i].base;
+@@ -429,7 +429,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+ phys_addr_t __lmb_alloc_base(struct lmb *lmb, phys_size_t size, ulong align,
+ 			     phys_addr_t max_addr)
+ {
+-	long i, area;
++	int i, area;
+ 	phys_addr_t base = 0;
+ 	phys_addr_t res_base;
+ 
 -- 
 2.42.0.283.g2d96d420d3-goog
 
