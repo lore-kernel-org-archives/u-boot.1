@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A22CA0FEB
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 17:33:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0B59CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 17:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A17A865DE;
-	Fri,  1 Sep 2023 19:33:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A43785F9F;
+	Fri,  1 Sep 2023 19:37:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yEnWsgpE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZKlQCT+J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FBBE866AA; Fri,  1 Sep 2023 19:33:50 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id DB3EE85F9F; Fri,  1 Sep 2023 19:37:52 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D2868074B
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 19:33:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AF31860AA
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 19:37:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 381HXjME117461;
- Fri, 1 Sep 2023 12:33:45 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 381HbmB1125396;
+ Fri, 1 Sep 2023 12:37:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693589625;
- bh=qq8jxV8G6k7hD55e1wOrwGfgj+89LJffCtZlBbUvVtA=;
+ s=ti-com-17Q1; t=1693589868;
+ bh=qeTSGyD57P7XDGcxEJhwoQ9VbSmjkPemIwqtArpBCq0=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=yEnWsgpEDxHhlAy6TCjsT93OqKKRtqZldlwtnWVQsqsQQ/frkriBtVFhDa+hhtY5d
- U4WNXW4uzia42dItsAPCfcL7HCCu8DWuQWEuXICITq13+rPIYS47Rq/yGY+sYhu0ia
- 8EeF3Cyvk/v7z9KDDEhW4RQ4aWotqxais54ED1Vs=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 381HXjfe002443
+ b=ZKlQCT+Jox+ltWrz3FSYDMBMmlTa/E23GFma4p+SGvVuQ1zOw33CZnITfmbwQCzCb
+ 8svQ7iLuU8zkhQD6ZzYSkMcoPMSKk3tVgwZo7Dya2Srdq6VAxS1teHJnSucxu1bwyT
+ 7X17RCtgXJBy9o1iIhwRt+QFzxy5x/0MOI7WiMKk=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 381Hblw6095984
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 1 Sep 2023 12:33:45 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 1 Sep 2023 12:37:48 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 1
- Sep 2023 12:33:44 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 12:37:47 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 1 Sep 2023 12:33:44 -0500
+ Frontend Transport; Fri, 1 Sep 2023 12:37:47 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 381HXiUU112801;
- Fri, 1 Sep 2023 12:33:44 -0500
-Date: Fri, 1 Sep 2023 12:33:44 -0500
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 381HblS0117263;
+ Fri, 1 Sep 2023 12:37:47 -0500
+Date: Fri, 1 Sep 2023 12:37:47 -0500
 From: Nishanth Menon <nm@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: <vigneshr@ti.com>, <bb@ti.com>, <sjg@chromium.org>, <peng.fan@nxp.com>,
- <ye.li@nxp.com>, <robimarko@gmail.com>, <u-boot@lists.denx.de>,
- <n-francis@ti.com>
-Subject: Re: [PATCH 1/2] thermal: k3-j72xx-bandgap: Add support for vtm
-Message-ID: <20230901173344.fw7glgqmed3fm7ua@comfort>
-References: <20230901061500.2342452-1-u-kumar1@ti.com>
- <20230901061500.2342452-2-u-kumar1@ti.com>
- <20230901150640.u7nyi3hawwkz3rbs@leverage>
- <f3dfffb4-4a97-be0b-61d8-f0e4761b1714@ti.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
+Subject: Re: [PATCH v3 3/6] k3-j721s2: Sync from Linux tag v6.5-rc1
+Message-ID: <20230901173747.5h3eofurpr63ls6c@scared>
+References: <20230816-b4-upstream-j721s2-r5-pinmux-v3-0-fd6602912536@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v3-3-fd6602912536@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <f3dfffb4-4a97-be0b-61d8-f0e4761b1714@ti.com>
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v3-3-fd6602912536@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,26 +81,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22:54-20230901, Kumar, Udit wrote:
-> > > +static const struct  udevice_id of_k3_j72xx_bandgap_match[] = {
-> > > +	{
-> > > +		.compatible = "ti,j721e-vtm",
-> > > +		.data = (ulong)&k3_j72xx_bandgap_j721e_data,
-> > So what happens to drivers/misc/k3_avs.c ?
+On 12:32-20230901, Manorit Chawdhry wrote:
+> The following commit syncs the device tree from Linux tag
+> v6.5-rc1 to U-boot and fixes the following to be compatible with
+> the future syncs -
 > 
-> Could you help me to understand this comment.
+> - Include k3-j721s2-common-proc-board.dts file
 > 
-> Do you mean, why we can not add this support in AVS driver or
+>     Remove the duplicated pinmuxes from r5 and -u-boot.dtsi files and
+>     include k3-j721s2-common-proc-board.dts for Linux fixes to propagate
+>     to U-boot.
 > 
-> need of this porting ?
+> - Fixing the mcu_timer0
 > 
-> How I see, AVS driver to run at SPL/R5 time and this driver
+>     Remove timer0 and use the mcu_timer0 defined in mcu-wakeup.dtsi
 > 
-> to be probed in Main/A72 u-boot when needed.
-you are saying the drivers are mutually exclusive - how about detecting
-over-temp scenario at R5 boot? switching on A53 will be a mistake at
-that point, no?
+>     The device manager is not functional at this point so we can't
+>     configure the clocks for the mcu_timer0, delete the properties
+>     that enable the clocks and power domains for it.
+> 
+> - Fixing secure proxy nodes
+> 
+>     Linux DT now have these nodes defined so remove them and rename to
+>     use the Linux DT ones.
+> 
+> - Remove cpsw node
+> 
+>     The compatible is now fixed and the node is not required in
+>     -u-boot specifically
+> 
+> - Remove aliases and chosen node
+> 
+>     Use these from Linux and don't override when not required.
+> 
+> - Remove /delete-property/ from sdhci nodes
+> 
+>     We have the necessary clock and dev data so remove these.
+> 
+> - Remove dummy_clocks and fs_loader0
+> 
+>     These weren't being used anywhere so remove it.
+> 
+> All these have been put in a single commit to not break the
+> bisectability.
+> 
+> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 
+Thank you for cleaning this up
+
+Reviewed-by: Nishanth Menon <nm@ti.com>
 -- 
 Regards,
 Nishanth Menon
