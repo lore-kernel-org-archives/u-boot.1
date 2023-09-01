@@ -4,63 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B206CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 07:50:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA6E1CA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 07:50:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC1AF866AA;
-	Fri,  1 Sep 2023 09:50:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 0051D86824;
+	Fri,  1 Sep 2023 09:50:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="a5s+VHLA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ph7JW2zR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D3386725; Fri,  1 Sep 2023 09:50:13 +0200 (CEST)
-Received: from mail-m2839.qiye.163.com (mail-m2839.qiye.163.com [103.74.28.39])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 286FD8669D; Fri,  1 Sep 2023 09:50:30 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DB0B8669D
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 09:50:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id EED96867EA
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 09:50:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=a5s+VHLAVp5o3NlYKYT65y8o3GbyKkpULKKtKpIOu80QN+x9uorEIDY4x/+4I3ZGVp48vAmTsA6iWFhiWd+6rHuA2Vwxi9vX+ktm9IGz6VoMgxnGZEZCkmLTodhJKYDigmdd2qs2jVNaVUH11WIV4botjkc1Z/rhLCz0uoz3Q/I=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=fP18NPWQaxRHAJMepYg3PFQhlJ26AliuxlI08dYL7tM=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m127102.qiye.163.com (Hmail) with ESMTPA id 0FAA06C01FC;
- Fri,  1 Sep 2023 15:49:54 +0800 (CST)
-Message-ID: <7532dcdb-ed81-b424-a8ad-5f98a8acf81d@rock-chips.com>
-Date: Fri, 1 Sep 2023 15:49:53 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-4ff9b389677so2886525e87.3
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 00:50:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693554625; x=1694159425; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+97UdMNF+enWFaHMaqp3+8Rb2U8+X4o/03puA0bisGk=;
+ b=Ph7JW2zRx906Pz+EsLUifEwvWysai3f9GsBHEdUiXtExu9v5tiCLEz2mrXs1uPjGJh
+ u+jWKYrd9Mi1XpNhjxRKreHK2v3V21RW3owKLRYCzH864P0kyrn8szbUIHg3FEupixzt
+ ThEXLevoonBHXBTcBChfRd8U1vpfk6+lrRFtSL2d2iSULhdZCmjFy/sWpa/iVCqGyA9T
+ Y+lO/njh2RdjOBPu5/XbxfE1ZN1tC84ls/1Xf/rDTP8bkAKPwDTzsa+XLWnoTx+1kLm7
+ HkgeJXoFs4jvLnbSXBl08Y472m1pNpjNY+arKWKlRqSC1ipCur5S+HTnf0m17k905Afp
+ 12BQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693554625; x=1694159425;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+97UdMNF+enWFaHMaqp3+8Rb2U8+X4o/03puA0bisGk=;
+ b=V62GuXfJBLsuvPc9XrygouxTBjcbHxn/jnfMYXXjHaiYZNuP1BisR4y3xG2RZNgPZF
+ /yQ4lalTFV4hu9Jt+L32v30rLVoHudY3O54FfxAYeziHdeSpzUQk/imcHMVpNJAbME5s
+ FoRqjwVigHcZtJRrJHLK22jfgDPRyzcsbKLQNskRR5S+QMJs4pZaRLjKcNzyi/BOFb/f
+ Jq7hpQYYPihmULfIPuUUhbj5a1Wb1qtwSBMNGKSlWtgwV+jua064jcM1OutCStRYTdK+
+ rljFKDlwY+9Zx+DygppSOFn+lAewJSDFpJZyCkXnPotn1kojc76Q4AqeouQBw2PgfcnF
+ USbA==
+X-Gm-Message-State: AOJu0YzNrEd3N/aCcYhyr8fat6OOcN8siUGnvoBykkVXFqBhzunvD37w
+ mL2J6ZgWUFfdwn2OR0G8A6lziaB1oNmAezqmu0Ak/w==
+X-Google-Smtp-Source: AGHT+IGMErHxkiCSYFxccz9gdNjqperpdYy6LzbWByjZ1bbnystnpv9peeuu80IzFps+ADPDOYvzJsM6qKW+0M649yw=
+X-Received: by 2002:a05:6512:220b:b0:500:b63f:4db3 with SMTP id
+ h11-20020a056512220b00b00500b63f4db3mr1292149lfu.35.1693554625111; Fri, 01
+ Sep 2023 00:50:25 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH 6/6] video: rockchip: dw_mipi_dsi: Use generic_phy_valid()
- helper
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Ondrej Jirman <megi@xff.cz>
-Cc: u-boot@lists.denx.de
-References: <20230831221629.1027552-1-jonas@kwiboo.se>
- <20230831221629.1027552-7-jonas@kwiboo.se>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20230831221629.1027552-7-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUkaSlZPHkxIQk5PSR5PQkpVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8a4fb851d0b280kuuu0faa06c01fc
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mwg6MRw6SD0DESgNNAlCLhw2
- FRxPFElVSlVKTUJITk5PTkJPTElMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITkxMNwY+
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-31-sjg@chromium.org>
+ <ZPA8AtGOel8pko6y@hades>
+ <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 1 Sep 2023 10:49:46 +0300
+Message-ID: <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
+Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
+ Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,54 +92,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+[...]
 
-     Why is this patch 6/6 and didn't see other patches?
+> >
+> > > +config OF_BLOBLIST
+> > > +     bool "DTB is provided by a bloblist"
+> > > +     help
+> > > +       Select this to read the devicetree from the bloblist. This allows
+> > > +       using a bloblist to transfer the devicetree between  U-Boot phases.
+> > > +       The devicetree is stored in the bloblist by an early phase so that
+> > > +       U-Boot can read it.
+> > > +
+> >
+> > I dont think this is a good idea.  We used to have 4-5 different options
+> > here, which we tried to clean up and ended up with two very discrete
+> > options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
+> > have a header of some sort?  The bloblist literally comes from a previous
+> > stage bootloader which is what OF_BOARD is here for. So why can't we just
+> > read the header and figure out if the magic of the bloblist matches?
+>
+> No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
+>
+> This patch is a standard mechanism to pass the DT from one firmware
+> phase to the next. We have spent quite a bit of time creating a spec
+> for it, and we should use it.
 
-On 2023/9/1 06:16, Jonas Karlman wrote:
-> The documentation for struct phy state that "The content of the
-> structure is managed solely by the PHY API and PHY drivers".
->
-> Change to use the generic_phy_valid() helper to check if phy is valid.
->
-> Fixes: b7d8d40346f2 ("video: rockchip: dw_mipi_dsi: Fix external phy existence check")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Where exactly am I objecting using the spec?   Can you please re-read my email?
+I am actually pointing out we should use the spec *properly*.  So
+instead of having a Kconfig option for the DT, which is pretty
+pointless,  we should parse the bloblist.  If the header defined by
+the *spec* is found, we should just search for the DT in there.
+What you are doing here, is take the spec, pick a very specific item
+that the list contains, and create a Kconfig option out of it.  Which
+basically ignores the discoverable options of the bloblist.  For
+example, that bloblist can also contain an entry to a TPM eventlog.
+Should we start creating Kconfig options for all the firmware handoff
+entries that are defined on that spec?
 
-Thanks,
-- Kever
-> ---
->   drivers/video/rockchip/dw_mipi_dsi_rockchip.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+Thanks
+/Ilias
+
 >
-> diff --git a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-> index 0852b53ebed5..1a5ab781e3f1 100644
-> --- a/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-> +++ b/drivers/video/rockchip/dw_mipi_dsi_rockchip.c
-> @@ -377,7 +377,7 @@ static int dsi_phy_init(void *priv_data)
->   	struct dw_rockchip_dsi_priv *dsi = dev_get_priv(dev);
->   	int ret, i, vco;
->   
-> -	if (dsi->phy.dev) {
-> +	if (generic_phy_valid(&dsi->phy)) {
->   		ret = generic_phy_configure(&dsi->phy, &dsi->phy_opts);
->   		if (ret) {
->   			dev_err(dsi->dsi_host,
-> @@ -559,7 +559,7 @@ dw_mipi_dsi_get_lane_mbps(void *priv_data, struct display_timing *timings,
->   	}
->   
->   	/* for external phy only the mipi_dphy_config is necessary */
-> -	if (dsi->phy.dev) {
-> +	if (generic_phy_valid(&dsi->phy)) {
->   		phy_mipi_dphy_get_default_config(timings->pixelclock.typ  * 10 / 8,
->   						 bpp, lanes,
->   						 &dsi->phy_opts);
-> @@ -859,7 +859,7 @@ static int dw_mipi_dsi_rockchip_probe(struct udevice *dev)
->   	}
->   
->   	/* Get a ref clock only if not using an external phy. */
-> -	if (priv->phy.dev) {
-> +	if (generic_phy_valid(&priv->phy)) {
->   		dev_dbg(dev, "setting priv->ref to NULL\n");
->   		priv->ref = NULL;
->   
+> The patches to align bloblist with the spec have been sent, but there
+> is a late-breaking change that we are trying to resolve. Once that is
+> sorted out, I will send v2 of those patches.
+>
+> >
+> > >  config OF_BOARD
+> > >       bool "Provided by the board (e.g a previous loader) at runtime"
+> > >       default y if SANDBOX || OF_HAS_PRIOR_STAGE
+> > > diff --git a/include/bloblist.h b/include/bloblist.h
+> > > index 080cc46a126..e16d122f4fb 100644
+> > > --- a/include/bloblist.h
+> > > +++ b/include/bloblist.h
+> > > @@ -103,6 +103,11 @@ enum bloblist_tag_t {
+> > >       BLOBLISTT_ACPI_TABLES = 0x104,  /* ACPI tables for x86 */
+> > >       BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+> > >       BLOBLISTT_VBOOT_CTX = 0x106,    /* Chromium OS verified boot context */
+> > > +     /*
+> >
+> > [...]
+> >
+> > >
+> > [0] https://github.com/FirmwareHandoff/firmware_handoff
+>
+> Regards,
+> Simon
