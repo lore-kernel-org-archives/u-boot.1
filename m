@@ -4,80 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ACB1CA0FE6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97A0ACA0FE1
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 10:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E9A086932;
-	Fri,  1 Sep 2023 12:27:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B51F786776;
+	Fri,  1 Sep 2023 12:32:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SKiPvnHV";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5659586906; Fri,  1 Sep 2023 12:27:02 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1693564343;
+	bh=Z2EiQVaOnE7dUjocT7p3eXWy0zOrZ7orrRJgpdq7Q/o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=eo+ibLN7aaBWj8Nv6M8LVtEgH5lg53o1ooydwO8R47QjrIQ09Wo/vVD6rBSj2O49D
+	 xCQNWhnViUwwt5SmZqG84A9e/PhSMDT3BLJ8xAgHlmrbtDrpX4Q0Aw3yMxEoQz+sLc
+	 EHpCheWBlI1+hRR9Esgx09U0xT7Lzfkt8Rhmlv6rpZMDvbt00imqCIQ4Lbl8BRhxGq
+	 CZRkUO0CKSbimzfkbJ1hE227jWcRUQUIdSavh27wXca1xR8Gi6IH6skobr/Ac9/oUO
+	 DRYP19X7KiqD6U+06OlLxAPGLejy/SM9GpJcnET4h64CEwvYgYtjp7sO8W+h6FKhZp
+	 cisIdfj65LCAw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 759088693C
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 12:26:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-57358a689d2so1125504eaf.2
- for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 03:26:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693564014; x=1694168814; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/NmMRlMmHbAXwjiLaquucgjFfrDauScedEYe17PD+cM=;
- b=SKiPvnHVwv7jEJKNACqz3wJ8TxHAfBctprySrsuQs/9FthiK/iuCZk7AYWWVafwqtW
- 1EVYdGlc4lUbJvGrJvYJQtOzJCYHL+mV4/+7kSPCZBFs/DO00u0Zuog+/S6H8Xzv6KpJ
- zAIColgEAlgy96Ibm8PjZILD1+lb4FBU6D0QaSqZPwZhu/7Fe5LtnQ0aOs2l7hwJ03RZ
- Cn0bZr/VuQ73nRmri1/n1XgvbKuPpqe27zMNSdwERiXZienoZN3MCTSMlbf5IOJJwPGP
- SvbZQ4d0JSV2HezBDtZO50DqchCxlSB7eAnOYxexiQBb1gcKZxhKI50bnzbt+ERzEbuK
- ji7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693564014; x=1694168814;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/NmMRlMmHbAXwjiLaquucgjFfrDauScedEYe17PD+cM=;
- b=DOoZoYSptEToBa8wXkqxlSM2AzMDZFwrRaRGyNURv9EjR1RAlrK1vQl1YUs2zCJp15
- BJflMEeXiTy6Rz4leTxl2u2htUHWmQAydUT8NLZ6u8cNAKZ5ys7SplUfVZyJ0eu6svYf
- 0pzGjX9K++bxOXYYnSGcpcdWDP+KthWqkJ6cG4QWbY1b+qgaN/FXJxQSdUq9vvEIQFlA
- 5X2G99vD4mN8yjP+jw8Uc0w3UAPjOBuF1vgGRIrox6YVHWa2ptlq39sDQBG3GbnwfYgw
- 63OMXwDO/OT8yJR2+egKSUYX/4v9pCSGzIokn2UOnXsnPT/6XUt62Tv9CDn9MnuocIQM
- ey7g==
-X-Gm-Message-State: AOJu0YwEQVcxJi2CjJ/kB9UNRrIVQs2gcH00s+MS6CCU81LqUpsWEzkU
- dFStmv+ZFhTBQcaIwzgASI4WXQ+y7mbATJamCPE=
-X-Google-Smtp-Source: AGHT+IEkLBdAoCcWVU0iRbks8f0VwuwWmIO0TY7sp8Mrm4llFfjzhDEe0t8GWc+ngPxKrLoauyoSig==
-X-Received: by 2002:a05:6808:1150:b0:3a8:7c67:7f5 with SMTP id
- u16-20020a056808115000b003a87c6707f5mr2733211oiu.1.1693564014597; 
- Fri, 01 Sep 2023 03:26:54 -0700 (PDT)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- b15-20020a63714f000000b0056c24c2e23dsm2526016pgn.25.2023.09.01.03.26.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Sep 2023 03:26:53 -0700 (PDT)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v2 6/6] doc: uefi: add HTTP Boot support
-Date: Fri,  1 Sep 2023 19:25:42 +0900
-Message-Id: <20230901102542.609239-7-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230901102542.609239-1-masahisa.kojima@linaro.org>
-References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8053A8074B;
+ Fri,  1 Sep 2023 12:32:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1693564342;
+ bh=Z2EiQVaOnE7dUjocT7p3eXWy0zOrZ7orrRJgpdq7Q/o=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Cg/Divgi2JnazKu7NgiHEbHc+lkemHgGsuLEK7c5othgBco5HjnrDx4Rlo9EEMlui
+ S8iNcCuK9hBVkURDqzpgjSYla6iD1a1BRceAL1BVGFBNeJdlEVMjqaWA1qEItSBuOI
+ 9lR8WNxJc4TMnVnMcFV9J0w69aPXfGCiNdcV7dgNew22NZDgHMUWZLLhmPhdgGmDod
+ z7khPxNBdRb6Y8ru9mfd9vj38rwGUNIWsz6iHfuACF+0BXjotuH+H3fhMl10LCnXnj
+ RHGyLB7IqEpL7FEEnZ/UWVeeW8rPJ9WGA/NPmIXCPaoCke6k2TiDHU6RHcuVW33nma
+ S+JR1m5up6qHA==
+Message-ID: <8b2463ac-897d-e93e-fc92-751dcb9a70bd@denx.de>
+Date: Fri, 1 Sep 2023 12:32:21 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH] usb: gadget: sdp: Option to enable SDP read register
+ command
+To: Loic Poulain <loic.poulain@linaro.org>
+Cc: lukma@denx.de, u-boot@lists.denx.de
+References: <20230813083912.532982-1-loic.poulain@linaro.org>
+ <a00ee265-d65f-f15b-48a0-4112b7e762dc@denx.de>
+ <CAMZdPi9fupGqHhEOH_kTREUUOzmrCCZPbVbK5u5JGwRHTuMeFA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAMZdPi9fupGqHhEOH_kTREUUOzmrCCZPbVbK5u5JGwRHTuMeFA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,45 +72,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the description about HTTP Boot.
+On 9/1/23 12:03, Loic Poulain wrote:
+> Hi Marek,
+> 
+> On Mon, 14 Aug 2023 at 01:53, Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 8/13/23 10:39, Loic Poulain wrote:
+>>> The SDP read register command can be used to read any memory
+>>> mapped address of the device (ddr, registers...). It can then
+>>> be exploited by an attacker to access sensitive data/values,
+>>> especially when running SDP from SPL, as SPL runs with highest
+>>> privileges in ARM secure mode.
+>>>
+>>> Without read, SDP still useful to bootstrap and jump on (signed)
+>>> blob such as u-boot with write and jump commands, but reading
+>>> is optional in that case (debug purpose).
+>>>
+>>> NXP SoCs usually have a dedicated SDP_READ_DISABLE fuse to disable
+>>> SDP read command in their ROM SDP implementation, so it seems quite
+>>> reasonable to make it optional from u-boot/spl as well.
+>>
+>> If there is a fuse, why not read the fuse and disable READ based on that
+>> fuse instead ?
+> 
+> Well, fuse is more a way to tune a specific ROM code here, not the software.
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
----
- doc/develop/uefi/uefi.rst | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+The way I read the commit message, when the fuse is set, the READ 
+functionality should be disabled, to avoid any READs, right ?
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index a7a41f2fac..fd87bb1edb 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -594,6 +594,27 @@ UEFI variables. Booting according to these variables is possible via::
- As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
- command 'efidebug' can be used to set the variables.
- 
-+UEFI HTTP Boot
-+~~~~~~~~~~~~~~
-+
-+HTTP Boot provides the capability for system deployment and configuration
-+over the network. HTTP Boot can be activated by specifying::
-+
-+    CONFIG_CMD_DNS
-+    CONFIG_CMD_WGET
-+    CONFIG_BLKMAP
-+
-+Set up the load option specifying the target URI::
-+
-+    efidebug boot add -u 1 netinst http://foo/bar
-+
-+When this load option is selected as boot selection, resolve the
-+host ip address by dhs, then download the file with wget.
-+If the downloaded file extension is .iso or .img file, efibootmgr tries to
-+mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-+If the downloaded file extension is .efi and file is PE-COFF image,
-+load the downloaded file and start it.
-+
- Executing the built in hello world application
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--- 
-2.34.1
+> It would be more generic to make it a build config like other features, and one
+> may purposely force SDP READ in SPL, even if disabled at ROM level. That
+> said we could also introduce a weak board_sdp_read_allowed() function...
+> 
+> Let me know what you prefer.
 
+I think the weak default function would be a good approach.
+
+[...]
