@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10575CA0FE5
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 15:59:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128E5CA0FE4
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 16:00:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1966F847C3;
-	Fri,  1 Sep 2023 17:59:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6F518847C3;
+	Fri,  1 Sep 2023 18:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693583977;
-	bh=PVh7DUH3VOQHx7lwhF2Q3ytkGLJ0Bs6v4Q4iXbp8CS0=;
+	s=phobos-20191101; t=1693584041;
+	bh=C7TjGwUSc9AEh+0Q19Uuh4IrnFXSkpD28S2stKu3BeA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sYtfXf7/uTRWvwmLepm9TeAAkBvMqBxpMAMhiqnoVMOWvbmz/TWJD3zyA2f9lnl0R
-	 3aMBjljpBUne/tbZzWgeDNNM83QKuj0lARyZJzPpcrbjE1iZSLI5u8tDEGLX7DzocS
-	 Wdpp2KL3bu315is1hbSGlV8908XYjPEi8B260pwY7sTeSWWExbhuJXfMIBbegston4
-	 XdBZsNTQUfGrM/uynvbfPGoSbgOZ1P4G60NFNmjJD8N+NkAQzv/vRdhFwJ06xwjFgp
-	 dwOKzIujBTr786bcipJgK5AdVi7243vCWcoKTgrhbuQBzsBR265niCJ/wsJEcgdkKi
-	 lkn20CnT05vfw==
+	b=enhJ2ue1qpul64BARcJxOuPbbZsFEAdeG0Y4xeF9I0BZsmVr8aYA1beXqVhKwdEH9
+	 VB+KZH5VhDTLGG9ui/KMKVU4AYpbbVusOOYh+HFy+hlVS3r4MpEtq/Wvu+McrmYdeY
+	 q/HUDXdDji4mZqeWHqARLI7nPgO0pXD6GIGdJaZagNO40Pxzl8buiK+KkFd9kdgi7d
+	 vfNaMIjqBLVM/AzieJoeY5Lvk1mhRdMX29IdQfu4NcWx0tydrCd9gNGUPvv/bJJdY5
+	 qEc7tmvQZajsEcCTuaomfb0Ytn0YmDPhcTQwUhVkE71bLvBe7wkSSVfqhRfpqkMFBV
+	 Csk9diKNfEmxw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2DAD984698;
- Fri,  1 Sep 2023 17:59:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 106AD8556F;
+ Fri,  1 Sep 2023 18:00:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693583975;
- bh=PVh7DUH3VOQHx7lwhF2Q3ytkGLJ0Bs6v4Q4iXbp8CS0=;
+ s=phobos-20191101; t=1693584040;
+ bh=C7TjGwUSc9AEh+0Q19Uuh4IrnFXSkpD28S2stKu3BeA=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=NT+cujMl+1A5LB4IyiGeDI9mSL0YLNdRtEhNVZILW5ammIoM614dYyHXJ1vjDQ6VT
- OYusOSclqqWkP08OSitBKlzmkmkTnOjOs507fKclvi4hc0hpLQlQBFLjqgJseGTmWG
- ZmJ9s7hfRjUb1P8ZqQpeSmsr0BLTaXqGUlvfJ8zpmcABZ7JAaJp6j6rb9Ym0msKZCh
- 3maiVh6QWthyVoKGbmQ/ubp8jxYVaypoYXyVBDvhNVqXJlTnEqnuZrG5eLdblnFs8Z
- vi9Iwh0zfORUb6CHZreq0Y/L238q9/UBoTvICA+Tq8jBU7JKreAEnoHomTf2x38Fnh
- arOU5/6j7g/VQ==
-Message-ID: <541f6ca4-9ee5-e2c9-7a9e-bc8f13562a8c@denx.de>
-Date: Fri, 1 Sep 2023 17:59:34 +0200
+ b=ajh7GxRrozj2D8vYxRXfp2Ruhy/TLxPRcpE2Rlk66PvhiKaRYuYdcFA0eAl82wF7e
+ ht4XwAUMUFcf++ltYnueAiZciy3jIfrr8PBxJ+2Zs2nYQVC13sr6YTZjstCeUXBWzB
+ ltyORMGlcoHaYdGq+snfgCy7zHziqgjTchjduP6SDZqOkM5u2GTcEWNzb2hSKPWUHJ
+ J1ZasB+msUnuX4g3d4gJyhEwUvE36P9ols31AGQfFSKUrEp0A3Olh6tkHaIKjCAYDz
+ sCxICkzKx1yHug3jCzBi2rAo9V6r8SAAMYUnKxZKgdub1DfwFMtrCdh4r79mUy+Zo6
+ 9Lo4Wx4gjVrXQ==
+Message-ID: <fef0778b-4850-fb73-9d8f-da48a6138e13@denx.de>
+Date: Fri, 1 Sep 2023 18:00:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-Subject: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset bulk()
- API
+Subject: Re: [PATCH v2] usb: check for companion controller in uclass
 Content-Language: en-US
 To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-References: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
- <84041468-abf2-9b68-6701-6605f4948bf5@denx.de>
- <2e1cf0cd-1d98-16fe-97e8-96604bbb009c@foss.st.com>
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>
+References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
+ <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
+ <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <2e1cf0cd-1d98-16fe-97e8-96604bbb009c@foss.st.com>
+In-Reply-To: <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,80 +73,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/23 14:05, Fabrice Gasnier wrote:
-> On 8/30/23 17:18, Marek Vasut wrote:
->> On 8/30/23 10:01, Fabrice Gasnier wrote:
->>> Make usage of clock and reset bulk API in order to simplify the code
+On 9/1/23 14:12, Fabrice Gasnier wrote:
+> On 9/1/23 12:48, Marek Vasut wrote:
+>> On 9/1/23 11:52, Fabrice Gasnier wrote:
+>>> EHCI is usually used with companion controller (like OHCI) as companion
+>>> controller. This information on the companion is missing currently in
+>>> companion drivers.
+>>> So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
+>>> first, then EHCI.
+>>> This is seen on STM32MP1 where DT probing makes the probe order to occur
+>>> by increasing address (OHCI address < EHCI address).
+>>>
+>>> When a low speed or full-speed device is plugged in, it's not detected as
+>>> EHCI should first detect it, and give ownership (handover) to OHCI.
+>>>
+>>> Current situation on STM32MP1 (with a low speed device plugged-in)
+>>> STM32MP> usb start
+>>> starting USB...
+>>> Bus usb@5800c000: USB OHCI 1.0
+>>> Bus usb@5800d000: USB EHCI 1.00
+>>> scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+>>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>>>      scanning usb for storage devices... 0 Storage Device(s) found
+>>>
+>>> The "companion" property in the device tree allow to retrieve companion
+>>> controller information, from the EHCI node. This allow marking the
+>>> companion driver as such.
+>>>
+>>> With this patch (same low speed device plugged in):
+>>> STM32MP> usb start
+>>> starting USB...
+>>> Bus usb@5800c000: USB OHCI 1.0
+>>> Bus usb@5800d000: USB EHCI 1.00
+>>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>>> scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+>>>      scanning usb for storage devices... 0 Storage Device(s) found
+>>> STM32MP> usb tree
+>>> USB device tree:
+>>> 1  Hub (12 Mb/s, 0mA)
+>>> |   U-Boot Root Hub
+>>> |
+>>> +-2  Human Interface (1.5 Mb/s, 100mA)
+>>>      HP HP USB 1000dpi Laser Mouse
+>>>
+>>> 1  Hub (480 Mb/s, 0mA)
+>>>    u-boot EHCI Host Controller
+>>>
+>>> This also optimize bus scan when a High speed device is plugged in, as
+>>> the usb-uclass skips OHCI in this case:
+>>>
+>>> STM32MP> usb reset
+>>> resetting USB...
+>>> Bus usb@5800c000: USB OHCI 1.0
+>>> Bus usb@5800d000: USB EHCI 1.00
+>>> scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+>>>      scanning usb for storage devices... 1 Storage Device(s) found
+>>> STM32MP> usb tree
+>>> USB device tree:
+>>> 1  Hub (480 Mb/s, 0mA)
+>>> |  u-boot EHCI Host Controller
+>>> |
+>>> +-2  Mass Storage (480 Mb/s, 200mA)
+>>>      SanDisk Cruzer Blade 03003432021922011407
 >>>
 >>> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
 >>> ---
 >>>
->>>    drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
->>>    1 file changed, 29 insertions(+), 63 deletions(-)
+>>> Changes in v2:
+>>> - move companion probing from generic ehci driver to usb-uclass, after
+>>>     Marek's questions on design choice.
+>>> - rename commit title to follow this change
 >>>
->>> diff --git a/drivers/usb/host/ohci-generic.c
->>> b/drivers/usb/host/ohci-generic.c
->>> index 2d8d38ce9a40..95aa608d8c19 100644
->>> --- a/drivers/usb/host/ohci-generic.c
->>> +++ b/drivers/usb/host/ohci-generic.c
->>> @@ -16,75 +16,41 @@
->>>      struct generic_ohci {
->>>        ohci_t ohci;
->>> -    struct clk *clocks;    /* clock list */
->>> -    struct reset_ctl *resets; /* reset list */
->>> +    struct clk_bulk clocks;    /* clock list */
->>> +    struct reset_ctl_bulk resets; /* reset list */
->>>        struct phy phy;
->>> -    int clock_count;    /* number of clock in clock list */
->>> -    int reset_count;    /* number of reset in reset list */
->>>    };
->>>      static int ohci_usb_probe(struct udevice *dev)
->>>    {
->>>        struct ohci_regs *regs = dev_read_addr_ptr(dev);
->>>        struct generic_ohci *priv = dev_get_priv(dev);
->>> -    int i, err, ret, clock_nb, reset_nb;
->>> -
->>> -    err = 0;
->>> -    priv->clock_count = 0;
->>> -    clock_nb = dev_count_phandle_with_args(dev, "clocks",
->>> "#clock-cells",
->>> -                           0);
->>> -    if (clock_nb > 0) {
->>> -        priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
->>> -                        GFP_KERNEL);
->>> -        if (!priv->clocks)
->>> -            return -ENOMEM;
->>> -
->>> -        for (i = 0; i < clock_nb; i++) {
->>> -            err = clk_get_by_index(dev, i, &priv->clocks[i]);
->>> -            if (err < 0)
->>> -                break;
->>> -
->>> -            err = clk_enable(&priv->clocks[i]);
->>> -            if (err && err != -ENOSYS) {
->>> -                dev_err(dev, "failed to enable clock %d\n", i);
->>> -                clk_free(&priv->clocks[i]);
->>> -                goto clk_err;
->>> -            }
->>> -            priv->clock_count++;
->>> -        }
->>> -    } else if (clock_nb != -ENOENT) {
->>> -        dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
->>> -        return clock_nb;
->>> +    int err, ret;
+>>> ---
+>>>    drivers/usb/host/usb-uclass.c | 36 +++++++++++++++++++++++++++++++++++
+>>>    1 file changed, 36 insertions(+)
+>>>
+>>> diff --git a/drivers/usb/host/usb-uclass.c
+>>> b/drivers/usb/host/usb-uclass.c
+>>> index 02c0138a2065..e238eee8c84d 100644
+>>> --- a/drivers/usb/host/usb-uclass.c
+>>> +++ b/drivers/usb/host/usb-uclass.c
+>>> @@ -249,6 +249,37 @@ static void remove_inactive_children(struct
+>>> uclass *uc, struct udevice *bus)
+>>>        }
+>>>    }
+>>>    +static int usb_probe_companion(struct udevice *bus)
+>>> +{
+>>> +    struct udevice *companion_dev;
+>>> +    int ret;
 >>> +
->>> +    ret = clk_get_bulk(dev, &priv->clocks);
->>> +    if (ret && ret != -ENOENT) {
->>> +        dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+>>> +    /*
+>>> +     * Enforce optional companion controller is marked as such in
+>>> order to
+>>> +     * 1st scan the primary controller, before the companion controller
+>>> +     * (ownership is given to companion when low or full speed devices
+>>> +     * have been detected).
+>>> +     */
+>>> +    ret = uclass_get_device_by_phandle(UCLASS_USB, bus, "companion",
+>>> &companion_dev);
+>>> +    if (!ret) {
+>>> +        struct usb_bus_priv *companion_bus_priv;
+>>> +
+>>> +        debug("%s is the companion of %s\n", companion_dev->name,
+>>> bus->name);
+>>> +        companion_bus_priv = dev_get_uclass_priv(companion_dev);
+>>> +        companion_bus_priv->companion = true;
+>>> +    } else if (ret && ret != -ENOENT && ret != -ENODEV) {
+>>> +        /*
+>>> +         * Treat everything else than no companion or disabled
+>>> +         * companion as an error. (It may not be enabled on boards
+>>> +         * that have a High-Speed HUB to handle FS and LS traffic).
+>>> +         */
+>>> +        printf("Failed to get companion (ret=%d)\n", ret);
+>>> +        return ret;
+>>> +    }
+>>> +
+>>> +    return 0;
+>>> +}
+>>> +
+>>>    int usb_init(void)
+>>>    {
+>>>        int controllers_initialized = 0;
+>>> @@ -299,6 +330,11 @@ int usb_init(void)
+>>>                printf("probe failed, error %d\n", ret);
+>>>                continue;
+>>>            }
+>>> +
+>>> +        ret = usb_probe_companion(bus);
 >>
->> Plural of 'clock' is still 'clock' , please fix just the text, keep the
->> variable name .
+>> Shouldn't this ^ be in separate uclass_foreach_dev(bus, uc) {} loop
+>> before this device_probe() loop , so that when the probe of the
+>> controller is called, its ->companion is already set ?
 > 
-> Hi Marek,
+> The point is to have the companion flag set before scanning the bus.
+> Generic OHCI or EHCI drivers don't care about this flag.
 > 
-> Are you sure ? Taking a closer look on the web, also in Linux or u-boot,
-> I can see plural of clock is clocks. Documentation also deals with
-> multiple clocks too.
+> Scanning is performed right after this first loop (low-level), in two
+> subsequent steps: primary controllers (2nd step), then companions if
+> necessary (3rd step).
 
-I also looked it up in a dictionary now and even asked about it, 
-clearly, I am wrong. Sorry.
+Thanks for clarifying, in that case:
+
+Reviewed-by: Marek Vasut <marex@denx.de>
+
+Is this a fix for this release (currently rc3) or next release ?
