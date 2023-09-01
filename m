@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF898CA0FF6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 21:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A043ACA0FF6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 21:01:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC97B8669D;
-	Fri,  1 Sep 2023 23:01:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E22B86725;
+	Fri,  1 Sep 2023 23:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nGIMFFy1";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="R84bAzJd";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="M6N9kv7O";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aRYraJxa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A37628657B; Fri,  1 Sep 2023 23:01:11 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 4DDF38657B; Fri,  1 Sep 2023 23:01:25 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CB38866DC
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 23:01:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C17128657B
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 23:01:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,34 +32,34 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Rcr6X1qHmz9skw;
- Fri,  1 Sep 2023 23:01:08 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Rcr6p4gPvz9sWQ;
+ Fri,  1 Sep 2023 23:01:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693602068;
+ s=mail20150812; t=1693602082;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3jhKvcPw5rI27KD6TUCWK1GLjRYduSvkD9lUCOJ36/w=;
- b=nGIMFFy15XL77IYHt83pie4VSmRMtjtzkC5j6cgSDOxA3bSqfcxOM/0XU8SjngckXR2psf
- 4XDFrLVUqtK/oCZ+0LV0nOru/UA2aBGud2VRXq5HJgyjs9fx/SUgIu3BkevSWleAQNZBRU
- 8d7MKhakMym5JTviRl/pDuntm7Xm+kBVWQnlYVJgScn6J1D88CNChlygIsOKBywp0U/Cot
- ylyOk1ME6UGGEUWvE4e8j+IvLNQOZXATaFMNyDENanXEP+VdT5SMnR6gKmG4wwQ1Nupdmt
- WHwBUFbli+KPQYWJVD/zyoddlElR0zx/1886fwcsEcN2tn8RdNrW+ruksL4FMA==
-Message-ID: <9f03487a-ae6a-6e17-5051-a0a575c2d517@mailbox.org>
+ bh=LAYluwsa5qlIy/2Aia+jk4nLzNKWtLLXsk5zUO1gsLQ=;
+ b=M6N9kv7OsrLAJGeCRL6Ulsq3o35Zc13RXqVFKOoujIrAevSAzpQmm+9UuW8Oz64+tj9agO
+ coZv/cuCrHTMgFDWr0Y8g0g9SX6bAnMvD8htI7N9GCpYog7sT6kQ4BcdC25LxsISveA53A
+ Wg3vcNkO8Bu7L/SZHgbILvgyPu1UnL/Ab/uYPUlrleRDEw5psU2L2581KI8x/XYJ+OHg6n
+ 0PQEDQn7rChx1UStDzvE7eaC1e5RVlJLyhXlCVp85VFQn4SXgSmzo8Jnwj9/SEhXGwpk7l
+ eSzwcAKkIr4Pv85LP3moFF2jGq6Jwmd2p2cGHp6AoKFPnzYIcFhPaid/AeFHtw==
+Message-ID: <90536404-b36d-c267-0c44-cb23ae26f5f5@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693602065;
+ s=mail20150812; t=1693602080;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3jhKvcPw5rI27KD6TUCWK1GLjRYduSvkD9lUCOJ36/w=;
- b=R84bAzJdDJydf/SFMKnWvNAF3IKWTTGNOiD3aQZiXzEDA/ytPb93zKZ0Hmht9jYc1qzosy
- BN22r9QURxbgqQbv8tzAcCN18iFNmWNwkIfDtTXFwVIgZ1e4SBzRUcY43fcWHHwpGsIJXl
- v+Bc0w+y0xr0lHIA8lP2ikk4izmD/MBN01IG3A12s1HcQB3zjtPPJcv7veOTHyC11mCKAx
- MrBbeWsRIDvzVvmY3zi2tZBCNm0uuEF1TKufSLrB1ryVXvVNdTZQ9rWeIY+GMCLIWNNTGY
- nf5Ecztve6ASDqMfQ+wg7adnm0I8VmUqPmaS7UzKJK0uUi07N8gdM7hobGFYaw==
-Date: Fri, 1 Sep 2023 23:01:03 +0200
+ bh=LAYluwsa5qlIy/2Aia+jk4nLzNKWtLLXsk5zUO1gsLQ=;
+ b=aRYraJxaqnR5tHvRwooTzfp8SnmivtxGRcexb/gb4GvKM0DMw1ENKbcRKbMl33HBmEN3QD
+ LXjN/WbH8+qwjwd1KumSDtZ9lRruzsPBPDRNHCYyvhX9uRsc+4uEGkVmSZfzYwPTOMgG5B
+ h3M8FtoO9kfLiutZRSbeBs+MdAjDDVUTMpp7qZcZiI9u4TZDMJ6XoKM17aPFtG9FbGO3qj
+ pm5f7ION2fG2fbt3iWKXcX5uWaIn1WXb7himlCh8+XqbUtGAawdi4w9qG5j4P9C9abA77I
+ yD0JQQHtCjF2wIXdyN7eFsI8W9YNX63BYDRRrwhTOX38bqvix/+6I1CWyvZGmw==
+Date: Fri, 1 Sep 2023 23:01:19 +0200
 MIME-Version: 1.0
 Subject: Re: [PATCH] .gitlab-ci: Test sandbox64 board in addition to sandbox
 Content-Language: en-US
@@ -68,14 +69,14 @@ Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Simon Glass <sjg@chromium.org>
 References: <20230901084810.238594-1-marek.vasut+renesas@mailbox.org>
- <20230901181123.GT3101304@bill-the-cat>
+ <20230901132405.GR3101304@bill-the-cat>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230901181123.GT3101304@bill-the-cat>
+In-Reply-To: <20230901132405.GR3101304@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 31dac9d77e0450f47f1
-X-MBO-RS-META: 8ar55yjj974g46h84jqfwy1kipjmc3nh
-X-Rspamd-Queue-Id: 4Rcr6X1qHmz9skw
+X-MBO-RS-ID: 4f388b1323d794eedf0
+X-MBO-RS-META: ofcegramcadtfqea4kmhszyz5tbwphdo
+X-Rspamd-Queue-Id: 4Rcr6p4gPvz9sWQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,8 +93,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/23 20:11, Tom Rini wrote:
+On 9/1/23 15:24, Tom Rini wrote:
 > On Fri, Sep 01, 2023 at 10:48:10AM +0200, Marek Vasut wrote:
+> 
 >> Test both 32bit and 64bit sandbox boards in CI.
 >>
 >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -106,6 +108,11 @@ On 9/1/23 20:11, Tom Rini wrote:
 >> - [v2] test: print: Fix hexdump test on 64bit systems
 >> - test: dm: test-fdt: Use fdtdec_get_int() in dm_check_devices()
 >> - configs: sandbox64: Enable legacy image format support
+> 
+> Nice work.
+> 
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> 
 >> ---
 >>   .gitlab-ci.yml | 17 +++++++++++++++++
 >>   1 file changed, 17 insertions(+)
@@ -135,10 +142,9 @@ On 9/1/23 20:11, Tom Rini wrote:
 >> +    BUILD_ENV: "NO_LTO=1"
 >> +  <<: *buildman_and_testpy_dfn
 > 
-> I'm not sure it's worth building and testing sandbox64 without LTO as
-> well. The primary reason we do this here is to ensure that the NO_LTO
-> flag keeps working, rather than specific outputs from the tests, and we
-> should _probably_ change the current one to be a case where we just test
-> that the version test runs and passes.
+> I think this means it'll be time to split sandbox out in to its own
+> stage on Azure as we can get 10 meaningful-but-long runs there and so
+> it's best for overall job time to make that a stage. I'll go give that a
+> spin shortly unless you want to.
 
-It is faster to finish building if nothing else.
+Sure
