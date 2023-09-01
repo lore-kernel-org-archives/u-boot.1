@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7798CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 12:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58C33CA0FE6
+	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 12:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A0B3868B1;
-	Fri,  1 Sep 2023 14:05:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B896C86907;
+	Fri,  1 Sep 2023 14:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="6KxeLcRn";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="bHEYIT5a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0B8F86886; Fri,  1 Sep 2023 14:05:08 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 7AA11868B1; Fri,  1 Sep 2023 14:12:16 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EBEF868BB
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 14:05:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCD3086908
+ for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 14:12:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=76082d487b=fabrice.gasnier@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 381Bocia005077; Fri, 1 Sep 2023 14:05:05 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 381BtNu3024007; Fri, 1 Sep 2023 14:12:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=+v99ALnlUe6ZYUQKOD3Ng50z461MtT4A61BM9WVUAUQ=; b=6K
- xeLcRnvoRx2S2IG/DuhNPesuVGSWe59PZWyhRGW11wYFnk7yQSWDXSy20HwvETa9
- XbMthwdhgCMx5CtCW8zhy/zvf266wwtUK75vH3amfSson782YLsUvdLA/4eYDVg7
- JXeUXNp6+Ncgt7Q401FGA0HvkR4ROBOuLyRCxvolxm3lSr+JRngj2pmQ/S5G9wQg
- 5Q4Y33R45emQVEccMhicupX/zowTh4RhU7tcjKIef3+3ajNcbgDfwyeoZstLWG6r
- 3h1NDFsN+mp9LVJTPyV7Mo9GHpDBe/rccI+tsvQzskK6FDTW4o5XPYk4K510wy3C
- DVjR3baYqdDsEB8GasnQ==
+ selector1; bh=tAZBWXDF8HEN8aMU3dDhnVtHqVYnFSyMyZHqP0S1TnM=; b=bH
+ EYIT5aLXuy1UT4IYAuBgVT7eO8KqzTQ2EiB1QtJU1ik3XrjfcUrq4WDGqGxYrcjV
+ UNOP1IqDCwtJgOSTlBHnDp+jw2peENLTzzFT57aEiX0LzmQ+NsH7Hn/FufOeew7t
+ ArdFD1RTOcN/a6SsdNjyQpZSbh6IXV0KO55uIv2jS3c/A9RtM1Y9y16niFJBvLSX
+ 5FXoYJo6WnCQhOmRXgmpWC9a6cmTLcw6IkYGFv8/lgqEZV3zlk7dkEoTM+Ztps8N
+ 9+RGbsj3xqirRgRQEYN4spWa6UUGhbzzdmNNXPdjQipkvDLB+0x1HcaOVwNz7uSx
+ 7fUzfjkFe6vapcCc5AIw==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sqvbhradf-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq6h4jx0h-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 01 Sep 2023 14:05:05 +0200 (MEST)
+ Fri, 01 Sep 2023 14:12:12 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CBC0D100058;
- Fri,  1 Sep 2023 14:05:04 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 59271100058;
+ Fri,  1 Sep 2023 14:12:12 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A250D2291BB;
- Fri,  1 Sep 2023 14:05:04 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 51B472291DC;
+ Fri,  1 Sep 2023 14:12:12 +0200 (CEST)
 Received: from [10.201.22.39] (10.201.22.39) by SHFDAG1NODE2.st.com
  (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 1 Sep
- 2023 14:05:04 +0200
-Message-ID: <2e1cf0cd-1d98-16fe-97e8-96604bbb009c@foss.st.com>
-Date: Fri, 1 Sep 2023 14:05:03 +0200
+ 2023 14:12:11 +0200
+Message-ID: <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
+Date: Fri, 1 Sep 2023 14:12:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset bulk()
- API
+Subject: Re: [PATCH v2] usb: check for companion controller in uclass
 Content-Language: en-US
 To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-References: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
- <84041468-abf2-9b68-6701-6605f4948bf5@denx.de>
+ <patrick.delaunay@foss.st.com>, Patrice CHOTARD
+ <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>
+References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
+ <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
 From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-In-Reply-To: <84041468-abf2-9b68-6701-6605f4948bf5@denx.de>
+In-Reply-To: <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.201.22.39]
@@ -93,146 +92,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/30/23 17:18, Marek Vasut wrote:
-> On 8/30/23 10:01, Fabrice Gasnier wrote:
->> Make usage of clock and reset bulk API in order to simplify the code
+On 9/1/23 12:48, Marek Vasut wrote:
+> On 9/1/23 11:52, Fabrice Gasnier wrote:
+>> EHCI is usually used with companion controller (like OHCI) as companion
+>> controller. This information on the companion is missing currently in
+>> companion drivers.
+>> So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
+>> first, then EHCI.
+>> This is seen on STM32MP1 where DT probing makes the probe order to occur
+>> by increasing address (OHCI address < EHCI address).
+>>
+>> When a low speed or full-speed device is plugged in, it's not detected as
+>> EHCI should first detect it, and give ownership (handover) to OHCI.
+>>
+>> Current situation on STM32MP1 (with a low speed device plugged-in)
+>> STM32MP> usb start
+>> starting USB...
+>> Bus usb@5800c000: USB OHCI 1.0
+>> Bus usb@5800d000: USB EHCI 1.00
+>> scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>>     scanning usb for storage devices... 0 Storage Device(s) found
+>>
+>> The "companion" property in the device tree allow to retrieve companion
+>> controller information, from the EHCI node. This allow marking the
+>> companion driver as such.
+>>
+>> With this patch (same low speed device plugged in):
+>> STM32MP> usb start
+>> starting USB...
+>> Bus usb@5800c000: USB OHCI 1.0
+>> Bus usb@5800d000: USB EHCI 1.00
+>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>> scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+>>     scanning usb for storage devices... 0 Storage Device(s) found
+>> STM32MP> usb tree
+>> USB device tree:
+>> 1  Hub (12 Mb/s, 0mA)
+>> |   U-Boot Root Hub
+>> |
+>> +-2  Human Interface (1.5 Mb/s, 100mA)
+>>     HP HP USB 1000dpi Laser Mouse
+>>
+>> 1  Hub (480 Mb/s, 0mA)
+>>   u-boot EHCI Host Controller
+>>
+>> This also optimize bus scan when a High speed device is plugged in, as
+>> the usb-uclass skips OHCI in this case:
+>>
+>> STM32MP> usb reset
+>> resetting USB...
+>> Bus usb@5800c000: USB OHCI 1.0
+>> Bus usb@5800d000: USB EHCI 1.00
+>> scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+>>     scanning usb for storage devices... 1 Storage Device(s) found
+>> STM32MP> usb tree
+>> USB device tree:
+>> 1  Hub (480 Mb/s, 0mA)
+>> |  u-boot EHCI Host Controller
+>> |
+>> +-2  Mass Storage (480 Mb/s, 200mA)
+>>     SanDisk Cruzer Blade 03003432021922011407
 >>
 >> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
 >> ---
 >>
->>   drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
->>   1 file changed, 29 insertions(+), 63 deletions(-)
+>> Changes in v2:
+>> - move companion probing from generic ehci driver to usb-uclass, after
+>>    Marek's questions on design choice.
+>> - rename commit title to follow this change
 >>
->> diff --git a/drivers/usb/host/ohci-generic.c
->> b/drivers/usb/host/ohci-generic.c
->> index 2d8d38ce9a40..95aa608d8c19 100644
->> --- a/drivers/usb/host/ohci-generic.c
->> +++ b/drivers/usb/host/ohci-generic.c
->> @@ -16,75 +16,41 @@
->>     struct generic_ohci {
->>       ohci_t ohci;
->> -    struct clk *clocks;    /* clock list */
->> -    struct reset_ctl *resets; /* reset list */
->> +    struct clk_bulk clocks;    /* clock list */
->> +    struct reset_ctl_bulk resets; /* reset list */
->>       struct phy phy;
->> -    int clock_count;    /* number of clock in clock list */
->> -    int reset_count;    /* number of reset in reset list */
->>   };
->>     static int ohci_usb_probe(struct udevice *dev)
->>   {
->>       struct ohci_regs *regs = dev_read_addr_ptr(dev);
->>       struct generic_ohci *priv = dev_get_priv(dev);
->> -    int i, err, ret, clock_nb, reset_nb;
->> -
->> -    err = 0;
->> -    priv->clock_count = 0;
->> -    clock_nb = dev_count_phandle_with_args(dev, "clocks",
->> "#clock-cells",
->> -                           0);
->> -    if (clock_nb > 0) {
->> -        priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
->> -                        GFP_KERNEL);
->> -        if (!priv->clocks)
->> -            return -ENOMEM;
->> -
->> -        for (i = 0; i < clock_nb; i++) {
->> -            err = clk_get_by_index(dev, i, &priv->clocks[i]);
->> -            if (err < 0)
->> -                break;
->> -
->> -            err = clk_enable(&priv->clocks[i]);
->> -            if (err && err != -ENOSYS) {
->> -                dev_err(dev, "failed to enable clock %d\n", i);
->> -                clk_free(&priv->clocks[i]);
->> -                goto clk_err;
->> -            }
->> -            priv->clock_count++;
->> -        }
->> -    } else if (clock_nb != -ENOENT) {
->> -        dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
->> -        return clock_nb;
->> +    int err, ret;
+>> ---
+>>   drivers/usb/host/usb-uclass.c | 36 +++++++++++++++++++++++++++++++++++
+>>   1 file changed, 36 insertions(+)
+>>
+>> diff --git a/drivers/usb/host/usb-uclass.c
+>> b/drivers/usb/host/usb-uclass.c
+>> index 02c0138a2065..e238eee8c84d 100644
+>> --- a/drivers/usb/host/usb-uclass.c
+>> +++ b/drivers/usb/host/usb-uclass.c
+>> @@ -249,6 +249,37 @@ static void remove_inactive_children(struct
+>> uclass *uc, struct udevice *bus)
+>>       }
+>>   }
+>>   +static int usb_probe_companion(struct udevice *bus)
+>> +{
+>> +    struct udevice *companion_dev;
+>> +    int ret;
 >> +
->> +    ret = clk_get_bulk(dev, &priv->clocks);
->> +    if (ret && ret != -ENOENT) {
->> +        dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
-> 
-> Plural of 'clock' is still 'clock' , please fix just the text, keep the
-> variable name .
-
-Hi Marek,
-
-Are you sure ? Taking a closer look on the web, also in Linux or u-boot,
-I can see plural of clock is clocks. Documentation also deals with
-multiple clocks too.
-
-> 
+>> +    /*
+>> +     * Enforce optional companion controller is marked as such in
+>> order to
+>> +     * 1st scan the primary controller, before the companion controller
+>> +     * (ownership is given to companion when low or full speed devices
+>> +     * have been detected).
+>> +     */
+>> +    ret = uclass_get_device_by_phandle(UCLASS_USB, bus, "companion",
+>> &companion_dev);
+>> +    if (!ret) {
+>> +        struct usb_bus_priv *companion_bus_priv;
+>> +
+>> +        debug("%s is the companion of %s\n", companion_dev->name,
+>> bus->name);
+>> +        companion_bus_priv = dev_get_uclass_priv(companion_dev);
+>> +        companion_bus_priv->companion = true;
+>> +    } else if (ret && ret != -ENOENT && ret != -ENODEV) {
+>> +        /*
+>> +         * Treat everything else than no companion or disabled
+>> +         * companion as an error. (It may not be enabled on boards
+>> +         * that have a High-Speed HUB to handle FS and LS traffic).
+>> +         */
+>> +        printf("Failed to get companion (ret=%d)\n", ret);
 >> +        return ret;
 >> +    }
 >> +
->> +    err = clk_enable_bulk(&priv->clocks);
->> +    if (err) {
->> +        dev_err(dev, "Failed to enable clocks (err=%d)\n", err);
-> 
-> DTTO here
-> 
->> +        goto clk_err;
->>       }
->>   -    priv->reset_count = 0;
->> -    reset_nb = dev_count_phandle_with_args(dev, "resets",
->> "#reset-cells",
->> -                           0);
->> -    if (reset_nb > 0) {
->> -        priv->resets = devm_kcalloc(dev, reset_nb,
->> -                        sizeof(struct reset_ctl),
->> -                        GFP_KERNEL);
->> -        if (!priv->resets)
->> -            return -ENOMEM;
->> -
->> -        for (i = 0; i < reset_nb; i++) {
->> -            err = reset_get_by_index(dev, i, &priv->resets[i]);
->> -            if (err < 0)
->> -                break;
->> -
->> -            err = reset_deassert(&priv->resets[i]);
->> -            if (err) {
->> -                dev_err(dev, "failed to deassert reset %d\n", i);
->> -                reset_free(&priv->resets[i]);
->> -                goto reset_err;
->> -            }
->> -            priv->reset_count++;
->> -        }
->> -    } else if (reset_nb != -ENOENT) {
->> -        dev_err(dev, "failed to get reset phandle(%d)\n", reset_nb);
->> +    err = reset_get_bulk(dev, &priv->resets);
->> +    if (err && err != -ENOENT) {
->> +        dev_err(dev, "failed to get resets (err=%d)\n", err);
->>           goto clk_err;
->>       }
->>   +    err = reset_deassert_bulk(&priv->resets);
->> +    if (err) {
->> +        dev_err(dev, "failed to get deassert resets (err=%d)\n", err);
-> 
-> Drop the 'get' from the text here, I think it's copy-paste error.
-
-ack, will update in v2
-
-> 
->> +        goto reset_err;
->> +    }
+>> +    return 0;
+>> +}
 >> +
->>       err = generic_setup_phy(dev, &priv->phy, 0);
->>       if (err)
->>           goto reset_err;
+>>   int usb_init(void)
+>>   {
+>>       int controllers_initialized = 0;
+>> @@ -299,6 +330,11 @@ int usb_init(void)
+>>               printf("probe failed, error %d\n", ret);
+>>               continue;
+>>           }
+>> +
+>> +        ret = usb_probe_companion(bus);
 > 
-> With that fixed:
-> 
-> Reviewed-by: Marek Vasut <marex@denx.de>
+> Shouldn't this ^ be in separate uclass_foreach_dev(bus, uc) {} loop
+> before this device_probe() loop , so that when the probe of the
+> controller is called, its ->companion is already set ?
 
-Thanks, will add in v2.
-BR,
-Fabrice
+The point is to have the companion flag set before scanning the bus.
+Generic OHCI or EHCI drivers don't care about this flag.
+
+Scanning is performed right after this first loop (low-level), in two
+subsequent steps: primary controllers (2nd step), then companions if
+necessary (3rd step).
+
 
 > 
-> Nice cleanup, thanks !
+>> +        if (ret)
+>> +            continue;
+>> +
+>>           controllers_initialized++;
+>>           usb_started = true;
+>>       }
+> 
+> [...]
