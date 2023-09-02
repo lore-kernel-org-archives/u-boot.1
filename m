@@ -4,75 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBC9C83F2C
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 13:38:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE9CEC83F2C
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 13:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12DE686416;
-	Sat,  2 Sep 2023 15:38:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B95BA86433;
+	Sat,  2 Sep 2023 15:45:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sj5XTlti";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="JcP7f1nS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 925A58643B; Sat,  2 Sep 2023 15:38:30 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id D8E928643B; Sat,  2 Sep 2023 15:45:20 +0200 (CEST)
+Received: from s.wfbtzhsw.outbound-mail.sendgrid.net
+ (s.wfbtzhsw.outbound-mail.sendgrid.net [159.183.224.105])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1A39847C3
- for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 15:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E1A6847C3
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 15:45:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jmcosta944@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-500913779f5so29442e87.2
- for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 06:38:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693661905; x=1694266705; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qfQ3Y7YiI8nibagMHulBMM4IBwQQHpttNnGi6Yeqg+4=;
- b=sj5XTlti4XkeiYzXGIWKda5QbacO0fGFwQscBdZH8+HoBMjq0UtS/UqW1DJsrn/8cJ
- eHr8jPoROXRL7v173tAUl36AN2w7ctYmTbmmvjoFVnBKH+E8BLA4lJZ5RYic9UjG0MmC
- xxXm6aEpbat5ecwbW5/6kVo4yQyA2VzU0OHNroQdNzfqMYY8FtGaTByDAVcoI98eQ37Z
- Sj7jSC4iXt01tHeaV2g0mlEoZ1yfO23cPpO2egrYyI3TpOfHLFGQd7GWh59vZNW3E0j4
- +iplF+AoQTsMu232MTcCiMAUdZLa+X/5Y7rbE6bx5j01nLbCIQ+tUymPd+nlxvkA7ymg
- BXWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693661905; x=1694266705;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qfQ3Y7YiI8nibagMHulBMM4IBwQQHpttNnGi6Yeqg+4=;
- b=lk46E9XFpAYM3AtLXvH3CJM73RbcRA7BBTgk5zOa/Q88IevHahg+JqiavVX0tgSCSt
- b+7P85l96O3rKCz043RjQ0cum2hs9VQHrmvHbeUdPs2i3xL9oTPyqg6JyNnz+chk/m+m
- t42t/XjWZt5HwsKCJmtI4w5MJQuTSbsGI/2f0xAsdW10nXSSBuqEOxAhW9Dbj8AOCT1n
- ggRX1W6fiTu8rvt6R7VDA7ZECw8+AoNEUFhpfqR1cNwyxiGWC1cKIUL4ZP4wd4TK+u74
- 33FLXgUq9fmwXyTnRvHyOSuJ14N2OyZBIncHclEZNXFZldi0bDwISuw33iOmU5cJiKr1
- CnrQ==
-X-Gm-Message-State: AOJu0YzAVgZ3KpxGtKRD2SLQdgoyfLIPwZo0Jn9A0NgCHvWc/qmHUd55
- 5CUABQSujA7LULq4vP4g7eC0VY3fl1Z58LWEvAEN5ebrsrkcaWNx
-X-Google-Smtp-Source: AGHT+IGiCfIPiJiQBAnkiGuAHczIwSvj++bPN97Z8pATXE2ESFSGKnESnrivJMx8u1FX9T1Bp/yTG0NdvpXopi9UNx4=
-X-Received: by 2002:a05:6512:1316:b0:4fd:f889:b9d2 with SMTP id
- x22-20020a056512131600b004fdf889b9d2mr4315168lfu.38.1693661904650; Sat, 02
- Sep 2023 06:38:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=mime-version:subject:references:from:in-reply-to:to:content-type:
+ content-transfer-encoding:cc:content-type:from:subject:to;
+ s=s1; bh=qUsPtrRtKKq3ldpBYHh60fLVAZVGOcV7akPQpjj9OIo=;
+ b=JcP7f1nSHKWjQN9Jj5EEL9tERaSzEM65P3kMVKsxknGI+K0hEaEUV1xTPWqSN6HY3Y2W
+ VvnMMcm0kyz/zDYHFoH6ATCBk4hMhmFwOEzINCOlj27HaIu3TkD4iw3mgo0r0eDAz6I1FP
+ JBlx5s8rNt6UErPsqilXljnTpYWjZ5JoMnbrLrNp0jAnWVLFxXpoTXMFjgSdrsoH5uYkml
+ ZyXepXhPJkMmryXeEKdtVwDuCk3TxHcJOukZUbdSq9PIHWdHgm997agGf63EF9HFavloDy
+ r40Jvu2kVbPfqvFY5fIaODB/ivMY3AHQcA/Y/Kygl+d6Ld8bfOFGT1YON1MQXLQg==
+Received: by filterdrecv-d7bbbc8bf-s5hdm with SMTP id
+ filterdrecv-d7bbbc8bf-s5hdm-1-64F33C6C-2A
+ 2023-09-02 13:45:16.356790058 +0000 UTC m=+9900338.293538723
+Received: from [192.168.1.50] (unknown) by geopod-ismtpd-canary-0 (SG)
+ with ESMTP id yRGK12vnRSmTQtmiaQ-1XQ
+ Sat, 02 Sep 2023 13:45:16.007 +0000 (UTC)
+Message-ID: <d27f6c83-4b29-25af-9991-574f2e79b8fa@kwiboo.se>
+Date: Sat, 02 Sep 2023 13:45:16 +0000 (UTC)
 MIME-Version: 1.0
-References: <20230901200353.90290-1-jmcosta944@gmail.com>
- <20230901200353.90290-7-jmcosta944@gmail.com>
- <20230902131109.GW3101304@bill-the-cat>
-In-Reply-To: <20230902131109.GW3101304@bill-the-cat>
-From: =?UTF-8?Q?Jo=C3=A3o_Marcos_Costa?= <jmcosta944@gmail.com>
-Date: Sat, 2 Sep 2023 15:38:13 +0200
-Message-ID: <CABfBAmDEwtTAHL8hxGXrsRNN1V9USPYNwi9nojb-HN-CQwDF1Q@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] doc: add documentation for gen_compile_commands.py
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, antoningodard@pm.me, 
- Y.Moog@phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: Issue with mmc_power_on() and reference counter of regulator
+References: <CAF1eZtvEmjZohyJfa=Jm=Dm76bhkayKk_tzTMM8ooQUQ-OL0CA@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAF1eZtvEmjZohyJfa=Jm=Dm76bhkayKk_tzTMM8ooQUQ-OL0CA@mail.gmail.com>
+X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h5iaH=2Fh1JhP=2FQzowa?=
+ =?us-ascii?Q?IrK=2Fa5+nYEK9gvYSwh0AWV3ID2rmRchXV8eeXpK?=
+ =?us-ascii?Q?LX+24qSQXHDJoJg1n8HVQk0U59tNLc4U4pkLv8Y?=
+ =?us-ascii?Q?wgwKT2xFHnAq5LZYbtcA1GNlo+ty41E6SlQMt=2FT?=
+ =?us-ascii?Q?ITMbzy=2FsyGQ4XMMZeyYiIkJsfai2b07QpcJ9P8?=
+To: Kenta Sato <tosainu.maple@gmail.com>, u-boot@lists.denx.de
+X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,30 +77,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Hi,
 
-Em s=C3=A1b., 2 de set. de 2023 =C3=A0s 15:11, Tom Rini <trini@konsulko.com=
-> escreveu:
+On 2023-09-02 13:35, Kenta Sato wrote:
+> Hi,
+> 
+> I am using the FriendlyElec NanoPi R4S board.
+> When I updated U-Boot to a recent version (0fe0395922), it failed to
+> boot from MMC. Here is the log:
+> 
+> ================================
+> U-Boot TPL 2023.10-rc3 (Sep 02 2023 - 08:21:08)
+> lpddr4_set_rate: change freq to 400MHz 0, 1
+> Channel 0: LPDDR4, 400MHz
+> BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
+> Channel 1: LPDDR4, 400MHz
+> BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
+> 256B stride
+> lpddr4_set_rate: change freq to 800MHz 1, 0
+> Trying to boot from BOOTROM
+> Returning to boot ROM...
+> 
+> U-Boot SPL 2023.10-rc3 (Sep 02 2023 - 08:21:08 +0000)
+> Trying to boot from MMC1
+> spl_load_fit_image: Skip load 'atf-5': image size is 0!
+> NOTICE:  BL31: v2.9(release):
+> NOTICE:  BL31: Built : 08:19:59, Sep  2 2023
+> 
+> 
+> U-Boot 2023.10-rc3 (Sep 02 2023 - 08:21:08 +0000)
+> 
+> SoC: Rockchip rk3399
+> Reset cause: POR
+> Model: FriendlyElec NanoPi R4S
+> DRAM:  4 GiB (effective 3.9 GiB)
+> PMIC:  RK808
+> Core:  264 devices, 23 uclasses, devicetree: separate
+> MMC:   mmc@fe320000: 1
+> Loading Environment from nowhere... OK
+> In:    serial,usbkbd
+> Out:   serial,vidconsole
+> Err:   serial,vidconsole
+> Model: FriendlyElec NanoPi R4S
+> Net:
+> Error: ethernet@fe300000 address not set.
+> No ethernet found.
+> 
+> Hit any key to stop autoboot:  0
+> Error enabling VMMC supply : -114
+> Error enabling VMMC supply : -114
+> Error enabling VMMC supply : -114
+> Error enabling VMMC supply : -114
+> Error enabling VMMC supply : -114
+> Error enabling VMMC supply : -114
+> ================================
+> 
+> Does anyone know how to fix the issue?
+> 
+> I looked into commit logs and the mailing list so far, and I found the
+> below commit that adds the reference counter to the regulator. I could
+> remove the above error by reverting this change. Of course, it should
+> not be the proper way.
+> Maybe we could replace regulator_set_enable() in mmc_power_on() by
+> regulator_set_enable_if_allowed(). However, I have no confidence about
+> it as I'm not familiar with the U-Boot source code.
 
->
-> This isn't included in one of the index files, which will be the first
-> error 'make htmldocs' throws, and I think I saw other syntax errors as
-> well in the file.  The docs themselves look fine, thanks.
->
-> --
-> Tom
->
+I sent patches to fix such situation back in July, see [1]. Those
+patches was merged into next, but should probably have gone into master.
 
-I'm not sure what's the most pertinent category in 'develop/index.rst'.
+Please try next, and/or apply patches at [1] and report back result.
 
-Would 'general' be a good idea? I thought about putting it in the same
-category as checkpatch, but this isn't refactoring per se.
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=364753&state=*
 
-Thanks.
+Regards,
+Jonas
 
---=20
-Atenciosamente,
-Jo=C3=A3o Marcos Costa
+> 
+> ================================
+> commit 4fcba5d556b4224ad65a249801e4c9594d1054e8
+> Author: Eugen Hristev <eugen.hristev@collabora.com>
+> Date:   Wed Apr 19 16:45:24 2023 +0300
+> 
+>     regulator: implement basic reference counter
+> 
+>     Some devices share a regulator supply, when the first one will request
+>     regulator disable, the second device will have it's supply cut off before
+>     graciously shutting down. Hence there will be timeouts and other failed
+>     operations.
+>     Implement a reference counter mechanism similar with what is done in
+>     Linux, to keep track of enable and disable requests, and only disable the
+>     regulator when the last of the consumers has requested shutdown.
+> 
+>     Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
+>     Reviewed-by: Simon Glass <sjg@chromium.org>
+>     Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ================================
+> 
+> Any help would be greatly appreciated.
+> Thank you!
+> 
+> Kenta Sato
 
-www.linkedin.com/in/jmarcoscosta/
-https://github.com/jmarcoscosta
