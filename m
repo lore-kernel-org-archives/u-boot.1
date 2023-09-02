@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26705C001DB
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 13:09:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD7EBC001DB
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 13:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D76528669D;
-	Sat,  2 Sep 2023 15:09:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3940C86453;
+	Sat,  2 Sep 2023 15:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X7b9ZiiE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HGBIYrpG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAA52864CA; Sat,  2 Sep 2023 15:09:42 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 813DB86467; Sat,  2 Sep 2023 15:11:15 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABE9A86453
- for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 15:09:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8EF1847C3
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 15:11:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5922380064bso30519367b3.2
- for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 06:09:39 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5924093a9b2so29545387b3.2
+ for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 06:11:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693660178; x=1694264978; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1693660271; x=1694265071; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ah/G20X5nqno9jkDVwr2pK9QAdH0T3guRlO0ac7nK6I=;
- b=X7b9ZiiEHwn6Vl5GLqp0MMtyBQoiEJcm5yn6BDXnPbEM++pI5+xn/bSC7GbX/7YRvf
- QgIO4oaofnatyurWVlKEGgF+Go6ddexopQzpXbnVwAMnywBPTj2Mo2ufsOVRZcvssgzF
- vU+6E7s0+5nFuZAdkSz7+Rjyh9rFK+Fl/qPgk=
+ bh=DTRgFxAlPk4luo8Zy+4HE/n/OEtyPoDj59PmsTuVSvM=;
+ b=HGBIYrpG65a84vLeg80NUVTMTa/+/P02I0mZqCZE407KRdQKUtCTiUWvwBz2I8Zq2p
+ Vjl8RjjPd8y5jz0N76g9j+EsPdldl6DK5uJhpg8sEHNVMM0FfUvQt7l8lFvn0+H6MuDY
+ e30gR7izkDRkr+3my5W/w/M4kpwIS/xLHtxbU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693660178; x=1694264978;
+ d=1e100.net; s=20221208; t=1693660271; x=1694265071;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ah/G20X5nqno9jkDVwr2pK9QAdH0T3guRlO0ac7nK6I=;
- b=DMsHrbqtdKLF3PKHA51ooMd9YDZRwGKIeXTbxiqAjdR13DjosIZV5sNWlrFiJH5pGB
- AhxiJOaIwqlUeIXeYPDXqJYnf33pPkB05IBauS/jsqc8QoftmeDGDH1BlCdOV36HHtTU
- 5Gey1pBoFfSl58hzYR06+246Fvd4O72n+pdyyw02k3sn8rHsJG/+eMu2j95QnG266MvW
- QGGhjBpVXyQ5yg5GXJlJiJ+3K6hWj9t1c3ATv33rj6fmnAusCOxQ1ajFkPa9YWzLCtYN
- Fcc3i6KBllc9t+wc4fdvENTvBYJZk1u37uWlCN9gS2IHu4qUOhHLMakSt9LRbVrez+tx
- kBAw==
-X-Gm-Message-State: AOJu0YyHbNqESuhI0UnKXNb9lTcPbjiVC3EuhfhVkgHUhVIjVLVLys/B
- TJ96Fr8Ynb6iVOGzsr6cHrGXzg==
-X-Google-Smtp-Source: AGHT+IGHp9Z3o5T4+30EPY2CkFOsO+REdis11cB1jSDsJeEKxeCO97YuDbvefswazsmLZfHqOZi08Q==
-X-Received: by 2002:a81:5483:0:b0:592:9433:d2f4 with SMTP id
- i125-20020a815483000000b005929433d2f4mr5846557ywb.16.1693660178391; 
- Sat, 02 Sep 2023 06:09:38 -0700 (PDT)
+ bh=DTRgFxAlPk4luo8Zy+4HE/n/OEtyPoDj59PmsTuVSvM=;
+ b=ZVX/oyPbYXR/BJUEV2TpP6/tl5LJ8N/2nloaI09rGbFtVxcuS2rXjF5XZ+GQbcQ7yd
+ PpvIkJfFGToc7KC9oDa6ABhpwOhd8zlrXU7tG/3HIc1ShiBDYCV4rd1w/nQyAHxSx0Eb
+ GMgs5Ysqq52ESYBmL4YPqCeLYA2aIqctBaOv83R5ZsvHR8GjaF9B/FAn6AzQYEvbnVLk
+ xdRwt6gpN/TqWYicPMtjYD4ef+YE11BbAOMrWPliBd43jKq3DYEjmwgAsW6HiPRTxtbp
+ BURHo/7gi9p1mOv/fhHOphLdqr1EV0totdC0UJlHdKGtVAZfyoxQaMLnia0xYL3qo+ET
+ 7P2w==
+X-Gm-Message-State: AOJu0YwBNqEeGTEF79XCWCcgmiaqC3cIH7FrlJK5km8bynDVxG0o7ukv
+ NimnEDLpCbCWbfbkGBu5AaxFrVk37F9+C8O/yBfGrQ==
+X-Google-Smtp-Source: AGHT+IGDY1LQ4LYBaOP/5bSrO7VeSHjbMX4Dq6Fb24TTDzKWA6oXQUb9/nFAAOKUw99U7ECUWQpIEQ==
+X-Received: by 2002:a0d:cc10:0:b0:58a:d281:a275 with SMTP id
+ o16-20020a0dcc10000000b0058ad281a275mr5588171ywd.21.1693660271578; 
+ Sat, 02 Sep 2023 06:11:11 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-9522-bc83-aa36-be61.res6.spectrum.com.
  [2603:6081:7b00:6400:9522:bc83:aa36:be61])
  by smtp.gmail.com with ESMTPSA id
- i198-20020a816dcf000000b00583f8f41cb8sm1580118ywc.63.2023.09.02.06.09.37
+ f123-20020a0ddc81000000b00584554be59dsm1610856ywe.85.2023.09.02.06.11.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Sep 2023 06:09:37 -0700 (PDT)
-Date: Sat, 2 Sep 2023 09:09:35 -0400
+ Sat, 02 Sep 2023 06:11:10 -0700 (PDT)
+Date: Sat, 2 Sep 2023 09:11:09 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Joshua Watt <jpewhacker@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: Re: [MASTER] Pull request doc-2023-10-rc4-2
-Message-ID: <20230902130935.GV3101304@bill-the-cat>
-References: <a4e2444c-f534-4824-a3ef-fa4c819edfed@gmx.de>
+To: Joao Marcos Costa <jmcosta944@gmail.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, antoningodard@pm.me,
+ Y.Moog@phytec.de
+Subject: Re: [PATCH v2 6/6] doc: add documentation for gen_compile_commands.py
+Message-ID: <20230902131109.GW3101304@bill-the-cat>
+References: <20230901200353.90290-1-jmcosta944@gmail.com>
+ <20230901200353.90290-7-jmcosta944@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sF3HcHTJj80H1YY9"
+ protocol="application/pgp-signature"; boundary="dNM/Jm1T/QETHKvz"
 Content-Disposition: inline
-In-Reply-To: <a4e2444c-f534-4824-a3ef-fa4c819edfed@gmx.de>
+In-Reply-To: <20230901200353.90290-7-jmcosta944@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,52 +94,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sF3HcHTJj80H1YY9
+--dNM/Jm1T/QETHKvz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 02, 2023 at 09:55:09AM +0200, Heinrich Schuchardt wrote:
+On Fri, Sep 01, 2023 at 10:03:53PM +0200, Joao Marcos Costa wrote:
 
-> Dear Tom,
+> This documentation briefly explains what is a compilation database,
+> and how to use the script to generate one.
 >=20
-> The following changes since commit 0fe0395922d859730eb7ddfcff6ed8d3ac4b29=
-37:
+> This is not a portage, as there was no original documentation in the
+> Linux sources.
 >=20
->   Merge branch '2023-08-28-assorted-important-fixes' (2023-08-29
-> 10:06:08 -0400)
+> Acknowledge the documentation in the script's header.
 >=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/doc-2023-10-rc4-2
->=20
-> for you to fetch changes up to 44c5d7764bf458ef0a8093ddf3422dfebbf7b00c:
->=20
->   doc: Add gpt command documentation (2023-09-02 09:44:04 +0200)
->=20
+> Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
+> ---
+>  doc/develop/gen_compile_commands.rst | 46 ++++++++++++++++++++++++++++
 
-Applied to u-boot/master, thanks!
+This isn't included in one of the index files, which will be the first
+error 'make htmldocs' throws, and I think I saw other syntax errors as
+well in the file.  The docs themselves look fine, thanks.
 
 --=20
 Tom
 
---sF3HcHTJj80H1YY9
+--dNM/Jm1T/QETHKvz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTzNA8ACgkQFHw5/5Y0
-tyy1QAwAnNvmU8KO3mXhGX5GxIlMIkQgL3jwoTDmw13nNDE3d1YMOlySrt9nxVp7
-Ruoq38F6AXYDBBEnavBVYUpdD6VdJcqVdxhW5owKeS6QcgZZITWc4PxVS8/E4TbT
-Cqpj9V+rDbPq1pVjRI1yuhyM/K2JdNC66FpJI83J5+kEP8ry9It+M0rEREtI0zwG
-AjLz7TKW39U7Gfl+hJ1bMI4b3u4Vg+RObbzQ1HI9XLoVMCgi91/BW75X8fxRdCSD
-nSY8uJQIKjIUn9JHZMphqcZSH5NLKwVm3uKHs/a6aZTz4+fGX68qb+W35ks875B8
-LHzoAZE09RGDghXIt8Ob7fDDTjLHFtcY/txOanL+XD1nGj7a5QXmSMvOP2ufxoq8
-hKY11F/laahms/uIpsXV3ELOOKLlZuwJpGq5Ml/65UirO8NKXbCmdDvSAb0qIWlN
-Fa+2B5VbLeItyBDFLFcAQJVAXfc8XlFsl8bF+xaI9XV85gykgZiOm2Tyc8Nn+mhx
-ZtW9guuR
-=3yuL
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTzNG0ACgkQFHw5/5Y0
+tyyLgwv+LPzSaZDijmARyxof0QlHwlqgxtvXR36VRsGK5wJ/5WDBynbHxqAC8n8L
+ss4LZTffhqubKDWl+d6tiMBGmgIDaJS1Cgj4jN9Wkdlwos3V9lIWOR+7VIsjMo79
+x64+/KkoG0XUY4sAmwwyr5E0S/I/+lhMYCIuHBx8SFbXiO1SmPr5D/Yz9CqNTYUq
+hbByocOQaXDh8h0xiJS2/xZbADxXoJocIsYyiO1BXY4HgmHQdLe371RaDTp1TmYi
+YEZ1IpnvhuKSxuTTz1f4e/g9lss7257tuzykeEA0qhhnInx/Fqy0mBEmlCAOUZHR
+2SXnm3XAqfhnYNzig1SfMxt84jN3Atv6BJIUB+HmUEFmhRKG2KY5jbtdLlRYJu+Z
+C/EDLA2Ga0IcKJGYmr0yk9MVVE/gKkyBllQ/E/KCpwY8yp2yy2w5PB1j+R3+J2Q+
+64J/v/qVFO2UPxAe2tp5N4+l5auogZVbQZ9RAipI+a8dY5FGDlLidhs5Y+xq5yGX
+8StqYFAC
+=TNWZ
 -----END PGP SIGNATURE-----
 
---sF3HcHTJj80H1YY9--
+--dNM/Jm1T/QETHKvz--
