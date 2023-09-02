@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A5FC71153
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 13:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA1DCC001DB
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 14:53:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5599086703;
-	Sat,  2 Sep 2023 15:49:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7FCEF8644F;
+	Sat,  2 Sep 2023 16:53:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GM7tOZ7M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sstfdH/C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6510286741; Sat,  2 Sep 2023 15:49:15 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id E74D186467; Sat,  2 Sep 2023 16:53:18 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0ECF8644F
- for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 15:49:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E38E8643B
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 16:53:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-ccc462deca6so7691276.0
- for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 06:49:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=jmcosta944@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-31c5c06e8bbso2554891f8f.1
+ for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 07:53:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693662551; x=1694267351; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=H+knHQniirzrFimT3uYhZFKlJhZcqII7CCnhuszRh+w=;
- b=GM7tOZ7MGlIHjB245HtKmSdaRg+FJX5WMYbQpikMesu8+oCMPXgWgULl21D7NCqUSP
- eWwtUTNkWU21TPPGbq70PFZOaYyJ3HvuPimX0eiQuzJQQj9M/ma5Bn9xWo3LfB98lES8
- 8t7plU8hHFWwj7/V+Nx4lMZZTj2nVvJ+U5ITI=
+ d=gmail.com; s=20221208; t=1693666395; x=1694271195; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2Xu5siSjrpl5CLNKrjnyqzHgjEZUEXoDH/RPkAhG9+0=;
+ b=sstfdH/C1G9fnUK8sir6viq0W+LkPb2I5255hnU9QYzMTK7ETguEwVKdgnuyj2tq5M
+ THE7ft53oMu0ztIU/YkDtOigrSN83sR6hyLbNlGkhq5WHZ5gWtyxTSnf7s6FH9Zr+xBc
+ 6ryvmoq36mITGnk81dHfFj2ehocBJ7tUAYNUWN0ZKCMeUv9xBEKHXj5IqEr3fPqujk6L
+ iMVn1PtmlQM8lwnhO6OkC3Ei3GUE6lPJVfmcVuA1pUl42S1qvLuPhB3sw+JVEa9dKnKF
+ Ai3eYZ82iPh0a/Qe0YhSqBgomaZl7h4IMbQJQfOUNTp4OaZqHlziLrXTQYId5GhW7K71
+ lDZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693662551; x=1694267351;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H+knHQniirzrFimT3uYhZFKlJhZcqII7CCnhuszRh+w=;
- b=WVMGR71SX3jZMMVCqmb/X8rPS0JesPypQbg89gJXoCaKuN5o6Atvc3du8mHYXdZ4wa
- hCxAAroHa8E+GQUn6HnlfYH9E1q9leG7GjC4S4K9FTkfoXGehZuWoe5rGxAZFdTikhL0
- RpMV4Y6JMETw2mXASQM6JjgjF6+o8+40DSXeRxZ2uJtSKQsEplpGBYPEppK+zK4RXWNd
- XoBRoT5Acg4mhLkAdy/nRsH80v78hKVIWbOLMu5sinBazuWpz7S+4nBVPgIfrQrDXrGo
- mpnlVhKrupss3ccSEnMucB0AmK1ekLSkM3Uk+ULTckFoFCzEkuXgQepDZv6GNUSYv8kM
- WrIw==
-X-Gm-Message-State: AOJu0YxLYRoIO7P4Cu9M1f69ffLKvRfSiimDZaotCCnXLs4tMTQvpi83
- iMCdYL7TNUA0t8W5vI2rhOUMIw==
-X-Google-Smtp-Source: AGHT+IEK6AWQUOc39dUCsH6RFl7fdM/5lNcxFbtCT2oVBfp6ms6yS8Q1USucvElX83ZUD4jOHf8XAA==
-X-Received: by 2002:a25:acd9:0:b0:d19:ea71:a96b with SMTP id
- x25-20020a25acd9000000b00d19ea71a96bmr5720644ybd.57.1693662551384; 
- Sat, 02 Sep 2023 06:49:11 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-9522-bc83-aa36-be61.res6.spectrum.com.
- [2603:6081:7b00:6400:9522:bc83:aa36:be61])
- by smtp.gmail.com with ESMTPSA id
- j136-20020a25d28e000000b00d7e339ada01sm1395182ybg.20.2023.09.02.06.49.10
+ d=1e100.net; s=20221208; t=1693666395; x=1694271195;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2Xu5siSjrpl5CLNKrjnyqzHgjEZUEXoDH/RPkAhG9+0=;
+ b=TRFp1W/TBN/24+pnZWqQm9yHzq3HXUDvPOyf4dAntcGXUxNU+gU9/o3/g1E6hp14Z2
+ 8nCXkz3j9EgiL3XxdhRvNwJtxuAdCMMCpOUijkiaW9HxiixLpo16SBG4PfMMiYTaXVtx
+ QFevyh2V0/YSWRm1XhXfp5Gkdm4n+rTOeTrOJbo003z1zirE4KVd7aNXQ+74E2Iq8yAg
+ r5+4HEufIM/jfaVP4dBiaEUGQZ+k3cwiJZwVIPABot1k/LT4OKL8PYiUD0rSsP79jIoc
+ wT3tWH3QrR23vD9cxUhNeE8d8Shs0Hn87rS5XYrJGb7U2qBODPG6ugl2aAnAagronJhR
+ P+LA==
+X-Gm-Message-State: AOJu0YwV5xVu6D6aURV63a49+I9n0SND2rZ1f8L53YXYYVtCgr7wj/x9
+ /ChRhFf38C+k9Eoy/SID7RHyoLDWEoKKfPo1
+X-Google-Smtp-Source: AGHT+IH6LnpRVvKryz2KYaD2s4Kt9Zk2bWaH86/2mARIcLwkhjz+7eoFQNuHxg5N4I8EjrAbO7UCPQ==
+X-Received: by 2002:a5d:428d:0:b0:319:52a5:569f with SMTP id
+ k13-20020a5d428d000000b0031952a5569fmr4111182wrq.11.1693666394939; 
+ Sat, 02 Sep 2023 07:53:14 -0700 (PDT)
+Received: from fedora.. (cust-west-par-46-193-56-152.cust.wifirst.net.
+ [46.193.56.152]) by smtp.gmail.com with ESMTPSA id
+ cc11-20020a5d5c0b000000b0031f34a395e7sm2385449wrb.45.2023.09.02.07.53.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Sep 2023 06:49:10 -0700 (PDT)
-Date: Sat, 2 Sep 2023 09:49:09 -0400
-From: Tom Rini <trini@konsulko.com>
-To: =?iso-8859-1?Q?Jo=E3o?= Marcos Costa <jmcosta944@gmail.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, antoningodard@pm.me,
- Y.Moog@phytec.de
-Subject: Re: [PATCH v2 6/6] doc: add documentation for gen_compile_commands.py
-Message-ID: <20230902134909.GX3101304@bill-the-cat>
-References: <20230901200353.90290-1-jmcosta944@gmail.com>
- <20230901200353.90290-7-jmcosta944@gmail.com>
- <20230902131109.GW3101304@bill-the-cat>
- <CABfBAmDEwtTAHL8hxGXrsRNN1V9USPYNwi9nojb-HN-CQwDF1Q@mail.gmail.com>
+ Sat, 02 Sep 2023 07:53:14 -0700 (PDT)
+From: Joao Marcos Costa <jmcosta944@gmail.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, antoningodard@pm.me,
+ Y.Moog@phytec.de, Joao Marcos Costa <jmcosta944@gmail.com>
+Subject: [PATCH v3 0/7] Port gen_compile_commands.py from Linux to U-Boot 
+Date: Sat,  2 Sep 2023 16:53:03 +0200
+Message-ID: <20230902145310.107054-1-jmcosta944@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2UaI5C6xvAEM27lO"
-Content-Disposition: inline
-In-Reply-To: <CABfBAmDEwtTAHL8hxGXrsRNN1V9USPYNwi9nojb-HN-CQwDF1Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,57 +89,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello U-Boot community,
 
---2UaI5C6xvAEM27lO
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I'm submitting a patch series that ports the gen_compile_commands.py
+script from the Linux kernel's sources to U-Boot. This script, originally
+located in scripts/clang-tools/gen_compile_commands.py, enables the
+generation of compile_commands.json file for improved code navigation
+and analysis. The series consists of the initial script import, the
+necessary modifications for U-Boot compatibility, and finally some
+documentation.
 
-On Sat, Sep 02, 2023 at 03:38:13PM +0200, Jo=E3o Marcos Costa wrote:
-> Hello,
->=20
-> Em s=E1b., 2 de set. de 2023 =E0s 15:11, Tom Rini <trini@konsulko.com> es=
-creveu:
->=20
-> >
-> > This isn't included in one of the index files, which will be the first
-> > error 'make htmldocs' throws, and I think I saw other syntax errors as
-> > well in the file.  The docs themselves look fine, thanks.
-> >
-> > --
-> > Tom
-> >
->=20
-> I'm not sure what's the most pertinent category in 'develop/index.rst'.
->=20
-> Would 'general' be a good idea? I thought about putting it in the same
-> category as checkpatch, but this isn't refactoring per se.
+Your feedback on these contributions would be greatly appreciated.
 
-So, the main use case is to make integration with IDEs easier? Maybe put
-it under doc/build/ or referenced from doc/build/tools.rst with a small
-section like "Integration with IDEs" and a few words about how some IDEs
-such as ... use Clangd LSP for ... and see :doc:... for more
-information on how to generate these files.
+Best regards,
 
---=20
-Tom
+Changes in v3:
+- Add documentation to index and fix syntax issues
+- Add reference to documentation in doc/build/tools
+Changes in v2:
+- Add compile_commands.json to gitignore
+- Add documentation
 
---2UaI5C6xvAEM27lO
-Content-Type: application/pgp-signature; name="signature.asc"
+Joao Marcos Costa (7):
+  scripts: Port Linux's gen_compile_commands.py to U-Boot
+  scripts/gen_compile_commands.py: adapt _LINE_PATTERN
+  scripts/gen_compile_commands.py: fix docstring
+  scripts/gen_compile_commands.py: add acknowledgments
+  .gitignore: add compile_commands.json
+  doc: add documentation for gen_compile_commands.py
+  doc: add new section to build/tools
 
------BEGIN PGP SIGNATURE-----
+ .gitignore                         |   3 +
+ doc/build/gen_compile_commands.rst |  47 ++++++
+ doc/build/index.rst                |   1 +
+ doc/build/tools.rst                |  13 ++
+ scripts/gen_compile_commands.py    | 230 +++++++++++++++++++++++++++++
+ 5 files changed, 294 insertions(+)
+ create mode 100644 doc/build/gen_compile_commands.rst
+ create mode 100755 scripts/gen_compile_commands.py
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTzPU4ACgkQFHw5/5Y0
-tyxKKgv+I4MAAtIAm04LCZ4wHdIbQI+61mi9WR1Vav1fpdKe+htzH2A6Pb9Gy6oc
-epPKu1AxvbZImxRhVdmcObz9PSsLPCNN0tWhssfs+idJmH0X+tM+9uWnaeWESkeY
-XsYJ8mjxGDeZOubVxOTXYVC6rC5w4s30p5QQBD9oZu7J3rzk0B8nDRiANEzKij+P
-MOstbJWS4ox5rRky+RWeAz24iBH4Ril24B6oOAjSSTYjat65cFGc/BhFqu9Ld+eb
-DdUdnIelV9PVCw73/VgpSNPz0C7kJaFGmpfXaZ5D2hnTvTRt9+UbLyM0ycaxEetL
-m7Xvuw+OVCJPgS8PixDhQhDwoANbdbH9EfMbGJvcIUYaRol0kwBuE2pvH5x5wiys
-IdAqscrnQHjloMlMBIBI/Z8PY1vdrMdnjBPMdsRd7fAzxxfxe/q/RsC14QwYLyR8
-MBOdk1TtwQDhDpEG9QTFY/KdGUYx9uM5GYPTvtDVHv6B+08xJOq5fgnQAwwVHdUV
-2evXLFFQ
-=mkD6
------END PGP SIGNATURE-----
+-- 
+2.41.0
 
---2UaI5C6xvAEM27lO--
