@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01546CA0FF7
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 09:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0720C71153
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 11:38:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE5B1846C0;
-	Sat,  2 Sep 2023 11:06:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinet.cat
+	by phobos.denx.de (Postfix) with ESMTP id DDC9181FA8;
+	Sat,  2 Sep 2023 13:38:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ssKVbjzm";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A096F846C0; Sat,  2 Sep 2023 11:06:27 +0200 (CEST)
-Received: from mx1.tinet.cat (mx1.tinet.cat [195.77.216.146])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2720E8468A; Sat,  2 Sep 2023 13:35:27 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C918984698
- for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 11:06:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50DEC81970
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 13:35:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=tinet.cat
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xdrudis@tinet.cat
-X-ASG-Debug-ID: 1693645581-163e7b47df389520001-4l7tJC
-Received: from smtp01.tinet.cat (smtp01.tinet.cat [195.77.216.131]) by
- mx1.tinet.cat with ESMTP id cZsz5rTkVHB8ckeq;
- Sat, 02 Sep 2023 11:06:21 +0200 (CEST)
-X-Barracuda-Envelope-From: xdrudis@tinet.cat
-X-Barracuda-Effective-Source-IP: smtp01.tinet.cat[195.77.216.131]
-X-Barracuda-Apparent-Source-IP: 195.77.216.131
-Received: from xdrudis.tinet.cat (42.red-79-152-186.dynamicip.rima-tde.net
- [79.152.186.42])
- by smtp01.tinet.cat (Postfix) with ESMTPSA id 37007605D0AC;
- Sat,  2 Sep 2023 11:06:21 +0200 (CEST)
-Date: Sat, 2 Sep 2023 11:06:20 +0200
-From: Xavier Drudis Ferran <xdrudis@tinet.cat>
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Cc: u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset
- bulk() API
-Message-ID: <ZPL7DAQfE3WxCFa+@xdrudis.tinet.cat>
-X-ASG-Orig-Subj: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset
- bulk() API
-References: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
+ spf=pass smtp.mailfrom=tosainu.maple@gmail.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6bf04263dc8so2318292a34.3
+ for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 04:35:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693654523; x=1694259323; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=K65dyfTuDd64QpzQ9yamgpvCApEPtP9Yq14bqQb9cy8=;
+ b=ssKVbjzmJS39dmTmbAtDb6Fr59Tjqc8qsQjshAOzWKPQgp+nTbiUGiaPbtTNDWXIRA
+ NWcdIL+SEQG8nv5zRBclhuTbehYqL5n3MpBaE6vmcraUsSNQDCt5oRFJJknFC0/EPV21
+ iqbdNmaEIP7XOcyCnYhjLXve5q6QtEZVXNbh2SbCiWA7Ia8x3QCAUpjZT2byCif8zPVC
+ g13F6h7ZEGfE9FxO2Bbi8URN2OAz1i2H9pqsqCtP4WJoztmgXfh4c830vYIdBkVL04EW
+ jCRyBrYE6Qhoz/loSbNm4tUhHG5sgPvuNDT7a6RyC0OtNJthCxxFutxQth7+opuoUtNj
+ m9Hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693654523; x=1694259323;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=K65dyfTuDd64QpzQ9yamgpvCApEPtP9Yq14bqQb9cy8=;
+ b=IWfEnqLpJYgNVcSTwW5ddlUoRF8hxONcQDcaJxINwOCr7LoDotyd9HF9Lo16+nrlCK
+ F8ikAOXLt21cZMaXhCgZg0eehOKCn37QLk6vZylgIHK5WoYumIAqytbspCIHDnbAlI08
+ yHmyEA0S48J8+d1Utvpb10XJPuvKEu1vrDzBpoS0lAk8VJgSNLAf1cOfifiL2hAN5KAM
+ YR1KT4PJmX0p7XLxoB2sFXHks2af9lZtNdIid0/OJ4wv8bVBMiBl5gfFInXbss8mUda4
+ QmNKhnCSmRrPdbGuBK8MK97oBMmU0FwlHrl1brhAfKyCYURlDtmqX4K1vLenMvfD28dF
+ qe6A==
+X-Gm-Message-State: AOJu0YwSPXCO80Nsn8wyQrUSK5r76/3kW8Ubtm0PMlcu3AB2yZ32h1PN
+ vOhLRJa+KuhhdPxlrpBWb9XZgORlTPRscc71HcSw/NLlO2s=
+X-Google-Smtp-Source: AGHT+IGvYmq6JdrHHqSs14qg98vZCpjzPA7YWeYbOfSlh5klOZR7YpiOHInUCVBlEzwt2kUoLQZ66dhLz/3Ka3doDXU=
+X-Received: by 2002:a05:6358:249f:b0:135:89d6:22e9 with SMTP id
+ m31-20020a056358249f00b0013589d622e9mr5489189rwc.13.1693654522610; Sat, 02
+ Sep 2023 04:35:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
-X-Barracuda-Connect: smtp01.tinet.cat[195.77.216.131]
-X-Barracuda-Start-Time: 1693645581
-X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
-X-Barracuda-Scan-Msg-Size: 5737
-X-Barracuda-BRTS-Status: 1
-X-Barracuda-Bayes: INNOCENT GLOBAL 0.5003 1.0000 0.7500
-X-Barracuda-Spam-Score: 1.35
-X-Barracuda-Spam-Status: No, SCORE=1.35 using global scores of TAG_LEVEL=1000.0
- QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=MARKETING_SUBJECT
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.113557
- Rule breakdown below
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- 0.60 MARKETING_SUBJECT      Subject contains popular marketing words
+From: Kenta Sato <tosainu.maple@gmail.com>
+Date: Sat, 2 Sep 2023 20:35:06 +0900
+Message-ID: <CAF1eZtvEmjZohyJfa=Jm=Dm76bhkayKk_tzTMM8ooQUQ-OL0CA@mail.gmail.com>
+Subject: Issue with mmc_power_on() and reference counter of regulator
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sat, 02 Sep 2023 13:38:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,178 +81,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Is the change of behaviour intended when a clock or reset is not found ?
-(see below)
+Hi,
 
-El Wed, Aug 30, 2023 at 10:01:49AM +0200, Fabrice Gasnier deia:
-> Make usage of clock and reset bulk API in order to simplify the code
-> 
-> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> ---
-> 
->  drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
->  1 file changed, 29 insertions(+), 63 deletions(-)
-> 
-> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
-> index 2d8d38ce9a40..95aa608d8c19 100644
-> --- a/drivers/usb/host/ohci-generic.c
-> +++ b/drivers/usb/host/ohci-generic.c
-> @@ -16,75 +16,41 @@
->  
->  struct generic_ohci {
->  	ohci_t ohci;
-> -	struct clk *clocks;	/* clock list */
-> -	struct reset_ctl *resets; /* reset list */
-> +	struct clk_bulk clocks;	/* clock list */
-> +	struct reset_ctl_bulk resets; /* reset list */
->  	struct phy phy;
-> -	int clock_count;	/* number of clock in clock list */
-> -	int reset_count;	/* number of reset in reset list */
->  };
->  
->  static int ohci_usb_probe(struct udevice *dev)
->  {
->  	struct ohci_regs *regs = dev_read_addr_ptr(dev);
->  	struct generic_ohci *priv = dev_get_priv(dev);
-> -	int i, err, ret, clock_nb, reset_nb;
-> -
-> -	err = 0;
-> -	priv->clock_count = 0;
-> -	clock_nb = dev_count_phandle_with_args(dev, "clocks", "#clock-cells",
-> -					       0);
-> -	if (clock_nb > 0) {
-> -		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
-> -					    GFP_KERNEL);
-> -		if (!priv->clocks)
-> -			return -ENOMEM;
-> -
-> -		for (i = 0; i < clock_nb; i++) {
-> -			err = clk_get_by_index(dev, i, &priv->clocks[i]);
-> -			if (err < 0)
-> -				break;
-> -
+I am using the FriendlyElec NanoPi R4S board.
+When I updated U-Boot to a recent version (0fe0395922), it failed to
+boot from MMC. Here is the log:
 
-Please note the old code was tolerant of not finding some clocks. It
-ignored any clock not found and any other listed after it in the
-"clocks" property and enabled the clocks before it.
+================================
+U-Boot TPL 2023.10-rc3 (Sep 02 2023 - 08:21:08)
+lpddr4_set_rate: change freq to 400MHz 0, 1
+Channel 0: LPDDR4, 400MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
+Channel 1: LPDDR4, 400MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
+256B stride
+lpddr4_set_rate: change freq to 800MHz 1, 0
+Trying to boot from BOOTROM
+Returning to boot ROM...
 
-The clk_get_bulk() function instead returns an error when any clock in
-"clocks" is not found and releases (disables again and frees) those
-before it.
+U-Boot SPL 2023.10-rc3 (Sep 02 2023 - 08:21:08 +0000)
+Trying to boot from MMC1
+spl_load_fit_image: Skip load 'atf-5': image size is 0!
+NOTICE:  BL31: v2.9(release):
+NOTICE:  BL31: Built : 08:19:59, Sep  2 2023
 
-I'm not aware of any case that breaks because of this, but I once saw
-a case of ehci not working and ohci working because one of the listed
-clocks not being found (ehci called clk_get_bulk(),
-clk_enable_blk()). In that case, a fix by ignoring the missing clock
-in ehci was rejected, so maybe that criteria applies here as well and
-your patch is deemed correct. I don't know. That case won't break now,
-I think, either with or without your patch, because after another fix,
-that clock will be found. But I don't know if there might be similar
-cases.
 
-I just wanted to point out the change in behaviour. If the change is
-intended, then all is fine.
+U-Boot 2023.10-rc3 (Sep 02 2023 - 08:21:08 +0000)
 
-> -			err = clk_enable(&priv->clocks[i]);
-> -			if (err && err != -ENOSYS) {
-> -				dev_err(dev, "failed to enable clock %d\n", i);
-> -				clk_free(&priv->clocks[i]);
-> -				goto clk_err;
-> -			}
-> -			priv->clock_count++;
-> -		}
-> -	} else if (clock_nb != -ENOENT) {
-> -		dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
-> -		return clock_nb;
-> +	int err, ret;
-> +
-> +	ret = clk_get_bulk(dev, &priv->clocks);
-> +	if (ret && ret != -ENOENT) {
-> +		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	err = clk_enable_bulk(&priv->clocks);
-> +	if (err) {
-> +		dev_err(dev, "Failed to enable clocks (err=%d)\n", err);
-> +		goto clk_err;
->  	}
->  
-> -	priv->reset_count = 0;
-> -	reset_nb = dev_count_phandle_with_args(dev, "resets", "#reset-cells",
-> -					       0);
-> -	if (reset_nb > 0) {
-> -		priv->resets = devm_kcalloc(dev, reset_nb,
-> -					    sizeof(struct reset_ctl),
-> -					    GFP_KERNEL);
-> -		if (!priv->resets)
-> -			return -ENOMEM;
-> -
-> -		for (i = 0; i < reset_nb; i++) {
-> -			err = reset_get_by_index(dev, i, &priv->resets[i]);
-> -			if (err < 0)
-> -				break;
-> -
+SoC: Rockchip rk3399
+Reset cause: POR
+Model: FriendlyElec NanoPi R4S
+DRAM:  4 GiB (effective 3.9 GiB)
+PMIC:  RK808
+Core:  264 devices, 23 uclasses, devicetree: separate
+MMC:   mmc@fe320000: 1
+Loading Environment from nowhere... OK
+In:    serial,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: FriendlyElec NanoPi R4S
+Net:
+Error: ethernet@fe300000 address not set.
+No ethernet found.
 
-Similar here.
+Hit any key to stop autoboot:  0
+Error enabling VMMC supply : -114
+Error enabling VMMC supply : -114
+Error enabling VMMC supply : -114
+Error enabling VMMC supply : -114
+Error enabling VMMC supply : -114
+Error enabling VMMC supply : -114
+================================
 
-> -			err = reset_deassert(&priv->resets[i]);
-> -			if (err) {
-> -				dev_err(dev, "failed to deassert reset %d\n", i);
-> -				reset_free(&priv->resets[i]);
-> -				goto reset_err;
-> -			}
-> -			priv->reset_count++;
-> -		}
-> -	} else if (reset_nb != -ENOENT) {
-> -		dev_err(dev, "failed to get reset phandle(%d)\n", reset_nb);
-> +	err = reset_get_bulk(dev, &priv->resets);
-> +	if (err && err != -ENOENT) {
-> +		dev_err(dev, "failed to get resets (err=%d)\n", err);
->  		goto clk_err;
->  	}
->  
-> +	err = reset_deassert_bulk(&priv->resets);
-> +	if (err) {
-> +		dev_err(dev, "failed to get deassert resets (err=%d)\n", err);
-> +		goto reset_err;
-> +	}
-> +
->  	err = generic_setup_phy(dev, &priv->phy, 0);
->  	if (err)
->  		goto reset_err;
-> @@ -101,13 +67,13 @@ phy_err:
->  		dev_err(dev, "failed to shutdown usb phy\n");
->  
->  reset_err:
-> -	ret = reset_release_all(priv->resets, priv->reset_count);
-> +	ret = reset_release_bulk(&priv->resets);
->  	if (ret)
-> -		dev_err(dev, "failed to assert all resets\n");
-> +		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
->  clk_err:
-> -	ret = clk_release_all(priv->clocks, priv->clock_count);
-> +	ret = clk_release_bulk(&priv->clocks);
->  	if (ret)
-> -		dev_err(dev, "failed to disable all clocks\n");
-> +		dev_err(dev, "failed to release clocks (ret=%d)\n", ret);
->  
->  	return err;
->  }
-> @@ -125,11 +91,11 @@ static int ohci_usb_remove(struct udevice *dev)
->  	if (ret)
->  		return ret;
->  
-> -	ret = reset_release_all(priv->resets, priv->reset_count);
-> +	ret = reset_release_bulk(&priv->resets);
->  	if (ret)
->  		return ret;
->  
-> -	return clk_release_all(priv->clocks, priv->clock_count);
-> +	return clk_release_bulk(&priv->clocks);
->  }
->  
->  static const struct udevice_id ohci_usb_ids[] = {
-> -- 
-> 2.25.1
-> 
+Does anyone know how to fix the issue?
+
+I looked into commit logs and the mailing list so far, and I found the
+below commit that adds the reference counter to the regulator. I could
+remove the above error by reverting this change. Of course, it should
+not be the proper way.
+Maybe we could replace regulator_set_enable() in mmc_power_on() by
+regulator_set_enable_if_allowed(). However, I have no confidence about
+it as I'm not familiar with the U-Boot source code.
+
+================================
+commit 4fcba5d556b4224ad65a249801e4c9594d1054e8
+Author: Eugen Hristev <eugen.hristev@collabora.com>
+Date:   Wed Apr 19 16:45:24 2023 +0300
+
+    regulator: implement basic reference counter
+
+    Some devices share a regulator supply, when the first one will request
+    regulator disable, the second device will have it's supply cut off before
+    graciously shutting down. Hence there will be timeouts and other failed
+    operations.
+    Implement a reference counter mechanism similar with what is done in
+    Linux, to keep track of enable and disable requests, and only disable the
+    regulator when the last of the consumers has requested shutdown.
+
+    Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
+    Reviewed-by: Simon Glass <sjg@chromium.org>
+    Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+================================
+
+Any help would be greatly appreciated.
+Thank you!
+
+Kenta Sato
