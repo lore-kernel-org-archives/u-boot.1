@@ -4,67 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0720C71153
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 11:38:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB4CEC71153
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 12:49:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC9181FA8;
-	Sat,  2 Sep 2023 13:38:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C5BE281970;
+	Sat,  2 Sep 2023 14:49:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ssKVbjzm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qATwYbNj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2720E8468A; Sat,  2 Sep 2023 13:35:27 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CE9A384698; Sat,  2 Sep 2023 14:49:10 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50DEC81970
- for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 13:35:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F071805C5
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 14:49:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tosainu.maple@gmail.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-6bf04263dc8so2318292a34.3
- for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 04:35:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693654523; x=1694259323; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=K65dyfTuDd64QpzQ9yamgpvCApEPtP9Yq14bqQb9cy8=;
- b=ssKVbjzmJS39dmTmbAtDb6Fr59Tjqc8qsQjshAOzWKPQgp+nTbiUGiaPbtTNDWXIRA
- NWcdIL+SEQG8nv5zRBclhuTbehYqL5n3MpBaE6vmcraUsSNQDCt5oRFJJknFC0/EPV21
- iqbdNmaEIP7XOcyCnYhjLXve5q6QtEZVXNbh2SbCiWA7Ia8x3QCAUpjZT2byCif8zPVC
- g13F6h7ZEGfE9FxO2Bbi8URN2OAz1i2H9pqsqCtP4WJoztmgXfh4c830vYIdBkVL04EW
- jCRyBrYE6Qhoz/loSbNm4tUhHG5sgPvuNDT7a6RyC0OtNJthCxxFutxQth7+opuoUtNj
- m9Hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693654523; x=1694259323;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=K65dyfTuDd64QpzQ9yamgpvCApEPtP9Yq14bqQb9cy8=;
- b=IWfEnqLpJYgNVcSTwW5ddlUoRF8hxONcQDcaJxINwOCr7LoDotyd9HF9Lo16+nrlCK
- F8ikAOXLt21cZMaXhCgZg0eehOKCn37QLk6vZylgIHK5WoYumIAqytbspCIHDnbAlI08
- yHmyEA0S48J8+d1Utvpb10XJPuvKEu1vrDzBpoS0lAk8VJgSNLAf1cOfifiL2hAN5KAM
- YR1KT4PJmX0p7XLxoB2sFXHks2af9lZtNdIid0/OJ4wv8bVBMiBl5gfFInXbss8mUda4
- QmNKhnCSmRrPdbGuBK8MK97oBMmU0FwlHrl1brhAfKyCYURlDtmqX4K1vLenMvfD28dF
- qe6A==
-X-Gm-Message-State: AOJu0YwSPXCO80Nsn8wyQrUSK5r76/3kW8Ubtm0PMlcu3AB2yZ32h1PN
- vOhLRJa+KuhhdPxlrpBWb9XZgORlTPRscc71HcSw/NLlO2s=
-X-Google-Smtp-Source: AGHT+IGvYmq6JdrHHqSs14qg98vZCpjzPA7YWeYbOfSlh5klOZR7YpiOHInUCVBlEzwt2kUoLQZ66dhLz/3Ka3doDXU=
-X-Received: by 2002:a05:6358:249f:b0:135:89d6:22e9 with SMTP id
- m31-20020a056358249f00b0013589d622e9mr5489189rwc.13.1693654522610; Sat, 02
- Sep 2023 04:35:22 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 382Cn4qF073180;
+ Sat, 2 Sep 2023 07:49:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693658944;
+ bh=QMrva+Yxz6ZIz/N7R1g0lasc+lMaLMWLfFh/ehQXgG0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=qATwYbNjJQ7NBu+ODXhWBxlV5goxWD1zgMkMjctjZYuqrYht3OdhKCPPIfCutWtAz
+ NUg8jN/aTx81dmPRf6vKc8PIahPMphc08arhYQ4KInLxTRA1GmpmAdftG+GuENaW5J
+ qfPzMiwroTK5JiRno9x3FrhiAYyPMcTPAHd95u6M=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 382Cn4Ax087312
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 2 Sep 2023 07:49:04 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 2
+ Sep 2023 07:49:03 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 2 Sep 2023 07:49:03 -0500
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 382Cn0Im122259;
+ Sat, 2 Sep 2023 07:49:01 -0500
+Message-ID: <1fed9388-dfc4-0b9c-4502-b5020b2aed1a@ti.com>
+Date: Sat, 2 Sep 2023 18:19:00 +0530
 MIME-Version: 1.0
-From: Kenta Sato <tosainu.maple@gmail.com>
-Date: Sat, 2 Sep 2023 20:35:06 +0900
-Message-ID: <CAF1eZtvEmjZohyJfa=Jm=Dm76bhkayKk_tzTMM8ooQUQ-OL0CA@mail.gmail.com>
-Subject: Issue with mmc_power_on() and reference counter of regulator
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Sat, 02 Sep 2023 13:38:12 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH 1/2] thermal: k3-j72xx-bandgap: Add support for vtm
+To: Nishanth Menon <nm@ti.com>
+CC: <vigneshr@ti.com>, <bb@ti.com>, <sjg@chromium.org>, <peng.fan@nxp.com>,
+ <ye.li@nxp.com>, <robimarko@gmail.com>, <u-boot@lists.denx.de>,
+ <n-francis@ti.com>
+References: <20230901061500.2342452-1-u-kumar1@ti.com>
+ <20230901061500.2342452-2-u-kumar1@ti.com>
+ <20230901150640.u7nyi3hawwkz3rbs@leverage>
+ <f3dfffb4-4a97-be0b-61d8-f0e4761b1714@ti.com>
+ <20230901173344.fw7glgqmed3fm7ua@comfort>
+ <8857fb8f-415b-2b59-585f-d6a3cff9327b@ti.com>
+ <20230901191042.7iq2tunocqjxnyh3@paramedic>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230901191042.7iq2tunocqjxnyh3@paramedic>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,89 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Nishanth,
 
-I am using the FriendlyElec NanoPi R4S board.
-When I updated U-Boot to a recent version (0fe0395922), it failed to
-boot from MMC. Here is the log:
+On 9/2/2023 12:40 AM, Nishanth Menon wrote:
+> On 23:43-20230901, Kumar, Udit wrote:
+>> On 9/1/2023 11:03 PM, Nishanth Menon wrote:
+>>> On 22:54-20230901, Kumar, Udit wrote:
+>>>>>> +static const struct  udevice_id of_k3_j72xx_bandgap_match[] = {
+>>>>>> +	{
+>>>>>> +		.compatible = "ti,j721e-vtm",
+>>>>>> +		.data = (ulong)&k3_j72xx_bandgap_j721e_data,
+>>>>> So what happens to drivers/misc/k3_avs.c ?
+>>>> Could you help me to understand this comment.
+>>>>
+>>>> Do you mean, why we can not add this support in AVS driver or
+>>>>
+>>>> need of this porting ?
+>>>>
+>>>> How I see, AVS driver to run at SPL/R5 time and this driver
+>>>>
+>>>> to be probed in Main/A72 u-boot when needed.
+>>> you are saying the drivers are mutually exclusive - how about detecting
+>>> over-temp scenario at R5 boot? switching on A53 will be a mistake at
+>>> that point, no?
+>> Yes these are  mutually exclusive.
+>>
+>> Let me see, how I can add TSHUT value programming in avs driver to avoid
+>> above.
+>>
+>> But in case, temperature reading is needed from u-boot shell, we still need
+>> this code.
+> One approach might be to merge the two.
 
-================================
-U-Boot TPL 2023.10-rc3 (Sep 02 2023 - 08:21:08)
-lpddr4_set_rate: change freq to 400MHz 0, 1
-Channel 0: LPDDR4, 400MHz
-BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
-Channel 1: LPDDR4, 400MHz
-BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
-256B stride
-lpddr4_set_rate: change freq to 800MHz 1, 0
-Trying to boot from BOOTROM
-Returning to boot ROM...
+I think merging of these two feature could be done in one file, as one 
+driver or two.
 
-U-Boot SPL 2023.10-rc3 (Sep 02 2023 - 08:21:08 +0000)
-Trying to boot from MMC1
-spl_load_fit_image: Skip load 'atf-5': image size is 0!
-NOTICE:  BL31: v2.9(release):
-NOTICE:  BL31: Built : 08:19:59, Sep  2 2023
+But on execution/feature side, from R5/SPL we need to set voltage for 
+A72 (OPP or AVS)  before
 
+releasing A72 core. Also can program TSHUT value for thermal overrun 
+protection.
 
-U-Boot 2023.10-rc3 (Sep 02 2023 - 08:21:08 +0000)
+For A72/Main u-boot, provide function of temperature reporting from shell.
 
-SoC: Rockchip rk3399
-Reset cause: POR
-Model: FriendlyElec NanoPi R4S
-DRAM:  4 GiB (effective 3.9 GiB)
-PMIC:  RK808
-Core:  264 devices, 23 uclasses, devicetree: separate
-MMC:   mmc@fe320000: 1
-Loading Environment from nowhere... OK
-In:    serial,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Model: FriendlyElec NanoPi R4S
-Net:
-Error: ethernet@fe300000 address not set.
-No ethernet found.
-
-Hit any key to stop autoboot:  0
-Error enabling VMMC supply : -114
-Error enabling VMMC supply : -114
-Error enabling VMMC supply : -114
-Error enabling VMMC supply : -114
-Error enabling VMMC supply : -114
-Error enabling VMMC supply : -114
-================================
-
-Does anyone know how to fix the issue?
-
-I looked into commit logs and the mailing list so far, and I found the
-below commit that adds the reference counter to the regulator. I could
-remove the above error by reverting this change. Of course, it should
-not be the proper way.
-Maybe we could replace regulator_set_enable() in mmc_power_on() by
-regulator_set_enable_if_allowed(). However, I have no confidence about
-it as I'm not familiar with the U-Boot source code.
-
-================================
-commit 4fcba5d556b4224ad65a249801e4c9594d1054e8
-Author: Eugen Hristev <eugen.hristev@collabora.com>
-Date:   Wed Apr 19 16:45:24 2023 +0300
-
-    regulator: implement basic reference counter
-
-    Some devices share a regulator supply, when the first one will request
-    regulator disable, the second device will have it's supply cut off before
-    graciously shutting down. Hence there will be timeouts and other failed
-    operations.
-    Implement a reference counter mechanism similar with what is done in
-    Linux, to keep track of enable and disable requests, and only disable the
-    regulator when the last of the consumers has requested shutdown.
-
-    Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
-    Reviewed-by: Simon Glass <sjg@chromium.org>
-    Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-================================
-
-Any help would be greatly appreciated.
-Thank you!
-
-Kenta Sato
