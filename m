@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B500BCA0FF8
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 07:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCCCCCA0FF6
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 07:34:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 912A286758;
-	Sat,  2 Sep 2023 09:34:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4DC986411;
+	Sat,  2 Sep 2023 09:34:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="PtWu3Qnu";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BhskPpA3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12CF9847D9; Sat,  2 Sep 2023 09:34:32 +0200 (CEST)
+ id 76123867B5; Sat,  2 Sep 2023 09:34:34 +0200 (CEST)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DF5D85894
+ by phobos.denx.de (Postfix) with ESMTPS id EAEE7863F9
  for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 09:34:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,27 +31,27 @@ Received: from LT2ubnt.fritz.box (ip-062-143-244-162.um16.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 0433942946; 
- Sat,  2 Sep 2023 07:34:28 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 62BA542947; 
+ Sat,  2 Sep 2023 07:34:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1693640069;
- bh=sXbzqCgUWFFRHYO1nu/M+AgsvymyCMZGwRm3t2BADm0=;
+ bh=f/rmk9tuC/rVsfZpuhfHWqgTXdxeNHsSRhgbR9zK4NU=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=PtWu3QnuPdG+QOvEsi3Y03bIWTnG+fCIC+6D8r2kPoYkBdln1BIyWyD9g9sOR6Ehw
- iOzpSzZFCGiIUo/5CJMeXQhGcPBCYjOsElJhKhAB4lIr17mq1mT7X7YUVp6O0TfiBJ
- gxobVqRiAA/iFWXlaDto/xGaSfFJdqSc0xzzsrfElwLUBUu6s4/XYUAk5zivLMPgTf
- nag2t/mmMaxuVU2C86hYPZsUcnjOUG+UB2hssmkZsOf6SHEM4QX/HE13i83Xmxs3um
- Flw9A/taen5oV8qQ7DWzzbcHunMit0/Q8OmVzZgNDP8RCVHy0n87CHQT1fS6QQJ+9s
- //X8DvFGTnZ6g==
+ b=BhskPpA38P5vclRUVYqAzd6Udn2O0+d6mWOZIG6mYOrmRNMIQMdWCEU6R+8yQNxm8
+ n3mPAFTlv16RKayo8e6IC0Aa6pAzHn7U7J5zXXpPvct2ibmb7IAVuE1Q16mSy4FPVK
+ mro2X9o1XetQuLUFEdY9e8Y9RS6b4q4SlQdmwQ2FZEnS/BcrgqAgY5tIKvHBx4Z1Kf
+ cZrZLL1nQjSlncp1RKNVM4oZLKBsuT0+7Ol+z0b219aMzgo+rGnumofg0U1y4426Ct
+ lqk07h5Y4Ie1XhaTFtM+cvt70UegM7odpU0ZVDMYQHugsDvRrx9Sz0UgcV/AwJkKSI
+ pWYKRUMlvGIPA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Joshua Watt <jpewhacker@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/4] part: rename disk_partition_type_uuid()
-Date: Sat,  2 Sep 2023 09:35:21 +0200
-Message-Id: <20230902073524.87451-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/4] cmd: gpt: use UUID accessor more consistently
+Date: Sat,  2 Sep 2023 09:35:22 +0200
+Message-Id: <20230902073524.87451-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230902073524.87451-1-heinrich.schuchardt@canonical.com>
 References: <20230902073524.87451-1-heinrich.schuchardt@canonical.com>
@@ -73,79 +73,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename disk_partition_type_uuid to disk_partition_type_guid.
+disk_partition_uuid() and disk_partition_set_uuid() were introduced to let
+us avoid the usage of #ifdef when dealing with the field uuid of
+struct disk_partition.
 
-Provide function descriptions for the getter and setter.
+In allocate_disk_part() commit c5f1d005f517 ("part: Add accessors for
+struct disk_partition uuid") missed to use the setter.
 
-Fixes: bcd645428c34 ("part: Add accessors for struct disk_partition type_uuid")
+print_gpt_info() and create_gpt_partitions_list() are further functions
+where we should use the getter.
+
+Fixes: c5f1d005f517 ("part: Add accessors for struct disk_partition uuid")
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
 	new patch
 ---
- disk/part_efi.c |  2 +-
- include/part.h  | 26 +++++++++++++++++++++++---
- 2 files changed, 24 insertions(+), 4 deletions(-)
+ cmd/gpt.c | 23 ++++++++++++-----------
+ 1 file changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index 39382c5fae..b7aef3731b 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -299,7 +299,7 @@ int part_get_info_efi(struct blk_desc *desc, int part,
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index 8969efba8c..092f7defff 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -211,10 +211,9 @@ static struct disk_part *allocate_disk_part(struct disk_partition *info,
+ 		PART_TYPE_LEN);
+ 	newpart->gpt_part_info.type[PART_TYPE_LEN - 1] = '\0';
+ 	newpart->gpt_part_info.bootable = info->bootable;
+-	if (IS_ENABLED(CONFIG_PARTITION_UUIDS)) {
+-		strlcpy(newpart->gpt_part_info.uuid, disk_partition_uuid(info),
+-			UUID_STR_LEN + 1);
+-	}
++	if (IS_ENABLED(CONFIG_PARTITION_UUIDS))
++		disk_partition_set_uuid(&newpart->gpt_part_info,
++					disk_partition_uuid(info));
+ 	newpart->partnum = partnum;
+ 
+ 	return newpart;
+@@ -250,9 +249,9 @@ static void print_gpt_info(void)
+ 		       curr->gpt_part_info.name);
+ 		printf("Type %s, bootable %d\n", curr->gpt_part_info.type,
+ 		       curr->gpt_part_info.bootable & PART_BOOTABLE);
+-#ifdef CONFIG_PARTITION_UUIDS
+-		printf("UUID %s\n", curr->gpt_part_info.uuid);
+-#endif
++		if (CONFIG_IS_ENABLED(PARTITION_UUIDS))
++			printf("UUID %s\n",
++			       disk_partition_uuid(&curr->gpt_part_info));
+ 		printf("\n");
  	}
- 	if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID)) {
- 		uuid_bin_to_str(gpt_pte[part - 1].partition_type_guid.b,
--				(char *)disk_partition_type_uuid(info),
-+				(char *)disk_partition_type_guid(info),
- 				UUID_STR_FORMAT_GUID);
+ }
+@@ -296,10 +295,12 @@ static int create_gpt_partitions_list(int numparts, const char *guid,
+ 			(unsigned long long)curr->gpt_part_info.size *
+ 					    curr->gpt_part_info.blksz);
+ 		strncat(partitions_list, partstr, PART_NAME_LEN + 1);
+-
+-		strcat(partitions_list, ",uuid=");
+-		strncat(partitions_list, curr->gpt_part_info.uuid,
+-			UUID_STR_LEN + 1);
++		if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
++			strcat(partitions_list, ",uuid=");
++			strncat(partitions_list,
++				disk_partition_uuid(&curr->gpt_part_info),
++				UUID_STR_LEN + 1);
++		}
+ 		strcat(partitions_list, ";");
  	}
- 
-diff --git a/include/part.h b/include/part.h
-index f321479a5e..db34bc6bb7 100644
---- a/include/part.h
-+++ b/include/part.h
-@@ -108,18 +108,38 @@ static inline void disk_partition_clr_uuid(struct disk_partition *info)
- }
- 
- /* Accessors for struct disk_partition field ->type_guid */
--extern char *__invalid_use_of_disk_partition_type_uuid;
-+extern char *__invalid_use_of_disk_partition_type_guid;
- 
-+/**
-+ * disk_partition_type_guid() - get partition type GUID
-+ *
-+ * By using this function to get the partition type GUID we can use
-+ * 'if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID))' instead of
-+ * '#ifdef CONFIG_PARTITION_TYPE_GUID'.
-+ *
-+ * @info:	partition information
-+ * Return:	partition type GUID
-+ */
- static inline const
--char *disk_partition_type_uuid(const struct disk_partition *info)
-+char *disk_partition_type_guid(const struct disk_partition *info)
- {
- #ifdef CONFIG_PARTITION_TYPE_GUID
- 	return info->type_guid;
- #else
--	return __invalid_use_of_disk_partition_type_uuid;
-+	return __invalid_use_of_disk_partition_type_guid;
- #endif
- }
- 
-+/**
-+ * disk_partition_set_type_guid() - set partition type GUID
-+ *
-+ * By using this function to set the partition type GUID we can use
-+ * 'if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID))' instead of
-+ * '#ifdef CONFIG_PARTITION_TYPE_GUID'.
-+ *
-+ * @info:	partition information
-+ * @val:	partition type GUID as string
-+ */
- static inline void disk_partition_set_type_guid(struct disk_partition *info,
- 						const char *val)
- {
+ 	return 0;
 -- 
 2.40.1
 
