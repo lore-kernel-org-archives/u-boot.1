@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A043ACA0FF6
-	for <u-boot@archiver.kernel.org>; Fri,  1 Sep 2023 21:01:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F828CA0FF6
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 00:09:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E22B86725;
-	Fri,  1 Sep 2023 23:01:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6AE078657B;
+	Sat,  2 Sep 2023 02:09:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="M6N9kv7O";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="aRYraJxa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H40tmXBd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DDF38657B; Fri,  1 Sep 2023 23:01:25 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D78AF867B5; Sat,  2 Sep 2023 02:09:37 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C17128657B
- for <u-boot@lists.denx.de>; Fri,  1 Sep 2023 23:01:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3410A86453
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 02:09:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Rcr6p4gPvz9sWQ;
- Fri,  1 Sep 2023 23:01:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693602082;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LAYluwsa5qlIy/2Aia+jk4nLzNKWtLLXsk5zUO1gsLQ=;
- b=M6N9kv7OsrLAJGeCRL6Ulsq3o35Zc13RXqVFKOoujIrAevSAzpQmm+9UuW8Oz64+tj9agO
- coZv/cuCrHTMgFDWr0Y8g0g9SX6bAnMvD8htI7N9GCpYog7sT6kQ4BcdC25LxsISveA53A
- Wg3vcNkO8Bu7L/SZHgbILvgyPu1UnL/Ab/uYPUlrleRDEw5psU2L2581KI8x/XYJ+OHg6n
- 0PQEDQn7rChx1UStDzvE7eaC1e5RVlJLyhXlCVp85VFQn4SXgSmzo8Jnwj9/SEhXGwpk7l
- eSzwcAKkIr4Pv85LP3moFF2jGq6Jwmd2p2cGHp6AoKFPnzYIcFhPaid/AeFHtw==
-Message-ID: <90536404-b36d-c267-0c44-cb23ae26f5f5@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693602080;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=LAYluwsa5qlIy/2Aia+jk4nLzNKWtLLXsk5zUO1gsLQ=;
- b=aRYraJxaqnR5tHvRwooTzfp8SnmivtxGRcexb/gb4GvKM0DMw1ENKbcRKbMl33HBmEN3QD
- LXjN/WbH8+qwjwd1KumSDtZ9lRruzsPBPDRNHCYyvhX9uRsc+4uEGkVmSZfzYwPTOMgG5B
- h3M8FtoO9kfLiutZRSbeBs+MdAjDDVUTMpp7qZcZiI9u4TZDMJ6XoKM17aPFtG9FbGO3qj
- pm5f7ION2fG2fbt3iWKXcX5uWaIn1WXb7himlCh8+XqbUtGAawdi4w9qG5j4P9C9abA77I
- yD0JQQHtCjF2wIXdyN7eFsI8W9YNX63BYDRRrwhTOX38bqvix/+6I1CWyvZGmw==
-Date: Fri, 1 Sep 2023 23:01:19 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-52a49a42353so3318621a12.2
+ for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 17:09:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693613374; x=1694218174; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=a3BVgyYP09N+5k5CKIyBrQ8tX6ushJq2viSgpY8P66Y=;
+ b=H40tmXBdIQtaqvZ8kCjy0mQNElfhSCa1pq6Ny8PWg4Fabf3nYskUWhEWJ2eY+mUek7
+ N1bSpQx37ATmBSz7sbOfwFKoAufqmXWwGDJmn8EGy0ZA/eIrw40c97VwLoIQV9STBPHD
+ ZOqawa91rCWvf2lVKfZpEQD0Brck9Camhtnqw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693613374; x=1694218174;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a3BVgyYP09N+5k5CKIyBrQ8tX6ushJq2viSgpY8P66Y=;
+ b=b1oVQ1D0mXhy4i5uMKBw2HHwRlhIWxBe7jHTKM2PBzXxMIckgpsC9oJ5UlNNGTACl0
+ Zp3xIZU8g6OWdj6axUpmSM3gtdKdvY7hXfNVjx3CJ5BmgUG5nl3JWxu+YM0Q/zVlrOBz
+ +o2kMqg9Gf0cDUq8fA9eeDoR6kMTNcETmUKyUbV5k9yfeQDZrP5ozcyAqWgmMOl25+p+
+ BrSoXvpaPudutv+XCuQv8Ch06p0aezdh55OQgoLNeyW/pYM7MEE5dDVdHW7zXkmM83eS
+ 9DTfi3L0wCfjtimYFIVicUD6vLTU8+P5/Y1zfqTPLWO4XyJVGzAo/OvqJs+IY6zddnhj
+ JK3g==
+X-Gm-Message-State: AOJu0YwDeQyhznLYHBVsMZ3WT+55MC99pxyjmQDZLwCOoKsBGqd6dpiX
+ C6E7kddJBQDb3iAHsEnpt4Z0fmEVSfJxUQHjjSpTazU+ttxW6ytvJ8o=
+X-Google-Smtp-Source: AGHT+IHbVuQ8if4y5Z7AHiEaTARuXBVweFJzaA3CkM7O5fczIOayEzhfry1TMrSGGE23AcqPtjK6DdQHADs24zZNmVg=
+X-Received: by 2002:a05:6402:553:b0:52a:1d54:2533 with SMTP id
+ i19-20020a056402055300b0052a1d542533mr3376698edx.9.1693613374524; Fri, 01 Sep
+ 2023 17:09:34 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] .gitlab-ci: Test sandbox64 board in addition to sandbox
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>
-References: <20230901084810.238594-1-marek.vasut+renesas@mailbox.org>
- <20230901132405.GR3101304@bill-the-cat>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230901132405.GR3101304@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 4f388b1323d794eedf0
-X-MBO-RS-META: ofcegramcadtfqea4kmhszyz5tbwphdo
-X-Rspamd-Queue-Id: 4Rcr6p4gPvz9sWQ
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-2-masahisa.kojima@linaro.org>
+In-Reply-To: <20230901102542.609239-2-masahisa.kojima@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 1 Sep 2023 18:09:16 -0600
+Message-ID: <CAPnjgZ22G-F1_VfFPge6hDOQC9eOgRdZ2U-NftrYx=XsJ-opsA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] net: wget: prevent overwriting reserved memory
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +84,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/23 15:24, Tom Rini wrote:
-> On Fri, Sep 01, 2023 at 10:48:10AM +0200, Marek Vasut wrote:
-> 
->> Test both 32bit and 64bit sandbox boards in CI.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> ---
->> DEPENDS:
->> - [v2] test: print: Fix hexdump test on 64bit systems
->> - test: dm: test-fdt: Use fdtdec_get_int() in dm_check_devices()
->> - configs: sandbox64: Enable legacy image format support
-> 
-> Nice work.
-> 
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> 
->> ---
->>   .gitlab-ci.yml | 17 +++++++++++++++++
->>   1 file changed, 17 insertions(+)
->>
->> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
->> index 6d7ffdd1bbc..a7282be3181 100644
->> --- a/.gitlab-ci.yml
->> +++ b/.gitlab-ci.yml
->> @@ -291,6 +291,23 @@ sandbox without LTO test.py:
->>       BUILD_ENV: "NO_LTO=1"
->>     <<: *buildman_and_testpy_dfn
->>   
->> +sandbox64 test.py:
->> +  variables:
->> +    TEST_PY_BD: "sandbox64"
->> +  <<: *buildman_and_testpy_dfn
->> +
->> +sandbox64 with clang test.py:
->> +  variables:
->> +    TEST_PY_BD: "sandbox64"
->> +    OVERRIDE: "-O clang-16"
->> +  <<: *buildman_and_testpy_dfn
->> +
->> +sandbox64 without LTO test.py:
->> +  variables:
->> +    TEST_PY_BD: "sandbox64"
->> +    BUILD_ENV: "NO_LTO=1"
->> +  <<: *buildman_and_testpy_dfn
-> 
-> I think this means it'll be time to split sandbox out in to its own
-> stage on Azure as we can get 10 meaningful-but-long runs there and so
-> it's best for overall job time to make that a stage. I'll go give that a
-> spin shortly unless you want to.
+Hi Masahisa,
 
-Sure
+On Fri, 1 Sept 2023 at 04:26, Masahisa Kojima
+<masahisa.kojima@linaro.org> wrote:
+>
+> This introduces the valid range check to store the received
+> blocks using lmb. The same logic is implemented in tftp.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>  net/wget.c | 76 +++++++++++++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 69 insertions(+), 7 deletions(-)
+>
+> diff --git a/net/wget.c b/net/wget.c
+> index 2dbfeb1a1d..8bf4db4d04 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -4,16 +4,20 @@
+>   * Copyright Duncan Hare <dh@synoia.com> 2017
+>   */
+>
+> +#include <asm/global_data.h>
+>  #include <command.h>
+>  #include <common.h>
+>  #include <display_options.h>
+>  #include <env.h>
+>  #include <image.h>
+> +#include <lmb.h>
+>  #include <mapmem.h>
+>  #include <net.h>
+>  #include <net/tcp.h>
+>  #include <net/wget.h>
+>
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+>  static const char bootfile1[] = "GET ";
+>  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+>  static const char http_eom[] = "\r\n\r\n";
+> @@ -55,6 +59,32 @@ static unsigned int retry_tcp_ack_num;       /* TCP retry acknowledge number*/
+>  static unsigned int retry_tcp_seq_num; /* TCP retry sequence number */
+>  static int retry_len;                  /* TCP retry length */
+>
+> +#ifdef CONFIG_LMB
+> +static ulong wget_load_size;
+> +#endif
+> +
+> +/**
+> + * wget_init_max_size() - initialize maximum load size
+> + *
+> + * Return:     0 if success, -1 if fails
+> + */
+> +static int wget_init_load_size(void)
+> +{
+> +#ifdef CONFIG_LMB
+
+please can you use if IS_ENABLED() throughout?
+
+> +       struct lmb lmb;
+> +       phys_size_t max_size;
+> +
+> +       lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
+> +
+> +       max_size = lmb_get_free_size(&lmb, image_load_addr);
+> +       if (!max_size)
+> +               return -1;
+> +
+> +       wget_load_size = max_size;
+> +#endif
+> +       return 0;
+> +}
+> +
+>  /**
+>   * store_block() - store block in memory
+>   * @src: source of data
+> @@ -63,10 +93,24 @@ static int retry_len;                       /* TCP retry length */
+>   */
+>  static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+>  {
+> +       ulong store_addr = image_load_addr + offset;
+>         ulong newsize = offset + len;
+>         uchar *ptr;
+>
+> -       ptr = map_sysmem(image_load_addr + offset, len);
+> +#ifdef CONFIG_LMB
+> +       ulong end_addr = image_load_addr + wget_load_size;
+> +
+> +       if (!end_addr)
+> +               end_addr = ULONG_MAX;
+> +
+> +       if (store_addr < image_load_addr ||
+> +               store_addr + len > end_addr) {
+> +               puts("\nwget error: ");
+> +               puts("trying to overwrite reserved memory...\n");
+> +               return -1;
+> +       }
+> +#endif
+> +       ptr = map_sysmem(store_addr, len);
+>         memcpy(ptr, src, len);
+>         unmap_sysmem(ptr);
+>
+> @@ -240,25 +284,37 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+>
+>                         net_boot_file_size = 0;
+>
+> -                       if (len > hlen)
+> -                               store_block(pkt + hlen, 0, len - hlen);
+> +                       if (len > hlen) {
+> +                               if (store_block(pkt + hlen, 0, len - hlen) != 0) {
+> +                                       wget_loop_state = NETLOOP_FAIL;
+> +                                       wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
+> +                                       return;
+> +                               }
+> +                       }
+>
+>                         debug_cond(DEBUG_WGET,
+>                                    "wget: Connected Pkt %p hlen %x\n",
+>                                    pkt, hlen);
+>
+>                         for (i = 0; i < pkt_q_idx; i++) {
+> +                               int err;
+> +
+>                                 ptr1 = map_sysmem(
+>                                         (phys_addr_t)(pkt_q[i].pkt),
+>                                         pkt_q[i].len);
+> -                               store_block(ptr1,
+> -                                           pkt_q[i].tcp_seq_num -
+> -                                           initial_data_seq_num,
+> -                                           pkt_q[i].len);
+> +                               err = store_block(ptr1,
+> +                                                 pkt_q[i].tcp_seq_num -
+> +                                                 initial_data_seq_num,
+> +                                                 pkt_q[i].len);
+>                                 unmap_sysmem(ptr1);
+>                                 debug_cond(DEBUG_WGET,
+>                                            "wget: Connctd pkt Q %p len %x\n",
+>                                            pkt_q[i].pkt, pkt_q[i].len);
+> +                               if (err) {
+> +                                       wget_loop_state = NETLOOP_FAIL;
+> +                                       wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
+> +                                       return;
+> +                               }
+>                         }
+>                 }
+>         }
+> @@ -420,6 +476,12 @@ void wget_start(void)
+>         debug_cond(DEBUG_WGET,
+>                    "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+>
+> +       if (wget_init_load_size()) {
+> +               puts("\nwget error: ");
+> +               puts("trying to overwrite reserved memory...\n");
+
+I think it is OK to use printf() here.
+
+> +               return;
+
+Needs to return the error code
+
+> +       }
+> +
+>         net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+>         tcp_set_tcp_handler(wget_handler);
+>
+> --
+> 2.34.1
+>
+
+Regards,
+Simon
