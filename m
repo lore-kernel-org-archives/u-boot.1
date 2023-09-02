@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D5ECA0FF9
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 00:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E702CA0FF6
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 00:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F9FA867EF;
+	by phobos.denx.de (Postfix) with ESMTP id 952CA86824;
 	Sat,  2 Sep 2023 02:09:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JED7NozK";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="MBQpCyq1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6254786703; Sat,  2 Sep 2023 02:09:40 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id A31EF86703; Sat,  2 Sep 2023 02:09:40 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DAA686722
+ by phobos.denx.de (Postfix) with ESMTPS id 8823C86741
  for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 02:09:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-500c37d479aso4171950e87.2
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-500cefc3644so4554149e87.3
  for <u-boot@lists.denx.de>; Fri, 01 Sep 2023 17:09:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693613375; x=1694218175; darn=lists.denx.de;
+ d=google.com; s=20221208; t=1693613375; x=1694218175; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4yDTXGtIEfhJgHeQCyheNdC3Ic4E98RDXcxguXcqZns=;
- b=JED7NozK6JydIqfOzbO2aoDlI6zj3KAM558QjE+uCSiJrzwJGVFI1iTlW0yTNSROcW
- nsHh61nbSELGRwfjeM3seBBwdawZufXosyNm+oC7nRs1Ib9WsIfPI0Vk12XU1S6Z3oiP
- VG0Psv7AbqZ5aEg5P7ej3K+gvb96/Sc03vcLg=
+ bh=ivhm+yta0ikWx+7oXCA10CasE+z03E7xKHYz3nclnKA=;
+ b=MBQpCyq1gAEdedPKjOhzBYEVX7Bt443ykmFmb8O3DLRONdWzpU3lXJ6M94od/qs1GR
+ WAqloCR8eZL7W1e7MApQyMiABaFU1F57JOghkShf3vY/1jpPzIPkmyGu40Q1qFM2Yeuz
+ IVbTRHso5oDWsqT1OTHnfw4DUG0S8nGJV0cPCqB3yEBUq8mkIq671T6PACV6bgewwnis
+ EJGB8//jo3GMQaSRxzxrRz6oa3U90dVmCPnUipguin4V9KlwcvSWaZTXdIW0yuICsIfZ
+ P2m4PvH9NJHXhbFdNu8b/05FnshNe0OnLv7FKkI6kzRfO5Oo3oE4dd2u8FrzdS9fOp+i
+ 6kpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693613375; x=1694218175;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4yDTXGtIEfhJgHeQCyheNdC3Ic4E98RDXcxguXcqZns=;
- b=LVzVh8QwSyCrY95MysSFqAmRsDWbSXdgmVIvMw4gPclYOyc4IvY/sM4JP4CcBtcEFk
- MOdg3S9u4OUm5yx4X3OliDjvJRLh5E/OWlqAvkjLxp3zujd6q+F7Gby4DBc22WkIvKmJ
- /sMjtGBkxlTRAvedcFliGonWto4hLzmGN9xM5XScCAO6n6TYp6oOJBfJsntI6MYZHbfy
- bjptvLQQxDJ8fIut8tZG9q2FJBAyQalltPxT50QHHM37GVAxnS3PSigHRczwkfmDhHSd
- Ut++pySHHy4/cuMqxi94FuB3RvJaY4iYSPhD08QqIw9S9cYo4/MTUiGe1upXQDzEnfJC
- bW9A==
-X-Gm-Message-State: AOJu0Yy7iPLASUoDjI+4Eeqcum+gE5pY5RLl/7uMP/WGXvx4y46neKM2
- STt3M8GVnmtrSGHUdgGC4f25Z3hluN34ZvOLmXkPVQ==
-X-Google-Smtp-Source: AGHT+IF+X3xq7qY//ETeXSpjshsNJ/arbSAoUm8wGoe9zDwzPIdMJ0xmKaMivigpk50DrwznGfzUl3w/obpCTGyMqiw=
-X-Received: by 2002:a05:6512:3051:b0:4fb:77d6:89c3 with SMTP id
- b17-20020a056512305100b004fb77d689c3mr3048579lfb.12.1693613374555; Fri, 01
- Sep 2023 17:09:34 -0700 (PDT)
+ bh=ivhm+yta0ikWx+7oXCA10CasE+z03E7xKHYz3nclnKA=;
+ b=hiHL37lgsQ3iUDwFEpDf27CG9NbPDJGAnINHLRtyoKsIwZGWN+ZPU8k0nTp9UjXNXv
+ Bnj+n/ByFG5NOiTWiWNqkaffyRjWyzeC7NYxAL0x/OcEy0wOWjt0JS/kPUD5wQEsV8kF
+ jv2Y+HWi2AlzhCli9AkHg4PoBaF48Ih+9s1bfJRauu4NzZ6zkHv787z8bMOpPFKv8Qud
+ N8r9MtdF/2lsqyogHlSLDNsBnqRpdEj2J/wevnGMeVldMj5hOy6odypmF9Cdzxb3SbZM
+ dz/kD6lIN3WZSFYfxvrKKas+dnhJ3kRJprD2UEugjaYJDWHXtlFU+5/6u/3Ei/ohUSSm
+ cOKg==
+X-Gm-Message-State: AOJu0YyN+zTQ40M7O3/e3w8EpXWvPIiZvmrv95Yz4StqUrKAXpUYnZOi
+ 9bBcngGrEZtEV20x2izfXGjodyIJ443bXWPxumGnag==
+X-Google-Smtp-Source: AGHT+IGErWCyBR3rlom0F5utqKHY3ExqQmB/qOSK5L61TXzR/eBaVcRLmdM/s+RRD7nyVUhr9WReZN1Ps2TZrncMXeQ=
+X-Received: by 2002:a05:6512:3603:b0:4f8:6dfd:faa0 with SMTP id
+ f3-20020a056512360300b004f86dfdfaa0mr2339221lfs.2.1693613374547; Fri, 01 Sep
+ 2023 17:09:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230901050532.725-1-maxim.cournoyer@gmail.com>
-In-Reply-To: <20230901050532.725-1-maxim.cournoyer@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Sep 2023 18:09:20 -0600
-Message-ID: <CAPnjgZ2n-z9CEn_ej3HqNP1C9j=x7E0U-WcmnAyAHFCSeOWWyA@mail.gmail.com>
-Subject: Re: [PATCH] tools: Fix patman launcher script.
-To: Maxim Cournoyer <maxim.cournoyer@gmail.com>
-Cc: u-boot@lists.denx.de
+References: <20230901142859.1569900-1-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20230901142859.1569900-1-paul.barker.ct@bp.renesas.com>
+From: Simon Glass <sjg@google.com>
+Date: Fri, 1 Sep 2023 18:09:14 -0600
+Message-ID: <CAPnjgZ01dutg5934yaquG7LeFvTComvG1R+mAtWnb=ndJ5zK-g@mail.gmail.com>
+Subject: Re: [PATCH] env: Improve ENV_OFFSET help message
+To: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,18 +83,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Aug 2023 at 23:05, Maxim Cournoyer <maxim.cournoyer@gmail.com> wrote:
+On Fri, 1 Sept 2023 at 08:29, Paul Barker <paul.barker.ct@bp.renesas.com> wrote:
 >
-> There is no "run_patman" procedure in patman's __main__.py file, which
-> would cause the following error at execution:
+> When reading Kconfig help messages to understand ENV_OFFSET and
+> ENV_OFFSET_REDUND, developers may not realise that they need to also
+> look at the chosen ENV_IS_IN_* options to see how the offsets will be
+> interpreted.
 >
->   "AttributeError: module 'patman.__main__' has no attribute 'run_patman'"
->
-> Signed-off-by: Maxim Cournoyer <maxim.cournoyer@gmail.com>
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 > ---
->
->  tools/patman/pyproject.toml | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  env/Kconfig | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
