@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC19C001DB
-	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 14:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C0FDC001DB
+	for <u-boot@archiver.kernel.org>; Sat,  2 Sep 2023 14:54:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CEEE867C3;
+	by phobos.denx.de (Postfix) with ESMTP id E029686828;
 	Sat,  2 Sep 2023 16:53:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z+ZTb5xE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FaJ4vhMA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC2FB867B6; Sat,  2 Sep 2023 16:53:27 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id D382A867C3; Sat,  2 Sep 2023 16:53:27 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A27AD86824
- for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 16:53:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DAB6386801
+ for <u-boot@lists.denx.de>; Sat,  2 Sep 2023 16:53:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jmcosta944@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-402be83929eso295915e9.3
- for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 07:53:24 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-400a087b0bfso321825e9.2
+ for <u-boot@lists.denx.de>; Sat, 02 Sep 2023 07:53:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693666404; x=1694271204; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693666403; x=1694271203; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7/rN6hpA6RUR8xcynsTbN4wgdal1KH5zv5tVJu4j/8A=;
- b=Z+ZTb5xExRCEED5GukbDlWtm3WCmZW3biAbsdVBbMQQgnU65yAlyXC9/fVoVeCDUFP
- UosWg0IV9lDoE0H4E94jXt8AebulhWeQwQCN9sTZ0BkMJSNhqvOJsqb3wMfV6Ee4pDIG
- pHc1FJoGG6XcunYJyA+bAutknvkQJckGkwsQvQbG0XCSzlqw6g0MMfGwDPezkAp+Y7Y6
- L8npO5mRalmjOPNie/sbAbtUn20Mc0Vx8QPWiooppS0FTf/Ny/grxHnGO4Xwfd5DXBdk
- 3mVr0wimffyGmmb0oculQChU7J7ZzgPOfzDmIewUf3mO9UBWcvqoIiAdp1gGhWlnHSkD
- axKA==
+ bh=nquaMTUkKEj9f0VDmD18sTp9HY+/Vhfo0qP8M2hbUps=;
+ b=FaJ4vhMAV9mLVwZDy01Rm3kAL/M6bB9VYbRfW8amH/XHioZ3Rd8ppQcDL5bXLkWBXn
+ fQV1EROpLqxeeG8TCDuOcEMtHkAvVwC1meB2xZZnaqAQ1merhej0Mmdu1M3jz3Ol3lr+
+ /3/869YxFskbIMFQSESDIoHojfjsiM6jPo/+p55qPAGaVs9/3x6pgTkbCE0/lg1YW/5k
+ XUq2urfsafnpa2bMlh+zfnLWmuI3wnwf7gMgWdseo3pqjQlzx75MEzwQA8p531LMdFFI
+ zHZqklJCdvNTT9U8wUZ+aF0BvXLmV50nY1k8nAywrzYE9HN0kLVatPp4pkndV8595JDO
+ VhvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693666404; x=1694271204;
+ d=1e100.net; s=20221208; t=1693666403; x=1694271203;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7/rN6hpA6RUR8xcynsTbN4wgdal1KH5zv5tVJu4j/8A=;
- b=b1sybVETQX7fA8XvuFcX3oe5dCNoqUJzGA73zEAIHZ0O8PwX4bt/8t4ULwuSCHgcmh
- t2y/jXy2K2F/YXExLBhAI9oBlaEQB8kY5POfF6n/takBKIsj09OgTPwvyQwCfOCKQz/3
- /ms0GgNf3RZXNfkFE/sqK0549jHhMVIyUn5e9UYOpUaTvDCJ9HRL8otV/ujRGCwNEmgV
- IqNsf6+4D2szh7oDeJPA8Aeh1dwxB1lvpf8+Pfso8fHIbACjqRWzEalJamnInIY1VXGG
- Uz0N0Icc9AaTFvFcN5yIMTRPfIefj0xKrC0MYDs2RT3k/eE9vEdlEVXXqiRheVuARMy7
- hPjQ==
-X-Gm-Message-State: AOJu0Yw8z6Ui/OZNAjGpG7Yj9SlfSFuY6q4xlN2u8//Mu6jxDj8ltznu
- 3Wieqw8am0wlqdgBML1kpbjg6HrWnWdPFzIn
-X-Google-Smtp-Source: AGHT+IHuPAH+s3vDEUBeNHf+SHGGhgDmWY0xoWoMCdZYK1HUGj2hP/+rdG+D0BhoBBGogGXlA6bHCQ==
-X-Received: by 2002:a5d:4683:0:b0:31c:3013:9fa5 with SMTP id
- u3-20020a5d4683000000b0031c30139fa5mr4243832wrq.59.1693666403896; 
+ bh=nquaMTUkKEj9f0VDmD18sTp9HY+/Vhfo0qP8M2hbUps=;
+ b=LUs3s+AMemp4PqW5kFQrHO+0DPdqJ6vltzlvHTwVPwQ32j6hbsDl5/yujJHTKHfCvW
+ Rnz/m+669Ori+3i5nKLIdHhdHfvorpu4kMDtVYucQWQCzTkV/8gQrGLmmZcH+XP4RbIL
+ V3NhCRoHGH6xRTk3r/N+LOOvipg+Y0RWcb7Jpc5In6oMzFDzNpi/mFmq9dRk4IWblMQP
+ m02Y3etoo2hqVAYbS7XLlxniQzWgYIlBK7lj+CREbCsUW/Y2+Z3yz2doV23Esr807gg/
+ GGN1Ep0cvjEZvHmXj/rxfJJFKpQDcSoJ9qpNmBUTklvvVEZhuYULulLUVmFmvEGcJWnL
+ dihQ==
+X-Gm-Message-State: AOJu0YyJOnGuM0s+5fdG1wUq9gCdqx4CN4e0ued/M2o4fJBQ+RxonZXl
+ bdblmaSgPWRNtoIhJlmmf4ZpOvPg9hCGBntY
+X-Google-Smtp-Source: AGHT+IGdTjMjTn5h3h4D+4QUdMuluoVNsTNniWr+n46OMZSXVvtVnzrGTlcHwJxOGXCgU6ZSyd4TAA==
+X-Received: by 2002:a5d:638d:0:b0:317:6d9d:1250 with SMTP id
+ p13-20020a5d638d000000b003176d9d1250mr3866514wru.61.1693666403082; 
  Sat, 02 Sep 2023 07:53:23 -0700 (PDT)
 Received: from fedora.. (cust-west-par-46-193-56-152.cust.wifirst.net.
  [46.193.56.152]) by smtp.gmail.com with ESMTPSA id
- cc11-20020a5d5c0b000000b0031f34a395e7sm2385449wrb.45.2023.09.02.07.53.23
+ cc11-20020a5d5c0b000000b0031f34a395e7sm2385449wrb.45.2023.09.02.07.53.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 Sep 2023 07:53:23 -0700 (PDT)
+ Sat, 02 Sep 2023 07:53:22 -0700 (PDT)
 From: Joao Marcos Costa <jmcosta944@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, antoningodard@pm.me,
  Y.Moog@phytec.de, Joao Marcos Costa <jmcosta944@gmail.com>
-Subject: [PATCH v3 5/7] .gitignore: add compile_commands.json
-Date: Sat,  2 Sep 2023 16:53:08 +0200
-Message-ID: <20230902145310.107054-6-jmcosta944@gmail.com>
+Subject: [PATCH v3 4/7] scripts/gen_compile_commands.py: add acknowledgments
+Date: Sat,  2 Sep 2023 16:53:07 +0200
+Message-ID: <20230902145310.107054-5-jmcosta944@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230902145310.107054-1-jmcosta944@gmail.com>
 References: <20230902145310.107054-1-jmcosta944@gmail.com>
@@ -92,25 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Clang's compilation database file (i.e. compile_commands.json) to
-.gitignore, at the root of the repository.
+Add acknowledgments for porting and modifying the script. Of course, the
+license, author, and copyright notice remain the same as in the original
+script.
 
 Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
 ---
- .gitignore | 3 +++
- 1 file changed, 3 insertions(+)
+ scripts/gen_compile_commands.py | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/.gitignore b/.gitignore
-index 002f95de4f..261a1d6754 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -109,3 +109,6 @@ __pycache__
+diff --git a/scripts/gen_compile_commands.py b/scripts/gen_compile_commands.py
+index 63d036a773..1a9c49b34a 100755
+--- a/scripts/gen_compile_commands.py
++++ b/scripts/gen_compile_commands.py
+@@ -4,6 +4,7 @@
+ # Copyright (C) Google LLC, 2018
+ #
+ # Author: Tom Roeder <tmroeder@google.com>
++# Ported and modified for U-Boot by Joao Marcos Costa <jmcosta944@gmail.com>
+ #
+ """A tool for generating compile_commands.json in U-Boot."""
  
- # moveconfig database
- /moveconfig.db
-+
-+# Clang's compilation database file
-+/compile_commands.json
 -- 
 2.41.0
 
