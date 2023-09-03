@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405A2C71153
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73DABC83F2D
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A7C786961;
-	Sun,  3 Sep 2023 22:57:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCDE68698D;
+	Sun,  3 Sep 2023 22:57:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="VIEzMGyq";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="SGZ5L4aL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51BAB86898; Sun,  3 Sep 2023 22:57:09 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 99C498698D; Sun,  3 Sep 2023 22:57:11 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6E82868AE
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:57:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBA7186951
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-52a4737a08fso1010878a12.3
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:57:06 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-52a1ce529fdso997202a12.1
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:57:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774626; x=1694379426;
+ d=amarulasolutions.com; s=google; t=1693774627; x=1694379427;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Pu874AXqAnFuFEoWLwUCi0oaN1bQ6BNWKx9R8q+zZXk=;
- b=VIEzMGyqt8Essq5yCm1x3T6mi/yZKVfwBbhgNTvlbbOlewiC0EKGZH0uJafa6zsaSe
- 4Tdc6GRKrZS/uFl770Zkvqc14RZaQvUzjrwXQi/2soco+189dgS1scptrL4EtBpvF7tO
- 8LvDuMO3faFSphT6Djpw7g7/tsONZ1HucqPy4=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Er+cmfuY24AtPiDqGJnBw1eBcMXGQAsBK3WVqoQh17c=;
+ b=SGZ5L4aLoFm7RYOOb6xZJq6T0OjLN0KreJlWnNhtBNqztrCoPBFNNHb0FHzAyF4+P+
+ VfppK/njfCwDe/LrVRaL3FM8SvDxhU/jvZmAsRVHqRUYMU+21inJe0Gxz60cobziswCf
+ ZwkbpEZqawGtBLD97IK49D0IBfGL6udc1tlD8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774626; x=1694379426;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Pu874AXqAnFuFEoWLwUCi0oaN1bQ6BNWKx9R8q+zZXk=;
- b=l2zgBb0OktFAHKfctuUolkBXuk27/bpoaJ8ek6CSnBI16CR5ep49ZZtRw4dFSog/7N
- /1zqCYCtDYrpSQf9ORxVOd3Gxu2tkq+UQKmQ6GM8Kr0ET53k3/ZDX6umDyP4zwHnuAN+
- mJG90WH4r3XgwaF4OuhlGUTGvBexLNPEzycLJc4fbCcSiVWqsctElzE7w/BaB3br5fxM
- WsckNZFlPUEwonV+yE5sbkJSI9dHlQldbBV3irt3lso+E0jo6YsO3Ps9qIecipflORTr
- k9Jj/+H4O7Lup0P+aM/tm8Bh4kA71xEgLlIVFqzt2EbnmzzY/9hX8d9ovaLJyE/AWgKe
- TfRg==
-X-Gm-Message-State: AOJu0Yz9zws2UDjCyhPf71TvdZtF2p9Ah2M9El9urKBY1Lqf/gjrOPwJ
- Wx9ycPsqBFZ7CN5bPM9Rp4o7cdyUCnPk+PxqD2/nNQ==
-X-Google-Smtp-Source: AGHT+IGu3c6CExox+4C9h8/JyNKpmciYT1Mbp/YEH5ZidJjjz2xdvPeECf08e0v/Nix3rxEo7KNHrQ==
-X-Received: by 2002:aa7:cfc5:0:b0:525:d95b:cd4c with SMTP id
- r5-20020aa7cfc5000000b00525d95bcd4cmr5892731edy.20.1693774626130; 
- Sun, 03 Sep 2023 13:57:06 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693774627; x=1694379427;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Er+cmfuY24AtPiDqGJnBw1eBcMXGQAsBK3WVqoQh17c=;
+ b=gypMnuddjm8W7Qlz178Mjrk9jzL1PHppZ7oVpcoDovaEPjwith3+cbqp5ibT+XWaaJ
+ EGB7RBh7Yys6JKrB4S+lYTR8eJSmsb6toQlxUlD/9bpvsMGqVdyKVvcr0w1mQKLx3xFE
+ SjMQl7/w3AlmfIHKSZHi9OLrS4vCz5urqwBFIssrTWcQAdgyF/tnsT1X4/QMcXvbonR/
+ yJURAyTG0rVczvyh1MDlFi9IMZlep9c2d1guKa1Y1hPXxOdXDuZ5pRStSyG79ZjXwzZX
+ 2IKX9mQrV2hpaCSCn9jStEJIa55WhfRjaHcbbFxoKxoGQdGg2ODhmQZ3dijTr33vqvvh
+ exhw==
+X-Gm-Message-State: AOJu0YztI7IeHeZ+Z4bObY22gSW1MLzX6zB3agtgZwf+mohTfcn7yIJb
+ 2WpTIvEAL/vfMA1Sv46LJwG1Yb1j3eR0jS7NOUOi2A==
+X-Google-Smtp-Source: AGHT+IFZokVpkIALkymREVl770Jn/Lhpe9ZTqtD74yuWoi4ctLwpq4Wpccj/woooJ+AJ9PLOB/31TQ==
+X-Received: by 2002:a05:6402:517c:b0:52a:38c3:1b49 with SMTP id
+ d28-20020a056402517c00b0052a38c31b49mr5692154ede.40.1693774627148; 
+ Sun, 03 Sep 2023 13:57:07 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- v22-20020aa7d9d6000000b0052568bf9411sm4850232eds.68.2023.09.03.13.57.05
+ v22-20020aa7d9d6000000b0052568bf9411sm4850232eds.68.2023.09.03.13.57.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:57:05 -0700 (PDT)
+ Sun, 03 Sep 2023 13:57:06 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [RFC PATCH 0/5] Support display on stm32f469-disco board
-Date: Sun,  3 Sep 2023 22:56:58 +0200
-Message-Id: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [RFC PATCH 1/5] ARM: dts: stm32f469-disco: sync with Linux 6.5
+Date: Sun,  3 Sep 2023 22:56:59 +0200
+Message-Id: <20230903205703.662080-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
+References: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,32 +94,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The series adds support for the Orise Tech OTM8009A display on the
-stm32f469-disco board. Substantial differences in the drivers for clock
-management, LTDC and DSI compared to Linux, made it necessary to modify
-the device tree. These changes were made in stm32f469-disco-uboot.dtsi to
-avoid altering the Linux device tree. It is therefore desirable, as soon
-as possible, to add these drivers the functionalities so that they do not
-require device tree properties that deviate from those present in the Linux
-version.
+Sync the devicetree with linux 6.5 for stm32f746-disco board.
 
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+---
 
-Dario Binacchi (5):
-  ARM: dts: stm32f469-disco: sync with Linux 6.5
-  ARM: dts: stm32: make the LTDC clock usable by the clock driver
-  ARM: dts: stm32: make the DSI clock usable by the clock driver
-  ARM: dts: stm32: support display on stm32f469-disco board
-  board: stm32f469-disco: add splash screen with stmicroelectronics logo
+ arch/arm/dts/stm32f469-disco.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- arch/arm/dts/stm32f469-disco-u-boot.dtsi |  13 ++++++++
- arch/arm/dts/stm32f469-disco.dts         |   4 +--
- configs/stm32f469-discovery_defconfig    |  16 ++++++++++
- drivers/video/stm32/stm32_ltdc.c         |  37 ++++++++++++++++++++++-
- include/configs/stm32f469-discovery.h    |   2 ++
- tools/logos/stm32f469-discovery.bmp      | Bin 0 -> 18532 bytes
- 6 files changed, 69 insertions(+), 3 deletions(-)
- create mode 100644 tools/logos/stm32f469-discovery.bmp
-
+diff --git a/arch/arm/dts/stm32f469-disco.dts b/arch/arm/dts/stm32f469-disco.dts
+index 6e0ffc1903be..c9acabf0f530 100644
+--- a/arch/arm/dts/stm32f469-disco.dts
++++ b/arch/arm/dts/stm32f469-disco.dts
+@@ -119,7 +119,7 @@
+ 		};
+ 	};
+ 
+-	panel-dsi@0 {
++	panel@0 {
+ 		compatible = "orisetech,otm8009a";
+ 		reg = <0>; /* dsi virtual channel (0..3) */
+ 		reset-gpios = <&gpioh 7 GPIO_ACTIVE_LOW>;
+@@ -138,7 +138,7 @@
+ 	status = "okay";
+ 
+ 	port {
+-		ltdc_out_dsi: endpoint@0 {
++		ltdc_out_dsi: endpoint {
+ 			remote-endpoint = <&dsi_in>;
+ 		};
+ 	};
 -- 
 2.34.1
 
