@@ -4,81 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B9AC71153
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:34:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D37C83F2C
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C96868D0;
-	Sun,  3 Sep 2023 22:34:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 2912986852;
+	Sun,  3 Sep 2023 22:36:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KN9fdILS";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JML4RIW+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 867FA86828; Sun,  3 Sep 2023 22:34:03 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0710F86824; Sun,  3 Sep 2023 22:36:24 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E701F867EF
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:33:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2b962c226ceso12779001fa.3
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:33:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693773238; x=1694378038;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MEeomf7ZPFQybaRfXvdW6XL/l95ik8glYfxOcn+2XI4=;
- b=KN9fdILSHUaDMHZf2P+zPlvqrduoTh7G2PiV6ln2ixhPm0VZgs7rvEgoGkscgdRZ0J
- 3dcLboLi/2RT6x1G0BvtyWsCJNSCY7DderJ5dsQoN/U8sM9Ybopded23qc9wuKTNjmU0
- qh6E5DCfpt7wM4FLZIJlz7SmLQjdMYynzw2kM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693773238; x=1694378038;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MEeomf7ZPFQybaRfXvdW6XL/l95ik8glYfxOcn+2XI4=;
- b=ZEjEm8R28T3KcKndxXV1HmY0gaK5eicSgN63GNhjAORdI5YbRP84SWnmcqSYnHCNUI
- EoolYcO0kP6Bm3Q1kIAbh75w+MQt9+nFNPA+2E+pzewKuiDHuc26z2jEJl6SiZGJAYqv
- bnA9C6VuNtoYVwtI8YfTnXCmpWBnl2E2wjRaXipyEuMfnGqjWHH6sWkAdMgLCBF6MTCr
- CNyOC4GgGW8VtjXcsnoRk0zvPJKMVeieJrEFCaFXDW9T+pywNgNOvnm6GuKCQ2BkIE7z
- CqjbdxfCWndUCyeSyIjle08l8Or8orozFXqX/SaDfUvKMJRDQrHDCpWyQwPpZIvU4XUb
- Cn8A==
-X-Gm-Message-State: AOJu0YyOxtUSqjuaJfP6igoIba4NJvHQfyalEZlV+7/WMCLtsen/obc4
- r3SB+pFB4oHKnr2btjyNFnaHEqtH3SWGqHr+NsCeuA==
-X-Google-Smtp-Source: AGHT+IEoaCH60V/tG+PSeJ1dGrxbWfPcKes0xUV84X+2vQ2YNzEGdX0F4JbShW1vPAmLZSJ/dspgcQ==
-X-Received: by 2002:a2e:b70d:0:b0:2bd:133c:58ff with SMTP id
- j13-20020a2eb70d000000b002bd133c58ffmr5294506ljo.48.1693773237816; 
- Sun, 03 Sep 2023 13:33:57 -0700 (PDT)
-Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
- (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
- by smtp.gmail.com with ESMTPSA id
- pw9-20020a17090720a900b0098884f86e41sm5103232ejb.123.2023.09.03.13.33.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:33:57 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marc Kleine-Budde <mkl@pengutronix.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 2/3] ARM: dts: stm32: add pin map for CAN controller on stm32f4
-Date: Sun,  3 Sep 2023 22:33:51 +0200
-Message-Id: <20230903203352.658691-3-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230903203352.658691-1-dario.binacchi@amarulasolutions.com>
-References: <20230903203352.658691-1-dario.binacchi@amarulasolutions.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 24F3D867B5
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:36:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pali@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 4E94860B88;
+ Sun,  3 Sep 2023 20:36:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65C30C433C8;
+ Sun,  3 Sep 2023 20:36:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1693773378;
+ bh=gtjDe8Zr9Jh0j7YH0J9byoWtcdApyE+7i5Vkn9kVLzA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=JML4RIW+fK0AD0XA2lhycBiXSt07goH0R8NLhKbhL/dsYcb4iUaxxI15HeR8j4Kkd
+ 39Rd6XES7wb7g4N9MBmRyGTkFoFt1ebRj8tgYAislXS+zSibHs4NN4DkYFDIBVHq0h
+ eCKzy2YAboTGUdQdNBW09HqmcAj6gAv/IIggscMXj1ay3rnsBJLLWF2r89Qr0Yzj6V
+ 7fij09dZH28w8mMuFnxOUKgYjzFEcKK7uj+Dch8zFd5P7ZbJStbshpvW1j+4RUHL7n
+ zp67YhMVprYg3x+dFOR8nAhRwat8ZWnjaA3NW6pfoe2oRSM30wzT6ELgJw6ZQ1oU8I
+ SqgSMMX80SHPA==
+Received: by pali.im (Postfix)
+ id 873CA736; Sun,  3 Sep 2023 22:36:15 +0200 (CEST)
+Date: Sun, 3 Sep 2023 22:36:15 +0200
+From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 32/32] pci: serial: Support reading PCI-register size
+ with base
+Message-ID: <20230903203615.ncyjug2prctiufk2@pali>
+References: <20230830190422.GE3101304@bill-the-cat>
+ <20230830191036.hecw3vyabdsczxrb@pali>
+ <20230830194157.GF3101304@bill-the-cat>
+ <20230830194409.a7acogmn54gajmk6@pali>
+ <20230830205145.t75fkjhnc7kjux3z@pali>
+ <20230830210842.GG3101304@bill-the-cat>
+ <20230830211316.5ywrzq6gmxzvdl4o@pali>
+ <20230830212620.GH3101304@bill-the-cat>
+ <20230830212934.tl2bnmmls2ajdj46@pali>
+ <20230830214201.GM3101304@bill-the-cat>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230830214201.GM3101304@bill-the-cat>
+User-Agent: NeoMutt/20180716
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,61 +84,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 559a6e75b4bcf0fc9e41d34865e72cf742f67d8e Linux upstream.
+You are not saying truth here, you are lying and you know it. mvebu
+changes? ignored, no answer. ppc changes? ignored no answer in 10
+months. mmc changes, no answer at all. rx-51 bug reports and regression
+which you and your people broke? you wrote me: fuck you and fix it
+yourself. So what does compromise means for you? Just "Pali has to do
+anything". So yes, I'm refusing to do all this dirty jobs for you. This
+is not any compromise, maybe just in your head or your language.
+Compromise is something like, you will fix regression what you and your
+people caused and I then I will look at some of the pending patches for
+which I'm listed as reviewer. Helping do debug? Nobody helped me with
+anything. Do you still you think that I'm such idiot who is going to
+review more and more of your code and you continue ignoring me?? No.
 
-Add pin configurations for using CAN controller on stm32f469-disco
-board. They are located on the Arduino compatible connector CN5 (CAN1)
-and on the extension connector CN12 (CAN2).
+On Wednesday 30 August 2023 17:42:01 Tom Rini wrote:
+> On Wed, Aug 30, 2023 at 11:29:34PM +0200, Pali Rohár wrote:
+> 
+> > There were no answers.
+> > 
+> > On Wednesday 30 August 2023 17:26:20 Tom Rini wrote:
+> > > I'm trimming the CC list. All of those points you list were addressed
+> > > and answered in your last long running argument. You need to decide what
+> > > is best for you moving forward and I would ask that it not involve
+> > > complaining that you're being asked to review code that you're a listed
+> > > maintainer of.
+> > > 
+> > > On Wed, Aug 30, 2023 at 11:13:16PM +0200, Pali Rohár wrote:
+> > > > Seems that you completely miss the point of the argument, then the only
+> > > > option for such people is to repeat them. Or have I repeat you again
+> > > > that you have not answered the first question, why you are asking for
+> > > > review from somebody who you are ignoring and not taking into account?
+> > > > You do not want to answer this question, right? So you rather change a
+> > > > topic and talking about something totally different.
+> > > > 
+> > > > On Wednesday 30 August 2023 17:08:42 Tom Rini wrote:
+> > > > > I don't think it's worth re-hashing the same arguments over and over.
+> > > > > There is no "my persons", there is the public community.  If you no
+> > > > > longer wish to participate, I can remove you from the maintainers
+> > > > > entries you're listed in.  But please stop with the long arguments
+> > > > > unrelated to the patches at hand when there's a dozen people and other
+> > > > > lists on CC.
+> > > > > 
+> > > > > On Wed, Aug 30, 2023 at 10:51:45PM +0200, Pali Rohár wrote:
+> > > > > > So lets recap what you and your persons have done in last 6 months:
+> > > > > > 
+> > > > > > * Ignored my changes
+> > > > > > * Ignored my reviews
+> > > > > > * Ignored my reminders
+> 
+> Not ignored, changes requested and refused.  Compromises refused.
+> Apologies from others who had said they would pick up the platform and
+> push it, but did not have time ignored.
+> 
+> > > > > > * Ignored my regression reports
+> 
+> Not ignored, debugged, problems with your platform implementation
+> reported and questions asked, patches provided to help you debug the
+> problem on the single place that seems to show a problem which no one
+> else can reproduce ignored.
+> 
+> -- 
+> Tom
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/all/20230328073328.3949796-5-dario.binacchi@amarulasolutions.com
-Signed-off-by: Marc Kleine-Budde <mkl@pengutronix.de>
----
-
- arch/arm/dts/stm32f4-pinctrl.dtsi | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
-
-diff --git a/arch/arm/dts/stm32f4-pinctrl.dtsi b/arch/arm/dts/stm32f4-pinctrl.dtsi
-index 46815c965d59..0adc41b2a46c 100644
---- a/arch/arm/dts/stm32f4-pinctrl.dtsi
-+++ b/arch/arm/dts/stm32f4-pinctrl.dtsi
-@@ -412,6 +412,36 @@
- 					slew-rate = <2>;
- 				};
- 			};
-+
-+			can1_pins_a: can1-0 {
-+				pins1 {
-+					pinmux = <STM32_PINMUX('B', 9, AF9)>; /* CAN1_TX */
-+				};
-+				pins2 {
-+					pinmux = <STM32_PINMUX('B', 8, AF9)>; /* CAN1_RX */
-+					bias-pull-up;
-+				};
-+			};
-+
-+			can2_pins_a: can2-0 {
-+				pins1 {
-+					pinmux = <STM32_PINMUX('B', 13, AF9)>; /* CAN2_TX */
-+				};
-+				pins2 {
-+					pinmux = <STM32_PINMUX('B', 5, AF9)>; /* CAN2_RX */
-+					bias-pull-up;
-+				};
-+			};
-+
-+			can2_pins_b: can2-1 {
-+				pins1 {
-+					pinmux = <STM32_PINMUX('B', 13, AF9)>; /* CAN2_TX */
-+				};
-+				pins2 {
-+					pinmux = <STM32_PINMUX('B', 12, AF9)>; /* CAN2_RX */
-+					bias-pull-up;
-+				};
-+			};
- 		};
- 	};
- };
--- 
-2.34.1
 
