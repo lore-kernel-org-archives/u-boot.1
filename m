@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E568C83F2C
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 09:51:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A9CC83F2D
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 10:04:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33B82857BF;
-	Sun,  3 Sep 2023 11:51:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2DC686411;
+	Sun,  3 Sep 2023 12:04:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XNvEsp0r";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="s2JgSUVf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCD4686411; Sun,  3 Sep 2023 11:51:48 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 0C0A08645D; Sun,  3 Sep 2023 12:04:27 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B78F18144A
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 11:51:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C6B78144A
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 12:04:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-58d40c2debeso5016967b3.2
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 02:51:45 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-59205f26e47so4565217b3.2
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 03:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693734704; x=1694339504; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NZ4g0wXB1BzRTv48k10Sp/UcJoyOiv9boFd1Y8Fvj7s=;
- b=XNvEsp0rBdnVc0qs95Nb0Xb9WlLnAgwB8YU1rscXrITpZcYqB9ILu5cFT9HR3AQzex
- YKlxa7Jc/8cEkOcOQNoEw3TdWcpWvHXLws1rcOERT98nGgxH34qn9vVGQmxokJ0I739M
- /F3nKb60v1rwepwScg0abpbhisytsZ/g/F7Pa+MsBRs6JtXnCc66bsxb9I1mmln7L6Js
- f/sRUcEl7Kh9Iuj/1zlC1NWOBSMJ347azL04E63+45FiNoqFVkNcFryxNjHbQMqb2DfM
- pg3y+WHxZaH92ktkgNvoOZBdVncKU8Nmnugm3zkBqQxguUzhgoUw9YpniJAKkSuLhNAW
- DJqA==
+ d=gmail.com; s=20221208; t=1693735463; x=1694340263; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KUaUF7VXaRONIuKRMXNN3DD5B/+p8ChZGXymCnzFFxU=;
+ b=s2JgSUVfKIyHLyl3usgdkxg543ZF7S+Xp6ErLIdSwAeEO+pIzSDYPoamZDUt/wfxHy
+ mGzVQLP7ZtZ+uI8JCwMtpfSTGdjsaBW2j5F13ieoNXiDN1Cm8rX3/bK4Q7THP0bHZ1W3
+ xbZ2g6ybgZXIHszHcXljpbeRJCxJLBGdIETlILOOi+fY+huWsfIqd+yWyJ9xJLcj2Vn/
+ 1kCIhg546jPBRc371nJOvlPsUl0CwqCYf4p30KjDs61nzp33uElR76yo+Wje8FC9lzkk
+ kOY8efFnOW/JGv+48vWwHy77BBdmKhR14o7vtFbRRrnVTA1s1EC3h17WKD9iH/yeC1tE
+ PEGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693734704; x=1694339504;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NZ4g0wXB1BzRTv48k10Sp/UcJoyOiv9boFd1Y8Fvj7s=;
- b=UkCEddSYgYaQkNB/0dq/xYbhQ+LSroYfnSIhYxugDAJuhvdBesicj7/gDSt7H7vFNS
- 89Kq+4JqhjCyQ21iFObQWTKDXkS6biZ4Z/aMps1hvCnJSrw+ra/xr4o/Zu+AyjdzwMiS
- ehRT5+zUvjdwQZqhIx+Qo4NGaZxIEq/f5VDGsFCHlwZfC9bclLaTnGFNft6mk2VweH2S
- cFDZ50v0qMHzeSh/HbWSN2TsYNFoG4E5d1uIopl9UHdWcAzM+Jw8iQ83gB6aKpLk06Ge
- PpAu/kqIjnm0Pz9slC3ZGQ14JJfPMjvIZVhOsimsBbe1b+PcudD2WbMVnV4DpGiRIxNG
- l0LA==
-X-Gm-Message-State: AOJu0Yw/6e/Y62APhOUTUZWK0NKmYgvAMpKNYDP8T0KH+hCaISMaoVNf
- o2XmoqBPYQdAdo+BcD1Nrly5aTH0gXQpR9aPQGI=
-X-Google-Smtp-Source: AGHT+IFaMqgSUur2hSAqAqqf6gTFIkKF28QJ92f/RTs6GgKvDbrtYl4Nds/6HNg2olQYi16Ysoq99VAm4142eGt9AGw=
-X-Received: by 2002:a0d:df97:0:b0:589:f883:c8f1 with SMTP id
- i145-20020a0ddf97000000b00589f883c8f1mr7660465ywe.37.1693734704389; Sun, 03
- Sep 2023 02:51:44 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693735463; x=1694340263;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KUaUF7VXaRONIuKRMXNN3DD5B/+p8ChZGXymCnzFFxU=;
+ b=H7N52D0nya8yd9UJ7Ity4oZTuo0TzoyaXoxXSz1YGtoEaQYSxLUXPT9DRkjYYA3ZCA
+ Zz3/WV18nbFRHiwS8+8h2YBpLPehqk4PVBSY0BxBCYoRQTMauWZK/8vW8Louik+Up5TR
+ k8eWYVQWfHXOnq17HDd9kUKccCkQ3QZiRAzuCQWHO9m04o5u+WdmF7yQ+4vpSrDUeSAZ
+ ZZYsxKDrGPyMm3MRIwpigCcoenYB1/B3pg8qB+Lysnp45R8IVOy/mMdpIU+iKdlF98fc
+ ct5QpMZAiG7a/i2Q4+IhGyESAS2KP+eecCsdL7e6oAfUQs+RLPUscpGQczT/E1S++rV4
+ H0dQ==
+X-Gm-Message-State: AOJu0YzrLbxsDf3An5PFGlbW4Pvwv4nh23vwXtqYNHZYuiRoVABj4+yA
+ RHooWGA06kajrvuG82t9j1EaUraCx4mDdwKZyAjQIoS031ex6w==
+X-Google-Smtp-Source: AGHT+IGptiv1qocRDYoKQJlpQCepUmf1/EvoTbjlQa+X9DhuCq1glxmSK/FN6fbqefwNh+53tILLP4IpYgRr661OEew=
+X-Received: by 2002:a81:91d2:0:b0:577:417b:8e90 with SMTP id
+ i201-20020a8191d2000000b00577417b8e90mr7656313ywg.10.1693735463026; Sun, 03
+ Sep 2023 03:04:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230902163212.343746-1-massimo.pegorer+oss@gmail.com>
- <56b4c1d1-e86c-722c-c9fa-87082cae8307@gmail.com>
-In-Reply-To: <56b4c1d1-e86c-722c-c9fa-87082cae8307@gmail.com>
+References: <20230902163159.343716-1-massimo.pegorer+oss@gmail.com>
+In-Reply-To: <20230902163159.343716-1-massimo.pegorer+oss@gmail.com>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sun, 3 Sep 2023 11:51:33 +0200
-Message-ID: <CAC928Ha2qUwbYv6yuAsf2f4qmCCoaA4-ya4B6qY48bJ60GgXaQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] doc: rockchip: Update and complete info about RK3308
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+Date: Sun, 3 Sep 2023 12:04:12 +0200
+Message-ID: <CAC928HY_6fotX5DnQMR4=pAojOTjMFhSmOQLX3sD87UF+ruQJw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] rockchip: Use an external TPL binary on RK3308
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, 
  Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>,
@@ -89,91 +86,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+Il giorno sab 2 set 2023 alle ore 18:32 Massimo Pegorer
+<massimo.pegorer+oss@gmail.com> ha scritto:
+>
+> There is no support to initialize DRAM on RK3308 SoC using U-Boot
+> TPL and therefore an external TPL binary must be used to generate
+> a bootable u-boot-rockchip.bin image.
+>
+> Imply ROCKCHIP_EXTERNAL_TPL by default for RK3308 builds. Remove
+> useless TPL_SERIAL.
+>
+> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+> ---
+>  arch/arm/mach-rockchip/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index a279582f4f..e8584de258 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -159,6 +159,7 @@ config ROCKCHIP_RK3308
+>         select SPL_ATF
+>         select SPL_ATF_NO_PLATFORM_PARAM
+>         select SPL_LOAD_FIT
+> +       imply ROCKCHIP_EXTERNAL_TPL
+>         imply ROCKCHIP_COMMON_BOARD
+>         imply SPL_ROCKCHIP_COMMON_BOARD
+>         imply SPL_CLK
+> @@ -166,7 +167,6 @@ config ROCKCHIP_RK3308
+>         imply SPL_SYSCON
+>         imply SPL_RAM
+>         imply SPL_SERIAL
+> -       imply TPL_SERIAL
+>         imply SPL_SEPARATE_BSS
+>         help
+>           The Rockchip RK3308 is a ARM-based Soc which embedded with quad
+> --
+> 2.34.1
+>
 
-Il giorno dom 3 set 2023 alle ore 10:36 Johan Jonker
-<jbx6244@gmail.com> ha scritto:
->
->
->
-> On 9/2/23 18:32, Massimo Pegorer wrote:
-> > Update documentation about build steps for RK3308, using an external
-> > TPL. Add RK3308 case to rST document. Add ROCK Pi S in the list of
-> > supported boards.
-> >
-> > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> > ---
-> >  doc/README.rockchip             |  4 ++--
-> >  doc/board/rockchip/rockchip.rst | 10 ++++++++++
-> >  2 files changed, 12 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/doc/README.rockchip b/doc/README.rockchip
-> > index 52b5140eca..cfbd858c3b 100644
-> > --- a/doc/README.rockchip
-> > +++ b/doc/README.rockchip
-> > @@ -38,16 +38,16 @@ Building
-> >      (or you can use another cross compiler if you prefer)
-> >
->
-> >  2. To build RK3308 board:
-> > +
-> >     - Get the rkbin
-> >       => git clone https://github.com/rockchip-linux/rkbin.git
-> >
-> >     - Compile U-Boot
-> >       => cd /path/to/u-boot
-> >       => export BL31=/path/to/rkbin/bin/rk33/rk3308_bl31_v2.22.elf
-> > +     => export ROCKCHIP_TPL=/path/to/rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin
-> >       => make roc-cc-rk3308_defconfig
-> >       => make CROSS_COMPILE=aarch64-linux-gnu- all
-> > -     => ./tools/mkimage -n rk3308 -T rksd -d /path/to/rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin idbloader.img
-> > -     => cat spl/u-boot-spl.bin  >> idbloader.img
-> >
->
-> Hi Massimo,
->
-> The text in this document should moved to doc/board/rockchip.
-> This paragraph above is therefor redundant, so it can be removed I think.
->
-> Johan
+I've just noticed that Jonas followed a different approach for RK3568
+and RK3588:
 
-OK, thanks, I agree on redundant. But I do not know if everything here
-- other than RK3308 info - has already been moved to
-doc/board/rockchip.rst, so to remove it. On the other hand, leaving as
-it is (i.e. not updated) would be misleading.
+config ROCKCHIP_EXTERNAL_TPL
+    bool "Use external TPL binary"
+    default y if ROCKCHIP_RK3568 || ROCKCHIP_RK3588
 
-If everybody agree I can remove it in a V2, or otherwise just delete
-the RK3308 section.
+Is any one preferred? I slightly prefer the one I've done, as it gives
+a terse picture of what a SoC select/imply in a single place. Of
+course I can change it in a V2, if Jonas way is preferred, and to have
+a single congruent way to do things.
 
+Thanks. Regards,
 Massimo
-
-> >  3. To build RK3399 board:
-> >
-> > diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> > index de9fe8e642..b38c3d3136 100644
-> > --- a/doc/board/rockchip/rockchip.rst
-> > +++ b/doc/board/rockchip/rockchip.rst
-> > @@ -53,6 +53,7 @@ List of mainline supported Rockchip boards:
-> >       - Google Speedy (chromebook_speedy)
-> >       - Amarula Vyasa-RK3288 (vyasa-rk3288)
-> >  * rk3308
-> > +     - Radxa ROCK Pi S (rock-pi-s-rk3308)
-> >       - Rockchip Evb-RK3308 (evb-rk3308)
-> >       - Roc-cc-RK3308 (roc-cc-rk3308)
-> >  * rk3326
-> > @@ -172,6 +173,15 @@ To build rk3288 boards:
-> >          make evb-rk3288_defconfig
-> >          make CROSS_COMPILE=arm-linux-gnueabihf-
-> >
-> > +To build rk3308 boards:
-> > +
-> > +.. code-block:: bash
-> > +
-> > +        export BL31=../rkbin/bin/rk33/rk3308_bl31_vX.YZ.elf
-> > +        export ROCKCHIP_TPL=../rkbin/bin/rk33/rk3308_ddr_589MHz_uart0_m0_vX.YZ.bin
-> > +        make evb-rk3308_defconfig
-> > +        make CROSS_COMPILE=aarch64-linux-gnu-
-> > +
-> >  To build rk3328 boards:
-> >
-> >  .. code-block:: bash
