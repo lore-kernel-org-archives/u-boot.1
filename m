@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B54C88CB2
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E41C71153
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF478867F7;
-	Sun,  3 Sep 2023 22:48:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 59F8A86867;
+	Sun,  3 Sep 2023 22:48:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="l6wILCaG";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="RfsVElQ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F2D4864CF; Sun,  3 Sep 2023 22:48:56 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id C934F86813; Sun,  3 Sep 2023 22:48:57 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAF4C864CF
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:48:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E914786504
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:48:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-99bc9e3cbf1so176321866b.0
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:48:53 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-99bcf2de59cso125397366b.0
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:48:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774133; x=1694378933;
+ d=amarulasolutions.com; s=google; t=1693774134; x=1694378934;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4QKPM1XwohIlginldl+jOoz/CGz32GSR1vatPUJR834=;
- b=l6wILCaGSElMUMF1kBBz6ZJ8/a1D+3ckEJ81330Xh2LjZqLCUhwhzaTx3R8uh4YBkK
- 00jVH5Q8Uh8yeSmxTG43XBNsqZ0L0wSeT+gbiY6Mslyth1waKxuguPt3u7Esq/8Ls0eS
- 2C72rb+FDZPONjBffBSLUjnX9zl1iX5Ve3UhA=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7v/T47c4cyvP0ZBQxSABDrZzKs6stbyxJ2yX9+Ibn8w=;
+ b=RfsVElQ7lw3jTdN/nhkydQSfy7TthFSxeCg9kSljmzG76JUJgBow8h7xyNb+2JQ2EZ
+ 14ypElKoXnEeweFQw7AcItQpryj+aiYT88dMUPf9yKBtKP7OwKi7ipvUTn6Nv7E64pLh
+ pMVa+H7Lrub7gWeh80obwuwimYHezIIcTK0sI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774133; x=1694378933;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4QKPM1XwohIlginldl+jOoz/CGz32GSR1vatPUJR834=;
- b=Imhsz+2W63/XYUzsk5pl+zyAojmNesovaqzRI7EzMKs1/A7HRs6O180Vnw5CoRUS2V
- TAtIhI/5pYiPHcl4OJRBL6CaogNesG4B09fvNfZdeNA+65wZUaOlFb633oQ9Qk+MEyn8
- cN/LQYk5+xL/HGr6h6GxP6hMZxkfZbOHVDI3uBqZVWFPeDUtXTPg0LQtj+VSGUPDpJ2Z
- Uo0NadQf/TgvYh9oAg6QSdb3v1sthCQP8w62NbulGZ7snosZ6VSswj78jCD8vSfKmhVX
- 5KXBzgt7JVJZdqShk2cCfY5/zFlymRxTxCmJl88MZo0X5BOMrlhGLUlAdv73fLup+HnN
- rq0w==
-X-Gm-Message-State: AOJu0Yw90UM91dhzF6ZiTuyEtAJhAqPHEsD5uhk9hd7uS6fgsyU1mn+Z
- t9HEl869F6IcJLHUGJj3auqikgLi9Y37BkV+0/3SQw==
-X-Google-Smtp-Source: AGHT+IGbphW7BS9Ha2hfF7l97wgo8w4OxoK5DhOqWofNQP06zuTgZWlfzbNhZuxVLXNx5unZ0DSK+w==
-X-Received: by 2002:a17:907:7b9e:b0:9a1:d29c:fb6b with SMTP id
- ne30-20020a1709077b9e00b009a1d29cfb6bmr12483582ejc.25.1693774132761; 
- Sun, 03 Sep 2023 13:48:52 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693774134; x=1694378934;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7v/T47c4cyvP0ZBQxSABDrZzKs6stbyxJ2yX9+Ibn8w=;
+ b=L5LdMXZ56NUSuBI5hLCuw8aha8kNAT0gk238ZKAYyevU8VPmxHQcHABfRKuanmE9Ld
+ ozhoqq30UrZRTyXDp8JfApaxjm0MCuUPaQPnM21IlVh2bZSJUCAA7C9eahyOuva5Noa6
+ /qxFCKMAryomQJNSCRFUWuDwVO92RrulHwjuH1Bkj/FkcjBHO2bjp1GWFzaAg551x099
+ DX57mSDA2Tiy7OJ4IgaWDC7MWbJvxhNU8PZSz6HUfRwx9BwaaKlnKN6DgBnjm63ATPEV
+ eGIO0hRbwDCc/Ha7UvEFcaT6ghDM6GNkfo3xnJwLGpBaoCHyHYY9HECi8ymI/s7dTxCX
+ 1hGw==
+X-Gm-Message-State: AOJu0Yzhbu1ktxuy/80Qb35+8VjJY7kGMeyN4mdABvik3bBR2ZIG9QTS
+ 7Fquv2euuNdN/uOO873c1u7KoYhMxTCYxrDavuArzw==
+X-Google-Smtp-Source: AGHT+IEd+voLKr49j9NBJ2ZPx0YBVE/q6iq3Wj+HRes2K0jTK2A5HB0gttgtu5yF3yXaQBMeOm04ng==
+X-Received: by 2002:a17:906:1009:b0:9a5:db06:4264 with SMTP id
+ 9-20020a170906100900b009a5db064264mr6718778ejm.72.1693774134022; 
+ Sun, 03 Sep 2023 13:48:54 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.51
+ w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:48:52 -0700 (PDT)
+ Sun, 03 Sep 2023 13:48:53 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Lee Jones <lee@kernel.org>, Marc Kleine-Budde <mkl@pengutronix.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
+ Lee Jones <lee@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- =?UTF-8?q?Rapha=C3=ABl=20Gallais-Pou?= <raphael.gallais-pou@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 00/10] ARM: dts: stm32f746 sync with Linux kernel 6.5
-Date: Sun,  3 Sep 2023 22:48:39 +0200
-Message-Id: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 01/10] dt-bindings: mfd: stm32f7: Add binding definition for
+ CAN3
+Date: Sun,  3 Sep 2023 22:48:40 +0200
+Message-Id: <20230903204849.660722-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
+References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,32 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series contains my patches on the device tree for stm32f746-disco board
-that have already been merged into the Linux mainline. Since most of them
-applied perfectly, and for the remaining ones, only minimal changes were made,
-I preferred not to merge them into a single patch, which would have been less
-readable.
+commit 8f3ef556f8e1a670895f59ef3f01e4e26edd63e3 Linux upstream.
 
+Add binding definition for CAN3 peripheral.
 
-Dario Binacchi (10):
-  dt-bindings: mfd: stm32f7: Add binding definition for CAN3
-  ARM: dts: stm32: add pin map for CAN controller on stm32f7
-  ARM: dts: stm32: add CAN support on stm32f746
-  ARM: dts: stm32: use RCC macro for CRC node on stm32f746
-  ARM: dts: stm32: add pin map for i2c3 controller on stm32f7
-  ARM: dts: stm32: add touchscreen on stm32f746-disco board
-  ARM: dts: stm32: add ltdc support on stm32f746 MCU
-  ARM: dts: stm32: add pin map for LTDC on stm32f7
-  ARM: dts: stm32: rename mmc_vcard to vcc-3v3 on stm32f746-disco
-  ARM: dts: stm32: support display on stm32f746-disco board
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Link: https://lore.kernel.org/r/20230423172528.1398158-2-dario.binacchi@amarulasolutions.com
+Signed-off-by: Lee Jones <lee@kernel.org>
+---
 
- arch/arm/dts/stm32f7-pinctrl.dtsi        | 126 +++++++++++++++++++++++
- arch/arm/dts/stm32f746-disco-u-boot.dtsi | 103 +++++-------------
- arch/arm/dts/stm32f746-disco.dts         |  69 ++++++++++++-
- arch/arm/dts/stm32f746.dtsi              |  59 ++++++++++-
- include/dt-bindings/mfd/stm32f7-rcc.h    |   1 +
- 5 files changed, 276 insertions(+), 82 deletions(-)
+ include/dt-bindings/mfd/stm32f7-rcc.h | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/include/dt-bindings/mfd/stm32f7-rcc.h b/include/dt-bindings/mfd/stm32f7-rcc.h
+index ba5cb7456ee4..a4e4f9271395 100644
+--- a/include/dt-bindings/mfd/stm32f7-rcc.h
++++ b/include/dt-bindings/mfd/stm32f7-rcc.h
+@@ -64,6 +64,7 @@
+ #define STM32F7_RCC_APB1_TIM14		8
+ #define STM32F7_RCC_APB1_LPTIM1		9
+ #define STM32F7_RCC_APB1_WWDG		11
++#define STM32F7_RCC_APB1_CAN3		13
+ #define STM32F7_RCC_APB1_SPI2		14
+ #define STM32F7_RCC_APB1_SPI3		15
+ #define STM32F7_RCC_APB1_SPDIFRX	16
 -- 
 2.34.1
 
