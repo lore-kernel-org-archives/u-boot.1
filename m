@@ -4,70 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAC7C83F2C
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 08:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE742C83F2D
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 08:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C0528144A;
-	Sun,  3 Sep 2023 10:17:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B21098144A;
+	Sun,  3 Sep 2023 10:36:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="mPQGYWeT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rkfJRNjK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBC8B80DF7; Sun,  3 Sep 2023 10:17:30 +0200 (CEST)
-Received: from s.wrqvtbkv.outbound-mail.sendgrid.net
- (s.wrqvtbkv.outbound-mail.sendgrid.net [149.72.123.24])
+ id BACD486411; Sun,  3 Sep 2023 10:36:18 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B91EF8144A
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 10:17:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C348D80DF7
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 10:36:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
- content-transfer-encoding:cc:content-type:from:subject:to;
- s=s1; bh=h4Cd6XheZ1KyVphKWuvh5WMbBHrA/lgVgOHKRicqxa0=;
- b=mPQGYWeTmnmtQ+4JJnfpcUahJxon5TDZ2vjm63Rhl9xKdk6WEQGgCGi2XoUqaLgI6KdX
- BpGSLx4F2z76UtYtxG0Y/K6L74BgH0HJ6J3orq0qPCvJ+p7XLRNSbG4qPEK6C4USqB1p6T
- qD0s04gK8B2bKRT9TavUPghWJbySqaq49QC446qpssznQvpi1c4c6gnWIeguo5xxax3EeO
- +1qyBiyGLG5ftsi3asgvZsYHFLPNvmZvo5IALo9Tx5r6RNnFYcXF4kyWLhB9Eq3QjKnNPJ
- UXqATlEn+pwY8jczZaqchr8DTEJSXkJSIFrwF0SYisSlhxeDCFUmHKJulojGaBTQ==
-Received: by filterdrecv-66949dbc98-mtdwq with SMTP id
- filterdrecv-66949dbc98-mtdwq-1-64F44116-8
- 2023-09-03 08:17:26.326324131 +0000 UTC m=+6068545.576114068
-Received: from [192.168.1.50] (unknown) by geopod-ismtpd-8 (SG) with ESMTP
- id znDJN7CtTnmtTsFu2N7dgQ Sun, 03 Sep 2023 08:17:25.960 +0000 (UTC)
-Message-ID: <cb381ee1-fbbf-54b3-873a-d3003cc4b528@kwiboo.se>
-Date: Sun, 03 Sep 2023 08:17:26 +0000 (UTC)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-52a0856b4fdso530851a12.1
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 01:36:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693730175; x=1694334975; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=+G5QYVL3+hvY85o0CjD5TRSPpqGwNv93hSonhwNSf5I=;
+ b=rkfJRNjKB9PQHc+o+iqLY496bL21NgvQuKP+O5KPg7n/iuwnfrkooIlRyZUFMiNS3o
+ JSQFLNQ2vOKhNAYMsobR5c7o5dsRCBCeK1+nMFCbV0PwzTBDau/LhN2nwW2NChcoyTnN
+ BOkiCVy16wYNl/Ez0wzgrrYzHXbAo9MPxzklPsR+/b2UfMux5u/Gnlqb2zDzrmg4cLWh
+ OXRDOah+juzp7SIW6Dufe3gFZ3WhRs5ZEFWLXxP3JetX/IwaiYSkQNwRCsTN11Ouqq34
+ N0Y1zSUJl2l9mBTvuFLu7yxxxmCe7Y9HpjNqdVzZQJDFeLZnv4+oTvPd+rNczfI48OUv
+ besA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693730175; x=1694334975;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+G5QYVL3+hvY85o0CjD5TRSPpqGwNv93hSonhwNSf5I=;
+ b=BTwMEbTYHpY/ap/ZmDj96xZ5sgAzQgvVHq/zvvSo/N2+ivkjLlBoR6+ROcKhwJ9Y98
+ B5fqASUy90t5zT2mmAqC1pno+xjAREm62iZFTSjIYKuhWlrbpOtxJVq5Yw0VW+F7+pPx
+ yIuIJSYpqL5pj0K96RgQQvpSJEg+pe99SfurSOUQa1LB1efqY1l0uNVW4sY3eXa31YS5
+ KQXTceJLgryLbYlNX+P34bkADd7XQ7jVa93Gbjmb44iTP+iKHhynLkns89zgVwka1FKZ
+ Z7E1eopKlqNIk3U4ugl8rk8oXFbtbZpg4f3IjxuS0fARaUo2f2k5C7pXY8EtgZIah5mD
+ CgEQ==
+X-Gm-Message-State: AOJu0YxMgEY35rB4qPqI/thR1bc6wm+ng50VxOUvmq1WxIHbtEWx31HU
+ zyswtJMtbV/njf84z8vwawI=
+X-Google-Smtp-Source: AGHT+IH+VivfYye3tgvwlrfTXOrsiTXiDLwIqPfgx63wLrZNHGzDAYMxISM3yA2sBiT09wbzkKIutA==
+X-Received: by 2002:a17:906:cc18:b0:9a2:24c8:4d82 with SMTP id
+ ml24-20020a170906cc1800b009a224c84d82mr5001428ejb.64.1693730175129; 
+ Sun, 03 Sep 2023 01:36:15 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ i27-20020a1709063c5b00b009a1fd22257fsm4456499ejg.207.2023.09.03.01.36.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 03 Sep 2023 01:36:14 -0700 (PDT)
+Message-ID: <56b4c1d1-e86c-722c-c9fa-87082cae8307@gmail.com>
+Date: Sun, 3 Sep 2023 10:36:13 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v5 05/11] spl: Convert mmc to spl_load
-References: <20230731224304.111081-1-sean.anderson@seco.com>
- <20230731224304.111081-6-sean.anderson@seco.com>
- <ZMtl65DZ0NmO7pZO@xdrudis.tinet.cat>
- <4546689a-5b75-9ae3-3dd8-1a15bf896b5a@seco.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH 2/2] doc: rockchip: Update and complete info about RK3308
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@edgeble.ai>, FUKAUMI Naoki <naoki@radxa.com>
+References: <20230902163212.343746-1-massimo.pegorer+oss@gmail.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <4546689a-5b75-9ae3-3dd8-1a15bf896b5a@seco.com>
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h8aGp4B9djA480Vsu?=
- =?us-ascii?Q?202tVarAIMDrNzserP7k9Kes6xJv=2FL9iLZKy69U?=
- =?us-ascii?Q?lTC2DkzcDkgTHLxQHdIf9sZUWKklNExLpDKZkFU?=
- =?us-ascii?Q?4BshmeN=2F19P+4Gcew44rbTX5Z2wbdDvFwZhEG1K?=
- =?us-ascii?Q?h3xz7Krg0QlBg40JWUY2qI+ZN5X4OLO6BZzp3e?=
-To: Sean Anderson <sean.anderson@seco.com>, Xavier Drudis Ferran
- <xdrudis@tinet.cat>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Pali =?iso-8859-1?b?Um9o4XI=?= <pali@kernel.org>, Stefan Roese <sr@denx.de>,
- Marek =?iso-8859-1?b?QmVo+m4=?= <marek.behun@nic.cz>, Simon Glass
- <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut
- <marex@denx.de>
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Type: text/plain; charset=us-ascii
+From: Johan Jonker <jbx6244@gmail.com>
+In-Reply-To: <20230902163212.343746-1-massimo.pegorer+oss@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,68 +96,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-08-03 18:11, Sean Anderson wrote:
-> On 8/3/23 04:31, Xavier Drudis Ferran wrote:
->> El Mon, Jul 31, 2023 at 06:42:57PM -0400, Sean Anderson deia:
->>> This converts the mmc loader to spl_load. Legacy images are handled by
->>> spl_load (via spl_parse_image_header), so mmc_load_legacy can be
->>> omitted.
->>>
->>
->> Yes. I haven't used the legacy case, but by looking at the code, it
->> seems to me that mmc_load_legacy left the image at some mapped memory
->> at [ spl_image->load_addr,   spl_image->load_addr + size )
->> and the new code does too, but when the image is not aligned, the
->> memory that gets written to
->> was at [ spl_image->load_addr,   spl_image->load_addr + size + spl_image->offset % mmc->read_bl_len )
->> and it will
->> be at [ spl_image->load_addr - spl_image->offset % mmc->read_bl_len,   spl_image->load_addr + size )
->> after this patch.
->>
->> Meaning both with or without this patch some memory outside the image
->> gets written when the image is not aligned on media, but before it was
->> some part of a block at the end and now is that part before the
->> beginning.
->>
->> Whether that's better or worse I don't know. It depends on whether
->> it's a problem to write in non mapped memory, whether there's
->> something worth preserving there, and whether some SOC has some sort
->> of special behaving memory just there, like it happened with the issue
->> Jerome Forissier found (note in this case it wasn't legacy, it was
->> simple fit)
+
+
+On 9/2/23 18:32, Massimo Pegorer wrote:
+> Update documentation about build steps for RK3308, using an external
+> TPL. Add RK3308 case to rST document. Add ROCK Pi S in the list of
+> supported boards.
 > 
-> Fundamentally, we can't really deal with unaligned images without a
-> bounce-buffer. The method used by SPL_LOAD_FIT_IMAGE_BUFFER_SIZE will
-> continue working, since we call into the FIT routines to load the image.
-> I would like to defer bounce buffering for other images until someone
-> actually needs it.
+> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+> ---
+>  doc/README.rockchip             |  4 ++--
+>  doc/board/rockchip/rockchip.rst | 10 ++++++++++
+>  2 files changed, 12 insertions(+), 2 deletions(-)
 > 
-> Note that in the FIT case, you can also do `mkimage -EB`, at least if
-> you aren't using FIT_LOAD_FULL.
+> diff --git a/doc/README.rockchip b/doc/README.rockchip
+> index 52b5140eca..cfbd858c3b 100644
+> --- a/doc/README.rockchip
+> +++ b/doc/README.rockchip
+> @@ -38,16 +38,16 @@ Building
+>      (or you can use another cross compiler if you prefer)
+>  
 
-With the following two commits introduced in v2023.04-rc1, the alignment
-issue for Rockchip has been fixed and all external data is now accessed
-block aligned.
+>  2. To build RK3308 board:
+> +
+>     - Get the rkbin
+>       => git clone https://github.com/rockchip-linux/rkbin.git
+>  
+>     - Compile U-Boot
+>       => cd /path/to/u-boot
+>       => export BL31=/path/to/rkbin/bin/rk33/rk3308_bl31_v2.22.elf
+> +     => export ROCKCHIP_TPL=/path/to/rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin
+>       => make roc-cc-rk3308_defconfig
+>       => make CROSS_COMPILE=aarch64-linux-gnu- all
+> -     => ./tools/mkimage -n rk3308 -T rksd -d /path/to/rkbin/bin/rk33/rk3308_ddr_589MHz_uart2_m0_v1.26.bin idbloader.img
+> -     => cat spl/u-boot-spl.bin  >> idbloader.img
+>  
 
-9b2fd2d22852 ("binman: Add support for align argument to mkimage tool")
-5ad03fc77dfa ("rockchip: Align FIT image data to SD/MMC block length")
+Hi Massimo,
 
-Regards,
-Jonas
+The text in this document should moved to doc/board/rockchip.
+This paragraph above is therefor redundant, so it can be removed I think.
 
-> 
-> --Sean
-> 
->> https://patchwork.ozlabs.org/project/uboot/patch/c941d835a85255ff81a21c72069c3a9fc9a8a255.1656489154.git.jerome.forissier@linaro.org/
->>                                                                   
->>> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
->>> ---
->>>
->>> Changes in v5:
->>> - Rework to load header in spl_load
->>>
->>>  common/spl/spl_mmc.c | 91 ++++----------------------------------------
->>>  1 file changed, 8 insertions(+), 83 deletions(-)
->>>
+Johan
 
-[...]
+>  3. To build RK3399 board:
+>  
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index de9fe8e642..b38c3d3136 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -53,6 +53,7 @@ List of mainline supported Rockchip boards:
+>       - Google Speedy (chromebook_speedy)
+>       - Amarula Vyasa-RK3288 (vyasa-rk3288)
+>  * rk3308
+> +     - Radxa ROCK Pi S (rock-pi-s-rk3308)
+>       - Rockchip Evb-RK3308 (evb-rk3308)
+>       - Roc-cc-RK3308 (roc-cc-rk3308)
+>  * rk3326
+> @@ -172,6 +173,15 @@ To build rk3288 boards:
+>          make evb-rk3288_defconfig
+>          make CROSS_COMPILE=arm-linux-gnueabihf-
+>  
+> +To build rk3308 boards:
+> +
+> +.. code-block:: bash
+> +
+> +        export BL31=../rkbin/bin/rk33/rk3308_bl31_vX.YZ.elf
+> +        export ROCKCHIP_TPL=../rkbin/bin/rk33/rk3308_ddr_589MHz_uart0_m0_vX.YZ.bin
+> +        make evb-rk3308_defconfig
+> +        make CROSS_COMPILE=aarch64-linux-gnu-
+> +
+>  To build rk3328 boards:
+>  
+>  .. code-block:: bash
