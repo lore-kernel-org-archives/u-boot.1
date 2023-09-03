@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1194EC71153
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12402C83F2C
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:50:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 909F88693D;
+	by phobos.denx.de (Postfix) with ESMTP id D733B86954;
 	Sun,  3 Sep 2023 22:49:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MzZsyCOj";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KyPoZxo4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58397867E2; Sun,  3 Sep 2023 22:49:07 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 558258693D; Sun,  3 Sep 2023 22:49:08 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C060868BB
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:49:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87D8A86901
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:49:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-991c786369cso125791266b.1
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:49:04 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-52a49a42353so1162071a12.2
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:49:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774138; x=1694378938;
+ d=amarulasolutions.com; s=google; t=1693774145; x=1694378945;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j7MgzMUgLOIoOxHVOIHBX1f8KoDdp05bomfoJMS2h+Q=;
- b=MzZsyCOju45ekHdQxHWmalkgkf8HAIfEDwSy6Gvh09HQdZ5pxIfQSC7XceARWiILfO
- /ly1h7wAy5uAJW77ETUNTQ4sMhy3k6f33v842YcYGAwvmywXP4WTn4qM/j0G0BY6SlTc
- oxODMUb9Yi5oU07ozLY166ayBZY3k0wwZfID4=
+ bh=oU/q22HAug8UzsnmuC0vhco1L9LOpbnUW7H8vuRFmVk=;
+ b=KyPoZxo4Xcgd/pX9tnDrO0UuOJArnJg4ISIoUj3l84QRwjusrE+E5ep/hAd6VDmhhm
+ QObIzdgbPEdrM2DpjLQcgRfg5vy4Eb2B6xf3g0fte+qP1+cdspzI0ymLrmWqZHCrHWvf
+ DILWN1ffIOCqvx+SEQzQyaKj+ZiCBtYqL8SOg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774138; x=1694378938;
+ d=1e100.net; s=20221208; t=1693774145; x=1694378945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j7MgzMUgLOIoOxHVOIHBX1f8KoDdp05bomfoJMS2h+Q=;
- b=lN7YemEuECi16mW9hYH4n7CWP2BonlOx9K7R0p/6TOy4fSrBLItGe85SZSJ3zKBrqy
- X0aw4buENbf/4SkNzJjBauUYBvO7/4mZzPIEg8JQWZsdH6E7YDVwIvV4HZnZFnaWnaJH
- tAIj9ymzLg9DHS7EMu8w4NCAUJGerjXcucjWUm1ezcGEyDmuzAqx9agVUyb4A3gI0AGe
- ua1NIkvDuzygXupg6H8Uuc+BN8iqA+1B9SoyRhltt0fYpzE1Bf8OF2ySGuXv9GYUcE+n
- XXgv1oDxKjuIYSPGkde/rLEtgaAdEw8/wO8KAXkPSfczbHLnxdkMJ3Y2KORpwZKYsHr4
- U8uQ==
-X-Gm-Message-State: AOJu0YyclB1RY8p6gpiBjmEOV16Avufh9HMDHYWE1gi2MFJaW+UkuNPX
- 2IrRDFJyfIbLUpQ8tFL1kpuFbfcBx0pVDy2bgSPbLg==
-X-Google-Smtp-Source: AGHT+IFkPVaiHP4mgGp02Yh3rtCCcpTINMxvW8wPiTNv1OzzRWb3emrQJGcy3G7CrBp12ziHbWT0Pg==
-X-Received: by 2002:a17:907:7751:b0:9a2:28dc:4168 with SMTP id
- kx17-20020a170907775100b009a228dc4168mr6119502ejc.61.1693774138798; 
- Sun, 03 Sep 2023 13:48:58 -0700 (PDT)
+ bh=oU/q22HAug8UzsnmuC0vhco1L9LOpbnUW7H8vuRFmVk=;
+ b=YlPWFj9UNZ8KNA8/wAqpbMMTDcjsOyvuBC3EFemGFOF5H9Sx19iXTvVNXZnwVCoIBk
+ N3sxv1ae9gGGJ7oNsEOdmWJR6LocQql9pnoW1XRApe+iapGAlf/JpAZh4DNwXZRnagnc
+ jKPsbL6doY07CWxoCBL2EG4BjdtVfoFFrNywMxVgCkZ/zexAQsJSMqk9hnSqz8udHz1X
+ FRhJSIbCUoe/AthAosi048cYlnZZGMPg1YjWwYt20yVp1zNq+fctTlyfGa9ainuwzk6K
+ +KSU/pEHiZmkI1r6+uJ9tsU5c8N0/xswS6zh01GlpdFbjT8V1lQ4hg+io3J9WSWc4rjk
+ qUNQ==
+X-Gm-Message-State: AOJu0YzJEDZm2g4VMlqcIQk3qWNF+qCo0RUOtNa1EBwFg+Xb90e0Dr/U
+ 0HVLfNVjNNAeuzYJ3vMHvtomcdTfb+B+uiTXSkUAxg==
+X-Google-Smtp-Source: AGHT+IGlY+8nKiSRsyM1BgA1H4VgnlW6bGKVNGvAsqdRq4IfNuiv5Qb3NzW/kDlSMfdxvm1KuJCXNg==
+X-Received: by 2002:a17:906:2210:b0:994:1eb4:6898 with SMTP id
+ s16-20020a170906221000b009941eb46898mr6619562ejs.9.1693774144766; 
+ Sun, 03 Sep 2023 13:49:04 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.57
+ w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.49.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:48:58 -0700 (PDT)
+ Sun, 03 Sep 2023 13:49:04 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Marc Kleine-Budde <mkl@pengutronix.de>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- =?UTF-8?q?Rapha=C3=ABl=20Gallais-Pou?= <raphael.gallais-pou@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 05/10] ARM: dts: stm32: add pin map for i2c3 controller on
- stm32f7
-Date: Sun,  3 Sep 2023 22:48:44 +0200
-Message-Id: <20230903204849.660722-6-dario.binacchi@amarulasolutions.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 10/10] ARM: dts: stm32: support display on stm32f746-disco
+ board
+Date: Sun,  3 Sep 2023 22:48:49 +0200
+Message-Id: <20230903204849.660722-11-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
@@ -98,38 +97,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 0637e66f8250c61f75042131fcb7f88ead2ad436 Linux upstream.
-
-Add pin configurations for using i2c3 controller on stm32f7.
+The patch applies the changes from Linux commit 10a970bc3ebfa ("ARM: dts:
+stm32: support display on stm32f746-disco board") and removes the same
+settings from stm32f746-disco-u-boot.dtsi.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
+
 ---
 
- arch/arm/dts/stm32f7-pinctrl.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi | 89 ++++++------------------
+ arch/arm/dts/stm32f746-disco.dts         | 44 ++++++++++++
+ 2 files changed, 66 insertions(+), 67 deletions(-)
 
-diff --git a/arch/arm/dts/stm32f7-pinctrl.dtsi b/arch/arm/dts/stm32f7-pinctrl.dtsi
-index 000278ec2c58..607fe42f4f46 100644
---- a/arch/arm/dts/stm32f7-pinctrl.dtsi
-+++ b/arch/arm/dts/stm32f7-pinctrl.dtsi
-@@ -172,6 +172,16 @@
- 				};
- 			};
+diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+index 3c2b9fc59512..1b42d6cbbc19 100644
+--- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+@@ -23,12 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
  
-+			i2c3_pins_a: i2c3-0 {
-+				pins {
-+					pinmux = <STM32_PINMUX('H', 8, AF4)>, /* I2C3_SDA */
-+						 <STM32_PINMUX('H', 7, AF4)>; /* I2C3_SCL */
-+					bias-disable;
-+					drive-open-drain;
-+					slew-rate = <0>;
-+				};
-+			};
+-	backlight: backlight {
+-		compatible = "gpio-backlight";
+-		gpios = <&gpiok 3 0>;
+-		status = "okay";
+-	};
+-
+ 	button1 {
+ 		compatible = "st,button1";
+ 		button-gpio = <&gpioi 11 0>;
+@@ -38,37 +32,10 @@
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpioi 1 0>;
+ 	};
+-
+-	panel-rgb@0 {
+-		compatible = "simple-panel";
+-		backlight = <&backlight>;
+-		enable-gpios = <&gpioi 12 0>;
+-		status = "okay";
+-
+-		display-timings {
+-			timing@0 {
+-				clock-frequency = <9000000>;
+-				hactive = <480>;
+-				vactive = <272>;
+-				hfront-porch = <2>;
+-				hback-porch = <2>;
+-				hsync-len = <41>;
+-				vfront-porch = <2>;
+-				vback-porch = <2>;
+-				vsync-len = <10>;
+-				hsync-active = <0>;
+-				vsync-active = <0>;
+-				de-active = <1>;
+-				pixelclk-active = <1>;
+-			};
+-		};
+-	};
+ };
+ 
+ &ltdc {
+ 	clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
+-	pinctrl-0 = <&ltdc_pins>;
+-	status = "okay";
+ 	bootph-all;
+ };
+ 
+@@ -96,6 +63,28 @@
+ 	};
+ };
+ 
++&panel_rgb {
++	compatible = "simple-panel";
 +
- 			usbotg_hs_pins_a: usbotg-hs-0 {
- 				pins {
- 					pinmux = <STM32_PINMUX('H', 4, AF10)>, /* OTG_HS_ULPI_NXT */
++	display-timings {
++		timing@0 {
++			clock-frequency = <9000000>;
++			hactive = <480>;
++			vactive = <272>;
++			hfront-porch = <2>;
++			hback-porch = <2>;
++			hsync-len = <41>;
++			vfront-porch = <2>;
++			vback-porch = <2>;
++			vsync-len = <10>;
++			hsync-active = <0>;
++			vsync-active = <0>;
++			de-active = <1>;
++			pixelclk-active = <1>;
++		};
++	};
++};
++
+ &pinctrl {
+ 	ethernet_mii: mii@0 {
+ 		pins {
+@@ -160,40 +149,6 @@
+ 		};
+ 	};
+ 
+-	ltdc_pins: ltdc@0 {
+-		pins {
+-			pinmux = <STM32_PINMUX('E', 4, AF14)>, /* B0 */
+-				 <STM32_PINMUX('G',12, AF9)>,  /* B4 */
+-				 <STM32_PINMUX('I', 9, AF14)>, /* VSYNC */
+-				 <STM32_PINMUX('I',10, AF14)>, /* HSYNC */
+-				 <STM32_PINMUX('I',14, AF14)>, /* CLK */
+-				 <STM32_PINMUX('I',15, AF14)>, /* R0 */
+-				 <STM32_PINMUX('J', 0, AF14)>, /* R1 */
+-				 <STM32_PINMUX('J', 1, AF14)>, /* R2 */
+-				 <STM32_PINMUX('J', 2, AF14)>, /* R3 */
+-				 <STM32_PINMUX('J', 3, AF14)>, /* R4 */
+-				 <STM32_PINMUX('J', 4, AF14)>, /* R5 */
+-				 <STM32_PINMUX('J', 5, AF14)>, /* R6 */
+-				 <STM32_PINMUX('J', 6, AF14)>, /* R7 */
+-				 <STM32_PINMUX('J', 7, AF14)>, /* G0 */
+-				 <STM32_PINMUX('J', 8, AF14)>, /* G1 */
+-				 <STM32_PINMUX('J', 9, AF14)>, /* G2 */
+-				 <STM32_PINMUX('J',10, AF14)>, /* G3 */
+-				 <STM32_PINMUX('J',11, AF14)>, /* G4 */
+-				 <STM32_PINMUX('J',13, AF14)>, /* B1 */
+-				 <STM32_PINMUX('J',14, AF14)>, /* B2 */
+-				 <STM32_PINMUX('J',15, AF14)>, /* B3 */
+-				 <STM32_PINMUX('K', 0, AF14)>, /* G5 */
+-				 <STM32_PINMUX('K', 1, AF14)>, /* G6 */
+-				 <STM32_PINMUX('K', 2, AF14)>, /* G7 */
+-				 <STM32_PINMUX('K', 4, AF14)>, /* B5 */
+-				 <STM32_PINMUX('K', 5, AF14)>, /* B6 */
+-				 <STM32_PINMUX('K', 6, AF14)>, /* B7 */
+-				 <STM32_PINMUX('K', 7, AF14)>; /* DE */
+-			slew-rate = <2>;
+-		};
+-	};
+-
+ 	qspi_pins: qspi@0 {
+ 		pins {
+ 			pinmux = <STM32_PINMUX('B', 2, AF9)>, /* CLK */
+diff --git a/arch/arm/dts/stm32f746-disco.dts b/arch/arm/dts/stm32f746-disco.dts
+index e1564d69f9f6..431275134033 100644
+--- a/arch/arm/dts/stm32f746-disco.dts
++++ b/arch/arm/dts/stm32f746-disco.dts
+@@ -25,6 +25,19 @@
+ 		reg = <0xC0000000 0x800000>;
+ 	};
+ 
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		linux,cma {
++			compatible = "shared-dma-pool";
++			no-map;
++			size = <0x80000>;
++			linux,dma-default;
++		};
++	};
++
+ 	aliases {
+ 		serial0 = &usart1;
+ 	};
+@@ -50,6 +63,25 @@
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
+ 	};
++
++	backlight: backlight {
++		compatible = "gpio-backlight";
++		gpios = <&gpiok 3 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++	};
++
++	panel_rgb: panel-rgb {
++		compatible = "rocktech,rk043fn48h";
++		power-supply = <&vcc_3v3>;
++		backlight = <&backlight>;
++		enable-gpios = <&gpioi 12 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++		port {
++			panel_in_rgb: endpoint {
++				remote-endpoint = <&ltdc_out_rgb>;
++			};
++		};
++	};
+ };
+ 
+ &clk_hse {
+@@ -80,6 +112,18 @@
+ 	};
+ };
+ 
++&ltdc {
++	pinctrl-0 = <&ltdc_pins_a>;
++	pinctrl-names = "default";
++	status = "okay";
++
++	port {
++		ltdc_out_rgb: endpoint {
++			remote-endpoint = <&panel_in_rgb>;
++		};
++	};
++};
++
+ &sdio1 {
+ 	status = "okay";
+ 	vmmc-supply = <&vcc_3v3>;
 -- 
 2.34.1
 
