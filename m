@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E87ACC83F2C
-	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B9AC71153
+	for <u-boot@archiver.kernel.org>; Sun,  3 Sep 2023 20:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 765158688B;
+	by phobos.denx.de (Postfix) with ESMTP id B8C96868D0;
 	Sun,  3 Sep 2023 22:34:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="bZKeG4Jf";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KN9fdILS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC5638682B; Sun,  3 Sep 2023 22:34:02 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 867FA86828; Sun,  3 Sep 2023 22:34:03 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D35E986504
- for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:33:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E701F867EF
+ for <u-boot@lists.denx.de>; Sun,  3 Sep 2023 22:33:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2bd0a5a5abbso11717161fa.0
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:33:59 -0700 (PDT)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2b962c226ceso12779001fa.3
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 13:33:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693773239; x=1694378039;
+ d=amarulasolutions.com; s=google; t=1693773238; x=1694378038;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sD2hlYlCgVuW77uU7td9BkSqqVZKqgGImD1ny70Cgk8=;
- b=bZKeG4JfwXkcvWlA23dxsUMkiZVsB3+aF1pp7KIc7ca+R4aCxaJWcpERwEP2cZCCSm
- rmqHXIy4S2w6MtgIZmHCqEh0jvZox0bunEZcpwukewIbajmIA21QlPo6k0fLbvoLSXXr
- mh1bU7mKv8jBx0YOpeUtACL+ZNFNENh3jMfS4=
+ bh=MEeomf7ZPFQybaRfXvdW6XL/l95ik8glYfxOcn+2XI4=;
+ b=KN9fdILSHUaDMHZf2P+zPlvqrduoTh7G2PiV6ln2ixhPm0VZgs7rvEgoGkscgdRZ0J
+ 3dcLboLi/2RT6x1G0BvtyWsCJNSCY7DderJ5dsQoN/U8sM9Ybopded23qc9wuKTNjmU0
+ qh6E5DCfpt7wM4FLZIJlz7SmLQjdMYynzw2kM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693773239; x=1694378039;
+ d=1e100.net; s=20221208; t=1693773238; x=1694378038;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sD2hlYlCgVuW77uU7td9BkSqqVZKqgGImD1ny70Cgk8=;
- b=jGOHAsuPo4MqxaFetjK7Q7fPGqtkocTe6dPSyWahOR8efoHK7WuSdqOru8+JtN/bSo
- 921pwoc2PrP7WpLqDsfiAALSixsetUWadhoYB5F9xZJG0dqtUY8lednXLNc4suxodgAi
- BCrtIfRoCsAtQ5/0VQiLd6Qr4qFrlwf6Ne5dunXxwRQIeNVDG/MsZoYLcuBzVKQwNlef
- myJRmdZjLQajuIzILJe3HG5GIIK/ib5oTnoN6I8IeoF8Rysi+2Ch6MJZ6S6uS+/EDdqI
- X0OWvudW/BKcqk3Dyn5nNa3WLo23RZvrQuLR7lRXkcZUtsfjlfg2d6En6z2kMKDYYV8k
- jjEg==
-X-Gm-Message-State: AOJu0YzjmkTYD9guGqYW/MeXLHtgHKH1vegRrAOBIipcCEuA68y9hbVH
- CaVJXbp5QHw34IxR0YUwKmgyfHUOc9vJpulnEueYzw==
-X-Google-Smtp-Source: AGHT+IHbt/tGXxwRItjjCYYthkLlY11NA6kxY6S3nYRYgum6PIYquSnkon8xKeF5RcI5LoHQFUpKHQ==
-X-Received: by 2002:a2e:a401:0:b0:2bb:a14c:f6de with SMTP id
- p1-20020a2ea401000000b002bba14cf6demr5821058ljn.21.1693773238951; 
- Sun, 03 Sep 2023 13:33:58 -0700 (PDT)
+ bh=MEeomf7ZPFQybaRfXvdW6XL/l95ik8glYfxOcn+2XI4=;
+ b=ZEjEm8R28T3KcKndxXV1HmY0gaK5eicSgN63GNhjAORdI5YbRP84SWnmcqSYnHCNUI
+ EoolYcO0kP6Bm3Q1kIAbh75w+MQt9+nFNPA+2E+pzewKuiDHuc26z2jEJl6SiZGJAYqv
+ bnA9C6VuNtoYVwtI8YfTnXCmpWBnl2E2wjRaXipyEuMfnGqjWHH6sWkAdMgLCBF6MTCr
+ CNyOC4GgGW8VtjXcsnoRk0zvPJKMVeieJrEFCaFXDW9T+pywNgNOvnm6GuKCQ2BkIE7z
+ CqjbdxfCWndUCyeSyIjle08l8Or8orozFXqX/SaDfUvKMJRDQrHDCpWyQwPpZIvU4XUb
+ Cn8A==
+X-Gm-Message-State: AOJu0YyOxtUSqjuaJfP6igoIba4NJvHQfyalEZlV+7/WMCLtsen/obc4
+ r3SB+pFB4oHKnr2btjyNFnaHEqtH3SWGqHr+NsCeuA==
+X-Google-Smtp-Source: AGHT+IEoaCH60V/tG+PSeJ1dGrxbWfPcKes0xUV84X+2vQ2YNzEGdX0F4JbShW1vPAmLZSJ/dspgcQ==
+X-Received: by 2002:a2e:b70d:0:b0:2bd:133c:58ff with SMTP id
+ j13-20020a2eb70d000000b002bd133c58ffmr5294506ljo.48.1693773237816; 
+ Sun, 03 Sep 2023 13:33:57 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- pw9-20020a17090720a900b0098884f86e41sm5103232ejb.123.2023.09.03.13.33.58
+ pw9-20020a17090720a900b0098884f86e41sm5103232ejb.123.2023.09.03.13.33.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:33:58 -0700 (PDT)
+ Sun, 03 Sep 2023 13:33:57 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
@@ -71,9 +71,9 @@ Cc: linux-amarula@amarulasolutions.com,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 3/3] ARM: dts: stm32f429: put can2 in secondary mode
-Date: Sun,  3 Sep 2023 22:33:52 +0200
-Message-Id: <20230903203352.658691-4-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 2/3] ARM: dts: stm32: add pin map for CAN controller on stm32f4
+Date: Sun,  3 Sep 2023 22:33:51 +0200
+Message-Id: <20230903203352.658691-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230903203352.658691-1-dario.binacchi@amarulasolutions.com>
 References: <20230903203352.658691-1-dario.binacchi@amarulasolutions.com>
@@ -95,34 +95,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 6b443faa313c519db755ff90be32758fd9c66453 Linux upstream.
+commit 559a6e75b4bcf0fc9e41d34865e72cf742f67d8e Linux upstream.
 
-This is a preparation patch for the upcoming support to manage CAN
-peripherals in single configuration.
-
-The addition ensures backwards compatibility.
+Add pin configurations for using CAN controller on stm32f469-disco
+board. They are located on the Arduino compatible connector CN5 (CAN1)
+and on the extension connector CN12 (CAN2).
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/all/20230427204540.3126234-3-dario.binacchi@amarulasolutions.com
+Link: https://lore.kernel.org/all/20230328073328.3949796-5-dario.binacchi@amarulasolutions.com
 Signed-off-by: Marc Kleine-Budde <mkl@pengutronix.de>
-
 ---
 
- arch/arm/dts/stm32f429.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/stm32f4-pinctrl.dtsi | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/arch/arm/dts/stm32f429.dtsi b/arch/arm/dts/stm32f429.dtsi
-index 22225104fca8..8133ea15b036 100644
---- a/arch/arm/dts/stm32f429.dtsi
-+++ b/arch/arm/dts/stm32f429.dtsi
-@@ -346,6 +346,7 @@
- 			interrupt-names = "tx", "rx0", "rx1", "sce";
- 			resets = <&rcc STM32F4_APB1_RESET(CAN2)>;
- 			clocks = <&rcc 0 STM32F4_APB1_CLOCK(CAN2)>;
-+			st,can-secondary;
- 			st,gcan = <&gcan>;
- 			status = "disabled";
+diff --git a/arch/arm/dts/stm32f4-pinctrl.dtsi b/arch/arm/dts/stm32f4-pinctrl.dtsi
+index 46815c965d59..0adc41b2a46c 100644
+--- a/arch/arm/dts/stm32f4-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f4-pinctrl.dtsi
+@@ -412,6 +412,36 @@
+ 					slew-rate = <2>;
+ 				};
+ 			};
++
++			can1_pins_a: can1-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 9, AF9)>; /* CAN1_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 8, AF9)>; /* CAN1_RX */
++					bias-pull-up;
++				};
++			};
++
++			can2_pins_a: can2-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 13, AF9)>; /* CAN2_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 5, AF9)>; /* CAN2_RX */
++					bias-pull-up;
++				};
++			};
++
++			can2_pins_b: can2-1 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 13, AF9)>; /* CAN2_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 12, AF9)>; /* CAN2_RX */
++					bias-pull-up;
++				};
++			};
  		};
+ 	};
+ };
 -- 
 2.34.1
 
