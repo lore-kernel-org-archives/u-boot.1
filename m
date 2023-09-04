@@ -4,64 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66443C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:53:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DB8C71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 17:04:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFD2C8643D;
-	Mon,  4 Sep 2023 18:52:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id C72B986411;
+	Mon,  4 Sep 2023 19:04:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="bEnUeaWT";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZQO8M6N4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5FEC8682B; Mon,  4 Sep 2023 18:52:57 +0200 (CEST)
-Received: from s.wrqvwxzv.outbound-mail.sendgrid.net
- (s.wrqvwxzv.outbound-mail.sendgrid.net [149.72.154.232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9DC1B863DC; Mon,  4 Sep 2023 19:04:35 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F19AD863DC
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 18:52:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3ACB864EA
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 19:04:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
- content-transfer-encoding:cc:content-type:from:subject:to;
- s=s1; bh=CMka/bQ6hD+aPN9PD/DZoTfml2GvsRONp5MsHJltdbE=;
- b=bEnUeaWTIVVs2jSOWvDt+e8vLfhoWo+26WFSjRnMWuBAJbv6F5PiCjGYcRZ4SKmXbMp4
- YLhns+4WYWYO9k95+FOtcuFS01YNgUT7G/jlZfx4mRqwM1pF+4vOM9red5YhymskM5b7tb
- qhJ2sWEKr/g5mTKD4R0z5UgkEeR9pmFuqJuWv5Az0EvLMx0dsuLWcmGXlsUQol1F0DNfLK
- e7+wNx0bMieGnjUi8IebfTFMsGA8/7mbtKpdIlVZW/EihO9Wwx2lD7ch44TlfszAdxRAYM
- kbUoVBPuxKYhYWGZ3u5fEUaE9cbIMHgoLPAGbCFXtdwsdcuntSd6zL1cBLCz+5vQ==
-Received: by filterdrecv-d7bbbc8bf-s5hdm with SMTP id
- filterdrecv-d7bbbc8bf-s5hdm-1-64F60B65-16
- 2023-09-04 16:52:53.44216519 +0000 UTC m=+10084395.378913855
-Received: from [192.168.1.50] (unknown) by geopod-ismtpd-9 (SG) with ESMTP
- id gU9U6rOLSQuEEyDg4ftDfQ Mon, 04 Sep 2023 16:52:53.124 +0000 (UTC)
-Message-ID: <c2b9e22b-e55a-03d3-1bac-f7801a8d60c4@kwiboo.se>
-Date: Mon, 04 Sep 2023 16:52:53 +0000 (UTC)
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6686D3F545
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:04:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1693847072;
+ bh=vqmXg+PQmpUuETCxaBQ4H0u5QR0X0+Hkr68gvTbScjo=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=ZQO8M6N4voWV+EiJxPLA/Wirrrw/kS9hUth9KUy9xO/ReU46BizPy+NL4uQPBPqak
+ /h1pv3gIxp2YUpfH6JFDVSgwfXysueP/O+roAjwyPre4pr8AkXg4p6Qiij7DjhkFHJ
+ XUxd3fALpbUVUHZNAAc6zsjq++kOb883ssZsU6K1svx+IP2IUJ2OFrHK7K2cVojzJU
+ 8inRzJvHHV6ForaA5KumYP/7KTOaFAvVTVl479cZAExFjD++Q3O3ptlnkAA/MlRluA
+ 4ksjGbej8/85oegqkrufe61d9oe1UuM6+j49pRv1w2II95y3fD+54X2g0OF+BhEZC9
+ 9XaeAtWjveCqA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-3f42bcef2acso11689055e9.2
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 10:04:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693847072; x=1694451872;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vqmXg+PQmpUuETCxaBQ4H0u5QR0X0+Hkr68gvTbScjo=;
+ b=V8NFM8RhLC5s/d2CJ3n9xBtHpvHbbTFHOAsJI1s1u11M9hu3h88DsNG4ea5AeGsDlN
+ ACsWPD923aigm0ZWXFB3WQnWnH2lLuBkCjDAsV2rpVGua1POyKHUpVPXdtamUlHcpZFd
+ DTnevxd/+5eyRZ9v5Ud8Zf2qc2kZ9IhIEEYLtOadroS1A0ZqGHqobE/CddHng+s5FjeF
+ XzF729HF6gZsmuEbBW4+WWpP3B1nZxfpZkNkKPaELmhv1IlP0OU4mDkCYklDOMBH6MW9
+ LzwI+BXTBgqfhrHYH6hF+bYzYmQTnplAyk4eLDiTQ6G/UQaMrG705PBu2hUjXbprS8Il
+ +qtw==
+X-Gm-Message-State: AOJu0YztrGV5Nn9jW1RW2F45xuWUdKbYm4xO2hLuQnyGCmFsghAA0vHt
+ kWSLtkXxNmH7cMSSHhS5+er1tYOZz47wK/GqCBESYMeqqL6XnfJptRc0eqDFHhw7zNH2Nvq8fe9
+ ruFgAvtfKZ3g+liqY24fn6E/6lenxQ10=
+X-Received: by 2002:a05:600c:2108:b0:401:b1c6:97d8 with SMTP id
+ u8-20020a05600c210800b00401b1c697d8mr8393401wml.35.1693847071946; 
+ Mon, 04 Sep 2023 10:04:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEAOVkoNCfqQ5F/Pe7xWY3338SbyJlADru2vmj8Q0V/7tIHw5a0lkGacqTTMoNFCYLlglgFpA==
+X-Received: by 2002:a05:600c:2108:b0:401:b1c6:97d8 with SMTP id
+ u8-20020a05600c210800b00401b1c697d8mr8393386wml.35.1693847071608; 
+ Mon, 04 Sep 2023 10:04:31 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ l21-20020a7bc455000000b003fe195cecb3sm17869334wmi.38.2023.09.04.10.04.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 Sep 2023 10:04:30 -0700 (PDT)
+Message-ID: <0469a0ae-b336-4ccd-9539-bf5d793c401d@canonical.com>
+Date: Mon, 4 Sep 2023 19:05:28 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: Binman how to build using Rockchip BL32 binary as OP-TEE
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/4] part: rename disk_partition_type_uuid()
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Joshua Watt <jpewhacker@gmail.com>,
+ u-boot@lists.denx.de
+References: <20230902073524.87451-1-heinrich.schuchardt@canonical.com>
+ <20230902073524.87451-2-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ0UYquSyqyCoAYVG3UmiB-K07oyUsE6pXds_E1BiGf9NA@mail.gmail.com>
 Content-Language: en-US
-References: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h0ZprrWiKLPiVuR2y?=
- =?us-ascii?Q?KmEKax=2FXMEfgPND1WQtqLQz3lYyrBVMMNFj93WO?=
- =?us-ascii?Q?RHmHrsMFa4tZioPbIOt=2FNcSONVI2aD99FgV+Xrq?=
- =?us-ascii?Q?qEZfCcP8LEW1IJGLc+lEl0E2wcemqd=2FQcEe0XwE?=
- =?us-ascii?Q?Fi3UH+lSJcdmzKqsNOoKYfCiwYrZjdxwyW2n51?=
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>, Simon Glass
- <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: u-boot@lists.denx.de
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Type: text/plain; charset=us-ascii
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ0UYquSyqyCoAYVG3UmiB-K07oyUsE6pXds_E1BiGf9NA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,49 +106,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Massimo,
 
-On 2023-09-04 17:05, Massimo Pegorer wrote:
-> Hi,
+
+On 9/4/23 18:48, Simon Glass wrote:
+> Hi Heinrich,
 > 
-> Is there any way for binman to package FIT with U-Boot TF-A and
-> OP-TEE, using bl32 binary provided by Rockchip as TEE?
+> On Sat, 2 Sept 2023 at 01:34, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Rename disk_partition_type_uuid to disk_partition_type_guid.
+>>
+>> Provide function descriptions for the getter and setter.
+>>
+>> Fixes: bcd645428c34 ("part: Add accessors for struct disk_partition type_uuid")
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          new patch
+>> ---
+>>   disk/part_efi.c |  2 +-
+>>   include/part.h  | 26 +++++++++++++++++++++++---
+>>   2 files changed, 24 insertions(+), 4 deletions(-)
 > 
-> I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
-> binman failed.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > 
-> In my poor understanding of Python code, it seems binman accepts only
-> ELF format or a binary format starting with optee_v1_header, but
-> binaries provided by Rockchip in rkbin repository do not have this
-> header.
+> But this doesn't look like a rename
 
-One way that I have used/tested before was to create a tee.elf version
-using something like:
+We replace *uuid by *guid. So the function is renamed.
 
-$ aarch64-linux-gnu-objcopy -B aarch64 -I binary -O elf64-littleaarch64 xxx_bl32_vX.YZ.bin bl32.o
-$ aarch64-linux-gnu-ld bl32.o -T tee.ld -o tee.elf
+Best regards
 
-tee.ld:
-----
-ENTRY(_binary_bl32_bin_start);
-
-SECTIONS
-{
-        . = 0x08400000;
-        .data : {
-                *(.data)
-        }
-}
-----
-
-And then make with TEE=tee.elf, however keep in mind that U-Boot may not
-treat the memory region used by OP-TEE properly for aarch64.
-
-Regards,
-Jonas
+Heinrich
 
 > 
-> Thanks in advance for any hints!
 > 
-> Massimo
-
+>>
+>> diff --git a/disk/part_efi.c b/disk/part_efi.c
+>> index 39382c5fae..b7aef3731b 100644
+>> --- a/disk/part_efi.c
+>> +++ b/disk/part_efi.c
+>> @@ -299,7 +299,7 @@ int part_get_info_efi(struct blk_desc *desc, int part,
+>>          }
+>>          if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID)) {
+>>                  uuid_bin_to_str(gpt_pte[part - 1].partition_type_guid.b,
+>> -                               (char *)disk_partition_type_uuid(info),
+>> +                               (char *)disk_partition_type_guid(info),
+>>                                  UUID_STR_FORMAT_GUID);
+>>          }
+>>
+>> diff --git a/include/part.h b/include/part.h
+>> index f321479a5e..db34bc6bb7 100644
+>> --- a/include/part.h
+>> +++ b/include/part.h
+>> @@ -108,18 +108,38 @@ static inline void disk_partition_clr_uuid(struct disk_partition *info)
+>>   }
+>>
+>>   /* Accessors for struct disk_partition field ->type_guid */
+>> -extern char *__invalid_use_of_disk_partition_type_uuid;
+>> +extern char *__invalid_use_of_disk_partition_type_guid;
+>>
+>> +/**
+>> + * disk_partition_type_guid() - get partition type GUID
+>> + *
+>> + * By using this function to get the partition type GUID we can use
+>> + * 'if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID))' instead of
+>> + * '#ifdef CONFIG_PARTITION_TYPE_GUID'.
+>> + *
+>> + * @info:      partition information
+>> + * Return:     partition type GUID
+>> + */
+>>   static inline const
+>> -char *disk_partition_type_uuid(const struct disk_partition *info)
+>> +char *disk_partition_type_guid(const struct disk_partition *info)
+>>   {
+>>   #ifdef CONFIG_PARTITION_TYPE_GUID
+>>          return info->type_guid;
+>>   #else
+>> -       return __invalid_use_of_disk_partition_type_uuid;
+>> +       return __invalid_use_of_disk_partition_type_guid;
+>>   #endif
+>>   }
+>>
+>> +/**
+>> + * disk_partition_set_type_guid() - set partition type GUID
+>> + *
+>> + * By using this function to set the partition type GUID we can use
+>> + * 'if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID))' instead of
+>> + * '#ifdef CONFIG_PARTITION_TYPE_GUID'.
+>> + *
+>> + * @info:      partition information
+>> + * @val:       partition type GUID as string
+>> + */
+>>   static inline void disk_partition_set_type_guid(struct disk_partition *info,
+>>                                                  const char *val)
+>>   {
+>> --
+>> 2.40.1
+>>
