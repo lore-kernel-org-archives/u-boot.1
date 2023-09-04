@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E88E2C83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:45:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55547C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:45:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D41968698E;
-	Mon,  4 Sep 2023 16:43:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinet.cat
+	by phobos.denx.de (Postfix) with ESMTP id 2E1CE86932;
+	Mon,  4 Sep 2023 16:43:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PNBf88r5";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7F548698E; Mon,  4 Sep 2023 16:43:09 +0200 (CEST)
-Received: from mx1.tinet.cat (smtp.altanet.org [195.76.233.59])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B5FB586915; Mon,  4 Sep 2023 16:43:34 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76AA586A39
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:43:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3227D86A3A
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=tinet.cat
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xdrudis@tinet.cat
-X-ASG-Debug-ID: 1693838585-12aaf213d6514bd0001-4l7tJC
-Received: from smtp01.tinet.cat (smtp01.tinet.org [195.77.216.131]) by
- mx1.tinet.cat with ESMTP id tqZEIM5bXMlUm0dD;
- Mon, 04 Sep 2023 16:43:05 +0200 (CEST)
-X-Barracuda-Envelope-From: xdrudis@tinet.cat
-X-Barracuda-Effective-Source-IP: smtp01.tinet.org[195.77.216.131]
-X-Barracuda-Apparent-Source-IP: 195.77.216.131
-Received: from xdrudis.tinet.cat (42.red-79-152-186.dynamicip.rima-tde.net
- [79.152.186.42])
- by smtp01.tinet.cat (Postfix) with ESMTPSA id 0A581605D080;
- Mon,  4 Sep 2023 16:43:05 +0200 (CEST)
-Date: Mon, 4 Sep 2023 16:42:54 +0200
-From: Xavier Drudis Ferran <xdrudis@tinet.cat>
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Cc: u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2] usb: host: ohci-generic: Make usage of clock/reset
- bulk() API
-Message-ID: <ZPXs3v7NVClBt3ey@xdrudis.tinet.cat>
-X-ASG-Orig-Subj: Re: [PATCH v2] usb: host: ohci-generic: Make usage of
- clock/reset bulk() API
-References: <20230904122021.2088429-1-fabrice.gasnier@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-52c88a03f99so1925307a12.2
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:43:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693838611; x=1694443411; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2crUV0xEHHLo7ADALLmew/OjMjOuFQKdryA82sv8yDI=;
+ b=PNBf88r52fRCh4TZ3Zph6NPVgLPIq8sLGlfKTq+uw2QHNGMeynMZ5avJ/un0Hy4YNO
+ GCdlXCHw8R32NB/V41+8bW19nZNGm1GpWJ9YBXiNluGxGXmQjoG15S1xNOxcsdhP0SJy
+ qfQ4Z3yelOi6kn6gHpN/85BjIk7PiS+joEmlU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693838611; x=1694443411;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2crUV0xEHHLo7ADALLmew/OjMjOuFQKdryA82sv8yDI=;
+ b=BrMjd9Oar+xx5OCuYZXPh2oUF2JLlsRvnE/YbK6dm6S8I7EUoTpxYFTpwCgmlJsvMJ
+ B1liJmMbOuAObeXwtCu4ZF6ETpQI+Yxe+DVoO3Q7iBW3tOM3ZZmiRuTAeI6Q2SOdbI+2
+ RKEeoMuzFNhRCXApPld6nlMkbbGJ1Z+7nQErjoQwRVBpsSMbAzvGLw0ZomzHglyhpG0k
+ KhK3RjDBQ542sl7YaH6HPYPdP3aj+prxWSF+U7flKLxKMF+dgNr9QH9tqalf+p7kGpal
+ 98rQ56kKBSGEugjMoaRxOXs9Jd6Tp8m0neaZSmQ+GwJEnqC1wHjBwuzFXmgxeJXKO8hU
+ 0Pow==
+X-Gm-Message-State: AOJu0YxVC36NE3GTPR9/WavDZxN2OClxCf3mMLQwG9j2luGkStTMXVIs
+ HM3AqbXsDETh1He5BOrnpykIAEaY+UPAa4lion09cngAgXH0xHPjsI0=
+X-Google-Smtp-Source: AGHT+IENMDzJ8OCUP5IQTU2MUwqhXXoEIuemZLhGHVoc9gQ9rtUf3mhxv85fc0PGVd1GfZPf+wMLOLMs/JQ7THrBraU=
+X-Received: by 2002:aa7:cf90:0:b0:525:734a:bf30 with SMTP id
+ z16-20020aa7cf90000000b00525734abf30mr7583488edx.36.1693838610541; Mon, 04
+ Sep 2023 07:43:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20230904122021.2088429-1-fabrice.gasnier@foss.st.com>
-X-Barracuda-Connect: smtp01.tinet.org[195.77.216.131]
-X-Barracuda-Start-Time: 1693838585
-X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
-X-Barracuda-Scan-Msg-Size: 4904
-X-Barracuda-BRTS-Status: 1
-X-Barracuda-Bayes: INNOCENT GLOBAL 0.2540 1.0000 -0.5561
-X-Barracuda-Spam-Score: 0.04
-X-Barracuda-Spam-Status: No, SCORE=0.04 using global scores of TAG_LEVEL=1000.0
- QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=MARKETING_SUBJECT
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.113655
- Rule breakdown below
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- 0.60 MARKETING_SUBJECT      Subject contains popular marketing words
+References: <20230831035319.2316665-1-sjg@chromium.org>
+ <20230831035319.2316665-20-sjg@chromium.org>
+ <20230831140149.GR3101304@bill-the-cat>
+In-Reply-To: <20230831140149.GR3101304@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 4 Sep 2023 08:43:12 -0600
+Message-ID: <CAPnjgZ1qH4oPq23=+DpEBz3o-t=2454yCmzJOJLdF_mCJ38QNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 19/19] boot: Join ARCH_FIXUP_FDT_MEMORY with related
+ options
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,161 +85,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-El Mon, Sep 04, 2023 at 02:20:21PM +0200, Fabrice Gasnier deia:
-> Make usage of clock and reset bulk API in order to simplify the code
-> 
-> Reviewed-by: Marek Vasut <marex@denx.de>
+Hi Tom,
 
-Reviewed-by: Xavier Drudis Ferran <xdrudis@tinet.cat>
+On Thu, 31 Aug 2023 at 08:01, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Aug 30, 2023 at 09:53:13PM -0600, Simon Glass wrote:
+> > Move this to be with the other devicetree-fixup options.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  boot/Kconfig | 16 ++++++++--------
+> >  1 file changed, 8 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index 023446130282..257f4cc085e1 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -693,14 +693,6 @@ config SUPPORT_RAW_INITRD
+> >         address of the initrd must be augmented by it's size, in the following
+> >         format: "<initrd address>:<initrd size>".
+> >
+> > -config ARCH_FIXUP_FDT_MEMORY
+> > -     bool "Enable arch_fixup_memory_banks() call"
+> > -     default y
+> > -     help
+> > -       Enable FDT memory map syncup before OS boot. This feature can be
+> > -       used for booting OS with different memory setup where the part of
+> > -       the memory location should be used for different purpose.
+> > -
+> >  config CHROMEOS
+> >       bool "Support booting Chrome OS"
+> >       help
+> > @@ -1492,6 +1484,14 @@ config FDT_SIMPLEFB
+> >         the presence of the simple frame buffer with associated reserved
+> >         memory
+> >
+> > +config ARCH_FIXUP_FDT_MEMORY
+> > +     bool "Enable arch_fixup_memory_banks() call"
+> > +     default y
+> > +     help
+> > +       Enable FDT memory map syncup before OS boot. This feature can be
+> > +       used for booting OS with different memory setup where the part of
+> > +       the memory location should be used for different purpose.
+> > +
+> >  endmenu
+> >
+> >  endif # OF_LIBFDT
+>
+> It seems like fixups are mixed in with other changes in this menu when
+> we should probably keep the fixups lumped together at least.
 
-Sorry. I don't know why I used the wrong address before.
+From what I can tell all of the things I am putting in this menu
+relate to DT fixups. The naming is a bit odd though, on some of them.
 
-> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> ---
-> 
-> Changes in v2:
-> - fix copy/paste on dev_err message since Marek's review comment
-> - add Marek's review tag
-> 
-> ---
->  drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
->  1 file changed, 29 insertions(+), 63 deletions(-)
-> 
-> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
-> index 2d8d38ce9a40..ceed1911a95a 100644
-> --- a/drivers/usb/host/ohci-generic.c
-> +++ b/drivers/usb/host/ohci-generic.c
-> @@ -16,75 +16,41 @@
->  
->  struct generic_ohci {
->  	ohci_t ohci;
-> -	struct clk *clocks;	/* clock list */
-> -	struct reset_ctl *resets; /* reset list */
-> +	struct clk_bulk clocks;	/* clock list */
-> +	struct reset_ctl_bulk resets; /* reset list */
->  	struct phy phy;
-> -	int clock_count;	/* number of clock in clock list */
-> -	int reset_count;	/* number of reset in reset list */
->  };
->  
->  static int ohci_usb_probe(struct udevice *dev)
->  {
->  	struct ohci_regs *regs = dev_read_addr_ptr(dev);
->  	struct generic_ohci *priv = dev_get_priv(dev);
-> -	int i, err, ret, clock_nb, reset_nb;
-> -
-> -	err = 0;
-> -	priv->clock_count = 0;
-> -	clock_nb = dev_count_phandle_with_args(dev, "clocks", "#clock-cells",
-> -					       0);
-> -	if (clock_nb > 0) {
-> -		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
-> -					    GFP_KERNEL);
-> -		if (!priv->clocks)
-> -			return -ENOMEM;
-> -
-> -		for (i = 0; i < clock_nb; i++) {
-> -			err = clk_get_by_index(dev, i, &priv->clocks[i]);
-> -			if (err < 0)
-> -				break;
-> -
-> -			err = clk_enable(&priv->clocks[i]);
-> -			if (err && err != -ENOSYS) {
-> -				dev_err(dev, "failed to enable clock %d\n", i);
-> -				clk_free(&priv->clocks[i]);
-> -				goto clk_err;
-> -			}
-> -			priv->clock_count++;
-> -		}
-> -	} else if (clock_nb != -ENOENT) {
-> -		dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
-> -		return clock_nb;
-> +	int err, ret;
-> +
-> +	ret = clk_get_bulk(dev, &priv->clocks);
-> +	if (ret && ret != -ENOENT) {
-> +		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	err = clk_enable_bulk(&priv->clocks);
-> +	if (err) {
-> +		dev_err(dev, "Failed to enable clocks (err=%d)\n", err);
-> +		goto clk_err;
->  	}
->  
-> -	priv->reset_count = 0;
-> -	reset_nb = dev_count_phandle_with_args(dev, "resets", "#reset-cells",
-> -					       0);
-> -	if (reset_nb > 0) {
-> -		priv->resets = devm_kcalloc(dev, reset_nb,
-> -					    sizeof(struct reset_ctl),
-> -					    GFP_KERNEL);
-> -		if (!priv->resets)
-> -			return -ENOMEM;
-> -
-> -		for (i = 0; i < reset_nb; i++) {
-> -			err = reset_get_by_index(dev, i, &priv->resets[i]);
-> -			if (err < 0)
-> -				break;
-> -
-> -			err = reset_deassert(&priv->resets[i]);
-> -			if (err) {
-> -				dev_err(dev, "failed to deassert reset %d\n", i);
-> -				reset_free(&priv->resets[i]);
-> -				goto reset_err;
-> -			}
-> -			priv->reset_count++;
-> -		}
-> -	} else if (reset_nb != -ENOENT) {
-> -		dev_err(dev, "failed to get reset phandle(%d)\n", reset_nb);
-> +	err = reset_get_bulk(dev, &priv->resets);
-> +	if (err && err != -ENOENT) {
-> +		dev_err(dev, "failed to get resets (err=%d)\n", err);
->  		goto clk_err;
->  	}
->  
-> +	err = reset_deassert_bulk(&priv->resets);
-> +	if (err) {
-> +		dev_err(dev, "failed to deassert resets (err=%d)\n", err);
-> +		goto reset_err;
-> +	}
-> +
->  	err = generic_setup_phy(dev, &priv->phy, 0);
->  	if (err)
->  		goto reset_err;
-> @@ -101,13 +67,13 @@ phy_err:
->  		dev_err(dev, "failed to shutdown usb phy\n");
->  
->  reset_err:
-> -	ret = reset_release_all(priv->resets, priv->reset_count);
-> +	ret = reset_release_bulk(&priv->resets);
->  	if (ret)
-> -		dev_err(dev, "failed to assert all resets\n");
-> +		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
->  clk_err:
-> -	ret = clk_release_all(priv->clocks, priv->clock_count);
-> +	ret = clk_release_bulk(&priv->clocks);
->  	if (ret)
-> -		dev_err(dev, "failed to disable all clocks\n");
-> +		dev_err(dev, "failed to release clocks (ret=%d)\n", ret);
->  
->  	return err;
->  }
-> @@ -125,11 +91,11 @@ static int ohci_usb_remove(struct udevice *dev)
->  	if (ret)
->  		return ret;
->  
-> -	ret = reset_release_all(priv->resets, priv->reset_count);
-> +	ret = reset_release_bulk(&priv->resets);
->  	if (ret)
->  		return ret;
->  
-> -	return clk_release_all(priv->clocks, priv->clock_count);
-> +	return clk_release_bulk(&priv->clocks);
->  }
->  
->  static const struct udevice_id ohci_usb_ids[] = {
-> -- 
-> 2.25.1
-> 
+Regards,
+Simon
