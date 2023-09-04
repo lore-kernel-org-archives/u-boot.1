@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CA2C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 05:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D19ABC83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 06:00:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77EF0864F5;
-	Mon,  4 Sep 2023 07:59:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01101864F5;
+	Mon,  4 Sep 2023 08:00:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 987CD867F7; Mon,  4 Sep 2023 07:59:11 +0200 (CEST)
+ id EDAAD867F7; Mon,  4 Sep 2023 08:00:20 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7D90864D8
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 07:59:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EFB3864D8
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 08:00:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3845w8Rd086709;
- Mon, 4 Sep 2023 13:58:08 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3845xeAX088302;
+ Mon, 4 Sep 2023 13:59:40 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Mon, 4 Sep 2023 13:58:04 +0800
-Date: Mon, 4 Sep 2023 13:57:08 +0800
+ Mon, 4 Sep 2023 13:59:35 +0800
+Date: Mon, 4 Sep 2023 13:58:43 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Torsten Duwe <duwe@lst.de>
 CC: Rick Chen <rick@andestech.com>, Yanhong Wang
@@ -38,19 +38,18 @@ CC: Rick Chen <rick@andestech.com>, Yanhong Wang
  Mason Huo <mason.huo@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Simon Glass <sjg@chromium.org>,
  <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/2] riscv: allow riscv timer to be instantiated via
- device tree
-Message-ID: <ZPVxtChyM1i3ypTy@swlinux02>
+Subject: Re: [PATCH 2/2] riscv: jh7110: enable riscv,timer in the device tree
+Message-ID: <ZPVyE5qVTrJyRLLK@swlinux02>
 References: <20230814160404.9B2E067373@verein.lst.de>
- <20230814160528.4979467373@verein.lst.de>
+ <20230814160533.D5AE068AFE@verein.lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230814160528.4979467373@verein.lst.de>
+In-Reply-To: <20230814160533.D5AE068AFE@verein.lst.de>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3845w8Rd086709
+X-MAIL: Atcsqr.andestech.com 3845xeAX088302
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,17 +66,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 14, 2023 at 06:05:28PM +0200, Torsten Duwe wrote:
-> For the architectural timer on riscv, there already is a defined
-> device tree binding[1]. Allow timer instances to be created from
-> device tree matches, but for now retain the old mechanism, which
-> registers the timer biggy-back with the CPU.
-> 
-> [1] linux/Documentation/devicetree/bindings/timer/riscv,timer.yaml
+On Mon, Aug 14, 2023 at 06:05:33PM +0200, Torsten Duwe wrote:
+> The JH7110 has the arhitectural CPU timer on all 5 rv64 cores.
+> Note that in the device tree.
 > 
 > Signed-off-by: Torsten Duwe <duwe@suse.de>
 > ---
->  drivers/timer/riscv_timer.c | 28 ++++++++++++++++++++++++++--
->  1 file changed, 26 insertions(+), 2 deletions(-)
+>  arch/riscv/dts/jh7110.dtsi | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
