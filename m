@@ -4,71 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FB9C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 15:55:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB96CC83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E51B386915;
-	Mon,  4 Sep 2023 17:55:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E6BBB8643D;
+	Mon,  4 Sep 2023 18:15:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jLs2crOg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="N8T4pxbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3A5786960; Mon,  4 Sep 2023 17:55:09 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C0EC88682B; Mon,  4 Sep 2023 18:15:33 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3E7D864A7
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:55:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DCE886380
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 18:15:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34f0fd5f871so4081315ab.3
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 08:55:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693842905; x=1694447705; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=s8D1LzX5QtQ4fVaes115LJ+nWAlm0Reu/CDvtuNSULI=;
- b=jLs2crOghs53BUgz/d1D3YqcTDz2TWfi+oKubL5mNuPfb1bjp3FzVwG1d4XRTZyM4g
- zAEb+vYJXKzb/tEyrP8kvm9a3a4QeBFp532iBOhYmeMzU84deNZeW4y5Z0hxTyck+nOK
- ZvwOecXiT4rmwOlcKV7OT64J+/UJj2XCx3Cs4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693842905; x=1694447705;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=s8D1LzX5QtQ4fVaes115LJ+nWAlm0Reu/CDvtuNSULI=;
- b=QL1rqR5Ul5ARDw1zbtkUmwIx+CZOJUQ0hd4opL27k4wGm7xF5BXBn8VzGuh2LmHbAl
- 2gdux+hAwQjyz8/aZxiNvVsi9RVBDCDBWp6v/ygc766qZzFWdZYvdABRdfQ7MCieE7lF
- btVDRan4lJssQHKKbOiuVqDx084JoxWwEtcwEmadU1vvSY/a8a91eV49uPq0oqSv4u84
- AyXXP3c7dtmDjWlnl5pUTc27CSSm/rchhkE4W3GHa408oZq9Z6GX7fXvzDxnOriANiA4
- OyIkPKex+kQ5hWkY0gHETC5/OQmkD/5H7/D9Ch252TFzs8reX7oetbEIaXDANgeS1vnF
- Z8kw==
-X-Gm-Message-State: AOJu0YzW6bgK8CMGV+AcvFGilkRruknH9HtbUmpOLBdVlo93s0GIyFZL
- QWZfTFRStEdV69bjx4iXbckK9poVQrDgzj2aWlg=
-X-Google-Smtp-Source: AGHT+IGk93jqxbZeHXKw+aS24la11HqcJZzEPljZAMmVTZj6P8opqu1XBFa1rpapKn95HPML0pW77Q==
-X-Received: by 2002:a05:6e02:f45:b0:34d:f0b4:787a with SMTP id
- y5-20020a056e020f4500b0034df0b4787amr10190286ilj.15.1693842905269; 
- Mon, 04 Sep 2023 08:55:05 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- cz17-20020a0566384a1100b0042acf389ac8sm3296709jab.130.2023.09.04.08.55.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Sep 2023 08:55:05 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH] buildman: Fix full help for Python 3.8
-Date: Mon,  4 Sep 2023 09:54:59 -0600
-Message-ID: <20230904155501.2715470-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 384GFSLk063007;
+ Mon, 4 Sep 2023 11:15:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693844128;
+ bh=+LCLlFgPuh8QANl3uQ/syoIvywFg3Bi6Bcph1V/UOg8=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=N8T4pxbnHE0DRfIcLsNT0YpGh+MSi5BhKGohCheA+aPQAskl/JejQ3YQqE6zsFqVO
+ zHGMRjNri0GH/o4LwL8La8zLHuLwAyDPxE1ppIeuIJSIXxmePdw64F1hUvxAPhgD03
+ qUofXPoQol2M7+Y/jyDZ08ikr+eakoPcxJhd8DzY=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 384GFSLk027768
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 4 Sep 2023 11:15:28 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
+ Sep 2023 11:15:28 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 4 Sep 2023 11:15:27 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 384GFRvx125368;
+ Mon, 4 Sep 2023 11:15:27 -0500
+Date: Mon, 4 Sep 2023 11:15:27 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+CC: <trini@konsulko.com>, <m-chawdhry@ti.com>, <u-boot@lists.denx.de>,
+ <vigneshr@ti.com>
+Subject: Re: [PATCH] arm: dts: k3-j7*: ddr: Update to 0.10 version of DDR
+ config tool
+Message-ID: <20230904161527.bxpw6kz62zs23o63@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20230828114405.2537829-1-n-francis@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20230828114405.2537829-1-n-francis@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,46 +80,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With Python versions older than 3.9 Buildman produces an error on
-start-up. Fix this with a workaround for importlib.
+Hi Neha!
 
-There is already a workaround for v3.6 but I am not sure if that is still
-functioning.
+On August 28, 2023 thus sayeth Neha Malcom Francis:
+> Update the DDR settings to those generated using 0.10 version of Jacinto
+> 7 DDRSS Register Configuration tool.
+> 
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>  arch/arm/dts/k3-j721e-ddr-evm-lp4-4266.dtsi  |  98 ++--
+>  arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi | 464 +++++++++----------
+>  2 files changed, 281 insertions(+), 281 deletions(-)
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Reviewed-by: Bryan Brattlof <bb@ti.com>
 
- tools/buildman/main.py | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+This works for me :)
 
-diff --git a/tools/buildman/main.py b/tools/buildman/main.py
-index 5f42a58ddbb3..3cf877e5e688 100755
---- a/tools/buildman/main.py
-+++ b/tools/buildman/main.py
-@@ -7,7 +7,7 @@
- """See README for more information"""
- 
- try:
--    from importlib.resources import files
-+    import importlib.resources
- except ImportError:
-     # for Python 3.6
-     import importlib_resources
-@@ -83,7 +83,13 @@ def run_buildman():
-         run_test_coverage()
- 
-     elif args.full_help:
--        tools.print_full_help(str(files('buildman').joinpath('README.rst')))
-+        if hasattr(importlib.resources, 'files'):
-+            dirpath = importlib.resources.files('buildman')
-+            tools.print_full_help(str(dirpath.joinpath('README.rst')))
-+        else:
-+            with importlib.resources.path('buildman', 'README.rst') as readme:
-+                tools.print_full_help(str(readme))
-+
- 
-     # Build selected commits for selected boards
-     else:
--- 
-2.42.0.283.g2d96d420d3-goog
-
+~Bryan
