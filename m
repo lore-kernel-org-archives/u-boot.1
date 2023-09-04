@@ -4,133 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEF5C83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 13:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4C3C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 13:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E14B86741;
-	Mon,  4 Sep 2023 15:37:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id D5C1E86898;
+	Mon,  4 Sep 2023 15:54:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="Gmm6Es9v";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BF83A86901; Mon,  4 Sep 2023 15:37:54 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1693835655;
+	bh=6lWHscKHdpcnCc2BdgJQ/Mib/JQm5bgo8HxxelgnK5c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xSmnywfagucTEbj0X/Maz5z+wdATlMphk9YnHB3Bz2L6efavs7angCzwJsCWszKb6
+	 xgdP+hHS9eRFKGE8cpYcopWuMz9BE1azeVyvzzilb2Gd5Evfp6ZW+H2LdF7Tzlg2zi
+	 uvAB5dti5aCWBZKFDqnEDsxPcoqq6jd3iap9Qb1o/6E+IRX9P3cjGjAvOKy9d5juy1
+	 1otmAYIgh6zpJupz8XMsSB026TzyvaG6sDx8V7N8N7zTO/vmR/0xcuZHJvs2CozrCy
+	 yP+vTKEFRWwDZCUOtDfQHY4ZjDUyT4N9LOAHnbaps14qAfdWCw+x4BDp9DQPQiRl03
+	 5uMlreaSjezaA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E98B86053
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 15:37:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1693834671;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sAAJd8dUS+zeKpPHX0zhoEfbaj9TkQyNwQFoKCamfTE=;
- b=Gmm6Es9v5ZiL3h7AinTrarrwuC3sCHxkxMrN/9OoAYqIrIWKQxlzj6P9gRBucSXqTKjxuz
- cM20MVuRMJbpMywKGSD+RcDyWm5weii2axBzS0aw/dsU5I3EpeGha6iPu5NhpLO3EcdrVn
- hVTmCkGAuJ4DsHU7O+fYjU/EpHBHSqg=
-Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
- (mail-zr0che01lp2107.outbound.protection.outlook.com [104.47.22.107]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-38-7HQudc_AOva-lTbK7_jqjg-2; Mon, 04 Sep 2023 15:37:50 +0200
-X-MC-Unique: 7HQudc_AOva-lTbK7_jqjg-2
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR0P278MB0042.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1a::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6745.32; Mon, 4 Sep 2023 13:37:49 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::d5a7:e7ce:ac78:4984]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::d5a7:e7ce:ac78:4984%6]) with mapi id 15.20.6745.030; Mon, 4 Sep 2023
- 13:37:49 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "hiagofranco@gmail.com" <hiagofranco@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Hiago De Franco
- <hiago.franco@toradex.com>
-Subject: Re: [PATCH] verdin-imx8mp: drop unused tdx easy installer ifdef
-Thread-Topic: [PATCH] verdin-imx8mp: drop unused tdx easy installer ifdef
-Thread-Index: AQHZ3zM0GsbS4EijnUG0vlqGgfmxwLAKq5UA
-Date: Mon, 4 Sep 2023 13:37:49 +0000
-Message-ID: <f91dc5d596263c4ed747e341295d549285728a09.camel@toradex.com>
-References: <20230904132437.36435-1-hiagofranco@gmail.com>
-In-Reply-To: <20230904132437.36435-1-hiagofranco@gmail.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB0042:EE_
-x-ms-office365-filtering-correlation-id: 4e42ee22-1e63-4f8f-82a4-08dbad4c218c
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: Eb3URLtmmEXmGpDvapRCieMPPKxcfUug1e88ILBdcgRbMUwZ9XxbDELCkPwpfm1AvZ6M3bUzHJz/LgpYJX1gZj41usYjZgczpwKvqgBA3NNK2YCXedXXhatpryBdQJgBnQh+QOIl9bXDswQUVdaloYUHwVjnMinVakJk3MTPq+OpH/ErPr4aqOydtlfE1k+IOPiLsgGvyxYaPeXEuw3yr+cUarXcZ8hEIbP2Jpy25vF/TFxBNnb/dogigTMZ2DJGSAtJrjuz0k2pDGvqRNP42U4Ik/gAfzE6YfnuxiaP6jtW+kTOoYNntkHZ4kXx9tZK3LyI46sAgF+2lVqOq6nhvuR9+vt4bF6HNT0pPnhpwjS4kcWDqFvd29pRmasSrkUFDuS6+V1sgP5HFzex2K+e/aZPOIPGsRdQM/54oJZV+yET1oNXRAQzvyyGzrJSZCLsD4qoypAXXCUFlMJYLk7gmLUA6ogFureX9NGv0p1jgJ5mcAk93pczGE2/+nCce5gDgnP9rLUvsMmVlp+0lWAfZErEkUDOFfPnCwHr0cfZRHquFp+yLSGACaySwcFVziBTLUI2UfOlN0Wjomf4ACqJ25me0FIJkDcNdRcMVvV7GBN3wW7YAqtg11YM6UZrcYw1kdPcJ1+ZhhvgqkDl6ao4sw==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(39840400004)(396003)(366004)(136003)(376002)(346002)(451199024)(186009)(1800799009)(66556008)(6916009)(66476007)(66446008)(316002)(64756008)(36756003)(2906002)(86362001)(76116006)(54906003)(66946007)(8936002)(5660300002)(44832011)(8676002)(4326008)(41300700001)(107886003)(6512007)(2616005)(38100700002)(38070700005)(83380400001)(478600001)(122000001)(6506007)(6486002)(71200400001)(139555002);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RXNFRFF0ZVE5dVViekNpZFZxSS9lNmdJV3NBN1JlZHZoUVIwSE56cjNFc1BB?=
- =?utf-8?B?UU5aQ3AwWVJXYnR4RlRXMzJoTzZzZWsyNUo2RFV2b2FybkxGUllGcWRZUm1n?=
- =?utf-8?B?UGFOS2U0T29UU0l1MmV0MlFzMGl3VTlFajBJcFp5MFozZmM0azUwRC8wdnp5?=
- =?utf-8?B?R29GTlhIRk9HRjNndDQ2VkE1clM5RmozMUtJNHdIbmJTeGFnR0hxc2IwNnMw?=
- =?utf-8?B?dFdmdnR4OSsyRTZPZGNNY3R6UVJldmRqMVNhNng4b0pzY0g4M3U2YnY0amxp?=
- =?utf-8?B?VGFDSURpQWh6dGliRXZRcnpUbkRNVUMxZmJxczZUTjVTN3lwRDBlM3hORjZn?=
- =?utf-8?B?RWNCRk01Zk83a2Y4V240cGhaWHVvR2hkc3FWZHFiYWJQL3pnNmxDM3RXNGtm?=
- =?utf-8?B?cjc4N1krUnNCY2JpcGozQU8xSWtvKzFpeTVEMUhGRlpSaWhQakNhOVZrYkNz?=
- =?utf-8?B?U2xWYjBOUUFpdkNqVlpQODJxeG9iR1I4MUNHSGtkMlltVU5BTDZGakhZZStT?=
- =?utf-8?B?Z0haa01BcjFQRXlWaW5maUp6VFVBNVM4QU9LR1c0ZkJxakJvYkZsNEFYcW1o?=
- =?utf-8?B?Z0d4TjQ0QWVKaGtSVmY5aXVEQXlCeThrWVVXQTlielU1eUpZY2pqVUVrcmVt?=
- =?utf-8?B?NldHZ1Vvc0xZM2F1ZmVSQm0vQXZldGl0Q1pic1pEaVRmL3hOeUk1c2VvWkJJ?=
- =?utf-8?B?UHU1a1A5bzNycHYyUGZNOWk5VzdKVDZiYVFKK1lYYjBqOUUwOTY4WXYwbHdp?=
- =?utf-8?B?Tzc0c2QybHVVaGYxUENNclh5eHVlKzRndkpxQlBYeFB5RS9LaHY5WDB0N3Qx?=
- =?utf-8?B?UzUvYUhvK2ZPeVF2SHJwWEhwNEY4TkROdW1EbFgzRThoczdjR2psMTJqckdu?=
- =?utf-8?B?eEl5SDVLMHhwNnp5N2E1d0NNV1F3cDlOcHJCRXVjRHB5bmh6MlJaL1RCWGR4?=
- =?utf-8?B?VTlSSkxleWZmZzRsVE5ySW8zdmNLbWVVUERsVUhpQmJHaUdVUDhnY1NTZXJt?=
- =?utf-8?B?ckY3Ynp5QzcrbHZSVHJuOExMYXNnb0hvRHJUMjFySWpDdkNCa0o3cWkzZktJ?=
- =?utf-8?B?dmxVNi9rQ0lrK2krdlNPLzdSaEhMR3RSQ1BlVU11TFF5UjFQL0M0ZklJakRO?=
- =?utf-8?B?dXRFd3F6eGlqUlRJZjVrcnBoQXBwSHU3c1hjTGZkbjVIWlM3RVQ3QlhoSmU4?=
- =?utf-8?B?YWppS0g1dmVOYjJTQUlpR0grMUI5Wmw2dzh4SmpBWVowU0hqWXZ0ajZvVnhC?=
- =?utf-8?B?czlxbkVUWnIyVFBtLzlvb2xjUjJBSlYxampQaE1FWXlIYXROZjBsN3NYQnRT?=
- =?utf-8?B?Rk55M2RlWnBaZDBlYnl3WWZEQkNYcnc0djRDbDRCN3BKVld1TXlzeEVrVlVv?=
- =?utf-8?B?TW5lakpzdjFIMGtJaFBESHBUam5VNWpiaUpNci92eUk5NFFOc05Jb3JHZTB0?=
- =?utf-8?B?OU9ZZ2E1V1R1MTNyYzkvdmhDUVExbDZ4bXRsbFRJNDVCdDFJbGlTbFQrNGs4?=
- =?utf-8?B?d0Zoc1duOElLOVUvM2FkL21LMlhrR0pTRDBML1FrRjBjK0FLQnBOSWVzSjZS?=
- =?utf-8?B?cDFuNk5DNDZNWmxmckJzVXR4RmpuS21sdnlla1BIMXc3aHErcmZOL05aeDVO?=
- =?utf-8?B?YU9iUXQ0RjZQck9zS3FaQnBXR2NJdTR6MStySlVDM0txcGltZHhyMDBjWEt0?=
- =?utf-8?B?WWdtWHRzZ0dlOFNPM1hySnAxaUtFaXRpbUJURzZRSmtuWUVaTkp0bEo1U2hG?=
- =?utf-8?B?aEtPdEZlb2trYksrRERhMGJOeUlDMlBVZWZoeEdEN1hSTytwL1R1UE0vd3VQ?=
- =?utf-8?B?SzZ5eE5SK1h1SG5BajYwU1hZaEg3RWxESURYMmsxQkNsVS9aUFk4YlpjWklR?=
- =?utf-8?B?aEZtS2FaWlNFc0NZeVdrSXg1eUxmVEpETnRGc09EdmRNb3N1RUVseVNJYXdm?=
- =?utf-8?B?dll4cVg4TU45QTI4d3B0M3BoNjdlN2xtbjBmTnVtQjlZa0FrRkZNUmsyTTBN?=
- =?utf-8?B?Nkk4OEhYYWVyM0dlQWdnODFGYWxkT1RtK2JHRnVVM1ltem9sdWltQ1hQRnU5?=
- =?utf-8?B?bU9BbmhXZnV2L3VnUDF2Z2wwNHRSZ3JSWjAxQTAzVCsrSUxjWG9TR01WbzBj?=
- =?utf-8?B?V0NyOTFrQ0JJaENJWlMxWXVORitqK2lWTmc5UkFraXJkdXQ2UnNiQXJsNzAv?=
- =?utf-8?Q?JjgDyEMATlHM76cc5j9sogM=3D?=
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0A408863C3;
+ Mon,  4 Sep 2023 15:54:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1693835654;
+ bh=6lWHscKHdpcnCc2BdgJQ/Mib/JQm5bgo8HxxelgnK5c=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=LkMLVkK5cLcE7pESu/Eh6x9qlHD0F4kn94xIRv9vds+WbrEgGird+ME08BwV8TEla
+ Ai3NrpNKpNO+VqnN3jlaqTIl3buBOk3KzQI1VXqExCCqr/DLXSY0tnKpvGQsaP+BCg
+ 1HITWCs0xMUrj1wTRszyHao+hjcK8RCXPGtlcXOAlhHdRjqXLww9CgxDaBPFcElVm1
+ RBcgV6LLcXUDSMosCAXSMR3sJNN98obY8QwedVdhRMxRt9kCLqBcwSAdwQOjSh4UcJ
+ r+OpFxXbE/mWdE7+FANI0aGgDrAlEW/PoimJtQhF4n+5xeMezA88kimtk2e1QbNH7B
+ CNvq5aibfnZBg==
+Message-ID: <cb4278ea-1cf9-a2c5-1310-7e6419315d38@denx.de>
+Date: Mon, 4 Sep 2023 15:54:13 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e42ee22-1e63-4f8f-82a4-08dbad4c218c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Sep 2023 13:37:49.4822 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9vKdkouBSRpMOqCQmTEFKwWVJA2Q5mosNtTVreWp9MtozID58wyhDjTQ9BhR0F12d/XRXS6SgpT5caBZq1nqBED6aW+fDm/R1gY0WDt30C8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0042
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH v2] usb: check for companion controller in uclass
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <CEF9D1CB69AB5E4B8D2D09B5CEA51AE6@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Simon Glass <sjg@chromium.org>
+References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
+ <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
+ <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
+ <fef0778b-4850-fb73-9d8f-da48a6138e13@denx.de>
+ <7b2d0448-d7f0-e5f8-a6eb-beb1746921f1@foss.st.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <7b2d0448-d7f0-e5f8-a6eb-beb1746921f1@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,32 +75,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgSGlhZ28NCg0KVGhhbmtzIQ0KDQpPbiBNb24sIDIwMjMtMDktMDQgYXQgMTA6MjQgLTAzMDAs
-IEhpYWdvIERlIEZyYW5jbyB3cm90ZToNCj4gRnJvbTogSGlhZ28gRGUgRnJhbmNvIDxoaWFnby5m
-cmFuY29AdG9yYWRleC5jb20+DQo+IA0KPiBEcm9wIHVudXNlZCBjb2RlIHJlbGF0ZWQgdG8gQ09O
-RklHX1REWF9FQVNZX0lOU1RBTExFUiwgdGhhdCBleGlzdGVkIG9ubHkgb24NCj4gdG9yYWRleCBk
-b3duc3RyZWFtIGJyYW5jaC4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEhpYWdvIERlIEZyYW5jbyA8
-aGlhZ28uZnJhbmNvQHRvcmFkZXguY29tPg0KDQpBY2tlZC1ieTogTWFyY2VsIFppc3dpbGVyIDxt
-YXJjZWwuemlzd2lsZXJAdG9yYWRleC5jb20+DQoNCj4gLS0tDQo+IMKgaW5jbHVkZS9jb25maWdz
-L3ZlcmRpbi1pbXg4bXAuaCB8IDEwICsrLS0tLS0tLS0NCj4gwqAxIGZpbGUgY2hhbmdlZCwgMiBp
-bnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUv
-Y29uZmlncy92ZXJkaW4taW14OG1wLmggYi9pbmNsdWRlL2NvbmZpZ3MvdmVyZGluLWlteDhtcC5o
-DQo+IGluZGV4IDk0MjA4MWFiODQuLmQ5ODBiZDY2YWUgMTAwNjQ0DQo+IC0tLSBhL2luY2x1ZGUv
-Y29uZmlncy92ZXJkaW4taW14OG1wLmgNCj4gKysrIGIvaW5jbHVkZS9jb25maWdzL3ZlcmRpbi1p
-bXg4bXAuaA0KPiBAQCAtMzYsMjAgKzM2LDE0IEBADQo+IMKgwqDCoMKgwqDCoMKgwqBmdW5jKERI
-Q1AsIGRoY3AsIG5hKQ0KPiDCoCNpbmNsdWRlIDxjb25maWdfZGlzdHJvX2Jvb3RjbWQuaD4NCj4g
-wqANCj4gLSNpZiBkZWZpbmVkKENPTkZJR19URFhfRUFTWV9JTlNUQUxMRVIpDQo+IC0jwqAgZGVm
-aW5lIEJPT1RfU0NSSVBUwqDCoCJib290LXRlemkuc2NyIg0KPiAtI2Vsc2UNCj4gLSPCoCBkZWZp
-bmUgQk9PVF9TQ1JJUFTCoMKgImJvb3Quc2NyIg0KPiAtI2VuZGlmDQo+IC0NCj4gwqAvKiBJbml0
-aWFsIGVudmlyb25tZW50IHZhcmlhYmxlcyAqLw0KPiDCoCNkZWZpbmUgQ0ZHX0VYVFJBX0VOVl9T
-RVRUSU5HUyBcDQo+IMKgwqDCoMKgwqDCoMKgwqBCT09URU5WIFwNCj4gwqDCoMKgwqDCoMKgwqDC
-oE1FTV9MQVlPVVRfRU5WX1NFVFRJTkdTIFwNCj4gwqDCoMKgwqDCoMKgwqDCoCJib290Y21kX21m
-Zz1mYXN0Ym9vdCAwXDAiIFwNCj4gwqDCoMKgwqDCoMKgwqDCoCJib290X2ZpbGU9SW1hZ2VcMCIg
-XA0KPiAtwqDCoMKgwqDCoMKgwqAiYm9vdF9zY3JpcHRzPSIgQk9PVF9TQ1JJUFQgIlwwIiBcDQo+
-IC3CoMKgwqDCoMKgwqDCoCJib290X3NjcmlwdF9kaGNwPSIgQk9PVF9TQ1JJUFQgIlwwIiBcDQo+
-ICvCoMKgwqDCoMKgwqDCoCJib290X3NjcmlwdHM9Ym9vdC5zY3JcMCIgXA0KPiArwqDCoMKgwqDC
-oMKgwqAiYm9vdF9zY3JpcHRfZGhjcD1ib290LnNjclwwIiBcDQo+IMKgwqDCoMKgwqDCoMKgwqAi
-Y29uc29sZT10dHlteGMyXDAiIFwNCj4gwqDCoMKgwqDCoMKgwqDCoCJmZHRfYm9hcmQ9ZGV2XDAi
-IFwNCj4gwqDCoMKgwqDCoMKgwqDCoCJpbml0cmRfYWRkcj0weDQzODAwMDAwXDAiIFwNCg0KQ2hl
-ZXJzDQoNCk1hcmNlbA0K
+On 9/4/23 14:34, Fabrice Gasnier wrote:
+> On 9/1/23 18:00, Marek Vasut wrote:
+>> On 9/1/23 14:12, Fabrice Gasnier wrote:
+>>> On 9/1/23 12:48, Marek Vasut wrote:
+>>>> On 9/1/23 11:52, Fabrice Gasnier wrote:
+>>>>> EHCI is usually used with companion controller (like OHCI) as companion
+>>>>> controller. This information on the companion is missing currently in
+>>>>> companion drivers.
+>>>>> So, if the usb-uclass isn't aware, it may scan busses in any order:
+>>>>> OHCI
+>>>>> first, then EHCI.
+>>>>> This is seen on STM32MP1 where DT probing makes the probe order to
+>>>>> occur
+>>>>> by increasing address (OHCI address < EHCI address).
+>>>>>
+>>>>> When a low speed or full-speed device is plugged in, it's not
+>>>>> detected as
+>>>>> EHCI should first detect it, and give ownership (handover) to OHCI.
+>>>>>
+>>>>> Current situation on STM32MP1 (with a low speed device plugged-in)
+>>>>> STM32MP> usb start
+>>>>> starting USB...
+>>>>> Bus usb@5800c000: USB OHCI 1.0
+>>>>> Bus usb@5800d000: USB EHCI 1.00
+>>>>> scanning bus usb@5800c000 for devices... 1 USB Device(s) found
+>>>>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>>>>>       scanning usb for storage devices... 0 Storage Device(s) found
+>>>>>
+>>>>> The "companion" property in the device tree allow to retrieve companion
+>>>>> controller information, from the EHCI node. This allow marking the
+>>>>> companion driver as such.
+>>>>>
+>>>>> With this patch (same low speed device plugged in):
+>>>>> STM32MP> usb start
+>>>>> starting USB...
+>>>>> Bus usb@5800c000: USB OHCI 1.0
+>>>>> Bus usb@5800d000: USB EHCI 1.00
+>>>>> scanning bus usb@5800d000 for devices... 1 USB Device(s) found
+>>>>> scanning bus usb@5800c000 for devices... 2 USB Device(s) found
+>>>>>       scanning usb for storage devices... 0 Storage Device(s) found
+>>>>> STM32MP> usb tree
+>>>>> USB device tree:
+>>>>> 1  Hub (12 Mb/s, 0mA)
+>>>>> |   U-Boot Root Hub
+>>>>> |
+>>>>> +-2  Human Interface (1.5 Mb/s, 100mA)
+>>>>>       HP HP USB 1000dpi Laser Mouse
+>>>>>
+>>>>> 1  Hub (480 Mb/s, 0mA)
+>>>>>     u-boot EHCI Host Controller
+>>>>>
+>>>>> This also optimize bus scan when a High speed device is plugged in, as
+>>>>> the usb-uclass skips OHCI in this case:
+>>>>>
+>>>>> STM32MP> usb reset
+>>>>> resetting USB...
+>>>>> Bus usb@5800c000: USB OHCI 1.0
+>>>>> Bus usb@5800d000: USB EHCI 1.00
+>>>>> scanning bus usb@5800d000 for devices... 2 USB Device(s) found
+>>>>>       scanning usb for storage devices... 1 Storage Device(s) found
+>>>>> STM32MP> usb tree
+>>>>> USB device tree:
+>>>>> 1  Hub (480 Mb/s, 0mA)
+>>>>> |  u-boot EHCI Host Controller
+>>>>> |
+>>>>> +-2  Mass Storage (480 Mb/s, 200mA)
+>>>>>       SanDisk Cruzer Blade 03003432021922011407
+>>>>>
+>>>>> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+>>>>> ---
+>>>>>
+>>>>> Changes in v2:
+>>>>> - move companion probing from generic ehci driver to usb-uclass, after
+>>>>>      Marek's questions on design choice.
+>>>>> - rename commit title to follow this change
+>>>>>
+>>>>> ---
+>>>>>     drivers/usb/host/usb-uclass.c | 36
+>>>>> +++++++++++++++++++++++++++++++++++
+>>>>>     1 file changed, 36 insertions(+)
+>>>>>
+>>>>> diff --git a/drivers/usb/host/usb-uclass.c
+>>>>> b/drivers/usb/host/usb-uclass.c
+>>>>> index 02c0138a2065..e238eee8c84d 100644
+>>>>> --- a/drivers/usb/host/usb-uclass.c
+>>>>> +++ b/drivers/usb/host/usb-uclass.c
+>>>>> @@ -249,6 +249,37 @@ static void remove_inactive_children(struct
+>>>>> uclass *uc, struct udevice *bus)
+>>>>>         }
+>>>>>     }
+>>>>>     +static int usb_probe_companion(struct udevice *bus)
+>>>>> +{
+>>>>> +    struct udevice *companion_dev;
+>>>>> +    int ret;
+>>>>> +
+>>>>> +    /*
+>>>>> +     * Enforce optional companion controller is marked as such in
+>>>>> order to
+>>>>> +     * 1st scan the primary controller, before the companion
+>>>>> controller
+>>>>> +     * (ownership is given to companion when low or full speed devices
+>>>>> +     * have been detected).
+>>>>> +     */
+>>>>> +    ret = uclass_get_device_by_phandle(UCLASS_USB, bus, "companion",
+>>>>> &companion_dev);
+>>>>> +    if (!ret) {
+>>>>> +        struct usb_bus_priv *companion_bus_priv;
+>>>>> +
+>>>>> +        debug("%s is the companion of %s\n", companion_dev->name,
+>>>>> bus->name);
+>>>>> +        companion_bus_priv = dev_get_uclass_priv(companion_dev);
+>>>>> +        companion_bus_priv->companion = true;
+>>>>> +    } else if (ret && ret != -ENOENT && ret != -ENODEV) {
+>>>>> +        /*
+>>>>> +         * Treat everything else than no companion or disabled
+>>>>> +         * companion as an error. (It may not be enabled on boards
+>>>>> +         * that have a High-Speed HUB to handle FS and LS traffic).
+>>>>> +         */
+>>>>> +        printf("Failed to get companion (ret=%d)\n", ret);
+>>>>> +        return ret;
+>>>>> +    }
+>>>>> +
+>>>>> +    return 0;
+>>>>> +}
+>>>>> +
+>>>>>     int usb_init(void)
+>>>>>     {
+>>>>>         int controllers_initialized = 0;
+>>>>> @@ -299,6 +330,11 @@ int usb_init(void)
+>>>>>                 printf("probe failed, error %d\n", ret);
+>>>>>                 continue;
+>>>>>             }
+>>>>> +
+>>>>> +        ret = usb_probe_companion(bus);
 
+One more thing, shouldn't this do
+
+if (ret)
+   continue;
+
+for maximum compatibility ?
+
+> I'd be glad to have it in this release.
+
+OK
