@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B40C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D033EC83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:21:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1BDE868D3;
-	Mon,  4 Sep 2023 11:20:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44D78868D3;
+	Mon,  4 Sep 2023 11:21:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zzu5so3N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Iz04Csec";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9F81868D3; Mon,  4 Sep 2023 11:20:29 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id BE37D86900; Mon,  4 Sep 2023 11:21:40 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63E48868E8
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:20:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45EA586500
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-52a250aa012so1603558a12.3
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:20:27 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-52bcd4db4bdso1653535a12.3
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:21:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693819227; x=1694424027; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693819298; x=1694424098; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DDVfI8m4Ri1KfmUC9tgiczYg+qOnqkS+TkXjEOYURcc=;
- b=Zzu5so3NhF+Qv4AGE4a1Gd8szMAST0NwlsFDxp9WfyU7wUpv9drfpEAT1Xw02uYPBY
- bdns/zx4SrZeRDMCvQfZTEJw5MbhSgQgD+Jt58eLvUuYRWhMp10uGsu7XmdasC6K1gtu
- yToIxRzB195WyQ+OoEcbiI7xCe/+7ZLgGoVbxFMGS5xBMd3tjwJiwWYEZZsgjLILwRjH
- 9UjMMfAc2fr0L2a4/UUdnAGch6Nh6kmGExa4QGZV40vAfQw7Lr29itFn9R2sn8c5Jz3R
- nw5qbVuINCwyyzxjm7Gm0DmiOT7xI9FHkgu6nxXVuQ6tYernzue95MhDy8AF8LMIOoV3
- AhvQ==
+ bh=OLT94AdaeS31zIeIOaoC+wBwP5v50ngj5SC1zwvKyhQ=;
+ b=Iz04CsechZkQmP/calwdSDHhB0rfYnCJU7QolobF02SBU7UvGkXxEAQoSmDqASlgIh
+ UhpJw/y/E93rDlz/g5olPnYShEvoU7DmtXvkRx/9jD5iwSsBxF6FPi7p3qV6lqWsrk8w
+ wNY8Wnnc1MRihNuDaLO6TD794vhxSmcv78bjdL6RfUqxX45L7zfeOE14jopHdOUohLae
+ 15hkYymODIb3QtA1bVfaJ4VpkDOV1XezJTcyA+h4Xqda5Cx0d2EW/wqhktPsXNGK284t
+ 6/zHHHLUlXl77PXLk0Xl34vFXimnOLpR/Fs+vmMqA8dzwylo2LbhvX+r8b9XT1K3+iOa
+ BqBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693819227; x=1694424027;
+ d=1e100.net; s=20221208; t=1693819298; x=1694424098;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DDVfI8m4Ri1KfmUC9tgiczYg+qOnqkS+TkXjEOYURcc=;
- b=SG5thszLWEV+yWPHDYgBNrPRX611CLo18ePHNEI8f2DkBXkzNVT2YbwB2sc4hiNwdu
- gk18AktPuFt1aKYacVlkgiis4vozizoc33pfJ17eCQnvJYLZkveAVn6xdn6pnsV5M5Iv
- rIP5t47TfvLIake6jI+2qcJ4aSQbnE25KegwTVsyJf7uCpvVxj5ZPgWxdTK/jAobfyK/
- DYBabir5cy7ZTbs5vUUmZK5SXYKJy+/pmVh4/d3SN7AVCzwTh6POu6PsIiuSad4NnHba
- /ZiHx2mLM0L6PVPpuZshtGn5M8o6+uKBTb9bL5jIBz95/dLJHuvxfQtpe53oneSFa0iE
- Pt+Q==
-X-Gm-Message-State: AOJu0YyFZHjy50CwrrLpPiISyB/lHPvjcMY7k8ZnToJ9A7Qp9aGBov7g
- mJPbIqEfS84UiL71GTPR750K+UW3o1XCCLG9qbI=
-X-Google-Smtp-Source: AGHT+IGup2ozU4m904ZiZ747w6RIZmZhv0at7C/vAwfkFmyRCqU3loasgU6/w3edIQMkSR3tArtykRWSfu2kn86gA9o=
-X-Received: by 2002:a50:fe8e:0:b0:529:fa63:ef80 with SMTP id
- d14-20020a50fe8e000000b00529fa63ef80mr6555572edt.28.1693819226691; Mon, 04
- Sep 2023 02:20:26 -0700 (PDT)
+ bh=OLT94AdaeS31zIeIOaoC+wBwP5v50ngj5SC1zwvKyhQ=;
+ b=TNnHGZdBpreWL7pVNva2IMjBMrKLT80c3RQfFk6I6sDk27RUTzmajLnveKsHW9gSJq
+ moz3tnQix0cv5jnHWdwVvGoe5w4nM4Jeunc5VJkWvpnZxdYaMiF4JZ2j2vZtOUoh68Tq
+ vChtV++WkgiLbjLqdXX/GhQ/wd7tx2QUICuleG0GmhJXaZK7oykVnb/8xnUa+fPimTgt
+ 4YCTsCXROo5MSAkeMOuz2oEIpij5k6co2ntnqnnAgr7FkiklfgY7RHTpFBFiTdcTIocH
+ f1RK8dvgWzHOUAjNnKwmTFtJlzU+6kFUum948sNIVnZxQTm7qdtdNa50wXiP1T1czd7V
+ s+3g==
+X-Gm-Message-State: AOJu0YxLPqcFu+/o+NkUq2IFZHkKdYvwRcg2PTmHahIJ66lWtyh9yXo1
+ PLlN9kbPECRB1S7WcmZCO/4XGzSY7QkfFC69CQV8cYzm6F84bQ==
+X-Google-Smtp-Source: AGHT+IHrG2fVS2WnZzdt6TtWS+/6xxYFe9JAv/6r42lrN157mePh7JjmWtatj7uECReJCJmorcNDT3fgPgFW1/VMZW4=
+X-Received: by 2002:a05:6402:b30:b0:523:4057:fa6e with SMTP id
+ bo16-20020a0564020b3000b005234057fa6emr5519705edb.42.1693819297797; Mon, 04
+ Sep 2023 02:21:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823184746.842091-1-sjg@chromium.org>
- <20230823184746.842091-8-sjg@chromium.org>
- <6f1ea3e9-7284-22d3-e2ee-071523b7dbac@gmx.de>
- <CAPnjgZ3i9EDe3CyU64WRpE+oR0-xS2iffQR=2hVBZRzA2KkC6Q@mail.gmail.com>
- <2058DF5A-619E-4B47-A80E-4B5C56FC3573@gmx.de>
-In-Reply-To: <2058DF5A-619E-4B47-A80E-4B5C56FC3573@gmx.de>
+ <20230823184746.842091-2-sjg@chromium.org>
+In-Reply-To: <20230823184746.842091-2-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 4 Sep 2023 17:20:12 +0800
-Message-ID: <CAEUhbmWvEXvB6UmtsvHe5M13dMqS2BQF6Q-fdapYDVh3ROG73A@mail.gmail.com>
-Subject: Re: [PATCH 7/8] spl: x86: Avoid starting up PCI automatically in SPL
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marex@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Mon, 4 Sep 2023 17:21:23 +0800
+Message-ID: <CAEUhbmXxtVoCwuco_Ew_1L7B4U5y_JSAa3tXkftf6TiyKB+9vw@mail.gmail.com>
+Subject: Re: [PATCH 1/8] x86: broadwell: Show the memory delay
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,62 +87,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Thu, Aug 24, 2023 at 10:11=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
+On Thu, Aug 24, 2023 at 2:47=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
+> Samus only takes 7 seconds but it is long enough to think it has hung. Ad=
+d
+> a message about what it is doing, similar to the approach on coral.
 >
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> Am 24. August 2023 01:57:55 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Heinrich,
-> >
-> >On Wed, 23 Aug 2023 at 14:19, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
-> >>
-> >> On 8/23/23 20:47, Simon Glass wrote:
-> >> > For x86 platforms, PCI is core to their operation and is managed in
-> >> > arch-specific code. Each platform has its own way of doing this. For=
- TPL
-> >> > and some SPL implementations, the full driver model PCI is not used.
-> >> >
-> >> > A recent change enabled full PCI in TPL/SPL for all boards. This bre=
-aks
-> >> > some x86 boards, so adjust it to skip that for x86.
-> >>
-> >> Could you, please, give some more detail?
-> >>
-> >> * Which boards are broken?
-> >
-> >For example, chromebook_samus and chromebook_samus_tpl
-> >
-> >> * Don't these boards have a pci_init() function?
-> >
-> >Yes, the same one you are calling.
-> >
-> >> * In what way does calling pci_init() lead to a failure?
-> >
-> >It probes and sets up PCI devices and uses a lot of pre-alloc RAM.
-> >
-> >>
-> >> It would be preferable to have all architectures and boards use the sa=
-me
-> >> high level API. Excluding x86 here looks more like a (necessary) hack
-> >> than like a target state.
-> >
-> >Fair enough, but on x86 we access PCI long before driver model is up.
-> >Generally we don't fully enumerate it in SPL as it is expensive. It is
-> >also pointless, since U-Boot proper does it again later.
-> >
-> >Regards,
-> >Simon
-> >
->
-> Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>  arch/x86/cpu/intel_common/mrc.c   | 18 +++++++++++++++++-
+>  arch/x86/dts/chromebook_samus.dts |  1 +
+>  2 files changed, 18 insertions(+), 1 deletion(-)
 >
 
-To address Heinrich's concern, how about you turn off CONFIG_SPL_PCI
-in chromebook_samus and chromebook_samus_tpl?
-
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
