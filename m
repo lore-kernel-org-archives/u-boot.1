@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CE3C83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:44:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C73C83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:44:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C90B0869BC;
-	Mon,  4 Sep 2023 16:41:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D59786A02;
+	Mon,  4 Sep 2023 16:42:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b9bXasFE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E9n/+z6M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57BB3869E2; Mon,  4 Sep 2023 16:41:58 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 5BA4E8693D; Mon,  4 Sep 2023 16:41:59 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 985CB869E9
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:41:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1601869F1
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:41:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-34b4b2608e3so5507645ab.3
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:41:55 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-34deefc2016so5397015ab.2
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:41:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693838514; x=1694443314; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693838515; x=1694443315; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aR6/Tltza0UPaHtMUyuss531V93lIyPJZPa7rL323sQ=;
- b=b9bXasFEoL6LxmO3E1XPkNC7WO+EXQPpX4/awA8RFr9tjYjmUlYe/n4sUcNJKupnQY
- uXtfsK804AscJUUdRLKRouUAxB73A8YnNixqGbxwSPqIHRY/FV9pFxWvN88BN7jDFAYL
- IL9jm82MhOwpwTt4H4vMQU1zgEYzrGC/CSIsQ=
+ bh=n+c63DhxEjEi71ZArTEybo2kx53g5lAOc+XYUwcFlPc=;
+ b=E9n/+z6M2BU8pqNa/TEbnlBHRWAQ7WkZh2FU/JaNdu3MNPNQOR/T7dXoub4vKt884Z
+ CQpW+5vDxnRq87ekn1PGa0QYSYxFw6F7Gz+nyxlg5EPdUSOIpjGEq4YrBLocG+U2IuVl
+ l+bU8iwfnsKHMIRGZc2R/H/6ts7+8lzaIoBtA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693838514; x=1694443314;
+ d=1e100.net; s=20221208; t=1693838515; x=1694443315;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aR6/Tltza0UPaHtMUyuss531V93lIyPJZPa7rL323sQ=;
- b=T+EojBK8/L9yfbuTDxYIVIaq/lcogFgvepAfve53z3Qjn+ng9pJnsWP2oCqiGguLjS
- ucdnwqAANg5kCwQDH1GnBsmrczHj2LLwDCjoAibGXJ+qOOX4BjSVd/JYKntqrrLI47tP
- uKdjfZUnXv7xF6sohNGf7UT7NNWLsCqQIpfmc0OD+3yQX2LmJR5BNy1w/ZXxkk5T9IJJ
- 2QHKd81iRLSb1j2fZBu9G+kIF8cIFDkQIKZLCpYlMRgxw8X9/H33D1bBGaenddhe/rNG
- arGB2HU+N4+y9ayl+vA0vUfJCjk8yEJgvz1NzkI/Jxy53lUa8eJ7S2x2RQM0iHQpztk6
- OYIg==
-X-Gm-Message-State: AOJu0YxaZ394g+RXaW2GBUzwdrAFUDe5jxCwPslU/pyv9zf39pnVE2vk
- 7aRj7Ngv46TTY3tGNLkBxTAB0m7wp/CJeE2tJo4=
-X-Google-Smtp-Source: AGHT+IEp1r3ymLA6DrDtr7FuZwooSXJ3XMXpSzTL9Mv6OScNvv5HjGfK4Pm+e1QmzL5rp9BxeHjODg==
-X-Received: by 2002:a92:c261:0:b0:349:862e:a863 with SMTP id
- h1-20020a92c261000000b00349862ea863mr13361407ild.15.1693838514320; 
- Mon, 04 Sep 2023 07:41:54 -0700 (PDT)
+ bh=n+c63DhxEjEi71ZArTEybo2kx53g5lAOc+XYUwcFlPc=;
+ b=Qd1AOr/4SizWSS2V5+ppsMXh+oYgUtlAxnMCHwNwFfukXyjwdcFttydFO5y28rPGRE
+ jpMAuVYpI9XFRouG9KN1ds93UAJtqy3C00p4EB88Q1TRnntoyo+00aHSfu4M2zbvYf/w
+ UywHO8SncaIuF3eSid6xDf87XHG0Q4yLUS650bEo+5F6H6PDM2NWmO7sUPitiq5WnJWV
+ qryD2A22Xx0AZgX501QxTnj7L7r+CvLK6A/o6P288NGnZ7rOifh4nG4N7ogfSSehGZhy
+ SEL1G/scdBJ4l+F5ecXMUBW7ebm6dMl55lXn4U6CqeARAgfdVWYMsWvxgYXAIpDBKMiu
+ iCDw==
+X-Gm-Message-State: AOJu0YzkCmF6ToR3kf4uwAgFdv0vvL9vkJdS76e0VIwLSaA4luyJI3gk
+ 8NzN5Y+nwa48zOkhZpu+4vVSTfMLfLarbiE5+j8=
+X-Google-Smtp-Source: AGHT+IEy2Ci4RHh1ZIrFWv1csqOYGGasE8RCzeZlVnx1pCy2463TO5t5gX5Z0OiWfg0/mzHp5uuJNA==
+X-Received: by 2002:a05:6e02:1303:b0:34c:ecc8:98eb with SMTP id
+ g3-20020a056e02130300b0034cecc898ebmr10130148ilr.28.1693838515209; 
+ Mon, 04 Sep 2023 07:41:55 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- r16-20020a92d990000000b00345d6297aa7sm3364860iln.16.2023.09.04.07.41.52
+ r16-20020a92d990000000b00345d6297aa7sm3364860iln.16.2023.09.04.07.41.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Sep 2023 07:41:54 -0700 (PDT)
+ Mon, 04 Sep 2023 07:41:55 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 14/20] spl: Tidy up load address in spl_ram
-Date: Mon,  4 Sep 2023 08:41:17 -0600
-Message-ID: <20230904144131.2699824-15-sjg@chromium.org>
+Subject: [PATCH v3 15/20] boot: Make standard boot a menu
+Date: Mon,  4 Sep 2023 08:41:18 -0600
+Message-ID: <20230904144131.2699824-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230904144131.2699824-1-sjg@chromium.org>
 References: <20230904144131.2699824-1-sjg@chromium.org>
@@ -88,80 +88,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This CONFIG is used but is not given a value by some boards. Use
-a default value of 0 explicitly, rather than relying on the 0 value
-provided by CONFIG_SPL_LOAD_FIT_ADDRESS
-
-This will allow us to make SPL_LOAD_FIT_ADDRESS depend on SPL_LOAD_FIT
-as it should.
+Collect these options into a menu for easier viewing.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/spl_ram.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+ boot/Kconfig | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-index 93cf420d810a..4158ed1c32d7 100644
---- a/common/spl/spl_ram.c
-+++ b/common/spl/spl_ram.c
-@@ -20,12 +20,16 @@
- static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
- 			       ulong count, void *buf)
- {
--	ulong addr;
-+	ulong addr = 0;
+diff --git a/boot/Kconfig b/boot/Kconfig
+index c9b7d3f710b6..17f54b926f05 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -372,8 +372,8 @@ config BOOT_DEFAULTS
+ 	  of U-Boot to boot various images. Currently much functionality is
+ 	  tied to enabling the command that exercises it.
  
- 	debug("%s: sector %lx, count %lx, buf %lx\n",
- 	      __func__, sector, count, (ulong)buf);
+-config BOOTSTD
+-	bool "Standard boot support"
++menuconfig BOOTSTD
++	bool "Standard boot"
+ 	default y
+ 	depends on DM && OF_CONTROL && BLK
+ 	help
+@@ -393,6 +393,8 @@ config BOOTSTD
+ 	        U-Boot)
+ 	    - bootflow - a description of how to boot (owned by the distro)
  
--	addr = (ulong)CONFIG_SPL_LOAD_FIT_ADDRESS + sector;
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
-+		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
-+				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-+	}
-+	addr += sector;
- 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
- 		addr += image_load_offset;
++if BOOTSTD
++
+ config SPL_BOOTSTD
+ 	bool "Standard boot support in SPL"
+ 	depends on SPL && SPL_DM && SPL_OF_CONTROL && SPL_BLK
+@@ -413,8 +415,6 @@ config VPL_BOOTSTD
+ 	  boot. It is enabled by default since the main purpose of VPL is to
+ 	  handle the firmware part of VBE.
  
-@@ -38,20 +42,23 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 			      struct spl_boot_device *bootdev)
- {
- 	struct legacy_img_hdr *header;
-+	ulong addr = 0;
- 	int ret;
+-if BOOTSTD
+-
+ config BOOTSTD_FULL
+ 	bool "Enhanced features for standard boot"
+ 	default y if SANDBOX
+@@ -673,7 +673,7 @@ config BOOTMETH_SCRIPT
+ 	  This provides a way to try out standard boot on an existing boot flow.
+ 	  It is not enabled by default to save space.
  
--	header = (struct legacy_img_hdr *)CONFIG_SPL_LOAD_FIT_ADDRESS;
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
-+		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
-+				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-+	}
+-endif
++endif # BOOTSTD
  
- 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
--		unsigned long addr = (unsigned long)header;
- 		ret = image_pre_load(addr);
- 
- 		if (ret)
- 			return ret;
- 
- 		addr += image_load_offset;
--		header = (struct legacy_img_hdr *)addr;
- 	}
-+	header = map_sysmem(addr, 0);
- 
- #if CONFIG_IS_ENABLED(DFU)
- 	if (bootdev->boot_device == BOOT_DEVICE_DFU)
-@@ -84,7 +91,7 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 			u_boot_pos = (ulong)spl_get_load_buffer(-sizeof(*header),
- 								sizeof(*header));
- 		}
--		header = (struct legacy_img_hdr *)map_sysmem(u_boot_pos, 0);
-+		header = map_sysmem(u_boot_pos, 0);
- 
- 		ret = spl_parse_image_header(spl_image, bootdev, header);
- 	}
+ config LEGACY_IMAGE_FORMAT
+ 	bool "Enable support for the legacy image format"
 -- 
 2.42.0.283.g2d96d420d3-goog
 
