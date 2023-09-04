@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB87AC83F3F
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 13:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C8ECA0FF3
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 13:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 767BE86995;
+	by phobos.denx.de (Postfix) with ESMTP id BCB008699B;
 	Mon,  4 Sep 2023 15:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Gdsre175";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ohPSnT6B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E85C86828; Mon,  4 Sep 2023 05:21:18 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::624])
+ id 26A4986879; Mon,  4 Sep 2023 05:21:52 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2062a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::62a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44AEC867B5
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 05:21:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A886867B5
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 05:21:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=i9c2vVTo0zw5J7YKOKywmb3kBLDvtgJHe51s/i1fuhFbVCyETcZHvYnX8lKCxWYwqB6yqrK6zrDYViLMWaPSMIXmi/MAYVjXUEfD8yOynPkipTCsojG7zg0v6x/0idpJcFEO/r/v8ilwGTVUC1GrjAKDcVXxOTql5zInR3C+JnFcMathorn+VRMXnB7b1SHhX/OuaQSqAz4c2NKtg4zTS+4fbW6khlVnVLBFjl9Pot+ob2Y6mqhvLMOvVdNPGDM4ZWVfIzIF4e3cIxsdNHcWIqlNccIziteFjaBKrFNxKfRapWAcD4DP8jgphFuulN9illMRALhMT5TTL7dhRhhtJg==
+ b=ZkuVJi8/KrWZiFmOuVBu6PHt5M5+NNRDWnQ9JLb+i+U3ZqT8tr/Wbrjfagb0gt/84g377E7p6Osem36x9sqRSURCHT8eJ6pIRB4Fl1M/VvI4eWy9W23/bx84UeuMRgKCchn1VylC/LeZqZ7ZJd1rgkSZnTqQSvq59DFDOzCq9aek18y2nW5goEl2yRMnE+6gKsDhBlzVLIB5UE+kAZhTkSonW5TZko6fg9WOu3FvEeZkEYKo4ZquM77gm4vvSW2Pwk8aoLDAJkgBhsYgjrQefbwGHLQGUH2z5bKSZAEKKiVCwG0TQzcO+e2RDCwAolCIAH82zHsacRj0yzFLilREfQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p9PaWFcw32FU6yifWsywbF89jPY11/GdhxdtpZNG30I=;
- b=oUdm5nuxw+ydZ+6RQ/5hIWuwCXvogK5e5HaodA4aCkiHhpIRSvdVkQSGQfUkDu2O4LJWwLEe/hOJ/VuQGlSwr2vkDls1rK1tZIEskoBvKj+89z7wMtxa0/EotQvfukKCPZCs+ASZoMaqvSJDJNuq7LBXtZ988iHjUbWOaofIMWE/qM8W18Zx199mjnC4hU/Yad5aXT0LSRW/UmkzkQB8c4qNkMOxZvO1f2PfovNEtWEdZNuN4F0TFiKyz//Sx56HbD9ueeD6uE7D5Vvo0aYdTf95yntY33H2FQC71Ns7nFCSB+8dcJpgpm/lxzwIPuIv+a8oiW74FXmGs8IfoAFMag==
+ bh=j/knzP5tXiuPxkIUMiswJsHaGots66jNuqNzXiY6eQ8=;
+ b=k1sjl8O9DB/uk7w+t4n42pcECHU/e/45+rB0b0mV7/6XUxwF8DgrAvUbnUwjVgBEdNnOE6Y+EwIE8GgTR7KmA69I23WLwHC5lZNKYYuncqdXqtJdiXBAMxVHT0bt7HtSWS15Zsjiok/h/WMUI1BaEyjNpKBLR5Wsi/U6cFT6lcUdsEfBkYX7Jy11RTSZkRU6FetimH+EmXKjctEwcCONtQh38yEE9GSHpZFo6gpl/QG6+bMDdCvELn/PKXmtedGfZZ00dC4z6vcGA9kvs9b63X9HBsoDTBspS4cmZMIcYTStSoFmiVtgrN8ixm1EnP+M5/6cwuURrPI/jNfKdkVGVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p9PaWFcw32FU6yifWsywbF89jPY11/GdhxdtpZNG30I=;
- b=Gdsre1753uikm7tu1LfErehofaWVzPJMEiDMlSJmUt+dgEWjhhE0+oA267efYvUatteHRzGETeFRkdU6wBMyad73S23MXoBlyZFtM5zEC5EfOU0hc+yw+4eAlW0s3wxSzFC1PBECUFLQUUItoUMNUYjhLY+hSyVZZM2uvrNa9cE=
-Received: from BLAPR05CA0010.namprd05.prod.outlook.com (2603:10b6:208:36e::19)
- by CO6PR12MB5393.namprd12.prod.outlook.com (2603:10b6:5:356::9) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=j/knzP5tXiuPxkIUMiswJsHaGots66jNuqNzXiY6eQ8=;
+ b=ohPSnT6BiZKqbc86NgpR7NksHHLH54mmNIyURSKIai6WzQa1c6zIVzsLhruHu/YdaFL7t1LIqW3FFGz52V25NOEhPhdvG7xl5n2GQnDcbhA5Wk5IZar2Vj7/0dIVTYKI/FUG+yDlvMlpulGSt+DfoSTa4mDSwgGCj22+WglGFP4=
+Received: from SN7PR18CA0025.namprd18.prod.outlook.com (2603:10b6:806:f3::29)
+ by PH7PR12MB8595.namprd12.prod.outlook.com (2603:10b6:510:1b5::5)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.32; Mon, 4 Sep
- 2023 03:21:11 +0000
-Received: from BL02EPF0001A0F9.namprd03.prod.outlook.com
- (2603:10b6:208:36e:cafe::ae) by BLAPR05CA0010.outlook.office365.com
- (2603:10b6:208:36e::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.23 via Frontend
- Transport; Mon, 4 Sep 2023 03:21:10 +0000
+ 2023 03:21:43 +0000
+Received: from SA2PEPF00001504.namprd04.prod.outlook.com
+ (2603:10b6:806:f3:cafe::df) by SN7PR18CA0025.outlook.office365.com
+ (2603:10b6:806:f3::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.32 via Frontend
+ Transport; Mon, 4 Sep 2023 03:21:43 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A0F9.mail.protection.outlook.com (10.167.242.100) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SA2PEPF00001504.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Mon, 4 Sep 2023 03:21:09 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.6768.25 via Frontend Transport; Mon, 4 Sep 2023 03:21:42 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Sun, 3 Sep
- 2023 22:21:09 -0500
+ 2023 22:21:08 -0500
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
  (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Sun, 3 Sep
- 2023 22:21:08 -0500
+ 2023 22:20:46 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Sun, 3 Sep 2023 22:20:49 -0500
+ Transport; Sun, 3 Sep 2023 22:20:45 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH 3/3] xilinx: zynqmp: Do not setup boot_targets if driver is
+Subject: [PATCH 2/3] xilinx: versal: Do not setup boot_targets if driver is
  not enabled
-Date: Mon, 4 Sep 2023 08:50:35 +0530
-Message-ID: <20230904032035.11926-4-venkatesh.abbarapu@amd.com>
+Date: Mon, 4 Sep 2023 08:50:34 +0530
+Message-ID: <20230904032035.11926-3-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230904032035.11926-1-venkatesh.abbarapu@amd.com>
 References: <20230904032035.11926-1-venkatesh.abbarapu@amd.com>
@@ -88,26 +88,26 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0F9:EE_|CO6PR12MB5393:EE_
-X-MS-Office365-Filtering-Correlation-Id: 049f0149-56d6-4c26-7386-08dbacf5fbea
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001504:EE_|PH7PR12MB8595:EE_
+X-MS-Office365-Filtering-Correlation-Id: bd47c1df-3825-4231-be3e-08dbacf60faf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: eu2pnmTFelOi6Ljy/F7pG7G3EcWNO5QpJKHhmUikuTf4m3yNCAHLLu+J6/k3+fYGQTa5P1rIyWvq/PYfHhQWHrsqpYxwY10x00Au7ZLg2+6jKXYReLial0xAZYX37976+wVmsEXWuencPRm9JCU+XScuIA06Vv8z8qtHiR9NVXefJeqV1r3XlJs95pSBHp4YmxBeFcNm4Qa1ckwa+jFLWd5Mk0DnjBgTAJUp2N+2n8VZXtbKZrVvFpgHTfIdGdKM02vKVDiggXfj4i8QH7Hib4pA4VOwnvIm9AOPaC8zcIg18NnX8lw/Sy+jorhGXVooIP53IcTRi+wrIH0XB5HvvzGRD9Ho9J4DuL7xhibbYgFS3IlWZaP9wlhwNnGltAJn2dDe8Yg3EVgso8OENeo3gSqIa5SHkRpcYSadzvqKhDkfsfMAyWrC+BJPsTsb0Z57tSR+6O7gCOZig1lPgBNLRfCm3zE3vH2oPoiiSs78NsAn7J+N1C3VBKRqYJAZopzPHr/bw2LpFrl3F70LsSAwi9xFcUhPGu/HMhhMkZ0zz3k+0sFgzuKm0cP6O+ZgNNbgU2rnvbB6/naXRQHsBSEh9kF5F4VxtMg7K8RHv1cYZoplKp53xyjoa/M2HY7S46kq1sFaQ+DtvsvLpsXCT+hrH61OM7M7mFot5P0sOhHLWzyWPyL/mVRT/ssp91vp3YAlNKJkI95oso4TOxSE8nDeizzPnC2mk0hdLL1uqM6uJ11T7TuT2e1Lr2kBTFYJ8gjplGl4DVFfbdwZSbQZH3a0tw==
+X-Microsoft-Antispam-Message-Info: OremzvlL+1S/DiiVGTKcin/ZeJAtM9mRJmHDRzbhHZ/g4P9JDC3+7KgkbDCau6n9QoOZFtPOXgfF7oLJuEoDmQMB4oXunN08YE4t9G6QBc93BQvJSAEuKyPY/oj6leGmnnF/bDAfwYki7vnyI/av/g3PmwfQK/3S1JBdUP1T6DQNL9aUEQh1zRG71dJcEM9NwJOLdxXz+fYwK27DDTzX5WA2yP4ctceSaiGe0YjCacE8nc6lojwX8P/MMnxpjFDNkkqXqUQYj7dhigQ1wkEtk2/JHHdbBE8hy0FnT1gzIBFR72fLPscEG9G4qUAN3tFGzGNIpffKGTUNO+4B9i1CHhqt4XC+O4ndM/IZ4oDR4jS0RDeYZYcVNBwo9ff6pjUze94ZNpG7LeCIUvlBIV7weWZ7jdbHxFAZ4HFSjYYE0g6v+C+G+rZWs76u+uuqjA08vxLLUGae1HZta6r9DjnKzcOlYJ5JtpF01TK4ioWVH24SO/W8Xw4HM9Qnt/dYiRzLFgwfQz85fVr2wpUi5eNvbZD4Qn+CdcC8PiBBaNAlO6T2XLZpYgq0jljO10GQAydKK8NCKySA8AFitf5FZN00RQGBEyRDJjcjfSgwPw0V3r20Qg7+PG4ST89LXA/X+sN6vsXkFO6vIRXxjIdjKchYLggBCEQkcSzNTgTzQnSn8EcDUFx1By3YpXEUHvjMvVGZouZOYRtcTJONy2BbRGV+t9RQCA8CUvKuhkgFJ0DopSxtMimzX7xdwVjA2oc7kfFxxEDyrUjefU/s1zfPbNViCA==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(396003)(376002)(39860400002)(136003)(186009)(1800799009)(82310400011)(451199024)(40470700004)(36840700001)(46966006)(40460700003)(41300700001)(356005)(81166007)(82740400003)(6666004)(86362001)(478600001)(2616005)(83380400001)(47076005)(426003)(336012)(26005)(107886003)(1076003)(36860700001)(40480700001)(70586007)(70206006)(54906003)(2906002)(36756003)(6916009)(316002)(8676002)(8936002)(5660300002)(4326008)(36900700001);
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(39860400002)(396003)(346002)(136003)(1800799009)(186009)(82310400011)(451199024)(40470700004)(36840700001)(46966006)(5660300002)(107886003)(41300700001)(40460700003)(356005)(1076003)(2616005)(26005)(336012)(426003)(2906002)(47076005)(81166007)(82740400003)(86362001)(36756003)(36860700001)(40480700001)(4326008)(8676002)(8936002)(83380400001)(6666004)(478600001)(316002)(6916009)(70206006)(70586007)(54906003)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2023 03:21:09.5218 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 049f0149-56d6-4c26-7386-08dbacf5fbea
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2023 03:21:42.7540 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bd47c1df-3825-4231-be3e-08dbacf60faf
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0F9.namprd03.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001504.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR12MB5393
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8595
 X-Mailman-Approved-At: Mon, 04 Sep 2023 15:58:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -134,14 +134,14 @@ in boot process and don't prioritize boot device in this case.
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- board/xilinx/zynqmp/zynqmp.c | 71 ++++++++++++++++++------------------
- 1 file changed, 36 insertions(+), 35 deletions(-)
+ board/xilinx/versal/board.c | 67 +++++++++++++++++++------------------
+ 1 file changed, 34 insertions(+), 33 deletions(-)
 
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 309f24a5f4..0b6d4e5707 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -391,7 +391,7 @@ int board_late_init(void)
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index 60bf37d3c9..982a8b3779 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -133,7 +133,7 @@ int board_late_init(void)
  	int bootseq = -1;
  	int bootseq_len = 0;
  	int env_targets_len = 0;
@@ -149,22 +149,22 @@ index 309f24a5f4..0b6d4e5707 100644
 +	const char *mode = NULL;
  	char *new_targets;
  	char *env_targets;
- 	int ret, multiboot;
-@@ -442,8 +442,8 @@ int board_late_init(void)
- 					      "mmc@ff160000", &dev) &&
+ 
+@@ -175,8 +175,8 @@ int board_late_init(void)
+ 					      "mmc@f1050000", &dev) &&
  		    uclass_get_device_by_name(UCLASS_MMC,
- 					      "sdhci@ff160000", &dev)) {
--			puts("Boot from EMMC but without SD0 enabled!\n");
+ 					      "sdhci@f1050000", &dev)) {
+-			puts("Boot from EMMC but without SD1 enabled!\n");
 -			return -1;
-+			debug("SD0 driver for SD0 device is not present\n");
++			debug("SD1 driver for SD1 device is not present\n");
 +			break;
  		}
- 		debug("mmc0 device found at %p, seq %d\n", dev, dev_seq(dev));
- 
-@@ -457,8 +457,8 @@ int board_late_init(void)
- 					      "mmc@ff160000", &dev) &&
+ 		debug("mmc1 device found at %p, seq %d\n", dev, dev_seq(dev));
+ 		mode = "mmc";
+@@ -188,8 +188,8 @@ int board_late_init(void)
+ 					      "mmc@f1040000", &dev) &&
  		    uclass_get_device_by_name(UCLASS_MMC,
- 					      "sdhci@ff160000", &dev)) {
+ 					      "sdhci@f1040000", &dev)) {
 -			puts("Boot from SD0 but without SD0 enabled!\n");
 -			return -1;
 +			debug("SD0 driver for SD0 device is not present\n");
@@ -172,10 +172,10 @@ index 309f24a5f4..0b6d4e5707 100644
  		}
  		debug("mmc0 device found at %p, seq %d\n", dev, dev_seq(dev));
  
-@@ -475,8 +475,8 @@ int board_late_init(void)
- 					      "mmc@ff170000", &dev) &&
+@@ -205,8 +205,8 @@ int board_late_init(void)
+ 					      "mmc@f1050000", &dev) &&
  		    uclass_get_device_by_name(UCLASS_MMC,
- 					      "sdhci@ff170000", &dev)) {
+ 					      "sdhci@f1050000", &dev)) {
 -			puts("Boot from SD1 but without SD1 enabled!\n");
 -			return -1;
 +			debug("SD1 driver for SD1 device is not present\n");
@@ -183,8 +183,8 @@ index 309f24a5f4..0b6d4e5707 100644
  		}
  		debug("mmc1 device found at %p, seq %d\n", dev, dev_seq(dev));
  
-@@ -490,39 +490,40 @@ int board_late_init(void)
- 		env_set("modeboot", "nandboot");
+@@ -214,37 +214,38 @@ int board_late_init(void)
+ 		bootseq = dev_seq(dev);
  		break;
  	default:
 -		mode = "";
@@ -195,13 +195,11 @@ index 309f24a5f4..0b6d4e5707 100644
 -	if (bootseq >= 0) {
 -		bootseq_len = snprintf(NULL, 0, "%i", bootseq);
 -		debug("Bootseq len: %x\n", bootseq_len);
--		env_set_hex("bootseq", bootseq);
 -	}
 +	if (mode) {
 +		if (bootseq >= 0) {
 +			bootseq_len = snprintf(NULL, 0, "%i", bootseq);
 +			debug("Bootseq len: %x\n", bootseq_len);
-+			env_set_hex("bootseq", bootseq);
 +		}
  
 -	/*
@@ -225,7 +223,6 @@ index 309f24a5f4..0b6d4e5707 100644
 -			env_targets ? env_targets : "");
 -
 -	env_set("boot_targets", new_targets);
--	free(new_targets);
 +		/*
 +		 * One terminating char + one byte for space between mode
 +		 * and default boot_targets
@@ -247,11 +244,10 @@ index 309f24a5f4..0b6d4e5707 100644
 +				env_targets ? env_targets : "");
 +
 +		env_set("boot_targets", new_targets);
-+		free(new_targets);
 +	}
  
- 	reset_reason();
- 
+ 	return board_late_init_xilinx();
+ }
 -- 
 2.17.1
 
