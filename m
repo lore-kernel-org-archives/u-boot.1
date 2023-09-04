@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD03BC83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:50:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803ABC83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D4F0869D1;
-	Mon,  4 Sep 2023 18:49:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 904F686932;
+	Mon,  4 Sep 2023 18:49:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h3K9n5nq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PxzwsbKg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45AE3863DC; Mon,  4 Sep 2023 18:49:51 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id C736286886; Mon,  4 Sep 2023 18:49:52 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 801368692D
+ by phobos.denx.de (Postfix) with ESMTPS id 89F838694A
  for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 18:49:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-50079d148aeso2749991e87.3
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-500cefc3644so2754457e87.3
  for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 09:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693846185; x=1694450985; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EzJjNoo2sIWChbTis4ZDuJ/D0QUqTTGY5c1Qwr01H/s=;
- b=h3K9n5nq6/UdIdWqMDOqieBPBlG9ynFoBpMnu/pUzfQYnqvh1pGou61bRb20QarCMU
- LlhvpYygbEykqG/LMin0cbdxlgN4v8/UMsTvd3QrrYGpZsFif1HQdMJDg3DvS5+8cYYw
- kwi3Xn3SztkDZWajfU0zBKrpEc9OX/E90uSqM=
+ bh=dQZDNocKKaaBtAruQtgzDe3OAtegxRfGFSdsfDCpzAs=;
+ b=PxzwsbKgOFS1t4mpcyFMlPYHxA6MpqdXhiIM1en1WqX35kTZlQgLL4Ho9O7f9k7k9o
+ ybURY3OWgdxZult/DYDbxyidI5kA30T+YcetL8UxDxJCOjF2lZYYee3sFloifwSitvpL
+ SP1OiuCMBDsuaxTwqgQIARvVnrcdrh/DB0vo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693846185; x=1694450985;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EzJjNoo2sIWChbTis4ZDuJ/D0QUqTTGY5c1Qwr01H/s=;
- b=iMPK/R1uZNY9g5JiKpypcWvmFpO83g7DTumNSQc4Q/ZaiZQV4k4yI2ofbbilgR3Tyh
- fNR8b/gzopxDXPMDSWAlHf96oqdw3OWOIuGU8Oxjy4SCwaRcHO0TGOSm6eZ5wYSJhEoi
- pFMdXeCTuslurpsou2xFXn9BIV8yVd8KjFkRgHXnLDkovkaeNxwYo7pziRAJ01Dnw1dO
- 2YixpW/RcpOyWX/I11NbF54lnnsAQ0eM3PE5z3x48KsFRz5CClNuckoNVgRKxGiY873f
- CIdvF5AsinZ9uMqNEW1SP5TJXh8woHHdHIaWKS8dL8p1yKr1F9QTUVAtx7SgK84cLdJb
- cFsQ==
-X-Gm-Message-State: AOJu0Yw/yqvCGiPLj5XVjRF8za2o8oE9YWXhaU7zAp/sJpZ8844ns4Qy
- cMsVDfSt4DhRNyTBPLa+oP30t/QITqCijXjBvESa6g==
-X-Google-Smtp-Source: AGHT+IHoRCy7VQeF7rueCojdtjKNTEmeBqiB/KmTU9DdTXvjuzy+cO8RE3W14tPTcXWYafl0MdoYm9uP4mFYBxFdxKs=
-X-Received: by 2002:a19:504e:0:b0:4f8:6d53:a68f with SMTP id
- z14-20020a19504e000000b004f86d53a68fmr5458310lfj.64.1693846184548; Mon, 04
+ bh=dQZDNocKKaaBtAruQtgzDe3OAtegxRfGFSdsfDCpzAs=;
+ b=gbxZg2Tg7UiQYQ8mggSHQKUIW6sbFVvn7/4q88334VlIyFuexDnKHoVBSxeDheYbf2
+ FbpSykbeI7tVP1HuzO9aNWJ0dG+dg2cD4lt+RxS7ZZJcjizWgy+6p9DcT8XElnf4h2HR
+ ZrS82kz4prmwCG8BsiA1qM2zuTbFbRHNk0hqOlRaaO8JQGCXTm+C8eYLrNY+pNgwJBB4
+ EBFM8wmkxWjADycJKRShe63FleCvINwDsbhOnQEhjlsVpOUlm1aSCA7t60shUv05M3II
+ O/IUaiE45WV8E9vabfFbmfxOYuGhO7bfnoGRsjhwTJQrxHa5uvtzjd5uhJkbxJvfGwX9
+ 8Chg==
+X-Gm-Message-State: AOJu0YzoLjkIZryckAnIyYxSvKG4m2rHg44Py1sybSmVqBgOYZ82f5s7
+ xuiYII18+ydeIMYwI29dzSxe2ZpkJ/UgRNu92CCQnQ==
+X-Google-Smtp-Source: AGHT+IEH92ryRRgvWhPWsos9FUNmY7eODafvQdFvtcV0pPDsa2vCLcTfCWGbDRUadY4LOUwQ5V8PGL3tfO85Lz8k5hk=
+X-Received: by 2002:a05:6512:20cb:b0:500:8c19:d8c6 with SMTP id
+ u11-20020a05651220cb00b005008c19d8c6mr6303151lfr.58.1693846184553; Mon, 04
  Sep 2023 09:49:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <tencent_0D22B14196104C56C3E5BB4AD46BCF283306@qq.com>
-In-Reply-To: <tencent_0D22B14196104C56C3E5BB4AD46BCF283306@qq.com>
+References: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
+In-Reply-To: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Sep 2023 10:48:47 -0600
-Message-ID: <CAPnjgZ0mW0gtQdUprkR=BHoHX3pmbAqt2BTcJnH=4LyyzYxggQ@mail.gmail.com>
-Subject: Re: [PATCH] binman: Fix SyntaxWarning: invalid escape sequence '\('
-To: Rong Tao <rtoax@foxmail.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Ivan Mikhaylov <fr0st61te@gmail.com>, open list <u-boot@lists.denx.de>,
- Rong Tao <rongtao@cestc.cn>
+Date: Mon, 4 Sep 2023 10:48:46 -0600
+Message-ID: <CAPnjgZ1U1an8+2-VgEXkqZtf3yWTggtEmjn-RFjm+ESgS+Qu3g@mail.gmail.com>
+Subject: Re: Binman how to build using Rockchip BL32 binary as OP-TEE
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,48 +82,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rong,
+Hi Massimo,
 
-On Mon, 4 Sept 2023 at 05:00, Rong Tao <rtoax@foxmail.com> wrote:
+On Mon, 4 Sept 2023 at 09:05, Massimo Pegorer
+<massimo.pegorer+oss@gmail.com> wrote:
 >
-> From: Rong Tao <rongtao@cestc.cn>
+> Hi,
 >
-> Reproduct warning:
+> Is there any way for binman to package FIT with U-Boot TF-A and
+> OP-TEE, using bl32 binary provided by Rockchip as TEE?
 >
->     $ sudo git clean -dfx
->     $ make CROSS_COMPILE="" qemu-x86_64_defconfig
->     $ sudo make -j8
+> I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
+> binman failed.
+>
+> In my poor understanding of Python code, it seems binman accepts only
+> ELF format or a binary format starting with optee_v1_header, but
+> binaries provided by Rockchip in rkbin repository do not have this
+> header.
 
-I hope you don't need sudo
+Yes that is correct. How would U-Boot know the load address of the TEE
+fille? Hmm it seems to be a fixed address. Perhaps you could change
+the rockchip-u-boot.dtsi file to make the 'tee-os' node a 'blobext'
+node instead, then add a filename property in there with the name of
+your file?
 
->     ...
->     u-boot/tools/binman/etype/section.py:25:
->     SyntaxWarning: invalid escape sequence '\('
->     """Entry that contains other entries
 >
-> Signed-off-by: Rong Tao <rongtao@cestc.cn>
-> ---
->  tools/binman/etype/section.py | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/tools/binman/etype/section.py b/tools/binman/etype/section.py
-> index fb49e85a7634..30c1041c7e8d 100644
-> --- a/tools/binman/etype/section.py
-> +++ b/tools/binman/etype/section.py
-> @@ -40,7 +40,7 @@ class Entry_section(Entry):
->      For example code, see etypes which subclass `Entry_section`, or `cbfs.py`
->      for a more involved example::
->
-> -       $ grep -l \(Entry_section tools/binman/etype/*.py
-> +       $ grep -l \\(Entry_section tools/binman/etype/*.py
->
->      ReadNode()
->          Call `super().ReadNode()`, then read any special properties for the
-> --
-> 2.41.0
->
-
-Can you please regenerate entries.rst as well? We need to keep that in sync.
+> Thanks in advance for any hints!
 
 Regards,
 Simon
