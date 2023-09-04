@@ -4,123 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0325C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 07:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409D0C71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 07:42:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07054868D0;
-	Mon,  4 Sep 2023 09:41:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D972864A7;
+	Mon,  4 Sep 2023 09:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Vz2o1J3N";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="pPGFqJh/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECA96868D9; Mon,  4 Sep 2023 09:41:15 +0200 (CEST)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ id E1F41864A7; Mon,  4 Sep 2023 09:42:37 +0200 (CEST)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEEC886497
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:41:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBBCD86497
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:42:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20230904074109epoutp02400e37cde30b53e7c154c506d87c0079~BojGzIKzi1167211672epoutp02M
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 07:41:09 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20230904074109epoutp02400e37cde30b53e7c154c506d87c0079~BojGzIKzi1167211672epoutp02M
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20230904074229epoutp045b4cc032be58ec682e1f5f019a0c2a14~BokRVHYav2978529785epoutp04Z
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 07:42:29 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20230904074229epoutp045b4cc032be58ec682e1f5f019a0c2a14~BokRVHYav2978529785epoutp04Z
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1693813269;
- bh=T6psqt7K7N26xyePzgOwEqYth4ZPqBf+O+4UWzUI80s=;
+ s=mail20170921; t=1693813349;
+ bh=2mfyyfeOoZYYn/x854G72DEl+8YQLEElIQLkYQw65qA=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=Vz2o1J3NNCtaKl1KoDSrf09HdAYCnJeD1dAG87YphVnv/g5lchzi4bnhalTuufWMy
- EWw6Jb1dlvWD0tt+7X+/CBv/GERgrhz1S8uOnc8wTCWKIL4xNxvDDbfaoDJkL+dC8g
- doBQvWuK7T7sukMlj/g7nxFAd0Ghje1v68ZYgYng=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ b=pPGFqJh/4m3DfsVMpSL4gpQsfd5rB5jCNV1XZHu4ESzoYtD2bH9utyPVctMpSPa9x
+ WRRf712FnXSIPn14jxJ6RilcqOxFBeJZ09diMgX9Yt8SLh8O2cxKQjahCJ7Dzdgrxb
+ LqdJtqLv3FdW7YvEWOYvVxbyItyW5xmVMQzLADEE=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
  epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230904074108epcas2p1db4058cf0fe13109e1806641d0a3e09d~BojGeBBbC1711417114epcas2p1f;
- Mon,  4 Sep 2023 07:41:08 +0000 (GMT)
+ 20230904074228epcas2p1130ebbc6d27577b7303a995e3dddd87e~BokRD8wDH2143621436epcas2p1y;
+ Mon,  4 Sep 2023 07:42:28 +0000 (GMT)
 Received: from epsmges2p3.samsung.com (unknown [182.195.36.70]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4RfLD41sKNz4x9Py; Mon,  4 Sep
- 2023 07:41:08 +0000 (GMT)
-Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4RfLFc2b09z4x9Px; Mon,  4 Sep
+ 2023 07:42:28 +0000 (GMT)
+Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
  epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- E2.83.09660.31A85F46; Mon,  4 Sep 2023 16:41:07 +0900 (KST)
+ FD.04.09660.46A85F46; Mon,  4 Sep 2023 16:42:28 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
- 20230904074106epcas2p4a130e7d89e79c9593a41ec168065f0b7~BojEks4RK2878828788epcas2p4P;
- Mon,  4 Sep 2023 07:41:06 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20230904074227epcas2p3fa1fdcecbeb64c26f47e191666e83d7d~BokQLRvTt1596615966epcas2p3l;
+ Mon,  4 Sep 2023 07:42:27 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20230904074106epsmtrp11dc369b984e5615db1c15ee0ff4c6787~BojEkFPKr1483114831epsmtrp1z;
- Mon,  4 Sep 2023 07:41:06 +0000 (GMT)
-X-AuditID: b6c32a47-afdff700000025bc-91-64f58a1316c0
+ 20230904074227epsmtrp1f63d85a82ab57f883cf12d3f61fa1918~BokQKr4en1511715117epsmtrp1v;
+ Mon,  4 Sep 2023 07:42:27 +0000 (GMT)
+X-AuditID: b6c32a47-afdff700000025bc-bc-64f58a64a108
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- DF.2B.18916.21A85F46; Mon,  4 Sep 2023 16:41:06 +0900 (KST)
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 9B.5B.08788.36A85F46; Mon,  4 Sep 2023 16:42:27 +0900 (KST)
 Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20230904074106epsmtip10ad09a5890bbdecb99a56eb954ad2fbe~BojEVfPB70261502615epsmtip1C;
- Mon,  4 Sep 2023 07:41:06 +0000 (GMT)
+ 20230904074227epsmtip15f98deef09be3a175ad3b4f894f06c9d~BokQB24E70423004230epsmtip1M;
+ Mon,  4 Sep 2023 07:42:27 +0000 (GMT)
 From: "Chanho Park" <chanho61.park@samsung.com>
 To: "'Leo Liang'" <ycliang@andestech.com>
 Cc: "'Rick Chen'" <rick@andestech.com>, "'Simon Glass'" <sjg@chromium.org>,
  <u-boot@lists.denx.de>
-In-Reply-To: <ZPWAx5JcsZRizFxb@swlinux02>
-Subject: RE: [PATCH v2 2/3] riscv: timer: add timer_get_boot_us for BOOTSTAGE
-Date: Mon, 4 Sep 2023 16:41:06 +0900
-Message-ID: <003b01d9df03$2a01d780$7e058680$@samsung.com>
+In-Reply-To: <ZPWBAKPO5HBAzFRK@swlinux02>
+Subject: RE: [PATCH v2 3/3] timer: riscv_aclint_timer: add timer_get_boot_us
+ for BOOTSTAGE
+Date: Mon, 4 Sep 2023 16:42:27 +0900
+Message-ID: <003c01d9df03$5a67fa80$0f37ef80$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
 Content-Language: en-us
-Thread-Index: AQJDo85+4KW0dBmGLBsoxGjOXDx6aAImVWeyAu9hIN0BURnKwa8DhTUA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLKsWRmVeSWpSXmKPExsWy7bCmua5w19cUg03/OSzevjjLaPFtyzZG
+Thread-Index: AQJDo85+4KW0dBmGLBsoxGjOXDx6aAKO/hFpAXmVEGsDGNxoKa79s1Vg
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrHKsWRmVeSWpSXmKPExsWy7bCmqW5K19cUg6tvBC3evjjLaPFtyzZG
  i7d7O9ktHh96zeTA4rHn9Cxmj9kNF1k8zt7ZwRjAHJVtk5GamJJapJCal5yfkpmXbqvkHRzv
  HG9qZmCoa2hpYa6kkJeYm2qr5OIToOuWmQO0TkmhLDGnFCgUkFhcrKRvZ1OUX1qSqpCRX1xi
- q5RakJJTYF6gV5yYW1yal66Xl1piZWhgYGQKVJiQnXF8NW/BRv6KmdsWsDQw9vF0MXJySAiY
- SBw4vZ6pi5GLQ0hgB6PEsvkX2SGcT4wSU+9sYoFzup69ZodpOXj0LTNEYiejxJUDS1ghnBeM
- Eu8ObGIFqWIT0Jd42bENzBYR0JRY9PQkYxcjBwezQIrEnveWIGFOoPDHlTOYQWxhAX+J0/N6
- mUBsFgEViS/TljCC2LwClhJ7G/dB2YISJ2c+YQGxmQXkJba/ncMMcZCCxM+ny1gh4uISL48e
- YYdY6yax9fQjsNskBH6yS/z5/JAVosFFYsb/E4wQtrDEq+NboD6TknjZ38YOcqeEQLnEjmVJ
- EL0tjBLNbXugltlL/Lg5hRXiF02J9bv0IcqVJY7cgjqNT6Lj8F+oKbwSHW1CEI3qEge2T2eB
- sGUluud8Zp3AqDQLyWOzkDw2C8kzsxB2LWBkWcUollpQnJueWmxUYAyP6uT83E2M4HSo5b6D
- ccbbD3qHGJk4GA8xSnAwK4nwyml/ShHiTUmsrEotyo8vKs1JLT7EaAoM6onMUqLJ+cCEnFcS
- b2hiaWBiZmZobmRqYK4kznuvdW6KkEB6YklqdmpqQWoRTB8TB6dUA1PE2xWHtt9XvjwhX+BX
- xaK98dvXqj/4WrvN8vDs1MXsJ5/xZK6Z8j+26+0L4Uv1nBsZK1SbJ/+ZkzEpY9m7oPdLCi8v
- m7XBasoyu9O3BL4JTL9ydE+ZWpvl6YXLnk30YO+5+Nrt3cWlmt61rBrMFxvf92t8Tdp6bY/4
- tAIu7jUKzvM/Lzp38Ej9sel51Wd71a7cvmdcOPuq3D1xYdZ+tqkc6ppKjxfuSyzO0/acsfjI
- TeU+GQeGCP6PleUV989Fz+fbceicoO523eK7gT+1lI/u0BDVWZG49paUkPJ2o5Y/CXWTj7Y8
- j18ZXVE+Nea0mj+ny4/nIj+vC9zJvmKjLTDn7Ylk7V2TQ+acvbS91zCWRYmlOCPRUIu5qDgR
- AAEE0ykQBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLLMWRmVeSWpSXmKPExsWy7bCSnK5Q19cUg5s7dS3evjjLaPFtyzZG
- i7d7O9ktHh96zeTA4rHn9Cxmj9kNF1k8zt7ZwRjAHMVlk5Kak1mWWqRvl8CVcXw1b8FG/oqZ
- 2xawNDD28XQxcnJICJhIHDz6lrmLkYtDSGA7o8TBd6dZIRKyEs/e7WCHsIUl7rccYYUoesYo
- Mb3jH1gRm4C+xMuObWC2iICmxKKnJxlBbGaBNIkDNy8wQjQ8YZRYdf87M0iCE6jo48oZYLaw
- gK/Eha3bWEBsFgEViS/TloA18wpYSuxt3AdlC0qcnPkEqIYDaKieRNtGqPnyEtvfzmGGOE5B
- 4ufTZawQcXGJl0ePsMM88OfoXDaI29wktp5+xArzzKvjW9gnMIrOQrJhFsKGWUg2zEIydQEj
- yypG0dSC4tz03OQCQ73ixNzi0rx0veT83E2M4BjSCtrBuGz9X71DjEwcjIcYJTiYlUR45bQ/
- pQjxpiRWVqUW5ccXleakFh9ilOZgURLnVc7pTBESSE8sSc1OTS1ILYLJMnFwSjUw+a2+NZnz
- 76w1ZpMz5MNtZprnPbt//e6ZxJlisT2JjzP+ez5KlAvJX3+kya3gTOTJBVssFFZclzPmboiV
- jyt2WlZ0/W9WyIM1bsuvV/Tb6HRqyVV+DLL7yKHBFvvi518Wzr0Jrgtb/mU+iDjz6Y/NmuBd
- p6aL67N2x7JoKh1+ue7Uaq4Yxy2XIn3WKpbLSmwUePr5yhXReEXRl3nXfHVv3Dqd3fzn9e+N
- RzZIHbyYlyx4vHyOgHra4eib+5d1XOP8dzOlk6FTndeyuv9mkfqnj1mnV4mf+S1TurdkgaXJ
- lPyFvy+djnu7b7rxFf/Qi++5ll9/1y6e/PryLrn60PIZPXwWq9Wfxfav364e7vomV4mlOCPR
- UIu5qDgRAPSC4ssQAwAA
-X-CMS-MailID: 20230904074106epcas2p4a130e7d89e79c9593a41ec168065f0b7
+ q5RakJJTYF6gV5yYW1yal66Xl1piZWhgYGQKVJiQnfFp7wqmglN8FX9mzWVrYLzG3cXIySEh
+ YCLxb+dt1i5GLg4hgR2MEkeubWSGcD4xSuw+d50dwvnGKNEzZR8bTMuVKe+gEnsZJc5t7YZq
+ ecEo8WDuX0aQKjYBfYmXHdtYQWwRAU2JRU9PAsU5OJgFUiT2vLcECXMChXdeOMcCYgsLxEh8
+ mPUVbAGLgIrEhosbwWxeAUuJPYe/sELYghInZz4Bq2cWkJfY/nYOM8RBChI/ny5jhYiLS7w8
+ eoQdYq2bxPbPB8B+kxBo5JBoaP0J9YGLxL5tv6GahSVeHd/CDmFLSbzsb2MHuVNCoFxix7Ik
+ iN4WRonmtj1Q9fYSP25OYYX4RVNi/S59iHJliSO3oE7jk+g4/BdqCq9ER5sQRKO6xIHt01kg
+ bFmJ7jmfWScwKs1C8tgsJI/NQvLMLIRdCxhZVjGKpRYU56anFhsVGMPjOjk/dxMjOCFque9g
+ nPH2g94hRiYOxkOMEhzMSiK8ctqfUoR4UxIrq1KL8uOLSnNSiw8xmgKDeiKzlGhyPjAl55XE
+ G5pYGpiYmRmaG5kamCuJ895rnZsiJJCeWJKanZpakFoE08fEwSnVwOTcJfLI5GLJD5dnLvJr
+ znJ37MvlCfBcEVBcqL/lReMFpfXn4jKl5rooce01PeFbeyM2rkvkyNHwX/u2X1p2eM8KhcRX
+ l3TdGFzW9U4otvtu/17b8nLlF+UId+MNG94L77Z8GGSd9VNNTCG9nEsqUCQ8pDbjAfuO/V98
+ 925oL6056hOm/DVgVsay42a6f8M26ZaH/XmdmtX4aNvho7cj9feXFtZlvOw/HODbrBleHLIq
+ kt/osoDc+VUzNjXuP68s+Gptofn8+iR9pXruJcJ5107eeC3w8GHIiVrbtR9Z+dYs9lz6pojL
+ jNdeq0HfWNfANXCSCessafZr213+T2OOLLSSrRapWiN3bMYrmdbtSizFGYmGWsxFxYkAgDR3
+ KREEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpikeLIzCtJLcpLzFFi42LZdlhJTje562uKQe88S4u3L84yWnzbso3R
+ 4u3eTnaLx4deMzmweOw5PYvZY3bDRRaPs3d2MAYwR3HZpKTmZJalFunbJXBlfNq7gqngFF/F
+ n1lz2RoYr3F3MXJySAiYSFyZ8o69i5GLQ0hgN6NE/4rJjBAJWYln73awQ9jCEvdbjrBCFD1j
+ lHj2cR8bSIJNQF/iZcc2VhBbREBTYtHTk2DNzAJpEgduXmCEaHjCKHFv5iFmkAQnUNHOC+dY
+ QGxhgSiJ7WuOgsVZBFQkNlzcCDaUV8BSYs/hL6wQtqDEyZlPgOo5gIbqSbRthJovL7H97Rxm
+ iOMUJH4+XcYKEReXeHn0CDvMA3+OzmWDuM1NYvvnA6wwz7w6voV9AqPoLCQbZiFsmIVkwywk
+ UxcwsqxilEwtKM5Nzy02LDDKSy3XK07MLS7NS9dLzs/dxAiOJi2tHYx7Vn3QO8TIxMF4iFGC
+ g1lJhFdO+1OKEG9KYmVValF+fFFpTmrxIUZpDhYlcd5vr3tThATSE0tSs1NTC1KLYLJMHJxS
+ DUyz5vZP/r20OrkooyxKu3eOr/3HfRJSKwXeOD5eK+Se8FHMhW19x07e9h3TbZ3MtyYzzHKZ
+ LM0xgWVpUFOe9YeL+1awFiTwMDpntR6b0ryqLeVnrmVgef+z551Mtj1bT/m1m2j97UwtrDaR
+ CX65ZcYao4WlnVmmxcEem3wybm6K1/JINpy/4rML++zTOwV/mHktfj+N4XbsyxtKpyRjOQ7W
+ zruzUd5VX6B+5foLfKYMxvX6x9evbVQ8NOth+L4jex/W9dw/9YzLuzRo9vv/Ht8VrAQ9Tpjq
+ f457wlCxsNQ06oi28rVctQWXPuq1PzdrcOFasG+SmMaOTYmrzB4HH43s+pG3NljKmsu6Q0Xr
+ qxJLcUaioRZzUXEiAOSWm2QVAwAA
+X-CMS-MailID: 20230904074227epcas2p3fa1fdcecbeb64c26f47e191666e83d7d
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: AUTO_CONFIDENTIAL
 CMS-TYPE: 102P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230828094952epcas2p1826292dae2e93fb619cc5fa146bb0787
+X-CMS-RootMailID: 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5
 References: <20230828094938.2061606-1-chanho61.park@samsung.com>
- <CGME20230828094952epcas2p1826292dae2e93fb619cc5fa146bb0787@epcas2p1.samsung.com>
- <20230828094938.2061606-3-chanho61.park@samsung.com>
- <ZPWAx5JcsZRizFxb@swlinux02>
+ <CGME20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5@epcas2p3.samsung.com>
+ <20230828094938.2061606-4-chanho61.park@samsung.com>
+ <ZPWBAKPO5HBAzFRK@swlinux02>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,39 +142,40 @@ Hi,
 
 > -----Original Message-----
 > From: Leo Liang <ycliang@andestech.com>
-> Sent: Monday, September 4, 2023 4:01 PM
+> Sent: Monday, September 4, 2023 4:02 PM
 > To: Chanho Park <chanho61.park@samsung.com>
 > Cc: Rick Chen <rick@andestech.com>; Simon Glass <sjg@chromium.org>; u-
 > boot@lists.denx.de
-> Subject: Re: [PATCH v2 2/3] riscv: timer: add timer_get_boot_us for
-> BOOTSTAGE
+> Subject: Re: [PATCH v2 3/3] timer: riscv_aclint_timer: add
+> timer_get_boot_us for BOOTSTAGE
 > 
 > Hi Chanho,
 > 
-> On Mon, Aug 28, 2023 at 06:49:37PM +0900, Chanho Park wrote:
+> On Mon, Aug 28, 2023 at 06:49:38PM +0900, Chanho Park wrote:
 > > timer_get_boot_us function is required to record the boot stages as
 > > us-based timestamp.
 > >
 > > Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 > > ---
-> >  drivers/timer/riscv_timer.c | 21 +++++++++++++++++++++
-> >  1 file changed, 21 insertions(+)
+> >  drivers/timer/riscv_aclint_timer.c | 22 ++++++++++++++++++++++
+> >  1 file changed, 22 insertions(+)
 > >
-> > diff --git a/drivers/timer/riscv_timer.c b/drivers/timer/riscv_timer.c
-> > index 3627ed79b819..6cb589fcdc45 100644
-> > --- a/drivers/timer/riscv_timer.c
-> > +++ b/drivers/timer/riscv_timer.c
-> > @@ -11,6 +11,7 @@
-> >   */
+> > diff --git a/drivers/timer/riscv_aclint_timer.c
+> > b/drivers/timer/riscv_aclint_timer.c
+> > index e29d527c8d77..8b67745bb4a2 100644
+> > --- a/drivers/timer/riscv_aclint_timer.c
+> > +++ b/drivers/timer/riscv_aclint_timer.c
+> > @@ -6,6 +6,7 @@
 > >
 > >  #include <common.h>
+> >  #include <clk.h>
 > > +#include <div64.h>
 > >  #include <dm.h>
-> >  #include <errno.h>
 > >  #include <timer.h>
-> > @@ -50,6 +51,26 @@ u64 notrace timer_early_get_count(void)  }  #endif
+> >  #include <asm/io.h>
+> > @@ -44,6 +45,27 @@ u64 notrace timer_early_get_count(void)  }  #endif
 > >
-> > +#if CONFIG_IS_ENABLED(RISCV_SMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
+> > +#if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
 > > +ulong timer_get_boot_us(void) {
 > > +	int ret;
 > > +	u64 ticks = 0;
@@ -184,20 +186,18 @@ Hi,
 > > +		rate = timer_get_rate(gd->timer);
 > > +		timer_get_count(gd->timer, &ticks);
 > > +	} else {
-> > +		rate = RISCV_SMODE_TIMER_FREQ;
-> > +		ticks = riscv_timer_get_count(NULL);
+> > +		rate = RISCV_MMODE_TIMER_FREQ;
+> > +		ticks = readq((void __iomem
+> *)MTIME_REG(RISCV_MMODE_TIMERBASE,
+> > +
+RISCV_MMODE_TIMEROFF));
 > > +	}
 > > +
-> > +	return lldiv(ticks * 1000, (rate / 1000));
+> > +	return lldiv(ticks * 1001, (rate / 1000));
 > 
-> Could you elaborate a little how this formula is derived?
+> Why is this dividend 1001 ?
 
-Sure. Below is the original formula. To avoid zero of (tick/rate), I split
-the calculation to ticks and rate, respectively.
-
-Time(us) = (ticks / rate) * 1000000
-          Or (ticks * 1000000) / rate
-          Or tick / (rate / 10000000)
+It's a typo. I'll correct when I send v2.
 
 Best Regards,
 Chanho Park
