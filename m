@@ -4,64 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D479C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:10:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B40C83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC640868D7;
-	Mon,  4 Sep 2023 11:10:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E1BDE868D3;
+	Mon,  4 Sep 2023 11:20:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693818644;
-	bh=qzd0uvtDnnP/dGImTiOMJMb4Osm+KkvOq74o0E7yV84=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=wsoHqWfaQSsPythy4vE8G0UWCLi5q1Kyhm4lcybdJ3tm/YdDxo/ZJP967EK3kkhqN
-	 +6oaBmCimNk8aeJ2ozEFHsquPITaRxoDr6QeaBMvrgVOXwRcop73dq0X7GrzaeXOWp
-	 RQx8Si1xeFmDj1ttzb1Ue7ELrVxV11QFvd5ILc3HXOKngWd0ZJgJcyTZ1UL0/3+w/b
-	 WqQFVrlckKb/hcHiWj5mHE0H5NC5hZbnnHvjHWVbA0nRfyqMRXK95JFbeCqsOTqxmt
-	 67/VnNhq2qsLvuRQv8pOtV9LlIeTqctpqXCcYtUfJ9azHZDRskWc1WHHYJPpC+SfqS
-	 pKQj+9y59u70A==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zzu5so3N";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E9F81868D3; Mon,  4 Sep 2023 11:20:29 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D7EBE86380;
- Mon,  4 Sep 2023 11:10:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693818643;
- bh=qzd0uvtDnnP/dGImTiOMJMb4Osm+KkvOq74o0E7yV84=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ibSqXtn6Ix8T0KYHOc6a3KKJ7KHmTvBSVllEkJK1efc/NohJNnAvTQGqJaHUGZtIL
- 8pHKvbqRPz0MqRLBkydVu9ZBx2DIxnwcGwOdSJuq0gRd7oCugVzugN4tUOMCse8UdU
- XHf6hPYKpnaMmPlLrs/sfNIYhe8/rxIeE+7ejRdKyx3qIx+iz75/CWDTkZA7rAUVVQ
- yTezqoEOMOYXCrhcro45usvVvKiA1B742mT5xLNwYwDE1Sqxj6E8hia13DqNqPqEyo
- Qi/s2f28t8CTvYXiB7mMve/U9Kuk5WUu+Etk65CwUochv+UHVkRPJ2471o2m1ZxEFD
- ABOghVWadqsUg==
-Message-ID: <ecff6c3d-dcb3-3669-c22a-b8f6146e302b@denx.de>
-Date: Mon, 4 Sep 2023 11:10:41 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 63E48868E8
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:20:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-52a250aa012so1603558a12.3
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:20:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693819227; x=1694424027; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DDVfI8m4Ri1KfmUC9tgiczYg+qOnqkS+TkXjEOYURcc=;
+ b=Zzu5so3NhF+Qv4AGE4a1Gd8szMAST0NwlsFDxp9WfyU7wUpv9drfpEAT1Xw02uYPBY
+ bdns/zx4SrZeRDMCvQfZTEJw5MbhSgQgD+Jt58eLvUuYRWhMp10uGsu7XmdasC6K1gtu
+ yToIxRzB195WyQ+OoEcbiI7xCe/+7ZLgGoVbxFMGS5xBMd3tjwJiwWYEZZsgjLILwRjH
+ 9UjMMfAc2fr0L2a4/UUdnAGch6Nh6kmGExa4QGZV40vAfQw7Lr29itFn9R2sn8c5Jz3R
+ nw5qbVuINCwyyzxjm7Gm0DmiOT7xI9FHkgu6nxXVuQ6tYernzue95MhDy8AF8LMIOoV3
+ AhvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693819227; x=1694424027;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DDVfI8m4Ri1KfmUC9tgiczYg+qOnqkS+TkXjEOYURcc=;
+ b=SG5thszLWEV+yWPHDYgBNrPRX611CLo18ePHNEI8f2DkBXkzNVT2YbwB2sc4hiNwdu
+ gk18AktPuFt1aKYacVlkgiis4vozizoc33pfJ17eCQnvJYLZkveAVn6xdn6pnsV5M5Iv
+ rIP5t47TfvLIake6jI+2qcJ4aSQbnE25KegwTVsyJf7uCpvVxj5ZPgWxdTK/jAobfyK/
+ DYBabir5cy7ZTbs5vUUmZK5SXYKJy+/pmVh4/d3SN7AVCzwTh6POu6PsIiuSad4NnHba
+ /ZiHx2mLM0L6PVPpuZshtGn5M8o6+uKBTb9bL5jIBz95/dLJHuvxfQtpe53oneSFa0iE
+ Pt+Q==
+X-Gm-Message-State: AOJu0YyFZHjy50CwrrLpPiISyB/lHPvjcMY7k8ZnToJ9A7Qp9aGBov7g
+ mJPbIqEfS84UiL71GTPR750K+UW3o1XCCLG9qbI=
+X-Google-Smtp-Source: AGHT+IGup2ozU4m904ZiZ747w6RIZmZhv0at7C/vAwfkFmyRCqU3loasgU6/w3edIQMkSR3tArtykRWSfu2kn86gA9o=
+X-Received: by 2002:a50:fe8e:0:b0:529:fa63:ef80 with SMTP id
+ d14-20020a50fe8e000000b00529fa63ef80mr6555572edt.28.1693819226691; Mon, 04
+ Sep 2023 02:20:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v2 15/17] usb: gadget: ether: Use plain udevice for UDC
- controller interaction
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Cc: Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev <dimorinny@google.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>, Kever Yang
- <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Nishanth Menon <nm@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, kernel@puri.sm
-References: <20230901095003.352930-1-marex@denx.de>
- <20230901095003.352930-15-marex@denx.de> <877cp62wyk.fsf@baylibre.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <877cp62wyk.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230823184746.842091-1-sjg@chromium.org>
+ <20230823184746.842091-8-sjg@chromium.org>
+ <6f1ea3e9-7284-22d3-e2ee-071523b7dbac@gmx.de>
+ <CAPnjgZ3i9EDe3CyU64WRpE+oR0-xS2iffQR=2hVBZRzA2KkC6Q@mail.gmail.com>
+ <2058DF5A-619E-4B47-A80E-4B5C56FC3573@gmx.de>
+In-Reply-To: <2058DF5A-619E-4B47-A80E-4B5C56FC3573@gmx.de>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 4 Sep 2023 17:20:12 +0800
+Message-ID: <CAEUhbmWvEXvB6UmtsvHe5M13dMqS2BQF6Q-fdapYDVh3ROG73A@mail.gmail.com>
+Subject: Re: [PATCH 7/8] spl: x86: Avoid starting up PCI automatically in SPL
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,115 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/4/23 09:56, Mattijs Korpershoek wrote:
-> On ven., sept. 01, 2023 at 11:50, Marek Vasut <marex@denx.de> wrote:
-> 
->> Convert to plain udevice interaction with UDC controller
->> device, avoid the use of UDC uclass dev_array .
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Angus Ainslie <angus@akkea.ca>
->> Cc: Dmitrii Merkurev <dimorinny@google.com>
->> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
->> Cc: Kever Yang <kever.yang@rock-chips.com>
->> Cc: Lukasz Majewski <lukma@denx.de>
->> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
->> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> Cc: Nishanth Menon <nm@ti.com>
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Stefan Roese <sr@denx.de>
->> Cc: kernel@puri.sm
->> ---
->> V2: Use udev->parent for UDC access
->> ---
->>   drivers/usb/gadget/ether.c | 20 +++++++++++---------
->>   1 file changed, 11 insertions(+), 9 deletions(-)
->>
->> diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
->> index 5ff06d3814b..11b1a6221b3 100644
->> --- a/drivers/usb/gadget/ether.c
->> +++ b/drivers/usb/gadget/ether.c
->> @@ -1880,8 +1880,10 @@ static void eth_start(struct eth_dev *dev, gfp_t gfp_flags)
->>   	}
->>   }
->>   
->> -static int eth_stop(struct eth_dev *dev)
->> +static int eth_stop(struct udevice *udev)
->>   {
->> +	struct ether_priv *priv = dev_get_priv(udev);
->> +	struct eth_dev *dev = &priv->ethdev;
->>   #ifdef RNDIS_COMPLETE_SIGNAL_DISCONNECT
->>   	unsigned long ts;
->>   	unsigned long timeout = CONFIG_SYS_HZ; /* 1 sec to stop RNDIS */
->> @@ -1895,7 +1897,7 @@ static int eth_stop(struct eth_dev *dev)
->>   		/* Wait until host receives OID_GEN_MEDIA_CONNECT_STATUS */
->>   		ts = get_timer(0);
->>   		while (get_timer(ts) < timeout)
->> -			usb_gadget_handle_interrupts(0);
->> +			dm_usb_gadget_handle_interrupts(udev->parent);
->>   #endif
->>   
->>   		rndis_uninit(dev->rndis_config);
->> @@ -2300,7 +2302,7 @@ static int usb_eth_start(struct udevice *udev)
->>   			pr_err("The remote end did not respond in time.");
->>   			goto fail;
->>   		}
->> -		usb_gadget_handle_interrupts(0);
->> +		dm_usb_gadget_handle_interrupts(udev->parent);
->>   	}
->>   
->>   	packet_received = 0;
->> @@ -2370,7 +2372,7 @@ static int usb_eth_send(struct udevice *udev, void *packet, int length)
->>   			printf("timeout sending packets to usb ethernet\n");
->>   			return -1;
->>   		}
->> -		usb_gadget_handle_interrupts(0);
->> +		dm_usb_gadget_handle_interrupts(udev->parent);
->>   	}
->>   	free(rndis_pkt);
->>   
->> @@ -2400,13 +2402,13 @@ static void usb_eth_stop(struct udevice *udev)
->>   	 * 2) 'pullup' callback in your UDC driver can be improved to perform
->>   	 * this deinitialization.
->>   	 */
->> -	eth_stop(dev);
->> +	eth_stop(udev);
->>   
->>   	usb_gadget_disconnect(dev->gadget);
->>   
->>   	/* Clear pending interrupt */
->>   	if (dev->network_started) {
->> -		usb_gadget_handle_interrupts(0);
->> +		dm_usb_gadget_handle_interrupts(udev->parent);
->>   		dev->network_started = 0;
->>   	}
->>   }
->> @@ -2416,7 +2418,7 @@ static int usb_eth_recv(struct udevice *dev, int flags, uchar **packetp)
->>   	struct ether_priv *priv = dev_get_priv(dev);
->>   	struct eth_dev *ethdev = &priv->ethdev;
->>   
->> -	usb_gadget_handle_interrupts(0);
->> +	dm_usb_gadget_handle_interrupts(dev->parent);
->>   
->>   	if (packet_received) {
->>   		if (ethdev->rx_req) {
->> @@ -2467,7 +2469,7 @@ int usb_ether_init(void)
->>   		return ret;
->>   	}
->>   
->> -	return usb_gadget_initialize(0);
->> +	return 0;
-> 
-> No udc_device_get() here?
-> 
-> This looks a little suspicious, because in the unbind() we call
-> udc_device_put().
+Hi Simon,
 
-Look at how udc_device_get_by_index() is implemented and what it does, 
-compared to what usb_ether_init() does (hint: they are basically doing 
-the same thing). This udc_device_put() here is only a workaround for 
-platforms which are not using the bind command to bind USB ethernet yet.
+On Thu, Aug 24, 2023 at 10:11=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
+mx.de> wrote:
+>
+>
+>
+> Am 24. August 2023 01:57:55 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Heinrich,
+> >
+> >On Wed, 23 Aug 2023 at 14:19, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+> >>
+> >> On 8/23/23 20:47, Simon Glass wrote:
+> >> > For x86 platforms, PCI is core to their operation and is managed in
+> >> > arch-specific code. Each platform has its own way of doing this. For=
+ TPL
+> >> > and some SPL implementations, the full driver model PCI is not used.
+> >> >
+> >> > A recent change enabled full PCI in TPL/SPL for all boards. This bre=
+aks
+> >> > some x86 boards, so adjust it to skip that for x86.
+> >>
+> >> Could you, please, give some more detail?
+> >>
+> >> * Which boards are broken?
+> >
+> >For example, chromebook_samus and chromebook_samus_tpl
+> >
+> >> * Don't these boards have a pci_init() function?
+> >
+> >Yes, the same one you are calling.
+> >
+> >> * In what way does calling pci_init() lead to a failure?
+> >
+> >It probes and sets up PCI devices and uses a lot of pre-alloc RAM.
+> >
+> >>
+> >> It would be preferable to have all architectures and boards use the sa=
+me
+> >> high level API. Excluding x86 here looks more like a (necessary) hack
+> >> than like a target state.
+> >
+> >Fair enough, but on x86 we access PCI long before driver model is up.
+> >Generally we don't fully enumerate it in SPL as it is expensive. It is
+> >also pointless, since U-Boot proper does it again later.
+> >
+> >Regards,
+> >Simon
+> >
+>
+> Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>
+
+To address Heinrich's concern, how about you turn off CONFIG_SPL_PCI
+in chromebook_samus and chromebook_samus_tpl?
+
+Regards,
+Bin
