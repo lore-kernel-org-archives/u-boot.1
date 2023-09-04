@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3871C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:31:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4563EC71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 10:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EC4B86926;
-	Mon,  4 Sep 2023 11:31:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 32E39863B2;
+	Mon,  4 Sep 2023 12:02:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QLw1uUs6";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="JVKu1XoV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80A5B86907; Mon,  4 Sep 2023 11:31:40 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 4FEC0864D8; Mon,  4 Sep 2023 12:02:46 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49B3C857BF
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:31:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24021854BD
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 12:02:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5008d16cc36so2045402e87.2
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:31:36 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-51a52a7d859so4544998a12.0
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 03:02:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693819895; x=1694424695; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Vs330YR8lYz1NuHEF3qumcG/K45JwX+zXrf4QZ74YrI=;
- b=QLw1uUs6QpeKQgcuy8UxIl7uJSKrVnVP0WcCtlD4wx/PU+uYRL6rIjMcj3hj9MfqU0
- OMbTU8t6r7FVlopC5VABQ7I8iXoJJxX6tIGqccPI8zrgAbSVLvG6+ryZU6E87MugjNU3
- 1C44oBlUMB+3Qz8Glv60isISQ5eFnU8YPTl3DBOSRbdLnY5WI7aZaWxEgfBkC3JvFb01
- qdSp7lboHVIIVm95Ib5YweCYg9g7YdjHeAY8csBQpuPyFk30rmME1iLgwybuSjc/tSJ2
- R5GOpkjuU3JwWjGJcwNgn7KtA4/3ihyjgCbSYrLXMeLW3f/NAor86xXJbtboUWF3M7/z
- bX9A==
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1693821762; x=1694426562;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=h0Pb9E6HAwqddbgpDeKqCGYQXLJpj5IG1Mqfawh5VqA=;
+ b=JVKu1XoVVrda1Y4XO+PUyRNfiu+lTCXi0FmwtolaXy6OY9zeVo8SyNKOL1T+AlvAQ5
+ +i9umS2T98EfLeuATFEGcjB/hsrqTE1dUjqUZCoqPZjvfDgEq/yvHbSkcxDCu3rmDOj7
+ HCgHq9H0qoudVAZ+VDOeqJC39+JSMd7fVpqHXr0CP5txFUKqogMWCOeDsO2ckqgsNsgx
+ h/RwKI0omBOR/IG0dEK/tW9xHPaK+SLy7FjFvLYS4G5rxOYLXnhq3xon28+QGegD9mh1
+ kQ3A+rttcisq2qlWwlEV4VscK8GxFgL7U+1CuL+PGuWt70qSM2YgrSfLWCl+RL39Mh0P
+ aM5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693819895; x=1694424695;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Vs330YR8lYz1NuHEF3qumcG/K45JwX+zXrf4QZ74YrI=;
- b=KZZO/1MGtR7QcrhokZhWh1yv/EKsJdcVptpbfxYUkzf8V8yO6LCCJReqc6ZxOwMpXT
- N6Bcp1ihEG/KjgFv35BHT9kppf2Zjv+u0o6hVcmLb0iFNRx9kTD9v6o/+Qcc0WnU2aLA
- QnF2pEtrmkYwk7ZWpwkL90IAoku6cAplFdByUFCHthEXbI3NrUTTg+JC89PvuSgGoDqc
- K1J3L/W3evSQ7ennvzpiiQ32Hn4e+tZTdxRLhDirC/xRPiFpZ3TfZMR8+Q13eRUUEc4q
- 25Jg1xRw7utGp2Vqv3nr+ej2ZAm+ItqbK+UoC+rqaYS7jnHByMtwLyccD8ZT8o6OM6j2
- oPmQ==
-X-Gm-Message-State: AOJu0YyzJccGok5gKNjJYrfs/TCezZOtaHidoytQ/C/hy/2OgqHwPRik
- LctxUiVmfQ5tuhy8YG9x9kJig4Fa9OnngcfVS3w9BQ==
-X-Google-Smtp-Source: AGHT+IFJPGPSSj2QtkXzzSA03G3CeMWrmdHWovkAbWCuBwMIiOlKMta3Of2ra1avOYSP6vqtCik/ygtlTPoA8HLonhw=
-X-Received: by 2002:a05:6512:742:b0:500:7f51:d129 with SMTP id
- c2-20020a056512074200b005007f51d129mr5057626lfs.34.1693819895442; Mon, 04 Sep
- 2023 02:31:35 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693821762; x=1694426562;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=h0Pb9E6HAwqddbgpDeKqCGYQXLJpj5IG1Mqfawh5VqA=;
+ b=S+qx9vwR6MpR6p3KfkU1hoGi9UU6Bm2o+VRxr2IuTXsOir32M+34naK28yuJNGYy46
+ DrZb3SfFn3F5CDgaH/S51mklhzqY1RAfCJqIw75zJJO7ipULJ9W601z9EYirBivh4FiK
+ x+IZNIkkOiLWFG0LWQ2rG7xRLapFZxHbnqz0AVVTFjmChna5priE07Xbm8wH2jGjAMma
+ nDn6rZ+UmcDJvhJ+EvdqG7tYdm9Iw4tLUte41sqjOnwyB6jsUnJ2a2cE374SJoxG8sJH
+ E7nM5QNuvjgjJ7eNX5u5qO5EdBCR1mQLGfSciwvVjSEpVxbaJu6O+7FIUgack0VDYKt8
+ s4fw==
+X-Gm-Message-State: AOJu0YzXCL8/nPjneBiFqj4SJASkwK05mb6pVp1niKpu+Os6wxyVPDxw
+ gxQ/kI2GgtW6xYa8kA/Mp+2mLg==
+X-Google-Smtp-Source: AGHT+IH2nYiiMfDB3SEHh5dtmlHS13OfjW57qut+6Vr6KzT02Elza1N2es8wXs4E7mRQlzEQ3oaipg==
+X-Received: by 2002:a05:6402:32e:b0:522:d801:7d07 with SMTP id
+ q14-20020a056402032e00b00522d8017d07mr10026674edw.10.1693821762510; 
+ Mon, 04 Sep 2023 03:02:42 -0700 (PDT)
+Received: from [10.254.183.223] ([149.199.62.131])
+ by smtp.gmail.com with ESMTPSA id
+ h5-20020aa7de05000000b0051e22660835sm5605949edv.46.2023.09.04.03.02.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 Sep 2023 03:02:41 -0700 (PDT)
+Message-ID: <f9c9c779-55b5-8438-e7ee-e392d5181305@monstr.eu>
+Date: Mon, 4 Sep 2023 12:02:35 +0200
 MIME-Version: 1.0
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-31-sjg@chromium.org>
- <ZPA8AtGOel8pko6y@hades>
- <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
- <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
- <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 4 Sep 2023 12:30:59 +0300
-Message-ID: <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
-Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
- Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH 4/5] xilinx: zynqmp: add Beckhoff CX8200
+To: Steffen Dirkwinkel <lists@steffen.cc>, Michal Simek
+ <michal.simek@amd.com>, u-boot@lists.denx.de
+Cc: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+References: <20230830140349.10801-1-lists@steffen.cc>
+ <20230830140349.10801-5-lists@steffen.cc>
+ <ec8f243c-0084-b512-fe72-551e959e9103@amd.com>
+ <4c458e6a-05e7-489c-ba3d-8d139024ddb1@steffen.cc>
+ <b7172191-ed03-e585-a2c0-bbebe3b7c6af@amd.com>
+ <15d4153e-a01c-4ba6-a5ed-9bc93a600a35@steffen.cc>
+Content-Language: en-US
+From: Michal Simek <monstr@monstr.eu>
+In-Reply-To: <15d4153e-a01c-4ba6-a5ed-9bc93a600a35@steffen.cc>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,92 +100,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Fri, 1 Sept 2023 at 18:51, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 1 Sept 2023 at 01:50, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> >
-> > [...]
-> >
-> > > >
-> > > > > +config OF_BLOBLIST
-> > > > > +     bool "DTB is provided by a bloblist"
-> > > > > +     help
-> > > > > +       Select this to read the devicetree from the bloblist. This allows
-> > > > > +       using a bloblist to transfer the devicetree between  U-Boot phases.
-> > > > > +       The devicetree is stored in the bloblist by an early phase so that
-> > > > > +       U-Boot can read it.
-> > > > > +
-> > > >
-> > > > I dont think this is a good idea.  We used to have 4-5 different options
-> > > > here, which we tried to clean up and ended up with two very discrete
-> > > > options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
-> > > > have a header of some sort?  The bloblist literally comes from a previous
-> > > > stage bootloader which is what OF_BOARD is here for. So why can't we just
-> > > > read the header and figure out if the magic of the bloblist matches?
-> > >
-> > > No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
-> > >
-> > > This patch is a standard mechanism to pass the DT from one firmware
-> > > phase to the next. We have spent quite a bit of time creating a spec
-> > > for it, and we should use it.
-> >
-> > Where exactly am I objecting using the spec?   Can you please re-read my email?
-> > I am actually pointing out we should use the spec *properly*.  So
-> > instead of having a Kconfig option for the DT, which is pretty
-> > pointless,  we should parse the bloblist.  If the header defined by
-> > the *spec* is found, we should just search for the DT in there.
-> > What you are doing here, is take the spec, pick a very specific item
-> > that the list contains, and create a Kconfig option out of it.  Which
-> > basically ignores the discoverable options of the bloblist.  For
-> > example, that bloblist can also contain an entry to a TPM eventlog.
-> > Should we start creating Kconfig options for all the firmware handoff
-> > entries that are defined on that spec?
->
-> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
 
-That's fine by me.  You can even put that under IS_ENABLED for the
-bloblist inside the existing OF_BOARD check.  So I was thinking
-- If no bloblist is required in Kconfig options we do the hacks we used to
-- if bloblist is selected and the config option is OF_BOARD, throw an
-error and mention that the previous stage loader should hand over a DT
+On 9/1/23 17:03, Steffen Dirkwinkel wrote:
+> 
+> 
+> Am 01.09.23 um 13:16 schrieb Michal Simek:
+>>
+>>
+>> On 9/1/23 11:00, Steffen Dirkwinkel wrote:
+>>>
+>>>
+>>> Am 01.09.23 um 09:36 schrieb Michal Simek:
+>>>>
+>>>>
+>>>> On 8/30/23 16:03, Steffen Dirkwinkel wrote:
+>>>>> From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+>>>>>
+>>>>> This adds support for the Beckhoff CX8200 series of industrial embedded PCs.
+>>>>> There is some information about the device and features here:
+>>>>> https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx8200-arm-cortex-a53/
+>>>>>
+>>>>> Currently supported/tested:
+>>>>> - Boot from microSD
+>>>>> - Ethernet
+>>>>> - USB
+>>>>> - rtc / rtc eeprom
+>>>>> - tpm access
+>>>>> - uart
+>>>>>
+>>>>> Open points:
+>>>>> - adding the psgtr usb phy doesn't work in linux (failed to get pll
+>>>>>    lock)
+>>>>> - fpga loading currently only as u-boot script or pre launch cmd (type
+>>>>>    may be stored in eeprom of rtc so this could be made generic)
+>>>>>
+>>>>> Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
+>>>>> ---
+>>>>>
+>>>>>   arch/arm/dts/Makefile                         |    1 +
+>>>>>   arch/arm/dts/zynqmp-beckhoff-cx8200.dts       |  247 +++
+>>>>>   .../zynqmp-beckhoff-cx8200/psu_init_gpl.c     | 1960 +++++++++++++++++
+>>>>>   configs/xilinx_zynqmp_virt_defconfig          |    2 +-
+>>>>>   4 files changed, 2209 insertions(+), 1 deletion(-)
+>>>>>   create mode 100644 arch/arm/dts/zynqmp-beckhoff-cx8200.dts
+>>>>>   create mode 100644 board/xilinx/zynqmp/zynqmp-beckhoff-cx8200/psu_init_gpl.c
+>>>>
+>>>> First of all xilinx folder is not the right location because Xilinx/AMD is 
+>>>> not manufacturer of this board.
+>>>
+>>> Yeah, sorry. I saw the avnet board and copied that.
+>>>
+>>>>
+>>>> Second I am normally pushing back on adding these custom boards because it 
+>>>> just increase time for maintaining.
+>>>> Your last commit was in 2019 but at least you have some commits that I can 
+>>>> trust that you would maintain your board for some time.
+>>>
+>>> Our last board [1] only had linux/u-boot support as an afterthought. 
+>>> Customers had to buy a special option to set the right boot fuses, so most 
+>>> devices don’t boot u-boot.
+>>> With this board and a second similar zynqmp board (CX9240 [2]) we’ll have 
+>>> u-boot as default (and probably only) bootloader, so we’ll be
+>>> more active. We can also set two of us as maintainers and it would be fine to 
+>>> drop the boards if nobody responds.
+>>> We generally support these industrial boards for long time frames and would 
+>>> like to stay close to mainline instead of maintaining forks.
+>>>
+>>> The alternative would be to have a downstream u-boot repository on github or 
+>>> somewhere. We’ll still likely have something there for build scripts / 
+>>> firmware builds / integration, but don’t plan to really diverge from upstream 
+>>> u-boot.
+>>>
+>>> The main advantage of being in upstream u-boot would be that we can trigger 
+>>> internal CI on upstream changes. We can still do that and apply patches, but 
+>>> even simple patches like adding files to a makefile may fail to apply and 
+>>> will need fixing.
+>>>
+>>>
+>>>>
+>>>> My biggest question is in what category is your board unique that it should 
+>>>> be added it to the tree?
+>>>
+>>> Currently the board isn’t really unique. I guess we’d be the only users of 
+>>> the rtc with eeprom and there might be something needed for loading the 
+>>> correct fpga file based on eeprom (this might be done in linux / userspace or 
+>>> even u-boot script though)
+>>>
+>>> [1] 
+>>> https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx9020-arm-cortex-a8/cx9020.html#tab_productdetails_1
+>>> [2] 
+>>> https://www.beckhoff.com/en-en/products/ipc/embedded-pcs/cx9240-arm-cortex-a53/cx9240.html
+>>
+>> Regarding board itself.
+>> It is DTB - we use OF_SEPARATE/OF_BOARD it means building is easy. I expect 
+>> you have pretty much something in PL that's why your DT is bigger if you don't 
+>> use DT overlays but for fixed design there is actually no reason to use it.
+>>
+>> psu_init_gpl. You are adding it to specific folder which match DEVICE_TREE 
+>> variable when you use it. You can actually just copy it to 
+>> board/xilinx/zynqmp/ folder and it will be pick up for your build.
+>>
+>> xilinx_zynqmp_virt_defconfig - you likely don't want to use this in your 
+>> product because there are things enabled which you don't use on your board. 
+>> That's why you should tune it for your usage.
+>>
+>> regs.init - that's for boot.bin generation with SPL - BOOT_INIT_FILE should be 
+>> used and it can't be wired via generic defconfig anyway.
+>>
+>> That pretty much leads to the state that make no sense for you to use 
+>> xilinx_zynqmp_virt_defconfig.
+> 
+> There are things in the defconfig we don't need, but size hasn't really been an 
+> issue, since we boot from relatively large sdcards. We might still do separate 
+> config for all our boards though.
+> 
+> We currently build virt_defconfig and set BOOT_INIT_FILE, PMUFW_INIT_FILE and 
+> ZYNQMP_SPL_PM_CFG_OBJ_FILE. If we ship this firmware somewhere (similar to 
+> linux-firmware?) we could set fixed paths for that and make rebuilding u-boot 
+> simpler. I've found reproducing images for zynqmp devboards with and without 
+> using petalinux and the xilinx fsbl to be quite annoying on the first try and 
+> this could be simpler if one just wants to support generic arm64 distros.
+> 
+>>
+>> I think we are still supporting defconfig fragments which is the way how to 
+>> maintain your board to be close to mainline as possible.
+>>
+>> And fdt_addr change. I think this is for me the most problematic part which 
+>> should be solved. Pretty much all these variables should be moved out and 
+>> that's what we started to work on. But it will take some time to get there.
+>>
+> 
+> I agree, I can also work on that, but it will likely be in October since I'm on 
+> vacation for most of September. Maybe one of our other developers will work on 
+> it instead.
+> 
+>> Definitely there shouldn't be a problem to merge that rtc driver and I would 
+>> prefer if you can stay with your board out of upstream and try to maintain it 
+>> via your build scripts only. And let me know if we can improve/fix something 
+>> to be able to do it in long term. But pretty much all things should be in 
+>> place already to do it without pain. At least I would like you to try it and 
+>> see if there is any major blocker which we can try to fix.
+> 
+> I don't really understand why the board shouldn't be upstream, once it is just a 
+> dts file + psu_init_gpl + regs. There really isn't much to maintain there that 
+> wouldn't also break out of tree.
+> 
+> We might be different from most other out of tree zynqmp users, since we usually 
+> also offer to sell hardware without our software and users would then either 
+> download an image from us or build their own u-boot + linux and only download 
+> the fpga bitstreams. I expect most people would look at upstream u-boot and 
+> linux before looking for our downstream repositories.
 
-Is that what you had in mind?
+Sounds good.
 
-Thanks
-/Ilias
->
-> >
-> > Thanks
-> > /Ilias
-> >
-> > >
-> > > The patches to align bloblist with the spec have been sent, but there
-> > > is a late-breaking change that we are trying to resolve. Once that is
-> > > sorted out, I will send v2 of those patches.
-> > >
-> > > >
-> > > > >  config OF_BOARD
-> > > > >       bool "Provided by the board (e.g a previous loader) at runtime"
-> > > > >       default y if SANDBOX || OF_HAS_PRIOR_STAGE
-> > > > > diff --git a/include/bloblist.h b/include/bloblist.h
-> > > > > index 080cc46a126..e16d122f4fb 100644
-> > > > > --- a/include/bloblist.h
-> > > > > +++ b/include/bloblist.h
-> > > > > @@ -103,6 +103,11 @@ enum bloblist_tag_t {
-> > > > >       BLOBLISTT_ACPI_TABLES = 0x104,  /* ACPI tables for x86 */
-> > > > >       BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
-> > > > >       BLOBLISTT_VBOOT_CTX = 0x106,    /* Chromium OS verified boot context */
-> > > > > +     /*
-> > > >
-> > > > [...]
-> > > >
-> > > > >
-> > > > [0] https://github.com/FirmwareHandoff/firmware_handoff
-> > >
->
-> Regards,
-> Simon
+> 
+> We can and will of course start with a downstream repository, I just don't 
+> understand why real (non-devboard) hardware should be out of tree.
+
+It can be I just want to make sure that you don't disappear after short time.
+Topic's platforms are also the part of tree. It means let's figure it out that 
+fdt part which you need to solve and we can merge your platform if you give me 
+commitment that you will test and support it.
+
+Thanks,
+Michal
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
