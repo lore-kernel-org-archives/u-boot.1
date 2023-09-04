@@ -4,77 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41446C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 10:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F0EC71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 11:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD82C86936;
-	Mon,  4 Sep 2023 12:38:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D92E486824;
+	Mon,  4 Sep 2023 13:23:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="F3Ud3fK7";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YztxoFT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF41C86958; Mon,  4 Sep 2023 12:38:44 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E257B868D1; Mon,  4 Sep 2023 13:23:24 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7BB88693D
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 12:38:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52819864C5
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 13:23:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 384Ace96107465;
- Mon, 4 Sep 2023 05:38:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693823920;
- bh=D0GdWrsKd/WddRvks9GWqafmJtNAUBSCAQGJN5JJylQ=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=F3Ud3fK7EhBKVtjnGDqc2Fx3/stvERq5NRdiqFNmraNmyLwZph9eRrvHHrCIKoKyn
- EtJHuxH3ET7ahIYFPrw9xo0uLRh6BOxYnewpm8h2ZmpWYZuXjPiMhIJ1Wr0QZb8oEp
- 9eqsCR2HJihKpD13ZOwJ9wgOXBidxUTMjYr5cpk0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 384AceVR092592
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 4 Sep 2023 05:38:40 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
- Sep 2023 05:38:39 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 4 Sep 2023 05:38:39 -0500
-Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 384AcHYx029746;
- Mon, 4 Sep 2023 05:38:37 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Mon, 4 Sep 2023 16:08:21 +0530
-Subject: [PATCH v4 6/6] board: ti: j721s2: MAINTAINERS: Update the
- MAINTAINERS File.
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (unknown [46.114.152.14])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 6A496400E8; 
+ Mon,  4 Sep 2023 11:23:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1693826601;
+ bh=+8KqOH50Lg9HsygGCAuMz7atr97Sttfep1dYDWITUZc=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=YztxoFT1peFvTe6ZL//hvlCgWBBQGeJ6zF+61qAqLjmmDr+R4Fv+IiazSfkd86k/P
+ G+wRKaqEYeyt51E449yK6y7YhXjG6XUWH9utK1MgOFqvHZuknA0JxfospSXWbpqVi8
+ 2ndlODvrOv0coJi8Zu21ikQv/6RrYx/9qwTkFr38zPvosOrMY1jx99tSUbRS8dqwfF
+ PVLqOfPDy2d8OKMIucBtD0S+Kj+kpzUSfP/gy+K9dWo9uX701mN4e+/t1eOSYrMk3B
+ koGuoEgAVfJODHW+76kRbRi2U4mp8McPbbQj5Oo1UOOIujqR3r06DGmrz1tIk0C81G
+ TVMivJ7WzkTFQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>,
+	Leo <ycliang@andestech.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Anup Patel <apatel@ventanamicro.com>,
+ Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 0/2] risc-v: implement DBCN based debug console
+Date: Mon,  4 Sep 2023 13:24:02 +0200
+Message-Id: <20230904112404.81899-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20230816-b4-upstream-j721s2-r5-pinmux-v4-6-dc114bece5d7@ti.com>
-References: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
- <a-nandan@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>
-X-Mailer: b4 0.12.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1693823897; l=1496;
- i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
- bh=sIWlO7GX6X6vKgAIkXFXZ/UQjCIRJrcz1l8oISnXINo=;
- b=oF1sutChXUcbxWh7sTpr8+sLNUNiGzP/TKUpF9Km92WG5i0LDKSAXXi1n0EllwXlGnh6UZpE5
- 5h9tZAdqw/OD203ABpxVmeVFOz553YcigCN1MyBR0KA2lFEgoug7RMs
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,45 +70,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
-to the previous MAINTAINER not being associated with TI.
+Currently we only offer an SBI based debug UART for SBI v0.1.
+With OpenSBI 1.3 the Debug Console Extension (DBCN) has become available.
+This allows us to implement a debug UART in a device independent manor.
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- board/ti/j721s2/MAINTAINERS | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+v2:
+	In the driver check that we are in S-mode.
 
-diff --git a/board/ti/j721s2/MAINTAINERS b/board/ti/j721s2/MAINTAINERS
-index 323bd2353a7e..08c8d110ac0a 100644
---- a/board/ti/j721s2/MAINTAINERS
-+++ b/board/ti/j721s2/MAINTAINERS
-@@ -1,16 +1,23 @@
- J721S2 BOARD
--M:	Aswath Govindraju <a-govindraju@ti.com>
-+M:	Manorit Chawdhry <m-chawdhry@ti.com>
- S:	Maintained
- F:	board/ti/j721s2
-+F:	arch/arm/mach-k3/j721s2
-+F:	doc/board/ti/j721s2_evm.rst
- F:	include/configs/j721s2_evm.h
- F:	configs/j721s2_evm_r5_defconfig
- F:	configs/j721s2_evm_a72_defconfig
- F:	arch/arm/dts/k3-j721s2.dtsi
- F:	arch/arm/dts/k3-j721s2-main.dtsi
- F:	arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
-+F:	arch/arm/dts/k3-j721s2-thermal.dtsi
- F:	arch/arm/dts/k3-j721s2-som-p0.dtsi
- F:	arch/arm/dts/k3-j721s2-common-proc-board.dts
- F:	arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
--F:	arch/arm/dts//k3-j721s2-r5-common-proc-board.dts
-+F:	arch/arm/dts/k3-j721s2-r5-common-proc-board.dts
- F:	arch/arm/dts/k3-j721s2-ddr.dtsi
- F:	arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi
-+F:	arch/arm/dts/k3-am68-sk-som.dtsi
-+F:	arch/arm/dts/k3-am68-sk-base-board.dts
-+F:	arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
-+F:	arch/arm/dts/k3-am68-sk-r5-base-board.dts
+Heinrich Schuchardt (2):
+  risc-v: implement DBCN write byte
+  risc-v: implement DBCN based debug console
+
+ arch/riscv/include/asm/sbi.h |  1 +
+ arch/riscv/lib/sbi.c         | 16 ++++++++++++++++
+ drivers/serial/Kconfig       |  5 ++++-
+ drivers/serial/serial_sbi.c  | 20 ++++++++++++++++++++
+ 4 files changed, 41 insertions(+), 1 deletion(-)
 
 -- 
-2.41.0
+2.40.1
 
