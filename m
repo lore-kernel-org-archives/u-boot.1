@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB3AC71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 15:35:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5339C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 15:38:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27DA86940;
-	Mon,  4 Sep 2023 17:35:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 62963869A0;
+	Mon,  4 Sep 2023 17:37:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S/xU9B9I";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="El/0/rgu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E877C8694A; Mon,  4 Sep 2023 17:35:37 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id D08B1869A9; Mon,  4 Sep 2023 17:37:57 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26E1E8693D
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:35:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BEFA8693D
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:37:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9a5dff9d2d9so238546966b.3
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 08:35:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4018af103bcso10280205e9.1
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 08:37:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693841734; x=1694446534; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=22HRViHGPu6npupJtkWWyAkEEdVlIgBZ60EfOi8fJO0=;
- b=S/xU9B9IchRoNS6qTY25ZTni32rJLTBYSgJEHYb1cwaNU2hw59CTHP+LsACZ5Im40U
- KH1pofcDg6aUoPD34NS0YM/Zpy+q8730MpU+/reZDx3IGHnDA0m2kgNIonV5WcSjUSua
- W56quNoP/MNDP5VG/dEp0bRJ9XXzGS0y6agY+a6i096ApqCg/wcTJCfK0mTmfoBT0beV
- VpdJFCfw3rvKJj4KkI5AeOGm5je2ntRQ1isAWbkVlMsW+aMp8nlP4wWfFDQSjs4fq0Gr
- BlShCOayR9KirgqEKHla2CI90jdhbfZCHl1jidlgGo0Z5ArdRjqmReiaJ6j4ud9FTtbX
- R9ww==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1693841874; x=1694446674;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8L1sANvT66RDiLXKJPtotm94hmsu1KcskfTFCx7C1EU=;
+ b=El/0/rgu4MJX3TNFWxZebqBuejTzWSeh8A6vXNClNMiUGl6ad7GQGJGt4Z0RwiirLc
+ SS65bU6UPNqIwmoA8nUCdT/ok0mppCwbsQ/FGVNfCKHWL6ac8kTro8PNRStR+imRDfpT
+ umGbjJ2dj9hZYGKls8oJlP/ARfsHC04QtJmA9N9F6PQAvGE2inUT1LIDtzzkmk8U7E9r
+ DcKjCqilybe3KbkfeqRA/q60+ix5+7s6wy41HksW/yEPgxkExV7ovEkqaack78BZrMEd
+ r01OhQGho4KXPyBog4S7OFmwrxEqEl8m6AIguhaAhjlS2ql64DDPNJLExCzoc7EHgvId
+ F8aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693841734; x=1694446534;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=22HRViHGPu6npupJtkWWyAkEEdVlIgBZ60EfOi8fJO0=;
- b=GIOknxip71WMuWaaC0oD7DU0OmrrRNHcsh4rhXHjyXmmdAEG7u/483oxKGoZMdzUDx
- NS74at2pEEAEh96uUWylVqGKnqohMFo4dDbtLAeEGFzrsIacDueuY0YxrOGMNVbXwcuN
- NFHEkVNqkhGorkAiOsC+NN+GMSDbTYmKE73CREKSh3Ak3BG7Ud6DoBzYJkPtyHumHB9F
- TYag8vXGuEJ40PLblYJdSOTpQYI6QiB+I5r2jtOgnzV4jal097RAJHXG0XTPH1Qdexcq
- nbYfV7OiGdZr0TVkY/LyPThQKoAVeXDloTEXBA+3iIveMgC2DsjF3eZhTDuh4FvrbUfc
- e3dw==
-X-Gm-Message-State: AOJu0Yx/EEzz9lYbqvMkDcIk5y+PQ3knAJijunb5Or25YODVm8PGMCSf
- RHb3GHPmoJ1ugJasTBD+kginn7hYaTobTIYoNh6J8g==
-X-Google-Smtp-Source: AGHT+IGnYCG/3XewLwLJBia2yzaDclNuhWuZtmNDzv6+h7AmJNXaRntWv3qQ4UkqVlYyXiTUFEmMfzoEeAtv9s44Xr4=
-X-Received: by 2002:a17:906:20dd:b0:9a1:6aea:50d6 with SMTP id
- c29-20020a17090620dd00b009a16aea50d6mr7505021ejc.65.1693841734646; Mon, 04
- Sep 2023 08:35:34 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693841874; x=1694446674;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8L1sANvT66RDiLXKJPtotm94hmsu1KcskfTFCx7C1EU=;
+ b=JsWh7NY7WJqykFfN4hCCyoCtZ9pcJCqf5sstTyrgK1AXS4vhMqiH8ynKM0WK8Bwfq6
+ Ni+pcbG9N6g1fzPlckFEQAKZbxcg83zrBpnnQjx1y32xZ1KvkvKxMAP61Dt7KArKDBd4
+ VHd73oKPuvr2xZZV2XRBnOCpmIwjMqmJPxRq6eIa1cMNn21Qz73z9/j4UpPIVfdB746L
+ /egbtEiMg9QcDy9/nDFwGIPAX0HmvXiTSzBvXTT6FXbZGGnWAZhoRD/R11Xoq5r3wHIm
+ PoFrOfMfxdXUhg/9b8icL7F884wFTXygdumcbFxQrjN+2ugdOFtuuBvzYWphWJ9B7Dqg
+ FSOA==
+X-Gm-Message-State: AOJu0Yw5xQgqhwRvroywDO7uEioDloTugyCE32kH8ifl7SuWQfLQub+T
+ H3WbCyNKyPj0K4p+XRVhG3m0jw2CFnjk3B8A2WI=
+X-Google-Smtp-Source: AGHT+IF/d3Aryzc9raeUEF+6APbAvtdS2yXUr0/PI9j2S/HxzmqZcxxjCOuog55mw5kL5bvcCSxAfw==
+X-Received: by 2002:a05:600c:c6:b0:401:c717:ec6d with SMTP id
+ u6-20020a05600c00c600b00401c717ec6dmr10512868wmm.15.1693841874448; 
+ Mon, 04 Sep 2023 08:37:54 -0700 (PDT)
+Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
+ by smtp.gmail.com with ESMTPSA id
+ e12-20020adf9bcc000000b0031759e6b43fsm11585636wrc.39.2023.09.04.08.37.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Sep 2023 08:37:54 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev <dimorinny@google.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, Miquel
+ Raynal <miquel.raynal@bootlin.com>, Nishanth Menon <nm@ti.com>, Patrice
+ Chotard <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Stefan Roese
+ <sr@denx.de>, kernel@puri.sm
+Subject: Re: [PATCH v2 15/17] usb: gadget: ether: Use plain udevice for UDC
+ controller interaction
+In-Reply-To: <ecff6c3d-dcb3-3669-c22a-b8f6146e302b@denx.de>
+References: <20230901095003.352930-1-marex@denx.de>
+ <20230901095003.352930-15-marex@denx.de> <877cp62wyk.fsf@baylibre.com>
+ <ecff6c3d-dcb3-3669-c22a-b8f6146e302b@denx.de>
+Date: Mon, 04 Sep 2023 17:37:53 +0200
+Message-ID: <874jka2bla.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20230822093614.4717-1-maxim.uvarov@linaro.org>
- <20230822093614.4717-5-maxim.uvarov@linaro.org>
- <CAPnjgZ0TA_ZBDntxdVDEscdECz-=oh9cRHFnT=hCm8V_0=V2LA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0TA_ZBDntxdVDEscdECz-=oh9cRHFnT=hCm8V_0=V2LA@mail.gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Mon, 4 Sep 2023 21:27:01 +0600
-Message-ID: <CAD8XO3amn80tvyEKT471V2SSmFThVyEUN0js7uOUmkQAnCJW+w@mail.gmail.com>
-Subject: Re: [PATCHv7 04/15] net/lwip: implement dhcp cmd
-To: Simon Glass <sjg@google.com>
-Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
- joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com, 
- goldsimon@gmx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,171 +99,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 23 Aug 2023 at 00:58, Simon Glass <sjg@google.com> wrote:
+On lun., sept. 04, 2023 at 11:10, Marek Vasut <marex@denx.de> wrote:
 
-> Hi Maxim,
+> On 9/4/23 09:56, Mattijs Korpershoek wrote:
+>> On ven., sept. 01, 2023 at 11:50, Marek Vasut <marex@denx.de> wrote:
+>> 
+>>> Convert to plain udevice interaction with UDC controller
+>>> device, avoid the use of UDC uclass dev_array .
+>>>
+>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>> ---
+>>> Cc: Angus Ainslie <angus@akkea.ca>
+>>> Cc: Dmitrii Merkurev <dimorinny@google.com>
+>>> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
+>>> Cc: Kever Yang <kever.yang@rock-chips.com>
+>>> Cc: Lukasz Majewski <lukma@denx.de>
+>>> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+>>> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>> Cc: Nishanth Menon <nm@ti.com>
+>>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>>> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+>>> Cc: Simon Glass <sjg@chromium.org>
+>>> Cc: Stefan Roese <sr@denx.de>
+>>> Cc: kernel@puri.sm
+>>> ---
+>>> V2: Use udev->parent for UDC access
+>>> ---
+>>>   drivers/usb/gadget/ether.c | 20 +++++++++++---------
+>>>   1 file changed, 11 insertions(+), 9 deletions(-)
+>>>
+>>> diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+>>> index 5ff06d3814b..11b1a6221b3 100644
+>>> --- a/drivers/usb/gadget/ether.c
+>>> +++ b/drivers/usb/gadget/ether.c
+>>> @@ -1880,8 +1880,10 @@ static void eth_start(struct eth_dev *dev, gfp_t gfp_flags)
+>>>   	}
+>>>   }
+>>>   
+>>> -static int eth_stop(struct eth_dev *dev)
+>>> +static int eth_stop(struct udevice *udev)
+>>>   {
+>>> +	struct ether_priv *priv = dev_get_priv(udev);
+>>> +	struct eth_dev *dev = &priv->ethdev;
+>>>   #ifdef RNDIS_COMPLETE_SIGNAL_DISCONNECT
+>>>   	unsigned long ts;
+>>>   	unsigned long timeout = CONFIG_SYS_HZ; /* 1 sec to stop RNDIS */
+>>> @@ -1895,7 +1897,7 @@ static int eth_stop(struct eth_dev *dev)
+>>>   		/* Wait until host receives OID_GEN_MEDIA_CONNECT_STATUS */
+>>>   		ts = get_timer(0);
+>>>   		while (get_timer(ts) < timeout)
+>>> -			usb_gadget_handle_interrupts(0);
+>>> +			dm_usb_gadget_handle_interrupts(udev->parent);
+>>>   #endif
+>>>   
+>>>   		rndis_uninit(dev->rndis_config);
+>>> @@ -2300,7 +2302,7 @@ static int usb_eth_start(struct udevice *udev)
+>>>   			pr_err("The remote end did not respond in time.");
+>>>   			goto fail;
+>>>   		}
+>>> -		usb_gadget_handle_interrupts(0);
+>>> +		dm_usb_gadget_handle_interrupts(udev->parent);
+>>>   	}
+>>>   
+>>>   	packet_received = 0;
+>>> @@ -2370,7 +2372,7 @@ static int usb_eth_send(struct udevice *udev, void *packet, int length)
+>>>   			printf("timeout sending packets to usb ethernet\n");
+>>>   			return -1;
+>>>   		}
+>>> -		usb_gadget_handle_interrupts(0);
+>>> +		dm_usb_gadget_handle_interrupts(udev->parent);
+>>>   	}
+>>>   	free(rndis_pkt);
+>>>   
+>>> @@ -2400,13 +2402,13 @@ static void usb_eth_stop(struct udevice *udev)
+>>>   	 * 2) 'pullup' callback in your UDC driver can be improved to perform
+>>>   	 * this deinitialization.
+>>>   	 */
+>>> -	eth_stop(dev);
+>>> +	eth_stop(udev);
+>>>   
+>>>   	usb_gadget_disconnect(dev->gadget);
+>>>   
+>>>   	/* Clear pending interrupt */
+>>>   	if (dev->network_started) {
+>>> -		usb_gadget_handle_interrupts(0);
+>>> +		dm_usb_gadget_handle_interrupts(udev->parent);
+>>>   		dev->network_started = 0;
+>>>   	}
+>>>   }
+>>> @@ -2416,7 +2418,7 @@ static int usb_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+>>>   	struct ether_priv *priv = dev_get_priv(dev);
+>>>   	struct eth_dev *ethdev = &priv->ethdev;
+>>>   
+>>> -	usb_gadget_handle_interrupts(0);
+>>> +	dm_usb_gadget_handle_interrupts(dev->parent);
+>>>   
+>>>   	if (packet_received) {
+>>>   		if (ethdev->rx_req) {
+>>> @@ -2467,7 +2469,7 @@ int usb_ether_init(void)
+>>>   		return ret;
+>>>   	}
+>>>   
+>>> -	return usb_gadget_initialize(0);
+>>> +	return 0;
+>> 
+>> No udc_device_get() here?
+>> 
+>> This looks a little suspicious, because in the unbind() we call
+>> udc_device_put().
 >
-> On Tue, 22 Aug 2023 at 03:39, Maxim Uvarov <maxim.uvarov@linaro.org>
-> wrote:
-> >
-> > U-Boot recently got support for an alternative network stack using LWIP.
-> > Replace dhcp command with the LWIP variant while keeping the output and
-> > error messages identical.
-> >
-> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > ---
-> >  include/net/lwip.h             | 12 +++++++
-> >  net/lwip/Makefile              |  1 +
-> >  net/lwip/apps/dhcp/lwip-dhcp.c | 62 ++++++++++++++++++++++++++++++++++
-> >  3 files changed, 75 insertions(+)
-> >  create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
-> >
-> > diff --git a/include/net/lwip.h b/include/net/lwip.h
-> > index cda896d062..240ebba354 100644
-> > --- a/include/net/lwip.h
-> > +++ b/include/net/lwip.h
-> > @@ -17,3 +17,15 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int
-> argc,
-> >   *         Other value < 0, if error
-> >   */
-> >  int ulwip_dns(char *name, char *varname);
-> > +
-> > +/**
-> > + * ulwip_dhcp() -  create the DHCP request to obtain IP address.
-> > + *
-> > + * This function creates the DHCP request to obtain IP address. If DHCP
-> server
-> > + * returns file name, this file will be downloaded with tftp.  After
-> this
-> > + * function you need to invoke the polling loop to process network
-> communication.
-> > + *
-> > + * Returns: 0 if success
-> > + *         Other value < 0, if error
->
-> So this is an errno value from errno.h ?
->
->
-No.  In this version it's what lwip returned. I can replace it with:
-return dhcp_start(netif) ? 0 : -EPERM;
-to not provide on upper layer lwip internal things.
+> Look at how udc_device_get_by_index() is implemented and what it does, 
+> compared to what usb_ether_init() does (hint: they are basically doing 
+> the same thing). This udc_device_put() here is only a workaround for 
+> platforms which are not using the bind command to bind USB ethernet yet.
 
+Oh right. Thank you for explaining.
 
-
-> > +*/
-> > +int ulwip_dhcp(void);
-> > diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-> > index 6d2c00605b..59323fb325 100644
-> > --- a/net/lwip/Makefile
-> > +++ b/net/lwip/Makefile
-> > @@ -65,4 +65,5 @@ obj-$(CONFIG_NET) += $(LWIPDIR)/netif/ethernet.o
-> >  obj-$(CONFIG_NET) += port/if.o
-> >  obj-$(CONFIG_NET) += port/sys-arch.o
-> >
-> > +obj-$(CONFIG_CMD_DHCP) += apps/dhcp/lwip-dhcp.o
-> >  obj-$(CONFIG_CMD_DNS) += apps/dns/lwip-dns.o
-> > diff --git a/net/lwip/apps/dhcp/lwip-dhcp.c
-> b/net/lwip/apps/dhcp/lwip-dhcp.c
-> > new file mode 100644
-> > index 0000000000..cce1e367f9
-> > --- /dev/null
-> > +++ b/net/lwip/apps/dhcp/lwip-dhcp.c
-> > @@ -0,0 +1,62 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +
-> > +/*
-> > + * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
-> > + */
-> > +
-> > +#include <common.h>
-> > +#include <command.h>
-> > +#include <console.h>
-> > +
-> > +#include <lwip/dhcp.h>
-> > +#include <lwip/prot/dhcp.h>
-> > +
-> > +#include <net/eth.h>
-> > +#include <net/ulwip.h>
-> > +
-> > +static struct dhcp dhcp;
->
-> Can we keep the state in the uclass?
->
->
-I found a good way to avoid this static. If dhcp_set_struct() is not called
-this struct is malloced, later it can be accessed as code bellow.
-
-
-> > +
-> > +static int ulwip_dhcp_tmo(void)
-> > +{
-> > +       switch (dhcp.state) {
-> > +       case DHCP_STATE_BOUND:
-> > +               env_set("bootfile", dhcp.boot_file_name);
-> > +               env_set("ipaddr", ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > +               env_set("netmask", ip4addr_ntoa(&dhcp.offered_sn_mask));
-> > +               env_set("serverip", ip4addr_ntoa(&dhcp.server_ip_addr));
->
-> Please check errors throughout your patches. Use the
-> netif_get_client_data() as in code bellow and do not pass
->
->
-yep.
-
-
-> > +               printf("DHCP client bound to address %s\n",
-> ip4addr_ntoa(&dhcp.offered_ip_addr));
-> > +               break;
-> > +       default:
-> > +               return -1;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +int ulwip_dhcp(void)
-> > +{
-> > +       int err;
-> > +       struct netif *netif;
-> > +       int eth_idx;
-> > +
-> > +       eth_idx = eth_get_dev_index();
-> > +       if (eth_idx < 0) {
-> > +               log_err("no eth idx\n");
-> > +               return -1;
->
-> That is -EPERM...please use a suitable error, perhaps -ENOENT?
->
-> > +       }
-> > +
-> > +       netif = netif_get_by_index(eth_idx + 1);
-> > +       if (!netif)
-> > +               return -1;
-> > +
-> > +       ulwip_set_tmo(ulwip_dhcp_tmo);
-> > +
-> > +       if (!netif_get_client_data(netif,
-> LWIP_NETIF_CLIENT_DATA_INDEX_DHCP))
-> > +               dhcp_set_struct(netif, &dhcp);
-> > +
-> > +       err = dhcp_start(netif);
-> > +       if (err)
-> > +               log_err("dhcp_start error %d\n", err);
->
-> Ideally the caller would print the errors. We try to have commands do
-> that, since then it allows silent running for things which want it. It
-> also helps with code size.
->
->
-ok.
-
-> > +
-> > +       return err;
-> > +}
-> > --
-> > 2.30.2
-> >
->
-> Regards,
-> Simon
->
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
