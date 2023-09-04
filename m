@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E6EC83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:41:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD11C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:41:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ACD486611;
-	Mon,  4 Sep 2023 16:41:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 777B486942;
+	Mon,  4 Sep 2023 16:41:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eh2Duk41";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e5ODRVPb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1B8B8679F; Mon,  4 Sep 2023 16:41:00 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 78F0686932; Mon,  4 Sep 2023 16:41:08 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D03B6846D2
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:40:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F9598693D
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:41:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-58fb73e26a6so14761767b3.1
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:40:57 -0700 (PDT)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-d74a012e613so2023529276.1
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:41:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693838456; x=1694443256; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a3Lydtk5EC0r81V2NV5DTZql6w8//VTH1/GTd4MvHj0=;
- b=eh2Duk41J+5VOLErHA1nVS397M7k7RPpXXG3gEv40xmarCqRbG6WQbQOkktb39Txpu
- Z/CsQGl8f+JTzfWs58VVMDgaIeQpLMTk9bwqkq+JvGqIaz8l549VFgQmIfepOrRKpD3p
- EQmEjEGyX1xuWb8/3lwxV6azC7z7rn9Z9jAd0=
+ d=konsulko.com; s=google; t=1693838462; x=1694443262; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mg33pxBtcw1M6rN/C2BNzGGBb2XSfkQM5vJZX6rHz1k=;
+ b=e5ODRVPb5A5bR4fFeZrD/ynsnRBlwlYc8UF11OSFXIWtanEXB2l56Qj5sFTVE4xUH8
+ Q05TxpLQ0A8J902ZWJyJT5iUq8C3I880tppUJDeysAGTfeVBtEvr3eNmbliwmsMnBPLi
+ kF+zT2tpAfb1jvfKBHu6/oqEIIMf5eAE8QgHU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693838456; x=1694443256;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a3Lydtk5EC0r81V2NV5DTZql6w8//VTH1/GTd4MvHj0=;
- b=WvcrItCuKJ3MTCzaUu+ShK9EsBT1tK8JGwBHkNjhmC8BrXtdbzvJwnp1ppQONbopGl
- jnUDOegUTul4ccUKeDpdd/5FeCxJX9mSjj/Rp7KS0lDkI/FX7MuNSbKjjIxSWxYHRQi/
- qJKgoE/7aoDzjRYfveO5IouY9PCKUj55Hr1aYJc8Yhv+yzhZBEFkyzxDtXLyvKyIHds7
- mlCJsyMJRdXi83XcW9wekwZnYxURHwg9BJ1E3w2SK51rmtKqrivZqkb0kev/pf88J3JM
- JPSE9EVFsENmlmaPNsfjntng+km9x2UrEqZNOicWpF19Q/P+A/oF3jWk8SeFeM8kETIe
- UYJQ==
-X-Gm-Message-State: AOJu0Yxm79L8D6peAoFQ9D1AZdJSsAD3Mce4zE+qsMe2/6k9XdOgF4yy
- JpTYQXssDAzKXI+frhUIF8hSiA==
-X-Google-Smtp-Source: AGHT+IF4CdIVw6wmMbquD3fVwqe4z8wf8h1KaVyS01VTZYOBKSLVz5eVlmvXzwvFd6Btrznc/x4UXA==
-X-Received: by 2002:a25:938f:0:b0:d77:fcdb:842f with SMTP id
- a15-20020a25938f000000b00d77fcdb842fmr9814994ybm.60.1693838456289; 
- Mon, 04 Sep 2023 07:40:56 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693838462; x=1694443262;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mg33pxBtcw1M6rN/C2BNzGGBb2XSfkQM5vJZX6rHz1k=;
+ b=j9D+kPhWAjlmeeSdKkp3QaUi1PoWg+no1hI3OQAgXWuPMB0BwcbOb0zrgJhlTU+DjK
+ XLd13bv9oxYyY9Yq8DT7ipxeistt6ZG8TJW9+ryEK2d0eJ++ETRByDzGvaGYuN+kq+pk
+ GpBo3YAmtvEI4YOHViV6qBi4nh0s8+vf17PXRKNJaQW2X0wfqpyE9G+1hTNpz28fseAx
+ RQu8EDTZV+B3/Zoe2D+7QSq0lg3ZInrJmGMSl2Uv1mrGDgPhtSJ3KcU5tPztHohaPt8i
+ OH/gnW6k+3RVjYY2Wv7xAKw3cSGaLPgcLTpHXcHcg9ZKC0lNIB1uoKHUD/nMrzrmgy7i
+ c5vA==
+X-Gm-Message-State: AOJu0Yz/aIFJt9aF8JONcOP+kBtS8T++1tUBNaoB7dALnsnvptNKpyrx
+ HQXMRst6Ol7Od8EFth6/TRX1EaEsFy5n/FRLgKE3SA==
+X-Google-Smtp-Source: AGHT+IE3KLuLTUWOmTRt+bBcvgFg+fL/7RQeKeRh8MEEX52q7VzXGBy8bsU0bvVE3kCsDQCAAOvdEA==
+X-Received: by 2002:a25:ce47:0:b0:d7c:26ae:9518 with SMTP id
+ x68-20020a25ce47000000b00d7c26ae9518mr13195350ybe.14.1693838462057; 
+ Mon, 04 Sep 2023 07:41:02 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-977e-7fa5-b64a-ed15.res6.spectrum.com.
  [2603:6081:7b00:6400:977e:7fa5:b64a:ed15])
  by smtp.gmail.com with ESMTPSA id
- y18-20020a253212000000b00d74c43dad49sm2335475yby.48.2023.09.04.07.40.55
+ x13-20020a25ce0d000000b00d0b0bbe574asm2330233ybe.44.2023.09.04.07.41.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Sep 2023 07:40:55 -0700 (PDT)
-Date: Mon, 4 Sep 2023 10:40:54 -0400
+ Mon, 04 Sep 2023 07:41:01 -0700 (PDT)
+Date: Mon, 4 Sep 2023 10:40:59 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Updates for RPi for 2023.10:
-Message-ID: <20230904144054.GB3101304@bill-the-cat>
-References: <CALeDE9MLAxKXRZethKcxBKjocRmaFq2dNw0e-5TjHfSiPvryXA@mail.gmail.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2023.10-rc4 released
+Message-ID: <20230904144059.GC3101304@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BrlIRVEyIPkB80Vd"
+ protocol="application/pgp-signature"; boundary="r4AzFDNxSjrb9htA"
 Content-Disposition: inline
-In-Reply-To: <CALeDE9MLAxKXRZethKcxBKjocRmaFq2dNw0e-5TjHfSiPvryXA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,51 +88,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BrlIRVEyIPkB80Vd
+--r4AzFDNxSjrb9htA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 04, 2023 at 01:10:09PM +0100, Peter Robinson wrote:
+Hey all,
 
-> The following changes since commit 8999257f219d1e371c2fd66f255b8782897944=
-d9:
->=20
->   Merge tag 'doc-2023-10-rc4-2' of
-> https://source.denx.de/u-boot/custodians/u-boot-efi (2023-09-02
-> 09:08:54 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/ tags/rpi-2=
-023.10
->=20
-> for you to fetch changes up to fc2af2d978b525e188b15d909e321caf9445bdb0:
->=20
->   arm: rpi: Switch to a text environment (2023-09-03 23:33:04 +0100)
->=20
+Once again it's release day and I've tagged and pushed -rc4, and will
+merge that to next as well shortly. We are firmly in the stabilization
+period at this point and I really want to see PRs for -next for things
+that aren't fixes.  Adding Fixes tags would be great and helpful, but
+not required.
 
-Applied to u-boot/master, thanks!
+In terms of a changelog,=20
+git log --merges v2023.10-rc3..v2023.10-rc4
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
+
+I'm going to try and stay on schedule now and that means the rest of the
+rcs every other Monday, and with final release on October 2nd, 2023.
+Thanks all!
 
 --=20
 Tom
 
---BrlIRVEyIPkB80Vd
+--r4AzFDNxSjrb9htA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT17HYACgkQFHw5/5Y0
-tyw+wAwAqfbMbYaMqYJ4asue4OrTu+pkBKcqA1FSyoJubkFtz6vy4pRAECyMXEgB
-Chsz9kaA6BRddbM0lPtfT3WliwaxFyossMv/hGQwwVimOKZA54umkL71ainGjy9J
-it2THQs2ZMJ1RW9i5+ZbwfuCZRASupMA13zc7IPquRrW0ruTQ8HMU3UO9epjtxse
-KJ+cQsJHPzUDCCA9IvY06OYFlcWEV2kq+xrjiHI+fqO/5OYGDe9RVypyj5NnsO9T
-OCOxssuav4gIL13L1PtPzBF9j8gUkFFGH6k3aLUwK8Asb81X86o1rtCR7T9S38Bk
-wPWzOeocHcb4MdaBO4ScAfEryPB4ofZZ9OV0tY0ahSJCRGv56XRkYOPTIGPPx7EA
-bygOEiefAbfT281EEuTbH31rzDcDLOx4hyQ/kBpqK9GeqNT6rgqQUmCXt85+GscS
-XLTP/I/fVQMoyo22k7SQ+z+wz08ycV+DBka2ITuLo6Dsi0F6rHLbhnBVdF1oDRHP
-CrkBEcoU
-=tK4R
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT17HsACgkQFHw5/5Y0
+tyzEtwwArJsMU0Qa7o6VaCien14Pr04EFIRWDQede6HSS+w4maSUDw61uwRKvlv2
+dUlcPJXxtxzH4QSLh4OtzC4dwpwuyCl+xOXInFz9cVJ6oaHB1elgMhLQ/BBYVbmu
+4rghmlQqrBgbHGHxQ8frbs8TxiKpm3o6Z+Oy52agwu2vr6ja4CiaFTSEbhSyylsW
+bY0lbIkfJ3XOQEXDFV977qyZNviaYx8S6qZdQ4IgP52UnLr4axGk8dvR/7aYZsNH
+Dsbty/MZObSOMg9vHo68lYVGpkB114OO0XPdz9duZEC4/XdPdZ+hrpy0YM1C7IDu
+ByeZzx3NpQCtC70266//5LkCZnvczjvnSD/G+tqHpbsJbiHNqHXIX7YYxHwqyl0T
+JCRQgJrdP8dsLA+MWxHBCXHfOG3B9rBIBzEZbde7Z+ghEskhy/0ASN6DPwrhpVPi
+JAg2IIb+oocT+QxEpt54T5+TG4jFXSozLul5pVzYHDGUbr4vC4spvIFNa5t0R60s
+ig+VFz4y
+=NprC
 -----END PGP SIGNATURE-----
 
---BrlIRVEyIPkB80Vd--
+--r4AzFDNxSjrb9htA--
