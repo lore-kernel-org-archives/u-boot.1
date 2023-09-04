@@ -4,69 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7806BC88CB2
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 15:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F74DC71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 15:18:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B320386954;
-	Mon,  4 Sep 2023 17:05:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D9C686983;
+	Mon,  4 Sep 2023 17:17:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QHfGUPSm";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1693840679;
+	bh=xUXZnlixfsxeOzVeZvc2kpnqVFo9+VBvjFwQ/nvTPNA=;
+	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From;
+	b=B4rd/808pI9Lzlqi/ZzBxwXl0GR0PKNA9Jijx7b73BKq5llMPt6fuKX21jN+Oof/B
+	 epLvy2HRGTZVY3MTdS/d24qDn+t5Fysjs6vB9e+5FihciHu1NC193do/CXQEoB85GN
+	 r1UOun796DmvMKgDiJa/0GuEjls6vupTZUUegGFlSt0Qa45QE5wN9pcxbSAc3kuc2e
+	 vlGrf3etO1wy2ohRm12TPOicx42kfTcTfgOuQB9k30ECepMpdqLdLaULTZ3TxnAL2c
+	 dE73R5KA8TbGoyH5lKHiS9tCxDGJCTfA+WmmVYE9CJp8N3MOlpLCqjfSDlgSKu4QeC
+	 //UX+EXwOujow==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED9BF8698D; Mon,  4 Sep 2023 17:05:22 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C38B86977; Mon,  4 Sep 2023 17:17:57 +0200 (CEST)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44EBE863DC
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:05:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F17CB863CF
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:17:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-592976e5b6dso14837517b3.2
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 08:05:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693839919; x=1694444719; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Tm1UU4KtT+0LCOvVv+xHmTrW4q9V5qJvwHFlUacWR4c=;
- b=QHfGUPSmcmzNbdZxdnomp+QRxVsfX6gBaS8Zv+phLVLvwg5af04Osm6CatoAA8vpAm
- uYU8VQT2P8JO2quIwd50QTAtCcoXrAqwVXLcRa9wZ+zwOA0ez+2X3XqBV1BUETFXK974
- QvZ5uw3jVJfkLUDVAm7ASTymDyadd1B11p5knA1Q+AGSutFKC7kJU984CXkOysTE+6Xt
- OEaYdEi/JC8/CxSXb/Zm2UzAyuU2ykyYOGzChnlS1MsO4y2hLT9Dl/HjS0YvdbDi6IlQ
- kHCVUtkE8B2w4VbwzJCuj5M0/9rowJDy35t1b009RKTUIAjTm/2cr4N/dExGGYbFajkG
- F0kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693839919; x=1694444719;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Tm1UU4KtT+0LCOvVv+xHmTrW4q9V5qJvwHFlUacWR4c=;
- b=PW7HdPhorOQUhatscyPdocv6FqpRXPtNJbtYKRW2kSp01BYDo23qtp9ob5XpDAM/A2
- 4dkfD3xrryScUjqU8oDSy8PblL7xrEv5W7xH831Q2pAd4IqHRtwMFEC1zKkcpo3/usS5
- tpE6POk+w8O5JW7rBNnfYJWEVhYgxwZCvUkRS9xweA29ntolcm60YE3YOZUDdQgqpaGL
- wHb/0Sm5TBLX2qXQts//kuj8PUjs+IphzgIsO4slrxmJAfRm6mwvMfNdrPk709rxbqrb
- qMevxmrtANoMpYvgGHnUB0ohWhj9Y80O9fZj+Es2DhxV3K/gF4gcM/PZCF9oPye0F1PC
- oycw==
-X-Gm-Message-State: AOJu0YwVfojTEUQ7O4biNPcSJRF84lyt0pGsR1T43JUUl7HBNuQ5pjV5
- LuYmIvunilOUNWvRPStsWu1sufywlSy9TTJeU1x1ONx+CYQ=
-X-Google-Smtp-Source: AGHT+IFyqIpTtLtIk6OVZ1HqM+eDwD42SLEF6O5eJPrdTqEWmdX8WQifD6Ln+TysDfVZfSu4lIwleDE2FqXmMbcRDBc=
-X-Received: by 2002:a81:6cd0:0:b0:595:7fc9:4ca3 with SMTP id
- h199-20020a816cd0000000b005957fc94ca3mr10174585ywc.0.1693839919028; Mon, 04
- Sep 2023 08:05:19 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 4RfXM644vbz1r2s2;
+ Mon,  4 Sep 2023 17:17:54 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
+ by mail.m-online.net (Postfix) with ESMTP id 4RfXM61zSrz1qqlS;
+ Mon,  4 Sep 2023 17:17:54 +0200 (CEST)
+X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
+ with ESMTP id V3GykC7O1BtW; Mon,  4 Sep 2023 17:17:53 +0200 (CEST)
+Received: from papero (host-88-217-136-221.customer.m-online.net
+ [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
+ Mon,  4 Sep 2023 17:17:53 +0200 (CEST)
+From: sbabic@denx.de
+X-Patchwork-Submitter: Tim Harvey <tharvey@gateworks.com>
+X-Patchwork-Id: 1821580
+X-Patchwork-Delegate: sbabic@denx.de
+To: Tim Harvey <tharvey@gateworks.com>,u-boot@lists.denx.de
+Subject: [PATCH 1/6] board: gateworks: venice: fix gw7904
+In-reply-to: <20230815220115.2000851-1-tharvey@gateworks.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Mon, 4 Sep 2023 17:05:08 +0200
-Message-ID: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
-Subject: Binman how to build using Rockchip BL32 binary as OP-TEE
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Content-Type: text/plain; charset="UTF-8"
+Message-Id: <20230904151757.6C38B86977@phobos.denx.de>
+Date: Mon,  4 Sep 2023 17:17:55 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,19 +73,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-Is there any way for binman to package FIT with U-Boot TF-A and
-OP-TEE, using bl32 binary provided by Rockchip as TEE?
-
-I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
-binman failed.
-
-In my poor understanding of Python code, it seems binman accepts only
-ELF format or a binary format starting with optee_v1_header, but
-binaries provided by Rockchip in rkbin repository do not have this
-header.
-
-Thanks in advance for any hints!
-
-Massimo
+PiBBZGQgbWlzc2luZyBpbXg4bW0tdmVuaWNlLWd3NzkwNCB0byBDT05GSUdfT0ZfTElTVAo+IEZp
+eGVzIGNvbW1pdCA2MWU3Zjk3MzI1NjUgKCJib2FyZDogZ2F0ZXdvcmtzOiB2ZW5pY2U6IGFkZCBp
+bXg4bW0tZ3c3OTA0IHN1cHBvcnQiKQo+IFNpZ25lZC1vZmYtYnk6IFRpbSBIYXJ2ZXkgPHRoYXJ2
+ZXlAZ2F0ZXdvcmtzLmNvbT4KQXBwbGllZCB0byB1LWJvb3QtaW14LCBtYXN0ZXIsIHRoYW5rcyAh
+CgpCZXN0IHJlZ2FyZHMsClN0ZWZhbm8gQmFiaWMKCi0tIAo9PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KREVOWCBTb2Z0
+d2FyZSBFbmdpbmVlcmluZyBHbWJILCAgICAgICAgTWFuYWdpbmcgRGlyZWN0b3I6IEVyaWthIFVu
+dGVyICAKSFJCIDE2NTIzNSBNdW5pY2gsICAgT2ZmaWNlOiBLaXJjaGVuc3RyLjUsIDgyMTk0IEdy
+b2ViZW56ZWxsLCBHZXJtYW55ClBob25lOiArNDktODE0Mi02Njk4OS01MyBGYXg6ICs0OS04MTQy
+LTY2OTg5LTgwIEVtYWlsOiBzYmFiaWNAZGVueC5kZQo9PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0K
