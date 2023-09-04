@@ -4,95 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90ABBC71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 10:22:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FE8C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 10:38:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 920B6847C3;
-	Mon,  4 Sep 2023 12:22:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E6D4086453;
+	Mon,  4 Sep 2023 12:38:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uZJOyNLd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eAq64jFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24CC4864A7; Mon,  4 Sep 2023 12:22:01 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED9F786500; Mon,  4 Sep 2023 12:38:27 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3858280B98
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 12:21:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9446186453
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 12:38:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C8C7A3F20F
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 10:21:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1693822917;
- bh=v8vBYDUfP4Pxg54LTfqEoRk5rDjyrccww3PweKIxMD8=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=uZJOyNLdoGK7gPJWSxgyKUQNt7FO2zp1WS0G2V0my1pgzeE2/Mj118oO8VXV71U+q
- xSzOq5EvmN4faOg9ODta1EqqFVDh1R5zNLEMKp7Q3WdD+2VHSO+ZwcKjMYoDsVTTFh
- AIxGvXk0sgDK+yCQGfB5bXEq8eJIJxUkmktgk7JKdx+eaTQh+MTooB4oMAZa9lvvQ+
- NzLJED9mOBuPk+ZG1WSp+aXlWUm2Ryrs6ekY8vXx03arkvKRR/Ha9AVmka2DxMUVn9
- Y3JQG3j4L0SYBCvaapZFze7flyV5CTkU78SYXxSzRtUJngJtKysULsMNR3UP1ytvd4
- aXq5YCGfmOXRA==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-94a34a0b75eso89360266b.1
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 03:21:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693822917; x=1694427717;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=v8vBYDUfP4Pxg54LTfqEoRk5rDjyrccww3PweKIxMD8=;
- b=NoTvUqcUfuCgMEN4haNgHiHWJ2+UQEMeoozRzJlUweGKKaXM+GiwXwBvrSG39HRTWj
- ngIXaji+z9TJtzYSqFwibJR5wpHuOyq2ov6SvhO4CayR2q3rtPi2sNnUNLrbmuyfGfL/
- UxdWmvanCbjwcxt+R4cJ/Zd+tmiU2oQQ7eX7C7XgB5+pLqJq7d3i78sI5PTWiY/G99Gv
- 8dRQJJ+OpTi69qAqYj9aX0ovcMq7Gpk97nMPtG5E2eIvGwFYR960GRgj9i5zRQHOLw0U
- dihR3ZAKL8EBDf5L8Lvx7P1Y5aRUNq4yTErERjdclGXVZkwSyGjWXFOpc8+dlKNbeVPU
- 3SPw==
-X-Gm-Message-State: AOJu0YwmaqsW98xXlPyIA0Hi4Zqa5Il0eUs5pUvoIemSSj7Ywj8iRYB8
- PVzyIeJtsos4tY4EbWyYGAldmUxO67rDXKMQiUgERnyDtCIZDB2Kq9OjkiNjLEotpbjguqKmJEX
- 002BC56OwfEJ5xw3mReIB5gfFgceATmo=
-X-Received: by 2002:a17:906:224a:b0:9a1:b144:30f0 with SMTP id
- 10-20020a170906224a00b009a1b14430f0mr7663335ejr.53.1693822917513; 
- Mon, 04 Sep 2023 03:21:57 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHYd3BiZ5mI9CTWHB2EASorOOQRpnkoVKOH/sG6uIIhBPDgXQdSIpu1+q4y+Rq1dc9/tckTRw==
-X-Received: by 2002:a17:906:224a:b0:9a1:b144:30f0 with SMTP id
- 10-20020a170906224a00b009a1b14430f0mr7663319ejr.53.1693822917096; 
- Mon, 04 Sep 2023 03:21:57 -0700 (PDT)
-Received: from [192.168.89.42]
- (dynamic-046-114-152-014.46.114.pool.telefonica.de. [46.114.152.14])
- by smtp.gmail.com with ESMTPSA id
- rn5-20020a170906d92500b0099cc402d3ddsm5867768ejb.202.2023.09.04.03.21.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Sep 2023 03:21:56 -0700 (PDT)
-Message-ID: <288365fb-80f0-42d0-a960-e7adf45c28a5@canonical.com>
-Date: Mon, 4 Sep 2023 12:22:55 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 384AcLpL107419;
+ Mon, 4 Sep 2023 05:38:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693823901;
+ bh=vCwKi8Ljhax2aIB6KJJE6Z0JsuVHeIoST5SNxwh1OfM=;
+ h=From:Subject:Date:To:CC;
+ b=eAq64jFVjbOrAEge26fEsdMjheTd5LkmN5vUfj0pPBBLi/cqvoTuJgLwOLzKrvcZC
+ yBFKIMStsS4I1ILhYlFXqBtMX3O19HTJIWQtSYpwa2jHb1zG/npDK0x85/yU4u8FVJ
+ QNj9ENvGyds2YH7ZPggLVxzTtFXeBUosG0pNpNwo=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 384AcL3b092454
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 4 Sep 2023 05:38:21 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
+ Sep 2023 05:38:20 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 4 Sep 2023 05:38:20 -0500
+Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 384AcHYr029746;
+ Mon, 4 Sep 2023 05:38:18 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH v4 0/6] DTS Sync from v6.5-rc1 to u-boot
+Date: Mon, 4 Sep 2023 16:08:15 +0530
+Message-ID: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] risc-v: implement DBCN based debug console
-Content-Language: en-US, de-DE
-To: Chanho Park <chanho61.park@samsung.com>
-Cc: 'Bin Meng' <bmeng.cn@gmail.com>, 'Anup Patel' <apatel@ventanamicro.com>,
- u-boot@lists.denx.de, 'Leo' <ycliang@andestech.com>,
- 'Rick Chen' <rick@andestech.com>
-References: <20230819131250.10251-1-heinrich.schuchardt@canonical.com>
- <CGME20230819131306epcas2p115da29b1053ca3f7d852317e7c61b831@epcas2p1.samsung.com>
- <20230819131250.10251-3-heinrich.schuchardt@canonical.com>
- <004301d9df12$6e749600$4b5dc200$@samsung.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <004301d9df12$6e749600$4b5dc200$@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJez9WQC/5XOwQ7CIAwG4FcxnK2BDnB68j2MB2Cdw2RsgbnMm
+ L274MHEmx7/Nv36P1mi6Cmx4+bJIs0++SHkILcb5joTrgS+yZkhx4rXQoOVcB/TFMn0cNujSAh
+ RwehDf18AlZOu0cKiqlkmrEkENprguoJ8DgMtU9mPkVq/vN+fLzl3Pk1DfLzbzKJMf3w8C+DQS
+ iVrqXCvuTlNfueGnhV1xn8kzJJRrZDCkuTWfUnVP1JVOjVaczwIVJX+SOu6vgD80t/veQEAAA=
+ =
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Nikhil M Jain <n-jain1@ti.com>
+X-Mailer: b4 0.12.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1693823897; l=2961;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=W+D7uLVIQsK4KlBfZZiOUB+zdd7zugJaXsuHL3Agp7k=;
+ b=vgqPsV3KlQdsTgrV7kspWFQEsA2fG87fSleoghrJPyCFR27aui+PAlImjFzn6LzxS8f/IuGNV
+ z12yH5z5936Bu4V+B0DPkIl0Fry+46zLNhtoFlGPhN53OQKhfJ1XNpW
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,117 +93,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/4/23 11:30, Chanho Park wrote:
-> Hi,
-> 
->> -----Original Message-----
->> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Heinrich
->> Schuchardt
->> Sent: Saturday, August 19, 2023 10:13 PM
->> To: Rick Chen <rick@andestech.com>; Leo <ycliang@andestech.com>
->> Cc: Bin Meng <bmeng.cn@gmail.com>; Anup Patel <apatel@ventanamicro.com>;
->> u-boot@lists.denx.de; Heinrich Schuchardt
->> <heinrich.schuchardt@canonical.com>
->> Subject: [PATCH 2/2] risc-v: implement DBCN based debug console
->>
->> Use the DBCN SBI extension to implement a debug console.
->> Make it the default for S-mode RISC-V.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   drivers/serial/Kconfig      |  3 ++-
->>   drivers/serial/serial_sbi.c | 19 +++++++++++++++++++
->>   2 files changed, 21 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig index
->> a1e089962a..8421c5c047 100644
->> --- a/drivers/serial/Kconfig
->> +++ b/drivers/serial/Kconfig
->> @@ -218,6 +218,7 @@ config DEBUG_UART
->>   choice
->>   	prompt "Select which UART will provide the debug UART"
->>   	depends on DEBUG_UART
->> +	default DEBUG_SBI_CONSOLE if RISCV_SMODE
->>   	default DEBUG_UART_NS16550
->>
->>   config DEBUG_UART_ALTERA_JTAGUART
->> @@ -289,7 +290,7 @@ config DEBUG_EFI_CONSOLE
->>
->>   config DEBUG_SBI_CONSOLE
->>   	bool "SBI"
->> -	depends on SBI_V01
->> +	depends on RISCV_SMODE
->>   	help
->>   	  Select this to enable a debug console which calls back to SBI to
->>   	  output to the console. This can be useful for early debugging of
->> diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
->> index b9f35ed36e..093c7309d3 100644
->> --- a/drivers/serial/serial_sbi.c
->> +++ b/drivers/serial/serial_sbi.c
->> @@ -3,6 +3,8 @@
->>   #include <debug_uart.h>
->>   #include <asm/sbi.h>
->>
->> +#ifdef CONFIG_SBI_V01
->> +
->>   static inline void _debug_uart_init(void)  {  } @@ -13,4 +15,21 @@ static
->> inline void _debug_uart_putc(int c)
->>   		sbi_console_putchar(c);
->>   }
->>
->> +#else
->> +
->> +static int sbi_dbcn_available;
->> +
->> +static inline void _debug_uart_init(void) {
->> +	sbi_dbcn_available = sbi_probe_extension(SBI_EXT_DBCN);
->> +}
->> +
->> +static inline void _debug_uart_putc(int ch) {
->> +	if (sbi_dbcn_available)
->> +		sbi_dbcn_write_byte(ch);
->> +}
->> +
->> +#endif
->> +
->>   DEBUG_UART_FUNCS
->> --
->> 2.40.1
-> 
-> I've got below error when I tried to build it with VisionFive2 board
-> configuration(starfive_visionfive2_defconfig).
-> To test this patch, I enabled CONFIG_DEBUG_SBI_CONSOLE. Seems like spl also
-> includes the driver when DEBUG_SBI_CONSOLE is enabled.
-> Do I need to do any more configurations to test this?
-> 
-> LD      spl/u-boot-spl
-> riscv64-unknown-linux-gnu-ld.bfd: drivers/serial/serial_sbi.o: in function
-> `_debug_uart_putc':
-> /data/risc-v/vf2/mainline/u-boot/drivers/serial/serial_sbi.c:30: undefined
-> reference to `sbi_dbcn_write_byte'
-> riscv64-unknown-linux-gnu-ld.bfd:
-> /data/risc-v/vf2/mainline/u-boot/drivers/serial/serial_sbi.c:30: undefined
-> reference to `sbi_dbcn_write_byte'
-> riscv64-unknown-linux-gnu-ld.bfd: drivers/serial/serial_sbi.o: in function
-> `_debug_uart_init':
-> /data/risc-v/vf2/mainline/u-boot/drivers/serial/serial_sbi.c:24: undefined
-> reference to `sbi_probe_extension'
-> make[2]: *** [/data/risc-v/vf2/mainline/u-boot/scripts/Makefile.spl:527:
-> spl/u-boot-spl] Error 1
-> 
-> Best Regards,
-> Chanho Park
-> 
+The sync tries to ensure that U-boot remains functional with the updated
+Linux DTS and all the fixes from Linux move to U-boot during the sync.
 
-Hello Chanho,
+The series tries to sync from Linux v6.5-rc1 along with addition of
+the documentation for J721S2 that had been previously missing.
 
-thanks for reporting the issue. SBI is not available in M-mode. We need 
-a check in the driver like
+MCU Ringacc [0] and DMA fixes [1] are currently being upstreamed to Linux. 
+They'll be fixed in U-boot post their merge in Linux hopefully during
+v6.6-rc1 timeframe.
 
-     if (!CONFIG_IS_ENABLED(RISCV_MMODE))
+Test Logs are included in [2]
 
-I will send a new version of the series.
+[0]: https://lore.kernel.org/all/20230809175932.2553156-1-vigneshr@ti.com/
+[1]: https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
+[2]: https://gist.github.com/manorit2001/dbad09fd00e8b7c3872e85874c8e648c
 
-Best regards
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v4:
+- Change the documentation commit description. (Nishanth)
+- Remove extra spaces (Nishanth)
+- Update J721S2 as J721S2-EVM and similar for AM68 (Nishanth)
+- Add documentation for AM68 openocd (Nishanth)
+- Add k3-j721s2-thermal.dtsi and arch/arm/mach-k3/j721s2 folder 
+  in MAINTAINERS file
+- Link to v3: https://lore.kernel.org/r/20230816-b4-upstream-j721s2-r5-pinmux-v3-0-fd6602912536@ti.com
 
-Heinrich
+---
+Manorit Chawdhry (5):
+      arm: mach-k3: j721s2: Add mcu_timer0 id to the dev list
+      k3-j721s2: Sync from Linux tag v6.5-rc1
+      k3-am68: Sync from Linux tag v6.5-rc1
+      docs: board: ti: Add j721s2_evm documentation
+      board: ti: j721s2: MAINTAINERS: Update the MAINTAINERS File.
+
+Udit Kumar (1):
+      configs: j721s2_evm_r5_defconfig: Increase malloc pool size in DRAM
+
+ arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi     |  69 +--
+ arch/arm/dts/k3-am68-sk-base-board.dts             | 389 ++++++++------
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts          | 151 +-----
+ arch/arm/dts/k3-am68-sk-som.dtsi                   | 112 +---
+ .../dts/k3-j721s2-common-proc-board-u-boot.dtsi    |  60 +--
+ arch/arm/dts/k3-j721s2-common-proc-board.dts       | 330 ++++++------
+ arch/arm/dts/k3-j721s2-main.dtsi                   | 585 ++++++++++++++++++++-
+ arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi             | 365 ++++++++++++-
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts    | 158 +-----
+ arch/arm/dts/k3-j721s2-som-p0.dtsi                 | 165 +++---
+ arch/arm/dts/k3-j721s2-thermal.dtsi                | 101 ++++
+ arch/arm/dts/k3-j721s2.dtsi                        |  12 +-
+ arch/arm/mach-k3/j721s2/dev-data.c                 |   1 +
+ board/ti/j721s2/MAINTAINERS                        |  11 +-
+ configs/j721s2_evm_r5_defconfig                    |   1 +
+ doc/board/ti/j721s2_evm.rst                        | 341 ++++++++++++
+ doc/board/ti/k3.rst                                |   1 +
+ 17 files changed, 1998 insertions(+), 854 deletions(-)
+---
+base-commit: f2bb6d9ffd9ba0d0d89c00445a70cf81327a7af2
+change-id: 20230816-b4-upstream-j721s2-r5-pinmux-25c4cd61b258
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
