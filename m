@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C05FC83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:22:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE234C83F3F
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:22:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 737DC86936;
-	Mon,  4 Sep 2023 11:22:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B762386915;
+	Mon,  4 Sep 2023 11:22:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="rlNrtx/f";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="sxt+LVo/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8EF886945; Mon,  4 Sep 2023 11:22:19 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 3A2EA86500; Mon,  4 Sep 2023 11:22:28 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 182C286915
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:22:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A08AF868AE
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:22:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5007f3d3235so1875112e87.2
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:22:17 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-52a0856b4fdso1597279a12.1
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:22:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693819336; x=1694424136; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693819345; x=1694424145; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/840kZgrscObTEvYXoW5rlC2KVwEiYUwVc+QH4/oNvo=;
- b=rlNrtx/fd9T0aO7y+Pq0UhWcTuQSXBatLsaWiowrpi/uUD0R1lTq1XTmLaHFrollnX
- uSbCOcWXTgKsMTTIgJQbwWAEkDWpvwgjXXIhhazdF47dTRH0wZBm5+TpWS3KbJpfTvF3
- 5KG5n+SwGEbz8exmn+w4jJ4lqOOUcnBgU3NBBH3YHsQjTYroSL/F4R6q/sbiwU3o4ACI
- XqorWaBAHWpwmMrAn6GVURxPds4xsATygsfhghYlQXfBike/AijQmw8IwbqtfdN2gapG
- bN3IwNmesIi5bsdZNbp0ptI/NlHDrTpxXh+KytfgPSHhmnH+2s9nzHd/UEPHlu3wUdSR
- PTow==
+ bh=sEy8BLjZMhdH0v3ORBUnOVtNiHTbtuAjOBgsjGkEcXM=;
+ b=sxt+LVo/7OmmELtbDGZHiG75wPfG3hlUbyGP924w9l/d6m+P8f3s/6fe+ba56ETj1e
+ Um1n7nnW5uu5HjEsNFwBw0BlMJaV/Om6cPCejOBbax16al2A4TfBSYeHmcYyQW6iG9BW
+ EN38YAiT3zvFOVi5049K3KTwF+ellXF7HsqpSsu0ZiipQv53+wl03h7CgTygTTGmYACR
+ pY5hzaddMFzRC7HOge0tWnCoPwTC/xOCpTVGpjiF4MwryED0RfU/t1w1+X/o4QiOjOAD
+ LOB462b+2dG7LH+yby+qk9QuIFMM9eikFyTT6I/8T0YRk46Uup3Xxsqj+qbgajXrfiop
+ A/eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693819336; x=1694424136;
+ d=1e100.net; s=20221208; t=1693819345; x=1694424145;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/840kZgrscObTEvYXoW5rlC2KVwEiYUwVc+QH4/oNvo=;
- b=G2diOdH0C6zFJzHZIsdpW91WQKmhp/QKJe4iJfZBIThQExePTEQbvHjTQOhs/lD2SG
- nIvEpjJGZT39ZqLKCG0Xqb0AOAh8RihLM5dA3MnmleHF/xm8TMLVgXDRE7XgbLybYm+3
- /W8vsntaVRvtbp3wkneuy3LOtqdWuETXQ8YA8mpRLcA05zVX50n7zr9HcyBiYTfrYnio
- 3Uhwxbuwa3HY4dsnMpspPwG8vMo6ui+/GanCR0cBUw77ZKiV00U7/fgAkGiRKfhtRk/P
- 5D8+gvRC50543Qr7IHGPEMyDEEK9JCTHHCLpmCLCPUKVPRH69x06qrwqkH2rOP3YsRmK
- hgcQ==
-X-Gm-Message-State: AOJu0YzKe1wUj5FvXhN9blMzn4TbyW/LmiRYVuk9CmuhWVnE3lPZoVnD
- zwHI6Fs04ZfcjBPQw3lkI1Cq/Kf/CwERG1Dkq8o0Zw9qAEzzWw==
-X-Google-Smtp-Source: AGHT+IGa8kSvRLFrtnopHXYcnEAky2pwK7DUOvlyZSXhUESY2yP1m9mE/vIAs9fhAOKOv4/NaN+j2AmrDsWPKiMNPaQ=
-X-Received: by 2002:a19:644a:0:b0:500:c534:3e4e with SMTP id
- b10-20020a19644a000000b00500c5343e4emr5319793lfj.60.1693819336142; Mon, 04
- Sep 2023 02:22:16 -0700 (PDT)
+ bh=sEy8BLjZMhdH0v3ORBUnOVtNiHTbtuAjOBgsjGkEcXM=;
+ b=agwhChitYoEnF6GObESQFa3X8/BcuPtSBbeg5+YPWyjlbCTseX6CxZARx+kWcPwSLr
+ gG5enO57DFZcvNLHuUmzu7YeW2+SGsowowawRvT4dGMkVQXYDmEja5U3LCrF/9IAPoeU
+ VJYEEWtXhfyALXz7p95qZpUyb9WTUoBywYo8O1Zoj4AP780PNnTYXLnkL8B3vWBK8UX3
+ VnfmLIpVcyWH7VAsB0V7teTcZKSPg4RaR9bi6+m0yq9GrKBSmlL/wL/LO1rfbPJvdWWS
+ jx8xvV2Ay3utUwtsn4zD9jzFI6xW6vNfN8B8dV/kucrBCqjZL7Y0uSkqn6PWS245WVkE
+ MuoQ==
+X-Gm-Message-State: AOJu0YxwB2e0Z/1lQBD2t+iFtWDahL7Z6J93T9+Km8erBQ+figJTgOrF
+ Zapvzgngd80IOflbInpB0YkxiotN0rPpVQcJvVc=
+X-Google-Smtp-Source: AGHT+IGGnakUV9a4cLopVX9Pct1SzB6x56WCL606khXzH9UUbAKbaGsOSE0Nw4nsa4ZhXh1Kc4h6wwag+NVX63alq7s=
+X-Received: by 2002:aa7:d316:0:b0:52c:164:efe5 with SMTP id
+ p22-20020aa7d316000000b0052c0164efe5mr6492895edq.39.1693819345219; Mon, 04
+ Sep 2023 02:22:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823184746.842091-1-sjg@chromium.org>
- <20230823184746.842091-6-sjg@chromium.org>
-In-Reply-To: <20230823184746.842091-6-sjg@chromium.org>
+ <20230823184746.842091-7-sjg@chromium.org>
+In-Reply-To: <20230823184746.842091-7-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 4 Sep 2023 17:22:00 +0800
-Message-ID: <CAEUhbmVXFQpMzC7KMTk9dy_f=-iJCcK_ux_zJS2L4+UbdyBoDw@mail.gmail.com>
-Subject: Re: [PATCH 5/8] x86: broadwell: Avoid initing the CPU twice
+Date: Mon, 4 Sep 2023 17:22:11 +0800
+Message-ID: <CAEUhbmVYRm0rHNkGj4TDR3NcGeOQY9iAqSj3JByx_cDg1FxC6w@mail.gmail.com>
+Subject: Re: [PATCH 6/8] x86: broadwell: Set up MTRRs
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Michal Suchanek <msuchanek@suse.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,17 +87,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
+
 On Thu, Aug 24, 2023 at 2:48=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> When TPL has already set up the CPU, don't do it again. This existing
-> code actually has this backwards, so fix it.
+> The current condition does not handle the samus_tpl case where it sets
+> up the RAM in SPL but needs to commit the MTRRs in U-Boot proper.
+>
+> Add another case to handle this and update the comment.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->  arch/x86/cpu/broadwell/cpu.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+>  arch/x86/lib/init_helpers.c | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
 >
+> diff --git a/arch/x86/lib/init_helpers.c b/arch/x86/lib/init_helpers.c
+> index 60a2707dcf1..bf0c921577d 100644
+> --- a/arch/x86/lib/init_helpers.c
+> +++ b/arch/x86/lib/init_helpers.c
+> @@ -15,7 +15,8 @@ DECLARE_GLOBAL_DATA_PTR;
+>  int init_cache_f_r(void)
+>  {
+>         bool do_mtrr =3D CONFIG_IS_ENABLED(X86_32BIT_INIT) ||
+> -                IS_ENABLED(CONFIG_FSP_VERSION2);
+> +                IS_ENABLED(CONFIG_FSP_VERSION2) ||
+> +                (IS_ENABLED(CONFIG_TPL) && IS_ENABLED(CONFIG_HAVE_MRC));
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+So this combination is only for Samus TPL case, not a generic one, right?
+
+I hate this as it's easy to break. Maybe we should be calling an API
+from the board specific codes to determine whether we should do the
+MTRR programming. Thoughts?
+
+>         int ret;
+>
+>         /*
+> @@ -23,11 +24,9 @@ int init_cache_f_r(void)
+>          *
+>          * booting from slimbootloader - MTRRs are already set up
+>          * booting with FSPv1 - MTRRs are already set up
+> -        * booting with FSPv2 - MTRRs must be set here
+> +        * booting with FSPv2 or MRC - MTRRs must be set here
+>          * booting from coreboot - in this case there is no SPL, so we se=
+t up
+>          *      the MTRRs here
+> -        * Note: if there is an SPL, then it has already set up MTRRs so =
+we
+> -        *      don't need to do that here
+>          */
+>         do_mtrr &=3D !IS_ENABLED(CONFIG_FSP_VERSION1) &&
+>                 !IS_ENABLED(CONFIG_SYS_SLIMBOOTLOADER);
+> --
+
+Regards,
+Bin
