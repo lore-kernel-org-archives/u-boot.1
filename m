@@ -4,123 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA1D0C83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3871C71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:31:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19C44868D3;
-	Mon,  4 Sep 2023 11:30:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EC4B86926;
+	Mon,  4 Sep 2023 11:31:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="vCvIN3jg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QLw1uUs6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59DB9868D9; Mon,  4 Sep 2023 11:30:33 +0200 (CEST)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 80A5B86907; Mon,  4 Sep 2023 11:31:40 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E598857BF
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:30:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49B3C857BF
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:31:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20230904093025epoutp03eef526520be8a0ca0ccff25be01ee4a9~BqCgxCppW2323623236epoutp03f
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:30:25 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20230904093025epoutp03eef526520be8a0ca0ccff25be01ee4a9~BqCgxCppW2323623236epoutp03f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1693819825;
- bh=6j/FJfHE0liSoeunCsJc5EldouuePyFAetzAXIrYBak=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=vCvIN3jgkfskN/A1X+lMMkWrn83kkwkpFShDvvUtK8nVb3DFcHIFbYV4Y0tSbf9ql
- s3/dRaHd9OoUSJ5Ja4PYqGWfnSBoLxLDyaqTuRoufzymSOeKJGk5u757L9OlzdrsmV
- uguOumzu2iQf0WTUUgjxU6HpuY7mx6Ty0bTmo/Uw=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20230904093025epcas2p2a3b572fecbe736547f7c8cf1de61cf51~BqCgiEK-Y0816308163epcas2p2K;
- Mon,  4 Sep 2023 09:30:25 +0000 (GMT)
-Received: from epsmges2p2.samsung.com (unknown [182.195.36.69]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4RfNf846Zkz4x9QC; Mon,  4 Sep
- 2023 09:30:24 +0000 (GMT)
-Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
- epsmges2p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- 93.99.09649.0B3A5F46; Mon,  4 Sep 2023 18:30:24 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
- 20230904093024epcas2p46053e90e86ff06c72dcfeba536c489b8~BqCfgxw4_3253232532epcas2p4G;
- Mon,  4 Sep 2023 09:30:24 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20230904093024epsmtrp22cf4e6d773216c11d516e0f2ff378256~BqCfgDFTH1186911869epsmtrp2G;
- Mon,  4 Sep 2023 09:30:24 +0000 (GMT)
-X-AuditID: b6c32a46-b9ffa700000025b1-94-64f5a3b0f57b
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 44.85.08788.FA3A5F46; Mon,  4 Sep 2023 18:30:24 +0900 (KST)
-Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20230904093023epsmtip17d691f0663639108c9b314a8a68862f1~BqCfVmFui0098500985epsmtip1f;
- Mon,  4 Sep 2023 09:30:23 +0000 (GMT)
-From: "Chanho Park" <chanho61.park@samsung.com>
-To: "'Heinrich Schuchardt'" <heinrich.schuchardt@canonical.com>, "'Rick
- Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>
-Cc: "'Bin Meng'" <bmeng.cn@gmail.com>, "'Anup Patel'"
- <apatel@ventanamicro.com>, <u-boot@lists.denx.de>
-In-Reply-To: <20230819131250.10251-3-heinrich.schuchardt@canonical.com>
-Subject: RE: [PATCH 2/2] risc-v: implement DBCN based debug console
-Date: Mon, 4 Sep 2023 18:30:23 +0900
-Message-ID: <004301d9df12$6e749600$4b5dc200$@samsung.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5008d16cc36so2045402e87.2
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:31:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693819895; x=1694424695; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vs330YR8lYz1NuHEF3qumcG/K45JwX+zXrf4QZ74YrI=;
+ b=QLw1uUs6QpeKQgcuy8UxIl7uJSKrVnVP0WcCtlD4wx/PU+uYRL6rIjMcj3hj9MfqU0
+ OMbTU8t6r7FVlopC5VABQ7I8iXoJJxX6tIGqccPI8zrgAbSVLvG6+ryZU6E87MugjNU3
+ 1C44oBlUMB+3Qz8Glv60isISQ5eFnU8YPTl3DBOSRbdLnY5WI7aZaWxEgfBkC3JvFb01
+ qdSp7lboHVIIVm95Ib5YweCYg9g7YdjHeAY8csBQpuPyFk30rmME1iLgwybuSjc/tSJ2
+ R5GOpkjuU3JwWjGJcwNgn7KtA4/3ihyjgCbSYrLXMeLW3f/NAor86xXJbtboUWF3M7/z
+ bX9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693819895; x=1694424695;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Vs330YR8lYz1NuHEF3qumcG/K45JwX+zXrf4QZ74YrI=;
+ b=KZZO/1MGtR7QcrhokZhWh1yv/EKsJdcVptpbfxYUkzf8V8yO6LCCJReqc6ZxOwMpXT
+ N6Bcp1ihEG/KjgFv35BHT9kppf2Zjv+u0o6hVcmLb0iFNRx9kTD9v6o/+Qcc0WnU2aLA
+ QnF2pEtrmkYwk7ZWpwkL90IAoku6cAplFdByUFCHthEXbI3NrUTTg+JC89PvuSgGoDqc
+ K1J3L/W3evSQ7ennvzpiiQ32Hn4e+tZTdxRLhDirC/xRPiFpZ3TfZMR8+Q13eRUUEc4q
+ 25Jg1xRw7utGp2Vqv3nr+ej2ZAm+ItqbK+UoC+rqaYS7jnHByMtwLyccD8ZT8o6OM6j2
+ oPmQ==
+X-Gm-Message-State: AOJu0YyzJccGok5gKNjJYrfs/TCezZOtaHidoytQ/C/hy/2OgqHwPRik
+ LctxUiVmfQ5tuhy8YG9x9kJig4Fa9OnngcfVS3w9BQ==
+X-Google-Smtp-Source: AGHT+IFJPGPSSj2QtkXzzSA03G3CeMWrmdHWovkAbWCuBwMIiOlKMta3Of2ra1avOYSP6vqtCik/ygtlTPoA8HLonhw=
+X-Received: by 2002:a05:6512:742:b0:500:7f51:d129 with SMTP id
+ c2-20020a056512074200b005007f51d129mr5057626lfs.34.1693819895442; Mon, 04 Sep
+ 2023 02:31:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-us
-Thread-Index: AQDpAsHOP8aGy9YqEgKlPsQRNCZ1hQKd0QYUAgfUdMaxxvD0IA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIJsWRmVeSWpSXmKPExsWy7bCmue6GxV9TDN5slbOYdek4o8XUnniL
- C4032S3evjjLaPF2bye7xeNDr5kc2Dz2nJ7F7DGroZfNY+esu+weZ+/sYPT4+3MrSwBrVLZN
- RmpiSmqRQmpecn5KZl66rZJ3cLxzvKmZgaGuoaWFuZJCXmJuqq2Si0+ArltmDtAFSgpliTml
- QKGAxOJiJX07m6L80pJUhYz84hJbpdSClJwC8wK94sTc4tK8dL281BIrQwMDI1OgwoTsjPb2
- BUwFi6Uqms/eZG9g/CvaxcjJISFgInH09Ta2LkYuDiGBHYwSy9asYodwPjFKHNiwgBHC+cYo
- sWT/CXaYlu/7rjKC2EICexklri1Ogyh6wSjx5MM9FpAEm4C+xMuObawgCRGBNkaJs5O3g3Uz
- C2RKbOxsYQOxOQXcJbp7z4BNEhZwlpjy+R9YnEVAReLc3llANgcHr4ClRM+7RJAwr4CgxMmZ
- T1ggxshLbH87hxniIAWJn0+XsULExSVeHj0CtkpEwEliccM3sBskBBZySDxZ+ZUNosFFYvus
- EywQtrDEq+NboD6Tkvj8bi/YXgmBcokdy5IgelsYJZrb9kAts5f4cXMKK0gNs4CmxPpd+hDl
- yhJHbkGdxifRcfgvO0SYV6KjTQiiUV3iwPbpUEtlJbrnfGadwKg0C8ljs5A8NgvJM7MQdi1g
- ZFnFKJZaUJybnlpsVGAEj+vk/NxNjOC0qeW2g3HK2w96hxiZOBgPMUpwMCuJ8Mppf0oR4k1J
- rKxKLcqPLyrNSS0+xGgKDOmJzFKiyfnAxJ1XEm9oYmlgYmZmaG5kamCuJM57r3VuipBAemJJ
- anZqakFqEUwfEwenVANTYVizbbxqbHV4a10/c21nwbONXbr+9y41e3MI5cf1tX4Oc5n55D5f
- KLdRTPeHm7Nubu/ft09sPmuy46lsr+/yfW269XxrxKd6rn4fMmuX123Zg922zX9T3A48fZAT
- 23RcOJzJT7hu97NiyakTDJ+zvkivjv/yNvR1zJqY+Ss2fZj/5GjoMud4zZfciQ89dtW9aJh+
- x+7kHLP4z4WLnouW5cy1cTw286Bdfn7xJ7n70rdOl8rE7T2zX9jZ6AarzWe9Ne4H1FXLxMwE
- 5DiXvlXc+vXGeb2PDuLZP9Z0SE7fbs9btMv6dBiHpnDD/wNzLTs0Kz2Z9P9oHd77d/LM87uu
- /tj2cu9/he5Pc36XCN5QYinOSDTUYi4qTgQAar8kUyQEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprKIsWRmVeSWpSXmKPExsWy7bCSnO6GxV9TDJaeYLSYdek4o8XUnniL
- C4032S3evjjLaPF2bye7xeNDr5kc2Dz2nJ7F7DGroZfNY+esu+weZ+/sYPT4+3MrSwBrFJdN
- SmpOZllqkb5dAldGe/sCpoLFUhXNZ2+yNzD+Fe1i5OSQEDCR+L7vKmMXIxeHkMBuRomGZfPZ
- IBKyEs/e7WCHsIUl7rccYYUoesYoMenLclaQBJuAvsTLjm1gCRGBDkaJvZ3PGEESzALZEi+a
- lkKNvcwoMXP1W7CxnALuEt29Z8CKhAWcJaZ8/gcWZxFQkTi3dxaQzcHBK2Ap0fMuESTMKyAo
- cXLmExaQMLOAnkTbRqjx8hLb385hhjhOQeLn02WsEHFxiZdHj7DDPPDn6Fyw6SICThKLG76x
- wjzz6vgW9gmMorOQbJiFsGEWkg2zkExdwMiyilEytaA4Nz232LDAKC+1XK84Mbe4NC9dLzk/
- dxMjOOa0tHYw7ln1Qe8QIxMH4yFGCQ5mJRFeOe1PKUK8KYmVValF+fFFpTmpxYcYpTlYlMR5
- v73uTRESSE8sSc1OTS1ILYLJMnFwSjUw9bxW0GK7+oVhgfEePonMmqd3us/9O+7m0BzSaLTq
- 8fTz6YtzP07MNVCedifm7ITF6c35U8w+Hzpg9Hzyq8CHcUwJueH9s3lsLqQoW6/40PqURYE5
- 9uNHpeNaE7QmxZRtD9gdf2L/v9/sl05FW+zKumm3+6DA/O6WzZXnE1WOJX3YaunK5HLWdLvI
- H06PAknVxYtjTi2dUfWsYCvrols9H3s/nNcyuOvFtpQ3LHL2K820H7IiDvNqqhaW6eWt5ZZ+
- Uib/LMgjWCXevna6u2AxX+ICrrIvHp6inrO5Wur+6b343v/eVJ5VZT+TyS3nxRNOvXR5OV9x
- 7oTb03h+zY94HSUrol5SvyNw9cvP/tUVSizFGYmGWsxFxYkAnOgiLCgDAAA=
-X-CMS-MailID: 20230904093024epcas2p46053e90e86ff06c72dcfeba536c489b8
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230819131306epcas2p115da29b1053ca3f7d852317e7c61b831
-References: <20230819131250.10251-1-heinrich.schuchardt@canonical.com>
- <CGME20230819131306epcas2p115da29b1053ca3f7d852317e7c61b831@epcas2p1.samsung.com>
- <20230819131250.10251-3-heinrich.schuchardt@canonical.com>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-31-sjg@chromium.org>
+ <ZPA8AtGOel8pko6y@hades>
+ <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
+ <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
+ <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 4 Sep 2023 12:30:59 +0300
+Message-ID: <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
+Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marex@denx.de>, Baruch Siach <baruch@tkos.co.il>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>,
+ Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,103 +94,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-> -----Original Message-----
-> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Heinrich
-> Schuchardt
-> Sent: Saturday, August 19, 2023 10:13 PM
-> To: Rick Chen <rick@andestech.com>; Leo <ycliang@andestech.com>
-> Cc: Bin Meng <bmeng.cn@gmail.com>; Anup Patel <apatel@ventanamicro.com>;
-> u-boot@lists.denx.de; Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com>
-> Subject: [PATCH 2/2] risc-v: implement DBCN based debug console
-> 
-> Use the DBCN SBI extension to implement a debug console.
-> Make it the default for S-mode RISC-V.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  drivers/serial/Kconfig      |  3 ++-
->  drivers/serial/serial_sbi.c | 19 +++++++++++++++++++
->  2 files changed, 21 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig index
-> a1e089962a..8421c5c047 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -218,6 +218,7 @@ config DEBUG_UART
->  choice
->  	prompt "Select which UART will provide the debug UART"
->  	depends on DEBUG_UART
-> +	default DEBUG_SBI_CONSOLE if RISCV_SMODE
->  	default DEBUG_UART_NS16550
-> 
->  config DEBUG_UART_ALTERA_JTAGUART
-> @@ -289,7 +290,7 @@ config DEBUG_EFI_CONSOLE
-> 
->  config DEBUG_SBI_CONSOLE
->  	bool "SBI"
-> -	depends on SBI_V01
-> +	depends on RISCV_SMODE
->  	help
->  	  Select this to enable a debug console which calls back to SBI to
->  	  output to the console. This can be useful for early debugging of
-> diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
-> index b9f35ed36e..093c7309d3 100644
-> --- a/drivers/serial/serial_sbi.c
-> +++ b/drivers/serial/serial_sbi.c
-> @@ -3,6 +3,8 @@
->  #include <debug_uart.h>
->  #include <asm/sbi.h>
-> 
-> +#ifdef CONFIG_SBI_V01
-> +
->  static inline void _debug_uart_init(void)  {  } @@ -13,4 +15,21 @@ static
-> inline void _debug_uart_putc(int c)
->  		sbi_console_putchar(c);
->  }
-> 
-> +#else
-> +
-> +static int sbi_dbcn_available;
-> +
-> +static inline void _debug_uart_init(void) {
-> +	sbi_dbcn_available = sbi_probe_extension(SBI_EXT_DBCN);
-> +}
-> +
-> +static inline void _debug_uart_putc(int ch) {
-> +	if (sbi_dbcn_available)
-> +		sbi_dbcn_write_byte(ch);
-> +}
-> +
-> +#endif
-> +
->  DEBUG_UART_FUNCS
-> --
-> 2.40.1
+On Fri, 1 Sept 2023 at 18:51, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Fri, 1 Sept 2023 at 01:50, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> >
+> > [...]
+> >
+> > > >
+> > > > > +config OF_BLOBLIST
+> > > > > +     bool "DTB is provided by a bloblist"
+> > > > > +     help
+> > > > > +       Select this to read the devicetree from the bloblist. This allows
+> > > > > +       using a bloblist to transfer the devicetree between  U-Boot phases.
+> > > > > +       The devicetree is stored in the bloblist by an early phase so that
+> > > > > +       U-Boot can read it.
+> > > > > +
+> > > >
+> > > > I dont think this is a good idea.  We used to have 4-5 different options
+> > > > here, which we tried to clean up and ended up with two very discrete
+> > > > options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
+> > > > have a header of some sort?  The bloblist literally comes from a previous
+> > > > stage bootloader which is what OF_BOARD is here for. So why can't we just
+> > > > read the header and figure out if the magic of the bloblist matches?
+> > >
+> > > No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
+> > >
+> > > This patch is a standard mechanism to pass the DT from one firmware
+> > > phase to the next. We have spent quite a bit of time creating a spec
+> > > for it, and we should use it.
+> >
+> > Where exactly am I objecting using the spec?   Can you please re-read my email?
+> > I am actually pointing out we should use the spec *properly*.  So
+> > instead of having a Kconfig option for the DT, which is pretty
+> > pointless,  we should parse the bloblist.  If the header defined by
+> > the *spec* is found, we should just search for the DT in there.
+> > What you are doing here, is take the spec, pick a very specific item
+> > that the list contains, and create a Kconfig option out of it.  Which
+> > basically ignores the discoverable options of the bloblist.  For
+> > example, that bloblist can also contain an entry to a TPM eventlog.
+> > Should we start creating Kconfig options for all the firmware handoff
+> > entries that are defined on that spec?
+>
+> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
 
-I've got below error when I tried to build it with VisionFive2 board
-configuration(starfive_visionfive2_defconfig).
-To test this patch, I enabled CONFIG_DEBUG_SBI_CONSOLE. Seems like spl also
-includes the driver when DEBUG_SBI_CONSOLE is enabled.
-Do I need to do any more configurations to test this?
+That's fine by me.  You can even put that under IS_ENABLED for the
+bloblist inside the existing OF_BOARD check.  So I was thinking
+- If no bloblist is required in Kconfig options we do the hacks we used to
+- if bloblist is selected and the config option is OF_BOARD, throw an
+error and mention that the previous stage loader should hand over a DT
 
-LD      spl/u-boot-spl
-riscv64-unknown-linux-gnu-ld.bfd: drivers/serial/serial_sbi.o: in function
-`_debug_uart_putc':
-/data/risc-v/vf2/mainline/u-boot/drivers/serial/serial_sbi.c:30: undefined
-reference to `sbi_dbcn_write_byte'
-riscv64-unknown-linux-gnu-ld.bfd:
-/data/risc-v/vf2/mainline/u-boot/drivers/serial/serial_sbi.c:30: undefined
-reference to `sbi_dbcn_write_byte'
-riscv64-unknown-linux-gnu-ld.bfd: drivers/serial/serial_sbi.o: in function
-`_debug_uart_init':
-/data/risc-v/vf2/mainline/u-boot/drivers/serial/serial_sbi.c:24: undefined
-reference to `sbi_probe_extension'
-make[2]: *** [/data/risc-v/vf2/mainline/u-boot/scripts/Makefile.spl:527:
-spl/u-boot-spl] Error 1
+Is that what you had in mind?
 
-Best Regards,
-Chanho Park
-
+Thanks
+/Ilias
+>
+> >
+> > Thanks
+> > /Ilias
+> >
+> > >
+> > > The patches to align bloblist with the spec have been sent, but there
+> > > is a late-breaking change that we are trying to resolve. Once that is
+> > > sorted out, I will send v2 of those patches.
+> > >
+> > > >
+> > > > >  config OF_BOARD
+> > > > >       bool "Provided by the board (e.g a previous loader) at runtime"
+> > > > >       default y if SANDBOX || OF_HAS_PRIOR_STAGE
+> > > > > diff --git a/include/bloblist.h b/include/bloblist.h
+> > > > > index 080cc46a126..e16d122f4fb 100644
+> > > > > --- a/include/bloblist.h
+> > > > > +++ b/include/bloblist.h
+> > > > > @@ -103,6 +103,11 @@ enum bloblist_tag_t {
+> > > > >       BLOBLISTT_ACPI_TABLES = 0x104,  /* ACPI tables for x86 */
+> > > > >       BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+> > > > >       BLOBLISTT_VBOOT_CTX = 0x106,    /* Chromium OS verified boot context */
+> > > > > +     /*
+> > > >
+> > > > [...]
+> > > >
+> > > > >
+> > > > [0] https://github.com/FirmwareHandoff/firmware_handoff
+> > >
+>
+> Regards,
+> Simon
