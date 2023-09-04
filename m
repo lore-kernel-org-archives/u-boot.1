@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9A3C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7806BC88CB2
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 15:05:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38FDF86A3C;
-	Mon,  4 Sep 2023 16:46:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B320386954;
+	Mon,  4 Sep 2023 17:05:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mnGfK23m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QHfGUPSm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6401C86A45; Mon,  4 Sep 2023 16:46:49 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id ED9BF8698D; Mon,  4 Sep 2023 17:05:22 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B76D886A34
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:46:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44EBE863DC
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 17:05:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-500a398cda5so2626203e87.0
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:46:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-592976e5b6dso14837517b3.2
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 08:05:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693838806; x=1694443606; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u0EEnGvp0NJH+Qcu+jvl97IUEnY/JSh3kcdlemIiz6k=;
- b=mnGfK23mft2YS95fenOxcczR6Eu7ioYK0u4FfUU5r7u2baLTUxxI1FOlrxfGdAHgh6
- lb5wsGKnppi9xlu0Jk2GwIU0v2CAlaZy/F3B7tSJrCeDdo0y9+S9F0g6QwovQeF/pfGv
- QpSaaQfiuFZPje75g7N1QxwxbvYZKvR28r66w=
+ d=gmail.com; s=20221208; t=1693839919; x=1694444719; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Tm1UU4KtT+0LCOvVv+xHmTrW4q9V5qJvwHFlUacWR4c=;
+ b=QHfGUPSmcmzNbdZxdnomp+QRxVsfX6gBaS8Zv+phLVLvwg5af04Osm6CatoAA8vpAm
+ uYU8VQT2P8JO2quIwd50QTAtCcoXrAqwVXLcRa9wZ+zwOA0ez+2X3XqBV1BUETFXK974
+ QvZ5uw3jVJfkLUDVAm7ASTymDyadd1B11p5knA1Q+AGSutFKC7kJU984CXkOysTE+6Xt
+ OEaYdEi/JC8/CxSXb/Zm2UzAyuU2ykyYOGzChnlS1MsO4y2hLT9Dl/HjS0YvdbDi6IlQ
+ kHCVUtkE8B2w4VbwzJCuj5M0/9rowJDy35t1b009RKTUIAjTm/2cr4N/dExGGYbFajkG
+ F0kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693838806; x=1694443606;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=u0EEnGvp0NJH+Qcu+jvl97IUEnY/JSh3kcdlemIiz6k=;
- b=jDg3scvcre0ygQBBxr8wEjXsdd1B/reAiPeHGi1YPe18u2f4c7JbAw2m3yfpvIDLrK
- XsbNKmkMTEQwQANO9ENcradFKa6UGhBBwGNaVri6aA2EVfpFYSK4b3EOHaNhr82ZZ8X9
- LorwMPMK/Ql77WMuSt8L9ukgCXwS+IOwBGo/UiV+GAlowLprE2PyJ3Kn+RRBndo2mVbh
- jZwAATlPHkd7PXkV/y61GL0l7JFrRtblfTssQ6MRxBm66seDWLtEgrCypo8YIn5UbLdJ
- poAmjnzrR8OSVhKM+veWdptabxW8/w9QtLQbxlDkWLRZjSA7CnxZXZmIAYx5Fv3XIgkh
- ZWQA==
-X-Gm-Message-State: AOJu0YxJ3h4ohgmH/urB5iQKKxwESZS2S6B4yKhjbCNvhYYEdeqpU9Qe
- r5tCBm+hpQDJwv0kRzljMZN4HxAPzATDBhe903u/Rw==
-X-Google-Smtp-Source: AGHT+IHAAmvkxcKYutRlshAGErF+HJ7ZnkEocWnC5yUVoUoYxJvYdjWoVXL2BxIz1PLpaOrHzNZ4dPHor9FfYc+xedM=
-X-Received: by 2002:a05:6512:3c8a:b0:500:aec8:cac1 with SMTP id
- h10-20020a0565123c8a00b00500aec8cac1mr8831384lfv.26.1693838805697; Mon, 04
- Sep 2023 07:46:45 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693839919; x=1694444719;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Tm1UU4KtT+0LCOvVv+xHmTrW4q9V5qJvwHFlUacWR4c=;
+ b=PW7HdPhorOQUhatscyPdocv6FqpRXPtNJbtYKRW2kSp01BYDo23qtp9ob5XpDAM/A2
+ 4dkfD3xrryScUjqU8oDSy8PblL7xrEv5W7xH831Q2pAd4IqHRtwMFEC1zKkcpo3/usS5
+ tpE6POk+w8O5JW7rBNnfYJWEVhYgxwZCvUkRS9xweA29ntolcm60YE3YOZUDdQgqpaGL
+ wHb/0Sm5TBLX2qXQts//kuj8PUjs+IphzgIsO4slrxmJAfRm6mwvMfNdrPk709rxbqrb
+ qMevxmrtANoMpYvgGHnUB0ohWhj9Y80O9fZj+Es2DhxV3K/gF4gcM/PZCF9oPye0F1PC
+ oycw==
+X-Gm-Message-State: AOJu0YwVfojTEUQ7O4biNPcSJRF84lyt0pGsR1T43JUUl7HBNuQ5pjV5
+ LuYmIvunilOUNWvRPStsWu1sufywlSy9TTJeU1x1ONx+CYQ=
+X-Google-Smtp-Source: AGHT+IFyqIpTtLtIk6OVZ1HqM+eDwD42SLEF6O5eJPrdTqEWmdX8WQifD6Ln+TysDfVZfSu4lIwleDE2FqXmMbcRDBc=
+X-Received: by 2002:a81:6cd0:0:b0:595:7fc9:4ca3 with SMTP id
+ h199-20020a816cd0000000b005957fc94ca3mr10174585ywc.0.1693839919028; Mon, 04
+ Sep 2023 08:05:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230901011357.2482203-1-sjg@chromium.org>
- <20230901011357.2482203-3-sjg@chromium.org>
- <94edeb15-f260-4c88-9527-e58065a470f0@gmx.de>
- <CAPnjgZ1-YLz=SAqO962ih2trf+2HP8Dzuchwn9cjZju+BomLAg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1-YLz=SAqO962ih2trf+2HP8Dzuchwn9cjZju+BomLAg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Sep 2023 08:46:34 -0600
-Message-ID: <CAPnjgZ3W0iBbvF4yKjp6VRvn73b3P-5CFKSaYShD9OE+2r34wQ@mail.gmail.com>
-Subject: Re: [PATCH v2 02/14] lmb: Rename interior piece to area
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Mon, 4 Sep 2023 17:05:08 +0200
+Message-ID: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
+Subject: Binman how to build using Rockchip BL32 binary as OP-TEE
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,64 +83,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi,
 
-On Fri, 1 Sept 2023 at 08:29, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Heinrich,
->
-> On Fri, 1 Sept 2023 at 00:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 9/1/23 03:13, Simon Glass wrote:
-> > > The lmb data structures use the word 'region' to describe the region in
-> > > which the allocations happen, as well as the individual allocations in
-> > > that region. The interior structure is called lmb_property but is
-> > > described as a region.
-> > >
-> > > This is quite confusing. One of the reviewers in v1 asked why we are using
-> > > a property to describe a region!
-> >
-> > We currently have:
-> >
-> > struct lmb_region - Description of a set of region.
-> > struct lmb_property - Description of one region.
-> >
-> > The word 'region' implies that it is contiguous, while 'region set'
-> > implies that its members might not be contiguous.
->
-> From what I can tell, the areas inside a region are contiguous. The
-> code is so badly commented that it is hard to know what the intent
-> was.
->
-> Actually I just looked it up and found it came from Linux, so I
-> suppose that explains the lack of comments. There it has been renamed
-> memblock.
->
-> Could you take a look and see if we could adopt the same naming?
+Is there any way for binman to package FIT with U-Boot TF-A and
+OP-TEE, using bl32 binary provided by Rockchip as TEE?
 
-I am waiting for your thoughts on this one.
+I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
+binman failed.
 
->
-> >
-> > Calling a set region is what starts the confusion.
-> >
-> > Your patch is creating new confusion by calling a member of "a set of
-> > regions" "area".
-> >
-> > Please, rename as follows:
-> >
-> > lmb_region -> lmb_region_set
->
-> That sounds like it sets a region
->
-> > lmb_property -> lmb_region
-> >
-> > The comments below are only valid if you stick with area which I
-> > strongly discourage.
->
-> Fair enough, I don't like it much either.
->
-[..]
+In my poor understanding of Python code, it seems binman accepts only
+ELF format or a binary format starting with optee_v1_header, but
+binaries provided by Rockchip in rkbin repository do not have this
+header.
 
-Regards,
-Simon
+Thanks in advance for any hints!
+
+Massimo
