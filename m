@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803ABC83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:50:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D220AC71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:51:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 904F686932;
+	by phobos.denx.de (Postfix) with ESMTP id D37E1869B1;
 	Mon,  4 Sep 2023 18:49:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PxzwsbKg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lgwI02Nx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C736286886; Mon,  4 Sep 2023 18:49:52 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id CED398694A; Mon,  4 Sep 2023 18:49:52 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89F838694A
+ by phobos.denx.de (Postfix) with ESMTPS id 9842486960
  for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 18:49:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-500cefc3644so2754457e87.3
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5007c8308c3so2578174e87.0
  for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 09:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693846185; x=1694450985; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dQZDNocKKaaBtAruQtgzDe3OAtegxRfGFSdsfDCpzAs=;
- b=PxzwsbKgOFS1t4mpcyFMlPYHxA6MpqdXhiIM1en1WqX35kTZlQgLL4Ho9O7f9k7k9o
- ybURY3OWgdxZult/DYDbxyidI5kA30T+YcetL8UxDxJCOjF2lZYYee3sFloifwSitvpL
- SP1OiuCMBDsuaxTwqgQIARvVnrcdrh/DB0vo8=
+ bh=yOAr388YQN6Burw5V7PBW12v+fQ2a8fg+UrMplzitnw=;
+ b=lgwI02Nxyh6wih9qBqnikofK4ItjpMyWLXBtXVwNB61l8HiaqggTBZBCAxr0QyMUxC
+ PwFFXuFw+zSL9W+NLrRZowI353ZTRmKkbn1+q5wD7mpGSD2kB/qqNB2UMIW19MkiEl4B
+ vuEaWcq1Qsty82g61dXhi7usvy9KYwhVQyXhg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693846185; x=1694450985;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dQZDNocKKaaBtAruQtgzDe3OAtegxRfGFSdsfDCpzAs=;
- b=gbxZg2Tg7UiQYQ8mggSHQKUIW6sbFVvn7/4q88334VlIyFuexDnKHoVBSxeDheYbf2
- FbpSykbeI7tVP1HuzO9aNWJ0dG+dg2cD4lt+RxS7ZZJcjizWgy+6p9DcT8XElnf4h2HR
- ZrS82kz4prmwCG8BsiA1qM2zuTbFbRHNk0hqOlRaaO8JQGCXTm+C8eYLrNY+pNgwJBB4
- EBFM8wmkxWjADycJKRShe63FleCvINwDsbhOnQEhjlsVpOUlm1aSCA7t60shUv05M3II
- O/IUaiE45WV8E9vabfFbmfxOYuGhO7bfnoGRsjhwTJQrxHa5uvtzjd5uhJkbxJvfGwX9
- 8Chg==
-X-Gm-Message-State: AOJu0YzoLjkIZryckAnIyYxSvKG4m2rHg44Py1sybSmVqBgOYZ82f5s7
- xuiYII18+ydeIMYwI29dzSxe2ZpkJ/UgRNu92CCQnQ==
-X-Google-Smtp-Source: AGHT+IEH92ryRRgvWhPWsos9FUNmY7eODafvQdFvtcV0pPDsa2vCLcTfCWGbDRUadY4LOUwQ5V8PGL3tfO85Lz8k5hk=
-X-Received: by 2002:a05:6512:20cb:b0:500:8c19:d8c6 with SMTP id
- u11-20020a05651220cb00b005008c19d8c6mr6303151lfr.58.1693846184553; Mon, 04
+ bh=yOAr388YQN6Burw5V7PBW12v+fQ2a8fg+UrMplzitnw=;
+ b=Fd7kMr2aXRgNEzTqvJyHP2ptPeOFeMi5HhFBqza4KYQE4V/uiR9scxHWtHqRyFqaVV
+ Tep+wYmrlSMpRcqMiHVLyUaTtcllgHmuodhHM7/E4/G2i/9Z/8Tlqo1YVo7SrEQfq865
+ d5Hv8cvXXYhJmDVi4UEnuMm6siXocOvRkRvINqUmNCkWPciDgJdGs0vucBwVRZ9QWdAA
+ SI2p58cUzNizBNE+WMOHathjJFnP8kHlyiRcStk7e9l1GOc03OHtl5GKtXLsqZvGm8Qb
+ FX864+2Cs18G0NG+iVWr4RCFm/TIUulkPiXfALeyzYfOVmZ7kTgdd2cL+IK/E5VHyxLI
+ r7mw==
+X-Gm-Message-State: AOJu0Yww2zGuCdJR4ZCoE/ShW6LPn8iWy0p0MaLBEyIeWgW9NMl2DCoK
+ IPrgVkQ35DI4vVzyivrTgQL3fq9t9/DXErzqJx6pzw==
+X-Google-Smtp-Source: AGHT+IH1+otA7sYqvlPf09mjCEC8YVAPjgq4LGfRjW9mSRarKAOF1QewCIlHmQxArjPALzb5h6zORzLnowX+htes7S4=
+X-Received: by 2002:a05:6512:2016:b0:500:91c1:9642 with SMTP id
+ a22-20020a056512201600b0050091c19642mr5590675lfb.21.1693846184542; Mon, 04
  Sep 2023 09:49:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
-In-Reply-To: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
+References: <tencent_055CBAA884BC568E56211618940881653D0A@qq.com>
+In-Reply-To: <tencent_055CBAA884BC568E56211618940881653D0A@qq.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Sep 2023 10:48:46 -0600
-Message-ID: <CAPnjgZ1U1an8+2-VgEXkqZtf3yWTggtEmjn-RFjm+ESgS+Qu3g@mail.gmail.com>
-Subject: Re: Binman how to build using Rockchip BL32 binary as OP-TEE
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
+Date: Mon, 4 Sep 2023 10:48:49 -0600
+Message-ID: <CAPnjgZ37OL8XjMu1eOYPYR8OdmEp52tMwbVfJ5+j8_fCE7WRig@mail.gmail.com>
+Subject: Re: [PATCH] Adjust gitignore for /build
+To: Rong Tao <rtoax@foxmail.com>
+Cc: Maxim Cournoyer <maxim.cournoyer@gmail.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Rong Tao <rongtao@cestc.cn>, 
+ open list <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,32 +82,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Massimo,
+Hi Rong,
 
-On Mon, 4 Sept 2023 at 09:05, Massimo Pegorer
-<massimo.pegorer+oss@gmail.com> wrote:
+On Sun, 3 Sept 2023 at 20:50, Rong Tao <rtoax@foxmail.com> wrote:
 >
-> Hi,
+> From: Rong Tao <rongtao@cestc.cn>
 >
-> Is there any way for binman to package FIT with U-Boot TF-A and
-> OP-TEE, using bl32 binary provided by Rockchip as TEE?
->
-> I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
-> binman failed.
->
-> In my poor understanding of Python code, it seems binman accepts only
-> ELF format or a binary format starting with optee_v1_header, but
-> binaries provided by Rockchip in rkbin repository do not have this
-> header.
+> /build-* can't ignore /build.
 
-Yes that is correct. How would U-Boot know the load address of the TEE
-fille? Hmm it seems to be a fixed address. Perhaps you could change
-the rockchip-u-boot.dtsi file to make the 'tee-os' node a 'blobext'
-node instead, then add a filename property in there with the name of
-your file?
+How does that directory get created?
 
 >
-> Thanks in advance for any hints!
+> Signed-off-by: Rong Tao <rongtao@cestc.cn>
+> ---
+>  .gitignore | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/.gitignore b/.gitignore
+> index 002f95de4feb..9697f0088f80 100644
+> --- a/.gitignore
+> +++ b/.gitignore
+> @@ -35,7 +35,7 @@
+>  *.tab.[ch]
+>
+>  # Build tree
+> -/build-*
+> +/build*
+>
+>  #
+>  # Top-level generic files
+> --
+> 2.41.0
+>
 
 Regards,
 Simon
