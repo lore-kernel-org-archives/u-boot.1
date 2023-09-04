@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99321C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E3EC83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 14:42:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36C1986997;
-	Mon,  4 Sep 2023 16:41:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C04786996;
+	Mon,  4 Sep 2023 16:41:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M59cFCDk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ibWSSnrk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B383C86936; Mon,  4 Sep 2023 16:41:50 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 0C47086940; Mon,  4 Sep 2023 16:41:52 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F18986977
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:41:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55DB4869BC
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 16:41:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-34b0f3b792dso5363065ab.3
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:41:46 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-792979d4cb5so74749039f.2
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 07:41:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693838505; x=1694443305; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693838506; x=1694443306; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vEajdKjZC4jHbmtmiAPuIgOet42kRiJgzLo4f2LaWq4=;
- b=M59cFCDkMs5ryNC3/kd5Scq54fHzg29I1rICtJTTD35c/fZ6F77EmH90jx+yfW43X3
- p7lDZ+215dTxIitXazeruDv8EkDFODcpIUtqFUd+3QzY/dig2heL+syvihpYpY2aylQ8
- X4VoO6f0gVMOa9oPWsniltIF4A2ROUPoa51Bs=
+ bh=gDX+yNkBObzzT5qeAWZ30M8SfG+IPVeBzfHRk+CUIz4=;
+ b=ibWSSnrkZzJ51PmSwHh1JErf2kU7gRpP0T62G8o9F9jYFGWnXQ36/emjjHEWX7ukjx
+ 41wx+OVeWA1bBjmYO4CcJxrPuxYDQnImvKt9EjRFNhEX6raao4QyDt2UhVCyoGuZinY4
+ KF6xF7QngPjOUVESFZVn3qrjErj2aDrfPhbnc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693838505; x=1694443305;
+ d=1e100.net; s=20221208; t=1693838506; x=1694443306;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vEajdKjZC4jHbmtmiAPuIgOet42kRiJgzLo4f2LaWq4=;
- b=A7o3fBh90DwxzVOqDZ4DraZ2TEzZX3Cit3p5fG4XwQnatj/l4E4uAdqRguenF37Frc
- nARMOyOiffm+nyv744BOBGkdc1NxwnCHSFunEwmS0/mqdueME2hKU40FvQi4WpPInRPO
- P8SXKPNuXjKFa8XTPzOspt92iTFVNxX4uJC3gFTZkhZ0VAMyLXGKUd37aJhzXqGWI/Pb
- lcP9O8wKhOAftgH+sYbPKGn8lMZdHrDB6vXn8Rt18Xmtr4HJOdEYNPo2ypdTU28iO5nD
- h7e/SeAE+giS1OyugqWcIoZdk78O/usw3npDPP0jirTr2/0L4/JMrHHfh8A2F4ZzY2Uv
- S6LQ==
-X-Gm-Message-State: AOJu0YwEbc/KJ9Hjb3M77mbfkZkNpUR5U3hCtjwr2Zr1IgJHfNcJFZlb
- tpuIvJ1Xa1V12XKAT1/qKKFiJ7tzr6Hts2me8Rc=
-X-Google-Smtp-Source: AGHT+IEd9XVakWd5vw2IZVylImfGNlE7DFlt6U7Wr0ZS3dR6xvHtPBkSZ+caoYvQ46Xu9QORfudVVA==
-X-Received: by 2002:a92:4a0e:0:b0:34b:aec8:e14c with SMTP id
- m14-20020a924a0e000000b0034baec8e14cmr10207080ilf.3.1693838505017; 
+ bh=gDX+yNkBObzzT5qeAWZ30M8SfG+IPVeBzfHRk+CUIz4=;
+ b=BDWsYU3zyNELyaD6SLLpTNUSGYjDDZ7CcXs04Mf/SZOeAg/zogp3PXhBPlXOaK50K+
+ dWLfXTA09u/AnQmVKfoBrvzCOjFuM2YmMv07dfYsODcY3riVXJsiecTjMnjX07iWETo+
+ dIE9XFYXJli88rWV6P/DGVyxbtf713TMbRYWIhVFWt8MzvDycc4m0YfayYgp9odwHjmn
+ vTWhfxiayrPJScGhspxfwnUqUs76R9qAnQgjbmiHvJ5pcRk22xFY3Kf3+fvajr3n7wJl
+ 9J5wO+EuhaQ5l0fv5397tp/RjfPbZPtEry+7dtHkvvXdvFSFilJ5MybS7b95cge8sZBK
+ dv4A==
+X-Gm-Message-State: AOJu0Yydw6rm+SFDMWIkEgcgscZMOuurCPHSSyxDSChzIFUuhlIsozsd
+ IjeeVDFTjDsf/m1tqyna2eCPKe/0ZnFvDtsciFc=
+X-Google-Smtp-Source: AGHT+IEJoygrnd7bCOa6bHosiMDDMVwoYY4oZGta+p4KiXHHQrJl+e72Yw8JAcItcMpsWTxOi171pg==
+X-Received: by 2002:a05:6e02:1a44:b0:34c:e84b:4c5c with SMTP id
+ u4-20020a056e021a4400b0034ce84b4c5cmr12366470ilv.27.1693838505949; 
  Mon, 04 Sep 2023 07:41:45 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- r16-20020a92d990000000b00345d6297aa7sm3364860iln.16.2023.09.04.07.41.44
+ r16-20020a92d990000000b00345d6297aa7sm3364860iln.16.2023.09.04.07.41.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Sep 2023 07:41:44 -0700 (PDT)
+ Mon, 04 Sep 2023 07:41:45 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
- Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v3 05/20] video: Move BMP options and code to video directory
-Date: Mon,  4 Sep 2023 08:41:08 -0600
-Message-ID: <20230904144131.2699824-6-sjg@chromium.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v3 06/20] FWU: Avoid showing an unselectable menu option
+Date: Mon,  4 Sep 2023 08:41:09 -0600
+Message-ID: <20230904144131.2699824-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230904144131.2699824-1-sjg@chromium.org>
 References: <20230904144131.2699824-1-sjg@chromium.org>
@@ -89,60 +89,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Put the options and the common BMP code with the other related Kconfig
-options in the drivers/video directory.
+Use a menuconfig to avoid showing a menu which cannot be selected in many
+cases.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Drop comment about an update/ directory
 
- drivers/video/Kconfig  | 11 +++++++++++
- drivers/video/Makefile |  2 ++
- 2 files changed, 13 insertions(+)
+Changes in v2:
+- Fix FMU typo in the subject
+- Drop now-unnecessary depends on FWU_MULTI_BANK_UPDATE
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 4eeb8ce022a6..336508af6a57 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -682,6 +682,11 @@ config BACKLIGHT_LM3533
- 	  LM3533 Lighting Power chip. Only Bank A is supported as for now.
- 	  Supported backlight level range is from 2 to 255 with step of 1.
+ lib/Kconfig             | 4 ----
+ lib/fwu_updates/Kconfig | 9 +++++----
+ 2 files changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 9addcfab3734..bfab2f3165a7 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1118,8 +1118,4 @@ config PHANDLE_CHECK_SEQ
  
-+config BMP
-+	bool # Enable bmp image display
-+	help
-+	  Enable bmp functions to display bmp image and get bmp info.
+ endmenu
+ 
+-menu "FWU Multi Bank Updates"
+-
+ source lib/fwu_updates/Kconfig
+-
+-endmenu
+diff --git a/lib/fwu_updates/Kconfig b/lib/fwu_updates/Kconfig
+index 71f34793d926..d35247d0e5d4 100644
+--- a/lib/fwu_updates/Kconfig
++++ b/lib/fwu_updates/Kconfig
+@@ -1,4 +1,4 @@
+-config FWU_MULTI_BANK_UPDATE
++menuconfig FWU_MULTI_BANK_UPDATE
+ 	bool "Enable FWU Multi Bank Update Feature"
+ 	depends on EFI_CAPSULE_ON_DISK
+ 	select PARTITION_TYPE_GUID
+@@ -10,24 +10,25 @@ config FWU_MULTI_BANK_UPDATE
+ 	  multiple banks(copies) of the firmware images. One of the
+ 	  bank is selected for updating all the firmware components
+ 
++if FWU_MULTI_BANK_UPDATE
 +
- source "drivers/video/ti/Kconfig"
+ config FWU_NUM_BANKS
+ 	int "Number of Banks defined by the platform"
+-	depends on FWU_MULTI_BANK_UPDATE
+ 	help
+ 	  Define the number of banks of firmware images on a platform
  
- source "drivers/video/exynos/Kconfig"
-@@ -1125,6 +1130,12 @@ config SPL_VIDEO_REMOVE
- 	  if this  option is enabled video driver will be removed at the end of
- 	  SPL stage, before loading the next stage.
+ config FWU_NUM_IMAGES_PER_BANK
+ 	int "Number of firmware images per bank"
+-	depends on FWU_MULTI_BANK_UPDATE
+ 	help
+ 	  Define the number of firmware images per bank. This value
+ 	  should be the same for all the banks.
  
-+config SPL_BMP
-+	bool # Enable bmp image display at SPL
-+	depends on SPL_VIDEO
-+	help
-+	  Enable bmp functions to display bmp image and get bmp info at SPL.
+ config FWU_TRIAL_STATE_CNT
+ 	int "Number of times system boots in Trial State"
+-	depends on FWU_MULTI_BANK_UPDATE
+ 	default 3
+ 	help
+ 	  With FWU Multi Bank Update feature enabled, number of times
+ 	  the platform is allowed to boot in Trial State after an
+ 	  update.
 +
- if SPL_SPLASH_SCREEN
- 
- config SPL_SPLASH_SCREEN_ALIGN
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 6841d8965842..88b37b1855c6 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -3,6 +3,8 @@
- # (C) Copyright 2000-2007
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- 
-+obj-$(CONFIG_$(SPL_)BMP) += bmp.o
-+
- ifdef CONFIG_DM
- obj-$(CONFIG_$(SPL_TPL_)BACKLIGHT) += backlight-uclass.o
- obj-$(CONFIG_BACKLIGHT_GPIO) += backlight_gpio.o
++endif
 -- 
 2.42.0.283.g2d96d420d3-goog
 
