@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8092C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 07:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3138C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 07:56:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A741864ED;
-	Mon,  4 Sep 2023 09:46:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CAE9868D1;
+	Mon,  4 Sep 2023 09:56:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="utAY4RR9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="IPEATKn5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEED486497; Mon,  4 Sep 2023 09:46:30 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 8BCA4868D1; Mon,  4 Sep 2023 09:56:26 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F863868CB
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:46:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6177F868CB
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:56:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-401da71b85eso11568535e9.1
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 00:46:25 -0700 (PDT)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-31c6cd238e0so1175629f8f.0
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 00:56:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1693813585; x=1694418385;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1693814181; x=1694418981;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=WHiIub8hNZcw7n3CPRU0DNyxQ6GKGaHhV9m7/+U1lxs=;
- b=utAY4RR9xqzYe9PcAP8zK/Gc4t2Bdo2QqzgwTOCm4ebebLVdCeQqMj4oRtQynF3VfE
- vEY9G/+5W7aqAg5QlG1qnnXvmo4E8dDqbs1lYpSIwTup0U2SXv5hvf0a7hI33F5bSHzI
- KwKzJU5BN9C4CX2WFcY2Coj5UPxPX77bLpo9aD1kPaP3V24/pdGQaezMU2JSD/4ivL8O
- Bex5JHp/J5518n37TfyXSTifV6/EZ6XTdgmHKRe1nQocBoffzfzsyCeGWwD8WdPu3TyW
- 9ewfK5INkq8pAAPel3rQqf+iOpBWV2COYH2XyTdAGakQaOm2SQIY24FGW7Wvwbq63One
- ttAg==
+ bh=Jv1XIw9nxj64NeOIMt9ZqePCljFmelOMReL1TmFnGVk=;
+ b=IPEATKn5wGlMRyOFkzWmMACjcThCiQ0VgQYhow/NbFXNclJ3gLdc8IqibNG3zkPiOM
+ s6Gfa6FM3sYQSt2G5kqc+G9E2oos1T5xFNRP4MTgsinRs4cgUtAz7A5aEhL5fy/CZFmU
+ OV3MkOItSUfb3zZpFBT68m8Ri3/yfKVant4g6+7bB6Gwg1YI7w59PLw8QNv9GpT0PwVs
+ +ZabWudM7+ay8gTPoCJvwa4aflhD+35BH3/f47SBRHqu2+rrb6jCF/U3cbH0HXsOLpnr
+ qe3BPfzhZVSv4DowPwjEE4oGStqscaolCAmwHqV0KC8Gx/rSqim0h0J68+TejnqTGvjY
+ 7dEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693813585; x=1694418385;
+ d=1e100.net; s=20221208; t=1693814181; x=1694418981;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WHiIub8hNZcw7n3CPRU0DNyxQ6GKGaHhV9m7/+U1lxs=;
- b=Qv+PCD9Js++O1UO1RHKafR1Xh0Ymmi1tBXe/jvs7Flj1LEXiFR64g3NQ2mXn1dh+LC
- xuh1RhZ3rcSKX99pzpYkQ22c3JtQoLB+F2QsMJtpHZQw6qt83dgHucV3g5XlaEO0QLQR
- VzbZj8cxPtzRQ2+na76gS1DIhVWiDnPGUk1HkxP1tfQgbWlMOZZAnbFdgwQTqJ9mrIWi
- O8LRFm5qpCk3gPpjmdm1R7TS1UQM3M4M5o+jNTayzr9CbjbegQgPPEQZ7hdi/xpoVamc
- 6W3DbGjATdHZEnjPy2UIS5OEw7B3xrfu7h7XhalCLG/TZ+8OaoEufqw9ZQNclPRa23tY
- OAuQ==
-X-Gm-Message-State: AOJu0YyTys59LrN+tEb3w1I+gQBX6LcaTiVPM2RZEFBodC3H7VV3h7ry
- Is7BaypVL45aOlPDuBsfr0ElHg==
-X-Google-Smtp-Source: AGHT+IHTghE2DerrJ7u2U0myLo6QkC9dI9ux5V6zqO0l+UWlISJV2EsoVD1E7ylWHsuHv9cL90hjHg==
-X-Received: by 2002:a05:600c:21cd:b0:401:5443:5591 with SMTP id
- x13-20020a05600c21cd00b0040154435591mr6753642wmj.20.1693813585113; 
- Mon, 04 Sep 2023 00:46:25 -0700 (PDT)
+ bh=Jv1XIw9nxj64NeOIMt9ZqePCljFmelOMReL1TmFnGVk=;
+ b=EdOmGeo+J+vygLr63WZgbbxTkp16OiULQQpo28qYLpMdD4Rq1RSqe2a6oTuhFptZFf
+ mjFIluczTSw8lyNamd/7fT1zIbwQdZDXznlbCzEk5J+jeMX2QNUbQM224NnsnilP0OWx
+ OcrNrkF/P+mEIezg0z8IU3OEFM0a69p96/sQz/zUP1KW75IfBYI7Qv4oaDwrcnzLXJKY
+ hFesLpBSoSHIF+K/x6jps39LgFG2LGwtkyLDrSdYktJFXCQgYYOdEl7MMRpcwm4uGVmS
+ Nse51ocPgYRBtFLVbe8glbeHN9Sn69yiXVOmwIsx2c9k+MgkWNF3e9QPV0dhj4TNe9d+
+ FpSQ==
+X-Gm-Message-State: AOJu0Ywcn0Wr6zO3OyX00zXZn60iJFDsKkRY+hsBVWk0pcFhCInqD5EA
+ EMlL3h9XpJTbD3XS5tpCTzRWSg==
+X-Google-Smtp-Source: AGHT+IFfmMW8DQ/ZZ5S38YgYsU2HP+hpknN3Zg8zhRNM3MjKkijqau/tbmPOTsis2vsibD9Pswxiuw==
+X-Received: by 2002:a05:6000:151:b0:317:f3fd:21b0 with SMTP id
+ r17-20020a056000015100b00317f3fd21b0mr7676050wrx.7.1693814180834; 
+ Mon, 04 Sep 2023 00:56:20 -0700 (PDT)
 Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
  by smtp.gmail.com with ESMTPSA id
- t4-20020a1c7704000000b003fefe70ec9csm16230551wmi.10.2023.09.04.00.46.24
+ s10-20020a5d69ca000000b00317731a6e07sm13594259wrw.62.2023.09.04.00.56.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Sep 2023 00:46:24 -0700 (PDT)
+ Mon, 04 Sep 2023 00:56:20 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>, Dmitrii
@@ -73,13 +73,13 @@ Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>, Dmitrii
  <patrick.delaunay@foss.st.com>, Philipp Tomsich
  <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Stefan Roese
  <sr@denx.de>, kernel@puri.sm
-Subject: Re: [PATCH v2 14/17] usb: gadget: acm: Use plain udevice for UDC
+Subject: Re: [PATCH v2 15/17] usb: gadget: ether: Use plain udevice for UDC
  controller interaction
-In-Reply-To: <20230901095003.352930-14-marex@denx.de>
+In-Reply-To: <20230901095003.352930-15-marex@denx.de>
 References: <20230901095003.352930-1-marex@denx.de>
- <20230901095003.352930-14-marex@denx.de>
-Date: Mon, 04 Sep 2023 09:46:24 +0200
-Message-ID: <87a5u22xf3.fsf@baylibre.com>
+ <20230901095003.352930-15-marex@denx.de>
+Date: Mon, 04 Sep 2023 09:56:19 +0200
+Message-ID: <877cp62wyk.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -104,9 +104,6 @@ On ven., sept. 01, 2023 at 11:50, Marek Vasut <marex@denx.de> wrote:
 > device, avoid the use of UDC uclass dev_array .
 >
 > Signed-off-by: Marek Vasut <marex@denx.de>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
 > ---
 > Cc: Angus Ainslie <angus@akkea.ca>
 > Cc: Dmitrii Merkurev <dimorinny@google.com>
@@ -123,62 +120,102 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Cc: Stefan Roese <sr@denx.de>
 > Cc: kernel@puri.sm
 > ---
-> V2: No change
+> V2: Use udev->parent for UDC access
 > ---
->  drivers/usb/gadget/f_acm.c | 13 ++++++++-----
->  1 file changed, 8 insertions(+), 5 deletions(-)
+>  drivers/usb/gadget/ether.c | 20 +++++++++++---------
+>  1 file changed, 11 insertions(+), 9 deletions(-)
 >
-> diff --git a/drivers/usb/gadget/f_acm.c b/drivers/usb/gadget/f_acm.c
-> index b2ddd1ada8b..de42e0189e8 100644
-> --- a/drivers/usb/gadget/f_acm.c
-> +++ b/drivers/usb/gadget/f_acm.c
-> @@ -51,7 +51,7 @@ struct f_acm {
->  #define ACM_CTRL_RTS	BIT(1)	/* unused with full duplex */
->  #define ACM_CTRL_DTR	BIT(0)	/* host is ready for data r/w */
->  
-> -	int controller_index;
-> +	struct udevice *udc;
->  };
->  
->  static struct f_acm *default_acm_function;
-> @@ -489,7 +489,7 @@ static void __acm_tx(struct f_acm *f_acm)
->  	int len, ret;
->  
->  	do {
-> -		usb_gadget_handle_interrupts(f_acm->controller_index);
-> +		dm_usb_gadget_handle_interrupts(f_acm->udc);
->  
->  		if (!(f_acm->handshake_bits & ACM_CTRL_DTR))
->  			break;
-> @@ -520,7 +520,7 @@ static bool acm_connected(struct stdio_dev *dev)
->  	struct f_acm *f_acm = stdio_to_acm(dev);
->  
->  	/* give a chance to process udc irq */
-> -	usb_gadget_handle_interrupts(f_acm->controller_index);
-> +	dm_usb_gadget_handle_interrupts(f_acm->udc);
->  
->  	return f_acm->connected;
+> diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+> index 5ff06d3814b..11b1a6221b3 100644
+> --- a/drivers/usb/gadget/ether.c
+> +++ b/drivers/usb/gadget/ether.c
+> @@ -1880,8 +1880,10 @@ static void eth_start(struct eth_dev *dev, gfp_t gfp_flags)
+>  	}
 >  }
-> @@ -543,7 +543,10 @@ static int acm_add(struct usb_configuration *c)
->  	f_acm->usb_function.descriptors = acm_fs_function;
->  	f_acm->usb_function.hs_descriptors = acm_hs_function;
->  	f_acm->usb_function.setup = acm_setup;
-> -	f_acm->controller_index = 0;
-> +
-> +	status = udc_device_get_by_index(0, &f_acm->udc);
-> +	if (status)
-> +		return status;
 >  
->  	status = usb_add_function(c, &f_acm->usb_function);
->  	if (status) {
-> @@ -567,7 +570,7 @@ static int acm_stdio_tstc(struct stdio_dev *dev)
+> -static int eth_stop(struct eth_dev *dev)
+> +static int eth_stop(struct udevice *udev)
 >  {
->  	struct f_acm *f_acm = stdio_to_acm(dev);
+> +	struct ether_priv *priv = dev_get_priv(udev);
+> +	struct eth_dev *dev = &priv->ethdev;
+>  #ifdef RNDIS_COMPLETE_SIGNAL_DISCONNECT
+>  	unsigned long ts;
+>  	unsigned long timeout = CONFIG_SYS_HZ; /* 1 sec to stop RNDIS */
+> @@ -1895,7 +1897,7 @@ static int eth_stop(struct eth_dev *dev)
+>  		/* Wait until host receives OID_GEN_MEDIA_CONNECT_STATUS */
+>  		ts = get_timer(0);
+>  		while (get_timer(ts) < timeout)
+> -			usb_gadget_handle_interrupts(0);
+> +			dm_usb_gadget_handle_interrupts(udev->parent);
+>  #endif
 >  
-> -	usb_gadget_handle_interrupts(f_acm->controller_index);
-> +	dm_usb_gadget_handle_interrupts(f_acm->udc);
+>  		rndis_uninit(dev->rndis_config);
+> @@ -2300,7 +2302,7 @@ static int usb_eth_start(struct udevice *udev)
+>  			pr_err("The remote end did not respond in time.");
+>  			goto fail;
+>  		}
+> -		usb_gadget_handle_interrupts(0);
+> +		dm_usb_gadget_handle_interrupts(udev->parent);
+>  	}
 >  
->  	return (f_acm->rx_buf.size > 0);
+>  	packet_received = 0;
+> @@ -2370,7 +2372,7 @@ static int usb_eth_send(struct udevice *udev, void *packet, int length)
+>  			printf("timeout sending packets to usb ethernet\n");
+>  			return -1;
+>  		}
+> -		usb_gadget_handle_interrupts(0);
+> +		dm_usb_gadget_handle_interrupts(udev->parent);
+>  	}
+>  	free(rndis_pkt);
+>  
+> @@ -2400,13 +2402,13 @@ static void usb_eth_stop(struct udevice *udev)
+>  	 * 2) 'pullup' callback in your UDC driver can be improved to perform
+>  	 * this deinitialization.
+>  	 */
+> -	eth_stop(dev);
+> +	eth_stop(udev);
+>  
+>  	usb_gadget_disconnect(dev->gadget);
+>  
+>  	/* Clear pending interrupt */
+>  	if (dev->network_started) {
+> -		usb_gadget_handle_interrupts(0);
+> +		dm_usb_gadget_handle_interrupts(udev->parent);
+>  		dev->network_started = 0;
+>  	}
+>  }
+> @@ -2416,7 +2418,7 @@ static int usb_eth_recv(struct udevice *dev, int flags, uchar **packetp)
+>  	struct ether_priv *priv = dev_get_priv(dev);
+>  	struct eth_dev *ethdev = &priv->ethdev;
+>  
+> -	usb_gadget_handle_interrupts(0);
+> +	dm_usb_gadget_handle_interrupts(dev->parent);
+>  
+>  	if (packet_received) {
+>  		if (ethdev->rx_req) {
+> @@ -2467,7 +2469,7 @@ int usb_ether_init(void)
+>  		return ret;
+>  	}
+>  
+> -	return usb_gadget_initialize(0);
+> +	return 0;
+
+No udc_device_get() here?
+
+This looks a little suspicious, because in the unbind() we call
+udc_device_put().
+
+>  }
+>  
+>  static int usb_eth_probe(struct udevice *dev)
+> @@ -2528,7 +2530,7 @@ static int usb_eth_remove(struct udevice *dev)
+>  
+>  static int usb_eth_unbind(struct udevice *dev)
+>  {
+> -	usb_gadget_release(0);
+> +	udc_device_put(dev->parent);
+>  
+>  	return 0;
 >  }
 > -- 
 > 2.40.1
