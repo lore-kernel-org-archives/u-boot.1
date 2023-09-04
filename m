@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 907C2C83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0D0C83F2C
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:50:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB46D8698E;
-	Mon,  4 Sep 2023 18:49:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E3E1869A9;
+	Mon,  4 Sep 2023 18:49:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="jXke5UjF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bvBLpwjO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF3138698E; Mon,  4 Sep 2023 18:49:47 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id C07C186886; Mon,  4 Sep 2023 18:49:47 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 367028643D
+ by phobos.denx.de (Postfix) with ESMTPS id 3668A863DC
  for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 18:49:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-51a52a7d859so5375102a12.0
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-52a23227567so2209112a12.0
  for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 09:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1693846184; x=1694450984; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1693846184; x=1694450984; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iooAQZaIx95VXPaIXEv6JynnnFak4c/k/r2aA82ScXQ=;
- b=jXke5UjF0HMOfyUirLDZyOtWJufuNJZ2V27LWt5NaNxqCPgPqB8D4LYAktsk0pr+ys
- 8ckJLNzfymCaTzZSQQMT37UtAnTQzkKjn1ngFB9T1izD8GOEg/L1vXmBc38jNl9WAyf1
- WpdGIUVSLNscSV5ROk92WKvR2OF57IxxPcTWgv2UEn0TAVhrVrNIW/LT6kUbt3m2Gi8Y
- Lk5FpB4C5hC2U3hNurSU3EOzNh97KRUgSm8qRYGeN7yy8B3h6OPKGChH1f7WclRJeqZF
- hx3CwH2DixeUm1WOafFf5FYohJEIj8jtUvj1afDQNFc8bW3fDDXfGfr2QCocS4+fwnvu
- BnPw==
+ bh=L4Y6fDOlAHmT0vEwG/+ES+cmGa2+gJbHY9PtEVONHfw=;
+ b=bvBLpwjOEeaaONF/W+jLHvbMCXlC3AccFUBs/aefCQj6LaBUU6PDAHIJQ5dMLs11mb
+ Qw+ovOQTHjakUUSnPLCxxe0vYTEw49vuVwe4IesHyMcXVwkaFjbbOiEJNsf3KPLRAWRM
+ 0Gzutpq+iNhMW1hT/rn+yx6qgZIi8YF9eJQqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693846184; x=1694450984;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=iooAQZaIx95VXPaIXEv6JynnnFak4c/k/r2aA82ScXQ=;
- b=NA1VucVfVl5hhvoqRAE6rZDQYlL92ouBGtVmLcS4R4XEtBVsr5T3n/kC5p5u31S2/+
- 2nzoopucRG1mxUWA+h2GA2kJ34vZI0RTVbDIXa1oy4jDAW1IEgkVCVF96exnCLLGiQRi
- Z20lSonOU5Pbh0qbCkTjFxBtPAgxCh/9NZKB1K+oMnAgV+LKfudIva1G7MrSwbXsH8FK
- rThZ+mKgiWHsIsrKc0VIEPnJq36WDZ9+BdEHjULtkNtc7rMsdd7WJ51RvAJD8knryXFH
- s1g0184FEDJ93iTNwBP39EhmCPlSu6SxgiQanMyShsMd6bwn5xyYl9mNJwkxCSJzRqVe
- lrXw==
-X-Gm-Message-State: AOJu0YwrU4d0K8FTfZiFUYDwG1F3QQb/LKRdoD3m43qdHqcVAFr8g6Rk
- DDBc93Vg0UPxvBrOZ6eVGJksd8hj/Fc1la5t7VzETA==
-X-Google-Smtp-Source: AGHT+IFkh3+hniOWI2aTR/FpOlFf3XfD+o1DDjek6XQLgiN+ffRGUU0Av9sEJq1kD5D3L9yB4LvlSKmLTTwpCL37jcg=
-X-Received: by 2002:a05:6402:34d0:b0:51d:b184:efd with SMTP id
- w16-20020a05640234d000b0051db1840efdmr14741257edc.20.1693846184525; Mon, 04
- Sep 2023 09:49:44 -0700 (PDT)
+ bh=L4Y6fDOlAHmT0vEwG/+ES+cmGa2+gJbHY9PtEVONHfw=;
+ b=XaeeO0mGJuyF0MY7Zhj8zA9JQHcuR6UcUtgAW9OEZW6+5grhzAXf/FmaA26diE746E
+ 0tnJgB2PdsfauQuBkSiscKFUwEWQG94d1bba63ddeNnrRwRvlfwViwJyxryFnd5IYuXs
+ /kSKIn8gHuroSTOwyCfWFo4+XdzZRy+4SMnKtHEA+7Ui2oyII52mpR1PTGQIe3ZGiTiw
+ 7CRAa8af7UFFOxygIAlaSkok6j+1TP1KqOHnE6VFuIuiVFz/McUFD8ogt1gmHj6a1oAE
+ xvYetxeFbh576JzQd54T6iyywroUU6D4XdfxAQwrbzsJvc/jdcfyNoObehtpv7I37dxg
+ JmCQ==
+X-Gm-Message-State: AOJu0YwX1485kxIBVApQhn5Y0LqKY8VdrN4Jznu50ti53gu9y5Z2Y0rd
+ ZJpI/v2ix1Jvd0PVpx7ZhiQCDO4/IRxxtXtmDeIcNw==
+X-Google-Smtp-Source: AGHT+IGI/+nUcO77iLAC1RtoPHFysXVAVtnYfc6jVocNHNWk3FVb8y86dp4jam12gT9Y9NE50hnLTigHhDJdndh1iSg=
+X-Received: by 2002:a05:6402:1f82:b0:52c:b469:bb01 with SMTP id
+ c2-20020a0564021f8200b0052cb469bb01mr3829568edc.38.1693846184520; Mon, 04 Sep
+ 2023 09:49:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230901204143.3617876-1-trini@konsulko.com>
- <20230901204143.3617876-3-trini@konsulko.com>
-In-Reply-To: <20230901204143.3617876-3-trini@konsulko.com>
-From: Simon Glass <sjg@google.com>
-Date: Mon, 4 Sep 2023 10:48:50 -0600
-Message-ID: <CAPnjgZ0JTjPaV47XxXoShwgk9yKEdpv7A7NAVC6NsOjgm2cM8A@mail.gmail.com>
-Subject: Re: [PATCH 3/3] Azure: Add sandbox64 to CI
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+References: <20230902073524.87451-1-heinrich.schuchardt@canonical.com>
+ <20230902073524.87451-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230902073524.87451-3-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 4 Sep 2023 10:48:52 -0600
+Message-ID: <CAPnjgZ1wEay5S5azzQ-hCPuQiT07LhMSBe=QOO6opJDb-0UrtA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] cmd: gpt: use UUID accessor more consistently
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Joshua Watt <jpewhacker@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,15 +82,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 1 Sept 2023 at 14:42, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 2 Sept 2023 at 01:34, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Now that sandbox64 can run and pass the regular test.py suite, add it
-> here as well.
+> disk_partition_uuid() and disk_partition_set_uuid() were introduced to let
+> us avoid the usage of #ifdef when dealing with the field uuid of
+> struct disk_partition.
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> In allocate_disk_part() commit c5f1d005f517 ("part: Add accessors for
+> struct disk_partition uuid") missed to use the setter.
+>
+> print_gpt_info() and create_gpt_partitions_list() are further functions
+> where we should use the getter.
+>
+> Fixes: c5f1d005f517 ("part: Add accessors for struct disk_partition uuid")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  .azure-pipelines.yml | 5 +++++
->  1 file changed, 5 insertions(+)
+> v2:
+>         new patch
+> ---
+>  cmd/gpt.c | 23 ++++++++++++-----------
+>  1 file changed, 12 insertions(+), 11 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
