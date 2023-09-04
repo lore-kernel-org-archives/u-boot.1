@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F25C83F2C
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:22:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5EE6C83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 09:22:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8B6086918;
-	Mon,  4 Sep 2023 11:22:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2BB368690B;
+	Mon,  4 Sep 2023 11:22:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AOl8EuIW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PPg33Z9L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E811A86915; Mon,  4 Sep 2023 11:22:09 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 217288693D; Mon,  4 Sep 2023 11:22:14 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B99386500
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:22:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9870686500
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 11:22:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-52e297c7c39so991907a12.2
- for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:22:07 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-51a52a7d859so4460312a12.0
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 02:22:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693819327; x=1694424127; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693819331; x=1694424131; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p6tDt2PS9aFeSW4jtOms+0cTfZSrBnbPu4YGs7F8ipY=;
- b=AOl8EuIW8rfMU/Q00faNjlGxwA+ZSxAn6N2P0OsFURGbgY0TJ8Jpb8Z/CMSvjj2iLu
- PYA8v+kb4njZVuNd9BjNpxxR7i8tKicBs7CMwnGD+ueromzs3TToGfHCfGijITL+WbMx
- vNEIjd+CFsNRXPjc08f/xy/gRF5aQ632rsn6PKCspRATJNB1XxAZxADKH1c/mvwafOgb
- V7K0k4aFLC2HOjt9tf8nw0iCEFSDlCTNGcxX1RlrUJojePHkirgsSwqo7edXX1WlA/F2
- 1Nspe/G/+oCI1oa5YCOw+DnkEivmrXfc+oZpyfl6NsKLP6LaLjbMsoo7nr7n2z9jqMTC
- 7sbw==
+ bh=laYO2uuZ1PU64OqPhv+gR9YcPM0oKIsnTNum0KIU7x4=;
+ b=PPg33Z9Lw+gZELnp6bgq/UK8TFZLziZExq0KNMbgTK2szU7iaAd3mx7/K1Fcz/7IEp
+ EVadHNanUlIQ3RRJSzadHzjvXlpMXX2rmWGiWgHBVfrsWulhkjMqtNV9wXho/LrYCt0G
+ egJodnBymbReoF/uIioik9kTupz1fxXmcFFSSdhULMBlsOo+Mrcgc9/Sb5LJiwhyM0z7
+ KEx91P46fHBWV6Xa6A7y4EYzL8swMWBqEaiiYAGHB/Mo24U0g2S8SCb40m8YPyk7wyj1
+ 9CHH+WcKxwobTiKsRzoRCL8Zo6e/h/sf4TjAHYr1O12M5zIwqoslGDlylwhdJVh+XDHf
+ 1p7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693819327; x=1694424127;
+ d=1e100.net; s=20221208; t=1693819331; x=1694424131;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p6tDt2PS9aFeSW4jtOms+0cTfZSrBnbPu4YGs7F8ipY=;
- b=EGdMBgV9DifYRu09ClZ7xAXVEVV60DML0Z9b47JYUpzvqKmvffpgmQRKaf1NEuNDIC
- jwSAhCgyScCUmRb/4uR/R5Whwta9CLXPSbBRRuo1GxnFydpUDoBa3/+BoRgrmx3bFNGr
- WxjnfCb5l3xMilEc9W/D9XR9JphVoPAp/DFAU67Z9vpSaptSQjYvIvpZgvHztMpnHEhC
- HoN1W5arsdgnu/e8Y9+fup2QpNL+ciChd2Trr70LSbVTg5C91WbqVw7qtIQ0xCyOB9rX
- JKwwv2FwJ2rQPcpmhsUdw/BdckqK9bb71ZcVMF2xEeStuDIYOViGJl5en75xBC8wfFg+
- MPXg==
-X-Gm-Message-State: AOJu0Yy1tdb893/MOfanH8FbP3xReKLHsQ3fcz07F5EC1cti9qMjmYWI
- 0iayzdgw2zJiswFcN/c4SaQ+VstiTOSjyHUdSYX7/8kUxk4QnA==
-X-Google-Smtp-Source: AGHT+IEwm8NjAXfkeIuhHtNl910gYgu8TZo7XqPL2KgvAZuEW0U9pcjQaBEb8Cnqxwk65lCErcQS3WIA71Ej4RW8CXM=
-X-Received: by 2002:a05:6402:2035:b0:52a:5848:c674 with SMTP id
- ay21-20020a056402203500b0052a5848c674mr6634104edb.12.1693819327053; Mon, 04
- Sep 2023 02:22:07 -0700 (PDT)
+ bh=laYO2uuZ1PU64OqPhv+gR9YcPM0oKIsnTNum0KIU7x4=;
+ b=Sqo6nw3Af6ILMWGCcl7661jHJN5StRb7TEm651VeBUaZPMesoOTOnRB1MA1qoi2iNO
+ Y/p3Nozd+yp3dNU9kWE+NoFzzyMzmlSMcYHQYZt27MD2Mr55u1VHT8d9sHj23B7rqr0K
+ M5w2zqn5bMa8iBsjuo7kyF4I2ZiFD83VYqWQ7C6NA8tAJZ3gE5svbF/T25AwUcI5lvfz
+ J+WqHQDb8zUx8qyzF9B4jn+f6SLGzQ4nqio10mg8PhkCmg58u5HrAMuZLKxlxGmvk/lX
+ 6ID6pMTvi1fLhwuLa3M/ZZqQUc9VB/kyBQO+xiAejUx7fepnzRidhDeuY3nV6gItd/SK
+ 2t5g==
+X-Gm-Message-State: AOJu0YxqeIoiARvdJhfiXsNSrd/FMX+BMWqutYgpLNtyrHpHSv6aYPD7
+ h3WxQJvGSw4WluYrRpHIoktrg4J8aYTkjH1gnFTLd/J0IMspNA==
+X-Google-Smtp-Source: AGHT+IHkHRnIb1pOi1vwCNDvSjGT6FbKmgeVdcBSKUfb6y0cyOT0d+NPur2YbYzW6SmY4GzrFh5KRy0kVZkW6OZ7XDY=
+X-Received: by 2002:aa7:d316:0:b0:523:3e27:caa7 with SMTP id
+ p22-20020aa7d316000000b005233e27caa7mr8411443edq.20.1693819331002; Mon, 04
+ Sep 2023 02:22:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823184746.842091-1-sjg@chromium.org>
- <20230823184746.842091-4-sjg@chromium.org>
-In-Reply-To: <20230823184746.842091-4-sjg@chromium.org>
+ <20230823184746.842091-5-sjg@chromium.org>
+In-Reply-To: <20230823184746.842091-5-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 4 Sep 2023 17:21:53 +0800
-Message-ID: <CAEUhbmV2quMh_x6Nsy=MRqPwaB56QK-TgcfO7_rkEpmOrUBZBA@mail.gmail.com>
-Subject: Re: [PATCH 3/8] x86: samus_tpl: Correct text base and alloc sizes
+Date: Mon, 4 Sep 2023 17:21:56 +0800
+Message-ID: <CAEUhbmVbP9Tsjr6G40TOgBeyLyyRo4Qz2LPr5SMAQv3Rt8oUtA@mail.gmail.com>
+Subject: Re: [PATCH 4/8] x86: spl: Change the condition for copying U-Boot to
+ RAM
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Shiji Yang <yangshiji66@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,59 +89,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
 On Thu, Aug 24, 2023 at 2:48=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Make sure that CONFIG_TEXT_BASE is the same as CONFIG_X86_OFFSET_U_BOOT
-
-The commit message should say:
-
-Make sure that CONFIG_X86_OFFSET_U_BOOT is the same as
-CONFIG_TEXT_BASE as it is changing CONFIG_X86_OFFSET_U_BOOT.
-
-> since this boards boots into U-Boot proper in flash, not RAM. Also exapnd
-
-s/boards/board
-
-typo: expand
-
-> the SPL malloc() size a little, to avoid an error.
+> Make this depend on whether the address matches the offset, rather than
+> a particular board build. For samus_tpl we don't need to copy, for
+> example.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->  configs/chromebook_samus_tpl_defconfig | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  arch/x86/lib/spl.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/configs/chromebook_samus_tpl_defconfig b/configs/chromebook_=
-samus_tpl_defconfig
-> index 4cfaf4bc5c7..6fefe2ddc25 100644
-> --- a/configs/chromebook_samus_tpl_defconfig
-> +++ b/configs/chromebook_samus_tpl_defconfig
-> @@ -1,6 +1,8 @@
->  CONFIG_X86=3Dy
->  CONFIG_TEXT_BASE=3D0xffed0000
->  CONFIG_SYS_MALLOC_F_LEN=3D0x2000
-> +CONFIG_TPL_SYS_MALLOC_F_LEN=3D0x2000
-> +CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x3000
->  CONFIG_NR_DRAM_BANKS=3D8
->  CONFIG_ENV_SIZE=3D0x1000
->  CONFIG_ENV_OFFSET=3D0x3F8000
-> @@ -19,7 +21,7 @@ CONFIG_HAVE_MRC=3Dy
->  CONFIG_HAVE_REFCODE=3Dy
->  CONFIG_SMP=3Dy
->  CONFIG_HAVE_VGA_BIOS=3Dy
-> -CONFIG_X86_OFFSET_U_BOOT=3D0xffee0000
-> +CONFIG_X86_OFFSET_U_BOOT=3D0xffed0000
->  CONFIG_SYS_MONITOR_BASE=3D0xFFED0000
->  CONFIG_BOOTSTAGE=3Dy
->  CONFIG_BOOTSTAGE_REPORT=3Dy
-> --
 
-Otherwise,
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-
-Regards,
-Bin
