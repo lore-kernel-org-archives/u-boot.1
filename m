@@ -4,124 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409D0C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 07:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89AF1C83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 07:45:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D972864A7;
-	Mon,  4 Sep 2023 09:42:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id D21F1864ED;
+	Mon,  4 Sep 2023 09:45:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="pPGFqJh/";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="jtH56jmb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1F41864A7; Mon,  4 Sep 2023 09:42:37 +0200 (CEST)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 115CB864ED; Mon,  4 Sep 2023 09:45:18 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBBCD86497
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:42:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52053868D7
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 09:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20230904074229epoutp045b4cc032be58ec682e1f5f019a0c2a14~BokRVHYav2978529785epoutp04Z
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 07:42:29 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20230904074229epoutp045b4cc032be58ec682e1f5f019a0c2a14~BokRVHYav2978529785epoutp04Z
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1693813349;
- bh=2mfyyfeOoZYYn/x854G72DEl+8YQLEElIQLkYQw65qA=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=pPGFqJh/4m3DfsVMpSL4gpQsfd5rB5jCNV1XZHu4ESzoYtD2bH9utyPVctMpSPa9x
- WRRf712FnXSIPn14jxJ6RilcqOxFBeJZ09diMgX9Yt8SLh8O2cxKQjahCJ7Dzdgrxb
- LqdJtqLv3FdW7YvEWOYvVxbyItyW5xmVMQzLADEE=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230904074228epcas2p1130ebbc6d27577b7303a995e3dddd87e~BokRD8wDH2143621436epcas2p1y;
- Mon,  4 Sep 2023 07:42:28 +0000 (GMT)
-Received: from epsmges2p3.samsung.com (unknown [182.195.36.70]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4RfLFc2b09z4x9Px; Mon,  4 Sep
- 2023 07:42:28 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- FD.04.09660.46A85F46; Mon,  4 Sep 2023 16:42:28 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20230904074227epcas2p3fa1fdcecbeb64c26f47e191666e83d7d~BokQLRvTt1596615966epcas2p3l;
- Mon,  4 Sep 2023 07:42:27 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20230904074227epsmtrp1f63d85a82ab57f883cf12d3f61fa1918~BokQKr4en1511715117epsmtrp1v;
- Mon,  4 Sep 2023 07:42:27 +0000 (GMT)
-X-AuditID: b6c32a47-afdff700000025bc-bc-64f58a64a108
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 9B.5B.08788.36A85F46; Mon,  4 Sep 2023 16:42:27 +0900 (KST)
-Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20230904074227epsmtip15f98deef09be3a175ad3b4f894f06c9d~BokQB24E70423004230epsmtip1M;
- Mon,  4 Sep 2023 07:42:27 +0000 (GMT)
-From: "Chanho Park" <chanho61.park@samsung.com>
-To: "'Leo Liang'" <ycliang@andestech.com>
-Cc: "'Rick Chen'" <rick@andestech.com>, "'Simon Glass'" <sjg@chromium.org>,
- <u-boot@lists.denx.de>
-In-Reply-To: <ZPWBAKPO5HBAzFRK@swlinux02>
-Subject: RE: [PATCH v2 3/3] timer: riscv_aclint_timer: add timer_get_boot_us
- for BOOTSTAGE
-Date: Mon, 4 Sep 2023 16:42:27 +0900
-Message-ID: <003c01d9df03$5a67fa80$0f37ef80$@samsung.com>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-401f503b529so11177815e9.0
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 00:45:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1693813512; x=1694418312;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WcIN65m/q6Bm0XQEzl2FmgABalATaryuLgdxREQUe8I=;
+ b=jtH56jmbppWx1XiODVU6PS+Q/jqzfO0XyzRo+TZMBg2Trd4LsEYFaLDWFuKkue/t4+
+ XZx+sq1C4qGBLse/aAM1K5Kz+Nev+1LW4dSTTycbwuXuCVgUKs5woy4jcNDUTZ2++rgr
+ tkdCkhJDUKJKsiBMFsJyp6gy/OAs5FifNfVMF9acTvZv2zKTAIdt6Jy9N4RVAyTd2Qse
+ il9cuxf7eROd6HLvUe3q+wPpw2ZufR2RoFvbEIOElX6NdkxwvAJdLUP7eZcwKxNXC5pf
+ WnKRxpdmNR4HcLyz/YZejWe8SGPb2pvRMAPQmVamaoPfy6ybSE0I81ICN0sbWwEM1AiM
+ IJ7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693813512; x=1694418312;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WcIN65m/q6Bm0XQEzl2FmgABalATaryuLgdxREQUe8I=;
+ b=ddL7PkhJ2tu4ZJ/hFKgrDfyQ5H5yGxG4nHUg5er8RpVEdB0xYEP7tJ+0Kh1D5bXuGp
+ j8BldFsts0B/3Z/jUtOrw8YoW9yKlqzDQFGSpIMSBtzV9zx8Z+R3xJBNR6+aEb9zMXQv
+ CAQklUHiJ16hzTEAlDjQTtOuEzHw99UKsY6ffJcwJdCO2olmE5A+aAZ8dYfcYphp60dq
+ 2d/Cm74vu2ECDZOjCyW0krhffN1lQwDpJFEM1EALmdALk7llRPtA6q1ok82gVgPGFi7C
+ 8K9qQ7TdBg7MLIY4q5VkQExzvJ/3Fg9DX7PAVwW0TE9NcpWlLHf/F0edN9NMgFKaXZqP
+ YqNQ==
+X-Gm-Message-State: AOJu0Yw6xCN7Mgih2AIQfkEJjSuz40IwNkn9sGpGWAiZ2V2LHDnb8Mxc
+ fFgFNuOsrMosyVyXpOYTlddIRg==
+X-Google-Smtp-Source: AGHT+IHPIjCH5I1+zz/E/zkbkaP+ZNblVDzFa5z/Gu8EA/9BuxoVBWEbyO/1xETIAAOmjqxX8cn5Lw==
+X-Received: by 2002:a1c:4b08:0:b0:400:f6f2:66b9 with SMTP id
+ y8-20020a1c4b08000000b00400f6f266b9mr6859918wma.12.1693813511704; 
+ Mon, 04 Sep 2023 00:45:11 -0700 (PDT)
+Received: from localhost ([2a01:cb19:8704:be00:4f55:bd9d:611a:6c8e])
+ by smtp.gmail.com with ESMTPSA id
+ y11-20020a05600c20cb00b003fc02e8ea68sm16127775wmm.13.2023.09.04.00.45.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Sep 2023 00:45:11 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Angus Ainslie <angus@akkea.ca>, Dmitrii
+ Merkurev <dimorinny@google.com>, Eddie Cai <eddie.cai.linux@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nishanth Menon <nm@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Stefan Roese
+ <sr@denx.de>, kernel@puri.sm
+Subject: Re: [PATCH v2 13/17] thordown: Use plain udevice for UDC controller
+ interaction
+In-Reply-To: <20230901095003.352930-13-marex@denx.de>
+References: <20230901095003.352930-1-marex@denx.de>
+ <20230901095003.352930-13-marex@denx.de>
+Date: Mon, 04 Sep 2023 09:45:10 +0200
+Message-ID: <87cyyy2xh5.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-us
-Thread-Index: AQJDo85+4KW0dBmGLBsoxGjOXDx6aAKO/hFpAXmVEGsDGNxoKa79s1Vg
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrHKsWRmVeSWpSXmKPExsWy7bCmqW5K19cUg6tvBC3evjjLaPFtyzZG
- i7d7O9ktHh96zeTA4rHn9Cxmj9kNF1k8zt7ZwRjAHJVtk5GamJJapJCal5yfkpmXbqvkHRzv
- HG9qZmCoa2hpYa6kkJeYm2qr5OIToOuWmQO0TkmhLDGnFCgUkFhcrKRvZ1OUX1qSqpCRX1xi
- q5RakJJTYF6gV5yYW1yal66Xl1piZWhgYGQKVJiQnfFp7wqmglN8FX9mzWVrYLzG3cXIySEh
- YCLxb+dt1i5GLg4hgR2MEkeubWSGcD4xSuw+d50dwvnGKNEzZR8bTMuVKe+gEnsZJc5t7YZq
- ecEo8WDuX0aQKjYBfYmXHdtYQWwRAU2JRU9PAsU5OJgFUiT2vLcECXMChXdeOMcCYgsLxEh8
- mPUVbAGLgIrEhosbwWxeAUuJPYe/sELYghInZz4Bq2cWkJfY/nYOM8RBChI/ny5jhYiLS7w8
- eoQdYq2bxPbPB8B+kxBo5JBoaP0J9YGLxL5tv6GahSVeHd/CDmFLSbzsb2MHuVNCoFxix7Ik
- iN4WRonmtj1Q9fYSP25OYYX4RVNi/S59iHJliSO3oE7jk+g4/BdqCq9ER5sQRKO6xIHt01kg
- bFmJ7jmfWScwKs1C8tgsJI/NQvLMLIRdCxhZVjGKpRYU56anFhsVGMPjOjk/dxMjOCFque9g
- nPH2g94hRiYOxkOMEhzMSiK8ctqfUoR4UxIrq1KL8uOLSnNSiw8xmgKDeiKzlGhyPjAl55XE
- G5pYGpiYmRmaG5kamCuJ895rnZsiJJCeWJKanZpakFoE08fEwSnVwOTcJfLI5GLJD5dnLvJr
- znJ37MvlCfBcEVBcqL/lReMFpfXn4jKl5rooce01PeFbeyM2rkvkyNHwX/u2X1p2eM8KhcRX
- l3TdGFzW9U4otvtu/17b8nLlF+UId+MNG94L77Z8GGSd9VNNTCG9nEsqUCQ8pDbjAfuO/V98
- 925oL6056hOm/DVgVsay42a6f8M26ZaH/XmdmtX4aNvho7cj9feXFtZlvOw/HODbrBleHLIq
- kt/osoDc+VUzNjXuP68s+Gptofn8+iR9pXruJcJ5107eeC3w8GHIiVrbtR9Z+dYs9lz6pojL
- jNdeq0HfWNfANXCSCessafZr213+T2OOLLSSrRapWiN3bMYrmdbtSizFGYmGWsxFxYkAgDR3
- KREEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpikeLIzCtJLcpLzFFi42LZdlhJTje562uKQe88S4u3L84yWnzbso3R
- 4u3eTnaLx4deMzmweOw5PYvZY3bDRRaPs3d2MAYwR3HZpKTmZJalFunbJXBlfNq7gqngFF/F
- n1lz2RoYr3F3MXJySAiYSFyZ8o69i5GLQ0hgN6NE/4rJjBAJWYln73awQ9jCEvdbjrBCFD1j
- lHj2cR8bSIJNQF/iZcc2VhBbREBTYtHTk2DNzAJpEgduXmCEaHjCKHFv5iFmkAQnUNHOC+dY
- QGxhgSiJ7WuOgsVZBFQkNlzcCDaUV8BSYs/hL6wQtqDEyZlPgOo5gIbqSbRthJovL7H97Rxm
- iOMUJH4+XcYKEReXeHn0CDvMA3+OzmWDuM1NYvvnA6wwz7w6voV9AqPoLCQbZiFsmIVkwywk
- UxcwsqxilEwtKM5Nzy02LDDKSy3XK07MLS7NS9dLzs/dxAiOJi2tHYx7Vn3QO8TIxMF4iFGC
- g1lJhFdO+1OKEG9KYmVValF+fFFpTmrxIUZpDhYlcd5vr3tThATSE0tSs1NTC1KLYLJMHJxS
- DUyz5vZP/r20OrkooyxKu3eOr/3HfRJSKwXeOD5eK+Se8FHMhW19x07e9h3TbZ3MtyYzzHKZ
- LM0xgWVpUFOe9YeL+1awFiTwMDpntR6b0ryqLeVnrmVgef+z551Mtj1bT/m1m2j97UwtrDaR
- CX65ZcYao4WlnVmmxcEem3wybm6K1/JINpy/4rML++zTOwV/mHktfj+N4XbsyxtKpyRjOQ7W
- zruzUd5VX6B+5foLfKYMxvX6x9evbVQ8NOth+L4jex/W9dw/9YzLuzRo9vv/Ht8VrAQ9Tpjq
- f457wlCxsNQ06oi28rVctQWXPuq1PzdrcOFasG+SmMaOTYmrzB4HH43s+pG3NljKmsu6Q0Xr
- qxJLcUaioRZzUXEiAOSWm2QVAwAA
-X-CMS-MailID: 20230904074227epcas2p3fa1fdcecbeb64c26f47e191666e83d7d
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5
-References: <20230828094938.2061606-1-chanho61.park@samsung.com>
- <CGME20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5@epcas2p3.samsung.com>
- <20230828094938.2061606-4-chanho61.park@samsung.com>
- <ZPWBAKPO5HBAzFRK@swlinux02>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,67 +98,374 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On ven., sept. 01, 2023 at 11:49, Marek Vasut <marex@denx.de> wrote:
 
-> -----Original Message-----
-> From: Leo Liang <ycliang@andestech.com>
-> Sent: Monday, September 4, 2023 4:02 PM
-> To: Chanho Park <chanho61.park@samsung.com>
-> Cc: Rick Chen <rick@andestech.com>; Simon Glass <sjg@chromium.org>; u-
-> boot@lists.denx.de
-> Subject: Re: [PATCH v2 3/3] timer: riscv_aclint_timer: add
-> timer_get_boot_us for BOOTSTAGE
-> 
-> Hi Chanho,
-> 
-> On Mon, Aug 28, 2023 at 06:49:38PM +0900, Chanho Park wrote:
-> > timer_get_boot_us function is required to record the boot stages as
-> > us-based timestamp.
-> >
-> > Signed-off-by: Chanho Park <chanho61.park@samsung.com>
-> > ---
-> >  drivers/timer/riscv_aclint_timer.c | 22 ++++++++++++++++++++++
-> >  1 file changed, 22 insertions(+)
-> >
-> > diff --git a/drivers/timer/riscv_aclint_timer.c
-> > b/drivers/timer/riscv_aclint_timer.c
-> > index e29d527c8d77..8b67745bb4a2 100644
-> > --- a/drivers/timer/riscv_aclint_timer.c
-> > +++ b/drivers/timer/riscv_aclint_timer.c
-> > @@ -6,6 +6,7 @@
-> >
-> >  #include <common.h>
-> >  #include <clk.h>
-> > +#include <div64.h>
-> >  #include <dm.h>
-> >  #include <timer.h>
-> >  #include <asm/io.h>
-> > @@ -44,6 +45,27 @@ u64 notrace timer_early_get_count(void)  }  #endif
-> >
-> > +#if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
-> > +ulong timer_get_boot_us(void) {
-> > +	int ret;
-> > +	u64 ticks = 0;
-> > +	u32 rate;
-> > +
-> > +	ret = dm_timer_init();
-> > +	if (!ret) {
-> > +		rate = timer_get_rate(gd->timer);
-> > +		timer_get_count(gd->timer, &ticks);
-> > +	} else {
-> > +		rate = RISCV_MMODE_TIMER_FREQ;
-> > +		ticks = readq((void __iomem
-> *)MTIME_REG(RISCV_MMODE_TIMERBASE,
-> > +
-RISCV_MMODE_TIMEROFF));
-> > +	}
-> > +
-> > +	return lldiv(ticks * 1001, (rate / 1000));
-> 
-> Why is this dividend 1001 ?
+> Convert to plain udevice interaction with UDC controller
+> device, avoid the use of UDC uclass dev_array .
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Angus Ainslie <angus@akkea.ca>
+> Cc: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Eddie Cai <eddie.cai.linux@gmail.com>
+> Cc: Kever Yang <kever.yang@rock-chips.com>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: kernel@puri.sm
 
-It's a typo. I'll correct when I send v2.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Best Regards,
-Chanho Park
-
+> ---
+> V2: No change
+> ---
+>  cmd/thordown.c              |  9 +++--
+>  drivers/usb/gadget/f_thor.c | 74 +++++++++++++++++++------------------
+>  include/thor.h              |  4 +-
+>  3 files changed, 45 insertions(+), 42 deletions(-)
+>
+> diff --git a/cmd/thordown.c b/cmd/thordown.c
+> index 0d8dcee5314..fcfd38f523c 100644
+> --- a/cmd/thordown.c
+> +++ b/cmd/thordown.c
+> @@ -17,6 +17,7 @@ int do_thor_down(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  {
+>  	char *interface, *devstring;
+>  	int controller_index;
+> +	struct udevice *udc;
+>  	int ret;
+>  
+>  	if (argc < 4)
+> @@ -32,7 +33,7 @@ int do_thor_down(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  		goto done;
+>  
+>  	controller_index = simple_strtoul(argv[1], NULL, 0);
+> -	ret = usb_gadget_initialize(controller_index);
+> +	ret = udc_device_get_by_index(controller_index, &udc);
+>  	if (ret) {
+>  		pr_err("USB init failed: %d\n", ret);
+>  		ret = CMD_RET_FAILURE;
+> @@ -46,7 +47,7 @@ int do_thor_down(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  		goto exit;
+>  	}
+>  
+> -	ret = thor_init();
+> +	ret = thor_init(udc);
+>  	if (ret) {
+>  		pr_err("THOR DOWNLOAD failed: %d\n", ret);
+>  		ret = CMD_RET_FAILURE;
+> @@ -54,7 +55,7 @@ int do_thor_down(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  	}
+>  
+>  	do {
+> -		ret = thor_handle();
+> +		ret = thor_handle(udc);
+>  		if (ret == THOR_DFU_REINIT_NEEDED) {
+>  			dfu_free_entities();
+>  			ret = dfu_init_env_entities(interface, devstring);
+> @@ -67,7 +68,7 @@ int do_thor_down(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  	} while (ret == 0);
+>  exit:
+>  	g_dnl_unregister();
+> -	usb_gadget_release(controller_index);
+> +	udc_device_put(udc);
+>  done:
+>  	dfu_free_entities();
+>  
+> diff --git a/drivers/usb/gadget/f_thor.c b/drivers/usb/gadget/f_thor.c
+> index 47ef55b2fd3..3caa4c36387 100644
+> --- a/drivers/usb/gadget/f_thor.c
+> +++ b/drivers/usb/gadget/f_thor.c
+> @@ -15,9 +15,10 @@
+>   */
+>  
+>  #include <command.h>
+> -#include <errno.h>
+>  #include <common.h>
+>  #include <console.h>
+> +#include <dm.h>
+> +#include <errno.h>
+>  #include <init.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> @@ -34,9 +35,9 @@
+>  
+>  #include "f_thor.h"
+>  
+> -static void thor_tx_data(unsigned char *data, int len);
+> +static void thor_tx_data(struct udevice *udc, unsigned char *data, int len);
+>  static void thor_set_dma(void *addr, int len);
+> -static int thor_rx_data(void);
+> +static int thor_rx_data(struct udevice *udc);
+>  
+>  static struct f_thor *thor_func;
+>  static inline struct f_thor *func_to_thor(struct usb_function *f)
+> @@ -56,15 +57,15 @@ DEFINE_CACHE_ALIGN_BUFFER(char, f_name, F_NAME_BUF_SIZE + 1);
+>  static unsigned long long int thor_file_size;
+>  static int alt_setting_num;
+>  
+> -static void send_rsp(const struct rsp_box *rsp)
+> +static void send_rsp(struct udevice *udc, const struct rsp_box *rsp)
+>  {
+>  	memcpy(thor_tx_data_buf, rsp, sizeof(struct rsp_box));
+> -	thor_tx_data(thor_tx_data_buf, sizeof(struct rsp_box));
+> +	thor_tx_data(udc, thor_tx_data_buf, sizeof(struct rsp_box));
+>  
+>  	debug("-RSP: %d, %d\n", rsp->rsp, rsp->rsp_data);
+>  }
+>  
+> -static void send_data_rsp(s32 ack, s32 count)
+> +static void send_data_rsp(struct udevice *udc, s32 ack, s32 count)
+>  {
+>  	ALLOC_CACHE_ALIGN_BUFFER(struct data_rsp_box, rsp,
+>  				 sizeof(struct data_rsp_box));
+> @@ -73,12 +74,12 @@ static void send_data_rsp(s32 ack, s32 count)
+>  	rsp->count = count;
+>  
+>  	memcpy(thor_tx_data_buf, rsp, sizeof(struct data_rsp_box));
+> -	thor_tx_data(thor_tx_data_buf, sizeof(struct data_rsp_box));
+> +	thor_tx_data(udc, thor_tx_data_buf, sizeof(struct data_rsp_box));
+>  
+>  	debug("-DATA RSP: %d, %d\n", ack, count);
+>  }
+>  
+> -static int process_rqt_info(const struct rqt_box *rqt)
+> +static int process_rqt_info(struct udevice *udc, const struct rqt_box *rqt)
+>  {
+>  	ALLOC_CACHE_ALIGN_BUFFER(struct rsp_box, rsp, sizeof(struct rsp_box));
+>  	memset(rsp, 0, sizeof(struct rsp_box));
+> @@ -111,11 +112,11 @@ static int process_rqt_info(const struct rqt_box *rqt)
+>  		return -EINVAL;
+>  	}
+>  
+> -	send_rsp(rsp);
+> +	send_rsp(udc, rsp);
+>  	return true;
+>  }
+>  
+> -static int process_rqt_cmd(const struct rqt_box *rqt)
+> +static int process_rqt_cmd(struct udevice *udc, const struct rqt_box *rqt)
+>  {
+>  	ALLOC_CACHE_ALIGN_BUFFER(struct rsp_box, rsp, sizeof(struct rsp_box));
+>  	memset(rsp, 0, sizeof(struct rsp_box));
+> @@ -126,7 +127,7 @@ static int process_rqt_cmd(const struct rqt_box *rqt)
+>  	switch (rqt->rqt_data) {
+>  	case RQT_CMD_REBOOT:
+>  		debug("TARGET RESET\n");
+> -		send_rsp(rsp);
+> +		send_rsp(udc, rsp);
+>  		g_dnl_unregister();
+>  		dfu_free_entities();
+>  #ifdef CONFIG_THOR_RESET_OFF
+> @@ -136,7 +137,7 @@ static int process_rqt_cmd(const struct rqt_box *rqt)
+>  		break;
+>  	case RQT_CMD_POWEROFF:
+>  	case RQT_CMD_EFSCLEAR:
+> -		send_rsp(rsp);
+> +		send_rsp(udc, rsp);
+>  	default:
+>  		printf("Command not supported -> cmd: %d\n", rqt->rqt_data);
+>  		return -EINVAL;
+> @@ -145,7 +146,8 @@ static int process_rqt_cmd(const struct rqt_box *rqt)
+>  	return true;
+>  }
+>  
+> -static long long int download_head(unsigned long long total,
+> +static long long int download_head(struct udevice *udc,
+> +				   unsigned long long total,
+>  				   unsigned int packet_size,
+>  				   long long int *left,
+>  				   int *cnt)
+> @@ -166,7 +168,7 @@ static long long int download_head(unsigned long long total,
+>  	while (total - rcv_cnt >= packet_size) {
+>  		thor_set_dma(buf, packet_size);
+>  		buf += packet_size;
+> -		ret_rcv = thor_rx_data();
+> +		ret_rcv = thor_rx_data(udc);
+>  		if (ret_rcv < 0)
+>  			return ret_rcv;
+>  		rcv_cnt += ret_rcv;
+> @@ -184,7 +186,7 @@ static long long int download_head(unsigned long long total,
+>  			}
+>  			buf = transfer_buffer;
+>  		}
+> -		send_data_rsp(0, ++usb_pkt_cnt);
+> +		send_data_rsp(udc, 0, ++usb_pkt_cnt);
+>  	}
+>  
+>  	/* Calculate the amount of data to arrive from PC (in bytes) */
+> @@ -200,11 +202,11 @@ static long long int download_head(unsigned long long total,
+>  
+>  	if (left_to_rcv) {
+>  		thor_set_dma(buf, packet_size);
+> -		ret_rcv = thor_rx_data();
+> +		ret_rcv = thor_rx_data(udc);
+>  		if (ret_rcv < 0)
+>  			return ret_rcv;
+>  		rcv_cnt += ret_rcv;
+> -		send_data_rsp(0, ++usb_pkt_cnt);
+> +		send_data_rsp(udc, 0, ++usb_pkt_cnt);
+>  	}
+>  
+>  	debug("%s: %llu total: %llu cnt: %d\n", __func__, rcv_cnt, total, *cnt);
+> @@ -254,7 +256,7 @@ static int download_tail(long long int left, int cnt)
+>  	return ret;
+>  }
+>  
+> -static long long int process_rqt_download(const struct rqt_box *rqt)
+> +static long long int process_rqt_download(struct udevice *udc, const struct rqt_box *rqt)
+>  {
+>  	ALLOC_CACHE_ALIGN_BUFFER(struct rsp_box, rsp, sizeof(struct rsp_box));
+>  	static long long int left, ret_head;
+> @@ -301,8 +303,8 @@ static long long int process_rqt_download(const struct rqt_box *rqt)
+>  		}
+>  		break;
+>  	case RQT_DL_FILE_START:
+> -		send_rsp(rsp);
+> -		ret_head = download_head(thor_file_size, THOR_PACKET_SIZE,
+> +		send_rsp(udc, rsp);
+> +		ret_head = download_head(udc, thor_file_size, THOR_PACKET_SIZE,
+>  					 &left, &cnt);
+>  		if (ret_head < 0) {
+>  			left = 0;
+> @@ -324,11 +326,11 @@ static long long int process_rqt_download(const struct rqt_box *rqt)
+>  		ret = -ENOTSUPP;
+>  	}
+>  
+> -	send_rsp(rsp);
+> +	send_rsp(udc, rsp);
+>  	return ret;
+>  }
+>  
+> -static int process_data(void)
+> +static int process_data(struct udevice *udc)
+>  {
+>  	ALLOC_CACHE_ALIGN_BUFFER(struct rqt_box, rqt, sizeof(struct rqt_box));
+>  	int ret = -EINVAL;
+> @@ -339,13 +341,13 @@ static int process_data(void)
+>  
+>  	switch (rqt->rqt) {
+>  	case RQT_INFO:
+> -		ret = process_rqt_info(rqt);
+> +		ret = process_rqt_info(udc, rqt);
+>  		break;
+>  	case RQT_CMD:
+> -		ret = process_rqt_cmd(rqt);
+> +		ret = process_rqt_cmd(udc, rqt);
+>  		break;
+>  	case RQT_DL:
+> -		ret = (int) process_rqt_download(rqt);
+> +		ret = (int) process_rqt_download(udc, rqt);
+>  		break;
+>  	case RQT_UL:
+>  		puts("RQT: UPLOAD not supported!\n");
+> @@ -536,7 +538,7 @@ static struct usb_request *alloc_ep_req(struct usb_ep *ep, unsigned length)
+>  	return req;
+>  }
+>  
+> -static int thor_rx_data(void)
+> +static int thor_rx_data(struct udevice *udc)
+>  {
+>  	struct thor_dev *dev = thor_func->dev;
+>  	int data_to_rx, tmp, status;
+> @@ -557,7 +559,7 @@ static int thor_rx_data(void)
+>  		}
+>  
+>  		while (!dev->rxdata) {
+> -			usb_gadget_handle_interrupts(0);
+> +			dm_usb_gadget_handle_interrupts(udc);
+>  			if (ctrlc())
+>  				return -1;
+>  		}
+> @@ -568,7 +570,7 @@ static int thor_rx_data(void)
+>  	return tmp;
+>  }
+>  
+> -static void thor_tx_data(unsigned char *data, int len)
+> +static void thor_tx_data(struct udevice *udc, unsigned char *data, int len)
+>  {
+>  	struct thor_dev *dev = thor_func->dev;
+>  	unsigned char *ptr = dev->in_req->buf;
+> @@ -591,7 +593,7 @@ static void thor_tx_data(unsigned char *data, int len)
+>  
+>  	/* Wait until tx interrupt received */
+>  	while (!dev->txdata)
+> -		usb_gadget_handle_interrupts(0);
+> +		dm_usb_gadget_handle_interrupts(udc);
+>  
+>  	dev->txdata = 0;
+>  }
+> @@ -685,18 +687,18 @@ static void thor_set_dma(void *addr, int len)
+>  	dev->out_req->length = len;
+>  }
+>  
+> -int thor_init(void)
+> +int thor_init(struct udevice *udc)
+>  {
+>  	struct thor_dev *dev = thor_func->dev;
+>  
+>  	/* Wait for a device enumeration and configuration settings */
+>  	debug("THOR enumeration/configuration setting....\n");
+>  	while (!dev->configuration_done)
+> -		usb_gadget_handle_interrupts(0);
+> +		dm_usb_gadget_handle_interrupts(udc);
+>  
+>  	thor_set_dma(thor_rx_data_buf, strlen("THOR"));
+>  	/* detect the download request from Host PC */
+> -	if (thor_rx_data() < 0) {
+> +	if (thor_rx_data(udc) < 0) {
+>  		printf("%s: Data not received!\n", __func__);
+>  		return -1;
+>  	}
+> @@ -706,7 +708,7 @@ int thor_init(void)
+>  		udelay(30 * 1000); /* 30 ms */
+>  
+>  		strcpy((char *)thor_tx_data_buf, "ROHT");
+> -		thor_tx_data(thor_tx_data_buf, strlen("ROHT"));
+> +		thor_tx_data(udc, thor_tx_data_buf, strlen("ROHT"));
+>  	} else {
+>  		puts("Wrong reply information\n");
+>  		return -1;
+> @@ -715,17 +717,17 @@ int thor_init(void)
+>  	return 0;
+>  }
+>  
+> -int thor_handle(void)
+> +int thor_handle(struct udevice *udc)
+>  {
+>  	int ret;
+>  
+>  	/* receive the data from Host PC */
+>  	while (1) {
+>  		thor_set_dma(thor_rx_data_buf, sizeof(struct rqt_box));
+> -		ret = thor_rx_data();
+> +		ret = thor_rx_data(udc);
+>  
+>  		if (ret > 0) {
+> -			ret = process_data();
+> +			ret = process_data(udc);
+>  #ifdef CONFIG_THOR_RESET_OFF
+>  			if (ret == RESET_DONE)
+>  				break;
+> diff --git a/include/thor.h b/include/thor.h
+> index ee67ab0a270..3cb56b654ae 100644
+> --- a/include/thor.h
+> +++ b/include/thor.h
+> @@ -14,7 +14,7 @@
+>  
+>  #define THOR_DFU_REINIT_NEEDED	0xFFFFFFFE
+>  
+> -int thor_handle(void);
+> -int thor_init(void);
+> +int thor_handle(struct udevice *udc);
+> +int thor_init(struct udevice *udc);
+>  int thor_add(struct usb_configuration *c);
+>  #endif /* __THOR_H_ */
+> -- 
+> 2.40.1
