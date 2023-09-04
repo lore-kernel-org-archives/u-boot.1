@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1CDC71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 03:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD78C71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 03:46:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25009867EA;
-	Mon,  4 Sep 2023 05:07:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 76894867F7;
+	Mon,  4 Sep 2023 05:46:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YR9soDcp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VOC07iLL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02588867F7; Mon,  4 Sep 2023 05:07:36 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 11CAA86867; Mon,  4 Sep 2023 05:46:26 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65874867B5
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 05:07:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74A7D86758
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 05:46:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5230a22cfd1so1238691a12.1
- for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 20:07:33 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-52a4737a08fso1218842a12.3
+ for <u-boot@lists.denx.de>; Sun, 03 Sep 2023 20:46:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693796853; x=1694401653; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1693799183; x=1694403983; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aCpsT7g/cHOyp71odNG6Dp9vWl/BVDCRnYyx7EC8RtA=;
- b=YR9soDcpgC8DgF1FHlzA7JI1z9UZpDoBw9KVp19Jy78hv6+KDZXBd4y5qo5zYnw1x4
- BLiLVkNzdRO2CZfO/csBAv+BjoFoVNRtiw9byI7YgDbC4T7IhCo88HypFmfn7F15xv7G
- RUgb7RpOVUPPBvP8P7zzkPaZF+vGiKR4qC3QxjOuaMMeCAVuWYUfz4EV7MuOvk6habqR
- gQFPzC6oHcOtSts/Wsq0Bq/TDLb2taNuvNMvWDvvEP/KMDeE8X56xyRTa1dSrUDKUN2j
- KfCqkzmvKhCVxIttLvRPKrkC6HYR77F6vSnsTFRiSThYydlAOAXS6bgffEOV9iTcn1Wf
- Vfog==
+ bh=I4Bp+59tuyHo+78KDoYi9QeqLZdbEI6/Yr5zbu6kuis=;
+ b=VOC07iLLJ0WaY0J8it05LVYC0ZiB9PL3SFV3G23hGJVAmsIektmRqpusmv8D+Hvnxv
+ AFLMK5SlQ2wMlul1MmlC1SysWmtsGc5sSNNeJFuvrRfVlEXHlkYJ2hDuow3MAwX2AqOW
+ SbpoowQPWgnaa6elBI7SMCtirgVzqaZVayw+PSajDuT5nR/twwLaQwpz5W9/b1cfDEBT
+ BK+O8RAgZxYxGkx2wMJ81jRbvN6ZoyUfVszkp204XJiIdmFenG1HW2gxoEEwH67KGyv1
+ uvI4jvD5r5WDRvuQjNFu0cPu27KsoOO153OUcQ6tRDzd0Lk65uXzm5WiQoPnjAToJ/gj
+ w55Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693796853; x=1694401653;
+ d=1e100.net; s=20221208; t=1693799183; x=1694403983;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aCpsT7g/cHOyp71odNG6Dp9vWl/BVDCRnYyx7EC8RtA=;
- b=DIcxMUYWchs7fmKvb1oni/khvogkkSza5XAuwOcwyWeisqv7261y2FKGtRl7cYVYPR
- /kqiei8UpQqPTwgh6DDHWztV2nEzz4FofvL982JtUIe6ixmhBx3f5EqN0oaQ9xg1TUoI
- o73Ykyr+b9oxZAyAZ0oHOnqmbJWw31Ns3wlpyP363oz4m5IIa6wCO8amlnjf2lMpTvR2
- oFc47Xr+v2ZxFFjYwUXDGGcDTztOP/OGLBsyAEXH+7yi7Lu/3BxLbZ2KWL5WpV11C64z
- 3zSEU23KGTpJ9LWOUnK2KekMOGNhWu5jUJwGrVJDlsGoRteTo2XjPBxcgCAve3G0O5gd
- XJBw==
-X-Gm-Message-State: AOJu0YxpL2OXx5yHWmof8J7+h59fDLK78dVo5IenXGDOqfxGvFdp9jA2
- d88WEVvdT1n7zoPKDpcknRwivooqP1cw15tlN5eiCrC+i5WX0t7e
-X-Google-Smtp-Source: AGHT+IFVryTTMD68cSkaX4ybkeEbPiYEKF/KfwUGDb61GIiimhu8BRKx1ZK82aLeRYCMdktYs7DfH2knRC8+R+q6fw4=
-X-Received: by 2002:a05:6402:2027:b0:522:b112:6254 with SMTP id
- ay7-20020a056402202700b00522b1126254mr5541634edb.4.1693796852596; Sun, 03 Sep
- 2023 20:07:32 -0700 (PDT)
+ bh=I4Bp+59tuyHo+78KDoYi9QeqLZdbEI6/Yr5zbu6kuis=;
+ b=LqmXP7em+cU6FDtT1TZvSh8H9BiHrhcvtuOGJf9jf6qT2TSYEDK25NHbZrKEGx1pk5
+ K/k8hV+gETvXfSdOQwjGM5cYyEyNMy7MRVUYyjw1M8neeTTr3lG+LF9VGLpdOBVAtEok
+ f2lb2w5TFMztbGNbuyQI/ARfZ98nl5yZVYxLGceedTVdMvG6R7hMkL8MXIhW1nITLst/
+ CabIZXn2Gl2z1KqCO7Ag93rGmgpEv0ATRMSnli/FW491BpvYZtbjiAIt0F/L/Wc7rn7y
+ lUzYfGFpzRHLb3631DMznV/UKctGCy6Xvwsp906l3ArWz86+jOhob0ORwMDyMLUWP8Rc
+ 3vqQ==
+X-Gm-Message-State: AOJu0YwM2hgscbuuBz1DaPeUYJQvDlt1r2PEEZ+42/8SsbVlm7RQ35GV
+ 7J0g3JRaUo8BGqed4+rnw+/eQ5ouF1nBEP3tqRo=
+X-Google-Smtp-Source: AGHT+IHu7vQanqFcg9Q4vxNguACDsZUzIpiwTpwHDvQYzKZo+Fm84c+shL3tCaDhAmXUuDRTmdwyLtRc4vka0xnllWQ=
+X-Received: by 2002:a05:6402:2c4:b0:525:6772:1595 with SMTP id
+ b4-20020a05640202c400b0052567721595mr6237104edx.6.1693799182626; Sun, 03 Sep
+ 2023 20:46:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230817015754.776507-1-sjg@chromium.org>
-In-Reply-To: <20230817015754.776507-1-sjg@chromium.org>
+ <20230817015754.776507-2-sjg@chromium.org>
+In-Reply-To: <20230817015754.776507-2-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 4 Sep 2023 11:07:19 +0800
-Message-ID: <CAEUhbmUaE--7hn=ybJ2cofjYkH1cfO2m4=PQ1auTy9OOjrPiyg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] x86: coreboot: Update cbmem table
+Date: Mon, 4 Sep 2023 11:46:09 +0800
+Message-ID: <CAEUhbmX0D7DnhsPZrKHk3AHjomvVZrtJdonkWpxGeDTZbjhsQQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] x86: Update cbmem driver
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Paul Menzel <pmenzel@molgen.mpg.de>, 
- Nable <nable.maininbox@googlemail.com>, Coreboot ML <coreboot@coreboot.org>
+ Nable <nable.maininbox@googlemail.com>, Coreboot ML <coreboot@coreboot.org>, 
+ Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,73 +98,117 @@ Hi Simon,
 On Thu, Aug 17, 2023 at 9:58=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> This changed a few years ago to include an overflow flag. Bring in the
-> new structure.
-
-s/This/Coreboot
-
-"Bring in the new structure" does not sound correct to me. The
-structure is not changed. It's adding a comment block and some bit
-fields.
-
-The commit summary is not accurately reflecting what is changed in
-this patch. How about:
-
-x86: coreboot: Document cbmem console struct
-
+> This driver is not actually built since a Kconfig was never created for
+> it.
 >
-> This comes from coreboot commit:
+> Add a Kconfig (which is already implied by COREBOOT) and update the
+> implementation to avoid using unnecessary memory. Drop the #ifdef at the
+> top since we can rely on Kconfig to get that right.
 >
->    6f5ead14b4 ("mb/google/nissa/var/joxer: Update eMMC DLL settings")
+> To enable it (in addition to serial and video), use:
 >
-> Note: There are several implementations of this in coreboot. I have chose=
-n
-> to follow the one in src/lib/cbmem_console.c
+>    setenv stdout serial,vidconsole,cbmem
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
-> Changes in v3:
-> - Drop __packed as it does nothing useful
+> (no changes since v2)
 >
->  arch/x86/include/asm/coreboot_tables.h | 17 +++++++++++++++--
->  1 file changed, 15 insertions(+), 2 deletions(-)
+> Changes in v2:
+> - Update to support the new overflow mechanism
 >
-> diff --git a/arch/x86/include/asm/coreboot_tables.h b/arch/x86/include/as=
-m/coreboot_tables.h
-> index 4de137fbab9d..0dfb64babb96 100644
-> --- a/arch/x86/include/asm/coreboot_tables.h
-> +++ b/arch/x86/include/asm/coreboot_tables.h
-> @@ -299,11 +299,24 @@ struct cb_vdat {
->  #define CB_TAG_TIMESTAMPS              0x0016
->  #define CB_TAG_CBMEM_CONSOLE           0x0017
+>  drivers/misc/Kconfig         |  8 ++++++++
+>  drivers/misc/cbmem_console.c | 38 +++++++++++++++++++-----------------
+>  2 files changed, 28 insertions(+), 18 deletions(-)
 >
-> +#define CBMC_CURSOR_MASK       ((1 << 28) - 1)
-> +#define CBMC_OVERFLOW          BIT(31)
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index a6e3f62ecb09..c930e4a361bf 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -122,6 +122,14 @@ config VEXPRESS_CONFIG
+>           configuration bus on the Arm Versatile Express boards via
+>           a sysreg driver.
+>
+> +config CBMEM_CONSOLE
+> +       bool "Write console output to coreboot cbmem"
+> +       depends on X86
+> +       help
+> +         Enables console output to the cbmem console, which is a memory
+> +         region set up by coreboot to hold a record of all console outpu=
+t.
+> +         Enable this only if booting from coreboot.
 > +
-> +/*
-> + * struct cbmem_console - In-memory console buffer for coreboot
-> + *
-> + * Structure describing console buffer. It is overlaid on a flat memory =
-area,
-> + * with body covering the extent of the memory. Once the buffer is full,
-> + * output will wrap back around to the start of the buffer. The high bit=
- of the
-> + * cursor field gets set to indicate that this happened. If the underlyi=
-ng
-> + * storage allows this, the buffer will persist across multiple boots an=
-d append
-> + * to the previous log.
-> + */
->  struct cbmem_console {
->         u32 size;
->         u32 cursor;
-> -       char body[0];
-> -} __packed;
-> +       u8  body[0];
-> +};
+>  config CMD_CROS_EC
+>         bool "Enable crosec command"
+>         depends on CROS_EC
+> diff --git a/drivers/misc/cbmem_console.c b/drivers/misc/cbmem_console.c
+> index 8bbe33d414da..7a47a814f638 100644
+> --- a/drivers/misc/cbmem_console.c
+> +++ b/drivers/misc/cbmem_console.c
+> @@ -5,27 +5,30 @@
 >
->  #define CB_TAG_MRC_CACHE               0x0018
+>  #include <common.h>
+>  #include <console.h>
+> -#ifndef CONFIG_SYS_COREBOOT
+> -#error This driver requires coreboot
+> -#endif
+> -
+>  #include <asm/cb_sysinfo.h>
+>
+> -struct cbmem_console {
+> -       u32 buffer_size;
+> -       u32 buffer_cursor;
+> -       u8  buffer_body[0];
+> -}  __attribute__ ((__packed__));
+> -
+> -static struct cbmem_console *cbmem_console_p;
+> -
+>  void cbmemc_putc(struct stdio_dev *dev, char data)
+>  {
+> -       int cursor;
+> -
+> -       cursor =3D cbmem_console_p->buffer_cursor++;
+> -       if (cursor < cbmem_console_p->buffer_size)
+> -               cbmem_console_p->buffer_body[cursor] =3D data;
+> +       const struct sysinfo_t *sysinfo =3D cb_get_sysinfo();
+> +       struct cbmem_console *cons;
+> +       uint pos, flags;
+> +
+> +       if (!sysinfo)
+> +               return;
+> +       cons =3D sysinfo->cbmem_cons;
+> +       if (!cons)
+> +               return;
+> +
+> +       pos =3D cons->cursor & CBMC_CURSOR_MASK;
+> +       flags =3D cons->cursor & ~CBMC_CURSOR_MASK;
+
+This line does not seem useful to me, as we don't use the extracted
+flag from the higher bits of cons->cursor.
+
+I guess we can just drop it.
+
+> +
+> +       cons->body[pos++] =3D data;
+> +       if (pos >=3D cons->size) {
+> +               pos =3D 0;
+> +               flags |=3D CBMC_OVERFLOW;
+
+Who is supposed to clear the overflow flag?
+
+> +       }
+> +
+> +       cons->cursor =3D flags | pos;
+>  }
+>
+>  void cbmemc_puts(struct stdio_dev *dev, const char *str)
+> @@ -40,7 +43,6 @@ int cbmemc_init(void)
+>  {
+>         int rc;
+>         struct stdio_dev cons_dev;
+> -       cbmem_console_p =3D lib_sysinfo.cbmem_cons;
+>
+>         memset(&cons_dev, 0, sizeof(cons_dev));
 >
 > --
 
