@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB145C71153
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C734C71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 16:50:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE418869B6;
-	Mon,  4 Sep 2023 18:49:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E36F869C8;
+	Mon,  4 Sep 2023 18:49:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NtjSvvIE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XJ0K5Ip9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51F1A8691E; Mon,  4 Sep 2023 18:49:50 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 883E58691E; Mon,  4 Sep 2023 18:49:50 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C02486925
+ by phobos.denx.de (Postfix) with ESMTPS id 8115886932
  for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 18:49:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-50091b91a83so2758947e87.3
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50098cc8967so2578290e87.1
  for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 09:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1693846185; x=1694450985; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MTMkLLeH81O2d7rq2xaq8G/6vWbdU8k9FhZXyLp9OSA=;
- b=NtjSvvIEgXoBN3CdEgW9BWUar5Gzb/micwHHVcoXK50tlyul0GxfavM09Be+O0n5O7
- W4sq1khR1PvyM+qds55ot1FA7u+beQYuDw7wc7o7VVHInkXNqbhmjhJWI2fohYWibPma
- bj/vkWwAy4nLa/uRpbpehno8hvM4IBibph43M=
+ bh=9QXPP1i/Tn12EGCYOsUbu9om5d6fXLnN3DiREOt3Jqg=;
+ b=XJ0K5Ip9+HkNtx8tpOIRvgjN949syxQPzyHl9BSRkg/vTWjO5kw6nrwD+piiXIaD7d
+ Ler7lZvsLpXoYdQRz6P9fzJvz5CkHEI6y89rqucXkyQMZ/EI7e2o1xkWwB4Dl2e/+9Va
+ BkwZdL/Q2XO21ui9cLPnJ//z+4nYLHP8XSGS0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1693846185; x=1694450985;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MTMkLLeH81O2d7rq2xaq8G/6vWbdU8k9FhZXyLp9OSA=;
- b=Xaf9RC7Quz3amF35fEZ5Wt6JKXMJq5TNXoHZ64ZbT5bn0IyDopwIStFQW9nrABEP0I
- t8e7QXbYdGMtqgmPuH3PCI3ziJtfmiOylj5hq8HMPtUNTEqhgWDFo7n6t3Qwz45h+lQs
- NZ6w3wjVfBW63vEeIX+57J/6VvIH/GduIcukWEJUAS1iEbPpOiq0qkU1mEHCc6AC7kcX
- Y2ppvkm1UoSBQmzyWzXjzgwbHIXy9hBgJd+RG4+xqqqANDyvc7rK9+vYKxxM8AafZ25h
- NBgISL6w3LbE9aItwrMwBAipF7ubeC3Ok0G2uVBKQYlWwkFhDJoeqCyhFpUohjNN/gVo
- 8ahg==
-X-Gm-Message-State: AOJu0YwVrthOwMQp2234TTxz7GR5h8kD16QsYzq0K1Ek1JgLgXdwoAYD
- FHv+mXGXrsRcmetA82U/jdiLvfhJHg1NYcvblFwfEA==
-X-Google-Smtp-Source: AGHT+IFnuL+2ntmpOczWUBG26Pugncc7ADN/ei5cPNjydKP3FLbMciMKtYr6ZxuWI6KZ5pi29P/ViS8KFRTDOkHkuoM=
-X-Received: by 2002:a05:6512:281c:b0:4fd:d172:fc2c with SMTP id
- cf28-20020a056512281c00b004fdd172fc2cmr8420682lfb.21.1693846184537; Mon, 04
+ bh=9QXPP1i/Tn12EGCYOsUbu9om5d6fXLnN3DiREOt3Jqg=;
+ b=YGEzySuDsO2vVME/U9sdGDQemFBl9SHbZLH0WQV2v/ZJs4NAtfQWG9uwSSXTKZOYEK
+ yWCxCNygG7TbZaA4pGmkjcNrxldkD3t2O851+D3wjiugfWyIqjzXFpPCaeZmWqMz8xBM
+ VMxgTbEQtMaVrRf1xU8E2VFy9ok52LjlMr7FR4GzE5lTZzL6IrMN3veXw643FUbAHyjD
+ O4WQLXiMY/Qg4qun9+mjD3eB0jdJiKj9/bs++zwJ/JLWEzVxr544B/BwyWMGdpbbLWe7
+ QWcMXVDzqTYoLYbRuVnC1qOroJxfuolC3kjB+f5WBRcNYymVVa59BOoRh3Yk0P8pxOlp
+ ++pw==
+X-Gm-Message-State: AOJu0Yy6MkoVtQL/lZG8PZIhDHZDe7WnkMV/Zw0JNYA72DdR4WKORAvP
+ 24wDMrJKSwzN6f9LEEmXazEMHmcoXcp2GUgIuv5ryQ==
+X-Google-Smtp-Source: AGHT+IFnZWe9DuehC7XUwqbHZXTN9ai//KH3EgjSs12144PPyi7yulgH8WGoOO/lJ0rqf/lByZf6FNXJ1LZAnSZ2nTU=
+X-Received: by 2002:a05:6512:2522:b0:4f7:6966:36fb with SMTP id
+ be34-20020a056512252200b004f7696636fbmr6988605lfb.12.1693846184529; Mon, 04
  Sep 2023 09:49:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230824195917.1687886-1-sjg@chromium.org>
- <20230824195917.1687886-9-sjg@chromium.org>
- <d04cf2fd-92d0-46d1-5041-9ec4480bd6fd@ti.com>
-In-Reply-To: <d04cf2fd-92d0-46d1-5041-9ec4480bd6fd@ti.com>
+References: <CGME20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5@epcas2p3.samsung.com>
+ <20230828094938.2061606-1-chanho61.park@samsung.com>
+ <20230828094938.2061606-4-chanho61.park@samsung.com>
+In-Reply-To: <20230828094938.2061606-4-chanho61.park@samsung.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Sep 2023 10:48:55 -0600
-Message-ID: <CAPnjgZ0zx1yyVsQpR1CoeWqFzcZ_NZAMUq=+3BxaGQCwqgo13g@mail.gmail.com>
-Subject: Re: [PATCH 08/19] boot: Move fdt_support to boot/
-To: Devarsh Thakkar <devarsht@ti.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, 
- Nikhil M Jain <n-jain1@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
+Date: Mon, 4 Sep 2023 10:48:48 -0600
+Message-ID: <CAPnjgZ2eKzzcyjBG_EKbCLMM_9x4h4O4ABPMgX6vY_ScD=tZUA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] timer: riscv_aclint_timer: add timer_get_boot_us
+ for BOOTSTAGE
+To: Chanho Park <chanho61.park@samsung.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,49 +84,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Devarsh,
+Hi Chanho,
 
-On Thu, 31 Aug 2023 at 00:02, Devarsh Thakkar <devarsht@ti.com> wrote:
+On Mon, 28 Aug 2023 at 03:50, Chanho Park <chanho61.park@samsung.com> wrote:
 >
-> Hi Simon,
+> timer_get_boot_us function is required to record the boot stages as
+> us-based timestamp.
 >
-> On 25/08/23 01:28, Simon Glass wrote:
-> > This relates to booting since it fixes up the devicetree for the OS. Move
-> > it into the boot/ directory.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  boot/Makefile                  | 3 +++
-> >  {common => boot}/fdt_support.c | 0
-> >  common/Makefile                | 2 --
-> >  3 files changed, 3 insertions(+), 2 deletions(-)
-> >  rename {common => boot}/fdt_support.c (100%)
-> >
-> > diff --git a/boot/Makefile b/boot/Makefile
-> > index 10f015722378..f15a161614ff 100644
-> > --- a/boot/Makefile
-> > +++ b/boot/Makefile
-> > @@ -16,6 +16,7 @@ obj-$(CONFIG_QFW) += bootmeth_qfw.o
-> >  endif
-> >
-> >  obj-y += image.o image-board.o
-> > +
-> >  obj-$(CONFIG_ANDROID_AB) += android_ab.o
-> >  obj-$(CONFIG_ANDROID_BOOT_IMAGE) += image-android.o image-android-dt.o
-> >
-> > @@ -37,6 +38,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
-> >  obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
-> >  endif
-> >
-> > +obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o
-> > +
-> >  obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += image-fdt.o
+> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+> ---
+>  drivers/timer/riscv_aclint_timer.c | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
 >
-> Can this be,
-> obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += fdt_support.o image-fdt.o ?
+> diff --git a/drivers/timer/riscv_aclint_timer.c b/drivers/timer/riscv_aclint_timer.c
+> index e29d527c8d77..8b67745bb4a2 100644
+> --- a/drivers/timer/riscv_aclint_timer.c
+> +++ b/drivers/timer/riscv_aclint_timer.c
+> @@ -6,6 +6,7 @@
+>
+>  #include <common.h>
+>  #include <clk.h>
+> +#include <div64.h>
+>  #include <dm.h>
+>  #include <timer.h>
+>  #include <asm/io.h>
+> @@ -44,6 +45,27 @@ u64 notrace timer_early_get_count(void)
+>  }
+>  #endif
+>
+> +#if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
 
-Yes...unfortunately I missed this when sending v3
+Just a nit...you should not need this #if, since if the function is
+not used it will be stripped from the image by the linker.
+
+> +ulong timer_get_boot_us(void)
+> +{
+> +       int ret;
+> +       u64 ticks = 0;
+> +       u32 rate;
+> +
+> +       ret = dm_timer_init();
+> +       if (!ret) {
+> +               rate = timer_get_rate(gd->timer);
+> +               timer_get_count(gd->timer, &ticks);
+> +       } else {
+> +               rate = RISCV_MMODE_TIMER_FREQ;
+> +               ticks = readq((void __iomem *)MTIME_REG(RISCV_MMODE_TIMERBASE,
+> +                                                       RISCV_MMODE_TIMEROFF));
+> +       }
+> +
+> +       return lldiv(ticks * 1001, (rate / 1000));
+> +}
+> +#endif
+> +
+>  static const struct timer_ops riscv_aclint_timer_ops = {
+>         .get_count = riscv_aclint_timer_get_count,
+>  };
+> --
+> 2.39.2
+>
 
 Regards,
 Simon
