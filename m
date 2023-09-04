@@ -4,59 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA174C83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 11:23:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E9A5C83F33
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 12:10:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 671FA868C0;
-	Mon,  4 Sep 2023 13:23:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C78C863A8;
+	Mon,  4 Sep 2023 14:10:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Q21pvfoJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MheV1b5i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69F0886908; Mon,  4 Sep 2023 13:23:27 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 64C208684C; Mon,  4 Sep 2023 14:10:24 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2278B86898
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 13:23:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FE81847C3
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 14:10:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (unknown [46.114.152.14])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7282243CDC; 
- Mon,  4 Sep 2023 11:23:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1693826602;
- bh=aC+YjhB99D6W1YO4rl9uO9kTtL5MlAIl39dkddKx44Y=;
- h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
- MIME-Version;
- b=Q21pvfoJ2dSDLP2OXRDwPr1J/aBXaH+8uthBagqRhiDsMOCgw0fP4jvwY1YlsOgkS
- OpJ7xzNpNX4EAbEGv2d8OMyanE2PGkbctS2pJ5ymUqQ1U6h82kQAVSStKW1jsGZkBH
- LIeEVUb4Wfq4+AitpYskT1fI7Oh5H/3BnjyS4QE1ma49UVv1LxQ0J9RtkFgZ0rrTLg
- +KvtGKKIXJF5pu8ZB+QQf5zQMpKyGoPB7ChcfMrVcOOdJeF4jxJKq5ZiNgrgFQqtN+
- UZOAm0S6eLccOi/ixbSgmK9GXjXYeDqxbuYNKBAWv4Ae11D1JJh7tUX54gIi1l7J7M
- K94StbVVdfXzw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Anup Patel <apatel@ventanamicro.com>,
- Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 2/2] risc-v: implement DBCN based debug console
-Date: Mon,  4 Sep 2023 13:24:04 +0200
-Message-Id: <20230904112404.81899-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230904112404.81899-1-heinrich.schuchardt@canonical.com>
-References: <20230904112404.81899-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2bcc4347d2dso19480951fa.0
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 05:10:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693829420; x=1694434220; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=SmCuo32UUMY3ew9+NERIkbjXnHhbCUkN3wHymWOjurs=;
+ b=MheV1b5iPkKdXhOX7mJCkEXEfJxfPMmOO/dV/+Ec3gR6ymKHXYXV8pyci05A2gqki8
+ c4Ae/FPti6W8r350iU6el5Opxib3eGW69nPPHxv2hN9/hN/se8Q3g8HBE9amQrjWIEIS
+ tUIXJL+/vCzUYHmmzmlwj07DbSYSRJiwi5gunpJO+F061HDzrgXVOpxWFp7izYxGZdBM
+ gNMQYk0On9FHrKCxDaKjH+Un7DLhq0mAYOdrTp7PHqvnOOjsSoJyu04ej4+aFfVDFhxV
+ f26B5Ji6uuJyurv8pgjMp9ismZDGC8XMefIzEtcayA2rhI8Led8INAzaXhACXXVeMiuj
+ 66TA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693829420; x=1694434220;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SmCuo32UUMY3ew9+NERIkbjXnHhbCUkN3wHymWOjurs=;
+ b=fJXpIxTSkwHyrqXtLhYEQ1hZpFlvbwla8E9brBhR9fBemKhJfzD5w/4Hgr3yrY+kPH
+ bIrUXqkrnBH+bQ2CH0nVM7E+UHDccYq96ISgyQEvRx1H+2ScmdqX3y1+kgr1F/faZdxw
+ ltbKmh4lWc6HFYq1YOVixqjZ2BLhs74P9/ExBbofL/Vv6iuIdtj7vJSWIo9SMnswoQf7
+ u03S7vTI4sVW2HVbvCj4yzDziUis/GsrkqJ8YNrXRCteRAp5s97awSJsJrHqMjb+gNSh
+ RQbodnSzzI16SIIsKteebZyw+uznMBytfKOb331ZuBxLLg98O1mL0QaK4pfoMVoe/TRK
+ YzCA==
+X-Gm-Message-State: AOJu0YxTp2U8pJaEJ512KRtoyEc1j2UThFQP3f1zKainitF7w9pxw4CS
+ ivgIfZfiuUy3jT+/jpuv+u8CeOMe7DKLaVNJSZc=
+X-Google-Smtp-Source: AGHT+IF2yY7kNzCaJAiJyWvojQ/+1HoaBUY27kR1egOt6UhqQeTuZGjqR/8n3cygCdzABhLnqUuXrtUAwEkA1QJiR+A=
+X-Received: by 2002:a2e:9f43:0:b0:2b9:b9c8:99 with SMTP id
+ v3-20020a2e9f43000000b002b9b9c80099mr6900075ljk.22.1693829420352; 
+ Mon, 04 Sep 2023 05:10:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 4 Sep 2023 13:10:09 +0100
+Message-ID: <CALeDE9MLAxKXRZethKcxBKjocRmaFq2dNw0e-5TjHfSiPvryXA@mail.gmail.com>
+Subject: Updates for RPi for 2023.10:
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,81 +80,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the DBCN SBI extension to implement a debug console.
-Make it the default for S-mode RISC-V.
+The following changes since commit 8999257f219d1e371c2fd66f255b8782897944d9:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	check that we are in S-mode
----
- drivers/serial/Kconfig      |  5 ++++-
- drivers/serial/serial_sbi.c | 20 ++++++++++++++++++++
- 2 files changed, 24 insertions(+), 1 deletion(-)
+  Merge tag 'doc-2023-10-rc4-2' of
+https://source.denx.de/u-boot/custodians/u-boot-efi (2023-09-02
+09:08:54 -0400)
 
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index 7ca42df6a7..fb108f0189 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -218,6 +218,7 @@ config DEBUG_UART
- choice
- 	prompt "Select which UART will provide the debug UART"
- 	depends on DEBUG_UART
-+	default DEBUG_SBI_CONSOLE if RISCV_SMODE
- 	default DEBUG_UART_NS16550
- 
- config DEBUG_UART_ALTERA_JTAGUART
-@@ -289,11 +290,13 @@ config DEBUG_EFI_CONSOLE
- 
- config DEBUG_SBI_CONSOLE
- 	bool "SBI"
--	depends on SBI_V01
-+	depends on RISCV_SMODE
- 	help
- 	  Select this to enable a debug console which calls back to SBI to
- 	  output to the console. This can be useful for early debugging of
- 	  U-Boot when running on top of SBI (Supervisor Binary Interface).
-+	  This implementation of the debug UART is not available while in
-+	  M-mode (e.g. during SPL).
- 
- config DEBUG_UART_S5P
- 	bool "Samsung S5P"
-diff --git a/drivers/serial/serial_sbi.c b/drivers/serial/serial_sbi.c
-index b9f35ed36e..a51a96c1ef 100644
---- a/drivers/serial/serial_sbi.c
-+++ b/drivers/serial/serial_sbi.c
-@@ -3,6 +3,8 @@
- #include <debug_uart.h>
- #include <asm/sbi.h>
- 
-+#ifdef CONFIG_SBI_V01
-+
- static inline void _debug_uart_init(void)
- {
- }
-@@ -13,4 +15,22 @@ static inline void _debug_uart_putc(int c)
- 		sbi_console_putchar(c);
- }
- 
-+#else
-+
-+static int sbi_dbcn_available;
-+
-+static inline void _debug_uart_init(void)
-+{
-+	if (CONFIG_IS_ENABLED(RISCV_SMODE))
-+		sbi_dbcn_available = sbi_probe_extension(SBI_EXT_DBCN);
-+}
-+
-+static inline void _debug_uart_putc(int ch)
-+{
-+	if (CONFIG_IS_ENABLED(RISCV_SMODE) && sbi_dbcn_available)
-+		sbi_dbcn_write_byte(ch);
-+}
-+
-+#endif
-+
- DEBUG_UART_FUNCS
--- 
-2.40.1
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-raspberrypi/ tags/rpi-2023.10
+
+for you to fetch changes up to fc2af2d978b525e188b15d909e321caf9445bdb0:
+
+  arm: rpi: Switch to a text environment (2023-09-03 23:33:04 +0100)
+
+----------------------------------------------------------------
+Updates for RPi for 2023.10:
+
+- rpi: Disable DISTRO_DEFAULTS
+- arm: rpi: Switch to standard boot
+- arm: rpi: Switch to a text environment
+
+----------------------------------------------------------------
+Simon Glass (3):
+      arm: rpi: Switch to standard boot
+      rpi: Disable DISTRO_DEFAULTS
+      arm: rpi: Switch to a text environment
+
+ board/raspberrypi/rpi/rpi.env  |  77
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ configs/rpi_0_w_defconfig      |   2 +-
+ configs/rpi_2_defconfig        |   2 +-
+ configs/rpi_3_32b_defconfig    |   2 +-
+ configs/rpi_3_b_plus_defconfig |   2 +-
+ configs/rpi_3_defconfig        |   2 +-
+ configs/rpi_4_32b_defconfig    |   2 +-
+ configs/rpi_4_defconfig        |   2 +-
+ configs/rpi_arm64_defconfig    |   2 +-
+ configs/rpi_defconfig          |   2 +-
+ include/configs/rpi.h          | 134
+--------------------------------------------------------------------------------------------------------------------------------------
+ 11 files changed, 86 insertions(+), 143 deletions(-)
+ create mode 100644 board/raspberrypi/rpi/rpi.env
