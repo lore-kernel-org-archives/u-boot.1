@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE29AC83F33
-	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 13:58:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D645C71153
+	for <u-boot@archiver.kernel.org>; Mon,  4 Sep 2023 13:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3695F86945;
+	by phobos.denx.de (Postfix) with ESMTP id 828188695F;
 	Mon,  4 Sep 2023 15:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eNXs5lxa";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="F+5vgpUd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4F0B86828; Mon,  4 Sep 2023 05:16:08 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::60e])
+ id B8C98867B5; Mon,  4 Sep 2023 05:16:09 +0200 (CEST)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2060f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7ea9::60f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0C8286867
- for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 05:16:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C99E4868B8
+ for <u-boot@lists.denx.de>; Mon,  4 Sep 2023 05:16:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=E9LvRTi8fZA8Z6JIBQsxHufOFqiFVKiBy9Ziu+RKPhjtbo6BN4sVemgfUFqVbpE1wWQE7OmHquY6db9YbNLgiVDkr8DXGZrP1LSZ/N3GKQ/TGOx/rWLlWWCYQr8/8W6BFEcDhcdpo2098tqI5Rw8V/Ypf2x2NDjyEVPrzZs6K1KIXkzmymk3GwbSIWyEUEjkUvxyMLFsDidzlxluNuiDOfcHsGZOb4l99TjuW+mJGOQxMdTo7uVHHll0tq5WeMqS7i6cBxTQzr2J9xPoDvPHmBMyaszIrkNeivzLyPdsg4yFVN7zKpSoKNO/oFxTEgrTI2UtjrFuZTqTP8mURwnf+Q==
+ b=JpIt61vIPuZF93faX2WEtJq+VWIMzXo/T8cJxLtwdnWT9UV0Uf3vJMtRQy6Z2UrHLmNcvvzYFRIfDgddlTwCOsfuGoW+SK/iCrnm2ec8gmi/4FCA23WFq4hjPzuv48O4sbzKThrB+uEGu/PQnkhNfxzM3WZO6iKIsG3Ve5rD09sZPR2IK4VyQPziWfPdu5ulpOBoquAXtieEe0MrhcPgY1VGpdk8qheysxTgMW8vj8VE3+Z9U8y/EA0l0vbu1GrrOfn2CBg36OqX3x+C0gaCJ9MUH9UD1szYSSh5PuHsfiAgnswsHF/TcyM4arFJ450Fy2sO4Kpr6SdevM3zcyOiqQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s+wph8x7VAhJKDi6b5Ei7ZgGQr83UMRAVQiizz9iM0E=;
- b=kWAm5vM2O0wfMlsydDu7dk3DLdwV3Ps4OOWNkao7bCXUJAvOFPzw4NfFu6EWtgPa6pyjgNF7tOLRWRXl1h8p/iIgGeRxs2VXwvpj1fu+chDdZJqOD38Y1qZ6SkVFR1LgJXAjgMa6L4MiveokkJM4QzltZkHrb1x/BnsV5DKpHyBmS2HR7zy0VS4tts0ah7j8JRtgaOx4jc6/JaS4Da9y7/fWDI0CnlQuq3k8JTqFAwNW3R4grmb85qtAYvBIEo3k9Jt6vv0NiLYDj4OSXpcwma7TvfUjRiLHMB2OzsbZnaatZ4v1BCaIgVXAMC4k/Lp80OrcqETh6SBCbSMfc5ShhA==
+ bh=Axho+jxbk53wF4ye8Fvx+P4LUz/BsuPCQgrLB/6VEL4=;
+ b=Ms8ZgO1cV2dkRII8hniPvbFnQ7iKAhdEeH4UFJEtrAWX5uRaHVs1t+I+YaJ0HiLUX7dYNhLa9AdYtZB+JvKiOZp/VfIE2sWpICBfgoWqoil+KdifR0tukWQNhDeaLQxQTDV6Es2A2FLlQ+WRbrY9QfO5iAokF/O0/xkGinn4r24cn0nS1QyMGuDKzLGJLHhIusnBlvSLeM6Clw5ijXkSNWV/fbx0379zNmP2Qh420KIYwcnZAN5MEhggplstOLeArBJFgBlZSfOnMzmngVstEeR9Ka/vjrAZbV4+XetuDZcXHRKNZoit6wYaQrHyYTgWKcuYslx2jXqI3ZV+p5vdiw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s+wph8x7VAhJKDi6b5Ei7ZgGQr83UMRAVQiizz9iM0E=;
- b=eNXs5lxaa4WVKYjI7aSgWyA1nnrcMVfpINy+1ZNLsA0yyBj9qfkqwAHPCEgkJWbPSF8phsgpZ48SgQDXTkTSAvy81dA8tqEFnH1qkLg3HkBeAMj0VxEBspPKWYNwj14M0TcnYpt3w6WGJ4822oQkujvEAWfyqyCPDcrMVucJc6k=
-Received: from CH0PR03CA0427.namprd03.prod.outlook.com (2603:10b6:610:10e::30)
- by SA1PR12MB5659.namprd12.prod.outlook.com (2603:10b6:806:236::7)
+ bh=Axho+jxbk53wF4ye8Fvx+P4LUz/BsuPCQgrLB/6VEL4=;
+ b=F+5vgpUdBfYa9hny9z7Lu+gS9fKi0/6dSDtF2HtL/Fm1isF0UEfsHEcciOqbxI0GrCwTjeG+LZZLeNacx0lgluI/qExejXSELIWquDpUEwU+YaFziMZgo/9G0YphDwPIPcpRWzUR72Jcho+1yeLeO16Zcw9pFBzrptINHZ+AZjA=
+Received: from CH0PR03CA0443.namprd03.prod.outlook.com (2603:10b6:610:10e::7)
+ by SA1PR12MB8599.namprd12.prod.outlook.com (2603:10b6:806:254::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.30; Mon, 4 Sep
- 2023 03:16:00 +0000
+ 2023 03:15:59 +0000
 Received: from DS1PEPF00017093.namprd03.prod.outlook.com
- (2603:10b6:610:10e:cafe::dd) by CH0PR03CA0427.outlook.office365.com
- (2603:10b6:610:10e::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.30 via Frontend
- Transport; Mon, 4 Sep 2023 03:16:00 +0000
+ (2603:10b6:610:10e:cafe::56) by CH0PR03CA0443.outlook.office365.com
+ (2603:10b6:610:10e::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.32 via Frontend
+ Transport; Mon, 4 Sep 2023 03:15:59 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,19 +61,19 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
  DS1PEPF00017093.mail.protection.outlook.com (10.167.17.136) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Mon, 4 Sep 2023 03:16:00 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ 15.20.6768.25 via Frontend Transport; Mon, 4 Sep 2023 03:15:58 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Sun, 3 Sep
  2023 22:15:53 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Sun, 3 Sep
- 2023 22:15:42 -0500
+ 2023 22:15:46 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Sun, 3 Sep 2023 22:15:39 -0500
+ Transport; Sun, 3 Sep 2023 22:15:43 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <sjg@chromium.org>, <xypron.glpk@gmx.de>,
@@ -81,10 +81,9 @@ CC: <michal.simek@amd.com>, <sjg@chromium.org>, <xypron.glpk@gmx.de>,
  <seanedmond@microsoft.com>, <tobias@waldekranz.com>, <sr@denx.de>,
  <john@metanate.com>, <git@xilinx.com>, Ashok Reddy Soma
  <ashok.reddy.soma@amd.com>
-Subject: [PATCH v2 1/2] cmd: thordown: Add proper dependency for
- CMD_THOR_DOWNLOAD
-Date: Mon, 4 Sep 2023 08:45:27 +0530
-Message-ID: <20230904031528.11817-2-venkatesh.abbarapu@amd.com>
+Subject: [PATCH v2 2/2] zynqmp: config: Add proper dependencies for USB
+Date: Mon, 4 Sep 2023 08:45:28 +0530
+Message-ID: <20230904031528.11817-3-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230904031528.11817-1-venkatesh.abbarapu@amd.com>
 References: <20230904031528.11817-1-venkatesh.abbarapu@amd.com>
@@ -92,26 +91,26 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017093:EE_|SA1PR12MB5659:EE_
-X-MS-Office365-Filtering-Correlation-Id: d5689488-504a-4fba-e19e-08dbacf543cd
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017093:EE_|SA1PR12MB8599:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7babb0ec-ed09-4283-15a6-08dbacf542be
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Bk+rlt0sPsCuYiBi0nnMJZRuRhsn5lBpqV02xDIG/zqeE4UwC34zRWnQ3s/0OHe4lfE7Pl/yYNyd1xYom2EnaPQHLRmjtnmB0DsnR1xa5AFq0FTT15y9fOH0zWcGPX+xlqZJwNXyy5MIVrDwztLGvgNyOf8w+U4FKs4cdiuPCH+nypvsIsfHQ/ujE5XXY0F7FxSsTlB55lADPI/JXpZsDhJumkaOg0AlA8DJ0BMRmC04zS8SBCWKGwHm2rE25zNJw147Wtw/oLml2V5TESPKdKLFia+g56zEWWI8Tz6MaA+ThylMHA0D1RdWOCo9HnZvqgaMp1RlHlQyYlnJaMXvAaDPgfMm4zkkdsSKGd8cY9p4wkNCB+ol5gsNiELpGVr86Mf/xF68okHNpaMkn1z3MkvJDhrDncT84cxUbigymnFhjupRaMwszRRGHS/j9TKAgLlOOrm/Q4b0+z1z6w10OXUuGqfrBUnvCOl/0zy5sGA3yt/4CcE80PPcNtSHmiS6mRnyKjrSc73GkjJ8pI97Qo+lBjEGewcD1Esr7sHL++BcNp5DAUiPlPGeoCGfz5E/8UHSn3ydfuA19mIlNMk84PQ+DP8RKZ88WuFgayg6OxMkGBxM2W8xLf/qjHLU9UEwn+6wcU1wkbC8jIUjHOsZe/YBkKBqkwQrACY95ubndME9FiIJW11EY15Un/6E+40+jdvKhxgFQR0VqoXChuST1wDSRRJrvoLn2ZTIiYhOL9lZ0Ds9N8T/U+KGyBLqn289lf596rESU2fxWBa39Y6itQ==
+X-Microsoft-Antispam-Message-Info: TzOHAAnQ8NfN81Nn9HcqCn82KE0y4GnVrX/Ude1rF/3gc6ARSRu9I3RNGIDMOv/XDWaBcxdRulFvL6WigCQs29gGJpHEqlBE2ASg0CYaZgUTxevc3vBd2L4Sfwajgerg0DVxPtzqR/T9/s/KTvW7xCLW1Bkq4P+ZIfFstmn+sSXCD9hlnL1DNfoolpJmdHnwAiY7CmBGJJYh3UmLP+KG595btmWhyQ2eV7NlVf847cnJPcFYf8xecXLsqLDHodHU1Pf0+Fy0lv9IpUHqhLq7g7ykmKK80zd/1No2UpzVmHlcByH0j6DwdSVKyeeyH1kspOSLDDq1CWaq5S+jVBZfYB6LdoZmGTzAxrfk0z82N0cvIj1VhFsq0FPACWtrpmNNcsCpz2C33Lq+Uu+FnrXfRBsGWC2hZwOMhDym/0Kw4L7B3dgmkDuydhjvj/Awn9lc1HyJ0EGvlWpT/s7AGDNRsNFWVUt0DkLkjXNEA4yABejrKlII1sCQAppphNKHdK4hHvQkDrskMnx/X+smk6gnOmJ8UzkZnRUnZc8xmIo/UMHjltA0oB9+jJnsHZEn7tmpylmYxalJ3GKr92iTQ13djsTGAWJfDjtVwXXHwwG8khht+nferifJRzP6JFgOv2ACKj2O0DQ5pGVTuyx9CbzRURAPvryXXxrGtKZBB7EnAG+Aqo7hmZeHq3Qkghk022qNcZbmt0j58254Nt+xJCwZWgIg6nhHAoZ2ngW4rqd5uFdHZHId5mhQtIek6iBk109GWHRDnghH7sHtKj+HQ2zn5Q==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(39860400002)(396003)(376002)(346002)(451199024)(186009)(1800799009)(82310400011)(36840700001)(40470700004)(46966006)(70206006)(70586007)(2906002)(36756003)(54906003)(86362001)(316002)(6916009)(40480700001)(5660300002)(8936002)(8676002)(4326008)(41300700001)(40460700003)(1076003)(47076005)(2616005)(83380400001)(426003)(336012)(26005)(36860700001)(478600001)(81166007)(356005)(82740400003)(6666004)(36900700001);
+ SFS:(13230031)(4636009)(39860400002)(346002)(396003)(136003)(376002)(451199024)(186009)(1800799009)(82310400011)(40470700004)(36840700001)(46966006)(316002)(2906002)(54906003)(70586007)(36756003)(86362001)(70206006)(6916009)(40480700001)(5660300002)(8936002)(8676002)(4326008)(41300700001)(40460700003)(1076003)(36860700001)(2616005)(83380400001)(426003)(336012)(26005)(47076005)(478600001)(81166007)(356005)(82740400003)(6666004)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2023 03:16:00.6806 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d5689488-504a-4fba-e19e-08dbacf543cd
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2023 03:15:58.8994 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7babb0ec-ed09-4283-15a6-08dbacf542be
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017093.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5659
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8599
 X-Mailman-Approved-At: Mon, 04 Sep 2023 15:58:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -129,46 +128,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_CMD_USB and CONFIG_USB are disabled some compilation errors are seen as below.
+When CONFIG_CMD_USB and CONFIG_USB are disabled, still some compilation
+errors are seen as below.
 
-cmd/thordown.o: in function `usb_gadget_initialize':
-include/linux/usb/gadget.h:981: undefined reference to `board_usb_init'
-cmd/thordown.o: in function `do_thor_down':
-cmd/thordown.c:68: undefined reference to `g_dnl_unregister'
-cmd/thordown.o: in function `usb_gadget_release':
-include/linux/usb/gadget.h:986: undefined reference to `board_usb_cleanup'
-cmd/thordown.o: in function `do_thor_down':
-cmd/thordown.c:41: undefined reference to `g_dnl_register'
-cmd/thordown.c:48: undefined reference to `thor_init'
-cmd/thordown.c:56: undefined reference to `thor_handle'
-gnu/aarch64/lin/aarch64-linux/bin/aarch64-linux-gnu-ld.bfd: line 4:  8485
-Segmentation fault      (core dumped) $CC --sysroot=$LIBC
---no-warn-rwx-segment "$@"
-Makefile:1779: recipe for target 'u-boot' failed
-make: *** [u-boot] Error 139
-make: *** Deleting file 'u-boot'
+In file included from include/configs/xilinx_zynqmp.h:173,
+                 from include/config.h:3,
+                 from include/common.h:16,
+                 from env/common.c:10:
+include/config_distro_bootcmd.h:302:9: error: expected '}' before 'BOOT_TARGET_DEVICES_references_USB_without_CONFIG_CMD_USB'
+  302 |         BOOT_TARGET_DEVICES_references_USB_without_CONFIG_CMD_USB
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/config_distro_bootcmd.h:302:9: note: in definition of macro
+'BOOTENV_DEV_NAME_USB'
+  302 |         BOOT_TARGET_DEVICES_references_USB_without_CONFIG_CMD_USB
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+include/configs/xilinx_zynqmp.h:77:41: note: in expansion of macro
+'BOOTENV_DEV_NAME'
+   77 | # define BOOT_TARGET_DEVICES_USB(func)  func(USB, usb, 0)
+   func(USB, usb, 1)
+      |                                         ^~~~
+include/configs/xilinx_zynqmp.h:168:9: note: in expansion of macro
+'BOOT_TARGET_DEVICES_USB'
+  168 |         BOOT_TARGET_DEVICES_USB(func) \
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+include/config_distro_bootcmd.h:454:25: note: in expansion of macro
+'BOOT_TARGET_DEVICES'
+  454 |         "boot_targets=" BOOT_TARGET_DEVICES(BOOTENV_DEV_NAME) "\0"
+      |                         ^~~~~~~~~~~~~~~~~~~
+include/config_distro_bootcmd.h:474:9: note: in expansion of macro
+'BOOTENV_BOOT_TARGETS'
+  474 |         BOOTENV_BOOT_TARGETS \
+      |         ^~~~~~~~~~~~~~~~~~~~
+include/configs/xilinx_zynqmp.h:179:9: note: in expansion of macro
+'BOOTENV'
+  179 |         BOOTENV
+      |         ^~~~~~~
+include/env_default.h:120:9: note: in expansion of macro
+'CFG_EXTRA_ENV_SETTINGS'
+  120 |         CFG_EXTRA_ENV_SETTINGS
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+In file included from env/common.c:32:
+include/env_default.h:27:36: note: to match this '{'
+   27 | const char default_environment[] = {
+      |                                    ^
+scripts/Makefile.build:256: recipe for target 'env/common.o' failed
+make[1]: *** [env/common.o] Error 1
+Makefile:1853: recipe for target 'env' failed
+make: *** [env] Error 2
+make: *** Waiting for unfinished jobs....
 
-Add dependency of USB_GADGET_DOWNLOAD for CONFIG_CMD_THOR_DOWNLOAD to fix the errors.
+Add CONFIG_USB_STORAGE as dependency for USB related macro's such as
+BOOT_TARGET_DEVICES_USB() and DFU_DEFAULT_POLL_TIMEOUT and
+CONFIG_THOR_RESET_OFF.
+
+Remove CONFIG_ZYNQMP_USB from Kconfig and also from defconfig since it
+is not used anywhere else.
 
 Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- cmd/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/mach-zynqmp/Kconfig         | 3 ---
+ configs/xilinx_zynqmp_virt_defconfig | 1 -
+ include/configs/xilinx_zynqmp.h      | 4 ++--
+ 3 files changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 43ca10f69c..ac58000eb3 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -544,6 +544,8 @@ config CMD_SPL_WRITE_SIZE
- config CMD_THOR_DOWNLOAD
- 	bool "thor - TIZEN 'thor' download"
- 	select DFU
-+	select USB_FUNCTION_THOR
-+	depends on USB_GADGET_DOWNLOAD
+diff --git a/arch/arm/mach-zynqmp/Kconfig b/arch/arm/mach-zynqmp/Kconfig
+index fd6f07715a..26b80b7882 100644
+--- a/arch/arm/mach-zynqmp/Kconfig
++++ b/arch/arm/mach-zynqmp/Kconfig
+@@ -84,9 +84,6 @@ config ZYNQMP_SPL_PM_CFG_OBJ_FILE
+ 	  Leave this option empty if your PMU firmware has a hard-coded
+ 	  configuration object or you are loading it by any other means.
+ 
+-config ZYNQMP_USB
+-	bool "Configure ZynqMP USB"
+-
+ config ZYNQMP_NO_DDR
+ 	bool "Disable DDR MMU mapping"
  	help
- 	  Implements the 'thor' download protocol. This is a way of
- 	  downloading a software update over USB from an attached host.
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index acab38fefe..c0e7061524 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -17,7 +17,6 @@ CONFIG_ENV_OFFSET_REDUND=0x1E80000
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
+ CONFIG_CMD_FRU=y
+-CONFIG_ZYNQMP_USB=y
+ CONFIG_SYS_LOAD_ADDR=0x8000000
+ CONFIG_AHCI=y
+ CONFIG_SYS_MEMTEST_START=0x00000000
+diff --git a/include/configs/xilinx_zynqmp.h b/include/configs/xilinx_zynqmp.h
+index 74264b7bee..a8edf13e34 100644
+--- a/include/configs/xilinx_zynqmp.h
++++ b/include/configs/xilinx_zynqmp.h
+@@ -29,7 +29,7 @@
+ 
+ /* Miscellaneous configurable options */
+ 
+-#if defined(CONFIG_ZYNQMP_USB)
++#if defined(CONFIG_USB_STORAGE)
+ #define DFU_DEFAULT_POLL_TIMEOUT	300
+ 
+ # define PARTS_DEFAULT \
+@@ -76,7 +76,7 @@
+ # define BOOT_TARGET_DEVICES_SCSI(func)
+ #endif
+ 
+-#if defined(CONFIG_ZYNQMP_USB)
++#if defined(CONFIG_USB_STORAGE)
+ # define BOOT_TARGET_DEVICES_USB(func)	func(USB, usb, 0) func(USB, usb, 1)
+ #else
+ # define BOOT_TARGET_DEVICES_USB(func)
 -- 
 2.17.1
 
