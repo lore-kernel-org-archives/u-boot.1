@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB11DC83F33
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 12:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB98C83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 13:48:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AC0686989;
-	Tue,  5 Sep 2023 14:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 44D5F86579;
+	Tue,  5 Sep 2023 15:48:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cJ2LPmcv";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gmGjzcD/";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="d52t3ZAZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C11A68698D; Tue,  5 Sep 2023 14:27:17 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E72C68698E; Tue,  5 Sep 2023 15:48:24 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C3AB8656D
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 14:27:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1159686575
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 15:48:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 385CRDjZ116408;
- Tue, 5 Sep 2023 07:27:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693916833;
- bh=Sl3gKEimUJOpGkpjKz0nJ46Sz7Wup8QGfHlDhNUIGkg=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=cJ2LPmcvmxLjCWLGNck8UCEsu1COzQ2hiExvWWXFnlltaxhOnQCOtlAUx06AsFxd4
- GQzWXW4WOqPTzOEeDwjjk0bVz66HI/hSdLEYgv7O7aCjkFonTvClPFm6IctHxMPOfR
- IkblonFs3jgnp5O17fIGMeKcFKvWVtrAFH8FkSdE=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 385CRDe6082998
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Sep 2023 07:27:13 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Sep 2023 07:27:12 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Sep 2023 07:27:12 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 385CRCG9111041;
- Tue, 5 Sep 2023 07:27:12 -0500
-Date: Tue, 5 Sep 2023 07:27:12 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
- <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
- <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-Subject: Re: [PATCH v4 6/6] board: ti: j721s2: MAINTAINERS: Update the
- MAINTAINERS File.
-Message-ID: <20230905122712.q3l3ecsygad4jsry@quality>
-References: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v4-6-dc114bece5d7@ti.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Rg6KK5Kbhz9shG;
+ Tue,  5 Sep 2023 15:48:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693921701;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dfxgFTQeC+LpRRZ1TWB+jEnBPkzQFN58zE07V7NcLJg=;
+ b=gmGjzcD/EaXPJylKHtIkcgs5GojzmLq34SPb1pAejdiTEYMSO05pIS866lkgoneT3XyQ9Q
+ wew4VbPZJPHKn5hUHomDKtzwq1pHe8iPCyISKmOYkHbN0K6Mv0WvOEpcZPhpSiWz2mzMcG
+ ebcmqM7FxL05OCSe75O2S5SjidsSRI7JBRU8+HmkBmj5fCuCBU1GBt3qThWbkQjcUIOFjb
+ GE3758QLg8LENy15pDB/EKXNw/FEWinqJCdLDy6s0bML4eGSoLgnN+o/ZCJuAccSJk1yb0
+ Tw8NkdflorVCpi5NW1wc6nU8Wilr6mAqy1IyQyN4xwfE4yaF228ssTrImleVMQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1693921699;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dfxgFTQeC+LpRRZ1TWB+jEnBPkzQFN58zE07V7NcLJg=;
+ b=d52t3ZAZfhHqIBMm7kUCBPQlNDSIrZspMnJ9PcxabCGKyBwfp1kFt6x4swJ6b4TA+FIQgx
+ LksjFZ7no0u0k1B/PDwkcauuW/Iw6mLpWUvmqk8AavE2cUa+A4BUqaMiDd7j/2SW9c8eBl
+ CrUnnDUU9P6KC+vVwsZMCgSy8SEzle+QXgeKRMONwLpUqT5hAuaadQheJmcFp2hVCVfm4a
+ 1yQXgk4ORaq8rM38pMwvidSuUmsoGvz9OoWFEoX83ic1c5BvJq5wugnvQ+5cbwWWCHVl+e
+ 4tgPlnYOuLLSaBzOgIMK38BdDsYr1Z8YDjH0ljriVBjgE7ZzTj/2PyldX+w3+g==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Chanho Park <chanho61.park@samsung.com>, Leo <ycliang@andestech.com>,
+ Nikita Shubin <n.shubin@yadro.com>,
+ Padmarao Begari <padmarao.begari@microchip.com>,
+ Rick Chen <rick@andestech.com>, Simon Glass <sjg@chromium.org>,
+ Yu Chien Peter Lin <peterlin@andestech.com>
+Subject: [PATCH 1/2] riscv: cpu: Rename EVENT_SPY to EVENT_SPY_SIMPLE
+Date: Tue,  5 Sep 2023 15:48:07 +0200
+Message-Id: <20230905134808.14744-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v4-6-dc114bece5d7@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 3a90d65146817c49131
+X-MBO-RS-META: sfejreqo8gufyg3ibccjybt6rqa3pkr4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,21 +85,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:08-20230904, Manorit Chawdhry wrote:
-> Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
-> to the previous MAINTAINER not being associated with TI.
-> 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
->  board/ti/j721s2/MAINTAINERS | 11 +++++++++--
->  1 file changed, 9 insertions(+), 2 deletions(-)
-> 
+Fix up cpu.c and align it with commit
+6c4cad7438 ("event: Rename EVENT_SPY to EVENT_SPY_FULL")
 
-For whatever it is worth:
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Chanho Park <chanho61.park@samsung.com>
+Cc: Leo <ycliang@andestech.com>
+Cc: Nikita Shubin <n.shubin@yadro.com>
+Cc: Padmarao Begari <padmarao.begari@microchip.com>
+Cc: Rick Chen <rick@andestech.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Yu Chien Peter Lin <peterlin@andestech.com>
+---
+ arch/riscv/cpu/cpu.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
-
+diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
+index d64aa330f20..15beec29875 100644
+--- a/arch/riscv/cpu/cpu.c
++++ b/arch/riscv/cpu/cpu.c
+@@ -66,7 +66,7 @@ static inline bool supports_extension(char ext)
+ #endif /* CONFIG_CPU */
+ }
+ 
+-static int riscv_cpu_probe(void *ctx, struct event *event)
++static int riscv_cpu_probe(void)
+ {
+ #ifdef CONFIG_CPU
+ 	int ret;
+@@ -79,7 +79,7 @@ static int riscv_cpu_probe(void *ctx, struct event *event)
+ 
+ 	return 0;
+ }
+-EVENT_SPY(EVT_DM_POST_INIT_R, riscv_cpu_probe);
++EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_R, riscv_cpu_probe);
+ 
+ /*
+  * This is called on secondary harts just after the IPI is init'd. Currently
+@@ -96,7 +96,7 @@ int riscv_cpu_setup(void)
+ {
+ 	int ret;
+ 
+-	ret = riscv_cpu_probe(ctx, event);
++	ret = riscv_cpu_probe();
+ 	if (ret)
+ 		return ret;
+ 
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.40.1
+
