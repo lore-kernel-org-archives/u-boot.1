@@ -4,69 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F941C83F3E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 13:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D10C83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 13:50:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBEE886596;
-	Tue,  5 Sep 2023 15:49:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 419B4869A4;
+	Tue,  5 Sep 2023 15:50:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uk3Y3qlh";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kb0oAsjC";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ABC98690B; Tue,  5 Sep 2023 15:49:31 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1693921828;
+	bh=biJtdZIQJMMYA/USHg5e+nuze7erRAplCsR2ocfmq8A=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=T9GmycJxSjM2mWLMCXZEeynxWenxLebCk8hJIM2+VyKHHba2VidxnzB/ib07TqpLm
+	 0TA1CJ8Fsj6OIFDNj5/v4y5mVB5t/SrI8mdQJ5on6AkJCgxsu7V5ASn0Qeick9lsdB
+	 MM9rBkIR38ImHUtE0ngygmMYYOoa+0coMkneicSbzSyZSGl5cI1xZnGGCl48pn8SRh
+	 oJolI3KsYQQzya41UyDZkxturw5HuNpeTsb1OogQ7XdEr2EqMOfDNuw1qtpQq/C3bj
+	 mR4J1h9AhAXe5dfmqS7W0fEY4LecaskzQkyeQmoQZ6eHXce4L9dr0rXmq+Lg2eJKUJ
+	 oW1LMiBQ+5p0w==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2948586580
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 15:49:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Rg6Lb6kGKz9ssT;
- Tue,  5 Sep 2023 15:49:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693921767;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=qNHsYt/Yq4wGD+Jr/fn9szNqr96096FmQRe4vEeG3aI=;
- b=uk3Y3qlhm0x8I9coqWAb8zshVZCaCezd79gTTz4VIx3c0XUUaZYAXf2zz3u+kuXTtTeSVS
- 5X2XqreNxrrAOKXR6p4/w3dMTNp9wcxK0FnqMF1ytZK9grqQO+p+6KXRUxOtZUJdaPCHnv
- XTFc3qG4yc7rCM4CSPGfctUM2Hl41otTYCD/P0QJ2xUavTLlByaMa77dU/1zzzDv2ULX3q
- wKr/CdLZH9WCgXS62Ad+KadX4JrteBS5P+/SW8mYvZ0yJJCkrUu++wq5JJAsRE3Qet+QvD
- udQ9ngTf+LKMH1BEnFbV4paLwHNk+5KXW6bVTkTMYmy0AwnhP+BOeTwZAmGb6g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1693921765;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=qNHsYt/Yq4wGD+Jr/fn9szNqr96096FmQRe4vEeG3aI=;
- b=kb0oAsjCWBAceOQRNezbkSdDQRha/9bmlr5TYp5UAMUBeq38WkrQEDyGJYAGN2VOUaX6lh
- rkm6HWbkoc8hVCuh21ZSwy2Oeu1zqhGqN4ec8ahvBeCagkFzloBzd3cMspp+yhyP2QAmxT
- nWRInjc4nE+bkUWmlCf8ibIF5YfU6k5ryNwNSKrlc87Lhggu2rdFm4cvZE8wKMDa/5urjG
- Mw1O/3ckdHQFEbCKxBD+bpXHGo0GocUtKRS/wyP0LQR4II/UMqltze5laUjUkm9tZs9Bkw
- TCxpb6jiEjm9VLEI7KfGAa+U/v1qy03m/3gn4DPAjiubt/Ge2KC0YyKqyP6Hng==
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 84EAF86580;
+ Tue,  5 Sep 2023 15:50:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1693921827;
+ bh=biJtdZIQJMMYA/USHg5e+nuze7erRAplCsR2ocfmq8A=;
+ h=From:To:Cc:Subject:Date:From;
+ b=nmMKBd82GlRinVGl1srZhn538mar9YcBUyfvzZ6V5eM4UPECZiWgopijp9YYRfNDY
+ qJmA/UnDuE+7iUaQ/ko4/nlCNHFoZW+Qt32nG/t/8D4XGzi4Qpw5UZUBdqxH7tkkOD
+ w9e0l7eZdRcZc6/onrOrkZe3PDI7YxWz+l2dxbbJfFg6b7QP8/XjoBxGIfWnCEKlrH
+ LGPvS/L5cmcguBUOshsn4ba4d1smqeFwVkEdnWqPC91l/r2QVwVAhCWvHYGRP1IR6t
+ bMf/6CciapYu64CHOUa3/6Ozu1OPUs30ZyyQIf8mUxxhzhD1Qvxppz1O5r52QHJNdj
+ sI+LUy1xkuuQA==
+From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/next
-Date: Tue,  5 Sep 2023 15:49:15 +0200
-Message-Id: <20230905134915.15105-1-marek.vasut+renesas@mailbox.org>
+Cc: Marek Vasut <marex@denx.de>
+Subject: [PULL] u-boot-usb/next
+Date: Tue,  5 Sep 2023 15:50:11 +0200
+Message-Id: <20230905135011.15535-1-marex@denx.de>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: bjgms6j1rhah8rjubo85jwfg561ihm6a
-X-MBO-RS-ID: d90f3e2f645d48ebdfa
-X-Rspamd-Queue-Id: 4Rg6Lb6kGKz9ssT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,21 +64,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit b53ab97150314674edc25508f4fc528be2baa73f:
+The following changes since commit f2bb6d9ffd9ba0d0d89c00445a70cf81327a7af2:
 
-  event.h: Documented some newly added portions better (2023-09-04 11:19:50 -0400)
+  Merge tag 'doc-next' of https://source.denx.de/u-boot/custodians/u-boot-efi into next (2023-09-02 09:08:34 -0400)
 
 are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git next
+  git://source.denx.de/u-boot-usb.git next
 
-for you to fetch changes up to 733fab7177ea3c0402bab9db07422d5dce495139:
+for you to fetch changes up to adee3ba577a6d5902b5af6c2368faf5f509003c6:
 
-  ARM: rmobile: Clean up rmobile_cpuinfo_idx() (2023-09-05 01:13:35 +0200)
+  usb: host: ohci-generic: Make usage of clock/reset bulk() API (2023-09-04 18:25:20 +0200)
 
 ----------------------------------------------------------------
-Marek Vasut (1):
-      ARM: rmobile: Clean up rmobile_cpuinfo_idx()
+Fabrice Gasnier (2):
+      usb: check for companion controller in uclass
+      usb: host: ohci-generic: Make usage of clock/reset bulk() API
 
- arch/arm/mach-rmobile/cpu_info.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ drivers/usb/host/ohci-generic.c | 92 +++++++++++++----------------------------
+ drivers/usb/host/usb-uclass.c   | 36 ++++++++++++++++
+ 2 files changed, 65 insertions(+), 63 deletions(-)
