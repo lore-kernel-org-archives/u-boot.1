@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D9ACA0FFA
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 18:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D58CA1008
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 20:29:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDE1B869A4;
-	Tue,  5 Sep 2023 20:43:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 620D78658D;
+	Tue,  5 Sep 2023 22:29:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eiQ2iG2i";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="tZmEnPHC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8040281FA8; Tue,  5 Sep 2023 20:43:57 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 0802A8659D; Tue,  5 Sep 2023 22:29:42 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 651598698E
- for <U-Boot@lists.denx.de>; Tue,  5 Sep 2023 20:43:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1E3886568
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 22:29:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-59254e181a2so26903527b3.1
- for <U-Boot@lists.denx.de>; Tue, 05 Sep 2023 11:43:54 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5280ef23593so3851626a12.3
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 13:29:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1693939433; x=1694544233; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I3ym7mwShbxoxKollIXdbSrS0xCLX01rGr1NVV9LM5I=;
- b=eiQ2iG2irB4ITxr6s0laDXRnyLYC9uj6sxCg2N6ro4g4GXlUzm6z7EOoyr9XujQTZm
- 2RArHdP5ZUnu0gQ0meKF1A8RN0sekAafob5unK1HVvE1qzLf6dr4tiWc/pHIT2Es3pGT
- eAmi6vEO3IHG7nzrMqx7ReUhZVg80YAbLECg8=
+ d=google.com; s=20221208; t=1693945778; x=1694550578; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YCG3/nMx9aNvk7mbBSQEZpfSUpdUasP4W/7hmRA1m1c=;
+ b=tZmEnPHC4zrFCGV7oM9LX/sTF/kaqo62BPIyzER7UuifgWugd0bM3VYC+abo3UvYbp
+ mc2e3XuaTloHaptqJhQ79VFbwnsaCFbw8TPsPbRfX/WrqGyOltIyqTRheMGkcBS7GEOA
+ +2PXlHS9TZPUaZBtwS6CaVLOJhOTjYQK6x2107G0V7KrtokGQ0lhK5QDiHNdbaTgMWsI
+ 2Uns9EI4bSbiaGvmAwL9avPmxCqFP7sqfZBVYKAMnCXVNFBN9mXDGb2aZBfg5ETEjo7g
+ m7cozqBoqumXb0NlkUaSYQAQHRG5qgjTTogZ3OjuCZsJo066co1cN/m+RqtvauYse73d
+ MEQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693939433; x=1694544233;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I3ym7mwShbxoxKollIXdbSrS0xCLX01rGr1NVV9LM5I=;
- b=I3Q95WGHar02CwvEp5nyQckvY3Owm2QXAk9NCoA3x5+BZEiM1QIj6c1AjCTlBPPEbC
- 8QrM+gReimFPos4G06yn8caHIMOKC66pNKzf8lwslnIaUaeN2o20OwS8xWB9imAmzwca
- a4bSHmvnds8eG2uPjmdgcrBGY0QAn5R0spaMo7Wp7R6bzJUxBjWp22mkKMSSmd0oM1zb
- iSg2OOoaENyu92DgNTh4WHzNEBvGfqnxqFqfPuoATf0jLFLg/TnT/Zv1CvTHfMSfiu7s
- DtwTSW5FjthDeQDH6YpPEwdNrgFhErJI4izp8rYpNkYAXPhb2PH904q9oNy3/9C3rK/9
- wQyQ==
-X-Gm-Message-State: AOJu0Yy6SFpvCjYEmHjx+am8PJPjEJWXKEQOwlw9l9X/6GjgOrwpRGkj
- DC1PWLrfXDyNf9RTk0ZxP3cJaZAK+tEdxNo3JW9/NA==
-X-Google-Smtp-Source: AGHT+IGTruA2n03TkW7Y1ivmW/i/DB8oKSLG3YGkK6pK0AwrL3HcqFvr+zLqCp30f39Ea/kstMgDDQ==
-X-Received: by 2002:a0d:eb48:0:b0:589:e4aa:7b67 with SMTP id
- u69-20020a0deb48000000b00589e4aa7b67mr15008220ywe.41.1693939433142; 
- Tue, 05 Sep 2023 11:43:53 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-51ef-a95e-1d1c-c7f8.res6.spectrum.com.
- [2603:6081:7b00:6400:51ef:a95e:1d1c:c7f8])
- by smtp.gmail.com with ESMTPSA id
- g127-20020a0ddd85000000b0059b17647dcbsm229724ywe.69.2023.09.05.11.43.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Sep 2023 11:43:52 -0700 (PDT)
-Date: Tue, 5 Sep 2023 14:43:50 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Stefano Babic <sbabic@denx.de>
-Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Subject: Re: Pull request: please pull u-boot-imx-20230905
-Message-ID: <20230905184350.GN3101304@bill-the-cat>
-References: <f0ca845c-890f-9360-7426-41dce4147a7e@denx.de>
+ d=1e100.net; s=20221208; t=1693945778; x=1694550578;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YCG3/nMx9aNvk7mbBSQEZpfSUpdUasP4W/7hmRA1m1c=;
+ b=epEDGbe5BTmj6cMW9yII5zgfoAVU7MHpBMT/b9T3Cbq4SBgHvnJQ/8cLMX2WN2eJ5G
+ PmoXg4JSE0vH4mfmLluv1t2lhK4ALeYqUVa/chRe1p8bEZtAHl4SLDGZrQUWSRrW91v1
+ RMbdDR9bdnHMbwOLx1RBM65IXVk3SKekHGwxw9bcsDHx2eCGhg6mumWoJsVoVbTsUTFy
+ lqHGpRTgPke4n67rKZuaPTX5186i772EVpiTegda+mtio7e69gQahOehKlIwpZY9eHQa
+ Bmcp5K+hA66y7ABLIsPnFoFU141v3KrXfuer5WaW098JyE+AuSTbL/VdUWpe3801ga7I
+ PWTQ==
+X-Gm-Message-State: AOJu0YzmkjQ5lHG+NlziQYp3nYdhlNby/hx76s9zO/6zPFDtkVkO3THi
+ jsD59AzjhrJYKv83qZRc7SiRC2LflIdPEMGRJDSlveW84gFnt4uicbc=
+X-Google-Smtp-Source: AGHT+IECQPDsrUkL2leVHyaS4W0WfDgmbIegMKyi5OlZjaTRRxgt8/xOqVN8bT5OyQ3EFEPMaqYqAf7vYENhG6M/LRo=
+X-Received: by 2002:a05:6402:710:b0:52b:c8d9:1d66 with SMTP id
+ w16-20020a056402071000b0052bc8d91d66mr510480edx.42.1693945778282; Tue, 05 Sep
+ 2023 13:29:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9kw4ybqzWwvwecrM"
-Content-Disposition: inline
-In-Reply-To: <f0ca845c-890f-9360-7426-41dce4147a7e@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CA+9LrUHa5fZpRkgjYjDQft-L32Tzpa=FzOmMnLzM-q8RttqVeQ@mail.gmail.com>
+ <CAPnjgZ33SiNPRdrMXmrwvRrKgi+mp+sJ+OBbu7=yDf19Gydd9Q@mail.gmail.com>
+ <CA+9LrUEGqmsUL9xu0KzwgqhWptWOU1z4x3ncvXMYUJFomSv+ug@mail.gmail.com>
+ <CAPnjgZ3458G_-+Nm-GzCbcVGV4uu7DNzYKd2cNQ=JFYZVS78dA@mail.gmail.com>
+ <CA+9LrUF0ZjeXpG9UC3s0BLssN03wmVG3NRHG3xuXcZ=9vGnmzQ@mail.gmail.com>
+In-Reply-To: <CA+9LrUF0ZjeXpG9UC3s0BLssN03wmVG3NRHG3xuXcZ=9vGnmzQ@mail.gmail.com>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 5 Sep 2023 14:29:23 -0600
+Message-ID: <CAPnjgZ3sgh-b-f3WVu9aWh82A4GA-L7nRuuApas=q4xMVhST9A@mail.gmail.com>
+Subject: Re: NVMe support on RPi CM4 board
+To: Luis Alfredo da Silva <luis.adasilvaf@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,57 +89,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Luis,
 
---9kw4ybqzWwvwecrM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 05, 2023 at 09:56:31AM +0200, Stefano Babic wrote:
+L
+On Tue, Sep 5, 2023, 12:00 Luis Alfredo da Silva <luis.adasilvaf@gmail.com>
+wrote:
 
-> Hi Tom,
->=20
-> some fixes for the release, please pull from u-boot-imx, thanks !
->=20
-> The following changes since commit 8999257f219d1e371c2fd66f255b8782897944=
-d9:
->=20
->   Merge tag 'doc-2023-10-rc4-2' of
-> https://source.denx.de/u-boot/custodians/u-boot-efi (2023-09-02 09:08:54
-> -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git
-> tags/u-boot-imx-20230905
->=20
-> for you to fetch changes up to a79fca7b44d0dee96e14d31de5869b35b587283c:
->=20
->   thermal: imx_tmu: Increase the polling interval (2023-09-04 17:26:44
-> +0200)
->=20
+> Hi Simon, it took me some time to come back to this issue, but I was able
+> to enable the debug messages on drivers/nvme/nvme.c.
+>
+> This is what I got when running the nvme scan command
+>
+> U-Boot> pci
+> BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+> _____________________________________________________________
+> 00.00.00   0x14e4     0x2711     Bridge device           0x04
+> 01.00.00   0x1c5c     0x174a     Mass storage controller 0x08
+> U-Boot> nvme info
+> U-Boot> nvme scan
+> Cannot set queue count (err=3D-110)
+> Unable to setup I/O queues(err=3D-110)
+> Failed to probe 'nvme#0': err=3D-110
+> U-Boot>
+>
+> I'm reporting as soon as I got the messages, but I'll continue
+> investigating.
+>
 
-Applied to u-boot/master, thanks!
+Can you check if the device has PCI bus master enabled?
 
---=20
-Tom
+Regards,
+Simon
 
---9kw4ybqzWwvwecrM
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT3duYACgkQFHw5/5Y0
-tyzWigv/dtLY9hBJ9wi2qTAIw871NQYWwfWzVLiZzndGmSG+fDPPcg0kdUIycupl
-yCWxY3bZdcZLbZXq6uBmo5lkNqsAJH+ImoK7RcRvR7m55NeSlzKZj2OPtMdw3JMt
-fe5ojlG6D+EKDKXLR5TLaiasMS+3c1xsQmtjjLc8hIscOFFXfec5o6/N9DQ1vrUW
-5iZZGUSVYiTzGviAsa+UXaKpYSpJEmmATvcNkpwup2BPwEB0CBSjU5WyRrYdSSAO
-LalL7jbd0D9yjDr8Bv9+CJCw8d/9U8gPWeN62jxKzG5L21q2LDm63RMx+IoZhQqM
-G0b1ElbfP0S7r/zNR8J8CfN+gG0Qs9VvhO3h8di8pPmMDld2pTcm6KmNilrkqQy9
-jzBldO/PxXNYWR3KGeGNbCBJ1wI5GKaejy2DFLu6G71TN1BvlLQOoqf+T3wcY/uZ
-Evu2/MFuGUZH/G3EIOwP8CUw+lwGf5qeHn/8KpazSPBDqrEfaU5r/PgGYF4sclNd
-h2F2abZ0
-=9vMW
------END PGP SIGNATURE-----
-
---9kw4ybqzWwvwecrM--
+> Regards,
+> Luis
+>
+>
+> El mi=C3=A9, 9 ago 2023 a las 20:15, Simon Glass (<sjg@google.com>) escri=
+bi=C3=B3:
+>
+>> Hi Luis,
+>>
+>> On Wed, 9 Aug 2023 at 10:43, Luis Alfredo da Silva
+>> <luis.adasilvaf@gmail.com> wrote:
+>> >
+>> > Hi Simon, I enabled the next four variables
+>> >
+>> > CONFIG_NVME_PCI=3Dy
+>> > CONFIG_NVME=3Dy
+>> > CONFIG_CMD_NVME=3Dy
+>> > CONFIG_PCI=3Dy
+>> >
+>> > how different is CONFIG_NVME_PCI from NVME_PCI, I took the latter valu=
+e
+>> from several configs files in u-boot repo and from [1]
+>>
+>> I just left off the CONFIG as they all have that. This looks right to
+>> me. Assuming that the NVMe controller appears in 'dm tree' perhaps you
+>> can enable debugging in the driver and see why it is not working?
+>>
+>> Regards,
+>> Simon
+>>
+>>
+>> >
+>> >
+>> > [1]
+>> https://github.com/u-boot/u-boot/blob/ef8336e2705fce2502383f25d68188c6b1=
+f94dd0/doc/develop/driver-model/nvme.rst#L44
+>> >
+>> > El mar, 8 ago 2023 a las 22:05, Simon Glass (<sjg@google.com>)
+>> escribi=C3=B3:
+>> >>
+>> >> Hi Luis,
+>> >>
+>> >> On Tue, 8 Aug 2023 at 17:09, Luis Alfredo da Silva
+>> >> <luis.adasilvaf@gmail.com> wrote:
+>> >> >
+>> >> > I compiled u-boot version 2023-07 and boot it on a RPi CM4 using a
+>> PCIe M.2
+>> >> > NVMe drive, but it doesn't appear to be working.
+>> >> >
+>> >> > Once u-boot has started and boot successfully it recognizes the PCI=
+e
+>> device
+>> >> > giving me the next output
+>> >> >
+>> >> > U-Boot> pci
+>> >> > BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+>> >> > _____________________________________________________________
+>> >> > 00.00.00   0x14e4     0x2711     Bridge device           0x04
+>> >> > 01.00.00   0x1c5c     0x174a     Mass storage controller 0x08
+>> >> >
+>> >> > but when trying to use the nvme scan and nvme info there is not
+>> output.
+>> >> >
+>> >> > NVMe drive has two partitions 1st is a FAT partition, and 2nd is a
+>> EXT4
+>> >> > partition, the RPi firmware recognizes the FAT partition and u-boot
+>> boot
+>> >> > correctly.
+>> >> >
+>> >> > I don't know if this worked before, but I saw in the mailing list
+>> that
+>> >> > there could be already support for other ARM64 boards.
+>> >>
+>> >> Is NVME_PCI enabled?
+>> >>
+>> >> Regards,
+>> >> SImon
+>>
+>
