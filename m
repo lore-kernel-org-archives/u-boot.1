@@ -4,60 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F12C83F3E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 07:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7B6C83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 07:56:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2191786925;
-	Tue,  5 Sep 2023 09:39:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6103086611;
+	Tue,  5 Sep 2023 09:56:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693899559;
-	bh=Mp09YqFcPgYK1b++/oUh0S8JVLsmrgbUOToo1ktyb4g=;
-	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:From;
-	b=ZacilkSfZ0I1uEkMKn931hpAUuFpYfdxRUEVkyF9SVYKHMZoROH/LE7lDKBqxSUxk
-	 wU6cxnb+JFjYddMbBtKcSh3i7YbDCuTYKdk4NcqBC/bH4tP4DrY4qvXkHXPnlfurXy
-	 I4mOeWBOjywtbI/d25ug9OYacn1DYSPpEc2sAQuaSj7YjVjO7fxqsq3qH+MfWTcCCg
-	 8ljShCXme6TBPZWmuIbswTt748D1PyWVhYTUIEcpUlR+D7+4YzWa1ThxoreKuawtnU
-	 g11iOiPxjDe6mx67Xj1sIkikY2Q/jQ1mpwLH1iFYuGG/34QdM0QFP6MGIJ0Dy1G/nK
-	 dm+m0GqeT/s/g==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4485886925; Tue,  5 Sep 2023 09:39:18 +0200 (CEST)
-Received: from mail-out.m-online.net (mail-out.m-online.net
- [IPv6:2001:a60:0:28:0:1:25:1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	s=phobos-20191101; t=1693900593;
+	bh=XB9IdtmGc4UvcoQKW+IsBDD4w77RqYvaPWK1BbFGBdk=;
+	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=V0YN+gqJW52G3b2i4f/OqelQftYPj5WXL5nPN3NBYAacGx0vP3DnxbEXYcZYcA7fT
+	 H4ZTohiGvvHas5M1poMMG7cUzBuYx1ZDg5Q5e6TFBmmtOydTT4Qkw9s1C4pb12k24S
+	 xkH23dexHD2tniiHg2RzjiisgwNF4YLs3TP/0CwYgfEexwwdG/4MqtYSq1DTEbMG4P
+	 hxBYjx8SnGNPwstIz6LJhIOVKC8XVPiDfkTt7HQtmCvNT+ucortteq5tr9PvtPNGcX
+	 aLSDvmypl/IpV3IRcozZGbex4qvlI1zVWszMPYOuLXVr+bSxIhnPW8o3XAfOK48KlB
+	 j74L9LyUp5sdg==
+Received: from [IPV6:2001:a61:6041:6101:8b79:a919:5b01:e026] (unknown
+ [IPv6:2001:a61:6041:6101:8b79:a919:5b01:e026])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C914586569
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 09:39:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4Rfy7R4Gwgz1sBpn;
- Tue,  5 Sep 2023 09:39:15 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4Rfy7R48gJz1qqlY;
- Tue,  5 Sep 2023 09:39:15 +0200 (CEST)
-X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id m4lzkpMGDOJ4; Tue,  5 Sep 2023 09:39:14 +0200 (CEST)
-Received: from papero (host-88-217-136-221.customer.m-online.net
- [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Tue,  5 Sep 2023 09:39:14 +0200 (CEST)
-From: sbabic@denx.de
-X-Patchwork-Submitter: Fabio Estevam <festevam@gmail.com>
-X-Patchwork-Id: 1824873
-X-Patchwork-Delegate: sbabic@denx.de
-To: Fabio Estevam <festevam@gmail.com>,u-boot@lists.denx.de
-Subject: [PATCH v2 1/5] imx8mm_evk_defconfig: Select CONFIG_IMX_TMU
-In-reply-to: <20230823175911.319414-1-festevam@gmail.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+ (Authenticated sender: sbabic@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3264D86569;
+ Tue,  5 Sep 2023 09:56:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1693900592;
+ bh=XB9IdtmGc4UvcoQKW+IsBDD4w77RqYvaPWK1BbFGBdk=;
+ h=Date:To:Cc:From:Subject:From;
+ b=YMNjEJ9hToWv3+cetlNLjKQrWsHwDogqB3gaoiO3yC4DqSAMPa7qvubZP7Yq3/wiD
+ Xl6EBVyIDWntufgHIrsuf+2Unk62EUk/JN6aKOBnfv4ESMYcKfherZ9Xb9JUWByxxP
+ ufhy8j7U0ZgoXLklgZTpd2VynVd+8+BmjoIwM0ts5J0LU6gCVDZvMcStVRlWtL+3QL
+ PpAr8LZ3cRDHggJ80Va0Hru/5lhZxZAHoYBtXQUJFtXuQ63rYmckHN2vdjP6Gn/T5V
+ qeylgvayczgijmrdp7WOS3HQYLdbEBPLXRcG2V5/D1+bhIpAdyP4W2lA3Vyn9hDF9Z
+ +aNS/wOoi4loA==
+Message-ID: <f0ca845c-890f-9360-7426-41dce4147a7e@denx.de>
+Date: Tue, 5 Sep 2023 09:56:31 +0200
 MIME-Version: 1.0
-Message-Id: <20230905073918.4485886925@phobos.denx.de>
-Date: Tue,  5 Sep 2023 09:39:15 +0200 (CEST)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+To: Tom Rini <trini@konsulko.com>
+Content-Language: de-DE
+Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
+From: Stefano Babic <sbabic@denx.de>
+Subject: Pull request: please pull u-boot-imx-20230905
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,21 +67,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Fabio Estevam <festevam@denx.de>
-> Select the i.MX8MM thermal driver as it is useful for displaying
-> the CPU temperature and its grading:
-> CPU:   Commercial temperature grade (0C to 95C) at 38C
-> It also prevents booting when the temperature is above the alert
-> point.
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-Applied to u-boot-imx, master, thanks !
+Hi Tom,
+
+some fixes for the release, please pull from u-boot-imx, thanks !
+
+The following changes since commit 8999257f219d1e371c2fd66f255b8782897944d9:
+
+   Merge tag 'doc-2023-10-rc4-2' of 
+https://source.denx.de/u-boot/custodians/u-boot-efi (2023-09-02 09:08:54 
+-0400)
+
+are available in the Git repository at:
+
+   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git 
+tags/u-boot-imx-20230905
+
+for you to fetch changes up to a79fca7b44d0dee96e14d31de5869b35b587283c:
+
+   thermal: imx_tmu: Increase the polling interval (2023-09-04 17:26:44 
++0200)
+
+----------------------------------------------------------------
+Fixes for release
+-----------------
+
+- imx9: fix DRAM calculation
+- thermal: fixes
+- fixed for DM, DH and Gateworks boards
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/17639
+
+----------------------------------------------------------------
+Elena Popa (1):
+       arm: imx: imx8m: imx9: Fix DRAM size calculation due to rom_pointer
+
+Fabio Estevam (5):
+       imx8mm_evk_defconfig: Select CONFIG_IMX_TMU
+       thermal: imx_tmu: Fix the polling default
+       thermal: imx_tmu: Increase the log level for high temperatures
+       thermal: imx_tmu: Fix the temperature unit
+       thermal: imx_tmu: Increase the polling interval
+
+Marek Vasut (5):
+       ARM: imx: Drop CONFIG_USE_BOOTCOMMAND=n on i.MX6 DHSOM
+       ARM: imx: Select 2 DRAM banks on Data Modul i.MX8M Mini eDM SBC
+       ARM: imx: Use default SAVED_DRAM_TIMING_BASE on DH i.MX8M Plus DHCOM
+       ARM: imx: Use default SAVED_DRAM_TIMING_BASE on Data Modul i.MX8M 
+Mini eDM SBC
+       ARM: imx: Use default SAVED_DRAM_TIMING_BASE on Data Modul i.MX8M 
+Plus eDM SBC
+
+Tim Harvey (1):
+       board: gateworks: venice: fix gw7904
+
+  arch/arm/mach-imx/imx8m/soc.c               |  7 ++++---
+  arch/arm/mach-imx/imx9/soc.c                |  6 +++---
+  configs/dh_imx6_defconfig                   |  1 -
+  configs/imx8mm_data_modul_edm_sbc_defconfig |  3 +--
+  configs/imx8mm_evk_defconfig                |  1 +
+  configs/imx8mm_venice_defconfig             |  2 +-
+  configs/imx8mp_data_modul_edm_sbc_defconfig |  1 -
+  configs/imx8mp_dhcom_pdk2_defconfig         |  1 -
+  configs/imx8mp_dhcom_pdk3_defconfig         |  1 -
+  drivers/thermal/imx_tmu.c                   | 10 +++++++---
+  10 files changed, 17 insertions(+), 16 deletions(-)
 
 Best regards,
-Stefano Babic
+Stefano
 
 -- 
 =====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter  
+DENX Software Engineering GmbH,        Managing Director: Erika Unter
 HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
 Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
 =====================================================================
