@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E73AC83F3E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 07:39:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA82C83F2C
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 07:39:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D88E86940;
-	Tue,  5 Sep 2023 09:39:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EC0086932;
+	Tue,  5 Sep 2023 09:39:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693899547;
-	bh=Q7Ug98pKRdZr2OkfgjUrQWUdTB69YB/YtOoqsKEZPzo=;
+	s=phobos-20191101; t=1693899551;
+	bh=a+CUZKg4aE+bZzAlIMzP4p5LeLxhcmzGw2JqUkThMgA=;
 	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:From;
-	b=z9oIhn/l35gzvF9idtGpdHwBJC6a+IwNyAAggRDxHe+7nh/nnRNKQ/BuN8ybwv1Fo
-	 1VTUeelGFvEsQMjuYJSovreoSK58Sj3uM0RVZk/Yn1d4nPqOj9uOq4r01h4cAreGYh
-	 2MODuIrf8jha7QTMAdAeACx2I4OUevJI/sQoHymWMc3sknSa3L2xdu6DAs4oDUEyX1
-	 QKivCV7sNKTirtDf4qwJ0WyP75ZmhZqLNT9kQPMyAApIhADFV8cWjSlJe+dCwIiLgJ
-	 JkAHyp/kkF9K1dWqqGqAlSvBHXboKYIfTnodlVNRyL95Kppwo0mZu5XJcDtqnQaZXD
-	 eGUdwHduU6lxQ==
+	b=qXow0AKMixVzkHI5tBxislAckg/XPH4WZ9zDGxvqKVMbf0nxh8aQiFZPALKwpj4FR
+	 yzXGr1qZRRUgKsxBXmEYyPu2R0jfqJLXZehxzgSQ5OHKHaXcQwOm3Dfx3jOjwl6zAu
+	 flZZ+xxmMUJz/WuxJj/sdZ9DPxD1+b2uCn4+2IOIHjoJO18FDDbqsor0Y8Vkum0WpG
+	 xwtbD2YZiI6Gn6qa3s1GffVqTzavRISplr4Wv89X2i1YK5CaMMcDavzL0M5EWE0dXb
+	 uqpC+TcBlSEL3ywlV2eGh+msCfXxmewP3ILC22BOwy9dz8dY/XCPjYcDYJGOilKbnf
+	 +lGB0inZBM7uQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B00F286940; Tue,  5 Sep 2023 09:39:06 +0200 (CEST)
-Received: from mail-out.m-online.net (mail-out.m-online.net
- [IPv6:2001:a60:0:28:0:1:25:1])
+ id 7FB9D86569; Tue,  5 Sep 2023 09:39:10 +0200 (CEST)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41A418691E
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 09:39:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 138CD86960
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 09:39:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4Rfy7D0FRwz1sBpv;
- Tue,  5 Sep 2023 09:39:04 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4Rfy7H6Mg2z1r1gZ;
+ Tue,  5 Sep 2023 09:39:07 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4Rfy7D050nz1qqlS;
- Tue,  5 Sep 2023 09:39:04 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4Rfy7H64l6z1qqlS;
+ Tue,  5 Sep 2023 09:39:07 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id CUf0IV04hJNf; Tue,  5 Sep 2023 09:39:03 +0200 (CEST)
+ with ESMTP id 8ae7taK5Zqy0; Tue,  5 Sep 2023 09:39:07 +0200 (CEST)
 Received: from papero (host-88-217-136-221.customer.m-online.net
  [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Tue,  5 Sep 2023 09:39:03 +0200 (CEST)
+ Tue,  5 Sep 2023 09:39:07 +0200 (CEST)
 From: sbabic@denx.de
 X-Patchwork-Submitter: Fabio Estevam <festevam@gmail.com>
-X-Patchwork-Id: 1824876
+X-Patchwork-Id: 1824877
 X-Patchwork-Delegate: sbabic@denx.de
 To: Fabio Estevam <festevam@gmail.com>,u-boot@lists.denx.de
-Subject: [PATCH v2 4/5] thermal: imx_tmu: Fix the temperature unit
-In-reply-to: <20230823175911.319414-4-festevam@gmail.com>
+Subject: [PATCH v2 5/5] thermal: imx_tmu: Increase the polling interval
+In-reply-to: <20230823175911.319414-5-festevam@gmail.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Message-Id: <20230905073906.B00F286940@phobos.denx.de>
-Date: Tue,  5 Sep 2023 09:39:04 +0200 (CEST)
+Message-Id: <20230905073910.7FB9D86569@phobos.denx.de>
+Date: Tue,  5 Sep 2023 09:39:08 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,9 +74,12 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 > From: Fabio Estevam <festevam@denx.de>
-> The temperature unit is millidegree Celsius, so divide by 1000 to correctly
-> print the temperature values in Celsius.
-> While at it, also change a typo: "has beyond" to "is beyond".
+> Polling every second to check whether the CPU has cooled down is
+> too frequent.
+> Allow more time for the CPU to cool down by increasing the polling
+> interval to 5 seconds by defaut.
+> This value is used in the absence of the 'polling-delay' devicetree
+> property.
 > Signed-off-by: Fabio Estevam <festevam@denx.de>
 Applied to u-boot-imx, master, thanks !
 
