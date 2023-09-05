@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3840C83F3E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 06:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46590C83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 07:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94B918653E;
-	Tue,  5 Sep 2023 08:46:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1E23C86637;
+	Tue,  5 Sep 2023 09:13:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kjeIM443";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jux6s3fA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 104288654B; Tue,  5 Sep 2023 08:46:16 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6CFE086879; Tue,  5 Sep 2023 09:13:26 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76323863C3
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 08:46:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 807C0864DD
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 09:13:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1693896356; x=1694501156; i=xypron.glpk@gmx.de;
- bh=48y3Dc97K1dEStYlY6It6NSIVyih5ZsVXEkrVjCPfpA=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=kjeIM443Ae7o/GL3RXbfJ/hrVlg7i4j/W9tJ78h4A0qImw2Ptds4eTNwQLBZTtFwSklHeWD
- QryiaaIyBvWa2j6BFgeyY3GoK0CeOLXTP2WIp2ls/7xqtswboE+L3+Aol1X37LSFBOIGW6r/0
- NdmWQrvdRW/F7AGs/6ztxQZ4LaNbgv+PMmw+XW9uNgX1XxOi2/8UM2Sufuul84LvttGNQ/HSW
- qOO4qqAehy9EqO0BV9Lp0KrD2shLxpDDufSbH6lqF/z1H2tlwqaEvlyX5hj4kiWWRv3QqmOTs
- gfMoC+jUsehhC+VACiqzk2aVCiv3QbCPsK4pp+CqGZEi76PBzNgA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mk0JW-1pxVQC0BAG-00kQm3; Tue, 05
- Sep 2023 08:45:56 +0200
-Message-ID: <510eb72f-cdce-4546-afe1-febe61b9ef27@gmx.de>
-Date: Tue, 5 Sep 2023 08:46:50 +0200
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6bd8639e7e5so1652407a34.1
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 00:13:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693898002; x=1694502802; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vtBzyDnTBXGXVlzn09aq746Yl4tDGmEa9Iuxe/r/M08=;
+ b=Jux6s3fA74fW+kRwxyK6neXTc/aDhp21W5FcdbDerBUaxcLP8mbivSKYyoNjGGN2bH
+ h1Ii+FzrbJt+7AgLLhFD5vvwfA3mmpaVhP+au13BiuSZ/9XpGZQ/INt0JeDHe7d3ZmcF
+ SDMfNzwNwkgaZ5IIXySRLs+9GqsK4DnGyuhfld2xMU5XXHnLJdeGIvE9/z2rpXg1wXYU
+ Gn97p0w+/9D/MJ78E5D7dKHxHrI3yKWcZ+tx707YSBSIr6C/nASNnDRMZGpzZFAhL6Lw
+ 85F9/evB3mgJX/R62i42FSyDJvHEw2ZFr4n0rH/BzS5rNxbZH1fUlA6hEHH17/oUG+YM
+ 2uAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693898002; x=1694502802;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vtBzyDnTBXGXVlzn09aq746Yl4tDGmEa9Iuxe/r/M08=;
+ b=RNXodle+W0Cu+240dlX0H07nqYL1VPx/cI9QfbAhraHyV7bpIPV8vV0Esscz7m/4GG
+ pNtuEovvsqn4aAwF+HtpH9S+kvUW9D6/kdHtUiD4udvM9YmDjG1FEtYouaUbsQ7SJHT4
+ cdih1obPS2qa9f2FEhi5gW7PZ1mlbuNOeaFTVjEhovMMT+dL6G4IZTRnS+gTIOQo7+4e
+ WfZ+CKLYRBcU7Y3xBnlRwXAcP6MXee4B3tRsGIhkmsVshrjkbQ64/Z9BGW0rNDvECoV7
+ hDbv8DyXk5oMzbxUaqebyIm/A+BW2RYNTOQuwH8NfV1ILPtl+Fyeakyt8bNqgVV6b7Ck
+ cidQ==
+X-Gm-Message-State: AOJu0YyTEBweTHT6eHjxR4dPgj0eOYIABJJuxdBTJcH33hbuUR1c1lcE
+ 5k2ugG45lXyddT+LhfPyUtS5osFIrOjKn7QiQrSbVQ==
+X-Google-Smtp-Source: AGHT+IGV+pv/Gs70R7Hw5tjs0rkF81/3qvnZ7xLWbLhR+yFSNG98fZ5KMsCxe3+3Ut6jdoIX4pUc0y7Frswn96qVZcI=
+X-Received: by 2002:a05:6358:9184:b0:133:e286:9259 with SMTP id
+ j4-20020a056358918400b00133e2869259mr12784271rwa.17.1693898002014; Tue, 05
+ Sep 2023 00:13:22 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] doc: board: starfive: Add more info about
- supported driver
-Content-Language: en-US, de-DE
-To: Shengyu Qu <wiagn233@outlook.com>
-Cc: mps@arvanta.net, chanho61.park@samsung.com, ycliang@andestech.com,
- yanhong.wang@starfivetech.com, u-boot@lists.denx.de
-References: <20230822143357.2818-1-wiagn233@outlook.com>
- <TY3P286MB26115DF6D963C38835BCBE30981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <TY3P286MB26115DF6D963C38835BCBE30981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:fA1TAkz4LxJKe0ziKspR65JR0R7CWbUY/0t9ebp5srUR5K96rc6
- X3Feqj4SMHEAKVKlx/sTrCcMxU8rh6tk3q1kXBjdHO77SIsGSHm0Pen0ZwmzSWP3HrhEhJZ
- NyfP/B+l3jR0jiEhiOwwQOAwHtEX2B4DQMKglTyrxCIcDqJ3Mg2Ejb6Jv+0fQEx2E8Tm8oZ
- E7gq1fp2BQto2F3DR0LlA==
-UI-OutboundReport: notjunk:1;M01:P0:n+8irQijkkk=;gZVW/yCi7fHo4tqPAYqS9/hs0+3
- Xg4X+3z8/+fcaw9lmAyZhdwrGQxg7JSysdfVEJgl3+hszi17tEJQiFt+DQzESEmiQgTFWw0/4
- mTy8k35DF5PoYdsjchvw55oBb5PFlZF4yBpFaq1SXFIa7ldb74PN+P8e4qdidXYXfiP2FBIRQ
- 6hO644jr1QlpoI263livACEguJAvHI7fMdUC+ocZ1D3sFeBNvJZOOsSQ6ets9fe77vv5bKgxY
- 4IxZMNBpSj+bUx1ikK4W8h0riynF1tKZRcMDGjkK9LziFovg68KVIMKUltd9/YUQuxjkabzYB
- nJdlv+Gkdz1OqV9iUjrcL/gxg9+thSY5hlNrrfKvnzCdZ+RCSyV8murqGLr2Q9Ihqbdky4uQw
- LtI1n57llJjk1m+eiZ5KMKziwx/0av/ZBI71CG0jG14zs9yU6boCWISxDPXfaYOKdQJVKqVig
- 3LggGFnHNuMdDMBvyGO7LbGcBiecM61flqfhARSIOEf0UBL1X4NcuGVkIsNJZ42ftZ19L2lQZ
- IVKCxg497p3rfE2jyfKyAAti2PYjIzcquvhmFNoxV5uOhoGC75jpwXsXJIcE3tcB4MDjn510K
- ZDkhyht/5S4ykJbKv/KSFXjulQDIMF7hxyvykUwmA0Z5eTmbKaEXkwFTxjBfQAOfFLB37KZfI
- ln+dNSqVny/HAYgEWvwF7z468bb1fhDhgpqCUQ8aguHb0fyLpxlSmpe4uN7vE7yYzFSREgd96
- DiiA8TOKfxxlfV9tfIbYl7l86YQYV97L5noqStvKcVBXQa1fzRVoqj0+gWOyb8qi+6snWxFVF
- t4niOitNwLyIe8zXIT4347MSu/305109QWNha02IlGyaRq/s4OFJa1+xvwMcMJEi7dx0BLqjN
- n1XHTx9SM8amcjyOvYVCMQ/6QSjE4vbtRYgpBlnru6uL+FVv5a/veH2BLZj1U0IpcszE3RHOh
- C8g5miU3vkYojVOKnBMLUuvGJ2M=
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-2-masahisa.kojima@linaro.org>
+ <CAPnjgZ22G-F1_VfFPge6hDOQC9eOgRdZ2U-NftrYx=XsJ-opsA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ22G-F1_VfFPge6hDOQC9eOgRdZ2U-NftrYx=XsJ-opsA@mail.gmail.com>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Tue, 5 Sep 2023 16:13:10 +0900
+Message-ID: <CADQ0-X-aoFupCo2LOhsSSz6zcfcx3EUSXkmxEbWj9aX5Jt_q0w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] net: wget: prevent overwriting reserved memory
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,37 +89,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/22/23 16:33, Shengyu Qu wrote:
-> Since PLDA PCIE driver is added and VL805 support is enabled in
-> defconfig for Starfive Visionfive 2, modify the document to keep
-> consistent.
+Hi Simon,
+
+On Sat, 2 Sept 2023 at 09:09, Simon Glass <sjg@chromium.org> wrote:
 >
-> Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
-> ---
->   doc/board/starfive/visionfive2.rst | 2 ++
->   1 file changed, 2 insertions(+)
+> Hi Masahisa,
 >
-> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/vis=
-ionfive2.rst
-> index 941899a0a4..460f23aec3 100644
-> --- a/doc/board/starfive/visionfive2.rst
-> +++ b/doc/board/starfive/visionfive2.rst
-> @@ -20,6 +20,8 @@ The support for following drivers are already enabled:
-
-Nits:
-
-Support for the following drivers is already enabled:
-
-Best regards
-
-Heinrich
-
->   3. StarFive JH7110 reset Driver.
->   4. Cadence QSPI controller Driver.
->   5. MMC SPI Driver for MMC/SD support.
-> +6. PLDA PCIE controller driver.
-> +7. On-board VL805 PCIE-USB controller driver.
+> On Fri, 1 Sept 2023 at 04:26, Masahisa Kojima
+> <masahisa.kojima@linaro.org> wrote:
+> >
+> > This introduces the valid range check to store the received
+> > blocks using lmb. The same logic is implemented in tftp.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >  net/wget.c | 76 +++++++++++++++++++++++++++++++++++++++++++++++++-----
+> >  1 file changed, 69 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/net/wget.c b/net/wget.c
+> > index 2dbfeb1a1d..8bf4db4d04 100644
+> > --- a/net/wget.c
+> > +++ b/net/wget.c
+> > @@ -4,16 +4,20 @@
+> >   * Copyright Duncan Hare <dh@synoia.com> 2017
+> >   */
+> >
+> > +#include <asm/global_data.h>
+> >  #include <command.h>
+> >  #include <common.h>
+> >  #include <display_options.h>
+> >  #include <env.h>
+> >  #include <image.h>
+> > +#include <lmb.h>
+> >  #include <mapmem.h>
+> >  #include <net.h>
+> >  #include <net/tcp.h>
+> >  #include <net/wget.h>
+> >
+> > +DECLARE_GLOBAL_DATA_PTR;
+> > +
+> >  static const char bootfile1[] = "GET ";
+> >  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+> >  static const char http_eom[] = "\r\n\r\n";
+> > @@ -55,6 +59,32 @@ static unsigned int retry_tcp_ack_num;       /* TCP retry acknowledge number*/
+> >  static unsigned int retry_tcp_seq_num; /* TCP retry sequence number */
+> >  static int retry_len;                  /* TCP retry length */
+> >
+> > +#ifdef CONFIG_LMB
+> > +static ulong wget_load_size;
+> > +#endif
+> > +
+> > +/**
+> > + * wget_init_max_size() - initialize maximum load size
+> > + *
+> > + * Return:     0 if success, -1 if fails
+> > + */
+> > +static int wget_init_load_size(void)
+> > +{
+> > +#ifdef CONFIG_LMB
 >
->   Booting from MMC using U-Boot SPL
->   ---------------------------------
+> please can you use if IS_ENABLED() throughout?
+OK.
 
+>
+> > +       struct lmb lmb;
+> > +       phys_size_t max_size;
+> > +
+> > +       lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
+> > +
+> > +       max_size = lmb_get_free_size(&lmb, image_load_addr);
+> > +       if (!max_size)
+> > +               return -1;
+> > +
+> > +       wget_load_size = max_size;
+> > +#endif
+> > +       return 0;
+> > +}
+> > +
+> >  /**
+> >   * store_block() - store block in memory
+> >   * @src: source of data
+> > @@ -63,10 +93,24 @@ static int retry_len;                       /* TCP retry length */
+> >   */
+> >  static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+> >  {
+> > +       ulong store_addr = image_load_addr + offset;
+> >         ulong newsize = offset + len;
+> >         uchar *ptr;
+> >
+> > -       ptr = map_sysmem(image_load_addr + offset, len);
+> > +#ifdef CONFIG_LMB
+> > +       ulong end_addr = image_load_addr + wget_load_size;
+> > +
+> > +       if (!end_addr)
+> > +               end_addr = ULONG_MAX;
+> > +
+> > +       if (store_addr < image_load_addr ||
+> > +               store_addr + len > end_addr) {
+> > +               puts("\nwget error: ");
+> > +               puts("trying to overwrite reserved memory...\n");
+> > +               return -1;
+> > +       }
+> > +#endif
+> > +       ptr = map_sysmem(store_addr, len);
+> >         memcpy(ptr, src, len);
+> >         unmap_sysmem(ptr);
+> >
+> > @@ -240,25 +284,37 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+> >
+> >                         net_boot_file_size = 0;
+> >
+> > -                       if (len > hlen)
+> > -                               store_block(pkt + hlen, 0, len - hlen);
+> > +                       if (len > hlen) {
+> > +                               if (store_block(pkt + hlen, 0, len - hlen) != 0) {
+> > +                                       wget_loop_state = NETLOOP_FAIL;
+> > +                                       wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
+> > +                                       return;
+> > +                               }
+> > +                       }
+> >
+> >                         debug_cond(DEBUG_WGET,
+> >                                    "wget: Connected Pkt %p hlen %x\n",
+> >                                    pkt, hlen);
+> >
+> >                         for (i = 0; i < pkt_q_idx; i++) {
+> > +                               int err;
+> > +
+> >                                 ptr1 = map_sysmem(
+> >                                         (phys_addr_t)(pkt_q[i].pkt),
+> >                                         pkt_q[i].len);
+> > -                               store_block(ptr1,
+> > -                                           pkt_q[i].tcp_seq_num -
+> > -                                           initial_data_seq_num,
+> > -                                           pkt_q[i].len);
+> > +                               err = store_block(ptr1,
+> > +                                                 pkt_q[i].tcp_seq_num -
+> > +                                                 initial_data_seq_num,
+> > +                                                 pkt_q[i].len);
+> >                                 unmap_sysmem(ptr1);
+> >                                 debug_cond(DEBUG_WGET,
+> >                                            "wget: Connctd pkt Q %p len %x\n",
+> >                                            pkt_q[i].pkt, pkt_q[i].len);
+> > +                               if (err) {
+> > +                                       wget_loop_state = NETLOOP_FAIL;
+> > +                                       wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
+> > +                                       return;
+> > +                               }
+> >                         }
+> >                 }
+> >         }
+> > @@ -420,6 +476,12 @@ void wget_start(void)
+> >         debug_cond(DEBUG_WGET,
+> >                    "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+> >
+> > +       if (wget_init_load_size()) {
+> > +               puts("\nwget error: ");
+> > +               puts("trying to overwrite reserved memory...\n");
+>
+> I think it is OK to use printf() here.
+OK.
+
+>
+> > +               return;
+>
+> Needs to return the error code
+
+I will modify it to notify the caller of the  error by calling
+"net_set_state(NETLOOP_FAIL);"
+instead of returning the error code.
+
+Thanks,
+Masahisa Kojima
+
+>
+> > +       }
+> > +
+> >         net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+> >         tcp_set_tcp_handler(wget_handler);
+> >
+> > --
+> > 2.34.1
+> >
+>
+> Regards,
+> Simon
