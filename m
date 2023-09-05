@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976E2C83F33
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 12:26:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB11DC83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 12:27:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F27868BC;
-	Tue,  5 Sep 2023 14:26:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AC0686989;
+	Tue,  5 Sep 2023 14:27:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RsHhnrmw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cJ2LPmcv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE4A38690B; Tue,  5 Sep 2023 14:26:44 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id C11A68698D; Tue,  5 Sep 2023 14:27:17 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0FC98656D
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 14:26:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C3AB8656D
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 14:27:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 385CQcig108129;
- Tue, 5 Sep 2023 07:26:38 -0500
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 385CRDjZ116408;
+ Tue, 5 Sep 2023 07:27:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693916798;
- bh=ckahhYge2aL/iheFP55NUZCYktdU0yoACR1YYLK9Xsc=;
+ s=ti-com-17Q1; t=1693916833;
+ bh=Sl3gKEimUJOpGkpjKz0nJ46Sz7Wup8QGfHlDhNUIGkg=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=RsHhnrmwyoG9vui+V6rmIC/ssv2eEypObr92jstGZLKCJM8P17goeP249jInG6Xn8
- J+4N1zYxyK29xjoi0t9d3dAlpwZ8c1ruCBT+4eK9MBPcfxczDTfkV1MQffk/nW4SLw
- lyGAWpb6PnHzC4oGe1W+Wx8tuxPr5pj061Yj07oU=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 385CQcxq082450
+ b=cJ2LPmcvmxLjCWLGNck8UCEsu1COzQ2hiExvWWXFnlltaxhOnQCOtlAUx06AsFxd4
+ GQzWXW4WOqPTzOEeDwjjk0bVz66HI/hSdLEYgv7O7aCjkFonTvClPFm6IctHxMPOfR
+ IkblonFs3jgnp5O17fIGMeKcFKvWVtrAFH8FkSdE=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 385CRDe6082998
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Sep 2023 07:26:38 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 5 Sep 2023 07:27:13 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Sep 2023 07:26:37 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 07:27:12 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Sep 2023 07:26:37 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 385CQbei081605;
- Tue, 5 Sep 2023 07:26:37 -0500
-Date: Tue, 5 Sep 2023 07:26:37 -0500
+ Frontend Transport; Tue, 5 Sep 2023 07:27:12 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 385CRCG9111041;
+ Tue, 5 Sep 2023 07:27:12 -0500
+Date: Tue, 5 Sep 2023 07:27:12 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>
 CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
  <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
  <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
  <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-Subject: Re: [PATCH v4 5/6] docs: board: ti: Add j721s2_evm documentation
-Message-ID: <20230905122637.iiqqltgsce2pvnnw@outscore>
+Subject: Re: [PATCH v4 6/6] board: ti: j721s2: MAINTAINERS: Update the
+ MAINTAINERS File.
+Message-ID: <20230905122712.q3l3ecsygad4jsry@quality>
 References: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v4-5-dc114bece5d7@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v4-6-dc114bece5d7@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v4-5-dc114bece5d7@ti.com>
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v4-6-dc114bece5d7@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,15 +83,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 16:08-20230904, Manorit Chawdhry wrote:
-> Add the documentation for J721S2-EVM and SK-AM68
+> Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
+> to the previous MAINTAINER not being associated with TI.
 > 
-> TRM for J721S2/AM68: https://www.ti.com/lit/pdf/spruj28
-> Product Page for J721S2: https://www.ti.com/tool/J721S2XSOMXEVM
-> Product Page for AM68: https://www.ti.com/tool/SK-AM68
-> 
-> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
+>  board/ti/j721s2/MAINTAINERS | 11 +++++++++--
+>  1 file changed, 9 insertions(+), 2 deletions(-)
+> 
+
+For whatever it is worth:
+
 Reviewed-by: Nishanth Menon <nm@ti.com>
 
 -- 
