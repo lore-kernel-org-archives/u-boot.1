@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20EE2CA0FFA
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 17:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3F95CA0FFA
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 18:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73C8386583;
-	Tue,  5 Sep 2023 19:33:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE39386595;
+	Tue,  5 Sep 2023 20:05:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aKDnYvU4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dWm5fql7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 964BE86582; Tue,  5 Sep 2023 19:33:28 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 606AE865DF; Tue,  5 Sep 2023 20:05:09 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A49A4865DA
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 19:33:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A2BDE8071F
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 20:05:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-501bd164fbfso1818252e87.0
- for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 10:33:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5925e580f12so27806337b3.3
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 11:05:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693935204; x=1694540004; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=iXxUSU0N4LMqy2gaYQ0QzHA99jfZjJIfU5QzoxbQU90=;
- b=aKDnYvU4LPP1L1dQDqY8RtgHpvlgC72GnIChVTxVFAXfuNs0RHeCT3V9o0PbqdZO5h
- POJ1rYY7FYwDPY6+VkIwN3+z51xyIGkaH27FhVLoVeGWHYTJbPFTOEOoOWnrwFapj34Q
- b+lNCvxtFdbFNWqq7TD1Vrb8r8B0/Ue7QODqsPf55SEUj9YuS7vXkiKIPQYoi1APFyrc
- 2slx/NfABnn4hH9VHWHpCGc9L47I1MoR2BkgrY+qXzbE92Fsffam/rMb4e4tpze9dNHe
- Zoc5D/TkVhoyp5xm85uj8blniRocf/y/NXf8Yh4kU7aB+6EVR/GlHjBRZ4eh2CK+o1H7
- hLaA==
+ d=gmail.com; s=20221208; t=1693937105; x=1694541905; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hSeIVbzqeNCP/lSJuHySN5ogGP4E5u7hHjqUQa2lasU=;
+ b=dWm5fql7v2fuORMevqqf76tCL2wu3Mpeg7SekQg434W5YyLPOlUOn5j5b/Df1XYLiq
+ dx+wKyKfjCKmZF/pBnsoNNOCJsBiWTfbxjMu0nqbxpMAlKXeFbjvb/8HnQBhJI8qH5aT
+ 3MANnPdCh3KY51ovm6X0SUhhu2CdpEmyo5PzFdVgKgklQeXkdmg0NTVH2ohD4z1XPoxN
+ zCIpxQiIKLzSeAR28D+sYiZWTL/zXRTRwqpvaMzUND2UYEjMw34NNbCdx1uoRc3m6QyM
+ KxNErLWOYfLxw+abMBygsHF/SwAAIA3IfIlZBxFG/FL+5uav40MyXvueb73MzN6xkVE2
+ 5Wdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693935204; x=1694540004;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20221208; t=1693937105; x=1694541905;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=iXxUSU0N4LMqy2gaYQ0QzHA99jfZjJIfU5QzoxbQU90=;
- b=RXho0EesEkgF7B8twbgDl7JhNH2KtICByHq7LQHLRYv2G9yM4rSwmttV7CBcJMzSGn
- b7nq3twE/Ybej4Rp2zEHQ1lNVQa8LpPz76t78pfjg9OhRpWGCmjW0wyc/41qA8/P3sfm
- SP63OxMM8Bm8QiQ+Zrsom+gf325kGMkXfJ9l4UaeHEeNsQHRm0z9fVKObWIh5guqBl42
- u1PbVikyXuG3euHaUACMpBZ19delwgJ2O+AP3GePlfLjH0pEgPoVV3pztg7fUqHt9nYr
- wCfSEexi18pURijJChSDvhLJ4q0xfD3x03mRfPxhNEgLhcKcbRjQ9VkO/lLQ2zKq6+52
- YK8Q==
-X-Gm-Message-State: AOJu0YwngYef+VcuKVfEdXHJpKeoJ+/aKwfLSOiZBIJXfwcf2QJqV/LP
- ei+g3uSg9CpS3wkTjhcWfLIG01gByaLgog==
-X-Google-Smtp-Source: AGHT+IHG1JqADdmEM4Z+r2wnDEg8Q0hFmuUsA1RhSSoZIpDUepulB/J9Xwj9YSuQ078ivqfctfyY2w==
-X-Received: by 2002:ac2:5977:0:b0:500:c709:5845 with SMTP id
- h23-20020ac25977000000b00500c7095845mr388117lfp.4.1693935203398; 
- Tue, 05 Sep 2023 10:33:23 -0700 (PDT)
-Received: from user-PC.. ([92.51.95.194]) by smtp.gmail.com with ESMTPSA id
- u7-20020a05651206c700b00501c1794883sm342357lff.251.2023.09.05.10.33.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Sep 2023 10:33:23 -0700 (PDT)
-From: Maksim Kiselev <bigunclemax@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maksim Kiselev <bigunclemax@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v1] clk: mux: check value returned from clk_mux_val_to_index()
-Date: Tue,  5 Sep 2023 20:33:06 +0300
-Message-Id: <20230905173307.3404875-1-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ bh=hSeIVbzqeNCP/lSJuHySN5ogGP4E5u7hHjqUQa2lasU=;
+ b=NiXLokxJlplpvRP9FBTmXRxES9x3hzD6y4LOsM9nDjc223P9YmG7oMnIHOQW2hJo+e
+ gsdCSfGKERuZCJUqb1XyXUdjH7gjGVfiJz4uRQcjbVqqW1ZEqiQOxlaTLT6LKWAHkwgC
+ 5v5FpHLyrqbStKhV4oMFTJllSrGc0RdtzpW5PE7o5yW+cj4H8P9wt5wPz4DHoI82ABrL
+ rPzFNfCAEFNFqL4PBNoBZpC+/fCNR9kfJd1x2WVWmX475dC2nx+ecVWaQfDDD5Hfyhb+
+ igzxSRglZna0w2cJim37Kkw08RGvkEGTWPKOhtBsCrmqbacICfbGsr7dqVXzgyGvqjf4
+ hcog==
+X-Gm-Message-State: AOJu0YxxJWvSr28MsED4Elf9+JUlmiv4g14uE04jhNfxi+c7o4U8X6T6
+ SsuaKE6tLkFW7bseJGLbfPCIOM6j3oDC1dIagOA=
+X-Google-Smtp-Source: AGHT+IGWuh/eVadXuTndV/F/TUIh6wtSCt0X/Vh9D0Q6LebjGX9PNMwNMOlt+AVRwsHTnDO7s9hEhldom0xRjKKq5Zo=
+X-Received: by 2002:a81:48d1:0:b0:577:616e:2d72 with SMTP id
+ v200-20020a8148d1000000b00577616e2d72mr14470362ywa.5.1693937105318; Tue, 05
+ Sep 2023 11:05:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
+ <CAPnjgZ1U1an8+2-VgEXkqZtf3yWTggtEmjn-RFjm+ESgS+Qu3g@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1U1an8+2-VgEXkqZtf3yWTggtEmjn-RFjm+ESgS+Qu3g@mail.gmail.com>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Tue, 5 Sep 2023 20:04:54 +0200
+Message-ID: <CAC928HZo8LTpp9eWST2vt_N7cN4Tdhbok_d3m9M4d+pN5rWtCQ@mail.gmail.com>
+Subject: Re: Binman how to build using Rockchip BL32 binary as OP-TEE
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,49 +87,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The clk_mux_val_to_index() may return -EINVAL. In this case
-clk_mux_get_parent() will return a wrong parent index and
-this will lead to out of bounds error.
+Il giorno lun 4 set 2023 alle ore 18:49 Simon Glass <sjg@chromium.org>
+ha scritto:
+>
+> Hi Massimo,
+>
+> On Mon, 4 Sept 2023 at 09:05, Massimo Pegorer
+> <massimo.pegorer+oss@gmail.com> wrote:
+> >
+> > Hi,
+> >
+> > Is there any way for binman to package FIT with U-Boot TF-A and
+> > OP-TEE, using bl32 binary provided by Rockchip as TEE?
+> >
+> > I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
+> > binman failed.
+> >
+> > In my poor understanding of Python code, it seems binman accepts only
+> > ELF format or a binary format starting with optee_v1_header, but
+> > binaries provided by Rockchip in rkbin repository do not have this
+> > header.
+>
+> Yes that is correct. How would U-Boot know the load address of the TEE
+> fille? Hmm it seems to be a fixed address. Perhaps you could change
+> the rockchip-u-boot.dtsi file to make the 'tee-os' node a 'blobext'
+> node instead, then add a filename property in there with the name of
+> your file?
 
-E.g. when we register mux clk:
-	ret = clk_register(clk, UBOOT_DM_CLK_CCF_MUX, name,
-			   parent_names[clk_mux_get_parent(clk)]);
+Yes, I agree, it can not. But I was not complaining about binman, just
+wondering what I was missing, or why Rockchip binaries are lacking of
+optee_v1_header. It seems these binaries are in the format of
+tee-pager_v2.bin. I suspect the load address is the value of the ADDR
+field in the [BL32_OPTION] of rkbin/RKTRUST/RK33xxTRUST.ini file. That
+is 0x08400000 except for RK3308 which has 0x00200000. I will give it a
+try.
 
-Let's add a check on the return value of clk_mux_val_to_index() and if
-it's negative, set parent index to 0.
+Thanks. Regards,
+Massimo
 
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
- drivers/clk/clk-mux.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-index 017f25f7a5..00fe916171 100644
---- a/drivers/clk/clk-mux.c
-+++ b/drivers/clk/clk-mux.c
-@@ -88,6 +88,7 @@ unsigned int clk_mux_index_to_val(u32 *table, unsigned int flags, u8 index)
- u8 clk_mux_get_parent(struct clk *clk)
- {
- 	struct clk_mux *mux = to_clk_mux(clk);
-+	int index;
- 	u32 val;
- 
- #if IS_ENABLED(CONFIG_SANDBOX_CLK_CCF)
-@@ -98,7 +99,13 @@ u8 clk_mux_get_parent(struct clk *clk)
- 	val >>= mux->shift;
- 	val &= mux->mask;
- 
--	return clk_mux_val_to_index(clk, mux->table, mux->flags, val);
-+	index = clk_mux_val_to_index(clk, mux->table, mux->flags, val);
-+	if (index < 0) {
-+		log_err("Could not fetch index\n");
-+		index = 0;
-+	}
-+
-+	return index;
- }
- 
- static int clk_fetch_parent_index(struct clk *clk,
--- 
-2.39.2
-
+>
+> >
+> > Thanks in advance for any hints!
+>
+> Regards,
+> Simon
