@@ -4,124 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E04EC83F2C
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 05:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A139C83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 05:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6CAD8609B;
-	Tue,  5 Sep 2023 07:02:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 67040864EA;
+	Tue,  5 Sep 2023 07:58:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=fedoraproject.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="uZ0qYLXg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2464F86555; Tue,  5 Sep 2023 07:02:31 +0200 (CEST)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7245A8654D; Tue,  5 Sep 2023 07:58:25 +0200 (CEST)
+Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com
+ [209.85.219.45])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4DDC81FA8
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 07:02:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8D09863C3
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 07:58:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=fedoraproject.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20230905050221epoutp0275c14f3ab0a94c8447d510c7f104dd53~B6Bvr_cax2693526935epoutp02A
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 05:02:21 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20230905050221epoutp0275c14f3ab0a94c8447d510c7f104dd53~B6Bvr_cax2693526935epoutp02A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1693890141;
- bh=LmSVt8lxrWF6acALVOMnt5RNUqYhoGG4dUzjMRChLUE=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=uZ0qYLXgD2mMZ60fCVqw57SrM2eBfo6i9YlPSiPgY9AhXY/aIv3D0GmXNF6+8kXFQ
- of6jhTX+dY0bl7/Zv6FQtstqGOvLYEP06lMpouA+L2HDXAQ8VDapzlMF/KPff9eFi5
- hE0Hl7kugMVDZ7hokZ+KSna3lFU0Z1fFGfh5oWNs=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230905050221epcas2p1a24d61ea3c2032b9bc2432f30445692f~B6BvTq3lU0340903409epcas2p1P;
- Tue,  5 Sep 2023 05:02:21 +0000 (GMT)
-Received: from epsmgec2p1.samsung.com (unknown [182.195.36.68]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4RftfN3wrMz4x9Pp; Tue,  5 Sep
- 2023 05:02:20 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmgec2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- B6.AD.08583.C56B6F46; Tue,  5 Sep 2023 14:02:20 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20230905050220epcas2p34939db5d4b4d5088bd3f09b239a37704~B6BuYUp4g2593425934epcas2p3E;
- Tue,  5 Sep 2023 05:02:20 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20230905050220epsmtrp265154dd564bdb13dd4dbdefb11e9591e~B6BuXxCSr2879128791epsmtrp2Z;
- Tue,  5 Sep 2023 05:02:20 +0000 (GMT)
-X-AuditID: b6c32a43-96bfd70000002187-ff-64f6b65c2057
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 81.F4.18916.B56B6F46; Tue,  5 Sep 2023 14:02:19 +0900 (KST)
-Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20230905050219epsmtip1062c19558c01842b45ecf670a41adff8~B6BuN9s8O0202802028epsmtip1K;
- Tue,  5 Sep 2023 05:02:19 +0000 (GMT)
-From: "Chanho Park" <chanho61.park@samsung.com>
-To: "'Simon Glass'" <sjg@chromium.org>
-Cc: "'Rick Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>,
- <u-boot@lists.denx.de>
-In-Reply-To: <CAPnjgZ2eKzzcyjBG_EKbCLMM_9x4h4O4ABPMgX6vY_ScD=tZUA@mail.gmail.com>
-Subject: RE: [PATCH v2 3/3] timer: riscv_aclint_timer: add timer_get_boot_us
- for BOOTSTAGE
-Date: Tue, 5 Sep 2023 14:02:19 +0900
-Message-ID: <003001d9dfb6$260f2930$722d7b90$@samsung.com>
+ spf=pass smtp.mailfrom=dennis@gilmore.net.au
+Received: by mail-qv1-f45.google.com with SMTP id
+ 6a1803df08f44-64a5bc52b0aso13166396d6.3
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 22:58:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693893501; x=1694498301;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Fcg58Jf+gMwczYI/PYCHLS4Q9izfS3k7xycwLCtuUBs=;
+ b=f9xHJOXKP7i6Q8bN7NulZ8tPpC5TQn7vw01GCZtDJwYz3pMDDv/8wr0QVLUmqGpe9A
+ jptrA8P97qs91fP3UoLjQMcPqFByaWe7qj+ZsDh+0Qx24MDUrIWOAdQwdk6EpKWbp1KH
+ lBwvrTnAzMScvkjeE3HYQMPIrnTO2re/M3kfG9dod+UCt3ROEcjStvkvKRkkQCHMiWCR
+ c2GYhrA2a3RGdEw/UdG3LC7thyVCgnmnctjjw/hrAhj0LVqLpvUsZ8X7H71l2Ve7hqZc
+ AicRFCVcUeL0XGFDw14GDMOTFeH4WTxC53YNu2Eg5jBrUo2qYc8jgsJDpvF9gtQxFsYD
+ tLdA==
+X-Gm-Message-State: AOJu0YykxmbFjFwtKyYF+8sP11/7dw/Vua/5Qb/8fISIt9K9GZbv1p4f
+ dxPXE6znqDl7oh05z1P+Y9AxoVMExmlCosnC3LyYBPS59UQ=
+X-Google-Smtp-Source: AGHT+IGUhxZg6BEdYU1gvqF54vFY+OOW7AJi21rv6GEaP2PlXJKkhvyJSxyOjsRqUwcQ7rUG3phGbg==
+X-Received: by 2002:a0c:db92:0:b0:64f:36b3:5620 with SMTP id
+ m18-20020a0cdb92000000b0064f36b35620mr12654834qvk.46.1693893501215; 
+ Mon, 04 Sep 2023 22:58:21 -0700 (PDT)
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com.
+ [209.85.160.179]) by smtp.gmail.com with ESMTPSA id
+ g25-20020a0caad9000000b0064f778c8165sm4165483qvb.64.2023.09.04.22.58.20
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 Sep 2023 22:58:21 -0700 (PDT)
+Received: by mail-qt1-f179.google.com with SMTP id
+ d75a77b69052e-4039f7e1d3aso15746321cf.0
+ for <u-boot@lists.denx.de>; Mon, 04 Sep 2023 22:58:20 -0700 (PDT)
+X-Received: by 2002:a05:622a:1f87:b0:413:3384:d43f with SMTP id
+ cb7-20020a05622a1f8700b004133384d43fmr14387281qtb.11.1693893500643; Mon, 04
+ Sep 2023 22:58:20 -0700 (PDT)
 MIME-Version: 1.0
+References: <20230822143357.2818-1-wiagn233@outlook.com>
+ <TY3P286MB2611C9AD6E5BB3756A959E89981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <TY3P286MB2611C9AD6E5BB3756A959E89981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+From: Dennis Gilmore <dgilmore@fedoraproject.org>
+Date: Tue, 5 Sep 2023 00:58:09 -0500
+X-Gmail-Original-Message-ID: <CAABkxwswTJaxC-E7RH0Zxj-wRJ9kY6kTL2Bgb6__Kgzfm5FiBw@mail.gmail.com>
+Message-ID: <CAABkxwswTJaxC-E7RH0Zxj-wRJ9kY6kTL2Bgb6__Kgzfm5FiBw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] configs: starfive: Enable PCIE auto enum and
+ NVME/USB stuff for Starfive Visionfive 2
+To: Shengyu Qu <wiagn233@outlook.com>
+Cc: xypron.glpk@gmx.de, chanho61.park@samsung.com, ycliang@andestech.com, 
+ yanhong.wang@starfivetech.com, u-boot@lists.denx.de, mps@arvanta.net
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQKO/hFpQCIJv5N4xDW6Es6peGHY4AJDo85+AXmVEGsB//jQZa5zhcYQ
-Content-Language: en-us
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrDKsWRmVeSWpSXmKPExsWy7bCmqW7Mtm8pBlfOyli8fXGW0eLblm2M
- Fm/3drJbPD70msmBxWPP6VnMHrMbLrJ4nL2zgzGAOSrbJiM1MSW1SCE1Lzk/JTMv3VbJOzje
- Od7UzMBQ19DSwlxJIS8xN9VWycUnQNctMwdonZJCWWJOKVAoILG4WEnfzqYov7QkVSEjv7jE
- Vim1ICWnwLxArzgxt7g0L10vL7XEytDAwMgUqDAhO2PnBZmClYIVc1ccZmxgPMLXxcjBISFg
- IvFrE28XIxeHkMAORomzfw8wQzifGCU2n1/J1sXICeFMXMQOYoM0LHs9jQ2iaCejxMr1X1kg
- nBeMEufOnmEGqWIT0Jd42bGNFcQWEVCTeLvgBFg3s0CixLStX8GmcgoESny88B/MFhaIkfgw
- CyLOIqAicWDmTxYQm1fAUqJv8y0mCFtQ4uTMJywQc7Qlli18zQxxkYLEz6fLoHa5SdxecR6q
- Rlzi5dEj7CDHSQh8ZZd4u20q1AsuEk+WLWCEsIUlXh3fAhWXkvj8bi8bJFzKJXYsS4LobWGU
- aG7bA7XMXuLHzSmsIDXMApoS63fpQ5QrSxy5BbWWT6Lj8F92iDCvREebEESjusSB7dNZIGxZ
- ie45n1knMCrNQvLYLCSPzULywCyEXQsYWVYxiqUWFOempyYbFRjCYzo5P3cTIzgZajnvYLwy
- /5/eIUYmDsZDjBIczEoivO/kv6UI8aYkVlalFuXHF5XmpBYfYjQFBvVEZinR5HxgOs4riTc0
- sTQwMTMzNDcyNTBXEue91zo3RUggPbEkNTs1tSC1CKaPiYNTqoEpuzVZ4iBXRhh3YdHu1Qs/
- XTh9PdZEuOPB+ZCgz94fQvw13vHaLeazk3vrwfnQ7H7TIbdlPLcX7pqXcdSoZO3Ln5MTuUxV
- Y2ckCp4Xf7VwzYOeb53Rzd69lUrS3w66Jy+LnWZ8+8KOeg3hl4aX3+dXp0pcv/hrVkPGgfds
- 1Z2Kabkyx+Ydie1Z03NE8Wf87L4ex9/6U6wDb7duqgt1ZWth/D5Ps3NtQ9W8uVxsO9fuVpn7
- 1PhUcvAlJ9myz7nnEk/ezLhg8Jd5TmfD8yfsCkduXYya8H977Fw1idfr9jheeVS4odTJwGFK
- 7L1jdWe6HuwoS2+4/3Hm56rtUQtjO34fyNx1d1PWG4Zzb1TdrrwJV2Ipzkg01GIuKk4EAHzT
- jbYPBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPLMWRmVeSWpSXmKPExsWy7bCSnG7Mtm8pBv/NLN6+OMto8W3LNkaL
- t3s72S0eH3rN5MDisef0LGaP2Q0XWTzO3tnBGMAcxWWTkpqTWZZapG+XwJVxdHInc8ELgYo9
- 726yNDA28nUxcnJICJhILHs9ja2LkYtDSGA7o0T34p/sEAlZiWfvdkDZwhL3W46wQhQ9Y5T4
- uWQyK0iCTUBf4mXHNjBbREBN4u2CE2ANzALJEmvOLGGHaOhhknh6/T8bSIJTIFDi4wUIW1gg
- SmL7mqPMIDaLgIrEgZk/WUBsXgFLib7Nt5ggbEGJkzOfsEAM1ZbofdjKCGMvW/iaGeI6BYmf
- T5dBHeEmcXvFeah6cYmXR4/AfdO9s4cN5pu7D16yT2AUnYVkxSwkK2YhWTELyagFjCyrGEVT
- C4pz03OTCwz1ihNzi0vz0vWS83M3MYLjSCtoB+Oy9X/1DjEycTAeYpTgYFYS4X0n/y1FiDcl
- sbIqtSg/vqg0J7X4EKM0B4uSOK9yTmeKkEB6YklqdmpqQWoRTJaJg1OqgWlGvUjqAnWzo64+
- XJoLX9cqB21nPttRPDVbnKd24rlrYZvW1RtofOa57PFra+BCfTv9TfsdTh3/7LZ7m1PDtbUv
- PnfOKfwxI3DH0l1V71+FZW34PtP8TZJKnbZP+jq/M0cq5MyFzNfm1nbdfFq45b67/e+4h+ra
- n/MPK3iEpMn7Vq5d+7Zizb8DIs8OcH6ySYiTKk6ZVpyplTchVpTvkJ3VgiA1xcx6y08La89b
- tbwVVL9X8vgwn8Kj9dsZJiSG22e+uCr1KuNSyXOFs28uTjq5vPlEQsjDiNQYK2meGar903o+
- njvA6F/ktszW8OzXR0LPv2xYOblyeWpZ7O1dvVfvzlhusNlRVdxl+y+uo6+UWIozEg21mIuK
- EwHzpXAiEgMAAA==
-X-CMS-MailID: 20230905050220epcas2p34939db5d4b4d5088bd3f09b239a37704
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5
-References: <CGME20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5@epcas2p3.samsung.com>
- <20230828094938.2061606-1-chanho61.park@samsung.com>
- <20230828094938.2061606-4-chanho61.park@samsung.com>
- <CAPnjgZ2eKzzcyjBG_EKbCLMM_9x4h4O4ABPMgX6vY_ScD=tZUA@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,67 +88,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Tue, Aug 22, 2023 at 9:34=E2=80=AFAM Shengyu Qu <wiagn233@outlook.com> w=
+rote:
 
-> -----Original Message-----
-> From: Simon Glass <sjg=40chromium.org>
-> Sent: Tuesday, September 5, 2023 1:49 AM
-> To: Chanho Park <chanho61.park=40samsung.com>
-> Cc: Rick Chen <rick=40andestech.com>; Leo <ycliang=40andestech.com>; u-
-> boot=40lists.denx.de
-> Subject: Re: =5BPATCH v2 3/3=5D timer: riscv_aclint_timer: add
-> timer_get_boot_us for BOOTSTAGE
->=20
-> Hi Chanho,
->=20
-> On Mon, 28 Aug 2023 at 03:50, Chanho Park <chanho61.park=40samsung.com>
-> wrote:
-> >
-> > timer_get_boot_us function is required to record the boot stages as
-> > us-based timestamp.
-> >
-> > Signed-off-by: Chanho Park <chanho61.park=40samsung.com>
-> > ---
-> >  drivers/timer/riscv_aclint_timer.c =7C 22 ++++++++++++++++++++++
-> >  1 file changed, 22 insertions(+)
-> >
-> > diff --git a/drivers/timer/riscv_aclint_timer.c
-> b/drivers/timer/riscv_aclint_timer.c
-> > index e29d527c8d77..8b67745bb4a2 100644
-> > --- a/drivers/timer/riscv_aclint_timer.c
-> > +++ b/drivers/timer/riscv_aclint_timer.c
-> > =40=40 -6,6 +6,7 =40=40
-> >
-> >  =23include <common.h>
-> >  =23include <clk.h>
-> > +=23include <div64.h>
-> >  =23include <dm.h>
-> >  =23include <timer.h>
-> >  =23include <asm/io.h>
-> > =40=40 -44,6 +45,27 =40=40 u64 notrace timer_early_get_count(void)
-> >  =7D
-> >  =23endif
-> >
-> > +=23if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
->=20
-> Just a nit...you should not need this =23if, since if the function is
-> not used it will be stripped from the image by the linker.
+> Although PCIE driver already exists, board defconfig isn't configured to
+> enable PCIE enum on boot, thus USB storage device and NVME drive are not
+> supported by default. So modify defconfig to enable PCIE auto enum, then
+> start USB subsystem and scan nvme drive on boot.
+>
+> Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
+>
+Tested-by: Dennis Gilmore <dennis@ausil.us>
 
-Thank you for the suggestion.
-Without these guards, compile error can be occurred due to multiple timer_g=
-et_boot_us definitions.
-For risc-v, there are two timers for S-mode and M-mode, respectively.
-So, I put them to avoid below build errors.
-
-riscv64-unknown-linux-gnu-ld.bfd: drivers/timer/riscv_aclint_timer.o: in fu=
-nction =60timer_get_boot_us':
-
-/data/risc-v/qemu/u-boot/drivers/timer/riscv_aclint_timer.c:49: multiple de=
-finition of =60timer_get_boot_us'; drivers/timer/riscv_timer.o:/data/risc-v=
-/qemu/u-boot/drivers/timer/riscv_timer.c:55: first defined here
-
-make=5B1=5D: *** =5Bscripts/Makefile.spl:527: spl/u-boot-spl=5D Error 1
-
-Best Regards,
-Chanho Park
-
+> ---
+>  configs/starfive_visionfive2_defconfig | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
+>
+> diff --git a/configs/starfive_visionfive2_defconfig
+> b/configs/starfive_visionfive2_defconfig
+> index e9b63e5b84..3002c96f0e 100644
+> --- a/configs/starfive_visionfive2_defconfig
+> +++ b/configs/starfive_visionfive2_defconfig
+> @@ -30,6 +30,7 @@ CONFIG_SPL_SPI=3Dy
+>  CONFIG_SYS_LOAD_ADDR=3D0x82000000
+>  CONFIG_SYS_PCI_64BIT=3Dy
+>  CONFIG_PCI=3Dy
+> +CONFIG_PCI_INIT_R=3Dy
+>  CONFIG_TARGET_STARFIVE_VISIONFIVE2=3Dy
+>  CONFIG_SPL_OPENSBI_LOAD_ADDR=3D0x40000000
+>  CONFIG_ARCH_RV64I=3Dy
+> @@ -43,7 +44,7 @@ CONFIG_SD_BOOT=3Dy
+>  CONFIG_USE_BOOTARGS=3Dy
+>  CONFIG_BOOTARGS=3D"console=3DttyS0,115200 debug rootwait earlycon=3Dsbi"
+>  CONFIG_USE_PREBOOT=3Dy
+> -CONFIG_PREBOOT=3D"setenv fdt_addr ${fdtcontroladdr};fdt addr
+> ${fdtcontroladdr};"
+> +CONFIG_PREBOOT=3D"nvme scan; usb start; setenv fdt_addr ${fdtcontroladdr=
+};
+> fdt addr ${fdtcontroladdr};"
+>  CONFIG_DEFAULT_FDT_FILE=3D"starfive/jh7110-starfive-visionfive-2.dtb"
+>  CONFIG_DISPLAY_CPUINFO=3Dy
+>  CONFIG_DISPLAY_BOARDINFO=3Dy
+> @@ -124,4 +125,9 @@ CONFIG_TIMER_EARLY=3Dy
+>  CONFIG_USB=3Dy
+>  CONFIG_USB_XHCI_HCD=3Dy
+>  CONFIG_USB_XHCI_PCI=3Dy
+> +CONFIG_USB_EHCI_HCD=3Dy
+> +CONFIG_USB_EHCI_PCI=3Dy
+> +CONFIG_USB_OHCI_HCD=3Dy
+> +CONFIG_USB_OHCI_PCI=3Dy
+> +CONFIG_USB_STORAGE=3Dy
+>  CONFIG_USB_KEYBOARD=3Dy
+> --
+> 2.42.0
+>
+>
