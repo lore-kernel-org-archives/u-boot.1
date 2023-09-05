@@ -4,73 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3F95CA0FFA
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 18:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C053CA0FFA
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 18:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE39386595;
-	Tue,  5 Sep 2023 20:05:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D98A86940;
+	Tue,  5 Sep 2023 20:10:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dWm5fql7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a2/A8dDj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 606AE865DF; Tue,  5 Sep 2023 20:05:09 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 85754866DC; Tue,  5 Sep 2023 20:10:08 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2BDE8071F
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 20:05:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD0FC865F4
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 20:10:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5925e580f12so27806337b3.3
- for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 11:05:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693937105; x=1694541905; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hSeIVbzqeNCP/lSJuHySN5ogGP4E5u7hHjqUQa2lasU=;
- b=dWm5fql7v2fuORMevqqf76tCL2wu3Mpeg7SekQg434W5YyLPOlUOn5j5b/Df1XYLiq
- dx+wKyKfjCKmZF/pBnsoNNOCJsBiWTfbxjMu0nqbxpMAlKXeFbjvb/8HnQBhJI8qH5aT
- 3MANnPdCh3KY51ovm6X0SUhhu2CdpEmyo5PzFdVgKgklQeXkdmg0NTVH2ohD4z1XPoxN
- zCIpxQiIKLzSeAR28D+sYiZWTL/zXRTRwqpvaMzUND2UYEjMw34NNbCdx1uoRc3m6QyM
- KxNErLWOYfLxw+abMBygsHF/SwAAIA3IfIlZBxFG/FL+5uav40MyXvueb73MzN6xkVE2
- 5Wdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693937105; x=1694541905;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hSeIVbzqeNCP/lSJuHySN5ogGP4E5u7hHjqUQa2lasU=;
- b=NiXLokxJlplpvRP9FBTmXRxES9x3hzD6y4LOsM9nDjc223P9YmG7oMnIHOQW2hJo+e
- gsdCSfGKERuZCJUqb1XyXUdjH7gjGVfiJz4uRQcjbVqqW1ZEqiQOxlaTLT6LKWAHkwgC
- 5v5FpHLyrqbStKhV4oMFTJllSrGc0RdtzpW5PE7o5yW+cj4H8P9wt5wPz4DHoI82ABrL
- rPzFNfCAEFNFqL4PBNoBZpC+/fCNR9kfJd1x2WVWmX475dC2nx+ecVWaQfDDD5Hfyhb+
- igzxSRglZna0w2cJim37Kkw08RGvkEGTWPKOhtBsCrmqbacICfbGsr7dqVXzgyGvqjf4
- hcog==
-X-Gm-Message-State: AOJu0YxxJWvSr28MsED4Elf9+JUlmiv4g14uE04jhNfxi+c7o4U8X6T6
- SsuaKE6tLkFW7bseJGLbfPCIOM6j3oDC1dIagOA=
-X-Google-Smtp-Source: AGHT+IGWuh/eVadXuTndV/F/TUIh6wtSCt0X/Vh9D0Q6LebjGX9PNMwNMOlt+AVRwsHTnDO7s9hEhldom0xRjKKq5Zo=
-X-Received: by 2002:a81:48d1:0:b0:577:616e:2d72 with SMTP id
- v200-20020a8148d1000000b00577616e2d72mr14470362ywa.5.1693937105318; Tue, 05
- Sep 2023 11:05:05 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 385IA1Ik061280;
+ Tue, 5 Sep 2023 13:10:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693937401;
+ bh=Ov78murwZdaHHDyalUiUb2zOZ74WmBPYnTUOleCcorY=;
+ h=From:To:CC:Subject:Date;
+ b=a2/A8dDjw+5+N7qNks9dMsRbTY59HnsZNCyBBAPGrWhb5PFNAfvnlN/9BogMIsTEP
+ 53FzL7eFMK+PjLZWqVcvvfyj6SFBM48d6LVDfU/f5K9TigLrch8DplSOL7FF6Nao4k
+ s1mdy21dY8mDNMuEpTRz5gqz2pS5Z/9zsA+oK34Q=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 385IA1TK002428
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 5 Sep 2023 13:10:01 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
+ Sep 2023 13:10:01 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 5 Sep 2023 13:10:01 -0500
+Received: from lelv0327.itg.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 385IA051025418; 
+ Tue, 5 Sep 2023 13:10:01 -0500
+From: Andrew Davis <afd@ti.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+CC: Andrew Davis <afd@ti.com>
+Subject: [PATCH] Makefile: Force regeneration of env.txt
+Date: Tue, 5 Sep 2023 13:09:59 -0500
+Message-ID: <20230905180959.392276-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <CAC928HYMtd=RZnZYW9CNc5wPjzGk11X0+RpcuwHMFEuUpv0C4w@mail.gmail.com>
- <CAPnjgZ1U1an8+2-VgEXkqZtf3yWTggtEmjn-RFjm+ESgS+Qu3g@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1U1an8+2-VgEXkqZtf3yWTggtEmjn-RFjm+ESgS+Qu3g@mail.gmail.com>
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Tue, 5 Sep 2023 20:04:54 +0200
-Message-ID: <CAC928HZo8LTpp9eWST2vt_N7cN4Tdhbok_d3m9M4d+pN5rWtCQ@mail.gmail.com>
-Subject: Re: Binman how to build using Rockchip BL32 binary as OP-TEE
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Kever Yang <kever.yang@rock-chips.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,47 +77,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Il giorno lun 4 set 2023 alle ore 18:49 Simon Glass <sjg@chromium.org>
-ha scritto:
->
-> Hi Massimo,
->
-> On Mon, 4 Sept 2023 at 09:05, Massimo Pegorer
-> <massimo.pegorer+oss@gmail.com> wrote:
-> >
-> > Hi,
-> >
-> > Is there any way for binman to package FIT with U-Boot TF-A and
-> > OP-TEE, using bl32 binary provided by Rockchip as TEE?
-> >
-> > I've tried with TEE=/path/to/rkbin/bin/rk33/xxx_bl32_vX.YZ.bin, but
-> > binman failed.
-> >
-> > In my poor understanding of Python code, it seems binman accepts only
-> > ELF format or a binary format starting with optee_v1_header, but
-> > binaries provided by Rockchip in rkbin repository do not have this
-> > header.
->
-> Yes that is correct. How would U-Boot know the load address of the TEE
-> fille? Hmm it seems to be a fixed address. Perhaps you could change
-> the rockchip-u-boot.dtsi file to make the 'tee-os' node a 'blobext'
-> node instead, then add a filename property in there with the name of
-> your file?
+If the source .env file changes to one that is also older than
+the generated env.txt file then it is not regenerated. This means
+when switching board configs we do not regenerate the env. This
+can be tested easily with:
 
-Yes, I agree, it can not. But I was not complaining about binman, just
-wondering what I was missing, or why Rockchip binaries are lacking of
-optee_v1_header. It seems these binaries are in the format of
-tee-pager_v2.bin. I suspect the load address is the value of the ADDR
-field in the [BL32_OPTION] of rkbin/RKTRUST/RK33xxTRUST.ini file. That
-is 0x08400000 except for RK3308 which has 0x00200000. I will give it a
-try.
+$ make j721e_evm_a72_defconfig
+$ make # this may fail to complete but that is okay for this test
+$ make am64x_evm_a53_defconfig
+$ make
+$ vim include/generated/env.txt
 
-Thanks. Regards,
-Massimo
+Note this is still the J721e env not the AM64 config as expected.
 
->
-> >
-> > Thanks in advance for any hints!
->
-> Regards,
-> Simon
+There is probably a better way to detect if the dependency name changed,
+but that may involve extra files and hashing contents, so let's just
+force it for now.
+
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 9be24c4ec61..d195590d4b0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1830,7 +1830,7 @@ quiet_cmd_envc = ENVC    $@
+ 		touch $@ ; \
+ 	fi
+ 
+-include/generated/env.txt: $(wildcard $(ENV_FILE))
++include/generated/env.txt: $(wildcard $(ENV_FILE)) FORCE
+ 	$(call cmd,envc)
+ 
+ # Write out the resulting environment, converted to a C string
+-- 
+2.39.2
+
