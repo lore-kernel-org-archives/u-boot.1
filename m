@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C944CA0FFA
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 18:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5DA4CA0FF7
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 18:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B819D869DA;
-	Tue,  5 Sep 2023 20:17:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8848E86577;
+	Tue,  5 Sep 2023 20:43:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WvWDP3y7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XUpir85z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0652C86580; Tue,  5 Sep 2023 20:17:08 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 1560E86667; Tue,  5 Sep 2023 20:43:52 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59CB1869D8
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 20:17:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E834D86575
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 20:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-529fb2c6583so4016674a12.1
- for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 11:17:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-59254e181a2so26902617b3.1
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 11:43:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1693937825; x=1694542625; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T5Pi0ofhHHBwxBYV1AwBDL00n/hn2lC5usRXOvtFy3k=;
- b=WvWDP3y7viG9bX4SicfVcrzvtqUVkkFg25YJRfz2NRLEIKyal7Rbd0P2qRoMhP3Xjy
- GE/XIT2vkB5/m/r+FR4Gk1NtqjAiN5AxxJ2QSSh/RiziSZJ/Bp4A0RFbw/w2ASSCiIiw
- Zdte5aORv8WehFIP87p/djd9boUVahFoRffxw=
+ d=konsulko.com; s=google; t=1693939427; x=1694544227; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HZ+4FW2N1n8Sr9PpL8dTKn8nOiYiD1uBijMmeaL7mZQ=;
+ b=XUpir85zTvA2oTxXJn1IoCYzBWLpTCTqtaQxMG4hKiEII2WJcFKhnyb6Em6vbJdOY/
+ ySWYXfK7v5ouoBAJJKCLYon4r1KH/OM6pyq6GgszjYMlTvxYsH7WDSzWm+fQEyOWzImp
+ 3bF0sGfMelI8tE7BrbXOnGVTCYUx/oysqhEPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693937825; x=1694542625;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=T5Pi0ofhHHBwxBYV1AwBDL00n/hn2lC5usRXOvtFy3k=;
- b=UJkxr04MyGcG/+7rOFdYm4Vn3uXndc2Al5t/A8YJNW2qxyMVS6CIhWRX4pBmM5j/Jb
- o36WJ5QKdlQq0FbCm06ZRuyZ9L8FPEld0iOmkPK88yBGy2Cs+2V3CtUXuYmrG/EYnfGn
- aZwxs2x2rKCWtPBWpHjYk2J/RmGAmyTzueUWOdw7x51Me5RWFyK4bL9n97iSSnsFmfje
- AxySQHf2w3ek4KUBL+RoilltEr513S1I2jictOgrv7Ht0xXgKOIpu5MLcZXBhr3biDd5
- wJvjK4rvWdbV4mtmSk+JMMpLfZOo7pzcerBngg/rUn+WkZqKrzb+AGwGJrfTFnOvSuNM
- iaCg==
-X-Gm-Message-State: AOJu0Yw+0QTie4hwvusRGnczjEzrHQAhqIoqEDKGhehbTsfBpFRT1Kgy
- qYnhZiYZASm5RMDwiA6jyzys/IDxEK9eQTNIda2KHg==
-X-Google-Smtp-Source: AGHT+IFAd/xJ8u5tk2k1FeVRoBlpR474Ruuv3n1d/L9lSisHHylv0Gb8kin8LXG1wRwI8C4hgzd3XvLPWiVAjt9Q9OA=
-X-Received: by 2002:aa7:d050:0:b0:522:2aba:bc3b with SMTP id
- n16-20020aa7d050000000b005222ababc3bmr468664edo.28.1693937824854; Tue, 05 Sep
- 2023 11:17:04 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1693939427; x=1694544227;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HZ+4FW2N1n8Sr9PpL8dTKn8nOiYiD1uBijMmeaL7mZQ=;
+ b=DPBtdLt6PYLxaNsqpviLdpU98UaYCLwiZaSE9ujjqpW6iQ1Ciubws5cCu3OFNZe4s+
+ Vuz+AvvAIHN9u2FiOs0cTejMr5MuS0Q2SXL+x9TXjdyKv7H6GqGnEzTpsKjL8EjXkIXp
+ +SS4lYNq1UshITmw2D2inO4nyuOjAAhle37rENSPTftHQTGQFvQxGvI2gZWfq4noca9N
+ LeXgwNwljijzSuLnbJxuwlqSIhnOM3K4YOlwEkbUNGn9RWFdEOpz+k+XCSZzcJhr8rLj
+ SAfNCipW7KfyhKC80DuVgCnYntcH+n7056A+BGBnKU94GlK7hMQr26bWJYi971wVmQeM
+ 9z+Q==
+X-Gm-Message-State: AOJu0YzAYKVcjT96QMR9X0oKl4203VV9fexqvqs8uRXE/ou4lEbUBUhh
+ rs3p53PI9UlPvKTqzZnNcenDBa/ggYYTYKAh0xuPuA==
+X-Google-Smtp-Source: AGHT+IFuWrw4TV1081Q7hoG32t/Cd0YFnzou65bRyabH0hqSul5bCELjUchwn/FMJIlLlYCG2O05cA==
+X-Received: by 2002:a0d:ca51:0:b0:589:d942:5e8d with SMTP id
+ m78-20020a0dca51000000b00589d9425e8dmr13861160ywd.9.1693939427543; 
+ Tue, 05 Sep 2023 11:43:47 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-51ef-a95e-1d1c-c7f8.res6.spectrum.com.
+ [2603:6081:7b00:6400:51ef:a95e:1d1c:c7f8])
+ by smtp.gmail.com with ESMTPSA id
+ i145-20020a819197000000b00570599de9a5sm3338223ywg.88.2023.09.05.11.43.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Sep 2023 11:43:46 -0700 (PDT)
+Date: Tue, 5 Sep 2023 14:43:45 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [PULL] u-boot-riscv/master
+Message-ID: <20230905184345.GM3101304@bill-the-cat>
+References: <ZPag2qB1EH18MN8F@swlinux02>
 MIME-Version: 1.0
-References: <20230823134209.1450567-1-sjg@chromium.org>
- <20230823134209.1450567-8-sjg@chromium.org>
- <20230823151400.GK3953269@bill-the-cat>
- <CAPnjgZ1VBpE8S7G-eBfAeRNQ6PgNvONbGyLceDYL0JsoNnYMjQ@mail.gmail.com>
- <20230903164244.GY3101304@bill-the-cat>
- <CAPnjgZ3WbCoxx-GGcf-fXA9iU6pzyr7BJGZD5tRvG0+tZ6Frdg@mail.gmail.com>
- <20230903192522.GZ3101304@bill-the-cat>
-In-Reply-To: <20230903192522.GZ3101304@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Sep 2023 12:16:56 -0600
-Message-ID: <CAPnjgZ3c45YBFoX+by0aybgHnzmEqzrFvv90oeW6cyiLdrwAkw@mail.gmail.com>
-Subject: Re: [PATCH 7/7] fs: Fix a confusing error about overlapping regions
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Sjoerd Simons <sjoerd@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="S204AKIukpUlopq5"
+Content-Disposition: inline
+In-Reply-To: <ZPag2qB1EH18MN8F@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,76 +91,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Sun, 3 Sept 2023 at 13:25, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Sep 03, 2023 at 12:06:13PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sun, 3 Sept 2023 at 10:42, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Aug 31, 2023 at 06:15:19PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 23 Aug 2023 at 09:14, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Aug 23, 2023 at 07:42:03AM -0600, Simon Glass wrote:
-> > > > >
-> > > > > > When lmb runs out of space in its internal tables, it gives
-errors on
-> > > > > > every fs load operation. This is horribly confusing, as the
-poor user
-> > > > > > tries different memory regions one at a time.
-> > > > > >
-> > > > > > Use the updated API to check the error code and print a helpful
-message.
-> > > > > > Also, allow the operation to proceed.
-> > > > > >
-> > > > > > Update the tests accordingly.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > [snip]
-> > > > > > +     if (ret == -E2BIG) {
-> > > > > > +             log_warning("Reservation tables exhausted: see
-CONFIG_LMB_USE_MAX_REGIONS\n");
-> > > > > > +             return 0;
-> > > > > > +     }
-> > > > >
-> > > > > This isn't the right option.  Everyone has
-CONFIG_LMB_USE_MAX_REGIONS
-> > > > > set.  You would want to increase CONFIG_LMB_MAX_REGIONS.
-> > > > >
-> > > > > But it sounds like what you've found and fixed is an underlying
-problem
-> > > > > as to why 16 regions isn't enough in some common cases now?  So
-we could
-> > > >
-> > > > I don't think I have fixed anything. But I'll send v2 and perhaps it
-> > > > will be clearer what is going on here.
-> > > >
-> > > > > possibly avoid the string size growth here and have a comment
-that also
-> > > > > matches up with the help under LMB_MAX_REGIONS?
-> > > >
-> > > > I don't know, sorry. The size of struct(lmb) on 64-bit sandbox is
-> > > > about 400 bytes. There seems to be a lot of code to save not much
-> > > > memory.
-> > >
-> > > What do you mean here?  The alternative is not unlimited ranges but
-> > > instead to define the limit of memory regions and limit of reserved
-> > > ranges.
-> >
-> > A better alternative would be not to limit the number of regions, IMO,
-> > i.e. have an array of regions that can grow as needed.
->
-> That's not something that we have in the code today, however.
+--S204AKIukpUlopq5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-No, I do have an arraylist thing that I plan to upstream, which could
-handle that.
+On Tue, Sep 05, 2023 at 11:30:34AM +0800, Leo Liang wrote:
 
-But for this series, what do you think of the memregion idea? I am still
-unsure of the saming we should use - see Heinrich's comments too.
+> Hi Tom,
+>=20
+> The following changes since commit 493fd3363f6da6a784514657d689c7cda0f390=
+d5:
+>=20
+>   nokia_rx51: Remove platform (2023-09-04 21:14:32 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
+>=20
+> for you to fetch changes up to dfe08374943c0e898fcfaf7327f69e0fb56b7d23:
+>=20
+>   risc-v: implement DBCN based debug console (2023-09-05 10:53:55 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/17650
 
-Regards,
-Simon
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--S204AKIukpUlopq5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT3dt4ACgkQFHw5/5Y0
+tyykuwv+PLw0PT+s4QwqlZiy5611S++KpfQuFzY6BsmwKYbZuM6VnhWk53t046oc
+spH0smEdOSogorrxFz6x4TdsJ8p6hYdg8k02eXllKMyjkN79WgRsFT6wZ9hPio6D
+LgI/84tGUtvNZ3jMMI/B/CpyFZCnirC9Zk+8Z5ufTOYlSK1bMGm4AuMfiFyaJzge
+KlMF0bcTov2gmL+X11RUqhjkIs/hCo2U5FRUVCAcXAnSDViUVQPh8yQY+5ssO3AT
+Lc9LREsxZ3kpecA6+i1MV1JHGuiVxhxsmZyEVVn+UmB+E/ea+AoGP/Ud9aWCJFyG
+Xpy9IDX71/t56KOuoCtj4YCVnwi+6p5mgOdsii5kVNRKo3EoC50L3zAtNGNwGutc
+aXQ43U3wMGElIgN8YaZxdo4D01k+TSacb17rUkdhTj+ISt0vF3ZLglWzWWufG0t5
+K0FS/stAjN0RlWavomjQM5NCNenBOvkDtt0y02LU5RknvsFddZRzBgv6V292mBPJ
+5u5Q8Ch7
+=INfG
+-----END PGP SIGNATURE-----
+
+--S204AKIukpUlopq5--
