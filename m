@@ -4,108 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE67C83F33
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 03:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E04EC83F2C
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 05:02:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C4B780181;
-	Tue,  5 Sep 2023 05:47:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E6CAD8609B;
+	Tue,  5 Sep 2023 07:02:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h/O+66Uv";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="uZ0qYLXg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D20380181; Tue,  5 Sep 2023 05:44:13 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20616.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5a::616])
+ id 2464F86555; Tue,  5 Sep 2023 07:02:31 +0200 (CEST)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 486D3866D9
- for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 05:44:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4DDC81FA8
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 07:02:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HPhC1b2IzZbX0l3wWHbX/wINiwzf6uPLBhrgGJXQaGRKb3z5IXNf8S2g3nv9EaRaZerjRbr/4gJHrpd6FhquAT73ZqkAim1dP60WBg1lt4NaScWo7mAFL6WQOFGmqzwXxK16RjevLCtCE/Du0tcmOoEJ+jL6C3e2brEu9vMxG/JE8UL54XW2lxOp/RHS+V0440cWBXWvMPTyTazcd7fB5svhKn7RPcU8sql28yJx/AmYznS4PMNVDNMlW25sB7LSYtPbkrmm3129YTMrXX6nQHIWTE5xPsilxQpZ2XzIU284Uldo2xxMfjfAbLo6xmiv2CQI/4NMB9V8ATpR1/zK8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TyHtN1htSN0E2lzJqfN0twsqxoTH3FmNAK/FknHsGVM=;
- b=DnWPd37Y8grnJuRa2ezdB+e25VTc/Nhcn1ZRbdsjAAZK9u7oy+YXpvwejp8x3yVolF7IlkM8iw6teHcmhntF5W98KvJG62ZFxYcC1xi5t6hqaekT/IRWuYmpHvs832njrDWGz+hePE9jwCaG+v+i0n7+UHfr9p4S0eN2DNR4u6twQDPRrJHczzuIyh9MYP65I+kB2Y98FgeZWOrSczRd9yThq9B9lVNmF3mxuwt0sOxZ7wpoYdUNttY4l1BEpAaI0iMMpQTTgQISskadXqBE4Wh3nvFKY4SNb5FGi+rGpUcAy2im42Q4TnskKa6PdDiQEm2U1qdTR1T5OKf3Lkz4Yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TyHtN1htSN0E2lzJqfN0twsqxoTH3FmNAK/FknHsGVM=;
- b=h/O+66UvyrB/dMl9MtwS87OpoxvRe7+skp8DjuyJpePn7dPmXVGeHvYUop9ntj6jo/QWdn2Pz6btwauXgokqfmFJV4GOlX0E8t9av+8uYHtz8Yr4Wcm6GSHRiE5aZV1GajYrjgMyWTRlcQuRGYfA4DDXBtcE5lqbyIvIcnPjtNc=
-Received: from DM5PR07CA0051.namprd07.prod.outlook.com (2603:10b6:4:ad::16) by
- PH8PR12MB6771.namprd12.prod.outlook.com (2603:10b6:510:1c6::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6745.33; Tue, 5 Sep 2023 03:44:05 +0000
-Received: from DS2PEPF0000343D.namprd02.prod.outlook.com
- (2603:10b6:4:ad:cafe::63) by DM5PR07CA0051.outlook.office365.com
- (2603:10b6:4:ad::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33 via Frontend
- Transport; Tue, 5 Sep 2023 03:44:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF0000343D.mail.protection.outlook.com (10.167.18.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Tue, 5 Sep 2023 03:44:04 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 4 Sep
- 2023 22:43:35 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 4 Sep
- 2023 22:43:22 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Mon, 4 Sep 2023 22:43:21 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <git@xilinx.com>
-Subject: [PATCH] cmd: sf: Fix the flash_is_unlocked api size parameter
-Date: Tue, 5 Sep 2023 09:13:09 +0530
-Message-ID: <20230905034309.29099-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20230905050221epoutp0275c14f3ab0a94c8447d510c7f104dd53~B6Bvr_cax2693526935epoutp02A
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 05:02:21 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20230905050221epoutp0275c14f3ab0a94c8447d510c7f104dd53~B6Bvr_cax2693526935epoutp02A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1693890141;
+ bh=LmSVt8lxrWF6acALVOMnt5RNUqYhoGG4dUzjMRChLUE=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=uZ0qYLXgD2mMZ60fCVqw57SrM2eBfo6i9YlPSiPgY9AhXY/aIv3D0GmXNF6+8kXFQ
+ of6jhTX+dY0bl7/Zv6FQtstqGOvLYEP06lMpouA+L2HDXAQ8VDapzlMF/KPff9eFi5
+ hE0Hl7kugMVDZ7hokZ+KSna3lFU0Z1fFGfh5oWNs=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTP id
+ 20230905050221epcas2p1a24d61ea3c2032b9bc2432f30445692f~B6BvTq3lU0340903409epcas2p1P;
+ Tue,  5 Sep 2023 05:02:21 +0000 (GMT)
+Received: from epsmgec2p1.samsung.com (unknown [182.195.36.68]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4RftfN3wrMz4x9Pp; Tue,  5 Sep
+ 2023 05:02:20 +0000 (GMT)
+Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
+ epsmgec2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ B6.AD.08583.C56B6F46; Tue,  5 Sep 2023 14:02:20 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20230905050220epcas2p34939db5d4b4d5088bd3f09b239a37704~B6BuYUp4g2593425934epcas2p3E;
+ Tue,  5 Sep 2023 05:02:20 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20230905050220epsmtrp265154dd564bdb13dd4dbdefb11e9591e~B6BuXxCSr2879128791epsmtrp2Z;
+ Tue,  5 Sep 2023 05:02:20 +0000 (GMT)
+X-AuditID: b6c32a43-96bfd70000002187-ff-64f6b65c2057
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 81.F4.18916.B56B6F46; Tue,  5 Sep 2023 14:02:19 +0900 (KST)
+Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20230905050219epsmtip1062c19558c01842b45ecf670a41adff8~B6BuN9s8O0202802028epsmtip1K;
+ Tue,  5 Sep 2023 05:02:19 +0000 (GMT)
+From: "Chanho Park" <chanho61.park@samsung.com>
+To: "'Simon Glass'" <sjg@chromium.org>
+Cc: "'Rick Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>,
+ <u-boot@lists.denx.de>
+In-Reply-To: <CAPnjgZ2eKzzcyjBG_EKbCLMM_9x4h4O4ABPMgX6vY_ScD=tZUA@mail.gmail.com>
+Subject: RE: [PATCH v2 3/3] timer: riscv_aclint_timer: add timer_get_boot_us
+ for BOOTSTAGE
+Date: Tue, 5 Sep 2023 14:02:19 +0900
+Message-ID: <003001d9dfb6$260f2930$722d7b90$@samsung.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343D:EE_|PH8PR12MB6771:EE_
-X-MS-Office365-Filtering-Correlation-Id: 86db9ecc-a70f-4225-01fd-08dbadc259e8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: DtEaR6skmzbxlppyOOTZHpI29qNgd+GSg/CzOKI+ksvqoWhEt0/Utc4rhJDlLHz/OQPU3/mfoMgAgujYWaEu1jtkl1tPebCESAHcpnCCNUAo+cTXayeQ2CX783jiymQO9pfwHm5rZygo0eYBYjSA3QAM1h02TyapUOjzVw0WkF/ghP2jZIJRHopd2vm9+FHhucAr/AgvOgL7HjYs8cAnV0e9i8q3XB45d7pFIv+ofuEkO7d7V+WEZDuFeVusC5arutTwAjKyC5bHxgBr/N0xx/ILMKy7wY5nJOI8n23bARiO8d9WlUCiyTTRzb4ox591KF58iMyKaDQlVYQeKJYx7D5ML9MBFicZyEz7ADAKQn4/50jUZ1SjXmbFKkIyWfuNmdHBWjFVpHRLyF3hGnPLW/tp/J7kR1Xf5e2A1vsnqlUwEZsmfwO4kqgl4zKLis/d9hfK4B3uUoB7iIwE5Lys611hw+q9aeFB5WsDK8BTnuFLweqLt2SJv9RWdbjgGlEs8ZoJxKal9iLiXt4hAyz7Gv32zPXDrs1/y7gVtT88ez9bUslUZ9lFgmRPTaP2JjE3qjhnN7jSTEDaoLUqTpfVsXR33DtAYSGubJ0p2xPXGICIGq486ao4yr/9yVle0k8JUbuyd6avgpAQUbZAt5fpAGwEsmRWor3VnpXSDs7r2x2Bm71FH4h5goxfKoQABuAN3VfgWtcESBZDSsAn1Izs/vsVbtio+SvFY4FUeaZRMuAv1B8ZUfSbW1M+ANY0lnP12ZkWvbJHAmefaS86mz7sRQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(376002)(39860400002)(396003)(346002)(82310400011)(451199024)(1800799009)(186009)(36840700001)(40470700004)(46966006)(8676002)(70586007)(70206006)(4326008)(8936002)(6666004)(36756003)(6916009)(41300700001)(4744005)(5660300002)(54906003)(478600001)(316002)(2906002)(2616005)(26005)(1076003)(107886003)(336012)(86362001)(426003)(83380400001)(47076005)(40460700003)(36860700001)(356005)(81166007)(82740400003)(40480700001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2023 03:44:04.5913 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 86db9ecc-a70f-4225-01fd-08dbadc259e8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343D.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6771
-X-Mailman-Approved-At: Tue, 05 Sep 2023 05:47:36 +0200
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQKO/hFpQCIJv5N4xDW6Es6peGHY4AJDo85+AXmVEGsB//jQZa5zhcYQ
+Content-Language: en-us
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrDKsWRmVeSWpSXmKPExsWy7bCmqW7Mtm8pBlfOyli8fXGW0eLblm2M
+ Fm/3drJbPD70msmBxWPP6VnMHrMbLrJ4nL2zgzGAOSrbJiM1MSW1SCE1Lzk/JTMv3VbJOzje
+ Od7UzMBQ19DSwlxJIS8xN9VWycUnQNctMwdonZJCWWJOKVAoILG4WEnfzqYov7QkVSEjv7jE
+ Vim1ICWnwLxArzgxt7g0L10vL7XEytDAwMgUqDAhO2PnBZmClYIVc1ccZmxgPMLXxcjBISFg
+ IvFrE28XIxeHkMAORomzfw8wQzifGCU2n1/J1sXICeFMXMQOYoM0LHs9jQ2iaCejxMr1X1kg
+ nBeMEufOnmEGqWIT0Jd42bGNFcQWEVCTeLvgBFg3s0CixLStX8GmcgoESny88B/MFhaIkfgw
+ CyLOIqAicWDmTxYQm1fAUqJv8y0mCFtQ4uTMJywQc7Qlli18zQxxkYLEz6fLoHa5SdxecR6q
+ Rlzi5dEj7CDHSQh8ZZd4u20q1AsuEk+WLWCEsIUlXh3fAhWXkvj8bi8bJFzKJXYsS4LobWGU
+ aG7bA7XMXuLHzSmsIDXMApoS63fpQ5QrSxy5BbWWT6Lj8F92iDCvREebEESjusSB7dNZIGxZ
+ ie45n1knMCrNQvLYLCSPzULywCyEXQsYWVYxiqUWFOempyYbFRjCYzo5P3cTIzgZajnvYLwy
+ /5/eIUYmDsZDjBIczEoivO/kv6UI8aYkVlalFuXHF5XmpBYfYjQFBvVEZinR5HxgOs4riTc0
+ sTQwMTMzNDcyNTBXEue91zo3RUggPbEkNTs1tSC1CKaPiYNTqoEpuzVZ4iBXRhh3YdHu1Qs/
+ XTh9PdZEuOPB+ZCgz94fQvw13vHaLeazk3vrwfnQ7H7TIbdlPLcX7pqXcdSoZO3Ln5MTuUxV
+ Y2ckCp4Xf7VwzYOeb53Rzd69lUrS3w66Jy+LnWZ8+8KOeg3hl4aX3+dXp0pcv/hrVkPGgfds
+ 1Z2Kabkyx+Ydie1Z03NE8Wf87L4ex9/6U6wDb7duqgt1ZWth/D5Ps3NtQ9W8uVxsO9fuVpn7
+ 1PhUcvAlJ9myz7nnEk/ezLhg8Jd5TmfD8yfsCkduXYya8H977Fw1idfr9jheeVS4odTJwGFK
+ 7L1jdWe6HuwoS2+4/3Hm56rtUQtjO34fyNx1d1PWG4Zzb1TdrrwJV2Ipzkg01GIuKk4EAHzT
+ jbYPBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPLMWRmVeSWpSXmKPExsWy7bCSnG7Mtm8pBv/NLN6+OMto8W3LNkaL
+ t3s72S0eH3rN5MDisef0LGaP2Q0XWTzO3tnBGMAcxWWTkpqTWZZapG+XwJVxdHInc8ELgYo9
+ 726yNDA28nUxcnJICJhILHs9ja2LkYtDSGA7o0T34p/sEAlZiWfvdkDZwhL3W46wQhQ9Y5T4
+ uWQyK0iCTUBf4mXHNjBbREBN4u2CE2ANzALJEmvOLGGHaOhhknh6/T8bSIJTIFDi4wUIW1gg
+ SmL7mqPMIDaLgIrEgZk/WUBsXgFLib7Nt5ggbEGJkzOfsEAM1ZbofdjKCGMvW/iaGeI6BYmf
+ T5dBHeEmcXvFeah6cYmXR4/AfdO9s4cN5pu7D16yT2AUnYVkxSwkK2YhWTELyagFjCyrGEVT
+ C4pz03OTCwz1ihNzi0vz0vWS83M3MYLjSCtoB+Oy9X/1DjEycTAeYpTgYFYS4X0n/y1FiDcl
+ sbIqtSg/vqg0J7X4EKM0B4uSOK9yTmeKkEB6YklqdmpqQWoRTJaJg1OqgWlGvUjqAnWzo64+
+ XJoLX9cqB21nPttRPDVbnKd24rlrYZvW1RtofOa57PFra+BCfTv9TfsdTh3/7LZ7m1PDtbUv
+ PnfOKfwxI3DH0l1V71+FZW34PtP8TZJKnbZP+jq/M0cq5MyFzNfm1nbdfFq45b67/e+4h+ra
+ n/MPK3iEpMn7Vq5d+7Zizb8DIs8OcH6ySYiTKk6ZVpyplTchVpTvkJ3VgiA1xcx6y08La89b
+ tbwVVL9X8vgwn8Kj9dsZJiSG22e+uCr1KuNSyXOFs28uTjq5vPlEQsjDiNQYK2meGar903o+
+ njvA6F/ktszW8OzXR0LPv2xYOblyeWpZ7O1dvVfvzlhusNlRVdxl+y+uo6+UWIozEg21mIuK
+ EwHzpXAiEgMAAA==
+X-CMS-MailID: 20230905050220epcas2p34939db5d4b4d5088bd3f09b239a37704
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5
+References: <CGME20230828094953epcas2p3fc191dd7a0d387cfd987240b972c79b5@epcas2p3.samsung.com>
+ <20230828094938.2061606-1-chanho61.park@samsung.com>
+ <20230828094938.2061606-4-chanho61.park@samsung.com>
+ <CAPnjgZ2eKzzcyjBG_EKbCLMM_9x4h4O4ABPMgX6vY_ScD=tZUA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,36 +138,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When we pass the size parameter to the command "sf erase",
-flash_is_unlocked() api is getting updated with length which is
-incorrect. Fix this flash_is_unlocked() api by passing the size
-parameter.
+Hi Simon,
 
-ZynqMP> sf erase 0 100000
-len=0x8000000 which is flash size
-size=0x100000
+> -----Original Message-----
+> From: Simon Glass <sjg=40chromium.org>
+> Sent: Tuesday, September 5, 2023 1:49 AM
+> To: Chanho Park <chanho61.park=40samsung.com>
+> Cc: Rick Chen <rick=40andestech.com>; Leo <ycliang=40andestech.com>; u-
+> boot=40lists.denx.de
+> Subject: Re: =5BPATCH v2 3/3=5D timer: riscv_aclint_timer: add
+> timer_get_boot_us for BOOTSTAGE
+>=20
+> Hi Chanho,
+>=20
+> On Mon, 28 Aug 2023 at 03:50, Chanho Park <chanho61.park=40samsung.com>
+> wrote:
+> >
+> > timer_get_boot_us function is required to record the boot stages as
+> > us-based timestamp.
+> >
+> > Signed-off-by: Chanho Park <chanho61.park=40samsung.com>
+> > ---
+> >  drivers/timer/riscv_aclint_timer.c =7C 22 ++++++++++++++++++++++
+> >  1 file changed, 22 insertions(+)
+> >
+> > diff --git a/drivers/timer/riscv_aclint_timer.c
+> b/drivers/timer/riscv_aclint_timer.c
+> > index e29d527c8d77..8b67745bb4a2 100644
+> > --- a/drivers/timer/riscv_aclint_timer.c
+> > +++ b/drivers/timer/riscv_aclint_timer.c
+> > =40=40 -6,6 +6,7 =40=40
+> >
+> >  =23include <common.h>
+> >  =23include <clk.h>
+> > +=23include <div64.h>
+> >  =23include <dm.h>
+> >  =23include <timer.h>
+> >  =23include <asm/io.h>
+> > =40=40 -44,6 +45,27 =40=40 u64 notrace timer_early_get_count(void)
+> >  =7D
+> >  =23endif
+> >
+> > +=23if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
+>=20
+> Just a nit...you should not need this =23if, since if the function is
+> not used it will be stripped from the image by the linker.
 
-We need to update the size in the flash_is_unlocked() api and not
-the length.
+Thank you for the suggestion.
+Without these guards, compile error can be occurred due to multiple timer_g=
+et_boot_us definitions.
+For risc-v, there are two timers for S-mode and M-mode, respectively.
+So, I put them to avoid below build errors.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- cmd/sf.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+riscv64-unknown-linux-gnu-ld.bfd: drivers/timer/riscv_aclint_timer.o: in fu=
+nction =60timer_get_boot_us':
 
-diff --git a/cmd/sf.c b/cmd/sf.c
-index 55bef2f769..977ffcb63c 100644
---- a/cmd/sf.c
-+++ b/cmd/sf.c
-@@ -366,7 +366,7 @@ static int do_spi_flash_erase(int argc, char *const argv[])
- 	}
- 
- 	if (flash->flash_is_unlocked &&
--	    !flash->flash_is_unlocked(flash, offset, len)) {
-+	    !flash->flash_is_unlocked(flash, offset, size)) {
- 		printf("ERROR: flash area is locked\n");
- 		return CMD_RET_FAILURE;
- 	}
--- 
-2.17.1
+/data/risc-v/qemu/u-boot/drivers/timer/riscv_aclint_timer.c:49: multiple de=
+finition of =60timer_get_boot_us'; drivers/timer/riscv_timer.o:/data/risc-v=
+/qemu/u-boot/drivers/timer/riscv_timer.c:55: first defined here
+
+make=5B1=5D: *** =5Bscripts/Makefile.spl:527: spl/u-boot-spl=5D Error 1
+
+Best Regards,
+Chanho Park
 
