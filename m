@@ -4,53 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7B6C83F33
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 07:56:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD0FC83F33
+	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 08:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6103086611;
-	Tue,  5 Sep 2023 09:56:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id ACCD48654B;
+	Tue,  5 Sep 2023 10:21:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1693900593;
-	bh=XB9IdtmGc4UvcoQKW+IsBDD4w77RqYvaPWK1BbFGBdk=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=V0YN+gqJW52G3b2i4f/OqelQftYPj5WXL5nPN3NBYAacGx0vP3DnxbEXYcZYcA7fT
-	 H4ZTohiGvvHas5M1poMMG7cUzBuYx1ZDg5Q5e6TFBmmtOydTT4Qkw9s1C4pb12k24S
-	 xkH23dexHD2tniiHg2RzjiisgwNF4YLs3TP/0CwYgfEexwwdG/4MqtYSq1DTEbMG4P
-	 hxBYjx8SnGNPwstIz6LJhIOVKC8XVPiDfkTt7HQtmCvNT+ucortteq5tr9PvtPNGcX
-	 aLSDvmypl/IpV3IRcozZGbex4qvlI1zVWszMPYOuLXVr+bSxIhnPW8o3XAfOK48KlB
-	 j74L9LyUp5sdg==
-Received: from [IPV6:2001:a61:6041:6101:8b79:a919:5b01:e026] (unknown
- [IPv6:2001:a61:6041:6101:8b79:a919:5b01:e026])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CLpQBWbV";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CBB008691E; Tue,  5 Sep 2023 10:21:49 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: sbabic@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3264D86569;
- Tue,  5 Sep 2023 09:56:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693900592;
- bh=XB9IdtmGc4UvcoQKW+IsBDD4w77RqYvaPWK1BbFGBdk=;
- h=Date:To:Cc:From:Subject:From;
- b=YMNjEJ9hToWv3+cetlNLjKQrWsHwDogqB3gaoiO3yC4DqSAMPa7qvubZP7Yq3/wiD
- Xl6EBVyIDWntufgHIrsuf+2Unk62EUk/JN6aKOBnfv4ESMYcKfherZ9Xb9JUWByxxP
- ufhy8j7U0ZgoXLklgZTpd2VynVd+8+BmjoIwM0ts5J0LU6gCVDZvMcStVRlWtL+3QL
- PpAr8LZ3cRDHggJ80Va0Hru/5lhZxZAHoYBtXQUJFtXuQ63rYmckHN2vdjP6Gn/T5V
- qeylgvayczgijmrdp7WOS3HQYLdbEBPLXRcG2V5/D1+bhIpAdyP4W2lA3Vyn9hDF9Z
- +aNS/wOoi4loA==
-Message-ID: <f0ca845c-890f-9360-7426-41dce4147a7e@denx.de>
-Date: Tue, 5 Sep 2023 09:56:31 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id CD08B8643D
+ for <u-boot@lists.denx.de>; Tue,  5 Sep 2023 10:21:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3858LhuS029406;
+ Tue, 5 Sep 2023 03:21:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693902103;
+ bh=Vf2jeAM9GFdpNQZhtW+2+nuFA9ctbfidUe0m9wDT0bA=;
+ h=From:Subject:Date:To:CC;
+ b=CLpQBWbVYVWecI8toBotwSHI29mpu6ygOd2ofwj/JXAC7Wq+xR+yxwMyeVW+9oA+C
+ thZGKI3/Me+lXgosfe9VzdP8wPoIwD0C9jnyiZp1TyBCV/d7xLDaGC0HaCKHfpBPk0
+ Yi7r2sUkc3L1+nrz8p5n7waD4A4PaV4xNkTi1dCE=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3858Lhqx013994
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 5 Sep 2023 03:21:43 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
+ Sep 2023 03:21:42 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 5 Sep 2023 03:21:42 -0500
+Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3858LdLg016284;
+ Tue, 5 Sep 2023 03:21:39 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [RFC PATCH 0/2] RFC version for ATF and OP-TEE Firewalling
+Date: Tue, 5 Sep 2023 13:51:33 +0530
+Message-ID: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-To: Tom Rini <trini@konsulko.com>
-Content-Language: de-DE
-Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-From: Stefano Babic <sbabic@denx.de>
-Subject: Pull request: please pull u-boot-imx-20230905
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAA3l9mQC/x2NQQrCMBBFr1Jm7UhMq4JbwQO4FReTdNoO1ElJo
+ hZK727j8sF/7y+QOAonuFQLRP5IkqAbHHYV+IG0Z5R2Y7DG1uZsG3SiL1LsJPKXxlG0x9ORfet
+ szd4QbKKjxOgiqR+KmgXf6ELIWCJ706DynMtwitzJ/H9/wP12hee6/gBi83O4kgAAAA==
+To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew
+ Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
+ <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
+ <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1693902099; l=830;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=gxaPBTgRMOkSC3Bt8H1PZ6xyEbKuUJoYwjv1HVXU4KY=;
+ b=bIjDoURQOfrR8wYZPFVtP6FeiPY+cbjeeDbfJJ4Y4NOJqgYwHZFyeRbxrewylYXOTcXSXECdI
+ bp/o2lG8EY1AC1tdEczJdD7+YUs8QUSE5XTG2aF9Pva1dGhLHbVBLCR
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,77 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This is a start to firewall ATF and OP-TEE memory regions using the
+firewalls present in K3 SoCs. Please give reviews as to what can be
+better in the implementation.
 
-some fixes for the release, please pull from u-boot-imx, thanks !
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Manorit Chawdhry (2):
+      binman: ti-secure: Add support for firewalling entities
+      binman: j721e: Add firewall configurations for atf
 
-The following changes since commit 8999257f219d1e371c2fd66f255b8782897944d9:
-
-   Merge tag 'doc-2023-10-rc4-2' of 
-https://source.denx.de/u-boot/custodians/u-boot-efi (2023-09-02 09:08:54 
--0400)
-
-are available in the Git repository at:
-
-   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git 
-tags/u-boot-imx-20230905
-
-for you to fetch changes up to a79fca7b44d0dee96e14d31de5869b35b587283c:
-
-   thermal: imx_tmu: Increase the polling interval (2023-09-04 17:26:44 
-+0200)
-
-----------------------------------------------------------------
-Fixes for release
------------------
-
-- imx9: fix DRAM calculation
-- thermal: fixes
-- fixed for DM, DH and Gateworks boards
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/17639
-
-----------------------------------------------------------------
-Elena Popa (1):
-       arm: imx: imx8m: imx9: Fix DRAM size calculation due to rom_pointer
-
-Fabio Estevam (5):
-       imx8mm_evk_defconfig: Select CONFIG_IMX_TMU
-       thermal: imx_tmu: Fix the polling default
-       thermal: imx_tmu: Increase the log level for high temperatures
-       thermal: imx_tmu: Fix the temperature unit
-       thermal: imx_tmu: Increase the polling interval
-
-Marek Vasut (5):
-       ARM: imx: Drop CONFIG_USE_BOOTCOMMAND=n on i.MX6 DHSOM
-       ARM: imx: Select 2 DRAM banks on Data Modul i.MX8M Mini eDM SBC
-       ARM: imx: Use default SAVED_DRAM_TIMING_BASE on DH i.MX8M Plus DHCOM
-       ARM: imx: Use default SAVED_DRAM_TIMING_BASE on Data Modul i.MX8M 
-Mini eDM SBC
-       ARM: imx: Use default SAVED_DRAM_TIMING_BASE on Data Modul i.MX8M 
-Plus eDM SBC
-
-Tim Harvey (1):
-       board: gateworks: venice: fix gw7904
-
-  arch/arm/mach-imx/imx8m/soc.c               |  7 ++++---
-  arch/arm/mach-imx/imx9/soc.c                |  6 +++---
-  configs/dh_imx6_defconfig                   |  1 -
-  configs/imx8mm_data_modul_edm_sbc_defconfig |  3 +--
-  configs/imx8mm_evk_defconfig                |  1 +
-  configs/imx8mm_venice_defconfig             |  2 +-
-  configs/imx8mp_data_modul_edm_sbc_defconfig |  1 -
-  configs/imx8mp_dhcom_pdk2_defconfig         |  1 -
-  configs/imx8mp_dhcom_pdk3_defconfig         |  1 -
-  drivers/thermal/imx_tmu.c                   | 10 +++++++---
-  10 files changed, 17 insertions(+), 16 deletions(-)
+ arch/arm/dts/k3-j721e-binman.dtsi | 161 ++++++++++++++++++++++++++++++++++++++
+ tools/binman/btool/openssl.py     |  16 +++-
+ tools/binman/etype/ti_secure.py   |  54 +++++++++++++
+ tools/binman/etype/x509_cert.py   |   3 +-
+ 4 files changed, 231 insertions(+), 3 deletions(-)
+---
+base-commit: 321d7b4d875a77552a969dd6ea5bbed2644fcb0c
+change-id: 20230724-binman-firewalling-65ecdb23ec0a
 
 Best regards,
-Stefano
-
 -- 
-=====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
-Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
-=====================================================================
+Manorit Chawdhry <m-chawdhry@ti.com>
+
