@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C072CEB8FAD
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 03:50:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D2FEB8FA5
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 04:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1471086591;
-	Wed,  6 Sep 2023 05:50:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 02D0286553;
+	Wed,  6 Sep 2023 06:00:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j0C66W4h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nqrWtGa9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8C498659F; Wed,  6 Sep 2023 05:50:10 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 08D708666B; Wed,  6 Sep 2023 06:00:38 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 110F28656A
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 05:50:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36BBE86553
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 06:00:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3863o5hV001766;
- Tue, 5 Sep 2023 22:50:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693972205;
- bh=ESKwiJp0lZ94pIZn7ZaHvwT5ECOPcurrUw+nbWFQiQI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=j0C66W4hE/S743mzK90SbU42cnqobPXoHLtJviHsFjAOol/cPfQ/wDNdG1DMB8907
- Hr/bxvdsL9M0o1cKsyBJxAoTTg/Ixb3EKZHSLiuDJ91AMEyZp/9y1CuiijNouc6fEM
- UTFDqwJu+uJbTuXP1YAKWmPWWv/d4Xu7h5WNpftw=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3863o5he029733
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Sep 2023 22:50:05 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Sep 2023 22:50:05 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Sep 2023 22:50:05 -0500
-Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3863o1a3049175;
- Tue, 5 Sep 2023 22:50:01 -0500
-Message-ID: <2c91bdf0-39c1-f7d9-28db-c1a7a8e361eb@ti.com>
-Date: Wed, 6 Sep 2023 09:20:00 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-58cbdf3eecaso30771667b3.0
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 21:00:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693972834; x=1694577634; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AsL93w0JohuxWulQ84FPpRM9tCMtvR9c9+Dc+Wa9pdw=;
+ b=nqrWtGa96Nt9yHli4XeAbDqf81q89l458Hy1IJJH15ms7rfE3TODSxyoxX4ur5VB+P
+ jWYs8UIdRVejUKbihTwV9WltXjwN0SzCUfG9lqYk0vqDXVh8VA3vVkN+mFpWjK+HsziC
+ mKOmPYAeXd3RM6ns+c8V9+x5+tJec/hfbVxy7YmYznVlhTJeB/jUmoqY7Gwbr3/uimUe
+ 2aSBCKwurJccyfw2zsxIY3MM67v037vTWPC5Jc99I0J9QmBXL4sjCT58h8dKBZhDj+VZ
+ N8dPmr6s6K5WJiifYgwtMMXEeQekEXBb+Ks7OadJOWCqTDsVhFymvbjJzbItlmnxNedg
+ lamA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693972834; x=1694577634;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AsL93w0JohuxWulQ84FPpRM9tCMtvR9c9+Dc+Wa9pdw=;
+ b=Q/ockfKY+4UVYVhhBItSgiTspkJa2J7wOuoDL+0KqGnVHxCvzytbMsyW/ez/arx6OZ
+ JEd/zhrB4O4EGM1R5l7rCytGypBqoDhcKB3EE7cTw5IjJi9SQ94OyNksanSFbP5fcziP
+ gbFkI+mZbQqtRtwFoPWqbOiq8ahjFV7YhG6c7fB9/PAB4Tmb2EJD/acVgFQAE6xdndcm
+ 4XGZI9pjV9OBHfOVXdhXCIkxT5Ah2UQ+0zHBzh73VqQnhavtxSSnWiJnE6wZMu6Vl64/
+ jt42LCb9oI/QNwzN9BRBpzO+8SXryVixe1F8WXP4igWnehZYsXcskVtmHO03xnixfSNz
+ Ix9g==
+X-Gm-Message-State: AOJu0YxU+bq4OIScMEhCrDsEubqB0VuPn1+ZQLKNVmgGft9Fn9/XxvH0
+ eeIQhSTWmH43Drsaz1ISE7Q=
+X-Google-Smtp-Source: AGHT+IEGqX3h+CF93VIR1sHCwfGwAya00aMFmnrdx79/da8D24z1JM4mWX2Fad+lB0yNmp3UXVIY+A==
+X-Received: by 2002:a0d:d747:0:b0:592:264c:a88c with SMTP id
+ z68-20020a0dd747000000b00592264ca88cmr16949960ywd.18.1693972833808; 
+ Tue, 05 Sep 2023 21:00:33 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ t144-20020a0dea96000000b005839a780c29sm3510214ywe.102.2023.09.05.21.00.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Sep 2023 21:00:33 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH] bootstd: sata: Add bootstd support for ahci sata
+Date: Tue,  5 Sep 2023 21:00:02 -0700
+Message-Id: <20230906040002.19267-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [RFC PATCH 2/2] binman: j721e: Add firewall configurations for atf
-Content-Language: en-US
-To: Andrew Davis <afd@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Simon
- Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
- <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
- <nm@ti.com>
-References: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
- <20230905-binman-firewalling-v1-2-3894520bff8a@ti.com>
- <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,35 +90,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Add ahci sata bootdev and corresponding hunting function.
 
-On 05/09/23 20:52, Andrew Davis wrote:
-> On 9/5/23 3:21 AM, Manorit Chawdhry wrote:
->> The following commits adds the configuration of firewalls required to
->> protect ATF and OP-TEE memory region from non-secure reads and
->> writes using master and slave firewalls present in our K3 SOCs.
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-[...]
+ drivers/ata/Makefile       |  1 +
+ drivers/ata/sata.c         | 25 +++++++++++++++
+ drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+ include/sata.h             |  1 +
+ 4 files changed, 89 insertions(+)
+ create mode 100644 drivers/ata/sata_bootdev.c
 
->> +                        // cpu_0_cpu_0_msmc Foreground Firewall
->> +                        firewall-1 {
->> +                            id = <257>;
->> +                            region = <1>;
->> +                            control = <0x1a>;
->> +                            permissions = <0x0100ff>;
->> +                            start_address = <0x0 0x70000000>;
-> 
-> This address might change if one moves ATF, might work to use 
-> CONFIG_K3_ATF_LOAD_ADDR?
-> Not sure how you would get the end address as we don't really know ATF size..
-> 
-
-I think this could be handled within binman IF CONFIG_K3_ATF_LOAD_ADDR and the 
-ATF binary were not only A53/A72 inputs. But since it is, I don't see how that 
-can be implemented.
-
-> Andrew
-
+diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
+index 6e30180b8b..c1b51b5444 100644
+--- a/drivers/ata/Makefile
++++ b/drivers/ata/Makefile
+@@ -11,6 +11,7 @@ obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
+ obj-$(CONFIG_FSL_SATA) += fsl_sata.o
+ obj-$(CONFIG_LIBATA) += libata.o
+ obj-$(CONFIG_SATA) += sata.o
++obj-$(CONFIG_BOOTSTD) += sata_bootdev.o
+ obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
+ obj-$(CONFIG_SATA_MV) += sata_mv.o
+ obj-$(CONFIG_SATA_SIL) += sata_sil.o
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index ce3e9b5a40..9da7218564 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -15,6 +15,8 @@
+ #include <dm.h>
+ #include <part.h>
+ #include <sata.h>
++#include <dm/device-internal.h>
++#include <dm/uclass-internal.h>
+ 
+ #ifndef CONFIG_AHCI
+ struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
+@@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
+ 	return ops->scan(dev);
+ }
+ 
++int sata_rescan(bool verbose)
++{
++	struct udevice *dev;
++	int devnum = 0;
++	int ret;
++
++	/* Find and probing the SATA controller */
++	ret = uclass_get_device(UCLASS_AHCI, devnum, &dev);
++
++	/* Sanity check */
++	if (ret)
++		ret = uclass_find_first_device(UCLASS_AHCI, &dev);
++	if (ret) {
++		printf("Cannot probe SATA device %d (err=%d)\n", devnum, ret);
++		return -ENOSYS;
++	}
++	if (!dev) {
++		printf("No SATA device found!\n");
++		return -ENOSYS;
++	}
++	return 0;
++}
++
+ #ifndef CONFIG_AHCI
+ #ifdef CONFIG_PARTITIONS
+ struct blk_desc *sata_get_dev(int dev)
+diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+new file mode 100644
+index 0000000000..f638493ce0
+--- /dev/null
++++ b/drivers/ata/sata_bootdev.c
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Bootdev for sata
++ *
++ * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
++ */
++
++#include <common.h>
++#include <ahci.h>
++#include <bootdev.h>
++#include <dm.h>
++#include <init.h>
++#include <sata.h>
++
++static int sata_bootdev_bind(struct udevice *dev)
++{
++	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++
++	ucp->prio = BOOTDEVP_4_SCAN_FAST;
++
++	return 0;
++}
++
++static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
++{
++	int ret;
++
++	if (IS_ENABLED(CONFIG_PCI)) {
++		ret = pci_init();
++		if (ret)
++			return ret;
++	}
++
++	ret = sata_rescan(true);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++struct bootdev_ops sata_bootdev_ops = {
++};
++
++static const struct udevice_id sata_bootdev_ids[] = {
++	{ .compatible = "u-boot,bootdev-sata" },
++	{ }
++};
++
++U_BOOT_DRIVER(sata_bootdev) = {
++	.name		= "sata_bootdev",
++	.id		= UCLASS_BOOTDEV,
++	.ops		= &sata_bootdev_ops,
++	.bind		= sata_bootdev_bind,
++	.of_match	= sata_bootdev_ids,
++};
++
++BOOTDEV_HUNTER(sata_bootdev_hunter) = {
++	.prio		= BOOTDEVP_4_SCAN_FAST,
++	.uclass		= UCLASS_AHCI,
++	.hunt		= sata_bootdev_hunt,
++	.drv		= DM_DRIVER_REF(sata_bootdev),
++};
+diff --git a/include/sata.h b/include/sata.h
+index d89f7a8a29..0495744bad 100644
+--- a/include/sata.h
++++ b/include/sata.h
+@@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
+ 
+ int sata_probe(int devnum);
+ int sata_remove(int devnum);
++int sata_rescan(bool verbose);
+ 
+ #endif
 -- 
-Thanking You
-Neha Malcom Francis
+2.39.2
+
