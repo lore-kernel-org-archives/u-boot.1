@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 832CDEE14D0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:34:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A749EE14D0
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:34:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 265E086A61;
-	Wed,  6 Sep 2023 23:30:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6DDBB86A08;
+	Wed,  6 Sep 2023 23:30:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="TlQTTGKu";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wWt19Zem";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="X+CYg8Sd";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="T50sabVa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F421586A3F; Wed,  6 Sep 2023 23:30:55 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 4E969869A4; Wed,  6 Sep 2023 23:30:56 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4681A86A22
+ by phobos.denx.de (Postfix) with ESMTPS id CD56C868BC
  for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
@@ -31,7 +31,7 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RgwXY0H0sz9t26;
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RgwXY4LBPz9sqQ;
  Wed,  6 Sep 2023 23:30:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694035853;
@@ -39,38 +39,38 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w3ZQLU46BmvV1IuLVsClTduT3jipgMqmDy5/JVT9Cdw=;
- b=TlQTTGKuFIRgz0mCVC+8vtrJj2yo2AJ7n3zQH3SQ0+C0PiEtj6qhQNqbYVjKIPjRbLr/5+
- 8XU0a3WhkrB4QUtiH6YXfcUtFxFqmDJxQY+h3v7p6JlcPKbFpI+0eacpqEF/Zr83FoMLOP
- i/U9+UeSmJ1NKvfrVZOyE88cbmSzHwPLYeSZzcE1LsPAioxOgrzX/EDCVrzUkvi6TLG5yj
- OCmwQ2b/WCglAD5BOT/6rkmIgyalGoN3yfQ2qtVAzXFXNEFyK2OX+w8w0yd55LpnNYTAb0
- +d0zacSv8h8nm02ebiQPswFMa2PMh+c/1YxTt7XnC5RyhfwPe0ZtBQvXkPDfsw==
+ bh=BJNfqnqHb5RnaUHSZWzBK6titqbtpt+/+qA13roacts=;
+ b=X+CYg8SdJZIydI9Ln0wJ+1Vk7Gos2rkDJn9S6apibCzSaLo166NS7KEuda4NGZ0scqTnKq
+ 38tPwK4ZVW6iugwMDR2l3AwkvZu4ngK8cuuaz8W9ydtjsGC7wk75UJKjjkuEmKD3FR9nna
+ t3bCuiGW+xMFhBN8TmTgXEB2Rn9GhRy/tV9pFLWz0IpqsodZzoobZtmNkyFZMFjzzO3Ac3
+ lmR/AGwKGWCdaQp7rdy9MY+hiPCCxJxYObluyCa7/dmjpHydM520Fd/KfZ3TiY1g42tJcp
+ 80EYwF1V5B4Ak/OQS/yZQICxPlSs3EJqhOyA8ZdPFU1GDY8j2Zac9uxR4bVwHA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035850;
+ s=mail20150812; t=1694035851;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w3ZQLU46BmvV1IuLVsClTduT3jipgMqmDy5/JVT9Cdw=;
- b=wWt19ZemBxQjwdnuhEIp6fgur0XhPa6UYuqmQaFsO+UUIUaP6BGpA9Ml8iSwV2XQ9ySdKc
- CZR/Km9flbC105oGBo17GRCRM+zlVhUfCeemjb9ADbAQTQuZvBiCt6lJQsYCxPU1mKsMVI
- lOYQ3o9yEj0BPXo1fA8GUsrCIttNNe+3PgWWJfAGtH9lVEQ5Ms90ejaq4uC7WWxik1WuG1
- 3EeROXPBBMRgBHaoVICpRDjC2GI4V/ry7GOmLwTxpjLs68ejiw6PyyI7Mr1bUCtsBsOT/s
- 2Xh5VIVnEHASc9rkdxNns8v40WUD5jY1wAJtKxVaL8X0NTsUKD6s3Y7oBVJiVw==
+ bh=BJNfqnqHb5RnaUHSZWzBK6titqbtpt+/+qA13roacts=;
+ b=T50sabVadjOE03+tRp+gE8q0TGzRgxvm2WqYO8/un9Ct4NpjSqSOv2XnrXt23e7aht6x05
+ UGeiojVaPA5XivPUpi3jTXXjRCRpkIyZWs/bDoGCa4ZwLPt4yLJETwJyTztVUp76qqxLWs
+ VgxPLZus7uYqFOkZeRo49gmuQRuI44gogMPRGXIwqSfUXuMNUg51MwFQw57aEoyxE4b0qC
+ 2ScnpeqOQXtIu/0qmhuyZz7vaFXJmLXvY0l3Bl2rwWAc1BErALTlJUnJm1fkUWMWFL2VWs
+ /S1Ci8hXOTAtl9h/MlgkgC8lwzJQY19tSiyWYRW3Q33hGWSefGDJrcmoSU5BPg==
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 20/35] fs: Remove unused NEEDS_MANUAL_RELOC code bits
-Date: Wed,  6 Sep 2023 23:30:00 +0200
-Message-Id: <20230906213015.203437-21-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 21/35] cpu: Remove unused NEEDS_MANUAL_RELOC code bits
+Date: Wed,  6 Sep 2023 23:30:01 +0200
+Message-Id: <20230906213015.203437-22-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ab0ba8d02c3020f83f3
-X-MBO-RS-META: zqe36drdetbbf8hr5nc3ritbgsxsw3b8
-X-Rspamd-Queue-Id: 4RgwXY0H0sz9t26
+X-MBO-RS-ID: 2ae1942425438a365ca
+X-MBO-RS-META: 4pasub4icd5s5nur9t1qzx3dookjc7o7
+X-Rspamd-Queue-Id: 4RgwXY4LBPz9sqQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,36 +93,50 @@ Remove now unused NEEDS_MANUAL_RELOC code.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- fs/fs.c | 16 ----------------
- 1 file changed, 16 deletions(-)
+ drivers/cpu/cpu-uclass.c | 27 ---------------------------
+ 1 file changed, 27 deletions(-)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index 2b815b1db0f..cfc781bbb8d 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -422,22 +422,6 @@ int fs_set_blk_dev(const char *ifname, const char *dev_part_str, int fstype)
- {
- 	struct fstype_info *info;
- 	int part, i;
--#ifdef CONFIG_NEEDS_MANUAL_RELOC
--	static int relocated;
--
--	if (!relocated) {
--		for (i = 0, info = fstypes; i < ARRAY_SIZE(fstypes);
--				i++, info++) {
--			info->name += gd->reloc_off;
--			info->probe += gd->reloc_off;
--			info->close += gd->reloc_off;
--			info->ls += gd->reloc_off;
--			info->read += gd->reloc_off;
--			info->write += gd->reloc_off;
--		}
--		relocated = 1;
--	}
--#endif
+diff --git a/drivers/cpu/cpu-uclass.c b/drivers/cpu/cpu-uclass.c
+index a7548325265..9772578968b 100644
+--- a/drivers/cpu/cpu-uclass.c
++++ b/drivers/cpu/cpu-uclass.c
+@@ -127,36 +127,9 @@ static int uclass_cpu_init(struct uclass *uc)
+ 	return ret;
+ }
  
- 	part = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str, &fs_dev_desc,
- 						    &fs_partition, 1);
+-static int uclass_cpu_post_bind(struct udevice *dev)
+-{
+-	if (IS_ENABLED(CONFIG_NEEDS_MANUAL_RELOC) &&
+-	    (gd->flags & GD_FLG_RELOC)) {
+-		struct cpu_ops *ops = cpu_get_ops(dev);
+-		static int reloc_done;
+-
+-		if (!reloc_done) {
+-			if (ops->get_desc)
+-				MANUAL_RELOC(ops->get_desc);
+-			if (ops->get_info)
+-				MANUAL_RELOC(ops->get_info);
+-			if (ops->get_count)
+-				MANUAL_RELOC(ops->get_count);
+-			if (ops->get_vendor)
+-				MANUAL_RELOC(ops->get_vendor);
+-			if (ops->is_current)
+-				MANUAL_RELOC(ops->is_current);
+-
+-			reloc_done++;
+-		}
+-	}
+-
+-	return 0;
+-}
+-
+ UCLASS_DRIVER(cpu) = {
+ 	.id		= UCLASS_CPU,
+ 	.name		= "cpu",
+ 	.flags		= DM_UC_FLAG_SEQ_ALIAS,
+ 	.init		= uclass_cpu_init,
+-	.post_bind	= uclass_cpu_post_bind,
+ };
 -- 
 2.40.1
 
