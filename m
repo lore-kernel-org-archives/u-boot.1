@@ -4,73 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F732EB8FD4
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 13:54:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B8ADEB8FD2
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:21:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB12686519;
-	Wed,  6 Sep 2023 15:54:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DB14B86546;
+	Wed,  6 Sep 2023 16:21:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rkergUcH";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gc/RZfjO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6710C86546; Wed,  6 Sep 2023 15:54:19 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6B6E88643D; Wed,  6 Sep 2023 16:21:45 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6617185DFA
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 15:54:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF4D3865A2
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 386DsDbi020696;
- Wed, 6 Sep 2023 08:54:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694008453;
- bh=yDpJ4V7UiBzjurLNbiO3WuRvlYb29+jsp5rx+fsq2ek=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=rkergUcHg0cjKV+7q96E4Xm7IqHWcQHLTsFx9aQd6F/UPtzFz/3kxXxpssr06WVvi
- jOG2Xhs6oOoODr7Frz3Tf0Rc9lTPHKXTCQoP2DeincTDVuFovtq/ILarvPTeE82+Z1
- Bi+vSZVZPNBcMwaGXAEmAe9fSD7lE/77i+9o+tT4=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 386DsDdM028684
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Sep 2023 08:54:13 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Sep 2023 08:54:11 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Sep 2023 08:54:11 -0500
-Received: from [10.250.38.120] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 386DsBNY073518;
- Wed, 6 Sep 2023 08:54:11 -0500
-Message-ID: <4eb25acc-0d36-fa59-eb89-b8e3321dae3e@ti.com>
-Date: Wed, 6 Sep 2023 08:54:11 -0500
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=BIxy=EW=robh_at_kernel.org=rob@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 455D9B81AD2;
+ Wed,  6 Sep 2023 14:21:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46689C433C8;
+ Wed,  6 Sep 2023 14:21:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1694010101;
+ bh=QbAd/TQ8WCHZRFkkxQMRVcDckFRyvm+rJV5QkeUeW8A=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gc/RZfjOd1UDlSN6a8sVoaPlTbE+9NRr2Dc7fpKD2yECCxZxB1Z7O/pirs3Jwpqu6
+ FJv3bXDzpt7T3++1iXHMh82jIfS+G3bNLJ1cbcd2MlE37mgKxoLyyPkK1pZna6a2U3
+ f2wYup5Wfq93lX3KsJt5+i9jIzT9aW8efb7088tByfU7hpZ6AxNbsltY3dd/NUUWXQ
+ 2l8fPIsN2YjrOrTJjyWoOny9aRGgWgu8m3500un4hxS5vSz7zbwfGp55sJis/hxfcP
+ NJdatDKEdVqZAcpU7dxxIL7KOGTAJeXld3LVzz0aChTvbo1ySSJ+q6zuC6kPErMmEz
+ /sPMMv/1DHFhQ==
+Received: (nullmailer pid 1275640 invoked by uid 1000);
+ Wed, 06 Sep 2023 14:21:39 -0000
+Date: Wed, 6 Sep 2023 09:21:39 -0500
+From: Rob Herring <robh@kernel.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+Message-ID: <20230906142139.GA1236014-robh@kernel.org>
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
+ <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
+ <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
+ <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
+ <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [RFC PATCH 2/2] binman: j721e: Add firewall configurations for atf
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>, Udit Kumar
- <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
-References: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
- <20230905-binman-firewalling-v1-2-3894520bff8a@ti.com>
- <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
- <20230906051840.3747bkybpqd2m4gg@ula0497581>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20230906051840.3747bkybpqd2m4gg@ula0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,114 +82,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/6/23 12:18 AM, Manorit Chawdhry wrote:
-> Hi Andrew,
+On Mon, Aug 28, 2023 at 04:09:29PM -0600, Simon Glass wrote:
+> Hi Peter,
 > 
-> On 10:22-20230905, Andrew Davis wrote:
->> On 9/5/23 3:21 AM, Manorit Chawdhry wrote:
->>> The following commits adds the configuration of firewalls required to
->>> protect ATF and OP-TEE memory region from non-secure reads and
->>> writes using master and slave firewalls present in our K3 SOCs.
->>>
->>> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
->>> ---
->>>    arch/arm/dts/k3-j721e-binman.dtsi | 161 ++++++++++++++++++++++++++++++++++++++
->>>    1 file changed, 161 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
->>> index 4f566c21a9af..0569a592597e 100644
->>> --- a/arch/arm/dts/k3-j721e-binman.dtsi
->>> +++ b/arch/arm/dts/k3-j721e-binman.dtsi
->>> @@ -330,6 +330,73 @@
->>>    					ti-secure {
->>>    						content = <&atf>;
->>>    						keyfile = "custMpk.pem";
->>> +						auth_in_place = <0xa02>;
->>> +
->>> +						// cpu_0_cpu_0_msmc Background Firewall - 0
->>
->> I don't have a personal preference, but I see most comments in DTS
->> are C style /* */.
->>
->> Also it might be easier to understand if you put the comments right before
->> the properties that they relate to, i.g.
->>
->> firewall-0 {
->> 	/* cpu_0_cpu_0_msmc */
->> 	id = <257>;
->> 	region = <0>;
->> 	/* Background, Locked */
->> 	control = <0x31a>;
->> 	permissions = <0xc3ffff>;
->> 	start_address = <0x0 0x0>;
->> 	end_address = <0xff 0xffffffff>;
->> };
->>
->> For permissions, I wonder if it would be easier to read if we add
->> some helper macros:
->>
->> #define FWPRIVID_ALL 0xc3
->>
->> #define FWPERM_SECURE_PRIV_WRITE      BIT(0)
->> #define FWPERM_SECURE_PRIV_READ       BIT(1)
->> #define FWPERM_SECURE_PRIV_CACHEABLE  BIT(2)
->> #define FWPERM_SECURE_PRIV_DEBUG      BIT(3)
->> #define FWPERM_SECURE_USER_WRITE      BIT(4)
->> ...
->>
->> Then you would have:
->>
->> permissions = <FWPRIVID_ALL |
-> 
-> I think we'll have to do some shift here for the right calculations.
-> 
->    #define FWPRIVID_SHIFT 8
-> 
->    permissions = <(FWPRIVID_ALL << FWPRIVID_SHIFT)
+> On Mon, 28 Aug 2023 at 14:29, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >
+> > On Mon, Aug 28, 2023 at 6:54 PM Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Peter,
+> > >
+> > > On Mon, 28 Aug 2023 at 10:37, Peter Robinson <pbrobinson@gmail.com> wrote:
+> > > >
+> > > > On Mon, Aug 28, 2023 at 5:20 PM Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi,
+> > > > >
+> > > > > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > >
+> > > > > >
+> > > > > > Provide a way for removing certain devicetree nodes and/or properties
+> > > > > > from the devicetree. This is needed to purge certain nodes and
+> > > > > > properties which may be relevant only in U-Boot. Such nodes and
+> > > > > > properties are then removed from the devicetree before it is passed to
+> > > > > > the kernel. This ensures that the devicetree passed to the OS does not
+> > > > > > contain any non-compliant nodes and properties.
+> > > > > >
+> > > > > > The removal of the nodes and properties is being done through an
+> > > > > > EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
+> > > > > > behind any Kconfig symbol.
+> > > > > >
+> > > > > > I have only build tested this on sandbox, and tested on qemu arm64
+> > > > > > virt platform. This being a RFC, I have not put this through a CI run.
+> > > > > >
+> > > > > > Sughosh Ganu (5):
+> > > > > >   dt: Provide a way to remove non-compliant nodes and properties
+> > > > > >   fwu: Add the fwu-mdata node for removal from devicetree
+> > > > > >   capsule: Add the capsule-key property for removal from devicetree
+> > > > > >   bootefi: Call the EVT_FT_FIXUP event handler
+> > > > > >   doc: Add a document for non-compliant DT node/property removal
+> > > > > >
+> > > > > >  cmd/bootefi.c                                 | 18 +++++
+> > > > > >  .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
+> > > > > >  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
+> > > > > >  include/dt-structs.h                          | 11 +++
+> > > > > >  lib/Makefile                                  |  1 +
+> > > > > >  lib/dt_purge.c                                | 73 +++++++++++++++++++
+> > > > > >  lib/efi_loader/efi_capsule.c                  |  7 ++
+> > > > > >  7 files changed, 179 insertions(+)
+> > > > > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
+> > > > > >  create mode 100644 lib/dt_purge.c
+> > > > >
+> > > > > What is the point of removing them? Instead, we should make sure that
+> > > > > we upstream the bindings and encourage SoC vendors to sync them. If we
+> > > > > remove them, no one will bother and U-Boot just becomes a dumping
+> > > > > ground.
+> > > >
+> > > > Well things like the binman entries in DT are U-Boot specific and not
+> > > > useful for HW related descriptions or for Linux or another OS being
+> > > > able to deal with HW so arguably we're already a dumping ground to
+> > > > some degree for not defining hardware.
+> > >
+> > > I have started the process to upstream the binman bindings.
+> >
+> > I don't think they should be in DT at all, they don't describe
+> > anything to do with hardware, or generally even the runtime of a
+> > device, they don't even describe the boot/runtime state of the
+> > firmware, they describe build time, so I don't see what that has to do
+> > with device tree? Can you explain that? To me those sorts of things
+> > should live in a build time style config file.
 
-Right, I must have meant #define FWPRIVID_ALL 0xc30000 above, but
-a shift looks better.
+For the record, I tend to agree.
 
->>                 FWPERM_SECURE_PRIV_WRITE |
->>                 FWPERM_SECURE_PRIV_READ |
-> 
-> Also, I would like to make FWPERM_SECURE_PRIV_RWCD too as it'll be
-> commonly used.
-> 
-> Would be sending another RFC with this change if you are fine with the
-> suggestions. Thank you for reviewing!
-> 
+> I beg to differ. Devicetree is more than just hardware and always has
+> been. See, for example the /chosen and /options nodes.
 
-Works for me, should get rid of several of these magic numbers.
+There are exceptions...
 
-Andrew
+> We need run-time configuration here, since we cannot know at build
+> time what we will be asked to do by a previous firmware phase.
 
-> Regards,
-> Manorit
-> 
->>                 ...
-> 
-> 
->>> ;
->>
->>> +						firewall-0 {
->>> +							id = <257>;
->>> +							region = <0>;
->>> +							control = <0x31a>;
->>> +							permissions = <0xc3ffff>;
->>> +							start_address = <0x0 0x0>;
->>> +							end_address = <0xff 0xffffffff>;
->>> +						};
->>> +
->>> +						// cpu_0_cpu_0_msmc Foreground Firewall
->>> +						firewall-1 {
->>> +							id = <257>;
->>> +							region = <1>;
->>> +							control = <0x1a>;
->>> +							permissions = <0x0100ff>;
->>> +							start_address = <0x0 0x70000000>;
->>
->> This address might change if one moves ATF, might work to use CONFIG_K3_ATF_LOAD_ADDR?
->> Not sure how you would get the end address as we don't really know ATF size..
->>
->> Andrew
+Really, I don't want to have to care about the binman binding. If it is 
+u-boot specific, then it should stay in u-boot. I took /options/u-boot/, 
+but now I'm starting to have second thoughts on that being in dtschema 
+if it is going to be continually and frequently extended. Validating it 
+in SR does little. If a vendor is abusing /options/u-boot/ in some way 
+they could just as easily remove the node in their u-boot fork to pass. 
+SR is certainly not going to require the node be there.
+
+On A/B updates, that really doesn't seem like a u-boot specific problem 
+to me. No one wants A/B updates in EDK2 or anything else?
+
+Rob
