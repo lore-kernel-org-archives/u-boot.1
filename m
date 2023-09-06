@@ -4,75 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D847EC83F3E
-	for <u-boot@archiver.kernel.org>; Tue,  5 Sep 2023 22:17:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2798FCCF9E9
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 00:14:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCF478655E;
-	Wed,  6 Sep 2023 00:17:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CFDF286568;
+	Wed,  6 Sep 2023 02:14:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DCDFrAQq";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B31486543; Wed,  6 Sep 2023 00:17:03 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5D4A86579
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 00:17:00 +0200 (CEST)
+ id B6D8F86550; Wed,  6 Sep 2023 02:14:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id E42AC86590
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 02:14:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2bd6611873aso46734541fa.1
- for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 15:17:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693952220; x=1694557020; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yzc8WVXtOCReGjT3rJo2E5yBVov6EG5u+EMNpY8m4KM=;
- b=DCDFrAQqES8I3EvMS+xS61RVAUJav4LM7EZESMhick+exD3TQb+FEcgOvmvZ88gkgo
- kKzJ5b0DI3duid/80CVi3FGAhajtZ71uObxOuXfVRyFA6JwGB0ltp3NrJt1m3oWp4f53
- DU+yNbIwLw7G607Q4vGDbx65uMxecUtGe3M3WMAf+ZfjE6zUiCBshYXdiTSrYE68R7pX
- qrv8TxlJsMST6DBwG+XglLuwE3mjY5R9yI08YUu/Z7yZFu1qqqJ1Ha3VKBGoWSUhub36
- fYUY/Q94fJP6lcJawUpNW7U3xEj4V3XJmyMYYfcaKOPc6lHkE3YGMknonYizKiiQROAb
- v/+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693952220; x=1694557020;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yzc8WVXtOCReGjT3rJo2E5yBVov6EG5u+EMNpY8m4KM=;
- b=kjUoRsy6UbB8XYVL3brt4xljKlJ8Xz2W0bjiOWbF69F2oETIMJvAxw5EKMradFc+AC
- Hroe7f/Tfk9E11Ug4u+GYMS2it51irVUwYZA8Z1uF03z1Nb+v2fM5QkH5Q3ERs0ke1Jx
- POnWcSQZ9wykEORu90FkIOVpQyMysMGaRV5SJ2ULr3UjtvERBT1h1Kou/46ogW7Q4QKv
- U03OvaVuYgILl8Qt9rLdZJc7Pnu/2Aq73CZ0CoxC5LQdFZ5KWWnc+w+jpBqsT33VCBdC
- WF1HiREUvbbyR2fPKbMqpK69XTxfBYxkUL3nGtHzR9QmtTW9EkLjUYuy7/Z+QOldH/Tb
- /GLw==
-X-Gm-Message-State: AOJu0YzMis/epi8eYxpOajLWdup/kB30U233+H17Zy3aGaqU2FeYOpDY
- 75IR4Z09g3NnIJSjHlUV/USS64b2864FYA==
-X-Google-Smtp-Source: AGHT+IFAiuSF9hpaSULjpXG/+f0Pf/+3fqCzL02oX7GtBFZhlFqAZKJNA5Fw5DuHllSsy9nr6EELfw==
-X-Received: by 2002:a05:6512:613:b0:4f8:7781:9870 with SMTP id
- b19-20020a056512061300b004f877819870mr761539lfe.60.1693952219307; 
- Tue, 05 Sep 2023 15:16:59 -0700 (PDT)
-Received: from user-PC.. ([92.51.95.194]) by smtp.gmail.com with ESMTPSA id
- y23-20020a197517000000b004fbc6a8ad08sm2519643lfe.306.2023.09.05.15.16.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Sep 2023 15:16:59 -0700 (PDT)
-From: Maksim Kiselev <bigunclemax@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maksim Kiselev <bigunclemax@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v1] clk: use private clk struct in CLK_CCF's enable/disable
- functions
-Date: Wed,  6 Sep 2023 01:16:49 +0300
-Message-Id: <20230905221649.3577929-1-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B9FA611FB;
+ Tue,  5 Sep 2023 17:14:41 -0700 (PDT)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DCEC33F64C;
+ Tue,  5 Sep 2023 17:14:02 -0700 (PDT)
+Date: Wed, 6 Sep 2023 01:12:58 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Hans de Goede
+ <hdegoede@redhat.com>, u-boot@lists.denx.de, Samuel Holland
+ <samuel@sholland.org>, Jarrah Gosbell <kernel@undef.tools>, Jernej
+ =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+Subject: Re: [PATCH] sunxi: board: provide CPU idle states to loaded OS
+Message-ID: <20230906011232.05ee691a@slackpad.lan>
+In-Reply-To: <ZPboy228t8rVajL8@skv.local>
+References: <20230904205430.1647654-1-andrej.skvortzov@gmail.com>
+ <20230905092712.6ba245bb@donnerap.manchester.arm.com>
+ <ZPboy228t8rVajL8@skv.local>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,44 +60,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In clk_enable()/clk_disable() functions, when CCF is activated,
-we must pass a private clk struct to enable()/disable() ops functions.
-Otherwise, the use of a container_of() construction within these ops
-should be banned. Because passing a non-private clk struct to
-container_of() results in an out of range error.
+On Tue, 5 Sep 2023 11:37:31 +0300
+Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
 
-At the moment, clk-mux, clk-fixed-factor, clk-gate and possibly other
-clocks use container_of() in their enable()/disable() functions.
-Therefore, for these functions to work correclty, private clk struct
-must be passed.
+Hi,
 
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
- drivers/clk/clk-uclass.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> On 23-09-05 09:27, Andre Przywara wrote:
+> > On Mon,  4 Sep 2023 23:54:30 +0300
+> > Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
+> > 
+> > Hi Andrey,
+> >   
+> > > When using SCPI as the PSCI backend, firmware can wake up the CPUs and
+> > > cluster from sleep, so CPU idle states are available for loaded OS to
+> > > use. TF-A modifies DTB to advertise available CPU idle states, when
+> > > SCPI is detected. This change copies nodes added by TF-A to any new
+> > > dtb that is used for loaded OS.  
+> > 
+> > Why do you need that, exactly? Why not just use $fdtcontroladdr for the
+> > kernel? We now keep the U-Boot copy of the .dts files in sync with the
+> > kernel. If you need to modify the DT in U-Boot, for instance by applying
+> > overlays, you can copy that DTB into a better suitable location first:  
+> > => fdt move $fdtcontroladdr $fdt_addr_r  
+> > 
+> > In any case, there shall be only one DT, that one in the U-Boot image. Why
+> > do you need to load another one for the kernel?  
+> 
+> extlinux is used by distributions (sometimes with device-specific changes especially
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index dc3e9d6a26..542ec41cba 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -649,7 +649,7 @@ int clk_enable(struct clk *clk)
- 		}
- 
- 		if (ops->enable) {
--			ret = ops->enable(clk);
-+			ret = ops->enable(clkp ? clkp : clk);
- 			if (ret) {
- 				printf("Enable %s failed\n", clk->dev->name);
- 				return ret;
-@@ -706,7 +706,7 @@ int clk_disable(struct clk *clk)
- 		}
- 
- 		if (ops->disable) {
--			ret = ops->disable(clk);
-+			ret = ops->disable(clkp ? clkp : clk);
- 			if (ret)
- 				return ret;
- 		}
--- 
-2.39.2
+What distros are that? I guess some special ones, targeting embedded
+devices, like the Pinephone?
+And who is generating extlinux.conf then? Is that some distro specific
+scripting, similar to how grub is configured?
+Honest questions, I am not a user of extlinux, I mostly use UEFI
+booting, or type U-Boot commands directly for experiments, or use
+boot.scr, as a quick-and-dirty hack.
 
+> for platforms not fully supported by mainline yet),
+
+Do you need any changes to the DT? Do you need to apply overlays?
+If you run on a non-mainlined platform, you could still put your DT
+into the U-Boot tree, then you wouldn't need to load another DTB, which
+also simplifies the deployment on the kernel/distro side.
+
+> then U-Boot loads DT defined in
+> extlinux.conf file. u-boot scripts are not used in case of extlinux at all.
+
+That's fine, you don't need any U-Boot scripts for this to work. If
+there is no "fdt" or "fdtdir" label in extlinux.conf, then the U-Boot
+PXE code will eventually fall back to $fdtcontroladdr - I just tested
+that.
+So could you make that work for you? I guess all you need to change is
+to remove any fdtdir label from extlinux.conf?
+
+Cheers,
+Andre
