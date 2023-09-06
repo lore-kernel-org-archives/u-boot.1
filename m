@@ -4,79 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C4CEE14A1
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:54:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 565BDEE14A3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36D52866DA;
-	Wed,  6 Sep 2023 16:54:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B8AFB86907;
+	Wed,  6 Sep 2023 16:57:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ieWFb20L";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="olxlf1UK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3458486907; Wed,  6 Sep 2023 16:54:00 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DFD1386963; Wed,  6 Sep 2023 16:57:05 +0200 (CEST)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8d::623])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C95B865A0
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:53:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24251865A0
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9a6190af24aso579332566b.0
- for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:53:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694012036; x=1694616836; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=heM2WIdgYwpyKdVMhVOdDsIpHChYmeGvTy53ja7Lcs8=;
- b=ieWFb20LXaIYCFMoBPx1meYtT01YQfjF0M8DGw2ZHnl1z+TvpobhwBi3ePSdCnQaoT
- 1NKCcKn4t0RzGDmHE3Hh4LsrptPEX9TFwKO0qrcp9d6mu1tS05ZpBza9HOJjVlU6F9bd
- Ng3HqA8GaWlB9MKdoHX9ZJxUe8GXP1vs00lcA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694012036; x=1694616836;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=heM2WIdgYwpyKdVMhVOdDsIpHChYmeGvTy53ja7Lcs8=;
- b=fcpqjQaN64i/A/2EjgFqTQa88Yfue1By1MX8VeXN2Faj+ZZnS2v3B2m0V1KyrIA9As
- S8LlzYRZusiVHGfnVglX7OqS3OpJdQ3OYqsxUIUBAR1pY8SvEjNswG3GAxwJQM1fSoYY
- fZuz+Zd3iYYZO/49H25tGHIdEe5Fux00wKcvCiJlrKCDYssT3q2VLjuHfGgxOML7dUuE
- 32onWUJ+LgpMMq2Zknh+VRgmsfVm0szmhZpgQomWfWzhyEhtROnzKifyNLxs1ODKhbxw
- yqr0tRKtHAhoDDpFFdDtBdr5+8Tm4lcG1BjEQf4sulpLsnqr/6A0gzu6oiMI6F3MH2oQ
- hGpg==
-X-Gm-Message-State: AOJu0YyuS2rY0XaokcYJ776iv6ofp9CijETC5t7Yf5nGhaM8l08nc8dH
- HSIydVRUzXEyxpT497Wp9qtPjHE29Odg2T+IjQfhPg==
-X-Google-Smtp-Source: AGHT+IEU5UffRYUvDwA0NQm7JOuEQu6yerz5z3/Mhzsxu8B4Hq3armkLEjFFu6wwdpmajrU9Sup7CUTnJTt9lIFlQHI=
-X-Received: by 2002:a17:906:10c:b0:9a5:bce9:ffb7 with SMTP id
- 12-20020a170906010c00b009a5bce9ffb7mr2596750eje.19.1694012036398; Wed, 06 Sep
- 2023 07:53:56 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=T9MULMpC+spBdP4Icfed0qGysqODBquFJ6Y6XuMLIkQx3+CVva10fZqoBnBalhg79MfeFFhM5I/G+v330ncbO6fvWksfp6OK1+xt7i6Zns/RSSos9deGzkmZQMssuG3NR9ahlz+yzObvcm/Qd4OkE2w6185q2fb0VV2SCaVPnzYDMqLxeSeu4XwwGwdQ2wdWQYzVZ6MgRKNmaB6HKm9hdvHeprFGsI/g8DPvYOi1h0WqcAZXBwpcwf0hEMUaWe1kmLkGFpR3WHLoo8GSmUJJPTLTw9a/5e2Ej4vVV3PDqYgcQc2xQXmEOOGSZ5fFDNdVug3OelARmhJFpsKterghPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NtnjznhiywSrKrT6cA7KMkZu6ZWoDX9V/qLXtiQSReM=;
+ b=OI9a6PSCp0W8jDoUA2FVd95G0AWA9u4CcVazKnmdvHR07qMlhV7RI/BgjkKPNDEB9u+3dRCT6w7GWYvkloKy7aNp2UEjbk4AqWw+3K+whwZbOw5wuvdjhd+YNa69m47F+3pMRDOrVlfB8ldkSL6W9Ik+4ytuDCbCvIIeKUCL+6R2TaUeJuL7yKeY2AFlnuvqWsUspQ3i47jNJQeeAMBdCc+NebQLxrmBUpHr2drCB7uuMizKXOwdH5zXH16zUqFdZBaqsyL1SVLRNRF2obbfkMr03cJxwNGSu32TySG62dQMSrSs3+Mx9DxlR91vx08ipOvvquihB7n8ByBh7xF3Uw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NtnjznhiywSrKrT6cA7KMkZu6ZWoDX9V/qLXtiQSReM=;
+ b=olxlf1UKgGMJEeovioH93AdOzTYd97sSOOKRqmzqc5OCFtH2HsjyF3Xn5GQjqFiTKtRwIPBicnVgAgTvCLEsTEy1xNB/8VMJWdPmbFBxSHbFNtFWbYTwNvped3ygCooEq/wHkreQ3ELl6nw38WVa8iz6vVczqHluQcHxBo0/T6w=
+Received: from DM6PR04CA0023.namprd04.prod.outlook.com (2603:10b6:5:334::28)
+ by MN2PR12MB4142.namprd12.prod.outlook.com (2603:10b6:208:1dd::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Wed, 6 Sep
+ 2023 14:56:59 +0000
+Received: from DS3PEPF000099D7.namprd04.prod.outlook.com
+ (2603:10b6:5:334:cafe::88) by DM6PR04CA0023.outlook.office365.com
+ (2603:10b6:5:334::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.36 via Frontend
+ Transport; Wed, 6 Sep 2023 14:56:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS3PEPF000099D7.mail.protection.outlook.com (10.167.17.8) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6768.25 via Frontend Transport; Wed, 6 Sep 2023 14:56:59 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 6 Sep
+ 2023 09:56:58 -0500
+Message-ID: <523ca6eb-3737-d090-8006-f127eda2330b@amd.com>
+Date: Wed, 6 Sep 2023 16:56:56 +0200
 MIME-Version: 1.0
-References: <20230830231758.2561402-1-sjg@chromium.org>
- <20230830231758.2561402-3-sjg@chromium.org>
- <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
- <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
-In-Reply-To: <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 6 Sep 2023 08:53:44 -0600
-Message-ID: <CAPnjgZ1U+Gy0Q_Sc63p0ixkWF9iJEEBLhV8-N9-sh7OGNy-OmQ@mail.gmail.com>
-Subject: Re: [PATCH v5 3/4] schemas: Add some common reserved-memory usages
-To: Rob Herring <robh@kernel.org>
-Cc: Ard Biesheuvel <ardb@kernel.org>, devicetree@vger.kernel.org, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- ron minnich <rminnich@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
- Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>, 
- Chiu Chasel <chasel.chiu@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
+Content-Language: en-US
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>, <u-boot@lists.denx.de>
+CC: <etienne.carriere@st.com>, <sjg@chromium.org>, <linus.walleij@linaro.org>, 
+ <Oleksii_Moisieiev@epam.com>
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-5-takahiro.akashi@linaro.org>
+From: Michal Simek <michal.simek@amd.com>
+In-Reply-To: <20230906024011.17488-5-takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D7:EE_|MN2PR12MB4142:EE_
+X-MS-Office365-Filtering-Correlation-Id: 197ce816-8536-4f84-5658-08dbaee985b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 6gHV88P//f6DzOyeWxLpuE0Tip8NKbwwerSQ2WhTK4pWsVez7I3/RgwMSzXTLZMPTpEsWyC+GpSemGgRQoS6dFLP5bnTabravX1nblBceA/4Qn4NWOX14lGnO9megTHJJYiLxcS5YcV+xdy6gjAQODCbda3iyBPNEdOP08MG6/Ct6l6f8fNU6OMDEtZ+eufZ0lRGgTJObPen5J2BNVCpTFkwbRA55kFhlSivJbEFJ2jMxqHYSe20o9dc1b5OfgmCwko3HB4cIa0U8bDiJHjJGKIDnJpCvAfRLrCmLIRHp4+Oe9Chnr7K2tV8NbFyUI5k7TbWFnZZxfAaxCJHTyZRLqy7rLivlQYy/1DTnwreL4G6TiwoFiDTbtj58o+vZMoirn/cn6vYBfaplkzWOy43Ac1ZZpTlzkHJp/pnuo9i6hc3/z86TGojWpdqpmB6z/jfOqLpGHhCTsMItDqLqH0YYUqjjHoJns/mYbsmS38/gdJs72Vmhm9oVYLjn4cYnCJkcwVGhPsfjCxUbVblqjxOko8IlowL6hOL1dY0eRQiJ9y8ZI1bAj9S9jzWByETzceut0HvceTp6JDbAEJBdc1anQWmxOKOQcX1hzyYw4lQVOO7hGuDe2CceI9251NO/mJtdekfGPU6wTM8oFDkkkT7AmDPnUWIy4WI13BcQsjrcqipkWPvB+wOtLD7k50kXRqgkVf4RWWvcJ8sOMO7aEgttzXB3ld/nEcBNq2Pcdsqpn0Lgu2vqn0P4S/w04BWaRAglUs3KUVEGghGlL7q9++6H0grNn0j93KQzBXwvE6+/MU=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(376002)(396003)(39860400002)(346002)(82310400011)(451199024)(186009)(1800799009)(46966006)(36840700001)(40470700004)(53546011)(478600001)(83380400001)(2616005)(426003)(336012)(16526019)(2906002)(26005)(316002)(16576012)(44832011)(54906003)(70206006)(70586007)(41300700001)(110136005)(5660300002)(4326008)(8936002)(8676002)(40460700003)(82740400003)(40480700001)(47076005)(36860700001)(31696002)(36756003)(86362001)(356005)(81166007)(31686004)(66899024)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2023 14:56:59.6339 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 197ce816-8536-4f84-5658-08dbaee985b8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D7.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4142
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,163 +123,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob, Ard,
 
-On Wed, 6 Sept 2023 at 08:34, Rob Herring <robh@kernel.org> wrote:
->
-> On Tue, Sep 5, 2023 at 4:44=E2=80=AFPM Ard Biesheuvel <ardb@kernel.org> w=
-rote:
-> >
-> > On Thu, 31 Aug 2023 at 01:18, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > The Devicetree specification skips over handling of a logical view of
-> > > the memory map, pointing users to the UEFI specification.
-> > >
-> > > It is common to split firmware into 'Platform Init', which does the
-> > > initial hardware setup and a "Payload" which selects the OS to be boo=
-ted.
-> > > Thus an handover interface is required between these two pieces.
-> > >
-> > > Where UEFI boot-time services are not available, but UEFI firmware is
-> > > present on either side of this interface, information about memory us=
-age
-> > > and attributes must be presented to the "Payload" in some form.
-> > >
-> >
-> > I don't think the UEFI references are needed or helpful here.
-> >
-> > > This aims to provide an small schema addition for this mapping.
-> > >
-> > > For now, no attempt is made to create an exhaustive binding, so there=
- are
-> > > some example types listed. More can be added later.
-> > >
-> > > The compatible string is not included, since the node name is enough =
-to
-> > > indicate the purpose of a node, as per the existing reserved-memory
-> > > schema.
->
-> Node names reflect the 'class', but not what's specifically in the
-> node. So really, all reserved-memory nodes should have the same name,
-> but that ship already sailed for existing users. 'compatible' is the
-> right thing here. As to what the node name should be, well, we haven't
-> defined that. I think we just used 'memory' on some platforms.
 
-OK
+On 9/6/23 04:40, AKASHI Takahiro wrote:
+> This DM-compliant driver deals with SCMI pinctrl protocol and presents
+> gpio devices exposed by SCMI firmware (server).
+> 
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>   drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
+>   1 file changed, 539 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
+> index 3ebdad57b86c..73d385bdbfcc 100644
+> --- a/drivers/pinctrl/pinctrl-scmi.c
+> +++ b/drivers/pinctrl/pinctrl-scmi.c
+> @@ -11,21 +11,20 @@
+>   #include <malloc.h>
+>   #include <scmi_agent.h>
+>   #include <scmi_protocols.h>
+> +#include <asm-generic/gpio.h>
+>   #include <dm/device_compat.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>   #include <dm/pinctrl.h>
+>   
+>   /**
+>    * struct scmi_pin - attributes for a pin
+>    * @name:	Name of pin
+> - * @value:	Value of pin
+> - * @flags:	A set of flags
+>    * @function:	Function selected
+>    * @status:	An array of status of configuration types
+>    */
+>   struct scmi_pin {
+>   	char		*name;
+> -	u32		value;
+> -	u32		flags;
 
->
-> > > This binding does not include a binding for the memory 'attribute'
-> > > property, defined by EFI_BOOT_SERVICES.GetMemoryMap(). It may be usef=
-ul
-> > > to have that as well, but perhaps not as a bit mask.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v5:
-> > > - Drop the memory-map node (should have done that in v4)
-> > > - Tidy up schema a bit
-> > >
-> > > Changes in v4:
-> > > - Make use of the reserved-memory node instead of creating a new one
-> > >
-> > > Changes in v3:
-> > > - Reword commit message again
-> > > - cc a lot more people, from the FFI patch
-> > > - Split out the attributes into the /memory nodes
-> > >
-> > > Changes in v2:
-> > > - Reword commit message
-> > >
-> > >  .../reserved-memory/common-reserved.yaml      | 53 +++++++++++++++++=
-++
-> > >  1 file changed, 53 insertions(+)
-> > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.=
-yaml
-> > >
-> > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/=
-dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > new file mode 100644
-> > > index 0000000..d1b466b
-> > > --- /dev/null
-> > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > @@ -0,0 +1,53 @@
-> > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > +%YAML 1.2
-> > > +---
-> > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.y=
-aml#
-> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: Common memory reservations
-> > > +
-> > > +description: |
-> > > +  Specifies that the reserved memory region can be used for the purp=
-ose
-> > > +  indicated by its node name.
-> > > +
-> > > +  Clients may reuse this reserved memory if they understand what it =
-is for.
-> > > +
-> > > +maintainers:
-> > > +  - Simon Glass <sjg@chromium.org>
-> > > +
-> > > +allOf:
-> > > +  - $ref: reserved-memory.yaml
-> > > +
-> > > +properties:
-> > > +  $nodename:
-> > > +    enum:
-> > > +      - acpi-reclaim
-> > > +      - acpi-nvs
-> > > +      - boot-code
-> > > +      - boot-data
-> > > +      - runtime-code
-> > > +      - runtime-data
-> > > +
-> >
-> > These types are used by firmware to describe the nature of certain
-> > memory regions to the OS. Boot code and data can be discarded, as well
-> > as ACPI reclaim after its contents have been consumed. Runtime code
-> > and data need to be mapped for runtime features to work.
-> >
-> > When one firmware phase communicates the purpose of a certain memory
-> > reservation to another, it is typically not limited to whether its
-> > needs to be preserved and when it needs to be mapped (and with which
-> > attributes). I'd expect a memory reservation appearing under this node
-> > to have a clearly defined purpose, and the subsequent phases need to
-> > be able to discover this information.
-> >
-> > For example, a communication buffer for secure<->non-secure
-> > communication or a page with spin tables used by PSCI. None of the
-> > proposed labels are appropriate for this, and I'd much rather have a
-> > compatible string or some other property that clarifies the nature in
-> > a more suitable way. Note that 'no-map' already exists to indicate
-> > that the CPU should not map this memory unless it does so for the
-> > specific purpose that the reservation was made for.
->
-> I agree. I think compatible is the better approach. Some property like
-> 'discard' may not be sufficient information if the OS needs to consume
-> the region first and then discard it. Better to state exactly what's
-> there and then the OS can imply the rest.
 
-OK, so what sort of compatible strings?
+You have added this in 3/6 then there is no reason to remove it in this version.
 
-How about:
-"acpi-reclaim" - holds ACPI tables; memory can be reclaimed once the
-tables are read and no-longer needed
-"boot-code" - holds boot code; memory can be reclaimed once the boot
-phase is complete
-"runtime-code" - holds runtime code; memory can be reclaimed only if
-this code will not be used from that point
-
-etc. We can then have more specific compatibles, like:
-
-"psci-spin-table" - holds PSCI spin tables
-
-so you could do:
-
-compatible =3D "runtime-code", "psci-spin-table";
-
-Regards,
-Simon
+M
