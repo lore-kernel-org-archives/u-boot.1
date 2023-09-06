@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72778EE14C3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E0CEEE14D0
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:36:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78B1E86AC6;
+	by phobos.denx.de (Postfix) with ESMTP id B876886ACA;
 	Wed,  6 Sep 2023 23:31:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Bzz60Gr7";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OqiUQ3MD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IYMBPPRu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hJqcc2OZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71E9286AAC; Wed,  6 Sep 2023 23:31:07 +0200 (CEST)
+ id 9668B868BC; Wed,  6 Sep 2023 23:31:07 +0200 (CEST)
 Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A23C0868BC
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:31:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 524BE86A68
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:31:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RgwXj362Vz9tTZ;
- Wed,  6 Sep 2023 23:31:01 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RgwXk0jbwz9tTZ;
+ Wed,  6 Sep 2023 23:31:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035861;
+ s=mail20150812; t=1694035862;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xTocCfghmsZlpHayZK2AH4wC/vEj14akfH6kigSiR1c=;
- b=Bzz60Gr71MZb7DVjBUfk8sB76vcc3gt1a/3u9jMucbOFqmyotaXzpQ9+4eVYlN7MyB1ZNl
- yuHpRuAr+pyZuU41obiQWE7OYa93XwoB+NFlrSJxRelnaFDaWQX0xKcdYgjAQtUS0pHjPC
- mZC30fouy7mV6uF1RJi69Rz6wBoCo8gDrtXWx7SFX9rRzf6ABU6N+/IBqRN3jMq6pTTSr0
- MgklewBm4D35rqLwKz2z+Zcf/WWmBXNedvTtVq3KPBnwpf1bKTkUTA5u3OFLZ2A1j5Y8dJ
- tywkuE3d95lXJN4m2vDMj7aybUrVjPwvm3db/aC5DggE8SBbpUHVqMLVUyOjsQ==
+ bh=TcgkYvWHGiLO9SSzofNt+dgVgyo+8MhZvY5yLQurLsU=;
+ b=IYMBPPRuWMg/8e8Gdn8HB/Ll42YlVVSrjJJqRD3x6U/PQTOsjI1SXnKckQjZEZe8aBj8St
+ jXJsImYSVisH/rlKuMPwS6QEjqvJaCAcRVihOXhZexd6nxm0N1+ZBbyFj/KKoLbbQOi0EE
+ h23zRITMqt2NHhi2uyDaPvyYvnADnDfFY5eduGGz1B3glYIO4xeCPiXA6yqCzkuxRgtZKS
+ IK04HofdKoy5TVCRoICH5HvjM17HS8UVh9LfZ0Jtk8DHctB3Q1wY/7/5j+bsBzBvi7J39v
+ 80G1bWBKXoqe83WjGUaCbyxNr14teCN7CT1z/tI5aQ8hiHK/p3hdzAjqeXTe5w==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035858;
+ s=mail20150812; t=1694035859;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xTocCfghmsZlpHayZK2AH4wC/vEj14akfH6kigSiR1c=;
- b=OqiUQ3MDGsBWdT7s+JrWo+X5htnTbw0I47IlNzjF8n2siZZlhxd1zDIAfugC+04SUgZY8l
- IJ1WwFP7a86Ng/43DfFUZjPZmYvUVpWShjahDMpI4S2gCefkRtWkKJWTU8w3HGrlSRCATo
- yFwJKbckJypB5RZp5ahT7OHy7yPbeUFOfi07Y4Qzk/RBBxMIngbD6R+iTFc5ZN2KSgFIef
- PrFcpxXH0+UqxtCcFWOj/HJpBTD9uRIG5lybuwc6nqwldIlUR9RWcwmstc9wNKt1v6h6nR
- yInm401rFODscdN6/tD2zYmcTG3CjA44318+IXoPbSJ9HC87poibqosmkTE23Q==
+ bh=TcgkYvWHGiLO9SSzofNt+dgVgyo+8MhZvY5yLQurLsU=;
+ b=hJqcc2OZoXZ0iHJH7Iq1AH4fG6gk+byfTBJ3Ikep3aHAWOBKMpJ9fzWkLinKrteNR0dE1A
+ pRX+H4SrcDXNfJWpArLXRsdb7fs9j0BfSm5iMiUcXDCvHiGRxb+xb+N1x3uJrL746jsZrP
+ DKR+dbLWkQHESiM5GFQwG+fMzlF6bey5GSnbwiNR0LG0Z37vOHHsgsKvcgM8F0h+8zF5Id
+ ixjLnnuXi4UmQJe63Il6Mwd/78S/n0iYeQRoanpLmN7hzZeyRF3qLAHlcmITUsYGSPgnl3
+ 3gWxNktwcJrgxFa47j7ydwTp5dRGIfrvGOD8NoS5GKv2rtZlFpmthe1lY10fVw==
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 33/35] timer: Remove unused NEEDS_MANUAL_RELOC code bits
-Date: Wed,  6 Sep 2023 23:30:13 +0200
-Message-Id: <20230906213015.203437-34-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 34/35] wdt: Remove unused NEEDS_MANUAL_RELOC code bits
+Date: Wed,  6 Sep 2023 23:30:14 +0200
+Message-Id: <20230906213015.203437-35-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: af5ef6e3e44d869abbb
-X-MBO-RS-META: gsc64rsqg1prnrsfr75mawsk9f5amtt3
+X-MBO-RS-ID: 1247674cd6ad70359ad
+X-MBO-RS-META: 98745ufghs94pk7ai6riugpwir5cj4qu
+X-Rspamd-Queue-Id: 4RgwXk0jbwz9tTZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,33 +93,50 @@ Remove now unused NEEDS_MANUAL_RELOC code.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/timer/timer-uclass.c | 13 -------------
- 1 file changed, 13 deletions(-)
+ drivers/watchdog/wdt-uclass.c | 23 -----------------------
+ 1 file changed, 23 deletions(-)
 
-diff --git a/drivers/timer/timer-uclass.c b/drivers/timer/timer-uclass.c
-index f4b871ac23a..0c2018bfe3b 100644
---- a/drivers/timer/timer-uclass.c
-+++ b/drivers/timer/timer-uclass.c
-@@ -51,19 +51,6 @@ unsigned long notrace timer_get_rate(struct udevice *dev)
+diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
+index 509896a1b80..ed329284dec 100644
+--- a/drivers/watchdog/wdt-uclass.c
++++ b/drivers/watchdog/wdt-uclass.c
+@@ -236,28 +236,6 @@ void watchdog_reset(void)
+ }
+ #endif
  
- static int timer_pre_probe(struct udevice *dev)
- {
--	if (IS_ENABLED(CONFIG_NEEDS_MANUAL_RELOC) &&
--	    (gd->flags & GD_FLG_RELOC)) {
--		struct timer_ops *ops = timer_get_ops(dev);
--		static int reloc_done;
+-static int wdt_post_bind(struct udevice *dev)
+-{
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-	struct wdt_ops *ops = (struct wdt_ops *)device_get_ops(dev);
+-	static int reloc_done;
 -
--		if (!reloc_done) {
--			if (ops->get_count)
--				MANUAL_RELOC(ops->get_count);
+-	if (!reloc_done) {
+-		if (ops->start)
+-			ops->start += gd->reloc_off;
+-		if (ops->stop)
+-			ops->stop += gd->reloc_off;
+-		if (ops->reset)
+-			ops->reset += gd->reloc_off;
+-		if (ops->expire_now)
+-			ops->expire_now += gd->reloc_off;
 -
--			reloc_done++;
--		}
+-		reloc_done++;
 -	}
+-#endif
+-	return 0;
+-}
 -
- 	if (CONFIG_IS_ENABLED(OF_REAL)) {
- 		struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 		struct clk timer_clk;
+ static int wdt_pre_probe(struct udevice *dev)
+ {
+ 	u32 timeout = WATCHDOG_TIMEOUT_SECS;
+@@ -295,7 +273,6 @@ UCLASS_DRIVER(wdt) = {
+ 	.id			= UCLASS_WDT,
+ 	.name			= "watchdog",
+ 	.flags			= DM_UC_FLAG_SEQ_ALIAS,
+-	.post_bind		= wdt_post_bind,
+ 	.pre_probe		= wdt_pre_probe,
+ 	.per_device_auto	= sizeof(struct wdt_priv),
+ };
 -- 
 2.40.1
 
