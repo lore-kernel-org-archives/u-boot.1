@@ -4,72 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E6EEE14D0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:37:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20963EE14D0
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0403D86A30;
-	Wed,  6 Sep 2023 23:31:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6DA4586963;
+	Wed,  6 Sep 2023 23:50:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WIJIUClI";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mOpemq+b";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8109E868BC; Wed,  6 Sep 2023 23:31:08 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 091F88685B; Wed,  6 Sep 2023 23:50:39 +0200 (CEST)
+Received: from soltyk.jannau.net (soltyk.jannau.net [144.76.91.90])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C606486A4C
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:31:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A97A869B6
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:50:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RgwXk5Pqqz9sW6;
- Wed,  6 Sep 2023 23:31:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035862;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kyxWN9r/K+ghErumb6q7ED0sl0+8XLdNN++FVLN5UZg=;
- b=WIJIUClIG4ut7lJESNbVPMWroZdgdYCGJ9fSP3UejN1kI6hT2lxiSNAp//F0yoshTBh20D
- RLen6Go5HEg0qAcBOkynijjcFF6g20kF6CBv7PusfNvwdjILN6LJTCE65qRwcriCiutqpk
- HMdxgOvvxD4dblVI+xBK+82AVBg6jXN2kGO2aTVuzK/xnSUhYVIeMg7KO4CDNWVFdRdANT
- R1Uh93sjcebJc/q6tAKTuk+rvnjet+/kGPYtj/it5CGDWjt76/IhwNyEv1ZTJGkPPzYqN9
- nLBIvqeOWgWPIL/0K9nbmfmhtIULdJn6M985/CruHijtzHHduhXT28KD8WtAdQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035860;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kyxWN9r/K+ghErumb6q7ED0sl0+8XLdNN++FVLN5UZg=;
- b=mOpemq+bFJpiRLCk+zBL91UNlixdQFW9NrzaKfp7hx4ulkldiuv51ZaryqT0sX5W3QoIes
- fFPqZ3Sjd2vjqBl15XoJKydElHlMazeKmXfiTzN4KDGZPIa4Ntgj+MbwhnVx3QKen6EhzF
- u/vYGgUpMqdYVi7A/u4wDbYO1bGfvtBpdm3LcpKVQsEA3jfQrIxFgaDiVi+o+ZEXrLR1X9
- 0Dkb86GLSa1O1w79SmxdLMQCq2Wf4IUyL+rUEIrl5oWWzHSi2EZbbjJnLIGLGfs7zgxSnK
- f1jea9T+nImUU5Ji4qEb3LHJbZ6GtZJBiIy8BZWCI3ZevgfbSqYrNXXtH+3HJQ==
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 35/35] post: Remove unused NEEDS_MANUAL_RELOC code bits
-Date: Wed,  6 Sep 2023 23:30:15 +0200
-Message-Id: <20230906213015.203437-36-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
-References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=j@jannau.net
+Received: from robin.home.jannau.net (p54acc40e.dip0.t-ipconnect.de
+ [84.172.196.14])
+ by soltyk.jannau.net (Postfix) with ESMTPSA id B7E1527043B;
+ Wed,  6 Sep 2023 23:50:35 +0200 (CEST)
+From: Janne Grunau <j@jannau.net>
+Date: Wed, 06 Sep 2023 23:50:34 +0200
+Subject: [PATCH] arm: apple: Add initial Apple M2 Ultra support
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: f1d18ba992e67c68fc7
-X-MBO-RS-META: izxtk8u7zjdj8xiqf9qxg6z55611bx3y
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20230906-apple_t6022_m2_ultra-v1-1-7d28623285bc@jannau.net>
+X-B4-Tracking: v=1; b=H4sIACn0+GQC/x3MTQqAIBBA4avErBN0igG7SoRITTXQj2hFEN09a
+ fkt3nsgcRRO0BQPRL4kyb5lmLKAfvbbxEqGbECNlbaalA9hYXeQRnQrunM5olfW1MRVTcYyQU5
+ D5FHuf9t27/sB6hKwt2YAAAA=
+To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5741; i=j@jannau.net;
+ h=from:subject:message-id; bh=kgPgiM+XPg/71EY4MSmAuucKGUPOjxUNeLFYoWf0a0Y=;
+ b=owGbwMvMwCG2UNrmdq9+ahrjabUkhpQfX7Sv3KqTz0iSrXzi9W3y50cL1dU1VXc1hQdZLPc+k
+ vct5WBlRykLgxgHg6yYIkuS9ssOhtU1ijG1D8Jg5rAygQxh4OIUgIloGzP8dxFYuev2IZ71wUE/
+ f17NDbr96Y6CYNZF7SnGZuzuC/4ejWVkWPZktjiXeefz537zp+QwTmKqObOL3+BwV2iI2muns/Y
+ P2AE=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,106 +62,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The last user of the NEEDS_MANUAL_RELOC has been removed in commit
-26af162ac8f8 ("arch: m68k: Implement relocation")
-Remove now unused NEEDS_MANUAL_RELOC code.
+Apple's M2 Ultra SoC are somewhat similar to the M1 Ultra but needs
+a tweaked memory map as the M2 Pro/Max SoCs.  USB, NVMe, UART, WDT
+and PCIe are working with the existing drivers.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- doc/README.POST |  5 -----
- include/post.h  |  3 ---
- post/post.c     | 48 ------------------------------------------------
- 3 files changed, 56 deletions(-)
+ arch/arm/mach-apple/board.c | 183 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 183 insertions(+)
 
-diff --git a/doc/README.POST b/doc/README.POST
-index 1366f95c662..c614ea44a28 100644
---- a/doc/README.POST
-+++ b/doc/README.POST
-@@ -138,11 +138,6 @@ The POST layer will export the following interface routines:
-      mode the test is executed in (power-on, normal, power-fail,
-      manual).
+diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+index d50194811843..47393babbc62 100644
+--- a/arch/arm/mach-apple/board.c
++++ b/arch/arm/mach-apple/board.c
+@@ -444,6 +444,187 @@ static struct mm_region t6020_mem_map[] = {
+ 	}
+ };
  
--  o) void post_reloc(ulong offset);
--
--     This routine will be called from board_init_r() and will
--     relocate the POST test table.
--
-   o) int post_info(char *name);
++/* Apple M2 Ultra */
++
++static struct mm_region t6022_mem_map[] = {
++	{
++		/* I/O */
++		.virt = 0x280000000,
++		.phys = 0x280000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x340000000,
++		.phys = 0x340000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x380000000,
++		.phys = 0x380000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x580000000,
++		.phys = 0x580000000,
++		.size = SZ_512M,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* PCIE */
++		.virt = 0x5a0000000,
++		.phys = 0x5a0000000,
++		.size = SZ_512M,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
++			 PTE_BLOCK_INNER_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* PCIE */
++		.virt = 0x5c0000000,
++		.phys = 0x5c0000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
++			 PTE_BLOCK_INNER_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x700000000,
++		.phys = 0x700000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0xb00000000,
++		.phys = 0xb00000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0xf00000000,
++		.phys = 0xf00000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x1300000000,
++		.phys = 0x1300000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2280000000,
++		.phys = 0x2280000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2340000000,
++		.phys = 0x2340000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2380000000,
++		.phys = 0x2380000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2580000000,
++		.phys = 0x2580000000,
++		.size = SZ_512M,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* PCIE */
++		.virt = 0x25a0000000,
++		.phys = 0x25a0000000,
++		.size = SZ_512M,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
++			 PTE_BLOCK_INNER_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* PCIE */
++		.virt = 0x25c0000000,
++		.phys = 0x25c0000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRE) |
++			 PTE_BLOCK_INNER_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2700000000,
++		.phys = 0x2700000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2b00000000,
++		.phys = 0x2b00000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x2f00000000,
++		.phys = 0x2f00000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* I/O */
++		.virt = 0x3300000000,
++		.phys = 0x3300000000,
++		.size = SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* RAM */
++		.virt = 0x10000000000,
++		.phys = 0x10000000000,
++		.size = 16UL * SZ_1G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		/* Framebuffer */
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++			 PTE_BLOCK_INNER_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* List terminator */
++		0,
++	}
++};
++
+ struct mm_region *mem_map;
  
-      This routine will print the list of all POST tests that can be
-diff --git a/include/post.h b/include/post.h
-index 41120695064..6e88d550722 100644
---- a/include/post.h
-+++ b/include/post.h
-@@ -105,9 +105,6 @@ void post_bootmode_clear (void);
- int post_run (char *name, int flags);
- int post_info (char *name);
- int post_log (char *format, ...);
--#ifdef CONFIG_NEEDS_MANUAL_RELOC
--void post_reloc (void);
--#endif
- unsigned long post_time_ms (unsigned long base);
+ int board_init(void)
+@@ -488,6 +669,8 @@ void build_mem_map(void)
+ 	else if (of_machine_is_compatible("apple,t6020") ||
+ 		 of_machine_is_compatible("apple,t6021"))
+ 		mem_map = t6020_mem_map;
++	else if (of_machine_is_compatible("apple,t6022"))
++		mem_map = t6022_mem_map;
+ 	else
+ 		panic("Unsupported SoC\n");
  
- /**
-diff --git a/post/post.c b/post/post.c
-index 4db862c0dbb..946d9094d45 100644
---- a/post/post.c
-+++ b/post/post.c
-@@ -416,54 +416,6 @@ int post_log(char *format, ...)
- 	return 0;
- }
- 
--#ifdef CONFIG_NEEDS_MANUAL_RELOC
--void post_reloc(void)
--{
--	unsigned int i;
--
--	/*
--	 * We have to relocate the test table manually
--	 */
--	for (i = 0; i < post_list_size; i++) {
--		ulong addr;
--		struct post_test *test = post_list + i;
--
--		if (test->name) {
--			addr = (ulong)(test->name) + gd->reloc_off;
--			test->name = (char *)addr;
--		}
--
--		if (test->cmd) {
--			addr = (ulong)(test->cmd) + gd->reloc_off;
--			test->cmd = (char *)addr;
--		}
--
--		if (test->desc) {
--			addr = (ulong)(test->desc) + gd->reloc_off;
--			test->desc = (char *)addr;
--		}
--
--		if (test->test) {
--			addr = (ulong)(test->test) + gd->reloc_off;
--			test->test = (int (*)(int flags)) addr;
--		}
--
--		if (test->init_f) {
--			addr = (ulong)(test->init_f) + gd->reloc_off;
--			test->init_f = (int (*)(void)) addr;
--		}
--
--		if (test->reloc) {
--			addr = (ulong)(test->reloc) + gd->reloc_off;
--			test->reloc = (void (*)(void)) addr;
--
--			test->reloc();
--		}
--	}
--}
--#endif
--
--
- /*
-  * Some tests (e.g. SYSMON) need the time when post_init_f started,
-  * but we cannot use get_timer() at this point.
+
+---
+base-commit: c0c08be5468cb26db597932bc69c4eda1129841d
+change-id: 20230906-apple_t6022_m2_ultra-9146e34619e6
+
+Best regards,
 -- 
-2.40.1
+Janne Grunau <j@jannau.net>
 
