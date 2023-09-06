@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC92EB8FAE
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 02:41:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D88EB8FAE
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 02:41:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28B9B8664A;
-	Wed,  6 Sep 2023 04:41:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6F964866A0;
+	Wed,  6 Sep 2023 04:41:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KCySzshv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mCGuD78X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C10086590; Wed,  6 Sep 2023 04:41:07 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id A6882833DE; Wed,  6 Sep 2023 04:41:09 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47830865B0
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 04:41:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3899B866A0
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 04:41:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-68a32506e90so700508b3a.1
- for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 19:41:03 -0700 (PDT)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-68a4dab8172so647493b3a.0
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 19:41:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1693968061; x=1694572861; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1693968063; x=1694572863; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NZwraZo0t3tnCWHq4TbRwxe/8ErYV/OER8HmEq9/qS4=;
- b=KCySzshv02S0Nodf4/vQVUxg5s/8euPmHdbNcvdYLPF+Jbh2rpTCd7OYShtBCZAoUl
- tofjUoMd3dNjpdZYsdhOJ6oNugBS2EfAsSu+3/IqBMNL22wzemQtBFv5076Clx6NkhMA
- Oo6mUirrJQrZfmXh8f4AXc5dgOPDwrZw5ytTlN/TAtqqWkqF9Bhknyvi/lIXC7VgjjAj
- o0ibJeSihHnxYj9l2v5VYYhUPkcbH9m5eiqoxA1edIe1Z3tbSXR2UmV1rbXCRlZ2T1fv
- FRVP7IiGkxJWEZFXtR1JtZO+tda8I9VfVJk5+AivQmqg4zXQQzWbYsOUvYxf4gMH6FbY
- PhBw==
+ bh=lPYCnBRLWg4g7sl74QYJVP75Z/zmBm7PNVaK8xYbfG8=;
+ b=mCGuD78XqGtgC4ymz8mMQMfZmYCeiD0oe7074mODiiOcin2PChvApLsJG+M/1j/uKo
+ z0v0d6m9vr935Mv4ZEwhBciOsQePydtyhd0u5HxikicYYTqXsmVHhLbb+0pyBEAjwLe1
+ qsBJ2ft9hKoIbu+K4pT+f1AApIocE67ZBrzA3tkwZYi5E27u1jMbVHsGQYZD5JqUU56x
+ 3dQaaftDzWm8vHMZJ1rNP2VXmr9Rlb08vsYvuF6AesSbg4yuiaw0KbF3ewC6vt9Dgkz8
+ dWPGIQGGr9HC+1d/JV6jikx7/6XGEKnxaNaSR8wMBjtepfDJV3QVuiGFVcFL9PMnsBRv
+ JxCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693968061; x=1694572861;
+ d=1e100.net; s=20221208; t=1693968063; x=1694572863;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NZwraZo0t3tnCWHq4TbRwxe/8ErYV/OER8HmEq9/qS4=;
- b=Fi7QY7TF8s6FfDY7kHK6s2Z+UtV14JTGdhy1xrCOEfy5AEbkJaXG9ZpZs8A6PIsO3m
- 6i55XpGSjvs6BAOwxApNuC+ah3iwPuub4vxuwHwbWrNrXaJLvwwzz/r0eDCuO0tuXrGV
- WgWmpXKpJ+x9k5lhZz0a3v+LjgX1hrkSNA0ol1wTOjbjMDCihQ8bGWfqPGMvectitrob
- b1SFcig+QzxckoWqgqzv8u/2WTZ5KcwPyzZc4r1u15YW7weLoiRZ+282rccyxWkh2qu2
- /fhije6aub6ryN8UTeRL5qg9xACfUW07FL96PYeRBJBnCAnSdAXMuYKaGVZbYL0wYdoQ
- O4/A==
-X-Gm-Message-State: AOJu0YyvdcrZl9jhPlJwv8XosCUnwZn5Sc/ylAs3b9O9UWrRUw9apOeF
- /ZEONCnwJJexSrxOQsW//IT/KRKr/EC7lzwuVT8WHA==
-X-Google-Smtp-Source: AGHT+IGOpa+pOsBfQTVCmOyxlty+CSNHSdKTc9qL1Gnql3UD4D5esNe3Mrx4URS+ZVrSS4hQc1/JDg==
-X-Received: by 2002:a05:6a00:f0e:b0:68b:c562:da46 with SMTP id
- cr14-20020a056a000f0e00b0068bc562da46mr16015314pfb.1.1693968061405; 
- Tue, 05 Sep 2023 19:41:01 -0700 (PDT)
+ bh=lPYCnBRLWg4g7sl74QYJVP75Z/zmBm7PNVaK8xYbfG8=;
+ b=HSmMIkIYT8VTgcGNF3I1XJWyEF/wNH9AcG25wCaGVKfxyVgvhIVBSmIkBHbSHELwwb
+ LIHQ4X/UVkjd8WMpfKxCOshupqRdn57BsHoU8o3SYN0t2P9xygwq/EBW4FoOCYCaU3/Q
+ Iplar0w3wLQdapyJNeLOVFann6daiSHaxcnnDE5s2U5aJrG8wdmQLLVF/mNcaVbFCvd8
+ 0LzhG8d/h66By3AP/wOx/Y3caYQe8NgPLuomTFhCJd9Rd0IZzQCw5HquWdacRlodvpx0
+ sjf1E134PD4EnB/osITsYH/js48++lXBV5rM8lURxnH9xiCHAoZ0wZ673ohaFfLb0VoZ
+ sgcA==
+X-Gm-Message-State: AOJu0YzqVpbMrjldUrRnNsAPw3kn3xe+1QgTPRIYZiD+nCQL3eqh5MJY
+ coS3s8yZeyDu9rBKf7mQeGVKnWG64ej++QIt6MWqxw==
+X-Google-Smtp-Source: AGHT+IEpAau0JlfDFRUej9/PnC+yEDD4DXyTB/TnCOFrs8PhXOG7mfn62Wup4E3KelDh8SPzm+Nc6Q==
+X-Received: by 2002:a05:6a20:a122:b0:13e:1d49:7249 with SMTP id
+ q34-20020a056a20a12200b0013e1d497249mr19515911pzk.2.1693968063455; 
+ Tue, 05 Sep 2023 19:41:03 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:8294:a07d:b7e9:4033])
  by smtp.gmail.com with ESMTPSA id
- c5-20020a6566c5000000b0056428865aadsm9145378pgw.82.2023.09.05.19.40.59
+ c5-20020a6566c5000000b0056428865aadsm9145378pgw.82.2023.09.05.19.41.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Sep 2023 19:41:01 -0700 (PDT)
+ Tue, 05 Sep 2023 19:41:03 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: u-boot@lists.denx.de
 Cc: etienne.carriere@st.com, michal.simek@amd.com, sjg@chromium.org,
  linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com,
  AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [RFC 2/6] firmware: scmi: add pinctrl protocol support
-Date: Wed,  6 Sep 2023 11:40:07 +0900
-Message-Id: <20230906024011.17488-3-takahiro.akashi@linaro.org>
+Subject: [RFC 3/6] pinctrl: add scmi driver
+Date: Wed,  6 Sep 2023 11:40:08 +0900
+Message-Id: <20230906024011.17488-4-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230906024011.17488-1-takahiro.akashi@linaro.org>
 References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
@@ -93,980 +93,594 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With this patch, transport-level utility functions for SCMI pinctrl
-protocol are added. DM-compliant device drivers, pinctrl and gpio, are
-added in the following patches.
+This DM-compliant driver deals with SCMI pinctrl protocol and presents
+pinctrl devices exposed by SCMI firmware (server).
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 ---
- cmd/scmi.c                                |   1 +
- drivers/firmware/scmi/Kconfig             |   3 +
- drivers/firmware/scmi/Makefile            |   1 +
- drivers/firmware/scmi/pinctrl.c           | 412 ++++++++++++++++++++
- drivers/firmware/scmi/scmi_agent-uclass.c |  11 +
- include/scmi_agent-uclass.h               |   2 +
- include/scmi_protocols.h                  | 435 ++++++++++++++++++++++
- 7 files changed, 865 insertions(+)
- create mode 100644 drivers/firmware/scmi/pinctrl.c
+ drivers/pinctrl/Kconfig        |  11 +
+ drivers/pinctrl/Makefile       |   1 +
+ drivers/pinctrl/pinctrl-scmi.c | 537 +++++++++++++++++++++++++++++++++
+ 3 files changed, 549 insertions(+)
+ create mode 100644 drivers/pinctrl/pinctrl-scmi.c
 
-diff --git a/cmd/scmi.c b/cmd/scmi.c
-index 5efec8ad87fd..ae7892381e0a 100644
---- a/cmd/scmi.c
-+++ b/cmd/scmi.c
-@@ -33,6 +33,7 @@ struct {
- 	{SCMI_PROTOCOL_ID_SENSOR, "Sensor management"},
- 	{SCMI_PROTOCOL_ID_RESET_DOMAIN, "Reset domain management"},
- 	{SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN, "Voltage domain management"},
-+	{SCMI_PROTOCOL_ID_PIN_CONTROL, "Pin control"},
- };
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index 75b3ff47a2e8..d02f5db550c8 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -256,6 +256,17 @@ config PINCTRL_SANDBOX
+ 	  Currently, this driver actually does nothing but print debug
+ 	  messages when pinctrl operations are invoked.
  
- /**
-diff --git a/drivers/firmware/scmi/Kconfig b/drivers/firmware/scmi/Kconfig
-index 8cf85f0d7a12..e0cb7b70dede 100644
---- a/drivers/firmware/scmi/Kconfig
-+++ b/drivers/firmware/scmi/Kconfig
-@@ -41,3 +41,6 @@ config SCMI_AGENT_OPTEE
- 	help
- 	  Enable the SCMI communication channel based on OP-TEE transport
- 	  for compatible "linaro,scmi-optee".
++config PINCTRL_SCMI
++	bool "SCMI pinctrl driver"
++	depends on SCMI_FIRMWARE
++	select SCMI_PINCTRL
++	help
++	  This enables pinctrl driver base on  SCMI.
 +
-+config SCMI_PINCTRL
-+	bool
-diff --git a/drivers/firmware/scmi/Makefile b/drivers/firmware/scmi/Makefile
-index 1a23d4981709..bf6381332e9e 100644
---- a/drivers/firmware/scmi/Makefile
-+++ b/drivers/firmware/scmi/Makefile
-@@ -4,4 +4,5 @@ obj-y	+= smt.o
- obj-$(CONFIG_SCMI_AGENT_SMCCC)		+= smccc_agent.o
- obj-$(CONFIG_SCMI_AGENT_MAILBOX)	+= mailbox_agent.o
- obj-$(CONFIG_SCMI_AGENT_OPTEE)	+= optee_agent.o
-+obj-$(CONFIG_SCMI_PINCTRL)	+= pinctrl.o
- obj-$(CONFIG_SANDBOX)		+= sandbox-scmi_agent.o sandbox-scmi_devices.o
-diff --git a/drivers/firmware/scmi/pinctrl.c b/drivers/firmware/scmi/pinctrl.c
++	  The driver is controlled by a device tree node which contains
++	  both the GPIO definitions and pin control functions for each
++	  available multiplex function.
++
+ config PINCTRL_SINGLE
+ 	bool "Single register pin-control and pin-multiplex driver"
+ 	depends on DM
+diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+index fc1f01a02cbd..a791df022b7d 100644
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -27,6 +27,7 @@ obj-$(CONFIG_PINCTRL_MSCC)	+= mscc/
+ obj-$(CONFIG_ARCH_MVEBU)	+= mvebu/
+ obj-$(CONFIG_ARCH_NEXELL)	+= nexell/
+ obj-$(CONFIG_PINCTRL_QE)	+= pinctrl-qe-io.o
++obj-$(CONFIG_PINCTRL_SCMI)	+= pinctrl-scmi.o
+ obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
+ obj-$(CONFIG_PINCTRL_STI)	+= pinctrl-sti.o
+ obj-$(CONFIG_PINCTRL_STM32)	+= pinctrl_stm32.o
+diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
 new file mode 100644
-index 000000000000..88ec57dc3d53
+index 000000000000..3ebdad57b86c
 --- /dev/null
-+++ b/drivers/firmware/scmi/pinctrl.c
-@@ -0,0 +1,412 @@
++++ b/drivers/pinctrl/pinctrl-scmi.c
+@@ -0,0 +1,537 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * SCMI Pin control protocol as U-Boot device
-+ *
 + * Copyright (C) 2023 Linaro Limited
-+ *		author: AKASHI Takahiro <takahiro.akashi@linaro.org>
++ *		Author: AKASHI Takahiro <takahiro.akashi@linaro.org>
 + */
++
++#define LOG_CATEGORY UCLASS_PINCTRL
 +
 +#include <common.h>
 +#include <dm.h>
 +#include <malloc.h>
 +#include <scmi_agent.h>
 +#include <scmi_protocols.h>
-+#include <string.h>
-+#include <asm/types.h>
 +#include <dm/device_compat.h>
-+#include <linux/kernel.h>
++#include <dm/pinctrl.h>
 +
 +/**
-+ * struct scmi_pinctrl_priv - Private data for SCMI Pin control protocol
-+ * @channel: Reference to the SCMI channel to use
-+ */
-+struct scmi_pinctrl_priv {
-+	struct scmi_channel *channel;
-+};
-+
-+int scmi_pinctrl_protocol_attrs(struct udevice *dev, u32 *num_pins,
-+				u32 *num_groups, u32 *num_functions)
-+{
-+	struct scmi_pinctrl_protocol_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PROTOCOL_ATTRIBUTES,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !num_pins || !num_groups || !num_functions)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*num_groups = SCMI_PINCTRL_ATTRS_NUM_GROUPS(out.attributes_low);
-+	*num_pins = SCMI_PINCTRL_ATTRS_NUM_PINS(out.attributes_low);
-+	*num_functions = SCMI_PINCTRL_ATTRS_NUM_FUNCTIONS(out.attributes_high);
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_attrs(struct udevice *dev, u32 id, u32 flags,
-+		       bool *extended_name, u8 **name)
-+{
-+	struct scmi_pinctrl_attrs_in in;
-+	struct scmi_pinctrl_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_ATTRIBUTES,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !extended_name || !name)
-+		return -EINVAL;
-+
-+	in.id = id;
-+	in.flags = flags;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*extended_name = SCMI_PINCTRL_ATTRS_EXTENDED_NAME(out.attributes);
-+	*name = strdup(out.name);
-+	if (!*name)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_list_assocs(struct udevice *dev, u32 id, u32 flags,
-+			     u16 **array)
-+{
-+	struct scmi_pinctrl_list_assocs_in in;
-+	struct scmi_pinctrl_list_assocs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_LIST_ASSOCIATIONS,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	u32 index;
-+	u16 *buf;
-+	int i, ret;
-+
-+	if (!dev || !array)
-+		return -EINVAL;
-+
-+	in.id = id;
-+	in.flags = flags;
-+
-+	buf = calloc(sizeof(u16), SCMI_PINCTRL_ARRAY_SIZE);
-+	if (!buf)
-+		return -ENOMEM;
-+
-+	index = 0;
-+	while (1) {
-+		in.index = index;
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			goto err;
-+		if (out.status) {
-+			ret = scmi_to_linux_errno(out.status);
-+			goto err;
-+		}
-+
-+		for (i = 0; i < SCMI_PINCTRL_LIST_NUM_PINGROUP(out.flags);
-+		     i++, index++)
-+			buf[index] = out.array[i];
-+
-+		/* realloc should happen only once */
-+		if (SCMI_PINCTRL_LIST_NUM_REMAINING(out.flags)) {
-+			buf = realloc(buf, sizeof(u16) *
-+				      (SCMI_PINCTRL_ARRAY_SIZE
-+				       + SCMI_PINCTRL_LIST_NUM_REMAINING(out.flags)));
-+			if (!buf)
-+				return -ENOMEM;
-+		} else {
-+			break;
-+		}
-+	}
-+
-+	*array = buf;
-+
-+	return index;
-+err:
-+	free(buf);
-+
-+	return ret;
-+}
-+
-+int scmi_pinctrl_config_get(struct udevice *dev, u32 id, bool all_configs,
-+			    int selector, unsigned int config_type,
-+			    struct scmi_pin_entry **configs)
-+
-+{
-+	struct scmi_pinctrl_config_get_in in;
-+	struct scmi_pinctrl_config_get_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_CONFIG_GET,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	struct scmi_pin_entry *entry;
-+	int cur, num, remaining, ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	if (!all_configs) {
-+		in.id = id;
-+		in.attributes = SCMI_PINCTRL_CONFIG_GET_ATTRS(0, selector, 0,
-+							      config_type);
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			return ret;
-+		if (out.status)
-+			return scmi_to_linux_errno(out.status);
-+
-+		entry = malloc(sizeof(*entry));
-+		if (!entry)
-+			return -ENOMEM;
-+
-+		*entry = out.configs[0];
-+		*configs = entry;
-+
-+		return 0;
-+	}
-+
-+	entry = NULL;
-+	cur = 0;
-+	while (1) {
-+		in.id = id;
-+		in.attributes = SCMI_PINCTRL_CONFIG_GET_ATTRS(1, selector, cur,
-+							      0);
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			return ret;
-+		if (out.status)
-+			return scmi_to_linux_errno(out.status);
-+
-+		num = SCMI_PINCTRL_CONFIG_GET_NUM_RET(out.num_configs);
-+		remaining = SCMI_PINCTRL_CONFIG_GET_REMAINING(out.num_configs);
-+
-+		if (!entry)
-+			entry = malloc(sizeof(*entry) * (num + remaining));
-+		if (!entry)
-+			return -ENOMEM;
-+
-+		memcpy(entry + cur, &out.configs, sizeof(*entry) * num);
-+
-+		if (!remaining)
-+			break;
-+
-+		cur += num;
-+	}
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_config_set(struct udevice *dev, u32 id, int selector,
-+			    int num_configs, struct scmi_pin_entry *configs)
-+{
-+	s32 status;
-+	struct scmi_pinctrl_config_set_in in;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_CONFIG_SET,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int cur, num, ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	cur = 0;
-+	while (num_configs) {
-+		if (num_configs < SCMI_PINCTRL_CONFIG_ENTRY_MAX)
-+			num =  num_configs;
-+		else
-+			num =  SCMI_PINCTRL_CONFIG_ENTRY_MAX;
-+
-+		in.id = id;
-+		in.attributes = SCMI_PINCTRL_CONFIG_SET_ATTRS(num, selector);
-+		memcpy(&in.configs[cur], configs,
-+		       sizeof(struct scmi_pin_entry) * num);
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			return ret;
-+		if (status)
-+			return scmi_to_linux_errno(status);
-+
-+		num_configs -= num;
-+		cur += num;
-+	}
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_function_select(struct udevice *dev, u32 id, u32 function_id,
-+				 u32 flags)
-+{
-+	s32 status;
-+	struct scmi_pinctrl_function_select_in in;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_FUNCTION_SELECT,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	in.id = id;
-+	in.function_id = function_id;
-+	in.flags = flags;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_request(struct udevice *dev, u32 id, u32 flags)
-+{
-+	s32 status;
-+	struct scmi_pinctrl_request_in in;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_REQUEST,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	in.id = id;
-+	in.flags = flags;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_release(struct udevice *dev, u32 id, u32 flags)
-+{
-+	s32 status;
-+	struct scmi_pinctrl_release_in in;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_RELEASE,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	in.id = id;
-+	in.flags = flags;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_name_get(struct udevice *dev, u32 id, u32 flags, u8 **name)
-+{
-+	struct scmi_pinctrl_name_get_in in;
-+	struct scmi_pinctrl_name_get_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_NAME_GET,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !name)
-+		return -EINVAL;
-+
-+	in.id = id;
-+	in.flags = flags;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*name = strdup(out.name);
-+	if (!*name)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+
-+int scmi_pinctrl_set_permissions(struct udevice *dev, u32 agent_id, u32 id,
-+				 u32 flags)
-+{
-+	s32 status;
-+	struct scmi_pinctrl_set_permissions_in in;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_PIN_CONTROL,
-+		.message_id = SCMI_PINCTRL_SET_PERMISSIONS,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	in.agent_id = agent_id;
-+	in.id = id;
-+	in.flags = flags;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index 79584c00a066..a5953cabbcee 100644
---- a/drivers/firmware/scmi/scmi_agent-uclass.c
-+++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -95,6 +95,9 @@ struct udevice *scmi_get_protocol(struct udevice *dev,
- 	case SCMI_PROTOCOL_ID_CLOCK:
- 		proto = priv->clock_dev;
- 		break;
-+	case SCMI_PROTOCOL_ID_PIN_CONTROL:
-+		proto = priv->pinctrl_dev;
-+		break;
- 	case SCMI_PROTOCOL_ID_RESET_DOMAIN:
- 		proto = priv->resetdom_dev;
- 		break;
-@@ -142,6 +145,9 @@ static int scmi_add_protocol(struct udevice *dev,
- 	case SCMI_PROTOCOL_ID_CLOCK:
- 		priv->clock_dev = proto;
- 		break;
-+	case SCMI_PROTOCOL_ID_PIN_CONTROL:
-+		priv->pinctrl_dev = proto;
-+		break;
- 	case SCMI_PROTOCOL_ID_RESET_DOMAIN:
- 		priv->resetdom_dev = proto;
- 		break;
-@@ -414,6 +420,11 @@ static int scmi_bind_protocols(struct udevice *dev)
- 			    scmi_protocol_is_supported(dev, protocol_id))
- 				drv = DM_DRIVER_GET(scmi_clock);
- 			break;
-+		case SCMI_PROTOCOL_ID_PIN_CONTROL:
-+			if (IS_ENABLED(CONFIG_PINCTRL_SCMI) &&
-+			    scmi_protocol_is_supported(dev, protocol_id))
-+				drv = DM_DRIVER_GET(scmi_pinctrl);
-+			break;
- 		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
- 			if (IS_ENABLED(CONFIG_RESET_SCMI) &&
- 			    scmi_protocol_is_supported(dev, protocol_id))
-diff --git a/include/scmi_agent-uclass.h b/include/scmi_agent-uclass.h
-index 6fd6d54d6a5a..993ea81e09c8 100644
---- a/include/scmi_agent-uclass.h
-+++ b/include/scmi_agent-uclass.h
-@@ -25,6 +25,7 @@ struct scmi_channel;
-  * @base_dev:		SCMI base protocol device
-  * @clock_dev:		SCMI clock protocol device
-  * @resetdom_dev:	SCMI reset domain protocol device
-+ * @pinctrl_dev:	SCMI pin control protocol device
-  * @voltagedom_dev:	SCMI voltage domain protocol device
-  */
- struct scmi_agent_priv {
-@@ -40,6 +41,7 @@ struct scmi_agent_priv {
- 	struct udevice *base_dev;
- 	struct udevice *clock_dev;
- 	struct udevice *resetdom_dev;
-+	struct udevice *pinctrl_dev;
- 	struct udevice *voltagedom_dev;
- };
- 
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index f41d3f317ce2..699e27e0a84f 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -24,6 +24,7 @@ enum scmi_std_protocol {
- 	SCMI_PROTOCOL_ID_SENSOR = 0x15,
- 	SCMI_PROTOCOL_ID_RESET_DOMAIN = 0x16,
- 	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN = 0x17,
-+	SCMI_PROTOCOL_ID_PIN_CONTROL = 0x19,
- };
- 
- enum scmi_status_code {
-@@ -683,4 +684,438 @@ struct scmi_voltd_level_get_out {
- 	s32 voltage_level;
- };
- 
-+/*
-+ * SCMI Pin Control Protocol
-+ */
-+#define SCMI_PIN_CONTROL_PROTOCOL_VERSION 0x10000
-+
-+enum scmi_pin_control_id {
-+	SCMI_PINCTRL_ATTRIBUTES = 0x3,
-+	SCMI_PINCTRL_LIST_ASSOCIATIONS = 0x4,
-+	SCMI_PINCTRL_CONFIG_GET = 0x5,
-+	SCMI_PINCTRL_CONFIG_SET = 0x6,
-+	SCMI_PINCTRL_FUNCTION_SELECT = 0x7,
-+	SCMI_PINCTRL_REQUEST = 0x8,
-+	SCMI_PINCTRL_RELEASE = 0x9,
-+	SCMI_PINCTRL_NAME_GET = 0xa,
-+	SCMI_PINCTRL_SET_PERMISSIONS = 0xb,
-+};
-+
-+#define SCMI_PINCTRL_NAME_LENGTH_MAX 16
-+
-+/**
-+ * struct scmi_pinctrl_protocol_attrs_out - Response for PINCTRL's
-+ *					    PROTOCOL_ATTRIBUTES command
-+ * @status:		SCMI command status
-+ * @attributes_low:	Protocol attributes (lower bytes)
-+ * @attributes_high:	Protocol attributes (higher bytes)
-+ */
-+struct scmi_pinctrl_protocol_attrs_out {
-+	s32 status;
-+	u32 attributes_low;
-+	u32 attributes_high;
-+};
-+
-+#define SCMI_PINCTRL_ATTRS_NUM_GROUPS(attributes_low) \
-+				(((attributes_low) & GENMASK(31, 16)) >> 16)
-+#define SCMI_PINCTRL_ATTRS_NUM_PINS(attributes_low) \
-+				((attributes_low) & GENMASK(15, 0))
-+#define SCMI_PINCTRL_ATTRS_NUM_FUNCTIONS(attributes_high) \
-+				((attributes_high) & GENMASK(15, 0))
-+
-+/**
-+ * struct scmi_pinctrl_attrs_in - Message payload for
-+ *				SCMI_PINCTRL_ATTRIBUTES command
-+ * @id:		Identifier of pin, group or function
++ * struct scmi_pin - attributes for a pin
++ * @name:	Name of pin
++ * @value:	Value of pin
 + * @flags:	A set of flags
++ * @function:	Function selected
++ * @status:	An array of status of configuration types
 + */
-+struct scmi_pinctrl_attrs_in {
-+	u32 id;
-+	u32 flags;
++struct scmi_pin {
++	char		*name;
++	u32		value;
++	u32		flags;
++	unsigned int	function;
++	u32		status[SCMI_PINCTRL_CONFIG_RESERVED];
 +};
 +
 +/**
-+ * struct scmi_pinctrl_attrs_out - Response payload for
-+ *				SCMI_PINCTRL_ATTRIBUTES command
-+ * @status:	SCMI command status
-+ * @attributes:	Attributes of pin, group for function
-+ * @name:	Name of pin, group or function
++ * struct scmi_group - attributes for a group
++ * @name:	Name of group
++ * @num_pins:	A number of pins
++ * @pins:	An array of pin id's
 + */
-+struct scmi_pinctrl_attrs_out {
-+	u32 status;
-+	u32 attributes;
-+	u8 name[SCMI_PINCTRL_NAME_LENGTH_MAX];
-+};
-+
-+#define SCMI_PINCTRL_TYPE(flags)	((flags) & GENMASK(1, 0))
-+#define SCMI_PINCTRL_TYPE_PIN		0x0
-+#define SCMI_PINCTRL_TYPE_GROUP		0x1
-+#define SCMI_PINCTRL_TYPE_FUNCTION	0x2
-+
-+#define SCMI_PINCTRL_ATTRS_EXTENDED_NAME(attributes) \
-+				((attributes) & BIT(31))
-+#define SCMI_PINCTRL_ATTRS_NUM_PINGROUP(attributes) \
-+				((attributes) & GENMASK(15, 0))
-+
-+/**
-+ * struct scmi_pinctrl_list_assocs_in - Message payload for
-+ *				SCMI_PINCTRL_LIST_ASSOCIATIONS command
-+ * @id:		Identifier of group or function
-+ * @flags:	A set of flags
-+ * @index:	Index of first group to be described
-+ */
-+struct scmi_pinctrl_list_assocs_in {
-+	u32 id;
-+	u32 flags;
-+	u32 index;
-+};
-+
-+#define SCMI_PINCTRL_ARRAY_SIZE	8
-+
-+/**
-+ * struct scmi_pinctrl_list_assocs_out - Response payload for
-+ *				SCMI_PINCTRL_LIST_ASSOCIATIONS command
-+ * @status:	SCMI command status
-+ * @attributes:	A set of flags
-+ * @array:	Array of pin or group identifiers
-+ */
-+struct scmi_pinctrl_list_assocs_out {
-+	u32 status;
-+	u32 flags;
-+	u16 array[SCMI_PINCTRL_ARRAY_SIZE];
-+};
-+
-+#define SCMI_PINCTRL_LIST_NUM_REMAINING(flags) \
-+				(((flags) & GENMASK(31, 16)) >> 16)
-+#define SCMI_PINCTRL_LIST_NUM_PINGROUP(flags) \
-+				((flags) & GENMASK(11, 0))
-+
-+/* FIXME: depends on transport */
-+#define SCMI_PINCTRL_CONFIG_ENTRY_MAX 8
-+
-+struct scmi_pin_entry {
-+	u32 type;
-+	u32 value;
++struct scmi_group {
++	char		*name;
++	unsigned int	num_pins;
++	u16		*pins;
 +};
 +
 +/**
-+ * struct scmi_pinctrl_config_get_in - Message payload for
-+ *				SCMI_PINCTRL_CONFIG_GET command
-+ * @id:		Identifier of pin or group
-+ * @attributes:	Configuration attributes
-+ */
-+struct scmi_pinctrl_config_get_in {
-+	u32 id;
-+	u32 attributes;
-+};
-+
-+#define SCMI_PINCTRL_CONFIG_GET_ATTRS(all, selector, skip, type) \
-+				(((all) << 18) | ((selector) << 16) | \
-+				 (((skip) << 8) | (type)))
-+
-+#define SCMI_PINCTRL_CONFIG_GET_ALL BIT(18)
-+#define SCMI_PINCTRL_CONFIG_GET_PINCTRL_TYPE(attributes) \
-+				(((attributes) & GENMASK(17, 16)) >> 16)
-+#define SCMI_PINCTRL_CONFIG_GET_SKIP(attributes) \
-+				(((attributes) & GENMASK(15, 8)) >> 8)
-+#define SCMI_PINCTRL_CONFIG_GET_TYPE(attributes) \
-+				((attributes) & GENMASK(7, 0))
-+
-+/**
-+ * struct scmi_pinctrl_confige_get_out - Response payload for
-+ *				SCMI_PINCTRL_CONFIG_GET command
-+ * @status:		SCMI command status
-+ * @num_configs:	Number of configuration types
-+ * @configs:		Values of configuration types
-+ */
-+struct scmi_pinctrl_config_get_out {
-+	u32 status;
-+	u32 num_configs;
-+	struct scmi_pin_entry configs[SCMI_PINCTRL_CONFIG_ENTRY_MAX];
-+};
-+
-+#define SCMI_PINCTRL_CONFIG_GET_REMAINING(attributes) \
-+				(((attributes) & GENMASK(31, 24)) >> 24)
-+#define SCMI_PINCTRL_CONFIG_GET_NUM_RET(attributes) \
-+				((attributes) & GENMASK(7, 0))
-+#define SCMI_PINCTRL_CONFIG_GET_NUM_CONFIGS(remaining, num) \
-+				(((remaining) << 24) | (num))
-+
-+#define SCMI_PINCTRL_CONFIG_ID_SHIFT		8
-+
-+#define SCMI_PINCTRL_CONFIG_DEFAULT			0
-+#define SCMI_PINCTRL_CONFIG_BIAS_BUS_HOLD		1
-+#define SCMI_PINCTRL_CONFIG_BIAS_DISABLE		2
-+#define SCMI_PINCTRL_CONFIG_BIAS_HI_IMPEDANCE		3
-+#define SCMI_PINCTRL_CONFIG_BIAS_PULL_UP		4
-+#define SCMI_PINCTRL_CONFIG_BIAS_PULL_DEF		5
-+#define SCMI_PINCTRL_CONFIG_BIAS_PULL_DOWN		6
-+#define SCMI_PINCTRL_CONFIG_DRIVE_OPEN_DRAIN		7
-+#define SCMI_PINCTRL_CONFIG_DRIVE_OPEN_SOURCE		8
-+#define SCMI_PINCTRL_CONFIG_DRIVE_PUSH_PULL		9
-+#define SCMI_PINCTRL_CONFIG_DRIVE_STRENGTH		10
-+#define SCMI_PINCTRL_CONFIG_INPUT_DEBOUNCE		11
-+#define SCMI_PINCTRL_CONFIG_INPUT_MODE			12
-+#define SCMI_PINCTRL_CONFIG_PULL_MODE			13
-+#define SCMI_PINCTRL_CONFIG_INPUT_VALUE			14
-+#define SCMI_PINCTRL_CONFIG_INPUT_SCHMITT		15
-+#define SCMI_PINCTRL_CONFIG_LOW_POWER_MODE		16
-+#define SCMI_PINCTRL_CONFIG_OUTPUT_MODE			17
-+#define SCMI_PINCTRL_CONFIG_OUTPUT_VALUE		18
-+#define SCMI_PINCTRL_CONFIG_POWER_SOURCE		19
-+#define SCMI_PINCTRL_CONFIG_SLEW_RATE			20
-+#define SCMI_PINCTRL_CONFIG_RESERVED			21
-+#define SCMI_PINCTRL_CONFIG_OEM				192
-+
-+/**
-+ * struct scmi_pinctrl_config_set_in - Message payload for
-+ *				SCMI_PINCTRL_CONFIG_GET command
-+ * @id:		Identifier of pin or group
-+ * @attributes:	Configuration attributes
-+ * @configs:	Values of configuration types
-+ */
-+struct scmi_pinctrl_config_set_in {
-+	u32 id;
-+	u32 attributes;
-+	struct scmi_pin_entry configs[SCMI_PINCTRL_CONFIG_ENTRY_MAX];
-+};
-+
-+#define SCMI_PINCTRL_CONFIG_SET_ATTRS(num, type) \
-+				(((num) << 2) | (type))
-+#define SCMI_PINCTRL_CONFIG_SET_NUM_CONFIGS(attributes) \
-+				(((attributes) & GENMASK(9, 2)) >> 2)
-+#define SCMI_PINCTRL_CONFIG_SET_PINCTRL_TYPE(attributes) \
-+				((attributes) & GENMASK(1, 0))
-+
-+/**
-+ * struct scmi_pinctrl_function_select_in - Message payload for
-+ *				SCMI_PINCTRL_FUNCTION_SELECT command
-+ * @id:			Identifier of pin or group
-+ * @function_id:	Identifier of function
-+ * @flags:		A set of flags
-+ */
-+struct scmi_pinctrl_function_select_in {
-+	u32 id;
-+	u32 function_id;
-+	u32 flags;
-+};
-+
-+/**
-+ * struct scmi_pinctrl_request_in - Message payload for
-+ *				SCMI_PINCTRL_REQUEST command
-+ * @id:			Identifier of pin or group
-+ * @flags:		A set of flags
-+ */
-+struct scmi_pinctrl_request_in {
-+	u32 id;
-+	u32 flags;
-+};
-+
-+/**
-+ * struct scmi_pinctrl_release_in - Message payload for
-+ *				SCMI_PINCTRL_RELEASE command
-+ * @id:			Identifier of pin or group
-+ * @flags:		A set of flags
-+ */
-+struct scmi_pinctrl_release_in {
-+	u32 id;
-+	u32 flags;
-+};
-+
-+/**
-+ * struct scmi_pinctrl_name_get_in - Message payload for
-+ *				SCMI_PINCTRL_NAME_GET command
-+ * @id:			Identifier of pin, group or function
-+ * @flags:		A set of flags
-+ */
-+struct scmi_pinctrl_name_get_in {
-+	u32 id;
-+	u32 flags;
-+};
-+
-+/**
-+ * struct scmi_pinctrl_name_get_out - Response payload for
-+ *				SCMI_PINCTRL_NAME_GET command
-+ * @status:	SCMI command status
-+ * @flags:	A set of flags (reserved)
-+ * @name:	Name in string
-+ */
-+struct scmi_pinctrl_name_get_out {
-+	u32 status;
-+	u32 flags;
-+	u8 name[64];
-+};
-+
-+/**
-+ * struct scmi_pinctrl_set_permissions_in - Message payload for
-+ *				SCMI_PINCTRL_SET_PERMISSIONS command
-+ * @agent_id:	Identifier of the agent
-+ * @id:		Identifier of pin or group
-+ * @flags:	A set of flags
-+ */
-+struct scmi_pinctrl_set_permissions_in {
-+	u32 agent_id;
-+	u32 id;
-+	u32 flags;
-+};
-+
-+#define SCMI_PINCTRL_PERMISSION BIT(2)
-+
-+/**
-+ * scmi_pinctrl_protocol_attrs - get attributes of pinctrl protocol
-+ * @dev:		SCMI pinctrl device
++ * struct scmi_pinctrl_priv - private data for pinctrl device
 + * @num_pins:		A number of pins
 + * @num_groups:		A number of groups
 + * @num_functions:	A number of functions
-+ *
-+ * Get a number of available pins, groups and functions, respectively,
-+ * in @num_pins, @num_groups, @num_functions.
-+ *
-+ * Return: 0 on success, error code otherwise
++ * @pins:		An array of pins
++ * @groups:		An array of groups
++ * @functions:		An array of function names
 + */
-+int scmi_pinctrl_protocol_attrs(struct udevice *dev, u32 *num_pins,
-+				u32 *num_groups, u32 *num_functions);
++struct scmi_pinctrl_priv {
++	unsigned int	num_pins;
++	unsigned int	num_groups;
++	unsigned int	num_functions;
++	struct scmi_pin	*pins;
++	struct scmi_group *groups;
++	char		**functions;
++};
++
++static const struct pinconf_param scmi_conf_params[] = {
++	{ "default", SCMI_PINCTRL_CONFIG_DEFAULT, 1 },
++	{ "bias-bus-hold", SCMI_PINCTRL_CONFIG_BIAS_BUS_HOLD, 1 },
++	{ "bias-disable", SCMI_PINCTRL_CONFIG_BIAS_DISABLE, 1 },
++	{ "bias-high-impedance", SCMI_PINCTRL_CONFIG_BIAS_HI_IMPEDANCE, 1 },
++	{ "bias-pull-up", SCMI_PINCTRL_CONFIG_BIAS_PULL_UP, 1 },
++	{ "bias-pull-default", SCMI_PINCTRL_CONFIG_BIAS_PULL_DEF, 1 },
++	{ "bias-pull-down", SCMI_PINCTRL_CONFIG_BIAS_PULL_DOWN, 1 },
++	{ "drive-open-drain", SCMI_PINCTRL_CONFIG_DRIVE_OPEN_DRAIN, 1 },
++	{ "drive-open-source", SCMI_PINCTRL_CONFIG_DRIVE_OPEN_SOURCE, 1 },
++	{ "drive-push-pull", SCMI_PINCTRL_CONFIG_DRIVE_PUSH_PULL, 1 },
++	{ "drive-strength", SCMI_PINCTRL_CONFIG_DRIVE_STRENGTH, 0 },
++	{ "input-debounce", SCMI_PINCTRL_CONFIG_INPUT_DEBOUNCE, 0 },
++	{ "input-mode", SCMI_PINCTRL_CONFIG_INPUT_MODE, 1 },
++	{ "pull-mode", SCMI_PINCTRL_CONFIG_PULL_MODE, 0 },
++	{ "input-value", SCMI_PINCTRL_CONFIG_INPUT_VALUE, 0 },
++	{ "input-schmitt", SCMI_PINCTRL_CONFIG_INPUT_SCHMITT, 1 },
++	{ "low-power-mode", SCMI_PINCTRL_CONFIG_LOW_POWER_MODE, 1 },
++	{ "output-mode", SCMI_PINCTRL_CONFIG_OUTPUT_MODE, 1 },
++	{ "output-value", SCMI_PINCTRL_CONFIG_OUTPUT_VALUE, 0 },
++	{ "power-source", SCMI_PINCTRL_CONFIG_POWER_SOURCE, 0 },
++	{ "slew-rate", SCMI_PINCTRL_CONFIG_SLEW_RATE, 0 },
++};
 +
 +/**
-+ * scmi_pinctrl_attrs - get attributes of pin, group or function
-+ * @dev:		SCMI pinctrl device
-+ * @id:			Identifier of pin, group or function
-+ * @flags:		A set of flags
-+ * @extended_name:	Bit flag for extended name
-+ * @name:		Name of pin, group or function
-+ *
-+ * Get the name of @id in @name.
-+ * @flags can be SCMI_PINCTRL_TYPE_PIN, GROUP or FUNCTION.
-+ * If @id has an extended name, @extended_name is set to true.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_attrs(struct udevice *dev, u32 id, u32 flags,
-+		       bool *extended_name, u8 **name);
-+
-+/**
-+ * scmi_pinctrl_list_assocs - Get a list of pins or groups
-+ * @dev:		SCMI pinctrl device
-+ * @id:			Identifier of group or function
-+ * @flags:		A set of flags
-+ * @array:		A pointer to a list of pins, groups or functions
-+ *
-+ * Get a list of pins or groups associated with @id in @array.
-+ * @flags can be SCMI_PINCTRL_TYPE_GROUP or FUNCTION.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_list_assocs(struct udevice *dev, u32 id, u32 flags,
-+			     u16 **array);
-+
-+/**
-+ * scmi_pinctrl_config_get - Get configuration
-+ * @dev:		SCMI pinctrl device
-+ * @id:			Identifier of pin or group
-+ * @all_configs:	Identifier of pin or group
-+ * @selector:		Type of id
-+ * @config_type:	Type of configuration
-+ * @configs:		A pointer to an array of configuration data
-+ *
-+ * If @all_configs is set, get a list of values of all configuration types
-+ * associated with @id in @configs, otherwise get the configuration for
-+ * a specific @config_type. Each configuration data is presented in a form
-+ * of struct scmi_pin_entry.
-+ * @selector can be SCMI_PINCTRL_TYPE_PIN or GROUP.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_config_get(struct udevice *dev, u32 id, bool all_configs,
-+			    int selector, unsigned int config_type,
-+			    struct scmi_pin_entry **configs);
-+
-+/**
-+ * scmi_pinctrl_config_set - Set configuration
-+ * @dev:		SCMI pinctrl device
-+ * @id:			Identifier of pin or group
-+ * @selector:		Type of id
-+ * @num_configs:	A number of configuration data
-+ * @configs:		A pointer to an array of configuration data
-+ *
-+ * Configure a pin or group associated with @id using @configs.
-+ * Each configuration data is presented in a form of struct scmi_pin_entry.
-+ * @selector can be SCMI_PINCTRL_TYPE_PIN or GROUP.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_config_set(struct udevice *dev, u32 id, int selector,
-+			    int num_configs, struct scmi_pin_entry *configs);
-+
-+/**
-+ * scmi_pinctrl_function_select - Select a function
-+ * @dev:		SCMI pinctrl device
-+ * @id:			Identifier of pin or group
-+ * @function_id:	Identifier of function
-+ * @flags:		A set of flags
-+ *
-+ * Select a function, @function_id, for a pin or group with @id.
-+ * @flags can be SCMI_PINCTRL_TYPE_PIN or GROUP.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_function_select(struct udevice *dev, u32 id, u32 function_id,
-+				 u32 flags);
-+
-+/**
-+ * scmi_pinctrl_request - Request exclusive control
++ * pinctrl_get_name - get a name
 + * @dev:	SCMI pinctrl device
-+ * @id:		Identifier of pin or group
-+ * @flags:	A set of flags
-+ *
-+ * Make a request for exclusive control of pin or group with @id by this agent.
-+ * Once granted, no other agent can access @id until released.
-+ * @flags can be SCMI_PINCTRL_TYPE_PIN or GROUP.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_request(struct udevice *dev, u32 id, u32 flags);
-+
-+/**
-+ * scmi_pinctrl_release - Release exclusive control
-+ * @dev:	SCMI pinctrl device
-+ * @id:		Identifier of pin or group
-+ * @flags:	A set of flags
-+ *
-+ * Release exclusive control of pin or group with @id by this agent.
-+ * @flags can be SCMI_PINCTRL_TYPE_PIN or GROUP.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_pinctrl_release(struct udevice *dev, u32 id, u32 flags);
-+
-+/**
-+ * scmi_pinctrl_name_get - Get extended name
-+ * @dev:	SCMI pinctrl device
++ * @type:	Type of id
 + * @id:		Identifier of pin, group or function
-+ * @flags:	A set of flags
 + *
-+ * Get an extended name of pin, group or function with @id.
-+ * @flags can be SCMI_PINCTRL_TYPE_PIN, GROUP or FUNCTION.
++ * Get a name of @id.
++ * @type can be SCMI_PINCTRL_TYPE_PIN, GROUP or FUNCTION.
++ * An extended name is returned if it is provided.
 + *
-+ * Return: 0 on success, error code otherwise
++ * Return: A pointer to the name, NULL if failed.
 + */
-+int scmi_pinctrl_name_get(struct udevice *dev, u32 id, u32 flags, u8 **name);
++static char *pinctrl_get_name(struct udevice *dev, unsigned int type,
++			      unsigned int id)
++{
++	u8 *name, *extended_name;
++	bool extended;
++	int ret;
++
++	ret = scmi_pinctrl_attrs(dev, id, type, &extended, &name);
++	if (ret) {
++		dev_err(dev, "failed to get attributes (%d)\n", ret);
++		return NULL;
++	}
++
++	if (!extended)
++		return name;
++
++	ret = scmi_pinctrl_name_get(dev, id, type, &extended_name);
++	if (ret) {
++		dev_err(dev, "failed to get extended_name (%d)\n", ret);
++		return name;
++	}
++
++	free(name);
++	return extended_name;
++}
 +
 +/**
-+ * scmi_pinctrl_set_permissions - Claim access permission
-+ * @dev:	SCMI pinctrl device
-+ * @agent_id:	Identifier of SCMI agent
-+ * @id:		Identifier of pin or group
-+ * @flags:	A set of flags
++ * get_pins_count - Get the number of selectable pins
++ * @dev:	SCMI pinctrl device to use
 + *
-+ * Request to set or deny access permission against @id for the agent
-+ * with @agent_id.
-+ * Bit[2] of @flags indicates "allow access" if set, otherwise "deny access".
-+ * @flags should have SCMI_PINCTRL_TYPE_PIN or GROUP.
++ * Get the number of selectable named pins available in this driver
 + *
-+ * Return: 0 on success, error code otherwise
++ * Return: a number of pins
 + */
-+int scmi_pinctrl_set_permissions(struct udevice *dev, u32 agent_id, u32 id,
-+				 u32 flags);
++static int scmi_get_pins_count(struct udevice *dev)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
 +
- #endif /* _SCMI_PROTOCOLS_H */
++	return priv->num_pins;
++}
++
++/**
++ * get_pin_name - Get the name of a pin
++ * @dev:	SCMI pinctrl device of the pin
++ * @selector:	The pin selector
++ *
++ * Get the name of a pin
++ *
++ * Return: a pointer to the name of the pin
++ */
++static const char *scmi_get_pin_name(struct udevice *dev, unsigned int selector)
++{
++	return pinctrl_get_name(dev, SCMI_PINCTRL_TYPE_PIN, selector);
++}
++
++/**
++ * get_pin_muxing - Show pin muxing
++ * @dev:	SCMI pinctrl device to use
++ * @selector:	Pin selector
++ * @buf:	Buffer to fill with pin muxing description
++ * @size:	Size of @buf
++ *
++ * Create a displayable information in @buf about the muxing of a given pin.
++ *
++ * @Return: 0 if OK, or negative error code on failure
++ */
++static int scmi_get_pin_muxing(struct udevice *dev, unsigned int selector,
++			       char *buf, int size)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	char tmp[100];
++	int i;
++
++	if (priv->pins[selector].function == UINT_MAX) {
++		strlcpy(buf, "<unknown>", size);
++		return 0;
++	}
++
++	sprintf(tmp, "%s", priv->functions[priv->pins[selector].function]);
++	strlcpy(buf, tmp, size);
++
++	for (i = 0; i < SCMI_PINCTRL_CONFIG_RESERVED; i++) {
++		/* TODO: distinguish 0 and "disabled" in status */
++		if (priv->pins[selector].status[i]) {
++			strlcat(buf, " ", size);
++			strlcat(buf, scmi_conf_params[i].property, size);
++		}
++	}
++	strlcat(buf, ".", size);
++
++	return 0;
++}
++
++/**
++ * get_groups_count - Get the number of selectable groups
++ * @dev:	SCMI pinctrl device to use
++ *
++ * Get a number of selectable groups
++ *
++ * Return: a number of selectable named groups available in the driver
++ */
++static int scmi_get_groups_count(struct udevice *dev)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++
++	return priv->num_groups;
++}
++
++/**
++ * get_group_name - Get the name of a group
++ * @dev:	SCMI pinctrl device of the group
++ * @selector:	The group selector
++ *
++ * Ge the name of a group
++ *
++ * Return: a pointer to the name of the group
++ */
++static const char *scmi_get_group_name(struct udevice *dev,
++				       unsigned int selector)
++{
++	return pinctrl_get_name(dev, SCMI_PINCTRL_TYPE_GROUP, selector);
++}
++
++/**
++ * get_functions_count - Get the number of selectable functions
++ * @dev:	SCMI pinctrl device to use
++ *
++ * Get a number of selectable functions
++ *
++ * Return: a number of selectable named functions available in this driver
++ */
++static int scmi_get_functions_count(struct udevice *dev)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++
++	return priv->num_functions;
++}
++
++/**
++ * get_function_name - Get the name of a function
++ * @dev:	SCMI pinmux device of the function
++ * @selector:	The function selector
++ *
++ * Get a name of a function
++ *
++ * Return: a pointer to the function name of the muxing selector
++ */
++static const char *scmi_get_function_name(struct udevice *dev,
++					  unsigned int selector)
++{
++	return pinctrl_get_name(dev, SCMI_PINCTRL_TYPE_FUNCTION, selector);
++}
++
++/**
++ * pinmux_set - Mux a pin to a function
++ * @dev:		SCMI pinctrl device to use
++ * @pin_selector:	The pin selector
++ * @func_selector:	The func selector
++ *
++ * Set a function, @function_selector, to @pin_selector.
++ *
++ * Return: 0 if OK, or negative error code on failure
++ */
++static int scmi_pinmux_set(struct udevice *dev, unsigned int pin_selector,
++			   unsigned int func_selector)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = scmi_pinctrl_function_select(dev, pin_selector, func_selector,
++					   SCMI_PINCTRL_TYPE_PIN);
++	if (ret) {
++		dev_err(dev, "failed to select function (%d)\n", ret);
++		return ret;
++	}
++
++	priv->pins[pin_selector].function = func_selector;
++
++	return 0;
++}
++
++/**
++ * pinmux_group_set - Mux a group of pins to a function
++ * @dev:		SCMI pinctrl device to use
++ * @group_selector:	The group selector
++ * @func_selector:	The func selector
++ *
++ * Set a function, @function_selector, to @group_selector.
++ *
++ * @Return: 0 if OK, or negative error code on failure
++ */
++static int scmi_pinmux_group_set(struct udevice *dev,
++				 unsigned int group_selector,
++				 unsigned int func_selector)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	int i, ret;
++
++	ret = scmi_pinctrl_function_select(dev, group_selector, func_selector,
++					   SCMI_PINCTRL_TYPE_GROUP);
++	if (ret) {
++		dev_err(dev, "failed to select function (%d)\n", ret);
++		return ret;
++	}
++
++	for (i = 0; i < priv->groups[group_selector].num_pins; i++)
++		priv->pins[priv->groups[group_selector].pins[i]].function =
++				func_selector;
++
++	return 0;
++}
++
++/* TODO: may be driver-specific */
++/**
++ * pinmux_property_set - Enable a pinmux group
++ * @dev:	SCMI pinctrl device to use
++ * @pinmux_group: A u32 representing the pin identifier and mux
++ *                settings.
++ *
++ * Mux a single pin to a single function based on a driver-specific
++ * pinmux group.
++ * The format of @pinmux_group follows ...
++ *
++ * Return: Pin selector for the muxed pin if OK, or negative error code on
++ *      failure
++ */
++static int scmi_pinmux_property_set(struct udevice *dev, u32 pinmux_group)
++{
++	unsigned int pin_selector = pinmux_group & 0xFFFF;
++	unsigned int func_selector = pinmux_group >> 16;
++	int ret;
++
++	ret = scmi_pinmux_set(dev, pin_selector, func_selector);
++
++	return ret ? ret : pin_selector;
++}
++
++/**
++ * pinconf_set - Configure an individual pin with a parameter
++ * @dev:		SCMI pinctrl device to use
++ * @pin_selector:	The pin selector
++ * @param:		An &enum pin_config_param from @pinconf_params
++ * @argument:		The argument to this param from the device tree, or
++ *			@pinconf_params.default_value
++ *
++ * Configure @param of a pin, @pin_selector, with @argument.
++ *
++ * @Return: 0 if OK, or negative error code on failure
++ */
++static int scmi_pinconf_set(struct udevice *dev, unsigned int pin_selector,
++			    unsigned int param, unsigned int argument)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	struct scmi_pin_entry config;
++	int ret;
++
++	config.type = param;
++	config.value = argument;
++	ret = scmi_pinctrl_config_set(dev, pin_selector, SCMI_PINCTRL_TYPE_PIN,
++				      1, &config);
++	if (ret) {
++		dev_err(dev, "failed to set config (%d)\n", ret);
++		return ret;
++	}
++
++	if (param < SCMI_PINCTRL_CONFIG_RESERVED)
++		priv->pins[pin_selector].status[param] = argument;
++
++	return 0;
++}
++
++/**
++ * pinconf_group_set - Configure all pins in a group with a parameter
++ * @dev:		SCmi pinctrl device to use
++ * @group_selector:	The group selector
++ * @param:		A &enum pin_config_param from @pinconf_params
++ * @argument:		The argument to this param from the device tree, or
++ *			@pinconf_params.default_value
++ *
++ * Configure @param of all the pins in a group, @group_selector, with @argument.
++ *
++ * @Return: 0 if OK, or negative error code on failure
++ */
++static int scmi_pinconf_group_set(struct udevice *dev,
++				  unsigned int group_selector,
++				  unsigned int param, unsigned int argument)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	struct scmi_pin_entry config;
++	int i, ret;
++
++	config.type = param;
++	config.value = argument;
++	ret = scmi_pinctrl_config_set(dev, group_selector,
++				      SCMI_PINCTRL_TYPE_GROUP, 1, &config);
++	if (ret) {
++		dev_err(dev, "failed to set config (%d)\n", ret);
++		return ret;
++	}
++
++	if (param >= SCMI_PINCTRL_CONFIG_RESERVED)
++		return 0;
++
++	for (i = 0; i < priv->groups[group_selector].num_pins; i++)
++		priv->pins[priv->groups[group_selector].pins[i]].status[param] =
++				argument;
++
++	return 0;
++}
++
++const struct pinctrl_ops scmi_pinctrl_ops = {
++	.get_pins_count = scmi_get_pins_count,
++	.get_pin_name = scmi_get_pin_name,
++	.get_pin_muxing = scmi_get_pin_muxing,
++	.get_groups_count = scmi_get_groups_count,
++	.get_group_name = scmi_get_group_name,
++	.get_functions_count = scmi_get_functions_count,
++	.get_function_name = scmi_get_function_name,
++	.pinmux_set = scmi_pinmux_set,
++	.pinmux_group_set = scmi_pinmux_group_set,
++	.pinmux_property_set = scmi_pinmux_property_set,
++	.pinconf_num_params = ARRAY_SIZE(scmi_conf_params),
++	.pinconf_params = scmi_conf_params,
++	.pinconf_set = scmi_pinconf_set,
++	.pinconf_group_set = scmi_pinconf_group_set,
++	.set_state = pinctrl_generic_set_state,
++};
++
++/**
++ * scmi_pinctrl_probe - probe a device
++ * @dev:	SCMI pinctrl device
++ *
++ * Probe and initialize a pinctrl device.
++ *
++ * Return:	0 on success, error code on failure
++ */
++static int scmi_pinctrl_probe(struct udevice *dev)
++{
++	struct scmi_pinctrl_priv *priv = dev_get_priv(dev);
++	u32 version;
++	char *name;
++	int i, ret;
++
++	ret = devm_scmi_of_get_channel(dev);
++	if (ret) {
++		dev_err(dev, "failed to get channel (%d)\n", ret);
++		return ret;
++	}
++
++	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_PIN_CONTROL,
++					    &version);
++	if (ret || version < SCMI_PIN_CONTROL_PROTOCOL_VERSION) {
++		dev_err(dev, "protocol version doesn't match (%d)\n", version);
++		return -EINVAL;
++	}
++
++	ret = scmi_pinctrl_protocol_attrs(dev, &priv->num_pins,
++					  &priv->num_groups,
++					  &priv->num_functions);
++	if (ret) {
++		dev_err(dev, "failed to get protocol attributes (%d)\n", ret);
++		return ret;
++	}
++
++	priv->pins = calloc(sizeof(struct scmi_pin), priv->num_pins);
++	if (!priv->pins) {
++		dev_err(dev, "memory not available\n");
++		return -ENOMEM;
++	}
++	for (i = 0; i < priv->num_pins; i++) {
++		priv->pins[i].function = UINT_MAX; /* unknown yet */
++		name = scmi_get_pin_name(dev, i);
++		if (!name) {
++			dev_err(dev, "failed to get pin name\n");
++			return ret;
++		}
++		priv->pins[i].name = strdup(name);
++		free(name);
++		if (!priv->pins[i].name) {
++			dev_err(dev, "memory not available\n");
++			return -ENOMEM;
++		}
++	}
++
++	priv->groups = calloc(sizeof(struct scmi_group), priv->num_groups);
++	if (!priv->groups)
++		return -ENOMEM;
++	for (i = 0; i < priv->num_groups; i++) {
++		name = scmi_get_group_name(dev, i);
++		if (!name) {
++			dev_err(dev, "failed to get group name\n");
++			return ret;
++		}
++		priv->groups[i].name = strdup(name);
++		free(name);
++		if (!priv->groups[i].name) {
++			dev_err(dev, "memory not available\n");
++			return -ENOMEM;
++		}
++
++		ret = scmi_pinctrl_list_assocs(dev, i, SCMI_PINCTRL_TYPE_GROUP,
++					       &priv->groups[i].pins);
++		if (ret < 0) {
++			dev_err(dev, "failed to enumerate pins (%d)\n", ret);
++			return ret;
++		}
++
++		priv->groups[i].num_pins = ret;
++	}
++
++	priv->functions = calloc(sizeof(char *), priv->num_functions);
++	if (!priv->functions) {
++		dev_err(dev, "memory not available\n");
++		return -ENOMEM;
++	}
++	for (i = 0; i < priv->num_functions; i++) {
++		name = scmi_get_function_name(dev, i);
++		if (!name) {
++			dev_err(dev, "failed to get group name\n");
++			return ret;
++		}
++		priv->functions[i] = strdup(name);
++		free(name);
++		if (!priv->functions[i]) {
++			dev_err(dev, "memory not available\n");
++			return -ENOMEM;
++		}
++	}
++
++	return 0;
++}
++
++U_BOOT_DRIVER(scmi_pinctrl) = {
++	.name = "scmi_pinctrl",
++	.id = UCLASS_PINCTRL,
++	.ops = &scmi_pinctrl_ops,
++	.probe = scmi_pinctrl_probe,
++	.priv_auto	= sizeof(struct scmi_pinctrl_priv),
++};
 -- 
 2.34.1
 
