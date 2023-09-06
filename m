@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A687EE14C3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9336FEE14C3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E66286A0A;
-	Wed,  6 Sep 2023 23:30:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E29C4869F0;
+	Wed,  6 Sep 2023 23:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B0siJKuK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EvBrI68P";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LreFqvwJ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Vd2IUcCK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C85A6869C3; Wed,  6 Sep 2023 23:30:47 +0200 (CEST)
+ id 86C13869F4; Wed,  6 Sep 2023 23:30:48 +0200 (CEST)
 Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
  [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5465E866DA
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F1E8868BC
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,7 +32,7 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RgwXP225fz9tTZ;
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4RgwXP6d61z9t0P;
  Wed,  6 Sep 2023 23:30:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694035845;
@@ -40,38 +40,39 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SWVzM+GSHxjH3k37Usn5OeUFomBCI4xn/MfWn3ivtDo=;
- b=B0siJKuKsyVXVCk2R/p8+uT8K8xqRCouXdnHyhNaCCKcU36RUN5YYlWb80w/wtERcIrIM8
- VnZ/X49prBENGvmPAATGHccuMWNcOpW2G/51fp5NW/3njuT90e9MosSTE/4OI5FfK39q7T
- ERNjhM1QO64uVFEh+g0U99U/KU+yo7pQ6rGFR8bgiS8NdR4WuMVwKJTJTppfBx8ONR+N2+
- 6wTZAIxMtroyYURotn6nk8+cx8E2Zp2f2K/UagJ7mTC+j6IO2kJ/o/GqCr7S9rUg2JRqYs
- s/dXiD8gVW7RLUMrtWv3odI9uavnTCg4S5FqSdJD5TS4oYmkvB+odr805NzPaQ==
+ bh=3OR82C+bBds4oCAeIJ1gg5XiN13E5oJYbR829FPLtBU=;
+ b=LreFqvwJiiIjroujijiNBWuSq1C9MQC1PoSu5p4jKLivzkAV/7XYMxIRvgCsUBUvMvIkQN
+ 1R8yF9Bvb8zcptxu5I7NKtppSTpmwEnQGfgsuS0yJJI62ExKcxbhxHEWUdgssjBDuleJQq
+ dhZu3gNrhefPqsKGGdEzlofK6CkQRbZUFBDBG5JjKhyzN5k8JoUYfHwIp8sNoB+MQNsfcJ
+ 8HksgLUre3WO5cD9x5kQi3l4992JwjqJVct8xEZSE0m5RN0cDFtfy2PjMR+6rpxw5KaRWj
+ zI+G+4F3+crPryZg+2cxUV3FY0lzqCyJ/NgP6Z6uqm335E9rZg0xQHj8D/GJhQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035842;
+ s=mail20150812; t=1694035843;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SWVzM+GSHxjH3k37Usn5OeUFomBCI4xn/MfWn3ivtDo=;
- b=EvBrI68PwFsDiikHKRnQBDAPlYA78SB6NF6JxvgywwEQBhDADGUmvZkj2T2wVT480prGqd
- qQbS099cbGE+Iod6i9FkE+jH4kWOZqsoy3Snuc5mAaPvB9pvG8xl5v8sV9Cz4Vzi8k1kuL
- UlPBT745fC3Pp5OVvny5SjcmZGwuGDZKKoGYqfQfj+oIKWekISUThnxOA8SYI0ERwZHDe/
- d3e8kAokQJeMtNFkqrhh8oNa8rjJna+Bk/d1Lat2o6K9dt0WUBP7+fjVizWwV8mYAW3qQQ
- mzAgUmdy4i6k9CL+gLjYsN3KpLLffYaAFsvGwquA/287g51xgQv1YaCktAKNAA==
+ bh=3OR82C+bBds4oCAeIJ1gg5XiN13E5oJYbR829FPLtBU=;
+ b=Vd2IUcCKbvl2I2ruGeDLbR65ivrlqlLi8Wn/xZIilbfPHcgSrxYP9k90KGv4d+sP8bMwGh
+ UMoGIXcnM9fivpFrydhXlOMXSL23ZG6BdkHS4J24fVuh1Tk1SuJEw27gl5Gp2B8ird9mQf
+ 7IxZVMWlSCKoqi/tohfvs6lxOZpksB2ukEMCTmQUtysb+CJkAF6j5NV3toGwimOakN/kpp
+ EezaXeheAEW0OPCoDm/vCZnttLExxAMv5c/86Y01vqDnOc0z/nlshWnMITR8b+FeW+ZzTd
+ tIS0OPm80SopCQXc9ua4rq7rN+JIQW1RW/qsXBzxh3U3wH0QP3xzbmAO1piwkA==
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 08/35] common: hash: Remove unused NEEDS_MANUAL_RELOC code bits
-Date: Wed,  6 Sep 2023 23:29:48 +0200
-Message-Id: <20230906213015.203437-9-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 09/35] common: stdio: Remove unused NEEDS_MANUAL_RELOC code
+ bits
+Date: Wed,  6 Sep 2023 23:29:49 +0200
+Message-Id: <20230906213015.203437-10-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e5fb415aab765d62b7a
-X-MBO-RS-META: rd77kzwc8gsmx9i66mzb6gfx9juw3cwk
-X-Rspamd-Queue-Id: 4RgwXP225fz9tTZ
+X-MBO-RS-ID: 11cebdd43d958d5421f
+X-MBO-RS-META: cs6yqhfessygtqfmy57zh5416g1ddsh9
+X-Rspamd-Queue-Id: 4RgwXP6d61z9t0P
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,67 +95,32 @@ Remove now unused NEEDS_MANUAL_RELOC code.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- common/hash.c | 29 -----------------------------
- 1 file changed, 29 deletions(-)
+ common/stdio.c | 12 ------------
+ 1 file changed, 12 deletions(-)
 
-diff --git a/common/hash.c b/common/hash.c
-index 159179e7f21..e837c56d443 100644
---- a/common/hash.c
-+++ b/common/hash.c
-@@ -36,12 +36,6 @@
- #include <u-boot/sha512.h>
- #include <u-boot/md5.h>
+diff --git a/common/stdio.c b/common/stdio.c
+index 894cbd3fb44..010bf576af0 100644
+--- a/common/stdio.c
++++ b/common/stdio.c
+@@ -293,18 +293,6 @@ int stdio_deregister_dev(struct stdio_dev *dev, int force)
  
--#if !defined(USE_HOSTCC) && defined(CONFIG_NEEDS_MANUAL_RELOC)
--DECLARE_GLOBAL_DATA_PTR;
--#endif
--
--static void reloc_update(void);
--
- static int __maybe_unused hash_init_sha1(struct hash_algo *algo, void **ctxp)
+ int stdio_init_tables(void)
  {
- 	sha1_context *ctx = malloc(sizeof(sha1_context));
-@@ -333,31 +327,10 @@ static struct hash_algo hash_algo[] = {
- #define multi_hash()	0
- #endif
- 
--static void reloc_update(void)
--{
--#if !defined(USE_HOSTCC) && defined(CONFIG_NEEDS_MANUAL_RELOC)
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-	/* already relocated for current ARM implementation */
+-	ulong relocation_offset = gd->reloc_off;
 -	int i;
--	static bool done;
 -
--	if (!done) {
--		done = true;
--		for (i = 0; i < ARRAY_SIZE(hash_algo); i++) {
--			hash_algo[i].name += gd->reloc_off;
--			hash_algo[i].hash_func_ws += gd->reloc_off;
--			hash_algo[i].hash_init += gd->reloc_off;
--			hash_algo[i].hash_update += gd->reloc_off;
--			hash_algo[i].hash_finish += gd->reloc_off;
--		}
+-	/* relocate device name pointers */
+-	for (i = 0; i < (sizeof (stdio_names) / sizeof (char *)); ++i) {
+-		stdio_names[i] = (char *) (((ulong) stdio_names[i]) +
+-						relocation_offset);
 -	}
--#endif
--}
+-#endif /* CONFIG_NEEDS_MANUAL_RELOC */
 -
- int hash_lookup_algo(const char *algo_name, struct hash_algo **algop)
- {
- 	int i;
+ 	/* Initialize the list */
+ 	INIT_LIST_HEAD(&devs.list);
  
--	reloc_update();
--
- 	for (i = 0; i < ARRAY_SIZE(hash_algo); i++) {
- 		if (!strcmp(algo_name, hash_algo[i].name)) {
- 			*algop = &hash_algo[i];
-@@ -374,8 +347,6 @@ int hash_progressive_lookup_algo(const char *algo_name,
- {
- 	int i;
- 
--	reloc_update();
--
- 	for (i = 0; i < ARRAY_SIZE(hash_algo); i++) {
- 		if (!strcmp(algo_name, hash_algo[i].name)) {
- 			if (hash_algo[i].hash_init) {
 -- 
 2.40.1
 
