@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27D06EE14A0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 16:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1921CEE14A8
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 16:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA9D78657F;
-	Wed,  6 Sep 2023 18:02:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 250D8869C1;
+	Wed,  6 Sep 2023 18:02:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="juAkkn52";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="bkLxlitM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA0FB869B9; Wed,  6 Sep 2023 18:02:11 +0200 (CEST)
+ id CD29D8643D; Wed,  6 Sep 2023 18:02:11 +0200 (CEST)
 Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::611])
+ (mail-am6eur05on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1b::631])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 803A28643D
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 18:02:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C427086611
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 18:02:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=laurentiu.tudor@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Or5zgupGJ5jMPZTb5ONfjVPeHmmu0aEJBkjJ0EFa23n5cet6RhTv4j2ZPxVJwkXp/ClgQbFQOivSCUmvZGIwyMfK29K/v2YmZ98i3CGJ9L6s5kjfqtXTEG6xCjIYWcwykvkCJGN/iOsz7sxCSIHeHsqChnh0kwmNz1IAXZ7/EoC7VXFC9KLmJF0Jmt+izh5m1rjvDkeo+M70TvTqetWy7jFx16/JX5J7TgeOwZs684QJCXSCf1oA/ujI8hjsjbE2B0b0+EiglLYqXoNmXtjnX9Ea72JIah7lQ6Xr2FTf7DLSAsv8DJrQjq8Sdn9gjN7rD276fd8LlqPCJtJ5A8g8yQ==
+ b=UJ0B6847ayOF6aVRvemSdmBR/OXmQcNyNwyt5FslXgW5gw0UTQLxUfpvKgmrUY9Sw7YKVjiXjpEofznevANCjuwQROkWhHu00SkfbW7pIg6GpsbH2f/6x2IH798Men4FMJFvGzNIKEjeYC1+sBaikGzSEs1q6a2X63amKC/khrxA9cal4XeqVqRyzMjX77baoQHGA//d7wlFHD9qyJ6tccBCxQooSvyvUaZjwUfYKWOorlWqdCAcodId7nXubGKxq3+Z5LDOy59zlVLCpjLzlKndvuGs3JqXBOPghI143bHsXXsRFWjiRPIrsTy+MKcyk6PsO192CHgGsbfjhDXCng==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HZiHK8hPOTsf97yDfdZriH76a7BRy0xBaRKBX1i7zm4=;
- b=jIxBPa/FRf4Lzw4PX96jKSvU6UutHOwnfW3TnbEsoynDRQLR+1HbwZsLNMkELiKdkrQXHHMew5YbMIUf4CCgRcsrcALDE16WsoYfs9WrxSx//Mq04caXKln1pa+VW0RPIttPs3wAhtOFTmqIf2r23w4np0nbd6b441/O4IqopmHeb6nVLt6NoF6kXveHnkGUOWxRf1jKhkdXGPdQ0PzQmHxwZm2gcqmkUPf0tF27CoS3Xp3uOlQlWmkeloIMtCQy+p7faiRptRdFbLm+yVIy+b/LwVZh81xdsdH2eV2eYkYWnNtP/wDZUEFO0ofIA3KXP2W2liwei7zEXfPC24lDVQ==
+ bh=E/K33TvjnX5QQRBONenuD3dr+x9nkeWHVRLdJZKXag8=;
+ b=gDanvZKS3KOBkwCoFvv/JMaY6IANMnbrVECslpCXznoc+ZP9r7ZdMAgwJ7wUSKzXxzMqJJ9EGsafvVr9bnjUn3hgueCcB9mB+LspDIngxBuUUNnQB1lvCl9NqzQdEiv1u1/l090D8AoJcDu27Uu7rsijds2+eLdiubEj8n4dLThTW26SfeSIA1TSQ8S1ikvyIBPnoZFxm5IM13Tow2ozpj0A7xxyQ6FyI/uVyl9AEvaCE3UNDesuQlh3zAeGU1UKFvuvMOhZcZkLzDiuqhMDdcwfisxekRZ8lEawxeqFMoqiF4sQqbvFS9oRwKcBPsEBhbucENOFTHxXXOS6q3ZlHQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HZiHK8hPOTsf97yDfdZriH76a7BRy0xBaRKBX1i7zm4=;
- b=juAkkn52hY0bdgFkUN64NHlhcibVDMR+ljwVIaLQDS7i3ReuM6X1wf3JA3u2QxYlPNLYtPNV4HTDAwQKJPmBIPkKb4eWT4W4AVVHASdKDGmIn1pY3JN4f/nRrpWA1zRmCf3koLd/oRGS14hHuR7UJV/AkXteduiyMuiDc0vXFuQ=
+ bh=E/K33TvjnX5QQRBONenuD3dr+x9nkeWHVRLdJZKXag8=;
+ b=bkLxlitMCkAhgI6oe/3KfToCXsIYcHLCG9jj1M5J+KI4KDi+PYiJFISq10cpmBLIrRi98skSdMBJlqjJW1x1d6vTA8mnBk9Gcor6FdnvvDsYUiGjSC8DjL5NcMv1zsFWI/F/4CWGy7GMuys5UMJxiUHcPDA8wQlpxuA+RU09bEE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from DB9PR04MB9380.eurprd04.prod.outlook.com (2603:10a6:10:368::16)
  by AS8PR04MB8690.eurprd04.prod.outlook.com (2603:10a6:20b:429::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Wed, 6 Sep
- 2023 16:02:06 +0000
+ 2023 16:02:07 +0000
 Received: from DB9PR04MB9380.eurprd04.prod.outlook.com
  ([fe80::179f:1c4a:4573:acb9]) by DB9PR04MB9380.eurprd04.prod.outlook.com
  ([fe80::179f:1c4a:4573:acb9%4]) with mapi id 15.20.6745.030; Wed, 6 Sep 2023
- 16:02:06 +0000
+ 16:02:07 +0000
 From: Laurentiu Tudor <laurentiu.tudor@nxp.com>
 To: Ashish.Kumar@nxp.com, priyanka.jain@nxp.com, wasim.khan@nxp.com,
  meenakshi.aggarwal@nxp.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
@@ -59,9 +59,9 @@ To: Ashish.Kumar@nxp.com, priyanka.jain@nxp.com, wasim.khan@nxp.com,
  ioana.ciornei@nxp.com, u-boot@lists.denx.de
 Cc: thierry.reding@gmail.com, robin.murphy@arm.com,
  Laurentiu Tudor <laurentiu.tudor@nxp.com>
-Subject: [PATCH 3/5] armv8: fsl-layerscape: create bypass smmu mapping for MC
-Date: Wed,  6 Sep 2023 19:01:50 +0300
-Message-Id: <20230906160152.24185-3-laurentiu.tudor@nxp.com>
+Subject: [PATCH 4/5] board: freescale: ls2080a: declare MC reserved regions
+Date: Wed,  6 Sep 2023 19:01:51 +0300
+Message-Id: <20230906160152.24185-4-laurentiu.tudor@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20230906160152.24185-1-laurentiu.tudor@nxp.com>
 References: <20230906160152.24185-1-laurentiu.tudor@nxp.com>
@@ -72,53 +72,53 @@ X-ClientProxiedBy: AS4P189CA0059.EURP189.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR04MB9380:EE_|AS8PR04MB8690:EE_
-X-MS-Office365-Filtering-Correlation-Id: 84b0069d-310c-40bb-422b-08dbaef29de6
+X-MS-Office365-Filtering-Correlation-Id: 5a74199f-fa57-47a9-9086-08dbaef29ec1
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: WOFvsexGgZ+k2Ucq4jXrowQGU5fmYN4CpFEccy3YemDIyqBgWbplKG6CPSGRI81NmuO5yRjzXXCm+JonhFgTHWVZX5nQWAx5eh8ZWy1xw4ujB7ubEVMsdIwGH+sz9gN/CFUZJMA84tTzzmGHyr17VCJz3gNxq1bOb33SacsQpFhjeHBON+ps3Qy9eOp6XUf+eDRS4RrTikGWNLYSsDAZxpFomzyho6J6nZh59Qvfqf8Hhx0+LJn8v845eID/RXBKTjgMsoT5eC84ueFBmQ0+WhRjfXoaRd63XpOQKKorpHtR3gchH1SJxdiSq2DA1zpfHtleh6WVLtfFdPVlq2OhDsGRitZpVNwr6PShxmmlq002vdE89NosS9jk0wNLLTGRQEmHs+WKI3lg22HcrqDRI2ETjR6gwR04Uc0xyeOxGZcVIqfMPRlUxBfNkLVTsJJ7ad+E1CDuAz0hKP3Qp0anzcr5t8U0pj9wC7wk6bToqSmXg/DkLsU07KE5R/QoDZmkTkBCDhbZeZFZ0FJL+5XKjnEqMNVqSDbSyX/1FMhnPp7bjY6yzvtNm0K1pJm/m7pxefywqALvnuGZCXTAZSwi+qa4UTXlimrvg332pcEuH41gKp6EmDN2R1oWh6aAPgp13ghYrYmzoUtMKPiz5HQpLA==
+X-Microsoft-Antispam-Message-Info: 4Ojty+EPhm3vVG8ggRdG7GAgWU6DbYU5CjpuS9ruhEUE8Y6ZnkYsybPPegY3gasj/Vt7HbbAwyychVJPIGCC2YA/gXl34O43P6Cua9nVEe8qxt+IYjGjuTd2lXEGKUrb8cNErwvCNDqoBFYnrMdFLwd89XF/p7y56I0dAqhZBRGWUhcjZs1c71bF8Tvuj19kW0p13uBVMZ302b6UHT2LCkrolVm8s1LnaRC+C5aAj0INv5C/RLcuXPKsIc2jUT4vx57aTXL77PzsI/Vk6WfUZSKXCX8OPTUdbinA73aA9LEC8a3QyqsgSbCmKJiy+qC+ChHN7lBcsAazqlIzafzI6aremDma/xpU3a1zDSNkfLhn1V4xMO/LKEOviqWj82jQFDmBmT1e6+y8ahWpL9b7xIxP7Phocgu0WVeXXehtT/0YuC1TwBGCRqqFL0UIBcfesI9SjQUi6tPwbwvREeGIWYi/vxvxPUPsw6IIIKiNTUf3N9TMt8z+JDh2BbcXZlJvXMZI/wZRQg48uh9xTzjmmM30zcPqe8C9T75WJpExbpcCwSjAqNWoha8Jx9/6jeolGTsYhIWCwm/7HdZ9T2yCPdxJPymWN4cacKj5k44ToDcBls4HNMRxdDizHTJx9bEnwq6g7mBQAbO6TygCucLQ4Q==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR04MB9380.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(396003)(366004)(376002)(346002)(136003)(186009)(1800799009)(451199024)(36756003)(5660300002)(83380400001)(86362001)(41300700001)(44832011)(6506007)(8936002)(4326008)(8676002)(52116002)(6666004)(6486002)(2616005)(1076003)(26005)(6512007)(478600001)(921005)(2906002)(38350700002)(38100700002)(66556008)(66476007)(66946007)(316002);
+ SFS:(13230031)(39860400002)(396003)(366004)(376002)(346002)(136003)(186009)(1800799009)(451199024)(36756003)(5660300002)(86362001)(41300700001)(44832011)(6506007)(8936002)(4326008)(8676002)(52116002)(6666004)(6486002)(2616005)(1076003)(26005)(6512007)(478600001)(921005)(2906002)(38350700002)(38100700002)(66556008)(66476007)(66946007)(316002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oRYvrX4CMEydiH/FqKxK70tvSAqS3y2gH8zTlqdFAp7x6eLpWWBHn0ozA1hf?=
- =?us-ascii?Q?qG8sn6BaTA2UIu44+ZPfxrMeSGbL7Y1V4YOh15g+jkDrsw2wYRI4jy/0T3uW?=
- =?us-ascii?Q?8gWbytMhrbO/+/G8Al07pEpENqCu3GyiiTysy510nxm8xh2v7htyHZHGpbH3?=
- =?us-ascii?Q?iKofhZUED1ZK/a7BhRZD/GJ5qY8pYiG9Etd7pPQrnj1ELGT6+/iVIA1S0NAf?=
- =?us-ascii?Q?JG4SgJxgu8hX5J0ekeS0SNkAfrAfmZ/1tmVTsTbGhr6CQW239HUpDnpHciE3?=
- =?us-ascii?Q?MCp0nbkCC68LiQeAsVSEk5C3EBx3R4QThq9QEDjm4lMUv61DxGz8UbmD7Jn7?=
- =?us-ascii?Q?m4SUl+IHab538LXfm7e8igX258L7DECUaNAtkMGZKfUttGG8i0UbdICABtRv?=
- =?us-ascii?Q?nUdqICC5eS4YNHFmncWgZ8oQV8NLj7QSqCyHK4ml5dn2v+s8mblAcDXZwbTY?=
- =?us-ascii?Q?cxK07y/irOB1A6rNvOsYUO0i5Pf/KuRh/drd0OqKgS6JrD05z8MeEWD7Ka3F?=
- =?us-ascii?Q?Q0mHVXiXDbxr+JCsTDkISjUXIIb08GWAm/g38aQj2rUPLs1LQWnuRUzD51gh?=
- =?us-ascii?Q?XTJVXTVhwpVnHZ0vJhnMlyig1Og2YQksBbX3iuqtCDOrsCYeZJnCmts6fSna?=
- =?us-ascii?Q?vcWv9PZaZMo3jqAdqdr1uR6O+7m9pBRDD177ZEUXKRsmvJ4Guy3WgbkRXT1Y?=
- =?us-ascii?Q?y+Mo5P9lmBvRT7k3G67okrEVm09vXGZkHwGcCoT0UeehAryl5/se/c0EHtgA?=
- =?us-ascii?Q?XNQ3cmp02NdFIF5JwtA15merFKDdzWojqY4EsC0kGxT4k7S2uxQ+w3GfibvD?=
- =?us-ascii?Q?84GUjJiUD2Dq4UzZdusvNmsAxe3/Gqeluk1WRKkUv/UevT7Sf1s9Wy4BOBO9?=
- =?us-ascii?Q?JlFYCDT9vTGUhLd6QPtZOlHNaDIYq3na/zKWLp2CUBUXjfUcvA/FWwxI2XAN?=
- =?us-ascii?Q?zq20AI7zB5hg+pWphXg7LZjDPJa+1oliA93noRP3+rDvYeuSE2BHnCeBTgPJ?=
- =?us-ascii?Q?mLsQTYwrAczqXPIOauNC9Ky0+j8rvCLjJ+wATbqOSML3PrZSm69Eo3fi48iA?=
- =?us-ascii?Q?gyFneZv6rPw2lnFOhyK2oiwJbWtl249WAF04QcgPllLLeBKZXVoUvRMedYrp?=
- =?us-ascii?Q?XaK9IW73WG+DYeYIFppwaTrIaDVYAGGf7HnDGl9wSHRr/+5tO5Np6F72jC3F?=
- =?us-ascii?Q?kT1kPggta3fpVvIYHTtKiBJFrJqJmcMthh43LwfxQgFNWnoKs12Qdiy2vndp?=
- =?us-ascii?Q?XiSKlx2bw5thf2VgXOOXItqIZhnEYAiDXMoouVoiTcl7gxaLtYKIQ6TY2jfU?=
- =?us-ascii?Q?gaBpxyw3kOJeKi7JTglYQraA4EdWFevjhs91JJJTdrzCIdp3yJ9pYqkx4tH1?=
- =?us-ascii?Q?8AwoYVrzTNMj490jsqkSs1tnF+ZlL9oCdNAXoXWZxDrjNYlQzxilxBm1XC8n?=
- =?us-ascii?Q?s79HIhjEZFk7c9rGjG7wGTJD0NBnMOT45VIrcO+0Duk4zb/o6CqnX81qclZ+?=
- =?us-ascii?Q?Vntx+K6AISz7wyJMyc28su/8G1gEaUcfryhvJW/l91QSTTS+hPNq/PpUZDSD?=
- =?us-ascii?Q?QWYion00OwbTGxqj5c9FfuzVumxvQP5rAUZCerLP?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zIVrVi8+v5XEVaD5b4dgCtTVwaQlbTz0fYieCFIVxWYT0xQEk2WT2wIXmvBG?=
+ =?us-ascii?Q?yXb7FBDW6wMMddHOmoMeFEGc9xujcL+2QJFYMx/5Xtnt7Ybb6au9XyKASSkw?=
+ =?us-ascii?Q?dl4pFj/NDe8jE12rhoCT0fdNccNjvoKdm2uYUJ36OpswqKDXUqdLfU/q+Nqu?=
+ =?us-ascii?Q?sMTePzfvE8LLlR0Sq/Pbeu/0sUSdtEVow9ABqqJC4k0+X2ilCqRPzBZmE4DA?=
+ =?us-ascii?Q?6wGZV0dx6CBBiUdM5StQcDPwVg+N/4y12iOt99ShSr6H9GaFNRN6oZzzMP6a?=
+ =?us-ascii?Q?M+fw0fxlm350RwX8J2epAo6CneSSyyC9vf502e83B2xneeK5x1bo6WlGrYUx?=
+ =?us-ascii?Q?i4V3pJIZGVJ64KS1ylV53Vy0F1P3QtTUOjzaRaeIlo0TPPdHvd8iXIU3Y6SI?=
+ =?us-ascii?Q?xLcfP+acwCNCEuVge0cKEmocwG49qRu92rPLsU+/lydCGrVrZCGBZm1UoLA4?=
+ =?us-ascii?Q?et6Db+29OI99qapLK2lRBUfPjBQFwWb++BBSYOSQtoRYaEyvWtx/JhnKTfuf?=
+ =?us-ascii?Q?KHlvtuQo1EMAT8aDkymmoEOVwM6J9vhyLiU41o6VZ5/bEEwp45ni1madOX/J?=
+ =?us-ascii?Q?L6u845wVvKWdYuCQrsjS1xfaO5XX4zex5aiMDzvEYvqaml2GRL/vP9GN8+3H?=
+ =?us-ascii?Q?TWvWZrOu3nmn5ON+N5+QNKV5R0BfzxdXQ6tujB2UYvGHsqSS5f7SWQzJ/ZH2?=
+ =?us-ascii?Q?gmmOj5bTujKa4P+ihPcZAg6jSLe3K4KDGdwkyLb7vJTJZFb80yHRury65rns?=
+ =?us-ascii?Q?8s8d2rcgaE1xYY17gqOsfrEsh2IeHcAQTj+IVcJIErp9iGg4cGsC+lXmbO20?=
+ =?us-ascii?Q?6fYsHQXDWQmNbTh05jW1Kb8hwxeIRIzAPiBWX7FIS4CAiOt3rpy4kRccRLlP?=
+ =?us-ascii?Q?uBpkaBI4HL4duAXgWbohwQFgpby33Wntm0JWZ1kQ5PCzj/rPdHwyFmieMTHP?=
+ =?us-ascii?Q?0V/hweq3GuzXxrPkCXRVQOijm2+tDO6CvdX7UZJTI3kjiEd+aj9AUR5lgT5v?=
+ =?us-ascii?Q?w5ycoK8fpUJhXMf+2OtnJT5KW20nrB5ZwIM4Rb2/2WFaeXASagS9sYR60TXX?=
+ =?us-ascii?Q?uqjTp03s1dHYu1LqNL66VjhWOqxzpxpnLiRlVej0dLeaPZrBPT0RLIQx7qIa?=
+ =?us-ascii?Q?GPg+Kc1FavXqS4dYFLSTmZcLe4MhEwUB8QlvWIqmc+4vXi5Bz/esXKbLOSHK?=
+ =?us-ascii?Q?HhzRgPJzJcFxemPN8ab47OLWX9vAONVqhsEEeWAt6SwlzIcp1R9WbH0MtDSK?=
+ =?us-ascii?Q?SH0u2EgCZPrcy0wddDfJbrLpx1m8EQWcCurOoLm9g9AGMa1vi/kH39ZWxQPU?=
+ =?us-ascii?Q?ZnbfyCsmcMbt3z7NPO5DIyffzzkokRbKrDDmkt7OpiAX9lbKe2XZOaRVAVsv?=
+ =?us-ascii?Q?sd5ruVY4wd/E8Y5NO/AGnhtnl547bZ6WvaSh9lJcVgosaYvckCFjdMqaXGPG?=
+ =?us-ascii?Q?KV2IH9MYWokhXiTqTmpBXrUFj1yJc+mVQYQbHfx+Nbv/MzuzgAgMF2a4a/zL?=
+ =?us-ascii?Q?NNbIz0ZBR+vx0PQqykMrLkyDoasSQbvwKQKzWzJQnMDxUtyXcVsAP5qdrleI?=
+ =?us-ascii?Q?7IiMoymiQmnONn/kyxljD+m+rpZ5K7AA+hL4Agdm?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 84b0069d-310c-40bb-422b-08dbaef29de6
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a74199f-fa57-47a9-9086-08dbaef29ec1
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB9380.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2023 16:02:05.9638 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2023 16:02:07.4657 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: q3tCxncIlS69EE9tC5GOrum1d+iiqKGluSKFdSnIvT2kRYbj5FRoGpLrn6GyYePu9bO6uJEo20UuZAvyKuki0Q==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4tAGnOkuWwx8JOCN5XSs+jjsfPY33aQtVzeA5ghWlG9ViXEUQdTti87FJYBZH8G99hIcW6A1NHVLO8iV1Q5O3Q==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8690
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -136,83 +136,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-MC being a plain DMA master as any other device in the SoC and
-being live at OS boot time, as soon as the SMMU is probed it
-will immediately start triggering faults because there is no
-mapping in the SMMU for the MC. Pre-create such a mapping in
-the SMMU, being the OS's responsibility to preserve it.
+Populate the device tree with the MC reserved memory regions.
 
 Signed-off-by: Laurentiu Tudor <laurentiu.tudor@nxp.com>
 ---
- arch/arm/cpu/armv8/fsl-layerscape/soc.c       | 26 ++++++++++++++++---
- .../asm/arch-fsl-layerscape/immap_lsch3.h     |  9 +++++++
- 2 files changed, 32 insertions(+), 3 deletions(-)
+ board/freescale/ls2080aqds/ls2080aqds.c | 1 +
+ board/freescale/ls2080ardb/ls2080ardb.c | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/soc.c b/arch/arm/cpu/armv8/fsl-layerscape/soc.c
-index 3bfdc3f77431..870b99838ab5 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/soc.c
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/soc.c
-@@ -376,6 +376,18 @@ void bypass_smmu(void)
- 	val = (in_le32(SMMU_NSCR0) | SCR0_CLIENTPD_MASK) & ~(SCR0_USFCFG_MASK);
- 	out_le32(SMMU_NSCR0, val);
- }
-+
-+void setup_smmu_mc_bypass(int icid, int mask)
-+{
-+	u32 val;
-+
-+	val = SMMU_SMR_VALID_MASK | (icid << SMMU_SMR_ID_SHIFT) |
-+		(mask << SMMU_SMR_MASK_SHIFT);
-+	out_le32(SMMU_REG_SMR(0), val);
-+	val = SMMU_S2CR_EXIDVALID_VALID_MASK | SMMU_S2CR_TYPE_BYPASS_MASK;
-+	out_le32(SMMU_REG_S2CR(0), val);
-+}
-+
- void fsl_lsch3_early_init_f(void)
- {
- 	erratum_rcw_src();
-@@ -402,10 +414,18 @@ void fsl_lsch3_early_init_f(void)
- 		bypass_smmu();
+diff --git a/board/freescale/ls2080aqds/ls2080aqds.c b/board/freescale/ls2080aqds/ls2080aqds.c
+index ba25e9b0b8fc..5c94c83121b5 100644
+--- a/board/freescale/ls2080aqds/ls2080aqds.c
++++ b/board/freescale/ls2080aqds/ls2080aqds.c
+@@ -325,6 +325,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 
+ #if defined(CONFIG_FSL_MC_ENET) && !defined(CONFIG_SPL_BUILD)
+ 	fdt_fixup_board_enet(blob);
++	fdt_reserve_mc_mem(blob, 0x300);
  #endif
  
--#if defined(CONFIG_ARCH_LS1088A) || defined(CONFIG_ARCH_LS1028A) || \
--	defined(CONFIG_ARCH_LS2080A) || defined(CONFIG_ARCH_LX2160A) || \
--	defined(CONFIG_ARCH_LX2162A)
-+#ifdef CONFIG_ARCH_LS1028A
-+	set_icids();
-+#endif
-+
-+#if defined(CONFIG_ARCH_LS1088A) || defined(CONFIG_ARCH_LS2080A)
-+	set_icids();
-+	setup_smmu_mc_bypass(0x300, 0);
-+#endif
-+
-+#if defined(CONFIG_ARCH_LX2160A) || defined(CONFIG_ARCH_LX2162A)
- 	set_icids();
-+	setup_smmu_mc_bypass(0x4000, 0);
+ 	fdt_fixup_icid(blob);
+diff --git a/board/freescale/ls2080ardb/ls2080ardb.c b/board/freescale/ls2080ardb/ls2080ardb.c
+index 8d340f17a256..5c30de83d841 100644
+--- a/board/freescale/ls2080ardb/ls2080ardb.c
++++ b/board/freescale/ls2080ardb/ls2080ardb.c
+@@ -522,6 +522,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 
+ #ifdef CONFIG_FSL_MC_ENET
+ 	fdt_fixup_board_enet(blob);
++	fdt_reserve_mc_mem(blob, 0x300);
  #endif
- }
  
-diff --git a/arch/arm/include/asm/arch-fsl-layerscape/immap_lsch3.h b/arch/arm/include/asm/arch-fsl-layerscape/immap_lsch3.h
-index ca5e33379ba9..bec5355adaed 100644
---- a/arch/arm/include/asm/arch-fsl-layerscape/immap_lsch3.h
-+++ b/arch/arm/include/asm/arch-fsl-layerscape/immap_lsch3.h
-@@ -190,6 +190,15 @@
- #define SCR0_CLIENTPD_MASK		0x00000001
- #define SCR0_USFCFG_MASK		0x00000400
- 
-+#define SMMU_REG_SMR(n)			(SMMU_BASE + 0x800 + ((n) << 2))
-+#define SMMU_REG_S2CR(n)		(SMMU_BASE + 0xc00 + ((n) << 2))
-+#define SMMU_SMR_VALID_MASK		0x80000000
-+#define SMMU_SMR_MASK_MASK		0xffff0000
-+#define SMMU_SMR_MASK_SHIFT		16
-+#define SMMU_SMR_ID_MASK		0x0000ffff
-+#define SMMU_SMR_ID_SHIFT		0
-+#define SMMU_S2CR_EXIDVALID_VALID_MASK	0x00000400
-+#define SMMU_S2CR_TYPE_BYPASS_MASK	0x00010000
- 
- /* PCIe */
- #define CFG_SYS_PCIE1_ADDR			(CONFIG_SYS_IMMR + 0x2400000)
+ 	fdt_fixup_icid(blob);
 -- 
 2.17.1
 
