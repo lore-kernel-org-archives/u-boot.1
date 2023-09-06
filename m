@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D3DEE14C0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 17:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63006EE14BC
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 17:50:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BEEC869C7;
-	Wed,  6 Sep 2023 19:50:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DEC71869A3;
+	Wed,  6 Sep 2023 19:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KmIbVAEM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sEbMomtR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12BD6868BC; Wed,  6 Sep 2023 19:50:30 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id D755A869AC; Wed,  6 Sep 2023 19:50:44 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F22F6865A8
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 19:50:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2582986989
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 19:50:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-d74a012e613so38479276.1
- for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 10:50:26 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59205f26e47so813497b3.2
+ for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 10:50:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694022625; x=1694627425; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=POBdhhbRS747zIXKnDZWxzgpcJ+W/q11eEmOrPUL8is=;
- b=KmIbVAEMkJg6omT52bw3kxGU1lprqIsEshf7bfVkTihy8KVDCPG3rGl9dmaXh34sjS
- kvKj9yp5Jgbulee122oKY7dB5N+VmY8qM+bbbNFLbAEdaEQW4K+FpgQ76t/K/9a04z3S
- S0SYNChbJPWnO4qzMZ0o4tTS7Ygfz3tp+IfPg=
+ d=konsulko.com; s=google; t=1694022640; x=1694627440; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=furbGd47u+uwcRUEHADdr6wBu1nS4p5VZeaKNMz2rzA=;
+ b=sEbMomtRMYyicR/88yn7ZIytAlszyHYS8oLDKgTz7/fN7Rc+/iNC2m5gZ1ZjkRB92H
+ OCWoZ2tJsiMQEeBw6qSSY9r+5Sajcb1FutsYhQgp0W2FZTPErk/9hRqeTkJYDzeZRXsO
+ ejHOHK+o/BG4Pk3/eqy0/bo9H3foSixnOYIFk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694022625; x=1694627425;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=POBdhhbRS747zIXKnDZWxzgpcJ+W/q11eEmOrPUL8is=;
- b=l8z8FntPZfm1/kiWbnrb4Ihp/owTvGXY0tY6H2uYPWtri+FLsb76Yo7BElovIb4SAN
- DRsBOxuVTieAVMk4+kLJa8rEZhxmdWa+OMpSKgijChb/1khCt4+btEx1J97qVVHaQbYi
- ie2fnQGhYcTA82A2Bf3D958uf/Ezqg/S1kCmvk/ZQPEbNVdYHKKI+PPA04GAQzxcj8o6
- b0sdckAo63n75P1gXazDJdEh2iZifGdL5DhA9jHHMLbZXY6SlEgc7wOizLzb1DEAR4uv
- F4uMNiuL8JsJYAixMdJLbKkjdx1bWkzGiYFwFOWhMo59TqfGllmd+2yPB/Zo/3yKuYow
- hPCA==
-X-Gm-Message-State: AOJu0YyVS7yYz4tcxLUTgpaHyvsh7uZZFWBcm+d/DiO8qPxyFbPVGIzm
- mXZ+kZEgnEyqUwydgoMwSynBhg==
-X-Google-Smtp-Source: AGHT+IETrZKX4W4hSRvHPK2H99W9220a5Pcl7tKoev03uEjcdBToAHFZCK0d/YIfOA1D8/JpSUCR+A==
-X-Received: by 2002:a25:2601:0:b0:d71:6f6f:73da with SMTP id
- m1-20020a252601000000b00d716f6f73damr341946ybm.6.1694022625704; 
- Wed, 06 Sep 2023 10:50:25 -0700 (PDT)
-Received: from bill-the-cat
+ d=1e100.net; s=20221208; t=1694022640; x=1694627440;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=furbGd47u+uwcRUEHADdr6wBu1nS4p5VZeaKNMz2rzA=;
+ b=TdftNYPPcDa8+qYqH+ALPqRdovKBe5DpHvqBzCnZ17tsjix/tQgEM/xqGoUY1Vd0YN
+ fhwnIM2Dmu1pqN0hteOXyrRdwDKYxajBQltRhcyyf3/qiWsjEyRR8sxU65uYEe6w6mUn
+ +SvF6/VlGG5c6hpryLjEkfjm+OyPFD3Bfx3c6OkP4FjWzHDWEnOMsdRKSNd+o42yDdxz
+ 3Py+7v40EG5ZFZFGdI3Uym/hdUqUCwn1c2cu/obh7VLguBOxGHpnmpaaTpXEBtmJJzS8
+ JD1WYz4fUqC11Hj3Ra2UDSEHh+dL/mBbgqI8sVh7ZdQ0HhS+gT8YnfkDvbswZU7obgml
+ Z+mg==
+X-Gm-Message-State: AOJu0YyL1EOQiagWL57MZHecvZARsWBBcUzRyhbmTedjS0HN/l8tf7kt
+ hYwylFx9gKtsKlQW63sNU/7lilptBag+Ouwcmp70wA==
+X-Google-Smtp-Source: AGHT+IH7gmEFJ8xpxcnC/PUd3uprNoVhtIxeLHyVxh701UHwqssLufWPjmqUhCYb0uVqHz1EICiD1g==
+X-Received: by 2002:a05:690c:f03:b0:599:da80:e1e6 with SMTP id
+ dc3-20020a05690c0f0300b00599da80e1e6mr17998067ywb.34.1694022640770; 
+ Wed, 06 Sep 2023 10:50:40 -0700 (PDT)
+Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-06dc-de6d-386e-5d48.res6.spectrum.com.
  [2603:6081:7b00:6400:6dc:de6d:386e:5d48])
  by smtp.gmail.com with ESMTPSA id
- z66-20020a25a148000000b00d7b9fab78bfsm3406296ybh.7.2023.09.06.10.50.24
+ m125-20020a0de383000000b00583d44b4b30sm3883314ywe.99.2023.09.06.10.50.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Sep 2023 10:50:25 -0700 (PDT)
-Date: Wed, 6 Sep 2023 13:50:23 -0400
+ Wed, 06 Sep 2023 10:50:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PULL] u-boot-sh/next
-Message-ID: <20230906175023.GH305624@bill-the-cat>
-References: <20230905134915.15105-1-marek.vasut+renesas@mailbox.org>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/2] riscv: Rework riscv_cpu_probe for current event macros
+Date: Wed,  6 Sep 2023 13:50:39 -0400
+Message-Id: <169402263440.935221.409149664957886372.b4-ty@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230904190635.3896494-1-trini@konsulko.com>
+References: <20230904190635.3896494-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yc0Kobznxugg/MTV"
-Content-Disposition: inline
-In-Reply-To: <20230905134915.15105-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,51 +90,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 04 Sep 2023 15:06:34 -0400, Tom Rini wrote:
 
---yc0Kobznxugg/MTV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This function should now be a EVENT_SPY_SIMPLE call, update it.
+> 
+> 
 
-On Tue, Sep 05, 2023 at 03:49:15PM +0200, Marek Vasut wrote:
+Applied to u-boot/next, thanks!
 
-> The following changes since commit b53ab97150314674edc25508f4fc528be2baa7=
-3f:
->=20
->   event.h: Documented some newly added portions better (2023-09-04 11:19:=
-50 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git next
->=20
-> for you to fetch changes up to 733fab7177ea3c0402bab9db07422d5dce495139:
->=20
->   ARM: rmobile: Clean up rmobile_cpuinfo_idx() (2023-09-05 01:13:35 +0200)
->=20
-
-With a quick rewording of the commit to fix a typo, applied to
-u-boot/next, thanks!
-
---=20
+-- 
 Tom
 
---yc0Kobznxugg/MTV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT4u98ACgkQFHw5/5Y0
-tyy6lAv9HkXgjcjbYn7h8U3eg8s13SNfFetl0up4Zc+C73on5/BNtGpIyPpHczj2
-EiDvuCiO23ynYKegVis/RsJBf63HU8vKfuFhfOXhvugVMZT3cfObRjaCvRbBBtIL
-cV3UcfpFisB9gaEpIiiHdS95Ula9rBBusGR0+h0/Xx4r16uGl5PPjynm6C7WQ1td
-asIypLDM7B5YZMQ03fRDoIL7nA/2C17mV587SvqHhM6mAcSFl5Nu9mlszWvWpzyp
-ttazOYMhUsJbxwYbvPdqfZQiSEDCI15QXKMKGt/Xxew9X6qJ56K6MdQAFZ6ue1wP
-CjhcJcOrp6ZKb9KMlcIL1JHDqSzS4HaufNcB2jc4Of4qqQhJ7WktIKpRxIG27uTz
-SyPNs5lXq805gpcUnOwjZM8fJvw9GDNWnHaJVTTtC6yhUX15469WkW3vQtcd8mj/
-PWLwM0LQc28JY+7PZ1Wflib8ZoxKqkLlOI+fuRD4I65lpLPqNxe+Fy3ZPLVl22Ad
-1JTvtc/+
-=5wVw
------END PGP SIGNATURE-----
-
---yc0Kobznxugg/MTV--
