@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0647EE14D0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:33:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3A2EEE14C3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 138F486A27;
+	by phobos.denx.de (Postfix) with ESMTP id 5EE2F869F6;
 	Wed,  6 Sep 2023 23:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JCR1Hq6O";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KB3F6JwH";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tJqIHHBp";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yRWZhOcK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BA6A86A21; Wed,  6 Sep 2023 23:30:52 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 9A8A28685B; Wed,  6 Sep 2023 23:30:52 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAA908685B
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 455FE869F6
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,20 +32,20 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4RgwXS3qQFz9sSM;
- Wed,  6 Sep 2023 23:30:48 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RgwXT1djrz9sn0;
+ Wed,  6 Sep 2023 23:30:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035848;
+ s=mail20150812; t=1694035849;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cSqm2lhRO55fE6WjiCnWi/U79EhiM+HzqvfrxntInD4=;
- b=JCR1Hq6Om4mQR0oOPaVU3gShVe8XdqYutq0Qb9OwSrsY18BlqOa9ZQszQ8RVMSC19+H35k
- oaPaQVAMj+2pjNHvX6XzgkNMoxwXKzNP1zayKhynPt6OQKYOuQzfMlF4hKaK4Se0FbjV9B
- LP775WfYId8qSdshGb7IBS90zxNytZJWUsIMY2E9VmCQ4SqAuk58y9+mJ3e85pX3VIBNor
- kSwS3l98EXw9FSr0Nz+qZjCzIjEihz0PUM2pwY4sPZ3s8tIzAAvaJHPBqUhEjKAUNMnFDb
- jCgeBvElKzZerP6jzMnqdOd7AreineaVytLxzqaXwCF8/rTtH2KU9Hq1yRpAkQ==
+ bh=tRY+Co0bU4/5FfDHp0cv16kRkZfpAPoSbV4C6umT1Jc=;
+ b=tJqIHHBpjPmFJrEsAPXpmOC+zMKrAiPvDl9Uv9n7uHBqRHIl5wHeycWo8TohV+m/uJ0BOQ
+ Dq22kNcw5zaR5JXpC7z3RvkSrcndPHlHdEGSqQzLNejJv/CNacsy1alfi7ofGmb+l0LzPU
+ 2RsMil6hK8xuj0fxNZQAsfJtbtKabHlDSuB0ox/orUm+nEpdVGOodFWpgsPCn/mod4VRo0
+ PkCecGAuof4x7TSXIWZj8HHNeswPDumbqqfxPd/Q2bEUWOa0XP/0dJa4L304SYeGPRkVii
+ tQJ3vEA20FhRKQTXrA36snQ14oMo+/09K8Ndm3u9IUn+RGdN0qsLNjnM3V21uA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694035846;
@@ -52,25 +53,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cSqm2lhRO55fE6WjiCnWi/U79EhiM+HzqvfrxntInD4=;
- b=KB3F6JwHGMYFBKbsgCGekwmH+vfTi7WCC6wo+uK65ls++ZfdC1QrRIc+CGZ2KjZmPf5dOi
- lSDgbtf7qICY0jYnsiVVdc5MfQ+HNc8HcYf2scAtpkvSDoyi3jM+37bMmdzNt7dRj+nDYa
- Aj6L3JvthVQN6iAYdZ0N3QjKljKFU8oURvWewYmJIVHWIwajreLScKvv9LbWDb1Y4VBzyx
- /+Os5VDIiwKaouZeRoBeioRN/dh/mVDwU+5jY5+ZvHkGMzUHzykegvMUdFmM9PCVwlYJaw
- FjnkmtYcZu6nMmwrVmOIzGHoUDrkrMuN68ubNNmAjNFF142BsDbTqcahT+m0GQ==
+ bh=tRY+Co0bU4/5FfDHp0cv16kRkZfpAPoSbV4C6umT1Jc=;
+ b=yRWZhOcKtQO+hjUTHcsiKXoRfpGJEnWj/YITuL5/225sRmHxnWJzW2kKB1ZSsJyFxrS7H3
+ vp2okpEwIeR/Jjs30aR2PVcOfNKVsz7XGJHPxM09MQR5beZhE2sZORtkk/YDHidVINwSTl
+ ervaGB7KuukpyVskN2NAzDl3myCesUUQwTMeLzVgX99NVmsnrlg4OlZh9LOVOmHGlLsvt9
+ +cXkseXaTD/OZ2NJCDD3f6VLArjMpcqGALhwdeOR7Sfw2oKUp4QhiUtxHHL9pGe1TaNRUw
+ IRmX3COaKmBNNJlwHha7rtPSYV00HeomCe7iQJLCVgz9PyxyWvp25bpnJA9bUQ==
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 13/35] cmd: nvedit: Remove unused NEEDS_MANUAL_RELOC code bits
-Date: Wed,  6 Sep 2023 23:29:53 +0200
-Message-Id: <20230906213015.203437-14-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 14/35] cmd: onenand: Remove unused NEEDS_MANUAL_RELOC code bits
+Date: Wed,  6 Sep 2023 23:29:54 +0200
+Message-Id: <20230906213015.203437-15-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1ef44eb8c55e8a4ff52
-X-MBO-RS-META: 1b461o3jsc37j7jpp55tmyty5rcswa11
-X-Rspamd-Queue-Id: 4RgwXS3qQFz9sSM
+X-MBO-RS-META: 4a3pch6doc11ogcm6d1fjwxwigjnh3cz
+X-MBO-RS-ID: d8d5f6a3c5ac9bc59ad
+X-Rspamd-Queue-Id: 4RgwXT1djrz9sn0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,72 +94,26 @@ Remove now unused NEEDS_MANUAL_RELOC code.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- cmd/nvedit.c  | 11 -----------
- env/common.c  |  1 -
- include/env.h |  8 --------
- 3 files changed, 20 deletions(-)
+ cmd/onenand.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index 9e4ee4b0177..fe99157fd17 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -407,11 +407,7 @@ static int print_active_callback(struct env_entry *entry)
- 	for (i = 0, clbkp = ll_entry_start(struct env_clbk_tbl, env_clbk);
- 	     i < num_callbacks;
- 	     i++, clbkp++) {
--#if defined(CONFIG_NEEDS_MANUAL_RELOC)
--		if (entry->callback == clbkp->callback + gd->reloc_off)
--#else
- 		if (entry->callback == clbkp->callback)
--#endif
- 			break;
- 	}
- 
-@@ -1222,13 +1218,6 @@ static struct cmd_tbl cmd_env_sub[] = {
- #endif
+diff --git a/cmd/onenand.c b/cmd/onenand.c
+index d633f19d3bb..3ec11246f6f 100644
+--- a/cmd/onenand.c
++++ b/cmd/onenand.c
+@@ -560,12 +560,6 @@ static struct cmd_tbl cmd_onenand_sub[] = {
+ 	U_BOOT_CMD_MKENT(markbad, CONFIG_SYS_MAXARGS, 0, do_onenand_markbad, "", ""),
  };
  
--#if defined(CONFIG_NEEDS_MANUAL_RELOC)
--void env_reloc(void)
--{
--	fixup_cmdtable(cmd_env_sub, ARRAY_SIZE(cmd_env_sub));
+-#ifdef CONFIG_NEEDS_MANUAL_RELOC
+-void onenand_reloc(void) {
+-	fixup_cmdtable(cmd_onenand_sub, ARRAY_SIZE(cmd_onenand_sub));
 -}
 -#endif
 -
- static int do_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ static int do_onenand(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char *const argv[])
  {
- 	struct cmd_tbl *cp;
-diff --git a/env/common.c b/env/common.c
-index 0ecdb248a08..4cf2dadc694 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -429,7 +429,6 @@ int env_export(env_t *env_out)
- void env_relocate(void)
- {
- #if defined(CONFIG_NEEDS_MANUAL_RELOC)
--	env_reloc();
- 	env_fix_drivers();
- 	env_htab.change_ok += gd->reloc_off;
- #endif
-diff --git a/include/env.h b/include/env.h
-index 1480efa59e3..b28886d80b9 100644
---- a/include/env.h
-+++ b/include/env.h
-@@ -356,14 +356,6 @@ char *env_get_default(const char *name);
- /* [re]set to the default environment */
- void env_set_default(const char *s, int flags);
- 
--/**
-- * env_reloc() - Relocate the 'env' sub-commands
-- *
-- * This is used for those unfortunate archs with crappy toolchains
-- */
--void env_reloc(void);
--
--
- /**
-  * env_import_fdt() - Import environment values from device tree blob
-  *
 -- 
 2.40.1
 
