@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C143ACA100E
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:52:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C4CEE14A1
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:54:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEE2F86993;
-	Wed,  6 Sep 2023 16:52:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 36D52866DA;
+	Wed,  6 Sep 2023 16:54:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EEVyB2Xu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ieWFb20L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEAB486963; Wed,  6 Sep 2023 16:52:38 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 3458486907; Wed,  6 Sep 2023 16:54:00 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC039865A0
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:52:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C95B865A0
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3aa1446066aso2701535b6e.1
- for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:52:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9a6190af24aso579332566b.0
+ for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:53:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694011954; x=1694616754; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kkn8fi4pjvUR6oSt46H4nHDHfWq8bCM8KWcQ/s/TBvI=;
- b=EEVyB2XuoKOGG5atjD2u/zzJbgEKtVqcU2lLSHBMNYle2N7aZy+rLseyI6ml802fBo
- JWUiTI1qLtAdYxu9iEOwR/0VFjTHbiQ+p143ciri3phxBWzi7Nl2W+7kPodsmvpBHcPU
- cjcFj1YPqaqBU4jvKOdFPDAvZIBRqjsCS6YCE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694011954; x=1694616754;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1694012036; x=1694616836; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kkn8fi4pjvUR6oSt46H4nHDHfWq8bCM8KWcQ/s/TBvI=;
- b=iByLz4gsPOZXP3J5q+FBNYOthPVDrErCYltYt20uhlw/BT4vKcrs2jwIf4BPn+waFV
- Lq4Io+RfzqfYzOXEgwm7HCdti7F7AlUJ50RM7tN+6dJ9NzFeJ34Iqv/TLTUJml7MYHLy
- xo12Zfv7yo7jiUDy1Eub6x0eBlogAYl9xx47sHlB/PICO23gUAyeGqyKpfWGzNiwLWRE
- ihCwTInKIzyh9PKxAejea2qJPu4qZJoVi2UxOKSzdgKERY7LPYp1NyTiZpYfhZsfVi2J
- DWbWo309mhlmiwF7r+3CyzHkeiv/dAargrnpnViFxjDMOZrJZkxlQeMDiq5FKMrqQUKM
- L6Dw==
-X-Gm-Message-State: AOJu0YxiYZrZig1zwPxKjMqI71OFU1M7PX+wNTNCE5kDMpdFkFDaffj4
- dRooETSy77ObCzC29KTD6VFxsEy4aiRpF+fvZpllLg==
-X-Google-Smtp-Source: AGHT+IHi2rZGvIyHdlV0Bj/eiP1Rb8TeHEE5qup4C4oxU2a6VCpzLf38n0mhCCULhR++1dDng81guA==
-X-Received: by 2002:a05:6808:646:b0:3a7:94d3:43fe with SMTP id
- z6-20020a056808064600b003a794d343femr16000951oih.30.1694011954475; 
- Wed, 06 Sep 2023 07:52:34 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-06dc-de6d-386e-5d48.res6.spectrum.com.
- [2603:6081:7b00:6400:6dc:de6d:386e:5d48])
- by smtp.gmail.com with ESMTPSA id
- z5-20020a81aa45000000b00597e912e67esm3707773ywk.131.2023.09.06.07.52.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Sep 2023 07:52:34 -0700 (PDT)
-Date: Wed, 6 Sep 2023 10:52:32 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PULL] u-boot-usb/master
-Message-ID: <20230906145232.GB305624@bill-the-cat>
-References: <20230905135054.15652-1-marex@denx.de>
+ bh=heM2WIdgYwpyKdVMhVOdDsIpHChYmeGvTy53ja7Lcs8=;
+ b=ieWFb20LXaIYCFMoBPx1meYtT01YQfjF0M8DGw2ZHnl1z+TvpobhwBi3ePSdCnQaoT
+ 1NKCcKn4t0RzGDmHE3Hh4LsrptPEX9TFwKO0qrcp9d6mu1tS05ZpBza9HOJjVlU6F9bd
+ Ng3HqA8GaWlB9MKdoHX9ZJxUe8GXP1vs00lcA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694012036; x=1694616836;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=heM2WIdgYwpyKdVMhVOdDsIpHChYmeGvTy53ja7Lcs8=;
+ b=fcpqjQaN64i/A/2EjgFqTQa88Yfue1By1MX8VeXN2Faj+ZZnS2v3B2m0V1KyrIA9As
+ S8LlzYRZusiVHGfnVglX7OqS3OpJdQ3OYqsxUIUBAR1pY8SvEjNswG3GAxwJQM1fSoYY
+ fZuz+Zd3iYYZO/49H25tGHIdEe5Fux00wKcvCiJlrKCDYssT3q2VLjuHfGgxOML7dUuE
+ 32onWUJ+LgpMMq2Zknh+VRgmsfVm0szmhZpgQomWfWzhyEhtROnzKifyNLxs1ODKhbxw
+ yqr0tRKtHAhoDDpFFdDtBdr5+8Tm4lcG1BjEQf4sulpLsnqr/6A0gzu6oiMI6F3MH2oQ
+ hGpg==
+X-Gm-Message-State: AOJu0YyuS2rY0XaokcYJ776iv6ofp9CijETC5t7Yf5nGhaM8l08nc8dH
+ HSIydVRUzXEyxpT497Wp9qtPjHE29Odg2T+IjQfhPg==
+X-Google-Smtp-Source: AGHT+IEU5UffRYUvDwA0NQm7JOuEQu6yerz5z3/Mhzsxu8B4Hq3armkLEjFFu6wwdpmajrU9Sup7CUTnJTt9lIFlQHI=
+X-Received: by 2002:a17:906:10c:b0:9a5:bce9:ffb7 with SMTP id
+ 12-20020a170906010c00b009a5bce9ffb7mr2596750eje.19.1694012036398; Wed, 06 Sep
+ 2023 07:53:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YntrU0qEoL7lsfFP"
-Content-Disposition: inline
-In-Reply-To: <20230905135054.15652-1-marex@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230830231758.2561402-1-sjg@chromium.org>
+ <20230830231758.2561402-3-sjg@chromium.org>
+ <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
+ <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
+In-Reply-To: <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 6 Sep 2023 08:53:44 -0600
+Message-ID: <CAPnjgZ1U+Gy0Q_Sc63p0ixkWF9iJEEBLhV8-N9-sh7OGNy-OmQ@mail.gmail.com>
+Subject: Re: [PATCH v5 3/4] schemas: Add some common reserved-memory usages
+To: Rob Herring <robh@kernel.org>
+Cc: Ard Biesheuvel <ardb@kernel.org>, devicetree@vger.kernel.org, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ ron minnich <rminnich@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
+ Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>, 
+ Chiu Chasel <chasel.chiu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +93,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rob, Ard,
 
---YntrU0qEoL7lsfFP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 6 Sept 2023 at 08:34, Rob Herring <robh@kernel.org> wrote:
+>
+> On Tue, Sep 5, 2023 at 4:44=E2=80=AFPM Ard Biesheuvel <ardb@kernel.org> w=
+rote:
+> >
+> > On Thu, 31 Aug 2023 at 01:18, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > The Devicetree specification skips over handling of a logical view of
+> > > the memory map, pointing users to the UEFI specification.
+> > >
+> > > It is common to split firmware into 'Platform Init', which does the
+> > > initial hardware setup and a "Payload" which selects the OS to be boo=
+ted.
+> > > Thus an handover interface is required between these two pieces.
+> > >
+> > > Where UEFI boot-time services are not available, but UEFI firmware is
+> > > present on either side of this interface, information about memory us=
+age
+> > > and attributes must be presented to the "Payload" in some form.
+> > >
+> >
+> > I don't think the UEFI references are needed or helpful here.
+> >
+> > > This aims to provide an small schema addition for this mapping.
+> > >
+> > > For now, no attempt is made to create an exhaustive binding, so there=
+ are
+> > > some example types listed. More can be added later.
+> > >
+> > > The compatible string is not included, since the node name is enough =
+to
+> > > indicate the purpose of a node, as per the existing reserved-memory
+> > > schema.
+>
+> Node names reflect the 'class', but not what's specifically in the
+> node. So really, all reserved-memory nodes should have the same name,
+> but that ship already sailed for existing users. 'compatible' is the
+> right thing here. As to what the node name should be, well, we haven't
+> defined that. I think we just used 'memory' on some platforms.
 
-On Tue, Sep 05, 2023 at 03:50:54PM +0200, Marek Vasut wrote:
+OK
 
-> The following changes since commit 8999257f219d1e371c2fd66f255b8782897944=
-d9:
->=20
->   Merge tag 'doc-2023-10-rc4-2' of https://source.denx.de/u-boot/custodia=
-ns/u-boot-efi (2023-09-02 09:08:54 -0400)
->=20
-> are available in the Git repository at:
->=20
->   git://source.denx.de/u-boot-usb.git master
->=20
-> for you to fetch changes up to 7f4b73fe6939761dd3891b96628efcab47a0570e:
->=20
->   usb: dwc3: Fix enabling USB_DR_MODE_HOST (2023-09-04 15:51:38 +0200)
->=20
+>
+> > > This binding does not include a binding for the memory 'attribute'
+> > > property, defined by EFI_BOOT_SERVICES.GetMemoryMap(). It may be usef=
+ul
+> > > to have that as well, but perhaps not as a bit mask.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > Changes in v5:
+> > > - Drop the memory-map node (should have done that in v4)
+> > > - Tidy up schema a bit
+> > >
+> > > Changes in v4:
+> > > - Make use of the reserved-memory node instead of creating a new one
+> > >
+> > > Changes in v3:
+> > > - Reword commit message again
+> > > - cc a lot more people, from the FFI patch
+> > > - Split out the attributes into the /memory nodes
+> > >
+> > > Changes in v2:
+> > > - Reword commit message
+> > >
+> > >  .../reserved-memory/common-reserved.yaml      | 53 +++++++++++++++++=
+++
+> > >  1 file changed, 53 insertions(+)
+> > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.=
+yaml
+> > >
+> > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/=
+dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > new file mode 100644
+> > > index 0000000..d1b466b
+> > > --- /dev/null
+> > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > @@ -0,0 +1,53 @@
+> > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > +%YAML 1.2
+> > > +---
+> > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.y=
+aml#
+> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > +
+> > > +title: Common memory reservations
+> > > +
+> > > +description: |
+> > > +  Specifies that the reserved memory region can be used for the purp=
+ose
+> > > +  indicated by its node name.
+> > > +
+> > > +  Clients may reuse this reserved memory if they understand what it =
+is for.
+> > > +
+> > > +maintainers:
+> > > +  - Simon Glass <sjg@chromium.org>
+> > > +
+> > > +allOf:
+> > > +  - $ref: reserved-memory.yaml
+> > > +
+> > > +properties:
+> > > +  $nodename:
+> > > +    enum:
+> > > +      - acpi-reclaim
+> > > +      - acpi-nvs
+> > > +      - boot-code
+> > > +      - boot-data
+> > > +      - runtime-code
+> > > +      - runtime-data
+> > > +
+> >
+> > These types are used by firmware to describe the nature of certain
+> > memory regions to the OS. Boot code and data can be discarded, as well
+> > as ACPI reclaim after its contents have been consumed. Runtime code
+> > and data need to be mapped for runtime features to work.
+> >
+> > When one firmware phase communicates the purpose of a certain memory
+> > reservation to another, it is typically not limited to whether its
+> > needs to be preserved and when it needs to be mapped (and with which
+> > attributes). I'd expect a memory reservation appearing under this node
+> > to have a clearly defined purpose, and the subsequent phases need to
+> > be able to discover this information.
+> >
+> > For example, a communication buffer for secure<->non-secure
+> > communication or a page with spin tables used by PSCI. None of the
+> > proposed labels are appropriate for this, and I'd much rather have a
+> > compatible string or some other property that clarifies the nature in
+> > a more suitable way. Note that 'no-map' already exists to indicate
+> > that the CPU should not map this memory unless it does so for the
+> > specific purpose that the reservation was made for.
+>
+> I agree. I think compatible is the better approach. Some property like
+> 'discard' may not be sufficient information if the OS needs to consume
+> the region first and then discard it. Better to state exactly what's
+> there and then the OS can imply the rest.
 
-Applied to u-boot/master, thanks!
+OK, so what sort of compatible strings?
 
---=20
-Tom
+How about:
+"acpi-reclaim" - holds ACPI tables; memory can be reclaimed once the
+tables are read and no-longer needed
+"boot-code" - holds boot code; memory can be reclaimed once the boot
+phase is complete
+"runtime-code" - holds runtime code; memory can be reclaimed only if
+this code will not be used from that point
 
---YntrU0qEoL7lsfFP
-Content-Type: application/pgp-signature; name="signature.asc"
+etc. We can then have more specific compatibles, like:
 
------BEGIN PGP SIGNATURE-----
+"psci-spin-table" - holds PSCI spin tables
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT4ki0ACgkQFHw5/5Y0
-tyzFKQv/XBYdkq+NaoBOvzPoTcKfjdLGzTr/BKNmYqYIwz0wOQCON8wWysR7IjmV
-xTEdSA3RfO24yLwkCntep3NRjl7FVlo8LPjME5S24SnVdG6kpSVEh9k6tQmN0gsF
-eXKPCHqhzfLLH+AHm1BNMxYFr6ACWDP9sEmhoxRWq+oV+vr9QhYej0CdtQPUoTim
-gnTLJaER+x//ziTkiW/8Zj3Fu+kUXN/+JBLyD8FuKUQOCTpBWF+XsoKl9BgeRhSo
-O899f6Aua6n6WdtdUPDg00X1C2HwFt33YKRCz6Rdky+Uusr3XUANsUNi38LYuJzR
-sPhzTXixTe5JDSkoW5fC72h19GWXpD/8IdWr4BvXwEabCW6oNwpEB3v7oP8nYmPP
-yx55Wiy5UpBQf8YqcMtGIsJDRbZzgok2wdH1RA1ONUYOXpGLmbNeGve0XOAIUe8M
-VgTt9luERnkEwTG2HukxPfS0WLiJ8b43tmaR3MdTC/gUAFIRfB/r+JkIkKN/CxTe
-7zTFfS1w
-=GxS3
------END PGP SIGNATURE-----
+so you could do:
 
---YntrU0qEoL7lsfFP--
+compatible =3D "runtime-code", "psci-spin-table";
+
+Regards,
+Simon
