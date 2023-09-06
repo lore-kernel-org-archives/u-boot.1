@@ -4,72 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1362CEB8FAD
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 05:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A37EB8FAD
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 05:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 025708654A;
-	Wed,  6 Sep 2023 07:02:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A96E86546;
+	Wed,  6 Sep 2023 07:04:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BagxtQC/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lQ4GiXjq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E2058654A; Wed,  6 Sep 2023 07:02:40 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BEBB286546; Wed,  6 Sep 2023 07:04:12 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DCB18666B
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 07:02:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6BCB8666B
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 07:04:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38652Yj5017794;
- Wed, 6 Sep 2023 00:02:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693976554;
- bh=6Wr7p05xr+PXuwwTbnbYDHxzHB7Am+/twEu6SibFnuQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=BagxtQC/kk3Rs/BHonz+STgFAqHoJP1e/Ya+imW5/JM7M6L+VasxAMbomSuOgjJYn
- tCVy6fehTcjoNP4R/B68VbeXcTvJsS3dvv6WMYg1a4Vn0PGx5r94EWrUiga7hbqYD1
- 1IHV9fKfG3/CnLiqrcPs30lMK0vj7CMhR4/EPXWo=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38652YOo010701
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Sep 2023 00:02:34 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Sep 2023 00:02:34 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Sep 2023 00:02:34 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38652Wfb020305;
- Wed, 6 Sep 2023 00:02:33 -0500
-Date: Wed, 6 Sep 2023 10:32:31 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>, Alper Nebi
- Yasak <alpernebiyasak@gmail.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>,
- Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [RFC PATCH 2/2] binman: j721e: Add firewall configurations for atf
-Message-ID: <20230906050231.ethqqhzo3473eotg@ula0497581>
-References: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
- <20230905-binman-firewalling-v1-2-3894520bff8a@ti.com>
- <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
- <2c91bdf0-39c1-f7d9-28db-c1a7a8e361eb@ti.com>
+ spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-27183f4ccc1so1878639a91.2
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 22:04:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693976648; x=1694581448; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RcL6va75VjgehcXyrlC2rr10HaOMJXz3I5t6kDsqW2M=;
+ b=lQ4GiXjqZt7PAPsuDEDightk5zfjRoo2JH4IHazU2DGQvJ0VQmCwOKA+7vZYu0i3Lr
+ BgM1TxkI0BWi7UObXJgF40wyMd+5R7LVB2PKvJXSq98oEuhB26OOd1frVn77VUl5oA0e
+ SEcnmobOta378rACuGZoStUR6puPH4V/FB4tOVXKrmqw3y7kwp+zA1HFzUvQExYpQ+uY
+ d5090icDyKkz3y3Ux3BF60PYK5UAG/ghizl4G3sft7NLtNEj1/yIEnOjLZXQDRWTU1eu
+ CprHf89dzlGf6CelSCIeHTkU/gMys6lrPn54ZnJ1PPB6IOgWzXv8PuGcCaVJABwPS5F6
+ 8dkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693976648; x=1694581448;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RcL6va75VjgehcXyrlC2rr10HaOMJXz3I5t6kDsqW2M=;
+ b=NTrPDIPsVjsbmRshYieRo5CCPaL5/U2Nz488HNG0r4K9mvtqVw4EFENreORp9mFVic
+ O1qFkkjJAVr0M+y/MlhvmKYc4TCpD+Mg2jcSdBh8FbPBq4srJlx7QEBQYK7Q5AFh6NIG
+ ZCg4Ib0r2zG3M2blux/m4t4QLlU7YqhWXh4O0fzOs9sQc5lX6ZNFilNupoYXiGDPzgsq
+ txrtE1dk6aXRuFUnQVkuZqZFhXs6cE9LEbY7qsyUA4cRwAaGrf49tkLcwW/KCprrYpSz
+ 4N/+G/aYwBp6QmgrrwV8sqRLnkNJjvHfkI49egwDkGgi6tK+zrePSXmLFX+MpcIrESIT
+ E0lg==
+X-Gm-Message-State: AOJu0YxJ9ntciBDF31ujyzuXfNPaFUwpViGVIz3Ip/UfYqpBsKr/QHCK
+ x+Q5bp7Zy91w33XXbd1SQa8=
+X-Google-Smtp-Source: AGHT+IHajMSdZBBxDeIZuB8EIwVTUe2O9GDA0Mf47F+kcnSijnggISqkx5AYMvSYyTuuxx5vBuTiLg==
+X-Received: by 2002:a17:90a:17ec:b0:26d:2198:6117 with SMTP id
+ q99-20020a17090a17ec00b0026d21986117mr11704818pja.13.1693976648013; 
+ Tue, 05 Sep 2023 22:04:08 -0700 (PDT)
+Received: from ?IPV6:2001:470:ec7b:2:65:b591:d36f:9c78?
+ ([2001:470:ec7b:2:65:b591:d36f:9c78])
+ by smtp.gmail.com with ESMTPSA id
+ g14-20020a17090ace8e00b00263f8915aa3sm11709117pju.31.2023.09.05.22.04.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Sep 2023 22:04:07 -0700 (PDT)
+Message-ID: <bd2a0c45-9d6a-494b-9ffd-f32fdec21027@gmail.com>
+Date: Wed, 6 Sep 2023 10:34:01 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <2c91bdf0-39c1-f7d9-28db-c1a7a8e361eb@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Adjust gitignore for /build
+To: Simon Glass <sjg@chromium.org>, Rong Tao <rtoax@foxmail.com>
+Cc: Maxim Cournoyer <maxim.cournoyer@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Rong Tao
+ <rongtao@cestc.cn>, u-boot@lists.denx.de
+References: <tencent_055CBAA884BC568E56211618940881653D0A@qq.com>
+ <CAPnjgZ37OL8XjMu1eOYPYR8OdmEp52tMwbVfJ5+j8_fCE7WRig@mail.gmail.com>
+Content-Language: en-US, tr, en-GB
+From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+In-Reply-To: <CAPnjgZ37OL8XjMu1eOYPYR8OdmEp52tMwbVfJ5+j8_fCE7WRig@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,56 +97,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha, Andrew,
-
-On 09:20-20230906, Neha Malcom Francis wrote:
-> Hi Andrew,
+On 2023-09-04 22:18 +05:30, Simon Glass wrote:
+> Hi Rong,
 > 
-> On 05/09/23 20:52, Andrew Davis wrote:
-> > On 9/5/23 3:21 AM, Manorit Chawdhry wrote:
-> > > The following commits adds the configuration of firewalls required to
-> > > protect ATF and OP-TEE memory region from non-secure reads and
-> > > writes using master and slave firewalls present in our K3 SOCs.
+> On Sun, 3 Sept 2023 at 20:50, Rong Tao <rtoax@foxmail.com> wrote:
+>>
+>> From: Rong Tao <rongtao@cestc.cn>
+>>
+>> /build-* can't ignore /build.
 > 
-> [...]
+> How does that directory get created?
+
+Most likely `make O=build` as an attempt to do out-of-tree builds? FWIW,
+I manually create and use build/$board/ directories for build outputs,
+but adding "build" to .git/info/exclude is an easy enough alternative.
+
+>> Signed-off-by: Rong Tao <rongtao@cestc.cn>
+>> ---
+>>  .gitignore | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/.gitignore b/.gitignore
+>> index 002f95de4feb..9697f0088f80 100644
+>> --- a/.gitignore
+>> +++ b/.gitignore
+>> @@ -35,7 +35,7 @@
+>>  *.tab.[ch]
+>>
+>>  # Build tree
+>> -/build-*
+>> +/build*
+>>
+>>  #
+>>  # Top-level generic files
+>> --
+>> 2.41.0
+>>
 > 
-> > > +                        // cpu_0_cpu_0_msmc Foreground Firewall
-> > > +                        firewall-1 {
-> > > +                            id = <257>;
-> > > +                            region = <1>;
-> > > +                            control = <0x1a>;
-> > > +                            permissions = <0x0100ff>;
-> > > +                            start_address = <0x0 0x70000000>;
-> > 
-> > This address might change if one moves ATF, might work to use
-> > CONFIG_K3_ATF_LOAD_ADDR?
-> > Not sure how you would get the end address as we don't really know ATF size..
-> > 
-> 
-> I think this could be handled within binman IF CONFIG_K3_ATF_LOAD_ADDR and
-> the ATF binary were not only A53/A72 inputs. But since it is, I don't see
-> how that can be implemented.
-> 
-
-Andrew, 
-
-I don't think that just using the CONFIG would be a good solution as
-the slave firewalls would not be able to protect the updated ATF address. 
-
-Maybe we can use configs and put some warning in build time if the ATF
-address is not the default, would see how this could be done getting the
-size is still an issue as Neha mentioned that they have to be inputs for
-all the build stages. 
-
-Neha,
-
-Would you be able to elaborate more on that part?
-
-Regards,
-Manorit
-
-> > Andrew
-> 
-> -- 
-> Thanking You
-> Neha Malcom Francis
+> Regards,
+> Simon
