@@ -4,120 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7438EEB8FAD
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 05:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D80BAEB8FA5
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 05:19:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B624586997;
-	Wed,  6 Sep 2023 07:18:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 0490186963;
+	Wed,  6 Sep 2023 07:18:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="m1CCwlBI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MoT4HT2b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29A69866DA; Wed,  6 Sep 2023 07:18:42 +0200 (CEST)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ id 3C9B7866E1; Wed,  6 Sep 2023 07:18:49 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EBDB8679F
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 07:18:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B8186996
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 07:18:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20230906051833epoutp0242ef25412a6098a4a591385e3ba2a29c~CN5LDHpYS2276222762epoutp02c
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 05:18:33 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20230906051833epoutp0242ef25412a6098a4a591385e3ba2a29c~CN5LDHpYS2276222762epoutp02c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1693977513;
- bh=Z+QdkTZ9zTQwb8GHWYIyBdP6qjm7PIy2Rq4YJoR5zqc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=m1CCwlBIGrU1/Wh8rC0CECBBlJZZDHSh4/3cl3PAquQzGnGx30EVo4Gim8AVBRGx3
- NsAzW8FuG6LznuizGM+6IvIC0JLdeGIM4i/sciru2Labs0xSLfMjB1z+UvXgY4//dF
- Ib2ukd4UwKLDHKVoj+V5Z07FCoFElqXI9z3Z7CSA=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20230906051832epcas2p29b150d513c3bc44ab760d3bb4966d9c7~CN5KnpFYP0205002050epcas2p2h;
- Wed,  6 Sep 2023 05:18:32 +0000 (GMT)
-Received: from epsmgec2p1.samsung.com (unknown [182.195.36.100]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4RgVyc1y6lz4x9Pr; Wed,  6 Sep
- 2023 05:18:32 +0000 (GMT)
-Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
- epsmgec2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 47.EE.08583.7AB08F46; Wed,  6 Sep 2023 14:18:31 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
- 20230906051831epcas2p2641bd65052f96115e5d8130f1974ad18~CN5JMHXv50197301973epcas2p2a;
- Wed,  6 Sep 2023 05:18:31 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20230906051831epsmtrp2793a8b0a63e5f1ecacd62e3dd5028a28~CN5JJ0ZhJ1149911499epsmtrp2R;
- Wed,  6 Sep 2023 05:18:31 +0000 (GMT)
-X-AuditID: b6c32a43-6f7ff70000002187-d8-64f80ba7b2f6
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 2C.3F.08788.7AB08F46; Wed,  6 Sep 2023 14:18:31 +0900 (KST)
-Received: from cometzero-ubuntu..
- (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20230906051831epsmtip1d0c440b23c424d06e101ecfc21bacba9~CN5I9y1dC0460504605epsmtip1g;
- Wed,  6 Sep 2023 05:18:31 +0000 (GMT)
-From: Chanho Park <chanho61.park@samsung.com>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Simon Glass
- <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Chanho Park <chanho61.park@samsung.com>
-Subject: [PATCH v3 3/3] timer: riscv_aclint_timer: add timer_get_boot_us for
- BOOTSTAGE
-Date: Wed,  6 Sep 2023 14:18:14 +0900
-Message-Id: <20230906051814.1393464-4-chanho61.park@samsung.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230906051814.1393464-1-chanho61.park@samsung.com>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3865IhVp021579;
+ Wed, 6 Sep 2023 00:18:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693977523;
+ bh=uie7RlsvmWr4FMSMWX52M3eIKopQqXJCfoGdQMVrBcA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=MoT4HT2bYYkwAtoniEo48PUpectfATxxoGPcUERw5BdgpUA+lavrjxtJ2842xkFep
+ YXj23M8cclWgnQ3RrhHiNi2e6FuXXCHKcCC6msAA1kbNB6UAEzBSOegRbtnJz7r1MA
+ od1s8r808zRj0kYCK4D2Ev+zzCwpNwFJ1Y0BMzq4=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3865Ihec022343
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 6 Sep 2023 00:18:43 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Sep 2023 00:18:42 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Sep 2023 00:18:42 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3865IfhY101288;
+ Wed, 6 Sep 2023 00:18:41 -0500
+Date: Wed, 6 Sep 2023 10:48:40 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>, Udit Kumar
+ <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [RFC PATCH 2/2] binman: j721e: Add firewall configurations for atf
+Message-ID: <20230906051840.3747bkybpqd2m4gg@ula0497581>
+References: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
+ <20230905-binman-firewalling-v1-2-3894520bff8a@ti.com>
+ <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrJKsWRmVeSWpSXmKPExsWy7bCmme5y7h8pBm3PVCwu79e2ePviLKPF
- ty3bGC3e7u1kt3h86DWTA6vHntOzmD1mN1xk8Th7ZwejR9+WVYwBLFHZNhmpiSmpRQqpecn5
- KZl56bZK3sHxzvGmZgaGuoaWFuZKCnmJuam2Si4+AbpumTlAe5UUyhJzSoFCAYnFxUr6djZF
- +aUlqQoZ+cUltkqpBSk5BeYFesWJucWleel6eaklVoYGBkamQIUJ2RmTb+5kLtjKU/Hy5GWW
- BsbpXF2MnBwSAiYSE349Z+li5OIQEtjBKHHh8Xx2COcTo8TrxvVsEM43RomGFS+YYVrerdvN
- DJHYyyjxcPtnKGcak8Ttxh52kCo2AV2JLc9fMXYxcnCICCRKPD5cD2IyCzhKnJtqBFIhLBAh
- MWNhG9hMFgFViX+TXzKB2LwCDhJLVvWCdUoIyEssfiABEuYE6uxu+ckCUSIocXLmEzCbGaik
- eetssAskBC6xSxy/f4MZotdF4vRJAYiThSVeHd/CDmFLSXx+t5cNoqRcYseyJIjWFkaJ5rY9
- UC/aS/y4OYUV4mJNifW79CHKlSWO3ILayifRcfgvO0SYV6KjTQiiUV3iwPbpLBC2rET3nM+s
- ELaHxNkTy6CBOYVR4u/tB2wTGBVmIXlmFpJnZiEsXsDIvIpRLLWgODc9NdmowBAeu8n5uZsY
- wWlQy3kH45X5//QOMTJxMB5ilOBgVhLhfSf/LUWINyWxsiq1KD++qDQntfgQoykwpCcyS4km
- 5wMTcV5JvKGJpYGJmZmhuZGpgbmSOO+91rkpQgLpiSWp2ampBalFMH1MHJxSDUxbFXKcr1wP
- +rXXze6g08qz4rc03+b+slPKvf2gLbr9xRuWJZfui/qoCOqFr5JtvqWUudjd/8qqe/Y6amcy
- rn5NdYhmY/Kpm2WnGsW7+GVn7lklprtf9z7zfrlzVaC5wzehGW+TZeYKH8nfv3fvD77jmcuK
- 9Gu2761P+v/Earpo9+Sfj97u9EycH5T9/vfjP7fM2VYcFZiz5Etyb1Xw/jfqzc+mMFW8yuA5
- 08eRMqPsS8llve1Fi94duzB9wQ/fGd7p+ftXX24szStr/jZ/74r5Ek//iz/Nu7nlDDvPEvnv
- +QU2PQ/eXF8YsYORlzUxeIL5wbYMd1OvD6rqxhqCu9w9qtvtVj6z332s3Srotr6jEktxRqKh
- FnNRcSIA0LovEQwEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWy7bCSnO5y7h8pBsvvcVtc3q9t8fbFWUaL
- b1u2MVq83dvJbvH40GsmB1aPPadnMXvMbrjI4nH2zg5Gj74tqxgDWKK4bFJSczLLUov07RK4
- Mibf3MlcsJWn4uXJyywNjNO5uhg5OSQETCTerdvN3MXIxSEksJtR4su6a8wQCVmJZ+92sEPY
- whL3W46wQhRNYpJ4dnQaE0iCTUBXYsvzV4wgtohAssTFni6wBmYBZ4k757YDNXBwCAuESay/
- xQESZhFQlfg3+SVYK6+Ag8SSVb2MICUSAvISix9IgIQ5BRwlult+soDYQkAl92a8YIYoF5Q4
- OfMJC8R0eYnmrbOZJzAKzEKSmoUktYCRaRWjZGpBcW56brFhgVFearlecWJucWleul5yfu4m
- RnDQamntYNyz6oPeIUYmDsZDjBIczEoivO/kv6UI8aYkVlalFuXHF5XmpBYfYpTmYFES5/32
- ujdFSCA9sSQ1OzW1ILUIJsvEwSnVwOT04HJyVeP+0/r7Zhm/72Tfcr7Lam0LV5GbqfXJLWsn
- 3PJ9FrrGpOpy9I6P6Q/cb/LLzthle4VvTZn+ppVHCv3aO+2DOPf/Tov+wG//4Twby4pyf0Ph
- DUt+8WSbXs75mJb73MXatPzYCYMWv1cH0ldMkQx9O/WC7bQHu5S+TWKpnjv1a5lZyR6NUo2f
- LM6NO2OzkvuVHmXVXwm0bX0sFa98ReeASWKLpEQ0Z916p9mrWZyLLgjrG91pV9NtTnwh4jvv
- f92qlFvrPcXzu4q2WG3O/V37Kjrd1kp2hfTD8I7Wr2vtT5jduvhUM2jtt9ulRQs5bHieSyln
- LfIuM1Pb8qvxy+4iB9Z9ezzeMHZOV2Ipzkg01GIuKk4EAIfD61fJAgAA
-X-CMS-MailID: 20230906051831epcas2p2641bd65052f96115e5d8130f1974ad18
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230906051831epcas2p2641bd65052f96115e5d8130f1974ad18
-References: <20230906051814.1393464-1-chanho61.park@samsung.com>
- <CGME20230906051831epcas2p2641bd65052f96115e5d8130f1974ad18@epcas2p2.samsung.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,60 +84,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-timer_get_boot_us function is required to record the boot stages as
-us-based timestamp.
-To get a micro-second time from a timer tick, this converts the
-formula like below to avoid zero result of (tick / rate) part.
+Hi Andrew,
 
-From: time(us) = (tick / rate) * 10000000
-To  : time(us) = (tick * 1000) / (rate / 1000)
+On 10:22-20230905, Andrew Davis wrote:
+> On 9/5/23 3:21 AM, Manorit Chawdhry wrote:
+> > The following commits adds the configuration of firewalls required to
+> > protect ATF and OP-TEE memory region from non-secure reads and
+> > writes using master and slave firewalls present in our K3 SOCs.
+> > 
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> >   arch/arm/dts/k3-j721e-binman.dtsi | 161 ++++++++++++++++++++++++++++++++++++++
+> >   1 file changed, 161 insertions(+)
+> > 
+> > diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+> > index 4f566c21a9af..0569a592597e 100644
+> > --- a/arch/arm/dts/k3-j721e-binman.dtsi
+> > +++ b/arch/arm/dts/k3-j721e-binman.dtsi
+> > @@ -330,6 +330,73 @@
+> >   					ti-secure {
+> >   						content = <&atf>;
+> >   						keyfile = "custMpk.pem";
+> > +						auth_in_place = <0xa02>;
+> > +
+> > +						// cpu_0_cpu_0_msmc Background Firewall - 0
+> 
+> I don't have a personal preference, but I see most comments in DTS
+> are C style /* */.
+> 
+> Also it might be easier to understand if you put the comments right before
+> the properties that they relate to, i.g.
+> 
+> firewall-0 {
+> 	/* cpu_0_cpu_0_msmc */
+> 	id = <257>;
+> 	region = <0>;
+> 	/* Background, Locked */
+> 	control = <0x31a>;
+> 	permissions = <0xc3ffff>;
+> 	start_address = <0x0 0x0>;
+> 	end_address = <0xff 0xffffffff>;
+> };
+> 
+> For permissions, I wonder if it would be easier to read if we add
+> some helper macros:
+> 
+> #define FWPRIVID_ALL 0xc3
+> 
+> #define FWPERM_SECURE_PRIV_WRITE      BIT(0)
+> #define FWPERM_SECURE_PRIV_READ       BIT(1)
+> #define FWPERM_SECURE_PRIV_CACHEABLE  BIT(2)
+> #define FWPERM_SECURE_PRIV_DEBUG      BIT(3)
+> #define FWPERM_SECURE_USER_WRITE      BIT(4)
+> ...
+> 
+> Then you would have:
+> 
+> permissions = <FWPRIVID_ALL |
 
-Signed-off-by: Chanho Park <chanho61.park@samsung.com>
----
- drivers/timer/riscv_aclint_timer.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+I think we'll have to do some shift here for the right calculations.
 
-diff --git a/drivers/timer/riscv_aclint_timer.c b/drivers/timer/riscv_aclint_timer.c
-index e29d527c8d77..73fb87912851 100644
---- a/drivers/timer/riscv_aclint_timer.c
-+++ b/drivers/timer/riscv_aclint_timer.c
-@@ -6,6 +6,7 @@
- 
- #include <common.h>
- #include <clk.h>
-+#include <div64.h>
- #include <dm.h>
- #include <timer.h>
- #include <asm/io.h>
-@@ -44,6 +45,28 @@ u64 notrace timer_early_get_count(void)
- }
- #endif
- 
-+#if CONFIG_IS_ENABLED(RISCV_MMODE) && CONFIG_IS_ENABLED(BOOTSTAGE)
-+ulong timer_get_boot_us(void)
-+{
-+	int ret;
-+	u64 ticks = 0;
-+	u32 rate;
-+
-+	ret = dm_timer_init();
-+	if (!ret) {
-+		rate = timer_get_rate(gd->timer);
-+		timer_get_count(gd->timer, &ticks);
-+	} else {
-+		rate = RISCV_MMODE_TIMER_FREQ;
-+		ticks = readq((void __iomem *)MTIME_REG(RISCV_MMODE_TIMERBASE,
-+							RISCV_MMODE_TIMEROFF));
-+	}
-+
-+	/* Below is converted from time(us) = (tick / rate) * 10000000 */
-+	return lldiv(ticks * 1000, (rate / 1000));
-+}
-+#endif
-+
- static const struct timer_ops riscv_aclint_timer_ops = {
- 	.get_count = riscv_aclint_timer_get_count,
- };
--- 
-2.39.2
+  #define FWPRIVID_SHIFT 8
 
+  permissions = <(FWPRIVID_ALL << FWPRIVID_SHIFT)
+>                FWPERM_SECURE_PRIV_WRITE |
+>                FWPERM_SECURE_PRIV_READ |
+
+Also, I would like to make FWPERM_SECURE_PRIV_RWCD too as it'll be
+commonly used.
+
+Would be sending another RFC with this change if you are fine with the
+suggestions. Thank you for reviewing!
+
+Regards,
+Manorit
+
+>                ...
+
+
+> > ;
+> 
+> > +						firewall-0 {
+> > +							id = <257>;
+> > +							region = <0>;
+> > +							control = <0x31a>;
+> > +							permissions = <0xc3ffff>;
+> > +							start_address = <0x0 0x0>;
+> > +							end_address = <0xff 0xffffffff>;
+> > +						};
+> > +
+> > +						// cpu_0_cpu_0_msmc Foreground Firewall
+> > +						firewall-1 {
+> > +							id = <257>;
+> > +							region = <1>;
+> > +							control = <0x1a>;
+> > +							permissions = <0x0100ff>;
+> > +							start_address = <0x0 0x70000000>;
+> 
+> This address might change if one moves ATF, might work to use CONFIG_K3_ATF_LOAD_ADDR?
+> Not sure how you would get the end address as we don't really know ATF size..
+> 
+> Andrew
