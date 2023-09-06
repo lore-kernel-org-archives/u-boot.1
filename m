@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D80BAEB8FA5
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 05:19:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237A2EB8FAD
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 05:23:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0490186963;
-	Wed,  6 Sep 2023 07:18:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8917285DFA;
+	Wed,  6 Sep 2023 07:23:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MoT4HT2b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gouc0XYl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C9B7866E1; Wed,  6 Sep 2023 07:18:49 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 87F5F8660B; Wed,  6 Sep 2023 07:23:05 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06B8186996
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 07:18:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD7CF805C2
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 07:23:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3865IhVp021579;
- Wed, 6 Sep 2023 00:18:43 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1693977523;
- bh=uie7RlsvmWr4FMSMWX52M3eIKopQqXJCfoGdQMVrBcA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=MoT4HT2bYYkwAtoniEo48PUpectfATxxoGPcUERw5BdgpUA+lavrjxtJ2842xkFep
- YXj23M8cclWgnQ3RrhHiNi2e6FuXXCHKcCC6msAA1kbNB6UAEzBSOegRbtnJz7r1MA
- od1s8r808zRj0kYCK4D2Ev+zzCwpNwFJ1Y0BMzq4=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3865Ihec022343
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Sep 2023 00:18:43 -0500
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Sep 2023 00:18:42 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Sep 2023 00:18:42 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3865IfhY101288;
- Wed, 6 Sep 2023 00:18:41 -0500
-Date: Wed, 6 Sep 2023 10:48:40 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>, Udit Kumar
- <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [RFC PATCH 2/2] binman: j721e: Add firewall configurations for atf
-Message-ID: <20230906051840.3747bkybpqd2m4gg@ula0497581>
-References: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
- <20230905-binman-firewalling-v1-2-3894520bff8a@ti.com>
- <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-d776e1f181bso2789027276.3
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 22:23:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693977781; x=1694582581; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kwxPj+SWKDQIlkIYQLNZfwDWSc9ZgqOsSNFK82bNkaw=;
+ b=Gouc0XYlsGEc/wrdiNzu69CN96xMBA/76y4I3M2ZIjqcruDloQYj4l5ojqAgvDU1Nz
+ 8svWLQxAQKr/XSSmOijtnM4IFAvATJ6JL3KNeUd2o2yibyVioh1jnFOEPejFpYEthjaC
+ n+GHkWgg0gM13aNIs45EZ7oL00LMYHGoBhJbQreaf4rybozq48YtK174oahVv+1YX8df
+ dH5ASjY3UcQElPx8xEtEUqG+Iylglzg99SZ9LvyTEIZ7EogN2K8tUqZ11GekWODCam69
+ 7Eal5Kuk/KX0cxW3CMuDwd6deG3WOPYdLL0NBprhMbik8IFbg8m2ZGqce+QmGeYrU3Qt
+ c/lA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693977781; x=1694582581;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kwxPj+SWKDQIlkIYQLNZfwDWSc9ZgqOsSNFK82bNkaw=;
+ b=FjqT0//u1CjafvAb44boccwv8cTLE46kd1YDu6uaIhAPiQHBl7Mla3ePnvTs+d8Na5
+ dMNAABBD6V1pd8S3J0qqigb3os6ut7yxG01Ueib2WRNnpGzhhao9YoF6SRVpblZm/PKx
+ xt2b3tzdWcwpd8Mmtu4Eya+5gEz6BGjwrNO8QGpMJh3dV9Ho1xghFl9xmZuEke+JyslK
+ ejZt/evRvFp83CEI+S+urX0YnwchrdOSzwXz2tHH8k1fBM/1Cz0iDON/2fSsgdDMSm9i
+ ht1vnT5HuwsiCsQhV6bsqfCUo8PkzAzzfFD0FAH9C/NJ/s+dLrHhwFDoTCYczCzvlsCX
+ 5OqQ==
+X-Gm-Message-State: AOJu0Yx5SrJ+/gpH2NVrHiIqj7jEWw1JhZjDuL551ziGooP9fajcQ0L+
+ ueTbFxvmNVXJf/S5fxUWGJE=
+X-Google-Smtp-Source: AGHT+IHSaIKdfxxYMOXbMzW8NEALgtUnI2dmF4XkSMElx/Kg1RNeWbLKHNCuj7Nb7MuYtBJufYg9jw==
+X-Received: by 2002:a25:3a87:0:b0:d44:af:3cce with SMTP id
+ h129-20020a253a87000000b00d4400af3ccemr5281739yba.27.1693977781457; 
+ Tue, 05 Sep 2023 22:23:01 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ l131-20020a252589000000b00d749bc5b169sm3163298ybl.43.2023.09.05.22.23.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Sep 2023 22:23:01 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH] arm: mvebu: sata_mv: Add bootstd hook to enable sata_bootdev
+Date: Tue,  5 Sep 2023 22:22:41 -0700
+Message-Id: <20230906052242.21568-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,104 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Add hook in sata_mv probe to enable bootstd bootdev.
 
-On 10:22-20230905, Andrew Davis wrote:
-> On 9/5/23 3:21 AM, Manorit Chawdhry wrote:
-> > The following commits adds the configuration of firewalls required to
-> > protect ATF and OP-TEE memory region from non-secure reads and
-> > writes using master and slave firewalls present in our K3 SOCs.
-> > 
-> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > ---
-> >   arch/arm/dts/k3-j721e-binman.dtsi | 161 ++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 161 insertions(+)
-> > 
-> > diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-> > index 4f566c21a9af..0569a592597e 100644
-> > --- a/arch/arm/dts/k3-j721e-binman.dtsi
-> > +++ b/arch/arm/dts/k3-j721e-binman.dtsi
-> > @@ -330,6 +330,73 @@
-> >   					ti-secure {
-> >   						content = <&atf>;
-> >   						keyfile = "custMpk.pem";
-> > +						auth_in_place = <0xa02>;
-> > +
-> > +						// cpu_0_cpu_0_msmc Background Firewall - 0
-> 
-> I don't have a personal preference, but I see most comments in DTS
-> are C style /* */.
-> 
-> Also it might be easier to understand if you put the comments right before
-> the properties that they relate to, i.g.
-> 
-> firewall-0 {
-> 	/* cpu_0_cpu_0_msmc */
-> 	id = <257>;
-> 	region = <0>;
-> 	/* Background, Locked */
-> 	control = <0x31a>;
-> 	permissions = <0xc3ffff>;
-> 	start_address = <0x0 0x0>;
-> 	end_address = <0xff 0xffffffff>;
-> };
-> 
-> For permissions, I wonder if it would be easier to read if we add
-> some helper macros:
-> 
-> #define FWPRIVID_ALL 0xc3
-> 
-> #define FWPERM_SECURE_PRIV_WRITE      BIT(0)
-> #define FWPERM_SECURE_PRIV_READ       BIT(1)
-> #define FWPERM_SECURE_PRIV_CACHEABLE  BIT(2)
-> #define FWPERM_SECURE_PRIV_DEBUG      BIT(3)
-> #define FWPERM_SECURE_USER_WRITE      BIT(4)
-> ...
-> 
-> Then you would have:
-> 
-> permissions = <FWPRIVID_ALL |
+Note: bootdev_setup_for_sibling_blk() invocation is a noop if bootsd is
+not enabled for ahci sata yet.
 
-I think we'll have to do some shift here for the right calculations.
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-  #define FWPRIVID_SHIFT 8
+ drivers/ata/sata_mv.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-  permissions = <(FWPRIVID_ALL << FWPRIVID_SHIFT)
->                FWPERM_SECURE_PRIV_WRITE |
->                FWPERM_SECURE_PRIV_READ |
+diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
+index 18c7a66db1..55a5365b5a 100644
+--- a/drivers/ata/sata_mv.c
++++ b/drivers/ata/sata_mv.c
+@@ -34,6 +34,7 @@
+ #include <common.h>
+ #include <ahci.h>
+ #include <blk.h>
++#include <bootdev.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <log.h>
+@@ -1104,6 +1105,12 @@ static int sata_mv_probe(struct udevice *dev)
+ 			/* TODO: undo create */
+ 			continue;
+ 
++		ret = bootdev_setup_for_sibling_blk(blk, "sata_bootdev");
++		if (ret) {
++			printf("%s: Failed to create bootdev\n", __func__);
++			continue;
++		}
++
+ 		/* If we got here, the current SATA port was probed
+ 		 * successfully, so set the probe status to successful.
+ 		 */
+@@ -1116,7 +1123,6 @@ static int sata_mv_probe(struct udevice *dev)
+ static int sata_mv_scan(struct udevice *dev)
+ {
+ 	/* Nothing to do here */
+-
+ 	return 0;
+ }
+ 
+-- 
+2.39.2
 
-Also, I would like to make FWPERM_SECURE_PRIV_RWCD too as it'll be
-commonly used.
-
-Would be sending another RFC with this change if you are fine with the
-suggestions. Thank you for reviewing!
-
-Regards,
-Manorit
-
->                ...
-
-
-> > ;
-> 
-> > +						firewall-0 {
-> > +							id = <257>;
-> > +							region = <0>;
-> > +							control = <0x31a>;
-> > +							permissions = <0xc3ffff>;
-> > +							start_address = <0x0 0x0>;
-> > +							end_address = <0xff 0xffffffff>;
-> > +						};
-> > +
-> > +						// cpu_0_cpu_0_msmc Foreground Firewall
-> > +						firewall-1 {
-> > +							id = <257>;
-> > +							region = <1>;
-> > +							control = <0x1a>;
-> > +							permissions = <0x0100ff>;
-> > +							start_address = <0x0 0x70000000>;
-> 
-> This address might change if one moves ATF, might work to use CONFIG_K3_ATF_LOAD_ADDR?
-> Not sure how you would get the end address as we don't really know ATF size..
-> 
-> Andrew
