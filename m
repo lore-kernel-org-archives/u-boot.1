@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7300EB8FA6
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 02:56:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FAEAEB8FAD
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 03:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BEB286940;
-	Wed,  6 Sep 2023 04:56:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foxmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AAF6C86660;
+	Wed,  6 Sep 2023 05:00:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="euMcd/OM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QFm4JGdU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C3AC8659F; Wed,  6 Sep 2023 03:34:21 +0200 (CEST)
-Received: from out162-62-57-252.mail.qq.com (out162-62-57-252.mail.qq.com
- [162.62.57.252])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0B51C86660; Wed,  6 Sep 2023 05:00:09 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4134486590
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 03:34:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C31986584
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 05:00:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foxmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rtoax@foxmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1693964047;
- bh=qXc6X7ghLyICEps3/k7kq3by/1gr2rR1azV6azEYTxw=;
- h=In-Reply-To:References:From:To:Cc:Subject:Date;
- b=euMcd/OMNzAu6CZ1cn8V8l1mX+0F9HipKk7i9c1t1MyFLyZeHkMMfst4O1M9lGGLo
- 6F+Voqy3uTyvQqYqb0cSHNVPISHa0Uyvsneyw3a3Tx/t1Sw8xEwUotiRO1+rHUh8QE
- leTUvGwg6izVpiYqROacccTFJrBse1EHIltNolnA=
-X-QQ-FEAT: oHWrrGTW1dDcx9FDKRrPeMctvggFgZ/w
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-X-QQ-XMAILINFO: MNsLylogNlqch7ZA1JE6Zg3aV0nRjRYZdNgpVQYXWjMuPVt9DEkVn/lIk9Puq1
- xxkI6kFmNVVwfUy1PefblTAGQ8zNqoHWW2MgiHaIZz3lT2AAdCMPP4X1AbErMRjAHXeXNcqjE7xCE
- TtWuizdjGIwEIf2K3PXSyt21pLYUa3fMAbptUieRSWt+zaQF7vXV1qpL1NojrYTi3J2+dsT9r7e8y
- l19NmxVRfruplyAI+K7CrKzRjZcPKF8QeZCSeU9cKT0WRGAJ8SiJTan2hhBqQlYPwkYDUw/MwU6sB
- YGThU3RdVFYcVI8Y4MTdnLfZJvwqil97uzO6ZE4IT66X4R5x0voJKCqJYGXYbkZja2GF+zrRDTxIB
- 6FoVGgn8fZWPQyiLnzvPi8L35124rJLth8eivaZMuL73JWLEn4XbWnCpk6I4NZclf1nsPbsSex3nb
- gHWtNxaMNG/G2e9kiMoWAcV6VKSi+/5fHylVBrkEzqrkJalxkQHDPK7WN/Y/bNfRYXw3rMp0oGt7I
- 0M14L7o09dMQBR9/iRjiJ0GUjhRM48q7zovVCGlLijcsRRMD6l9/2UIwN0WJ1F/Ffdx7EYO5CnoJc
- xDd9tptINWwg31rLKiZUD7TJv6ih/w6rHxC/SV1UparKuWns0Oc3l5ciYaBIV+qDS28nWMvGX9WYg
- 8+lyqMwsXqLhTkmjY6b21KY9J5721LPrGvZOVoySB9KMyC6tottiNgUac6hb+tDK2cQrSFoa8NU2Y
- 93g0Mm3VJPEU91oOOReoSCywvPaVcfvKOI62MNkX2pu3ePuj9MiXw9g31buMLXhrpRFg8l63Lm4vp
- jiHHtCcx9WgewpwhIwk/sy8sBub69xEXs6VgerSL4MHt/ARUsxTnftnAeL5CJvWORbMrIqzZmCCxc
- PHTNKhO+SPZW9t2nm7hOuR8Uf/biqdXXHv9SAzj272xr/Up5iKXUN5++OOKL4/7p8vJwLCWAGayrA
- 6FPZ8VYg==
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 39.156.37.17
-In-Reply-To: <CAPnjgZ1fWjL_qy+W4ygOvA2dDjK2v15zTJFkeNdqSSCDq8FuWQ@mail.gmail.com>
-References: <tencent_A957A85155C40E033B2189AC8CCB3995F607@qq.com>
- <CAPnjgZ1fWjL_qy+W4ygOvA2dDjK2v15zTJFkeNdqSSCDq8FuWQ@mail.gmail.com>
-X-QQ-STYLE: 
-X-QQ-mid: webmail872t1693964046t7966883
-From: "=?gb18030?B?yNnMzg==?=" <rtoax@foxmail.com>
-To: "=?gb18030?B?U2ltb24gR2xhc3M=?=" <sjg@chromium.org>
-Cc: "=?gb18030?B?QWxwZXIgTmViaSBZYXNhaw==?=" <alpernebiyasak@gmail.com>,
- "=?gb18030?B?SXZhbiBNaWtoYXlsb3Y=?=" <fr0st61te@gmail.com>,
- "=?gb18030?B?Sm9uYXMgS2FybG1hbg==?=" <jonas@kwiboo.se>,
- "=?gb18030?B?b3BlbiBsaXN0?=" <u-boot@lists.denx.de>,
- "=?gb18030?B?Um9uZyBUYW8=?=" <rongtao@cestc.cn>
-Subject: Re: [PATCH v2] binman: Fix SyntaxWarning: invalid escape sequence '\('
-Mime-Version: 1.0
-Date: Wed, 6 Sep 2023 09:34:06 +0800
-X-Priority: 3
-Message-ID: <tencent_BA46C710370DF285E4B2EA2E35553A5FF909@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-X-Mailman-Approved-At: Wed, 06 Sep 2023 04:56:11 +0200
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-68cb5278e3fso753442b3a.1
+ for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 20:00:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1693969204; x=1694574004; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+EPxQZjCadBOZdt3t61CSpCT9YOPdLlB+MGI4y0If3g=;
+ b=QFm4JGdUbar9Af/BXrs+YstPRDBj4cV2ozZ9eZwzI3GmaNT2S4TxtQHIe0cM3ATD6Q
+ MBvNjfymQ4jtcXH6S+wNgGaVcMDbCDon+0971KONzXmzyfDAuB5cenXxEkeomN1JovB+
+ 3xntqVzvh+vPWz41YExUNVZhdEQiIPDtVqZJg587Y/RtXY4U3rtx9bZo7Ylh3HzCuM4k
+ EMl6dh5r7npSI1nEZyYF4/GMtwoGO2rqYRHCcpXFYntqGeHp82+4n+d65VGY71sFRrNz
+ 81SHn6qVMTQIkgdMDPgjDBB2BxycsUHPF9mf4gQRsvIBm5KMJB0zI5LwmhQ5ZUV6OrVT
+ CE6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693969204; x=1694574004;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+EPxQZjCadBOZdt3t61CSpCT9YOPdLlB+MGI4y0If3g=;
+ b=g1lUknguDNp6a9c/9Mx9pfH8+VDaWNS239qbRJCdtX34Vh9nNslqSON1uTgOpTsLuM
+ +lNoxIVrIME1VUBQS7t6a85o8PUzMZmVRjn6HSABj1vgOmpTx9pOyTXvEAvQDmyHYEHt
+ 4hZEbNG0bOMiJmOWMgzjjlfvDEN5pcr9sfdufsMAh95FZjKK798OUf2naRAoWiPx5HiH
+ g4XuFF2BJ1m3ytUxEXvIQyTLuyzMk6ZUwjZZY9RgMskGMPC7d4nWAYjMYpZqu+INu5/s
+ baGZxnvmRKJKyHPrr2hzRR3qxRKOkFrGfh0Zx9L8Pc8gjirtKci59N/upGH4dRssp6TW
+ A8XQ==
+X-Gm-Message-State: AOJu0YzCX1wAWNvieW+8jjkurJ0n+JqAoRhWpTrmKixur4nl6YLhPBRt
+ IkZV+jdoRiVBKbbYqXP95kTpSw==
+X-Google-Smtp-Source: AGHT+IEtdDOkyREHbCJWguuaiIKetfm5rHgjGe/p0HXomHiPkJw5V8JzXP3+r9pV6mTo5pJ87++zbQ==
+X-Received: by 2002:a05:6a20:7d8c:b0:13d:d5bd:758f with SMTP id
+ v12-20020a056a207d8c00b0013dd5bd758fmr20661220pzj.6.1693969203864; 
+ Tue, 05 Sep 2023 20:00:03 -0700 (PDT)
+Received: from octopus ([2400:4050:c3e1:100:8294:a07d:b7e9:4033])
+ by smtp.gmail.com with ESMTPSA id
+ y4-20020a170902700400b001c0c86a5415sm9945147plk.154.2023.09.05.20.00.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Sep 2023 20:00:03 -0700 (PDT)
+Date: Wed, 6 Sep 2023 12:00:01 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [RFC] make sandbox UT more generic
+Message-ID: <ZPfrMbr6cAOfklAj@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <ZO/g8T1ohHI23xM8@octopus>
+ <CAPnjgZ32h4vtMiScP-4NKEVFCSYcYHV7=bKVSqT3mQSfDPQ=FA@mail.gmail.com>
+ <ZPAlCLyi8eB+a6yP@octopus>
+ <CAPnjgZ1sB7xCRD7P-SCjJQP2w6p8Kxx2ahJTbfiQ887djxX7qQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1sB7xCRD7P-SCjJQP2w6p8Kxx2ahJTbfiQ887djxX7qQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,43 +96,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-VGhhbmtzLCBTaW1vbg0KDQoNClRoZSBmb2xsb3dpbmcgbGluZXMgaXMgbXkgc3lzdGVtZSBF
-TlYgYW5kIG1ha2UgbG9nDQoNCg0KJCBjYXQgL2V0Yy9vcy1yZWxlYXNlJm5ic3A7DQpOQU1F
-PSJGZWRvcmEgTGludXgiDQpWRVJTSU9OPSI0MCAoV29ya3N0YXRpb24gRWRpdGlvbiBQcmVy
-ZWxlYXNlKSINCklEPWZlZG9yYQ0KVkVSU0lPTl9JRD00MA0KVkVSU0lPTl9DT0RFTkFNRT0i
-Ig0KUExBVEZPUk1fSUQ9InBsYXRmb3JtOmY0MCINClBSRVRUWV9OQU1FPSJGZWRvcmEgTGlu
-dXggNDAgKFdvcmtzdGF0aW9uIEVkaXRpb24gUHJlcmVsZWFzZSkiDQpBTlNJX0NPTE9SPSIw
-OzM4OzI7NjA7MTEwOzE4MCINCkxPR089ZmVkb3JhLWxvZ28taWNvbg0KQ1BFX05BTUU9ImNw
-ZTovbzpmZWRvcmFwcm9qZWN0OmZlZG9yYTo0MCINCkRFRkFVTFRfSE9TVE5BTUU9ImZlZG9y
-YSINCkhPTUVfVVJMPSJodHRwczovL2ZlZG9yYXByb2plY3Qub3JnLyINCkRPQ1VNRU5UQVRJ
-T05fVVJMPSJodHRwczovL2RvY3MuZmVkb3JhcHJvamVjdC5vcmcvZW4tVVMvZmVkb3JhL3Jh
-d2hpZGUvc3lzdGVtLWFkbWluaXN0cmF0b3JzLWd1aWRlLyINClNVUFBPUlRfVVJMPSJodHRw
-czovL2Fzay5mZWRvcmFwcm9qZWN0Lm9yZy8iDQpCVUdfUkVQT1JUX1VSTD0iaHR0cHM6Ly9i
-dWd6aWxsYS5yZWRoYXQuY29tLyINClJFREhBVF9CVUdaSUxMQV9QUk9EVUNUPSJGZWRvcmEi
-DQpSRURIQVRfQlVHWklMTEFfUFJPRFVDVF9WRVJTSU9OPXJhd2hpZGUNClJFREhBVF9TVVBQ
-T1JUX1BST0RVQ1Q9IkZlZG9yYSINClJFREhBVF9TVVBQT1JUX1BST0RVQ1RfVkVSU0lPTj1y
-YXdoaWRlDQpTVVBQT1JUX0VORD0yMDI0LTA1LTE0DQpWQVJJQU5UPSJXb3Jrc3RhdGlvbiBF
-ZGl0aW9uIg0KVkFSSUFOVF9JRD13b3Jrc3RhdGlvbg0KDQoNCg0KJCB1bmFtZSAtcg0KNi42
-LjAtMC5yYzAuMjAyMzA5MDFnaXQ5OWQ5OTgyNWZjMDcuMy5mYzQwLng4Nl82NA0KDQoNCg0K
-JCBnY2MgLS12ZXJzaW9uDQpnY2MgKEdDQykgMTMuMi4xIDIwMjMwNzI4IChSZWQgSGF0IDEz
-LjIuMS0xKQ0KQ29weXJpZ2h0IChDKSAyMDIzIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwg
-SW5jLg0KVGhpcyBpcyBmcmVlIHNvZnR3YXJlOyBzZWUgdGhlIHNvdXJjZSBmb3IgY29weWlu
-ZyBjb25kaXRpb25zLiZuYnNwOyBUaGVyZSBpcyBOTw0Kd2FycmFudHk7IG5vdCBldmVuIGZv
-ciBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0Uu
-DQoNCg0KDQokIG1ha2UgcWVtdS14ODZfNjRfZGVmY29uZmlnDQombmJzcDsgSE9TVENDJm5i
-c3A7IHNjcmlwdHMvYmFzaWMvZml4ZGVwDQombmJzcDsgSE9TVENDJm5ic3A7IHNjcmlwdHMv
-a2NvbmZpZy9jb25mLm8NCiZuYnNwOyBZQUNDJm5ic3A7ICZuYnNwOyBzY3JpcHRzL2tjb25m
-aWcvemNvbmYudGFiLmMNCiZuYnNwOyBMRVgmbmJzcDsgJm5ic3A7ICZuYnNwO3NjcmlwdHMv
-a2NvbmZpZy96Y29uZi5sZXguYw0KJm5ic3A7IEhPU1RDQyZuYnNwOyBzY3JpcHRzL2tjb25m
-aWcvemNvbmYudGFiLm8NCiZuYnNwOyBIT1NUTEQmbmJzcDsgc2NyaXB0cy9rY29uZmlnL2Nv
-bmYNCiMNCiMgY29uZmlndXJhdGlvbiB3cml0dGVuIHRvIC5jb25maWcNCiMNCg0KDQoNCiQg
-bWFrZSAtajgNCi4uLiBbdG9vIG11Y2ggbG9nc10NCiZuYnNwOyBTWU0mbmJzcDsgJm5ic3A7
-ICZuYnNwO3NwbC91LWJvb3Qtc3BsLnN5bQ0KJm5ic3A7IE9CSkNPUFkgc3BsL3UtYm9vdC14
-ODYtc3RhcnQxNi1zcGwuYmluDQombmJzcDsgT0JKQ09QWSBzcGwvdS1ib290LXg4Ni1yZXNl
-dDE2LXNwbC5iaW4NCiZuYnNwOyBDQVQmbmJzcDsgJm5ic3A7ICZuYnNwO3NwbC91LWJvb3Qt
-c3BsLWR0Yi5iaW4NCiZuYnNwOyBDT1BZJm5ic3A7ICZuYnNwOyBzcGwvdS1ib290LXNwbC5i
-aW4NCiZuYnNwOyBCSU5NQU4mbmJzcDsgLmJpbm1hbl9zdGFtcA0KL2hvbWUvc2RhL2dpdC1y
-ZXBvcy91LWJvb3QvdG9vbHMvYmlubWFuL2V0eXBlL3NlY3Rpb24ucHk6MjU6IFN5bnRheFdh
-cm5pbmc6IGludmFsaWQgZXNjYXBlIHNlcXVlbmNlICdcKCcNCiZuYnNwOyAiIiJFbnRyeSB0
-aGF0IGNvbnRhaW5zIG90aGVyIGVudHJpZXMNCiZuYnNwOyBPRkNISyZuYnNwOyAmbmJzcDsu
-Y29uZmln
+Hi Simon,
+
+On Thu, Aug 31, 2023 at 09:04:43AM -0600, Simon Glass wrote:
+> Hi,
+> 
+> On Wed, 30 Aug 2023 at 23:28, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Wed, Aug 30, 2023 at 08:49:05PM -0600, Simon Glass wrote:
+> > > Hi,
+> > >
+> > > On Wed, 30 Aug 2023 at 18:38, AKASHI Takahiro
+> > > <takahiro.akashi@linaro.org> wrote:
+> > > >
+> > > > Hi,
+> > > >
+> > > > I'm working on implementing SCMI-based pinctrl/gpio driver,
+> > > > and want to re-use sandbox UT to test the code. However,
+> > > > It is somehow sandbox-specific (with additional DT nodes).
+> > > > How can/should we make it more generic for other targets/drivers
+> > > > rather than just by copying the test code?
+> > > > (I have already created a test for pinmux since there is only
+> > > > one existing scenario, but gpio test has many.)
+> > > >
+> > > > Even if I say 'generic', my case may be special since real
+> > > > hardware (device drivers) cannot always run all the test cases,
+> > > > while SCMI-based drivers potentially can with a dummy SCMI server
+> > > > for sandbox.
+> > > > See:
+> > > >     drivers/firmware/scmi/sandbox-scmi_agent.c
+> > >
+> > > We don't have a good way to test drivers that talk to hardware, in general.
+> > >
+> > > For I2C, SPI and some PCI devices you can sometimes write an emulator
+> > > for the chip and then your driver can talk to the emulator as if it
+> > > were talking to the hardware. Sandbox does actually support that with
+> > > memory-mapped I/O too, although it is fairly rarely used.
+> >
+> > Well, I don't want or need to emulate some *real* hardware.
+> > Instead, I would like to emulate what the current sandbox drivers
+> > (pinctrl-sandbox.c and gpio/sandbox.c) emulate so that we can re-use
+> > (some portion of) test cases for sandbox (test/dm/pinmux.c and gpio.c).
+> >
+> > As you might know, SCMI protocol with associated drivers on U-Boot is
+> > so generic that it would be able to talk to any of real pinctrl/gpio
+> > drivers/firmware (say, run on OPTEE or SCP).
+> > By implementing/mimicking protocol messages in sandbox-scmi_agent.c,
+> > SCMI drivers are expected to provide *virtual* pinctrl/gpio devices
+> > similar to what sandbox does.
+> 
+> I actually know almost nothing about SCMI.
+> 
+> >
+> > I have already implemented pinmux test with some tweaks by copying
+> > test/dm/pinmux.c and duplicating almost the same DT nodes as "pinctrl-gpio"
+> > in test.dts.
+> > But I'm looking for any other means without test code duplication.
+> >
+> > Did I clarify my question a bit?
+> 
+> Well you should be able to factor out the test code into a function,
+> then call it from two places with the two different devices (or other
+> params) that are needed.
+> 
+> For the DT, copying a few nodes is not the end of the world, IMO.
+> 
+> BTW have you seen this talk? [2] It seems that you are moving pieces
+> into firmware which should be OS drivers?
+> 
+> Anyway, if you place a sandbox pinmux device under the SCMI node in
+> the DT, then you should end up with a pinmux device you can use likely
+> normal. Then if that device uses the sandbox emulator, you can run the
+> existing tests on it with little modification, I suspect.
+> 
+> But if I am still missing the point, a diagram or patch might help me
+> understand!
+
+I just posted my RFC for supporting SCMI pinctrl protocol[1],
+hoping it will help you understand what I'm planning to do regarding
+test methodology, in particular by looking at patch#5 and #6.
+
+[1] https://lists.denx.de/pipermail/u-boot/2023-September/529765.html
+
+Thanks,
+-Takahiro Akashi
+
+> Regards,
+> Simon
+> 
+> 
+> >
+> > -Takahiro Akashi
+> >
+> >
+> > > We have done this a lot with Zephyr, as well[1] and achieved 90% code
+> > > coverage on some boards.
+> > >
+> > > But I'm not quite sure I am answering the right question, so I will stop here.
+> > >
+> > > Regards,
+> > > Simon
+> > >
+> > > [1] https://www.youtube.com/watch?v=usXCAXR2G_c
+> 
+> [2] https://www.usenix.org/conference/osdi21/presentation/fri-keynote
