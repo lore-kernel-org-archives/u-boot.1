@@ -4,109 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 565BDEE14A3
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA76EE14A1
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8AFB86907;
-	Wed,  6 Sep 2023 16:57:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 360E18698E;
+	Wed,  6 Sep 2023 16:59:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="olxlf1UK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JY7zrJaQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD1386963; Wed,  6 Sep 2023 16:57:05 +0200 (CEST)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8d::623])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6EB0A869B1; Wed,  6 Sep 2023 16:59:27 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24251865A0
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:57:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF191865A0
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:59:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=T9MULMpC+spBdP4Icfed0qGysqODBquFJ6Y6XuMLIkQx3+CVva10fZqoBnBalhg79MfeFFhM5I/G+v330ncbO6fvWksfp6OK1+xt7i6Zns/RSSos9deGzkmZQMssuG3NR9ahlz+yzObvcm/Qd4OkE2w6185q2fb0VV2SCaVPnzYDMqLxeSeu4XwwGwdQ2wdWQYzVZ6MgRKNmaB6HKm9hdvHeprFGsI/g8DPvYOi1h0WqcAZXBwpcwf0hEMUaWe1kmLkGFpR3WHLoo8GSmUJJPTLTw9a/5e2Ej4vVV3PDqYgcQc2xQXmEOOGSZ5fFDNdVug3OelARmhJFpsKterghPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NtnjznhiywSrKrT6cA7KMkZu6ZWoDX9V/qLXtiQSReM=;
- b=OI9a6PSCp0W8jDoUA2FVd95G0AWA9u4CcVazKnmdvHR07qMlhV7RI/BgjkKPNDEB9u+3dRCT6w7GWYvkloKy7aNp2UEjbk4AqWw+3K+whwZbOw5wuvdjhd+YNa69m47F+3pMRDOrVlfB8ldkSL6W9Ik+4ytuDCbCvIIeKUCL+6R2TaUeJuL7yKeY2AFlnuvqWsUspQ3i47jNJQeeAMBdCc+NebQLxrmBUpHr2drCB7uuMizKXOwdH5zXH16zUqFdZBaqsyL1SVLRNRF2obbfkMr03cJxwNGSu32TySG62dQMSrSs3+Mx9DxlR91vx08ipOvvquihB7n8ByBh7xF3Uw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NtnjznhiywSrKrT6cA7KMkZu6ZWoDX9V/qLXtiQSReM=;
- b=olxlf1UKgGMJEeovioH93AdOzTYd97sSOOKRqmzqc5OCFtH2HsjyF3Xn5GQjqFiTKtRwIPBicnVgAgTvCLEsTEy1xNB/8VMJWdPmbFBxSHbFNtFWbYTwNvped3ygCooEq/wHkreQ3ELl6nw38WVa8iz6vVczqHluQcHxBo0/T6w=
-Received: from DM6PR04CA0023.namprd04.prod.outlook.com (2603:10b6:5:334::28)
- by MN2PR12MB4142.namprd12.prod.outlook.com (2603:10b6:208:1dd::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Wed, 6 Sep
- 2023 14:56:59 +0000
-Received: from DS3PEPF000099D7.namprd04.prod.outlook.com
- (2603:10b6:5:334:cafe::88) by DM6PR04CA0023.outlook.office365.com
- (2603:10b6:5:334::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.36 via Frontend
- Transport; Wed, 6 Sep 2023 14:56:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D7.mail.protection.outlook.com (10.167.17.8) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Wed, 6 Sep 2023 14:56:59 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 6 Sep
- 2023 09:56:58 -0500
-Message-ID: <523ca6eb-3737-d090-8006-f127eda2330b@amd.com>
-Date: Wed, 6 Sep 2023 16:56:56 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2ba1e9b1fa9so62138651fa.3
+ for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:59:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1694012364; x=1694617164; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=q1LrNb7QHBKIA9255KZLxhSuzD8G/WX1zHSr42ebP+o=;
+ b=JY7zrJaQwuaKYb9acRxMgPeS8aeYEeZidOvjizM2jaELdqYl7kL+VWCpmQEcbfEOOn
+ v3rVkLSYdBrR6+FIjUK02EpIosVvyk36qSh7HWxsDb7f6xzzHoJpD8YczFcC7eMiNiFD
+ gHq94Rybwh5oMN1yYikg5QySnM8kjJR1ifN7Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694012364; x=1694617164;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=q1LrNb7QHBKIA9255KZLxhSuzD8G/WX1zHSr42ebP+o=;
+ b=HF2GejDYt9/EJ7dNA+j2L6oV7ro3vSjtegsDrQxYWl8iaLIolAN2sKTm60lAife5hI
+ Cz6w4KEn8NIzMoURTTf87lV5CG+NRdZY1DufscB32Qy9bqDQdLuxpuXNInVf9tiLryy2
+ hRtG7KbwM5UEBwupmtPvBK5uFDZgR/BEih6ksmUBLU6tE8xMbe1/5rEM9pM0bJyQBRjx
+ iSf9TXlO91GPYlgY3/RvAm2XnRisbPUZoV+UcEmv/XTL4JCMt/lI5IOuHgfazH9CTali
+ oTj9Qlf3Wf4b6WeIx/rq23rIdyjUvmhWDPmLdg++Q3BNFgmWLajQptMZXj1F4HV/cCqb
+ Lkcw==
+X-Gm-Message-State: AOJu0Yz45XxcqWCnjjlXVq2KfsjkitqU0uUUgoQxWeN4R7g93Hd1QO/d
+ +d0SuEXBjbiPXNoWEvBtkgRX0Rowu/SgHi8F8PWGpA==
+X-Google-Smtp-Source: AGHT+IEu/VIdkx5UcahGSsIer3DtrhPYRAHAY6j+nASJfp+Ys/kHE2iyV2RMZbp8mfnramRWs6oPKbSU4SsISKs1RXk=
+X-Received: by 2002:a2e:2c19:0:b0:2bc:c28c:a2b5 with SMTP id
+ s25-20020a2e2c19000000b002bcc28ca2b5mr2397185ljs.51.1694012363624; Wed, 06
+ Sep 2023 07:59:23 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
-Content-Language: en-US
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>, <u-boot@lists.denx.de>
-CC: <etienne.carriere@st.com>, <sjg@chromium.org>, <linus.walleij@linaro.org>, 
- <Oleksii_Moisieiev@epam.com>
-References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
- <20230906024011.17488-5-takahiro.akashi@linaro.org>
-From: Michal Simek <michal.simek@amd.com>
-In-Reply-To: <20230906024011.17488-5-takahiro.akashi@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D7:EE_|MN2PR12MB4142:EE_
-X-MS-Office365-Filtering-Correlation-Id: 197ce816-8536-4f84-5658-08dbaee985b8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 6gHV88P//f6DzOyeWxLpuE0Tip8NKbwwerSQ2WhTK4pWsVez7I3/RgwMSzXTLZMPTpEsWyC+GpSemGgRQoS6dFLP5bnTabravX1nblBceA/4Qn4NWOX14lGnO9megTHJJYiLxcS5YcV+xdy6gjAQODCbda3iyBPNEdOP08MG6/Ct6l6f8fNU6OMDEtZ+eufZ0lRGgTJObPen5J2BNVCpTFkwbRA55kFhlSivJbEFJ2jMxqHYSe20o9dc1b5OfgmCwko3HB4cIa0U8bDiJHjJGKIDnJpCvAfRLrCmLIRHp4+Oe9Chnr7K2tV8NbFyUI5k7TbWFnZZxfAaxCJHTyZRLqy7rLivlQYy/1DTnwreL4G6TiwoFiDTbtj58o+vZMoirn/cn6vYBfaplkzWOy43Ac1ZZpTlzkHJp/pnuo9i6hc3/z86TGojWpdqpmB6z/jfOqLpGHhCTsMItDqLqH0YYUqjjHoJns/mYbsmS38/gdJs72Vmhm9oVYLjn4cYnCJkcwVGhPsfjCxUbVblqjxOko8IlowL6hOL1dY0eRQiJ9y8ZI1bAj9S9jzWByETzceut0HvceTp6JDbAEJBdc1anQWmxOKOQcX1hzyYw4lQVOO7hGuDe2CceI9251NO/mJtdekfGPU6wTM8oFDkkkT7AmDPnUWIy4WI13BcQsjrcqipkWPvB+wOtLD7k50kXRqgkVf4RWWvcJ8sOMO7aEgttzXB3ld/nEcBNq2Pcdsqpn0Lgu2vqn0P4S/w04BWaRAglUs3KUVEGghGlL7q9++6H0grNn0j93KQzBXwvE6+/MU=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(376002)(396003)(39860400002)(346002)(82310400011)(451199024)(186009)(1800799009)(46966006)(36840700001)(40470700004)(53546011)(478600001)(83380400001)(2616005)(426003)(336012)(16526019)(2906002)(26005)(316002)(16576012)(44832011)(54906003)(70206006)(70586007)(41300700001)(110136005)(5660300002)(4326008)(8936002)(8676002)(40460700003)(82740400003)(40480700001)(47076005)(36860700001)(31696002)(36756003)(86362001)(356005)(81166007)(31686004)(66899024)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2023 14:56:59.6339 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 197ce816-8536-4f84-5658-08dbaee985b8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D7.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4142
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
+ <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
+ <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
+ <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
+ <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
+ <20230906142139.GA1236014-robh@kernel.org>
+In-Reply-To: <20230906142139.GA1236014-robh@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 6 Sep 2023 08:59:11 -0600
+Message-ID: <CAPnjgZ1wyoH2i1Ez1s+qQv6ViEYQ-6YkLtcLZaQJvTAyCGPiFw@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+To: Rob Herring <robh@kernel.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,45 +91,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rob,
 
+On Wed, 6 Sept 2023 at 08:21, Rob Herring <robh@kernel.org> wrote:
+>
+> On Mon, Aug 28, 2023 at 04:09:29PM -0600, Simon Glass wrote:
+> > Hi Peter,
+> >
+> > On Mon, 28 Aug 2023 at 14:29, Peter Robinson <pbrobinson@gmail.com> wro=
+te:
+> > >
+> > > On Mon, Aug 28, 2023 at 6:54=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Peter,
+> > > >
+> > > > On Mon, 28 Aug 2023 at 10:37, Peter Robinson <pbrobinson@gmail.com>=
+ wrote:
+> > > > >
+> > > > > On Mon, Aug 28, 2023 at 5:20=E2=80=AFPM Simon Glass <sjg@chromium=
+.org> wrote:
+> > > > > >
+> > > > > > Hi,
+> > > > > >
+> > > > > > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro=
+.org> wrote:
+> > > > > > >
+> > > > > > >
+> > > > > > > Provide a way for removing certain devicetree nodes and/or pr=
+operties
+> > > > > > > from the devicetree. This is needed to purge certain nodes an=
+d
+> > > > > > > properties which may be relevant only in U-Boot. Such nodes a=
+nd
+> > > > > > > properties are then removed from the devicetree before it is =
+passed to
+> > > > > > > the kernel. This ensures that the devicetree passed to the OS=
+ does not
+> > > > > > > contain any non-compliant nodes and properties.
+> > > > > > >
+> > > > > > > The removal of the nodes and properties is being done through=
+ an
+> > > > > > > EVT_FT_FIXUP handler. I am not sure if the removal code needs=
+ to be
+> > > > > > > behind any Kconfig symbol.
+> > > > > > >
+> > > > > > > I have only build tested this on sandbox, and tested on qemu =
+arm64
+> > > > > > > virt platform. This being a RFC, I have not put this through =
+a CI run.
+> > > > > > >
+> > > > > > > Sughosh Ganu (5):
+> > > > > > >   dt: Provide a way to remove non-compliant nodes and propert=
+ies
+> > > > > > >   fwu: Add the fwu-mdata node for removal from devicetree
+> > > > > > >   capsule: Add the capsule-key property for removal from devi=
+cetree
+> > > > > > >   bootefi: Call the EVT_FT_FIXUP event handler
+> > > > > > >   doc: Add a document for non-compliant DT node/property remo=
+val
+> > > > > > >
+> > > > > > >  cmd/bootefi.c                                 | 18 +++++
+> > > > > > >  .../devicetree/dt_non_compliant_purge.rst     | 64 +++++++++=
++++++++
+> > > > > > >  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
+> > > > > > >  include/dt-structs.h                          | 11 +++
+> > > > > > >  lib/Makefile                                  |  1 +
+> > > > > > >  lib/dt_purge.c                                | 73 +++++++++=
+++++++++++
+> > > > > > >  lib/efi_loader/efi_capsule.c                  |  7 ++
+> > > > > > >  7 files changed, 179 insertions(+)
+> > > > > > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_p=
+urge.rst
+> > > > > > >  create mode 100644 lib/dt_purge.c
+> > > > > >
+> > > > > > What is the point of removing them? Instead, we should make sur=
+e that
+> > > > > > we upstream the bindings and encourage SoC vendors to sync them=
+. If we
+> > > > > > remove them, no one will bother and U-Boot just becomes a dumpi=
+ng
+> > > > > > ground.
+> > > > >
+> > > > > Well things like the binman entries in DT are U-Boot specific and=
+ not
+> > > > > useful for HW related descriptions or for Linux or another OS bei=
+ng
+> > > > > able to deal with HW so arguably we're already a dumping ground t=
+o
+> > > > > some degree for not defining hardware.
+> > > >
+> > > > I have started the process to upstream the binman bindings.
+> > >
+> > > I don't think they should be in DT at all, they don't describe
+> > > anything to do with hardware, or generally even the runtime of a
+> > > device, they don't even describe the boot/runtime state of the
+> > > firmware, they describe build time, so I don't see what that has to d=
+o
+> > > with device tree? Can you explain that? To me those sorts of things
+> > > should live in a build time style config file.
+>
+> For the record, I tend to agree.
+>
+> > I beg to differ. Devicetree is more than just hardware and always has
+> > been. See, for example the /chosen and /options nodes.
+>
+> There are exceptions...
 
-On 9/6/23 04:40, AKASHI Takahiro wrote:
-> This DM-compliant driver deals with SCMI pinctrl protocol and presents
-> gpio devices exposed by SCMI firmware (server).
-> 
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> ---
->   drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
->   1 file changed, 539 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
-> index 3ebdad57b86c..73d385bdbfcc 100644
-> --- a/drivers/pinctrl/pinctrl-scmi.c
-> +++ b/drivers/pinctrl/pinctrl-scmi.c
-> @@ -11,21 +11,20 @@
->   #include <malloc.h>
->   #include <scmi_agent.h>
->   #include <scmi_protocols.h>
-> +#include <asm-generic/gpio.h>
->   #include <dm/device_compat.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
->   #include <dm/pinctrl.h>
->   
->   /**
->    * struct scmi_pin - attributes for a pin
->    * @name:	Name of pin
-> - * @value:	Value of pin
-> - * @flags:	A set of flags
->    * @function:	Function selected
->    * @status:	An array of status of configuration types
->    */
->   struct scmi_pin {
->   	char		*name;
-> -	u32		value;
-> -	u32		flags;
+I wish we could stop having this discussion entirely...to me the
+devicetree is all that firmware has to handle its configuration, both
+within projects and across project boundaries. There is no user space,
+no filesystem, etc.
 
+>
+> > We need run-time configuration here, since we cannot know at build
+> > time what we will be asked to do by a previous firmware phase.
+>
+> Really, I don't want to have to care about the binman binding. If it is
+> u-boot specific, then it should stay in u-boot.
 
-You have added this in 3/6 then there is no reason to remove it in this version.
+I don't believe it is U-Boot-specific since it describes the system
+firmware as a whole. It collects things from multiple projects and we
+want to know where they ended up, so we can do firmware update, etc.
 
-M
+> I took /options/u-boot/,
+> but now I'm starting to have second thoughts on that being in dtschema
+> if it is going to be continually and frequently extended. Validating it
+> in SR does little. If a vendor is abusing /options/u-boot/ in some way
+> they could just as easily remove the node in their u-boot fork to pass.
+> SR is certainly not going to require the node be there.
+
+The challenge here is that we are trying to validate that the U-Boot
+DT matches the schema. We don't want to have people adding things
+willy nilly, even in /options/u-boot.
+
+>
+> On A/B updates, that really doesn't seem like a u-boot specific problem
+> to me. No one wants A/B updates in EDK2 or anything else?
+
+I agree we should specify it correctly and in a general manner.
+
+Regards,
+Simon
