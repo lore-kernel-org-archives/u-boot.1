@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7807AEE14D0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F035BEE14C3
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:32:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1828486998;
+	by phobos.denx.de (Postfix) with ESMTP id 5C55286A02;
 	Wed,  6 Sep 2023 23:30:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="v/UoRNhX";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xMTdAR4C";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EnNnFE/c";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wUQqn5wI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90ED9869A0; Wed,  6 Sep 2023 23:30:47 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id A5384869E5; Wed,  6 Sep 2023 23:30:47 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BC7C869A0
+ by phobos.denx.de (Postfix) with ESMTPS id A5B8A869BB
  for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RgwXN02bKz9sjN;
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RgwXN4XWvz9sW6;
  Wed,  6 Sep 2023 23:30:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694035844;
@@ -39,39 +39,38 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xNvKj4CUZ/gO0qfu0wcIAYT9+yMOEf+ABmLbCG1eE2U=;
- b=v/UoRNhX4TwFVkzgPtHKlKrS+i9bbdcmxMTfsa3T/Ms+2zd9TrJgYOhqTlpXIzj+v8hiK8
- +vAcidzRbX8XjLJzISjz6QsIf0uwzrZAbNLqsz0ylRJhQVjSN1CAlmTBxj1LqjE4jKtx+D
- GU9OZSyN8usEhqGFd+n/hTZt8UMdZ6d6z00LqP1m5oiOPpzr+LzThRPHmZ3XZY4zIbsJfG
- gTXVxLD/Atmxycv/1Dj/Nr6rkoi/yf635zdKYnsknJM14FIXCwwAS/Actpp6okOfpWcheg
- 7ALbXSBHHtXOJnSmnPdGSF6HS6q5TGXFWZmBhAudorG5/Z2VX1r9NpjGYVpHPA==
+ bh=VVvD6obeEthv5Sf3MLjm/PMVWHLhH5TaAKpyLR8v/hQ=;
+ b=EnNnFE/c66IxPxoaTDpPpZQIh8EtTd6GTJcBqeC7W3pwVFnPNPttIpdMIT4EQxhL9/Lg2N
+ 1N+QeBxydCRkxEZxAm+Cr20tF2ttS6CtLeLmOmcrY0FiIuNIDf3EEMn/wctCONrEJJBfxO
+ blbiEoHhtWeaJwWYw+XawNa3hd4ceLNYNmN3sZkRnO0/nLZQbhYu+GCaUQPDnVT2AJ6vwk
+ xd7Re5i5XlyIc60RJtSGWTaW73ONaqddpK61oFlmCwYmRKhbbnT+HJsMewLrBkYVpaXePw
+ M6kdSHrNmFV52/8ZvoNEOyr/JZ8Z2OrBOGUMszHrhG/ZAWGQoXv20hUgLa+n+A==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035841;
+ s=mail20150812; t=1694035842;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xNvKj4CUZ/gO0qfu0wcIAYT9+yMOEf+ABmLbCG1eE2U=;
- b=xMTdAR4Ckc7bIMibm3yYTQrlLLAl02bct8RhHabOa8+s1yV7YsZqTxG/PnvGz7AMi8+xBC
- 5eBpPaGuXrWIuHrL0xmq4Udv9hWVInfwNWB5LioXjIMjYZveCyMCFzhf4jw7GEKHQ0TgU4
- 2JMpb0GrwJaEGNIzo178ogpL5ibBaDBDGRFBnkqgaS6ayt284mPF10uDBy6AaTdBpTtt3g
- eVBgWlb2n0XZZy1w0OCfv/YPRHdPbss17FCmfLV7V8dn7AsrWGi2QpY0U1GYSY3QAG7YZ/
- R5lWKKntvAYXAdzCm799KG9Q9xjB4EFql+u2tjuSULs6Gpnql8DgIDBUiYZBIw==
+ bh=VVvD6obeEthv5Sf3MLjm/PMVWHLhH5TaAKpyLR8v/hQ=;
+ b=wUQqn5wIWmbKREW+1nTW/fTCxdMbTmLv861UjBjMQAXhD3Z1S+JGB8DVUCu6znSZk2Uftp
+ BfRfAEeRKA+xbZKJ17Ex45y1Qgw1l645HAVfNPpBGSe8XfX9xN17xQFkh+ylokygnvVaDP
+ JrmKdFWSutHBy6SyrfaMD2vFSEnqlvaB1Q8jZxUrekwba3kKHB9/nYGAUG3tIBKsnARY4D
+ seJPI2wHzjxfOuYDLtVFtW2be94mBPp6WHUNtauzKD/41Z2+Hrb7zm3SRKyCz5c7ItZ0pH
+ hEgVAjyWl4ffuGQezejqJ8EPmbbF7mX8/xdDnS/6mB6Mgwph9UjcBpsA9hgSPw==
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 06/35] common: malloc: Remove unused NEEDS_MANUAL_RELOC code
+Subject: [PATCH 07/35] common: event: Remove unused NEEDS_MANUAL_RELOC code
  bits
-Date: Wed,  6 Sep 2023 23:29:46 +0200
-Message-Id: <20230906213015.203437-7-marek.vasut+renesas@mailbox.org>
+Date: Wed,  6 Sep 2023 23:29:47 +0200
+Message-Id: <20230906213015.203437-8-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 4hjy13due494jm8rxe5k6pn1kgs775i4
-X-MBO-RS-ID: 0210d69280749094a0b
-X-Rspamd-Queue-Id: 4RgwXN02bKz9sjN
+X-MBO-RS-ID: 618dfdeaffa6654cc28
+X-MBO-RS-META: mgewjy7k1oowtax1pbfxyr9h53nbsp64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,41 +93,71 @@ Remove now unused NEEDS_MANUAL_RELOC code.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- common/dlmalloc.c | 14 --------------
- 1 file changed, 14 deletions(-)
+ common/board_r.c |  3 ---
+ common/event.c   | 14 --------------
+ include/event.h  | 10 ----------
+ 3 files changed, 27 deletions(-)
 
-diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-index 0f9b7262d51..ebf0f27e165 100644
---- a/common/dlmalloc.c
-+++ b/common/dlmalloc.c
-@@ -575,19 +575,6 @@ static mbinptr av_[NAV * 2 + 2] = {
-  IAV(120), IAV(121), IAV(122), IAV(123), IAV(124), IAV(125), IAV(126), IAV(127)
- };
- 
--#ifdef CONFIG_NEEDS_MANUAL_RELOC
--static void malloc_bin_reloc(void)
--{
--	mbinptr *p = &av_[2];
--	size_t i;
--
--	for (i = 2; i < ARRAY_SIZE(av_); ++i, ++p)
--		*p = (mbinptr)((ulong)*p + gd->reloc_off);
--}
--#else
--static inline void malloc_bin_reloc(void) {}
+diff --git a/common/board_r.c b/common/board_r.c
+index 630c104a985..e30963339cf 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -590,9 +590,6 @@ static init_fnc_t init_sequence_r[] = {
+ 	 */
+ #endif
+ 	initr_reloc_global_data,
+-#if IS_ENABLED(CONFIG_NEEDS_MANUAL_RELOC) && CONFIG_IS_ENABLED(EVENT)
+-	event_manual_reloc,
 -#endif
--
- #ifdef CONFIG_SYS_MALLOC_DEFAULT_TO_INIT
- static void malloc_init(void);
+ #if defined(CONFIG_SYS_INIT_RAM_LOCK) && defined(CONFIG_E500)
+ 	initr_unlock_ram_in_cache,
  #endif
-@@ -634,7 +621,6 @@ void mem_malloc_init(ulong start, ulong size)
- #ifdef CONFIG_SYS_MALLOC_CLEAR_ON_INIT
- 	memset((void *)mem_malloc_start, 0x0, size);
- #endif
--	malloc_bin_reloc();
+diff --git a/common/event.c b/common/event.c
+index d11b37a1d80..3080d9ed754 100644
+--- a/common/event.c
++++ b/common/event.c
+@@ -168,20 +168,6 @@ void event_show_spy_list(void)
+ 	}
  }
  
- /* field-extraction macros */
+-#if IS_ENABLED(CONFIG_NEEDS_MANUAL_RELOC)
+-int event_manual_reloc(void)
+-{
+-	struct evspy_info *spy, *end;
+-
+-	spy = ll_entry_start(struct evspy_info, evspy_info);
+-	end = ll_entry_end(struct evspy_info, evspy_info);
+-	for (; spy < end; spy++)
+-		MANUAL_RELOC(spy->func);
+-
+-	return 0;
+-}
+-#endif
+-
+ #if CONFIG_IS_ENABLED(EVENT_DYNAMIC)
+ static void spy_free(struct event_spy *spy)
+ {
+diff --git a/include/event.h b/include/event.h
+index 311df878c4a..be4cefd6ae8 100644
+--- a/include/event.h
++++ b/include/event.h
+@@ -328,16 +328,6 @@ int event_register(const char *id, enum event_t type, event_handler_t func,
+ /** event_show_spy_list( - Show a list of event spies */
+ void event_show_spy_list(void);
+ 
+-/**
+- * event_manual_reloc() - Relocate event handler pointers
+- *
+- * Relocate event handler pointers for all static event spies. It is called
+- * during the generic board init sequence, after relocation.
+- *
+- * Return: 0 if OK
+- */
+-int event_manual_reloc(void);
+-
+ /**
+  * event_type_name() - Get the name of an event type
+  *
 -- 
 2.40.1
 
