@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A4C2EE14D0
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A0AEE14D0
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 21:33:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC68A86A3C;
-	Wed,  6 Sep 2023 23:30:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FF9586A45;
+	Wed,  6 Sep 2023 23:30:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mSs2VXbB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="B3q1kEY3";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hLiX4OX5";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eK9a05Eb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82CCB86A24; Wed,  6 Sep 2023 23:30:53 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id BA4A78698F; Wed,  6 Sep 2023 23:30:53 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1C4986963
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F7ED869A0
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 23:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,20 +32,20 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RgwXV3bPvz9sjN;
- Wed,  6 Sep 2023 23:30:50 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RgwXW0zYrz9sW6;
+ Wed,  6 Sep 2023 23:30:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694035850;
+ s=mail20150812; t=1694035851;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bplSA57tqql5dFfTEUR3cu2y+vV7myXYRWQWwTLcb8Q=;
- b=mSs2VXbBn4R0aLzdhyFxiGr5y52kbgvSWh9rEGsEI4DdjrPaA0LQvj7gU6F4GSycq10dF4
- Of3NV56gvf1qVJ7cC6s+dTFsPJ5Xjde9tTpUqh6NKRgJp9q2FtZA4u4NUPMY8NhueuYjcv
- TtduxYBYu0O843899aWe8N5RH7LmbCZLDLJC0CZhfUg2WDFM5uNnLDZ0t1PcMLK5ll7uQL
- 5JCdVvjufzs6di2U/ndtGa5fWjE1DKEOGn1SndbRRQtllPI78VDC833/yIIZ1A1Tj9A98n
- v6Muf3GVdraxbES2EBRlJRcSPe1yJlk/J/uoZlCYu8pi0LBijX5WItNEY+fQhg==
+ bh=rzdqsVK9ioXf36CXQi6HFn3nlnDw8S6sDg4Yen337kc=;
+ b=hLiX4OX5V0ba94p9J15J/9ES+uzl8eCQY4QXg/4u7TJHdZJft90L829GWABy5e6HZmG24H
+ Xc6nEYkd2i+58A/OSBCVSF/Pw9XsUbJjZhrOBEe9f68Hn6LkCF3hCJb4f4CHmtcdDou7YV
+ dgCk6uuIjmxf3MzZsZtaLHERBeZnpC1a0fCLSvt8EBuG9hOjRBDdXhv8vZqdJEksmjvhTp
+ yW7hO6lX2BK/0vL6wLYZMBdSJMCrs2+NEtDKspXlYGkuek14spmXz3MB/A5RlGHFckZX0z
+ ak40qvIm/c1dps3nc7Jwzjmm8t+CJJS1/yGmEdcAj/sqOc8k0zNc8KsSdWYk5w==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694035848;
@@ -52,25 +53,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bplSA57tqql5dFfTEUR3cu2y+vV7myXYRWQWwTLcb8Q=;
- b=B3q1kEY3+NSP7Qs+uC11icsFI4OEiytMRGsJ7/j41Mkl/XulRyFmWMjr16AAoziK4K66zz
- fcSHw6VvfLuf0885c0+iaelqTjOJ6drU1cjVtdfiti18DfBLiBru0KILOoRVBOk01HIhS1
- RPiotdk+IMC2mvYT9YTgpS+O3oIbAbuhWHY05fFQFHo77jZroJHZfXy1rSbpuCmIa3Y2yC
- +E85Z0yzk0INeVaPDNXT5/TMBCfMQYn+7waSNd/drFwoVINOTeyzCid1MpVj5ElvTWtjnI
- 1t7jB67+0jMjzXRb/Kv0jyMdlsFCuecBXsRb09JtxWFqhICyKnLpxIwhgksBeg==
+ bh=rzdqsVK9ioXf36CXQi6HFn3nlnDw8S6sDg4Yen337kc=;
+ b=eK9a05EbSMEbMmB9qdBB2WVpBFhbAGKM35q+GpKzxjGmX/NH87hcIWEKdW7JzeL8oIaHed
+ o/m7NsNAelT+e19iLYnVG9z9TWkXkdKz9eJAmdt/HpR+slM9hqBmoA9hS33B8U5mkyJ1jT
+ SVfQ7KIXSK87xy+SgXFAs7wJKYpOvy7G8i3gboEpueitP9aAbLXOWaT8BtonqKdV+a3rG9
+ YdDqOQFsm1MBSIjNu1KAY6L66wZB4zD0aCroV+Ye+t/nkjogOdoAIBLsiLxojJkxwl4XsJ
+ aRwkD97JffZtf5XbdUPcGGkJRutUWFiAf9tqrtVoDkwUq62Tm4RbcImMZwht0A==
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 16/35] dm: Remove unused NEEDS_MANUAL_RELOC code bits
-Date: Wed,  6 Sep 2023 23:29:56 +0200
-Message-Id: <20230906213015.203437-17-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 17/35] env: Remove unused NEEDS_MANUAL_RELOC code bits
+Date: Wed,  6 Sep 2023 23:29:57 +0200
+Message-Id: <20230906213015.203437-18-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: eeb5246d442914f5ffe
-X-MBO-RS-META: kkz6a84qbg7knfi6at7puekttuf7jkwc
-X-Rspamd-Queue-Id: 4RgwXV3bPvz9sjN
+X-MBO-RS-META: tw8qd1ny4h764opfh9oa7dpyehfigtbz
+X-MBO-RS-ID: 8d2da5a4d31ae72a836
+X-Rspamd-Queue-Id: 4RgwXW0zYrz9sW6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,108 +94,116 @@ Remove now unused NEEDS_MANUAL_RELOC code.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/core/root.c | 81 ---------------------------------------------
- 1 file changed, 81 deletions(-)
+ env/callback.c | 12 ------------
+ env/common.c   |  4 ----
+ env/env.c      | 23 -----------------------
+ include/env.h  |  5 -----
+ 4 files changed, 44 deletions(-)
 
-diff --git a/drivers/core/root.c b/drivers/core/root.c
-index 79d871ab291..47b1320a441 100644
---- a/drivers/core/root.c
-+++ b/drivers/core/root.c
-@@ -55,81 +55,6 @@ void dm_fixup_for_gd_move(struct global_data *new_gd)
+diff --git a/env/callback.c b/env/callback.c
+index 638a02b28f7..98ddba035ea 100644
+--- a/env/callback.c
++++ b/env/callback.c
+@@ -9,10 +9,6 @@
+ #include <env_internal.h>
+ #include <asm/global_data.h>
+ 
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-DECLARE_GLOBAL_DATA_PTR;
+-#endif
+-
+ /*
+  * Look up a callback function pointer by name
+  */
+@@ -71,11 +67,7 @@ void env_callback_init(struct env_entry *var_entry)
+ 	if (!ret && strlen(callback_name)) {
+ 		clbkp = find_env_callback(callback_name);
+ 		if (clbkp != NULL)
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-			var_entry->callback = clbkp->callback + gd->reloc_off;
+-#else
+ 			var_entry->callback = clbkp->callback;
+-#endif
  	}
  }
  
--void fix_drivers(void)
--{
--	struct driver *drv =
--		ll_entry_start(struct driver, driver);
--	const int n_ents = ll_entry_count(struct driver, driver);
--	struct driver *entry;
--
--	for (entry = drv; entry != drv + n_ents; entry++) {
--		if (entry->of_match)
--			entry->of_match = (const struct udevice_id *)
--				((ulong)entry->of_match + gd->reloc_off);
--		if (entry->bind)
--			entry->bind += gd->reloc_off;
--		if (entry->probe)
--			entry->probe += gd->reloc_off;
--		if (entry->remove)
--			entry->remove += gd->reloc_off;
--		if (entry->unbind)
--			entry->unbind += gd->reloc_off;
--		if (entry->of_to_plat)
--			entry->of_to_plat += gd->reloc_off;
--		if (entry->child_post_bind)
--			entry->child_post_bind += gd->reloc_off;
--		if (entry->child_pre_probe)
--			entry->child_pre_probe += gd->reloc_off;
--		if (entry->child_post_remove)
--			entry->child_post_remove += gd->reloc_off;
--		/* OPS are fixed in every uclass post_probe function */
--		if (entry->ops)
--			entry->ops += gd->reloc_off;
--	}
--}
--
--void fix_uclass(void)
--{
--	struct uclass_driver *uclass =
--		ll_entry_start(struct uclass_driver, uclass_driver);
--	const int n_ents = ll_entry_count(struct uclass_driver, uclass_driver);
--	struct uclass_driver *entry;
--
--	for (entry = uclass; entry != uclass + n_ents; entry++) {
--		if (entry->post_bind)
--			entry->post_bind += gd->reloc_off;
--		if (entry->pre_unbind)
--			entry->pre_unbind += gd->reloc_off;
--		if (entry->pre_probe)
--			entry->pre_probe += gd->reloc_off;
--		if (entry->post_probe)
--			entry->post_probe += gd->reloc_off;
--		if (entry->pre_remove)
--			entry->pre_remove += gd->reloc_off;
--		if (entry->child_post_bind)
--			entry->child_post_bind += gd->reloc_off;
--		if (entry->child_pre_probe)
--			entry->child_pre_probe += gd->reloc_off;
--		if (entry->init)
--			entry->init += gd->reloc_off;
--		if (entry->destroy)
--			entry->destroy += gd->reloc_off;
--	}
--}
--
--void fix_devices(void)
--{
--	struct driver_info *dev =
--		ll_entry_start(struct driver_info, driver_info);
--	const int n_ents = ll_entry_count(struct driver_info, driver_info);
--	struct driver_info *entry;
--
--	for (entry = dev; entry != dev + n_ents; entry++) {
--		if (entry->plat)
--			entry->plat += gd->reloc_off;
--	}
--}
--
- static int dm_setup_inst(void)
- {
- 	DM_ROOT_NON_CONST = DM_DEVICE_GET(root);
-@@ -181,12 +106,6 @@ int dm_init(bool of_live)
- 		INIT_LIST_HEAD(DM_UCLASS_ROOT_NON_CONST);
+@@ -112,11 +104,7 @@ static int set_callback(const char *name, const char *value, void *priv)
+ 			/* assign the requested callback */
+ 			clbkp = find_env_callback(value);
+ 			if (clbkp != NULL)
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-				ep->callback = clbkp->callback + gd->reloc_off;
+-#else
+ 				ep->callback = clbkp->callback;
+-#endif
+ 		}
  	}
  
--	if (IS_ENABLED(CONFIG_NEEDS_MANUAL_RELOC)) {
--		fix_drivers();
--		fix_uclass();
--		fix_devices();
--	}
+diff --git a/env/common.c b/env/common.c
+index 4cf2dadc694..21045a7eb33 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -428,10 +428,6 @@ int env_export(env_t *env_out)
+ 
+ void env_relocate(void)
+ {
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-	env_fix_drivers();
+-	env_htab.change_ok += gd->reloc_off;
+-#endif
+ 	if (gd->env_valid == ENV_INVALID) {
+ #if defined(CONFIG_ENV_IS_NOWHERE) || defined(CONFIG_SPL_BUILD)
+ 		/* Environment not changable */
+diff --git a/env/env.c b/env/env.c
+index 2aa52c98f8f..bae3f6482ae 100644
+--- a/env/env.c
++++ b/env/env.c
+@@ -14,29 +14,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-#if defined(CONFIG_NEEDS_MANUAL_RELOC)
+-void env_fix_drivers(void)
+-{
+-	struct env_driver *drv;
+-	const int n_ents = ll_entry_count(struct env_driver, env_driver);
+-	struct env_driver *entry;
 -
- 	if (CONFIG_IS_ENABLED(OF_PLATDATA_INST)) {
- 		ret = dm_setup_inst();
- 		if (ret) {
+-	drv = ll_entry_start(struct env_driver, env_driver);
+-	for (entry = drv; entry != drv + n_ents; entry++) {
+-		if (entry->name)
+-			entry->name += gd->reloc_off;
+-		if (entry->load)
+-			entry->load += gd->reloc_off;
+-		if (entry->save)
+-			entry->save += gd->reloc_off;
+-		if (entry->erase)
+-			entry->erase += gd->reloc_off;
+-		if (entry->init)
+-			entry->init += gd->reloc_off;
+-	}
+-}
+-#endif
+-
+ static struct env_driver *_env_driver_lookup(enum env_location loc)
+ {
+ 	struct env_driver *drv;
+diff --git a/include/env.h b/include/env.h
+index b28886d80b9..430c4fa94a4 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -239,11 +239,6 @@ int eth_env_get_enetaddr(const char *name, uint8_t *enetaddr);
+  */
+ int eth_env_set_enetaddr(const char *name, const uint8_t *enetaddr);
+ 
+-/**
+- * env_fix_drivers() - Updates envdriver as per relocation
+- */
+-void env_fix_drivers(void);
+-
+ /**
+  * env_set_default_vars() - reset variables to their default value
+  *
 -- 
 2.40.1
 
