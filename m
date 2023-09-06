@@ -4,76 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D2FEB8FA5
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 04:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1469DEB8FAD
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 04:30:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02D0286553;
-	Wed,  6 Sep 2023 06:00:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 02A7E86553;
+	Wed,  6 Sep 2023 06:30:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nqrWtGa9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ws8J22EI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08D708666B; Wed,  6 Sep 2023 06:00:38 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 137238656A; Wed,  6 Sep 2023 06:30:00 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36BBE86553
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 06:00:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68BA686308
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 06:29:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-58cbdf3eecaso30771667b3.0
- for <u-boot@lists.denx.de>; Tue, 05 Sep 2023 21:00:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1693972834; x=1694577634; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AsL93w0JohuxWulQ84FPpRM9tCMtvR9c9+Dc+Wa9pdw=;
- b=nqrWtGa96Nt9yHli4XeAbDqf81q89l458Hy1IJJH15ms7rfE3TODSxyoxX4ur5VB+P
- jWYs8UIdRVejUKbihTwV9WltXjwN0SzCUfG9lqYk0vqDXVh8VA3vVkN+mFpWjK+HsziC
- mKOmPYAeXd3RM6ns+c8V9+x5+tJec/hfbVxy7YmYznVlhTJeB/jUmoqY7Gwbr3/uimUe
- 2aSBCKwurJccyfw2zsxIY3MM67v037vTWPC5Jc99I0J9QmBXL4sjCT58h8dKBZhDj+VZ
- N8dPmr6s6K5WJiifYgwtMMXEeQekEXBb+Ks7OadJOWCqTDsVhFymvbjJzbItlmnxNedg
- lamA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693972834; x=1694577634;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AsL93w0JohuxWulQ84FPpRM9tCMtvR9c9+Dc+Wa9pdw=;
- b=Q/ockfKY+4UVYVhhBItSgiTspkJa2J7wOuoDL+0KqGnVHxCvzytbMsyW/ez/arx6OZ
- JEd/zhrB4O4EGM1R5l7rCytGypBqoDhcKB3EE7cTw5IjJi9SQ94OyNksanSFbP5fcziP
- gbFkI+mZbQqtRtwFoPWqbOiq8ahjFV7YhG6c7fB9/PAB4Tmb2EJD/acVgFQAE6xdndcm
- 4XGZI9pjV9OBHfOVXdhXCIkxT5Ah2UQ+0zHBzh73VqQnhavtxSSnWiJnE6wZMu6Vl64/
- jt42LCb9oI/QNwzN9BRBpzO+8SXryVixe1F8WXP4igWnehZYsXcskVtmHO03xnixfSNz
- Ix9g==
-X-Gm-Message-State: AOJu0YxU+bq4OIScMEhCrDsEubqB0VuPn1+ZQLKNVmgGft9Fn9/XxvH0
- eeIQhSTWmH43Drsaz1ISE7Q=
-X-Google-Smtp-Source: AGHT+IEGqX3h+CF93VIR1sHCwfGwAya00aMFmnrdx79/da8D24z1JM4mWX2Fad+lB0yNmp3UXVIY+A==
-X-Received: by 2002:a0d:d747:0:b0:592:264c:a88c with SMTP id
- z68-20020a0dd747000000b00592264ca88cmr16949960ywd.18.1693972833808; 
- Tue, 05 Sep 2023 21:00:33 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- t144-20020a0dea96000000b005839a780c29sm3510214ywe.102.2023.09.05.21.00.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Sep 2023 21:00:33 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH] bootstd: sata: Add bootstd support for ahci sata
-Date: Tue,  5 Sep 2023 21:00:02 -0700
-Message-Id: <20230906040002.19267-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3864TtL9096758;
+ Tue, 5 Sep 2023 23:29:55 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1693974595;
+ bh=O/B7QWYZespmLiOmBapypC6Sv0YLsHLAh28ugPPd1zg=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Ws8J22EIK1SHm96zy6dCStWU4b69ReWNXHP/09ucdCMkoE0vSC2YyZdSmlPBKp554
+ MSP9939fFKjrwPgaG8cLGyMYWmVPW24kuqH/eropeqHo2Y9cvlJvncemTXhpkxF7w/
+ t2bqVBJBByuBf9VbAABXBaIuplQtKTwoqIDZ8Z+A=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3864TtOa064748
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 5 Sep 2023 23:29:55 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
+ Sep 2023 23:29:54 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 5 Sep 2023 23:29:54 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3864TrkL086160;
+ Tue, 5 Sep 2023 23:29:54 -0500
+Date: Wed, 6 Sep 2023 09:59:53 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
+Subject: Re: [PATCH v4 6/6] board: ti: j721s2: MAINTAINERS: Update the
+ MAINTAINERS File.
+Message-ID: <20230906042953.agilh3r2wsf4ztvv@ula0497581>
+References: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v4-6-dc114bece5d7@ti.com>
+ <20230905122712.q3l3ecsygad4jsry@quality>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230905122712.q3l3ecsygad4jsry@quality>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,152 +84,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ahci sata bootdev and corresponding hunting function.
+On 07:27-20230905, Nishanth Menon wrote:
+> On 16:08-20230904, Manorit Chawdhry wrote:
+> > Update the MAINTAINERS file and propose a new MAINTAINER for j721s2 due
+> > to the previous MAINTAINER not being associated with TI.
+> > 
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> >  board/ti/j721s2/MAINTAINERS | 11 +++++++++--
+> >  1 file changed, 9 insertions(+), 2 deletions(-)
+> > 
+> 
+> For whatever it is worth:
+> 
+> Reviewed-by: Nishanth Menon <nm@ti.com>
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+Thanks for your reviews Nishanth!
 
- drivers/ata/Makefile       |  1 +
- drivers/ata/sata.c         | 25 +++++++++++++++
- drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
- include/sata.h             |  1 +
- 4 files changed, 89 insertions(+)
- create mode 100644 drivers/ata/sata_bootdev.c
+Regards,
+Manorit
 
-diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
-index 6e30180b8b..c1b51b5444 100644
---- a/drivers/ata/Makefile
-+++ b/drivers/ata/Makefile
-@@ -11,6 +11,7 @@ obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
- obj-$(CONFIG_FSL_SATA) += fsl_sata.o
- obj-$(CONFIG_LIBATA) += libata.o
- obj-$(CONFIG_SATA) += sata.o
-+obj-$(CONFIG_BOOTSTD) += sata_bootdev.o
- obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
- obj-$(CONFIG_SATA_MV) += sata_mv.o
- obj-$(CONFIG_SATA_SIL) += sata_sil.o
-diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-index ce3e9b5a40..9da7218564 100644
---- a/drivers/ata/sata.c
-+++ b/drivers/ata/sata.c
-@@ -15,6 +15,8 @@
- #include <dm.h>
- #include <part.h>
- #include <sata.h>
-+#include <dm/device-internal.h>
-+#include <dm/uclass-internal.h>
- 
- #ifndef CONFIG_AHCI
- struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
-@@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
- 	return ops->scan(dev);
- }
- 
-+int sata_rescan(bool verbose)
-+{
-+	struct udevice *dev;
-+	int devnum = 0;
-+	int ret;
-+
-+	/* Find and probing the SATA controller */
-+	ret = uclass_get_device(UCLASS_AHCI, devnum, &dev);
-+
-+	/* Sanity check */
-+	if (ret)
-+		ret = uclass_find_first_device(UCLASS_AHCI, &dev);
-+	if (ret) {
-+		printf("Cannot probe SATA device %d (err=%d)\n", devnum, ret);
-+		return -ENOSYS;
-+	}
-+	if (!dev) {
-+		printf("No SATA device found!\n");
-+		return -ENOSYS;
-+	}
-+	return 0;
-+}
-+
- #ifndef CONFIG_AHCI
- #ifdef CONFIG_PARTITIONS
- struct blk_desc *sata_get_dev(int dev)
-diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
-new file mode 100644
-index 0000000000..f638493ce0
---- /dev/null
-+++ b/drivers/ata/sata_bootdev.c
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bootdev for sata
-+ *
-+ * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
-+ */
-+
-+#include <common.h>
-+#include <ahci.h>
-+#include <bootdev.h>
-+#include <dm.h>
-+#include <init.h>
-+#include <sata.h>
-+
-+static int sata_bootdev_bind(struct udevice *dev)
-+{
-+	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
-+
-+	ucp->prio = BOOTDEVP_4_SCAN_FAST;
-+
-+	return 0;
-+}
-+
-+static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
-+{
-+	int ret;
-+
-+	if (IS_ENABLED(CONFIG_PCI)) {
-+		ret = pci_init();
-+		if (ret)
-+			return ret;
-+	}
-+
-+	ret = sata_rescan(true);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+struct bootdev_ops sata_bootdev_ops = {
-+};
-+
-+static const struct udevice_id sata_bootdev_ids[] = {
-+	{ .compatible = "u-boot,bootdev-sata" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(sata_bootdev) = {
-+	.name		= "sata_bootdev",
-+	.id		= UCLASS_BOOTDEV,
-+	.ops		= &sata_bootdev_ops,
-+	.bind		= sata_bootdev_bind,
-+	.of_match	= sata_bootdev_ids,
-+};
-+
-+BOOTDEV_HUNTER(sata_bootdev_hunter) = {
-+	.prio		= BOOTDEVP_4_SCAN_FAST,
-+	.uclass		= UCLASS_AHCI,
-+	.hunt		= sata_bootdev_hunt,
-+	.drv		= DM_DRIVER_REF(sata_bootdev),
-+};
-diff --git a/include/sata.h b/include/sata.h
-index d89f7a8a29..0495744bad 100644
---- a/include/sata.h
-+++ b/include/sata.h
-@@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
- 
- int sata_probe(int devnum);
- int sata_remove(int devnum);
-+int sata_rescan(bool verbose);
- 
- #endif
--- 
-2.39.2
-
+> 
+> -- 
+> Regards,
+> Nishanth Menon
+> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
