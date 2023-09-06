@@ -4,68 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B8ADEB8FD2
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC51EB8FDB
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:34:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB14B86546;
-	Wed,  6 Sep 2023 16:21:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE530865A8;
+	Wed,  6 Sep 2023 16:34:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gc/RZfjO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G7E0sAbA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B6E88643D; Wed,  6 Sep 2023 16:21:45 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id D8A4A86977; Wed,  6 Sep 2023 16:34:47 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF4D3865A2
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:21:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CFCC8643D
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:34:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=BIxy=EW=robh_at_kernel.org=rob@kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 455D9B81AD2;
- Wed,  6 Sep 2023 14:21:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46689C433C8;
- Wed,  6 Sep 2023 14:21:40 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTPS id E8805CE16C1
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 14:34:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BE66C433CA
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 14:34:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1694010101;
- bh=QbAd/TQ8WCHZRFkkxQMRVcDckFRyvm+rJV5QkeUeW8A=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=gc/RZfjOd1UDlSN6a8sVoaPlTbE+9NRr2Dc7fpKD2yECCxZxB1Z7O/pirs3Jwpqu6
- FJv3bXDzpt7T3++1iXHMh82jIfS+G3bNLJ1cbcd2MlE37mgKxoLyyPkK1pZna6a2U3
- f2wYup5Wfq93lX3KsJt5+i9jIzT9aW8efb7088tByfU7hpZ6AxNbsltY3dd/NUUWXQ
- 2l8fPIsN2YjrOrTJjyWoOny9aRGgWgu8m3500un4hxS5vSz7zbwfGp55sJis/hxfcP
- NJdatDKEdVqZAcpU7dxxIL7KOGTAJeXld3LVzz0aChTvbo1ySSJ+q6zuC6kPErMmEz
- /sPMMv/1DHFhQ==
-Received: (nullmailer pid 1275640 invoked by uid 1000);
- Wed, 06 Sep 2023 14:21:39 -0000
-Date: Wed, 6 Sep 2023 09:21:39 -0500
-From: Rob Herring <robh@kernel.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <20230906142139.GA1236014-robh@kernel.org>
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
- <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
- <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
+ s=k20201202; t=1694010879;
+ bh=5CgX0qwVwa7r31LHexER1pGw9ZB7C7bXkkhE9p8u1dM=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=G7E0sAbA9XzGssy6wa8hjot6QZDI1nr1S1Er5vJsDaKFsTqzgGz9byJNYpYMc1euI
+ 2jzTFadEvLVMiEZi+pNRel2r4cgHtZ9HC4ojL4mNLGQsENyLwnu96F93QQ9exMPSbM
+ X/fuATA+0tbteX6ohecGHwRQ0TPf/TjOWDsgknbqFCnRnkkz4iB2juCysN7FYbdGV7
+ OsOtXCk0OWHth8BnhEnT79qO5c/Sn/D0Frj4qhHyr434I9Tv5o2Z+QFbv4HvH2SeiP
+ 50IAQHeckeBsWNLLAVW2BhWMj4EZUGaSenYqLJRhSV1SatxbMowkjP3jk4Pcx/K/mF
+ A/CO0MsR+RIWQ==
+Received: by mail-lj1-f179.google.com with SMTP id
+ 38308e7fff4ca-2bd0d135ca3so63505501fa.3
+ for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:34:39 -0700 (PDT)
+X-Gm-Message-State: AOJu0Yws1LoOWkXTyMjwi5BnwCepIg7vVEKILILyF+j/xlQVun3XpoUX
+ cXzQNzuhY2a5UtciJYa0PQUY81ZXVDlstHi51A==
+X-Google-Smtp-Source: AGHT+IHmZe9ADeT4s6VgDMevloEJ4hor33qOF7jCIYcpLWo61GuYHIGx/ltJxqfIj+RnbcHpgsYGiiy7WZsnHrujp7c=
+X-Received: by 2002:a2e:9811:0:b0:2bc:efa4:2c36 with SMTP id
+ a17-20020a2e9811000000b002bcefa42c36mr2221334ljj.11.1694010877155; Wed, 06
+ Sep 2023 07:34:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
+References: <20230830231758.2561402-1-sjg@chromium.org>
+ <20230830231758.2561402-3-sjg@chromium.org>
+ <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
+In-Reply-To: <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
+From: Rob Herring <robh@kernel.org>
+Date: Wed, 6 Sep 2023 09:34:24 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
+Message-ID: <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
+Subject: Re: [PATCH v5 3/4] schemas: Add some common reserved-memory usages
+To: Ard Biesheuvel <ardb@kernel.org>, Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ ron minnich <rminnich@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
+ Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>, 
+ Chiu Chasel <chasel.chiu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,94 +90,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 28, 2023 at 04:09:29PM -0600, Simon Glass wrote:
-> Hi Peter,
-> 
-> On Mon, 28 Aug 2023 at 14:29, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Tue, Sep 5, 2023 at 4:44=E2=80=AFPM Ard Biesheuvel <ardb@kernel.org> wro=
+te:
+>
+> On Thu, 31 Aug 2023 at 01:18, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Mon, Aug 28, 2023 at 6:54 PM Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Peter,
-> > >
-> > > On Mon, 28 Aug 2023 at 10:37, Peter Robinson <pbrobinson@gmail.com> wrote:
-> > > >
-> > > > On Mon, Aug 28, 2023 at 5:20 PM Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > On Sat, 26 Aug 2023 at 03:07, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > > >
-> > > > > >
-> > > > > > Provide a way for removing certain devicetree nodes and/or properties
-> > > > > > from the devicetree. This is needed to purge certain nodes and
-> > > > > > properties which may be relevant only in U-Boot. Such nodes and
-> > > > > > properties are then removed from the devicetree before it is passed to
-> > > > > > the kernel. This ensures that the devicetree passed to the OS does not
-> > > > > > contain any non-compliant nodes and properties.
-> > > > > >
-> > > > > > The removal of the nodes and properties is being done through an
-> > > > > > EVT_FT_FIXUP handler. I am not sure if the removal code needs to be
-> > > > > > behind any Kconfig symbol.
-> > > > > >
-> > > > > > I have only build tested this on sandbox, and tested on qemu arm64
-> > > > > > virt platform. This being a RFC, I have not put this through a CI run.
-> > > > > >
-> > > > > > Sughosh Ganu (5):
-> > > > > >   dt: Provide a way to remove non-compliant nodes and properties
-> > > > > >   fwu: Add the fwu-mdata node for removal from devicetree
-> > > > > >   capsule: Add the capsule-key property for removal from devicetree
-> > > > > >   bootefi: Call the EVT_FT_FIXUP event handler
-> > > > > >   doc: Add a document for non-compliant DT node/property removal
-> > > > > >
-> > > > > >  cmd/bootefi.c                                 | 18 +++++
-> > > > > >  .../devicetree/dt_non_compliant_purge.rst     | 64 ++++++++++++++++
-> > > > > >  drivers/fwu-mdata/fwu-mdata-uclass.c          |  5 ++
-> > > > > >  include/dt-structs.h                          | 11 +++
-> > > > > >  lib/Makefile                                  |  1 +
-> > > > > >  lib/dt_purge.c                                | 73 +++++++++++++++++++
-> > > > > >  lib/efi_loader/efi_capsule.c                  |  7 ++
-> > > > > >  7 files changed, 179 insertions(+)
-> > > > > >  create mode 100644 doc/develop/devicetree/dt_non_compliant_purge.rst
-> > > > > >  create mode 100644 lib/dt_purge.c
-> > > > >
-> > > > > What is the point of removing them? Instead, we should make sure that
-> > > > > we upstream the bindings and encourage SoC vendors to sync them. If we
-> > > > > remove them, no one will bother and U-Boot just becomes a dumping
-> > > > > ground.
-> > > >
-> > > > Well things like the binman entries in DT are U-Boot specific and not
-> > > > useful for HW related descriptions or for Linux or another OS being
-> > > > able to deal with HW so arguably we're already a dumping ground to
-> > > > some degree for not defining hardware.
-> > >
-> > > I have started the process to upstream the binman bindings.
+> > The Devicetree specification skips over handling of a logical view of
+> > the memory map, pointing users to the UEFI specification.
 > >
-> > I don't think they should be in DT at all, they don't describe
-> > anything to do with hardware, or generally even the runtime of a
-> > device, they don't even describe the boot/runtime state of the
-> > firmware, they describe build time, so I don't see what that has to do
-> > with device tree? Can you explain that? To me those sorts of things
-> > should live in a build time style config file.
+> > It is common to split firmware into 'Platform Init', which does the
+> > initial hardware setup and a "Payload" which selects the OS to be boote=
+d.
+> > Thus an handover interface is required between these two pieces.
+> >
+> > Where UEFI boot-time services are not available, but UEFI firmware is
+> > present on either side of this interface, information about memory usag=
+e
+> > and attributes must be presented to the "Payload" in some form.
+> >
+>
+> I don't think the UEFI references are needed or helpful here.
+>
+> > This aims to provide an small schema addition for this mapping.
+> >
+> > For now, no attempt is made to create an exhaustive binding, so there a=
+re
+> > some example types listed. More can be added later.
+> >
+> > The compatible string is not included, since the node name is enough to
+> > indicate the purpose of a node, as per the existing reserved-memory
+> > schema.
 
-For the record, I tend to agree.
+Node names reflect the 'class', but not what's specifically in the
+node. So really, all reserved-memory nodes should have the same name,
+but that ship already sailed for existing users. 'compatible' is the
+right thing here. As to what the node name should be, well, we haven't
+defined that. I think we just used 'memory' on some platforms.
 
-> I beg to differ. Devicetree is more than just hardware and always has
-> been. See, for example the /chosen and /options nodes.
+> > This binding does not include a binding for the memory 'attribute'
+> > property, defined by EFI_BOOT_SERVICES.GetMemoryMap(). It may be useful
+> > to have that as well, but perhaps not as a bit mask.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v5:
+> > - Drop the memory-map node (should have done that in v4)
+> > - Tidy up schema a bit
+> >
+> > Changes in v4:
+> > - Make use of the reserved-memory node instead of creating a new one
+> >
+> > Changes in v3:
+> > - Reword commit message again
+> > - cc a lot more people, from the FFI patch
+> > - Split out the attributes into the /memory nodes
+> >
+> > Changes in v2:
+> > - Reword commit message
+> >
+> >  .../reserved-memory/common-reserved.yaml      | 53 +++++++++++++++++++
+> >  1 file changed, 53 insertions(+)
+> >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.ya=
+ml
+> >
+> > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/dt=
+schema/schemas/reserved-memory/common-reserved.yaml
+> > new file mode 100644
+> > index 0000000..d1b466b
+> > --- /dev/null
+> > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > @@ -0,0 +1,53 @@
+> > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > +%YAML 1.2
+> > +---
+> > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.yam=
+l#
+> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > +
+> > +title: Common memory reservations
+> > +
+> > +description: |
+> > +  Specifies that the reserved memory region can be used for the purpos=
+e
+> > +  indicated by its node name.
+> > +
+> > +  Clients may reuse this reserved memory if they understand what it is=
+ for.
+> > +
+> > +maintainers:
+> > +  - Simon Glass <sjg@chromium.org>
+> > +
+> > +allOf:
+> > +  - $ref: reserved-memory.yaml
+> > +
+> > +properties:
+> > +  $nodename:
+> > +    enum:
+> > +      - acpi-reclaim
+> > +      - acpi-nvs
+> > +      - boot-code
+> > +      - boot-data
+> > +      - runtime-code
+> > +      - runtime-data
+> > +
+>
+> These types are used by firmware to describe the nature of certain
+> memory regions to the OS. Boot code and data can be discarded, as well
+> as ACPI reclaim after its contents have been consumed. Runtime code
+> and data need to be mapped for runtime features to work.
+>
+> When one firmware phase communicates the purpose of a certain memory
+> reservation to another, it is typically not limited to whether its
+> needs to be preserved and when it needs to be mapped (and with which
+> attributes). I'd expect a memory reservation appearing under this node
+> to have a clearly defined purpose, and the subsequent phases need to
+> be able to discover this information.
+>
+> For example, a communication buffer for secure<->non-secure
+> communication or a page with spin tables used by PSCI. None of the
+> proposed labels are appropriate for this, and I'd much rather have a
+> compatible string or some other property that clarifies the nature in
+> a more suitable way. Note that 'no-map' already exists to indicate
+> that the CPU should not map this memory unless it does so for the
+> specific purpose that the reservation was made for.
 
-There are exceptions...
-
-> We need run-time configuration here, since we cannot know at build
-> time what we will be asked to do by a previous firmware phase.
-
-Really, I don't want to have to care about the binman binding. If it is 
-u-boot specific, then it should stay in u-boot. I took /options/u-boot/, 
-but now I'm starting to have second thoughts on that being in dtschema 
-if it is going to be continually and frequently extended. Validating it 
-in SR does little. If a vendor is abusing /options/u-boot/ in some way 
-they could just as easily remove the node in their u-boot fork to pass. 
-SR is certainly not going to require the node be there.
-
-On A/B updates, that really doesn't seem like a u-boot specific problem 
-to me. No one wants A/B updates in EDK2 or anything else?
+I agree. I think compatible is the better approach. Some property like
+'discard' may not be sufficient information if the OS needs to consume
+the region first and then discard it. Better to state exactly what's
+there and then the OS can imply the rest.
 
 Rob
