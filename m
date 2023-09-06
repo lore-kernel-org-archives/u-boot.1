@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9DE8EB8FB6
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 12:10:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05485EB8FB6
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 12:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E94E286553;
-	Wed,  6 Sep 2023 14:10:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1A4FF86571;
+	Wed,  6 Sep 2023 14:22:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gZy15mVy";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="dJLuixiq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5466386519; Wed,  6 Sep 2023 14:10:44 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 19510865A0; Wed,  6 Sep 2023 14:22:17 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B57C086571
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 14:10:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42FC686568
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 14:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694002235; x=1694607035; i=xypron.glpk@gmx.de;
- bh=S48rDx/XPAdv4yk9g2v7K7KjJchx289jsDUa8Illqgo=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=gZy15mVyANqvcv05Ddwb0X/f6ZGh6YjOqvYhyQtT+l9exdgY4I6GQBV7DCgTtDQIF46LOSo
- LfkCeVLR2EzofCuZBRN8BnHSPrpB7pSpXsZH5oiBDtQW9lMrjNlfdT8LLZgAhOf2Zehi37p78
- Iea23STQ3WXkP4rEH1SeZJbwZ2k/3fBHHQUQ6saY5aygyCZAJ1S58hj07SWmxs6fUMwPbjaff
- H9f5epMtXlIC0FM411PhVytXzvEWK0ea3Vyw2jtpwyY+VIyc9z/DhFR576K/TQPLhrup4Z3X6
- 3lBIR5z50+OdLaS5nUki/aG+YjMlvkJ+z/cJpZIWtMm+8zBId5jg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbRfl-1q2rqs3CED-00bw6b; Wed, 06
- Sep 2023 14:10:35 +0200
-Message-ID: <2ce99268-a437-4304-a1d4-f86b8ceaaffe@gmx.de>
-Date: Wed, 6 Sep 2023 14:10:30 +0200
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-58caaedb20bso36755047b3.1
+ for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 05:22:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1694002933; x=1694607733;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=96cVDFzOHOp0O2xlSYyiAW3RJ7AcS9RZUVnDpiwLyDw=;
+ b=dJLuixiqHoelJc8AOPcIMkTiyQ5+j5SzMfHXNiNAgoUlz0kVMM9MoMxxLx3V7BvD9v
+ /631DM94g9H0eAkb4+9Or578ARWCSIw467e/uBM/P6JSbr/XyHSYsCddihHalxBO6fvy
+ Ommd7xoK0UEXyKOjLN9ViFuoPyT4bX3WQx1kaQlI2Awnb9u9abCuTBFbr/cuTn2t8C5w
+ pAEfNhBUVwt4PLN+jTC+miJUbfmm1oo9BfYunKNCV8uoiXO33k1DRaF+M9uRNcSI4HQD
+ D2DuJd4psUYWgelhPypQOQb1cqsuKVVode6S4+oXwefGvUZ3zQMHv+X967btkHBd5cVw
+ jQXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694002933; x=1694607733;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=96cVDFzOHOp0O2xlSYyiAW3RJ7AcS9RZUVnDpiwLyDw=;
+ b=izTLgWcsilAsednFOv6JwPXyD2/z8uJBlyMtf05IECarsyW1WLYCC7W1Lli0HeG0wc
+ hZ630rG7zpPmXwiwil4ByLAloH3W52OvBZYvrfSrrHOFWvyAOB9ZfOcX7USC8Ky9lsHs
+ c3+ea/LUhA/jIIxId3ukntwlKyyTTqkQku/LWel1/8c6HQYtOSJv0GkBSNIUwVpRjznf
+ JngHiop4vUpT3IW5B1DdaicRdB8yOKM2ZuvyCejz/f8A0yM4Fmuif0GWddP9AOQ0f36w
+ 5+842PwIVojEo0YsTs+ukZ3OG9qyntp3THmCGTe4f3nYzPQjOetnDDndLow55MtK7go+
+ gJEA==
+X-Gm-Message-State: AOJu0YyOUhH0y/wKM7MFFBMPdBd2dLc4J5QABd3SBGBj6clmeGc/1U6o
+ Vq7G/m9PDK+bdh6fgLNKecEw9nVpgh/1dL59vhxEWg==
+X-Google-Smtp-Source: AGHT+IGMXD/ZguDiHmKlbRuofngzU+UC1eCjVwNU5ynjgiZcyATzj2mi36u+vnJsKQ6ptRwJEowgIxhDz+CfRc+b9Qo=
+X-Received: by 2002:a25:2f95:0:b0:d78:ef4:76ae with SMTP id
+ v143-20020a252f95000000b00d780ef476aemr15391336ybv.33.1694002933001; Wed, 06
+ Sep 2023 05:22:13 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 09/11] spl: Convert semihosting to spl_load
-Content-Language: en-US
-To: Xavier Drudis Ferran <xdrudis@tinet.cat>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, Stefan Roese <sr@denx.de>,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <marek.behun@nic.cz>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Sean Anderson <sean.anderson@seco.com>
-References: <20230731224304.111081-1-sean.anderson@seco.com>
- <20230731224304.111081-10-sean.anderson@seco.com>
- <ZMtnBC/Dn6mcFZwe@xdrudis.tinet.cat>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <ZMtnBC/Dn6mcFZwe@xdrudis.tinet.cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20230725213634.255345-1-sjg@chromium.org>
+In-Reply-To: <20230725213634.255345-1-sjg@chromium.org>
+From: Michal Simek <monstr@monstr.eu>
+Date: Wed, 6 Sep 2023 14:22:01 +0200
+Message-ID: <CAHTX3dJ+es41yLzPA32kLWt70d0rGATCROJBW8aXMZjZA5w=Hg@mail.gmail.com>
+Subject: Re: [PATCH 00/14] bloblist: Align to firmware handoff
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Julius Werner <jwerner@chromium.org>, 
+ Dan Handley <dan.handley@arm.com>, Jose Marinho <jose.marinho@arm.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0jdooeLfR5xm6HHLGJ43LWJFzIbchXrYoXcnhSEq+p3slQpQxyy
- VHfx1dzxz84oYopMF0IuCNL8EGp+nxDMhzD9B/o7jZ1bV7R75FZXprezLK7NJbaRz9exyUm
- 1pY8/yz7SMbSn7z4ND+wim5gUqd7lLfLUQGY4Cu6PRRiUVTh9v8BbmsoNljzX4gKc4T37t+
- y3yy6QhXchE49oVbFKV4g==
-UI-OutboundReport: notjunk:1;M01:P0:97DYIiTOAoA=;X/VO0TLPMwQD40a5cqEVIUpGcCa
- Y6uUHxp2MrVDU3a8AllxY9adjjvbZjeYWf8BkNXPnFu4E/ni1EKOgAKMpTCxZxG3gGe1Za+I3
- O6EGOXheM1XNAiHYwSGhbLgkmuc7oy33+Wh6DxPzwt6vnxqODXuKybMbHW1+qWTJD3RHBK85s
- VrF0G9IhVjldg/NuJb1JwUPDPxGBrW9Vx6c6xs+Z+dirvLzQ0qqMYp6CFC3lztkxoXG4oOGTX
- 2A6PelfOajczAGdXLiNSaGwa0JY1VJrshWaWm3z1ZIx7xy86+3PsdxjDvvoHZgV5wXl1jOXhH
- Vr/b99+9uoKTEsAjUwC0Il800ODs9USiGguVh8mkwSbd/5QH6FkSY1UT3NysSbu0DSyy/sJmr
- 5mRfPNKMjmXFDcAFMRoaljH3QR/6XdQ63Sw+tlNyMheYNxdcN6C6/1pAiJSdYQj/aB2HhAesF
- DKzV5NIGvQr826QyX+aYqwtdIhrC25RMZJBrM2NbcRCRY9Uw7wqzs+BKCPiGjWaewqs1JMkhA
- qSwtvv1Y5AZrI7pZUYsiBCulg4SrZOoaA7LJthKCJz3jC8n075OBXabxs3T5dE0I+LPucxepd
- Lpe0aKVhWEjcDeYPqHtXK1X0U/jpjuOYA0SU+0CRItdW4k35ZXxxSBFf8/xrvaBI4H653GroZ
- i3hOvOR51sB66vKcZ3/4cAuUJjX0xS8kKV7rv/uYjmT17dspPOtDQ354sgAlHjDvI1aVKL+cZ
- DLTWwVz+XjRNa03tA3vR93S0/9zbYo+NpcoYnrlMpI42P4vxLbGga4QRioziUwaw9Z/iirxEj
- dmvJ0SIzDY8v5SWw+SDHBge7T7mW+Yx3ds/fxS9PvgFpqlgZV4maoHq+/G4V+cKNpUTPndrui
- nv2gdknm8lHtHE5GsW6ziGAEk95D59FpK+1MPvvu4gj4tiH6flW8ofWaLJl1GGrwpHDL9CctR
- AX3A1dp5+zmZUBrPp9VLJhwqzek=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,76 +91,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 03.08.23 10:36, Xavier Drudis Ferran wrote:
-> El Mon, Jul 31, 2023 at 06:43:01PM -0400, Sean Anderson deia:
->> This converts the semihosting load method to use spl_load. As a result,=
- it
->> also adds support for LOAD_FIT_FULL and IMX images.
->>
->> Signed-off-by: Sean Anderson <sean.anderson@seco.com>
->> ---
->>
->> Changes in v5:
->> - Rework to load header in spl_load
->>
->> Changes in v2:
->> - New
->>
->>   common/spl/spl_semihosting.c | 43 ++++++++++++-----------------------=
--
->>   1 file changed, 14 insertions(+), 29 deletions(-)
->>
->> diff --git a/common/spl/spl_semihosting.c b/common/spl/spl_semihosting.=
-c
->> index 5b5e842a11..e7cb9f4ce6 100644
->> --- a/common/spl/spl_semihosting.c
->> +++ b/common/spl/spl_semihosting.c
->> @@ -9,16 +9,16 @@
->>   #include <semihosting.h>
->>   #include <spl.h>
->>
->> -static int smh_read_full(long fd, void *memp, size_t len)
->> +static ulong spl_smh_fit_read(struct spl_load_info *load, ulong sector=
-,
->> +			      ulong count, void *buf)
->>   {
->> -	long read;
->> +	int ret, fd =3D *(int *)load->priv;
->>
->
-> should ret be long to hold smh_read() return value ?
->
->> -	read =3D smh_read(fd, memp, len);
->> -	if (read < 0)
->> -		return read;
->> -	if (read !=3D len)
->> -		return -EIO;
->> -	return 0;
->> +	if (smh_seek(fd, sector))
->> +		return 0;
->> +
->
->
-> I never used smh, but why would this not be :
->
-> +       ret =3D smh_seek(fd, sector);
-> +       if (ret)
-> +               return ret;
->
-> (why does smh_seek(), smh_write(), smh_open(), smh_close() return
-> long, by the way? the implementations return either 0 or smh_errno(),
-> so int would do ?)
+Hi Simon,
 
-The return type used should match the implementation on the host side.
-The ARM documentation explicitly refers to register R0 which will match
-the length of long (or unsigned long).
+=C3=BAt 25. 7. 2023 v 23:36 odes=C3=ADlatel Simon Glass <sjg@chromium.org> =
+napsal:
+>
+> In moving from v0.8 to v0.9 the Firmware Handoff specification made some
+> changes, including:
+>
+>    - Use a packed format for headers to reduce space
+>    - Add an explicit alignment field in the header
+>    - Renumber all the tags and reduce their size to 24 bits
+>    - Drop use of the blob header to specify alignment, in favour of a
+>      'void' blob type
+>
+> This series attempts to align to that specification, including updating
+> the API and tests. It is likely that refinements will be made as other
+> projects implement the spec too.
+>
+> As before the code is dual-licensed, to permit use in projects with a
+> permissive license.
+>
+>
+> Simon Glass (14):
+>   bloblist: Update the tag numbering
+>   bloblist: Adjust API to align in powers of 2
+>   bloblist: Change the magic value
+>   bloblist: Set version to 1
+>   bloblist: Access record hdr_size and tag via a function
+>   bloblist: Drop the flags value
+>   bloblist: Drop the spare values
+>   bloblist: Change the checksum algorithm
+>   bloblist: Checksum the entire bloblist
+>   bloblist: Handle alignment with a void entry
+>   bloblist: Reduce blob-header size
+>   bloblist: Reduce bloblist header size
+>   bloblist: Add alignment to bloblist_new()
+>   bloblist: Update documentation and header comment
+>
+>  arch/x86/lib/tables.c    |   3 +-
+>  common/bloblist.c        | 102 ++++++++++++++++++++-------------
+>  doc/develop/bloblist.rst |   4 +-
+>  include/bloblist.h       | 121 +++++++++++++++++++--------------------
+>  test/bloblist.c          |  53 +++++++++--------
+>  5 files changed, 152 insertions(+), 131 deletions(-)
+>
+> --
+> 2.41.0.487.g6d72f3e995-goog
+>
 
-For smh_seek, smh_read(), smh_write()  we should investigate if the type
-should not better be unsigned long to handle a number of bytes exceeding
-2^31 on a 32bit emulation or system. But that is beyond the scope of
-this patch series.
+Would it be also possible to align names in the bloblist_hdr structure?
+magic->signature
+align_log2->alignment
+alloced->size
+size->max_size
 
-Best regards
+The same is for bloblist_rec.
 
-Heinrich
+I don't know the history but spec is about transfer list and transfer entry=
+.
+Do you plan to rename it to avoid confusion?
 
+Thanks,
+Michal
+
+--=20
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
