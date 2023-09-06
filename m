@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A14BC83F17
-	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C143ACA100E
+	for <u-boot@archiver.kernel.org>; Wed,  6 Sep 2023 14:52:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32D4D865A8;
-	Wed,  6 Sep 2023 16:48:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CEE2F86993;
+	Wed,  6 Sep 2023 16:52:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XxX7aA/s";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EEVyB2Xu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C61058696B; Wed,  6 Sep 2023 16:48:35 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id EEAB486963; Wed,  6 Sep 2023 16:52:38 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 244C5865A0
- for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:48:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC039865A0
+ for <u-boot@lists.denx.de>; Wed,  6 Sep 2023 16:52:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-51a52a7d859so2242970a12.0
- for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:48:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3aa1446066aso2701535b6e.1
+ for <u-boot@lists.denx.de>; Wed, 06 Sep 2023 07:52:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694011712; x=1694616512; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VM31Omv2VF1wbkMub+dDYlOZRCfHD1+o+lV3RVrjZoc=;
- b=XxX7aA/sKiZkOzYvOuZlehpCE9vmX0L8HbI56+fsfjPxWAy+pWXg0z8CDIcMla9myr
- 8lLH4YC24BuQhCbJKiHR08GmBa+pUfQv3iZBKqzrCwJJ1b06gKbWS7yLrFaSUj5Cnuyp
- zNckrUggtLyQkH771Ii1aWl68s8Ljc0UD7icY=
+ d=konsulko.com; s=google; t=1694011954; x=1694616754; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kkn8fi4pjvUR6oSt46H4nHDHfWq8bCM8KWcQ/s/TBvI=;
+ b=EEVyB2XuoKOGG5atjD2u/zzJbgEKtVqcU2lLSHBMNYle2N7aZy+rLseyI6ml802fBo
+ JWUiTI1qLtAdYxu9iEOwR/0VFjTHbiQ+p143ciri3phxBWzi7Nl2W+7kPodsmvpBHcPU
+ cjcFj1YPqaqBU4jvKOdFPDAvZIBRqjsCS6YCE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694011712; x=1694616512;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VM31Omv2VF1wbkMub+dDYlOZRCfHD1+o+lV3RVrjZoc=;
- b=WH56nzlzDMwc3X5sZV9/IThbIKd+mC1ziTAabRHnnyLq1qBqawCZdrLow21N7t/p3U
- uX+XYlaJigsrf+dLta5vLSowA6yhzwe+vNaeF/cE6uEaCVSBZ8M14MbfumZK03KmEnCO
- iH6Cogh51kDBLOh51CU4M84FIS6RYCapm0F7K7EvL9dAVJ9YoNaTr7D4NU6iuq18wXhg
- 0SPDLWiikMiCTZ66b6G/QaYE+WTmNNOk0MYNbtxsaIiZDzgAaqcwu8u65Qu6+e4snGuS
- sd/k4zyOa81L+QdGfTj2znBh0EaI14AeOiqr9+iyytOFkZos6CidcBcZgoyvu7CnJZox
- MEqg==
-X-Gm-Message-State: AOJu0YyMD+lZYU8zmi3RF8FV28xAbT8IIaS9Wv/eiEhsU9qmrahZTrrL
- DljJE5xasywK+2tYDZl6P6ZTQxy5B62C+09suRlfbQ==
-X-Google-Smtp-Source: AGHT+IHNMWaasVkgp44pFNPVHkyJontSd/vvGQZX5Wxd2x9pX7I8Zx1MV/UPgxQHR/mIRxbiRhQ5295jv/BnGFJcWSk=
-X-Received: by 2002:a17:906:9754:b0:9a5:9b93:d60d with SMTP id
- o20-20020a170906975400b009a59b93d60dmr3084119ejy.36.1694011712458; Wed, 06
- Sep 2023 07:48:32 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1694011954; x=1694616754;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kkn8fi4pjvUR6oSt46H4nHDHfWq8bCM8KWcQ/s/TBvI=;
+ b=iByLz4gsPOZXP3J5q+FBNYOthPVDrErCYltYt20uhlw/BT4vKcrs2jwIf4BPn+waFV
+ Lq4Io+RfzqfYzOXEgwm7HCdti7F7AlUJ50RM7tN+6dJ9NzFeJ34Iqv/TLTUJml7MYHLy
+ xo12Zfv7yo7jiUDy1Eub6x0eBlogAYl9xx47sHlB/PICO23gUAyeGqyKpfWGzNiwLWRE
+ ihCwTInKIzyh9PKxAejea2qJPu4qZJoVi2UxOKSzdgKERY7LPYp1NyTiZpYfhZsfVi2J
+ DWbWo309mhlmiwF7r+3CyzHkeiv/dAargrnpnViFxjDMOZrJZkxlQeMDiq5FKMrqQUKM
+ L6Dw==
+X-Gm-Message-State: AOJu0YxiYZrZig1zwPxKjMqI71OFU1M7PX+wNTNCE5kDMpdFkFDaffj4
+ dRooETSy77ObCzC29KTD6VFxsEy4aiRpF+fvZpllLg==
+X-Google-Smtp-Source: AGHT+IHi2rZGvIyHdlV0Bj/eiP1Rb8TeHEE5qup4C4oxU2a6VCpzLf38n0mhCCULhR++1dDng81guA==
+X-Received: by 2002:a05:6808:646:b0:3a7:94d3:43fe with SMTP id
+ z6-20020a056808064600b003a794d343femr16000951oih.30.1694011954475; 
+ Wed, 06 Sep 2023 07:52:34 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-06dc-de6d-386e-5d48.res6.spectrum.com.
+ [2603:6081:7b00:6400:6dc:de6d:386e:5d48])
+ by smtp.gmail.com with ESMTPSA id
+ z5-20020a81aa45000000b00597e912e67esm3707773ywk.131.2023.09.06.07.52.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Sep 2023 07:52:34 -0700 (PDT)
+Date: Wed, 6 Sep 2023 10:52:32 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-usb/master
+Message-ID: <20230906145232.GB305624@bill-the-cat>
+References: <20230905135054.15652-1-marex@denx.de>
 MIME-Version: 1.0
-References: <20230829191812.135759-1-sjg@chromium.org>
- <20230829191812.135759-4-sjg@chromium.org>
- <CAL_JsqLFX9PpMcJBv2yZXRpQyQ-h1DrGyApE0+AAYN2LCCj7Kg@mail.gmail.com>
- <CAMWxwJ13-itCyyKaH21nncaX2OUesGwpfMNHocvDEKHzZ1_F4Q@mail.gmail.com>
-In-Reply-To: <CAMWxwJ13-itCyyKaH21nncaX2OUesGwpfMNHocvDEKHzZ1_F4Q@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 6 Sep 2023 08:48:16 -0600
-Message-ID: <CAPnjgZ2NacjTmMB4fUL+ttAmMvn+3oJS8fA+Lu94zgMOt4rKCw@mail.gmail.com>
-Subject: Re: [PATCH v4 4/4] memory: Add ECC property
-To: Lean Sheng Tan <sheng.tan@9elements.com>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
- Dhaval Sharma <dhaval@rivosinc.com>, Mark Rutland <mark.rutland@arm.com>,
- Gua Guo <gua.guo@intel.com>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- ron minnich <rminnich@gmail.com>, Ard Biesheuvel <ardb@kernel.org>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Chiu Chasel <chasel.chiu@intel.com>, 
- lkml <linux-kernel@vger.kernel.org>, Yunhui Cui <cuiyunhui@bytedance.com>, 
- linux-acpi@vger.kernel.org, Guo Dong <guo.dong@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YntrU0qEoL7lsfFP"
+Content-Disposition: inline
+In-Reply-To: <20230905135054.15652-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,106 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sheng,
 
-On Wed, 6 Sept 2023 at 08:47, Lean Sheng Tan <sheng.tan@9elements.com> wrot=
-e:
->
-> Hi Rob,
-> Sorry for missing this:
-> regarding your question on whether if the memory can support both single-=
-bit and multi-bit ECC, i think the answer is yes.
-> @Dong, Guo or @Chiu, Chasel could you help to confirm on this?
+--YntrU0qEoL7lsfFP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I sent a v5 series which breaks these out into separate properties.
+On Tue, Sep 05, 2023 at 03:50:54PM +0200, Marek Vasut wrote:
 
-Regards,
-Simon
+> The following changes since commit 8999257f219d1e371c2fd66f255b8782897944=
+d9:
+>=20
+>   Merge tag 'doc-2023-10-rc4-2' of https://source.denx.de/u-boot/custodia=
+ns/u-boot-efi (2023-09-02 09:08:54 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://source.denx.de/u-boot-usb.git master
+>=20
+> for you to fetch changes up to 7f4b73fe6939761dd3891b96628efcab47a0570e:
+>=20
+>   usb: dwc3: Fix enabling USB_DR_MODE_HOST (2023-09-04 15:51:38 +0200)
+>=20
 
->
-> Thanks.
->
-> Best Regards,
-> Lean Sheng Tan
->
->
->
-> 9elements GmbH, Kortumstra=C3=9Fe 19-21, 44787 Bochum, Germany
-> Email: sheng.tan@9elements.com
-> Phone: +49 234 68 94 188
-> Mobile: +49 176 76 113842
->
-> Registered office: Bochum
-> Commercial register: Amtsgericht Bochum, HRB 17519
-> Management: Sebastian German, Eray Bazaar
->
-> Data protection information according to Art. 13 GDPR
->
->
-> On Tue, 29 Aug 2023 at 23:38, Rob Herring <robh@kernel.org> wrote:
->>
->> On Tue, Aug 29, 2023 at 2:18=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
->> >
->> > Some memories provides ECC correction. For software which wants to che=
-ck
->> > memory, it is helpful to see which regions provide this feature.
->> >
->> > Add this as a property of the /memory nodes, since it presumably follo=
-ws
->> > the hardware-level memory system.
->> >
->> > Signed-off-by: Simon Glass <sjg@chromium.org>
->> > ---
->> >
->> > (no changes since v3)
->> >
->> > Changes in v3:
->> > - Add new patch to update the /memory nodes
->> >
->> >  dtschema/schemas/memory.yaml | 9 ++++++++-
->> >  1 file changed, 8 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.ya=
-ml
->> > index 1d74410..981af04 100644
->> > --- a/dtschema/schemas/memory.yaml
->> > +++ b/dtschema/schemas/memory.yaml
->> > @@ -34,7 +34,14 @@ patternProperties:
->> >          description:
->> >            For the purpose of identification, each NUMA node is associ=
-ated with
->> >            a unique token known as a node id.
->> > -
->> > +      attr:
->>
->> Kind of vague.
->>
->> > +        $ref: /schemas/types.yaml#/definitions/string-array
->> > +        description: |
->> > +          Attributes possessed by this memory region:
->> > +
->> > +            "single-bit-ecc" - supports single-bit ECC
->> > +            "multi-bit-ecc" - supports multiple-bit ECC
->>
->> "supports" means corrects or reports? Most h/w supports both, but only
->> reports multi-bit errors.
->>
->> > +            "no-ecc" - non-ECC memory
->>
->> Don't define values in free form text.
->>
->> This form is difficult to validate especially when non-ECC related
->> attr's are added to the mix as we can't really define which
->> combinations are valid. For example how do we prevent:
->>
->> attr =3D "single-bit-ecc", "multi-bit-ecc";
->>
->> Or maybe that's valid? If so, how would we express that?
->>
->> Why do we need "no-ecc"? Is that the same as no "attr" property?
->>
->> I think it's better if we have 'ecc-type' or something? Or generally,
->> a property per class/type of attribute.
->>
->> Rob
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--YntrU0qEoL7lsfFP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT4ki0ACgkQFHw5/5Y0
+tyzFKQv/XBYdkq+NaoBOvzPoTcKfjdLGzTr/BKNmYqYIwz0wOQCON8wWysR7IjmV
+xTEdSA3RfO24yLwkCntep3NRjl7FVlo8LPjME5S24SnVdG6kpSVEh9k6tQmN0gsF
+eXKPCHqhzfLLH+AHm1BNMxYFr6ACWDP9sEmhoxRWq+oV+vr9QhYej0CdtQPUoTim
+gnTLJaER+x//ziTkiW/8Zj3Fu+kUXN/+JBLyD8FuKUQOCTpBWF+XsoKl9BgeRhSo
+O899f6Aua6n6WdtdUPDg00X1C2HwFt33YKRCz6Rdky+Uusr3XUANsUNi38LYuJzR
+sPhzTXixTe5JDSkoW5fC72h19GWXpD/8IdWr4BvXwEabCW6oNwpEB3v7oP8nYmPP
+yx55Wiy5UpBQf8YqcMtGIsJDRbZzgok2wdH1RA1ONUYOXpGLmbNeGve0XOAIUe8M
+VgTt9luERnkEwTG2HukxPfS0WLiJ8b43tmaR3MdTC/gUAFIRfB/r+JkIkKN/CxTe
+7zTFfS1w
+=GxS3
+-----END PGP SIGNATURE-----
+
+--YntrU0qEoL7lsfFP--
