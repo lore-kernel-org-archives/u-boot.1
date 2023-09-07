@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B2ABEC8721
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:24:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABA0EC8720
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:24:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7F65869D1;
-	Thu,  7 Sep 2023 14:23:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11B32869CD;
+	Thu,  7 Sep 2023 14:23:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aQP1ej2a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JkaFQVZP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BE2E8620C; Thu,  7 Sep 2023 14:23:53 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id E4183869C7; Thu,  7 Sep 2023 14:23:57 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0826086410
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:23:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23560869D8
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:23:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5921a962adfso9396277b3.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 05:23:49 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6bf58009a8dso627159a34.1
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 05:23:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694089429; x=1694694229; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=GZKIId8/pxLqSzilJwd0TB9ZHBuuis7wXwC8xMrihTs=;
- b=aQP1ej2aVokeUJ7mm0zkrh3PFC8oaHEWlfXHscRYxW18i35iaT+IhX181M+/RfvW2J
- FJZyfAUv17ejoOBbOJhc253zttdNn1eXzakWQNPh3Hpjdi/qPGn91aOqhgqUPYtex7FQ
- bXBCBllTrb4EeDkBm2CtJiHdfHN6Yico5dHoU=
+ d=chromium.org; s=google; t=1694089433; x=1694694233; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MSnMYwgPtc90QwVe7tMYFvFE6wJqk7NWV26foT7YXqY=;
+ b=JkaFQVZPzHOXhEuozouEdVnL2nK2tzJ7k/Imb4aAJ5jBzdn9E7ofm7TGoDTftX2K2P
+ pTQdMDsdWsiiB8JRIxwk2CEbYf1/DvYYleFeZI8K0XZ3C19GUjIGRt02iw0aMmGM3Ye4
+ D02ZqiHxNb+zJtLnSP7Oxb8DNkVmcW2JZudcQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694089429; x=1694694229;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GZKIId8/pxLqSzilJwd0TB9ZHBuuis7wXwC8xMrihTs=;
- b=XJTOCmKpG/MSSLYaNrOg9S18lDv2c98nO4flFTbpUztBQ8rocOvpPSAViorHESe4K7
- LxdkyvaVyScJ7/UEyhJ1b4jO2TkyRy1/BVT8jKcKfF+lCZnjYuLjBep3WTG8rn/A6KJ+
- 6MV/atHRA/tJdM/JmPkS6cljYp9JTi4iDW4+5P4iISyiIvJTbCgM75+Wb3M8Y+P8bsyl
- whfCaQVA8g9suhwuxbJwtGoHeWO/wi8Ru5fA9RExWutWuDVV/uuaOQgiIF8+1Rlo8RLb
- U7quelEtWWsufZ/2se5udvhtOlABF7tOsTAY0nZO8o4VKeH+oMKIJtdHFCAmQiOkF350
- fBDw==
-X-Gm-Message-State: AOJu0YyKoqMwhgB239hrtZsKiHfkJtWZJKE6M87onFLl/Q+NqqQ+G5o7
- huQ1N95oObK5f2stOlcDX3P2A413UFmx+YPJWsx2k/jbrPHv5bhruCI=
-X-Google-Smtp-Source: AGHT+IHZu6FrvmIyID16uf2ElzjjBHCnMSE0r5jSBhRGqrRZlSBcFC9sfv5huh6qzWVZmllBekoEpO5kcY9Ry7YPuPw=
-X-Received: by 2002:a25:aa52:0:b0:d63:44e:cbcc with SMTP id
- s76-20020a25aa52000000b00d63044ecbccmr19244937ybi.22.1694089428523; Thu, 07
- Sep 2023 05:23:48 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1694089433; x=1694694233;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MSnMYwgPtc90QwVe7tMYFvFE6wJqk7NWV26foT7YXqY=;
+ b=QBYRnpBRE/yvxnzqsEPfzDTDbLGUEUz518DDcj+p5SntQhs9g4MldPhxmWoMtCwVc0
+ /bkAJ2Mcbt5IuSnJumd4bI1CKCxyRiDzI1bR+10ef0QL4P/I8XzQJo2C2z3fLI9InNhQ
+ PW9C5G/ljcvuWP25udif7RM8k/eyvKcc79iYmElqoMmJyfijrOzS07R54Qci0uitBWp9
+ EKIYCXpWLWSUX3zijB8F8sWsY89lT7vJp/wXM70TCWLgnfROnWwq5ntri+HZhM+2XLU1
+ cyMOT03HWvoyJDG4sDTDC168Gyb7FjNn0YPH/3PCjp4OsMbeJnGLYRWk5sWiVVRbTmV3
+ KFGg==
+X-Gm-Message-State: AOJu0Yzu35hqVcwRHRFTU4iGwKqZsXf+zlNa/rN4whFPAauOsiDrL/ud
+ +loXV2yFWOfmLu5/RohV+n0/D+IfLD+XRK+vmlwD4A==
+X-Google-Smtp-Source: AGHT+IFm+Y4Q4HNfq7dmZRMJ3Y6L5abZW+AFakaw9EV8qN6XGpXlQKG+gGd4nfOjIgZOaJ6XLeBSJMg+rtBMGFpD+jg=
+X-Received: by 2002:a05:6830:12d4:b0:6bf:df7:10e9 with SMTP id
+ a20-20020a05683012d400b006bf0df710e9mr17753770otq.36.1694089433498; Thu, 07
+ Sep 2023 05:23:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <ZO/g8T1ohHI23xM8@octopus>
- <CAPnjgZ32h4vtMiScP-4NKEVFCSYcYHV7=bKVSqT3mQSfDPQ=FA@mail.gmail.com>
- <ZPAlCLyi8eB+a6yP@octopus>
- <CAPnjgZ1sB7xCRD7P-SCjJQP2w6p8Kxx2ahJTbfiQ887djxX7qQ@mail.gmail.com>
- <ZPfrMbr6cAOfklAj@octopus>
-In-Reply-To: <ZPfrMbr6cAOfklAj@octopus>
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-5-takahiro.akashi@linaro.org>
+In-Reply-To: <20230906024011.17488-5-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Sep 2023 06:23:08 -0600
-Message-ID: <CAPnjgZ1=tGWWdD4N=9CNZRc=mNBfpZNycddOZGyyh0ue7Dt+xQ@mail.gmail.com>
-Subject: Re: [RFC] make sandbox UT more generic
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Date: Thu, 7 Sep 2023 06:23:05 -0600
+Message-ID: <CAPnjgZ3z1srw_ZxfV2aRz1FAzTR=M==_rRPMFFrd7BdrGsu4AQ@mail.gmail.com>
+Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com, 
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,122 +82,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi AKASHI,
 
-On Tue, 5 Sept 2023 at 21:00, AKASHI Takahiro
+On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
 <takahiro.akashi@linaro.org> wrote:
 >
-> Hi Simon,
+> This DM-compliant driver deals with SCMI pinctrl protocol and presents
+> gpio devices exposed by SCMI firmware (server).
 >
-> On Thu, Aug 31, 2023 at 09:04:43AM -0600, Simon Glass wrote:
-> > Hi,
-> >
-> > On Wed, 30 Aug 2023 at 23:28, AKASHI Takahiro
-> > <takahiro.akashi@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Wed, Aug 30, 2023 at 08:49:05PM -0600, Simon Glass wrote:
-> > > > Hi,
-> > > >
-> > > > On Wed, 30 Aug 2023 at 18:38, AKASHI Takahiro
-> > > > <takahiro.akashi@linaro.org> wrote:
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > I'm working on implementing SCMI-based pinctrl/gpio driver,
-> > > > > and want to re-use sandbox UT to test the code. However,
-> > > > > It is somehow sandbox-specific (with additional DT nodes).
-> > > > > How can/should we make it more generic for other targets/drivers
-> > > > > rather than just by copying the test code?
-> > > > > (I have already created a test for pinmux since there is only
-> > > > > one existing scenario, but gpio test has many.)
-> > > > >
-> > > > > Even if I say 'generic', my case may be special since real
-> > > > > hardware (device drivers) cannot always run all the test cases,
-> > > > > while SCMI-based drivers potentially can with a dummy SCMI server
-> > > > > for sandbox.
-> > > > > See:
-> > > > >     drivers/firmware/scmi/sandbox-scmi_agent.c
-> > > >
-> > > > We don't have a good way to test drivers that talk to hardware, in general.
-> > > >
-> > > > For I2C, SPI and some PCI devices you can sometimes write an emulator
-> > > > for the chip and then your driver can talk to the emulator as if it
-> > > > were talking to the hardware. Sandbox does actually support that with
-> > > > memory-mapped I/O too, although it is fairly rarely used.
-> > >
-> > > Well, I don't want or need to emulate some *real* hardware.
-> > > Instead, I would like to emulate what the current sandbox drivers
-> > > (pinctrl-sandbox.c and gpio/sandbox.c) emulate so that we can re-use
-> > > (some portion of) test cases for sandbox (test/dm/pinmux.c and gpio.c).
-> > >
-> > > As you might know, SCMI protocol with associated drivers on U-Boot is
-> > > so generic that it would be able to talk to any of real pinctrl/gpio
-> > > drivers/firmware (say, run on OPTEE or SCP).
-> > > By implementing/mimicking protocol messages in sandbox-scmi_agent.c,
-> > > SCMI drivers are expected to provide *virtual* pinctrl/gpio devices
-> > > similar to what sandbox does.
-> >
-> > I actually know almost nothing about SCMI.
-> >
-> > >
-> > > I have already implemented pinmux test with some tweaks by copying
-> > > test/dm/pinmux.c and duplicating almost the same DT nodes as "pinctrl-gpio"
-> > > in test.dts.
-> > > But I'm looking for any other means without test code duplication.
-> > >
-> > > Did I clarify my question a bit?
-> >
-> > Well you should be able to factor out the test code into a function,
-> > then call it from two places with the two different devices (or other
-> > params) that are needed.
-> >
-> > For the DT, copying a few nodes is not the end of the world, IMO.
-> >
-> > BTW have you seen this talk? [2] It seems that you are moving pieces
-> > into firmware which should be OS drivers?
-> >
-> > Anyway, if you place a sandbox pinmux device under the SCMI node in
-> > the DT, then you should end up with a pinmux device you can use likely
-> > normal. Then if that device uses the sandbox emulator, you can run the
-> > existing tests on it with little modification, I suspect.
-> >
-> > But if I am still missing the point, a diagram or patch might help me
-> > understand!
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>  drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
+>  1 file changed, 539 insertions(+), 5 deletions(-)
 >
-> I just posted my RFC for supporting SCMI pinctrl protocol[1],
-> hoping it will help you understand what I'm planning to do regarding
-> test methodology, in particular by looking at patch#5 and #6.
+> diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
+> index 3ebdad57b86c..73d385bdbfcc 100644
+> --- a/drivers/pinctrl/pinctrl-scmi.c
+> +++ b/drivers/pinctrl/pinctrl-scmi.c
+> @@ -11,21 +11,20 @@
+>  #include <malloc.h>
+>  #include <scmi_agent.h>
+>  #include <scmi_protocols.h>
+> +#include <asm-generic/gpio.h>
+>  #include <dm/device_compat.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>  #include <dm/pinctrl.h>
+>
+[..]
 
-OK...I am mostly out this week but will take a look next week.
+> +
+> +U_BOOT_DRIVER(scmi_gpio) = {
+> +       .name = "scmi_gpio",
+> +       .id = UCLASS_GPIO,
+> +       .of_match = scmi_gpio_ids,
+> +       .of_to_plat = scmi_gpio_probe,
+> +       .ops = &scmi_gpio_ops,
+> +       .plat_auto = sizeof(struct scmi_pinctrl_gpio_plat),
+> +};
+> +
+> +/**
+> + * scmi_gpiochip_register - Create a pinctrl-controlled gpio device
+> + * @parent:    SCMI pinctrl device
+> + *
+> + * Create a pinctrl-controlled gpio device
+> + *
+> + * Return:     0 on success, error code on failure
+> + */
+> +static int scmi_gpiochip_register(struct udevice *parent)
+> +{
+> +       ofnode node;
+> +       struct driver *drv;
+> +       struct udevice *gpio_dev;
+> +       int ret;
+> +
+> +       /* TODO: recovery if failed */
+> +       dev_for_each_subnode(node, parent) {
+> +               if (!ofnode_is_enabled(node))
+> +                       continue;
 
-
->
-> [1] https://lists.denx.de/pipermail/u-boot/2023-September/529765.html
->
-> Thanks,
-> -Takahiro Akashi
->
-> > Regards,
-> > Simon
-> >
-> >
-> > >
-> > > -Takahiro Akashi
-> > >
-> > >
-> > > > We have done this a lot with Zephyr, as well[1] and achieved 90% code
-> > > > coverage on some boards.
-> > > >
-> > > > But I'm not quite sure I am answering the right question, so I will stop here.
-> > > >
-> > > > Regards,
-> > > > Simon
-> > > >
-> > > > [1] https://www.youtube.com/watch?v=usXCAXR2G_c
-> >
-> > [2] https://www.usenix.org/conference/osdi21/presentation/fri-keynote
+Can we not rely on the normal driver model binding to bind these
+devices? Why does it need to be done manually here?
+> +
+> +               if (!ofnode_read_prop(node, "gpio-controller", NULL))
+> +                       /* not a GPIO node */
+> +                       continue;
+> +
+> +               drv = DM_DRIVER_GET(scmi_gpio);
+> +               if (!drv) {
+> +                       dev_err(parent, "No gpio driver?\n");
+> +                       return -ENODEV;
+> +               }
+> +
+> +               ret = device_bind(parent, drv, ofnode_get_name(node), NULL,
+> +                                 node, &gpio_dev);
+> +               if (ret) {
+> +                       dev_err(parent, "failed to bind %s to gpio (%d)\n",
+> +                               ofnode_get_name(node), ret);
+> +                       return -ENODEV;
+> +               }
+> +
+> +               return 0;
+> +       }
+> +
+> +       return -ENODEV;
+> +}
+> +
 
 Regards,
 Simon
