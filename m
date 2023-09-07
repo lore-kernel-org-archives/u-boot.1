@@ -4,90 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D6BBEC8758
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 19:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10007EC8758
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 20:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D1CB869CA;
-	Thu,  7 Sep 2023 21:40:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EC14B86823;
+	Thu,  7 Sep 2023 22:50:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A1pyYdvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kpk4VcHh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FF86869B5; Thu,  7 Sep 2023 21:40:55 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 7918886998; Thu,  7 Sep 2023 22:50:51 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22686869D7
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 21:40:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D83BE867F6
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 22:50:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3ab244ef065so918500b6e.0
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 12:40:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=jmcosta944@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-401d67434daso15084445e9.2
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 13:50:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694115650; x=1694720450; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=79geGhybYkXImjNe8XGgWA/JcdYEgIeJ62xyQWE86sg=;
- b=A1pyYdvJRck/p1hjj8Sc83BRmbEnhZ7l00piQSGZGy3f6S2VJsezSs1yvfIOfSYEgZ
- BYXtIFRZ5O3M6rZOVzwswwSqXyWOACuPsGcqRg3mpvENQ6I+u0lKBpyOfuPfYcXSel2Q
- RVWz1Qln9fciuGRRV7E9TFPN7AMdzU2s6XJDg=
+ d=gmail.com; s=20221208; t=1694119848; x=1694724648; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2IgLkecb9Dep1GbLdnmaV9pUQGxUQbRnpsHtR8SAzTo=;
+ b=kpk4VcHhhnzkwO9TTnWsciOIUME2iZTU3GQxnZe5+EoYtlPnB1nqEkDnkwrE7O3HQv
+ AhV47RgXcZNwrKmd3tCeZJJIAjkzFEDDoihFkdQloWZh30L1RGC9U0rSIYYLXTSy3jwU
+ 3WErrtPtlheEwfzykKXpf7WwuS8LTJQZ/OZnMK7gF1mOc080Vbujfsco9qrbXYJzl7Xm
+ NRrit+W+5k9j28ZJZSnvFeGUbWx5eniLC3H8o2gqdOaX5Q1Poq9htB3TFbED5bNX/Ocw
+ 3lTxqrhYs3HNIrP64dKk6VKE+FTD8JIPJwfXgBnRkX8H9Kirh6poYZnS7DWKuk6TGdm5
+ 4xPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694115650; x=1694720450;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=79geGhybYkXImjNe8XGgWA/JcdYEgIeJ62xyQWE86sg=;
- b=YTIDDpVn8x2YWw5VPjn1TT+N/yaBIVSunNUJq6bR18QXH0xarVICaKBz1gjFT75jFC
- X2rP59YaK5RYRzi3tjuWt1oD9KXy7J5LU4NOaixhMPSmpSwS2vIj3nPPRKFl5qi16+7/
- kWpEXwutzKg5Iv52lItiu0ckGCmOnjp3wEk8c11T0AbguK/rFQbxEdea4msAZXvRYZ0Y
- jOcCJHmt1/SCaCeSu1YZcaPXERxEbvjtoNFH0UTlsWqiaoWdBKag3qlIZPJ5uitXz5ti
- IopkL91Sc5VQg/O5DtGuPYqXtCA91iUDx9znBrPZVa3G/azEfdjUcbhoH77PHHdU7fyq
- hySA==
-X-Gm-Message-State: AOJu0Ywg0ye4gDWzP0Ehgy9PjaxYzYd1uF2CqXlRA36wy+LGPZz/F2nV
- 2PIo82iWAkun5b6HihCvaETt3Q==
-X-Google-Smtp-Source: AGHT+IGWZF5x3W8Yz327AZIxeUH3KXsPXUDdS3VatGequhpUBbsf1KIjom5oo3cX1A3fH7IO3GFHqA==
-X-Received: by 2002:a05:6808:abc:b0:3a7:2693:3293 with SMTP id
- r28-20020a0568080abc00b003a726933293mr557843oij.16.1694115650638; 
- Thu, 07 Sep 2023 12:40:50 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-27f1-c90c-e8ad-e559.res6.spectrum.com.
- [2603:6081:7b00:6400:27f1:c90c:e8ad:e559])
- by smtp.gmail.com with ESMTPSA id
- r83-20020a815d56000000b0056d51c39c1fsm38789ywb.23.2023.09.07.12.40.49
+ d=1e100.net; s=20230601; t=1694119848; x=1694724648;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2IgLkecb9Dep1GbLdnmaV9pUQGxUQbRnpsHtR8SAzTo=;
+ b=icCj6Q7dPQk9lbxUd+dxNHxVRwgj6azwVQQKIwIukIvI6nu9fjhRGZjeh56rWevWEl
+ 7Y8/8l6tuVeT1XchGkI0C+FDcTQrTjWVnDYrJMRTZnjJZOEgggE8LlgDYSfepmGBdgI0
+ TDdDKltkcZs8LE6Go1lb638LK7QL2LeMCqVqbtxw30Xw/cuj79yQKDnmqDUy5ISrBcEP
+ I0ZTtATIQ0Z3rAJJIaqOIvEVPI0cojyVGjZzluT9ibzwKqWPna3+aYdRk/tXJ5IIULEm
+ Pya4pkeP6u82ROE6heramGB1gRnOf6MCloPHqMUU0MmdPLvI0Dvc2c9+8b8Gmb+RnnU3
+ Gwbw==
+X-Gm-Message-State: AOJu0YzxD49WB3buxvCFTLa2gz/WkvemhZnZiJqqsiHS5xcJoKn8TXSA
+ MAT7wII40ST/702OPcy0n179vm3foEW9+y+m
+X-Google-Smtp-Source: AGHT+IEf4z46d8X9ZHlM5qzlmYsqjAKCOTHyXyE2Lv7IkxcqfPiklD63zeYXuUCbX6N/KodFCxvl7g==
+X-Received: by 2002:a05:600c:2108:b0:401:b76d:3b8b with SMTP id
+ u8-20020a05600c210800b00401b76d3b8bmr602433wml.16.1694119847630; 
+ Thu, 07 Sep 2023 13:50:47 -0700 (PDT)
+Received: from fedora.. (cust-west-par-46-193-56-152.cust.wifirst.net.
+ [46.193.56.152]) by smtp.gmail.com with ESMTPSA id
+ o8-20020a1c7508000000b003fed7fa6c00sm3521350wmc.7.2023.09.07.13.50.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 12:40:49 -0700 (PDT)
-Date: Thu, 7 Sep 2023 15:40:47 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>,
-	Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sjoerd Simons <sjoerd@collabora.com>
-Subject: Re: [PATCH 7/7] fs: Fix a confusing error about overlapping regions
-Message-ID: <20230907194047.GZ305624@bill-the-cat>
-References: <20230823134209.1450567-1-sjg@chromium.org>
- <20230823134209.1450567-8-sjg@chromium.org>
- <20230823151400.GK3953269@bill-the-cat>
- <CAPnjgZ1VBpE8S7G-eBfAeRNQ6PgNvONbGyLceDYL0JsoNnYMjQ@mail.gmail.com>
- <20230903164244.GY3101304@bill-the-cat>
- <CAPnjgZ3WbCoxx-GGcf-fXA9iU6pzyr7BJGZD5tRvG0+tZ6Frdg@mail.gmail.com>
- <20230903192522.GZ3101304@bill-the-cat>
- <CAPnjgZ3c45YBFoX+by0aybgHnzmEqzrFvv90oeW6cyiLdrwAkw@mail.gmail.com>
- <20230906175755.GI305624@bill-the-cat>
- <CAPnjgZ3LAtZ4V7hwwnBzHBu8=HBroQzTb1XuHV-7aBrkrxS6yg@mail.gmail.com>
+ Thu, 07 Sep 2023 13:50:47 -0700 (PDT)
+From: Joao Marcos Costa <jmcosta944@gmail.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, sjg@chromium.org, miquel.raynal@bootlin.com,
+ Joao Marcos Costa <jmcosta944@gmail.com>
+Subject: [PATCH v1] doc: Update path to source_file_format.rst
+Date: Thu,  7 Sep 2023 22:50:45 +0200
+Message-ID: <20230907205045.15406-1-jmcosta944@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iEk6AOxxe71No9wg"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3LAtZ4V7hwwnBzHBu8=HBroQzTb1XuHV-7aBrkrxS6yg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,163 +89,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Previously, the file extension was .txt, and it referenced the uImage.FIT
+directory, which no longer exists. This commit updates the path accordingly.
 
---iEk6AOxxe71No9wg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
+---
+ doc/usage/fit/howto.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Thu, Sep 07, 2023 at 06:23:06AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 6 Sept 2023 at 11:58, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Sep 05, 2023 at 12:16:56PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sun, 3 Sept 2023 at 13:25, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sun, Sep 03, 2023 at 12:06:13PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Sun, 3 Sept 2023 at 10:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Aug 31, 2023 at 06:15:19PM -0600, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Wed, 23 Aug 2023 at 09:14, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Wed, Aug 23, 2023 at 07:42:03AM -0600, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > When lmb runs out of space in its internal tables, it giv=
-es
-> > > errors on
-> > > > > > > > > every fs load operation. This is horribly confusing, as t=
-he
-> > > poor user
-> > > > > > > > > tries different memory regions one at a time.
-> > > > > > > > >
-> > > > > > > > > Use the updated API to check the error code and print a h=
-elpful
-> > > message.
-> > > > > > > > > Also, allow the operation to proceed.
-> > > > > > > > >
-> > > > > > > > > Update the tests accordingly.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > [snip]
-> > > > > > > > > +     if (ret =3D=3D -E2BIG) {
-> > > > > > > > > +             log_warning("Reservation tables exhausted: =
-see
-> > > CONFIG_LMB_USE_MAX_REGIONS\n");
-> > > > > > > > > +             return 0;
-> > > > > > > > > +     }
-> > > > > > > >
-> > > > > > > > This isn't the right option.  Everyone has
-> > > CONFIG_LMB_USE_MAX_REGIONS
-> > > > > > > > set.  You would want to increase CONFIG_LMB_MAX_REGIONS.
-> > > > > > > >
-> > > > > > > > But it sounds like what you've found and fixed is an underl=
-ying
-> > > problem
-> > > > > > > > as to why 16 regions isn't enough in some common cases now?=
-  So
-> > > we could
-> > > > > > >
-> > > > > > > I don't think I have fixed anything. But I'll send v2 and per=
-haps it
-> > > > > > > will be clearer what is going on here.
-> > > > > > >
-> > > > > > > > possibly avoid the string size growth here and have a comme=
-nt
-> > > that also
-> > > > > > > > matches up with the help under LMB_MAX_REGIONS?
-> > > > > > >
-> > > > > > > I don't know, sorry. The size of struct(lmb) on 64-bit sandbo=
-x is
-> > > > > > > about 400 bytes. There seems to be a lot of code to save not =
-much
-> > > > > > > memory.
-> > > > > >
-> > > > > > What do you mean here?  The alternative is not unlimited ranges=
- but
-> > > > > > instead to define the limit of memory regions and limit of rese=
-rved
-> > > > > > ranges.
-> > > > >
-> > > > > A better alternative would be not to limit the number of regions,=
- IMO,
-> > > > > i.e. have an array of regions that can grow as needed.
-> > > >
-> > > > That's not something that we have in the code today, however.
-> > >
-> > > No, I do have an arraylist thing that I plan to upstream, which could
-> > > handle that.
-> > >
-> > > But for this series, what do you think of the memregion idea? I am st=
-ill
-> > > unsure of the saming we should use - see Heinrich's comments too.
-> >
-> > My biggest worry here is that we're papering over a real issue, and
-> > should either dig at that and see what's going on (should something be
-> > coalescing adjacent allocations? Were many platforms just right at the
-> > previous limit?) or just bump the default from 16 to "64 if EFI_LOADER"
-> > and then see if anything else really needs tweaking / cleaning up in the
-> > code itself.  I know Heinrich has previously said the LMB system could
-> > be better (or something to that effect, I'm going from memory, sorry if
-> > I'm mis-stating things) and I don't object to replacing what we have
-> > with something more robust/smarter/etc.
->=20
-> I am not sure...my series was designed to rename the code to reduce
-> confusion, and print a useful message when we run out of regions. It
-> does not paper over the problem, but actually makes it more visible.
+diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
+index c933703d1d..8b38cd534d 100644
+--- a/doc/usage/fit/howto.rst
++++ b/doc/usage/fit/howto.rst
+@@ -22,7 +22,7 @@ for its latest version. mkimage (together with dtc) takes as input
+ an image source file, which describes the contents of the image and defines
+ its various properties used during booting. By convention, image source file
+ has the ".its" extension, also, the details of its format are given in
+-doc/uImage.FIT/source_file_format.txt. The actual data that is to be included in
++doc/usage/fit/source_file_format.rst. The actual data that is to be included in
+ the uImage (kernel, ramdisk, etc.) is specified in the image source file in the
+ form of paths to appropriate data files. The outcome of the image creation
+ process is a binary file (by convention with the ".itb" extension) that
+-- 
+2.41.0
 
-Well, "papering over" maybe wasn't the best choice of words on my part.
-But since the series of events was something like:
-- We nee to use LMB to cover my U-Boot regions to address a handful of
-  CVEs over arbitrarily overwriting U-Boot at run-time.
-  - AFAICT no platforms suddenly ran out of LMB reservation space, but
-    maybe I'm wrong?
-- Someone noted that the EFI subsystem was exposing the same kind of
-  issue.
-- Heinrich adds logic for EFI_LOADER (iirc) to also add allocations
-  there to LMB
-- Assorted platforms start changing the max allocation to 64 to fix the
-  problems that get reported sometimes by booting.
-- Heinrich notes that our memory reservation system (LMB) could be
-  better designed than it is today.
-  - And, iirc, EFI_LOADER or similar has something maybe we can
-    leverage?
-
-Which brings me to what I was trying to say.  I'm not sure it's worth
-cleaning up the code a little, or refactoring/renaming things within it
-without both:
-- Understanding why EFI_LOADER being enabled causes us to run out of
-  allocations and so if the answer is "increase the default" OR "fix
-  some underlying issue such as coalescing being too strict or broken".
-- Understanding if there's a better memory reservation system we can use
-  instead.
-
---=20
-Tom
-
---iEk6AOxxe71No9wg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT6JzwACgkQFHw5/5Y0
-tyywrgv9FN15FeQy7zBfTW2HJOumWnC/GlFvPhbxftdhM9muxQ4Y3K5X2jbvTYgj
-33zMGCAZr9Em83+RO2cHN9XWQmfQHqzoMkmBptU+8ceEyCWQ9PY8bL1Eu+LTV+6J
-te/QtsOIpbrWas+fyZcYweVCcgVz6PdZ8Xl78+lywilUQF/gUxWQEu8xA9jxEJCl
-bBNZ2AyVhvfyhoGAc8BEQ2/VQP4ldVIbPpx/g4a84XqiT/o27TfFhWW/g6Q9seiS
-IKEFgJAdQDmgDssu9uhG9zJq9/5TLx609a8PAtMOKjppq4ZVfo1odfDo30MjtRnO
-sUzNt4uRIamxD2dZ1blDo/7OauReH/2pM32ZKSB1+Rj0lkjeNkWt/BNHMtewLy5w
-BbRT75ClZIfBB5OqqK7hc2LIaos1XwnG6ieyeLvfshq1VXdtcvekRYrEfkG+r7Kj
-YpYtd3QLeczZ9nOn4Ho4dksW5RRs46TsSHY0aHSdvMk6QI4b+IoOrAcLsLhZM/PW
-p09+56YX
-=7yjE
------END PGP SIGNATURE-----
-
---iEk6AOxxe71No9wg--
