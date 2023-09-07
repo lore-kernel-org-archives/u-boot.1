@@ -4,108 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC347EB8FB0
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 11:25:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3802DEB8FDE
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:21:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D32A868BC;
-	Thu,  7 Sep 2023 13:25:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 46133863ED;
+	Thu,  7 Sep 2023 14:21:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CiDLIv/3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GEp2DJnS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A6618692F; Thu,  7 Sep 2023 13:25:32 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2060c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::60c])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DCB1886591; Thu,  7 Sep 2023 14:21:36 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF08586410
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:25:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3841F8620C
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:21:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MB94MaypNoUlRBLTTxlGMcYBOesKdq8fRBezbBlj4w+hRmSJwUgEVFecCVh12N5ODu3WVWOfu7h83k6yzkNojLXbHza+Xl48DGPKKfnlfzAb0SsVP1SbRZaJl5lXz+FiQ3HzjsuzJHWFnQqserDxuS+VDBd2xG1I+marsv0TE0xVo8yRS7nJyx4U6euhEVH2k1sbQsu1Kmhpd2xbzqXqRH8j42E0Jx9TTS2sLQia3+s9MTMwQBGonjHtDSSsDWLfFc8ITfVxnbbX+wCT7U2pNNFPNer/2TKzxiNSxlQ/pamYlyKBIycJnS3dqNt568J9EqWmW+ObNAcmvIjKeN8b/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b7VoZ4FZHbNbDb6s25mdpxnkhjxraLGjDIxi3F/94eI=;
- b=edpiC0HcQf75GLyzWiSr2dFVnodUClhrAgxM5i+TwfJRV5p6OF/YZkfu3hgccRg6ECNxVIzr+KP4pfhqj9XHoSxI9/UUptio2wCthE6zWmKmtQ6g68uHgLTOp15e1OhPlyCWiyCw9TrahpJLf89TJBhjg1SA60m9lWghWHtExEMrelSnCZp8gF8W/ia4xOTi5PV+pQKN7YyDArB+k3+jRIgJY1KHOkMTq6s63JE/N+2cS/7zd2UCe5ITOGBPSbSHydYysxI3GnZVCOgHaAiGR1fVT8eF0LjJ/d1SDOQw4Mm+0MZGEpUqeGXTfnQzjA+myhC6HuAFxGtGGsCmfRkPfg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b7VoZ4FZHbNbDb6s25mdpxnkhjxraLGjDIxi3F/94eI=;
- b=CiDLIv/3hJNAZS+0ID9iE94UikVo3IFrl4HZnVO4Yf1ktOL2XWnSwuvHjYVzQ3ffyMUMmdNuGCEkxjaccPF5hMJnXwGF1fEvrU3sPPxeVmOaYSCQnq/9FXR2VHR2/E81v7pB+5+hnBYDUagDT9VXZ7K4X9mvdeLKMqPv+BZQn4Q=
-Received: from SA9PR13CA0095.namprd13.prod.outlook.com (2603:10b6:806:24::10)
- by SA3PR12MB8438.namprd12.prod.outlook.com (2603:10b6:806:2f6::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Thu, 7 Sep
- 2023 11:25:25 +0000
-Received: from SA2PEPF00001509.namprd04.prod.outlook.com
- (2603:10b6:806:24:cafe::be) by SA9PR13CA0095.outlook.office365.com
- (2603:10b6:806:24::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.10 via Frontend
- Transport; Thu, 7 Sep 2023 11:25:25 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Thu, 7 Sep 2023 11:25:25 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 7 Sep
- 2023 06:25:22 -0500
-Message-ID: <9f36935d-ba51-72b5-04e0-b91a88f7805d@amd.com>
-Date: Thu, 7 Sep 2023 13:25:05 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-502153ae36cso1390753e87.3
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 05:21:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1694089293; x=1694694093; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qj5JzootHB+WT27wyWw9LZN1UqSGHU8dA0pvUZuKoyE=;
+ b=GEp2DJnSxdYNfHFYYwIQiUnDPFF/a+hb67KT5kAkMzRwEWT7GGF9p64kO7ZPO1TuYI
+ aVGgQWpPwMyRUJQGbNBC/L+Jo5kZa+/NhY5ZxY9ippYnX8BAXblM1cyAchHtZSzhyEHq
+ fRyH+gUCjVGZbAppMzTwN2SudZYono3FXN4BY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1694089293; x=1694694093;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qj5JzootHB+WT27wyWw9LZN1UqSGHU8dA0pvUZuKoyE=;
+ b=JNMCYouwPel48T3/qA5tU44JaWfuP/Rt9+3m6wI04M+7AU0I0Do1P33txLQsKGGi/6
+ LTEaC/oAlrhhG8jvakt1I2p6Ni9m4IWtietw7ohgMzTnctjqRrPTh+xTR3CAmN5a4h2O
+ U77hQRLf7mUko+m5sjRUR7C0RdEV1Bb/j50CP3NM+BhUhjGp/NkfJtbPpq3ad0ay4UJn
+ ASqMvVYUFYHblZe04W9bTCiJrBHkCikwksZgha6vhEL5K+SiBmM//HkH9tXTuU+GkOUC
+ uMhnxJ3gGESZVFwDYC4x2H25CjEVTok7cUOjGbvDw5oN1FijbfhixVR/yV42WWOnrXQB
+ 10iw==
+X-Gm-Message-State: AOJu0YzMoZ5Zw3MPowHs/RuDTFUvGJtzfa2/E8zShqGwpCD9e18n0rlQ
+ tBrGO4SShTLKq/QDCX+SksP/I4BuyRAm4U+WBgIoFw==
+X-Google-Smtp-Source: AGHT+IGcWMDlhRL6jKymPfhYBQMYESsfRyFFqifd69zjLs5WQmg1EnMw6WdyKKMEDWUWzypGAMBZNJbWcaO7XRWgSFk=
+X-Received: by 2002:a19:501a:0:b0:500:9d32:8deb with SMTP id
+ e26-20020a19501a000000b005009d328debmr4500102lfb.51.1694089293129; Thu, 07
+ Sep 2023 05:21:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH 0/3] Do not setup boot_targets if driver is not enabled
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- <u-boot@lists.denx.de>
-CC: <git@xilinx.com>
-References: <20230904032035.11926-1-venkatesh.abbarapu@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-In-Reply-To: <20230904032035.11926-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|SA3PR12MB8438:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93cea7e4-16a4-4c02-e7b3-08dbaf9521de
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: cKOZTCTtPvule6E/FBcR9BB6fo/0DR4k6ayN5de4x+dBNqE/yDcHcmfeJNXX7CONa860nSHQ7/7lDhGNjHNzsNgen+RiFcYr4kxP1+WIikxcPRsTWLrxOCniOwKdB2NJsZ33uLDffVVoVRDoZ5pvJwpYnwfN2a/vBtp0cd0rL/OHDTRIBJx2D0bnfIpoNCSAbGynEEWtoAKJqj0FwLasBqOSNrzS5qxkX34RQ/8fK25v8VjvOoSrsWkWHRLWhoWBBofP/gCFd+kKdKnNs13yLrCgzjAnQzoB7yQcoMv7KzHrKS/nSXB0VobK1V/bVJy3TIGBO/VfHYw6ldHgXoY24/uCo9iiAe6SWEGJJFgb1M09jYEeRwmkwIrG0OuYlkH0eCD72hwly8aucF1eLT8qHp4GAS6FvGnP2jgn41sxt4i+QXPwNC/8bq1rhe4JG6/uqxkwEerZDT2tc/oadZQbgcTZE24uszXndAyYoEHIGeBQHzg9AbN/zn8a2HJab9s5dQNelvs+21zgucLGVicYEzhaE+0L5LXefL89a++NUHHZwi/LCf4F9l0RDdOaV2lUSuDFbUt3xwaBL0a8IAp4atBnauhef67ZyvWIW2Rotj4g/MiPkSccDNFGNX51qFytzfBn8suLxDLYEo4XZfAa83RPZEdHI/WlTSwXCpIZLOfLU4jiiO/oOpZjHLAkRe6QqH3pDUi1+te4ucTWjRC2lrQeO+NBaWOU5RAHs1h6grQWzJ2fz53Gugp3533Fzzjqsun+XLOWDBfIZCM7dD/v1+9oUby1kYX4i/tsksQYfERX607ucVIVbOi2MI+AeQfs
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(396003)(376002)(136003)(1800799009)(186009)(451199024)(82310400011)(40470700004)(36840700001)(46966006)(81166007)(31686004)(53546011)(6666004)(356005)(40460700003)(82740400003)(31696002)(36756003)(47076005)(36860700001)(86362001)(40480700001)(107886003)(2616005)(4744005)(2906002)(336012)(426003)(16526019)(26005)(478600001)(16576012)(83380400001)(70206006)(8936002)(41300700001)(8676002)(4326008)(5660300002)(70586007)(316002)(44832011)(110136005)(43740500002)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2023 11:25:25.5676 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93cea7e4-16a4-4c02-e7b3-08dbaf9521de
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB8438
+References: <20230823184746.842091-1-sjg@chromium.org>
+ <20230823184746.842091-8-sjg@chromium.org>
+ <6f1ea3e9-7284-22d3-e2ee-071523b7dbac@gmx.de>
+ <CAPnjgZ3i9EDe3CyU64WRpE+oR0-xS2iffQR=2hVBZRzA2KkC6Q@mail.gmail.com>
+ <2058DF5A-619E-4B47-A80E-4B5C56FC3573@gmx.de>
+ <CAEUhbmWvEXvB6UmtsvHe5M13dMqS2BQF6Q-fdapYDVh3ROG73A@mail.gmail.com>
+In-Reply-To: <CAEUhbmWvEXvB6UmtsvHe5M13dMqS2BQF6Q-fdapYDVh3ROG73A@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 7 Sep 2023 06:21:15 -0600
+Message-ID: <CAPnjgZ1cwU5mwRFWCy58-SRYhE50wryPowP+WzDJ=9f78PCCDw@mail.gmail.com>
+Subject: Re: [PATCH 7/8] spl: x86: Avoid starting up PCI automatically in SPL
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,21 +92,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Bin,
 
+On Mon, 4 Sept 2023 at 03:20, Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> On Thu, Aug 24, 2023 at 10:11=E2=80=AFAM Heinrich Schuchardt <xypron.glpk=
+@gmx.de> wrote:
+> >
+> >
+> >
+> > Am 24. August 2023 01:57:55 MESZ schrieb Simon Glass <sjg@chromium.org>=
+:
+> > >Hi Heinrich,
+> > >
+> > >On Wed, 23 Aug 2023 at 14:19, Heinrich Schuchardt <xypron.glpk@gmx.de>=
+ wrote:
+> > >>
+> > >> On 8/23/23 20:47, Simon Glass wrote:
+> > >> > For x86 platforms, PCI is core to their operation and is managed i=
+n
+> > >> > arch-specific code. Each platform has its own way of doing this. F=
+or TPL
+> > >> > and some SPL implementations, the full driver model PCI is not use=
+d.
+> > >> >
+> > >> > A recent change enabled full PCI in TPL/SPL for all boards. This b=
+reaks
+> > >> > some x86 boards, so adjust it to skip that for x86.
+> > >>
+> > >> Could you, please, give some more detail?
+> > >>
+> > >> * Which boards are broken?
+> > >
+> > >For example, chromebook_samus and chromebook_samus_tpl
+> > >
+> > >> * Don't these boards have a pci_init() function?
+> > >
+> > >Yes, the same one you are calling.
+> > >
+> > >> * In what way does calling pci_init() lead to a failure?
+> > >
+> > >It probes and sets up PCI devices and uses a lot of pre-alloc RAM.
+> > >
+> > >>
+> > >> It would be preferable to have all architectures and boards use the =
+same
+> > >> high level API. Excluding x86 here looks more like a (necessary) hac=
+k
+> > >> than like a target state.
+> > >
+> > >Fair enough, but on x86 we access PCI long before driver model is up.
+> > >Generally we don't fully enumerate it in SPL as it is expensive. It is
+> > >also pointless, since U-Boot proper does it again later.
+> > >
+> > >Regards,
+> > >Simon
+> > >
+> >
+> > Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >
+>
+> To address Heinrich's concern, how about you turn off CONFIG_SPL_PCI
+> in chromebook_samus and chromebook_samus_tpl?
 
-On 9/4/23 05:20, Venkatesh Yadav Abbarapu wrote:
-> Fixing the boot_targets for versal-net, versal and zynqmp platforms.
-> 
-> Venkatesh Yadav Abbarapu (3):
->    xilinx: versal-net: Do not setup boot_targets if driver is not enabled
->    xilinx: versal: Do not setup boot_targets if driver is not enabled
->    xilinx: zynqmp: Do not setup boot_targets if driver is not enabled
-> 
->   board/xilinx/versal-net/board.c | 76 ++++++++++++++++-----------------
->   board/xilinx/versal/board.c     | 67 +++++++++++++++--------------
->   board/xilinx/zynqmp/zynqmp.c    | 71 +++++++++++++++---------------
->   3 files changed, 108 insertions(+), 106 deletions(-)
-> 
+I dug into this a bit more...the root cause is that we are turning off
+CAR so the driver model tables are no-longer available. Accessing them
+causes a hang.
 
-Applied.
-M
+I will send a v2 which adds a flag to indicate this.
+
+Regards,
+Simon
