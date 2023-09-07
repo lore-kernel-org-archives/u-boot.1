@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5DFEC873A
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 870CEEC873A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:03:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B45186B0C;
+	by phobos.denx.de (Postfix) with ESMTP id A078086B16;
 	Thu,  7 Sep 2023 17:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GxSn7gBs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JVxCdq4T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D16DA86AFA; Thu,  7 Sep 2023 17:59:53 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id 2A7EC86AFA; Thu,  7 Sep 2023 17:59:54 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E570786A34
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9468286ACB
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-34e1ddc38c6so4624345ab.3
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:48 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-794c7d95ba5so46553939f.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694102387; x=1694707187; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694102389; x=1694707189; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lDGnaIWbNhNl6kWHptIT+eNHXJ+a52oZEkH/UOuEe44=;
- b=GxSn7gBsNITltCblcj4nJvjNaaDf2TkBLq+ZdMTjTq9a+hDRJzPAVlgE0HMvIN8SEu
- EjW2KV1yN2ehmLFMprWDPGJjCOijb5sPtEnv/S/vcJb0UHenyW1JHWw4jnGgrQOtId7u
- VN32IAkTtO83EfE6VmEBXzR+QE0551W+u3UVw=
+ bh=exw6NQMiT9vP9DRkiw0iggFLQArW04Aa/pGSc3aenEk=;
+ b=JVxCdq4TU1tXK5c3lRkRpWBFDBXD2jcSuVTPJ444LnHPO3g+NcPiaSvfLPhV4ikqVQ
+ zOkdDKE0mG8ugc/oup5oExzZMcG7dm9E/bqcvE2ss7Va5F0m7yB5hKITMKDfzlFzMPmj
+ DsjHCL1oaNzPPyuCmf3AIPhO/BK/JfYvvDWyA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694102387; x=1694707187;
+ d=1e100.net; s=20221208; t=1694102389; x=1694707189;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lDGnaIWbNhNl6kWHptIT+eNHXJ+a52oZEkH/UOuEe44=;
- b=kiWBXbPgXNwa+bpBXzS5/TXSvzSR+wbZxe/UjaxM/w8vTGduF1t3Vcr7MnS4VAHvCH
- QDj2SYWszvzAjd0LwwwYPALCdaBs4Xsf3p6682mc4IueoV+aUXoK78Ls8mCYXUy9Pzch
- sqDPm4Wzhp+g7aITh0d/ebbTdhWT3H6G5/BznmRAPQMt3HayAyTuf2Lz89c1N+rQZdxG
- h2bz4Zz+r4kpnU+Sk6cc5mIzyBMQL+rUQRZz4ybqJjimzZcdJGY9tG7B+iunReOeLkXE
- UMiBFNRp/nvdy5svh/uZEWkoXyx0xg9zq8rLwSQTmG6QwXoO+gTMK4JyCQR9VxkLv9eG
- sTtw==
-X-Gm-Message-State: AOJu0YyMb4QTgfrahE0pwd+Ckw/vK71ntxFsaj8wOsbYWu+49KZLSje6
- 54XcPx9ZEEBCh792skgN8+BiSSRHi6Zbvui5j5A=
-X-Google-Smtp-Source: AGHT+IF+zP0RhCPy7p3Cblx/5wOmoLM4JT2c51xtzAyv6D0ubiBC0n03GlByaREfuBqcQqBnKTE+eg==
-X-Received: by 2002:a05:6e02:c72:b0:34c:b981:52d4 with SMTP id
- f18-20020a056e020c7200b0034cb98152d4mr90774ilj.31.1694102387598; 
- Thu, 07 Sep 2023 08:59:47 -0700 (PDT)
+ bh=exw6NQMiT9vP9DRkiw0iggFLQArW04Aa/pGSc3aenEk=;
+ b=G4l0Z06rL/+EPKB7kbkBSWbOhS+3/zVeTALRkoINg2GU2pNcuXssKtPEWiysvL6FSV
+ M9DaGVCYdIa/lF2KPovAlAhMby+2Ii5nN4mOIsvYrV+R93EvQ4dT4802nhzRSq44t3Mg
+ JDwyGTHg7SGjcdB0HL5rvMUfAvWD8tmCiI5E2YDy3xaIke6g/vfGtNfmof5BivC4dBnG
+ MKJO8AC44o0tjqwrHGPZrgfzUpBqJioUKEg4vYHqJ0fNclcnpDEoEWbX867laY/wjJna
+ l0PRfRRlAg+ev1UjxB7LwdmbBj5RwyMp9hWNj3u1jYxJZFgLhbM4evU6RkVZW7/MCzxm
+ Ie3Q==
+X-Gm-Message-State: AOJu0YwRW2Q47sUtWczuqk3aj9UTFerGkobXB4CYGIa2l3gvbpMkfIO9
+ /5zlA35vqCF+2U9nxJxxQ9eeuCi5R0F9QCjBE00=
+X-Google-Smtp-Source: AGHT+IEUupGPatVX2IEoF1oi0ZER0+gLSFFg9ZtUGeoUGx4As/6rL8j9bIe1wPA7DQR80Ii1US2XEQ==
+X-Received: by 2002:a05:6e02:ca3:b0:34c:e16d:6793 with SMTP id
+ 3-20020a056e020ca300b0034ce16d6793mr106462ilg.14.1694102389244; 
+ Thu, 07 Sep 2023 08:59:49 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.47
+ o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 08:59:47 -0700 (PDT)
+ Thu, 07 Sep 2023 08:59:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 10/22] boot: Move some other fdt-fixup options to the same
- menu
-Date: Thu,  7 Sep 2023 09:59:15 -0600
-Message-ID: <20230907155933.48511-11-sjg@chromium.org>
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>
+Subject: [PATCH v4 12/22] Kconfig: Create a menu for FIT
+Date: Thu,  7 Sep 2023 09:59:17 -0600
+Message-ID: <20230907155933.48511-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230907155933.48511-1-sjg@chromium.org>
 References: <20230907155933.48511-1-sjg@chromium.org>
@@ -89,90 +89,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move more options relating to fixing up a device tree into the new
-devicetree-fixup menu.
+This is a major feature with a lot of options. Give it its own menu to
+tidy up the 'make menuconfig' display. Drop the 'depends on FIT' pieces
+which are now unnecessary, since they are now bracketed by an 'if FIT'.
+
+Leave CONFIG_TIMESTAMP out since it affects legacy images too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v4:
+- Allow TIMESTAMP without FIT
 
- boot/Kconfig | 55 +++++++++++++++++++++++++---------------------------
- 1 file changed, 26 insertions(+), 29 deletions(-)
+ boot/Kconfig | 38 ++++++++++++++++++--------------------
+ 1 file changed, 18 insertions(+), 20 deletions(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 39c51e9e2fe8..f8b8d6089511 100644
+index 017f7117d57f..99a2ffca2fc6 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -696,35 +696,6 @@ config SUPPORT_RAW_INITRD
- 	  address of the initrd must be augmented by it's size, in the following
- 	  format: "<initrd address>:<initrd size>".
+@@ -9,8 +9,19 @@ config ANDROID_BOOT_IMAGE
+ 	  This enables support for booting images which use the Android
+ 	  image format header.
  
--config OF_BOARD_SETUP
--	bool "Set up board-specific details in device tree before boot"
--	depends on OF_LIBFDT
--	help
--	  This causes U-Boot to call ft_board_setup() before booting into
--	  the Operating System. This function can set up various
--	  board-specific information in the device tree for use by the OS.
--	  The device tree is then passed to the OS.
--
--config OF_SYSTEM_SETUP
--	bool "Set up system-specific details in device tree before boot"
--	depends on OF_LIBFDT
--	help
--	  This causes U-Boot to call ft_system_setup() before booting into
--	  the Operating System. This function can set up various
--	  system-specific information in the device tree for use by the OS.
--	  The device tree is then passed to the OS.
--
--config OF_STDOUT_VIA_ALIAS
--	bool "Update the device-tree stdout alias from U-Boot"
--	depends on OF_LIBFDT
--	help
--	  This uses U-Boot's serial alias from the aliases node to update
--	  the device tree passed to the OS. The "linux,stdout-path" property
--	  in the chosen node is set to point to the correct serial node.
--	  This option currently references CONFIG_CONS_INDEX, which is
--	  incorrect when used with device tree as this option does not
--	  exist / should not be used.
--
- config HAVE_TEXT_BASE
- 	bool
- 	depends on !NIOS2 && !XTENSA
-@@ -1542,6 +1513,32 @@ if OF_LIBFDT
+-config FIT
+-	bool "Support Flattened Image Tree"
++config TIMESTAMP
++	bool "Show image date and time when displaying image information"
++	default y if CMD_DATE
++	help
++	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
++	  an image is printed by image commands like bootm or iminfo. This
++	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
++	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
++	  loaded that does not, the message 'Wrong FIT format: no timestamp'
++	  is shown.
++
++menuconfig FIT
++	bool "Flattened Image Tree (FIT)"
+ 	select HASH
+ 	select MD5
+ 	select SHA1
+@@ -25,20 +36,10 @@ config FIT
+ 	  multiple configurations, verification through hashing and also
+ 	  verified boot (secure boot using RSA).
  
- menu "Devicetree fixup"
+-config TIMESTAMP
+-	bool "Show image date and time when displaying image information"
+-	default y if CMD_DATE
+-	help
+-	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
+-	  an image is printed by image commands like bootm or iminfo. This
+-	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
+-	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
+-	  loaded that does not, the message 'Wrong FIT format: no timestamp'
+-	  is shown.
++if FIT
  
-+config OF_BOARD_SETUP
-+	bool "Set up board-specific details in device tree before boot"
-+	help
-+	  This causes U-Boot to call ft_board_setup() before booting into
-+	  the Operating System. This function can set up various
-+	  board-specific information in the device tree for use by the OS.
-+	  The device tree is then passed to the OS.
-+
-+config OF_SYSTEM_SETUP
-+	bool "Set up system-specific details in device tree before boot"
-+	help
-+	  This causes U-Boot to call ft_system_setup() before booting into
-+	  the Operating System. This function can set up various
-+	  system-specific information in the device tree for use by the OS.
-+	  The device tree is then passed to the OS.
-+
-+config OF_STDOUT_VIA_ALIAS
-+	bool "Update the device-tree stdout alias from U-Boot"
-+	help
-+	  This uses U-Boot's serial alias from the aliases node to update
-+	  the device tree passed to the OS. The "linux,stdout-path" property
-+	  in the chosen node is set to point to the correct serial node.
-+	  This option currently references CONFIG_CONS_INDEX, which is
-+	  incorrect when used with device tree as this option does not
-+	  exist / should not be used.
-+
- config FDT_SIMPLEFB
- 	bool "FDT tools for simplefb support"
+ config FIT_EXTERNAL_OFFSET
+ 	hex "FIT external data offset"
+-	depends on FIT
+ 	default 0x0
  	help
+ 	  This specifies a data offset in fit image.
+@@ -49,7 +50,6 @@ config FIT_EXTERNAL_OFFSET
+ 
+ config FIT_FULL_CHECK
+ 	bool "Do a full check of the FIT before using it"
+-	depends on FIT
+ 	default y
+ 	help
+ 	  Enable this do a full check of the FIT to make sure it is valid. This
+@@ -59,7 +59,7 @@ config FIT_FULL_CHECK
+ 
+ config FIT_SIGNATURE
+ 	bool "Enable signature verification of FIT uImages"
+-	depends on DM && FIT
++	depends on DM
+ 	select HASH
+ 	imply RSA
+ 	imply RSA_VERIFY
+@@ -97,7 +97,7 @@ config FIT_RSASSA_PSS
+ 
+ config FIT_CIPHER
+ 	bool "Enable ciphering data in a FIT uImages"
+-	depends on DM && FIT
++	depends on DM
+ 	select AES
+ 	help
+ 	  Enable the feature of data ciphering/unciphering in the tool mkimage
+@@ -105,7 +105,6 @@ config FIT_CIPHER
+ 
+ config FIT_VERBOSE
+ 	bool "Show verbose messages when FIT images fail"
+-	depends on FIT
+ 	help
+ 	  Generally a system will have valid FIT images so debug messages
+ 	  are a waste of code space. If you are debugging your images then
+@@ -114,7 +113,6 @@ config FIT_VERBOSE
+ 
+ config FIT_BEST_MATCH
+ 	bool "Select the best match for the kernel device tree"
+-	depends on FIT
+ 	help
+ 	  When no configuration is explicitly selected, default to the
+ 	  one whose fdt's compatibility field best matches that of
+@@ -124,7 +122,6 @@ config FIT_BEST_MATCH
+ 
+ config FIT_IMAGE_POST_PROCESS
+ 	bool "Enable post-processing of FIT artifacts after loading by U-Boot"
+-	depends on FIT
+ 	depends on SOCFPGA_SECURE_VAB_AUTH
+ 	help
+ 	  Allows doing any sort of manipulation to blobs after they got extracted
+@@ -139,11 +136,12 @@ config FIT_IMAGE_POST_PROCESS
+ 
+ config FIT_PRINT
+         bool "Support FIT printing"
+-	depends on FIT
+         default y
+         help
+           Support printing the content of the fitImage in a verbose manner.
+ 
++endif # FIT
++
+ config SPL_FIT
+ 	bool "Support Flattened Image Tree within SPL"
+ 	depends on SPL && FIT
 -- 
 2.42.0.283.g2d96d420d3-goog
 
