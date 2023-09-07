@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6116EEC8743
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4764EC8743
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 17:08:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AC8986410;
-	Thu,  7 Sep 2023 18:58:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 010A086863;
+	Thu,  7 Sep 2023 19:08:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HZSOww+G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LFM78giY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE0D3869E1; Thu,  7 Sep 2023 18:58:26 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 54417869AC; Thu,  7 Sep 2023 19:08:52 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BA3385DD2
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:58:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 467C48620C
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 19:08:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id C8AFEB81E82
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:58:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65084C433B7
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:58:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1694105901;
- bh=9H8krLtYfLzgGeA5i0zuj9qgIuh5eWibHtX4rliuuxQ=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=HZSOww+G/B17lm44Q4pK901JIvTJ+z2HSd8QVDZnTmfMHtw4A/FdMMdg0G9fWUG8n
- VgwoarbRzt5ypjQeRKWF1UtKEO/iIScBixMwuctbelX+fXPN7iNwDDQkBf/gnAUYkx
- mf6r1j0bJ0GDOXTs7goJT5QasJ1jlDe/wPpJKZAcuzxHRagM7PMKEn32dCanO0a57H
- BtndR0lM1QbhEN3hLC1d6wDNm0i/GQHtxpbo5HFx1mhzL5rO/aiEqNINT5VrCu3Wi8
- xES8vBcm83QU9L+UKQa6B4ed3Ba6vkmpyDuJT0GGJXIAZvb3mgxws/PkYis79hfx4E
- V0qByRzTyJTSg==
-Received: by mail-lj1-f180.google.com with SMTP id
- 38308e7fff4ca-2b9c907bc68so20219461fa.2
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 09:58:21 -0700 (PDT)
-X-Gm-Message-State: AOJu0YxadTHvqF13EcS0l1NYFWPDo7WdObpGnhUae5MfCZ91bP3kr+DO
- RUWk8T1D1HGXiteKmyB9ilzaskuTSE7JDBulqw==
-X-Google-Smtp-Source: AGHT+IHLKsGi67L1BWMr0evQdFmmKrCxPICw4WCCL86IJN0XnEYKyZyPOVddUmJXTpGASiUH1k4Vzk7Q+KRVgc7tkH4=
-X-Received: by 2002:a2e:965a:0:b0:2bc:b815:d64d with SMTP id
- z26-20020a2e965a000000b002bcb815d64dmr5383234ljh.30.1694105899386; Thu, 07
- Sep 2023 09:58:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230830231758.2561402-1-sjg@chromium.org>
- <20230830231758.2561402-4-sjg@chromium.org>
-In-Reply-To: <20230830231758.2561402-4-sjg@chromium.org>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 7 Sep 2023 11:58:07 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqKEbqUtWHpHXmiDSZBY7-Nw4-fLs23BEqomBevSDNBprQ@mail.gmail.com>
-Message-ID: <CAL_JsqKEbqUtWHpHXmiDSZBY7-Nw4-fLs23BEqomBevSDNBprQ@mail.gmail.com>
-Subject: Re: [PATCH v5 4/4] memory: Add ECC properties
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-d80199061fdso65417276.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 10:08:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1694106528; x=1694711328; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mnv5rTIp33PtAFc1DjAwid/uoML9tDThU+5tzsXmfvA=;
+ b=LFM78giYbLMRrAuozSZsfQ6kEk/mLE2qhsWjmk6yK/+vKJFgOJmEORMBiECbpJT7os
+ kEqlgjz2br3t/ApOKJHNzxqN5TuqSkvwQAvSd0fA10CsoKFv+G9hFgQmNZYBVmK4kml7
+ jJxW5Ee5qEOHwWqqDeWKQlFHwfiYdb4w/anbY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694106528; x=1694711328;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mnv5rTIp33PtAFc1DjAwid/uoML9tDThU+5tzsXmfvA=;
+ b=qKLsbidaAUvAOXpVSlG0v2W91P5rjWX314x+oRJB8kcvXHYpmK9Xlaart+KsNsj8Iu
+ +FCCnh23LDyZVp9FRET3Px7aka+UurDv4vmaRReHEthewvXiVHOI0aHQrQS7wiAMdwFl
+ hPTVRz9mntR2KoktmxeKnBg80Zi3J3AOOyiGly4wCTkkIWHWreGCRvUemia0GB5uKE04
+ WqxyWRi2aKJh1n9Lqcs0+lCWI5nRtgXUWz6ZMqwmXtjks2l4xs0KXbah4rDap52VbfEY
+ QJU1iXqcXLfC/DKP0cmewamwMCmTf9/rrgzCosFQZtpjyf9GtxHq+TobClUG1z/ZM2Jc
+ NiKA==
+X-Gm-Message-State: AOJu0YwWRmN51rZIbhH97DBdHr4TbDLYJHR5P8+OQkBJDq+RycCqtFXO
+ EN7AISmJnkMZewTUbhUYtsHD1g==
+X-Google-Smtp-Source: AGHT+IEoO2Id+FOqBl0POqWM76x3aATMlgy+FOzhBY20zetCKdOM6qJt8vLZrvDifI/6ycpV/LzWzA==
+X-Received: by 2002:a05:6902:50a:b0:d7e:c920:9818 with SMTP id
+ x10-20020a056902050a00b00d7ec9209818mr14489425ybs.8.1694106527894; 
+ Thu, 07 Sep 2023 10:08:47 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-27f1-c90c-e8ad-e559.res6.spectrum.com.
+ [2603:6081:7b00:6400:27f1:c90c:e8ad:e559])
+ by smtp.gmail.com with ESMTPSA id
+ q11-20020a25bfcb000000b00babcd913630sm3719002ybm.3.2023.09.07.10.08.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Sep 2023 10:08:47 -0700 (PDT)
+Date: Thu, 7 Sep 2023 13:08:44 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- ron minnich <rminnich@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
- Ard Biesheuvel <ardb@kernel.org>, Gua Guo <gua.guo@intel.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, Guo Dong <guo.dong@intel.com>, 
- lkml <linux-kernel@vger.kernel.org>, Chiu Chasel <chasel.chiu@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 1/4] buildman: Keep all common output files
+Message-ID: <20230907170844.GW305624@bill-the-cat>
+References: <20230907160023.49339-1-sjg@chromium.org>
+ <20230907160023.49339-2-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Rrk9jp9j/0dUg3R+"
+Content-Disposition: inline
+In-Reply-To: <20230907160023.49339-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,92 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 30, 2023 at 6:18=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Some memories provide ECC detection and/or correction. For software which
-> wants to check memory, it is helpful to see which regions provide this
-> feature.
->
-> Add this as a property of the /memory nodes, since it presumably follows
-> the hardware-level memory system.
->
+
+--Rrk9jp9j/0dUg3R+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Sep 07, 2023 at 10:00:17AM -0600, Simon Glass wrote:
+
+> Make a list of common output extensions and use it to ensure that the -k
+> option preserves all of these.
+>=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v5:
-> - Redo to make this property specific to ECC
-> - Provide properties both for detection and correction
->
-> Changes in v3:
-> - Add new patch to update the /memory nodes
->
->  dtschema/schemas/memory.yaml | 30 ++++++++++++++++++++++++++++++
->  1 file changed, 30 insertions(+)
->
-> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
-> index 1d74410..944aa9f 100644
-> --- a/dtschema/schemas/memory.yaml
-> +++ b/dtschema/schemas/memory.yaml
-> @@ -34,7 +34,37 @@ patternProperties:
->          description:
->            For the purpose of identification, each NUMA node is associate=
-d with
->            a unique token known as a node id.
-> +      ecc-detection:
-> +        $ref: /schemas/types.yaml#/definitions/string
-> +        enum:
-> +          - none
-> +          - single-bit
-> +          - multi-bit
-> +        description: |
-> +          If present, this inidcates the type of memory errors which can=
- be
+> Suggested-by: Tom Rini <trini@konsulko.com>
 
-typo
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> +          detected and reported by the Error-Correction Code (ECC) memor=
-y
-> +          subsystem:
->
-> +            none       - No error detection is possible
-> +            single-bit - Detects and reports single-bit ECC errors
-> +            multi-bit  - Detects and reports multiple-bit ECC errors
+--=20
+Tom
 
-I don't think 'multi' is specific enough. Perhaps this should be an
-int instead with how many bits. (And '-bits' is a standard unit suffix
-so a type isn't needed)
+--Rrk9jp9j/0dUg3R+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> +
-> +          If not present, this is equivalent to 'none'.
+-----BEGIN PGP SIGNATURE-----
 
-Can be expressed as schema:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT6A5YACgkQFHw5/5Y0
+tywJNwwAr0ZBRSjPGtMahPBbO8Xl1LnhMf1TIuBFWPWN16B1xYnVDhpYI4I6z0fH
+vJMuw1mwktRpGNLTr13plFRD4L/hdKaFvKdohlOgvKWUJQNRe/FN1ucqsDxDTcM6
+SK8jnpLjpEeH7n+Gl+crFq/hpzRGfU6N4eB6eA2gAorrdvcH7L77lSy3ojerwRGe
+Wt7ODKxmNwo81IHj37lcRw1qGFfCUtKeJ4v0Aun+w8U0jnEDlPQPYKK4GQ1TaiwH
+36LDON4tOT3oXIvRBiAHvCRi92DnOMt0wYalfPQOfd7XPOuyfNMXUa51z68I04To
+6AiLWPJ0XsNn37nRIttYecwh2MGKPPcNW0YQwWtDqCJ9ZYEYAB2i3EOqEZjwEVhG
+VS8Hgl3DDj1+1gFEjEXtIzu8OhXdNjh+/QQJ3VHRUBfFjGiaI5yvn0fJ8hIf0KCI
+0N1s0DaNIveXKtumoZdVSWvKDcw2OwcHcP8GKGlQFXDoysHr2DnIgmxmqQUA3MqX
+RWomAuZ4
+=9Ndd
+-----END PGP SIGNATURE-----
 
-default: none
-
-Though if that's the default why have it as a value? (It's fine though)
-
-> +      ecc-correction:
-> +        $ref: /schemas/types.yaml#/definitions/string
-> +        enum:
-> +          - none
-> +          - single-bit
-> +          - multi-bit
-> +        description: |
-> +          If present, this inidcates the type of memory errors which can=
- be
-
-typo
-
-> +          corrected by the Error-Correction Code (ECC) memory subsystem:
-> +
-> +            none       - No error correction is possible
-> +            single-bit - Corrects single-bit ECC errors
-> +            multi-bit  - Corrects multiple-bit ECC errors
-> +
-> +          If not present, this is equivalent to 'none'.
-
-One issue is with 2 properties nonsensical combinations are allowed.
-Not really any way to handle that in the schema though.
-
-Rob
+--Rrk9jp9j/0dUg3R+--
