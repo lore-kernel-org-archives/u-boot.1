@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C77EC8720
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:24:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E87EC8720
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:24:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C28A3869A0;
-	Thu,  7 Sep 2023 14:23:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C4EB869BF;
+	Thu,  7 Sep 2023 14:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwHUGN5C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lJKnwIrr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F7CA86863; Thu,  7 Sep 2023 14:23:41 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 4FBBD86907; Thu,  7 Sep 2023 14:23:41 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EF8E86907
+ by phobos.denx.de (Postfix) with ESMTPS id 561518685B
  for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-58d70c441d5so9277147b3.2
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d74a012e613so1167904276.1
  for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 05:23:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694089417; x=1694694217; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WRC94CdEpjPp1tSK5wU6zb48WEOcd6sJIioS3zR1h5s=;
- b=YwHUGN5CdpG1OetF2AwCIhs4EvxlDdeIZfAPZVkk8GYOr9kKamLUNH2X77vCHq9Lo2
- b1XO+5DYnmMFcLDvs5yUuACU56vRhGn3YcpCbS/Rr6DQqDzqsUmh5jTW5uO7w8fAd4/d
- PYHcS9BiZXepvZOpQ/KPgRZhCzfkldx6W7la0=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=v7C1wPwW/TDUXmfPEWBelhG0dr00fp3RC1t8YWn7ANI=;
+ b=lJKnwIrrCht0TlhFvp5/+0g1SxvAIbRfK7YiOPFvy+yqZMP5/tskXwFRih0G3Tyq5t
+ Z3aknNXe2Q8iagkdO0EsETSYRU4daThsde/ubel4oQFG+LvZ1IDujqtU9ybrzD8mlqyI
+ H3mJ+xIlfVexXT3qf8XYrBXu4a4RXJYwD8504=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1694089417; x=1694694217;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WRC94CdEpjPp1tSK5wU6zb48WEOcd6sJIioS3zR1h5s=;
- b=V/E7Mq6N+GsXqMk3shSOLeF6CdMHIGeGqMnwrjkgpObSXtxFnjRQ1Q43+7/y++2Np1
- pqlnutORFvi3a8UBt00JTAZUSCpYXactAaglZgoBED+hjhLrYG11VJ1UMkj4Do1dm36K
- BBR3uXywxTRmODEomYuQhKDEtCGATWW2isdETs3xpQ8IMZx8+/w/TBz21cQrii0dJt+E
- 8YlRH30v4kOHubZbWZU1+NEv1r1/nfBgjp6znCfVoRVV5OxVmK4/DEu3HIDZlonqBsKR
- 6KMqgZboPdOE2Dtba7O2MC7xYdtGQDGISppTa9ysngIA3gKj5rW+ARVbgOWpKlhhIY2A
- wImg==
-X-Gm-Message-State: AOJu0YxehUC0ApUoiE99gxrkC0q7GtivbMJTzjH1PMsd1xPVxf8QbO45
- TY6pFYn1NntCSyYa2mwTHl5B4vEa8Yg4Qzn8BfkakQ==
-X-Google-Smtp-Source: AGHT+IHt4zWUfGyLM1wJdfsx1s+xSQPJxcWQePHz4GNY+QK1Jj2IyaQyL053Ob7jVbTUlgdkv4lzCqHFUM3glt50tLY=
-X-Received: by 2002:a25:6b4a:0:b0:d62:ba45:539f with SMTP id
- o10-20020a256b4a000000b00d62ba45539fmr18560703ybm.43.1694089416805; Thu, 07
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v7C1wPwW/TDUXmfPEWBelhG0dr00fp3RC1t8YWn7ANI=;
+ b=gZKkHGXBw+fCMoLhz7EvQBvQ4DJ12IcspLJ2Pay+UyeIGz2e+vuWmvf8Wa6FrH+zae
+ qRMl0X36vE4T2EEnvY6Evo8iaNl54ft0mFqzE/Q8+ZONL+RKLR78YljyKjNNWHbLVd4n
+ xItsURUIHJkuuGqP0HRcZz7jn1kzShkBsIUPv6dHn8pNUyeK8sdqHmPRUhgJHuxVaRf7
+ UjMMiNOF0n3A3HoDQYIb5XtPKB5imT5hlQq+4WvTKPvw4OIdICCB+L2ScyN42CSNhkUw
+ DtLmbE/qcv1TbQc3YItH8kWQke5zmY0U9qMBu5/zou8nFc02A8ENZeJ59VqmhpKBwKhv
+ 2fRg==
+X-Gm-Message-State: AOJu0YzxnckOE2exwPP1yPEqVWfOgqVjUgIxraULZ04SKFPf1IxICxaz
+ PXlaMnV1PWVXaFHOkp+sZz8A8yMb5LrNzpjrr3Z9Gg==
+X-Google-Smtp-Source: AGHT+IEiUoEbxeyc49wRh49Qext8fQgr0sqqzFDqqvPIZdXCk8uz/csRfztYMUqLaE2oHtKPnSzjWNehErXL/xQhpUo=
+X-Received: by 2002:a25:e0c7:0:b0:d7b:9b9b:2fc3 with SMTP id
+ x190-20020a25e0c7000000b00d7b9b9b2fc3mr3099725ybg.3.1694089416801; Thu, 07
  Sep 2023 05:23:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230823184746.842091-1-sjg@chromium.org>
- <20230823184746.842091-7-sjg@chromium.org>
- <CAEUhbmVYRm0rHNkGj4TDR3NcGeOQY9iAqSj3JByx_cDg1FxC6w@mail.gmail.com>
-In-Reply-To: <CAEUhbmVYRm0rHNkGj4TDR3NcGeOQY9iAqSj3JByx_cDg1FxC6w@mail.gmail.com>
+References: <20230823134209.1450567-1-sjg@chromium.org>
+ <20230823134209.1450567-8-sjg@chromium.org>
+ <20230823151400.GK3953269@bill-the-cat>
+ <CAPnjgZ1VBpE8S7G-eBfAeRNQ6PgNvONbGyLceDYL0JsoNnYMjQ@mail.gmail.com>
+ <20230903164244.GY3101304@bill-the-cat>
+ <CAPnjgZ3WbCoxx-GGcf-fXA9iU6pzyr7BJGZD5tRvG0+tZ6Frdg@mail.gmail.com>
+ <20230903192522.GZ3101304@bill-the-cat>
+ <CAPnjgZ3c45YBFoX+by0aybgHnzmEqzrFvv90oeW6cyiLdrwAkw@mail.gmail.com>
+ <20230906175755.GI305624@bill-the-cat>
+In-Reply-To: <20230906175755.GI305624@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Sep 2023 06:23:11 -0600
-Message-ID: <CAPnjgZ1zF+++8_1QC54pKEZD3zJW76HqPyqYnXBXspXwd9QbPQ@mail.gmail.com>
-Subject: Re: [PATCH 6/8] x86: broadwell: Set up MTRRs
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 7 Sep 2023 06:23:06 -0600
+Message-ID: <CAPnjgZ3LAtZ4V7hwwnBzHBu8=HBroQzTb1XuHV-7aBrkrxS6yg@mail.gmail.com>
+Subject: Re: [PATCH 7/7] fs: Fix a confusing error about overlapping regions
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Sjoerd Simons <sjoerd@collabora.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,80 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bin,
+Hi Tom,
 
-On Mon, 4 Sept 2023 at 03:22, Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, 6 Sept 2023 at 11:58, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Tue, Sep 05, 2023 at 12:16:56PM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Sun, 3 Sept 2023 at 13:25, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sun, Sep 03, 2023 at 12:06:13PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Sun, 3 Sept 2023 at 10:42, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Aug 31, 2023 at 06:15:19PM -0600, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Wed, 23 Aug 2023 at 09:14, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Wed, Aug 23, 2023 at 07:42:03AM -0600, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > When lmb runs out of space in its internal tables, it gives
+> > errors on
+> > > > > > > > every fs load operation. This is horribly confusing, as the
+> > poor user
+> > > > > > > > tries different memory regions one at a time.
+> > > > > > > >
+> > > > > > > > Use the updated API to check the error code and print a helpful
+> > message.
+> > > > > > > > Also, allow the operation to proceed.
+> > > > > > > >
+> > > > > > > > Update the tests accordingly.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > [snip]
+> > > > > > > > +     if (ret == -E2BIG) {
+> > > > > > > > +             log_warning("Reservation tables exhausted: see
+> > CONFIG_LMB_USE_MAX_REGIONS\n");
+> > > > > > > > +             return 0;
+> > > > > > > > +     }
+> > > > > > >
+> > > > > > > This isn't the right option.  Everyone has
+> > CONFIG_LMB_USE_MAX_REGIONS
+> > > > > > > set.  You would want to increase CONFIG_LMB_MAX_REGIONS.
+> > > > > > >
+> > > > > > > But it sounds like what you've found and fixed is an underlying
+> > problem
+> > > > > > > as to why 16 regions isn't enough in some common cases now?  So
+> > we could
+> > > > > >
+> > > > > > I don't think I have fixed anything. But I'll send v2 and perhaps it
+> > > > > > will be clearer what is going on here.
+> > > > > >
+> > > > > > > possibly avoid the string size growth here and have a comment
+> > that also
+> > > > > > > matches up with the help under LMB_MAX_REGIONS?
+> > > > > >
+> > > > > > I don't know, sorry. The size of struct(lmb) on 64-bit sandbox is
+> > > > > > about 400 bytes. There seems to be a lot of code to save not much
+> > > > > > memory.
+> > > > >
+> > > > > What do you mean here?  The alternative is not unlimited ranges but
+> > > > > instead to define the limit of memory regions and limit of reserved
+> > > > > ranges.
+> > > >
+> > > > A better alternative would be not to limit the number of regions, IMO,
+> > > > i.e. have an array of regions that can grow as needed.
+> > >
+> > > That's not something that we have in the code today, however.
+> >
+> > No, I do have an arraylist thing that I plan to upstream, which could
+> > handle that.
+> >
+> > But for this series, what do you think of the memregion idea? I am still
+> > unsure of the saming we should use - see Heinrich's comments too.
 >
-> On Thu, Aug 24, 2023 at 2:48=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > The current condition does not handle the samus_tpl case where it sets
-> > up the RAM in SPL but needs to commit the MTRRs in U-Boot proper.
-> >
-> > Add another case to handle this and update the comment.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  arch/x86/lib/init_helpers.c | 7 +++----
-> >  1 file changed, 3 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/arch/x86/lib/init_helpers.c b/arch/x86/lib/init_helpers.c
-> > index 60a2707dcf1..bf0c921577d 100644
-> > --- a/arch/x86/lib/init_helpers.c
-> > +++ b/arch/x86/lib/init_helpers.c
-> > @@ -15,7 +15,8 @@ DECLARE_GLOBAL_DATA_PTR;
-> >  int init_cache_f_r(void)
-> >  {
-> >         bool do_mtrr =3D CONFIG_IS_ENABLED(X86_32BIT_INIT) ||
-> > -                IS_ENABLED(CONFIG_FSP_VERSION2);
-> > +                IS_ENABLED(CONFIG_FSP_VERSION2) ||
-> > +                (IS_ENABLED(CONFIG_TPL) && IS_ENABLED(CONFIG_HAVE_MRC)=
-);
->
-> So this combination is only for Samus TPL case, not a generic one, right?
+> My biggest worry here is that we're papering over a real issue, and
+> should either dig at that and see what's going on (should something be
+> coalescing adjacent allocations? Were many platforms just right at the
+> previous limit?) or just bump the default from 16 to "64 if EFI_LOADER"
+> and then see if anything else really needs tweaking / cleaning up in the
+> code itself.  I know Heinrich has previously said the LMB system could
+> be better (or something to that effect, I'm going from memory, sorry if
+> I'm mis-stating things) and I don't object to replacing what we have
+> with something more robust/smarter/etc.
 
-It is certainly targeted at samus TPL, but in a way it is applicable
-generically. When TPL is in use, we do the memory init in SPL and pass
-the RAM into to U-Boot proper, so it sets up the MTRRs. This is the
-same as the only other TPL board (coral). So samus and coral are in
-common in this sense...with the different being that samus uses MRC
-but coral usese FSP2.
-
->
-> I hate this as it's easy to break. Maybe we should be calling an API
-> from the board specific codes to determine whether we should do the
-> MTRR programming. Thoughts?
-
-I am not sure how we would do that. I did suggest a special Kconfig a
-while back, so that boards can overwrite the setting if needed. But in
-any case we would want a sensible default for that Kconfig.
-
->
-> >         int ret;
-> >
-> >         /*
-> > @@ -23,11 +24,9 @@ int init_cache_f_r(void)
-> >          *
-> >          * booting from slimbootloader - MTRRs are already set up
-> >          * booting with FSPv1 - MTRRs are already set up
-> > -        * booting with FSPv2 - MTRRs must be set here
-> > +        * booting with FSPv2 or MRC - MTRRs must be set here
-> >          * booting from coreboot - in this case there is no SPL, so we =
-set up
-> >          *      the MTRRs here
-> > -        * Note: if there is an SPL, then it has already set up MTRRs s=
-o we
-> > -        *      don't need to do that here
-> >          */
-> >         do_mtrr &=3D !IS_ENABLED(CONFIG_FSP_VERSION1) &&
-> >                 !IS_ENABLED(CONFIG_SYS_SLIMBOOTLOADER);
-> > --
->
-
-At least until we figure out something better, this seems clear enough.
+I am not sure...my series was designed to rename the code to reduce
+confusion, and print a useful message when we run out of regions. It
+does not paper over the problem, but actually makes it more visible.
 
 Regards,
 Simon
