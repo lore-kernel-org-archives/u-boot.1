@@ -4,73 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE57DEC873E
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:41:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A166FEC8745
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:45:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B63C8649F;
-	Thu,  7 Sep 2023 18:41:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id ECB4286487;
+	Thu,  7 Sep 2023 18:45:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ER06lwSM";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lggDYX7d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E1FF86785; Thu,  7 Sep 2023 18:41:33 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 682278657B; Thu,  7 Sep 2023 18:45:51 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D91386410
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:41:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D99D686410
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:45:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 64259CE1A59
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:41:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33772C4AF6D
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:41:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1694104882;
- bh=TcXlCdBwAdhvSY29Gk4U6YRFj3oqsCMGTaUu7DO7ABc=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=ER06lwSM/j1xnFBQOrUJerziPgcpI5gDKNTqDixQjhU0k8PiCru4SwlOiLg0ImvO/
- kEl2QkM+/7urjlYrzxPn1a8a1ZCkKhzzM8HypyK/+JghUgI3OsD+X4qRpOf9w0w2ud
- K9Dp7IOFdNfiBgJcfKNJsRDaKud6Z9tI6+OY2bZa7Y0P6V8dNJpLmHShL8JqTYeGoW
- mOODtbz272BFtKswS1WP6lEktZ106QkwAwa+Ag4bzzUqiM0KMPvw/7g9cUlUzd6iyd
- kt9RhoKcdRgV5l2w4Q9WhMRyEXIhDJHAr9j4tVqUCpFDNWVtVVTW6jLSnZrRJfkwKk
- 2NJKmzlChFiyA==
-Received: by mail-lj1-f176.google.com with SMTP id
- 38308e7fff4ca-2bd0d19a304so21029711fa.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 09:41:22 -0700 (PDT)
-X-Gm-Message-State: AOJu0YyX32+9iKD6cYncjUwuAUxAtTSqhuSV272VLz3kxETst7hDbDGC
- KKkgVid424hKpFAv3Fat26QZiWXzggQK5DYNFQ==
-X-Google-Smtp-Source: AGHT+IG23bFGvQrEWMPrUuiNiXfBfSQ2nV8yCIxtgarBdJYaaWK6UgdiyOScuIdqPU/mpa09cy/VQ6TL5hv239G+U08=
-X-Received: by 2002:a2e:3a18:0:b0:2bc:bdbd:1542 with SMTP id
- h24-20020a2e3a18000000b002bcbdbd1542mr5251425lja.11.1694104880149; Thu, 07
- Sep 2023 09:41:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230830231758.2561402-1-sjg@chromium.org>
-In-Reply-To: <20230830231758.2561402-1-sjg@chromium.org>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 7 Sep 2023 11:41:07 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqJFyuHfJ1t1gKfDFp1yGuNB_FhVCnY1Tk9iBzvchHwEOw@mail.gmail.com>
-Message-ID: <CAL_JsqJFyuHfJ1t1gKfDFp1yGuNB_FhVCnY1Tk9iBzvchHwEOw@mail.gmail.com>
-Subject: Re: [PATCH v5 1/4] Add reserved-memory
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 9FDF73F6E7; 
+ Thu,  7 Sep 2023 16:45:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1694105145;
+ bh=FHxxc/gJhResXFFA1OFLUV2q7pzG1B+ksxjn5C4xO7s=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=lggDYX7da88NcGe3Gq+56vDO1/2JzBhnZML3rOc/qLSp+0YDut6KFHLTd0tq0KyDb
+ UzGFFNi69LdLoUt4bf1i11XW4HqSz0yNC1p5ZuefK/QroZZNJS97QbX0LnuZAHbE1/
+ ZZlT4wZ8/0BZCUgGqeW6j6wsw/rnQDfRz7ZZl9BMnvcVewRApFuOyuKGL/Yj6g9+NK
+ SJdAN50Q28ZpGDUJodPVi4dgCdtsglPMDSeIVU4O/SlmFRtsJCrAAgiKMJPMD7k6iX
+ ud7JxrXyiNutDjfMU2LPDS9WFl+7bEJv297cM48Qa/NbM+RutBpHoMRIkXtYfJVwyE
+ MZdK3uhGZTF2g==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- ron minnich <rminnich@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
- Ard Biesheuvel <ardb@kernel.org>, Gua Guo <gua.guo@intel.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, Guo Dong <guo.dong@intel.com>, 
- lkml <linux-kernel@vger.kernel.org>, Chiu Chasel <chasel.chiu@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] test: build dependency for event unit tests
+Date: Thu,  7 Sep 2023 18:43:17 +0200
+Message-Id: <20230907164317.378832-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,23 +69,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 30, 2023 at 6:18=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Bring in this file from Linux v6.5
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> (no changes since v4)
->
-> Changes in v4:
-> - New patch
->
->  .../reserved-memory/reserved-memory.yaml      | 181 ++++++++++++++++++
->  1 file changed, 181 insertions(+)
->  create mode 100644 dtschema/schemas/reserved-memory/reserved-memory.yaml
+The test_event_base and test_event_probe unit tests use function
+event_register() which depends on CONFIG_EVENT_DYNAMIC=y.
 
-I've applied this one and patch 2.
+Fixes: 7d02645fe4c0 ("event: Add a simple test")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ test/common/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Rob
+diff --git a/test/common/Makefile b/test/common/Makefile
+index a5ab10f6f6..12c65f8c95 100644
+--- a/test/common/Makefile
++++ b/test/common/Makefile
+@@ -2,5 +2,5 @@
+ obj-y += cmd_ut_common.o
+ obj-$(CONFIG_AUTOBOOT) += test_autoboot.o
+ obj-$(CONFIG_CYCLIC) += cyclic.o
+-obj-$(CONFIG_EVENT) += event.o
++obj-$(CONFIG_EVENT_DYNAMIC) += event.o
+ obj-y += cread.o
+-- 
+2.40.1
+
