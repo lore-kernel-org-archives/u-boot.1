@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 747F1EC873A
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59559EC873E
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:02:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFD6D86AE9;
-	Thu,  7 Sep 2023 17:59:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CB5486AF3;
+	Thu,  7 Sep 2023 17:59:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nZG8qq2+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="got5krU1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60B8586A74; Thu,  7 Sep 2023 17:59:51 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 8823F86A63; Thu,  7 Sep 2023 17:59:51 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD6C786A63
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68CF386A78
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-79565370aa3so48894939f.0
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:45 -0700 (PDT)
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-34dee07e676so4362705ab.3
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694102384; x=1694707184; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694102385; x=1694707185; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lRzRUEk8sT3KjjWHLrFSnYroUmTzEPlpZJdnd65D78k=;
- b=nZG8qq2+bdOsT3CH8Q/HycKwJCTvHUS5V0kSd51qwHYYvnm4aTGXTeITUPkwRGdWfw
- AVnZJNdwMf0hFUUrGnMSsKZZK3LBZL2nb1cU8Sl5FZLW2v6D31557OdsIL/fH74mI4zt
- 3YncAf+35iRYpYGzlwsOgFTLiauUHlYGSGnvc=
+ bh=Yt09BtrpGSKexAEvRPD3m8ALdhGApkEe6kX9IW4j1yM=;
+ b=got5krU1aJHT+ipO8mczCDM+fSx8ZaxN5GSnc0MiYMoJmJWO5UamrNEYFNCTPocPST
+ Lyq5ZrPheycC7WDuC+yd1iehAwPsXJsjKVn2CcKVuHNQXsDCWue+DxFcGh7rriBTpwDA
+ 7sGGcsQedvfmfnSBvEAIklZJqQvOfFsaQqWFk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694102384; x=1694707184;
+ d=1e100.net; s=20221208; t=1694102385; x=1694707185;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lRzRUEk8sT3KjjWHLrFSnYroUmTzEPlpZJdnd65D78k=;
- b=lWlXzs6Jlsy/O6ijGJKONrfcNgOicId8oWdQgiwuD/KqWeQjPdNKjzYgh1sn/r8g5u
- R55cBvzJMlI5xLmJt0v5RIMXI7MMT6Rgletqh4piIY+I0OSLIEzFebGuEFZorMUSNEpu
- wL7DvMmhx3nd8nS64hOsfbpU5WeooBXSR48qME8e391UE0w12Ggc81ekoEuXQi0LNL4Q
- fHvtM1a1qrU+v+YPLXooLc7mxCswKhQMnFk5y4WapGj9Ehg27JUYRMj3Zgp6hQIr9GuH
- b8dMTCfWj+yhMUIhnrjqh8QjBB8oLesAyX0CRWwe7+7PDR6HB7CgKfO5HX3fWRHVA2B7
- c2Mw==
-X-Gm-Message-State: AOJu0YxLp80gIfH7l95G2x/aJDdNzALrAlsjvkYGl78sR8lF0vvs8DRP
- 4vNm4M2J6S6x50LwpA2CEOXVZLqtwxZu+6hir3g=
-X-Google-Smtp-Source: AGHT+IFhvKBpfgPp3Ynry4uBdZ+f6kfLwPLJqTGOsiOJApPZOIOa8vUE57W60e5NpwsGGhOR30Le/A==
-X-Received: by 2002:a92:ca07:0:b0:348:ddcb:137 with SMTP id
- j7-20020a92ca07000000b00348ddcb0137mr131310ils.16.1694102384153; 
- Thu, 07 Sep 2023 08:59:44 -0700 (PDT)
+ bh=Yt09BtrpGSKexAEvRPD3m8ALdhGApkEe6kX9IW4j1yM=;
+ b=ZE8NzUmZxIUpwkm3nSeDVuUYyjP4gRzSvqkp5+FpWZvHzsk5difMmAFQ1OVEXC527P
+ WrwjOV/qdHX80874cngYbEz8pgASfpvdAycf4GVfD6PkkxWiMt3HLHG8gLscqH3eYjja
+ HTF6riWaTuYrSm3X7FY47I0+uzIRBNEpAMH06juSS+dI5NSBI1Vg3xgcOW4ujGUsH8JX
+ GQ2GQ+rv0xJfONjuJJSBv++H1cTFsiNjwencNMF9W1KMny3dSBeVLkHWP5Kqc4GCvx7X
+ +k6Lwxnp3MpBjPWHIbXWEe1q+2jYmruc4ObzMnwedZiM9sW841o04nrCp1kZNt4FhiP8
+ bywA==
+X-Gm-Message-State: AOJu0YwgXl/yvrYbwohCiqSvjKBFwIXOuNcS+HRVnPFUsGJBpLENxcT5
+ dSDFjAUmAT8zPpnx6Tuo39F3YmWArzwFas+lDXQ=
+X-Google-Smtp-Source: AGHT+IGhzAlg7WqttgUyoj3e04Ha6WdLVscur6PV1Wt/mdyN39Vz0WQw3vrG6HjhrBh7SyTvuh9/ug==
+X-Received: by 2002:a05:6e02:1c2f:b0:34b:ba9b:c764 with SMTP id
+ m15-20020a056e021c2f00b0034bba9bc764mr78842ilh.18.1694102385053; 
+ Thu, 07 Sep 2023 08:59:45 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.43
+ o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 08:59:43 -0700 (PDT)
+ Thu, 07 Sep 2023 08:59:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 06/22] FWU: Avoid showing an unselectable menu option
-Date: Thu,  7 Sep 2023 09:59:11 -0600
-Message-ID: <20230907155933.48511-7-sjg@chromium.org>
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 07/22] test: Move POST under a renamed Testing section
+Date: Thu,  7 Sep 2023 09:59:12 -0600
+Message-ID: <20230907155933.48511-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230907155933.48511-1-sjg@chromium.org>
 References: <20230907155933.48511-1-sjg@chromium.org>
@@ -89,79 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a menuconfig to avoid showing a menu which cannot be selected in many
-cases.
+Rename Unit tests to Testing, since it is a stretch to describe some of
+the tests as unit tests. Move POST there as well, so it doesn't show up
+by itself in the top-level menu.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Drop comment about an update/ directory
+ test/Kconfig | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-Changes in v2:
-- Fix FMU typo in the subject
-- Drop now-unnecessary depends on FWU_MULTI_BANK_UPDATE
-
- lib/Kconfig             | 4 ----
- lib/fwu_updates/Kconfig | 9 +++++----
- 2 files changed, 5 insertions(+), 8 deletions(-)
-
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 9addcfab3734..bfab2f3165a7 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1118,8 +1118,4 @@ config PHANDLE_CHECK_SEQ
+diff --git a/test/Kconfig b/test/Kconfig
+index 6e859fb7d0db..830245b6f9a9 100644
+--- a/test/Kconfig
++++ b/test/Kconfig
+@@ -1,9 +1,4 @@
+-config POST
+-	bool "Power On Self Test support"
+-	help
+-	  See doc/README.POST for more details
+-
+-menu "Unit tests"
++menu "Testing"
  
+ config UNIT_TEST
+ 	bool "Unit tests"
+@@ -110,4 +105,9 @@ source "test/lib/Kconfig"
+ source "test/optee/Kconfig"
+ source "test/overlay/Kconfig"
+ 
++config POST
++	bool "Power On Self Test support"
++	help
++	  See doc/README.POST for more details
++
  endmenu
- 
--menu "FWU Multi Bank Updates"
--
- source lib/fwu_updates/Kconfig
--
--endmenu
-diff --git a/lib/fwu_updates/Kconfig b/lib/fwu_updates/Kconfig
-index 71f34793d926..d35247d0e5d4 100644
---- a/lib/fwu_updates/Kconfig
-+++ b/lib/fwu_updates/Kconfig
-@@ -1,4 +1,4 @@
--config FWU_MULTI_BANK_UPDATE
-+menuconfig FWU_MULTI_BANK_UPDATE
- 	bool "Enable FWU Multi Bank Update Feature"
- 	depends on EFI_CAPSULE_ON_DISK
- 	select PARTITION_TYPE_GUID
-@@ -10,24 +10,25 @@ config FWU_MULTI_BANK_UPDATE
- 	  multiple banks(copies) of the firmware images. One of the
- 	  bank is selected for updating all the firmware components
- 
-+if FWU_MULTI_BANK_UPDATE
-+
- config FWU_NUM_BANKS
- 	int "Number of Banks defined by the platform"
--	depends on FWU_MULTI_BANK_UPDATE
- 	help
- 	  Define the number of banks of firmware images on a platform
- 
- config FWU_NUM_IMAGES_PER_BANK
- 	int "Number of firmware images per bank"
--	depends on FWU_MULTI_BANK_UPDATE
- 	help
- 	  Define the number of firmware images per bank. This value
- 	  should be the same for all the banks.
- 
- config FWU_TRIAL_STATE_CNT
- 	int "Number of times system boots in Trial State"
--	depends on FWU_MULTI_BANK_UPDATE
- 	default 3
- 	help
- 	  With FWU Multi Bank Update feature enabled, number of times
- 	  the platform is allowed to boot in Trial State after an
- 	  update.
-+
-+endif
 -- 
 2.42.0.283.g2d96d420d3-goog
 
