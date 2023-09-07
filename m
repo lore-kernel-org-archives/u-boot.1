@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7641DEC874B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 18:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 547FCEC8750
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 19:23:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCA29869D7;
-	Thu,  7 Sep 2023 20:14:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AEB18657B;
+	Thu,  7 Sep 2023 21:23:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qotnsYWb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JPbFOu9R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82D92869F7; Thu,  7 Sep 2023 20:14:18 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id C755086682; Thu,  7 Sep 2023 21:23:34 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5513F8644F
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 20:14:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B000386487
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 21:23:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-58cbdf3eecaso12549687b3.0
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 11:14:15 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-59231a1ca9eso13684517b3.1
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 12:23:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694110454; x=1694715254; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1694114610; x=1694719410; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fpWWnD3jfs5kkJVrfGLd9ZSZzv9B7RoW+CRhyua9P9c=;
- b=qotnsYWb/W4ScAlevYHoMLl2a/2H8KheK9D9JVb3/Gkazp2hjE9sIbYaScHWqVPH71
- jESIZWZAS+MwDvB3xUuAxU310RXw5wFCI3gtSWU6rqehHQ1Re805X/pVwnRpQzER6Vxk
- dCUNOVGCiAEiKYrCkNdjrybUitvUMq+HqMMeg=
+ bh=+m17NMzwoToNbqe4xAGzQ7SfQ+a18rGjkEl841A/H7E=;
+ b=JPbFOu9RvKpPsdzXS7RJiHVvTxxPDr0mAEM3Nr23A0Z4l71zJuY8UuBHgV26GgohJ8
+ 4Nna6ATviqsRvMJp9NVBZKOj/ETC9iF9lUrEhbih47jhYFSx4hN/JusEiwxKulMPddyv
+ 4NtOrEVOckguE5b7trh2+gPdT44SA7IbacTfA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694110454; x=1694715254;
+ d=1e100.net; s=20230601; t=1694114610; x=1694719410;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fpWWnD3jfs5kkJVrfGLd9ZSZzv9B7RoW+CRhyua9P9c=;
- b=AeHPSumPd6G3rPmWesumO4OMoLNPtr4tPuSJZP/yKrg8m1PbGHfU3gDRgkwbH1HOtb
- /Cd9DiPFFOqSAMycU5wJBGiOo6bJ16tCV7eLd3JHL7WBVm/mo6F4exZrf2JsxRUMK5ri
- nTDUA3SPLGwBv/PTq5Bku5XpCC3RKYNY6kocN0AV3BQgEGBxWa/WeVjTina7DAPWpuGp
- /i0nDgO1lZJ8ox4pOR2MFfITwi3S60SM7b4nOwnbr7tayi6+BnXpCJzbPcUeVPlCP4yb
- W537LufGm3mg9DkpLXt8bjws/sdwbjCiOSRA21RBE4SmjVP9ClnxPOr3lwyyIb/rX7hH
- Ql2w==
-X-Gm-Message-State: AOJu0YyoB2FfcO6korTFiUU0ys2CGkcZt9QAEM7eUZuvTKwbu75ajZY9
- 8R9dlc4cRN+QoHSy94wp/hNE3w==
-X-Google-Smtp-Source: AGHT+IH91uuV8o5c/m6XeX18E00kFPJ5cqaBW79oSBWVb+gh2IAeWff+BtDL78P6B9+C9HF3ydr8ag==
-X-Received: by 2002:a0d:dc42:0:b0:595:89b0:6b56 with SMTP id
- f63-20020a0ddc42000000b0059589b06b56mr424861ywe.28.1694110454010; 
- Thu, 07 Sep 2023 11:14:14 -0700 (PDT)
+ bh=+m17NMzwoToNbqe4xAGzQ7SfQ+a18rGjkEl841A/H7E=;
+ b=MbC/lvYX6mpMKJv2D1zfGP4rQLDzKrRGDnoaToopcws7FUl7eOrEoVNzDkOdHITUPt
+ E8NamgTBdFPmzTymZIjp3+j3yIc0Gkh0/V9HsGM+mqBsCFgoP4+RLttJ1nwlEnP/A7Rc
+ adn3nYJ48TlNXG2x2i15MmISsc0TCSrHnoo0NPU9Ri8KttO1Mda/cbcQk4lU2uXSzqpg
+ p10RqUGry8KWCwznuV12tQCOTeOzJz4PulibG1eHstQszh/z6z80LSn1kGux/pMylN/l
+ 4GTA+XKjOJmfrlMg/di2y1GKEMBobhnK1my+yAV5vreba0Vx181ItJa/iKa+1//lS/gY
+ vQAg==
+X-Gm-Message-State: AOJu0YykpKmgrZIIX9zkfAIwBClHTbOFSsc3HrDhplXbeSxlbR8otWV8
+ cI85y/Gs1wFXi+oL+0YlZsOaVQ==
+X-Google-Smtp-Source: AGHT+IF8kgh/WjINQukVCt7nUsGPlGmWDVww8wWj3jSsGh3p5YzQNbpvG+LnpQTT4DMtXDxs+tz+NQ==
+X-Received: by 2002:a81:6588:0:b0:59b:1f6d:1958 with SMTP id
+ z130-20020a816588000000b0059b1f6d1958mr545820ywb.46.1694114610427; 
+ Thu, 07 Sep 2023 12:23:30 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-27f1-c90c-e8ad-e559.res6.spectrum.com.
  [2603:6081:7b00:6400:27f1:c90c:e8ad:e559])
  by smtp.gmail.com with ESMTPSA id
- i4-20020a81f204000000b0059af121d0b8sm2008604ywm.52.2023.09.07.11.14.13
+ i143-20020a819195000000b00586b5b6347csm26027ywg.109.2023.09.07.12.23.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 11:14:13 -0700 (PDT)
-Date: Thu, 7 Sep 2023 14:14:11 -0400
+ Thu, 07 Sep 2023 12:23:29 -0700 (PDT)
+Date: Thu, 7 Sep 2023 15:23:27 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: sandbox trace errors in CI loop
-Message-ID: <20230907181411.GX305624@bill-the-cat>
-References: <7d128f4a-b972-0535-ac06-bd600ba2e37c@monstr.eu>
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, Michal Simek <monstr@monstr.eu>,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, goldsimon@gmx.de
+Subject: Re: [PATCHv7 00/15] net/lwip: add lwip library for the network stack
+Message-ID: <20230907192327.GY305624@bill-the-cat>
+References: <20230822093614.4717-1-maxim.uvarov@linaro.org>
+ <CAHTX3dKEqFNMQf+-FSO7oZerT03fQb1Z1BYvN3-dfpmoPtZQFg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VInCTK0/m+LQjl2A"
+ protocol="application/pgp-signature"; boundary="zLTpSg6j2/QFtFHp"
 Content-Disposition: inline
-In-Reply-To: <7d128f4a-b972-0535-ac06-bd600ba2e37c@monstr.eu>
+In-Reply-To: <CAHTX3dKEqFNMQf+-FSO7oZerT03fQb1Z1BYvN3-dfpmoPtZQFg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,86 +95,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VInCTK0/m+LQjl2A
-Content-Type: text/plain; charset=us-ascii
+--zLTpSg6j2/QFtFHp
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 07, 2023 at 05:30:03PM +0200, Michal Simek wrote:
-> Hi Simon and Tom,
+On Thu, Sep 07, 2023 at 05:21:18PM +0200, Michal Simek wrote:
+> Hi,
 >=20
-> I am preparing pull request and I see that CI loop is reporting issue with
-> sandbox trace and I have no idea what's going wrong here.
+> =FAt 22. 8. 2023 v 11:38 odes=EDlatel Maxim Uvarov <maxim.uvarov@linaro.o=
+rg> napsal:
+> >
+> > Hello,
+> >
+> > I'm sending v7, with all v6 comments getting fixed. The only thing left=
+ is a pointer
+> > to timeout callback which 2 applications use. I will rework this timeout
+> > in next v8. I started take a look at it, and want to fix this together
+> > with background applications support in v8.
+> >
+> > changelog:
+> >         v7: - more review fixes.
+> >             - support of multiply eth devices, were "ethact" selects the
+> >               active device.
+> >         v6: - fixed review comments for v5 (thanks Ilias and Simon).
+> >             - lwip is not under /net, so prior applying patch following
+> >               commit is needed to create lwIP merge into U-Boot:
+> >               git subtree add --prefix net/lwip/lwip-external https://g=
+it.savannah.nongnu.org/git/lwip.git master --squash
 >=20
-> This is the first problematic commit but have no clue what it has to do w=
-ith trace.
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/commit/8c5f8=
-0d11b29536979ac41a6087fb8938f45bbf2
->=20
-> If you have an access you can take a look at my queue to see that only th=
-is
-> job is failing.
-> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipelines
->=20
-> Thanks,
-> Michal
->=20
-> collected 1152 items / 1151 deselected / 1 selected
-> test/py/tests/test_trace.py F                                            =
-[100%]
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> __________________________________ test_trace ___________________________=
-_______
-> test/py/tests/test_trace.py:292: in test_trace
->     check_function(cons, fname, proftool, map_fname, trace_dat)
-> test/py/tests/test_trace.py:117: in check_function
->     out =3D util.run_and_log(cons, ['sh', '-c', cmd])
-> test/py/u_boot_utils.py:181: in run_and_log
->     output =3D runner.run(cmd, ignore_errors=3Dignore_errors, stdin=3Dstd=
-in, env=3Denv)
-> test/py/multiplexed_log.py:183: in run
->     raise exception
-> E   ValueError: Exit code: 1
-> ---------------------------- Captured stdout setup ----------------------=
--------
-> /u-boot
-> trace: early enable at 00100000
-> sandbox_serial serial: pinctrl_select_state_full:
-> uclass_get_device_by_phandle_id: err=3D-19
-> =3D>
+> I think you should integrate it via .gitmodules as is done for example in=
+ qemu.
 
-I don't get it either since I see this on master with trace options
-enabled per CI:
-$ ./u-boot -T arch/sandbox/dts/test.dtb
-trace: early enable at 00100000
-sandbox_serial serial: pinctrl_select_state_full: uclass_get_device_by_phan=
-dle_id: err=3D-19
-=2E.. rest of boot proceeds ...
-
-So the test should be failing already if that was the problem.
+I _think_ I am leaning towards subtree, but it sounds like we need to
+make the initial build easier, perhaps some Makefile logic to see we
+haven't added, and then do what's needed?
 
 --=20
 Tom
 
---VInCTK0/m+LQjl2A
+--zLTpSg6j2/QFtFHp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT6Eu0ACgkQFHw5/5Y0
-tyzVpwwAmlmMu6JCMejnY4WrnOf1CD6mFWAyLVpkftiCPOHybV/jmgMy6WERbsMl
-2rV0Nwb6Cv5cGJKckodnMzwc75PZVE9gbliBhsXfs7EFmo8VSW9TDsOdoQDx79od
-HQ2XpTlM/1+kgw3NXKS7noOMmAqozoxgcCAaU9iPFPQngGiXNxyi8LnVOn5KESge
-GSf70/tX61AlGsFC3sDakKQFvgDupWWZ1rHihkRrA5JJQxdaHH7mTyFnIbhYW4MF
-tTXteur+QllHDwDmu4HeE3gDNzdfZrqcI08AHkpECVG1fXtG61mFjfcozR/6SBnp
-uDbwxbDK6KnwyrK5PsoCe3IyH7HlVD9C1xo306t0eszrw7hdj14xL4yI30RdYfyD
-T1ua76ZAROPSoOLZ+FKTC9JIZCtNiiguf7vEDPK+u8dlJPdqyr+nzfgxi2LOmM4Z
-orUoYDBQ5HFkG9Yj2pLBAQv2PPuJ4AcExjLG6HvpX9R7lncndaQLS0agp0oGp/Mb
-072u++vD
-=lULc
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT6IywACgkQFHw5/5Y0
+tyzbsgv/RWwAbhpw9cQlieF5IAQQP2c7W1Nymz4+SjQ5j/0Q74eiec/fm2luGfss
++X14UolYlFcqek3+gh7NCpmYgCnTzY1lM6GWMMlXdSgvMCT+zPbeqc5Nj26mBP1c
+snfmAHINqXPIF51GHHp+vT8aJSbs1Nx8sU/z8Ot7BimS5GpHgmRpKF844suIdW9f
+I2VpRvZecrzx2xJ447PI4j9ySoqBXvsIGqbFMA18fLm/6ubBng2x8swP9OGhdwZj
+tUhJAmlWkd+a6LXOdjQcvftC6b/23PLja0MPbbwMN+dR8mZFm+PM3XswUdGd0dyu
+Z2YRtPb4rEb6O2T+oanQnxtoUGdHkoNTnaSjraEZPlpydgw+lFYG7cPmcu+8PFEj
+f1OptGa87NzYmrVi7K94oOqj8O/6LH5BoIKTo0Vrjy7PfoSHqV0gWgceneTm6Vdg
+moE+CQ7xbaAc5a4reAxT+Io+BpXutQFNDxB/u60HhFZPX7rFZaDXJmwNBO0S+/+9
+awrCPsAY
+=qB/L
 -----END PGP SIGNATURE-----
 
---VInCTK0/m+LQjl2A--
+--zLTpSg6j2/QFtFHp--
