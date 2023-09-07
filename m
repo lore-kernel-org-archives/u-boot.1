@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F072DEC8736
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:03:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB49FEC8736
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:05:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63E5286863;
-	Thu,  7 Sep 2023 17:03:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0043A869CD;
+	Thu,  7 Sep 2023 17:05:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WSDrj+mW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x4dWAuKv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFAFD86722; Thu,  7 Sep 2023 17:03:10 +0200 (CEST)
+ id 1CBB6869CD; Thu,  7 Sep 2023 17:05:22 +0200 (CEST)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23221869CA
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:03:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EB5286854
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:05:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 387F320g032649;
- Thu, 7 Sep 2023 10:03:03 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 387F5H4G034115;
+ Thu, 7 Sep 2023 10:05:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694098983;
- bh=7/jo6YL/RA3XPYjltz1UNZNuz+k0FX50NW9c+cT7wnw=;
+ s=ti-com-17Q1; t=1694099117;
+ bh=M+JWyh/vpmdR2Bef+fsXVDKFM1UU5KcbGDp3W6JqhBs=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=WSDrj+mWorCW5gNJyilzDISfhG9XYxcNxbg96pfy9P8axu9BCSJLM4JRNC3qx1f51
- RlrS4QxZnUcbM/p4EJv39x4Fme9+PFse7DJkrQwKpfsChH5C1azPtVFozesqfyL3EJ
- t+DP7IxyltuK6FIQfG1QlHkrGsrs/TAogghNAlvY=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 387F321D111444
+ b=x4dWAuKv06SV+rcoqqqSGk1fiVsalEX5FNpmsIBxZvakPm37KDrHB6fYUB0cSi1p+
+ pnPTlwBaPxRHj4ZVn17vYLM1E7MpqqRU/0pEwa2z3m6w9r7LQjvgsi+fmgteMvCiZ5
+ MYIxY5buQFvEP1aUDY3t3K7yScFE+ZzrNOhbI31s=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 387F5HFc099779
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Sep 2023 10:03:02 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 7 Sep 2023 10:05:17 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Sep 2023 10:03:01 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 10:05:16 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Sep 2023 10:03:01 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 387F31Dn115172;
- Thu, 7 Sep 2023 10:03:01 -0500
-Date: Thu, 7 Sep 2023 10:03:01 -0500
+ Frontend Transport; Thu, 7 Sep 2023 10:05:16 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 387F5GFe117449;
+ Thu, 7 Sep 2023 10:05:16 -0500
+Date: Thu, 7 Sep 2023 10:05:16 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Neha Malcom Francis <n-francis@ti.com>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
  <vigneshr@ti.com>, <u-kumar1@ti.com>, <reidt@ti.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
  <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>
-Subject: Re: [PATCH v2 3/7] arm: mach-k3: j721e_init: Move clk_k3 probe
- before loading TIFS
-Message-ID: <20230907150301.ro3dnojvridbkfc2@gosling>
+Subject: Re: [PATCH v2 4/7] drivers: firmware: ti_sci: Get SCI revision only
+ if TIFS/SYSFW is up
+Message-ID: <20230907150516.v3tsushxhcucmmsl@undergrad>
 References: <20230907141407.382215-1-n-francis@ti.com>
- <20230907141407.382215-4-n-francis@ti.com>
+ <20230907141407.382215-5-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230907141407.382215-4-n-francis@ti.com>
+In-Reply-To: <20230907141407.382215-5-n-francis@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,59 +83,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 19:44-20230907, Neha Malcom Francis wrote:
-> Since we need to configure required clocks before TIFS is loaded, move
-> clk_k3 driver probe before k3_sysfw_loader.
+> While setting up necessary dependent clocks and power domains, we end up
+> probing the ti_sci driver before TIFS/SYSFW has been loaded in the case
+> of legacy boot flow devices. This leads to panic when getting the SCI
+> revision. Return the revision only if it is combined boot flow. Also
 
-This needs further elaboration. what kind of clocks are we talking
-about? what is the call sequence that is involved that this is solving?
+Not clear description of the problem.
 
+> ensure that after TIFS/SYSFW comes up we run ti_sci_cmd_get_revision
+> again so we print the revision right.
 > 
 > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  arch/arm/mach-k3/j721e_init.c | 24 ++++++++++++------------
->  1 file changed, 12 insertions(+), 12 deletions(-)
+>  drivers/firmware/ti_sci.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
-> index b6164575b7..b1f7e25ed0 100644
-> --- a/arch/arm/mach-k3/j721e_init.c
-> +++ b/arch/arm/mach-k3/j721e_init.c
-> @@ -228,6 +228,18 @@ void board_init_f(ulong dummy)
->  	if (!ret)
->  		pinctrl_select_state(dev, "default");
+> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+> index 72f572d824..6a85d202f2 100644
+> --- a/drivers/firmware/ti_sci.c
+> +++ b/drivers/firmware/ti_sci.c
+> @@ -2703,6 +2703,9 @@ struct ti_sci_handle *ti_sci_get_handle_from_sysfw(struct udevice *sci_dev)
+>  	if (!handle)
+>  		return ERR_PTR(-EINVAL);
 >  
-> +	/*
-> +	 * Force probe of clk_k3 driver here to ensure basic default clock
-> +	 * configuration is always done.
-> +	 */
-> +	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
-> +		ret = uclass_get_device_by_driver(UCLASS_CLK,
-> +						  DM_DRIVER_GET(ti_clk),
-> +						  &dev);
-> +		if (ret)
-> +			panic("Failed to initialize clk-k3!\n");
-> +	}
+> +	/* May have been skipped in case TIFS/SYSFW had come up later */
+Very confusing comment.
+
+> +	ti_sci_cmd_get_revision(handle);
+
+should this be protected with if (IS_ENABLED(CONFIG_K3_DM_FW) ?
+
+Since getting the handle is where the entire flow happens, why not do it
+here always?
+
+what if ti_sci_cmd_get_revision fails? there is no error handling here.
 > +
->  	/*
->  	 * Load, start up, and configure system controller firmware. Provide
->  	 * the U-Boot console init function to the SYSFW post-PM configuration
-> @@ -241,18 +253,6 @@ void board_init_f(ulong dummy)
->  	do_dt_magic();
->  #endif
+>  	return handle;
+>  }
 >  
-> -	/*
-> -	 * Force probe of clk_k3 driver here to ensure basic default clock
-> -	 * configuration is always done.
-> -	 */
-> -	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
-> -		ret = uclass_get_device_by_driver(UCLASS_CLK,
-> -						  DM_DRIVER_GET(ti_clk),
-> -						  &dev);
-> -		if (ret)
-> -			panic("Failed to initialize clk-k3!\n");
-> -	}
-> -
->  	/* Prepare console output */
->  	preloader_console_init();
+> @@ -2825,7 +2828,11 @@ static int ti_sci_probe(struct udevice *dev)
+>  	list_add_tail(&info->list, &ti_sci_list);
+>  	ti_sci_setup_ops(info);
+>  
+> -	ret = ti_sci_cmd_get_revision(&info->handle);
+> +	/* Get SCI revision ONLY if we are real */
+> +	if (!IS_ENABLED(CONFIG_K3_DM_FW))
+> +		ret = ti_sci_cmd_get_revision(&info->handle);
+> +	else
+> +		ret = 0;
+>  
+>  	INIT_LIST_HEAD(&info->dev_list);
 >  
 > -- 
 > 2.34.1
