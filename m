@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7893DEC8738
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55097EC8738
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F82986AD8;
+	by phobos.denx.de (Postfix) with ESMTP id F1F8D86B4C;
 	Thu,  7 Sep 2023 18:00:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Je6YKE+L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L6N/S1MH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32EAB86B3B; Thu,  7 Sep 2023 18:00:33 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 6355786B47; Thu,  7 Sep 2023 18:00:33 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C320D86A88
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:00:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF25A86B0E
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:00:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-77ac14ff51bso47767939f.3
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 09:00:27 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-34b4b2608e3so4692735ab.3
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 09:00:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694102426; x=1694707226; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694102427; x=1694707227; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xD5RxK+XMIDAPUevKuxM+4fM45QZifEiRyKnEpplT8Y=;
- b=Je6YKE+LdJP4muchGDC1wnbASruMyOxM5ehZa3tLN3zKkcTag844eP/RVQvihHcH3S
- zOudtOIbJMGztJRnVg09rZOVt65LYInjHrAeTxUMndTwFOqN2LNJjZYj+X6skahbrupr
- fFDfgeB+2q9+NtLmIV+bBPIHpMUyRJ5qpUSKc=
+ bh=+qFge+TEdu7UFg/Oif2SVdTzVoiK71ndOG9LYwkkyOA=;
+ b=L6N/S1MH3uG4KgTswfm4AXHhtkBFaIY42oNBi982NuNNTIdhP9civAFNq4I7+ShPE5
+ 4qTPyzNvZGcFu09Un1Vlu/f4i+bnFrxIxv3fNazwtRfVcr9wJox672CuyVWenNNmHw6C
+ a9lc2xoISjM+aZJYlQ7LfxaMGtyPvUlarAZa8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694102426; x=1694707226;
+ d=1e100.net; s=20221208; t=1694102427; x=1694707227;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xD5RxK+XMIDAPUevKuxM+4fM45QZifEiRyKnEpplT8Y=;
- b=P1sI4tR9qGPb+j4VXOh0zhxGYab9J+O9hG74cX28D5kdfg3COdoVTuvb+/Z2kwuNnP
- U/pXYZrvGcya96Kqx3qro1vwYGuVReS4fGCZhe8P0cc/b5SCcelQ+xbo/lcCCH2z029c
- /CCzvNUAuf2tPem1XBbHl/hSOTI+p05oJlUwhBSIowVITFMTzN8kWMKD3smkF5JQIKTY
- zxDUyMTffQsjKJxCuAO8K4314kmbi8UWjQY51X2sgkiL//cn5YQuLEmsxCSUjUeByTJm
- DDdIjKKgaoOlNUqWvXA0Ikgct7DrgKPkQFIvrec8NOpLWQf3FMElH6U1FTK67zzAmpt3
- GnMg==
-X-Gm-Message-State: AOJu0YxXaS0q+R/sXA13rUwzgpaWrZfQpwxgwd96vPB6cB/efUEtLNVG
- jedw3GsQVwLTQYD2ZzRnidCquikXjFWN/N+tnbs=
-X-Google-Smtp-Source: AGHT+IHe9R5njUKma5OK1m8K6TpRuC5lzwb1e7cMLxJu7wyKN9G6c9ZEWxkHfn9kOsffaVdmnaEUuw==
-X-Received: by 2002:a6b:7f43:0:b0:792:8d16:91ea with SMTP id
- m3-20020a6b7f43000000b007928d1691eamr182016ioq.0.1694102426391; 
- Thu, 07 Sep 2023 09:00:26 -0700 (PDT)
+ bh=+qFge+TEdu7UFg/Oif2SVdTzVoiK71ndOG9LYwkkyOA=;
+ b=DAc6mcDUNVWiulbPaln2ATP/zWUgEEFKHtvr5bZULLYqueFOKGDMhGPakYxj9Mqfy5
+ eepaGhqRr59ZS4nGpmIxUbtdBenK0itQT6DZDxf4YsOd2uLe5RXYf+aR7dm04XwmiVRl
+ WrWgYlJkJD9gasIwWqquRG9aduk2hGV4ctv2tSkfUXz571GF6yhBL6EIj4mDbp+nhgMT
+ wKwEUBB0C/AVjyHSw9E3he/yebYa0saQR/k1cJkJtxn+Fx3j5ozQ411O8JbDzkat3GQw
+ 8WzrZiA3R6X3k0MVvcwAOL6r3J1eKs2VXr4k+6zKLSq9jdNrz47BDCYcF3oQIONJhOOj
+ C1ZQ==
+X-Gm-Message-State: AOJu0YxGfrWr+jU3omMibs8EJYhnwQnLmb1RX2t5p7IabrqjLbdqfM3E
+ 0ksbUZggwXcf+Y2y5Xds1tv3ps4pN8RC+6jLREc=
+X-Google-Smtp-Source: AGHT+IGF56q0mxIzL6cEbb5WKnByw8n4xfXNuA8hxQM/WjqHUO3cTbHVOj+USoeyR6I3mPLFFaoHCA==
+X-Received: by 2002:a05:6e02:18cd:b0:349:36e1:10fb with SMTP id
+ s13-20020a056e0218cd00b0034936e110fbmr160758ilu.18.1694102427343; 
+ Thu, 07 Sep 2023 09:00:27 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- f5-20020a02a805000000b0042b39b2289asm5699209jaj.102.2023.09.07.09.00.25
+ f5-20020a02a805000000b0042b39b2289asm5699209jaj.102.2023.09.07.09.00.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 09:00:26 -0700 (PDT)
+ Thu, 07 Sep 2023 09:00:27 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 1/4] buildman: Keep all common output files
-Date: Thu,  7 Sep 2023 10:00:17 -0600
-Message-ID: <20230907160023.49339-2-sjg@chromium.org>
+Subject: [PATCH v2 2/4] buildman: Show progress when regenerating the
+ board.cfg file
+Date: Thu,  7 Sep 2023 10:00:18 -0600
+Message-ID: <20230907160023.49339-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230907160023.49339-1-sjg@chromium.org>
 References: <20230907160023.49339-1-sjg@chromium.org>
@@ -88,49 +89,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make a list of common output extensions and use it to ensure that the -k
-option preserves all of these.
+This can take a while, so show a message when starting.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Tom Rini <trini@konsulko.com>
+Reported-by Tom Rini <trini@konsulko.com>
 ---
 
-Changes in v2:
-- Redo patch based on dropping the binman restriction
+(no changes since v1)
 
- tools/buildman/builderthread.py | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ tools/buildman/boards.py  | 15 ++++++++++++---
+ tools/buildman/control.py |  3 ++-
+ 2 files changed, 14 insertions(+), 4 deletions(-)
 
-diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
-index 25f460c207db..6a61f64da1d4 100644
---- a/tools/buildman/builderthread.py
-+++ b/tools/buildman/builderthread.py
-@@ -23,6 +23,9 @@ from u_boot_pylib import command
- RETURN_CODE_RETRY = -1
- BASE_ELF_FILENAMES = ['u-boot', 'spl/u-boot-spl', 'tpl/u-boot-tpl']
+diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
+index eef3f19f7ad6..341a5056dfd2 100644
+--- a/tools/buildman/boards.py
++++ b/tools/buildman/boards.py
+@@ -19,6 +19,7 @@ import time
+ from buildman import board
+ from buildman import kconfiglib
  
-+# Common extensions for images
-+COMMON_EXTS = ['.bin', '.rom', '.itb', '.img']
-+
- def mkdir(dirname, parents=False):
-     """Make a directory if it doesn't already exist.
++from u_boot_pylib.terminal import print_clear, tprint
  
-@@ -636,10 +639,11 @@ class BuilderThread(threading.Thread):
+ ### constant variables ###
+ OUTPUT_FILE = 'boards.cfg'
+@@ -863,11 +864,19 @@ class Boards:
+         Returns:
+             bool: True if all is well, False if there were warnings
+         """
+-        if not force and output_is_new(output, CONFIG_DIR, '.'):
++        if not force:
+             if not quiet:
+-                print(f'{output} is up to date. Nothing to do.')
+-            return True
++                tprint('\rChecking for Kconfig changes...', newline=False)
++            is_new = output_is_new(output, CONFIG_DIR, '.')
++            print_clear()
++            if is_new:
++                if not quiet:
++                    print(f'{output} is up to date. Nothing to do.')
++                return True
++        if not quiet:
++            tprint('\rGenerating board list...', newline=False)
+         params_list, warnings = self.build_board_list(CONFIG_DIR, '.', jobs)
++        print_clear()
+         for warn in warnings:
+             print(warn, file=sys.stderr)
+         self.format_and_output(params_list, output)
+diff --git a/tools/buildman/control.py b/tools/buildman/control.py
+index f2ffb7f5b4aa..8f6850c52113 100644
+--- a/tools/buildman/control.py
++++ b/tools/buildman/control.py
+@@ -621,7 +621,8 @@ def do_buildman(args, toolchains=None, make_func=None, brds=None,
+     if not brds:
+         brds = get_boards_obj(output_dir, args.regen_board_list,
+                               args.maintainer_check, args.full_check,
+-                              args.threads, args.verbose)
++                              args.threads, args.verbose and
++                              not args.print_arch and not args.print_prefix)
+         if isinstance(brds, int):
+             return brds
  
-             # Now write the actual build output
-             if keep_outputs:
--                copy_files(
--                    result.out_dir, build_dir, '',
--                    ['u-boot*', '*.bin', '*.map', '*.img', 'MLO', 'SPL',
--                     'include/autoconf.mk', 'spl/u-boot-spl*'])
-+                to_copy = ['u-boot*', '*.map', 'MLO', 'SPL',
-+                           'include/autoconf.mk', 'spl/u-boot-spl*',
-+                           'tpl/u-boot-tpl*', 'vpl/u-boot-vpl*']
-+                to_copy += [f'*{ext}' for ext in COMMON_EXTS]
-+                copy_files(result.out_dir, build_dir, '', to_copy)
- 
-     def _send_result(self, result):
-         """Send a result to the builder for processing
 -- 
 2.42.0.283.g2d96d420d3-goog
 
