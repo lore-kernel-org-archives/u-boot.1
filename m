@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA07BEC875B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 21:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D3CCEC8759
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 21:39:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E328E86998;
-	Thu,  7 Sep 2023 23:01:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 65D13869F5;
+	Thu,  7 Sep 2023 23:39:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KLVo+Uhm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gUNST/9w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40B29869D6; Thu,  7 Sep 2023 23:01:28 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 45D2A869F2; Thu,  7 Sep 2023 23:39:44 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EA9C867F6
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 23:01:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66C6A86995
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 23:39:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-52a23227567so1937977a12.0
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 14:01:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d7bae413275so3571749276.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 14:39:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694120485; x=1694725285; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J9DmIBq/OdG3Jl1nHB5ocAvNmXSrRtHC5mOjtsQOX1w=;
- b=KLVo+UhmG3fwXSkE5QfKyMpQi9e5y3dRxRWnRFkMqav6ZwTn70NSvvV3e6lC0dJlXI
- ifL7FFLK6UppWjnQv5exxnlbAwqu3dB5ziVYK5AAx2HLfxkQjbCzQdfLHD9RKdTkFY9V
- KOhCBN84lx2ngGvLbJq11SFkg8/wFjSsejVlQ=
+ d=gmail.com; s=20221208; t=1694122780; x=1694727580; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=our/uxSB/CKplt07iIY3zvkZJ59EnrxcAcxj2EbdYcU=;
+ b=gUNST/9wfwP/pTWT4BZcwo7GGzMSSN2rBeCsW3X4Wqh5DXzbOy1f141ynH8mrVGcfU
+ mnR7UtoMVAP/CkrzSH5tFoqGaRrSka4W26eVAIOBM+6LfwCBPwaxflPCKYgFYEtZgXmu
+ 5NJZAWc6yfPJBt3HN0/NhzJrPbbhupngJjX4qzbLMvLEsqvous70JAFC8DyidVRUjMAb
+ U6yu8lhDIH1hUG8WW+bLjEWqfDGY9IR/u19Q6GoX/Z1Q7n9/5wEkCx7Hy5AFdlXMDWfs
+ c3zkSp8eWBGxiTehRAhXcDqa6tyT/fNp3Q1Mw4QLhy88MXmntI6j7OF2+FgXIItWFSFT
+ 1Gfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694120485; x=1694725285;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1694122780; x=1694727580;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J9DmIBq/OdG3Jl1nHB5ocAvNmXSrRtHC5mOjtsQOX1w=;
- b=i4uO1bHYzTC2kUtfqUEYvjW+x9tWgdkFzlVMN6yMOhLVIR5tkKL/2Yxfq9/iYw0KCr
- WmKFFykw9/8fzsIsvyUW6NV7Hjp0BxnHKXOI5ZW01wXahRPdbVfL9FQVeBd8lFusZJRS
- X4lFp2A8v+Lwr6Ms8WDi30Wp1/gnxjlUgPh5r/M7sCHQT7XOEyYuM6cOTU+724fN0Fuh
- b/QHUgcWQ67qLWtWTLKFGEFNvY2jctpCxKi/paszNzoa29ZT/1Rp/DXPW/O4x+vNGNhP
- d9A8410uMpULr8SNzqpqMsYARMG4kGul1IPkawoALl8cUl5LyGV/+9luhEu3bxcewZkv
- G8ZQ==
-X-Gm-Message-State: AOJu0YwCLAwUBK0Px7GklY+euFGG4pxcpr9ugXxE2HYL+q+BCAFylzmW
- lOr0FqsK2A7DDKv7xlvIl2atGPfzeZZsjgGjOF1L0A==
-X-Google-Smtp-Source: AGHT+IHWY/pYItwnZgHl3Olu/RaNX2fguk91tA1Hyb9ME1XE/aJ4RwUKMiV1ggBCBrcxsIeDAfheL7ZeUyJoepIz39w=
-X-Received: by 2002:a17:906:51c2:b0:9a5:b8ca:9b76 with SMTP id
- v2-20020a17090651c200b009a5b8ca9b76mr375997ejk.72.1694120484740; Thu, 07 Sep
- 2023 14:01:24 -0700 (PDT)
+ bh=our/uxSB/CKplt07iIY3zvkZJ59EnrxcAcxj2EbdYcU=;
+ b=CFICOjPZFtFl9m3dd5GxuvcfSEr0NijIXYLyVEGployCElOR9pl7//8zO3TEulcgwE
+ oTkJaNMbclvh1kdQsBScSr/g7hx5JzuuPcobVuH99SN5bK/Ekd0uXSZdslbCgnWtH+Jo
+ s4zJRC3IfsaJQzkUgylUho44Id1hfS+m6f7rFQcVRPKJ+rnrmwQNIBd+IN2J6C184ynq
+ dq05yCYFBTGVDgtDzEh4Aja6CiKixVyYxfHMccmHmTQNmFHbs9+c7i7jXAPb8w3lOrQ5
+ iyD+zLHLOfD9DVwYI3cCj1NEXpsWZEvs5k0ULZSUhwovMNqwDGpPMODDSjJyd6TNd6wU
+ NykA==
+X-Gm-Message-State: AOJu0YxzwWaO6hvjoFI6MH6LdrnEeMCZKX/M3pkEx/fn2XebA8qWmVN0
+ 8VuibAouGrWsyTojX4BBZ1Y=
+X-Google-Smtp-Source: AGHT+IEt9KM2+4QMMRB23ow7mICeDEswAIYWUSoktFgrFw0n3WDyAaUFfZdMgh9UkNXuKX7G8h0KAQ==
+X-Received: by 2002:a25:b29d:0:b0:d78:2258:f5b8 with SMTP id
+ k29-20020a25b29d000000b00d782258f5b8mr5034360ybj.19.1694122779888; 
+ Thu, 07 Sep 2023 14:39:39 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ z1-20020a258681000000b00d7b9fab78bfsm78214ybk.7.2023.09.07.14.39.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Sep 2023 14:39:39 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v2] bootstd: sata: Add bootstd support for ahci sata
+Date: Thu,  7 Sep 2023 14:39:22 -0700
+Message-Id: <20230907213923.25948-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230823134209.1450567-1-sjg@chromium.org>
- <20230823134209.1450567-8-sjg@chromium.org>
- <20230823151400.GK3953269@bill-the-cat>
- <CAPnjgZ1VBpE8S7G-eBfAeRNQ6PgNvONbGyLceDYL0JsoNnYMjQ@mail.gmail.com>
- <20230903164244.GY3101304@bill-the-cat>
- <CAPnjgZ3WbCoxx-GGcf-fXA9iU6pzyr7BJGZD5tRvG0+tZ6Frdg@mail.gmail.com>
- <20230903192522.GZ3101304@bill-the-cat>
- <CAPnjgZ3c45YBFoX+by0aybgHnzmEqzrFvv90oeW6cyiLdrwAkw@mail.gmail.com>
- <20230906175755.GI305624@bill-the-cat>
- <CAPnjgZ3LAtZ4V7hwwnBzHBu8=HBroQzTb1XuHV-7aBrkrxS6yg@mail.gmail.com>
- <20230907194047.GZ305624@bill-the-cat>
-In-Reply-To: <20230907194047.GZ305624@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Sep 2023 15:01:06 -0600
-Message-ID: <CAPnjgZ1=_ufxMCQOCQRzV4ooYP4eR96BNYr8RX8fVb-DV-xSPg@mail.gmail.com>
-Subject: Re: [PATCH 7/7] fs: Fix a confusing error about overlapping regions
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Michal Simek <michal.simek@amd.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Sjoerd Simons <sjoerd@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,131 +90,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Add ahci sata bootdev and corresponding hunting function.
 
-On Thu, 7 Sept 2023 at 13:40, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Sep 07, 2023 at 06:23:06AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 6 Sept 2023 at 11:58, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Sep 05, 2023 at 12:16:56PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sun, 3 Sept 2023 at 13:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sun, Sep 03, 2023 at 12:06:13PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Sun, 3 Sept 2023 at 10:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Aug 31, 2023 at 06:15:19PM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Wed, 23 Aug 2023 at 09:14, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Wed, Aug 23, 2023 at 07:42:03AM -0600, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > When lmb runs out of space in its internal tables, it gives
-> > > > errors on
-> > > > > > > > > > every fs load operation. This is horribly confusing, as the
-> > > > poor user
-> > > > > > > > > > tries different memory regions one at a time.
-> > > > > > > > > >
-> > > > > > > > > > Use the updated API to check the error code and print a helpful
-> > > > message.
-> > > > > > > > > > Also, allow the operation to proceed.
-> > > > > > > > > >
-> > > > > > > > > > Update the tests accordingly.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > [snip]
-> > > > > > > > > > +     if (ret == -E2BIG) {
-> > > > > > > > > > +             log_warning("Reservation tables exhausted: see
-> > > > CONFIG_LMB_USE_MAX_REGIONS\n");
-> > > > > > > > > > +             return 0;
-> > > > > > > > > > +     }
-> > > > > > > > >
-> > > > > > > > > This isn't the right option.  Everyone has
-> > > > CONFIG_LMB_USE_MAX_REGIONS
-> > > > > > > > > set.  You would want to increase CONFIG_LMB_MAX_REGIONS.
-> > > > > > > > >
-> > > > > > > > > But it sounds like what you've found and fixed is an underlying
-> > > > problem
-> > > > > > > > > as to why 16 regions isn't enough in some common cases now?  So
-> > > > we could
-> > > > > > > >
-> > > > > > > > I don't think I have fixed anything. But I'll send v2 and perhaps it
-> > > > > > > > will be clearer what is going on here.
-> > > > > > > >
-> > > > > > > > > possibly avoid the string size growth here and have a comment
-> > > > that also
-> > > > > > > > > matches up with the help under LMB_MAX_REGIONS?
-> > > > > > > >
-> > > > > > > > I don't know, sorry. The size of struct(lmb) on 64-bit sandbox is
-> > > > > > > > about 400 bytes. There seems to be a lot of code to save not much
-> > > > > > > > memory.
-> > > > > > >
-> > > > > > > What do you mean here?  The alternative is not unlimited ranges but
-> > > > > > > instead to define the limit of memory regions and limit of reserved
-> > > > > > > ranges.
-> > > > > >
-> > > > > > A better alternative would be not to limit the number of regions, IMO,
-> > > > > > i.e. have an array of regions that can grow as needed.
-> > > > >
-> > > > > That's not something that we have in the code today, however.
-> > > >
-> > > > No, I do have an arraylist thing that I plan to upstream, which could
-> > > > handle that.
-> > > >
-> > > > But for this series, what do you think of the memregion idea? I am still
-> > > > unsure of the saming we should use - see Heinrich's comments too.
-> > >
-> > > My biggest worry here is that we're papering over a real issue, and
-> > > should either dig at that and see what's going on (should something be
-> > > coalescing adjacent allocations? Were many platforms just right at the
-> > > previous limit?) or just bump the default from 16 to "64 if EFI_LOADER"
-> > > and then see if anything else really needs tweaking / cleaning up in the
-> > > code itself.  I know Heinrich has previously said the LMB system could
-> > > be better (or something to that effect, I'm going from memory, sorry if
-> > > I'm mis-stating things) and I don't object to replacing what we have
-> > > with something more robust/smarter/etc.
-> >
-> > I am not sure...my series was designed to rename the code to reduce
-> > confusion, and print a useful message when we run out of regions. It
-> > does not paper over the problem, but actually makes it more visible.
->
-> Well, "papering over" maybe wasn't the best choice of words on my part.
-> But since the series of events was something like:
-> - We nee to use LMB to cover my U-Boot regions to address a handful of
->   CVEs over arbitrarily overwriting U-Boot at run-time.
->   - AFAICT no platforms suddenly ran out of LMB reservation space, but
->     maybe I'm wrong?
-> - Someone noted that the EFI subsystem was exposing the same kind of
->   issue.
-> - Heinrich adds logic for EFI_LOADER (iirc) to also add allocations
->   there to LMB
-> - Assorted platforms start changing the max allocation to 64 to fix the
->   problems that get reported sometimes by booting.
-> - Heinrich notes that our memory reservation system (LMB) could be
->   better designed than it is today.
->   - And, iirc, EFI_LOADER or similar has something maybe we can
->     leverage?
->
-> Which brings me to what I was trying to say.  I'm not sure it's worth
-> cleaning up the code a little, or refactoring/renaming things within it
-> without both:
-> - Understanding why EFI_LOADER being enabled causes us to run out of
->   allocations and so if the answer is "increase the default" OR "fix
->   some underlying issue such as coalescing being too strict or broken".
-> - Understanding if there's a better memory reservation system we can use
->   instead.
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-Perhaps Heinrich has some thoughts on that and/or the memregion
-question. EFI loves memory regions so perhaps it needs more?
+Changes in v2:
+- set devtype to sata in bootmeth_script for non-scsi SATA device
 
-But it should report a useful error, not the silly one it shows today.
+ boot/bootmeth_script.c     | 12 ++++++--
+ drivers/ata/Makefile       |  1 +
+ drivers/ata/sata.c         | 25 +++++++++++++++
+ drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+ include/sata.h             |  1 +
+ 5 files changed, 99 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/ata/sata_bootdev.c
 
-Regards,
-Simon
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index a4050c384d..3113183fb0 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct bootflow *bflow)
+ 	ulong addr;
+ 	int ret;
+ 
+-	if (desc->uclass_id == UCLASS_USB)
++	if (desc->uclass_id == UCLASS_USB) {
+ 		ret = env_set("devtype", "usb");
+-	else
++	} else {
+ 		ret = env_set("devtype", blk_get_devtype(bflow->blk));
++
++		/* If the parent uclass is AHCI, but the driver is ATA
++		 * (not scsi), set devtype to sata
++		 */
++		if (!ret && IS_ENABLED(CONFIG_SATA) &&
++		    !strcmp("ahci", env_get("devtype")))
++			ret = env_set("devtype", "sata");
++	}
+ 	if (!ret)
+ 		ret = env_set_hex("devnum", desc->devnum);
+ 	if (!ret)
+diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
+index 6e30180b8b..c1b51b5444 100644
+--- a/drivers/ata/Makefile
++++ b/drivers/ata/Makefile
+@@ -11,6 +11,7 @@ obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
+ obj-$(CONFIG_FSL_SATA) += fsl_sata.o
+ obj-$(CONFIG_LIBATA) += libata.o
+ obj-$(CONFIG_SATA) += sata.o
++obj-$(CONFIG_BOOTSTD) += sata_bootdev.o
+ obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
+ obj-$(CONFIG_SATA_MV) += sata_mv.o
+ obj-$(CONFIG_SATA_SIL) += sata_sil.o
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index ce3e9b5a40..9da7218564 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -15,6 +15,8 @@
+ #include <dm.h>
+ #include <part.h>
+ #include <sata.h>
++#include <dm/device-internal.h>
++#include <dm/uclass-internal.h>
+ 
+ #ifndef CONFIG_AHCI
+ struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
+@@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
+ 	return ops->scan(dev);
+ }
+ 
++int sata_rescan(bool verbose)
++{
++	struct udevice *dev;
++	int devnum = 0;
++	int ret;
++
++	/* Find and probing the SATA controller */
++	ret = uclass_get_device(UCLASS_AHCI, devnum, &dev);
++
++	/* Sanity check */
++	if (ret)
++		ret = uclass_find_first_device(UCLASS_AHCI, &dev);
++	if (ret) {
++		printf("Cannot probe SATA device %d (err=%d)\n", devnum, ret);
++		return -ENOSYS;
++	}
++	if (!dev) {
++		printf("No SATA device found!\n");
++		return -ENOSYS;
++	}
++	return 0;
++}
++
+ #ifndef CONFIG_AHCI
+ #ifdef CONFIG_PARTITIONS
+ struct blk_desc *sata_get_dev(int dev)
+diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+new file mode 100644
+index 0000000000..f638493ce0
+--- /dev/null
++++ b/drivers/ata/sata_bootdev.c
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Bootdev for sata
++ *
++ * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
++ */
++
++#include <common.h>
++#include <ahci.h>
++#include <bootdev.h>
++#include <dm.h>
++#include <init.h>
++#include <sata.h>
++
++static int sata_bootdev_bind(struct udevice *dev)
++{
++	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++
++	ucp->prio = BOOTDEVP_4_SCAN_FAST;
++
++	return 0;
++}
++
++static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
++{
++	int ret;
++
++	if (IS_ENABLED(CONFIG_PCI)) {
++		ret = pci_init();
++		if (ret)
++			return ret;
++	}
++
++	ret = sata_rescan(true);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++struct bootdev_ops sata_bootdev_ops = {
++};
++
++static const struct udevice_id sata_bootdev_ids[] = {
++	{ .compatible = "u-boot,bootdev-sata" },
++	{ }
++};
++
++U_BOOT_DRIVER(sata_bootdev) = {
++	.name		= "sata_bootdev",
++	.id		= UCLASS_BOOTDEV,
++	.ops		= &sata_bootdev_ops,
++	.bind		= sata_bootdev_bind,
++	.of_match	= sata_bootdev_ids,
++};
++
++BOOTDEV_HUNTER(sata_bootdev_hunter) = {
++	.prio		= BOOTDEVP_4_SCAN_FAST,
++	.uclass		= UCLASS_AHCI,
++	.hunt		= sata_bootdev_hunt,
++	.drv		= DM_DRIVER_REF(sata_bootdev),
++};
+diff --git a/include/sata.h b/include/sata.h
+index d89f7a8a29..0495744bad 100644
+--- a/include/sata.h
++++ b/include/sata.h
+@@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
+ 
+ int sata_probe(int devnum);
+ int sata_remove(int devnum);
++int sata_rescan(bool verbose);
+ 
+ #endif
+-- 
+2.39.2
+
