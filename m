@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C03AEB8FB2
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 11:24:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E80EB8FB1
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 11:24:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D42869A0;
-	Thu,  7 Sep 2023 13:23:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DB2388692F;
+	Thu,  7 Sep 2023 13:24:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="o1esxRuc";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wrvbwjK6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 145DC86997; Thu,  7 Sep 2023 13:23:57 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20618.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::618])
+ id 7D0AA86940; Thu,  7 Sep 2023 13:24:32 +0200 (CEST)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8b::631])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2488B868BC
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:23:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B16A8868BC
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:24:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Wueh/5hEjKM1Zg797Xq80htQbvEQZvdfWawF/Oaa5eYZAokOAVrlBZLg6v0JlDoyBpvuFD7Ooa84Z/jvRJ+oXRcK+zxCHoRIMFiM0uGg+RL34XZUjPyV6T/GhVu+l9KUvW7Vzcjc0DZvhStVUNi45KsdeSsuQ3Bof0+KaPW317q9LPX4NemLwDszw1rVooUi8d19c+rGe+f8QEYGycXJZafzBXrrpK7DAaGlSzpC8jglH0cRgPQZZStToZAP2HatyHgOwtz5I/ym1sMDJxWbu0r/F9jL68TCasP0NDudmtKLWWDwhb7EV66fRuZjZHTTtyJdysJVud77aSZAp+Autg==
+ b=BEb4+v+rtvS28VOKzV6hDQWNp7KnLvIZhqBxFFCo+Zz2/kkewGdE6DyIfGZklCxHVBgX9DSINJccZOe3zHo/VJ9WPSjNXVfGhaIBg0n2qSoImLQZ2EnXDiaT4mjOJi6fxBT6IjP0gYI/SAMGGn9U0amJXITpRKPWD5L60ECA0Ur93JR4MhvysHDSCFomi4KZ5zZwpO+4KyMFWa4CAsS8w4wD81DaY8hzTrz2apewABODCLqTdVn2IR137dDsjJndpqVky5u49BqcuOURIkn+3vmuv0mmksqNIByYLYxiptq6cCoCv1NkRLb55miS319p8I/if2/UVugJZF74CnxK6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ai5Jia2tFV+CkHG/t8AHZK1jDgSqKmS0woLMdgAgIXg=;
- b=Ehtc8FDuxdUWifBjGiCQTfWMVk7QpB3eq5kE8NA4Ogqz9Ca2x36FrBw0ljQDS2bZal9Kib+A3kvcbbjsRcDrKEI5Ricnv9IpBvOuwEuDSlUGlMutgrt9b1oKYsJ7zcjR1yLWp3yl+6ODKcCvUn+uRxSM8uQaNd1Y3y1hHltwmEcdNeK9aPlVcHp5CujLPrRQX9YABktjmHhET8Ka7geowqVTvirNv7BiWHYUS7h0DoJ83LwBD2Wq40HPQ+Vj81ql8xGcL2sq9ON/y81xpW0zvm9eN1nLFEjz16nBeV17ETV+fpfCoxnv7WJv0WrIMfl3JMsCC2Rf5CO45pQ9f7P88g==
+ bh=CiajUHsxY/Z3ffed1vX9YY8emijyHosToapPHi3Dp6E=;
+ b=CUNHWioyTmXJAZnT01irw+ZADwQktYtNfjwZHMv2KiMBGUL7KNO5k6mSHf97xmzZMyTszmlRIS2V1B8sBStVN9EkEA9X23dhFbsuMX4xHwm2qhrZ2p1lOxJaK9jrw8pj+SkuZ8J5P3omrb/TWqh8tU0ehPAeSu3gaGIEBes+7lhcAHI2OpfXG+iQiYLgAKkLN6BS8wL31OD1P2xzl7a52Vuf53a76l6JjslSUhkJ9vpUceS/O9CqToUMd8bmVQQT2JuYBixRHeJnGqU2a+lyhcl8BqGhlLPvs+xN/fhBGJrP9zMWpMZKRMxIebQ+XOxuZnwlTI5inc4cQY5YqGjeeA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ai5Jia2tFV+CkHG/t8AHZK1jDgSqKmS0woLMdgAgIXg=;
- b=o1esxRuccojBuMo6mmFSzyy4HEP8GsF2jx/kTpzklSQglgcRl0Rogq/gbZhA/6aShmy7XcMEvv2EN5j5S02onmCaaYJYVWQQ77f2MTcNR/xSisym9muxfEammJMrO6o4nGalngA32pqybt+1XFMIGStVzugxrAHMTjB+N+FCSrw=
-Received: from SA1P222CA0019.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:22c::20)
- by SA1PR12MB7344.namprd12.prod.outlook.com (2603:10b6:806:2b7::15)
+ bh=CiajUHsxY/Z3ffed1vX9YY8emijyHosToapPHi3Dp6E=;
+ b=wrvbwjK6mVV+Xb/fbaMGxoRpVBndJSMnPz5JwvxCsyHNMeo6/S4bNGmM2gl8tKleUuxSWTcwv83m25pn3g+Th53kJgI17dv/tYoUd0aum+3u+au1xAoaOry1fyMobjjUrTFFE0pZPgB2WpaQyz28zTnteaHGlBn0kH31CXRlark=
+Received: from SA1PR05CA0023.namprd05.prod.outlook.com (2603:10b6:806:2d2::17)
+ by SA1PR12MB6970.namprd12.prod.outlook.com (2603:10b6:806:24d::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33; Thu, 7 Sep
- 2023 11:23:50 +0000
-Received: from SA2PEPF00001509.namprd04.prod.outlook.com
- (2603:10b6:806:22c:cafe::6f) by SA1P222CA0019.outlook.office365.com
- (2603:10b6:806:22c::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30 via Frontend
- Transport; Thu, 7 Sep 2023 11:23:50 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Thu, 7 Sep
+ 2023 11:24:26 +0000
+Received: from SA2PEPF00001504.namprd04.prod.outlook.com
+ (2603:10b6:806:2d2:cafe::ca) by SA1PR05CA0023.outlook.office365.com
+ (2603:10b6:806:2d2::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.10 via Frontend
+ Transport; Thu, 7 Sep 2023 11:24:26 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,25 +59,29 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ SA2PEPF00001504.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Thu, 7 Sep 2023 11:23:50 +0000
+ 15.20.6768.25 via Frontend Transport; Thu, 7 Sep 2023 11:24:25 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 7 Sep
- 2023 06:23:45 -0500
-Message-ID: <9e52f99f-c678-d3c5-74b5-529a549bc425@amd.com>
-Date: Thu, 7 Sep 2023 13:23:43 +0200
+ 2023 06:24:22 -0500
+Message-ID: <7f678098-36bb-1543-b0d1-f04322ee702b@amd.com>
+Date: Thu, 7 Sep 2023 13:24:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH v2] arm64: zynqmp: Add output-enable pins to SOMs
+Subject: Re: [PATCH v2 1/2] dm: core: ofnode: Add
+ ofnode_read_bootscript_flash()
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Neal Frager <neal.frager@amd.com>
-References: <7ecd98b2a302c5c6628e0234482f23c38e721fd6.1693492064.git.michal.simek@amd.com>
-In-Reply-To: <7ecd98b2a302c5c6628e0234482f23c38e721fd6.1693492064.git.michal.simek@amd.com>
+CC: Simon Glass <sjg@chromium.org>, Abdellatif El Khlifi
+ <abdellatif.elkhlifi@arm.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Nikhil M Jain
+ <n-jain1@ti.com>
+References: <08a3e6c09cce13287c69ad370e409e7f1766b406.1693465465.git.michal.simek@amd.com>
+In-Reply-To: <08a3e6c09cce13287c69ad370e409e7f1766b406.1693465465.git.michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -85,26 +89,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|SA1PR12MB7344:EE_
-X-MS-Office365-Filtering-Correlation-Id: 32fc4f94-39b1-48f2-c516-08dbaf94e969
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001504:EE_|SA1PR12MB6970:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7f3f0779-863f-4e46-0bf3-08dbaf94fe3b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: OAxUdnq2rJ+7qHdMZypNeJzr4KFeaQ835Orp+d0RWZpA9bgsLwoEn8hg+RRku4/Ui5EyuR3WRO2Uj6vymy4lb4HYDylcwsUXYRAcYuUfIP3qKi8GXjpaonqM0sv9L4IPdqpJTcdjtnNTtgenYVAkn8w24qIn3bKJVSPjvdfXqCewOwa+BDxQNXUW996mxZJhWOm3IGAICGDCHXAzbUJdJ98s/nRImm0r9Y6ryV35otyCCRf1qGD8KCgs+XNhz19qcY7v63ZVGRoigRSpsFlnDLyGLc46LgpFNAqB6yDQ58dX/Iy0alCSg/r2QLrfGCYIP2te8NlB81K7AqoIHusQPWvSwVg+Pdl86I+s+FaT3tujZjmezKI5wK7EgP5P9Nvva5f8Qi62BDh8GuHfWoMdpiZqC1oQg4XyS2y3L/wXMNTcMLwyHhO3S3PpwBls+sZeltwo/syI/qkXr0a2Mdt6Jb0ohZHa+ZGSk0ANRgj003nhQdZ4+mHVEUVh5iqEevrmd+kZqOZuKOCdSEgx/SYju3t3m9xDtEJyPeuTNMAlcxTqn0N0C01o80Biy74QLlLzTtr+k1CphjHqR5iPfFQRejQ2Z3+IhqBBO9hLWDGifFezZb8YPvd3wPdGnrGA55pDXkOuAZpVsbOgVsuEGX8PDgXP0faaabLLQK12LktP4v0P61DqmL0yddjpjIfvgAcpe1kADlUeNjiQemP7OVlhrpVGIywiKsw4X5DcOiVu0GjClB81IbMSJPwolVhUiyUCmbBkuS8/h/DfpIJDhCJLoEnRsHOWBa3qCUMLV3q+o2HRAyn70/eIBDirOkrITufo
+X-Microsoft-Antispam-Message-Info: bQ+AXZWiQkkqPN4GkU9kuwcBpJyG0q7vXbqbYfV2jFW6vd56+9S3Y8SVqJt/lFQkQecW4yt4HEQOn9DNrAdk/zB+Lcq7RBXv0g82oQ8pCr4FUVPek1WDrpaDX3tZ02QHYHK5dqC5MQzVyXLeunDJZ3T81TcHi8IoNhhfP9Kv/ElQ3l2xh7vHKz5TdO+5egdrWBmpCarV1qO1kZlQMwwliyNj8ZRhmpG2TyY1n5QGz8nsi7yaO85lM2bD3kdQvjnu9cMOPgI4UPMFZKn6LGP4ikbRXnNsRjnKJhQhE0AQrpm/4Ekw34l2+fPKAS53YmZ/h1ucPc5CVOHSA6DXNm3fhVlAnBiUZpszuYIMdvyxN6oYTz+7YkQ7fq7sRMUnHA1MFE9hcHhVMCTN19T19CSBllL23y2sp0XBxOYHoibNWZI66KRzeNCGgGvxp74DwQxPLQhrsoL4mHu5lUK9jC/C2Tk9N4CHfnphsiVOWoUIxEIpjdhglxMcJfOS4ST3ch4lPoGXgdhyQoaHto4lHDhAq+CS8To5LCRgxrxu/WK293rCEyjl4rjAMWKOKVWdHZsntBSMZMjaTAYHQTi625qGrogH46ZmsE225E3N0XW7D3KMSRnd6OOEJce7X8yG806nCU9LYMSLS/IybnL+qfVoFX6jiQ55wo1A8oQpu2NHpZsuNn52vq5sGtko8hQKacBZCkoJofOG2ZBASTNuDlNH3ZvG+0m5f+SW65g64fUdqUGJbvCUmI1/kEOUvWn02ZNv+27n28e7OrIOKArQx+7fi2DnnO3W/nNhpjyDxQYZBzbNRjskf8Qne85ndPAtOoou
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(376002)(346002)(136003)(39860400002)(1800799009)(82310400011)(451199024)(186009)(36840700001)(40470700004)(46966006)(41300700001)(40460700003)(16526019)(86362001)(356005)(82740400003)(81166007)(31696002)(478600001)(2616005)(83380400001)(53546011)(26005)(426003)(40480700001)(47076005)(36860700001)(336012)(316002)(110136005)(36756003)(70206006)(16576012)(2906002)(70586007)(44832011)(8676002)(5660300002)(31686004)(4326008)(8936002)(43740500002)(36900700001);
+ SFS:(13230031)(4636009)(136003)(346002)(396003)(39860400002)(376002)(1800799009)(82310400011)(186009)(451199024)(36840700001)(46966006)(40470700004)(8676002)(8936002)(83380400001)(47076005)(426003)(36860700001)(4326008)(16576012)(478600001)(70206006)(70586007)(54906003)(110136005)(336012)(26005)(2616005)(53546011)(6666004)(16526019)(41300700001)(2906002)(40460700003)(31696002)(356005)(316002)(5660300002)(44832011)(81166007)(82740400003)(40480700001)(86362001)(31686004)(36756003)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2023 11:23:50.8475 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 32fc4f94-39b1-48f2-c516-08dbaf94e969
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2023 11:24:25.7735 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7f3f0779-863f-4e46-0bf3-08dbaf94fe3b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001504.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7344
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6970
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,228 +127,158 @@ X-Virus-Status: Clean
 
 
 
-On 8/31/23 16:27, Michal Simek wrote:
-> From: Neal Frager <neal.frager@amd.com>
+On 8/31/23 09:04, Michal Simek wrote:
+> ofnode_read_bootscript_flash() reads bootscript address from
+> /options/u-boot DT node. bootscr-flash-offset and bootscr-flash-size
+> properties are read and values are filled. When bootscr-flash-size is not
+> defined, bootscr-flash-offset property is unusable that's why cleaned.
+> Both of these properties should be defined to function properly.
 > 
-> Now that the zynqmp pinctrl driver supports the tri-state registers, make
-> sure that the pins requiring output-enable are configured appropriately for
-> SOMs.
+> Also add test to cover this new function.
 > 
-> Without it, all tristate setting for MIOs, which are not related to SOM
-> itself, are using default configuration which is not correct setting.
-> It means SDs, USBs, ethernet, etc. are not working properly.
-> 
-> In past it was fixed through calling tristate configuration via bootcmd:
-> usb_init=mw 0xFF180208 2020
-> kv260_gem3=mw 0xFF18020C 0xFC0 && gpio toggle gpio@ff0a000038 && \
->    gpio toggle gpio@ff0a000038
-> 
-> Signed-off-by: Neal Frager <neal.frager@amd.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
 > Changes in v2:
-> - update commit message
-> - add also fixes for kr260-revB and kv260-revA/B
+> - Add missing static inline for !DM case (found by CI loop)
 > 
->   arch/arm/dts/zynqmp-sck-kr-g-revA.dts | 6 ++++++
->   arch/arm/dts/zynqmp-sck-kr-g-revB.dts | 6 ++++++
->   arch/arm/dts/zynqmp-sck-kv-g-revA.dts | 5 +++++
->   arch/arm/dts/zynqmp-sck-kv-g-revB.dts | 5 +++++
->   4 files changed, 22 insertions(+)
+>   arch/sandbox/dts/test.dts |  2 ++
+>   drivers/core/ofnode.c     | 34 ++++++++++++++++++++++++++++++++++
+>   include/dm/ofnode.h       | 27 +++++++++++++++++++++++++++
+>   test/dm/ofnode.c          |  9 +++++++--
+>   4 files changed, 70 insertions(+), 2 deletions(-)
 > 
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dts b/arch/arm/dts/zynqmp-sck-kr-g-revA.dts
-> index d318773bd9d6..30a0230d4767 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dts
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dts
-> @@ -250,6 +250,7 @@
->   		conf-tx {
->   			pins = "MIO36";
->   			bias-disable;
-> +			output-enable;
+> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> index 84879cc31ac0..cedb66af09e7 100644
+> --- a/arch/sandbox/dts/test.dts
+> +++ b/arch/sandbox/dts/test.dts
+> @@ -83,6 +83,8 @@
+>   		u-boot {
+>   			compatible = "u-boot,config";
+>   			bootscr-ram-offset = /bits/ 64 <0x12345678>;
+> +			bootscr-flash-offset = /bits/ 64 <0>;
+> +			bootscr-flash-size = /bits/ 64 <0x2000>;
 >   		};
+>   	};
 >   
->   		mux {
-> @@ -301,6 +302,7 @@
->   		conf-bootstrap {
->   			pins = "MIO45", "MIO47", "MIO49";
->   			bias-disable;
-> +			output-enable;
->   			low-power-disable;
->   		};
+> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> index d94f0300c30a..023aad06ddc3 100644
+> --- a/drivers/core/ofnode.c
+> +++ b/drivers/core/ofnode.c
+> @@ -1588,6 +1588,40 @@ int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset)
+>   	return 0;
+>   }
 >   
-> @@ -308,6 +310,7 @@
->   			pins = "MIO38", "MIO39", "MIO40",
->   				"MIO41", "MIO42", "MIO43";
->   			bias-disable;
-> +			output-enable;
->   			low-power-enable;
->   		};
+> +int ofnode_read_bootscript_flash(u64 *bootscr_flash_offset,
+> +				 u64 *bootscr_flash_size)
+> +{
+> +	int ret;
+> +	ofnode uboot;
+> +
+> +	*bootscr_flash_offset = 0;
+> +	*bootscr_flash_size = 0;
+> +
+> +	uboot = ofnode_path("/options/u-boot");
+> +	if (!ofnode_valid(uboot)) {
+> +		printf("%s: Missing /u-boot node\n", __func__);
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = ofnode_read_u64(uboot, "bootscr-flash-offset",
+> +			      bootscr_flash_offset);
+> +	if (ret)
+> +		return -EINVAL;
+> +
+> +	ret = ofnode_read_u64(uboot, "bootscr-flash-size",
+> +			      bootscr_flash_size);
+> +	if (ret)
+> +		return -EINVAL;
+> +
+> +	if (!bootscr_flash_size) {
+> +		debug("bootscr-flash-size is zero. Ignoring properties!\n");
+> +		*bootscr_flash_offset = 0;
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   ofnode ofnode_get_phy_node(ofnode node)
+>   {
+>   	/* DT node properties that reference a PHY node */
+> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> index c1afa69e1c56..6f8dc4fb4551 100644
+> --- a/include/dm/ofnode.h
+> +++ b/include/dm/ofnode.h
+> @@ -1521,6 +1521,27 @@ const char *ofnode_conf_read_str(const char *prop_name);
+>    */
+>   int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset);
 >   
-> @@ -316,6 +319,7 @@
->   			slew-rate = <SLEW_RATE_SLOW>;
->   			power-source = <IO_STANDARD_LVCMOS18>;
->   			bias-disable;
-> +			output-enable;
->   		};
+> +/**
+> + * ofnode_read_bootscript_flash() - Read bootscr-flash-offset/size
+> + *
+> + * @bootscr_flash_offset: pointer to 64bit offset where bootscr-flash-offset
+> + * property value is stored
+> + * @bootscr_flash_size: pointer to 64bit size where bootscr-flash-size property
+> + * value is stored
+> + *
+> + * This reads a bootscr-flash-offset and bootscr-flash-size properties from
+> + * the /options/u-boot/ node of the devicetree. bootscr-flash-offset holds
+> + * the offset of the boot script file from start of flash. bootscr-flash-size
+> + * holds the boot script size in flash. When bootscr-flash-size is not defined,
+> + * bootscr-flash-offset property is cleaned.
+> + *
+> + * This only works with the control FDT.
+> + *
+> + * Return: 0 if OK, -EINVAL if property is not found or incorrect.
+> + */
+> +int ofnode_read_bootscript_flash(u64 *bootscr_flash_offset,
+> +				 u64 *bootscr_flash_size);
+> +
+>   #else /* CONFIG_DM */
+>   static inline bool ofnode_conf_read_bool(const char *prop_name)
+>   {
+> @@ -1542,6 +1563,12 @@ static inline int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *boot
+>   	return -EINVAL;
+>   }
 >   
->   		mux-mdio {
-> @@ -346,6 +350,7 @@
->   			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
->   			"MIO60", "MIO61", "MIO62", "MIO63";
->   			bias-disable;
-> +			output-enable;
->   			drive-strength = <4>;
->   			slew-rate = <SLEW_RATE_SLOW>;
->   		};
-> @@ -373,6 +378,7 @@
->   			pins = "MIO66", "MIO68", "MIO69", "MIO70", "MIO71",
->   			"MIO72", "MIO73", "MIO74", "MIO75";
->   			bias-disable;
-> +			output-enable;
->   			drive-strength = <4>;
->   			slew-rate = <SLEW_RATE_SLOW>;
->   		};
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts b/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
-> index 69dba0761b37..8f4c52d6d643 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dts
-> @@ -250,6 +250,7 @@
->   		conf-tx {
->   			pins = "MIO36";
->   			bias-disable;
-> +			output-enable;
->   		};
+> +static inline int ofnode_read_bootscript_flash(u64 *bootscr_flash_offset,
+> +					       u64 *bootscr_flash_size)
+> +{
+> +	return -EINVAL;
+> +}
+> +
+>   #endif /* CONFIG_DM */
 >   
->   		mux {
-> @@ -301,6 +302,7 @@
->   		conf-bootstrap {
->   			pins = "MIO45", "MIO47", "MIO49";
->   			bias-disable;
-> +			output-enable;
->   			low-power-disable;
->   		};
+>   /**
+> diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+> index a4e04f23784f..d84b738ed7c4 100644
+> --- a/test/dm/ofnode.c
+> +++ b/test/dm/ofnode.c
+> @@ -585,14 +585,19 @@ DM_TEST(dm_test_ofnode_conf, 0);
 >   
-> @@ -308,6 +310,7 @@
->   			pins = "MIO38", "MIO39", "MIO40",
->   				"MIO41", "MIO42", "MIO43";
->   			bias-disable;
-> +			output-enable;
->   			low-power-enable;
->   		};
+>   static int dm_test_ofnode_options(struct unit_test_state *uts)
+>   {
+> -	u64 bootscr_address;
+> -	u64 bootscr_offset;
+> +	u64 bootscr_address, bootscr_offset;
+> +	u64 bootscr_flash_offset, bootscr_flash_size;
 >   
-> @@ -316,6 +319,7 @@
->   			slew-rate = <SLEW_RATE_SLOW>;
->   			power-source = <IO_STANDARD_LVCMOS18>;
->   			bias-disable;
-> +			output-enable;
->   		};
+>   	ut_assertok(ofnode_read_bootscript_address(&bootscr_address,
+>   						   &bootscr_offset));
+>   	ut_asserteq_64(0, bootscr_address);
+>   	ut_asserteq_64(0x12345678, bootscr_offset);
 >   
->   		mux-mdio {
-> @@ -346,6 +350,7 @@
->   			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
->   			"MIO60", "MIO61", "MIO62", "MIO63";
->   			bias-disable;
-> +			output-enable;
->   			drive-strength = <4>;
->   			slew-rate = <SLEW_RATE_SLOW>;
->   		};
-> @@ -373,6 +378,7 @@
->   			pins = "MIO66", "MIO68", "MIO69", "MIO70", "MIO71",
->   			"MIO72", "MIO73", "MIO74", "MIO75";
->   			bias-disable;
-> +			output-enable;
->   			drive-strength = <4>;
->   			slew-rate = <SLEW_RATE_SLOW>;
->   		};
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dts b/arch/arm/dts/zynqmp-sck-kv-g-revA.dts
-> index a81b3f6f51ad..55bef1df75d0 100644
-> --- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dts
-> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dts
-> @@ -205,6 +205,7 @@
->   		conf-tx {
->   			pins = "MIO36";
->   			bias-disable;
-> +			output-enable;
->   		};
->   
->   		mux {
-> @@ -256,6 +257,7 @@
->   		conf-bootstrap {
->   			pins = "MIO71", "MIO73", "MIO75";
->   			bias-disable;
-> +			output-enable;
->   			low-power-disable;
->   		};
->   
-> @@ -263,6 +265,7 @@
->   			pins = "MIO64", "MIO65", "MIO66",
->   				"MIO67", "MIO68", "MIO69";
->   			bias-disable;
-> +			output-enable;
->   			low-power-enable;
->   		};
->   
-> @@ -271,6 +274,7 @@
->   			slew-rate = <SLEW_RATE_SLOW>;
->   			power-source = <IO_STANDARD_LVCMOS18>;
->   			bias-disable;
-> +			output-enable;
->   		};
->   
->   		mux-mdio {
-> @@ -301,6 +305,7 @@
->   			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
->   			"MIO60", "MIO61", "MIO62", "MIO63";
->   			bias-disable;
-> +			output-enable;
->   			drive-strength = <4>;
->   			slew-rate = <SLEW_RATE_SLOW>;
->   		};
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dts b/arch/arm/dts/zynqmp-sck-kv-g-revB.dts
-> index f935f25c887f..1b1d9e772f55 100644
-> --- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dts
-> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dts
-> @@ -193,6 +193,7 @@
->   		conf-tx {
->   			pins = "MIO36";
->   			bias-disable;
-> +			output-enable;
->   		};
->   
->   		mux {
-> @@ -244,6 +245,7 @@
->   		conf-bootstrap {
->   			pins = "MIO71", "MIO73", "MIO75";
->   			bias-disable;
-> +			output-enable;
->   			low-power-disable;
->   		};
->   
-> @@ -251,6 +253,7 @@
->   			pins = "MIO64", "MIO65", "MIO66",
->   				"MIO67", "MIO68", "MIO69";
->   			bias-disable;
-> +			output-enable;
->   			low-power-enable;
->   		};
->   
-> @@ -259,6 +262,7 @@
->   			slew-rate = <SLEW_RATE_SLOW>;
->   			power-source = <IO_STANDARD_LVCMOS18>;
->   			bias-disable;
-> +			output-enable;
->   		};
->   
->   		mux-mdio {
-> @@ -289,6 +293,7 @@
->   			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
->   			"MIO60", "MIO61", "MIO62", "MIO63";
->   			bias-disable;
-> +			output-enable;
->   			drive-strength = <4>;
->   			slew-rate = <SLEW_RATE_SLOW>;
->   		};
+> +	ut_assertok(ofnode_read_bootscript_flash(&bootscr_flash_offset,
+> +						 &bootscr_flash_size));
+> +	ut_asserteq_64(0, bootscr_flash_offset);
+> +	ut_asserteq_64(0x2000, bootscr_flash_size);
+> +
+>   	return 0;
+>   }
+>   DM_TEST(dm_test_ofnode_options, 0);
 
-Applied.
+Applied both.
+
 M
