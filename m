@@ -4,55 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A166FEC8745
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6116EEC8743
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:58:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECB4286487;
-	Thu,  7 Sep 2023 18:45:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0AC8986410;
+	Thu,  7 Sep 2023 18:58:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lggDYX7d";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HZSOww+G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 682278657B; Thu,  7 Sep 2023 18:45:51 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id AE0D3869E1; Thu,  7 Sep 2023 18:58:26 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D99D686410
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:45:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BA3385DD2
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 18:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 9FDF73F6E7; 
- Thu,  7 Sep 2023 16:45:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1694105145;
- bh=FHxxc/gJhResXFFA1OFLUV2q7pzG1B+ksxjn5C4xO7s=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=lggDYX7da88NcGe3Gq+56vDO1/2JzBhnZML3rOc/qLSp+0YDut6KFHLTd0tq0KyDb
- UzGFFNi69LdLoUt4bf1i11XW4HqSz0yNC1p5ZuefK/QroZZNJS97QbX0LnuZAHbE1/
- ZZlT4wZ8/0BZCUgGqeW6j6wsw/rnQDfRz7ZZl9BMnvcVewRApFuOyuKGL/Yj6g9+NK
- SJdAN50Q28ZpGDUJodPVi4dgCdtsglPMDSeIVU4O/SlmFRtsJCrAAgiKMJPMD7k6iX
- ud7JxrXyiNutDjfMU2LPDS9WFl+7bEJv297cM48Qa/NbM+RutBpHoMRIkXtYfJVwyE
- MZdK3uhGZTF2g==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] test: build dependency for event unit tests
-Date: Thu,  7 Sep 2023 18:43:17 +0200
-Message-Id: <20230907164317.378832-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ by ams.source.kernel.org (Postfix) with ESMTPS id C8AFEB81E82
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:58:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65084C433B7
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:58:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1694105901;
+ bh=9H8krLtYfLzgGeA5i0zuj9qgIuh5eWibHtX4rliuuxQ=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=HZSOww+G/B17lm44Q4pK901JIvTJ+z2HSd8QVDZnTmfMHtw4A/FdMMdg0G9fWUG8n
+ VgwoarbRzt5ypjQeRKWF1UtKEO/iIScBixMwuctbelX+fXPN7iNwDDQkBf/gnAUYkx
+ mf6r1j0bJ0GDOXTs7goJT5QasJ1jlDe/wPpJKZAcuzxHRagM7PMKEn32dCanO0a57H
+ BtndR0lM1QbhEN3hLC1d6wDNm0i/GQHtxpbo5HFx1mhzL5rO/aiEqNINT5VrCu3Wi8
+ xES8vBcm83QU9L+UKQa6B4ed3Ba6vkmpyDuJT0GGJXIAZvb3mgxws/PkYis79hfx4E
+ V0qByRzTyJTSg==
+Received: by mail-lj1-f180.google.com with SMTP id
+ 38308e7fff4ca-2b9c907bc68so20219461fa.2
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 09:58:21 -0700 (PDT)
+X-Gm-Message-State: AOJu0YxadTHvqF13EcS0l1NYFWPDo7WdObpGnhUae5MfCZ91bP3kr+DO
+ RUWk8T1D1HGXiteKmyB9ilzaskuTSE7JDBulqw==
+X-Google-Smtp-Source: AGHT+IHLKsGi67L1BWMr0evQdFmmKrCxPICw4WCCL86IJN0XnEYKyZyPOVddUmJXTpGASiUH1k4Vzk7Q+KRVgc7tkH4=
+X-Received: by 2002:a2e:965a:0:b0:2bc:b815:d64d with SMTP id
+ z26-20020a2e965a000000b002bcb815d64dmr5383234ljh.30.1694105899386; Thu, 07
+ Sep 2023 09:58:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230830231758.2561402-1-sjg@chromium.org>
+ <20230830231758.2561402-4-sjg@chromium.org>
+In-Reply-To: <20230830231758.2561402-4-sjg@chromium.org>
+From: Rob Herring <robh@kernel.org>
+Date: Thu, 7 Sep 2023 11:58:07 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqKEbqUtWHpHXmiDSZBY7-Nw4-fLs23BEqomBevSDNBprQ@mail.gmail.com>
+Message-ID: <CAL_JsqKEbqUtWHpHXmiDSZBY7-Nw4-fLs23BEqomBevSDNBprQ@mail.gmail.com>
+Subject: Re: [PATCH v5 4/4] memory: Add ECC properties
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ ron minnich <rminnich@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
+ Ard Biesheuvel <ardb@kernel.org>, Gua Guo <gua.guo@intel.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, Guo Dong <guo.dong@intel.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Chiu Chasel <chasel.chiu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,26 +89,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test_event_base and test_event_probe unit tests use function
-event_register() which depends on CONFIG_EVENT_DYNAMIC=y.
+On Wed, Aug 30, 2023 at 6:18=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Some memories provide ECC detection and/or correction. For software which
+> wants to check memory, it is helpful to see which regions provide this
+> feature.
+>
+> Add this as a property of the /memory nodes, since it presumably follows
+> the hardware-level memory system.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v5:
+> - Redo to make this property specific to ECC
+> - Provide properties both for detection and correction
+>
+> Changes in v3:
+> - Add new patch to update the /memory nodes
+>
+>  dtschema/schemas/memory.yaml | 30 ++++++++++++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>
+> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
+> index 1d74410..944aa9f 100644
+> --- a/dtschema/schemas/memory.yaml
+> +++ b/dtschema/schemas/memory.yaml
+> @@ -34,7 +34,37 @@ patternProperties:
+>          description:
+>            For the purpose of identification, each NUMA node is associate=
+d with
+>            a unique token known as a node id.
+> +      ecc-detection:
+> +        $ref: /schemas/types.yaml#/definitions/string
+> +        enum:
+> +          - none
+> +          - single-bit
+> +          - multi-bit
+> +        description: |
+> +          If present, this inidcates the type of memory errors which can=
+ be
 
-Fixes: 7d02645fe4c0 ("event: Add a simple test")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- test/common/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+typo
 
-diff --git a/test/common/Makefile b/test/common/Makefile
-index a5ab10f6f6..12c65f8c95 100644
---- a/test/common/Makefile
-+++ b/test/common/Makefile
-@@ -2,5 +2,5 @@
- obj-y += cmd_ut_common.o
- obj-$(CONFIG_AUTOBOOT) += test_autoboot.o
- obj-$(CONFIG_CYCLIC) += cyclic.o
--obj-$(CONFIG_EVENT) += event.o
-+obj-$(CONFIG_EVENT_DYNAMIC) += event.o
- obj-y += cread.o
--- 
-2.40.1
+> +          detected and reported by the Error-Correction Code (ECC) memor=
+y
+> +          subsystem:
+>
+> +            none       - No error detection is possible
+> +            single-bit - Detects and reports single-bit ECC errors
+> +            multi-bit  - Detects and reports multiple-bit ECC errors
 
+I don't think 'multi' is specific enough. Perhaps this should be an
+int instead with how many bits. (And '-bits' is a standard unit suffix
+so a type isn't needed)
+
+> +
+> +          If not present, this is equivalent to 'none'.
+
+Can be expressed as schema:
+
+default: none
+
+Though if that's the default why have it as a value? (It's fine though)
+
+> +      ecc-correction:
+> +        $ref: /schemas/types.yaml#/definitions/string
+> +        enum:
+> +          - none
+> +          - single-bit
+> +          - multi-bit
+> +        description: |
+> +          If present, this inidcates the type of memory errors which can=
+ be
+
+typo
+
+> +          corrected by the Error-Correction Code (ECC) memory subsystem:
+> +
+> +            none       - No error correction is possible
+> +            single-bit - Corrects single-bit ECC errors
+> +            multi-bit  - Corrects multiple-bit ECC errors
+> +
+> +          If not present, this is equivalent to 'none'.
+
+One issue is with 2 properties nonsensical combinations are allowed.
+Not really any way to handle that in the schema though.
+
+Rob
