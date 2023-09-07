@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5320EEB8FB1
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C77EC8720
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:24:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D8086996;
+	by phobos.denx.de (Postfix) with ESMTP id C28A3869A0;
 	Thu,  7 Sep 2023 14:23:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xq7aLXkU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwHUGN5C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E5AA8620C; Thu,  7 Sep 2023 14:23:41 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 4F7CA86863; Thu,  7 Sep 2023 14:23:41 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F8498691E
+ by phobos.denx.de (Postfix) with ESMTPS id 5EF8E86907
  for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d71dd633f33so828292276.2
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-58d70c441d5so9277147b3.2
  for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 05:23:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694089417; x=1694694217; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jfW+A2Ru9DuBHVn5kA+6NJP7LOdk812ovtiy4QyRlIc=;
- b=Xq7aLXkUKPAozROJRK4ph0llqLpiGaANRAJBFQS61Ka5poM849SsspyfkKpjIdQMBK
- MHy2qYhyW5A/WIl4mmApS5Ja4IlVDX4WIAEzz22S4VTAZ7iNESRGqiThmYTIjtw9ziqP
- VNRKS++4jDdclCfQgzDRF+Wfwz8CdejYjLCEM=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WRC94CdEpjPp1tSK5wU6zb48WEOcd6sJIioS3zR1h5s=;
+ b=YwHUGN5CdpG1OetF2AwCIhs4EvxlDdeIZfAPZVkk8GYOr9kKamLUNH2X77vCHq9Lo2
+ b1XO+5DYnmMFcLDvs5yUuACU56vRhGn3YcpCbS/Rr6DQqDzqsUmh5jTW5uO7w8fAd4/d
+ PYHcS9BiZXepvZOpQ/KPgRZhCzfkldx6W7la0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1694089417; x=1694694217;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jfW+A2Ru9DuBHVn5kA+6NJP7LOdk812ovtiy4QyRlIc=;
- b=fu72I/YYO2k/ftesZVc2S6LOcdFwgXOl9yP4QFGFNYvxDZpttwkd+WqHhLpeUl7tk8
- jYybALhd+6GYoHZanBfT+A2fsej3calyHvUlEC5kN+z2bybBmC0UEsKApkeeQEmzwM0M
- sPmtN/KAiDzjYvdZFxJkGTI2fA0wfzS9nMjxUrfgsEyfCNiklVNhjWx3HiYJ21Q795sV
- EDNp7KI+uC8qUVFibu6ZoagGdTmMTdhTptaCNnPdWFAdbq661iWs/eMaye38q0UNR/Xx
- ZpABLrkji8avpRmSqj+aUHMOL9A5J34kpLfUIByaUo0DHjwPWAe6+SUyYtUmhmSVzoEr
- 87Uw==
-X-Gm-Message-State: AOJu0Yzp/BOUwjaSnTnj6cjX2dxxqdMyynuGIUxJoBx5qKS31WPFJ+p2
- ZFH8dqweBE14wLxFZ1epYSzuUr7FND/1VGhbB4NQlA==
-X-Google-Smtp-Source: AGHT+IEaGUQMYeyg0HHJ0csLuaG7GMrqZHEp2YVqyZ2h8f/52gQmZIZFtPtq7JwK6/ZSW04ELe/4OH5WEeRBuuUQZlA=
-X-Received: by 2002:a5b:4cf:0:b0:d74:62df:e802 with SMTP id
- u15-20020a5b04cf000000b00d7462dfe802mr17648828ybp.0.1694089416810; Thu, 07
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WRC94CdEpjPp1tSK5wU6zb48WEOcd6sJIioS3zR1h5s=;
+ b=V/E7Mq6N+GsXqMk3shSOLeF6CdMHIGeGqMnwrjkgpObSXtxFnjRQ1Q43+7/y++2Np1
+ pqlnutORFvi3a8UBt00JTAZUSCpYXactAaglZgoBED+hjhLrYG11VJ1UMkj4Do1dm36K
+ BBR3uXywxTRmODEomYuQhKDEtCGATWW2isdETs3xpQ8IMZx8+/w/TBz21cQrii0dJt+E
+ 8YlRH30v4kOHubZbWZU1+NEv1r1/nfBgjp6znCfVoRVV5OxVmK4/DEu3HIDZlonqBsKR
+ 6KMqgZboPdOE2Dtba7O2MC7xYdtGQDGISppTa9ysngIA3gKj5rW+ARVbgOWpKlhhIY2A
+ wImg==
+X-Gm-Message-State: AOJu0YxehUC0ApUoiE99gxrkC0q7GtivbMJTzjH1PMsd1xPVxf8QbO45
+ TY6pFYn1NntCSyYa2mwTHl5B4vEa8Yg4Qzn8BfkakQ==
+X-Google-Smtp-Source: AGHT+IHt4zWUfGyLM1wJdfsx1s+xSQPJxcWQePHz4GNY+QK1Jj2IyaQyL053Ob7jVbTUlgdkv4lzCqHFUM3glt50tLY=
+X-Received: by 2002:a25:6b4a:0:b0:d62:ba45:539f with SMTP id
+ o10-20020a256b4a000000b00d62ba45539fmr18560703ybm.43.1694089416805; Thu, 07
  Sep 2023 05:23:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230907075442.156556-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20230907075442.156556-1-heinrich.schuchardt@canonical.com>
+References: <20230823184746.842091-1-sjg@chromium.org>
+ <20230823184746.842091-7-sjg@chromium.org>
+ <CAEUhbmVYRm0rHNkGj4TDR3NcGeOQY9iAqSj3JByx_cDg1FxC6w@mail.gmail.com>
+In-Reply-To: <CAEUhbmVYRm0rHNkGj4TDR3NcGeOQY9iAqSj3JByx_cDg1FxC6w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Sep 2023 06:23:03 -0600
-Message-ID: <CAPnjgZ2Xu+F9nahQsFGTorsBoJhvXvSc8Cw14HbRcAfp69_cYg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] timer: document the unit of the timer rate
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Ovidiu Panait <ovpanait@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Chanho Park <chanho61.park@samsung.com>,
- u-boot@lists.denx.de
+Date: Thu, 7 Sep 2023 06:23:11 -0600
+Message-ID: <CAPnjgZ1zF+++8_1QC54pKEZD3zJW76HqPyqYnXBXspXwd9QbPQ@mail.gmail.com>
+Subject: Re: [PATCH 6/8] x86: broadwell: Set up MTRRs
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,15 +84,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 7 Sept 2023 at 01:55, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> To avoid confusion document that timer_dev_priv.clock_rate and
-> timer_get_rate() yield the timer rate in hertz.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/timer.h | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+Hi Bin,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 4 Sept 2023 at 03:22, Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> On Thu, Aug 24, 2023 at 2:48=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > The current condition does not handle the samus_tpl case where it sets
+> > up the RAM in SPL but needs to commit the MTRRs in U-Boot proper.
+> >
+> > Add another case to handle this and update the comment.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  arch/x86/lib/init_helpers.c | 7 +++----
+> >  1 file changed, 3 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/arch/x86/lib/init_helpers.c b/arch/x86/lib/init_helpers.c
+> > index 60a2707dcf1..bf0c921577d 100644
+> > --- a/arch/x86/lib/init_helpers.c
+> > +++ b/arch/x86/lib/init_helpers.c
+> > @@ -15,7 +15,8 @@ DECLARE_GLOBAL_DATA_PTR;
+> >  int init_cache_f_r(void)
+> >  {
+> >         bool do_mtrr =3D CONFIG_IS_ENABLED(X86_32BIT_INIT) ||
+> > -                IS_ENABLED(CONFIG_FSP_VERSION2);
+> > +                IS_ENABLED(CONFIG_FSP_VERSION2) ||
+> > +                (IS_ENABLED(CONFIG_TPL) && IS_ENABLED(CONFIG_HAVE_MRC)=
+);
+>
+> So this combination is only for Samus TPL case, not a generic one, right?
+
+It is certainly targeted at samus TPL, but in a way it is applicable
+generically. When TPL is in use, we do the memory init in SPL and pass
+the RAM into to U-Boot proper, so it sets up the MTRRs. This is the
+same as the only other TPL board (coral). So samus and coral are in
+common in this sense...with the different being that samus uses MRC
+but coral usese FSP2.
+
+>
+> I hate this as it's easy to break. Maybe we should be calling an API
+> from the board specific codes to determine whether we should do the
+> MTRR programming. Thoughts?
+
+I am not sure how we would do that. I did suggest a special Kconfig a
+while back, so that boards can overwrite the setting if needed. But in
+any case we would want a sensible default for that Kconfig.
+
+>
+> >         int ret;
+> >
+> >         /*
+> > @@ -23,11 +24,9 @@ int init_cache_f_r(void)
+> >          *
+> >          * booting from slimbootloader - MTRRs are already set up
+> >          * booting with FSPv1 - MTRRs are already set up
+> > -        * booting with FSPv2 - MTRRs must be set here
+> > +        * booting with FSPv2 or MRC - MTRRs must be set here
+> >          * booting from coreboot - in this case there is no SPL, so we =
+set up
+> >          *      the MTRRs here
+> > -        * Note: if there is an SPL, then it has already set up MTRRs s=
+o we
+> > -        *      don't need to do that here
+> >          */
+> >         do_mtrr &=3D !IS_ENABLED(CONFIG_FSP_VERSION1) &&
+> >                 !IS_ENABLED(CONFIG_SYS_SLIMBOOTLOADER);
+> > --
+>
+
+At least until we figure out something better, this seems clear enough.
+
+Regards,
+Simon
