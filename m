@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45EB9EC8730
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 14:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DABEC8731
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 14:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1A00869B5;
-	Thu,  7 Sep 2023 16:14:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 090B4869CB;
+	Thu,  7 Sep 2023 16:14:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iSqLsRJ+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BOV9aEOs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 901F3869B5; Thu,  7 Sep 2023 16:14:21 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 31ACB869C8; Thu,  7 Sep 2023 16:14:27 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F094986722
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:14:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E1E6869CA
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 16:14:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 387EEGJB048337;
- Thu, 7 Sep 2023 09:14:16 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 387EEL9N113966;
+ Thu, 7 Sep 2023 09:14:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694096056;
- bh=Q8FYRYlxkY8fwIEeVkHQcgaUrfuzMX9aObLMliqbL8c=;
+ s=ti-com-17Q1; t=1694096061;
+ bh=PYMMXnOyD5p9QkNlyg6hku7opJuotAp28gmvtVQTDdQ=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=iSqLsRJ+LERYT525/sW62qxHZh3zI7yjBhbDQC+nxdK3ndKao1yEVMywyt+rKmhlG
- TPZDmNDE/mPU6lP55ztB5PmKZYr8rzJwGgxx6CZL8VaQlvt+1mbzvdp8aPMZ4FuI0o
- ha3wHdj1zwbW83c3Y66jGO4ubkn3ve56FaEnupGo=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 387EEGFQ033740
+ b=BOV9aEOsmx3H3UVWLfMxsaL0umr7g4PK47Kyt6+XAUqABTRYclaNPUulO11FSHsAg
+ LSfLoFZFp8qcjE+DUYlLCPOYNLDexlCyHj+oPb+NOh1Nit8BGuCnGpqD81h5GI0TBf
+ TpidKPPC7G4FbxjRYGngS8PdZviGKA46zZ0y53E0=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 387EELYb027220
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Sep 2023 09:14:16 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 7 Sep 2023 09:14:21 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Sep 2023 09:14:16 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 09:14:20 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Sep 2023 09:14:16 -0500
+ Frontend Transport; Thu, 7 Sep 2023 09:14:20 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 387EE70f046139;
- Thu, 7 Sep 2023 09:14:12 -0500
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 387EE70g046139;
+ Thu, 7 Sep 2023 09:14:16 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <reidt@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
  <sinthu.raja@ti.com>, <gadiyar@ti.com>, <a-nandan@ti.com>,
  <vaishnav.a@ti.com>, <n-francis@ti.com>
-Subject: [PATCH v2 1/7] drivers: misc: k3_avs: Add linux compatible to
- maintain sync
-Date: Thu, 7 Sep 2023 19:44:01 +0530
-Message-ID: <20230907141407.382215-2-n-francis@ti.com>
+Subject: [PATCH v2 2/7] arm: mach-k3: j721e: dev-data: Add mcu_timer0 ID
+Date: Thu, 7 Sep 2023 19:44:02 +0530
+Message-ID: <20230907141407.382215-3-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230907141407.382215-1-n-francis@ti.com>
 References: <20230907141407.382215-1-n-francis@ti.com>
@@ -83,30 +82,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U-Boot AVS driver works on the VTM (Voltage and Thermal Management)
-module, also used by the Linux TI Bandgap temperature sensor driver
-(drivers/thermal/k3_j72xx_bandgap.c). Although the purpose and
-functionalities that these two implement are different, the hardware is
-the same, so ensure that their compatibles are in sync. Thus, add
-ti,j721e-vtm compatible to the AVS driver.
+U-Boot uses mcu_timer0 as the tick-timer, so add it to device list.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- drivers/misc/k3_avs.c | 1 +
+ arch/arm/mach-k3/j721e/dev-data.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
-index 840148d090..3008cf9810 100644
---- a/drivers/misc/k3_avs.c
-+++ b/drivers/misc/k3_avs.c
-@@ -382,6 +382,7 @@ static struct vd_config am654_vd_config = {
- static const struct udevice_id k3_avs_ids[] = {
- 	{ .compatible = "ti,am654-avs", .data = (ulong)&am654_vd_config },
- 	{ .compatible = "ti,j721e-avs", .data = (ulong)&j721e_vd_config },
-+	{ .compatible = "ti,j721e-vtm", .data = (ulong)&j721e_vd_config },
- 	{}
- };
- 
+diff --git a/arch/arm/mach-k3/j721e/dev-data.c b/arch/arm/mach-k3/j721e/dev-data.c
+index 97f017f8af..b0adb1857b 100644
+--- a/arch/arm/mach-k3/j721e/dev-data.c
++++ b/arch/arm/mach-k3/j721e/dev-data.c
+@@ -56,6 +56,7 @@ static struct ti_dev soc_dev_list[] = {
+ 	PSC_DEV(4, &soc_lpsc_list[8]),
+ 	PSC_DEV(202, &soc_lpsc_list[9]),
+ 	PSC_DEV(203, &soc_lpsc_list[10]),
++	PSC_DEV(35, &soc_lpsc_list[11]),
+ 	PSC_DEV(102, &soc_lpsc_list[11]),
+ 	PSC_DEV(103, &soc_lpsc_list[11]),
+ 	PSC_DEV(104, &soc_lpsc_list[11]),
 -- 
 2.34.1
 
