@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 995D0EC8738
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:05:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 910A2EC873A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:05:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD9FE86ABF;
-	Thu,  7 Sep 2023 18:00:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4EA8486A6B;
+	Thu,  7 Sep 2023 18:00:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RZSEXpn9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MScR7HhP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CCED86AA3; Thu,  7 Sep 2023 18:00:02 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id C431C86AA3; Thu,  7 Sep 2023 18:00:02 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4357986B1D
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 091C186A93
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-34baf19955cso4890945ab.2
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-7951f0e02ecso48842639f.0
  for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694102396; x=1694707196; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=efssHrt3m6jQQAZkgpRd95UvGnOQq4CVd6+bPCUYoog=;
- b=RZSEXpn9OWb1yuwQIYku58bFj44HMBMw0lRg2uaYqX14j5e6pz0DRbuWqR1CbtXl8x
- reLk/THKqvki7ZModQtGVH0/2NBiLdsXJj8oGEXGBKfbVVuD2uWOh8t4IsjCS/iYot2O
- fugQFNwVemElHJeyDGCZzeJICpiCCkoE1yOQ0=
+ bh=BXZhwLJ5ywef7l28qt7irOZE2+DY8gJY7dZBYDvNe88=;
+ b=MScR7HhPlVeYThLQvBmbUgFAduoDlrlyD6zVlKyS9WOnFVqImg/12HpG9RDW2k2dRq
+ M6BQ3mhRa0z9h6KLHD6x696cP/yKxkivIFiHJmBPPPrgYKFx5n8PVdPA/BrB/L2WYwvQ
+ cW3enSC/+Zod8K27IfRScljLXWLuKArTaZ/hA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20221208; t=1694102396; x=1694707196;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=efssHrt3m6jQQAZkgpRd95UvGnOQq4CVd6+bPCUYoog=;
- b=KhiVbSRahw9R3GEWSa+jkTqqcnHPPMQGupx+T0Yd1qncD1COazHDUjTjrwD4oBtmq+
- /W6HuYdoXSRV9ueDWbzBLO7f1IeU74HZIGLA+NeJCZtp+jzLcFkT7vLIPCvtnPKutnVg
- TmZy6w3qdx0FrvHrnRM6snIlwlcCyHDO/2SR/VZxTovXNW1j9sg2XO/IyYRbozKx4QS7
- r3JC+5PTHzC2W7y/9GZlk6jEv9i070v0ixUdP+u97Gj60yWbnRclbn9BQyTGGnuJycM/
- jK9Si4fQcgYDM/FBASF5uuIQaEZFHbO7WoR7p3fBhiJv/2gVO8hZauu2gOj03zb6Jom7
- XJwg==
-X-Gm-Message-State: AOJu0YyyvdFXNXG3XeTPx+WLnhiLzntnq6rTH9solX6WgXK1UXeLeGhr
- 1NNKtT3SCjKQWUdrhcqlCAn0XKs0V/Pmi+a/sho=
-X-Google-Smtp-Source: AGHT+IEBsybBrzQYDJaGVXs8V7AIX+nVNUE/KNG4xynr3a/YgrGqtnkBwCzBlds/8KzZVJcnL9oAuw==
-X-Received: by 2002:a05:6e02:1151:b0:34d:ec00:2ce8 with SMTP id
- o17-20020a056e02115100b0034dec002ce8mr79901ill.21.1694102395906; 
- Thu, 07 Sep 2023 08:59:55 -0700 (PDT)
+ bh=BXZhwLJ5ywef7l28qt7irOZE2+DY8gJY7dZBYDvNe88=;
+ b=Hxmns+SU6TP+2Oc/ycbAcdeaY+tUjuazW6TEk2bMBBi10u0M2nT0K1ZFlOYbRNjIpB
+ eFwjvcFEN3ck4h8/v8BQ/k/zJtQ/CGg/ykWMoPg08/FUZuNxvu3o1YOTStdHV0VeYkxq
+ UFmkXnTyFSBFoZI7QrlQI7qx2eTJghfB4NUtxMjbZABhsdae5NWU+QmfgP306PriG22X
+ sfecuNej/ixb5OMbOBRO/Ysl/cxHivW84w4NyHyEjCgQIGqFwHNRH0CY9gc5LJ0pfJB0
+ BMiT/jckSx2p2BCiaF99gzH1VPD+/9p2j0OTLMpayKI3zE2xoirTk+jxAelVR/bpYu5o
+ u9nA==
+X-Gm-Message-State: AOJu0YxDC8dU7C7+tDW7rxTQuInlHKHELWbsQvcxTDWHo3pEuPHH1HmI
+ 4taFTLmulq9lqBrhw05f+ttlspRLkteBvJLQ3ss=
+X-Google-Smtp-Source: AGHT+IF/7VaQrcTTS1cfhHdJQ4nyhNZ1qjRfwbMX1W96dDdDLf7QBKw2glKLIDWV2+dqPZYCfeFbvQ==
+X-Received: by 2002:a05:6e02:1068:b0:345:c72d:33a5 with SMTP id
+ q8-20020a056e02106800b00345c72d33a5mr45123ilj.19.1694102396695; 
+ Thu, 07 Sep 2023 08:59:56 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.55
+ o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 08:59:55 -0700 (PDT)
+ Thu, 07 Sep 2023 08:59:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 20/22] boot: Join FDT_FIXUP_PARTITIONS with related options
-Date: Thu,  7 Sep 2023 09:59:25 -0600
-Message-ID: <20230907155933.48511-21-sjg@chromium.org>
+Subject: [PATCH v4 21/22] boot: Drop CMD_MTDPARTS condition for
+ FDT_FIXUP_PARTITIONS
+Date: Thu,  7 Sep 2023 09:59:26 -0600
+Message-ID: <20230907155933.48511-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230907155933.48511-1-sjg@chromium.org>
 References: <20230907155933.48511-1-sjg@chromium.org>
@@ -88,56 +89,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this to be with the other devicetree-fixup options.
+This is not needed, so drop it. Also use a capital 'O' for the option,
+while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- boot/Kconfig | 8 ++++++++
- lib/Kconfig  | 9 ---------
- 2 files changed, 8 insertions(+), 9 deletions(-)
+Changes in v3:
+- Add new patch to drop CMD_MTDPARTS condition for FDT_FIXUP_PARTITIONS
+
+ boot/Kconfig | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 2dd05e2e1661..a1592a74e624 100644
+index a1592a74e624..235c5a7a9933 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -1475,6 +1475,14 @@ config OF_STDOUT_VIA_ALIAS
- 	  incorrect when used with device tree as this option does not
+@@ -1476,8 +1476,7 @@ config OF_STDOUT_VIA_ALIAS
  	  exist / should not be used.
  
-+config FDT_FIXUP_PARTITIONS
-+	bool "overwrite MTD partitions in DTS through defined in 'mtdparts'"
-+	depends on CMD_MTDPARTS
-+	help
-+	  Allow overwriting defined partitions in the device tree blob
-+	  using partition info defined in the 'mtdparts' environment
-+	  variable.
-+
- config FDT_SIMPLEFB
- 	bool "FDT tools for simplefb support"
- 	help
-diff --git a/lib/Kconfig b/lib/Kconfig
-index bfab2f3165a7..eb2b10161824 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -953,15 +953,6 @@ config VPL_OF_LIBFDT_ASSUME_MASK
- 	  0xff means all assumptions are made and any invalid data may cause
- 	  unsafe execution. See FDT_ASSUME_PERFECT, etc. in libfdt_internal.h
- 
--config FDT_FIXUP_PARTITIONS
+ config FDT_FIXUP_PARTITIONS
 -	bool "overwrite MTD partitions in DTS through defined in 'mtdparts'"
--	depends on OF_LIBFDT
 -	depends on CMD_MTDPARTS
--	help
--	  Allow overwriting defined partitions in the device tree blob
--	  using partition info defined in the 'mtdparts' environment
--	  variable.
--
- menu "System tables"
- 	depends on (!EFI && !SYS_COREBOOT) || (ARM && EFI_LOADER)
- 
++	bool "Overwrite MTD partitions in DTS through defined in 'mtdparts'"
+ 	help
+ 	  Allow overwriting defined partitions in the device tree blob
+ 	  using partition info defined in the 'mtdparts' environment
 -- 
 2.42.0.283.g2d96d420d3-goog
 
