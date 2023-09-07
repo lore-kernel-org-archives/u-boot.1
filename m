@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A33B5CCF9F4
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 11:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4669EB8FB0
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 11:23:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2D00867F6;
-	Thu,  7 Sep 2023 13:23:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C36686863;
+	Thu,  7 Sep 2023 13:23:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="RdGX7EgQ";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="c497/M/A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B246867F6; Thu,  7 Sep 2023 13:23:08 +0200 (CEST)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e83::62d])
+ id 4E8BE8691E; Thu,  7 Sep 2023 13:23:19 +0200 (CEST)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2060a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8c::60a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5788A8685B
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 791F286410
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:23:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=b0Bi0bHEdqNXu+/PKJyMJMxRFZd8mm9V9kuxkfq6SabiuFcOy9Ub/LDOCtO7IkFOy1NKRjYOVh+J0n01dGx4zD7zfD0GChe8eifRHZdXxgnJbKxIBfei/HJsY6teAfI5bZZE8eQntlQAvH75uXYQ18kGP21d3JQOzNGTb+th+b00/uQpiXn+Ud3x3kBzRnyVRAALTbQYgD6kieU0lKr860lD+5x/i0z/w5+kWcrJvUSPWEuUvehtZ3R/OBME1cs/T9VGzHE08grSRDLYkicx9BaovFgTWjuVidfMOgKkmoKNedCCYMzYGux3KV/ZZtZqq12MWr/MUfpks57Og4/oCQ==
+ b=QMA0VSkeXYpIJtH84f3WQ9meMadyWyf5eDqm4AKgtmk/P6pggKWHoUwZzGVc6KCCm8gNlpq0QMiiJvDyziSM1hyYWnHAQMXQQNVSFtJSiRPyiPPgICh5sOd9UHLACjSvulJzvI9NkOZERMvmTL9i5iXHbCLp6y2BsLFLe8/z+By/tK9yHqEhxZemQG30ImKGJB/qkukF3sdgm90Ws8s/10NFdN4tZaDLacEITPOUGyEYpBZhMUb4QCeUDP9AC7bdMi5+DfSMMp8PSYOcqqImOnx0ovlT9G4kgW3J8sotKd5XxTO9YCGS5q3qC2XbXGG7bKhnB1qo4NbBsZxHDGesww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cfMzp0fRL6Trn6yRpRz+Me+1/qGXhRCaxAjYpXBqCVU=;
- b=DRFZ4xEcRbB/LkPlMNs6Pj4lg30aVLt0qH8Sq744/1qAj3RpuzbFaDCW7lSMziwfAq/Xw6BKuwGlbvHT5KS877KOv6ydjn9Yr+8Vn41H673fn0PUBpUe950HhztO/RMtbSXgdx1gdMJJjDybcVDIk4DZZGJVqKo4ghOT+0Wgb4j6zBj4AuEh8I5D58+GSuT5tADn10msEPYQ82W7zl5TasJjo841NmZut67hNGs775ykhxEvBnksJXz15Q6tTN4O5SiYeuGR9IJt2qZ9hihvFQ2b6i6Y816MCAY8q+kpmvnilJj46HCqzobyA6pjpmQVRLmuVtunqxj+TtT0Vr08nw==
+ bh=DdKfhMDP28yl/1/DV0AgTABA4pddxLlwQoggxcLQTGo=;
+ b=I1+5KczvAayeIekAuzEorUxBjZRPthf3Sh0xr+5/i09UMJQOCsKz506vUCV+nvuL+evsVMx8ZuKeVk206nH+TYMh7oQb8JUarULYYng7gWJk/ZhQSTsatokBTInyvHgg4wW5L/Q3m2n5RGiX9MGqGfe/a46IIrOepSJ9Wa1l1bNh1hqvmdxDlkiTqLxg7hLr6Jum68Log26mLN3QXXkVN+JQDsEWdlsUCB+fys66kG+Y6w/Voh9k1EyUPkhuni3hBcwj5MwiQNrWet0IuyI1we9UhxVMA80nZccysWl3jHFjv7ESLQlO3NQckR8Cmz5ivoNhbs/zQuXAWuHMEe4Uug==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cfMzp0fRL6Trn6yRpRz+Me+1/qGXhRCaxAjYpXBqCVU=;
- b=RdGX7EgQpkLtTpqVMFmzqMDdfuF6fgfP87oa0OYKH7ejlcB1nNAZ+IFo1oDDWr5r6JPz3Iq2FfUfWSjP+rqufK9CnpTjw7UPKpAUy/2HM9SL8pzQiH2St5InONTNrYzdr/v8LaclFBMgIXa812/nTB7oORJcPT3Y48KwIiE9EFQ=
-Received: from SA1P222CA0018.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:22c::18)
- by DM4PR12MB7576.namprd12.prod.outlook.com (2603:10b6:8:10c::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Thu, 7 Sep
- 2023 11:23:01 +0000
-Received: from SA2PEPF00001509.namprd04.prod.outlook.com
- (2603:10b6:806:22c:cafe::8b) by SA1P222CA0018.outlook.office365.com
- (2603:10b6:806:22c::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30 via Frontend
- Transport; Thu, 7 Sep 2023 11:23:01 +0000
+ bh=DdKfhMDP28yl/1/DV0AgTABA4pddxLlwQoggxcLQTGo=;
+ b=c497/M/AJpGrxWSodRuR0LiY7j2SmlbaR6Qnj2sKJexPLWu18+7sGSr0qxsOUW2XmnQyZA0QQdceYU0Cb9BrVWXPz19opBngh1YpPfAAt1TPcTtXZBSPTKI5mb33qfyVry6IlEtLtZpLCsvfeLr8k/50iR/AFIpv8sgiSWHPZuA=
+Received: from SA9PR13CA0170.namprd13.prod.outlook.com (2603:10b6:806:28::25)
+ by SJ0PR12MB6783.namprd12.prod.outlook.com (2603:10b6:a03:44e::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33; Thu, 7 Sep
+ 2023 11:23:12 +0000
+Received: from SA2PEPF00001506.namprd04.prod.outlook.com
+ (2603:10b6:806:28:cafe::55) by SA9PR13CA0170.outlook.office365.com
+ (2603:10b6:806:28::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.10 via Frontend
+ Transport; Thu, 7 Sep 2023 11:23:12 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,31 +59,29 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ SA2PEPF00001506.mail.protection.outlook.com (10.167.242.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6768.25 via Frontend Transport; Thu, 7 Sep 2023 11:23:00 +0000
+ 15.20.6768.25 via Frontend Transport; Thu, 7 Sep 2023 11:23:11 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 7 Sep
- 2023 06:22:58 -0500
-Message-ID: <09500ec1-b9ca-ccf1-1806-243dda59c3f3@amd.com>
-Date: Thu, 7 Sep 2023 13:22:35 +0200
+ 2023 06:23:09 -0500
+Message-ID: <8fe824c3-88d7-92a4-3b5d-31013b130ed6@amd.com>
+Date: Thu, 7 Sep 2023 13:23:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH v2] clk: Dont return error when assigned-clocks is empty
- or missing
+Subject: Re: [PATCH v5 1/2] dm: core: ofnode: Add
+ ofnode_read_bootscript_address()
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Tom Rini
- <trini@konsulko.com>, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Lukasz Majewski <lukma@denx.de>, Nikhil M Jain
- <n-jain1@ti.com>, Sean Anderson <seanga2@gmail.com>, Simon Glass
- <sjg@chromium.org>
-References: <a9a9d853e0ac396cd9b3577cce26279a75765711.1693384296.git.michal.simek@amd.com>
-In-Reply-To: <a9a9d853e0ac396cd9b3577cce26279a75765711.1693384296.git.michal.simek@amd.com>
+CC: Simon Glass <sjg@chromium.org>, Abdellatif El Khlifi
+ <abdellatif.elkhlifi@arm.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Nikhil M Jain
+ <n-jain1@ti.com>
+References: <23be3838502efef61803c90ef6e8b32bbd6ede41.1693465140.git.michal.simek@amd.com>
+In-Reply-To: <23be3838502efef61803c90ef6e8b32bbd6ede41.1693465140.git.michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -91,26 +89,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|DM4PR12MB7576:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8a089c98-d4d0-4e3e-f6f1-08dbaf94cb8d
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001506:EE_|SJ0PR12MB6783:EE_
+X-MS-Office365-Filtering-Correlation-Id: b570780e-d867-41de-fcbc-08dbaf94d228
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: iyWmydIA8uiMTvjLss6YFLq5kGTHZUArFsTjzdmubgDFt6Ql21QM1Y1Vv0bAqDOXh+yL0juvdZzewz+nAqpHKdf7x2aVFziwVPSOfIvKkxHgM5kXytbbIk/T5Gkx+NPZ0ttaGoWFveQ0AqUMNfEinbqVsLu002K64lSq+yVUX9nNhyUq75wRM4qFMub85uZ+AY+jQ7G6K8EkSUKBPKX10CMJxZl6WW9PWWHn67ZeMqm5eOTk/M2bONcUOVnDntGs5oMw2+zajN7yFIHqVDcE6NnvGKwqOlReZVHXcwymcrX4IUA3LyCkUtRw3z6ATzAB/ov+A5mRoTPXqatFyQ2e1U33dgg9DgV/qG2qmU3aTJaVpSDKuQjWFyXAqRoZud/Ws+lqN1BxdtN4PW1SkAxNZ5NAsTId+gbltYGkMlxuTqP9yJlWCWhaqwIFULnwzAX+2fwa29mSO1dHfaJofSDWR46bWvoCHmNAuMfKFx2ytUDsGnrTGpPrHpCCsOoMh58i5SvXdcI0QDNetR0PCWDrGj+EfAaJ27J1lib1F1aAQozYCxT86VIScNvUwMwIvvoYaqWve9F0vEk+zVd9ygQFvmz9LXA3ZlgmrCIzMAgA7t+3Z7ARrwJNBkw5BSyGWQf+OK/b36wbDnm1q9f18nxtAeOO5lzHIf1RD7Llp93RD8o+cOE4pxGFGsjrEj/lY+6RAopV3BhL5MOFTQetkzYMKoT8yb1hs8cSuGshyi6lj/v8FtpRyMwY9VrBEgKIa2Ds1Ri175g56cwGz4e8h/AokSmckC+Mne4IgNN1zZixUR/ak7AQGZdtk1Imd6X1vKEZ5Oxy9U59ZUPhXxXqSzePmA==
+X-Microsoft-Antispam-Message-Info: hrUijX61qtxW5wFm+VKN7kv2LXVp6rb2cvK7ZD9/sVEbqsQ0Ctxy161ftmckBMW9LDfrmmu6wcyWvy8RFEvfgjd5u/wDLmTNuU14LT4TmRVsR9ytoLH+QeMua/9BsH+ZPeJQUsAcPYOXOUAMZf40NQoS3/oRjdPJ05RiWJMFuSvxCN7hoIbM80D+kSUa9N9p1EbtmUie+zq7NBDhMhc8k/VqAqsjg5ZL+qFzNU4e3narQzS+0OC9Emj7GrOkLx0viw3Rb8VM43q3GWPpX5i8n7EGtttnafMgJ1TlolOafJBqcmYHPNFABSrzPYiY0d39KgDCQ88opDo87ZeK+TldqK37ZwJWtsBc+1X4d6QvDsxyrYI+UdjH/JN+S4cowd/0r/9+CvGrxpi3pE7Jbn9MvTpRhYh9w245ziT5EwE4p/a5Hdh0wof9vYOksfNpLJ0mUIpzUl0wr2rI4alLuJilIKaRw/lcub+GSmiiet2p+Q1QyGBtq5GoKMP008P34HfJE5rcU/QTqVC2vWvhr+u0A6aMB5OGnoD9C5J4PLD7tXutYAvcFK/vUG0tNOy7n5UmhHuM8VvPyBIKsm6DWnNTGdHhLSrXg3Pxe3MWUN9q85GAJ5uLP55qAc+AY1tFhxHD+ziJW7cS12L4lo7DdSgSx7QEnxrVlMOk79UytkbUE5VaDYN4BSbX3BC7Npg2ZPBrthrikVG4ze0I8P0MPiZyogQi09AXD2cGY+6WBQaa/SIRanPTBjuD60qatn7pPYkU9/Nlznzm5hjZ4G+j7dwB73tiy3VA2xUcGjvX60EINmEWE3R/UXb0dvE8ncyyiaFF
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(376002)(346002)(39860400002)(136003)(186009)(451199024)(1800799009)(82310400011)(40470700004)(36840700001)(46966006)(31686004)(36756003)(316002)(2906002)(41300700001)(40460700003)(82740400003)(31696002)(86362001)(40480700001)(356005)(81166007)(44832011)(5660300002)(2616005)(36860700001)(426003)(8936002)(4326008)(8676002)(47076005)(83380400001)(26005)(53546011)(16526019)(336012)(6666004)(54906003)(478600001)(70206006)(16576012)(70586007)(110136005)(192303002)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(396003)(376002)(346002)(39860400002)(136003)(82310400011)(186009)(451199024)(1800799009)(40470700004)(36840700001)(46966006)(41300700001)(110136005)(70586007)(336012)(54906003)(86362001)(31696002)(16526019)(40480700001)(26005)(70206006)(83380400001)(426003)(16576012)(40460700003)(316002)(44832011)(5660300002)(81166007)(356005)(478600001)(36756003)(36860700001)(82740400003)(53546011)(31686004)(2616005)(4326008)(2906002)(8676002)(8936002)(47076005)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2023 11:23:00.7531 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a089c98-d4d0-4e3e-f6f1-08dbaf94cb8d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2023 11:23:11.8354 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b570780e-d867-41de-fcbc-08dbaf94d228
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001506.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7576
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6783
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,94 +127,165 @@ X-Virus-Status: Clean
 
 
 
-On 8/30/23 10:31, Michal Simek wrote:
-> From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+On 8/31/23 08:59, Michal Simek wrote:
+> ofnode_read_bootscript_address() reads bootscript address from
+> /options/u-boot DT node. bootscr-address or bootscr-ram-offset properties
+> are read and values are filled. bootscr-address has higher priority than
+> bootscr-ram-offset and the only one should be described in DT.
 > 
-> There is a chance that assigned-clock-rates is given and assigned-clocks
-> could be empty. Dont return error in that case, because the probe of the
-> corresponding driver will not be called at all if this fails.
-> Better to continue to look for it and return 0.
+> Also add test to cover this new function.
 > 
-> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
 > ---
 > 
-> Changes in v2:
-> - Add also test to cover it
-> - Add Tom's reviewed-by line
+> Changes in v5:
+> - CI loop found some issues. Missing errno.h, multiple
+>    ofnode_read_bootscript_address() because of missing static inline for !DM
+>    cases
 > 
->   arch/sandbox/dts/test.dts | 16 ++++++++++++++++
->   drivers/clk/clk-uclass.c  |  8 +++++++-
->   test/dm/clk.c             |  9 +++++++++
->   3 files changed, 32 insertions(+), 1 deletion(-)
+> Changes in v4:
+> - Update ofnode test based on review from Simon
+> 
+> Changes in v3:
+> - new patch in this series
+> 
+>   arch/sandbox/dts/test.dts |  7 +++++++
+>   drivers/core/ofnode.c     | 25 +++++++++++++++++++++++++
+>   include/dm/ofnode.h       | 26 ++++++++++++++++++++++++++
+>   test/dm/ofnode.c          | 14 ++++++++++++++
+>   4 files changed, 72 insertions(+)
 > 
 > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-> index ff9f9222e6f9..90f876ac9c78 100644
+> index f351d5cb84b0..84879cc31ac0 100644
 > --- a/arch/sandbox/dts/test.dts
 > +++ b/arch/sandbox/dts/test.dts
-> @@ -589,6 +589,22 @@
->   		clock-names = "fixed", "i2c", "spi", "uart2", "uart1";
+> @@ -79,6 +79,13 @@
+>   		};
 >   	};
 >   
-> +	clk-test2 {
-> +		compatible = "sandbox,clk-test";
-> +		assigned-clock-rates = <321>;
+> +	options {
+> +		u-boot {
+> +			compatible = "u-boot,config";
+> +			bootscr-ram-offset = /bits/ 64 <0x12345678>;
+> +		};
 > +	};
 > +
-> +	clk-test3 {
-> +		compatible = "sandbox,clk-test";
-> +		assigned-clocks = <&clk_sandbox 1>;
-> +	};
-> +
-> +	clk-test4 {
-> +		compatible = "sandbox,clk-test";
-> +		assigned-clock-rates = <654>, <321>;
-> +		assigned-clocks = <&clk_sandbox 1>;
-> +	};
-> +
->   	ccf: clk-ccf {
->   		compatible = "sandbox,clk-ccf";
->   	};
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index dc3e9d6a2615..f186fcbcdb86 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -329,7 +329,13 @@ static int clk_set_default_rates(struct udevice *dev,
->   			dev_dbg(dev,
->   				"could not get assigned clock %d (err = %d)\n",
->   				index, ret);
-> -			continue;
-> +			/* Skip if it is empty */
-> +			if (ret == -ENOENT) {
-> +				ret = 0;
-> +				continue;
-> +			}
-> +
-> +			return ret;
->   		}
->   
->   		/* This is clk provider device trying to program itself
-> diff --git a/test/dm/clk.c b/test/dm/clk.c
-> index f48de05436bf..01417fbd8257 100644
-> --- a/test/dm/clk.c
-> +++ b/test/dm/clk.c
-> @@ -36,6 +36,15 @@ static int dm_test_clk_base(struct unit_test_state *uts)
->   	ut_asserteq(clk_is_match(&clk_method1, &clk_method2), true);
->   	ut_asserteq(clk_method1.id, clk_method2.id);
->   
-> +	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test2", &dev));
-> +	ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
-> +
-> +	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test3", &dev));
-> +	ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
-> +
-> +	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "clk-test4", &dev));
-> +	ut_assertok(clk_set_defaults(dev, CLK_DEFAULTS_PRE));
-> +
->   	return 0;
+>   	bootstd {
+>   		bootph-verify;
+>   		compatible = "u-boot,boot-std";
+> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> index 8df16e56af5c..d94f0300c30a 100644
+> --- a/drivers/core/ofnode.c
+> +++ b/drivers/core/ofnode.c
+> @@ -1563,6 +1563,31 @@ const char *ofnode_conf_read_str(const char *prop_name)
+>   	return ofnode_read_string(node, prop_name);
 >   }
 >   
+> +int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset)
+> +{
+> +	int ret;
+> +	ofnode uboot;
+> +
+> +	*bootscr_address = 0;
+> +	*bootscr_offset = 0;
+> +
+> +	uboot = ofnode_path("/options/u-boot");
+> +	if (!ofnode_valid(uboot)) {
+> +		printf("%s: Missing /u-boot node\n", __func__);
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = ofnode_read_u64(uboot, "bootscr-address", bootscr_address);
+> +	if (ret) {
+> +		ret = ofnode_read_u64(uboot, "bootscr-ram-offset",
+> +				      bootscr_offset);
+> +		if (ret)
+> +			return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   ofnode ofnode_get_phy_node(ofnode node)
+>   {
+>   	/* DT node properties that reference a PHY node */
+> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> index 0f38b3e736de..c1afa69e1c56 100644
+> --- a/include/dm/ofnode.h
+> +++ b/include/dm/ofnode.h
+> @@ -20,6 +20,7 @@
+>   struct resource;
+>   
+>   #include <dm/ofnode_decl.h>
+> +#include <linux/errno.h>
+>   
+>   struct ofnode_phandle_args {
+>   	ofnode node;
+> @@ -1500,6 +1501,26 @@ int ofnode_conf_read_int(const char *prop_name, int default_val);
+>    */
+>   const char *ofnode_conf_read_str(const char *prop_name);
+>   
+> +/**
+> + * ofnode_read_bootscript_address() - Read bootscr-address or bootscr-ram-offset
+> + *
+> + * @bootscr_address: pointer to 64bit address where bootscr-address property value
+> + * is stored
+> + * @bootscr_offset:  pointer to 64bit offset address where bootscr-ram-offset
+> + * property value is stored
+> + *
+> + * This reads a bootscr-address or bootscr-ram-offset property from
+> + * the /options/u-boot/ node of the devicetree. bootscr-address holds the full
+> + * address of the boot script file. bootscr-ram-offset holds the boot script
+> + * file offset from the start of the ram base address. When bootscr-address is
+> + * defined, bootscr-ram-offset property is ignored.
+> + *
+> + * This only works with the control FDT.
+> + *
+> + * Return: 0 if OK, -EINVAL if property is not found.
+> + */
+> +int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset);
+> +
+>   #else /* CONFIG_DM */
+>   static inline bool ofnode_conf_read_bool(const char *prop_name)
+>   {
+> @@ -1516,6 +1537,11 @@ static inline const char *ofnode_conf_read_str(const char *prop_name)
+>   	return NULL;
+>   }
+>   
+> +static inline int ofnode_read_bootscript_address(u64 *bootscr_address, u64 *bootscr_offset)
+> +{
+> +	return -EINVAL;
+> +}
+> +
+>   #endif /* CONFIG_DM */
+>   
+>   /**
+> diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+> index 6fbebc7da085..a4e04f23784f 100644
+> --- a/test/dm/ofnode.c
+> +++ b/test/dm/ofnode.c
+> @@ -583,6 +583,20 @@ static int dm_test_ofnode_conf(struct unit_test_state *uts)
+>   }
+>   DM_TEST(dm_test_ofnode_conf, 0);
+>   
+> +static int dm_test_ofnode_options(struct unit_test_state *uts)
+> +{
+> +	u64 bootscr_address;
+> +	u64 bootscr_offset;
+> +
+> +	ut_assertok(ofnode_read_bootscript_address(&bootscr_address,
+> +						   &bootscr_offset));
+> +	ut_asserteq_64(0, bootscr_address);
+> +	ut_asserteq_64(0x12345678, bootscr_offset);
+> +
+> +	return 0;
+> +}
+> +DM_TEST(dm_test_ofnode_options, 0);
+> +
+>   static int dm_test_ofnode_for_each_compatible_node(struct unit_test_state *uts)
+>   {
+>   	const char compatible[] = "denx,u-boot-fdt-test";
 
 Applied.
 M
