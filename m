@@ -4,68 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABA0EC8720
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:24:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40496EC8724
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 12:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11B32869CD;
-	Thu,  7 Sep 2023 14:23:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5A6208676C;
+	Thu,  7 Sep 2023 14:56:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JkaFQVZP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="jJv4AOdf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4183869C7; Thu,  7 Sep 2023 14:23:57 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 236E986785; Thu,  7 Sep 2023 14:56:03 +0200 (CEST)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on20624.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7ea9::624])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23560869D8
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:23:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40D2086682
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 14:56:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6bf58009a8dso627159a34.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 05:23:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694089433; x=1694694233; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MSnMYwgPtc90QwVe7tMYFvFE6wJqk7NWV26foT7YXqY=;
- b=JkaFQVZPzHOXhEuozouEdVnL2nK2tzJ7k/Imb4aAJ5jBzdn9E7ofm7TGoDTftX2K2P
- pTQdMDsdWsiiB8JRIxwk2CEbYf1/DvYYleFeZI8K0XZ3C19GUjIGRt02iw0aMmGM3Ye4
- D02ZqiHxNb+zJtLnSP7Oxb8DNkVmcW2JZudcQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694089433; x=1694694233;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MSnMYwgPtc90QwVe7tMYFvFE6wJqk7NWV26foT7YXqY=;
- b=QBYRnpBRE/yvxnzqsEPfzDTDbLGUEUz518DDcj+p5SntQhs9g4MldPhxmWoMtCwVc0
- /bkAJ2Mcbt5IuSnJumd4bI1CKCxyRiDzI1bR+10ef0QL4P/I8XzQJo2C2z3fLI9InNhQ
- PW9C5G/ljcvuWP25udif7RM8k/eyvKcc79iYmElqoMmJyfijrOzS07R54Qci0uitBWp9
- EKIYCXpWLWSUX3zijB8F8sWsY89lT7vJp/wXM70TCWLgnfROnWwq5ntri+HZhM+2XLU1
- cyMOT03HWvoyJDG4sDTDC168Gyb7FjNn0YPH/3PCjp4OsMbeJnGLYRWk5sWiVVRbTmV3
- KFGg==
-X-Gm-Message-State: AOJu0Yzu35hqVcwRHRFTU4iGwKqZsXf+zlNa/rN4whFPAauOsiDrL/ud
- +loXV2yFWOfmLu5/RohV+n0/D+IfLD+XRK+vmlwD4A==
-X-Google-Smtp-Source: AGHT+IFm+Y4Q4HNfq7dmZRMJ3Y6L5abZW+AFakaw9EV8qN6XGpXlQKG+gGd4nfOjIgZOaJ6XLeBSJMg+rtBMGFpD+jg=
-X-Received: by 2002:a05:6830:12d4:b0:6bf:df7:10e9 with SMTP id
- a20-20020a05683012d400b006bf0df710e9mr17753770otq.36.1694089433498; Thu, 07
- Sep 2023 05:23:53 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RHPH6hkh7FZAujjaYPjJHETcDOUFKOLozE+a4e4ljktwmoczGe0P0oNXgBU/Bo60bW4OmOobNhS6qCqCB1CKjfTMHTNC7ZeMhn4cT4cIjLJse0ntI2fJRJr5zS6oaUw03c2e8zN04dExJXgUpPsWqx9KYbV6kH4eSUJeLzFlHXRTQDW3JI1q/s9uqXVCoY50Ddj/H/CNEyrUArKsFzwETudzH23CsBUES7zfT4xt+sOn/kiilYSOpw1TELK6aDQo2e2/HDT6yFYU4wrTCBxsTdmY9A+IiuWQP5kI6urSt8nyr6l/g0BtPn29FOLs5fDwbV1AkTEATY338iPMWBSshg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=q1PsOk6XD9mO2cojzjoAL1sJNJpO1I2RDhke9MKXod4=;
+ b=QhSAat7Hk5Zv34xkCbwCRV/18qiIp2vQKYR8Ut9G6wIdvfz//zmcPJTkh2V2LaSQCphg9MkvbhFzox7AAz2f48w/L+tx6ocDpVKP6EWpcc1PuNuIZwIXG/EWobSzr4rb5naZCz92ZTtFYRke+++5wje7i8YdoQQrCaoGCZeiEyY+Kvej8Q0JwwOjH+EpRVjtp/IPfR1bX8G0t0oKNB0G6MTJETyS3LzBygImcU4y/e7GV9G6RNhDljKb49aE1FnlLsmqYdzjiWiI+2rGokcAsxHqZgIsYBDgBTqjwqSVNwxg9N2Iz3DarxkcAsx1maeOMXMcYfoH5BWUvkSz58Y5ZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=q1PsOk6XD9mO2cojzjoAL1sJNJpO1I2RDhke9MKXod4=;
+ b=jJv4AOdf+O1uTZrqCe+Ye4z9rJTwotlwaResprzm4ivW9XnVOr2vi6OpTGs1HhLubLlHPeWmBv8VHGnlPGBwavaqCS6UGke0Q40kmW/5EpyX4ncyV5uPm3fKmM4p1FkkHEXPpD8dSENBORV/in6C17MQUmJPIS5y41okKExxreE=
+Received: from MW4PR04CA0085.namprd04.prod.outlook.com (2603:10b6:303:6b::30)
+ by SJ2PR12MB8182.namprd12.prod.outlook.com (2603:10b6:a03:4fd::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33; Thu, 7 Sep
+ 2023 12:55:54 +0000
+Received: from MWH0EPF000989EA.namprd02.prod.outlook.com
+ (2603:10b6:303:6b:cafe::b1) by MW4PR04CA0085.outlook.office365.com
+ (2603:10b6:303:6b::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.36 via Frontend
+ Transport; Thu, 7 Sep 2023 12:55:53 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ MWH0EPF000989EA.mail.protection.outlook.com (10.167.241.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6768.25 via Frontend Transport; Thu, 7 Sep 2023 12:55:52 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 7 Sep
+ 2023 07:55:50 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, Ashok Reddy Soma
+ <ashok.reddy.soma@amd.com>, Dzmitry Sankouski <dsankouski@gmail.com>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] sandbox: test: Fix typo in test.dts
+Date: Thu, 7 Sep 2023 14:55:48 +0200
+Message-ID: <f0276ada1166fb05bb4277c213b4c8f96b63173f.1694091345.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
- <20230906024011.17488-5-takahiro.akashi@linaro.org>
-In-Reply-To: <20230906024011.17488-5-takahiro.akashi@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Sep 2023 06:23:05 -0600
-Message-ID: <CAPnjgZ3z1srw_ZxfV2aRz1FAzTR=M==_rRPMFFrd7BdrGsu4AQ@mail.gmail.com>
-Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com, 
- linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
-Content-Type: text/plain; charset="UTF-8"
+X-Developer-Signature: v=1; a=openpgp-sha256; l=632; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=qUYAAzCMPtHJKOD9UaL2arVCrYVdh+b0fgtFwzugjvg=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhpSfJ4Kcauev5vC8nX1Zb6b13uacdepm1Ru5nnCreP07d
+ PPs/vNnO2JZGASZGGTFFFmkba6c2Vs5Y4rwxcNyMHNYmUCGMHBxCsBEjjkxzGYv2HOK41S7/543
+ UUWN8W7Merz5dQxzZfzlw2Xb6vL+9tRuaf/f+WHp/koRAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989EA:EE_|SJ2PR12MB8182:EE_
+X-MS-Office365-Filtering-Correlation-Id: b83d3343-1c5b-401b-da81-08dbafa1c4a8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VoJGUvLIoHnUrZflDirYRDskRf+fwObAjI41NzlNSGY/ax0/xwRwTC/gHwamWhNs9AzE6sX3rxPcfLcSA3k2++tgsl/oMrL7FWAt61VCvZ1kMOUGq8niEQtfIMPOfSjnJmASCwsh9mPqrGiPsVf8HUBRr56IXYfCRj1zqdguP77wcuxvm+ZItr+QkEl7aQPnzDWP/mBS5Z8vPjtElStqYBwGHfivRGYKIT8OdAeo+DyA17CwWMhC8MtMvq2kNHnZV1FNHMDbCJ02RuUaaic7ckPLxo4eyEOUGZlAl4MQJri5G2033wkND74uq2JAJDjdC24fIIZtRBtqNt1ZvNRJrVG7Sg2oaEjgVjeq2n9ye8NFzqrveXZgTv/jXK0lKIxJeKaaImeLvmxewXjpCLyNuTWRm+wqAWEnR696nAq5xt7DkkQCqCBh603SAoczKU6G/6NUutiqCzqrERWF14yxStydd7/bBneBgslPxEWslKMcrP/+g1NHMxNL7D+HP/ZFdyiOJhqqhjN/L1zntSb1MYU8O97XY+vW2lNqjpg4oo13gRt6vHTSBMYbrD3dBsNlZ2fa2gulSRoziGCidW4Bg28PHM2GSXfZ80ASwmbxMiDT1xjJLci3cPzLowoS3HX3SN0Cdx/oJmCaGkt9QU46chOosBglz37xlCRcxBSVjwoxqZlCYhMLnY53c276fo+6/fLW3VGFlqq+2xl0ebuR/Y/IrB7+WCeXxeUR/xDxBZiv0yzLKnhOp6rJCDY+UxD+Tf62AlL2RylaIWzjbtq/enaKARW/z0dHH5sFXTvaDg4WVs0ZJPVZ3TFWY2PvHmWq
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(396003)(346002)(39860400002)(376002)(136003)(82310400011)(1800799009)(451199024)(186009)(46966006)(36840700001)(40470700004)(41300700001)(40480700001)(36860700001)(82740400003)(70206006)(47076005)(70586007)(54906003)(316002)(110136005)(26005)(16526019)(44832011)(2616005)(5660300002)(86362001)(8936002)(478600001)(4326008)(8676002)(336012)(426003)(36756003)(40460700003)(83380400001)(4744005)(2906002)(81166007)(356005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2023 12:55:52.5490 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b83d3343-1c5b-401b-da81-08dbafa1c4a8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989EA.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8182
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,92 +127,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi AKASHI,
+s/parititon/partition/
 
-On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
-<takahiro.akashi@linaro.org> wrote:
->
-> This DM-compliant driver deals with SCMI pinctrl protocol and presents
-> gpio devices exposed by SCMI firmware (server).
->
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> ---
->  drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
->  1 file changed, 539 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
-> index 3ebdad57b86c..73d385bdbfcc 100644
-> --- a/drivers/pinctrl/pinctrl-scmi.c
-> +++ b/drivers/pinctrl/pinctrl-scmi.c
-> @@ -11,21 +11,20 @@
->  #include <malloc.h>
->  #include <scmi_agent.h>
->  #include <scmi_protocols.h>
-> +#include <asm-generic/gpio.h>
->  #include <dm/device_compat.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
->  #include <dm/pinctrl.h>
->
-[..]
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-> +
-> +U_BOOT_DRIVER(scmi_gpio) = {
-> +       .name = "scmi_gpio",
-> +       .id = UCLASS_GPIO,
-> +       .of_match = scmi_gpio_ids,
-> +       .of_to_plat = scmi_gpio_probe,
-> +       .ops = &scmi_gpio_ops,
-> +       .plat_auto = sizeof(struct scmi_pinctrl_gpio_plat),
-> +};
-> +
-> +/**
-> + * scmi_gpiochip_register - Create a pinctrl-controlled gpio device
-> + * @parent:    SCMI pinctrl device
-> + *
-> + * Create a pinctrl-controlled gpio device
-> + *
-> + * Return:     0 on success, error code on failure
-> + */
-> +static int scmi_gpiochip_register(struct udevice *parent)
-> +{
-> +       ofnode node;
-> +       struct driver *drv;
-> +       struct udevice *gpio_dev;
-> +       int ret;
-> +
-> +       /* TODO: recovery if failed */
-> +       dev_for_each_subnode(node, parent) {
-> +               if (!ofnode_is_enabled(node))
-> +                       continue;
+ arch/sandbox/dts/test.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Can we not rely on the normal driver model binding to bind these
-devices? Why does it need to be done manually here?
-> +
-> +               if (!ofnode_read_prop(node, "gpio-controller", NULL))
-> +                       /* not a GPIO node */
-> +                       continue;
-> +
-> +               drv = DM_DRIVER_GET(scmi_gpio);
-> +               if (!drv) {
-> +                       dev_err(parent, "No gpio driver?\n");
-> +                       return -ENODEV;
-> +               }
-> +
-> +               ret = device_bind(parent, drv, ofnode_get_name(node), NULL,
-> +                                 node, &gpio_dev);
-> +               if (ret) {
-> +                       dev_err(parent, "failed to bind %s to gpio (%d)\n",
-> +                               ofnode_get_name(node), ret);
-> +                       return -ENODEV;
-> +               }
-> +
-> +               return 0;
-> +       }
-> +
-> +       return -ENODEV;
-> +}
-> +
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index cf1b3da9cace..19f184e791bf 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -112,7 +112,7 @@
+ 		/*
+ 		 * This is used for the VBE OS-request tests. A FAT filesystem
+ 		 * created in a partition with the VBE information appearing
+-		 * before the parititon starts
++		 * before the partition starts
+ 		 */
+ 		firmware0 {
+ 			bootph-verify;
+-- 
+2.36.1
 
-Regards,
-Simon
