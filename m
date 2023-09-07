@@ -4,75 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A75EC8745
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4229CEC8738
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:57:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1374886A04;
-	Thu,  7 Sep 2023 17:45:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 41D96869E1;
+	Thu,  7 Sep 2023 17:57:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S1zFFsnv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QBXggY3C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAE5C868D7; Thu,  7 Sep 2023 17:45:15 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id EF1D6869E6; Thu,  7 Sep 2023 17:56:59 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E56A86A14
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:45:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 970CB869CA
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:56:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9a648f9d8e3so138975466b.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:45:10 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-991c786369cso144255266b.1
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:56:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694101509; x=1694706309; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7y3rbO1RzgxKWnNXsWIfcygwrDuRBorBovsktP1bzXQ=;
- b=S1zFFsnvLFRBPq1OfWmgI2uNiBE87La24ukXHl6UCVxPiAJ9uk7GbIXZweBSGra6OV
- n+eLotBrR8HLnvcDf4OWGv7296O6kmVURN6o2qDjCQ2XD6agrya162PW0mgpkmMuNaxm
- cizo3TrQd2lAbqwsyJDEM2tJN4AQJ5y/zf/EUWH72E2SkrRlhZryYRNakg+w3wCjI+qe
- obzMQrVD6F6kWAl4Si7OHAqwQ0x3Nc/Sv0VgaWz1oP3rifVVUDhlgwqyjNLgyrr69BW+
- wd/JLWJUQtFhD8ryO1OmKO8i8MQdsHnzuTS1mNmw9Zu9MbBlx6lNEzf4fW5w2aSamIT1
- EDbw==
+ d=chromium.org; s=google; t=1694102216; x=1694707016; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1JN+Qao8IdvyNSWvDm5vhSmhNPjf4gx2dY5//ckJMUw=;
+ b=QBXggY3CTK534C/bsHMRq39r0Po8iZF+oCXHpE8Oa9JapJMTZ4LekOfyT+Yr51R7gM
+ wwV9aWogfYh5yUI15aXbmJouO+o1UKeHXWKQ6EJrdD+DUALOeG8x+oTolKZRChNFcvmA
+ R4abykM7Ctnu0/dvT7QWnV7SA+KIMfzDfnOEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694101509; x=1694706309;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7y3rbO1RzgxKWnNXsWIfcygwrDuRBorBovsktP1bzXQ=;
- b=Ol4upAyyOZ/eNvSNvFuyKmb2owNFZfdyJU+qNBU5LTHKdpk9fAPtcO+/VO3IfR471s
- WhMbfgCi2fbK/ZBCJT0+I6mYEhsrpBDcFk9dx95If7sI+cnzkK1Gq1AzaC+cl089o0IL
- wF98bDcBQLSKRuQQmtXpk3hWKB0Mm2n7KfODC2CPWYnl80ksoEeFjUulHOUU1WzybTBv
- UsWaiYhnOpU2EPXjkN7RHWz1GxafXP6FOKJOg+vSpcOBqSbbjEB1bbl2IxXMpXmdf0fX
- 97ZHu4ELmodpPBoCsWiIPC7lYWwmb5aLE1n9vEUKqKrQadJ0DKmh2FTHI1PwzoqiMLUX
- msLA==
-X-Gm-Message-State: AOJu0YxWtRviTlWipYdVVX5gMa0t6VxkMeswdl4lQ8p9lRygE46Luw4k
- CMjlRQgOKfCLP2rszg8za7FJ03dmr6N29YNpD5Bp/ex6GfRB3Bi0xgU=
-X-Google-Smtp-Source: AGHT+IFsSMDALMntfmkytMS6y++xu5h0PtPgrMpcaEPOiEZpdTlfFIZ28v9U3GiDWFrUeC3VhpcphJs05uu0eQxJmPs=
-X-Received: by 2002:a17:907:7616:b0:9a1:aea2:d18d with SMTP id
- jx22-20020a170907761600b009a1aea2d18dmr5156466ejc.48.1694101509521; Thu, 07
- Sep 2023 08:45:09 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1694102216; x=1694707016;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1JN+Qao8IdvyNSWvDm5vhSmhNPjf4gx2dY5//ckJMUw=;
+ b=GVTUOb3h7qv/Y07uRdFKR9yO4R8Q7TDB4Ep/GngPtgAWCmvBSalZRCnJ2rUv4nDYZ6
+ +RIEflH/4NX4o+xRhSspcw0j/CQry1zRU7+aisWY5VEQ5Yb7UMnds+DIR0ei2eaOpXdv
+ 4pyd4BI1YDzu8EHskaDN45HF0Jpq4duPdIokKUA0QXYfHY+jkFz3msmwxeLFoaZFN8Ux
+ VphSyvjRC3keomrjJkgmUecoXxPk1/WJEnNmkhuKQjBsOoEi+oU1z3BgMST9zu+JITCJ
+ T0xyl9D+sy+hZZYBn8orik/1zpBiuV/A9lcQaceLpr1EBA1FT76/RH681/k9yPmKZnjV
+ GCkw==
+X-Gm-Message-State: AOJu0Yxy+jPiTZ6LdvBhTgVo+jk9hzDLb0A4aKsQL8kMKO7u+ugFkKMJ
+ KV//0HQxU2ogUf3ptAVzvmgkw+CqKTUWeAUfwSMa0w==
+X-Google-Smtp-Source: AGHT+IGKYHUOwu4XGYcybpijSZ0JznJv7+Gh4Hl56ZWHPkAdzWLM3X+6tE/P1NiSyW/cwzz+UlzCUK6gEy03EY7aOO0=
+X-Received: by 2002:a17:906:518d:b0:9a1:f81f:d0d5 with SMTP id
+ y13-20020a170906518d00b009a1f81fd0d5mr4617047ejk.54.1694102215719; Thu, 07
+ Sep 2023 08:56:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822093614.4717-1-maxim.uvarov@linaro.org>
- <CAHTX3dKEqFNMQf+-FSO7oZerT03fQb1Z1BYvN3-dfpmoPtZQFg@mail.gmail.com>
-In-Reply-To: <CAHTX3dKEqFNMQf+-FSO7oZerT03fQb1Z1BYvN3-dfpmoPtZQFg@mail.gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Thu, 7 Sep 2023 21:44:57 +0600
-Message-ID: <CAD8XO3Y4jc5NStvfyY=Nj2pG5on-a8DkVPZUShNHgcd+NZr4Hg@mail.gmail.com>
-Subject: Re: [PATCHv7 00/15] net/lwip: add lwip library for the network stack
-To: Michal Simek <monstr@monstr.eu>
-Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
- joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com, 
- goldsimon@gmx.de
+References: <20230830231758.2561402-1-sjg@chromium.org>
+ <20230830231758.2561402-3-sjg@chromium.org>
+ <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
+ <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
+ <CAPnjgZ1U+Gy0Q_Sc63p0ixkWF9iJEEBLhV8-N9-sh7OGNy-OmQ@mail.gmail.com>
+ <CAMj1kXG9vM0haSOu19j7ujQCBEN6CBeXVAH96nm+gixt9FmMrA@mail.gmail.com>
+ <CAPnjgZ1oGF0Ni3RhK4fv6mJk40YjqyFVJxt6FfS9AW2rkcs9iA@mail.gmail.com>
+ <CAMj1kXEZ4fDvbtgXKjF+L7si-=C-5E0XcjutoEF8pU9a-BGN-g@mail.gmail.com>
+ <CAPnjgZ0vv+s00xvY2FqP+Fxb12tHuVWg-nwyWTrvuG+Mo4PaWg@mail.gmail.com>
+ <CAMj1kXHGpCt8qkd6XYQF8mMdivQkTnEWjv6NzsFK=+N72LAn=Q@mail.gmail.com>
+ <CAPnjgZ1vBaXfBa+FWvASi15=Py0DLbEK5XsRHLrJc02K2Yr_RQ@mail.gmail.com>
+ <CAMj1kXFjVPwnu226R8bHbo0i0LZ7jQE+vLPNQa6cvrCYqGD+YA@mail.gmail.com>
+In-Reply-To: <CAMj1kXFjVPwnu226R8bHbo0i0LZ7jQE+vLPNQa6cvrCYqGD+YA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 7 Sep 2023 09:56:37 -0600
+Message-ID: <CAPnjgZ1fVJE=ar_rB_So+vjkOZ_pDjaO5wwPn3pMKe=n3MmBeg@mail.gmail.com>
+Subject: Re: [PATCH v5 3/4] schemas: Add some common reserved-memory usages
+To: Ard Biesheuvel <ardb@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+ Devicetree Discuss <devicetree@vger.kernel.org>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ ron minnich <rminnich@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
+ Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>, 
+ Chiu Chasel <chasel.chiu@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,275 +102,358 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 7 Sept 2023 at 21:21, Michal Simek <monstr@monstr.eu> wrote:
+Hi Ard,
 
-> Hi,
+On Thu, 7 Sept 2023 at 09:07, Ard Biesheuvel <ardb@kernel.org> wrote:
 >
-> =C3=BAt 22. 8. 2023 v 11:38 odes=C3=ADlatel Maxim Uvarov <maxim.uvarov@li=
-naro.org>
-> napsal:
+> On Thu, 7 Sept 2023 at 16:50, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Hello,
+> > Hi Ard,
 > >
-> > I'm sending v7, with all v6 comments getting fixed. The only thing left
-> is a pointer
-> > to timeout callback which 2 applications use. I will rework this timeou=
-t
-> > in next v8. I started take a look at it, and want to fix this together
-> > with background applications support in v8.
-> >
-> > changelog:
-> >         v7: - more review fixes.
-> >             - support of multiply eth devices, were "ethact" selects th=
+> > On Thu, 7 Sept 2023 at 08:12, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > >
+> > > On Thu, 7 Sept 2023 at 15:56, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ard,
+> > > >
+> > > > On Thu, 7 Sept 2023 at 07:31, Ard Biesheuvel <ardb@kernel.org> wrot=
+e:
+> > > > >
+> > > > > On Wed, 6 Sept 2023 at 18:50, Simon Glass <sjg@chromium.org> wrot=
+e:
+> > > > > >
+> > > > > > Hi Ard,
+> > > > > >
+> > > > > > On Wed, Sep 6, 2023, 10:09 Ard Biesheuvel <ardb@kernel.org> wro=
+te:
+> > > > > >>
+> > > > > >> On Wed, 6 Sept 2023 at 16:54, Simon Glass <sjg@chromium.org> w=
+rote:
+> > > > > >> >
+> > > > > >> > Hi Rob, Ard,
+> > > > > >> >
+> > > > > >> > On Wed, 6 Sept 2023 at 08:34, Rob Herring <robh@kernel.org> =
+wrote:
+> > > > > >> > >
+> > > > > >> > > On Tue, Sep 5, 2023 at 4:44=E2=80=AFPM Ard Biesheuvel <ard=
+b@kernel.org> wrote:
+> > > > > >> > > >
+> > > > > >> > > > On Thu, 31 Aug 2023 at 01:18, Simon Glass <sjg@chromium.=
+org> wrote:
+> > > > > >> > > > >
+> > > > > >> > > > > The Devicetree specification skips over handling of a =
+logical view of
+> > > > > >> > > > > the memory map, pointing users to the UEFI specificati=
+on.
+> > > > > >> > > > >
+> > > > > >> > > > > It is common to split firmware into 'Platform Init', w=
+hich does the
+> > > > > >> > > > > initial hardware setup and a "Payload" which selects t=
+he OS to be booted.
+> > > > > >> > > > > Thus an handover interface is required between these t=
+wo pieces.
+> > > > > >> > > > >
+> > > > > >> > > > > Where UEFI boot-time services are not available, but U=
+EFI firmware is
+> > > > > >> > > > > present on either side of this interface, information =
+about memory usage
+> > > > > >> > > > > and attributes must be presented to the "Payload" in s=
+ome form.
+> > > > > >> > > > >
+> > > > > >> > > >
+> > > > > >> > > > I don't think the UEFI references are needed or helpful =
+here.
+> > > > > >> > > >
+> > > > > >> > > > > This aims to provide an small schema addition for this=
+ mapping.
+> > > > > >> > > > >
+> > > > > >> > > > > For now, no attempt is made to create an exhaustive bi=
+nding, so there are
+> > > > > >> > > > > some example types listed. More can be added later.
+> > > > > >> > > > >
+> > > > > >> > > > > The compatible string is not included, since the node =
+name is enough to
+> > > > > >> > > > > indicate the purpose of a node, as per the existing re=
+served-memory
+> > > > > >> > > > > schema.
+> > > > > >> > >
+> > > > > >> > > Node names reflect the 'class', but not what's specificall=
+y in the
+> > > > > >> > > node. So really, all reserved-memory nodes should have the=
+ same name,
+> > > > > >> > > but that ship already sailed for existing users. 'compatib=
+le' is the
+> > > > > >> > > right thing here. As to what the node name should be, well=
+, we haven't
+> > > > > >> > > defined that. I think we just used 'memory' on some platfo=
+rms.
+> > > > > >> >
+> > > > > >> > OK
+> > > > > >> >
+> > > > > >> > >
+> > > > > >> > > > > This binding does not include a binding for the memory=
+ 'attribute'
+> > > > > >> > > > > property, defined by EFI_BOOT_SERVICES.GetMemoryMap().=
+ It may be useful
+> > > > > >> > > > > to have that as well, but perhaps not as a bit mask.
+> > > > > >> > > > >
+> > > > > >> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > >> > > > > ---
+> > > > > >> > > > >
+> > > > > >> > > > > Changes in v5:
+> > > > > >> > > > > - Drop the memory-map node (should have done that in v=
+4)
+> > > > > >> > > > > - Tidy up schema a bit
+> > > > > >> > > > >
+> > > > > >> > > > > Changes in v4:
+> > > > > >> > > > > - Make use of the reserved-memory node instead of crea=
+ting a new one
+> > > > > >> > > > >
+> > > > > >> > > > > Changes in v3:
+> > > > > >> > > > > - Reword commit message again
+> > > > > >> > > > > - cc a lot more people, from the FFI patch
+> > > > > >> > > > > - Split out the attributes into the /memory nodes
+> > > > > >> > > > >
+> > > > > >> > > > > Changes in v2:
+> > > > > >> > > > > - Reword commit message
+> > > > > >> > > > >
+> > > > > >> > > > >  .../reserved-memory/common-reserved.yaml      | 53 ++=
++++++++++++++++++
+> > > > > >> > > > >  1 file changed, 53 insertions(+)
+> > > > > >> > > > >  create mode 100644 dtschema/schemas/reserved-memory/c=
+ommon-reserved.yaml
+> > > > > >> > > > >
+> > > > > >> > > > > diff --git a/dtschema/schemas/reserved-memory/common-r=
+eserved.yaml b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > > >> > > > > new file mode 100644
+> > > > > >> > > > > index 0000000..d1b466b
+> > > > > >> > > > > --- /dev/null
+> > > > > >> > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved=
+.yaml
+> > > > > >> > > > > @@ -0,0 +1,53 @@
+> > > > > >> > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clau=
+se
+> > > > > >> > > > > +%YAML 1.2
+> > > > > >> > > > > +---
+> > > > > >> > > > > +$id: http://devicetree.org/schemas/reserved-memory/co=
+mmon-reserved.yaml#
+> > > > > >> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml=
+#
+> > > > > >> > > > > +
+> > > > > >> > > > > +title: Common memory reservations
+> > > > > >> > > > > +
+> > > > > >> > > > > +description: |
+> > > > > >> > > > > +  Specifies that the reserved memory region can be us=
+ed for the purpose
+> > > > > >> > > > > +  indicated by its node name.
+> > > > > >> > > > > +
+> > > > > >> > > > > +  Clients may reuse this reserved memory if they unde=
+rstand what it is for.
+> > > > > >> > > > > +
+> > > > > >> > > > > +maintainers:
+> > > > > >> > > > > +  - Simon Glass <sjg@chromium.org>
+> > > > > >> > > > > +
+> > > > > >> > > > > +allOf:
+> > > > > >> > > > > +  - $ref: reserved-memory.yaml
+> > > > > >> > > > > +
+> > > > > >> > > > > +properties:
+> > > > > >> > > > > +  $nodename:
+> > > > > >> > > > > +    enum:
+> > > > > >> > > > > +      - acpi-reclaim
+> > > > > >> > > > > +      - acpi-nvs
+> > > > > >> > > > > +      - boot-code
+> > > > > >> > > > > +      - boot-data
+> > > > > >> > > > > +      - runtime-code
+> > > > > >> > > > > +      - runtime-data
+> > > > > >> > > > > +
+> > > > > >> > > >
+> > > > > >> > > > These types are used by firmware to describe the nature =
+of certain
+> > > > > >> > > > memory regions to the OS. Boot code and data can be disc=
+arded, as well
+> > > > > >> > > > as ACPI reclaim after its contents have been consumed. R=
+untime code
+> > > > > >> > > > and data need to be mapped for runtime features to work.
+> > > > > >> > > >
+> > > > > >> > > > When one firmware phase communicates the purpose of a ce=
+rtain memory
+> > > > > >> > > > reservation to another, it is typically not limited to w=
+hether its
+> > > > > >> > > > needs to be preserved and when it needs to be mapped (an=
+d with which
+> > > > > >> > > > attributes). I'd expect a memory reservation appearing u=
+nder this node
+> > > > > >> > > > to have a clearly defined purpose, and the subsequent ph=
+ases need to
+> > > > > >> > > > be able to discover this information.
+> > > > > >> > > >
+> > > > > >> > > > For example, a communication buffer for secure<->non-sec=
+ure
+> > > > > >> > > > communication or a page with spin tables used by PSCI. N=
+one of the
+> > > > > >> > > > proposed labels are appropriate for this, and I'd much r=
+ather have a
+> > > > > >> > > > compatible string or some other property that clarifies =
+the nature in
+> > > > > >> > > > a more suitable way. Note that 'no-map' already exists t=
+o indicate
+> > > > > >> > > > that the CPU should not map this memory unless it does s=
+o for the
+> > > > > >> > > > specific purpose that the reservation was made for.
+> > > > > >> > >
+> > > > > >> > > I agree. I think compatible is the better approach. Some p=
+roperty like
+> > > > > >> > > 'discard' may not be sufficient information if the OS need=
+s to consume
+> > > > > >> > > the region first and then discard it. Better to state exac=
+tly what's
+> > > > > >> > > there and then the OS can imply the rest.
+> > > > > >> >
+> > > > > >> > OK, so what sort of compatible strings?
+> > > > > >> >
+> > > > > >> > How about:
+> > > > > >> > "acpi-reclaim" - holds ACPI tables; memory can be reclaimed =
+once the
+> > > > > >> > tables are read and no-longer needed
+> > > > > >>
+> > > > > >> ACPI reclaim is a policy, not a purpose. This memory could con=
+tain
+> > > > > >> many different things.
+> > > > > >>
+> > > > > >> > "boot-code" - holds boot code; memory can be reclaimed once =
+the boot
+> > > > > >> > phase is complete
+> > > > > >> > "runtime-code" - holds runtime code; memory can be reclaimed=
+ only if
+> > > > > >> > this code will not be used from that point
+> > > > > >> >
+> > > > > >>
+> > > > > >> These are also policies. They can be inferred from the purpose=
+.
+> > > > > >>
+> > > > > >> > etc. We can then have more specific compatibles, like:
+> > > > > >> >
+> > > > > >> > "psci-spin-table" - holds PSCI spin tables
+> > > > > >> >
+> > > > > >> > so you could do:
+> > > > > >> >
+> > > > > >> > compatible =3D "runtime-code", "psci-spin-table";
+> > > > > >> >
+> > > > > >>
+> > > > > >> I understand that this binding targets firmware<->firmware rat=
+her than
+> > > > > >> firmware<->OS, which makes it much more difficult to keep it b=
+oth
+> > > > > >> generic and sufficiently descriptive.
+> > > > > >>
+> > > > > >> However, I still feel that all the overlap with UEFI memory ty=
+pes is
+> > > > > >> not what we want here. UEFI knows how to manage its own memory=
+ map,
+> > > > > >> what it needs to know is what memory is already in use and for=
+ which
+> > > > > >> exact purpose. Whether or not that implies that the memory can=
+ be
+> > > > > >> freed at some point or can be mapped or not should follow from=
+ that.
+> > > > > >
+> > > > > >
+> > > > > > Can you please make a suggestion? I am unsure what you are look=
+ing for.
+> > > > > >
+> > > > >
+> > > > > I'm happy to help flesh this out, but you still have not provided=
+ us
+> > > > > with an actual use case, so I can only draw from my own experienc=
 e
-> >               active device.
-> >         v6: - fixed review comments for v5 (thanks Ilias and Simon).
-> >             - lwip is not under /net, so prior applying patch following
-> >               commit is needed to create lwIP merge into U-Boot:
-> >               git subtree add --prefix net/lwip/lwip-external
-> https://git.savannah.nongnu.org/git/lwip.git master --squash
+> > > > > putting together firmware for virtual and physical ARM machines.
+> > > >
+> > > > I did explain that this is needed when Tianocore is on both sides o=
+f
+> > > > the interface, since Platform Init places some things in memory and
+> > > > the Payload needs to preserve them there, and/or know where they ar=
+e.
+> > > >
+> > > > I think the problem might be that you don't agree with that, but it
+> > > > seems to be a fact, so I am not sure how I can alter it.
+> > > >
+> > > > Please can you clearly explain which part of the use case you are m=
+issing.
+> > > >
+> > >
+> > > 'Tianocore on both sides of the interface' means that Tianocore runs
+> > > as the platform init code, and uses a bespoke DT based protocol to
+> > > launch another instance of Tianocore as the payload, right?
+> >
+> > Not another instance, no. Just the other half of Tianocore. The first
+> > half does platform init and the second half does the loading of the
+> > OS.
+> >
 >
-> I think you should integrate it via .gitmodules as is done for example in
-> qemu.
+> That doesn't make any sense to me.
 >
-> The next part. I tried to use buildmain to build the whole series and
-> I am getting a lot of errors.
-> You should fix pretty much all of these errors to make sure that the
-> tree is bisectable.
+> > >
+> > > Tianocore/EDK2 already implements methods to reinvoke itself if neede=
+d
+> > > (e.g., during a firmware update), and does so by launching a new DXE
+> > > core. So the boot sequence looks like
+> > >
+> > > SEC -> PEI -> DXE -> BDS -> app that invokes UpdateCapsule() -> DXE -=
 >
-> Thanks,
-> Michal
+> > > firmware update
+> > >
+> > > So please elaborate on how this Tianocore on both sides of the
+> > > interface is put together when it uses this DT based handover. We
+> > > really need a better understanding of this in order to design a DT
+> > > binding that meets its needs.
+> >
+> > Are you familiar with building Tianocore as a coreboot payload, for
+> > example? That shows Tianocore running as just the Payload, with
+> > coreboot doing the platform init. So the use case I am talking about
+> > is similar to that.
+> >
 >
->
-Hello Michal, the first version was with .gitmodules. To  run  buildman you
-need to create a subtree commit with the above line first, and only then
-run buildman for patches.
-And I think these series of patches are not friendly with sequential per
-patch builds. It's split into logical pieces for easier review.
+> Yes I am familiar with that, and it is a completely different thing.
 
-From the log below I can say that subtree commit was not created. lwIP
-library files are missing in your set up.
+Right, but that is my use case.
 
-BR,
-Maxim.
-
-
-> [u-boot](lwip)$ ./tools/buildman/buildman -C -b `git rev-parse
-> --abbrev-ref HEAD` xilinx_zynqmp_virt -o /run/shm/ -sSed
-> Summary of 18 commits for 1 boards (1 thread, 12 jobs per thread)
-> 01: Merge branch 'master' of
-> https://gitlab.denx.de/u-boot/custodians/u-boot-usb
->    aarch64:  w+   xilinx_zynqmp_virt
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +This board uses CONFIG_SPL_FIT_GENERATOR. Please migrate
-> +to binman instead, to avoid the proliferation of
-> +arch-specific scripts with no tests.
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-> 02: net/lwip: add doc/develop/net_lwip.rst
-> 03: net/lwip: integrate lwIP library
->    aarch64:  +   xilinx_zynqmp_virt
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> -This board uses CONFIG_SPL_FIT_GENERATOR. Please migrate
-> -to binman instead, to avoid the proliferation of
-> -arch-specific scripts with no tests.
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-> +make[3]: *** No rule to make target
-> 'net/lwip/lwip-external/src/core/init.o', needed by
-> 'net/lwip/built-in.o'.  Stop.
-> +make[2]: *** [../scripts/Makefile.build:397: net/lwip] Error 2
-> +../net/net.c:128:23: fatal error: net/ulwip.h: No such file or directory
-> + #include <net/ulwip.h>
-> +                       ^
-> +compilation terminated.
-> +make[2]: *** [../scripts/Makefile.build:256: net/net.o] Error 1
-> +make[1]: *** [Makefile:1857: net] Error 2
-> +make: *** [Makefile:177: sub-make] Error 2
-> 04: net/lwip: implement dns cmd
-> -make[2]: *** [../scripts/Makefile.build:256: net/net.o] Error 1
-> +make[2]: *** [../scripts/Makefile.build:257: net/net.o] Error 1
-> 05: net/lwip: implement dhcp cmd
-> 06: net/lwip: implement tftp cmd
-> +cp: cannot stat '../net/lwip/lwip-external/src/apps/tftp/tftp.c': No
-> such file or directory
-> +make[4]: *** [../net/lwip/apps/tftp/Makefile:9:
-> net/lwip/apps/tftp/tftp.c] Error 1
-> +../net/lwip/apps/tftp/lwip-tftp.c:12:35: fatal error:
-> lwip/apps/tftp_client.h: No such file or directory
-> + #include "lwip/apps/tftp_client.h"
-> +                                   ^
-> +make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/tftp/lwip-tftp.o] Error 1
-> +make[3]: *** [../scripts/Makefile.build:397: net/lwip/apps/tftp] Error 2
-> 07: net/lwip: implement wget cmd
-> 08: net/lwip: implement ping cmd
-> +cp: cannot stat '../net/lwip/lwip-external/contrib/apps/ping/ping.c':
-> No such file or directory
-> +make[4]: *** [../net/lwip/apps/ping/Makefile:8:
-> net/lwip/apps/ping/ping.c] Error 1
-> +../net/lwip/apps/ping/lwip_ping.c:7:22: fatal error: lwip/opt.h: No
-> such file or directory
-> + #include "lwip/opt.h"
-> +                      ^
-> +make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/ping/lwip_ping.o] Error 1
-> +make[3]: *** [../scripts/Makefile.build:397: net/lwip/apps/ping] Error 2
-> 09: net/lwip: add lwIP configuration
-> 10: net/lwip: implement lwIP port to U-Boot
-> -../net/lwip/apps/ping/lwip_ping.c:7:22: fatal error: lwip/opt.h: No
-> such file or directory
-> - #include "lwip/opt.h"
-> -                      ^
-> -make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/ping/lwip_ping.o] Error 1
-> -../net/lwip/apps/tftp/lwip-tftp.c:12:35: fatal error:
-> lwip/apps/tftp_client.h: No such file or directory
-> - #include "lwip/apps/tftp_client.h"
-> -                                   ^
-> -make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/tftp/lwip-tftp.o] Error 1
-> +../net/eth-uclass.c:35:2: error: unknown type name =E2=80=98ulwip=E2=80=
-=99
-> +  ulwip ulwip;
-> +  ^~~~~
-> +  return &priv->ulwip;
-> +         ^~~~~~~~~~~~
-> +make[2]: *** [../scripts/Makefile.build:257: net/eth-uclass.o] Error 1
-> w+../net/eth-uclass.c: In function =E2=80=98eth_lwip_priv=E2=80=99:
-> w+../net/eth-uclass.c:355:9: warning: return from incompatible pointer
-> type [-Wincompatible-pointer-types]
-> 11: net/lwip: update .gitignore with lwIP
-> +../net/lwip/apps/ping/lwip_ping.c:7:22: fatal error: lwip/opt.h: No
-> such file or directory
-> + #include "lwip/opt.h"
-> +                      ^
-> +make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/ping/lwip_ping.o] Error 1
-> +../net/lwip/apps/tftp/lwip-tftp.c:12:35: fatal error:
-> lwip/apps/tftp_client.h: No such file or directory
-> + #include "lwip/apps/tftp_client.h"
-> +                                   ^
-> +make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/tftp/lwip-tftp.o] Error 1
-> 12: net/lwip: connection between cmd and lwip apps
-> -../net/lwip/apps/ping/lwip_ping.c:7:22: fatal error: lwip/opt.h: No
-> such file or directory
-> - #include "lwip/opt.h"
-> -                      ^
-> -make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/ping/lwip_ping.o] Error 1
-> -../net/lwip/apps/tftp/lwip-tftp.c:12:35: fatal error:
-> lwip/apps/tftp_client.h: No such file or directory
-> - #include "lwip/apps/tftp_client.h"
-> -                                   ^
-> -make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/tftp/lwip-tftp.o] Error 1
-> +../cmd/net-lwip.c:16:23: fatal error: net/ulwip.h: No such file or
-> directory
-> + #include "net/ulwip.h"
-> +make[2]: *** [../scripts/Makefile.build:257: cmd/net-lwip.o] Error 1
-> +make[1]: *** [Makefile:1857: cmd] Error 2
-> 13: net/lwip: replace original net commands with lwip
-> -make[3]: *** No rule to make target
-> 'net/lwip/lwip-external/src/core/init.o', needed by
-> 'net/lwip/built-in.o'.  Stop.
-> -cp: cannot stat '../net/lwip/lwip-external/src/apps/tftp/tftp.c': No
-> such file or directory
-> -make[4]: *** [../net/lwip/apps/tftp/Makefile:9:
-> net/lwip/apps/tftp/tftp.c] Error 1
-> -make[3]: *** [../scripts/Makefile.build:397: net/lwip/apps/tftp] Error 2
-> -../cmd/net-lwip.c:16:23: fatal error: net/ulwip.h: No such file or
-> directory
-> - #include "net/ulwip.h"
-> -                       ^
-> -compilation terminated.
-> -make[2]: *** [../scripts/Makefile.build:257: cmd/net-lwip.o] Error 1
-> -make[1]: *** [Makefile:1857: cmd] Error 2
-> -make[2]: *** [../scripts/Makefile.build:257: net/eth-uclass.o] Error 1
-> -../net/net.c:128:23: fatal error: net/ulwip.h: No such file or directory
-> - #include <net/ulwip.h>
-> -make[2]: *** [../scripts/Makefile.build:257: net/net.o] Error 1
-> +make[2]: *** [../scripts/Makefile.build:256: net/eth-uclass.o] Error 1
-> 14: net/lwip: split net.h to net.h, arp.h and eth.h
-> -../net/eth-uclass.c:35:2: error: unknown type name =E2=80=98ulwip=E2=80=
-=99
-> -  ulwip ulwip;
-> -  ^~~~~
-> -  return &priv->ulwip;
-> -         ^~~~~~~~~~~~
-> -make[2]: *** [../scripts/Makefile.build:256: net/eth-uclass.o] Error 1
-> w-../net/eth-uclass.c: In function =E2=80=98eth_lwip_priv=E2=80=99:
-> w-../net/eth-uclass.c:355:9: warning: return from incompatible pointer
-> type [-Wincompatible-pointer-types]
-> 15: net/lwip: drop old net/wget
-> +make[3]: *** No rule to make target
-> 'net/lwip/lwip-external/src/core/init.o', needed by
-> 'net/lwip/built-in.o'.  Stop.
-> +cp: cannot stat '../net/lwip/lwip-external/src/apps/tftp/tftp.c': No
-> such file or directory
-> +make[4]: *** [../net/lwip/apps/tftp/Makefile:9:
-> net/lwip/apps/tftp/tftp.c] Error 1
-> +../net/lwip/apps/ping/lwip_ping.c:7:22: fatal error: lwip/opt.h: No
-> such file or directory
-> + #include "lwip/opt.h"
-> +                      ^
-> +compilation terminated.
-> +make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/ping/lwip_ping.o] Error 1
-> +../net/lwip/apps/tftp/lwip-tftp.c:12:35: fatal error:
-> lwip/apps/tftp_client.h: No such file or directory
-> + #include "lwip/apps/tftp_client.h"
-> +                                   ^
-> +make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/tftp/lwip-tftp.o] Error 1
-> +make[3]: *** [../scripts/Makefile.build:397: net/lwip/apps/tftp] Error 2
-> 16: net/lwip/wget add port selection
-> 17: Squashed 'net/lwip/lwip-external/' content from commit 84fde1ebbfe3
-> -make[3]: *** No rule to make target
-> 'net/lwip/lwip-external/src/core/init.o', needed by
-> 'net/lwip/built-in.o'.  Stop.
-> -cp: cannot stat '../net/lwip/lwip-external/contrib/apps/ping/ping.c':
-> No such file or directory
-> -make[4]: *** [../net/lwip/apps/ping/Makefile:8:
-> net/lwip/apps/ping/ping.c] Error 1
-> -cp: cannot stat '../net/lwip/lwip-external/src/apps/tftp/tftp.c': No
-> such file or directory
-> -make[4]: *** [../net/lwip/apps/tftp/Makefile:9:
-> net/lwip/apps/tftp/tftp.c] Error 1
-> -../net/lwip/apps/ping/lwip_ping.c:7:22: fatal error: lwip/opt.h: No
-> such file or directory
-> - #include "lwip/opt.h"
-> -                      ^
-> -compilation terminated.
-> -make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/ping/lwip_ping.o] Error 1
-> -make[3]: *** [../scripts/Makefile.build:397: net/lwip/apps/ping] Error 2
-> -../net/lwip/apps/tftp/lwip-tftp.c:12:35: fatal error:
-> lwip/apps/tftp_client.h: No such file or directory
-> - #include "lwip/apps/tftp_client.h"
-> -                                   ^
-> -make[4]: *** [../scripts/Makefile.build:257:
-> net/lwip/apps/tftp/lwip-tftp.o] Error 1
-> -make[3]: *** [../scripts/Makefile.build:397: net/lwip/apps/tftp] Error 2
-> -make[2]: *** [../scripts/Makefile.build:397: net/lwip] Error 2
-> -make[1]: *** [Makefile:1857: net] Error 2
-> -make: *** [Makefile:177: sub-make] Error 2
-> +make: *** No rule to make target 'xilinx_zynqmp_virt_defconfig'.  Stop.
-> 18: Merge commit 'c773d79082011e8d77cd4b125c07a84b8348af39' as
-> 'net/lwip/lwip-external'
->    aarch64:  w+   xilinx_zynqmp_virt
-> -make: *** No rule to make target 'xilinx_zynqmp_virt_defconfig'.  Stop.
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +This board uses CONFIG_SPL_FIT_GENERATOR. Please migrate
-> +to binman instead, to avoid the proliferation of
-> +arch-specific scripts with no tests.
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
 >
+> As i explained before, there is already prior art for this in
+> Tianocore, i.e., launching a Tianocore build based on a DT description
+> of the platform, including /memory and /reserved-memory nodes.
+
+By prior art do you mean code, or an existing binding? In either case,
+can you please point me to it? Is this a generic binding used on x86
+as well, or just for ARM?
+
+My goal here is to augment the binding.
+
+>
+> I argued that Tianocore never consumes memory reservations with UEFI
+> semantics, given that it supplants whatever UEFI functionality the
+> previous stage may have provided. But it shouldn't step on the code
+> and data regions used by the previous stage if it is still running in
+> the background (e.g., OS at EL1 and PSCI at EL2 on ARM)
+>
+> So this brings me back to the things I proposed in my previous reply:
+> - memory reservations should be described in detail so the consumer
+> knows what to do with it
+
+Yes I can add more detail, if that is all that is needed. But we seem
+to still not be aligned on the goal.
+
+
+> - memory reservations should have attributes that describe how the
+> memory may be used if not for the described purpose
+>
+> I still don't see a reason for things like runtime-code and
+> runtime-data etc based on the above. If stage N describes the memory
+> it occupies itself as system memory, it should reserve it as well if
+> it needs to be preserved after stage N+1 has taken over, so perhaps it
+> should be described as a discardable memory reservation but I don't
+> think it necessarily needs a type in that case.
+
+Well if you can find another way to do this in the DT, that is fine.
+
+Regards,
+Simon
