@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E6AEC8738
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:01:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB312EC873E
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 16:01:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 051D686ACC;
-	Thu,  7 Sep 2023 17:59:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 599AA86A7D;
+	Thu,  7 Sep 2023 17:59:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lWQECVnK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jaPu4+6d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CAFB86A7B; Thu,  7 Sep 2023 17:59:46 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id 69C8186ADA; Thu,  7 Sep 2023 17:59:48 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F1F686A7D
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A8F186A34
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:59:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-34e25ad38cbso4705205ab.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:41 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-34cc8e8cbd4so4991005ab.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:59:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694102380; x=1694707180; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694102382; x=1694707182; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wa8zTccRvHCzKytOqq/6zuYeGX/X+GHliY8eBPBMEeM=;
- b=lWQECVnKwhC1pTapVhxYsvDKRZTFtBipR9icWuOeUBg5we1dLZTgFOPRQFd3fMYQnP
- j4/rW8S8ShzznpAPVF4LvRs9UFVABQ7nU8TWuTjHBl0peLYLDbiaCitcyJ/I/0n1GyP2
- qPH5o4l4SofUkFI4UbNZIkd0TgbX69yBB7HMg=
+ bh=TfMLQRyS3HX575ElJkxU+JP5qGOenzoFDNtinWhNVCI=;
+ b=jaPu4+6dlM9L2i9r+pCYBMvQQkQPjl8A7PBrifziZL9+M3NDZFH2cHVupL2vSXtga2
+ 98DcNK4HSOP9oG1BPsT95e2OeUFno1oxAE7LoH6ELPPKN9YFBbEQ0xLCRUrDpbb6o5rY
+ JbuMzYUdRoQkm8hIGhlDHEz5DMgMfSUDuIxV0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694102380; x=1694707180;
+ d=1e100.net; s=20221208; t=1694102382; x=1694707182;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wa8zTccRvHCzKytOqq/6zuYeGX/X+GHliY8eBPBMEeM=;
- b=eLAGwHCBMUMOjn68/IXt1towhLytFnbvhMaKCrLcP+cLEG599JuEXNCyIU7JLVlARG
- eTbVN4mxPG8ivCrmOODBLRqqGqehcoE+Z52FF9P2HUQEzoSS9ZWIMUyZuhmwnLEG5Z1+
- QEXRkNjr387O3YNlTS4XsMPEzpoOiRwLsSG+JPC1GB0GLGd2R5JkvXpIMl0PaUTiCCDF
- 5zXp7KIB9pfHI+s5L3JS7A58M1p8NVYnyOMwWjsjHSqSnOCBODEObJSHRMTOdFDyPKe8
- mze0M42mo21CkPKqDMH6Ggr9AmRzcVywbmcANL+zTP9YebtIpA/TUqLdJ1m/BBTTBUf4
- BwWg==
-X-Gm-Message-State: AOJu0YwQUnrJGSM13LWQbsf9eiEBwbuwuNuhXnoMSEMrUCPggNHhAwkc
- Gceq0rZVl4hU07TEwlLA0cTC6d5vWVXqFEMbzWQ=
-X-Google-Smtp-Source: AGHT+IEQzXcx21eDUQjo8Ex1vnK5hF8PFVfMlHMtefeFLpbQf6hxhL0SXUyrK+pRpVUc17SzEfavLQ==
-X-Received: by 2002:a92:c7c6:0:b0:348:6736:6605 with SMTP id
- g6-20020a92c7c6000000b0034867366605mr130859ilk.9.1694102380229; 
- Thu, 07 Sep 2023 08:59:40 -0700 (PDT)
+ bh=TfMLQRyS3HX575ElJkxU+JP5qGOenzoFDNtinWhNVCI=;
+ b=ASs7jXKKHWMN3OPseO5ayamrL6PXYD5F5dW1BJseTghtR5qim92nuW9j9bQ1byPrbX
+ YP86lsh2i9nN87ETXbQnbizX4pfLGpi+fi/t8bP4ZQnCc8JmfkaIYPkUmcWA7f0+j8Df
+ LKIZWDsZknKEZoLku+mFb6kWEX/GJnIjVg2yalU8V5SBFqWc1nohg2J6vZglxPclNSXV
+ qL5I0W4p5VDLtQvioXIqMSfZHJx4bRlMiaAcLCLeU+e5IJXpQvTGBWrapiU2PY4kp+Rp
+ IxnPdOBhQKOd7PiYhcfsIHxvqLSv01/ZLP3q/zkjS49ArfQBG9Lsw/Caj56cb1dlA6bB
+ ATZg==
+X-Gm-Message-State: AOJu0Yy2++oLn/BTJVZ35wfRgcx8QGr21MNLr2TM3mCqDLYPnpHpD7v6
+ JWR0RSYbwMSRD/0TEpReokVAJ2xl0Ri3hEGEASA=
+X-Google-Smtp-Source: AGHT+IHQJVo/1whthu2zje6e37CA7xnjO7lTdNSIxPNoIO1nFnNym0yU042BODynG/gU1ly4w/bMog==
+X-Received: by 2002:a05:6e02:1d91:b0:34b:aa34:a5c4 with SMTP id
+ h17-20020a056e021d9100b0034baa34a5c4mr42153ila.30.1694102381803; 
+ Thu, 07 Sep 2023 08:59:41 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.39
+ o18-20020a92d4d2000000b0034989674ad7sm5637727ilm.52.2023.09.07.08.59.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 08:59:40 -0700 (PDT)
+ Thu, 07 Sep 2023 08:59:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 01/22] lib: rational: Move the Kconfigs into the correct
- place
-Date: Thu,  7 Sep 2023 09:59:06 -0600
-Message-ID: <20230907155933.48511-2-sjg@chromium.org>
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v4 03/22] video: Move bmp code to drivers/video
+Date: Thu,  7 Sep 2023 09:59:08 -0600
+Message-ID: <20230907155933.48511-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230907155933.48511-1-sjg@chromium.org>
 References: <20230907155933.48511-1-sjg@chromium.org>
@@ -89,40 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These should not be part of the 'system tables' menu. Move them outside
-on their own.
+This relates to graphics which is only active when CONFIG_VIDEO is
+enabled. Move it into that directory.
+
+There is no harm in compiling it always, since it if not used it will
+be dropped by the linker. So drop use of the BMP Kconfig.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 7d0f3fbb93c ("lib: rational: copy the rational fraction lib...")
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- lib/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes in v2:
+- Add new patch to move bmp code to drivers/video
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 42e559ad0b51..9addcfab3734 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -989,6 +989,8 @@ config GENERATE_SMBIOS_TABLE
- 	  See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
- 	  the devicetree.
+ common/Makefile                 | 1 -
+ drivers/video/Makefile          | 1 +
+ {common => drivers/video}/bmp.c | 0
+ 3 files changed, 1 insertion(+), 1 deletion(-)
+ rename {common => drivers/video}/bmp.c (100%)
+
+diff --git a/common/Makefile b/common/Makefile
+index f5c3d90f0675..0a3f75f2f1c8 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -45,7 +45,6 @@ endif # !CONFIG_SPL_BUILD
  
-+endmenu
-+
- config LIB_RATIONAL
- 	bool "enable continued fraction calculation routines"
+ obj-$(CONFIG_$(SPL_TPL_)BOOTSTAGE) += bootstage.o
+ obj-$(CONFIG_$(SPL_TPL_)BLOBLIST) += bloblist.o
+-obj-$(CONFIG_$(SPL_)BMP) += bmp.o
  
-@@ -996,8 +998,6 @@ config SPL_LIB_RATIONAL
- 	bool "enable continued fraction calculation routines for SPL"
- 	depends on SPL
+ ifdef CONFIG_SPL_BUILD
+ ifdef CONFIG_SPL_DFU
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index d13af9f3b19b..6841d8965842 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -25,6 +25,7 @@ obj-$(CONFIG_PANEL_HX8238D) += hx8238d.o
+ obj-$(CONFIG_$(SPL_TPL_)SIMPLE_PANEL) += simple_panel.o
  
--endmenu
--
- config ASN1_COMPILER
- 	bool
- 	help
+ obj-$(CONFIG_VIDEO_LOGO) += u_boot_logo.o
++obj-y += bmp.o
+ 
+ endif
+ 
+diff --git a/common/bmp.c b/drivers/video/bmp.c
+similarity index 100%
+rename from common/bmp.c
+rename to drivers/video/bmp.c
 -- 
 2.42.0.283.g2d96d420d3-goog
 
