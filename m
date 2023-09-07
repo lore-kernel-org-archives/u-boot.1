@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE229EC8738
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F16DEC873A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B72D86A68;
-	Thu,  7 Sep 2023 17:58:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA22186A4F;
+	Thu,  7 Sep 2023 17:58:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N+6DxErP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QDmcqfoF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0CE586A35; Thu,  7 Sep 2023 17:58:40 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id BB382869A3; Thu,  7 Sep 2023 17:58:41 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF8E886A68
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:58:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07D3886A6C
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:58:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7927f36120cso46868939f.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:58:36 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-79536bc6697so46385139f.1
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:58:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694102315; x=1694707115; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694102316; x=1694707116; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4zTPDBXKoBFVR7fs1I0Vez+Z8DhMRSE+qQU5VpbyH4M=;
- b=N+6DxErPtb8xC2gauzb13xQFrSi15+p/fBONrWq8jsKMkxcIyVZqTVyG9QCoAlhNcO
- A0qssD5zkzY3LoZdCoO49xWD74DtZhYtRyMUf6QGYQMpmrMBvRDhYoHpLiInX0nLqmKo
- Z+yn3uepOaj43asxnXmLOMdak+hAiDNCWFo7U=
+ bh=+B30j6FDwyLJp+/49RYF6ztnLZnUXruCSRkA4W9djbY=;
+ b=QDmcqfoFUNedFObIhsTmMWQmePla5WnkNng2z1//3Jw1ApMpiTvLvZtOWKp1Ed8etx
+ dm3XGy/fcrZn7Q4MIUfm1R/wPY3s/35bSzPpIvWFzd/u05ifBnUGf4UqcSUxXb+5Z+fL
+ 2+8befB53LQlrWUE3znYYGvHBS9J/eA0WoqzI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694102315; x=1694707115;
+ d=1e100.net; s=20221208; t=1694102316; x=1694707116;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4zTPDBXKoBFVR7fs1I0Vez+Z8DhMRSE+qQU5VpbyH4M=;
- b=I+n0SX9TZBpte1Juxb0ISJ4czC+gBxT/Ne/etAIRjgNO5VC9BJs5FqTlOLyVmlnZC0
- jWxIcUMzhC4yTRphH6QbyRUg9GYUQ3p2kTMDwuPQkdS0jxs5jLIrHvZgysN+/jsPM5tL
- CtgcENHDec+vAZe0dD39eemS8Ll5GWNzfIOr7IqsRSXSV7d4ApULuRsfOiK/a/VI9LFj
- CIKkSOZzwyn1Yp1Jxasc7sej4x8GekVQeix3x9trwk+ouRZSSyZ99+RbKIXA3UTgP0EI
- 4pooXOzfeoA2sEYXvwBx5VhX97D5tEZZk11mSMsS4BJIFP/WSxhPjOuePW3Tj58mrqzE
- QJug==
-X-Gm-Message-State: AOJu0YwIBOGWIO3Ixw3OjUzz60Z6cbhsKDQNMZApBUzFNhahn+Vro6V4
- m82Qq6SiguvObdzsgOokQI1b0tDlxhIQ0pPM7Kc=
-X-Google-Smtp-Source: AGHT+IEAnX69C0JaBoeM6LjPaRTB3uHJy92DHZOgP7sO1kiWgjb38vxUbjHLsVOmFfavTIppKGaskw==
-X-Received: by 2002:a6b:ea07:0:b0:792:9333:2cbf with SMTP id
- m7-20020a6bea07000000b0079293332cbfmr129923ioc.6.1694102315460; 
- Thu, 07 Sep 2023 08:58:35 -0700 (PDT)
+ bh=+B30j6FDwyLJp+/49RYF6ztnLZnUXruCSRkA4W9djbY=;
+ b=kVobk4rbscTQSRM+hDLgftUlQlvIqHYr4S3J6r8H0COIn0HepDrwF2liRI3rczgNM6
+ L/NyHGlrb5KaVwXfMuZIxKPRse2DfdPDDKKWV1UEykMh+LvUmmQpkBnUgFcmZIR9Mumk
+ b4Oeg/BaDHOLuyvKJ1WX1P2q0qtkEpeiOaCtRU+RmreAzEmsGmLnQnjGlY0r40d7fAoc
+ caxhETG/XDH0vOTkYLVUaGGLaUsu9fINRrGYrPmN8CVKEL1KDB/ouLaEEukiMr7cfzNk
+ NqmjuJNcGjfAruoiSJFIgVnd38vayyqFfhthCgWnV60JS9d2ELCVcrnTH6MMmu/W7LOr
+ /gJA==
+X-Gm-Message-State: AOJu0YyaS0VDSWwcZB46MVenNtUhXO2ylKBKX7nh3JsY6PqZmI4Oc0NZ
+ l8amshzKrqtozzSDu7++bZSCxL1UMW6EkDZnIz8=
+X-Google-Smtp-Source: AGHT+IG1MNDe6pT4Ri5QRgykuIU/AktLqunYNAV9NmqWO1nazuHYyVLn3xA8vh1gyCqU9uZ6/PTG6A==
+X-Received: by 2002:a5d:9c92:0:b0:77e:3598:e516 with SMTP id
+ p18-20020a5d9c92000000b0077e3598e516mr157501iop.2.1694102316470; 
+ Thu, 07 Sep 2023 08:58:36 -0700 (PDT)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  p1-20020a02b881000000b004317dfe68e7sm5498839jam.153.2023.09.07.08.58.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 08:58:35 -0700 (PDT)
+ Thu, 07 Sep 2023 08:58:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 6/9] x86: broadwell: Avoid initing the CPU twice
-Date: Thu,  7 Sep 2023 09:58:18 -0600
-Message-ID: <20230907155825.48056-7-sjg@chromium.org>
+Subject: [PATCH v2 7/9] x86: broadwell: Set up MTRRs
+Date: Thu,  7 Sep 2023 09:58:19 -0600
+Message-ID: <20230907155825.48056-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 In-Reply-To: <20230907155825.48056-1-sjg@chromium.org>
 References: <20230907155825.48056-1-sjg@chromium.org>
@@ -88,47 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When TPL has already set up the CPU, don't do it again. This existing
-code actually has this backwards, so fix it.
+The current condition does not handle the samus_tpl case where it sets
+up the RAM in SPL but needs to commit the MTRRs in U-Boot proper.
+
+Add another case to handle this and update the comment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
 (no changes since v1)
 
- arch/x86/cpu/broadwell/cpu.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ arch/x86/lib/init_helpers.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/arch/x86/cpu/broadwell/cpu.c b/arch/x86/cpu/broadwell/cpu.c
-index 560b1f7893f6..cbd4a3b67973 100644
---- a/arch/x86/cpu/broadwell/cpu.c
-+++ b/arch/x86/cpu/broadwell/cpu.c
-@@ -11,6 +11,7 @@
- #include <event.h>
- #include <init.h>
- #include <log.h>
-+#include <spl.h>
- #include <asm/cpu.h>
- #include <asm/cpu_x86.h>
- #include <asm/cpu_common.h>
-@@ -67,12 +68,11 @@ int arch_cpu_init(void)
+diff --git a/arch/x86/lib/init_helpers.c b/arch/x86/lib/init_helpers.c
+index 60a2707dcf1b..bf0c921577d1 100644
+--- a/arch/x86/lib/init_helpers.c
++++ b/arch/x86/lib/init_helpers.c
+@@ -15,7 +15,8 @@ DECLARE_GLOBAL_DATA_PTR;
+ int init_cache_f_r(void)
  {
- 	post_code(POST_CPU_INIT);
+ 	bool do_mtrr = CONFIG_IS_ENABLED(X86_32BIT_INIT) ||
+-		 IS_ENABLED(CONFIG_FSP_VERSION2);
++		 IS_ENABLED(CONFIG_FSP_VERSION2) ||
++		 (IS_ENABLED(CONFIG_TPL) && IS_ENABLED(CONFIG_HAVE_MRC));
+ 	int ret;
  
--#ifdef CONFIG_TPL
- 	/* Do a mini-init if TPL has already done the full init */
--	return x86_cpu_reinit_f();
--#else
--	return x86_cpu_init_f();
--#endif
-+	if (IS_ENABLED(CONFIG_TPL) && spl_phase() != PHASE_TPL)
-+		return x86_cpu_reinit_f();
-+	else
-+		return x86_cpu_init_f();
- }
- 
- int checkcpu(void)
+ 	/*
+@@ -23,11 +24,9 @@ int init_cache_f_r(void)
+ 	 *
+ 	 * booting from slimbootloader - MTRRs are already set up
+ 	 * booting with FSPv1 - MTRRs are already set up
+-	 * booting with FSPv2 - MTRRs must be set here
++	 * booting with FSPv2 or MRC - MTRRs must be set here
+ 	 * booting from coreboot - in this case there is no SPL, so we set up
+ 	 *	the MTRRs here
+-	 * Note: if there is an SPL, then it has already set up MTRRs so we
+-	 *	don't need to do that here
+ 	 */
+ 	do_mtrr &= !IS_ENABLED(CONFIG_FSP_VERSION1) &&
+ 		!IS_ENABLED(CONFIG_SYS_SLIMBOOTLOADER);
 -- 
 2.42.0.283.g2d96d420d3-goog
 
