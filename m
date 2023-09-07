@@ -4,88 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4229CEC8738
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE2BEC873A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 15:57:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41D96869E1;
-	Thu,  7 Sep 2023 17:57:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A388086A1C;
+	Thu,  7 Sep 2023 17:57:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QBXggY3C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="apjoWIlj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF1D6869E6; Thu,  7 Sep 2023 17:56:59 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 6E61A869F2; Thu,  7 Sep 2023 17:57:49 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 970CB869CA
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:56:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA46586A14
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 17:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-991c786369cso144255266b.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:56:56 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-98377c5d53eso134972066b.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 08:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694102216; x=1694707016; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1JN+Qao8IdvyNSWvDm5vhSmhNPjf4gx2dY5//ckJMUw=;
- b=QBXggY3CTK534C/bsHMRq39r0Po8iZF+oCXHpE8Oa9JapJMTZ4LekOfyT+Yr51R7gM
- wwV9aWogfYh5yUI15aXbmJouO+o1UKeHXWKQ6EJrdD+DUALOeG8x+oTolKZRChNFcvmA
- R4abykM7Ctnu0/dvT7QWnV7SA+KIMfzDfnOEg=
+ d=chromium.org; s=google; t=1694102266; x=1694707066; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sCXoShlQ3+20Ri9jrbaVtIIxDnQvEGKrYLP2MttuT68=;
+ b=apjoWIlj+7V0RB9LBTR5vxkTLuJihXcHvnn0EowcwYxKrLgG5ihfZtGr5MRjhq7Xzb
+ 4peTH2qSUY3QULLrN9jZu3zyrnoeOsItf993q62+YGk5dlnvmsBDZImdRimt1Dfqs4rH
+ GNZGvcWSvPjH2EngANiOy2CzlDAvZFM8HKMA0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1694102216; x=1694707016;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1JN+Qao8IdvyNSWvDm5vhSmhNPjf4gx2dY5//ckJMUw=;
- b=GVTUOb3h7qv/Y07uRdFKR9yO4R8Q7TDB4Ep/GngPtgAWCmvBSalZRCnJ2rUv4nDYZ6
- +RIEflH/4NX4o+xRhSspcw0j/CQry1zRU7+aisWY5VEQ5Yb7UMnds+DIR0ei2eaOpXdv
- 4pyd4BI1YDzu8EHskaDN45HF0Jpq4duPdIokKUA0QXYfHY+jkFz3msmwxeLFoaZFN8Ux
- VphSyvjRC3keomrjJkgmUecoXxPk1/WJEnNmkhuKQjBsOoEi+oU1z3BgMST9zu+JITCJ
- T0xyl9D+sy+hZZYBn8orik/1zpBiuV/A9lcQaceLpr1EBA1FT76/RH681/k9yPmKZnjV
- GCkw==
-X-Gm-Message-State: AOJu0Yxy+jPiTZ6LdvBhTgVo+jk9hzDLb0A4aKsQL8kMKO7u+ugFkKMJ
- KV//0HQxU2ogUf3ptAVzvmgkw+CqKTUWeAUfwSMa0w==
-X-Google-Smtp-Source: AGHT+IGKYHUOwu4XGYcybpijSZ0JznJv7+Gh4Hl56ZWHPkAdzWLM3X+6tE/P1NiSyW/cwzz+UlzCUK6gEy03EY7aOO0=
-X-Received: by 2002:a17:906:518d:b0:9a1:f81f:d0d5 with SMTP id
- y13-20020a170906518d00b009a1f81fd0d5mr4617047ejk.54.1694102215719; Thu, 07
- Sep 2023 08:56:55 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1694102266; x=1694707066;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sCXoShlQ3+20Ri9jrbaVtIIxDnQvEGKrYLP2MttuT68=;
+ b=Lz/ug5IQJlmHoIlquszqQQpj4RY76pS7nCa3zQmSOBE2teJecb8T/dWicKAXku1WqA
+ JWRsbW3rHArfyWDiIs4Y0tFEwNXndtRXmlRtMpKrZldu/vxZK0zJj6GHTtC5v4pvvAfw
+ Ho0N9/8CPziQNT2WM1aBynyT8n6SP1qRNsWa/MW+XhL2sQQfBaaW2Q7C3y5s2eFm2OYt
+ eNShCCzHuLyRc/E9/EhTkGCBLdnsZMWp83t/CibBaWpdslo5/GU3vK1R//dHlKNWmB7b
+ wKUShJRPuZjGz9d/JNeRRn0Rpj07hp59ZhfvvxFGcmCp5Yjs3iRTIlbmDzV+gFFxLg3n
+ z3Cg==
+X-Gm-Message-State: AOJu0YxmFoBfjIhDE8fEVX5iguMiXTz7CGieaC9zusQKFJKDDqYhlorE
+ j9jKREyihnDfmXKOVq++zoaCOdwPyvhQEWDXp70cxcPgvv+SxYtFKVw=
+X-Google-Smtp-Source: AGHT+IGtp5QZ2mMSZjR3YYpunzkMQZiJPUXRiLTty76piX1Kz2RUlnC92a728VODGp3QEgrpyegQ81aeIeqIDkcnHBE=
+X-Received: by 2002:a17:906:5396:b0:993:d75b:63ea with SMTP id
+ g22-20020a170906539600b00993d75b63eamr4987617ejo.16.1694102266129; Thu, 07
+ Sep 2023 08:57:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230830231758.2561402-1-sjg@chromium.org>
- <20230830231758.2561402-3-sjg@chromium.org>
- <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
- <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
- <CAPnjgZ1U+Gy0Q_Sc63p0ixkWF9iJEEBLhV8-N9-sh7OGNy-OmQ@mail.gmail.com>
- <CAMj1kXG9vM0haSOu19j7ujQCBEN6CBeXVAH96nm+gixt9FmMrA@mail.gmail.com>
- <CAPnjgZ1oGF0Ni3RhK4fv6mJk40YjqyFVJxt6FfS9AW2rkcs9iA@mail.gmail.com>
- <CAMj1kXEZ4fDvbtgXKjF+L7si-=C-5E0XcjutoEF8pU9a-BGN-g@mail.gmail.com>
- <CAPnjgZ0vv+s00xvY2FqP+Fxb12tHuVWg-nwyWTrvuG+Mo4PaWg@mail.gmail.com>
- <CAMj1kXHGpCt8qkd6XYQF8mMdivQkTnEWjv6NzsFK=+N72LAn=Q@mail.gmail.com>
- <CAPnjgZ1vBaXfBa+FWvASi15=Py0DLbEK5XsRHLrJc02K2Yr_RQ@mail.gmail.com>
- <CAMj1kXFjVPwnu226R8bHbo0i0LZ7jQE+vLPNQa6cvrCYqGD+YA@mail.gmail.com>
-In-Reply-To: <CAMj1kXFjVPwnu226R8bHbo0i0LZ7jQE+vLPNQa6cvrCYqGD+YA@mail.gmail.com>
+References: <20230903204000.96999-1-kettenis@openbsd.org>
+ <CAPnjgZ2D6Fq5WnSxjxD2fzCZkZB0yDAk7mOda7bTuUf-KZLmhA@mail.gmail.com>
+ <87bkeegmgc.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87bkeegmgc.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Sep 2023 09:56:37 -0600
-Message-ID: <CAPnjgZ1fVJE=ar_rB_So+vjkOZ_pDjaO5wwPn3pMKe=n3MmBeg@mail.gmail.com>
-Subject: Re: [PATCH v5 3/4] schemas: Add some common reserved-memory usages
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
- Devicetree Discuss <devicetree@vger.kernel.org>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- ron minnich <rminnich@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
- Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>, 
- Chiu Chasel <chasel.chiu@intel.com>
+Date: Thu, 7 Sep 2023 09:57:34 -0600
+Message-ID: <CAPnjgZ1R8c2qCaraQavRr+=MiAiHK38gD1NS2FHdhkXV=XKVog@mail.gmail.com>
+Subject: Re: [PATCH v2] bootstd: Make efi_mgr bootmeth work for non-sandbox
+ setups
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: kettenis@openbsd.org, u-boot@lists.denx.de, xypron.glpk@gmx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,358 +83,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ard,
+Hi Mark,
 
-On Thu, 7 Sept 2023 at 09:07, Ard Biesheuvel <ardb@kernel.org> wrote:
+On Thu, 7 Sept 2023 at 07:08, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> On Thu, 7 Sept 2023 at 16:50, Simon Glass <sjg@chromium.org> wrote:
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Thu, 7 Sep 2023 06:23:10 -0600
 > >
-> > Hi Ard,
+> > Hi Mark,
 > >
-> > On Thu, 7 Sept 2023 at 08:12, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > On Sun, 3 Sept 2023 at 14:40, Mark Kettenis <kettenis@openbsd.org> wrote:
 > > >
-> > > On Thu, 7 Sept 2023 at 15:56, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ard,
-> > > >
-> > > > On Thu, 7 Sept 2023 at 07:31, Ard Biesheuvel <ardb@kernel.org> wrot=
-e:
-> > > > >
-> > > > > On Wed, 6 Sept 2023 at 18:50, Simon Glass <sjg@chromium.org> wrot=
-e:
-> > > > > >
-> > > > > > Hi Ard,
-> > > > > >
-> > > > > > On Wed, Sep 6, 2023, 10:09 Ard Biesheuvel <ardb@kernel.org> wro=
-te:
-> > > > > >>
-> > > > > >> On Wed, 6 Sept 2023 at 16:54, Simon Glass <sjg@chromium.org> w=
-rote:
-> > > > > >> >
-> > > > > >> > Hi Rob, Ard,
-> > > > > >> >
-> > > > > >> > On Wed, 6 Sept 2023 at 08:34, Rob Herring <robh@kernel.org> =
-wrote:
-> > > > > >> > >
-> > > > > >> > > On Tue, Sep 5, 2023 at 4:44=E2=80=AFPM Ard Biesheuvel <ard=
-b@kernel.org> wrote:
-> > > > > >> > > >
-> > > > > >> > > > On Thu, 31 Aug 2023 at 01:18, Simon Glass <sjg@chromium.=
-org> wrote:
-> > > > > >> > > > >
-> > > > > >> > > > > The Devicetree specification skips over handling of a =
-logical view of
-> > > > > >> > > > > the memory map, pointing users to the UEFI specificati=
-on.
-> > > > > >> > > > >
-> > > > > >> > > > > It is common to split firmware into 'Platform Init', w=
-hich does the
-> > > > > >> > > > > initial hardware setup and a "Payload" which selects t=
-he OS to be booted.
-> > > > > >> > > > > Thus an handover interface is required between these t=
-wo pieces.
-> > > > > >> > > > >
-> > > > > >> > > > > Where UEFI boot-time services are not available, but U=
-EFI firmware is
-> > > > > >> > > > > present on either side of this interface, information =
-about memory usage
-> > > > > >> > > > > and attributes must be presented to the "Payload" in s=
-ome form.
-> > > > > >> > > > >
-> > > > > >> > > >
-> > > > > >> > > > I don't think the UEFI references are needed or helpful =
-here.
-> > > > > >> > > >
-> > > > > >> > > > > This aims to provide an small schema addition for this=
- mapping.
-> > > > > >> > > > >
-> > > > > >> > > > > For now, no attempt is made to create an exhaustive bi=
-nding, so there are
-> > > > > >> > > > > some example types listed. More can be added later.
-> > > > > >> > > > >
-> > > > > >> > > > > The compatible string is not included, since the node =
-name is enough to
-> > > > > >> > > > > indicate the purpose of a node, as per the existing re=
-served-memory
-> > > > > >> > > > > schema.
-> > > > > >> > >
-> > > > > >> > > Node names reflect the 'class', but not what's specificall=
-y in the
-> > > > > >> > > node. So really, all reserved-memory nodes should have the=
- same name,
-> > > > > >> > > but that ship already sailed for existing users. 'compatib=
-le' is the
-> > > > > >> > > right thing here. As to what the node name should be, well=
-, we haven't
-> > > > > >> > > defined that. I think we just used 'memory' on some platfo=
-rms.
-> > > > > >> >
-> > > > > >> > OK
-> > > > > >> >
-> > > > > >> > >
-> > > > > >> > > > > This binding does not include a binding for the memory=
- 'attribute'
-> > > > > >> > > > > property, defined by EFI_BOOT_SERVICES.GetMemoryMap().=
- It may be useful
-> > > > > >> > > > > to have that as well, but perhaps not as a bit mask.
-> > > > > >> > > > >
-> > > > > >> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > >> > > > > ---
-> > > > > >> > > > >
-> > > > > >> > > > > Changes in v5:
-> > > > > >> > > > > - Drop the memory-map node (should have done that in v=
-4)
-> > > > > >> > > > > - Tidy up schema a bit
-> > > > > >> > > > >
-> > > > > >> > > > > Changes in v4:
-> > > > > >> > > > > - Make use of the reserved-memory node instead of crea=
-ting a new one
-> > > > > >> > > > >
-> > > > > >> > > > > Changes in v3:
-> > > > > >> > > > > - Reword commit message again
-> > > > > >> > > > > - cc a lot more people, from the FFI patch
-> > > > > >> > > > > - Split out the attributes into the /memory nodes
-> > > > > >> > > > >
-> > > > > >> > > > > Changes in v2:
-> > > > > >> > > > > - Reword commit message
-> > > > > >> > > > >
-> > > > > >> > > > >  .../reserved-memory/common-reserved.yaml      | 53 ++=
-+++++++++++++++++
-> > > > > >> > > > >  1 file changed, 53 insertions(+)
-> > > > > >> > > > >  create mode 100644 dtschema/schemas/reserved-memory/c=
-ommon-reserved.yaml
-> > > > > >> > > > >
-> > > > > >> > > > > diff --git a/dtschema/schemas/reserved-memory/common-r=
-eserved.yaml b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > > >> > > > > new file mode 100644
-> > > > > >> > > > > index 0000000..d1b466b
-> > > > > >> > > > > --- /dev/null
-> > > > > >> > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved=
-.yaml
-> > > > > >> > > > > @@ -0,0 +1,53 @@
-> > > > > >> > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clau=
-se
-> > > > > >> > > > > +%YAML 1.2
-> > > > > >> > > > > +---
-> > > > > >> > > > > +$id: http://devicetree.org/schemas/reserved-memory/co=
-mmon-reserved.yaml#
-> > > > > >> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml=
-#
-> > > > > >> > > > > +
-> > > > > >> > > > > +title: Common memory reservations
-> > > > > >> > > > > +
-> > > > > >> > > > > +description: |
-> > > > > >> > > > > +  Specifies that the reserved memory region can be us=
-ed for the purpose
-> > > > > >> > > > > +  indicated by its node name.
-> > > > > >> > > > > +
-> > > > > >> > > > > +  Clients may reuse this reserved memory if they unde=
-rstand what it is for.
-> > > > > >> > > > > +
-> > > > > >> > > > > +maintainers:
-> > > > > >> > > > > +  - Simon Glass <sjg@chromium.org>
-> > > > > >> > > > > +
-> > > > > >> > > > > +allOf:
-> > > > > >> > > > > +  - $ref: reserved-memory.yaml
-> > > > > >> > > > > +
-> > > > > >> > > > > +properties:
-> > > > > >> > > > > +  $nodename:
-> > > > > >> > > > > +    enum:
-> > > > > >> > > > > +      - acpi-reclaim
-> > > > > >> > > > > +      - acpi-nvs
-> > > > > >> > > > > +      - boot-code
-> > > > > >> > > > > +      - boot-data
-> > > > > >> > > > > +      - runtime-code
-> > > > > >> > > > > +      - runtime-data
-> > > > > >> > > > > +
-> > > > > >> > > >
-> > > > > >> > > > These types are used by firmware to describe the nature =
-of certain
-> > > > > >> > > > memory regions to the OS. Boot code and data can be disc=
-arded, as well
-> > > > > >> > > > as ACPI reclaim after its contents have been consumed. R=
-untime code
-> > > > > >> > > > and data need to be mapped for runtime features to work.
-> > > > > >> > > >
-> > > > > >> > > > When one firmware phase communicates the purpose of a ce=
-rtain memory
-> > > > > >> > > > reservation to another, it is typically not limited to w=
-hether its
-> > > > > >> > > > needs to be preserved and when it needs to be mapped (an=
-d with which
-> > > > > >> > > > attributes). I'd expect a memory reservation appearing u=
-nder this node
-> > > > > >> > > > to have a clearly defined purpose, and the subsequent ph=
-ases need to
-> > > > > >> > > > be able to discover this information.
-> > > > > >> > > >
-> > > > > >> > > > For example, a communication buffer for secure<->non-sec=
-ure
-> > > > > >> > > > communication or a page with spin tables used by PSCI. N=
-one of the
-> > > > > >> > > > proposed labels are appropriate for this, and I'd much r=
-ather have a
-> > > > > >> > > > compatible string or some other property that clarifies =
-the nature in
-> > > > > >> > > > a more suitable way. Note that 'no-map' already exists t=
-o indicate
-> > > > > >> > > > that the CPU should not map this memory unless it does s=
-o for the
-> > > > > >> > > > specific purpose that the reservation was made for.
-> > > > > >> > >
-> > > > > >> > > I agree. I think compatible is the better approach. Some p=
-roperty like
-> > > > > >> > > 'discard' may not be sufficient information if the OS need=
-s to consume
-> > > > > >> > > the region first and then discard it. Better to state exac=
-tly what's
-> > > > > >> > > there and then the OS can imply the rest.
-> > > > > >> >
-> > > > > >> > OK, so what sort of compatible strings?
-> > > > > >> >
-> > > > > >> > How about:
-> > > > > >> > "acpi-reclaim" - holds ACPI tables; memory can be reclaimed =
-once the
-> > > > > >> > tables are read and no-longer needed
-> > > > > >>
-> > > > > >> ACPI reclaim is a policy, not a purpose. This memory could con=
-tain
-> > > > > >> many different things.
-> > > > > >>
-> > > > > >> > "boot-code" - holds boot code; memory can be reclaimed once =
-the boot
-> > > > > >> > phase is complete
-> > > > > >> > "runtime-code" - holds runtime code; memory can be reclaimed=
- only if
-> > > > > >> > this code will not be used from that point
-> > > > > >> >
-> > > > > >>
-> > > > > >> These are also policies. They can be inferred from the purpose=
-.
-> > > > > >>
-> > > > > >> > etc. We can then have more specific compatibles, like:
-> > > > > >> >
-> > > > > >> > "psci-spin-table" - holds PSCI spin tables
-> > > > > >> >
-> > > > > >> > so you could do:
-> > > > > >> >
-> > > > > >> > compatible =3D "runtime-code", "psci-spin-table";
-> > > > > >> >
-> > > > > >>
-> > > > > >> I understand that this binding targets firmware<->firmware rat=
-her than
-> > > > > >> firmware<->OS, which makes it much more difficult to keep it b=
-oth
-> > > > > >> generic and sufficiently descriptive.
-> > > > > >>
-> > > > > >> However, I still feel that all the overlap with UEFI memory ty=
-pes is
-> > > > > >> not what we want here. UEFI knows how to manage its own memory=
- map,
-> > > > > >> what it needs to know is what memory is already in use and for=
- which
-> > > > > >> exact purpose. Whether or not that implies that the memory can=
- be
-> > > > > >> freed at some point or can be mapped or not should follow from=
- that.
-> > > > > >
-> > > > > >
-> > > > > > Can you please make a suggestion? I am unsure what you are look=
-ing for.
-> > > > > >
-> > > > >
-> > > > > I'm happy to help flesh this out, but you still have not provided=
- us
-> > > > > with an actual use case, so I can only draw from my own experienc=
-e
-> > > > > putting together firmware for virtual and physical ARM machines.
-> > > >
-> > > > I did explain that this is needed when Tianocore is on both sides o=
-f
-> > > > the interface, since Platform Init places some things in memory and
-> > > > the Payload needs to preserve them there, and/or know where they ar=
-e.
-> > > >
-> > > > I think the problem might be that you don't agree with that, but it
-> > > > seems to be a fact, so I am not sure how I can alter it.
-> > > >
-> > > > Please can you clearly explain which part of the use case you are m=
-issing.
-> > > >
+> > > Enable the bootflow based on this bootmeth if the BootOrder EFI
+> > > variable is set.
 > > >
-> > > 'Tianocore on both sides of the interface' means that Tianocore runs
-> > > as the platform init code, and uses a bespoke DT based protocol to
-> > > launch another instance of Tianocore as the payload, right?
-> >
-> > Not another instance, no. Just the other half of Tianocore. The first
-> > half does platform init and the second half does the loading of the
-> > OS.
-> >
->
-> That doesn't make any sense to me.
->
+> > > Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
+> > > ---
 > > >
-> > > Tianocore/EDK2 already implements methods to reinvoke itself if neede=
-d
-> > > (e.g., during a firmware update), and does so by launching a new DXE
-> > > core. So the boot sequence looks like
+> > > ChangeLog:
 > > >
-> > > SEC -> PEI -> DXE -> BDS -> app that invokes UpdateCapsule() -> DXE -=
->
-> > > firmware update
+> > > v2: - Initialize EFI subsystem to populate EFI variables
 > > >
-> > > So please elaborate on how this Tianocore on both sides of the
-> > > interface is put together when it uses this DT based handover. We
-> > > really need a better understanding of this in order to design a DT
-> > > binding that meets its needs.
+> > >
+> > >  boot/bootmeth_efi_mgr.c | 17 ++++++++++++++++-
+> > >  1 file changed, 16 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> > > index e9d973429f..e6c42d41fb 100644
+> > > --- a/boot/bootmeth_efi_mgr.c
+> > > +++ b/boot/bootmeth_efi_mgr.c
+> > > @@ -14,6 +14,8 @@
+> > >  #include <bootmeth.h>
+> > >  #include <command.h>
+> > >  #include <dm.h>
+> > > +#include <efi_loader.h>
+> > > +#include <efi_variable.h>
+> > >
+> > >  /**
+> > >   * struct efi_mgr_priv - private info for the efi-mgr driver
+> > > @@ -46,13 +48,26 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
+> > >  static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+> > >  {
+> > >         struct efi_mgr_priv *priv = dev_get_priv(dev);
+> > > +       efi_status_t ret;
+> > > +       efi_uintn_t size;
+> > > +       u16 *bootorder;
+> > >
+> > >         if (priv->fake_dev) {
+> > >                 bflow->state = BOOTFLOWST_READY;
+> > >                 return 0;
+> > >         }
+> > >
+> > > -       /* To be implemented */
+> > > +       ret = efi_init_obj_list();
 > >
-> > Are you familiar with building Tianocore as a coreboot payload, for
-> > example? That shows Tianocore running as just the Payload, with
-> > coreboot doing the platform init. So the use case I am talking about
-> > is similar to that.
-> >
+> > Doesn't this start up the whole EFI system? Is there a cheaper way to
+> > see if the variable subsystem exists, or can work?
 >
-> Yes I am familiar with that, and it is a completely different thing.
-
-Right, but that is my use case.
-
+> A fair bit of it at least.  With the possible exception of launching
+> EFI capsules (which shouldn't happen for a "normal" boot), I don't
+> think this is very expensive though.
 >
-> As i explained before, there is already prior art for this in
-> Tianocore, i.e., launching a Tianocore build based on a DT description
-> of the platform, including /memory and /reserved-memory nodes.
-
-By prior art do you mean code, or an existing binding? In either case,
-can you please point me to it? Is this a generic binding used on x86
-as well, or just for ARM?
-
-My goal here is to augment the binding.
-
+> There currently isn't a way to only initialize the variable subsystem;
+> we can't just call efi_init_variables() here since we have to also
+> call efi_disks_register() and a later efi_init_obj_list() call would
+> call efi_init_variables() again, which would leak memory.
 >
-> I argued that Tianocore never consumes memory reservations with UEFI
-> semantics, given that it supplants whatever UEFI functionality the
-> previous stage may have provided. But it shouldn't step on the code
-> and data regions used by the previous stage if it is still running in
-> the background (e.g., OS at EL1 and PSCI at EL2 on ARM)
+> Alternatively we could just unconditionally declare the efi_mgr
+> bootmeth as "ready" (like you already do for sandbox).  That would
+> postpone initialization of the EFI subsystem until we actually execute
+> this bootmeth.
 >
-> So this brings me back to the things I proposed in my previous reply:
-> - memory reservations should be described in detail so the consumer
-> knows what to do with it
+> But we need to do something before we switch more targets to standard
+> boot since otherwise booting through the EFI boot manager is just
+> plain broken.
 
-Yes I can add more detail, if that is all that is needed. But we seem
-to still not be aligned on the goal.
+Yes...
 
-
-> - memory reservations should have attributes that describe how the
-> memory may be used if not for the described purpose
->
-> I still don't see a reason for things like runtime-code and
-> runtime-data etc based on the above. If stage N describes the memory
-> it occupies itself as system memory, it should reserve it as well if
-> it needs to be preserved after stage N+1 has taken over, so perhaps it
-> should be described as a discardable memory reservation but I don't
-> think it necessarily needs a type in that case.
-
-Well if you can find another way to do this in the DT, that is fine.
+I don't have any great ideas on this. If we could get the EFI code
+better integrated into U-Boot then perhaps we would not need this
+'monolithm' init?
 
 Regards,
 Simon
