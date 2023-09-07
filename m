@@ -4,81 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 345E6EC8724
-	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 13:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D50ADEC872A
+	for <u-boot@archiver.kernel.org>; Thu,  7 Sep 2023 13:53:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16C29869A4;
-	Thu,  7 Sep 2023 15:31:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CB7F186494;
+	Thu,  7 Sep 2023 15:53:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="NgvZ3Wnr";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tCGXbsnd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12CB3869AC; Thu,  7 Sep 2023 15:31:58 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id 64C31863F9; Thu,  7 Sep 2023 15:53:51 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9984F86863
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 15:31:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7555386722
+ for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 15:53:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 287FEB81E5A
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:31:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3745EC3278E
- for <u-boot@lists.denx.de>; Thu,  7 Sep 2023 13:31:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1694093512;
- bh=oQCFnQHlRCRNYg7LhYt6nE9Xyrh2IY/UDLfbmmAuJTc=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=NgvZ3Wnr6VZUTsPII4TR20OXB34ch3STYpBxiE0nNulJhP7HtmRBJHtPlpliTq9sH
- 8cAkQAo/BMgNp3osaK+JWFQd2XsdJJSnhT5psOj6/5gMTlQz03aCZSJK5bNn8mbrUq
- dLyrOtJxVmzNn14AfuesBDeU3zKIosmvWkl/Vdw6aw5oGTzdzBtqbWA8pejWbwSmpK
- i6H6+kGCar4G0WgexbZ3IQtuuofoMlgJZJCLNwcGb0V9glqs4t4frzBhAtwbd0iF19
- Y6xc0r/Odn7hRKnUIMGuPtzUT2lhbbs3LJR5ujceUyaunRMt36bX2kZzN1QisoX6Pk
- MrH4wnzebwwHw==
-Received: by mail-lj1-f174.google.com with SMTP id
- 38308e7fff4ca-2bcda0aaf47so25434451fa.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 06:31:52 -0700 (PDT)
-X-Gm-Message-State: AOJu0YxxhTJ+ssYrO5MqlaIMjL/5migCZjzlRD4VE/1EXGl94jh8TcD9
- zsgXiR5Xk3RSA6BOC4934pmf5MO9J2bs06UUs3k=
-X-Google-Smtp-Source: AGHT+IEjJwoW5qdlQBOAX/47bLSCc44eatYa2/UB4A2WGcY12fy1WiePxwgI+rXJZoXPpM0fXU2+ekD4V1VBmB6Dhxg=
-X-Received: by 2002:a05:6512:3ca5:b0:501:be4d:6dc5 with SMTP id
- h37-20020a0565123ca500b00501be4d6dc5mr826360lfv.8.1694093510033; Thu, 07 Sep
- 2023 06:31:50 -0700 (PDT)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 7FC573F6B3; 
+ Thu,  7 Sep 2023 13:53:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1694094827;
+ bh=YJ/FLUoXYcZn9BCwVQfp0bPFNHPM4gc4fIyr2dwqNc8=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=tCGXbsndvQkjqGAzdKfyaKz4xauPFgNgk3e4zeLOc0xAUma396aMP2t8QbLuHJYfU
+ O45EIuO0P1JKR5IryCxjq9qb0Td01ROVA8kfCM34TinQQ+CfciQWUMH6kA+ibA16a+
+ ilTg9Jh+w6y9xCOSL5KT5xnwpWlzXf8OeWJWGpf/6Jpwq+jggA7CYWBHyf0v+75b4A
+ ZVxy/+1L4CXXrCnvVMQfTGM+uBdyAiLf2qhOWmtO1KICKYKtj09dfFRC4w90xr18/+
+ 7HqLtSey8j/KhGqrmAl5ssNC/00LFroaZ5R0ucLOOtjzLDc2jtoI4+juvJyXQ4PqZS
+ lm22d1UmQGnYg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Yanhong Wang <yanhong.wang@starfivetech.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Shengyu Qu <wiagn233@outlook.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] configs: NVMe/USB target boot devices on VisionFive 2
+Date: Thu,  7 Sep 2023 15:53:36 +0200
+Message-Id: <20230907135336.364877-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20230830231758.2561402-1-sjg@chromium.org>
- <20230830231758.2561402-3-sjg@chromium.org>
- <CAMj1kXG5-aqoOtKdPFEdm=_5SdvgUTOhcDOBP1zdARAvKphJtg@mail.gmail.com>
- <CAL_JsqLx0KnXxFc8mFyT_RmA2qeBEutMXj_3nKo_g==cuSeYuQ@mail.gmail.com>
- <CAPnjgZ1U+Gy0Q_Sc63p0ixkWF9iJEEBLhV8-N9-sh7OGNy-OmQ@mail.gmail.com>
- <CAMj1kXG9vM0haSOu19j7ujQCBEN6CBeXVAH96nm+gixt9FmMrA@mail.gmail.com>
- <CAPnjgZ1oGF0Ni3RhK4fv6mJk40YjqyFVJxt6FfS9AW2rkcs9iA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1oGF0Ni3RhK4fv6mJk40YjqyFVJxt6FfS9AW2rkcs9iA@mail.gmail.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Thu, 7 Sep 2023 15:31:38 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXEZ4fDvbtgXKjF+L7si-=C-5E0XcjutoEF8pU9a-BGN-g@mail.gmail.com>
-Message-ID: <CAMj1kXEZ4fDvbtgXKjF+L7si-=C-5E0XcjutoEF8pU9a-BGN-g@mail.gmail.com>
-Subject: Re: [PATCH v5 3/4] schemas: Add some common reserved-memory usages
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>,
- Devicetree Discuss <devicetree@vger.kernel.org>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- ron minnich <rminnich@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Dhaval Sharma <dhaval@rivosinc.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Mark Rutland <mark.rutland@arm.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, linux-acpi@vger.kernel.org, 
- Gua Guo <gua.guo@intel.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- Guo Dong <guo.dong@intel.com>, lkml <linux-kernel@vger.kernel.org>, 
- Chiu Chasel <chasel.chiu@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,243 +70,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Sept 2023 at 18:50, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ard,
->
-> On Wed, Sep 6, 2023, 10:09 Ard Biesheuvel <ardb@kernel.org> wrote:
->>
->> On Wed, 6 Sept 2023 at 16:54, Simon Glass <sjg@chromium.org> wrote:
->> >
->> > Hi Rob, Ard,
->> >
->> > On Wed, 6 Sept 2023 at 08:34, Rob Herring <robh@kernel.org> wrote:
->> > >
->> > > On Tue, Sep 5, 2023 at 4:44=E2=80=AFPM Ard Biesheuvel <ardb@kernel.o=
-rg> wrote:
->> > > >
->> > > > On Thu, 31 Aug 2023 at 01:18, Simon Glass <sjg@chromium.org> wrote=
-:
->> > > > >
->> > > > > The Devicetree specification skips over handling of a logical vi=
-ew of
->> > > > > the memory map, pointing users to the UEFI specification.
->> > > > >
->> > > > > It is common to split firmware into 'Platform Init', which does =
-the
->> > > > > initial hardware setup and a "Payload" which selects the OS to b=
-e booted.
->> > > > > Thus an handover interface is required between these two pieces.
->> > > > >
->> > > > > Where UEFI boot-time services are not available, but UEFI firmwa=
-re is
->> > > > > present on either side of this interface, information about memo=
-ry usage
->> > > > > and attributes must be presented to the "Payload" in some form.
->> > > > >
->> > > >
->> > > > I don't think the UEFI references are needed or helpful here.
->> > > >
->> > > > > This aims to provide an small schema addition for this mapping.
->> > > > >
->> > > > > For now, no attempt is made to create an exhaustive binding, so =
-there are
->> > > > > some example types listed. More can be added later.
->> > > > >
->> > > > > The compatible string is not included, since the node name is en=
-ough to
->> > > > > indicate the purpose of a node, as per the existing reserved-mem=
-ory
->> > > > > schema.
->> > >
->> > > Node names reflect the 'class', but not what's specifically in the
->> > > node. So really, all reserved-memory nodes should have the same name=
-,
->> > > but that ship already sailed for existing users. 'compatible' is the
->> > > right thing here. As to what the node name should be, well, we haven=
-'t
->> > > defined that. I think we just used 'memory' on some platforms.
->> >
->> > OK
->> >
->> > >
->> > > > > This binding does not include a binding for the memory 'attribut=
-e'
->> > > > > property, defined by EFI_BOOT_SERVICES.GetMemoryMap(). It may be=
- useful
->> > > > > to have that as well, but perhaps not as a bit mask.
->> > > > >
->> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
->> > > > > ---
->> > > > >
->> > > > > Changes in v5:
->> > > > > - Drop the memory-map node (should have done that in v4)
->> > > > > - Tidy up schema a bit
->> > > > >
->> > > > > Changes in v4:
->> > > > > - Make use of the reserved-memory node instead of creating a new=
- one
->> > > > >
->> > > > > Changes in v3:
->> > > > > - Reword commit message again
->> > > > > - cc a lot more people, from the FFI patch
->> > > > > - Split out the attributes into the /memory nodes
->> > > > >
->> > > > > Changes in v2:
->> > > > > - Reword commit message
->> > > > >
->> > > > >  .../reserved-memory/common-reserved.yaml      | 53 ++++++++++++=
-+++++++
->> > > > >  1 file changed, 53 insertions(+)
->> > > > >  create mode 100644 dtschema/schemas/reserved-memory/common-rese=
-rved.yaml
->> > > > >
->> > > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.ya=
-ml b/dtschema/schemas/reserved-memory/common-reserved.yaml
->> > > > > new file mode 100644
->> > > > > index 0000000..d1b466b
->> > > > > --- /dev/null
->> > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
->> > > > > @@ -0,0 +1,53 @@
->> > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
->> > > > > +%YAML 1.2
->> > > > > +---
->> > > > > +$id: http://devicetree.org/schemas/reserved-memory/common-reser=
-ved.yaml#
->> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> > > > > +
->> > > > > +title: Common memory reservations
->> > > > > +
->> > > > > +description: |
->> > > > > +  Specifies that the reserved memory region can be used for the=
- purpose
->> > > > > +  indicated by its node name.
->> > > > > +
->> > > > > +  Clients may reuse this reserved memory if they understand wha=
-t it is for.
->> > > > > +
->> > > > > +maintainers:
->> > > > > +  - Simon Glass <sjg@chromium.org>
->> > > > > +
->> > > > > +allOf:
->> > > > > +  - $ref: reserved-memory.yaml
->> > > > > +
->> > > > > +properties:
->> > > > > +  $nodename:
->> > > > > +    enum:
->> > > > > +      - acpi-reclaim
->> > > > > +      - acpi-nvs
->> > > > > +      - boot-code
->> > > > > +      - boot-data
->> > > > > +      - runtime-code
->> > > > > +      - runtime-data
->> > > > > +
->> > > >
->> > > > These types are used by firmware to describe the nature of certain
->> > > > memory regions to the OS. Boot code and data can be discarded, as =
-well
->> > > > as ACPI reclaim after its contents have been consumed. Runtime cod=
-e
->> > > > and data need to be mapped for runtime features to work.
->> > > >
->> > > > When one firmware phase communicates the purpose of a certain memo=
-ry
->> > > > reservation to another, it is typically not limited to whether its
->> > > > needs to be preserved and when it needs to be mapped (and with whi=
-ch
->> > > > attributes). I'd expect a memory reservation appearing under this =
-node
->> > > > to have a clearly defined purpose, and the subsequent phases need =
-to
->> > > > be able to discover this information.
->> > > >
->> > > > For example, a communication buffer for secure<->non-secure
->> > > > communication or a page with spin tables used by PSCI. None of the
->> > > > proposed labels are appropriate for this, and I'd much rather have=
- a
->> > > > compatible string or some other property that clarifies the nature=
- in
->> > > > a more suitable way. Note that 'no-map' already exists to indicate
->> > > > that the CPU should not map this memory unless it does so for the
->> > > > specific purpose that the reservation was made for.
->> > >
->> > > I agree. I think compatible is the better approach. Some property li=
-ke
->> > > 'discard' may not be sufficient information if the OS needs to consu=
-me
->> > > the region first and then discard it. Better to state exactly what's
->> > > there and then the OS can imply the rest.
->> >
->> > OK, so what sort of compatible strings?
->> >
->> > How about:
->> > "acpi-reclaim" - holds ACPI tables; memory can be reclaimed once the
->> > tables are read and no-longer needed
->>
->> ACPI reclaim is a policy, not a purpose. This memory could contain
->> many different things.
->>
->> > "boot-code" - holds boot code; memory can be reclaimed once the boot
->> > phase is complete
->> > "runtime-code" - holds runtime code; memory can be reclaimed only if
->> > this code will not be used from that point
->> >
->>
->> These are also policies. They can be inferred from the purpose.
->>
->> > etc. We can then have more specific compatibles, like:
->> >
->> > "psci-spin-table" - holds PSCI spin tables
->> >
->> > so you could do:
->> >
->> > compatible =3D "runtime-code", "psci-spin-table";
->> >
->>
->> I understand that this binding targets firmware<->firmware rather than
->> firmware<->OS, which makes it much more difficult to keep it both
->> generic and sufficiently descriptive.
->>
->> However, I still feel that all the overlap with UEFI memory types is
->> not what we want here. UEFI knows how to manage its own memory map,
->> what it needs to know is what memory is already in use and for which
->> exact purpose. Whether or not that implies that the memory can be
->> freed at some point or can be mapped or not should follow from that.
->
->
-> Can you please make a suggestion? I am unsure what you are looking for.
->
+Make NVMe and USB target boot devices on the StarFive VisionFive 2 board.
+The boot devices are sorted by decreasing device speed.
 
-I'm happy to help flesh this out, but you still have not provided us
-with an actual use case, so I can only draw from my own experience
-putting together firmware for virtual and physical ARM machines.
+CONFIG_PCI_INIT_R=y is set via [1]. 'start usb' is added to CONFIG_PREBOOT
+by the same patch.
 
-All the ACPI and UEFI lingo needs to be dropped. This is relevant only
-to the OS, and only if the prior stage exposes UEFI interfaces, in
-which case it does not need this binding.
+[1] [PATCH v1 1/2] configs: starfive: Enable PCIE auto enum and NVME/USB stuff for Starfive Visionfive 2
+    https://lore.kernel.org/u-boot/TY3P286MB2611C9AD6E5BB3756A959E89981FA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM/
 
-So on one side, there is the requirement for each memory reservation
-to be described with sufficient detail so that a subsequent boot stage
-(firmware or OS) can use it for its intended purpose, provided that
-this boot stage is aware of its purpose (i.e., it has a driver that
-matches on the compatible string in question, and actually maps/uses
-the memory)
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ include/configs/starfive-visionfive2.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On the other side, we need to describe how a memory reservation should
-be treated if the boot stage doesn't know its purpose, has no interest
-in using it or has consumed the contents and has no longer a need for
-the region. We already have no-map to describe that the memory should
-never be mapped (and this may be disregarded by an actual driver for
-the region). I imagine we might add 'discardable' as a boolean DT
-property, meaning that stage N may use the memory whichever way it
-wants if it is not going to use it for its intended purpose, provided
-that it deletes the node from the DT before passing it on to stage
-N+1.
+diff --git a/include/configs/starfive-visionfive2.h b/include/configs/starfive-visionfive2.h
+index 4ee02b8420..6fa7f16ddc 100644
+--- a/include/configs/starfive-visionfive2.h
++++ b/include/configs/starfive-visionfive2.h
+@@ -18,6 +18,8 @@
+ /* Environment options */
+ 
+ #define BOOT_TARGET_DEVICES(func) \
++	func(NVME, nvme, 0) \
++	func(USB, usb, 0) \
+ 	func(MMC, mmc, 1) \
+ 	func(DHCP, dhcp, na)
+ 
+-- 
+2.40.1
 
-One thing that needs to be clarified is how this binding interacts
-with /memory nodes. I assume that currently, /reserved-memory is
-independent, i.e., it could describe mappable memory that is not
-covered by /memory at all. If this is the case, we have to decide
-whether or not discardable regions can be treated in the same way, or
-whether we should require that discardable regions are covered by
-/memory.
