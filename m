@@ -4,68 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F083FEE57E0
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 07:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670D4EE57DE
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 08:09:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C89D18648D;
-	Fri,  8 Sep 2023 09:46:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 71D6686564;
+	Fri,  8 Sep 2023 10:09:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o6DlWx+b";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="HjYn5VYF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 363BE8653C; Fri,  8 Sep 2023 09:46:16 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 0DBC7865D0; Fri,  8 Sep 2023 10:09:24 +0200 (CEST)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C6F086457
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 09:46:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35007864AB
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 10:09:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3887k9Dp039681;
- Fri, 8 Sep 2023 02:46:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694159169;
- bh=AxMfdMoTIIx+7kwm63CR/WYMR83H1VbFTpIzK5V2t20=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=o6DlWx+bUpWaPzxB1n5bxRf4EE/9aHrt9KA6cJXAYA/meSgNfySGryp3AvWPV5dO8
- HH5qpG7iBYYfQkKm6Mjs9ag4eNqQ4hDClmYiqnO/z912dLuodZKB1WOq3eSbaCwHDV
- c5ZTDzfmYurr/fXew04Sls/m0Z/4CbqGEQavAvoM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3887k9pR105485
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 02:46:09 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 02:46:08 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 02:46:09 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3887k8TP113981;
- Fri, 8 Sep 2023 02:46:08 -0500
-Date: Fri, 8 Sep 2023 13:16:07 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>, <gadiyar@ti.com>,
- <a-nandan@ti.com>, <vaishnav.a@ti.com>
-Subject: Re: [PATCH v2 2/7] arm: mach-k3: j721e: dev-data: Add mcu_timer0 ID
-Message-ID: <20230908074607.q7jkxvnd642k6xfj@ula0497581>
-References: <20230907141407.382215-1-n-francis@ti.com>
- <20230907141407.382215-3-n-francis@ti.com>
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20230908080916epoutp010a621292f0e66aea9419fa47ec30cda1~C3gy06Ci61954319543epoutp012
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 08:09:15 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20230908080916epoutp010a621292f0e66aea9419fa47ec30cda1~C3gy06Ci61954319543epoutp012
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1694160556;
+ bh=l5wPW0vE5djqECZYvMVhNRzzDro1NaCbj6gxMYFEBcs=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=HjYn5VYFQnXesrpJ8DYFaL7rGQeq26aoQI8PqPPpg3ExOenVEUkik9cqyo7jOnPmX
+ dbqwS/8DHDfvS8+9CmM7ls9ZaeDndpl0XhQUECaztffz4PAMjJLE7CTxPZXhRUDCef
+ bBSHzvRX1JdNPWgbNH5/j/6HzMDN/A+eE1LwhwKk=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTP id
+ 20230908080915epcas2p197738b519ebbce2fedfb8c515eecd426~C3gylL9Zr0683306833epcas2p1I;
+ Fri,  8 Sep 2023 08:09:15 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.92]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4Rhpff6m68z4x9Pv; Fri,  8 Sep
+ 2023 08:09:14 +0000 (GMT)
+Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 56.B4.09660.8A6DAF46; Fri,  8 Sep 2023 17:09:12 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9~C3gvlXYpA2833528335epcas2p3M;
+ Fri,  8 Sep 2023 08:09:12 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20230908080912epsmtrp15b281cd4a795a63e958db6b735ae7dc8~C3gvkv6Ba1192411924epsmtrp1p;
+ Fri,  8 Sep 2023 08:09:12 +0000 (GMT)
+X-AuditID: b6c32a47-d5dfa700000025bc-33-64fad6a82b62
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ EB.83.18916.8A6DAF46; Fri,  8 Sep 2023 17:09:12 +0900 (KST)
+Received: from cometzero-ubuntu..
+ (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20230908080912epsmtip1a2e5f15727d48ea6d0833792829f8632~C3gvbgLA32089420894epsmtip1Z;
+ Fri,  8 Sep 2023 08:09:12 +0000 (GMT)
+From: Chanho Park <chanho61.park@samsung.com>
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Chanho Park <chanho61.park@samsung.com>
+Subject: [PATCH] spl: add __noreturn attribute to spl_invoke_atf function
+Date: Fri,  8 Sep 2023 17:08:56 +0900
+Message-Id: <20230908080856.2819538-1-chanho61.park@samsung.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230907141407.382215-3-n-francis@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHKsWRmVeSWpSXmKPExsWy7bCmue6Ka79SDP6/1rG4vF/b4tuWbYwW
+ b/d2sjswe8xuuMjicfbODkaPvi2rGAOYo7JtMlITU1KLFFLzkvNTMvPSbZW8g+Od403NDAx1
+ DS0tzJUU8hJzU22VXHwCdN0yc4AWKSmUJeaUAoUCEouLlfTtbIryS0tSFTLyi0tslVILUnIK
+ zAv0ihNzi0vz0vXyUkusDA0MjEyBChOyM94f38Ra8IWvonWGYgPjPp4uRk4OCQETiTfT21i6
+ GLk4hAR2MEo0Xr7IBuF8YpTYv2k+I5xz9+ASZpiW8z93skIkdjJKLN94GKp/GpPEgSs72UCq
+ 2AR0JbY8f8UIYosIWEgcO7iaBcRmFtCW6Pw8hR3EFhbwlOh/dIEJxGYRUJX4+vgKK4jNK+Ag
+ sbjtB5DNAbRNXmLxAwmIsKDEyZlPoMbISzRvnc0MsldCYDq7xP/5ixghrnOReHPvPSuELSzx
+ 6vgWdghbSuJlfxs7xMxyiR3LkiB6Wxglmtv2QH1mL/Hj5hSwvcwCmhLrd+lDlCtLHLkFtZZP
+ ouPwX6gpvBIdbUIQjeoSB7ZPZ4GwZSW653yGOsBD4svnS0wg5UICsRIdx4ImMMrPQvLLLCS/
+ zEJYu4CReRWjWGpBcW56arFRgTE8RpPzczcxghOalvsOxhlvP+gdYmTiYDzEKMHBrCTCu1rk
+ V4oQb0piZVVqUX58UWlOavEhRlNg4E5klhJNzgem1LySeEMTSwMTMzNDcyNTA3Mlcd57rXNT
+ hATSE0tSs1NTC1KLYPqYODilGpgElOdoGgfqaz19+bIip+bhjbp7bM9+F4tcrVpjz5O56WHE
+ V7k5T296bo/OuVJbcb5SOH7Bvc4/VguvyC7bvOJanqrkxX77Pbts7i/KTPRv6G1zllTbx35B
+ vuOcSP4heWGdwyJTpj0JfpJf9OS8/r2jdzwdjXLPH81c/67C4/RJfpsvJnHBIftMs04EprXp
+ /T/a3aZzPvo0axu/Rdd14xlxreJe7zea/jmRreP44c2NiWrXPvBLi79snLph5+TOD/Oi5dUS
+ FxQe6ueavez/yVWrPOpZZktwJpvsfvZTUKFvjYVC7Mk3/no/IvLOxtooNVUZ2jsz5r/+zmH0
+ wL5bSvHJdvZ33Y8+fpd3lXP1u6HEUpyRaKjFXFScCACp+aNc8QMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmluLIzCtJLcpLzFFi42LZdlhJTnfFtV8pBvO2S1tc3q9t8W3LNkaL
+ t3s72R2YPWY3XGTxOHtnB6NH35ZVjAHMUVw2Kak5mWWpRfp2CVwZ749vYi34wlfROkOxgXEf
+ TxcjJ4eEgInE+Z87WbsYuTiEBLYzSvxoXsoMkZCVePZuBzuELSxxv+UIVNEkJokzXxpYQRJs
+ AroSW56/YgSxRQSsJFZ/eQYWZxbQluj8PAWsWVjAU6L/0QUmEJtFQFXi6+MrYDW8Ag4Si9t+
+ ANkcQAvkJRY/kIAIC0qcnPmEBWKMvETz1tnMExj5ZiFJzUKSWsDItIpRNLWgODc9N7nAUK84
+ Mbe4NC9dLzk/dxMjOLy0gnYwLlv/V+8QIxMH4yFGCQ5mJRHe1SK/UoR4UxIrq1KL8uOLSnNS
+ iw8xSnOwKInzKud0pggJpCeWpGanphakFsFkmTg4pRqYpu8sSY8uVWvZMseNLW/9zTSj/Ilh
+ 60W/HeP8c9zzt9ySBrNMwwsKPWfnOct/536l1sPfpe/Gxrrun97Woqn1+n1f9p3SZhcMP8dt
+ 3iD74o2TjVfivTV31mTG3LdmsF3def1/0eTEZavuJ1WdCq37pKsa7rf26pr9ihc9vBZWLtxb
+ 17iyKuByaDv7bFd1Vbs9hRXLzS672d9aYqZysFqA60r2+6mKMSt2S1+Qm6r9Vv+H+f2Wa2kZ
+ oYKrvx9eNdfh7nuxy4zXqo+6nzMN0rebvOGcmfdF75kSU9p33OpOerX92PO7Xb+SGtQvyMv0
+ ndrB9+iKtmp9xfppXQJnOWcprppScIPFWbr63+YfZ99HKLEUZyQaajEXFScCAKDvYg2eAgAA
+X-CMS-MailID: 20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9
+References: <CGME20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9@epcas2p3.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,37 +128,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+spl_invoke_atf function will not be returned to SPL. Thus, we need to
+set __noreturn function attribute to the function.
 
-On 19:44-20230907, Neha Malcom Francis wrote:
-> U-Boot uses mcu_timer0 as the tick-timer, so add it to device list.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
->  arch/arm/mach-k3/j721e/dev-data.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/arm/mach-k3/j721e/dev-data.c b/arch/arm/mach-k3/j721e/dev-data.c
-> index 97f017f8af..b0adb1857b 100644
-> --- a/arch/arm/mach-k3/j721e/dev-data.c
-> +++ b/arch/arm/mach-k3/j721e/dev-data.c
-> @@ -56,6 +56,7 @@ static struct ti_dev soc_dev_list[] = {
->  	PSC_DEV(4, &soc_lpsc_list[8]),
->  	PSC_DEV(202, &soc_lpsc_list[9]),
->  	PSC_DEV(203, &soc_lpsc_list[10]),
-> +	PSC_DEV(35, &soc_lpsc_list[11]),
+Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+---
+ common/spl/spl_atf.c | 8 ++++----
+ include/spl.h        | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-Confirmed the LPSC ID and the DEV ID for MCU_TIMER0.
+diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
+index 2c10252834f6..3bdd013a35fe 100644
+--- a/common/spl/spl_atf.c
++++ b/common/spl/spl_atf.c
+@@ -187,10 +187,10 @@ static inline void raw_write_daif(unsigned int daif)
+ 	__asm__ __volatile__("msr DAIF, %x0\n\t" : : "r" (daif) : "memory");
+ }
+ 
+-typedef void (*atf_entry_t)(struct bl31_params *params, void *plat_params);
++typedef void __noreturn (*atf_entry_t)(struct bl31_params *params, void *plat_params);
+ 
+-static void bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
+-		       uintptr_t bl33_entry, uintptr_t fdt_addr)
++static void __noreturn bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
++				  uintptr_t bl33_entry, uintptr_t fdt_addr)
+ {
+ 	atf_entry_t  atf_entry = (atf_entry_t)bl31_entry;
+ 	void *bl31_params;
+@@ -251,7 +251,7 @@ uintptr_t spl_fit_images_get_entry(void *blob, int node)
+ 	return val;
+ }
+ 
+-void spl_invoke_atf(struct spl_image_info *spl_image)
++void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
+ {
+ 	uintptr_t  bl32_entry = 0;
+ 	uintptr_t  bl33_entry = CONFIG_TEXT_BASE;
+diff --git a/include/spl.h b/include/spl.h
+index 93e906431e7d..01ed8f58afd8 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -770,7 +770,7 @@ int spl_ymodem_load_image(struct spl_image_info *spl_image,
+ /**
+  * spl_invoke_atf - boot using an ARM trusted firmware image
+  */
+-void spl_invoke_atf(struct spl_image_info *spl_image);
++void __noreturn spl_invoke_atf(struct spl_image_info *spl_image);
+ 
+ /**
+  * bl2_plat_get_bl31_params() - return params for bl31.
+-- 
+2.39.2
 
-Reviewed-By: Manorit Chawdhry <m-chawdhry@ti.com>
-
-Regards,
-Manorit
-
-
->  	PSC_DEV(102, &soc_lpsc_list[11]),
->  	PSC_DEV(103, &soc_lpsc_list[11]),
->  	PSC_DEV(104, &soc_lpsc_list[11]),
-> -- 
-> 2.34.1
-> 
