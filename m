@@ -4,79 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6F4EE8006
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E975EE8009
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:06:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 423AC86B49;
-	Fri,  8 Sep 2023 16:01:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CEE286B3B;
+	Fri,  8 Sep 2023 16:02:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aS4XkQnn";
+	dkim=pass (2048-bit key; unprotected) header.d=st.com header.i=@st.com header.b="bxA0q9Z8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 633488644E; Fri,  8 Sep 2023 13:08:02 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id B8FA286B35; Fri,  8 Sep 2023 16:02:00 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 247D886410
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:07:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8E2886B01
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 16:01:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388B7pQn095030;
- Fri, 8 Sep 2023 06:07:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694171271;
- bh=+duwpCp9fhuSw/XSYsuydxUW1b8MBQ9WZQH+01JmaCQ=;
- h=From:To:Subject:Date:In-Reply-To:References;
- b=aS4XkQnnIeEWrcP0PXlFxMPzGq7A68xcqRfWQvA5av74cjIc9hVcfcFrPhOWqTAON
- 2nPmU60QYs9byg8B6aFD0A+svf8mdLWbMuJQ1Vc9FSUu6UGMTay6SKDQs7D6Qo1KmP
- XgH9SDIMA9BqBPJt/NbZfVM1Mmf+tS7svuy96ypw=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388B7ow5045887
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 06:07:51 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 06:07:50 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 06:07:50 -0500
-Received: from TI.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388B5qET018063;
- Fri, 8 Sep 2023 06:07:44 -0500
-From: Apurva Nandan <a-nandan@ti.com>
-To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon
- <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jason
- Kacines <j-kacines@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph
- Siemsen <ralph.siemsen@linaro.org>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 16/16] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
- documentation
-Date: Fri, 8 Sep 2023 16:35:51 +0530
-Message-ID: <20230908110551.861575-17-a-nandan@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230908110551.861575-1-a-nandan@ti.com>
-References: <20230908110551.861575-1-a-nandan@ti.com>
+ dmarc=pass (p=reject dis=none) header.from=st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7615c7331c=etienne.carriere@st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3889lq1K026324; Fri, 8 Sep 2023 16:01:55 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=from
+ :to:cc:subject:date:message-id:references:in-reply-to
+ :content-type:content-transfer-encoding:mime-version; s=
+ STMicroelectronics; bh=NWUOTn7N6w3iIrqskUpGjAP7+dS7xYoKeUS7UlmQG
+ 5Q=; b=bxA0q9Z8lokG2uI+g2Q0nHd6BbAFEVYsAsqidbH0XxgZt5WcG7a2vA5nJ
+ V7pwgq1UHnj1QrpmuXGh4hNQ/IPzSzbXAx/i/YQ/zDoq01wP5vW9F5i1tTMwTdaV
+ B8L1xB9irvu6zkvLNDLkfh4IHgOr0P41d+dp+Q44yGSd9ZZ8i7OivFb9TMOTGFDZ
+ uJ18hxJfb/vaN58gUtsgpC5vlwxwEtx0RDE8WBUzXFl/Oxb06V5s1LDsuGSWVAWy
+ 1BIGLuj+EF32NefQ3yl3eGoH1QK8D6V1+GXKxnUr+C1EtLRsu6448RH0EHwTVC0B
+ KaYKIlHb+nnhzjQVv4lMsyoO0gkAg==
+Received: from eur04-vi1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04lp2053.outbound.protection.outlook.com [104.47.14.53])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3svem117jm-2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 08 Sep 2023 16:01:54 +0200 (MEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KroWMFHChy296/CooWtuRI8i/XkYNTLKZ7MXU+NNTviLGM9pB92Uue/2ovKTbBla9zu+PjMHdkds3x98CqWOTvXrmEz4EkyB/S+OWQUFSFGhoBx41N9NDSkt86/sG9W9lRJJJPI1ednGAkPgzPTxYOD8d1AhMmJ8zmzQJegz5uElpjpfV0TegiJ/AxfYv4rDRST4coa8EPNu/34VrgWo+eOTcd5xEbXduTuv31h/LXaly95QeG/c6IGHmQ6ldhpaoMGQxcUVMSg3PThpfXuwhXL/o58kM0COx0K44nx9KoEotu3s2P7LoZcxQxftRcZmKdKOyrSC5bGKNf0FTWrfhg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NWUOTn7N6w3iIrqskUpGjAP7+dS7xYoKeUS7UlmQG5Q=;
+ b=Ow6aZtQEmldtVQcvSw1MYIR+7JsAujn4jHKW1fYS7aFNwZ9/rYAu3x+4rnFs9lHwqMchB/lOw6ixl4P3UBAENoOvq+u5cAL9zO7+dr1JoQU6qDt/oEhWo+QuDbnrOPpfsfGV6DQbn8o7ifH4hLmSwoBtqXKjwLnJm3T/1g65ppZFOTn9WGfQzcpVBogRBu6xaBfVH85iAcPDywlgEtG9Iu/bfLslIXWsYW0doyH8Z+skVIE5JHJvXtBde0iqrxdmIjN7Koly1u3o6YnVLH8wKaF1Zjuy9c9k1h49z5nfJXOlFcum/QHcSdhdebg49ci+bDGO1pG0q/xXtxoQyquPXg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=st.com; dmarc=pass action=none header.from=st.com; dkim=pass
+ header.d=st.com; arc=none
+Received: from PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:157::13)
+ by AS8PR10MB6269.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:54e::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Fri, 8 Sep
+ 2023 14:01:53 +0000
+Received: from PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::16e5:8821:2b8b:6d5f]) by PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::16e5:8821:2b8b:6d5f%3]) with mapi id 15.20.6768.029; Fri, 8 Sep 2023
+ 14:01:53 +0000
+From: Etienne CARRIERE <etienne.carriere@st.com>
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>, "trini@konsulko.com"
+ <trini@konsulko.com>, "sjg@chromium.org" <sjg@chromium.org>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Etienne CARRIERE - foss
+ <etienne.carriere@foss.st.com>
+Subject: Re: [PATCH v3 04/13] firmware: scmi: framework for installing
+ additional protocols
+Thread-Topic: [PATCH v3 04/13] firmware: scmi: framework for installing
+ additional protocols
+Thread-Index: AQHZ4f+EFPyTFpmVG0y7H0eLf1MAkrAQ2o2v
+Date: Fri, 8 Sep 2023 14:01:52 +0000
+Message-ID: <PAXPR10MB4687A7E0331B9FD9206F1E8AFDEDA@PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM>
+References: <20230908025138.44405-1-takahiro.akashi@linaro.org>
+ <20230908025138.44405-5-takahiro.akashi@linaro.org>
+In-Reply-To: <20230908025138.44405-5-takahiro.akashi@linaro.org>
+Accept-Language: en-US, fr-FR
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_cf8c7287-838c-46dd-b281-b1140229e67a_Enabled=True;
+ MSIP_Label_cf8c7287-838c-46dd-b281-b1140229e67a_SiteId=75e027c9-20d5-47d5-b82f-77d7cd041e8f;
+ MSIP_Label_cf8c7287-838c-46dd-b281-b1140229e67a_SetDate=2023-09-08T14:01:52.481Z;
+ MSIP_Label_cf8c7287-838c-46dd-b281-b1140229e67a_Name=None
+ (Unclassified); MSIP_Label_cf8c7287-838c-46dd-b281-b1140229e67a_ContentBits=0;
+ MSIP_Label_cf8c7287-838c-46dd-b281-b1140229e67a_Method=Privileged; 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR10MB4687:EE_|AS8PR10MB6269:EE_
+x-ms-office365-filtering-correlation-id: 61c5e7ec-30db-411c-a637-08dbb0742797
+x-ld-processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Uc6yxojiBj+HOMQLLH9Q6ObZQ/Kwv1QhDSuvQGg4TTpvJcKXN+X8aEkNoe5bvuaG9ilGI9jZi/Y4VkuzZD2ZnOuTxRylY0kx7cmrk9aWPSqmRgY2qggn2zf0Ba2MCNBoyL+f+91gChreBGcCPwmxuBJBKkDSbe5yjhp2DGdvaA1ax0mCC2R2fuBdGA8lYpC5Tr8DVcbIfmB2EQfbhlGw+J9MRO78u/ZnMsFjqqajynIL3IRsrq3LSeBCOec58hiasxFvgtXleqX0mPzcyr6JQFCllr87GCfLzHGWLKnlpNkXvpxJYlAD721qe24507OxslAHp+5j4/MleV/JNMv/VsBMAg1tK/YR6FpgJG+ocL8n5jvJDZWFfqxNd0kBuXnQKxHXmoeOIp6uOpw7IEB7HRfCyfzt6tBCHGnKVHFnOFz2gOxNL/aCBfrCihr/Pu64dho5RowMJkrZePzuB14Ers30rSYVTvxNiO3pMqkq5BKbA9GKyAEaXuXWaT7eJ9qpfLGQm78fCZ3JfO/hCXKW5KWJ3qxDZE65p4063k9w6gCi17SszLP3/oAkeG6sxlm7tea3UgL9C8PnbaunxQx9gH5EuTlbDYf+gVvjhIvHFOvVhECxQpnvTSFQwptb3xVK
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(136003)(366004)(39860400002)(376002)(396003)(186009)(1800799009)(451199024)(52536014)(110136005)(71200400001)(6506007)(7696005)(9686003)(83380400001)(478600001)(26005)(2906002)(64756008)(66946007)(5660300002)(4326008)(66476007)(66556008)(54906003)(66446008)(316002)(8936002)(76116006)(8676002)(41300700001)(86362001)(38070700005)(33656002)(55016003)(38100700002)(122000001);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?xv/B33rGuu4h1DtvlZo4HQT3cCRByNqXPLNoyPw7lVSTrKw+dREwm1Vikh?=
+ =?iso-8859-1?Q?+g0DgTzgrux8wexnU8eO5EX+fyXSqx2kvkWI3APyA03pxO+HeUuEGEI2GC?=
+ =?iso-8859-1?Q?jcme7n6UqS8iVAUCs+x47nZfUDErbEZO/oSLJn4gl2SfOG6wYtDui6O0hx?=
+ =?iso-8859-1?Q?JBRemJOG7T1JXDjjkvqnUXSMyesXhk2x8VnrcsJdXt4VRk6p3FLL2trdGm?=
+ =?iso-8859-1?Q?UH3zy/fKX0qD5Fgu88HqT6kNW3LXblyHQGhrNKbQupytk2KU23PnhHqjdK?=
+ =?iso-8859-1?Q?+x/VQJrtNT4DVKemDaLtjnbHaa4vKgGkCAD+ggi5k+j2Qit2bori1pvMl4?=
+ =?iso-8859-1?Q?svJMY7KxdKgS4heRjal2+3WqyyidWAnpaZbHvFWkshPssjCcZ25AYa+MXA?=
+ =?iso-8859-1?Q?v1gBcP3IR+KduN5rU1MDHIWugtEDJrky8RRa4nX5yXPcEsbD5+s1vTMHHI?=
+ =?iso-8859-1?Q?Fayd5HGHAs3jApynaceGp/oYUkAtUuzmz6HZYv0TqMfOgSFYgNMe72Yyv/?=
+ =?iso-8859-1?Q?LG6daos4y0obrqkKgNaDApdS41SgAfep6bSHVb9BYm12thWkL4luaIGODm?=
+ =?iso-8859-1?Q?47O/2x9y8weW+QR35KBogGlUR93wz0vEGZdcakvwcUP+iudyx1xGF/AB8w?=
+ =?iso-8859-1?Q?jxU8CwdPtO7S8ne4034vt26mOgcfenykCLknAVWXOw9ea/zmjFZnIQVq+9?=
+ =?iso-8859-1?Q?iLQeCMuWp5cJ5ROqxGwdUWZSZPCv36fsBOMDnawPttvjqAOOLqEgxp5n6O?=
+ =?iso-8859-1?Q?p7eVNtPFPK5O/GC0hmHURJPQvgfNPQQf9HQUPvKdNN1rlqOyOBK8kI//Oo?=
+ =?iso-8859-1?Q?BqIW/Cf7v8SrOkHly5WWeHdP7bUwAC0KqavSjSktUAW6c49V+a79oZ6PTv?=
+ =?iso-8859-1?Q?f14V+azCaEQeS0JAzfGZRgpZpUnN/ZHn2cD6dVrkgimYbSbynzEypazXYq?=
+ =?iso-8859-1?Q?1cbZ40r3B0AUnYC4SwRzjr2mlr1dOpXJmy9PlWmfIFIfBjQua7j8MOAqz5?=
+ =?iso-8859-1?Q?syeTB5QOqiySDCG8WO/O0rJWn1HpQzMSkgziPsL5nTF1LFL2g3lQjBR1k5?=
+ =?iso-8859-1?Q?+74hBrQMiQH+PdUlwhUAoktbKBvxMnD2+rUrnXzIpLFEKhxWcJ6nXMqwz2?=
+ =?iso-8859-1?Q?zU2MZ5iMmQsIJCd64DuIf8H1K4THPU21KGjhaPUmoVAV39ggOBkbwCGo8D?=
+ =?iso-8859-1?Q?TtKOZ8r9UMEwt1PQj/g1C5Ivw3v/VBYoojHZ+KfThbm7mkB545hfGMUCCu?=
+ =?iso-8859-1?Q?0AIATK4O6rb5imse59j+bS43nvmdvAL1rvDfBPPkCZXTXgJuUx0taijmsy?=
+ =?iso-8859-1?Q?cxcCbg9rJN9EZv355Sjx1i5iiWojokc2kK2UibDwuOnbPRXT6d1yuJAX1Y?=
+ =?iso-8859-1?Q?BTZP9b6gDmX3k/eodXUqYeMM+7Ghw9ihh+42s1OvQNWst04kG5ZXXf2vR7?=
+ =?iso-8859-1?Q?j/pXnyIvZ2pOZUIcXBpUPczhBY+eGljABgpkXt3cJ2Ju81RYWn/CLiN3nN?=
+ =?iso-8859-1?Q?tlHcuqOrcd+VKgAL+WA8s9FLXqkiae+rhjbCyk8R99dGwkMWjvXSV3g5lq?=
+ =?iso-8859-1?Q?8+YTqv13qI70JlaInlSpGtTRV0XfhnyrFTj5IRVYbLY13hjg11RAUT0GWH?=
+ =?iso-8859-1?Q?TtFaNBf1Swkf1tCxtCCgpMX53gYchSFKx/?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Fri, 08 Sep 2023 16:01:41 +0200
+X-OriginatorOrg: ST.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 61c5e7ec-30db-411c-a637-08dbb0742797
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Sep 2023 14:01:52.9931 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: FgZDM3KwanFG324mVwOW/dJHWOmnC/9Av5koH1SONA1nyX6jAL6vWSlT2aN2Ix/XA+M++FqdMTyms/LoZjx2Uw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6269
+X-Proofpoint-ORIG-GUID: sywO6f8X53ot0RWpbzrX6f590V-HuevE
+X-Proofpoint-GUID: sywO6f8X53ot0RWpbzrX6f590V-HuevE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-08_10,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ spamscore=0 adultscore=0
+ malwarescore=0 mlxscore=0 phishscore=0 mlxlogscore=999 clxscore=1015
+ impostorscore=0 priorityscore=1501 lowpriorityscore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2308100000
+ definitions=main-2309080130
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,384 +169,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TI K3 J784S4 and AM69 SK are new additions to the K3 SoC family.
-Add documentation about the J784S4 EVM and AM69 SK.
-
-Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-Signed-off-by: Apurva Nandan <a-nandan@ti.com>
----
- board/ti/j784s4/MAINTAINERS |   1 +
- doc/board/ti/j784s4_evm.rst | 339 ++++++++++++++++++++++++++++++++++++
- doc/board/ti/k3.rst         |   1 +
- 3 files changed, 341 insertions(+)
- create mode 100644 doc/board/ti/j784s4_evm.rst
-
-diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
-index 7d3549dd31..be2f9a04b7 100644
---- a/board/ti/j784s4/MAINTAINERS
-+++ b/board/ti/j784s4/MAINTAINERS
-@@ -18,3 +18,4 @@ F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
- F:	arch/arm/dts/k3-am69-sk.dts
- F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
- F:	arch/arm/dts/k3-am69-r5-sk.dts
-+F:	doc/board/ti/j784s4_evm.rst
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-new file mode 100644
-index 0000000000..1e2b7f3820
---- /dev/null
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -0,0 +1,339 @@
-+.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+.. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
-+
-+J784S4 and AM69 Platforms
-+=========================
-+
-+Introduction:
-+-------------
-+The J784S4 SoC belongs to the K3 Multicore SoC architecture
-+platform, providing advanced system integration in automotive,
-+ADAS and industrial applications requiring AI at the network edge.
-+This SoC extends the K3 Jacinto 7 family of SoCs with focus on
-+raising performance and integration while providing interfaces,
-+memory architecture and compute performance for multi-sensor, high
-+concurrency applications.
-+
-+The device is partitioned into three functional domains, each containing
-+specific processing cores and peripherals:
-+
-+1. Wake-up (WKUP) domain:
-+    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
-+
-+2. Microcontroller (MCU) domain:
-+    * Dual core ARM Cortex-R5F processor, runs device management
-+      and SoC early boot
-+
-+3. MAIN domain:
-+    * Dual core 64-bit ARM Cortex-A72, runs HLOS
-+
-+More info can be found in TRM: http://www.ti.com/lit/zip/spruj52
-+
-+Platform information:
-+
-+* https://www.ti.com/tool/J784S4XEVM
-+* https://www.ti.com/tool/SK-AM69
-+
-+Boot Flow:
-+----------
-+Below is the pictorial representation of boot flow:
-+
-+.. image:: img/boot_diagram_k3_current.svg
-+
-+- On this platform, "TI Foundational Security (TIFS)" functions as the
-+  security enclave master. While "Device Manager (DM)", also known as the
-+  "TISCI server" in TI terminology, offers all the essential services.
-+
-+- As illustrated in the diagram above, R5 SPL manages power and clock
-+  services independently before handing over control to DM. The A72 or
-+  the C7x (Aux core) software components request TIFS/DM to handle
-+  security or device management services.
-+
-+Sources:
-+--------
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure:
-+----------------
-+0. Setup the environment variables:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
-+ $ export TFA_BOARD=generic
-+ $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-+ $ export OPTEE_PLATFORM=k3-j784s4
-+ $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-+
-+.. j784s4_evm_rst_include_start_build_steps
-+
-+1. Trusted Firmware-A:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+
-+2. OP-TEE:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_optee
-+    :end-before: .. k3_rst_include_end_build_steps_optee
-+
-+3. U-Boot:
-+
-+.. _j784s4_evm_rst_u_boot_r5:
-+
-+* 3.1 R5:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+.. _j784s4_evm_rst_u_boot_a72:
-+
-+* 3.2 A72:
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. j784s4_evm_rst_include_end_build_steps
-+
-+Target Images
-+--------------
-+In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
-+variant (GP, HS-FS, HS-SE) requires a different source for these files.
-+
-+ - GP
-+
-+    * tiboot3-j784s4-gp-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
-+
-+ - HS-FS
-+
-+    * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
-+
-+ - HS-SE
-+
-+    * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
-+    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
-+
-+Image formats:
-+--------------
-+
-+- tiboot3.bin
-+
-+.. image:: img/multi_cert_tiboot3.bin.svg
-+
-+- tispl.bin
-+
-+.. image:: img/dm_tispl.bin.svg
-+
-+R5 Memory Map:
-+--------------
-+
-+.. list-table::
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Region
-+     - Start Address
-+     - End Address
-+
-+   * - SPL
-+     - 0x41c00000
-+     - 0x41c40000
-+
-+   * - EMPTY
-+     - 0x41c40000
-+     - 0x41c61f20
-+
-+   * - STACK
-+     - 0x41c65f20
-+     - 0x41c61f20
-+
-+   * - Global data
-+     - 0x41c65f20
-+     - 0x41c66000
-+
-+   * - Heap
-+     - 0x41c66000
-+     - 0x41c76000
-+
-+   * - BSS
-+     - 0x41c76000
-+     - 0x41c80000
-+
-+   * - DM DATA
-+     - 0x41c80000
-+     - 0x41c84130
-+
-+   * - EMPTY
-+     - 0x41c84130
-+     - 0x41cff9fc
-+
-+   * - MCU Scratchpad
-+     - 0x41cff9fc
-+     - 0x41cffbfc
-+
-+   * - ROM DATA
-+     - 0x41cffbfc
-+     - 0x41cfffff
-+
-+Switch Setting for Boot Mode
-+----------------------------
-+
-+Boot Mode pins provide means to select the boot mode and options before the
-+device is powered up. After every POR, they are the main source to populate
-+the Boot Parameter Tables.
-+
-+Boot Mode Pins for J784S4-EVM
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The following tables shows some common boot modes used on J784S4 SoC platform.
-+More details can be found in the Technical Reference Manual:
-+http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
-+
-+.. list-table:: J784S4 EVM Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW9: 12345678
-+     - SW8: 12345678
-+
-+   * - SD
-+     - 00000000
-+     - 10000010
-+
-+   * - EMMC
-+     - 01000000
-+     - 10000000
-+
-+   * - OSPI
-+     - 01000000
-+     - 00000110
-+
-+   * - UART
-+     - 01110000
-+     - 00000000
-+
-+   * - USB DFU
-+     - 00100000
-+     - 10000000
-+
-+For SW8 and SW9, the switch state in the "ON" position = 1.
-+
-+Boot Mode Pins for AM69-SK
-+^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The following table shows some common boot modes used on AM69-SK platform.
-+More details can be found in the User Guide for AM69-SK:
-+https://www.ti.com/lit/ug/spruj70/spruj70.pdf under the `Bootmode Settings`
-+section.
-+
-+.. list-table:: AM69 SK Boot Modes
-+   :widths: 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW2: 1234
-+
-+   * - SD
-+     - 0000
-+
-+   * - EMMC
-+     - 0110
-+
-+   * - OSPI
-+     - 1110
-+
-+   * - UART
-+     - 1010
-+
-+For SW2, the switch state in the "ON" position = 1.
-+
-+Debugging U-Boot
-+----------------
-+
-+See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-+detailed setup information.
-+
-+.. warning::
-+
-+  **OpenOCD support since**: v0.12.0
-+
-+  If the default package version of OpenOCD in your development
-+  environment's distribution needs to be updated, it might be necessary to
-+  build OpenOCD from the source.
-+
-+Debugging U-Boot on J784S4-EVM
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-+    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-+
-+To start OpenOCD and connect to the board
-+
-+.. code-block:: bash
-+
-+  openocd -f board/ti_j784s4evm.cfg
-+
-+Debugging U-Boot on SK-AM69
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_cti20
-+    :end-before: .. k3_rst_include_end_openocd_connect_cti20
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
-+    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
-+
-+For SK-AM69, the openocd_connect.cfg is as follows:
-+
-+.. code-block:: tcl
-+
-+  # TUMPA example:
-+  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
-+  source [find interface/ftdi/tumpa.cfg]
-+
-+  transport select jtag
-+
-+  # default JTAG configuration has only SRST and no TRST
-+  reset_config srst_only srst_push_pull
-+
-+  # delay after SRST goes inactive
-+  adapter srst delay 20
-+
-+  if { ![info exists SOC] } {
-+    # Set the SoC of interest
-+    set SOC j784s4
-+  }
-+
-+  source [find target/ti_k3.cfg]
-+
-+  ftdi tdo_sample_edge falling
-+
-+  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
-+  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
-+  adapter speed 16000
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 95cdb36625..314975e9ba 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -36,6 +36,7 @@ K3 Based SoCs
-    am65x_evm
-    j7200_evm
-    j721e_evm
-+   j784s4_evm
- 
- Boot Flow Overview
- ------------------
--- 
-2.34.1
-
+=0A=
+> From: AKASHI Takahiro <takahiro.akashi@linaro.org>=0A=
+> Sent: Friday, September 8, 2023 04:51=0A=
+> =A0=0A=
+> This framework allows SCMI protocols to be installed and bound to the age=
+nt=0A=
+> so that the agent can manage and utilize them later.=0A=
+> =0A=
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>=0A=
+> Reviewed-by: Simon Glass <sjg@chromium.org>=0A=
+> Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>=0A=
+> ---=0A=
+> v3=0A=
+> * move "per_device_plat_auto" from a earlier patch=0A=
+> * fix comments in "scmi_agent_priv"=0A=
+> * modify an order of include files in scmi_agent.h=0A=
+> v2=0A=
+> * check for availability of protocols=0A=
+> ---=0A=
+> =A0drivers/firmware/scmi/scmi_agent-uclass.c | 101 +++++++++++++++++++++-=
+=0A=
+> =A0include/scmi_agent-uclass.h=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+|=A0 15 +++-=0A=
+> =A0include/scmi_agent.h=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0 |=A0 14 +++=0A=
+> =A03 files changed, 126 insertions(+), 4 deletions(-)=0A=
+> =0A=
+> diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware=
+/scmi/scmi_agent-uclass.c=0A=
+> index 94e54eeb066b..e823d105a3eb 100644=0A=
+> --- a/drivers/firmware/scmi/scmi_agent-uclass.c=0A=
+> +++ b/drivers/firmware/scmi/scmi_agent-uclass.c=0A=
+> @@ -38,6 +38,86 @@ static const struct error_code scmi_linux_errmap[] =3D=
+ {=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 { .scmi =3D SCMI_PROTOCOL_ERROR, .errno =3D -EPR=
+OTO, },=0A=
+> =A0};=0A=
+> =A0=0A=
+> +/*=0A=
+> + * NOTE: The only one instance should exist according to=0A=
+> + * the current specification and device tree bindings.=0A=
+> + */=0A=
+> +struct udevice *scmi_agent;=0A=
+> +=0A=
+> +struct udevice *scmi_get_protocol(struct udevice *dev,=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0 enum scmi_std_protocol id)=0A=
+> +{=0A=
+> +=A0=A0=A0=A0=A0=A0 struct scmi_agent_priv *priv;=0A=
+> +=A0=A0=A0=A0=A0=A0 struct udevice *proto;=0A=
+> +=0A=
+> +=A0=A0=A0=A0=A0=A0 priv =3D dev_get_uclass_plat(dev);=0A=
+> +=A0=A0=A0=A0=A0=A0 if (!priv) {=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 dev_err(dev, "No priv data fo=
+und\n");=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return NULL;=0A=
+> +=A0=A0=A0=A0=A0=A0 }=0A=
+> +=0A=
+> +=A0=A0=A0=A0=A0=A0 switch (id) {=0A=
+> +=A0=A0=A0=A0=A0=A0 case SCMI_PROTOCOL_ID_CLOCK:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 proto =3D priv->clock_dev;=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 case SCMI_PROTOCOL_ID_RESET_DOMAIN:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 proto =3D priv->resetdom_dev;=
+=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 proto =3D priv->voltagedom_de=
+v;=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 default:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 dev_err(dev, "Protocol not su=
+pported\n");=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 proto =3D NULL;=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 }=0A=
+> +=A0=A0=A0=A0=A0=A0 if (proto && device_probe(proto))=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 dev_err(dev, "Probe failed\n"=
+);=0A=
+> +=0A=
+> +=A0=A0=A0=A0=A0=A0 return proto;=0A=
+> +}=0A=
+> +=0A=
+> +/**=0A=
+> + * scmi_add_protocol - add protocol to agent=0A=
+> + * @dev:=A0=A0=A0=A0=A0=A0 SCMI agent device=0A=
+> + * @proto_id:=A0 SCMI protocol ID=0A=
+> + * @proto:=A0=A0=A0=A0 SCMI protocol device=0A=
+> + *=0A=
+> + * Associate the protocol instance, @proto, to the agent, @dev,=0A=
+> + * for later use.=0A=
+> + *=0A=
+> + * Return:=A0=A0=A0=A0 0 on success, error code otherwise=0A=
+> + */=0A=
+> +static int scmi_add_protocol(struct udevice *dev,=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 enum scmi_std_protocol proto_id,=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 struct udevice *proto)=0A=
+> +{=0A=
+> +=A0=A0=A0=A0=A0=A0 struct scmi_agent_priv *priv;=0A=
+> +=0A=
+> +=A0=A0=A0=A0=A0=A0 priv =3D dev_get_uclass_plat(dev);=0A=
+> +=A0=A0=A0=A0=A0=A0 if (!priv) {=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 dev_err(dev, "No priv data fo=
+und\n");=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return -ENODEV;=0A=
+> +=A0=A0=A0=A0=A0=A0 }=0A=
+> +=0A=
+> +=A0=A0=A0=A0=A0=A0 switch (proto_id) {=0A=
+> +=A0=A0=A0=A0=A0=A0 case SCMI_PROTOCOL_ID_CLOCK:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 priv->clock_dev =3D proto;=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 case SCMI_PROTOCOL_ID_RESET_DOMAIN:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 priv->resetdom_dev =3D proto;=
+=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 priv->voltagedom_dev =3D prot=
+o;=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+> +=A0=A0=A0=A0=A0=A0 default:=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 dev_err(dev, "Protocol not su=
+pported\n");=0A=
+> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return -EPROTO;=0A=
+> +=A0=A0=A0=A0=A0=A0 }=0A=
+> +=0A=
+> +=A0=A0=A0=A0=A0=A0 return 0;=0A=
+> +}=0A=
+> +=0A=
+> =A0int scmi_to_linux_errno(s32 scmi_code)=0A=
+> =A0{=0A=
+> =A0=A0=A0=A0=A0=A0=A0=A0 int n;=0A=
+> @@ -164,12 +244,14 @@ int devm_scmi_process_msg(struct udevice *dev, stru=
+ct scmi_msg *msg)=0A=
+> =A0 */=0A=
+> =A0static int scmi_bind_protocols(struct udevice *dev)=0A=
+> =A0{=0A=
+> +=A0=A0=A0=A0=A0=A0 struct udevice *agent;=0A=
+=0A=
+nit: my build reported 'agent' here is not used in the scope of this patch.=
+=0A=
+Strictly speaking, it should be brought by patch v3 05/13.=0A=
+("firmware: scmi: install base protocol to SCMI agent")=0A=
+=0A=
+BR,=0A=
+etienne=0A=
+=0A=
+> (snip)=0A=
