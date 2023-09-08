@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88AD8EE8012
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92184EE8012
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 15:00:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9C6586A27;
-	Fri,  8 Sep 2023 16:54:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A276D865D0;
+	Fri,  8 Sep 2023 17:00:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bege+naq";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="fJ3kd1Pu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CF3486A2A; Fri,  8 Sep 2023 16:54:25 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 8480086A27; Fri,  8 Sep 2023 17:00:41 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7799585E44
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 16:54:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2078185E44
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 17:00:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-59b53488f7cso10828767b3.0
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 07:54:22 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3ab244ef065so1475871b6e.0
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 08:00:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694184861; x=1694789661; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vrj8AbsrQE326a9G0gUmJZm95kw7fXmH6hKX6uULr/s=;
- b=bege+naqkHKDzQ8sCdCdOPTqx/wnii0DoVdVSNsg3znPPvVS5VL9VzJx3hTnrnQcv2
- wiFz4FCUU/AewKJSGpVAOSzDCZQIAtsiAZA7ePXOC2m1SRH5ugIgMxOGiMrCdMiiZokk
- ECPZuOCM0sVCYdflO+S481QX83w2PP9xFfJ3Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694184861; x=1694789661;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1694185236; x=1694790036;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vrj8AbsrQE326a9G0gUmJZm95kw7fXmH6hKX6uULr/s=;
- b=nOG/BQRpiHoYRfGifnkppX1R2TrK3yzdooKrO7a/rRy33JVUyLXfUl0r3FA2NZtCYG
- Jj/c7sPBXhIwdvPe0U4DE6Zj691UiOG4QThq0iHxGf77GJyNgmzBP7zsb2kTdlUxoJx4
- 4k5QoiuwZigNPbi8USy0QFXQBMgXJmJ58XbGQj1VavKWDYbHQMlYnA9UxOq09WKUnsRn
- R7ZgUdOPGiwGZi6CjaJr+K1Y3b1WA3X7wG8ioaFrZel5g7Z2lejvZGDraXFVwyFUAmB0
- +3W1vCXe0TVBA5qfjO/vwGgnbnsTS8kfGpR5u+T7rT54QwHjSb2YVRiQ5XmN88BGiOta
- 8aBQ==
-X-Gm-Message-State: AOJu0YxOEKyf/yZ9DSJWx1Gzq0+r0dNDiLkXQ4v47m8RVcJyB0Dzn1H9
- 4pNyUsvs4vUUQ/fOXAWCn0laH5lkko0jcCqQqqnH5Q==
-X-Google-Smtp-Source: AGHT+IFON+F6ctsUxTJPo5HjpofW9j5oh/8qS+Y4TV4r/vMu5Ms3tCaIfJvQ5+qTI7iQeyM7o53kBw==
-X-Received: by 2002:a0d:e544:0:b0:583:3c7e:7749 with SMTP id
- o65-20020a0de544000000b005833c7e7749mr3063814ywe.41.1694184861182; 
- Fri, 08 Sep 2023 07:54:21 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-031e-83f0-a4af-2e7d.res6.spectrum.com.
- [2603:6081:7b00:6400:31e:83f0:a4af:2e7d])
- by smtp.gmail.com with ESMTPSA id
- fj3-20020a05690c330300b0059b50f126fbsm453486ywb.114.2023.09.08.07.54.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Sep 2023 07:54:20 -0700 (PDT)
-Date: Fri, 8 Sep 2023 10:54:18 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Rob Herring <robh@kernel.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <20230908145418.GG305624@bill-the-cat>
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
- <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
- <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
- <20230906142139.GA1236014-robh@kernel.org> <ZPldgbS8mu+5DG7Q@hera>
- <CAPnjgZ0kcOZp65d_-wwYyjbTwC-aDamvGU50aa34o2PeZjZk6Q@mail.gmail.com>
- <CAC_iWjKn_xzoCEv8EBghm7-N5Ex1gEJK=nxdV6QvQ_mPm5R=hQ@mail.gmail.com>
+ bh=L85S9NQ3m+FfLdfozFY6qxuhPUNSlb8jB4R6NZURyAE=;
+ b=fJ3kd1Pu4L+4s7YujJcOPIH5uJog1Qk9ME/6PXVbHQlVGef7At9tnk/t0df7XtCLdE
+ 2IZAjEgoaHuJkIS1O3ztoRLXy1iNQmxKfaODlgCnvG7OfASdlCMLS3iTvXiJrhcQXkT0
+ WvTpX5nMLQujs4q1douYgv0fZcxaPccrK/88wa+YDpl0PyAh6GphgB3bWBZYo77kaVt7
+ YJYCXJpQ+uhu0JA8oZ7jbAhYw+OQI4gy571C+3miD5BboNFhHwJ3XO97rd0hRvfS5MTE
+ qXeZfpONQSOh+dyFIWKRnK8iBvHr/zB5jo3rslCG7/hjZ28ZcQGoGgQeT/fAIiUl6WWu
+ DHZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694185236; x=1694790036;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L85S9NQ3m+FfLdfozFY6qxuhPUNSlb8jB4R6NZURyAE=;
+ b=ZBUH3ZYIUDqESueYGvM9ee/UVowFfhBS9ripkbBO06/PFzXPPDJk8LPe37AS9sM/5+
+ 0STA0Ru6UMm5yPr5vegW4uTXDUmCejbVN41U51E7dPdMTp5RROQjQalx5b6dc0M4WO2e
+ 9pWHtbGjYGaRRgY0jOSN/WGu//QyfTk6mcdoiopJu/0vRd+7x1Vyl/dhRX2EwvIuGvXC
+ ipKmp4JDTfyizlfWf/no7okI9/F5rEYGjDHD95uhVbCgwGKVq9ijn7ZQi2fHXl3p8bv5
+ 01wCpCOZaWBjAeC94Gc29xi5XbsgMWMnv7UsiX3jQ2JpW0CmYd7nmU92f3W65f4bxC4b
+ qgyw==
+X-Gm-Message-State: AOJu0Yyvy+XmjdaIpXaNggfcHREF4JvMABxaRp59ZLvAcZua1HPr9t9w
+ mnbn8UVLFHx+8D3l4cGzILdYxQ/9ZaFz9hqukWzVJw==
+X-Google-Smtp-Source: AGHT+IFphx2goOCp1BMu1eyOCJJuSASv2AvIcZiqOeMdmZMNergaVouRswi5aBlXvehXRlJdpjeYvJWZYAmb6QD+EOo=
+X-Received: by 2002:a05:6808:19a2:b0:3a7:2598:ab2c with SMTP id
+ bj34-20020a05680819a200b003a72598ab2cmr3391809oib.7.1694185236551; Fri, 08
+ Sep 2023 08:00:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2P7XAqMMkBne3mo3"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWjKn_xzoCEv8EBghm7-N5Ex1gEJK=nxdV6QvQ_mPm5R=hQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <7d128f4a-b972-0535-ac06-bd600ba2e37c@monstr.eu>
+ <20230907181411.GX305624@bill-the-cat>
+ <9d45165f-fc88-4615-969b-0aafc7d43f13@monstr.eu>
+ <20230908133415.GA305624@bill-the-cat>
+ <fd3a2682-0215-4026-a51d-de6364e06a69@monstr.eu>
+In-Reply-To: <fd3a2682-0215-4026-a51d-de6364e06a69@monstr.eu>
+From: Michal Simek <monstr@monstr.eu>
+Date: Fri, 8 Sep 2023 17:00:25 +0200
+Message-ID: <CAHTX3dJW1JHGnn15YxWH2Fe2CDdLK0KYBbof_ww79vepY=x_oQ@mail.gmail.com>
+Subject: Re: sandbox trace errors in CI loop
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,156 +90,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---2P7XAqMMkBne3mo3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Sep 08, 2023 at 01:13:42PM +0300, Ilias Apalodimas wrote:
-> Hi Simon,
->=20
-> On Thu, 7 Sept 2023 at 15:23, Simon Glass <sjg@chromium.org> wrote:
+p=C3=A1 8. 9. 2023 v 15:42 odes=C3=ADlatel Michal Simek <monstr@monstr.eu> =
+napsal:
+>
+>
+>
+> On 9/8/23 15:34, Tom Rini wrote:
+> > On Fri, Sep 08, 2023 at 12:24:10PM +0200, Michal Simek wrote:
+> >>
+> >>
+> >> On 9/7/23 20:14, Tom Rini wrote:
+> >>> On Thu, Sep 07, 2023 at 05:30:03PM +0200, Michal Simek wrote:
+> >>>> Hi Simon and Tom,
+> >>>>
+> >>>> I am preparing pull request and I see that CI loop is reporting issu=
+e with
+> >>>> sandbox trace and I have no idea what's going wrong here.
+> >>>>
+> >>>> This is the first problematic commit but have no clue what it has to=
+ do with trace.
+> >>>>
+> >>>> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/commit/=
+8c5f80d11b29536979ac41a6087fb8938f45bbf2
+> >>>>
+> >>>> If you have an access you can take a look at my queue to see that on=
+ly this
+> >>>> job is failing.
+> >>>> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipelin=
+es
+> >>>>
+> >>>> Thanks,
+> >>>> Michal
+> >>>>
+> >>>> collected 1152 items / 1151 deselected / 1 selected
+> >>>> test/py/tests/test_trace.py F                                       =
+     [100%]
+> >>>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+> >>>> __________________________________ test_trace ______________________=
+____________
+> >>>> test/py/tests/test_trace.py:292: in test_trace
+> >>>>       check_function(cons, fname, proftool, map_fname, trace_dat)
+> >>>> test/py/tests/test_trace.py:117: in check_function
+> >>>>       out =3D util.run_and_log(cons, ['sh', '-c', cmd])
+> >>>> test/py/u_boot_utils.py:181: in run_and_log
+> >>>>       output =3D runner.run(cmd, ignore_errors=3Dignore_errors, stdi=
+n=3Dstdin, env=3Denv)
+> >>>> test/py/multiplexed_log.py:183: in run
+> >>>>       raise exception
+> >>>> E   ValueError: Exit code: 1
+> >>>> ---------------------------- Captured stdout setup -----------------=
+------------
+> >>>> /u-boot
+> >>>> trace: early enable at 00100000
+> >>>> sandbox_serial serial: pinctrl_select_state_full:
+> >>>> uclass_get_device_by_phandle_id: err=3D-19
+> >>>> =3D>
+> >>>
+> >>> I don't get it either since I see this on master with trace options
+> >>> enabled per CI:
+> >>> $ ./u-boot -T arch/sandbox/dts/test.dtb
+> >>> trace: early enable at 00100000
+> >>> sandbox_serial serial: pinctrl_select_state_full: uclass_get_device_b=
+y_phandle_id: err=3D-19
+> >>> ... rest of boot proceeds ...
+> >>>
+> >>> So the test should be failing already if that was the problem.
+> >>>
+> >>
+> >> I don't thin it is the problematic part.
+> >>
+> >> When I look at
+> >> https://source.denx.de/u-boot/u-boot/-/blob/master/tools/docker/Docker=
+file?ref_type=3Dheads#L225
+> >>
+> >> clone is done from
+> >> git clone https://github.com/rostedt/trace-cmd.git /tmp/trace/trace-cm=
+d && \
+> >>
+> >> https://github.com/rostedt/trace-cmd/blob/master/README#L5
+> >>
+> >> we should be using
+> >> git://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git instead.
+> >>
+> >> I installed the latest version on my PC and run it via pytest and this=
+ is
+> >> what I am getting.
+> >> You see that trace-cmd report is returning "failed to init data".
+> >>
+> >> Are we wired to any specific trace-cmd version?
 > >
-> > Hi Ilias,
+> > Wait, no, what's going on exactly? The github repository is a mirror of
+> > the kernel.org one. So yes, we should correct to point to the main one,
+> > but the top of tree in both cases is commit
+> > 354dccca52e805ce1b22e2b62cbae8c265886c27.
 > >
-> > On Wed, 6 Sept 2023 at 23:20, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Rob,
-> > >
-> > > [...]
-> > >
-> > > > > > > > >
-> > > > > > > > > What is the point of removing them? Instead, we should ma=
-ke sure that
-> > > > > > > > > we upstream the bindings and encourage SoC vendors to syn=
-c them. If we
-> > > > > > > > > remove them, no one will bother and U-Boot just becomes a=
- dumping
-> > > > > > > > > ground.
-> > > > > > > >
-> > > > > > > > Well things like the binman entries in DT are U-Boot specif=
-ic and not
-> > > > > > > > useful for HW related descriptions or for Linux or another =
-OS being
-> > > > > > > > able to deal with HW so arguably we're already a dumping gr=
-ound to
-> > > > > > > > some degree for not defining hardware.
-> > > > > > >
-> > > > > > > I have started the process to upstream the binman bindings.
-> > > > > >
-> > > > > > I don't think they should be in DT at all, they don't describe
-> > > > > > anything to do with hardware, or generally even the runtime of a
-> > > > > > device, they don't even describe the boot/runtime state of the
-> > > > > > firmware, they describe build time, so I don't see what that ha=
-s to do
-> > > > > > with device tree? Can you explain that? To me those sorts of th=
-ings
-> > > > > > should live in a build time style config file.
-> > > >
-> > > > For the record, I tend to agree.
-> > > >
-> > >
-> > > +1
-> > >
-> > > > > I beg to differ. Devicetree is more than just hardware and always=
- has
-> > > > > been. See, for example the /chosen and /options nodes.
-> > > >
-> > > > There are exceptions...
-> > > >
-> > >
-> > > We've been this over and over again and frankly it gets a bit annoyin=
-g.
-> > > It's called *DEVICE* tree for a reason.  As Rob pointed out there are
-> > > exceptions, but those made a lot of sense.  Having arbitrary internal=
- ABI
-> > > stuff of various projects in the schema just defeats the definition o=
-f a
-> > > spec.
-> >
-> > Our efforts should not just be about internal ABI, but working to
-> > provide a consistent configuration system for all firmware elements.
->=20
-> And that's what the firmware handoff was all about.
-> I get what you are trying to do here.  I am just aware of any other
+>
+> I dig into it more.
+> What it is happening is that when sandbox u-boot is bigger trace.dat file=
+ is
+> placing information to different offset then it is recorded somewhere in =
+header.
+>
+> Wrong placement
+>
+> 0005b000  20 70 65 72 66 20 6d 6f  6e 6f 20 6d 6f 6e 6f 5f  | perf mono m=
+ono_|
+> 0005b010  72 61 77 20 62 6f 6f 74  20 78 38 36 2d 74 73 63  |raw boot x86=
+-tsc|
+> 0005b020  0a 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |............=
+....|
+> 0005b030  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |............=
+....|
+> *
+> 0005c000  89 df f6 1d 00 00 00 00  dc 0f 00 00 00 00 00 00  |............=
+....|
+> 0005c010  06 00 00 00 01 00 00 00  01 00 00 00 af e5 0a 00  |............=
+....|
+> 0005c020  00 00 00 00 ef dc 09 00  00 00 00 00 06 00 00 00  |............=
+....|
+> 0005c030  01 00 00 00 01 00 00 00  af e5 0a 00 00 00 00 00  |............=
+....|
+>
+> Correct placement for trace-cmd
+>
+> 0005aee0  75 70 74 69 6d 65 20 70  65 72 66 20 6d 6f 6e 6f  |uptime perf =
+mono|
+> 0005aef0  20 6d 6f 6e 6f 5f 72 61  77 20 62 6f 6f 74 20 78  | mono_raw bo=
+ot x|
+> 0005af00  38 36 2d 74 73 63 0a 00  00 00 00 00 00 00 00 00  |86-tsc......=
+....|
+> 0005af10  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |............=
+....|
+> *
+> 0005b000  36 f8 92 3f 00 00 00 00  e0 0f 00 00 00 00 00 00  |6..?........=
+....|
+>
+> And trace-cmd want to decode data available at 0x5b000 offset in both cas=
+es.
+>
+> It means I expect proftool is not correctly generating offset where data =
+is
+> present. I don't understand how it works but I clearly see based on trace=
+-cmd
+> that it points to incorrect location.
 
-"just not aware" did you mean?
+diff --git a/tools/proftool.c b/tools/proftool.c
+index 101bcb63334e..815e01efb5d1 100644
+--- a/tools/proftool.c
++++ b/tools/proftool.c
+@@ -1500,7 +1500,7 @@ static int write_flyrecord(struct twriter *tw,
+enum out_format_t out_format,
+        tw->ptr +=3D fprintf(fout, "flyrecord%c", 0);
 
-> project apart from U-Boot which uses DT for it's own configuration.
-> So trying to standardize some bindings that are useful to all projects
-> that use DT is fine. Trying to *enforce* them to use it for config
-> isn't IMHO.
->=20
-> >
-> > We cannot have it both ways, i.e. refusing to accept non-hardware
-> > bindings and then complaining that U-Boot does not pass schema
-> > validation. Devicetree should be a shared resource, not just for the
-> > use of Linux.
->=20
-> It's not for the use of Linux, I've wasted enough time repeating that
-> and so has Rob.  Please go back to previous emails and read the
-> arguments.
+        /* trace data */
+-       start =3D ALIGN(tw->ptr + 16, TRACE_PAGE_SIZE);
++       start =3D ALIGN(tw->ptr + 16, 0x4000);
+        tw->ptr +=3D tputq(fout, start);
 
-Right, it's not just for Linux, but Linux is where most of the
-exceptions to the "ONLY HARDWARE" rule got in, because they also make
-sense.  And the overarching point Simon keeps trying to make I believe
-can be boiled down to that too.  There are things that one does not have
-a (reasonable) choice about how to do things with when interacting with
-the hunk of melted sand on your desk and that information needs to go
-somewhere.
+        /* use a placeholder for the size */
 
-> > We already have reserved-memory, flash layout and other
-> > things which don't relate to hardware. I would love to somehome get
-> > past this fundamental discussion which seems to come up every time we
-> > get close to making progress
->=20
-> Most of the nodes we already have were used across projects and made
-> sense to all of them. U-Boot might need to reserve some memory and so
-> does linux etc etc.
-> Some other nodes make nosense at all to and they just serve internal
-> ABI implementation details.  I can't possibly fathom how these would
-> be justifiable.  On top of all that, there's a huge danger here.  How
-> are you planning on separating arbitrary entries from various
-> projects?
+This is the problematic code. In flyrecord section in header there is
+the calculation where data start.
+And there is tw->ptr +16 used (not sure why +16) but actual flyrecord
+is much bigger than 16.
 
-I think in some ways this is the whole point of at least what I'm asking
-for.  It's fine to say "Here is the mechanism to remove nodes /
-properties from the device tree".  BUT adding entries to that list MUST
-document where someone tried to upstream and explain that this is
-something that belongs in the device tree because it is useful to
-everyone.
+In my case start of flyrecord is 0x5afc1 + flyrecordX + 16 (mentioned
+above) is 0x5afdb.
+Then there is page alignment which gives 0x5b000 which is recorded but
+actual size is till 0x5b021.
 
-> What I am afraid is going to happen here is simple.  If a project
-> doesn't use DT to configure itself and wants to provide a DT to
-> U-Boot, then are you going to say "Can you please inject various DT
-> nodes in the tree because U-Boot *needs* them and they are now part of
-> the spec"?  Anyway, it's not up to me to decide here, I am just saying
-> what makes sense to me.
+The actual size of the header is 0x60 not  flyrecordX + 16 (based on
+location where tw->ptr is taken).
+Simon: Do you agree with this logic?
 
-What's the difference between that and "If a project doesn't use DT to
-configure itself and wants to provide a DT to Linux, ..." ?
+It was introduced by commit be16fc81b2ed ("trace: Update proftool to
+use new binary format").
+
+Thanks,
+Michal
 
 --=20
-Tom
-
---2P7XAqMMkBne3mo3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT7NZcACgkQFHw5/5Y0
-tyxDmgv/W7SBueXYSWAWXrZLhl2ErjyC73IUcZ+O2pkgQMjbSIhrHLSdeAtVAkCK
-DvH+5nbGdqAFsCjYLMgqoosM2T1NY89ha0TNC78SoBZPQMr1lRxtx+DvP3VeCfli
-Ro+cJSYQ3fcFbl6degVhwdb6L2jkRi4P/jjFO9TIGcZvFOEVI3BWte3DUbovQzJo
-44w18gq5BR/2Fv77LPrzgPjpfUGGshsDDe2hj85RETQE2vrBjhr4zTSLhS/uc/Th
-EwQGLX/1fgoXw8sPrakqP+P3dHR9FymkhWstRQhRos7gYi8JtYVUd5KiHYj9ZCN1
-Bn5MciwpWShDUBmdnKhgzL3rzoJk3XMnhWv61j1aJsDZq1BkoW/2NBVF2R8wwVEU
-++UHnJwEvPWiqSTqPKK+O5W9MJFly255cagGM68OKOJIsG+NAKeszRW4P+Ntw4Hu
-3p51CwXa34CBIhvuivGuI6LgVr57AVVF+ohJmgVITpT3605gLZIQz2eZ142KuQWO
-/pW1wTx4
-=lkei
------END PGP SIGNATURE-----
-
---2P7XAqMMkBne3mo3--
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
