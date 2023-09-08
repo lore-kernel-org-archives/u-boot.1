@@ -4,73 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF30EE57FC
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 11:46:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF35CCFA0A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 11:56:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08DA7869F9;
-	Fri,  8 Sep 2023 13:46:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EBF2A869A4;
+	Fri,  8 Sep 2023 13:56:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BPEtcWZr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="frUMznCn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F30DF86A04; Fri,  8 Sep 2023 13:46:07 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 81F2986993; Fri,  8 Sep 2023 13:56:22 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24E4E86501
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:46:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78D2C869F6
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:56:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 52CAD6149D
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 11:45:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B20BFC433C9
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 11:45:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1694173557;
- bh=aODHL6mbNW0WLyQo2/gZhYlzuWIMAbhDYth1ivLfiJs=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=BPEtcWZrdC/o+gbIBKtuvpPZ1GJmKxqF8z7Tz15gNxu4UNu+zchX6c78qd3GRiBv6
- 4admkoRJfGJ1JRASdiZVyzOAzbVD15sV9Au+hZXXr1Ki+RGk0otXyHn9GIHe3tpviv
- xuPclUkDl/eHCxBguoAm9ALCQdoAtY9kgQ3qOjO8bNIkVsaB9sHidwYoSs3pIYqzHs
- hFPvYxIicGPwDlT3cylZmTxfyJ8t+rJsH+XXd6eM9sKjPP7N42uE9LdASVzOz/1lMI
- MWVhybkcBY41VIQkAT5IOwzG0RmDpCZ6nw4VpoSnrr6ETXoZhycu+mxWc/zEOPAXj3
- tH2as6Q8nzqZA==
-Received: by mail-lj1-f173.google.com with SMTP id
- 38308e7fff4ca-2b974031aeaso34957621fa.0
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 04:45:57 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yx3pPNU46V9RX35/TJvq9kd4u1Ka6ddnp8SQj4oMBXogf4VZx13
- 5XbnmEMtwXlNJk1OmxWEoHwosJql0/rILKfY4g==
-X-Google-Smtp-Source: AGHT+IGGKjJmemgNHpyI56G1+q2fUiJV4ppgzoy9LEO/x9T0+wAy75B+QGXgy5XYMiqRpu3pH/RANsVfOlTDWayxIDc=
-X-Received: by 2002:a2e:7801:0:b0:2bc:b0c3:9e8d with SMTP id
- t1-20020a2e7801000000b002bcb0c39e8dmr1610795ljc.41.1694173555929; Fri, 08 Sep
- 2023 04:45:55 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388BuHZ3010017;
+ Fri, 8 Sep 2023 06:56:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1694174177;
+ bh=iAL6qZwrrdrnM/2lTkWMJNjCxlYsaGab3hVx6uh7bl8=;
+ h=From:To:CC:Subject:Date;
+ b=frUMznCnH6sSQO/dFFTnrAsDmF8PW/JYZs+sYbncD99Xy7ZJngEzGARtZd9CSyUmV
+ dn2FogG5Gwm6DNiufiEIBmkhVqlaL3j/Y0glF2iRnXKLv7Vo68LoTTnvgzM8zSwiZ3
+ Rery2PNy0KPQE6OCu5DOmbBTh2rATVQQdcaCDf/s=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388BuHlr119684
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 8 Sep 2023 06:56:17 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
+ Sep 2023 06:56:17 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 8 Sep 2023 06:56:17 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388BuGkB031639;
+ Fri, 8 Sep 2023 06:56:16 -0500
+From: Devarsh Thakkar <devarsht@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>
+CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
+ <j-luthra@ti.com>, <devarsht@ti.com>, <nsekhar@ti.com>,
+ <jan.kiszka@siemens.com>, <chao.zeng@siemens.com>
+Subject: [PATCH] configs: am65x_evm: Use envboot before distro_bootcmd
+Date: Fri, 8 Sep 2023 17:26:15 +0530
+Message-ID: <20230908115615.3829854-1-devarsht@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230907214012.74978-1-sjg@chromium.org>
- <20230907214012.74978-2-sjg@chromium.org>
-In-Reply-To: <20230907214012.74978-2-sjg@chromium.org>
-From: Rob Herring <robh@kernel.org>
-Date: Fri, 8 Sep 2023 06:45:43 -0500
-X-Gmail-Original-Message-ID: <CAL_Jsq+N1=XuZqFsVEgBeVpJzTBJRJ+w76roOUBtbP2Y8f3bEw@mail.gmail.com>
-Message-ID: <CAL_Jsq+N1=XuZqFsVEgBeVpJzTBJRJ+w76roOUBtbP2Y8f3bEw@mail.gmail.com>
-Subject: Re: [PATCH v6 2/2] schemas: memory: Add ECC properties
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
- Guo Dong <guo.dong@intel.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Yunhui Cui <cuiyunhui@bytedance.com>, Chiu Chasel <chasel.chiu@intel.com>, 
- Mark Rutland <mark.rutland@arm.com>, linux-acpi@vger.kernel.org, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Ard Biesheuvel <ardb@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- Gua Guo <gua.guo@intel.com>, ron minnich <rminnich@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,74 +78,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 7, 2023 at 4:40=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Some memories provide ECC detection and/or correction. For software which
-> wants to check memory, it is helpful to see which regions provide this
-> feature.
->
-> Add this as a property of the /memory nodes, since it presumably follows
-> the hardware-level memory system.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v6:
-> - Use a number of bits instead of a string property
-> - Fix inidcates typo
->
-> Changes in v5:
-> - Redo to make this property specific to ECC
-> - Provide properties both for detection and correction
->
-> Changes in v3:
-> - Add new patch to update the /memory nodes
->
->  dtschema/schemas/memory.yaml | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
->
-> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
-> index 1d74410..1a48b1c 100644
-> --- a/dtschema/schemas/memory.yaml
-> +++ b/dtschema/schemas/memory.yaml
-> @@ -31,10 +31,21 @@ patternProperties:
->
->        numa-node-id:
->          $ref: types.yaml#/definitions/uint32
-> -        description:
-> +        description: |
+Use envboot cmd before issuring distro_bootcmd as otherwise
+environment variables from uEnv.txt are not getting imported.
 
-Why? '|' is not needed for any of these.
+The commands after distro_bootcmd have no impact since board starts
+booting after distro_bootcmd, so it need to run last after all
+environment variables are configured correctly.
 
->            For the purpose of identification, each NUMA node is associate=
-d with
->            a unique token known as a node id.
-> -
+Fixes: bde6ac54905 ("configs: am65x_evm: Switch envboot out for
+distro_bootcmd")
 
-blank line between properties.
+Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+---
+Boot logs (with display overlay) :
+https://gist.github.com/devarsht/2bac56933847d3e954d6ee275d711e27
+---
+ configs/am65x_evm_a53_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I can fix these up when applying.
+diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+index 4301553af8..4f1ef10e69 100644
+--- a/configs/am65x_evm_a53_defconfig
++++ b/configs/am65x_evm_a53_defconfig
+@@ -34,7 +34,7 @@ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTCOMMAND="run findfdt; run distro_bootcmd; run init_${boot}; run boot_rprocs; run get_kern_${boot}; run get_fdt_${boot}; run get_overlay_${boot}; run run_kern"
++CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
+ CONFIG_LOGLEVEL=7
+ CONFIG_CONSOLE_MUX=y
+ CONFIG_SPL_MAX_SIZE=0x58000
+-- 
+2.34.1
 
-> +      ecc-detection-bits:
-> +        default: 0
-> +        description: |
-> +          If present, this indicates the number of bits of memory error =
-which
-> +          can be detected and reported by the Error-Correction Code (ECC=
-) memory
-> +          subsystem (typically 0, 1 or 2).
-> +      ecc-correction-bits:
-> +        default: 0
-> +        description: |
-> +          If present, this indicates the number of bits of memory error =
-which
-> +          can be corrected by the Error-Correction Code (ECC) memory sub=
-system
-> +          (typically 0, 1 or 2).
->
->      required:
->        - device_type
-> --
-> 2.42.0.283.g2d96d420d3-goog
->
