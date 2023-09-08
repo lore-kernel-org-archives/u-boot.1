@@ -4,114 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 670D4EE57DE
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 08:09:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37C4EE57E0
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 08:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D6686564;
-	Fri,  8 Sep 2023 10:09:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 058F7869B6;
+	Fri,  8 Sep 2023 10:12:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="HjYn5VYF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MVTXBzxf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DBC7865D0; Fri,  8 Sep 2023 10:09:24 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id 41F33869B9; Fri,  8 Sep 2023 10:12:35 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35007864AB
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 10:09:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B432869AC
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 10:12:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20230908080916epoutp010a621292f0e66aea9419fa47ec30cda1~C3gy06Ci61954319543epoutp012
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 08:09:15 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20230908080916epoutp010a621292f0e66aea9419fa47ec30cda1~C3gy06Ci61954319543epoutp012
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1694160556;
- bh=l5wPW0vE5djqECZYvMVhNRzzDro1NaCbj6gxMYFEBcs=;
- h=From:To:Cc:Subject:Date:References:From;
- b=HjYn5VYFQnXesrpJ8DYFaL7rGQeq26aoQI8PqPPpg3ExOenVEUkik9cqyo7jOnPmX
- dbqwS/8DHDfvS8+9CmM7ls9ZaeDndpl0XhQUECaztffz4PAMjJLE7CTxPZXhRUDCef
- bBSHzvRX1JdNPWgbNH5/j/6HzMDN/A+eE1LwhwKk=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20230908080915epcas2p197738b519ebbce2fedfb8c515eecd426~C3gylL9Zr0683306833epcas2p1I;
- Fri,  8 Sep 2023 08:09:15 +0000 (GMT)
-Received: from epsmges2p3.samsung.com (unknown [182.195.36.92]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4Rhpff6m68z4x9Pv; Fri,  8 Sep
- 2023 08:09:14 +0000 (GMT)
-Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
- epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- 56.B4.09660.8A6DAF46; Fri,  8 Sep 2023 17:09:12 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9~C3gvlXYpA2833528335epcas2p3M;
- Fri,  8 Sep 2023 08:09:12 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20230908080912epsmtrp15b281cd4a795a63e958db6b735ae7dc8~C3gvkv6Ba1192411924epsmtrp1p;
- Fri,  8 Sep 2023 08:09:12 +0000 (GMT)
-X-AuditID: b6c32a47-d5dfa700000025bc-33-64fad6a82b62
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- EB.83.18916.8A6DAF46; Fri,  8 Sep 2023 17:09:12 +0900 (KST)
-Received: from cometzero-ubuntu..
- (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20230908080912epsmtip1a2e5f15727d48ea6d0833792829f8632~C3gvbgLA32089420894epsmtip1Z;
- Fri,  8 Sep 2023 08:09:12 +0000 (GMT)
-From: Chanho Park <chanho61.park@samsung.com>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Chanho Park <chanho61.park@samsung.com>
-Subject: [PATCH] spl: add __noreturn attribute to spl_invoke_atf function
-Date: Fri,  8 Sep 2023 17:08:56 +0900
-Message-Id: <20230908080856.2819538-1-chanho61.park@samsung.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3888CTA6038506;
+ Fri, 8 Sep 2023 03:12:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1694160749;
+ bh=1He6BtGumB00YIdxWEeGYbneLNMr1ZQikpjRkuQH8QU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=MVTXBzxfUInYPcTZJsGB7xuCgbrGWpYM71LPXclLQJrMY8bM26AujhwGUIQ1cm//6
+ gX4dQ8SpwwtsRFM7lMbX9fyIOA0JWBC6khIREl+ul9DC+kCdBvArzWLExljnL7KvrT
+ /WOrv6Ls1LD6J3cY6ZXBmwu5XRbSBoRURBw74mgQ=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3888CTuD102358
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 8 Sep 2023 03:12:29 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
+ Sep 2023 03:12:27 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 8 Sep 2023 03:12:27 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3888CRsP099953;
+ Fri, 8 Sep 2023 03:12:27 -0500
+Date: Fri, 8 Sep 2023 13:42:26 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>,
+ <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>, <gadiyar@ti.com>,
+ <a-nandan@ti.com>, <vaishnav.a@ti.com>
+Subject: Re: [PATCH v2 7/7] arm: dts: k3-j721e: Sync with v6.5-rc1
+Message-ID: <20230908081226.auh2dted5ums5p2e@ula0497581>
+References: <20230907141407.382215-1-n-francis@ti.com>
+ <20230907141407.382215-8-n-francis@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHKsWRmVeSWpSXmKPExsWy7bCmue6Ka79SDP6/1rG4vF/b4tuWbYwW
- b/d2sjswe8xuuMjicfbODkaPvi2rGAOYo7JtMlITU1KLFFLzkvNTMvPSbZW8g+Od403NDAx1
- DS0tzJUU8hJzU22VXHwCdN0yc4AWKSmUJeaUAoUCEouLlfTtbIryS0tSFTLyi0tslVILUnIK
- zAv0ihNzi0vz0vXyUkusDA0MjEyBChOyM94f38Ra8IWvonWGYgPjPp4uRk4OCQETiTfT21i6
- GLk4hAR2MEo0Xr7IBuF8YpTYv2k+I5xz9+ASZpiW8z93skIkdjJKLN94GKp/GpPEgSs72UCq
- 2AR0JbY8f8UIYosIWEgcO7iaBcRmFtCW6Pw8hR3EFhbwlOh/dIEJxGYRUJX4+vgKK4jNK+Ag
- sbjtB5DNAbRNXmLxAwmIsKDEyZlPoMbISzRvnc0MsldCYDq7xP/5ixghrnOReHPvPSuELSzx
- 6vgWdghbSuJlfxs7xMxyiR3LkiB6Wxglmtv2QH1mL/Hj5hSwvcwCmhLrd+lDlCtLHLkFtZZP
- ouPwX6gpvBIdbUIQjeoSB7ZPZ4GwZSW653yGOsBD4svnS0wg5UICsRIdx4ImMMrPQvLLLCS/
- zEJYu4CReRWjWGpBcW56arFRgTE8RpPzczcxghOalvsOxhlvP+gdYmTiYDzEKMHBrCTCu1rk
- V4oQb0piZVVqUX58UWlOavEhRlNg4E5klhJNzgem1LySeEMTSwMTMzNDcyNTA3Mlcd57rXNT
- hATSE0tSs1NTC1KLYPqYODilGpgElOdoGgfqaz19+bIip+bhjbp7bM9+F4tcrVpjz5O56WHE
- V7k5T296bo/OuVJbcb5SOH7Bvc4/VguvyC7bvOJanqrkxX77Pbts7i/KTPRv6G1zllTbx35B
- vuOcSP4heWGdwyJTpj0JfpJf9OS8/r2jdzwdjXLPH81c/67C4/RJfpsvJnHBIftMs04EprXp
- /T/a3aZzPvo0axu/Rdd14xlxreJe7zea/jmRreP44c2NiWrXPvBLi79snLph5+TOD/Oi5dUS
- FxQe6ueavez/yVWrPOpZZktwJpvsfvZTUKFvjYVC7Mk3/no/IvLOxtooNVUZ2jsz5r/+zmH0
- wL5bSvHJdvZ33Y8+fpd3lXP1u6HEUpyRaKjFXFScCACp+aNc8QMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmluLIzCtJLcpLzFFi42LZdlhJTnfFtV8pBvO2S1tc3q9t8W3LNkaL
- t3s72R2YPWY3XGTxOHtnB6NH35ZVjAHMUVw2Kak5mWWpRfp2CVwZ749vYi34wlfROkOxgXEf
- TxcjJ4eEgInE+Z87WbsYuTiEBLYzSvxoXsoMkZCVePZuBzuELSxxv+UIVNEkJokzXxpYQRJs
- AroSW56/YgSxRQSsJFZ/eQYWZxbQluj8PAWsWVjAU6L/0QUmEJtFQFXi6+MrYDW8Ag4Si9t+
- ANkcQAvkJRY/kIAIC0qcnPmEBWKMvETz1tnMExj5ZiFJzUKSWsDItIpRNLWgODc9N7nAUK84
- Mbe4NC9dLzk/dxMjOLy0gnYwLlv/V+8QIxMH4yFGCQ5mJRHe1SK/UoR4UxIrq1KL8uOLSnNS
- iw8xSnOwKInzKud0pggJpCeWpGanphakFsFkmTg4pRqYpu8sSY8uVWvZMseNLW/9zTSj/Ilh
- 60W/HeP8c9zzt9ySBrNMwwsKPWfnOct/536l1sPfpe/Gxrrun97Woqn1+n1f9p3SZhcMP8dt
- 3iD74o2TjVfivTV31mTG3LdmsF3def1/0eTEZavuJ1WdCq37pKsa7rf26pr9ihc9vBZWLtxb
- 17iyKuByaDv7bFd1Vbs9hRXLzS672d9aYqZysFqA60r2+6mKMSt2S1+Qm6r9Vv+H+f2Wa2kZ
- oYKrvx9eNdfh7nuxy4zXqo+6nzMN0rebvOGcmfdF75kSU9p33OpOerX92PO7Xb+SGtQvyMv0
- ndrB9+iKtmp9xfppXQJnOWcprppScIPFWbr63+YfZ99HKLEUZyQaajEXFScCAKDvYg2eAgAA
-X-CMS-MailID: 20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9
-References: <CGME20230908080912epcas2p311f577b1f5d36af18333daf4a327e7c9@epcas2p3.samsung.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230907141407.382215-8-n-francis@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,55 +82,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-spl_invoke_atf function will not be returned to SPL. Thus, we need to
-set __noreturn function attribute to the function.
+Hi Neha,
 
-Signed-off-by: Chanho Park <chanho61.park@samsung.com>
----
- common/spl/spl_atf.c | 8 ++++----
- include/spl.h        | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
+On 19:44-20230907, Neha Malcom Francis wrote:
+> Sync k3-j721e DTS with kernel.org v6.5-rc1.
+> 
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>  .../k3-j721e-common-proc-board-u-boot.dtsi    | 146 +--
+>  arch/arm/dts/k3-j721e-common-proc-board.dts   | 483 ++++++---
+>  arch/arm/dts/k3-j721e-main.dtsi               | 974 ++++++++++++++++--
+>  arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         | 280 ++++-
+>  .../arm/dts/k3-j721e-r5-common-proc-board.dts | 302 +-----
+>  arch/arm/dts/k3-j721e-r5-sk.dts               | 522 +---------
+>  arch/arm/dts/k3-j721e-sk-u-boot.dtsi          | 177 +---
+>  arch/arm/dts/k3-j721e-sk.dts                  | 663 +++++++++---
+>  arch/arm/dts/k3-j721e-som-p0.dtsi             | 226 ++--
+>  arch/arm/dts/k3-j721e-thermal.dtsi            |  75 ++
+>  arch/arm/dts/k3-j721e.dtsi                    |  32 +-
+>  11 files changed, 2365 insertions(+), 1515 deletions(-)
+>  create mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
+> 
+> diff --git a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
+> index 540c847eb3..4cca01be61 100644
+> --- a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
+> @@ -7,15 +7,7 @@
+[..]
+> -
+>  	aliases {
+> -		ethernet0 = &cpsw_port1;
+> -		spi0 = &ospi0;
+> -		spi1 = &ospi1;
+>  		remoteproc0 = &mcu_r5fss0_core0;
+>  		remoteproc1 = &mcu_r5fss0_core1;
+>  		remoteproc2 = &main_r5fss0_core0;
+> @@ -25,61 +17,49 @@
+>  		remoteproc6 = &c66_0;
+>  		remoteproc7 = &c66_1;
+>  		remoteproc8 = &c71_0;
 
-diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
-index 2c10252834f6..3bdd013a35fe 100644
---- a/common/spl/spl_atf.c
-+++ b/common/spl/spl_atf.c
-@@ -187,10 +187,10 @@ static inline void raw_write_daif(unsigned int daif)
- 	__asm__ __volatile__("msr DAIF, %x0\n\t" : : "r" (daif) : "memory");
- }
- 
--typedef void (*atf_entry_t)(struct bl31_params *params, void *plat_params);
-+typedef void __noreturn (*atf_entry_t)(struct bl31_params *params, void *plat_params);
- 
--static void bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
--		       uintptr_t bl33_entry, uintptr_t fdt_addr)
-+static void __noreturn bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
-+				  uintptr_t bl33_entry, uintptr_t fdt_addr)
- {
- 	atf_entry_t  atf_entry = (atf_entry_t)bl31_entry;
- 	void *bl31_params;
-@@ -251,7 +251,7 @@ uintptr_t spl_fit_images_get_entry(void *blob, int node)
- 	return val;
- }
- 
--void spl_invoke_atf(struct spl_image_info *spl_image)
-+void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
- {
- 	uintptr_t  bl32_entry = 0;
- 	uintptr_t  bl33_entry = CONFIG_TEXT_BASE;
-diff --git a/include/spl.h b/include/spl.h
-index 93e906431e7d..01ed8f58afd8 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -770,7 +770,7 @@ int spl_ymodem_load_image(struct spl_image_info *spl_image,
- /**
-  * spl_invoke_atf - boot using an ARM trusted firmware image
-  */
--void spl_invoke_atf(struct spl_image_info *spl_image);
-+void __noreturn spl_invoke_atf(struct spl_image_info *spl_image);
- 
- /**
-  * bl2_plat_get_bl31_params() - return params for bl31.
--- 
-2.39.2
+I don't think these aliases are used anywhere, they can be removed ig. 
 
+> -		i2c0 = &wkup_i2c0;
+> -		i2c1 = &mcu_i2c0;
+> -		i2c2 = &mcu_i2c1;
+> -		i2c3 = &main_i2c0;
+>  	};
+>  };
+[..]
+
+> diff --git a/arch/arm/dts/k3-j721e-common-proc-board.dts b/arch/arm/dts/k3-j721e-common-proc-board.dts
+> index 1b600547c0..c1cbbae761 100644
+> --- a/arch/arm/dts/k3-j721e-common-proc-board.dts
+> +++ b/arch/arm/dts/k3-j721e-common-proc-board.dts
+
+[..]
+
+> diff --git a/arch/arm/dts/k3-j721e-main.dtsi b/arch/arm/dts/k3-j721e-main.dtsi
+> index cf3482376c..2ded1ee1a8 100644
+> --- a/arch/arm/dts/k3-j721e-main.dtsi
+> +++ b/arch/arm/dts/k3-j721e-main.dtsi
+
+[..]
+
+> diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+> index 7bb5ce775c..0452e94b6d 100644
+> --- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+> +++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+> @@ -12,16 +12,15 @@
+ -};
+> -
+> -&wkup_uart0 {
+> +&secure_proxy_mcu {
+>  	bootph-pre-ram;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&wkup_uart0_pins_default>;
+>  	status = "okay";
+
+Am not sure if this should be okay or did I break something in my series
+by not setting this as okay, will see what Nishanth has to comment
+regarding this.
+
+>  };
+>  
+> -&wkup_gpio0 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&wkup_gpio_pins_default>;
+> +&cbass_mcu_wakeup {
+> +	sysctrler: sysctrler {
+> +		bootph-pre-ram;
+> +		compatible = "ti,am654-system-controller";
+> +		mboxes= <&secure_proxy_mcu 4>, <&secure_proxy_mcu 5>;
+> +		mbox-names = "tx", "rx";
+> +	};
+>  };
+>  
+>  &mcu_uart0 {
+> -	/delete-property/ power-domains;
+> -	/delete-property/ clocks;
+> -	/delete-property/ clock-names;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&mcu_uart0_pins_default>;
+> -	status = "okay";
+>  	clock-frequency = <48000000>;
+>  };
+>  
+> -&main_uart0 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&main_uart0_pins_default>;
+> -	status = "okay";
+> -	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
+> -};
+> -
+>  &main_sdhci0 {
+> -	/delete-property/ power-domains;
+> -	/delete-property/ assigned-clocks;
+> -	/delete-property/ assigned-clock-parents;
+> -	clock-names = "clk_xin";
+> -	clocks = <&clk_200mhz>;
+> -	ti,driver-strength-ohm = <50>;
+> -	non-removable;
+> +	clock-frequency = <200000000>;
+>  	bus-width = <8>;
+
+This property will need to be removed too I believe.
+
+>  };
+>  
+>  &main_sdhci1 {
+> -	/delete-property/ power-domains;
+> -	/delete-property/ assigned-clocks;
+> -	/delete-property/ assigned-clock-parents;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&main_mmc1_pins_default>;
+> -	clock-names = "clk_xin";
+> -	clocks = <&clk_200mhz>;
+> -	ti,driver-strength-ohm = <50>;
+> +	clock-frequency = <19200000>;
+>  };
+>  
+>  &wkup_i2c0 {
+> @@ -293,96 +124,35 @@
+>  };
+>  
+>  &usbss0 {
+> -	/delete-property/ power-domains;
+> -	/delete-property/ assigned-clocks;
+> -	/delete-property/ assigned-clock-parents;
+> -	clocks = <&clk_19_2mhz>;
+> -	clock-names = "ref";
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&main_usbss0_pins_default>;
+> -	ti,vbus-divider;
+> -};
+> -
+
+[..]
+> diff --git a/arch/arm/dts/k3-j721e-r5-sk.dts b/arch/arm/dts/k3-j721e-r5-sk.dts
+> index 1cc64d07f7..f5eb29a861 100644
+> --- a/arch/arm/dts/k3-j721e-r5-sk.dts
+> +++ b/arch/arm/dts/k3-j721e-r5-sk.dts
+
+With the above comments.
+
+Reviewed-By: Manorit Chawdhry <m-chawdhry@ti.com>
+
+Regards,
+Manorit
