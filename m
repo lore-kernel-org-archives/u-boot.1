@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31898EE8015
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 16:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EFBAEE8015
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 16:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66F0A86A23;
-	Fri,  8 Sep 2023 17:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C479C86A23;
+	Fri,  8 Sep 2023 18:01:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TkNKxjas";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IlwlUAdJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFE8686A69; Fri,  8 Sep 2023 17:59:57 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E580286A9F; Fri,  8 Sep 2023 18:01:07 +0200 (CEST)
+Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
+ [IPv6:2607:f8b0:4864:20::a33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3188F86A04
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 17:59:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF30986A04
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 18:01:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388FxjHn043568;
- Fri, 8 Sep 2023 10:59:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694188785;
- bh=tVxU2vIh5rC7mJjYH0UtOUjA5EU9Sk09nraVuBgt6kg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=TkNKxjas5MT4QB43gH6DaHEV2fOi0liL5l80aruHEjMnmqpNOTY72LaISoz4E8yLC
- aaOZYFFgBp9Xd/YteHp3QL710wG8/CT5NoP4d7nBSSeMi9Xq0+aU7gl7Cda9dG9BCF
- IFPrl7dC/KpBJRTKOEXFUIguZxdQ7n6oHrNY4yUQ=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388FxjpQ082295
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 10:59:45 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 10:59:45 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 10:59:45 -0500
-Received: from [10.250.38.120] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388FxiHQ011386;
- Fri, 8 Sep 2023 10:59:44 -0500
-Message-ID: <0ea3625a-c647-fc80-36c6-93e46685c750@ti.com>
-Date: Fri, 8 Sep 2023 10:59:44 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robertcnelson@gmail.com
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-493639d6173so816349e0c.3
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 09:01:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694188863; x=1694793663; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=30OsZ1HiqbkS5dhuYzEbwAnsGp4/M7Q0cJdPeAZUKHU=;
+ b=IlwlUAdJ9rJvxfoO0TqlMgczH1MyGzme/xFnm6AmeAMQ8rbq5Lq0+VSawhQhv7dExJ
+ FlIv0IwznNckWzaTBtpL+AS2nV1d2WsWmIvWZWTCe+a2mLAfr8yX+udC5/AdGYl0cKmS
+ X0e+Ma+MEeGTzYZLmo7F38hDNuWeE1ToJYBTuX50jmTcJvFr1tXr5DeVYrLsqXYecvOa
+ 0fMxQgmpm2lNC+0050m2Q79rXBgDft38voHER/ccqIkyvwSH/tSNh13QHJvq4KDpSMFr
+ UEPTh2tloIB7OTs0pD9BmlzpuURuCz10dToPXc7yvlYAse5BWU54/80Yy+O/kK7/7O2L
+ XkQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694188863; x=1694793663;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=30OsZ1HiqbkS5dhuYzEbwAnsGp4/M7Q0cJdPeAZUKHU=;
+ b=HK1EMpFE0EynB7QK2JkG5BfnrqqztKkpAHfOaH3+RXW47jRFJOq6/+eZ9c9fyFs91j
+ GfB8xAFrHUXC71bvB67pAkmX4/57CRar9vIkbrXB8JsP4jKctDBQPrBwFYLFdDbjyn9W
+ mMZLidTBTpz/dUQOJwaIFpk9bIYR3duPe2dEm4tzWeQexHg4lYME+dcJISInY8Y6YnTx
+ sBlQGFeaK40U5IWT+rtAC34XDlAZK7ru6FIk9fqS4a7cS3A+ZCTdyo2hX5SOm3oiEwIZ
+ XlVgsYE7Ouqj6zIo/4mtB/otB8XT/HSYxBco+R5TEc9qOGNsQOmiJH9ooBPS3Xlz9z2i
+ mbCA==
+X-Gm-Message-State: AOJu0Yyz+IoH/u69yp8RKqdxAoe/HCbeoCk7SpADiN5DnlSE+Jv+g5Rd
+ XOibv9VAiAOcdXChKz3QEB/gy0m9pSQB2G9NFvI=
+X-Google-Smtp-Source: AGHT+IEjP9VkFz2brwhIsbLSp1XyNjsGWlERm9Fm/qCyurglgxaw+LAXChc1P16MpizyEkwF1eXKILU7wUuN0VRStoQ=
+X-Received: by 2002:a1f:c547:0:b0:48d:5af8:b9d0 with SMTP id
+ v68-20020a1fc547000000b0048d5af8b9d0mr3294234vkf.6.1694188863186; Fri, 08 Sep
+ 2023 09:01:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v3 11/16] board: ti: j784s4: Add support for board
- detection by EEPROM read
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Apurva Nandan <a-nandan@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Kamlesh
- Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>, Manorit
- Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>, Bryan
- Brattlof <bb@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jason
- Kacines <j-kacines@ti.com>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph
- Siemsen <ralph.siemsen@linaro.org>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-References: <20230908110551.861575-1-a-nandan@ti.com>
- <20230908110551.861575-12-a-nandan@ti.com>
- <20230908144237.qd4ito3c656hmfp2@degrading>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20230908144237.qd4ito3c656hmfp2@degrading>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230830152553.15465-1-twoerner@gmail.com>
+In-Reply-To: <20230830152553.15465-1-twoerner@gmail.com>
+From: Robert Nelson <robertcnelson@gmail.com>
+Date: Fri, 8 Sep 2023 11:00:37 -0500
+Message-ID: <CAOCHtYiuf9sZ-_LFUsxCe+oJO0pQ=SBAtse2n78Q1MjMPCS0Bw@mail.gmail.com>
+Subject: Re: [PATCH] ARM: dts: am335x-pocketbeagle: choose tick-timer
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Pierre Lebleu <pierre.lebleu@pile-engineering.com>, Andrew Davis <afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,31 +87,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/8/23 9:42 AM, Nishanth Menon wrote:
-> On 16:35-20230908, Apurva Nandan wrote:
->> From: Dasnavis Sabiya <sabiya.d@ti.com>
->>
->> The board name is programmed in the EEPROM. Add support for board
->> detection and choose the right dtb based on the board name read
->> from EEPROM.
->>
->> The J784S4/AM69 has two platforms naming J784S4-EVM and AM69-SK. The
->> J784S4 has EEPROM populated at 0x50. AM69 SK has EEPROM
->> populated at next address 0x51. So start looking for TI specific EEPROM
->> at 0x50, if not found look for EEPROM at 0x51.
->>
->> Also, add support for setup_serial() to read the serial number from EEPROM
->> and update the serial environment variable with the same.
->>
->> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
->> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> 
-> 
-> NAK. go with the approach similar to AM62x. AM69-SK has it's own
-> fragment.
-> 
+On Wed, Aug 30, 2023 at 10:26=E2=80=AFAM Trevor Woerner <twoerner@gmail.com=
+> wrote:
+>
+> Commit 4b2be78ab66c ("time: Fix get_ticks being non-monotonic")
+> requires '/chosen/tick-timer' in device-tree. Otherwise we get:
+>
+>         U-Boot 2023.07.02 (Jul 11 2023 - 15:20:44 +0000)
+>
+>         CPU  : AM335X-GP rev 2.1
+>         Model: TI AM335x PocketBeagle
+>         DRAM:  512 MiB
+>         Core:  154 devices, 16 uclasses, devicetree: separate
+>         Could not initialize timer (err -19)
+>
+>         resetting ...
+>
+> Suggested-by: Pierre Lebleu <pierre.lebleu@pile-engineering.com>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 
-NAK to your NAK, there is no reason to introduce more fragments here
-when both boards can be supported with one defconfig.
+Tested-by: Robert Nelson <robertcnelson@gmail.com>
 
-Andrew
+> ---
+>  arch/arm/dts/am335x-pocketbeagle.dts | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/arch/arm/dts/am335x-pocketbeagle.dts b/arch/arm/dts/am335x-p=
+ocketbeagle.dts
+> index b379e3a5570d..02e3aac56064 100644
+> --- a/arch/arm/dts/am335x-pocketbeagle.dts
+> +++ b/arch/arm/dts/am335x-pocketbeagle.dts
+> @@ -15,6 +15,7 @@
+>
+>         chosen {
+>                 stdout-path =3D &uart0;
+> +               tick-timer =3D &timer2;
+>         };
+>
+>         leds {
+> --
+> 2.41.0.327.gaa9166bcc0ba
+
+Thanks for posting this Trevor, I'm also running with this change..
+
+Regards,
+
+--=20
+Robert Nelson
+https://rcn-ee.com/
