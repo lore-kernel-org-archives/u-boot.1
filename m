@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990B7EEB562
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 18:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A366DEEB566
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 18:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 887F6869CD;
-	Fri,  8 Sep 2023 20:05:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 623F186863;
+	Fri,  8 Sep 2023 20:31:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="FS6+r1nR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o80jIrma";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13040869E6; Fri,  8 Sep 2023 20:05:00 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E1E44869A4; Fri,  8 Sep 2023 20:31:40 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8417869BC
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 20:04:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B382286501
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 20:31:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 21d52880-4e72-11ee-ac31-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 21d52880-4e72-11ee-ac31-005056994fde;
- Fri, 08 Sep 2023 20:04:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=pyfrXJLLLsYEKHgOARtGppEaPGum4EAKs0hFSnfD2bc=;
- b=FS6+r1nRh2nIrF0o3MTPAI4+7NWFQuADQE75lT1pKOqKG5MbYm38O+S/qNv8RmxxYKSMonTORgi+7
- bnCwsUeA9IUuaHtl923K+l2c0bSle7qdhiUokSRm6ccYvvUxFy/eVUCv0L39si9Qs/0txO+l0Pq7t9
- hoMcjWDICRS3Chg8Qwcd7hMAB6SijipJcszN0s/ZrfjtEvxQ0a//FOPAcV1Lu1VO6aCtAXW6LJHH/F
- 1USSH1aVFe6tnkZQO/oAeAdl4Dh+9AZCt2DuvG2z3OpitSx+2iW//0aomyvrgSOoO+OEDXardl0pVw
- KTFgcjoD3nT6I6fb8MasyMKQltQppEA==
-X-KPN-MID: 33|a163+kmlEqD13VIlA6BNXkuZKw+c8+6JwkdwQib/J0Q/pS86XkVE8kXDuI9rO4P
- XtCiadBugO0PRvYGgmH6DUyRm5SV7pcI/Pym9OxeVZv0=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|0PWFkMSBFf5EcbdH3BCh/VyOpNRtMeDxsF/PY2MnNd9SwC+uxKepesvpnEDqKzm
- OZ8zbw7bFVek9cGNZv8gmZQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 371de594-4e72-11ee-acaa-00505699d6e5;
- Fri, 08 Sep 2023 20:04:56 +0200 (CEST)
-Date: Fri, 08 Sep 2023 20:04:55 +0200
-Message-Id: <875y4kh77c.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Jassi Brar <jassisinghbrar@gmail.com>
-Cc: sjg@chromium.org, ilias.apalodimas@linaro.org, robh@kernel.org,
- pbrobinson@gmail.com, sughosh.ganu@linaro.org,
- u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de
-In-Reply-To: <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
- (message from Jassi Brar on Fri, 8 Sep 2023 09:37:12 -0500)
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
- <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
- <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
- <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
- <20230906142139.GA1236014-robh@kernel.org> <ZPldgbS8mu+5DG7Q@hera>
- <CAPnjgZ0kcOZp65d_-wwYyjbTwC-aDamvGU50aa34o2PeZjZk6Q@mail.gmail.com>
- <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
-MIME-version: 1.0
-Content-type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388IVPL1086276;
+ Fri, 8 Sep 2023 13:31:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1694197885;
+ bh=4zcDG30bCeDd9vYgLLFvDHPRmd7mER0/sAP7JxvT3Hc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=o80jIrmaVNsqGyy032SUIq+rtxiI7HumH6jR0ZAfaOW7fEjVQ9wixIpTiVoWiDo7S
+ J2JZSu4d2OWtFM2e0ih8Q4/JVZcen4ZPIArkFOYavA9CsU0ED5+aFYTkK74BB5IS8C
+ CIc3PsEEh3XhdHVFbMySU1uCqPcHyFKyKugCPgiY=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388IVPo0074188
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 8 Sep 2023 13:31:25 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
+ Sep 2023 13:31:25 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 8 Sep 2023 13:31:25 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388IVP9g097921;
+ Fri, 8 Sep 2023 13:31:25 -0500
+Date: Fri, 8 Sep 2023 13:31:24 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jason Kacines <j-kacines@ti.com>, Jayesh Choudhary
+ <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 11/16] board: ti: j784s4: Add support for board
+ detection by EEPROM read
+Message-ID: <20230908183124.27zctk6ishfd7ics@canopener>
+References: <20230908110551.861575-1-a-nandan@ti.com>
+ <20230908110551.861575-12-a-nandan@ti.com>
+ <20230908144237.qd4ito3c656hmfp2@degrading>
+ <0ea3625a-c647-fc80-36c6-93e46685c750@ti.com>
+ <20230908170346.frwfoahna3qu37lg@dinginess>
+ <57edfc59-475e-dadc-4b99-0639d0e61cdb@ti.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <57edfc59-475e-dadc-4b99-0639d0e61cdb@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,79 +96,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Jassi Brar <jassisinghbrar@gmail.com>
-> Date: Fri, 8 Sep 2023 09:37:12 -0500
+On 12:20-20230908, Andrew Davis wrote:
+> On 9/8/23 12:03 PM, Nishanth Menon wrote:
+> > On 10:59-20230908, Andrew Davis wrote:
+> > > On 9/8/23 9:42 AM, Nishanth Menon wrote:
+> > > > On 16:35-20230908, Apurva Nandan wrote:
+> > > > > From: Dasnavis Sabiya <sabiya.d@ti.com>
+> > > > > 
+> > > > > The board name is programmed in the EEPROM. Add support for board
+> > > > > detection and choose the right dtb based on the board name read
+> > > > > from EEPROM.
+> > > > > 
+> > > > > The J784S4/AM69 has two platforms naming J784S4-EVM and AM69-SK. The
+> > > > > J784S4 has EEPROM populated at 0x50. AM69 SK has EEPROM
+> > > > > populated at next address 0x51. So start looking for TI specific EEPROM
+> > > > > at 0x50, if not found look for EEPROM at 0x51.
+> > > > > 
+> > > > > Also, add support for setup_serial() to read the serial number from EEPROM
+> > > > > and update the serial environment variable with the same.
+> > > > > 
+> > > > > Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+> > > > > Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> > > > 
+> > > > 
+> > > > NAK. go with the approach similar to AM62x. AM69-SK has it's own
+> > > > fragment.
+> > > > 
+> > > 
+> > > NAK to your NAK, there is no reason to introduce more fragments here
+> > > when both boards can be supported with one defconfig.
+> > 
+> > Sorry, but no. the evm.c has become a mess. Time to stop it is in the
+> > introduction itself
+> > 
+> > Need the eeprom stuff clearly pulled out of evm.c -> evm.c should still
+> > work with CONFIG_EEPROM_DETECT disabled and should be board independent.
+> > 
 > 
-> Hi Simon,
+> Sure evm.c is a mess, but that is the price for one config/build working
+> on multiple boards. That is why we have EEPROM on *every* EVM, you throw
+> that away if you got to "just have a different config/build for each EVM".
+
+I understand, it also comes in the way of downstream customers creating
+board variants and using this code as the reference (there is only this
+code that is the starting point).
+
 > 
-> On Thu, Sep 7, 2023 at 3:08 PM Simon Glass <sjg@chromium.org> wrote:
-> > On Wed, 6 Sept 2023 at 23:20, Ilias Apalodimas
-> > >
-> > > > > I beg to differ. Devicetree is more than just hardware and always has
-> > > > > been. See, for example the /chosen and /options nodes.
-> > > >
-> > > > There are exceptions...
-> > > >
-> > >
-> > > We've been this over and over again and frankly it gets a bit annoying.
-> > > It's called *DEVICE* tree for a reason.  As Rob pointed out there are
-> > > exceptions, but those made a lot of sense.  Having arbitrary internal ABI
-> > > stuff of various projects in the schema just defeats the definition of a
-> > > spec.
-> >
-> > Our efforts should not just be about internal ABI, but working to
-> > provide a consistent configuration system for all firmware elements.
-> >
-> Sure, programmatically we can pass any data/info via DT, however it is
-> only meant to map hardware features onto data structures.
-> 
-> devicetree.org  landing page
->     "The devicetree is a data structure for describing hardware."
-> 
-> devicetree-specification-v0.3.pdf  Chapter-2 Line-1
->    "DTSpec specifies a construct called a devicetree to describe
-> system hardware."
+> Honestly I'm fine either way (I never did think we got much out of
+> multi-board detection support), but that decision should come with more
+> reasoning than "NAK"..
 
-But it doesn't say that it describes *only* hardware.  And it does
-describe more than just hardware.  There is /chosen to specify
-firmware configuration and there are several examples of device tree
-bindings that describe non-discoverable firmware interfaces in the
-Linux tree.  And it has been that way since the days of IEEE 1275.
-There are also bindings describing things like the firmware partition
-layout.
+Sure and it has been discussed over and over again on the mailing list
+with Tom reacting to the mess created and which is how am62 was trimmed
+down in the first place and highlighted internally as well, multiple
+times.
 
-> If we want to digress from the spec, we need the majority of
-> developers to switch sides :)  which is unlikely to happen and rightly
-> so, imho.
+So, I believe the rationale is sufficient.
+If we don't learn from the feedback[1], it shows badly on us.
 
-It isn't even clear what the spec is.  There is the document you
-reference above, there are the yaml files at
-https://github.com/devicetree-org/dt-schema and then there are
-additional yaml files in the Linux tree.  As far as I know it isn't
-written down anywhere that those are the only places where device tree
-bindings can live.
+Long story short, keep it clean, simple reference code, or sorry, NAK
+stands.
 
-Anyway, let's face it, there is some consensus among developers that
-what Simon has done in U-Boot is pushing the use of devicetree beyond
-the point where a significant fraction of developers thinks it makes
-sense.  And I think I agree with that.  But you can't beat him with
-the spec to make your point.
-
-Now the devicetree is cleverly constructed such that it is possible to
-define additional bindings without the risk of conflicting with
-bindings developed by other parties.  In particular if U-Boot is
-augmenting a device tree with properties that are prefixed with
-"u-boot," this isn't going to hurt an operating system that uses such
-an augmented device tree.
-
-The real problem is that some folks developed a certification program
-that allegedly requires schema verification and now propose adding
-code to U-Boot that doesn't really solve any problem.  My proposed
-solution would be to change said certification program to allow
-firmware to augment the device tree with properties and nodes with
-compatibles that are in the namespace controlled by the firmware.
-
-Cheers,
-
-Mark
-
+[1] https://jaycarlson.net/embedded-linux/#am335x
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
