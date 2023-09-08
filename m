@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBBFEE8009
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ABD7EE8006
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:03:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C3B586B0A;
+	by phobos.denx.de (Postfix) with ESMTP id B2BB886B11;
 	Fri,  8 Sep 2023 16:01:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GR9BefH9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OWFlElNA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBD6386A2B; Fri,  8 Sep 2023 13:06:52 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 492A486A2A; Fri,  8 Sep 2023 13:06:59 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C1D586A24
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:06:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A5CF86410
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:06:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388B6fIO000690;
- Fri, 8 Sep 2023 06:06:41 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388B6mLc118599;
+ Fri, 8 Sep 2023 06:06:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694171201;
- bh=lx2ShItbrnm24Gk4lkGCArW+j3Vug00vNSJ23oEzVD0=;
+ s=ti-com-17Q1; t=1694171208;
+ bh=okUThkDPJvaH6+eYFNIniqDXcDIRMbg5I5LLjbM5tVs=;
  h=From:To:Subject:Date:In-Reply-To:References;
- b=GR9BefH9rT6u1GAti86s4LBvFkrEahRRGJgV7RESNLyakULsmutggmI4aL3Y9+mIL
- GnDBbory4OBBWWdiqx7RnPxa4ThQOCbwW2Oq+o5as6OYQIqoeYz1CHDoUfKoEGCVlR
- gTNP/ZyVxobisbfrh9QvDuzJBicNLBjXUFgynlGY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388B6foh094455
+ b=OWFlElNAScRL1lGsWlZ9nhYD1ODnlhRgxhyFjmly+40+zxPID32Ox2g0T6C8jEbus
+ Jq+lBB5ubAh1SIhOP4xhwFw+yYQqF31ElDQAeWLOqqrkm6cC+RNyQAVtRzfiai76bZ
+ Zx5P2K0UyHuhdmog7BayG0onjPW7Fii+kAFCPlkk=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388B6mE9094506
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 06:06:41 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 8 Sep 2023 06:06:48 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 06:06:41 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 06:06:48 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 06:06:41 -0500
+ Frontend Transport; Fri, 8 Sep 2023 06:06:48 -0500
 Received: from TI.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388B5qEJ018063;
- Fri, 8 Sep 2023 06:06:34 -0500
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388B5qEK018063;
+ Fri, 8 Sep 2023 06:06:41 -0500
 From: Apurva Nandan <a-nandan@ti.com>
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
@@ -65,10 +65,10 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  <yanhong.wang@starfivetech.com>, Marek Vasut
  <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
  <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 06/16] remoteproc: k3-r5: Extend support for R5F clusters
- on J784S4 SoCs
-Date: Fri, 8 Sep 2023 16:35:41 +0530
-Message-ID: <20230908110551.861575-7-a-nandan@ti.com>
+Subject: [PATCH v3 07/16] remoteproc: k3-dsp: Extend support for C71x DSPs on
+ J784S4 SoCs
+Date: Fri, 8 Sep 2023 16:35:42 +0530
+Message-ID: <20230908110551.861575-8-a-nandan@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230908110551.861575-1-a-nandan@ti.com>
 References: <20230908110551.861575-1-a-nandan@ti.com>
@@ -95,47 +95,40 @@ X-Virus-Status: Clean
 
 From: Hari Nagalla <hnagalla@ti.com>
 
-The K3 J784S4 SoCs have four dual-core R5F subsystems, one in MCU
-voltage domain and the other three in MAIN voltage domain. These R5F
-clusters are similar to the R5F clusters in J7200 and J721S2 SoCs.
+The K3 J784S4 SoCs have four C71x DSP subsystems in MAIN voltage domain
+The C71x DSPs are 64 bit machine with fixed and floating point DSP
+operations. The C71x DSP subsystem is a slighly updated version of the
+C71x DSP subsystem on J721e. And, same ip data can be used for J7200,
+J721S2 and J784S4.
 
-Extend support to the R5F clusters for J784S4 with J721S2 compatible
+Extend support to the C71x DSPs for J784S4 with J721S2 compatible
 string.
 
 Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Apurva Nandan <a-nandan@ti.com>
 ---
- drivers/remoteproc/ti_k3_r5f_rproc.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ drivers/remoteproc/ti_k3_dsp_rproc.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
-index 6f3e12d915..631e548dcc 100644
---- a/drivers/remoteproc/ti_k3_r5f_rproc.c
-+++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
-@@ -855,7 +855,7 @@ static const struct k3_r5f_ip_data k3_data = {
- 	.tcm_ecc_autoinit = false,
- };
+diff --git a/drivers/remoteproc/ti_k3_dsp_rproc.c b/drivers/remoteproc/ti_k3_dsp_rproc.c
+index 1a2e9dd1f5..d856e31db8 100644
+--- a/drivers/remoteproc/ti_k3_dsp_rproc.c
++++ b/drivers/remoteproc/ti_k3_dsp_rproc.c
+@@ -327,7 +327,8 @@ static int k3_dsp_of_get_memories(struct udevice *dev)
  
--static const struct k3_r5f_ip_data j7200_data = {
-+static const struct k3_r5f_ip_data j7200_j721s2_data = {
- 	.tcm_is_double = true,
- 	.tcm_ecc_autoinit = true,
- };
-@@ -863,7 +863,8 @@ static const struct k3_r5f_ip_data j7200_data = {
- static const struct udevice_id k3_r5f_rproc_ids[] = {
- 	{ .compatible = "ti,am654-r5f", .data = (ulong)&k3_data, },
- 	{ .compatible = "ti,j721e-r5f", .data = (ulong)&k3_data, },
--	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_data, },
-+	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_j721s2_data, },
-+	{ .compatible = "ti,j721s2-r5f", .data = (ulong)&j7200_j721s2_data, },
- 	{}
- };
- 
-@@ -901,6 +902,7 @@ static const struct udevice_id k3_r5fss_ids[] = {
- 	{ .compatible = "ti,am654-r5fss"},
- 	{ .compatible = "ti,j721e-r5fss"},
- 	{ .compatible = "ti,j7200-r5fss"},
-+	{ .compatible = "ti,j721s2-r5fss"},
+ 	for (i = 0; i < dsp->num_mems; i++) {
+ 		/* C71 cores only have a L1P Cache, there are no L1P SRAMs */
+-		if (device_is_compatible(dev, "ti,j721e-c71-dsp") &&
++		if (((device_is_compatible(dev, "ti,j721e-c71-dsp")) ||
++		     (device_is_compatible(dev, "ti,j721s2-c71-dsp"))) &&
+ 		    !strcmp(mem_names[i], "l1pram")) {
+ 			dsp->mem[i].bus_addr = FDT_ADDR_T_NONE;
+ 			dsp->mem[i].dev_addr = FDT_ADDR_T_NONE;
+@@ -446,6 +447,7 @@ static const struct k3_dsp_boot_data c71_data = {
+ static const struct udevice_id k3_dsp_ids[] = {
+ 	{ .compatible = "ti,j721e-c66-dsp", .data = (ulong)&c66_data, },
+ 	{ .compatible = "ti,j721e-c71-dsp", .data = (ulong)&c71_data, },
++	{ .compatible = "ti,j721s2-c71-dsp", .data = (ulong)&c71_data, },
  	{}
  };
  
