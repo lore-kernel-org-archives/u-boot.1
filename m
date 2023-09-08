@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A366DEEB566
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 18:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04CE0EEB562
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 18:53:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 623F186863;
-	Fri,  8 Sep 2023 20:31:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CC62869E6;
+	Fri,  8 Sep 2023 20:53:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o80jIrma";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RG6roqqh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1E44869A4; Fri,  8 Sep 2023 20:31:40 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0C41D869EB; Fri,  8 Sep 2023 20:53:00 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B382286501
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 20:31:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7149F869A4
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 20:52:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388IVPL1086276;
- Fri, 8 Sep 2023 13:31:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694197885;
- bh=4zcDG30bCeDd9vYgLLFvDHPRmd7mER0/sAP7JxvT3Hc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=o80jIrmaVNsqGyy032SUIq+rtxiI7HumH6jR0ZAfaOW7fEjVQ9wixIpTiVoWiDo7S
- J2JZSu4d2OWtFM2e0ih8Q4/JVZcen4ZPIArkFOYavA9CsU0ED5+aFYTkK74BB5IS8C
- CIc3PsEEh3XhdHVFbMySU1uCqPcHyFKyKugCPgiY=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388IVPo0074188
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 13:31:25 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 13:31:25 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 13:31:25 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388IVP9g097921;
- Fri, 8 Sep 2023 13:31:25 -0500
-Date: Fri, 8 Sep 2023 13:31:24 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
- <rogerq@kernel.org>, Jason Kacines <j-kacines@ti.com>, Jayesh Choudhary
- <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 11/16] board: ti: j784s4: Add support for board
- detection by EEPROM read
-Message-ID: <20230908183124.27zctk6ishfd7ics@canopener>
-References: <20230908110551.861575-1-a-nandan@ti.com>
- <20230908110551.861575-12-a-nandan@ti.com>
- <20230908144237.qd4ito3c656hmfp2@degrading>
- <0ea3625a-c647-fc80-36c6-93e46685c750@ti.com>
- <20230908170346.frwfoahna3qu37lg@dinginess>
- <57edfc59-475e-dadc-4b99-0639d0e61cdb@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1694199173; x=1694803973; i=xypron.glpk@gmx.de;
+ bh=oXxS5W8W6JmJ1+46LCvUBQiaI6JMRaJKWS8P396IzqM=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=RG6roqqhEiJ5Cfp7b85f6h2wfd2P7IihgNTrkYahiiIaCnJnvFjtAsuYnNTpTFjWUxTO8sG
+ 1uCZweGnuqyPnWt36xQMrpJPGqtLW2/EXxo3/s9GzLJFn22HvLf4R61MYbwo0gXwsU6GGF8C3
+ VI4EIhrzEtc8956ECOdrlmgpRVjySeE9awOUhAKGItRSfoY646/nYhYP5ReqRMnZWNiNHI3t1
+ oPLjSwAo36sE5brKyBkFzQFqEcQoSJ0aq4b4FJq5s1ed3T5O10E7xVW4Vq4VNppeQcvc2iDV1
+ vsn08UbCnl4cLSHElmjKwoqcBXr5dyy4xpw1LwkgkOGTdm2N9JfQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MPGRp-1qHFOq1TWn-00Pbs5; Fri, 08
+ Sep 2023 20:52:53 +0200
+Message-ID: <34abc752-919d-4bf3-8ef3-db01a09b71c3@gmx.de>
+Date: Fri, 8 Sep 2023 20:53:51 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <57edfc59-475e-dadc-4b99-0639d0e61cdb@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] rng: stm32: rename STM32 RNG driver
+To: Gatien Chevallier <gatien.chevallier@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+References: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:qNemXEIC1kVYYgJzuqfPgaRHZcbMIROj+g+GvWzmy+370E72oVq
+ yRkrMIgWSqm6BajR4jFvq3Cy5KinLghLaSwyJift6PrN1hgoPwt9xAlxN4WdXzWtdQIyskd
+ qVlDxKXMRRNEn7iOlH7UmMbfFTi9LVx7IKVKHosC8PcJ6eZxKo1fqZU3h5aUQ6VbvivHuhN
+ 1WS6LIsYfqWpAjbc/RfcQ==
+UI-OutboundReport: notjunk:1;M01:P0:M2XHUtfFYck=;F3WkoQRE/iHpXmtbOC7L+poPKwV
+ 0tcagX84AY6aB0/fNzWuzSlQ1FCOJcuAsnmh7lgftE61X8GiPdW2BVcCF8ijlHMYMWIiCSlm0
+ kiHAGklMQNX7QAQODfPMQliov+kXFCjQ3RKbd7WvS03RB+4QoACkDSAsZ4wCxtHDYyx0UESqi
+ uxs9R4pBePau74+cMPYthJH7p/cI/qUdKBweYJwFdquIn9Gp6YSF2UrlUC9yqq1gr/KR5X8C6
+ PBuBmXuCiKCb4M/LoApFg1vJaY+Nul7HT1GmrNPfaHIS6BCqOkPxU7B/eCJbBC8IRW+fPBzP7
+ 7uuzBuqCR9KGlol9IqQ0onl2ysonYtooqPyalPVR5CKUp+w0P5wZKkN6riGr30yQgVA4r2ruV
+ 1cr9Dxwh3pxUxCyBW/NVvmVdlTEd5XyXXCq41u7K0qMo3SBQl3jc12aarOErWn8Gn4Zi6zjGd
+ Rg1AAh58cfxv1uJ9xAntcpVbIADysBCxU66uLqZBy2KZbX9b6jbcV/kcKUaZJ7c9PD/hCAVV+
+ yTyxa+Kw21X7khgLTQNlmDNl8Aj5OhGgMMtEIHBZNGrFQNUf0iJIvdRCAb//pujp6VjUmqGaJ
+ XNWjPVpyWx7dFHvy/H1nor6Op3eVRSDRnv8AV22+7m5ROzgy79RDGE2A7d4sjIrzVIEF4SkAI
+ s9RTbjfMbbQ4C1LRxlACKUYpI51Y0COoE+XF+/3U/LfK7c+B4uNI/qMqD3GZj0Y85jC8CqnQ8
+ YWkI1rCMhOm6ZZ3SHKp24yfJFvoig59x02k8FvCSJduV7FdFjKCp/5j4wp8j8DAKqiq1GRwEK
+ LlJrt4vvZqexPClW++FdFk1/xNVfy9Io0uzPN+7n9rDFcT8ZiHWUgROkj/BlxEFRalcC04Hij
+ jttKZsf0yuIu1Ma/j+LehVncM8MxYmmmODE4VJ+Xyc3Ije6+iFKAFXUQp24l4HMMf5ZRmek2d
+ /fIuhX+pVSHydot1MdoZneQxywQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,69 +89,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:20-20230908, Andrew Davis wrote:
-> On 9/8/23 12:03 PM, Nishanth Menon wrote:
-> > On 10:59-20230908, Andrew Davis wrote:
-> > > On 9/8/23 9:42 AM, Nishanth Menon wrote:
-> > > > On 16:35-20230908, Apurva Nandan wrote:
-> > > > > From: Dasnavis Sabiya <sabiya.d@ti.com>
-> > > > > 
-> > > > > The board name is programmed in the EEPROM. Add support for board
-> > > > > detection and choose the right dtb based on the board name read
-> > > > > from EEPROM.
-> > > > > 
-> > > > > The J784S4/AM69 has two platforms naming J784S4-EVM and AM69-SK. The
-> > > > > J784S4 has EEPROM populated at 0x50. AM69 SK has EEPROM
-> > > > > populated at next address 0x51. So start looking for TI specific EEPROM
-> > > > > at 0x50, if not found look for EEPROM at 0x51.
-> > > > > 
-> > > > > Also, add support for setup_serial() to read the serial number from EEPROM
-> > > > > and update the serial environment variable with the same.
-> > > > > 
-> > > > > Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-> > > > > Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> > > > 
-> > > > 
-> > > > NAK. go with the approach similar to AM62x. AM69-SK has it's own
-> > > > fragment.
-> > > > 
-> > > 
-> > > NAK to your NAK, there is no reason to introduce more fragments here
-> > > when both boards can be supported with one defconfig.
-> > 
-> > Sorry, but no. the evm.c has become a mess. Time to stop it is in the
-> > introduction itself
-> > 
-> > Need the eeprom stuff clearly pulled out of evm.c -> evm.c should still
-> > work with CONFIG_EEPROM_DETECT disabled and should be board independent.
-> > 
-> 
-> Sure evm.c is a mess, but that is the price for one config/build working
-> on multiple boards. That is why we have EEPROM on *every* EVM, you throw
-> that away if you got to "just have a different config/build for each EVM".
+On 9/7/23 18:21, Gatien Chevallier wrote:
+> Rename the RNG driver as it is usable by other STM32 platforms
+> than the STM32MP1x ones. Rename CONFIG_RNG_STM32MP1 to
+> CONFIG_RNG_STM32
+>
+> Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
 
-I understand, it also comes in the way of downstream customers creating
-board variants and using this code as the reference (there is only this
-code that is the starting point).
+LGTM
 
-> 
-> Honestly I'm fine either way (I never did think we got much out of
-> multi-board detection support), but that decision should come with more
-> reasoning than "NAK"..
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Sure and it has been discussed over and over again on the mailing list
-with Tom reacting to the mess created and which is how am62 was trimmed
-down in the first place and highlighted internally as well, multiple
-times.
-
-So, I believe the rationale is sufficient.
-If we don't learn from the feedback[1], it shows badly on us.
-
-Long story short, keep it clean, simple reference code, or sorry, NAK
-stands.
-
-[1] https://jaycarlson.net/embedded-linux/#am335x
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
