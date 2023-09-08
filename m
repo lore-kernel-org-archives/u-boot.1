@@ -4,73 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EECFEE57E7
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 09:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6C4EE57EC
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 09:39:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC11869B1;
-	Fri,  8 Sep 2023 11:36:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05F7B8620C;
+	Fri,  8 Sep 2023 11:39:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cLkyX4Wv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KxPhPZ37";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035DE80275; Fri,  8 Sep 2023 11:36:35 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 24AAD85E44; Fri,  8 Sep 2023 11:39:22 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DB5E86580
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 11:36:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7212086410
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 11:39:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2bcfd3220d3so30871771fa.2
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 02:36:32 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2bd0d19a304so32810761fa.1
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 02:39:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694165791; x=1694770591; darn=lists.denx.de;
+ d=gmail.com; s=20221208; t=1694165959; x=1694770759; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8WfNGGaZbm+JuECthQ7r6XPKeGogFjHXxjxhC8hBZ6E=;
- b=cLkyX4WvDrnUbbiVEYxPD4Gq+KVtMM9ta7fPhDc7WDAvPT2rLH4jZ5f9EDY14Y3L/j
- 6fPSZiDcnJTAsP2yxBmV3Dx94RrVuEM296QJhmI2OAdJZ/IDMjtGfyvCiAhy0Qty5q+g
- IrImrpc1nZ1zZHBlyeBXrsygE9NykH2yIt33wPKLZHbds0aoYGgRCHQ2iQMblqrhprmt
- OOljiqHJCvZdLhC8tXaHopbslUSCoMKPmMSJO8//JVOjsLuLh8vXAFnkHSMgd9BFsSsj
- vN69xaGqT40CzP6C5lxfuyvBHNA6nR1FqiMabX0TShC+VCSpYOZz6bQgMxCrYC9rU5W8
- +80g==
+ bh=gmNsFLpdzT7HD0s5ZXq/w5dV3nJ64Nz1IklRYrFXDFk=;
+ b=KxPhPZ37SwCAaRQ0gNsRTV/REhuofVd4BRmMKUjnqL0gMwOUYpen5l+jeUvq1nCACV
+ TpxWNnvE5IHK+AkOJxmX974ItMmikz16Ph0+ZJExyzMCI+WOMp00wbmbaRcdPrqR2XZn
+ VLn4n+lVr4CHITIjY2+K1KIlT6+lG+4scRopcYnpEeysgQX0/mYsxrn/FSVXzin5LFxG
+ goPJ9nStqUBi+pLdf/zdgXElbg9JF7O3idqQibPM7eLYsHCp8UshfU5tQqSIqMzr4TuQ
+ nfP2cwiFwChDXXIFKNveWp3XmwduL+bgzNaYfXmdxnUPDuQljuTHn9Cb/hn2Ly5eO7Ui
+ nrtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694165791; x=1694770591;
+ d=1e100.net; s=20230601; t=1694165959; x=1694770759;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8WfNGGaZbm+JuECthQ7r6XPKeGogFjHXxjxhC8hBZ6E=;
- b=ulvoqftOBZ7tsIyONqh92UmiTG4nJVtNdxI5dKQECX26N+FqpMS35cPrp1YXh+5znB
- Qz3Pb8A79jFv6Vrp2Bn554Iv0ZTLrep77Ojr89XsoRf2YLe+8Cd4YbAOnEJOtUWqqp7b
- 5X+dRDtJuiwvc/acjePgxgUwVNfiuaBGM4fn95aaYjubSg+ChPffXWU8J38cNKPzDzAA
- RrFXTeq2TzbZVElcsYLPspwyOWRfACGzE1j/42NRqdxkd3SF4IXMmSff6+ciADkEfMT+
- UBpxYKsntSkerFUt6Po8Tgp8ty3WTiNtvn+ayGaVQxTLaAFt8cqpxQ/X5+SEPMUd8K+G
- cshg==
-X-Gm-Message-State: AOJu0YxmtsQm86Au2rhF2TjXhmYY2aa2N7UCEgVp2er2L9O0P7S00eBr
- p4m3PRZluv/8LC6ZNI/+0wwGbaI2PULD/kZ1/ps=
-X-Google-Smtp-Source: AGHT+IG4ckpAQl9q8MMXUgbqCFuW0h6bOaD1+FpJxTU1aaBhnuFBuIbVt/5dwOQj+cxvEW0uAmw1wmck6QpcDeVrer4=
-X-Received: by 2002:a2e:9dc6:0:b0:2bd:1614:d47 with SMTP id
- x6-20020a2e9dc6000000b002bd16140d47mr1483674ljj.42.1694165791361; Fri, 08 Sep
- 2023 02:36:31 -0700 (PDT)
+ bh=gmNsFLpdzT7HD0s5ZXq/w5dV3nJ64Nz1IklRYrFXDFk=;
+ b=tqeYjcVN5viCJeVuD9fYHXt2y1k8lSXLYVo9nR58EMUW4si0xUKxAtXz+DH0xkPxX6
+ z1idh7p1CkFSqb193pvRo5BzjxCeGogb5sisVWLlXAGmiJQmeF21bCsYU5rFTSZ/MzER
+ KES8uHX3pNNfyJGO7H5WkioIn6rvPAuBefMmDyAqxXI2N1px0PmuOR4iVkma7BSwgzwc
+ cnKR/VygH0UVHvF9o5AxdrH5laCKrkH3jh4Wo8knT4mcOnDrw+qymPmazvDyts11LH5Z
+ /kOO79TKN5Z3QTvPJ0oz82gAyIWiGaRAAlsBLrFiaUSzglhKkwKe5IhWYLUWbR7DYY+j
+ HujQ==
+X-Gm-Message-State: AOJu0Yzw1t506zNg72GwLPXITNjbCXwi/B8g1rISh7GSqB+JuIftdXDS
+ fNTu2YEgBACUuhZ+0zcOa/a3mx6O0xLQlJI7e1w=
+X-Google-Smtp-Source: AGHT+IFjfGA9NdJS6OhiKH64cF2dg48YPknpqmQwImslm67FtorC5iz65zDqt4aJedeew0m5WTNkHCX1TLGmUzaOvdw=
+X-Received: by 2002:a2e:9b4b:0:b0:2bd:d34:f892 with SMTP id
+ o11-20020a2e9b4b000000b002bd0d34f892mr1397188ljj.3.1694165958609; Fri, 08 Sep
+ 2023 02:39:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230907155933.48511-1-sjg@chromium.org>
- <20230907155933.48511-10-sjg@chromium.org>
-In-Reply-To: <20230907155933.48511-10-sjg@chromium.org>
+References: <20230907214012.74978-1-sjg@chromium.org>
+ <20230907214012.74978-2-sjg@chromium.org>
+In-Reply-To: <20230907214012.74978-2-sjg@chromium.org>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 8 Sep 2023 10:36:20 +0100
-Message-ID: <CALeDE9PS3J-wGzMNbAJuHtqUkVCnraCAAdJXoEnX_eyoFq2xLw@mail.gmail.com>
-Subject: Re: [PATCH v4 09/22] Move fdt_simplefb to boot/
+Date: Fri, 8 Sep 2023 10:39:07 +0100
+Message-ID: <CALeDE9NwvFRoq7_WQdYAPcurRwOpenEsYt+PKrckaR6asB2TdQ@mail.gmail.com>
+Subject: Re: [PATCH v6 2/2] schemas: memory: Add ECC properties
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Guo Dong <guo.dong@intel.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Yunhui Cui <cuiyunhui@bytedance.com>, Chiu Chasel <chasel.chiu@intel.com>, 
+ Mark Rutland <mark.rutland@arm.com>, linux-acpi@vger.kernel.org, 
+ Rob Herring <robh@kernel.org>,
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Ard Biesheuvel <ardb@kernel.org>, Tom Rini <trini@konsulko.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, Gua Guo <gua.guo@intel.com>, 
+ ron minnich <rminnich@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,105 +95,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 7, 2023 at 5:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
+On Thu, Sep 7, 2023 at 11:57=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> This relates to booting, so move it there. Create a new Kconfig menu for
-> things related to devicetree fixup.
+> Some memories provide ECC detection and/or correction. For software which
+> wants to check memory, it is helpful to see which regions provide this
+> feature.
+>
+> Add this as a property of the /memory nodes, since it presumably follows
+> the hardware-level memory system.
 
-Is simplefb booting or video?
+Have these been accepted upstream? A grep of bindings in the upstream
+kernel I don't see them.
 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
-> (no changes since v1)
+> Changes in v6:
+> - Use a number of bits instead of a string property
+> - Fix inidcates typo
 >
->  boot/Kconfig                    | 16 ++++++++++++++++
->  boot/Makefile                   |  1 +
->  {common =3D> boot}/fdt_simplefb.c |  0
->  common/Kconfig                  |  9 ---------
->  common/Makefile                 |  1 -
->  5 files changed, 17 insertions(+), 10 deletions(-)
->  rename {common =3D> boot}/fdt_simplefb.c (100%)
+> Changes in v5:
+> - Redo to make this property specific to ECC
+> - Provide properties both for detection and correction
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 0a98f1e22207..39c51e9e2fe8 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -1538,6 +1538,22 @@ config SPL_IMAGE_PRE_LOAD_SIG
+> Changes in v3:
+> - Add new patch to update the /memory nodes
 >
->  endmenu
+>  dtschema/schemas/memory.yaml | 15 +++++++++++++--
+>  1 file changed, 13 insertions(+), 2 deletions(-)
 >
-> +if OF_LIBFDT
-> +
-> +menu "Devicetree fixup"
-> +
-> +config FDT_SIMPLEFB
-> +       bool "FDT tools for simplefb support"
-> +       help
-> +         Enable the fdt tools to manage the simple fb nodes in device tr=
-ee.
-> +         These functions can be used by board to indicate to the OS
-> +         the presence of the simple frame buffer with associated reserve=
-d
-> +         memory
-> +
-> +endmenu
-> +
-> +endif # OF_LIBFDT
-> +
->  config USE_BOOTARGS
->         bool "Enable boot arguments"
->         help
-> diff --git a/boot/Makefile b/boot/Makefile
-> index f15a161614ff..6ce983b83fa4 100644
-> --- a/boot/Makefile
-> +++ b/boot/Makefile
-> @@ -39,6 +39,7 @@ obj-$(CONFIG_$(SPL_TPL_)CEDIT) +=3D cedit.o
->  endif
+> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
+> index 1d74410..1a48b1c 100644
+> --- a/dtschema/schemas/memory.yaml
+> +++ b/dtschema/schemas/memory.yaml
+> @@ -31,10 +31,21 @@ patternProperties:
 >
->  obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) +=3D fdt_support.o
-> +obj-$(CONFIG_$(SPL_TPL_)FDT_SIMPLEFB) +=3D fdt_simplefb.o
->
->  obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) +=3D image-fdt.o
->  obj-$(CONFIG_$(SPL_TPL_)FIT_SIGNATURE) +=3D fdt_region.o
-> diff --git a/common/fdt_simplefb.c b/boot/fdt_simplefb.c
-> similarity index 100%
-> rename from common/fdt_simplefb.c
-> rename to boot/fdt_simplefb.c
-> diff --git a/common/Kconfig b/common/Kconfig
-> index d11292f52c2b..21eaa5e815f9 100644
-> --- a/common/Kconfig
-> +++ b/common/Kconfig
-> @@ -1157,14 +1157,5 @@ config VPL_IMAGE_SIGN_INFO
->
->  endif
->
-> -config FDT_SIMPLEFB
-> -       bool "FDT tools for simplefb support"
-> -       depends on OF_LIBFDT
-> -       help
-> -         Enable the fdt tools to manage the simple fb nodes in device tr=
-ee.
-> -         These functions can be used by board to indicate to the OS
-> -         the presence of the simple frame buffer with associated reserve=
-d
-> -         memory
+>        numa-node-id:
+>          $ref: types.yaml#/definitions/uint32
+> -        description:
+> +        description: |
+>            For the purpose of identification, each NUMA node is associate=
+d with
+>            a unique token known as a node id.
 > -
->  config IO_TRACE
->         bool
-> diff --git a/common/Makefile b/common/Makefile
-> index 0948721d0b47..5c1617206f07 100644
-> --- a/common/Makefile
-> +++ b/common/Makefile
-> @@ -17,7 +17,6 @@ obj-y +=3D board_r.o
->  obj-$(CONFIG_DISPLAY_BOARDINFO) +=3D board_info.o
->  obj-$(CONFIG_DISPLAY_BOARDINFO_LATE) +=3D board_info.o
+> +      ecc-detection-bits:
+> +        default: 0
+> +        description: |
+> +          If present, this indicates the number of bits of memory error =
+which
+> +          can be detected and reported by the Error-Correction Code (ECC=
+) memory
+> +          subsystem (typically 0, 1 or 2).
+> +      ecc-correction-bits:
+> +        default: 0
+> +        description: |
+> +          If present, this indicates the number of bits of memory error =
+which
+> +          can be corrected by the Error-Correction Code (ECC) memory sub=
+system
+> +          (typically 0, 1 or 2).
 >
-> -obj-$(CONFIG_FDT_SIMPLEFB) +=3D fdt_simplefb.o
->  obj-$(CONFIG_MII) +=3D miiphyutil.o
->  obj-$(CONFIG_CMD_MII) +=3D miiphyutil.o
->  obj-$(CONFIG_PHYLIB) +=3D miiphyutil.o
+>      required:
+>        - device_type
 > --
 > 2.42.0.283.g2d96d420d3-goog
 >
