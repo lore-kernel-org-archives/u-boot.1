@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94724EEB566
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 19:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91395EEB56D
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 20:21:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC7E585DD2;
-	Fri,  8 Sep 2023 21:53:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A688285894;
+	Fri,  8 Sep 2023 22:21:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="res7S1BF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ig6V8vDP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 096118620C; Fri,  8 Sep 2023 21:53:56 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 98ACA86A63; Fri,  8 Sep 2023 16:17:22 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A6A284788
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 21:53:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC1D686A3F
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 16:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-d7eccc1b8c6so2345893276.0
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 12:53:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=fshao@chromium.org
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-26f38171174so1690548a91.3
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 07:17:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694202832; x=1694807632; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZdJQ6+OHI6gR/a0i1aaCIniAPLj+Xa16MnngIL0oUAc=;
- b=res7S1BFbgDBC2pwbeUNhhs0ivIEyiLj7Lw3bxJLz2eH8b6glWkhmwSFtZjNrXxRT+
- 4P5Qw3VHcYCEl77O4ms5Gw6Tz2LBGilk897aSBkQPxDVIK6ACaN4fsNnB9QPfQvhCxXZ
- rB0Vz6fXK6dau11py8AXTQJ4rP9BEGyJKlScM=
+ d=chromium.org; s=google; t=1694182638; x=1694787438; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hhqYepBOV4e0+5cMGNJzKRmfwFgtIrM/9hQuwm9Z/U4=;
+ b=Ig6V8vDPAulBGu8MhJKqc+pAy49r3fno3CFInmdZ10zUqn+i93f7cHdc7r+HQZNas5
+ DRWRIwjGx0u50XIhkZpVhQTjkzdrRC0pe9c6hs0gR2yE6GYVEas9rEa7LeNc5SrvrJs9
+ uIbPRM5OUasKGzIfIx8X7c99LQ9KbVimHcB/M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694202832; x=1694807632;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZdJQ6+OHI6gR/a0i1aaCIniAPLj+Xa16MnngIL0oUAc=;
- b=YEey7EMpUVVf9m7eomIBULI/3axK4VI7bFIycv5/J86m61EZxHHqu4xHkWo1ttOnkE
- XQBSllbiJ4UHU5+CwJV8nA8LOB58M9oogN8nZQmF6lVuP8flM9kP9Z1jAX0fssjPzLdZ
- xjdZYvnZtQwZgo0dw1XXqvlKO/FcSbinskFuQwTfZ0WO9QHfyKTYH2Qi9bPBks6Yyk+O
- /iObE5KLGhpatrJ+iLOpzOYH/aAwMhL52ZL+PSPFuU8w5UAOK8HFNjcqyEHCZI9eVlU9
- 2O0DmrT5gXYYHjJThEYTYd35r0NKdqNeHNZYCPKeflFITiXV8qjC0cMLLRPpHwnUmLoz
- NeXA==
-X-Gm-Message-State: AOJu0YzEgLELSgDGpYgFDINY9FUccrXqwrDim9OfD5kyhkK00LSnVL4I
- SMWXT/krdhWVWhkh8nBMozdQkQ==
-X-Google-Smtp-Source: AGHT+IHd290cDGAa3Mhn++TN7LxSuWcP/r93nTSYH1q2s4qIrm0xWtPpWzAoeb62QVs3wvpc2Xh+dQ==
-X-Received: by 2002:a25:e7c1:0:b0:d78:26a0:ab8b with SMTP id
- e184-20020a25e7c1000000b00d7826a0ab8bmr3277524ybh.55.1694202831785; 
- Fri, 08 Sep 2023 12:53:51 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-031e-83f0-a4af-2e7d.res6.spectrum.com.
- [2603:6081:7b00:6400:31e:83f0:a4af:2e7d])
+ d=1e100.net; s=20230601; t=1694182638; x=1694787438;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hhqYepBOV4e0+5cMGNJzKRmfwFgtIrM/9hQuwm9Z/U4=;
+ b=EisgwA6K6tDZ2NFV3I7f3+9SPy9KZYZwwoSXEUNESYeDEB6kUKq7H7jc0Eg6WIu4SU
+ PJyubPccDYCIehs7cmKVJonxhj9uJRT5dRSHxdv5nlXfWRw6pHzY6t1cLOPJQseAlKJX
+ 2AiJf+5z77QI0YD4qZ9OVErbg270qbSibmO6TOIFMLWD6/hSoaG8Hw9UI/hWYfMeVRgd
+ V5pSuQ4q1FS3GFtQe8vzyTBIjKAQATgSM4hoQnXqNSlJfnpKRmNEIT7w+4KMLsr6mwt/
+ XGH1HpNsEPLkV53VQpb9M2Jv5HO6RJg5rvUqb+8jg3JcfYLsLv4p2Jp60YkefZM3BFW5
+ BLgg==
+X-Gm-Message-State: AOJu0YxQMRtjRyxzqkqVeTMiWCdCzuUd/qT2HpXZuyOzxar2O2O2M9Ln
+ fEHkTdkhTKPgqedmMT2c1iw50g==
+X-Google-Smtp-Source: AGHT+IGpKkvIS+b0lx50Bi6MyV0RCTkNX3tHb4uIhbicw8ivcssXY2VOwxP9C3nz/zvDLj4n9ngZWw==
+X-Received: by 2002:a17:90b:3689:b0:26d:2162:f596 with SMTP id
+ mj9-20020a17090b368900b0026d2162f596mr2619177pjb.6.1694182638003; 
+ Fri, 08 Sep 2023 07:17:18 -0700 (PDT)
+Received: from fshao-p620.tpe.corp.google.com
+ ([2401:fa00:1:10:2f7e:9c4:ed14:b826])
  by smtp.gmail.com with ESMTPSA id
- o9-20020a258109000000b00d0bad22d652sm495247ybk.36.2023.09.08.12.53.51
+ rm10-20020a17090b3eca00b00265c742a262sm1362301pjb.4.2023.09.08.07.17.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Sep 2023 12:53:51 -0700 (PDT)
-Date: Fri, 8 Sep 2023 15:53:49 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Faiz Abbas <faiz_abbas@ti.com>
-Subject: Re: [PATCH] ufs: ufs-renesas: Add support for Renesas R-Car UFS
- controller
-Message-ID: <20230908195349.GA2250768@bill-the-cat>
-References: <20230822014713.138131-1-marek.vasut+renesas@mailbox.org>
+ Fri, 08 Sep 2023 07:17:17 -0700 (PDT)
+From: Fei Shao <fshao@chromium.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Fei Shao <fshao@chromium.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH] patman: Respect include directive on Git config lookup
+Date: Fri,  8 Sep 2023 22:15:59 +0800
+Message-ID: <20230908141655.2307809-1-fshao@chromium.org>
+X-Mailer: git-send-email 2.42.0.283.g2d96d420d3-goog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KYYRKb+RqX6g96II"
-Content-Disposition: inline
-In-Reply-To: <20230822014713.138131-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 08 Sep 2023 22:21:30 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,43 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+People may put their user name and email in a local config file and
+reference it by the include.* directives, however `git config --global`
+doesn't look up the included configs by default.
 
---KYYRKb+RqX6g96II
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Enable the --includes option explicitly to support such use cases.
 
-On Tue, Aug 22, 2023 at 03:47:13AM +0200, Marek Vasut wrote:
+Signed-off-by: Fei Shao <fshao@chromium.org>
+---
 
-> Add support for Renesas R-Car UFS controller which needs vendor-specific
-> initialization.
->=20
-> Ported from Linux kernel as of commit
-> c2ab666072bc ("scsi: ufs: Explicitly include correct DT includes")
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+ tools/patman/gitutil.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+diff --git a/tools/patman/gitutil.py b/tools/patman/gitutil.py
+index 6700057359fc..b0a12f2e8c06 100644
+--- a/tools/patman/gitutil.py
++++ b/tools/patman/gitutil.py
+@@ -651,7 +651,7 @@ def get_default_user_name():
+     Returns:
+         User name found in .gitconfig file, or None if none
+     """
+-    uname = command.output_one_line('git', 'config', '--global', 'user.name')
++    uname = command.output_one_line('git', 'config', '--global', '--includes', 'user.name')
+     return uname
+ 
+ 
+@@ -661,7 +661,7 @@ def get_default_user_email():
+     Returns:
+         User's email found in .gitconfig file, or None if none
+     """
+-    uemail = command.output_one_line('git', 'config', '--global', 'user.email')
++    uemail = command.output_one_line('git', 'config', '--global', '--includes', 'user.email')
+     return uemail
+ 
+ 
+-- 
+2.42.0.283.g2d96d420d3-goog
 
---=20
-Tom
-
---KYYRKb+RqX6g96II
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT7e8cACgkQFHw5/5Y0
-tyw14Qv7BnVdWd5rF3Gi24h5YrEb/1Ut3WyAhcTlj1Q6Maem/CtbZY+FKlf6bgRx
-1P4Y0vAFjvUCh7Uvdyb+SzFUsA9blcdsGtXH+ch29RHYLe6PtBdD5CPH44TpuyXM
-oo6RpwrFOzoq1oR2FfiqmFyy3ZSgDs1n2We682Q+D+q1J7hcMzmC23PGhjks+Vvs
-Krt0TUxkMryYKBZ8HH8Wpg0llmrQ7biosF746yQzSAW1GAJ7kkKqMprAPcIFk2eg
-b48I0D233GZCjLFWh9w/TiWJThd0HqtY20oZvA0/b6pey4cxnaXs5KTOvsPYz8dl
-ypgiESMat+v2x+XuWfTsSfozeIECgd/W5fY4IyViGDM0g98YJKetWH2vtvVZMJ/2
-OZwKfbQC2coeNSyOHqET9qpa067ho2jSIQhFt+u8qe/PCMWTn+sjCbcViuCUQ8Cz
-TUMiKPOVny57HeOlDN6l+fzXS7MwkRCjxe+aacxUbjXJbQTeTMG6TZe7FpB0VBnx
-LmxWFSS5
-=r5Ek
------END PGP SIGNATURE-----
-
---KYYRKb+RqX6g96II--
