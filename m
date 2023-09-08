@@ -4,46 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58C88EC8748
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 12:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8187EE7FE3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 12:14:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 467D086A21;
-	Fri,  8 Sep 2023 14:00:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BC27A86560;
+	Fri,  8 Sep 2023 14:14:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="jD8X+k69";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9BD786A24; Fri,  8 Sep 2023 14:00:52 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 5D206866AA
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 14:00:49 +0200 (CEST)
+ id 54CD8866AA; Fri,  8 Sep 2023 14:14:55 +0200 (CEST)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on0602.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0e::602])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 26B3B86429
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 14:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CDD8CD75;
- Fri,  8 Sep 2023 05:01:26 -0700 (PDT)
-Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 669FF3F67D;
- Fri,  8 Sep 2023 05:00:46 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Malte Schmidt <malte.schmidt-oss@weidmueller.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 8/8] binman: capsule: Add support for generating EFI empty
- capsules
-Date: Fri,  8 Sep 2023 17:30:02 +0530
-Message-Id: <20230908120002.29851-9-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230908120002.29851-1-sughosh.ganu@linaro.org>
-References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=SFsj2TJFMIjgEPymtMUjyaAriFY07uKjy1FlV7J31ui9SJMLE6n1SxcinaXkW7ytSljIrldWgjQkjCo/8/Ii1iNCYP5UkbzmR0pg4OftpChpo8iigX1jttmREgn59Ij29tlBMPnnSZ/vY7nkN5OMiUnH+hSnwSSRSI8Y1hZnJewcf/R+vrJv6WZTpr9xQBc7skY/QmSvJa5aKXb+lgGBvMKLBpAFWm8FgCSY2k00zVTEAT66bhZk3N693MpVJ9B/LRyhSrFnbPQNAwqFNZv0I07sg17OtIncvkE7UcBW+Zt3orjrrAlFkmkDzS0WZnxUiWLn0Kc3YMpS5dd2hbTH9A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ajI5EgaxJULNmiUhwaHg0cSI8PmQlpKhx/GGBmTS2Q8=;
+ b=KAXkuqOeXllmcYo/sV3pPzHH11UqeT5B7/s7x4QOiWDU2j732RqSxy7mjYVdzYzMXmL472erCbkEWvtXhzh6Z4KvJjM5xOCgevBDk3mgQvbIbbcqpPJTgq6QfgiMPwMo88lDrZns4z/JeDrjdqtspQUL53x3+WsPZTzOQUGPUOwzshuXBcabR3zQZEzPo7sG2V3j4PNMcsw6Hc/7jQUR12nq29T/9HtPd1oOq6eUf2zB3luuTqlpbyTOgUNbto9SwRLhXDfZJndXrdkUaqxeYmrv0wLyBgWEDtQtt14a6fjntY0GMy1Oil3XpjBzL/yjvsMb92LCxQmkAm/HWzvRHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector2-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ajI5EgaxJULNmiUhwaHg0cSI8PmQlpKhx/GGBmTS2Q8=;
+ b=jD8X+k69sxCHDKfvossT/MZcZx9GzjCcgyPT7d0zX2Be+gT6ZP2ViiUYjwEyilVoXBV4sc+gg7kGh8CcCCpeDowLBb/TwsfrpsRWvT6ZmelDPmlYw3wmjBP8kYTORJwE/hE8UD8JDQHXDRx29bWAw4HB6yWj/8yg6NIihlssXL8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from DU0PR04MB9417.eurprd04.prod.outlook.com (2603:10a6:10:358::11)
+ by AS8PR04MB8328.eurprd04.prod.outlook.com (2603:10a6:20b:3fc::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.36; Fri, 8 Sep
+ 2023 12:14:49 +0000
+Received: from DU0PR04MB9417.eurprd04.prod.outlook.com
+ ([fe80::2b3:d8de:95c8:b28b]) by DU0PR04MB9417.eurprd04.prod.outlook.com
+ ([fe80::2b3:d8de:95c8:b28b%3]) with mapi id 15.20.6745.034; Fri, 8 Sep 2023
+ 12:14:49 +0000
+Message-ID: <280f002d-5c8c-b679-508d-b3469d1fec95@oss.nxp.com>
+Date: Fri, 8 Sep 2023 20:14:37 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.1
+Subject: Re: [RFC 0/6] firmware: scmi: add SCMI pinctrl protocol support
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com,
+ sjg@chromium.org, linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <CAOMZO5BNpWM0a1UwJmYE+cvd5NDtxXSULb-Tr7qhucGC3i16QA@mail.gmail.com>
+ <ZPmezjoqEwCtJ7qd@octopus>
+From: Peng Fan <peng.fan@oss.nxp.com>
+In-Reply-To: <ZPmezjoqEwCtJ7qd@octopus>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI2P153CA0013.APCP153.PROD.OUTLOOK.COM
+ (2603:1096:4:140::12) To DU0PR04MB9417.eurprd04.prod.outlook.com
+ (2603:10a6:10:358::11)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU0PR04MB9417:EE_|AS8PR04MB8328:EE_
+X-MS-Office365-Filtering-Correlation-Id: 40abd1fa-88cd-431f-a7db-08dbb06532af
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 0AlPaDx/DsZR69gzZRbwO4iflqNqWepb0/ERHWFldlVWeKl5kLhFYilWgtGqWvuzr/ppNybuMqUCOeX+e3xGHml4zOzntSjYjLhzuPCKOHcpD102qIWwb7dePHBheOV92Z9mdot6yVGzx+euLzhWFJtCTsuEAyKN7qPhdzaKaYVg+YxFgqMCMOgiy/pMt5EOASih7cUrAKtnt6CaXkd5LmHVliE7aIUe4z/uUyqRRjWRgEaV73qeVNKwlrgPyL4GXGXULGpsFrSwVDq+MNWBhWn028qT7zMcOYQiyAXQpeu+Qct4cuj0/+xEd2vdWHVL/ZEeEzQ/NeOZsSP+bGIEmrtD/xFHX1aiPPdIIjr8QAMx5lZjJVQx+L+a4ZfkNtIPbW7vheNLglFP2uXPK1K8c1SgsFLmRdiFR8OkcEjT7PwjzxRQ3dzy9d5UjrdHSh3YZbDZyM5qUHyFySgYPh2PUJP6+3HguI3JTp+tI5XRvTGwZ6e2OJCMGmSFkycfaPVoPtnyYhz/ATERAHUUDuvMYkdnTJfx9S+lKsC1b4JUgkX6abX2dUm8+i0U5JQFCuMEmeUwRGo9erGwcxXDRVDbQsf4/mSuNHa12IJDUOp1VkqzveI8vqbfx7S/NcsRGGpE
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU0PR04MB9417.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(136003)(366004)(346002)(39860400002)(396003)(451199024)(186009)(1800799009)(5660300002)(44832011)(6506007)(8936002)(8676002)(6486002)(31686004)(66476007)(316002)(41300700001)(66946007)(66556008)(966005)(2906002)(53546011)(110136005)(6666004)(6512007)(2616005)(83380400001)(478600001)(26005)(38100700002)(31696002)(86362001)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L1lGaVZ2MGd4Y1NndjkyU21UMU1LeGVoeUh5MlVjalY3STk5ei9IUmhTeGZZ?=
+ =?utf-8?B?K3NHTFR6bUxOWnJsUzJuaDhnUE5NZ0JYeTlreFhwRVJob0xITVpVdlNLSkZG?=
+ =?utf-8?B?emt4bnJyeTJtWEJMYWRXanVpamsyMnVtR29Nck4ya2JHc0c3T29tWjJWc25U?=
+ =?utf-8?B?MmRFY09BNjRESFNEVHNZNHpBZ0wxZU4zSDhzbDVLby8wejJoWmVqbXo5TXVu?=
+ =?utf-8?B?dWFyaHRka1hQUmpwcjZpamF6dXp0d29CQkVMOHNGM0srdUc3OGpqOUJtWlFN?=
+ =?utf-8?B?S0NDdVVFZ3pJeHNyMUVrTUU5YXRTODJEWkorYkx3YVhBZml4cGZITUZ1Vk12?=
+ =?utf-8?B?NEpKNE14aE44VFRiQjRtRGd0bUpSeVFMSVJqNzdmM1hkZVFtdGFwSXVKODg1?=
+ =?utf-8?B?RHgwSU1sb2RQVzlQanV6SVdidmpod3o1NzhlZTVZdjRDT3o2YUFscGxNckRv?=
+ =?utf-8?B?N01YclcvdTU2MVpPckpXdUp5SmEzY09DUU9Ha29Mc1pGWmtHVlJaOXVHVmFS?=
+ =?utf-8?B?eWNhUWo3eEpGc3pvYVk5ams4bE9odEN1QTV6aEowUmFGVWZmRGpuaU0xRVBH?=
+ =?utf-8?B?VXRiUFA3dFUwYlZKYkRZdlZqUXlBRlRDTDBpTllrL1NIZGNmQVNhak1GS3Jo?=
+ =?utf-8?B?YmZaNW44MEdxeU4wZm8wckxwVjU1NzVSUzZYako3c29aZlVrb3ZlZVBobW1u?=
+ =?utf-8?B?MmtuczRaVmNTa0xMQ3dsd2xhWHlIWnA0c1A1YnM4QUlFanRFZnRhV0pPRDlZ?=
+ =?utf-8?B?cXZOZlVXRWVJU2gvbFNxR0QzSTY0cnY0VXZVeGNCUEIzbVk3d0FGcC9NcHNI?=
+ =?utf-8?B?ckJ6bEZUQnZLZWR1eEplRVp3dlVqRldKdm4vRTh0WEtGQUFlR253dnlwWEtl?=
+ =?utf-8?B?cFhMcUNtejFxbmdUbW5Nd3BFZ2RSalhUeDl6Q2pmV3hhVm8vWHRGU01TdW1E?=
+ =?utf-8?B?UG8xUWZhN3JuaWd3ZFNROERjR1pJaGplN2Y3OTlWYlJjQjB2aFNsejFtSGlG?=
+ =?utf-8?B?dkNQUW9EOVhnUEtSS3ZENkFyTlF4UitGRzA2bEZORkJwTVhrTzRIcjJDWWlI?=
+ =?utf-8?B?ZURtZE1nOUVVM21ybHZGSnh6WHhJZ0o4MGdLYUVjOVpnTStSblp1eHNTTkhV?=
+ =?utf-8?B?dk5PSHA2L3lzZXhjTkNaM0RHUFRrUWc3dWRtMldYTTlZOW5paVk5anBkN1A0?=
+ =?utf-8?B?aVZ4WTJaSUE0dXRHdlpjbUVmODdTeU0yN1BCb0J0SjU1V25uUGhKZFhYSnBa?=
+ =?utf-8?B?Y3FNWlB0MEZ6YzJXUkZtaHdpMjFXSVlXbWxVd3M1Ty91YWxWKzk2WElPelRm?=
+ =?utf-8?B?cjdTWDcrbjIvdnNZM20vNk9aLzdYM1hKSlV3S2VXL0tRMEVXSW45QUJOTEhU?=
+ =?utf-8?B?MThxclVXWWVKMWlMS0FNQ2loRlRRdmkwcWRPWmhOZ0p5VDJudUVIL3FodDUz?=
+ =?utf-8?B?dU5LbjhISWM1d1RxZTRDWkVkNzJwMlhIRTlsVGJhZTZPVFFJQ2p1L3dzSnow?=
+ =?utf-8?B?TElCZ0tkQkRpMGNzdVVIU1FZNWEwcVdYWEUwUXVKd0s3ckt0emppSGI3ZlVZ?=
+ =?utf-8?B?dG1jeEFpaXZ2aUNhZ2tGS09icUVGQlFmMlYrRUtNY09UbTZoRDhVV1ZuNlB1?=
+ =?utf-8?B?OHZYTUR2MFpjcXF3dE44Qmd2WWdoeVEzc0NodmxscnAxRTB6bjViZkNaMGJO?=
+ =?utf-8?B?ZUpJRzN4b3JVU1VkOFVNaDUzUVY3dUp0WWFrTDlZMjJ4NG1SWkNWTjNsQ2d4?=
+ =?utf-8?B?QVZ5RDh3Q2Z1d3FPZTF5K3dOelNDZ2xSTzhSbGxFUENpWWZqMFA1MG5pcUdQ?=
+ =?utf-8?B?NUNpdE5QV1JxSzE1UzFyakxuZjFrTmpmVnNVOG5IVWp3K25HdWM1RFViK3lD?=
+ =?utf-8?B?d0FNeG14aDlNbG0rT0tyNE5Kdmd1TmFFd0x3YzE1WFFGOFhpTWl6cnRialNr?=
+ =?utf-8?B?WHhpVUN2Zy83YzNMVjdiNzVLVklkYTcwYklUOEVtcmxXeEljTTBHTk0rZU5T?=
+ =?utf-8?B?VmV2WEZUSTIzdFROWkNHL3NVa3VWUUtCYkNURU5TVDZETzdubDhuRVI5SnFE?=
+ =?utf-8?B?QVFua3R3bkZ5eWljZFpSVCsvM1RSNFd2VlEzYVRkOHBRSCtjNEJYZVduN0FC?=
+ =?utf-8?Q?RPUzhQc5MRKgpmc5WkY4H7jCq?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40abd1fa-88cd-431f-a7db-08dbb06532af
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR04MB9417.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2023 12:14:49.8738 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ap0MImcOAb1dWkYXTKfyfhn8JnWe41ovNa5dO+NlGiLUqqy5weaUnZAznV9x+qFo5g2+Fl8kBB50lSYKptQccA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8328
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,288 +149,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support in binman for generating EFI empty capsules. These
-capsules are used in the FWU A/B update feature. Also add test cases
-in binman for the corresponding code coverage.
-
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
-Note: Simon, I have not forgotten your comment on the earlier series
-to add support for dumping the contents of a capsule. I will be
-working on that task once I am done with these patches.
 
 
- tools/binman/etype/efi_empty_capsule.py       | 91 +++++++++++++++++++
- tools/binman/ftest.py                         | 52 +++++++++++
- tools/binman/test/320_capsule_accept.dts      | 16 ++++
- tools/binman/test/321_capsule_revert.dts      | 14 +++
- .../test/322_capsule_accept_missing_guid.dts  | 14 +++
- .../binman/test/323_capsule_accept_revert.dts | 17 ++++
- 6 files changed, 204 insertions(+)
- create mode 100644 tools/binman/etype/efi_empty_capsule.py
- create mode 100644 tools/binman/test/320_capsule_accept.dts
- create mode 100644 tools/binman/test/321_capsule_revert.dts
- create mode 100644 tools/binman/test/322_capsule_accept_missing_guid.dts
- create mode 100644 tools/binman/test/323_capsule_accept_revert.dts
+On 9/7/2023 5:58 PM, AKASHI Takahiro wrote:
+> Hi Peng,
+> 
+> On Wed, Sep 06, 2023 at 12:09:45AM -0300, Fabio Estevam wrote:
+>> Adding Peng Fan, who is working on scmi/pinctrl support for i.MX9:
 
-diff --git a/tools/binman/etype/efi_empty_capsule.py b/tools/binman/etype/efi_empty_capsule.py
-new file mode 100644
-index 0000000000..d2c781627b
---- /dev/null
-+++ b/tools/binman/etype/efi_empty_capsule.py
-@@ -0,0 +1,91 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2023 Linaro Limited
-+#
-+# Entry-type module for producing an empty  EFI capsule
-+#
-+
-+import os
-+
-+from binman.entry import Entry
-+from binman.etype.section import Entry_section
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
-+
-+class Entry_efi_empty_capsule(Entry_section):
-+    """Generate EFI empty capsules
-+
-+    The parameters needed for generation of the empty capsules can
-+    be provided as properties in the entry.
-+
-+    Properties / Entry arguments:
-+    - image-guid: Image GUID which will be used for identifying the
-+      updatable image on the board. Mandatory for accept capsule.
-+    - accept-capsule - Boolean property to generate an accept capsule.
-+      image-type-id
-+    - revert-capsule - Boolean property to generate a revert capsule
-+
-+    For more details on the description of the capsule format, and the capsule
-+    update functionality, refer Section 8.5 and Chapter 23 in the `UEFI
-+    specification`_. For more information on the empty capsule, refer the
-+    sections 2.3.2 and 2.3.3 in the `Dependable Boot specification`_.
-+
-+    A typical accept empty capsule entry node would then look something like this
-+
-+    empty-capsule {
-+            type = "efi-empty-capsule";
-+            /* Image GUID for testing capsule update */
-+            image-type-id = SANDBOX_UBOOT_IMAGE_GUID;
-+            accept-capsule;
-+    };
-+
-+    A typical revert empty capsule entry node would then look something like this
-+
-+    empty-capsule {
-+            type = "efi-empty-capsule";
-+            revert-capsule;
-+    };
-+
-+    The empty capsules do not have any input payload image.
-+
-+    .. _`UEFI specification`: https://uefi.org/sites/default/files/resources/UEFI_Spec_2_10_Aug29.pdf
-+    .. _`Dependable Boot specification`: https://git.codelinaro.org/linaro/dependable-boot/mbfw/uploads/6f7ddfe3be24e18d4319e108a758d02e/mbfw.pdf
-+    """
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.accept = 0
-+        self.revert = 0
-+
-+    def ReadNode(self):
-+        super().ReadNode()
-+
-+        self.image_guid = fdt_util.GetString(self._node, 'image-guid')
-+        self.accept = fdt_util.GetBool(self._node, 'accept-capsule')
-+        self.revert = fdt_util.GetBool(self._node, 'revert-capsule')
-+
-+        if self.accept and not self.image_guid:
-+            self.Raise('Image GUID needed for generating accept capsule')
-+
-+        if self.accept and self.revert:
-+            self.Raise('Need to enable either Accept or Revert capsule')
-+
-+    def BuildSectionData(self, required):
-+        def get_binman_test_guid(type_str):
-+            TYPE_TO_GUID = {
-+                'binman-test' : '09d7cf52-0720-4710-91d1-08469b7fe9c8'
-+            }
-+            return TYPE_TO_GUID[type_str]
-+
-+        uniq = self.GetUniqueName()
-+        outfile = self._filename if self._filename else 'capsule.%s' % uniq
-+        capsule_fname = tools.get_output_filename(outfile)
-+        guid = self.image_guid
-+        if self.image_guid == "binman-test":
-+            guid = get_binman_test_guid('binman-test')
-+
-+        ret = self.mkeficapsule.generate_empty_capsule(self.accept, self.revert,
-+                                                       guid, capsule_fname)
-+        if ret is not None:
-+            return tools.read_file(capsule_fname)
-+
-+    def AddBintools(self, btools):
-+        self.mkeficapsule = self.AddBintool(btools, 'mkeficapsule')
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 654af2c617..dbb3e3f1f8 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -124,6 +124,9 @@ TEE_ADDR = 0x5678
- FW_MGMT_GUID = 'edd5cb6d2de8444cbda17194199ad92a'
- # Image GUID specified in the DTS
- CAPSULE_IMAGE_GUID = '52cfd7092007104791d108469b7fe9c8'
-+# Empty capsule GUIDs
-+EMPTY_CAPSULE_ACCEPT_GUID = '4660990cc0bc044d85ece1fcedf1c6f8'
-+EMPTY_CAPSULE_REVERT_GUID = '4b8bd5ace8c05f4799b56b3f7e07aaf0'
- 
- class TestFunctional(unittest.TestCase):
-     """Functional tests for binman
-@@ -7270,6 +7273,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             # payload offset for non-signed capsule with no version header(184 - 190)
-             self.assertEqual(payload_data.hex(), data.hex()[184:190])
- 
-+    def _CheckEmptyCapsule(self, data, accept_capsule=False):
-+        if accept_capsule:
-+            capsule_hdr_guid = EMPTY_CAPSULE_ACCEPT_GUID
-+        else:
-+            capsule_hdr_guid = EMPTY_CAPSULE_REVERT_GUID
-+
-+        # Empty Capsule Header GUID - offset(0 - 32)
-+        self.assertEqual(capsule_hdr_guid, data.hex()[:32])
-+
-+        if accept_capsule:
-+            capsule_size = "2c"
-+        else:
-+            capsule_size = "1c"
-+
-+        # size of the capsule header + contents - offset(48 - 50)
-+        self.assertEqual(capsule_size, data.hex()[48:50])
-+
-+        if accept_capsule:
-+            # capsule contents - offset(56 - 88)
-+            self.assertEqual(CAPSULE_IMAGE_GUID, data.hex()[56:88])
-+
-     def testCapsuleGen(self):
-         """Test generation of EFI capsule"""
-         data = self._DoReadFile('311_capsule.dts')
-@@ -7363,5 +7387,33 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         if not self.preserve_outdirs:
-             shutil.rmtree(self.tmpdir)
- 
-+    def testCapsuleGenAcceptCapsule(self):
-+        """Test generationg of accept EFI capsule"""
-+        data = self._DoReadFile('320_capsule_accept.dts')
-+
-+        self._CheckEmptyCapsule(data, accept_capsule=True)
-+
-+    def testCapsuleGenRevertCapsule(self):
-+        """Test generationg of revert EFI capsule"""
-+        data = self._DoReadFile('321_capsule_revert.dts')
-+
-+        self._CheckEmptyCapsule(data)
-+
-+    def testCapsuleGenAcceptGuidMissing(self):
-+        """Test that binman errors out on missing image GUID for accept capsule"""
-+        with self.assertRaises(ValueError) as e:
-+            self._DoReadFile('322_capsule_accept_missing_guid.dts')
-+
-+        self.assertIn("Image GUID needed for generating accept capsule",
-+                      str(e.exception))
-+
-+    def testCapsuleGenAcceptOrRevert(self):
-+        """Test that both accept and revert capsule are not specified"""
-+        with self.assertRaises(ValueError) as e:
-+            self._DoReadFile('323_capsule_accept_revert.dts')
-+
-+        self.assertIn("Need to enable either Accept or Revert capsule",
-+                      str(e.exception))
-+
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/binman/test/320_capsule_accept.dts b/tools/binman/test/320_capsule_accept.dts
-new file mode 100644
-index 0000000000..4d6c005019
---- /dev/null
-+++ b/tools/binman/test/320_capsule_accept.dts
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		efi-empty-capsule {
-+			/* Image GUID for testing capsule update */
-+			image-guid = "binman-test";
-+			accept-capsule;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/321_capsule_revert.dts b/tools/binman/test/321_capsule_revert.dts
-new file mode 100644
-index 0000000000..eeaa2793a5
---- /dev/null
-+++ b/tools/binman/test/321_capsule_revert.dts
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		efi-empty-capsule {
-+			revert-capsule;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/322_capsule_accept_missing_guid.dts b/tools/binman/test/322_capsule_accept_missing_guid.dts
-new file mode 100644
-index 0000000000..6f7062e83e
---- /dev/null
-+++ b/tools/binman/test/322_capsule_accept_missing_guid.dts
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		efi-empty-capsule {
-+			accept-capsule;
-+		};
-+	};
-+};
-diff --git a/tools/binman/test/323_capsule_accept_revert.dts b/tools/binman/test/323_capsule_accept_revert.dts
-new file mode 100644
-index 0000000000..c68e76a669
---- /dev/null
-+++ b/tools/binman/test/323_capsule_accept_revert.dts
-@@ -0,0 +1,17 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		efi-empty-capsule {
-+			/* Image GUID for testing capsule update */
-+			image-guid = "binman-test";
-+			accept-capsule;
-+			revert-capsule;
-+		};
-+	};
-+};
--- 
-2.34.1
+Thanks for looping me.
 
+>>
+>> https://lore.kernel.org/all/ZO9GLG5tQynYyAvR@pluto/T/
+> 
+> I made a comment there.
+
+Thanks for help reviewing.
+
+> 
+> BTW, do you already have your own implementation of SCMI pin control
+> protocol at SCMI firmware(server)?
+
+We follow the SCMI 3.2 pinctrl protocol, but use OEM config type.
+
+> Is it public available?
+
+The firmware is not public for now, but I could share
+the config set array, something like this:
+MUX TYPE, MUX REG, CONF_TYPE, CONF REG,
+DAISY TYPE, DAISY ID, DAISY VALUE.
+
+Regards,
+Peng.
+
+
+> 
+> -Takahiro Akashi
+> 
+> 
+>> On Tue, Sep 5, 2023 at 11:41 PM AKASHI Takahiro
+>> <takahiro.akashi@linaro.org> wrote:
+>>>
+>>> This is an RFC and meant to get feedback from other developers as
+>>> - the specification (pinctrl part) is still in a draft
+>>> - the upstream patch for linux, including dt bindings, is still WIP
+>>> - I'm not confident the drivers are generic enough to cover most HWs
+>>> - The tests ("ut") doesn't cover all the features yet
+>>>
+>>>
+>>> This patch series allows users to access SCMI pin control protocol provided
+>>> by SCMI server (platform). See SCMI specification document v3.2 beta 2[1]
+>>> for more details about SCMI pin control protocol.
+>>>
+>>> The implementation consists of two layers:
+>>> - basic helper functions for SCMI pin control protocol
+>>>    in drivers/firmware/scmi/pinctrl.c (patch#2)
+>>> - DM-compliant pinctrl/gpio drivers, which utilizes the helper functions,
+>>>    in drivers/pinctrl/pinctrl-scmi.c (patch#3,#4)
+>>>
+>>> [1] https://developer.arm.com/documentation/den0056/e/?lang=en
+>>>
+>>> DT bindings
+>>> ===========
+>>> Upstream pinctrl patch for linux defines the bindings in [2] though
+>>> it doesn't say much.
+>>> I expect that my implementation basically complies with U-Boot's generic
+>>> bindings described in [3], but not all the features are verified.
+>>>
+>>> As for gpio, unless you hard-code pin assignments directly in a device
+>>> driver, my implementation allows the following alternatives in DT.
+>>> Either way, we may need an additional binding description for gpio.
+>>>
+>>> (A)
+>>>      scmi {
+>>>          ... // other protocols
+>>>          scmi_pinctrl: protocol@19 { // Pin control protocol
+>>>              ...
+>>>              {pinmux definitions}... // if any, including GPIO?
+>>>          }
+>>>      }
+>>>      scmi_gpio: scmi_gpio {
+>>>          compatible = "arm,scmi-gpio-generic";
+>>>          gpio-controller;
+>>>          #gpio-cells = <2>;
+>>>          gpio-ranges = <&scmi_pinctrl 0 5 4>,
+>>>                        <&scmi_pinctrl 4 0 0>;
+>>>          gpio-ranges-group-names = "",
+>>>                                    "ANOTHER_GPIO_GROUP";
+>>>      }
+>>>      some_device {
+>>>          ...
+>>>          reset-gpios = <&scmi_gpio 0 GPIO_ACTIVE_HIGH>;
+>>>      }
+>>> (B)
+>>>      scmi {
+>>>          ... // other protocols
+>>>          scmi_pinctrl: protocol@19 { // Pin control protocol
+>>>              ...
+>>>              {pinmux definitions}... // if any, including GPIO?
+>>>
+>>>              scmi_gpio: scmi_gpio {
+>>>                  // no need for "compatible"
+>>>                  gpio-controller;
+>>>                  #gpio-cells = <2>;
+>>>                  gpio-ranges = <&scmi_pinctrl 0 5 4>,
+>>>                                <&scmi_pinctrl 4 0 0>;
+>>>                  gpio-ranges-group-names = "",
+>>>                                            "ANOTHER_GPIO_GROUP";
+>>>              }
+>>>          }
+>>>      }
+>>>      some_device {
+>>>          ...
+>>>          reset-gpios = <&scmi_gpio 0 GPIO_ACTIVE_HIGH>;
+>>>      }
+>>> (C)
+>>>      if "gpio-ranges" is missing in gpio definition, assume 1:1 mapping,
+>>>      i.e. use a native pinctrl pin number (5).
+>>>      some_device {
+>>>          ...
+>>>          reset-gpios = <&scmi_gpio 5 GPIO_ACTIVE_HIGH>;
+>>>      }
+>>>
+>>>
+>>> [2] https://lkml.iu.edu/hypermail/linux/kernel/2308.1/01084.html
+>>> [3] <u-boot>/doc/device-tree-bindings/pinctrl/pinctrl-bindings.txt
+>>>      <u-boot>/doc/device-tree-bindings/gpio/gpio.txt
+>>>
+>>> Test
+>>> ====
+>>> The patch series was tested on the following platforms:
+>>> * sandbox ("ut dm pinmux" and manually using gpio command)
+>>>
+>>>
+>>> Prerequisite:
+>>> =============
+>>> * This patch series is based on my WIP "Base protocol support" patches
+>>>    on v2023.10-rc3. You can fetch the whole code from [4].
+>>>
+>>> [4] https://git.linaro.org/people/takahiro.akashi/u-boot.git
+>>>      branch:scmi/pinctrl
+>>>
+>>>
+>>> Patches:
+>>> ========
+>>> Patch#1: Add SCMI base protocol driver
+>>> Patch#2-#4: Add drivers
+>>> Patch#5-#6: Test related
+>>>
+>>>
+>>> Change history:
+>>> ===============
+>>> RFC (Sep 6, 2023)
+>>> * initial release as RFC
+>>>
+>>> AKASHI Takahiro (6):
+>>>    firmware: scmi: fix protocol enumeration logic
+>>>    firmware: scmi: add pinctrl protocol support
+>>>    pinctrl: add scmi driver
+>>>    gpio: add scmi driver based on pinctrl
+>>>    firmware: scmi: add pseudo pinctrl protocol support on sandbox
+>>>    test: dm: add SCMI pinctrl test
+>>>
+>>>   arch/sandbox/dts/test.dts                  |  115 +++
+>>>   cmd/scmi.c                                 |    1 +
+>>>   drivers/firmware/scmi/Kconfig              |    3 +
+>>>   drivers/firmware/scmi/Makefile             |    1 +
+>>>   drivers/firmware/scmi/pinctrl.c            |  412 ++++++++
+>>>   drivers/firmware/scmi/sandbox-scmi_agent.c |  722 +++++++++++++
+>>>   drivers/firmware/scmi/scmi_agent-uclass.c  |   18 +-
+>>>   drivers/pinctrl/Kconfig                    |   11 +
+>>>   drivers/pinctrl/Makefile                   |    1 +
+>>>   drivers/pinctrl/pinctrl-scmi.c             | 1071 ++++++++++++++++++++
+>>>   include/scmi_agent-uclass.h                |    2 +
+>>>   include/scmi_protocols.h                   |  435 ++++++++
+>>>   test/dm/scmi.c                             |   62 ++
+>>>   13 files changed, 2852 insertions(+), 2 deletions(-)
+>>>   create mode 100644 drivers/firmware/scmi/pinctrl.c
+>>>   create mode 100644 drivers/pinctrl/pinctrl-scmi.c
+>>>
+>>> --
+>>> 2.34.1
+>>>
