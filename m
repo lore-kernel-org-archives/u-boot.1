@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393A4EEB564
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 17:50:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990B7EEB562
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 18:05:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6041086997;
-	Fri,  8 Sep 2023 19:50:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 887F6869CD;
+	Fri,  8 Sep 2023 20:05:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fMmcF5IT";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="FS6+r1nR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9D1886997; Fri,  8 Sep 2023 19:50:04 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 13040869E6; Fri,  8 Sep 2023 20:05:00 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23D5D864C4
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 19:50:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8417869BC
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 20:04:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-52c9be5e6f0so2942458a12.1
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 10:50:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694195401; x=1694800201; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VBRi1kO/pgl2wy6ePbj6Gf5uQj5Hradl4IEBz59rQoY=;
- b=fMmcF5ITI7+tBIsFznnCbD7JoonoDpfuKtN2PJbWsI4mUEjTi+G5n8kHtDuCOU0IEC
- FhY88FAwrGr+0erQ2wQNL5/EvloNenACQz4AX6+pbhaeFxlPxuCTYkQg+gp1Ru2LKSNa
- FcLSMnBprdLolR4Gn4sgSrAW23GGpdnskB4u9fRATMuIUInxepl+/VZC66AsjFrp1XyN
- 2RKyBY8SFTPYXgDpK3+bVNrxCSXfBnfDEliihVLKcAudMsYyQ2MvGxbq9kZp9NiDnkTs
- 2mrtFC/ZDTPl3x6hGeKYQJ1GcKWj3gasLQ9b6PKt2DxvDDIFMf8Q3+E/8UrKKuNoWUM7
- BZXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694195401; x=1694800201;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VBRi1kO/pgl2wy6ePbj6Gf5uQj5Hradl4IEBz59rQoY=;
- b=apGVBnsPDPTRe1E9MVZB0QQ46VVfge0qZ9mv3AlhcIUZuJZYqrIyscALbLLqdT0Y99
- LX1Hj4BooeM0MyWitAenTtjgtvrkRNHBY6fSM5+XdygWlAbCEFFJRqtGQhpSkX68RDBw
- Bqy9Vq6Asnf0gZWCnTM3WMvordIuh1+FWkaBGspmMBVifHcoCeX057ZeBTp/XnkA0e4W
- zJjEQRZxTlFTmx7c1fyQj2Q8CREmJV0yBwSTD7/S6AQUnsviz+98kcVyFCN2B5XjDQ27
- jSAHAmFM+Zql8wFqP5cZyeyaQ/79C2g0KReCC927VE1keLfRpmV+LCJWylm8zjbfH7BS
- xpug==
-X-Gm-Message-State: AOJu0YztoJ+oBz0NKuo/E6ZToAlKiBaq8bk1pr9vnb+Rd3PHZdoTWR19
- v03z0NUB+AOj/VT11mjYdd+xMCrka7fhJ8a0OkA=
-X-Google-Smtp-Source: AGHT+IFxHFfBmw1VX2xWXw13NOYl0sWQxdky3XV/Npomf48KWrunhGC9S7PnTQAkaS4ypMF0UpTRehwbhdLj7ikEprk=
-X-Received: by 2002:a05:6402:3229:b0:525:466c:5fda with SMTP id
- g41-20020a056402322900b00525466c5fdamr2271593eda.28.1694195401464; Fri, 08
- Sep 2023 10:50:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230907213923.25948-1-mibodhi@gmail.com>
-In-Reply-To: <20230907213923.25948-1-mibodhi@gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 8 Sep 2023 10:49:49 -0700
-Message-ID: <CAJaLiFzNXpHq==m-OLRO=FAbi3m+fvbohqE14vOZzVFwOw1scg@mail.gmail.com>
-Subject: Re: [PATCH v2] bootstd: sata: Add bootstd support for ahci sata
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 21d52880-4e72-11ee-ac31-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 21d52880-4e72-11ee-ac31-005056994fde;
+ Fri, 08 Sep 2023 20:04:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=content-type:mime-version:subject:to:from:message-id:date;
+ bh=pyfrXJLLLsYEKHgOARtGppEaPGum4EAKs0hFSnfD2bc=;
+ b=FS6+r1nRh2nIrF0o3MTPAI4+7NWFQuADQE75lT1pKOqKG5MbYm38O+S/qNv8RmxxYKSMonTORgi+7
+ bnCwsUeA9IUuaHtl923K+l2c0bSle7qdhiUokSRm6ccYvvUxFy/eVUCv0L39si9Qs/0txO+l0Pq7t9
+ hoMcjWDICRS3Chg8Qwcd7hMAB6SijipJcszN0s/ZrfjtEvxQ0a//FOPAcV1Lu1VO6aCtAXW6LJHH/F
+ 1USSH1aVFe6tnkZQO/oAeAdl4Dh+9AZCt2DuvG2z3OpitSx+2iW//0aomyvrgSOoO+OEDXardl0pVw
+ KTFgcjoD3nT6I6fb8MasyMKQltQppEA==
+X-KPN-MID: 33|a163+kmlEqD13VIlA6BNXkuZKw+c8+6JwkdwQib/J0Q/pS86XkVE8kXDuI9rO4P
+ XtCiadBugO0PRvYGgmH6DUyRm5SV7pcI/Pym9OxeVZv0=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|0PWFkMSBFf5EcbdH3BCh/VyOpNRtMeDxsF/PY2MnNd9SwC+uxKepesvpnEDqKzm
+ OZ8zbw7bFVek9cGNZv8gmZQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 371de594-4e72-11ee-acaa-00505699d6e5;
+ Fri, 08 Sep 2023 20:04:56 +0200 (CEST)
+Date: Fri, 08 Sep 2023 20:04:55 +0200
+Message-Id: <875y4kh77c.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Jassi Brar <jassisinghbrar@gmail.com>
+Cc: sjg@chromium.org, ilias.apalodimas@linaro.org, robh@kernel.org,
+ pbrobinson@gmail.com, sughosh.ganu@linaro.org,
+ u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de
+In-Reply-To: <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
+ (message from Jassi Brar on Fri, 8 Sep 2023 09:37:12 -0500)
+Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
+References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
+ <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
+ <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
+ <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
+ <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
+ <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
+ <20230906142139.GA1236014-robh@kernel.org> <ZPldgbS8mu+5DG7Q@hera>
+ <CAPnjgZ0kcOZp65d_-wwYyjbTwC-aDamvGU50aa34o2PeZjZk6Q@mail.gmail.com>
+ <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
+MIME-version: 1.0
+Content-type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,197 +86,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 7, 2023 at 2:39=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrote:
->
-> Add ahci sata bootdev and corresponding hunting function.
->
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
->
-> Changes in v2:
-> - set devtype to sata in bootmeth_script for non-scsi SATA device
->
->  boot/bootmeth_script.c     | 12 ++++++--
->  drivers/ata/Makefile       |  1 +
->  drivers/ata/sata.c         | 25 +++++++++++++++
->  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
->  include/sata.h             |  1 +
->  5 files changed, 99 insertions(+), 2 deletions(-)
->  create mode 100644 drivers/ata/sata_bootdev.c
->
-> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-> index a4050c384d..3113183fb0 100644
-> --- a/boot/bootmeth_script.c
-> +++ b/boot/bootmeth_script.c
-> @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct =
-bootflow *bflow)
->         ulong addr;
->         int ret;
->
-> -       if (desc->uclass_id =3D=3D UCLASS_USB)
-> +       if (desc->uclass_id =3D=3D UCLASS_USB) {
->                 ret =3D env_set("devtype", "usb");
-> -       else
-> +       } else {
->                 ret =3D env_set("devtype", blk_get_devtype(bflow->blk));
-> +
-> +               /* If the parent uclass is AHCI, but the driver is ATA
-> +                * (not scsi), set devtype to sata
-> +                */
-> +               if (!ret && IS_ENABLED(CONFIG_SATA) &&
-> +                   !strcmp("ahci", env_get("devtype")))
-> +                       ret =3D env_set("devtype", "sata");
-> +       }
->         if (!ret)
->                 ret =3D env_set_hex("devnum", desc->devnum);
->         if (!ret)
-> diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
-> index 6e30180b8b..c1b51b5444 100644
-> --- a/drivers/ata/Makefile
-> +++ b/drivers/ata/Makefile
-> @@ -11,6 +11,7 @@ obj-$(CONFIG_DWC_AHSATA) +=3D dwc_ahsata.o
->  obj-$(CONFIG_FSL_SATA) +=3D fsl_sata.o
->  obj-$(CONFIG_LIBATA) +=3D libata.o
->  obj-$(CONFIG_SATA) +=3D sata.o
-> +obj-$(CONFIG_BOOTSTD) +=3D sata_bootdev.o
->  obj-$(CONFIG_SATA_CEVA) +=3D sata_ceva.o
->  obj-$(CONFIG_SATA_MV) +=3D sata_mv.o
->  obj-$(CONFIG_SATA_SIL) +=3D sata_sil.o
-> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-> index ce3e9b5a40..9da7218564 100644
-> --- a/drivers/ata/sata.c
-> +++ b/drivers/ata/sata.c
-> @@ -15,6 +15,8 @@
->  #include <dm.h>
->  #include <part.h>
->  #include <sata.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/uclass-internal.h>
->
->  #ifndef CONFIG_AHCI
->  struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
-> @@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
->         return ops->scan(dev);
->  }
->
-> +int sata_rescan(bool verbose)
-> +{
-> +       struct udevice *dev;
-> +       int devnum =3D 0;
-> +       int ret;
-> +
-> +       /* Find and probing the SATA controller */
-> +       ret =3D uclass_get_device(UCLASS_AHCI, devnum, &dev);
-> +
-> +       /* Sanity check */
-> +       if (ret)
-> +               ret =3D uclass_find_first_device(UCLASS_AHCI, &dev);
-> +       if (ret) {
-> +               printf("Cannot probe SATA device %d (err=3D%d)\n", devnum=
-, ret);
-> +               return -ENOSYS;
-> +       }
-> +       if (!dev) {
-> +               printf("No SATA device found!\n");
-> +               return -ENOSYS;
-> +       }
-> +       return 0;
-> +}
-> +
->  #ifndef CONFIG_AHCI
->  #ifdef CONFIG_PARTITIONS
->  struct blk_desc *sata_get_dev(int dev)
-> diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
-> new file mode 100644
-> index 0000000000..f638493ce0
-> --- /dev/null
-> +++ b/drivers/ata/sata_bootdev.c
-> @@ -0,0 +1,62 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Bootdev for sata
-> + *
-> + * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
-> + */
-> +
-> +#include <common.h>
-> +#include <ahci.h>
-> +#include <bootdev.h>
-> +#include <dm.h>
-> +#include <init.h>
-> +#include <sata.h>
-> +
-> +static int sata_bootdev_bind(struct udevice *dev)
-> +{
-> +       struct bootdev_uc_plat *ucp =3D dev_get_uclass_plat(dev);
-> +
-> +       ucp->prio =3D BOOTDEVP_4_SCAN_FAST;
-> +
-> +       return 0;
-> +}
-> +
-> +static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
-> +{
-> +       int ret;
-> +
-> +       if (IS_ENABLED(CONFIG_PCI)) {
-> +               ret =3D pci_init();
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
-> +       ret =3D sata_rescan(true);
-> +       if (ret)
-> +               return ret;
-> +
-> +       return 0;
-> +}
-> +
-> +struct bootdev_ops sata_bootdev_ops =3D {
-> +};
-> +
-> +static const struct udevice_id sata_bootdev_ids[] =3D {
-> +       { .compatible =3D "u-boot,bootdev-sata" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(sata_bootdev) =3D {
-> +       .name           =3D "sata_bootdev",
-> +       .id             =3D UCLASS_BOOTDEV,
-> +       .ops            =3D &sata_bootdev_ops,
-> +       .bind           =3D sata_bootdev_bind,
-> +       .of_match       =3D sata_bootdev_ids,
-> +};
-> +
-> +BOOTDEV_HUNTER(sata_bootdev_hunter) =3D {
-> +       .prio           =3D BOOTDEVP_4_SCAN_FAST,
-> +       .uclass         =3D UCLASS_AHCI,
-> +       .hunt           =3D sata_bootdev_hunt,
-> +       .drv            =3D DM_DRIVER_REF(sata_bootdev),
-> +};
-> diff --git a/include/sata.h b/include/sata.h
-> index d89f7a8a29..0495744bad 100644
-> --- a/include/sata.h
-> +++ b/include/sata.h
-> @@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
->
->  int sata_probe(int devnum);
->  int sata_remove(int devnum);
-> +int sata_rescan(bool verbose);
->
->  #endif
-> --
-> 2.39.2
->
+> From: Jassi Brar <jassisinghbrar@gmail.com>
+> Date: Fri, 8 Sep 2023 09:37:12 -0500
+> 
+> Hi Simon,
+> 
+> On Thu, Sep 7, 2023 at 3:08 PM Simon Glass <sjg@chromium.org> wrote:
+> > On Wed, 6 Sept 2023 at 23:20, Ilias Apalodimas
+> > >
+> > > > > I beg to differ. Devicetree is more than just hardware and always has
+> > > > > been. See, for example the /chosen and /options nodes.
+> > > >
+> > > > There are exceptions...
+> > > >
+> > >
+> > > We've been this over and over again and frankly it gets a bit annoying.
+> > > It's called *DEVICE* tree for a reason.  As Rob pointed out there are
+> > > exceptions, but those made a lot of sense.  Having arbitrary internal ABI
+> > > stuff of various projects in the schema just defeats the definition of a
+> > > spec.
+> >
+> > Our efforts should not just be about internal ABI, but working to
+> > provide a consistent configuration system for all firmware elements.
+> >
+> Sure, programmatically we can pass any data/info via DT, however it is
+> only meant to map hardware features onto data structures.
+> 
+> devicetree.org  landing page
+>     "The devicetree is a data structure for describing hardware."
+> 
+> devicetree-specification-v0.3.pdf  Chapter-2 Line-1
+>    "DTSpec specifies a construct called a devicetree to describe
+> system hardware."
 
-Sorry, looks like I need to send in the V3 patch to correct this Make
-file patch. I was not aware that CONFIG_BOOTSTD is now automatically
-enabled.
+But it doesn't say that it describes *only* hardware.  And it does
+describe more than just hardware.  There is /chosen to specify
+firmware configuration and there are several examples of device tree
+bindings that describe non-discoverable firmware interfaces in the
+Linux tree.  And it has been that way since the days of IEEE 1275.
+There are also bindings describing things like the firmware partition
+layout.
 
-diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
--obj-$(CONFIG_SATA) +=3D sata.o
--obj-$(CONFIG_BOOTSTD) +=3D sata_bootdev.o
-+obj-$(CONFIG_SATA) +=3D sata.o sata_bootdev.o
+> If we want to digress from the spec, we need the majority of
+> developers to switch sides :)  which is unlikely to happen and rightly
+> so, imho.
 
-All the best,
-Tony
+It isn't even clear what the spec is.  There is the document you
+reference above, there are the yaml files at
+https://github.com/devicetree-org/dt-schema and then there are
+additional yaml files in the Linux tree.  As far as I know it isn't
+written down anywhere that those are the only places where device tree
+bindings can live.
+
+Anyway, let's face it, there is some consensus among developers that
+what Simon has done in U-Boot is pushing the use of devicetree beyond
+the point where a significant fraction of developers thinks it makes
+sense.  And I think I agree with that.  But you can't beat him with
+the spec to make your point.
+
+Now the devicetree is cleverly constructed such that it is possible to
+define additional bindings without the risk of conflicting with
+bindings developed by other parties.  In particular if U-Boot is
+augmenting a device tree with properties that are prefixed with
+"u-boot," this isn't going to hurt an operating system that uses such
+an augmented device tree.
+
+The real problem is that some folks developed a certification program
+that allegedly requires schema verification and now propose adding
+code to U-Boot that doesn't really solve any problem.  My proposed
+solution would be to change said certification program to allow
+firmware to augment the device tree with properties and nodes with
+compatibles that are in the namespace controlled by the firmware.
+
+Cheers,
+
+Mark
+
