@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E514EC8732
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 03:14:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B38EE14C3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 03:34:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C77A868D1;
-	Fri,  8 Sep 2023 05:14:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE1298643D;
+	Fri,  8 Sep 2023 05:34:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JZDDDU7Y";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GnKeA7NV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DE9E86682; Fri,  8 Sep 2023 05:14:25 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id B1E1A8477A; Fri,  8 Sep 2023 05:34:39 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74FB1869AC
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 05:14:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7692B8643D
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 05:34:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3883EI30000714;
- Thu, 7 Sep 2023 22:14:18 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3883YWfU002547;
+ Thu, 7 Sep 2023 22:34:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694142858;
- bh=N5Ajo7ETNaEuFN5Rmx7QtXIohjiiQIwo0zPeTetiYUc=;
+ s=ti-com-17Q1; t=1694144072;
+ bh=P5iAGNHuBMKrY1ozLgWoKUxviaksfPJl4gOifGBh9yc=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=JZDDDU7YNKQXRNejoyZ4hzSl6XsdIqEIVBhgx5pm7RvbN8gSkaiIESd+7A0PHpLLy
- DNfIBOj9ANdESrxKmv/1A4GJD/mA+dDXfM7NNok+tE8h0vHjle/SUwX+a9+KtEFf3S
- a/NgtlzMvq6owo7JwdzRjT/Qrz8k3Yib0tH2byak=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3883EIDY064628
+ b=GnKeA7NVgKxBOgIXB2Nmp9MkHmISWeD/dXR8uolfllDpdfxq1ABhDFw3O1y5GwAfo
+ P69vnmnpMhd96gxUn4F3TbwoV2hwSHcJyXOiKk2q1mZvSWBCyHi1vRzR2B7Hmhkkjb
+ h5kg72KS679IVfoi2SXuvAI4dEzFHmZBRaZQ23uY=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3883YWnO076772
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Sep 2023 22:14:18 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 7 Sep 2023 22:34:32 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Sep 2023 22:14:18 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 22:34:31 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Sep 2023 22:14:18 -0500
+ Frontend Transport; Thu, 7 Sep 2023 22:34:32 -0500
 Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3883EDV5103418;
- Thu, 7 Sep 2023 22:14:14 -0500
-Message-ID: <535f60a7-34bb-40b9-14c0-65d0df4ecdc5@ti.com>
-Date: Fri, 8 Sep 2023 08:44:12 +0530
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3883YRMd020564;
+ Thu, 7 Sep 2023 22:34:28 -0500
+Message-ID: <feeb284f-c9dc-1565-8ad6-283fdf02344e@ti.com>
+Date: Fri, 8 Sep 2023 09:04:26 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH v2 3/7] arm: mach-k3: j721e_init: Move clk_k3 probe before
- loading TIFS
+Subject: Re: [PATCH v2 4/7] drivers: firmware: ti_sci: Get SCI revision only
+ if TIFS/SYSFW is up
 Content-Language: en-US
 To: Nishanth Menon <nm@ti.com>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
@@ -63,10 +63,10 @@ CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
  <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>
 References: <20230907141407.382215-1-n-francis@ti.com>
- <20230907141407.382215-4-n-francis@ti.com>
- <20230907150301.ro3dnojvridbkfc2@gosling>
+ <20230907141407.382215-5-n-francis@ti.com>
+ <20230907150516.v3tsushxhcucmmsl@undergrad>
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230907150301.ro3dnojvridbkfc2@gosling>
+In-Reply-To: <20230907150516.v3tsushxhcucmmsl@undergrad>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -88,76 +88,84 @@ X-Virus-Status: Clean
 
 Hi Nishanth
 
-On 07/09/23 20:33, Nishanth Menon wrote:
+On 07/09/23 20:35, Nishanth Menon wrote:
 > On 19:44-20230907, Neha Malcom Francis wrote:
->> Since we need to configure required clocks before TIFS is loaded, move
->> clk_k3 driver probe before k3_sysfw_loader.
+>> While setting up necessary dependent clocks and power domains, we end up
+>> probing the ti_sci driver before TIFS/SYSFW has been loaded in the case
+>> of legacy boot flow devices. This leads to panic when getting the SCI
+>> revision. Return the revision only if it is combined boot flow. Also
 > 
-> This needs further elaboration. what kind of clocks are we talking
-> about? what is the call sequence that is involved that this is solving?
+> Not clear description of the problem.
+
+Hmm okay I will modify this and the earlier commit message to give a clearer 
+picture.
+
 > 
-
-When setting up our boot media to take in the TIFS binary (sysfw.itb) in legacy 
-boot flow  (followed by J721E) what we end up doing is a get_timer() which by 
-call stack will eventually call dm_timer_init() and then get our "tick-timer" in 
-our case mcu_timer0. Now mcu_timer0 uses k3_clks (clock-controller) and k3_pds 
-(power controller) from the dmsc node that forces probe of the ti_sci driver 
-(for TIFS that hasn't been loaded yet!).
-
-So we have two issues that need to be solved here, one of not having set the 
-required devices and clocks before we even stat to probe their dependent 
-devices, and two of handling how ti_sci reacts when TIFS is not even up yet. 
-This patch solves the former.
-
-Would this be excessive detailing for a commit message?
-
+>> ensure that after TIFS/SYSFW comes up we run ti_sci_cmd_get_revision
+>> again so we print the revision right.
 >>
 >> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 >> ---
->>   arch/arm/mach-k3/j721e_init.c | 24 ++++++++++++------------
->>   1 file changed, 12 insertions(+), 12 deletions(-)
+>>   drivers/firmware/ti_sci.c | 9 ++++++++-
+>>   1 file changed, 8 insertions(+), 1 deletion(-)
 >>
->> diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
->> index b6164575b7..b1f7e25ed0 100644
->> --- a/arch/arm/mach-k3/j721e_init.c
->> +++ b/arch/arm/mach-k3/j721e_init.c
->> @@ -228,6 +228,18 @@ void board_init_f(ulong dummy)
->>   	if (!ret)
->>   		pinctrl_select_state(dev, "default");
+>> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+>> index 72f572d824..6a85d202f2 100644
+>> --- a/drivers/firmware/ti_sci.c
+>> +++ b/drivers/firmware/ti_sci.c
+>> @@ -2703,6 +2703,9 @@ struct ti_sci_handle *ti_sci_get_handle_from_sysfw(struct udevice *sci_dev)
+>>   	if (!handle)
+>>   		return ERR_PTR(-EINVAL);
 >>   
->> +	/*
->> +	 * Force probe of clk_k3 driver here to ensure basic default clock
->> +	 * configuration is always done.
->> +	 */
->> +	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
->> +		ret = uclass_get_device_by_driver(UCLASS_CLK,
->> +						  DM_DRIVER_GET(ti_clk),
->> +						  &dev);
->> +		if (ret)
->> +			panic("Failed to initialize clk-k3!\n");
->> +	}
+>> +	/* May have been skipped in case TIFS/SYSFW had come up later */
+> Very confusing comment.
+> 
+
+Understood, will change that.
+
+>> +	ti_sci_cmd_get_revision(handle);
+> 
+> should this be protected with if (IS_ENABLED(CONFIG_K3_DM_FW) ?
+> 
+> Since getting the handle is where the entire flow happens, why not do it
+> here always?
+> 
+
+This is a valid point, I am in the process of making sure there's no other 
+consequences to getting the revision this late for platforms with other boot 
+devices, if this gets an all clear, I will push it here for the next version, 
+else I will explain why I couldn't.
+
+> what if ti_sci_cmd_get_revision fails? there is no error handling here.
+
+Yes that would be a consequence since ti_sci_probe, the logic it was written; 
+used reading the version as an "all okay return 0" for the TIFS/SYSFW binary.
+
+But now after moving, ti_sci_get_handle_from_sysfw happens after k3_sysfw_loader 
+so we're not checking binary sanity early on in the case of combined boot
+
+I'm hesitant that we are checking version way later after k3_sysfw_loader for 
+combined platforms and if that is something we want? But there is an 
+advantage(?) that it will run every time someone tries to get a handle for doing 
+anything with TISCI and that would be a kind of check (?) if the binary is good? 
+Correct me if I'm wrong in thinking that.
+
 >> +
->>   	/*
->>   	 * Load, start up, and configure system controller firmware. Provide
->>   	 * the U-Boot console init function to the SYSFW post-PM configuration
->> @@ -241,18 +253,6 @@ void board_init_f(ulong dummy)
->>   	do_dt_magic();
->>   #endif
+>>   	return handle;
+>>   }
 >>   
->> -	/*
->> -	 * Force probe of clk_k3 driver here to ensure basic default clock
->> -	 * configuration is always done.
->> -	 */
->> -	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
->> -		ret = uclass_get_device_by_driver(UCLASS_CLK,
->> -						  DM_DRIVER_GET(ti_clk),
->> -						  &dev);
->> -		if (ret)
->> -			panic("Failed to initialize clk-k3!\n");
->> -	}
->> -
->>   	/* Prepare console output */
->>   	preloader_console_init();
+>> @@ -2825,7 +2828,11 @@ static int ti_sci_probe(struct udevice *dev)
+>>   	list_add_tail(&info->list, &ti_sci_list);
+>>   	ti_sci_setup_ops(info);
+>>   
+>> -	ret = ti_sci_cmd_get_revision(&info->handle);
+>> +	/* Get SCI revision ONLY if we are real */
+>> +	if (!IS_ENABLED(CONFIG_K3_DM_FW))
+>> +		ret = ti_sci_cmd_get_revision(&info->handle);
+>> +	else
+>> +		ret = 0;
+>>   
+>>   	INIT_LIST_HEAD(&info->dev_list);
 >>   
 >> -- 
 >> 2.34.1
