@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A7EEEB562
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 19:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B38EEB569
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 19:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B288386A1C;
-	Fri,  8 Sep 2023 21:16:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0EA186A4B;
+	Fri,  8 Sep 2023 21:28:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="I+w2+5u1";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tn7WaSbV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 751DB86A97; Fri,  8 Sep 2023 21:16:32 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id B5D9286A4B; Fri,  8 Sep 2023 21:28:26 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E26F0869EB
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 21:16:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24EB0869EB
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 21:28:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694200588; x=1694805388; i=xypron.glpk@gmx.de;
- bh=SbYi42X19GdEujHBJku0VwgWDtevx2HQMMkt1OrdGGQ=;
+ s=s31663417; t=1694201302; x=1694806102; i=xypron.glpk@gmx.de;
+ bh=PPoixplBuylQpvvpyhQT2WmiUQhkyM8UIaaYFlgqe1I=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=I+w2+5u1Y4TX+muaUjcjNAt7VlwbLEMFubp8EpH+vuykSdxby7YOV1E7w3+zsmqbs3l1QP/
- D7I7igdygRlnCKKMg3n8Xe4VLCwUNcI0THXdfTVuTltBWpqDZKQlJJNMQQ82DWLS1lnCloBpl
- gebG7/xBzSdAIxvy4/sfiifzIab1IgGUzj38VYes+e6SIIiX4d6BMfgPIHzRAHJrCk1NFG8cN
- AxQ2/qF8tbdhyb+GWW/bGDSs6r+b9igvBWJVE6/+la7LX2GPg0mOle1k3PsDWDbelev6oBScO
- AWRkMDX+adDMQAHd4U3Nw7sapEYxwgBqCMJWOf968xXD8MLGBgXw==
+ b=tn7WaSbVfVZ5KfgcBh3PFhdVTExxj7jgc7OOuPhZE7eN8az74gmrRrWtDRw8BMpQCKKsyRW
+ 9LCsuJJ6I2uY1ONJQzrYaS2qGvNAL0f6dfuBeJhRZxkh0kGYV+MTw71bJ/HjIEwFmJYblnuD1
+ ajw670221s11wRJ7ckCi+jhbWEFF3WBpSojJXp7RpCDxaIgFGL/30aOwrG8qmNvE3/KcecKo0
+ xUCL4bJAQ0pQwddijscOE1E97ROYUGcDgUrOeT/uGms4TlveOu3E+VlZYWtaOAicedpOwOzOW
+ FLsZtHEAyhWQugcd6QLs6p7M+UDPttLDpYkdt5z7DWCb0ICs2DpA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2f9b-1qcmDj2yD9-0049sm; Fri, 08
- Sep 2023 21:16:28 +0200
-Message-ID: <888a4523-0dfb-4b35-a809-947758519607@gmx.de>
-Date: Fri, 8 Sep 2023 21:17:31 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N0X8u-1pke3800qy-00wZ48; Fri, 08
+ Sep 2023 21:28:22 +0200
+Message-ID: <2e7387ce-e47a-4f51-8521-a43971ab62d4@gmx.de>
+Date: Fri, 8 Sep 2023 21:29:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: qemu: switch swtpm instruction to 'tpm autostart'
+Subject: Re: [PATCH v1] doc: Update path to source_file_format.rst
 Content-Language: en-US, de-DE
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: sjg@chromium.org, u-boot@lists.denx.de
-References: <20230616084253.490380-1-ilias.apalodimas@linaro.org>
+To: Joao Marcos Costa <jmcosta944@gmail.com>
+Cc: trini@konsulko.com, sjg@chromium.org, miquel.raynal@bootlin.com,
+ u-boot@lists.denx.de
+References: <20230907205045.15406-1-jmcosta944@gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230616084253.490380-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20230907205045.15406-1-jmcosta944@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:D6hczyfIyWR1DGpYOL7kWfCsYeQKYtNjIHJbRnXJY3rVWEq+adB
- ncCkk0HDwgXxA6r/CRk+l5LP9v2gOjsU0mUtfEEV7QdGj48ac4Fo6kwjMZiJ+tGZQqZLs4n
- mJpq4hC/beKH6MvUlZcWt4mR1E/RVSJVrrOXV8/1GI1LNJ7lftdussJGH71xoIxKd+IkYmH
- K+rQhnnO0DFaTc1gtI+mw==
-UI-OutboundReport: notjunk:1;M01:P0:f/FHegoE1lE=;RGKmbf5gTHf3KPmTb/5PfqbW7/n
- bwwVrLpNc8FoZtgGWiReTkPAm3HwqhfG6qh3Tp/8ZhIDLw5YsGGNp4mGTBIv2qMFz4c7gaBSp
- fbz8AE4RJtgtgY/dBRFDMultzb1+iyVoOa1h5N+0VNi4fl22SyIew6CzpScdvJzoN0lhZXz0/
- 1kGpOQNbzAQcoYo+2jJsd4BCyurpfUFG1c19GzrrgOY2uc1ca+q+5KBVxXjF1eDZC70PKasNK
- jDWy0uKHq23QSUUHy6k/xV5QsqVNb97qz6LTult2TuEqspe1nlmF4upUUAcn9tS5IyK+Z+IFA
- Z8j/619fY3DUru5JgiJFqlxVHBupa+KqKn72RNg7loCzPGG5M4QWfQiujxoDeznmmJKBVaPu7
- bCmgo+2m0MPUi8aeNHlzQ4phTIanObFeILSBF9U1Mne57X//+A4JXFRou09hJ9TRTDnegmIu0
- l1e+P5qCipGz1vky8nD5VSq1eRQWep5EhoiZXY26UZSqepUsLYtyEus77vIAPJ+GWbgyBMUkw
- OKUc5SM/Sib96TJx6KbCBVJE4fee0mrI4OG8ALekA8QlxdxrNsIP1Ves/Jv/4Zt7FiRynRNmX
- SOaWV4ozapsdY4vRLu3AI11vVopTBG5aMnXD699B+QWg3B8HhCDxKGXxdKbIskb9hW5qwqlvF
- otLTRuAor7cD/egqgib8WLUd4SM5K+F3oB3f602YOL0eYGGOXJ/XIiSHJ7z+ccgljNUSkarCm
- JL3hxUzYx/no40CUpfJir1355CKwMsfdw65QGdPIn+avb5zKzZYw9wu03SNOmf85hecqfGZKd
- FOi5rqrqpqM8ULG7KPFCoysAVoG5k9SHST3yrrraUiFHzmvYxPVtmEXDyEG1QvsrOEVf6i6yZ
- NKoSpbE5m4oqyUhcCpwmNSfhAwgHFjKHSWTwZixKUyrXqOdVyqoOA6EJu2BZRq6r0nwc3Benp
- cd4o6D7D4vpUDfZecc5ANPZacDw=
+X-Provags-ID: V03:K1:ci2P+ExMEj5Y0Aq0vc1/PKmkN6egdW9tllR6Zv4DPYCUeJoeW1z
+ ICXJseMnmRfV5MplHl5lB+POU1+Dda+PQzlawGha+OyYcKvWVhgzSfvziBWrxhQnlQqZix3
+ YQr7V8qgyG/PWjtzj/OQKJWU+awOPhkGN9ZqYCxrZXcXDwAPVrQ/AByBxLKUlkSXpyBwpN7
+ TD4k3jrUtf4Tq7bvh6plQ==
+UI-OutboundReport: notjunk:1;M01:P0:xD8xdVP2P8A=;evFRVj+bBgRnzRiXpUrAj7jCTS8
+ YPiT6xrYeZAr0M9+PnlX9mAJ42djhUCdZgjcVR4mbvN1kWl8FMsCGhg9jt079KOJhF2GphVwL
+ c6GnmWENW2WT/AsmvAHj291VIZMMUgBwDb5wDkuWlZoihTpWUT9V9gRjwYndI9V20T7h6IVh8
+ kqRPNAFWax2WaWr3wjciGvyZB/DVHK7fBqnA7sTJpVV97mhisi7QiNC4ez04whUR8iRxfSLTh
+ 4lqbe++foOM2eM/4EcL/yiUp6k/tI/U3+rbwPtrLKccjv1yu95I9Ku3oRUp1ECGMIaQFLxahX
+ FMZVbRg3slOLME291L+MCBZbECSqqJd4ID+/jZcciS3lH70g8KAT0UFl3U+htdXwcFV4LPduz
+ iI8vQdBO6i9Qkw4L5Y0V2HK933iGje58WwI/haJWoupweupNnnJqbG+NkVM0c839CfTnq54d0
+ ShFk42KwoPyhAaSJdEHmGeVLReXcpJAnx+AwWrtvbGSiJEZIf+V1TOK04rJrUJlaOaxvHRTqi
+ zqFToT8evpxfUFVnsLFpGE5WZw9AoWvJls4ODaVvfhAgp3j9J9bbk21otwIWEZt8y4Rqwt66O
+ rM1CgYjsVZ6/h+6q7fACH61cFag5vfptnJSpjyhVOn0bs1V1oEwOfGyRBNQXxgbJHO43W/54d
+ DSKN5mgqYt7yrtl6tPfYLf+igBiuGNQ5BqALIx1pBCQ+nejFrKE32D+Jzw1kEE/tjJ7+t68GE
+ yhdkd9Fg/tv5Ih1EbtMnfdeNa24R3TiXRTPjqGB4sTtI19u8+UyqTm6HrYuNBBTtb7SPgYfkl
+ nHwrWXALx1soyx9PnlLASkipOOnByUgc/Lbm18wKALDnEDGjnz9cpeygwZAVPxLjlqufv3L6M
+ V2S6EjogAjTlF/M/CXttedlG2VV8paFJXpSVNdLbiWrTw+4X3MKG2leKv3Liv7hqZYlm+9R0a
+ UjdCOWA6omBhXhINblGbrNlywME=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,41 +87,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 6/16/23 10:42, Ilias Apalodimas wrote:
-> We don't have a documentation page for our TPM subsystem.  I plan
-> on sending one in the future,  but in the meantime document the
-> new 'tpm autostart' command in the QEMU instructions while using
-> a SWTPM
+On 9/7/23 22:50, Joao Marcos Costa wrote:
+> Previously, the file extension was .txt, and it referenced the uImage.FI=
+T
+> directory, which no longer exists. This commit updates the path accordin=
+gly.
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
 > ---
->   doc/board/emulation/qemu-arm.rst | 2 +-
+>   doc/usage/fit/howto.rst | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu=
--arm.rst
-> index 16f66388eb1f..30819637723d 100644
-> --- a/doc/board/emulation/qemu-arm.rst
-> +++ b/doc/board/emulation/qemu-arm.rst
-> @@ -113,7 +113,7 @@ In a second console invoke qemu-system-aarch64 with:=
-:
->
->   Enable the TPM on U-Boot's command line with::
->
-> -    tpm2 startup TPM2_SU_CLEAR
-> +    tpm autostart
+> diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
+> index c933703d1d..8b38cd534d 100644
+> --- a/doc/usage/fit/howto.rst
+> +++ b/doc/usage/fit/howto.rst
+> @@ -22,7 +22,7 @@ for its latest version. mkimage (together with dtc) ta=
+kes as input
+>   an image source file, which describes the contents of the image and de=
+fines
+>   its various properties used during booting. By convention, image sourc=
+e file
+>   has the ".its" extension, also, the details of its format are given in
+> -doc/uImage.FIT/source_file_format.txt. The actual data that is to be in=
+cluded in
+> +doc/usage/fit/source_file_format.rst. The actual data that is to be inc=
+luded in
 
-Do you really intend switch from TPM v2 to the deprecated TPM v1?
+Thank you for updating the reference.
 
-I assume you mean "tpm2 autostart".
+In the HTML documentation we want to generate a link here using:
+
+     :doc:`source_file_format`
 
 Best regards
 
 Heinrich
 
->
->   Debug UART
->   ----------
+>   the uImage (kernel, ramdisk, etc.) is specified in the image source fi=
+le in the
+>   form of paths to appropriate data files. The outcome of the image crea=
+tion
+>   process is a binary file (by convention with the ".itb" extension) tha=
+t
+
