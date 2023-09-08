@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31BC8EB8FDE
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 02:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD81EB8FDE
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 02:53:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B84DB86A24;
-	Fri,  8 Sep 2023 04:52:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 133B186A34;
+	Fri,  8 Sep 2023 04:52:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yuBe6qSy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zDx/B85r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E502586A1A; Fri,  8 Sep 2023 04:52:31 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 8536C86A24; Fri,  8 Sep 2023 04:52:33 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D857F86995
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 04:52:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAED3869F6
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 04:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1bf7b5e1f06so3055835ad.0
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 19:52:28 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1bf11a7cf9fso3029595ad.1
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 19:52:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694141547; x=1694746347; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694141549; x=1694746349; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FFPJjDa20a8vFvRkRF/UxpvOVUFkHJ53fb9mlcp1AUY=;
- b=yuBe6qSyS1zxPYYwR3L4cvXL3GudRk0ucOSkKDmdpPFFcu+CO0rj+jQXwsk7b/Rn7v
- bK245lUmlXpThkuxitTT4qocG9wS5PB/65R5KkvZHEgiptSPSnpQ3IfEGlQLBrqkiAGt
- lsf7g9Y3pjFR9WtM8AqVwGh++8l/1nSQH4A4+KCXJTGGZd9sFfSxfXa+GZCZTRpsEnJt
- pqy7fmgnH12tbuJlNvr9GOjQ7wxt8xiJe6623MtL7EXNGjDo1mhimvRY6YtSQhcnG0bl
- 4trR6Iw6Vu3uPS1IkEx0lgOzIpT2/79cpGOQaji734pfqKraqjtqyxa581oTpxEaDeEw
- L3Pw==
+ bh=Luyf4+jN+xcEEas/3QA6pjJQYTZgtnyDFzxGv25LCKk=;
+ b=zDx/B85rgn+FbjPi6G16JlLovn+iuubz5QBixdYxnW0/+c7nOsAUOx3fTVz6FNY2ed
+ T/IUr7y5ssUyoGpNXL8AtBqtp0jcLgIbzywTmWx2RVaKOj8RlYDu1eyXLgS/THMBEGF4
+ kwnXGPfof5xbePlEPlTTjyC7422ZopaihPxIvvs3M5qGEo2TMBFU6wYg+KXvuIOuBHO3
+ CFEdPJDP0VhkWBiYe1J2W4hsBal02dk6UJll+BPjDJAbXlGajzMlSn4OUtjGi6KDWWQ1
+ SZgENivoMHiYV2//N2KDPWYyf0IBaZMJPQoifGQRLeN6k49d8hF8q81mlwevExIrIqrm
+ 2A8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694141547; x=1694746347;
+ d=1e100.net; s=20230601; t=1694141549; x=1694746349;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FFPJjDa20a8vFvRkRF/UxpvOVUFkHJ53fb9mlcp1AUY=;
- b=K0hV/7oxljFhkKFQ4IQv6gGiVVovLdMmEW+HULhPOtdKBK7WujQSB8CgGzRzr8P8Dl
- xtEE9IdMjsM5eZKp3o+qFYZZWgFQnihymv18px61Wa6JUPIDqC7AoAeDjmSu7VA/ELTi
- 8yODsnTls+KydJ239MeSG8IExYtWWg/rvOqkTCLjVa1PWbbPsnBT1IbU9cBqzHAuFoZH
- e3+k3lpTPPfmGdoxJMN9pja9lql3Gca+u9tAY50NNd4ZBKhaxScqPx/VDdzNY9D0KvrH
- AXFNCbhZlCCYNb3pTVmwTFhx++/lrSqidu0Bgw/H4JlLGPhbIHHLAEhkhnHgBYEeR3+6
- Svgg==
-X-Gm-Message-State: AOJu0Yy4QFkmoWpctGw17W3RDABlES5by3wkQDTD6Ww+ARVv6eycIlVT
- cenFNkiNFFLqdwAXj7qdUjTzRPfO40UJdqjg8qvzMw==
-X-Google-Smtp-Source: AGHT+IFjTcqG4pnyiF1b4om556Kq6XmhN42all25nj682jWhcqu3kPJAF6K6U/AeHbE60gsgdF5POQ==
-X-Received: by 2002:a17:902:d48d:b0:1c2:c60:8387 with SMTP id
- c13-20020a170902d48d00b001c20c608387mr1544408plg.0.1694141547104; 
- Thu, 07 Sep 2023 19:52:27 -0700 (PDT)
+ bh=Luyf4+jN+xcEEas/3QA6pjJQYTZgtnyDFzxGv25LCKk=;
+ b=Rhi/6X3XE5qom6klRLMfWX8PvbT/YrZX8jYUv1JLwDjpMjVwM1d/LQVn73UWd5oNz5
+ cKPjsFhuxiclIJtyF1epnGPwbD2X21iL0twR0aU7duGn+Q/vGTdDfyQ/EcYS1nBrNSI4
+ q7hHBWjR7G6g9zMVyKVuas6aSqAJIBm8pDL+PIi55aiR40FgP051Y1nEf6GBykYrrv1Q
+ 72rwmjpsxrDu64by3bwX1qzrmmD6v1D+IPOL1K4FiIhxXYXTEXVTVW8PLq9Mx6g3Jvr6
+ HMGoET5clKFd+H106kK8Ab959hkLNzi4RoayD/m27PqigEkBGDxMtBuU51XtyJyPvGvI
+ jmYg==
+X-Gm-Message-State: AOJu0Yw3htCgxJEQ1x0yJOAZHV8LnbSIa4jyp7aNIHohthKtw8FPoUBo
+ Bj2irBNQ8CzIRIa/vyEfS2Ph2w==
+X-Google-Smtp-Source: AGHT+IFns9QZQ6qOWBC5AV1BHJYUN7wXztPvEau9y3TgMJpJzOI13cMQmdz8g4PJ8N/v58NF95JTHw==
+X-Received: by 2002:a17:902:e5c1:b0:1b3:d8ac:8db3 with SMTP id
+ u1-20020a170902e5c100b001b3d8ac8db3mr1439511plf.6.1694141549022; 
+ Thu, 07 Sep 2023 19:52:29 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:2d89:7669:ac2d:f09e])
  by smtp.gmail.com with ESMTPSA id
- n9-20020a170902e54900b001c0ce518e98sm417286plf.224.2023.09.07.19.52.25
+ n9-20020a170902e54900b001c0ce518e98sm417286plf.224.2023.09.07.19.52.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 19:52:26 -0700 (PDT)
+ Thu, 07 Sep 2023 19:52:28 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v3 05/13] firmware: scmi: install base protocol to SCMI agent
-Date: Fri,  8 Sep 2023 11:51:30 +0900
-Message-Id: <20230908025138.44405-6-takahiro.akashi@linaro.org>
+Subject: [PATCH v3 06/13] firmware: scmi: add a check against availability of
+ protocols
+Date: Fri,  8 Sep 2023 11:51:31 +0900
+Message-Id: <20230908025138.44405-7-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230908025138.44405-1-takahiro.akashi@linaro.org>
 References: <20230908025138.44405-1-takahiro.akashi@linaro.org>
@@ -94,268 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SCMI base protocol is mandatory, and once SCMI node is found in a device
-tree, the protocol handle (udevice) is unconditionally installed to
-the agent. Then basic information will be retrieved from SCMI server via
-the protocol and saved into the agent instance's local storage.
+Now that we have Base protocol support, we will be able to check if a given
+protocol is really supported by the SCMI server (firmware).
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
 v3
-* typo fix: add '@' for argument name in function description
-* eliminate dev_get_uclass_plat()'s repeated in inline
-* modify the code for dynamically allocated sub-vendor/agent names
-v2
-* use helper functions, removing direct uses of ops
+* new; import this patch from my followup patch set
 ---
- drivers/firmware/scmi/scmi_agent-uclass.c | 116 ++++++++++++++++++++++
- include/scmi_agent-uclass.h               |  66 ++++++++++++
- 2 files changed, 182 insertions(+)
+ drivers/firmware/scmi/scmi_agent-uclass.c | 41 +++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index e823d105a3eb..87a667d60124 100644
+index 87a667d60124..54e17992af00 100644
 --- a/drivers/firmware/scmi/scmi_agent-uclass.c
 +++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -57,6 +57,9 @@ struct udevice *scmi_get_protocol(struct udevice *dev,
- 	}
- 
- 	switch (id) {
-+	case SCMI_PROTOCOL_ID_BASE:
-+		proto = priv->base_dev;
-+		break;
- 	case SCMI_PROTOCOL_ID_CLOCK:
- 		proto = priv->clock_dev;
- 		break;
-@@ -101,6 +104,9 @@ static int scmi_add_protocol(struct udevice *dev,
- 	}
- 
- 	switch (proto_id) {
-+	case SCMI_PROTOCOL_ID_BASE:
-+		priv->base_dev = proto;
-+		break;
- 	case SCMI_PROTOCOL_ID_CLOCK:
- 		priv->clock_dev = proto;
- 		break;
-@@ -237,6 +243,83 @@ int devm_scmi_process_msg(struct udevice *dev, struct scmi_msg *msg)
- 	return scmi_process_msg(protocol->parent, priv->channel, msg);
- }
+@@ -44,6 +44,38 @@ static const struct error_code scmi_linux_errmap[] = {
+  */
+ struct udevice *scmi_agent;
  
 +/**
-+ * scmi_fill_base_info - get base information about SCMI server
-+ * @agent:	SCMI agent device
-+ * @dev:	SCMI protocol device
++ * scmi_protocol_is_supported - check availability of protocol
++ * @dev:	SCMI agent device
++ * @proto_id:	Identifier of protocol
 + *
-+ * By using Base protocol commands, collect the base information
-+ * about SCMI server.
++ * check if the protocol, @proto_id, is provided by the SCMI agent,
++ * @dev.
 + *
-+ * Return: 0 on success, error code otherwise
++ * Return:	0 on success, error code otherwise
 + */
-+static int scmi_fill_base_info(struct udevice *agent, struct udevice *dev)
++static bool scmi_protocol_is_supported(struct udevice *dev,
++				       enum scmi_std_protocol proto_id)
 +{
-+	struct scmi_agent_priv *priv = dev_get_uclass_plat(agent);
-+	int ret;
++	struct scmi_agent_priv *priv;
++	int i;
 +
-+	ret = scmi_base_protocol_version(dev, &priv->version);
-+	if (ret) {
-+		dev_err(dev, "protocol_version() failed (%d)\n", ret);
-+		return ret;
-+	}
-+	/* check for required version */
-+	if (priv->version < SCMI_BASE_PROTOCOL_VERSION) {
-+		dev_err(dev, "base protocol version (%d) lower than expected\n",
-+			priv->version);
-+		return -EPROTO;
++	if (proto_id == SCMI_PROTOCOL_ID_BASE)
++		return true;
++
++	priv = dev_get_uclass_plat(dev);
++	if (!priv) {
++		dev_err(dev, "No priv data found\n");
++		return false;
 +	}
 +
-+	ret = scmi_base_protocol_attrs(dev, &priv->num_agents,
-+				       &priv->num_protocols);
-+	if (ret) {
-+		dev_err(dev, "protocol_attrs() failed (%d)\n", ret);
-+		return ret;
-+	}
-+	ret = scmi_base_discover_vendor(dev, &priv->vendor);
-+	if (ret) {
-+		dev_err(dev, "base_discover_vendor() failed (%d)\n", ret);
-+		return ret;
-+	}
-+	ret = scmi_base_discover_sub_vendor(dev, &priv->sub_vendor);
-+	if (ret) {
-+		if (ret != -EOPNOTSUPP) {
-+			dev_err(dev, "base_discover_sub_vendor() failed (%d)\n",
-+				ret);
-+			return ret;
-+		}
-+		priv->sub_vendor = "NA";
-+	}
-+	ret = scmi_base_discover_impl_version(dev, &priv->impl_version);
-+	if (ret) {
-+		dev_err(dev, "base_discover_impl_version() failed (%d)\n",
-+			ret);
-+		return ret;
-+	}
++	for (i = 0; i < priv->num_protocols; i++)
++		if (priv->protocols[i] == proto_id)
++			return true;
 +
-+	priv->agent_id = 0xffffffff; /* to avoid false claim */
-+	ret = scmi_base_discover_agent(dev, 0xffffffff,
-+				       &priv->agent_id, &priv->agent_name);
-+	if (ret) {
-+		if (ret != -EOPNOTSUPP) {
-+			dev_err(dev,
-+				"base_discover_agent() failed for myself (%d)\n",
-+				ret);
-+			return ret;
-+		}
-+		priv->agent_name = "NA";
-+	}
-+
-+	ret = scmi_base_discover_list_protocols(dev, &priv->protocols);
-+	if (ret != priv->num_protocols) {
-+		dev_err(dev, "base_discover_list_protocols() failed (%d)\n",
-+			ret);
-+		return ret;
-+	}
-+
-+	return 0;
++	return false;
 +}
 +
- /*
-  * SCMI agent devices binds devices of various uclasses depeding on
-  * the FDT description. scmi_bind_protocol() is a generic bind sequence
-@@ -251,6 +334,39 @@ static int scmi_bind_protocols(struct udevice *dev)
- 	struct driver *drv;
- 	struct udevice *proto;
- 
-+	if (!uclass_get_device(UCLASS_SCMI_AGENT, 1, &agent)) {
-+		/* This is a second SCMI agent */
-+		dev_err(dev, "Cannot have more than one SCMI agent\n");
-+		return -EEXIST;
-+	}
-+
-+	/* initialize the device from device tree */
-+	drv = DM_DRIVER_GET(scmi_base_drv);
-+	name = "scmi-base.0";
-+	ret = device_bind(dev, drv, name, NULL, ofnode_null(), &proto);
-+	if (ret) {
-+		dev_err(dev, "failed to bind base protocol\n");
-+		return ret;
-+	}
-+	ret = scmi_add_protocol(dev, SCMI_PROTOCOL_ID_BASE, proto);
-+	if (ret) {
-+		dev_err(dev, "failed to add protocol: %s, ret: %d\n",
-+			proto->name, ret);
-+		return ret;
-+	}
-+
-+	ret = device_probe(proto);
-+	if (ret) {
-+		dev_err(dev, "failed to probe base protocol\n");
-+		return ret;
-+	}
-+
-+	ret = scmi_fill_base_info(dev, proto);
-+	if (ret) {
-+		dev_err(dev, "failed to get base information\n");
-+		return ret;
-+	}
-+
- 	dev_for_each_subnode(node, dev) {
- 		u32 protocol_id;
- 
-diff --git a/include/scmi_agent-uclass.h b/include/scmi_agent-uclass.h
-index 3358c2b2d804..6fd6d54d6a5a 100644
---- a/include/scmi_agent-uclass.h
-+++ b/include/scmi_agent-uclass.h
-@@ -5,6 +5,7 @@
- #ifndef _SCMI_AGENT_UCLASS_H
- #define _SCMI_AGENT_UCLASS_H
- 
-+#include <scmi_protocols.h>
- #include <dm/device.h>
- 
- struct scmi_msg;
-@@ -12,16 +13,81 @@ struct scmi_channel;
- 
- /**
-  * struct scmi_agent_priv - private data maintained by agent instance
-+ * @version:		Version
-+ * @num_agents:		Number of agents
-+ * @num_protocols:	Number of protocols
-+ * @impl_version:	Implementation version
-+ * @protocols:		Array of protocol IDs
-+ * @vendor:		Vendor name
-+ * @sub_vendor:		Sub-vendor name
-+ * @agent_name:		Agent name
-+ * agent_id:		Identifier of agent
-+ * @base_dev:		SCMI base protocol device
-  * @clock_dev:		SCMI clock protocol device
-  * @resetdom_dev:	SCMI reset domain protocol device
-  * @voltagedom_dev:	SCMI voltage domain protocol device
-  */
- struct scmi_agent_priv {
-+	u32 version;
-+	u32 num_agents;
-+	u32 num_protocols;
-+	u32 impl_version;
-+	u8 *protocols;
-+	u8 *vendor;
-+	u8 *sub_vendor;
-+	u8 *agent_name;
-+	u32 agent_id;
-+	struct udevice *base_dev;
- 	struct udevice *clock_dev;
- 	struct udevice *resetdom_dev;
- 	struct udevice *voltagedom_dev;
- };
- 
-+static inline u32 scmi_version(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->version;
-+}
-+
-+static inline u32 scmi_num_agents(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->num_agents;
-+}
-+
-+static inline u32 scmi_num_protocols(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->num_protocols;
-+}
-+
-+static inline u32 scmi_impl_version(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->impl_version;
-+}
-+
-+static inline u8 *scmi_protocols(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->protocols;
-+}
-+
-+static inline u8 *scmi_vendor(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->vendor;
-+}
-+
-+static inline u8 *scmi_sub_vendor(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->sub_vendor;
-+}
-+
-+static inline u8 *scmi_agent_name(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->agent_name;
-+}
-+
-+static inline u32 scmi_agent_id(struct udevice *dev)
-+{
-+	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->agent_id;
-+}
-+
- /**
-  * struct scmi_transport_ops - The functions that a SCMI transport layer must implement.
-  */
+ struct udevice *scmi_get_protocol(struct udevice *dev,
+ 				  enum scmi_std_protocol id)
+ {
+@@ -380,15 +412,18 @@ static int scmi_bind_protocols(struct udevice *dev)
+ 		name = ofnode_get_name(node);
+ 		switch (protocol_id) {
+ 		case SCMI_PROTOCOL_ID_CLOCK:
+-			if (CONFIG_IS_ENABLED(CLK_SCMI))
++			if (CONFIG_IS_ENABLED(CLK_SCMI) &&
++			    scmi_protocol_is_supported(dev, protocol_id))
+ 				drv = DM_DRIVER_GET(scmi_clock);
+ 			break;
+ 		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
+-			if (IS_ENABLED(CONFIG_RESET_SCMI))
++			if (IS_ENABLED(CONFIG_RESET_SCMI) &&
++			    scmi_protocol_is_supported(dev, protocol_id))
+ 				drv = DM_DRIVER_GET(scmi_reset_domain);
+ 			break;
+ 		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
+-			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
++			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI) &&
++			    scmi_protocol_is_supported(dev, protocol_id)) {
+ 				node = ofnode_find_subnode(node, "regulators");
+ 				if (!ofnode_valid(node)) {
+ 					dev_err(dev, "no regulators node\n");
 -- 
 2.34.1
 
