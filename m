@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB751EC8748
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 12:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD4DACCFA0A
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 12:01:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEB1A86A3A;
-	Fri,  8 Sep 2023 14:00:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3012186A63;
+	Fri,  8 Sep 2023 14:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7548A86A3A; Fri,  8 Sep 2023 14:00:40 +0200 (CEST)
+ id 684B686A56; Fri,  8 Sep 2023 14:00:43 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9DE1186A1D
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 14:00:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 8F5D986A1D
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 14:00:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 22266D75;
- Fri,  8 Sep 2023 05:01:15 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1176414BF;
+ Fri,  8 Sep 2023 05:01:18 -0700 (PDT)
 Received: from a076522.blr.arm.com (a076522.blr.arm.com [10.162.46.7])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B05C33F67D;
- Fri,  8 Sep 2023 05:00:34 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9D5193F67D;
+ Fri,  8 Sep 2023 05:00:37 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -35,9 +35,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Tom Rini <trini@konsulko.com>,
  Malte Schmidt <malte.schmidt-oss@weidmueller.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 4/8] doc: Document capsule generation through a config file
-Date: Fri,  8 Sep 2023 17:29:58 +0530
-Message-Id: <20230908120002.29851-5-sughosh.ganu@linaro.org>
+Subject: [PATCH 5/8] sandbox: capsule: Add a config file for generating
+ capsules
+Date: Fri,  8 Sep 2023 17:29:59 +0530
+Message-Id: <20230908120002.29851-6-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230908120002.29851-1-sughosh.ganu@linaro.org>
 References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
@@ -59,97 +60,202 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The UEFI capsule can now be generate by specifying the capsule
-parameters through a config file. Additionally, the capsules can be
-generated as part of u-boot build, through binman. Highlight these
-changes in the documentation.
+Support has been added to the mkeficapsule tool to generate capsules
+by parsing the capsule parameters through a config file. Add a config
+file for generating capsules. These capsules will be used for testing
+the capsule update feature on sandbox platform.
+
+Enable generation of capsules through the config file on the sandbox
+variant.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- doc/develop/uefi/uefi.rst | 70 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 70 insertions(+)
+ configs/sandbox_defconfig                     |   2 +
+ .../test_efi_capsule/sandbox_capsule_cfg.txt  | 162 ++++++++++++++++++
+ 2 files changed, 164 insertions(+)
+ create mode 100644 test/py/tests/test_efi_capsule/sandbox_capsule_cfg.txt
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 68f9b332d1..2e27ddc9c0 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -318,6 +318,76 @@ Run the following command
-       --guid <image GUID> \
-       <capsule_file_name>
- 
-+Alternatively, the capsules can be generated through a config
-+file. When generating the capsules through a config file, the Kconfig
-+symbol CONFIG_EFI_CAPSULE_CFG_FILE is to be used for specifying the
-+path to the config file.
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 98f0bc13a5..34f4adc10f 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -342,6 +342,8 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_EFI_CAPSULE_AUTHENTICATE=y
+ CONFIG_EFI_CAPSULE_ESL_FILE="board/sandbox/capsule_pub_esl_good.esl"
++CONFIG_EFI_CAPSULE_CFG_FILE="test/py/tests/test_efi_capsule/sandbox_capsule_cfg.txt"
++CONFIG_EFI_USE_CAPSULE_CFG_FILE=y
+ CONFIG_EFI_SECURE_BOOT=y
+ CONFIG_TEST_FDTDEC=y
+ CONFIG_UNIT_TEST=y
+diff --git a/test/py/tests/test_efi_capsule/sandbox_capsule_cfg.txt b/test/py/tests/test_efi_capsule/sandbox_capsule_cfg.txt
+new file mode 100644
+index 0000000000..2897c1904e
+--- /dev/null
++++ b/test/py/tests/test_efi_capsule/sandbox_capsule_cfg.txt
+@@ -0,0 +1,162 @@
++{
++	image-index: 1
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test01
++}
++{
++	image-index: 2
++	image-guid: 5A7021F5-FEF2-48B4-AABA-832E777418C0
++	payload: u-boot.env.new
++	capsule: Test02
++}
++{
++	image-index: 1
++	image-guid: 058B7D83-50D5-4C47-A195-60D86AD341C4
++	payload: u-boot.bin.new
++	capsule: Test03
 +
-+The config file describes the parameters that are used for generating
-+one or more capsules. The parameters for a given capsule file are
-+specified within curly braces, in the form of "key:value" pairs. All
-+the parameters that are currently supported by the mkeficapsule tool
-+can be specified through the config file.
++}
++{
++	image-index: 1
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test04
 +
-+The following are some example payload parameters specified through
-+the config file.
++}
++{
++	image-index: 1
++	image-guid: 058B7D83-50D5-4C47-A195-60D86AD341C4
++	payload: u-boot_bin_env.itb
++	capsule: Test05
 +
-+.. code-block:: none
++}
++{
++	image-index: 1
++	image-guid: 058B7D83-50D5-4C47-A195-60D86AD341C4
++	payload: u-boot_bin_env.itb
++	capsule: Test05
++}
++{
++	image-index: 1
++	monotonic-count: 1
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test11
++}
++{
++	image-index: 1
++	monotonic-count: 1
++	private-key: SIGNER2.key
++	pub-key-cert: SIGNER2.crt
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test12
++}
++{
++	image-index: 1
++	monotonic-count: 1
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test13
++}
++{
++	image-index: 1
++	monotonic-count: 1
++	private-key: SIGNER2.key
++	pub-key-cert: SIGNER2.crt
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test14
++}
++{
++	image-index: 1
++	fw-version: 5
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test101
++}
++{
++	image-index: 2
++	fw-version: 10
++	image-guid: 5A7021F5-FEF2-48B4-AABA-832E777418C0
++	payload: u-boot.env.new
++	capsule: Test102
++}
++{
++	image-index: 1
++	fw-version: 2
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test103
 +
-+	{
-+	    image-guid: 02f4d760-cfd5-43bd-8e2d-a42acb33c660
-+	    hardware-instance: 0
-+	    monotonic-count: 1
-+	    payload: u-boot.bin
-+	    image-index: 1
-+	    fw-version: 2
-+	    private-key: /path/to/priv/key
-+	    pub-key-cert: /path/to/pub/key
-+	    capsule: u-boot.capsule
-+	}
-+	{
-+	    image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
-+	    hardware-instance: 0
-+	    payload: u-boot.itb
-+	    image-index: 2
-+	    fw-version: 7
-+	    oemflags: 0x8000
-+	    capsule: fit.capsule
-+	}
-+	{
-+	    capsule-type: accept
-+	    image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
-+	    capsule: accept.capsule
-+	}
-+	{
-+	    capsule-type: revert
-+	    capsule: revert.capsule
-+	}
++}
++{
++	image-index: 1
++	fw-version: 5
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test104
++}
++{
++	image-index: 1
++	fw-version: 2
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test105
 +
-+The following are the keys that specify the capsule parameters
-+
-+..code-block:: none
-+
-+    image-guid: Image GUID
-+    image-index: Image index value
-+    fw-version: Image version
-+    private-key: Path to the private key file used for capsule signing
-+    pub-key-cert: Path to the public key crt file used for capsule signing
-+    payload: Path to the capsule payload file
-+    capsule: Path to the output capsule file that is generated
-+    hardware-instance: Hardware Instance value
-+    monotonic-count: Monotonic count value
-+    capsule-type: Specifies capsule type. normal(default), accept or revert
-+    oemflags: 16bit Oemflags value to be used(populated in capsule header)
-+
-+When generating capsules through a config file, the command would look
-+like
-+
-+.. code-block:: console
-+
-+    $ mkeficapsule --cfg-file </path/to/the/config/file>
-+
-+
- Capsule with firmware version
- *****************************
- 
++}
++{
++	image-index: 1
++	monotonic-count: 1
++	fw-version: 5
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test111
++}
++{
++	image-index: 2
++	monotonic-count: 1
++	fw-version: 10
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 5A7021F5-FEF2-48B4-AABA-832E777418C0
++	payload: u-boot.env.new
++	capsule: Test112
++}
++{
++	image-index: 1
++	monotonic-count: 1
++	fw-version: 2
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 09D7CF52-0720-4710-91D1-08469B7FE9C8
++	payload: u-boot.bin.new
++	capsule: Test113
++}
++{
++	image-index: 1
++	fw-version: 5
++	monotonic-count: 1
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test114
++}
++{
++	image-index: 1
++	fw-version: 2
++	monotonic-count: 1
++	private-key: SIGNER.key
++	pub-key-cert: SIGNER.crt
++	image-guid: 3673B45D-6A7C-46F3-9E60-ADABB03F7937
++	payload: u-boot_bin_env.itb
++	capsule: Test115
++}
 -- 
 2.34.1
 
