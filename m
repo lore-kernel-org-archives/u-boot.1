@@ -4,74 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDF5EE57C7
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 05:32:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A34EE57CA
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 06:30:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A67FC86501;
-	Fri,  8 Sep 2023 07:32:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 41F0186564;
+	Fri,  8 Sep 2023 08:30:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="htikYqN+";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="k/E9AD+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0E96869A3; Fri,  8 Sep 2023 07:32:53 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 1D5D2866CF; Fri,  8 Sep 2023 08:30:47 +0200 (CEST)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20617.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::617])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 137D886996
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 07:32:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAB3186564
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 08:30:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3885Wmq4001936;
- Fri, 8 Sep 2023 00:32:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694151168;
- bh=uf/le7VIHY1XW98iNFr1+tqnRt/SHHHtO5Le2IRL7+4=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=htikYqN+VRSr09Kq7p+NBtEgiC+To8aQG37VMRN7hXp4xirjKtD+hdzmJXtjqlT4B
- H18xcOKpXA+NJwYmREJ0bI1BKJ658wE2hHtkWjV+m2plu/XyXGXm8t4lgHShqAZyvJ
- ioNDGw3CW+79LA72TRRpprkBg1+Tnh7J6Jbqe7Jk=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3885WmYW013346
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 00:32:48 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 00:32:47 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 00:32:47 -0500
-Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3885WhQB026515;
- Fri, 8 Sep 2023 00:32:44 -0500
-Message-ID: <3e127f6a-98e7-5f57-300c-280d5851794f@ti.com>
-Date: Fri, 8 Sep 2023 11:02:42 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lOpcbZ4+SQsEDXCewruXzpGAEiEdxTS9hMalaTh+K/y8Fo4r4w2rQrqMAjW3YN4tncbL7dZZi6u40zMlbgqf3Kwq8rtYi+tdIH9f9bZ+ipy3MyexyJaVOx692yd0x6RoQolfpzyqkEtb1fNUL5kcjNAJ9OH9tV0D1Z/cv7ZWNsc6sCx7dInhePA6dhPWMkKbvT5eoZqbNHgV3PVI5mdUlLIFIuCuBadBoSH8izyCwfxvakEM/lsenp25cbWA73IT86FzqBpKU/bO3RsEmSOIIKamtPtF7I1PKBWD+4+t5GxB29d9fYNGkFk+hb1EPXFvqYMmIc24Z3n8q/nPXKFgQg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=y52gnnQtDmcFy5UGa95YoJ0NTjj9xH78cuRiQ0+zVEU=;
+ b=PqhJcANcfFV0hhNHiJ5tA7mzBsnMiWAYTYW/16eU5AziGvuf1ntVErWXowmXjbN28s4xGhxULdeCFOTjzSWqj6QYYINFsNVzVfJiQ6Vz6vCkFNrq6JeKWjLTipZnaNmNu9bE1LG3Uut5nRqdOjZ7YY22X8GABbuCLNE+xKttrlKaqHJqFN/yay2+5KmjjHh0qTtBZVpXi6+NXADz1IvaH2Hvjln58CRjVtRO1elPHUs6Lxs3oE/G1J8XWIetHXNiby9PLZwdEGEjTks7bztrdW2L2agVHMm7FavY/9fx5YwVuFsWiTCuEMgwyFMhhLNaLEB5NgMaqfeZNFQNTzOqCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y52gnnQtDmcFy5UGa95YoJ0NTjj9xH78cuRiQ0+zVEU=;
+ b=k/E9AD+2sjkuQo53oKEiFozGbYEB0UQnq26wCUKRNmuEnZpCdWLv+4J9SXm+ug2U1iXHmPX09Xp1agBkjf55sh53tjHW+wCztknepv16oOBy5rd7xEWLLL8eiYrBMil3GMH4/5C6CRkS0Oe5BLpWZNuVZB5+Nns2LpMIlQkvEYY=
+Received: from SN6PR08CA0019.namprd08.prod.outlook.com (2603:10b6:805:66::32)
+ by DS0PR12MB7825.namprd12.prod.outlook.com (2603:10b6:8:14d::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30; Fri, 8 Sep
+ 2023 06:30:40 +0000
+Received: from SN1PEPF0002529D.namprd05.prod.outlook.com
+ (2603:10b6:805:66:cafe::40) by SN6PR08CA0019.outlook.office365.com
+ (2603:10b6:805:66::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.30 via Frontend
+ Transport; Fri, 8 Sep 2023 06:30:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF0002529D.mail.protection.outlook.com (10.167.242.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6768.25 via Frontend Transport; Fri, 8 Sep 2023 06:30:40 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 8 Sep
+ 2023 01:30:38 -0500
+Message-ID: <c7207e0f-ddf1-6892-b77c-9830ecb0cd7f@amd.com>
+Date: Fri, 8 Sep 2023 08:30:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH v2 4/7] drivers: firmware: ti_sci: Get SCI revision only
- if TIFS/SYSFW is up
+Subject: Re: [PATCHv7 00/15] net/lwip: add lwip library for the network stack
 Content-Language: en-US
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Nishanth Menon <nm@ti.com>, <trini@konsulko.com>, <sjg@chromium.org>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>, <gadiyar@ti.com>,
- <a-nandan@ti.com>, <vaishnav.a@ti.com>
-References: <20230907141407.382215-1-n-francis@ti.com>
- <20230907141407.382215-5-n-francis@ti.com>
- <20230907150516.v3tsushxhcucmmsl@undergrad>
- <feeb284f-c9dc-1565-8ad6-283fdf02344e@ti.com>
- <20230908051706.nsldv7p23hacnadq@ula0497581>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230908051706.nsldv7p23hacnadq@ula0497581>
+To: Tom Rini <trini@konsulko.com>, Maxim Uvarov <maxim.uvarov@linaro.org>
+CC: <u-boot@lists.denx.de>, <pbrobinson@gmail.com>,
+ <ilias.apalodimas@linaro.org>, <joe.hershberger@ni.com>,
+ <rfried.dev@gmail.com>, <goldsimon@gmx.de>
+References: <20230822093614.4717-1-maxim.uvarov@linaro.org>
+ <CAHTX3dKEqFNMQf+-FSO7oZerT03fQb1Z1BYvN3-dfpmoPtZQFg@mail.gmail.com>
+ <20230907192327.GY305624@bill-the-cat>
+From: Michal Simek <michal.simek@amd.com>
+In-Reply-To: <20230907192327.GY305624@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002529D:EE_|DS0PR12MB7825:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7d45ea03-01a1-4bec-1d16-08dbb0351eec
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: WS95KXgyOoBtXrruZ8TSFay8t6rx6DC0LQKSyf9vpvsb05MNw6d/XsSZbI3c6orxcmWGrpYFOfeR8Huvd0XodYOpCMlN8s6V2r5+XbOmDwsZ5TQea2wYIhBPkCvLNaWmuTJuy96CXuk4sAttewat+8UhIkwcIoTQo1Y58a/YKXnJMzw/EIfFEDhmVBjKzELvMz1Ji/K5RPh0pNrtmPhMN1vl5W42qEiwQhYbnkIMO6eA9DNjxSZfh5DcFyKjsQtn2OpJcGf8WDSrE5v+yneEf8D9j8CDx+Ux1gyJ0ZsMOydbkuXfadfVPY3quydTKV6x0QwoGSKpgxVl+YuhkWygLkb+2we9NjAcETN316Y0he5Agt/MthBBrPnkhQrFsU3ip173idR77bbewQ1MmoUM/GukAMzB+UJLUqKvThse2Sc8Pfsn/7UfmQGeqjrZMnXf1OWsdAaTEpydgNb0nNRH0opjAAQQ5571jvMH4pryWcSLFt2lMNeaSAl6Y2iS355ayS1Efr5kY2ZyRQATavDk3BIK+g9VlYc3V3xBx/wxkHAzcl9ddqdbINg1KRyPaIPYVqmyFCP+35V9t3Gk20AdCNLvcw0EZlwCsjy+uf4etMfehhLYtnzTuVHMWiffGLh36DGzGXI/BLhI2G1CEHNVE2h7958eKmqtiY0SJRDm0ad5+Cxuy3hBoT464puUOKwC+k7H9nmxHrfn9blWHugul/WRSfGNUdXuVJlJlDTPEmNQflDu7mcJSd4J5P0eO7uJ3cWMlkt85Wz9UfOj/gLUU/rK2AuJ8ipZct3ZNVUaTas=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(396003)(136003)(346002)(376002)(39860400002)(82310400011)(186009)(1800799009)(451199024)(36840700001)(40470700004)(46966006)(110136005)(53546011)(40460700003)(83380400001)(41300700001)(478600001)(336012)(66574015)(2616005)(966005)(16526019)(426003)(26005)(2906002)(54906003)(44832011)(70206006)(316002)(16576012)(70586007)(5660300002)(4326008)(8936002)(8676002)(31696002)(82740400003)(47076005)(40480700001)(36860700001)(36756003)(86362001)(356005)(31686004)(81166007)(43740500002)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2023 06:30:40.0977 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7d45ea03-01a1-4bec-1d16-08dbb0351eec
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002529D.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7825
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,131 +125,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit
 
-On 08/09/23 10:47, Manorit Chawdhry wrote:
-> Hi Neha,
+
+On 9/7/23 21:23, Tom Rini wrote:
+> On Thu, Sep 07, 2023 at 05:21:18PM +0200, Michal Simek wrote:
+>> Hi,
+>>
+>> út 22. 8. 2023 v 11:38 odesílatel Maxim Uvarov <maxim.uvarov@linaro.org> napsal:
+>>>
+>>> Hello,
+>>>
+>>> I'm sending v7, with all v6 comments getting fixed. The only thing left is a pointer
+>>> to timeout callback which 2 applications use. I will rework this timeout
+>>> in next v8. I started take a look at it, and want to fix this together
+>>> with background applications support in v8.
+>>>
+>>> changelog:
+>>>          v7: - more review fixes.
+>>>              - support of multiply eth devices, were "ethact" selects the
+>>>                active device.
+>>>          v6: - fixed review comments for v5 (thanks Ilias and Simon).
+>>>              - lwip is not under /net, so prior applying patch following
+>>>                commit is needed to create lwIP merge into U-Boot:
+>>>                git subtree add --prefix net/lwip/lwip-external https://git.savannah.nongnu.org/git/lwip.git master --squash
+>>
+>> I think you should integrate it via .gitmodules as is done for example in qemu.
 > 
-> On 09:04-20230908, Neha Malcom Francis wrote:
->> Hi Nishanth
->>
->> On 07/09/23 20:35, Nishanth Menon wrote:
->>> On 19:44-20230907, Neha Malcom Francis wrote:
->>>> While setting up necessary dependent clocks and power domains, we end up
->>>> probing the ti_sci driver before TIFS/SYSFW has been loaded in the case
->>>> of legacy boot flow devices. This leads to panic when getting the SCI
->>>> revision. Return the revision only if it is combined boot flow. Also
->>>
->>> Not clear description of the problem.
->>
->> Hmm okay I will modify this and the earlier commit message to give a clearer
->> picture.
->>
-> 
-> I still don't understand why we are coming to the TISCI driver to
-> contact M4/DM for setting up the power domains and clocks, if this would
-> have been the case then even the normal J721E wouldn't have been working
-> and it shouldn't have been dependent on the DT Sync to uncover this
-> issue. Could you elaborate more w.r.t this patch?
+> I _think_ I am leaning towards subtree, but it sounds like we need to
+> make the initial build easier, perhaps some Makefile logic to see we
+> haven't added, and then do what's needed?
 > 
 
-We were using /delete-property/ to remove every instance of k3_clks and k3_pds 
-before TIFS/SYSFW came up so it was never probing the TISCI driver.
+Definitely it has to solved without any manual step. And this is enabled by 
+default for all platforms. I pretty much think that it should be disabled now 
+and when tested properly it can become default y.
 
->  From what I understand is that even if we end up coming here, we
-> shouldn't be hitting the panic as the previous patch sets up the
-> necessary clock (mcu_timer0) and at the worst - we would just end up
-> polling to get a response and if we don't, we would fail and we
-> shouldn't be getting a panic. I believe this is how the J721E would've
-
-So earlier we never reached here because of above mentioned reason, now we do 
-with the last patch. While probing ti_sci we invoke ti_sci_cmd_get_revision that 
-returns -61 (ENODATA) and we reach panic like this:
-
-get_timer --> get_ticks --> dm_timer_init (tries to get timer, fails for above 
-reason) --> panic
-
-> been working before the sync but am not sure what is breaking after the
-> sync. Maybe this helps in uncovering the real issue that we still have,
-> I believe we should still be looking at why the timer is failing and
-> causing this probe to fail.
-> 
-> Regards,
-> Manorit
-> 
->>>
->>>> ensure that after TIFS/SYSFW comes up we run ti_sci_cmd_get_revision
->>>> again so we print the revision right.
->>>>
->>>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->>>> ---
->>>>    drivers/firmware/ti_sci.c | 9 ++++++++-
->>>>    1 file changed, 8 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
->>>> index 72f572d824..6a85d202f2 100644
->>>> --- a/drivers/firmware/ti_sci.c
->>>> +++ b/drivers/firmware/ti_sci.c
->>>> @@ -2703,6 +2703,9 @@ struct ti_sci_handle *ti_sci_get_handle_from_sysfw(struct udevice *sci_dev)
->>>>    	if (!handle)
->>>>    		return ERR_PTR(-EINVAL);
->>>> +	/* May have been skipped in case TIFS/SYSFW had come up later */
->>> Very confusing comment.
->>>
->>
->> Understood, will change that.
->>
->>>> +	ti_sci_cmd_get_revision(handle);
->>>
->>> should this be protected with if (IS_ENABLED(CONFIG_K3_DM_FW) ?
->>>
->>> Since getting the handle is where the entire flow happens, why not do it
->>> here always?
->>>
->>
->> This is a valid point, I am in the process of making sure there's no other
->> consequences to getting the revision this late for platforms with other boot
->> devices, if this gets an all clear, I will push it here for the next
->> version, else I will explain why I couldn't.
->>
->>> what if ti_sci_cmd_get_revision fails? there is no error handling here.
->>
->> Yes that would be a consequence since ti_sci_probe, the logic it was
->> written; used reading the version as an "all okay return 0" for the
->> TIFS/SYSFW binary.
->>
->> But now after moving, ti_sci_get_handle_from_sysfw happens after
->> k3_sysfw_loader so we're not checking binary sanity early on in the case of
->> combined boot
->>
->> I'm hesitant that we are checking version way later after k3_sysfw_loader
->> for combined platforms and if that is something we want? But there is an
->> advantage(?) that it will run every time someone tries to get a handle for
->> doing anything with TISCI and that would be a kind of check (?) if the
->> binary is good? Correct me if I'm wrong in thinking that.
->>
->>>> +
->>>>    	return handle;
->>>>    }
->>>> @@ -2825,7 +2828,11 @@ static int ti_sci_probe(struct udevice *dev)
->>>>    	list_add_tail(&info->list, &ti_sci_list);
->>>>    	ti_sci_setup_ops(info);
->>>> -	ret = ti_sci_cmd_get_revision(&info->handle);
->>>> +	/* Get SCI revision ONLY if we are real */
->>>> +	if (!IS_ENABLED(CONFIG_K3_DM_FW))
->>>> +		ret = ti_sci_cmd_get_revision(&info->handle);
->>>> +	else
->>>> +		ret = 0;
->>>>    	INIT_LIST_HEAD(&info->dev_list);
->>>> -- 
->>>> 2.34.1
->>>>
->>>
->>
->> -- 
->> Thanking You
->> Neha Malcom Francis
-
--- 
-Thanking You
-Neha Malcom Francis
+Thanks,
+Michal
