@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A9DEE8011
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88AD8EE8012
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 14:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3E9286A7B;
-	Fri,  8 Sep 2023 16:43:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9C6586A27;
+	Fri,  8 Sep 2023 16:54:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SFaIPmjd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bege+naq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B79ED86560; Fri,  8 Sep 2023 16:43:46 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 5CF3486A2A; Fri,  8 Sep 2023 16:54:25 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDEE686560
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 16:43:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7799585E44
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 16:54:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5922b96c5fcso20427797b3.0
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 07:43:43 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-59b53488f7cso10828767b3.0
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 07:54:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694184222; x=1694789022; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1694184861; x=1694789661; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Y0lab1jbFMsHKpeQmwg+brG28M2E3AjGuOGh8bp28dg=;
- b=SFaIPmjd/wRHsrgMsdTLeF4bCQp+hdkZmJ7wi0VghZOlPHAyZsOjZ2hsFRXtwpp8/N
- CcPWfB2vXmTvMsnsL/TklReOlMG6MA6pDmHNAYe+eUODfNjLIhdnXPgnQOIHCBbnX0W3
- kbZ1V71maLHiqkG2XhtYXK1wCFLmXkgQUytrI=
+ bh=Vrj8AbsrQE326a9G0gUmJZm95kw7fXmH6hKX6uULr/s=;
+ b=bege+naqkHKDzQ8sCdCdOPTqx/wnii0DoVdVSNsg3znPPvVS5VL9VzJx3hTnrnQcv2
+ wiFz4FCUU/AewKJSGpVAOSzDCZQIAtsiAZA7ePXOC2m1SRH5ugIgMxOGiMrCdMiiZokk
+ ECPZuOCM0sVCYdflO+S481QX83w2PP9xFfJ3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694184222; x=1694789022;
+ d=1e100.net; s=20230601; t=1694184861; x=1694789661;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y0lab1jbFMsHKpeQmwg+brG28M2E3AjGuOGh8bp28dg=;
- b=n95DkkAggacqh+9SpV0rEli1ndMD16y5tQkc/Xx8LCWucPpQZgPX4xxjM42PBtWYQY
- hNB+quQnJh70T6DUqYeukQrv8vLtsS+4J/pZzZSmjxVk20zwy95CfbJeuK1252y9+8jc
- jvzOl7ePOAgVwnCaBJIdK/CBC2XoqGjV3wwSr5g1mvzMjq739oxrUhmpoAOiwi0nXvzv
- F1K2esqKiIjfcZkqIQmIiRWLxGUFGh6yWIbi8GVxTu/lu3De2nfej5IzUIFyLzgtYANu
- a6PttIgLmDuykxa/yc0sVa5L1Dq/uMFjGPXjxEbE0zSu4BqKjLE54J6gGLaoW3bU2eKc
- 6osA==
-X-Gm-Message-State: AOJu0Yyw0C1n7zyXxlRk7omyCfysA0GY40RMUKB4Rv8afHwe1av8wRaf
- n9oedG8n4I2fjI6YuHgl7wUatg==
-X-Google-Smtp-Source: AGHT+IHxs3sS1LKxY6UxXZugIynBveeC2TRMYqv08MaBgpxBW2asmKgATm68+4z5A3jqL7zZBzeaMQ==
-X-Received: by 2002:a81:4808:0:b0:583:7b49:57ac with SMTP id
- v8-20020a814808000000b005837b4957acmr2981047ywa.25.1694184222612; 
- Fri, 08 Sep 2023 07:43:42 -0700 (PDT)
+ bh=Vrj8AbsrQE326a9G0gUmJZm95kw7fXmH6hKX6uULr/s=;
+ b=nOG/BQRpiHoYRfGifnkppX1R2TrK3yzdooKrO7a/rRy33JVUyLXfUl0r3FA2NZtCYG
+ Jj/c7sPBXhIwdvPe0U4DE6Zj691UiOG4QThq0iHxGf77GJyNgmzBP7zsb2kTdlUxoJx4
+ 4k5QoiuwZigNPbi8USy0QFXQBMgXJmJ58XbGQj1VavKWDYbHQMlYnA9UxOq09WKUnsRn
+ R7ZgUdOPGiwGZi6CjaJr+K1Y3b1WA3X7wG8ioaFrZel5g7Z2lejvZGDraXFVwyFUAmB0
+ +3W1vCXe0TVBA5qfjO/vwGgnbnsTS8kfGpR5u+T7rT54QwHjSb2YVRiQ5XmN88BGiOta
+ 8aBQ==
+X-Gm-Message-State: AOJu0YxOEKyf/yZ9DSJWx1Gzq0+r0dNDiLkXQ4v47m8RVcJyB0Dzn1H9
+ 4pNyUsvs4vUUQ/fOXAWCn0laH5lkko0jcCqQqqnH5Q==
+X-Google-Smtp-Source: AGHT+IFON+F6ctsUxTJPo5HjpofW9j5oh/8qS+Y4TV4r/vMu5Ms3tCaIfJvQ5+qTI7iQeyM7o53kBw==
+X-Received: by 2002:a0d:e544:0:b0:583:3c7e:7749 with SMTP id
+ o65-20020a0de544000000b005833c7e7749mr3063814ywe.41.1694184861182; 
+ Fri, 08 Sep 2023 07:54:21 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-031e-83f0-a4af-2e7d.res6.spectrum.com.
  [2603:6081:7b00:6400:31e:83f0:a4af:2e7d])
  by smtp.gmail.com with ESMTPSA id
- t128-20020a818386000000b0059590440338sm455563ywf.43.2023.09.08.07.43.41
+ fj3-20020a05690c330300b0059b50f126fbsm453486ywb.114.2023.09.08.07.54.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Sep 2023 07:43:41 -0700 (PDT)
-Date: Fri, 8 Sep 2023 10:43:40 -0400
+ Fri, 08 Sep 2023 07:54:20 -0700 (PDT)
+Date: Fri, 8 Sep 2023 10:54:18 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Jassi Brar <jassisinghbrar@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rob Herring <robh@kernel.org>, Peter Robinson <pbrobinson@gmail.com>,
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Rob Herring <robh@kernel.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <20230908144340.GF305624@bill-the-cat>
+Message-ID: <20230908145418.GG305624@bill-the-cat>
 References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
  <CAPnjgZ3HVJ9+-PjmHSKwQRgCMkcNPWAcfMkk5SMMgiHAcY0SsQ@mail.gmail.com>
  <CALeDE9MMiA9HVfbeOV3tGqfAAC9oYf9qvizBW0T=hLmqcYD=qw@mail.gmail.com>
@@ -80,12 +79,12 @@ References: <20230826090633.239342-1-sughosh.ganu@linaro.org>
  <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
  <20230906142139.GA1236014-robh@kernel.org> <ZPldgbS8mu+5DG7Q@hera>
  <CAPnjgZ0kcOZp65d_-wwYyjbTwC-aDamvGU50aa34o2PeZjZk6Q@mail.gmail.com>
- <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
+ <CAC_iWjKn_xzoCEv8EBghm7-N5Ex1gEJK=nxdV6QvQ_mPm5R=hQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XDr3O0bcIIPUj8zQ"
+ protocol="application/pgp-signature"; boundary="2P7XAqMMkBne3mo3"
 Content-Disposition: inline
-In-Reply-To: <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
+In-Reply-To: <CAC_iWjKn_xzoCEv8EBghm7-N5Ex1gEJK=nxdV6QvQ_mPm5R=hQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,17 +103,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---XDr3O0bcIIPUj8zQ
-Content-Type: text/plain; charset=utf-8
+--2P7XAqMMkBne3mo3
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 08, 2023 at 09:37:12AM -0500, Jassi Brar wrote:
+On Fri, Sep 08, 2023 at 01:13:42PM +0300, Ilias Apalodimas wrote:
 > Hi Simon,
 >=20
-> On Thu, Sep 7, 2023 at 3:08=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
+> On Thu, 7 Sept 2023 at 15:23, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
 > > On Wed, 6 Sept 2023 at 23:20, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Rob,
+> > >
+> > > [...]
+> > >
+> > > > > > > > >
+> > > > > > > > > What is the point of removing them? Instead, we should ma=
+ke sure that
+> > > > > > > > > we upstream the bindings and encourage SoC vendors to syn=
+c them. If we
+> > > > > > > > > remove them, no one will bother and U-Boot just becomes a=
+ dumping
+> > > > > > > > > ground.
+> > > > > > > >
+> > > > > > > > Well things like the binman entries in DT are U-Boot specif=
+ic and not
+> > > > > > > > useful for HW related descriptions or for Linux or another =
+OS being
+> > > > > > > > able to deal with HW so arguably we're already a dumping gr=
+ound to
+> > > > > > > > some degree for not defining hardware.
+> > > > > > >
+> > > > > > > I have started the process to upstream the binman bindings.
+> > > > > >
+> > > > > > I don't think they should be in DT at all, they don't describe
+> > > > > > anything to do with hardware, or generally even the runtime of a
+> > > > > > device, they don't even describe the boot/runtime state of the
+> > > > > > firmware, they describe build time, so I don't see what that ha=
+s to do
+> > > > > > with device tree? Can you explain that? To me those sorts of th=
+ings
+> > > > > > should live in a build time style config file.
+> > > >
+> > > > For the record, I tend to agree.
+> > > >
+> > >
+> > > +1
 > > >
 > > > > > I beg to differ. Devicetree is more than just hardware and always=
  has
@@ -134,51 +173,85 @@ f a
 > >
 > > Our efforts should not just be about internal ABI, but working to
 > > provide a consistent configuration system for all firmware elements.
-> >
-> Sure, programmatically we can pass any data/info via DT, however it is
-> only meant to map hardware features onto data structures.
 >=20
-> devicetree.org  landing page
->     "The devicetree is a data structure for describing hardware."
->=20
-> devicetree-specification-v0.3.pdf  Chapter-2 Line-1
->    "DTSpec specifies a construct called a devicetree to describe
-> system hardware."
->=20
-> If we want to digress from the spec, we need the majority of
-> developers to switch sides :)  which is unlikely to happen and rightly
-> so, imho.
+> And that's what the firmware handoff was all about.
+> I get what you are trying to do here.  I am just aware of any other
 
-It's the same language-lawyering that's been going on since device trees
-moved from the neat thing Apple-based PowerPC platforms provided (and
-extended), and then got ad-hoc'd to support other PowerPC platforms, and
-then was used to solve "Linus is sick of the patch conflicts on ARM"
-problems.  And everyone is tired of talking about the exceptions to "it
-must be hardware" because if your software isn't where the
-software-burned-into-the-hardware wants it to be, the hardware won't
-work and so on.
+"just not aware" did you mean?
+
+> project apart from U-Boot which uses DT for it's own configuration.
+> So trying to standardize some bindings that are useful to all projects
+> that use DT is fine. Trying to *enforce* them to use it for config
+> isn't IMHO.
+>=20
+> >
+> > We cannot have it both ways, i.e. refusing to accept non-hardware
+> > bindings and then complaining that U-Boot does not pass schema
+> > validation. Devicetree should be a shared resource, not just for the
+> > use of Linux.
+>=20
+> It's not for the use of Linux, I've wasted enough time repeating that
+> and so has Rob.  Please go back to previous emails and read the
+> arguments.
+
+Right, it's not just for Linux, but Linux is where most of the
+exceptions to the "ONLY HARDWARE" rule got in, because they also make
+sense.  And the overarching point Simon keeps trying to make I believe
+can be boiled down to that too.  There are things that one does not have
+a (reasonable) choice about how to do things with when interacting with
+the hunk of melted sand on your desk and that information needs to go
+somewhere.
+
+> > We already have reserved-memory, flash layout and other
+> > things which don't relate to hardware. I would love to somehome get
+> > past this fundamental discussion which seems to come up every time we
+> > get close to making progress
+>=20
+> Most of the nodes we already have were used across projects and made
+> sense to all of them. U-Boot might need to reserve some memory and so
+> does linux etc etc.
+> Some other nodes make nosense at all to and they just serve internal
+> ABI implementation details.  I can't possibly fathom how these would
+> be justifiable.  On top of all that, there's a huge danger here.  How
+> are you planning on separating arbitrary entries from various
+> projects?
+
+I think in some ways this is the whole point of at least what I'm asking
+for.  It's fine to say "Here is the mechanism to remove nodes /
+properties from the device tree".  BUT adding entries to that list MUST
+document where someone tried to upstream and explain that this is
+something that belongs in the device tree because it is useful to
+everyone.
+
+> What I am afraid is going to happen here is simple.  If a project
+> doesn't use DT to configure itself and wants to provide a DT to
+> U-Boot, then are you going to say "Can you please inject various DT
+> nodes in the tree because U-Boot *needs* them and they are now part of
+> the spec"?  Anyway, it's not up to me to decide here, I am just saying
+> what makes sense to me.
+
+What's the difference between that and "If a project doesn't use DT to
+configure itself and wants to provide a DT to Linux, ..." ?
 
 --=20
 Tom
 
-p.s. Yes, I know Apple didn't invent device trees either.
-
---XDr3O0bcIIPUj8zQ
+--2P7XAqMMkBne3mo3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT7MxgACgkQFHw5/5Y0
-tyxezgv+N4Hq9cXCmbEMlO/unDk3LmKa4JD9XCCF+cmsmILOTo0wnszW5iDyaDPG
-pgCM5gEbjSIivO5VsCAGWSpRAyGaHP0lLBRUmyN6vYnj6OVveB5Q38B2YabQ6+Iu
-OgMpSbY9doQwarXIWK+tJbOsBtku7kvUeKsKgBc0sGTB+CY/i2l8XIl8c5i5TALe
-G9ODfCw3HAh7piKTl9GI95zRVKIaU6bhVic20UBvH4ThvO+0pc/CQH8ZcMa/l1VA
-Z4U4o9kUORDFgs0H2LZvxKMKANLNnApd58JgA0m4mQUO/vOuB44fUfpi11u7u3Un
-WDhXtz+lwOEGERF/e4QopW3CRm3Me/7JsJCmsOJ9jPBYpQFp95OGXq29rOTwAb3y
-PeHCSi4fmHabHmQQS2Lv/SQOPuba0zaQnuXYmsg3lP48fNgHj20Fd1qH7G8sbI6t
-e6bPhS6CAvcjbGZglrj3D8ZB2BFi6nH4YxZvUTm+JEJTvDgm7q+tyxxe7du752hr
-y999Fz/2
-=JnIl
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT7NZcACgkQFHw5/5Y0
+tyxDmgv/W7SBueXYSWAWXrZLhl2ErjyC73IUcZ+O2pkgQMjbSIhrHLSdeAtVAkCK
+DvH+5nbGdqAFsCjYLMgqoosM2T1NY89ha0TNC78SoBZPQMr1lRxtx+DvP3VeCfli
+Ro+cJSYQ3fcFbl6degVhwdb6L2jkRi4P/jjFO9TIGcZvFOEVI3BWte3DUbovQzJo
+44w18gq5BR/2Fv77LPrzgPjpfUGGshsDDe2hj85RETQE2vrBjhr4zTSLhS/uc/Th
+EwQGLX/1fgoXw8sPrakqP+P3dHR9FymkhWstRQhRos7gYi8JtYVUd5KiHYj9ZCN1
+Bn5MciwpWShDUBmdnKhgzL3rzoJk3XMnhWv61j1aJsDZq1BkoW/2NBVF2R8wwVEU
+++UHnJwEvPWiqSTqPKK+O5W9MJFly255cagGM68OKOJIsG+NAKeszRW4P+Ntw4Hu
+3p51CwXa34CBIhvuivGuI6LgVr57AVVF+ohJmgVITpT3605gLZIQz2eZ142KuQWO
+/pW1wTx4
+=lkei
 -----END PGP SIGNATURE-----
 
---XDr3O0bcIIPUj8zQ--
+--2P7XAqMMkBne3mo3--
