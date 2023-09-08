@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C60DAEC875E
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 01:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E85EEB8FDE
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 02:52:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6EE58648D;
-	Fri,  8 Sep 2023 03:33:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6776586467;
+	Fri,  8 Sep 2023 04:52:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OUQ3B4Yn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BEB93LIV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CACB86682; Fri,  8 Sep 2023 03:33:27 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 0614C8645F; Fri,  8 Sep 2023 04:52:18 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B95598645F
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 03:33:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A28F78645F
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 04:52:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-64a5bc53646so9020906d6.2
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 18:33:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1c0a4333e03so3612345ad.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 19:52:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694136803; x=1694741603; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jWFOCqAfCXuz02WoQUvtEl78epMDWU+SOEZpnmb3gos=;
- b=OUQ3B4YnrVT6oYMBu5TiUhFbP23KsSRBkufsI8ib9kFXjNCODveauZzN1TxjqjBZFw
- KcyeXdKbZZIgCNmF3kHu+gjG2BsLZciSL+0IlcXd+RIRWaddsjDSyygGq8vJnL/J1RSy
- 2rY56GxqUlPoAjXfmV7M6SGpgGc1WcFjUHku+BvqkNukDzC20RrHqOmKWcCGwAJIJl7P
- bC8KUlXMIKlFgQ7jVyUC/ff69GHJO67P8/mDtp4MZFiU0cGO5tQLY6ekN47JkB7n/Lb6
- TtiBbefIQZRLJici9W1tcZ8uD/UIhLVCTuPMERmrPu4itqQHtCZUlw5cBr0MwDsHaW1K
- f3hQ==
+ d=linaro.org; s=google; t=1694141533; x=1694746333; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=zBf8rSaDqLSjB2tMWzSA11fPFdlVhtXZxRMcM1Gr/Tw=;
+ b=BEB93LIVzE2j56YPc1t+56XlW6XXaLq9UGYh/iLMtqh2vpsZj45Y7qhrP5gTspwzsC
+ EpmNZ9lDyusBe0eRqrNZz+D3v7PbCEV2+MQwruAGkhjkX6otmXghCE2WCn3jN3isEKjm
+ 01AsF/OjVdoJKivclyE7npDWMUxsqNNm9p6sa6TBoiexPks3++rm+FBd5MGNKqCcNKWL
+ x9fFF3eA4LKQzxJCMUzQuIWcCTIbIZHxwdNhMPo2TWWFdA5slsarflBLZslhWv5BMTeI
+ SRIFDN5iQlDMfJqBbz+oHUFhnM5Xs04VkMpTD2tpuveAjfvGBUYYVFewu2uOHzmNQCdf
+ gPGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694136803; x=1694741603;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jWFOCqAfCXuz02WoQUvtEl78epMDWU+SOEZpnmb3gos=;
- b=F8szMWN3Wz65MUViivZoI5q3eYlbpgOsgxaOoBDO7C8Qt0S7JlSGBE7WxGKsLH9paj
- nLKCiKP8vS1HdHpZXe3U4UfeQPBcFD/injrLxlY2lBh6vCwaEiY4c3PLnoVYlBRUpmBg
- GkI4SbLBt8mb3mQXkfDBcfftr+qK5LIhjYg41iGA807nysmVkJYSUjA+S0IShXVLo0eR
- QMrgBSkzAUPIqycKSSzlB5cWs/d7CoUTQEAxtz+qD7P5uItEcZjngQiuzgtm9bzsPwwl
- Lxd5fB6G5nIMpZwp2v+DhVOWOnN2FsZWUzU8+ZpTJyN0vRHp/zvQwfob7c7BPQJuxZcw
- swfg==
-X-Gm-Message-State: AOJu0YzCQKtO7GhLdoHCNFdeyUIrJT4OqvA8n2x25LFc5i28SVRaQwgC
- KjXAaYFOWORKCYpjgoGj67s=
-X-Google-Smtp-Source: AGHT+IEGifaKCOksQ/pn/Hhqkeg+tq9Fwxl/Wrnp9QPUN4QKYJOQVIv4A1hDmzmasixF8de5Gt+mUQ==
-X-Received: by 2002:a0c:dc06:0:b0:64f:77d3:779e with SMTP id
- s6-20020a0cdc06000000b0064f77d3779emr1061303qvk.3.1694136803392; 
- Thu, 07 Sep 2023 18:33:23 -0700 (PDT)
-Received: from [192.168.1.201] (pool-173-73-95-180.washdc.fios.verizon.net.
- [173.73.95.180]) by smtp.gmail.com with ESMTPSA id
- u18-20020a0cf1d2000000b0064f725828f3sm267575qvl.35.2023.09.07.18.33.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Sep 2023 18:33:23 -0700 (PDT)
-Message-ID: <40808cb6-6feb-3127-dbab-6102cde14d11@gmail.com>
-Date: Thu, 7 Sep 2023 21:33:21 -0400
+ d=1e100.net; s=20230601; t=1694141533; x=1694746333;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zBf8rSaDqLSjB2tMWzSA11fPFdlVhtXZxRMcM1Gr/Tw=;
+ b=xCDGCnYJWvbXnr4X68a4sFRDc1cnq6ndmETj6hB4QoZuQubeCYZ6xQuO8BmHJwL+oT
+ 9i26Fplf7UDn9yLIraSazaCCMT/GETRXYpgexev7Zqa6sEslY7N7veNpfAVfADjXHJGF
+ pfxgiA3Vtb/TVyaPgO4aK2o/6RlyfafSztUdaByxXi2nMFjKMrHaOFaH1y46QIYTmZZ7
+ 9eDL/SBgOLA5S0u0gZ3uc+SMDrOkuwFbQTHjST2B+gmsppKuvlD8BS5LRufmVqBIyoyG
+ vMQK0tSlVF6TzthpqnZGjQRoPanpeKwH7cl2mHurXYt8BFkw5nk4Q7jcWDB1KjdckuqU
+ jicQ==
+X-Gm-Message-State: AOJu0YxdLljj5BxRd/477sIyn2BVEdYar4KeycbhVjvmB5tkYjbGMk/C
+ YqhxblgGScI2EkHp/xrpWG+ByQ==
+X-Google-Smtp-Source: AGHT+IEx9DjC+iwFq/7al6UfsrKICQPJ+FbJd60jgsVlTOGs1WsVyPO4J3qUEGWlFcKxNoCTtM4npA==
+X-Received: by 2002:a05:6a20:8e19:b0:111:a0e5:d2b7 with SMTP id
+ y25-20020a056a208e1900b00111a0e5d2b7mr1257040pzj.4.1694141532747; 
+ Thu, 07 Sep 2023 19:52:12 -0700 (PDT)
+Received: from octopus.. ([2400:4050:c3e1:100:2d89:7669:ac2d:f09e])
+ by smtp.gmail.com with ESMTPSA id
+ n9-20020a170902e54900b001c0ce518e98sm417286plf.224.2023.09.07.19.52.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Sep 2023 19:52:12 -0700 (PDT)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v3 00/13] firmware: scmi: add SCMI base protocol support
+Date: Fri,  8 Sep 2023 11:51:25 +0900
+Message-Id: <20230908025138.44405-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH] clk: Add GPIO-controlled clock gate driver
-Content-Language: en-US
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>
-References: <20230813235127.591432-1-marek.vasut+renesas@mailbox.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20230813235127.591432-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,130 +90,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/13/23 19:51, Marek Vasut wrote:
-> Add driver which implements GPIO-controlled clock. The GPIO is used
-> as a gate to enable/disable the clock. This matches linux clk-gpio.c
-> driver, however this does not implement the GPIO mux part, which in
-> U-Boot DM would be better fit in separate driver.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> ---
->   drivers/clk/Kconfig    | 13 +++++++++
->   drivers/clk/Makefile   |  1 +
->   drivers/clk/clk-gpio.c | 66 ++++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 80 insertions(+)
->   create mode 100644 drivers/clk/clk-gpio.c
-> 
-> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
-> index 29859cdfa15..bfd23a99046 100644
-> --- a/drivers/clk/Kconfig
-> +++ b/drivers/clk/Kconfig
-> @@ -83,6 +83,19 @@ config CLK_COMPOSITE_CCF
->   	  Enable this option if you want to (re-)use the Linux kernel's Common
->   	  Clock Framework [CCF] composite code in U-Boot's clock driver.
->   
-> +config CLK_GPIO
-> +	bool "GPIO-controlled clock gate driver"
-> +	depends on CLK
-> +	help
-> +	  Enable this option to add GPIO-controlled clock gate driver.
-> +
-> +config SPL_CLK_GPIO
-> +	bool "GPIO-controlled clock gate driver in SPL"
-> +	depends on SPL_CLK
-> +	help
-> +	  Enable this option to add GPIO-controlled clock gate driver
-> +	  in U-Boot SPL.
-> +
->   config CLK_BCM6345
->   	bool "Clock controller driver for BCM6345"
->   	depends on CLK && ARCH_BMIPS
-> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-> index e22c8cf291f..26bf429acbc 100644
-> --- a/drivers/clk/Makefile
-> +++ b/drivers/clk/Makefile
-> @@ -10,6 +10,7 @@ obj-$(CONFIG_$(SPL_TPL_)CLK) += clk_fixed_factor.o
->   obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk.o clk-divider.o clk-mux.o clk-gate.o
->   obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk-fixed-factor.o
->   obj-$(CONFIG_$(SPL_TPL_)CLK_COMPOSITE_CCF) += clk-composite.o
-> +obj-$(CONFIG_$(SPL_TPL_)CLK_GPIO) += clk-gpio.o
->   
->   obj-y += analogbits/
->   obj-y += imx/
-> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
-> new file mode 100644
-> index 00000000000..26d795b9783
-> --- /dev/null
-> +++ b/drivers/clk/clk-gpio.c
-> @@ -0,0 +1,66 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
-> + */
-> +
-> +#include <asm/gpio.h>
-> +#include <common.h>
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +
-> +struct clk_gpio_priv {
-> +	struct gpio_desc	enable;
-> +};
-> +
-> +static int clk_gpio_enable(struct clk *clk)
-> +{
-> +	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	dm_gpio_set_value(&priv->enable, 1);
-> +
-> +	return 0;
-> +}
-> +
-> +static int clk_gpio_disable(struct clk *clk)
-> +{
-> +	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	dm_gpio_set_value(&priv->enable, 0);
-> +
-> +	return 0;
-> +}
-> +
-> +const struct clk_ops clk_gpio_ops = {
-> +	.enable		= clk_gpio_enable,
-> +	.disable	= clk_gpio_disable,
-> +};
-> +
-> +static int clk_gpio_probe(struct udevice *dev)
-> +{
-> +	struct clk_gpio_priv *priv = dev_get_priv(dev);
-> +
-> +	return gpio_request_by_name(dev, "enable-gpios", 0,
-> +				    &priv->enable, GPIOD_IS_OUT);
-> +}
-> +
-> +/*
-> + * When implementing clk-mux-clock, use gpio_request_list_by_name
-> + * and implement get_rate/set_rate/set_parent ops. This should be
-> + * in a separate driver and with separate Kconfig option to enable
-> + * that driver, since unlike Linux implementation, the U-Boot DM
-> + * integration would be orthogonal to this driver.
-> + */
-> +static const struct udevice_id clk_gpio_match[] = {
-> +	{ .compatible = "gpio-gate-clock" },
-> +	{ /* sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(gpio_gate_clock) = {
-> +	.name		= "gpio_clock",
-> +	.id		= UCLASS_CLK,
-> +	.of_match	= clk_gpio_match,
-> +	.probe		= clk_gpio_probe,
-> +	.priv_auto	= sizeof(struct clk_gpio_priv),
-> +	.ops		= &clk_gpio_ops,
-> +	.flags		= DM_FLAG_PRE_RELOC,
-> +};
+This patch series allows users to access SCMI base protocol provided by
+SCMI server (platform). It will also be utilized in separate patches
+in the future to add sanity/validity checks for other protocols.
+See SCMI specification document v3.2 beta[1] for more details about SCMI
+base protocol.
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+What is currently not implemented is
+- SCMI_BASE_NOTIFY_ERRORS command and notification callback mechanism
+
+This feature won't be very useful in the current U-Boot environment.
+
+[1] https://developer.arm.com/documentation/den0056/e/?lang=en
+
+
+Test
+====
+The patch series was tested on the following platforms:
+* sandbox
+* qemu-arm64 with OPTEE as SCMI server
+
+
+Prerequisite:
+=============
+* This patch series is based on v2023.10-rc3.
+
+
+Patches:
+========
+Patch#1-#6: Add SCMI base protocol driver
+Patch#7-#10: Add SCMI base protocol device unit test
+Patch#11-#13: Add scmi command
+
+
+Change history:
+===============
+v3 (Sep 8, 2023)
+* import patch#6 (protocol availability check) from my followup patch
+* fix an issue on ST board (reported by Etienne) (patch#1)
+* minor code improvements
+* fix various typos pointed out by Etienne
+* revise function descriptions/comments 
+  (Each commit message has more details.)
+
+v2 (Jul, 26, 2023)
+* refactor devm_scmi_of_get_channel()/process_msg(), removing uses of ops
+  (patch#1)
+* use helper functions, removing uses of ops (patch#2,#9,#10)
+* add more descriptions in scmi command doc (patch#11)
+* remove 'scmi base' sub-command (patch#10,#12)
+
+v1 (Jun, 28, 2023)
+* initial release
+
+AKASHI Takahiro (13):
+  scmi: refactor the code to hide a channel from devices
+  firmware: scmi: implement SCMI base protocol
+  firmware: scmi: move scmi_bind_protocols() backward
+  firmware: scmi: framework for installing additional protocols
+  firmware: scmi: install base protocol to SCMI agent
+  firmware: scmi: add a check against availability of protocols
+  sandbox: remove SCMI base node definition from test.dts
+  firmware: scmi: fake base protocol commands on sandbox
+  test: dm: simplify SCMI unit test on sandbox
+  test: dm: add SCMI base protocol test
+  cmd: add scmi command for SCMI firmware
+  doc: cmd: add documentation for scmi
+  test: dm: add scmi command test
+
+ arch/sandbox/dts/test.dts                  |   4 -
+ arch/sandbox/include/asm/scmi_test.h       |   7 +-
+ cmd/Kconfig                                |   9 +
+ cmd/Makefile                               |   1 +
+ cmd/scmi.c                                 | 337 +++++++++++
+ doc/usage/cmd/scmi.rst                     | 126 ++++
+ drivers/clk/clk_scmi.c                     |  27 +-
+ drivers/firmware/scmi/Makefile             |   1 +
+ drivers/firmware/scmi/base.c               | 656 +++++++++++++++++++++
+ drivers/firmware/scmi/sandbox-scmi_agent.c | 379 +++++++++++-
+ drivers/firmware/scmi/scmi_agent-uclass.c  | 416 +++++++++++--
+ drivers/power/regulator/scmi_regulator.c   |  27 +-
+ drivers/reset/reset-scmi.c                 |  19 +-
+ include/dm/uclass-id.h                     |   1 +
+ include/scmi_agent-uclass.h                |  81 ++-
+ include/scmi_agent.h                       |  29 +-
+ include/scmi_protocols.h                   | 351 +++++++++++
+ test/dm/scmi.c                             | 228 +++++--
+ 18 files changed, 2506 insertions(+), 193 deletions(-)
+ create mode 100644 cmd/scmi.c
+ create mode 100644 doc/usage/cmd/scmi.rst
+ create mode 100644 drivers/firmware/scmi/base.c
+
+-- 
+2.34.1
+
