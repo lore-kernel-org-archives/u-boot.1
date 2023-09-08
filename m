@@ -4,123 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 069F1EE57F1
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 10:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C660EE57F6
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 10:59:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71706869D3;
-	Fri,  8 Sep 2023 12:24:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 1805D8644E;
+	Fri,  8 Sep 2023 12:59:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="1iq9XNOi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m0NYMF7V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84545869E1; Fri,  8 Sep 2023 12:24:21 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 806548685B; Fri,  8 Sep 2023 07:39:39 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F205D869D1
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 12:24:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F3678644E
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 07:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1c1ff5b741cso17098665ad.2
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 03:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1694168656; x=1694773456;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hYVEvu/EevuJFzLrZroJH5SVPAN7FUEn2IPmbRaCxJo=;
- b=1iq9XNOi/tyZzbotsKIrF/ZBqPpvAN3AmZQdXkxVaIuEDAggH08rLGlHsZ7urxvJN+
- ynG0u9Y94LlcAzpzW6D0FVvc3Mm4YdyZaHCXFbvMo5tOzkmai/jVCYBKVhN0FDT9qWav
- ogbJR5s8neS+bh1/ORIhmrkAvqhThCXGgoOaFzgq3qWibnJQ8FRTAETazh1XpfKJEIdW
- yK9yw1Fm9wPLL8SB5FKXUuGbpcebTdC4IGYp1kYhrQc622IS8AbhKwDgWRLtJKOWw1/6
- XBLR7h/6Tz5LWaManX/OxBA5uCUtVBVR3pTx/qofWHvtjedbVMokdmZlfFPdzCAx56FQ
- QFYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694168656; x=1694773456;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hYVEvu/EevuJFzLrZroJH5SVPAN7FUEn2IPmbRaCxJo=;
- b=lt03hMH2191FWiEsDTPXItwb2DMGnv3BRLES1c9eL4w0W+HlJeqob429zNP0PbYIpn
- CE3NIb/ce6kPX3575ljb8xaUkAVnvja8GTkN6fq6tIrXTRil1bD8G+MmagTNJpyXN+ZX
- eUMk3ix4imcirdSjObSqpP7c04lDUz58O5HlVX09PxNkesD+ae/g9KpkjyMM6HDzkI6c
- T7ZePqbdCirkKOjcDHALJtahKFYvqCNI2przUNeWSynEl5LACsoKlQc7ai1oRxqW4Ecx
- nRANv+fvldyLSJWw0XcwVwjZKjvHgTQ6/uye7qOLNKpjV0FMJbS+zskZxr3wR85nJ0Om
- Qtog==
-X-Gm-Message-State: AOJu0YwQlH5N2TNF0cjCmaHQTiXDibj/niqWrraUALu+a75rEWW6a4ru
- 2soYZcKgCAwEesIFoZvrWWy3MQ==
-X-Google-Smtp-Source: AGHT+IEpYQWNfZmXcVDuGAtmZANRKnwjIWkZmrYx87krKu9f6S8vNRGOwX5CiOi3Bew2u/7T8qdfGQ==
-X-Received: by 2002:a17:902:db11:b0:1bc:61d6:5fcc with SMTP id
- m17-20020a170902db1100b001bc61d65fccmr2147959plx.51.1694168656097; 
- Fri, 08 Sep 2023 03:24:16 -0700 (PDT)
-Received: from [192.168.137.2] ([149.199.80.131])
- by smtp.gmail.com with ESMTPSA id
- e3-20020a170902ed8300b001b1a2c14a4asm1266326plj.38.2023.09.08.03.24.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 08 Sep 2023 03:24:15 -0700 (PDT)
-Message-ID: <9d45165f-fc88-4615-969b-0aafc7d43f13@monstr.eu>
-Date: Fri, 8 Sep 2023 12:24:10 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3885dY9H128956;
+ Fri, 8 Sep 2023 00:39:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1694151574;
+ bh=lA2Kwn5mODAklYE5otA+FzzOhH3+zJ9VmVsTx3G8pE0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=m0NYMF7VFxKWHncuGx1SbICibB0bZ3wA0p64OofIMq0qloBG+VkhYbi/xxxtXRExg
+ SuC8T+1JSa5UtnJSVM3A+H24XV+8Lq81N/QWeD6tfrTzGUjJ3Le3J28HwzC6KCAq+C
+ oZiLvwL2QbS1hYpBMTrspxg6CspcV8k86PQij+iw=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3885dYok034334
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 8 Sep 2023 00:39:34 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
+ Sep 2023 00:39:32 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 8 Sep 2023 00:39:32 -0500
+Received: from [10.24.69.34] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3885dT1S003184;
+ Fri, 8 Sep 2023 00:39:29 -0500
+Message-ID: <30919c1d-b5bb-8fd5-5945-27de699a2c3d@ti.com>
+Date: Fri, 8 Sep 2023 11:09:28 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: sandbox trace errors in CI loop
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v4 5/6] docs: board: ti: Add j721s2_evm documentation
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <7d128f4a-b972-0535-ac06-bd600ba2e37c@monstr.eu>
- <20230907181411.GX305624@bill-the-cat>
-From: Michal Simek <monstr@monstr.eu>
-Autocrypt: addr=monstr@monstr.eu; keydata=
- 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
-In-Reply-To: <20230907181411.GX305624@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Andrew Davis <afd@ti.com>
+References: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
+ <20230816-b4-upstream-j721s2-r5-pinmux-v4-5-dc114bece5d7@ti.com>
+From: Apurva Nandan <a-nandan@ti.com>
+In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v4-5-dc114bece5d7@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Fri, 08 Sep 2023 12:59:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,210 +85,378 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-
-On 9/7/23 20:14, Tom Rini wrote:
-> On Thu, Sep 07, 2023 at 05:30:03PM +0200, Michal Simek wrote:
->> Hi Simon and Tom,
->>
->> I am preparing pull request and I see that CI loop is reporting issue with
->> sandbox trace and I have no idea what's going wrong here.
->>
->> This is the first problematic commit but have no clue what it has to do with trace.
->>
->> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/commit/8c5f80d11b29536979ac41a6087fb8938f45bbf2
->>
->> If you have an access you can take a look at my queue to see that only this
->> job is failing.
->> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipelines
->>
->> Thanks,
->> Michal
->>
->> collected 1152 items / 1151 deselected / 1 selected
->> test/py/tests/test_trace.py F                                            [100%]
->> =================================== FAILURES ===================================
->> __________________________________ test_trace __________________________________
->> test/py/tests/test_trace.py:292: in test_trace
->>      check_function(cons, fname, proftool, map_fname, trace_dat)
->> test/py/tests/test_trace.py:117: in check_function
->>      out = util.run_and_log(cons, ['sh', '-c', cmd])
->> test/py/u_boot_utils.py:181: in run_and_log
->>      output = runner.run(cmd, ignore_errors=ignore_errors, stdin=stdin, env=env)
->> test/py/multiplexed_log.py:183: in run
->>      raise exception
->> E   ValueError: Exit code: 1
->> ---------------------------- Captured stdout setup -----------------------------
->> /u-boot
->> trace: early enable at 00100000
->> sandbox_serial serial: pinctrl_select_state_full:
->> uclass_get_device_by_phandle_id: err=-19
->> =>
-> 
-> I don't get it either since I see this on master with trace options
-> enabled per CI:
-> $ ./u-boot -T arch/sandbox/dts/test.dtb
-> trace: early enable at 00100000
-> sandbox_serial serial: pinctrl_select_state_full: uclass_get_device_by_phandle_id: err=-19
-> ... rest of boot proceeds ...
-> 
-> So the test should be failing already if that was the problem.
-> 
-
-I don't thin it is the problematic part.
-
-When I look at
-https://source.denx.de/u-boot/u-boot/-/blob/master/tools/docker/Dockerfile?ref_type=heads#L225
-
-clone is done from
-git clone https://github.com/rostedt/trace-cmd.git /tmp/trace/trace-cmd && \
-
-https://github.com/rostedt/trace-cmd/blob/master/README#L5
-
-we should be using git://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git 
-instead.
-
-I installed the latest version on my PC and run it via pytest and this is what I 
-am getting.
-You see that trace-cmd report is returning "failed to init data".
-
-Are we wired to any specific trace-cmd version?
-
-Thanks,
-Michal
-
-
-$ ./test/py/test.py -p no:random-order --bd sandbox --build -s -k test_trace
-+make O=/home/monstr/data/disk/u-boot/build-sandbox -s sandbox_defconfig
-+make O=/home/monstr/data/disk/u-boot/build-sandbox -s -j12
-==================================================================== test 
-session starts =====================================================================
-platform linux -- Python 3.10.12, pytest-6.2.5, py-1.10.0, pluggy-0.13.0
-rootdir: /home/monstr/data/disk/u-boot/test/py, configfile: pytest.ini
-plugins: forked-1.4.0, xdist-2.5.0
-collected 1152 items / 1151 deselected / 1 selected 
-
-
-test/py/tests/test_trace.py /u-boot
-trace: early enable at 00100000
-sandbox_serial serial: pinctrl_select_state_full: 
-uclass_get_device_by_phandle_id: err=-19
-
-
-U-Boot 2023.10-rc4-00005-gb8dbddc83ab4 (Sep 08 2023 - 12:20:25 +0200)
-
-Reset Status: WARM Reset Status: COLD
-Model: sandbox
-DRAM:  256 MiB
-trace: copying 009a442c bytes of early data from 100000 to 0e000000
-658075 traced function calls
-trace: enabled
-Core:  275 devices, 97 uclasses, devicetree: board
-WDT:   Not starting wdt-gpio-toggle
-wdt_gpio wdt-gpio-level: Request for wdt gpio failed: -16
-WDT:   Not starting wdt@0
-MMC:   Can't map file 'mmc1.img': Invalid argument
-mmc1: Unable to map file 'mmc1.img'
-Can't map file 'mmc1.img': Invalid argument
-mmc1: Unable to map file 'mmc1.img'
-mmc1 - probe failed: -1
-mmc2: 2 (SD)Can't map file 'mmc1.img': Invalid argument
-mmc1: Unable to map file 'mmc1.img'
-, mmc0: 0 (SD)
-Loading Environment from nowhere... OK
-In:    serial,cros-ec-keyb,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Model: sandbox
-Net:   eth0: eth@10002000, eth5: eth@10003000, eth3: sbe5, eth6: eth@10004000, 
-eth8: phy-test-eth, eth4: dsa-test-eth, eth2: lan0, eth7: lan1
-Hit any key to stop autoboot:  0
-=> => trace pause
-=> => trace stats
-         276,625 function sites
-       1,568,061 function calls
-               0 untracked function calls
-       1,213,676 traced function calls (898312 dropped due to overflow)
-              36 maximum observed call depth
-              15 call depth limit
-       1,024,122 calls not traced due to depth
-       1,213,676 max function calls
-
-trace buffer e000000 call records e21c4e8
-=> => bootstage report
-Timer summary in microseconds (10 records):
-        Mark    Elapsed  Stage
-           0          0  reset
-           0          0  board_init_f
-      40,753     40,753  board_init_r
-      91,689     50,936  eth_common_init
-      91,699         10  eth_initialize
-      93,786      2,087  main_loop
-      94,644        858  cli_loop
-
-Accumulated time:
-                 10,148  dm_r
-                 11,269  of_live
-                 25,652  dm_f
-=> => trace calls 2000000 1000000
-Call list dumped to 02000000, size 0xde3b30
-=> Call list dumped to 02000000, size 0xde3b30
-=> host save hostfs - 2000000 /tmp/test_trace/trace ${profoffset}
-14564144 bytes written in 3 ms (4.5 GiB/s)
-=> +/home/monstr/data/disk/u-boot/build-sandbox/tools/proftool -t 
-/tmp/test_trace/trace -o /tmp/test_trace/trace.dat -m 
-/home/monstr/data/disk/u-boot/build-sandbox/System.map dump-ftrace
-9842 functions found in map file, start addr 3e000
-call count: 1213676
-+trace-cmd dump /tmp/test_trace/trace.dat
-
-  Tracing meta data in file /tmp/test_trace/trace.dat:
-	[Initial format]
-		6	[Version]
-		0	[Little endian]
-		4	[Bytes in a long]
-		4096	[Page size, bytes]
-	[Header page, 205 bytes]
-	[Header event, 205 bytes]
-	[Ftrace format, 3 events]
-	[Events format, 0 systems]
-	[Kallsyms, 370293 bytes]
-	[Trace printk, 0 bytes]
-	[Saved command lines, 9 bytes]
-	1 [CPUs with tracing data]
-	[6 options]
-	[Flyrecord tracing data]
-	[Tracing clock]
-		[local] global counter uptime perf mono mono_raw boot x86-tsc
-
-+sh -c trace-cmd report /tmp/test_trace/trace.dat |grep -E '(initf_|initr_)'
-   failed to init data
-Exit code: 1
-F
-
-========================================================================== 
-FAILURES ==========================================================================
-_________________________________________________________________________ 
-test_trace _________________________________________________________________________
-test/py/tests/test_trace.py:292: in test_trace
-     check_function(cons, fname, proftool, map_fname, trace_dat)
-test/py/tests/test_trace.py:117: in check_function
-     out = util.run_and_log(cons, ['sh', '-c', cmd])
-test/py/u_boot_utils.py:181: in run_and_log
-     output = runner.run(cmd, ignore_errors=ignore_errors, stdin=stdin, env=env)
-test/py/multiplexed_log.py:183: in run
-     raise exception
-E   ValueError: Exit code: 1
-================================================================== short test 
-summary info ===================================================================
-FAILED test/py/tests/test_trace.py::test_trace - ValueError: Exit code: 1
-============================================================= 1 failed, 1151 
-deselected in 2.13s =============================================================
-
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+On 04/09/23 16:08, Manorit Chawdhry wrote:
+> Add the documentation for J721S2-EVM and SK-AM68
+>
+> TRM for J721S2/AM68: https://www.ti.com/lit/pdf/spruj28
+> Product Page for J721S2: https://www.ti.com/tool/J721S2XSOMXEVM
+> Product Page for AM68: https://www.ti.com/tool/SK-AM68
+>
+> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>   doc/board/ti/j721s2_evm.rst | 341 ++++++++++++++++++++++++++++++++++++++++++++
+>   doc/board/ti/k3.rst         |   1 +
+>   2 files changed, 342 insertions(+)
+>
+> diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
+> new file mode 100644
+> index 000000000000..a72a47ee8603
+> --- /dev/null
+> +++ b/doc/board/ti/j721s2_evm.rst
+> @@ -0,0 +1,341 @@
+> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+> +.. sectionauthor:: Manorit Chawdhry <m-chawdhry@ti.com>
+> +
+> +J721S2 and AM68 Platforms
+> +=========================
+> +
+> +Introduction:
+> +-------------
+> +The J721S2 family of SoCs are part of K3 Multicore SoC architecture platform
+> +targeting automotive applications. They are designed as a low power, high
+> +performance and highly integrated device architecture, adding significant
+> +enhancement on processing power, graphics capability, video and imaging
+> +processing, virtualization and coherent memory support.
+> +
+> +The AM68 Starter Kit/Evaluation Module (EVM) is based on the J721S2 family
+> +of SoCs. They are designed for machine vision, traffic monitoring, retail
+> +automation, and factory automation.
+> +
+> +The device is partitioned into three functional domains, each containing
+> +specific processing cores and peripherals:
+> +
+> +1. Wake-up (WKUP) domain:
+> +    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
+> +
+> +2. Microcontroller (MCU) domain:
+> +    * Dual core ARM Cortex-R5F processor, runs device management
+> +      and SoC early boot
+> +
+> +3. MAIN domain:
+> +    * Dual core 64-bit ARM Cortex-A72, runs HLOS
+> +
+> +More info can be found in TRM: https://www.ti.com/lit/pdf/spruj28
+> +
+> +Platform information:
+> +
+> +* https://www.ti.com/tool/J721S2XSOMXEVM
+> +* https://www.ti.com/tool/SK-AM68
+> +
+> +Boot Flow:
+> +----------
+> +Below is the pictorial representation of boot flow:
+> +
+> +.. image:: img/boot_diagram_k3_current.svg
+> +
+> +- On this platform, "TI Foundational Security" (TIFS) functions as the
+> +  security enclave master while "Device Manager" (DM), also known as the
+> +  "TISCI server" in TI terminology, offers all the essential services.
+> +
+> +- As illustrated in the diagram above, R5 SPL manages power and clock
+> +  services independently before handing over control to "DM". The A72 or
+> +  the C7x (Aux core) software components request TIFS/DM to handle
+> +  security or device management services.
+> +
+> +Sources:
+> +--------
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_boot_sources
+> +    :end-before: .. k3_rst_include_end_boot_sources
+> +
+> +Build procedure:
+> +----------------
+> +0. Setup the environment variables:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
+> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
+> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
+> +
+> +Set the variables corresponding to this platform:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
+> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
+> +.. code-block:: bash
+> +
+> + $ export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
+> + $ export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
+> + $ export TFA_BOARD=generic
+> + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
+> + $ # The following is not a typo, j784s4 is the OP-TEE platform for j721s2
+> + $ export OPTEE_PLATFORM=k3-j784s4
+> + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
+> +
+> +.. j721s2_evm_rst_include_start_build_steps
+> +
+> +1. Trusted Firmware-A:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_tfa
+> +    :end-before: .. k3_rst_include_end_build_steps_tfa
+> +
+> +
+> +2. OP-TEE:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_optee
+> +    :end-before: .. k3_rst_include_end_build_steps_optee
+> +
+> +3. U-Boot:
+> +
+> +.. _j721s2_evm_rst_u_boot_r5:
+> +
+> +* 3.1 R5:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
+> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
+> +
+> +.. _j721s2_evm_rst_u_boot_a72:
+> +
+> +* 3.2 A72:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_uboot
+> +    :end-before: .. k3_rst_include_end_build_steps_uboot
+> +.. j721s2_evm_rst_include_end_build_steps
+> +
+> +Target Images
+> +--------------
+> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
+> +variant (GP, HS-FS, HS-SE) requires a different source for these files.
+> +
+> + - GP
+> +
+> +    * tiboot3-j721s2-gp-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
+> +    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
+> +
+> + - HS-FS
+> +
+> +    * tiboot3-j721s2-hs-fs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
+> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
+> +
+> + - HS-SE
+> +
+> +    * tiboot3-j721s2-hs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
+> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
+> +
+> +Image formats:
+> +--------------
+> +
+> +- tiboot3.bin
+> +
+> +.. image:: img/multi_cert_tiboot3.bin.svg
+> +
+> +- tispl.bin
+> +
+> +.. image:: img/dm_tispl.bin.svg
+> +
+> +R5 Memory Map:
+> +--------------
+> +
+> +.. list-table::
+> +   :widths: 16 16 16
+> +   :header-rows: 1
+> +
+> +   * - Region
+> +     - Start Address
+> +     - End Address
+> +
+> +   * - SPL
+> +     - 0x41c00000
+> +     - 0x41c40000
+> +
+> +   * - EMPTY
+> +     - 0x41c40000
+> +     - 0x41c61f20
+> +
+> +   * - STACK
+> +     - 0x41c65f20
+> +     - 0x41c61f20
+> +
+> +   * - Global data
+> +     - 0x41c65f20
+> +     - 0x41c66000
+> +
+> +   * - Heap
+> +     - 0x41c66000
+> +     - 0x41c76000
+> +
+> +   * - BSS
+> +     - 0x41c76000
+> +     - 0x41c80000
+> +
+> +   * - DM DATA
+> +     - 0x41c80000
+> +     - 0x41c84130
+> +
+> +   * - EMPTY
+> +     - 0x41c84130
+> +     - 0x41cff9fc
+> +
+> +   * - MCU Scratchpad
+> +     - 0x41cff9fc
+> +     - 0x41cffbfc
+> +
+> +   * - ROM DATA
+> +     - 0x41cffbfc
+> +     - 0x41cfffff
+> +
+> +Switch Setting for Boot Mode
+> +----------------------------
+> +
+> +Boot Mode pins provide means to select the boot mode and options before the
+> +device is powered up. After every POR, they are the main source to populate
+> +the Boot Parameter Tables.
+> +
+> +Boot Mode Pins for J721S2-EVM
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +The following table shows some common boot modes used on J721S2 platform.
+> +More details can be found in the Technical Reference Manual:
+> +https://www.ti.com/lit/pdf/spruj28 under the `Boot Mode Pins` section.
+> +
+> +.. list-table:: Boot Modes
+> +   :widths: 16 16 16
+> +   :header-rows: 1
+> +
+> +   * - Switch Label
+> +     - SW9: 12345678
+> +     - SW8: 12345678
+> +
+> +   * - SD
+> +     - 00000000
+> +     - 10000010
+> +
+> +   * - EMMC
+> +     - 01000000
+> +     - 10000000
+> +
+> +   * - OSPI
+> +     - 01000000
+> +     - 00000110
+> +
+> +   * - UART
+> +     - 01110000
+> +     - 00000000
+> +
+> +   * - USB DFU
+> +     - 00100000
+> +     - 10000000
+> +
+> +For SW8 and SW9, the switch state in the "ON" position = 1.
+> +
+> +Boot Mode Pins for SK-AM68
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +The following table shows some common boot modes used on AM68-SK platform.
+> +More details can be found in the User Guide for AM68-SK:
+> +https://www.ti.com/pdf/spruj68 under the `Bootmode Settings` section.
+The above user guide link doesn't work :)
+> +
+> +.. list-table:: Boot Modes
+> +   :widths: 16 16
+> +   :header-rows: 1
+> +
+> +   * - Switch Label
+> +     - SW1: 1234
+> +
+> +   * - SD
+> +     - 0000
+> +
+> +   * - xSPI
+> +     - 0010
+> +
+> +   * - UART
+> +     - 1010
+> +
+> +   * - Ethernet
+> +     - 0100
+> +
+> +For SW1, the switch state in the "ON" position = 1.
+> +
+> +Debugging U-Boot
+> +----------------
+> +
+> +See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+> +detailed setup information.
+> +
+> +.. warning::
+> +
+> +  **OpenOCD support since**: v0.12.0
+> +
+> +  If the default package version of OpenOCD in your development
+> +  environment's distribution needs to be updated, it might be necessary to
+> +  build OpenOCD from the source.
+> +
+> +Debugging U-Boot on J721S2-EVM
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+> +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+> +
+> +To start OpenOCD and connect to the board
+> +
+> +.. code-block:: bash
+> +
+> +  openocd -f board/ti_j721s2evm.cfg
+> +
+> +Debugging U-Boot on SK-AM68
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_connect_cti20
+> +    :end-before: .. k3_rst_include_end_openocd_connect_cti20
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
+> +    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
+> +
+> +For SK-AM68, the openocd_connect.cfg is as follows:
+> +
+> +.. code-block:: tcl
+> +
+> +  # TUMPA example:
+> +  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
+> +  source [find interface/ftdi/tumpa.cfg]
+> +
+> +  transport select jtag
+> +
+> +  # default JTAG configuration has only SRST and no TRST
+> +  reset_config srst_only srst_push_pull
+> +
+> +  # delay after SRST goes inactive
+> +  adapter srst delay 20
+> +
+> +  if { ![info exists SOC] } {
+> +    # Set the SoC of interest
+> +    set SOC j721s2
+> +  }
+> +
+> +  source [find target/ti_k3.cfg]
+> +
+> +  ftdi tdo_sample_edge falling
+> +
+> +  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
+> +  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
+> +  adapter speed 16000
+> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> index 5f9bd4dfcbe9..423d55526dc5 100644
+> --- a/doc/board/ti/k3.rst
+> +++ b/doc/board/ti/k3.rst
+> @@ -36,6 +36,7 @@ K3 Based SoCs
+>      am65x_evm
+>      j7200_evm
+>      j721e_evm
+> +   j721s2_evm
+>   
+>   Boot Flow Overview
+>   ------------------
+>
