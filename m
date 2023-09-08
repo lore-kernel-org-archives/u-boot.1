@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34E4FEB8FDE
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 02:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCF4EB8FDE
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 02:53:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6F2C868D1;
-	Fri,  8 Sep 2023 04:52:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1448C8676C;
+	Fri,  8 Sep 2023 04:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lKb+Dsq1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J7NHdeqZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C8648676C; Fri,  8 Sep 2023 04:52:27 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 14EDE868D7; Fri,  8 Sep 2023 04:52:28 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3B9386907
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 04:52:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE8AD86995
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 04:52:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1b89b0c73d7so3003155ad.1
- for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 19:52:22 -0700 (PDT)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-26fa19322b5so414889a91.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 19:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694141541; x=1694746341; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694141543; x=1694746343; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YP5GypidPwfsg4gfiM/WuMY1RsNXxacFHC8ieH3JDUo=;
- b=lKb+Dsq1HljNonoEI5Z46zTbXfcWkKiHXHHb2yl9C1uu1ah3ucnqolrNhz17nN0GbN
- ZWGoKK2/+jGoEHrbTL3DumCYsCQC/4oSWFdoBPp4cVpEokSleUqO0HvszmPgKeN64HQV
- qcB3TaVFWECMt6SEA7brevR+TkrafWX9xr4DGYzdkeDNrqy3y6zRgHiVFFj1su9ij+6B
- jwmf453ubaovMG/4kCtQJakH4Zs4S5h6+qq5VlwuxoMYDhycIEsQZmorXsBHbNqXL+Tj
- Lnc4+681gz3nB23LiaDgeUt9TJ1ifvE6ul/8ltug/oKRS46IpZTtHuFBGLj60ucamSyO
- pI0w==
+ bh=eUShx2iTkUy1YqhRliZ2KHnTEDC/P7z8JupwczPNw/U=;
+ b=J7NHdeqZcNpxfsSFH1XJdg1Pj/SSoFmo9JShtLwnalaehEdl+blEMY2dELIr/WClHr
+ Kelr2S2Fi/teGjbLk/QfcR97yZ5ZFvdCjVOyDW8EyiL6BIKfr0aQVpmb65ph8Q18xgc5
+ StnljYuMO1MBiswHhTezMX+wbMRDbtvkUdSz8gi+kvaSbyMScMQyjNtJMz4Y+vwWLAt4
+ 9/vNG/IBhKp8fZ2a2UfDYg7bF0rcnnwVDz8BmZLBe6mRq53qyJcQ7XZqngOk2PHFkAaX
+ aJ4N2YwqGfV0erLY5UTri3xUeuT7dDD3/fv6UK2w60AGa3rVsgX2FFvQ8TLKRYAQEYzn
+ 1KUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694141541; x=1694746341;
+ d=1e100.net; s=20230601; t=1694141543; x=1694746343;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YP5GypidPwfsg4gfiM/WuMY1RsNXxacFHC8ieH3JDUo=;
- b=mxOqt9kJAg9ccwfTR5kQkPMEZIVF6j4w1Kc27g8UOmJuGDh01eUumOliczdJ2QW4iP
- krDoVdImyy3cZZIKXVOco1jSQ1n3qxEBrH0gHUV1444fxZT+XZLL78KPKGFY7ah7lJPF
- iF1sr+c65FAOjKMtIP424nvO6X/xwM/z+QGjs3Y7evIXEZKyquWBAvy0JIs0BjjD/+PN
- SIFStpdJ9qoCv2lC5xO9ZuQT+5BLwWlFYOXLmZ0hLzcMOo2+cBmKeCxGHPK9HM802mkJ
- 51e58ZB2lzNfSnClgB4T0PoQtgZHgsdCC7cP/2xtXYkmJBKImAwiylkV4kAKamSBHNUR
- vHBA==
-X-Gm-Message-State: AOJu0Yxqfu66JIuPP0xnJR5gT5VYjvvOVsABkgc9jS4+Est05GPtYuoG
- yOHCF3SxvGix3826mRkvPVWV+A==
-X-Google-Smtp-Source: AGHT+IF6T5oUvVzLjlvrUoiebYKr5ZsoVwFhcz8aQwE1vPccOnSVr6L9Avqzs1cjitfDsx/gLtEisA==
-X-Received: by 2002:a17:903:41c2:b0:1c0:ecbb:182e with SMTP id
- u2-20020a17090341c200b001c0ecbb182emr1494471ple.2.1694141541028; 
- Thu, 07 Sep 2023 19:52:21 -0700 (PDT)
+ bh=eUShx2iTkUy1YqhRliZ2KHnTEDC/P7z8JupwczPNw/U=;
+ b=PYjmFobueM92P0nN8Yup5zXtC8M5P8XaYgO493UoGfQ2e2vcwEv15/GBC3Yl9sDO2i
+ WQRRRH/jGJrDohuXXeLdAol8Ght998NMNsBtdn5RUJRNaEG+IVhgW+3Y4HjRxYGZoWgS
+ 0hpxUfoyQlaKdODQDUi+1b7mAEp5cg3Q8IeAzZgweShxKZb93t0W8fLvvCzcMdz0UmhA
+ CtJtup+KIZB6F/77tBb8/YC6bq1Ek6/jYczp7+QkbR9E8qXsomPfGt0Dpct9BAbxEqqW
+ 3UiV5Cw8VTdYfZq+x8njjE94/HwzCTUxtmQoxwsphx3KJj05u75j5dxjXFILmDYWLnrs
+ F4IA==
+X-Gm-Message-State: AOJu0YxdDMbSGmOBLDAZjy7JswxyGFGvzutyjee7b5h9bO6liMIwaxB/
+ bySR+ORGKOXhueUJRkxArhe36Q==
+X-Google-Smtp-Source: AGHT+IE578v0HCUF6wUycp2Ss7XEYHUFMnWf1F8G3R1Hd9jlS0KE4blka+LM4m8nJSxIkNELH6/5FQ==
+X-Received: by 2002:a17:902:ec8b:b0:1c0:cbaf:6939 with SMTP id
+ x11-20020a170902ec8b00b001c0cbaf6939mr1444481plg.3.1694141543014; 
+ Thu, 07 Sep 2023 19:52:23 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:2d89:7669:ac2d:f09e])
  by smtp.gmail.com with ESMTPSA id
- n9-20020a170902e54900b001c0ce518e98sm417286plf.224.2023.09.07.19.52.18
+ n9-20020a170902e54900b001c0ce518e98sm417286plf.224.2023.09.07.19.52.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Sep 2023 19:52:20 -0700 (PDT)
+ Thu, 07 Sep 2023 19:52:22 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v3 02/13] firmware: scmi: implement SCMI base protocol
-Date: Fri,  8 Sep 2023 11:51:27 +0900
-Message-Id: <20230908025138.44405-3-takahiro.akashi@linaro.org>
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Etienne Carriere <etienne.carriere@foss.st.com>
+Subject: [PATCH v3 03/13] firmware: scmi: move scmi_bind_protocols() backward
+Date: Fri,  8 Sep 2023 11:51:28 +0900
+Message-Id: <20230908025138.44405-4-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230908025138.44405-1-takahiro.akashi@linaro.org>
 References: <20230908025138.44405-1-takahiro.akashi@linaro.org>
@@ -93,1078 +94,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SCMI base protocol is mandatory according to the SCMI specification.
-
-With this patch, SCMI base protocol can be accessed via SCMI transport
-layers. All the commands, except SCMI_BASE_NOTIFY_ERRORS, are supported.
-This is because U-Boot doesn't support interrupts and the current transport
-layers are not able to handle asynchronous messages properly.
+Move the location of scmi_bind_protocols() backward for changes
+in later patches.
+There is no change in functionality.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
-v3
-* strncpy (TODO)
-* remove a duplicated function prototype
-* use newly-allocated memory when return vendor name or agent name
-* revise function descriptions in a header
-v2
-* add helper functions, removing direct uses of ops
-* add function descriptions for each of functions in ops
----
- drivers/firmware/scmi/Makefile |   1 +
- drivers/firmware/scmi/base.c   | 656 +++++++++++++++++++++++++++++++++
- include/dm/uclass-id.h         |   1 +
- include/scmi_protocols.h       | 351 ++++++++++++++++++
- 4 files changed, 1009 insertions(+)
- create mode 100644 drivers/firmware/scmi/base.c
+ drivers/firmware/scmi/scmi_agent-uclass.c | 59 +++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-diff --git a/drivers/firmware/scmi/Makefile b/drivers/firmware/scmi/Makefile
-index b2ff483c75a1..1a23d4981709 100644
---- a/drivers/firmware/scmi/Makefile
-+++ b/drivers/firmware/scmi/Makefile
-@@ -1,4 +1,5 @@
- obj-y	+= scmi_agent-uclass.o
-+obj-y	+= base.o
- obj-y	+= smt.o
- obj-$(CONFIG_SCMI_AGENT_SMCCC)		+= smccc_agent.o
- obj-$(CONFIG_SCMI_AGENT_MAILBOX)	+= mailbox_agent.o
-diff --git a/drivers/firmware/scmi/base.c b/drivers/firmware/scmi/base.c
-new file mode 100644
-index 000000000000..6b99f36d0697
---- /dev/null
-+++ b/drivers/firmware/scmi/base.c
-@@ -0,0 +1,656 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * SCMI Base protocol as U-Boot device
-+ *
-+ * Copyright (C) 2023 Linaro Limited
-+ *		author: AKASHI Takahiro <takahiro.akashi@linaro.org>
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <scmi_agent.h>
-+#include <scmi_protocols.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <asm/types.h>
-+#include <dm/device_compat.h>
-+#include <linux/kernel.h>
-+
-+/**
-+ * scmi_generic_protocol_version - get protocol version
-+ * @dev:	SCMI device
-+ * @id:		SCMI protocol ID
-+ * @version:	Pointer to SCMI protocol version
-+ *
-+ * Obtain the protocol version number in @version.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_generic_protocol_version(struct udevice *dev,
-+				  enum scmi_std_protocol id, u32 *version)
-+{
-+	struct scmi_protocol_version_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = id,
-+		.message_id = SCMI_PROTOCOL_VERSION,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*version = out.version;
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_protocol_version_int - get Base protocol version
-+ * @dev:	SCMI device
-+ * @version:	Pointer to SCMI protocol version
-+ *
-+ * Obtain the protocol version number in @version for Base protocol.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_protocol_version_int(struct udevice *dev, u32 *version)
-+{
-+	return scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_BASE,
-+					     version);
-+}
-+
-+/**
-+ * scmi_protocol_attrs_int - get protocol attributes
-+ * @dev:		SCMI device
-+ * @num_agents:		Number of SCMI agents
-+ * @num_protocols:	Number of SCMI protocols
-+ *
-+ * Obtain the protocol attributes, the number of agents and the number
-+ * of protocols, in @num_agents and @num_protocols respectively, that
-+ * the device provides.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_protocol_attrs_int(struct udevice *dev, u32 *num_agents,
-+				   u32 *num_protocols)
-+{
-+	struct scmi_protocol_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_PROTOCOL_ATTRIBUTES,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*num_agents = SCMI_PROTOCOL_ATTRS_NUM_AGENTS(out.attributes);
-+	*num_protocols = SCMI_PROTOCOL_ATTRS_NUM_PROTOCOLS(out.attributes);
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_protocol_message_attrs_int - get message-specific attributes
-+ * @dev:		SCMI device
-+ * @message_id:		SCMI message ID
-+ * @attributes:		Message-specific attributes
-+ *
-+ * Obtain the message-specific attributes in @attributes.
-+ * This command succeeds if the message is implemented and available.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_protocol_message_attrs_int(struct udevice *dev, u32 message_id,
-+					   u32 *attributes)
-+{
-+	struct scmi_protocol_msg_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_PROTOCOL_MESSAGE_ATTRIBUTES,
-+		.in_msg = (u8 *)&message_id,
-+		.in_msg_sz = sizeof(message_id),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*attributes = out.attributes;
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_discover_vendor_int - get vendor name
-+ * @dev:	SCMI device
-+ * @vendor:	Pointer to vendor name
-+ *
-+ * Obtain the vendor's name in @vendor.
-+ * It is a caller's responsibility to free @vendor.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_discover_vendor_int(struct udevice *dev, u8 **vendor)
-+{
-+	struct scmi_base_discover_vendor_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_DISCOVER_VENDOR,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!vendor)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*vendor = strdup(out.vendor_identifier);
-+	if (!*vendor)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_discover_sub_vendor_int - get sub-vendor name
-+ * @dev:	SCMI device
-+ * @sub_vendor:	Pointer to sub-vendor name
-+ *
-+ * Obtain the sub-vendor's name in @sub_vendor.
-+ * It is a caller's responsibility to free @sub_vendor.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_discover_sub_vendor_int(struct udevice *dev,
-+					     u8 **sub_vendor)
-+{
-+	struct scmi_base_discover_vendor_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_DISCOVER_SUB_VENDOR,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!sub_vendor)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*sub_vendor = strdup(out.vendor_identifier);
-+	if (!*sub_vendor)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_discover_impl_version_int - get implementation version
-+ * @dev:		SCMI device
-+ * @impl_version:	Pointer to implementation version
-+ *
-+ * Obtain the implementation version number in @impl_version.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_discover_impl_version_int(struct udevice *dev,
-+					       u32 *impl_version)
-+{
-+	struct scmi_base_discover_impl_version_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_DISCOVER_IMPL_VERSION,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*impl_version = out.impl_version;
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_discover_list_protocols_int - get list of protocols
-+ * @dev:	SCMI device
-+ * @protocols:	Pointer to array of SCMI protocols
-+ *
-+ * Obtain the list of protocols provided in @protocols.
-+ * The number of elements in @protocols always match to the number of
-+ * protocols returned by smci_protocol_attrs() when this function succeeds.
-+ * It is a caller's responsibility to free @protocols.
-+ *
-+ * Return: the number of protocols in @protocols on success, error code otherwise
-+ */
-+static int scmi_base_discover_list_protocols_int(struct udevice *dev,
-+						 u8 **protocols)
-+{
-+	struct scmi_base_discover_list_protocols_out out;
-+	int cur;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_DISCOVER_LIST_PROTOCOLS,
-+		.in_msg = (u8 *)&cur,
-+		.in_msg_sz = sizeof(cur),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	u32 num_agents, num_protocols;
-+	u8 *buf;
-+	int i, ret;
-+
-+	ret = scmi_base_protocol_attrs(dev, &num_agents, &num_protocols);
-+	if (ret)
-+		return ret;
-+
-+	buf = calloc(sizeof(u8), num_protocols);
-+	if (!buf)
-+		return -ENOMEM;
-+
-+	cur = 0;
-+	do {
-+		ret = devm_scmi_process_msg(dev, &msg);
-+		if (ret)
-+			goto err;
-+		if (out.status) {
-+			ret = scmi_to_linux_errno(out.status);
-+			goto err;
-+		}
-+
-+		for (i = 0; i < out.num_protocols; i++, cur++)
-+			buf[cur] = out.protocols[i / 4] >> ((i % 4) * 8);
-+	} while (cur < num_protocols);
-+
-+	*protocols = buf;
-+
-+	return num_protocols;
-+err:
-+	free(buf);
-+
-+	return ret;
-+}
-+
-+/**
-+ * scmi_base_discover_agent_int - identify agent
-+ * @dev:		SCMI device
-+ * @agent_id:		SCMI agent ID
-+ * @ret_agent_id:	Pointer to SCMI agent ID
-+ * @name:		Pointer to SCMI agent name
-+ *
-+ * Obtain the agent's name in @name. If @agent_id is equal to 0xffffffff,
-+ * this function returns the caller's agent id in @ret_agent_id.
-+ * It is a caller's responsibility to free @name.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_discover_agent_int(struct udevice *dev, u32 agent_id,
-+					u32 *ret_agent_id, u8 **name)
-+{
-+	struct scmi_base_discover_agent_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_DISCOVER_AGENT,
-+		.in_msg = (u8 *)&agent_id,
-+		.in_msg_sz = sizeof(agent_id),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	if (ret_agent_id)
-+		*ret_agent_id = out.agent_id;
-+	if (name) {
-+		*name = strdup(out.name);
-+		if (!*name)
-+			return -ENOMEM;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_set_device_permissions_int - configure access permission to device
-+ * @dev:	SCMI device
-+ * @agent_id:	SCMI agent ID
-+ * @device_id:	ID of device to access
-+ * @flags:	A set of flags
-+ *
-+ * Ask for allowing or denying access permission to the device, @device_id.
-+ * The meaning of @flags is defined in SCMI specification.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_set_device_permissions_int(struct udevice *dev, u32 agent_id,
-+						u32 device_id, u32 flags)
-+{
-+	struct scmi_base_set_device_permissions_in in = {
-+		.agent_id = agent_id,
-+		.device_id = device_id,
-+		.flags = flags,
-+	};
-+	s32 status;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_SET_DEVICE_PERMISSIONS,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_set_protocol_permissions_int - configure access permission to
-+					   protocol on device
-+ * @dev:	SCMI device
-+ * @agent_id:	SCMI agent ID
-+ * @device_id:	ID of device to access
-+ * @command_id:	SCMI command ID
-+ * @flags:	A set of flags
-+ *
-+ * Ask for allowing or denying access permission to the protocol, @command_id,
-+ * on the device, @device_id.
-+ * The meaning of @flags is defined in SCMI specification.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_set_protocol_permissions_int(struct udevice *dev,
-+						  u32 agent_id, u32 device_id,
-+						  u32 command_id, u32 flags)
-+{
-+	struct scmi_base_set_protocol_permissions_in in = {
-+		.agent_id = agent_id,
-+		.device_id = device_id,
-+		.command_id = command_id,
-+		.flags = flags,
-+	};
-+	s32 status;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_SET_PROTOCOL_PERMISSIONS,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_reset_agent_configuration_int - reset resource settings
-+ * @dev:	SCMI device
-+ * @agent_id:	SCMI agent ID
-+ * @flags:	A set of flags
-+ *
-+ * Ask for allowing or denying access permission to the protocol, @command_id,
-+ * on the device, @device_id.
-+ * The meaning of @flags is defined in SCMI specification.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_reset_agent_configuration_int(struct udevice *dev,
-+						   u32 agent_id, u32 flags)
-+{
-+	struct scmi_base_reset_agent_configuration_in in = {
-+		.agent_id = agent_id,
-+		.flags = flags,
-+	};
-+	s32 status;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_BASE,
-+		.message_id = SCMI_BASE_RESET_AGENT_CONFIGURATION,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+/**
-+ * scmi_base_probe - probe base protocol device
-+ * @dev:	SCMI device
-+ *
-+ * Probe the device for SCMI base protocol and initialize the private data.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+static int scmi_base_probe(struct udevice *dev)
-+{
-+	int ret;
-+
-+	ret = devm_scmi_of_get_channel(dev);
-+	if (ret) {
-+		dev_err(dev, "get_channel failed\n");
-+		return ret;
-+	}
-+
-+	return ret;
-+}
-+
-+struct scmi_base_ops scmi_base_ops = {
-+	/* Commands */
-+	.protocol_version = scmi_base_protocol_version_int,
-+	.protocol_attrs = scmi_protocol_attrs_int,
-+	.protocol_message_attrs = scmi_protocol_message_attrs_int,
-+	.base_discover_vendor = scmi_base_discover_vendor_int,
-+	.base_discover_sub_vendor = scmi_base_discover_sub_vendor_int,
-+	.base_discover_impl_version = scmi_base_discover_impl_version_int,
-+	.base_discover_list_protocols = scmi_base_discover_list_protocols_int,
-+	.base_discover_agent = scmi_base_discover_agent_int,
-+	.base_notify_errors = NULL,
-+	.base_set_device_permissions = scmi_base_set_device_permissions_int,
-+	.base_set_protocol_permissions = scmi_base_set_protocol_permissions_int,
-+	.base_reset_agent_configuration =
-+			scmi_base_reset_agent_configuration_int,
-+};
-+
-+int scmi_base_protocol_version(struct udevice *dev, u32 *version)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->protocol_version)
-+		return (*ops->protocol_version)(dev, version);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_protocol_attrs(struct udevice *dev, u32 *num_agents,
-+			     u32 *num_protocols)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->protocol_attrs)
-+		return (*ops->protocol_attrs)(dev, num_agents, num_protocols);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_protocol_message_attrs(struct udevice *dev, u32 message_id,
-+				     u32 *attributes)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->protocol_message_attrs)
-+		return (*ops->protocol_message_attrs)(dev, message_id,
-+						      attributes);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_discover_vendor(struct udevice *dev, u8 **vendor)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_discover_vendor)
-+		return (*ops->base_discover_vendor)(dev, vendor);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_discover_sub_vendor(struct udevice *dev, u8 **sub_vendor)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_discover_sub_vendor)
-+		return (*ops->base_discover_sub_vendor)(dev, sub_vendor);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_discover_impl_version(struct udevice *dev, u32 *impl_version)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_discover_impl_version)
-+		return (*ops->base_discover_impl_version)(dev, impl_version);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_discover_list_protocols(struct udevice *dev, u8 **protocols)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_discover_list_protocols)
-+		return (*ops->base_discover_list_protocols)(dev, protocols);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_discover_agent(struct udevice *dev, u32 agent_id,
-+			     u32 *ret_agent_id, u8 **name)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_discover_agent)
-+		return (*ops->base_discover_agent)(dev, agent_id, ret_agent_id,
-+						   name);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_notify_errors(struct udevice *dev, u32 enable)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_notify_errors)
-+		return (*ops->base_notify_errors)(dev, enable);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_set_device_permissions(struct udevice *dev, u32 agent_id,
-+				     u32 device_id, u32 flags)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_set_device_permissions)
-+		return (*ops->base_set_device_permissions)(dev, agent_id,
-+							   device_id, flags);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_set_protocol_permissions(struct udevice *dev,
-+				       u32 agent_id, u32 device_id,
-+				       u32 command_id, u32 flags)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_set_protocol_permissions)
-+		return (*ops->base_set_protocol_permissions)(dev, agent_id,
-+							     device_id,
-+							     command_id,
-+							     flags);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int scmi_base_reset_agent_configuration(struct udevice *dev, u32 agent_id,
-+					u32 flags)
-+{
-+	const struct scmi_base_ops *ops = device_get_ops(dev);
-+
-+	if (ops->base_reset_agent_configuration)
-+		return (*ops->base_reset_agent_configuration)(dev, agent_id,
-+							      flags);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+U_BOOT_DRIVER(scmi_base_drv) = {
-+	.id = UCLASS_SCMI_BASE,
-+	.name = "scmi_base_drv",
-+	.ops = &scmi_base_ops,
-+	.probe = scmi_base_probe,
-+};
-+
-+UCLASS_DRIVER(scmi_base) = {
-+	.id		= UCLASS_SCMI_BASE,
-+	.name		= "scmi_base",
-+};
-diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index 0432c95c9edc..ab315803dad7 100644
---- a/include/dm/uclass-id.h
-+++ b/include/dm/uclass-id.h
-@@ -123,6 +123,7 @@ enum uclass_id {
- 	UCLASS_RNG,		/* Random Number Generator */
- 	UCLASS_RTC,		/* Real time clock device */
- 	UCLASS_SCMI_AGENT,	/* Interface with an SCMI server */
-+	UCLASS_SCMI_BASE,	/* Interface for SCMI Base protocol */
- 	UCLASS_SCSI,		/* SCSI device */
- 	UCLASS_SERIAL,		/* Serial UART */
- 	UCLASS_SIMPLE_BUS,	/* Bus with child devices */
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index a220cb2a91ad..f41d3f317ce2 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -49,6 +49,357 @@ enum scmi_discovery_id {
- 	SCMI_PROTOCOL_MESSAGE_ATTRIBUTES = 0x2,
- };
+diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
+index feb31809e715..94e54eeb066b 100644
+--- a/drivers/firmware/scmi/scmi_agent-uclass.c
++++ b/drivers/firmware/scmi/scmi_agent-uclass.c
+@@ -157,6 +157,65 @@ int devm_scmi_process_msg(struct udevice *dev, struct scmi_msg *msg)
+ 	return scmi_process_msg(protocol->parent, priv->channel, msg);
+ }
  
 +/*
-+ * SCMI Base Protocol
++ * SCMI agent devices binds devices of various uclasses depeding on
++ * the FDT description. scmi_bind_protocol() is a generic bind sequence
++ * called by the uclass at bind stage, that is uclass post_bind.
 + */
-+#define SCMI_BASE_PROTOCOL_VERSION 0x20000
++static int scmi_bind_protocols(struct udevice *dev)
++{
++	int ret = 0;
++	ofnode node;
++	const char *name;
 +
-+enum scmi_base_message_id {
-+	SCMI_BASE_DISCOVER_VENDOR = 0x3,
-+	SCMI_BASE_DISCOVER_SUB_VENDOR = 0x4,
-+	SCMI_BASE_DISCOVER_IMPL_VERSION = 0x5,
-+	SCMI_BASE_DISCOVER_LIST_PROTOCOLS = 0x6,
-+	SCMI_BASE_DISCOVER_AGENT = 0x7,
-+	SCMI_BASE_NOTIFY_ERRORS = 0x8,
-+	SCMI_BASE_SET_DEVICE_PERMISSIONS = 0x9,
-+	SCMI_BASE_SET_PROTOCOL_PERMISSIONS = 0xa,
-+	SCMI_BASE_RESET_AGENT_CONFIGURATION = 0xb,
-+};
++	dev_for_each_subnode(node, dev) {
++		struct driver *drv = NULL;
++		u32 protocol_id;
 +
-+#define SCMI_BASE_NAME_LENGTH_MAX 16
++		if (!ofnode_is_enabled(node))
++			continue;
 +
-+/**
-+ * struct scmi_protocol_version_out - Response for SCMI_PROTOCOL_VERSION
-+ *					command
-+ * @status:	SCMI command status
-+ * @version:	Protocol version
-+ */
-+struct scmi_protocol_version_out {
-+	s32 status;
-+	u32 version;
-+};
++		if (ofnode_read_u32(node, "reg", &protocol_id))
++			continue;
 +
-+/**
-+ * struct scmi_protocol_attrs_out - Response for SCMI_PROTOCOL_ATTRIBUTES
-+ *					command
-+ * @status:	SCMI command status
-+ * @attributes:	Protocol attributes or implementation details
-+ */
-+struct scmi_protocol_attrs_out {
-+	s32 status;
-+	u32 attributes;
-+};
++		name = ofnode_get_name(node);
++		switch (protocol_id) {
++		case SCMI_PROTOCOL_ID_CLOCK:
++			if (CONFIG_IS_ENABLED(CLK_SCMI))
++				drv = DM_DRIVER_GET(scmi_clock);
++			break;
++		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
++			if (IS_ENABLED(CONFIG_RESET_SCMI))
++				drv = DM_DRIVER_GET(scmi_reset_domain);
++			break;
++		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
++			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
++				node = ofnode_find_subnode(node, "regulators");
++				if (!ofnode_valid(node)) {
++					dev_err(dev, "no regulators node\n");
++					return -ENXIO;
++				}
++				drv = DM_DRIVER_GET(scmi_voltage_domain);
++			}
++			break;
++		default:
++			break;
++		}
 +
-+#define SCMI_PROTOCOL_ATTRS_NUM_AGENTS(attributes) \
-+				(((attributes) & GENMASK(15, 8)) >> 8)
-+#define SCMI_PROTOCOL_ATTRS_NUM_PROTOCOLS(attributes) \
-+				((attributes) & GENMASK(7, 0))
++		if (!drv) {
++			dev_dbg(dev, "Ignore unsupported SCMI protocol %#x\n",
++				protocol_id);
++			continue;
++		}
 +
-+/**
-+ * struct scmi_protocol_msg_attrs_out - Response for
-+ *					SCMI_PROTOCOL_MESSAGE_ATTRIBUTES command
-+ * @status:	SCMI command status
-+ * @attributes:	Message-specific attributes
-+ */
-+struct scmi_protocol_msg_attrs_out {
-+	s32 status;
-+	u32 attributes;
-+};
++		ret = device_bind(dev, drv, name, NULL, node, NULL);
++		if (ret)
++			break;
++	}
 +
-+/**
-+ * struct scmi_base_discover_vendor_out - Response for
-+ *					  SCMI_BASE_DISCOVER_VENDOR or
-+ *					  SCMI_BASE_DISCOVER_SUB_VENDOR command
-+ * @status:		SCMI command status
-+ * @vendor_identifier:	Name of vendor or sub-vendor in string
-+ */
-+struct scmi_base_discover_vendor_out {
-+	s32 status;
-+	u8 vendor_identifier[SCMI_BASE_NAME_LENGTH_MAX];
-+};
++	return ret;
++}
 +
-+/**
-+ * struct scmi_base_discover_impl_version_out - Response for
-+ *					SCMI_BASE_DISCOVER_IMPL_VERSION command
-+ * @status:		SCMI command status
-+ * @impl_version:	Vendor-specific implementation version
-+ */
-+struct scmi_base_discover_impl_version_out {
-+	s32 status;
-+	u32 impl_version;
-+};
-+
-+/**
-+ * struct scmi_base_discover_list_protocols_out - Response for
-+ *				SCMI_BASE_DISCOVER_LIST_PROTOCOLS command
-+ * @status:		SCMI command status
-+ * @num_protocols:	Number of SCMI protocols in @protocol
-+ * @protocols:		Array of packed SCMI protocol ID's
-+ */
-+struct scmi_base_discover_list_protocols_out {
-+	s32 status;
-+	u32 num_protocols;
-+	u32 protocols[3];
-+};
-+
-+/**
-+ * struct scmi_base_discover_agent_out - Response for
-+ *					 SCMI_BASE_DISCOVER_AGENT command
-+ * @status:	SCMI command status
-+ * @agent_id:	SCMI agent ID
-+ * @name:	Name of agent in string
-+ */
-+struct scmi_base_discover_agent_out {
-+	s32 status;
-+	u32 agent_id;
-+	u8 name[SCMI_BASE_NAME_LENGTH_MAX];
-+};
-+
-+#define SCMI_BASE_NOTIFY_ERRORS_ENABLE BIT(0)
-+
-+/**
-+ * struct scmi_base_set_device_permissions_in - Parameters for
-+ *					SCMI_BASE_SET_DEVICE_PERMISSIONS command
-+ * @agent_id:	SCMI agent ID
-+ * @device_id:	device ID
-+ * @flags:	A set of flags
-+ */
-+struct scmi_base_set_device_permissions_in {
-+	u32 agent_id;
-+	u32 device_id;
-+	u32 flags;
-+};
-+
-+#define SCMI_BASE_SET_DEVICE_PERMISSIONS_ACCESS BIT(0)
-+
-+/**
-+ * struct scmi_base_set_protocol_permissions_in - Parameters for
-+ *				SCMI_BASE_SET_PROTOCOL_PERMISSIONS command
-+ * @agent_id:		SCMI agent ID
-+ * @device_id:		device ID
-+ * @command_id:		command ID
-+ * @flags:		A set of flags
-+ */
-+struct scmi_base_set_protocol_permissions_in {
-+	u32 agent_id;
-+	u32 device_id;
-+	u32 command_id;
-+	u32 flags;
-+};
-+
-+#define SCMI_BASE_SET_PROTOCOL_PERMISSIONS_COMMAND GENMASK(7, 0)
-+#define SCMI_BASE_SET_PROTOCOL_PERMISSIONS_ACCESS BIT(0)
-+
-+/**
-+ * struct scmi_base_reset_agent_configuration_in - Parameters for
-+ *				SCMI_BASE_RESET_AGENT_CONFIGURATION command
-+ * @agent_id:	SCMI agent ID
-+ * @flags:	A set of flags
-+ */
-+struct scmi_base_reset_agent_configuration_in {
-+	u32 agent_id;
-+	u32 flags;
-+};
-+
-+#define SCMI_BASE_RESET_ALL_ACCESS_PERMISSIONS BIT(0)
-+
-+/**
-+ * struct scmi_base_ops - SCMI base protocol interfaces
-+ */
-+struct scmi_base_ops {
-+	/**
-+	 * protocol_version - get Base protocol version
-+	 * @dev:	SCMI device
-+	 * @version:	Pointer to SCMI protocol version
-+	 *
-+	 * Obtain the protocol version number in @version for Base protocol.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*protocol_version)(struct udevice *dev, u32 *version);
-+	/**
-+	 * protocol_attrs - get protocol attributes
-+	 * @dev:		SCMI device
-+	 * @num_agents:		Number of SCMI agents
-+	 * @num_protocols:	Number of SCMI protocols
-+	 *
-+	 * Obtain the protocol attributes, the number of agents and the number
-+	 * of protocols, in @num_agents and @num_protocols respectively, that
-+	 * the device provides.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*protocol_attrs)(struct udevice *dev, u32 *num_agents,
-+			      u32 *num_protocols);
-+	/**
-+	 * protocol_message_attrs - get message-specific attributes
-+	 * @dev:		SCMI device
-+	 * @message_id:		SCMI message ID
-+	 * @attributes:		Message-specific attributes
-+	 *
-+	 * Obtain the message-specific attributes in @attributes.
-+	 * This command succeeds if the message is implemented and available.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*protocol_message_attrs)(struct udevice *dev, u32 message_id,
-+				      u32 *attributes);
-+	/**
-+	 * base_discover_vendor - get vendor name
-+	 * @dev:	SCMI device
-+	 * @vendor:	Pointer to vendor name
-+	 *
-+	 * Obtain the vendor's name in @vendor.
-+	 * It is a caller's responsibility to free @vendor.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_discover_vendor)(struct udevice *dev, u8 **vendor);
-+	/**
-+	 * base_discover_sub_vendor - get sub-vendor name
-+	 * @dev:	SCMI device
-+	 * @sub_vendor:	Pointer to sub-vendor name
-+	 *
-+	 * Obtain the sub-vendor's name in @sub_vendor.
-+	 * It is a caller's responsibility to free @sub_vendor.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_discover_sub_vendor)(struct udevice *dev, u8 **sub_vendor);
-+	/**
-+	 * base_discover_impl_version - get implementation version
-+	 * @dev:		SCMI device
-+	 * @impl_version:	Pointer to implementation version
-+	 *
-+	 * Obtain the implementation version number in @impl_version.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_discover_impl_version)(struct udevice *dev,
-+					  u32 *impl_version);
-+	/**
-+	 * base_discover_list_protocols - get list of protocols
-+	 * @dev:	SCMI device
-+	 * @protocols:	Pointer to array of SCMI protocols
-+	 *
-+	 * Obtain the list of protocols provided in @protocols.
-+	 * The number of elements in @protocols always match to the number of
-+	 * protocols returned by smci_protocol_attrs() when this function
-+	 * succeeds.
-+	 * It is a caller's responsibility to free @protocols.
-+	 *
-+	 * Return: the number of protocols in @protocols on success,
-+	 * error code otherwise
-+	 */
-+	int (*base_discover_list_protocols)(struct udevice *dev,
-+					    u8 **protocols);
-+	/**
-+	 * base_discover_agent - identify agent
-+	 * @dev:		SCMI device
-+	 * @agent_id:		SCMI agent ID
-+	 * @ret_agent_id:	Pointer to SCMI agent ID
-+	 * @name:		Pointer to SCMI agent name
-+	 *
-+	 * Obtain the agent's name in @name. If @agent_id is equal to
-+	 * 0xffffffff, * this function returns the caller's agent id in
-+	 * @ret_agent_id.
-+	 * It is a caller's responsibility to free @name.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_discover_agent)(struct udevice *dev, u32 agent_id,
-+				   u32 *ret_agent_id, u8 **name);
-+	/**
-+	 * base_notify_errors - configure error notification
-+	 * @dev:	SCMI device
-+	 * @enable:	Operation
-+	 *
-+	 * This function is not yet implemented.
-+	 *
-+	 * Return: always -EOPNOTSUPP
-+	 */
-+	int (*base_notify_errors)(struct udevice *dev, u32 enable);
-+	/**
-+	 * base_set_device_permissions - configure access permission to device
-+	 * @dev:	SCMI device
-+	 * @agent_id:	SCMI agent ID
-+	 * @device_id:	ID of device to access
-+	 * @flags:	A set of flags
-+	 *
-+	 * Ask for allowing or denying access permission to the device,
-+	 * @device_id. The meaning of @flags is defined in SCMI specification.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_set_device_permissions)(struct udevice *dev, u32 agent_id,
-+					   u32 device_id, u32 flags);
-+	/**
-+	 * base_set_protocol_permissions - configure access permission to
-+	 *				   protocol on device
-+	 * @dev:	SCMI device
-+	 * @agent_id:	SCMI agent ID
-+	 * @device_id:	ID of device to access
-+	 * @command_id:	command ID
-+	 * @flags:	A set of flags
-+	 *
-+	 * Ask for allowing or denying access permission to the protocol, @command_id,
-+	 * on the device, @device_id.
-+	 * The meaning of @flags is defined in SCMI specification.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_set_protocol_permissions)(struct udevice *dev, u32 agent_id,
-+					     u32 device_id, u32 command_id,
-+					     u32 flags);
-+	/**
-+	 * base_reset_agent_configuration - reset resource settings
-+	 * @dev:	SCMI device
-+	 * @agent_id:	SCMI agent ID
-+	 * @flags:	A set of flags
-+	 *
-+	 * Ask for allowing or denying access permission to the protocol, @command_id,
-+	 * on the device, @device_id.
-+	 * The meaning of @flags is defined in SCMI specification.
-+	 *
-+	 * Return: 0 on success, error code otherwise
-+	 */
-+	int (*base_reset_agent_configuration)(struct udevice *dev, u32 agent_id,
-+					      u32 flags);
-+};
-+
-+int scmi_base_protocol_version(struct udevice *dev, u32 *version);
-+int scmi_base_protocol_attrs(struct udevice *dev, u32 *num_agents,
-+			     u32 *num_protocols);
-+int scmi_base_protocol_message_attrs(struct udevice *dev, u32 message_id,
-+				     u32 *attributes);
-+int scmi_base_discover_vendor(struct udevice *dev, u8 **vendor);
-+int scmi_base_discover_sub_vendor(struct udevice *dev, u8 **sub_vendor);
-+int scmi_base_discover_impl_version(struct udevice *dev, u32 *impl_version);
-+int scmi_base_discover_list_protocols(struct udevice *dev, u8 **protocols);
-+int scmi_base_discover_agent(struct udevice *dev, u32 agent_id,
-+			     u32 *ret_agent_id, u8 **name);
-+int scmi_base_notify_errors(struct udevice *dev, u32 enable);
-+int scmi_base_set_device_permissions(struct udevice *dev, u32 agent_id,
-+				     u32 device_id, u32 flags);
-+int scmi_base_set_protocol_permissions(struct udevice *dev,
-+				       u32 agent_id, u32 device_id,
-+				       u32 command_id, u32 flags);
-+int scmi_base_reset_agent_configuration(struct udevice *dev, u32 agent_id,
-+					u32 flags);
-+
-+/**
-+ * scmi_generic_protocol_version - get protocol version
-+ * @dev:	SCMI device
-+ * @id:		SCMI protocol ID
-+ * @version:	Pointer to SCMI protocol version
-+ *
-+ * Obtain the protocol version number in @version.
-+ *
-+ * Return: 0 on success, error code otherwise
-+ */
-+int scmi_generic_protocol_version(struct udevice *dev,
-+				  enum scmi_std_protocol id, u32 *version);
-+
- /*
-  * SCMI Clock Protocol
-  */
+ UCLASS_DRIVER(scmi_agent) = {
+ 	.id		= UCLASS_SCMI_AGENT,
+ 	.name		= "scmi_agent",
 -- 
 2.34.1
 
