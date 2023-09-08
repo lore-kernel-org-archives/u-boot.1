@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EFBAEE8015
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 16:01:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE3B6EE801F
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 16:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C479C86A23;
-	Fri,  8 Sep 2023 18:01:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 99CA786A08;
+	Fri,  8 Sep 2023 18:42:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IlwlUAdJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qutdV/fZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E580286A9F; Fri,  8 Sep 2023 18:01:07 +0200 (CEST)
-Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
- [IPv6:2607:f8b0:4864:20::a33])
+ id 7648386A1F; Fri,  8 Sep 2023 18:42:41 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF30986A04
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 18:01:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D020B869F5
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 18:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robertcnelson@gmail.com
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-493639d6173so816349e0c.3
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 09:01:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-31c7912416bso2320730f8f.1
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 09:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694188863; x=1694793663; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=30OsZ1HiqbkS5dhuYzEbwAnsGp4/M7Q0cJdPeAZUKHU=;
- b=IlwlUAdJ9rJvxfoO0TqlMgczH1MyGzme/xFnm6AmeAMQ8rbq5Lq0+VSawhQhv7dExJ
- FlIv0IwznNckWzaTBtpL+AS2nV1d2WsWmIvWZWTCe+a2mLAfr8yX+udC5/AdGYl0cKmS
- X0e+Ma+MEeGTzYZLmo7F38hDNuWeE1ToJYBTuX50jmTcJvFr1tXr5DeVYrLsqXYecvOa
- 0fMxQgmpm2lNC+0050m2Q79rXBgDft38voHER/ccqIkyvwSH/tSNh13QHJvq4KDpSMFr
- UEPTh2tloIB7OTs0pD9BmlzpuURuCz10dToPXc7yvlYAse5BWU54/80Yy+O/kK7/7O2L
- XkQQ==
+ d=linaro.org; s=google; t=1694191358; x=1694796158; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ScqFyoEU2AOShTtPEcSLoXhSegutv3XmJuJ7rGvgdvM=;
+ b=qutdV/fZLqZJTUfBlKW3uNdL6fljez4HOlMxpVmrso/s0JGPtPKvAFVONIPk00BVqv
+ gcZJoWwrI49E2gWTZSkRPYJUp4rGbNGItTY315+w2XTn8GxHskx33vUGMiWCHlXbZLFz
+ yCdQKRj6nwbWb1XdzIjsNVi0HV6Gn0RlbC4FDRF8SeX/oHoHuJdFv2Yi5Q+2MLkgSak8
+ sxRVoHemvyJaI2PmHI+0EiT96sH+BPbSHxHClNYCOXBW0JJ/LnBdm6rmD8Q4HEp0Z4J1
+ HhJ2rbSszAOt0OLf99BqCJUYpo+trwo9pFW+MfPs1gPpxBCeKDwFN/KDDWuV60NuMFqq
+ kf8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694188863; x=1694793663;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=30OsZ1HiqbkS5dhuYzEbwAnsGp4/M7Q0cJdPeAZUKHU=;
- b=HK1EMpFE0EynB7QK2JkG5BfnrqqztKkpAHfOaH3+RXW47jRFJOq6/+eZ9c9fyFs91j
- GfB8xAFrHUXC71bvB67pAkmX4/57CRar9vIkbrXB8JsP4jKctDBQPrBwFYLFdDbjyn9W
- mMZLidTBTpz/dUQOJwaIFpk9bIYR3duPe2dEm4tzWeQexHg4lYME+dcJISInY8Y6YnTx
- sBlQGFeaK40U5IWT+rtAC34XDlAZK7ru6FIk9fqS4a7cS3A+ZCTdyo2hX5SOm3oiEwIZ
- XlVgsYE7Ouqj6zIo/4mtB/otB8XT/HSYxBco+R5TEc9qOGNsQOmiJH9ooBPS3Xlz9z2i
- mbCA==
-X-Gm-Message-State: AOJu0Yyz+IoH/u69yp8RKqdxAoe/HCbeoCk7SpADiN5DnlSE+Jv+g5Rd
- XOibv9VAiAOcdXChKz3QEB/gy0m9pSQB2G9NFvI=
-X-Google-Smtp-Source: AGHT+IEjP9VkFz2brwhIsbLSp1XyNjsGWlERm9Fm/qCyurglgxaw+LAXChc1P16MpizyEkwF1eXKILU7wUuN0VRStoQ=
-X-Received: by 2002:a1f:c547:0:b0:48d:5af8:b9d0 with SMTP id
- v68-20020a1fc547000000b0048d5af8b9d0mr3294234vkf.6.1694188863186; Fri, 08 Sep
- 2023 09:01:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1694191358; x=1694796158;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ScqFyoEU2AOShTtPEcSLoXhSegutv3XmJuJ7rGvgdvM=;
+ b=qlpgFgVAwIB+2EupSWitQM3HS1PtFS8OS0hDgeCFcRuSbL6v0JqPH0zPrNCGf2dkPo
+ 8ABh/VldUuQ4xAnjY9e2TjXVDOGtDLyhqZlVYDFF64voBEShFHTWdu09KPzg8KOTyBjJ
+ r99HBS82EkrD1+BDu2ajPHjUsBCxt7GpDHPPaNlF7adIE8VBFFPI6oRO/yZrub2E2Rkf
+ i5zwTEeKyhD8HU57AbmfmINjslvAxc/a2JpQZEuE/x9mtcmHoAGad2onpoUwgjJ61MhW
+ TzzG9CG6wp3Tbxv1kdsQ1lNnMFktRmKcsHJVcE9qZlzXrBk0ijZyCjCTSyJST/vpnlSX
+ t7WA==
+X-Gm-Message-State: AOJu0YyF8ZWOVowphTd0bMf+CdjLQ4lVMxXYDi6wMVFvrlXgmGrTdeaC
+ ghLHkOuU2wPtWmM/xBFeX+kgIA==
+X-Google-Smtp-Source: AGHT+IF9dumghd3K+bist4rnrmE3x0JS6fmA1yb4lV0k1/thFlhemT/DnBkSYpnr2Zzxn6YQlTVAmg==
+X-Received: by 2002:adf:e784:0:b0:317:3c89:7f03 with SMTP id
+ n4-20020adfe784000000b003173c897f03mr2583120wrm.5.1694191358288; 
+ Fri, 08 Sep 2023 09:42:38 -0700 (PDT)
+Received: from hera (ppp089210246083.access.hol.gr. [89.210.246.83])
+ by smtp.gmail.com with ESMTPSA id
+ s17-20020adff811000000b0030ada01ca78sm2493245wrp.10.2023.09.08.09.42.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Sep 2023 09:42:37 -0700 (PDT)
+Date: Fri, 8 Sep 2023 19:42:35 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com,
+ macromorgan@hotmail.com, sjg@chromium.org
+Subject: Re: [PATCH 2/3] fdt: kaslr seed from tpm entropy
+Message-ID: <ZPtO+7sQx5Tuin0n@hera>
+References: <20230804233357.65214-1-seanedmond@linux.microsoft.com>
+ <20230804233357.65214-3-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
-References: <20230830152553.15465-1-twoerner@gmail.com>
-In-Reply-To: <20230830152553.15465-1-twoerner@gmail.com>
-From: Robert Nelson <robertcnelson@gmail.com>
-Date: Fri, 8 Sep 2023 11:00:37 -0500
-Message-ID: <CAOCHtYiuf9sZ-_LFUsxCe+oJO0pQ=SBAtse2n78Q1MjMPCS0Bw@mail.gmail.com>
-Subject: Re: [PATCH] ARM: dts: am335x-pocketbeagle: choose tick-timer
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Pierre Lebleu <pierre.lebleu@pile-engineering.com>, Andrew Davis <afd@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230804233357.65214-3-seanedmond@linux.microsoft.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,51 +92,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 30, 2023 at 10:26=E2=80=AFAM Trevor Woerner <twoerner@gmail.com=
-> wrote:
->
-> Commit 4b2be78ab66c ("time: Fix get_ticks being non-monotonic")
-> requires '/chosen/tick-timer' in device-tree. Otherwise we get:
->
->         U-Boot 2023.07.02 (Jul 11 2023 - 15:20:44 +0000)
->
->         CPU  : AM335X-GP rev 2.1
->         Model: TI AM335x PocketBeagle
->         DRAM:  512 MiB
->         Core:  154 devices, 16 uclasses, devicetree: separate
->         Could not initialize timer (err -19)
->
->         resetting ...
->
-> Suggested-by: Pierre Lebleu <pierre.lebleu@pile-engineering.com>
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Hi Sean,
 
-Tested-by: Robert Nelson <robertcnelson@gmail.com>
+On Fri, Aug 04, 2023 at 04:33:56PM -0700, seanedmond@linux.microsoft.com wrote:
+> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+>
+> Add support for KASLR seed from TPM device. Invokes tpm_get_random()
+> API to read 8-bytes of random bytes for KASLR.
 
+Can you elaborate a bit more why you specifically need an RNG from the TPM?
+
+>
+> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
+> Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 > ---
->  arch/arm/dts/am335x-pocketbeagle.dts | 1 +
->  1 file changed, 1 insertion(+)
+>  boot/image-fdt.c      |  3 +++
+>  common/fdt_support.c  | 39 ++++++++++++++++++++++++++++++++++++++-
+>  include/fdt_support.h |  1 +
+>  lib/Kconfig           |  9 +++++++++
+>  4 files changed, 51 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/dts/am335x-pocketbeagle.dts b/arch/arm/dts/am335x-p=
-ocketbeagle.dts
-> index b379e3a5570d..02e3aac56064 100644
-> --- a/arch/arm/dts/am335x-pocketbeagle.dts
-> +++ b/arch/arm/dts/am335x-pocketbeagle.dts
-> @@ -15,6 +15,7 @@
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index f10200f647..127443963e 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -624,6 +624,9 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
+>  		goto err;
+>  	}
 >
->         chosen {
->                 stdout-path =3D &uart0;
-> +               tick-timer =3D &timer2;
->         };
->
->         leds {
-> --
-> 2.41.0.327.gaa9166bcc0ba
+> +	if (IS_ENABLED(CONFIG_KASLR_TPM_SEED))
+> +		fdt_tpm_kaslr_seed(blob);
 
-Thanks for posting this Trevor, I'm also running with this change..
+So, why can't we just add entropy from any available RNG? In Arm world we
+could have TF-A, OP-TEE, an RNG hardware or a TPM capable of doing that (or
+all of them).
 
-Regards,
+Can't we just do
+platform_get_rng_device(&dev);
+dm_rng_read(....);
 
---=20
-Robert Nelson
-https://rcn-ee.com/
+And even if we specifically need an RNG from a TPM, I think it's better to
+find a way and teach platform_get_rng_device() to return a list of devices
+in priority instead of hardcoding that.
+
+[...]
+
+Thanks
+/Ilias
+
