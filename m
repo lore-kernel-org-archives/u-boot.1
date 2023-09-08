@@ -4,71 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE2BAEE14C3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 03:35:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1047EE57C1
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 04:32:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1700D8643D;
-	Fri,  8 Sep 2023 05:35:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 925E186467;
+	Fri,  8 Sep 2023 06:32:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sKGrWQY+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yl1IRYR5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABFF486907; Fri,  8 Sep 2023 05:35:37 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0FECB86564; Fri,  8 Sep 2023 06:32:23 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86CE68477A
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 05:35:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BEBA86456
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 06:32:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3883ZVjE003040;
- Thu, 7 Sep 2023 22:35:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694144131;
- bh=SFjSK2FVvh4zTLA+UWRh7g+xy1SmmQjIxejmr8SA4Bg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=sKGrWQY+c0j7j8WCi6BGpweybCy8YnfAi3yk5LcqkKabLmKADs7z0cqdPxco1ZSVg
- egIOsMGE1nFVyoAaYw/tNk1hq+uNRrhSgeav96+6htfDekcVKeXYe+LszLqS1/fZOd
- hjEmugRQ3ba79FOJZ3TYiWDoT2xA+5lFR5ms2iiE=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3883ZVKt008453
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Sep 2023 22:35:31 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Sep 2023 22:35:30 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Sep 2023 22:35:30 -0500
-Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3883ZQ1N120617;
- Thu, 7 Sep 2023 22:35:27 -0500
-Message-ID: <16d6f8a8-8b39-d8d2-c6de-b20347ad4486@ti.com>
-Date: Fri, 8 Sep 2023 09:05:25 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-1a2dd615ddcso501380fac.0
+ for <u-boot@lists.denx.de>; Thu, 07 Sep 2023 21:32:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1694147538; x=1694752338; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=P2Vx4lkKLAIiF9Rr0YRH40RpkQKb3l5GJXytrYan60Y=;
+ b=Yl1IRYR5ccn5H5Zj00So3gVqsxocu8bNRadX7TW/1vboU0ec/QqkhEnnRSOXlobdy3
+ PTtMXkZbdOes7QoseSA/SWR1jM+eiqAQ6Lwba37JDEt86CXAozAbethId9/bZvawpkDZ
+ ogKwTyQgent8Q4cCdBy9rsCMeGSeP2OSp16EDbYwRiET6h/oaCh70hK6iShcK1ED4Mg0
+ eyjkAyVkwoBp356VdgbqEnNFEkYrsNmBL3BI0lL2vU7ioS399R5q+pNbx/F8Bvf25TrH
+ 1jchActFtD15wm+HMGfj/YcWZtjUj14NYmgOGcTs3+CdoJolnBTVrSCKrYRnC0wPTDNo
+ 4NFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694147539; x=1694752339;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=P2Vx4lkKLAIiF9Rr0YRH40RpkQKb3l5GJXytrYan60Y=;
+ b=Ab/X2tUaKaXFMlfiTHUX82BHYL/0sfcZjIdU1sJKwjOy/deV9876y7NYUypvymtLEn
+ iGA7wRU+n41Bqno3dpjCJIffx15uKJMO46jc7j5wA5AyYBYaI31rkN+Z/90OBbK2EuWa
+ 5uRvjeCwHLZAeUoiu/WCiNeX5Mc04YR2dSPXxlbd1k8p444wbKYiC/M4Yhd+VdTMGIEa
+ NWOqlXuqGdgyPXCsn7preaOAmSV1RFexEBZY+PL0TRA2GlWn1/k4Xl7nK4g9kdSmfexg
+ YUOVBaNuD6cuA8uqsfVfIXA1gojITuonCaVzo9E82TkWUsxjzUI5IU8w7R7TLxkGRTU7
+ vpbg==
+X-Gm-Message-State: AOJu0Ywv0MlOvwVVmmGpekYODnwA4k7GOoVmuk+DpWVZMWmsaA0nALqS
+ GL4bogY07cq5K9tWd1Zw4zfJQA==
+X-Google-Smtp-Source: AGHT+IE3o9BN7l13ncbi3n0Gnl3pxB3Lk7WV6jSHVtGwODiCD670MuYpXfG4yuqDLVBa7KquoKeAng==
+X-Received: by 2002:a05:6870:ecac:b0:1d0:e371:e20a with SMTP id
+ eo44-20020a056870ecac00b001d0e371e20amr1760841oab.2.1694147538654; 
+ Thu, 07 Sep 2023 21:32:18 -0700 (PDT)
+Received: from octopus ([2400:4050:c3e1:100:2d89:7669:ac2d:f09e])
+ by smtp.gmail.com with ESMTPSA id
+ q22-20020a637516000000b005741b5eee47sm34496pgc.10.2023.09.07.21.32.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Sep 2023 21:32:18 -0700 (PDT)
+Date: Fri, 8 Sep 2023 13:32:15 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com,
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
+Message-ID: <ZPqjz3+Mlla8zxDS@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ etienne.carriere@st.com, michal.simek@amd.com,
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-5-takahiro.akashi@linaro.org>
+ <CAPnjgZ3z1srw_ZxfV2aRz1FAzTR=M==_rRPMFFrd7BdrGsu4AQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v2 5/7] configs: j721e: Remove HBMC_AM654 config
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
- <vigneshr@ti.com>, <u-kumar1@ti.com>, <reidt@ti.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
- <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>
-References: <20230907141407.382215-1-n-francis@ti.com>
- <20230907141407.382215-6-n-francis@ti.com>
- <20230907150700.jkt7drasgubtoab2@flagstone>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230907150700.jkt7drasgubtoab2@flagstone>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3z1srw_ZxfV2aRz1FAzTR=M==_rRPMFFrd7BdrGsu4AQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,59 +98,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
+Hi Simon,
 
-On 07/09/23 20:37, Nishanth Menon wrote:
-> On 19:44-20230907, Neha Malcom Francis wrote:
->> Remove config as kernel commit d93036b47f35 ("arm64: dts: ti:
->> k3-j721e-mcu-wakeup: Add HyperBus node") is impacting boot. Its
->> dependent patch [1] has not yet been merged to kernel, similar fix will
->> be needed in U-Boot.
->>
->> [1] https://lore.kernel.org/all/20230424184810.29453-1-afd@ti.com/
+On Thu, Sep 07, 2023 at 06:23:05AM -0600, Simon Glass wrote:
+> Hi AKASHI,
 > 
-> So, fix the kernel, why do this in u-boot? The rationale in the commit
-> message should clearly state why we do in u-boot.
+> On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > This DM-compliant driver deals with SCMI pinctrl protocol and presents
+> > gpio devices exposed by SCMI firmware (server).
+> >
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > ---
+> >  drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
+> >  1 file changed, 539 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
+> > index 3ebdad57b86c..73d385bdbfcc 100644
+> > --- a/drivers/pinctrl/pinctrl-scmi.c
+> > +++ b/drivers/pinctrl/pinctrl-scmi.c
+> > @@ -11,21 +11,20 @@
+> >  #include <malloc.h>
+> >  #include <scmi_agent.h>
+> >  #include <scmi_protocols.h>
+> > +#include <asm-generic/gpio.h>
+> >  #include <dm/device_compat.h>
+> > +#include <dm/device-internal.h>
+> > +#include <dm/lists.h>
+> >  #include <dm/pinctrl.h>
+> >
+> [..]
 > 
-
-Will explain better in the commit message.
-
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   configs/j721e_evm_a72_defconfig | 1 -
->>   configs/j721e_evm_r5_defconfig  | 1 -
->>   2 files changed, 2 deletions(-)
->>
->> diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
->> index 214fa8b2f3..beea948c4e 100644
->> --- a/configs/j721e_evm_a72_defconfig
->> +++ b/configs/j721e_evm_a72_defconfig
->> @@ -140,7 +140,6 @@ CONFIG_CFI_FLASH=y
->>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
->>   CONFIG_FLASH_CFI_MTD=y
->>   CONFIG_SYS_FLASH_CFI=y
->> -CONFIG_HBMC_AM654=y
->>   CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
->>   CONFIG_DM_SPI_FLASH=y
->>   CONFIG_SPI_FLASH_STMICRO=y
->> diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
->> index cf7bc872b5..d974be275f 100644
->> --- a/configs/j721e_evm_r5_defconfig
->> +++ b/configs/j721e_evm_r5_defconfig
->> @@ -127,7 +127,6 @@ CONFIG_CFI_FLASH=y
->>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
->>   CONFIG_FLASH_CFI_MTD=y
->>   CONFIG_SYS_FLASH_CFI=y
->> -CONFIG_HBMC_AM654=y
->>   CONFIG_DM_SPI_FLASH=y
->>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->>   CONFIG_SPI_FLASH_STMICRO=y
->> -- 
->> 2.34.1
->>
+> > +
+> > +U_BOOT_DRIVER(scmi_gpio) = {
+> > +       .name = "scmi_gpio",
+> > +       .id = UCLASS_GPIO,
+> > +       .of_match = scmi_gpio_ids,
+> > +       .of_to_plat = scmi_gpio_probe,
+> > +       .ops = &scmi_gpio_ops,
+> > +       .plat_auto = sizeof(struct scmi_pinctrl_gpio_plat),
+> > +};
+> > +
+> > +/**
+> > + * scmi_gpiochip_register - Create a pinctrl-controlled gpio device
+> > + * @parent:    SCMI pinctrl device
+> > + *
+> > + * Create a pinctrl-controlled gpio device
+> > + *
+> > + * Return:     0 on success, error code on failure
+> > + */
+> > +static int scmi_gpiochip_register(struct udevice *parent)
+> > +{
+> > +       ofnode node;
+> > +       struct driver *drv;
+> > +       struct udevice *gpio_dev;
+> > +       int ret;
+> > +
+> > +       /* TODO: recovery if failed */
+> > +       dev_for_each_subnode(node, parent) {
+> > +               if (!ofnode_is_enabled(node))
+> > +                       continue;
 > 
+> Can we not rely on the normal driver model binding to bind these
+> devices? Why does it need to be done manually here?
 
--- 
-Thanking You
-Neha Malcom Francis
+First, please take a look at the cover letter.
+In this RFC, I basically assume two patterns of DT bindings,
+(A) and (B) in the cover letter (or sandbox's test.dts in patch#5).
+
+In (B), a DT node as a gpio device, which is essentially a child
+of pinctrl device, is located *under* a pinctrl device. It need
+to be probed manually as there is no implicit method to enumerate
+it as a DM device automatically.
+
+On the other hand, in (A), the same node can be put anywhere in a DT
+as it contains a "compatible" property to identify itself.
+So if we want to only support (A), scmi_gpiochip_register() and
+scmi_pinctrl_bind() are not necessary.
+
+Since there is no discussion about bindings for GPIO managed by SCMI
+pinctrl device yet on the kernel side, I have left two solutions
+in this RFC.
+
+Thanks,
+-Takakahiro Akashi
+
+
+> > +
+> > +               if (!ofnode_read_prop(node, "gpio-controller", NULL))
+> > +                       /* not a GPIO node */
+> > +                       continue;
+> > +
+> > +               drv = DM_DRIVER_GET(scmi_gpio);
+> > +               if (!drv) {
+> > +                       dev_err(parent, "No gpio driver?\n");
+> > +                       return -ENODEV;
+> > +               }
+> > +
+> > +               ret = device_bind(parent, drv, ofnode_get_name(node), NULL,
+> > +                                 node, &gpio_dev);
+> > +               if (ret) {
+> > +                       dev_err(parent, "failed to bind %s to gpio (%d)\n",
+> > +                               ofnode_get_name(node), ret);
+> > +                       return -ENODEV;
+> > +               }
+> > +
+> > +               return 0;
+> > +       }
+> > +
+> > +       return -ENODEV;
+> > +}
+> > +
+> 
+> Regards,
+> Simon
