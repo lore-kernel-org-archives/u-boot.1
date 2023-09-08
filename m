@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2915EE8004
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 13:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 079F1EE7FF3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 13:57:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2628B86A97;
-	Fri,  8 Sep 2023 15:56:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7662F86AA4;
+	Fri,  8 Sep 2023 15:56:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JBhezNbw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SQRT7OWZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B281486A8F; Fri,  8 Sep 2023 15:56:00 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 8760586AA2; Fri,  8 Sep 2023 15:56:03 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BA0D86A9E
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 15:55:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9C1185894
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 15:56:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2bcbfb3705dso34855281fa.1
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 06:55:57 -0700 (PDT)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2bcfdadd149so37202721fa.0
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 06:56:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694181356; x=1694786156; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694181360; x=1694786160; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EDvrCmEs4AowbUl/thMcgKJCloHgFxRz4FWB3a/1gSQ=;
- b=JBhezNbwc8edQp3q/dG01K5fwSmdwdIEd8roVLwwMGVgnX2p/BpRE8d9/9hbCEzAUa
- /X5cBKzo0GmA0zVAZLTwv/XFzy8szAjH7xmpQLXSd9tS8KP0E6ZrDhIyngQ0WTIMj1A5
- fltL+PHP1lhGDj3iEbQoxxVMmRitgLmRR2NtGW1TVmFqeWerLKQkbM4utuis3+3E0tnF
- aZSlO+/OidUcXhe2b6g+jGG55PdeM0faPfgionMRaXN24ZHT6tNi4kF69vzVgLSEggqf
- BUQiAt0PuQ9c01v+bUB9OYIH/bTJjOIZ8IX8BC43rcdXsXiFNEg5obWxdQxW83X7hMFZ
- BK9A==
+ bh=4B+NIoCaIipSyRVsbzMYMEmPAAldulFwGSMkMcSpesQ=;
+ b=SQRT7OWZKS/4WoWQWc1XAw7dVZk1ZFoNmsU5tkZrbjvRX/NcIMCzvS5JvLC9wmxbba
+ QrfJu/JNX8gYG1Jd3fDZYt9w9zvvUvjjtaOWyxqgS1lmLbQ3B68QJ2dzTEfSe+vWcKML
+ n1/4oTRhfXkoc8rPIb7xIV2C+wjFGQ0+Jc66ENHS16ZZIPAuJ2BH7yrwh1YQjqXf2nJF
+ ZZXp0S7AWuZhmfaE0RCGZNanT1ROCTVx843SKcVTWDOpWRaBu1wJ9JLJ1o9F04bsLx09
+ F05KcRyo0aXTtdELlJ5Z12RStldstiEKV8bmN3eRmDg5Q5LT7TxzOa9Rh+U50krm7XHh
+ Mjgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694181356; x=1694786156;
+ d=1e100.net; s=20230601; t=1694181360; x=1694786160;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EDvrCmEs4AowbUl/thMcgKJCloHgFxRz4FWB3a/1gSQ=;
- b=f8h6zjDijCOKIvqVFJd3XpkxuXTDm5zq5jhTs+0UZdtZH5SqbDWyRu1FgYxiQ8t6Ue
- wrV7gzGaknbGiOI7lJaXTsJ5yn15aOYjLm3Nan8cipfo5msu4FBu0sFYR31SdF+CVFbJ
- LwrzaLJ5XAlDrk1TeIQVJZUqPMdhAFq9t/gpyJnu/1ENk0UF6AAgXncP/PP5PCs48feU
- YPBA6JgOoxFDU1jYH7VzACW0y8SqSs8JWYacSq5jpp8YHPbgl8KfzONFC5nm2RlsKLxZ
- nN9fZ2rIvMZWPlo/KX2z/CUDR+3K6LzeQywBs6BFLtjvUS9IQUp8VHGcJ7+KwVA4DaOS
- 7wuQ==
-X-Gm-Message-State: AOJu0Yymr0UO9l/yNn7KjtVZEh2AebKV4+eMsL9NPcXhcJbmvHGk/Y5I
- 00KQyhYzk+QizLpKs0f2SaQv/8iMZIr/Pm6pz+PFJg==
-X-Google-Smtp-Source: AGHT+IGXXoEPl/XZDfWMz3XhLCsYYK+PR3QehfBxlXO/kG0AxExv/iLsZ8w13E8nR3onm7yAExe35w==
-X-Received: by 2002:a05:651c:2044:b0:2bc:dd96:147c with SMTP id
- t4-20020a05651c204400b002bcdd96147cmr1826408ljo.34.1694181356765; 
- Fri, 08 Sep 2023 06:55:56 -0700 (PDT)
+ bh=4B+NIoCaIipSyRVsbzMYMEmPAAldulFwGSMkMcSpesQ=;
+ b=arRJdSPtnGJupmLM3u488K4rkSSk4wq9Bb8ZCjCMrqkAmQ8fvLYzghI5+wB9o+ugcF
+ gKhnBjqZm1J0CW34LQ4LU3Wu8xDiEt5MYGEnTGt5hvm+5UacsFreoaPHvAqzj/W1Etnt
+ Zcld18cmig1QqU6fUq1pV8Pwmc/m18JYfOURgq9xw2BXmspFQ/Eokm8ephdsTxY+0mYl
+ AHIDoo04/sJgdLf36t2t88a5c6Com0g11DMUuejmTedE0ejYTvgyHOvTDxWOEDKbj8BP
+ c4y1a7U8yk6f96TiCs5togrYFP4ETyPDN7VcH5NpDSvTXRUxLJUpBARWZG5OQfEQDsB1
+ ZHeA==
+X-Gm-Message-State: AOJu0Yx6K5HsbbQ4Oxe1qRRBQHkQgk8ByjIX0TzFqUgJQG7mi6z1x2Pi
+ TeJdriukR82ulYBjUHHd+5Zqkaw/Lw4KpD2OJ2hn4g==
+X-Google-Smtp-Source: AGHT+IH2qcMKkiMfdKTCBUfW0BR3idpSU1HveTpr8bpJb43iyMiRwXaCtA7ZRLrjqqhNRiysBSfJaw==
+X-Received: by 2002:a2e:9ed7:0:b0:2bd:a85:899e with SMTP id
+ h23-20020a2e9ed7000000b002bd0a85899emr1839823ljk.3.1694181359959; 
+ Fri, 08 Sep 2023 06:55:59 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- u14-20020a2e9f0e000000b002bcbae4c21fsm306907ljk.50.2023.09.08.06.55.54
+ u14-20020a2e9f0e000000b002bcbae4c21fsm306907ljk.50.2023.09.08.06.55.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Sep 2023 06:55:56 -0700 (PDT)
+ Fri, 08 Sep 2023 06:55:59 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv8 10/15] net/lwip: update .gitignore with lwIP
-Date: Fri,  8 Sep 2023 19:53:15 +0600
-Message-Id: <20230908135320.7066-11-maxim.uvarov@linaro.org>
+Subject: [PATCHv8 11/15] net/lwip: connection between cmd and lwip apps
+Date: Fri,  8 Sep 2023 19:53:16 +0600
+Message-Id: <20230908135320.7066-12-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230908135320.7066-1-maxim.uvarov@linaro.org>
 References: <20230908135320.7066-1-maxim.uvarov@linaro.org>
@@ -93,28 +93,317 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ignore lwIP library code and reused files from the lwIP.
-
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- net/lwip/.gitignore | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 net/lwip/.gitignore
+ cmd/Makefile   |   1 +
+ cmd/net-lwip.c | 286 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 287 insertions(+)
+ create mode 100644 cmd/net-lwip.c
 
-diff --git a/net/lwip/.gitignore b/net/lwip/.gitignore
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 9bebf321c3..6ab6b16aab 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -128,6 +128,7 @@ endif
+ obj-$(CONFIG_CMD_MUX) += mux.o
+ obj-$(CONFIG_CMD_NAND) += nand.o
+ obj-$(CONFIG_CMD_NET) += net.o
++obj-$(CONFIG_CMD_NET) += net-lwip.o
+ obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+ obj-$(CONFIG_CMD_ONENAND) += onenand.o
+ obj-$(CONFIG_CMD_OSD) += osd.o
+diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
 new file mode 100644
-index 0000000000..7b5dacce90
+index 0000000000..82e0fe392d
 --- /dev/null
-+++ b/net/lwip/.gitignore
-@@ -0,0 +1,8 @@
-+lwip-external
-+apps/ping/ping.c
-+apps/http/http_client.c
-+apps/http/http_client.h
-+apps/tftp/tftp.c
-+apps/tftp/tftp_client.h
-+apps/tftp/tftp_common.h
-+apps/tftp/tftp_example.h
++++ b/cmd/net-lwip.c
+@@ -0,0 +1,286 @@
++// SPDX-License-Identifier: GPL-2.0
++
++/*
++ * (C) Copyright 2023 Maxim Uvarov, maxim.uvarov@linaro.org
++ */
++
++#include <common.h>
++#include <command.h>
++#include <console.h>
++#include <display_options.h>
++#include <memalign.h>
++#include <net.h>
++#include <image.h>
++
++#include "net/lwip.h"
++#include "net/ulwip.h"
++
++static int do_lwip_init(struct cmd_tbl *cmdtp, int flag, int argc,
++		      char *const argv[])
++{
++	if (!ulwip_init())
++		return CMD_RET_SUCCESS;
++	return CMD_RET_FAILURE;
++}
++
++static void ulwip_timeout_handler(void)
++{
++	eth_halt();
++	net_set_state(NETLOOP_FAIL);	/* we did not get the reply */
++	ulwip_loop_set(0);
++}
++
++int ulwip_loop(void)
++{
++	int ret = CMD_RET_FAILURE;
++
++	ulwip_loop_set(1);
++	if (!net_loop(LWIP))
++		ret = CMD_RET_SUCCESS;
++	ulwip_loop_set(0);
++	return ret;
++}
++
++#if defined(CONFIG_CMD_PING)
++int do_lwip_ping(struct cmd_tbl *cmdtp, int flag, int argc,
++		 char *const argv[])
++{
++	int ret;
++
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	ret = ulwip_init();
++	if (ret) {
++		log_err("ulwip_init err %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	log_info("Using %s device\n", eth_get_name());
++	log_info("pinging addr: %s\n", argv[1]);
++
++	if (ulwip_ping(argv[1])) {
++		printf("ping init fail\n");
++		return CMD_RET_FAILURE;
++	}
++
++	return ulwip_loop();
++}
++#endif /* CONFIG_CMD_PING */
++
++#if defined(CONFIG_CMD_WGET)
++int do_lwip_wget(struct cmd_tbl *cmdtp, int flag, int argc,
++		 char *const argv[])
++{
++	char *url;
++	int ret;
++
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	url = argv[1];
++
++	ret = ulwip_init();
++	if (ret) {
++		log_err("ulwip_init err %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	ret = ulwip_wget(image_load_addr, url);
++	if (ret) {
++		log_err("lwip_wget err %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++
++	return ulwip_loop();
++}
++#endif
++
++#if defined(CONFIG_CMD_TFTPBOOT)
++int do_lwip_tftp(struct cmd_tbl *cmdtp, int flag, int argc,
++		 char *const argv[])
++{
++	char *filename;
++	ulong addr;
++	char *end;
++	int ret;
++
++	switch (argc) {
++	case 1:
++		filename = env_get("bootfile");
++		break;
++	case 2:
++		/*
++		 * Only one arg - accept two forms:
++		 * Just load address, or just boot file name. The latter
++		 * form must be written in a format which can not be
++		 * mis-interpreted as a valid number.
++		 */
++		addr = hextoul(argv[1], &end);
++		if (end == (argv[1] + strlen(argv[1]))) {
++			image_load_addr = addr;
++			filename = env_get("bootfile");
++		} else {
++			filename = argv[1];
++		}
++		break;
++	case 3:
++		image_load_addr = hextoul(argv[1], NULL);
++		filename = argv[2];
++		break;
++	default:
++		return CMD_RET_USAGE;
++	}
++
++	ret = ulwip_init();
++	if (ret) {
++		log_err("ulwip_init err %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	ret = ulwip_tftp(image_load_addr, filename);
++	if (ret)
++		return ret;
++
++	return ulwip_loop();
++}
++#endif /* CONFIG_CMD_TFTPBOOT */
++
++#if defined(CONFIG_CMD_DHCP)
++int do_lwip_dhcp(void)
++{
++	int ret;
++	char *filename;
++
++	ret = ulwip_init();
++	if (ret) {
++		log_err("ulwip_init err %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	ret = ulwip_dhcp();
++
++	net_set_timeout_handler(2000UL, ulwip_timeout_handler);
++
++	ulwip_loop();
++	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
++		filename = env_get("bootfile");
++		if (!filename) {
++			log_notice("no bootfile\n");
++			return CMD_RET_SUCCESS;
++		}
++
++		ret = ulwip_init();
++		if (ret) {
++			log_err("ulwip_init err %d\n", ret);
++			return CMD_RET_FAILURE;
++		}
++
++		net_set_timeout_handler(20000UL, ulwip_timeout_handler);
++		ulwip_tftp(image_load_addr, filename);
++
++		ret =  ulwip_loop();
++	}
++
++	return ret;
++}
++
++static int _do_lwip_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
++		char *const argv[])
++{
++	return do_lwip_dhcp();
++}
++#endif /* CONFIG_CMD_DHCP */
++
++#if defined(CONFIG_CMD_DNS)
++int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
++		char *const argv[])
++{
++	int ret;
++	char *name;
++	char *varname;
++
++	if (argc == 1)
++		return CMD_RET_USAGE;
++
++	name = argv[1];
++
++	if (argc == 3)
++		varname = argv[2];
++	else
++		varname = NULL;
++
++	ret = ulwip_init();
++	if (ret) {
++		log_err("ulwip_init err %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	ret = ulwip_dns(name, varname);
++	if (ret == 0)
++		return CMD_RET_SUCCESS;
++	if (ret != -EINPROGRESS)
++		return CMD_RET_FAILURE;
++
++	net_set_timeout_handler(1000UL, ulwip_timeout_handler);
++
++	return ulwip_loop();
++}
++#endif /* CONFIG_CMD_DNS */
++
++static struct cmd_tbl cmds[] = {
++	U_BOOT_CMD_MKENT(init, 1, 0, do_lwip_init,
++			 "initialize lwip stack", ""),
++#if defined(CONFIG_CMD_PING)
++	U_BOOT_CMD_MKENT(ping, 2, 0, do_lwip_ping,
++			 "send ICMP ECHO_REQUEST to network host",
++			 "pingAddress"),
++#endif
++#if defined(CONFIG_CMD_WGET)
++	U_BOOT_CMD_MKENT(wget, 2, 0, do_lwip_wget, "", ""),
++#endif
++#if defined(CONFIG_CMD_TFTPBOOT)
++	U_BOOT_CMD_MKENT(tftp, 3, 0, do_lwip_tftp,
++			"boot image via network using TFTP protocol\n",
++			"[loadAddress] [[hostIPaddr:]bootfilename]"),
++#endif
++#if defined(CONFIG_CMD_DHCP)
++	U_BOOT_CMD_MKENT(dhcp, 1, 0, _do_lwip_dhcp,
++			"boot image via network using DHCP/TFTP protocol",
++			""),
++#endif
++#if defined(CONFIG_CMD_DNS)
++	U_BOOT_CMD_MKENT(dns, 3, 0, do_lwip_dns,
++			 "lookup dns name [and store address at variable]",
++			 ""),
++#endif
++};
++
++static int do_ops(struct cmd_tbl *cmdtp, int flag, int argc,
++		     char *const argv[])
++{
++	struct cmd_tbl *cp;
++
++	cp = find_cmd_tbl(argv[1], cmds, ARRAY_SIZE(cmds));
++
++	argc--;
++	argv++;
++
++	if (cp == NULL || argc > cp->maxargs)
++		return CMD_RET_USAGE;
++	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
++		return CMD_RET_SUCCESS;
++
++	return cp->cmd(cmdtp, flag, argc, argv);
++}
++
++U_BOOT_CMD(
++	lwip, 4, 1, do_ops,
++	"LWIP sub system",
++	"init - init LWIP\n"
++	"ping addr - pingAddress\n"
++	"wget http://IPadress/url/\n"
++	"tftp [loadAddress] [[hostIPaddr:]bootfilename]\n"
++	"dhcp - boot image via network using DHCP/TFTP protocol\n"
++	);
 -- 
 2.30.2
 
