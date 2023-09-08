@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BBCEEB562
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 17:30:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27CABEEB560
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 17:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76DD986AAF;
-	Fri,  8 Sep 2023 19:30:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2210186A35;
+	Fri,  8 Sep 2023 19:36:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QH3yn9kk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G9SD9CMu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D5F86AAF; Fri,  8 Sep 2023 19:30:39 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id D60DF86A97; Fri,  8 Sep 2023 19:36:22 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0461B86A97
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 19:30:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01C97863F9
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 19:36:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388HUX4s114689;
- Fri, 8 Sep 2023 12:30:33 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388HaHZE075428;
+ Fri, 8 Sep 2023 12:36:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694194233;
- bh=YuF7auLPTghu0m4jTvOqEoTxx3wHgjiagPMq9EZDe0c=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=QH3yn9kkjd0NOJE0DupxwTlMuZvWEjb9oD6dcbxlaA254vBRbeHlDA/yVqUsj3YL2
- r34wPgebWlUENAbwLp90yAo04cJZdHiRTI8rCW1Zp2NGu+3crEx7Mie6AA/A3jVJVO
- aHx+/vcOZUuODOYVsOINEqcdyVK1Ok8IoKjIMihM=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388HUXZS054595
+ s=ti-com-17Q1; t=1694194577;
+ bh=mOhkLAkmUmQtnA9wd2mRixEFLKfFkeCCDiNT2A+M574=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=G9SD9CMuTgK2KR+S+GLOu20Zck3lc9wSHlUOpwODjvKu82E1Eo1LRmdJL28JKMLz9
+ CVHpk0SU3aW16nXPsb1XNdgQpQ3yQN4SLjJmM+mWjiOH9RLd96n+B7u2l5f6HMbkE8
+ H2rN4OOUTiEFrzY9+8kExPGOLNWevMjbViuIpKEk=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388HaHOC041350
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 12:30:33 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 8 Sep 2023 12:36:17 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 12:30:33 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 12:36:17 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 12:30:33 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388HTfxL052571;
- Fri, 8 Sep 2023 12:30:30 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <sjg@chromium.org>
-CC: <peng.fan@nxp.com>, <ye.li@nxp.com>, <robimarko@gmail.com>,
- <u-boot@lists.denx.de>, <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [RFC PATCH v2 3/3] arm: dts: k3: update device tree for vtm node
-Date: Fri, 8 Sep 2023 22:59:17 +0530
-Message-ID: <20230908172914.436194-4-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230908172914.436194-1-u-kumar1@ti.com>
-References: <20230908172914.436194-1-u-kumar1@ti.com>
+ Frontend Transport; Fri, 8 Sep 2023 12:36:17 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388HaH2b025098;
+ Fri, 8 Sep 2023 12:36:17 -0500
+Date: Fri, 8 Sep 2023 12:36:17 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Trevor Woerner <twoerner@gmail.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Pierre Lebleu
+ <pierre.lebleu@pile-engineering.com>, Andrew Davis <afd@ti.com>
+Subject: Re: [PATCH] ARM: dts: am335x-pocketbeagle: choose tick-timer
+Message-ID: <20230908173617.7c2xto3n4hqltnf2@ferris>
+References: <20230830152553.15465-1-twoerner@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230830152553.15465-1-twoerner@gmail.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,124 +78,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update device tree for vtm node and update driver compatible too
+On 11:25-20230830, Trevor Woerner wrote:
+> Commit 4b2be78ab66c ("time: Fix get_ticks being non-monotonic")
+> requires '/chosen/tick-timer' in device-tree. Otherwise we get:
+> 
+> 	U-Boot 2023.07.02 (Jul 11 2023 - 15:20:44 +0000)
+> 
+> 	CPU  : AM335X-GP rev 2.1
+> 	Model: TI AM335x PocketBeagle
+> 	DRAM:  512 MiB
+> 	Core:  154 devices, 16 uclasses, devicetree: separate
+> 	Could not initialize timer (err -19)
+> 
+> 	resetting ...
+> 
+> Suggested-by: Pierre Lebleu <pierre.lebleu@pile-engineering.com>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>  arch/arm/dts/am335x-pocketbeagle.dts | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/arch/arm/dts/am335x-pocketbeagle.dts b/arch/arm/dts/am335x-pocketbeagle.dts
+> index b379e3a5570d..02e3aac56064 100644
+> --- a/arch/arm/dts/am335x-pocketbeagle.dts
+> +++ b/arch/arm/dts/am335x-pocketbeagle.dts
+> @@ -15,6 +15,7 @@
+>  
+>  	chosen {
+>  		stdout-path = &uart0;
+> +		tick-timer = &timer2;
+>  	};
+>  
+>  	leds {
+> -- 
+> 2.41.0.327.gaa9166bcc0ba
+> 
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Kernel DT sync is happening in other series. So this patch is added
-just for testing and make sure functions are working ok
+Does enabling CONFIG_SYS_ARCH_TIMER solve this?
 
- arch/arm/dts/k3-j7200-mcu-wakeup.dtsi          |  9 +++++++++
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts |  6 ------
- arch/arm/dts/k3-j721e-mcu-wakeup.dtsi          | 10 ++++++++++
- arch/arm/dts/k3-j721e-r5-common-proc-board.dts |  7 -------
- arch/arm/dts/k3-j721e-r5-sk.dts                |  7 -------
- drivers/thermal/k3_thermal.c                   |  2 ++
- 6 files changed, 21 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
-index 1044ec6c4b..217bb0c821 100644
---- a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
-+++ b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
-@@ -375,4 +375,13 @@
- 			ti,loczrama = <1>;
- 		};
- 	};
-+
-+	wkup_vtm0: temperature-sensor@42040000 {
-+		bootph-all;
-+		compatible = "ti,j7200-vtm";
-+		reg = <0x00 0x42040000 0x00 0x350>,
-+			<0x00 0x42050000 0x00 0x350>;
-+		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
-+		#thermal-sensor-cells = <1>;
-+	};
- };
-diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-index e62f9218e8..bcd5f15eb5 100644
---- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-@@ -91,12 +91,6 @@
- 		bootph-pre-ram;
- 	};
- 
--	wkup_vtm0: vtm@42040000 {
--		compatible = "ti,am654-vtm", "ti,j721e-avs";
--		reg = <0x0 0x42040000 0x0 0x330>;
--		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
--		#thermal-sensor-cells = <1>;
--	};
- };
- 
- &dmsc {
-diff --git a/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi b/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
-index 22166c7942..dee824e548 100644
---- a/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
-+++ b/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
-@@ -408,4 +408,14 @@
- 			ti,loczrama = <1>;
- 		};
- 	};
-+
-+	wkup_vtm0: temperature-sensor@42040000 {
-+		bootph-all;
-+		compatible = "ti,j721e-vtm";
-+		reg = <0x00 0x42040000 0x00 0x350>,
-+			<0x00 0x42050000 0x00 0x350>,
-+			<0x00 0x43000300 0x00 0x10>;
-+		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
-+		#thermal-sensor-cells = <1>;
-+	};
- };
-diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-index 32f71e9b6a..93a6baea2c 100644
---- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-@@ -71,13 +71,6 @@
- 		mbox-names = "tx", "rx";
- 	};
- 
--	wkup_vtm0: wkup_vtm@42040000 {
--		compatible = "ti,am654-vtm", "ti,j721e-avs";
--		reg = <0x0 0x42040000 0x0 0x330>;
--		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
--		#thermal-sensor-cells = <1>;
--	};
--
- 	dm_tifs: dm-tifs {
- 		compatible = "ti,j721e-dm-sci";
- 		ti,host-id = <3>;
-diff --git a/arch/arm/dts/k3-j721e-r5-sk.dts b/arch/arm/dts/k3-j721e-r5-sk.dts
-index 6986292e37..f146ba1314 100644
---- a/arch/arm/dts/k3-j721e-r5-sk.dts
-+++ b/arch/arm/dts/k3-j721e-r5-sk.dts
-@@ -204,13 +204,6 @@
- 		mbox-names = "tx", "rx";
- 	};
- 
--	wkup_vtm0: wkup_vtm@42040000 {
--		compatible = "ti,am654-vtm", "ti,j721e-avs";
--		reg = <0x0 0x42040000 0x0 0x330>;
--		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
--		#thermal-sensor-cells = <1>;
--	};
--
- 	dm_tifs: dm-tifs {
- 		compatible = "ti,j721e-dm-sci";
- 		ti,host-id = <3>;
-diff --git a/drivers/thermal/k3_thermal.c b/drivers/thermal/k3_thermal.c
-index de6d88abf0..c34b69ddca 100644
---- a/drivers/thermal/k3_thermal.c
-+++ b/drivers/thermal/k3_thermal.c
-@@ -913,6 +913,8 @@ static struct vd_config am654_vd_config = {
- static const struct udevice_id k3_avs_ids[] = {
- 	{ .compatible = "ti,am654-avs", .data = (ulong)&am654_vd_config },
- 	{ .compatible = "ti,j721e-avs", .data = (ulong)&j721e_vd_config },
-+	{ .compatible = "ti,j7200-vtm", .data = (ulong)&j721e_vd_config },
-+	{ .compatible = "ti,j721e-vtm", .data = (ulong)&j721e_vd_config },
- 	{}
- };
- 
 -- 
-2.34.1
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
