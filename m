@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22E6AEEB56F
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 20:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B11EEB56F
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 20:37:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C8CD85DD2;
-	Fri,  8 Sep 2023 22:32:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20B5086A78;
+	Fri,  8 Sep 2023 22:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kywM8vjQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="seftYWyl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA2C9869CD; Fri,  8 Sep 2023 22:32:51 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 1227B86A80; Fri,  8 Sep 2023 22:37:32 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 230DE8071F
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 22:32:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C8DA86A5F
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 22:37:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-502153ae36cso3959401e87.3
- for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 13:32:49 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-31adc5c899fso2522899f8f.2
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 13:37:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694205168; x=1694809968; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0GqdVas5Ho65h547F5aFQ5o57KOoR//kT762k4QjXAA=;
- b=kywM8vjQ2GH/HfqdyBHy1OlKkT30/Gh+XRuU/QY8ZxqzJXaoj6VYf+1mbBbHo5z5ld
- 8LujCo6OB0rBFuOwyR2FaTdctEgpmnWBRlGfC3HqO/8UyRSuJoeYZ71zPIuhgggtYq6f
- FW+EtRVlmbcg8OPJ2gqr6ZhtkfZK2fvn9Vu6S6YoQ57QwQ9jxMhY1m9F274pUGLlOAa1
- OExciitLeLmvBH0qqPNZfLyygx/Rsnie7PT75VA/0QWidxUIA8TWApI0NWivqOwPreNu
- nqN0z07FmYvQ6jRfM8CPtgZAvJDDWLl/3tna/RKtIoPhqN1fvYLMr5FJCGKMs6U1+dM8
- d4xg==
+ d=linaro.org; s=google; t=1694205449; x=1694810249; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8/LBgAXA5Lhthm6Cb7lwYgJL9iPQarlGWiCmTiIVPvk=;
+ b=seftYWylk2i+hiL99f6zcWFDRGU5MKHn5tjL3IHXDjS/XYS7QNOL6Ce/bPIVYfsm+w
+ sQJL9cPU7Xz++WmaLHHZuxfO+SFw+jJ2EO+I7czvGiecLwbgxnyGEqJ+9+pKI2xsO717
+ vcwPsOPZCv86Xx9Tib7hej4gsXKSb9fj2vEZTB6FT9i33FPwHOrbLxaqS5OcmL1GlS/T
+ /T6BieAyDxC3vHg4URSvlozu5+qi+xwVPGR0fHyGQYQ4+fMWJzgDIt+Xw/9fnVWPWc8c
+ qIPvAZQtrlATR4KwmKO9jTmWsAZuCRSyoiHiAZnT4ijPLOkVsGIHzagCob5fKaVcUfc9
+ TYAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694205168; x=1694809968;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1694205449; x=1694810249;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0GqdVas5Ho65h547F5aFQ5o57KOoR//kT762k4QjXAA=;
- b=YGFbTklOLgmT7f7EWOcvu6CVs5d9b2zfOYVqtmSXt24Uu1IlJfa9FMRvFA6NUWAPth
- 9MWyrECG6hhjL26Ks89dWC7iuNT+kWr3WLMq+b7Khqx1MaTAlYwUMsukhxkbOCuX169y
- zlcedaQGAS5gx0XveLnVGVDcDsobX8oj48vE3K6Jyc3BE20ShrnTYAp8xmEKHF/yDP5R
- HJNSEbL5vSQEXQaLVKddaeo0oHMnUaOBHGh1OTbLeSqfE8jao3VQNHtehyP8KBOmwaQa
- i6+PNt0e6SA0H1MDLuRZTXPS6keJzSZy9u84gYlz6S1GCNwhHs4w+gx19soVWgJam8MU
- nheQ==
-X-Gm-Message-State: AOJu0YxqDKVeFC+4HqIQ0tcUe3nJLrDDchzfX4Gw+7CRyigyCkl3jbfS
- Ek2HurH5Mdth3bCs+l3tnyy6KlS0fAIrV6SFzTjlWQ==
-X-Google-Smtp-Source: AGHT+IFrjnidrNtbLso11PqOgq8UoQ7zBV1BrLcS03y6ER2OJqIYGUcw4dyOrErNeIitVwdZMxED56hcRzD1u8QzDfM=
-X-Received: by 2002:ac2:4bd3:0:b0:500:adbd:43e7 with SMTP id
- o19-20020ac24bd3000000b00500adbd43e7mr2987067lfq.8.1694205168330; Fri, 08 Sep
- 2023 13:32:48 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230616084253.490380-1-ilias.apalodimas@linaro.org>
- <888a4523-0dfb-4b35-a809-947758519607@gmx.de>
-In-Reply-To: <888a4523-0dfb-4b35-a809-947758519607@gmx.de>
+ bh=8/LBgAXA5Lhthm6Cb7lwYgJL9iPQarlGWiCmTiIVPvk=;
+ b=DB0wxmZVgRkneiYym7Ji/z5qkvYyfU2LthroYf2ws9IEpKH/G//+uT5mJbIO0L/K1Q
+ LbOydfNOjidsaod7UNQ9vST7j5Phott74yY7+ZnkewBOlWmXPtVDeGdda+7V7x4HeQQX
+ U/2uSQncBB+oRYap4i6sep5W53AmLRZVGsMxWT8WpjrOnAo0fJVr6qurVDFgb/Mr6jCu
+ TnlQL3Yq4YMW/N5hwP//deA+ZALXjLg0PFMFKp8rRXAPqq42712W5AO5Y7bUP1FYfkeo
+ hRY2EUdBB4c8qzrouB1oe1eCIgepCLNh/Xg7+C2V0Y7wLwbqfkl6/feA+VmlYfKajWjn
+ BJNA==
+X-Gm-Message-State: AOJu0YxEr1NdHpT+KKz5EMP/Bjaxf+WNzshURq/oCNNWUCdHJCM+x2/U
+ q+4WQdjnZdevNvIoOL4QoFZiwUNiKepN+xd9INs=
+X-Google-Smtp-Source: AGHT+IGfDEP8fNmzzqLS0c+gqeAX9epJSpDqvkK/PSYdxFaXDiTy6lkF8mqI538xJY8bv/AX7NFOPw==
+X-Received: by 2002:a05:6000:1b06:b0:318:7bc:122e with SMTP id
+ f6-20020a0560001b0600b0031807bc122emr2833476wrz.23.1694205448948; 
+ Fri, 08 Sep 2023 13:37:28 -0700 (PDT)
+Received: from hades.. ([2a02:85f:fcb3:de74:3efd:feff:fe6b:c5ca])
+ by smtp.gmail.com with ESMTPSA id
+ h5-20020adfe985000000b0031ae8d86af4sm2910062wrm.103.2023.09.08.13.37.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Sep 2023 13:37:28 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 8 Sep 2023 23:32:12 +0300
-Message-ID: <CAC_iWjL9vxFuA2YpUUFUdHbf9W0WEHj6LpuJQ0UtV60RarPDZQ@mail.gmail.com>
-Subject: Re: [PATCH] doc: qemu: switch swtpm instruction to 'tpm autostart'
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: u-boot@lists.denx.de,
+	xypron.glpk@gmx.de
+Cc: sjg@chromium.org,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] tpm: Fix autostart for TPM1.2 devices
+Date: Fri,  8 Sep 2023 23:37:22 +0300
+Message-Id: <20230908203723.5702-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.37.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,55 +90,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On commit e663b2ff4ba2("tpm: Add 'tpm autostart' shell command") an
+autostart function was added for both TPM1.2 and 2.0 devices.  Instead
+of correctly wiring the autostart command for TPM1.2 devices that patch
+mistakenly added it on 'tpm init'
 
-On Fri, 8 Sept 2023 at 22:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> On 6/16/23 10:42, Ilias Apalodimas wrote:
-> > We don't have a documentation page for our TPM subsystem.  I plan
-> > on sending one in the future,  but in the meantime document the
-> > new 'tpm autostart' command in the QEMU instructions while using
-> > a SWTPM
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >   doc/board/emulation/qemu-arm.rst | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
-> > index 16f66388eb1f..30819637723d 100644
-> > --- a/doc/board/emulation/qemu-arm.rst
-> > +++ b/doc/board/emulation/qemu-arm.rst
-> > @@ -113,7 +113,7 @@ In a second console invoke qemu-system-aarch64 with::
-> >
-> >   Enable the TPM on U-Boot's command line with::
-> >
-> > -    tpm2 startup TPM2_SU_CLEAR
-> > +    tpm autostart
->
-> Do you really intend switch from TPM v2 to the deprecated TPM v1?
->
-> I assume you mean "tpm2 autostart".
+Fixes: commit e663b2ff4ba2("tpm: Add 'tpm autostart' shell command")
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ cmd/tpm-v1.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Both tpm v1/v2 commands will call do_tpm(). That function will
-properly call a v1 or v2 API depending on the device it discovered. So
-the autostart function will work for both variants correctly.
+diff --git a/cmd/tpm-v1.c b/cmd/tpm-v1.c
+index 3b95c950cc96..1b1efcd204d2 100644
+--- a/cmd/tpm-v1.c
++++ b/cmd/tpm-v1.c
+@@ -655,7 +655,7 @@ TPM_COMMAND_NO_ARG(tpm_physical_disable)
+ static struct cmd_tbl tpm1_commands[] = {
+ 	U_BOOT_CMD_MKENT(device, 0, 1, do_tpm_device, "", ""),
+ 	U_BOOT_CMD_MKENT(info, 0, 1, do_tpm_info, "", ""),
+-	U_BOOT_CMD_MKENT(init, 0, 1, do_tpm_autostart, "", ""),
++	U_BOOT_CMD_MKENT(autostart, 0, 1, do_tpm_autostart, "", ""),
+ 	U_BOOT_CMD_MKENT(init, 0, 1, do_tpm_init, "", ""),
+ 	U_BOOT_CMD_MKENT(startup, 0, 1,
+ 			 do_tpm_startup, "", ""),
+--
+2.37.2
 
-P.S: Looking at commit e663b2ff4ba2("tpm: Add 'tpm autostart' shell
-command"), I apparently messed up a c/p and autostart is missing from
-the v1 version of the command.  I'll send a patch to fix that
-
-Thanks
-/Ilias
-
->
-> Best regards
->
-> Heinrich
->
-> >
-> >   Debug UART
-> >   ----------
