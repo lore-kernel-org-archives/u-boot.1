@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B38EE14C3
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 03:34:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE2BAEE14C3
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 03:35:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE1298643D;
-	Fri,  8 Sep 2023 05:34:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1700D8643D;
+	Fri,  8 Sep 2023 05:35:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GnKeA7NV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sKGrWQY+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1E1A8477A; Fri,  8 Sep 2023 05:34:39 +0200 (CEST)
+ id ABFF486907; Fri,  8 Sep 2023 05:35:37 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7692B8643D
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 05:34:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86CE68477A
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 05:35:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3883YWfU002547;
- Thu, 7 Sep 2023 22:34:32 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3883ZVjE003040;
+ Thu, 7 Sep 2023 22:35:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694144072;
- bh=P5iAGNHuBMKrY1ozLgWoKUxviaksfPJl4gOifGBh9yc=;
+ s=ti-com-17Q1; t=1694144131;
+ bh=SFjSK2FVvh4zTLA+UWRh7g+xy1SmmQjIxejmr8SA4Bg=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=GnKeA7NVgKxBOgIXB2Nmp9MkHmISWeD/dXR8uolfllDpdfxq1ABhDFw3O1y5GwAfo
- P69vnmnpMhd96gxUn4F3TbwoV2hwSHcJyXOiKk2q1mZvSWBCyHi1vRzR2B7Hmhkkjb
- h5kg72KS679IVfoi2SXuvAI4dEzFHmZBRaZQ23uY=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3883YWnO076772
+ b=sKGrWQY+c0j7j8WCi6BGpweybCy8YnfAi3yk5LcqkKabLmKADs7z0cqdPxco1ZSVg
+ egIOsMGE1nFVyoAaYw/tNk1hq+uNRrhSgeav96+6htfDekcVKeXYe+LszLqS1/fZOd
+ hjEmugRQ3ba79FOJZ3TYiWDoT2xA+5lFR5ms2iiE=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3883ZVKt008453
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Sep 2023 22:34:32 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 7 Sep 2023 22:35:31 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Sep 2023 22:34:31 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 22:35:30 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Sep 2023 22:34:32 -0500
+ Frontend Transport; Thu, 7 Sep 2023 22:35:30 -0500
 Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3883YRMd020564;
- Thu, 7 Sep 2023 22:34:28 -0500
-Message-ID: <feeb284f-c9dc-1565-8ad6-283fdf02344e@ti.com>
-Date: Fri, 8 Sep 2023 09:04:26 +0530
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3883ZQ1N120617;
+ Thu, 7 Sep 2023 22:35:27 -0500
+Message-ID: <16d6f8a8-8b39-d8d2-c6de-b20347ad4486@ti.com>
+Date: Fri, 8 Sep 2023 09:05:25 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [PATCH v2 4/7] drivers: firmware: ti_sci: Get SCI revision only
- if TIFS/SYSFW is up
+Subject: Re: [PATCH v2 5/7] configs: j721e: Remove HBMC_AM654 config
 Content-Language: en-US
 To: Nishanth Menon <nm@ti.com>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
@@ -63,10 +62,10 @@ CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
  <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>
 References: <20230907141407.382215-1-n-francis@ti.com>
- <20230907141407.382215-5-n-francis@ti.com>
- <20230907150516.v3tsushxhcucmmsl@undergrad>
+ <20230907141407.382215-6-n-francis@ti.com>
+ <20230907150700.jkt7drasgubtoab2@flagstone>
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20230907150516.v3tsushxhcucmmsl@undergrad>
+In-Reply-To: <20230907150700.jkt7drasgubtoab2@flagstone>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -88,85 +87,52 @@ X-Virus-Status: Clean
 
 Hi Nishanth
 
-On 07/09/23 20:35, Nishanth Menon wrote:
+On 07/09/23 20:37, Nishanth Menon wrote:
 > On 19:44-20230907, Neha Malcom Francis wrote:
->> While setting up necessary dependent clocks and power domains, we end up
->> probing the ti_sci driver before TIFS/SYSFW has been loaded in the case
->> of legacy boot flow devices. This leads to panic when getting the SCI
->> revision. Return the revision only if it is combined boot flow. Also
+>> Remove config as kernel commit d93036b47f35 ("arm64: dts: ti:
+>> k3-j721e-mcu-wakeup: Add HyperBus node") is impacting boot. Its
+>> dependent patch [1] has not yet been merged to kernel, similar fix will
+>> be needed in U-Boot.
+>>
+>> [1] https://lore.kernel.org/all/20230424184810.29453-1-afd@ti.com/
 > 
-> Not clear description of the problem.
-
-Hmm okay I will modify this and the earlier commit message to give a clearer 
-picture.
-
+> So, fix the kernel, why do this in u-boot? The rationale in the commit
+> message should clearly state why we do in u-boot.
 > 
->> ensure that after TIFS/SYSFW comes up we run ti_sci_cmd_get_revision
->> again so we print the revision right.
+
+Will explain better in the commit message.
+
 >>
 >> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 >> ---
->>   drivers/firmware/ti_sci.c | 9 ++++++++-
->>   1 file changed, 8 insertions(+), 1 deletion(-)
+>>   configs/j721e_evm_a72_defconfig | 1 -
+>>   configs/j721e_evm_r5_defconfig  | 1 -
+>>   2 files changed, 2 deletions(-)
 >>
->> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
->> index 72f572d824..6a85d202f2 100644
->> --- a/drivers/firmware/ti_sci.c
->> +++ b/drivers/firmware/ti_sci.c
->> @@ -2703,6 +2703,9 @@ struct ti_sci_handle *ti_sci_get_handle_from_sysfw(struct udevice *sci_dev)
->>   	if (!handle)
->>   		return ERR_PTR(-EINVAL);
->>   
->> +	/* May have been skipped in case TIFS/SYSFW had come up later */
-> Very confusing comment.
-> 
-
-Understood, will change that.
-
->> +	ti_sci_cmd_get_revision(handle);
-> 
-> should this be protected with if (IS_ENABLED(CONFIG_K3_DM_FW) ?
-> 
-> Since getting the handle is where the entire flow happens, why not do it
-> here always?
-> 
-
-This is a valid point, I am in the process of making sure there's no other 
-consequences to getting the revision this late for platforms with other boot 
-devices, if this gets an all clear, I will push it here for the next version, 
-else I will explain why I couldn't.
-
-> what if ti_sci_cmd_get_revision fails? there is no error handling here.
-
-Yes that would be a consequence since ti_sci_probe, the logic it was written; 
-used reading the version as an "all okay return 0" for the TIFS/SYSFW binary.
-
-But now after moving, ti_sci_get_handle_from_sysfw happens after k3_sysfw_loader 
-so we're not checking binary sanity early on in the case of combined boot
-
-I'm hesitant that we are checking version way later after k3_sysfw_loader for 
-combined platforms and if that is something we want? But there is an 
-advantage(?) that it will run every time someone tries to get a handle for doing 
-anything with TISCI and that would be a kind of check (?) if the binary is good? 
-Correct me if I'm wrong in thinking that.
-
->> +
->>   	return handle;
->>   }
->>   
->> @@ -2825,7 +2828,11 @@ static int ti_sci_probe(struct udevice *dev)
->>   	list_add_tail(&info->list, &ti_sci_list);
->>   	ti_sci_setup_ops(info);
->>   
->> -	ret = ti_sci_cmd_get_revision(&info->handle);
->> +	/* Get SCI revision ONLY if we are real */
->> +	if (!IS_ENABLED(CONFIG_K3_DM_FW))
->> +		ret = ti_sci_cmd_get_revision(&info->handle);
->> +	else
->> +		ret = 0;
->>   
->>   	INIT_LIST_HEAD(&info->dev_list);
->>   
+>> diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+>> index 214fa8b2f3..beea948c4e 100644
+>> --- a/configs/j721e_evm_a72_defconfig
+>> +++ b/configs/j721e_evm_a72_defconfig
+>> @@ -140,7 +140,6 @@ CONFIG_CFI_FLASH=y
+>>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+>>   CONFIG_FLASH_CFI_MTD=y
+>>   CONFIG_SYS_FLASH_CFI=y
+>> -CONFIG_HBMC_AM654=y
+>>   CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
+>>   CONFIG_DM_SPI_FLASH=y
+>>   CONFIG_SPI_FLASH_STMICRO=y
+>> diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+>> index cf7bc872b5..d974be275f 100644
+>> --- a/configs/j721e_evm_r5_defconfig
+>> +++ b/configs/j721e_evm_r5_defconfig
+>> @@ -127,7 +127,6 @@ CONFIG_CFI_FLASH=y
+>>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+>>   CONFIG_FLASH_CFI_MTD=y
+>>   CONFIG_SYS_FLASH_CFI=y
+>> -CONFIG_HBMC_AM654=y
+>>   CONFIG_DM_SPI_FLASH=y
+>>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>>   CONFIG_SPI_FLASH_STMICRO=y
 >> -- 
 >> 2.34.1
 >>
