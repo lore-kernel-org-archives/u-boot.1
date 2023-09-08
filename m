@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 264D1EEB560
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 19:06:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C0AEEEB562
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 19:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ED8986A6B;
-	Fri,  8 Sep 2023 21:06:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0904386977;
+	Fri,  8 Sep 2023 21:10:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YCSWZrIM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SyijsY/W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A2586A80; Fri,  8 Sep 2023 21:06:42 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5C22486977; Fri,  8 Sep 2023 21:10:09 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95E8586A1C
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 21:06:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C30E80726
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 21:10:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694199995; x=1694804795; i=xypron.glpk@gmx.de;
- bh=RdAhEAWyjTkpLA58ppjyUOMWj7qVS149qxXl8lGvfRU=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=YCSWZrIM09DwwQxxEjAKtUvUqWaIEUawehEMLfCkcXo3HBFtJk3h1m8mZRkobbyCkc+8FdF
- Pu1AvsVUkQyoHSt7HVvekmivcbbz9thWfbTZcdCusfkxQgRzG+DaJFOKnkZRrXwwwXp0IIJiy
- PtdSK1BIsXmZCEDQSBk3VA0zDx5l+zkWOMzstldH6gRhSlC1F3I+wcuF1TkChJ/aQKXqG1COx
- k+d7E3TmGte0Wssg6sZmWbQVsPTHQJj6xOTTFKyeq8yzkimuu34BysGngAGRhE5meCfZXjPiO
- 7wmhyMFxk70r1SuH19pnRH/tE+fDQOfI2RPOY5MQxqaUfjolgzjQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MulmF-1pn8ie3CNP-00rpIT; Fri, 08
- Sep 2023 21:06:35 +0200
-Message-ID: <99b66fba-e92a-4a6f-b1f7-428d814d402a@gmx.de>
-Date: Fri, 8 Sep 2023 21:07:38 +0200
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-58caaedb20bso24887577b3.1
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 12:10:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694200200; x=1694805000; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5ahj68QoBYpl5laaN7YYEHxcxGk3Dy7ue1P52a0gL7Q=;
+ b=SyijsY/WFcCqEuPzrBtphYNrbSaVa9h/3jLU9etS304gyF7+MYVsl+j/+4dJ4eEuhR
+ RYw1jJLv3E3xvsktK2660cKeUr0+iUqWoepHJXpcnbBqGddqiSVCtUkZ2+eh1/k1VpeE
+ repCBlBWOWhPmnH0RIo1BPlNdOczFCcAOI08GktS/JkuZ+NZTf9aSnPhiid/O1WUm68T
+ 6LmC+LrW5iqMMsp929RyptYR6YHKDfvF3vAnewVHTC1VdB+zyiflQ5HJW44kd/jAQYy4
+ W8D4D84gRiPPMaPUY+T2iLiyzVKiHJ9D6wdC3phlI5JY9E6J0/M7OAY9V92JXs47MEho
+ IHWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694200200; x=1694805000;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5ahj68QoBYpl5laaN7YYEHxcxGk3Dy7ue1P52a0gL7Q=;
+ b=Qwc+KT+/TByhkpL5bV1QcAYrh7Se/Ld3kxYosdtgQzrJkd54wy5hHay/7P6RcpQqRK
+ jKQJ1Ws+KtCpG5foWptNDRbnPcmUsKz+/WiMHNCLFxv872c5RbEpyif4+qdzKgs4PHk5
+ As0d7OaN/+GdZm+A7NkQ2LWz2oX2N95wi+zQMy4f67gTcCwEYxw+dFstSXAkdtAwNL7e
+ ux9GkZGIkhn1LvnBFtEgBZW5UhH3UkZYx3dIP/5FTeXGBsZ860rV5VwmivBF7YJfcEzA
+ kn85P62EiWaIbc8I6RyQBRrJD8u0lqGd4lK7Tuzp0O8xVQTdfTXCdgjDNqY1gQcyIvoq
+ xniQ==
+X-Gm-Message-State: AOJu0Yy4oRU8qlSYFm8Z9bttgSRo+2FLAnBJbQjYicnpq5A+yZfZX11R
+ C+nZmS6kj2F7bDNdhi1cEjk=
+X-Google-Smtp-Source: AGHT+IF44RvE6nCxU56zK5DwQdKaNp66omJZ54R9Roh7P7mzy0s4TJkx7g94qZQ/eEE6PbecVr3RWg==
+X-Received: by 2002:a0d:ca84:0:b0:58d:5df8:f61e with SMTP id
+ m126-20020a0dca84000000b0058d5df8f61emr3341868ywd.2.1694200200070; 
+ Fri, 08 Sep 2023 12:10:00 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ h6-20020a0df706000000b0058c55d40765sm562957ywf.106.2023.09.08.12.09.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Sep 2023 12:09:59 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stefan Roese <sr@denx.de>,
+	Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v3] bootstd: sata: Add bootstd support for ahci sata
+Date: Fri,  8 Sep 2023 12:09:34 -0700
+Message-Id: <20230908190935.12516-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] rng: stm32: Implement configurable RNG clock error
- detection
-Content-Language: en-US, de-DE
-To: Gatien Chevallier <gatien.chevallier@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
-References: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
- <20230907162200.205602-3-gatien.chevallier@foss.st.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230907162200.205602-3-gatien.chevallier@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:aShp9z5e5H2RoDLKXaqmg3xg8eRU9tYPJuIPv/iWyPzWsP8LAcZ
- WndZl2lAeWYhl+Xx9HT0Xp175XnZMMbDb+Y3fJRlC+QIl0mpCjMGssQTXrxgUwk92668mK0
- VQ+ini3RrXdlwvUT+EiMhVu4DIOZNmpfPtax5qbcpuzd0HevmCCHkdPeJmf9teQvSlCunpe
- yWDGBry+QNEzqYlBou3tg==
-UI-OutboundReport: notjunk:1;M01:P0:OHf3BlVq7lM=;zo4xDZdl+XItKdtbB+QHuSlZrKS
- YxY2hfEvgAbj3wiPDQRE4ZfMktZeMwCUkM578a7mWlPCL5mjiOeXX5yNfABWz6xvPEYf3xuSD
- /6HeUKBu2It6rcNcJCQI9gH9royf9MPt5WATnNKvECmdg89S3qn9ATpa/IwuNQQqV0XqSXJpU
- 1X9fbEMGtMlW7/8JWtWDvtegr4nD06Qhg4qhpBrexZlLXCH3EGOIF+WZAWWIXgWzn11rsiV85
- 4d58IB8o8eIIB2t+BwUnXDNeilL7hmqNDVLJF3Te8W3Cse8zgo4jMrFIW26cuopuuqhuCessq
- MgJsCmuusNTV1WSjgkbZ2jnh+AE1W09yz0MLCmQ7nfVVWKp9Yj45FxMGtm8FtdCShX1o1lKmo
- o33myt/XiSGSj59fOdZCUH63e+2/VvnJe6lVdssG6gpl0eYn2j2S4KjJhOLK2eqxKqfNLiltc
- /xzA6mU1Q331Or/4cRpx/lvv+xVKjvoFZAmsa9oiQMrypVDTtP/EWSccIE+6A1HfmNyxOTA/c
- pIlNq4nH9M575a+uZx0BkKBKbBtLMfEz65gUilXL1+F6SJZR3tUQigDtqsa9i91fNQaLcNZES
- T3HxerCxXuUYw3+fZR6wb5ro3BoOOp49u8MGHs7G3Kl9yLEu61diZjPw0TI1FkmmPM8QPxmCH
- vEtfRq5MXQeBAqi4J3+74wKCFw2vFNPA1qmvyDtcAxyv4+uYVlc6J7BY71vJQeXSkmYIFO+49
- fCCaSiN7/rIgYE452PUSh29efRbRslhHc4/LXknobYfF/p4+rsQx0fY1d3i6kSTV4suUec3k5
- ocuJ8LreNvAQdlAJ3QO9eCRmWSKSIImPj366H16IQDp3EGRmVKAASE0vs4wU6dG7ZeaDeePY2
- 7iOjyyTuu27dsgsfCDnf4QkZVZ1BD6aYZycMuJ4GfDScJGpAsyJnediIyigowpE+P/1sCe/85
- ZhQhzFcMzuiyN8zQG8S8Q3QZvWU=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,89 +91,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/7/23 18:21, Gatien Chevallier wrote:
-> RNG clock error detection is now enabled if the "clock-error-detect"
-> property is set in the device tree.
->
-> Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
-> ---
->   drivers/rng/stm32_rng.c | 22 +++++++++++++++++-----
->   1 file changed, 17 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/rng/stm32_rng.c b/drivers/rng/stm32_rng.c
-> index 89da78c6c8..ada5d92214 100644
-> --- a/drivers/rng/stm32_rng.c
-> +++ b/drivers/rng/stm32_rng.c
-> @@ -40,6 +40,7 @@ struct stm32_rng_plat {
->   	struct clk clk;
->   	struct reset_ctl rst;
->   	const struct stm32_rng_data *data;
-> +	bool ced;
->   };
->
->   static int stm32_rng_read(struct udevice *dev, void *data, size_t len)
-> @@ -97,25 +98,34 @@ static int stm32_rng_init(struct stm32_rng_plat *pda=
-ta)
->
->   	cr =3D readl(pdata->base + RNG_CR);
->
-> -	/* Disable CED */
-> -	cr |=3D RNG_CR_CED;
->   	if (pdata->data->has_cond_reset) {
->   		cr |=3D RNG_CR_CONDRST;
-> +		if (pdata->ced)
-> +			cr &=3D ~RNG_CR_CED;
-> +		else
-> +			cr |=3D RNG_CR_CED;
->   		writel(cr, pdata->base + RNG_CR);
->   		cr &=3D ~RNG_CR_CONDRST;
-> +		cr |=3D RNG_CR_RNGEN;
->   		writel(cr, pdata->base + RNG_CR);
->   		err =3D readl_poll_timeout(pdata->base + RNG_CR, cr,
->   					 (!(cr & RNG_CR_CONDRST)), 10000);
->   		if (err)
->   			return err;
-> +	} else {
-> +		if (pdata->ced)
-> +			cr &=3D ~RNG_CR_CED;
-> +		else
-> +			cr |=3D RNG_CR_CED;
-> +
-> +		cr |=3D RNG_CR_RNGEN;
-> +
-> +		writel(cr, pdata->base + RNG_CR);
->   	}
->
->   	/* clear error indicators */
->   	writel(0, pdata->base + RNG_SR);
->
-> -	cr |=3D RNG_CR_RNGEN;
-> -	writel(cr, pdata->base + RNG_CR);
-> -
->   	err =3D readl_poll_timeout(pdata->base + RNG_SR, sr,
->   				 sr & RNG_SR_DRDY, 10000);
->   	return err;
-> @@ -165,6 +175,8 @@ static int stm32_rng_of_to_plat(struct udevice *dev)
->   	if (err)
->   		return err;
->
-> +	pdata->ced =3D dev_read_bool(dev, "clock-error-detect");
+Add ahci sata bootdev and corresponding hunting function.
 
-The kernel describes this property in
-Documentation/devicetree/bindings/rng/st,stm32-rng.yaml
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-Which patch is adding it to the U-Boot device-trees?
-I can't find it in this patch series.
+Changes in v3:
+- Correct drivers/ata/Makefile to compile sata_bootdev only if
+ahci sata is enabled.
 
-It would have been helpful to send a cover-letter with the patch series
-to get an overview of the changed files in the patch set.
+Changes in v2:
+- set devtype to sata in bootmeth_script for non-scsi SATA device.
 
-Best regards
+ boot/bootmeth_script.c     | 12 ++++++--
+ drivers/ata/Makefile       |  2 +-
+ drivers/ata/sata.c         | 25 +++++++++++++++
+ drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+ include/sata.h             |  1 +
+ 5 files changed, 99 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/ata/sata_bootdev.c
 
-Heinrich
-
-> +
->   	return 0;
->   }
->
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index 58c57a2d4b..0269e0f9b0 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct bootflow *bflow)
+ 	ulong addr;
+ 	int ret;
+ 
+-	if (desc->uclass_id == UCLASS_USB)
++	if (desc->uclass_id == UCLASS_USB) {
+ 		ret = env_set("devtype", "usb");
+-	else
++	} else {
+ 		ret = env_set("devtype", blk_get_devtype(bflow->blk));
++
++		/* If the parent uclass is AHCI, but the driver is ATA
++		 * (not scsi), set devtype to sata
++		 */
++		if (!ret && IS_ENABLED(CONFIG_SATA) &&
++		    !strcmp("ahci", env_get("devtype")))
++			ret = env_set("devtype", "sata");
++	}
+ 	if (!ret)
+ 		ret = env_set_hex("devnum", desc->devnum);
+ 	if (!ret)
+diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
+index 6e30180b8b..0b6f91098a 100644
+--- a/drivers/ata/Makefile
++++ b/drivers/ata/Makefile
+@@ -10,7 +10,7 @@ obj-$(CONFIG_SCSI_AHCI) += ahci.o
+ obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
+ obj-$(CONFIG_FSL_SATA) += fsl_sata.o
+ obj-$(CONFIG_LIBATA) += libata.o
+-obj-$(CONFIG_SATA) += sata.o
++obj-$(CONFIG_SATA) += sata.o sata_bootdev.o
+ obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
+ obj-$(CONFIG_SATA_MV) += sata_mv.o
+ obj-$(CONFIG_SATA_SIL) += sata_sil.o
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index ce3e9b5a40..9da7218564 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -15,6 +15,8 @@
+ #include <dm.h>
+ #include <part.h>
+ #include <sata.h>
++#include <dm/device-internal.h>
++#include <dm/uclass-internal.h>
+ 
+ #ifndef CONFIG_AHCI
+ struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
+@@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
+ 	return ops->scan(dev);
+ }
+ 
++int sata_rescan(bool verbose)
++{
++	struct udevice *dev;
++	int devnum = 0;
++	int ret;
++
++	/* Find and probing the SATA controller */
++	ret = uclass_get_device(UCLASS_AHCI, devnum, &dev);
++
++	/* Sanity check */
++	if (ret)
++		ret = uclass_find_first_device(UCLASS_AHCI, &dev);
++	if (ret) {
++		printf("Cannot probe SATA device %d (err=%d)\n", devnum, ret);
++		return -ENOSYS;
++	}
++	if (!dev) {
++		printf("No SATA device found!\n");
++		return -ENOSYS;
++	}
++	return 0;
++}
++
+ #ifndef CONFIG_AHCI
+ #ifdef CONFIG_PARTITIONS
+ struct blk_desc *sata_get_dev(int dev)
+diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+new file mode 100644
+index 0000000000..f638493ce0
+--- /dev/null
++++ b/drivers/ata/sata_bootdev.c
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Bootdev for sata
++ *
++ * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
++ */
++
++#include <common.h>
++#include <ahci.h>
++#include <bootdev.h>
++#include <dm.h>
++#include <init.h>
++#include <sata.h>
++
++static int sata_bootdev_bind(struct udevice *dev)
++{
++	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++
++	ucp->prio = BOOTDEVP_4_SCAN_FAST;
++
++	return 0;
++}
++
++static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
++{
++	int ret;
++
++	if (IS_ENABLED(CONFIG_PCI)) {
++		ret = pci_init();
++		if (ret)
++			return ret;
++	}
++
++	ret = sata_rescan(true);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++struct bootdev_ops sata_bootdev_ops = {
++};
++
++static const struct udevice_id sata_bootdev_ids[] = {
++	{ .compatible = "u-boot,bootdev-sata" },
++	{ }
++};
++
++U_BOOT_DRIVER(sata_bootdev) = {
++	.name		= "sata_bootdev",
++	.id		= UCLASS_BOOTDEV,
++	.ops		= &sata_bootdev_ops,
++	.bind		= sata_bootdev_bind,
++	.of_match	= sata_bootdev_ids,
++};
++
++BOOTDEV_HUNTER(sata_bootdev_hunter) = {
++	.prio		= BOOTDEVP_4_SCAN_FAST,
++	.uclass		= UCLASS_AHCI,
++	.hunt		= sata_bootdev_hunt,
++	.drv		= DM_DRIVER_REF(sata_bootdev),
++};
+diff --git a/include/sata.h b/include/sata.h
+index d89f7a8a29..0495744bad 100644
+--- a/include/sata.h
++++ b/include/sata.h
+@@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
+ 
+ int sata_probe(int devnum);
+ int sata_remove(int devnum);
++int sata_rescan(bool verbose);
+ 
+ #endif
+-- 
+2.39.2
 
