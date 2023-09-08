@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C660EE57F6
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 10:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665A6EE57F5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 10:59:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1805D8644E;
+	by phobos.denx.de (Postfix) with ESMTP id 69E8A86A04;
 	Fri,  8 Sep 2023 12:59:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m0NYMF7V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ma0X3d44";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 806548685B; Fri,  8 Sep 2023 07:39:39 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B1FB486998; Fri,  8 Sep 2023 10:00:22 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F3678644E
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 07:39:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0475865D0
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 10:00:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3885dY9H128956;
- Fri, 8 Sep 2023 00:39:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694151574;
- bh=lA2Kwn5mODAklYE5otA+FzzOhH3+zJ9VmVsTx3G8pE0=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=m0NYMF7VFxKWHncuGx1SbICibB0bZ3wA0p64OofIMq0qloBG+VkhYbi/xxxtXRExg
- SuC8T+1JSa5UtnJSVM3A+H24XV+8Lq81N/QWeD6tfrTzGUjJ3Le3J28HwzC6KCAq+C
- oZiLvwL2QbS1hYpBMTrspxg6CspcV8k86PQij+iw=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3885dYok034334
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 00:39:34 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 00:39:32 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 00:39:32 -0500
-Received: from [10.24.69.34] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3885dT1S003184;
- Fri, 8 Sep 2023 00:39:29 -0500
-Message-ID: <30919c1d-b5bb-8fd5-5945-27de699a2c3d@ti.com>
-Date: Fri, 8 Sep 2023 11:09:28 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v4 5/6] docs: board: ti: Add j721s2_evm documentation
-Content-Language: en-US
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Andrew Davis <afd@ti.com>
-References: <20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com>
- <20230816-b4-upstream-j721s2-r5-pinmux-v4-5-dc114bece5d7@ti.com>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20230816-b4-upstream-j721s2-r5-pinmux-v4-5-dc114bece5d7@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jaewon8868@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-68e369ba5f8so1448498b3a.2
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 01:00:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694160017; x=1694764817; darn=lists.denx.de;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7XU8MYriCgu4QKPbyIFRiOihYKAcZu5lwELnDUnEkUY=;
+ b=Ma0X3d443ENXkzcW63T2Dx+8mwI25tUyWRs741EVh3UxgCnCqQGGYcHRcTNvrHiz87
+ x2F3MbmeeOu1aqdTZYcLVK67ERmIxTjndfBtK/RcfTV2aQQOO7tTy+f8/P38B4dtfHRw
+ GPHcURgOOemGCc7Ukyf7hjYECPF4sBVm2VeCdyPJXPmHz6C4U0dG+HOwfQvgcf+o5cSi
+ Fn7PddaHUnc2BGfxtLhKtsS/ab/SfW23ZFrvHBLbDdC9p7DzbEUxILsphtPz6NkxMcVG
+ EufGXBHklxtVaKL1adBWfAR9VMzJOR9d+mGjGZ9UiqHlFJ6Pa6lPN5iucnp1DkJCJedz
+ tyyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694160017; x=1694764817;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7XU8MYriCgu4QKPbyIFRiOihYKAcZu5lwELnDUnEkUY=;
+ b=MA6MdHNwSHZbXFlKF+QbKpFiv4cRbk/DmZ5dXXCXnlFkyt4YgMcyNDVF8NVphgLTph
+ qwYN/R04OP8g1p7+JaqFiDG0yHl+gCyBF4p558/W27v0NnDp1hwlvrBt2ZJK5JG2L8vZ
+ sYXQ7zIAEzOqh26eW5ph28IF+9DUhIdzuByRzUzfyhh0MEVA2kKDNLTkRzt8Y6nRnWzS
+ 32FgepVkNDcGp0uWBCrOfvcUS7LD5csID1sy92JdBTo1Q0/sz9THoibjCcl2v0lCXV0J
+ U225bqWHdwWNm5Deq+Qb6iEOwajNR7aZVmMKCJWp4j2JAcp5TPfX0PkNg+P9EGktw0nP
+ P6hQ==
+X-Gm-Message-State: AOJu0YzSCr1GP6lQdMZXHHM739EYaNw9wTgtg17o/xqLbl0Yozp0/RQQ
+ S47XH+aDqQ1zYsHPdTS4XNgEBAeZo6w=
+X-Google-Smtp-Source: AGHT+IGnMIw/VtXDj+5RojJhT4LlEdGYmXlKw9p3lUtJCVLNZwZWsnVNyI3358HeEdeQV5eod0ITmw==
+X-Received: by 2002:a05:6a20:1395:b0:14c:6a05:dfbf with SMTP id
+ hn21-20020a056a20139500b0014c6a05dfbfmr1647123pzc.60.1694160017188; 
+ Fri, 08 Sep 2023 01:00:17 -0700 (PDT)
+Received: from localhost.localdomain ([180.230.198.109])
+ by smtp.gmail.com with ESMTPSA id
+ m5-20020a17090a414500b0026f919ff9a1sm2485341pjg.10.2023.09.08.01.00.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Sep 2023 01:00:16 -0700 (PDT)
+From: Jaewon Jung <jaewon8868@gmail.com>
+X-Google-Original-From: Jaewon Jung <jw.jung@navercorp.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org,
+	Jaewon Jung <jw.jung@navercorp.com>
+Subject: [PATCH] doc: delete unused values kernel command line
+Date: Fri,  8 Sep 2023 17:00:01 +0900
+Message-Id: <20230908080001.31231-1-jw.jung@navercorp.com>
+X-Mailer: git-send-email 2.17.1
 X-Mailman-Approved-At: Fri, 08 Sep 2023 12:59:17 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,379 +88,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Delete "boot=local", "noswap" unused values in kernel command line
 
-On 04/09/23 16:08, Manorit Chawdhry wrote:
-> Add the documentation for J721S2-EVM and SK-AM68
->
-> TRM for J721S2/AM68: https://www.ti.com/lit/pdf/spruj28
-> Product Page for J721S2: https://www.ti.com/tool/J721S2XSOMXEVM
-> Product Page for AM68: https://www.ti.com/tool/SK-AM68
->
-> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
->   doc/board/ti/j721s2_evm.rst | 341 ++++++++++++++++++++++++++++++++++++++++++++
->   doc/board/ti/k3.rst         |   1 +
->   2 files changed, 342 insertions(+)
->
-> diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-> new file mode 100644
-> index 000000000000..a72a47ee8603
-> --- /dev/null
-> +++ b/doc/board/ti/j721s2_evm.rst
-> @@ -0,0 +1,341 @@
-> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> +.. sectionauthor:: Manorit Chawdhry <m-chawdhry@ti.com>
-> +
-> +J721S2 and AM68 Platforms
-> +=========================
-> +
-> +Introduction:
-> +-------------
-> +The J721S2 family of SoCs are part of K3 Multicore SoC architecture platform
-> +targeting automotive applications. They are designed as a low power, high
-> +performance and highly integrated device architecture, adding significant
-> +enhancement on processing power, graphics capability, video and imaging
-> +processing, virtualization and coherent memory support.
-> +
-> +The AM68 Starter Kit/Evaluation Module (EVM) is based on the J721S2 family
-> +of SoCs. They are designed for machine vision, traffic monitoring, retail
-> +automation, and factory automation.
-> +
-> +The device is partitioned into three functional domains, each containing
-> +specific processing cores and peripherals:
-> +
-> +1. Wake-up (WKUP) domain:
-> +    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
-> +
-> +2. Microcontroller (MCU) domain:
-> +    * Dual core ARM Cortex-R5F processor, runs device management
-> +      and SoC early boot
-> +
-> +3. MAIN domain:
-> +    * Dual core 64-bit ARM Cortex-A72, runs HLOS
-> +
-> +More info can be found in TRM: https://www.ti.com/lit/pdf/spruj28
-> +
-> +Platform information:
-> +
-> +* https://www.ti.com/tool/J721S2XSOMXEVM
-> +* https://www.ti.com/tool/SK-AM68
-> +
-> +Boot Flow:
-> +----------
-> +Below is the pictorial representation of boot flow:
-> +
-> +.. image:: img/boot_diagram_k3_current.svg
-> +
-> +- On this platform, "TI Foundational Security" (TIFS) functions as the
-> +  security enclave master while "Device Manager" (DM), also known as the
-> +  "TISCI server" in TI terminology, offers all the essential services.
-> +
-> +- As illustrated in the diagram above, R5 SPL manages power and clock
-> +  services independently before handing over control to "DM". The A72 or
-> +  the C7x (Aux core) software components request TIFS/DM to handle
-> +  security or device management services.
-> +
-> +Sources:
-> +--------
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_boot_sources
-> +    :end-before: .. k3_rst_include_end_boot_sources
-> +
-> +Build procedure:
-> +----------------
-> +0. Setup the environment variables:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
-> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
-> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
-> +
-> +Set the variables corresponding to this platform:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
-> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
-> +.. code-block:: bash
-> +
-> + $ export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
-> + $ export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
-> + $ export TFA_BOARD=generic
-> + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-> + $ # The following is not a typo, j784s4 is the OP-TEE platform for j721s2
-> + $ export OPTEE_PLATFORM=k3-j784s4
-> + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-> +
-> +.. j721s2_evm_rst_include_start_build_steps
-> +
-> +1. Trusted Firmware-A:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_tfa
-> +    :end-before: .. k3_rst_include_end_build_steps_tfa
-> +
-> +
-> +2. OP-TEE:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_optee
-> +    :end-before: .. k3_rst_include_end_build_steps_optee
-> +
-> +3. U-Boot:
-> +
-> +.. _j721s2_evm_rst_u_boot_r5:
-> +
-> +* 3.1 R5:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-> +
-> +.. _j721s2_evm_rst_u_boot_a72:
-> +
-> +* 3.2 A72:
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_uboot
-> +    :end-before: .. k3_rst_include_end_build_steps_uboot
-> +.. j721s2_evm_rst_include_end_build_steps
-> +
-> +Target Images
-> +--------------
-> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
-> +variant (GP, HS-FS, HS-SE) requires a different source for these files.
-> +
-> + - GP
-> +
-> +    * tiboot3-j721s2-gp-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-> +    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-> +
-> + - HS-FS
-> +
-> +    * tiboot3-j721s2-hs-fs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-> +
-> + - HS-SE
-> +
-> +    * tiboot3-j721s2-hs-evm.bin from :ref:`step 3.1 <j721s2_evm_rst_u_boot_r5>`
-> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j721s2_evm_rst_u_boot_a72>`
-> +
-> +Image formats:
-> +--------------
-> +
-> +- tiboot3.bin
-> +
-> +.. image:: img/multi_cert_tiboot3.bin.svg
-> +
-> +- tispl.bin
-> +
-> +.. image:: img/dm_tispl.bin.svg
-> +
-> +R5 Memory Map:
-> +--------------
-> +
-> +.. list-table::
-> +   :widths: 16 16 16
-> +   :header-rows: 1
-> +
-> +   * - Region
-> +     - Start Address
-> +     - End Address
-> +
-> +   * - SPL
-> +     - 0x41c00000
-> +     - 0x41c40000
-> +
-> +   * - EMPTY
-> +     - 0x41c40000
-> +     - 0x41c61f20
-> +
-> +   * - STACK
-> +     - 0x41c65f20
-> +     - 0x41c61f20
-> +
-> +   * - Global data
-> +     - 0x41c65f20
-> +     - 0x41c66000
-> +
-> +   * - Heap
-> +     - 0x41c66000
-> +     - 0x41c76000
-> +
-> +   * - BSS
-> +     - 0x41c76000
-> +     - 0x41c80000
-> +
-> +   * - DM DATA
-> +     - 0x41c80000
-> +     - 0x41c84130
-> +
-> +   * - EMPTY
-> +     - 0x41c84130
-> +     - 0x41cff9fc
-> +
-> +   * - MCU Scratchpad
-> +     - 0x41cff9fc
-> +     - 0x41cffbfc
-> +
-> +   * - ROM DATA
-> +     - 0x41cffbfc
-> +     - 0x41cfffff
-> +
-> +Switch Setting for Boot Mode
-> +----------------------------
-> +
-> +Boot Mode pins provide means to select the boot mode and options before the
-> +device is powered up. After every POR, they are the main source to populate
-> +the Boot Parameter Tables.
-> +
-> +Boot Mode Pins for J721S2-EVM
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The following table shows some common boot modes used on J721S2 platform.
-> +More details can be found in the Technical Reference Manual:
-> +https://www.ti.com/lit/pdf/spruj28 under the `Boot Mode Pins` section.
-> +
-> +.. list-table:: Boot Modes
-> +   :widths: 16 16 16
-> +   :header-rows: 1
-> +
-> +   * - Switch Label
-> +     - SW9: 12345678
-> +     - SW8: 12345678
-> +
-> +   * - SD
-> +     - 00000000
-> +     - 10000010
-> +
-> +   * - EMMC
-> +     - 01000000
-> +     - 10000000
-> +
-> +   * - OSPI
-> +     - 01000000
-> +     - 00000110
-> +
-> +   * - UART
-> +     - 01110000
-> +     - 00000000
-> +
-> +   * - USB DFU
-> +     - 00100000
-> +     - 10000000
-> +
-> +For SW8 and SW9, the switch state in the "ON" position = 1.
-> +
-> +Boot Mode Pins for SK-AM68
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The following table shows some common boot modes used on AM68-SK platform.
-> +More details can be found in the User Guide for AM68-SK:
-> +https://www.ti.com/pdf/spruj68 under the `Bootmode Settings` section.
-The above user guide link doesn't work :)
-> +
-> +.. list-table:: Boot Modes
-> +   :widths: 16 16
-> +   :header-rows: 1
-> +
-> +   * - Switch Label
-> +     - SW1: 1234
-> +
-> +   * - SD
-> +     - 0000
-> +
-> +   * - xSPI
-> +     - 0010
-> +
-> +   * - UART
-> +     - 1010
-> +
-> +   * - Ethernet
-> +     - 0100
-> +
-> +For SW1, the switch state in the "ON" position = 1.
-> +
-> +Debugging U-Boot
-> +----------------
-> +
-> +See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-> +detailed setup information.
-> +
-> +.. warning::
-> +
-> +  **OpenOCD support since**: v0.12.0
-> +
-> +  If the default package version of OpenOCD in your development
-> +  environment's distribution needs to be updated, it might be necessary to
-> +  build OpenOCD from the source.
-> +
-> +Debugging U-Boot on J721S2-EVM
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-> +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-> +
-> +To start OpenOCD and connect to the board
-> +
-> +.. code-block:: bash
-> +
-> +  openocd -f board/ti_j721s2evm.cfg
-> +
-> +Debugging U-Boot on SK-AM68
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_openocd_connect_cti20
-> +    :end-before: .. k3_rst_include_end_openocd_connect_cti20
-> +
-> +.. include::  k3.rst
-> +    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
-> +    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
-> +
-> +For SK-AM68, the openocd_connect.cfg is as follows:
-> +
-> +.. code-block:: tcl
-> +
-> +  # TUMPA example:
-> +  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
-> +  source [find interface/ftdi/tumpa.cfg]
-> +
-> +  transport select jtag
-> +
-> +  # default JTAG configuration has only SRST and no TRST
-> +  reset_config srst_only srst_push_pull
-> +
-> +  # delay after SRST goes inactive
-> +  adapter srst delay 20
-> +
-> +  if { ![info exists SOC] } {
-> +    # Set the SoC of interest
-> +    set SOC j721s2
-> +  }
-> +
-> +  source [find target/ti_k3.cfg]
-> +
-> +  ftdi tdo_sample_edge falling
-> +
-> +  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
-> +  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
-> +  adapter speed 16000
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> index 5f9bd4dfcbe9..423d55526dc5 100644
-> --- a/doc/board/ti/k3.rst
-> +++ b/doc/board/ti/k3.rst
-> @@ -36,6 +36,7 @@ K3 Based SoCs
->      am65x_evm
->      j7200_evm
->      j721e_evm
-> +   j721s2_evm
->   
->   Boot Flow Overview
->   ------------------
->
+Signed-off-by: Jaewon Jung <jw.jung@navercorp.com>
+---
+ doc/board/google/chromebook_coral.rst | 4 ++--
+ doc/usage/cmd/bootflow.rst            | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/doc/board/google/chromebook_coral.rst b/doc/board/google/chromebook_coral.rst
+index 23e2db4556..1ee634c6c2 100644
+--- a/doc/board/google/chromebook_coral.rst
++++ b/doc/board/google/chromebook_coral.rst
+@@ -88,7 +88,7 @@ Here is the console output::
+   Net:   No ethernet found.
+   SF: Detected w25q128fw with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+   Hit any key to stop autoboot:  0
+-  cmdline=console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=${uuid}/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none rw 1,0 3788800 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3788800 alg=sha1 root_hexdigest=55052b629d3ac889f25a9583ea12cdcd3ea15ff8 salt=a2d4d9e574069f4fed5e3961b99054b7a4905414b60a25d89974a7334021165c" noinitrd vt.global_cursor_default=0 kern_guid=${uuid} add_efi_memmap boot=local noresume noswap i915.modeset=1 Kernel command line: "console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=35c775e7-3735-d745-93e5-d9e0238f7ed0/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none rw 1,0 3788800 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3788800 alg=sha1 root_hexdigest=55052b629d3ac889f25a9583ea12cdcd3ea15ff8 salt=a2d4d9e574069f4fed5e3961b99054b7a4905414b60a25d89974a7334021165c" n
+ oinitrd vt.global_cursor_default=0 kern_guid=35c775e7-3735-d745-93e5-d9e0238f7ed0 add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic disablevmx=off  "
++  cmdline=console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=${uuid}/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none rw 1,0 3788800 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3788800 alg=sha1 root_hexdigest=55052b629d3ac889f25a9583ea12cdcd3ea15ff8 salt=a2d4d9e574069f4fed5e3961b99054b7a4905414b60a25d89974a7334021165c" noinitrd vt.global_cursor_default=0 kern_guid=${uuid} add_efi_memmap noresume i915.modeset=1 Kernel command line: "console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=35c775e7-3735-d745-93e5-d9e0238f7ed0/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none rw 1,0 3788800 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3788800 alg=sha1 root_hexdigest=55052b629d3ac889f25a9583ea12cdcd3ea15ff8 salt=a2d4d9e574069f4fed5e3961b99054b7a4905414b60a25d89974a7334021165c" noinitrd vt.global_
+ cursor_default=0 kern_guid=35c775e7-3735-d745-93e5-d9e0238f7ed0 add_efi_memmap noresume i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic disablevmx=off  "
+   Setup located at 00090000:
+ 
+   ACPI RSDP addr      : 7991f000
+@@ -136,7 +136,7 @@ Here is the console output::
+   Ext loader ver      : 0
+   Ext loader type     : 0
+   Command line ptr    : 99000
+-     console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=35c775e7-3735-d745-93e5-d9e0238f7ed0/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none rw 1,0 3788800 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3788800 alg=sha1 root_hexdigest=55052b629d3ac889f25a9583ea12cdcd3ea15ff8 salt=a2d4d9e574069f4fed5e3961b99054b7a4905414b60a25d89974a7334021165c" noinitrd vt.global_cursor_default=0 kern_guid=35c775e7-3735-d745-93e5-d9e0238f7ed0 add_efi_memmap boot=local noresume noswap i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic disablevmx=off
++     console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=35c775e7-3735-d745-93e5-d9e0238f7ed0/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none rw 1,0 3788800 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3788800 alg=sha1 root_hexdigest=55052b629d3ac889f25a9583ea12cdcd3ea15ff8 salt=a2d4d9e574069f4fed5e3961b99054b7a4905414b60a25d89974a7334021165c" noinitrd vt.global_cursor_default=0 kern_guid=35c775e7-3735-d745-93e5-d9e0238f7ed0 add_efi_memmap noresume i915.modeset=1 tpm_tis.force=1 tpm_tis.interrupts=0 nmi_watchdog=panic,lapic disablevmx=off
+   Initrd addr max     : 7fffffff
+   Kernel alignment    : 200000
+   Relocatable kernel  : 1
+diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
+index a8af1f8f60..65e3777cdc 100644
+--- a/doc/usage/cmd/bootflow.rst
++++ b/doc/usage/cmd/bootflow.rst
+@@ -495,8 +495,8 @@ the cmdline is word-wrapped here and some parts of the command line are elided::
+           root_hexdigest=78cc462cd45aecbcd49ca476587b4dee59aa1b00ba5ece58e2c29ec9acd914ab
+           salt=8dec4dc80a75dd834a9b3175c674405e15b16a253fdfe05c79394ae5fd76f66a"
+         noinitrd vt.global_cursor_default=0
+-        kern_guid=799c935b-ae62-d143-8493-816fa936eef7 add_efi_memmap boot=local
+-        noresume noswap i915.modeset=1 ramoops.ecc=1 tpm_tis.force=0
++        kern_guid=799c935b-ae62-d143-8493-816fa936eef7 add_efi_memmap
++        noresume i915.modeset=1 ramoops.ecc=1 tpm_tis.force=0
+         intel_pmc_core.warn_on_s0ix_failures=1 i915.enable_guc=3 i915.enable_dc=4
+         xdomain=0 swiotlb=65536 intel_iommu=on i915.enable_psr=1
+         usb-storage.quirks=13fe:6500:u
+-- 
+2.17.1
+
