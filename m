@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EA9EEE57FC
-	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 11:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF30EE57FC
+	for <u-boot@archiver.kernel.org>; Fri,  8 Sep 2023 11:46:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8405F869B9;
-	Fri,  8 Sep 2023 13:43:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 08DA7869F9;
+	Fri,  8 Sep 2023 13:46:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qUeidd5k";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BPEtcWZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C784F869BC; Fri,  8 Sep 2023 13:43:20 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F30DF86A04; Fri,  8 Sep 2023 13:46:07 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D235786501
- for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24E4E86501
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 13:46:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 388BhEV7099106;
- Fri, 8 Sep 2023 06:43:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694173394;
- bh=L9rI9Y59MPjEm57GR4C1ABuOIwM/cb0FCIECUSqNya4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=qUeidd5kzt9n0v6fG7cRT2uW5Tg6pfRm1XA+xTvbkIWYKujK8VyuCF5j2+e73lmSb
- qU3ymmLwZF9hHe1wNVX52g/dnbRTQocGOeGdHlD27isUYPdyX6VzLh7Nnp1eH8sSrg
- dgD0VuyWeSI2gIVSgeKuVQ6Fmc3xFx/7OjFWFKwU=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 388BhERU093868
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 8 Sep 2023 06:43:14 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 8
- Sep 2023 06:43:14 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 8 Sep 2023 06:43:13 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 388BhD7X032749;
- Fri, 8 Sep 2023 06:43:13 -0500
-Date: Fri, 8 Sep 2023 17:13:12 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>, Udit Kumar
- <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [RFC PATCH 2/2] binman: j721e: Add firewall configurations for atf
-Message-ID: <20230908114312.weraz2yvskcaboku@ula0497581>
-References: <20230905-binman-firewalling-v1-0-3894520bff8a@ti.com>
- <20230905-binman-firewalling-v1-2-3894520bff8a@ti.com>
- <72516776-1b6f-cd79-2e00-a28b920f722f@ti.com>
- <20230906051840.3747bkybpqd2m4gg@ula0497581>
- <4eb25acc-0d36-fa59-eb89-b8e3321dae3e@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 52CAD6149D
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 11:45:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B20BFC433C9
+ for <u-boot@lists.denx.de>; Fri,  8 Sep 2023 11:45:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1694173557;
+ bh=aODHL6mbNW0WLyQo2/gZhYlzuWIMAbhDYth1ivLfiJs=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=BPEtcWZrdC/o+gbIBKtuvpPZ1GJmKxqF8z7Tz15gNxu4UNu+zchX6c78qd3GRiBv6
+ 4admkoRJfGJ1JRASdiZVyzOAzbVD15sV9Au+hZXXr1Ki+RGk0otXyHn9GIHe3tpviv
+ xuPclUkDl/eHCxBguoAm9ALCQdoAtY9kgQ3qOjO8bNIkVsaB9sHidwYoSs3pIYqzHs
+ hFPvYxIicGPwDlT3cylZmTxfyJ8t+rJsH+XXd6eM9sKjPP7N42uE9LdASVzOz/1lMI
+ MWVhybkcBY41VIQkAT5IOwzG0RmDpCZ6nw4VpoSnrr6ETXoZhycu+mxWc/zEOPAXj3
+ tH2as6Q8nzqZA==
+Received: by mail-lj1-f173.google.com with SMTP id
+ 38308e7fff4ca-2b974031aeaso34957621fa.0
+ for <u-boot@lists.denx.de>; Fri, 08 Sep 2023 04:45:57 -0700 (PDT)
+X-Gm-Message-State: AOJu0Yx3pPNU46V9RX35/TJvq9kd4u1Ka6ddnp8SQj4oMBXogf4VZx13
+ 5XbnmEMtwXlNJk1OmxWEoHwosJql0/rILKfY4g==
+X-Google-Smtp-Source: AGHT+IGGKjJmemgNHpyI56G1+q2fUiJV4ppgzoy9LEO/x9T0+wAy75B+QGXgy5XYMiqRpu3pH/RANsVfOlTDWayxIDc=
+X-Received: by 2002:a2e:7801:0:b0:2bc:b0c3:9e8d with SMTP id
+ t1-20020a2e7801000000b002bcb0c39e8dmr1610795ljc.41.1694173555929; Fri, 08 Sep
+ 2023 04:45:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <4eb25acc-0d36-fa59-eb89-b8e3321dae3e@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230907214012.74978-1-sjg@chromium.org>
+ <20230907214012.74978-2-sjg@chromium.org>
+In-Reply-To: <20230907214012.74978-2-sjg@chromium.org>
+From: Rob Herring <robh@kernel.org>
+Date: Fri, 8 Sep 2023 06:45:43 -0500
+X-Gmail-Original-Message-ID: <CAL_Jsq+N1=XuZqFsVEgBeVpJzTBJRJ+w76roOUBtbP2Y8f3bEw@mail.gmail.com>
+Message-ID: <CAL_Jsq+N1=XuZqFsVEgBeVpJzTBJRJ+w76roOUBtbP2Y8f3bEw@mail.gmail.com>
+Subject: Re: [PATCH v6 2/2] schemas: memory: Add ECC properties
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Guo Dong <guo.dong@intel.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Yunhui Cui <cuiyunhui@bytedance.com>, Chiu Chasel <chasel.chiu@intel.com>, 
+ Mark Rutland <mark.rutland@arm.com>, linux-acpi@vger.kernel.org, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Ard Biesheuvel <ardb@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Gua Guo <gua.guo@intel.com>, ron minnich <rminnich@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,137 +87,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+On Thu, Sep 7, 2023 at 4:40=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
+:
+>
+> Some memories provide ECC detection and/or correction. For software which
+> wants to check memory, it is helpful to see which regions provide this
+> feature.
+>
+> Add this as a property of the /memory nodes, since it presumably follows
+> the hardware-level memory system.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v6:
+> - Use a number of bits instead of a string property
+> - Fix inidcates typo
+>
+> Changes in v5:
+> - Redo to make this property specific to ECC
+> - Provide properties both for detection and correction
+>
+> Changes in v3:
+> - Add new patch to update the /memory nodes
+>
+>  dtschema/schemas/memory.yaml | 15 +++++++++++++--
+>  1 file changed, 13 insertions(+), 2 deletions(-)
+>
+> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
+> index 1d74410..1a48b1c 100644
+> --- a/dtschema/schemas/memory.yaml
+> +++ b/dtschema/schemas/memory.yaml
+> @@ -31,10 +31,21 @@ patternProperties:
+>
+>        numa-node-id:
+>          $ref: types.yaml#/definitions/uint32
+> -        description:
+> +        description: |
 
-On 08:54-20230906, Andrew Davis wrote:
-> On 9/6/23 12:18 AM, Manorit Chawdhry wrote:
-> > Hi Andrew,
-> > 
-> > On 10:22-20230905, Andrew Davis wrote:
-> > > On 9/5/23 3:21 AM, Manorit Chawdhry wrote:
-> > > > The following commits adds the configuration of firewalls required to
-> > > > protect ATF and OP-TEE memory region from non-secure reads and
-> > > > writes using master and slave firewalls present in our K3 SOCs.
-> > > > 
-> > > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > > > ---
-> > > >    arch/arm/dts/k3-j721e-binman.dtsi | 161 ++++++++++++++++++++++++++++++++++++++
-> > > >    1 file changed, 161 insertions(+)
-> > > > 
-> > > > diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-> > > > index 4f566c21a9af..0569a592597e 100644
-> > > > --- a/arch/arm/dts/k3-j721e-binman.dtsi
-> > > > +++ b/arch/arm/dts/k3-j721e-binman.dtsi
-> > > > @@ -330,6 +330,73 @@
-> > > >    					ti-secure {
-> > > >    						content = <&atf>;
-> > > >    						keyfile = "custMpk.pem";
-> > > > +						auth_in_place = <0xa02>;
-> > > > +
-> > > > +						// cpu_0_cpu_0_msmc Background Firewall - 0
-> > > 
-> > > I don't have a personal preference, but I see most comments in DTS
-> > > are C style /* */.
-> > > 
-> > > Also it might be easier to understand if you put the comments right before
-> > > the properties that they relate to, i.g.
-> > > 
-> > > firewall-0 {
-> > > 	/* cpu_0_cpu_0_msmc */
-> > > 	id = <257>;
-> > > 	region = <0>;
-> > > 	/* Background, Locked */
-> > > 	control = <0x31a>;
-> > > 	permissions = <0xc3ffff>;
-> > > 	start_address = <0x0 0x0>;
-> > > 	end_address = <0xff 0xffffffff>;
-> > > };
-> > > 
-> > > For permissions, I wonder if it would be easier to read if we add
-> > > some helper macros:
-> > > 
-> > > #define FWPRIVID_ALL 0xc3
-> > > 
-> > > #define FWPERM_SECURE_PRIV_WRITE      BIT(0)
-> > > #define FWPERM_SECURE_PRIV_READ       BIT(1)
-> > > #define FWPERM_SECURE_PRIV_CACHEABLE  BIT(2)
-> > > #define FWPERM_SECURE_PRIV_DEBUG      BIT(3)
-> > > #define FWPERM_SECURE_USER_WRITE      BIT(4)
-> > > ...
-> > > 
-> > > Then you would have:
-> > > 
-> > > permissions = <FWPRIVID_ALL |
-> > 
-> > I think we'll have to do some shift here for the right calculations.
-> > 
-> >    #define FWPRIVID_SHIFT 8
-> > 
-> >    permissions = <(FWPRIVID_ALL << FWPRIVID_SHIFT)
-> 
-> Right, I must have meant #define FWPRIVID_ALL 0xc30000 above, but
-> a shift looks better.
-> 
-> > >                 FWPERM_SECURE_PRIV_WRITE |
-> > >                 FWPERM_SECURE_PRIV_READ |
-> > 
-> > Also, I would like to make FWPERM_SECURE_PRIV_RWCD too as it'll be
-> > commonly used.
-> > 
-> > Would be sending another RFC with this change if you are fine with the
-> > suggestions. Thank you for reviewing!
-> > 
-> 
-> Works for me, should get rid of several of these magic numbers.
-> 
-> Andrew
+Why? '|' is not needed for any of these.
 
-firewall-0 {
-    id = <257>;
-    region = <0>;
-    control = <(FWCTRL_EN | FWCTRL_LOCK | 
-                FWCTRL_BG | FWCTRL_CACHE)>;
-    permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
-                    FWPERM_SECURE_PRIV_RWCD |
-                    FWPERM_SECURE_USER_RWCD |
-                    FWPERM_NON_SECURE_PRIV_RWCD |
-                    FWPERM_NON_SECURE_USER_RWCD)>;
-    start_address = <0x0 0x0>;
-    end_address = <0xff 0xffffffff>;
-};
+>            For the purpose of identification, each NUMA node is associate=
+d with
+>            a unique token known as a node id.
+> -
 
-Does this look okay now?
+blank line between properties.
 
-Regards,
-Manorit
+I can fix these up when applying.
 
-> 
-> > Regards,
-> > Manorit
-> > 
-> > >                 ...
-> > 
-> > 
-> > > > ;
-> > > 
-> > > > +						firewall-0 {
-> > > > +							id = <257>;
-> > > > +							region = <0>;
-> > > > +							control = <0x31a>;
-> > > > +							permissions = <0xc3ffff>;
-> > > > +							start_address = <0x0 0x0>;
-> > > > +							end_address = <0xff 0xffffffff>;
-> > > > +						};
-> > > > +
-> > > > +						// cpu_0_cpu_0_msmc Foreground Firewall
-> > > > +						firewall-1 {
-> > > > +							id = <257>;
-> > > > +							region = <1>;
-> > > > +							control = <0x1a>;
-> > > > +							permissions = <0x0100ff>;
-> > > > +							start_address = <0x0 0x70000000>;
-> > > 
-> > > This address might change if one moves ATF, might work to use CONFIG_K3_ATF_LOAD_ADDR?
-> > > Not sure how you would get the end address as we don't really know ATF size..
-> > > 
-> > > Andrew
+> +      ecc-detection-bits:
+> +        default: 0
+> +        description: |
+> +          If present, this indicates the number of bits of memory error =
+which
+> +          can be detected and reported by the Error-Correction Code (ECC=
+) memory
+> +          subsystem (typically 0, 1 or 2).
+> +      ecc-correction-bits:
+> +        default: 0
+> +        description: |
+> +          If present, this indicates the number of bits of memory error =
+which
+> +          can be corrected by the Error-Correction Code (ECC) memory sub=
+system
+> +          (typically 0, 1 or 2).
+>
+>      required:
+>        - device_type
+> --
+> 2.42.0.283.g2d96d420d3-goog
+>
