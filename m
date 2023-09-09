@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E4F5EEB564
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 06:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51777EEB57C
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 09:33:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B75A8641B;
-	Sat,  9 Sep 2023 08:48:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3F7868620C;
+	Sat,  9 Sep 2023 11:33:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PlbmUbES";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SAjXZIFi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3FEB8642A; Sat,  9 Sep 2023 08:48:34 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2DE4D864E6; Sat,  9 Sep 2023 11:33:20 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4D9385DFA
- for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 08:48:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C5F485DFA
+ for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 11:33:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694242107; x=1694846907; i=xypron.glpk@gmx.de;
- bh=ckPsngL+po0FbjpDxMTk/2VbmouAJLlB9nglMCPuCuM=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=PlbmUbESed1HlIXgO6t7NFa6J1FAFcAc4KGRQ5RXCi3zcKNY+MBUJxo7tfbaABHVyM7/E3Y
- BfyU0HQyQtzGqR/Mw+ng+vl0DJ7fg+IPhvKWAJfypypTWjQHIDINIwLZ62j7RtqBzfdOjOep6
- nv/mIdugQGi4wb4Y+hpeIQhjK9xC1r/I0+UvvFfABf9p0Ke7ba5CiJqE5NOmZEPDrMThIwUaa
- GvPgbYIBOuS7M+RBZJfj8/w4iZ5X+W1TN1kHihfzgFWqph2t8LA8y09KAbHEHszWtVJC8ttMc
- HYYQ7Fg5LnLYQmdYgLZfQXB7jyTgz33CsbLi+U7dS8GDoH8WaxFQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMofW-1qMESF2tlM-00Ihpg; Sat, 09
- Sep 2023 08:48:27 +0200
-Message-ID: <a29e29a3-10f0-4ff2-9e27-3bb771ab2b8c@gmx.de>
-Date: Sat, 9 Sep 2023 08:49:29 +0200
+ spf=pass smtp.mailfrom=massimo.pegorer+oss@gmail.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-400a087b0bfso29780195e9.2
+ for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 02:33:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694251997; x=1694856797; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=tjh6M8T7M9/5cZNppq/BbQKOlM0Ct71YjzpIfPNUx3c=;
+ b=SAjXZIFid4ajNYzhBW4EIU7FBoJf3I5FmBm33qvXxrOB5/sAP2Srrmbzz9QQFVsfK2
+ r51PzlQ4R8BsCcU9R+Pw/uixUcWG0Ail23oER7T1BNSq0VsFex24irVI3C3drtEJ14Ol
+ ax8MqWulPC6bkwlldQe0yXBgv619l+4jRON9t+GeYKOppzZb+EOggGpAgSbLz2MSvoRA
+ HTOI9lQ05l6ZNqJkJsaAyhrsJ/vvxjFqyT/5PFQPJeCr7J6PH/PaXLlvArzH+z94cNfw
+ vBbKbhWhO4YGtauEIZkPt7ySkWxsixM1YYpTdABBWsaZe+aTanZEv/P7rbqA3gLdPkk1
+ OLig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694251997; x=1694856797;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tjh6M8T7M9/5cZNppq/BbQKOlM0Ct71YjzpIfPNUx3c=;
+ b=npov1+Btiq7DzVtKBzYZUbZvNDvk4TSUMhrbX/yBMaIwEYF7Wiubefj3ACVw4sdhEZ
+ 3aIQirzVGOcr9qAVk0rckvn76BI+mwXokQykB+m5pX4sylXRAQFEHQWfRydZopo8qLP3
+ MXLUVFhDEwYq3IIo3IS6ZA2ouQs9a0HDbHJ301PcEjaZJkOMtimYwqVm3bYjzhM7RsEX
+ vc9oBSXQcrx0bYZ0f3wzdaA/mDd+5xo/Kcszc11po+BzPYdBXgbujLa96BYL1aBU/Rdt
+ Jpuz6NHNo+UbAVF9dl1gxqyc8C429V7IT6GVZIBHuqlG3Ge5kw3+y+ciTBK7K6cGGK0h
+ Kl3Q==
+X-Gm-Message-State: AOJu0Yy8hFszA3N8xuGVsMz15qwuu4dg77NdYe6YTFxsFRWW6wIcmJA/
+ 094RkvNB9T5nIiSYe5g6zMalJsGhmY5Ckg==
+X-Google-Smtp-Source: AGHT+IEVPOL8PL2Ywf6nyoWYrhG+1oEgBFNIzk89SzS2UeOurt9RwDJiVpzpe2PF+5BC0FSUe36wPg==
+X-Received: by 2002:a7b:cb87:0:b0:401:cc0f:f866 with SMTP id
+ m7-20020a7bcb87000000b00401cc0ff866mr3991269wmi.12.1694251996655; 
+ Sat, 09 Sep 2023 02:33:16 -0700 (PDT)
+Received: from pegmas-T15.fritz.box ([151.51.159.106])
+ by smtp.gmail.com with ESMTPSA id
+ c26-20020a7bc01a000000b003feeb082a9fsm4167174wmb.3.2023.09.09.02.33.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Sep 2023 02:33:16 -0700 (PDT)
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@edgeble.ai>, FUKAUMI Naoki <naoki@radxa.com>,
+ Johan Jonker <jbx6244@gmail.com>
+Cc: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Subject: [PATCH v2 0/2] rockchip: Use an external TPL binary on RK3308
+Date: Sat,  9 Sep 2023 11:33:00 +0200
+Message-Id: <20230909093300.11933-1-massimo.pegorer+oss@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request doc-2023-10-rc5
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:O2X7HPplLqd3I+NlZH7KUTg6dxdIx+j+aY3+XL2suIwMz03QDd+
- 01sPPY8fxRGS+ZS55K2iRSHo8m9CMGtB7e/qeJ0muzYuIwycZYsnNXdhsas59YXBjzOz7ia
- xZd1Z3BoaLSdJ/H14PmYGYbqRETJ/KdT714HwT/cavRbUeSQD+keeTCC6RNrKKooZP67Lse
- aUT4LinTnWZVZEpqsHTRg==
-UI-OutboundReport: notjunk:1;M01:P0:kzq3ag06cjM=;aOrqw4Q7eM/JXMQnMA6uUN8Ykv6
- 3XRAjsloI3WghnyORHf08aS8J5cHPwNCUvy32qM1nbfT/qutN1P5uj1zMmVWN4MWRQW0k6hwr
- 4M86RiegawhJOytaPBRX1yqTwss52R2D+M+DPQe8h1qa5tFutbHToYy3IWiOGl9bJUy7aZNXE
- FlQaP3yfTSzu5nCpYXAD6h2NhVMGPZIw9bVrofY93EORfMXKlGZWw1TZhCmYcFlznXTtO3JBY
- saGNph9qp2aPj6G7y3uhMLith3u9oee38kDGYK/mXtED6kO4qopwi0HRj16gQK3sMWMr2Y9Gm
- wodAhs4Q1oZ6B9Lpi4+KkF+sHz90EWe1Edu3ZxwjOL33nttOoVuBQPQNweVuyVImgGT6TpsFF
- Vc/YagWRLjoAEOWdVp9JfwsjsXU3D3JfykGA4KNPFFOYSGVrPqJN0NFjRShq4Nbl6uPwYoors
- +2V7nBmNEs0q7hzCexfb54s+IMflZ0ubTRjZhm63UEYIBeI0s7HcbLXn6VrNQf7s8nm2XdmnA
- 5vMga7AkBB+URLdSFNdG18xq5B+2rE2ZXQPb9XnS6t15+O7uJNR/2nQqDlV+fch6I/+Y6Gmcy
- 5aqfu5H9Y7VrHV5SKT2WKMv+7QPdtY7eJjF1gPgMt8WljjMCJvTmkN4v8Jurkv4pk3yTFnAJS
- OSxEfC4FWG+kV600uJ7ND0MC9MK4SSG8DCk0JT/fBzIGp3wBfNifyviidY+KFlBzcRY5xPjBT
- utyY0zun9kQ26DzaxGoWHJ2N3rlNM46RO3j0eocE89HXQ3sfCW6SVy9h6O6KgNUMsMBKzu+i6
- O08jT5g8UYyTYAV90/ufMglFAuEeMmTWlLAYJdj495pk8slhOMIOesmKXSKfo41r5UbP49pjD
- iMQbLBLzAHfkvPDE2898gA1nl6jo/1McIw3BtCdWa6ZRTAOv8cP8qTLHJuBJiqg/lTksX+TUO
- pz4Ffeug2Q6Qc+81WLbnPMsb5To=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,85 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+There is no support to initialize DRAM on rk3308 SoC using U-Boot
+TPL or SPL, and therefore an external TPL binary must be used to
+package a bootable u-boot-rockchip.bin image.
 
-The following changes since commit c0c08be5468cb26db597932bc69c4eda1129841=
-d:
+Default ROCKCHIP_EXTERNAL_TPL to yes if ROCKCHIP_RK3308.
+Remove useless TPL_SERIAL.
+Doc add ROCK Pi S in the list of supported boards.
+Doc add info about usage of TF-A and TPL binaries provided by Rockchip.
+Doc add build steps for rk3308.
 
-   Merge branch 'master' of
-https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2023-09-05 14:44:10
--0400)
+Changes in v2:
+- Replace imply with default yes if ROCKCHIP_RK3308
+- Redirect outdated README.rockchip to rockchip.rst for rk3308 info
+- Improve rockchip.rst document about usage of TF-A and TPL binaries
 
-are available in the Git repository at:
+Massimo Pegorer (2):
+  rockchip: Kconfig: Enable external TPL binary for rk3308
+  doc: rockchip: Update and improve info on rk3308, TPL and TF-A
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/doc-2023-10-rc5
+ arch/arm/mach-rockchip/Kconfig  |  3 +--
+ doc/README.rockchip             | 10 +-------
+ doc/board/rockchip/rockchip.rst | 43 +++++++++++++++++++++++++++------
+ 3 files changed, 37 insertions(+), 19 deletions(-)
 
-for you to fetch changes up to 7314ba2bf8452df68d07f251aa59440de58067b0:
+-- 
+2.34.1
 
-   doc: board: ti: Move documentation from README to .rst (2023-09-09
-06:12:47 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/17697
-
-=2D---------------------------------------------------------------
-Pull request doc-2023-10-rc5
-
-Documentation:
-
-* move more TI board documentation to HTML
-* update TPM usage instructions for qemu-arm
-* update the EFI app documentation
-
-Other:
-
-* tpm: Fix autostart for TPM1.2 devices
-* spl: fix undefined return value in spl_blk_load_image
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (2):
-       spl: undefined return value in spl_blk_load_image
-       timer: document the unit of the timer rate
-
-Ilias Apalodimas (2):
-       tpm: Fix autostart for TPM1.2 devices
-       doc: qemu: switch swtpm instruction to 'tpm autostart'
-
-Joao Marcos Costa (1):
-       doc: Update path to source_file_format.rst
-
-Neha Malcom Francis (1):
-       doc: board: ti: Move documentation from README to .rst
-
-Simon Glass (1):
-       doc: efi: Update for the 64-bit app
-
-  board/ti/dra7xx/README             |  26 ---
-  board/ti/ks2_evm/README            | 194 ----------------
-  cmd/tpm-v1.c                       |   2 +-
-  common/spl/spl_blk_fs.c            |   2 +-
-  doc/README.ti-secure               | 226 -------------------
-  doc/SPI/README.ti_qspi_am43x_test  |  76 -------
-  doc/SPI/README.ti_qspi_dra_test    |  47 ----
-  doc/SPI/README.ti_qspi_flash       |  47 ----
-  doc/board/emulation/qemu-arm.rst   |   2 +-
-  doc/board/ti/am335x_evm.rst        | 437
-++++++++++++++++++++++++++++---------
-  doc/board/ti/am43xx_evm.rst        | 188 ++++++++++++++++
-  doc/board/ti/dra7xx_evm.rst        | 139 ++++++++++++
-  doc/board/ti/index.rst             |   3 +
-  doc/board/ti/ks2_evm.rst           | 306 ++++++++++++++++++++++++++
-  doc/develop/uefi/u-boot_on_efi.rst |  26 +--
-  doc/usage/fit/howto.rst            |   4 +-
-  include/timer.h                    |   6 +-
-  17 files changed, 984 insertions(+), 747 deletions(-)
-  delete mode 100644 board/ti/dra7xx/README
-  delete mode 100644 board/ti/ks2_evm/README
-  delete mode 100644 doc/README.ti-secure
-  delete mode 100644 doc/SPI/README.ti_qspi_am43x_test
-  delete mode 100644 doc/SPI/README.ti_qspi_dra_test
-  delete mode 100644 doc/SPI/README.ti_qspi_flash
-  create mode 100644 doc/board/ti/am43xx_evm.rst
-  create mode 100644 doc/board/ti/dra7xx_evm.rst
-  create mode 100644 doc/board/ti/ks2_evm.rst
