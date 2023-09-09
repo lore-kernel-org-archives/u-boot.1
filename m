@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E052EEB57C
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 10:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E542AEEB585
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 10:32:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E3D4864E6;
-	Sat,  9 Sep 2023 12:13:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EDF08864E6;
+	Sat,  9 Sep 2023 12:32:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uUCi/1hr";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FDO0zdAe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 587768650E; Sat,  9 Sep 2023 12:13:54 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id D99D886552; Sat,  9 Sep 2023 12:32:34 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EA5F8620C
- for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 12:13:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 513B0864A0
+ for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 12:32:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50079d148aeso4797403e87.3
- for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 03:13:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=massimo.pegorer+oss@gmail.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-403004a96eeso6047665e9.3
+ for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 03:32:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694254430; x=1694859230; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qfFZoeqoNaQvgzA4HZKekgRTDqP/EoQ1uosrqO8t+3U=;
- b=uUCi/1hrr0WlP4JCWhp5XNoaX/pHhOvEWsGZ+bo8DnMNV4yMnWWL4vZnQK4ExbD9Ry
- UIK7VhbsigG1ojUQNJC6mlFJ8NisvG21iClSX7RNWt0LDqu9eb1lcYQDc4fQeHd/aDmF
- S/L30Ys231ZTnFSiyOvKh0vX1I+rxydkf7nZ/THMW6w0Zp4Li8dkL1k9ofKREruKahhu
- +l7aOmPSVGgNVhjz/c53vasIKESvEm38SLxJH5I5by6bZlmXXlDya2f43YFXCFG8furY
- YfgkinDwhMxxQho23T68DLTL6wi3du2Kq4BnQ9TUo0rDsvcLMnH0mynjYTabcHKJFuTe
- VXVg==
+ d=gmail.com; s=20221208; t=1694255552; x=1694860352; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=2FBTnsx9JL9RkLPt8nV1yOJkrJVvf+9QtrTIVroOUkY=;
+ b=FDO0zdAez6cDFRSLSBpYQXrcRksRiURGUZ+1+1v8cDhmR1R3ry1gXSJPxoqyImxgNK
+ 7OeiwMRvKdPF2NuEMOYY8lA+epa3AZLudF38yS5cRl7c5lRTeXuCVXp99m7e/ELiQgYu
+ XRcctxrBJZ/5G02AYxqBwGCxQsfF0GYst7U2KnTbtEq7WNXIjMoU8yDX6efU61GDMqSK
+ wbkyyEmRJ/sCerstu3A/4VIREUlunlH2zX5E7xHDe0VmRntF+XXKXDwqNxeNwX+g6u79
+ SelIPtxhss/M8CfDX+50QD0avZprHMQlLLqIhNCi8ez5XFXEyTOfKnkbEwDLHlJUp4XH
+ cjfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694254430; x=1694859230;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qfFZoeqoNaQvgzA4HZKekgRTDqP/EoQ1uosrqO8t+3U=;
- b=TbM7sxMbHfHmJZYf1t4iTvVDzVXMUbutim8hZWICXjqufsyS1yKXtgjgoUBsVHhMxs
- 6WAbc6Ovlv1vjvcALrULCkXXSm0USNrmsJLSMpWRpcLs8SlvREpy5DAU6IAldqu6reun
- xi3+LEIqS1dhQzjXZpnRtz9ktMG0tb3yPdIrumZkNYKdhO51NWZLWiP7DxEZ0E24HSeV
- PH7UvuzsYawsDqwKar+PG/O+HI3ODm9HD6+JrZhpfLsHVf/LGxO6ukioIDaScB5AqypW
- cbNQk8hRFZC1kalpkYM3Klp4AfyTdQPtW1ZIjqukG3WnuquWlmhcFILXWm0f50/b4inr
- 6FvQ==
-X-Gm-Message-State: AOJu0YztfvNAXWKbs+EeWbO/p7t5nfQZX0ncSCXjVzAC/ggYPeF9bMjY
- gHKui5tctkcWqLLIRFS3nHMnTEGgYry/0cxDSvhVYA==
-X-Google-Smtp-Source: AGHT+IFu7whFPtd5m/p8TZotqu4btat2GfG5sRqZc0AwqCn/ERqgTwTK4RyZaFHTLf3ULDb2hn35KNM7traRekGvXeo=
-X-Received: by 2002:a05:6512:488a:b0:501:b97a:9f50 with SMTP id
- eq10-20020a056512488a00b00501b97a9f50mr3463178lfb.65.1694254430437; Sat, 09
- Sep 2023 03:13:50 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1694255552; x=1694860352;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2FBTnsx9JL9RkLPt8nV1yOJkrJVvf+9QtrTIVroOUkY=;
+ b=RW6FOkdKfzoblr3+no+JKazs54GW3wWbLBLKODLcbFy4JGl4hnE6Bhy8xhwoHCiVq7
+ EauqP4eimR5HzJyMqko/u3uIEvp4bji0ONUqVoeze6w8Be5m7yUrqUWYwJI9SaEJOdEg
+ 4CElO4ozV8GUMJp+N0ueWK84Hfw3+R1T+6hy1nXKo7ZX9DD787DGZ2Z0lZgUHhox0qOw
+ 9nu/0bx8TAbEPfaRViJfz/ncRRG1xIzyzxfs3yCxYhp+XAxmu9Rp86O2RB31PC3p7BqH
+ ZpQIXk7SztPHKdlZTnaIHrW7h1SX52v4uWdYkdDYiAPX8R0UQrHNcfRlYbFrkaILD6F6
+ 1aRA==
+X-Gm-Message-State: AOJu0YwgsIPJh+gtTHkM1eJ7Cz1GAmeD+JoqxHPva/knG6sEK52zBpHe
+ mn4U5KCn4Dg7kXizVbi0SZTlC0UHoiU=
+X-Google-Smtp-Source: AGHT+IHzpF+qB7/EugFlNdG0Gif9OF2SJi6+HWXDmdYmsF8QSPxeKWjl4fsJuvjjaoPW6Rwv+Ls0CQ==
+X-Received: by 2002:a05:600c:2295:b0:401:aa8f:7562 with SMTP id
+ 21-20020a05600c229500b00401aa8f7562mr4119903wmf.11.1694255551538; 
+ Sat, 09 Sep 2023 03:32:31 -0700 (PDT)
+Received: from pegmas-T15.fritz.box ([151.51.159.106])
+ by smtp.gmail.com with ESMTPSA id
+ ay7-20020a05600c1e0700b0040303a9965asm1168564wmb.40.2023.09.09.03.32.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Sep 2023 03:32:31 -0700 (PDT)
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+To: u-boot@lists.denx.de,
+	Simon Glass <sjg@chromium.org>
+Cc: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Subject: [PATCH] expo: Fix documentation reference
+Date: Sat,  9 Sep 2023 12:32:28 +0200
+Message-Id: <20230909103228.17366-1-massimo.pegorer+oss@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <a29e29a3-10f0-4ff2-9e27-3bb771ab2b8c@gmx.de>
-In-Reply-To: <a29e29a3-10f0-4ff2-9e27-3bb771ab2b8c@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 9 Sep 2023 13:13:14 +0300
-Message-ID: <CAC_iWjJvGH95igWgPz+EZciKxPTS07HfT5WUjVWJybi7--0VTg@mail.gmail.com>
-Subject: Re: Pull request doc-2023-10-rc5
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,91 +89,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 9 Sept 2023 at 09:48, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> Dear Tom,
->
-> The following changes since commit c0c08be5468cb26db597932bc69c4eda1129841d:
+Fix typo: doc/develop/expo.rst instead of doc/developer/expo.rst
 
-Thanks for picking those up Heinrich!
+Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+---
+ boot/expo_build.c | 6 +++---
+ include/expo.h    | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-Regards
-/Ilias
->
->    Merge branch 'master' of
-> https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2023-09-05 14:44:10
-> -0400)
->
-> are available in the Git repository at:
->
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/doc-2023-10-rc5
->
-> for you to fetch changes up to 7314ba2bf8452df68d07f251aa59440de58067b0:
->
->    doc: board: ti: Move documentation from README to .rst (2023-09-09
-> 06:12:47 +0200)
->
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/17697
->
-> ----------------------------------------------------------------
-> Pull request doc-2023-10-rc5
->
-> Documentation:
->
-> * move more TI board documentation to HTML
-> * update TPM usage instructions for qemu-arm
-> * update the EFI app documentation
->
-> Other:
->
-> * tpm: Fix autostart for TPM1.2 devices
-> * spl: fix undefined return value in spl_blk_load_image
->
-> ----------------------------------------------------------------
-> Heinrich Schuchardt (2):
->        spl: undefined return value in spl_blk_load_image
->        timer: document the unit of the timer rate
->
-> Ilias Apalodimas (2):
->        tpm: Fix autostart for TPM1.2 devices
->        doc: qemu: switch swtpm instruction to 'tpm autostart'
->
-> Joao Marcos Costa (1):
->        doc: Update path to source_file_format.rst
->
-> Neha Malcom Francis (1):
->        doc: board: ti: Move documentation from README to .rst
->
-> Simon Glass (1):
->        doc: efi: Update for the 64-bit app
->
->   board/ti/dra7xx/README             |  26 ---
->   board/ti/ks2_evm/README            | 194 ----------------
->   cmd/tpm-v1.c                       |   2 +-
->   common/spl/spl_blk_fs.c            |   2 +-
->   doc/README.ti-secure               | 226 -------------------
->   doc/SPI/README.ti_qspi_am43x_test  |  76 -------
->   doc/SPI/README.ti_qspi_dra_test    |  47 ----
->   doc/SPI/README.ti_qspi_flash       |  47 ----
->   doc/board/emulation/qemu-arm.rst   |   2 +-
->   doc/board/ti/am335x_evm.rst        | 437
-> ++++++++++++++++++++++++++++---------
->   doc/board/ti/am43xx_evm.rst        | 188 ++++++++++++++++
->   doc/board/ti/dra7xx_evm.rst        | 139 ++++++++++++
->   doc/board/ti/index.rst             |   3 +
->   doc/board/ti/ks2_evm.rst           | 306 ++++++++++++++++++++++++++
->   doc/develop/uefi/u-boot_on_efi.rst |  26 +--
->   doc/usage/fit/howto.rst            |   4 +-
->   include/timer.h                    |   6 +-
->   17 files changed, 984 insertions(+), 747 deletions(-)
->   delete mode 100644 board/ti/dra7xx/README
->   delete mode 100644 board/ti/ks2_evm/README
->   delete mode 100644 doc/README.ti-secure
->   delete mode 100644 doc/SPI/README.ti_qspi_am43x_test
->   delete mode 100644 doc/SPI/README.ti_qspi_dra_test
->   delete mode 100644 doc/SPI/README.ti_qspi_flash
->   create mode 100644 doc/board/ti/am43xx_evm.rst
->   create mode 100644 doc/board/ti/dra7xx_evm.rst
->   create mode 100644 doc/board/ti/ks2_evm.rst
+diff --git a/boot/expo_build.c b/boot/expo_build.c
+index 22f62eb54b..702bf49890 100644
+--- a/boot/expo_build.c
++++ b/boot/expo_build.c
+@@ -209,7 +209,7 @@ static void list_strings(struct build_info *info)
+ /**
+  * menu_build() - Build a menu and add it to a scene
+  *
+- * See doc/developer/expo.rst for a description of the format
++ * See doc/develop/expo.rst for a description of the format
+  *
+  * @info: Build information
+  * @node: Node containing the menu description
+@@ -282,7 +282,7 @@ static int menu_build(struct build_info *info, ofnode node, struct scene *scn)
+ /**
+  * menu_build() - Build an expo object and add it to a scene
+  *
+- * See doc/developer/expo.rst for a description of the format
++ * See doc/develop/expo.rst for a description of the format
+  *
+  * @info: Build information
+  * @node: Node containing the object description
+@@ -318,7 +318,7 @@ static int obj_build(struct build_info *info, ofnode node, struct scene *scn)
+ /**
+  * scene_build() - Build a scene and all its objects
+  *
+- * See doc/developer/expo.rst for a description of the format
++ * See doc/develop/expo.rst for a description of the format
+  *
+  * @info: Build information
+  * @node: Node containing the scene description
+diff --git a/include/expo.h b/include/expo.h
+index 0b1d944a16..e8f7d7d6ff 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -667,7 +667,7 @@ int expo_apply_theme(struct expo *exp, ofnode node);
+  *
+  * Build a complete expo from a description in the provided devicetree.
+  *
+- * See doc/developer/expo.rst for a description of the format
++ * See doc/develop/expo.rst for a description of the format
+  *
+  * @root: Root node for expo description
+  * @expp: Returns the new expo
+-- 
+2.34.1
+
