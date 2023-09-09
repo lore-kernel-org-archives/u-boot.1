@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A5EEEB58C
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 13:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9776EEB572
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 13:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99CD386A0A;
-	Sat,  9 Sep 2023 15:30:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F16BD86A38;
+	Sat,  9 Sep 2023 15:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TER41yCO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hselA1Nh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3010B803AE; Sat,  9 Sep 2023 15:30:55 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id DE32E86A2B; Sat,  9 Sep 2023 15:31:04 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D1D186A2A
- for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 15:30:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C870D86A38
+ for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 15:30:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6bd0a0a6766so2191422a34.2
- for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 06:30:50 -0700 (PDT)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-d78328bc2abso2803152276.2
+ for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 06:30:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694266248; x=1694871048; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1694266258; x=1694871058; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EpLBAY9aQx7TFEyh8a0s/UKcrKvn4dTRAXXoFOXtXb4=;
- b=TER41yCOOEOMREBziXlzhvFTjxs0lLTYW6UtoPVSfwc13yU/HqHdE1jd0u7u2hWvfx
- Z+pRG62G63Kz7OS3vBk2HINJNu163fmv8BdlwdETPZbHjkwImWFfVt/1KW+Dh7tEOopX
- uL5gWeU1NHh6OQVC5o7JGCPRsgWVxGSb19Pac=
+ bh=Mdle5ultpgEbqOdY9Xl1+2KrGsftRSsrsw3WeORQOio=;
+ b=hselA1NhFsVBLwyKy1WUatV4WOw3cTPMEuk0wkZKSNlyi+Ha/sR5UQRJZVA1ZJy3HY
+ vYuqMs3tjsJtc7o5JSPM50Mqcl1geza7vn9kSL3oFQtdwstE7ZjeAVl8kT4OLMwpe8yt
+ AkyJgjrsd3PWOwCyY+nIZ3Ax7l0Kwlhc/brFo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694266248; x=1694871048;
+ d=1e100.net; s=20230601; t=1694266258; x=1694871058;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EpLBAY9aQx7TFEyh8a0s/UKcrKvn4dTRAXXoFOXtXb4=;
- b=p6Ef9DK7hix8fIRDOFPKjwQe0KnY6QzYKlu48QE3lQQ9V+TksoOKVmqhli0u7LDRkV
- oDq60bQWlVJjcUoXr9jA4RWRGJKTukshliRisNL4WS74umq1JH23SaT6Pj5Jb0idQtDC
- gOZfykData9EjUmTjf6hEcdp35k8ivPCNpReIZHKetua5/vDxQom1oBHgn7SnyKJs23G
- Ou5F36wS++i05DFkGe+3XQp8qbGbvXSKItbWfnJo5HfRhEMJc4IIf4uMJnpX3Xk9/ULP
- +bnRJ50fiQBthsMGIk6ZCw0206MNg7sUpxPO3ifmxe2y7TPRVy+tEJgr54gIT4N3fqVM
- kBxw==
-X-Gm-Message-State: AOJu0YzC83Wk3Co1OJO/raOxm92A3qKGnfUu5uy8nVLMcL+311xqfOQV
- +BSB5dPZUiAAJ/1menTyu8QSDg==
-X-Google-Smtp-Source: AGHT+IF5l5XrecWYVyFR0ZTxzhalJBYaE9Vsp4vkosge6Sqk3ZqnJh4lz9i6CeKUcN5oJ3Cffw630w==
-X-Received: by 2002:a05:6358:9490:b0:139:d5f0:c027 with SMTP id
- i16-20020a056358949000b00139d5f0c027mr3969460rwb.30.1694266248592; 
- Sat, 09 Sep 2023 06:30:48 -0700 (PDT)
+ bh=Mdle5ultpgEbqOdY9Xl1+2KrGsftRSsrsw3WeORQOio=;
+ b=rtYu+BJpmgklXTCG6Qgegd3deLkaNOLdnA2+hJKsXrVc+9/4q5zbO+v7u9j9dH4Gn1
+ eUjoKCKGRYucwzVbDo/my/vlfFUbKLenmu8iteFKR9u2jebVS55wUeC13tCQfytxtUsB
+ E8n1vU6IPStCTYXQSyp1a5cHNaIF9ElXNQSIHgnk0T17Mz8S0M4QX0xIKL6rmKywVlrN
+ mq1ch2Muy2qRzeRaZq9ryHpkUcVeIWbC1zmlXCP7qRI5/Aph/681aqMmrnGVVq6kL68o
+ 8e/M+AaijZ3eOvDm0lMp/8vVhbPRNlGEgwg2NjxBqiRRIv2A9drMs85y44MDDcwloGZW
+ jkSA==
+X-Gm-Message-State: AOJu0Yy8qx17I4A5nhigoK3ZOr6bK5I+klNvOpAQ+6hU4baKs4e9tfcp
+ ChtzDGVT79u9rDmxZi4iGciTMA==
+X-Google-Smtp-Source: AGHT+IGEsXQGiyWSD9ZHUB7+FE7BLtq+PyqqyErN7OFEbxcToy5Q3BeIj8apPUTYhhdpyJ+8+wwuug==
+X-Received: by 2002:a25:40c8:0:b0:d0a:da40:638e with SMTP id
+ n191-20020a2540c8000000b00d0ada40638emr4699519yba.12.1694266258348; 
+ Sat, 09 Sep 2023 06:30:58 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-f749-5d0d-9a20-19cd.res6.spectrum.com.
  [2603:6081:7b00:6400:f749:5d0d:9a20:19cd])
  by smtp.gmail.com with ESMTPSA id
- b5-20020a0dd905000000b0058461c9524fsm946868ywe.12.2023.09.09.06.30.47
+ o12-20020a056902010c00b00d71c764379fsm131310ybh.55.2023.09.09.06.30.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Sep 2023 06:30:47 -0700 (PDT)
-Date: Sat, 9 Sep 2023 09:30:46 -0400
+ Sat, 09 Sep 2023 06:30:57 -0700 (PDT)
+Date: Sat, 9 Sep 2023 09:30:56 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 Cc: u-boot@lists.denx.de, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
  Bryan Brattlof <bb@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: Re: [PATCH v1 1/2] verdin-am62: add u-boot update wrappers
-Message-ID: <20230909133046.GM305624@bill-the-cat>
+Subject: Re: [PATCH v1 2/2] board: verdin-am62: fix check for minimum memory
+ size
+Message-ID: <20230909133056.GN305624@bill-the-cat>
 References: <20230824080850.1755724-1-ghidoliemanuele@gmail.com>
- <20230824080850.1755724-2-ghidoliemanuele@gmail.com>
+ <20230824080850.1755724-3-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RJU8sR7lDDYDhQTH"
+ protocol="application/pgp-signature"; boundary="qhyH0eUn6I96tRGQ"
 Content-Disposition: inline
-In-Reply-To: <20230824080850.1755724-2-ghidoliemanuele@gmail.com>
+In-Reply-To: <20230824080850.1755724-3-ghidoliemanuele@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,28 +96,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RJU8sR7lDDYDhQTH
+--qhyH0eUn6I96tRGQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 24, 2023 at 10:08:49AM +0200, Emanuele Ghidoli wrote:
+On Thu, Aug 24, 2023 at 10:08:50AM +0200, Emanuele Ghidoli wrote:
 
 > From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 >=20
-> Add update_tiboot3, update_tispl and update_uboot wrappers to update
-> R5 SPL, A53 SPL and A53 U-boot respectively.
+> verdin am62 SKUs comes in multiple memory configuration, check that
+> the detected memory is at least 512MB since we have some
+> reserved memory just before this threshold and therefore
+> the module cannot work with less memory.
 >=20
-> Usage example:
-> > tftpboot ${loadaddr} tiboot3-am62x-gp-verdin.bin
-> > run update_tiboot3
->=20
-> > tftpboot ${loadaddr} tispl.bin
-> > run update_tispl
->=20
-> > tftpboot ${loadaddr} u-boot.img
-> > run update_uboot
->=20
+> Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
 > Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 > Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
@@ -125,22 +119,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---RJU8sR7lDDYDhQTH
+--qhyH0eUn6I96tRGQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8c4YACgkQFHw5/5Y0
-tyz/fAv/Zo0E6zH72Yc8EAuGU5rSTjwfnZVpIXQFduMw+TVPiogPaK+dzgBoKD2Y
-n+w6DdutoSI/BAhmivUEJKFel/FSMZH/wYE4dbFpY0lKXwE6TsyqFEpW9+iPvLjY
-iH4vMPbeTWUmVDnq2keACakBIgpxcQpk/Y0C/Bykmo3zyVa/2V2HLXxtrCF5uB/V
-z1fwNuSXQYwJhjzr38TkorQr4GdUNYlBXQvRFUNRbMWuc7wN7mbh0qdaHG4ZiWDi
-l7PL7xQK0DBSzZwjDZcqrpDGTjm2wPWS93kYFnF68grbITf0+9ZmDYKdPR52OH8K
-YqhAPMXzyFlFwjn6VIzexzLJ6mVGVAHtvtu6Q4KVXHquWBCi7qrsT+AMqJgXhVW2
-etD/o+1KNmTRloPagKLqpTZxIVY2mjvtFGBQULucSNWDxk0Gsyj9tTQZJGJJKaby
-6VeDrMRZUt39EbShV0Exmt/Jjfjsjb+Nx5jUCUYOZVpFP3/SGFmRA1PqtqxpZIpg
-tSZKUuZk
-=/6Wn
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8c48ACgkQFHw5/5Y0
+tyw/iwv+Pim1hzsW/AAsZES9BarWwpqGCmmvdkbaKbcyLGtyX1U+O8gCrLKDVOJv
+xNlpbP+av8eTjT3vFFz7Kyw7ZgMVSLRx8DDiobvwZOk2S3GUdEmYutCbSr3SnNQb
+L+o+sIzHcwP3fAF49T4VC7nbqHVbMaglM0yb4LURD1sS6sb2YyyDbi3Of5NRlKVl
+HkEBRvFjMP1KlSkwTkM7wYsm1T/UNhzjwwGSXAby1o6D64Fp29PIvS/Peo1m7kxs
++266yM7f2YQNvdJcy0+XbIYxEUnq8YD/919i5leXP83++Rg0F6e0owYmJHj+ZtiL
+/02I2e61VKh7nbp9Zs/g8/JHMRcc6BOdL3EQ/9AwYv73kye9fY6TLxhasBvsfZcM
+/oeVQ2cUFe8WqMbNEu7cceN42nqoVYiUIGoPM7JWK1P7qOjt47J9MFmqMl07WbQp
+d6kcbWJFh0hqK38ibUWQ64XVHYG5LeyR3xh6DNcTad4BRNC/fEOHzBV+p9rvCKKG
+H27rXYWr
+=ah3f
 -----END PGP SIGNATURE-----
 
---RJU8sR7lDDYDhQTH--
+--qhyH0eUn6I96tRGQ--
