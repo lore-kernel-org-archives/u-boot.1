@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D99CCEEB572
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 13:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB246EEB572
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 13:32:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F246286A4B;
-	Sat,  9 Sep 2023 15:31:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 62EA086A77;
+	Sat,  9 Sep 2023 15:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GL+Nh7Uo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YjYKXucA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB493803AE; Sat,  9 Sep 2023 15:31:16 +0200 (CEST)
+ id 5B2F686A78; Sat,  9 Sep 2023 15:32:41 +0200 (CEST)
 Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
  [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3241C86A82
- for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 15:31:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F42C803AE
+ for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 15:32:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-58fba83feb0so28416447b3.3
- for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 06:31:14 -0700 (PDT)
+ 00721157ae682-58d9ba95c78so29218947b3.1
+ for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 06:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694266273; x=1694871073; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1694266357; x=1694871157; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Cc5OlTHzPgZWD9R/JR9eEpdD+ErCt0HbJ9NOT74C6A4=;
- b=GL+Nh7UoxCyR6LNDBvelq319f9+HW71WLGXOdq9yg2H0xox1j/ojTaNIwh+1V8RruC
- 2E8FjODaLoMw7rnjoI8KqmX/Tjpoo5ZioyC+ou1TOR0gw8pQ2982Zvs7ap4KvTDZMmf8
- OutaNtAjrYiVqUkBP2dX+XBHY2H9RlTIyh1QU=
+ bh=gfqvc6QIAoR4VgzD0V2dgnQNvRkEnNy8hFoz8fFo2nI=;
+ b=YjYKXucAZZgBlK7ng8cBbXb4GnJo4B1GG+O5XOnOLokYyqLIA4Rnc/iaOWKsfYvQFE
+ sxuRqX3NSk02rjQGaBOOsNv/7cGvH84fHv0E3IqF+97P6geJmyO0z2dbCLS6KADjdrjR
+ Sw36F6hcr8q9Z5UYJiLGEgPJhV6122xH4I/c0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694266273; x=1694871073;
+ d=1e100.net; s=20230601; t=1694266357; x=1694871157;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Cc5OlTHzPgZWD9R/JR9eEpdD+ErCt0HbJ9NOT74C6A4=;
- b=jxIJ6/GZC4leQMpHjWQWGufJvsTAeAozf30xxRNec+yL6XbXJ7J5YSQ6sECm3D11m1
- 1D1Il67OlI/WAzUiahGPaOQ9fjU/hIyd85emwvLzR8ZnMAosoGOe1YlwFakNIkB4mz8E
- 5ltDCXIx68hWBLmeKYQXpx+TNGnB7cHOtS0H/5eyB3PwiFmxUvQeo/1+z3023u4MTcQe
- EaKFm3av+XCpgpO+8OHkmgAEXlAXkJs5rKMrZLd0CN4QU+mFaIu9wDIdfSSQkx4ejlKT
- Kgd9Tczwek1lEOZitTbFRIZvkynYxgeu7KUYba9H8uDDHd5TNqdYGXM67Kusjlb17hO7
- Ch9w==
-X-Gm-Message-State: AOJu0YzeWU+f/6ZS1GHRjbUXoTjANvjdMCfpTLQdjBLCTlvE/RHS9T+g
- 5KMC0NxMJbA/ltXVK6hWODYlt0UoeTo73QDHPBrCjQ==
-X-Google-Smtp-Source: AGHT+IHzv4AN6MFsygut8AH3iLKZSfzMM/SfC7Y8tQKFIrDY03huAHBxhtC/vizsZbeXZk9IE/2VBg==
-X-Received: by 2002:a05:690c:a90:b0:59b:5456:a9bb with SMTP id
- ci16-20020a05690c0a9000b0059b5456a9bbmr5720982ywb.42.1694266272862; 
- Sat, 09 Sep 2023 06:31:12 -0700 (PDT)
+ bh=gfqvc6QIAoR4VgzD0V2dgnQNvRkEnNy8hFoz8fFo2nI=;
+ b=sBSD0YoiQfXBYsSOQInScNrmERrh6V3/r/1h+xeznW419T9nyGkTX5UFB/2Qv1TjLR
+ rXuXx+CNrVtwMmHsmKnerbdDOcnsEsERhPcOlwtykzAi122jq8MmFfGAJphB+ZrC2pAk
+ 1ku0iyxJueQyemRYt90fujUL6keNhNUrWQ+Zl+d0PXF5tLAddog2A5aA19mOWXJnK+Oh
+ 2EJxz/9UUteOstA4ZhfjtOWZLonYs65rQ0CLXCxROjLqAA4Z70hpz2hkuckyF083qNVo
+ /UFEeVybZLn/IKKN40PgTdB7Ghm4XDhmw+TIlDM4Ye5er81EQsITm9bd2Q2g5Ejjm9cT
+ 3EUw==
+X-Gm-Message-State: AOJu0YwOWhL180ubDamiNfeQt96452dbNNSTCJfgXrd6d9brhztVI2zY
+ ha31mkHSXqgSYuGyhcCkQ+xmFXLOmClAu7DTeiQjGA==
+X-Google-Smtp-Source: AGHT+IFGVbeHFM+qCP/cxSKvbaHlU+8GVOp0iTmuqAAprTAnl6yEAdrKbkhXIbCEeWZckiDSt7uI0w==
+X-Received: by 2002:a0d:d8d3:0:b0:589:f47b:beac with SMTP id
+ a202-20020a0dd8d3000000b00589f47bbeacmr5212408ywe.39.1694266357412; 
+ Sat, 09 Sep 2023 06:32:37 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-f749-5d0d-9a20-19cd.res6.spectrum.com.
  [2603:6081:7b00:6400:f749:5d0d:9a20:19cd])
  by smtp.gmail.com with ESMTPSA id
- e184-20020a8169c1000000b0059a34cfa2a5sm927447ywc.67.2023.09.09.06.31.12
+ i135-20020a81918d000000b0059b547b167esm947552ywg.98.2023.09.09.06.32.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Sep 2023 06:31:12 -0700 (PDT)
-Date: Sat, 9 Sep 2023 09:31:10 -0400
+ Sat, 09 Sep 2023 06:32:36 -0700 (PDT)
+Date: Sat, 9 Sep 2023 09:32:35 -0400
 From: Tom Rini <trini@konsulko.com>
-To: huaqian.li@siemens.com
-Cc: u-boot@lists.denx.de, huaqianlee@gmail.com, jan.kiszka@siemens.com,
- baocheng.su@siemens.com, lokeshvutla@ti.com
-Subject: Re: [PATCH 1/1] Watchdog: Support WDIOF_CARDRESET on TI AM65x platform
-Message-ID: <20230909133110.GQ305624@bill-the-cat>
-References: <20230829034620.119207-1-huaqian.li@siemens.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.sharma@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>
+Subject: Re: [PATCH] ufs: ufs-renesas: Drop include common.h
+Message-ID: <20230909133235.GR305624@bill-the-cat>
+References: <20230909025435.84441-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3lp9T9CHsOJocnsL"
+ protocol="application/pgp-signature"; boundary="qYOnGvBi4vwJBS73"
 Content-Disposition: inline
-In-Reply-To: <20230829034620.119207-1-huaqian.li@siemens.com>
+In-Reply-To: <20230909025435.84441-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,42 +93,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3lp9T9CHsOJocnsL
+--qYOnGvBi4vwJBS73
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 29, 2023 at 11:46:21AM +0800, huaqian.li@siemens.com wrote:
+On Sat, Sep 09, 2023 at 04:54:35AM +0200, Marek Vasut wrote:
 
-> From: Li Hua Qian <huaqian.li@siemens.com>
+> The "#include <common.h>" is being phased out in favor of more fine
+> grained header management, i.e. ideally include a subset of headers
+> that are really needed. Remove it from this driver.
 >=20
-> To have the WDIOF_CARDRESET support for the TI AM65x platform watchdog,
-> this patch reserves some memories, which indicate if the current boot due
-> to a watchdog reset.
->=20
-> Signed-off-by: Li Hua Qian <huaqian.li@siemens.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Applied to u-boot/next, thanks!
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---3lp9T9CHsOJocnsL
+--qYOnGvBi4vwJBS73
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8c54ACgkQFHw5/5Y0
-tyzX9Av/amdfD23pRMKU6UXbatUcHS4VFOOBrrqOD3k7XFjw/VCY6a59YBNZgZaM
-WyrF1xH7eZDJeLKctUjR6WGzJBxxDn9kPWCWxkRUfVWaN8krthevaupd2O4y3WkQ
-DA6SQrL9RVRPbcnZ5AgHcbpk6jFnxBJ1z/8KX2Yjc5a5sW+sQ11dF74/KRXc3nJ2
-e5Z3kRKQKNMtMjrHN07uEJbqUcqf4/GzliDgEYjnn8eAWOF61kTuVdydNp4y2bPE
-2sjfrG3ZZppzDctRzMQKlM3tJZvsqTevIiEQxYGLglJix2aQVPOk6A9jGDCfKf45
-hLvPbn8+6EcZYTfky3cuFomYdh0bK1ytm91EQ0a1MgkUJK9kPjXl0mRDnOsMVpDS
-nLc0iRaZQCWnEk/IE5j9I3nJcF8oqJZRXPLERHrhKMc4fgIsuFgQ3omwGgMNNBp5
-kGr8DxyapGJWmqYl7VxwOFY8KmGLePLKgv0H5W1KMOjVdKZ3K2p/JONpBRqqw5FE
-Y3sw3sDj
-=PPBq
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8c/MACgkQFHw5/5Y0
+tywFUgwAi2kQh1uNtNGxqPokqvuwhM2Fepz5CGFvkYbcy9tyVwAHYZaBLJK8dYlB
+81zSYpiJndaDrcOSXLGEftcvghoN350DJKCkdX0s1ptB1IHsxwwzNPkuwut9fqIj
+K9saU+hXyHYHAiAWwvJr+sgwbPlyM5piITmmdQrxX7xeEMQY3HhlUZNjdJalRnsW
+N0Wi9zD/P53KsGBkV6UmKlMywhTUZP/1c7dM5OcHBggRhkp5AkivOrcS20FfLpk3
+f/XilSx/OKfAiQRm/OPUDaEwknQ234BZATUS5XrpPEP+9g7uaUcx8JOnk2wZ+0tc
+z5WCcrBXJyz3/fwt8VVKD3sDE7+Sl1glme9qzThnRFD9/TTqogXlm32gZsPKlk9z
+NPfYBHHhbms+MnIR4mMWZXNSy40n97BkQBrf8K60W331YoP/o17nKLwj3hYdngyS
+mz4yym/ZR+g8YmY7ZvMedGRhPNKnPSn+ha14w+fSfP7eCM3vCzT95ca4l6YmDB7q
+zTNHNr8y
+=6wTS
 -----END PGP SIGNATURE-----
 
---3lp9T9CHsOJocnsL--
+--qYOnGvBi4vwJBS73--
