@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB7AEE57CD
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 23:20:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA139EE57CD
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 23:20:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E949D86ADC;
-	Sun, 10 Sep 2023 01:20:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D31B86AD9;
+	Sun, 10 Sep 2023 01:20:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fmc3ZrTi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="azktXyQx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 797A486AE2; Sun, 10 Sep 2023 01:20:24 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id AF78F846B8; Sun, 10 Sep 2023 01:20:29 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6474386AD9
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 01:20:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBCFE86AE8
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 01:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-58fc4d319d2so31986417b3.1
- for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 16:20:21 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d7d50ba994eso2865586276.1
+ for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 16:20:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694301620; x=1694906420; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1694301625; x=1694906425; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QW8PDV9vs//Ncov6gDIsxIRsQ1AOhmnJ6hpnwtb+Qbc=;
- b=fmc3ZrTiC36MWVOinZrKbENQSY4AO7dhwiL8gjC7QRlA9utKV9/EjFFz1TcpvgfG+C
- URvMu0yTeIDKX/qwaw5WmwGDBDhaL3CC638BwVjg5BuBbBTV4NL3WpLJJXBlIoX6vy9G
- TfeyaxYL9FW/FMWyjlYsoKHBm3EQ61/ZiV4lo=
+ bh=MBZDpzGc0TPdAAKcFCp3qWGSaFDpsa9b0+osqb9Sxeg=;
+ b=azktXyQxw1voWXTPnw3hfZbtRMv17gv0nqJ5xyhW/NkVbRnwiX2RnRvBT/Sg0E9Wx4
+ Q+J0WpjDVZvdhl1K55w3HDGi/UzfjTEtjn2LzvKUM76PZ5Xd2ulPpdRCk8h4FyB6P/My
+ L14YHc6sv45mRucSjsqmg78Dm0mwq16hRbAWM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694301620; x=1694906420;
+ d=1e100.net; s=20230601; t=1694301625; x=1694906425;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QW8PDV9vs//Ncov6gDIsxIRsQ1AOhmnJ6hpnwtb+Qbc=;
- b=L6Z++YUzU2bQJ/i7SgVrtkKA4nyEIN6ncC/FrSGmbWbPk2ezZ818JYuVOKUzKMWPO3
- pCzGrrm6N3PMc4DbLn0yJ8b49vgujfm4/reVoPMlBtvcLYtIGQXNYPR3JVqcVC8lHa4d
- eNQr+baf+LKbf5OGokwomKvxl7FlKvssJH25KDl2F3bM8nUcwWUegHvIWOOjsI3Ka2GA
- Veawg6loHGXzBg8fDyfRoC8B9SFGHB2gRCM774vq38gc0duqoQQk2RXbdasP4s+JP8jC
- Xztugr/tLoCZQtOGSOAgGb4AHKK8tS1NVdZxt0aFdcfbyoWnMnLJkM7x6j/f6DDTpDAu
- RWEg==
-X-Gm-Message-State: AOJu0Yx2mylkXxxM2/tCwOX2DstoK/Rt/MGVsKPnj+gIOQXytwHN+tyR
- WoV7EQlTW8oYg2k5M8IiaNo7oDrLWyts/mMsdgd1pw==
-X-Google-Smtp-Source: AGHT+IGFhYAuyi/n5hfMY42NWe3vojmDygy/MPEm1bzDT1gQvT9i5ycOShke/EvySGShr8Xaecslkg==
-X-Received: by 2002:a0d:d80d:0:b0:586:9d8e:8322 with SMTP id
- a13-20020a0dd80d000000b005869d8e8322mr5916567ywe.2.1694301620022; 
- Sat, 09 Sep 2023 16:20:20 -0700 (PDT)
+ bh=MBZDpzGc0TPdAAKcFCp3qWGSaFDpsa9b0+osqb9Sxeg=;
+ b=p8SXs62F0R6/al9LEpVXwMNdS8W6L+p1zbxTvn42sKWY1AiwNU+Ikc025BGOIYtiPn
+ 1O7O/t1sZRLz2GvzoijrujBkzimQdxl+MRMpIc5WaT9/42YP+u8VDfRNAKVHDAIlGMKL
+ I6w0bmGlVE2tpZnKE2kxAveY2Zel6YBtPvxtss90K+mGoEoZxw5U2z/eGCPgUjWCkC29
+ Nm5yeVGu0ZXRvMCFQAxWq1kxqD7g1+48byTDfX88SRpxAkeYRQ7V3tRh/syCsnFAP6/h
+ WvRVEWQJ0kvHeWswmdzKk6oQ1pA2r4oXST9EGBM5+i7bdgH27FFsYz05/QG6Ri2leosE
+ E5EQ==
+X-Gm-Message-State: AOJu0YzZWGoNSpqSIxbwddTa3gCp+iceHMBtch3A5nLVUDRnmtQc5YTt
+ uIzrsJ8IfRBHyob1W/Jz50bRkg==
+X-Google-Smtp-Source: AGHT+IEuzoV3UK+xvggxVzzF42cA23Dw4lJaqYmNXtbdqXZY3/Pk4pjfy511GqhD5cjhSn4IT9u3bg==
+X-Received: by 2002:a25:ab08:0:b0:d4c:cbd2:f6f3 with SMTP id
+ u8-20020a25ab08000000b00d4ccbd2f6f3mr6098132ybi.53.1694301625610; 
+ Sat, 09 Sep 2023 16:20:25 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-1687-83fa-3eda-ba26.res6.spectrum.com.
  [2603:6081:7b00:6400:1687:83fa:3eda:ba26])
  by smtp.gmail.com with ESMTPSA id
- j189-20020a0df9c6000000b0054f50f71834sm1145407ywf.124.2023.09.09.16.20.19
+ d29-20020a25361d000000b00d746487d6f7sm1004461yba.35.2023.09.09.16.20.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Sep 2023 16:20:19 -0700 (PDT)
-Date: Sat, 9 Sep 2023 19:20:17 -0400
+ Sat, 09 Sep 2023 16:20:25 -0700 (PDT)
+Date: Sat, 9 Sep 2023 19:20:23 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PULL] u-boot-sh/next_ufs
-Message-ID: <20230909232017.GT305624@bill-the-cat>
-References: <20230909121459.5143-1-marek.vasut+renesas@mailbox.org>
+To: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1] CI: Add jsonschema python module
+Message-ID: <20230909232023.GU305624@bill-the-cat>
+References: <20230829143710.204875-1-andrejs.cainikovs@toradex.com>
+ <20230829150422.GD3953269@bill-the-cat>
+ <5219f4a0-b91b-16d0-33cb-4b7fea37625c@toradex.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kRIE74FniFce8Iz3"
+ protocol="application/pgp-signature"; boundary="UtkS+yA02huoitzk"
 Content-Disposition: inline
-In-Reply-To: <20230909121459.5143-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <5219f4a0-b91b-16d0-33cb-4b7fea37625c@toradex.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,49 +94,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kRIE74FniFce8Iz3
+--UtkS+yA02huoitzk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 09, 2023 at 02:14:59PM +0200, Marek Vasut wrote:
+On Tue, Aug 29, 2023 at 05:37:35PM +0200, Andrejs Cainikovs wrote:
+> On 29/08/2023 17:04, Tom Rini wrote:
+> > Interesting.  How exactly are you using these CI images? We have
+> > tools/buildman/requirements.txt now to cover the newly-added modules in
+> > CI, as we call pip on that.  But, it's not being used in the prepopulate
+> > the pip cache stage in the Dockerfile.  And, I'm not immune to the idea
+> > that we should instead be installing the distro package here.
+>=20
+> I see in Dockerfile test/py/requirements.txt and
+> doc/sphinx/requirements.txt, but not tools/buildman/requirements.txt, so
+> whatever is mentioned there is not part of the image on CI runners.
+>=20
+> Following is the part of *our own* .gitlab.yml file,
+> which uses a public Docker image
+> (docker.io/trini/u-boot-gitlab-ci-runner:jammy-20230624-20Jul2023, as of
+> now):
+>=20
+> verdin-am62:
+>   stage: build
+>   script: |
+>     ...
+>     tools/buildman/buildman -o /tmp -P -E "verdin-am62" -M
+>     ...
+>=20
+> And this is how it fails in our CI without this change:
+>=20
+> Building current source for 3 boards (3 threads, 14 jobs per thread)
+>        arm:  +   verdin-am62_r5
+> +binman: Unknown entry type 'ti-board-config' in node
+> '/binman/board-cfg/ti-board-config' (expected etype/ti_board_config.py,
+> error 'No module named 'jsonschema''
+> +make[1]: *** [Makefile:1108: .binman_stamp] Error 1
+> +make: *** [Makefile:177: sub-make] Error 2
 
-> The following changes since commit 515e0af77b25fba24ef6a3c72afee6ae3c7398=
-25:
->=20
->   Merge branch '2023-09-06-assorted-CI-updates' into next (2023-09-06 18:=
-47:18 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git next_ufs
->=20
-> for you to fetch changes up to fad9d9b70113bda05b5339d0193adc4edd3ca0e9:
->=20
->   ufs: ufs-renesas: Drop include common.h (2023-09-09 04:56:50 +0200)
->=20
-
-Applied to u-boot/next, thanks!
+Thinking on this more, yes, I think at least as it stands now we expect
+pip / similar to be used by consumers of this container if needed for
+the jsonschema module.
 
 --=20
 Tom
 
---kRIE74FniFce8Iz3
+--UtkS+yA02huoitzk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8/bEACgkQFHw5/5Y0
-tyy6XQv9EEhcpD6BwrCZYhiJBokui/xtLj9vmobH4HrI9nOiI4GVBuS9qmLoYnPc
-ishds719E3QZz0fXEs7lFTA8dtbnFZ4Xf2Fz4MjwayyLZle4WaB29fntUZykJeky
-46arxIAmgTL0vEUfa8uCJBUThAB7BWZsvCFnojx3Y4EUpU+xSs8vf9dPQJvvgA+3
-U26GucQ+bHM0tR25vfkMzUTtADMM8RMORAPvEB4SlN2bx5ZKA5z3XsxRdj9l/u7V
-bJTYzcssN00GpcCuVvtMxRR5I+U7Jon39WRXOWYebdE2Q3vuhU+Rx2SrROzHHaUn
-y4BNR1pkb0y+U7M1avDRVDn8AMMFqTtAXna07i5qthIhryC96d1ZTceOjWB4GlAO
-DEhVBWfBkcyQtnuydOmSSa+6ON64u1ZD2l/JxpkPX0Y56NqEPENofH2+Wq5Ibn5b
-TggJJbw/oJ6YnqJr8al7NHxYoGJ6wol/uFJ8S/+oRdn7JTKqbtFXAj1dscyKaRrb
-GrFdwScM
-=fIkf
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8/bcACgkQFHw5/5Y0
+tyz/hAv/WqZgqiKyrPO1UrnwxVYBw/W+VpkK/2rfm9TFVd7i9Vmr/S8bbsl8KbcE
+PiN6eX8YlEylHXDh8F6PXsQPAodsFSp21QKdPd4x0guU+8egsIZSYL3tRfRNlZZS
+UjOsDJvBkzulL8y+MdyHiSmZkvS+nIybFIbU9wdUrqQjTi3U8qxzyHlYAHsxLbrH
+bEshHL1Y2i4dFlXXhjaA7hITt1DDetEzqzyJzcogu8U/77I6UUNqr3u3hZGBUvBI
+mjMlOSxngtAl/d0r2llrr2HCwHyo0+c/qBtv0ipjiTs23WipewuC6wakhq7DcBAu
+gzdEVrA/9yrE3GNTVrSkG4/yimRWC7/GRVnTkW+y/E1duG4tV7xKmrauzvjYBvqc
+Sfwk+XjtBEYupXNOUG6nbjXlYugEBUGbhZNIPCkimiUOSfAosRtm1cf1vQ6UAoIn
+x9zqWuusg/6N/5QJSTOFtIgBhtfPKO/Y3DdzSgbQJEDu1rlkNNsGCOvyagrKdCgM
+QTUwPfQH
+=jKCg
 -----END PGP SIGNATURE-----
 
---kRIE74FniFce8Iz3--
+--UtkS+yA02huoitzk--
