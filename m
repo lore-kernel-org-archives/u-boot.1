@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2595EEEB580
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 04:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E4F5EEB564
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 06:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3283E8650A;
-	Sat,  9 Sep 2023 06:07:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B75A8641B;
+	Sat,  9 Sep 2023 08:48:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XwnlnZfR";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PlbmUbES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F8458650E; Sat,  9 Sep 2023 06:07:24 +0200 (CEST)
+ id C3FEB8642A; Sat,  9 Sep 2023 08:48:34 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE79986504
- for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 06:07:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4D9385DFA
+ for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 08:48:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694232440; x=1694837240; i=xypron.glpk@gmx.de;
- bh=H/7gYEdujAHqDS3BI5xtY9+9VXAVWaExpZaN16whF+0=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=XwnlnZfR3ANuvbufx4zmAakgMOY63RhYU7XUjvC/DGsUEmm15LC2upB/3zsDmeFa2LhYlS2
- hy1al8uTPPoemOyhyxM3TgMbl/Ka4dWd6ZE6Nk+qnOdibo+2bgqpwTi3/FecILWNaHIaZsTe0
- vBlanxsbjHF5ajtB9ZCiC+j1SwlOQMEjg6HzeolePQ+WeSIM5wYh0pSPR86uUiU8wlHSiO3i6
- axVi0mMiDsVB+OksGLq844rfjdWK04OzTDZNJD45l+UIi0nklD4q6MDRT2obN4A7uytMTQ03m
- sNzR8f39d1LUfELa/S3hSRQu9qr7jXe75iUl+pBnSKSuDAB3Q8ZA==
+ s=s31663417; t=1694242107; x=1694846907; i=xypron.glpk@gmx.de;
+ bh=ckPsngL+po0FbjpDxMTk/2VbmouAJLlB9nglMCPuCuM=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=PlbmUbESed1HlIXgO6t7NFa6J1FAFcAc4KGRQ5RXCi3zcKNY+MBUJxo7tfbaABHVyM7/E3Y
+ BfyU0HQyQtzGqR/Mw+ng+vl0DJ7fg+IPhvKWAJfypypTWjQHIDINIwLZ62j7RtqBzfdOjOep6
+ nv/mIdugQGi4wb4Y+hpeIQhjK9xC1r/I0+UvvFfABf9p0Ke7ba5CiJqE5NOmZEPDrMThIwUaa
+ GvPgbYIBOuS7M+RBZJfj8/w4iZ5X+W1TN1kHihfzgFWqph2t8LA8y09KAbHEHszWtVJC8ttMc
+ HYYQ7Fg5LnLYQmdYgLZfQXB7jyTgz33CsbLi+U7dS8GDoH8WaxFQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MF3He-1qPOts2U7U-00FWtB; Sat, 09
- Sep 2023 06:07:20 +0200
-Message-ID: <849ad57d-2941-4066-870e-0dfcbf938fc6@gmx.de>
-Date: Sat, 9 Sep 2023 06:08:19 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMofW-1qMESF2tlM-00Ihpg; Sat, 09
+ Sep 2023 08:48:27 +0200
+Message-ID: <a29e29a3-10f0-4ff2-9e27-3bb771ab2b8c@gmx.de>
+Date: Sat, 9 Sep 2023 08:49:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tpm: Fix autostart for TPM1.2 devices
 Content-Language: en-US, de-DE
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: sjg@chromium.org, u-boot@lists.denx.de
-References: <20230908203723.5702-1-ilias.apalodimas@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230908203723.5702-1-ilias.apalodimas@linaro.org>
+Subject: Pull request doc-2023-10-rc5
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:bL7o3khrVUrZGpHyn+xKpazC9JqCZxiHWfWoTuDxiKVMZo/GXZP
- lAcI0PfITfDCcdCTd4VjQGl4xY9e7Ph7aV2z3naYrXo5dCU5Mf2zWxS+C/BUjBfTz8C23hf
- wyslfDxrR/XoGciAFNdHOlww56GSkUN0H9v1d/llU0oa2mzmqIjS1g+bcoQRQZaS9KYPSih
- z2bSZO7WLfV3PR87wfqcg==
-UI-OutboundReport: notjunk:1;M01:P0:FH+RwK/dZNk=;op1YyNJ2hKbfnYTLlfPVB2xUFkl
- loyB+qG1cnGT1ZXstGkxAfzi9Q1GX0iI/YVCreOOAI1lZG3bor0Xxgy7RHRKG/VLithCVoOLY
- 1Em5p1wrB5jA7vKhnSrHXb/LafhBLSt5hjT5P3xr86pKhVADvp4vOLcRfFag1iUEUlWTfNV25
- y+oQCfOufm/doXKYfo0wgunM1fYfG5V0DSFAXc7enbeygZCGYv8KgsPapwILkxGV4mHnkLGyA
- wzA8kE1mPxk+OJAALoIkkSE+T6I8EeKBNaCyEPveTUdANWIHAUuAEqHYx4YBvbYWUoPFyj8EF
- CsLXXkrviie8G4o+Mb399Z7PYQpY+7RB+pC0wiQIQHkYF+z2K4M0wXEOin5y+s08ZCoCq87bJ
- j/YGmvt50a2Oy6FfV50fQRLStUAPOO1y7nGvjFvaIySSVLo6FILdoUsTafCmhEUG6j08bCm2z
- IQQH0l2xnqrKzpPDNjZ8NQo9NPTqNbB5bCJXinPkUrVNdzS0Y7+8EJE8KNweI6h64+Gd7Do3e
- aiNYRRfzYXWleNU+UxTNKF3Sf7fYOMep/qyxlkxqJOJakGaEJZaJt/Sa8HGejpROBcdpScAme
- pPBUNyttzUbiSZcAbnEz7O7yQfUfAQmoDY44shoZjkeVJSmr7EIpBfB67k7izU4Qd5K8vnoLR
- Ewx+A+mM2KiNXIrmcxNKp3WIAyyUqel+dswQuSkOkajjmwiIMGHEhr+BPzT4FxJZXBeRuDMKo
- 6ClrgNw1PjL4WEdw7cwYDBINgM6nKHN4gYhKfLW+pD7F2x4g3/G9ecizowNWtGGU0jemW+jps
- mw0YTbM3DOs/++5BSiN6D35DHR4P3YgwKjaGreaubHWUb6m7o74dZhEi2zFGI6wG5VJbJB2dM
- L9v4mBi59Tq3b7iEnc0QBIc2GZh9AH4bkAQ/ih+bMA/uEFNKh95UZ1kKNdwW0p8Gd7S92fTfp
- nfWHmEngQXYaea6ZRPIUjygFDFM=
+X-Provags-ID: V03:K1:O2X7HPplLqd3I+NlZH7KUTg6dxdIx+j+aY3+XL2suIwMz03QDd+
+ 01sPPY8fxRGS+ZS55K2iRSHo8m9CMGtB7e/qeJ0muzYuIwycZYsnNXdhsas59YXBjzOz7ia
+ xZd1Z3BoaLSdJ/H14PmYGYbqRETJ/KdT714HwT/cavRbUeSQD+keeTCC6RNrKKooZP67Lse
+ aUT4LinTnWZVZEpqsHTRg==
+UI-OutboundReport: notjunk:1;M01:P0:kzq3ag06cjM=;aOrqw4Q7eM/JXMQnMA6uUN8Ykv6
+ 3XRAjsloI3WghnyORHf08aS8J5cHPwNCUvy32qM1nbfT/qutN1P5uj1zMmVWN4MWRQW0k6hwr
+ 4M86RiegawhJOytaPBRX1yqTwss52R2D+M+DPQe8h1qa5tFutbHToYy3IWiOGl9bJUy7aZNXE
+ FlQaP3yfTSzu5nCpYXAD6h2NhVMGPZIw9bVrofY93EORfMXKlGZWw1TZhCmYcFlznXTtO3JBY
+ saGNph9qp2aPj6G7y3uhMLith3u9oee38kDGYK/mXtED6kO4qopwi0HRj16gQK3sMWMr2Y9Gm
+ wodAhs4Q1oZ6B9Lpi4+KkF+sHz90EWe1Edu3ZxwjOL33nttOoVuBQPQNweVuyVImgGT6TpsFF
+ Vc/YagWRLjoAEOWdVp9JfwsjsXU3D3JfykGA4KNPFFOYSGVrPqJN0NFjRShq4Nbl6uPwYoors
+ +2V7nBmNEs0q7hzCexfb54s+IMflZ0ubTRjZhm63UEYIBeI0s7HcbLXn6VrNQf7s8nm2XdmnA
+ 5vMga7AkBB+URLdSFNdG18xq5B+2rE2ZXQPb9XnS6t15+O7uJNR/2nQqDlV+fch6I/+Y6Gmcy
+ 5aqfu5H9Y7VrHV5SKT2WKMv+7QPdtY7eJjF1gPgMt8WljjMCJvTmkN4v8Jurkv4pk3yTFnAJS
+ OSxEfC4FWG+kV600uJ7ND0MC9MK4SSG8DCk0JT/fBzIGp3wBfNifyviidY+KFlBzcRY5xPjBT
+ utyY0zun9kQ26DzaxGoWHJ2N3rlNM46RO3j0eocE89HXQ3sfCW6SVy9h6O6KgNUMsMBKzu+i6
+ O08jT5g8UYyTYAV90/ufMglFAuEeMmTWlLAYJdj495pk8slhOMIOesmKXSKfo41r5UbP49pjD
+ iMQbLBLzAHfkvPDE2898gA1nl6jo/1McIw3BtCdWa6ZRTAOv8cP8qTLHJuBJiqg/lTksX+TUO
+ pz4Ffeug2Q6Qc+81WLbnPMsb5To=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,35 +87,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/8/23 22:37, Ilias Apalodimas wrote:
-> On commit e663b2ff4ba2("tpm: Add 'tpm autostart' shell command") an
-> autostart function was added for both TPM1.2 and 2.0 devices.  Instead
-> of correctly wiring the autostart command for TPM1.2 devices that patch
-> mistakenly added it on 'tpm init'
->
-> Fixes: commit e663b2ff4ba2("tpm: Add 'tpm autostart' shell command")
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Dear Tom,
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+The following changes since commit c0c08be5468cb26db597932bc69c4eda1129841=
+d:
 
-> ---
->   cmd/tpm-v1.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/cmd/tpm-v1.c b/cmd/tpm-v1.c
-> index 3b95c950cc96..1b1efcd204d2 100644
-> --- a/cmd/tpm-v1.c
-> +++ b/cmd/tpm-v1.c
-> @@ -655,7 +655,7 @@ TPM_COMMAND_NO_ARG(tpm_physical_disable)
->   static struct cmd_tbl tpm1_commands[] =3D {
->   	U_BOOT_CMD_MKENT(device, 0, 1, do_tpm_device, "", ""),
->   	U_BOOT_CMD_MKENT(info, 0, 1, do_tpm_info, "", ""),
-> -	U_BOOT_CMD_MKENT(init, 0, 1, do_tpm_autostart, "", ""),
-> +	U_BOOT_CMD_MKENT(autostart, 0, 1, do_tpm_autostart, "", ""),
->   	U_BOOT_CMD_MKENT(init, 0, 1, do_tpm_init, "", ""),
->   	U_BOOT_CMD_MKENT(startup, 0, 1,
->   			 do_tpm_startup, "", ""),
-> --
-> 2.37.2
->
+   Merge branch 'master' of
+https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2023-09-05 14:44:10
+-0400)
 
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/doc-2023-10-rc5
+
+for you to fetch changes up to 7314ba2bf8452df68d07f251aa59440de58067b0:
+
+   doc: board: ti: Move documentation from README to .rst (2023-09-09
+06:12:47 +0200)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/17697
+
+=2D---------------------------------------------------------------
+Pull request doc-2023-10-rc5
+
+Documentation:
+
+* move more TI board documentation to HTML
+* update TPM usage instructions for qemu-arm
+* update the EFI app documentation
+
+Other:
+
+* tpm: Fix autostart for TPM1.2 devices
+* spl: fix undefined return value in spl_blk_load_image
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (2):
+       spl: undefined return value in spl_blk_load_image
+       timer: document the unit of the timer rate
+
+Ilias Apalodimas (2):
+       tpm: Fix autostart for TPM1.2 devices
+       doc: qemu: switch swtpm instruction to 'tpm autostart'
+
+Joao Marcos Costa (1):
+       doc: Update path to source_file_format.rst
+
+Neha Malcom Francis (1):
+       doc: board: ti: Move documentation from README to .rst
+
+Simon Glass (1):
+       doc: efi: Update for the 64-bit app
+
+  board/ti/dra7xx/README             |  26 ---
+  board/ti/ks2_evm/README            | 194 ----------------
+  cmd/tpm-v1.c                       |   2 +-
+  common/spl/spl_blk_fs.c            |   2 +-
+  doc/README.ti-secure               | 226 -------------------
+  doc/SPI/README.ti_qspi_am43x_test  |  76 -------
+  doc/SPI/README.ti_qspi_dra_test    |  47 ----
+  doc/SPI/README.ti_qspi_flash       |  47 ----
+  doc/board/emulation/qemu-arm.rst   |   2 +-
+  doc/board/ti/am335x_evm.rst        | 437
+++++++++++++++++++++++++++++---------
+  doc/board/ti/am43xx_evm.rst        | 188 ++++++++++++++++
+  doc/board/ti/dra7xx_evm.rst        | 139 ++++++++++++
+  doc/board/ti/index.rst             |   3 +
+  doc/board/ti/ks2_evm.rst           | 306 ++++++++++++++++++++++++++
+  doc/develop/uefi/u-boot_on_efi.rst |  26 +--
+  doc/usage/fit/howto.rst            |   4 +-
+  include/timer.h                    |   6 +-
+  17 files changed, 984 insertions(+), 747 deletions(-)
+  delete mode 100644 board/ti/dra7xx/README
+  delete mode 100644 board/ti/ks2_evm/README
+  delete mode 100644 doc/README.ti-secure
+  delete mode 100644 doc/SPI/README.ti_qspi_am43x_test
+  delete mode 100644 doc/SPI/README.ti_qspi_dra_test
+  delete mode 100644 doc/SPI/README.ti_qspi_flash
+  create mode 100644 doc/board/ti/am43xx_evm.rst
+  create mode 100644 doc/board/ti/dra7xx_evm.rst
+  create mode 100644 doc/board/ti/ks2_evm.rst
