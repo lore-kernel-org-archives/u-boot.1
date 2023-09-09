@@ -4,23 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16715EEB57C
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 11:03:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3610BEEB589
+	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 11:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76BC08689A;
-	Sat,  9 Sep 2023 13:02:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F8F68669D;
+	Sat,  9 Sep 2023 13:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ifv7DIQ9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CWHr+4IC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE54D86940; Sat,  9 Sep 2023 13:02:56 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 9CC7186906; Sat,  9 Sep 2023 13:29:32 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52D1586867
- for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 13:02:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A32D6867EA
+ for <u-boot@lists.denx.de>; Sat,  9 Sep 2023 13:29:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
@@ -29,22 +30,22 @@ Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id AE5D0CE02C3;
- Sat,  9 Sep 2023 11:02:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D724C433C8;
- Sat,  9 Sep 2023 11:02:44 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 3FEAAB8069E;
+ Sat,  9 Sep 2023 11:29:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1E7DC433C7;
+ Sat,  9 Sep 2023 11:29:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1694257370;
- bh=ueGjxb0JFGdxcTWRgN7bQSt/VkHjvqwWpMhAVsYyXsM=;
+ s=k20201202; t=1694258968;
+ bh=26pBKH9gGSgtzPDjAsgNNjUMHAEE7WFPA9ToDvsbC7U=;
  h=Date:Subject:To:References:From:In-Reply-To:From;
- b=ifv7DIQ9cC8aIaywHwZ/QmL4z8dZruN0AzGN0lUE+xaiDtrGFCdqzRv/FfA32lzd4
- e2XO8EHLfywfAAe2faWVsUFj3v1aQMcj0HxsuI0QcfmDc/6a0ffAP7caApHLYTnVgo
- Iv40GSaCL7A1xQxEcxLoFcqa4lKi5i+Gwbh4o25u8GvQUfpl6aC7bYrWsQOGkj0MbG
- PpM978SV8dkd4HrVadFPWwaWt4x3n+Fel/5ORGABdgP59y3tG0DQtWR38kz2d6WAVN
- n3pKO1y/LUs+0oMmTIACbBas72WTYKUE6O2rz+6e4kxQIOJOlZ7i1vW357ddajKrId
- TnAvoYop71WfA==
-Message-ID: <f31f0b70-e50a-51e3-baf0-7e1d00e6f926@kernel.org>
-Date: Sat, 9 Sep 2023 14:02:42 +0300
+ b=CWHr+4ICQ46ZxR/kIVPjSU/joNqRGDkOHCGjVxBxpguSgQPJ9ebZja5ReNUMrdePf
+ 1C7mCpGulHHUMDN7xCXLSIIwmprTnOdv/UQ6uPI4pDuAR8nzglPh/kg3pPor8H1Dw5
+ aES5MOTq4jx2PxaxKRTbP7dsSIG1jXpHhiAhASBHKZ7ngRkPUsMyM0zApDgeKiwhyv
+ vBKVbfKEdvl1JZOBDcfheiYgqr+d2mvYOhWkr/itC1Y0Qdzwd2m3GFdiO7TIiFXWWx
+ iQWoyYRCvvATys3t/xFnzn2tS8Sg3bR4/6l0M9wQXo+yqoNL7gIXzPiAw+IaJVu+LN
+ qQ7TDKd/dPjHg==
+Message-ID: <9bc5aa14-b03c-d2d0-947c-692a200db996@kernel.org>
+Date: Sat, 9 Sep 2023 14:29:20 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
@@ -230,37 +231,8 @@ On 08/09/2023 14:05, Apurva Nandan wrote:
 > +F:	arch/arm/dts/k3-am69-sk.dts
 > +F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
 > +F:	arch/arm/dts/k3-am69-r5-sk.dts
-> diff --git a/board/ti/j784s4/Makefile b/board/ti/j784s4/Makefile
-> new file mode 100644
-> index 0000000000..fc98b24a2d
-> --- /dev/null
-> +++ b/board/ti/j784s4/Makefile
-> @@ -0,0 +1,8 @@
-> +#
-> +# Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
-> +#	Hari Nagalla <hnagalla@ti.com>
-> +#
-> +# SPDX-License-Identifier:     GPL-2.0+
 
-SPDX tag must be the first line?
-
-> +#
-> +
-> +obj-y	+= evm.o
-> diff --git a/board/ti/j784s4/board-cfg.yaml b/board/ti/j784s4/board-cfg.yaml
-> new file mode 100644
-> index 0000000000..ea9a8b4a26
-> --- /dev/null
-> +++ b/board/ti/j784s4/board-cfg.yaml
-> @@ -0,0 +1,36 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +# Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-> +#
-> +# Board configuration for J784S4
-> +#
-> +
-
-<snip>
+These 3 files are not part of J724S4 EVM.
 
 -- 
 cheers,
