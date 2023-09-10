@@ -4,69 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 606DFC71153
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 22:37:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604D6C71153
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 22:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BCC686CEB;
-	Mon, 11 Sep 2023 00:37:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id AEB6C86CFC;
+	Mon, 11 Sep 2023 00:37:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="DFx4zygz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a+mRJpIO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4873686CC0; Mon, 11 Sep 2023 00:37:06 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 7FAB386CF5; Mon, 11 Sep 2023 00:37:09 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF49186CC0
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 00:37:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD9CC86CD0
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 00:37:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-52c9f1bd05dso4983251a12.3
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 15:37:02 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-51a52a7d859so10582664a12.0
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 15:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20221208; t=1694385422; x=1694990222; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694385426; x=1694990226; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DpAY7TBeidgDdf6WBGV0I2F8+pC7om9wQu22KAQvKxw=;
- b=DFx4zygzrDCAgu1cJIxKmem0dHuWlIycoBHYwuHghhlbF5aCTrfPRWA9+HvkmwlA36
- 6RZHFW/XBlF/AT8iqzdRGYSByls9Y7FuGOdBw3O2bA9OsS02iwzZNONK9CpPQ3vVTOjM
- cr1YLBQXvFC5f2YlsdU154AE0ZeLS9zzg2f8bYdL5QUg301Ff1ly9oLNnUKF56T/NTtu
- SVAqgNMJg6zSjjDZLxLW55cIH6n0QMOdQxgWNOYC2zi3GDE19uydAYs1Xa8loPusWteq
- x1dUkvx/KvYg7XSqDGOenRp+05j+C95x97zbOOdhRWgi7oBBpC19ARWPaQuBQSFi9apm
- wgQA==
+ bh=gsGpAVTQDHJTDPCv9ByDMphJhAFi9K8NW1FEbDT8k6I=;
+ b=a+mRJpIOv5WxWqTDlQAHsaw/ujNuVoX7eYvYcM75B4StVVCXqVWNFmv3UaJAibmE4x
+ b+Rc3y104m+vFN9pFx80i7IR2LP6BtpJ+nPNCYxaoJEt2/lzm7tZPdZy1m1EaObsrujA
+ Uw2C8EJpqu6z2G5RssfKIydKjS2YMXoQireII=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694385422; x=1694990222;
+ d=1e100.net; s=20230601; t=1694385426; x=1694990226;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DpAY7TBeidgDdf6WBGV0I2F8+pC7om9wQu22KAQvKxw=;
- b=npg6Xt/T9p8olSqK77mkg/QbnNBufjxDB1OQvLkkA0Ujs/E6745j+Ks1vSUpYE3v/x
- 8eIvay/T76R51Qj2OV8KbugY6ei2Qln76qgAptNYeLkve8yBSmh7wF/pLHRdISp2D7wC
- 2mjq62NTMCs2sZqRErPKwlR4EsoAuyHXdSxUhYz3U6J5R4IyGY/YMdHqyPXf/TkoBkKs
- VUwICWfqU5jbCsz1zCYZuVGN35dbQMcs8f+0vDyzLmxBnOcenNeV5g4gtYtO0ki/h8Ft
- c/M/+wnupakYYpaIUaUKkqFHo7lbryh12r/jCnQxGRqvTwapO+ptOB+FpN1xxjUyLJxR
- btxg==
-X-Gm-Message-State: AOJu0Yw38KE32q9bDWbjnBoJwtRUGqdnOQW7KdDDvnZ7npgjcjXh1SOa
- 3OdktxvnbaFud6YRiIncYttGuAc85gjnY8fRrO35CQ==
-X-Google-Smtp-Source: AGHT+IF701vfxOYSlv+ykQjhq+X2CsOjI83MebsyRXQFch6jtbkVBrOh6ZZghtn5sU4IHqN/GC9+PKqJFakGJG6uw1g=
-X-Received: by 2002:aa7:d0cf:0:b0:52e:585a:e95 with SMTP id
- u15-20020aa7d0cf000000b0052e585a0e95mr5697280edo.2.1694385422344; Sun, 10 Sep
- 2023 15:37:02 -0700 (PDT)
+ bh=gsGpAVTQDHJTDPCv9ByDMphJhAFi9K8NW1FEbDT8k6I=;
+ b=OCH0cn081Y6/WlDNOvKh3/P8OEtrCymY7vkp5348Va8pbzMTN4Sd9UtDNVvAwyKIoB
+ uXqPGOudWk5qVZRCwN5f0bFTgq3jLYi5T1gUnOsG4BA5dXjp7ZTvXVHFPHnSU2OVQNZR
+ Y8k5YkPGc9tfm9LZZ+7VinBrDpBUVWvNC+itv4wO45NxL3PdGClzOSHxesBo8zXHuT+i
+ qn2Jrz/GSO7SkV1YaS8w2Wg4F1cvv7jhjZFZTuU7QlAHEO/OkJMGpM5Cls9MxXrlcbVd
+ cFSIVY5JLryG0SZdG+cF4fI4HzOm+yEnLzFYzqf+ayZyCagtZGkm/HZ1sr1t+XAKswzn
+ D2kQ==
+X-Gm-Message-State: AOJu0Yz1eGbInZaX726xD/rWS+Ec/UokQ3U/o/03I57x3bhWHTZjXkQJ
+ sJV6JqEGq8zFP6ucEXzDoT6Fa34GExwVk/dF5zLWwA==
+X-Google-Smtp-Source: AGHT+IFHT8t1NQbAUa8XKyz2/ajizYzbS8vaNkrHQtpvq3vEEosj0+Gd8BcuhuVf3B0EpEzGOxIBi6ul1VOvG3xJ8DU=
+X-Received: by 2002:a05:6402:5242:b0:51d:b184:efd with SMTP id
+ t2-20020a056402524200b0051db1840efdmr13671511edd.20.1694385426319; Sun, 10
+ Sep 2023 15:37:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230906-apple_t6022_m2_ultra-v1-1-7d28623285bc@jannau.net>
-In-Reply-To: <20230906-apple_t6022_m2_ultra-v1-1-7d28623285bc@jannau.net>
-From: Simon Glass <sjg@google.com>
-Date: Sun, 10 Sep 2023 16:36:48 -0600
-Message-ID: <CAPnjgZ0aDxNsqKzWcTDOq++4vC4j_VRQNqC0=LiL3As0d0H7Bg@mail.gmail.com>
-Subject: Re: [PATCH] arm: apple: Add initial Apple M2 Ultra support
-To: j@jannau.net
-Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+References: <20230908190935.12516-1-mibodhi@gmail.com>
+In-Reply-To: <20230908190935.12516-1-mibodhi@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 10 Sep 2023 16:36:51 -0600
+Message-ID: <CAPnjgZ1b7mx1fk5rBQ0wWBD4p85-Smw5=KG89KdCSyR+cMx+YA@mail.gmail.com>
+Subject: Re: [PATCH v3] bootstd: sata: Add bootstd support for ahci sata
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,43 +81,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tony,
 
-On Wed, 6 Sept 2023 at 15:50, Janne Grunau <j@jannau.net> wrote:
+On Fri, 8 Sept 2023 at 13:10, Tony Dinh <mibodhi@gmail.com> wrote:
 >
-> Apple's M2 Ultra SoC are somewhat similar to the M1 Ultra but needs
-> a tweaked memory map as the M2 Pro/Max SoCs.  USB, NVMe, UART, WDT
-> and PCIe are working with the existing drivers.
+> Add ahci sata bootdev and corresponding hunting function.
 >
-> Signed-off-by: Janne Grunau <j@jannau.net>
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 > ---
->  arch/arm/mach-apple/board.c | 183 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 183 insertions(+)
 >
-> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-> index d50194811843..47393babbc62 100644
-> --- a/arch/arm/mach-apple/board.c
-> +++ b/arch/arm/mach-apple/board.c
-> @@ -444,6 +444,187 @@ static struct mm_region t6020_mem_map[] = {
->         }
->  };
+> Changes in v3:
+> - Correct drivers/ata/Makefile to compile sata_bootdev only if
+> ahci sata is enabled.
 >
-> +/* Apple M2 Ultra */
+> Changes in v2:
+> - set devtype to sata in bootmeth_script for non-scsi SATA device.
+>
+>  boot/bootmeth_script.c     | 12 ++++++--
+>  drivers/ata/Makefile       |  2 +-
+>  drivers/ata/sata.c         | 25 +++++++++++++++
+>  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+>  include/sata.h             |  1 +
+>  5 files changed, 99 insertions(+), 3 deletions(-)
+>  create mode 100644 drivers/ata/sata_bootdev.c
+>
+> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+> index 58c57a2d4b..0269e0f9b0 100644
+> --- a/boot/bootmeth_script.c
+> +++ b/boot/bootmeth_script.c
+> @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct bootflow *bflow)
+>         ulong addr;
+>         int ret;
+>
+> -       if (desc->uclass_id == UCLASS_USB)
+> +       if (desc->uclass_id == UCLASS_USB) {
+>                 ret = env_set("devtype", "usb");
+> -       else
+> +       } else {
+>                 ret = env_set("devtype", blk_get_devtype(bflow->blk));
 > +
-> +static struct mm_region t6022_mem_map[] = {
-> +       {
-> +               /* I/O */
-> +               .virt = 0x280000000,
-> +               .phys = 0x280000000,
-> +               .size = SZ_1G,
-> +               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> +                        PTE_BLOCK_NON_SHARE |
-> +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> +       }, {
+> +               /* If the parent uclass is AHCI, but the driver is ATA
+> +                * (not scsi), set devtype to sata
+> +                */
+> +               if (!ret && IS_ENABLED(CONFIG_SATA) &&
+> +                   !strcmp("ahci", env_get("devtype")))
 
-Is there no devicetree binding for this information?
+Can you not use desc->uclass_id to do the right thing here? It seems
+odd to compare with the value of the env var you just set up above.
 
-[..]
+> +                       ret = env_set("devtype", "sata");
+> +       }
+>         if (!ret)
+>                 ret = env_set_hex("devnum", desc->devnum);
+>         if (!ret)
+> diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
+> index 6e30180b8b..0b6f91098a 100644
+> --- a/drivers/ata/Makefile
+> +++ b/drivers/ata/Makefile
+> @@ -10,7 +10,7 @@ obj-$(CONFIG_SCSI_AHCI) += ahci.o
+>  obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
+>  obj-$(CONFIG_FSL_SATA) += fsl_sata.o
+>  obj-$(CONFIG_LIBATA) += libata.o
+> -obj-$(CONFIG_SATA) += sata.o
+> +obj-$(CONFIG_SATA) += sata.o sata_bootdev.o
+>  obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
+>  obj-$(CONFIG_SATA_MV) += sata_mv.o
+>  obj-$(CONFIG_SATA_SIL) += sata_sil.o
+> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+> index ce3e9b5a40..9da7218564 100644
+> --- a/drivers/ata/sata.c
+> +++ b/drivers/ata/sata.c
+> @@ -15,6 +15,8 @@
+>  #include <dm.h>
+>  #include <part.h>
+>  #include <sata.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/uclass-internal.h>
+>
+>  #ifndef CONFIG_AHCI
+>  struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
+> @@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
+>         return ops->scan(dev);
+>  }
+>
+> +int sata_rescan(bool verbose)
+> +{
+> +       struct udevice *dev;
+> +       int devnum = 0;
+> +       int ret;
+> +
+> +       /* Find and probing the SATA controller */
+> +       ret = uclass_get_device(UCLASS_AHCI, devnum, &dev);
+
+This does not actually rescan...if the device has already been probed,
+it won't be probed again. You will need to use the logic like in
+sata_remove().
+
+Also, please avoid using devnum. You should probably just use
+uclass_probe_all(UCLASS_AHCI)
+
+> +
+> +       /* Sanity check */
+> +       if (ret)
+> +               ret = uclass_find_first_device(UCLASS_AHCI, &dev);
+
+That just finds it, but does not probe it. See uclass_first_device_err()
+
+> +       if (ret) {
+> +               printf("Cannot probe SATA device %d (err=%d)\n", devnum, ret);
+> +               return -ENOSYS;
+
+return ret
+
+> +       }
+> +       if (!dev) {
+> +               printf("No SATA device found!\n");
+> +               return -ENOSYS;
+> +       }
+> +       return 0;
+> +}
+> +
+>  #ifndef CONFIG_AHCI
+>  #ifdef CONFIG_PARTITIONS
+>  struct blk_desc *sata_get_dev(int dev)
+> diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+> new file mode 100644
+> index 0000000000..f638493ce0
+> --- /dev/null
+> +++ b/drivers/ata/sata_bootdev.c
+> @@ -0,0 +1,62 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Bootdev for sata
+> + *
+> + * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
+> + */
+> +
+> +#include <common.h>
+> +#include <ahci.h>
+> +#include <bootdev.h>
+> +#include <dm.h>
+> +#include <init.h>
+> +#include <sata.h>
+> +
+> +static int sata_bootdev_bind(struct udevice *dev)
+> +{
+> +       struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
+> +
+> +       ucp->prio = BOOTDEVP_4_SCAN_FAST;
+> +
+> +       return 0;
+> +}
+> +
+> +static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
+> +{
+> +       int ret;
+> +
+> +       if (IS_ENABLED(CONFIG_PCI)) {
+> +               ret = pci_init();
+> +               if (ret)
+> +                       return ret;
+> +       }
+> +
+> +       ret = sata_rescan(true);
+> +       if (ret)
+> +               return ret;
+> +
+> +       return 0;
+> +}
+> +
+> +struct bootdev_ops sata_bootdev_ops = {
+> +};
+> +
+> +static const struct udevice_id sata_bootdev_ids[] = {
+> +       { .compatible = "u-boot,bootdev-sata" },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(sata_bootdev) = {
+> +       .name           = "sata_bootdev",
+> +       .id             = UCLASS_BOOTDEV,
+> +       .ops            = &sata_bootdev_ops,
+> +       .bind           = sata_bootdev_bind,
+> +       .of_match       = sata_bootdev_ids,
+> +};
+> +
+> +BOOTDEV_HUNTER(sata_bootdev_hunter) = {
+> +       .prio           = BOOTDEVP_4_SCAN_FAST,
+> +       .uclass         = UCLASS_AHCI,
+> +       .hunt           = sata_bootdev_hunt,
+> +       .drv            = DM_DRIVER_REF(sata_bootdev),
+> +};
+> diff --git a/include/sata.h b/include/sata.h
+> index d89f7a8a29..0495744bad 100644
+> --- a/include/sata.h
+> +++ b/include/sata.h
+> @@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
+>
+>  int sata_probe(int devnum);
+>  int sata_remove(int devnum);
+> +int sata_rescan(bool verbose);
+
+Please add a comment
+
+>
+>  #endif
+> --
+> 2.39.2
+>
 
 Regards,
 Simon
