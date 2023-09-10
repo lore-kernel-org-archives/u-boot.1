@@ -4,63 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC22EE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 14:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8A3EEE57DF
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 15:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2596F86B9A;
-	Sun, 10 Sep 2023 16:57:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id AB45486C5B;
+	Sun, 10 Sep 2023 17:35:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="ggn1LLHi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AZc/oQu4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2A8286C35; Sun, 10 Sep 2023 16:57:44 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2092086C58; Sun, 10 Sep 2023 17:35:50 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21AEF84003
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 16:57:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5984786C0B
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 17:35:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 61cbee74-4fea-11ee-8608-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 61cbee74-4fea-11ee-8608-005056999439;
- Sun, 10 Sep 2023 16:57:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=LvAvcHrp3gkmcqHyuqyQhUSRR2JrPMJ+pn6xirNtifI=;
- b=ggn1LLHiHVOacRGbdXJAHqCcjbVoVRD1iXdqR8EegYqjfSi6m1E8mrGQggp1AV/r+iHG1UJc4dxZW
- GCiYdppC1gjHRPxUaUv2daslBsEegjle2OFfo87QSW5caHTWtPYpfnnnT4BO75hxCS9Lo+077xsCAX
- FFyTk/tY/GSXm7wJsDpStu3v1hWK87aNP8zeXsX9AV89eWPMlJeke55rrMoOtN7deYDfq0DuoKcXT1
- Lt7H/iBZQR8Cw5YFhduw3xAYdBH380uZLUSJ/YFHoGXgrYMk49KwoYDoRjC0i36oMXKgIEZmulQLFs
- yp8wzkv5d9CqbEJFYdjVXnm44kuwfxQ==
-X-KPN-MID: 33|BLwes38aXQ597bRHTNFmQphSL7EqKN3PBnllLgWrfUK+6s6VeUHy2gkRm/pjDom
- Qh4jVh4AnPdkq2CGlwln5ixYGNTkPPWe8vHf5graUGCU=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|cPN8kF2Xry1yU2j/T3srdOWO77w8QKKsusJRnkWjWxnqetFhs3eMEf+TyM5pBg2
- 8KZsTpqYRJXL7c1gXeMehRA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 6399b3a4-4fea-11ee-acaa-00505699d6e5;
- Sun, 10 Sep 2023 16:57:41 +0200 (CEST)
-Date: Sun, 10 Sep 2023 16:57:40 +0200
-Message-Id: <87v8cif53v.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: kettenis@openbsd.org, u-boot@lists.denx.de, xypron.glpk@gmx.de
-In-Reply-To: <CAPnjgZ1R8c2qCaraQavRr+=MiAiHK38gD1NS2FHdhkXV=XKVog@mail.gmail.com>
- (message from Simon Glass on Thu, 7 Sep 2023 09:57:34 -0600)
-Subject: Re: [PATCH v2] bootstd: Make efi_mgr bootmeth work for non-sandbox
- setups
-References: <20230903204000.96999-1-kettenis@openbsd.org>
- <CAPnjgZ2D6Fq5WnSxjxD2fzCZkZB0yDAk7mOda7bTuUf-KZLmhA@mail.gmail.com>
- <87bkeegmgc.fsf@bloch.sibelius.xs4all.nl>
- <CAPnjgZ1R8c2qCaraQavRr+=MiAiHK38gD1NS2FHdhkXV=XKVog@mail.gmail.com>
+ spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-579de633419so35540607b3.3
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 08:35:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694360146; x=1694964946; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=udFxHH7rO+my7fuESkfxFdSK5Xpa70W9oaVh7RepJPM=;
+ b=AZc/oQu4zFXnL2chWsep2xZOHBqRMZmYsiOHYwEAxcLARiJB+7FwLwAig9HZ5ZiBe5
+ 0rZUq1nU+wnMaLAVzgIsPt3v2Mxi8l5+7ly9vd3HP8V9n781x2b9/RH1blQHb3T8fgko
+ OhTONHZfr4Gjc/giR3v9+ItAJqzgFVWAVvWp6zxBS0vFZzzxBLeiDIpNcclH1axydS8R
+ eXpoKYaE8WL4v7km2xJZqovzCerurtD6Bf1CKdUFzq/esAaRWyU/V8ezv6ddr1Zhq7Yf
+ wDnsdEYOv6fcjwz198M/ZFad8YI8+j8PDPfDASuYKQ4hwOtnb5hqWueam2+GN2+vI/Oz
+ xJAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694360146; x=1694964946;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=udFxHH7rO+my7fuESkfxFdSK5Xpa70W9oaVh7RepJPM=;
+ b=j2RFsKHYNG20cqWOGm7eSwCTdpdHBV8wMoTIHTgajczM3e8n82DgiS8o2H9ICT4kwY
+ 7/OrsP7lvmSwtZ7oOYH7b+um1BfxsigFMzMNSJiPxwMGPAETF1f1IpTrc0Rs5EjrmQWg
+ ATukJaImSn9KPLTTwnOJxUpLxBsrhdA+Y3qYOFmho25Ct/3RFeTtzukjfskx/CCnFdh5
+ shwnzX50EhpMOq8zrK+3R70RSeWQMTqp1RlUqpo+kl8bA5KTvc9RRGJVl1ql6f9wW+7h
+ hv8o5h4is9uSvmkMz7xbbKpvjAlj6qlzrlZ/bO/D7lBXLX92Hz9VW0aJxDwPZDeG0mM+
+ lIkQ==
+X-Gm-Message-State: AOJu0Ywi/dtNyADmJ+FeYe5lKrO85ESeefSUY6S1KHOPemz2kLHTxgFa
+ oekH8ggufC2qBvhfHdqU6EISbWnrtBOrit2QGyw=
+X-Google-Smtp-Source: AGHT+IE19cOpmc3a8l+MjaJv4nS0Z+q5IJQz4mKmom0c25+AtA3ADaOFITFCCMScvU7So1doob3qDy9h8hqPtVxHZjQ=
+X-Received: by 2002:a81:5fc2:0:b0:58f:a19f:2b79 with SMTP id
+ t185-20020a815fc2000000b0058fa19f2b79mr7640573ywb.9.1694360145874; Sun, 10
+ Sep 2023 08:35:45 -0700 (PDT)
+MIME-Version: 1.0
+References: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
+In-Reply-To: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Sun, 10 Sep 2023 17:35:34 +0200
+Message-ID: <CAC928HZipzfTmucsBOFeta+9od_41AZx7Ot9ErGs4kX0ACOMSw@mail.gmail.com>
+Subject: Re: [PATCH] binman: doc: fix reference tag placement for Logging
+ section
+To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,90 +85,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Thu, 7 Sep 2023 09:57:34 -0600
-> 
-> Hi Mark,
-> 
-> On Thu, 7 Sept 2023 at 07:08, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > From: Simon Glass <sjg@chromium.org>
-> > > Date: Thu, 7 Sep 2023 06:23:10 -0600
-> > >
-> > > Hi Mark,
-> > >
-> > > On Sun, 3 Sept 2023 at 14:40, Mark Kettenis <kettenis@openbsd.org> wrote:
-> > > >
-> > > > Enable the bootflow based on this bootmeth if the BootOrder EFI
-> > > > variable is set.
-> > > >
-> > > > Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> > > > ---
-> > > >
-> > > > ChangeLog:
-> > > >
-> > > > v2: - Initialize EFI subsystem to populate EFI variables
-> > > >
-> > > >
-> > > >  boot/bootmeth_efi_mgr.c | 17 ++++++++++++++++-
-> > > >  1 file changed, 16 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > > > index e9d973429f..e6c42d41fb 100644
-> > > > --- a/boot/bootmeth_efi_mgr.c
-> > > > +++ b/boot/bootmeth_efi_mgr.c
-> > > > @@ -14,6 +14,8 @@
-> > > >  #include <bootmeth.h>
-> > > >  #include <command.h>
-> > > >  #include <dm.h>
-> > > > +#include <efi_loader.h>
-> > > > +#include <efi_variable.h>
-> > > >
-> > > >  /**
-> > > >   * struct efi_mgr_priv - private info for the efi-mgr driver
-> > > > @@ -46,13 +48,26 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
-> > > >  static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> > > >  {
-> > > >         struct efi_mgr_priv *priv = dev_get_priv(dev);
-> > > > +       efi_status_t ret;
-> > > > +       efi_uintn_t size;
-> > > > +       u16 *bootorder;
-> > > >
-> > > >         if (priv->fake_dev) {
-> > > >                 bflow->state = BOOTFLOWST_READY;
-> > > >                 return 0;
-> > > >         }
-> > > >
-> > > > -       /* To be implemented */
-> > > > +       ret = efi_init_obj_list();
-> > >
-> > > Doesn't this start up the whole EFI system? Is there a cheaper way to
-> > > see if the variable subsystem exists, or can work?
-> >
-> > A fair bit of it at least.  With the possible exception of launching
-> > EFI capsules (which shouldn't happen for a "normal" boot), I don't
-> > think this is very expensive though.
-> >
-> > There currently isn't a way to only initialize the variable subsystem;
-> > we can't just call efi_init_variables() here since we have to also
-> > call efi_disks_register() and a later efi_init_obj_list() call would
-> > call efi_init_variables() again, which would leak memory.
-> >
-> > Alternatively we could just unconditionally declare the efi_mgr
-> > bootmeth as "ready" (like you already do for sandbox).  That would
-> > postpone initialization of the EFI subsystem until we actually execute
-> > this bootmeth.
-> >
-> > But we need to do something before we switch more targets to standard
-> > boot since otherwise booting through the EFI boot manager is just
-> > plain broken.
-> 
-> Yes...
-> 
-> I don't have any great ideas on this. If we could get the EFI code
-> better integrated into U-Boot then perhaps we would not need this
-> 'monolithm' init?
+Hi Simon, Heinrich,
 
-You'll have to take that up with the maintainers of the EFI loader
-subsystem.  I just want to repair the breakage that was introduced
-with bootstd.
+Il giorno sab 9 set 2023 alle ore 15:52 Massimo Pegorer
+<massimo.pegorer+oss@gmail.com> ha scritto:
+>
+> Move BinmanLogging reference tag after section "Signing FIT container
+> with private key in an image" and just before section "Logging".
+>
+> Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
+> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+>
+> ---
+> Note that at the end of section "Replacing files in an image" and just
+> before section "Signing FIT container with private key in an image"
+> there is a line which seems a typo or an incomplete sentence:
+>
+>  Repacking an image involves
+
+Any comment about this note? Should I remove this line in a v2?
+
+Regards,
+Massimo
+
+> ---
+>  tools/binman/binman.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+> index aeea33fddb..8945b19446 100644
+> --- a/tools/binman/binman.rst
+> +++ b/tools/binman/binman.rst
+> @@ -1482,7 +1482,6 @@ when it was created.
+>
+>   Repacking an image involves
+>
+> -.. _`BinmanLogging`:
+>
+>  Signing FIT container with private key in an image
+>  --------------------------------------------------
+> @@ -1501,6 +1500,7 @@ If you want to sign and replace FIT container in place::
+>  which will sign FIT container with private key and replace it immediately
+>  inside your image.
+>
+> +.. _`BinmanLogging`:
+>
+>  Logging
+>  -------
+> --
+> 2.34.1
+>
