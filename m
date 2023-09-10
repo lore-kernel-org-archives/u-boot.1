@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BCAEEE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:15:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF63C71153
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B714086D1C;
-	Sun, 10 Sep 2023 21:14:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1274B86D21;
+	Sun, 10 Sep 2023 21:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S4EXe0ow";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dvPQw55f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AFC386D18; Sun, 10 Sep 2023 21:14:51 +0200 (CEST)
+ id 1E4A586D13; Sun, 10 Sep 2023 21:14:51 +0200 (CEST)
 Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
  [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60BC686AFD
+ by phobos.denx.de (Postfix) with ESMTPS id 6168086CF5
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d7d50ba994eso3282015276.1
+ 3f1490d57ef6-d77a4e30e97so3345786276.2
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694373287; x=1694978087; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y476KKce+HIzghI91G16y+k6/o7FwOszLbUpMmz7BQU=;
- b=S4EXe0owmNEeVs4llfGgragynACr77NEDeAwdqpduj5GmB2YNVtCMdJYYzIX7jj0Yx
- dJGD4Ps9qo1cjH07BJSmVuY3Pg7shIK0BxRtmsgpHAiTCb+8yPv3Jjx+UVvlstnmepnU
- 2BLcIb6fXahmca2KC2V2F09qpf/Ww9NAus+gw=
+ bh=AoTmSpU9+hJIeYy5TWMq4SP3tVazYoHaBXCYKJiHttA=;
+ b=dvPQw55f8kYiBgmitUPBvnTkEhDwTchl5jINo+rkk/BVakzCqOtWlFzJpfJ9Cw/No6
+ EbUwZ+6/FXR65GOup9vynZB37XUxmNSwGc/XoAS8yC7W4GLiVmsno0D6kj7GNpgJUNSC
+ oJpnuiwPK4tvKDeedcBlirRVYz5yFnOV6oTbk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1694373287; x=1694978087;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y476KKce+HIzghI91G16y+k6/o7FwOszLbUpMmz7BQU=;
- b=h1He811jnuLCNdDWo1RWHmTqH8vFP2YaU0mfdELs2bs2rHjGpG29fMwChfDRxTKlf3
- SUVI1SiHrOksy4ob39EYfYBdDXnvNPL86BNzOYe9xSlTvOpdcxeLw4/tTikBRZm5WdZx
- pRKW/bMSlWLE1j1OxdyNYfrmabvwcWqinrmdQnYDXWb8YaZWfsufiTj2xvH9QsRBZE4X
- 9RwlUs5ZVTrjUerWiOMSHMhuD4LTQYU/kxq0B9dEfFEAA1ioMuP9At65r2DNiwfX3cUF
- eMsxnGGHGILRdbNgAxlE7/KB27TY5ijosVfp6OSUZcCS06bscGnhtmB7MAUjw+wRw6Wr
- sFTw==
-X-Gm-Message-State: AOJu0YyMF8pMeiaG68izd0uImAnrz+rIW6DhQdlgK/6hECXhdVOSs3B7
- t2R6oUzUKqcWDnh6Zn0YJXVQSwaBkehE0o+v1fIpITyw+bBd/y/K+a0=
-X-Google-Smtp-Source: AGHT+IHmic/g1jMUwWo9cMNEva94Gq1ujQjAblIJts8rbrRnIGCoXhQGcqdBmtQ8tfErHTwADUTlHRg4OHozlMvy11o=
-X-Received: by 2002:a25:250e:0:b0:d7b:8d9a:4ec5 with SMTP id
- l14-20020a25250e000000b00d7b8d9a4ec5mr8271995ybl.41.1694373286991; Sun, 10
- Sep 2023 12:14:46 -0700 (PDT)
+ bh=AoTmSpU9+hJIeYy5TWMq4SP3tVazYoHaBXCYKJiHttA=;
+ b=urZPiaGZB67NHr0Io6bGBvDdoYxBMy4iV6WxnTul5exznFag8PpbCXE+/YTZ73aCDr
+ 9uirryticRc6mE+38oHTi4T69/vnyBYf3l42atMHmxMm30wW9Q38ZJH2GcEQ/wtvUdlR
+ Gb8qTO9MpjDLAH9ySZoiygjf1VOx2LPtbTyxk+JaaHOkjNfSFIw7nkLM9He3GP0/25ZX
+ Kyh2zhN654lCF24GIyGZx1fz7QLoqmgqM07EttqUqDzqi/4mwLahvb16oS1fSEAS9eJd
+ aijYAOT1kQz918/6LpcnJGhP2KjSnBZQN/FFxwwvhhLZXAnnVhwRNYfaPrZy8ChfGLnt
+ wBfA==
+X-Gm-Message-State: AOJu0Yw4qQqOUhELFH92o20vL0dOHkYuIwXtg6YnsxmasOuk0IwUPCke
+ CdtFAgXVi/UC+TooI6lpwxZ/tOUl5jttS55jvrmY6Q==
+X-Google-Smtp-Source: AGHT+IEefP4fM5BZkmOoCa96Ne7TS5SRxKNJTlBrIyAm4SXprlTyHrAO+JIM/Fa7M8srxCKPPWAKrzjsFIi9GM0cTmU=
+X-Received: by 2002:a25:97c3:0:b0:d0a:a1fa:b8e4 with SMTP id
+ j3-20020a2597c3000000b00d0aa1fab8e4mr7918377ybo.38.1694373286956; Sun, 10 Sep
+ 2023 12:14:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
- <CAC928HZipzfTmucsBOFeta+9od_41AZx7Ot9ErGs4kX0ACOMSw@mail.gmail.com>
-In-Reply-To: <CAC928HZipzfTmucsBOFeta+9od_41AZx7Ot9ErGs4kX0ACOMSw@mail.gmail.com>
+References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
+ <20230908120002.29851-4-sughosh.ganu@linaro.org>
+In-Reply-To: <20230908120002.29851-4-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 10 Sep 2023 13:13:20 -0600
-Message-ID: <CAPnjgZ0Hc9ATk-j-p=vQk3BH817_zvA7PF7rA9h6fNcvvoUvOA@mail.gmail.com>
-Subject: Re: [PATCH] binman: doc: fix reference tag placement for Logging
- section
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 10 Sep 2023 13:13:32 -0600
+Message-ID: <CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com>
+Subject: Re: [PATCH 3/8] binman: capsule: Generate capsules through config file
+To: sughosh.ganu@linaro.org
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ Malte Schmidt <malte.schmidt-oss@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,33 +85,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Massimo,
+Hi Sughosh,
 
-On Sun, 10 Sept 2023 at 09:35, Massimo Pegorer
-<massimo.pegorer+oss@gmail.com> wrote:
+On Fri, 8 Sept 2023 at 06:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Hi Simon, Heinrich,
+> Add support in binman for generating capsules by reading the capsule
+> parameters through a config file. Also add a test case in binman for
+> this mode of capsule generation.
 >
-> Il giorno sab 9 set 2023 alle ore 15:52 Massimo Pegorer
-> <massimo.pegorer+oss@gmail.com> ha scritto:
-> >
-> > Move BinmanLogging reference tag after section "Signing FIT container
-> > with private key in an image" and just before section "Logging".
-> >
-> > Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
-> > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> >
-> > ---
-> > Note that at the end of section "Replacing files in an image" and just
-> > before section "Signing FIT container with private key in an image"
-> > there is a line which seems a typo or an incomplete sentence:
-> >
-> >  Repacking an image involves
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
 >
-> Any comment about this note? Should I remove this line in a v2?
+>  tools/binman/entries.rst                   | 35 ++++++++++++
+>  tools/binman/etype/efi_capsule_cfg_file.py | 66 ++++++++++++++++++++++
+>  tools/binman/ftest.py                      | 29 ++++++++++
+>  tools/binman/test/319_capsule_cfg.dts      | 15 +++++
+>  4 files changed, 145 insertions(+)
+>  create mode 100644 tools/binman/etype/efi_capsule_cfg_file.py
+>  create mode 100644 tools/binman/test/319_capsule_cfg.dts
 
-Yes you can remove it. I suspect I was starting to explain what binman
-does to repack...
+I think we discussed this some time ago. The problem I have with this
+is that it adds another way of specifying the image description,
+separate from the binman definition. This introduces all sorts of
+problems:
+
+- the question of where the filenames are located, something which
+binman tries to handle cohesively
+- binman has no knowledge of what is being put in the capsules
+- the resulting fdtmap lacks any information about what is in the capsules
+- it seems to create two ways of doing the same thing
+
+Binman can presumably already create multiple capsule files, just by
+adding to the description.
+
+What need does this feature meet?
 
 Regards,
 Simon
