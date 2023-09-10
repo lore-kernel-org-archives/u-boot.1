@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34281C71153
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64C6EE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:14:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A780E86CF2;
-	Sun, 10 Sep 2023 21:14:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B03786D02;
+	Sun, 10 Sep 2023 21:14:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lqFD6T4Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QNEniz6C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E92C86AFD; Sun, 10 Sep 2023 21:14:39 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 2E61386CFC; Sun, 10 Sep 2023 21:14:41 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2610C86CF3
+ by phobos.denx.de (Postfix) with ESMTPS id 2836386CF5
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:14:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d7b9c04591fso3120273276.3
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-58d41109351so67096247b3.1
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694373275; x=1694978075; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oGDxYfNWAFS8r6CCpVSbBA8aEinbVX0nCYWZQG993do=;
- b=lqFD6T4ZXs3lSp6MGmKFs2rB1ZY6Rpuwna6Ov/CDDUyGM1W5E+yUAc+XJ1OEQTPmUW
- WZmx/32b+9jIiPc50cAR5if5xzGqQZrBulzdmhbQf/oMEXeMEcaqwMvPm59sE/IhZo4M
- dTcFUg3yHtkbVsQlq/llczw2tM2I9FgI8d5Qc=
+ bh=hSCxt27KZiF4mCQofacQvPgFP70F0CN8no/5n2ATK0g=;
+ b=QNEniz6C9qvFd3Xi7ltT7o0/60tb+fsHuicKXmSCqsM6BU79j2R6pFHS85IVOKSZFW
+ 9LHQDjc1HOrxzlAUNcJz62N1Yg439E7OevJvYdW3+vXurZDgVnowAXFwj8B9S8MMHlmY
+ zxNf8mSB1ksZzo+laDSURAp7sznz2DY8zKNo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1694373275; x=1694978075;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oGDxYfNWAFS8r6CCpVSbBA8aEinbVX0nCYWZQG993do=;
- b=jFgHQven7I9bZrjDBxEQhmeyEnuiXjOUzbgyQAYhWdghpKDKkh6IHT1LO7WA2s9Z72
- sunaVqOQlHPVZcDKBbzpze1DpUNvQCfHLaisBbjnmbm0FmAG7d/sUiddFwXqqQiN4E4X
- iyRS2TCfN968mDA0SV2ao1Pe7IiqTPRNn8jjzNIYSfY5Q1WjiS2gAWEoroNRoQNVpl8S
- 0bnb9MrMneFfpgh5xYuCqbjF9oCcr5eG4Bl+7nyxv4n5jqhVqXWyWX2izYj2tz+0GBbL
- IJpQzlIw/vqBE5YsRfPFpx2SXq8ELIhpXQ0yqewa4jQra3zr3eXfhy4kaIyetBXGGL77
- N3xw==
-X-Gm-Message-State: AOJu0YwHsDyOyOkxrkkv8t5iZZqwxkHAAtvUhVmDA8qsPOTJdhNKwjse
- vXeDZRDNjvV+zp4NKJu+fv848iSsHeEEBd68LedDjQ==
-X-Google-Smtp-Source: AGHT+IEyKeqEr4EaknkWhHNwdeMWToUk9rosykaKHpM6VBjZ7mYmh+TjxU2BUUcNjpWjx3H0R0L1XcfMJrWOFNfvvkY=
-X-Received: by 2002:a25:acde:0:b0:d7f:3f07:722d with SMTP id
- x30-20020a25acde000000b00d7f3f07722dmr7156827ybd.3.1694373274654; Sun, 10 Sep
- 2023 12:14:34 -0700 (PDT)
+ bh=hSCxt27KZiF4mCQofacQvPgFP70F0CN8no/5n2ATK0g=;
+ b=onll4bWbbEbLlBU/n/rA9vph72JtUsWdrI9dtQEC0NabItOdxstz1vqtIyuSqQWc71
+ Alz0OtnqCbiWSycjkXSd133x2wj3r2f6azcygDzc5Arb+eeAL7BPZuKbgMSdLCNJfD36
+ 8GhChkP0KTmkWa2xYmpNPbEC17hjoqOutroAEynmb4fqnIj26lZAn4Y6KNIE86hiQGuN
+ B0RaaqE93GXPuNA1G6rwprelS25aW6IXr5QLTIOcdV3nNrR2r58ePSiIkVhncgTXxq14
+ G/ZQQKDR0geDxPNsm+iD5nNJ3XBv/tkkb/vvMdGv3aXxMpOztNjLvyNh6qHxLTS6AVaT
+ XqVg==
+X-Gm-Message-State: AOJu0YwfrclhEAr9p8bZDzlg7CXK90LduxaM7CceeuKFfjdk3OKI/vYt
+ QWNztfELqGuaEoXpcM8i7bTQJLegVDvhvNvsMg44Vg==
+X-Google-Smtp-Source: AGHT+IHbcX+S2UpZ6e27h0MNlOeSmMhXsYeAMc8MYmaTuxZTOGkVjxtaO1NhJ5jluYHCXhyzZLFtH3BHs/YJrPMGjsw=
+X-Received: by 2002:a25:ce01:0:b0:d72:652f:4054 with SMTP id
+ x1-20020a25ce01000000b00d72652f4054mr12615877ybe.16.1694373274644; Sun, 10
+ Sep 2023 12:14:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ11KEV4TAjihfijFNpXmROheGPKmVwVvpgfOpZP7GZ-HA@mail.gmail.com>
- <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
-In-Reply-To: <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
+References: <20230907205045.15406-1-jmcosta944@gmail.com>
+ <2e7387ce-e47a-4f51-8521-a43971ab62d4@gmx.de>
+In-Reply-To: <2e7387ce-e47a-4f51-8521-a43971ab62d4@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 10 Sep 2023 13:13:34 -0600
-Message-ID: <CAPnjgZ2YJ292wMU9Yjom9TdSgHA-J2A5uHxhAZk-d3BsAsf5AQ@mail.gmail.com>
-Subject: Re: UEFI update files missing on sandbox?
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 10 Sep 2023 13:13:19 -0600
+Message-ID: <CAPnjgZ2UUhUw=F-XPo84U7dqQJVbGe08L-f7_ojKP+_Np3s44w@mail.gmail.com>
+Subject: Re: [PATCH v1] doc: Update path to source_file_format.rst
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Joao Marcos Costa <jmcosta944@gmail.com>, trini@konsulko.com,
+ miquel.raynal@bootlin.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,45 +82,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
-On Sun, 10 Sept 2023 at 04:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Fri, 8 Sept 2023 at 13:28, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> hi Simon,
->
-> On Sun, 10 Sept 2023 at 04:10, Simon Glass <sjg@chromium.org> wrote:
+> On 9/7/23 22:50, Joao Marcos Costa wrote:
+> > Previously, the file extension was .txt, and it referenced the uImage.FIT
+> > directory, which no longer exists. This commit updates the path accordingly.
 > >
-> > Hi Sughosh,
+> > Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
+> > ---
+> >   doc/usage/fit/howto.rst | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
 > >
-> > I thought that all your patches were merged but now when I build
-> > sandbox I don't see the capsule-update files generated. Is there
-> > something missing?
+> > diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
+> > index c933703d1d..8b38cd534d 100644
+> > --- a/doc/usage/fit/howto.rst
+> > +++ b/doc/usage/fit/howto.rst
+> > @@ -22,7 +22,7 @@ for its latest version. mkimage (together with dtc) takes as input
+> >   an image source file, which describes the contents of the image and defines
+> >   its various properties used during booting. By convention, image source file
+> >   has the ".its" extension, also, the details of its format are given in
+> > -doc/uImage.FIT/source_file_format.txt. The actual data that is to be included in
+> > +doc/usage/fit/source_file_format.rst. The actual data that is to be included in
 >
-> The building of the EFI capsules was moved to the corresponding test
-> setup. This was based on feedback from Tom Rini [1], where he had
-> suggested that instead of having the binman nodes for the capsules as
-> part of the sandbox dtb, it should rather be highlighted in the
-> document.
-
-Hmmm that was not how I was hoping it would work.
-
-Is there a way to make the build create the files?
-
-...I just found efi_capsule_data()
-
-I really don't like this at all...it is running a part of the build
-system in the test. We have to do this in some cases, e.g. for tracing
-we must run with a special build of sandbox, but it should not be
-necessary for EFI capsules.
-
-I would really like the sandbox build to produce the capsules needed
-for tests, without any extra effort. As it is, there is no way to try
-this out.
-
+> Thank you for updating the reference.
 >
-> -sughosh
+> In the HTML documentation we want to generate a link here using:
 >
-> [1] - https://lists.denx.de/pipermail/u-boot/2023-August/526987.html
+>      :doc:`source_file_format`
+>
+> Best regards
+>
+> Heinrich
+>
+> >   the uImage (kernel, ramdisk, etc.) is specified in the image source file in the
+> >   form of paths to appropriate data files. The outcome of the image creation
+> >   process is a binary file (by convention with the ".itb" extension) that
+>
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
