@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2CA1EE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34281C71153
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:14:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4991986CEC;
-	Sun, 10 Sep 2023 21:14:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A780E86CF2;
+	Sun, 10 Sep 2023 21:14:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Go5bmrL/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lqFD6T4Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 924CF86CF2; Sun, 10 Sep 2023 21:14:20 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 4E92C86AFD; Sun, 10 Sep 2023 21:14:39 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D659F86AFD
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:14:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2610C86CF3
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:14:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6c07e122a78so2739840a34.2
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:14:17 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d7b9c04591fso3120273276.3
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694373256; x=1694978056; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694373275; x=1694978075; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ssXGPqEp5oCjUh/J9yH3wbMkJZqjzLhMJqJq2io7yTM=;
- b=Go5bmrL/lVZXnfZfMlNxo0oH4jOvgcjU5sE0UHaeT4vkve79XkewK0WDDEZR5zHBfd
- NYzjcn6ETnedTw6Y6MzItsPEBdKWjbOA1eEPahyLvm0gmXGp7iECOeuYuglrEj0aMT0D
- WMykz5r4agAIj2oDHjrNzygjpRXDBLDw6CWds=
+ bh=oGDxYfNWAFS8r6CCpVSbBA8aEinbVX0nCYWZQG993do=;
+ b=lqFD6T4ZXs3lSp6MGmKFs2rB1ZY6Rpuwna6Ov/CDDUyGM1W5E+yUAc+XJ1OEQTPmUW
+ WZmx/32b+9jIiPc50cAR5if5xzGqQZrBulzdmhbQf/oMEXeMEcaqwMvPm59sE/IhZo4M
+ dTcFUg3yHtkbVsQlq/llczw2tM2I9FgI8d5Qc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694373256; x=1694978056;
+ d=1e100.net; s=20230601; t=1694373275; x=1694978075;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ssXGPqEp5oCjUh/J9yH3wbMkJZqjzLhMJqJq2io7yTM=;
- b=GTGueaU/dkNEgm28RoYC5Vkr7F6BxJxtxp5qzVnZyxa550eZT49ZfI75xQKTafFxNO
- cKZqH2XPIc6yaD2TUNZ8iAK8ncWAIRfqQ4qn+rDIzU4AhO8xrCLd4sdyf7W6JmR2vU5u
- MqBUsF2BIH48Gu/6AE2JrqItNQX1G1E12O3uQe6n+IWArU2fWadisW280C8hoypy+TsT
- NENg38bjHyNWtKVoRo6Qedifz3duZLlkbtd/vw1qO/G1fnPydI1BVr2Woj82asofOq+9
- GIbKs1UMTaMKNwPi0uST1gbPU6NzEe9ByTIlTYFYBsmPDjlRQQ11KwAhyKRujGm+S6VR
- 6LkQ==
-X-Gm-Message-State: AOJu0Yzb1SdpImkkmgkd3UnafwMO1LXIOetqpHEDluzSQH+qEmYK4vPl
- 1VQb+AtEgAtaaWhNu6RWXbJeREFBEy72NdoUu2BlPw==
-X-Google-Smtp-Source: AGHT+IF8SQB7EVSTnMeNC3XmRk1Von8NcuRDcXAdbFi9V6zLUN+6StKnLa2Cym5gscRHl8TBVm9t95WgPFrXF9mRzx0=
-X-Received: by 2002:a05:6830:1e0a:b0:6bf:2476:a97e with SMTP id
- s10-20020a0568301e0a00b006bf2476a97emr9144232otr.5.1694373256246; Sun, 10 Sep
- 2023 12:14:16 -0700 (PDT)
+ bh=oGDxYfNWAFS8r6CCpVSbBA8aEinbVX0nCYWZQG993do=;
+ b=jFgHQven7I9bZrjDBxEQhmeyEnuiXjOUzbgyQAYhWdghpKDKkh6IHT1LO7WA2s9Z72
+ sunaVqOQlHPVZcDKBbzpze1DpUNvQCfHLaisBbjnmbm0FmAG7d/sUiddFwXqqQiN4E4X
+ iyRS2TCfN968mDA0SV2ao1Pe7IiqTPRNn8jjzNIYSfY5Q1WjiS2gAWEoroNRoQNVpl8S
+ 0bnb9MrMneFfpgh5xYuCqbjF9oCcr5eG4Bl+7nyxv4n5jqhVqXWyWX2izYj2tz+0GBbL
+ IJpQzlIw/vqBE5YsRfPFpx2SXq8ELIhpXQ0yqewa4jQra3zr3eXfhy4kaIyetBXGGL77
+ N3xw==
+X-Gm-Message-State: AOJu0YwHsDyOyOkxrkkv8t5iZZqwxkHAAtvUhVmDA8qsPOTJdhNKwjse
+ vXeDZRDNjvV+zp4NKJu+fv848iSsHeEEBd68LedDjQ==
+X-Google-Smtp-Source: AGHT+IEyKeqEr4EaknkWhHNwdeMWToUk9rosykaKHpM6VBjZ7mYmh+TjxU2BUUcNjpWjx3H0R0L1XcfMJrWOFNfvvkY=
+X-Received: by 2002:a25:acde:0:b0:d7f:3f07:722d with SMTP id
+ x30-20020a25acde000000b00d7f3f07722dmr7156827ybd.3.1694373274654; Sun, 10 Sep
+ 2023 12:14:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230908141655.2307809-1-fshao@chromium.org>
-In-Reply-To: <20230908141655.2307809-1-fshao@chromium.org>
+References: <CAPnjgZ11KEV4TAjihfijFNpXmROheGPKmVwVvpgfOpZP7GZ-HA@mail.gmail.com>
+ <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
+In-Reply-To: <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 10 Sep 2023 13:13:31 -0600
-Message-ID: <CAPnjgZ11Em1cq195+KL0UTcWvo=DwtF1WPq19fnMkg9GvtgoSw@mail.gmail.com>
-Subject: Re: [PATCH] patman: Respect include directive on Git config lookup
-To: Fei Shao <fshao@chromium.org>
-Cc: u-boot@lists.denx.de
+Date: Sun, 10 Sep 2023 13:13:34 -0600
+Message-ID: <CAPnjgZ2YJ292wMU9Yjom9TdSgHA-J2A5uHxhAZk-d3BsAsf5AQ@mail.gmail.com>
+Subject: Re: UEFI update files missing on sandbox?
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,18 +81,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 8 Sept 2023 at 08:17, Fei Shao <fshao@chromium.org> wrote:
->
-> People may put their user name and email in a local config file and
-> reference it by the include.* directives, however `git config --global`
-> doesn't look up the included configs by default.
->
-> Enable the --includes option explicitly to support such use cases.
->
-> Signed-off-by: Fei Shao <fshao@chromium.org>
-> ---
->
->  tools/patman/gitutil.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Sughosh,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sun, 10 Sept 2023 at 04:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> hi Simon,
+>
+> On Sun, 10 Sept 2023 at 04:10, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sughosh,
+> >
+> > I thought that all your patches were merged but now when I build
+> > sandbox I don't see the capsule-update files generated. Is there
+> > something missing?
+>
+> The building of the EFI capsules was moved to the corresponding test
+> setup. This was based on feedback from Tom Rini [1], where he had
+> suggested that instead of having the binman nodes for the capsules as
+> part of the sandbox dtb, it should rather be highlighted in the
+> document.
+
+Hmmm that was not how I was hoping it would work.
+
+Is there a way to make the build create the files?
+
+...I just found efi_capsule_data()
+
+I really don't like this at all...it is running a part of the build
+system in the test. We have to do this in some cases, e.g. for tracing
+we must run with a special build of sandbox, but it should not be
+necessary for EFI capsules.
+
+I would really like the sandbox build to produce the capsules needed
+for tests, without any extra effort. As it is, there is no way to try
+this out.
+
+>
+> -sughosh
+>
+> [1] - https://lists.denx.de/pipermail/u-boot/2023-August/526987.html
+
+Regards,
+Simon
