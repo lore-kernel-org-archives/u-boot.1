@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B1F2C71153
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 18:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8325BC71153
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 18:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8DE786C8C;
-	Sun, 10 Sep 2023 20:25:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A88B86CD9;
+	Sun, 10 Sep 2023 20:25:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W7iDZ2A2";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dLQ2HX+D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EB9C86C39; Sun, 10 Sep 2023 20:24:59 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id DDE1086CD6; Sun, 10 Sep 2023 20:25:02 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9746486BFE
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 20:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF13186BFE
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 20:24:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=abbaraju.manojsai@amarulasolutions.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3ab3aceaf2aso2654800b6e.2
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 11:24:56 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-68fb79ef55eso584002b3a.0
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 11:24:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1694370295; x=1694975095;
+ d=amarulasolutions.com; s=google; t=1694370298; x=1694975098;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F8f8NZUQsOxgk4pQjJLMndC3D775L/41GMIatGSh9WE=;
- b=W7iDZ2A2p/QPkdHGuFFFY5Cyu8n6V27pekjXtLn/ffIkiOg7lMEQSL8HA9yH7mHhjP
- +SnxBUZAoaXO4l72x2vie8jjoGIx/4p6aEbpYj8HUah5lF0JfrGW7SWILEQkjPpsxMRF
- wemZQNG+iAikC48MPYPeEz7ubsqWjmb3gf8AU=
+ bh=8NFcFUftAGw4mATUlBHPwydw3iQqOBubNHFK1k/szH4=;
+ b=dLQ2HX+DeEaI4jqlGuPAN1yE0E/LY+/jaQVLHIEBbj64mC2TI5Njr7PTB6ShZS7dJJ
+ DrQL+K6qcy3cJWKVMiaHkiDo2yw5nEPDzd/wOYC8J2GM/hgrdrM4ldwhsfi8zxme8d+v
+ sVLlrm9qOUNWHY0qpKN7IeAEhz8F3ofmKklm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694370295; x=1694975095;
+ d=1e100.net; s=20230601; t=1694370298; x=1694975098;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F8f8NZUQsOxgk4pQjJLMndC3D775L/41GMIatGSh9WE=;
- b=ONN6R1QW8iutCJgzLWxTkkYNA77pR+f8iSYslmR2qQkKQfRTYk73UNfAXa1G5hzX7D
- Pr1nA8wuY6Lbg4M1zBPrwHIew3Kg9a6LwVotYPVhP5f7+mk/hwvE3kU+iIjDb98LgnEM
- OUn7KzvvXenTFknpLNeXLOsSquvO9VgeF+9h/N3RfraIDXgN7X9yFhacHrHg1gNZ39Pl
- 1Xc/zI14+McKHU/Mn4N/s3dAEmTl42Y4Y5gtrdGPlYFBtD9lEfU+pxfQqAzsbttOBaiI
- lnfusMSv3s3VdenNryqn+fYXEtnXhRT97iVYh6bBjARD/kgjYm9b+PT6Lt7+HtBvNhnL
- Gdbw==
-X-Gm-Message-State: AOJu0YyZFjEu0qnPR4U4DVCO/wzEwbb3qogRdx8c0BaENmIehaXvtBSh
- y2MD+a7M3zL4DKeQ7gF3Qd0zmg==
-X-Google-Smtp-Source: AGHT+IGDkUpuw5GEVmC84liARrNQQFVODRvfQtHi13K9aMrCXXlCGhWPVlstNUlToKpzlEvK1+3xoQ==
-X-Received: by 2002:aca:1202:0:b0:3a4:894a:9f3d with SMTP id
- 2-20020aca1202000000b003a4894a9f3dmr9614638ois.41.1694370295206; 
- Sun, 10 Sep 2023 11:24:55 -0700 (PDT)
+ bh=8NFcFUftAGw4mATUlBHPwydw3iQqOBubNHFK1k/szH4=;
+ b=CDV833wkbY6suTQUd/dfzcPm3ekMDhCm3wJGx/8uoCj0ugX0/kwtEj4xw4+u2bXuYr
+ 1Ot/+K5d5t0GO33f78QQL3qYt5bFOfwMuFTLcpwV1RXr4k2sgT8zZ+W8dgrdLFTjbYg8
+ EhF2cnukBAxZqyZiAcuoBLLQgqmte/Lyhbd32lKd561pbV3GdUg41Ly3Ah8gXQIFEOes
+ lQAVLIH1Be44dWG4k203kWdNqhmfKi5+j6xGZS3GRcuidzN8vVSGqst0bMtLrhvZmAii
+ DSs7bChy73zxcnmillw92yJapNuy45vR2ug9KFO4F6pFSGGbTAc6p2IDcucaCyUIvDpb
+ w8cw==
+X-Gm-Message-State: AOJu0YzYQMLWVz9rr9vu3BAietW9aYxngc2cNx9I/tnypk1YFAwl6nrK
+ yjdXZMe3261ezi/mqu5nBK2uIQ==
+X-Google-Smtp-Source: AGHT+IHgw9Gc37mXpaXwmlo3ct/JTbROj/8rUhbnxKG3QjBawdbpeNhsIeHlpf2swB8TZlaCXOAAuw==
+X-Received: by 2002:a05:6a00:2384:b0:68b:fcb9:74f9 with SMTP id
+ f4-20020a056a00238400b0068bfcb974f9mr10159053pfc.33.1694370297987; 
+ Sun, 10 Sep 2023 11:24:57 -0700 (PDT)
 Received: from localhost.localdomain ([49.204.31.103])
  by smtp.gmail.com with ESMTPSA id
- a5-20020a655c85000000b0055b61cd99a1sm3720593pgt.81.2023.09.10.11.24.52
+ a5-20020a655c85000000b0055b61cd99a1sm3720593pgt.81.2023.09.10.11.24.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Sep 2023 11:24:54 -0700 (PDT)
+ Sun, 10 Sep 2023 11:24:57 -0700 (PDT)
 From: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
 Cc: dsx724 <da@lessconfused.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Suniel Mahesh <sunil@amarulasolutions.com>,
  Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
-Subject: [PATCH v3 0/4] support for booting the compressed U-boot binary on
- Rockchip based ARM64 SOC's
-Date: Sun, 10 Sep 2023 23:54:44 +0530
-Message-Id: <20230910182448.285542-1-abbaraju.manojsai@amarulasolutions.com>
+Subject: [PATCH v3 1/4] spl: fit: support for booting a GZIP-compressed U-boot
+ binary
+Date: Sun, 10 Sep 2023 23:54:45 +0530
+Message-Id: <20230910182448.285542-2-abbaraju.manojsai@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230725035101.281325-1-abbaraju.manojsai@amarulasolutions.com>
+In-Reply-To: <20230910182448.285542-1-abbaraju.manojsai@amarulasolutions.com>
 References: <20230725035101.281325-1-abbaraju.manojsai@amarulasolutions.com>
+ <20230910182448.285542-1-abbaraju.manojsai@amarulasolutions.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=y
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,127 +94,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patchset adds the support on Rockchip based ARM64 SOC's that  compress the U-BOOT proper along with dtb
-and ATF in FIT image format.Second stage bootloader(SPL) loads the compressed binaries, uncompress
-them and  handover control to the next stage.
+If GZIP Compression support is enabled, GZIP compressed U-Boot binary
+will be at a specified RAM location which is defined at
+CONFIG_SYS_LOAD_ADDR and will be assign it as the source address.
 
-Changes for V3 :-
+gunzip function in spl_load_fit_image ,will decompress the GZIP
+compressed U-Boot binary which is placed at
+source address(CONFIG_SYS_LOAD_ADDR)  to the default
+CONFIG_SYS_TEXT_BASE location.
 
-1. Replaced spl_decompression_enabled() function instead of checking IS_ENABLED(CONFIG_SPL_GZIP)
-   and IS_ENABLED(CONFIG_SPL_LZMA) in spl_fit.c
+spl_load_fit_image function will load the decompressed U-Boot
+binary, which is placed at the CONFIG_SYS_TEXT_BASE location.
 
-2. Removed extra wrapping parentheses in spl_decompression_enabled().
+Signed-off-by: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
+Signed-off-by: Suniel Mahesh <sunil@amarulasolutions.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+Changes in v3:
+ - Replaced spl_decompression_enabled() function instead of
+   checking IS_ENABLED(CONFIG_SPL_GZIP).
 
-Size Comparision between compressed and uncompressed binaries :-
+ - Removed checking IS_ENABLED(CONFIG_SPL_LZMA) in spl_decompression_enabled()
+   function.
 
-       size of uncompressed binary    :- 9.0M (94,21,824 bytes)
-         manoj:u-boot$ ls -lb u-boot-rockchip.bin
-        -rw-rw-r-- 1 manoj manoj 9421824 Sep 10 22:22 u-boot-rockchip.bin
+Changes in v2:
+ - New patch for v2
 
-       size of GZIP compressed binary :- 8.6M (89,85,088 bytes)
-         manoj:u-boot$ ls -lb u-boot-rockchip.bin
-         -rw-rw-r-- 1 manoj manoj 8985088 Jul 25 07:42 u-boot-rockchip.bin
+ common/spl/spl_fit.c |  9 ++++++---
+ include/spl.h        | 10 ++++++++++
+ 2 files changed, 16 insertions(+), 3 deletions(-)
 
-       size of LZMA compressed binary :- 8.6 M (90,06,592 bytes)
-         manoj:u-boot$ ls -lb u-boot-rockchip.bin
-         -rw-rw-r-- 1 manoj manoj 9006592 Jul 25 07:47 u-boot-rockchip.bin
-
-Test results of  Booting time using bootstage command in Uboot command prompt on roc-rk3399-pc board :-
-
-1) Uncompressed U-BOOT : Total boot time ≈ 12.063971 seconds
-=> bootstage report
-Timer summary in microseconds (10 records):
-       Mark    Elapsed  Stage
-          0          0  reset
-  1,833,884  1,833,884  board_init_f
-  2,959,528  1,125,644  board_init_r
-  5,224,521  2,264,993  eth_common_init
-  5,523,428    298,907  eth_initialize
-  5,523,606        178  main_loop
-  5,523,764        158  usb_start
- 12,063,971  6,540,207  cli_loop
-
-2) GZIP Compressed U-BOOT : Total time ≈ 12.824968 seconds
-
-=> bootstage report
-Timer summary in microseconds (10 records):
-       Mark    Elapsed  Stage
-          0          0  reset
-  2,594,709  2,594,709  board_init_f
-  3,719,969  1,125,260  board_init_r
-  5,985,450  2,265,481  eth_common_init
-  6,284,371    298,921  eth_initialize
-  6,284,549        178  main_loop
-  6,284,708        159  usb_start
- 12,824,968  6,540,260  cli_loop
-
-3) LZMA Compressed U-BOOT : Total time ≈ 17.025004 seconds
-
-=> bootstage report
-Timer summary in microseconds (10 records):
-       Mark    Elapsed  Stage
-          0          0  reset
-  6,852,254  6,852,254  board_init_f
-  7,940,143  1,087,889  board_init_r
- 10,190,458  2,250,315  eth_common_init
- 10,487,254    296,796  eth_initialize
- 10,487,432        178  main_loop
- 10,487,590        158  usb_start
- 17,025,004  6,537,414  cli_loop
-
-
-As per suggestion from Mr.Jonas Karlman (jonas@kwiboo.se) through Patchset V2,that check boot time
-with enabling CONFIG_SPL_FIT_SIGNATURE that might impact boot time.
-
-Tried to check the boot time with CONFIG_FIT_SIGNATURE enabled, I didnt find any significant
-boot time improvement  with enabling CONFIG_SPL_FIT_SIGNATURE.
-
-Comparision of GZIP and LZMA compressed U-boot Boot time with and without Enable of CONFIG_FIT_SIGNATURE :-
-
-- GZIP Compressed U-BOOT  and CONFIG_FIT_SIGNATURE enabled  :-  Total time ≈ 13.283998 seconds
-
-=> bootstage report
-Timer summary in microseconds (10 records):
-       Mark    Elapsed  Stage
-          0          0  reset
-  3,052,571  3,052,571  board_init_f
-  4,179,787  1,127,216  board_init_r
-  6,445,472  2,265,685  eth_common_init
-  6,744,416    298,944  eth_initialize
-  6,744,593        177  main_loop
-  6,744,751        158  usb_start
- 13,283,998  6,539,247  cli_loop
-
-- GZIP Compressed U-BOOT and CONFIG_FIT_SIGNATURE disabled  :- Total time ≈ 12.824968 seconds
-
-
-- LZMA Compressed U-BOOT  and CONFIG_FIT_SIGNATURE enabled  :-  Total time ≈ 17.005996 seconds
-
-   => bootstage report
-Timer summary in microseconds (10 records):
-       Mark    Elapsed  Stage
-          0          0  reset
-  6,775,071  6,775,071  board_init_f
-  7,902,443  1,127,372  board_init_r
- 10,167,546  2,265,103  eth_common_init
- 10,466,418    298,872  eth_initialize
- 10,466,595        177  main_loop
- 10,466,753        158  usb_start
- 17,005,996  6,539,243  cli_loop
-
-- LZMA Compressed U-BOOT  and CONFIG_FIT_SIGNATURE disabled  :- Total time ≈ 17.025004 seconds
-
-Manoj Sai (4):
-  spl: fit: support for booting a GZIP-compressed U-boot binary
-  spl: fit: support for booting a LZMA-compressed U-boot binary
-  rockchip: Add support to generate GZIP compressed U-boot binary
-  rockchip: Add support to generate LZMA compressed U-boot binary
-
- arch/arm/dts/rockchip-u-boot.dtsi | 11 +++++++++++
- common/spl/spl_fit.c              | 20 +++++++++++++++++---
- include/spl.h                     | 10 ++++++++++
- 3 files changed, 38 insertions(+), 3 deletions(-)
-
---
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 730639f756..eb97259f57 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -239,14 +239,14 @@ static int spl_load_fit_image(struct spl_load_info *info, ulong sector,
+ 	bool external_data = false;
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_FPGA) ||
+-	    (IS_ENABLED(CONFIG_SPL_OS_BOOT) && IS_ENABLED(CONFIG_SPL_GZIP))) {
++	    (IS_ENABLED(CONFIG_SPL_OS_BOOT) && spl_decompression_enabled())) {
+ 		if (fit_image_get_type(fit, node, &type))
+ 			puts("Cannot get image type.\n");
+ 		else
+ 			debug("%s ", genimg_get_type_name(type));
+ 	}
+ 
+-	if (IS_ENABLED(CONFIG_SPL_GZIP)) {
++	if (spl_decompression_enabled()) {
+ 		fit_image_get_comp(fit, node, &image_comp);
+ 		debug("%s ", genimg_get_comp_name(image_comp));
+ 	}
+@@ -281,7 +281,10 @@ static int spl_load_fit_image(struct spl_load_info *info, ulong sector,
+ 			return 0;
+ 		}
+ 
+-		src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
++		if (spl_decompression_enabled() && image_comp == IH_COMP_GZIP)
++			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
++		else
++			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
+ 		length = len;
+ 
+ 		overhead = get_aligned_image_overhead(info, offset);
+diff --git a/include/spl.h b/include/spl.h
+index 93e906431e..3a7e448cc7 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -897,4 +897,14 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size);
+ 
+ void board_boot_order(u32 *spl_boot_list);
+ void spl_save_restore_data(void);
++
++/*
++ * spl_decompression_enabled() - check decompression support is enabled for SPL build
++ *
++ * Returns  true  if decompression support is enabled, else False
++ */
++static inline bool spl_decompression_enabled(void)
++{
++	return IS_ENABLED(CONFIG_SPL_GZIP);
++}
+ #endif
+-- 
 2.25.1
 
