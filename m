@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0522EE49A4
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 18:25:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8245DEE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 18:25:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCF4F86CD7;
-	Sun, 10 Sep 2023 20:25:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33FC486CEB;
+	Sun, 10 Sep 2023 20:25:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Fx38bjZm";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Az6jTFaD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39F5586BFF; Sun, 10 Sep 2023 20:25:09 +0200 (CEST)
+ id 7547B86CEB; Sun, 10 Sep 2023 20:25:11 +0200 (CEST)
 Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
  [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCBEA86CEE
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 20:25:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B07FE86CF3
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 20:25:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=abbaraju.manojsai@amarulasolutions.com
 Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3aa1446066aso2666295b6e.1
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 11:25:05 -0700 (PDT)
+ 5614622812f47-3a9f87adfe1so2971831b6e.1
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 11:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1694370304; x=1694975104;
+ d=amarulasolutions.com; s=google; t=1694370307; x=1694975107;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YludUDClnB7NiU9lKL4p9hbZieK2S4U9NN5JPvjKYso=;
- b=Fx38bjZmbjjl4n+2WH8/p3RAM0s1M6PHH2Vq0zO1nDrl4MfsrMM9wQD4jm+5bHyj+z
- hD+JT64ACLXZ80X2PCn0GrlDWMjM8TnoY1BWJJHAqjZRglE42eLlulT4vJhzO7S4zmYm
- sqV5+bp3t+CToXNfR+5kWm2FEB0PTIo6WIvlQ=
+ bh=UMKD00v3SvGytGxeXJ+8xcW77YWBFMkm0BWwKHOWhe4=;
+ b=Az6jTFaDMbmav8KjX7+jCbmn6wNiyuDRa+ZuEnokIZtFjBDIj0RABfFBVRfkIShzCv
+ o8DBmzFAjL/Ye4Hb910QdC/aVXUx5PopIUQckLiQJ2zjpmFDpIhobjZRB3b2XGWveX6C
+ nX4nWbCKKE89P9ndvReCNSqVglYHIqYz8ntyg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694370304; x=1694975104;
+ d=1e100.net; s=20230601; t=1694370307; x=1694975107;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YludUDClnB7NiU9lKL4p9hbZieK2S4U9NN5JPvjKYso=;
- b=kQNZSflD7WVbI4uZj2osQ6/ViXz6ZQXXppVdY/dUdIbp86H7CGi3cIyJM/oWwPxXed
- p7uSCOXzPUOoOvN1M5XuBs3MSYnN91o4pHG5zPh2GYALYeF+lNSAQvT5AHyO/dUDysEn
- i5KzKpM56vGOyFJIgkH+2urtMOz+aXWWZJmbJTjfXJVUOCRUGoluUdpsdbsXgbnUKq82
- 4MspfvsuQyrEbiX32szatYr3vCsnuTAZQ4u9L0uk6A3XHRN5o2WiWnUb9zSBHN3rFXWw
- TuAS2WnH+KMr7g6fWtW+cOUt0rDsIoIYtZQP2lDO5Gzxl3Tee5zYtm65YgGjAbuhF3zZ
- t4xA==
-X-Gm-Message-State: AOJu0Yx0DY8ccHRsw4nF7gNv+k/Vi2SNCSVOuLd4Q6vmbDgamVWyWVyb
- UEm4KtKqGK6YWjC2jYa0B7mt4A==
-X-Google-Smtp-Source: AGHT+IHJdGbppb/Ek/HZQ+ulSPdkw9SRQ7dMmHcVpUBGTvGmueraeaoQTou+bbkPFik5LN8CiNYypA==
-X-Received: by 2002:a05:6808:144c:b0:3a1:f237:ec62 with SMTP id
- x12-20020a056808144c00b003a1f237ec62mr11892553oiv.48.1694370304660; 
- Sun, 10 Sep 2023 11:25:04 -0700 (PDT)
+ bh=UMKD00v3SvGytGxeXJ+8xcW77YWBFMkm0BWwKHOWhe4=;
+ b=bXb5qkNQzEATL4eSO7wEXzStkxMqkBH8IwIw4dtBdHnM/Ra+bBghXZqiT7kBp8HIkT
+ s7QZbZkyH3yZUK+IwIWaRPEhKvm+LsFbbX5BsFwrtJ4VvtiiFIvS8qTWWbacZfi4xuJB
+ b8iRQb8ZbDHHfpo5ZHAWnGF+bDDOiwekBDeuOe/5XFN7kAvm13Fl4uoxr9FrRctAbsO3
+ AYXYvstfcheoY5fP2+Zc474SfeAkxFF6AMhsZHwiQhoThJEQ6VFUYrChN6nrmNAUxJqb
+ qBtQzhXcldvuFFfaGAce1BkcoEbZi650yX2kTQfMjAbEel6EiZ5SdXhKUD/xYbWw1Ctl
+ WgPw==
+X-Gm-Message-State: AOJu0YwMo+gdaelLS1VTr77FYUWE2pNWjchPFwG6u1+UhVzXsCdAygR6
+ aM5VQ5CTZBC4WPXOZ3hkRmRxcA==
+X-Google-Smtp-Source: AGHT+IFaUFWGRVvPgLoYI467zmT7YzJ6DEYHI9OwTXsLO44ZxzBTFyaCFvzFoLIVu7MzwkemSfrhsw==
+X-Received: by 2002:a05:6870:5a3:b0:1d5:1a99:538f with SMTP id
+ m35-20020a05687005a300b001d51a99538fmr10474658oap.15.1694370307417; 
+ Sun, 10 Sep 2023 11:25:07 -0700 (PDT)
 Received: from localhost.localdomain ([49.204.31.103])
  by smtp.gmail.com with ESMTPSA id
- a5-20020a655c85000000b0055b61cd99a1sm3720593pgt.81.2023.09.10.11.25.01
+ a5-20020a655c85000000b0055b61cd99a1sm3720593pgt.81.2023.09.10.11.25.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Sep 2023 11:25:04 -0700 (PDT)
+ Sun, 10 Sep 2023 11:25:07 -0700 (PDT)
 From: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
 Cc: dsx724 <da@lessconfused.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Suniel Mahesh <sunil@amarulasolutions.com>,
  Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
-Subject: [PATCH v3 3/4] rockchip: Add support to generate GZIP compressed
+Subject: [PATCH v3 4/4] rockchip: Add support to generate LZMA compressed
  U-boot binary
-Date: Sun, 10 Sep 2023 23:54:47 +0530
-Message-Id: <20230910182448.285542-4-abbaraju.manojsai@amarulasolutions.com>
+Date: Sun, 10 Sep 2023 23:54:48 +0530
+Message-Id: <20230910182448.285542-5-abbaraju.manojsai@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230910182448.285542-1-abbaraju.manojsai@amarulasolutions.com>
 References: <20230725035101.281325-1-abbaraju.manojsai@amarulasolutions.com>
@@ -94,8 +94,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for generating a GZIP-compressed U-boot binary with the
-help of binman, if CONFIG_SPL_GZIP is selected.
+Add support for generating a LZMA-compressed U-boot binary with the
+help of binman, if CONFIG_SPL_LZMA is selected.
 
 Signed-off-by: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -107,31 +107,31 @@ Changes in v3:
 Changes in v2:
  - New patch for v2
 
- arch/arm/dts/rockchip-u-boot.dtsi | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm/dts/rockchip-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index be2658e8ef..8f248f941f 100644
+index 8f248f941f..c8c928c7e5 100644
 --- a/arch/arm/dts/rockchip-u-boot.dtsi
 +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -56,10 +56,17 @@
- #else
- 					arch = "arm";
+@@ -58,6 +58,8 @@
  #endif
-+#if defined(CONFIG_SPL_GZIP)
-+					compression = "gzip";
-+#else
+ #if defined(CONFIG_SPL_GZIP)
+ 					compression = "gzip";
++#elif defined(CONFIG_SPL_LZMA)
++					compression = "lzma";
+ #else
  					compression = "none";
-+#endif
- 					load = <CONFIG_TEXT_BASE>;
- 					entry = <CONFIG_TEXT_BASE>;
+ #endif
+@@ -66,6 +68,8 @@
  					u-boot-nodtb {
-+#if defined(CONFIG_SPL_GZIP)
-+					compress = "gzip";
-+#endif
+ #if defined(CONFIG_SPL_GZIP)
+ 					compress = "gzip";
++#elif defined(CONFIG_SPL_LZMA)
++					compress = "lzma";
+ #endif
  					};
  #ifdef CONFIG_SPL_FIT_SIGNATURE
- 					hash {
 -- 
 2.25.1
 
