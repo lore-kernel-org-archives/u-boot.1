@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF63C71153
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A3CEE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:15:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1274B86D21;
-	Sun, 10 Sep 2023 21:14:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6732A86D17;
+	Sun, 10 Sep 2023 21:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dvPQw55f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="awJ7V9dp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E4A586D13; Sun, 10 Sep 2023 21:14:51 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 9517486D25; Sun, 10 Sep 2023 21:14:53 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6168086CF5
+ by phobos.denx.de (Postfix) with ESMTPS id 6880886CF6
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d77a4e30e97so3345786276.2
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-58d31f142eeso36642647b3.0
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694373287; x=1694978087; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AoTmSpU9+hJIeYy5TWMq4SP3tVazYoHaBXCYKJiHttA=;
- b=dvPQw55f8kYiBgmitUPBvnTkEhDwTchl5jINo+rkk/BVakzCqOtWlFzJpfJ9Cw/No6
- EbUwZ+6/FXR65GOup9vynZB37XUxmNSwGc/XoAS8yC7W4GLiVmsno0D6kj7GNpgJUNSC
- oJpnuiwPK4tvKDeedcBlirRVYz5yFnOV6oTbk=
+ bh=Wile7dxFn83S31Es9mdT4j8ihcfgHWh+onY+LFYeFNM=;
+ b=awJ7V9dpOyF08KdTsCFET0IVF83l+8q9HtEhxv0+ncXHZHRwgcD9JzkeSUeQNWmikN
+ IEO5Ys1JM+K2gRhGnY3gIlyYA9aPgdGjxDd4XV1rmCX+pf/Z7TPiaE+3yI+ONFpt1e7R
+ StxXeBu2iTIXT0G1DaArXKxYSwZUOF/27GNyc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1694373287; x=1694978087;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AoTmSpU9+hJIeYy5TWMq4SP3tVazYoHaBXCYKJiHttA=;
- b=urZPiaGZB67NHr0Io6bGBvDdoYxBMy4iV6WxnTul5exznFag8PpbCXE+/YTZ73aCDr
- 9uirryticRc6mE+38oHTi4T69/vnyBYf3l42atMHmxMm30wW9Q38ZJH2GcEQ/wtvUdlR
- Gb8qTO9MpjDLAH9ySZoiygjf1VOx2LPtbTyxk+JaaHOkjNfSFIw7nkLM9He3GP0/25ZX
- Kyh2zhN654lCF24GIyGZx1fz7QLoqmgqM07EttqUqDzqi/4mwLahvb16oS1fSEAS9eJd
- aijYAOT1kQz918/6LpcnJGhP2KjSnBZQN/FFxwwvhhLZXAnnVhwRNYfaPrZy8ChfGLnt
- wBfA==
-X-Gm-Message-State: AOJu0Yw4qQqOUhELFH92o20vL0dOHkYuIwXtg6YnsxmasOuk0IwUPCke
- CdtFAgXVi/UC+TooI6lpwxZ/tOUl5jttS55jvrmY6Q==
-X-Google-Smtp-Source: AGHT+IEefP4fM5BZkmOoCa96Ne7TS5SRxKNJTlBrIyAm4SXprlTyHrAO+JIM/Fa7M8srxCKPPWAKrzjsFIi9GM0cTmU=
-X-Received: by 2002:a25:97c3:0:b0:d0a:a1fa:b8e4 with SMTP id
- j3-20020a2597c3000000b00d0aa1fab8e4mr7918377ybo.38.1694373286956; Sun, 10 Sep
- 2023 12:14:46 -0700 (PDT)
+ bh=Wile7dxFn83S31Es9mdT4j8ihcfgHWh+onY+LFYeFNM=;
+ b=u+yXZoaNZCdfOu5H0T/qp35ExOX3lWkKCxfzmdZzdYJwMMXrUv0ObFaqtqxErRc7uV
+ fObrUgtBYIq4r+6mwFYjcmFgnmxMRdwL0W8btUT7rDK8lhmaivG2WZFH2SEbZXAXqRfI
+ l2++Ae9HDX9yamG2TTGg3yOZGp7dTp4XaPKoQQfa3Fwb+XUCt1bCn4X6uYDXZXT8sAer
+ vRltckxHtzOc307i4mr1uguh0G7HLn1oO58ZEgGBuhEgvJdo2zmpDzV6wmqZIaXV1Pd3
+ cwJbFc+bRT9VnKQ3onu1YWHk/y64PpWj3aADlDfUniQzwPeRptKF9CtsixIBkvZL1kNH
+ qGuA==
+X-Gm-Message-State: AOJu0YyJMUkOla5pI3PE3lqbIHBwV75BZpRCOlo9AedC+kdY/eALSQ6V
+ 0VcetsJzNwfl9O4MZD9EEBm5l092OzQgWpiHYrRF/w==
+X-Google-Smtp-Source: AGHT+IHObuUH7xfCd29xoQ8TJAkkeCYIWDFSpfhdrO5CFc4iy6HczsGkEpE7YurNgyAXmACW7T3RZJBw5yxDITQqGH4=
+X-Received: by 2002:a25:2648:0:b0:d7b:9a4b:5a72 with SMTP id
+ m69-20020a252648000000b00d7b9a4b5a72mr7735112ybm.31.1694373286973; Sun, 10
+ Sep 2023 12:14:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
- <20230908120002.29851-4-sughosh.ganu@linaro.org>
-In-Reply-To: <20230908120002.29851-4-sughosh.ganu@linaro.org>
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-6-takahiro.akashi@linaro.org>
+In-Reply-To: <20230906024011.17488-6-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 10 Sep 2023 13:13:32 -0600
-Message-ID: <CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com>
-Subject: Re: [PATCH 3/8] binman: capsule: Generate capsules through config file
-To: sughosh.ganu@linaro.org
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Tom Rini <trini@konsulko.com>,
- Malte Schmidt <malte.schmidt-oss@weidmueller.com>
+Date: Sun, 10 Sep 2023 13:13:28 -0600
+Message-ID: <CAPnjgZ2GwRi4TyNVzcm9UZOtvmhj+2ZwH77Z62VvNNH56D6spQ@mail.gmail.com>
+Subject: Re: [RFC 5/6] firmware: scmi: add pseudo pinctrl protocol support on
+ sandbox
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com, 
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,40 +83,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi AKASHI,
 
-On Fri, 8 Sept 2023 at 06:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> Add support in binman for generating capsules by reading the capsule
-> parameters through a config file. Also add a test case in binman for
-> this mode of capsule generation.
+> With this patch, sandbox SCMI agent can handle pinctrl protocol.
+> This feature is used in an unit test for SCMI pinctrl.
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 > ---
+>  arch/sandbox/dts/test.dts                  | 115 ++++
+>  drivers/firmware/scmi/sandbox-scmi_agent.c | 722 +++++++++++++++++++++
+>  2 files changed, 837 insertions(+)
 >
->  tools/binman/entries.rst                   | 35 ++++++++++++
->  tools/binman/etype/efi_capsule_cfg_file.py | 66 ++++++++++++++++++++++
->  tools/binman/ftest.py                      | 29 ++++++++++
->  tools/binman/test/319_capsule_cfg.dts      | 15 +++++
->  4 files changed, 145 insertions(+)
->  create mode 100644 tools/binman/etype/efi_capsule_cfg_file.py
->  create mode 100644 tools/binman/test/319_capsule_cfg.dts
+> diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> index dc0bfdfb6e4b..d2ddea801995 100644
+> --- a/arch/sandbox/dts/test.dts
+> +++ b/arch/sandbox/dts/test.dts
+> @@ -723,9 +723,124 @@
+>                                         };
+>                                 };
+>                         };
+> +
+> +                       pinctrl_scmi: protocol@19 {
+> +                               reg = <0x19>;
+> +
+> +                               pinctrl-names = "default","alternate";
+> +                               pinctrl-0 = <&scmi_pinctrl_gpios>, <&scmi_pinctrl_i2s>;
+> +                               pinctrl-1 = <&scmi_pinctrl_spi>, <&scmi_pinctrl_i2c>;
+> +
+> +#if 0
 
-I think we discussed this some time ago. The problem I have with this
-is that it adds another way of specifying the image description,
-separate from the binman definition. This introduces all sorts of
-problems:
+Are these alternatives that you are testing?
 
-- the question of where the filenames are located, something which
-binman tries to handle cohesively
-- binman has no knowledge of what is being put in the capsules
-- the resulting fdtmap lacks any information about what is in the capsules
-- it seems to create two ways of doing the same thing
-
-Binman can presumably already create multiple capsule files, just by
-adding to the description.
-
-What need does this feature meet?
+The bindings  look OK to me - is this how it is done in Linux?
 
 Regards,
 Simon
