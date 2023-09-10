@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65FF2C71153
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB89AEE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 19:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C980A86D16;
-	Sun, 10 Sep 2023 21:14:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D74286D3C;
+	Sun, 10 Sep 2023 21:15:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R/0kQYwu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sr/Hbxll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47DB186D00; Sun, 10 Sep 2023 21:14:56 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id A5D4C86D14; Sun, 10 Sep 2023 21:14:58 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70E3B86D01
+ by phobos.denx.de (Postfix) with ESMTPS id 8567E86D0E
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-d7260fae148so3374537276.1
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3ab244f2c89so2891243b6e.3
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694373287; x=1694978087; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rhjnb565dv/nh9Gb69ArKQq+I84VvsnYOTJBidPAenQ=;
- b=R/0kQYwuZMTm/Eq/111dzWxmzE0pNcaG0ePv3IooXyBJ9UMLJyTsLFimhqVw5kGd0H
- eHx+0wf9UM8bEluwW6KIXTAPjHgWTQSkZaJ1QWcz1neH77+5LoJhMJBnEZrYWaUAVvtt
- hlWZzLnr5sxK93Z5JvxSc03LaxhqIYKqXlKRs=
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7R2cukMRb2zFm6hs1Acgf/c+GUvZlDBfejwWXzV9WMk=;
+ b=Sr/HbxllpUosaH6t5HrDwb9hkYWopU7RDUfeR9edmOZORFHEi3FrqW6My7yS7pkGdU
+ I8egz3pUzd8I43oscFFpcR4CxLFdwH9XLWOQe+GVuF3QMqx3gOFfeOi78fIMGtnuGTkw
+ zjaP9VlzXrDTMmDk5wJ5rLanj2H8eopJxpMBU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1694373287; x=1694978087;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rhjnb565dv/nh9Gb69ArKQq+I84VvsnYOTJBidPAenQ=;
- b=g+p6vszSv+0Rin2klszZTs8e+qgB+g0fd8dWiEIreWLojIZoG12sIT4YWgNnTDHc59
- 3bEELVjf0PMDtrgi3wQY8/M3ZNswiFtaK6wkqkCHW0Wd916orbQPyqkoY5k4dot4CMVq
- Uv/bAFl0+3T4UFWwXGTn6/SpycXWtHOm2j6loKxoxoUfyKJo44aN9PviPL7SM46QwTsZ
- 7xFURBoGoB8clt5hcO1jWCsb0w+wK6cr7zT30yY4ghrc+qLp4qbfD5qU8rrC1jFvymg8
- suOhBpJd5+qvOIBXx1/y7SbzvB2PhW35WwvsFUXhayLKYgsFTXXJi07EBhDq0BVSUO+E
- gnkw==
-X-Gm-Message-State: AOJu0YylCzfhXHUK8Lb7wQvxLMfCvHCqUDSoY97LLCNxRVONcZLTPQs2
- gZFt22DcD41Ku/338UCN0Fs+nTjfDugM92JVYFla6w==
-X-Google-Smtp-Source: AGHT+IEZn0nCHn8NDNTzYvZxzFE0ievKwKRW6GffYwJTTRRC02Qa0mBfTRDwNdopuoFtsGg+WAmeAyKwLl2ijGvSetw=
-X-Received: by 2002:a25:d344:0:b0:d47:b3ac:e255 with SMTP id
- e65-20020a25d344000000b00d47b3ace255mr6866941ybf.43.1694373286967; Sun, 10
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7R2cukMRb2zFm6hs1Acgf/c+GUvZlDBfejwWXzV9WMk=;
+ b=O6ez/Y5H8col+jcQmC1j/3nZd2iS6B07mUrx7k/glEgIu8kLpJZLsgxa0wnAQcHR/x
+ OtSZ4iYxDYXrp2781YVWlFULaAVes9g07p9iea406vVHECjCxXeEEO9zrqcgUZuHaFfi
+ BAcGpKNDFrDoqhaJZhzr7/JfSxl3l5N8kRbfjdJgRA9VrPEi6rhEcgtElFbJM4f7mhF9
+ 0CBrkeorQf8+TOTebaxuw/tvUQeWu4BB3eH0t5+ZVaMRrLogw4VanTfedeCXbfbK2WVg
+ QrYNYiANVf+Uw1i3cCDrMfl78qvOO41xEjFwHJSTPCZF2kOMmxQg61Xv6Xc5pLAiFToR
+ GsSg==
+X-Gm-Message-State: AOJu0YzdvqJXXSiZZ5mvp87RAHs3OSMZAaK0XP050QbfHJEH1AyY5Y8y
+ GVq73AowWauCF8UWfV97ZqyBdviYsGN9oTOR8h9uFw==
+X-Google-Smtp-Source: AGHT+IGr5c6Gsw2REYpuF54RFI6QjsTWHTCwGXq361UvNwzInlTS6vhXLYEGxBoKwaBJs33IlIyl2CeNK6sstHwh7f4=
+X-Received: by 2002:a05:6808:1b1f:b0:3a8:50ba:fb1 with SMTP id
+ bx31-20020a0568081b1f00b003a850ba0fb1mr11106276oib.18.1694373286991; Sun, 10
  Sep 2023 12:14:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230903204000.96999-1-kettenis@openbsd.org>
- <CAPnjgZ2D6Fq5WnSxjxD2fzCZkZB0yDAk7mOda7bTuUf-KZLmhA@mail.gmail.com>
- <87bkeegmgc.fsf@bloch.sibelius.xs4all.nl>
- <CAPnjgZ1R8c2qCaraQavRr+=MiAiHK38gD1NS2FHdhkXV=XKVog@mail.gmail.com>
- <87v8cif53v.fsf@bloch.sibelius.xs4all.nl>
-In-Reply-To: <87v8cif53v.fsf@bloch.sibelius.xs4all.nl>
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-5-takahiro.akashi@linaro.org>
+ <CAPnjgZ3z1srw_ZxfV2aRz1FAzTR=M==_rRPMFFrd7BdrGsu4AQ@mail.gmail.com>
+ <ZPqjz3+Mlla8zxDS@octopus>
+In-Reply-To: <ZPqjz3+Mlla8zxDS@octopus>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 10 Sep 2023 13:13:16 -0600
-Message-ID: <CAPnjgZ1zta2DsTAUwHmxY8QFfPF0BFo4a6_v_J9nnVuCVBru=w@mail.gmail.com>
-Subject: Re: [PATCH v2] bootstd: Make efi_mgr bootmeth work for non-sandbox
- setups
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: kettenis@openbsd.org, u-boot@lists.denx.de, xypron.glpk@gmx.de
+Date: Sun, 10 Sep 2023 13:13:24 -0600
+Message-ID: <CAPnjgZ3Va35FLk6xF8iyoKtSe5_F_o8Ym7o8jdgXtGMUS6MJ3w@mail.gmail.com>
+Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ etienne.carriere@st.com, michal.simek@amd.com, linus.walleij@linaro.org, 
+ Oleksii_Moisieiev@epam.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,108 +84,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+Hi,
 
-On Sun, 10 Sept 2023 at 08:57, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+On Thu, 7 Sept 2023 at 22:32, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> > From: Simon Glass <sjg@chromium.org>
-> > Date: Thu, 7 Sep 2023 09:57:34 -0600
-> >
-> > Hi Mark,
-> >
-> > On Thu, 7 Sept 2023 at 07:08, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> > >
-> > > > From: Simon Glass <sjg@chromium.org>
-> > > > Date: Thu, 7 Sep 2023 06:23:10 -0600
-> > > >
-> > > > Hi Mark,
-> > > >
-> > > > On Sun, 3 Sept 2023 at 14:40, Mark Kettenis <kettenis@openbsd.org> wrote:
-> > > > >
-> > > > > Enable the bootflow based on this bootmeth if the BootOrder EFI
-> > > > > variable is set.
-> > > > >
-> > > > > Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> > > > > ---
-> > > > >
-> > > > > ChangeLog:
-> > > > >
-> > > > > v2: - Initialize EFI subsystem to populate EFI variables
-> > > > >
-> > > > >
-> > > > >  boot/bootmeth_efi_mgr.c | 17 ++++++++++++++++-
-> > > > >  1 file changed, 16 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > > > > index e9d973429f..e6c42d41fb 100644
-> > > > > --- a/boot/bootmeth_efi_mgr.c
-> > > > > +++ b/boot/bootmeth_efi_mgr.c
-> > > > > @@ -14,6 +14,8 @@
-> > > > >  #include <bootmeth.h>
-> > > > >  #include <command.h>
-> > > > >  #include <dm.h>
-> > > > > +#include <efi_loader.h>
-> > > > > +#include <efi_variable.h>
-> > > > >
-> > > > >  /**
-> > > > >   * struct efi_mgr_priv - private info for the efi-mgr driver
-> > > > > @@ -46,13 +48,26 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
-> > > > >  static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> > > > >  {
-> > > > >         struct efi_mgr_priv *priv = dev_get_priv(dev);
-> > > > > +       efi_status_t ret;
-> > > > > +       efi_uintn_t size;
-> > > > > +       u16 *bootorder;
-> > > > >
-> > > > >         if (priv->fake_dev) {
-> > > > >                 bflow->state = BOOTFLOWST_READY;
-> > > > >                 return 0;
-> > > > >         }
-> > > > >
-> > > > > -       /* To be implemented */
-> > > > > +       ret = efi_init_obj_list();
-> > > >
-> > > > Doesn't this start up the whole EFI system? Is there a cheaper way to
-> > > > see if the variable subsystem exists, or can work?
-> > >
-> > > A fair bit of it at least.  With the possible exception of launching
-> > > EFI capsules (which shouldn't happen for a "normal" boot), I don't
-> > > think this is very expensive though.
-> > >
-> > > There currently isn't a way to only initialize the variable subsystem;
-> > > we can't just call efi_init_variables() here since we have to also
-> > > call efi_disks_register() and a later efi_init_obj_list() call would
-> > > call efi_init_variables() again, which would leak memory.
-> > >
-> > > Alternatively we could just unconditionally declare the efi_mgr
-> > > bootmeth as "ready" (like you already do for sandbox).  That would
-> > > postpone initialization of the EFI subsystem until we actually execute
-> > > this bootmeth.
-> > >
-> > > But we need to do something before we switch more targets to standard
-> > > boot since otherwise booting through the EFI boot manager is just
-> > > plain broken.
-> >
-> > Yes...
-> >
-> > I don't have any great ideas on this. If we could get the EFI code
-> > better integrated into U-Boot then perhaps we would not need this
-> > 'monolithm' init?
+> Hi Simon,
 >
-> You'll have to take that up with the maintainers of the EFI loader
-> subsystem.  I just want to repair the breakage that was introduced
-> with bootstd.
+> On Thu, Sep 07, 2023 at 06:23:05AM -0600, Simon Glass wrote:
+> > Hi AKASHI,
+> >
+> > On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
+> > <takahiro.akashi@linaro.org> wrote:
+> > >
+> > > This DM-compliant driver deals with SCMI pinctrl protocol and presents
+> > > gpio devices exposed by SCMI firmware (server).
+> > >
+> > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > ---
+> > >  drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
+> > >  1 file changed, 539 insertions(+), 5 deletions(-)
+> > >
+> > > diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
+> > > index 3ebdad57b86c..73d385bdbfcc 100644
+> > > --- a/drivers/pinctrl/pinctrl-scmi.c
+> > > +++ b/drivers/pinctrl/pinctrl-scmi.c
+> > > @@ -11,21 +11,20 @@
+> > >  #include <malloc.h>
+> > >  #include <scmi_agent.h>
+> > >  #include <scmi_protocols.h>
+> > > +#include <asm-generic/gpio.h>
+> > >  #include <dm/device_compat.h>
+> > > +#include <dm/device-internal.h>
+> > > +#include <dm/lists.h>
+> > >  #include <dm/pinctrl.h>
+> > >
+> > [..]
+> >
+> > > +
+> > > +U_BOOT_DRIVER(scmi_gpio) = {
+> > > +       .name = "scmi_gpio",
+> > > +       .id = UCLASS_GPIO,
+> > > +       .of_match = scmi_gpio_ids,
+> > > +       .of_to_plat = scmi_gpio_probe,
+> > > +       .ops = &scmi_gpio_ops,
+> > > +       .plat_auto = sizeof(struct scmi_pinctrl_gpio_plat),
+> > > +};
+> > > +
+> > > +/**
+> > > + * scmi_gpiochip_register - Create a pinctrl-controlled gpio device
+> > > + * @parent:    SCMI pinctrl device
+> > > + *
+> > > + * Create a pinctrl-controlled gpio device
+> > > + *
+> > > + * Return:     0 on success, error code on failure
+> > > + */
+> > > +static int scmi_gpiochip_register(struct udevice *parent)
+> > > +{
+> > > +       ofnode node;
+> > > +       struct driver *drv;
+> > > +       struct udevice *gpio_dev;
+> > > +       int ret;
+> > > +
+> > > +       /* TODO: recovery if failed */
+> > > +       dev_for_each_subnode(node, parent) {
+> > > +               if (!ofnode_is_enabled(node))
+> > > +                       continue;
+> >
+> > Can we not rely on the normal driver model binding to bind these
+> > devices? Why does it need to be done manually here?
+>
+> First, please take a look at the cover letter.
+> In this RFC, I basically assume two patterns of DT bindings,
+> (A) and (B) in the cover letter (or sandbox's test.dts in patch#5).
+>
+> In (B), a DT node as a gpio device, which is essentially a child
+> of pinctrl device, is located *under* a pinctrl device. It need
+> to be probed manually as there is no implicit method to enumerate
+> it as a DM device automatically.
 
-Yes, understood. Do you know how long it takes to do this step?
+You could add a post_bind() method to the pinctrl uclass to call
+dm_scan_fdt_dev() as we do with TPM.
 
-The control for this feature is CMD_BOOTEFI_BOOTMGR...I think it would
-be better to have BOOTEFI_BOOTMGR as well as CMD_BOOTEFI_BOOTMGR,
-since it is strange to have a CMD Kconfig in lib/efi_loader
+>
+> On the other hand, in (A), the same node can be put anywhere in a DT
+> as it contains a "compatible" property to identify itself.
+> So if we want to only support (A), scmi_gpiochip_register() and
+> scmi_pinctrl_bind() are not necessary.
+>
+> Since there is no discussion about bindings for GPIO managed by SCMI
+> pinctrl device yet on the kernel side, I have left two solutions
+> in this RFC.
 
-I am OK with this patch as I don't see any alternative. We need to do
-something and we can always improve it if it causes problems.
 
-Heinrich?
+OK.
+
+[..]
 
 Regards,
 Simon
