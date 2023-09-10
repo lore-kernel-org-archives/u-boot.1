@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA139EE57CD
-	for <u-boot@archiver.kernel.org>; Sat,  9 Sep 2023 23:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550A7EE7FF4
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 05:17:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D31B86AD9;
-	Sun, 10 Sep 2023 01:20:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D99D1864D4;
+	Sun, 10 Sep 2023 07:16:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="azktXyQx";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="L7nXbdUr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF78F846B8; Sun, 10 Sep 2023 01:20:29 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37E9886538; Sun, 10 Sep 2023 07:16:58 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBCFE86AE8
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 01:20:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0DF98642D
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 07:16:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d7d50ba994eso2865586276.1
- for <u-boot@lists.denx.de>; Sat, 09 Sep 2023 16:20:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694301625; x=1694906425; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MBZDpzGc0TPdAAKcFCp3qWGSaFDpsa9b0+osqb9Sxeg=;
- b=azktXyQxw1voWXTPnw3hfZbtRMv17gv0nqJ5xyhW/NkVbRnwiX2RnRvBT/Sg0E9Wx4
- Q+J0WpjDVZvdhl1K55w3HDGi/UzfjTEtjn2LzvKUM76PZ5Xd2ulPpdRCk8h4FyB6P/My
- L14YHc6sv45mRucSjsqmg78Dm0mwq16hRbAWM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694301625; x=1694906425;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MBZDpzGc0TPdAAKcFCp3qWGSaFDpsa9b0+osqb9Sxeg=;
- b=p8SXs62F0R6/al9LEpVXwMNdS8W6L+p1zbxTvn42sKWY1AiwNU+Ikc025BGOIYtiPn
- 1O7O/t1sZRLz2GvzoijrujBkzimQdxl+MRMpIc5WaT9/42YP+u8VDfRNAKVHDAIlGMKL
- I6w0bmGlVE2tpZnKE2kxAveY2Zel6YBtPvxtss90K+mGoEoZxw5U2z/eGCPgUjWCkC29
- Nm5yeVGu0ZXRvMCFQAxWq1kxqD7g1+48byTDfX88SRpxAkeYRQ7V3tRh/syCsnFAP6/h
- WvRVEWQJ0kvHeWswmdzKk6oQ1pA2r4oXST9EGBM5+i7bdgH27FFsYz05/QG6Ri2leosE
- E5EQ==
-X-Gm-Message-State: AOJu0YzZWGoNSpqSIxbwddTa3gCp+iceHMBtch3A5nLVUDRnmtQc5YTt
- uIzrsJ8IfRBHyob1W/Jz50bRkg==
-X-Google-Smtp-Source: AGHT+IEuzoV3UK+xvggxVzzF42cA23Dw4lJaqYmNXtbdqXZY3/Pk4pjfy511GqhD5cjhSn4IT9u3bg==
-X-Received: by 2002:a25:ab08:0:b0:d4c:cbd2:f6f3 with SMTP id
- u8-20020a25ab08000000b00d4ccbd2f6f3mr6098132ybi.53.1694301625610; 
- Sat, 09 Sep 2023 16:20:25 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-1687-83fa-3eda-ba26.res6.spectrum.com.
- [2603:6081:7b00:6400:1687:83fa:3eda:ba26])
- by smtp.gmail.com with ESMTPSA id
- d29-20020a25361d000000b00d746487d6f7sm1004461yba.35.2023.09.09.16.20.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Sep 2023 16:20:25 -0700 (PDT)
-Date: Sat, 9 Sep 2023 19:20:23 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Cc: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] CI: Add jsonschema python module
-Message-ID: <20230909232023.GU305624@bill-the-cat>
-References: <20230829143710.204875-1-andrejs.cainikovs@toradex.com>
- <20230829150422.GD3953269@bill-the-cat>
- <5219f4a0-b91b-16d0-33cb-4b7fea37625c@toradex.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
+ s=s31663417; t=1694323014; x=1694927814; i=xypron.glpk@gmx.de;
+ bh=iDMEXycCg5rOSEC7dtVPlIkAwvsmPaBh0uTbUfDU8ko=;
+ h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:In-Reply-To;
+ b=L7nXbdUrMHoJRGwZFaG3uXGvn+ABmAi899WyTaW8mBKPJ3+QPB7eFghulEZtyiezejaggk4
+ 4j1qSm7kQw7mLvddIgOwIhuNJZmL5PurOvytr4wfSJeEOViBbBSqybkH8PsXfeUvZagd2kD2p
+ vdd+dIu/LDnWqxxDtHHS9W97HFNFrZS6yGMBvDEQGoAv8Iy5m91Locy2IZrdNuNi5Vkz0V6bp
+ bvlY62SBQdBPO74PF88VQ64r1+mwTM0gDSRTk9VlLXmwaLlw8NVEHiTmsjHxKJEf9gNQVoPOg
+ RFi0x0e5M2twdp8ocVV4dpIreB1TqRKpByQScBkY5H0xgDdzPW/w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MXGvM-1q7ca0041m-00YiIU; Sun, 10
+ Sep 2023 07:16:54 +0200
+Message-ID: <a5ae2e45-b37a-4c23-8638-3e5aecbd58d2@gmx.de>
+Date: Sun, 10 Sep 2023 07:17:54 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UtkS+yA02huoitzk"
-Content-Disposition: inline
-In-Reply-To: <5219f4a0-b91b-16d0-33cb-4b7fea37625c@toradex.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: doc: fix reference tag placement for Logging
+ section
+Content-Language: en-US, de-DE
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+References: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:KvUCRoeSxhcI8D2claN7cPhYRmFVQxXdjMfuLLrW/DybZaYlhI6
+ x4rM4rfGqpHy/NKRrCBVmTmDcZut966m65UCblHZNVP5lAMSs9IeYh/O03xR2RSN9spfxwC
+ tgRK+/bd4ZRvWcghjfKvYv9ajRwo6PMkogFr/j6VYckkbz3hwIZUr/ZOYbaotTQCmNvLWqZ
+ RH4KEoubNes6hjnYaLeVw==
+UI-OutboundReport: notjunk:1;M01:P0:oaipjSdmad4=;5re5XcScRvIMQg5anRNC7Jd5RPm
+ yptcD7t30SL+r6ZmCVauOKCVLvwvSsLFjTu+Zb+NAMPQYNkbjFljIwvmZaKKMD9YHNvIWOmQr
+ /jU1ohyn/x5gVwk6SHW8KWUJc3UbHZUC+YJcweY200tkJl9cdZ8rDjahJR3DnMaAy0SFlBFVd
+ kd+A7Jer41/FsRVCyGg/3mWU50pHZ1a9wzxsuHrKbJmUz+0srjdY7hqafOjNzWNT5O3hzHPyh
+ YdHOhZ7LrjOvu04WMuXLN/8b5f0lee33RxXmsSx/AebA/nUFZv1YqXQCHr6aR+/MwD+zb6XSN
+ TkSkydGuF6iPOBpGJcVeDhL+PkqYu7wTTVEbovNmZZnzvmpdzhPwg87F15aIog02EVU2ipIwg
+ rkr7MfoZYThg9Qas8gSxpftAhbefSlcxc3v8CB5QsgDGi0ZFW8/c2uXjWsC+UKDXSbLlJrBV8
+ vpN+WGkxU7HC0h+zyyMHtQTLIoZZNhcT8POKtoIhPAAbXx4CoFQtTec0zRztro9IpB2YYxIlj
+ fPMXz5AxBujoo9DrtPsXvqXOEI6DXyobzaaMo+ett83ew/rGw/hgu1NAbQ4odo3HduUWLINxT
+ ejg/SB3xFvr0dirqlMWuxqNqwv/9jPp6Xnqy1ZFEUNGGYn8SVBhNpwDe8of8H1PxZOeyIOj07
+ 7iIqOHavOIi8nvhJAS1tGj5f5vAqYBcJck+4m7u5Rs3pIcKE/vUjQC2qriylYCgmdMSwjoATb
+ fV9u2PpS8vPRN423fZFXqzhxhbBerfLWeyAPInyBDdm1vLoRcS8aL3FGvxBnholimVP37HfZq
+ VX35qJx3QjbuNWeiDtMQk9wMwACufisakjcsEgHD905JLUUYYpgvuCV/A2Yvv1HPzk+xO1qaT
+ 1+MwPrAH64HyLWy+rw85CJi7bVy5uoSQcNUauJpQpt6oF+KMoTH5owoQMWLDm9xo3UWn2YVNp
+ NMNJGA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,69 +87,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 9/9/23 15:52, Massimo Pegorer wrote:
+> Move BinmanLogging reference tag after section "Signing FIT container
+> with private key in an image" and just before section "Logging".
+>
+> Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
+> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 
---UtkS+yA02huoitzk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Aug 29, 2023 at 05:37:35PM +0200, Andrejs Cainikovs wrote:
-> On 29/08/2023 17:04, Tom Rini wrote:
-> > Interesting.  How exactly are you using these CI images? We have
-> > tools/buildman/requirements.txt now to cover the newly-added modules in
-> > CI, as we call pip on that.  But, it's not being used in the prepopulate
-> > the pip cache stage in the Dockerfile.  And, I'm not immune to the idea
-> > that we should instead be installing the distro package here.
->=20
-> I see in Dockerfile test/py/requirements.txt and
-> doc/sphinx/requirements.txt, but not tools/buildman/requirements.txt, so
-> whatever is mentioned there is not part of the image on CI runners.
->=20
-> Following is the part of *our own* .gitlab.yml file,
-> which uses a public Docker image
-> (docker.io/trini/u-boot-gitlab-ci-runner:jammy-20230624-20Jul2023, as of
-> now):
->=20
-> verdin-am62:
->   stage: build
->   script: |
->     ...
->     tools/buildman/buildman -o /tmp -P -E "verdin-am62" -M
->     ...
->=20
-> And this is how it fails in our CI without this change:
->=20
-> Building current source for 3 boards (3 threads, 14 jobs per thread)
->        arm:  +   verdin-am62_r5
-> +binman: Unknown entry type 'ti-board-config' in node
-> '/binman/board-cfg/ti-board-config' (expected etype/ti_board_config.py,
-> error 'No module named 'jsonschema''
-> +make[1]: *** [Makefile:1108: .binman_stamp] Error 1
-> +make: *** [Makefile:177: sub-make] Error 2
-
-Thinking on this more, yes, I think at least as it stands now we expect
-pip / similar to be used by consumers of this container if needed for
-the jsonschema module.
-
---=20
-Tom
-
---UtkS+yA02huoitzk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmT8/bcACgkQFHw5/5Y0
-tyz/hAv/WqZgqiKyrPO1UrnwxVYBw/W+VpkK/2rfm9TFVd7i9Vmr/S8bbsl8KbcE
-PiN6eX8YlEylHXDh8F6PXsQPAodsFSp21QKdPd4x0guU+8egsIZSYL3tRfRNlZZS
-UjOsDJvBkzulL8y+MdyHiSmZkvS+nIybFIbU9wdUrqQjTi3U8qxzyHlYAHsxLbrH
-bEshHL1Y2i4dFlXXhjaA7hITt1DDetEzqzyJzcogu8U/77I6UUNqr3u3hZGBUvBI
-mjMlOSxngtAl/d0r2llrr2HCwHyo0+c/qBtv0ipjiTs23WipewuC6wakhq7DcBAu
-gzdEVrA/9yrE3GNTVrSkG4/yimRWC7/GRVnTkW+y/E1duG4tV7xKmrauzvjYBvqc
-Sfwk+XjtBEYupXNOUG6nbjXlYugEBUGbhZNIPCkimiUOSfAosRtm1cf1vQ6UAoIn
-x9zqWuusg/6N/5QJSTOFtIgBhtfPKO/Y3DdzSgbQJEDu1rlkNNsGCOvyagrKdCgM
-QTUwPfQH
-=jKCg
------END PGP SIGNATURE-----
-
---UtkS+yA02huoitzk--
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
