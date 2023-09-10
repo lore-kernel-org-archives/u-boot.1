@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550A7EE7FF4
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 05:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA039EE57CD
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 10:54:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D99D1864D4;
-	Sun, 10 Sep 2023 07:16:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id DF1678694A;
+	Sun, 10 Sep 2023 12:54:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="L7nXbdUr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GDwG2j3X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37E9886538; Sun, 10 Sep 2023 07:16:58 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CA1108693D; Sun, 10 Sep 2023 12:54:19 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0DF98642D
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 07:16:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E31018693D
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 12:54:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694323014; x=1694927814; i=xypron.glpk@gmx.de;
- bh=iDMEXycCg5rOSEC7dtVPlIkAwvsmPaBh0uTbUfDU8ko=;
- h=X-UI-Sender-Class:Date:Subject:To:References:Cc:From:In-Reply-To;
- b=L7nXbdUrMHoJRGwZFaG3uXGvn+ABmAi899WyTaW8mBKPJ3+QPB7eFghulEZtyiezejaggk4
- 4j1qSm7kQw7mLvddIgOwIhuNJZmL5PurOvytr4wfSJeEOViBbBSqybkH8PsXfeUvZagd2kD2p
- vdd+dIu/LDnWqxxDtHHS9W97HFNFrZS6yGMBvDEQGoAv8Iy5m91Locy2IZrdNuNi5Vkz0V6bp
- bvlY62SBQdBPO74PF88VQ64r1+mwTM0gDSRTk9VlLXmwaLlw8NVEHiTmsjHxKJEf9gNQVoPOg
- RFi0x0e5M2twdp8ocVV4dpIreB1TqRKpByQScBkY5H0xgDdzPW/w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MXGvM-1q7ca0041m-00YiIU; Sun, 10
- Sep 2023 07:16:54 +0200
-Message-ID: <a5ae2e45-b37a-4c23-8638-3e5aecbd58d2@gmx.de>
-Date: Sun, 10 Sep 2023 07:17:54 +0200
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-52a40cf952dso4668321a12.2
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 03:54:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1694343256; x=1694948056; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AYQFJLY8hTRb4HcchiY40sO6KRXCyc16Z56esGGXhSI=;
+ b=GDwG2j3XGmBEnl2vvjukHjji6mFohLcPoIjqgxOyV+24tkTFI1DCi3zfDYijPEWXUy
+ nBOYHW2+nkMor9fCvMKQbYDechAtZxCnUeuZuLTTfD5YT7Y7diLOuKltrsth2pk6POJj
+ +IRvnyRYNp39aHUP4Ld6VjY/utINDd2usjLWP0yng6ouGUDf5s0qPx46sIzerv5RnlkO
+ tXzWHiECV2FStUOQ4sDl9s47DioSTkrwT3JBrfs0uwZeVaZFur6G4iWR/toI+1BUDmvQ
+ ExNzXmv2dADVgF6TGHc8j8whg3X4MnezGzUb1NaCGMWi/5iDMjbmfcrwbLm3olq4WZvf
+ vXCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694343256; x=1694948056;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AYQFJLY8hTRb4HcchiY40sO6KRXCyc16Z56esGGXhSI=;
+ b=O7mZIZFatKlliDdfpWQ8pwdYmcFJxSy6uOSyAAzEnov/jLmjz+sd6YM9sg279VFyoO
+ 1SfwamYC7nAGLtH8coTeqeO5nxBS5xSniTrBN3AB7KQ4WIAJZPiJUBjqNFiGTZJL+U9e
+ 1nPePPZ8bta/797rbklx6WHBwmr7Y1QWHGWX7qy/959SDSc0lsn+3mEGbFrXnH52pY6+
+ /sMUCjCA2iIyKQozfhu/eFgGOAWmeGMmugtqc70I9q9wzJciPdDcYIyV/UT49rxwYyh8
+ 0Z+s98E9RWEHjKtz2gjNTVkGK7WWcnE8ff9pwOZvThbm4lok1ic3awNYAMEw/Ox28GGX
+ PepQ==
+X-Gm-Message-State: AOJu0Yy1LyrBzWLZ8JGMUCDaT2fFDAfl7tQC+Wv4WOX6Gqgvp1zT/b3s
+ T4U40qgTbqnKycQ0H0dPqbicEtC87OBQIflWeafiIw==
+X-Google-Smtp-Source: AGHT+IFqgWGU1dZD7emB8aSnKO5Ye242Dq4fK0JvROOFef8B81+xwnbBVCO6Aw9BisGs2DOYINIs6y5Luwu+kJOl8hY=
+X-Received: by 2002:aa7:c40e:0:b0:523:102f:3ce0 with SMTP id
+ j14-20020aa7c40e000000b00523102f3ce0mr5409070edq.21.1694343256394; Sun, 10
+ Sep 2023 03:54:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: doc: fix reference tag placement for Logging
- section
-Content-Language: en-US, de-DE
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-References: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230909135235.21242-1-massimo.pegorer+oss@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KvUCRoeSxhcI8D2claN7cPhYRmFVQxXdjMfuLLrW/DybZaYlhI6
- x4rM4rfGqpHy/NKRrCBVmTmDcZut966m65UCblHZNVP5lAMSs9IeYh/O03xR2RSN9spfxwC
- tgRK+/bd4ZRvWcghjfKvYv9ajRwo6PMkogFr/j6VYckkbz3hwIZUr/ZOYbaotTQCmNvLWqZ
- RH4KEoubNes6hjnYaLeVw==
-UI-OutboundReport: notjunk:1;M01:P0:oaipjSdmad4=;5re5XcScRvIMQg5anRNC7Jd5RPm
- yptcD7t30SL+r6ZmCVauOKCVLvwvSsLFjTu+Zb+NAMPQYNkbjFljIwvmZaKKMD9YHNvIWOmQr
- /jU1ohyn/x5gVwk6SHW8KWUJc3UbHZUC+YJcweY200tkJl9cdZ8rDjahJR3DnMaAy0SFlBFVd
- kd+A7Jer41/FsRVCyGg/3mWU50pHZ1a9wzxsuHrKbJmUz+0srjdY7hqafOjNzWNT5O3hzHPyh
- YdHOhZ7LrjOvu04WMuXLN/8b5f0lee33RxXmsSx/AebA/nUFZv1YqXQCHr6aR+/MwD+zb6XSN
- TkSkydGuF6iPOBpGJcVeDhL+PkqYu7wTTVEbovNmZZnzvmpdzhPwg87F15aIog02EVU2ipIwg
- rkr7MfoZYThg9Qas8gSxpftAhbefSlcxc3v8CB5QsgDGi0ZFW8/c2uXjWsC+UKDXSbLlJrBV8
- vpN+WGkxU7HC0h+zyyMHtQTLIoZZNhcT8POKtoIhPAAbXx4CoFQtTec0zRztro9IpB2YYxIlj
- fPMXz5AxBujoo9DrtPsXvqXOEI6DXyobzaaMo+ett83ew/rGw/hgu1NAbQ4odo3HduUWLINxT
- ejg/SB3xFvr0dirqlMWuxqNqwv/9jPp6Xnqy1ZFEUNGGYn8SVBhNpwDe8of8H1PxZOeyIOj07
- 7iIqOHavOIi8nvhJAS1tGj5f5vAqYBcJck+4m7u5Rs3pIcKE/vUjQC2qriylYCgmdMSwjoATb
- fV9u2PpS8vPRN423fZFXqzhxhbBerfLWeyAPInyBDdm1vLoRcS8aL3FGvxBnholimVP37HfZq
- VX35qJx3QjbuNWeiDtMQk9wMwACufisakjcsEgHD905JLUUYYpgvuCV/A2Yvv1HPzk+xO1qaT
- 1+MwPrAH64HyLWy+rw85CJi7bVy5uoSQcNUauJpQpt6oF+KMoTH5owoQMWLDm9xo3UWn2YVNp
- NMNJGA==
+References: <CAPnjgZ11KEV4TAjihfijFNpXmROheGPKmVwVvpgfOpZP7GZ-HA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ11KEV4TAjihfijFNpXmROheGPKmVwVvpgfOpZP7GZ-HA@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Sun, 10 Sep 2023 16:24:05 +0530
+Message-ID: <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
+Subject: Re: UEFI update files missing on sandbox?
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,11 +84,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/9/23 15:52, Massimo Pegorer wrote:
-> Move BinmanLogging reference tag after section "Signing FIT container
-> with private key in an image" and just before section "Logging".
->
-> Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
-> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+hi Simon,
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+On Sun, 10 Sept 2023 at 04:10, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> I thought that all your patches were merged but now when I build
+> sandbox I don't see the capsule-update files generated. Is there
+> something missing?
+
+The building of the EFI capsules was moved to the corresponding test
+setup. This was based on feedback from Tom Rini [1], where he had
+suggested that instead of having the binman nodes for the capsules as
+part of the sandbox dtb, it should rather be highlighted in the
+document.
+
+-sughosh
+
+[1] - https://lists.denx.de/pipermail/u-boot/2023-August/526987.html
