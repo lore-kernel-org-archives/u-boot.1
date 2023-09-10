@@ -4,67 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604D6C71153
-	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 22:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 103D8EE49A4
+	for <u-boot@archiver.kernel.org>; Sun, 10 Sep 2023 22:37:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEB6C86CFC;
-	Mon, 11 Sep 2023 00:37:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D2A886D0E;
+	Mon, 11 Sep 2023 00:37:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a+mRJpIO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NyAGXqTO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FAB386CF5; Mon, 11 Sep 2023 00:37:09 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id E22BE86CF9; Mon, 11 Sep 2023 00:37:09 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD9CC86CD0
+ by phobos.denx.de (Postfix) with ESMTPS id 9F8CD86CC0
  for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 00:37:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-51a52a7d859so10582664a12.0
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-31fa15f4cc6so564444f8f.2
  for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 15:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694385426; x=1694990226; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gsGpAVTQDHJTDPCv9ByDMphJhAFi9K8NW1FEbDT8k6I=;
- b=a+mRJpIOv5WxWqTDlQAHsaw/ujNuVoX7eYvYcM75B4StVVCXqVWNFmv3UaJAibmE4x
- b+Rc3y104m+vFN9pFx80i7IR2LP6BtpJ+nPNCYxaoJEt2/lzm7tZPdZy1m1EaObsrujA
- Uw2C8EJpqu6z2G5RssfKIydKjS2YMXoQireII=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=blN2AoMG+LqeB4tIY/xZE/FaiJ2kUQEJ1Z8G83vmkLA=;
+ b=NyAGXqTOnJz8/jtlqistIdfApra5sKqqmTmJw21wk1IUqDuKlSABEp/s/E6imTreaw
+ /VDxfpIhuCyaEpjqFmFhSBT+sqAoTDf3lTW7PYxczxAuT7JsRuAc4A6lh6Ro4Q1Cf8GC
+ l/pCwsPeVFqBGTV943KTWSX+toAJTtNj7Loh0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1694385426; x=1694990226;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gsGpAVTQDHJTDPCv9ByDMphJhAFi9K8NW1FEbDT8k6I=;
- b=OCH0cn081Y6/WlDNOvKh3/P8OEtrCymY7vkp5348Va8pbzMTN4Sd9UtDNVvAwyKIoB
- uXqPGOudWk5qVZRCwN5f0bFTgq3jLYi5T1gUnOsG4BA5dXjp7ZTvXVHFPHnSU2OVQNZR
- Y8k5YkPGc9tfm9LZZ+7VinBrDpBUVWvNC+itv4wO45NxL3PdGClzOSHxesBo8zXHuT+i
- qn2Jrz/GSO7SkV1YaS8w2Wg4F1cvv7jhjZFZTuU7QlAHEO/OkJMGpM5Cls9MxXrlcbVd
- cFSIVY5JLryG0SZdG+cF4fI4HzOm+yEnLzFYzqf+ayZyCagtZGkm/HZ1sr1t+XAKswzn
- D2kQ==
-X-Gm-Message-State: AOJu0Yz1eGbInZaX726xD/rWS+Ec/UokQ3U/o/03I57x3bhWHTZjXkQJ
- sJV6JqEGq8zFP6ucEXzDoT6Fa34GExwVk/dF5zLWwA==
-X-Google-Smtp-Source: AGHT+IFHT8t1NQbAUa8XKyz2/ajizYzbS8vaNkrHQtpvq3vEEosj0+Gd8BcuhuVf3B0EpEzGOxIBi6ul1VOvG3xJ8DU=
-X-Received: by 2002:a05:6402:5242:b0:51d:b184:efd with SMTP id
- t2-20020a056402524200b0051db1840efdmr13671511edd.20.1694385426319; Sun, 10
- Sep 2023 15:37:06 -0700 (PDT)
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=blN2AoMG+LqeB4tIY/xZE/FaiJ2kUQEJ1Z8G83vmkLA=;
+ b=ma+lnayD8WtrDYhf5cP5bDB5s7/uJBsTgDJw3VmNiszbYsxpxz/3gP5BWxDCKmg784
+ m+eV+wLId7mQufBBG84OAGktbZNvlK2Z+VPATXa0CrDbU/EkOKw0whR1U6r4zOLiyE5g
+ DkUR0eMwIBVe7S7xbnUpOe8H1+Eiehqu5p+PxAS3DpcFpXSkMDNUTAV8GjN8hsU9NV63
+ TY/58DOda6zqiaYE88UGu4Z3XlhTRXlj7mSdQP6q5HKQeLjy0jMVrbCjY/EDbNSHLu9k
+ ysMPRGl4HLd6DTz1wkIaoxbg2iSpY0t4SsVAM/VdT48pf6G03rBxm/oWcf3uxsyOLSIH
+ pqYw==
+X-Gm-Message-State: AOJu0YwSHcdJAZKaS8sgylbADqYvE/eNLOL4C/b8W09LNWPm/OHTntNi
+ fRtB+ABotkkPX/+9HqSQud5H/pB5+Xylel2RH8k1dhZdD1nPxPPHGKY=
+X-Google-Smtp-Source: AGHT+IFx/pKKd88pz1zTwrYH4ApZ6fc9hV1It7vpgJgISt7uUV+xlYHrJo946ozpPdOxWb2HK4gNvYTcTd/4sQZVVg4=
+X-Received: by 2002:a5d:5103:0:b0:319:731f:748c with SMTP id
+ s3-20020a5d5103000000b00319731f748cmr6534054wrt.34.1694385425801; Sun, 10 Sep
+ 2023 15:37:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230908190935.12516-1-mibodhi@gmail.com>
-In-Reply-To: <20230908190935.12516-1-mibodhi@gmail.com>
+References: <7d128f4a-b972-0535-ac06-bd600ba2e37c@monstr.eu>
+ <20230907181411.GX305624@bill-the-cat>
+ <9d45165f-fc88-4615-969b-0aafc7d43f13@monstr.eu>
+ <20230908133415.GA305624@bill-the-cat>
+ <fd3a2682-0215-4026-a51d-de6364e06a69@monstr.eu>
+ <CAHTX3dJW1JHGnn15YxWH2Fe2CDdLK0KYBbof_ww79vepY=x_oQ@mail.gmail.com>
+In-Reply-To: <CAHTX3dJW1JHGnn15YxWH2Fe2CDdLK0KYBbof_ww79vepY=x_oQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 10 Sep 2023 16:36:51 -0600
-Message-ID: <CAPnjgZ1b7mx1fk5rBQ0wWBD4p85-Smw5=KG89KdCSyR+cMx+YA@mail.gmail.com>
-Subject: Re: [PATCH v3] bootstd: sata: Add bootstd support for ahci sata
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>
+Date: Sun, 10 Sep 2023 16:36:50 -0600
+Message-ID: <CAPnjgZ1RLD2Z+-YW2FRtpkWe4CUuYM8e_jXk2u6dcy4+NtT8JQ@mail.gmail.com>
+Subject: Re: sandbox trace errors in CI loop
+To: Michal Simek <monstr@monstr.eu>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,214 +87,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
+Hi Michal,
 
-On Fri, 8 Sept 2023 at 13:10, Tony Dinh <mibodhi@gmail.com> wrote:
+On Fri, 8 Sept 2023 at 09:00, Michal Simek <monstr@monstr.eu> wrote:
 >
-> Add ahci sata bootdev and corresponding hunting function.
+> Hi Tom,
 >
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
+> p=C3=A1 8. 9. 2023 v 15:42 odes=C3=ADlatel Michal Simek <monstr@monstr.eu=
+> napsal:
+> >
+> >
+> >
+> > On 9/8/23 15:34, Tom Rini wrote:
+> > > On Fri, Sep 08, 2023 at 12:24:10PM +0200, Michal Simek wrote:
+> > >>
+> > >>
+> > >> On 9/7/23 20:14, Tom Rini wrote:
+> > >>> On Thu, Sep 07, 2023 at 05:30:03PM +0200, Michal Simek wrote:
+> > >>>> Hi Simon and Tom,
+> > >>>>
+> > >>>> I am preparing pull request and I see that CI loop is reporting is=
+sue with
+> > >>>> sandbox trace and I have no idea what's going wrong here.
+> > >>>>
+> > >>>> This is the first problematic commit but have no clue what it has =
+to do with trace.
+> > >>>>
+> > >>>> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/commi=
+t/8c5f80d11b29536979ac41a6087fb8938f45bbf2
+> > >>>>
+> > >>>> If you have an access you can take a look at my queue to see that =
+only this
+> > >>>> job is failing.
+> > >>>> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/pipel=
+ines
+> > >>>>
+> > >>>> Thanks,
+> > >>>> Michal
+> > >>>>
+> > >>>> collected 1152 items / 1151 deselected / 1 selected
+> > >>>> test/py/tests/test_trace.py F                                     =
+       [100%]
+> > >>>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+> > >>>> __________________________________ test_trace ____________________=
+______________
+> > >>>> test/py/tests/test_trace.py:292: in test_trace
+> > >>>>       check_function(cons, fname, proftool, map_fname, trace_dat)
+> > >>>> test/py/tests/test_trace.py:117: in check_function
+> > >>>>       out =3D util.run_and_log(cons, ['sh', '-c', cmd])
+> > >>>> test/py/u_boot_utils.py:181: in run_and_log
+> > >>>>       output =3D runner.run(cmd, ignore_errors=3Dignore_errors, st=
+din=3Dstdin, env=3Denv)
+> > >>>> test/py/multiplexed_log.py:183: in run
+> > >>>>       raise exception
+> > >>>> E   ValueError: Exit code: 1
+> > >>>> ---------------------------- Captured stdout setup ---------------=
+--------------
+> > >>>> /u-boot
+> > >>>> trace: early enable at 00100000
+> > >>>> sandbox_serial serial: pinctrl_select_state_full:
+> > >>>> uclass_get_device_by_phandle_id: err=3D-19
+> > >>>> =3D>
+> > >>>
+> > >>> I don't get it either since I see this on master with trace options
+> > >>> enabled per CI:
+> > >>> $ ./u-boot -T arch/sandbox/dts/test.dtb
+> > >>> trace: early enable at 00100000
+> > >>> sandbox_serial serial: pinctrl_select_state_full: uclass_get_device=
+_by_phandle_id: err=3D-19
+> > >>> ... rest of boot proceeds ...
+> > >>>
+> > >>> So the test should be failing already if that was the problem.
+> > >>>
+> > >>
+> > >> I don't thin it is the problematic part.
+> > >>
+> > >> When I look at
+> > >> https://source.denx.de/u-boot/u-boot/-/blob/master/tools/docker/Dock=
+erfile?ref_type=3Dheads#L225
+> > >>
+> > >> clone is done from
+> > >> git clone https://github.com/rostedt/trace-cmd.git /tmp/trace/trace-=
+cmd && \
+> > >>
+> > >> https://github.com/rostedt/trace-cmd/blob/master/README#L5
+> > >>
+> > >> we should be using
+> > >> git://git.kernel.org/pub/scm/utils/trace-cmd/trace-cmd.git instead.
+> > >>
+> > >> I installed the latest version on my PC and run it via pytest and th=
+is is
+> > >> what I am getting.
+> > >> You see that trace-cmd report is returning "failed to init data".
+> > >>
+> > >> Are we wired to any specific trace-cmd version?
+> > >
+> > > Wait, no, what's going on exactly? The github repository is a mirror =
+of
+> > > the kernel.org one. So yes, we should correct to point to the main on=
+e,
+> > > but the top of tree in both cases is commit
+> > > 354dccca52e805ce1b22e2b62cbae8c265886c27.
+> > >
+> >
+> > I dig into it more.
+> > What it is happening is that when sandbox u-boot is bigger trace.dat fi=
+le is
+> > placing information to different offset then it is recorded somewhere i=
+n header.
+> >
+> > Wrong placement
+> >
+> > 0005b000  20 70 65 72 66 20 6d 6f  6e 6f 20 6d 6f 6e 6f 5f  | perf mono=
+ mono_|
+> > 0005b010  72 61 77 20 62 6f 6f 74  20 78 38 36 2d 74 73 63  |raw boot x=
+86-tsc|
+> > 0005b020  0a 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |..........=
+......|
+> > 0005b030  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |..........=
+......|
+> > *
+> > 0005c000  89 df f6 1d 00 00 00 00  dc 0f 00 00 00 00 00 00  |..........=
+......|
+> > 0005c010  06 00 00 00 01 00 00 00  01 00 00 00 af e5 0a 00  |..........=
+......|
+> > 0005c020  00 00 00 00 ef dc 09 00  00 00 00 00 06 00 00 00  |..........=
+......|
+> > 0005c030  01 00 00 00 01 00 00 00  af e5 0a 00 00 00 00 00  |..........=
+......|
+> >
+> > Correct placement for trace-cmd
+> >
+> > 0005aee0  75 70 74 69 6d 65 20 70  65 72 66 20 6d 6f 6e 6f  |uptime per=
+f mono|
+> > 0005aef0  20 6d 6f 6e 6f 5f 72 61  77 20 62 6f 6f 74 20 78  | mono_raw =
+boot x|
+> > 0005af00  38 36 2d 74 73 63 0a 00  00 00 00 00 00 00 00 00  |86-tsc....=
+......|
+> > 0005af10  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |..........=
+......|
+> > *
+> > 0005b000  36 f8 92 3f 00 00 00 00  e0 0f 00 00 00 00 00 00  |6..?......=
+......|
+> >
+> > And trace-cmd want to decode data available at 0x5b000 offset in both c=
+ases.
+> >
+> > It means I expect proftool is not correctly generating offset where dat=
+a is
+> > present. I don't understand how it works but I clearly see based on tra=
+ce-cmd
+> > that it points to incorrect location.
 >
-> Changes in v3:
-> - Correct drivers/ata/Makefile to compile sata_bootdev only if
-> ahci sata is enabled.
+> diff --git a/tools/proftool.c b/tools/proftool.c
+> index 101bcb63334e..815e01efb5d1 100644
+> --- a/tools/proftool.c
+> +++ b/tools/proftool.c
+> @@ -1500,7 +1500,7 @@ static int write_flyrecord(struct twriter *tw,
+> enum out_format_t out_format,
+>         tw->ptr +=3D fprintf(fout, "flyrecord%c", 0);
 >
-> Changes in v2:
-> - set devtype to sata in bootmeth_script for non-scsi SATA device.
+>         /* trace data */
+> -       start =3D ALIGN(tw->ptr + 16, TRACE_PAGE_SIZE);
+> +       start =3D ALIGN(tw->ptr + 16, 0x4000);
+>         tw->ptr +=3D tputq(fout, start);
 >
->  boot/bootmeth_script.c     | 12 ++++++--
->  drivers/ata/Makefile       |  2 +-
->  drivers/ata/sata.c         | 25 +++++++++++++++
->  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
->  include/sata.h             |  1 +
->  5 files changed, 99 insertions(+), 3 deletions(-)
->  create mode 100644 drivers/ata/sata_bootdev.c
+>         /* use a placeholder for the size */
 >
-> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-> index 58c57a2d4b..0269e0f9b0 100644
-> --- a/boot/bootmeth_script.c
-> +++ b/boot/bootmeth_script.c
-> @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct bootflow *bflow)
->         ulong addr;
->         int ret;
+> This is the problematic code. In flyrecord section in header there is
+> the calculation where data start.
+> And there is tw->ptr +16 used (not sure why +16) but actual flyrecord
+> is much bigger than 16.
 >
-> -       if (desc->uclass_id == UCLASS_USB)
-> +       if (desc->uclass_id == UCLASS_USB) {
->                 ret = env_set("devtype", "usb");
-> -       else
-> +       } else {
->                 ret = env_set("devtype", blk_get_devtype(bflow->blk));
-> +
-> +               /* If the parent uclass is AHCI, but the driver is ATA
-> +                * (not scsi), set devtype to sata
-> +                */
-> +               if (!ret && IS_ENABLED(CONFIG_SATA) &&
-> +                   !strcmp("ahci", env_get("devtype")))
+> In my case start of flyrecord is 0x5afc1 + flyrecordX + 16 (mentioned
+> above) is 0x5afdb.
+> Then there is page alignment which gives 0x5b000 which is recorded but
+> actual size is till 0x5b021.
+>
+> The actual size of the header is 0x60 not  flyrecordX + 16 (based on
+> location where tw->ptr is taken).
+> Simon: Do you agree with this logic?
+>
+> It was introduced by commit be16fc81b2ed ("trace: Update proftool to
+> use new binary format").
 
-Can you not use desc->uclass_id to do the right thing here? It seems
-odd to compare with the value of the env var you just set up above.
-
-> +                       ret = env_set("devtype", "sata");
-> +       }
->         if (!ret)
->                 ret = env_set_hex("devnum", desc->devnum);
->         if (!ret)
-> diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
-> index 6e30180b8b..0b6f91098a 100644
-> --- a/drivers/ata/Makefile
-> +++ b/drivers/ata/Makefile
-> @@ -10,7 +10,7 @@ obj-$(CONFIG_SCSI_AHCI) += ahci.o
->  obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
->  obj-$(CONFIG_FSL_SATA) += fsl_sata.o
->  obj-$(CONFIG_LIBATA) += libata.o
-> -obj-$(CONFIG_SATA) += sata.o
-> +obj-$(CONFIG_SATA) += sata.o sata_bootdev.o
->  obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
->  obj-$(CONFIG_SATA_MV) += sata_mv.o
->  obj-$(CONFIG_SATA_SIL) += sata_sil.o
-> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-> index ce3e9b5a40..9da7218564 100644
-> --- a/drivers/ata/sata.c
-> +++ b/drivers/ata/sata.c
-> @@ -15,6 +15,8 @@
->  #include <dm.h>
->  #include <part.h>
->  #include <sata.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/uclass-internal.h>
->
->  #ifndef CONFIG_AHCI
->  struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
-> @@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
->         return ops->scan(dev);
->  }
->
-> +int sata_rescan(bool verbose)
-> +{
-> +       struct udevice *dev;
-> +       int devnum = 0;
-> +       int ret;
-> +
-> +       /* Find and probing the SATA controller */
-> +       ret = uclass_get_device(UCLASS_AHCI, devnum, &dev);
-
-This does not actually rescan...if the device has already been probed,
-it won't be probed again. You will need to use the logic like in
-sata_remove().
-
-Also, please avoid using devnum. You should probably just use
-uclass_probe_all(UCLASS_AHCI)
-
-> +
-> +       /* Sanity check */
-> +       if (ret)
-> +               ret = uclass_find_first_device(UCLASS_AHCI, &dev);
-
-That just finds it, but does not probe it. See uclass_first_device_err()
-
-> +       if (ret) {
-> +               printf("Cannot probe SATA device %d (err=%d)\n", devnum, ret);
-> +               return -ENOSYS;
-
-return ret
-
-> +       }
-> +       if (!dev) {
-> +               printf("No SATA device found!\n");
-> +               return -ENOSYS;
-> +       }
-> +       return 0;
-> +}
-> +
->  #ifndef CONFIG_AHCI
->  #ifdef CONFIG_PARTITIONS
->  struct blk_desc *sata_get_dev(int dev)
-> diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
-> new file mode 100644
-> index 0000000000..f638493ce0
-> --- /dev/null
-> +++ b/drivers/ata/sata_bootdev.c
-> @@ -0,0 +1,62 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Bootdev for sata
-> + *
-> + * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
-> + */
-> +
-> +#include <common.h>
-> +#include <ahci.h>
-> +#include <bootdev.h>
-> +#include <dm.h>
-> +#include <init.h>
-> +#include <sata.h>
-> +
-> +static int sata_bootdev_bind(struct udevice *dev)
-> +{
-> +       struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
-> +
-> +       ucp->prio = BOOTDEVP_4_SCAN_FAST;
-> +
-> +       return 0;
-> +}
-> +
-> +static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
-> +{
-> +       int ret;
-> +
-> +       if (IS_ENABLED(CONFIG_PCI)) {
-> +               ret = pci_init();
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
-> +       ret = sata_rescan(true);
-> +       if (ret)
-> +               return ret;
-> +
-> +       return 0;
-> +}
-> +
-> +struct bootdev_ops sata_bootdev_ops = {
-> +};
-> +
-> +static const struct udevice_id sata_bootdev_ids[] = {
-> +       { .compatible = "u-boot,bootdev-sata" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(sata_bootdev) = {
-> +       .name           = "sata_bootdev",
-> +       .id             = UCLASS_BOOTDEV,
-> +       .ops            = &sata_bootdev_ops,
-> +       .bind           = sata_bootdev_bind,
-> +       .of_match       = sata_bootdev_ids,
-> +};
-> +
-> +BOOTDEV_HUNTER(sata_bootdev_hunter) = {
-> +       .prio           = BOOTDEVP_4_SCAN_FAST,
-> +       .uclass         = UCLASS_AHCI,
-> +       .hunt           = sata_bootdev_hunt,
-> +       .drv            = DM_DRIVER_REF(sata_bootdev),
-> +};
-> diff --git a/include/sata.h b/include/sata.h
-> index d89f7a8a29..0495744bad 100644
-> --- a/include/sata.h
-> +++ b/include/sata.h
-> @@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
->
->  int sata_probe(int devnum);
->  int sata_remove(int devnum);
-> +int sata_rescan(bool verbose);
-
-Please add a comment
-
->
->  #endif
-> --
-> 2.39.2
->
+If you can fix it then yes that is fine and please send a patch. The
+test is there to catch things going wrong. The intent of proftool is
+to mimic the flyrecord format used by Linux. Your analysis seems right
+to me.
 
 Regards,
 Simon
