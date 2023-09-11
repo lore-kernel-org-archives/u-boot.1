@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A0A5EE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 05:23:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1462FEE57DF
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 05:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4350B86583;
-	Mon, 11 Sep 2023 07:23:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B3F486D10;
+	Mon, 11 Sep 2023 07:32:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eQaE+tSg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hWgAZ3TO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAF1786410; Mon, 11 Sep 2023 07:23:17 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id EF9D686D11; Mon, 11 Sep 2023 07:32:12 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66B7386583
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 07:23:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25D3886D09
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 07:32:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1bf7b5e1f06so7324535ad.0
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 22:23:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6c0f4ad9eb1so20136a34.1
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 22:32:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694409793; x=1695014593; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=D4RzJmiYCzTefHGKldBRhnjjjDsCDGI0zcGmac4AE+I=;
- b=eQaE+tSgewbQP8dxT5oaZCoDSkpDT/58G+JDeoH0uagBX47I/BRuHzsaX+mszZkJP1
- F4+kHa06FqoSC6wDAP8YPQh+IcaCoF1gTXXhiXRmvGVJSvqX6fy//nIWcCH8i7KKqxZG
- KLwE3hlvePb2fh+fQxoZhe9cIrS13WNyGfuH2dNIGvJnnYLn89rEMUOMX+xG6M0dr0fk
- OPFNuS8YYaUKw8G28Ll2RupoPg/Y/yFIWTBBQZfiaiu6SkGKM+hSf+rqLFNGl7LNpevy
- y64wFOuoXFUzF7EX9Fhp2v8FEqsgmwVYzHNNBdpfszshUvJdI8lwzenwQqyQUbsg73G6
- 1xLw==
+ d=linaro.org; s=google; t=1694410328; x=1695015128; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Ey6Hr9jr5fDFa0pgv+y0SJNCoWCsunW6WI7wk+k7Vqs=;
+ b=hWgAZ3TOlv07I5LD8idg+QnGSBBZPWod6P2ri8nNvs+mpjNirPyQNgO7A63axtFuQ8
+ aC8wjKpvHlDzovKhbn8PEvDCjm94xxYMlP+1v3MQXOnf2L+D/lWy69mc6vbgJpX8lFnx
+ damEilE6EygmBq40MJvLBvxO1uLuinT23X2nFCZKmbJ//viJNb+8KewvKXAzakbtrz8c
+ 1WIl9bYhZSvDlsQOJM7fbd2YKk65bvVH3CUeQpmeNyBWyoKEsrNqgaEcKhPSYWics8d+
+ Qry6CPBVvuT7eHzwRJWqAszAWwC8E/cnMr8oqz9g60rMx/LPjHc181Q7lASV95Qe0blC
+ 951Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694409793; x=1695014593;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1694410328; x=1695015128;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=D4RzJmiYCzTefHGKldBRhnjjjDsCDGI0zcGmac4AE+I=;
- b=ct2e+Tz+mInKkEbAiH3W+7tOLRTmmqL5E94I/9wfqCh4ENQN99WjOzHAu2jEO25xAm
- Fxyd2LbAok0d5TzMBgO/+y8OS1SDU6IPiQJcHKQvAXuZ364N1tbaV5y6h0tuqTXmsaEl
- 0/kN/ArK6Xf1nqQwBmM8vHt6fm7Ri/p8OBno79PM2Yk/LVC5LKeS4+XJvCJGDVWl5u2L
- JgsG7F29se6/wbY/UJxE8I5Q+FiAxGUZgChvDapmn8zXElYzHEHnEWX9p4Jfe9N6gr5b
- h0y+kqbEqgbJwJ0qlYWzxreZ2k8dT+xTel43RmCICqa+COqdsrigFY5W3tb50uXLniqb
- kSog==
-X-Gm-Message-State: AOJu0Yxa8lHVTR43jasEj8Rg4Q0ksg+Ks5ji3lYXY6P1B2NhOwejM35F
- EHtZndh0yxsj2UV0GRh/LRS6UOMNm6IIWaJG7j6+LQ==
-X-Google-Smtp-Source: AGHT+IEh52g13hqHOw2UvttrK9A7G2X4DEqZBivYrE7r6ZGNOOzzRJb+hlqtwx9gKrIExyBzSAoMOA==
-X-Received: by 2002:a17:903:2448:b0:1c1:ee23:bb75 with SMTP id
- l8-20020a170903244800b001c1ee23bb75mr10567193pls.1.1694409792688; 
- Sun, 10 Sep 2023 22:23:12 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:91f5:5d19:aad:686c])
+ bh=Ey6Hr9jr5fDFa0pgv+y0SJNCoWCsunW6WI7wk+k7Vqs=;
+ b=NeZBrcBV2/GrWCiLtF4T2sw7HWQwRMqh+RVYS/IVFeM6jIq0ENp7leJTc6nE3MuyYY
+ Eiu8j3Blp/MlODD/2bl5ltkjs3dhG49MPhQ2+1QJW3wNAt2XAkA+Il7GXiaTceZXGiN8
+ y3MFBCI7lx3ev9fpeIaWLpxXhoqRL94/lD2NCia3PUZhzG3mbjDUvQIbJ+zjvPeBRpBC
+ SIW/Ubr7wh5MKVCA4J45uc23e2TBY7XfhVesDrvlkRBdVskFE166/WfmvfeYJ80reZL9
+ RKgMQ/nzKyVUh/5Evt9ZI9WTDVQPqrSDJoAB9JvjageYpoDi8TUBFAhF7xpcd3ILbhRB
+ Na8Q==
+X-Gm-Message-State: AOJu0YxCnMGbuWR4RyIRm1quk1OmocQRzaXArsEzopydV844kxG3FB9W
+ po4orqkx3PRtB4KODdGfSP5sUw==
+X-Google-Smtp-Source: AGHT+IEV1/zlpB3nN0S9RU5HayBWqh2debVvFF8TtH7QoMbjL573YANQXK7vtIoz/ZoVZYVrqMr9BA==
+X-Received: by 2002:a05:6358:919d:b0:139:d4cb:d9fd with SMTP id
+ j29-20020a056358919d00b00139d4cbd9fdmr10469111rwa.3.1694410328630; 
+ Sun, 10 Sep 2023 22:32:08 -0700 (PDT)
+Received: from ?IPV6:2401:4900:1c60:c4b6:ac3f:9422:8dcf:f944?
+ ([2401:4900:1c60:c4b6:ac3f:9422:8dcf:f944])
  by smtp.gmail.com with ESMTPSA id
- d7-20020a170902cec700b001c0a4146961sm5474491plg.19.2023.09.10.22.23.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Sep 2023 22:23:12 -0700 (PDT)
-Date: Mon, 11 Sep 2023 14:23:09 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com,
- linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
-Subject: Re: [RFC 5/6] firmware: scmi: add pseudo pinctrl protocol support on
- sandbox
-Message-ID: <ZP6kPVk9AGoO5T/z@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- etienne.carriere@st.com, michal.simek@amd.com,
- linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
-References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
- <20230906024011.17488-6-takahiro.akashi@linaro.org>
- <CAPnjgZ2GwRi4TyNVzcm9UZOtvmhj+2ZwH77Z62VvNNH56D6spQ@mail.gmail.com>
+ f13-20020aa78b0d000000b0068c62a45be6sm4877621pfd.179.2023.09.10.22.32.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 10 Sep 2023 22:32:08 -0700 (PDT)
+Message-ID: <dec9662f-eae0-1f8c-423f-2bc69df2d6d7@linaro.org>
+Date: Mon, 11 Sep 2023 11:02:03 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2GwRi4TyNVzcm9UZOtvmhj+2ZwH77Z62VvNNH56D6spQ@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.3.1
+Subject: Re: [PATCH] ufs: ufs-renesas: Drop include common.h
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, Neha Malcom Francis <n-francis@ti.com>
+References: <20230909025435.84441-1-marek.vasut+renesas@mailbox.org>
+Content-Language: en-US
+From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+In-Reply-To: <20230909025435.84441-1-marek.vasut+renesas@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,56 +95,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Sep 10, 2023 at 01:13:28PM -0600, Simon Glass wrote:
-> Hi AKASHI,
-> 
-> On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
-> <takahiro.akashi@linaro.org> wrote:
-> >
-> > With this patch, sandbox SCMI agent can handle pinctrl protocol.
-> > This feature is used in an unit test for SCMI pinctrl.
-> >
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > ---
-> >  arch/sandbox/dts/test.dts                  | 115 ++++
-> >  drivers/firmware/scmi/sandbox-scmi_agent.c | 722 +++++++++++++++++++++
-> >  2 files changed, 837 insertions(+)
-> >
-> > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-> > index dc0bfdfb6e4b..d2ddea801995 100644
-> > --- a/arch/sandbox/dts/test.dts
-> > +++ b/arch/sandbox/dts/test.dts
-> > @@ -723,9 +723,124 @@
-> >                                         };
-> >                                 };
-> >                         };
-> > +
-> > +                       pinctrl_scmi: protocol@19 {
-> > +                               reg = <0x19>;
-> > +
-> > +                               pinctrl-names = "default","alternate";
-> > +                               pinctrl-0 = <&scmi_pinctrl_gpios>, <&scmi_pinctrl_i2s>;
-> > +                               pinctrl-1 = <&scmi_pinctrl_spi>, <&scmi_pinctrl_i2c>;
-> > +
-> > +#if 0
-> 
-> Are these alternatives that you are testing?
 
-I should have had more explanation.
-Yes, as I mentioned in the cover letter (and patch#4), there
-are two alternatives for defining SCMI pinctrl based gpio devices.
-Actually, this "#if" corresponds to the case (B) where gpio node
-is located under scmi node.
-
-Since I didn't come up with any good way to switch two cases dynamically
-in the test, I had modified this option manually.
-(I left two "#if" here as the patch was an RFC, any way.)
-
-Thanks,
--Takahiro Akashi
-
+On 9/9/23 8:24 AM, Marek Vasut wrote:
+> The "#include <common.h>" is being phased out in favor of more fine
+> grained header management, i.e. ideally include a subset of headers
+> that are really needed. Remove it from this driver.
 > 
-> The bindings  look OK to me - is this how it is done in Linux?
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> Cc: Neha Malcom Francis <n-francis@ti.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>   drivers/ufs/ufs-renesas.c | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> Regards,
-> Simon
+> diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
+> index f6086050cde..ae05bdc8102 100644
+> --- a/drivers/ufs/ufs-renesas.c
+> +++ b/drivers/ufs/ufs-renesas.c
+> @@ -6,7 +6,6 @@
+>    */
+>   
+>   #include <clk.h>
+> -#include <common.h>
+>   #include <dm.h>
+>   #include <ufs.h>
+>   #include <asm/io.h>
+
+Reviewed-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+
+Thanks.
