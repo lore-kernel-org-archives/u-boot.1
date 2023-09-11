@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7519EE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 15:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D31B3EE7FF4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 15:40:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98C6B86E76;
-	Mon, 11 Sep 2023 17:39:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EDF2286E64;
+	Mon, 11 Sep 2023 17:39:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="rG/5y4oa";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xzZQga2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9894886E62; Mon, 11 Sep 2023 17:39:38 +0200 (CEST)
+ id 25BDC86E22; Mon, 11 Sep 2023 17:39:39 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6851D86AEC
+ by phobos.denx.de (Postfix) with ESMTPS id 6940B86E76
  for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 17:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
@@ -28,31 +28,31 @@ Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7618c49428=gatien.chevallier@foss.st.com
 Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 38BFH5hK013569; Mon, 11 Sep 2023 17:39:34 +0200
+ 38BFBUgg013602; Mon, 11 Sep 2023 17:39:34 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=ayNRlqi0dyxctbDTcwKvUhNDQgIsktxaAczk/WaJ5g8=; b=rG
- /5y4oaP6Se4SFQnBgxZa527ObOpEc3bI+1+qHwFjnC6QOx5fJo4dG9biML846tVn
- BBrMMrwCBqG7ANi5IqOKgB9TUib9weh45INAM+N311/WKVs8S4gdQrkaimSlP4lC
- DM/x9qrSsiXqJ+gBhc4JY+qZhbTNP3NzwnfB3MTIbAgIz5OOrAk7gDhTktPnHu8L
- OfVYQQF6e2+VVK9FAetXMNIWdv4rIEP00jqh15/E1uM7mIezEFgv070rR/6CffcK
- Eh32wAHPPgndFf/hnnpBJGW0htAqiTeqDF8aOQqtPAMZhcttILPfwXbOsQn5latH
- iDuMJdDRXmWT1biI/MeA==
+ selector1; bh=d4EUTCyAHuMJ6Wje3nVBEW2t8NQeUFX6MTzqGMpr81o=; b=xz
+ ZQga2XJyWvlY9jYDipnNA+LjWIBA5uHzAyPtMK2y7mkehwsneF6zPEDLsXBKCwO6
+ ZMz8ZRidlh2+2sqdV5AUx+ks46Dv+qeVuIHl1IWNxm1gyVIJG3MS59sod7u2/s7z
+ yqcWJvUL8m7U6atP36tO74acNCQbxBUYtSdN/2kINcY5xIL7fnHicXVcBE6xRxmi
+ tZCrk1B03gHFdlX/14Lsw+lZEYdZcW0c+EV09soKkTne0JqGKVIHIPhHCfc0Ggca
+ bF4ZiPbY9t9D2gSVfBlz6JK/TWUSagYAspLu9c5OO3EtsBMSkgLg5UHPTc8Q7rss
+ keKUxzLZbFhmHiDFf9RQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t207nske9-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t207nske8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Mon, 11 Sep 2023 17:39:34 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7AA23100064;
- Mon, 11 Sep 2023 17:39:27 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AFA2F100063;
+ Mon, 11 Sep 2023 17:39:26 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7024B2085BD;
- Mon, 11 Sep 2023 17:39:27 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A4EC82085BD;
+ Mon, 11 Sep 2023 17:39:26 +0200 (CEST)
 Received: from localhost (10.201.20.32) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Sep
- 2023 17:39:27 +0200
+ 2023 17:39:26 +0200
 From: Gatien Chevallier <gatien.chevallier@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice Chotard
@@ -60,9 +60,9 @@ CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice Chotard
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  <uboot-stm32@st-md-mailman.stormreply.com>, Gatien Chevallier
  <gatien.chevallier@foss.st.com>
-Subject: [PATCH v2 7/7] ARM: dts: stm32: add RNG node for STM32MP13x platforms
-Date: Mon, 11 Sep 2023 17:37:24 +0200
-Message-ID: <20230911153724.799535-8-gatien.chevallier@foss.st.com>
+Subject: [PATCH v2 6/7] rng: stm32: Implement custom RNG configuration support
+Date: Mon, 11 Sep 2023 17:37:23 +0200
+Message-ID: <20230911153724.799535-7-gatien.chevallier@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230911153724.799535-1-gatien.chevallier@foss.st.com>
 References: <20230911153724.799535-1-gatien.chevallier@foss.st.com>
@@ -91,7 +91,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add RNG node for STM32MP13x platforms.
+STM32 RNG configuration should best fit the requirements of the
+platform. Therefore, put a platform-specific RNG configuration
+field in the platform data. Default RNG configuration for STM32MP13
+is the NIST certified configuration [1].
+
+While there, fix and the RNG init sequence to support all RNG
+versions.
+
+[1] https://csrc.nist.gov/projects/cryptographic-module-validation-program/entropy-validations/certificate/53
 
 Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -99,28 +107,139 @@ Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Changes in V2:
 	- Added Patrick's tag
 
- arch/arm/dts/stm32mp131.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/rng/stm32_rng.c | 54 ++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 51 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
-index d23bbc3639..bd7285053d 100644
---- a/arch/arm/dts/stm32mp131.dtsi
-+++ b/arch/arm/dts/stm32mp131.dtsi
-@@ -1208,6 +1208,14 @@
- 			};
- 		};
+diff --git a/drivers/rng/stm32_rng.c b/drivers/rng/stm32_rng.c
+index b1a790b217..c397b4d95c 100644
+--- a/drivers/rng/stm32_rng.c
++++ b/drivers/rng/stm32_rng.c
+@@ -21,8 +21,15 @@
+ #define RNG_CR			0x00
+ #define RNG_CR_RNGEN		BIT(2)
+ #define RNG_CR_CED		BIT(5)
++#define RNG_CR_CONFIG1		GENMASK(11, 8)
++#define RNG_CR_NISTC		BIT(12)
++#define RNG_CR_CONFIG2		GENMASK(15, 13)
+ #define RNG_CR_CLKDIV_SHIFT	16
++#define RNG_CR_CLKDIV		GENMASK(19, 16)
++#define RNG_CR_CONFIG3		GENMASK(25, 20)
+ #define RNG_CR_CONDRST		BIT(30)
++#define RNG_CR_ENTROPY_SRC_MASK	(RNG_CR_CONFIG1 | RNG_CR_NISTC | RNG_CR_CONFIG2 | RNG_CR_CONFIG3)
++#define RNG_CR_CONFIG_MASK	(RNG_CR_ENTROPY_SRC_MASK | RNG_CR_CED | RNG_CR_CLKDIV)
  
-+		rng: rng@54004000 {
-+			compatible = "st,stm32mp13-rng";
-+			reg = <0x54004000 0x400>;
-+			clocks = <&rcc RNG1_K>;
-+			resets = <&rcc RNG1_R>;
-+			status = "disabled";
-+		};
+ #define RNG_SR		0x04
+ #define RNG_SR_SEIS	BIT(6)
+@@ -32,17 +39,28 @@
+ 
+ #define RNG_DR		0x08
+ 
++#define RNG_NSCR		0x0C
++#define RNG_NSCR_MASK		GENMASK(17, 0)
 +
- 		mdma: dma-controller@58000000 {
- 			compatible = "st,stm32h7-mdma";
- 			reg = <0x58000000 0x1000>;
++#define RNG_HTCR	0x10
++
+ #define RNG_NB_RECOVER_TRIES	3
+ 
+ /*
+  * struct stm32_rng_data - RNG compat data
+  *
+  * @max_clock_rate:	Max RNG clock frequency, in Hertz
++ * @cr:			Entropy source configuration
++ * @nscr:		Noice sources control configuration
++ * @htcr:		Health tests configuration
+  * @has_cond_reset:	True if conditionnal reset is supported
+  *
+  */
+ struct stm32_rng_data {
+ 	uint max_clock_rate;
++	u32 cr;
++	u32 nscr;
++	u32 htcr;
+ 	bool has_cond_reset;
+ };
+ 
+@@ -244,28 +262,48 @@ static int stm32_rng_init(struct stm32_rng_plat *pdata)
+ 
+ 	cr = readl(pdata->base + RNG_CR);
+ 
+-	if (pdata->data->has_cond_reset) {
++	/*
++	 * Keep default RNG configuration if none was specified, that is when conf.cr is set to 0.
++	 */
++	if (pdata->data->has_cond_reset && pdata->data->cr) {
+ 		uint clock_div = stm32_rng_clock_freq_restrain(pdata);
+ 
+-		cr |= RNG_CR_CONDRST | (clock_div << RNG_CR_CLKDIV_SHIFT);
++		cr &= ~RNG_CR_CONFIG_MASK;
++		cr |= RNG_CR_CONDRST | (pdata->data->cr & RNG_CR_ENTROPY_SRC_MASK) |
++		      (clock_div << RNG_CR_CLKDIV_SHIFT);
+ 		if (pdata->ced)
+ 			cr &= ~RNG_CR_CED;
+ 		else
+ 			cr |= RNG_CR_CED;
+ 		writel(cr, pdata->base + RNG_CR);
++
++		/* Health tests and noise control registers */
++		writel_relaxed(pdata->data->htcr, pdata->base + RNG_HTCR);
++		writel_relaxed(pdata->data->nscr & RNG_NSCR_MASK, pdata->base + RNG_NSCR);
++
+ 		cr &= ~RNG_CR_CONDRST;
+ 		cr |= RNG_CR_RNGEN;
+ 		writel(cr, pdata->base + RNG_CR);
+ 		err = readl_poll_timeout(pdata->base + RNG_CR, cr,
+ 					 (!(cr & RNG_CR_CONDRST)), 10000);
+-		if (err)
++		if (err) {
++			log_err("%s: Timeout!",  __func__);
+ 			return err;
++		}
+ 	} else {
++		if (pdata->data->has_cond_reset)
++			cr |= RNG_CR_CONDRST;
++
+ 		if (pdata->ced)
+ 			cr &= ~RNG_CR_CED;
+ 		else
+ 			cr |= RNG_CR_CED;
+ 
++		writel(cr, pdata->base + RNG_CR);
++
++		if (pdata->data->has_cond_reset)
++			cr &= ~RNG_CR_CONDRST;
++
+ 		cr |= RNG_CR_RNGEN;
+ 
+ 		writel(cr, pdata->base + RNG_CR);
+@@ -276,6 +314,9 @@ static int stm32_rng_init(struct stm32_rng_plat *pdata)
+ 
+ 	err = readl_poll_timeout(pdata->base + RNG_SR, sr,
+ 				 sr & RNG_SR_DRDY, 10000);
++	if (err)
++		log_err("%s: Timeout!",  __func__);
++
+ 	return err;
+ }
+ 
+@@ -335,11 +376,18 @@ static const struct dm_rng_ops stm32_rng_ops = {
+ static const struct stm32_rng_data stm32mp13_rng_data = {
+ 	.has_cond_reset = true,
+ 	.max_clock_rate = 48000000,
++	.htcr = 0x969D,
++	.nscr = 0x2B5BB,
++	.cr = 0xF00D00,
+ };
+ 
+ static const struct stm32_rng_data stm32_rng_data = {
+ 	.has_cond_reset = false,
+ 	.max_clock_rate = 3000000,
++	/* Not supported */
++	.htcr = 0,
++	.nscr = 0,
++	.cr = 0,
+ };
+ 
+ static const struct udevice_id stm32_rng_match[] = {
 -- 
 2.25.1
 
