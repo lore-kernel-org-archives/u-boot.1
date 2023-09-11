@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60D22EE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 05:15:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A0A5EE7FF4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 05:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 735B786CEC;
-	Mon, 11 Sep 2023 07:15:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4350B86583;
+	Mon, 11 Sep 2023 07:23:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L2hdp7P2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eQaE+tSg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 299CE86CF6; Mon, 11 Sep 2023 07:15:03 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id CAF1786410; Mon, 11 Sep 2023 07:23:17 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46269863D3
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 07:15:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66B7386583
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 07:23:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-68cb5278e3fso828878b3a.1
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 22:15:00 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1bf7b5e1f06so7324535ad.0
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 22:23:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694409298; x=1695014098; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694409793; x=1695014593; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vgo0O4t7kicjwmZd9yP7weMZKsysmNttFAt3TuNdO6I=;
- b=L2hdp7P2cojjs5Udyh4je7wow/XRxZx6euqxIJzQLveLLVnmfoQyum0KJiyxsPTaeL
- p2h9ofjSQIlKlD3dgvwb6sBt76qRi0qrx9crkkSzq9nMUk2JtOCTsn0QkePBdpEhEGGG
- qT0YJ+nkY+8GfL0s79W2ZzJlgG3B1KTlpqh66EMuZmITHfCJUgYIUu+dW/9Qq4jFMvyK
- Se6YLXfJ/LGHx+4QjAwUTJzM6zk1nhulQDDle73qxcOkJGQJebxvSx4d3WiBHl/x5idg
- Ybmw+nYvTNYv7CUADwWkyLaa9w+Wcok7QJrSKMSTjUnzmEJj2FUWeSU9kTxnkoI/rE3g
- YllQ==
+ bh=D4RzJmiYCzTefHGKldBRhnjjjDsCDGI0zcGmac4AE+I=;
+ b=eQaE+tSgewbQP8dxT5oaZCoDSkpDT/58G+JDeoH0uagBX47I/BRuHzsaX+mszZkJP1
+ F4+kHa06FqoSC6wDAP8YPQh+IcaCoF1gTXXhiXRmvGVJSvqX6fy//nIWcCH8i7KKqxZG
+ KLwE3hlvePb2fh+fQxoZhe9cIrS13WNyGfuH2dNIGvJnnYLn89rEMUOMX+xG6M0dr0fk
+ OPFNuS8YYaUKw8G28Ll2RupoPg/Y/yFIWTBBQZfiaiu6SkGKM+hSf+rqLFNGl7LNpevy
+ y64wFOuoXFUzF7EX9Fhp2v8FEqsgmwVYzHNNBdpfszshUvJdI8lwzenwQqyQUbsg73G6
+ 1xLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694409298; x=1695014098;
+ d=1e100.net; s=20230601; t=1694409793; x=1695014593;
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Vgo0O4t7kicjwmZd9yP7weMZKsysmNttFAt3TuNdO6I=;
- b=vz2pjKBuldcDmcdp9dgHkDR2cmIgrfg3x6OuJIgcMQdQLwks8Pfs6dJ3UpGpApxn8O
- py+ylPZdQqnHqJxBP4psGdlve1JC2Z7rEkTqZayF0m5RlkrrlmvkNx/aTvuiWJGf6lcX
- tbq6zko024mxjs33oXsGs6E/T1E6beXHlRRJ5NYifXdOObK22PaLMD7i4es1FA9+hXzq
- Y+FnJr2zcPtrHFlDPaNYGCGZjLzZwAFNxBhUPCYvV5lKC6PciUzG5G2QvEXVUAvw6ZsK
- aQPxfajaVvJAM0nW3hGaq2tK+LmpHvo8IDmzInASI58RbU/68SqTzBG2zggxN2esSHfk
- 9kyg==
-X-Gm-Message-State: AOJu0YxDhtZ6ZJk26IiWNBtzaYesCyW+JY/mEoPm5IR8IeWDmSAl+oY/
- BiPPavmyXEO401RFHD4KiW76ag==
-X-Google-Smtp-Source: AGHT+IGaxAL5ZBCztFvrdh1x9JPq+HymqH/m8goF3P77Vc6I79cwGA2dbRfJfEIPTsVewtA/ZI3TwQ==
-X-Received: by 2002:a05:6a21:194:b0:13f:65ca:52a2 with SMTP id
- le20-20020a056a21019400b0013f65ca52a2mr12859675pzb.5.1694409298288; 
- Sun, 10 Sep 2023 22:14:58 -0700 (PDT)
+ bh=D4RzJmiYCzTefHGKldBRhnjjjDsCDGI0zcGmac4AE+I=;
+ b=ct2e+Tz+mInKkEbAiH3W+7tOLRTmmqL5E94I/9wfqCh4ENQN99WjOzHAu2jEO25xAm
+ Fxyd2LbAok0d5TzMBgO/+y8OS1SDU6IPiQJcHKQvAXuZ364N1tbaV5y6h0tuqTXmsaEl
+ 0/kN/ArK6Xf1nqQwBmM8vHt6fm7Ri/p8OBno79PM2Yk/LVC5LKeS4+XJvCJGDVWl5u2L
+ JgsG7F29se6/wbY/UJxE8I5Q+FiAxGUZgChvDapmn8zXElYzHEHnEWX9p4Jfe9N6gr5b
+ h0y+kqbEqgbJwJ0qlYWzxreZ2k8dT+xTel43RmCICqa+COqdsrigFY5W3tb50uXLniqb
+ kSog==
+X-Gm-Message-State: AOJu0Yxa8lHVTR43jasEj8Rg4Q0ksg+Ks5ji3lYXY6P1B2NhOwejM35F
+ EHtZndh0yxsj2UV0GRh/LRS6UOMNm6IIWaJG7j6+LQ==
+X-Google-Smtp-Source: AGHT+IEh52g13hqHOw2UvttrK9A7G2X4DEqZBivYrE7r6ZGNOOzzRJb+hlqtwx9gKrIExyBzSAoMOA==
+X-Received: by 2002:a17:903:2448:b0:1c1:ee23:bb75 with SMTP id
+ l8-20020a170903244800b001c1ee23bb75mr10567193pls.1.1694409792688; 
+ Sun, 10 Sep 2023 22:23:12 -0700 (PDT)
 Received: from octopus ([2400:4050:c3e1:100:91f5:5d19:aad:686c])
  by smtp.gmail.com with ESMTPSA id
- j3-20020a170902da8300b001bba1475c92sm5391554plx.113.2023.09.10.22.14.56
+ d7-20020a170902cec700b001c0a4146961sm5474491plg.19.2023.09.10.22.23.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 10 Sep 2023 22:14:57 -0700 (PDT)
-Date: Mon, 11 Sep 2023 14:14:54 +0900
+ Sun, 10 Sep 2023 22:23:12 -0700 (PDT)
+Date: Mon, 11 Sep 2023 14:23:09 +0900
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com,
  linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
-Subject: Re: [RFC 3/6] pinctrl: add scmi driver
-Message-ID: <ZP6iTtWaq2EoUi8s@octopus>
+Subject: Re: [RFC 5/6] firmware: scmi: add pseudo pinctrl protocol support on
+ sandbox
+Message-ID: <ZP6kPVk9AGoO5T/z@octopus>
 Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  etienne.carriere@st.com, michal.simek@amd.com,
  linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
 References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
- <20230906024011.17488-4-takahiro.akashi@linaro.org>
- <CAPnjgZ00tEakxn4qq+o5W2Ks-bq+YW=JngJhE-zoqJYtjBFwtA@mail.gmail.com>
+ <20230906024011.17488-6-takahiro.akashi@linaro.org>
+ <CAPnjgZ2GwRi4TyNVzcm9UZOtvmhj+2ZwH77Z62VvNNH56D6spQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ00tEakxn4qq+o5W2Ks-bq+YW=JngJhE-zoqJYtjBFwtA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2GwRi4TyNVzcm9UZOtvmhj+2ZwH77Z62VvNNH56D6spQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,66 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Sun, Sep 10, 2023 at 01:13:27PM -0600, Simon Glass wrote:
+On Sun, Sep 10, 2023 at 01:13:28PM -0600, Simon Glass wrote:
 > Hi AKASHI,
 > 
 > On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
 > <takahiro.akashi@linaro.org> wrote:
 > >
-> > This DM-compliant driver deals with SCMI pinctrl protocol and presents
-> > pinctrl devices exposed by SCMI firmware (server).
+> > With this patch, sandbox SCMI agent can handle pinctrl protocol.
+> > This feature is used in an unit test for SCMI pinctrl.
 > >
 > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 > > ---
-> >  drivers/pinctrl/Kconfig        |  11 +
-> >  drivers/pinctrl/Makefile       |   1 +
-> >  drivers/pinctrl/pinctrl-scmi.c | 537 +++++++++++++++++++++++++++++++++
-> >  3 files changed, 549 insertions(+)
-> >  create mode 100644 drivers/pinctrl/pinctrl-scmi.c
-> 
-> 
-> [..]
-> 
-> +
-> > +U_BOOT_DRIVER(scmi_pinctrl) = {
-> > +       .name = "scmi_pinctrl",
-> > +       .id = UCLASS_PINCTRL,
-> > +       .ops = &scmi_pinctrl_ops,
-> > +       .probe = scmi_pinctrl_probe,
-> > +       .priv_auto      = sizeof(struct scmi_pinctrl_priv),
-> > +};
-> > --
-> > 2.34.1
+> >  arch/sandbox/dts/test.dts                  | 115 ++++
+> >  drivers/firmware/scmi/sandbox-scmi_agent.c | 722 +++++++++++++++++++++
+> >  2 files changed, 837 insertions(+)
 > >
+> > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> > index dc0bfdfb6e4b..d2ddea801995 100644
+> > --- a/arch/sandbox/dts/test.dts
+> > +++ b/arch/sandbox/dts/test.dts
+> > @@ -723,9 +723,124 @@
+> >                                         };
+> >                                 };
+> >                         };
+> > +
+> > +                       pinctrl_scmi: protocol@19 {
+> > +                               reg = <0x19>;
+> > +
+> > +                               pinctrl-names = "default","alternate";
+> > +                               pinctrl-0 = <&scmi_pinctrl_gpios>, <&scmi_pinctrl_i2s>;
+> > +                               pinctrl-1 = <&scmi_pinctrl_spi>, <&scmi_pinctrl_i2c>;
+> > +
+> > +#if 0
 > 
-> Where is the compatible string for this driver?
+> Are these alternatives that you are testing?
 
-Nothing defined.
+I should have had more explanation.
+Yes, as I mentioned in the cover letter (and patch#4), there
+are two alternatives for defining SCMI pinctrl based gpio devices.
+Actually, this "#if" corresponds to the case (B) where gpio node
+is located under scmi node.
 
-As I mentioned in the cover letter, pinctrl driver consists of
-two layers:
-- helper functions which directly manipulate protocol interfaces.
-- DM-compliant (that you doubt about :) pinctrl driver.
+Since I didn't come up with any good way to switch two cases dynamically
+in the test, I had modified this option manually.
+(I left two "#if" here as the patch was an RFC, any way.)
 
-All the SCMI-based drivers (existing ones, clock, reset and voltage domain,
-except base) follow this scheme.
-
-According to the DT bindings for SCMI protocols, they are sub-nodes
-of scmi node and identified by "reg" properties. When the *bind* takes
-place, scmi_bind_protocols() will enumerate all the sub-nodes and
-try to bind associated protocol drivers (pinctrl in my patch) based
-on "reg" value.
-
-So there is no need to have a "compatible" property for each protocol.
-Do you think it is ugly?
-I suppose the corresponding kernel code, scmi_probe() in
-drivers/firmware/arm_scmi/driver.c, has a similar logic although
-it seems a bit more complicated.
-
+Thanks,
 -Takahiro Akashi
 
+> 
+> The bindings  look OK to me - is this how it is done in Linux?
 > 
 > Regards,
 > Simon
