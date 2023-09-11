@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3DD4EE57DF
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 16:43:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD19BEE7FF4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 16:43:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E247486E80;
-	Mon, 11 Sep 2023 18:42:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 416FA86E8A;
+	Mon, 11 Sep 2023 18:42:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="j3inCveF";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="P6ePRoQF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F209886E68; Mon, 11 Sep 2023 18:35:53 +0200 (CEST)
+ id 71A8B86E6F; Mon, 11 Sep 2023 18:35:56 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1AF186E6F
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 18:35:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB5CC86E51
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 18:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 41C52100017;
- Mon, 11 Sep 2023 19:35:50 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 41C52100017
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 5ADF8100018;
+ Mon, 11 Sep 2023 19:35:52 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 5ADF8100018
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1694450150;
- bh=jDBhlJHfmXvdmGXtrsgO8ZPbipWZ0Ifl3WKfmyRnFQI=;
+ s=mail; t=1694450152;
+ bh=ciGOPjm1NieKg+YJw4aVb10kJXcuw93BkBKRElpKyAc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=j3inCveFzO7CoBI+8FT784rc4z6AgZ5ZYDR8kdtgrimeDeeqLdMNfFeRsC8+7x2qz
- wovwm3W7Ui5nGgUrNt4TgwyOm5CAqBjdCb2lpT7ZATYdY1+AY/Cd7HQ2MHmJ+Fd0hh
- nnnr6QzBxr6rvqTkAK+xRMOJALAGwUY4ZNe37uHHrDE6NH35w6yhkbegSdwriVNceT
- Sm41KYPQXmOTEu7dSrDmBtWc/MJBV4pP28cmaK4dPOfvlco0B5MqMdK+g08wG2dSU4
- pXwpIEhopawetz9ytsIr1Xl8DjFRR/xELg4w+hKUIoAJ3UeafyjW8/QKhLkabqLivx
- djGt6/d0lxfAg==
+ b=P6ePRoQFxU8XKnqoz8uhW8ju5EAk2TyBhjegqHMGIPR02o1c9spk5LEUSrGKQfqqB
+ OpgELsX+sAfEhLtwnZt+C8cjY7Mjw3/McwmnoQv0/+HxWadGbbJb9SjaCex84SW71m
+ mQmupoXYgB8adOvO3w2lLigritda95gCnEC8noxmr5Lu80ZSWRMU+bKlx/xSKNjCyh
+ ElAgL8TbyNcMyd58PZuhHJdprewyV6xXweHhQl4puXt0tSiX2yu5fGaqKa3P5HHJsj
+ H2CNmUIZZvBCsnWeuVnv7w8HmdPEv8grT7xPRShV3qsGOxrTpVIAhBO6XfvWeo/Z/3
+ EJHPB5Sk+8y7w==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 11 Sep 2023 19:35:50 +0300 (MSK)
+ Mon, 11 Sep 2023 19:35:52 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 11 Sep 2023 19:35:49 +0300
+ 15.2.1118.30; Mon, 11 Sep 2023 19:35:51 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <takahiro.akashi@linaro.org>, <ilias.apalodimas@linaro.org>,
@@ -57,9 +57,9 @@ To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>,
  <paul.barker@sancloud.com>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 5/8] sandbox: defconfig: enable CONFIG_SM option
-Date: Mon, 11 Sep 2023 19:35:33 +0300
-Message-ID: <20230911163536.20735-6-avromanov@salutedevices.com>
+Subject: [PATCH v2 7/8] arch: meson: sm: set correct order of the includes
+Date: Mon, 11 Sep 2023 19:35:35 +0300
+Message-ID: <20230911163536.20735-8-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20230911163536.20735-1-avromanov@salutedevices.com>
 References: <20230911163536.20735-1-avromanov@salutedevices.com>
@@ -108,25 +108,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We use this option for test UCLASS_SM.
+The common.h header should always be first, followed
+by other headers in order, then headers with directories,
+then local files.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- configs/sandbox_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-meson/sm.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index be46cae7aa..0745a4ecca 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -270,6 +270,7 @@ CONFIG_RTC_RV8803=y
- CONFIG_SCSI=y
- CONFIG_DM_SCSI=y
- CONFIG_SANDBOX_SERIAL=y
-+CONFIG_SM=y
- CONFIG_SMEM=y
- CONFIG_SANDBOX_SMEM=y
- CONFIG_SOUND=y
+diff --git a/arch/arm/mach-meson/sm.c b/arch/arm/mach-meson/sm.c
+index d600c64d0b..b5dd6c6d39 100644
+--- a/arch/arm/mach-meson/sm.c
++++ b/arch/arm/mach-meson/sm.c
+@@ -6,7 +6,10 @@
+  */
+ 
+ #include <common.h>
++#include <dm.h>
+ #include <log.h>
++#include <regmap.h>
++#include <syscon.h>
+ #include <asm/arch/sm.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+@@ -14,10 +17,7 @@
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+ #include <linux/kernel.h>
+-#include <dm.h>
+ #include <linux/bitfield.h>
+-#include <regmap.h>
+-#include <syscon.h>
+ 
+ #define FN_GET_SHARE_MEM_INPUT_BASE	0x82000020
+ #define FN_GET_SHARE_MEM_OUTPUT_BASE	0x82000021
 -- 
 2.25.1
 
