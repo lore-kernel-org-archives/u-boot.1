@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22848EE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 16:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E095EE57DF
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 16:42:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAE7886E68;
-	Mon, 11 Sep 2023 18:42:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40A6286E6E;
+	Mon, 11 Sep 2023 18:42:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="uVa5QY1k";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="fk9G3HFL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF3C986D00; Mon, 11 Sep 2023 18:35:51 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 8579886E79; Mon, 11 Sep 2023 18:35:53 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C81BE86E60
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 18:35:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCEB486E34
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 18:35:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 2292512000F;
- Mon, 11 Sep 2023 19:35:47 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2292512000F
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 45A43100016;
+ Mon, 11 Sep 2023 19:35:48 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 45A43100016
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1694450147;
- bh=03MJTYvoGhJ22sZxmhyDgiP2GAFh0r6TTAd4GNDCUTg=;
+ s=mail; t=1694450148;
+ bh=NX7b/JiLqZKMsdmXfq3yhM9SCu7KN8srYmlosZqolEw=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=uVa5QY1kNvvjvMl9Ry06oC4+4zb84zpKjbr8DsoUeRK+stIdpP43CVDYiMub3JXJl
- 9PsgPTU3dlwtttWu2UQLkDAK3kvXeYa5IBx9pYKX160CGvavpl84DDyuGdqSRoosOo
- Swo9O+AFR5JMq9fxk++Zsg8NOVTKgKTCQirsB4iEmRLUSTZReGb4cd2uv8qiFoXGEz
- 3xsdf9N7PgjtDv+11bgPmLQR+0yZ60hVVqWeHac1NPJjmDShRw4ZCpcIbU2cmsdIr1
- DcOfepMwb7x6I1LMeyBIEX15imF4Yly8ql2jO6jPlqJ39Hu9tiI/lIriPpCXAlTOz5
- XzTd5meB5EGVw==
+ b=fk9G3HFL7Rl86Ig2EHCfvXeJc37ZWEMHVCsr73fVYrhEJCoJJEI18t0Rm0rTIRW3p
+ FV+Ipe/yRhd9Xy/rnIGSTJ5m+mrOPTXtfYgqrhswrFcDKzQML7N1fPVj1qSlhjVo46
+ vzrW0iSxGYdLVmJPM52X/HPPGGlwg9BM6xX7dVR3COUlL4a51ZmzhvMYH/57A7Y8tT
+ TpWVEoVTWqToju/UhNlhx3JpOxSsptlcNUwhyvcgkbLNn1uRXXqxxpd1P8TRASJxpH
+ lY7tvvd0IdYQeNzpJ+5J2zdDShTtnChwnXlHQ4Foc/UlgOcZzI1NV211sk4BW7lw+9
+ t6Iwol5MbD2wA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 11 Sep 2023 19:35:46 +0300 (MSK)
+ Mon, 11 Sep 2023 19:35:48 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 11 Sep 2023 19:35:46 +0300
+ 15.2.1118.30; Mon, 11 Sep 2023 19:35:47 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <takahiro.akashi@linaro.org>, <ilias.apalodimas@linaro.org>,
@@ -57,9 +57,9 @@ To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>,
  <paul.barker@sancloud.com>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 2/8] sandbox: add sandobx sm uclass driver
-Date: Mon, 11 Sep 2023 19:35:30 +0300
-Message-ID: <20230911163536.20735-3-avromanov@salutedevices.com>
+Subject: [PATCH v2 3/8] sandbox: dts: add meson secure monitor node
+Date: Mon, 11 Sep 2023 19:35:31 +0300
+Message-ID: <20230911163536.20735-4-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20230911163536.20735-1-avromanov@salutedevices.com>
 References: <20230911163536.20735-1-avromanov@salutedevices.com>
@@ -80,10 +80,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 530 530
  ecb1547b3f72d1df4c71c0b60e67ba6b4aea5432,
- {Tracking_from_domain_doesnt_match_to},
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -108,132 +108,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds sandbox secure monitor driver.
+We need this to test UCLASS_SM.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/sm/Makefile     |  1 +
- drivers/sm/sandbox-sm.c | 76 +++++++++++++++++++++++++++++++++++++++++
- include/sandbox-sm.h    | 18 ++++++++++
- 3 files changed, 95 insertions(+)
- create mode 100644 drivers/sm/sandbox-sm.c
- create mode 100644 include/sandbox-sm.h
+ arch/sandbox/dts/test.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/sm/Makefile b/drivers/sm/Makefile
-index 9f4683ba06..af5f475c2b 100644
---- a/drivers/sm/Makefile
-+++ b/drivers/sm/Makefile
-@@ -1,3 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0-only
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index dffe10adbf..4475aa58a6 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -693,6 +693,10 @@
+ 				};
+ 			};
+ 		};
++
++		sm: secure-monitor {
++			compatible = "sandbox,sm";
++		};
+ 	};
  
- obj-y += sm-uclass.o
-+obj-$(CONFIG_SANDBOX) += sandbox-sm.o
-diff --git a/drivers/sm/sandbox-sm.c b/drivers/sm/sandbox-sm.c
-new file mode 100644
-index 0000000000..109ddb2af5
---- /dev/null
-+++ b/drivers/sm/sandbox-sm.c
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023 SberDevices, Inc.
-+ *
-+ * Author: Alexey Romanov <avromanov@salutedevices.com>
-+ */
-+
-+#include <common.h>
-+#include <sm.h>
-+#include <sm-uclass.h>
-+#include <sandbox-sm.h>
-+#include <asm/ptrace.h>
-+#include <dm/device.h>
-+#include <linux/sizes.h>
-+
-+static u8 test_buffer[SZ_4K];
-+
-+static int sandbox_sm_call(struct udevice *dev, u32 cmd_index, s32 *smc_ret,
-+			   struct pt_regs *args)
-+{
-+	if (cmd_index >= SANDBOX_SMC_CMD_COUNT)
-+		return -EINVAL;
-+
-+	if (smc_ret)
-+		*smc_ret = 0;
-+
-+	return 0;
-+}
-+
-+static int sandbox_sm_call_read(struct udevice *dev, void *buffer, size_t size,
-+				u32 cmd_index, struct pt_regs *args)
-+{
-+	if (cmd_index >= SANDBOX_SMC_CMD_COUNT || !buffer)
-+		return -EINVAL;
-+
-+	if (size > sizeof(test_buffer))
-+		return -EINVAL;
-+
-+	memcpy(buffer, test_buffer, size);
-+
-+	return size;
-+}
-+
-+static int sandbox_sm_call_write(struct udevice *dev, void *buffer, size_t size,
-+				 u32 cmd_index, struct pt_regs *args)
-+{
-+	if (cmd_index >= SANDBOX_SMC_CMD_COUNT || !buffer)
-+		return -EINVAL;
-+
-+	if (size > sizeof(test_buffer))
-+		return -EINVAL;
-+
-+	memcpy(test_buffer, buffer, size);
-+
-+	return size;
-+}
-+
-+static const struct udevice_id sandbox_sm_ids[] = {
-+	{
-+		.compatible = "sandbox,sm",
-+	},
-+	{},
-+};
-+
-+static const struct sm_ops sandbox_sm_ops = {
-+	.sm_call = sandbox_sm_call,
-+	.sm_call_read = sandbox_sm_call_read,
-+	.sm_call_write = sandbox_sm_call_write,
-+};
-+
-+U_BOOT_DRIVER(sm) = {
-+	.name = "sm",
-+	.id = UCLASS_SM,
-+	.of_match = sandbox_sm_ids,
-+	.ops = &sandbox_sm_ops,
-+};
-diff --git a/include/sandbox-sm.h b/include/sandbox-sm.h
-new file mode 100644
-index 0000000000..91c30d501d
---- /dev/null
-+++ b/include/sandbox-sm.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2023 SberDevices, Inc.
-+ *
-+ * Author: Alexey Romanov <avromanov@salutedevices.com>
-+ */
-+
-+#ifndef __SANDBOX_SM_H__
-+#define __SANDBOX_SM_H__
-+
-+enum sandbox_smc_cmd {
-+	SANDBOX_SMC_CMD_READ_MEM,
-+	SANDBOX_SMC_CMD_WRITE_MEM,
-+	SANDBOX_SMC_CMD_COMMON,
-+	SANDBOX_SMC_CMD_COUNT,
-+};
-+
-+#endif
+ 	fpga {
 -- 
 2.25.1
 
