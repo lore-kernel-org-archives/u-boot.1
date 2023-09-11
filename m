@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B227C71153
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 17:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1F3EE57DF
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 17:33:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4611B86E63;
-	Mon, 11 Sep 2023 19:33:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9BB7686E71;
+	Mon, 11 Sep 2023 19:33:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GEl8OqdQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qcJKw5n6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7420886E63; Mon, 11 Sep 2023 19:33:33 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 599B086E6C; Mon, 11 Sep 2023 19:33:34 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4152786E39
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 19:33:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7E5C86E58
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 19:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38BHXRob119034;
- Mon, 11 Sep 2023 12:33:27 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38BHXTUs115724;
+ Mon, 11 Sep 2023 12:33:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694453607;
- bh=IEhdyB9EHjSLiXzlfOgXE4uQxNss+oXWmUuoXQuVqEE=;
- h=From:To:CC:Subject:Date;
- b=GEl8OqdQgFA6s+HVKpKXTbM7gP0k6KzyhWSz20Az2Rlrwx1pYYfr/svxWuedSxEiL
- R22gcEwE+sLQKYKA4DhytbCESqN8EKiAkQ4B7RPrMTJdCFwo/QlbsJEOLuFLU5scWl
- UpZkEq0T0yeBqr6NJfTlc/GIB0FMTBRH5TMTp5NE=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38BHXRQg013173
+ s=ti-com-17Q1; t=1694453609;
+ bh=fKzZt/yct2bXoGcpmFaYxzuAUp18QHe3lvQarApiJlo=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=qcJKw5n6ajoXSYRFUdAkVsbFuP8P2sskuONkv5xUZ3wC9PTtg0mjNqDqN8O1ma+nA
+ tLbErB8dya801s22CKPY8POoU41F6l44bAcd4/ow4Cbm32irDpmTO2TJ2hDv5Jr1CY
+ OcFZv/o1gRSFyIzVilNy4379DUCX3E+Mp1esRm6Q=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38BHXTTt069291
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 11 Sep 2023 12:33:27 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 11 Sep 2023 12:33:29 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 11
- Sep 2023 12:33:26 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 12:33:28 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 11 Sep 2023 12:33:26 -0500
+ Frontend Transport; Mon, 11 Sep 2023 12:33:28 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38BHXQE2038796;
- Mon, 11 Sep 2023 12:33:26 -0500
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38BHXSnL013788;
+ Mon, 11 Sep 2023 12:33:28 -0500
 From: Reid Tonking <reidt@ti.com>
 To: <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <u-kumar1@ti.com>, <nm@ti.com>,
  <vigneshr@ti.com>, <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>
-Subject: [PATCH v3 0/2] J7200 device tree sync from v6.6-rc1 to u-boot
-Date: Mon, 11 Sep 2023 12:32:44 -0500
-Message-ID: <20230911173246.97988-1-reidt@ti.com>
+Subject: [PATCH v3 1/2] arm: mach-k3: j7200: Add mcu_timer0 id to the dev list
+Date: Mon, 11 Sep 2023 12:32:45 -0500
+Message-ID: <20230911173246.97988-2-reidt@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230911173246.97988-1-reidt@ti.com>
+References: <20230911173246.97988-1-reidt@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -77,51 +79,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series tries to sync device tree files from Linux v6.6-rc1 while
-making changes to the u-boot.dtsi and r5-common-proc-board.dts files in
-order to remove duplicate nodes and achieve successful boot.
+mcu_timer0 is now used as the tick timer in u-boot, so this adds the
+timer to the soc device list so it can be enabled via the k3 power
+controller.
 
-This is dependent on [0]. This patch was originally a part of v2, but
-was spun of as a dependency for both j7200 & j721e dtb sync series.
-
-DMA fixes [1] are currently being upstreamed to Linux. They'll be fixed
-in U-boot post their merge in Linux.
-
-Test Logs are included in [2]
-
-[0]: https://lore.kernel.org/u-boot/20230907180635.89011-1-reidt@ti.com/T/#u
-[1]: https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
-[2]: https://gist.github.com/Glockn/ecbe92606a8a772486fb9f636dd1f814
-
+Reviewed-by: Nishanth Menon <nm@ti.com>
+Signed-off-by: Reid Tonking <reidt@ti.com>
 ---
-Changes in v3:
-- Sync is now ith v6.6-rc1 instead of v6.5-rc1
-- &mcu_ringacc property overrides in u-boot.dtsi removed (patch 2/2)
-- Change to drivers/misc/k3_avs.c is now a separate patch [0]
-- dropped the trailing white space (patch 1/2)
-- changed wording in commit message (patch 2/2)
-- added k3_sysreset node back into u-boot.dtsi (patch 2/2)
-- Link to v2: https://lore.kernel.org/u-boot/20230905181309.61666-1-reidt@ti.com/T/#m8d254c1d912aae3b636fadb23a0c8aacdd9ea484
+ arch/arm/mach-k3/j7200/dev-data.c | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-Reid Tonking (2):
-  arm: mach-k3: j7200: Add mcu_timer0 id to the dev list
-  arm: dts: j7200: dts sync with Linux 6.6-rc1
-
- .../k3-j7200-common-proc-board-u-boot.dtsi    | 150 ++---
- arch/arm/dts/k3-j7200-common-proc-board.dts   | 188 +++---
- arch/arm/dts/k3-j7200-main.dtsi               | 535 +++++++++++++++++-
- arch/arm/dts/k3-j7200-mcu-wakeup.dtsi         | 286 +++++++++-
- .../arm/dts/k3-j7200-r5-common-proc-board.dts | 301 +---------
- arch/arm/dts/k3-j7200-som-p0.dtsi             | 154 +++--
- arch/arm/dts/k3-j7200-thermal.dtsi            |  47 ++
- arch/arm/dts/k3-j7200.dtsi                    |  30 +-
- arch/arm/dts/k3-serdes.h                      | 204 +++++++
- arch/arm/mach-k3/j7200/dev-data.c             |   1 +
- 10 files changed, 1383 insertions(+), 513 deletions(-)
- create mode 100644 arch/arm/dts/k3-j7200-thermal.dtsi
- create mode 100644 arch/arm/dts/k3-serdes.h
-
+diff --git a/arch/arm/mach-k3/j7200/dev-data.c b/arch/arm/mach-k3/j7200/dev-data.c
+index 4ddc34210e..8ce6796fd0 100644
+--- a/arch/arm/mach-k3/j7200/dev-data.c
++++ b/arch/arm/mach-k3/j7200/dev-data.c
+@@ -46,6 +46,7 @@ static struct ti_lpsc soc_lpsc_list[] = {
+ 
+ static struct ti_dev soc_dev_list[] = {
+ 	PSC_DEV(30, &soc_lpsc_list[0]),
++	PSC_DEV(35, &soc_lpsc_list[0]),
+ 	PSC_DEV(61, &soc_lpsc_list[1]),
+ 	PSC_DEV(90, &soc_lpsc_list[2]),
+ 	PSC_DEV(8, &soc_lpsc_list[3]),
 -- 
 2.34.1
 
