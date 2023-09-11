@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1462FEE57DF
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 05:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58591EE57DF
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 05:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B3F486D10;
-	Mon, 11 Sep 2023 07:32:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C618286582;
+	Mon, 11 Sep 2023 07:38:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hWgAZ3TO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XWd4cpBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF9D686D11; Mon, 11 Sep 2023 07:32:12 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 5CD1A86579; Mon, 11 Sep 2023 07:38:31 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25D3886D09
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 07:32:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6701386579
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 07:38:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhupesh.sharma@linaro.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6c0f4ad9eb1so20136a34.1
- for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 22:32:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1c0efe0c4acso6711905ad.0
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 22:38:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694410328; x=1695015128; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Ey6Hr9jr5fDFa0pgv+y0SJNCoWCsunW6WI7wk+k7Vqs=;
- b=hWgAZ3TOlv07I5LD8idg+QnGSBBZPWod6P2ri8nNvs+mpjNirPyQNgO7A63axtFuQ8
- aC8wjKpvHlDzovKhbn8PEvDCjm94xxYMlP+1v3MQXOnf2L+D/lWy69mc6vbgJpX8lFnx
- damEilE6EygmBq40MJvLBvxO1uLuinT23X2nFCZKmbJ//viJNb+8KewvKXAzakbtrz8c
- 1WIl9bYhZSvDlsQOJM7fbd2YKk65bvVH3CUeQpmeNyBWyoKEsrNqgaEcKhPSYWics8d+
- Qry6CPBVvuT7eHzwRJWqAszAWwC8E/cnMr8oqz9g60rMx/LPjHc181Q7lASV95Qe0blC
- 951Q==
+ d=linaro.org; s=google; t=1694410706; x=1695015506; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wVhlFGUK5LEgRx8qisGAfCLuK5DsF5OvsljG2ziyEA8=;
+ b=XWd4cpBnamjhQBee/K/VNKnCUBv9gp396WjGkC2xnKoVMWleRCiNKHpxnwqEo4Wi6Z
+ Gyo//z8bc7Xbk92/YG0zn2ncLoBk9fO+nBg3aU5ZTexb95CJyyfZKe3XKRDrttlZ5vrx
+ SSnqesYqmMzaxuA49GjlwtQYOknmkaxaTPK08s4pajJ6pJ5YsaN38Rgi7Ya8V05Ajnrp
+ fPUKGmPVhFNQckS/Qn/u4tgbFGpWyK3QctHqfDOBUmLos+45wOtPWX2YGUu9RY9TwEx/
+ 8JZsAFs29/1fHw9JZVeyY+BQpIhG7D/NuvFiqsTxfBXmQ4NVJfsRr+YBa38mTGgs+IkE
+ X8+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694410328; x=1695015128;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1694410706; x=1695015506;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ey6Hr9jr5fDFa0pgv+y0SJNCoWCsunW6WI7wk+k7Vqs=;
- b=NeZBrcBV2/GrWCiLtF4T2sw7HWQwRMqh+RVYS/IVFeM6jIq0ENp7leJTc6nE3MuyYY
- Eiu8j3Blp/MlODD/2bl5ltkjs3dhG49MPhQ2+1QJW3wNAt2XAkA+Il7GXiaTceZXGiN8
- y3MFBCI7lx3ev9fpeIaWLpxXhoqRL94/lD2NCia3PUZhzG3mbjDUvQIbJ+zjvPeBRpBC
- SIW/Ubr7wh5MKVCA4J45uc23e2TBY7XfhVesDrvlkRBdVskFE166/WfmvfeYJ80reZL9
- RKgMQ/nzKyVUh/5Evt9ZI9WTDVQPqrSDJoAB9JvjageYpoDi8TUBFAhF7xpcd3ILbhRB
- Na8Q==
-X-Gm-Message-State: AOJu0YxCnMGbuWR4RyIRm1quk1OmocQRzaXArsEzopydV844kxG3FB9W
- po4orqkx3PRtB4KODdGfSP5sUw==
-X-Google-Smtp-Source: AGHT+IEV1/zlpB3nN0S9RU5HayBWqh2debVvFF8TtH7QoMbjL573YANQXK7vtIoz/ZoVZYVrqMr9BA==
-X-Received: by 2002:a05:6358:919d:b0:139:d4cb:d9fd with SMTP id
- j29-20020a056358919d00b00139d4cbd9fdmr10469111rwa.3.1694410328630; 
- Sun, 10 Sep 2023 22:32:08 -0700 (PDT)
-Received: from ?IPV6:2401:4900:1c60:c4b6:ac3f:9422:8dcf:f944?
- ([2401:4900:1c60:c4b6:ac3f:9422:8dcf:f944])
+ bh=wVhlFGUK5LEgRx8qisGAfCLuK5DsF5OvsljG2ziyEA8=;
+ b=QBWAxlfHEU88mjv2+pookd4+qiULiQNWyNSNFQDxZPWkqHSh7htqdcn9nPFn4Ztqnc
+ yYJIMHm66w2BuEmX4RcAm9bpWMdbTX9XuPEDavaEK85MHMC1RzjV5abLybDrb9ro/Xy7
+ IW59yhGx+CnIot/li5fsqTDxGQvfsRoadu2GwDih997VPtdyV6WJPueicGBf6g6b1Tfi
+ EfYFT9sUMqB8VSbZur288JxH7QrCMR+ijsW5Z1DC0UM5hcwqPc7LwgDN4mvkokDJfIRK
+ b6EgzvrL1A/lURie5gI1E7UDKQ4zORt/5Warqv9WhVTf750u4Gb9wdwLI/u3uo0MknoM
+ oxhA==
+X-Gm-Message-State: AOJu0YylZ0CRBLXVC7uk0k2eJh5LadC97LNvWDIbXAlklZ7prg/HTXu3
+ W366ywlJRHGAbISwWglPvDJVDQ==
+X-Google-Smtp-Source: AGHT+IFTq7tqznCCxrqT3F2aL+mHu8/5PHOKZNiem0xLdEu/ob383HvhgmetD6Nq3ZxkaXMDSGb2dQ==
+X-Received: by 2002:a17:902:ec8b:b0:1c0:cbaf:6939 with SMTP id
+ x11-20020a170902ec8b00b001c0cbaf6939mr11230450plg.3.1694410706532; 
+ Sun, 10 Sep 2023 22:38:26 -0700 (PDT)
+Received: from octopus ([2400:4050:c3e1:100:91f5:5d19:aad:686c])
  by smtp.gmail.com with ESMTPSA id
- f13-20020aa78b0d000000b0068c62a45be6sm4877621pfd.179.2023.09.10.22.32.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 10 Sep 2023 22:32:08 -0700 (PDT)
-Message-ID: <dec9662f-eae0-1f8c-423f-2bc69df2d6d7@linaro.org>
-Date: Mon, 11 Sep 2023 11:02:03 +0530
+ x18-20020a170902821200b001b89b7e208fsm5461957pln.88.2023.09.10.22.38.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 10 Sep 2023 22:38:26 -0700 (PDT)
+Date: Mon, 11 Sep 2023 14:38:23 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com,
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+Subject: Re: [RFC 4/6] gpio: add scmi driver based on pinctrl
+Message-ID: <ZP6nz+sZkNiB+7+v@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ etienne.carriere@st.com, michal.simek@amd.com,
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-5-takahiro.akashi@linaro.org>
+ <CAPnjgZ3z1srw_ZxfV2aRz1FAzTR=M==_rRPMFFrd7BdrGsu4AQ@mail.gmail.com>
+ <ZPqjz3+Mlla8zxDS@octopus>
+ <CAPnjgZ3Va35FLk6xF8iyoKtSe5_F_o8Ym7o8jdgXtGMUS6MJ3w@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.1
-Subject: Re: [PATCH] ufs: ufs-renesas: Drop include common.h
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, Neha Malcom Francis <n-francis@ti.com>
-References: <20230909025435.84441-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-US
-From: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-In-Reply-To: <20230909025435.84441-1-marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3Va35FLk6xF8iyoKtSe5_F_o8Ym7o8jdgXtGMUS6MJ3w@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,34 +100,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
-On 9/9/23 8:24 AM, Marek Vasut wrote:
-> The "#include <common.h>" is being phased out in favor of more fine
-> grained header management, i.e. ideally include a subset of headers
-> that are really needed. Remove it from this driver.
+On Sun, Sep 10, 2023 at 01:13:24PM -0600, Simon Glass wrote:
+> Hi,
 > 
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-> Cc: Neha Malcom Francis <n-francis@ti.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->   drivers/ufs/ufs-renesas.c | 1 -
->   1 file changed, 1 deletion(-)
+> On Thu, 7 Sept 2023 at 22:32, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, Sep 07, 2023 at 06:23:05AM -0600, Simon Glass wrote:
+> > > Hi AKASHI,
+> > >
+> > > On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
+> > > <takahiro.akashi@linaro.org> wrote:
+> > > >
+> > > > This DM-compliant driver deals with SCMI pinctrl protocol and presents
+> > > > gpio devices exposed by SCMI firmware (server).
+> > > >
+> > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > > ---
+> > > >  drivers/pinctrl/pinctrl-scmi.c | 544 ++++++++++++++++++++++++++++++++-
+> > > >  1 file changed, 539 insertions(+), 5 deletions(-)
+> > > >
+> > > > diff --git a/drivers/pinctrl/pinctrl-scmi.c b/drivers/pinctrl/pinctrl-scmi.c
+> > > > index 3ebdad57b86c..73d385bdbfcc 100644
+> > > > --- a/drivers/pinctrl/pinctrl-scmi.c
+> > > > +++ b/drivers/pinctrl/pinctrl-scmi.c
+> > > > @@ -11,21 +11,20 @@
+> > > >  #include <malloc.h>
+> > > >  #include <scmi_agent.h>
+> > > >  #include <scmi_protocols.h>
+> > > > +#include <asm-generic/gpio.h>
+> > > >  #include <dm/device_compat.h>
+> > > > +#include <dm/device-internal.h>
+> > > > +#include <dm/lists.h>
+> > > >  #include <dm/pinctrl.h>
+> > > >
+> > > [..]
+> > >
+> > > > +
+> > > > +U_BOOT_DRIVER(scmi_gpio) = {
+> > > > +       .name = "scmi_gpio",
+> > > > +       .id = UCLASS_GPIO,
+> > > > +       .of_match = scmi_gpio_ids,
+> > > > +       .of_to_plat = scmi_gpio_probe,
+> > > > +       .ops = &scmi_gpio_ops,
+> > > > +       .plat_auto = sizeof(struct scmi_pinctrl_gpio_plat),
+> > > > +};
+> > > > +
+> > > > +/**
+> > > > + * scmi_gpiochip_register - Create a pinctrl-controlled gpio device
+> > > > + * @parent:    SCMI pinctrl device
+> > > > + *
+> > > > + * Create a pinctrl-controlled gpio device
+> > > > + *
+> > > > + * Return:     0 on success, error code on failure
+> > > > + */
+> > > > +static int scmi_gpiochip_register(struct udevice *parent)
+> > > > +{
+> > > > +       ofnode node;
+> > > > +       struct driver *drv;
+> > > > +       struct udevice *gpio_dev;
+> > > > +       int ret;
+> > > > +
+> > > > +       /* TODO: recovery if failed */
+> > > > +       dev_for_each_subnode(node, parent) {
+> > > > +               if (!ofnode_is_enabled(node))
+> > > > +                       continue;
+> > >
+> > > Can we not rely on the normal driver model binding to bind these
+> > > devices? Why does it need to be done manually here?
+> >
+> > First, please take a look at the cover letter.
+> > In this RFC, I basically assume two patterns of DT bindings,
+> > (A) and (B) in the cover letter (or sandbox's test.dts in patch#5).
+> >
+> > In (B), a DT node as a gpio device, which is essentially a child
+> > of pinctrl device, is located *under* a pinctrl device. It need
+> > to be probed manually as there is no implicit method to enumerate
+> > it as a DM device automatically.
 > 
-> diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
-> index f6086050cde..ae05bdc8102 100644
-> --- a/drivers/ufs/ufs-renesas.c
-> +++ b/drivers/ufs/ufs-renesas.c
-> @@ -6,7 +6,6 @@
->    */
->   
->   #include <clk.h>
-> -#include <common.h>
->   #include <dm.h>
->   #include <ufs.h>
->   #include <asm/io.h>
+> You could add a post_bind() method to the pinctrl uclass to call
+> dm_scan_fdt_dev() as we do with TPM.
 
-Reviewed-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+Okay, but in that case, defining "compatible" property will become
+mandatory, while I invented (B) so that we don't need extra bindings.
 
-Thanks.
+Please note that no discussion started about the binding of gpio devices.
+
+-Takahiro Akashi
+
+> >
+> > On the other hand, in (A), the same node can be put anywhere in a DT
+> > as it contains a "compatible" property to identify itself.
+> > So if we want to only support (A), scmi_gpiochip_register() and
+> > scmi_pinctrl_bind() are not necessary.
+> >
+> > Since there is no discussion about bindings for GPIO managed by SCMI
+> > pinctrl device yet on the kernel side, I have left two solutions
+> > in this RFC.
+> 
+> 
+> OK.
+> 
+> [..]
+> 
+> Regards,
+> Simon
