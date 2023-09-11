@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F844EE57DF
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 07:23:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22DD2EE7FF4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 07:57:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB66F86D0B;
-	Mon, 11 Sep 2023 09:22:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17B04867D2;
+	Mon, 11 Sep 2023 09:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rdbgcnfU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Do6h0gEB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB53086D16; Mon, 11 Sep 2023 09:22:57 +0200 (CEST)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
+ id 1C2DE86660; Mon, 11 Sep 2023 09:57:14 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9D9986CF1
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 09:22:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE00586CEB
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 09:57:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-68e2ff0b5c4so368017b3a.0
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 00:22:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-501bd7711e8so7092877e87.1
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 00:57:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694416973; x=1695021773; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:mail-followup-to:message-id:subject:cc:to
- :from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SrSmyX9ZA2e8h3vwINGrieOipex9QAX3maUZwA+2Etc=;
- b=rdbgcnfUYnXxRN2li79Ox8sT9v/9+p+dbZ2B3bWALLK8YpkIPqq5H0CqB2c1+6nLmk
- KtSZgLF13GNI8gfPdgDi/FUNiMFLCw0HOM2IrCtgebE2Q4Kz+S8II7Q9ZYRACy0TgcA7
- IlswYasU9V+j5hJ71rncggs0gMQQWdq7LwUHcYF7TAhnL+qjbJjvxXrUjLXYxhw0B9uU
- O+xe45zYn8U1tfrcldrQMdpztwmJYmSgTiFNaHpubcFyLeeN0WWFhUswDjPC46+3hFdr
- UjN/gG5WkebwjpPbagBduQP1RWaEHNfV45BaRTY19eZ9bLTz0hpEW2OXFO3EuJWyQZMv
- gDyg==
+ d=linaro.org; s=google; t=1694419028; x=1695023828; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6IFGsl2yf2S3d+elVC3eYRkNtkS36UuZ6x89ferm5TE=;
+ b=Do6h0gEBvL8qZ2zRBfigR/Zu52CAQSPBRoiacdkWqDJ1buTPFFj1pg7j+WJVcMIepq
+ mPEWPygS0bnjoUwKnb3SnEkX1KxZuI+MsgzPm9LAq+Y4MDrUR5q+u0v/9pN1zfY6+R51
+ ZDTnNcjknuBpDVJWQbNaotXahykV05ro+JmbztM6JIZDllmBbto+saC61pQiss9c1T4K
+ APGkQhi5sV0fUEnhMQmEPY4kY2gxqO0QsPdp+d16bvl4gpJHXAp/OlJrY2odiiXvk/St
+ FGFaMnUHgIO8Ww0QI3IxwyQFfvUXMg0K5Qu55jtLwMz68RokYJnnasnGp/KFlGD3JROo
+ twwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694416973; x=1695021773;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:mail-followup-to:message-id:subject:cc:to
- :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1694419028; x=1695023828;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SrSmyX9ZA2e8h3vwINGrieOipex9QAX3maUZwA+2Etc=;
- b=HWj7ukdydw2ixD1q+pHiY2zg4ThfX+YZ1B8ZN2g13lMBuF14pZmKDGGSHT7iNoQ0oT
- wLRdZc0WVJkmUjESChrcO/fG3dk/PICpdxeEIOGAZKGtpqGG2XdK9sBlq7b20WEIXm6Z
- LlNGOTCPQwiihlkPMsY9IypuFqdxo/Oj0z6xKDxx4ahEnjnnixE0O8kMgoXXGzys21ru
- PmxhpLxO+jNlj1YVc3PoPOi+nSl6sY2FuiMQu2y5U8H6AesRyxbWwxqoKaJbjYTzJRHQ
- fTq1zVhE2nbyKL07DfgL5FYleSgCUQ353D/XhtoE3o8BPzu1LMujZ0Qu6rxw3sf7b7pj
- h13Q==
-X-Gm-Message-State: AOJu0Yytl2lWDdr1uPIqaUUQGamsacUz3cOXyaprmgPVS9jo59YzYRbn
- t2mgbCayoXoPeMmiAb/yOoiyOQ==
-X-Google-Smtp-Source: AGHT+IFpLDn3szoA953sVg7iNhexEolUbwQFA2Zu1T63KkWueVRTIulHEVRUKZU+lYshl8peqtpAJg==
-X-Received: by 2002:a05:6a00:158e:b0:68e:3eff:e93a with SMTP id
- u14-20020a056a00158e00b0068e3effe93amr9817752pfk.2.1694416972894; 
- Mon, 11 Sep 2023 00:22:52 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:91f5:5d19:aad:686c])
- by smtp.gmail.com with ESMTPSA id
- q19-20020a62e113000000b0068a46cd4120sm647720pfh.199.2023.09.11.00.22.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 00:22:52 -0700 (PDT)
-Date: Mon, 11 Sep 2023 16:22:49 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Etienne CARRIERE <etienne.carriere@st.com>
-Cc: "trini@konsulko.com" <trini@konsulko.com>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Etienne CARRIERE - foss <etienne.carriere@foss.st.com>
-Subject: Re: [PATCH v3 13/13] test: dm: add scmi command test
-Message-ID: <ZP7ASf6h524kQHty@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Etienne CARRIERE <etienne.carriere@st.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Etienne CARRIERE - foss <etienne.carriere@foss.st.com>
-References: <20230908025138.44405-1-takahiro.akashi@linaro.org>
- <20230908025138.44405-14-takahiro.akashi@linaro.org>
- <PAXPR10MB4687E186E8A0810CF1784121FDEDA@PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM>
+ bh=6IFGsl2yf2S3d+elVC3eYRkNtkS36UuZ6x89ferm5TE=;
+ b=w1j2pLc6cLdoJIb2ugAXXvvRZqBxK7yLiqAx045sTiBQeFPRKDla2dgKxmzmZolUDB
+ 4N46eR08PtGVjTAb6/J2DiY7B2I16R8kXLCFoxsn7V0Kbo8hBXlM/Fz0gKAVK+YmIHwe
+ qIhZLS3trsqXyfFk6kMyDMxnlmTg7cKDPkEMP3enZyEQh9CmEmiIp6tPqYYPXwq1V7yL
+ ZXGDpoHQBojBCBfNg3Tsuqq3XK7exfZc8kRhbydflsyINcmdMDKbdYpLhlxWucW93aZo
+ FiwBv1OITyON6ueq8bGvGboBkCYibEtifvTLJMyiCShrmwmM1aV7a3+qh/Qf8lKsL4sF
+ IG5Q==
+X-Gm-Message-State: AOJu0YxR1EyaY9ouYuPFzzKBzOuC91qJqGj/rgvD3co04Fy3qhFceWW+
+ yccWlQnjA7XfGp87xas8p0QBXeg19Gs+t2h9jGW32A==
+X-Google-Smtp-Source: AGHT+IG1RJ/XJXrky7bkqaPol9myHE2VJV7Va6bWgV7Z6zoV5nE+1tVtBvMJsuJDzsYepMbwo/dTDD2+vH6E/JatQbU=
+X-Received: by 2002:a05:6512:78e:b0:4f4:b13a:d683 with SMTP id
+ x14-20020a056512078e00b004f4b13ad683mr5833566lfr.69.1694419027802; Mon, 11
+ Sep 2023 00:57:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <PAXPR10MB4687E186E8A0810CF1784121FDEDA@PAXPR10MB4687.EURPRD10.PROD.OUTLOOK.COM>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-31-sjg@chromium.org>
+ <ZPA8AtGOel8pko6y@hades>
+ <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
+ <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
+ <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
+ <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
+ <CAPnjgZ2QV3t9FnY_7VBJ4NAYW8zPL9p1bktfcEP86AnXrFoA1w@mail.gmail.com>
+ <CAC_iWjKd60b2pPdQf195ef+a8_3jEHtXh085Sd7uPAik1mCu+Q@mail.gmail.com>
+ <700c3677-6fc1-40b0-9ca2-9f9e2cc824b0@amd.com>
+In-Reply-To: <700c3677-6fc1-40b0-9ca2-9f9e2cc824b0@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 11 Sep 2023 10:56:31 +0300
+Message-ID: <CAC_iWjJUbads2Trqxm_chnhypyZ+tTT2mXUw56z0Py9bgyBhZg@mail.gmail.com>
+Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Michal Simek <michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nikhil M Jain <n-jain1@ti.com>, 
+ Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,139 +98,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 08, 2023 at 02:27:15PM +0000, Etienne CARRIERE wrote:
-> > From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > Sent: Friday, September 8, 2023 04:51
-> >  
-> > In this test, "scmi" command is tested against different sub-commands.
-> > Please note that scmi command is for debug purpose and is not intended
-> > in production system.
-> > 
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
-> > ---
-> > v3
-> > * change char to u8 in vendor/agent names
-> > v2
-> > * use helper functions, removing direct uses of ops
-> > ---
-> 
-> This change breaks pytest ut_dm_dm_test_scmi_cmd.
-> CONFIG_CMD_SCMI=y is missing in sandbox_defconfig.
+Hi Michal,
 
-Sure.
+On Mon, 11 Sept 2023 at 09:38, Michal Simek <michal.simek@amd.com> wrote:
+>
+>
+>
+> On 9/11/23 08:17, Ilias Apalodimas wrote:
+> > Hi Simon,
+> >
+> > On Sun, 10 Sept 2023 at 22:14, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Ilias,
+> >>
+> >> On Mon, 4 Sept 2023 at 03:31, Ilias Apalodimas
+> >> <ilias.apalodimas@linaro.org> wrote:
+> >>>
+> >>> Hi Simon,
+> >>>
+> >>> On Fri, 1 Sept 2023 at 18:51, Simon Glass <sjg@chromium.org> wrote:
+> >>>>
+> >>>> Hi Ilias,
+> >>>>
+> >>>> On Fri, 1 Sept 2023 at 01:50, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> >>>>>
+> >>>>> [...]
+> >>>>>
+> >>>>>>>
+> >>>>>>>> +config OF_BLOBLIST
+> >>>>>>>> +     bool "DTB is provided by a bloblist"
+> >>>>>>>> +     help
+> >>>>>>>> +       Select this to read the devicetree from the bloblist. This allows
+> >>>>>>>> +       using a bloblist to transfer the devicetree between  U-Boot phases.
+> >>>>>>>> +       The devicetree is stored in the bloblist by an early phase so that
+> >>>>>>>> +       U-Boot can read it.
+> >>>>>>>> +
+> >>>>>>>
+> >>>>>>> I dont think this is a good idea.  We used to have 4-5 different options
+> >>>>>>> here, which we tried to clean up and ended up with two very discrete
+> >>>>>>> options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
+> >>>>>>> have a header of some sort?  The bloblist literally comes from a previous
+> >>>>>>> stage bootloader which is what OF_BOARD is here for. So why can't we just
+> >>>>>>> read the header and figure out if the magic of the bloblist matches?
+> >>>>>>
+> >>>>>> No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
+> >>>>>>
+> >>>>>> This patch is a standard mechanism to pass the DT from one firmware
+> >>>>>> phase to the next. We have spent quite a bit of time creating a spec
+> >>>>>> for it, and we should use it.
+> >>>>>
+> >>>>> Where exactly am I objecting using the spec?   Can you please re-read my email?
+> >>>>> I am actually pointing out we should use the spec *properly*.  So
+> >>>>> instead of having a Kconfig option for the DT, which is pretty
+> >>>>> pointless,  we should parse the bloblist.  If the header defined by
+> >>>>> the *spec* is found, we should just search for the DT in there.
+> >>>>> What you are doing here, is take the spec, pick a very specific item
+> >>>>> that the list contains, and create a Kconfig option out of it.  Which
+> >>>>> basically ignores the discoverable options of the bloblist.  For
+> >>>>> example, that bloblist can also contain an entry to a TPM eventlog.
+> >>>>> Should we start creating Kconfig options for all the firmware handoff
+> >>>>> entries that are defined on that spec?
+> >>>>
+> >>>> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
+> >>>
+> >>> That's fine by me.  You can even put that under IS_ENABLED for the
+> >>> bloblist inside the existing OF_BOARD check.  So I was thinking
+> >>> - If no bloblist is required in Kconfig options we do the hacks we used to
+> >>> - if bloblist is selected and the config option is OF_BOARD, throw an
+> >>> error and mention that the previous stage loader should hand over a DT
+> >>>
+> >>> Is that what you had in mind?
+> >>
+> >> Yes, that sounds good to me.
+> >>
+> >> But I still think we need an OF_BLOBLIST option to control whether the
+> >> devicetree comes from there.
+> >>   Otherwise we will end up with people
+> >> using OF_BOARD to work around it. We also have the SPL case which does
+> >> not pass the DT in a bloblist...in fact SPL typically doesn't even
+> >> have the full DT.
+> >
+> > Wouldn't IS_ENABLED(BLOBLIST) || IS_ENABLED(SPL_BLOBLIST) be enough?
+> > Inside the OF_BOARD portion of the function, search for a bloblist if
+> > the option is enabled.  If you can't find a bloblist and the DT within
+> > that bloblist, then error out
+>
+> Just my 2c here.
+> I think all options should be possible to disable. It means I can imagine to
+> disable u-boot not to take care about DT provided from previous stage. The same
+> is for TPM event log. IMHO every stage should have an option to simply ignore
+> data pass from previous stage. I don't really mind how it is done but there
+> should be an option to by purpose say to ignore the part of pass data.
 
-> 
-> >  test/dm/scmi.c | 62 ++++++++++++++++++++++++++++++++++++++++++++++----
-> >  1 file changed, 57 insertions(+), 5 deletions(-)
-> > 
-> > diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-> > index 0785948186f0..423b6ef70b29 100644
-> > --- a/test/dm/scmi.c
-> > +++ b/test/dm/scmi.c
-> > @@ -104,8 +104,7 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
-> >          struct scmi_agent_priv *priv;
-> >          u32 version, num_agents, num_protocols, impl_version;
-> >          u32 attributes, agent_id;
-> > -       char *vendor, *agent_name;
-> > -       u8 *protocols;
-> > +       u8 *vendor, *agent_name, *protocols;
-> 
-> Could you squash these fixups into patch 10/13
-> ("test: dm: add SCMI base protocol test") unlesswhat that patch 
-> makes sandbox test build to fail.
+That would be done by disabling BLOBLIST.  I don't think having a Kconfig to say
+"I want a bloblist, but I only want the DT from there" is reasonable
+(or for any other item the bloblist can carry).   OF_BOARD means the
+DT will come from a previous stage loader. If bloblist is enabled then
+the DT must come from there.
 
-Okay.
+>
+> Regarding DT part. We are experimenting with TF-A injecting for example DDR
+> memory reservation to DT.
+> Injection is working properly if you are using single DT but in SOM case we are
+> using FIT image with a lot of DTBs inside (issue with checksums calculation).
+> I see couple of platforms (IIRC renesas/imx) which are using DT overlays and
+> passing it via specific registers. For these using bloblist might be right way
+> to go.
 
+Yes that's in fact the purpose of that spec.
 
-> >          int ret;
-> >  
-> >          /* preparation */
-> > @@ -134,9 +133,9 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
-> >          free(vendor);
-> >  
-> >          /* message attributes */
-> > -       ret = scmi_protocol_message_attrs(base,
-> > -                                         SCMI_BASE_DISCOVER_SUB_VENDOR,
-> > -                                         &attributes);
-> > +       ret = scmi_base_protocol_message_attrs(base,
-> > +                                              SCMI_BASE_DISCOVER_SUB_VENDOR,
-> > +                                              &attributes);
-> 
-> Same here.
+> I wasn't aware about the whole fdt bloblist discussion but based on my
+> experiments you can create multiple FDT entries that's why I expect that there
+> could be DT overlays from different stages. And I even think that all of them
+> can be overlays without base DT which can be select later on.
 
-Yes.
+If the bloblist has overlays, then we shouldn't be compiling with
+OF_BOARD.  You will get a DT from u-boot and tghe adding this
+overlays, is an matter of parsing the bloblist and appending the,
 
--Takahiro Akashi
-
-
-> BR,
-> etienne
-> 
-> >          ut_assertok(ret);
-> >          ut_assertok(attributes);
-> >  
-> > @@ -207,6 +206,59 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
-> >  
-> >  DM_TEST(dm_test_scmi_base, UT_TESTF_SCAN_FDT);
-> >  
-> > +static int dm_test_scmi_cmd(struct unit_test_state *uts)
-> > +{
-> > +       struct udevice *agent_dev;
-> > +
-> > +       /* preparation */
-> > +       ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-> > +                                             &agent_dev));
-> > +       ut_assertnonnull(agent_dev);
-> > +
-> > +       /* scmi info */
-> > +       ut_assertok(run_command("scmi info", 0));
-> > +
-> > +       ut_assert_nextline("SCMI device: scmi");
-> > +       ut_assert_nextline("  protocol version: 0x20000");
-> > +       ut_assert_nextline("  # of agents: 2");
-> > +       ut_assert_nextline("      0: platform");
-> > +       ut_assert_nextline("    > 1: OSPM");
-> > +       ut_assert_nextline("  # of protocols: 3");
-> > +       ut_assert_nextline("      Clock management");
-> > +       ut_assert_nextline("      Reset domain management");
-> > +       ut_assert_nextline("      Voltage domain management");
-> > +       ut_assert_nextline("  vendor: U-Boot");
-> > +       ut_assert_nextline("  sub vendor: Sandbox");
-> > +       ut_assert_nextline("  impl version: 0x1");
-> > +
-> > +       ut_assert_console_end();
-> > +
-> > +       /* scmi perm_dev */
-> > +       ut_assertok(run_command("scmi perm_dev 1 0 1", 0));
-> > +       ut_assert_console_end();
-> > +
-> > +       ut_assert(run_command("scmi perm_dev 1 0 0", 0));
-> > +       ut_assert_nextline("Denying access to device:0 failed (-13)");
-> > +       ut_assert_console_end();
-> > +
-> > +       /* scmi perm_proto */
-> > +       ut_assertok(run_command("scmi perm_proto 1 0 14 1", 0));
-> > +       ut_assert_console_end();
-> > +
-> > +       ut_assert(run_command("scmi perm_proto 1 0 14 0", 0));
-> > +       ut_assert_nextline("Denying access to protocol:0x14 on device:0 failed (-13)");
-> > +       ut_assert_console_end();
-> > +
-> > +       /* scmi reset */
-> > +       ut_assert(run_command("scmi reset 1 1", 0));
-> > +       ut_assert_nextline("Reset failed (-13)");
-> > +       ut_assert_console_end();
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +DM_TEST(dm_test_scmi_cmd, UT_TESTF_SCAN_FDT);
-> > +
-> >  static int dm_test_scmi_clocks(struct unit_test_state *uts)
-> >  {
-> >          struct sandbox_scmi_agent *agent;
-> > -- 
-> > 2.34.1
-> > 
+Thanks
+/Ilias
+>
+> Thanks,
+> Michal
+>
+>
