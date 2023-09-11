@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFACEE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 15:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1827BEE57DF
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 15:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10DCB86E4C;
-	Mon, 11 Sep 2023 17:37:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BF1386D43;
+	Mon, 11 Sep 2023 17:38:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EsA6ZkZC";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="kZW5sBJi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6996086E4E; Mon, 11 Sep 2023 17:37:28 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3FDF386E25; Mon, 11 Sep 2023 17:38:17 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D33E286AEC
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 17:37:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18D6A86AEC
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 17:38:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-99bed101b70so577364966b.3
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 08:37:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694446645; x=1695051445; darn=lists.denx.de;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ESx0CoexlSyWJh0hP5T1ahUykEKQsNsATjsSs+GXgo0=;
- b=EsA6ZkZCZX98Hl1BTLNm4jwJ/hfQNlZkGx4uxzJv3GC90bXOW/PR2zCEcnZqRRne1U
- TLP6Ke5MCk9CqLsN69DaIlU9VcPQXssF1YWqGxrGpXUNovtQtyE4wF65byPN7tOxfB6D
- AxT6OWqbevDOnIc3S0HTg5BXZlPt9OCWtSQTkU/y0nne0oOrsXMAhutFokroOgcWacIE
- I45P9ovxMFKEG5GxErabgzqcA3VvFuDF1N7WZ2n8Bc1qXfibGyVwbgrUIft1dW68mJkN
- PZPWBTQJXezCTh7lqcmVXGmn/PuoJdmQnfluPvu4bedEVNQxGAJbUzMq+D3FePimfCk0
- zLWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694446645; x=1695051445;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=ESx0CoexlSyWJh0hP5T1ahUykEKQsNsATjsSs+GXgo0=;
- b=QWVqYFbH8o0yqKSjv+SXksm7DuMBarrdIjdveKmItz2eXf3E2PghGOt3f+p1Gu/68e
- 6kZWxgNP64VqV5uTC0Ktn35SG9QpLdQoUg6bKaAnUboEAwmE+UR9NXoz+/OhBTRXUnFw
- aAhhLFEwaNBkJVp1/EVgwakJ5raB+xjEQ0ZTlf5YULPAsOxwlcsW0Gvm6GXcbE0VRmys
- JgSryXNbtdrVcWMCeis7BY+XwQXrURFRptzKA8HAHt9bceJqeTl+GCeYjdhKiB0L+GL2
- S+EwtAwGOZye6zfnP8O4nsWSk+4nDEEdLXHH5MYHXZiy3QxENNuOfnTjN95FxWRTDGd8
- FAHw==
-X-Gm-Message-State: AOJu0Yy06HBdnUa7NyrObH/uUSiG/EqhR/ZJVDr/2ufYvKaQcl1bgEsu
- KLWliqqWyY4At2vBMh3zKdA=
-X-Google-Smtp-Source: AGHT+IGYx42NpyemHf3EqizmtffcUeOhOkQYmbGMybG2oYsRIs1uTjsZaBHdK31oXG/uhU9sYuZTGQ==
-X-Received: by 2002:a17:906:d84:b0:9a1:cbe4:d033 with SMTP id
- m4-20020a1709060d8400b009a1cbe4d033mr7235497eji.53.1694446645115; 
- Mon, 11 Sep 2023 08:37:25 -0700 (PDT)
-Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
- by smtp.gmail.com with ESMTPSA id
- t14-20020a1709064f0e00b00992e265495csm5458724eju.212.2023.09.11.08.37.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Sep 2023 08:37:24 -0700 (PDT)
-Message-ID: <d94f5f41-b610-4345-f583-439eb1bc7c8a@gmail.com>
-Date: Mon, 11 Sep 2023 17:37:23 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7618c49428=gatien.chevallier@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 38BEdNru015527; Mon, 11 Sep 2023 17:38:12 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=kgW/+sz
+ jYsV2Oka/z2iYw0Yynrh7Okt6EcGtCnD/ifg=; b=kZW5sBJiJureQAawfuSbx3Y
+ +8JFUYp8PPBH3yqiP0P3Zd21Y2DzsL2BolwjrbnbtIaHuz1/FCQ0nSXLyufepBhx
+ k96uDJiMtieuk+zB0EMdXzi1Lchzju472AFOAyvSEQXcpMzjcNLv9Y9fsmYCF2YD
+ hr6h+ckxEOYpNMsNBYKWqGWKdJpy+DSp0p2gpzGR5ZHuOuuT6cjkhbdad1yUngYl
+ BD1u4W0WEsfkFIoRoB74fUpcAh5sg3JNuQMpFtWxS7maIXiOwNG8wezdlhOG6AzN
+ e9rj7Io6WRnDUwXonuhRgnW8ei/s2gpuLrXGMnXzlEYZFC0BKPvmcw5xB9XHXlQ=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t0fkchkxh-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 11 Sep 2023 17:38:12 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C98FF100061;
+ Mon, 11 Sep 2023 17:38:11 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BCC442085B6;
+ Mon, 11 Sep 2023 17:38:11 +0200 (CEST)
+Received: from localhost (10.201.20.32) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Sep
+ 2023 17:38:11 +0200
+From: Gatien Chevallier <gatien.chevallier@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>
+Subject: [PATCH v2 0/7] rng: stm32: support STM32MP13x platforms
+Date: Mon, 11 Sep 2023 17:37:17 +0200
+Message-ID: <20230911153724.799535-1-gatien.chevallier@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v1] rockchip: include: asm: fix entering download mode rk3066
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.201.20.32]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-11_10,2023-09-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,74 +89,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a Rockchip rk3066 board download key is pressed it hangs.
-The rk3066 BROM doesn't have support to check the return to BROM,
-so when a key is pressed the loop that reads data must be broken
-by writing a "-1" to the variable that points to the next page address.
-It then goes in download mode and waits for data on USB OTG and UART0.
+This is the cover letter for patchset [1].
+First, do not restrain the STM32 RNG driver to the MPU series.
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
----
- arch/arm/include/asm/arch-rockchip/boot0.h | 32 +++++++++++++++++++---
- 1 file changed, 28 insertions(+), 4 deletions(-)
+The STM32MP13x platforms have a RNG hardware block that supports
+customization, a conditional reset sequences that allows to
+recover from certain situations and a configuration locking
+mechanism.
 
-diff --git a/arch/arm/include/asm/arch-rockchip/boot0.h b/arch/arm/include/asm/arch-rockchip/boot0.h
-index 0c375e543a5e..305461ce3751 100644
---- a/arch/arm/include/asm/arch-rockchip/boot0.h
-+++ b/arch/arm/include/asm/arch-rockchip/boot0.h
-@@ -3,6 +3,8 @@
-  * Copyright 2017 Theobroma Systems Design und Consulting GmbH
-  */
+This series adds support for the mentionned features. Note that
+the hardware RNG can and should be managed in the secure world
+for this platform, hence the rng not being default enabled on
+the STM32MP135F-DK board.
 
-+#include <asm/arch-rockchip/boot_mode.h>
-+
- /*
-  * Execution starts on the instruction following this 4-byte header
-  * (containing the magic 'RK30', 'RK31', 'RK32' or 'RK33').  This
-@@ -23,17 +25,39 @@
- 	 * the first one may be overwritten, if this is the first stage
- 	 * contained in the final image created with mkimage)...
- 	 */
--	b 1f	 /* if overwritten, entry-address is at the next word */
-+	b	1f  /* if overwritten, entry-address is at the next word */
- 1:
- #endif
- #if CONFIG_IS_ENABLED(ROCKCHIP_EARLYRETURN_TO_BROM)
--	adr     r3, entry_counter
-+#if IS_ENABLED(CONFIG_ROCKCHIP_RK3066)
-+/*
-+ * Unlike newer Rockchip SoC models the rk3066 BROM code does not have
-+ * built-in support to enter download mode after return to BROM code.
-+ * Before a return the boot mode register must be checked for the
-+ * BOOT_BROM_DOWNLOAD flag. Writing '-1' to a location in SRAM
-+ * where the BROM stores the next page address breaks the loop
-+ * that reads boot blocks. The boot ROM code then goes into a
-+ * download mode and waits for data on USB OTG and UART0.
-+ */
-+	ldr	r1, =BOOT_BROM_DOWNLOAD
-+	ldr	r0, =CONFIG_ROCKCHIP_BOOT_MODE_REG
-+	ldr	r0, [r0]
-+	cmp	r0, r1           /* if (readl(CONFIG_ROCKCHIP_BOOT_MODE_REG) == */
-+	bne	counter_check    /*     BOOT_BROM_DOWNLOAD) {              */
-+	ldr	r1, =0xffffffff
-+	ldr	r0, =0x10080028
-+	str	r1, [r0]         /*     writel(0xffffffff, 0x10080028);    */
-+	mov	r0, #1           /*     return 1;                          */
-+	bx	lr               /* }                                      */
-+counter_check:
-+#endif
-+	adr	r3, entry_counter
- 	ldr	r0, [r3]
- 	cmp	r0, #1           /* check if entry_counter == 1 */
- 	beq	reset            /* regular bootup */
--	add     r0, #1
-+	add	r0, #1
- 	str	r0, [r3]         /* increment the entry_counter in memory */
--	mov     r0, #0           /* return 0 to the BROM to signal 'OK' */
-+	mov	r0, #0           /* return 0 to the BROM to signal 'OK' */
- 	bx	lr               /* return control to the BROM */
- entry_counter:
- 	.word   0
---
-2.39.2
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=372119&state=*
+
+Changes in V2:
+	- Added this cover letter
+	- Added ARCH_STM32 as a dependency for RNG_STM32
+	- Added review tags
+
+Gatien Chevallier (7):
+  rng: stm32: rename STM32 RNG driver
+  configs: default activate CONFIG_RNG_STM32 for STM32MP13x platforms
+  rng: stm32: Implement configurable RNG clock error detection
+  rng: stm32: add RNG clock frequency restraint
+  rng: stm32: add error concealment sequence
+  rng: stm32: Implement custom RNG configuration support
+  ARM: dts: stm32: add RNG node for STM32MP13x platforms
+
+ MAINTAINERS                         |   2 +-
+ arch/arm/dts/stm32mp131.dtsi        |   8 +
+ configs/stm32mp13_defconfig         |   1 +
+ configs/stm32mp15_basic_defconfig   |   2 +-
+ configs/stm32mp15_defconfig         |   2 +-
+ configs/stm32mp15_trusted_defconfig |   2 +-
+ drivers/rng/Kconfig                 |   8 +-
+ drivers/rng/Makefile                |   2 +-
+ drivers/rng/stm32_rng.c             | 408 ++++++++++++++++++++++++++++
+ drivers/rng/stm32mp1_rng.c          | 198 --------------
+ 10 files changed, 426 insertions(+), 207 deletions(-)
+ create mode 100644 drivers/rng/stm32_rng.c
+ delete mode 100644 drivers/rng/stm32mp1_rng.c
+
+-- 
+2.25.1
 
