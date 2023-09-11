@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD008EE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 09:40:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 376DDEEB580
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 09:50:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3259086D5C;
-	Mon, 11 Sep 2023 11:40:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 447BA86D3C;
+	Mon, 11 Sep 2023 11:50:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="XhkdFVS6";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="v1XtKIBd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36A7A86D68; Mon, 11 Sep 2023 11:40:41 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 86D8A86D3F; Mon, 11 Sep 2023 11:50:40 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A448E86D3C
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 11:40:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05EC886D11
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 11:50:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=76189757ae=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 38B9StRv013570; Mon, 11 Sep 2023 11:40:37 +0200
+ 38B9SxUl015392; Mon, 11 Sep 2023 11:50:36 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=dvAWhie1tSiON2yN8R77H8RN2Em1umlxvQ7B6DCTiwI=; b=Xh
- kdFVS61SQR8EQUlsimHKVQmgVb3RerOGi8XzBjMurGBHBYA5B7ZWtY26kTNMwC6j
- 3VAJxy4AFIZalFu83uS0AcaCL4BiT2IMtGNbrJt80zBahnA3O5urIja8AnID34Ue
- 9SDwe6JVXObyq66Tsu0L3JShnjz5utiwULYkyDmiDNdfbcsLqWTVA6VIBLQhtflU
- dhOs1oJD2u0PBNkIhkYPpNO6Aeov4bWJs+HsjCCyhTRpOS5LfJ9hIkgP9X7Wf3Od
- iSOKQ4wpgPM9fryAa/NXJoUq5m3WIjNTQlDd0pOYNfx0ec119bz/VjevMVjKTgcd
- QET5onMOatj9xoYmjbqA==
+ selector1; bh=v7OpwpClRNLkzPSS3cYs1vIp1PRe28m5DIAziVDrbh0=; b=v1
+ XtKIBdU1bFnAlf9cuZtD4VrC0JLJcqjTp9yOrb6c2FjPuFw+hoZuD/Y7FX9KGRVk
+ lAf3dtTfQ+NxEKKWwzm7u1Kl1dAh+b7l0pYRFSPUYgT8V9cnuHu1j5bA+PeSCaln
+ LrDo1E+6vrQDq6uHUKv9ydw4B5zpbv2yBgRWzb0/4mDtfrKtIvfNJc9aBq1NYxQv
+ d44no6v77lZ+yc1wKFHpIwEspBjWL6JpACmiyDaNCbisykxqSPwqi0dQPVjbvzPs
+ uILZmOFwldD68lwWpp3kIBKUNLtaurPoskRY+g61fJw/W0STIv2S8x8MRaajegq+
+ 4oMcniHSkyXi0poKnuxA==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t207nr32s-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t0fkcg3k0-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 11 Sep 2023 11:40:37 +0200 (MEST)
+ Mon, 11 Sep 2023 11:50:36 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AB04A10005A;
- Mon, 11 Sep 2023 11:40:36 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0B96510005A;
+ Mon, 11 Sep 2023 11:50:36 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9D9D5237D9C;
- Mon, 11 Sep 2023 11:40:36 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 030AB23A15B;
+ Mon, 11 Sep 2023 11:50:36 +0200 (CEST)
 Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Sep
- 2023 11:40:35 +0200
-Message-ID: <6eb16d4e-d892-d07c-f19f-74e10e8f024c@foss.st.com>
-Date: Mon, 11 Sep 2023 11:40:35 +0200
+ 2023 11:50:35 +0200
+Message-ID: <3b755794-b61e-140e-f292-94ca88e7f03b@foss.st.com>
+Date: Mon, 11 Sep 2023 11:50:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
-Subject: Re: [PATCH 1/7] rng: stm32: rename STM32 RNG driver
+Subject: Re: [PATCH 2/7] configs: default activate CONFIG_RNG_STM32 for
+ STM32MP13x platforms
 Content-Language: en-US
 To: Gatien Chevallier <gatien.chevallier@foss.st.com>, <u-boot@lists.denx.de>
 CC: Patrice Chotard <patrice.chotard@foss.st.com>, Sughosh Ganu
  <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
+ <20230907162200.205602-2-gatien.chevallier@foss.st.com>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
+In-Reply-To: <20230907162200.205602-2-gatien.chevallier@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.201.22.165]
@@ -94,22 +96,47 @@ X-Virus-Status: Clean
 Hi,
 
 On 9/7/23 18:21, Gatien Chevallier wrote:
-> Rename the RNG driver as it is usable by other STM32 platforms
-> than the STM32MP1x ones. Rename CONFIG_RNG_STM32MP1 to
-> CONFIG_RNG_STM32
+> Default embed this configuration. If OP-TEE PTA RNG is present as well,
+> the priority will be given to it instead of the U-Boot driver.
+
+
+The STM32 RNG driver will be probed when the is activated in U-Boot 
+device tree,
+
+it is avaiable for non secure world.
+
+
+OP-TEE RNG PTA will be registered when the RNG access is liited to
+
+secure world by firewall.
+
+
+For me not priority here but secure/non secure configuration, managed by 
+device tree.
+
+
 >
 > Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
 > ---
->   MAINTAINERS                                 | 2 +-
->   configs/stm32mp15_basic_defconfig           | 2 +-
->   configs/stm32mp15_defconfig                 | 2 +-
->   configs/stm32mp15_trusted_defconfig         | 2 +-
->   drivers/rng/Kconfig                         | 6 +++---
->   drivers/rng/Makefile                        | 2 +-
->   drivers/rng/{stm32mp1_rng.c => stm32_rng.c} | 0
->   7 files changed, 8 insertions(+), 8 deletions(-)
->   rename drivers/rng/{stm32mp1_rng.c => stm32_rng.c} (100%)
+>   configs/stm32mp13_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
 >
+> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+> index 82b62744f6..4a899c85de 100644
+> --- a/configs/stm32mp13_defconfig
+> +++ b/configs/stm32mp13_defconfig
+> @@ -65,6 +65,7 @@ CONFIG_DM_REGULATOR_GPIO=y
+>   CONFIG_DM_REGULATOR_SCMI=y
+>   CONFIG_RESET_SCMI=y
+>   CONFIG_DM_RNG=y
+> +CONFIG_RNG_STM32=y
+>   CONFIG_DM_RTC=y
+>   CONFIG_RTC_STM32=y
+>   CONFIG_SERIAL_RX_BUFFER=y
+
+
+with commit message update
+
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
