@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF46EEE7FF4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 16:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22848EE7FF4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 16:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8613C86E3A;
+	by phobos.denx.de (Postfix) with ESMTP id DAE7886E68;
 	Mon, 11 Sep 2023 18:42:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QwTgLG+/";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="uVa5QY1k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DDC186E51; Mon, 11 Sep 2023 18:35:51 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id BF3C986D00; Mon, 11 Sep 2023 18:35:51 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9033A86E3A
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 18:35:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C81BE86E60
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 18:35:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id EAFE1100015;
- Mon, 11 Sep 2023 19:35:45 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru EAFE1100015
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 2292512000F;
+ Mon, 11 Sep 2023 19:35:47 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2292512000F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1694450145;
- bh=IGtNQDaCRzrahgHolmZfcOvstG/UUE+40mRb2JGIXMA=;
+ s=mail; t=1694450147;
+ bh=03MJTYvoGhJ22sZxmhyDgiP2GAFh0r6TTAd4GNDCUTg=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=QwTgLG+/qi9sQdC6VAYyledMnoxbT5HtIhVnQLBdYiQEsScc9t0Yda0uiLK0nPgFF
- nnB/QTkwWeB9UUJbKYZ4y5JxsCWpB8aRoO2Rq9u8WpmNVhF4ucLJ4LknbMYjAsgk/6
- bV+kv8tFKKD/sduqQmXq8+nxJgxydD30uFp2Y5LQPaKbeDvDxTW/7iv/vdeQp1idWu
- KHA8UrU78Md7m6dHyoU8AbosZN3N8mRT37LdFVA0ETReECoTFJPVp7wZbdpPr8nXkp
- rGV4oWAPcEnTGngtcqDjH8rxdaWJsAPM6Jz31H0WUzD1xD+yZvrlQ7XS55pm1JnD1p
- 6DRv3yjbTU79g==
+ b=uVa5QY1kNvvjvMl9Ry06oC4+4zb84zpKjbr8DsoUeRK+stIdpP43CVDYiMub3JXJl
+ 9PsgPTU3dlwtttWu2UQLkDAK3kvXeYa5IBx9pYKX160CGvavpl84DDyuGdqSRoosOo
+ Swo9O+AFR5JMq9fxk++Zsg8NOVTKgKTCQirsB4iEmRLUSTZReGb4cd2uv8qiFoXGEz
+ 3xsdf9N7PgjtDv+11bgPmLQR+0yZ60hVVqWeHac1NPJjmDShRw4ZCpcIbU2cmsdIr1
+ DcOfepMwb7x6I1LMeyBIEX15imF4Yly8ql2jO6jPlqJ39Hu9tiI/lIriPpCXAlTOz5
+ XzTd5meB5EGVw==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 11 Sep 2023 19:35:45 +0300 (MSK)
+ Mon, 11 Sep 2023 19:35:46 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 11 Sep 2023 19:35:45 +0300
+ 15.2.1118.30; Mon, 11 Sep 2023 19:35:46 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <takahiro.akashi@linaro.org>, <ilias.apalodimas@linaro.org>,
@@ -57,9 +57,9 @@ To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>,
  <paul.barker@sancloud.com>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 1/8] drivers: introduce Secure Monitor uclass
-Date: Mon, 11 Sep 2023 19:35:29 +0300
-Message-ID: <20230911163536.20735-2-avromanov@salutedevices.com>
+Subject: [PATCH v2 2/8] sandbox: add sandobx sm uclass driver
+Date: Mon, 11 Sep 2023 19:35:30 +0300
+Message-ID: <20230911163536.20735-3-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20230911163536.20735-1-avromanov@salutedevices.com>
 References: <20230911163536.20735-1-avromanov@salutedevices.com>
@@ -80,10 +80,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 530 530
  ecb1547b3f72d1df4c71c0b60e67ba6b4aea5432,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to},
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -108,81 +108,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At the moment, we don't have a common API for working with
-SM, only the smc_call() function. This approach is not generic
-and difficult to configure and maintain.
-
-This patch adds UCLASS_SM with the generic API:
-
-- sm_call()
-- sm_call_write()
-- sm_call_read()
-
-These functions operate with struct pt_regs, which describes
-Secure Monitor arguments.
+This patch adds sandbox secure monitor driver.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/Kconfig        |  2 ++
- drivers/Makefile       |  1 +
- drivers/sm/Kconfig     |  2 ++
- drivers/sm/Makefile    |  3 ++
- drivers/sm/sm-uclass.c | 55 ++++++++++++++++++++++++++++++++
- include/dm/uclass-id.h |  1 +
- include/sm-uclass.h    | 72 ++++++++++++++++++++++++++++++++++++++++++
- include/sm.h           | 67 +++++++++++++++++++++++++++++++++++++++
- 8 files changed, 203 insertions(+)
- create mode 100644 drivers/sm/Kconfig
- create mode 100644 drivers/sm/Makefile
- create mode 100644 drivers/sm/sm-uclass.c
- create mode 100644 include/sm-uclass.h
- create mode 100644 include/sm.h
+ drivers/sm/Makefile     |  1 +
+ drivers/sm/sandbox-sm.c | 76 +++++++++++++++++++++++++++++++++++++++++
+ include/sandbox-sm.h    | 18 ++++++++++
+ 3 files changed, 95 insertions(+)
+ create mode 100644 drivers/sm/sandbox-sm.c
+ create mode 100644 include/sandbox-sm.h
 
-diff --git a/drivers/Kconfig b/drivers/Kconfig
-index 75ac149d31..72e6405322 100644
---- a/drivers/Kconfig
-+++ b/drivers/Kconfig
-@@ -112,6 +112,8 @@ source "drivers/scsi/Kconfig"
- 
- source "drivers/serial/Kconfig"
- 
-+source "drivers/sm/Kconfig"
-+
- source "drivers/smem/Kconfig"
- 
- source "drivers/sound/Kconfig"
-diff --git a/drivers/Makefile b/drivers/Makefile
-index 6f1de58e00..b7bd3633b1 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -124,3 +124,4 @@ obj-$(CONFIG_DM_RNG) += rng/
- endif
- 
- obj-y += soc/
-+obj-y += sm/
-diff --git a/drivers/sm/Kconfig b/drivers/sm/Kconfig
-new file mode 100644
-index 0000000000..6cc6d55578
---- /dev/null
-+++ b/drivers/sm/Kconfig
-@@ -0,0 +1,2 @@
-+config SM
-+	bool "Enable Secure Monitor driver support"
 diff --git a/drivers/sm/Makefile b/drivers/sm/Makefile
-new file mode 100644
-index 0000000000..9f4683ba06
---- /dev/null
+index 9f4683ba06..af5f475c2b 100644
+--- a/drivers/sm/Makefile
 +++ b/drivers/sm/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+
-+obj-y += sm-uclass.o
-diff --git a/drivers/sm/sm-uclass.c b/drivers/sm/sm-uclass.c
+@@ -1,3 +1,4 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+ 
+ obj-y += sm-uclass.o
++obj-$(CONFIG_SANDBOX) += sandbox-sm.o
+diff --git a/drivers/sm/sandbox-sm.c b/drivers/sm/sandbox-sm.c
 new file mode 100644
-index 0000000000..78af857026
+index 0000000000..109ddb2af5
 --- /dev/null
-+++ b/drivers/sm/sm-uclass.c
-@@ -0,0 +1,55 @@
++++ b/drivers/sm/sandbox-sm.c
+@@ -0,0 +1,76 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (c) 2023 SberDevices, Inc.
@@ -191,71 +142,80 @@ index 0000000000..78af857026
 + */
 +
 +#include <common.h>
-+#include <dm.h>
-+#include <errno.h>
++#include <sm.h>
 +#include <sm-uclass.h>
++#include <sandbox-sm.h>
++#include <asm/ptrace.h>
++#include <dm/device.h>
++#include <linux/sizes.h>
 +
-+static const struct sm_ops *get_sm_ops(struct udevice *dev)
++static u8 test_buffer[SZ_4K];
++
++static int sandbox_sm_call(struct udevice *dev, u32 cmd_index, s32 *smc_ret,
++			   struct pt_regs *args)
 +{
-+	return (const struct sm_ops *)dev->driver->ops;
++	if (cmd_index >= SANDBOX_SMC_CMD_COUNT)
++		return -EINVAL;
++
++	if (smc_ret)
++		*smc_ret = 0;
++
++	return 0;
 +}
 +
-+int sm_call(struct udevice *dev, u32 cmd, s32 *ret, struct pt_regs *args)
++static int sandbox_sm_call_read(struct udevice *dev, void *buffer, size_t size,
++				u32 cmd_index, struct pt_regs *args)
 +{
-+	const struct sm_ops *ops = get_sm_ops(dev);
++	if (cmd_index >= SANDBOX_SMC_CMD_COUNT || !buffer)
++		return -EINVAL;
 +
-+	if (ops->sm_call)
-+		return ops->sm_call(dev, cmd, ret, args);
++	if (size > sizeof(test_buffer))
++		return -EINVAL;
 +
-+	return -EPROTONOSUPPORT;
++	memcpy(buffer, test_buffer, size);
++
++	return size;
 +}
 +
-+int sm_call_read(struct udevice *dev, void *buffer, size_t size,
-+		 u32 cmd, struct pt_regs *args)
++static int sandbox_sm_call_write(struct udevice *dev, void *buffer, size_t size,
++				 u32 cmd_index, struct pt_regs *args)
 +{
-+	const struct sm_ops *ops = get_sm_ops(dev);
++	if (cmd_index >= SANDBOX_SMC_CMD_COUNT || !buffer)
++		return -EINVAL;
 +
-+	if (ops->sm_call_read)
-+		return ops->sm_call_read(dev, buffer, size, cmd,
-+					 args);
++	if (size > sizeof(test_buffer))
++		return -EINVAL;
 +
-+	return -EPROTONOSUPPORT;
++	memcpy(test_buffer, buffer, size);
++
++	return size;
 +}
 +
-+int sm_call_write(struct udevice *dev, void *buffer, size_t size,
-+		   u32 cmd, struct pt_regs *args)
-+{
-+	const struct sm_ops *ops = get_sm_ops(dev);
-+
-+	if (ops->sm_call_write)
-+		return ops->sm_call_write(dev, buffer, size, cmd,
-+					  args);
-+
-+	return -EPROTONOSUPPORT;
-+}
-+
-+UCLASS_DRIVER(sm) = {
-+	.name           = "sm",
-+	.id             = UCLASS_SM,
++static const struct udevice_id sandbox_sm_ids[] = {
++	{
++		.compatible = "sandbox,sm",
++	},
++	{},
 +};
-diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index 376f741cc2..545c9352a8 100644
---- a/include/dm/uclass-id.h
-+++ b/include/dm/uclass-id.h
-@@ -80,6 +80,7 @@ enum uclass_id {
- 	UCLASS_MDIO,		/* MDIO bus */
- 	UCLASS_MDIO_MUX,	/* MDIO MUX/switch */
- 	UCLASS_MEMORY,		/* Memory Controller device */
-+	UCLASS_SM,		/* Secure Monitor driver */
- 	UCLASS_MISC,		/* Miscellaneous device */
- 	UCLASS_MMC,		/* SD / MMC card or chip */
- 	UCLASS_MOD_EXP,		/* RSA Mod Exp device */
-diff --git a/include/sm-uclass.h b/include/sm-uclass.h
++
++static const struct sm_ops sandbox_sm_ops = {
++	.sm_call = sandbox_sm_call,
++	.sm_call_read = sandbox_sm_call_read,
++	.sm_call_write = sandbox_sm_call_write,
++};
++
++U_BOOT_DRIVER(sm) = {
++	.name = "sm",
++	.id = UCLASS_SM,
++	.of_match = sandbox_sm_ids,
++	.ops = &sandbox_sm_ops,
++};
+diff --git a/include/sandbox-sm.h b/include/sandbox-sm.h
 new file mode 100644
-index 0000000000..c114484044
+index 0000000000..91c30d501d
 --- /dev/null
-+++ b/include/sm-uclass.h
-@@ -0,0 +1,72 @@
++++ b/include/sandbox-sm.h
+@@ -0,0 +1,18 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * Copyright (c) 2023 SberDevices, Inc.
@@ -263,144 +223,17 @@ index 0000000000..c114484044
 + * Author: Alexey Romanov <avromanov@salutedevices.com>
 + */
 +
-+#ifndef __SM_UCLASS_H__
-+#define __SM_UCLASS_H__
++#ifndef __SANDBOX_SM_H__
++#define __SANDBOX_SM_H__
 +
-+#include <asm/types.h>
-+#include <asm/ptrace.h>
-+
-+struct udevice;
-+
-+/**
-+ * struct sm_ops - The functions that a SM driver must implement.
-+ *
-+ * @sm_call: Request a secure monitor call with specified command.
-+ *
-+ * @sm_call_read: Request a secure monitor call and retrieve data
-+ * from secure-monitor (depends on specified command).
-+ *
-+ * @sm_call_write: Request a secure monitor call and send data
-+ * to secure-monitor (depends on specified command).
-+ *
-+ * The individual methods are described more fully below.
-+ */
-+struct sm_ops {
-+	/**
-+	 * sm_call - generic SMC call to the secure-monitor
-+	 *
-+	 * @dev:	Pointer to UCLASS_SM device
-+	 * @cmd_index:	Index of the SMC function ID
-+	 * @smc_ret:	Returned value from secure world
-+	 * @args:	SMC arguments
-+	 *
-+	 * @return:	0 on success, a negative value on error
-+	 */
-+	int (*sm_call)(struct udevice *dev, u32 cmd, s32 *smc_ret,
-+		       struct pt_regs *args);
-+
-+	/**
-+	 * sm_call_write - send data to secure-monitor
-+	 *
-+	 * @dev:	Pointer to UCLASS_SM device
-+	 * @buffer:	Buffer containing data to send
-+	 * @size:	Size of the buffer
-+	 * @cmd:	Index of the SMC function ID
-+	 * @args:	SMC arguments
-+	 *
-+	 * @return:	size of sent data on success, a negative value on error
-+	 */
-+	int (*sm_call_write)(struct udevice *dev, void *buffer,
-+			     size_t size, u32 cmd, struct pt_regs *args);
-+
-+	/**
-+	 * sm_call_read - retrieve data from secure-monitor
-+	 *
-+	 * @dev:	Pointer to UCLASS_SM device
-+	 * @buffer:	Buffer to store the retrieved data
-+	 * @size:	Size of the buffer
-+	 * @cmd:	Index of the SMC function ID
-+	 * @args:	SMC arguments
-+	 *
-+	 * @return:	size of read data on success, a negative value on error
-+	 */
-+	int (*sm_call_read)(struct udevice *dev, void *buffer,
-+			    size_t size, u32 cmd, struct pt_regs *args);
++enum sandbox_smc_cmd {
++	SANDBOX_SMC_CMD_READ_MEM,
++	SANDBOX_SMC_CMD_WRITE_MEM,
++	SANDBOX_SMC_CMD_COMMON,
++	SANDBOX_SMC_CMD_COUNT,
 +};
 +
-+#endif /* __SM_UCLASS_H__ */
-diff --git a/include/sm.h b/include/sm.h
-new file mode 100644
-index 0000000000..afa9c89055
---- /dev/null
-+++ b/include/sm.h
-@@ -0,0 +1,67 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2023 SberDevices, Inc.
-+ *
-+ * Author: Alexey Romanov <avromanov@salutedevices.ru>
-+ */
-+
-+#ifndef __SM_H__
-+#define __SM_H__
-+
-+/*
-+ * NOTE: UCLASS_SM is designed with the idea that
-+ * each driver should convert @cmd to some raw
-+ * value, which is known only for driver, and set this
-+ * value to the first element of the @args->regs array.
-+ * Therefore, it is necessary to pass the remaining
-+ * arguments starting at index = 1. Anyway, driver
-+ * implementation may vary, so, please, check the specific
-+ * implementation of the driver you are using.
-+ */
-+
-+#include <asm/types.h>
-+#include <asm/ptrace.h>
-+
-+struct udevice;
-+
-+/**
-+ * sm_call - generic SMC call to the secure-monitor
-+ *
-+ * @dev:	Pointer to UCLASS_SM device
-+ * @cmd_index:	Index of the SMC function ID
-+ * @smc_ret:	Returned value from secure world
-+ * @args:	SMC arguments
-+ *
-+ * @return:	0 on success, a negative value on error
-+ */
-+int sm_call(struct udevice *dev, u32 cmd, s32 *ret, struct pt_regs *args);
-+
-+/**
-+ * sm_call_read - retrieve data from secure-monitor
-+ *
-+ * @dev:	Pointer to UCLASS_MESON_SM device
-+ * @buffer:	Buffer to store the retrieved data
-+ * @size:	Size of the buffer
-+ * @cmd:	Index of the SMC function ID
-+ * @args:	SMC arguments
-+ *
-+ * @return:	size of read data on success, a negative value on error
-+ */
-+int sm_call_read(struct udevice *dev, void *buffer, size_t size,
-+		 u32 cmd, struct pt_regs *args);
-+
-+/**
-+ * sm_call_write - send data to secure-monitor
-+ *
-+ * @dev:	Pointer to UCLASS_SM device
-+ * @buffer:	Buffer containing data to send
-+ * @size:	Size of the buffer
-+ * @cmd:	Index of the SMC function ID
-+ * @args:	SMC arguments
-+ *
-+ * @return:	size of sent data on success, a negative value on error
-+ */
-+int sm_call_write(struct udevice *dev, void *buffer, size_t size,
-+		  u32 cmd, struct pt_regs *args);
-+
-+#endif /* __SM_H__ */
++#endif
 -- 
 2.25.1
 
