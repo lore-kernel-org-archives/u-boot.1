@@ -4,74 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF491EE49A4
-	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 03:40:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A0EEE7FF4
+	for <u-boot@archiver.kernel.org>; Mon, 11 Sep 2023 04:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7029886CD0;
-	Mon, 11 Sep 2023 05:40:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foxmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 29D3E86C5E;
+	Mon, 11 Sep 2023 06:58:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=foxmail.com header.i=@foxmail.com header.b="sF3m0p4Z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QWJX72FO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F2C386B0E; Mon, 11 Sep 2023 02:58:13 +0200 (CEST)
-Received: from out162-62-57-49.mail.qq.com (out162-62-57-49.mail.qq.com
- [162.62.57.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0232B86CF2; Mon, 11 Sep 2023 06:58:23 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08AC586C0B
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 02:58:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 706618652B
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 06:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foxmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rtoax@foxmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1694393882;
- bh=8ZkZTE5jCUve79V9LdHGq6w0kkbhlZN3VcG/36IWZz8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=sF3m0p4Z4s7VeZkWGroislPtpDRO1uX+xwPTywfyIN2goJ7F2jNxtBo7hcS76QIN7
- W6Akl2rrAw9pxYQUCV5NwaBZJJMDX2mGNpO568dxc5dLmpvjZkAw+D+/u6ues2hxs5
- KfeJQYCDEz+WybpT3O0pNTNS7711L+B68CLxRJ+E=
-Received: from [10.56.52.5] ([39.156.73.12])
- by newxmesmtplogicsvrszc5-0.qq.com (NewEsmtp) with SMTP
- id CF20FAF7; Mon, 11 Sep 2023 08:51:50 +0800
-X-QQ-mid: xmsmtpt1694393510tn0zgwfmr
-Message-ID: <tencent_94924065F3356E3401F1C54043882B8BFA05@qq.com>
-X-QQ-XMAILINFO: MQ+wLuVvI2LQk1giPPfNlljxnw9LNoTUn/U73j14nzd6hRiaoqJpdgi0P7WDUr
- MmdIk3oH/dqKkeGfrdAmUUX8BT5QiE+5fytYtlqpiU3Y7dPHUXOlapJHfvMlRXzLkGZ/eAD0wdvo
- mAZyDjgtMQvceOSBX41Sxcm+iTT24Qu61MdoZeVOVM0Ko69nxvAfjrf0brY4/tgF/rCrZ7nihDNl
- a5qGwVEdjt//eZb26SsieLpYQvvjzuQfvXMsVZbkF8dorn1zi3h257lUPwDUjIjkSYfQ2kueoaNg
- x5BOQ3MZYyOEhu6ambpQV2LUBCmwABw1Qmrqx1y/Oy0RFdhryTJLnoWzLgTAZmMAa3zvTSdbl/FS
- rQgBLy/hCxqgZpKv5jjOUFNqwxGBrnGE/fS2Nfg4IgDZbvDfS27iUk5FcktRqf4b77yux4rucZhi
- saFZfeHRA6poPNmM5wLdQ62mKXcLTp+U5sqw2uqAUgoSqqovg5tsjVjHhrUKscqwQaY0HOib/Ufj
- 2jjncc7wAZnetYd5OGKbWqCN2ijqvFxfH6H9dqs0bL+VeYLxLY4Ac5nlHGUgu0+Krdb15hNu+uvF
- 1EDUoRMzunZsBQyMI3ivH1DNO+9HH89dHun/KoUMnhbiYxLczBcQkbNXq8A+uII/pOM6f1xDf2d9
- KYxHHavylzVnU+APzyvbyLrPriZv6hDiE/d1H7LKgQU5qmcmQOiZfR/8h9m4jEzhCuY7SLnOfAvx
- GN773O5knsPjluJLt1lfKGjnfKtUFw6i9d3mYt0WsRpZrbsvlCQxSYaZAqSgEX9EGHMhKFZa/csO
- wUQc4MbgXfe0NPbJyeVuCiv5RfbpjrIJNH7uu3FxNQUUt4wDpPCLIwhvmCXH0UKCGt4fE+I+Ax+a
- fw0aFo4mtHVEZfxgvoKNh4xU0Yz7ClpQzMgUXJgUaBCEPYlw5giz917+Bn0oKHJoZSOrL/TUmMGV
- eG072cFJsk8fkTXPJmywGgjGymxSNG7UWUwNW2sMY=
-X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
-X-OQ-MSGID: <5c36846b-26c6-42ec-8cc0-94a04eed9816@foxmail.com>
-Date: Mon, 11 Sep 2023 08:51:49 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] binman: Fix SyntaxWarning: invalid escape sequence '\('
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2684e225a6cso545287a91.1
+ for <u-boot@lists.denx.de>; Sun, 10 Sep 2023 21:58:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1694408297; x=1695013097; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L/t3vfMkOY+mumYRC118JDXb4yTlWzC4S2XKqfHyxaY=;
+ b=QWJX72FOSTegb0XAWofjh8IX+J3lj6lWol1aQWZvU6UTE8uwsYcnhgQlyFSWEgE0OK
+ SgcchI8iUrZFcEwFzxFClCSpUMebsUvi+qnQEIbgcRRW/fuIlVfkdKwoZXAB3oo1cF/j
+ d2WU1m9pSsO/InO93ZQESvyFmx76YxyrDApkNfPplCv/GTrRnDu/AcSHlqEVjovs4Kxc
+ zmdxYxE6EF+BhVHF+2VDwANTvH2foElhpr9/FbdbNukRNnth3mjxupOYmFjjs6+v4jvd
+ NqihwTJdeL5bKxmDKIYYr8d4TD41xPYuXWbRbfPqkZMgzSEsx82tiwKPF4fGP5iR8yRM
+ /cLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694408297; x=1695013097;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=L/t3vfMkOY+mumYRC118JDXb4yTlWzC4S2XKqfHyxaY=;
+ b=Axn7x9tV6Bj8/fck1pLMvGQOa88WYBepwHW4J+qgVWM5j4fLrXDZKuwBbW/ncxzEdr
+ tsjy/5g+FxIlZ2t7fxF1uEVsxYOmm0eKZDMkc4BnXjKAhAR+gP1RXh5xzoBKyOwaXAEN
+ kSImcos4pHwVechh/Y3b/ZwMXDBe3Vv+D6p2PgocrHATm5DaoCtyIweccms/x53xFthF
+ ALP0Stzzzhf1Ze/zl0zGzQ97onZKAHYlhEa37G3c8cECIBn/E/aDhXL0asfqBYYVLl+1
+ 3clsVP+ULhUCThV7xSU9oD/ugQerC6cCbrffcbKfpxW+gk/a8/vbY0y/ziTAKzYWgIXZ
+ tp/Q==
+X-Gm-Message-State: AOJu0YwHfGdAOLWPVBvFVbORUPD4aTaqUkKiSrWZIWsV22mrDbu8NdzK
+ 6TT5x46ILvUVsqLaq0B2XOlmXA==
+X-Google-Smtp-Source: AGHT+IFXgGzou8g7yGtSYwiXWAfJMggoyQZSCjX6X+Q3qjJpviSEoEFX7e8g2vySKuXL9u99zrufIg==
+X-Received: by 2002:a17:90a:9bc4:b0:273:e4a7:ce72 with SMTP id
+ b4-20020a17090a9bc400b00273e4a7ce72mr6042696pjw.3.1694408297488; 
+ Sun, 10 Sep 2023 21:58:17 -0700 (PDT)
+Received: from octopus ([2400:4050:c3e1:100:91f5:5d19:aad:686c])
+ by smtp.gmail.com with ESMTPSA id
+ t5-20020a17090aae0500b0026b3ed37ddcsm4714458pjq.32.2023.09.10.21.58.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 10 Sep 2023 21:58:16 -0700 (PDT)
+Date: Mon, 11 Sep 2023 13:58:13 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: Simon Glass <sjg@chromium.org>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ivan Mikhaylov <fr0st61te@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- open list <u-boot@lists.denx.de>, Rong Tao <rongtao@cestc.cn>
-References: <tencent_A957A85155C40E033B2189AC8CCB3995F607@qq.com>
- <CAPnjgZ1fWjL_qy+W4ygOvA2dDjK2v15zTJFkeNdqSSCDq8FuWQ@mail.gmail.com>
- <tencent_BA46C710370DF285E4B2EA2E35553A5FF909@qq.com>
- <CAPnjgZ12yLwPpo=8BBFmNOnz=RWykTtCzFOQyi11MgvS74QTcw@mail.gmail.com>
-Content-Language: en-US
-From: Rong Tao <rtoax@foxmail.com>
-In-Reply-To: <CAPnjgZ12yLwPpo=8BBFmNOnz=RWykTtCzFOQyi11MgvS74QTcw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 11 Sep 2023 05:40:38 +0200
+Cc: u-boot@lists.denx.de, etienne.carriere@st.com, michal.simek@amd.com,
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+Subject: Re: [RFC 1/6] firmware: scmi: fix protocol enumeration logic
+Message-ID: <ZP6eZS29gQhQ9x3z@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ etienne.carriere@st.com, michal.simek@amd.com,
+ linus.walleij@linaro.org, Oleksii_Moisieiev@epam.com
+References: <20230906024011.17488-1-takahiro.akashi@linaro.org>
+ <20230906024011.17488-2-takahiro.akashi@linaro.org>
+ <CAPnjgZ0kxE3NXD_pLTm5Oc3Sb9HRUz5pbWETCqrvr4XwSUzKcA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0kxE3NXD_pLTm5Oc3Sb9HRUz5pbWETCqrvr4XwSUzKcA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,78 +98,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/11/23 6:36 AM, Simon Glass wrote:
-> Hi,
->
-> On Tue, 5 Sept 2023 at 19:34, 荣涛 <rtoax@foxmail.com> wrote:
->> Thanks, Simon
->>
->> The following lines is my systeme ENV and make log
->>
->> $ cat /etc/os-release
->> NAME="Fedora Linux"
->> VERSION="40 (Workstation Edition Prerelease)"
->> ID=fedora
->> VERSION_ID=40
->> VERSION_CODENAME=""
->> PLATFORM_ID="platform:f40"
->> PRETTY_NAME="Fedora Linux 40 (Workstation Edition Prerelease)"
->> ANSI_COLOR="0;38;2;60;110;180"
->> LOGO=fedora-logo-icon
->> CPE_NAME="cpe:/o:fedoraproject:fedora:40"
->> DEFAULT_HOSTNAME="fedora"
->> HOME_URL="https://fedoraproject.org/"
->> DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/"
->> SUPPORT_URL="https://ask.fedoraproject.org/"
->> BUG_REPORT_URL="https://bugzilla.redhat.com/"
->> REDHAT_BUGZILLA_PRODUCT="Fedora"
->> REDHAT_BUGZILLA_PRODUCT_VERSION=rawhide
->> REDHAT_SUPPORT_PRODUCT="Fedora"
->> REDHAT_SUPPORT_PRODUCT_VERSION=rawhide
->> SUPPORT_END=2024-05-14
->> VARIANT="Workstation Edition"
->> VARIANT_ID=workstation
->>
->> $ uname -r
->> 6.6.0-0.rc0.20230901git99d99825fc07.3.fc40.x86_64
->>
->> $ gcc --version
->> gcc (GCC) 13.2.1 20230728 (Red Hat 13.2.1-1)
->> Copyright (C) 2023 Free Software Foundation, Inc.
->> This is free software; see the source for copying conditions.  There is NO
->> warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
->>
->> $ make qemu-x86_64_defconfig
->>    HOSTCC  scripts/basic/fixdep
->>    HOSTCC  scripts/kconfig/conf.o
->>    YACC    scripts/kconfig/zconf.tab.c
->>    LEX     scripts/kconfig/zconf.lex.c
->>    HOSTCC  scripts/kconfig/zconf.tab.o
->>    HOSTLD  scripts/kconfig/conf
->> #
->> # configuration written to .config
->> #
->>
->> $ make -j8
->> ... [too much logs]
->>    SYM     spl/u-boot-spl.sym
->>    OBJCOPY spl/u-boot-x86-start16-spl.bin
->>    OBJCOPY spl/u-boot-x86-reset16-spl.bin
->>    CAT     spl/u-boot-spl-dtb.bin
->>    COPY    spl/u-boot-spl.bin
->>    BINMAN  .binman_stamp
->> /home/sda/git-repos/u-boot/tools/binman/etype/section.py:25: SyntaxWarning: invalid escape sequence '\('
->>    """Entry that contains other entries
->>    OFCHK   .config
->>
-> Thanks for that. What is your Python version?
+Hi Simon,
 
-Thanks Simon
+On Sun, Sep 10, 2023 at 01:13:26PM -0600, Simon Glass wrote:
+> Hi AKASHI,
+> 
+> On Tue, 5 Sept 2023 at 20:41, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > The original logic in enumerating all the protocols accidentally
+> > modifies a *loop* variable, node, at Voltage domain protocol.
+> > So subsequent protocol nodes in a device tree won't be detected.
+> >
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > ---
+> >  drivers/firmware/scmi/scmi_agent-uclass.c | 7 +++++--
+> >  1 file changed, 5 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
+> > index 46a2933d51a4..79584c00a066 100644
+> > --- a/drivers/firmware/scmi/scmi_agent-uclass.c
+> > +++ b/drivers/firmware/scmi/scmi_agent-uclass.c
+> > @@ -422,8 +422,11 @@ static int scmi_bind_protocols(struct udevice *dev)
+> >                 case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
+> >                         if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI) &&
+> >                             scmi_protocol_is_supported(dev, protocol_id)) {
+> > -                               node = ofnode_find_subnode(node, "regulators");
+> > -                               if (!ofnode_valid(node)) {
+> > +                               ofnode sub_node;
+> > +
+> > +                               sub_node = ofnode_find_subnode(node,
+> > +                                                              "regulators");
+> > +                               if (!ofnode_valid(sub_node)) {
+> >                                         dev_err(dev, "no regulators node\n");
+> >                                         return -ENXIO;
+> >                                 }
+> > --
+> > 2.34.1
+> >
+> 
+> This function is very ugly...could we instead rely on driver model to
 
-$ python --version
-Python 3.12.0rc1
 
->
+I think you are talking about scmi_bind_protocols() itself,
+not the hunk above in my patch, which is merely a bug fix
+in the existing code.
+If so,
+
+> bind the devices? It seems unfortunate to have to write code for
+> something which could be done with no extra code.
+
+We will discuss in the threads on your comment [1].
+
+[1] https://lists.denx.de/pipermail/u-boot/2023-September/530200.html
+
+-Takahiro Akashi
+
+
 > Regards,
 > Simon
-
