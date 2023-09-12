@@ -4,47 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F84CA0EC3
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 09:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 770B4CA0ECA
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 09:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5889586E37;
-	Tue, 12 Sep 2023 11:47:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id E100086E1E;
+	Tue, 12 Sep 2023 11:51:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="ZMA/ab6D";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ovGi3zrD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EDB586E46; Tue, 12 Sep 2023 11:47:41 +0200 (CEST)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id A608B86E4B
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 11:47:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
+ id 3EF9A86E2A; Tue, 12 Sep 2023 11:51:00 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id ED35786D90
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 11:50:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 2F8FE212BC20;
- Tue, 12 Sep 2023 02:47:33 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 2F8FE212BC20
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1694512053;
- bh=rR6SdGuKgv1k/SLKYowO/1JsxJPlosHuwOmA549Vr8I=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZMA/ab6DVL9Sm4YVA+jKDl84vejVytt/CC4skka9chRaGP5E3G6VetpiOu0hOWa+I
- xyILoO4Z85AqkBJtjcyHaQQUsGTg0UIE7xxjzRtRCS4ynaKEsU4/mEWTAxu3rQTnMM
- GJ0DP/leeKMJ+O9XjFjLD7ampJWATwW4+qxoZiZg=
-From: seanedmond@linux.microsoft.com
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, stcarlso@linux.microsoft.com, ilias.apalodimas@linaro.org
-Subject: [PATCH 8/8] doc: rollback: anti-rollback verification
-Date: Tue, 12 Sep 2023 02:47:31 -0700
-Message-Id: <20230912094731.51413-9-seanedmond@linux.microsoft.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230912094731.51413-1-seanedmond@linux.microsoft.com>
-References: <20230912094731.51413-1-seanedmond@linux.microsoft.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38C9osAp012685;
+ Tue, 12 Sep 2023 04:50:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1694512254;
+ bh=bb3jHuZ82lAZWVdRCVzISS2ohhMB4LVa973HFj5UYv0=;
+ h=From:To:CC:Subject:Date;
+ b=ovGi3zrDoexQU/7JabPwJrG4Cos0lW+jOf0Kl44BiSQ2+GUY1JEg/3c5IFVi9IsEh
+ T40TnhXxaCd9Ncsxxpk997p1TnUmbzG69YN1zCjh9rzsjwTgW2vFOaAO6lieKtBER2
+ z5GR58rYF3Tj0qfR9c7j4cKHH0GDfDJlZWulaMf4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38C9orfg062534
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 12 Sep 2023 04:50:53 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
+ Sep 2023 04:50:53 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 12 Sep 2023 04:50:53 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38C9oocp043488;
+ Tue, 12 Sep 2023 04:50:51 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <jagan@amarulasolutions.com>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>, Udit Kumar
+ <u-kumar1@ti.com>, Apurva Nandan <a-nandan@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>
+Subject: [PATCH v2] spi: cadence_qspi: Select flash subnode at runtime
+Date: Tue, 12 Sep 2023 15:20:35 +0530
+Message-ID: <20230912095035.1163945-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,197 +79,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sean Edmond <seanedmond@microsoft.com>
+Currently spi driver gets flash parameter from first subnode.
 
-Add documentation for anti-rollback verification, optional properties in
-FIT image, and UCLASS_ROLLBACK device.
+Few boards have more than one flash with different parameters
+and selection of flash is done by on board switch settings.
+In such case, uboot needs to be recompiled with updated
+device tree to align with board switch settings.
 
-Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+This patch allows to select flash node at runtime.
+
+Boards those are supporting multiple flashes
+needs to implement cadence_qspi_get_subnode function and return correct
+flash node.
+
+Cc: Apurva Nandan <a-nandan@ti.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- doc/develop/driver-model/index.rst         |  1 +
- doc/develop/driver-model/rollback-info.rst | 42 +++++++++++++++++
- doc/usage/fit/signature.rst                | 53 +++++++++++++++++++---
- doc/usage/fit/source_file_format.rst       | 21 ++++++++-
- 4 files changed, 108 insertions(+), 9 deletions(-)
- create mode 100644 doc/develop/driver-model/rollback-info.rst
+One of such platform is J721S2 EVM
+link https://www.ti.com/lit/pdf/spruj69
+Fig 3.1, Page 18 has details of two flashes connected with one controller
 
-diff --git a/doc/develop/driver-model/index.rst b/doc/develop/driver-model/index.rst
-index 8e12bbd936..bb2d2e8a5d 100644
---- a/doc/develop/driver-model/index.rst
-+++ b/doc/develop/driver-model/index.rst
-@@ -25,6 +25,7 @@ subsystems
-    pci-info
-    pmic-framework
-    remoteproc-framework
-+   rollback-info
-    serial-howto
-    soc-framework
-    spi-howto
-diff --git a/doc/develop/driver-model/rollback-info.rst b/doc/develop/driver-model/rollback-info.rst
-new file mode 100644
-index 0000000000..06ba4584a9
---- /dev/null
-+++ b/doc/develop/driver-model/rollback-info.rst
-@@ -0,0 +1,42 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Rollback Driver Guide
-+=====================
-+
-+Rollback protection is required when there is a need to retire
-+previous versions of FIT images due to security flaws in them.
-+See :doc:`../../usage/fit/signature` for details on rollback protection.
-+
-+The rollback driver is intended to provide tamper-evident storage using
-+a UCLASS_ROLLBACK device.  It exposes the following APIs which are
-+used in the FIT verification process (if FIT_ROLLBACK_CHECK is set):
-+- rollback_idx_get()
-+- rollback_idx_set()
-+
-+A TPM based rollback device has been provided as an example.  Users could
-+create their own UCLASS_ROLLBACK device to access proprietary secure storage.
-+
-+TPM 2.0 based rollback devices
-+------------
-+
-+A TPM-based rollback device has been provided as a reference.  It can be
-+enabled with:
-+- DM_ROLLBACK
-+- ROLLBACK_TPM
-+
-+The tpm based rollback device should be added as a child node of the TPM in
-+the u-boot device tree.  You should provide the property "rollback-nv-index"
-+to set the TPM's NV index (if no "rollback-nv-index" is provided, an NV index
-+of 0 is assumed).  For example:
-+
-+	tpm2 {
-+		compatible = "sandbox,tpm2";
-+
-+		rollback@1 {
-+			compatible = "tpm,rollback";
-+			rollback-nv-index = <0x1001007>;
-+		};
-+	};
-+
-+Note, the ROLLBACK_TPM device does not set any policy.  Consumers of this
-+driver should add a policy to make it more secure.
-\ No newline at end of file
-diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-index 0804bffd1e..30dd529c29 100644
---- a/doc/usage/fit/signature.rst
-+++ b/doc/usage/fit/signature.rst
-@@ -674,14 +674,53 @@ Sign the fitImage with the hardware key::
-     "model=PKCS%2315%20emulated;manufacturer=ZeitControl;serial=000xxxxxxxxx;token=OpenPGP%20card%20%28User%20PIN%20%28sig%29%29" \
-     -K u-boot.dtb -N pkcs11 -r fitImage
+Change log:
+Changes in v2
+- Corrected link in comment
+- removed extra space
+- Added Reviewed-by, after addressing v1 feedback
+- link to v1
+https://lore.kernel.org/all/20230907092143.4110817-1-u-kumar1@ti.com/
+
+ drivers/spi/cadence_qspi.c | 7 ++++++-
+ drivers/spi/cadence_qspi.h | 1 +
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
+index cc3a54f295..eb7fbf83d0 100644
+--- a/drivers/spi/cadence_qspi.c
++++ b/drivers/spi/cadence_qspi.c
+@@ -40,6 +40,11 @@ __weak int cadence_qspi_versal_flash_reset(struct udevice *dev)
+ 	return 0;
+ }
  
-+Roll-back Protection
-+-----------------------------------------
++__weak ofnode cadence_qspi_get_subnode(struct udevice *dev)
++{
++	return dev_read_first_subnode(dev);
++}
++
+ static int cadence_spi_write_speed(struct udevice *bus, uint hz)
+ {
+ 	struct cadence_spi_priv *priv = dev_get_priv(bus);
+@@ -401,7 +406,7 @@ static int cadence_spi_of_to_plat(struct udevice *bus)
+ 	plat->is_dma = dev_read_bool(bus, "cdns,is-dma");
  
--Future Work
-------------
--
--- Roll-back protection using a TPM is done using the tpm command. This can
--  be scripted, but we might consider a default way of doing this, built into
--  bootm.
--
-+Rollback protection is required when there is a need to retire
-+previous versions of FIT images due to security flaws in them.
-+
-+This feature is realized by adding a rollback index as a property
-+in the FIT image.  Every time a security flaw is discovered, the
-+rollback index is incremented.  For example:
-+
-++-------------+----------------+
-+| FIT version | Rollback index |
-++=============+================+
-+| 1.0         | 0              |
-++-------------+----------------+
-+| 1.1         | 0              |
-++-------------+----------------+
-+| 2.0         | 0              |
-++-------------+----------------+
-+| Security issue found!        |
-++-------------+----------------+
-+| 1.2         | 1              |
-++-------------+----------------+
-+| 2.1         | 1              |
-++-------------+----------------+
-+
-+Each sub-image node inside /images node has an optional rollback rollback_index
-+("rollback"). This version number is part of signed data and is incremented as
-+security flaws are discovered and fixed. If no "rollback" property is present
-+in the FIT image, a rollback index of 0 is assumed.
-+
-+U-Boot stores the last seen "rollback" for a given image type in platform
-+specific tamper-evident storage (using a UCLASS_ROLLBACK device).
-+See :doc:`../../develop/driver-model/rollback-info` for more information on
-+rollback devices.
-+
-+As part of signature verification, U-Boot enforces rollback
-+protection if enabled (with FIT_ROLLBACK_CHECK). The rollback index stored in secure
-+storage is validated with "rollback" in the sub-image node. If the counter
-+in the FIT image is lower than the counter in platform secure storage, image
-+validation has failed. If both counters match or the image counter is
-+higher than that in the platform secure storage, the image validation is
-+successful. If the rollback index has increased, U-Boot stores the new
-+value in secure storage.
-+
-+A grace version can be enabled with FIT_ROLLBACK_CHECK_GRACE, which will accept
-+a FIT image with an anti-rollback version one less than number in secure storage.
+ 	/* All other parameters are embedded in the child node */
+-	subnode = dev_read_first_subnode(bus);
++	subnode = cadence_qspi_get_subnode(bus);
+ 	if (!ofnode_valid(subnode)) {
+ 		printf("Error: subnode with SPI flash config missing!\n");
+ 		return -ENODEV;
+diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
+index 1c59d1a9d9..12825f8911 100644
+--- a/drivers/spi/cadence_qspi.h
++++ b/drivers/spi/cadence_qspi.h
+@@ -304,6 +304,7 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv *priv,
+ int cadence_qspi_apb_wait_for_dma_cmplt(struct cadence_spi_priv *priv);
+ int cadence_qspi_apb_exec_flash_cmd(void *reg_base, unsigned int reg);
+ int cadence_qspi_versal_flash_reset(struct udevice *dev);
++ofnode cadence_qspi_get_subnode(struct udevice *dev);
+ void cadence_qspi_apb_enable_linear_mode(bool enable);
  
- Possible Future Work
- --------------------
-diff --git a/doc/usage/fit/source_file_format.rst b/doc/usage/fit/source_file_format.rst
-index b2b1e42bd7..149447b856 100644
---- a/doc/usage/fit/source_file_format.rst
-+++ b/doc/usage/fit/source_file_format.rst
-@@ -389,6 +389,16 @@ signature-1
-     Each signature sub-node represents separate signature
-     calculated for node's data according to specified algorithm.
- 
-+Optional properties
-+~~~~~~~~~~~~~~~~~~~~
-+
-+rollback
-+    The rollback index (used for anti rollback protection) specified
-+    as a 64-bit value.  For example a rollback index of 1 is sepcified as:
-+
-+    rollback = <0 1>
-+
-+    If no "rollback" property is present, a rollback index of 0 is assumed.
- 
- Hash nodes
- ----------
-@@ -507,7 +517,6 @@ padding
-     The padding algorithm, it may be pkcs-1.5 or pss,
-     if no value is provided we assume pkcs-1.5
- 
--
- '/configurations' node
- ----------------------
- 
-@@ -524,12 +533,20 @@ The 'configurations' node has the following structure::
-         ...
- 
- 
--Optional property
-+Optional properties
- ~~~~~~~~~~~~~~~~~
- 
- default
-     Selects one of the configuration sub-nodes as a default configuration.
- 
-+rollback
-+    The rollback index (used for anti rollback protection) specified
-+    as a 64-bit value.  For example a rollback index of 1 is sepcified as:
-+
-+    rollback = <0 1>
-+
-+    If no "rollback" property is present, a rollback index of 0 is assumed.
-+
- Mandatory nodes
- ~~~~~~~~~~~~~~~
- 
+ #endif /* __CADENCE_QSPI_H__ */
 -- 
-2.40.0
+2.34.1
 
