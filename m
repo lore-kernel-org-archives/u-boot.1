@@ -4,80 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B96CA0EC3
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 00:50:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD607CA0EC8
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 01:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FB5586E1C;
-	Tue, 12 Sep 2023 02:50:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BA10186D5C;
+	Tue, 12 Sep 2023 03:24:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LrPq0BtY";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MC7XO+pW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71F428700D; Mon, 11 Sep 2023 22:26:17 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D0AF86D5C; Tue, 12 Sep 2023 03:24:05 +0200 (CEST)
+Received: from mail-m12747.qiye.163.com (mail-m12747.qiye.163.com
+ [115.236.127.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C436886284
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 22:26:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 694BA86D23
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 03:24:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=luis.adasilvaf@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-502153ae36cso7804530e87.3
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 13:26:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694463974; x=1695068774; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kyIcWf+7kw9YH4Mr5h2ON0fw96H4aBcQ/udlsd/Fg+Y=;
- b=LrPq0BtYH1Yoj8HFJe8D2fsaob2kLrsxHcnd8eUepvgKvCmO+W8skI9mU49p4CaKoV
- RQ8aHwG0gNJ9MhSqOGMW1AnPG3msiZxu7SgAFucZrOidgMVuXMyaBlCWM4fqDNrhU8Nm
- 8Y4/iXY8/dKNGaZkHz/Mzh3HQvvxjb4Siw/2tLX2jzBoOfgBVwDAzXOnnI/S3WMo513p
- Dmpk/SzItTGojHRKhTIrhJWnbC6GOYb2E6k+NXBZfpSkqGSecJJUrw2oGkt/4wGuMOd7
- U/lkGELjUVHqube82vYfLiJ4tfhUkX32RIXQFlZaSyUHLonAdcy+ahxdapnWfxVabj+9
- bBZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694463974; x=1695068774;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kyIcWf+7kw9YH4Mr5h2ON0fw96H4aBcQ/udlsd/Fg+Y=;
- b=DWulqgtlAHmsBpgAgAfv25sGL2Dx/sUIxQ9gsVSCjn7CsfPbMCZnJi+OuvYYZmtG/s
- iLWGPXASXVx4ybhLQfUp0uXgO2ipIGonXu/M1RN5e1hJZ7YrCxx2jEej3rCZKy+369H5
- U0beq1Kwm8PSbLHnWZbcM+liIfPMCMKInnWYefpJ50osW+p76nohAVFQ/7NmhciZ3RNf
- I8LRUGR4ZacEnFlDxIS9aJ3d1fG3GbqZc1zLtFnEKkYJ5b5mDtFUiz1pe5hGnIzqMS3R
- GSubcXIJANQUOTH3AEz8rFqq1MgX700WseAcKSs3L6l59fYdjwp5+CwKLDtSVMFIM68p
- VnlA==
-X-Gm-Message-State: AOJu0Yw+kM0WSl7WxE/NUY0yrSZcBEhJbL1j6BP104EInX8nPXhGjvKS
- sAvpBOdv5nV6h+Vf6LpL6NWMiHJ9Yb+gIbcraodfBu+QqfYOng==
-X-Google-Smtp-Source: AGHT+IGU/irn/RhwQms+smYTPhTH6UJzMzYPAYyq73QwE/rffXF++I0/mL3bWfzeEiBRjd7cYCFniY7LcOIpGEW8NcI=
-X-Received: by 2002:ac2:4f0a:0:b0:501:be89:bc95 with SMTP id
- k10-20020ac24f0a000000b00501be89bc95mr10064217lfr.0.1694463973709; Mon, 11
- Sep 2023 13:26:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=MC7XO+pWp2HiqcCVJPoMg00zuUu9Esp5WyGBz17dswd0Cc2y5ZQRbI6x+W/yANhS8FelSO2Rl1m58PtE8MTjQZ3qXCDjIuvLbMVG2ETeYZXbk137QUT0LV3hUdCeeFKNYbzvXUPak1qizDX6JSATp257b7JbDSAXt6+ZABP5TVg=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=daPl1/qDc7Tx2YywdeNCtzui7beHOS7HKdBDvbMoPnY=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [192.168.60.65] (unknown [103.29.142.67])
+ by mail-m127102.qiye.163.com (Hmail) with ESMTPA id 05DF16C01A7;
+ Tue, 12 Sep 2023 09:23:45 +0800 (CST)
+Message-ID: <a681b5df-0344-d274-4536-716286cec701@rock-chips.com>
+Date: Tue, 12 Sep 2023 09:23:43 +0800
 MIME-Version: 1.0
-References: <CA+9LrUHa5fZpRkgjYjDQft-L32Tzpa=FzOmMnLzM-q8RttqVeQ@mail.gmail.com>
- <CAPnjgZ33SiNPRdrMXmrwvRrKgi+mp+sJ+OBbu7=yDf19Gydd9Q@mail.gmail.com>
- <CA+9LrUEGqmsUL9xu0KzwgqhWptWOU1z4x3ncvXMYUJFomSv+ug@mail.gmail.com>
- <CAPnjgZ3458G_-+Nm-GzCbcVGV4uu7DNzYKd2cNQ=JFYZVS78dA@mail.gmail.com>
- <CA+9LrUF0ZjeXpG9UC3s0BLssN03wmVG3NRHG3xuXcZ=9vGnmzQ@mail.gmail.com>
- <CAPnjgZ3sgh-b-f3WVu9aWh82A4GA-L7nRuuApas=q4xMVhST9A@mail.gmail.com>
- <CA+9LrUFHH3gV29oDWW-oM0x-7Y5f1gYCMVvaEcHNJc9GHbfJ9Q@mail.gmail.com>
- <CAPnjgZ1UAui2cNZYFtdhyz_aTc+=JWN=KrGBAs866axh7_BdMA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1UAui2cNZYFtdhyz_aTc+=JWN=KrGBAs866axh7_BdMA@mail.gmail.com>
-From: Luis Alfredo da Silva <luis.adasilvaf@gmail.com>
-Date: Mon, 11 Sep 2023 15:26:02 -0500
-Message-ID: <CA+9LrUEy+qRwsv3MCSJdMGXep5tUSfStVQWyutPov88mMS45aw@mail.gmail.com>
-Subject: Re: NVMe support on RPi CM4 board
-To: Simon Glass <sjg@google.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-X-Mailman-Approved-At: Tue, 12 Sep 2023 02:50:20 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH v2 1/2] rockchip: Kconfig: Enable external TPL binary for
+ rk3308
+Content-Language: en-US
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>,
+ FUKAUMI Naoki <naoki@radxa.com>, Johan Jonker <jbx6244@gmail.com>
+References: <20230909093324.11954-1-massimo.pegorer+oss@gmail.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20230909093324.11954-1-massimo.pegorer+oss@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHkJDVh8aSx0fGU8aGkwfTFUTARMWGhIXJBQOD1
+ lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lMTlVKS0tVSkJLS1kG
+X-HM-Tid: 0a8a86fcc4f8b280kuuu05df16c01a7
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODo6SCo6CD1JGQs0EzNMExMp
+ Cg4aFBxVSlVKTUJPT0NKQ0lMTExLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhLSE43Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,55 +75,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, no problem, apologies for the quoting issue, and thank you for
-all your prompt answers and some guidance to try to understand what is
-happening.
 
-Although I'm still having the same issue, I'll share more insights just in
-case they might be useful for anyone having the same problem.
+On 2023/9/9 17:33, Massimo Pegorer wrote:
+> There is no support to initialize DRAM on rk3308 SoC using U-Boot
+> TPL or SPL, and therefore an external TPL binary must be used to
+> package a bootable u-boot-rockchip.bin image.
+>
+> Default ROCKCHIP_EXTERNAL_TPL to yes if ROCKCHIP_RK3308.
+> Remove useless TPL_SERIAL.
+>
+> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-1. After I run nvme scan I'm noticing that the m.2 led starts flashing (it
-was not flashing, before running the command it was always On).
-2. I'm having the same issue on the Official IO Board and Waveshare
-cm4-io-base-b,
-using latest stable rpi-eeprom firmware and boot files (start4x.elf, etc),
-latest u-boot version 2023.10-rc4 (I've also used previous versions, but
-using the latest one because it has debug messages)
-
-It does not appear that there is any GPIO related to NVMe. Unfortunately
-I'll move forward and try other boards.
-
-Thank you again for your help Simon.
-
-El dom, 10 sept 2023 a las 17:37, Simon Glass (<sjg@google.com>) escribi=C3=
-=B3:
-
-> Hi Luis,
+Thanks,
+- Kever
+> ---
+>   arch/arm/mach-rockchip/Kconfig | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> On Tue, 5 Sept 2023 at 17:17, Luis Alfredo da Silva
-> <luis.adasilvaf@gmail.com> wrote:
-> >
-> > Thanks for your answer Simon,
-> >
-> >> Can you check if the device has PCI bus master enabled?
-> >
-> >
-> > I think this one will take me a bit more time, should this be in
-> raspberry pi=E2=80=99s eeprom firmware?
-> >
-> > Will the disabled PCI bus master also be a problem for the Linux kernel=
-?
-> As this is working as expected
->
-> (BTW the quoting seems broken in your email; also the text came out
-> white so at first I thought you had sent an empty reply)
->
-> Actually I can see that nvme_probe() turns on bus mastering.
->
-> So no, I don't know what is wrong, sorry. Perhaps there are some
-> quirks in the Linux driver which need to be added to U-Boot? Perhaps
-> there is a power GPIO to set?
->
-> Regards,
-> Simon
->
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index a279582f4f..3b044269bd 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -166,7 +166,6 @@ config ROCKCHIP_RK3308
+>   	imply SPL_SYSCON
+>   	imply SPL_RAM
+>   	imply SPL_SERIAL
+> -	imply TPL_SERIAL
+>   	imply SPL_SEPARATE_BSS
+>   	help
+>   	  The Rockchip RK3308 is a ARM-based Soc which embedded with quad
+> @@ -436,7 +435,7 @@ config TPL_ROCKCHIP_COMMON_BOARD
+>   
+>   config ROCKCHIP_EXTERNAL_TPL
+>   	bool "Use external TPL binary"
+> -	default y if ROCKCHIP_RK3568 || ROCKCHIP_RK3588
+> +	default y if ROCKCHIP_RK3308 || ROCKCHIP_RK3568 || ROCKCHIP_RK3588
+>   	help
+>   	  Some Rockchip SoCs require an external TPL to initialize DRAM.
+>   	  Enable this option and build with ROCKCHIP_TPL=/path/to/ddr.bin to
