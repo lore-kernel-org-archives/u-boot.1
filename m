@@ -4,61 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD607CA0EC8
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 01:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA9ACA0ECD
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 03:09:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA10186D5C;
-	Tue, 12 Sep 2023 03:24:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 3187B86D93;
+	Tue, 12 Sep 2023 05:09:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MC7XO+pW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V5MroIeE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D0AF86D5C; Tue, 12 Sep 2023 03:24:05 +0200 (CEST)
-Received: from mail-m12747.qiye.163.com (mail-m12747.qiye.163.com
- [115.236.127.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 649C0868D0; Tue, 12 Sep 2023 05:09:11 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 694BA86D23
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 03:24:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id A8D5B86DFF
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 05:09:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=MC7XO+pWp2HiqcCVJPoMg00zuUu9Esp5WyGBz17dswd0Cc2y5ZQRbI6x+W/yANhS8FelSO2Rl1m58PtE8MTjQZ3qXCDjIuvLbMVG2ETeYZXbk137QUT0LV3hUdCeeFKNYbzvXUPak1qizDX6JSATp257b7JbDSAXt6+ZABP5TVg=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=daPl1/qDc7Tx2YywdeNCtzui7beHOS7HKdBDvbMoPnY=;
- h=date:mime-version:subject:message-id:from;
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by mail-m127102.qiye.163.com (Hmail) with ESMTPA id 05DF16C01A7;
- Tue, 12 Sep 2023 09:23:45 +0800 (CST)
-Message-ID: <a681b5df-0344-d274-4536-716286cec701@rock-chips.com>
-Date: Tue, 12 Sep 2023 09:23:43 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5280ef23593so6135316a12.3
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 20:09:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694488146; x=1695092946; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/nItppIezGsfNnAuOw52hilDvjlhS1cAMVtFZZbUrCc=;
+ b=V5MroIeEeGx5uLRG+9Zma7Zqp/lgu3Tbd4hOfgDqnjnHaDrWkI0pGom5Y5MtATIW6r
+ uaF29Iq5hu04QyPFL3zu1ZO3zV7XuWzLxgVVl/a+3Rx03enpZT0zv+5SgGXF4AriaLHH
+ 0kKb2hFPGzdDmuCqat+1QcrB0DBGcqcfvaiXelfVJCO8ug96epclXXJ8Hrav/ejytNIx
+ DJXVV+XStyy37w7PXhnax8o6wX+eFXCyTIcAMD0ziN9osdXdc+3Yy5kxNFKGT8g3s9Q2
+ mf3Eq5uAxUlMGkS8o80bHj0CHJkxtle3MW1AF5VmjwjiGm+Sm2hJCL1V2VBBEOki8Zpk
+ wu/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694488146; x=1695092946;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/nItppIezGsfNnAuOw52hilDvjlhS1cAMVtFZZbUrCc=;
+ b=d/eGwgoOvbBHUtu+NO6frcxXE5mQyizJYv3l8NsVCTzsv20Wb9vroAYiC47NaO9biN
+ VNHUhmVIih7Wwzeh76egqF2cBfT3Fie5jb862YhJpCqs7O8vx2DFW7s0c5HL7ETOOKlR
+ fr4HGyKeJDulVafvq66EVLZaVoZ4sK3qq1tX3nPI/+8DnVw5VhAGGpEDPYiDwnyGF2WD
+ 4Ko5rrb8FuR2vwoozCTU+RBK+GeawuVSTHvxOHNCxgqwz1mbjWwkOkqtEhi6+S57NiA4
+ nCd6Y9SRK10VlFoKI5X90wI3fLCmvLujpAiSGNp9AQuFgUBNw55EBS0aMUnCc02X2OUA
+ XrMw==
+X-Gm-Message-State: AOJu0Yyx0pZ2dAozHKrC1DiaQMAnfOaiKm5sEXgJJYC3JZjoVGHg/k6T
+ oP/RotmrnBjRgFc3kuKP9d6y7+BlKuR1neNp9Tw=
+X-Google-Smtp-Source: AGHT+IGjVurMXE8fGH726GTXWCzls7t34k8Qq6as/WD+elIjgKXjABZdmWyGUCyqAN5A6tsUn+gzf6nPIT5D+gp75/Q=
+X-Received: by 2002:a05:6402:88d:b0:52c:9f89:4445 with SMTP id
+ e13-20020a056402088d00b0052c9f894445mr9077277edy.21.1694488145922; Mon, 11
+ Sep 2023 20:09:05 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v2 1/2] rockchip: Kconfig: Enable external TPL binary for
- rk3308
-Content-Language: en-US
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@edgeble.ai>,
- FUKAUMI Naoki <naoki@radxa.com>, Johan Jonker <jbx6244@gmail.com>
-References: <20230909093324.11954-1-massimo.pegorer+oss@gmail.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20230909093324.11954-1-massimo.pegorer+oss@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHkJDVh8aSx0fGU8aGkwfTFUTARMWGhIXJBQOD1
- lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lMTlVKS0tVSkJLS1kG
-X-HM-Tid: 0a8a86fcc4f8b280kuuu05df16c01a7
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODo6SCo6CD1JGQs0EzNMExMp
- Cg4aFBxVSlVKTUJPT0NKQ0lMTExLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhLSE43Bg++
+References: <20230908190935.12516-1-mibodhi@gmail.com>
+ <CAPnjgZ1b7mx1fk5rBQ0wWBD4p85-Smw5=KG89KdCSyR+cMx+YA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1b7mx1fk5rBQ0wWBD4p85-Smw5=KG89KdCSyR+cMx+YA@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 11 Sep 2023 20:08:54 -0700
+Message-ID: <CAJaLiFy9Jw6626FtZO1qbYop0CAjTHA+aORQ9QKiVkMwthwAjg@mail.gmail.com>
+Subject: Re: [PATCH v3] bootstd: sata: Add bootstd support for ahci sata
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,42 +88,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
-On 2023/9/9 17:33, Massimo Pegorer wrote:
-> There is no support to initialize DRAM on rk3308 SoC using U-Boot
-> TPL or SPL, and therefore an external TPL binary must be used to
-> package a bootable u-boot-rockchip.bin image.
+On Sun, Sep 10, 2023 at 3:37=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Default ROCKCHIP_EXTERNAL_TPL to yes if ROCKCHIP_RK3308.
-> Remove useless TPL_SERIAL.
+> Hi Tony,
 >
-> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> On Fri, 8 Sept 2023 at 13:10, Tony Dinh <mibodhi@gmail.com> wrote:
+> >
+> > Add ahci sata bootdev and corresponding hunting function.
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > ---
+> >
+> > Changes in v3:
+> > - Correct drivers/ata/Makefile to compile sata_bootdev only if
+> > ahci sata is enabled.
+> >
+> > Changes in v2:
+> > - set devtype to sata in bootmeth_script for non-scsi SATA device.
+> >
+> >  boot/bootmeth_script.c     | 12 ++++++--
+> >  drivers/ata/Makefile       |  2 +-
+> >  drivers/ata/sata.c         | 25 +++++++++++++++
+> >  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+> >  include/sata.h             |  1 +
+> >  5 files changed, 99 insertions(+), 3 deletions(-)
+> >  create mode 100644 drivers/ata/sata_bootdev.c
+> >
+> > diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+> > index 58c57a2d4b..0269e0f9b0 100644
+> > --- a/boot/bootmeth_script.c
+> > +++ b/boot/bootmeth_script.c
+> > @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struc=
+t bootflow *bflow)
+> >         ulong addr;
+> >         int ret;
+> >
+> > -       if (desc->uclass_id =3D=3D UCLASS_USB)
+> > +       if (desc->uclass_id =3D=3D UCLASS_USB) {
+> >                 ret =3D env_set("devtype", "usb");
+> > -       else
+> > +       } else {
+> >                 ret =3D env_set("devtype", blk_get_devtype(bflow->blk))=
+;
+> > +
+> > +               /* If the parent uclass is AHCI, but the driver is ATA
+> > +                * (not scsi), set devtype to sata
+> > +                */
+> > +               if (!ret && IS_ENABLED(CONFIG_SATA) &&
+> > +                   !strcmp("ahci", env_get("devtype")))
+>
+> Can you not use desc->uclass_id to do the right thing here? It seems
+> odd to compare with the value of the env var you just set up above.
 
-Thanks,
-- Kever
-> ---
->   arch/arm/mach-rockchip/Kconfig | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+Indeed, I must have been too caught up with the env :)
+
 >
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index a279582f4f..3b044269bd 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -166,7 +166,6 @@ config ROCKCHIP_RK3308
->   	imply SPL_SYSCON
->   	imply SPL_RAM
->   	imply SPL_SERIAL
-> -	imply TPL_SERIAL
->   	imply SPL_SEPARATE_BSS
->   	help
->   	  The Rockchip RK3308 is a ARM-based Soc which embedded with quad
-> @@ -436,7 +435,7 @@ config TPL_ROCKCHIP_COMMON_BOARD
->   
->   config ROCKCHIP_EXTERNAL_TPL
->   	bool "Use external TPL binary"
-> -	default y if ROCKCHIP_RK3568 || ROCKCHIP_RK3588
-> +	default y if ROCKCHIP_RK3308 || ROCKCHIP_RK3568 || ROCKCHIP_RK3588
->   	help
->   	  Some Rockchip SoCs require an external TPL to initialize DRAM.
->   	  Enable this option and build with ROCKCHIP_TPL=/path/to/ddr.bin to
+> > +                       ret =3D env_set("devtype", "sata");
+> > +       }
+> >         if (!ret)
+> >                 ret =3D env_set_hex("devnum", desc->devnum);
+> >         if (!ret)
+> > diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
+> > index 6e30180b8b..0b6f91098a 100644
+> > --- a/drivers/ata/Makefile
+> > +++ b/drivers/ata/Makefile
+> > @@ -10,7 +10,7 @@ obj-$(CONFIG_SCSI_AHCI) +=3D ahci.o
+> >  obj-$(CONFIG_DWC_AHSATA) +=3D dwc_ahsata.o
+> >  obj-$(CONFIG_FSL_SATA) +=3D fsl_sata.o
+> >  obj-$(CONFIG_LIBATA) +=3D libata.o
+> > -obj-$(CONFIG_SATA) +=3D sata.o
+> > +obj-$(CONFIG_SATA) +=3D sata.o sata_bootdev.o
+> >  obj-$(CONFIG_SATA_CEVA) +=3D sata_ceva.o
+> >  obj-$(CONFIG_SATA_MV) +=3D sata_mv.o
+> >  obj-$(CONFIG_SATA_SIL) +=3D sata_sil.o
+> > diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+> > index ce3e9b5a40..9da7218564 100644
+> > --- a/drivers/ata/sata.c
+> > +++ b/drivers/ata/sata.c
+> > @@ -15,6 +15,8 @@
+> >  #include <dm.h>
+> >  #include <part.h>
+> >  #include <sata.h>
+> > +#include <dm/device-internal.h>
+> > +#include <dm/uclass-internal.h>
+> >
+> >  #ifndef CONFIG_AHCI
+> >  struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
+> > @@ -50,6 +52,29 @@ int sata_scan(struct udevice *dev)
+> >         return ops->scan(dev);
+> >  }
+> >
+> > +int sata_rescan(bool verbose)
+> > +{
+> > +       struct udevice *dev;
+> > +       int devnum =3D 0;
+> > +       int ret;
+> > +
+> > +       /* Find and probing the SATA controller */
+> > +       ret =3D uclass_get_device(UCLASS_AHCI, devnum, &dev);
+>
+> This does not actually rescan...if the device has already been probed,
+> it won't be probed again. You will need to use the logic like in
+> sata_remove().
+>
+> Also, please avoid using devnum. You should probably just use
+> uclass_probe_all(UCLASS_AHCI)
+
+OK.
+
+>
+> > +
+> > +       /* Sanity check */
+> > +       if (ret)
+> > +               ret =3D uclass_find_first_device(UCLASS_AHCI, &dev);
+>
+> That just finds it, but does not probe it. See uclass_first_device_err()
+>
+> > +       if (ret) {
+> > +               printf("Cannot probe SATA device %d (err=3D%d)\n", devn=
+um, ret);
+> > +               return -ENOSYS;
+>
+> return ret
+>
+> > +       }
+> > +       if (!dev) {
+> > +               printf("No SATA device found!\n");
+> > +               return -ENOSYS;
+> > +       }
+> > +       return 0;
+> > +}
+> > +
+> >  #ifndef CONFIG_AHCI
+> >  #ifdef CONFIG_PARTITIONS
+> >  struct blk_desc *sata_get_dev(int dev)
+> > diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
+> > new file mode 100644
+> > index 0000000000..f638493ce0
+> > --- /dev/null
+> > +++ b/drivers/ata/sata_bootdev.c
+> > @@ -0,0 +1,62 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Bootdev for sata
+> > + *
+> > + * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
+> > + */
+> > +
+> > +#include <common.h>
+> > +#include <ahci.h>
+> > +#include <bootdev.h>
+> > +#include <dm.h>
+> > +#include <init.h>
+> > +#include <sata.h>
+> > +
+> > +static int sata_bootdev_bind(struct udevice *dev)
+> > +{
+> > +       struct bootdev_uc_plat *ucp =3D dev_get_uclass_plat(dev);
+> > +
+> > +       ucp->prio =3D BOOTDEVP_4_SCAN_FAST;
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
+> > +{
+> > +       int ret;
+> > +
+> > +       if (IS_ENABLED(CONFIG_PCI)) {
+> > +               ret =3D pci_init();
+> > +               if (ret)
+> > +                       return ret;
+> > +       }
+> > +
+> > +       ret =3D sata_rescan(true);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +struct bootdev_ops sata_bootdev_ops =3D {
+> > +};
+> > +
+> > +static const struct udevice_id sata_bootdev_ids[] =3D {
+> > +       { .compatible =3D "u-boot,bootdev-sata" },
+> > +       { }
+> > +};
+> > +
+> > +U_BOOT_DRIVER(sata_bootdev) =3D {
+> > +       .name           =3D "sata_bootdev",
+> > +       .id             =3D UCLASS_BOOTDEV,
+> > +       .ops            =3D &sata_bootdev_ops,
+> > +       .bind           =3D sata_bootdev_bind,
+> > +       .of_match       =3D sata_bootdev_ids,
+> > +};
+> > +
+> > +BOOTDEV_HUNTER(sata_bootdev_hunter) =3D {
+> > +       .prio           =3D BOOTDEVP_4_SCAN_FAST,
+> > +       .uclass         =3D UCLASS_AHCI,
+> > +       .hunt           =3D sata_bootdev_hunt,
+> > +       .drv            =3D DM_DRIVER_REF(sata_bootdev),
+> > +};
+> > diff --git a/include/sata.h b/include/sata.h
+> > index d89f7a8a29..0495744bad 100644
+> > --- a/include/sata.h
+> > +++ b/include/sata.h
+> > @@ -20,5 +20,6 @@ extern struct blk_desc sata_dev_desc[];
+> >
+> >  int sata_probe(int devnum);
+> >  int sata_remove(int devnum);
+> > +int sata_rescan(bool verbose);
+>
+> Please add a comment
+
+Will do. And thanks for the review! I will send in the v4 patch.
+
+All the best,
+Tony
+
+>
+> >
+> >  #endif
+> > --
+> > 2.39.2
+> >
+>
+> Regards,
+> Simon
