@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6543CA0EC3
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E4C5CA0EC3
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:48:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D02486CD9;
-	Tue, 12 Sep 2023 08:21:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 339B586915;
+	Tue, 12 Sep 2023 08:48:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aS5FpLc5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nXqHx25p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC1E986CD9; Tue, 12 Sep 2023 08:21:47 +0200 (CEST)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18D8386CD0; Tue, 12 Sep 2023 08:48:03 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6E1C86E68
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 230D586672
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:47:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-573e931433aso630925a12.1
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:21:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694499703; x=1695104503; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jULBC+9kuCwtWkpMQe51eU0+5y//ch+u0sbCGsOqB1A=;
- b=aS5FpLc5PyD/ZAgaugSA7zTN1PpDPfxURhv3Qeu6nOo4RjXrnJ4HpjRwhA1taPNPAH
- Phi+z9Xhhvm/Z+QNx/1R1HdOgnb4uYlQ1gZxMAOAX46amH3pXwSLE7ztLDKX+UrSWI54
- JvD0BTa/17zEgqKjjEImtEERvBI5z3npn+frL8QH0R7aqNVpTbYVC83chNMyPEZCSdr4
- ZWquL8jh72MU8qPNEVemUzcqQPYj9dNXbrrvI05pmf9akIJ17Qckis2JLVs+g+9Wt8bZ
- 95aY4S63wIKAJ4cg9k6trI0os5vktloABjGgl1wdjvTDZuj5AHkKQSqhpaLE9AhKZ4gz
- 1WJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694499703; x=1695104503;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jULBC+9kuCwtWkpMQe51eU0+5y//ch+u0sbCGsOqB1A=;
- b=aJG1Bw+FUAY2uL1d/nKkGjyDdtz16NMFDrk4qnZblKBXHdGpEh4BBTRRzQQ/AQDLpE
- PZajrfsOK9TSrB4PjdiD9Mg9VIFjGn40B8MPpGTH7ddQBQJkV8IkX+UBDrW2qwg/sJXP
- F2CH3LTSOTlHn4rINgTdYeFFPIbiAT+FD7sGoF2H7AET5SkrBl+QGwiuB/wDc9gXSHFl
- Ko0xlApePJNFYrR0FzjQ4e6KsyfwdknfDOdU2CM4Amos0wu8QyqpzBf9jEn3zLDM1cE8
- T/0js91Bux0gDySObzVUtA2EpxEDkWcYg8tac72dzzY/rMblLFdgiOLNZXq1EIXE/td2
- /dVQ==
-X-Gm-Message-State: AOJu0Yy8lGR/PQSzLKv6QUedA59Qi3VCOwjosLUPM8omyijRip1T9Kpm
- s6e1EB2H66E7XS2FJOwRJHXJSQ==
-X-Google-Smtp-Source: AGHT+IHUwGEz1upZcw61+cLF5YiC9pL4BXllvchnMBlv0Oc3mvd+zsI/lxCiX3tdEkB4BVXTAgOavg==
-X-Received: by 2002:a05:6a20:a10c:b0:145:3bd9:1389 with SMTP id
- q12-20020a056a20a10c00b001453bd91389mr14081151pzk.6.1694499703219; 
- Mon, 11 Sep 2023 23:21:43 -0700 (PDT)
-Received: from octopus.. ([2400:4050:c3e1:100:bf3d:658b:e9f7:3af5])
- by smtp.gmail.com with ESMTPSA id
- a15-20020a170902eccf00b001bc2831e1a8sm7503970plh.80.2023.09.11.23.21.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 23:21:42 -0700 (PDT)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com,
-	sjg@chromium.org
-Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v4 13/13] test: dm: add scmi command test
-Date: Tue, 12 Sep 2023 15:20:02 +0900
-Message-Id: <20230912062002.57361-14-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230912062002.57361-1-takahiro.akashi@linaro.org>
-References: <20230912062002.57361-1-takahiro.akashi@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38C6lt39084353;
+ Tue, 12 Sep 2023 01:47:55 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1694501275;
+ bh=LZscIsquXW+by6Kf4syS3wBDr0tHgJX0L8MFwT1lHRI=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=nXqHx25pRzVijNcRK+/9jqfOlFOZZoHHB/KjzuRZdbZc13eHRCGq3emAfIODkbR0X
+ eSbhK7oTBcwqhMiwJ2K7+65zSH5WEy6lgpeugVonYTxL2a2iMx5jsk9ZGRKx1EesC2
+ ISqqb2JolCwv+znaUxpkvAGjD/A3BypQJw4MPAKM=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38C6ltDR005149
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 12 Sep 2023 01:47:55 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
+ Sep 2023 01:47:55 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 12 Sep 2023 01:47:55 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38C6lsA7044455;
+ Tue, 12 Sep 2023 01:47:54 -0500
+Date: Tue, 12 Sep 2023 12:17:54 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Neha Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Bryan
+ <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Marcel Ziswiler <marcel@ziswiler.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, Emanuele Ghidoli
+ <emanuele.ghidoli@toradex.com>
+Subject: Re: [PATCH 2/2] arm: dts: k3-am625: Sync with kernel v6.6-rc1
+Message-ID: <20230912064754.gisep6zgbuhi7tsq@dhruva>
+References: <20230911140256.945074-1-nm@ti.com>
+ <20230911140256.945074-3-nm@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230911140256.945074-3-nm@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,102 +84,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this test, "scmi" command is tested against different sub-commands.
-Please note that scmi command is for debug purpose and is not intended
-in production system.
+On Sep 11, 2023 at 09:02:56 -0500, Nishanth Menon wrote:
+> Sync device tree with v6.6-rc1
+> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> ---
+>  arch/arm/dts/k3-am62-main.dtsi       |  52 ++++++++-
+>  arch/arm/dts/k3-am62-mcu.dtsi        |  24 +++++
+>  arch/arm/dts/k3-am62-verdin-dev.dtsi |  50 +++++++++
+>  arch/arm/dts/k3-am62-verdin.dtsi     |  45 +++++++-
+>  arch/arm/dts/k3-am62.dtsi            |   8 ++
+>  arch/arm/dts/k3-am625-beagleplay.dts | 154 ++++++++++++++++++++++++++-
+>  arch/arm/dts/k3-am625-sk.dts         |   2 +-
+>  7 files changed, 325 insertions(+), 10 deletions(-)
+> 
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
----
-v4
-* move 'base'-related changes to the prior commit
-* add CONFIG_CMD_SCMI to sandbox_defconfig
-v3
-* change char to u8 in vendor/agent names
-v2
-* use helper functions, removing direct uses of ops
----
- configs/sandbox_defconfig |  1 +
- test/dm/scmi.c            | 53 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 54 insertions(+)
+LGTM! Thanks for the sync up.
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 1cd1c2ed7cd5..3906476bb4fc 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -122,6 +122,7 @@ CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_AES=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_TPM_TEST=y
-+CONFIG_CMD_SCMI=y
- CONFIG_CMD_BTRFS=y
- CONFIG_CMD_CBFS=y
- CONFIG_CMD_CRAMFS=y
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index 48610299c1a1..423b6ef70b29 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -206,6 +206,59 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
- 
- DM_TEST(dm_test_scmi_base, UT_TESTF_SCAN_FDT);
- 
-+static int dm_test_scmi_cmd(struct unit_test_state *uts)
-+{
-+	struct udevice *agent_dev;
-+
-+	/* preparation */
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-+					      &agent_dev));
-+	ut_assertnonnull(agent_dev);
-+
-+	/* scmi info */
-+	ut_assertok(run_command("scmi info", 0));
-+
-+	ut_assert_nextline("SCMI device: scmi");
-+	ut_assert_nextline("  protocol version: 0x20000");
-+	ut_assert_nextline("  # of agents: 2");
-+	ut_assert_nextline("      0: platform");
-+	ut_assert_nextline("    > 1: OSPM");
-+	ut_assert_nextline("  # of protocols: 3");
-+	ut_assert_nextline("      Clock management");
-+	ut_assert_nextline("      Reset domain management");
-+	ut_assert_nextline("      Voltage domain management");
-+	ut_assert_nextline("  vendor: U-Boot");
-+	ut_assert_nextline("  sub vendor: Sandbox");
-+	ut_assert_nextline("  impl version: 0x1");
-+
-+	ut_assert_console_end();
-+
-+	/* scmi perm_dev */
-+	ut_assertok(run_command("scmi perm_dev 1 0 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assert(run_command("scmi perm_dev 1 0 0", 0));
-+	ut_assert_nextline("Denying access to device:0 failed (-13)");
-+	ut_assert_console_end();
-+
-+	/* scmi perm_proto */
-+	ut_assertok(run_command("scmi perm_proto 1 0 14 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assert(run_command("scmi perm_proto 1 0 14 0", 0));
-+	ut_assert_nextline("Denying access to protocol:0x14 on device:0 failed (-13)");
-+	ut_assert_console_end();
-+
-+	/* scmi reset */
-+	ut_assert(run_command("scmi reset 1 1", 0));
-+	ut_assert_nextline("Reset failed (-13)");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_scmi_cmd, UT_TESTF_SCAN_FDT);
-+
- static int dm_test_scmi_clocks(struct unit_test_state *uts)
- {
- 	struct sandbox_scmi_agent *agent;
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
+
+> 
+
 -- 
-2.34.1
-
+Best regards,
+Dhruva Gole <d-gole@ti.com>
