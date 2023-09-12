@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8829CA0EC3
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 09:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5F84CA0EC3
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 09:48:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D5AC86E42;
+	by phobos.denx.de (Postfix) with ESMTP id 5889586E37;
 	Tue, 12 Sep 2023 11:47:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="JzLBIcL3";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="ZMA/ab6D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2829C86E69; Tue, 12 Sep 2023 11:47:41 +0200 (CEST)
+ id 3EDB586E46; Tue, 12 Sep 2023 11:47:41 +0200 (CEST)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 713EF86E46
+ by phobos.denx.de (Postfix) with ESMTP id A608B86E4B
  for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 11:47:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id C4467212BC1A;
- Tue, 12 Sep 2023 02:47:32 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com C4467212BC1A
+ by linux.microsoft.com (Postfix) with ESMTPSA id 2F8FE212BC20;
+ Tue, 12 Sep 2023 02:47:33 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 2F8FE212BC20
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1694512052;
- bh=hTUCQ2YcfYdRt391q4RvhxRkdCTAgZJ+oV2hrjSi81k=;
+ s=default; t=1694512053;
+ bh=rR6SdGuKgv1k/SLKYowO/1JsxJPlosHuwOmA549Vr8I=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JzLBIcL3gxrhrVM46dMgmd4PMG1+Wf3NMUxiM2tcCtdoh3MQeObVeOpdACfVk6v3q
- psyDbRZ0jaQt3z1d91eHLnDqjJn4uXmaQDzeqVR9tquzGGfJN4mTIYUUGz8ugCRshv
- /YxHdKbashfjptVhd/zZQu205C86HtlNi5FbeETQ=
+ b=ZMA/ab6DVL9Sm4YVA+jKDl84vejVytt/CC4skka9chRaGP5E3G6VetpiOu0hOWa+I
+ xyILoO4Z85AqkBJtjcyHaQQUsGTg0UIE7xxjzRtRCS4ynaKEsU4/mEWTAxu3rQTnMM
+ GJ0DP/leeKMJ+O9XjFjLD7ampJWATwW4+qxoZiZg=
 From: seanedmond@linux.microsoft.com
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, stcarlso@linux.microsoft.com, ilias.apalodimas@linaro.org
-Subject: [PATCH 5/8] dm: test: Add a test for rollback driver
-Date: Tue, 12 Sep 2023 02:47:28 -0700
-Message-Id: <20230912094731.51413-6-seanedmond@linux.microsoft.com>
+Subject: [PATCH 8/8] doc: rollback: anti-rollback verification
+Date: Tue, 12 Sep 2023 02:47:31 -0700
+Message-Id: <20230912094731.51413-9-seanedmond@linux.microsoft.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230912094731.51413-1-seanedmond@linux.microsoft.com>
 References: <20230912094731.51413-1-seanedmond@linux.microsoft.com>
@@ -63,154 +63,195 @@ X-Virus-Status: Clean
 
 From: Sean Edmond <seanedmond@microsoft.com>
 
-Adds a test for a sandbox and TPM backed rollback driver.
-
-Allows for testing of anti-rollback version number get/set API using the
-rollback driver.
+Add documentation for anti-rollback verification, optional properties in
+FIT image, and UCLASS_ROLLBACK device.
 
 Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 ---
- arch/sandbox/dts/test.dts |  9 +++++
- configs/sandbox_defconfig |  3 ++
- test/dm/Makefile          |  1 +
- test/dm/rollback.c        | 78 +++++++++++++++++++++++++++++++++++++++
- 4 files changed, 91 insertions(+)
- create mode 100644 test/dm/rollback.c
+ doc/develop/driver-model/index.rst         |  1 +
+ doc/develop/driver-model/rollback-info.rst | 42 +++++++++++++++++
+ doc/usage/fit/signature.rst                | 53 +++++++++++++++++++---
+ doc/usage/fit/source_file_format.rst       | 21 ++++++++-
+ 4 files changed, 108 insertions(+), 9 deletions(-)
+ create mode 100644 doc/develop/driver-model/rollback-info.rst
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index f351d5cb84..1226bad6a6 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1263,6 +1263,10 @@
- 		backlight = <&backlight 0 100>;
- 	};
- 
-+	rollback@0 {
-+		compatible = "sandbox,rollback";
-+	};
+diff --git a/doc/develop/driver-model/index.rst b/doc/develop/driver-model/index.rst
+index 8e12bbd936..bb2d2e8a5d 100644
+--- a/doc/develop/driver-model/index.rst
++++ b/doc/develop/driver-model/index.rst
+@@ -25,6 +25,7 @@ subsystems
+    pci-info
+    pmic-framework
+    remoteproc-framework
++   rollback-info
+    serial-howto
+    soc-framework
+    spi-howto
+diff --git a/doc/develop/driver-model/rollback-info.rst b/doc/develop/driver-model/rollback-info.rst
+new file mode 100644
+index 0000000000..06ba4584a9
+--- /dev/null
++++ b/doc/develop/driver-model/rollback-info.rst
+@@ -0,0 +1,42 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
- 	scsi {
- 		compatible = "sandbox,scsi";
- 		sandbox,filepath = "scsi.img";
-@@ -1376,6 +1380,11 @@
- 
- 	tpm2 {
- 		compatible = "sandbox,tpm2";
++Rollback Driver Guide
++=====================
++
++Rollback protection is required when there is a need to retire
++previous versions of FIT images due to security flaws in them.
++See :doc:`../../usage/fit/signature` for details on rollback protection.
++
++The rollback driver is intended to provide tamper-evident storage using
++a UCLASS_ROLLBACK device.  It exposes the following APIs which are
++used in the FIT verification process (if FIT_ROLLBACK_CHECK is set):
++- rollback_idx_get()
++- rollback_idx_set()
++
++A TPM based rollback device has been provided as an example.  Users could
++create their own UCLASS_ROLLBACK device to access proprietary secure storage.
++
++TPM 2.0 based rollback devices
++------------
++
++A TPM-based rollback device has been provided as a reference.  It can be
++enabled with:
++- DM_ROLLBACK
++- ROLLBACK_TPM
++
++The tpm based rollback device should be added as a child node of the TPM in
++the u-boot device tree.  You should provide the property "rollback-nv-index"
++to set the TPM's NV index (if no "rollback-nv-index" is provided, an NV index
++of 0 is assumed).  For example:
++
++	tpm2 {
++		compatible = "sandbox,tpm2";
 +
 +		rollback@1 {
 +			compatible = "tpm,rollback";
 +			rollback-nv-index = <0x1001007>;
 +		};
- 	};
++	};
++
++Note, the ROLLBACK_TPM device does not set any policy.  Consumers of this
++driver should add a policy to make it more secure.
+\ No newline at end of file
+diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
+index 0804bffd1e..30dd529c29 100644
+--- a/doc/usage/fit/signature.rst
++++ b/doc/usage/fit/signature.rst
+@@ -674,14 +674,53 @@ Sign the fitImage with the hardware key::
+     "model=PKCS%2315%20emulated;manufacturer=ZeitControl;serial=000xxxxxxxxx;token=OpenPGP%20card%20%28User%20PIN%20%28sig%29%29" \
+     -K u-boot.dtb -N pkcs11 -r fitImage
  
- 	tpm {
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 1cd1c2ed7c..f2bd10fbf0 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -346,3 +346,6 @@ CONFIG_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
- CONFIG_ARM_FFA_TRANSPORT=y
-+CONFIG_DM_ROLLBACK=y
-+CONFIG_ROLLBACK_SANDBOX=y
-+CONFIG_ROLLBACK_TPM=y
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 7ed00733c1..3875ec4f4b 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -104,6 +104,7 @@ obj-$(CONFIG_DM_RNG) += rng.o
- obj-$(CONFIG_DM_RTC) += rtc.o
- obj-$(CONFIG_SCMI_FIRMWARE) += scmi.o
- obj-$(CONFIG_SCSI) += scsi.o
-+obj-$(CONFIG_DM_ROLLBACK) += security.o
- obj-$(CONFIG_DM_SERIAL) += serial.o
- obj-$(CONFIG_DM_SPI_FLASH) += sf.o
- obj-$(CONFIG_SIMPLE_BUS) += simple-bus.o
-diff --git a/test/dm/rollback.c b/test/dm/rollback.c
-new file mode 100644
-index 0000000000..a2984797f9
---- /dev/null
-+++ b/test/dm/rollback.c
-@@ -0,0 +1,78 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2023 Microsoft Corporation
-+ * Written by Sean Edmond <seanedmond@microsoft.com>
-+ */
++Roll-back Protection
++-----------------------------------------
+ 
+-Future Work
+------------
+-
+-- Roll-back protection using a TPM is done using the tpm command. This can
+-  be scripted, but we might consider a default way of doing this, built into
+-  bootm.
+-
++Rollback protection is required when there is a need to retire
++previous versions of FIT images due to security flaws in them.
 +
-+#include <common.h>
-+#include <dm.h>
-+#include <rollback.h>
-+#include <log.h>
-+#include <dm/test.h>
-+#include <test/test.h>
-+#include <test/ut.h>
++This feature is realized by adding a rollback index as a property
++in the FIT image.  Every time a security flaw is discovered, the
++rollback index is incremented.  For example:
 +
-+/*
-+ * get_rollback() - Get a rollback driver of a given driver name
-+ *
-+ * @devp: Returns the rollback device
-+ * @driver_name: Driver name to find
-+ * Returns: 0 if OK, -ENODEV if not found
-+ */
-+static int get_rollback(struct udevice **devp, char *driver_name)
-+{
-+	struct udevice *dev;
+++-------------+----------------+
++| FIT version | Rollback index |
+++=============+================+
++| 1.0         | 0              |
+++-------------+----------------+
++| 1.1         | 0              |
+++-------------+----------------+
++| 2.0         | 0              |
+++-------------+----------------+
++| Security issue found!        |
+++-------------+----------------+
++| 1.2         | 1              |
+++-------------+----------------+
++| 2.1         | 1              |
+++-------------+----------------+
 +
-+	uclass_foreach_dev_probe(UCLASS_ROLLBACK, dev) {
-+		if (strcmp(dev->driver->name, driver_name) == 0) {
-+			*devp = dev;
-+			return 0;
-+		}
-+	}
++Each sub-image node inside /images node has an optional rollback rollback_index
++("rollback"). This version number is part of signed data and is incremented as
++security flaws are discovered and fixed. If no "rollback" property is present
++in the FIT image, a rollback index of 0 is assumed.
 +
-+	return -ENODEV;
-+}
++U-Boot stores the last seen "rollback" for a given image type in platform
++specific tamper-evident storage (using a UCLASS_ROLLBACK device).
++See :doc:`../../develop/driver-model/rollback-info` for more information on
++rollback devices.
 +
-+/* Basic test of rollback driver Anti rollback version number read/write */
-+static int test_rollback_idx(struct unit_test_state *uts, char *driver_name)
-+{
-+	struct udevice *dev;
-+	u64 rollback_idx;
++As part of signature verification, U-Boot enforces rollback
++protection if enabled (with FIT_ROLLBACK_CHECK). The rollback index stored in secure
++storage is validated with "rollback" in the sub-image node. If the counter
++in the FIT image is lower than the counter in platform secure storage, image
++validation has failed. If both counters match or the image counter is
++higher than that in the platform secure storage, the image validation is
++successful. If the rollback index has increased, U-Boot stores the new
++value in secure storage.
 +
-+	/* get the rollback driver */
-+	ut_assertok(get_rollback(&dev, driver_name));
++A grace version can be enabled with FIT_ROLLBACK_CHECK_GRACE, which will accept
++a FIT image with an anti-rollback version one less than number in secure storage.
+ 
+ Possible Future Work
+ --------------------
+diff --git a/doc/usage/fit/source_file_format.rst b/doc/usage/fit/source_file_format.rst
+index b2b1e42bd7..149447b856 100644
+--- a/doc/usage/fit/source_file_format.rst
++++ b/doc/usage/fit/source_file_format.rst
+@@ -389,6 +389,16 @@ signature-1
+     Each signature sub-node represents separate signature
+     calculated for node's data according to specified algorithm.
+ 
++Optional properties
++~~~~~~~~~~~~~~~~~~~~
 +
-+	/* ensure initial value is 0 */
-+	rollback_idx_get(dev, &rollback_idx);
-+	ut_asserteq(0, rollback_idx);
++rollback
++    The rollback index (used for anti rollback protection) specified
++    as a 64-bit value.  For example a rollback index of 1 is sepcified as:
 +
-+	/* write 1 and ensure it's read back */
-+	rollback_idx_set(dev, 1);
-+	rollback_idx_get(dev, &rollback_idx);
-+	ut_asserteq(1, rollback_idx);
++    rollback = <0 1>
 +
-+	/* write all ones and ensure it's read back */
-+	rollback_idx_set(dev, 0xffffffffffffffffULL);
-+	rollback_idx_get(dev, &rollback_idx);
-+	ut_asserteq(0xffffffffffffffffULL, rollback_idx);
++    If no "rollback" property is present, a rollback index of 0 is assumed.
+ 
+ Hash nodes
+ ----------
+@@ -507,7 +517,6 @@ padding
+     The padding algorithm, it may be pkcs-1.5 or pss,
+     if no value is provided we assume pkcs-1.5
+ 
+-
+ '/configurations' node
+ ----------------------
+ 
+@@ -524,12 +533,20 @@ The 'configurations' node has the following structure::
+         ...
+ 
+ 
+-Optional property
++Optional properties
+ ~~~~~~~~~~~~~~~~~
+ 
+ default
+     Selects one of the configuration sub-nodes as a default configuration.
+ 
++rollback
++    The rollback index (used for anti rollback protection) specified
++    as a 64-bit value.  For example a rollback index of 1 is sepcified as:
 +
-+	return 0;
-+}
++    rollback = <0 1>
 +
-+static int dm_test_rollback_sandbox(struct unit_test_state *uts)
-+{
-+	ut_assertok(test_rollback_idx(uts, "rollback_sandbox"));
++    If no "rollback" property is present, a rollback index of 0 is assumed.
 +
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_rollback_sandbox, UT_TESTF_SCAN_FDT);
-+
-+static int dm_test_rollback_tpm(struct unit_test_state *uts)
-+{
-+	ut_assertok(test_rollback_idx(uts, "rollback_tpm"));
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_rollback_tpm, UT_TESTF_SCAN_FDT);
+ Mandatory nodes
+ ~~~~~~~~~~~~~~~
+ 
 -- 
 2.40.0
 
