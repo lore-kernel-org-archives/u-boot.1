@@ -4,56 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC879CA0EF1
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 16:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D09EE3F0F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 19:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B50FA86E24;
-	Tue, 12 Sep 2023 18:51:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 238A586D59;
+	Tue, 12 Sep 2023 21:27:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1694537488;
-	bh=8eSDeGfruATGMepWd3bn+5PiBpVf6H91ZexfNGfnP9Y=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QVEII+ENB8S95qQ0zuBDGceyqRNjMHqnwBNYCwVJf1Ja2qq8e6o1T8lZoPLwgqi+c
-	 WLb8d2kbhCg39BPYuYfU+IVittBcsPM4LX1Qu4CRmUQr1KNKD51CaKAopPijHNs9q0
-	 +9peIRlHXGxoK44rCqQq3EE96n3MZMJmOAV3CcnVY5VwbTs9RFa3kLeWcfx21j5vWa
-	 12gtPxSYSho5GGm3WY9C4/wSgmF+WU2bM/A/lUNFREZIrZTws97SzS5fpalYNcXLp6
-	 csCQv9MSHILCtrsX8kaTz867/WvGZIJSVXhlMu15FXMsSsdt1awDOT+rV4s12OoLMB
-	 QqE95OWfm+27A==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fMctscrZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BCC6686E3B; Tue, 12 Sep 2023 21:27:06 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E040B86E13;
- Tue, 12 Sep 2023 18:51:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1694537487;
- bh=8eSDeGfruATGMepWd3bn+5PiBpVf6H91ZexfNGfnP9Y=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=J6nEPNPwX9LR4hS3EWNIPcsM0Q5/A6z1g54frrpgWewg2SJQjySmtTacJBZPl4jt3
- B+IxjILCCncZrB28DgiP7QZgZBqoFjYDkU8opvnjIZqXE1VFB75m3k3irEKbfNu9d6
- B/Gi/6AUwmOOxcto6GjH855NESI+WSvJJg7a0usK6zrFF9ADLi4A8k+WvAKJfS0VFo
- wG3up7w4H9kp80RKLVFKbpXTxqTrSwZ2RV+RcwQO25lFF5A6TaQ2qUiyS9+fcwkM34
- k/vNE8UiLRCW2QTKk604YhdnfyBavvhB6hmEvy4Y0ltkmE5Lg3NfPaj7MIJVo9BZtl
- hQPHOYfJnu5nw==
-Message-ID: <d1627638-e9ac-d24d-5b6b-3e5c8d1fc158@denx.de>
-Date: Tue, 12 Sep 2023 18:38:44 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 2494B86D3E
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 21:27:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-51a52a7d859so389029a12.0
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 12:27:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1694546823; x=1695151623; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NrFMrMXDuqb7kn24N395MBJHC0mA2STiSrfvnjvD/6M=;
+ b=fMctscrZCSxXYqxRHR135T0/VhMfaIZSY8qVnIKUhqlBx98VCWexphD8Xf2nRMZ4RE
+ 1nag8yEv47tfnJnComdHhdq39wpVP5VyomiAxj9iE5gxSeP3xdl11UpNksnsj64NvcwI
+ /RXNSS1Lk6sdNABY/7bLVyo4zUofolFl90CbQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694546823; x=1695151623;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NrFMrMXDuqb7kn24N395MBJHC0mA2STiSrfvnjvD/6M=;
+ b=EWWOH5K6MSd6XNqQiRtgNzndQbCAaRSng1jKTgGrMTdYJ5drz5XZS4j+PZ2chjn9Z9
+ 1Dk4WBnX8b7ZhoBCl4rUXzFjUDwLq4nvGCqAkESH7gsZzsjOHFkMnj8r6U7qNbKSRG+1
+ vZDdcqTF4U20tlfBlKJoi2dS0zQStOvKRUzeWBQ9Iwf9bdnjPgCc87ghs9QQzYlwk9e2
+ 5YJU91ZvAOiwdO46fnv0B4C/bD5xw799fWdFKI2hbJf5b87a0YUnV79vf0KjnwIrx9lj
+ zazCHD8dGk7iFlGwUrqKjBQaKTpjdQS3WwyXb6bymypGlHJJ2U9ws5J6W0/imtf2/ur9
+ 2O3A==
+X-Gm-Message-State: AOJu0YxaDNH6JtytofGRRJb9ijN9RXrlJdQ5JRDFt8AKriMjtTuT/A8N
+ z2X6ryaPWHPkMFaafT0PxIZV5leGQEChV8s8l1otEQ==
+X-Google-Smtp-Source: AGHT+IHiifXGJegiZEhCeH5qTMiqw2CV9jzRJxU7E8GtNjg9IwxIdZuJNQbwOrGnmVmYqg/MsGDu/6UDzVMQBJrobqA=
+X-Received: by 2002:a05:6402:35c1:b0:52b:db44:79e3 with SMTP id
+ z1-20020a05640235c100b0052bdb4479e3mr5676518edc.4.1694546823509; Tue, 12 Sep
+ 2023 12:27:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH] usb: dwc3: core: add external vBus supply support for
- ulpi phy
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, git@xilinx.com
-References: <20230912040147.30734-1-venkatesh.abbarapu@amd.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20230912040147.30734-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <cover.1694435541.git.michal.simek@amd.com>
+ <9d02ae765d23ed8b82af8db4f288492c30d08ae2.1694435541.git.michal.simek@amd.com>
+In-Reply-To: <9d02ae765d23ed8b82af8db4f288492c30d08ae2.1694435541.git.michal.simek@amd.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 12 Sep 2023 13:26:48 -0600
+Message-ID: <CAPnjgZ37rxp8pNsshifyBe1nKu22GCmqe1dwF2OJ0OiYUJV6WQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] trace: Move trace_clocks description above record
+ offset calculation
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,19 +82,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/12/23 06:01, Venkatesh Yadav Abbarapu wrote:
-> [ Piyush: Ported from Linux kernel commit
-> 	  b84ba26c922a ("usb: dwc3: core: add external vBus
-> 				supply support for ulpi phy") ]
-> 
-> Some ULPI USB PHY does not support internal VBUS supply, to drive the CPEN
-> pin, which requires the configuration of the ULPI DRVVBUSEXTERNAL bit of
-> OTG_CTRL register.
-> 
-> Added 'snps,ulpi-ext-vbus-drv' a DT property to configure the USB2 PHY to
-> drive VBUS with an external supply, by setting the USB2 PHY ULPIEXTVBUSDRV
-> bit[:17] of the GUSB2PHYCFG register to drive VBUS with an external supply.
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+On Mon, 11 Sept 2023 at 06:32, Michal Simek <michal.simek@amd.com> wrote:
+>
+> Flyrecord tracing data are page aligned that's why it is necessary to
+> calculate alignment properly. Because trace_clocks description is the part
+> of record length it is necessary to have information about length earlier.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+>  tools/proftool.c | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+>
 
-Please sync the DWC3 driver with Linux first.
+Reviewed-by: Simon Glass <sjg@chromium.org>
