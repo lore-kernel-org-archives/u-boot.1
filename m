@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D120CA0EC9
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B18DCA0EC3
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97E5186E5E;
-	Tue, 12 Sep 2023 08:21:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EAB6786E20;
+	Tue, 12 Sep 2023 08:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nD8wyjnq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wpZwVvsq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D2BD86E68; Tue, 12 Sep 2023 08:21:44 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 5234F86E71; Tue, 12 Sep 2023 08:21:46 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE7A386E20
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2AD186E4D
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1bf11a7cf9fso9441015ad.1
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:21:40 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-273e3d8b57aso751070a91.0
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:21:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694499699; x=1695104499; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694499701; x=1695104501; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q0FkoP3w1CPqPpr0ceh6OYlsga4yz8DeWrXbi96YnB0=;
- b=nD8wyjnqrsWhMH06uipP7eDCl/uJYoLi0Sf5DWiDrqwmAC7c4kD/UAukAyS+DvL8VQ
- fa7SiBO4B1IoOUPo4Do1K6bsKtu+3qta4amtWQhv1fLxF6LxQoMI3VYQywTu0rUp9aWJ
- mHUeKHeW6dFsbBbDK/wu0JiJfJwRrrJmXd9qE+ORfUq6wOEOYYD806rpzkEw3hfBV0FM
- cFS5FXVBIKrd7jIvv3j8l0QspXKIHaY0QQ1Q0nEWneRlwOfmD2O33FYl2bX1z09oVlPR
- SWRP2qK2kFQENayu0iEjGlu3o9C1iVTxSGWkhLlSuVe+kpotfv/Ugm+PLqxfMPCNuk2z
- eIYw==
+ bh=lXHBt+K1km+W4GFANm6SDROKpTpvRqogPRSMXl325s0=;
+ b=wpZwVvsqBjHybR/ruiA/+nSNfZVQLeDSsDbJh7nhz2SdPVwMJ26MqrhM6TqGuzuzFq
+ g80yP7W4RdE13G08C7kf1K528NehR41fzCOItAyjv64cDXl5TrdfjxtGF0uv4us5E2qY
+ CnM2pZ5DFKO0VpQzR60GH8qFhKe1Ou3xcvF27s4iR6Xm/F2DBwcY7NIeVPsMEdi7yyp5
+ qyxUT6uoXO6ELImHqOe44+ulTvvxbi8sMy/URsQt4YbiPwK2eVZGoIc2417tbhm6rWWv
+ Pm4753p+skh1ay+3eRBROEesU/n8F5qOSWmK1UnZfGKgPzyBVJnBWu4akqRBIhbURDDO
+ nVvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694499699; x=1695104499;
+ d=1e100.net; s=20230601; t=1694499701; x=1695104501;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q0FkoP3w1CPqPpr0ceh6OYlsga4yz8DeWrXbi96YnB0=;
- b=YLoNwHc9NpxaV0Xvw5xD4lcElTWpv3mTqewO9N178uNPIa8kd5zsU7Oyu3SoSGtWZX
- OnKFbVkNX1x0aI/OORelUpiYtT5E2fddMgSHWUvzu4A0LreIKxDz+8dwVoJ3Ir6AsZsN
- 3VqYjYqOLSV5qiCVD3jVMLNoQK079uvcBVRl54Sz1dtRbPatfyM/qRhYK4T6OkDyq6n3
- 0IIWFQ2Qae+kqyr7z7MR1Z7dluaIV/u26ulUy0m195BPtI4P4w+8HeSl+pkALIMqMnDq
- nxwp1PT86ht4p3DtC4mbALGayOskdN3X1wUPXxkWx9pfpuvbc/PCZYMpVPdfqV7vhyNa
- Ypjg==
-X-Gm-Message-State: AOJu0YzPjOnIgjrkqmQ8+e5l2rglifKdc2bMKFSEg2U8ZYtzPvf4TUOP
- h1JUykeIxoH2Qb4ZuVAEmb4G6w==
-X-Google-Smtp-Source: AGHT+IHMr4ktKWgF3aFFDAp5McJPoVTOv7/c187MTiF5XLCLPFQ91jdHWBPaYX6LSmXzzNZf/6N56A==
-X-Received: by 2002:a17:902:da8e:b0:1b8:9fc4:2733 with SMTP id
- j14-20020a170902da8e00b001b89fc42733mr13616849plx.3.1694499699236; 
- Mon, 11 Sep 2023 23:21:39 -0700 (PDT)
+ bh=lXHBt+K1km+W4GFANm6SDROKpTpvRqogPRSMXl325s0=;
+ b=aSG6nFGiBrBafTTSLZeFnR/s+xw+KPLWDASlSCRa/aaT99A2PWhUAnQtfOyIrN88E9
+ ezYk5fNoQymL0jQhPUNTPjZ8KCUhj4HteQd5MPHja6QyNj+rLtksYUjEAfI3gyXAfxmL
+ 6z4478ZQRYwzep6n+ZBqkIpfupkqRFRcNEwKw7r3wi4YI5+LnVCWUWPfvZlEnMYwAU1y
+ 0LcO9jbwVOaR7oT0Lchrfzl8H8hdAN/Q2b3OdxQO6BXO6zPdYqN6la3+4rd2MqDeNGQg
+ cb0ZrLsopJZ5r0vMYQStL4AvihvI9CaGs0ge/ZmKt5zyJnKamoExZYjj2D0y2NW94NJx
+ adew==
+X-Gm-Message-State: AOJu0YyOt7i0YsNTUtQlo1219CT5YzHOMmCtTeLN7mRQgJyWCTIDzN6D
+ ZodNBL08nutYECLa6E0hb0FRfg==
+X-Google-Smtp-Source: AGHT+IEa7oeSw1CZpzgc0/C+688IpgKv0pLwYHnCURQ9Zjff4oKswPBL/rwz0Q7i45+9UDNPE4SnJw==
+X-Received: by 2002:a17:90a:7025:b0:263:730b:f568 with SMTP id
+ f34-20020a17090a702500b00263730bf568mr11145223pjk.3.1694499701204; 
+ Mon, 11 Sep 2023 23:21:41 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:bf3d:658b:e9f7:3af5])
  by smtp.gmail.com with ESMTPSA id
- a15-20020a170902eccf00b001bc2831e1a8sm7503970plh.80.2023.09.11.23.21.37
+ a15-20020a170902eccf00b001bc2831e1a8sm7503970plh.80.2023.09.11.23.21.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 23:21:38 -0700 (PDT)
+ Mon, 11 Sep 2023 23:21:40 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v4 11/13] cmd: add scmi command for SCMI firmware
-Date: Tue, 12 Sep 2023 15:20:00 +0900
-Message-Id: <20230912062002.57361-12-takahiro.akashi@linaro.org>
+Subject: [PATCH v4 12/13] doc: cmd: add documentation for scmi
+Date: Tue, 12 Sep 2023 15:20:01 +0900
+Message-Id: <20230912062002.57361-13-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230912062002.57361-1-takahiro.akashi@linaro.org>
 References: <20230912062002.57361-1-takahiro.akashi@linaro.org>
@@ -94,401 +94,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This command, "scmi", may provide a command line interface to various SCMI
-protocols. It supports at least initially SCMI base protocol and is
-intended mainly for debug purpose.
+This is a help text for scmi command.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
-v3
-* describe that arguments are in hex at a help message
-* modify the code for dynamically allocated agent names
+v4
+* s/tranport/transport/
 v2
-* remove sub command category, 'scmi base', for simplicity
+* add more descriptions about SCMI
 ---
- cmd/Kconfig  |   9 ++
- cmd/Makefile |   1 +
- cmd/scmi.c   | 337 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 347 insertions(+)
- create mode 100644 cmd/scmi.c
+ doc/usage/cmd/scmi.rst | 126 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 126 insertions(+)
+ create mode 100644 doc/usage/cmd/scmi.rst
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 43ca10f69ccf..f46152ace7d8 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2533,6 +2533,15 @@ config CMD_CROS_EC
- 	  a number of sub-commands for performing EC tasks such as
- 	  updating its flash, accessing a small saved context area
- 	  and talking to the I2C bus behind the EC (if there is one).
-+
-+config CMD_SCMI
-+	bool "Enable scmi command"
-+	depends on SCMI_FIRMWARE
-+	default n
-+	help
-+	  This command provides user interfaces to several SCMI (System
-+	  Control and Management Interface) protocols available on Arm
-+	  platforms to manage system resources.
- endmenu
- 
- menu "Filesystem commands"
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 9bebf321c397..ad3810b17e93 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -158,6 +158,7 @@ obj-$(CONFIG_CMD_SATA) += sata.o
- obj-$(CONFIG_CMD_NVME) += nvme.o
- obj-$(CONFIG_SANDBOX) += sb.o
- obj-$(CONFIG_CMD_SF) += sf.o
-+obj-$(CONFIG_CMD_SCMI) += scmi.o
- obj-$(CONFIG_CMD_SCSI) += scsi.o disk.o
- obj-$(CONFIG_CMD_SHA1SUM) += sha1sum.o
- obj-$(CONFIG_CMD_SEAMA) += seama.o
-diff --git a/cmd/scmi.c b/cmd/scmi.c
+diff --git a/doc/usage/cmd/scmi.rst b/doc/usage/cmd/scmi.rst
 new file mode 100644
-index 000000000000..5efec8ad87fd
+index 000000000000..9ea7e0e41dad
 --- /dev/null
-+++ b/cmd/scmi.c
-@@ -0,0 +1,337 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *  SCMI (System Control and Management Interface) utility command
-+ *
-+ *  Copyright (c) 2023 Linaro Limited
-+ *		Author: AKASHI Takahiro
-+ */
++++ b/doc/usage/cmd/scmi.rst
+@@ -0,0 +1,126 @@
++.. SPDX-License-Identifier: GPL-2.0+:
 +
-+#include <common.h>
-+#include <command.h>
-+#include <exports.h>
-+#include <scmi_agent.h>
-+#include <scmi_agent-uclass.h>
-+#include <stdlib.h>
-+#include <asm/types.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h> /* uclass_get_device */
-+#include <linux/bitfield.h>
-+#include <linux/bitops.h>
++scmi command
++============
 +
-+static struct udevice *agent;
-+static struct udevice *base_proto;
++Synopsis
++--------
 +
-+struct {
-+	enum scmi_std_protocol id;
-+	const char *name;
-+} protocol_name[] = {
-+	{SCMI_PROTOCOL_ID_BASE, "Base"},
-+	{SCMI_PROTOCOL_ID_POWER_DOMAIN, "Power domain management"},
-+	{SCMI_PROTOCOL_ID_SYSTEM, "System power management"},
-+	{SCMI_PROTOCOL_ID_PERF, "Performance domain management"},
-+	{SCMI_PROTOCOL_ID_CLOCK, "Clock management"},
-+	{SCMI_PROTOCOL_ID_SENSOR, "Sensor management"},
-+	{SCMI_PROTOCOL_ID_RESET_DOMAIN, "Reset domain management"},
-+	{SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN, "Voltage domain management"},
-+};
++::
 +
-+/**
-+ * get_proto_name() - get the name of SCMI protocol
-+ *
-+ * @id:		SCMI Protocol ID
-+ *
-+ * Get the printable name of the protocol, @id
-+ *
-+ * Return:	Name string on success, NULL on failure
-+ */
-+static const char *get_proto_name(enum scmi_std_protocol id)
-+{
-+	int i;
++    scmi info
++    scmi perm_dev <agent id> <device id> <flags>
++    scmi perm_proto <agent id> <device id> <protocol id> <flags>
++    scmi reset <agent id> <flags>
 +
-+	for (i = 0; i < ARRAY_SIZE(protocol_name); i++)
-+		if (id == protocol_name[i].id)
-+			return protocol_name[i].name;
++Description
++-----------
 +
-+	return NULL;
-+}
++Arm System Control and Management Interface (SCMI hereafter) is a set of
++standardised interfaces to manage system resources, like clocks, power
++domains, pin controls, reset and so on, in a system-wide manner.
 +
-+/**
-+ * do_scmi_info() - get the information of SCMI services
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ *
-+ * Get the information of SCMI services using various interfaces
-+ * provided by the Base protocol.
-+ *
-+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
-+ */
-+static int do_scmi_info(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char * const argv[])
-+{
-+	u32 agent_id, num_protocols;
-+	u8 *agent_name, *protocols;
-+	int i, ret;
++An entity which provides those services is called a SCMI firmware (or
++SCMI server if you like) may be placed/implemented by EL3 software or
++by a dedicated system control processor (SCP) or else.
 +
-+	if (argc != 1)
-+		return CMD_RET_USAGE;
++A user of SCMI interfaces, including U-Boot, is called a SCMI agent and
++may issues commands, which are defined in each protocol for specific system
++resources, to SCMI server via a communication channel, called a transport.
++Those interfaces are independent from the server's implementation thanks to
++a transport layer.
 +
-+	printf("SCMI device: %s\n", agent->name);
-+	printf("  protocol version: 0x%x\n", scmi_version(agent));
-+	printf("  # of agents: %d\n", scmi_num_agents(agent));
-+	for (i = 0; i < scmi_num_agents(agent); i++) {
-+		ret = scmi_base_discover_agent(base_proto, i, &agent_id,
-+					       &agent_name);
-+		if (ret) {
-+			if (ret != -EOPNOTSUPP)
-+				printf("base_discover_agent() failed for id: %d (%d)\n",
-+				       i, ret);
-+			break;
-+		}
-+		printf("    %c%2d: %s\n", i == scmi_agent_id(agent) ? '>' : ' ',
-+		       i, agent_name);
-+		free(agent_name);
-+	}
-+	printf("  # of protocols: %d\n", scmi_num_protocols(agent));
-+	num_protocols = scmi_num_protocols(agent);
-+	protocols = scmi_protocols(agent);
-+	if (protocols)
-+		for (i = 0; i < num_protocols; i++)
-+			printf("      %s\n", get_proto_name(protocols[i]));
-+	printf("  vendor: %s\n", scmi_vendor(agent));
-+	printf("  sub vendor: %s\n", scmi_sub_vendor(agent));
-+	printf("  impl version: 0x%x\n", scmi_impl_version(agent));
++For more details, see the `SCMI specification`_.
 +
-+	return CMD_RET_SUCCESS;
-+}
++While most of system resources managed under SCMI protocols are implemented
++and handled as standard U-Boot devices, for example clk_scmi, scmi command
++provides additional management functionality against SCMI server.
 +
-+/**
-+ * do_scmi_set_dev() - set access permission to device
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ *
-+ * Set access permission to device with SCMI_BASE_SET_DEVICE_PERMISSIONS
-+ *
-+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
-+ */
-+static int do_scmi_set_dev(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char * const argv[])
-+{
-+	u32 agent_id, device_id, flags, attributes;
-+	char *end;
-+	int ret;
++scmi info
++~~~~~~~~~
++    Show base information about SCMI server and supported protocols
 +
-+	if (argc != 4)
-+		return CMD_RET_USAGE;
++scmi perm_dev
++~~~~~~~~~~~~~
++    Allow or deny access permission to the device
 +
-+	agent_id = simple_strtoul(argv[1], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++scmi perm_proto
++~~~~~~~~~~~~~~~
++    Allow or deny access to the protocol on the device
 +
-+	device_id = simple_strtoul(argv[2], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++scmi reset
++~~~~~~~~~~
++    Reset the already-configured permissions against the device
 +
-+	flags = simple_strtoul(argv[3], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++Parameters are used as follows:
 +
-+	ret = scmi_base_protocol_message_attrs(base_proto,
-+					       SCMI_BASE_SET_DEVICE_PERMISSIONS,
-+					       &attributes);
-+	if (ret) {
-+		printf("This operation is not supported\n");
-+		return CMD_RET_FAILURE;
-+	}
++<agent id>
++    SCMI Agent ID, hex value
 +
-+	ret = scmi_base_set_device_permissions(base_proto, agent_id,
-+					       device_id, flags);
-+	if (ret) {
-+		printf("%s access to device:%u failed (%d)\n",
-+		       flags ? "Allowing" : "Denying", device_id, ret);
-+		return CMD_RET_FAILURE;
-+	}
++<device id>
++    SCMI Device ID, hex value
 +
-+	return CMD_RET_SUCCESS;
-+}
++    Please note that what a device means is not defined
++    in the specification.
 +
-+/**
-+ * do_scmi_set_proto() - set protocol permission to device
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ *
-+ * Set protocol permission to device with SCMI_BASE_SET_PROTOCOL_PERMISSIONS
-+ *
-+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
-+ */
-+static int do_scmi_set_proto(struct cmd_tbl *cmdtp, int flag, int argc,
-+			     char * const argv[])
-+{
-+	u32 agent_id, device_id, protocol_id, flags, attributes;
-+	char *end;
-+	int ret;
++<protocol id>
++    SCMI Protocol ID, hex value
 +
-+	if (argc != 5)
-+		return CMD_RET_USAGE;
++    It must not be 0x10 (base protocol)
 +
-+	agent_id = simple_strtoul(argv[1], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++<flags>
++    Flags to control the action, hex value
 +
-+	device_id = simple_strtoul(argv[2], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++    0 to deny, 1 to allow. The other values are reserved and allowed
++    values may depend on the implemented version of SCMI server in
++    the future. See SCMI specification for more details.
 +
-+	protocol_id = simple_strtoul(argv[3], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++Example
++-------
 +
-+	flags = simple_strtoul(argv[4], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++Obtain basic information about SCMI server:
 +
-+	ret = scmi_base_protocol_message_attrs(base_proto,
-+					       SCMI_BASE_SET_PROTOCOL_PERMISSIONS,
-+					       &attributes);
-+	if (ret) {
-+		printf("This operation is not supported\n");
-+		return CMD_RET_FAILURE;
-+	}
++::
 +
-+	ret = scmi_base_set_protocol_permissions(base_proto, agent_id,
-+						 device_id, protocol_id,
-+						 flags);
-+	if (ret) {
-+		printf("%s access to protocol:0x%x on device:%u failed (%d)\n",
-+		       flags ? "Allowing" : "Denying", protocol_id, device_id,
-+		       ret);
-+		return CMD_RET_FAILURE;
-+	}
++    => scmi info
++    SCMI device: scmi
++      protocol version: 0x20000
++      # of agents: 3
++          0: platform
++        > 1: OSPM
++          2: PSCI
++      # of protocols: 4
++          Power domain management
++          Performance domain management
++          Clock management
++          Sensor management
++      vendor: Linaro
++      sub vendor: PMWG
++      impl version: 0x20b0000
 +
-+	return CMD_RET_SUCCESS;
-+}
++Ask for access permission to device#0:
 +
-+/**
-+ * do_scmi_reset() - reset platform resource settings
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ *
-+ * Reset platform resource settings with BASE_RESET_AGENT_CONFIGURATION
-+ *
-+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
-+ */
-+static int do_scmi_reset(struct cmd_tbl *cmdtp, int flag, int argc,
-+			 char * const argv[])
-+{
-+	u32 agent_id, flags, attributes;
-+	char *end;
-+	int ret;
++::
 +
-+	if (argc != 3)
-+		return CMD_RET_USAGE;
++    => scmi perm_dev 1 0 1
 +
-+	agent_id = simple_strtoul(argv[1], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++Reset configurations with all access permission settings retained:
 +
-+	flags = simple_strtoul(argv[2], &end, 16);
-+	if (*end != '\0')
-+		return CMD_RET_USAGE;
++::
 +
-+	ret = scmi_base_protocol_message_attrs(base_proto,
-+					       SCMI_BASE_RESET_AGENT_CONFIGURATION,
-+					       &attributes);
-+	if (ret) {
-+		printf("Reset is not supported\n");
-+		return CMD_RET_FAILURE;
-+	}
++    => scmi reset 1 0
 +
-+	ret = scmi_base_reset_agent_configuration(base_proto, agent_id, flags);
-+	if (ret) {
-+		printf("Reset failed (%d)\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
++Configuration
++-------------
 +
-+	return CMD_RET_SUCCESS;
-+}
++The scmi command is only available if CONFIG_CMD_SCMI=y.
++Default n because this command is mainly for debug purpose.
 +
-+static struct cmd_tbl cmd_scmi_sub[] = {
-+	U_BOOT_CMD_MKENT(info, CONFIG_SYS_MAXARGS, 1,
-+			 do_scmi_info, "", ""),
-+	U_BOOT_CMD_MKENT(perm_dev, CONFIG_SYS_MAXARGS, 1,
-+			 do_scmi_set_dev, "", ""),
-+	U_BOOT_CMD_MKENT(perm_proto, CONFIG_SYS_MAXARGS, 1,
-+			 do_scmi_set_proto, "", ""),
-+	U_BOOT_CMD_MKENT(reset, CONFIG_SYS_MAXARGS, 1,
-+			 do_scmi_reset, "", ""),
-+};
++Return value
++------------
 +
-+/**
-+ * do_scmi() - SCMI utility
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ *
-+ * Provide user interfaces to SCMI protocols.
-+ *
-+ * Return:	CMD_RET_SUCCESS on success,
-+ *		CMD_RET_USAGE or CMD_RET_RET_FAILURE on failure
-+ */
-+static int do_scmi(struct cmd_tbl *cmdtp, int flag,
-+		   int argc, char *const argv[])
-+{
-+	struct cmd_tbl *cp;
++The return value ($?) is set to 0 if the operation succeeded,
++1 if the operation failed or -1 if the operation failed due to
++a syntax error.
 +
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	argc--; argv++;
-+
-+	if (!agent) {
-+		if (uclass_get_device(UCLASS_SCMI_AGENT, 0, &agent)) {
-+			printf("Cannot find any SCMI agent\n");
-+			return CMD_RET_FAILURE;
-+		}
-+	}
-+
-+	if (!base_proto)
-+		base_proto = scmi_get_protocol(agent, SCMI_PROTOCOL_ID_BASE);
-+	if (!base_proto) {
-+		printf("SCMI base protocol not found\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	cp = find_cmd_tbl(argv[0], cmd_scmi_sub, ARRAY_SIZE(cmd_scmi_sub));
-+	if (!cp)
-+		return CMD_RET_USAGE;
-+
-+	return cp->cmd(cmdtp, flag, argc, argv);
-+}
-+
-+static char scmi_help_text[] =
-+	" - SCMI utility\n"
-+	" info - get the info of SCMI services\n"
-+	" perm_dev <agent-id in hex> <device-id in hex> <flags in hex>\n"
-+	"   - set access permission to device\n"
-+	" perm_proto <agent-id in hex> <device-id in hex> <protocol-id in hex>"
-+	" <flags in hex>\n"
-+	"   - set protocol permission to device\n"
-+	" reset <agent-id in hex> <flags in hex>\n"
-+	"   - reset platform resource settings\n"
-+	"";
-+
-+U_BOOT_CMD(scmi, CONFIG_SYS_MAXARGS, 0, do_scmi, "SCMI utility",
-+	   scmi_help_text);
++.. _`SCMI specification`: https://developer.arm.com/documentation/den0056/e/?lang=en
 -- 
 2.34.1
 
