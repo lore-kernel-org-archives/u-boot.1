@@ -4,87 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44E26CA0EC9
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8C8CA0ECA
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 629CC86E15;
-	Tue, 12 Sep 2023 08:03:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8C4F86CEC;
+	Tue, 12 Sep 2023 08:21:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MDXLXf97";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PnkkQXEp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7962586DA7; Tue, 12 Sep 2023 08:03:55 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 1175286DA7; Tue, 12 Sep 2023 08:21:18 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3428A86E1F
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:03:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC3DD86CD9
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-403061cdf2bso26410765e9.2
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:03:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-573e931433aso630881a12.1
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:21:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694498631; x=1695103431; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ReRQejGtTg+NsGUpUn3zFQFzMvuWqvVxfEi6pgG+/7c=;
- b=MDXLXf97euNsTjn37wuo+wtUnsIf2vlomX/PJIXSioyP7ly8HKrhJt/rWrmX80iVaR
- 4RFhCxHobD0wqwKNUQRG6LyUAEI1ChCVor7Y3/f0YtnO25ibwDJLW030U2aMMxs+EBo2
- 6TgHHP01ilNxk+OKRxkmIhrSQDkUhoSpLofmt9vdLLzzsM/Pj2ExOJPKZxkjavDoX8hJ
- UuixJ1vmzNYXKeiqk96ozu1WjLJnD1kCm3p6Zxwj0Sf01dLDZ5F8QgykLnzTYMvIlpG3
- STy2oeUilcpwVrQZlmzpqke/T6GuYSY7zhvuE/GE5Td65kYMhhHnqRQZ+CxQ2R2ClvH2
- Pwvg==
+ d=linaro.org; s=google; t=1694499673; x=1695104473; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ow31Zbnq14pJEpkX1n+ISMOBd4veK+oojCyXMPlYIxA=;
+ b=PnkkQXEpg0JZKVChk4fUIy4bfSUS5XeZzEpWdxmJaGVSQ0cDsp+InTSpvVQ1EVMLbV
+ d1mT5IXr0sN8gJ7HadQsPNfZVA9OU4gXFtyhR/U6reUfIUbxURAujL5AjxZyDKt7zppP
+ votilHC42FxA3TFwldzATUyBIxcNMUqEBceuXlHXIxePUdgDCzQiQqVVPv/p1UDz2K0R
+ ewZlbppASec11o3vYl2Fe9t9Sw5ygiBCouNcb1LEfAQY5dKuGPUxAX0WKhreyQiXm0cc
+ ArZhKgsijxlpQ05C9zxaJkG+824SYCHqsJywGxVPfVNwynUuDKa+inU4pcawU9mmFPf2
+ Av5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694498631; x=1695103431;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ReRQejGtTg+NsGUpUn3zFQFzMvuWqvVxfEi6pgG+/7c=;
- b=VZ3brtbmX7P4P3hmwaD6LCF9oSkn7NbnM3Igk5RQouyq5f8pbSCcrP+KmDh/1ImusG
- s+8bu8IrAYzqEGZtUuTTIDLLCYuS0dQtriAzw3TW7ZHfHEMsnC0+uX8wtVHAx7aCz1WS
- OP84q8B8dXPYdzk9C5ca0NWfp4w/eynXD+Ajy8JMHBcIgYxHeaaRlyNCttZJFfCLyHjn
- AJ5v8N2apUvD43QHebvmHeEpysjX4bIGiDbt60EWz0ivABfkaM/s/8cCNUh1g8WaqvN0
- stf/pH6Ugg/JA7IjpPSO0t1QxZxvTmJqPhAxOpqdoaBj77/lGg34p5tdWjxsb75J/bTk
- Ahpw==
-X-Gm-Message-State: AOJu0YynNB5SHDXEjvT+sPQXuwS6Fc1Egszys6aS0jzSYFeNVXaRgf6G
- SNQDYlAyLBby95fEcL1AjdOatQ==
-X-Google-Smtp-Source: AGHT+IEhu+GbgUJDYJx8A6nUDEFI/5kVgb1BNCwO8Bj5EUftQav7v9ov/X4R9RH+Y13iKUddlKx5Rw==
-X-Received: by 2002:a7b:c7c5:0:b0:3fe:207c:1aea with SMTP id
- z5-20020a7bc7c5000000b003fe207c1aeamr9999959wmk.23.1694498631413; 
- Mon, 11 Sep 2023 23:03:51 -0700 (PDT)
-Received: from hera (ppp089210246083.access.hol.gr. [89.210.246.83])
+ d=1e100.net; s=20230601; t=1694499673; x=1695104473;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ow31Zbnq14pJEpkX1n+ISMOBd4veK+oojCyXMPlYIxA=;
+ b=ShElgUohKCZO6AxDwu+t7fsL0EPrNWspz80Uzyn86brSBH1bSvGKzd58MnqOQN4wSJ
+ S0ELg7w7cOGFyrWKXQ4DfX1OPmpPQICMdVy6NQciq5TTj07pWkVfCs2LMQn47Cn519ZM
+ J5A5xL2JGMrIbzEXKf+S0drgVpfdvOBsDGTFY7wfX/OGi+JMKlfi9FBMOHMOWDl8IjTD
+ DeNqYQ+8fdSATxZBBWnUskj7ryZHPEGPbguI/G//vQauCDvFueTeyUBwfhQis2ipVGLQ
+ mN4ZAVTofyT3dseWct6wj71E722WwVjb5Yo655nsi1RNko1+n+2q3F+irYFdbIDvf0an
+ MdrA==
+X-Gm-Message-State: AOJu0Yz5BkyCjbbD3G8TYP1Z/We9JRAa3ZzaBU1Hxa0VuQfsZOgdU7gB
+ x2L63vbXLbvOYvYXCcnsFTkQMQ==
+X-Google-Smtp-Source: AGHT+IFPnz6fo4MbazYUK3QriJlRzTXmeJFVguEmT6zw/NSUnikXR9cNmjd2L/ioIORcxnMi/0/VMQ==
+X-Received: by 2002:a05:6a20:5483:b0:140:cb66:73aa with SMTP id
+ i3-20020a056a20548300b00140cb6673aamr15836009pzk.3.1694499672989; 
+ Mon, 11 Sep 2023 23:21:12 -0700 (PDT)
+Received: from octopus.. ([2400:4050:c3e1:100:bf3d:658b:e9f7:3af5])
  by smtp.gmail.com with ESMTPSA id
- n22-20020a7bcbd6000000b003fef3180e7asm15113407wmi.44.2023.09.11.23.03.49
+ a15-20020a170902eccf00b001bc2831e1a8sm7503970plh.80.2023.09.11.23.21.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 23:03:50 -0700 (PDT)
-Date: Tue, 12 Sep 2023 09:03:48 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Rob Herring <robh@kernel.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <ZP//RBE8nri1bd0d@hera>
-References: <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
- <20230906142139.GA1236014-robh@kernel.org> <ZPldgbS8mu+5DG7Q@hera>
- <CAPnjgZ0kcOZp65d_-wwYyjbTwC-aDamvGU50aa34o2PeZjZk6Q@mail.gmail.com>
- <CAC_iWjKn_xzoCEv8EBghm7-N5Ex1gEJK=nxdV6QvQ_mPm5R=hQ@mail.gmail.com>
- <20230908145418.GG305624@bill-the-cat>
- <CAC_iWjLxd_9ceE8twaxSsh=8paN_tpaA4jiANAsJksUOH8c6yQ@mail.gmail.com>
- <20230911190613.GC305624@bill-the-cat>
+ Mon, 11 Sep 2023 23:21:12 -0700 (PDT)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v4 00/13] firmware: scmi: add SCMI base protocol support
+Date: Tue, 12 Sep 2023 15:19:49 +0900
+Message-Id: <20230912062002.57361-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230911190613.GC305624@bill-the-cat>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,218 +90,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This patch series allows users to access SCMI base protocol provided by
+SCMI server (platform). It will also be utilized in separate patches
+in the future to add sanity/validity checks for other protocols.
+See SCMI specification document v3.2 beta[1] for more details about SCMI
+base protocol.
 
-[...]
+What is currently not implemented is
+- SCMI_BASE_NOTIFY_ERRORS command and notification callback mechanism
 
-> > > > > > > > > I don't think they should be in DT at all, they don't describe
-> > > > > > > > > anything to do with hardware, or generally even the runtime of a
-> > > > > > > > > device, they don't even describe the boot/runtime state of the
-> > > > > > > > > firmware, they describe build time, so I don't see what that has to do
-> > > > > > > > > with device tree? Can you explain that? To me those sorts of things
-> > > > > > > > > should live in a build time style config file.
-> > > > > > >
-> > > > > > > For the record, I tend to agree.
-> > > > > > >
-> > > > > >
-> > > > > > +1
-> > > > > >
-> > > > > > > > I beg to differ. Devicetree is more than just hardware and always has
-> > > > > > > > been. See, for example the /chosen and /options nodes.
-> > > > > > >
-> > > > > > > There are exceptions...
-> > > > > > >
-> > > > > >
-> > > > > > We've been this over and over again and frankly it gets a bit annoying.
-> > > > > > It's called *DEVICE* tree for a reason.  As Rob pointed out there are
-> > > > > > exceptions, but those made a lot of sense.  Having arbitrary internal ABI
-> > > > > > stuff of various projects in the schema just defeats the definition of a
-> > > > > > spec.
-> > > > >
-> > > > > Our efforts should not just be about internal ABI, but working to
-> > > > > provide a consistent configuration system for all firmware elements.
-> > > >
-> > > > And that's what the firmware handoff was all about.
-> > > > I get what you are trying to do here.  I am just aware of any other
-> > >
-> > > "just not aware" did you mean?
-> >
-> > Yep, sorry!
-> >
-> > >
-> > > > project apart from U-Boot which uses DT for it's own configuration.
-> > > > So trying to standardize some bindings that are useful to all projects
-> > > > that use DT is fine. Trying to *enforce* them to use it for config
-> > > > isn't IMHO.
-> > > >
-> > > > >
-> > > > > We cannot have it both ways, i.e. refusing to accept non-hardware
-> > > > > bindings and then complaining that U-Boot does not pass schema
-> > > > > validation. Devicetree should be a shared resource, not just for the
-> > > > > use of Linux.
-> > > >
-> > > > It's not for the use of Linux, I've wasted enough time repeating that
-> > > > and so has Rob.  Please go back to previous emails and read the
-> > > > arguments.
-> > >
-> > > Right, it's not just for Linux, but Linux is where most of the
-> > > exceptions to the "ONLY HARDWARE" rule got in, because they also make
-> > > sense.
-> >
-> > Exactly.
-> >
-> > > And the overarching point Simon keeps trying to make I believe
-> > > can be boiled down to that too.  There are things that one does not have
-> > > a (reasonable) choice about how to do things with when interacting with
-> > > the hunk of melted sand on your desk and that information needs to go
-> > > somewhere.
-> >
-> > DT is a big hammer indeed, but that doesn't mean we always need to use
-> > it.  I never disagreed with adding nodes that make sense and will be
-> > useful for others. For example, the internal Driver model
-> > configuration options used to enable a device early etc etc are
-> > probably useful to more projects.  On the other hand, if U-Boot is
-> > indeed the only project using DT for its internal configuration why
-> > should we care?
-> >
-> > For example, let's imagine you build TF-A, and TF-A is configured and
-> > bundled with a device tree that gets passed along to U-Boot (using
-> > OF_BOARD).  Why on earth should TF-A be aware of internal DM
-> > implementation details and build a device tree containing
-> > u-boot,dm-pre-reloc, u-boot,dm-spl, dm-tpl, and every other
-> > non-upstreamed nodes we have?
->
-> I don't think this is a clear example, sorry.  "dm-pre-reloc" etc are
-> the bootph things now that you say could be useful.  So they're an
-> example of how (now that things are more receptive) we need to look at
-> what U-Boot has that doesn't pass validation and see "does this make
-> sense, today" or not.
->
+This feature won't be very useful in the current U-Boot environment.
 
-The point here is a bit different though.  We need this in U-Boot *because*
-we use the DT to configure things.  They are useful information, but unless
-another bootloader uses the same config method, U-Boot is the only consumer.
+[1] https://developer.arm.com/documentation/den0056/e/?lang=en
 
-If we could split those nodes in an internal u-boot .dtsi file that would
-be much much cleaner.  But IIRC we'll have problems with patching DTs in
-TPL/SPL with limited memory.
 
-> I guess I'm confused as to why it's a theoretical problem for TF-A to
-> pass along /binman/ but not a problem to pass along
-> /soc/.../snvs/.../linux,snvs_pwrkey on i.MX8.  _Sometimes_ internals
+Test
+====
+The patch series was tested on the following platforms:
+* sandbox
+* qemu-arm64 with OPTEE as SCMI server
 
-It's the same problem and I don't think it's ok for TF-A to pass those as
-either.
 
-> just need to be there.  That also does not mean every single should be
-> there.
->
+Prerequisite:
+=============
+* This patch series is based on v2023.10-rc4.
 
-> > Another example would be the public key that we shoehorn on the DT.
-> > In commit ddf67daac39d ("efi_capsule: Move signature from DTB to
-> > .rodata") I tried to get rid of that because since I was aware of the
-> > dt-schema conformance and honestly having the capsule public portion
-> > of the key there makes little sense.  Unfortunately, that got reverted
-> > in commit 47a25e81d35c8 with a bogus commit message as well.  So again
-> > imagine building TF-A, which is a first-stage bootloader and has no
-> > understanding of UEFI whatsoever,  asking the TF-A project to start
-> > injecting public keys around that has no idea why or how they will be
-> > used.
-> >
-> >  Can you imagine how the device tree would look like in a couple of
-> > years from now if we allow *every* project to add its own special
-> > config needs in there?  So perhaps we should take a step back, agree
-> > that some level of config is needed, identify the common options, and
-> > add that to the spec instead of dumping everything that doesn't fit
-> > somewhere else in there.
->
-> Part of the problem here and now with capsule update stuff seems to be
-> that, well, I don't know what the heck we should do.  It's a "lovely"
-> specification defined feature and so I honestly don't know how much
-> leeway we have for how we can and can't represent and implement the
-> portions that are left up to the implementation or board specific.
 
-Heinrich and I can help on that.  In short, the capsule update chapter
-doesn't define where the key should be stored.  It should obviously be on a
-tamper resistant medium and it has a specific format, but that's as far as
-the spec would go.
+Patches:
+========
+Patch#1-#4,#7-#8: Add SCMI base protocol driver
+Patch#5-#6,#9-#10: Add SCMI base protocol device unit test
+Patch#11-#13: Add scmi command
 
-> I don't see why TF-A would inject something that should have been present
-> already?  And/or ...
 
-I am not following you here.  The public key is unique per class of
-devices.  If someone builds TF-A and decides to provide a DTB though that,
-you then need to, unpack the TF-A binary when you build U-Boot,  amend it
-and repack it via binman.  On top of that, those binaries will
-probably be signed, so the repacking exercise becomes pretty painful.
+Change history:
+===============
+v4 (Sep 12, 2023)
+* shuffle the patch order (patch#5,6 prior to patch#7)
+* several improvements/cleanup thanks to Etienne
+  (Each commit message has more details.)
 
->
-> > > > > We already have reserved-memory, flash layout and other
-> > > > > things which don't relate to hardware. I would love to somehome get
-> > > > > past this fundamental discussion which seems to come up every time we
-> > > > > get close to making progress
-> > > >
-> > > > Most of the nodes we already have were used across projects and made
-> > > > sense to all of them. U-Boot might need to reserve some memory and so
-> > > > does linux etc etc.
-> > > > Some other nodes make nosense at all to and they just serve internal
-> > > > ABI implementation details.  I can't possibly fathom how these would
-> > > > be justifiable.  On top of all that, there's a huge danger here.  How
-> > > > are you planning on separating arbitrary entries from various
-> > > > projects?
-> > >
-> > > I think in some ways this is the whole point of at least what I'm asking
-> > > for.  It's fine to say "Here is the mechanism to remove nodes /
-> > > properties from the device tree".  BUT adding entries to that list MUST
-> > > document where someone tried to upstream and explain that this is
-> > > something that belongs in the device tree because it is useful to
-> > > everyone.
+v3 (Sep 8, 2023)
+* import patch#6 (protocol availability check) from my followup patch
+* fix an issue on ST board (reported by Etienne) (patch#1)
+* minor code improvements
+* fix various typos pointed out by Etienne
+* revise function descriptions/comments 
+  (Each commit message has more details.)
 
-We never disagreed on that.  I already said that the FWU link Sughosh sent
-in the cover letter should be added on a doc.  But that's irrelevant to
-'hard NAKing' patches [0].  It's also the complete opposite of what we are
-discussing here, since AFAICT you are fine with the removal mechanism as
-long as the nodes-to-be-removed are documented properly and there has been
-an upstream effort of those beforehand.
+v2 (Jul, 26, 2023)
+* refactor devm_scmi_of_get_channel()/process_msg(), removing uses of ops
+  (patch#1)
+* use helper functions, removing uses of ops (patch#2,#9,#10)
+* add more descriptions in scmi command doc (patch#11)
+* remove 'scmi base' sub-command (patch#10,#12)
 
-> >
-> > And we don't disagree on that either. That's why the link to the FWU
-> > discussion was there (although it should have been in a doc and not in
-> > a mail). I am not arguing against adding nodes, I am arguing that we
-> > shouldn't rush them and that there's zero chance that we manage to
-> > upstream everything and keep some level of sanity on the spec.
-> > So, since U-Boot is currently using the DT for its own configuration
-> > needs, not having the ability to provide a DT that conforms to the
-> > spec and hope that we can upstream everything will just delay all of
-> > SystemReady 2.0 conformance efforts (and is unrealistic IMHO).
->
-> The first problem is how does the capsule update specification specify
-> handling the stuff that we put in the FWU nodes that we then need to
-> delete?
->
+v1 (Jun, 28, 2023)
+* initial release
 
-It doesn't.  The A/B update support is not part of the spec.  FWU and the
-A/B updates are designed on top of the EFI spec to provide an easy way to
-do firmware updates without bricking the board while at the same time
-provide rollback protection.
+AKASHI Takahiro (13):
+  scmi: refactor the code to hide a channel from devices
+  firmware: scmi: implement SCMI base protocol
+  firmware: scmi: move scmi_bind_protocols() backward
+  firmware: scmi: framework for installing additional protocols
+  firmware: scmi: fake base protocol commands on sandbox
+  test: dm: simplify SCMI unit test on sandbox
+  firmware: scmi: install base protocol to SCMI agent
+  firmware: scmi: add a check against availability of protocols
+  sandbox: remove SCMI base node definition from test.dts
+  test: dm: add SCMI base protocol test
+  cmd: add scmi command for SCMI firmware
+  doc: cmd: add documentation for scmi
+  test: dm: add scmi command test
 
-> The second problem is that I don't want the discussion link to just be
-> in the cover letter, I want it in the tree, in documentation and heck,
-> an unused-by-the-compiler parameter in the macro that adds a node to
-> delete that is the rST file that documents the "we tried, it was
-> rejected, this still makes sense" or whatever is appropriate as to why
-> we're deleting the node.  Cheaters shall cheat here, yes, but upstream
-> will have a record of trying.
+ arch/sandbox/dts/test.dts                  |   4 -
+ arch/sandbox/include/asm/scmi_test.h       |   7 +-
+ cmd/Kconfig                                |   9 +
+ cmd/Makefile                               |   1 +
+ cmd/scmi.c                                 | 337 +++++++++++
+ configs/sandbox_defconfig                  |   1 +
+ doc/usage/cmd/scmi.rst                     | 126 ++++
+ drivers/clk/clk_scmi.c                     |  27 +-
+ drivers/firmware/scmi/Makefile             |   1 +
+ drivers/firmware/scmi/base.c               | 656 +++++++++++++++++++++
+ drivers/firmware/scmi/sandbox-scmi_agent.c | 379 +++++++++++-
+ drivers/firmware/scmi/scmi_agent-uclass.c  | 411 +++++++++++--
+ drivers/power/regulator/scmi_regulator.c   |  26 +-
+ drivers/reset/reset-scmi.c                 |  19 +-
+ include/dm/uclass-id.h                     |   1 +
+ include/scmi_agent-uclass.h                |  81 ++-
+ include/scmi_agent.h                       |  29 +-
+ include/scmi_protocols.h                   | 351 +++++++++++
+ test/dm/scmi.c                             | 228 +++++--
+ 19 files changed, 2500 insertions(+), 194 deletions(-)
+ create mode 100644 cmd/scmi.c
+ create mode 100644 doc/usage/cmd/scmi.rst
+ create mode 100644 drivers/firmware/scmi/base.c
 
-Again, we never disagreed on that
-
-[0] https://lore.kernel.org/u-boot/CAPnjgZ3AexW4vfO-A8WYGE0OD5EZnOUA7tA1QP71Bcw51QArBQ@mail.gmail.com/
-
-Thanks
-/Ilias
-
->
-> --
-> Tom
-
+-- 
+2.34.1
 
