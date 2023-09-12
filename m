@@ -4,104 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78530CA0EC3
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 11:24:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70590CA0ECA
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 11:25:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE08986E75;
-	Tue, 12 Sep 2023 13:24:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 930DE86E7D;
+	Tue, 12 Sep 2023 13:24:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ge.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="VzyRt5Jv";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78D3086CDA; Tue, 12 Sep 2023 06:02:27 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20621.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e89::621])
+ id 7A6B986E73; Tue, 12 Sep 2023 08:21:57 +0200 (CEST)
+Received: from mx0a-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
+ [67.231.157.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A632386D76
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 06:02:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C804C86E57
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=fail (p=none dis=none) header.from=ge.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ spf=none smtp.mailfrom=Lavakumar.S@ge.com
+Received: from pps.filterd (m0048300.ppops.net [127.0.0.1])
+ by m0048300.ppops.net-00176a03. (8.17.1.19/8.17.1.19) with ESMTP id
+ 38C4sDM1044373
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 02:21:52 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bxjJt0T2Ey8a322GE5qg9jEGmmW0iIDHTcWDiAUb46J9JLH9ZK5RvgaKq9byDIK0lIilD8J9rzIVrVTdQhLAvx1PSGgbTpqpuiVvZzahg8mj65yw/ATt93DH/SLak/iNosWX2kVffLyJ5Yh77i3wLe1hbNj5zkN6I4jyPW3Sd6R7vFYXZ/cvnUiSXM+cabY6nHQgOQPJnS59by/h4sU+PCL9FLB0p66KqWf6MVM2qXDk9Utmz9x7ZftyKxu1yU0rDiAIDL9m0UkAAcz6KUs/Dyg8iqjqNlK6ZhS9BjY9tI81YZYNMK0DHucuAdJq9g6UGpgPVxMp3Uti9/gdyzTYHQ==
+ b=h8pdANxihBVXf0Kk25qn0gDLcDxpfQJCr2lK+iRdgryUFtHyo5FkcojR6d/CmrSzxut1/9K+cG8BCfh27Rz//mZMFFAkwhh9Ssjs+Ns54KTjO1f/8QqON5MAU2gC6RwLEbrIApBL5y3vxK7K8tYQT8piLrTx1UjbVec/E7KKJqYHajxFc8DgyCO6HuSOm3JAB6VrkXrQ5ZmaKI3dhLuWFgxegqWxNTrtLo6Q2HUjq1dtshD/GMiWe+5REgs4yhcxkeq5rrCEKsFpgdUj4N0VN9sJwnigUEfSp2opbU4X4f8jjgDOGNcKpe2n1PUMIsT52V97LKfp/Voh90ck+GOquQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=y+KQcmLDXM+g8597QD1GAwp3p/1N5Q921itAF9nPy24=;
- b=kS27wPCaIV9KCVmBMmd/MzzQzIbhRwSW/VsD8XMPQmOtnT9Xk3Nqj6mgivqhqGfWhuzdunBIxCjJyuPup3tw2cgsaZulHVG/8rk/anteFkRLtm7j23qmk7pwEDh2HLed8YxeRvThL3LUnJ8Jqp9i600dD8ArOYVrSk31W3P4ewCtG1o6OJBrn0SRpwu3Z3UJ5iTIuP94bWkIjJQdEjt9hhHcJG5oFnsHLJK1EkLXk2W+tRpr74+asGSJeUhe7EtlPmU1ZrAiopr9F13FgCtQ+RGZbGXwE0Rld+LYVLjVvozZ0zIfYzeTOJ6y9//j2TM/jopPzTYixBdl/RB+AlPD4w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=y+KQcmLDXM+g8597QD1GAwp3p/1N5Q921itAF9nPy24=;
- b=VzyRt5JvxyNj1NGHWHj8EI5o4rGnpc022QysLOxWKQUrYiboAU0jg6TaVJmjEuEuk/65ssAKPUzYiyuxfQ827xHunPeXcY7Of7O7eS6EseR9iKdB2mvI5YaYBTKbWQ9jtvMl9sjw6qaoB1olB4rCg6SwY8h71Q0HxYcE0XYX1lQ=
-Received: from BL1P223CA0029.NAMP223.PROD.OUTLOOK.COM (2603:10b6:208:2c4::34)
- by PH7PR12MB9128.namprd12.prod.outlook.com (2603:10b6:510:2f7::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.33; Tue, 12 Sep
- 2023 04:02:19 +0000
-Received: from BL02EPF0001A0FD.namprd03.prod.outlook.com
- (2603:10b6:208:2c4:cafe::83) by BL1P223CA0029.outlook.office365.com
- (2603:10b6:208:2c4::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.35 via Frontend
- Transport; Tue, 12 Sep 2023 04:02:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A0FD.mail.protection.outlook.com (10.167.242.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.17 via Frontend Transport; Tue, 12 Sep 2023 04:02:18 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Sep
- 2023 23:02:17 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Mon, 11 Sep 2023 23:02:15 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <git@xilinx.com>
-Subject: [PATCH] usb: dwc3: core: add external vBus supply support for ulpi phy
-Date: Tue, 12 Sep 2023 09:31:47 +0530
-Message-ID: <20230912040147.30734-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ bh=DXI4X7s+aWA0Bv6aSeYq2QhCbBODN8jjXy3hDuytgGE=;
+ b=j/ikoVzPIdZFpaB1ptNZu0kit7IZUOahsq43e3X3hvKGUJnLNU8cVslIX/GUhCPrWiqLo9+fVDbBPlniMjIdUoTxCsk5yDKOANK3jgmzXhUAq6dVeTWyt9nSzB+CWgb4p13AhqY68B8MGUBE2O/WOqHt53NN8vGlBdpLi5bfzbgMbauuc66mzUJe1mhiVvzgohSy/wdAOkDrJn8TPMKuUrZSZFkUSvb8M2ggkT1EYpjbw0G7tk+fbs4hGlU43fhQv17z1AKXqDIIO7T1RR1LwOAFKGxTZorOj+evYg8X/+8pgCNXgnMXNu933iZzh/WNJqJ5lAsKcuxvr8CjY/TvLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ge.com; dmarc=pass action=none header.from=ge.com; dkim=pass
+ header.d=ge.com; arc=none
+From: "S, Lavakumar (GE HealthCare)" <Lavakumar.S@ge.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Enabling POST in imx8mp processor board. -reg
+Thread-Topic: Enabling POST in imx8mp processor board. -reg
+Thread-Index: AdnlQSK/279k8PqbRU6r24TwGF2roQ==
+Date: Tue, 12 Sep 2023 06:21:34 +0000
+Message-ID: <SA0P101MB0377EB3FB4EBD682FE97540490F1A@SA0P101MB0377.NAMP101.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-dg-ref: 22ABCDEF54ADAF4B1311323D940D9740ACC5494F1F19BB089F7577D1AB9027D6
+ 0810FD5eJzVWdty2kgQ3U+h9M5GQgJLKZOqkRckXEtqZYcqoHgZXRCYq43IxHz9d
+ vcMhsRRRMprxPaDRhq3oY/69Jme4XqRZPzTNc8qy0VTC1fx85+TbDHXKuumFn0cb
+ TfJ02ZUq5l6w3Iaxoiv1zHP+OhpxRfTZTrSndi2nLBRNWuxWbW4pVftepJUG6Fth
+ bzmJGY9HC026QYvVSfi1pU9Nqp1w7SqhgGOYWJGVTsK7atE12OYGvFFUs2STTZS3
+ uavvI8C3uyamuVYulbJmpphmqbtXJk1B/5Xd4yGpVUmTe1+vFzf/7VYtYJ2Upsvg
+ tvV4998/OhObkVTq0zjpqZVwnlTgw8JV/ApWiWawntgYK07v2fc3d/12p9v0h5jt
+ 50vjN10r/75lgRJf8iGjcjp8uUqGIrleqd/e0wm7pKNWZ75dJ22RJ5Di7GAuXh3G
+ 3iT+Ee/Wwsu7gPze4wH7ph5AxYK9yvzAzYM3Ofc770Yax1uUzkscfS6LA7cNWvbL
+ GYwAp6QuXN8X4MA3qjXY4PU3TDPZgPhPpUSep4FL3c3akjwCnEazO8inq/M01lfu
+ Dt8DlPMW4C4dsxLSwm5wNzDbUcOkneUB8DxwDwh4wc8HPPmzdS8jfgWpUT9S8vjX
+ YR1M0b+Ad8miCcSEg/fzwt3i3UGfg+lhJ5nObwbCqibNtUJ1EsL8ewQT0y8S2G+l
+ GhPsd/lXQ1xctRD1IeLxHUC7xS/AM8McUD96JgvwLmhPCJO+Uzz5A/zwxR1hfQSd
+ LKD72eLejl8b0jFvIO4LIxvjToHOLeo54Bvgvnrox/g7it9vAA7gXdK1+D9D/F9A
+ z5ap6C+QDfG+BwxyN/F2Nt5F+G65UeX01cU8I5TXigfutQ51POOwkvzEhfxMkJ/H
+ fl3trp5bUW8W5GuYT6wfkjnWhj/oc4g7gTzg7xEf/ArEQ8r5l2KI+kA1M8KeTig+
+ A91BryrY9449X0p+o0xT4AzY14HeUt5BL4K1Jd3t7fwDvIBcQuFb0d6TXi7x3U4U
+ 38/V95O4J3iE+QpCU7Rvxb2F/Qs523V5/6wP3m3vBXzbs+nEPl1gv5Rv9emfO3+4
+ 2BPs2Le7XUM9GF2yrpboi6QFfFuq3gjcH8r93uE6wL4lWdFvLMkz+C9A4+mmAeue
+ HXeOH/DCni37wv+R31REe8E6bL4iU6c1s+WUFcFvIN4olT2B7Lf6WFeaF1KiJczl
+ Tfqh7Lv6+qsQA6Ww7vosC8XKl5d1Y+B5yqDVO5/LtDyeLfn237f9t2+to/nD/4Ax
+ 4x4dVESkcM7iBN0zkSeRemr85Txy/mD7It2WD+Sl125f/UCuS/0U6UvHZg/k+Xz7
+ rD/wX6A9tldpQ+W1A2Ic4B6LvXg4cx9XJ7l887vyH4T11ch6wjGOvbVe5xS73QWB
+ pKfA3Gs54E6h2j99Iv
+x-dg-refone: fz/J5RzoHccUqD1RP2A+lL/VF/Z0814uOz19LwHFk+bx7R
+ n0AvhmqPqieEuofVH35dF4uqO6Y1PeofFxv4l1Mei4wP3NVV1Nap9TvAXLdOje+1
+ 7zTPny6/kC/n/3xL6bzdzM=
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA0P101MB0377:EE_|DM5P101MB0345:EE_
+x-ms-office365-filtering-correlation-id: 81dc1e4c-8fd2-43ae-e86a-08dbb3588311
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: d1b2H9/8s9sd/vDpma0wAt59LNxiEOIi0LpxAQ3JBP3nV9RRPHflF1f4qv7j/+L/mWCncoM5dm6gcTEioOc0vgUe7fReN5F9+9vdVpZszZ6iG4Ukb6sY4B3IAyaF47kxKc7gX4o9S9764+VTeA7g8DBm4DxlIA1OPbidHms2WXUEO1d5o6qYnbsOvXFndAIgnuFN/sa95KLPUJedrbPZGbeN/D7W/bfsbOEt8WPiUrlfZD319gn/wMhip5k3LHDEVXEOd/8uBfOTTEblvOWxKa5oYgF4Hpk1Jl5yawlkcICIgrAetlwdCiJXzellVx0I/2vpVAhXNoaSPEl7LLHPMC46/vbDJ+695AB2wHV1IwvFyLNx8SdseN4ef+grYa12oMKEdZni6xQMDehmvvGDajhfpctHncMBOg2TDT09XdjSk0asP5UlRMWaEFSqnV21IELeOQ7QjdSXp/jSm4QBIBjhjO73+XOgxfsyG47oJNa027y8v8FDlKicbVapGCZGq2L0DbTD3hMHNs8A17flMM1fKzvWDuz67TctnpvyrT5o8XvLi3AyixwJ8z2BdkhoEx+TrEsM6E/u52JnFix+bXA5geJeVYcSRwIQBJK1R6P7olsWSDCzTdqur4iWhxmuQJdVXS99E9HEgl3aTzfP2Q==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA0P101MB0377.NAMP101.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(396003)(346002)(39860400002)(376002)(136003)(451199024)(186009)(1800799009)(55016003)(9686003)(7696005)(6506007)(76116006)(66946007)(66556008)(66476007)(66446008)(478600001)(82960400001)(33656002)(558084003)(86362001)(122000001)(38100700002)(38070700005)(71200400001)(26005)(64756008)(5660300002)(8936002)(8676002)(52536014)(6916009)(316002)(41300700001)(2906002)(32563001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?7zaUdFm4+Zjjy5e2OYRakg69QTLdowSCTCv4YsZGdA0CY+OpClNlIxPFhREU?=
+ =?us-ascii?Q?l3LNmdFi/oRXOk6Ky3469wTwQ1fOFYU0jZM2j5YKFTaesYX/LicZfhpVa/0v?=
+ =?us-ascii?Q?+Hw0+LkLrqJ4/bARAViQktuNHtn/QGno8YfhT4o0HQkv2y1JwR3z4nyykrIX?=
+ =?us-ascii?Q?nfpCp5LaAEBcBX96NYWoOuss6Q1wx8l+yn3qxbVKfVgCpvQ5DDrN8BJA4nG4?=
+ =?us-ascii?Q?Y39M/LATeg48mA8EEZ0dzMpvPMH+bfq2z69Rh/54gaSVnT/fAWiGc8KxBLgR?=
+ =?us-ascii?Q?n0VU+EApFXj3QRndbQE50eOidDQA1y9DYHkTWzcBXFRr8bqg+u/ZwJMatB+f?=
+ =?us-ascii?Q?HzQoGdYIlk5ZU+aIsJ28qPyPHEoSZzTN84VAeYK2Axb/X8csq80IB4xVU2h+?=
+ =?us-ascii?Q?n7j1R1WUhwib2nbYL/y6PsDiWkoYczWnjoaC4URmyyk/VWxQcuPQXfumVeWn?=
+ =?us-ascii?Q?ecI6FUiUnDLno1Ytf9mcX58C65d+4Z4mnnBeeRJkDftJ1qCW3/FCaxadbwp8?=
+ =?us-ascii?Q?lqL8w/1mbzm7oVLStATUNMhIKHmrgkQwg89Wo65J071qTzp6brFTWJVUUBMm?=
+ =?us-ascii?Q?JkdB9dBklapJnWWp/23uUA2nm6vx4i3msMmUVjFRw2KVV7rOm5bwvMB6EAtd?=
+ =?us-ascii?Q?ad1dlTxQLqhmc9QFeHAacCl1+xxJOV/IBTyzgx0Zz91VY92YfxnWX81rq8N1?=
+ =?us-ascii?Q?qZ6GpHtOhRUweiUiFjNk3Gci7X/Q7pUHwDWRtFhxBiVvhRpR0cdx8bDFwhmZ?=
+ =?us-ascii?Q?qdOafqW4EK9ZTA/9eh6oQxlUoeuSAqcaLY4B18D/sOxF5D+UipaULzyPiYoB?=
+ =?us-ascii?Q?GNz7aTs1Iszzd0SNvcvyAJynKv8aX36Q+ONn46ihjlqFfZqRC9fTNqgq+crG?=
+ =?us-ascii?Q?9iOsQyojN9k4w16OBBlmFQVswoDM+4uSgH+qfPldKOhgDt//CYPV0s68xch2?=
+ =?us-ascii?Q?Q8IuWqFf1R/M0ZpkMILlXfrNEAzu2nA6eWQv0TvGgRbQ0PRgdgVjCFOZk5Aw?=
+ =?us-ascii?Q?yCxzaiUx1TRAjbi4dnphrIpSffX/0uagBe+WgPp+/jF0uOzaFQo4RZHZv9vr?=
+ =?us-ascii?Q?3ZhNP7bWrLuvNlHJi9fRaDgEGvHNFj7shAdytit/EAxyEdRWQHKeE904TrE5?=
+ =?us-ascii?Q?g+hn/ZNG1mB+zqQcWU7+ZSaESPFPyFX71egvi3+2K/95zzOSWesyNsW8hhMN?=
+ =?us-ascii?Q?S/bISXSAEq6FutxWZSVkvmXtU8zHZShaQoLkvg+DbZhynmEyRm575pT1H0xe?=
+ =?us-ascii?Q?2IkbclPmXCb20b7d4c/Fl0g6uH17GUfnjpB7iq92cJoJM5ayR/nioPrs/YjF?=
+ =?us-ascii?Q?3yEMRh+cGEE6+foG1jzq/Uax3rEJ26vKSF4giMbeD0wKnHdgEtHuS92a8AIE?=
+ =?us-ascii?Q?FSNQO3u+8cYyBjNUhyThPaLCSJFaQO7uwqENtMlnYqPqkk27+dD/aN0YQIt1?=
+ =?us-ascii?Q?1hTkXlOtN91YyveWPM0QB/wvOtuoo9Q4AUonjBv18Hc4guIJjlLHcpeIB9Lk?=
+ =?us-ascii?Q?6yJzN6lnmExi1Hu8JhRBbBrAPdsM/lNuUp7Pm8+ZQ80j1SLfKH3AVQ7PepTW?=
+ =?us-ascii?Q?tq2jSBOINSlSnH6M91s=3D?=
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FD:EE_|PH7PR12MB9128:EE_
-X-MS-Office365-Filtering-Correlation-Id: 90fb0a76-f004-4f2c-b1d5-08dbb3450e9b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 03xRrceNnVPEwr1YiMNUMM9AIwfodiognH5EYnd039xsk+qCqD1ajKXf/LyQ0DUy/thYgpkK8SXh9c0fvt0eGMexK0swQXQggTaGDcggZqzYoXRpW3mha+E9ivxRy4iYQKsoubwkgPbP5yCJqglfsZCZ5t7iQFO+uBGRK2+ZAmnhq1cI0ULEWarHwBFfJPY+1kzRtH9aZ/q10fz6ou+UdBBEyHzk6Yir9l+KDSY3gfN5V3KfJ2EOiRcZUINSaxz4J3rEWAITTZ0fLBsVolfa/ntBbToXu0Ip5uUBMGPbv12LJNrViy1BCA74Oo0hxlQB5/yPpcPJVFe3xxP986Q7n/k2ICuJGX9Bu42J6vE9RLx5aUhYwWjcWDaa6pMcKgp4H+FacpBAfpoF3nm77d1jxT9Tf3lKnsHj7/vXNYa4tzRBxRzE6LT8ycjOHylgGWwYm8OQFbk5wcVABZxNcu0MdwECvYOv4FtJRgsKK4TTeFckj59A3qOzstWnoRCwKzNUhEFLc43avjHIFbSLBKdKaqLAClr52kOvwSkA6nImmM8oUNRKxHLLiiERSN/8QyqS/hhuwEcmi9C+52oCEM2pr6k6rMxBEr7N/iIAlyTH6XMqsWA71aqYybdq078rIQOXHoMkzH4cotcxzpdHWvpa9A9ljI/DQdHDAEpAkffmUmpaW7Z83d9wMTEiufrbcWX7LEUGtYLTX7HAnf3G9lFBXoxDcHCoEBbfJOOK6Ywcee935pXyGsgh1dRV72Zj2qYECAaU6e4ZCMWqcS3/s73o1w==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(396003)(376002)(39860400002)(136003)(1800799009)(82310400011)(186009)(451199024)(40470700004)(36840700001)(46966006)(40460700003)(426003)(336012)(36756003)(2906002)(81166007)(356005)(82740400003)(47076005)(40480700001)(54906003)(70206006)(70586007)(41300700001)(6916009)(86362001)(316002)(5660300002)(8936002)(36860700001)(6666004)(4326008)(478600001)(8676002)(107886003)(2616005)(1076003)(26005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Sep 2023 04:02:18.1788 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 90fb0a76-f004-4f2c-b1d5-08dbb3450e9b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FD.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9128
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA0P101MB0377.NAMP101.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 81dc1e4c-8fd2-43ae-e86a-08dbb3588311
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Sep 2023 06:21:34.0441 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 15ccb6d1-d335-4996-b6f9-7b6925f08121
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2InEHr2soyLHUqeYDngSkzw6T3wuOzGxMMIWzGEFq1WEsWTOtth6zgJ5P7mcW0xmIBJ4iP0UCrtBzHL8YY94ww==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5P101MB0345
+X-OriginatorOrg: ge.com
+X-Proofpoint-ORIG-GUID: KnEREGEjCrhzIWwIMGvh-4jfGsPP0vrs
+X-Proofpoint-GUID: KnEREGEjCrhzIWwIMGvh-4jfGsPP0vrs
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-12_03,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 lowpriorityscore=0
+ mlxscore=0 mlxlogscore=504 phishscore=0 malwarescore=0 adultscore=0
+ suspectscore=0 spamscore=0 bulkscore=0 impostorscore=0 clxscore=1011
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2308100000
+ definitions=main-2309120053
 X-Mailman-Approved-At: Tue, 12 Sep 2023 13:24:28 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,104 +156,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[ Piyush: Ported from Linux kernel commit
-	  b84ba26c922a ("usb: dwc3: core: add external vBus
-				supply support for ulpi phy") ]
+Hi all,
 
-Some ULPI USB PHY does not support internal VBUS supply, to drive the CPEN
-pin, which requires the configuration of the ULPI DRVVBUSEXTERNAL bit of
-OTG_CTRL register.
 
-Added 'snps,ulpi-ext-vbus-drv' a DT property to configure the USB2 PHY to
-drive VBUS with an external supply, by setting the USB2 PHY ULPIEXTVBUSDRV
-bit[:17] of the GUSB2PHYCFG register to drive VBUS with an external supply.
+Warm greetings all.
+I working on enabling RAM test as POST operation in u-boot 2022, for the im=
+x8mp processor board.
+Can you suggest me how to make things work.
+Any leads are appreciated.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/usb/dwc3/core.c | 13 +++++++++++++
- drivers/usb/dwc3/core.h |  4 ++++
- include/dwc3-uboot.h    |  1 +
- 3 files changed, 18 insertions(+)
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 49f6a1900b..d59bbefec4 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -529,6 +529,16 @@ static void dwc3_phy_setup(struct dwc3 *dwc)
- 	if (dwc->dis_u2_freeclk_exists_quirk)
- 		reg &= ~DWC3_GUSB2PHYCFG_U2_FREECLK_EXISTS;
- 
-+	/*
-+	 * Some ULPI USB PHY does not support internal VBUS supply, to drive
-+	 * the CPEN pin requires the configuration of the ULPI DRVVBUSEXTERNAL
-+	 * bit of OTG_CTRL register. Controller configures the USB2 PHY
-+	 * ULPIEXTVBUSDRV bit[17] of the GUSB2PHYCFG register to drive vBus
-+	 * with an external supply.
-+	 */
-+	if (dwc->ulpi_ext_vbus_drv)
-+		reg |= DWC3_GUSB2PHYCFG_ULPIEXTVBUSDRV;
-+
- 	dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
- 
- 	mdelay(100);
-@@ -888,6 +898,7 @@ int dwc3_uboot_init(struct dwc3_device *dwc3_dev)
- 	dwc->dis_tx_ipgap_linecheck_quirk = dwc3_dev->dis_tx_ipgap_linecheck_quirk;
- 	dwc->dis_enblslpm_quirk = dwc3_dev->dis_enblslpm_quirk;
- 	dwc->dis_u2_freeclk_exists_quirk = dwc3_dev->dis_u2_freeclk_exists_quirk;
-+	dwc->ulpi_ext_vbus_drv = dwc3_dev->ulpi_ext_vbus_drv;
- 
- 	dwc->tx_de_emphasis_quirk = dwc3_dev->tx_de_emphasis_quirk;
- 	if (dwc3_dev->tx_de_emphasis)
-@@ -1107,6 +1118,8 @@ void dwc3_of_parse(struct dwc3 *dwc)
- 				"snps,dis-u2-freeclk-exists-quirk");
- 	dwc->tx_de_emphasis_quirk = dev_read_bool(dev,
- 				"snps,tx_de_emphasis_quirk");
-+	dwc->ulpi_ext_vbus_drv = dev_read_bool(dev,
-+				"snps,ulpi-ext-vbus-drv");
- 	tmp = dev_read_u8_array_ptr(dev, "snps,tx_de_emphasis", 1);
- 	if (tmp)
- 		tx_de_emphasis = *tmp;
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 532746dd88..54450842e0 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -184,6 +184,7 @@
- /* Global USB2 PHY Configuration Register */
- #define DWC3_GUSB2PHYCFG_PHYSOFTRST	(1 << 31)
- #define DWC3_GUSB2PHYCFG_U2_FREECLK_EXISTS	(1 << 30)
-+#define DWC3_GUSB2PHYCFG_ULPIEXTVBUSDRV		BIT(17)
- #define DWC3_GUSB2PHYCFG_SUSPHY		(1 << 6)
- #define DWC3_GUSB2PHYCFG_ENBLSLPM	(1 << 8)
- #define DWC3_GUSB2PHYCFG_PHYIF(n)	((n) << 3)
-@@ -742,6 +743,8 @@ struct dwc3_scratchpad_array {
-  *	1	- -3.5dB de-emphasis
-  *	2	- No de-emphasis
-  *	3	- Reserved
-+ * @ulpi_ext_vbus_drv: Set to confiure the upli chip to drives CPEN pin
-+ *			VBUS with an external supply.
-  * @index: index of _this_ controller
-  * @list: to maintain the list of dwc3 controllers
-  */
-@@ -876,6 +879,7 @@ struct dwc3 {
- 
- 	unsigned		tx_de_emphasis_quirk:1;
- 	unsigned		tx_de_emphasis:2;
-+	unsigned                ulpi_ext_vbus_drv:1;
- 	int			index;
- 	struct list_head        list;
- };
-diff --git a/include/dwc3-uboot.h b/include/dwc3-uboot.h
-index e08530ec4e..722a9352ce 100644
---- a/include/dwc3-uboot.h
-+++ b/include/dwc3-uboot.h
-@@ -39,6 +39,7 @@ struct dwc3_device {
- 	unsigned dis_u2_freeclk_exists_quirk;
- 	unsigned tx_de_emphasis_quirk;
- 	unsigned tx_de_emphasis;
-+	unsigned ulpi_ext_vbus_drv;
- 	int index;
- };
- 
--- 
-2.17.1
+Regards,
+Lavakumar S
+GE CommonOs & Platforms
 
