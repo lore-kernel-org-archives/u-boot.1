@@ -4,81 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BEC0CA0EC3
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 12:11:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A21CA0EC3
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 12:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 993A586E74;
-	Tue, 12 Sep 2023 14:11:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A491586E3D;
+	Tue, 12 Sep 2023 14:20:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BmmyKNla";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="Jm5RFVZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A43A86E8A; Tue, 12 Sep 2023 14:11:13 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CA83586E71; Tue, 12 Sep 2023 14:20:22 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8DE86E2B
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 14:11:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF38A86E3D
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 14:20:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-401d6f6b2e0so41773285e9.1
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 05:11:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1694520669; x=1695125469;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=8cNxffWljzPYSAxGPkxbCUavHD04CHY2HN30A4VPTac=;
- b=BmmyKNlaM6FnxecjqmEuTL1/o/WnEPJzKfJQ8YvfBNApU4fqlR/EPo6kIK/hoHltwI
- iUuZ9lBlaL1MMtVMTkyMYw2d0xCGFEd8l/9QuwxAC23JTKfAQBo7MoLztpmr+W7/NLnm
- j+IUZ+eY2/w2pyDtAfUFb7a8UAz2hcHUNBWbPqfkjlxDDPCsjrvVZR2R18GfYaFGFcl3
- l3Rqedg6XwbqEJwz+NXvCZrnqgnNyDQf6bnYtRhv8+7GkIdI3ufUAY06wfxJX6lD+jhW
- TincwTuqcqHMAI0Xq+GimlFGgLP4+HcVbyjc4GbhMC4wh4E90gfFMDJBxlymeLl4l+Mi
- 3iTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694520669; x=1695125469;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8cNxffWljzPYSAxGPkxbCUavHD04CHY2HN30A4VPTac=;
- b=Fd2aWehewplVSRuuu4QrSUqrFyQ6Q1EXQaSVlDbQVrfMTprwv/KM2WzSLclDLAsEMZ
- 6pCrkVKNq+Qbj0g85r0bEDCPC7IDQQ1x9FZiMQ50tfqHzUiJjMpFSZE8WxSlHpzilCHA
- 68WowHF7f+xAtJEpNTZisngLgUnvLnuvbc35K45nmcsdWyx+bLxCs1WjrSO3MkC/QG0K
- s24TDWYpGYRSzmro2w2nHzoaWhsGHUVOqi2a3a06R/uNPzKht4RbJOhtKgn9dChSXxhK
- EQuWJkInIZryQtfnKZkBz1as2IUQqtewKI4qcL8yrP/Y3Nyk3SGTiBfzWjwNEMdQs7Gb
- 5SqQ==
-X-Gm-Message-State: AOJu0YxM4r91tJCUKEK+7yfP0yhFt66jmvh40k6BeQxUVaFmpNENu2c2
- 9ODH0BXpDsboH+KYTGQS1gAx0g==
-X-Google-Smtp-Source: AGHT+IG4EVx7/w4qlOvfXs7vXbJ9zQ5hZ5phUNN0YAUSafxYjlHKc+/lK4QjcW7A2F1Dgu+77CZthg==
-X-Received: by 2002:a5d:6d81:0:b0:319:6997:9432 with SMTP id
- l1-20020a5d6d81000000b0031969979432mr2071705wrs.1.1694520669214; 
- Tue, 12 Sep 2023 05:11:09 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- h17-20020a056000001100b003197c2316ecsm12596700wrx.112.2023.09.12.05.11.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Sep 2023 05:11:08 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Nishanth Menon <nm@ti.com>, Neha Francis <n-francis@ti.com>, Tom Rini
- <trini@konsulko.com>
-Cc: Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, Robert
- Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- u-boot@lists.denx.de, Jan
- Kiszka <jan.kiszka@siemens.com>, Marcel Ziswiler <marcel@ziswiler.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, Emanuele Ghidoli
- <emanuele.ghidoli@toradex.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH 2/2] arm: dts: k3-am625: Sync with kernel v6.6-rc1
-In-Reply-To: <20230911140256.945074-3-nm@ti.com>
-References: <20230911140256.945074-1-nm@ti.com>
- <20230911140256.945074-3-nm@ti.com>
-Date: Tue, 12 Sep 2023 14:11:08 +0200
-Message-ID: <87r0n3lhgj.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1694521219;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dMb84f89b2JKwsKzsxUl4qeKaWki8uBqTmdLs1AE99o=;
+ b=Jm5RFVZrTQWiAd4FpR8Tdm1Pm/sYIy61UnhGNfu1OKMS8U/PYucj+Wgd5lHdkPOvXB2AI1
+ 8i+xlIeCb91PdTkH+s4dxuGe9I/bOAF09fUuZRnDgQ4xiwOZPx7A8gn0LA5p87PilLaM8R
+ DiIVUMvwzVpcmThjCB1YsWolKMqpz7Y=
+Received: from CHE01-GV0-obe.outbound.protection.outlook.com
+ (mail-gv0che01lp2041.outbound.protection.outlook.com [104.47.22.41]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-54-YN0qMxQJOsam5mGDA-66vg-1; Tue, 12 Sep 2023 14:20:17 +0200
+X-MC-Unique: YN0qMxQJOsam5mGDA-66vg-1
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
+ ZRAP278MB0079.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:12::11) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6768.35; Tue, 12 Sep 2023 12:20:15 +0000
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::d5a7:e7ce:ac78:4984]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::d5a7:e7ce:ac78:4984%6]) with mapi id 15.20.6768.036; Tue, 12 Sep 2023
+ 12:20:15 +0000
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+To: "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
+ "ralph.siemsen@linaro.org" <ralph.siemsen@linaro.org>, "nm@ti.com"
+ <nm@ti.com>, "j-kacines@ti.com" <j-kacines@ti.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "n-francis@ti.com" <n-francis@ti.com>,
+ "kamlesh@ti.com" <kamlesh@ti.com>, "afd@ti.com" <afd@ti.com>,
+ "a-nandan@ti.com" <a-nandan@ti.com>, "seanga2@gmail.com" <seanga2@gmail.com>, 
+ "lukma@denx.de" <lukma@denx.de>, "hnagalla@ti.com" <hnagalla@ti.com>,
+ "a-bhatia1@ti.com" <a-bhatia1@ti.com>, "m-chawdhry@ti.com"
+ <m-chawdhry@ti.com>, "j-choudhary@ti.com" <j-choudhary@ti.com>,
+ "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
+ "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>, "sabiya.d@ti.com"
+ <sabiya.d@ti.com>, "sjg@chromium.org" <sjg@chromium.org>,
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>, "bb@ti.com" <bb@ti.com>,
+ "rogerq@kernel.org" <rogerq@kernel.org>
+Subject: Re: [PATCH v3 13/16] arm: dts: Introduce am69-sk u-boot dts files
+Thread-Topic: [PATCH v3 13/16] arm: dts: Introduce am69-sk u-boot dts files
+Thread-Index: AQHZ4kTOCAlWfeEuskqOaigLg/CJmrAXIm0A
+Date: Tue, 12 Sep 2023 12:20:14 +0000
+Message-ID: <c404a39ce71abe4e4fb3a7cc143cb62e7779f802.camel@toradex.com>
+References: <20230908110551.861575-1-a-nandan@ti.com>
+ <20230908110551.861575-14-a-nandan@ti.com>
+In-Reply-To: <20230908110551.861575-14-a-nandan@ti.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZRAP278MB0079:EE_
+x-ms-office365-filtering-correlation-id: 449a933d-ed6e-4082-b813-08dbb38a9e93
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0
+x-microsoft-antispam-message-info: Yc3LBwvexgs0ExXJHlvZbbtX0pc96Gx9S/6H7IfGQQT7Zf16Zc6cE/ZEGLtb8C+WnsZVhM0SXLbmdM/WZHoWzPDujCXw/fhyXyh9o1vPbQEGHyA6X9KvqREiUkYayq05KM8XS/HAElSsWlhGq8f0JgAdk0YGx9xfV7l63DlHdFrNX1XQ8vJFDYijcOAnRgWd65BNbuveencru1B8dCACCBNW7YSCVyONjCtkMwX5uE62nkUVh7D1LHz7m+UdVaClYnGA3FXiWyf4ARgU0aE16+7pczfVk8Alg1bv/IbaD5mIzArsM0ATmB1i2C5QfXZxO6vbRtcPAtjHRXpk5RMBu43Nxt9EsTHGuryHbFI5BbSMpCgK+8PJhBWgvJeFUdH3rPMRaUkulA+2/KPinxm1Bai8xyzhuJQcmY9XKE5xELp53kOKijbfn0NL7cOM+LYX3WXKsoH/RGpH3tv6eFG3SXRB+4WVIwOn1aPcP2GNxxPsdAzmY4SANpZA1NFoYkpOFGdcfSR1F2N9+nz1fzIe3XZBcAzGj0jf4fKnsoaxsAg3OqDFOSlXr80s8BVmFCoUb10UM2tyUjeDTIGJlyIPYu//Qzrz2UHl5/k2teZPVcvkyZ4kmYQODW0DQtu618UG
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(376002)(39850400004)(396003)(136003)(346002)(1800799009)(451199024)(186009)(921005)(122000001)(6486002)(71200400001)(6506007)(83380400001)(110136005)(36756003)(86362001)(38070700005)(38100700002)(26005)(2906002)(41300700001)(6512007)(966005)(478600001)(5660300002)(316002)(8936002)(8676002)(2616005)(66946007)(7416002)(66556008)(66446008)(44832011)(66476007)(76116006)(64756008);
+ DIR:OUT; SFP:1102
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?L095R2xZU0E0WUJHM3ZwNTlOVVh1bnNOeUN0N1R4NTdPUTBjR2hvN3pQTGZ6?=
+ =?utf-8?B?SEpvRllYbTQ4amtEc0RhdGJySytPZmdXeDhlRUlYUkxqWDdGQmxRZ24yVnRP?=
+ =?utf-8?B?Y1M2NTBCNmR1MVBXMDdyUHRiR09QZ2svMVVGU2dTWkNmcGh2alRFc2hNNnpO?=
+ =?utf-8?B?N25mRmV1QjQySWpCdmY1cCtjV0FUMXc4SG9EZ1BNUXNsUGtYazF6b0dQTllm?=
+ =?utf-8?B?Nys1bC9wWDFFUXJvWmhySHQvQ0FsWml1c3UraXZNUEpTOU4rcXJoWTFIVFZq?=
+ =?utf-8?B?MXZLcEg4TGI1WDA2RmZlOHJjUkxUbE43VTdnZlIwdzNLUGxBZ2lNaTkvZEVo?=
+ =?utf-8?B?dUtyUXNDS0hXVHhKZlVzMndDZC9vM283b3VKRlNidkVGRk5oY2NHVDdIbkFB?=
+ =?utf-8?B?UWJEbDJNQkZLK1NBWFFBS3lmWlNRTUVNYXFoQS9GWGs1MDkzRWRBVVRrL05J?=
+ =?utf-8?B?Zi9yUjRjOHdFTkdFZEhBdVdIWFV3YWxzOXhidVRQMnBJRFVWZStQalRDTGpV?=
+ =?utf-8?B?MjJodnFjVUVyVTI3dTFiczhvUlhrejk1cUtmbkNHZjFrcjQ0bFY5aGN4VTly?=
+ =?utf-8?B?WFB4em1yRmRZb3hIODZkMjVadWtlYUxodW9vL0FJdnlBMk55ekdKN2JNSDdk?=
+ =?utf-8?B?Ri9YT3RFc2UwQ2tYOXliRVpPb2l4SUZXeHNPTDJoUCtDSXhDZnNKY3pZb001?=
+ =?utf-8?B?dy9OT01MNzlnY3A3K1d2M1pZbENHTHQ1OFlPbDBwNE1zeTdxNjdNVjdpMEYr?=
+ =?utf-8?B?Vmt4c3lBUUNma0JubVN5RDNLQTlIUEhFUC9KamJtT2RrQktoTjRIYWZEY29t?=
+ =?utf-8?B?NGNDc21aclJ3cXNCWDlvN1Y5ZkIwdVJmbEVsY3lXZ0V5NGozVjZpMVdtRmdE?=
+ =?utf-8?B?bEY1MVhJZXBleWdVTHphb2hzM1g0UFVpNktDL3picFBxM0FqWEUxT0x6QWxO?=
+ =?utf-8?B?SmNtZE1PcXUvdGZtcUxyY09GK0pNVFhkbGRvck1jRzVLVlNUYitKTmF4WlZn?=
+ =?utf-8?B?dEFtdXpDdWRJejVPb2dpc0hJMWh1VE1JNktMOGJ5Uk9vbHo1dDNoeis5NTNz?=
+ =?utf-8?B?VUd2T2Z5Z3NTR3pNKzk4a29vY2Vuc3h3UDcvQnYwZWJkclMreXdjSzIyT0xZ?=
+ =?utf-8?B?M0FMQnBIQjY5SlhpSnd6QTBLZkp6akx1OE5LVTZzSE1LcHRxZ3FKWmxHYk1k?=
+ =?utf-8?B?MnZ4ZUdVRXJMOUs5bVo4TXBaY3poTjZKclJoYitWQ1YydmUxRU13K3VuZ0dH?=
+ =?utf-8?B?TnRkeWp5L0Y2WTd6S2ZoTFlDTUo0ZEM2RHdZT0IwUHFmUXEyQ3cyeFJLbFF3?=
+ =?utf-8?B?ekxwSzJvRnFYMTdZOE1qaVMzZ3dFMHN2ZXV0NENYSWtvOEo0WlhrUmNMdzVE?=
+ =?utf-8?B?Ri9id04vcldVOHFyZzF4WDVjc2J6N1VVOUlaRDN6YTh0bGVReEF2MzYwai8w?=
+ =?utf-8?B?bmFhTkFWT3dnK3cyVW0yZHpiZ2xZYzNWYTlhSHF4WHY1N0NPaStTZkFxTXlH?=
+ =?utf-8?B?WVN4cFNINGFsUWtVNkJsakQxRUd5dm5VTktRanZ6MmdOUTc4Q01RZHh5bFpW?=
+ =?utf-8?B?SGovVm9DdTVhNmQwK1pXdFNabCtFSkJsa21TVXdWelQwa01xRWgxdWZ5L2J4?=
+ =?utf-8?B?cm5IenJzNmVaNnRCeWtwaUpBUXRxWExEZUVtdlBDME16Vk00eUxhMnZBY2hY?=
+ =?utf-8?B?L2oxc3VKLy9NRHFvY0oyZEhyZ0R0dkxQVU9EREZlZmIrb0EyaXVadlhmTTY5?=
+ =?utf-8?B?Z0hoNmpybEVZZzF6SDIvZWtUa3A3cmE0aTJLeFhGekpmMDQwQ1VCY2lkRlpC?=
+ =?utf-8?B?cGdPSi9RRVZwUTU1c3hKb2o1RjR2VkxpZWdZNHFDWHVhUlZTUnRBMDZvcTI0?=
+ =?utf-8?B?NkNkM2RyTjMvUU5QVVRMakR3SzRqWVJqMmVweUt6SUhxQ2VjZSsxd0lOSTdT?=
+ =?utf-8?B?bFVYOFJHOWdGbXFhV2ZWU2FoOHdzaG9MMWR1eGR6VmUxbVZPd0xGVEtUZ2ht?=
+ =?utf-8?B?c0ZvT3U1eFFhOEZsWVFNcnhXbjZGTWlzQTlJSGllVmdZQjlNWDlYR0NtWUVT?=
+ =?utf-8?B?Vnhicko5UVJMS0xMVFdrQVZGTnI5OEJtQ0ZJVlZuRjhkS3Y1WXZkd29tK1ov?=
+ =?utf-8?B?ZFA3cG9teUliS1dObHVZNGRUd05hK3JSRkZVS2VvKzJ1WlI0cWFPV3hQdEN6?=
+ =?utf-8?B?Snc9PQ==?=
 MIME-Version: 1.0
-Content-Type: text/plain
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 449a933d-ed6e-4082-b813-08dbb38a9e93
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Sep 2023 12:20:15.0066 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: iNL0W/I9ApqfqhfIyvoECDN4hdcWTH03vehugts/lpsSUsRfRD6DWM64ArBLj8l5lNYKVJb29p0F+ZwbwA3rv6iFioSjOrizsFakZDGZDds=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZRAP278MB0079
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-ID: <36CD2F563412D44D94643B065D496D6A@CHEP278.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,552 +161,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On lun., sept. 11, 2023 at 09:02, Nishanth Menon <nm@ti.com> wrote:
+T24gRnJpLCAyMDIzLTA5LTA4IGF0IDE2OjM1ICswNTMwLCBBcHVydmEgTmFuZGFuIHdyb3RlOgo+
+IEZyb206IERhc25hdmlzIFNhYml5YSA8c2FiaXlhLmRAdGkuY29tPgo+IAo+IEludHJvZHVjZSB0
+aGUgYmFzZSBkdHMgZmlsZXMgbmVlZGVkIGZvciB1LWJvb3Qgb3IgdG8gYXVnbWVudCB0aGUgbGlu
+dXgKPiBkdGJzIGZvciB1c2UgaW4gdGhlIHUtYm9vdC1zcGwgYW5kIHUtYm9vdCBiaW5hcmllcy4K
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBEYXNuYXZpcyBTYWJpeWEgPHNhYml5YS5kQHRpLmNvbT4KPiBT
+aWduZWQtb2ZmLWJ5OiBBcHVydmEgTmFuZGFuIDxhLW5hbmRhbkB0aS5jb20+Cj4gLS0tCj4gwqBh
+cmNoL2FybS9kdHMvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDMg
+Ky0KPiDCoGFyY2gvYXJtL2R0cy9rMy1hbTY5LXI1LXNrLmR0c8KgwqDCoMKgwqAgfCAxMDUgKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKwo+IMKgYXJjaC9hcm0vZHRzL2szLWFtNjktc2stdS1i
+b290LmR0c2kgfMKgIDI1ICsrKysrKysKPiDCoDMgZmlsZXMgY2hhbmdlZCwgMTMyIGluc2VydGlv
+bnMoKyksIDEgZGVsZXRpb24oLSkKPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9kdHMv
+azMtYW02OS1yNS1zay5kdHMKPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBhcmNoL2FybS9kdHMvazMt
+YW02OS1zay11LWJvb3QuZHRzaQo+IAo+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9kdHMvTWFrZWZp
+bGUgYi9hcmNoL2FybS9kdHMvTWFrZWZpbGUKPiBpbmRleCAxYmNkYmVhOWU1Li5iYjdhZTc5NzQ1
+IDEwMDY0NAo+IC0tLSBhL2FyY2gvYXJtL2R0cy9NYWtlZmlsZQo+ICsrKyBiL2FyY2gvYXJtL2R0
+cy9NYWtlZmlsZQo+IEBAIC0xMzMwLDcgKzEzMzAsOCBAQCBkdGItJChDT05GSUdfU09DX0szX0o3
+MjFTMikgKz0gazMtYW02OC1zay1iYXNlLWJvYXJkLmR0YlwKPiDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgazMtYW02OC1zay1yNS1i
+YXNlLWJvYXJkLmR0YlwKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgazMtajcyMXMyLWNvbW1vbi1wcm9jLWJvYXJkLmR0YlwKPiDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgazMtajcyMXMyLXI1LWNvbW1vbi1wcm9jLWJvYXJkLmR0Ygo+IC1kdGItJChDT05GSUdfU09D
+X0szX0o3ODRTNCkgKz0gazMtYW02OS1zay5kdGJcCj4gK2R0Yi0kKENPTkZJR19TT0NfSzNfSjc4
+NFM0KSArPSBrMy1hbTY5LXI1LXNrLmR0YlwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBrMy1hbTY5LXNrLmR0YlwKPiDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgazMt
+ajc4NHM0LWV2bS5kdGJcCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGszLWo3ODRzNC1yNS1ldm0uZHRiCj4gwqBkdGItJChDT05G
+SUdfU09DX0szX0FNNjQyKSArPSBrMy1hbTY0Mi1ldm0uZHRiIFwKPiBkaWZmIC0tZ2l0IGEvYXJj
+aC9hcm0vZHRzL2szLWFtNjktcjUtc2suZHRzIGIvYXJjaC9hcm0vZHRzL2szLWFtNjktcjUtc2su
+ZHRzCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRleCAwMDAwMDAwMDAwLi44Yzc4OWM0ZjI4
+dmFsdWF0aW9uIG1vZHVsZSAoRVZNKSBpcyBhIHBsCj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL2Fy
+Y2gvYXJtL2R0cy9rMy1hbTY5LXI1LXNrLmR0cwo+IEBAIC0wLDAgKzEsMTA1IEBACj4gKy8vIFNQ
+RFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wCgpTaG91bGQgYmU6CgpHUEwtMi4wLW9ubHkK
+CkJUVzogV2h5IGlzIFRJIG5vdCByZWxlYXNpbmcgdGhlaXIgZGV2aWNlIHRyZWVzIHdpdGggYSBt
+b3JlIHBlcm1pc3NpdmUgbGljZW5zZSBsaWtlIEdQTC0yLjAtb3ItbGF0ZXIgT1IgTUlUCmxpa2Ug
+bW9zdCBvdGhlcnMgZG8/Cgo+ICsvKgo+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjItMjAyMyBUZXhh
+cyBJbnN0cnVtZW50cyBJbmNvcnBvcmF0ZWQgLSBodHRwczovL3d3dy50aS5jb20vCj4gKyAqLwo+
+ICsKPiArL2R0cy12MS87Cj4gKwo+ICsjaW5jbHVkZSAiazMtYW02OS1zay5kdHMiCj4gKyNpbmNs
+dWRlICJrMy1qNzg0czQtZGRyLWV2bS1scDQtNDI2Ni5kdHNpIgo+ICsjaW5jbHVkZSAiazMtajc4
+NHM0LWRkci5kdHNpIgo+ICsjaW5jbHVkZSAiazMtYW02OS1zay11LWJvb3QuZHRzaSIKPiArCj4g
+Ky8gewo+ICvCoMKgwqDCoMKgwqDCoGNob3NlbiB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoHRpY2stdGltZXIgPSAmbWN1X3RpbWVyMDsKPiArwqDCoMKgwqDCoMKgwqB9Owo+ICsK
+PiArwqDCoMKgwqDCoMKgwqBhbGlhc2VzIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgcmVtb3RlcHJvYzAgPSAmc3lzY3RybGVyOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqByZW1vdGVwcm9jMSA9ICZhNzJfMDsKPiArwqDCoMKgwqDCoMKgwqB9Owo+ICsKPiArwqDC
+oMKgwqDCoMKgwqBhNzJfMDogYTcyQDAgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqBjb21wYXRpYmxlID0gInRpLGFtNjU0LXJwcm9jIjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgcmVnID0gPDB4MCAweDAwYTkwMDAwIDB4MCAweDEwPjsKPiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgcG93ZXItZG9tYWlucyA9IDwmazNfcGRzIDYxIFRJX1NDSV9QRF9F
+WENMVVNJVkU+LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoDwmazNfcGRzIDIwMiBUSV9TQ0lfUERfRVhDTFVTSVZFPjsKPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmVzZXRzID0gPCZrM19yZXNldCAyMDIgMD47
+Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGNsb2NrcyA9IDwmazNfY2xrcyA2MSAw
+PjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYXNzaWduZWQtY2xvY2tzID0gPCZr
+M19jbGtzIDYxIDA+LCA8JmszX2Nsa3MgMjAyIDA+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqBhc3NpZ25lZC1jbG9jay1wYXJlbnRzID0gPCZrM19jbGtzIDYxIDI+Owo+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBhc3NpZ25lZC1jbG9jay1yYXRlcyA9IDwyMDAwMDAw
+MDA+LCA8MjAwMDAwMDAwMD47Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHRpLHNj
+aSA9IDwmc21zPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdGksc2NpLXByb2Mt
+aWQgPSA8MzI+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB0aSxzY2ktaG9zdC1p
+ZCA9IDwxMD47Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGJvb3RwaC1wcmUtcmFt
+Owo+ICvCoMKgwqDCoMKgwqDCoH07Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoGRtX3RpZnM6IGRtLXRp
+ZnMgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjb21wYXRpYmxlID0gInRpLGo3
+MjFlLWRtLXNjaSI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHRpLGhvc3QtaWQg
+PSA8Mz47Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHRpLHNlY3VyZS1ob3N0Owo+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBtYm94LW5hbWVzID0gInJ4IiwgInR4IjsK
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgbWJveGVzPSA8JnNlY3VyZV9wcm94eV9t
+Y3UgMjE+LCA8JnNlY3VyZV9wcm94eV9tY3UgMjM+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqBib290cGgtcHJlLXJhbTsKPiArwqDCoMKgwqDCoMKgwqB9Owo+ICt9Owo+ICsKPiAr
+Jm1jdV90aW1lcjAgewo+ICvCoMKgwqDCoMKgwqDCoHN0YXR1cyA9ICJva2F5IjsKPiArwqDCoMKg
+wqDCoMKgwqBjbG9jay1mcmVxdWVuY3kgPSA8MjUwMDAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqBi
+b290cGgtcHJlLXJhbTsKPiArfTsKPiArCj4gKyZzZWN1cmVfcHJveHlfc2EzIHsKPiArwqDCoMKg
+wqDCoMKgwqBzdGF0dXMgPSAib2theSI7Cj4gK8KgwqDCoMKgwqDCoMKgYm9vdHBoLXByZS1yYW07
+Cj4gK307Cj4gKwo+ICsmc2VjdXJlX3Byb3h5X21jdSB7Cj4gK8KgwqDCoMKgwqDCoMKgc3RhdHVz
+ID0gIm9rYXkiOwo+ICvCoMKgwqDCoMKgwqDCoGJvb3RwaC1wcmUtcmFtOwo+ICt9Owo+ICsKPiAr
+JmNiYXNzX21jdV93YWtldXAgewo+ICvCoMKgwqDCoMKgwqDCoHN5c2N0cmxlcjogc3lzY3RybGVy
+IHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY29tcGF0aWJsZSA9ICJ0aSxhbTY1
+NC1zeXN0ZW0tY29udHJvbGxlciI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoG1i
+b3hlcz0gPCZzZWN1cmVfcHJveHlfbWN1IDQ+LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgPCZzZWN1cmVfcHJveHlfbWN1IDU+LAo+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgPCZzZWN1cmVfcHJveHlfc2EzIDU+
+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBtYm94LW5hbWVzID0gInR4IiwgInJ4
+IiwgImJvb3Rfbm90aWZ5IjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYm9vdHBo
+LXByZS1yYW07Cj4gK8KgwqDCoMKgwqDCoMKgfTsKPiArfTsKPiArCj4gKyZzbXMgewo+ICvCoMKg
+wqDCoMKgwqDCoG1ib3hlcz0gPCZzZWN1cmVfcHJveHlfbWN1IDg+LCA8JnNlY3VyZV9wcm94eV9t
+Y3UgNj4sIDwmc2VjdXJlX3Byb3h5X21jdSA1PjsKPiArwqDCoMKgwqDCoMKgwqBtYm94LW5hbWVz
+ID0gInR4IiwgInJ4IiwgIm5vdGlmeSI7Cj4gK8KgwqDCoMKgwqDCoMKgdGksaG9zdC1pZCA9IDw0
+PjsKPiArwqDCoMKgwqDCoMKgwqB0aSxzZWN1cmUtaG9zdDsKPiArwqDCoMKgwqDCoMKgwqBib290
+cGgtcHJlLXJhbTsKPiArfTsKPiArCj4gKyZ3a3VwX3VhcnQwIHsKPiArwqDCoMKgwqDCoMKgwqBi
+b290cGgtcHJlLXJhbTsKPiArwqDCoMKgwqDCoMKgwqBzdGF0dXMgPSAib2theSI7Cj4gK307Cj4g
+Kwo+ICsmb3NwaTAgewo+ICvCoMKgwqDCoMKgwqDCoHJlZyA9IDwweDAgMHg0NzA0MDAwMCAweDAg
+MHgxMDA+LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgPDB4MCAweDUwMDAwMDAwIDB4MCAw
+eDgwMDAwMDA+Owo+ICt9Owo+ICsKPiArJm9zcGkxIHsKPiArwqDCoMKgwqDCoMKgwqByZWcgPSA8
+MHgwIDB4NDcwNTAwMDAgMHgwIDB4MTAwPiwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDww
+eDAgMHg1ODAwMDAwMCAweDAgMHg4MDAwMDAwPjsKPiArfTsKPiArCj4gKyZtY3VfcmluZ2FjYyB7
+Cj4gK8KgwqDCoMKgwqDCoMKgdGksc2NpID0gPCZkbV90aWZzPjsKPiArfTsKPiArCj4gKyZtY3Vf
+dWRtYXAgewo+ICvCoMKgwqDCoMKgwqDCoHRpLHNjaSA9IDwmZG1fdGlmcz47Cj4gK307Cj4gZGlm
+ZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9rMy1hbTY5LXNrLXUtYm9vdC5kdHNpIGIvYXJjaC9hcm0v
+ZHRzL2szLWFtNjktc2stdS1ib290LmR0c2kKPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+IGluZGV4
+IDAwMDAwMDAwMDAuLmM4OTQ0NDk5ZTgKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIvYXJjaC9hcm0v
+ZHRzL2szLWFtNjktc2stdS1ib290LmR0c2kKPiBAQCAtMCwwICsxLDI1IEBACj4gKy8vIFNQRFgt
+TGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wCgpEaXR0by4KCj4gKy8qCj4gKyAqIENvcHlyaWdo
+dCAoQykgMjAyMiBUZXhhcyBJbnN0cnVtZW50cyBJbmNvcnBvcmF0ZWQgLSBodHRwczovL3d3dy50
+aS5jb20vCj4gKyAqLwo+ICsKPiArI2luY2x1ZGUgImszLWo3ODRzNC1iaW5tYW4uZHRzaSIKPiAr
+Cj4gKyZtY3VfdWRtYXAgewo+ICvCoMKgwqDCoMKgwqDCoHJlZyA9wqDCoCA8MHgwIDB4Mjg1YzAw
+MDAgMHgwIDB4MTAwPiwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgPDB4MCAweDI4
+NGMwMDAwIDB4MCAweDQwMDA+LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqA8MHgw
+IDB4MmE4MDAwMDAgMHgwIDB4NDAwMDA+LAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqA8MHgwIDB4Mjg0YTAwMDAgMHgwIDB4NDAwMD4sCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoDwweDAgMHgyYWEwMDAwMCAweDAgMHg0MDAwMD4sCj4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoDwweDAgMHgyODQwMDAwMCAweDAgMHgyMDAwPjsKPiArwqDCoMKgwqDCoMKg
+wqByZWctbmFtZXMgPSAiZ2NmZyIsICJyY2hhbiIsICJyY2hhbnJ0IiwgInRjaGFuIiwKPiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICJ0Y2hhbnJ0IiwgInJmbG93IjsKPiAr
+wqDCoMKgwqDCoMKgwqBib290cGgtcHJlLXJhbTsKPiArfTsKPiArCj4gKyZzbXMgewo+ICvCoMKg
+wqDCoMKgwqDCoGszX3N5c3Jlc2V0OiBzeXNyZXNldC1jb250cm9sbGVyIHsKPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgY29tcGF0aWJsZSA9ICJ0aSxzY2ktc3lzcmVzZXQiOwo+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBib290cGgtcHJlLXJhbTsKPiArwqDCoMKgwqDC
+oMKgwqB9Owo+ICt9Owo=
 
-> Sync device tree with v6.6-rc1
->
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
->  arch/arm/dts/k3-am62-main.dtsi       |  52 ++++++++-
->  arch/arm/dts/k3-am62-mcu.dtsi        |  24 +++++
->  arch/arm/dts/k3-am62-verdin-dev.dtsi |  50 +++++++++
->  arch/arm/dts/k3-am62-verdin.dtsi     |  45 +++++++-
->  arch/arm/dts/k3-am62.dtsi            |   8 ++
->  arch/arm/dts/k3-am625-beagleplay.dts | 154 ++++++++++++++++++++++++++-
->  arch/arm/dts/k3-am625-sk.dts         |   2 +-
->  7 files changed, 325 insertions(+), 10 deletions(-)
->
-> diff --git a/arch/arm/dts/k3-am62-main.dtsi b/arch/arm/dts/k3-am62-main.dtsi
-> index 2488e3a537fe..284b90c94da8 100644
-> --- a/arch/arm/dts/k3-am62-main.dtsi
-> +++ b/arch/arm/dts/k3-am62-main.dtsi
-> @@ -55,11 +55,29 @@
->  			#phy-cells = <1>;
->  		};
->  
-> -		epwm_tbclk: clock@4130 {
-> -			compatible = "ti,am62-epwm-tbclk", "syscon";
-> +		epwm_tbclk: clock-controller@4130 {
-> +			compatible = "ti,am62-epwm-tbclk";
->  			reg = <0x4130 0x4>;
->  			#clock-cells = <1>;
->  		};
-> +
-> +		audio_refclk0: clock-controller@82e0 {
-> +			compatible = "ti,am62-audio-refclk";
-> +			reg = <0x82e0 0x4>;
-> +			clocks = <&k3_clks 157 0>;
-> +			assigned-clocks = <&k3_clks 157 0>;
-> +			assigned-clock-parents = <&k3_clks 157 8>;
-> +			#clock-cells = <0>;
-> +		};
-> +
-> +		audio_refclk1: clock-controller@82e4 {
-> +			compatible = "ti,am62-audio-refclk";
-> +			reg = <0x82e4 0x4>;
-> +			clocks = <&k3_clks 157 10>;
-> +			assigned-clocks = <&k3_clks 157 10>;
-> +			assigned-clock-parents = <&k3_clks 157 18>;
-> +			#clock-cells = <0>;
-> +		};
->  	};
->  
->  	dmss: bus@48000000 {
-> @@ -174,7 +192,6 @@
->  	crypto: crypto@40900000 {
->  		compatible = "ti,am62-sa3ul";
->  		reg = <0x00 0x40900000 0x00 0x1200>;
-> -		power-domains = <&k3_pds 70 TI_SCI_PD_SHARED>;
->  		#address-cells = <2>;
->  		#size-cells = <2>;
->  		ranges = <0x00 0x40900000 0x00 0x40900000 0x00 0x30000>;
-> @@ -590,7 +607,7 @@
->  
->  		usb0: usb@31000000 {
->  			compatible = "snps,dwc3";
-> -			reg =<0x00 0x31000000 0x00 0x50000>;
-> +			reg = <0x00 0x31000000 0x00 0x50000>;
->  			interrupts = <GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>, /* irq.0 */
->  				     <GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>; /* irq.0 */
->  			interrupt-names = "host", "peripheral";
-> @@ -613,7 +630,7 @@
->  
->  		usb1: usb@31100000 {
->  			compatible = "snps,dwc3";
-> -			reg =<0x00 0x31100000 0x00 0x50000>;
-> +			reg = <0x00 0x31100000 0x00 0x50000>;
->  			interrupts = <GIC_SPI 226 IRQ_TYPE_LEVEL_HIGH>, /* irq.0 */
->  				     <GIC_SPI 226 IRQ_TYPE_LEVEL_HIGH>; /* irq.0 */
->  			interrupt-names = "host", "peripheral";
-> @@ -718,6 +735,31 @@
->  		};
->  	};
->  
-> +	dss: dss@30200000 {
-> +		compatible = "ti,am625-dss";
-> +		reg = <0x00 0x30200000 0x00 0x1000>, /* common */
-> +		      <0x00 0x30202000 0x00 0x1000>, /* vidl1 */
-> +		      <0x00 0x30206000 0x00 0x1000>, /* vid */
-> +		      <0x00 0x30207000 0x00 0x1000>, /* ovr1 */
-> +		      <0x00 0x30208000 0x00 0x1000>, /* ovr2 */
-> +		      <0x00 0x3020a000 0x00 0x1000>, /* vp1: Used for OLDI */
-> +		      <0x00 0x3020b000 0x00 0x1000>; /* vp2: Used as DPI Out */
-> +		reg-names = "common", "vidl1", "vid",
-> +			    "ovr1", "ovr2", "vp1", "vp2";
-> +		power-domains = <&k3_pds 186 TI_SCI_PD_EXCLUSIVE>;
-> +		clocks = <&k3_clks 186 6>,
-> +			 <&dss_vp1_clk>,
-> +			 <&k3_clks 186 2>;
-> +		clock-names = "fck", "vp1", "vp2";
-> +		interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>;
-> +		status = "disabled";
-> +
-> +		dss_ports: ports {
-> +			#address-cells = <1>;
-> +			#size-cells = <0>;
-> +		};
-> +	};
-> +
->  	hwspinlock: spinlock@2a000000 {
->  		compatible = "ti,am64-hwspinlock";
->  		reg = <0x00 0x2a000000 0x00 0x1000>;
-> diff --git a/arch/arm/dts/k3-am62-mcu.dtsi b/arch/arm/dts/k3-am62-mcu.dtsi
-> index 19fc38157d94..80a3e1db26a9 100644
-> --- a/arch/arm/dts/k3-am62-mcu.dtsi
-> +++ b/arch/arm/dts/k3-am62-mcu.dtsi
-> @@ -147,4 +147,28 @@
->  		/* Tightly coupled to M4F */
->  		status = "reserved";
->  	};
-> +
-> +	mcu_mcan0: can@4e08000 {
-> +		compatible = "bosch,m_can";
-> +		reg = <0x00 0x4e08000 0x00 0x200>,
-> +		      <0x00 0x4e00000 0x00 0x8000>;
-> +		reg-names = "m_can", "message_ram";
-> +		power-domains = <&k3_pds 188 TI_SCI_PD_EXCLUSIVE>;
-> +		clocks = <&k3_clks 188 6>, <&k3_clks 188 1>;
-> +		clock-names = "hclk", "cclk";
-> +		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
-> +		status = "disabled";
-> +	};
-> +
-> +	mcu_mcan1: can@4e18000 {
-> +		compatible = "bosch,m_can";
-> +		reg = <0x00 0x4e18000 0x00 0x200>,
-> +		      <0x00 0x4e10000 0x00 0x8000>;
-> +		reg-names = "m_can", "message_ram";
-> +		power-domains = <&k3_pds 189 TI_SCI_PD_EXCLUSIVE>;
-> +		clocks = <&k3_clks 189 6>, <&k3_clks 189 1>;
-> +		clock-names = "hclk", "cclk";
-> +		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
-> +		status = "disabled";
-> +	};
->  };
-> diff --git a/arch/arm/dts/k3-am62-verdin-dev.dtsi b/arch/arm/dts/k3-am62-verdin-dev.dtsi
-> index 846caee7dfa4..6701cb8974bb 100644
-> --- a/arch/arm/dts/k3-am62-verdin-dev.dtsi
-> +++ b/arch/arm/dts/k3-am62-verdin-dev.dtsi
-> @@ -8,6 +8,42 @@
->   * https://www.toradex.com/products/carrier-board/verdin-development-board-kit
->   */
->  
-> +/ {
-> +	sound {
-> +		compatible = "simple-audio-card";
-> +		simple-audio-card,bitclock-master = <&codec_dai>;
-> +		simple-audio-card,format = "i2s";
-> +		simple-audio-card,frame-master = <&codec_dai>;
-> +		simple-audio-card,name = "verdin-nau8822";
-> +		simple-audio-card,routing =
-> +			"Headphones", "LHP",
-> +			"Headphones", "RHP",
-> +			"Speaker", "LSPK",
-> +			"Speaker", "RSPK",
-> +			"Line Out", "AUXOUT1",
-> +			"Line Out", "AUXOUT2",
-> +			"LAUX", "Line In",
-> +			"RAUX", "Line In",
-> +			"LMICP", "Mic In",
-> +			"RMICP", "Mic In";
-> +		simple-audio-card,widgets =
-> +			"Headphones", "Headphones",
-> +			"Line Out", "Line Out",
-> +			"Speaker", "Speaker",
-> +			"Microphone", "Mic In",
-> +			"Line", "Line In";
-> +
-> +		codec_dai: simple-audio-card,codec {
-> +			clocks = <&audio_refclk1>;
-> +			sound-dai = <&nau8822_1a>;
-> +		};
-> +
-> +		simple-audio-card,cpu {
-> +			sound-dai = <&mcasp0>;
-> +		};
-> +	};
-> +};
-> +
->  /* Verdin ETHs */
->  &cpsw3g {
->  	pinctrl-names = "default";
-> @@ -65,6 +101,15 @@
->  &main_i2c1 {
->  	status = "okay";
->  
-> +	/* Audio Codec */
-> +	nau8822_1a: audio-codec@1a {
-> +		compatible = "nuvoton,nau8822";
-> +		reg = <0x1a>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&pinctrl_i2s1_mclk>;
-> +		#sound-dai-cells = <0>;
-> +	};
-> +
->  	/* IO Expander */
->  	gpio_expander_21: gpio@21 {
->  		compatible = "nxp,pcal6416";
-> @@ -144,6 +189,11 @@
->  	status = "okay";
->  };
->  
-> +/* Verdin CAN_2 */
-> +&mcu_mcan0 {
-> +	status = "okay";
-> +};
-> +
->  /* Verdin UART_4 */
->  &mcu_uart0 {
->  	status = "okay";
-> diff --git a/arch/arm/dts/k3-am62-verdin.dtsi b/arch/arm/dts/k3-am62-verdin.dtsi
-> index 57dd061911ab..40992e7e4c30 100644
-> --- a/arch/arm/dts/k3-am62-verdin.dtsi
-> +++ b/arch/arm/dts/k3-am62-verdin.dtsi
-> @@ -19,6 +19,8 @@
->  	};
->  
->  	aliases {
-> +		can0 = &main_mcan0;
-> +		can1 = &mcu_mcan0;
->  		ethernet0 = &cpsw_port1;
->  		ethernet1 = &cpsw_port2;
->  		i2c0 = &main_i2c0;
-> @@ -732,6 +734,14 @@
->  		>;
->  	};
->  
-> +	/* Verdin CAN_2 */
-> +	pinctrl_mcu_mcan0: mcu-mcan0-default-pins {
-> +		pinctrl-single,pins = <
-> +			AM62X_MCU_IOPAD(0x0038, PIN_INPUT,  0) /* (B3) MCU_MCAN0_RX */ /* SODIMM 26 */
-> +			AM62X_MCU_IOPAD(0x0034, PIN_OUTPUT, 0) /* (D6) MCU_MCAN0_TX */ /* SODIMM 24 */
-> +		>;
-> +	};
-> +
->  	/* Verdin UART_4 - Reserved to Cortex-M4 */
->  	pinctrl_mcu_uart0: mcu-uart0-default-pins {
->  		pinctrl-single,pins = <
-> @@ -758,6 +768,11 @@
->  	};
->  };
->  
-> +/* VERDIN I2S_1_MCLK */
-> +&audio_refclk1 {
-> +	assigned-clock-rates = <25000000>;
-> +};
-> +
->  &cpsw3g {
->  	pinctrl-names = "default";
->  	pinctrl-0 = <&pinctrl_rgmii1>;
-> @@ -800,6 +815,26 @@
->  	};
->  };
->  
-> +&dss {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&pinctrl_parallel_rgb>;
-> +	status = "disabled";
-> +};
-> +
-> +&dss_ports {
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* VP2: DPI Output */
-> +	port@1 {
-> +		reg = <1>;
-> +
-> +		dpi_out: endpoint {
-> +			remote-endpoint = <&rgb_in>;
-> +		};
-> +	};
-> +};
-> +
->  /* Verdin PWM_1, PWM_2 */
->  &epwm0 {
->  	pinctrl-names = "default";
-> @@ -1036,6 +1071,7 @@
->  
->  				rgb_in: endpoint {
->  					data-lines = <18>;
-> +					remote-endpoint = <&dpi_out>;
->  				};
->  			};
->  
-> @@ -1238,8 +1274,6 @@
->  	status = "disabled";
->  };
->  
-> -/* Verdin CAN_2 - Reserved to Cortex-M4 */
-> -
->  /* Verdin SPI_1 */
->  &main_spi1 {
->  	pinctrl-names = "default";
-> @@ -1333,6 +1367,13 @@
->  		"";
->  };
->  
-> +/* Verdin CAN_2 */
-> +&mcu_mcan0 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&pinctrl_mcu_mcan0>;
-> +	status = "disabled";
-> +};
-> +
->  /* Verdin UART_4 - Cortex-M4 UART */
->  &mcu_uart0 {
->  	pinctrl-names = "default";
-> diff --git a/arch/arm/dts/k3-am62.dtsi b/arch/arm/dts/k3-am62.dtsi
-> index 5e72c445f37a..11f14eef2d44 100644
-> --- a/arch/arm/dts/k3-am62.dtsi
-> +++ b/arch/arm/dts/k3-am62.dtsi
-> @@ -102,6 +102,14 @@
->  		};
->  	};
->  
-> +	dss_vp1_clk: clock-divider-oldi {
-> +		compatible = "fixed-factor-clock";
-> +		clocks = <&k3_clks 186 0>;
-> +		#clock-cells = <0>;
-> +		clock-div = <7>;
-> +		clock-mult = <1>;
-> +	};
-> +
->  	#include "k3-am62-thermal.dtsi"
->  };
->  
-> diff --git a/arch/arm/dts/k3-am625-beagleplay.dts b/arch/arm/dts/k3-am625-beagleplay.dts
-> index 589bf998bc52..7cfdf562b53b 100644
-> --- a/arch/arm/dts/k3-am625-beagleplay.dts
-> +++ b/arch/arm/dts/k3-am625-beagleplay.dts
-> @@ -14,7 +14,7 @@
->  #include "k3-am625.dtsi"
->  
->  / {
-> -	compatible =  "beagle,am625-beagleplay", "ti,am625";
-> +	compatible = "beagle,am625-beagleplay", "ti,am625";
->  	model = "BeagleBoard.org BeaglePlay";
->  
->  	aliases {
-> @@ -192,6 +192,34 @@
->  
->  	};
->  
-> +	hdmi0: connector-hdmi {
-> +		compatible = "hdmi-connector";
-> +		label = "hdmi";
-> +		type = "a";
-> +		port {
-> +			hdmi_connector_in: endpoint {
-> +				remote-endpoint = <&it66121_out>;
-> +			};
-> +		};
-> +	};
-> +
-> +	sound {
-> +		compatible = "simple-audio-card";
-> +		simple-audio-card,name = "it66121 HDMI";
-> +		simple-audio-card,format = "i2s";
-> +		simple-audio-card,bitclock-master = <&hdmi_dailink_master>;
-> +		simple-audio-card,frame-master = <&hdmi_dailink_master>;
-> +
-> +		hdmi_dailink_master: simple-audio-card,cpu {
-> +			sound-dai = <&mcasp1>;
-> +			system-clock-direction-out;
-> +		};
-> +
-> +		simple-audio-card,codec {
-> +			sound-dai = <&it66121>;
-> +		};
-> +	};
-> +
->  	/* Workaround for errata i2329 - just use mdio bitbang */
->  	mdio0: mdio {
->  		compatible = "virtual,mdio-gpio";
-> @@ -422,6 +450,57 @@
->  			AM62X_IOPAD(0x01f4, PIN_INPUT_PULLUP, 0) /* (D16) EXTINTn */
->  		>;
->  	};
-> +
-> +	hdmi_gpio_pins_default: hdmi-gpio-default-pins {
-> +		pinctrl-single,pins = <
-> +			AM62X_IOPAD(0x0094, PIN_INPUT_PULLUP | PIN_DEBOUNCE_CONF6, 7) /* (N20) GPMC0_BE1n.GPIO0_36 */
-> +			AM62X_IOPAD(0x0054, PIN_OUTPUT_PULLUP, 7) /* (P21) GPMC0_AD6.GPIO0_21 */
-> +		>;
-> +	};
-> +
-> +	mcasp_hdmi_pins_default: mcasp-hdmi-default-pins {
-> +		pinctrl-single,pins = <
-> +			AM62X_IOPAD(0x0090, PIN_INPUT, 2) /* (M24) GPMC0_BE0n_CLE.MCASP1_ACLKX */
-> +			AM62X_IOPAD(0x0098, PIN_INPUT, 2) /* (U23) GPMC0_WAIT0.MCASP1_AFSX */
-> +			AM62X_IOPAD(0x008c, PIN_OUTPUT, 2) /* (L25) GPMC0_WEn.MCASP1_AXR0 */
-> +			AM62X_IOPAD(0x0088, PIN_INPUT, 2) /* (L24) GPMC0_OEn_REn.MCASP1_AXR1 */
-> +			AM62X_IOPAD(0x0084, PIN_INPUT, 2) /* (L23) GPMC0_ADVn_ALE.MCASP1_AXR2 */
-> +			AM62X_IOPAD(0x007c, PIN_INPUT, 2) /* (P25) GPMC0_CLK.MCASP1_AXR3 */
-> +		>;
-> +	};
-> +
-> +	dss0_pins_default: dss0-default-pins {
-> +		pinctrl-single,pins = <
-> +			AM62X_IOPAD(0x0100, PIN_OUTPUT, 0) /* (AC25) VOUT0_VSYNC */
-> +			AM62X_IOPAD(0x00f8, PIN_OUTPUT, 0) /* (AB24) VOUT0_HSYNC */
-> +			AM62X_IOPAD(0x0104, PIN_OUTPUT, 0) /* (AC24) VOUT0_PCLK */
-> +			AM62X_IOPAD(0x00fc, PIN_OUTPUT, 0) /* (Y20) VOUT0_DE */
-> +			AM62X_IOPAD(0x00b8, PIN_OUTPUT, 0) /* (U22) VOUT0_DATA0 */
-> +			AM62X_IOPAD(0x00bc, PIN_OUTPUT, 0) /* (V24) VOUT0_DATA1 */
-> +			AM62X_IOPAD(0x00c0, PIN_OUTPUT, 0) /* (W25) VOUT0_DATA2 */
-> +			AM62X_IOPAD(0x00c4, PIN_OUTPUT, 0) /* (W24) VOUT0_DATA3 */
-> +			AM62X_IOPAD(0x00c8, PIN_OUTPUT, 0) /* (Y25) VOUT0_DATA4 */
-> +			AM62X_IOPAD(0x00cc, PIN_OUTPUT, 0) /* (Y24) VOUT0_DATA5 */
-> +			AM62X_IOPAD(0x00d0, PIN_OUTPUT, 0) /* (Y23) VOUT0_DATA6 */
-> +			AM62X_IOPAD(0x00d4, PIN_OUTPUT, 0) /* (AA25) VOUT0_DATA7 */
-> +			AM62X_IOPAD(0x00d8, PIN_OUTPUT, 0) /* (V21) VOUT0_DATA8 */
-> +			AM62X_IOPAD(0x00dc, PIN_OUTPUT, 0) /* (W21) VOUT0_DATA9 */
-> +			AM62X_IOPAD(0x00e0, PIN_OUTPUT, 0) /* (V20) VOUT0_DATA10 */
-> +			AM62X_IOPAD(0x00e4, PIN_OUTPUT, 0) /* (AA23) VOUT0_DATA11 */
-> +			AM62X_IOPAD(0x00e8, PIN_OUTPUT, 0) /* (AB25) VOUT0_DATA12 */
-> +			AM62X_IOPAD(0x00ec, PIN_OUTPUT, 0) /* (AA24) VOUT0_DATA13 */
-> +			AM62X_IOPAD(0x00f0, PIN_OUTPUT, 0) /* (Y22) VOUT0_DATA14 */
-> +			AM62X_IOPAD(0x00f4, PIN_OUTPUT, 0) /* (AA21) VOUT0_DATA15 */
-> +			AM62X_IOPAD(0x005c, PIN_OUTPUT, 1) /* (R24) GPMC0_AD8.VOUT0_DATA16 */
-> +			AM62X_IOPAD(0x0060, PIN_OUTPUT, 1) /* (R25) GPMC0_AD9.VOUT0_DATA17 */
-> +			AM62X_IOPAD(0x0064, PIN_OUTPUT, 1) /* (T25) GPMC0_AD10.VOUT0_DATA18 */
-> +			AM62X_IOPAD(0x0068, PIN_OUTPUT, 1) /* (R21) GPMC0_AD11.VOUT0_DATA19 */
-> +			AM62X_IOPAD(0x006c, PIN_OUTPUT, 1) /* (T22) GPMC0_AD12.VOUT0_DATA20 */
-> +			AM62X_IOPAD(0x0070, PIN_OUTPUT, 1) /* (T24) GPMC0_AD13.VOUT0_DATA21 */
-> +			AM62X_IOPAD(0x0074, PIN_OUTPUT, 1) /* (U25) GPMC0_AD14.VOUT0_DATA22 */
-> +			AM62X_IOPAD(0x0078, PIN_OUTPUT, 1) /* (U24) GPMC0_AD15.VOUT0_DATA23 */
-> +		>;
-> +	};
->  };
->  
->  &mcu_pmx0 {
-> @@ -432,7 +511,7 @@
->  		>;
->  	};
->  
-> -	gbe_pmx_obsclk: gbe-pmx-clk-default {
-> +	gbe_pmx_obsclk: gbe-pmx-obsclk-default-pins {
->  		pinctrl-single,pins = <
->  			AM62X_MCU_IOPAD(0x0004, PIN_OUTPUT, 1) /* (B8) MCU_SPI0_CS1.MCU_OBSCLK0 */
->  		>;
-> @@ -670,6 +749,42 @@
->  	pinctrl-0 = <&i2c2_1v8_pins_default>;
->  	clock-frequency = <100000>;
->  	status = "okay";
-> +
-> +	it66121: bridge-hdmi@4c {
-> +		compatible = "ite,it66121";
-> +		reg = <0x4c>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&hdmi_gpio_pins_default>;
-> +		vcn33-supply = <&vdd_3v3>;
-> +		vcn18-supply = <&buck2_reg>;
-> +		vrf12-supply = <&buck3_reg>;
-> +		reset-gpios = <&main_gpio0 21 GPIO_ACTIVE_LOW>;
-> +		interrupt-parent = <&main_gpio0>;
-> +		interrupts = <36 IRQ_TYPE_EDGE_FALLING>;
-> +		#sound-dai-cells = <0>;
-> +
-> +		ports {
-> +			#address-cells = <1>;
-> +			#size-cells = <0>;
-> +
-> +			port@0 {
-> +				reg = <0>;
-> +
-> +				it66121_in: endpoint {
-> +					bus-width = <24>;
-> +					remote-endpoint = <&dpi1_out>;
-> +				};
-> +			};
-> +
-> +			port@1 {
-> +				reg = <1>;
-> +
-> +				it66121_out: endpoint {
-> +					remote-endpoint = <&hdmi_connector_in>;
-> +				};
-> +			};
-> +		};
-> +	};
->  };
->  
->  &main_i2c3 {
-> @@ -756,3 +871,38 @@
->  	pinctrl-0 = <&wifi_debug_uart_pins_default>;
->  	status = "okay";
->  };
-> +
-> +&dss {
-> +	status = "okay";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&dss0_pins_default>;
-> +};
-> +
-> +&dss_ports {
-> +	/* VP2: DPI Output */
-> +	port@1 {
-> +		reg = <1>;
-> +
-> +		dpi1_out: endpoint {
-> +			remote-endpoint = <&it66121_in>;
-> +		};
-> +	};
-> +};
-> +
-> +&mcasp1 {
-> +	status = "okay";
-> +	#sound-dai-cells = <0>;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&mcasp_hdmi_pins_default>;
-> +	auxclk-fs-ratio = <2177>;
-> +	op-mode = <0>;          /* MCASP_IIS_MODE */
-> +	tdm-slots = <2>;
-> +	serial-dir = <  /* 0: INACTIVE, 1: TX, 2: RX */
-> +	       1 0 0 0
-> +	       0 0 0 0
-> +	       0 0 0 0
-> +	       0 0 0 0
-> +	>;
-> +	tx-num-evt = <32>;
-> +	rx-num-evt = <32>;
-> +};
-> diff --git a/arch/arm/dts/k3-am625-sk.dts b/arch/arm/dts/k3-am625-sk.dts
-> index 3f9ef4053aa6..7c98c1b855d1 100644
-> --- a/arch/arm/dts/k3-am625-sk.dts
-> +++ b/arch/arm/dts/k3-am625-sk.dts
-> @@ -212,7 +212,7 @@
->  	pinctrl-names = "default";
->  	pinctrl-0 = <&ospi0_pins_default>;
->  
-> -	flash@0{
-> +	flash@0 {
->  		compatible = "jedec,spi-nor";
->  		reg = <0x0>;
->  		spi-tx-bus-width = <8>;
-> -- 
-> 2.40.0
