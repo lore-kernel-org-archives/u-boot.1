@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B33E8EE3F0C
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 19:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20E90EE3F0C
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 19:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D4A86E87;
-	Tue, 12 Sep 2023 21:27:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CDFD986E1F;
+	Tue, 12 Sep 2023 21:27:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LiPmJXVs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FqqtGsHT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7BC986D3E; Tue, 12 Sep 2023 21:27:06 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 510C486F63; Tue, 12 Sep 2023 21:27:09 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CF1086D59
+ by phobos.denx.de (Postfix) with ESMTPS id 8D43686E2D
  for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 21:27:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so345542a12.1
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5007abb15e9so10344226e87.0
  for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 12:27:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694546823; x=1695151623; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694546824; x=1695151624; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gHHTgULNX26zp/i0NrtV4FQj7i38TzwSX3WISqKiX7g=;
- b=LiPmJXVstcIxN+B6X7k47QyA3paGsf0tlYMSEYmrEAxi9OZpS/FbgA9nngJyc6pOGq
- gRaVY40uzIyHG2BHV8rAd88Dg25+e3autEdjl8dRyDgGVuMkqdmZgi7kbtUfPrLhv7cE
- hUufYyBBftbRNvwy1/zwtWtor9PCbQqg5T2gw=
+ bh=FC0Ais9AX2a85o4hH2ofgt8F2OM6mrN7ZLXJFAx0N2o=;
+ b=FqqtGsHTQkxvnoJOUT0HThPgiMELyyWixZZCoYB8JIHHrqqkG6uyAqo58Djlb0FFSH
+ sSXtmkOxMaObByhGtrPwz2H31ptRC0i0Psz+iYpzcxvDbSWIlIW5ehiq4fp4RPCN+SkJ
+ mYC884cS33qTeXoJEa9nDIGnmq2HqlPqW7MuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694546823; x=1695151623;
+ d=1e100.net; s=20230601; t=1694546824; x=1695151624;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gHHTgULNX26zp/i0NrtV4FQj7i38TzwSX3WISqKiX7g=;
- b=RQuX4QKhPlPPdhZj/M093/b70q2RnvlHUOuF1+3GZxhlOZpeVlfhNsonAyFy/Hdz1l
- YZOTOq1uJv7KAXMZ4grOJ4tzYohFarPX8IuDPKZKzpwhN9qj2pn/SHcbf8Qqu9w+TivE
- xW00m+fyPhJZTho5DmhyZPUFe2gshvvoKIcN668xuJ3hqYMnM7upusKyS3Axpvq43R7R
- EEl7IMMwPrPbWGiFG5aC4xVs5d3L/R5kQ/xXk1RUcET+kEonjOCZGJ28kA85dpSeWMvh
- ezp4eDC34Jg1+2H5gUf0m2BDxDvhY6HxNlIvBTuGl7u5EmF/+n/jc1kYAIFKvWK/NP1k
- TQCA==
-X-Gm-Message-State: AOJu0YyIMBKt2Q07jyArvUpzrSlZGg2ez8/ODboar/rKmiGExMB2J1wb
- THCmiJ1y3dWjXWXRYnSw8sD4+uMkb50Bg8GSHvvMXg==
-X-Google-Smtp-Source: AGHT+IGWxhnu8uFs0EMeswoCGUPIdRH1/ul/0wyx9HBe1MH8+ymoM9kqQwV2mtcUAIKl1axjbmG4BgCU5ymReunYIp0=
-X-Received: by 2002:aa7:c748:0:b0:523:c36e:ec8b with SMTP id
- c8-20020aa7c748000000b00523c36eec8bmr873861eds.9.1694546823503; Tue, 12 Sep
+ bh=FC0Ais9AX2a85o4hH2ofgt8F2OM6mrN7ZLXJFAx0N2o=;
+ b=JrOx8aAFFrrWO/C1dihLrjwV8t1O0otd5spX7PHXM8jEeKSfe+e4SEE8eGkTcX1Ttg
+ 7BFoW2lfJs0Y7xYEkcmAa5/eThx59owPabKfOdSuSRGaRcTFqSw1844BGHAHCJG2dnVc
+ opL+uaXOsFDEQajOPeg6yri18EgsX+gpgy9WS9PbsjuBUFPcj0iv4hqA2308Z3Mtw3HT
+ /wCYJDA79o4Yw1QjZ7tJvkAL6wif1hhoV2hmvHvCsTFGOj3Mp/V/2uk5DSK7Gl0RIahD
+ uNUI4ij0RM2lHkGhenv6jTDkxRVcTYGKcX9tinwqt/sHEb7EiZxn3HD6+L9LzRW5BUZR
+ FRZw==
+X-Gm-Message-State: AOJu0YzJ9ed399V3yqfk+jl4lNDm8KV3i/pHKwgVgQduW+tVBbGItHZX
+ Fhxi1RbvNmxqIjC02dOBsdDlt0r6JcRXe2oMiW9iQQ==
+X-Google-Smtp-Source: AGHT+IGsFSHuz+VayndxwTc7TDQd3RGdWvy1k2qVVimI10lf2x6dwVBfL8Yrzjmvil7JntQGvj62T7dh+OJ64VcyWgw=
+X-Received: by 2002:a19:ca14:0:b0:500:7fc7:852f with SMTP id
+ a20-20020a19ca14000000b005007fc7852fmr326809lfg.39.1694546823534; Tue, 12 Sep
  2023 12:27:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1694435541.git.michal.simek@amd.com>
- <ffe462a5a535018833443821880becf3bb366564.1694435541.git.michal.simek@amd.com>
-In-Reply-To: <ffe462a5a535018833443821880becf3bb366564.1694435541.git.michal.simek@amd.com>
+ <734d41ddc4b5711fd93d3292d7049df3f11472e2.1694435541.git.michal.simek@amd.com>
+In-Reply-To: <734d41ddc4b5711fd93d3292d7049df3f11472e2.1694435541.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 12 Sep 2023 13:26:49 -0600
-Message-ID: <CAPnjgZ2dPj2RJh5vXQQ_6AkauPDzG65TdqYMz16RPXqVmYEuOw@mail.gmail.com>
-Subject: Re: [PATCH 3/3] trace: Fix alignment logic in flyrecord header
+Date: Tue, 12 Sep 2023 13:26:47 -0600
+Message-ID: <CAPnjgZ0bCzF+q8xpo0-pRBQrHMT50tV46f6369-Wjo4OJwm6Uw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] trace: Use 64bit variable for start and len
 To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, git@xilinx.com, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -85,91 +85,35 @@ Hi Michal,
 
 On Mon, 11 Sept 2023 at 06:32, Michal Simek <michal.simek@amd.com> wrote:
 >
-> Current alignment which is using 16 bytes is not correct in connection to
-> trace_clocks description and it's length.
-> That's why use start_addr variable and record proper size based on used
-> entries.
+> tputq() requires variables to have 64bit width that's why make them 64bit
+> to clean alignment requirement.
 >
-> Fixes: be16fc81b2ed ("trace: Update proftool to use new binary format").
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 >
->  tools/proftool.c | 31 +++++++++++++++++++++++++++++--
->  1 file changed, 29 insertions(+), 2 deletions(-)
->
+>  tools/proftool.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-See my comment below
+I would have thought that 'unsigned long' is enough on a 64-bit
+machines? Are you running on 32-bit?
 
+>
 > diff --git a/tools/proftool.c b/tools/proftool.c
-> index 7c95a94482fc..f79128169e68 100644
+> index 101bcb63334e..869a2a32c510 100644
 > --- a/tools/proftool.c
 > +++ b/tools/proftool.c
-> @@ -1493,19 +1493,43 @@ static int write_pages(struct twriter *tw, enum out_format_t out_format,
+> @@ -1493,7 +1493,8 @@ static int write_pages(struct twriter *tw, enum out_format_t out_format,
 >  static int write_flyrecord(struct twriter *tw, enum out_format_t out_format,
 >                            int *missing_countp, int *skip_countp)
 >  {
-> -       unsigned long long start, len;
-> +       unsigned long long start, start_addr, len;
->         int ret;
+> -       int start, ret, len;
+> +       unsigned long long start, len;
+> +       int ret;
 >         FILE *fout = tw->fout;
 >         char str[200];
 >
-> +       /* Record start pointer */
-> +       start_addr = tw->ptr;
-
-I'd prefer start_ofs since it is not an address, is it?
-
-> +       debug("Start of flyrecord header at: 0x%llx\n", start_addr);
-> +
->         tw->ptr += fprintf(fout, "flyrecord%c", 0);
->
-> +       /* flyrecord\0 - allocated 10 bytes */
-> +       start_addr += 10;
-> +
-> +       /*
-> +        * 8 bytes that are a 64-bit word containing the offset into the file
-> +        * that holds the data for the CPU.
-> +        *
-> +        * 8 bytes that are a 64-bit word containing the size of the CPU
-> +        * data at that offset.
-> +        */
-> +       start_addr += 16;
-> +
->         snprintf(str, sizeof(str),
->                  "[local] global counter uptime perf mono mono_raw boot x86-tsc\n");
->         len = strlen(str);
->
-> +       /* trace clock length - 8 bytes */
-> +       start_addr += 8;
-> +       /* trace clock data */
-> +       start_addr += len;
-> +
-> +       debug("Calculated flyrecord header end at: 0x%llx, trace clock len: 0x%llx\n",
-> +             start_addr, len);
-> +
->         /* trace data */
-> -       start = ALIGN(tw->ptr + 16, TRACE_PAGE_SIZE);
-> +       start = ALIGN(start_addr, TRACE_PAGE_SIZE);
-
-Would it be possible to store the old tw->ptr value at the top of this
-function (e.g. in tw_base) and calculate start using (tw->ptr -
-tw_base)? It seems that there are two parallel trackers here.
-
->         tw->ptr += tputq(fout, start);
->
->         /* use a placeholder for the size */
-> @@ -1517,6 +1541,9 @@ static int write_flyrecord(struct twriter *tw, enum out_format_t out_format,
->         tw->ptr += tputq(fout, len);
->         tw->ptr += tputs(fout, str);
->
-> +       debug("End of flyrecord header at: 0x%x, offset: 0x%llx\n",
-> +             tw->ptr, start);
-> +
->         debug("trace text base %lx, map file %lx\n", text_base, text_offset);
->
->         ret = write_pages(tw, out_format, missing_countp, skip_countp);
 > --
 > 2.36.1
 >
