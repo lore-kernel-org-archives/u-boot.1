@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4696CA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 14:41:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E45AECA0EED
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 14:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F293386E41;
-	Tue, 12 Sep 2023 16:41:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 53F5F86E70;
+	Tue, 12 Sep 2023 16:41:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cmLSiOmB";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="OIaKcgjr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C99286CC0; Tue, 12 Sep 2023 16:41:24 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 9285486CC0; Tue, 12 Sep 2023 16:41:34 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE90186E41
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 16:41:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C39B86E73
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 16:41:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5007c8308c3so9550120e87.0
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 07:41:21 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-52bcd4db4c0so12335620a12.0
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 07:41:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1694529681; x=1695134481; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1694529689; x=1695134489; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bR7r4o/LL8wmEfFTnFBIjVj4qqyOmRCej7kZxH+l9U4=;
- b=cmLSiOmB4Dlq6jvvg0KEBu8qE/zm9vH9+NlKHBwVJy45R7xfE4yvKm2B8bfH3v7YJf
- wtZ8a+8/BncUIL14NbL9Of3Bt/cKsSUnWEtlCwgOgjTqoHrpIIWjfE16nC2d9yyf5KcA
- wvbOQL4nRHycCtYGvq4FabmD+5dLnDcS8nyq8hOniu8Ts1jGmMqJiG+sT66NcRY3+vjJ
- 4IQHi90yxS8n8iK+HDn8nttWf56PsTZ8lDxfXMnTE3oGiRYzwE3sPOgSkc5GaPNxAC86
- arTJ+yIEE19p5wzJxtvRrJt0y0DDHXBidsZSQBPA+TQ2eAeAuBNoZHU5aOX7lbM0RRla
- RsOw==
+ bh=LAkOngPf48B4PBhUiAYbgegoVzNL6sCv/HGKlrQNq84=;
+ b=OIaKcgjrmCGtCbJw9KfOESPHTrCfk9fFRA9i4SlvPt93OCb0Zpgo/bPUCHji0hjQsO
+ HhBQK/RzUtb7oNozmF0k/qkh0lsmCGLK7ddJMlSx/IlU7uZbPAEd6UNXxP18yvqPM+iw
+ e1uazQn/15wLQLPnkcrmfgjTSE8BZVtGVB8XQzsveBvdrujvaNATpyGv00uv0Cp3VpG1
+ tBrIvLsp54z/TKlm8S4otAkvCO6odCiiQY/A0hPeAURRXRjl65KHfBOGXs/eEGtKPIo1
+ 3svSxfdaPGoOXhVYXdghmMNNxPgL8udwVe1ktOVoDDj6mTtnF5md25QnH+nSF05nSt9A
+ TBvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694529681; x=1695134481;
+ d=1e100.net; s=20230601; t=1694529689; x=1695134489;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bR7r4o/LL8wmEfFTnFBIjVj4qqyOmRCej7kZxH+l9U4=;
- b=Tcjl0pNEieiV1z9zwv8X4Gv7GTxfkSJXIYKxMjp0GjmN5Azku3awIgQ7BXmZ6mRHqy
- 6iR8lL+wehDAox/tBq/JpXGUJHdG0wkfEHvxNx3zCmZPt+OWy7AreuWnnvC9b2YVGwnL
- UsaH4HV32Sh4NWJK/8b0W6442DpjrpZz0/lEhmLsIK7YKj3WDfZVGAO7toIFm2PGPVXd
- 3o3Gyp3VPZDW/jPhMbLIjN80fG4cxlb+6VPtiNjSBuCzcT7J9gwwNFnxJpjABfQF/8SY
- kgikonoWFJOx9uEOxcQSl8yxR3HjzscoFr++XaCN4Q8C2d9SaIZWDxhBsjP9Rxzpyoq6
- 4htQ==
-X-Gm-Message-State: AOJu0YyFfdnAa41XgSse5Ys5MEN396ciCRNtZudPTQyFFwxu1IvfFSVk
- DfXCsxpF2zdq/IdF/a0CZdUKiN5cYN884XiTWhqgbXoq915IL799XGUYSw==
-X-Google-Smtp-Source: AGHT+IGKvu24gJnZ4aHTpNdVUFPYZ18BndCXXv1kk5bheDxqs8fZgO6bTgRT3yICvLG3DLFSym5nfSTgfCBIiAHnPcE=
-X-Received: by 2002:a05:6512:398f:b0:4fb:7559:aea3 with SMTP id
- j15-20020a056512398f00b004fb7559aea3mr12456145lfu.39.1694529680815; Tue, 12
- Sep 2023 07:41:20 -0700 (PDT)
+ bh=LAkOngPf48B4PBhUiAYbgegoVzNL6sCv/HGKlrQNq84=;
+ b=LmF7uKyvMlaP6u5nIHRAnlQ9opz6qZowDz4HloMVw94+GaueFf/axeygLugg7z0UzZ
+ kmUFy1EuyZQDYep6zqZOUd9711Te7ah4ebVAhfa4s5ZReEFYzULhl9jaQCSShEW6nTUx
+ 73QrNZ9PiQmDX36LCdCYh8Ih61NKeVYosO05Wr+HQgNUvh4GEN5zEJC7Eu2OMcOZGbsa
+ di/lDoFLqQguVZZ354pViDsCMBVEwBWIFrBw3peyu7KTb8c3AgFJj06ZtLa1e6juXJR5
+ znPKw7qrUqnv5vM9oR3LnXQ6KbBCMXBoVSJO9gmvVJoXUc/FxTJBpyfzYpSK1JlKMD7Z
+ +u/g==
+X-Gm-Message-State: AOJu0Yyi3omXPxWF/Nk0eNoB+CH6HWw+Zd5CJ/Gudq0PcJBLw7eAx/EA
+ IPdx0SlXFHnZ/WUpaXG78hDQ7m/NYZ5NPu9Hq7ZlSA==
+X-Google-Smtp-Source: AGHT+IHTuRV5mus+s2c8BwZfNm8vLnatvHNBQN+HNxLfZ4P66hbTZ9pJsDl1FVF8fF776YmzJGI+sL/BPIqesbFXlpo=
+X-Received: by 2002:aa7:d992:0:b0:523:3e27:caa7 with SMTP id
+ u18-20020aa7d992000000b005233e27caa7mr4165490eds.20.1694529689514; Tue, 12
+ Sep 2023 07:41:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <b2dd17c4-2da7-4785-aae6-6a9568f82fc9@moroto.mountain>
- <CAPnjgZ2-O1NOEpAZKa0zZhG9qEyMdJ+Do644MTrZXKRrbMDcoA@mail.gmail.com>
- <359d53d7-1abc-4d17-88c2-b208d7cfda18@kadam.mountain>
- <CAPnjgZ2YzOKwUkOJs5x7kAQwhKbJu_ef2ryG4q8LALYeUuziAA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2YzOKwUkOJs5x7kAQwhKbJu_ef2ryG4q8LALYeUuziAA@mail.gmail.com>
+References: <20230906-apple_t6022_m2_ultra-v1-1-7d28623285bc@jannau.net>
+ <CAPnjgZ0aDxNsqKzWcTDOq++4vC4j_VRQNqC0=LiL3As0d0H7Bg@mail.gmail.com>
+ <87r0n4foeq.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87r0n4foeq.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@google.com>
-Date: Tue, 12 Sep 2023 08:41:03 -0600
-Message-ID: <CAPnjgZ1Ggr_6m-4=s++jH_4ESzq4J_8E1fkvSz5skaxWh2ZSAw@mail.gmail.com>
-Subject: Re: [PATCH] addrmap: Fix off by one in addrmap_set_entry()
-To: Dan Carpenter <dan.carpenter@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
- Kumar Gala <galak@kernel.crashing.org>
-Cc: u-boot@lists.denx.de
+Date: Tue, 12 Sep 2023 08:41:10 -0600
+Message-ID: <CAPnjgZ3D9Q_tSR1hvMLDr9mE-2WzXs2yP6TgVg+3nF1PXVci=A@mail.gmail.com>
+Subject: Re: [PATCH] arm: apple: Add initial Apple M2 Ultra support
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: j@jannau.net, kettenis@openbsd.org, trini@konsulko.com, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,52 +86,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Jul 2023 at 19:51, Simon Glass <sjg@google.com> wrote:
->
-> Hi Dan,
->
-> On Thu, 27 Jul 2023 at 04:56, Dan Carpenter <dan.carpenter@linaro.org> wrote:
-> >
-> > On Wed, Jul 26, 2023 at 06:49:44PM -0600, Simon Glass wrote:
-> > > Hi Dan,
-> > >
-> > > On Tue, 25 Jul 2023 at 09:40, Dan Carpenter <dan.carpenter@linaro.org> wrote:
-> > > >
-> > > > The > comparison needs to be changed to >= to prevent an out of bounds
-> > > > write on th next line.
-> > > >
-> > > > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> > > > ---
-> > > >  lib/addr_map.c | 2 +-
-> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/lib/addr_map.c b/lib/addr_map.c
-> > > > index 9b3e0a544e47..86e932e4b561 100644
-> > > > --- a/lib/addr_map.c
-> > > > +++ b/lib/addr_map.c
-> > > > @@ -59,7 +59,7 @@ void *addrmap_phys_to_virt(phys_addr_t paddr)
-> > > >  void addrmap_set_entry(unsigned long vaddr, phys_addr_t paddr,
-> > > >                         phys_size_t size, int idx)
-> > > >  {
-> > > > -       if (idx > CONFIG_SYS_NUM_ADDR_MAP)
-> > > > +       if (idx >= CONFIG_SYS_NUM_ADDR_MAP)
-> > > >                 return;
-> > >
-> > > It looks like this function should return an error.
-> > >
-> >
-> > If we hit this error path there probably isn't a reasonable way to
-> > recover.  Maybe we could add a WARN()?
->
-> When we get an error we should report it. For leaf functions like
-> this, WARN adds to code size for a case that should not happen. The
-> caller will need to check the error and fail. The function should
-> always have had an error-return code, by the look of it. If we adopt
-> the approach of warning instead of returning error codes,
->
-> +Bin Meng
-> +Kumar Gala
+Hi Mark,
 
-Since this is a fix, separate from the poor API:
+On Mon, 11 Sept 2023 at 14:25, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > From: Simon Glass <sjg@google.com>
+> > Date: Sun, 10 Sep 2023 16:36:48 -0600
+> >
+> > Hi,
+> >
+> > On Wed, 6 Sept 2023 at 15:50, Janne Grunau <j@jannau.net> wrote:
+> > >
+> > > Apple's M2 Ultra SoC are somewhat similar to the M1 Ultra but needs
+> > > a tweaked memory map as the M2 Pro/Max SoCs.  USB, NVMe, UART, WDT
+> > > and PCIe are working with the existing drivers.
+> > >
+> > > Signed-off-by: Janne Grunau <j@jannau.net>
+> > > ---
+> > >  arch/arm/mach-apple/board.c | 183 ++++++++++++++++++++++++++++++++++++++++++++
+> > >  1 file changed, 183 insertions(+)
+> > >
+> > > diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> > > index d50194811843..47393babbc62 100644
+> > > --- a/arch/arm/mach-apple/board.c
+> > > +++ b/arch/arm/mach-apple/board.c
+> > > @@ -444,6 +444,187 @@ static struct mm_region t6020_mem_map[] = {
+> > >         }
+> > >  };
+> > >
+> > > +/* Apple M2 Ultra */
+> > > +
+> > > +static struct mm_region t6022_mem_map[] = {
+> > > +       {
+> > > +               /* I/O */
+> > > +               .virt = 0x280000000,
+> > > +               .phys = 0x280000000,
+> > > +               .size = SZ_1G,
+> > > +               .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > > +                        PTE_BLOCK_NON_SHARE |
+> > > +                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > > +       }, {
+> >
+> > Is there no devicetree binding for this information?
+>
+> Not directly.  The device tree does contain the addresses of the
+> devices of course.  But what we want here is a memory map that uses a
+> few big ranges that cover all the devices in the device tree rather
+> than lots of small ranges that cover the individual devices.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+OK I see.
+
+>
+> But yes, it sucks that every time Apple produces a new SoC we need to
+> add another memory map.
+
+Regards,
+Simon
