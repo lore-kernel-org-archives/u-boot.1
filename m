@@ -4,65 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73C43EE3F28
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 20:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51793EE3F37
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 21:35:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A19AE86CE8;
-	Tue, 12 Sep 2023 22:06:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 0E4B586D0A;
+	Tue, 12 Sep 2023 23:35:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="E3L3UPjt";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="nNN5IgA8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CB2D86E58; Tue, 12 Sep 2023 22:06:23 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E13BF86CE8
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 22:06:20 +0200 (CEST)
+ id 6C49286E58; Tue, 12 Sep 2023 23:35:09 +0200 (CEST)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id BB5AE86BDC
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 23:35:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: d65143f4-51a7-11ee-a194-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id d65143f4-51a7-11ee-a194-005056999439;
- Tue, 12 Sep 2023 22:06:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=rlkN4MCqqTsr185qgX09cPfZ7fxZoCwFPMVGpcXBQ14=;
- b=E3L3UPjtETyiQZawV+r9wK7kHNzDx2UgBFOeUQpEiVVWwx+DldlEEb8EBEmkBJL27u4MlxR3ossVW
- fvuNDkTKAxwZ5LtuKLXIVhEKMN8U+EIHz0ZprIHNhnnoOws+vwgdJBdiPok/DAYY6IxT+FbD7Adv9d
- t7Us5jaolFpruB5lZHmLgL/Cv/cnJUIkqkOp+oXAm+LoLIMqV+su7LpyKiNlBT501UTOCJYtC3+AFJ
- lblqHBTCOW93PVr+IVKotsQ2YOn2lRD1qK3Rp6zJyuqUMsXW6qp6izvSaWwj6sF6dGoWC2K8YTQmcP
- RupR0bICNEKAUpFVPISIp+Rd2U/ZkVg==
-X-KPN-MID: 33|SQe4nUJiVwbDy/RyujKOhuO01H1SQdx9kIyy2k/KR4BbHExLxx5MjLOTj5k3kno
- VfilhFtaFszl/2jhb2eE2zQ==
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|5Cx1zOmYQjWf1YCDpHeFXAXCwSR5TmdhZ6+JHkS0D2pb6qWELt8I7HNrlp88vrX
- auOLDkJK9jrqYqDev6pyb0Q==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id d684528b-51a7-11ee-ad2d-005056998788;
- Tue, 12 Sep 2023 22:06:20 +0200 (CEST)
-Date: Tue, 12 Sep 2023 22:06:19 +0200
-Message-Id: <87il8ff96s.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: kettenis@openbsd.org, u-boot@lists.denx.de, xypron.glpk@gmx.de
-In-Reply-To: <CAPnjgZ1zta2DsTAUwHmxY8QFfPF0BFo4a6_v_J9nnVuCVBru=w@mail.gmail.com>
- (message from Simon Glass on Sun, 10 Sep 2023 13:13:16 -0600)
-Subject: Re: [PATCH v2] bootstd: Make efi_mgr bootmeth work for non-sandbox
- setups
-References: <20230903204000.96999-1-kettenis@openbsd.org>
- <CAPnjgZ2D6Fq5WnSxjxD2fzCZkZB0yDAk7mOda7bTuUf-KZLmhA@mail.gmail.com>
- <87bkeegmgc.fsf@bloch.sibelius.xs4all.nl>
- <CAPnjgZ1R8c2qCaraQavRr+=MiAiHK38gD1NS2FHdhkXV=XKVog@mail.gmail.com>
- <87v8cif53v.fsf@bloch.sibelius.xs4all.nl>
- <CAPnjgZ1zta2DsTAUwHmxY8QFfPF0BFo4a6_v_J9nnVuCVBru=w@mail.gmail.com>
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 8C87B212BC2E;
+ Tue, 12 Sep 2023 14:35:05 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 8C87B212BC2E
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1694554505;
+ bh=MT8egt/U4kLW/WPbJc6OtkxTubA/5CzoaWQgFRTh9+8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=nNN5IgA8iX9iFreje1+GHZl7H3po55KBYb9jMmYHc8W6XAAcTdBOvNS49QI9BLVAk
+ ij+T2J8B618RiYdidZIau3WCkXyVClU+AcMw5yZrlYrdIFXPDq55Y/GufDU/s76FUR
+ 5pgxxhuEHEuOZz/HjfyUWtYee2VDjnzLtbfWMJAc=
+From: seanedmond@linux.microsoft.com
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, dphadke@linux.microsoft.com, ilias.apalodimas@linaro.org
+Subject: [PATCH v3 0/5] Populate kaslr seed with RNG
+Date: Tue, 12 Sep 2023 14:34:59 -0700
+Message-Id: <20230912213504.65513-1-seanedmond@linux.microsoft.com>
+X-Mailer: git-send-email 2.40.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,117 +59,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Sun, 10 Sep 2023 13:13:16 -0600
-> 
-> Hi Mark,
-> 
-> On Sun, 10 Sept 2023 at 08:57, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > From: Simon Glass <sjg@chromium.org>
-> > > Date: Thu, 7 Sep 2023 09:57:34 -0600
-> > >
-> > > Hi Mark,
-> > >
-> > > On Thu, 7 Sept 2023 at 07:08, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> > > >
-> > > > > From: Simon Glass <sjg@chromium.org>
-> > > > > Date: Thu, 7 Sep 2023 06:23:10 -0600
-> > > > >
-> > > > > Hi Mark,
-> > > > >
-> > > > > On Sun, 3 Sept 2023 at 14:40, Mark Kettenis <kettenis@openbsd.org> wrote:
-> > > > > >
-> > > > > > Enable the bootflow based on this bootmeth if the BootOrder EFI
-> > > > > > variable is set.
-> > > > > >
-> > > > > > Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> > > > > > ---
-> > > > > >
-> > > > > > ChangeLog:
-> > > > > >
-> > > > > > v2: - Initialize EFI subsystem to populate EFI variables
-> > > > > >
-> > > > > >
-> > > > > >  boot/bootmeth_efi_mgr.c | 17 ++++++++++++++++-
-> > > > > >  1 file changed, 16 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > > > diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> > > > > > index e9d973429f..e6c42d41fb 100644
-> > > > > > --- a/boot/bootmeth_efi_mgr.c
-> > > > > > +++ b/boot/bootmeth_efi_mgr.c
-> > > > > > @@ -14,6 +14,8 @@
-> > > > > >  #include <bootmeth.h>
-> > > > > >  #include <command.h>
-> > > > > >  #include <dm.h>
-> > > > > > +#include <efi_loader.h>
-> > > > > > +#include <efi_variable.h>
-> > > > > >
-> > > > > >  /**
-> > > > > >   * struct efi_mgr_priv - private info for the efi-mgr driver
-> > > > > > @@ -46,13 +48,26 @@ static int efi_mgr_check(struct udevice *dev, struct bootflow_iter *iter)
-> > > > > >  static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> > > > > >  {
-> > > > > >         struct efi_mgr_priv *priv = dev_get_priv(dev);
-> > > > > > +       efi_status_t ret;
-> > > > > > +       efi_uintn_t size;
-> > > > > > +       u16 *bootorder;
-> > > > > >
-> > > > > >         if (priv->fake_dev) {
-> > > > > >                 bflow->state = BOOTFLOWST_READY;
-> > > > > >                 return 0;
-> > > > > >         }
-> > > > > >
-> > > > > > -       /* To be implemented */
-> > > > > > +       ret = efi_init_obj_list();
-> > > > >
-> > > > > Doesn't this start up the whole EFI system? Is there a cheaper way to
-> > > > > see if the variable subsystem exists, or can work?
-> > > >
-> > > > A fair bit of it at least.  With the possible exception of launching
-> > > > EFI capsules (which shouldn't happen for a "normal" boot), I don't
-> > > > think this is very expensive though.
-> > > >
-> > > > There currently isn't a way to only initialize the variable subsystem;
-> > > > we can't just call efi_init_variables() here since we have to also
-> > > > call efi_disks_register() and a later efi_init_obj_list() call would
-> > > > call efi_init_variables() again, which would leak memory.
-> > > >
-> > > > Alternatively we could just unconditionally declare the efi_mgr
-> > > > bootmeth as "ready" (like you already do for sandbox).  That would
-> > > > postpone initialization of the EFI subsystem until we actually execute
-> > > > this bootmeth.
-> > > >
-> > > > But we need to do something before we switch more targets to standard
-> > > > boot since otherwise booting through the EFI boot manager is just
-> > > > plain broken.
-> > >
-> > > Yes...
-> > >
-> > > I don't have any great ideas on this. If we could get the EFI code
-> > > better integrated into U-Boot then perhaps we would not need this
-> > > 'monolithm' init?
-> >
-> > You'll have to take that up with the maintainers of the EFI loader
-> > subsystem.  I just want to repair the breakage that was introduced
-> > with bootstd.
-> 
-> Yes, understood. Do you know how long it takes to do this step?
+From: Sean Edmond <seanedmond@microsoft.com>
 
-It is instant.  But then this is on a fast machine with the EFI
-variables stored on the internal NVMe disk, which is plenty fast as
-well.  And I haven't enabled any of the capsule or TPM stuff hich may
-take more time.
+This patch series creates a common API (fdt_fixup_kaslr_seed()) for 
+populating the kaslr seed in the DTB.  Existing users (kaslrseed,
+and ARMv8 sec firmware) have been updated to use this common API.
 
-> The control for this feature is CMD_BOOTEFI_BOOTMGR...I think it would
-> be better to have BOOTEFI_BOOTMGR as well as CMD_BOOTEFI_BOOTMGR,
-> since it is strange to have a CMD Kconfig in lib/efi_loader
-> 
-> I am OK with this patch as I don't see any alternative. We need to do
-> something and we can always improve it if it causes problems.
-> 
-> Heinrich?
-> 
-> Regards,
-> Simon
-> 
+New functionality has been introduced to populate the kaslr using
+the RNG.  This can be enabled with CONFIG_RNG_TPM_SEED.  
+
+changes in v3:
+- Populate with RNG device instead of TPM device (this is a more generic solution)
+- Use event spy to do the FDT fixup
+- fix compile error for sandbox for !OFNODE_MULTI_TREE
+
+changes in v2:
+- fdt_fixup_kaslr_seed() uses the ofnode API
+- Add root_ofnode_from_fdt() to get the root node from an FDT and
+  perform error checking on the oftree
+- add comments to exported functions
+- Add error checking in image_setup_libfdt() for return from
+  fdt_tpm_kaslr_seed()
+- uclass_get_device() -> uclass_first_device_err()
+- Change default config for OFNODE_MULTI_TREE (y if !OF_LIVE)
+
+
+Dhananjay Phadke (2):
+  fdt: common API to populate kaslr seed
+  fdt: kaslr seed from RNG device
+
+Sean Edmond (3):
+  cmd: kaslrseed: Use common API to fixup FDT
+  dm: core: Modify default for OFNODE_MULTI_TREE
+  fdt: Fix compile error for !OFNODE_MULTI_TREE
+
+ arch/arm/cpu/armv8/sec_firmware.c | 39 ++++++++--------------
+ cmd/kaslrseed.c                   | 22 +++++--------
+ common/fdt_support.c              | 55 +++++++++++++++++++++++++++++++
+ drivers/core/Kconfig              |  2 +-
+ drivers/core/ofnode.c             | 29 ++++++++++++----
+ include/dm/ofnode.h               | 12 +++++++
+ include/fdt_support.h             |  9 +++++
+ lib/Kconfig                       |  7 ++++
+ 8 files changed, 129 insertions(+), 46 deletions(-)
+
+-- 
+2.40.0
+
