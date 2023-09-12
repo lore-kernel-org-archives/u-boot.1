@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51317CA0EEB
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 15:56:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CDDCCA0EEB
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 15:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8194786C8C;
-	Tue, 12 Sep 2023 17:56:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB5B686FBF;
+	Tue, 12 Sep 2023 17:57:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dFAxetXN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LsuUV+PN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD14B86FA8; Tue, 12 Sep 2023 17:56:06 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 546AB86FA0; Tue, 12 Sep 2023 17:57:03 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1C581970
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 17:56:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B420186FA3
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 17:57:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38CFtx17104655;
- Tue, 12 Sep 2023 10:55:59 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38CFuuen097608;
+ Tue, 12 Sep 2023 10:56:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694534159;
- bh=xq6LuJoWa1zmDNyPYrqTpR4vi1hsGsXzyEwkckB15+M=;
+ s=ti-com-17Q1; t=1694534216;
+ bh=R4KTWeP8Ufi2P0XY57XDYApkGbfSocbh1z9q/LkBeoI=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=dFAxetXN0uPSy1k+fU/heLP/0jMF+m1yRzFYNBQBpzJVPyNhCISUZBh1QKQri3CvK
- nx4sFU5sPkD+Sg7F+elar54QqosU0RZ9o1G4SWwNpK5TCzJEWUAEphjzt3wITjsjWp
- W4fW6OO1bt2JQLgDoJ+caxcSi1CbLy8CmXo3Ef2Q=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38CFtxM4030857
+ b=LsuUV+PNaRzDTjaXIuEX2fZD+TjD7uyshvNz7XVGl86PnFPeHKql4spjUM5fc1f7O
+ u1M6Wqd12vw9+Qb4fFd56waF646SYWDC+0cGLMNZui11ITIXqakHF2ffj/1El76VFx
+ A0bTSxpjW3ANcM5dyA+1xfeU0tLJwtpUzGwTUop4=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38CFuu87013536
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 12 Sep 2023 10:55:59 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 12 Sep 2023 10:56:56 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
- Sep 2023 10:55:58 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 10:56:55 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 12 Sep 2023 10:55:58 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38CFtwki038316;
- Tue, 12 Sep 2023 10:55:58 -0500
-Date: Tue, 12 Sep 2023 10:55:58 -0500
+ Frontend Transport; Tue, 12 Sep 2023 10:56:55 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38CFutJR001477;
+ Tue, 12 Sep 2023 10:56:55 -0500
+Date: Tue, 12 Sep 2023 10:56:55 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Udit Kumar <u-kumar1@ti.com>
 CC: <vigneshr@ti.com>, <jh80.chung@samsung.com>, <lukma@denx.de>,
  <seanga2@gmail.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>,
  <n-francis@ti.com>, <a-nandan@ti.com>
-Subject: Re: [PATCH v2 2/3] clk: ti: Add support to enable configs
- conditionally
-Message-ID: <20230912155558.t22bk2anf43dcx3v@endanger>
+Subject: Re: [PATCH v2 3/3] config: j7200: remove not needed power config
+Message-ID: <20230912155655.cxv4bzezrcqt4pc5@overfed>
 References: <20230912130645.1202325-1-u-kumar1@ti.com>
- <20230912130645.1202325-3-u-kumar1@ti.com>
+ <20230912130645.1202325-4-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230912130645.1202325-3-u-kumar1@ti.com>
+In-Reply-To: <20230912130645.1202325-4-u-kumar1@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,60 +81,36 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 18:36-20230912, Udit Kumar wrote:
-> TI SOC has two clock domains CLK_TI_SCI and
-> CLK_K3. These are mutually exclusive.
+> For J7200, R5/SPL TI_SCI_POWER_DOMAIN should be
+> disabled as DM is a separate binary like other
+> SOC of J7* family.
 > 
-> Adding conditional check for CLK_TI_SCI
-> and CLK_K3 along with other associated configs options.
+> Fixes: 02dff65efe7 (configs: j7200_evm_r5: Add initial support)
+
+Fixes: 02dff65efe70 ("configs: j7200_evm_r5: Add initial support")
+
 > 
-> Suggested-by: Nishanth Menon <nm@ti.com>
 > Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 > ---
->  drivers/clk/ti/Kconfig | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  configs/j7200_evm_r5_defconfig | 1 -
+>  1 file changed, 1 deletion(-)
 > 
-> diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-> index fbcdefd889..a21359d6b2 100644
-> --- a/drivers/clk/ti/Kconfig
-> +++ b/drivers/clk/ti/Kconfig
-> @@ -36,7 +36,7 @@ config CLK_TI_MUX
->  
->  config CLK_TI_SCI
->  	bool "TI System Control Interface (TI SCI) clock driver"
-> -	depends on CLK && TI_SCI_PROTOCOL && OF_CONTROL
-> +	depends on CLK && TI_SCI_PROTOCOL && OF_CONTROL && !CLK_K3
->  	help
->  	  This enables the clock driver support over TI System Control Interface
->  	  available on some new TI's SoCs. If you wish to use clock resources
-> @@ -44,13 +44,13 @@ config CLK_TI_SCI
->  
->  config CLK_K3_PLL
->  	bool "PLL clock support for K3 SoC family of devices"
-> -	depends on CLK && LIB_RATIONAL
-> +	depends on CLK && LIB_RATIONAL && !CLK_TI_SCI
->  	help
->  	  Enables PLL clock support for K3 SoC family of devices.
->  
->  config SPL_CLK_K3_PLL
->  	bool "PLL clock support for K3 SoC family of devices"
-> -	depends on CLK && LIB_RATIONAL && SPL
-> +	depends on CLK && LIB_RATIONAL && SPL && !CLK_TI_SCI
->  	help
->  	  Enables PLL clock support for K3 SoC family of devices.
->  
-> @@ -62,6 +62,6 @@ config CLK_K3
->  
->  config SPL_CLK_K3
->  	bool "Clock support for K3 SoC family of devices"
-> -	depends on CLK && SPL
-> +	depends on CLK && SPL && !CLK_TI_SCI
->  	help
->  	  Enables the clock translation layer from DT to device clocks.
+> diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+> index 6d240b16cb..9e744ba434 100644
+> --- a/configs/j7200_evm_r5_defconfig
+> +++ b/configs/j7200_evm_r5_defconfig
+> @@ -126,7 +126,6 @@ CONFIG_SPL_PINCTRL=y
+>  # CONFIG_SPL_PINCTRL_GENERIC is not set
+>  CONFIG_PINCTRL_SINGLE=y
+>  CONFIG_POWER_DOMAIN=y
+> -CONFIG_TI_SCI_POWER_DOMAIN=y
+>  CONFIG_TI_POWER_DOMAIN=y
+>  CONFIG_DM_PMIC=y
+>  CONFIG_PMIC_TPS65941=y
 > -- 
 > 2.34.1
 > 
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
 -- 
 Regards,
 Nishanth Menon
