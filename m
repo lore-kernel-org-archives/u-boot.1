@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46B2DCA0EC9
-	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:22:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 624E2CA0EC3
+	for <u-boot@archiver.kernel.org>; Tue, 12 Sep 2023 06:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 990F886E52;
-	Tue, 12 Sep 2023 08:21:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EAD3586E59;
+	Tue, 12 Sep 2023 08:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ue2RS7kl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mejUuZI2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22F8786E47; Tue, 12 Sep 2023 08:21:38 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id E4D6B86E56; Tue, 12 Sep 2023 08:21:39 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4392486E45
- for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C47D86CD9
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 08:21:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1c3c4eafe95so2648175ad.1
- for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:21:35 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1c3c4eafe95so2648265ad.1
+ for <u-boot@lists.denx.de>; Mon, 11 Sep 2023 23:21:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694499693; x=1695104493; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694499695; x=1695104495; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uOTPtjDHaxMMIH1M0rWFgNfGU24g7rDWYSO2jB2NRIY=;
- b=Ue2RS7klhqRAxnGP0Kqou0x6Ian1M9Ffi2npWW8kbXuv03b8NQh4L8gJWvEWX+3BYx
- Vlc0H6yYjI/zJ3JKE9ws7oatAOc16R5eKXyvDka5cJWtylMH9/q+q5gn7sfqCXwTX6xf
- BGrWESGPRxdBWcfhi8YpUxL6/8cGnW4gJO9BOOXtmTihTGm6N/eoyRclOY6swEw+v75i
- VJvdTBNTBeMhOONPCoYJLwmtRuf9whTMWshTG+/GA+kX482NymnW9DgENQbyO0j5m/pE
- VZvf/z8RrDbgrV+VSF1G+q66W4n/l/oN9+gPKL4lglJH3UHUcbQrh5ihf8XB7zlwq292
- 50JA==
+ bh=vhAR65M4soRG9S95MgJJZMHxp3xYHMV9h+mVgJ4WbmE=;
+ b=mejUuZI2uwT/ajy3aHKIdGis6e6raodm9eQzyXBpd0aHdpMDc4xELEYOjw0/anwe1S
+ 6fv3RrCiBzzWdPl+Bj/ZldEtfCLqraBgwRkDRUezJl2niUrbzXDY2t/aToiun4p/pZ4V
+ 0mDenjny37HLwnsNtunwGteKXmGHByYMxGEz/s6EVEf3lJi9REkas4/dkqB3xZ7WStDZ
+ 0yDtu/2YzM699J6I2XDp8KzxTmX8S1hKszHU+YKVK0n796BD2ts7PEZiv/LM2bZUKQN+
+ RNu8tSMAHd0V9nEHhEdlV79n1iDvohsQ8aea+noPBKLuSr1yuFdmo3MbjUrSXLYF+9fS
+ xyiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694499693; x=1695104493;
+ d=1e100.net; s=20230601; t=1694499695; x=1695104495;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uOTPtjDHaxMMIH1M0rWFgNfGU24g7rDWYSO2jB2NRIY=;
- b=DW6R/ZFwVEdyqgWNK1KiM+5ItOOEFAWhcsJwk2NcfLhoUr6h7PGmmmE+6qK9+a+Ep5
- GHgAJqdkO6o0wP04CHWQun1Cph9Fi0RDHdvTZq/N5E9s+2Y3bUK17HWhlik/Xyrk1eAJ
- dmQba8pCydYIcHAcmJcr6Kki2Sy/ji+uInbX/aJjZPzYe8dRT26nBd/j9dl8iaxEOuvz
- POvYO7HhzXIM5l7YTT11tO04JcRRokYBzhJZRc0KIWAS1lwW3EPcX7okKj0z6mIzaklM
- LY+k0hk6gusArITH7yjTm5ONWgzRY+ns2CTwksvGHtEgQ5XYT091xlW5FYYEe+QYOJjm
- TqAQ==
-X-Gm-Message-State: AOJu0YzHsKJ6zAaZJQzur+8BN8nl082cOoYSUTaQmH210gRYQZvY+b0P
- wBzF4uaNLi/iqPUY1hVMBeTTdQ==
-X-Google-Smtp-Source: AGHT+IEdCkJCuBDLJ5CGQCIJvrXiSU7Fqb7sz2/TRAvjrgJHefPssgoI6bE1LinwersssARWO7RQ/g==
+ bh=vhAR65M4soRG9S95MgJJZMHxp3xYHMV9h+mVgJ4WbmE=;
+ b=qEwy4/trr7MMuy9+zWAHTg0f89giLgDlpXyMqfKkVhzd1rKXXOaTvhS7DbAVwayO3V
+ J6A34IgxPZ7gNKAjKUAYmPTnXPE/33l4tShf9/UK/u0DF9o+EXcicRl2KL+iXoY4y2ME
+ 8fOHsI7N17fo+zBCayawRrukkYxhtdM52ceylIRCMlju6xpljjR0wbRcEC1rXZ/oiZhH
+ ZxvfmDt0AU8ZbOh/5k6gNMIcF/7tBCba+pMb1CaAliP/JbUu9kWkkmIZ0/Nlpnict1ec
+ FLjZ4UQXqPIZpmTaojrNMDTjW1MtAOe1yMIMHYTSmnbMtGuIHCdVjotD+p0GxD0WmMX9
+ kIdg==
+X-Gm-Message-State: AOJu0Ywi7zKeFe9eEjCdszZ0hZqVttxcgE3EFcmT2an8RcKbYiCOSt0r
+ 9gLefjshP51qpzuQhIzzRo/ZHg==
+X-Google-Smtp-Source: AGHT+IEHH8tcXMmQ+JHst2Ij5uF55VBy+OtsqRXhXjeoQTkU6p3JbXeyNGDO+07FxzIKTTwT4MFofg==
 X-Received: by 2002:a17:903:2843:b0:1c3:a4f2:7cc1 with SMTP id
- kq3-20020a170903284300b001c3a4f27cc1mr7883022plb.5.1694499693496; 
- Mon, 11 Sep 2023 23:21:33 -0700 (PDT)
+ kq3-20020a170903284300b001c3a4f27cc1mr7883061plb.5.1694499695374; 
+ Mon, 11 Sep 2023 23:21:35 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:bf3d:658b:e9f7:3af5])
  by smtp.gmail.com with ESMTPSA id
- a15-20020a170902eccf00b001bc2831e1a8sm7503970plh.80.2023.09.11.23.21.31
+ a15-20020a170902eccf00b001bc2831e1a8sm7503970plh.80.2023.09.11.23.21.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Sep 2023 23:21:33 -0700 (PDT)
+ Mon, 11 Sep 2023 23:21:35 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v4 08/13] firmware: scmi: add a check against availability of
- protocols
-Date: Tue, 12 Sep 2023 15:19:57 +0900
-Message-Id: <20230912062002.57361-9-takahiro.akashi@linaro.org>
+Subject: [PATCH v4 09/13] sandbox: remove SCMI base node definition from
+ test.dts
+Date: Tue, 12 Sep 2023 15:19:58 +0900
+Message-Id: <20230912062002.57361-10-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230912062002.57361-1-takahiro.akashi@linaro.org>
 References: <20230912062002.57361-1-takahiro.akashi@linaro.org>
@@ -95,83 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have Base protocol support, we will be able to check if a given
-protocol is really supported by the SCMI server (firmware).
+SCMI base protocol is mandatory and doesn't need to be listed in a device
+tree.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
-v3
-* new; import this patch from my followup patch set
----
- drivers/firmware/scmi/scmi_agent-uclass.c | 41 +++++++++++++++++++++--
- 1 file changed, 38 insertions(+), 3 deletions(-)
+ arch/sandbox/dts/test.dts | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index cd72345b8e54..b83cb0f5d0bc 100644
---- a/drivers/firmware/scmi/scmi_agent-uclass.c
-+++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -38,6 +38,38 @@ static const struct error_code scmi_linux_errmap[] = {
- 	{ .scmi = SCMI_PROTOCOL_ERROR, .errno = -EPROTO, },
- };
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index f351d5cb84b0..dc0bfdfb6e4b 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -693,10 +693,6 @@
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
  
-+/**
-+ * scmi_protocol_is_supported - check availability of protocol
-+ * @dev:	SCMI agent device
-+ * @proto_id:	Identifier of protocol
-+ *
-+ * check if the protocol, @proto_id, is provided by the SCMI agent,
-+ * @dev.
-+ *
-+ * Return:	0 on success, error code otherwise
-+ */
-+static bool scmi_protocol_is_supported(struct udevice *dev,
-+				       enum scmi_std_protocol proto_id)
-+{
-+	struct scmi_agent_priv *priv;
-+	int i;
-+
-+	if (proto_id == SCMI_PROTOCOL_ID_BASE)
-+		return true;
-+
-+	priv = dev_get_uclass_plat(dev);
-+	if (!priv) {
-+		dev_err(dev, "No priv data found\n");
-+		return false;
-+	}
-+
-+	for (i = 0; i < priv->num_protocols; i++)
-+		if (priv->protocols[i] == proto_id)
-+			return true;
-+
-+	return false;
-+}
-+
- struct udevice *scmi_get_protocol(struct udevice *dev,
- 				  enum scmi_std_protocol id)
- {
-@@ -373,15 +405,18 @@ static int scmi_bind_protocols(struct udevice *dev)
- 		name = ofnode_get_name(node);
- 		switch (protocol_id) {
- 		case SCMI_PROTOCOL_ID_CLOCK:
--			if (CONFIG_IS_ENABLED(CLK_SCMI))
-+			if (CONFIG_IS_ENABLED(CLK_SCMI) &&
-+			    scmi_protocol_is_supported(dev, protocol_id))
- 				drv = DM_DRIVER_GET(scmi_clock);
- 			break;
- 		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
--			if (IS_ENABLED(CONFIG_RESET_SCMI))
-+			if (IS_ENABLED(CONFIG_RESET_SCMI) &&
-+			    scmi_protocol_is_supported(dev, protocol_id))
- 				drv = DM_DRIVER_GET(scmi_reset_domain);
- 			break;
- 		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
--			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
-+			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI) &&
-+			    scmi_protocol_is_supported(dev, protocol_id)) {
- 				node = ofnode_find_subnode(node, "regulators");
- 				if (!ofnode_valid(node)) {
- 					dev_err(dev, "no regulators node\n");
+-			protocol@10 {
+-				reg = <0x10>;
+-			};
+-
+ 			clk_scmi: protocol@14 {
+ 				reg = <0x14>;
+ 				#clock-cells = <1>;
 -- 
 2.34.1
 
