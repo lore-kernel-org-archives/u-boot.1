@@ -4,73 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FA9EE01FD
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 18:07:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4BE4EE0202
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 18:33:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09D7E86A69;
-	Wed, 13 Sep 2023 20:07:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D23C1865D0;
+	Wed, 13 Sep 2023 20:33:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y5rPgph+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uZO9Y3rw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3533D86A1D; Wed, 13 Sep 2023 20:07:35 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 515818664A; Wed, 13 Sep 2023 20:32:59 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 364CB86A40
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 20:07:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8997F864EC
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 20:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-501ce655fcbso91777e87.2
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 11:07:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d7b9de8139fso155883276.1
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 11:32:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694628451; x=1695233251; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r3ozensYymgx1FFD+6wMYx2H4HzCD5SdvaF5IpxvnbA=;
- b=Y5rPgph+oNr+37c2TZZoDxCTYpSBCi4m40pKygwW3MmGjtcxZeDpjHV91ve1ciGGvh
- XtUIjZsswyLY9Pkf4O5wataqt26XO2pIQytywzhbl7IOLl3d1NHdM0DZMErvQS6UDx51
- qyaR2YuEyXSKCdynB6+9Rbf2iMo55G+VukOEA=
+ d=konsulko.com; s=google; t=1694629975; x=1695234775; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jjVxDp83F1DsAE7UkXKCrqeD1evQYXjd5P/V2JC0xO0=;
+ b=uZO9Y3rwdQTO3IwHrOtIi1y5AL6JKTXyVveOl/h3PM3CDD4Z/A+uhQQ3o6ZqNPvJdE
+ CvyMnA1HDfSF7xKwPXtjil0U9D8BHmu+8hGDfFOS21jq2Nn4M8aAZVPxRDZt4nnnwhc9
+ RBIxP5J199yfyEnFLQd9fREW1honUhHnhiaq0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694628451; x=1695233251;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=r3ozensYymgx1FFD+6wMYx2H4HzCD5SdvaF5IpxvnbA=;
- b=rB650mtvQSPnrssIkcRQIfsrZJ0hyqiLlOIZQxKsgJNRX+a5ynlflmG7CL6//pEWye
- GF8PFXCaxQnL3sdgeHoH2JY5il5P2zXIb6x16WNp+agpftLSqSMcny1Pk3JP3rEt5qt2
- X9sFWQyFHnviNbljpVkLKggYdL0jBc+ITyLzOVB8vl6iJzQl7D3TgRykbHhTTB31XI2B
- Bd0WV3QF102DD0jG8hpUjZJbOvQAPrwSzYskZETc9bT0Nx4+ENNIhsrXn/iFUeqkliJu
- dBzXdl1znnGGZkRLORdbCF1b+1nUXMgZ3c38KixW/UDQkok6isMOg2Aa8ewUovsR0Cw3
- MgTg==
-X-Gm-Message-State: AOJu0YyWSRM19EJ0VxUl8IPtAKybzFkpyJ/wP773obdUTD2zDioHsbLM
- ITWmmEHTR2LqaGXqEFVh0ZhgUKwixXUnS1rOpVEf0A==
-X-Google-Smtp-Source: AGHT+IEfrnzvkePJVugSk/mcnoxuTfnfebbykZh2D0wM+XpvS2TPIATY+Ltl/Aq8IhvWAaZCWcuDW9EUaY0coD0JRZk=
-X-Received: by 2002:a19:ca0b:0:b0:502:d85b:5de with SMTP id
- a11-20020a19ca0b000000b00502d85b05demr2207528lfg.68.1694628451055; Wed, 13
- Sep 2023 11:07:31 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1694629975; x=1695234775;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jjVxDp83F1DsAE7UkXKCrqeD1evQYXjd5P/V2JC0xO0=;
+ b=BvWb/GaxDX1tcNZHRERYyIccxMSpMN2xjBCeZO7aUWDFtnii50Ls//c/+j4Vx6YAOH
+ V6XksIy0kn/k2d0mal/dz5DBey2wfXD2TYFR5jmTuynOB/2M1YDdanJkxN3CiPpAFtp9
+ LvDR4Oi0Acl1I1ZmCvrs07yyUO14saHB/3aJ350hdGovIYSrqIf8pJfGhJxUQqK7nJv+
+ 3QYJ680BTxDpzuTqPEc47VO6spPEVaMRdeeBGudDu48Pe8xN7trxlkbabj+ge9tToXVd
+ wwXxoTYNh0t6Po5E3q6fPuvZTqSONa0HHlzJ1L0UbTpu9T2alk7HK9u4UHx6w/UetacJ
+ wl+w==
+X-Gm-Message-State: AOJu0YzA6Loei9uLbGTxMUYqjgyJ0RE02m6PM23+RVCR0UOOt0k3GGsB
+ lrPBFS5uW6YTFwIn+lB+yt57pw==
+X-Google-Smtp-Source: AGHT+IGbYvF+MVkt7dqv3c2fg3OWl4ybq2MCkZrxaCCm51Bsc2nLPVfdyIcHgMIKVkNRhpATys+2OA==
+X-Received: by 2002:a25:6806:0:b0:d81:61c8:aef5 with SMTP id
+ d6-20020a256806000000b00d8161c8aef5mr1988071ybc.40.1694629975180; 
+ Wed, 13 Sep 2023 11:32:55 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-2580-cbcf-c7bd-45ce.res6.spectrum.com.
+ [2603:6081:7b00:6400:2580:cbcf:c7bd:45ce])
+ by smtp.gmail.com with ESMTPSA id
+ 83-20020a251856000000b00d0b0bbe574asm2860681yby.44.2023.09.13.11.32.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Sep 2023 11:32:54 -0700 (PDT)
+Date: Wed, 13 Sep 2023 14:32:52 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] am33xx: ignore return value from usb_ether_init()
+Message-ID: <20230913183252.GO305624@bill-the-cat>
+References: <20230831024951.22599-1-twoerner@gmail.com>
+ <20230831101511.GD8826@kitsune.suse.cz>
+ <CAHUNapQxb=5sr3FPscBht_SAYh4++yvbMscwEnmQRJhw1TdO1g@mail.gmail.com>
 MIME-Version: 1.0
-References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
- <20230908120002.29851-4-sughosh.ganu@linaro.org>
- <CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com>
- <CADg8p97cQJYogd_MZT_hCH71XjqkO85VEay2fb7hZx1YwX+OPA@mail.gmail.com>
-In-Reply-To: <CADg8p97cQJYogd_MZT_hCH71XjqkO85VEay2fb7hZx1YwX+OPA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Sep 2023 12:07:14 -0600
-Message-ID: <CAPnjgZ1EBJJ7ZtHZVo1vp24gCrN-A-m4Hk3udLbKPS18C3QNqw@mail.gmail.com>
-Subject: Re: [PATCH 3/8] binman: capsule: Generate capsules through config file
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Tom Rini <trini@konsulko.com>,
- Malte Schmidt <malte.schmidt-oss@weidmueller.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZfNdkGNpS/QTPd0L"
+Content-Disposition: inline
+In-Reply-To: <CAHUNapQxb=5sr3FPscBht_SAYh4++yvbMscwEnmQRJhw1TdO1g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,86 +93,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
 
-On Mon, 11 Sept 2023 at 08:13, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> hi Simon,
->
-> On Mon, 11 Sept 2023 at 00:44, Simon Glass <sjg@chromium.org> wrote:
+--ZfNdkGNpS/QTPd0L
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Sep 13, 2023 at 08:50:49AM -0400, Trevor Woerner wrote:
+
+> Can this get added to the next release? I don't see it in -next.
+
+I was going to pick this up for v2024.01 (i.e. the next branch)
+soon'ish.
+
+>=20
+> On Thu, Aug 31, 2023 at 6:15=E2=80=AFAM Michal Such=C3=A1nek <msuchanek@s=
+use.de> wrote:
+>=20
+> > Hello,
 > >
-> > Hi Sughosh,
+> > On Wed, Aug 30, 2023 at 10:49:50PM -0400, Trevor Woerner wrote:
+> > > In 2cb43ef1c223 ("usb: ether: Fix error handling in usb_ether_init") =
+the
+> > error
+> > > handling of usb_ether_init() was changed. Not a single other call site
+> > of this
+> > > function checks its return value, therefore follow suit in the am33xx
+> > code.
 > >
-> > On Fri, 8 Sept 2023 at 06:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > then there is the question what point is there in having a return value
+> > in this function at all.
+> >
+> > Anyway, it's fine to not check the return value in the caller if there
+> > is no use for the error.
+> >
+> > Reviewed-by: Michal Such=C3=A1nek <msuchanek@suse.de>
+> >
 > > >
-> > > Add support in binman for generating capsules by reading the capsule
-> > > parameters through a config file. Also add a test case in binman for
-> > > this mode of capsule generation.
+> > > Do not cause the boot to halt if the usb gadget ethernet initializati=
+on
+> > fails:
 > > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > >       initcall sequence 9ffdbd84 failed at call 808024b9 (err=3D-19)
+> > >       ### ERROR ### Please RESET the board ###
+> > >
+> > > Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 > > > ---
+> > >  arch/arm/mach-omap2/am33xx/board.c | 6 +-----
+> > >  1 file changed, 1 insertion(+), 5 deletions(-)
 > > >
-> > >  tools/binman/entries.rst                   | 35 ++++++++++++
-> > >  tools/binman/etype/efi_capsule_cfg_file.py | 66 ++++++++++++++++++++++
-> > >  tools/binman/ftest.py                      | 29 ++++++++++
-> > >  tools/binman/test/319_capsule_cfg.dts      | 15 +++++
-> > >  4 files changed, 145 insertions(+)
-> > >  create mode 100644 tools/binman/etype/efi_capsule_cfg_file.py
-> > >  create mode 100644 tools/binman/test/319_capsule_cfg.dts
+> > > diff --git a/arch/arm/mach-omap2/am33xx/board.c
+> > b/arch/arm/mach-omap2/am33xx/board.c
+> > > index ecc0a592e993..8f772310a1a7 100644
+> > > --- a/arch/arm/mach-omap2/am33xx/board.c
+> > > +++ b/arch/arm/mach-omap2/am33xx/board.c
+> > > @@ -270,11 +270,7 @@ int arch_misc_init(void)
+> > >               return ret;
+> > >
+> > >  #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
+> > > -     ret =3D usb_ether_init();
+> > > -     if (ret) {
+> > > -             pr_err("USB ether init failed\n");
+> > > -             return ret;
+> > > -     }
+> > > +     usb_ether_init();
+> > >  #endif
+> > >
+> > >       return 0;
+> > > --
+> > > 2.41.0.327.gaa9166bcc0ba
+> > >
 > >
-> > I think we discussed this some time ago. The problem I have with this
-> > is that it adds another way of specifying the image description,
-> > separate from the binman definition. This introduces all sorts of
-> > problems:
-> >
-> > - the question of where the filenames are located, something which
-> > binman tries to handle cohesively
-> > - binman has no knowledge of what is being put in the capsules
-> > - the resulting fdtmap lacks any information about what is in the capsules
-> > - it seems to create two ways of doing the same thing
-> >
-> > Binman can presumably already create multiple capsule files, just by
-> > adding to the description.
-> >
-> > What need does this feature meet?
->
-> We already had this discussion earlier about the need for generating
-> capsules through the config file, where I had explained the need for
-> this [1]. This is functionality which is supported by the
-> specification, and we have folks who are interested in having the
-> capsules generated through config file, and also in generation of a
-> single capsule file consisting of multiple input payloads.
->
-> I understand that this model does not fit with the usual way in binman
-> of generating an output image by specifying it's inputs as DT nodes.
-> But just because this does not fit or align with the design of the
-> tool does not mean that we do not add support for the functionality.
-> Why can't we support this in binman as long as it is properly
-> documented as to what is being done. Moreover, my initial versions of
-> this patchset were attempting to achieve this by adding a make target,
-> but you had shot it down [2]. So it either has to be done through
-> binman, or through a make target.
 
-We have a lot of balls in the air right now...I would like to pause
-this one until we get the other things sorted out:
+--=20
+Tom
 
-- simple capsule update in sandbox (see my other email)
-- example of how to use all this on a real board (Tom is going to make
-a proposal there)
-- tidy up the testing so that it is easier to understand and fits
-better with the test framework
-- figure out the DT story, since we are still struggling to align
-there (Binman bindings, removing nodes, etc)
+--ZfNdkGNpS/QTPd0L
+Content-Type: application/pgp-signature; name="signature.asc"
 
-We don't need to get all those done, but we do need to at least agree
-on the direction.
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Simon
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUCAEsACgkQFHw5/5Y0
+tywVWgv/WSJZsDNC8CuPY+pMCmGBSv9hLTl//BQhIf/WwcdLBMa60hDjf7VoYCGa
+rpKpTZ3WEQ9pGK/xNyHbGnAZLGDCMVZuffae5ue58+8sJpBz7KoWpmKMz9tgEymB
+Dzi09uLuLu96PSL71CkzDMlAWTj+zzMH0Mskxo+pF6YLltigkuqFXI+Mzpj+26jS
+MOhYAU4uWUim1KFE7RSvQlwtharIHz4TcVqycrDvSfLSoeQMFgspntzLIrbFH4Ma
+C3cTVOy3T7Hi4vuExWvpeFP6Mr6OKLkBh5vGh9fFWJNxSlq0MRyGnB4uKpSOT3Ut
+Ge95vHavnREVPfyOFA5+MB9dlnl6o++5L4zI+X8Pu0TadQZtQnNTDAnK9TF2bucb
+kDA4lKODqFPwHk5KU1tP20Ouysjkg4gjtL9y42ODE7iMsXWwrZiBV8hSLMc+0ykl
+kjgp2MqNiiUOD6TcRcsVPGTfYKW9fnCO/SfKVeh2SSeowIRXaN/TiSsluYRPXrVQ
+61PQq4tQ
+=Oozn
+-----END PGP SIGNATURE-----
 
-
->
-> -sughosh
->
-> [1] - https://lists.denx.de/pipermail/u-boot/2023-July/524849.html
-> [2] - https://lists.denx.de/pipermail/u-boot/2023-June/521103.html
+--ZfNdkGNpS/QTPd0L--
