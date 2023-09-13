@@ -4,67 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C3BEE01FE
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 18:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FA9EE01FD
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 18:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AED8A86A24;
-	Wed, 13 Sep 2023 20:07:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09D7E86A69;
+	Wed, 13 Sep 2023 20:07:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j4o5jrgk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y5rPgph+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70DAC86A4C; Wed, 13 Sep 2023 20:07:34 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 3533D86A1D; Wed, 13 Sep 2023 20:07:35 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D208186A1D
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 20:07:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 364CB86A40
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 20:07:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-317c3ac7339so58087f8f.0
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 11:07:31 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-501ce655fcbso91777e87.2
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 11:07:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1694628451; x=1695233251; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nymUw1ZDfcCbfR5nP9Zb3NHcjZLahSZR+IVirRUvIts=;
- b=j4o5jrgkiBmwXjb3bl/QJ+Iq2ZvhBI0Rl4c8NjX+PVWafwxMxG3rPgwkWa0nqrSs1R
- WxZDuUZFuUPIJZvwBpgDjN/SXIumuflWRoD8GTO3SSnIaKjUfeGs3F1QROuxOV+VgAGA
- vWUnzo/4LsdPgRJP9KDrGALwdHLCmvTXxHWr8=
+ bh=r3ozensYymgx1FFD+6wMYx2H4HzCD5SdvaF5IpxvnbA=;
+ b=Y5rPgph+oNr+37c2TZZoDxCTYpSBCi4m40pKygwW3MmGjtcxZeDpjHV91ve1ciGGvh
+ XtUIjZsswyLY9Pkf4O5wataqt26XO2pIQytywzhbl7IOLl3d1NHdM0DZMErvQS6UDx51
+ qyaR2YuEyXSKCdynB6+9Rbf2iMo55G+VukOEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1694628451; x=1695233251;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nymUw1ZDfcCbfR5nP9Zb3NHcjZLahSZR+IVirRUvIts=;
- b=M71bS0gHLi5B1exLqXac4zMTtzfy5D0T4uUC/weHirPoP6io/pvmfVf+Ps350nsLAL
- VCikq4di9l2li/4J3iTQL7CxVuo4FheDJDbEHLmLZ/JQHbqsKn/Nv0MbYfeiWnegK3BU
- 7ecNaqWnXtZaNpsQSEFEcLh/55pnNw+U31BEhdjFEI5r8s+xwf8yngWIrLE5ycYl4Hw7
- fvgPrR/OVnwjoPqa29uph6ZqVZRLH3sCfpzN1VTS/Fi75oXZg5Ez4L7UbKxT6CIjC9fw
- kxWaPsIesVPlemzVz1B1LZYIOm86ucIOdI1aYnLrYhG83MHoZQ5vRY1Qi1DD1S4eIQ+w
- cGhA==
-X-Gm-Message-State: AOJu0YxK63QIvY0zHj4Hr5YXIUSNU4DeXOBF2B6NfV2ZJXYvylJu/MK7
- Crju+8/sVWk8CjuLE1H2eXuhk3X0YwfnOLywFyc3LwIcNMRLEfmEd0o=
-X-Google-Smtp-Source: AGHT+IGtmokhZOOWmm2klHEZH7Izg+gBbMFcSyi6pRqHQfmyC2hQjRZJI7vkoPXZ3pzscQTHUDaPu6EUc/j7VzufGJw=
-X-Received: by 2002:a05:6000:1110:b0:319:79bb:980c with SMTP id
- z16-20020a056000111000b0031979bb980cmr2792287wrw.64.1694628451030; Wed, 13
+ bh=r3ozensYymgx1FFD+6wMYx2H4HzCD5SdvaF5IpxvnbA=;
+ b=rB650mtvQSPnrssIkcRQIfsrZJ0hyqiLlOIZQxKsgJNRX+a5ynlflmG7CL6//pEWye
+ GF8PFXCaxQnL3sdgeHoH2JY5il5P2zXIb6x16WNp+agpftLSqSMcny1Pk3JP3rEt5qt2
+ X9sFWQyFHnviNbljpVkLKggYdL0jBc+ITyLzOVB8vl6iJzQl7D3TgRykbHhTTB31XI2B
+ Bd0WV3QF102DD0jG8hpUjZJbOvQAPrwSzYskZETc9bT0Nx4+ENNIhsrXn/iFUeqkliJu
+ dBzXdl1znnGGZkRLORdbCF1b+1nUXMgZ3c38KixW/UDQkok6isMOg2Aa8ewUovsR0Cw3
+ MgTg==
+X-Gm-Message-State: AOJu0YyWSRM19EJ0VxUl8IPtAKybzFkpyJ/wP773obdUTD2zDioHsbLM
+ ITWmmEHTR2LqaGXqEFVh0ZhgUKwixXUnS1rOpVEf0A==
+X-Google-Smtp-Source: AGHT+IEfrnzvkePJVugSk/mcnoxuTfnfebbykZh2D0wM+XpvS2TPIATY+Ltl/Aq8IhvWAaZCWcuDW9EUaY0coD0JRZk=
+X-Received: by 2002:a19:ca0b:0:b0:502:d85b:5de with SMTP id
+ a11-20020a19ca0b000000b00502d85b05demr2207528lfg.68.1694628451055; Wed, 13
  Sep 2023 11:07:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ11KEV4TAjihfijFNpXmROheGPKmVwVvpgfOpZP7GZ-HA@mail.gmail.com>
- <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
- <CAPnjgZ2YJ292wMU9Yjom9TdSgHA-J2A5uHxhAZk-d3BsAsf5AQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2YJ292wMU9Yjom9TdSgHA-J2A5uHxhAZk-d3BsAsf5AQ@mail.gmail.com>
+References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
+ <20230908120002.29851-4-sughosh.ganu@linaro.org>
+ <CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com>
+ <CADg8p97cQJYogd_MZT_hCH71XjqkO85VEay2fb7hZx1YwX+OPA@mail.gmail.com>
+In-Reply-To: <CADg8p97cQJYogd_MZT_hCH71XjqkO85VEay2fb7hZx1YwX+OPA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Sep 2023 12:07:13 -0600
-Message-ID: <CAPnjgZ381_UXw5kE4V3v=Tzjt1Co5o0mNcsJfjQSc6xsxqdVvA@mail.gmail.com>
-Subject: Re: UEFI update files missing on sandbox?
+Date: Wed, 13 Sep 2023 12:07:14 -0600
+Message-ID: <CAPnjgZ1EBJJ7ZtHZVo1vp24gCrN-A-m4Hk3udLbKPS18C3QNqw@mail.gmail.com>
+Subject: Re: [PATCH 3/8] binman: capsule: Generate capsules through config file
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ Malte Schmidt <malte.schmidt-oss@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,45 +89,84 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Sun, 10 Sept 2023 at 13:13, Simon Glass <sjg@chromium.org> wrote:
+On Mon, 11 Sept 2023 at 08:13, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Hi Sughosh,
+> hi Simon,
 >
-> On Sun, 10 Sept 2023 at 04:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Mon, 11 Sept 2023 at 00:44, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > hi Simon,
+> > Hi Sughosh,
 > >
-> > On Sun, 10 Sept 2023 at 04:10, Simon Glass <sjg@chromium.org> wrote:
+> > On Fri, 8 Sept 2023 at 06:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > Hi Sughosh,
+> > > Add support in binman for generating capsules by reading the capsule
+> > > parameters through a config file. Also add a test case in binman for
+> > > this mode of capsule generation.
 > > >
-> > > I thought that all your patches were merged but now when I build
-> > > sandbox I don't see the capsule-update files generated. Is there
-> > > something missing?
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >
+> > >  tools/binman/entries.rst                   | 35 ++++++++++++
+> > >  tools/binman/etype/efi_capsule_cfg_file.py | 66 ++++++++++++++++++++++
+> > >  tools/binman/ftest.py                      | 29 ++++++++++
+> > >  tools/binman/test/319_capsule_cfg.dts      | 15 +++++
+> > >  4 files changed, 145 insertions(+)
+> > >  create mode 100644 tools/binman/etype/efi_capsule_cfg_file.py
+> > >  create mode 100644 tools/binman/test/319_capsule_cfg.dts
 > >
-> > The building of the EFI capsules was moved to the corresponding test
-> > setup. This was based on feedback from Tom Rini [1], where he had
-> > suggested that instead of having the binman nodes for the capsules as
-> > part of the sandbox dtb, it should rather be highlighted in the
-> > document.
+> > I think we discussed this some time ago. The problem I have with this
+> > is that it adds another way of specifying the image description,
+> > separate from the binman definition. This introduces all sorts of
+> > problems:
+> >
+> > - the question of where the filenames are located, something which
+> > binman tries to handle cohesively
+> > - binman has no knowledge of what is being put in the capsules
+> > - the resulting fdtmap lacks any information about what is in the capsules
+> > - it seems to create two ways of doing the same thing
+> >
+> > Binman can presumably already create multiple capsule files, just by
+> > adding to the description.
+> >
+> > What need does this feature meet?
 >
-> Hmmm that was not how I was hoping it would work.
+> We already had this discussion earlier about the need for generating
+> capsules through the config file, where I had explained the need for
+> this [1]. This is functionality which is supported by the
+> specification, and we have folks who are interested in having the
+> capsules generated through config file, and also in generation of a
+> single capsule file consisting of multiple input payloads.
 >
-> Is there a way to make the build create the files?
->
-> ...I just found efi_capsule_data()
->
-> I really don't like this at all...it is running a part of the build
-> system in the test. We have to do this in some cases, e.g. for tracing
-> we must run with a special build of sandbox, but it should not be
-> necessary for EFI capsules.
->
-> I would really like the sandbox build to produce the capsules needed
-> for tests, without any extra effort. As it is, there is no way to try
-> this out.
+> I understand that this model does not fit with the usual way in binman
+> of generating an output image by specifying it's inputs as DT nodes.
+> But just because this does not fit or align with the design of the
+> tool does not mean that we do not add support for the functionality.
+> Why can't we support this in binman as long as it is properly
+> documented as to what is being done. Moreover, my initial versions of
+> this patchset were attempting to achieve this by adding a make target,
+> but you had shot it down [2]. So it either has to be done through
+> binman, or through a make target.
 
-How about we add a single capsule update to the sandbox build, so that
-it produces an update file containing U-Boot? Is that easy to do?
+We have a lot of balls in the air right now...I would like to pause
+this one until we get the other things sorted out:
+
+- simple capsule update in sandbox (see my other email)
+- example of how to use all this on a real board (Tom is going to make
+a proposal there)
+- tidy up the testing so that it is easier to understand and fits
+better with the test framework
+- figure out the DT story, since we are still struggling to align
+there (Binman bindings, removing nodes, etc)
+
+We don't need to get all those done, but we do need to at least agree
+on the direction.
 
 Regards,
 Simon
+
+
+>
+> -sughosh
+>
+> [1] - https://lists.denx.de/pipermail/u-boot/2023-July/524849.html
+> [2] - https://lists.denx.de/pipermail/u-boot/2023-June/521103.html
