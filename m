@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD393EDEC4D
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 13:14:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF58EEDEC50
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 13:19:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B19A986BDC;
-	Wed, 13 Sep 2023 15:14:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E1BD869B6;
+	Wed, 13 Sep 2023 15:19:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hti8TBNy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="h50+eWyg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="kitAzTR2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2ECF86BDC; Wed, 13 Sep 2023 15:14:30 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 15DF486CED; Wed, 13 Sep 2023 14:16:08 +0200 (CEST)
+Received: from wnew1-smtp.messagingengine.com (wnew1-smtp.messagingengine.com
+ [64.147.123.26])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83FEE869B1
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 15:14:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D249B86983
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 14:16:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=feathertop.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-59bbdb435bfso9288977b3.3
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 06:14:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694610866; x=1695215666; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WOec907pogVPO3Yv7hQVTEjsMJ1wrsvNNfDVSOzUKso=;
- b=hti8TBNyuRQ4VftfeM2erK3lbj9b9NwLrRntRcHvSJwXHraJVm36uUZH5vi1+ybB7g
- spZ6pLzkG7CfZNk8BDx5eZZnL78Vi3S0zV9+UCRK+My1LxBRWEH5c8//hpHMcAL4/kG5
- Rm+9ThnCNLbx/Kq+XTXkgeHigUizZ4oST3nAE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694610866; x=1695215666;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WOec907pogVPO3Yv7hQVTEjsMJ1wrsvNNfDVSOzUKso=;
- b=uCxqCameKovcxcijJIL4XJvEb5DKZakhzxWksOVU1apoXSyzRtdLhOBbJ8PoRn3UZ0
- 7szLpdYoAIy0jQFfobVDhA4FTDPfmilA6SJjLziLf+P/kbrFeT96QPTG9Q4ktzQIXBL8
- WFtkiZav5DCoN8xYt5wTidHbr//PCz6GRCEUVd9u9eWVdH0hzPdLi5D9VSuFi0re5HO3
- q0ABp2LJtLsEC7OViLE5xVyb20o9bAafzsfgbr51It+QPsRlzjdTTr8XXgZTZbTghzdQ
- DaGAwiTHzD2p3gsHwnPegBeAHmgyymHzsZt8jFQRTjn0D8ICpEee/oFidNzh6HPR2fBv
- J4RQ==
-X-Gm-Message-State: AOJu0YwmuUuuff59Tcnq9DItOQal5K3PjM4C7WQe9V/3Ymam62ukBeD3
- S6jAZf10UYNASCA/UIOU17vnbw==
-X-Google-Smtp-Source: AGHT+IFrPCp13WNJU2stdszqH7vWYxZLVUKZWkSpXMWJMGcQUxm+OUrOZtspFDnmtizIfZY6as+pEA==
-X-Received: by 2002:a05:6902:134e:b0:cf8:1070:82d3 with SMTP id
- g14-20020a056902134e00b00cf8107082d3mr2089223ybu.32.1694610866111; 
- Wed, 13 Sep 2023 06:14:26 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-2580-cbcf-c7bd-45ce.res6.spectrum.com.
- [2603:6081:7b00:6400:2580:cbcf:c7bd:45ce])
- by smtp.gmail.com with ESMTPSA id
- t31-20020a25f61f000000b00c64533e4e20sm2726829ybd.33.2023.09.13.06.14.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Sep 2023 06:14:25 -0700 (PDT)
-Date: Wed, 13 Sep 2023 09:14:23 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Simon Goldschmidt <goldsimon@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Maxim Uvarov <maxim.uvarov@linaro.org>,
- Simon Glass <sjg@google.com>, u-boot@lists.denx.de,
- joe.hershberger@ni.com, rfried.dev@gmail.com
-Subject: Re: [PATCHv8 00/15] net/lwip: add lwip library for the network stack
-Message-ID: <20230913131423.GI305624@bill-the-cat>
-References: <20230908135320.7066-1-maxim.uvarov@linaro.org>
- <20230908135922.GC305624@bill-the-cat>
- <CAD8XO3bWmefyQ7Dx8fn7kc3s8=uCUhG3FcE6J4H6=qFdwa3gmw@mail.gmail.com>
- <CAPnjgZ2Y6FJELJX7RA3_PehnCQ7zaiCeQd-VKJmtj_8nwnv3_w@mail.gmail.com>
- <CAD8XO3Ynafpncs42KPX9sDw-5VQHQpwJq=22SzXDi27Dz6rrEg@mail.gmail.com>
- <CAC_iWjJXHraJ2gEMgUGaRxjQxM1JUwP+jTNUiftngY1ubcEq6Q@mail.gmail.com>
- <93c9133d-b259-c093-64f4-2acdcedd0dc2@gmx.de>
- <CALeDE9MBUd2_8TZ87PJXx_jF0D6zqGV9FY2vQCSkxG4P2GJ-JQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=tim@feathertop.org
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailnew.west.internal (Postfix) with ESMTP id 4BF1C2B000F5
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 08:16:01 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute2.internal (MEProxy); Wed, 13 Sep 2023 08:16:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
+ h=cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:sender
+ :subject:subject:to:to; s=fm1; t=1694607360; x=1694614560; bh=Jj
+ JgqsAx7FfZIPcTxwYsMDPhqcKZcRbbK5Dq7LLUuwc=; b=h50+eWygvf3SXpzltZ
+ oK0bkP9csAnVcd7YpGjHIIyIB/MmKALqzmD7wgc3t4rXvn0sdhTY7xYLu+FCuQgY
+ Gml8Q6PjBLIVM0Oe6lg55ctbDf6/YpBVTrb+BuFxljw+p2RNPICZW8xppRg4ReCC
+ 7cXqp60GLttgi8BLhaqK2xUmTCBJquJKCveGWEf0G8em2DCI42wXuVDaiKEj9CNy
+ 8+pycvnCIo180Kt0PsQrl7hs15nj4DIPgIt1+dzZ8BPl5/9OahMlF+DQfhr1CKkG
+ rRqdcM/goNPexr/X//FT9ZggWB/KcOLB70sDFzpDB2A3oipderJAy8TJuJkawi3Y
+ jqig==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm2; t=1694607360; x=1694614560; bh=JjJgqsAx7FfZI
+ PcTxwYsMDPhqcKZcRbbK5Dq7LLUuwc=; b=kitAzTR2b9ifFXIgwKp0WCLwYvfKk
+ MqkKKLlFFQ5Qk81hsELGtaB99jcvkxcBmELpKM48sqEgwmeBzjld4VvYhFUAngJE
+ JmZR7Ci0K9k+lwV1BbH0VTMg355nUn5lHdCkiWqzrrO9287R9B9f0H0CzbFSKctq
+ MLkqxxCy2cqAppev/0xKbwHt0a2z2K4E64MBSWoPbkZpF5WNb6VhgrhGBgDpPAmc
+ zB79/QsyllbbAHno3Tquc1fzscIVYANbuuX/AH/y/1xx9z3wSQrM4GSrenpzw69Q
+ oUfr6xYPwZWwMSlOwWuEpbaeUOAxVL8VJmhBUSPdxR/GkL2LAWSUw1d3w==
+X-ME-Sender: <xms:AKgBZVzpyQyZX_lt092_eSA5hqqkxw1yOWC46eA7csZnmtbsQq0ecg>
+ <xme:AKgBZVQgZwqHhhNIbd8m8vAl7CXK0rfrRCvFFWgJjeZpIV2CXjO4NDIiQu2z7GNPR
+ _8EHBVebg>
+X-ME-Received: <xmr:AKgBZfWTxLHbMVaaGdpabZ8abDOhD-xePgVrVsytHVuK5V1-383tX9B-jQ9e48Z1K_cgbVcVIlwktpOO80ynq32qPGLkg-HjnRZinQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedviedrudeikedghedtucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucenucfjughrpegtkfffgggfhffuvfhfjgesrgdtre
+ ertdefjeenucfhrhhomhepvfhimhcunfhunhhnuceothhimhesfhgvrghthhgvrhhtohhp
+ rdhorhhgqeenucggtffrrghtthgvrhhnpedtueeijeeludeiteeivefhfedvhefgieffhe
+ dtgeegffelfeegtdeuvdeghfefueenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+ mhepmhgrihhlfhhrohhmpehtihhmsehfvggrthhhvghrthhophdrohhrgh
+X-ME-Proxy: <xmx:AKgBZXiJYG6F3kRbJFmwfPLKwnYPn_VoSNXUqRdZ5viGNZTHSP6HFw>
+ <xmx:AKgBZXAcgMHjShICgMWk4BWXmfoByTlFKGgWaW9u-LvcOdsSP0IzwQ>
+ <xmx:AKgBZQJYP1UpFhYScsrASs4vkAmVp8kbuIFpJkt-gM-HDqdxRJMQWg>
+ <xmx:AKgBZa-JR6w6ZHYtDeovFlkStK6XKSbSBNrk-VKqI-5XBlNWiDLc578QVzA>
+Feedback-ID: i1f8241ce:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA for
+ <u-boot@lists.denx.de>; Wed, 13 Sep 2023 08:15:59 -0400 (EDT)
+Message-ID: <2bd4dc8c-f8c0-97c5-f0ad-2a859c96fe5b@feathertop.org>
+Date: Wed, 13 Sep 2023 22:15:57 +1000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="e/hovNOpS1z15Uzv"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9MBUd2_8TZ87PJXx_jF0D6zqGV9FY2vQCSkxG4P2GJ-JQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+From: Tim Lunn <tim@feathertop.org>
+Subject: Re: PSCI: prefetch abort with Mainline linux (even with rockchip
+ u-boot)
+To: u-boot@lists.denx.de
+References: <CA+VMnFzdObAg63NU-1iVb-oyPZi0e1wLbsQppdbYmXmisuQQZg@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <CA+VMnFzdObAg63NU-1iVb-oyPZi0e1wLbsQppdbYmXmisuQQZg@mail.gmail.com>
+X-Mailman-Approved-At: Wed, 13 Sep 2023 15:19:35 +0200
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,75 +105,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jagan,
 
---e/hovNOpS1z15Uzv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Sep 13, 2023 at 11:06:13AM +0100, Peter Robinson wrote:
-> > >> Then if for development you need  to pull he history of lwip, you ca=
-n do it with:
-> > >> git pull -s subtree lwip  master --allow-unrelated-histories
-> > >> (but I think nobody will need this.)
-> > >>
-> > >> New update of the lwip net/lwip/lwip-external dir will be done with:
-> > >> git pull -s subtree lwip  master --allow-unrelated-histories --squash
-> > >> Squash commit also has to be git format-patch friendly.
-> > >>
-> > >> If you are ok with that proposal I will send v9 with the first patch=
- created with steps above.
-> > >
-> > > We've gone through this before.  The whole purpose of this is not
-> > > having to maintain patches.
-> > > Simon, instead of "I had problems in the past", can you elaborate a b=
-it more?
-> > >
-> > > Tom said he is fine with subtrees instead of submodules and I know for
-> > > a fact EDK2 doesn't have too many issues with submodules.
-> > > Their documentation is pretty clear on building and requires
-> > >
-> > > git clone https://github.com/tianocore/edk2.git
-> > > cd edk2
-> > > git submodule update --init
-> > >
-> > > Perhaps the situation has improved since you had issues?
-> >
-> > While I don't really care how you solve this technically, I'd *strongly*
-> > be interested for U-Boot to use *unmodified* lwIP sources where an
-> > explicit reference to an lwIP commit is used. I'd rather integrate
-> > bugfixes for U-Boot into lwIP than having the sources drift apart.
->=20
-> Strongly agree here, we want to use upstream and all the combined
-> development and reviews etc rather than forking off and ending up with
-> yet another slightly different IP stack. The whole advantage of
-> adopting LWIP is the advantage of combined security, features and bugs
-> from a wide range of projects :-)
-
-Yes, this is what I want as well, and why I'm perhaps more agreeable
-with the approaches where it's a lot harder for us to start forking
-things unintentionally.  I gather submodule rather than subtree would be
-better for that case?
-
---=20
-Tom
-
---e/hovNOpS1z15Uzv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUBtaYACgkQFHw5/5Y0
-tyy1WAwAphzjg0yGuPTJHJlxA3dBldImTMMkeoO+MWs7JANzmOP017bcJ9B9B4I9
-Zf2hXoTUxsZ0PFmgjKdp4PBsjdP1LuH7lgpUyGj6+odUnEAXJcgrhesis+6gB5c6
-Xmd6jchyEAhxr4J+EcRMJTPXpSZVO0bPET74D56Tdv38TzzaVK1jTNBvJqODNAxS
-R5J2ZtpN8Fo+LSyckekT3uyU11v68ye+g4zJr9UX5xRHuynD900YRmN3xcmzUOts
-7FRxbIeohF8vGoH4wyuj9OvyUGnozhkDyxYWGLhmBSjP6VtupIlkbSdPHIUTBKCT
-es8j5l5eICk1lL0QhLq4AZTZQBBxi7AZC1DStXUiGr749FVI3j5g8mZkGU3ap/zZ
-OCWN2ABI23nFI94GhS4KcuHJwoiWYhFH3/I1a4pVfFKb33KuoMWS3LYBA4qFhQPd
-/XqD6a2Lixabk99j0FDRwtXqzqY7KxSDXLTRZGy5IyOhfBvX93g+46eNLY03aTGM
-9Zj24Cd2
-=1BRd
------END PGP SIGNATURE-----
-
---e/hovNOpS1z15Uzv--
+On 10/23/22 01:35, Jagan Teki wrote:
+> Hi Kever and Heiko,
+>
+> Rockchip 32-bit SoC, like rv1126 seems to depend on PSCI to bring SMP in linux.
+>
+> With rockchip u-boot and Mainline U-Boot the psci in linux-next
+> triggers the abort. (note that I have added rockchip_smcc and enabled
+> PSCI in u-boot)
+Did you ever find a solution to this? I am hitting the same issue 
+building 6.1 kernel for rv1126.
+> [    0.000000] Booting Linux on physical CPU 0xf00
+> [    0.000000] Linux version 6.1.0-rc1-00029-gb09e57e6064a
+> (j@j-ThinkPad-E14-Gen-2) (arm-linux-gnueabihf-gcc (GCC) 11.0.1
+> 20210310 (experimental) [master revision
+> 5987d8a79cda1069c774e5c302d5597310270026], GNU ld
+>   (Linaro_Binutils-2021.03) 2.36.50.20210310) #12 SMP Sat Oct 22
+> 19:44:56 IST 2022
+> [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
+> [    0.000000] CPU: div instructions available: patching division code
+> [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing
+> instruction cache
+> [    0.000000] OF: fdt: Machine model: Edgeble Neu2 IO Board
+> [    0.000000] earlycon: uart8250 at MMIO32 0xff570000 (options '')
+> [    0.000000] printk: bootconsole [uart8250] enabled
+> [    0.000000] Memory policy: Data cache writealloc
+> [    0.000000] efi: UEFI not found.
+> [    0.000000] cma: Reserved 64 MiB at 0x7c000000
+> [    0.000000] Zone ranges:
+> [    0.000000]   DMA      [mem 0x0000000000000000-0x000000002fffffff]
+> [    0.000000]   Normal   empty
+> [    0.000000]   HighMem  [mem 0x0000000030000000-0x000000007fffffff]
+> [    0.000000] Movable zone start for each node
+> [    0.000000] Early memory node ranges
+> [    0.000000]   node   0: [mem 0x0000000000000000-0x000000007fffffff]
+> [    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x000000007fffffff]
+> [    0.000000] psci: probing for conduit method from DT.
+> [    0.000000] Bad mode in prefetch abort handler detected
+> [    0.000000] Internal error: Oops - bad mode: 0 [#1] SMP ARM
+> [    0.000000] Modules linked in:
+> [    0.000000] CPU: 0 PID: 0 Comm: swapper Not tainted
+> 6.1.0-rc1-00029-gb09e57e6064a #12
+> [    0.000000] Hardware name: Generic DT based system
+> [    0.000000] PC is at 0x133fd468
+> [    0.000000] LR is at __invoke_psci_fn_smc+0x38/0x58
+> [    0.000000] pc : [<133fd468>]    lr : [<c0eb20f0>]    psr: 600001d6
+> [    0.000000] sp : c1e01e68  ip : c1e01ec0  fp : 80000200
+> [    0.000000] r10: c1e01f58  r9 : 7fffffff  r8 : c1e09410
+> [    0.000000] r7 : 00000000  r6 : 00000000  r5 : 00000000  r4 : 00000000
+> [    0.000000] r3 : 00000000  r2 : 00000000  r1 : 00000000  r0 : 84000000
+> [    0.000000] Flags: nZCv  IRQs off  FIQs off  Mode MON_32  ISA ARM
+> Segment none
+> [    0.000000] Control: 10c5387d  Table: 0020406a  DAC: c1e09980
+> [    0.000000] Register r0 information: non-paged memory
+> [    0.000000] Register r1 information: NULL pointer
+> [    0.000000] Register r2 information: NULL pointer
+> [    0.000000] Register r3 information: NULL pointer
+> [    0.000000] Register r4 information: NULL pointer
+> [    0.000000] Register r5 information: NULL pointer
+> [    0.000000] Register r6 information: NULL pointer
+> [    0.000000] Register r7 information: NULL pointer
+> [    0.000000] Register r8 information: non-slab/vmalloc memory
+> [    0.000000] Register r9 information: non-paged memory
+> [    0.000000] Register r10 information: non-slab/vmalloc memory
+> [    0.000000] Register r11 information: non-paged memory
+> [    0.000000] Register r12 information: non-slab/vmalloc memory
+> [    0.000000] Process swapper (pid: 0, stack limit = 0x(ptrval))
+> [    0.000000] Stack: (0xc1e01e68 to 0xc1e02000)
+> [    0.000000] 1e60:                   84000000 00000000 00000000
+> 00000000 00000000 00000000
+> [    0.000000] 1e80: 00000000 00000000 c1e09410 7fffffff c1e01f58
+> 80000200 c1e01ec0 c1e01e68
+> [    0.000000] 1ea0: c0eb20f0 133fd468 600001d6 ffffffff c1e09980
+> 00000000 c20891c0 c1b1c168
+> [    0.000000] 1ec0: 00000000 00000000 00000000 00000000 c1e01edc
+> 00000000 c20891c0 c1245ac8
+> [    0.000000] 1ee0: ff8005a8 00000000 c1d2fca0 00000000 eefea2fc
+> c1c93594 eefea2fc c1e09980
+> [    0.000000] 1f00: c20891c0 c1b1c168 c1e09410 c1c93a10 eefea2fc
+> c1c939d8 c1d2fbdc 00000000
+> [    0.000000] 1f20: 7fffffff c1caf854 c1e0afa0 c1c04c44 00000000
+> c1e01f4c c1e01f50 00000000
+> [    0.000000] 1f40: c1e09980 c198cfec c1e01f9c 00000000 80000000
+> c1e09980 ffffffff ffffffff
+> [    0.000000] 1f60: c2089064 08300000 410fc075 10c5387d 00000000
+> c039de88 c1e01f9c 00000000
+> [    0.000000] 1f80: c1e09980 c1c00420 c1e04ec0 c1e09980 c2089064
+> 08300000 410fc075 10c5387d
+> [    0.000000] 1fa0: 00000000 c1c00b08 00000000 00000000 00000000
+> 00000000 00000000 00000000
+> [    0.000000] 1fc0: 00000000 c1cc8a6c 00000000 00000000 00000000
+> c1c00420 00000051 10c0387d
+> [    0.000000] 1fe0: 00000000 08300000 410fc075 10c5387d 00000000
+> 00000000 00000000 00000000
+> [    0.000000]  __invoke_psci_fn_smc from 0xc1e01e68
+> [    0.000000] Code: bad PC value
+>
+> Any comments?
+>
+> Thanks,
+> Jagan.
+>
