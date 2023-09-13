@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF4EDCA5539
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 16:16:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358A3CA5539
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 16:20:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4D0C869DA;
-	Wed, 13 Sep 2023 18:16:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3255F869D1;
+	Wed, 13 Sep 2023 18:20:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ID8g5o1C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YR4+xICT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CAA4869E1; Wed, 13 Sep 2023 18:16:40 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id CDFEA869E1; Wed, 13 Sep 2023 18:20:05 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CDB3869D1
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 18:16:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EA5F867D2
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 18:20:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massimo.pegorer+oss@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-401d67434daso76433135e9.2
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 09:16:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d7e904674aeso6125449276.3
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 09:20:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1694621797; x=1695226597; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=UmCEcMPwpZe9VQX0hOI6JLdTw2JlVxbKQX5C1n+gNyg=;
- b=ID8g5o1CIxAUji1f8twT7kqiJmOEQNyim8QFGnrv288q7a7mHtT3PX+h16KVcQC+Yn
- ee9ckexG3biN9llk2/XAQwxfccGVTERNfbmdG1N0wzC5VwNenGELtkVsDeQE99oL1Vck
- 6HC22Ip/KUnv4+2Je9ZxD+IIHZZZsbj/rd5X6Wl4uZhSCBSPblfmN0k4njmWGLMeIbEX
- sHmNBv95KKp/Q4reEUhaG38Cs/sP75WHBAsIUZjAo2dOTNdeolbqs8tEmGo6roILdiMM
- Yp1ogFyQbQK4gqrOdav6ntjMEaCHiF2U+W8h7DH/cFZgm5DTK/bCs6SBehjhDTpcqCAf
- MmLA==
+ d=konsulko.com; s=google; t=1694622001; x=1695226801; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WNtcwOi4xHNb6EEqCkmG7dodVCFzD1H2bUZkJ9C84Ns=;
+ b=YR4+xICT5WVTrjWHXGYdHT7ZmfCXvQjlM/QgffWv/pnEX+Wkvq+aYHMurnjiK4+mw1
+ MMq104PmkNhq/W+QWBww769qVPzIHEw+8IYxpzM6VLEF260snAJplLYLD0jAy9lo1HCH
+ dY0+EXGf0YPXhFRdP6JLo9QgSOkddQQJNG6do=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694621797; x=1695226597;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1694622001; x=1695226801;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UmCEcMPwpZe9VQX0hOI6JLdTw2JlVxbKQX5C1n+gNyg=;
- b=g0b1R2KS49xTMej654yt9+jGfj1yVA3gym1Lp5V2PyLN78T+QMSSBJsEKinnsyYI0v
- HvRqW2dWkiLe1qQVdNk7SH4w20e2pfwXWp7bWYY2iktkgX71a/StSIxKtTL3wbfT/dqO
- 1rXSybBXK/g8wOGXO8X+cFzH8t4T060ptZRzK5bjilnV1tkEJbScXQWaslBxeV6uNwQx
- 4r7Rx72RDMmWYJcqIw6GqG8aHmMFau50/kbzMM68PSKyyAIVHL3xRFbiEO+J06bfkUpx
- SnHwcYYE8mQwQAmEO/KRFknKovtLl29pBHWnD5ngq1f/bU5fKtVqLX6yR3ZaPzo3Y/v6
- 7KxA==
-X-Gm-Message-State: AOJu0YzghbHtm1G3/8+gBxdxEIJgRpwxaTI63w6DzLbBlkTZdT8MIC58
- 2SX0lHtNiHAIyk+sB7PsY5erlWq05s4=
-X-Google-Smtp-Source: AGHT+IGobcsSIA0qN/Q0wd7LqL5beRTdZnEEx2u5P9i/sWSxiOS2C7VkvTvMYOTFNP9X1pJtd1aO9A==
-X-Received: by 2002:a1c:f717:0:b0:401:d1a3:d7f7 with SMTP id
- v23-20020a1cf717000000b00401d1a3d7f7mr2748458wmh.30.1694621796765; 
- Wed, 13 Sep 2023 09:16:36 -0700 (PDT)
-Received: from pegmas-T15.fritz.box ([151.71.210.190])
+ bh=WNtcwOi4xHNb6EEqCkmG7dodVCFzD1H2bUZkJ9C84Ns=;
+ b=DfvgzTZXPLdxj91mN0PZKythjUtDHD3VrBtckLxSRBPxa3OkEC6/Od7eLYL1n1A8AK
+ 0tU9OG4YZLiypU+v67Qjp/ZR7j5F+l3xnhzKk8s4kQ8nBshGIWjS2n9PUNWKJSxmpyvj
+ HEfYfJ9yIqzuoEP4NKesOS2Iq+V8AiuvOFHoqZcz4f2c8mTQ6wtQdvUJPFufkXQwYrxC
+ xfkU4KFav2xQQegCDfNzLdE7HTbYzjWZZQCBPTDYNopFpNxa395Q8ngf+TWnJEffObZd
+ ORYl3YnyCt6kVNxeuKUEaicpZkw5VOydJJ9t5wqocfkvIBBiTvj0jIYO1vn7CJ2qF2nM
+ F4BQ==
+X-Gm-Message-State: AOJu0YywdSBv/Yw1vy1iuVCiveGnwnN745tevoooQpXuVEZI/3owmxnA
+ 76DxLg5fNa2ZuzLpDWZtFEh6oQ==
+X-Google-Smtp-Source: AGHT+IGhzko0wpEauWSywdSuUPegfontcFc+/Sfer9jRMtidvuvdvuHG/WDIjkfkVkb6z8xqTHqwiQ==
+X-Received: by 2002:a05:6902:18ca:b0:d74:3924:2141 with SMTP id
+ ck10-20020a05690218ca00b00d7439242141mr3511296ybb.15.1694622001635; 
+ Wed, 13 Sep 2023 09:20:01 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-2580-cbcf-c7bd-45ce.res6.spectrum.com.
+ [2603:6081:7b00:6400:2580:cbcf:c7bd:45ce])
  by smtp.gmail.com with ESMTPSA id
- o4-20020a1c7504000000b00401d8810c8bsm2439222wmc.15.2023.09.13.09.16.36
+ 10-20020a25190a000000b00babcd913630sm2810176ybz.3.2023.09.13.09.20.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Sep 2023 09:16:36 -0700 (PDT)
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Wed, 13 Sep 2023 09:20:00 -0700 (PDT)
+Date: Wed, 13 Sep 2023 12:19:58 -0400
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?Q?Jo=E3o?= Marcos Costa <jmcosta944@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Subject: [PATCH v2] binman: doc: fix reference tag placement for Logging
- section
-Date: Wed, 13 Sep 2023 18:16:33 +0200
-Message-Id: <20230913161633.999542-1-massimo.pegorer+oss@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: u-boot@lists.denx.de, sjg@chromium.org, antoningodard@pm.me,
+ Y.Moog@phytec.de
+Subject: Re: [PATCH v3 0/7] Port gen_compile_commands.py from Linux to U-Boot
+Message-ID: <20230913161958.GL305624@bill-the-cat>
+References: <20230902145310.107054-1-jmcosta944@gmail.com>
+ <CABfBAmBirBMaSBfJWNbBQrDJYY0be8n7xaFf6aC=m=Wx0P6uMw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B8BhivcKd/LPUyAB"
+Content-Disposition: inline
+In-Reply-To: <CABfBAmBirBMaSBfJWNbBQrDJYY0be8n7xaFf6aC=m=Wx0P6uMw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,42 +94,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move BinmanLogging reference tag after section "Signing FIT container
-with private key in an image" and just before section "Logging".
-Remove meaningless line with incomplete sentence.
 
-Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
-Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
----
-Changes in v2:
-- Removed incomplete sentence (confirmed by Simon)
+--B8BhivcKd/LPUyAB
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- tools/binman/binman.rst | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+On Wed, Sep 13, 2023 at 03:28:07PM +0200, Jo=E3o Marcos Costa wrote:
+> Hello,
+>=20
+> Em s=E1b., 2 de set. de 2023 =E0s 16:53, Joao Marcos Costa <jmcosta944@gm=
+ail.com>
+> escreveu:
+>=20
+> > Hello U-Boot community,
+> >
+> > I'm submitting a patch series that ports the gen_compile_commands.py
+> > script from the Linux kernel's sources to U-Boot. This script, original=
+ly
+> > located in scripts/clang-tools/gen_compile_commands.py, enables the
+> > generation of compile_commands.json file for improved code navigation
+> > and analysis. The series consists of the initial script import, the
+> > necessary modifications for U-Boot compatibility, and finally some
+> > documentation.
+> >
+> > Your feedback on these contributions would be greatly appreciated.
+> >
+> > Best regards,
+> >
+> > Changes in v3:
+> > - Add documentation to index and fix syntax issues
+> > - Add reference to documentation in doc/build/tools
+> > Changes in v2:
+> > - Add compile_commands.json to gitignore
+> > - Add documentation
+> >
+> > Joao Marcos Costa (7):
+> >   scripts: Port Linux's gen_compile_commands.py to U-Boot
+> >   scripts/gen_compile_commands.py: adapt _LINE_PATTERN
+> >   scripts/gen_compile_commands.py: fix docstring
+> >   scripts/gen_compile_commands.py: add acknowledgments
+> >   .gitignore: add compile_commands.json
+> >   doc: add documentation for gen_compile_commands.py
+> >   doc: add new section to build/tools
+> >
+> >  .gitignore                         |   3 +
+> >  doc/build/gen_compile_commands.rst |  47 ++++++
+> >  doc/build/index.rst                |   1 +
+> >  doc/build/tools.rst                |  13 ++
+> >  scripts/gen_compile_commands.py    | 230 +++++++++++++++++++++++++++++
+> >  5 files changed, 294 insertions(+)
+> >  create mode 100644 doc/build/gen_compile_commands.rst
+> >  create mode 100755 scripts/gen_compile_commands.py
+> >
+> > --
+> > 2.41.0
+> >
+> >
+> Any updates?
 
-diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-index aeea33fddb..020988d955 100644
---- a/tools/binman/binman.rst
-+++ b/tools/binman/binman.rst
-@@ -1480,9 +1480,6 @@ as set in stone, so Binman will ensure it doesn't change. Without this feature,
- repacking an entry might cause it to disobey the original constraints provided
- when it was created.
- 
-- Repacking an image involves
--
--.. _`BinmanLogging`:
- 
- Signing FIT container with private key in an image
- --------------------------------------------------
-@@ -1501,6 +1498,7 @@ If you want to sign and replace FIT container in place::
- which will sign FIT container with private key and replace it immediately
- inside your image.
- 
-+.. _`BinmanLogging`:
- 
- Logging
- -------
--- 
-2.34.1
+Heinrich, were you happy with the doc patches?
 
+--=20
+Tom
+
+--B8BhivcKd/LPUyAB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUB4SsACgkQFHw5/5Y0
+tyzMSQv/RzojCGSSTaMMNtSt60OYgX5RX72CePeGP9Yt8htCOVcmyUPY+OSUuWPA
+a60r1ZAGZZMlYRAybf0rhAa69abscgHbkZ9NRTLXqaWq45RgmFE8tpLVBn373cuk
+DMDQVe868m69YuV9b88BCAiDD1mP/8Vks9+Cv82GiJY3AQCFFLP8ZQdAtCoWVGMu
+aIkW7pqRFgZbDh7FP2Js/9OdQWCVK98kcPkpUfiK1Xvd8W8fbHhkYTYLQKIlz1eQ
+atS2JqnnXLaaW6OcWqEpyUiMV3AovPFxB3Oj4SgN0etUDFz/8DPQ7bu9SAkAX/ES
+AdWInTOhq8VfySGhcDjg0w3M5pp76b43eY6u5akKNg3N3jniLY34ZtuPCiO/l63k
+ml4uXxF9MFG09yWJDLcEY/9ZIKkEG3b6TzzDY+WQTdo61N44UT90Cs5z3IcQjBiF
+9n5AO6rb0sy7/Ilt1KutgXcXHD81CX9VZmHNZNV+mgwH/nhr+YTPclr+RN24ujmF
+4OKw0feK
+=3/u1
+-----END PGP SIGNATURE-----
+
+--B8BhivcKd/LPUyAB--
