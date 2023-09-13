@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3687CA550A
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 08:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D3DBCA550A
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 08:43:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68A4086D31;
-	Wed, 13 Sep 2023 10:38:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09B9386564;
+	Wed, 13 Sep 2023 10:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=goldsimon@gmx.de header.b="HZIzbMPN";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=goldsimon@gmx.de header.b="L2+0LM9r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF68886E93; Wed, 13 Sep 2023 10:38:34 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 1907386571; Wed, 13 Sep 2023 10:43:12 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2422486AEE
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 10:38:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 036BC86545
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 10:43:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=goldsimon@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1694594307; x=1695199107; i=goldsimon@gmx.de;
- bh=hH9WNXWbGBZuR795Fr6knBVsO4t2THYzbBMJxuvCR44=;
+ t=1694594584; x=1695199384; i=goldsimon@gmx.de;
+ bh=GyTtqBBfXFK66i9b9vqDuhLWtoD12wXyg2sas+flGiU=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=HZIzbMPNE+tAKT5kgVBLjrvMA0AH+We1nMH6tH4bCzgaHOxx7P6ocW6QKL1yPQbccQcCASetHGd
- sinM3sE61arff8raeEqZ2QBQIF65HPgFWREwfp5Y8DE07jO2dV9INvwLLTJXRSUFdjyFbIhCgxuuf
- RJexhjjsjZG1CGy3vibVSDuKu1p8+PrCRFMO1Oxj4JfkwHsS0AlGjmhMaoWSn4ArWQhwB2l+OEd4B
- G6cBxVzxY5sxFuFY7mD4I3q5CglU7JvqFFa4R+Hb8XYGbuSTspDgKLcNOwzzbWNMulCs++jLWfddQ
- XYGNlqa4NlnonW6xPvFytKy4aze44HHAdfTw==
+ b=L2+0LM9rutjxNcS5IFDkryhcGC9KMYTQWheKMxElGEMjxfNfajrcncxAtHoDtimInl+15oCwpjt
+ E7aflkdld9wv6r0hWxuYn1gcC1Idvea7ipPDZdMq0ds95e8BiqT7nAeoNWnTRda7kq5LWQ++Kd+T8
+ KD1YCDgX48qhOx3PLSrITrz7/TRhDguFI8RBqK5CK8UysG6RY2XGBw+CwhOZ144EOShgHwcrV3YbS
+ y6CtQ9jESTv937YmgIpFEHs7R0NW3zpC2EbIZIgVBvpIBiBgQZlpHyB45Z+FKxEPGxshSyEiJJEOw
+ sajnXbtYhoNo8Ffd3shtjUJfBC5HIVAS4CBA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.2.88] ([176.199.209.230]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mplc7-1rVr702YcH-00qBu6; Wed, 13
- Sep 2023 10:38:27 +0200
-Message-ID: <e5931bb5-2dfd-d5f9-69b2-38d14eebf181@gmx.de>
-Date: Wed, 13 Sep 2023 10:38:32 +0200
+Received: from [192.168.2.88] ([176.199.209.230]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLiCo-1qxsLX3pAW-00HbA2; Wed, 13
+ Sep 2023 10:43:03 +0200
+Message-ID: <93c9133d-b259-c093-64f4-2acdcedd0dc2@gmx.de>
+Date: Wed, 13 Sep 2023 10:43:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-Subject: Re: [PATCHv8 05/15] net/lwip: implement tftp cmd
+Subject: Re: [PATCHv8 00/15] net/lwip: add lwip library for the network stack
 Content-Language: en-US
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, joe.hershberger@ni.com,
- rfried.dev@gmail.com, trini@konsulko.com
+Cc: Simon Glass <sjg@google.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, pbrobinson@gmail.com, joe.hershberger@ni.com,
+ rfried.dev@gmail.com
 References: <20230908135320.7066-1-maxim.uvarov@linaro.org>
- <20230908135320.7066-6-maxim.uvarov@linaro.org> <ZQFTbcuLihQm2qoI@hera>
+ <20230908135922.GC305624@bill-the-cat>
+ <CAD8XO3bWmefyQ7Dx8fn7kc3s8=uCUhG3FcE6J4H6=qFdwa3gmw@mail.gmail.com>
+ <CAPnjgZ2Y6FJELJX7RA3_PehnCQ7zaiCeQd-VKJmtj_8nwnv3_w@mail.gmail.com>
+ <CAD8XO3Ynafpncs42KPX9sDw-5VQHQpwJq=22SzXDi27Dz6rrEg@mail.gmail.com>
+ <CAC_iWjJXHraJ2gEMgUGaRxjQxM1JUwP+jTNUiftngY1ubcEq6Q@mail.gmail.com>
 From: Simon Goldschmidt <goldsimon@gmx.de>
-In-Reply-To: <ZQFTbcuLihQm2qoI@hera>
+In-Reply-To: <CAC_iWjJXHraJ2gEMgUGaRxjQxM1JUwP+jTNUiftngY1ubcEq6Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:eiJA4x/BLEkdpFln4H63S6RLMuzS1yRH9tViqpzcZzKs8ntNwmM
- oYsp9X8z70+gbpbxrD/hYoAfiaAOqIhO0EurVZUT3pIgs29NmSnYJATgHkcFVinynAsJuEU
- sOUNdbgqDZUjKEcHacGOf2+bzelIxbPw6vGPzHdNShGQD2c5ighh7/jR6dBmfD6YL+HB49i
- KSU/Ny6M2DdLBKo83UlLw==
-UI-OutboundReport: notjunk:1;M01:P0:A5uCWaxWYZs=;kjedIMMCe1xyrwaGa996brCynGX
- i/JAmp8ixB93dp7/YKWGJk1Z7w1h3yjgMh0fO5te5HHvQFbfuWLbEqZP3kMZO+sRHLXEM3OpZ
- E/Atb/tY8spi3Kx4IQsn9Z2DbGe4e30a6fSs0E9ltXMIK+6266l7FBXnc1wBRaO8SOHt0BMxA
- j/Z0u4MkP2rssVAS21B2BhlBhAVS3XaRolV44Seb8rQsVMFJy+TyLWE9v3L2ifEredHsKyoK3
- QVCFDtC6yogZJQyxQZ+r2qmP/fvohvw5kxt6bIKZU+LZ6Zni014mP90MiATxcGVxSse4zZtDX
- u8q5njr4BvX5TwI4o+lm/FeeT37jppzLDjq2ZrjKT3uR0cBSt5gm1Cw/sd3+DkMhdb7GyjVAx
- ntwXDq9/IWOJr/abSM8gtSJOWo0xnq0osZW3+nvd58Gqlmkg8cS+EupCtZmh2DoJaaWpbiUph
- anMC1hd1WmBDiYl3sQBCTfDoh8mvkvYNzIJNYZJy/HN54JOX6ITJXiyVEbIgKa2lfjSPSGXOJ
- EPvJSFgrWZzUhNttiXaO3XcOIAIltR+IoceNctFe2E2+7sMqE8u8UKnxLROTkd11ZxG/XbDY4
- t1hNVYxIf9sLXbWKS0iVFn7hIFUQtl0te566owTKYK/6KeASdk6b9tYKV0nzCzQoIpjOxXZF6
- C6z7Z1uT2kqZSusGxfkDUdUfXX76mR2hnKCmopvsyNvEblz8AEzqkGuP9YTDA9DmV4CQCmfKL
- GTig20nKACcikz6j7FFwwqbDpm6RIFVgE1e+VuCkeEMks096Z/sG5SrtR0rdLPhNAnAGRPsQd
- Nn3DNzeYDKNn3tKkGutjJ5kwkLXWTTT0E2U8NIM5fjePwuIZVtwRonp57r+bQB6tJNCUX+ZhK
- Xqae34WdzBlGNMH3UekGBR1udIqTekbNvV+PQmbrQOWvyB4Hns8puPxdngRrJ1cizA39NC0p+
- wV6dKCBYH81NfGImPE3EF+ein/k=
+X-Provags-ID: V03:K1:9R148iffvUPqvGQHAoAYMMrLLBb8zW7hEo4+q0DzwcmkhiUGwXe
+ tHFDK49henZcosPQr8+6DCHfxjjg+5DorO3S/i4DGAHxm/bXdTX/GbgMmaoIfoQnztvvioN
+ 0cmT00QW2dyPrL+1HvUxDM1gWQcSCBp/xAINVyZK/nEUbU903UGND0UHyz3QNBahnG8WdE5
+ h23Kh+t+qObKCyl4az42w==
+UI-OutboundReport: notjunk:1;M01:P0:fUFvI1DTn5U=;4fNAprl6sLyzl0kk6W8COfXXDbJ
+ 4JLkH36WOpmiYVX8fThh7kktgSmRpwdGfeg9A3/Y8ZgdhDurzUhtGNWE54F2ROEsJ/W5TV6H/
+ A+3j8PFmJ219juBPZ3+xqlX3qTVp4GghlpQUl27sp2O8e5aPi7cCWK8SGTUmz7eefukvcCXoT
+ zPgxNY26SPAAQE0ofQiCK41Mk1aGGQ4d7Sux3vA9NoBmSXhl3XcIFPpkg+Xe9X4c3DR1vMIg2
+ sK1OhHZAI3I0xa3bX7TknZGkuzH6RKnNnVoX/YlWqF4o26zVlDN9bfnbmJSQIk8UhZCUaX3Zh
+ NE1U3VsBZnl/rZizprs2G/xJYGIoGALY2S557YmWYKrGlcQqxx20/bkxvVAJhTeF9URmwECmu
+ mFLj6yc+rChsA56JZLP/Mnq9U1wzzra7kHejGIrnsD9o+r9uNjyyR0Oyx88+stJpAVg9i+/Bb
+ xmwpDJJ4QNfIL7uup/sKSi83YNOD2zuml5WSCp0yDiwt0vTMnBYAednHVtZV2gfCnGqyQ4mdI
+ DAx86rstEy2fO9f25TZ50bXVw43Rlr4YeV8kJjjEBJhFpMOXBLr/Ss361pi59eC7pnTQ8m1mu
+ vy91waW/ARf4a0W+YalS/fM2m5xpjLHrlYW3o1MyCgsUMMbzh2EDRhQF7wPWXlUopWCmpzTE6
+ 6yrtHfCsn7WO4BvI2iPGd2JUjF4PNjAn/iKn8ZjOXiD49U1LHQFa9PKToJ1DsEeTltVwFi+nL
+ WDZs/kWyl99+ErBKLZcvFNQRi8HtUctK+i+OzyePI5HsG7QaG19QePAmVWJLWC26F0XrDW+pB
+ FoF3RI1eGT6cBkEKsSqXooz2owwodymaZwKL04RC0muG97pEjNddyHPgDDIr2H6Os1ZrMrUpv
+ iS/dN1APK3VZY0n846ordnbDQSUkC/ejYyBQaeqnqUr1tH/99rquNg1vG45J5Y/06mU3TmLM1
+ BQmUZg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,158 +96,217 @@ X-Virus-Status: Clean
 
 
 
-On 13.09.2023 08:15, Ilias Apalodimas wrote:
->> +
->> +/*
->> + * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
->> + */
->> +
->> +#include <common.h>
->> +#include <command.h>
->> +#include <console.h>
->> +#include <bootstage.h>
->> +
->> +#include "tftp_client.h"
->> +#include "tftp_server.h"
->> +#include <tftp_example.h>
->> +
->> +#include <string.h>
->> +
->> +#include <net/ulwip.h>
->> +
->> +static ulong daddr;
->> +static ulong size;
->> +
->> +static void *tftp_open(const char *fname, const char *mode, u8_t is_wr=
-ite)
->> +{
->> +	return NULL;
->> +}
->> +
->> +static void tftp_close(void *handle)
->> +{
->> +	log_info("\ndone\n");
->> +	log_info("Bytes transferred =3D %ld (0x%lx hex)\n", size, size);
->> +
->> +	bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
->> +	if (env_set_hex("filesize", size)) {
->> +		log_err("filesize not updated\n");
->> +		ulwip_exit(-1);
->> +		return;
->> +	}
->> +	ulwip_exit(0);
->> +}
->> +
->> +static int tftp_read(void *handle, void *buf, int bytes)
->> +{
->> +	return 0;
->> +}
->> +
->> +static int tftp_write(void *handle, struct pbuf *p)
->> +{
->> +	struct pbuf *q;
->> +
->> +	for (q =3D p; q !=3D NULL; q =3D q->next) {
->> +		memcpy((void *)daddr, q->payload, q->len);
->> +		daddr +=3D q->len;
->> +		size +=3D q->len;
->> +		log_info("#");
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->> +static void tftp_error(void *handle, int err, const char *msg, int siz=
-e)
->> +{
->> +	char message[100];
->> +
->> +	memset(message, 0, sizeof(message));
->> +	memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
->> +
->> +	log_info("TFTP error: %d (%s)", err, message);
->> +}
->> +
->> +static const struct tftp_context tftp =3D {
->> +	tftp_open,
->> +	tftp_close,
->> +	tftp_read,
->> +	tftp_write,
->> +	tftp_error
->> +};
->> +
->> +int ulwip_tftp(ulong addr, char *fname)
->> +{
->> +	void *f =3D (void *)0x1; /* unused fake file handle*/
+On 13.09.2023 09:53, Ilias Apalodimas wrote:
+> Hi Maxim,
 >
-> I haven't dug into lwip details yet, but I am not sure this is safe to u=
-se.
-> Simon, since you maintain the lwip part can you elaborate a bit more?
+> On Wed, 13 Sept 2023 at 10:32, Maxim Uvarov <maxim.uvarov@linaro.org> wr=
+ote:
+>>
+>>
+>>
+>> On Wed, 13 Sept 2023 at 01:27, Simon Glass <sjg@google.com> wrote:
+>>>
+>>> Hi Maxim,
+>>>
+>>> On Tue, 12 Sept 2023 at 05:42, Maxim Uvarov <maxim.uvarov@linaro.org> =
+wrote:
+>>>>
+>>>> On Fri, 8 Sept 2023 at 19:59, Tom Rini <trini@konsulko.com> wrote:
+>>>>
+>>>>> On Fri, Sep 08, 2023 at 07:53:05PM +0600, Maxim Uvarov wrote:
+>>>>>
+>>>>>> Before apply these patches it  is needed to create lwIP merge into
+>>>>> U-Boot:
+>>>>>> git subtree add --prefix net/lwip/lwip-external
+>>>>> https://git.savannah.nongnu.org/git/lwip.git master --squash
+>>>>>> or
+>>>>>> create git submodule, depends how it's more easy to maintain extern=
+al
+>>>>>> library.
+>>>>>
+>>>>> So, I think we're going to go with subtree.  Please work out how to
+>>>>> integrate the above in to the build process automatically (and such =
+that
+>>>>> we can maintain it via upgrades moving forward).
+>>>>>
+>>>>> --
+>>>>> Tom
+>>>>>
+>>>>
+>>>> I did not find a good way to friend git format-patch, git am and subt=
+ree.
+>>>> And now with using subtree I can provide my thoughts, in general I do=
+ not
+>>>> see any big advantages
+>>>> with maintaining subtree code.
+>>>>
+>>>> Problem is that:
+>>>>
+>>>> 1. subtree does some root reset. So rebase looks like:
+>>>> label onto
+>>>>
+>>>>
+>>>>
+>>>> # Branch acbc0469a49de7055141cc730aa9c728e61b6de2-2
+>>>>
+>>>> reset [new root]
+>>>>
+>>>> pick acbc0469a4 Squashed 'net/lwip/lwip-external/' content from commi=
+t
+>>>> 84fde1ebbf
+>>>> label acbc0469a49de7055141cc730aa9c728e61b6de2-2
+>>>>
+>>>>
+>>>>
+>>>> reset onto
+>>>>
+>>>> merge -C ec4a128c8d acbc0469a49de7055141cc730aa9c728e61b6de2-2 # Merg=
+e
+>>>> commit 'acbc0469a49de7055141cc730aa9c728e61b6de2' as
+>>>> 'net/lwip/lwip-external'
+>>>> pick 739681a6f5 net/lwip: add doc/develop/net_lwip.rst
+>>>>
+>>>> pick f0ecab85e0 net/lwip: integrate lwIP library
+>>>>
+>>>> 2. if  --rebase-merges option was not provided to rebase, then rebase=
+ will
+>>>> omit subtree directory and try to apply rebase patches to root direct=
+ory.
+>>>> I.e. in current case squashed commit for lwip, will be applied to ubo=
+ot
+>>>> root directory instead of ./net/lwip/lwip-external.
+>>>>
+>>>> 3. due to broken rebases without --rebase-merges more likely things l=
+ike
+>>>> git bisect also will not work.
+>>>>
+>>>> 4.  change in subtree code ./net/lwip/lwip-external/../something.c wi=
+ll
+>>>> create a git commit which looks like a standard U-Boot commit. I.e. p=
+ath
+>>>> starts with ./net/lwip/lwip-external/
+>>>
+>>> I don't really understand most of the above, but I take it that
+>>> subtree has some problems...I did find an article about subtree [1]
+>>>
+>>>>
+>>>> 5. lwip maintains code with a mailing list.  So we don't need to push
+>>>> subtree git somewhere to create a pull request.
+>>>>
+>>>> 6. I rechecked the latest edk2 and they use submodules now. (openssl,
+>>>> libfdt, berkeley-softfloat-3 and others).
+>>>>
+>>>> 7. dynamic download also looks horrible for me. I.e. create subtree i=
+n
+>>>> Makefile on compilation process. I think maintaining that will give y=
+ou a
+>>>> bunch of problems. I think we should not touch git structure after cl=
+oning.
+>>>>
+>>>> So what I can here suggest:
+>>>> 1.  lwip source code is 9.4M.  If we compare all code it will be 564M=
+ in
+>>>> total. So just having 1 commit witn copy of lwip library will work he=
+re.
+>>>
+>>> So we add a 9.4MB patch for the code we need? I suppose that is OK,
+>>> although it is much larger than net/ today (0.5MB).
+>>>
+>>> What is the churn on lwip? E.g. would it be easy to add a commit every
+>>> few months to bring in upstream changes?
+>>>
+>>>>
+>>>> or
+>>>>
+>>>> 2. use git submodules. Size of the project will be lower.  Submodule =
+will
+>>>> not allow you to use local changes. I.e. change needs to be merged in=
+to the
+>>>> upstream project and then you can update git HEAD for the submodule.
+>>>
+>>> I really don't want to work with a submodule project. I've just had
+>>> too many problems.
+>>>
+>>>>
+>>>> or
+>>>>
+>>>> 3. inside u-boot.git create branch lib-lwip and clone lwip repo there=
+. Then
+>>>> use git submoule to connect this branch as a folder to the main U-Boo=
+t code.
+>>>
+>>> It really needs to be properly part of U-Boot.
+>>>
+>>
+>> Ok. Then more likely we don't need all the git history of lwip inside u=
+boot.git. Then the option with a single commit is more preferable.
+>> Then we can use part 2 of this article, how to  go with standard git co=
+mmands:
+>>
+>> 1.
+>> <cmd>
+>> git remote add -f lwip https://git.savannah.nongnu.org/git/lwip.git
+>> git read-tree --prefix=3Dnet/lwip/lwip-external -u lwip/master
+>> git commit -m "lwip merge sha: xxxx"
+>> </cmd>
+>> this will create a git format-patch friendly commit. Then we send it to=
+ the mailing list  and apply.
+>> I hope the mailing list will allow us to send a 7.8 MB patch.
+>>
+>>
+>> Then if for development you need  to pull he history of lwip, you can d=
+o it with:
+>> git pull -s subtree lwip  master --allow-unrelated-histories
+>> (but I think nobody will need this.)
+>>
+>> New update of the lwip net/lwip/lwip-external dir will be done with:
+>> git pull -s subtree lwip  master --allow-unrelated-histories --squash
+>> Squash commit also has to be git format-patch friendly.
+>>
+>> If you are ok with that proposal I will send v9 with the first patch cr=
+eated with steps above.
+>
+> We've gone through this before.  The whole purpose of this is not
+> having to maintain patches.
+> Simon, instead of "I had problems in the past", can you elaborate a bit =
+more?
+>
+> Tom said he is fine with subtrees instead of submodules and I know for
+> a fact EDK2 doesn't have too many issues with submodules.
+> Their documentation is pretty clear on building and requires
+>
+> git clone https://github.com/tianocore/edk2.git
+> cd edk2
+> git submodule update --init
+>
+> Perhaps the situation has improved since you had issues?
 
- From the lwIP design, using an invalid pointer here is ok: that pointer
-is only used as a client handle which is never dereferenced internally.
-The only requirement is that it is not NULL, as that is the validity
-check for the tftp client to know the handle is valid (or e.g. open
-failed etc.).
-
-So while we can leave 0x1 here, using a static uint8_t would probably be
-better, at the expense of using a byte for nothing.
+While I don't really care how you solve this technically, I'd *strongly*
+be interested for U-Boot to use *unmodified* lwIP sources where an
+explicit reference to an lwIP commit is used. I'd rather integrate
+bugfixes for U-Boot into lwIP than having the sources drift apart.
 
 Regards,
 Simon
 
 >
->> +	err_t err;
->> +	ip_addr_t srv;
->> +	int ret;
->> +	char *server_ip;
->> +
->> +	if (!fname || addr =3D=3D 0)
->> +		return CMD_RET_FAILURE;
->> +
->> +	size =3D 0;
->> +	daddr =3D addr;
->> +	server_ip =3D env_get("serverip");
->> +	if (!server_ip) {
->> +		log_err("error: serverip variable has to be set\n");
->> +		return CMD_RET_FAILURE;
->> +	}
->> +
->> +	ret =3D ipaddr_aton(server_ip, &srv);
->> +	if (!ret) {
->> +		log_err("error: ipaddr_aton\n");
->> +		return CMD_RET_FAILURE;
->> +	}
->> +
->> +	log_info("TFTP from server %s; our IP address is %s\n",
->> +		 server_ip, env_get("ipaddr"));
->> +	log_info("Filename '%s'.\n", fname);
->> +	log_info("Load address: 0x%lx\n", daddr);
->> +	log_info("Loading:");
->> +
->> +	bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start");
->> +
->> +	err =3D tftp_init_client(&tftp);
->> +	if (!(err =3D=3D ERR_OK || err =3D=3D ERR_USE))
->> +		log_err("tftp_init_client err: %d\n", err);
->> +
->> +	err =3D tftp_get(f, &srv, TFTP_PORT, fname, TFTP_MODE_OCTET);
->> +	/* might return different errors, like routing problems */
->> +	if (err !=3D ERR_OK) {
->> +		log_err("tftp_get err=3D%d\n", err);
->> +		return CMD_RET_FAILURE;
->> +	}
->> +
->> +	if (env_set_hex("fileaddr", addr)) {
->> +		log_err("fileaddr not updated\n");
->> +		return CMD_RET_FAILURE;
->> +	}
->> +
->> +	return CMD_RET_SUCCESS;
->> +}
->> --
->> 2.30.2
->>
->
 > Thanks
 > /Ilias
+>>
+>> Thanks,
+>> Maxim.
+>>
+>>
+>>
+>>
+>>
+>>
+>>>
+>>>>
+>>>> BR,
+>>>> Maxim.
+>>>
+>>> Regards,
+>>> Simon
+>>>
+>>> [1] https://www.atlassian.com/git/tutorials/git-subtree
