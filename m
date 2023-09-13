@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FBF3EDEC4D
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 13:35:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A52BCEDEC4D
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 13:38:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 990CA86C23;
-	Wed, 13 Sep 2023 15:35:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 25EEE8645F;
+	Wed, 13 Sep 2023 15:38:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="whlUA1Oc";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZlcQ1UL2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C4B886BAE; Wed, 13 Sep 2023 15:35:04 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id AA873864D7; Wed, 13 Sep 2023 15:38:21 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F30D86E30
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 15:35:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E24558640F
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 15:38:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-501bef6e0d3so11216588e87.1
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 06:35:01 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-9a65f9147ccso876532666b.1
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 06:38:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694612101; x=1695216901; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694612298; x=1695217098; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1/A+QJLNoJNi+8D/iwIZ/12Rdqo2hGXegNBruu2ciCc=;
- b=whlUA1OcrsfHLVwH6hCEKBoV3m8CzFkkEfCjPSj+l4nzkseNiN+5x9Px6TGLDSAW7F
- elcor3OU5G91MgMqxByH3SKpK80MDH6nXHO72iAlsmjxN+mhHBXWQAIstjAe8IJCtmpv
- GT3nQ6iSWeUW8C9xTTXAyXtRJQ6tSGKxw16577yZOGc7bsgN0iq8usTHronsRj4pPb+H
- QYv4oez+sh3h5AQ8SGvhW+97KBQyT+oKObEMsGqcR8GNzAyQ99gSbT8im6Umlmt5L2K2
- /1ShFNE532kl2qMlEe8GycanF3ORulKZAlCr8w3moLkxlwCRX46eNWdptgIRz2gA3fTj
- GkNg==
+ bh=RUf5GyMt7NxQdxxwRE58EJkDK1gXnrKxp7IW41kGU1U=;
+ b=ZlcQ1UL2bUz6IPeuKhryBFLjywV7LdosZDtKehhe0s8gULF+lq2K/Fc3FvsFH01ZJw
+ upa5rc6nXqRG37CmqLZxLSdECUEYosXxwS0fpbJah+qEHW5k+rA5hHQ/IOGXHoobJDv/
+ Lh6ThmdthLhuQJY5F8JUhWqneV2LFqFGHBB2UYGNduc4Nuh7jioy83NJSUCOwN6k/M2g
+ UtAV6YogJ65WE70L5OaIDzhJmIYyD1+8Y620YfAxiPrxYQNWz9E2atBO4Gm2O6EMfYWo
+ Lb0IWpwCTz40cTRcSxNnj3f8k7dv5eC1F9tK9ZrFxAsjedrBmX9M4nqPeMaq3lNOCUyo
+ c2OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694612101; x=1695216901;
+ d=1e100.net; s=20230601; t=1694612298; x=1695217098;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1/A+QJLNoJNi+8D/iwIZ/12Rdqo2hGXegNBruu2ciCc=;
- b=tkaFzSWSuWaRLdZGpKU+aiY9U058jZitcnL/u8bcYDJLABO7I/ApM4ezjlu+JjYRQE
- NDlFJR2i3EDe1NrY9tyyln1FIxCEAWoPrMmKpMgwMRA4RaoOWeVKg5MGcyD1tK/NNshD
- dHKW9SPLNByYufJEvgXF5r0sVWkP1SZJ0WtSLArpuaitUMQuSLexKshMNFtBeOzuWW2b
- ztwoxaXBQdhBGpU0hm8P5SHyU6jd7UqnhWAr0YqJa4Khd13HSrnkYL/EoYmf/1vtxxcZ
- 9pIrRqo9NWij/2GaS8i/PkCE/ugICI29QlCn9u9G8emmrfbUnJvJyxaIDvNBsFEWXu1w
- zY0Q==
-X-Gm-Message-State: AOJu0YzcrZQmbkSsSscv+EXgUbXBpHutyvN2h3nbus2oxi/U8aHzEFZR
- /jVvjHqtpE6U89FPydjQwPrsicRN11CvAehNMpm9tg==
-X-Google-Smtp-Source: AGHT+IFrsm5UhFNRDBzk0p0r+3+UyAxAycTDeggL6WTqtVDXLL5L7KkcNSJyqHFMOE8skRtzm1ctlh6GC43Ctxlh8+w=
-X-Received: by 2002:a05:6512:1305:b0:500:acf1:b432 with SMTP id
- x5-20020a056512130500b00500acf1b432mr2200130lfu.63.1694612100367; Wed, 13 Sep
- 2023 06:35:00 -0700 (PDT)
+ bh=RUf5GyMt7NxQdxxwRE58EJkDK1gXnrKxp7IW41kGU1U=;
+ b=l/CYfc2PryG738eAEkojyyy46lOd+kUyiHVNuggdjOCDUq6FD1W+aC+0IrjXR9hjhx
+ DvayVZJSx/v9TZU0l2j6s9aBcH+WMcdNpySSTEJObaUEOra1D4e1WcCfSJjO08SHSR9C
+ pVk1vN7jZbPqoWJSNUSQvTr1JWvToYWuTLS9rI6eb2/yvJoa8OdM9yvUb1Hd7ksHViy0
+ DQoLPY4oTbb4pzFBCLsVVsL4++JoexP0I50nCRs340PTEMDPGJ+8atqW4Leo+9s/Vv2m
+ ZhM91KKh9MuAIzxU/vlW2cw3GeYXCVOGxkjKeODLJnP9TZD/P3UwHgGQORCX2ZcEp3aN
+ qbEw==
+X-Gm-Message-State: AOJu0YwoIxwY4CbKjotjOvJow2XM7hOXk/sNJjwX0Arrc8oLAVbzpg6U
+ xvLr6SOTh5Xh3sxT61XIbxuVcCApxgaA06HRxUFERA==
+X-Google-Smtp-Source: AGHT+IFPPRXvVUYdnqyHq83HIfhAImpUoBgAM0qWg9oQsfvUNmly0Z1OEpeGjUWGzoVh5XTxu1vK2NE4VphKNRXh8eY=
+X-Received: by 2002:a17:907:784e:b0:9a9:e5bb:edc5 with SMTP id
+ lb14-20020a170907784e00b009a9e5bbedc5mr1906642ejc.65.1694612298356; Wed, 13
+ Sep 2023 06:38:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230908135320.7066-1-maxim.uvarov@linaro.org>
- <20230908135922.GC305624@bill-the-cat>
- <CAD8XO3bWmefyQ7Dx8fn7kc3s8=uCUhG3FcE6J4H6=qFdwa3gmw@mail.gmail.com>
- <CAPnjgZ2Y6FJELJX7RA3_PehnCQ7zaiCeQd-VKJmtj_8nwnv3_w@mail.gmail.com>
- <CAD8XO3Ynafpncs42KPX9sDw-5VQHQpwJq=22SzXDi27Dz6rrEg@mail.gmail.com>
- <CAC_iWjJXHraJ2gEMgUGaRxjQxM1JUwP+jTNUiftngY1ubcEq6Q@mail.gmail.com>
- <93c9133d-b259-c093-64f4-2acdcedd0dc2@gmx.de>
- <CALeDE9MBUd2_8TZ87PJXx_jF0D6zqGV9FY2vQCSkxG4P2GJ-JQ@mail.gmail.com>
- <20230913131423.GI305624@bill-the-cat>
-In-Reply-To: <20230913131423.GI305624@bill-the-cat>
+ <20230908135320.7066-6-maxim.uvarov@linaro.org> <ZQFTbcuLihQm2qoI@hera>
+ <e5931bb5-2dfd-d5f9-69b2-38d14eebf181@gmx.de>
+In-Reply-To: <e5931bb5-2dfd-d5f9-69b2-38d14eebf181@gmx.de>
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Wed, 13 Sep 2023 19:34:47 +0600
-Message-ID: <CAD8XO3aq9+KDOUXKtURaL8UwX96RLqqwAhDz=U2924BfUdz9+g@mail.gmail.com>
-Subject: Re: [PATCHv8 00/15] net/lwip: add lwip library for the network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Goldschmidt <goldsimon@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@google.com>,
- u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com
+Date: Wed, 13 Sep 2023 19:38:05 +0600
+Message-ID: <CAD8XO3ZXoygUEagnpQhkQtK_XJF-o9n0bA953cdDD-=CDc43mw@mail.gmail.com>
+Subject: Re: [PATCHv8 05/15] net/lwip: implement tftp cmd
+To: Simon Goldschmidt <goldsimon@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, 
+ joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -95,64 +89,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 Sept 2023 at 19:14, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 13 Sept 2023 at 14:38, Simon Goldschmidt <goldsimon@gmx.de> wrote:
 
-> On Wed, Sep 13, 2023 at 11:06:13AM +0100, Peter Robinson wrote:
-> > > >> Then if for development you need  to pull he history of lwip, you
-> can do it with:
-> > > >> git pull -s subtree lwip  master --allow-unrelated-histories
-> > > >> (but I think nobody will need this.)
-> > > >>
-> > > >> New update of the lwip net/lwip/lwip-external dir will be done with:
-> > > >> git pull -s subtree lwip  master --allow-unrelated-histories
-> --squash
-> > > >> Squash commit also has to be git format-patch friendly.
-> > > >>
-> > > >> If you are ok with that proposal I will send v9 with the first
-> patch created with steps above.
-> > > >
-> > > > We've gone through this before.  The whole purpose of this is not
-> > > > having to maintain patches.
-> > > > Simon, instead of "I had problems in the past", can you elaborate a
-> bit more?
-> > > >
-> > > > Tom said he is fine with subtrees instead of submodules and I know
-> for
-> > > > a fact EDK2 doesn't have too many issues with submodules.
-> > > > Their documentation is pretty clear on building and requires
-> > > >
-> > > > git clone https://github.com/tianocore/edk2.git
-> > > > cd edk2
-> > > > git submodule update --init
-> > > >
-> > > > Perhaps the situation has improved since you had issues?
-> > >
-> > > While I don't really care how you solve this technically, I'd
-> *strongly*
-> > > be interested for U-Boot to use *unmodified* lwIP sources where an
-> > > explicit reference to an lwIP commit is used. I'd rather integrate
-> > > bugfixes for U-Boot into lwIP than having the sources drift apart.
+>
+>
+> On 13.09.2023 08:15, Ilias Apalodimas wrote:
+> >> +
+> >> +/*
+> >> + * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
+> >> + */
+> >> +
+> >> +#include <common.h>
+> >> +#include <command.h>
+> >> +#include <console.h>
+> >> +#include <bootstage.h>
+> >> +
+> >> +#include "tftp_client.h"
+> >> +#include "tftp_server.h"
+> >> +#include <tftp_example.h>
+> >> +
+> >> +#include <string.h>
+> >> +
+> >> +#include <net/ulwip.h>
+> >> +
+> >> +static ulong daddr;
+> >> +static ulong size;
+> >> +
+> >> +static void *tftp_open(const char *fname, const char *mode, u8_t
+> is_write)
+> >> +{
+> >> +    return NULL;
+> >> +}
+> >> +
+> >> +static void tftp_close(void *handle)
+> >> +{
+> >> +    log_info("\ndone\n");
+> >> +    log_info("Bytes transferred = %ld (0x%lx hex)\n", size, size);
+> >> +
+> >> +    bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
+> >> +    if (env_set_hex("filesize", size)) {
+> >> +            log_err("filesize not updated\n");
+> >> +            ulwip_exit(-1);
+> >> +            return;
+> >> +    }
+> >> +    ulwip_exit(0);
+> >> +}
+> >> +
+> >> +static int tftp_read(void *handle, void *buf, int bytes)
+> >> +{
+> >> +    return 0;
+> >> +}
+> >> +
+> >> +static int tftp_write(void *handle, struct pbuf *p)
+> >> +{
+> >> +    struct pbuf *q;
+> >> +
+> >> +    for (q = p; q != NULL; q = q->next) {
+> >> +            memcpy((void *)daddr, q->payload, q->len);
+> >> +            daddr += q->len;
+> >> +            size += q->len;
+> >> +            log_info("#");
+> >> +    }
+> >> +
+> >> +    return 0;
+> >> +}
+> >> +
+> >> +static void tftp_error(void *handle, int err, const char *msg, int
+> size)
+> >> +{
+> >> +    char message[100];
+> >> +
+> >> +    memset(message, 0, sizeof(message));
+> >> +    memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
+> >> +
+> >> +    log_info("TFTP error: %d (%s)", err, message);
+> >> +}
+> >> +
+> >> +static const struct tftp_context tftp = {
+> >> +    tftp_open,
+> >> +    tftp_close,
+> >> +    tftp_read,
+> >> +    tftp_write,
+> >> +    tftp_error
+> >> +};
+> >> +
+> >> +int ulwip_tftp(ulong addr, char *fname)
+> >> +{
+> >> +    void *f = (void *)0x1; /* unused fake file handle*/
 > >
-> > Strongly agree here, we want to use upstream and all the combined
-> > development and reviews etc rather than forking off and ending up with
-> > yet another slightly different IP stack. The whole advantage of
-> > adopting LWIP is the advantage of combined security, features and bugs
-> > from a wide range of projects :-)
+> > I haven't dug into lwip details yet, but I am not sure this is safe to
+> use.
+> > Simon, since you maintain the lwip part can you elaborate a bit more?
 >
-> Yes, this is what I want as well, and why I'm perhaps more agreeable
-> with the approaches where it's a lot harder for us to start forking
-> things unintentionally.  I gather submodule rather than subtree would be
-> better for that case?
+>  From the lwIP design, using an invalid pointer here is ok: that pointer
+> is only used as a client handle which is never dereferenced internally.
+> The only requirement is that it is not NULL, as that is the validity
+> check for the tftp client to know the handle is valid (or e.g. open
+> failed etc.).
 >
-> --
-> Tom
+> So while we can leave 0x1 here, using a static uint8_t would probably be
+> better, at the expense of using a byte for nothing.
+>
+> Regards,
+> Simon
 >
 
-Yes, submodule will be a much better solution for us. And I also don't
-think that today
-there are any issues with submodules. It works well of OE, RPM and DEB
-builds,
-distributions should not have problems with it.
+U-Boot does not like statics due to the fact that it can relocate itself to
+another address.
 
 BR,
 Maxim.
+
+
+>
+> >
+> >> +    err_t err;
+> >> +    ip_addr_t srv;
+> >> +    int ret;
+> >> +    char *server_ip;
+> >> +
+> >> +    if (!fname || addr == 0)
+> >> +            return CMD_RET_FAILURE;
+> >> +
+> >> +    size = 0;
+> >> +    daddr = addr;
+> >> +    server_ip = env_get("serverip");
+> >> +    if (!server_ip) {
+> >> +            log_err("error: serverip variable has to be set\n");
+> >> +            return CMD_RET_FAILURE;
+> >> +    }
+> >> +
+> >> +    ret = ipaddr_aton(server_ip, &srv);
+> >> +    if (!ret) {
+> >> +            log_err("error: ipaddr_aton\n");
+> >> +            return CMD_RET_FAILURE;
+> >> +    }
+> >> +
+> >> +    log_info("TFTP from server %s; our IP address is %s\n",
+> >> +             server_ip, env_get("ipaddr"));
+> >> +    log_info("Filename '%s'.\n", fname);
+> >> +    log_info("Load address: 0x%lx\n", daddr);
+> >> +    log_info("Loading:");
+> >> +
+> >> +    bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start");
+> >> +
+> >> +    err = tftp_init_client(&tftp);
+> >> +    if (!(err == ERR_OK || err == ERR_USE))
+> >> +            log_err("tftp_init_client err: %d\n", err);
+> >> +
+> >> +    err = tftp_get(f, &srv, TFTP_PORT, fname, TFTP_MODE_OCTET);
+> >> +    /* might return different errors, like routing problems */
+> >> +    if (err != ERR_OK) {
+> >> +            log_err("tftp_get err=%d\n", err);
+> >> +            return CMD_RET_FAILURE;
+> >> +    }
+> >> +
+> >> +    if (env_set_hex("fileaddr", addr)) {
+> >> +            log_err("fileaddr not updated\n");
+> >> +            return CMD_RET_FAILURE;
+> >> +    }
+> >> +
+> >> +    return CMD_RET_SUCCESS;
+> >> +}
+> >> --
+> >> 2.30.2
+> >>
+> >
+> > Thanks
+> > /Ilias
+>
