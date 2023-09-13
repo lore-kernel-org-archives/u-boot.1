@@ -4,61 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E51EEB58F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 04:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058DBCA0ED1
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 04:40:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5AFE86E1C;
-	Wed, 13 Sep 2023 06:39:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12F0F86E54;
+	Wed, 13 Sep 2023 06:39:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XR9j+O3P";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kLMo+o0A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF17786E26; Wed, 13 Sep 2023 06:39:47 +0200 (CEST)
+ id 1363586E4E; Wed, 13 Sep 2023 06:39:49 +0200 (CEST)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3E8786E1A
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 06:39:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C32E86D31
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 06:39:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38D4ddtB033711;
- Tue, 12 Sep 2023 23:39:39 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38D4dgvK033726;
+ Tue, 12 Sep 2023 23:39:42 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694579979;
- bh=x9V3g08WV7P734UsuU7UEqB1KLrOGzWSThUtRJXtGYc=;
- h=From:To:CC:Subject:Date;
- b=XR9j+O3PAi/GIFC6vXAsU6GXNylOQw0VeyhN3/OwHSRRdoBL9f3zEMTvWc79uJwbZ
- 8b1iwiOSfvY38sCEnswIeBD5hlKNXUB2Znm6Zvo893ePxWbs+JZo5t8pwiTwWpam/t
- NOnAUkFdNgCvJKHtseiSwuskdCVZ+quE8cvfNuto=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38D4ddD7102851
+ s=ti-com-17Q1; t=1694579982;
+ bh=whyJEhELj7QjZGq/AR958YllGRocCw7/z1TkwooMiS0=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=kLMo+o0AGvrbu6yZTTUwlf7lfdt+XBLYetCJOt3ezr0gVh3wZdsgQ9I5Hy7ReTdbo
+ h/lZud1qnD9CewK8cs2qR5573/8CULqHoVKoVezLvbH14Mc20grkzNQ4KBgLAMk2ID
+ 75t9Wme0suyR7lucCVmSej1kzSznqIb8uFnvdltM=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38D4dgj8017155
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 12 Sep 2023 23:39:39 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 12 Sep 2023 23:39:42 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
- Sep 2023 23:39:39 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 23:39:42 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 12 Sep 2023 23:39:39 -0500
+ Frontend Transport; Tue, 12 Sep 2023 23:39:42 -0500
 Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38D4dZNZ028334;
- Tue, 12 Sep 2023 23:39:36 -0500
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38D4dZNa028334;
+ Tue, 12 Sep 2023 23:39:39 -0500
 From: Udit Kumar <u-kumar1@ti.com>
 To: <nm@ti.com>, <vigneshr@ti.com>, <jh80.chung@samsung.com>, <lukma@denx.de>, 
  <seanga2@gmail.com>, <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <a-nandan@ti.com>, Udit Kumar
  <u-kumar1@ti.com>
-Subject: [PATCH v3 0/3] enable power and clock Kconfig conditionally
-Date: Wed, 13 Sep 2023 10:09:27 +0530
-Message-ID: <20230913043930.1316130-1-u-kumar1@ti.com>
+Subject: [PATCH v3 1/3] power: domain: ti: Enable single config for power
+ domain
+Date: Wed, 13 Sep 2023 10:09:28 +0530
+Message-ID: <20230913043930.1316130-2-u-kumar1@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230913043930.1316130-1-u-kumar1@ti.com>
+References: <20230913043930.1316130-1-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -79,38 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series, updates enabling mutually exclusive power and clock configs
-for TI SOCs.
+TI SOC has two power domain TI_SCI_POWER_DOMAIN and
+TI_POWER_DOMAIN. These are mutually exclusive.
+So adding rule to select one, in case defconfig enabled both.
 
+Suggested-by: Nishanth Menon <nm@ti.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Reviewed-by: Nishanth Menon <nm@ti.com>
+---
+ drivers/power/domain/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Sorry to push clock and power changes in one series,
-managed by two maintainers. But In my quick grep,
-I am not able to active PR raise from both trees.
-So copying maintainers of clock and power for review.
-
-Change log
-Changes in v3:
-- Patch 1 and 2: Added reviewed by
-- Patch 3: Corrected Fixes in commit message
-link to v2:
-https://lore.kernel.org/all/20230912130645.1202325-1-u-kumar1@ti.com/
-
-Changes in v2:
-- Patch 1 and 2) Added conditional support to enable Kconfig
-- Patch 3 No change
-link to v1:
-https://lore.kernel.org/all/20230911111946.749270-1-u-kumar1@ti.com/
-
-Udit Kumar (3):
-  power: domain: ti: Enable single config for power domain
-  clk: ti: Add support to enable configs conditionally
-  config: j7200: remove not needed power config
-
- configs/j7200_evm_r5_defconfig | 1 -
- drivers/clk/ti/Kconfig         | 8 ++++----
- drivers/power/domain/Kconfig   | 2 +-
- 3 files changed, 5 insertions(+), 6 deletions(-)
-
+diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+index 411c210756..30c358fb88 100644
+--- a/drivers/power/domain/Kconfig
++++ b/drivers/power/domain/Kconfig
+@@ -92,7 +92,7 @@ config TEGRA186_POWER_DOMAIN
+ 
+ config TI_SCI_POWER_DOMAIN
+ 	bool "Enable the TI SCI-based power domain driver"
+-	depends on POWER_DOMAIN && TI_SCI_PROTOCOL
++	depends on POWER_DOMAIN && TI_SCI_PROTOCOL && !TI_POWER_DOMAIN
+ 	help
+ 	  Generic power domain implementation for TI devices implementing the
+ 	  TI SCI protocol.
 -- 
 2.34.1
 
