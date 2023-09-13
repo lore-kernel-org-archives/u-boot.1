@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C66EDEC44
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 11:32:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 203A2EDEC4D
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 12:51:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B235D869F6;
-	Wed, 13 Sep 2023 13:32:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EB4F786A81;
+	Wed, 13 Sep 2023 14:51:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MW6AvxI/";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dj0Sh3y9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5F4B86CF5; Wed, 13 Sep 2023 13:32:36 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5AE6186A81; Wed, 13 Sep 2023 14:51:06 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57EAA8694A
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 13:32:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A70D286A78
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 14:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38DBWTJK004009;
- Wed, 13 Sep 2023 06:32:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1694604749;
- bh=rafdhPPORDfIDJZBoqAd0gLN6B+6kq3Nz6YfyTvHGFg=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=MW6AvxI//+i5mRb9yilULwIaajbFsB++PWh7jejJg66UHXTFFsrlULmbr2F0nJ2Cf
- 1sDjDYhOU/eHGYJJP5UeSluqaWanz1cboWuV7BaHTHSzmhGxeId2uc9+6+5mPJyzY8
- iG683IEBPe7+I0IxlEavar91pfBXq0dFHevWWOKQ=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38DBWTqS085541
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 13 Sep 2023 06:32:29 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 13
- Sep 2023 06:32:29 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 13 Sep 2023 06:32:29 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38DBWTQT034956;
- Wed, 13 Sep 2023 06:32:29 -0500
-Date: Wed, 13 Sep 2023 06:32:29 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Udit Kumar <u-kumar1@ti.com>
-CC: <vigneshr@ti.com>, <jh80.chung@samsung.com>, <lukma@denx.de>,
- <seanga2@gmail.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>,
- <n-francis@ti.com>, <a-nandan@ti.com>
-Subject: Re: [PATCH v3 3/3] config: j7200: remove not needed power config
-Message-ID: <20230913113229.uyw3em4vinhneb6t@grasp>
-References: <20230913043930.1316130-1-u-kumar1@ti.com>
- <20230913043930.1316130-4-u-kumar1@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=twoerner@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2bfb0a2682fso20909981fa.2
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 05:51:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1694609462; x=1695214262; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Xg6pOoetwbSVH8bb4vxc5Xq1NoarOWeihPoiKCMIyRU=;
+ b=dj0Sh3y9DR8YJiDvy+3Mw3Jj1cKdmEmSnYtolvd2L/nH/yS/A3wCzQtpOVyOw0YvBt
+ nEoN9BXLtktTUsAtEyzScPq9L9OfgFXTg8zTQRu9RXNkfysmhXJ5oH/HCib7TA+m6Aot
+ Z3h060KGPIPS4xaH0rB7FUEbPas1yUVMeJ5qZ8xljOjRKSpOmcU4UmLy16TDcJKf1RPp
+ TgcPIXxy8qhNwq5//EKodDOXyVYxfSvJiykzg0KxEQ8Hz0e4d11TJ5OXsZeapLyKnqj4
+ rNuCewQHM/akoe8XKh1mD7KjXq9Ce1PtVWR/pm8lxEIwFtPHBcHJEObJ/66xflOaHJ4B
+ ZMJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694609462; x=1695214262;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Xg6pOoetwbSVH8bb4vxc5Xq1NoarOWeihPoiKCMIyRU=;
+ b=uDk0sBpPZhGEp7vdJ9Gc7n0kWzGZ1/V1PXKDVYrBNNlHoxV3svAooZ0datH50h4gdj
+ tdAzlPJQmraN8MrHhN32M66pF58aGM2NQuOb4U22hGKTi4ThAzbcO6EcLOFOYkHYly+2
+ Nbxo/tHZyVMY6mXyCS/6PrQLY6woXDJa5s9jqW3Yad/kK6TVXn6SkZ8B0Csv+mMAS/wX
+ dqgOcsUdWkcc44DflybW3JUYl04vpkN8reSImYnKgm1SdPnbRTXzzO4iRQM7m8lRCgak
+ qCvy9VUZnJDy4g/xNL5WAL1be76MZ7wQvcxbYKVc/7qz7VPlunWsIDP+5U7N+VzpdjuL
+ O5IQ==
+X-Gm-Message-State: AOJu0YyyoH2bv+a4QPxE1yE+/nBUvkPj2S737kv341Tku+AplXW/FuZW
+ XNwZBtUfCFQw6JKgbONCS6/wZMSunsAxLuPqWoVA7T2KeOk=
+X-Google-Smtp-Source: AGHT+IGdvbFlxfMFvyMkANPVWfOBr/m6hOBjZTWuc8bPR3xbg/aRf4TcB/dOJaHV7hLsZ6lKalWYacOJY+PhPl4eO1k=
+X-Received: by 2002:a2e:b00e:0:b0:2bd:bc9:30aa with SMTP id
+ y14-20020a2eb00e000000b002bd0bc930aamr2340706ljk.23.1694609461903; Wed, 13
+ Sep 2023 05:51:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230913043930.1316130-4-u-kumar1@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230831024951.22599-1-twoerner@gmail.com>
+ <20230831101511.GD8826@kitsune.suse.cz>
+In-Reply-To: <20230831101511.GD8826@kitsune.suse.cz>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Wed, 13 Sep 2023 08:50:49 -0400
+Message-ID: <CAHUNapQxb=5sr3FPscBht_SAYh4++yvbMscwEnmQRJhw1TdO1g@mail.gmail.com>
+Subject: Re: [PATCH] am33xx: ignore return value from usb_ether_init()
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,37 +85,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:09-20230913, Udit Kumar wrote:
-> For J7200, R5/SPL TI_SCI_POWER_DOMAIN should be
-> disabled as DM is a separate binary like other
-> SOC of J7* family.
-> 
-> Fixes: 02dff65efe70 ("configs: j7200_evm_r5: Add initial support")
-> 
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> ---
->  configs/j7200_evm_r5_defconfig | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-> index 6d240b16cb..9e744ba434 100644
-> --- a/configs/j7200_evm_r5_defconfig
-> +++ b/configs/j7200_evm_r5_defconfig
-> @@ -126,7 +126,6 @@ CONFIG_SPL_PINCTRL=y
->  # CONFIG_SPL_PINCTRL_GENERIC is not set
->  CONFIG_PINCTRL_SINGLE=y
->  CONFIG_POWER_DOMAIN=y
-> -CONFIG_TI_SCI_POWER_DOMAIN=y
->  CONFIG_TI_POWER_DOMAIN=y
->  CONFIG_DM_PMIC=y
->  CONFIG_PMIC_TPS65941=y
-> -- 
-> 2.34.1
-> 
+Can this get added to the next release? I don't see it in -next.
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
+On Thu, Aug 31, 2023 at 6:15=E2=80=AFAM Michal Such=C3=A1nek <msuchanek@sus=
+e.de> wrote:
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> Hello,
+>
+> On Wed, Aug 30, 2023 at 10:49:50PM -0400, Trevor Woerner wrote:
+> > In 2cb43ef1c223 ("usb: ether: Fix error handling in usb_ether_init") th=
+e
+> error
+> > handling of usb_ether_init() was changed. Not a single other call site
+> of this
+> > function checks its return value, therefore follow suit in the am33xx
+> code.
+>
+> then there is the question what point is there in having a return value
+> in this function at all.
+>
+> Anyway, it's fine to not check the return value in the caller if there
+> is no use for the error.
+>
+> Reviewed-by: Michal Such=C3=A1nek <msuchanek@suse.de>
+>
+> >
+> > Do not cause the boot to halt if the usb gadget ethernet initialization
+> fails:
+> >
+> >       initcall sequence 9ffdbd84 failed at call 808024b9 (err=3D-19)
+> >       ### ERROR ### Please RESET the board ###
+> >
+> > Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> > ---
+> >  arch/arm/mach-omap2/am33xx/board.c | 6 +-----
+> >  1 file changed, 1 insertion(+), 5 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-omap2/am33xx/board.c
+> b/arch/arm/mach-omap2/am33xx/board.c
+> > index ecc0a592e993..8f772310a1a7 100644
+> > --- a/arch/arm/mach-omap2/am33xx/board.c
+> > +++ b/arch/arm/mach-omap2/am33xx/board.c
+> > @@ -270,11 +270,7 @@ int arch_misc_init(void)
+> >               return ret;
+> >
+> >  #if defined(CONFIG_DM_ETH) && defined(CONFIG_USB_ETHER)
+> > -     ret =3D usb_ether_init();
+> > -     if (ret) {
+> > -             pr_err("USB ether init failed\n");
+> > -             return ret;
+> > -     }
+> > +     usb_ether_init();
+> >  #endif
+> >
+> >       return 0;
+> > --
+> > 2.41.0.327.gaa9166bcc0ba
+> >
+>
