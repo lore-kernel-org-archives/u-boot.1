@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1F2CA0ED1
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 05:05:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF08AEEB595
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 05:56:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D33786E13;
-	Wed, 13 Sep 2023 07:05:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B2ED186B33;
+	Wed, 13 Sep 2023 07:56:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gRIg2Lse";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P2LywzOu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2413286E16; Wed, 13 Sep 2023 07:05:33 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 78CD886B50; Wed, 13 Sep 2023 07:56:38 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B71086C47
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 07:05:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBA1286963
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 07:56:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de;
- s=s31663417; t=1694581510; x=1695186310; i=xypron.glpk@gmx.de;
- bh=sP5938in6mGxqWxXvYpdRHdyctvzG1S6buxp/LcuOwU=;
- h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References;
- b=gRIg2LsePGxdFpAwqmsdoSeP1pOg4KQ1HUnfNDmmyYjkjuHthYuIx9nr6BvRugCUeMoSdaV
- jT3y0tnG2L8uGzDpKUiTBk0+Lwms2A0NOU77onlCO0WuZDztYs+13ZeCwebjrjFMVZBCVxd+Q
- egkiQyqK4Ret2o1IE9dSKA1oOxe6pvRNgul7I4AoRXoy8vmuEBwXCkwuGREExpd6/tXfBh0gB
- cE20XBU0rLUVdFvGVh7Fpsgkj7Yi/NHAdiW0txr2BriUfKWZdLB7KMsHqTDxTwF5t3Wp5rZhk
- sgf9CyBdVhU+/mIzZet6C7Kz743JAfWe617rvX+qaZl8q4elsaaw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.106.224]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1McH9Y-1rIwGY17pU-00clNv; Wed, 13
- Sep 2023 07:05:10 +0200
-Date: Wed, 13 Sep 2023 07:05:07 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: "Wu, Fei" <fei2.wu@intel.com>, rick@andestech.com, ycliang@andestech.com, 
- bmeng.cn@gmail.com, sjg@chromium.org, pali@kernel.org, u-boot@lists.denx.de,
- andrei.warkentin@intel.com, sunilvl@ventanamicro.com
-Subject: Re: [PATCH] riscv: enable multi-range memory layout
-User-Agent: K-9 Mail for Android
-In-Reply-To: <92e300b3-d4d5-4965-4ed4-ae3974fba279@intel.com>
-References: <20230905100935.428120-1-fei2.wu@intel.com>
- <92e300b3-d4d5-4965-4ed4-ae3974fba279@intel.com>
-Message-ID: <149987B6-0711-43D4-9CA8-15408D770681@gmx.de>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-31dca134c83so6489228f8f.3
+ for <u-boot@lists.denx.de>; Tue, 12 Sep 2023 22:56:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1694584595; x=1695189395; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1pYJjGlsXmy9hCyhMqfPqD0UeBUzS1vQ3KTROt4NhaM=;
+ b=P2LywzOuWrHBw/hB+cx9Vb1AWlkQywXpHVIumPHb/B+meKItScUnSggtAc7E+L+tam
+ XQB+000Gqcd3roZTKrH/068KITKPJbly3QE/MtSp55z1DpCthIzzwqyTs3HcPvkbjou9
+ drJtjUQVPXi8W8E5oqs/Ml1hKBs1rGrIwUtl7nN3kqoXVnagyjG/TFo9T0wE1pIjYhBx
+ ANO20sL0uSYG5AkzxZdFm4sL13SotlflkAxp+FTTdi1ilCOiZ5RFGU5ldZdZuY+mvIZf
+ K8dHiJDVWPntvNz6ECC3AHmE7i+iZAuXcZSd2Q6ZoWIkE+PmahGQvnkC55BCRnEfOOwO
+ 4HCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694584595; x=1695189395;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1pYJjGlsXmy9hCyhMqfPqD0UeBUzS1vQ3KTROt4NhaM=;
+ b=LH6nOkMny0PzQ86iEe++cF6/WBHKRZUhR3LUVKpL74EgZlcE1uNipy3HD3bagV/YcU
+ VT/tSKTSUNHKgDeLxfix42F/jsF5wmaJBI3Qsa79ZVNirtWPhjr76s6uVI6TyCKQKhhD
+ PN0MpG7/116/+mdwyviTaDAQhrqqXecyz38QiQYLzhBIU1npwyXh03kDQKkVE6HiIHc6
+ afGp2QrokkhqH2Hxn2/5k1S2qHGWqF6e/oapikBy3AQ8eFhxsgBtV94NyEs9QitbHbue
+ rkc/DAo9zCRv4Pzp91KXC/Axd9Hw15gq+9AwLD11DDaSNKsWeaZEOOkOTmeUnz8pTasH
+ yLuA==
+X-Gm-Message-State: AOJu0Yw/uSyNFTiDQqgGKXzGRNCW5/9gTaJyCIPy6lpk0D/2IK0/ded5
+ oEDCf+pWBkn2yooqtKdVmt8efQ==
+X-Google-Smtp-Source: AGHT+IF3bEfwjP7Cm9EryLt+CbQGx9hcLlbAw2K4PgFB+F+qulK6BVbxvLn5w5UJ45c3D7xXcT+5yA==
+X-Received: by 2002:a5d:58ca:0:b0:31f:bd75:698a with SMTP id
+ o10-20020a5d58ca000000b0031fbd75698amr1077424wrf.39.1694584595220; 
+ Tue, 12 Sep 2023 22:56:35 -0700 (PDT)
+Received: from hera (ppp089210246083.access.hol.gr. [89.210.246.83])
+ by smtp.gmail.com with ESMTPSA id
+ g13-20020a5d554d000000b0031f3ad17b2csm14425887wrw.52.2023.09.12.22.56.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Sep 2023 22:56:34 -0700 (PDT)
+Date: Wed, 13 Sep 2023 08:56:32 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, joe.hershberger@ni.com,
+ rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de
+Subject: Re: [PATCHv8 03/15] net/lwip: implement dns cmd
+Message-ID: <ZQFPEF85eOXtw8Qn@hera>
+References: <20230908135320.7066-1-maxim.uvarov@linaro.org>
+ <20230908135320.7066-4-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:wKC8lz8745Fieb2FnV/0otP7nPV1PYrGXBwiM4OQhPVwtUmx2mr
- WlEUj5t+YDUIgQ+kHX7zsVfmQ9WnWDE9VZGL+k28gLplcwRPyMdj35AKpyoavg+FDMToXpp
- VN4Crz4H0NUNqJYG/BndNEkqSwrOeW5glu/8OLFScv3LFERVdcwLIK4BuVJxp0qSi2YmJ7A
- JOgMOTzePWXn9tsGn+KEA==
-UI-OutboundReport: notjunk:1;M01:P0:P/vwlHak68o=;hjftpiw263fnnClTqDzl0DxlIkH
- ppMHuKwlOA009K5hkdxafIOIOUGQZxLDdCenMHL+mp+UQJaB8z2XB9rgnNwIdGIdc5EgAJa1g
- Kb8YSXI0l52sfmLJVGDS3ARPN/8RvabCPbBMj53rvADavSUXlQUMFcaxtkRVLmsSMtdcGra4L
- CL33BF8OetMv8OVTSe+2A9CwlOTi92gFq8CRfgbUguQXqXcAalozg9g4oQDvBxeBcGvXQpcw4
- 5jGJHmeIgNP4r4CYGUhbcP4tQABIAy6hKHU80k40FmDahqC98HY3lISKfw3PyYhPqk9DTDwVF
- plpRMwphJ/uEHtgtccEUtXhDvMDVNFhFDEh6DEkeWp8qL2WU8p3h7hA8AVg3GBoydCUtpeZCX
- c+a/2WtCrZAmKN0SBU61auJERpVFk9eDXwX/RKp4qDHDfq4/unG9tizOth67WVoRAIJl/OUMz
- nCF4M6+GlW4nrkVFWnryeXuqgTE4MIEbR2w0DG5OqXsGhgVaSwB63igsz4u0lb/6orBI/xGq0
- aAXzfy/7uMjk16LGjYWI4NVfMB38UiHUvZ+koffE0WnMFp3eka7ZxqrZCcrTIhnAWlD76qqjk
- 0gXyFWupq/w0HuUzMTnm+TODdcg6y+06H86fFAMFDzjC9JHD3H+th9UI4y1fwnq6uVdB262XE
- KWSfnJJwsbItmRaFxuAmWQenBZF8u1SgNa4amL+aWW39aTJG6vtjatDfhUmHCyi6gxjDsMKSW
- Qh4BfHRpixq9I3OSoU0xfy1mVIAM4COq6IXogwkO2WAz3f48WPJHz9O8IeqCANHRwhCFtXQHs
- 1ZYbNwvmYsKkkLgnclkCNofeNkZ6nuZvh8gm5QN0/gwbJXAHaaWu+lQI9lkN6HitygQme03Y7
- L4psO1nH0FGC6C7IsT1cAilxScyB+LjXvpo+QESI09rhi8rT4TOSPrNJCt5xFYyQoS50t1ekI
- aWHbJSSdvf5FSGUNgCp4kKo3pGE=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230908135320.7066-4-maxim.uvarov@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,65 +92,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-Am 13=2E September 2023 04:23:14 MESZ schrieb "Wu, Fei" <fei2=2Ewu@intel=
-=2Ecom>:
->On 9/5/2023 6:09 PM, Fei Wu wrote:
->> In order to enable PCIe passthrough on qemu riscv, the physical memory
->> range between 3GB and 4GB is reserved=2E Therefore if guest has 4GB ram=
-,
->> two ranges are created as [2G, 3G) and [4G, 7G), currently u-boot sets
->> ram_top to 4G - 1 if the gd->ram_top is above 4G in
->> board_get_usable_ram_top(), but that address is not backed by ram=2E Th=
-is
->> patch selects the lowest range instead=2E
->>=20
->I think multi-range memory layout is a common requirement, PCIe
->passthrough happens to be the first one to require it=2E Could anyone
->please take a look at this patch and give your comments?
+On Fri, Sep 08, 2023 at 07:53:08PM +0600, Maxim Uvarov wrote:
+> U-Boot recently got support for an alternative network stack using LWIP.
+> Replace dns command with the LWIP variant while keeping the output and
+> error messages identical.
 >
->Thanks,
->Fei=2E
+> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> ---
+>  include/net/lwip.h           | 19 +++++++++++
+>  net/lwip/Makefile            |  2 ++
+>  net/lwip/apps/dns/lwip-dns.c | 63 ++++++++++++++++++++++++++++++++++++
+>  3 files changed, 84 insertions(+)
+>  create mode 100644 include/net/lwip.h
+>  create mode 100644 net/lwip/apps/dns/lwip-dns.c
 >
->> Signed-off-by: Fei Wu <fei2=2Ewu@intel=2Ecom>
->> ---
->>  arch/riscv/cpu/generic/dram=2Ec        | 2 +-
->>  configs/qemu-riscv64_smode_defconfig | 2 +-
+> diff --git a/include/net/lwip.h b/include/net/lwip.h
+> new file mode 100644
+> index 0000000000..ab3db1a214
+> --- /dev/null
+> +++ b/include/net/lwip.h
+> @@ -0,0 +1,19 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +
+> +int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
+> +		char *const argv[]);
+> +
+> +/**
+> + * ulwip_dns() - creates the DNS request to resolve a domain host name
+> + *
+> + * This function creates the DNS request to resolve a domain host name. Function
+> + * can return immediately if previous request was cached or it might require
+> + * entering the polling loop for a request to a remote server.
+> + *
+> + * @name:    dns name to resolve
+> + * @varname: (optional) U-Boot variable name to store the result
+> + * Returns: ERR_OK(0) for fetching entry from the cache
+> + *          -EINPROGRESS success, can go to the polling loop
+> + *          Other value < 0, if error
+> + */
+> +int ulwip_dns(char *name, char *varname);
+> diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+> index 3fd5d34564..5d8d5527c6 100644
+> --- a/net/lwip/Makefile
+> +++ b/net/lwip/Makefile
+> @@ -62,3 +62,5 @@ obj-$(CONFIG_NET) += lwip-external/src/netif/ethernet.o
+>
+>  obj-$(CONFIG_NET) += port/if.o
+>  obj-$(CONFIG_NET) += port/sys-arch.o
+> +
+> +obj-y += apps/dns/lwip-dns.o
+> diff --git a/net/lwip/apps/dns/lwip-dns.c b/net/lwip/apps/dns/lwip-dns.c
+> new file mode 100644
+> index 0000000000..b340302f2c
+> --- /dev/null
+> +++ b/net/lwip/apps/dns/lwip-dns.c
+> @@ -0,0 +1,63 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +/*
+> + * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
+> + */
+> +
+> +#include <common.h>
+> +#include <command.h>
+> +#include <console.h>
+> +
+> +#include <lwip/dns.h>
+> +#include <lwip/ip_addr.h>
+> +
+> +#include <net/ulwip.h>
+> +
+> +static void dns_found_cb(const char *name, const ip_addr_t *ipaddr, void *callback_arg)
+> +{
+> +	char *varname = (char *)callback_arg;
+> +	char *ipstr = ip4addr_ntoa(ipaddr);
+> +
+> +	if (varname)
+> +		env_set(varname, ipstr);
+> +	log_info("resolved %s to %s\n",  name, ipstr);
+> +	ulwip_exit(0);
+> +}
+> +
+> +int ulwip_dns(char *name, char *varname)
+> +{
+> +	int err;
+> +	ip_addr_t ipaddr; /* not used */
+> +	ip_addr_t dns1;
+> +	ip_addr_t dns2;
+> +	char *dnsenv = env_get("dnsip");
+> +	char *dns2env = env_get("dnsip2");
+> +
+> +	if (!dnsenv && !dns2env) {
+> +		log_err("nameserver is not set with dnsip and dnsip2 vars\n");
+> +		return -ENOENT;
+> +	}
+> +
+> +	if (!dnsenv)
+> +		log_warning("dnsip var is not set\n");
+> +	if (!dns2env)
+> +		log_warning("dnsip2 var is not set\n");
+> +
+> +	dns_init();
+> +
+> +	if (ipaddr_aton(dnsenv, &dns1))
+> +		dns_setserver(0, &dns1);
+> +
+> +	if (ipaddr_aton(dns2env, &dns2))
+> +		dns_setserver(1, &dns2);
 
-We should consider all riscv64 defconfigs=2E
+env_get will return NULL if any of these is not set.  Looking at
+ipaddr_aton() of lwip that might lead to a NULL deref in ip_2_ip6()
 
-Best regards
-
-Heinrich
-
->>  2 files changed, 2 insertions(+), 2 deletions(-)
->>=20
->> diff --git a/arch/riscv/cpu/generic/dram=2Ec b/arch/riscv/cpu/generic/d=
-ram=2Ec
->> index 44e11bd56c=2E=2Efb53a57b4e 100644
->> --- a/arch/riscv/cpu/generic/dram=2Ec
->> +++ b/arch/riscv/cpu/generic/dram=2Ec
->> @@ -13,7 +13,7 @@ DECLARE_GLOBAL_DATA_PTR;
->> =20
->>  int dram_init(void)
->>  {
->> -	return fdtdec_setup_mem_size_base();
->> +	return fdtdec_setup_mem_size_base_lowest();
->>  }
->> =20
->>  int dram_init_banksize(void)
->> diff --git a/configs/qemu-riscv64_smode_defconfig b/configs/qemu-riscv6=
-4_smode_defconfig
->> index 1d0f021ade=2E=2Ede08a49dab 100644
->> --- a/configs/qemu-riscv64_smode_defconfig
->> +++ b/configs/qemu-riscv64_smode_defconfig
->> @@ -1,6 +1,6 @@
->>  CONFIG_RISCV=3Dy
->>  CONFIG_SYS_MALLOC_LEN=3D0x800000
->> -CONFIG_NR_DRAM_BANKS=3D1
->> +CONFIG_NR_DRAM_BANKS=3D2
->>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
->>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
->>  CONFIG_ENV_SIZE=3D0x20000
+> +
+> +	err = dns_gethostbyname(name, &ipaddr, dns_found_cb, varname);
+> +	if (err == ERR_OK)
+> +		dns_found_cb(name, &ipaddr, varname);
+> +
+> +	/* convert lwIP ERR_INPROGRESS to U-Boot -EINPROGRESS */
+> +	if (err == ERR_INPROGRESS)
+> +		err = -EINPROGRESS;
+> +
+> +	return err;
+> +}
+> --
+> 2.30.2
 >
