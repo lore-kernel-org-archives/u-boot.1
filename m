@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19766CA5539
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 16:20:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA46EDEC7C
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 16:22:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88EAD86AD0;
-	Wed, 13 Sep 2023 18:20:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B9EB86B9A;
+	Wed, 13 Sep 2023 18:22:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LlB5uouX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bLKXMxHR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A09867D2; Wed, 13 Sep 2023 18:20:16 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 104FD867D2; Wed, 13 Sep 2023 18:22:24 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 909A086B9A
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 18:20:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32AC086CA7
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 18:22:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d7f0a60a159so22574276.0
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 09:20:13 -0700 (PDT)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-58d40c2debeso72332587b3.2
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 09:22:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694622012; x=1695226812; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1694622139; x=1695226939; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y1hD4y3CVw2ElD8CmEvD37pxHwNDk1FSo3GuF1v6Mo0=;
- b=LlB5uouXApFG/MpdKr09BmCwgeI05lNGX3/Y8wRiWDfWlpkmmnznHTAA97vj/uzeKN
- 8oX8ceReWAe6BzB+cAnTsRFCZNecxPGCwnuVU57m+7e6y7sT6j3egGiMl7XeNGffDIdJ
- TloCXwX3fBPvHCnLF1BRsH4YLLbwFIUwVRKzk=
+ bh=eb4sQTLg9gaUrTg5EsiDPbIZroL//Xn+2bq+UCasE0M=;
+ b=bLKXMxHRYHm65MWMH1Q8b7WLMbDPLzL4ZJY0VpdxXhLCG+Bb7YwjJ0K1cZy+TuSp3c
+ H45Y5XRUwCVQlUlE5cE+k8BarI8sXX3BMZ8nXPxAlR3V/pfpU8Ix4ry2eqAZ9f9Jypes
+ aSUuBCMRkqVZqD7SmCLZo7GojDj6/wDmSiJvg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694622012; x=1695226812;
+ d=1e100.net; s=20230601; t=1694622139; x=1695226939;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y1hD4y3CVw2ElD8CmEvD37pxHwNDk1FSo3GuF1v6Mo0=;
- b=vtG/3lH291rfOYOAmeSbn1Jhk79EHGFskE2Zm7/d/9bd1ki98jQ1sk5IwrRkr49gHv
- Q4Y4NYCm7IQYFlToSdb9PBo+VQPIGDaIU4AL+YuQtTVBUNO15Ux5r95tWWy1OKb/rA7v
- bn6j1BDLxt2++L6VwogcsIdCVA6oD34G2gd6Mhf5XmYWD6C+YEQAlDm6M7cHKHhjxcmC
- y1aEgfz9YhjgUoVZimXZf9QdTCf8Nl0fIY6Co1d5DQFsUQMdsOwsEmQemLqBGCcbVwe+
- HllsaKO9kpJv6Hv9UR/vydzOGstSvzMT5RCwjtOnY0CKegp8Qd3mhLKRcYKtyd4Z/PO+
- qxgg==
-X-Gm-Message-State: AOJu0YxC1f8lUJBhKa5743zsxnVoGhixrRyV98KhaEPMF7HgSSYqXl82
- g8afSI/+tIIvtsHP8hJFNIgfUQ==
-X-Google-Smtp-Source: AGHT+IF7VIZ/qVTrTyIr8zMrxR2ERecpBqfY7i48JyJvpHl6mTH3iG0DQwF45niBGwwtQGY1Ks9p1w==
-X-Received: by 2002:a5b:9c8:0:b0:d4b:ab7b:17ed with SMTP id
- y8-20020a5b09c8000000b00d4bab7b17edmr2710991ybq.4.1694622012380; 
- Wed, 13 Sep 2023 09:20:12 -0700 (PDT)
+ bh=eb4sQTLg9gaUrTg5EsiDPbIZroL//Xn+2bq+UCasE0M=;
+ b=mqV22hcCp/Iaso6XXG6M4IxNxql/rl/WhevIk4h5Os4D32bT3j8PZ7UWTNxcWyURWC
+ QlRih3TOpWgkmjYAK0Doe6pDXis/H1xvOVeo2eUEisGuiySnoahX9dE9YKPDvNU9zKAY
+ ssAc46I/c9a4GaZcRpZBpuqR3+WEXrSe663WpWCjSdkicDBBdJ3fc5prsFtoNcrBEItE
+ 0JFv9QInBPjJd1Aey5fiVt+KGIkn8vlIHeVAS4KbyL9g5YA3z/wObFSLwt4STx3u32Is
+ HnjpNsEVEa2Km7Hi7Wp5PGmx7jNg8+c8T7BBoYrSWSB5NUj/5CPa1vf7v/7CrqabLJqv
+ nclA==
+X-Gm-Message-State: AOJu0Yxu1BtPtyEuI2fZ+myMFIT/qkFPtQAEkt80BlYwCKXz69/mLlQJ
+ H8w+QU9TaAzew95qbSstY3ZMUGoyn1ykASbsh4y7sw==
+X-Google-Smtp-Source: AGHT+IG9vlKUKDSQZ6cd3APuh5FLQvcglHPj3cI3ybLcu0urPHVvsCyGNbs6oBouLAh+Z1hbX/uZwQ==
+X-Received: by 2002:a25:1545:0:b0:d81:6116:ac2d with SMTP id
+ 66-20020a251545000000b00d816116ac2dmr1699599ybv.59.1694622139670; 
+ Wed, 13 Sep 2023 09:22:19 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2580-cbcf-c7bd-45ce.res6.spectrum.com.
  [2603:6081:7b00:6400:2580:cbcf:c7bd:45ce])
  by smtp.gmail.com with ESMTPSA id
- j62-20020a252341000000b00d1b86efc0ffsm2832749ybj.6.2023.09.13.09.20.11
+ n62-20020a25d641000000b00d7f06aa25c5sm2813152ybg.58.2023.09.13.09.22.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Sep 2023 09:20:11 -0700 (PDT)
-Date: Wed, 13 Sep 2023 12:20:10 -0400
+ Wed, 13 Sep 2023 09:22:19 -0700 (PDT)
+Date: Wed, 13 Sep 2023 12:22:17 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: Re: [PATCH v2] CI: allow jobs to be run in merge requests
-Message-ID: <20230913162010.GM305624@bill-the-cat>
-References: <20230913141536.109844-1-andrejs.cainikovs@gmail.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>
+Subject: Re: bootstd: CACHE Misaligned operation errors (Marvell Armada 385)
+Message-ID: <20230913162217.GN305624@bill-the-cat>
+References: <CAJaLiFyTMW40gdMRjQhSTcUb_4ZRtLPo119EfBih9k_bcpNbdg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FGCnekYLVuk2RPcd"
+ protocol="application/pgp-signature"; boundary="pfIvXoi1udMDwDkJ"
 Content-Disposition: inline
-In-Reply-To: <20230913141536.109844-1-andrejs.cainikovs@gmail.com>
+In-Reply-To: <CAJaLiFyTMW40gdMRjQhSTcUb_4ZRtLPo119EfBih9k_bcpNbdg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,45 +93,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FGCnekYLVuk2RPcd
+--pfIvXoi1udMDwDkJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 13, 2023 at 04:15:36PM +0200, Andrejs Cainikovs wrote:
+On Tue, Sep 12, 2023 at 12:38:00PM -0700, Tony Dinh wrote:
 
-> From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+> I've been testing the boostd for a few Marvell boards and seeing this
+> error on the Thecus N2350 (Marvell Armada 385, dual-core CPU). The
+> "bootflow scan scsi" command triggered the "CACHE: Misaligned
+> operation at range" error. However, this error did not affect the
+> result of the scan, i.e. the bootflow for scsi partition was created
+> correctly, and u-boot is running normally.
 >=20
-> Out-of-tree users could run an out-of-tree CI with limited coverage,
-> however it is convenient to be able to run the upstream CI from time
-> to time. To enable that we would need to change job rules to be able
-> to run on any GitLab event. Excerpt from GitLab documentation:
+> Enabling CONFIG_SYS_DCACHE_OFF got rid of the errors altogether.
+> Perhaps this is a case where the DCACHE is not required and should be
+> turned off?
 >=20
-> > Jobs with no rules default to except: merge_requests
->=20
-> Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+> Please see the log after the break below.
+=20
+Can you please try -next ?  There's at least one SCSI related cache
+alignment fix there that's not in master, thanks.
 
 --=20
 Tom
 
---FGCnekYLVuk2RPcd
+--pfIvXoi1udMDwDkJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUB4TkACgkQFHw5/5Y0
-tyxcfQv9HLyj8SO3qCdYPGKpWOrHlu45bOUcRnw9UKTHKjJjpJUdWWl9NyKZFtqj
-VZvYtsLIcIj8+PpGvhxBABxbK3NvopLJi0flo+qx85dXqck0csBiY1GEdY8YhF1H
-TezkvWflzVgfsDGFBcqMOhTqlU9Vqv3pQ3EeHlI3j/VrH5Ed86dC6gkP93iTubnM
-wEdLeCgXcY7x4AFigtqzHfX2regel6dwoQ+ltrg9GM5ODi7QNGmbnMoGLLdIBsQE
-NAzOYiIbwKa+66xEEXOexZXBYceZgNPp3ZSvSwAlsu3v1mM0LOpgDLoSAF873bz6
-55Sk3KcYzXDBdoaNuHbM9Tdt1b59d11KQD62IZ48S2OMHS6vhHgExmheooH4gntq
-6h3gBMwRjBYTGEIisF0HT7xBjV6bzuIfyq9bPOy2VLIZElYsMWtFtvatCv8IQqwl
-0+UYwg8kOkjm3bq+2qMc8yQngaicjs6+eAATpVPKe9r8GGPJZt2lapi+zslhqOAF
-+wxWmSWt
-=n/47
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUB4bkACgkQFHw5/5Y0
+tywrXAwAqgHlrUZnLvip+zwwa8TmCtzKdLzLorPMNmBYNZOoZv5JU49ZLkucsAiT
+AJAcjQ8AXVlusH7emD0t4Lv2f/b2JGCjealimnEkExTvS1JfkCS/5HxVtlYkIpTD
+eWc/yjIv/vvZt202qXbhbXgt40FZZCWr9kRihK/7wMwPfBJPxExqJHgTiE/C2S43
+A5+8RtuW4eZ9KeVqy45ergCEK2ocrb29T/gTYlIHDT+5OjN7jjY4UDjNosSZaOB7
+vCPhAjYx8O2ViM4iDpwDoGIbxiH4k5dCYQyy6WOimz2zd+tjL77TL/rHB5vEeSzl
+I/3xK1P3Jpd7QJ7RCez784HhYksGw+zHL9VsCkDLQA9L6tDqIzwinGBBuh3KEdZh
+1qGIS2Sjw0AULzmIjZpRJTR1P+Mic1dfr7ptnBY9d1MKyTfLISsT/zmXjhyq8d8F
+hOd2PzDOy42KweVBHl7QQb42iiAm0Ii5PLXGtJKtevHZB38dPWm6VUUJYLBEmFox
+dVReN/XO
+=yr61
 -----END PGP SIGNATURE-----
 
---FGCnekYLVuk2RPcd--
+--pfIvXoi1udMDwDkJ--
