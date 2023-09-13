@@ -4,83 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A12EFEE020A
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 19:24:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F6EEE020A
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 19:37:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D780486AE1;
-	Wed, 13 Sep 2023 21:24:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F07FB86A6D;
+	Wed, 13 Sep 2023 21:37:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eyQKpqBF";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="faVjaWkX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA3E686A82; Wed, 13 Sep 2023 21:24:34 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 94FD586BAE; Wed, 13 Sep 2023 16:20:54 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.109.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1931086A61
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 21:24:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86344866D4
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 16:20:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5922380064bso1895397b3.2
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 12:24:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694633071; x=1695237871; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R8/j4NwfSuBG88zftYSZebupgQ8GVhpp8BZlaxD4gW8=;
- b=eyQKpqBFf/SNPn9ZjfIay7sBjuOmZkMusjdNxh1nkp8nII2XIif2lQ+q/1wZT1xw3x
- DYwWR9qic0bAVF7eqT54kGgtihTnOltL7dk0JELbTlyskf/c8y85aFLyuOZI+MvE1zRQ
- whMmd7AhCzZ4HDHQ6so+V46jF1WSgZP8f9Cs4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694633071; x=1695237871;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R8/j4NwfSuBG88zftYSZebupgQ8GVhpp8BZlaxD4gW8=;
- b=URZmIVELNsrwE1bo6Lx7xymz6OJuEPctMfKsHUPFKtknXuOr67dKtSVTJdi7Bt0R30
- r/8g8UzfsQSjA5ss4oJG9OLxipUNq+1/YTL39LqXoDZhLfuX5lCP+Uz5SxRhf3MWpdNO
- 5CcJF5AnBAXncXK5/vtw4sLCpyZsKeZt0W7psdhoJaLSie9C44FVrOg/kJkII4n1vCTm
- nvbL9xQ+se3eQvtRpSNf1wh2dLQpIpSLqjKRNXFnq6UmhcuHLIZT+pDjsAk9OyJBc1dI
- ccTx+dmjtfq2BSzpG7fTSKBl6+AiFZtd/Q7Bxlh3PaU49g62+1nAaD2dxB5UwS0Wxx0U
- ymvw==
-X-Gm-Message-State: AOJu0YyvxhbL5EtOuKJH8VjjkdGsp64mkbTn0rMMBQRM4K+rnGwdAtDb
- qG1elw8JoRAi38jLu2gOXM4MdA==
-X-Google-Smtp-Source: AGHT+IFAdTZCA2u1mt39/NACKUfVoNpGuSQvKB6b0EylDeyYheyz6rNWmZbdeT2nqHT9yEqo9PG2dw==
-X-Received: by 2002:a0d:cb06:0:b0:589:f603:4b9b with SMTP id
- n6-20020a0dcb06000000b00589f6034b9bmr3664610ywd.7.1694633070869; 
- Wed, 13 Sep 2023 12:24:30 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-2580-cbcf-c7bd-45ce.res6.spectrum.com.
- [2603:6081:7b00:6400:2580:cbcf:c7bd:45ce])
- by smtp.gmail.com with ESMTPSA id
- h62-20020a0dde41000000b0057a918d6644sm3281326ywe.128.2023.09.13.12.24.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Sep 2023 12:24:30 -0700 (PDT)
-Date: Wed, 13 Sep 2023 15:24:28 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Malte Schmidt <malte.schmidt-oss@weidmueller.com>
-Subject: Re: [PATCH 1/8] tools: mkeficapsule: Add support for parsing capsule
- params from config file
-Message-ID: <20230913192428.GQ305624@bill-the-cat>
-References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
- <20230908120002.29851-2-sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=andrejs.cainikovs@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1694614851;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=nDd8b1f2w4ct8AKBeeoKvHm1gijaLcws5QZUSbDh/ts=;
+ b=faVjaWkX16dHpx3mL3ZXqbiBs2Oc3or1Po6Z1hrEiwIKAPmAlBUwfTVppK51SyJZOJpOn7
+ Sd1H6ZDx3+Q5g+xyltEGR1pO9FYdYx1QqXC/CAs1YjF+kLQCE/+Hv0RZe6Y1nMa9kjgSut
+ fhgXGf8Nv6VS0ntz/4gElkoE1QgyeDc=
+Received: from CHE01-GV0-obe.outbound.protection.outlook.com
+ (mail-gv0che01lp2045.outbound.protection.outlook.com [104.47.22.45]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-7-yNfKDj9NMZ6fxqMRrgrzZw-1; Wed, 13 Sep 2023 16:20:50 +0200
+X-MC-Unique: yNfKDj9NMZ6fxqMRrgrzZw-1
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1e::13)
+ by ZR0P278MB0742.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4e::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.19; Wed, 13 Sep
+ 2023 14:20:48 +0000
+Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::590b:1510:7512:c135]) by ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::590b:1510:7512:c135%6]) with mapi id 15.20.6792.019; Wed, 13 Sep 2023
+ 14:20:48 +0000
+Message-ID: <c566568b-bc60-f5f1-bdb9-8ef34473e962@toradex.com>
+Date: Wed, 13 Sep 2023 16:20:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Subject: Re: [PATCH v1] CI: allow jobs to be run in merge requests
+To: Tom Rini <trini@konsulko.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20230912110022.28420-1-andrejs.cainikovs@toradex.com>
+ <20230913132125.GJ305624@bill-the-cat>
+From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+In-Reply-To: <20230913132125.GJ305624@bill-the-cat>
+X-ClientProxiedBy: ZR2P278CA0050.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:53::10) To ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1e::13)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mVSS6fEv6dHfILDC"
-Content-Disposition: inline
-In-Reply-To: <20230908120002.29851-2-sughosh.ganu@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0254:EE_|ZR0P278MB0742:EE_
+X-MS-Office365-Filtering-Correlation-Id: 491685f3-ada8-42d5-51d2-08dbb464a081
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0
+X-Microsoft-Antispam-Message-Info: CekqsXWSO504s3UEIihrB4+P5Jh6/yp+fAN4tEjdChrpGAhGdkIHQiEn14xIjA2rcFzX5yXFCXoPEDMnNKfFBCjEn3BYEYnSL+zPjaLwnfL+tXuBkSvVEzbEtOtVSi8znSQAQMNruLdl0m1yyKYdZAihMwrQrvlzV1afqWo0OZQG2+aZJkHTO90+qULEBoKTFoEKRZS0XIU9RAEqC+VO9Zb07svvgtQHyqKLMS5rkSigRAyPtluJiZmPiwd4oOdF6BhQPwPJxem6BEmNBxvKRPJ3GPhLMoIAicMHhOtwh0/vaqmhPoRVFUnQM4H89CBZ0njHO9s8Gi9gwHfygG8Z2yyPCj9V1fV8QE+XBv43ln6d0vakPv33KORZtHYb4jRyNvJgmcNSJ4822iXMg1iOSNfcZY4w4naCmvvGgHZDLWX/mNU9ybujwgGEHLMCUNdDPRnWiyYmelvlVNqDs63z6jNWSpypcrxq8jjSqujuBqngREALZ7TN4M6BPXT7uE7F/pDHxQrUp9yqXEFF8mUoGDIWNEEGErP5iQZoGZ/pMwCY6K0bnsEK+NwQ13BkiXgMhKHD7M65r8gs0fH0esQThqVZL8y/UwjW5Bbzo08ANbmFQiFD+NQtRXYA/nssxA9EM0Zg4BqlfYV/o4lGcnF2Tw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(39840400004)(136003)(346002)(396003)(376002)(366004)(186009)(451199024)(1800799009)(478600001)(31686004)(6486002)(6512007)(6506007)(53546011)(38100700002)(86362001)(31696002)(26005)(2616005)(558084003)(66556008)(36756003)(4326008)(8676002)(5660300002)(8936002)(44832011)(966005)(66476007)(41300700001)(316002)(2906002)(110136005)(66946007)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SWkxdHVPUTA4TEtWaWdkWWxuQ1k0WVNzUkpEQnV4NFdHYUl1empseno2a084?=
+ =?utf-8?B?OW9CSjNIUDV3T3h3YTBLbTlVTTkrTEd6aDVUU1FUVlVqalRUUVA1Y0h3K0RM?=
+ =?utf-8?B?blFjNy9JRDc1WklFR0ZyTXJWSDlPSnNrdERFdnpHOHp0K3d0eTdPTjZhZFVC?=
+ =?utf-8?B?bElLOHFkYXVuT1pFTDdSTm9OVk1lUml6d0x3azZMd21oQTQ3dGRJOGRsWlJV?=
+ =?utf-8?B?N2tjK2pER3RqWGNsbG9CcjhQMWlWVGhheVkwbEF2a1hQYTdrc0FYbDdXQ20r?=
+ =?utf-8?B?RVVjSmE0T0puOWRtM01tbDh5c0kxdy9YYkpIcHZ3UWxBVUdITXFxR3J3ME9T?=
+ =?utf-8?B?allwdkVDTi9KemFNeTFjeHdwQmlsQXdFOGFqUUpSTXlLa0EzdE5NUmlnL2Iy?=
+ =?utf-8?B?R2hPcVU4MkRpOEhkOVd3R1pCcU44OFVydDBNeExGWDZUTzhsK3BmdStmSC9t?=
+ =?utf-8?B?L0JnNklBaWVaa0dpcDdmU3RmUXo3TGszL3paenh4ZXBHVGF4alFhd1NmemNr?=
+ =?utf-8?B?c09zMDRNZFZhSUppZHg3L0hJQ1J0WUhRZlFmT2NkQm1aZDV5UVU3bE14bDVo?=
+ =?utf-8?B?WDh6ZlVva0VTOHorN1pGM1N4RzNlaGZqOUhaUnJQL3RsN1FPeGlFdkY5NjJL?=
+ =?utf-8?B?Y0tLWHRzSHNvdjUvdS96SkdBa2xKZXZDSkJyNWJ4VUNkbllWejZXZFBvSFl5?=
+ =?utf-8?B?NGtjTG14SVlPZXNaSENyejh1TnVQbG5iVjNpc0tITDB5NzFqeHkwOFBFMWlJ?=
+ =?utf-8?B?V0hBZTRGR1g2SERUV25JUzYyVnFrRnRuM3pQbVVBSXlRNy9qT1dqS0FMWURP?=
+ =?utf-8?B?M0piSGR1czFUdWtJaVBhcGtDNWxjY1pMTzYyVXoyc2FvaVBwV2JST0Z6Yi82?=
+ =?utf-8?B?Tm84SkZaUytzNmRIeXhVODlYcWdrUWZ5OEwvSGcxanBsR0h3WDUzK2RnQzI4?=
+ =?utf-8?B?VGtOY2ovTWhONmFjZ0tZNklwc1doRnNVQzl5SW5kUU5QTnhFV3RjTVJUcnJT?=
+ =?utf-8?B?U1pJT2EvanF5a3dVTmE1R0VZckdXdzQ4bS83Tyt5a25xMEZXOWJlVzNQYjZv?=
+ =?utf-8?B?enVBNm0rWWFoWlV1RXdaN1EzbkNELzJDcHA5R2ZIOUxaSCtQM2tQK29mR0R2?=
+ =?utf-8?B?ZjAxMnJqRXRXMnVJbTB1M2Nzb3dlNWw1RTk3b0ZFa20wV0Z6c29sa096M05o?=
+ =?utf-8?B?YWJ2Mlg2QTJvdTZVSXpidVBhbGRBQ3NKa1gwUDZvZFJEclYyVzh6SWlQYXFu?=
+ =?utf-8?B?TWJvZDh4ZDIvOHBuODJ5d3Y3eE4wV3JzaTI2RGNDaFpLTWlVRDdoWkdUejJB?=
+ =?utf-8?B?ZE02b3NrNFFVcDR0WS84eTBqZ3Ruai9CQkRoREhlWW50d2dDSURRam9CZkdp?=
+ =?utf-8?B?Q01EUVNaM2ZwT011SUIxTi94NWVDcU42NjJzWFU5a0VGa3VLaUY4TmdSV2FX?=
+ =?utf-8?B?eDBqeWF3TVJZWHRqb1Bsc0JURjk4cHR2N2RFb1BhNWlpcU4vYnRUSFRkNVNB?=
+ =?utf-8?B?OGI0MTI5TWM4S1hGUVNEMVZGS09FaS9kMTdRSFF5eTRPYzA1WU5zTTk0cXEr?=
+ =?utf-8?B?NmVIZkwyak5lelh1Q0pob0RTTE12dmFkK1lpbzRUQU9xekcvZ3gxUmgwS2N2?=
+ =?utf-8?B?N3VnR2NjUUlTUGFXNk5XM25MRFlRSVpxTFlOVy9GM1NSVVhqYWtSb3BoRlJT?=
+ =?utf-8?B?eFcwTmN2VGhNWE1NQmI0eXB1d2puQmRFQmdhWHRlWjk1WUsvQVRqZ0FUNDk1?=
+ =?utf-8?B?MG11djVnMDZUakFWWkJxUEhGYStpR2ZPWHZyYjNyNThOUG9LS3BDaWNqS3Zq?=
+ =?utf-8?B?a1FFcCtNN0FEdDBObFFHdlQwYWFHR1pudUozMGpmREtnaVRxbXNTWHpSMTZ0?=
+ =?utf-8?B?R1ZHSkdmNGZZQkR4WVkxRXZ4RXlwajVFUVVFZFd1SHp5ZzIvenlPSWtXMmdJ?=
+ =?utf-8?B?R0IxUkQxVVRVL29YcUM2RDV4S200akxHYnB4SFVETjNodHBNVUpZNXB5ZGUz?=
+ =?utf-8?B?UTdiSTA4MGxET3cxdm84MmlFQzBDSjQ2b2VoZm1LTjZSNkovaVk3VlloTXNI?=
+ =?utf-8?B?dFRiVU8wUVZka0hDVytPekJLOVV6c205SlcxKzRNVFNaMk1lQzVJRHczZ0o1?=
+ =?utf-8?B?UU4zNW5abkwwM2Ixb1UxbkRCVVFMUk5IeTN2ZmtidTZ1eWFxR3BTdFNvcm9t?=
+ =?utf-8?B?Mmc9PQ==?=
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 491685f3-ada8-42d5-51d2-08dbb464a081
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2023 14:20:48.6968 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lhpbx7c6o1To8RHVThPUcuGySW2OyjytS+5vRwACigaJHtRLcon+B+fpsq7zZMj2gIgbJocYqbGb0gVQdGTqE5MVgr3N+aZH1+44krQdD+w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0742
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 13 Sep 2023 21:37:45 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,50 +148,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---mVSS6fEv6dHfILDC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Sep 08, 2023 at 05:29:55PM +0530, Sughosh Ganu wrote:
-
-> Add support for specifying the parameters needed for capsule
-> generation through a config file, instead of passing them through
-> command-line. Parameters for more than a single capsule file can be
-> specified, resulting in generation of multiple capsules through a
-> single invocation of the command.
+On 13/09/2023 15:21, Tom Rini wrote:
 >=20
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> This seems fine but please rebase on top of current -next, thanks.
+>=20
 
-Is this config file format used in any other project / form?
-
-[snip]
-> +config EFI_CAPSULE_CFG_FILE
-> +	string "Path to the EFI Capsule Config File"
-> +	default ""
-
-No empty defaults.
+Thanks for your quick review. Done in V2:
+https://lore.kernel.org/all/20230913141536.109844-1-andrejs.cainikovs@gmail=
+.com/
 
 --=20
-Tom
+Best regards,
+Andrejs Cainikovs
 
---mVSS6fEv6dHfILDC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUCDGwACgkQFHw5/5Y0
-tyxfZwv/QvjxG60zBeXQ/JRCzNFYiT5VHQwy+WRtELvQuShOyCA6Ye6mWKCXpcPX
-9VAWvfJlAvR6AhJFGoBdyBeh5rdcXqmD5kAOEX+yNyH/xaNHV5mmbi+py2NkDgMU
-LWKbB5qCTt1gHOs0kWyQJRfHk3ixN8Bh2xmY/G99LzGmxyOneHaNuHV8HpHRjnHt
-kIoc/XTmqcWviCDiKk0/W7K6PDllodT/ZDJ3KdyfeQOtDZZfY2hMrbDK14ldGh3E
-edyQFEcLDvvQ1s8Jb9suAWHk7YbSvsJ42KI5xsmofhKpujBPsIL8/UDQ+JuAZ7UY
-dwoVUwJK1F+Uy9RbPEgEJBSNK1mMGZMjn4iPIrL4W56a4T2ssL1Ul/6SB90pus7s
-k2SYuJ91C6pW70o+utL24Iyzeu/5oSaRUwln0mYwCz0V4cM5TVkdql5EUg01cCP/
-QIe+D/4U1sK/nrhgYAUOqumF0h4nDW2ADVUMLaZmcLGGZOKCZrdfloGoBGUAEFrQ
-Fy15eQHR
-=orjv
------END PGP SIGNATURE-----
-
---mVSS6fEv6dHfILDC--
