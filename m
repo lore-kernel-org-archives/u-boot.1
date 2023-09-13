@@ -4,133 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F6EEE020A
-	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 19:37:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00AD6EE020A
+	for <u-boot@archiver.kernel.org>; Wed, 13 Sep 2023 19:37:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F07FB86A6D;
-	Wed, 13 Sep 2023 21:37:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FF1E86BAE;
+	Wed, 13 Sep 2023 21:37:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="faVjaWkX";
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="ehR10KSR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94FD586BAE; Wed, 13 Sep 2023 16:20:54 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.109.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 705228667A; Wed, 13 Sep 2023 17:01:59 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86344866D4
- for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 16:20:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D6108693D
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 17:01:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ header.from=conclusive.pl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrejs.cainikovs@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1694614851;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nDd8b1f2w4ct8AKBeeoKvHm1gijaLcws5QZUSbDh/ts=;
- b=faVjaWkX16dHpx3mL3ZXqbiBs2Oc3or1Po6Z1hrEiwIKAPmAlBUwfTVppK51SyJZOJpOn7
- Sd1H6ZDx3+Q5g+xyltEGR1pO9FYdYx1QqXC/CAs1YjF+kLQCE/+Hv0RZe6Y1nMa9kjgSut
- fhgXGf8Nv6VS0ntz/4gElkoE1QgyeDc=
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com
- (mail-gv0che01lp2045.outbound.protection.outlook.com [104.47.22.45]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-7-yNfKDj9NMZ6fxqMRrgrzZw-1; Wed, 13 Sep 2023 16:20:50 +0200
-X-MC-Unique: yNfKDj9NMZ6fxqMRrgrzZw-1
-Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:1e::13)
- by ZR0P278MB0742.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4e::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.19; Wed, 13 Sep
- 2023 14:20:48 +0000
-Received: from ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
- ([fe80::590b:1510:7512:c135]) by ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
- ([fe80::590b:1510:7512:c135%6]) with mapi id 15.20.6792.019; Wed, 13 Sep 2023
- 14:20:48 +0000
-Message-ID: <c566568b-bc60-f5f1-bdb9-8ef34473e962@toradex.com>
-Date: Wed, 13 Sep 2023 16:20:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v1] CI: allow jobs to be run in merge requests
-To: Tom Rini <trini@konsulko.com>,
- Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20230912110022.28420-1-andrejs.cainikovs@toradex.com>
- <20230913132125.GJ305624@bill-the-cat>
-From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-In-Reply-To: <20230913132125.GJ305624@bill-the-cat>
-X-ClientProxiedBy: ZR2P278CA0050.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:53::10) To ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:1e::13)
+ spf=pass smtp.mailfrom=artur@conclusive.pl
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5029ace4a28so1269201e87.1
+ for <u-boot@lists.denx.de>; Wed, 13 Sep 2023 08:01:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=conclusive.pl; s=google; t=1694617313; x=1695222113; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=C/lKdOvpiLz+eh4q9dVSxndmjoCPIl8wWYpIWxK8UB0=;
+ b=ehR10KSRNvh6SkiTbyBdUomD4HF+BKPFsuxedU/Lp7z7WXVzcppkHrEiR/0TpCXKMI
+ 9tZgjOX2HzBjK/6sb5cU1QSjbfo06RlHfvarbpUlyl/6QphiXXWz3zoE6316rT8X8bPK
+ MkmlAWcgFwlPD5qAajKq8+QCwf8zCqPnUMNcZG87TSuJAWCHW6dJj7TLJahHsqW8EAE7
+ WcIShvnIDgvjIXPg9f2tnsC/LR7Hl/D0It0HAGrueLXvxAxczG58b9zUxnnh8Q0UEgqG
+ 11CFmKCUJ3UAQWOjnMOBw0FOuaQEti0r3tCI0BzzckN7QDphaQRLgwUs6GxM8C4nhmqw
+ O8dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694617313; x=1695222113;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=C/lKdOvpiLz+eh4q9dVSxndmjoCPIl8wWYpIWxK8UB0=;
+ b=rNjyIuqFFE6GN9E8HPUwHK9FmnAVq+UgZvLYvyw5Yvy/oIvGWRfCPkp3CumDuocBDI
+ +90GzvCP62q9jenVVwdTCRuY3oEyaE2qlk+AHNwi+y2FHDTI/USqJWffsRFo8kEgBv4p
+ Bg3tY8hLt9ccWyHZLCX7QmQ7709PspvEIFEAMACzf7Wg3rUOdeMqOFHDS9g2wZeJWXDw
+ ViMwSOyCTJqxtwGfiMXzDTz8WNv7uHCZIhWkQL+TYzFwZfi/52pw12jWZBuDttsSoc6k
+ g4UyUrLT6oYsC8SuTAiIvsI99m9g/VU3175s9uRXror2Ifc2Jie472+gd/bLZ0uYoxEC
+ CS/g==
+X-Gm-Message-State: AOJu0YzYfa96yaBkBrqybrrQHHJoqPFJp3yHWaWmKYHxKXrm8uXn7QoZ
+ J0ERG/n97eRzVeBuHrwMeWAi+g==
+X-Google-Smtp-Source: AGHT+IGsLd0bhkjjZqh0SbC/s85bvV0OIpdvmwZbH9rW3Pme4nssLDZSEcUs/leF8liGikmn1Rj6/A==
+X-Received: by 2002:a05:6512:159e:b0:500:af82:7ddc with SMTP id
+ bp30-20020a056512159e00b00500af827ddcmr2374690lfb.28.1694617313458; 
+ Wed, 13 Sep 2023 08:01:53 -0700 (PDT)
+Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
+ [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
+ f19-20020a05651232d300b00502a96484absm1817341lfg.99.2023.09.13.08.01.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Sep 2023 08:01:52 -0700 (PDT)
+From: Artur Rojek <artur@conclusive.pl>
+To: Lukasz Majewski <lukma@denx.de>,
+	Marek Vasut <marex@denx.de>
+Cc: Jakub Klama <jakub@conclusive.pl>,
+ Wojciech Kloska <wojciech@conclusive.pl>, u-boot@lists.denx.de,
+ Artur Rojek <artur@conclusive.pl>
+Subject: [PATCH] USB: gadget: atmel: fix transfer of queued requests
+Date: Wed, 13 Sep 2023 17:00:58 +0200
+Message-ID: <20230913150058.38972-1-artur@conclusive.pl>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZRAP278MB0254:EE_|ZR0P278MB0742:EE_
-X-MS-Office365-Filtering-Correlation-Id: 491685f3-ada8-42d5-51d2-08dbb464a081
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0
-X-Microsoft-Antispam-Message-Info: CekqsXWSO504s3UEIihrB4+P5Jh6/yp+fAN4tEjdChrpGAhGdkIHQiEn14xIjA2rcFzX5yXFCXoPEDMnNKfFBCjEn3BYEYnSL+zPjaLwnfL+tXuBkSvVEzbEtOtVSi8znSQAQMNruLdl0m1yyKYdZAihMwrQrvlzV1afqWo0OZQG2+aZJkHTO90+qULEBoKTFoEKRZS0XIU9RAEqC+VO9Zb07svvgtQHyqKLMS5rkSigRAyPtluJiZmPiwd4oOdF6BhQPwPJxem6BEmNBxvKRPJ3GPhLMoIAicMHhOtwh0/vaqmhPoRVFUnQM4H89CBZ0njHO9s8Gi9gwHfygG8Z2yyPCj9V1fV8QE+XBv43ln6d0vakPv33KORZtHYb4jRyNvJgmcNSJ4822iXMg1iOSNfcZY4w4naCmvvGgHZDLWX/mNU9ybujwgGEHLMCUNdDPRnWiyYmelvlVNqDs63z6jNWSpypcrxq8jjSqujuBqngREALZ7TN4M6BPXT7uE7F/pDHxQrUp9yqXEFF8mUoGDIWNEEGErP5iQZoGZ/pMwCY6K0bnsEK+NwQ13BkiXgMhKHD7M65r8gs0fH0esQThqVZL8y/UwjW5Bbzo08ANbmFQiFD+NQtRXYA/nssxA9EM0Zg4BqlfYV/o4lGcnF2Tw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(39840400004)(136003)(346002)(396003)(376002)(366004)(186009)(451199024)(1800799009)(478600001)(31686004)(6486002)(6512007)(6506007)(53546011)(38100700002)(86362001)(31696002)(26005)(2616005)(558084003)(66556008)(36756003)(4326008)(8676002)(5660300002)(8936002)(44832011)(966005)(66476007)(41300700001)(316002)(2906002)(110136005)(66946007)(45980500001)(43740500002);
- DIR:OUT; SFP:1102
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SWkxdHVPUTA4TEtWaWdkWWxuQ1k0WVNzUkpEQnV4NFdHYUl1empseno2a084?=
- =?utf-8?B?OW9CSjNIUDV3T3h3YTBLbTlVTTkrTEd6aDVUU1FUVlVqalRUUVA1Y0h3K0RM?=
- =?utf-8?B?blFjNy9JRDc1WklFR0ZyTXJWSDlPSnNrdERFdnpHOHp0K3d0eTdPTjZhZFVC?=
- =?utf-8?B?bElLOHFkYXVuT1pFTDdSTm9OVk1lUml6d0x3azZMd21oQTQ3dGRJOGRsWlJV?=
- =?utf-8?B?N2tjK2pER3RqWGNsbG9CcjhQMWlWVGhheVkwbEF2a1hQYTdrc0FYbDdXQ20r?=
- =?utf-8?B?RVVjSmE0T0puOWRtM01tbDh5c0kxdy9YYkpIcHZ3UWxBVUdITXFxR3J3ME9T?=
- =?utf-8?B?allwdkVDTi9KemFNeTFjeHdwQmlsQXdFOGFqUUpSTXlLa0EzdE5NUmlnL2Iy?=
- =?utf-8?B?R2hPcVU4MkRpOEhkOVd3R1pCcU44OFVydDBNeExGWDZUTzhsK3BmdStmSC9t?=
- =?utf-8?B?L0JnNklBaWVaa0dpcDdmU3RmUXo3TGszL3paenh4ZXBHVGF4alFhd1NmemNr?=
- =?utf-8?B?c09zMDRNZFZhSUppZHg3L0hJQ1J0WUhRZlFmT2NkQm1aZDV5UVU3bE14bDVo?=
- =?utf-8?B?WDh6ZlVva0VTOHorN1pGM1N4RzNlaGZqOUhaUnJQL3RsN1FPeGlFdkY5NjJL?=
- =?utf-8?B?Y0tLWHRzSHNvdjUvdS96SkdBa2xKZXZDSkJyNWJ4VUNkbllWejZXZFBvSFl5?=
- =?utf-8?B?NGtjTG14SVlPZXNaSENyejh1TnVQbG5iVjNpc0tITDB5NzFqeHkwOFBFMWlJ?=
- =?utf-8?B?V0hBZTRGR1g2SERUV25JUzYyVnFrRnRuM3pQbVVBSXlRNy9qT1dqS0FMWURP?=
- =?utf-8?B?M0piSGR1czFUdWtJaVBhcGtDNWxjY1pMTzYyVXoyc2FvaVBwV2JST0Z6Yi82?=
- =?utf-8?B?Tm84SkZaUytzNmRIeXhVODlYcWdrUWZ5OEwvSGcxanBsR0h3WDUzK2RnQzI4?=
- =?utf-8?B?VGtOY2ovTWhONmFjZ0tZNklwc1doRnNVQzl5SW5kUU5QTnhFV3RjTVJUcnJT?=
- =?utf-8?B?U1pJT2EvanF5a3dVTmE1R0VZckdXdzQ4bS83Tyt5a25xMEZXOWJlVzNQYjZv?=
- =?utf-8?B?enVBNm0rWWFoWlV1RXdaN1EzbkNELzJDcHA5R2ZIOUxaSCtQM2tQK29mR0R2?=
- =?utf-8?B?ZjAxMnJqRXRXMnVJbTB1M2Nzb3dlNWw1RTk3b0ZFa20wV0Z6c29sa096M05o?=
- =?utf-8?B?YWJ2Mlg2QTJvdTZVSXpidVBhbGRBQ3NKa1gwUDZvZFJEclYyVzh6SWlQYXFu?=
- =?utf-8?B?TWJvZDh4ZDIvOHBuODJ5d3Y3eE4wV3JzaTI2RGNDaFpLTWlVRDdoWkdUejJB?=
- =?utf-8?B?ZE02b3NrNFFVcDR0WS84eTBqZ3Ruai9CQkRoREhlWW50d2dDSURRam9CZkdp?=
- =?utf-8?B?Q01EUVNaM2ZwT011SUIxTi94NWVDcU42NjJzWFU5a0VGa3VLaUY4TmdSV2FX?=
- =?utf-8?B?eDBqeWF3TVJZWHRqb1Bsc0JURjk4cHR2N2RFb1BhNWlpcU4vYnRUSFRkNVNB?=
- =?utf-8?B?OGI0MTI5TWM4S1hGUVNEMVZGS09FaS9kMTdRSFF5eTRPYzA1WU5zTTk0cXEr?=
- =?utf-8?B?NmVIZkwyak5lelh1Q0pob0RTTE12dmFkK1lpbzRUQU9xekcvZ3gxUmgwS2N2?=
- =?utf-8?B?N3VnR2NjUUlTUGFXNk5XM25MRFlRSVpxTFlOVy9GM1NSVVhqYWtSb3BoRlJT?=
- =?utf-8?B?eFcwTmN2VGhNWE1NQmI0eXB1d2puQmRFQmdhWHRlWjk1WUsvQVRqZ0FUNDk1?=
- =?utf-8?B?MG11djVnMDZUakFWWkJxUEhGYStpR2ZPWHZyYjNyNThOUG9LS3BDaWNqS3Zq?=
- =?utf-8?B?a1FFcCtNN0FEdDBObFFHdlQwYWFHR1pudUozMGpmREtnaVRxbXNTWHpSMTZ0?=
- =?utf-8?B?R1ZHSkdmNGZZQkR4WVkxRXZ4RXlwajVFUVVFZFd1SHp5ZzIvenlPSWtXMmdJ?=
- =?utf-8?B?R0IxUkQxVVRVL29YcUM2RDV4S200akxHYnB4SFVETjNodHBNVUpZNXB5ZGUz?=
- =?utf-8?B?UTdiSTA4MGxET3cxdm84MmlFQzBDSjQ2b2VoZm1LTjZSNkovaVk3VlloTXNI?=
- =?utf-8?B?dFRiVU8wUVZka0hDVytPekJLOVV6c205SlcxKzRNVFNaMk1lQzVJRHczZ0o1?=
- =?utf-8?B?UU4zNW5abkwwM2Ixb1UxbkRCVVFMUk5IeTN2ZmtidTZ1eWFxR3BTdFNvcm9t?=
- =?utf-8?B?Mmc9PQ==?=
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 491685f3-ada8-42d5-51d2-08dbb464a081
-X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0254.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2023 14:20:48.6968 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lhpbx7c6o1To8RHVThPUcuGySW2OyjytS+5vRwACigaJHtRLcon+B+fpsq7zZMj2gIgbJocYqbGb0gVQdGTqE5MVgr3N+aZH1+44krQdD+w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0742
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 13 Sep 2023 21:37:45 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -148,16 +92,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13/09/2023 15:21, Tom Rini wrote:
->=20
-> This seems fine but please rebase on top of current -next, thanks.
->=20
+In the existing implementation, multiple requests queued up on an
+endpoint are subject to getting evicted without transmission.
 
-Thanks for your quick review. Done in V2:
-https://lore.kernel.org/all/20230913141536.109844-1-andrejs.cainikovs@gmail=
-.com/
+For both control and bulk endpoints, their respective logic found in
+usba_control_irq()/usba_ep_irq() guarantees that TX FIFO is empty before
+data is sent out, and that request_complete() gets called once the
+transaction has been finished. At this point however, if any additional
+requests are found on the endpoint queue, they will be processed by
+submit_next_request(), which makes no checks against the above
+conditions, trashing data on a busy FIFO and neglecting completion
+handlers.
 
---=20
-Best regards,
-Andrejs Cainikovs
+Fix the above issues by removing the calls to submit_next_request(),
+and thus forcing the pending requests to be processed on the next pass
+of the respective endpoint logic. While at it, remove a DBG message, as
+that branch becomes part of regular flow.
+
+This restores mass storage mode operation on Microchip ATSAMA5D27 SoC.
+
+Signed-off-by: Artur Rojek <artur@conclusive.pl>
+---
+ drivers/usb/gadget/atmel_usba_udc.c | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+index 7d51821497b4..e6b458d940d8 100644
+--- a/drivers/usb/gadget/atmel_usba_udc.c
++++ b/drivers/usb/gadget/atmel_usba_udc.c
+@@ -57,13 +57,9 @@ static void submit_request(struct usba_ep *ep, struct usba_request *req)
+ 	req->submitted = 1;
+ 
+ 	next_fifo_transaction(ep, req);
+-	if (req->last_transaction) {
+-		usba_ep_writel(ep, CTL_DIS, USBA_TX_PK_RDY);
+-		usba_ep_writel(ep, CTL_ENB, USBA_TX_COMPLETE);
+-	} else {
++	if (ep_is_control(ep))
+ 		usba_ep_writel(ep, CTL_DIS, USBA_TX_COMPLETE);
+-		usba_ep_writel(ep, CTL_ENB, USBA_TX_PK_RDY);
+-	}
++	usba_ep_writel(ep, CTL_ENB, USBA_TX_PK_RDY);
+ }
+ 
+ static void submit_next_request(struct usba_ep *ep)
+@@ -889,7 +885,6 @@ restart:
+ 			if (req) {
+ 				list_del_init(&req->queue);
+ 				request_complete(ep, req, 0);
+-				submit_next_request(ep);
+ 			}
+ 			usba_ep_writel(ep, CTL_DIS, USBA_TX_COMPLETE);
+ 			ep->state = WAIT_FOR_SETUP;
+@@ -1036,7 +1031,6 @@ static void usba_ep_irq(struct usba_udc *udc, struct usba_ep *ep)
+ 		DBG(DBG_BUS, "%s: TX PK ready\n", ep->ep.name);
+ 
+ 		if (list_empty(&ep->queue)) {
+-			DBG(DBG_INT, "ep_irq: queue empty\n");
+ 			usba_ep_writel(ep, CTL_DIS, USBA_TX_PK_RDY);
+ 			return;
+ 		}
+@@ -1050,7 +1044,6 @@ static void usba_ep_irq(struct usba_udc *udc, struct usba_ep *ep)
+ 
+ 		if (req->last_transaction) {
+ 			list_del_init(&req->queue);
+-			submit_next_request(ep);
+ 			request_complete(ep, req, 0);
+ 		}
+ 
+-- 
+2.42.0
 
