@@ -4,66 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC325EEAA7B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 22:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA41EEAA7A
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 23:21:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AA988669D;
-	Fri, 15 Sep 2023 00:43:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E099A86741;
+	Fri, 15 Sep 2023 01:21:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CdTal1IO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BOKJJyy7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 264D28669D; Fri, 15 Sep 2023 00:43:39 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 998AF864D7; Fri, 15 Sep 2023 01:21:06 +0200 (CEST)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5727786661
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 00:43:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67320864D7
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 01:21:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-52eed139ec2so1690311a12.2
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 15:43:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2747b49cac4so864956a91.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:21:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694731417; x=1695336217; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694733663; x=1695338463; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KxEd3Kel1ce1GLkybEQUe4FzSLPhWsLqId9zJLPPiec=;
- b=CdTal1IOlA7iB2tXP6CGiwCmUR3BKRHFFXkNFOyFHonb5wGbnJ6kUfvNIiGspl1iJG
- +nLlbvj1cL5jX+d5ogLdKMBUcKAdEQESvv4zHsO4YDi6PRhey0Nc+m6FXI+xkRkYDMYA
- gRvE/5RFx+C/5C6iMfVNVVkC5UnL7l9//Yg40=
+ bh=JNSor/Da2fzNm4Z7aE/b/qJAirRVGn92/iY3M8yskAM=;
+ b=BOKJJyy7MuJl6JHk1DtjRZSmIIoqrd3C49oPTJqnujFgfUZbCQvcPeyCegMN+vWz4A
+ O1Bc/egH7iHPBE2ycNHS/aEFdBdKHmguVGty2rpvofGwUvgVUqUyYeO5w52PCOikAdv+
+ kLjDrTS5/qCz1MDfI2FtjbNrI9+CdgFMa3FGkLfbm5bIemnV5SlPnS6xuRNZpBlviEw3
+ iC9btN8r9pHuY7s1JWKqIsu0nPMkbqCxRkx39l/2tnvUxVyfXl8yN9ahhieFc7NQY/bH
+ /u5zxuzub5eJWIqGvkH1QSbBn4aM3gdF7Q+ZZyFmKBFg7qZuoq1dObGYVkA8mVz4KeGT
+ EOAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694731417; x=1695336217;
+ d=1e100.net; s=20230601; t=1694733663; x=1695338463;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KxEd3Kel1ce1GLkybEQUe4FzSLPhWsLqId9zJLPPiec=;
- b=RXSTLFrugSBDQMR4G71iRWMRP6okQyAnMn25yVhvlzZ9SAgKXcLuqHmtdaUOyZi4gT
- 7ZWcDyTYc93EfDyXrIA9qzrRs7BIfD2CAznpttxhs8zuUeFvJWXnb0FSsYQgCxOShw3t
- 2uKZo/esWv+3GUpXHGy2lWRaU7V1aN085klqI1kR1hVldYVJO4qEEvAz1dX/kAZ/b2ZY
- UAmuyWeyK+aUpvHH6Bh8QFUP10dDJidZr3AL8hPtg9CpOvWSw6ru43PgdGt/UwbsLMxf
- CnpO7dChH1RKdO8UB8B9+hA0ynKTJMw301LfR6/T6KzdSFmx1ILwRQKjSC/Lw0aq/RVN
- TDSw==
-X-Gm-Message-State: AOJu0Yxu7tOthZdqY2odktozJZBLwNnMux2tY46l91z3IJMB9CCEYsWl
- Iize/KirjtCCdfANxdLYopECoMTMwpxLWq0AKN8x9g==
-X-Google-Smtp-Source: AGHT+IFjihhTBR/9fCW/T4Pk2gw8YVAFcfYiE8Y7/g708FyWwKTBPGkg2mSeTW0iXXlM4eng6yJksXZDeJNZ5ujP3wc=
-X-Received: by 2002:a17:906:c451:b0:9a2:23cd:f05a with SMTP id
- ck17-20020a170906c45100b009a223cdf05amr6036223ejb.76.1694731416775; Thu, 14
- Sep 2023 15:43:36 -0700 (PDT)
+ bh=JNSor/Da2fzNm4Z7aE/b/qJAirRVGn92/iY3M8yskAM=;
+ b=vzh3euF4WknV79ayeLwcH4lNQiYe/tixf+sJbAK6b4aX4UbYiiD7fF24lu6B3Cav1S
+ RQVVGNihixLFED1OqZnAWzjUWx4lx3hZO1tosqtbFUhyE/V9P+h/2Wim4f+d8+m2IElR
+ +ypXZ9yUpjnFPb9ygicPI5bzc0YSidO+h8fo9bd2L4qKPNlZOdSJq/SeUpiHhntSumII
+ HiWb7eHRPH4b9gZ0p7wgWQa6JJgXTHPXnd5jNs0IbZZa+qs1gp29zuUNT8y2G/i5gnqY
+ 0nyXM5bP0kbDxpSfIkKDqNi62lvv8qf6WgzV8DFaxo34hnp8YMTAtQunIUotJW012Ma3
+ WVKw==
+X-Gm-Message-State: AOJu0YyQx6SYO6d5yfWnrMqmIqjZBZry/tsdlM8HaNabNe5t1PRn+apW
+ sCjsFgilCWzn5ZbDU0HUA2738+C1Wu6AQ0b4RPmLyw==
+X-Google-Smtp-Source: AGHT+IG6cyIqH8cHwu7WAzxsF7dd4rXI5xptROCjK6/GojHiCJfQrGka4PSUXrFwG30RcYRwqbM7eyJovod9XSxc+bU=
+X-Received: by 2002:a17:90a:f00e:b0:274:922d:4b35 with SMTP id
+ bt14-20020a17090af00e00b00274922d4b35mr1061756pjb.1.1694733662772; Thu, 14
+ Sep 2023 16:21:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
- <169472311537.1507631.3823107473012828432.b4-ty@konsulko.com>
-In-Reply-To: <169472311537.1507631.3823107473012828432.b4-ty@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 14 Sep 2023 16:43:25 -0600
-Message-ID: <CAPnjgZ032j0Pyh=AMLjf8=Z8PrcTpVsu7fy3MOwvfccJ9HNW+Q@mail.gmail.com>
-Subject: Re: [PATCH 00/35] treewide: Remove unused NEEDS_MANUAL_RELOC code bits
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-3-masahisa.kojima@linaro.org> <ZQMB+VZ6msAaK5da@hera>
+In-Reply-To: <ZQMB+VZ6msAaK5da@hera>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Fri, 15 Sep 2023 08:20:51 +0900
+Message-ID: <CADQ0-X9BXXWLJKYCQAp6gSRGtapuR_yS3Bs0cFQDQt7_D2ysWg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/6] net: wget: add wget with dns utility function
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,27 +87,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Sept 2023 at 14:25, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, 06 Sep 2023 23:29:40 +0200, Marek Vasut wrote:
->
-> > The last user of the NEEDS_MANUAL_RELOC has been removed in commit
-> > 26af162ac8f8 ("arch: m68k: Implement relocation")
-> > Remove now unused NEEDS_MANUAL_RELOC code.
-> >
-> > This is a follow up on way over decade old commit
-> > 2e5167ccad93 ("Replace CONFIG_RELOC_FIXUP_WORKS by CONFIG_NEEDS_MANUAL_RELOC")
-> > "
-> > By now, the majority of architectures have working relocation
-> > support, so the few remaining architectures have become exceptions.
-> > To make this more obvious, we make working relocation now the default
-> > case, and flag the remaining cases with CONFIG_NEEDS_MANUAL_RELOC.
-> > "
-> > It took a bit longer than expected, but now we can really sunset
-> > CONFIG_NEEDS_MANUAL_RELOC.
-> >
-> > [...]
->
-> Applied to u-boot/next, thanks!
+Hi Ilias,
 
-yay, thanks indeed!
+On Thu, 14 Sept 2023 at 21:52, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Kojima-san
+>
+> [...]
+>
+> >  }
+> > +
+> > +#if (IS_ENABLED(CONFIG_CMD_DNS))
+> > +int wget_with_dns(ulong dst_addr, char *uri)
+> > +{
+> > +     int ret;
+> > +     char *s, *host_name, *file_name, *str_copy;
+> > +
+> > +     /*
+> > +      * Download file using wget.
+> > +      *
+> > +      * U-Boot wget takes the target uri in this format.
+> > +      *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
+> > +      * Need to resolve the http server ip address before starting wget.
+> > +      */
+> > +     str_copy = strdup(uri);
+> > +     if (!str_copy)
+> > +             return -ENOMEM;
+> > +
+> > +     s = str_copy + strlen("http://");
+> > +     host_name = strsep(&s, "/");
+> > +     if (!s) {
+> > +             log_err("Error: invalied uri, no file path\n");
+> > +             ret = -EINVAL;
+> > +             goto out;
+> > +     }
+> > +     file_name = s;
+> > +
+> > +     /* TODO: If the given uri has ip address for the http server, skip dns */
+> > +     net_dns_resolve = host_name;
+> > +     net_dns_env_var = "httpserverip";
+>
+> This is not idea, but I understand this is how dns currently works.  We
+> can take another look on improving this when LWIP lands
+
+Yes.
+Note that the prototype of this function is the same as the  Maxim's LWIP port
+"int ulwip_wget(ulong addr, char *url)", so we can easily replace it
+when the LWIP lands.
+
+>
+> > +     if (net_loop(DNS) < 0) {
+> > +             log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
+> > +             ret = -EINVAL;
+> > +             goto out;
+> > +     }
+> > +     s = env_get("httpserverip");
+> > +     if (!s) {
+> > +             ret = -EINVAL;
+> > +             goto out;
+> > +     }
+> > +
+> > +     strlcpy(net_boot_file_name, s, 1024);
+>
+> sizeof(net_boot_file_name) here please
+OK.
+
+>
+> > +     strlcat(net_boot_file_name, ":/", 1024); /* append '/' which is removed by strsep() */
+> > +     strlcat(net_boot_file_name, file_name, 1024);
+>
+> Don't you have to limit the size of subsequent writes depending on what
+> previous calls wrote? IOW that can't always be 1024.
+
+strlcat() appends the string with the limit of "buf_size - strlen(dst)
+- 1", so current code should be OK.
+1024 should be sizeof(net_boot_file_name) same as above.
+
+Thanks,
+Masahisa Kojima
+
+>
+> > +     image_load_addr = dst_addr;
+> > +     ret = net_loop(WGET);
+> > +
+> > +out:
+> > +     free(str_copy);
+> > +
+> > +     return ret;
+> > +}
+> > +#endif
+> > --
+> > 2.34.1
+> >
+>
+> Thanks
+> /Ilias
