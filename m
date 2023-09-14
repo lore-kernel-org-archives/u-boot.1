@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 132C5EEAA55
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:22:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC256EEAA55
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:23:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C120687077;
-	Thu, 14 Sep 2023 18:21:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A40186E46;
+	Thu, 14 Sep 2023 18:21:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="joSMAVXl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GluuAknM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 984B486AAC; Thu, 14 Sep 2023 18:21:12 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id AB58B87083; Thu, 14 Sep 2023 18:21:14 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 179EA869BC
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:21:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3C5787080
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:21:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2bcde83ce9fso18288721fa.1
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:21:07 -0700 (PDT)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2b962535808so19091251fa.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:21:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694708466; x=1695313266; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694708471; x=1695313271; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PIYjLMZK0dZcDLpQ4w8B+bV3JHY4j/+fB+98zxRQ+mI=;
- b=joSMAVXlrC0eO1PAeotiY5+BoSimQ+eRnJGKCmXi0eTxU+ze5WphvjA4Hr4wAgQ1IZ
- mM4Spt+R3UXzeYHzmJVC+cMOBddRMV1jEwxQEhk3fepILeYlLRsvtMejeOQz9QTxCyiY
- qStTBC+TssZGZX/9KK1hvf54yj66i6KQFnqKeFAWH/NTmaZJ+e0TCBU1F0KND3pl729+
- gLEKBaUYYO5fx8kXxpBuCC2lVAY0qQ/l4K49VOvJWPvwPKjEd1TbvnY/QQV1gKBnAv10
- 1CNt5Qd600DDY8p31AAlH2/HakGudMI836Bv5eQ6HxiKnKVYgOpHG4rB9G3zMRULFNnA
- SzCg==
+ bh=Enmy0689N7W2ZgwZJNW/re8YJQVeDPBPlmUCaBkcQNw=;
+ b=GluuAknMK0HAY4xCc3KaoPK8GJFgnygSctWnZojKdyNFHG4sF5r2pz9Y214+GtyRa4
+ nt9PTgabfjX94NJGsXHtyawVhekZ8dj5Err6rAKFLIyqGhdg88nNCMxodNmHvWTkWZj/
+ +kv/eZ3G7yZqzEygjX44prBCDMEG6O/Tse9q+I+YlBC7CfUc3r8PSoywsywSiy+HCTUo
+ 1s5HVa7ExDZe4PaBcqucNTN776cDOSqw41ISQUichLn5Wzey2gd1YEzSrnQSbEuecger
+ LQ2FJgYC4WuE3+zWj92JW0NLDpDcXqqUraCwOUjVttgZ+1XG1kqaKS7zR/HU7ECiaAlC
+ 8zqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694708466; x=1695313266;
+ d=1e100.net; s=20230601; t=1694708471; x=1695313271;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PIYjLMZK0dZcDLpQ4w8B+bV3JHY4j/+fB+98zxRQ+mI=;
- b=b9GUyE9WNmRBBigbdo13mGDHzlsVY6NMlVi6RJNKZeD3Wl2cA6sOfVKM007wgAp+Id
- W1YrQwdFuWqBqspi3zXGWIlLg2VvkcSDaORpsml4zOg6f1URT/to4fCg/tDgSAn4hGF3
- 1WPN+lSUb3TAyfsDnt2bmsXBmoV42Blk7shUw8eEBzQ/J64iUfVdrrp/llIVuCk0MFAb
- wHNWyDNdrRzlpqIpmtedCJ3JvoUQAaM6xP8rvPJ7Nx11hjFYbm5j31RJgo9RRbGfap8P
- r/pcRJeu9tyHbIi0F2kGp5XQIAjRGdzxM5Fldalus+jrGJ9WsJ2givScq+FxLOYYlat/
- W7YA==
-X-Gm-Message-State: AOJu0YyKKDsjpuuXOk7MpNioIWu5r2rZSbNf6o6KpEUPEz8pXzCIpoHk
- H9ruG0Wkgjg1nPE9fzv1McOVRS3R/U7BoLB6ZRkN5A==
-X-Google-Smtp-Source: AGHT+IG9Yti7BZCczQXK3JonTBWm2N/fw5j4z9jF8hCoeTz0r7MAT5A7IByaaf6adlc0nReDZxmUUg==
-X-Received: by 2002:a2e:9185:0:b0:2bc:e46d:f4ca with SMTP id
- f5-20020a2e9185000000b002bce46df4camr5244171ljg.46.1694708466057; 
- Thu, 14 Sep 2023 09:21:06 -0700 (PDT)
+ bh=Enmy0689N7W2ZgwZJNW/re8YJQVeDPBPlmUCaBkcQNw=;
+ b=iOQQYcavL2OHyF5FrolI/rLNqxNo73CeIBt+BS5DhYQVrM8TSv9PFrKiwW9kxLpfDN
+ Ea/sObY5idTN+tLLiHopYqWBIhEsd2fRfI7kXx1JKnewS2O5Ejkc9a/BsftLojUN1XEP
+ pAt79aTjI032aedkXilORVVOfdbBhHeZeGVedlqL7Ni1lezmAchP7RAj5kuj2cQTPIhq
+ lJxFW2aoIg1Va5O7KDKtO+dV3HFJhopMv3F5lap0BcVcgYIJJAly2nJ67BGMjzVcR6i8
+ LTxoWkz386yJkLRIRDQ/PNNk32LjBHijkWLnx3gleQpdlQ01qj6UQp/BrD3gyYFZ26CK
+ gLiA==
+X-Gm-Message-State: AOJu0YySpz5qPQFzKihrg3VlWg2cZJYGw0kY5IFMEDpJFUIwpzser8hU
+ ajb6BOQq4vLLIMtmVG03O/atQ/4XiXjW0aHgwZSUKA==
+X-Google-Smtp-Source: AGHT+IGMFcVSDwy+kGe+lLAqyNncVTh7xgFf3WrC+VsA8f0NgqHfw6hNqFQsi2XanWtg2CSxZGrLdA==
+X-Received: by 2002:a2e:9197:0:b0:2bb:985f:8479 with SMTP id
+ f23-20020a2e9197000000b002bb985f8479mr5357611ljg.48.1694708470966; 
+ Thu, 14 Sep 2023 09:21:10 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.21.03
+ z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.21.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:21:05 -0700 (PDT)
+ Thu, 14 Sep 2023 09:21:10 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv9 13/15] net/lwip: replace original net commands with lwip
-Date: Thu, 14 Sep 2023 22:18:26 +0600
-Message-Id: <20230914161828.3662-14-maxim.uvarov@linaro.org>
+Subject: [PATCHv9 15/15] net/lwip: drop old net/wget
+Date: Thu, 14 Sep 2023 22:18:28 +0600
+Message-Id: <20230914161828.3662-16-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230914161828.3662-1-maxim.uvarov@linaro.org>
 References: <20230914161828.3662-1-maxim.uvarov@linaro.org>
@@ -93,403 +93,530 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace original commands: ping, tftp, dhcp and wget.
+After which to lwip variants of working apps we need to
+drop old code with all dependencies. This commit
+drop old wget command files.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- boot/bootmeth_efi.c | 18 +++++++---
- boot/bootmeth_pxe.c | 21 ++++++-----
- cmd/net.c           | 86 +++++----------------------------------------
- cmd/pxe.c           | 19 +++++-----
- include/net.h       |  8 +++--
- include/net/ulwip.h | 64 +++++++++++++++++++++++++++++++++
- 6 files changed, 113 insertions(+), 103 deletions(-)
- create mode 100644 include/net/ulwip.h
+ include/net/wget.h |  22 ---
+ net/Makefile       |   1 -
+ net/net.c          |   6 -
+ net/wget.c         | 440 ---------------------------------------------
+ 4 files changed, 469 deletions(-)
+ delete mode 100644 include/net/wget.h
+ delete mode 100644 net/wget.c
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index ae936c8daa..52399d627c 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -20,6 +20,8 @@
- #include <mapmem.h>
- #include <mmc.h>
- #include <net.h>
-+#include <net/lwip.h>
-+#include <net/ulwip.h>
- #include <pxe_utils.h>
- #include <linux/sizes.h>
- 
-@@ -319,9 +321,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
- 
- static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- {
--	char file_addr[17], fname[256];
--	char *tftp_argv[] = {"tftp", file_addr, fname, NULL};
--	struct cmd_tbl cmdtp = {};	/* dummy */
-+	char fname[256];
- 	const char *addr_str, *fdt_addr_str;
- 	int ret, arch, size;
- 	ulong addr, fdt_addr;
-@@ -368,7 +368,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!fdt_addr_str)
- 		return log_msg_ret("fdt", -EINVAL);
- 	fdt_addr = hextoul(fdt_addr_str, NULL);
--	sprintf(file_addr, "%lx", fdt_addr);
- 
- 	/* We only allow the first prefix with PXE */
- 	ret = distro_efi_get_fdt_name(fname, sizeof(fname), 0);
-@@ -379,7 +378,16 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bflow->fdt_fname)
- 		return log_msg_ret("fil", -ENOMEM);
- 
--	if (!do_tftpb(&cmdtp, 0, 3, tftp_argv)) {
-+	ret = ulwip_init();
-+	if (ret)
-+		return log_msg_ret("ulwip_init", ret);
-+
-+	ret = ulwip_tftp(fdt_addr, fname);
-+	if (ret)
-+		return log_msg_ret("ulwip_tftp", ret);
-+
-+	ret = ulwip_loop();
-+	if (!ret) {
- 		bflow->fdt_size = env_get_hex("filesize", 0);
- 		bflow->fdt_addr = fdt_addr;
- 	} else {
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 8d489a11aa..fc6aabaa18 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -21,6 +21,8 @@
- #include <mapmem.h>
- #include <mmc.h>
- #include <net.h>
-+#include <net/ulwip.h>
-+#include <net/lwip.h>
- #include <pxe_utils.h>
- 
- static int extlinux_pxe_getfile(struct pxe_context *ctx, const char *file_path,
-@@ -116,18 +118,21 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
- 				  const char *file_path, ulong addr,
- 				  ulong *sizep)
- {
--	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
--	struct pxe_context *ctx = dev_get_priv(dev);
--	char file_addr[17];
- 	ulong size;
- 	int ret;
- 
--	sprintf(file_addr, "%lx", addr);
--	tftp_argv[1] = file_addr;
--	tftp_argv[2] = (void *)file_path;
-+	ret = ulwip_init();
-+	if (ret)
-+		return log_msg_ret("ulwip_init", ret);
-+
-+	ret = ulwip_tftp(addr, file_path);
-+	if (ret)
-+		return log_msg_ret("ulwip_tftp", ret);
-+
-+	ret = ulwip_loop();
-+	if (ret)
-+		return log_msg_ret("ulwip_loop", ret);
- 
--	if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
--		return -ENOENT;
- 	ret = pxe_get_file_size(&size);
- 	if (ret)
- 		return log_msg_ret("tftp", ret);
-diff --git a/cmd/net.c b/cmd/net.c
-index d407d8320a..dc5a114309 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -22,6 +22,7 @@
- #include <net/udp.h>
- #include <net/sntp.h>
- #include <net/ncsi.h>
-+#include <net/lwip.h>
- 
- static int netboot_common(enum proto_t, struct cmd_tbl *, int, char * const []);
- 
-@@ -40,19 +41,9 @@ U_BOOT_CMD(
- #endif
- 
- #ifdef CONFIG_CMD_TFTPBOOT
--int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	int ret;
+diff --git a/include/net/wget.h b/include/net/wget.h
+deleted file mode 100644
+index da0920de11..0000000000
+--- a/include/net/wget.h
++++ /dev/null
+@@ -1,22 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Duncan Hare Copyright 2017
+- */
 -
--	bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start");
--	ret = netboot_common(TFTPGET, cmdtp, argc, argv);
--	bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
--	return ret;
+-/**
+- * wget_start() - begin wget
+- */
+-void wget_start(void);
+-
+-enum wget_state {
+-	WGET_CLOSED,
+-	WGET_CONNECTING,
+-	WGET_CONNECTED,
+-	WGET_TRANSFERRING,
+-	WGET_TRANSFERRED
+-};
+-
+-#define DEBUG_WGET		0	/* Set to 1 for debug messages */
+-#define SERVER_PORT		80
+-#define WGET_RETRY_COUNT	30
+-#define WGET_TIMEOUT		2000UL
+diff --git a/net/Makefile b/net/Makefile
+index 61930c244e..eda21f988a 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -32,7 +32,6 @@ obj-$(CONFIG_TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
+ obj-$(CONFIG_CMD_WOL)  += wol.o
+ obj-$(CONFIG_PROT_UDP) += udp.o
+ obj-$(CONFIG_PROT_TCP) += tcp.o
+-obj-$(CONFIG_CMD_WGET) += wget.o
+ obj-$(CONFIG_LWIP) += lwip/
+ 
+ # Disable this warning as it is triggered by:
+diff --git a/net/net.c b/net/net.c
+index d9e566081c..677eda26bc 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -109,7 +109,6 @@
+ #include <linux/compiler.h>
+ #include <test/test.h>
+ #include <net/tcp.h>
+-#include <net/wget.h>
+ #include "arp.h"
+ #include "bootp.h"
+ #include "cdp.h"
+@@ -564,11 +563,6 @@ restart:
+ 			nfs_start();
+ 			break;
+ #endif
+-#if defined(CONFIG_CMD_WGET)
+-		case WGET:
+-			wget_start();
+-			break;
+-#endif
+ #if defined(CONFIG_CMD_CDP)
+ 		case CDP:
+ 			cdp_start();
+diff --git a/net/wget.c b/net/wget.c
+deleted file mode 100644
+index 2dbfeb1a1d..0000000000
+--- a/net/wget.c
++++ /dev/null
+@@ -1,440 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * WGET/HTTP support driver based on U-BOOT's nfs.c
+- * Copyright Duncan Hare <dh@synoia.com> 2017
+- */
+-
+-#include <command.h>
+-#include <common.h>
+-#include <display_options.h>
+-#include <env.h>
+-#include <image.h>
+-#include <mapmem.h>
+-#include <net.h>
+-#include <net/tcp.h>
+-#include <net/wget.h>
+-
+-static const char bootfile1[] = "GET ";
+-static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+-static const char http_eom[] = "\r\n\r\n";
+-static const char http_ok[] = "200";
+-static const char content_len[] = "Content-Length";
+-static const char linefeed[] = "\r\n";
+-static struct in_addr web_server_ip;
+-static int our_port;
+-static int wget_timeout_count;
+-
+-struct pkt_qd {
+-	uchar *pkt;
+-	unsigned int tcp_seq_num;
+-	unsigned int len;
+-};
+-
+-/*
+- * This is a control structure for out of order packets received.
+- * The actual packet bufers are in the kernel space, and are
+- * expected to be overwritten by the downloaded image.
+- */
+-static struct pkt_qd pkt_q[PKTBUFSRX / 4];
+-static int pkt_q_idx;
+-static unsigned long content_length;
+-static unsigned int packets;
+-
+-static unsigned int initial_data_seq_num;
+-
+-static enum  wget_state current_wget_state;
+-
+-static char *image_url;
+-static unsigned int wget_timeout = WGET_TIMEOUT;
+-
+-static enum net_loop_state wget_loop_state;
+-
+-/* Timeout retry parameters */
+-static u8 retry_action;			/* actions for TCP retry */
+-static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
+-static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
+-static int retry_len;			/* TCP retry length */
+-
+-/**
+- * store_block() - store block in memory
+- * @src: source of data
+- * @offset: offset
+- * @len: length
+- */
+-static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
+-{
+-	ulong newsize = offset + len;
+-	uchar *ptr;
+-
+-	ptr = map_sysmem(image_load_addr + offset, len);
+-	memcpy(ptr, src, len);
+-	unmap_sysmem(ptr);
+-
+-	if (net_boot_file_size < (offset + len))
+-		net_boot_file_size = newsize;
+-
+-	return 0;
 -}
 -
- #if IS_ENABLED(CONFIG_IPV6)
- U_BOOT_CMD(
--	tftpboot,	4,	1,	do_tftpb,
-+	tftpboot,	4,	1, do_lwip_tftp,
- 	"boot image via network using TFTP protocol\n"
- 	"To use IPv6 add -ipv6 parameter or use IPv6 hostIPaddr framed "
- 	"with [] brackets",
-@@ -60,7 +51,7 @@ U_BOOT_CMD(
- );
- #else
- U_BOOT_CMD(
--	tftpboot,	3,	1,	do_tftpb,
-+	tftpboot,	3,	1,  do_lwip_tftp,
- 	"load file via network using TFTP protocol",
- 	"[loadAddress] [[hostIPaddr:]bootfilename]"
- );
-@@ -139,7 +130,7 @@ U_BOOT_CMD(dhcp6,	3,	1,	do_dhcp6,
- static int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
- 		   char *const argv[])
- {
--	return netboot_common(DHCP, cmdtp, argc, argv);
-+	return do_lwip_dhcp();
- }
- 
- U_BOOT_CMD(
-@@ -196,13 +187,11 @@ U_BOOT_CMD(
- #endif
- 
- #if defined(CONFIG_CMD_WGET)
--static int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+-/**
+- * wget_send_stored() - wget response dispatcher
+- *
+- * WARNING, This, and only this, is the place in wget.c where
+- * SEQUENCE NUMBERS are swapped between incoming (RX)
+- * and outgoing (TX).
+- * Procedure wget_handler() is correct for RX traffic.
+- */
+-static void wget_send_stored(void)
 -{
--	return netboot_common(WGET, cmdtp, argc, argv);
+-	u8 action = retry_action;
+-	int len = retry_len;
+-	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
+-	unsigned int tcp_seq_num = retry_tcp_ack_num;
+-	uchar *ptr, *offset;
+-
+-	switch (current_wget_state) {
+-	case WGET_CLOSED:
+-		debug_cond(DEBUG_WGET, "wget: send SYN\n");
+-		current_wget_state = WGET_CONNECTING;
+-		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
+-				    tcp_seq_num, tcp_ack_num);
+-		packets = 0;
+-		break;
+-	case WGET_CONNECTING:
+-		pkt_q_idx = 0;
+-		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
+-				    tcp_seq_num, tcp_ack_num);
+-
+-		ptr = net_tx_packet + net_eth_hdr_size() +
+-			IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
+-		offset = ptr;
+-
+-		memcpy(offset, &bootfile1, strlen(bootfile1));
+-		offset += strlen(bootfile1);
+-
+-		memcpy(offset, image_url, strlen(image_url));
+-		offset += strlen(image_url);
+-
+-		memcpy(offset, &bootfile3, strlen(bootfile3));
+-		offset += strlen(bootfile3);
+-		net_send_tcp_packet((offset - ptr), SERVER_PORT, our_port,
+-				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
+-		current_wget_state = WGET_CONNECTED;
+-		break;
+-	case WGET_CONNECTED:
+-	case WGET_TRANSFERRING:
+-	case WGET_TRANSFERRED:
+-		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
+-				    tcp_seq_num, tcp_ack_num);
+-		break;
+-	}
 -}
-+int do_lwip_wget(struct cmd_tbl *cmdtp, int flag, int argc,
-+		 char *const argv[]);
- 
- U_BOOT_CMD(
--	wget,   3,      1,      do_wget,
-+	wget,   3,      1, do_lwip_wget,
- 	"boot image via network using HTTP protocol",
- 	"[loadAddress] [[hostIPaddr:]path and image name]"
- );
-@@ -456,28 +445,8 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
- }
- 
- #if defined(CONFIG_CMD_PING)
--static int do_ping(struct cmd_tbl *cmdtp, int flag, int argc,
--		   char *const argv[])
+-
+-static void wget_send(u8 action, unsigned int tcp_seq_num,
+-		      unsigned int tcp_ack_num, int len)
 -{
--	if (argc < 2)
--		return CMD_RET_USAGE;
+-	retry_action = action;
+-	retry_tcp_ack_num = tcp_ack_num;
+-	retry_tcp_seq_num = tcp_seq_num;
+-	retry_len = len;
 -
--	net_ping_ip = string_to_ip(argv[1]);
--	if (net_ping_ip.s_addr == 0)
--		return CMD_RET_USAGE;
+-	wget_send_stored();
+-}
 -
--	if (net_loop(PING) < 0) {
--		printf("ping failed; host %s is not alive\n", argv[1]);
--		return CMD_RET_FAILURE;
+-void wget_fail(char *error_message, unsigned int tcp_seq_num,
+-	       unsigned int tcp_ack_num, u8 action)
+-{
+-	printf("wget: Transfer Fail - %s\n", error_message);
+-	net_set_timeout_handler(0, NULL);
+-	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
+-}
+-
+-void wget_success(u8 action, unsigned int tcp_seq_num,
+-		  unsigned int tcp_ack_num, int len, int packets)
+-{
+-	printf("Packets received %d, Transfer Successful\n", packets);
+-	wget_send(action, tcp_seq_num, tcp_ack_num, len);
+-}
+-
+-/*
+- * Interfaces of U-BOOT
+- */
+-static void wget_timeout_handler(void)
+-{
+-	if (++wget_timeout_count > WGET_RETRY_COUNT) {
+-		puts("\nRetry count exceeded; starting again\n");
+-		wget_send(TCP_RST, 0, 0, 0);
+-		net_start_again();
+-	} else {
+-		puts("T ");
+-		net_set_timeout_handler(wget_timeout +
+-					WGET_TIMEOUT * wget_timeout_count,
+-					wget_timeout_handler);
+-		wget_send_stored();
+-	}
+-}
+-
+-#define PKT_QUEUE_OFFSET 0x20000
+-#define PKT_QUEUE_PACKET_SIZE 0x800
+-
+-static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+-			   u8 action, unsigned int tcp_ack_num, unsigned int len)
+-{
+-	uchar *pkt_in_q;
+-	char *pos;
+-	int hlen, i;
+-	uchar *ptr1;
+-
+-	pkt[len] = '\0';
+-	pos = strstr((char *)pkt, http_eom);
+-
+-	if (!pos) {
+-		debug_cond(DEBUG_WGET,
+-			   "wget: Connected, data before Header %p\n", pkt);
+-		pkt_in_q = (void *)image_load_addr + PKT_QUEUE_OFFSET +
+-			(pkt_q_idx * PKT_QUEUE_PACKET_SIZE);
+-
+-		ptr1 = map_sysmem((phys_addr_t)pkt_in_q, len);
+-		memcpy(ptr1, pkt, len);
+-		unmap_sysmem(ptr1);
+-
+-		pkt_q[pkt_q_idx].pkt = pkt_in_q;
+-		pkt_q[pkt_q_idx].tcp_seq_num = tcp_seq_num;
+-		pkt_q[pkt_q_idx].len = len;
+-		pkt_q_idx++;
+-	} else {
+-		debug_cond(DEBUG_WGET, "wget: Connected HTTP Header %p\n", pkt);
+-		/* sizeof(http_eom) - 1 is the string length of (http_eom) */
+-		hlen = pos - (char *)pkt + sizeof(http_eom) - 1;
+-		pos = strstr((char *)pkt, linefeed);
+-		if (pos > 0)
+-			i = pos - (char *)pkt;
+-		else
+-			i = hlen;
+-		printf("%.*s", i,  pkt);
+-
+-		current_wget_state = WGET_TRANSFERRING;
+-
+-		if (strstr((char *)pkt, http_ok) == 0) {
+-			debug_cond(DEBUG_WGET,
+-				   "wget: Connected Bad Xfer\n");
+-			initial_data_seq_num = tcp_seq_num + hlen;
+-			wget_loop_state = NETLOOP_FAIL;
+-			wget_send(action, tcp_seq_num, tcp_ack_num, len);
+-		} else {
+-			debug_cond(DEBUG_WGET,
+-				   "wget: Connctd pkt %p  hlen %x\n",
+-				   pkt, hlen);
+-			initial_data_seq_num = tcp_seq_num + hlen;
+-
+-			pos = strstr((char *)pkt, content_len);
+-			if (!pos) {
+-				content_length = -1;
+-			} else {
+-				pos += sizeof(content_len) + 2;
+-				strict_strtoul(pos, 10, &content_length);
+-				debug_cond(DEBUG_WGET,
+-					   "wget: Connected Len %lu\n",
+-					   content_length);
+-			}
+-
+-			net_boot_file_size = 0;
+-
+-			if (len > hlen)
+-				store_block(pkt + hlen, 0, len - hlen);
+-
+-			debug_cond(DEBUG_WGET,
+-				   "wget: Connected Pkt %p hlen %x\n",
+-				   pkt, hlen);
+-
+-			for (i = 0; i < pkt_q_idx; i++) {
+-				ptr1 = map_sysmem(
+-					(phys_addr_t)(pkt_q[i].pkt),
+-					pkt_q[i].len);
+-				store_block(ptr1,
+-					    pkt_q[i].tcp_seq_num -
+-					    initial_data_seq_num,
+-					    pkt_q[i].len);
+-				unmap_sysmem(ptr1);
+-				debug_cond(DEBUG_WGET,
+-					   "wget: Connctd pkt Q %p len %x\n",
+-					   pkt_q[i].pkt, pkt_q[i].len);
+-			}
+-		}
+-	}
+-	wget_send(action, tcp_seq_num, tcp_ack_num, len);
+-}
+-
+-/**
+- * wget_handler() - TCP handler of wget
+- * @pkt: pointer to the application packet
+- * @dport: destination TCP port
+- * @sip: source IP address
+- * @sport: source TCP port
+- * @tcp_seq_num: TCP sequential number
+- * @tcp_ack_num: TCP acknowledgment number
+- * @action: TCP action (SYN, ACK, FIN, etc)
+- * @len: packet length
+- *
+- * In the "application push" invocation, the TCP header with all
+- * its information is pointed to by the packet pointer.
+- */
+-static void wget_handler(uchar *pkt, u16 dport,
+-			 struct in_addr sip, u16 sport,
+-			 u32 tcp_seq_num, u32 tcp_ack_num,
+-			 u8 action, unsigned int len)
+-{
+-	enum tcp_state wget_tcp_state = tcp_get_tcp_state();
+-
+-	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+-	packets++;
+-
+-	switch (current_wget_state) {
+-	case WGET_CLOSED:
+-		debug_cond(DEBUG_WGET, "wget: Handler: Error!, State wrong\n");
+-		break;
+-	case WGET_CONNECTING:
+-		debug_cond(DEBUG_WGET,
+-			   "wget: Connecting In len=%x, Seq=%u, Ack=%u\n",
+-			   len, tcp_seq_num, tcp_ack_num);
+-		if (!len) {
+-			if (wget_tcp_state == TCP_ESTABLISHED) {
+-				debug_cond(DEBUG_WGET,
+-					   "wget: Cting, send, len=%x\n", len);
+-				wget_send(action, tcp_seq_num, tcp_ack_num,
+-					  len);
+-			} else {
+-				printf("%.*s", len,  pkt);
+-				wget_fail("wget: Handler Connected Fail\n",
+-					  tcp_seq_num, tcp_ack_num, action);
+-			}
+-		}
+-		break;
+-	case WGET_CONNECTED:
+-		debug_cond(DEBUG_WGET, "wget: Connected seq=%u, len=%x\n",
+-			   tcp_seq_num, len);
+-		if (!len) {
+-			wget_fail("Image not found, no data returned\n",
+-				  tcp_seq_num, tcp_ack_num, action);
+-		} else {
+-			wget_connected(pkt, tcp_seq_num, action, tcp_ack_num, len);
+-		}
+-		break;
+-	case WGET_TRANSFERRING:
+-		debug_cond(DEBUG_WGET,
+-			   "wget: Transferring, seq=%x, ack=%x,len=%x\n",
+-			   tcp_seq_num, tcp_ack_num, len);
+-
+-		if (tcp_seq_num >= initial_data_seq_num &&
+-		    store_block(pkt, tcp_seq_num - initial_data_seq_num,
+-				len) != 0) {
+-			wget_fail("wget: store error\n",
+-				  tcp_seq_num, tcp_ack_num, action);
+-			return;
+-		}
+-
+-		switch (wget_tcp_state) {
+-		case TCP_FIN_WAIT_2:
+-			wget_send(TCP_ACK, tcp_seq_num, tcp_ack_num, len);
+-			fallthrough;
+-		case TCP_SYN_SENT:
+-		case TCP_SYN_RECEIVED:
+-		case TCP_CLOSING:
+-		case TCP_FIN_WAIT_1:
+-		case TCP_CLOSED:
+-			net_set_state(NETLOOP_FAIL);
+-			break;
+-		case TCP_ESTABLISHED:
+-			wget_send(TCP_ACK, tcp_seq_num, tcp_ack_num,
+-				  len);
+-			wget_loop_state = NETLOOP_SUCCESS;
+-			break;
+-		case TCP_CLOSE_WAIT:     /* End of transfer */
+-			current_wget_state = WGET_TRANSFERRED;
+-			wget_send(action | TCP_ACK | TCP_FIN,
+-				  tcp_seq_num, tcp_ack_num, len);
+-			break;
+-		}
+-		break;
+-	case WGET_TRANSFERRED:
+-		printf("Packets received %d, Transfer Successful\n", packets);
+-		net_set_state(wget_loop_state);
+-		break;
+-	}
+-}
+-
+-#define RANDOM_PORT_START 1024
+-#define RANDOM_PORT_RANGE 0x4000
+-
+-/**
+- * random_port() - make port a little random (1024-17407)
+- *
+- * Return: random port number from 1024 to 17407
+- *
+- * This keeps the math somewhat trivial to compute, and seems to work with
+- * all supported protocols/clients/servers
+- */
+-static unsigned int random_port(void)
+-{
+-	return RANDOM_PORT_START + (get_timer(0) % RANDOM_PORT_RANGE);
+-}
+-
+-#define BLOCKSIZE 512
+-
+-void wget_start(void)
+-{
+-	image_url = strchr(net_boot_file_name, ':');
+-	if (image_url > 0) {
+-		web_server_ip = string_to_ip(net_boot_file_name);
+-		++image_url;
+-		net_server_ip = web_server_ip;
+-	} else {
+-		web_server_ip = net_server_ip;
+-		image_url = net_boot_file_name;
 -	}
 -
--	printf("host %s is alive\n", argv[1]);
+-	debug_cond(DEBUG_WGET,
+-		   "wget: Transfer HTTP Server %pI4; our IP %pI4\n",
+-		   &web_server_ip, &net_ip);
 -
--	return CMD_RET_SUCCESS;
--}
+-	/* Check if we need to send across this subnet */
+-	if (net_gateway.s_addr && net_netmask.s_addr) {
+-		struct in_addr our_net;
+-		struct in_addr server_net;
 -
- U_BOOT_CMD(
--	ping,	2,	1,	do_ping,
-+	ping,	2,	1, do_lwip_ping,
- 	"send ICMP ECHO_REQUEST to network host",
- 	"pingAddress"
- );
-@@ -601,45 +570,8 @@ U_BOOT_CMD(
- #endif
- 
- #if defined(CONFIG_CMD_DNS)
--int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	if (argc == 1)
--		return CMD_RET_USAGE;
+-		our_net.s_addr = net_ip.s_addr & net_netmask.s_addr;
+-		server_net.s_addr = net_server_ip.s_addr & net_netmask.s_addr;
+-		if (our_net.s_addr != server_net.s_addr)
+-			debug_cond(DEBUG_WGET,
+-				   "wget: sending through gateway %pI4",
+-				   &net_gateway);
+-	}
+-	debug_cond(DEBUG_WGET, "URL '%s'\n", image_url);
+-
+-	if (net_boot_file_expected_size_in_blocks) {
+-		debug_cond(DEBUG_WGET, "wget: Size is 0x%x Bytes = ",
+-			   net_boot_file_expected_size_in_blocks * BLOCKSIZE);
+-		print_size(net_boot_file_expected_size_in_blocks * BLOCKSIZE,
+-			   "");
+-	}
+-	debug_cond(DEBUG_WGET,
+-		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
+-
+-	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
+-	tcp_set_tcp_handler(wget_handler);
+-
+-	wget_timeout_count = 0;
+-	current_wget_state = WGET_CLOSED;
+-
+-	our_port = random_port();
 -
 -	/*
--	 * We should check for a valid hostname:
--	 * - Each label must be between 1 and 63 characters long
--	 * - the entire hostname has a maximum of 255 characters
--	 * - only the ASCII letters 'a' through 'z' (case-insensitive),
--	 *   the digits '0' through '9', and the hyphen
--	 * - cannot begin or end with a hyphen
--	 * - no other symbols, punctuation characters, or blank spaces are
--	 *   permitted
--	 * but hey - this is a minimalist implmentation, so only check length
--	 * and let the name server deal with things.
+-	 * Zero out server ether to force arp resolution in case
+-	 * the server ip for the previous u-boot command, for example dns
+-	 * is not the same as the web server ip.
 -	 */
--	if (strlen(argv[1]) >= 255) {
--		printf("dns error: hostname too long\n");
--		return CMD_RET_FAILURE;
--	}
 -
--	net_dns_resolve = argv[1];
+-	memset(net_server_ethaddr, 0, 6);
 -
--	if (argc == 3)
--		net_dns_env_var = argv[2];
--	else
--		net_dns_env_var = NULL;
--
--	if (net_loop(DNS) < 0) {
--		printf("dns lookup of %s failed, check setup\n", argv[1]);
--		return CMD_RET_FAILURE;
--	}
--
--	return CMD_RET_SUCCESS;
+-	wget_send(TCP_SYN, 0, 0, 0);
 -}
--
- U_BOOT_CMD(
--	dns,	3,	1,	do_dns,
-+	dns,	3,	1,	do_lwip_dns,
- 	"lookup the IP of a hostname",
- 	"hostname [envvar]"
- );
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 677142520b..d44df428d2 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -8,6 +8,7 @@
- #include <command.h>
- #include <fs.h>
- #include <net.h>
-+#include <net/lwip.h>
- #include <net6.h>
- #include <malloc.h>
- 
-@@ -29,21 +30,19 @@ const char *pxe_default_paths[] = {
- static int do_get_tftp(struct pxe_context *ctx, const char *file_path,
- 		       char *file_addr, ulong *sizep)
- {
--	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
-+	ulong addr;
-+	char *end;
- 	int ret;
--	int num_args;
- 
--	tftp_argv[1] = file_addr;
--	tftp_argv[2] = (void *)file_path;
-+	addr = hextoul(file_addr, &end);
-+
- 	if (ctx->use_ipv6) {
--		tftp_argv[3] = USE_IP6_CMD_PARAM;
--		num_args = 4;
--	} else {
--		num_args = 3;
-+		/* @todo: check and fix me, here */
- 	}
- 
--	if (do_tftpb(ctx->cmdtp, 0, num_args, tftp_argv))
--		return -ENOENT;
-+	ret = ulwip_tftp(addr, file_path);
-+	if (ret)
-+		return log_msg_ret("tftp", ret);
- 
- 	ret = pxe_get_file_size(sizep);
- 	if (ret)
-diff --git a/include/net.h b/include/net.h
-index e254df7d7f..de7baeb121 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -54,8 +54,10 @@ struct in_addr {
- 	__be32 s_addr;
- };
- 
-+int do_lwip_dhcp(void);
-+
- /**
-- * do_tftpb - Run the tftpboot command
-+ * do_lwip_tftp - Run the tftpboot command
-  *
-  * @cmdtp: Command information for tftpboot
-  * @flag: Command flags (CMD_FLAG_...)
-@@ -63,7 +65,7 @@ struct in_addr {
-  * @argv: List of arguments
-  * Return: result (see enum command_ret_t)
-  */
--int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_lwip_tftp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
- /**
-  * dhcp_run() - Run DHCP on the current ethernet device
-@@ -514,7 +516,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
- enum proto_t {
- 	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
- 	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
--	WOL, UDP, NCSI, WGET, RS
-+	WOL, UDP, NCSI, WGET, RS, LWIP
- };
- 
- extern char	net_boot_file_name[1024];/* Boot File name */
-diff --git a/include/net/ulwip.h b/include/net/ulwip.h
-new file mode 100644
-index 0000000000..8eac7aa130
---- /dev/null
-+++ b/include/net/ulwip.h
-@@ -0,0 +1,64 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+/**
-+ * ulwip_init() - initialize lwIP network stack
-+ *
-+ * @return 0 if success, !0 if error
-+ */
-+int ulwip_init(void);
-+
-+/**
-+ * ulwip_enabled() - check if lwIP network stack was initialized
-+ *
-+ * @return 1 lwip initialized, 0 if not yet initialized
-+ */
-+int ulwip_enabled(void);
-+
-+/**
-+ * ulwip_in_loop() - lwIP controls packet net loop
-+ *
-+ * @return 1 lwIP owns packet loop, 0 lwip does not own packet loop
-+ */
-+int ulwip_in_loop(void);
-+
-+/**
-+ * ulwip_loop_set() - make loop to be used by lwIP
-+ *
-+ * Function is used to make lwIP control network pool.
-+ *
-+ * @loop: 1. Rx packets go to lwIP 2. Rx packets go to the original stack.
-+ */
-+void ulwip_loop_set(int loop);
-+
-+/**
-+ * ulwip_exit() - exit from lwIP with a return code
-+ *
-+ * Exit from lwIP application back to the U-Boot with specific error code.
-+ *
-+ * @err: Error code to return
-+ */
-+void ulwip_exit(int err);
-+
-+/**
-+ * ulwip_poll() - polling function to feed lwIP with ethernet packet
-+ *
-+ * Function takes network packet and passes it to lwIP network stack
-+ */
-+void ulwip_poll(void);
-+
-+/**
-+ * ulwip_app_get_err() - return error code from lwIP application
-+ *
-+ * @return error code
-+ */
-+int ulwip_app_get_err(void);
-+
-+/**
-+ * ulwip_loop() - enter to packet polling loop
-+ *
-+ * When lwIP application did it's initialization stage, then it needs to enter
-+ * to packet polling loop to grab rx packets.
-+ *
-+ * Returns:  0 if success, !0 if error
-+ */
-+int ulwip_loop(void);
 -- 
 2.30.2
 
