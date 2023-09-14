@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25F3EEAA53
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA89AEEAA57
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69E1A87085;
-	Thu, 14 Sep 2023 18:21:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B9A286A38;
+	Thu, 14 Sep 2023 18:29:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Heqnjv4h";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jt5IpIvA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7E0687080; Thu, 14 Sep 2023 18:21:14 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id F164286A45; Thu, 14 Sep 2023 18:29:30 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A498586672
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:21:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A76D286A0A
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:29:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2bd0d135ca3so19044381fa.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:21:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-59c0281d72dso4412237b3.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:29:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694708469; x=1695313269; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E2ziTbeXz5Mw5Zsh+PXRJwRlKMm+1xFvTuTYPCWU9yo=;
- b=Heqnjv4hBecb9QiqEYTmjYEPG00F+sbUZdo6cTWVG8D6KDTTNmpYrtIi4uyKA67E5x
- rPnFhVrdtUWuNQGJgaXTNmICy+Bmul1MsrEEYdo+Gwr3kvxO2bwXTT6fODMuw3/QvVTp
- vk6Mo3RwsxUXBlNJeVCsp5Hb9eq5D8nSuaIt4kLQk1yoU/1+HcEYaYzwq8CyhfaS7YBY
- ybptJ4oEA8fxqLGXuHM+kpIpOxf0KRGux6k4qf+Ib8s3Ny7N3L4RWHuAtuedl4EKde2I
- fiW+ghr5EzxQ+Wtf4MC6AvtfSH4g27jBK7H7arE00J2MgQWVWpA9Ei+8Zs7KWHCuPoT8
- bjxQ==
+ d=konsulko.com; s=google; t=1694708967; x=1695313767; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zxl7XbBrGh3Z/d9MpZg5Ky9I+qCzohoKvLoT2ZdSWDU=;
+ b=jt5IpIvA8cBgxPrnsIyTFwGQsTwrB1YZTT9A/Gg45VQkrY1YQfNaYrTsS/oKqB0V3O
+ i61RTN5sut25WBK00bOB7JiUM6FGBH8avSg9crFsdPYihnD7X7nCEa5/O4/5xMkTDQOL
+ NOv5YFmYNx5uZz10WNm3Q6SIa/RWdhO/RM/YM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694708469; x=1695313269;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E2ziTbeXz5Mw5Zsh+PXRJwRlKMm+1xFvTuTYPCWU9yo=;
- b=Ayo6Z+LhgKXJ8F8D3sQj0IFtwwPW0+D0Qk1w9E3X9PVMab5GEpKwKEC3wFoDE03n4L
- bSskjPaSJMurYwbx+0psvT8JA/HQ7SqaXH1fMxtK/wl5xZuMmkOO6e1xSZUpMANpC00f
- BJEp26TfsAlWioen5seZtcOR3KnRJk2H4A/vS6o0oa11xMrgzcycMPtsRdxMd9HF7Epr
- TfOU/T2JkmY89zBM1HKgeS7m/fOLO7wG0z0pRNArIWq05Ry/fD/395wgb95fm/lBLV5z
- bfOhZUsqkriQDyvVXmiEryVeppWGg+dh5XZG1et+CnL/MiZmJt+nHeXb100ntUxN/DYC
- yzSw==
-X-Gm-Message-State: AOJu0YyH7/+FzLOd1JnaP1BcTIRinUrD0Ma7xmqgH0NmmX0IyuIOhXUl
- Aus4v9m+q20jQmqNgeEb41h/U+OW/CQWcJPgHlTCaQ==
-X-Google-Smtp-Source: AGHT+IET7EieKTHwGyWHv69bu3gWT4vTGAtQXaG5NG7qUUfIr1s2gTKzU638H1ADCp/YUvrhibtUag==
-X-Received: by 2002:a2e:8757:0:b0:2bc:b29e:8ff7 with SMTP id
- q23-20020a2e8757000000b002bcb29e8ff7mr5759520ljj.20.1694708468502; 
- Thu, 14 Sep 2023 09:21:08 -0700 (PDT)
-Received: from localhost.localdomain ([45.82.14.220])
+ d=1e100.net; s=20230601; t=1694708967; x=1695313767;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zxl7XbBrGh3Z/d9MpZg5Ky9I+qCzohoKvLoT2ZdSWDU=;
+ b=JQ6FDh7MimPg02phityQVG/GBiz2rLxZKuTtsrE6pCKKTc40kPM0QhTO7r23M0OVGz
+ LKubvSUMpZXZVmKJOHxVp5oHqO5Eh95gCx0Z8JDaAyJKrJDLJFJ2h8paoXD/SPhUV0kr
+ Jv91WV6y3bYIka2nBUalFkX9ePrRh+YA/LczxEEuCZvnPI84u2HtnpNMLuwiO0Bvpkok
+ nBOS8GVFaWthb41ZXmDnQAB/tMdNu88qteZBOmnIsrOOyQB97bXkrLzOC1B6vbOXbgiy
+ yGbCh+aZmBkpcnjvnV0gROMkybp3+s4LckK0mql29m5oWaHH8lLz+FUQPV77lDW2qnrZ
+ MN3Q==
+X-Gm-Message-State: AOJu0YwugNfL5xzIrcQpcqNk7o80QamCRXf9vR/ypIvFYcwUs7nZNI52
+ SXixD2fdczlOmFk5epYSk50LZA==
+X-Google-Smtp-Source: AGHT+IEiqC6S79Vgv6su9KYqYnCn0vQ+PkxDDRVERfUpJ+LRWuxWbcCPIIsVY7ZJUIx7cEkOd3HOVQ==
+X-Received: by 2002:a81:48c4:0:b0:583:7b49:57ac with SMTP id
+ v187-20020a8148c4000000b005837b4957acmr6002883ywa.25.1694708967462; 
+ Thu, 14 Sep 2023 09:29:27 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d1a3-6cda-a8be-914f.res6.spectrum.com.
+ [2603:6081:7b00:6400:d1a3:6cda:a8be:914f])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.21.06
+ i123-20020a0df881000000b0059935151fa1sm389383ywf.126.2023.09.14.09.29.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:21:08 -0700 (PDT)
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-To: u-boot@lists.denx.de
-Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
- rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
- Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv9 14/15] net/lwip: split net.h to net.h, arp.h and eth.h
-Date: Thu, 14 Sep 2023 22:18:27 +0600
-Message-Id: <20230914161828.3662-15-maxim.uvarov@linaro.org>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20230914161828.3662-1-maxim.uvarov@linaro.org>
-References: <20230914161828.3662-1-maxim.uvarov@linaro.org>
+ Thu, 14 Sep 2023 09:29:26 -0700 (PDT)
+Date: Thu, 14 Sep 2023 12:29:24 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: Re: [PATCH v1 2/2] spl: Add support for booting from ESP
+Message-ID: <20230914162924.GA305624@bill-the-cat>
+References: <20230914100821.755904-1-mchitale@ventanamicro.com>
+ <20230914100821.755904-3-mchitale@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="i34qqY7HLT9xzAC9"
+Content-Disposition: inline
+In-Reply-To: <20230914100821.755904-3-mchitale@ventanamicro.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,463 +94,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-current net.h has ethernet and protocol definitions. Protocol definitions
-overlap with lwIP protocol definitions and net.h can not be included from
-lwIP code. Splitting on logical blocks makes that work.
 
-Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
----
- include/net.h     | 189 +--------------------------------------------
- include/net/arp.h |   7 ++
- include/net/eth.h | 190 ++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 201 insertions(+), 185 deletions(-)
- create mode 100644 include/net/arp.h
- create mode 100644 include/net/eth.h
+--i34qqY7HLT9xzAC9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/include/net.h b/include/net.h
-index de7baeb121..780c51fab9 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -20,6 +20,7 @@
- #include <time.h>
- #include <linux/if_ether.h>
- #include <rand.h>
-+#include  <net/arp.h>
- 
- struct bd_info;
- struct cmd_tbl;
-@@ -30,25 +31,6 @@ struct udevice;
- #define DEBUG_NET_PKT 0		/* Packets on info on the network at large */
- #define DEBUG_INT_STATE 0	/* Internal network state changes */
- 
--/*
-- *	The number of receive packet buffers, and the required packet buffer
-- *	alignment in memory.
-- *
-- */
--#define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
--#define PKTALIGN	ARCH_DMA_MINALIGN
--
--/* Number of packets processed together */
--#define ETH_PACKETS_BATCH_RECV	32
--
--/* ARP hardware address length */
--#define ARP_HLEN 6
--/*
-- * The size of a MAC address in string form, each digit requires two chars
-- * and five separator characters to form '00:00:00:00:00:00'.
-- */
--#define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1)
--
- /* IPv4 addresses are always 32 bits in size */
- struct in_addr {
- 	__be32 s_addr;
-@@ -112,150 +94,7 @@ typedef void rxhand_icmp_f(unsigned type, unsigned code, unsigned dport,
-  */
- typedef void	thand_f(void);
- 
--enum eth_state_t {
--	ETH_STATE_INIT,
--	ETH_STATE_PASSIVE,
--	ETH_STATE_ACTIVE
--};
--
--/**
-- * struct eth_pdata - Platform data for Ethernet MAC controllers
-- *
-- * @iobase: The base address of the hardware registers
-- * @enetaddr: The Ethernet MAC address that is loaded from EEPROM or env
-- * @phy_interface: PHY interface to use - see PHY_INTERFACE_MODE_...
-- * @max_speed: Maximum speed of Ethernet connection supported by MAC
-- * @priv_pdata: device specific plat
-- */
--struct eth_pdata {
--	phys_addr_t iobase;
--	unsigned char enetaddr[ARP_HLEN];
--	int phy_interface;
--	int max_speed;
--	void *priv_pdata;
--};
--
--enum eth_recv_flags {
--	/*
--	 * Check hardware device for new packets (otherwise only return those
--	 * which are already in the memory buffer ready to process)
--	 */
--	ETH_RECV_CHECK_DEVICE		= 1 << 0,
--};
--
--/**
-- * struct eth_ops - functions of Ethernet MAC controllers
-- *
-- * start: Prepare the hardware to send and receive packets
-- * send: Send the bytes passed in "packet" as a packet on the wire
-- * recv: Check if the hardware received a packet. If so, set the pointer to the
-- *	 packet buffer in the packetp parameter. If not, return an error or 0 to
-- *	 indicate that the hardware receive FIFO is empty. If 0 is returned, the
-- *	 network stack will not process the empty packet, but free_pkt() will be
-- *	 called if supplied
-- * free_pkt: Give the driver an opportunity to manage its packet buffer memory
-- *	     when the network stack is finished processing it. This will only be
-- *	     called when no error was returned from recv - optional
-- * stop: Stop the hardware from looking for packets - may be called even if
-- *	 state == PASSIVE
-- * mcast: Join or leave a multicast group (for TFTP) - optional
-- * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
-- *		 on some platforms like ARM). This function expects the
-- *		 eth_pdata::enetaddr field to be populated. The method can
-- *		 return -ENOSYS to indicate that this is not implemented for
--		 this hardware - optional.
-- * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
-- *		    ROM on the board. This is how the driver should expose it
-- *		    to the network stack. This function should fill in the
-- *		    eth_pdata::enetaddr field - optional
-- * set_promisc: Enable or Disable promiscuous mode
-- * get_sset_count: Number of statistics counters
-- * get_string: Names of the statistic counters
-- * get_stats: The values of the statistic counters
-- */
--struct eth_ops {
--	int (*start)(struct udevice *dev);
--	int (*send)(struct udevice *dev, void *packet, int length);
--	int (*recv)(struct udevice *dev, int flags, uchar **packetp);
--	int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
--	void (*stop)(struct udevice *dev);
--	int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
--	int (*write_hwaddr)(struct udevice *dev);
--	int (*read_rom_hwaddr)(struct udevice *dev);
--	int (*set_promisc)(struct udevice *dev, bool enable);
--	int (*get_sset_count)(struct udevice *dev);
--	void (*get_strings)(struct udevice *dev, u8 *data);
--	void (*get_stats)(struct udevice *dev, u64 *data);
--};
--
--#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
--
--struct udevice *eth_get_dev(void); /* get the current device */
--/*
-- * The devname can be either an exact name given by the driver or device tree
-- * or it can be an alias of the form "eth%d"
-- */
--struct udevice *eth_get_dev_by_name(const char *devname);
--unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
--
--/* Used only when NetConsole is enabled */
--int eth_is_active(struct udevice *dev); /* Test device for active state */
--int eth_init_state_only(void); /* Set active state */
--void eth_halt_state_only(void); /* Set passive state */
--
--int eth_initialize(void);		/* Initialize network subsystem */
--void eth_try_another(int first_restart);	/* Change the device */
--void eth_set_current(void);		/* set nterface to ethcur var */
--
--int eth_get_dev_index(void);		/* get the device index */
--
--/**
-- * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
-- *
-- * This sets up an environment variable with the given MAC address (@enetaddr).
-- * The environment variable to be set is defined by <@base_name><@index>addr.
-- * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
-- * eth1addr, etc.
-- *
-- * @base_name:  Base name for variable, typically "eth"
-- * @index:      Index of interface being updated (>=0)
-- * @enetaddr:   Pointer to MAC address to put into the variable
-- * Return: 0 if OK, other value on error
-- */
--int eth_env_set_enetaddr_by_index(const char *base_name, int index,
--				 uchar *enetaddr);
--
--
--/*
-- * Initialize USB ethernet device with CONFIG_DM_ETH
-- * Returns:
-- *	0 is success, non-zero is error status.
-- */
--int usb_ether_init(void);
--
--/*
-- * Get the hardware address for an ethernet interface .
-- * Args:
-- *	base_name - base name for device (normally "eth")
-- *	index - device index number (0 for first)
-- *	enetaddr - returns 6 byte hardware address
-- * Returns:
-- *	Return true if the address is valid.
-- */
--int eth_env_get_enetaddr_by_index(const char *base_name, int index,
--				 uchar *enetaddr);
--
--int eth_init(void);			/* Initialize the device */
--int eth_send(void *packet, int length);	   /* Send a packet */
--
--#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
--int eth_receive(void *packet, int length); /* Receive a packet*/
--extern void (*push_packet)(void *packet, int length);
--#endif
--int eth_rx(void);			/* Check for received packets */
--void eth_halt(void);			/* stop SCC */
--const char *eth_get_name(void);		/* get name of current device */
--int eth_mcast_join(struct in_addr mcast_addr, int join);
-+#include <net/eth.h>
- 
- /**********************************************************************/
- /*
-@@ -495,16 +334,6 @@ extern char	net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN];	/* Our root path */
- /* Indicates whether the pxe path prefix / config file was specified in dhcp option */
- extern char *pxelinux_configfile;
- /** END OF BOOTP EXTENTIONS **/
--extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
--extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
--extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
--extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
--extern uchar		*net_tx_packet;		/* THE transmit packet */
--extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
--extern uchar		*net_rx_packet;		/* Current receive packet */
--extern int		net_rx_packet_len;	/* Current rx packet length */
--extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
--extern const u8		net_null_ethaddr[ARP_HLEN];
- 
- #define VLAN_NONE	4095			/* untagged */
- #define VLAN_IDMASK	0x0fff			/* mask of valid vlan id */
-@@ -557,6 +386,8 @@ extern struct in_addr	net_ntp_server;		/* the ip address to NTP */
- extern int net_ntp_time_offset;			/* offset time from UTC */
- #endif
- 
-+int eth_mcast_join(struct in_addr mcast_addr, int join);
-+
- /* Initialize the network adapter */
- int net_init(void);
- int net_loop(enum proto_t);
-@@ -827,18 +658,6 @@ static inline void net_random_ethaddr(uchar *addr)
- 	addr[0] |= 0x02;	/* set local assignment bit (IEEE802) */
- }
- 
--/**
-- * string_to_enetaddr() - Parse a MAC address
-- *
-- * Convert a string MAC address
-- *
-- * Implemented in lib/net_utils.c (built unconditionally)
-- *
-- * @addr: MAC address in aa:bb:cc:dd:ee:ff format, where each part is a 2-digit
-- *	hex value
-- * @enetaddr: Place to put MAC address (6 bytes)
-- */
--void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
- 
- /* Convert an IP address to a string */
- void ip_to_string(struct in_addr x, char *s);
-diff --git a/include/net/arp.h b/include/net/arp.h
-new file mode 100644
-index 0000000000..f614f0ef78
---- /dev/null
-+++ b/include/net/arp.h
-@@ -0,0 +1,7 @@
-+/* ARP hardware address length */
-+#define ARP_HLEN 6
-+/*
-+ * The size of a MAC address in string form, each digit requires two chars
-+ * and five separator characters to form '00:00:00:00:00:00'.
-+ */
-+#define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1)
-diff --git a/include/net/eth.h b/include/net/eth.h
-new file mode 100644
-index 0000000000..17552bca81
---- /dev/null
-+++ b/include/net/eth.h
-@@ -0,0 +1,190 @@
-+#include <net/arp.h>
-+
-+struct udevice;
-+
-+enum eth_state_t {
-+	ETH_STATE_INIT,
-+	ETH_STATE_PASSIVE,
-+	ETH_STATE_ACTIVE
-+};
-+
-+/**
-+ * struct eth_pdata - Platform data for Ethernet MAC controllers
-+ *
-+ * @iobase: The base address of the hardware registers
-+ * @enetaddr: The Ethernet MAC address that is loaded from EEPROM or env
-+ * @phy_interface: PHY interface to use - see PHY_INTERFACE_MODE_...
-+ * @max_speed: Maximum speed of Ethernet connection supported by MAC
-+ * @priv_pdata: device specific plat
-+ */
-+struct eth_pdata {
-+	phys_addr_t iobase;
-+	unsigned char enetaddr[ARP_HLEN];
-+	int phy_interface;
-+	int max_speed;
-+	void *priv_pdata;
-+};
-+
-+enum eth_recv_flags {
-+	/*
-+	 * Check hardware device for new packets (otherwise only return those
-+	 * which are already in the memory buffer ready to process)
-+	 */
-+	ETH_RECV_CHECK_DEVICE		= 1 << 0,
-+};
-+
-+/**
-+ * struct eth_ops - functions of Ethernet MAC controllers
-+ *
-+ * start: Prepare the hardware to send and receive packets
-+ * send: Send the bytes passed in "packet" as a packet on the wire
-+ * recv: Check if the hardware received a packet. If so, set the pointer to the
-+ *	 packet buffer in the packetp parameter. If not, return an error or 0 to
-+ *	 indicate that the hardware receive FIFO is empty. If 0 is returned, the
-+ *	 network stack will not process the empty packet, but free_pkt() will be
-+ *	 called if supplied
-+ * free_pkt: Give the driver an opportunity to manage its packet buffer memory
-+ *	     when the network stack is finished processing it. This will only be
-+ *	     called when no error was returned from recv - optional
-+ * stop: Stop the hardware from looking for packets - may be called even if
-+ *	 state == PASSIVE
-+ * mcast: Join or leave a multicast group (for TFTP) - optional
-+ * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
-+ *		 on some platforms like ARM). This function expects the
-+ *		 eth_pdata::enetaddr field to be populated. The method can
-+ *		 return -ENOSYS to indicate that this is not implemented for
-+		 this hardware - optional.
-+ * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
-+ *		    ROM on the board. This is how the driver should expose it
-+ *		    to the network stack. This function should fill in the
-+ *		    eth_pdata::enetaddr field - optional
-+ * set_promisc: Enable or Disable promiscuous mode
-+ * get_sset_count: Number of statistics counters
-+ * get_string: Names of the statistic counters
-+ * get_stats: The values of the statistic counters
-+ */
-+struct eth_ops {
-+	int (*start)(struct udevice *dev);
-+	int (*send)(struct udevice *dev, void *packet, int length);
-+	int (*recv)(struct udevice *dev, int flags, uchar **packetp);
-+	int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
-+	void (*stop)(struct udevice *dev);
-+	int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
-+	int (*write_hwaddr)(struct udevice *dev);
-+	int (*read_rom_hwaddr)(struct udevice *dev);
-+	int (*set_promisc)(struct udevice *dev, bool enable);
-+	int (*get_sset_count)(struct udevice *dev);
-+	void (*get_strings)(struct udevice *dev, u8 *data);
-+	void (*get_stats)(struct udevice *dev, u64 *data);
-+};
-+
-+#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
-+
-+struct udevice *eth_get_dev(void); /* get the current device */
-+/*
-+ * The devname can be either an exact name given by the driver or device tree
-+ * or it can be an alias of the form "eth%d"
-+ */
-+struct udevice *eth_get_dev_by_name(const char *devname);
-+unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
-+
-+/* Used only when NetConsole is enabled */
-+int eth_is_active(struct udevice *dev); /* Test device for active state */
-+int eth_init_state_only(void); /* Set active state */
-+void eth_halt_state_only(void); /* Set passive state */
-+
-+int eth_initialize(void);		/* Initialize network subsystem */
-+void eth_try_another(int first_restart);	/* Change the device */
-+void eth_set_current(void);		/* set nterface to ethcur var */
-+
-+int eth_get_dev_index(void);		/* get the device index */
-+
-+/**
-+ * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
-+ *
-+ * This sets up an environment variable with the given MAC address (@enetaddr).
-+ * The environment variable to be set is defined by <@base_name><@index>addr.
-+ * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
-+ * eth1addr, etc.
-+ *
-+ * @base_name:  Base name for variable, typically "eth"
-+ * @index:      Index of interface being updated (>=0)
-+ * @enetaddr:   Pointer to MAC address to put into the variable
-+ * Return: 0 if OK, other value on error
-+ */
-+int eth_env_set_enetaddr_by_index(const char *base_name, int index,
-+				 uchar *enetaddr);
-+
-+
-+/*
-+ * Initialize USB ethernet device with CONFIG_DM_ETH
-+ * Returns:
-+ *	0 is success, non-zero is error status.
-+ */
-+int usb_ether_init(void);
-+
-+/*
-+ * Get the hardware address for an ethernet interface .
-+ * Args:
-+ *	base_name - base name for device (normally "eth")
-+ *	index - device index number (0 for first)
-+ *	enetaddr - returns 6 byte hardware address
-+ * Returns:
-+ *	Return true if the address is valid.
-+ */
-+int eth_env_get_enetaddr_by_index(const char *base_name, int index,
-+				 uchar *enetaddr);
-+
-+int eth_init(void);			/* Initialize the device */
-+int eth_send(void *packet, int length);	   /* Send a packet */
-+
-+#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
-+int eth_receive(void *packet, int length); /* Receive a packet*/
-+extern void (*push_packet)(void *packet, int length);
-+#endif
-+int eth_rx(void);			/* Check for received packets */
-+void eth_halt(void);			/* stop SCC */
-+const char *eth_get_name(void);		/* get name of current device */
-+
-+/*
-+ *	The number of receive packet buffers, and the required packet buffer
-+ *	alignment in memory.
-+ *
-+ */
-+#define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
-+#define PKTALIGN	ARCH_DMA_MINALIGN
-+
-+/* Number of packets processed together */
-+#define ETH_PACKETS_BATCH_RECV	32
-+
-+extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
-+extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
-+extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
-+extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
-+extern uchar		*net_tx_packet;		/* THE transmit packet */
-+extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
-+extern uchar		*net_rx_packet;		/* Current receive packet */
-+extern int		net_rx_packet_len;	/* Current rx packet length */
-+extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
-+extern const u8		net_null_ethaddr[ARP_HLEN];
-+
-+/**
-+ * string_to_enetaddr() - Parse a MAC address
-+ *
-+ * Convert a string MAC address
-+ *
-+ * Implemented in lib/net_utils.c (built unconditionally)
-+ *
-+ * @addr: MAC address in aa:bb:cc:dd:ee:ff format, where each part is a 2-digit
-+ *	hex value
-+ * @enetaddr: Place to put MAC address (6 bytes)
-+ */
-+void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
-+
-+typedef struct ulwip {
-+	bool loop;
-+	int err;
-+	bool init_done;
-+} ulwip;
-+
-+struct ulwip *eth_lwip_priv(struct udevice *current);
--- 
-2.30.2
+On Thu, Sep 14, 2023 at 03:38:21PM +0530, Mayuresh Chitale wrote:
 
+> Some platforms as described by EBBR specification may store images in
+> the FIRMWARE directory of the UEFI system partition(ESP). Add support
+> to boot from the EFI system partition if it is enabled for a platform.
+>=20
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+[snip]
+> +config SPL_ESP_BOOT
+> +	bool "Load next stage boot image from the UEFI system partition"
+> +	select SPL_PARTITION_TYPE_GUID
+> +	help
+> +	  When enabled, first try to boot from the UEFI system partition as
+> +	  described in the Ch.4 of the EBBR specification.
+
+We need to select this by perhaps BOOT_DEFAULTS or BOOTMETH_DISTRO,
+whatever is supposed to signify that yes, this is going to be a
+SystemReady IR (or higher) compliant build.
+
+[snip]
+>  int spl_blk_load_image(struct spl_image_info *spl_image,
+>  		       struct spl_boot_device *bootdev,
+>  		       enum uclass_id uclass_id, int devnum, int partnum)
+>  {
+>  	const char *filename =3D CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+> -	struct legacy_img_hdr *header;
+[snip]
+> @@ -63,24 +88,26 @@ int spl_blk_load_image(struct spl_image_info *spl_ima=
+ge,
+>  	}
+> =20
+>  	blk_show_device(uclass_id, devnum);
+> -	header =3D spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+> -
+[snip]
+
+Is this an artifact of Sean's patch series where "header" is no longer
+actually used?  As-is this won't compile on top of next (which is where
+given Sean's feedback, the series needs to be rebased upon anyhow).
+
+> +	/*
+> +	 * First try to boot from EFI System partition. In case of failure,
+> +	 * fall back to the configured partition.
+> +	 */
+
+I don't know that this is the right behavior.  If we're configured to
+boot from partition X, we boot from partition X.  If we're configured to
+find the ESP and use that, we find and use that.
+
+--=20
+Tom
+
+--i34qqY7HLT9xzAC9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUDNOEACgkQFHw5/5Y0
+tyzVfQv9ErmzV+xrCZ+GeomSQfWKq6DdR4PIFVWbxJuLeNHKnmrQCUoFtaw3PmHV
+X1E3DDL8jdZ/W2Irz1Eh7cXamsjqdYLrafh849o7rqlNEY8oBEAxKvAtlVY3+E0n
+1f4EDommgWdREYwkaj8MgjoCaBxjfjq9S0t4LezEQ1kffv//Rc5z/jkZXcFTVcIc
+gGebScutQ6zBPcjDPBiWLhgkx4uSuXT/nR1q1YaOlWa+Vf4KZ9pQG2AB+19Ttga2
+3w8df+Fg87MnalBS5a9QkWZsLPIMshI6SImusKY7+zChchr8Px9zi8c6HXcdjfHN
+hkWa4KZfad51OLAsvVokt0+/4vJtck72TH+qbDforc+XFle8gWpPZ4V0Sg2KQAzi
+O2ya0tiOqNcmPxBSyk2XvaAu9Yght7TmX5TX+9qitnF606ftoCcfs9BMptYC7Xy4
+QTUtEKsBmQsqfIcdUZB963OgbhfqYyLHf9G1Vz7mVffNaXeD9Q7HMVnCuafZDX2Q
+3e9yO0B9
+=jSzq
+-----END PGP SIGNATURE-----
+
+--i34qqY7HLT9xzAC9--
