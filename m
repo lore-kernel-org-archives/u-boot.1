@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E86DEEAA59
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DDCFEEAA5A
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E78F5870B0;
-	Thu, 14 Sep 2023 18:56:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 46CE8870C7;
+	Thu, 14 Sep 2023 18:56:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R6k022hy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KRlXVsn3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C22BA87062; Thu, 14 Sep 2023 18:56:45 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id D61E9870B2; Thu, 14 Sep 2023 18:56:45 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7653870B2
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:56:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97CB186F58
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-34dee07e676so3621955ab.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:56:43 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-7927611c54bso43929539f.2
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:56:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694710602; x=1695315402; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694710601; x=1695315401; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=38UvI0BudTmGT8JBfKY5dU4kpUH8yPPwbVpjmw6CTrQ=;
- b=R6k022hyjaaND9anxQqXg8MkYtK9mdCpaTiI46CBZq/wIje+fohvYnhvEJQIIJmAM5
- f11CJ+2IVwm6v1FA4Menej3LCWG2DbIeQKNoGIquDLVsMR9Xfp0gYBzSXHD9c+13uzaT
- q4dgOf2ufnxNa2Ne8jfLtM2RbesjIjgjXxkXE=
+ bh=ZzUyIztaIQ3pjN8EQPBewZL6c0xLyMQ01auuaFPtu3Y=;
+ b=KRlXVsn3eOt8NEAk0xHQOS0Lu7chNq/7GhlcKaZfxSOmmIBRGIVeA4B+8h+ZBhrYha
+ R20cDgHT41VfkZ4C8HdRJGGqqRe+cW8VW9KvxhnQkSqeAaI9BWOor72bgBopVJBlECpi
+ 0gPdvF9MZceGFBFbuZcYLePbuEBgONfoy7LuA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694710602; x=1695315402;
+ d=1e100.net; s=20230601; t=1694710601; x=1695315401;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=38UvI0BudTmGT8JBfKY5dU4kpUH8yPPwbVpjmw6CTrQ=;
- b=OZHMAP01jUpSBKH1BkFArd+uZwpRO1QFX4zNRpShaP5CcJ4KmE+BK5i9LvAMpxzqr9
- L8ossIeBRCjTpQ/eQfLxhIw+JUwLMvGM2fqBPM6frmVkCHS38GYVHirLBtyALWqcPMzj
- +wOtnHLyTBGya9x9J84bf2PvjP9kqF2Q5J/bd3aOfIn7oQuR/lWsM71103ySZ+GymJA1
- gkZwXBHJE5TTmiXvjCnSU3YfvHv99BCSp06YvBbLhDbya+neV6u+1KA2z5/MlWPlpg1n
- Ak1sLK/yHegnOLKoLsSe7dhCz6pydY7ze8bKsZA2LhdyBt3fEJtjaKaA/o8zrrUnf/Bq
- L9Fg==
-X-Gm-Message-State: AOJu0Yw0t1s+E2Xrbn2UoIozJweWU7MDlYo9ECOy9Ww2IT0z5ep0rYNU
- 5cOLJLDsLTFtQPrWUwIJIyVYH1HdtAUBnRSjmtg=
-X-Google-Smtp-Source: AGHT+IGUccSaraZ9yXKI9uIgoY5fU9qAA9KFCUx28lq4R1ePeKbyNS41/KRfX36G8UZyQU9LjBV4Qw==
-X-Received: by 2002:a05:6e02:c63:b0:34d:f0d4:c436 with SMTP id
- f3-20020a056e020c6300b0034df0d4c436mr5316128ilj.3.1694710602316; 
- Thu, 14 Sep 2023 09:56:42 -0700 (PDT)
+ bh=ZzUyIztaIQ3pjN8EQPBewZL6c0xLyMQ01auuaFPtu3Y=;
+ b=Urkm8yZGOkJsLgs5e6uOHpeewzXuQ/HVQGVgcAxWd8pgeguNNKy6lc/xFhGL+W3rKV
+ IDEH+v+WALIYM1slhsz1XuNgQSqCPe6i/mn07EiGDS0Xh3vd3MNf2HqdeH9rIa3hLgpz
+ JTW6NYW3s4Vv4Dz+3UzU92sIqPQTi3pNCweAmk3IefB08twrOan2UDm1PNoAjSEROQW3
+ 5kIWn379i8LE5jLolgkpj5ufLT1x1mq+/+LovnWkNuFq0fXHTHdoJvZ/Z22iwuh3fWmo
+ vcDHZt/XTx8wEHZaaQCXY4/fIE/pp6kK8u5efLt+zHAynJkfgmdkNBXoQNJq5k1W0jth
+ 6New==
+X-Gm-Message-State: AOJu0YxwZbj86ETtKvC3HUOct0b2E2GkE2mCgjjKMQvvKI+CX/B67pFM
+ XjNHPGsJMRR1twPfibQzbTU5KXkXONNF5pkxeNM=
+X-Google-Smtp-Source: AGHT+IHz+fJoDSZoTEzG/i8jBif+Jw2exbLPMnw/B1jYPzRvn3fDYfdjVGuxDnEMuiOzWrCVW6hRcQ==
+X-Received: by 2002:a5d:83d5:0:b0:792:9a3e:2dd with SMTP id
+ u21-20020a5d83d5000000b007929a3e02ddmr7008068ior.3.1694710601257; 
+ Thu, 14 Sep 2023 09:56:41 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:a8b6:76a8:ff58:a8be])
  by smtp.gmail.com with ESMTPSA id
- s20-20020a02c514000000b00430979b6aa5sm535339jam.0.2023.09.14.09.56.41
+ s20-20020a02c514000000b00430979b6aa5sm535339jam.0.2023.09.14.09.56.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:56:42 -0700 (PDT)
+ Thu, 14 Sep 2023 09:56:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>, Nikita Shubin <n.shubin@yadro.com>,
- Stefan Roese <sr@denx.de>
-Subject: [PATCH v5 12/21] spl: Tidy up load address in spl_ram
-Date: Thu, 14 Sep 2023 10:55:50 -0600
-Message-ID: <20230914165615.1058529-12-sjg@chromium.org>
+ Masahiro Yamada <yamada.masahiro@socionext.com>
+Subject: [PATCH v5 11/21] Kconfig: Create a menu for FIT
+Date: Thu, 14 Sep 2023 10:55:49 -0600
+Message-ID: <20230914165615.1058529-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230914165615.1058529-1-sjg@chromium.org>
 References: <20230914165615.1058529-1-sjg@chromium.org>
@@ -90,80 +89,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This CONFIG is used but is not given a value by some boards. Use
-a default value of 0 explicitly, rather than relying on the 0 value
-provided by CONFIG_SPL_LOAD_FIT_ADDRESS
+This is a major feature with a lot of options. Give it its own menu to
+tidy up the 'make menuconfig' display. Drop the 'depends on FIT' pieces
+which are now unnecessary, since they are now bracketed by an 'if FIT'.
 
-This will allow us to make SPL_LOAD_FIT_ADDRESS depend on SPL_LOAD_FIT
-as it should.
+Leave CONFIG_TIMESTAMP out since it affects legacy images too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v4)
 
- common/spl/spl_ram.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+Changes in v4:
+- Allow TIMESTAMP without FIT
 
-diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-index 93cf420d810..4158ed1c32d 100644
---- a/common/spl/spl_ram.c
-+++ b/common/spl/spl_ram.c
-@@ -20,12 +20,16 @@
- static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
- 			       ulong count, void *buf)
- {
--	ulong addr;
-+	ulong addr = 0;
+ boot/Kconfig | 38 ++++++++++++++++++--------------------
+ 1 file changed, 18 insertions(+), 20 deletions(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 017f7117d57..99a2ffca2fc 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -9,8 +9,19 @@ config ANDROID_BOOT_IMAGE
+ 	  This enables support for booting images which use the Android
+ 	  image format header.
  
- 	debug("%s: sector %lx, count %lx, buf %lx\n",
- 	      __func__, sector, count, (ulong)buf);
+-config FIT
+-	bool "Support Flattened Image Tree"
++config TIMESTAMP
++	bool "Show image date and time when displaying image information"
++	default y if CMD_DATE
++	help
++	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
++	  an image is printed by image commands like bootm or iminfo. This
++	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
++	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
++	  loaded that does not, the message 'Wrong FIT format: no timestamp'
++	  is shown.
++
++menuconfig FIT
++	bool "Flattened Image Tree (FIT)"
+ 	select HASH
+ 	select MD5
+ 	select SHA1
+@@ -25,20 +36,10 @@ config FIT
+ 	  multiple configurations, verification through hashing and also
+ 	  verified boot (secure boot using RSA).
  
--	addr = (ulong)CONFIG_SPL_LOAD_FIT_ADDRESS + sector;
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
-+		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
-+				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-+	}
-+	addr += sector;
- 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
- 		addr += image_load_offset;
+-config TIMESTAMP
+-	bool "Show image date and time when displaying image information"
+-	default y if CMD_DATE
+-	help
+-	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
+-	  an image is printed by image commands like bootm or iminfo. This
+-	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
+-	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
+-	  loaded that does not, the message 'Wrong FIT format: no timestamp'
+-	  is shown.
++if FIT
  
-@@ -38,20 +42,23 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 			      struct spl_boot_device *bootdev)
- {
- 	struct legacy_img_hdr *header;
-+	ulong addr = 0;
- 	int ret;
+ config FIT_EXTERNAL_OFFSET
+ 	hex "FIT external data offset"
+-	depends on FIT
+ 	default 0x0
+ 	help
+ 	  This specifies a data offset in fit image.
+@@ -49,7 +50,6 @@ config FIT_EXTERNAL_OFFSET
  
--	header = (struct legacy_img_hdr *)CONFIG_SPL_LOAD_FIT_ADDRESS;
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
-+		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
-+				      CONFIG_SPL_LOAD_FIT_ADDRESS);
-+	}
+ config FIT_FULL_CHECK
+ 	bool "Do a full check of the FIT before using it"
+-	depends on FIT
+ 	default y
+ 	help
+ 	  Enable this do a full check of the FIT to make sure it is valid. This
+@@ -59,7 +59,7 @@ config FIT_FULL_CHECK
  
- 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
--		unsigned long addr = (unsigned long)header;
- 		ret = image_pre_load(addr);
+ config FIT_SIGNATURE
+ 	bool "Enable signature verification of FIT uImages"
+-	depends on DM && FIT
++	depends on DM
+ 	select HASH
+ 	imply RSA
+ 	imply RSA_VERIFY
+@@ -97,7 +97,7 @@ config FIT_RSASSA_PSS
  
- 		if (ret)
- 			return ret;
+ config FIT_CIPHER
+ 	bool "Enable ciphering data in a FIT uImages"
+-	depends on DM && FIT
++	depends on DM
+ 	select AES
+ 	help
+ 	  Enable the feature of data ciphering/unciphering in the tool mkimage
+@@ -105,7 +105,6 @@ config FIT_CIPHER
  
- 		addr += image_load_offset;
--		header = (struct legacy_img_hdr *)addr;
- 	}
-+	header = map_sysmem(addr, 0);
+ config FIT_VERBOSE
+ 	bool "Show verbose messages when FIT images fail"
+-	depends on FIT
+ 	help
+ 	  Generally a system will have valid FIT images so debug messages
+ 	  are a waste of code space. If you are debugging your images then
+@@ -114,7 +113,6 @@ config FIT_VERBOSE
  
- #if CONFIG_IS_ENABLED(DFU)
- 	if (bootdev->boot_device == BOOT_DEVICE_DFU)
-@@ -84,7 +91,7 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 			u_boot_pos = (ulong)spl_get_load_buffer(-sizeof(*header),
- 								sizeof(*header));
- 		}
--		header = (struct legacy_img_hdr *)map_sysmem(u_boot_pos, 0);
-+		header = map_sysmem(u_boot_pos, 0);
+ config FIT_BEST_MATCH
+ 	bool "Select the best match for the kernel device tree"
+-	depends on FIT
+ 	help
+ 	  When no configuration is explicitly selected, default to the
+ 	  one whose fdt's compatibility field best matches that of
+@@ -124,7 +122,6 @@ config FIT_BEST_MATCH
  
- 		ret = spl_parse_image_header(spl_image, bootdev, header);
- 	}
+ config FIT_IMAGE_POST_PROCESS
+ 	bool "Enable post-processing of FIT artifacts after loading by U-Boot"
+-	depends on FIT
+ 	depends on SOCFPGA_SECURE_VAB_AUTH
+ 	help
+ 	  Allows doing any sort of manipulation to blobs after they got extracted
+@@ -139,11 +136,12 @@ config FIT_IMAGE_POST_PROCESS
+ 
+ config FIT_PRINT
+         bool "Support FIT printing"
+-	depends on FIT
+         default y
+         help
+           Support printing the content of the fitImage in a verbose manner.
+ 
++endif # FIT
++
+ config SPL_FIT
+ 	bool "Support Flattened Image Tree within SPL"
+ 	depends on SPL && FIT
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
