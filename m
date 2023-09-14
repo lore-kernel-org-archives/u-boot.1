@@ -4,139 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC90EEAA49
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 14:36:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7304EEAA4F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 14:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95AE386A8A;
-	Thu, 14 Sep 2023 16:36:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=seco.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EE7886A23;
+	Thu, 14 Sep 2023 16:54:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=seco.com header.i=@seco.com header.b="LgbgFwPG";
-	dkim=pass (2048-bit key) header.d=seco.com header.i=@seco.com header.b="LgbgFwPG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TfZPQlDZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C4F286A14; Thu, 14 Sep 2023 16:36:19 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2061c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::61c])
+ id 7551686A2B; Thu, 14 Sep 2023 16:54:55 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on20621.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe59::621])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDA87866DA
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:36:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6925C86A14
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=seco.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sean.anderson@seco.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K+NbqIN8s3Ty8ZvzgRnKsylSrP1IyaxrAJUAoarZC1s=;
- b=LgbgFwPGu7uU/dot4UvCHZj7Znk2InGdKwbCrpF0nggzTOUNgTy0Ej/hPoIj4hYKo3tOqW521iuLhwWYIJnfIr+DFIKNO31dGm+LOqZJRYpcylbAAm9VVc05wUqg894c1EWHdJsOf3rXjEdq+yMQwvo8AgJ/bVfYIJzv2yyQzem8vq+B/wA8Gs9D/hB90X9zxpdsmcquIJk88Fq98dmDxAsws9w6sijgoPmH0tTYF5sLQqDStn6QJ9nKuUlYOiWxrFxGj+hPzli2irBNU/dQsaik+KowFwyIaVHGWxVBYu8DF+v7uej3y++Xev3W4tuyJWnnXGky6Q4YRoG12/0jGQ==
-Received: from DU2P251CA0010.EURP251.PROD.OUTLOOK.COM (2603:10a6:10:230::25)
- by AM9PR03MB6851.eurprd03.prod.outlook.com (2603:10a6:20b:2d9::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.19; Thu, 14 Sep
- 2023 14:36:14 +0000
-Received: from DB8EUR05FT008.eop-eur05.prod.protection.outlook.com
- (2603:10a6:10:230:cafe::6e) by DU2P251CA0010.outlook.office365.com
- (2603:10a6:10:230::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.20 via Frontend
- Transport; Thu, 14 Sep 2023 14:36:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.160.56.84)
- smtp.mailfrom=seco.com; dkim=pass (signature was verified)
- header.d=seco.com;dmarc=pass action=none header.from=seco.com;
-Received-SPF: Pass (protection.outlook.com: domain of seco.com designates
- 20.160.56.84 as permitted sender) receiver=protection.outlook.com;
- client-ip=20.160.56.84; helo=inpost-eu.tmcas.trendmicro.com; pr=C
-Received: from inpost-eu.tmcas.trendmicro.com (20.160.56.84) by
- DB8EUR05FT008.mail.protection.outlook.com (10.233.238.145) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6792.20 via Frontend Transport; Thu, 14 Sep 2023 14:36:14 +0000
-Received: from outmta (unknown [192.168.82.133])
- by inpost-eu.tmcas.trendmicro.com (Trend Micro CAS) with ESMTP id
- 284CA200813AA; Thu, 14 Sep 2023 14:36:14 +0000 (UTC)
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com (unknown
- [104.47.0.53])
- by repre.tmcas.trendmicro.com (Trend Micro CAS) with ESMTPS id 406472008006E; 
- Thu, 14 Sep 2023 14:36:12 +0000 (UTC)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IKFKJkp5oFutFvml+ktIPxHVf2W10147e0BhwSewqbEEwZ8HgQ/9g2q4883w6o1nU5XhY08NwlKK8aLHDwBKyoBPMpvBfXl3EGEIHuj7Db1CtgsOj5pC20DBcwm9Mq5d7AkU9XG6jRNliwoMzztw/WRRRYc/ZCXt++0YwTmEn6OpbYOESrb1unaNq9VoPLHA0us81YKAMQ+sNtwP9iYT34oOaA0wiMdWqqhwOPiCNqGe/RV1fKyeI7ZKJsCk+e4Nb7NTf85zrlded3CrPYoWnB9VX1Rsds4NPmy0D5V4Lzudmup98Doqffio4c17EBSjh1GdnWL86iXc5LNVIcRdkQ==
+ b=GQPSneSe2T/o9VgKt6kAVXgEIDcoTtnWC3NTZcUUryLSmZ40MnUZba0CCeQRyw5Gg3SOYyJutM+mXpi4gp/GXQqZQFonemcfTTOwx+lkknI6TAWXomatwKhVKHUCawdPLl/6FestqNtqaW2Il2m8VqomorFINfZ7/td9smPKWtnSX4nAqvhSt3tv253Mjf/0cy7vzzwGXF1g89hqK5zDw18pSP+bO4n4nI90yw33wlpOqvLwOyza5wIGF5AfiHBBEXQxKKtB2ZfqLeChEpFNT5vTB49NTKBKsDnwlJNqkEIsPhlcY0xeTIxfV26R5aztUrQ2odMV5J2lbERJOaQNEg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K+NbqIN8s3Ty8ZvzgRnKsylSrP1IyaxrAJUAoarZC1s=;
- b=MoVGoSnXDf9zmmzaZNegcVJFgat1xvTdDPG/IEHuBbZtMxv+G0klK19hHOj8XJKca9UBH5u6cGmiv/gR9o8IlgHZc7Jc/Wr/h14aliBVJVhC0z/mFeTv8r+SfhWY1Zm/wxFuF+o81TZ89d2aL1beveYI5ITII85AJ0wYnOD0gYrtWYHDm9htn666dTLs7AXr9VIVD1ovRgEWptv1cWKexuJZ+w6qQwsGwvsfrvcCI0T6HoqP8iQz+9yNIMZrv+dAeXY9Tcz1GxSA+fmmhjeqLFbHk+nY8A275ZBvUozC86rxtvrqMuo/YvneAWJXWUktdhbKM1HNJojGrjl1SUVwpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=seco.com; dmarc=pass action=none header.from=seco.com;
- dkim=pass header.d=seco.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ bh=zMTANMVfibwNR8YnwSTjDqkf9BwkL27RqeCnrCBgzlQ=;
+ b=ZfUY/FIKfnlTWjfZBczqJDCN1ynwFmOnNKI8PdpJY84qcfOZbFW42jaUDZyssbkmp1GoK5hoIvQ6q6KLSR3D5MyHZHkVr/tAJTmK3NNGbDSmcgm2dbDqHWnOJOLoLOs28mExiVJvyQWerXaSzH6cwkTBoi3yW47iYxdGXelVMYG8Zr4nqz7BGl2o3yHl7tu3z2M+dAMZa0y+CLPGJHkRVNnXxBbVzWgm8ZMO7gmx5DWluHP3kTgQolmmjTXXNigRxdqZWbuqkMdfaf4BIDItbMmqKafL17qCddb29u2Zy2YkhSJ28dB4tSjkrOLloLHGgtqdegjDyAYpzBE0jOsZ5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K+NbqIN8s3Ty8ZvzgRnKsylSrP1IyaxrAJUAoarZC1s=;
- b=LgbgFwPGu7uU/dot4UvCHZj7Znk2InGdKwbCrpF0nggzTOUNgTy0Ej/hPoIj4hYKo3tOqW521iuLhwWYIJnfIr+DFIKNO31dGm+LOqZJRYpcylbAAm9VVc05wUqg894c1EWHdJsOf3rXjEdq+yMQwvo8AgJ/bVfYIJzv2yyQzem8vq+B/wA8Gs9D/hB90X9zxpdsmcquIJk88Fq98dmDxAsws9w6sijgoPmH0tTYF5sLQqDStn6QJ9nKuUlYOiWxrFxGj+hPzli2irBNU/dQsaik+KowFwyIaVHGWxVBYu8DF+v7uej3y++Xev3W4tuyJWnnXGky6Q4YRoG12/0jGQ==
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=seco.com;
-Received: from DB9PR03MB8847.eurprd03.prod.outlook.com (2603:10a6:10:3dd::13)
- by AS2PR03MB9880.eurprd03.prod.outlook.com (2603:10a6:20b:547::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.37; Thu, 14 Sep
- 2023 14:36:09 +0000
-Received: from DB9PR03MB8847.eurprd03.prod.outlook.com
- ([fe80::bf95:eda3:be0f:a340]) by DB9PR03MB8847.eurprd03.prod.outlook.com
- ([fe80::bf95:eda3:be0f:a340%5]) with mapi id 15.20.6792.020; Thu, 14 Sep 2023
- 14:36:09 +0000
-Message-ID: <141dff74-1ca1-cdc6-0ead-d2d5ad2705b4@seco.com>
-Date: Thu, 14 Sep 2023 10:36:00 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.1
-Subject: Re: [PATCH v1 0/2] SPL EBBR - EFI System Partition support
-Content-Language: en-US
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, u-boot@lists.denx.de
-References: <20230914100821.755904-1-mchitale@ventanamicro.com>
- <ea8895a7-4812-4c65-8c63-8051237ad77f@gmx.de>
-From: Sean Anderson <sean.anderson@seco.com>
-In-Reply-To: <ea8895a7-4812-4c65-8c63-8051237ad77f@gmx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR13CA0204.namprd13.prod.outlook.com
- (2603:10b6:a03:2c3::29) To DB9PR03MB8847.eurprd03.prod.outlook.com
- (2603:10a6:10:3dd::13)
+ bh=zMTANMVfibwNR8YnwSTjDqkf9BwkL27RqeCnrCBgzlQ=;
+ b=TfZPQlDZnaBK+SDBAF8z3/daE4aulxSsn+N1kG8wARGfryS7nmkNhxdiXTMzMdwJD5iFof1AV8YOTE0kzqjHI7cA2nDt4bzAmrLG6rTLzcin34OrkpOOFprKoxk+6fXY1De8N+z8MjxQseMk2QCnB6Ph3JsjT1P4MxgcyrLOe78=
+Received: from DS7PR03CA0338.namprd03.prod.outlook.com (2603:10b6:8:55::31) by
+ BY5PR12MB4035.namprd12.prod.outlook.com (2603:10b6:a03:206::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.33; Thu, 14 Sep
+ 2023 14:54:49 +0000
+Received: from DS2PEPF00003440.namprd02.prod.outlook.com
+ (2603:10b6:8:55:cafe::84) by DS7PR03CA0338.outlook.office365.com
+ (2603:10b6:8:55::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.20 via Frontend
+ Transport; Thu, 14 Sep 2023 14:54:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS2PEPF00003440.mail.protection.outlook.com (10.167.18.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6792.20 via Frontend Transport; Thu, 14 Sep 2023 14:54:49 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 14 Sep
+ 2023 09:54:46 -0500
+Message-ID: <10973469-d107-4a02-a8ec-a91573453cf2@amd.com>
+Date: Thu, 14 Sep 2023 16:54:44 +0200
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: DB9PR03MB8847:EE_|AS2PR03MB9880:EE_|DB8EUR05FT008:EE_|AM9PR03MB6851:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9b28c435-af34-4587-1b8c-08dbb52ff2c5
-X-TrendMicro-CAS-OUT-LOOP-IDENTIFIER: 656f966764b7fb185830381c646b41a1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] trace: Use 64bit variable for start and len
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <git@xilinx.com>, Tom Rini <trini@konsulko.com>
+References: <cover.1694435541.git.michal.simek@amd.com>
+ <734d41ddc4b5711fd93d3292d7049df3f11472e2.1694435541.git.michal.simek@amd.com>
+ <CAPnjgZ0bCzF+q8xpo0-pRBQrHMT50tV46f6369-Wjo4OJwm6Uw@mail.gmail.com>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <CAPnjgZ0bCzF+q8xpo0-pRBQrHMT50tV46f6369-Wjo4OJwm6Uw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003440:EE_|BY5PR12MB4035:EE_
+X-MS-Office365-Filtering-Correlation-Id: d09de63e-b2e1-4641-4ed9-08dbb5328b74
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: Jr1eM9SVwsb6J7F0PC5aJB7igC7FKvxJLyFRt8tcNeuWqW1lQmJqW7w3xQkZgdrvBWxKzHdCY5Gv8Pd0PegunX4Xtt+DmkHyOd5kArz2cCdS2A1wQ11zJsDhBKyl65l4mjbwejF/uPHjrb0ihFVle007S8sar50Aku8Cr0WUKRioSUfl20WyRlxsIqRjIX6LpP9P0Ls/LFwCDbumbTYGlwvw0n7yLLT6scVRXqAIiNtRs2Hrgk9QeQEFcyjTwDHu0NqWaeDcyCpIwTSHawb+drq51atoeIHvoKzPTiPD/XU03zQSJNmFvC8DKpy4H2fGSNUp/uq9f3hZmt+8tYPT7PC8oGBHaK2sLxXgvo17GmUg2iIeQJdqcYGWksEyqpgASvbZPVK7sntuG0jSzSyx8C6K4i+S+uRwhaqoKM2Pr9PL9v/N316PfJH0VIDyhV4am2e8axPaAJysxpKQDSfgtvSCvPlIXghU4pBoz78+/OPgvuSzbUi+pK7IHnGXt0IF/gV6Ag7D/uSAW4c00y2IfvcEI1WoxxwNjahH40CADrt6bK1ju3zK/EZEVihfPWdL7licehKknmXJgpR5quGx+hcTlD2275woAbJM4Yv0MJnke7YeSVSyssm8EeKz9cH8lUynBr1xDErQx/Xukpq0BB8WXkVsxxU52FQ6kHKUFMs=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB9PR03MB8847.eurprd03.prod.outlook.com;
- PTR:; CAT:NONE;
- SFS:(13230031)(396003)(136003)(39850400004)(376002)(366004)(346002)(1800799009)(186009)(451199024)(83380400001)(6512007)(44832011)(5660300002)(8676002)(8936002)(4326008)(53546011)(31686004)(6486002)(52116002)(6506007)(26005)(2616005)(6666004)(478600001)(6916009)(66476007)(966005)(41300700001)(316002)(66556008)(66946007)(31696002)(54906003)(86362001)(36756003)(2906002)(38350700002)(38100700002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR03MB9880
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB8EUR05FT008.eop-eur05.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: ba3c972c-812f-4907-ee2a-08dbb52fefac
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: AHUp3V1xXxTht8btnvWmzeJnFnNmsQgkryoHPqzkXLFcY9hF5773MasFDJdQpHSjvwI8QC9Lro5MYrNlGdjscss4RUwV0WncS/uCPhjpiBPisR0JBSp4SFQn6AvF9MaPxYz6nZhgFEjAfSIf88t3cBmUREHa2CchVzlL3Ybm3qcnJ8MxCqllyG9QPMFtLnafWf8qF/CSOYUHTdy3PO/qLcA5Lu8m2JNds4O+GVL4E2mlV0aY+6v9CON1d3wv7yvin6ZfW/DJqaKJBubLGM/obXgBpbx/IlDe9f3iN3840q8ig2CpHRBJkNB5XVF58f77It+Y3DkhFSbtVAE5ZiJPvuhWeH7oF1WDevJWQza5abA8KS4uUYCk+zOC76XvfqxZgREG9nLcMDtG/QNIMwP8vkWKIuk5N21WoBllupuECFoSzGR6V2znEomoOaxYcSMO7Chpp+n06rgEYFLlbk0KhOxoQJoPxwMkavEwbNOqAvNjTAMCaW1uqvyGkogu0eooiszF/+nNNhxhOXtR01CkC5TPvctMEf+AZ7TURXh7UVKZoWDJ7Nki4tBWADZAT/ZfJRR0efEoQEhaviFyUmnCAiwg4vuW8PkhBgPRXNjR85j5NhFRsRX3H/fbmEbbDspTU2BoGvbekrPYAG2XaSxUDP5ItML686+OPOAvXtUGb8iADLEnLhEkpGsTGs9k6SXVStAtJkNh8vDHY8VbWenAqazcwanhnA1el0zWkVX3902JqlrVW4FqrW34TXaOu/LC/ye9SYcz/6uW/KcHl6aT+4n3OXFroakAMqEGT+AInrI=
-X-Forefront-Antispam-Report: CIP:20.160.56.84; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:inpost-eu.tmcas.trendmicro.com;
- PTR:inpost-eu.tmcas.trendmicro.com; CAT:NONE;
- SFS:(13230031)(396003)(136003)(346002)(39850400004)(376002)(451199024)(1800799009)(186009)(82310400011)(40470700004)(36840700001)(46966006)(40460700003)(31686004)(40480700001)(6506007)(6666004)(53546011)(478600001)(966005)(6512007)(47076005)(7636003)(36860700001)(6486002)(82740400003)(34070700002)(356005)(7596003)(336012)(2616005)(83380400001)(26005)(31696002)(86362001)(36756003)(6916009)(70206006)(41300700001)(54906003)(316002)(44832011)(8936002)(4326008)(2906002)(8676002)(70586007)(5660300002)(43740500002);
+X-Microsoft-Antispam-Message-Info: MweKNKt2Dn+VuJpF7wFlf4YDDHRfEbP+OAF+e+QeJioUXPYkiEUtPAcwQkgVUEV7hRA/uWiGfoHX0CQYbsvFg9SwTro4gNou7SejLYESmFatgtfRwcYFGDCSMgLeuVa4H9s4eTtusraAihK3kiFlBkn5FZYWzsPuj2N7Gy3hcYwQMeo8x0xo12k42tnH2bCIZHDiyW06zEkRx28e+5LucNFoNcm1R0XEiuChgw2FWkSC/t3IxkGcE51mx9CHD273RuJ9bzlLKM9cAu3qsS/IK3XUDkJTGQDFZEfgXek+eg1IFJAB1K3U2N0n/XyWOtTD192Rx7XWM+aTD1sEEgfN9O2iLre7nBjD0i8MxRfIUcD1bGcV6ij/lFdpV5AF7kCztxhhdCfw2JWPixz7WhtrFYMk7PXsDErtlr5WETePCJtmm3QODp3zrtK2ckNR90GGv4qpLjZF1u569bvTOAfWl2JLa9JeTNV5Hvisn1gjtidce2H0TYj17qzLCLZgFLeRSegSLeReVPMUdCfCZHPFtoorXTvV35X96UdhEHiIe9kTX6cFLqkcnkmi5T4x8sipBKNVclG5HlXQIyH8/6xUpEYO2bUN9bctV83wVZHkuQWxfyfXhGTtCrPtt3bvaZ55G/KhY6dn0Euq9UQO9ONTb+3IQsrugQjACOozkVKSmFoShmrFgPH/x3D2cGEGeqVhlpS8aV00q/kVE1uKcG6GJ3p1MQu002TTXqTt9TT8i9ImotQBQR8eoLjqAdGEYZxp5R65NoqDjvkGy/hUb+NnuIezqrlO/TZiL/QhIb0HsoaEuHiXiMhCOcsXkzKIeboe
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(376002)(39860400002)(396003)(136003)(82310400011)(186009)(1800799009)(451199024)(36840700001)(46966006)(40470700004)(40460700003)(53546011)(83380400001)(82740400003)(86362001)(36756003)(81166007)(356005)(31696002)(47076005)(36860700001)(2616005)(426003)(70206006)(26005)(40480700001)(31686004)(6916009)(16576012)(2906002)(41300700001)(316002)(4326008)(54906003)(16526019)(44832011)(8676002)(336012)(478600001)(5660300002)(70586007)(4744005)(8936002)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
-X-OriginatorOrg: seco.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2023 14:36:14.3526 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b28c435-af34-4587-1b8c-08dbb52ff2c5
-X-MS-Exchange-CrossTenant-Id: bebe97c3-6438-442e-ade3-ff17aa50e733
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bebe97c3-6438-442e-ade3-ff17aa50e733; Ip=[20.160.56.84];
- Helo=[inpost-eu.tmcas.trendmicro.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB8EUR05FT008.eop-eur05.prod.protection.outlook.com
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2023 14:54:49.4923 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d09de63e-b2e1-4641-4ed9-08dbb5328b74
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003440.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB6851
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4035
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,55 +166,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On 9/14/23 10:15, Heinrich Schuchardt wrote:
-> On 14.09.23 12:08, Mayuresh Chitale wrote:
->> This series adds support to locate an EFI System Partition on a disk and
->> boot the next stage from such a parition if found. The next stage image
->> is expected to be under the FIRMWARE directory as described in the EBBR
->> specification [1]. Also update the spl_blk_fs and spl_fat drivers to
->> prefer booting from ESP and fall back to the configured parition in
->> case of a failure.
->>
->> These patches are built on top of the following series from Sean Anderson:
->> https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2flists.denx.de%2fpipermail%2fu%2dboot%2f2023%2dAugust%2f525665.html&umid=9846b220-30e5-47d9-980b-6b2a067d6959&auth=d807158c60b7d2502abde8a2fc01f40662980862-8c7a372e72c3ce6a78488f17bac32c55586848b7
->>
->> [1] : https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2fgithub.com%2fARM%2dsoftware%2febbr%2fblob%2f854ba0e68590102667b84a5ba4e0b076a3f5f2cb%2fsource%2fchapter4%2dfirmware%2dmedia.rst&umid=9846b220-30e5-47d9-980b-6b2a067d6959&auth=d807158c60b7d2502abde8a2fc01f40662980862-c4109227e8dc78dcfe731b6e4cfe9dfef856e354
-> 
-> Hello Sean,
-> 
-> your series [1] is in status "changes requested". Will a new version
-> come up soon, or can this change go first?
 
-I had been working to incorporate your suggestion regarding bl_len.
-However, I have not had the time recently to finish that. I also need to
-have another look at the size changes once that is implemented. I had
-been hoping to use [1] to get some general size reductions on most
-platforms, but I am going to have to revisit that as well. I would like
-to work on this, but at the moment it's not high priority for me.
-Changes like this should likely go in first, since I suspect it will
-take another revision or two to finish up that series.
-
---Sean
-
-[1] https://lore.kernel.org/u-boot/20230810221138.GY3630934@bill-the-cat/
-
+On 9/12/23 21:26, Simon Glass wrote:
+> Hi Michal,
 > 
+> On Mon, 11 Sept 2023 at 06:32, Michal Simek <michal.simek@amd.com> wrote:
+>>
+>> tputq() requires variables to have 64bit width that's why make them 64bit
+>> to clean alignment requirement.
+>>
+>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>> ---
+>>
+>>   tools/proftool.c | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
->>
->> The patches are also present in the branch below:
->> https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2fgithub.com%2fmdchitale%2fu%2dboot%2ftree%2fmchitale%5fspl%5febbr%5fv1&umid=9846b220-30e5-47d9-980b-6b2a067d6959&auth=d807158c60b7d2502abde8a2fc01f40662980862-6f91c84d8d5661347bae86e4cb72a96341f7048d
->>
->> Mayuresh Chitale (2):
->>    part: Add a function to find ESP partition
->>    spl: Add support for booting from ESP
->>
->>   common/spl/Kconfig      |  7 +++++
->>   common/spl/spl_blk_fs.c | 61 +++++++++++++++++++++++++++++------------
->>   common/spl/spl_fat.c    | 34 ++++++++++++++++++++---
->>   disk/part.c             | 16 +++++++++++
->>   include/part.h          | 10 +++++++
->>   5 files changed, 107 insertions(+), 21 deletions(-)
->>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > 
+> I would have thought that 'unsigned long' is enough on a 64-bit
+> machines? Are you running on 32-bit?
+
+I have done it for better code understanding. U-Boot is small and 32bit var is 
+big enough. 64bit is more then enough but spec allocates for it 128bits that's 
+why it is easier to read that you are actually putting there the whole 128bits.
+
+M
+
