@@ -4,56 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83660EEAA50
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 15:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A8F5EEAA54
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:05:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 870AA86963;
-	Thu, 14 Sep 2023 17:16:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A707686852;
+	Thu, 14 Sep 2023 18:05:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1694704613;
-	bh=aWsCAny+CIIY4yGBNoEZukwseWCmQwtDyyE7510ILZI=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=lyg3Vm5ozxVEZCJBtFYec3AbdQEgztiWhVnvmPsMd97NiiZRT4jmXAdBRSND24pWp
-	 r7CZSPbwgpojZPb407rJRsxk0P3DtXwUNYgJdq9JalzTUdkaQYBJDKHEOW3khNy0oE
-	 3PUy9SXYNSKGzt9LakYQVT1C+Od8WqSO8LhEDIRF3mE6qv5eMTgMBY+q1XnVi2of+x
-	 y4YdYXqEE+76DFY2aYg6sWLCDK+kHtyFLQTfiIu7KBOMtPfZ1Izo6plRJBDceqoyUX
-	 u5uYvz/JVqnWErgIPshnvhKazIWDc6raeJPz1K2QeaMLJpHC46svUwJgBy7MPUUCxX
-	 OMIVw+gLy0yXg==
-Received: from [192.168.1.107] (87-97-111-83.pool.digikabel.hu [87.97.111.83])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="oy3qwGyT";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AD34B86918; Thu, 14 Sep 2023 18:05:29 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 313A786907;
- Thu, 14 Sep 2023 17:16:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1694704612;
- bh=aWsCAny+CIIY4yGBNoEZukwseWCmQwtDyyE7510ILZI=;
- h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=nbqI/OWPgd26BEAqz8QsGbd1aKHkXC4UYjpHDlwta7VtvGtzXZHLN/r7iTQ5/11KM
- z2vUmV2fgaFwoArChEFE/wxarrHvopdeb0Tk06Sxe02uBFHKHdd826butf/Oe/kH4k
- WMWG9mP8dMAH6bCa7k6/XbfNu97kGOrXoqUN5g2Galv+clwaYi6qPv6amiUE/0rpXE
- +/jiri139n0lKIRsQbrQbGzBZlsl4+GOm1kc1OJfPt+ElH9XU3EeB1TdoWxgMjuglR
- 9vBItJ8wtaHDyenf934+2cDVzGOa3Ad8UZ7dEl1YeLH8Oinis6VcdN2FCw/fMk9SgA
- i1h4dnCl80TSA==
-Subject: Re: [PATCH] drivers: mediatek: Fix error handling in
- mtk_i2c_do_transfer
-To: Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
-Cc: ryder.lee@mediatek.com, weijie.gao@mediatek.com,
- chunfeng.yun@mediatek.com, Tom Rini <trini@konsulko.com>
-References: <AM7P191MB06955AC8974FA0226ED937A5DAEDA@AM7P191MB0695.EURP191.PROD.OUTLOOK.COM>
-From: Heiko Schocher <hs@denx.de>
-Message-ID: <ae5d1c8d-a01a-0986-da4c-b64f755ba090@denx.de>
-Date: Thu, 14 Sep 2023 17:16:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8681A86537
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:05:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mchitale@ventanamicro.com
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-68fbd5cd0ceso921063b3a.1
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:05:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1694707525; x=1695312325; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PO2mjXJJQnKf/KQ0C8y8LPTWI7SvlM4gqub/vgPkvSE=;
+ b=oy3qwGyTOxJPzUqnF7XvPTgUP/if0f5rNmPLqBUY4khK0vxE9bhaJDSSES2eEQV76B
+ bQCMj6dulnDLRWiCJyBG0JUxSHWdPshKbU+Qxjd1bLmVDsspPqgNldp4XcioRPMq1ZqL
+ ak3SaZiVVAS2pmVwpYjvDEn2GHLbBB/n64Lo0RXhXBUoZq+2P7fv/VduL2jGVSP1pWKl
+ m62gnZHP3DRIt11c7U0HId1nYNdPC/atm077tk/ENDxhxxWfx+76418tiSf80jolsFQp
+ 04i7GIXVtfaQGyBmVj4ZwXF/t5Yvb7SjuaX86qu+FsA79PeRoD+a4b54cppw3/S6ACzN
+ pSIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694707525; x=1695312325;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PO2mjXJJQnKf/KQ0C8y8LPTWI7SvlM4gqub/vgPkvSE=;
+ b=f8TVZ8x0Az1OETYjS1nmrSVUhcp3eXLdp9TXNwfO4NKQJoLYdqAyiOlI61gfa/4YE8
+ wznYrMuOPzc7Q10C2bWhdhXi1oHWtON5JrYQsmk+0k58omvM7QKAjhu9T+7dKsUsOTBw
+ apWLgg2PpMdY+2aaEVRFuVHZbfoOID98+OoQfjgYoy/wuzKXrvRCTnDGiIx6Cgynh+3I
+ T/5L+94gJtjGYrOh7Jz3nfLPWiOb+jlLY3y6tg5attyF0Ruj33NL4WS8JK7pIy9NEz27
+ 9QJ2879hhpVLKrS3MuONolHhvLx/At8d8eKEqDCsBhyN6SbxGqx56OC1NRdSHKLsARMw
+ PLJw==
+X-Gm-Message-State: AOJu0YwkxGkH+Dom8AslPo3OLiBWD6R9m2I/EyoA9ZEYxG91wDyaL1S9
+ fLQlMbM+iAmxSHtO4dPheKrVQ6Nka8zK6KFS13kK1Q==
+X-Google-Smtp-Source: AGHT+IGKWNGxqV6NXx0KCms+HuAxC3QIimNDRre5YX1UI/WXtqegq4oUORZUsU5gYBa8IXCo+WExxQ==
+X-Received: by 2002:a05:6300:808c:b0:14c:def1:e728 with SMTP id
+ ap12-20020a056300808c00b0014cdef1e728mr5056150pzc.60.1694707525260; 
+ Thu, 14 Sep 2023 09:05:25 -0700 (PDT)
+Received: from mchitale-vm.. ([103.97.165.210])
+ by smtp.googlemail.com with ESMTPSA id
+ x47-20020a056a000bef00b0068a538cc7adsm1518998pfu.52.2023.09.14.09.05.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Sep 2023 09:05:24 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: u-boot@lists.denx.de
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v1] fs: Fix SPL build if FS_LOADER is enabled
+Date: Thu, 14 Sep 2023 21:35:15 +0530
+Message-Id: <20230914160515.1121668-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-In-Reply-To: <AM7P191MB06955AC8974FA0226ED937A5DAEDA@AM7P191MB0695.EURP191.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,35 +84,51 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Francois,
+If FS_LOADER is enabled for the SPL then the build fails with the error:
 
-On 08.09.23 18:47, Francois Berder wrote:
-> Errors were handled only if an I2C transfer timed out
-> and received a NACK which is very unlikely. This commit
-> changes the condition such that errors are handled if
-> an I2C transfer times out or received a NACK.
-> 
-> Signed-off-by: Francois Berder <fberder@outlook.fr>
-> ---
->  drivers/i2c/mtk_i2c.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+fs/fs.o:(.data.rel.fstypes+0x128):
+undefined reference to `smh_fs_set_blk_dev'
+fs/fs.o:(.data.rel.fstypes+0x140):
+undefined reference to `smh_fs_size'
+fs/fs.o:(.data.rel.fstypes+0x148):
+undefined reference to `smh_fs_read'
+fs/fs.o:(.data.rel.fstypes+0x150):
+undefined reference to `smh_fs_write'
 
-Good catch!
+Fix the error by populating the semihosting entry in the fs_types array
+only for non-SPL builds.
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+---
+ fs/fs.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-@Tom: Can this go into the release so late? If so, I can make a
-  pull request...
-
-bye,
-Heiko
+diff --git a/fs/fs.c b/fs/fs.c
+index 2b815b1db0..074db4b20f 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -256,6 +256,7 @@ static struct fstype_info fstypes[] = {
+ 		.ln = fs_ln_unsupported,
+ 	},
+ #endif
++#ifndef CONFIG_SPL_BUILD
+ #ifdef CONFIG_SEMIHOSTING
+ 	{
+ 		.fstype = FS_TYPE_SEMIHOSTING,
+@@ -275,6 +276,7 @@ static struct fstype_info fstypes[] = {
+ 		.ln = fs_ln_unsupported,
+ 	},
+ #endif
++#endif
+ #ifndef CONFIG_SPL_BUILD
+ #ifdef CONFIG_CMD_UBIFS
+ 	{
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.34.1
+
