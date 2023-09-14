@@ -4,74 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F70EEAA59
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 17:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35FF2EEAA6E
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 20:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 638A0870E7;
-	Thu, 14 Sep 2023 18:56:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 14D238658D;
+	Thu, 14 Sep 2023 22:22:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fuzm8Dq/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="oxRgP8T+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3CCE870D9; Thu, 14 Sep 2023 18:56:55 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id DD75C86596; Thu, 14 Sep 2023 22:22:38 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B6FA870A8
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:56:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6E4986560
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 22:22:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-34f6f29d319so3548325ab.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:56:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrej.skvortzov@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-502f302b68dso123285e87.2
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 13:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694710612; x=1695315412; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cnflEoIzNSwMq748K1d6WSIwnYt+GkocBp05r+MFELw=;
- b=fuzm8Dq/13VLnO4F0q8tVu9plI/HnxETpUrqEAqcgTVJMdyXK1lTJJyftrwrBA/pjs
- tKUy599I+9WjuZSsBeL2y5BBjBdpVAWOFjHlbwYUq0mOOcJ10Q/VThLfG3uMq1eAiC9t
- nWQzGWkV6nTjJeZbIWPBVHOjok2ljT+c6f2Bw=
+ d=gmail.com; s=20221208; t=1694722956; x=1695327756; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PO8mmI8n8h3HddmkLeNWSh70rH7gfxUCzIqxC74rO+I=;
+ b=oxRgP8T+omgZXygn/ClW0jhFRNWSA3zkLAuVMApSCpGAgd+4Z4r+cWGoXroJ3bAJUn
+ urB85ZuhEUakKFyyqqfdMVQ+S2Sw1xStkl/hOB2/3z/TI+0Ua0txentE2ugmWUUgXpgY
+ oHMM1r8JqOT6nMibJfjKqc7Jnm42XndZTpLYih3uRSDfUXYgY5/+0lyjHJ25e9B6FIHp
+ 4icbNW16nQruR0xl9/2ltO91zOQ1HFPRH/eGm/ZjsC3qQ4k5sM72qIwLxIxvAiC0ERrt
+ p2/oKyANnsjQQM8BrFyO3Kh7Gv2EnPz5msWholx5MFB51PEIVL1otmdgGZpzUKqSY+QM
+ UFVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694710612; x=1695315412;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cnflEoIzNSwMq748K1d6WSIwnYt+GkocBp05r+MFELw=;
- b=mb7EGuv9dOYkBo15xtySY8/bhlHShtv82hcmwuVMALbw99dztsgiHr5N8cv+b++ZfJ
- GXfKVx2KNOOgsJM2PPpraKG7/BlQnLhUtVTLx3emsjk8edCORxpMZg5LWBkl40Xr9GX5
- i+qhERBFRabiW8u4DPLxoXSlm7gZw8/CcetvdiQ24000I0D5ui7+ITnPOuOji3jqpAxT
- fXC33XNjJsEC2tSC42nX8fR5+88SmmaIABkeJFOU6RvQzjf1UVl8AugXvubdaMlIyEQj
- NaONMeOqdm7jBBI3CW12Kw2E1SeA88C28jenHVml6PK2Qz/RFaEkYfPV9NBHMmiONLsF
- 07dQ==
-X-Gm-Message-State: AOJu0YxH2TdBF7JMEV5kUbHQrcIJoanIs9we0vD7xAaY9zR7O7ypgHlx
- RjRXhIpWiO8xQeIhvQbhoQvx49qsSeVBC3azigY=
-X-Google-Smtp-Source: AGHT+IFKBtZhTwRGaNXzRqpE41xfuvkjLGAY8qmXBLTvbN7240leSP1nFLJSLPXu3OAxnVPnhTCF2A==
-X-Received: by 2002:a05:6e02:1a42:b0:34f:7eaa:1156 with SMTP id
- u2-20020a056e021a4200b0034f7eaa1156mr7872576ilv.11.1694710612255; 
- Thu, 14 Sep 2023 09:56:52 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:a8b6:76a8:ff58:a8be])
+ d=1e100.net; s=20230601; t=1694722956; x=1695327756;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PO8mmI8n8h3HddmkLeNWSh70rH7gfxUCzIqxC74rO+I=;
+ b=bAUWxcnjXA9PTxpJGN07Jj1XGSJ2Ownrzv93239920kmoFK4JSJ4l/k41RntHejlUd
+ 9itOO0tpeHT5y8esMMksKyxuqbH3eYo+yZtlec7Oz3aGdnebOGksgiHAF890aio0XLMB
+ N9pStSKA5n7z7yEm313HlR+pu2trnvQs8A6JNZEkYj0Wga3Sg1J2CBDYlOJpKu3GnCOx
+ OhV4GlqudeUc7dfsULdJWJflZ+JBJJ2kYGYIEpMpR2bkXQ+FVbtOIRWrFSe5SwsxQm1Z
+ DfxkDSqyRqV389wC9F3Emkdm+ihVQ3cd9Yq7JtAMl5HcNGc4gZQLRoVtw5SKg0H0X6dG
+ GwUg==
+X-Gm-Message-State: AOJu0YwO/94ECHCZkm/SlW4rN8mL5WF5QjOskZnIPoOW9/xs96OoNK9s
+ pNQVIaAbtB11pJrjktAxeFM=
+X-Google-Smtp-Source: AGHT+IHYdPqDtSUCS6XbZntUiyvP8uZHqIAqftvLgIffaNH2sGM+6AKTYICAewFBTSBCQvSKlDTz7Q==
+X-Received: by 2002:a05:6512:3d9e:b0:500:83dd:27e6 with SMTP id
+ k30-20020a0565123d9e00b0050083dd27e6mr6552065lfv.27.1694722955673; 
+ Thu, 14 Sep 2023 13:22:35 -0700 (PDT)
+Received: from localhost ([2a05:3580:f312:6c00:826c:ae47:61a7:8af8])
  by smtp.gmail.com with ESMTPSA id
- s20-20020a02c514000000b00430979b6aa5sm535339jam.0.2023.09.14.09.56.51
+ c27-20020ac244bb000000b00502b04e2722sm397228lfm.3.2023.09.14.13.22.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:56:51 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 21/21] boot: Join ARCH_FIXUP_FDT_MEMORY with related options
-Date: Thu, 14 Sep 2023 10:55:59 -0600
-Message-ID: <20230914165615.1058529-21-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
-In-Reply-To: <20230914165615.1058529-1-sjg@chromium.org>
-References: <20230914165615.1058529-1-sjg@chromium.org>
+ Thu, 14 Sep 2023 13:22:35 -0700 (PDT)
+Date: Thu, 14 Sep 2023 23:22:34 +0300
+From: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Arnaud Ferraris <arnaud.ferraris@collabora.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Hans de Goede <hdegoede@redhat.com>, u-boot@lists.denx.de,
+ Samuel Holland <samuel@sholland.org>, Jarrah Gosbell <kernel@undef.tools>,
+ Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>,
+ Vagrant Cascadian <vagrant@debian.org>, Jonas Smedegaard <dr@jones.dk>
+Subject: Re: [PATCH] sunxi: board: provide CPU idle states to loaded OS
+Message-ID: <ZQNris+EpoAIQjMU@skv.local>
+References: <20230904205430.1647654-1-andrej.skvortzov@gmail.com>
+ <20230905092712.6ba245bb@donnerap.manchester.arm.com>
+ <ZPboy228t8rVajL8@skv.local> <20230906011232.05ee691a@slackpad.lan>
+ <ZPjm30KGDpY30D7k@skv.local> <20230911231510.46b248ac@slackpad.lan>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20230911231510.46b248ac@slackpad.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,54 +98,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this to be with the other devicetree-fixup options.
+Hi Andre,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On 23-09-11 23:15, Andre Przywara wrote:
+> On Wed, 6 Sep 2023 23:53:51 +0300
+> Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
+> 
+> > > > > > When using SCPI as the PSCI backend, firmware can wake up the CPUs and
+> > > > > > cluster from sleep, so CPU idle states are available for loaded OS to
+> > > > > > use. TF-A modifies DTB to advertise available CPU idle states, when
+> > > > > > SCPI is detected. This change copies nodes added by TF-A to any new
+> > > > > > dtb that is used for loaded OS.    
+> > > > > 
+> > > > > Why do you need that, exactly? Why not just use $fdtcontroladdr for the
+> > > > > kernel? We now keep the U-Boot copy of the .dts files in sync with the
+> > > > > kernel. If you need to modify the DT in U-Boot, for instance by applying
+> > > > > overlays, you can copy that DTB into a better suitable location first:    
+> > > > > => fdt move $fdtcontroladdr $fdt_addr_r    
+> > > > > 
+> > > > > In any case, there shall be only one DT, that one in the U-Boot image. Why
+> > > > > do you need to load another one for the kernel?    
+> > > > 
+> > > > extlinux is used by distributions (sometimes with device-specific changes especially  
+> > > 
+> > > What distros are that? I guess some special ones, targeting embedded
+> > > devices, like the Pinephone?  
+> > 
+> > It's more likely universal operating system. In my particular case
+> > this is Mobian (several device-specific packages on top of
+> > Debian). It's very-very close to Debian with a goal to be
+> > pure Debian in the near future.
+> > 
+> > Rhino Linux is using extlinux as well and will benefit for this change
+> > as well.
+> 
+> We seem to have a very different understanding of "universal operating
+> systems" ;-)
+> You seem to talk about specific distros for embedded devices, whereas I
+> think of Ubuntu/Debian/Fedora/Arch/you-name-it.
 
-(no changes since v3)
+I was talking about Debian (The universal operating system ;-)
+initially. Even if PinePhone in my case runs Mobian,
+it uses the same packages and scripts and repositories from Debian. The
+difference is quite small (kernel and some other small changes).
 
-Changes in v3:
-- Drop patch 'Move SYS_RX_ETH_BUFFER into the network menu'
-- Drop patch 'video: Move BMP options and code to video directory'
+> And I still don't understand what a particular distribution has to do
+> with that: this is purely a question of boot firmware and who provides
+> the DTB.
+> > 
+> > > > for platforms not fully supported by mainline yet),  
+> > > 
+> > > Do you need any changes to the DT? Do you need to apply overlays?
+> > > If you run on a non-mainlined platform, you could still put your DT
+> > > into the U-Boot tree, then you wouldn't need to load another DTB, which
+> > > also simplifies the deployment on the kernel/distro side.  
+> > 
+> > Currently Mobian linux kernel for sunxi-devices contains 36 extra patches with DT
+> 
+> That does not sound good. Why are those patches not upstream?
 
- boot/Kconfig | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+Agree, I ask the same question. Some of the patches were posted for
+review and stalled, some of them haven't been posted. I'm preparing
+table to track current status of the patches. Maybe ping some of them.
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 235c5a7a993..a01e6cb8aaf 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -693,14 +693,6 @@ config SUPPORT_RAW_INITRD
- 	  address of the initrd must be augmented by it's size, in the following
- 	  format: "<initrd address>:<initrd size>".
- 
--config ARCH_FIXUP_FDT_MEMORY
--	bool "Enable arch_fixup_memory_banks() call"
--	default y if OF_LIBFDT
--	help
--	  Enable FDT memory map syncup before OS boot. This feature can be
--	  used for booting OS with different memory setup where the part of
--	  the memory location should be used for different purpose.
--
- config CHROMEOS
- 	bool "Support booting Chrome OS"
- 	help
-@@ -1490,6 +1482,14 @@ config FDT_SIMPLEFB
- 	  the presence of the simple frame buffer with associated reserved
- 	  memory
- 
-+config ARCH_FIXUP_FDT_MEMORY
-+	bool "Enable arch_fixup_memory_banks() call"
-+	default y
-+	help
-+	  Enable FDT memory map syncup before OS boot. This feature can be
-+	  used for booting OS with different memory setup where the part of
-+	  the memory location should be used for different purpose.
-+
- endmenu
- 
- endif # OF_LIBFDT
+There are some big and complex changes like wlan/bt driver, that it's hard to
+upstream in the current shape.
+
+> > modifications (add/remove nodes, modify existing properties). One of
+> > them unconditionally adds cpuidle states to DT, that I'm trying to fix
+> > upstream here with the proposed change.
+> 
+> That's very honourable, but not every patch that works(TM) is the right
+> approach to take upstream.
+
+Sure, this one will probably stay in our patches until all DT changes
+are upstream.
+
+> > Mobian doesn't provide
+> > device-specific bootloader (u-boot) and there is on-going work on
+> > making device-independent universal images.
+> 
+> With "universal image" you mean a single rootfs, and a single kernel for
+> every device? Of course, this is how Linux works everywhere, and the
+> arm64 kernel was a single-image kernel from day one (same as x86). And
+> taking the DTs out there and into firmware is just even more
+> consequential.
+> 
+
+> > 
+> > Regardless proposed change. Changes to dtb nodes already copied in
+> > u-boot on the fly in boot/image-fdt.c:image_setup_libfdt. For example,
+> > created optee nodes are copied there.
+> 
+> Yes, that is an example, just not a particularly good one. This seems
+> to originate from 2019, again building on the idea that you need to load
+> a DTB for the kernel from somewhere. I don't like to proliferate those
+> ideas anymore.
+> 
+> > I've just put platform specific
+> > changes into platform specific ft_board_setup, that was made
+> > apparently exactly for that.
+> 
+> Not really, that's for platform specific runtime *adjustments*, like
+> adding a unique MAC address, or adding simplefb DT nodes.
+
+Thanks again for taking time and explaining your position. I agree, that in
+a long term dtb should be provided by u-boot. In that case proposed
+change will not be needed. Hopefully we'll get all changes upstream
+and could use $fdtcontroladdr some day.
+
 -- 
-2.42.0.459.ge4e396fd5e-goog
-
+Best regards,
+Andrey Skvortsov
