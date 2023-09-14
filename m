@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A62EEAA56
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:20:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6278DEEAA53
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7AF186A7B;
-	Thu, 14 Sep 2023 18:20:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0452A86AA2;
+	Thu, 14 Sep 2023 18:20:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OtIMCkmw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yz2s0py2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C73686A3C; Thu, 14 Sep 2023 18:20:41 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id 945E286A3C; Thu, 14 Sep 2023 18:20:43 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3E2A86918
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:20:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4762186672
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:20:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2bfbd7d49e7so18452301fa.1
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:20:38 -0700 (PDT)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2bf66a32f25so17920021fa.2
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:20:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694708438; x=1695313238; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694708440; x=1695313240; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Iqjo/S2dlM9bmalrr162ON2R3PCrWmnEZHSq09Dn8Zw=;
- b=OtIMCkmwQRto17VAqLzQvOkYwr0pVKZDZbmF90bFQjzGT7I5OhcwdKkjYASESFFKHU
- XeP9tiDuuCAJbngWXjX9ye589ilBDDkJO/7Msc/i0QucvYbXX8m2LFr/JREKYB8sJ0XN
- VwUEH/yYZ0YO2jr+e2B7bsTZg2c8U3l8lf1nCqof6/s1BtiFyEvhtcscZ96Ya9vD8Oir
- yTGfa54qeFRMS6YNLxS1qIlEYq0G96DDDNBuUNGLbYFKTe5/5d2Bj2+ay3nT4/CH9voj
- YgD+2J+QDGPX723M0RDVE+qbo11y6mk915tfeHjv3Dc6OOOyWn93mA/yDjnZr1+vF7ks
- mwGw==
+ bh=KlGOSpnuP038/3uWYsQ6F/fPIq0GHwMSq4PrefaoKZA=;
+ b=yz2s0py2u8LPS/cBbe9AtJjfshM61oQDbP3BOJn2F0lbuA2U7mSqTGNz8o1dJPNabf
+ Rr72xeE1nsN9spWqZi2kUZEQiJ+zW9PrwEEJra2lnGY8raQqnRFf0B5x0AJg2TMwUl5T
+ KBCEFjAfc/YO9KRKnig68+QPxcp1QJu7P5g8Epf6sEsUst09UGA0FZh/hDLxWNcTsK2N
+ nI5j+PE+oto/wSTPhv7Xo+MmPKuUj+4LJE9FgoZztxesyEqaonosX5Stlpdau5/nKh/t
+ IvGwbwhLSy5+9iBG/DZg7pDtTXjjlfaOxAzd+92vcyYW79LdX2GICvqOLIA6cKjCDAfj
+ hsFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694708438; x=1695313238;
+ d=1e100.net; s=20230601; t=1694708440; x=1695313240;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Iqjo/S2dlM9bmalrr162ON2R3PCrWmnEZHSq09Dn8Zw=;
- b=AILWgGaxUdKjcaWNgsJDauhT58YNLwBZJcKwaS/1dRujeYyVU/sq9aWg1oRUrsKUuK
- 84HRbal0q1lfF6wy0AgGUDw/riY8AGRrU5fSwlpzrdNMImLERiH1NtFDXaOt64X2XvAa
- dP021rSzXqfgtz75gxrfLKGcCq6JDrOSguAwOFCzYwFB3HVt5CgKWwtoTlgrHsl6PXrh
- Q+71GS6h25pf3FVp/lrf/kXTuSqFiTsyB+kj9g5zJKMSfU/gG9mYDyHAGdXNt52kSO2A
- 1kF6o5Mw8eeYBqFGsCTVJ4+N/M7QkhBFsJV24sseYKHj1TVxTwEZgYllKrsf/Ygzpwuu
- oqoA==
-X-Gm-Message-State: AOJu0Ywj5VMO/M9y1BGBR7sUiKmbwMdFob8F3lzEoFjmAM6lvzGLLRtL
- PNqtV9Uh04xZVqOHqS1lTEFT5nQbo4cHvO3WjnDwWw==
-X-Google-Smtp-Source: AGHT+IEz740p8q/N0Sy5NHx49YQCr1bgkS2UnERt6UDk+WHWMlrcv2/JSs4OgiZoBqyhDy6PLjrDIg==
-X-Received: by 2002:a2e:93c5:0:b0:2b6:d89e:74e2 with SMTP id
- p5-20020a2e93c5000000b002b6d89e74e2mr5071779ljh.7.1694708438105; 
- Thu, 14 Sep 2023 09:20:38 -0700 (PDT)
+ bh=KlGOSpnuP038/3uWYsQ6F/fPIq0GHwMSq4PrefaoKZA=;
+ b=SI/YPwBCW7Aj69ZLnLGnbveJTn2NsCRimMjy/oZUzawGQr+LJbp4MAyNMl30mQDQUw
+ wvOnHFEaxr2Y0jkCVdaxGn1YVVIjjh8y2to7acN0b6Sz9I6tCW/oDK3DLaV966Gu5B+r
+ QT4YvAubNFMILrPHJxWpHKQE7eITwfLcvm+mHWHdNQx4CXemygCwy+LbXFrlMeDDrChC
+ 8UpWpATBk3nI6j/O9NuqEmNFidPrgXnFOWK03D1/6jVlUFrz5+5Q99dKA8TGuZAirdMp
+ q4tpuFow+Rn6cwB/w0sHvL2uTcg85HO/0CA47RX70PHO7On9l76qUeAu1/5d8OwApa6x
+ Ot4w==
+X-Gm-Message-State: AOJu0YyPqelK8Jg74WY9yLNR1RQVriqMcIeVzc1mUoQVqIrni4Us/EDy
+ plCLjTfcHFwZmBwnBDQzaBshqjJuKRoGr4zZrxVkkg==
+X-Google-Smtp-Source: AGHT+IEXJEsBSTxuJq8dKcCXQ4BKMCcJcUxE1WumltI9L/5lADIVLn1IMyjPofdvVr0yN1iTEiFzmA==
+X-Received: by 2002:a2e:9f06:0:b0:2bd:beb:4aca with SMTP id
+ u6-20020a2e9f06000000b002bd0beb4acamr5170780ljk.13.1694708440428; 
+ Thu, 14 Sep 2023 09:20:40 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.20.36
+ z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.20.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:20:37 -0700 (PDT)
+ Thu, 14 Sep 2023 09:20:40 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
- Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv9 01/15] submodule: add lwIP as git submodule
-Date: Thu, 14 Sep 2023 22:18:14 +0600
-Message-Id: <20230914161828.3662-2-maxim.uvarov@linaro.org>
+ Maxim Uvarov <maxim.uvarov@linaro.org>, Simon Glass <sjg@chromium.org>
+Subject: [PATCHv9 02/15] net/lwip: add doc/develop/net_lwip.rst
+Date: Thu, 14 Sep 2023 22:18:15 +0600
+Message-Id: <20230914161828.3662-3-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230914161828.3662-1-maxim.uvarov@linaro.org>
 References: <20230914161828.3662-1-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,32 +94,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add external lwIP library as a git submodule.
+Add initial documentation of lwIP network IP stack integration
+to the U-Boot (net_lwip.rst).
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- .gitmodules            | 3 +++
- net/lwip/lwip-external | 1 +
- 2 files changed, 4 insertions(+)
- create mode 100644 .gitmodules
- create mode 160000 net/lwip/lwip-external
+ doc/develop/index.rst    |  1 +
+ doc/develop/net_lwip.rst | 75 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 76 insertions(+)
+ create mode 100644 doc/develop/net_lwip.rst
 
-diff --git a/.gitmodules b/.gitmodules
+diff --git a/doc/develop/index.rst b/doc/develop/index.rst
+index 5b230d0321..4764990f25 100644
+--- a/doc/develop/index.rst
++++ b/doc/develop/index.rst
+@@ -48,6 +48,7 @@ Implementation
+    spl
+    falcon
+    uefi/index
++   net_lwip
+    vbe
+    version
+ 
+diff --git a/doc/develop/net_lwip.rst b/doc/develop/net_lwip.rst
 new file mode 100644
-index 0000000000..245ecff585
+index 0000000000..a77ab60d0f
 --- /dev/null
-+++ b/.gitmodules
-@@ -0,0 +1,3 @@
-+[submodule "lwip"]
-+	path = net/lwip/lwip-external
-+	url = https://git.savannah.nongnu.org/git/lwip.git
-diff --git a/net/lwip/lwip-external b/net/lwip/lwip-external
-new file mode 160000
-index 0000000000..84fde1ebbf
---- /dev/null
-+++ b/net/lwip/lwip-external
-@@ -0,0 +1 @@
-+Subproject commit 84fde1ebbfe35b3125fc2d89b8a456cbacf148e9
++++ b/doc/develop/net_lwip.rst
+@@ -0,0 +1,75 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++lwIP IP stack integration for U-Boot
++====================================
++
++Intro
++-----
++
++lwIP is a library implementing network protocols, which is commonly used
++on embedded devices.
++
++https://savannah.nongnu.org/projects/lwip/
++lwIP  license:
++lwIP is licensed under a BSD-style license: http://lwip.wikia.com/wiki/License.
++
++Main features include:
++
++* Protocols: IP, IPv6, ICMP, ND, MLD, UDP, TCP, IGMP, ARP, PPPoS, PPPoE
++
++* DHCP client, DNS client (incl. mDNS hostname resolver),
++  AutoIP/APIPA (Zeroconf), SNMP agent (v1, v2c, v3, private MIB support
++  & MIB compiler)
++
++* APIs: specialized APIs for enhanced performance, optional Berkeley-alike
++  socket API
++
++* Extended features: IP forwarding over multiple network interfaces, TCP
++  congestion control, RTT estimation and fast recovery/fast retransmit
++
++* Addon applications: HTTP(S) server, SNTP client, SMTP(S) client, ping,
++  NetBIOS nameserver, mDNS responder, MQTT client, TFTP server
++
++U-Boot implementation details
++-----------------------------
++
++1. In general we can build lwIP as a library and link it against U-Boot or
++   compile it in the U-Boot tree in the same way as other U-Boot files. There
++   are few reasons why second variant was selected: lwIP is very customizable
++   with defines for features, memory size, types of allocation, some internal
++   types and platform specific code. It turned out easier to enable/disable
++   debug which is also done with defines, and is needed periodically.
++
++2. lwIP has 2 APIs - raw mode and sequential (as lwIP names it, or socket API
++   as we name it in Linux). For now only raw API is supported.
++
++In raw IP mode a callback function for RX path is registered and will be called
++when packet is passed to the IP stack and is ready for the application.
++
++One example is the unmodified working ping example from lwip sources which
++registered the callback:
++
++.. code-block:: c
++
++        ping_pcb = raw_new(IP_PROTO_ICMP);
++        raw_recv(ping_pcb, ping_recv, NULL); <- ping_recv is app callback.
++        raw_bind(ping_pcb, IP_ADDR_ANY)
++
++3.  Input and output
++
++RX packet path is injected to U-Boot eth_rx() polling loop and TX patch is in
++eth_send() accordingly. That way we can leave the driver code unmodified and
++consume packets once they are ready. So we do not touch any drivers code and
++just eat packets when they are ready.
++
++U-Boot lwIP Applications
++========================
++
++.. kernel-doc:: include/net/lwip.h
++   :internal:
++
++lwIP API to control polling loop
++================================
++
++.. kernel-doc:: include/net/ulwip.h
++   :internal:
 -- 
 2.30.2
 
