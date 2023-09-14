@@ -4,88 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F245EEAA7A
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 23:38:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598CFEEAA7D
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 23:52:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44AD4867D6;
-	Fri, 15 Sep 2023 01:38:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BAE986679;
+	Fri, 15 Sep 2023 01:52:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tZCSGf2e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J3iGCdkI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF90E8657A; Fri, 15 Sep 2023 01:38:33 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 5CEA886741; Fri, 15 Sep 2023 01:52:34 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2D268657A
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 01:38:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 361DE8660B
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 01:52:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-579de633419so16841957b3.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:38:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-68fb79ef55eso1418220b3a.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:52:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694734710; x=1695339510; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1eXmHpKknByJWFkh4AexwpT6CSCZXavId6H0tXYKOw0=;
- b=tZCSGf2ePGhOHQ3C2yAnZISUcGSvsfqoWSL2+lZdlzz8RSinhD+l3aDe7IBqG2QOR/
- OnYmRL8ZOU9XNUB2K/Mwoq11x8mORJ7pRup4ym4v0Utxx4BDZH1y81IV40ZQfR4ZQPNY
- +Y8OXTLuUVm+cBfS5f4pL3BqgYh/njOuy/X+c=
+ d=linaro.org; s=google; t=1694735550; x=1695340350; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UHPvkeUuk9EmQ8js9iGy4EauLX0D+z+/I+13SK4L3PY=;
+ b=J3iGCdkIGX9Ypph+eSFRfRR9O5/dk+VXXyDIL/DRcVbBZmRRbMsM8L/CAupAjS7Cs+
+ th9NJzuMYiGGXrXcttM4Infx3WhVO+ffMUvOpyf1F3NMAYc6cX6nTs0nNb37h3AsMEoq
+ L9rqY6eYPusyA0cHmv++ea73Nd0MfN/UhNgZSNzDlElbWKRE+vv139uWKhghh/gUQ5RZ
+ oQNioRiJ7DQ3616fbWEHzY8UfUZ2h1WaZXY7fDVjB40gaKb0Ym4oXWFUhL/3AFeZ7KLk
+ CrncQlV/TQbzNXwdCEhfF+uYt6kiLkealiEXTbkhiOfRRshRxwTXBvFxAqI8EDPfb1Cr
+ Fa7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694734710; x=1695339510;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1eXmHpKknByJWFkh4AexwpT6CSCZXavId6H0tXYKOw0=;
- b=wsW1Hcs8/Xy8nXpi7/l5N0p2+Vh+4oS1SJKoBbsU4AWXgQwBg6ynWvUq1zGbDuFW6i
- BwrKL5kNwChSBt1HSO1lMSKGCXQSQWPoS5Btlb+5vza/FuccDSU8VwObKSeXX7wljanO
- OkxdDRsEe8rE9jzAqCvPxDmWHXXTr2lb4yyhI0DVUR5m/4P8N0pnW1J/MAYgpB0S49st
- HzlyMQPLy/kSNEdQAMDILwzF1raeKxv3lIiK8zKPlVwJRXtGRsnP/hbCexrRYomrXi0H
- xb0ocU8mTB/cxAy3mP2apbPyfMawhEm4Cy0PNAYKSqKBmhChjNtUl+4JHp+GULp+2kMB
- gUhA==
-X-Gm-Message-State: AOJu0YyI4Vc+KNsMoONGIj8FMtVPb2fvc0ukWbldMeCxndijWLWNPgng
- uTrYC5+1X9rZylmAvuR0xYvGkw==
-X-Google-Smtp-Source: AGHT+IGGl5MmHlytqfjgRbLL4XvU4uYRZ923q9+UOJAWLsbA+ZNP+pMoIKj37buBqQcg1j4eN3vH/Q==
-X-Received: by 2002:a0d:d808:0:b0:59b:cff1:a8eb with SMTP id
- a8-20020a0dd808000000b0059bcff1a8ebmr158128ywe.34.1694734710299; 
- Thu, 14 Sep 2023 16:38:30 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ba48-499c-2259-fcdc.res6.spectrum.com.
- [2603:6081:7b00:6400:ba48:499c:2259:fcdc])
- by smtp.gmail.com with ESMTPSA id
- l6-20020a819406000000b0057085b18cddsm587690ywg.54.2023.09.14.16.38.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 16:38:29 -0700 (PDT)
-Date: Thu, 14 Sep 2023 19:38:26 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Jassi Brar <jassisinghbrar@gmail.com>, ilias.apalodimas@linaro.org,
- pbrobinson@gmail.com, sughosh.ganu@linaro.org, u-boot@lists.denx.de,
- xypron.glpk@gmx.de
-Subject: Re: [RFC PATCH 0/5] Allow for removal of DT nodes and properties
-Message-ID: <20230914233826.GE305624@bill-the-cat>
-References: <CAPnjgZ1pgvxhntJvkuAsxKXUVxcWACNTpuDqgonFCrOLr=934Q@mail.gmail.com>
- <CALeDE9ODEwV0Z9APwb1N8QNZFQSB1dkMTMHPW2p2xTLiUZjQ1A@mail.gmail.com>
- <CAPnjgZ1FiqjjxjL+Ve-s5WEafksOZsSP3XyW4xYdjyP-U_TZzQ@mail.gmail.com>
- <20230906142139.GA1236014-robh@kernel.org> <ZPldgbS8mu+5DG7Q@hera>
- <CAPnjgZ0kcOZp65d_-wwYyjbTwC-aDamvGU50aa34o2PeZjZk6Q@mail.gmail.com>
- <CABb+yY0VJDu+L2C10E1O-uAU-p0OwuTq6XVF2XbYuOc2fBqoww@mail.gmail.com>
- <875y4kh77c.fsf@bloch.sibelius.xs4all.nl>
- <CAL_JsqKehgMGReC2GZseCy5JufgL9on9NTu7Bouh9-kUDFmfSQ@mail.gmail.com>
- <CAPnjgZ2CaLg2=Bbda0suwP8wYAM7H2iO-9U_Tw9tbxKu-YAnpA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1694735550; x=1695340350;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UHPvkeUuk9EmQ8js9iGy4EauLX0D+z+/I+13SK4L3PY=;
+ b=gM+eOj5TU2wf619Yf4gtO1lX5U2t0KpAu/bkOJzG3HR9FkV8BV9hTR5Pajdza0IeAG
+ fqp9//NySzfuNbZ3pyF7fOqOIg1dCv4VzPH5XYq9J6qriQg8e5waCEYhmAK6aeeM+oCM
+ xVxf1LjSMEaM/rQ57r98h+MT3n/jTmWhut9bOUghZrY0MoQZ1u/82RizywMvoJsqnn1K
+ uhR5u+2pSYkxoZywbhZVzoYpXcuCsNPyKIOSszEv3tH+WnxA2MsfJMLubGIXU5//dZmw
+ dZzGrqy9ssk1u6u8F7/1376oOqIQgygIwu1MbDGJ1y0YF2v5jZVhKjgZaWgR1G7nSse5
+ jLTg==
+X-Gm-Message-State: AOJu0Yw2oLMoUzAJ7EwfA1FTZvrEIYHx8TIZlbb60KOpKu7DjwfNhpzN
+ DwdunKzDXhXHivutdwZBVjBqydS5FoUol03EPQwRpQ==
+X-Google-Smtp-Source: AGHT+IFzvYVzI6xaJlQduEo6HYUtjKura2sQ33IdzRP6XHp2V4faqqTPJgdOShgD4lFnX0XDYNkY2OxtfN78FqsH8+o=
+X-Received: by 2002:a05:6a20:938a:b0:14e:9092:4291 with SMTP id
+ x10-20020a056a20938a00b0014e90924291mr373469pzh.7.1694735550409; Thu, 14 Sep
+ 2023 16:52:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cqx1hUF7vqZazUcQ"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2CaLg2=Bbda0suwP8wYAM7H2iO-9U_Tw9tbxKu-YAnpA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-7-masahisa.kojima@linaro.org> <ZQMRRQ4zOnKUU4WK@hera>
+In-Reply-To: <ZQMRRQ4zOnKUU4WK@hera>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Fri, 15 Sep 2023 08:52:19 +0900
+Message-ID: <CADQ0-X-NCj03ghuGj946KtO-2nO+BdXUt5HcDz8dH5ez2WHghA@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] doc: uefi: add HTTP Boot support
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,59 +86,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---cqx1hUF7vqZazUcQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Sep 14, 2023 at 04:41:43PM -0600, Simon Glass wrote:
-> Hi Rob,
->=20
-> On Wed, 13 Sept 2023 at 16:39, Rob Herring <robh@kernel.org> wrote:
-[snip]
-> > I don't think we should decide what to do here based on said
-> > certification program. It can adapt to what's decided. Probably, the
-> > /option nodes will be stripped out or ignored for certification.
+On Thu, 14 Sept 2023 at 22:57, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> On Fri, Sep 01, 2023 at 07:25:42PM +0900, Masahisa Kojima wrote:
+> > This adds the description about HTTP Boot.
 > >
-> > I accepted u-boot options node schema into dtschema, but now have
-> > second thoughts on that. Now I'm getting more u-boot specific
-> > (perhaps, not clear) stuff and widevine stuff internal to a TEE.
->=20
-> Where should these bindings go such that ARM / Linaro are not trying
-> to remove them? I would be OK with moving them out somewhere else, but
-> how are people supposed to deal with such fragmentation? My
-> understanding was that dt-schema was an attempt to set up a neutral
-> area where bindings could be accepted that were not just for
-> Linux...did that change?
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >  doc/develop/uefi/uefi.rst | 21 +++++++++++++++++++++
+> >  1 file changed, 21 insertions(+)
+> >
+> > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> > index a7a41f2fac..fd87bb1edb 100644
+> > --- a/doc/develop/uefi/uefi.rst
+> > +++ b/doc/develop/uefi/uefi.rst
+> > @@ -594,6 +594,27 @@ UEFI variables. Booting according to these variables is possible via::
+> >  As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
+> >  command 'efidebug' can be used to set the variables.
+> >
+> > +UEFI HTTP Boot
+> > +~~~~~~~~~~~~~~
+> > +
+> > +HTTP Boot provides the capability for system deployment and configuration
+> > +over the network. HTTP Boot can be activated by specifying::
+> > +
+> > +    CONFIG_CMD_DNS
+> > +    CONFIG_CMD_WGET
+> > +    CONFIG_BLKMAP
+> > +
+> > +Set up the load option specifying the target URI::
+> > +
+> > +    efidebug boot add -u 1 netinst http://foo/bar
+> > +
+> > +When this load option is selected as boot selection, resolve the
+> > +host ip address by dhs, then download the file with wget.
+>
+>  dhs -> dns
+OK.
 
-Well, part of the problem here is that I've been talking with Ilias more
-about what's intended here and the fwu-* stuff that Rob rejected is
-indeed not right.  We should drop it and replace it with something that
-really addresses the underlying problem (which is how do you know
-how/where to find some GUIDs) and I think we think it's something that
-can be shared between projects too and so be easier to convince Rob that
-the next form of it is right (or the right direction).
+>  what happens if it's an IP address?
+Current implementation tries to resolve the IP address as a host name,
+so the DNS process will end up with "host not found".
+We need to preset the "httpserverip" env variable to proceed the wget.
 
---=20
-Tom
+For this series, without a lwip port, this limitation should be noted here.
 
---cqx1hUF7vqZazUcQ
-Content-Type: application/pgp-signature; name="signature.asc"
+I could take the ip address format check code from iwip or other projects,
+but I did not do that since there is a workaround(set "httpserverip"
+env variable).
+In addition, when the lwip port lands, this case is properly handled.
+If the IP address is used as host, the DNS process is skipped.
 
------BEGIN PGP SIGNATURE-----
+Thanks,
+Masahisa Kojima
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUDmW0ACgkQFHw5/5Y0
-tyxgIQwAtWzQi0SNHJUkyLKIb5zwoCp4r3n7LWqMoDpxOOjWPjaNevsCCTagZccE
-Cm1JehK1YMPZW6Jy7+GX5E3DPYJ60WznxwxBrWYo8ZyMscx5CN4txeTxm+MQcbmY
-Qkbq3Gdrl4fq7ou3BpoMk/U8AXFiYPru8wzbnEYsydg8KPjRD5XRqbSx41liUO80
-IXU8up6JvtJjqvFNUeqiof6kb46LT85I1ZO5cmV6BPpzN1J5ZHhbbNDEbFEYVtYU
-iT8iZoPi2FuctH+mHOR7R1twPvXYK8Jwxe6SBiFwL1cts1FYTfiOfxoGuEtmBO+k
-umD/6VXwfa9AXSHCY5ols4yGwJhSDrli1JF8hSuZGLJ3kvxiM9VRCsjKVQp6Gb8g
-RSzwHbmBdU572UuWDleGWiuMHtDYtZ752OQwZRm3RjwCmXPZNZEy6DHHYBL9jx/J
-ZksREJy/UtSxvKU9um6lse5NoHtuTiV84d5BVxqw2aJcjWVBfx34zORTJCPHQPRR
-mOebUdUB
-=nmwx
------END PGP SIGNATURE-----
-
---cqx1hUF7vqZazUcQ--
+>
+> > +If the downloaded file extension is .iso or .img file, efibootmgr tries to
+> > +mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> > +If the downloaded file extension is .efi and file is PE-COFF image,
+> > +load the downloaded file and start it.
+> > +
+> >  Executing the built in hello world application
+> >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >
+> > --
+> > 2.34.1
+> >
+>
+> Thanks
+> /Ilias
