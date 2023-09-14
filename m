@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEDB6EEAA7B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 22:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC325EEAA7B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 22:43:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0493C86604;
-	Fri, 15 Sep 2023 00:43:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5AA988669D;
+	Fri, 15 Sep 2023 00:43:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PV/bYmi7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CdTal1IO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D873586679; Fri, 15 Sep 2023 00:43:37 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 264D28669D; Fri, 15 Sep 2023 00:43:39 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07666865D0
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 00:43:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5727786661
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 00:43:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-502f20ace96so452347e87.1
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 15:43:36 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-52eed139ec2so1690311a12.2
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 15:43:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694731415; x=1695336215; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694731417; x=1695336217; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=86EcK4l+tGFeyJUW8cVy+IEHvFmc25Oo7/yxlTo6Rv8=;
- b=PV/bYmi7USowTzV1gR6a1h24zROjEHwzyurfuL+BFhBGxCp+ITFcbmlpl9sqLO/UZA
- S+FVmB1ASnjeBFmigoE9SsP0itp+AYT0PWS3tJDEmuRvSl7xMb+fanrQp/0h1bAPIPy0
- GTimSSKoqQxLbmNa2OfnT6mnfJC2NXHbf/X5w=
+ bh=KxEd3Kel1ce1GLkybEQUe4FzSLPhWsLqId9zJLPPiec=;
+ b=CdTal1IOlA7iB2tXP6CGiwCmUR3BKRHFFXkNFOyFHonb5wGbnJ6kUfvNIiGspl1iJG
+ +nLlbvj1cL5jX+d5ogLdKMBUcKAdEQESvv4zHsO4YDi6PRhey0Nc+m6FXI+xkRkYDMYA
+ gRvE/5RFx+C/5C6iMfVNVVkC5UnL7l9//Yg40=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694731415; x=1695336215;
+ d=1e100.net; s=20230601; t=1694731417; x=1695336217;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=86EcK4l+tGFeyJUW8cVy+IEHvFmc25Oo7/yxlTo6Rv8=;
- b=hcI7iOdjA9ok3FcNLK4AOUT8Y/k6mGS+u4AQ1HPozcbj7Go/IgFab6UamMMRvHBPqd
- 4AN7alwwh1lcf4GXLS6BJTh+RrjNff4Du+6jKGLkHEDI2q1XfTFWnRBl+tU6izkFrEGE
- APYuGFHT0yhgUj559/kv4GP1cAg7Kl4ArWSlMWQXCiRC+jPoSkHO+jEeaM1jIKZXBGWr
- KEfAR49kt+x7xxabC9GKLtvCTeWC44sglA/lMw809r8fCbEtE3H2GnNMIMnOEJlMr+mQ
- 8ujRnKtExjttfYp+8ceStldpS73Xeg91qJnJe1W3JhnvZ4qBvN5NxfZEhfogxIgBPQJs
- GiFw==
-X-Gm-Message-State: AOJu0Yxb7ITQHaHR9R2Mt0N+U8R0X9TO4kzSye7tdfFfJPJMYmvrNIUV
- 4u8zSWSScilJTTGlsIzHld1D4rlgwsPmSzDVJVUneQ==
-X-Google-Smtp-Source: AGHT+IEpVZkv4zcUJV/eu215ySZ5DQvWCkLQaPhDtcwfmse9yoIt9D4zBPde5hl5D/W0yzFutbqADYWwlp+oqmChJVs=
-X-Received: by 2002:a05:6512:3255:b0:500:78ee:4cd7 with SMTP id
- c21-20020a056512325500b0050078ee4cd7mr70887lfr.23.1694731415090; Thu, 14 Sep
- 2023 15:43:35 -0700 (PDT)
+ bh=KxEd3Kel1ce1GLkybEQUe4FzSLPhWsLqId9zJLPPiec=;
+ b=RXSTLFrugSBDQMR4G71iRWMRP6okQyAnMn25yVhvlzZ9SAgKXcLuqHmtdaUOyZi4gT
+ 7ZWcDyTYc93EfDyXrIA9qzrRs7BIfD2CAznpttxhs8zuUeFvJWXnb0FSsYQgCxOShw3t
+ 2uKZo/esWv+3GUpXHGy2lWRaU7V1aN085klqI1kR1hVldYVJO4qEEvAz1dX/kAZ/b2ZY
+ UAmuyWeyK+aUpvHH6Bh8QFUP10dDJidZr3AL8hPtg9CpOvWSw6ru43PgdGt/UwbsLMxf
+ CnpO7dChH1RKdO8UB8B9+hA0ynKTJMw301LfR6/T6KzdSFmx1ILwRQKjSC/Lw0aq/RVN
+ TDSw==
+X-Gm-Message-State: AOJu0Yxu7tOthZdqY2odktozJZBLwNnMux2tY46l91z3IJMB9CCEYsWl
+ Iize/KirjtCCdfANxdLYopECoMTMwpxLWq0AKN8x9g==
+X-Google-Smtp-Source: AGHT+IFjihhTBR/9fCW/T4Pk2gw8YVAFcfYiE8Y7/g708FyWwKTBPGkg2mSeTW0iXXlM4eng6yJksXZDeJNZ5ujP3wc=
+X-Received: by 2002:a17:906:c451:b0:9a2:23cd:f05a with SMTP id
+ ck17-20020a170906c45100b009a223cdf05amr6036223ejb.76.1694731416775; Thu, 14
+ Sep 2023 15:43:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230913161633.999542-1-massimo.pegorer+oss@gmail.com>
-In-Reply-To: <20230913161633.999542-1-massimo.pegorer+oss@gmail.com>
+References: <20230906213015.203437-1-marek.vasut+renesas@mailbox.org>
+ <169472311537.1507631.3823107473012828432.b4-ty@konsulko.com>
+In-Reply-To: <169472311537.1507631.3823107473012828432.b4-ty@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 14 Sep 2023 16:43:24 -0600
-Message-ID: <CAPnjgZ1V+7CXn90HPxvMSDaC5iihfsvjsJ4yDuOonOeV=2mX4w@mail.gmail.com>
-Subject: Re: [PATCH v2] binman: doc: fix reference tag placement for Logging
- section
-To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Thu, 14 Sep 2023 16:43:25 -0600
+Message-ID: <CAPnjgZ032j0Pyh=AMLjf8=Z8PrcTpVsu7fy3MOwvfccJ9HNW+Q@mail.gmail.com>
+Subject: Re: [PATCH 00/35] treewide: Remove unused NEEDS_MANUAL_RELOC code bits
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,22 +81,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 Sept 2023 at 10:16, Massimo Pegorer
-<massimo.pegorer+oss@gmail.com> wrote:
+On Thu, 14 Sept 2023 at 14:25, Tom Rini <trini@konsulko.com> wrote:
 >
-> Move BinmanLogging reference tag after section "Signing FIT container
-> with private key in an image" and just before section "Logging".
-> Remove meaningless line with incomplete sentence.
+> On Wed, 06 Sep 2023 23:29:40 +0200, Marek Vasut wrote:
 >
-> Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
-> Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
-> Changes in v2:
-> - Removed incomplete sentence (confirmed by Simon)
+> > The last user of the NEEDS_MANUAL_RELOC has been removed in commit
+> > 26af162ac8f8 ("arch: m68k: Implement relocation")
+> > Remove now unused NEEDS_MANUAL_RELOC code.
+> >
+> > This is a follow up on way over decade old commit
+> > 2e5167ccad93 ("Replace CONFIG_RELOC_FIXUP_WORKS by CONFIG_NEEDS_MANUAL_RELOC")
+> > "
+> > By now, the majority of architectures have working relocation
+> > support, so the few remaining architectures have become exceptions.
+> > To make this more obvious, we make working relocation now the default
+> > case, and flag the remaining cases with CONFIG_NEEDS_MANUAL_RELOC.
+> > "
+> > It took a bit longer than expected, but now we can really sunset
+> > CONFIG_NEEDS_MANUAL_RELOC.
+> >
+> > [...]
 >
->  tools/binman/binman.rst | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
->
+> Applied to u-boot/next, thanks!
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+yay, thanks indeed!
