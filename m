@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10EBDEDE9A0
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 10:17:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D952EDE99C
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 10:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8BED86C87;
-	Thu, 14 Sep 2023 12:16:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 5C51986A82;
+	Thu, 14 Sep 2023 12:21:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="vjDnrC5R";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="H1IYT0+o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9603886A82; Thu, 14 Sep 2023 12:16:50 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ADCDE86A8F; Thu, 14 Sep 2023 12:21:34 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A6C686680
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 12:16:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72A3D86907
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 12:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9ada2e6e75fso107435266b.2
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 03:16:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1694686608; x=1695291408; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zr0YqkQBOOo4o0l4syMnFCyXS1o64AcCVJBKMNU6ddw=;
- b=vjDnrC5RattBie/6ig0YlrF1diYgvGPeXiKYbjaoX0SZP84tyrQtadexdkitSAYlFl
- Fo5bbh1LY3dfPyG/7yQkVVdIjuyxdDq7yKc5H0xmrWdPo5eczHOjkRRwYQ+eU4DbChGL
- CAncrsUyKa5zcZ5eOK6+8K1e+rAJHSDrOD6ITy14IbV3GZsR2QPHGMCJwTH2EFoErmoh
- Fg1UUAbNHWC/Ysb5uhRUYbSVW0zZFPEv3ftdCkLojrH6BY7acp0HUITf0EHm40QT7a+2
- E8MtYdjA2R8X5RjlgPMpvnFj9d2tX/PeEvUvsgQDXE8hJZC8wvV/yJGqxg/gDWcGAKco
- AMog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694686608; x=1695291408;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zr0YqkQBOOo4o0l4syMnFCyXS1o64AcCVJBKMNU6ddw=;
- b=OLUBQe+poOOqF7W+HDevWQ3uDDdb1D/cvJUIAmWxv1l+XzPhlAnm12UZB+M/gdiHox
- RsGDmslmZNwhM4FfoSl2UOmDDifaL7UN14o9pCSwigxcp+j2T0BOz8Q4b35jHIFl28NL
- WOqhFqUwMetTcKSwZJkhToFfful+FyJttIKefyO1CNL/1Vhhypf7MAD8aenPepyER0dp
- BEZN0/Q456i2R1OLyoSA6eZ+btYzDIJPB2U/xjpOvdHVNGaHpV1W8koL5bD44ngfbpXJ
- +t5BD3zEmQptifTJrBlBFzK/80WCd4/7xyvkP4kddHENcuDaIkrXrRPsgmDjhBa+R3E/
- bdGQ==
-X-Gm-Message-State: AOJu0YwHQq8lXzKXLw8ThMG1HUM5rRHnba4OD95R5fxkjJn7+WhlHsE6
- niqL0+MwaZz5/GANgzCoS2ymOg==
-X-Google-Smtp-Source: AGHT+IFL/9UF4gQG/5l53DrKnAltA0n7Q4sOpmUYZz8MpBbYpfmGf2OvNk28fKe7RNji9KLqc9faMA==
-X-Received: by 2002:a17:907:2cf5:b0:99b:de31:6666 with SMTP id
- hz21-20020a1709072cf500b0099bde316666mr3828125ejc.22.1694686608249; 
- Thu, 14 Sep 2023 03:16:48 -0700 (PDT)
-Received: from fedora.. (dh207-96-100.xnet.hr. [88.207.96.100])
- by smtp.googlemail.com with ESMTPSA id
- y3-20020a17090629c300b009929d998abcsm783253eje.209.2023.09.14.03.16.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 03:16:47 -0700 (PDT)
-From: Robert Marko <robert.marko@sartura.hr>
-To: sr@denx.de,
-	u-boot@lists.denx.de
-Cc: luka.perkov@sartura.hr,
-	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH 3/3] arm: mvebu: eDPU: support new board revision
-Date: Thu, 14 Sep 2023 12:16:34 +0200
-Message-ID: <20230914101642.1603383-3-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230914101642.1603383-1-robert.marko@sartura.hr>
-References: <20230914101642.1603383-1-robert.marko@sartura.hr>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1694686883; x=1695291683; i=xypron.glpk@gmx.de;
+ bh=/YOxKxAimxEHAsTA0ssHDgAe/3uTb+zFaiUTlEz1HbM=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=H1IYT0+oJaw+pbeV8YY2Ki9PxHuoXngIbUOrQrZP9YOlVuRqE77AF2v+jvzL1QsPS42rb4UG7+J
+ YkkM0ZwjRaramHKMzY/PhrV40WphEkY1BOkMrfux0ykKtFHLBdfHwExqDuj7H9C7bSzTlk/WkVqjB
+ Tisv08t5TlHIFMciCHo8tXYy43AOkkkZRewut/hddiTlutO2Etp1kcWhq57xVhRJUUouPufL17Giz
+ jOz5fseLj+IehZ86epA3vM9ExLfS21yxROvm/YW4OAX23epQDTvFBO7iXEwup2ueByGW6MkHhJNgC
+ gp4e484wgxGoWnRryvsDJJgjLfTPSCQR4L7w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MZTqW-1rC1Sv2aSk-00WVLO; Thu, 14
+ Sep 2023 12:21:23 +0200
+Message-ID: <fbac1b44-f2fe-42c1-af62-7a882e4737be@gmx.de>
+Date: Thu, 14 Sep 2023 12:21:12 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] riscv: enable multi-range memory layout
+To: "Wu, Fei" <fei2.wu@intel.com>, Anup Patel <apatel@ventanamicro.com>
+Cc: rick@andestech.com, ycliang@andestech.com, bmeng.cn@gmail.com,
+ sjg@chromium.org, u-boot@lists.denx.de, pali@kernel.org,
+ andrei.warkentin@intel.com, sunilvl@ventanamicro.com
+References: <20230914053055.745507-1-fei2.wu@intel.com>
+ <5D4FDDF5-5DEB-4A02-A423-C54662CCBFF0@gmx.de>
+ <c23a28ff-475d-0921-502f-f475b0e51ebd@intel.com>
+ <967f8765-67ac-48ff-970b-da8e431b5009@gmx.de>
+ <60f816cc-8372-0628-fb1a-0073dfd87361@intel.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <60f816cc-8372-0628-fb1a-0073dfd87361@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:fUVoAoSmWh8Ns5Y4Z7N/1P+jPg7BqunLy7qaPkADn/HYxtZ+nG3
+ mwJTsHmdm8rzpPcTOct01XuMeR4ok/JJt+8FouDYtm3JfYORNiOYUaHYjfSIeLtKOKSQke0
+ F6PS+TC0faUwuVzDvSGokVuZj3yi7dKbKHoWKbzQGBbPUbnEBt1y/+cxxGuCqinmFNhT0q8
+ TrN4TeAYA7TsqJiHVZ6QQ==
+UI-OutboundReport: notjunk:1;M01:P0:JfU7aAsZU8c=;6mJ12JJM5FPkGguOk87r0kvLhf8
+ x78SWs9jIZ9iNkcETnJ5/yR+I1rDuJvOLYJtG0lxTDoAE0+HbhCYBme3tf1HFz/B7OYeu34kA
+ fbmV63Ydgb+WustgyDJwm/pgcnJSlM+kjL83ivssW38z24ua2HlKpn3qNpT3S13tpSG/DUfa+
+ mvkxtVsFSQ9zpXY5zq8aKSwLp+VxoC8076ktMXJ0JJ5Oel/x1IjP21h+FBZNh9C+2l6HkHl6N
+ 6j2Ge46vMOLhmSoDYfq6uKHqkq6DfVQEEyiT8BNCVyQHLXylmtD457MVurPlTp1/S4vlfYLiv
+ ECWjUl5ZNcgOymDjHq6sSkH0B7T+kT04qPYGgjzmsNjS6jwLzgkLU3ZZPsSsFT1tyU8udbPIx
+ fwOfHKKL75Ca0xKvYXvTl9zokuYg2VzdBn1YpLKO5mJEf9BHJPiVZ62ywyJkR8ZWiapxi5f8D
+ 30A4kLS9VZp5LASX+xsmhvOI9ZJETbXrRvPpp+x5WrNxi2n9mLYlS+a2XHLI1S2AMw/wPHs1z
+ dMrU7h0Wqb+gJ5FOVytQ4EaKQSsPrn3hctpehbN+nzxRHzZiXl4Y9sG5hdvxUacLIvWvjK5QK
+ Mmt4DR3qgK2pUZWMXhn55flVW8RR53rMHHyADTlw7WAASxYZ8+57mnXqKx8z33Lk7LvQ9cxud
+ 9B52rs9l9423+NbAS1u3vq45uoYXuWbAjxEVcKzgfMPcv41wnQxC0dhcPTTo8Tn1P9UwtWnrz
+ wu3Zq2KXuVgr02fM1dqMThfogW5aU1hrQPS4Pw5VRvWX/q7zF82N9n4hVsM9LvML9Q+mgn2rB
+ bhgSbbh7IlL9erbswjdt6OBvGdn++hPP9ieJO3fNzoI8hs/yeRGifoBO/AW8BwYiykMvezMzF
+ uPrgy1/rYts4csPdhjvCspFEQtkKn0JU0WKJDV9yCCb+/nodHjOcLsfll4I5j4gBRPEvncs4V
+ P5HE1gpbRLGo4Q9vdDgxzqdIxTk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,306 +92,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a new eDPU revision that uses Marvell 88E6361 switch onboard.
-We can rely on detecting the switch to enable and fixup the Linux DTS
-so a single DTS can be used.
+On 9/14/23 09:42, Wu, Fei wrote:
+> On 9/14/2023 3:20 PM, Heinrich Schuchardt wrote:
+>> On 9/14/23 08:48, Wu, Fei wrote:
+>>> On 9/14/2023 2:05 PM, Heinrich Schuchardt wrote:
+>>>>
+>>>>
+>>>> Am 14. September 2023 07:30:55 MESZ schrieb Fei Wu <fei2.wu@intel.com=
+>:
+>>>>> In order to enable PCIe passthrough on qemu riscv, the physical memo=
+ry
+>>>>> range between 3GB and 4GB is reserved. Therefore if guest has 4GB ra=
+m,
+>>>>> two ranges are created as [2G, 3G) and [4G, 7G), currently u-boot se=
+ts
+>>>>> ram_top to 4G - 1 if the gd->ram_top is above 4G in
+>>>>
+>>>> This should move to 7GiB - 1 in your example on riscv64.
+>>>>
+>>> I'm describing the current implementation of board_get_usable_ram_top(=
+)
+>>> in ./arch/riscv/cpu/generic/dram.c. Do you mean this function should b=
+e
+>>> changed? Is the comment about 32bit DMA device still valid?
+>>>
+>>> phys_size_t board_get_usable_ram_top(phys_size_t total_size)
+>>> {
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Ensure that =
+we run from first 4GB so that all
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * addresses us=
+ed by U-Boot are 32bit addresses.
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * This in-turn=
+ ensures that 32bit DMA capablehe
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * devices work=
+ fine because DMA mapping APIs will
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * provide 32bi=
+t DMA addresses only.
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (gd->ram_top >=3D=
+ SZ_4G)
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 return SZ_4G - 1;
+>>>
+>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return gd->ram_top;
+>>> }
+>>
+>> The comment above says 32bit DMA is board specific and not architecture
+>> specific. So it is wrong to have this board_get_usable_ram_top()
+>> function on architecture level. It makes usage of devices with all
+>> memory above 4 GiB impossible.
 
-There is currently no support for the 88E6361 switch and thus no working
-networking in U-Boot, so we disable both ports.
+@Anup:
 
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
----
- arch/arm/dts/armada-3720-eDPU-u-boot.dtsi |  13 ++-
- arch/arm/dts/armada-3720-eDPU.dts         |  47 ++++++++
- board/Marvell/mvebu_armada-37xx/board.c   | 125 ++++++++++++++++++++++
- configs/eDPU_defconfig                    |   2 +
- 4 files changed, 182 insertions(+), 5 deletions(-)
+The generic code was introduced by your patch 26f4fd1cb4f6 ("riscv:
+generic: Ensure that U-Boot runs within 4GB for 64bit systems").
 
-diff --git a/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi b/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi
-index cb02b70e54..c3d450dd83 100644
---- a/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi
-+++ b/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi
-@@ -32,14 +32,17 @@
- 	bootph-all;
- };
- 
--&eth0 {
--	/* G.hn does not work without additional configuration */
--	status = "disabled";
--};
--
- &eth1 {
- 	fixed-link {
- 		speed = <1000>;
- 		full-duplex;
- 	};
- };
-+
-+/*
-+ * eDPU v2 has a MV88E6361 switch on the MDIO bus and U-boot is used
-+ * to patch the Linux DTS if its found so enable MDIO by default.
-+ */
-+&mdio {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/armada-3720-eDPU.dts b/arch/arm/dts/armada-3720-eDPU.dts
-index 57fc698e55..d6d37a1f6f 100644
---- a/arch/arm/dts/armada-3720-eDPU.dts
-+++ b/arch/arm/dts/armada-3720-eDPU.dts
-@@ -12,3 +12,50 @@
- &eth0 {
- 	phy-mode = "2500base-x";
- };
-+
-+/*
-+ * External MV88E6361 switch is only available on v2 of the board.
-+ * U-Boot will enable the MDIO bus and switch nodes.
-+ */
-+&mdio {
-+	status = "disabled";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&smi_pins>;
-+
-+	/* Actual device is MV88E6361 */
-+	switch: switch@0 {
-+		compatible = "marvell,mv88e6190";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		reg = <0>;
-+		status = "disabled";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				label = "cpu";
-+				phy-mode = "2500base-x";
-+				managed = "in-band-status";
-+				ethernet = <&eth0>;
-+			};
-+
-+			port@9 {
-+				reg = <9>;
-+				label = "downlink";
-+				phy-mode = "2500base-x";
-+				managed = "in-band-status";
-+			};
-+
-+			port@a {
-+				reg = <10>;
-+				label = "uplink";
-+				phy-mode = "2500base-x";
-+				managed = "in-band-status";
-+				sfp = <&sfp_eth1>;
-+			};
-+		};
-+	};
-+};
-diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
-index 6527155c6e..6d633e94f3 100644
---- a/board/Marvell/mvebu_armada-37xx/board.c
-+++ b/board/Marvell/mvebu_armada-37xx/board.c
-@@ -13,6 +13,7 @@
- #include <mmc.h>
- #include <miiphy.h>
- #include <phy.h>
-+#include <fdt_support.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch/cpu.h>
-@@ -49,6 +50,7 @@ DECLARE_GLOBAL_DATA_PTR;
- /* Single-chip mode */
- /* Switch Port Registers */
- #define MVEBU_SW_LINK_CTRL_REG		(1)
-+#define MVEBU_SW_PORT_SWITCH_ID		(3)
- #define MVEBU_SW_PORT_CTRL_REG		(4)
- #define MVEBU_SW_PORT_BASE_VLAN		(6)
- 
-@@ -56,6 +58,8 @@ DECLARE_GLOBAL_DATA_PTR;
- #define MVEBU_G2_SMI_PHY_CMD_REG	(24)
- #define MVEBU_G2_SMI_PHY_DATA_REG	(25)
- 
-+#define SWITCH_88E6361_PRODUCT_NUMBER	0x2610
-+
- /*
-  * Memory Controller Registers
-  *
-@@ -72,6 +76,27 @@ DECLARE_GLOBAL_DATA_PTR;
- #define A3700_MC_CTRL2_SDRAM_TYPE_DDR3	2
- #define A3700_MC_CTRL2_SDRAM_TYPE_DDR4	3
- 
-+static bool is_edpu_plus(void)
-+{
-+	struct udevice *bus;
-+	ofnode node;
-+	int val;
-+
-+	node = ofnode_by_compatible(ofnode_null(), "marvell,orion-mdio");
-+	if (!ofnode_valid(node) ||
-+	    uclass_get_device_by_ofnode(UCLASS_MDIO, node, &bus) ||
-+	    device_probe(bus)) {
-+		printf("Cannot find MDIO bus\n");
-+		return -ENODEV;
-+	}
-+
-+	val = dm_mdio_read(bus, 0x0, MDIO_DEVAD_NONE, MVEBU_SW_PORT_SWITCH_ID);
-+	if (val == SWITCH_88E6361_PRODUCT_NUMBER)
-+		return true;
-+	else
-+		return false;
-+}
-+
- int board_early_init_f(void)
- {
- 	return 0;
-@@ -353,6 +378,41 @@ static int espressobin_last_stage_init(void)
- 	return 0;
- }
- 
-+static int edpu_plus_last_stage_init(void)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	if (is_edpu_plus()) {
-+		ret = uclass_get_device_by_name(UCLASS_ETH,
-+						"ethernet@40000",
-+						&dev);
-+		if (!ret) {
-+			device_remove(dev, DM_REMOVE_NORMAL);
-+			device_unbind(dev);
-+		}
-+
-+		/* Currently no networking support on the eDPU+ board */
-+		ret = uclass_get_device_by_name(UCLASS_ETH,
-+						"ethernet@30000",
-+						&dev);
-+		if (!ret) {
-+			device_remove(dev, DM_REMOVE_NORMAL);
-+			device_unbind(dev);
-+		}
-+	} else {
-+		ret = uclass_get_device_by_name(UCLASS_ETH,
-+						"ethernet@30000",
-+						&dev);
-+		if (!ret) {
-+			device_remove(dev, DM_REMOVE_NORMAL);
-+			device_unbind(dev);
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- /* Bring-up board-specific network stuff */
- int last_stage_init(void)
- {
-@@ -360,6 +420,9 @@ int last_stage_init(void)
- 	if (of_machine_is_compatible("globalscale,espressobin"))
- 		return espressobin_last_stage_init();
- 
-+	if (of_machine_is_compatible("methode,edpu"))
-+		return edpu_plus_last_stage_init();
-+
- 	return 0;
- }
- #endif
-@@ -460,12 +523,74 @@ static int espressobin_fdt_setup(void *blob)
- 	return 0;
- }
- 
-+static int edpu_plus_fdt_setup(void *blob)
-+{
-+	const char *ports[] = { "downlink", "uplink" };
-+	uint8_t mac[ETH_ALEN];
-+	const char *path;
-+	int i, ret;
-+
-+	if (is_edpu_plus()) {
-+		ret = fdt_set_status_by_compatible(blob,
-+						   "marvell,orion-mdio",
-+						   FDT_STATUS_OKAY);
-+		if (ret)
-+			printf("Failed to enable MDIO!\n");
-+
-+		ret = fdt_set_status_by_alias(blob,
-+					      "ethernet1",
-+					      FDT_STATUS_DISABLED);
-+		if (ret)
-+			printf("Failed to disable ethernet1!\n");
-+
-+		path = fdt_get_alias(blob, "ethernet0");
-+		if (path)
-+			do_fixup_by_path_string(blob, path, "phy-mode", "2500base-x");
-+		else
-+			printf("Failed to update ethernet0 phy-mode to 2500base-x!\n");
-+
-+		ret = fdt_set_status_by_compatible(blob,
-+						   "marvell,mv88e6190",
-+						   FDT_STATUS_OKAY);
-+		if (ret)
-+			printf("Failed to enable MV88E6361!\n");
-+
-+		/*
-+		 * MAC-s for Uplink and Downlink ports are stored under
-+		 * non standard variable names, so lets manually fixup the
-+		 * switch port nodes to have the desired MAC-s.
-+		 */
-+		for (i = 0; i < 2; i++) {
-+			if (eth_env_get_enetaddr(ports[i], mac)) {
-+				do_fixup_by_prop(blob,
-+						 "label",
-+						 ports[i],
-+						 strlen(ports[i]) + 1,
-+						 "mac-address",
-+						 mac, ARP_HLEN, 1);
-+
-+				do_fixup_by_prop(blob,
-+						 "label",
-+						 ports[i],
-+						 strlen(ports[i]) + 1,
-+						 "local-mac-address",
-+						 mac, ARP_HLEN, 1);
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
- #ifdef CONFIG_ENV_IS_IN_SPI_FLASH
- 	if (of_machine_is_compatible("globalscale,espressobin"))
- 		return espressobin_fdt_setup(blob);
- #endif
-+	if (of_machine_is_compatible("methode,edpu"))
-+		return edpu_plus_fdt_setup(blob);
-+
- 	return 0;
- }
- #endif
-diff --git a/configs/eDPU_defconfig b/configs/eDPU_defconfig
-index 77ea2b2eec..d8bf35330d 100644
---- a/configs/eDPU_defconfig
-+++ b/configs/eDPU_defconfig
-@@ -17,12 +17,14 @@ CONFIG_DEBUG_UART=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
-+CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_LAST_STAGE_INIT=y
- CONFIG_SYS_MAXARGS=32
- CONFIG_SYS_PBSIZE=1048
- # CONFIG_CMD_ELF is not set
--- 
-2.41.0
+Which devices have that 32bit DMA issue?
+
+fu540, fu740, jh7110 already have a cpu specific implementation and
+don't need the generic one.
+
+>>
+>> It tried to pass through a SATA controller but received an error:
+>>
+>> # modprobe vfio-pci
+>> # echo 0000:06:00.0 > /sys/bus/pci/drivers/ahci/unbind
+>> # echo 1022 7091 > /sys/bus/pci/drivers/vfio-pci/new_id
+>> # qemu-system-riscv64 -kernel u-boot.bin -nographic -M virt -m 4G
+>> -device vfio-pci,host=3D0000:06:00.0
+>> qemu-system-riscv64: -device vfio-pci,host=3D0000:06:00.0: VFIO_MAP_DMA
+>> failed: Invalid argument
+>> qemu-system-riscv64: -device vfio-pci,host=3D0000:06:00.0: vfio
+>> 0000:06:00.0: failed to setup container for group 5: memory listener
+>> initialization failed: Region riscv_virt_board.ram:
+>> vfio_dma_map(0x55adbde66f70, 0x80000000, 0x100000000, 0x7fcd6fe00000) =
+=3D
+>> -22 (Invalid argument)
+>>
+>> With which version of QEMU were you able to use PCI pass through?
+>>
+> Please try this:
+>
+> base: ccb86f079a9e
+> patch:
+> https://lore.kernel.org/all/CAKmqyKMtAzt5saCUMd4vXYfgAQibpzQJAhtTSuSb+ye=
+KhcYpfw@mail.gmail.com/T/
+
+@Fei
+
+With that patch I see the two memory banks in QEMU but when I attach a
+vfio-pci device my whole system crashes and becomes unresponsive but
+that is not a U-Boot issue.
+
+Best regards
+
+Heinrich
+
+>
+> Thanks,
+> Fei.
+>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>>
+>>>>> board_get_usable_ram_top(), but that address is not backed by ram. T=
+his
+>>>>> patch selects the lowest range instead.
+>>>>>
+>>>>> Signed-off-by: Fei Wu <fei2.wu@intel.com>
+>>>>> ---
+>>>>> arch/riscv/cpu/generic/dram.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 | 2 +-
+>>>>> configs/qemu-riscv64_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=
+ 2 +-
+>>>>> configs/qemu-riscv64_smode_defconfig | 2 +-
+>>>>> configs/qemu-riscv64_spl_defconfig=C2=A0=C2=A0 | 2 +-
+>>>>> 4 files changed, 4 insertions(+), 4 deletions(-)
+>>>>>
+>>>>> diff --git a/arch/riscv/cpu/generic/dram.c
+>>>>> b/arch/riscv/cpu/generic/dram.c
+>>>>> index 44e11bd56c..fb53a57b4e 100644
+>>>>> --- a/arch/riscv/cpu/generic/dram.c
+>>>>> +++ b/arch/riscv/cpu/generic/dram.c
+>>>>> @@ -13,7 +13,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>>>>>
+>>>>> int dram_init(void)
+>>>>> {
+>>>>> -=C2=A0=C2=A0=C2=A0 return fdtdec_setup_mem_size_base();
+>>>>> +=C2=A0=C2=A0=C2=A0 return fdtdec_setup_mem_size_base_lowest();
+>>>>
+>>>> Linaro is working on allowing to download a distro image via https
+>>>> and installing from a RAM disk.
+>>>>
+>>>> We should not artificially reduce the RAM size available for U-Boot
+>>>> by restricting ourselfs to 1 GiB.
+>>>>
+>>>> We must ensure that ram top is in the upper range.
+>>>>
+>>> How do they handle the case of >4GB? board_get_usable_ram_top() attach=
+ed
+>>> above always returns <4GB. And it seems like
+>>> fdtdec_setup_mem_size_base() cannot ensure the upper one is picked, it
+>>> just picks up one, but which one is selected depending on fdt.
+>>>
+>>> Thanks,
+>>> Fei.
+>>>
+>>>> Best regards
+>>>>
+>>>> Heinrich
+>>>>
+>>>>> }
+>>>>>
+>>>>> int dram_init_banksize(void)
+>>>>> diff --git a/configs/qemu-riscv64_defconfig
+>>>>> b/configs/qemu-riscv64_defconfig
+>>>>> index 9a8bbef192..aa55317d26 100644
+>>>>> --- a/configs/qemu-riscv64_defconfig
+>>>>> +++ b/configs/qemu-riscv64_defconfig
+>>>>> @@ -1,6 +1,6 @@
+>>>>> CONFIG_RISCV=3Dy
+>>>>> CONFIG_SYS_MALLOC_LEN=3D0x800000
+>>>>> -CONFIG_NR_DRAM_BANKS=3D1
+>>>>> +CONFIG_NR_DRAM_BANKS=3D2
+>>>>> CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>>>>> CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
+>>>>> CONFIG_ENV_SIZE=3D0x20000
+>>>>> diff --git a/configs/qemu-riscv64_smode_defconfig
+>>>>> b/configs/qemu-riscv64_smode_defconfig
+>>>>> index 1d0f021ade..de08a49dab 100644
+>>>>> --- a/configs/qemu-riscv64_smode_defconfig
+>>>>> +++ b/configs/qemu-riscv64_smode_defconfig
+>>>>> @@ -1,6 +1,6 @@
+>>>>> CONFIG_RISCV=3Dy
+>>>>> CONFIG_SYS_MALLOC_LEN=3D0x800000
+>>>>> -CONFIG_NR_DRAM_BANKS=3D1
+>>>>> +CONFIG_NR_DRAM_BANKS=3D2
+>>>>> CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>>>>> CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
+>>>>> CONFIG_ENV_SIZE=3D0x20000
+>>>>> diff --git a/configs/qemu-riscv64_spl_defconfig
+>>>>> b/configs/qemu-riscv64_spl_defconfig
+>>>>> index bb10145e6e..66dc2a1dd9 100644
+>>>>> --- a/configs/qemu-riscv64_spl_defconfig
+>>>>> +++ b/configs/qemu-riscv64_spl_defconfig
+>>>>> @@ -1,6 +1,6 @@
+>>>>> CONFIG_RISCV=3Dy
+>>>>> CONFIG_SYS_MALLOC_LEN=3D0x800000
+>>>>> -CONFIG_NR_DRAM_BANKS=3D1
+>>>>> +CONFIG_NR_DRAM_BANKS=3D2
+>>>>> CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>>>>> CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x80200000
+>>>>> CONFIG_ENV_SIZE=3D0x20000
+>>>
+>>
+>
 
