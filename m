@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC256EEAA55
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:23:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25F3EEAA53
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:23:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A40186E46;
+	by phobos.denx.de (Postfix) with ESMTP id 69E1A87085;
 	Thu, 14 Sep 2023 18:21:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GluuAknM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Heqnjv4h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB58B87083; Thu, 14 Sep 2023 18:21:14 +0200 (CEST)
+ id B7E0687080; Thu, 14 Sep 2023 18:21:14 +0200 (CEST)
 Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
  [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3C5787080
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:21:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A498586672
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
 Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2b962535808so19091251fa.0
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:21:11 -0700 (PDT)
+ 38308e7fff4ca-2bd0d135ca3so19044381fa.3
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694708471; x=1695313271; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694708469; x=1695313269; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Enmy0689N7W2ZgwZJNW/re8YJQVeDPBPlmUCaBkcQNw=;
- b=GluuAknMK0HAY4xCc3KaoPK8GJFgnygSctWnZojKdyNFHG4sF5r2pz9Y214+GtyRa4
- nt9PTgabfjX94NJGsXHtyawVhekZ8dj5Err6rAKFLIyqGhdg88nNCMxodNmHvWTkWZj/
- +kv/eZ3G7yZqzEygjX44prBCDMEG6O/Tse9q+I+YlBC7CfUc3r8PSoywsywSiy+HCTUo
- 1s5HVa7ExDZe4PaBcqucNTN776cDOSqw41ISQUichLn5Wzey2gd1YEzSrnQSbEuecger
- LQ2FJgYC4WuE3+zWj92JW0NLDpDcXqqUraCwOUjVttgZ+1XG1kqaKS7zR/HU7ECiaAlC
- 8zqA==
+ bh=E2ziTbeXz5Mw5Zsh+PXRJwRlKMm+1xFvTuTYPCWU9yo=;
+ b=Heqnjv4hBecb9QiqEYTmjYEPG00F+sbUZdo6cTWVG8D6KDTTNmpYrtIi4uyKA67E5x
+ rPnFhVrdtUWuNQGJgaXTNmICy+Bmul1MsrEEYdo+Gwr3kvxO2bwXTT6fODMuw3/QvVTp
+ vk6Mo3RwsxUXBlNJeVCsp5Hb9eq5D8nSuaIt4kLQk1yoU/1+HcEYaYzwq8CyhfaS7YBY
+ ybptJ4oEA8fxqLGXuHM+kpIpOxf0KRGux6k4qf+Ib8s3Ny7N3L4RWHuAtuedl4EKde2I
+ fiW+ghr5EzxQ+Wtf4MC6AvtfSH4g27jBK7H7arE00J2MgQWVWpA9Ei+8Zs7KWHCuPoT8
+ bjxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694708471; x=1695313271;
+ d=1e100.net; s=20230601; t=1694708469; x=1695313269;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Enmy0689N7W2ZgwZJNW/re8YJQVeDPBPlmUCaBkcQNw=;
- b=iOQQYcavL2OHyF5FrolI/rLNqxNo73CeIBt+BS5DhYQVrM8TSv9PFrKiwW9kxLpfDN
- Ea/sObY5idTN+tLLiHopYqWBIhEsd2fRfI7kXx1JKnewS2O5Ejkc9a/BsftLojUN1XEP
- pAt79aTjI032aedkXilORVVOfdbBhHeZeGVedlqL7Ni1lezmAchP7RAj5kuj2cQTPIhq
- lJxFW2aoIg1Va5O7KDKtO+dV3HFJhopMv3F5lap0BcVcgYIJJAly2nJ67BGMjzVcR6i8
- LTxoWkz386yJkLRIRDQ/PNNk32LjBHijkWLnx3gleQpdlQ01qj6UQp/BrD3gyYFZ26CK
- gLiA==
-X-Gm-Message-State: AOJu0YySpz5qPQFzKihrg3VlWg2cZJYGw0kY5IFMEDpJFUIwpzser8hU
- ajb6BOQq4vLLIMtmVG03O/atQ/4XiXjW0aHgwZSUKA==
-X-Google-Smtp-Source: AGHT+IGMFcVSDwy+kGe+lLAqyNncVTh7xgFf3WrC+VsA8f0NgqHfw6hNqFQsi2XanWtg2CSxZGrLdA==
-X-Received: by 2002:a2e:9197:0:b0:2bb:985f:8479 with SMTP id
- f23-20020a2e9197000000b002bb985f8479mr5357611ljg.48.1694708470966; 
- Thu, 14 Sep 2023 09:21:10 -0700 (PDT)
+ bh=E2ziTbeXz5Mw5Zsh+PXRJwRlKMm+1xFvTuTYPCWU9yo=;
+ b=Ayo6Z+LhgKXJ8F8D3sQj0IFtwwPW0+D0Qk1w9E3X9PVMab5GEpKwKEC3wFoDE03n4L
+ bSskjPaSJMurYwbx+0psvT8JA/HQ7SqaXH1fMxtK/wl5xZuMmkOO6e1xSZUpMANpC00f
+ BJEp26TfsAlWioen5seZtcOR3KnRJk2H4A/vS6o0oa11xMrgzcycMPtsRdxMd9HF7Epr
+ TfOU/T2JkmY89zBM1HKgeS7m/fOLO7wG0z0pRNArIWq05Ry/fD/395wgb95fm/lBLV5z
+ bfOhZUsqkriQDyvVXmiEryVeppWGg+dh5XZG1et+CnL/MiZmJt+nHeXb100ntUxN/DYC
+ yzSw==
+X-Gm-Message-State: AOJu0YyH7/+FzLOd1JnaP1BcTIRinUrD0Ma7xmqgH0NmmX0IyuIOhXUl
+ Aus4v9m+q20jQmqNgeEb41h/U+OW/CQWcJPgHlTCaQ==
+X-Google-Smtp-Source: AGHT+IET7EieKTHwGyWHv69bu3gWT4vTGAtQXaG5NG7qUUfIr1s2gTKzU638H1ADCp/YUvrhibtUag==
+X-Received: by 2002:a2e:8757:0:b0:2bc:b29e:8ff7 with SMTP id
+ q23-20020a2e8757000000b002bcb29e8ff7mr5759520ljj.20.1694708468502; 
+ Thu, 14 Sep 2023 09:21:08 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.21.08
+ z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.21.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:21:10 -0700 (PDT)
+ Thu, 14 Sep 2023 09:21:08 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv9 15/15] net/lwip: drop old net/wget
-Date: Thu, 14 Sep 2023 22:18:28 +0600
-Message-Id: <20230914161828.3662-16-maxim.uvarov@linaro.org>
+Subject: [PATCHv9 14/15] net/lwip: split net.h to net.h, arp.h and eth.h
+Date: Thu, 14 Sep 2023 22:18:27 +0600
+Message-Id: <20230914161828.3662-15-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230914161828.3662-1-maxim.uvarov@linaro.org>
 References: <20230914161828.3662-1-maxim.uvarov@linaro.org>
@@ -93,530 +93,463 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After which to lwip variants of working apps we need to
-drop old code with all dependencies. This commit
-drop old wget command files.
+current net.h has ethernet and protocol definitions. Protocol definitions
+overlap with lwIP protocol definitions and net.h can not be included from
+lwIP code. Splitting on logical blocks makes that work.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- include/net/wget.h |  22 ---
- net/Makefile       |   1 -
- net/net.c          |   6 -
- net/wget.c         | 440 ---------------------------------------------
- 4 files changed, 469 deletions(-)
- delete mode 100644 include/net/wget.h
- delete mode 100644 net/wget.c
+ include/net.h     | 189 +--------------------------------------------
+ include/net/arp.h |   7 ++
+ include/net/eth.h | 190 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 201 insertions(+), 185 deletions(-)
+ create mode 100644 include/net/arp.h
+ create mode 100644 include/net/eth.h
 
-diff --git a/include/net/wget.h b/include/net/wget.h
-deleted file mode 100644
-index da0920de11..0000000000
---- a/include/net/wget.h
-+++ /dev/null
-@@ -1,22 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Duncan Hare Copyright 2017
-- */
--
--/**
-- * wget_start() - begin wget
-- */
--void wget_start(void);
--
--enum wget_state {
--	WGET_CLOSED,
--	WGET_CONNECTING,
--	WGET_CONNECTED,
--	WGET_TRANSFERRING,
--	WGET_TRANSFERRED
--};
--
--#define DEBUG_WGET		0	/* Set to 1 for debug messages */
--#define SERVER_PORT		80
--#define WGET_RETRY_COUNT	30
--#define WGET_TIMEOUT		2000UL
-diff --git a/net/Makefile b/net/Makefile
-index 61930c244e..eda21f988a 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -32,7 +32,6 @@ obj-$(CONFIG_TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
- obj-$(CONFIG_CMD_WOL)  += wol.o
- obj-$(CONFIG_PROT_UDP) += udp.o
- obj-$(CONFIG_PROT_TCP) += tcp.o
--obj-$(CONFIG_CMD_WGET) += wget.o
- obj-$(CONFIG_LWIP) += lwip/
+diff --git a/include/net.h b/include/net.h
+index de7baeb121..780c51fab9 100644
+--- a/include/net.h
++++ b/include/net.h
+@@ -20,6 +20,7 @@
+ #include <time.h>
+ #include <linux/if_ether.h>
+ #include <rand.h>
++#include  <net/arp.h>
  
- # Disable this warning as it is triggered by:
-diff --git a/net/net.c b/net/net.c
-index d9e566081c..677eda26bc 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -109,7 +109,6 @@
- #include <linux/compiler.h>
- #include <test/test.h>
- #include <net/tcp.h>
--#include <net/wget.h>
- #include "arp.h"
- #include "bootp.h"
- #include "cdp.h"
-@@ -564,11 +563,6 @@ restart:
- 			nfs_start();
- 			break;
- #endif
--#if defined(CONFIG_CMD_WGET)
--		case WGET:
--			wget_start();
--			break;
--#endif
- #if defined(CONFIG_CMD_CDP)
- 		case CDP:
- 			cdp_start();
-diff --git a/net/wget.c b/net/wget.c
-deleted file mode 100644
-index 2dbfeb1a1d..0000000000
---- a/net/wget.c
-+++ /dev/null
-@@ -1,440 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
+ struct bd_info;
+ struct cmd_tbl;
+@@ -30,25 +31,6 @@ struct udevice;
+ #define DEBUG_NET_PKT 0		/* Packets on info on the network at large */
+ #define DEBUG_INT_STATE 0	/* Internal network state changes */
+ 
 -/*
-- * WGET/HTTP support driver based on U-BOOT's nfs.c
-- * Copyright Duncan Hare <dh@synoia.com> 2017
+- *	The number of receive packet buffers, and the required packet buffer
+- *	alignment in memory.
+- *
 - */
+-#define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
+-#define PKTALIGN	ARCH_DMA_MINALIGN
 -
--#include <command.h>
--#include <common.h>
--#include <display_options.h>
--#include <env.h>
--#include <image.h>
--#include <mapmem.h>
--#include <net.h>
--#include <net/tcp.h>
--#include <net/wget.h>
+-/* Number of packets processed together */
+-#define ETH_PACKETS_BATCH_RECV	32
 -
--static const char bootfile1[] = "GET ";
--static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
--static const char http_eom[] = "\r\n\r\n";
--static const char http_ok[] = "200";
--static const char content_len[] = "Content-Length";
--static const char linefeed[] = "\r\n";
--static struct in_addr web_server_ip;
--static int our_port;
--static int wget_timeout_count;
+-/* ARP hardware address length */
+-#define ARP_HLEN 6
+-/*
+- * The size of a MAC address in string form, each digit requires two chars
+- * and five separator characters to form '00:00:00:00:00:00'.
+- */
+-#define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1)
 -
--struct pkt_qd {
--	uchar *pkt;
--	unsigned int tcp_seq_num;
--	unsigned int len;
+ /* IPv4 addresses are always 32 bits in size */
+ struct in_addr {
+ 	__be32 s_addr;
+@@ -112,150 +94,7 @@ typedef void rxhand_icmp_f(unsigned type, unsigned code, unsigned dport,
+  */
+ typedef void	thand_f(void);
+ 
+-enum eth_state_t {
+-	ETH_STATE_INIT,
+-	ETH_STATE_PASSIVE,
+-	ETH_STATE_ACTIVE
 -};
 -
--/*
-- * This is a control structure for out of order packets received.
-- * The actual packet bufers are in the kernel space, and are
-- * expected to be overwritten by the downloaded image.
-- */
--static struct pkt_qd pkt_q[PKTBUFSRX / 4];
--static int pkt_q_idx;
--static unsigned long content_length;
--static unsigned int packets;
--
--static unsigned int initial_data_seq_num;
--
--static enum  wget_state current_wget_state;
--
--static char *image_url;
--static unsigned int wget_timeout = WGET_TIMEOUT;
--
--static enum net_loop_state wget_loop_state;
--
--/* Timeout retry parameters */
--static u8 retry_action;			/* actions for TCP retry */
--static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
--static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
--static int retry_len;			/* TCP retry length */
--
 -/**
-- * store_block() - store block in memory
-- * @src: source of data
-- * @offset: offset
-- * @len: length
-- */
--static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
--{
--	ulong newsize = offset + len;
--	uchar *ptr;
--
--	ptr = map_sysmem(image_load_addr + offset, len);
--	memcpy(ptr, src, len);
--	unmap_sysmem(ptr);
--
--	if (net_boot_file_size < (offset + len))
--		net_boot_file_size = newsize;
--
--	return 0;
--}
--
--/**
-- * wget_send_stored() - wget response dispatcher
+- * struct eth_pdata - Platform data for Ethernet MAC controllers
 - *
-- * WARNING, This, and only this, is the place in wget.c where
-- * SEQUENCE NUMBERS are swapped between incoming (RX)
-- * and outgoing (TX).
-- * Procedure wget_handler() is correct for RX traffic.
+- * @iobase: The base address of the hardware registers
+- * @enetaddr: The Ethernet MAC address that is loaded from EEPROM or env
+- * @phy_interface: PHY interface to use - see PHY_INTERFACE_MODE_...
+- * @max_speed: Maximum speed of Ethernet connection supported by MAC
+- * @priv_pdata: device specific plat
 - */
--static void wget_send_stored(void)
--{
--	u8 action = retry_action;
--	int len = retry_len;
--	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
--	unsigned int tcp_seq_num = retry_tcp_ack_num;
--	uchar *ptr, *offset;
+-struct eth_pdata {
+-	phys_addr_t iobase;
+-	unsigned char enetaddr[ARP_HLEN];
+-	int phy_interface;
+-	int max_speed;
+-	void *priv_pdata;
+-};
 -
--	switch (current_wget_state) {
--	case WGET_CLOSED:
--		debug_cond(DEBUG_WGET, "wget: send SYN\n");
--		current_wget_state = WGET_CONNECTING;
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
--				    tcp_seq_num, tcp_ack_num);
--		packets = 0;
--		break;
--	case WGET_CONNECTING:
--		pkt_q_idx = 0;
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
--				    tcp_seq_num, tcp_ack_num);
--
--		ptr = net_tx_packet + net_eth_hdr_size() +
--			IP_TCP_HDR_SIZE + TCP_TSOPT_SIZE + 2;
--		offset = ptr;
--
--		memcpy(offset, &bootfile1, strlen(bootfile1));
--		offset += strlen(bootfile1);
--
--		memcpy(offset, image_url, strlen(image_url));
--		offset += strlen(image_url);
--
--		memcpy(offset, &bootfile3, strlen(bootfile3));
--		offset += strlen(bootfile3);
--		net_send_tcp_packet((offset - ptr), SERVER_PORT, our_port,
--				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
--		current_wget_state = WGET_CONNECTED;
--		break;
--	case WGET_CONNECTED:
--	case WGET_TRANSFERRING:
--	case WGET_TRANSFERRED:
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
--				    tcp_seq_num, tcp_ack_num);
--		break;
--	}
--}
--
--static void wget_send(u8 action, unsigned int tcp_seq_num,
--		      unsigned int tcp_ack_num, int len)
--{
--	retry_action = action;
--	retry_tcp_ack_num = tcp_ack_num;
--	retry_tcp_seq_num = tcp_seq_num;
--	retry_len = len;
--
--	wget_send_stored();
--}
--
--void wget_fail(char *error_message, unsigned int tcp_seq_num,
--	       unsigned int tcp_ack_num, u8 action)
--{
--	printf("wget: Transfer Fail - %s\n", error_message);
--	net_set_timeout_handler(0, NULL);
--	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
--}
--
--void wget_success(u8 action, unsigned int tcp_seq_num,
--		  unsigned int tcp_ack_num, int len, int packets)
--{
--	printf("Packets received %d, Transfer Successful\n", packets);
--	wget_send(action, tcp_seq_num, tcp_ack_num, len);
--}
--
--/*
-- * Interfaces of U-BOOT
-- */
--static void wget_timeout_handler(void)
--{
--	if (++wget_timeout_count > WGET_RETRY_COUNT) {
--		puts("\nRetry count exceeded; starting again\n");
--		wget_send(TCP_RST, 0, 0, 0);
--		net_start_again();
--	} else {
--		puts("T ");
--		net_set_timeout_handler(wget_timeout +
--					WGET_TIMEOUT * wget_timeout_count,
--					wget_timeout_handler);
--		wget_send_stored();
--	}
--}
--
--#define PKT_QUEUE_OFFSET 0x20000
--#define PKT_QUEUE_PACKET_SIZE 0x800
--
--static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
--			   u8 action, unsigned int tcp_ack_num, unsigned int len)
--{
--	uchar *pkt_in_q;
--	char *pos;
--	int hlen, i;
--	uchar *ptr1;
--
--	pkt[len] = '\0';
--	pos = strstr((char *)pkt, http_eom);
--
--	if (!pos) {
--		debug_cond(DEBUG_WGET,
--			   "wget: Connected, data before Header %p\n", pkt);
--		pkt_in_q = (void *)image_load_addr + PKT_QUEUE_OFFSET +
--			(pkt_q_idx * PKT_QUEUE_PACKET_SIZE);
--
--		ptr1 = map_sysmem((phys_addr_t)pkt_in_q, len);
--		memcpy(ptr1, pkt, len);
--		unmap_sysmem(ptr1);
--
--		pkt_q[pkt_q_idx].pkt = pkt_in_q;
--		pkt_q[pkt_q_idx].tcp_seq_num = tcp_seq_num;
--		pkt_q[pkt_q_idx].len = len;
--		pkt_q_idx++;
--	} else {
--		debug_cond(DEBUG_WGET, "wget: Connected HTTP Header %p\n", pkt);
--		/* sizeof(http_eom) - 1 is the string length of (http_eom) */
--		hlen = pos - (char *)pkt + sizeof(http_eom) - 1;
--		pos = strstr((char *)pkt, linefeed);
--		if (pos > 0)
--			i = pos - (char *)pkt;
--		else
--			i = hlen;
--		printf("%.*s", i,  pkt);
--
--		current_wget_state = WGET_TRANSFERRING;
--
--		if (strstr((char *)pkt, http_ok) == 0) {
--			debug_cond(DEBUG_WGET,
--				   "wget: Connected Bad Xfer\n");
--			initial_data_seq_num = tcp_seq_num + hlen;
--			wget_loop_state = NETLOOP_FAIL;
--			wget_send(action, tcp_seq_num, tcp_ack_num, len);
--		} else {
--			debug_cond(DEBUG_WGET,
--				   "wget: Connctd pkt %p  hlen %x\n",
--				   pkt, hlen);
--			initial_data_seq_num = tcp_seq_num + hlen;
--
--			pos = strstr((char *)pkt, content_len);
--			if (!pos) {
--				content_length = -1;
--			} else {
--				pos += sizeof(content_len) + 2;
--				strict_strtoul(pos, 10, &content_length);
--				debug_cond(DEBUG_WGET,
--					   "wget: Connected Len %lu\n",
--					   content_length);
--			}
--
--			net_boot_file_size = 0;
--
--			if (len > hlen)
--				store_block(pkt + hlen, 0, len - hlen);
--
--			debug_cond(DEBUG_WGET,
--				   "wget: Connected Pkt %p hlen %x\n",
--				   pkt, hlen);
--
--			for (i = 0; i < pkt_q_idx; i++) {
--				ptr1 = map_sysmem(
--					(phys_addr_t)(pkt_q[i].pkt),
--					pkt_q[i].len);
--				store_block(ptr1,
--					    pkt_q[i].tcp_seq_num -
--					    initial_data_seq_num,
--					    pkt_q[i].len);
--				unmap_sysmem(ptr1);
--				debug_cond(DEBUG_WGET,
--					   "wget: Connctd pkt Q %p len %x\n",
--					   pkt_q[i].pkt, pkt_q[i].len);
--			}
--		}
--	}
--	wget_send(action, tcp_seq_num, tcp_ack_num, len);
--}
--
--/**
-- * wget_handler() - TCP handler of wget
-- * @pkt: pointer to the application packet
-- * @dport: destination TCP port
-- * @sip: source IP address
-- * @sport: source TCP port
-- * @tcp_seq_num: TCP sequential number
-- * @tcp_ack_num: TCP acknowledgment number
-- * @action: TCP action (SYN, ACK, FIN, etc)
-- * @len: packet length
-- *
-- * In the "application push" invocation, the TCP header with all
-- * its information is pointed to by the packet pointer.
-- */
--static void wget_handler(uchar *pkt, u16 dport,
--			 struct in_addr sip, u16 sport,
--			 u32 tcp_seq_num, u32 tcp_ack_num,
--			 u8 action, unsigned int len)
--{
--	enum tcp_state wget_tcp_state = tcp_get_tcp_state();
--
--	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
--	packets++;
--
--	switch (current_wget_state) {
--	case WGET_CLOSED:
--		debug_cond(DEBUG_WGET, "wget: Handler: Error!, State wrong\n");
--		break;
--	case WGET_CONNECTING:
--		debug_cond(DEBUG_WGET,
--			   "wget: Connecting In len=%x, Seq=%u, Ack=%u\n",
--			   len, tcp_seq_num, tcp_ack_num);
--		if (!len) {
--			if (wget_tcp_state == TCP_ESTABLISHED) {
--				debug_cond(DEBUG_WGET,
--					   "wget: Cting, send, len=%x\n", len);
--				wget_send(action, tcp_seq_num, tcp_ack_num,
--					  len);
--			} else {
--				printf("%.*s", len,  pkt);
--				wget_fail("wget: Handler Connected Fail\n",
--					  tcp_seq_num, tcp_ack_num, action);
--			}
--		}
--		break;
--	case WGET_CONNECTED:
--		debug_cond(DEBUG_WGET, "wget: Connected seq=%u, len=%x\n",
--			   tcp_seq_num, len);
--		if (!len) {
--			wget_fail("Image not found, no data returned\n",
--				  tcp_seq_num, tcp_ack_num, action);
--		} else {
--			wget_connected(pkt, tcp_seq_num, action, tcp_ack_num, len);
--		}
--		break;
--	case WGET_TRANSFERRING:
--		debug_cond(DEBUG_WGET,
--			   "wget: Transferring, seq=%x, ack=%x,len=%x\n",
--			   tcp_seq_num, tcp_ack_num, len);
--
--		if (tcp_seq_num >= initial_data_seq_num &&
--		    store_block(pkt, tcp_seq_num - initial_data_seq_num,
--				len) != 0) {
--			wget_fail("wget: store error\n",
--				  tcp_seq_num, tcp_ack_num, action);
--			return;
--		}
--
--		switch (wget_tcp_state) {
--		case TCP_FIN_WAIT_2:
--			wget_send(TCP_ACK, tcp_seq_num, tcp_ack_num, len);
--			fallthrough;
--		case TCP_SYN_SENT:
--		case TCP_SYN_RECEIVED:
--		case TCP_CLOSING:
--		case TCP_FIN_WAIT_1:
--		case TCP_CLOSED:
--			net_set_state(NETLOOP_FAIL);
--			break;
--		case TCP_ESTABLISHED:
--			wget_send(TCP_ACK, tcp_seq_num, tcp_ack_num,
--				  len);
--			wget_loop_state = NETLOOP_SUCCESS;
--			break;
--		case TCP_CLOSE_WAIT:     /* End of transfer */
--			current_wget_state = WGET_TRANSFERRED;
--			wget_send(action | TCP_ACK | TCP_FIN,
--				  tcp_seq_num, tcp_ack_num, len);
--			break;
--		}
--		break;
--	case WGET_TRANSFERRED:
--		printf("Packets received %d, Transfer Successful\n", packets);
--		net_set_state(wget_loop_state);
--		break;
--	}
--}
--
--#define RANDOM_PORT_START 1024
--#define RANDOM_PORT_RANGE 0x4000
--
--/**
-- * random_port() - make port a little random (1024-17407)
-- *
-- * Return: random port number from 1024 to 17407
-- *
-- * This keeps the math somewhat trivial to compute, and seems to work with
-- * all supported protocols/clients/servers
-- */
--static unsigned int random_port(void)
--{
--	return RANDOM_PORT_START + (get_timer(0) % RANDOM_PORT_RANGE);
--}
--
--#define BLOCKSIZE 512
--
--void wget_start(void)
--{
--	image_url = strchr(net_boot_file_name, ':');
--	if (image_url > 0) {
--		web_server_ip = string_to_ip(net_boot_file_name);
--		++image_url;
--		net_server_ip = web_server_ip;
--	} else {
--		web_server_ip = net_server_ip;
--		image_url = net_boot_file_name;
--	}
--
--	debug_cond(DEBUG_WGET,
--		   "wget: Transfer HTTP Server %pI4; our IP %pI4\n",
--		   &web_server_ip, &net_ip);
--
--	/* Check if we need to send across this subnet */
--	if (net_gateway.s_addr && net_netmask.s_addr) {
--		struct in_addr our_net;
--		struct in_addr server_net;
--
--		our_net.s_addr = net_ip.s_addr & net_netmask.s_addr;
--		server_net.s_addr = net_server_ip.s_addr & net_netmask.s_addr;
--		if (our_net.s_addr != server_net.s_addr)
--			debug_cond(DEBUG_WGET,
--				   "wget: sending through gateway %pI4",
--				   &net_gateway);
--	}
--	debug_cond(DEBUG_WGET, "URL '%s'\n", image_url);
--
--	if (net_boot_file_expected_size_in_blocks) {
--		debug_cond(DEBUG_WGET, "wget: Size is 0x%x Bytes = ",
--			   net_boot_file_expected_size_in_blocks * BLOCKSIZE);
--		print_size(net_boot_file_expected_size_in_blocks * BLOCKSIZE,
--			   "");
--	}
--	debug_cond(DEBUG_WGET,
--		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
--
--	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
--	tcp_set_tcp_handler(wget_handler);
--
--	wget_timeout_count = 0;
--	current_wget_state = WGET_CLOSED;
--
--	our_port = random_port();
--
+-enum eth_recv_flags {
 -	/*
--	 * Zero out server ether to force arp resolution in case
--	 * the server ip for the previous u-boot command, for example dns
--	 * is not the same as the web server ip.
+-	 * Check hardware device for new packets (otherwise only return those
+-	 * which are already in the memory buffer ready to process)
 -	 */
+-	ETH_RECV_CHECK_DEVICE		= 1 << 0,
+-};
 -
--	memset(net_server_ethaddr, 0, 6);
+-/**
+- * struct eth_ops - functions of Ethernet MAC controllers
+- *
+- * start: Prepare the hardware to send and receive packets
+- * send: Send the bytes passed in "packet" as a packet on the wire
+- * recv: Check if the hardware received a packet. If so, set the pointer to the
+- *	 packet buffer in the packetp parameter. If not, return an error or 0 to
+- *	 indicate that the hardware receive FIFO is empty. If 0 is returned, the
+- *	 network stack will not process the empty packet, but free_pkt() will be
+- *	 called if supplied
+- * free_pkt: Give the driver an opportunity to manage its packet buffer memory
+- *	     when the network stack is finished processing it. This will only be
+- *	     called when no error was returned from recv - optional
+- * stop: Stop the hardware from looking for packets - may be called even if
+- *	 state == PASSIVE
+- * mcast: Join or leave a multicast group (for TFTP) - optional
+- * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
+- *		 on some platforms like ARM). This function expects the
+- *		 eth_pdata::enetaddr field to be populated. The method can
+- *		 return -ENOSYS to indicate that this is not implemented for
+-		 this hardware - optional.
+- * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
+- *		    ROM on the board. This is how the driver should expose it
+- *		    to the network stack. This function should fill in the
+- *		    eth_pdata::enetaddr field - optional
+- * set_promisc: Enable or Disable promiscuous mode
+- * get_sset_count: Number of statistics counters
+- * get_string: Names of the statistic counters
+- * get_stats: The values of the statistic counters
+- */
+-struct eth_ops {
+-	int (*start)(struct udevice *dev);
+-	int (*send)(struct udevice *dev, void *packet, int length);
+-	int (*recv)(struct udevice *dev, int flags, uchar **packetp);
+-	int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
+-	void (*stop)(struct udevice *dev);
+-	int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
+-	int (*write_hwaddr)(struct udevice *dev);
+-	int (*read_rom_hwaddr)(struct udevice *dev);
+-	int (*set_promisc)(struct udevice *dev, bool enable);
+-	int (*get_sset_count)(struct udevice *dev);
+-	void (*get_strings)(struct udevice *dev, u8 *data);
+-	void (*get_stats)(struct udevice *dev, u64 *data);
+-};
 -
--	wget_send(TCP_SYN, 0, 0, 0);
--}
+-#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
+-
+-struct udevice *eth_get_dev(void); /* get the current device */
+-/*
+- * The devname can be either an exact name given by the driver or device tree
+- * or it can be an alias of the form "eth%d"
+- */
+-struct udevice *eth_get_dev_by_name(const char *devname);
+-unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
+-
+-/* Used only when NetConsole is enabled */
+-int eth_is_active(struct udevice *dev); /* Test device for active state */
+-int eth_init_state_only(void); /* Set active state */
+-void eth_halt_state_only(void); /* Set passive state */
+-
+-int eth_initialize(void);		/* Initialize network subsystem */
+-void eth_try_another(int first_restart);	/* Change the device */
+-void eth_set_current(void);		/* set nterface to ethcur var */
+-
+-int eth_get_dev_index(void);		/* get the device index */
+-
+-/**
+- * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
+- *
+- * This sets up an environment variable with the given MAC address (@enetaddr).
+- * The environment variable to be set is defined by <@base_name><@index>addr.
+- * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
+- * eth1addr, etc.
+- *
+- * @base_name:  Base name for variable, typically "eth"
+- * @index:      Index of interface being updated (>=0)
+- * @enetaddr:   Pointer to MAC address to put into the variable
+- * Return: 0 if OK, other value on error
+- */
+-int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+-				 uchar *enetaddr);
+-
+-
+-/*
+- * Initialize USB ethernet device with CONFIG_DM_ETH
+- * Returns:
+- *	0 is success, non-zero is error status.
+- */
+-int usb_ether_init(void);
+-
+-/*
+- * Get the hardware address for an ethernet interface .
+- * Args:
+- *	base_name - base name for device (normally "eth")
+- *	index - device index number (0 for first)
+- *	enetaddr - returns 6 byte hardware address
+- * Returns:
+- *	Return true if the address is valid.
+- */
+-int eth_env_get_enetaddr_by_index(const char *base_name, int index,
+-				 uchar *enetaddr);
+-
+-int eth_init(void);			/* Initialize the device */
+-int eth_send(void *packet, int length);	   /* Send a packet */
+-
+-#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+-int eth_receive(void *packet, int length); /* Receive a packet*/
+-extern void (*push_packet)(void *packet, int length);
+-#endif
+-int eth_rx(void);			/* Check for received packets */
+-void eth_halt(void);			/* stop SCC */
+-const char *eth_get_name(void);		/* get name of current device */
+-int eth_mcast_join(struct in_addr mcast_addr, int join);
++#include <net/eth.h>
+ 
+ /**********************************************************************/
+ /*
+@@ -495,16 +334,6 @@ extern char	net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN];	/* Our root path */
+ /* Indicates whether the pxe path prefix / config file was specified in dhcp option */
+ extern char *pxelinux_configfile;
+ /** END OF BOOTP EXTENTIONS **/
+-extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
+-extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
+-extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
+-extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
+-extern uchar		*net_tx_packet;		/* THE transmit packet */
+-extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
+-extern uchar		*net_rx_packet;		/* Current receive packet */
+-extern int		net_rx_packet_len;	/* Current rx packet length */
+-extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
+-extern const u8		net_null_ethaddr[ARP_HLEN];
+ 
+ #define VLAN_NONE	4095			/* untagged */
+ #define VLAN_IDMASK	0x0fff			/* mask of valid vlan id */
+@@ -557,6 +386,8 @@ extern struct in_addr	net_ntp_server;		/* the ip address to NTP */
+ extern int net_ntp_time_offset;			/* offset time from UTC */
+ #endif
+ 
++int eth_mcast_join(struct in_addr mcast_addr, int join);
++
+ /* Initialize the network adapter */
+ int net_init(void);
+ int net_loop(enum proto_t);
+@@ -827,18 +658,6 @@ static inline void net_random_ethaddr(uchar *addr)
+ 	addr[0] |= 0x02;	/* set local assignment bit (IEEE802) */
+ }
+ 
+-/**
+- * string_to_enetaddr() - Parse a MAC address
+- *
+- * Convert a string MAC address
+- *
+- * Implemented in lib/net_utils.c (built unconditionally)
+- *
+- * @addr: MAC address in aa:bb:cc:dd:ee:ff format, where each part is a 2-digit
+- *	hex value
+- * @enetaddr: Place to put MAC address (6 bytes)
+- */
+-void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
+ 
+ /* Convert an IP address to a string */
+ void ip_to_string(struct in_addr x, char *s);
+diff --git a/include/net/arp.h b/include/net/arp.h
+new file mode 100644
+index 0000000000..f614f0ef78
+--- /dev/null
++++ b/include/net/arp.h
+@@ -0,0 +1,7 @@
++/* ARP hardware address length */
++#define ARP_HLEN 6
++/*
++ * The size of a MAC address in string form, each digit requires two chars
++ * and five separator characters to form '00:00:00:00:00:00'.
++ */
++#define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1)
+diff --git a/include/net/eth.h b/include/net/eth.h
+new file mode 100644
+index 0000000000..17552bca81
+--- /dev/null
++++ b/include/net/eth.h
+@@ -0,0 +1,190 @@
++#include <net/arp.h>
++
++struct udevice;
++
++enum eth_state_t {
++	ETH_STATE_INIT,
++	ETH_STATE_PASSIVE,
++	ETH_STATE_ACTIVE
++};
++
++/**
++ * struct eth_pdata - Platform data for Ethernet MAC controllers
++ *
++ * @iobase: The base address of the hardware registers
++ * @enetaddr: The Ethernet MAC address that is loaded from EEPROM or env
++ * @phy_interface: PHY interface to use - see PHY_INTERFACE_MODE_...
++ * @max_speed: Maximum speed of Ethernet connection supported by MAC
++ * @priv_pdata: device specific plat
++ */
++struct eth_pdata {
++	phys_addr_t iobase;
++	unsigned char enetaddr[ARP_HLEN];
++	int phy_interface;
++	int max_speed;
++	void *priv_pdata;
++};
++
++enum eth_recv_flags {
++	/*
++	 * Check hardware device for new packets (otherwise only return those
++	 * which are already in the memory buffer ready to process)
++	 */
++	ETH_RECV_CHECK_DEVICE		= 1 << 0,
++};
++
++/**
++ * struct eth_ops - functions of Ethernet MAC controllers
++ *
++ * start: Prepare the hardware to send and receive packets
++ * send: Send the bytes passed in "packet" as a packet on the wire
++ * recv: Check if the hardware received a packet. If so, set the pointer to the
++ *	 packet buffer in the packetp parameter. If not, return an error or 0 to
++ *	 indicate that the hardware receive FIFO is empty. If 0 is returned, the
++ *	 network stack will not process the empty packet, but free_pkt() will be
++ *	 called if supplied
++ * free_pkt: Give the driver an opportunity to manage its packet buffer memory
++ *	     when the network stack is finished processing it. This will only be
++ *	     called when no error was returned from recv - optional
++ * stop: Stop the hardware from looking for packets - may be called even if
++ *	 state == PASSIVE
++ * mcast: Join or leave a multicast group (for TFTP) - optional
++ * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
++ *		 on some platforms like ARM). This function expects the
++ *		 eth_pdata::enetaddr field to be populated. The method can
++ *		 return -ENOSYS to indicate that this is not implemented for
++		 this hardware - optional.
++ * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
++ *		    ROM on the board. This is how the driver should expose it
++ *		    to the network stack. This function should fill in the
++ *		    eth_pdata::enetaddr field - optional
++ * set_promisc: Enable or Disable promiscuous mode
++ * get_sset_count: Number of statistics counters
++ * get_string: Names of the statistic counters
++ * get_stats: The values of the statistic counters
++ */
++struct eth_ops {
++	int (*start)(struct udevice *dev);
++	int (*send)(struct udevice *dev, void *packet, int length);
++	int (*recv)(struct udevice *dev, int flags, uchar **packetp);
++	int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
++	void (*stop)(struct udevice *dev);
++	int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
++	int (*write_hwaddr)(struct udevice *dev);
++	int (*read_rom_hwaddr)(struct udevice *dev);
++	int (*set_promisc)(struct udevice *dev, bool enable);
++	int (*get_sset_count)(struct udevice *dev);
++	void (*get_strings)(struct udevice *dev, u8 *data);
++	void (*get_stats)(struct udevice *dev, u64 *data);
++};
++
++#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
++
++struct udevice *eth_get_dev(void); /* get the current device */
++/*
++ * The devname can be either an exact name given by the driver or device tree
++ * or it can be an alias of the form "eth%d"
++ */
++struct udevice *eth_get_dev_by_name(const char *devname);
++unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
++
++/* Used only when NetConsole is enabled */
++int eth_is_active(struct udevice *dev); /* Test device for active state */
++int eth_init_state_only(void); /* Set active state */
++void eth_halt_state_only(void); /* Set passive state */
++
++int eth_initialize(void);		/* Initialize network subsystem */
++void eth_try_another(int first_restart);	/* Change the device */
++void eth_set_current(void);		/* set nterface to ethcur var */
++
++int eth_get_dev_index(void);		/* get the device index */
++
++/**
++ * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
++ *
++ * This sets up an environment variable with the given MAC address (@enetaddr).
++ * The environment variable to be set is defined by <@base_name><@index>addr.
++ * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
++ * eth1addr, etc.
++ *
++ * @base_name:  Base name for variable, typically "eth"
++ * @index:      Index of interface being updated (>=0)
++ * @enetaddr:   Pointer to MAC address to put into the variable
++ * Return: 0 if OK, other value on error
++ */
++int eth_env_set_enetaddr_by_index(const char *base_name, int index,
++				 uchar *enetaddr);
++
++
++/*
++ * Initialize USB ethernet device with CONFIG_DM_ETH
++ * Returns:
++ *	0 is success, non-zero is error status.
++ */
++int usb_ether_init(void);
++
++/*
++ * Get the hardware address for an ethernet interface .
++ * Args:
++ *	base_name - base name for device (normally "eth")
++ *	index - device index number (0 for first)
++ *	enetaddr - returns 6 byte hardware address
++ * Returns:
++ *	Return true if the address is valid.
++ */
++int eth_env_get_enetaddr_by_index(const char *base_name, int index,
++				 uchar *enetaddr);
++
++int eth_init(void);			/* Initialize the device */
++int eth_send(void *packet, int length);	   /* Send a packet */
++
++#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
++int eth_receive(void *packet, int length); /* Receive a packet*/
++extern void (*push_packet)(void *packet, int length);
++#endif
++int eth_rx(void);			/* Check for received packets */
++void eth_halt(void);			/* stop SCC */
++const char *eth_get_name(void);		/* get name of current device */
++
++/*
++ *	The number of receive packet buffers, and the required packet buffer
++ *	alignment in memory.
++ *
++ */
++#define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
++#define PKTALIGN	ARCH_DMA_MINALIGN
++
++/* Number of packets processed together */
++#define ETH_PACKETS_BATCH_RECV	32
++
++extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
++extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
++extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
++extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
++extern uchar		*net_tx_packet;		/* THE transmit packet */
++extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
++extern uchar		*net_rx_packet;		/* Current receive packet */
++extern int		net_rx_packet_len;	/* Current rx packet length */
++extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
++extern const u8		net_null_ethaddr[ARP_HLEN];
++
++/**
++ * string_to_enetaddr() - Parse a MAC address
++ *
++ * Convert a string MAC address
++ *
++ * Implemented in lib/net_utils.c (built unconditionally)
++ *
++ * @addr: MAC address in aa:bb:cc:dd:ee:ff format, where each part is a 2-digit
++ *	hex value
++ * @enetaddr: Place to put MAC address (6 bytes)
++ */
++void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
++
++typedef struct ulwip {
++	bool loop;
++	int err;
++	bool init_done;
++} ulwip;
++
++struct ulwip *eth_lwip_priv(struct udevice *current);
 -- 
 2.30.2
 
