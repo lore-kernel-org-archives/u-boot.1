@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C3DEEDE9A8
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 11:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0901BEDE9A8
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 11:41:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4018D864C1;
-	Thu, 14 Sep 2023 13:32:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3206086F47;
+	Thu, 14 Sep 2023 13:41:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kAZo7VdN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gqPTaxBA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7F4D86ECF; Thu, 14 Sep 2023 13:32:49 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id AC63A86F58; Thu, 14 Sep 2023 13:41:27 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1978A8664A
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 13:32:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 643B286A40
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 13:41:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-529fb04a234so963792a12.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 04:32:48 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-502e0b7875dso1479885e87.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 04:41:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694691167; x=1695295967; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694691685; x=1695296485; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BvfhpEnd9HUg1VhchGK+0sNDZ6+/6OFLKs1kHi5BgB0=;
- b=kAZo7VdNR5eUHW18cW6LPBJbXq3o6QDb3zeNBUiDnFnQntoKVuVoYh/gmIsNHsR37N
- QW0Gr6km2OEyZYoFYG4K6UFpBj03lUi23fn3zIpwuF3pcbCLTRWdwEjx+I+cF39vWGjB
- IKdTeMttE6YDxYnnxyf+ciN/G5VUpKeZSiW2rQafSuRMHPvUBDCwqIGzoQfIM5yx0OSb
- bl/2f0H1oNgDv9mlP/kdvl0Faj0hto4Vj9qOLQq1uq8TbcOZP6kOh1twdl+EUGonkW8N
- B2tRcVk5A3C389oUjUAbgh1b2QxnE25QbHrC+g9LjpKBsXtgqGe0uHAzMEaqfQvid/Wy
- TiXg==
+ bh=fFUeX2KbQKotKRnabAzi5RTlTBkSv2CeiH7iOYRZxPk=;
+ b=gqPTaxBA+XJhRBR8mIb0hcPjLBI8lirthZ4JBsD6gB2rFFoj4kh2OsMcLV7oSteG29
+ 0vf3asCg/qOllbSgkdkSXb7G7LzzOq8MIHZV7NBJ4kzWw6Z5kNmt1yP22HgEaKgt5Y6e
+ 0PnSohL3oW15oc6iiKuVyju6BHT+srYSY+MlZZw1TWevkGu2xT4gCvb3dz7ljItAcuEO
+ sqYSQAlixVPbN5OBKxiVzXHnAdLNP4oPQPlQ0+UXkxrCOVI2dHkTxiDPI72mFx7BqATc
+ qtBByZEC4LnJcOa2ZuJZnusTRfX88HhST2nehc+f5as+JROLCWQiXhyV+V8xF6d/B0CF
+ 8x9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694691167; x=1695295967;
+ d=1e100.net; s=20230601; t=1694691685; x=1695296485;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BvfhpEnd9HUg1VhchGK+0sNDZ6+/6OFLKs1kHi5BgB0=;
- b=HWXzeE35jyyzQRIjKjEC8szbQB0OOS11o+rvY/jWcylQkk/NwvTR9O6dVwJm64iap4
- Q5/QuEouqPzkMg1+DlmyePdCbVFcbl+/nU7tTJ6Y0ryWrPRAizp4f+XgNlHDw3tO/Q6T
- +gI/mEpJjjwsmdHiPlbhfAECHGtt/xIcZoLBGzXrILAKG9wH5QXcst1lz/nbFvoVdHKn
- T0rm/QrXAHF6YomEDh7WClWUvPsOPf1bINH3ijjFrBbqqaPuna5WLF/yrmoYrwUQ75nu
- vmE9DP5eH5R8Ar0+R85VDWDiJ9mJBP+LhGwnzKoLaeqLX9pqdoJfXM5zb8ow8kyk+z7z
- rsjw==
-X-Gm-Message-State: AOJu0Yz1VZNpcd8nBLXq3vUKTCw5CtdTrr0sk49h1b9AebwhowxGgsgy
- HkQo6MBH2870MmK6CUrtHfyDQRGTDvKlrDYAapJLJfW480xeX/iu
-X-Google-Smtp-Source: AGHT+IFzCuHK1bj4V3MxNTgWNzzZQhs9Dqh4jbxy7nKQXw9c1tOl16Pmni/LqLW4/ZsM6uORqW3blaPzpysmMPaklRs=
-X-Received: by 2002:aa7:c606:0:b0:52a:1c3c:2ecc with SMTP id
- h6-20020aa7c606000000b0052a1c3c2eccmr4858010edq.25.1694691167516; Thu, 14 Sep
- 2023 04:32:47 -0700 (PDT)
+ bh=fFUeX2KbQKotKRnabAzi5RTlTBkSv2CeiH7iOYRZxPk=;
+ b=w1lPxpO2hjeEoJ1QakBAAPOm1+rmMqMqTt7wHKFQ9kup4PxrCixaYap3kYUGmTKLbQ
+ pIEZeTsfGb0dLDHZQzKRhUhDfdBm/NHLUG573k9/m/LZ1PH4WpbwK7phk2qCKTkPKYTr
+ 4av3g5Txu0XxPS3JtYha+knUyM3F0o7n6rNbLNOQE1VkiKBXsxUxOgA1FHu+8n3Zti2+
+ T63x8NfUimm/r0KAjpCkeQWuNNyNl924olEHsKNMZoG6XG21jzqqUl6LN+JpRr47VA5B
+ y9Rqf9ZoyNVuWATavuFzDw5ptsoGODi0XLb51FGhveJxc2PHzK956h4ef3wqqp4rH79d
+ mSYg==
+X-Gm-Message-State: AOJu0YxovGtB43LmwMWZnekcWerXNnxZkXCitZ3pqGorZkn3JkGHsP5g
+ BsSVpVArQhRYCDEWNa+bvVTck7ffB9jeTLnTne5fjQ==
+X-Google-Smtp-Source: AGHT+IHvi2cXhxzka22a9Pn11wh/vIkFaXtul/Qb8E1+/fZqhdAUyXQ4u/eNJdZ6gizShA4UCP2N6+jhiohaQ/EafLw=
+X-Received: by 2002:a05:6512:304d:b0:502:cc8d:f206 with SMTP id
+ b13-20020a056512304d00b00502cc8df206mr4870336lfb.23.1694691684510; Thu, 14
+ Sep 2023 04:41:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ11KEV4TAjihfijFNpXmROheGPKmVwVvpgfOpZP7GZ-HA@mail.gmail.com>
- <CADg8p97FOq4ropKF1xbMzBQb6O-QWpJCb5_zyq3Nyjhn4kBH6w@mail.gmail.com>
- <CAPnjgZ2YJ292wMU9Yjom9TdSgHA-J2A5uHxhAZk-d3BsAsf5AQ@mail.gmail.com>
- <CAPnjgZ381_UXw5kE4V3v=Tzjt1Co5o0mNcsJfjQSc6xsxqdVvA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ381_UXw5kE4V3v=Tzjt1Co5o0mNcsJfjQSc6xsxqdVvA@mail.gmail.com>
+References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
+ <20230908120002.29851-4-sughosh.ganu@linaro.org>
+ <CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com>
+ <CADg8p97cQJYogd_MZT_hCH71XjqkO85VEay2fb7hZx1YwX+OPA@mail.gmail.com>
+ <CAPnjgZ1EBJJ7ZtHZVo1vp24gCrN-A-m4Hk3udLbKPS18C3QNqw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1EBJJ7ZtHZVo1vp24gCrN-A-m4Hk3udLbKPS18C3QNqw@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 14 Sep 2023 17:02:36 +0530
-Message-ID: <CADg8p96j8EsxAEDZwYMh88Vi-GXk8CvnOn_uTypYNJRcJwGv2A@mail.gmail.com>
-Subject: Re: UEFI update files missing on sandbox?
+Date: Thu, 14 Sep 2023 17:11:13 +0530
+Message-ID: <CADg8p96g_5rmppg0LmrZ_Cch4-HgvafxPedcMbJ-hu_7Awh0Ug@mail.gmail.com>
+Subject: Re: [PATCH 3/8] binman: capsule: Generate capsules through config file
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rin <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ Malte Schmidt <malte.schmidt-oss@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,49 +98,96 @@ On Wed, 13 Sept 2023 at 23:37, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sughosh,
 >
-> On Sun, 10 Sept 2023 at 13:13, Simon Glass <sjg@chromium.org> wrote:
+> On Mon, 11 Sept 2023 at 08:13, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Hi Sughosh,
+> > hi Simon,
 > >
-> > On Sun, 10 Sept 2023 at 04:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > On Mon, 11 Sept 2023 at 00:44, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > hi Simon,
+> > > Hi Sughosh,
 > > >
-> > > On Sun, 10 Sept 2023 at 04:10, Simon Glass <sjg@chromium.org> wrote:
+> > > On Fri, 8 Sept 2023 at 06:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > > >
-> > > > Hi Sughosh,
+> > > > Add support in binman for generating capsules by reading the capsule
+> > > > parameters through a config file. Also add a test case in binman for
+> > > > this mode of capsule generation.
 > > > >
-> > > > I thought that all your patches were merged but now when I build
-> > > > sandbox I don't see the capsule-update files generated. Is there
-> > > > something missing?
+> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > ---
+> > > >
+> > > >  tools/binman/entries.rst                   | 35 ++++++++++++
+> > > >  tools/binman/etype/efi_capsule_cfg_file.py | 66 ++++++++++++++++++++++
+> > > >  tools/binman/ftest.py                      | 29 ++++++++++
+> > > >  tools/binman/test/319_capsule_cfg.dts      | 15 +++++
+> > > >  4 files changed, 145 insertions(+)
+> > > >  create mode 100644 tools/binman/etype/efi_capsule_cfg_file.py
+> > > >  create mode 100644 tools/binman/test/319_capsule_cfg.dts
 > > >
-> > > The building of the EFI capsules was moved to the corresponding test
-> > > setup. This was based on feedback from Tom Rini [1], where he had
-> > > suggested that instead of having the binman nodes for the capsules as
-> > > part of the sandbox dtb, it should rather be highlighted in the
-> > > document.
+> > > I think we discussed this some time ago. The problem I have with this
+> > > is that it adds another way of specifying the image description,
+> > > separate from the binman definition. This introduces all sorts of
+> > > problems:
+> > >
+> > > - the question of where the filenames are located, something which
+> > > binman tries to handle cohesively
+> > > - binman has no knowledge of what is being put in the capsules
+> > > - the resulting fdtmap lacks any information about what is in the capsules
+> > > - it seems to create two ways of doing the same thing
+> > >
+> > > Binman can presumably already create multiple capsule files, just by
+> > > adding to the description.
+> > >
+> > > What need does this feature meet?
 > >
-> > Hmmm that was not how I was hoping it would work.
+> > We already had this discussion earlier about the need for generating
+> > capsules through the config file, where I had explained the need for
+> > this [1]. This is functionality which is supported by the
+> > specification, and we have folks who are interested in having the
+> > capsules generated through config file, and also in generation of a
+> > single capsule file consisting of multiple input payloads.
 > >
-> > Is there a way to make the build create the files?
-> >
-> > ...I just found efi_capsule_data()
-> >
-> > I really don't like this at all...it is running a part of the build
-> > system in the test. We have to do this in some cases, e.g. for tracing
-> > we must run with a special build of sandbox, but it should not be
-> > necessary for EFI capsules.
-> >
-> > I would really like the sandbox build to produce the capsules needed
-> > for tests, without any extra effort. As it is, there is no way to try
-> > this out.
+> > I understand that this model does not fit with the usual way in binman
+> > of generating an output image by specifying it's inputs as DT nodes.
+> > But just because this does not fit or align with the design of the
+> > tool does not mean that we do not add support for the functionality.
+> > Why can't we support this in binman as long as it is properly
+> > documented as to what is being done. Moreover, my initial versions of
+> > this patchset were attempting to achieve this by adding a make target,
+> > but you had shot it down [2]. So it either has to be done through
+> > binman, or through a make target.
 >
-> How about we add a single capsule update to the sandbox build, so that
-> it produces an update file containing U-Boot? Is that easy to do?
+> We have a lot of balls in the air right now...I would like to pause
+> this one until we get the other things sorted out:
 
-Not a difficult thing at all. But is Tom okay with this? I moved the
-capsule generation to the tests based on his feedback. So I would like
-to hear what he has to say on this. I don't want to keep doing this
-again and again.
+Okay, fair enough. I will check if the capsule generation through
+config file can be added to the mkeficapsule tool in the meantime.
+Also, can you review the last two patches of this series [1] [2] which
+are adding support for empty capsules. I don't think they are at odds
+with the idea of binman. Thanks.
 
 -sughosh
+
+[1] - https://patchwork.ozlabs.org/project/uboot/patch/20230908120002.29851-8-sughosh.ganu@linaro.org/
+[2] - https://patchwork.ozlabs.org/project/uboot/patch/20230908120002.29851-9-sughosh.ganu@linaro.org/
+
+>
+> - simple capsule update in sandbox (see my other email)
+> - example of how to use all this on a real board (Tom is going to make
+> a proposal there)
+> - tidy up the testing so that it is easier to understand and fits
+> better with the test framework
+> - figure out the DT story, since we are still struggling to align
+> there (Binman bindings, removing nodes, etc)
+>
+> We don't need to get all those done, but we do need to at least agree
+> on the direction.
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > -sughosh
+> >
+> > [1] - https://lists.denx.de/pipermail/u-boot/2023-July/524849.html
+> > [2] - https://lists.denx.de/pipermail/u-boot/2023-June/521103.html
