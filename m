@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB31EEAA59
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:59:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03F10EEAA58
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC12E870CC;
-	Thu, 14 Sep 2023 18:56:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AD058709C;
+	Thu, 14 Sep 2023 18:56:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ex/m1eJf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HC4kSoTg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1FFC8709C; Thu, 14 Sep 2023 18:56:50 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 5C607870C5; Thu, 14 Sep 2023 18:56:52 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0570870D0
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:56:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7F0A8708F
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:56:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-34e12396f6fso3660685ab.1
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:56:48 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-795547f055fso40791039f.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:56:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694710607; x=1695315407; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694710608; x=1695315408; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z9ajpF/UmgFnMEzfs1NWX2nkWPdWGLIgC46IT+yL0kQ=;
- b=Ex/m1eJfW0ZJHQ3YgfpuxMnzc7VR2h1pat4J1Q26flkuoYU/9ky4Nov4xVPMMaVt7j
- Cz6N/A4Ai6CV8YXRjgZ+/f2AuwtVRE5yrmlSr3Tn55VkxXIDusaIEkc5jU3c85hSh4BZ
- WBgae7yoHBUjLA3LEqexp0xfPx29EmsbSdtoE=
+ bh=x7qvJaOzhNpUrZXrb6rcFBil/fMygzfOssQkug0BoTI=;
+ b=HC4kSoTg1S8oaCrLZEmVm+HWvZrz9TAQA2sVTOw8hNAz1AnnKIUi75z+qEMRDf01UB
+ QwqDa3aslj9DyguaTJwXDVcShgiBMkqSz/d+ikxYiy1hlIrH+mUnKk1AuGPqlZCfTHXk
+ IBCMrfy+B+8YPBweiSAu6I60TVQMa82GcSkFs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694710607; x=1695315407;
+ d=1e100.net; s=20230601; t=1694710608; x=1695315408;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z9ajpF/UmgFnMEzfs1NWX2nkWPdWGLIgC46IT+yL0kQ=;
- b=Amr/f7l1/REKtelRGcUCeumdGjBaUadeklrJQeSxSQBDS392z0QhA94ajSJPwMf8kz
- 9PzeZES9fw95dXDqr5F8AtdggMWL527G6KwS7ByF8GWFNXCXOrsbWDg2iXVlRMD+Cjf3
- c48qk0SDzs2YAoLgkkBZtoNkb0L8r867r+uvAMOt8MBSKoKj760cCpa13skByCt+6k8N
- eVSA56Dfnp2fdVIhVNP/6UUlZ5VheMChrDcSNzQVBVEt6rOKjAUmNxHfyBR2fr68/g+q
- OnPa5bSKTmh2mVJghfcQAfIozgzLdkZHuYXBU2mLU9gJeHhWwd956Pc5QlcI253r6kWp
- gcxA==
-X-Gm-Message-State: AOJu0YyNMreU4IAXPqs1WbrHcYjLhsBCS0tUFDC/ZR4ZaSxNJmYTkQea
- W4Vz7kxk+t0GvtJeQ+SIxfbS8yPkfv6F1hX/fEo=
-X-Google-Smtp-Source: AGHT+IGJNveDx41NzOPdKJSZFakxTdsjL7vWCaSqETLt7+SvajI6W0Ilqsh+DzMisW6eEY3Q8MbFyw==
-X-Received: by 2002:a05:6e02:1bc1:b0:34e:2be5:5ffd with SMTP id
- x1-20020a056e021bc100b0034e2be55ffdmr7779392ilv.11.1694710607474; 
- Thu, 14 Sep 2023 09:56:47 -0700 (PDT)
+ bh=x7qvJaOzhNpUrZXrb6rcFBil/fMygzfOssQkug0BoTI=;
+ b=TZ2/8PibQmxvj+IJtr3PSJ6DAogFPmUhDYKc0gq0/Zbj+s4MA4B8Cog3kfv73K4Gf+
+ RMcPxAd/F4dDSi8ep5YbJOv+lQ3TGSFZF+Bl4blXHcnivPaV/lcEFgFbl1n8PKVresNw
+ Miu/EpnpIoTubHNqkobWaMxcmk87oA6RH9LsxVNWAXUa0skZCtKK4eTSrE8pUEF+Cteg
+ oxH2NGmSgYvDMFwytEwjAr3xTl3kDgzDSmt1z398UU2e5r87sYcJiWayLOqFGrkpZ9MN
+ /26suwZpxnsi0wbfvL8O189X7vlZyi2fmFSqNhqGLG7wNVBwBzDnX22CYCwvAS1dcLHX
+ s87Q==
+X-Gm-Message-State: AOJu0Yypi6G/XDsnAZN/HoSLl0s6NwVTpKz+D/ZOCfpykjl9Tu0DB0BV
+ wKDoY6b/Xi3WJeeUCUDU9AGVyfWDxRKhOYZ5w04=
+X-Google-Smtp-Source: AGHT+IGoXkzTi7jZrMFhVAxcN8Bs/EcECnmsSGRDMMsCBNup7DMhMbtompdpYlPfoGRSkxVajcKTjw==
+X-Received: by 2002:a5d:9d8a:0:b0:799:178c:7be5 with SMTP id
+ ay10-20020a5d9d8a000000b00799178c7be5mr9667167iob.17.1694710608389; 
+ Thu, 14 Sep 2023 09:56:48 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:a8b6:76a8:ff58:a8be])
  by smtp.gmail.com with ESMTPSA id
- s20-20020a02c514000000b00430979b6aa5sm535339jam.0.2023.09.14.09.56.46
+ s20-20020a02c514000000b00430979b6aa5sm535339jam.0.2023.09.14.09.56.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:56:47 -0700 (PDT)
+ Thu, 14 Sep 2023 09:56:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Hai Pham <hai.pham.ud@renesas.com>, Johan Jonker <jbx6244@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v5 16/21] Kconfig: Move TEXT_BASE et al under general setup
-Date: Thu, 14 Sep 2023 10:55:54 -0600
-Message-ID: <20230914165615.1058529-16-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v5 17/21] Mark DISTRO_DEFAULTS as deprecated
+Date: Thu, 14 Sep 2023 10:55:55 -0600
+Message-ID: <20230914165615.1058529-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230914165615.1058529-1-sjg@chromium.org>
 References: <20230914165615.1058529-1-sjg@chromium.org>
@@ -93,170 +88,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These don't relate to booting. Move them out of there and into the same
-place as the other related settings.
+Standard boot has been in place for a while now. Quite a few problems
+have been found and fixed. It seems like a good time to mark the
+script-based approach as deprecated and encourage people to use standard
+boot.
+
+Update the DISTRO_DEFAULTS Kconfig to encourage people to move to
+standard boot, which is able to boot Linux distributions automatically.
+
+Add a short migration guide to make this easier.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- Kconfig      | 65 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- boot/Kconfig | 65 ----------------------------------------------------
- 2 files changed, 65 insertions(+), 65 deletions(-)
+Changes in v3:
+- Drop extra newline and quote
 
-diff --git a/Kconfig b/Kconfig
-index 0a2e97578df..2d4b8214986 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -585,6 +585,71 @@ config MP
- 	  This provides an option to bringup different processors
- 	  in multiprocessor cases.
- 
-+config HAVE_TEXT_BASE
-+	bool
-+	depends on !NIOS2 && !XTENSA
-+	depends on !EFI_APP
-+	default y
-+
-+config TEXT_BASE
-+	depends on HAVE_TEXT_BASE
-+	default 0x0 if POSITION_INDEPENDENT
-+	default 0x80800000 if ARCH_OMAP2PLUS || ARCH_K3
-+	default 0x81700000 if MACH_SUNIV
-+	default 0x2a000000 if MACH_SUN9I
-+	default 0x4a000000 if SUNXI_MINIMUM_DRAM_MB >= 256
-+	default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >= 64
-+	hex "Text Base"
-+	help
-+	  The address in memory that U-Boot will be running from, initially.
-+
-+config HAVE_SYS_MONITOR_BASE
-+	bool
-+	depends on ARC || MIPS || M68K || NIOS2 || PPC || XTENSA || X86 \
-+		|| ENV_IS_IN_FLASH || MTD_NOR_FLASH
-+	depends on !EFI_APP
-+	default y
-+
-+config SYS_MONITOR_BASE
-+	depends on HAVE_SYS_MONITOR_BASE
-+	hex "Physical start address of boot monitor code"
-+	default TEXT_BASE
-+	help
-+	  The physical start address of boot monitor code (which is the same as
-+	  CONFIG_TEXT_BASE when linking) and the same as CFG_SYS_FLASH_BASE
-+	  when booting from flash.
-+
-+config SPL_SYS_MONITOR_BASE
-+	depends on MPC85xx && SPL && HAVE_SYS_MONITOR_BASE
-+	hex "Physical start address of SPL monitor code"
-+	default SPL_TEXT_BASE
-+
-+config TPL_SYS_MONITOR_BASE
-+	depends on MPC85xx && TPL && HAVE_SYS_MONITOR_BASE
-+	hex "Physical start address of TPL monitor code"
-+
-+config DYNAMIC_SYS_CLK_FREQ
-+	bool "Determine CPU clock frequency at run-time"
-+	help
-+	  Implement a get_board_sys_clk function that will determine the CPU
-+	  clock frequency at run time, rather than define it statically.
-+
-+config SYS_CLK_FREQ
-+	depends on !DYNAMIC_SYS_CLK_FREQ
-+	int "CPU clock frequency"
-+	default 125000000 if ARCH_LS1012A
-+	default 100000000 if ARCH_P2020 || ARCH_T1024 || ARCH_T1042 || \
-+			     ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3
-+	default 66666666 if ARCH_P1010 || ARCH_P1020 || ARCH_T4240
-+	default 66660000 if ARCH_T2080
-+	default 33333333 if RCAR_GEN3
-+	default 24000000 if ARCH_EXYNOS
-+	default 20000000 if RCAR_GEN2
-+	default 0
-+	help
-+	  A static value for the CPU frequency.  Note that if not required
-+	  for a given SoC, this can be left at 0.
-+
- source "api/Kconfig"
- 
- endmenu		# General setup
+Changes in v2:
+- Mention in the DISTRO_DEFAULTS option that it is script-based
+- Expand and rewrite the commit message
+- Use the word 'Mark' instead of 'Make' to improve the English
+
+ boot/Kconfig            |  6 +++++-
+ doc/develop/bootstd.rst | 23 +++++++++++++++++++++++
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+
 diff --git a/boot/Kconfig b/boot/Kconfig
-index a885fea692f..4ebcf310911 100644
+index 4ebcf310911..7ef44a26fb9 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -693,71 +693,6 @@ config SUPPORT_RAW_INITRD
- 	  address of the initrd must be augmented by it's size, in the following
- 	  format: "<initrd address>:<initrd size>".
+@@ -784,7 +784,7 @@ config SYS_BOOT_RAMDISK_HIGH
+ endmenu		# Boot images
  
--config HAVE_TEXT_BASE
--	bool
--	depends on !NIOS2 && !XTENSA
--	depends on !EFI_APP
--	default y
--
--config TEXT_BASE
--	depends on HAVE_TEXT_BASE
--	default 0x0 if POSITION_INDEPENDENT
--	default 0x80800000 if ARCH_OMAP2PLUS || ARCH_K3
--	default 0x81700000 if MACH_SUNIV
--	default 0x2a000000 if MACH_SUN9I
--	default 0x4a000000 if SUNXI_MINIMUM_DRAM_MB >= 256
--	default 0x42e00000 if SUNXI_MINIMUM_DRAM_MB >= 64
--	hex "Text Base"
--	help
--	  The address in memory that U-Boot will be running from, initially.
--
--config HAVE_SYS_MONITOR_BASE
--	bool
--	depends on ARC || MIPS || M68K || NIOS2 || PPC || XTENSA || X86 \
--		|| ENV_IS_IN_FLASH || MTD_NOR_FLASH
--	depends on !EFI_APP
--	default y
--
--config SYS_MONITOR_BASE
--	depends on HAVE_SYS_MONITOR_BASE
--	hex "Physical start address of boot monitor code"
--	default TEXT_BASE
--	help
--	  The physical start address of boot monitor code (which is the same as
--	  CONFIG_TEXT_BASE when linking) and the same as CFG_SYS_FLASH_BASE
--	  when booting from flash.
--
--config SPL_SYS_MONITOR_BASE
--	depends on MPC85xx && SPL && HAVE_SYS_MONITOR_BASE
--	hex "Physical start address of SPL monitor code"
--	default SPL_TEXT_BASE
--
--config TPL_SYS_MONITOR_BASE
--	depends on MPC85xx && TPL && HAVE_SYS_MONITOR_BASE
--	hex "Physical start address of TPL monitor code"
--
--config DYNAMIC_SYS_CLK_FREQ
--	bool "Determine CPU clock frequency at run-time"
--	help
--	  Implement a get_board_sys_clk function that will determine the CPU
--	  clock frequency at run time, rather than define it statically.
--
--config SYS_CLK_FREQ
--	depends on !DYNAMIC_SYS_CLK_FREQ
--	int "CPU clock frequency"
--	default 125000000 if ARCH_LS1012A
--	default 100000000 if ARCH_P2020 || ARCH_T1024 || ARCH_T1042 || \
--			     ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3
--	default 66666666 if ARCH_P1010 || ARCH_P1020 || ARCH_T4240
--	default 66660000 if ARCH_T2080
--	default 33333333 if RCAR_GEN3
--	default 24000000 if ARCH_EXYNOS
--	default 20000000 if RCAR_GEN2
--	default 0
--	help
--	  A static value for the CPU frequency.  Note that if not required
--	  for a given SoC, this can be left at 0.
--
- config ARCH_FIXUP_FDT_MEMORY
- 	bool "Enable arch_fixup_memory_banks() call"
- 	default y
+ config DISTRO_DEFAULTS
+-	bool "Select defaults suitable for booting general purpose Linux distributions"
++	bool "(deprecated) Script-based booting of Linux distributions"
+ 	select BOOT_DEFAULTS
+ 	select AUTO_COMPLETE
+ 	select CMDLINE_EDITING
+@@ -792,6 +792,10 @@ config DISTRO_DEFAULTS
+ 	select HUSH_PARSER
+ 	select SYS_LONGHELP
+ 	help
++	  Note: These scripts have been replaced by Standard Boot. Do not use
++	  them on new boards. See 'Migrating from distro_boot' at
++	  doc/develop/bootstd.rst
++
+ 	  Select this to enable various options and commands which are suitable
+ 	  for building u-boot for booting general purpose Linux distributions.
+ 
+diff --git a/doc/develop/bootstd.rst b/doc/develop/bootstd.rst
+index e8b90752f08..6172dc906bd 100644
+--- a/doc/develop/bootstd.rst
++++ b/doc/develop/bootstd.rst
+@@ -464,6 +464,28 @@ ready    File was loaded and is ready for use. In this state the bootflow is
+ =======  =======================================================================
+ 
+ 
++Migrating from distro_boot
++--------------------------
++
++To migrate from distro_boot:
++
++#. Update your board header files to remove the BOOTENV and BOOT_TARGET_xxx
++   defines. Standard boot finds available boot devices automatically.
++
++#. Remove the "boot_targets" variable unless you need it. Standard boot uses a
++   default order from fastest to slowest, which generally matches the order used
++   by boards.
++
++#. Make sure that CONFIG_BOOTSTD_DEFAULTS is enabled by your board, so it can
++   boot common Linux distributions.
++
++An example patch is at migrate_patch_.
++
++If you are using custom boot scripts for your board, consider creating your
++own bootmeth to hold the logic. There are various examples at
++`boot/bootmeth_...`.
++
++
+ Theory of operation
+ -------------------
+ 
+@@ -775,3 +797,4 @@ Other ideas:
+ .. _BootLoaderSpec: http://www.freedesktop.org/wiki/Specifications/BootLoaderSpec/
+ .. _distro_boot: https://github.com/u-boot/u-boot/blob/master/boot/distro.c
+ .. _bootflow_h: https://github.com/u-boot/u-boot/blob/master/include/bootflow.h
++.. _migrate_patch: https://patchwork.ozlabs.org/project/uboot/patch/20230727215433.578830-2-sjg@chromium.org/
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
