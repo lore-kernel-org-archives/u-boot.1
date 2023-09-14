@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BFDBEEAA53
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53EBEEEAA55
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 16:21:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1F5C86A3C;
-	Thu, 14 Sep 2023 18:20:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 52D1686ABB;
+	Thu, 14 Sep 2023 18:20:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ljqCIAvj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tRHeWu1w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FC9A86A94; Thu, 14 Sep 2023 18:20:50 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 8930B86AA9; Thu, 14 Sep 2023 18:20:52 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A2EA86672
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:20:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AFD786672
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 18:20:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2bce552508fso17390541fa.1
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:20:48 -0700 (PDT)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2b703a0453fso19032281fa.3
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 09:20:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694708447; x=1695313247; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694708449; x=1695313249; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2TpMV1fzgEaRtklvSF1wLKwOvwOJoWTA7xIFAq1N3os=;
- b=ljqCIAvjmfAO877hZFx1wSImW/qMteKp6WVjgaBio8MkYbztLx2WjxFS8FGYHZ0GJf
- +ce/dQIN8uHBmX28bUgRZkvQtJ9VsU2CaNih+Ayg+NlGEu+EtsiqbvKSH7RBW6Lrc763
- Kn/ZUNYYJABo003yH2CBNrE6C9wAnCP5UUXq33kGdDp7e3IluecS3XU+VBDg8Uqk6rhs
- oJniavE/eBSESgFo0qI8kyZAx+BYtSnLdyJxhqEfR2Pfc1hCFU4+nW8epfjBtT5tlshP
- f4C1cFfN6OzRdUdEnSeRiHzV+plYw8x50iJbUUZBc3/JqIRVbHBT0zKxfQ1WLU70vcez
- M+Nw==
+ bh=LC1rzNwjkmeiEROge7PliJ2TWgUzdEBLyUtsof2ZFvo=;
+ b=tRHeWu1wmx7am4gNWgl557BjAHePAxsh7xC9ngNwj5HoqZDLbdL/fv4OKTK+WqmycQ
+ 63x4UZRSNvOlbjfzkHIG8obXZrj4l3RkXZG3vwkhmUlniJSiKLU36JC3wWo4s8fxiCVv
+ sliYzxaWZsvRRP77rMWviERvyhFClYgNmYzxP7pcbG3soNA/6WRZ5seQkhpQ2+PLBjYy
+ Yyn2ehmjS2s8Wy6xp9M9JFE3gUk9eRg0wtk8gMoYzHq8jtQ4TxANT2qDJdIHeh5xUEw6
+ y65eFEBDwoIVct3e8g9qBnvecbX9N4SZJiglQ5eRqSsgF1fSLi/v1z8Knkn95MqCLCUu
+ kykA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694708447; x=1695313247;
+ d=1e100.net; s=20230601; t=1694708449; x=1695313249;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2TpMV1fzgEaRtklvSF1wLKwOvwOJoWTA7xIFAq1N3os=;
- b=R4JD/AF8sUp6w6XXW+h5Dp5NP11D5BikiqYBuNq2nwFTMVcLIkRlhqDKsmKW0E6xDL
- fczia+ET3Y0revJgOtO8DCfUceffBqK3l4G3P64Q7lIvzkLNukGshx2h7KmJ1bSJdNy/
- 80BmlMYMyrJlGY+k0fsXD3fJAYpK0llUjuPDouQSXDqHy5Br01XxpYAE4PUjyBoTesGv
- 612mESI0R4Ev8wxGNjnhwHbWanQIxKQfAde+Ifc81pjHyJDr4i/3vjIjjg99reWbH8X5
- lcME+Mjwzc4LDYYb789FeF82FIlSxIuGaMZ1O//gMuhxIF575CVTmXkqJC5bUjoNveWr
- eiTA==
-X-Gm-Message-State: AOJu0YyOVAt0gu+X60gKPzvS8TUsBLsbN8XOBR+RysGnn3eB641EZS6S
- yx6zhPNuqRup480w6nL2aRTFcp6M0MyF6VprKBGlCg==
-X-Google-Smtp-Source: AGHT+IGtNkB3G35mxmr7W9KFZgW5oqUTfYlnGn3//XinzP7GAAZIWXSYS5m8WI1fjOpAxdGAx+jXhQ==
-X-Received: by 2002:a2e:9d41:0:b0:2bc:c3ad:f418 with SMTP id
- y1-20020a2e9d41000000b002bcc3adf418mr5241251ljj.20.1694708447426; 
- Thu, 14 Sep 2023 09:20:47 -0700 (PDT)
+ bh=LC1rzNwjkmeiEROge7PliJ2TWgUzdEBLyUtsof2ZFvo=;
+ b=UQ5bY4YYHy98oQUrsLIjpgaBfkGOiQuZIjKqewZwosPTLOJeMB1d6v1RNEMsT2mWU3
+ xgMj/Y2AtwMlgKIz77WoyBU0QBtvreOpV8Uqi243JkXjRD1V2mBz9k5ou8iV1FXG6uYR
+ dm7BJOSOL7V60jMpcbLIEP9e8om2gf0zvLWdM1FPk1wA03+lIK6LrpUf9UsqKV/yPFwk
+ Q5PSFsHYDwVQ6Oa47njsZSqLro4fY36zw0ZyL99GdKYF22YL+A1ccjD547EWPkkJQIaX
+ ziobSJOBkIe2Cf6pg9zxyk83rRuXmcaHSxo6Nsev2HbU9+2OeaSuoWeYZDRQjnlHROS7
+ jUmw==
+X-Gm-Message-State: AOJu0YzHzomSOJzfQ5Hzaa9UNeSk9bZJsjHlbS7ZnfhKBIP5ZtRm6CtR
+ YC9x/JvNsf1LojWMlMQDGAfQM5/P/nCn0PfuJoJoyw==
+X-Google-Smtp-Source: AGHT+IGxDUVdHGl1YcRsKOOo5LxaTPiQUIk/SY18xy5KkXlw8mJVmLi5BQMPjnCn76VjKY1CmcaT5w==
+X-Received: by 2002:a2e:7c19:0:b0:2b6:bb21:8d74 with SMTP id
+ x25-20020a2e7c19000000b002b6bb218d74mr5365865ljc.1.1694708449674; 
+ Thu, 14 Sep 2023 09:20:49 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.20.45
+ z15-20020a2e8e8f000000b002ba7ae1f52asm346919ljk.0.2023.09.14.09.20.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Sep 2023 09:20:47 -0700 (PDT)
+ Thu, 14 Sep 2023 09:20:49 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv9 05/15] net/lwip: implement dhcp cmd
-Date: Thu, 14 Sep 2023 22:18:18 +0600
-Message-Id: <20230914161828.3662-6-maxim.uvarov@linaro.org>
+Subject: [PATCHv9 06/15] net/lwip: implement tftp cmd
+Date: Thu, 14 Sep 2023 22:18:19 +0600
+Message-Id: <20230914161828.3662-7-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230914161828.3662-1-maxim.uvarov@linaro.org>
 References: <20230914161828.3662-1-maxim.uvarov@linaro.org>
@@ -94,53 +94,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 U-Boot recently got support for an alternative network stack using LWIP.
-Replace dhcp command with the LWIP variant while keeping the output and
+Replace tftp command with the LWIP variant while keeping the output and
 error messages identical.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- include/net/lwip.h             | 12 +++++
- net/lwip/Makefile              |  1 +
- net/lwip/apps/dhcp/lwip-dhcp.c | 85 ++++++++++++++++++++++++++++++++++
- 3 files changed, 98 insertions(+)
- create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
+ include/net/lwip.h             |  13 ++++
+ net/lwip/Makefile              |   1 +
+ net/lwip/apps/tftp/Makefile    |   7 ++
+ net/lwip/apps/tftp/lwip-tftp.c | 129 +++++++++++++++++++++++++++++++++
+ 4 files changed, 150 insertions(+)
+ create mode 100644 net/lwip/apps/tftp/Makefile
+ create mode 100644 net/lwip/apps/tftp/lwip-tftp.c
 
 diff --git a/include/net/lwip.h b/include/net/lwip.h
-index ab3db1a214..6a8fcef392 100644
+index 6a8fcef392..11389bb038 100644
 --- a/include/net/lwip.h
 +++ b/include/net/lwip.h
-@@ -17,3 +17,15 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
-  *          Other value < 0, if error
-  */
- int ulwip_dns(char *name, char *varname);
+@@ -29,3 +29,16 @@ int ulwip_dns(char *name, char *varname);
+  *         Other value < 0, if error
+ */
+ int ulwip_dhcp(void);
 +
 +/**
-+ * ulwip_dhcp() -  create the DHCP request to obtain IP address.
++ * ulwip_tftp() - load file with tftp
 + *
-+ * This function creates the DHCP request to obtain IP address. If DHCP server
-+ * returns file name, this file will be downloaded with tftp.  After this
-+ * function you need to invoke the polling loop to process network communication.
++ * Load file with tftp to specific address
 + *
-+ * Returns: 0 if success
-+ *         Other value < 0, if error
-+*/
-+int ulwip_dhcp(void);
++ * @addr: Address to store downloaded file
++ * @filename: File name on remote tftp server to download
++ *
++ *
++ * Returns:  0 if success, !0 if error
++ */
++int ulwip_tftp(ulong addr, const char *filename);
 diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 5d8d5527c6..a3a33b7f71 100644
+index a3a33b7f71..b348e5ca31 100644
 --- a/net/lwip/Makefile
 +++ b/net/lwip/Makefile
-@@ -63,4 +63,5 @@ obj-$(CONFIG_NET) += lwip-external/src/netif/ethernet.o
- obj-$(CONFIG_NET) += port/if.o
- obj-$(CONFIG_NET) += port/sys-arch.o
+@@ -65,3 +65,4 @@ obj-$(CONFIG_NET) += port/sys-arch.o
  
-+obj-y += apps/dhcp/lwip-dhcp.o
+ obj-y += apps/dhcp/lwip-dhcp.o
  obj-y += apps/dns/lwip-dns.o
-diff --git a/net/lwip/apps/dhcp/lwip-dhcp.c b/net/lwip/apps/dhcp/lwip-dhcp.c
++obj-y += apps/tftp/
+diff --git a/net/lwip/apps/tftp/Makefile b/net/lwip/apps/tftp/Makefile
 new file mode 100644
-index 0000000000..f0b0e26f6e
+index 0000000000..c3ad3c6353
 --- /dev/null
-+++ b/net/lwip/apps/dhcp/lwip-dhcp.c
-@@ -0,0 +1,85 @@
++++ b/net/lwip/apps/tftp/Makefile
+@@ -0,0 +1,7 @@
++ccflags-y += -I$(srctree)/net/lwip/port/include
++ccflags-y += -I$(srctree)/net/lwip/lwip-external/src/include -I$(srctree)/net/lwip
++ccflags-y += -I$(srctree)/net/lwip/lwip-external/src/include/lwip/apps
++ccflags-y += -I$(srctree)/net/lwip/lwip-external/contrib/examples/tftp/
++
++obj-y += ../../lwip-external/src/apps/tftp/tftp.o
++obj-y += lwip-tftp.o
+diff --git a/net/lwip/apps/tftp/lwip-tftp.c b/net/lwip/apps/tftp/lwip-tftp.c
+new file mode 100644
+index 0000000000..56eed3030b
+--- /dev/null
++++ b/net/lwip/apps/tftp/lwip-tftp.c
+@@ -0,0 +1,129 @@
 +// SPDX-License-Identifier: GPL-2.0
 +
 +/*
@@ -150,81 +165,125 @@ index 0000000000..f0b0e26f6e
 +#include <common.h>
 +#include <command.h>
 +#include <console.h>
++#include <bootstage.h>
 +
-+#include <lwip/dhcp.h>
-+#include <lwip/prot/dhcp.h>
-+#include "lwip/timeouts.h"
++#include "tftp_client.h"
++#include "tftp_server.h"
++#include <tftp_example.h>
 +
-+#include <net/eth.h>
++#include <string.h>
++
 +#include <net/ulwip.h>
 +
-+#define DHCP_TMO_TIME 500 /* poll for DHCP state change */
-+#define DHCP_TMO_NUM  10  /* number of tries */
++static ulong daddr;
++static ulong size;
 +
-+typedef struct dhcp_priv {
-+	int num_tries;
-+	struct netif *netif;
-+} dhcp_priv;
-+
-+static void dhcp_tmo(void *arg)
++static void *tftp_open(const char *fname, const char *mode, u8_t is_write)
 +{
-+	struct dhcp_priv *dpriv = (struct dhcp_priv *)arg;
-+	struct netif *netif = dpriv->netif;
-+	struct dhcp *dhcp;
++	return NULL;
++}
 +
-+	dhcp = netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
-+	if (!dhcp)
-+		return;
++static void tftp_close(void *handle)
++{
++	log_info("\ndone\n");
++	log_info("Bytes transferred = %ld (0x%lx hex)\n", size, size);
 +
-+	if (dhcp->state == DHCP_STATE_BOUND) {
-+		int err = 0;
-+
-+		err -= env_set("bootfile", dhcp->boot_file_name);
-+		err -= env_set("ipaddr", ip4addr_ntoa(&dhcp->offered_ip_addr));
-+		err -= env_set("netmask", ip4addr_ntoa(&dhcp->offered_sn_mask));
-+		err -= env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
-+		if (err)
-+			log_err("error update envs\n");
-+		log_info("DHCP client bound to address %s\n", ip4addr_ntoa(&dhcp->offered_ip_addr));
-+		free(dpriv);
-+		ulwip_exit(err);
-+		return;
-+	}
-+
-+	dpriv->num_tries--;
-+	if (dpriv->num_tries < 0) {
-+		log_err("DHCP client timeout\n");
-+		free(dpriv);
++	bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
++	if (env_set_hex("filesize", size)) {
++		log_err("filesize not updated\n");
 +		ulwip_exit(-1);
 +		return;
 +	}
-+
-+	sys_timeout(DHCP_TMO_TIME, dhcp_tmo, dpriv);
++	ulwip_exit(0);
 +}
 +
-+int ulwip_dhcp(void)
++static int tftp_read(void *handle, void *buf, int bytes)
 +{
-+	struct netif *netif;
-+	int eth_idx;
-+	struct dhcp_priv *dpriv;
++	return 0;
++}
 +
-+	dpriv = malloc(sizeof(struct dhcp_priv));
-+	if (!dpriv)
-+		return -EPERM;
++static int tftp_write(void *handle, struct pbuf *p)
++{
++	struct pbuf *q;
 +
-+	eth_idx = eth_get_dev_index();
-+	if (eth_idx < 0)
-+		return -EPERM;
++	for (q = p; q != NULL; q = q->next) {
++		memcpy((void *)daddr, q->payload, q->len);
++		daddr += q->len;
++		size += q->len;
++		log_info("#");
++	}
 +
-+	netif = netif_get_by_index(eth_idx + 1);
-+	if (!netif)
-+		return -ENOENT;
++	return 0;
++}
 +
-+	dpriv->num_tries = DHCP_TMO_NUM;
-+	dpriv->netif = netif;
-+	sys_timeout(DHCP_TMO_TIME, dhcp_tmo, dpriv);
++static void tftp_error(void *handle, int err, const char *msg, int size)
++{
++	char message[100];
 +
-+	return dhcp_start(netif) ? 0 : -EPERM;
++	memset(message, 0, sizeof(message));
++	memcpy(message, msg, LWIP_MIN(sizeof(message) - 1, (size_t)size));
++
++	log_info("TFTP error: %d (%s)", err, message);
++}
++
++static const struct tftp_context tftp = {
++	tftp_open,
++	tftp_close,
++	tftp_read,
++	tftp_write,
++	tftp_error
++};
++
++int ulwip_tftp(ulong addr, char *fname)
++{
++	void *f = (void *)0x1; /* unused fake file handle*/
++	err_t err;
++	ip_addr_t srv;
++	int ret;
++	char *server_ip;
++
++	if (!fname || addr == 0)
++		return CMD_RET_FAILURE;
++
++	size = 0;
++	daddr = addr;
++	server_ip = env_get("serverip");
++	if (!server_ip) {
++		log_err("error: serverip variable has to be set\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ret = ipaddr_aton(server_ip, &srv);
++	if (!ret) {
++		log_err("error: ipaddr_aton\n");
++		return CMD_RET_FAILURE;
++	}
++
++	log_info("TFTP from server %s; our IP address is %s\n",
++		 server_ip, env_get("ipaddr"));
++	log_info("Filename '%s'.\n", fname);
++	log_info("Load address: 0x%lx\n", daddr);
++	log_info("Loading:");
++
++	bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start");
++
++	err = tftp_init_client(&tftp);
++	if (!(err == ERR_OK || err == ERR_USE))
++		log_err("tftp_init_client err: %d\n", err);
++
++	err = tftp_get(f, &srv, TFTP_PORT, fname, TFTP_MODE_OCTET);
++	/* might return different errors, like routing problems */
++	if (err != ERR_OK) {
++		log_err("tftp_get err=%d\n", err);
++		return CMD_RET_FAILURE;
++	}
++
++	if (env_set_hex("fileaddr", addr)) {
++		log_err("fileaddr not updated\n");
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
 +}
 -- 
 2.30.2
