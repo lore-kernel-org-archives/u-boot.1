@@ -4,152 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7304EEAA4F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 14:54:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48715EEAA4F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 14:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EE7886A23;
-	Thu, 14 Sep 2023 16:54:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 85F7486A5A;
+	Thu, 14 Sep 2023 16:55:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TfZPQlDZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QxVjnlhd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7551686A2B; Thu, 14 Sep 2023 16:54:55 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20621.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::621])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DBE1486A68; Thu, 14 Sep 2023 16:55:33 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6925C86A14
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:54:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8A6B86A14
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:55:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GQPSneSe2T/o9VgKt6kAVXgEIDcoTtnWC3NTZcUUryLSmZ40MnUZba0CCeQRyw5Gg3SOYyJutM+mXpi4gp/GXQqZQFonemcfTTOwx+lkknI6TAWXomatwKhVKHUCawdPLl/6FestqNtqaW2Il2m8VqomorFINfZ7/td9smPKWtnSX4nAqvhSt3tv253Mjf/0cy7vzzwGXF1g89hqK5zDw18pSP+bO4n4nI90yw33wlpOqvLwOyza5wIGF5AfiHBBEXQxKKtB2ZfqLeChEpFNT5vTB49NTKBKsDnwlJNqkEIsPhlcY0xeTIxfV26R5aztUrQ2odMV5J2lbERJOaQNEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zMTANMVfibwNR8YnwSTjDqkf9BwkL27RqeCnrCBgzlQ=;
- b=ZfUY/FIKfnlTWjfZBczqJDCN1ynwFmOnNKI8PdpJY84qcfOZbFW42jaUDZyssbkmp1GoK5hoIvQ6q6KLSR3D5MyHZHkVr/tAJTmK3NNGbDSmcgm2dbDqHWnOJOLoLOs28mExiVJvyQWerXaSzH6cwkTBoi3yW47iYxdGXelVMYG8Zr4nqz7BGl2o3yHl7tu3z2M+dAMZa0y+CLPGJHkRVNnXxBbVzWgm8ZMO7gmx5DWluHP3kTgQolmmjTXXNigRxdqZWbuqkMdfaf4BIDItbMmqKafL17qCddb29u2Zy2YkhSJ28dB4tSjkrOLloLHGgtqdegjDyAYpzBE0jOsZ5g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zMTANMVfibwNR8YnwSTjDqkf9BwkL27RqeCnrCBgzlQ=;
- b=TfZPQlDZnaBK+SDBAF8z3/daE4aulxSsn+N1kG8wARGfryS7nmkNhxdiXTMzMdwJD5iFof1AV8YOTE0kzqjHI7cA2nDt4bzAmrLG6rTLzcin34OrkpOOFprKoxk+6fXY1De8N+z8MjxQseMk2QCnB6Ph3JsjT1P4MxgcyrLOe78=
-Received: from DS7PR03CA0338.namprd03.prod.outlook.com (2603:10b6:8:55::31) by
- BY5PR12MB4035.namprd12.prod.outlook.com (2603:10b6:a03:206::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.33; Thu, 14 Sep
- 2023 14:54:49 +0000
-Received: from DS2PEPF00003440.namprd02.prod.outlook.com
- (2603:10b6:8:55:cafe::84) by DS7PR03CA0338.outlook.office365.com
- (2603:10b6:8:55::31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.20 via Frontend
- Transport; Thu, 14 Sep 2023 14:54:49 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003440.mail.protection.outlook.com (10.167.18.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Thu, 14 Sep 2023 14:54:49 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 14 Sep
- 2023 09:54:46 -0500
-Message-ID: <10973469-d107-4a02-a8ec-a91573453cf2@amd.com>
-Date: Thu, 14 Sep 2023 16:54:44 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1694703330; x=1695308130; i=xypron.glpk@gmx.de;
+ bh=pcRLSvpZ9qWjrXdYf+8jfxOpU+OnCsbIyiKqZaNCrxA=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=QxVjnlhdw7Ux/ICqlQWOOFldQ2Xv6VMImfKH6Wcs93alyE/dy1MmjuWt98k9XBCRW/v4gsyZulg
+ vXL9gzGy8ochL5nVZKlcppmwRyGhpDgJDAQ18a9/iEQ3Ethi48pt3qGEcvtsD0q/J26sX3TQiE0f5
+ KSCc/EK9+ujRief4aoTW7MF6FEtI8K2RiFMHmG12yoX2Zm4qver/iy4Egf7IU5CR60BUaqgcI2utA
+ NnpAzS9bPNVKEh3JdTC0Yn3vSR5YZa/1ERaIFNssjCG7b3iVvDhII+eKjPaboqlw9UJpOq81GG7ks
+ w/QA6FYho4JjAJbF2L+mJvN6hJqdVCBcjRkg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N3bSj-1rfoLx2tff-010es4; Thu, 14
+ Sep 2023 16:55:30 +0200
+Message-ID: <8b9f5c70-ebd9-48e0-8d4f-738cc950dfb7@gmx.de>
+Date: Thu, 14 Sep 2023 16:55:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] trace: Use 64bit variable for start and len
+Subject: Re: [PATCH v2 4/6] efi_loader: support boot from URI device path
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, <git@xilinx.com>, Tom Rini <trini@konsulko.com>
-References: <cover.1694435541.git.michal.simek@amd.com>
- <734d41ddc4b5711fd93d3292d7049df3f11472e2.1694435541.git.michal.simek@amd.com>
- <CAPnjgZ0bCzF+q8xpo0-pRBQrHMT50tV46f6369-Wjo4OJwm6Uw@mail.gmail.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <CAPnjgZ0bCzF+q8xpo0-pRBQrHMT50tV46f6369-Wjo4OJwm6Uw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003440:EE_|BY5PR12MB4035:EE_
-X-MS-Office365-Filtering-Correlation-Id: d09de63e-b2e1-4641-4ed9-08dbb5328b74
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: MweKNKt2Dn+VuJpF7wFlf4YDDHRfEbP+OAF+e+QeJioUXPYkiEUtPAcwQkgVUEV7hRA/uWiGfoHX0CQYbsvFg9SwTro4gNou7SejLYESmFatgtfRwcYFGDCSMgLeuVa4H9s4eTtusraAihK3kiFlBkn5FZYWzsPuj2N7Gy3hcYwQMeo8x0xo12k42tnH2bCIZHDiyW06zEkRx28e+5LucNFoNcm1R0XEiuChgw2FWkSC/t3IxkGcE51mx9CHD273RuJ9bzlLKM9cAu3qsS/IK3XUDkJTGQDFZEfgXek+eg1IFJAB1K3U2N0n/XyWOtTD192Rx7XWM+aTD1sEEgfN9O2iLre7nBjD0i8MxRfIUcD1bGcV6ij/lFdpV5AF7kCztxhhdCfw2JWPixz7WhtrFYMk7PXsDErtlr5WETePCJtmm3QODp3zrtK2ckNR90GGv4qpLjZF1u569bvTOAfWl2JLa9JeTNV5Hvisn1gjtidce2H0TYj17qzLCLZgFLeRSegSLeReVPMUdCfCZHPFtoorXTvV35X96UdhEHiIe9kTX6cFLqkcnkmi5T4x8sipBKNVclG5HlXQIyH8/6xUpEYO2bUN9bctV83wVZHkuQWxfyfXhGTtCrPtt3bvaZ55G/KhY6dn0Euq9UQO9ONTb+3IQsrugQjACOozkVKSmFoShmrFgPH/x3D2cGEGeqVhlpS8aV00q/kVE1uKcG6GJ3p1MQu002TTXqTt9TT8i9ImotQBQR8eoLjqAdGEYZxp5R65NoqDjvkGy/hUb+NnuIezqrlO/TZiL/QhIb0HsoaEuHiXiMhCOcsXkzKIeboe
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(376002)(39860400002)(396003)(136003)(82310400011)(186009)(1800799009)(451199024)(36840700001)(46966006)(40470700004)(40460700003)(53546011)(83380400001)(82740400003)(86362001)(36756003)(81166007)(356005)(31696002)(47076005)(36860700001)(2616005)(426003)(70206006)(26005)(40480700001)(31686004)(6916009)(16576012)(2906002)(41300700001)(316002)(4326008)(54906003)(16526019)(44832011)(8676002)(336012)(478600001)(5660300002)(70586007)(4744005)(8936002)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2023 14:54:49.4923 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d09de63e-b2e1-4641-4ed9-08dbb5328b74
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003440.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4035
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi
+ <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-5-masahisa.kojima@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230901102542.609239-5-masahisa.kojima@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:9CZY4LwQ12mSIc5NMeTNoN38Oy7jfXacveYvFBEmnp7lqUB4mWI
+ 83fvdb0cv7B4+63jOpNYQecBRnwvtsAYniTKoIK5kpZCAFnTl0TOKGsokvei5auV2t4V6iD
+ kWbKX3r1HudWW7YEEGR6cIwuyxIRDsWv+JXHI/0WhPvOPn7X+boXF3u+QrTZ5g/5c4Fhf0g
+ YSplSp9gDV1Y85TgnT7FQ==
+UI-OutboundReport: notjunk:1;M01:P0:D4c7sktKYZU=;Mn2gRKk9UIJDoYfv6ek05LQ2TvH
+ fFzh1tPcXqvIKrOI/Bul2nz5E3isZUM+WmUj3h+2S2TOAek3GL7kZZpJCo/XNwpknZZTDJiwk
+ I2mq05h4fh+uPcN6S07fOtgpP37+D87ju94qY9DijxZbEWHBqgxxRLvi7wxPJdRK6PzjLbZhL
+ 10CBMbDPoxa9GOv0peOyNKaQyQaCfSBWFvWgBZEF+XXW0EGtTyFBly5vprncdLFOwgmNtjc+o
+ JNskp92VGCl1V1kQEWyMfO3tNu8nZtG1fsKmJobz5SnZPJrpmXWF3hnUloUzxmlgViuGUDRwR
+ sUe7Q/n4vaZBV8iaQH4dYo0W5dCxtbXe6s+wVmgcbVOJYQr34Aw7YKMVKWMqNf3RaFMEGcqsR
+ PpyiVWCH3oWdlELL6dTanv4qbd1AHWNjr/ICQ0tjHjH5kj78MMwhgflnVfhnmk5qZ/surlldB
+ lbL3diTFSLsaxl22BSQ52UiNp2iyblPw8o1jyXS0CEEDAzri+Ts+q9WO+K0Rqul+6n24BKpWF
+ 9doSxBEfNcq62Mjw38VhvTdgfauLB5ys7MO09BsPECmpAU4kSKIsRa88oowG27EiGEan6XvHX
+ /b4xnQRIiWA+PV5i0mg3Z9TIGcvvLOEFf9e3fsN2hpCRAtB+tYazyDznTSdQ5Up5VUpGTjvBQ
+ zDfZ8LYFqAgYrcoYSNYSNH7eZJXp4MPzNekNEky4fnYlCZdKLwVrsSnjHNayGFGuyT3obwFqf
+ MPMvo5wQ65scmDOwbPWiXvUIkOd/J7MkQflvkJlCwgKipRrAnV3EA9aK6E+acCmj+UmWHBkMA
+ doqzbP3uygVGB+CpPbKNFEKOwytB5gsU7KtjRfAB7sxCyodnhGUfnGp5raekPBNtpR6UOFfYy
+ 32uMBvVPl6KZR4DxAWgnYB/Z9EnwYdXkUGypinEErEVcLMulZa0tCO/XT97vuLhKOWm9K4C8u
+ G0Rh3o4a7/XAvci9p1TqOk+/PYg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,30 +89,261 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 01.09.23 12:25, Masahisa Kojima wrote:
+> This supports to boot from the URI device path.
+> When user selects the URI device path, bootmgr downloads
+> the file using wget into the address specified by loadaddr
+> env variable.
+> If the file is .iso or .img file, mount the image with blkmap
+> then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> If the file is .efi file, load and start the downloaded file.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>   lib/efi_loader/efi_bootmgr.c | 197 +++++++++++++++++++++++++++++++++++
+>   1 file changed, 197 insertions(+)
+>
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index a40762c74c..0e8d2ca9d1 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -7,10 +7,14 @@
+>
+>   #define LOG_CATEGORY LOGC_EFI
+>
+> +#include <blk.h>
+> +#include <blkmap.h>
+>   #include <common.h>
+>   #include <charset.h>
+> +#include <dm.h>
+>   #include <log.h>
+>   #include <malloc.h>
+> +#include <net.h>
+>   #include <efi_default_filename.h>
+>   #include <efi_loader.h>
+>   #include <efi_variable.h>
+> @@ -168,6 +172,193 @@ out:
+>   	return ret;
+>   }
+>
+> +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENA=
+BLED(CONFIG_CMD_DNS))
+> +/**
+> + * mount_image() - mount the image with blkmap
+> + *
+> + * @lo_label	u16 label string of load option
+> + * @image_addr:	image address
+> + * @image_size	image size
+> + * Return:	pointer to the UCLASS_BLK udevice, NULL if failed
+> + */
+> +static struct udevice *mount_image(u16 *lo_label, ulong image_addr, int=
+ image_size)
+> +{
+> +	int err;
+> +	struct blkmap *bm;
+> +	struct udevice *bm_dev;
+> +	char *label =3D NULL, *p;
+> +
+> +	label =3D efi_alloc(utf16_utf8_strlen(lo_label) + 1);
+> +	if (!label)
+> +		return NULL;
+> +
+> +	p =3D label;
+> +	utf16_utf8_strcpy(&p, lo_label);
+> +	err =3D blkmap_create_ramdisk(label, image_addr, image_size, &bm_dev);
+> +	if (err) {
+> +		efi_free_pool(label);
+> +		return NULL;
+> +	}
+> +	bm =3D dev_get_plat(bm_dev);
+> +
+> +	efi_free_pool(label);
+> +
+> +	return bm->blk;
+> +}
+> +
+> +/**
+> + * try_load_default_file() - try to load the default file
+> + *
+> + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
+> + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.E=
+FI).
+> + *
+> + * @dev			pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
+> + * @image_handle:	pointer to handle for newly installed image
+> + * Return:		status code
+> + */
+> +static efi_status_t try_load_default_file(struct udevice *dev,
+> +					  efi_handle_t *image_handle)
+> +{
+> +	efi_status_t ret;
+> +	efi_handle_t bm_handle;
+> +	struct efi_handler *handler;
+> +	struct efi_device_path *file_path;
+> +	struct efi_device_path *device_path;
+> +
+> +	if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&bm_handle)) {
+> +		log_warning("DM_TAG_EFI not found\n");
+> +		return EFI_INVALID_PARAMETER;
+> +	}
+> +
+> +	ret =3D efi_search_protocol(bm_handle,
+> +				  &efi_simple_file_system_protocol_guid, &handler);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		return ret;
+> +
+> +	ret =3D efi_search_protocol(bm_handle, &efi_guid_device_path, &handler=
+);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		return ret;
+> +
+> +	ret =3D efi_protocol_open(handler, (void **)&device_path, efi_root, NU=
+LL,
+> +				EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		return ret;
+> +
+> +	file_path =3D expand_media_path(device_path);
+> +	ret =3D EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
+> +				      image_handle));
+> +
+> +	efi_free_pool(file_path);
+> +
+> +	return ret;
+> +}
+> +
+> +/**
+> + * load_default_file_from_blk_dev() - load the default file
+> + *
+> + * @blk		pointer to the UCLASS_BLK udevice
+> + * @handle:	pointer to handle for newly installed image
+> + * Return:	status code
+> + */
+> +static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
+> +						   efi_handle_t *handle)
+> +{
+> +	efi_status_t ret;
+> +	struct udevice *partition;
+> +
+> +	/* image that has no partition table but a file system */
+> +	ret =3D try_load_default_file(blk, handle);
+> +	if (ret =3D=3D EFI_SUCCESS)
+> +		return ret;
+> +
+> +	/* try the partitions */
+> +	device_foreach_child(partition, blk) {
+> +		enum uclass_id id;
+> +
+> +		id =3D device_get_uclass_id(partition);
+> +		if (id !=3D UCLASS_PARTITION)
+> +			continue;
+> +
+> +		ret =3D try_load_default_file(partition, handle);
+> +		if (ret =3D=3D EFI_SUCCESS)
+> +			return ret;
+> +	}
+> +
+> +	return EFI_NOT_FOUND;
+> +}
+> +
+> +/**
+> + * try_load_from_uri_path() - Handle the URI device path
+> + *
+> + * @uridp:	uri device path
+> + * @lo_label	label of load option
+> + * @handle:	pointer to handle for newly installed image
+> + * Return:	status code
+> + */
+> +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *=
+uridp,
+> +					   u16 *lo_label,
+> +					   efi_handle_t *handle)
+> +{
+> +	char *s;
+> +	int uri_len;
+> +	int image_size;
+> +	efi_status_t ret;
+> +	ulong image_addr;
+> +
+> +	s =3D env_get("loadaddr");
+> +	if (!s) {
+> +		log_err("Error: loadaddr is not set\n");
+> +		return EFI_INVALID_PARAMETER;
+> +	}
+> +	image_addr =3D hextoul(s, NULL);
+> +	image_size =3D wget_with_dns(image_addr, uridp->uri);
+> +	if (image_size < 0)
+> +		return EFI_INVALID_PARAMETER;
+> +
+> +	/*
+> +	 * If the file extension is ".iso" or ".img", mount it and try to load
+> +	 * the default file.
+> +	 * If the file is ".efi" and PE-COFF image, load the downloaded file.
+> +	 */
+
+There is no requirement that EFI binaries have an .efi extension.
+Does EDK II require it?
+
+Best regards
+
+Heinrich
 
 
-On 9/12/23 21:26, Simon Glass wrote:
-> Hi Michal,
-> 
-> On Mon, 11 Sept 2023 at 06:32, Michal Simek <michal.simek@amd.com> wrote:
->>
->> tputq() requires variables to have 64bit width that's why make them 64bit
->> to clean alignment requirement.
->>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> ---
->>
->>   tools/proftool.c | 3 ++-
->>   1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> I would have thought that 'unsigned long' is enough on a 64-bit
-> machines? Are you running on 32-bit?
-
-I have done it for better code understanding. U-Boot is small and 32bit var is 
-big enough. 64bit is more then enough but spec allocates for it 128bits that's 
-why it is easier to read that you are actually putting there the whole 128bits.
-
-M
+> +	uri_len =3D strlen(uridp->uri); /* todo: directly use uridp->uri */
+> +	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+> +	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+> +		struct udevice *blk;
+> +
+> +		blk =3D mount_image(lo_label, image_addr, image_size);
+> +		if (!blk)
+> +			return EFI_INVALID_PARAMETER;
+> +
+> +		ret =3D load_default_file_from_blk_dev(blk, handle);
+> +	} else if (!strncmp(&uridp->uri[uri_len - 4], ".efi", 4)) {
+> +		efi_handle_t mem_handle =3D NULL;
+> +		struct efi_device_path *file_path =3D NULL;
+> +
+> +		ret =3D efi_check_pe((void *)image_addr, image_size, NULL);
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			log_err("Error: downloaded image is not a PE-COFF image\n");
+> +			return EFI_INVALID_PARAMETER;
+> +		}
+> +
+> +		file_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+> +					    (uintptr_t)image_addr, image_size);
+> +		ret =3D efi_install_multiple_protocol_interfaces(
+> +			&mem_handle, &efi_guid_device_path, file_path, NULL);
+> +		if (ret !=3D EFI_SUCCESS)
+> +			return EFI_INVALID_PARAMETER;
+> +
+> +		ret =3D EFI_CALL(efi_load_image(false, efi_root, file_path,
+> +					      (void *)image_addr, image_size,
+> +					      handle));
+> +	} else {
+> +		log_err("Error: file type is not supported\n");
+> +		return EFI_INVALID_PARAMETER;
+> +	}
+> +
+> +	return ret;
+> +}
+> +#endif
+> +
+>   /**
+>    * try_load_entry() - try to load image for boot option
+>    *
+> @@ -211,6 +402,12 @@ static efi_status_t try_load_entry(u16 n, efi_handl=
+e_t *handle,
+>   		if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
+>   			/* file_path doesn't contain a device path */
+>   			ret =3D try_load_from_short_path(lo.file_path, handle);
+> +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENA=
+BLED(CONFIG_CMD_DNS))
+> +		} else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
+> +			ret =3D try_load_from_uri_path(
+> +				(struct efi_device_path_uri *)lo.file_path,
+> +				lo.label, handle);
+> +#endif
+>   		} else {
+>   			file_path =3D expand_media_path(lo.file_path);
+>   			ret =3D EFI_CALL(efi_load_image(true, efi_root, file_path,
 
